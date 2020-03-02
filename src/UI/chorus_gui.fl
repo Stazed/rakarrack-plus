@@ -4,7 +4,7 @@ header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} ChorusGui {
   user_data 1 open
-  xywh {1075 81 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {734 227 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -41,7 +41,7 @@ chorus_delay->value(rkr->efx_Chorus->getpar(7));
 chorus_fb->value(rkr->efx_Chorus->getpar(8));
 chorus_LR->value(rkr->efx_Chorus->getpar(9));
 chorus_subs->value(rkr->efx_Chorus->getpar(11));
-chorus_awesome->value(rkr->efx_Chorus->getpar(12));} selected
+chorus_awesome->value(rkr->efx_Chorus->getpar(12));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -73,7 +73,7 @@ chorus_awesome->value(rkr->efx_Chorus->getpar(12));} selected
  return;
 } 
 rkr->efx_Chorus->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_pan {
@@ -84,7 +84,7 @@ rkr->efx_Chorus->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 } 
 rkr->efx_Chorus->changepar(1,(int)(o->value()+64));}
-    xywh {49 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_freq {
@@ -95,25 +95,25 @@ rkr->efx_Chorus->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Chorus->changepar(2,(int)o->value());}
-    xywh {49 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {53 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_rnd {
-    label Rnd
+    label Random
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(105);
  return;
 } 
 rkr->efx_Chorus->changepar(3,(int)o->value());}
-    xywh {49 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice chorus_lfotype {
     label {LFO Type}
     user_data 12
     callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open
-    xywh {61 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
   Fl_Check_Button chorus_subs {
@@ -129,14 +129,14 @@ rkr->efx_Chorus->changepar(3,(int)o->value());}
     xywh {88 95 56 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Value_Slider chorus_stdf {
-    label {St.df}
+    label {Stereo Df.}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(99);
  return;
 } 
 rkr->efx_Chorus->changepar(5,(int)o->value());}
-    xywh {49 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_dpth {
@@ -147,35 +147,35 @@ rkr->efx_Chorus->changepar(5,(int)o->value());}
  return;
 } 
 rkr->efx_Chorus->changepar(6,(int)o->value());}
-    xywh {49 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_delay {
     label Delay
     callback {rkr->efx_Chorus->changepar(7,(int)o->value());}
-    xywh {49 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_fb {
-    label Fb
+    label Feedback
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(79);
  return;
 } 
 rkr->efx_Chorus->changepar(8,(int)o->value());}
-    xywh {49 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_LR {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(91);
  return;
 } 
-rkr->efx_Chorus->changepar(9,(int)(o->value()));}
-    xywh {49 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Chorus->changepar(9,(int)(o->value()));} selected
+    xywh {53 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local

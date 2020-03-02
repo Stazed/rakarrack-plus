@@ -73,7 +73,7 @@ flanger_awesome->value(rkr->efx_Flanger->getpar(12));}
  return;
 } 
 rkr->efx_Flanger->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {52 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider flanger_pan {
@@ -84,7 +84,7 @@ rkr->efx_Flanger->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 } 
 rkr->efx_Flanger->changepar(1,(int)(o->value()+64));}
-    xywh {52 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider flanger_freq {
@@ -95,24 +95,24 @@ rkr->efx_Flanger->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Flanger->changepar(2,(int)o->value());}
-    xywh {52 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {54 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider flanger_rnd {
-    label Rnd
+    label Random
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(106);
  return;
 } 
 rkr->efx_Flanger->changepar(3,(int)o->value());}
-    xywh {52 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice flanger_lfotype {
     label {LFO Type}
     callback {rkr->efx_Flanger->changepar(4,(int)o->value());}
-    xywh {63 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
   Fl_Check_Button flanger_subs {
@@ -128,14 +128,14 @@ rkr->efx_Flanger->changepar(3,(int)o->value());}
     xywh {94 94 58 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Value_Slider flanger_stdf {
-    label {St.df}
+    label {Stereo Df.}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(100);
  return;
 } 
 rkr->efx_Flanger->changepar(5,(int)o->value());}
-    xywh {52 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider flanger_dpth {
@@ -146,35 +146,35 @@ rkr->efx_Flanger->changepar(5,(int)o->value());}
  return;
 } 
 rkr->efx_Flanger->changepar(6,(int)o->value());}
-    xywh {52 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider flanger_delay {
     label Delay
     callback {rkr->efx_Flanger->changepar(7,(int)o->value());}
-    xywh {52 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider flanger_fb {
-    label Fb
+    label Feedback
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(80);
  return;
 } 
 rkr->efx_Flanger->changepar(8,(int)o->value());}
-    xywh {52 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider flanger_LR {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(92);
  return;
 } 
 rkr->efx_Flanger->changepar(9,(int)(o->value()));} selected
-    xywh {52 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
