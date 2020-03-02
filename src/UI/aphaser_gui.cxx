@@ -212,7 +212,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
   aphaser_preset->menu(menu_aphaser_preset);
 } // Fl_Choice* aphaser_preset
-{ aphaser_WD = new SliderW(53, 27, 100, 10, "Dry/Wet");
+{ aphaser_WD = new SliderW(53, 25, 100, 10, "Dry/Wet");
   aphaser_WD->type(5);
   aphaser_WD->box(FL_FLAT_BOX);
   aphaser_WD->color((Fl_Color)178);
@@ -228,7 +228,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_WD->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_WD->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_WD
-{ aphaser_distort = new SliderW(53, 38, 100, 10, "Distort");
+{ aphaser_distort = new SliderW(53, 115, 100, 10, "Distort");
   aphaser_distort->type(5);
   aphaser_distort->box(FL_FLAT_BOX);
   aphaser_distort->color((Fl_Color)178);
@@ -244,7 +244,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_distort->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_distort->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_distort
-{ aphaser_freq = new SliderW(53, 50, 100, 10, "Tempo");
+{ aphaser_freq = new SliderW(53, 56, 100, 10, "Tempo");
   aphaser_freq->type(5);
   aphaser_freq->box(FL_FLAT_BOX);
   aphaser_freq->color((Fl_Color)178);
@@ -261,7 +261,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_freq->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_freq->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_freq
-{ aphaser_rnd = new SliderW(53, 62, 100, 10, "Random");
+{ aphaser_rnd = new SliderW(53, 127, 100, 10, "Random");
   aphaser_rnd->type(5);
   aphaser_rnd->box(FL_FLAT_BOX);
   aphaser_rnd->color((Fl_Color)178);
@@ -277,7 +277,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_rnd
-{ Fl_Choice* o = aphaser_lfotype = new Fl_Choice(65, 122, 72, 16, "LFO Type");
+{ Fl_Choice* o = aphaser_lfotype = new Fl_Choice(80, 37, 72, 16, "LFO Type");
   aphaser_lfotype->down_box(FL_BORDER_BOX);
   aphaser_lfotype->selection_color(FL_FOREGROUND_COLOR);
   aphaser_lfotype->labelsize(10);
@@ -287,7 +287,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_lfotype->callback((Fl_Callback*)cb_aphaser_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* aphaser_lfotype
-{ aphaser_width = new SliderW(53, 86, 100, 10, "Width");
+{ aphaser_width = new SliderW(53, 79, 100, 10, "Width");
   aphaser_width->type(5);
   aphaser_width->box(FL_FLAT_BOX);
   aphaser_width->color((Fl_Color)178);
@@ -303,7 +303,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_width->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_width->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_width
-{ aphaser_phase = new SliderW(53, 74, 100, 10, "P. Depth");
+{ aphaser_phase = new SliderW(53, 67, 100, 10, "P. Depth");
   aphaser_phase->tooltip("Phase Depth");
   aphaser_phase->type(5);
   aphaser_phase->box(FL_FLAT_BOX);
@@ -320,7 +320,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_phase->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_phase->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_phase
-{ aphaser_fb = new SliderW(53, 98, 100, 10, "Feedback");
+{ aphaser_fb = new SliderW(53, 91, 100, 10, "Feedback");
   aphaser_fb->type(5);
   aphaser_fb->box(FL_FLAT_BOX);
   aphaser_fb->color((Fl_Color)178);
@@ -337,7 +337,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_fb->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_fb->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_fb
-{ aphaser_mismatch = new SliderW(53, 111, 100, 10, "Mismatch");
+{ aphaser_mismatch = new SliderW(53, 103, 100, 10, "Mismatch");
   aphaser_mismatch->type(5);
   aphaser_mismatch->box(FL_FLAT_BOX);
   aphaser_mismatch->color((Fl_Color)178);
@@ -353,7 +353,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_mismatch->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_mismatch->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_mismatch
-{ aphaser_stdf = new SliderW(53, 140, 100, 10, "Stereo Df.");
+{ aphaser_stdf = new SliderW(53, 138, 100, 10, "Stereo Df.");
   aphaser_stdf->tooltip("LFO L/R Delay");
   aphaser_stdf->type(5);
   aphaser_stdf->box(FL_FLAT_BOX);
