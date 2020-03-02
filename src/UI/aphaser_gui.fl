@@ -77,7 +77,7 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
  rgui->getMIDIControl(117);
  return;
 } 
-rkr->efx_APhaser->changepar(0,Dry_Wet((int)(o->value())));} selected
+rkr->efx_APhaser->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {53 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -117,8 +117,8 @@ rkr->efx_APhaser->changepar(3,(int)o->value());}
   }
   Fl_Choice aphaser_lfotype {
     label {LFO Type}
-    callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open
-    xywh {80 37 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open selected
+    xywh {78 37 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
   Fl_Value_Slider aphaser_width {

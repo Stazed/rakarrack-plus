@@ -245,7 +245,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_freq->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_freq->when(FL_WHEN_CHANGED);
 } // SliderW* Alienwah_freq
-{ Alienwah_rnd = new SliderW(53, 65, 100, 10, "Rnd");
+{ Alienwah_rnd = new SliderW(53, 65, 100, 10, "Random");
   Alienwah_rnd->type(5);
   Alienwah_rnd->box(FL_FLAT_BOX);
   Alienwah_rnd->color((Fl_Color)178);
@@ -261,7 +261,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* Alienwah_rnd
-{ Fl_Choice* o = Alienwah_lfotype = new Fl_Choice(71, 79, 72, 16, "LFO Type");
+{ Fl_Choice* o = Alienwah_lfotype = new Fl_Choice(78, 79, 72, 16, "LFO Type");
   Alienwah_lfotype->down_box(FL_BORDER_BOX);
   Alienwah_lfotype->selection_color(FL_FOREGROUND_COLOR);
   Alienwah_lfotype->labelsize(10);

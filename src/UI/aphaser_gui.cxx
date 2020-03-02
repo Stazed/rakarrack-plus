@@ -277,7 +277,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_rnd
-{ Fl_Choice* o = aphaser_lfotype = new Fl_Choice(80, 37, 72, 16, "LFO Type");
+{ Fl_Choice* o = aphaser_lfotype = new Fl_Choice(78, 37, 72, 16, "LFO Type");
   aphaser_lfotype->down_box(FL_BORDER_BOX);
   aphaser_lfotype->selection_color(FL_FOREGROUND_COLOR);
   aphaser_lfotype->labelsize(10);
