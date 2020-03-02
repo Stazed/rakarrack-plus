@@ -152,24 +152,24 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
     class SliderW
   }
   Fl_Value_Slider Alienwah_fb {
-    label Fb
+    label Feedback
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(82);
  return;
 } 
-rkr->efx_Alienwah->changepar(7,(int)o->value());}
-    xywh {53 153 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Alienwah->changepar(7,(int)o->value());} selected
+    xywh {53 153 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider Alienwah_LR {
-    label {L/R cross}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(96);
  return;
 } 
-rkr->efx_Alienwah->changepar(9,(int)(o->value()));} selected
+rkr->efx_Alienwah->changepar(9,(int)(o->value()));}
     xywh {53 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

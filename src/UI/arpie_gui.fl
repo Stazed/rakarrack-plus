@@ -40,7 +40,7 @@ arpie_damp->value(rkr->efx_Arpie->getpar(6));
 arpie_arpe->value(rkr->efx_Arpie->getpar(7));
 arpie_harm->value(rkr->efx_Arpie->getpar(8));
 arpie_pattern->value(rkr->efx_Arpie->getpar(9));
-arpie_subdiv->value(rkr->efx_Arpie->getpar(10));} selected
+arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -88,7 +88,7 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));} selected
  return;
 } 
 rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {51 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_arpe {
@@ -99,7 +99,7 @@ rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 } 
 rkr->efx_Arpie->changepar(7,(int)o->value());}
-    xywh {51 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_pan {
@@ -110,7 +110,7 @@ rkr->efx_Arpie->changepar(7,(int)o->value());}
  return;
 } 
 rkr->efx_Arpie->changepar(1,(int)(o->value()+64));}
-    xywh {51 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_delay {
@@ -121,7 +121,7 @@ rkr->efx_Arpie->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Arpie->changepar(2,(int)o->value());}
-    xywh {51 70 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 1 textcolor 7
+    xywh {53 70 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 1 textcolor 7
     class SliderW
   }
   Fl_Choice arpie_subdiv {
@@ -132,36 +132,36 @@ rkr->efx_Arpie->changepar(2,(int)o->value());}
     code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
   } {}
   Fl_Value_Slider arpie_LRdl {
-    label {LRdl.}
+    label {L/R Delay}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(216);
  return;
 } 
 rkr->efx_Arpie->changepar(3,(int)o->value());}
-    xywh {51 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    xywh {53 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_LRc {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(217);
  return;
 } 
-rkr->efx_Arpie->changepar(4,(int)(o->value()));}
-    xywh {51 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Arpie->changepar(4,(int)(o->value()));} selected
+    xywh {53 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_fb {
-    label {Fb.}
+    label Feedback
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(218);
  return;
 } 
 rkr->efx_Arpie->changepar(5,(int)o->value());}
-    xywh {51 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_damp {
@@ -172,7 +172,7 @@ rkr->efx_Arpie->changepar(5,(int)o->value());}
  return;
 } 
 rkr->efx_Arpie->changepar(6,(int)o->value());}
-    xywh {51 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Counter arpie_harm {

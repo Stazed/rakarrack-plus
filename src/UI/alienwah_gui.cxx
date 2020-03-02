@@ -335,14 +335,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_delay->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_delay->when(FL_WHEN_CHANGED);
 } // SliderW* Alienwah_delay
-{ Alienwah_fb = new SliderW(53, 153, 100, 10, "Fb");
+{ Alienwah_fb = new SliderW(53, 153, 100, 10, "Feedback");
   Alienwah_fb->type(5);
   Alienwah_fb->box(FL_FLAT_BOX);
   Alienwah_fb->color((Fl_Color)178);
   Alienwah_fb->selection_color((Fl_Color)62);
   Alienwah_fb->labeltype(FL_NORMAL_LABEL);
   Alienwah_fb->labelfont(0);
-  Alienwah_fb->labelsize(10);
+  Alienwah_fb->labelsize(8);
   Alienwah_fb->labelcolor(FL_BACKGROUND2_COLOR);
   Alienwah_fb->maximum(127);
   Alienwah_fb->step(1);
@@ -351,7 +351,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_fb->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_fb->when(FL_WHEN_CHANGED);
 } // SliderW* Alienwah_fb
-{ Alienwah_LR = new SliderW(53, 166, 100, 10, "L/R cross");
+{ Alienwah_LR = new SliderW(53, 166, 100, 10, "L/R Cross");
   Alienwah_LR->type(5);
   Alienwah_LR->box(FL_FLAT_BOX);
   Alienwah_LR->color((Fl_Color)178);
