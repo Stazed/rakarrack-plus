@@ -4969,8 +4969,8 @@ LV2_Handle init_overdrivelv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
-    plug->effectindex = IDIST;
+    plug->nparams = 11;
+    plug->effectindex = IOVERDRIVE;
     plug->prev_bypass = 1;
 
     getFeatures(plug,host_features);
@@ -5028,18 +5028,13 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->overdrive->changepar(i,val);
     }
-    for(i++; i<plug->nparams-1; i++) //2-10
+    for(i++; i < plug->nparams; i++) //2-10
     {
         val = (int)*plug->param_p[i];
         if(plug->overdrive->getpar(i) != val)
         {
             plug->overdrive->changepar(i,val);
         }
-    }
-    val = (int)*plug->param_p[i++];//skip one index, 12 octave
-    if(plug->overdrive->getpar(i) != val)
-    {
-        plug->overdrive->changepar(i,val);
     }
 
     //now run

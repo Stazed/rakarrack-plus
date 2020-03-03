@@ -121,7 +121,7 @@ def remap(efxindex, paramindex):
          (2, 8) : (9, 'Highpass Filter', 'HPF', 0) ,
          (2, 9) : (10, 'Stereo', 'STEREO', 0) ,
          (2, 10) : (11, 'Prefilter', 'PREFILTER', 0) ,
-         (2, 11) : (0, 'SKIP', 'SKIP', 0) ,
+         (2, 11) : (0, 'SKIP', 'SKIP', 0) , #not used
          (2, 12) : (12, 'Suboctave', 'OCT', 0) ,
          (2, 13) : (-1,) ,
 
@@ -137,8 +137,8 @@ def remap(efxindex, paramindex):
          (3, 8) : (9, 'Highpass Filter', 'HPF', 0) ,
          (3, 9) : (10, 'Stereo', 'STEREO', 0) ,
          (3, 10) : (11, 'Prefilter', 'PREFILTER', 0) ,
-         (3, 11) : (0, 'SKIP', 'SKIP', 0) ,
-         (3, 12) : (12, 'Suboctave', 'OCT', 0) ,
+         (3, 11) : (0, 'SKIP', 'SKIP', 0) , #not used
+         (3, 12) : (0, 'SKIP', 'SKIP', 0) , #Suboctave not used
          (3, 13) : (-1,) ,
 
          (4, -1) : ('RakarrackPlus Echo', 'https://github.com/Stazed/rakarrack-plus#eco') ,

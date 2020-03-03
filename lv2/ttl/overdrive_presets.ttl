@@ -18,7 +18,7 @@
 		pset:value 0.0
 	] , [
 		lv2:symbol "LRCr" ;
-		pset:value 99.0
+		pset:value 35.0
 	] , [
 		lv2:symbol "DRIVE" ;
 		pset:value 56.0
@@ -42,9 +42,6 @@
 		pset:value 0.0
 	] , [
 		lv2:symbol "PREFILTER" ;
-		pset:value 0.0
-	] , [
-		lv2:symbol "OCT" ;
 		pset:value 0.0
 	] .
 
@@ -83,8 +80,5 @@
 		pset:value 0.0
 	] , [
 		lv2:symbol "PREFILTER" ;
-		pset:value 0.0
-	] , [
-		lv2:symbol "OCT" ;
 		pset:value 0.0
 	] .
