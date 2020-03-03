@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} MbdistGui {
@@ -88,18 +88,18 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
  return;
 } 
 rkr->efx_MBDist->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {52 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_LRc {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(203);
  return;
 } 
 rkr->efx_MBDist->changepar(2,(int)(o->value()));}
-    xywh {52 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_drive {
@@ -110,7 +110,7 @@ rkr->efx_MBDist->changepar(2,(int)(o->value()));}
  return;
 } 
 rkr->efx_MBDist->changepar(3,(int)o->value());}
-    xywh {52 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_level {
@@ -121,7 +121,7 @@ rkr->efx_MBDist->changepar(3,(int)o->value());}
  return;
 } 
 rkr->efx_MBDist->changepar(4,(int)o->value());}
-    xywh {52 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_volL {
@@ -132,7 +132,7 @@ rkr->efx_MBDist->changepar(4,(int)o->value());}
  return;
 } 
 rkr->efx_MBDist->changepar(8,(int)o->value());}
-    xywh {52 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    xywh {53 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_volM {
@@ -143,7 +143,7 @@ rkr->efx_MBDist->changepar(8,(int)o->value());}
  return;
 } 
 rkr->efx_MBDist->changepar(9,(int)o->value());}
-    xywh {52 89 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    xywh {53 89 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_volH {
@@ -154,7 +154,7 @@ rkr->efx_MBDist->changepar(9,(int)o->value());}
  return;
 } 
 rkr->efx_MBDist->changepar(10,(int)o->value());}
-    xywh {52 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    xywh {53 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_cross1 {
@@ -165,7 +165,7 @@ rkr->efx_MBDist->changepar(10,(int)o->value());}
  return;
 } 
 rkr->efx_MBDist->changepar(12,(int)o->value());}
-    xywh {52 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
+    xywh {53 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_cross2 {
@@ -176,7 +176,7 @@ rkr->efx_MBDist->changepar(12,(int)o->value());}
  return;
 } 
 rkr->efx_MBDist->changepar(13,(int)o->value());}
-    xywh {52 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 12000 step 1 textcolor 7
+    xywh {53 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 12000 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice mbdist_tipoL {
@@ -190,7 +190,7 @@ rkr->efx_MBDist->changepar(13,(int)o->value());}
     code0 {o->menu(m_dist_menu->get_distortion_type());}
   } {}
   Fl_Choice mbdist_tipoH {
-    callback {rkr->efx_MBDist->changepar(7,(int)o->value());} open
+    callback {rkr->efx_MBDist->changepar(7,(int)o->value());} open selected
     xywh {105 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
   } {}
@@ -201,8 +201,8 @@ rkr->efx_MBDist->changepar(13,(int)o->value());}
  rgui->getMIDIControl(211);
  return;
 } 
-rkr->efx_MBDist->changepar(1,(int)(o->value()+64));} selected
-    xywh {52 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
+    xywh {53 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button mbdist_st {
