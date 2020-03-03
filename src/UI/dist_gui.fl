@@ -69,18 +69,18 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
  return;
 } 
 rkr->efx_Distorsion->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {52 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider dist_LRc {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(95);
  return;
 } 
-rkr->efx_Distorsion->changepar(2,(int)(o->value()));} selected
-    xywh {52 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Distorsion->changepar(2,(int)(o->value()));}
+    xywh {53 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider dist_drive {
@@ -91,7 +91,7 @@ rkr->efx_Distorsion->changepar(2,(int)(o->value()));} selected
  return;
 } 
 rkr->efx_Distorsion->changepar(3,(int)o->value());}
-    xywh {52 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider dist_level {
@@ -102,7 +102,7 @@ rkr->efx_Distorsion->changepar(3,(int)o->value());}
  return;
 } 
 rkr->efx_Distorsion->changepar(4,(int)o->value());}
-    xywh {52 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice dist_tipo {
@@ -138,7 +138,7 @@ rkr->efx_Distorsion->changepar(4,(int)o->value());}
  return;
 } 
 rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));}
-    xywh {52 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider dist_oct {
@@ -149,7 +149,7 @@ rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Distorsion->changepar(12,(int)o->value());}
-    xywh {52 145 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 145 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider dist_lpf {
@@ -160,7 +160,7 @@ rkr->efx_Distorsion->changepar(12,(int)o->value());}
  return;
 } 
 rkr->efx_Distorsion->changepar(7,(int)o->value());}
-    xywh {52 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
+    xywh {53 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class SliderW
   }
   Fl_Value_Slider dist_hpf {
@@ -170,8 +170,8 @@ rkr->efx_Distorsion->changepar(7,(int)o->value());}
  rgui->getMIDIControl(89);
  return;
 } 
-rkr->efx_Distorsion->changepar(8,(int)o->value());}
-    xywh {52 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+rkr->efx_Distorsion->changepar(8,(int)o->value());} selected
+    xywh {53 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_dist_menu;} {private local

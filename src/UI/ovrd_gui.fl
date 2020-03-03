@@ -60,18 +60,18 @@ ovrd_pf->value(rkr->efx_Overdrive->getpar(10));}
  return;
 } 
 rkr->efx_Overdrive->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {51 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ovrd_LRc {
-    label {L/R Cr.}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(94);
  return;
 } 
-rkr->efx_Overdrive->changepar(2,(int)(o->value()));} selected
-    xywh {51 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Overdrive->changepar(2,(int)(o->value()));}
+    xywh {53 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ovrd_drive {
@@ -82,7 +82,7 @@ rkr->efx_Overdrive->changepar(2,(int)(o->value()));} selected
  return;
 } 
 rkr->efx_Overdrive->changepar(3,(int)o->value());}
-    xywh {51 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ovrd_level {
@@ -93,7 +93,7 @@ rkr->efx_Overdrive->changepar(3,(int)o->value());}
  return;
 } 
 rkr->efx_Overdrive->changepar(4,(int)o->value());}
-    xywh {51 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice ovrd_tipo {
@@ -122,7 +122,7 @@ rkr->efx_Overdrive->changepar(4,(int)o->value());}
  return;
 } 
 rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));}
-    xywh {51 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button ovrd_pf {
@@ -139,7 +139,7 @@ rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Overdrive->changepar(7,(int)o->value());}
-    xywh {51 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
+    xywh {53 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ovrd_hpf {
@@ -149,8 +149,8 @@ rkr->efx_Overdrive->changepar(7,(int)o->value());}
  rgui->getMIDIControl(88);
  return;
 } 
-rkr->efx_Overdrive->changepar(8,(int)o->value());}
-    xywh {51 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+rkr->efx_Overdrive->changepar(8,(int)o->value());} selected
+    xywh {53 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_dist_menu;} {private local
