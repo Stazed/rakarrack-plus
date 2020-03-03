@@ -208,7 +208,7 @@ void
 Compressor::setpreset(int dgui, int npreset)
 {
     const int PRESET_SIZE = 10;
-    const int NUM_PRESETS = 7;
+    const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //2:1
@@ -217,6 +217,8 @@ Compressor::setpreset(int dgui, int npreset)
         {-26, 4, -8, 20, 120, 1, 10, 0, 0},
         //8:1
         {-24, 8, -12, 20, 35, 1, 30, 0, 0},
+        //limiter - from rkrlv2
+        {-3, 15, 0, 10, 250, 0, 0, 1, 1},
         //Final Limiter
         {-1, 15, 0, 5, 250, 0, 0, 1, 1},
         //HarmonicEnhancer
@@ -227,9 +229,9 @@ Compressor::setpreset(int dgui, int npreset)
         {-60, 2, 0, 10, 500, 1, 0, 1, 1},
     };
 
-    if ((dgui)&&(npreset > 2))
+    if ((dgui)&&(npreset > 3))
     {
-        Fpre->ReadPreset(1, npreset - 2, pdata);
+        Fpre->ReadPreset(1, npreset - 3, pdata);
         
         for (int n = 1; n < PRESET_SIZE; n++)
             changepar(n, pdata[n - 1]);

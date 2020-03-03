@@ -50,10 +50,10 @@ CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize)
     CMH = new Compressor(sample_rate, PERIOD);
     CH = new Compressor(sample_rate, PERIOD);
 
-    CL->setpreset(0, 5);
-    CML->setpreset(0, 5);
-    CMH->setpreset(0, 5);
-    CH->setpreset(0, 5);
+    CL->setpreset(0, 6);
+    CML->setpreset(0, 6);
+    CMH->setpreset(0, 6);
+    CH->setpreset(0, 6);
 
     //default values
     Ppreset = 0;

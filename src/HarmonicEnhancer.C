@@ -47,7 +47,7 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, do
     lpffreq = lfreq;
 
     limiter = new Compressor(sample_rate, PERIOD);
-    limiter->setpreset(0, 4);
+    limiter->setpreset(0, 5);
     calcula_mag(Rmag);
 }
 

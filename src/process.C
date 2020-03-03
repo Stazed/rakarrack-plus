@@ -897,7 +897,7 @@ RKR::init_rkr()
     ACI_Bypass = 0;
     Selected_Preset = 1;
 
-    efx_FLimiter->setpreset(0, 3);
+    efx_FLimiter->setpreset(0, 4);
 
     val_sum = 0.0f;
     old_il_sum = -0.0f;
