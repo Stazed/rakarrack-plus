@@ -44,7 +44,7 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
-      label Tremolo selected
+      label Tremolo
       xywh {77 77 36 21} labelsize 10
     }
     MenuItem {} {
@@ -143,7 +143,7 @@ rkr->efx_Arpie->changepar(2,(int)o->value());}
  return;
 } 
 rkr->efx_Arpie->changepar(3,(int)o->value());}
-    xywh {53 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    xywh {53 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_LRc {
@@ -164,8 +164,8 @@ rkr->efx_Arpie->changepar(4,(int)(o->value()));}
  rgui->getMIDIControl(218);
  return;
 } 
-rkr->efx_Arpie->changepar(5,(int)o->value());}
-    xywh {53 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Arpie->changepar(5,(int)o->value());} selected
+    xywh {53 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider arpie_damp {

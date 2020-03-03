@@ -4,7 +4,7 @@ header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} ChorusGui {
   user_data 1 open
-  xywh {734 227 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {950 286 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -129,14 +129,14 @@ rkr->efx_Chorus->changepar(3,(int)o->value());}
     xywh {88 95 56 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Value_Slider chorus_stdf {
-    label {Stereo Df.}
+    label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(99);
  return;
 } 
-rkr->efx_Chorus->changepar(5,(int)o->value());}
-    xywh {53 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Chorus->changepar(5,(int)o->value());} selected
+    xywh {53 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_dpth {
@@ -164,7 +164,7 @@ rkr->efx_Chorus->changepar(6,(int)o->value());}
  return;
 } 
 rkr->efx_Chorus->changepar(8,(int)o->value());}
-    xywh {53 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider chorus_LR {
@@ -174,8 +174,8 @@ rkr->efx_Chorus->changepar(8,(int)o->value());}
  rgui->getMIDIControl(91);
  return;
 } 
-rkr->efx_Chorus->changepar(9,(int)(o->value()));} selected
-    xywh {53 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Chorus->changepar(9,(int)(o->value()));}
+    xywh {53 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local

@@ -106,7 +106,7 @@ rkr->efx_Alienwah->changepar(3,(int)o->value());}
   }
   Fl_Choice Alienwah_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open selected
+    callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
@@ -122,14 +122,14 @@ rkr->efx_Alienwah->changepar(10,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider Alienwah_stdf {
-    label {Stereo Df.}
+    label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(103);
  return;
 } 
 rkr->efx_Alienwah->changepar(5,(int)o->value());}
-    xywh {53 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider Alienwah_dpth {
@@ -158,8 +158,8 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
  rgui->getMIDIControl(82);
  return;
 } 
-rkr->efx_Alienwah->changepar(7,(int)o->value());}
-    xywh {53 153 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_Alienwah->changepar(7,(int)o->value());} selected
+    xywh {53 153 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider Alienwah_LR {

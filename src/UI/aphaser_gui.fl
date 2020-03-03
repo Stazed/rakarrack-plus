@@ -117,7 +117,7 @@ rkr->efx_APhaser->changepar(3,(int)o->value());}
   }
   Fl_Choice aphaser_lfotype {
     label {LFO Type}
-    callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open selected
+    callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open
     xywh {78 37 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
@@ -151,7 +151,7 @@ rkr->efx_APhaser->changepar(11,(int)o->value());}
  return;
 } 
 rkr->efx_APhaser->changepar(7,(int)(o->value()+64));}
-    xywh {53 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {53 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider aphaser_mismatch {
@@ -162,18 +162,18 @@ rkr->efx_APhaser->changepar(7,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_APhaser->changepar(9,(int)o->value());}
-    xywh {53 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    xywh {53 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider aphaser_stdf {
-    label {Stereo Df.}
+    label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(124);
  return;
 } 
-rkr->efx_APhaser->changepar(5,(int)o->value());}
-    tooltip {LFO L/R Delay} xywh {53 138 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_APhaser->changepar(5,(int)o->value());} selected
+    tooltip {LFO L/R Delay} xywh {53 138 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Counter aphaser_stages {
