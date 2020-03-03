@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class CabinetGui {
@@ -19,7 +19,7 @@ widget_class CabinetGui {
  return;
 }
 rkr->Cabinet_Bypass=(int)o->value();
-rgui->findpos(12,(int)o->value(),o);} selected
+rgui->findpos(12,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
   }
   Fl_Choice Cabinet_preset {
@@ -75,8 +75,8 @@ rgui->findpos(12,(int)o->value(),o);} selected
   }
   Fl_Value_Slider Cabinet_output {
     label Gain
-    callback {rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));}
-    xywh {48 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    callback {rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));} selected
+    xywh {53 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
 }
