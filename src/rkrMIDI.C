@@ -1989,7 +1989,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 290:
-        efx_CoilCrafter->changepar(0, 2600 + (int) ((float) value * 14.96063f));
+        efx_CoilCrafter->changepar(5, 2600 + (int) ((float) value * 14.96063f));
         break;
 
     case 291:
