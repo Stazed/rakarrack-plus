@@ -44,11 +44,12 @@ void DflangeGui::cb_dflange_preset(Fl_Choice* o, void* v) {
 Fl_Menu_Item DflangeGui::menu_dflange_preset[] = {
  {"Dual Flange 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Flange-Wah", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"FbFlange", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"SoftFlange", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Feedback Flange", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Soft Flange", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Flanger", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Deep Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Bright Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Dual Flange 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

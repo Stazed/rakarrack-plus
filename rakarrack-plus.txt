@@ -71,6 +71,9 @@ FIXME Help .png
 
 Dual Flange
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
+    Added LV2 Preset Dual Flange 2 - Done
+---Done---
+FIXME Help .png
 
 Echo
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

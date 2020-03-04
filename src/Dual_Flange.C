@@ -567,7 +567,7 @@ void
 Dflange::setpreset(int npreset)
 {
     const int PRESET_SIZE = 15;
-    const int NUM_PRESETS = 7;
+    const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Dual Flange 1
@@ -583,7 +583,9 @@ Dflange::setpreset(int npreset)
         //Chorus 1
         {49, 0, 0, 42, 12, 50, -10, 1500, 0, 0, 120, 0, 0, 20, 0},
         //Chorus 2
-        {24, 0, 0, 35, 9, 67, 12, 4700, 1, 1, 160, 75, 0, 60, 0}
+        {24, 0, 0, 35, 9, 67, 12, 4700, 1, 1, 160, 75, 0, 60, 0},
+        //Dual Flange 2
+        {32, 0, 64, 20, 4, 4, 0, 2000, 0, 0, 14, 64, 1, 0, 1}
     };
 
     if (npreset > NUM_PRESETS - 1)

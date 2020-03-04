@@ -44,7 +44,7 @@ dflange_subs->value(rkr->efx_DFlange->getpar(8));
 dflange_tz->value(rkr->efx_DFlange->getpar(9));
 dflange_offset->value(rkr->efx_DFlange->getpar(5));
 dflange_lpf->value(rkr->efx_DFlange->getpar(7));
-dflange_intense->value(rkr->efx_DFlange->getpar(14));}
+dflange_intense->value(rkr->efx_DFlange->getpar(14));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -56,11 +56,11 @@ dflange_intense->value(rkr->efx_DFlange->getpar(14));}
       xywh {72 72 36 21} labelsize 10
     }
     MenuItem {} {
-      label FbFlange
+      label {Feedback Flange}
       xywh {72 72 36 21} labelsize 10
     }
     MenuItem {} {
-      label SoftFlange
+      label {Soft Flange} selected
       xywh {82 82 36 21} labelsize 10
     }
     MenuItem {} {
@@ -74,6 +74,10 @@ dflange_intense->value(rkr->efx_DFlange->getpar(14));}
     MenuItem {} {
       label {Bright Chorus}
       xywh {112 112 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Dual Flange 2}
+      xywh {82 82 36 21} labelsize 10
     }
   }
   Fl_Value_Slider dflange_WD {
@@ -206,7 +210,7 @@ rkr->efx_DFlange->changepar(11,(int)o->value());}
   }
   Fl_Choice dflange_lfotype {
     label {LFO Type}
-    callback {rkr->efx_DFlange->changepar(12,(int)o->value());} open selected
+    callback {rkr->efx_DFlange->changepar(12,(int)o->value());} open
     xywh {78 153 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}

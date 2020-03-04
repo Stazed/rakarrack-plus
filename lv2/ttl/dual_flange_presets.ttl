@@ -9,7 +9,7 @@
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset1>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:label "Preset 1" ;
+        rdfs:label "Dual Flange 1" ;
         lv2:port [
                 lv2:symbol "DRYWET" ;
                 pset:value 95.0
@@ -61,7 +61,7 @@
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flangewah>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ; 
-        rdfs:label "FlangeWah" ;
+        rdfs:label "Flange-Wah" ;
         lv2:port [
                 lv2:symbol "DRYWET" ;
                 pset:value 63.0
@@ -269,7 +269,7 @@
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus1>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:label "Chorus 1" ;
+        rdfs:label "Deep Chorus" ;
         lv2:port [
                 lv2:symbol "DRYWET" ;
                 pset:value 78.0
@@ -321,7 +321,7 @@
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus2>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:label "Chorus 2" ;
+        rdfs:label "Bright Chorus" ;
         lv2:port [
                 lv2:symbol "DRYWET" ;
                 pset:value 103.0
@@ -370,3 +370,55 @@
         ] ;
         .
 
+<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset2>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+        rdfs:label "Dual Flange 2" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 95.0
+        ], [
+                lv2:symbol "PAN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "LRC" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "DEPTH" ;
+                pset:value 20.0
+        ], [
+                lv2:symbol "WIDTH" ;
+                pset:value 4.0
+        ], [
+                lv2:symbol "OFFS" ;
+                pset:value 4.0
+        ], [
+                lv2:symbol "FB" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "LPF" ;
+                pset:value 2000.0
+        ], [
+                lv2:symbol "SUB" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "THZ" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "TEMPO" ;
+                pset:value 14.0
+        ], [
+                lv2:symbol "STDL" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "TYPE" ;
+                pset:value 1.0
+        ], [
+                lv2:symbol "RND" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "INTENSE" ;
+                pset:value 1.0
+        ] ;
+        .
+	
