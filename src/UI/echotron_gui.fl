@@ -46,7 +46,7 @@ echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -78,7 +78,7 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
  return;
 }
 rkr->efx_Echotron->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {52 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_pan {
@@ -89,7 +89,7 @@ rkr->efx_Echotron->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->efx_Echotron->changepar(11,(int)(o->value()+64));}
-    xywh {52 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_tempo {
@@ -100,7 +100,7 @@ rkr->efx_Echotron->changepar(11,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Echotron->changepar(5,(int)o->value());}
-    xywh {52 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 60 textcolor 7
+    xywh {53 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 60 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_damp {
@@ -111,29 +111,29 @@ rkr->efx_Echotron->changepar(5,(int)o->value());}
  return;
 }
 rkr->efx_Echotron->changepar(6,(int)o->value());}
-    xywh {52 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_fb {
-    label Fb
+    label Feedback
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(352);
  return;
 }
 rkr->efx_Echotron->changepar(10,(int)o->value());}
-    xywh {52 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {53 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_lrcross {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(353);
  return;
 }
 rkr->efx_Echotron->changepar(7,(int)(o->value()+64));}
-    xywh {52 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {53 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_width {
@@ -144,7 +144,7 @@ rkr->efx_Echotron->changepar(7,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Echotron->changepar(2,(int)o->value());}
-    xywh {52 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    xywh {53 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_deep {
@@ -155,18 +155,18 @@ rkr->efx_Echotron->changepar(2,(int)o->value());}
  return;
 }
 rkr->efx_Echotron->changepar(1,((int)o->value()+64));}
-    xywh {52 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {53 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echotron_stdf {
-    label {St.df}
+    label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(356);
  return;
 }
 rkr->efx_Echotron->changepar(9,(int)o->value());}
-    xywh {52 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button echotron_af {
@@ -177,7 +177,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
   }
   Fl_Choice echotron_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
+    callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open selected
     xywh {88 135 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
