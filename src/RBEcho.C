@@ -252,7 +252,7 @@ void
 RBEcho::setpreset(int npreset)
 {
     const int PRESET_SIZE = 10;
-    const int NUM_PRESETS = 3;
+    const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Echo 1
@@ -260,7 +260,9 @@ RBEcho::setpreset(int npreset)
         //Echo 2
         {64, 64, 90, 64, 64, 64, 64, 0, 2, 96},
         //Echo 3
-        {64, 64, 90, 64, 64, 111, 127, 77, 3, 96}
+        {64, 64, 90, 64, 64, 111, 127, 77, 3, 96},
+        //Echo 4
+        {67, 64, 128, 64, 64, 59, 0, 0, 1, 0}
     };
 
     if (npreset > NUM_PRESETS - 1)

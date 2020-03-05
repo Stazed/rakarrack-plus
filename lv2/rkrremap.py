@@ -551,7 +551,7 @@ def remap(efxindex, paramindex):
          (32, -1) : ('RakarrackPlus Echoverse', 'https://github.com/Stazed/rakarrack-plus#Echoverse') ,
          (32, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (32, 1) : (2, 'Panning', 'PAN', -64) ,
-         (32, 2) : (3, 'TEMPO', 'DELAY', 0) ,
+         (32, 2) : (3, 'Tempo', 'DELAY', 0) ,
          (32, 3) : (4, 'Left/Right Delay Offset', 'LR_DELAY', 0) ,
          (32, 4) : (5, 'Angle', 'ANGLE', -64) ,
          (32, 5) : (6, 'Feedback', 'FEEDBACK', 0) ,
@@ -671,7 +671,7 @@ def remap(efxindex, paramindex):
          (41, 2) : (3, 'LFO Width', 'WIDTH', 0) ,
          (41, 3) : (4, 'Number of Taps', 'LENGTH', 0) ,
          (41, 4) : (0, 'SKIP', 'SKIP', 0) ,#user file
-         (41, 5) : (5, 'TEMPO', 'TEMPO', 0) ,
+         (41, 5) : (5, 'Tempo', 'TEMPO', 0) ,
          (41, 6) : (6, 'Dampening', 'DAMP', 0) ,
          (41, 7) : (7, 'Left/Right Crossover', 'LRC', -64) ,
          (41, 8) : (0, 'SKIP', 'SKIP', 0) ,#file number

@@ -137,7 +137,7 @@
             a lv2:InputPort, lv2:ControlPort ;
             lv2:index 11 ;
             lv2:symbol "TEMPO" ;
-            lv2:name "TEMPO" ;
+            lv2:name "Tempo" ;
             lv2:default 76 ;
             lv2:minimum 1 ;
             lv2:maximum 600 ;
