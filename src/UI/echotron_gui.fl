@@ -46,7 +46,7 @@ echotron_af->value(rkr->efx_Echotron->getpar(15));
 echotron_mf->value(rkr->efx_Echotron->getpar(13));
 echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);} open
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -68,6 +68,10 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     MenuItem {} {
       label SuctionFlange
       xywh {20 20 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Soft selected
+      xywh {97 97 36 21} labelsize 10
     }
   }
   Fl_Value_Slider echotron_WD {
@@ -177,7 +181,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
   }
   Fl_Choice echotron_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open selected
+    callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
     xywh {88 135 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}

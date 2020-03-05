@@ -275,3 +275,56 @@
 		<https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile> <Comb.dly>
 	] 
 	.
+<https://github.com/Stazed/rakarrack-plus#Echotron:preset:soft>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
+	rdfs:label "Soft" ;
+    lv2:port [
+        lv2:symbol "DRYWET" ;
+		pset:value 63.0
+    ], [
+        lv2:symbol "DEPTH" ;
+		pset:value 0.0
+    ], [
+        lv2:symbol "WIDTH" ;
+		pset:value 41.0
+    ], [
+        lv2:symbol "LENGTH" ;
+		pset:value 4.0
+        #skip user
+    ], [
+        lv2:symbol "TEMPO" ;
+		pset:value 64.0
+    ], [
+        lv2:symbol "DAMP" ;
+		pset:value 99.0
+    ], [
+        lv2:symbol "LRC" ;
+		pset:value 20.0
+        #skip file
+    ], [
+        lv2:symbol "STDF" ;
+		pset:value 64.0
+    ], [
+        lv2:symbol "FB" ;
+		pset:value 0.0
+    ], [
+        lv2:symbol "PAN" ;
+		pset:value 0.0
+    ], [
+        lv2:symbol "MD" ;
+		pset:value 0.0
+    ], [
+        lv2:symbol "MF" ;
+		pset:value 0.0
+    ], [
+        lv2:symbol "LFOTYPE" ;
+		pset:value 0.0
+    ], [
+        lv2:symbol "AF" ;
+		pset:value 0.0
+    ] ;
+    state:state [
+		<https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile> <SwingPong.dly>
+	] 
+	.

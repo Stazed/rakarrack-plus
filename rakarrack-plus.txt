@@ -85,7 +85,9 @@ FIXME Help .png
 Echotron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 64    |  STDF - LFO L/R Delay
-FIXME add LV2-Default
+    Added LV2 preset Soft - Done
+---Done---
+FIXME Help .png
 
 Echoverse (RBEcho)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

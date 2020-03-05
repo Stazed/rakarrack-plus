@@ -695,7 +695,7 @@ void
 Echotron::setpreset(int npreset)
 {
     const int PRESET_SIZE = 16;
-    const int NUM_PRESETS = 5;
+    const int NUM_PRESETS = 6;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Summer
@@ -707,8 +707,9 @@ Echotron::setpreset(int npreset)
         //Suction
         {0, 47, 28, 8, 0, 92, 0, 64, 3, 32, 0, 64, 1, 1, 1, 1},
         //SucFlange
-        {64, 36, 93, 8, 0, 81, 0, 64, 3, 32, 0, 64, 1, 0, 1, 1}
-
+        {64, 36, 93, 8, 0, 81, 0, 64, 3, 32, 0, 64, 1, 0, 1, 1},
+        //Soft
+        {64, 64, 41, 4, 0, 64, 99, 84, 0, 64, 0, 64, 0, 0, 0, 0},
     };
 
     if (npreset > NUM_PRESETS - 1)
