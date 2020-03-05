@@ -247,21 +247,24 @@ jackprocess(jack_nframes_t nframes, void * /* arg */)
         }
     }
 
-    memcpy(JackOUT->efxoutl, inl,
-           sizeof (jack_default_audio_sample_t) * nframes);
-    memcpy(JackOUT->efxoutr, inr,
-           sizeof (jack_default_audio_sample_t) * nframes);
-    memcpy(JackOUT->auxdata, aux,
-           sizeof (jack_default_audio_sample_t) * nframes);
+    if(nframes)
+    {
+        memcpy(JackOUT->efxoutl, inl,
+               sizeof (jack_default_audio_sample_t) * nframes);
+        memcpy(JackOUT->efxoutr, inr,
+               sizeof (jack_default_audio_sample_t) * nframes);
+        memcpy(JackOUT->auxdata, aux,
+               sizeof (jack_default_audio_sample_t) * nframes);
 
 
-    JackOUT->Alg(inl, inr, 0);
+        JackOUT->Alg(inl, inr, 0);
 
-    memcpy(outl, JackOUT->efxoutl,
-           sizeof (jack_default_audio_sample_t) * nframes);
-    memcpy(outr, JackOUT->efxoutr,
-           sizeof (jack_default_audio_sample_t) * nframes);
-
+        memcpy(outl, JackOUT->efxoutl,
+               sizeof (jack_default_audio_sample_t) * nframes);
+        memcpy(outr, JackOUT->efxoutr,
+               sizeof (jack_default_audio_sample_t) * nframes);
+    }
+    
     return 0;
 
 }

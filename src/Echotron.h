@@ -56,7 +56,27 @@ public:
 
     int fLength;
     char Filename[128];
+    
+    DlyFile():
+    fPan(),
+    fTime(),
+    fLevel(),
+    fLP(),
+    fBP(),
+    fHP(),
+    fFreq(),
+    fQ(),
+    iStages(),
+    subdiv_dmod(0.0),
+    subdiv_fmod(0.0),
+    f_qmode(0),
+    rtime(),
+    ltime(),
+    ldata(),
+    rdata(),
 
+    fLength(0.0),
+    Filename() {}
 
 };
 
