@@ -36,6 +36,14 @@ public:
 	int data_length;
 	float maxtime;
 	float maxdata;
+	
+	RvbFile ():
+	    Filename(),
+	    tdata(),
+	    ftime(),
+	    data_length(),
+	    maxtime(),
+	    maxdata() {}
 };
 
 class Reverbtron
