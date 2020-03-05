@@ -216,7 +216,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_preset->when(FL_WHEN_RELEASE_ALWAYS);
   eq_preset->menu(menu_eq_preset);
 } // Fl_Choice* eq_preset
-{ eq_Gain = new SliderW(49, 24, 100, 10, "Gain");
+{ eq_Gain = new SliderW(53, 24, 100, 10, "Gain");
   eq_Gain->type(5);
   eq_Gain->box(FL_FLAT_BOX);
   eq_Gain->color((Fl_Color)178);
@@ -233,7 +233,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_Gain->align(Fl_Align(FL_ALIGN_LEFT));
   eq_Gain->when(FL_WHEN_CHANGED);
 } // SliderW* eq_Gain
-{ eq_Q = new SliderW(49, 37, 100, 10, "Q");
+{ eq_Q = new SliderW(53, 37, 100, 10, "Q");
+  eq_Q->tooltip("Resonance");
   eq_Q->type(5);
   eq_Q->box(FL_FLAT_BOX);
   eq_Q->color((Fl_Color)178);
@@ -250,7 +251,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_Q->align(Fl_Align(FL_ALIGN_LEFT));
   eq_Q->when(FL_WHEN_CHANGED);
 } // SliderW* eq_Q
-{ eq_1 = new SliderW(49, 56, 100, 10, "31 Hz");
+{ eq_1 = new SliderW(53, 56, 100, 10, "31 Hz");
   eq_1->type(5);
   eq_1->box(FL_FLAT_BOX);
   eq_1->color((Fl_Color)178);
@@ -267,7 +268,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_1->align(Fl_Align(FL_ALIGN_LEFT));
   eq_1->when(FL_WHEN_CHANGED);
 } // SliderW* eq_1
-{ eq_2 = new SliderW(49, 68, 100, 10, "63 Hz");
+{ eq_2 = new SliderW(53, 68, 100, 10, "63 Hz");
   eq_2->type(5);
   eq_2->box(FL_FLAT_BOX);
   eq_2->color((Fl_Color)178);
@@ -284,7 +285,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_2->align(Fl_Align(FL_ALIGN_LEFT));
   eq_2->when(FL_WHEN_CHANGED);
 } // SliderW* eq_2
-{ eq_3 = new SliderW(49, 80, 100, 10, "125 Hz");
+{ eq_3 = new SliderW(53, 80, 100, 10, "125 Hz");
   eq_3->type(5);
   eq_3->box(FL_FLAT_BOX);
   eq_3->color((Fl_Color)178);
@@ -301,7 +302,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_3->align(Fl_Align(FL_ALIGN_LEFT));
   eq_3->when(FL_WHEN_CHANGED);
 } // SliderW* eq_3
-{ eq_4 = new SliderW(49, 93, 100, 10, "250 Hz");
+{ eq_4 = new SliderW(53, 93, 100, 10, "250 Hz");
   eq_4->type(5);
   eq_4->box(FL_FLAT_BOX);
   eq_4->color((Fl_Color)178);
@@ -318,7 +319,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_4->align(Fl_Align(FL_ALIGN_LEFT));
   eq_4->when(FL_WHEN_CHANGED);
 } // SliderW* eq_4
-{ eq_5 = new SliderW(49, 105, 100, 10, "500 Hz");
+{ eq_5 = new SliderW(53, 105, 100, 10, "500 Hz");
   eq_5->type(5);
   eq_5->box(FL_FLAT_BOX);
   eq_5->color((Fl_Color)178);
@@ -335,7 +336,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_5->align(Fl_Align(FL_ALIGN_LEFT));
   eq_5->when(FL_WHEN_CHANGED);
 } // SliderW* eq_5
-{ eq_6 = new SliderW(49, 117, 100, 10, "1 Khz");
+{ eq_6 = new SliderW(53, 117, 100, 10, "1 Khz");
   eq_6->type(5);
   eq_6->box(FL_FLAT_BOX);
   eq_6->color((Fl_Color)178);
@@ -352,7 +353,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_6->align(Fl_Align(FL_ALIGN_LEFT));
   eq_6->when(FL_WHEN_CHANGED);
 } // SliderW* eq_6
-{ eq_7 = new SliderW(49, 130, 100, 10, "2 Khz");
+{ eq_7 = new SliderW(53, 130, 100, 10, "2 Khz");
   eq_7->type(5);
   eq_7->box(FL_FLAT_BOX);
   eq_7->color((Fl_Color)178);
@@ -369,7 +370,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_7->align(Fl_Align(FL_ALIGN_LEFT));
   eq_7->when(FL_WHEN_CHANGED);
 } // SliderW* eq_7
-{ eq_8 = new SliderW(49, 142, 100, 10, "4 Khz");
+{ eq_8 = new SliderW(53, 142, 100, 10, "4 Khz");
   eq_8->type(5);
   eq_8->box(FL_FLAT_BOX);
   eq_8->color((Fl_Color)178);
@@ -386,7 +387,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_8->align(Fl_Align(FL_ALIGN_LEFT));
   eq_8->when(FL_WHEN_CHANGED);
 } // SliderW* eq_8
-{ eq_9 = new SliderW(49, 154, 100, 10, "8 Khz");
+{ eq_9 = new SliderW(53, 154, 100, 10, "8 Khz");
   eq_9->type(5);
   eq_9->box(FL_FLAT_BOX);
   eq_9->color((Fl_Color)178);
@@ -403,7 +404,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eq_9->align(Fl_Align(FL_ALIGN_LEFT));
   eq_9->when(FL_WHEN_CHANGED);
 } // SliderW* eq_9
-{ eq_10 = new SliderW(49, 167, 100, 10, "16 Khz");
+{ eq_10 = new SliderW(53, 165, 100, 10, "16 Khz");
   eq_10->type(5);
   eq_10->box(FL_FLAT_BOX);
   eq_10->color((Fl_Color)178);
