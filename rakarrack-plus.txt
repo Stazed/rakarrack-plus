@@ -107,6 +107,8 @@ Exciter
 
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
+    Added LV2 default Another as preset - done
+---Done---
 
 Flanger
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |

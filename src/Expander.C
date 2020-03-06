@@ -182,16 +182,18 @@ void
 Expander::setpreset(int npreset)
 {
     const int PRESET_SIZE = 7;
-    const int NUM_PRESETS = 3;
+    const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
 
         //Noise Gate
-        {-50, 20, 50, 50, 3134, 76, 0},
+        {-50, 20, 50, 50, 3134, 76, 1},
         //Boost Gate
         {-55, 30, 50, 50, 1441, 157, 50},
         //Treble swell
-        {-30, 9, 950, 25, 6703, 526, 90}
+        {-30, 9, 950, 25, 6703, 526, 90},
+        //Another
+        {-30, 2, 20, 120, 3134, 76, 10}
     };
 
     if (npreset > NUM_PRESETS - 1)

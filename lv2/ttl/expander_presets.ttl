@@ -30,7 +30,7 @@
 		pset:value 76.0
         ], [
                 lv2:symbol "OUTPUT" ;
-		pset:value 0.0
+		pset:value 1.0
         ] ;
 	.
 
@@ -88,5 +88,33 @@
         ], [
                 lv2:symbol "OUTPUT" ;
 		pset:value 90.0
+        ] ;
+	.
+
+<https://github.com/Stazed/rakarrack-plus#Expander:preset:another>
+	a pset:Preset ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> ;
+	rdfs:label "Another" ;
+        lv2:port [
+                lv2:symbol "THRESHOLD" ;
+		pset:value -30.0
+        ], [
+                lv2:symbol "SHAPE" ;
+		pset:value 2.0
+        ], [
+                lv2:symbol "ATTACK" ;
+		pset:value 20.0
+        ], [
+                lv2:symbol "RELEASE" ;
+		pset:value 120.0
+        ], [
+                lv2:symbol "LPF" ;
+		pset:value 3134.0
+        ], [
+                lv2:symbol "HPF" ;
+		pset:value 76.0
+        ], [
+                lv2:symbol "OUTPUT" ;
+		pset:value 10.0
         ] ;
 	.
