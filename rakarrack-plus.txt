@@ -103,6 +103,7 @@ EQ
 
 Exciter
     Wet/Dry                     |                |    none       |                   |       none        |
+---Done---
 
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
