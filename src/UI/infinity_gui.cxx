@@ -402,6 +402,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_pan->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_pan
 { infinity_stdf = new SliderW(53, 123, 100, 10, "Stereo Df");
+  infinity_stdf->tooltip("Sweep L/R Delay");
   infinity_stdf->type(5);
   infinity_stdf->box(FL_FLAT_BOX);
   infinity_stdf->color((Fl_Color)178);
