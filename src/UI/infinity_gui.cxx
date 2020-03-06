@@ -45,6 +45,7 @@ void InfinityGui::cb_infinity_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item InfinityGui::menu_infinity_preset[] = {
+ {"Plain", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Basic", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Rising Comb", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Falling Comb", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},

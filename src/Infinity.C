@@ -411,9 +411,11 @@ void
 Infinity::setpreset(int npreset)
 {
     const int PRESET_SIZE = 18;
-    const int NUM_PRESETS = 10;
+    const int NUM_PRESETS = 11;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
+        //Plain
+        {64, 64, -64, 64, -64, 64, -64, 64, -64, 0, 0, 0, 14, 0, 0, 0, 0, 4},
         //Basic
         {64, 64, 64, 64, 64, 64, 64, 64, 64, 700, 20, 80, 60, 0, 1, 0, 0, 1},
         //Rising Comb

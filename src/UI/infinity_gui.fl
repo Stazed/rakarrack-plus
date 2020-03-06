@@ -46,9 +46,13 @@ infinity_stdf->value(rkr->efx_Infinity->getpar(13));
 infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
 infinity_pan->value(rkr->efx_Infinity->getpar(15));
 infinity_rev->value(rkr->efx_Infinity->getpar(16));
-infinity_stages->value(rkr->efx_Infinity->getpar(17));}
+infinity_stages->value(rkr->efx_Infinity->getpar(17));} open
     xywh {80 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
+    MenuItem {} {
+      label Plain selected
+      xywh {37 37 36 21} labelsize 10
+    }
     MenuItem {} {
       label Basic
       xywh {27 27 36 21} labelsize 10

@@ -228,6 +228,11 @@
         ] ;
 	.
 
+<https://github.com/Stazed/rakarrack-plus#Infinity:preset:plain>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+        rdfs:seeAlso <inf_presets.ttl> .
+
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:basic>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
