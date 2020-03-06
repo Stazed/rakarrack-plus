@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class LooperGui {
@@ -44,7 +44,7 @@ looper_r2->value(rkr->efx_Looper->getpar(12));
 looper_lnk->value(rkr->efx_Looper->getpar(13));
 looper_Tempo->value(rkr->efx_Looper->getpar(14));
 looper_bar->value(rkr->efx_Looper->getpar(15));
-looper_ms->value(rkr->efx_Looper->getpar(17));} selected
+looper_ms->value(rkr->efx_Looper->getpar(17));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -64,7 +64,7 @@ looper_ms->value(rkr->efx_Looper->getpar(17));} selected
  return;
 }
 rkr->efx_Looper->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {51 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider looper_level1 {
@@ -75,7 +75,7 @@ rkr->efx_Looper->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->efx_Looper->changepar(6,(int)o->value());}
-    xywh {51 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    xywh {53 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider looper_level2 {
@@ -86,13 +86,13 @@ rkr->efx_Looper->changepar(6,(int)o->value());}
  return;
 }
 rkr->efx_Looper->changepar(10,(int)o->value());}
-    xywh {51 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    xywh {53 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider looper_Tempo {
     label Tempo
     callback {rkr->efx_Looper->changepar(14,(int)o->value());}
-    xywh {51 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 380 step 1 value 100 textcolor 7
+    xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 380 step 1 value 100 textcolor 7
     class SliderW
   }
   Fl_Choice looper_bar {
@@ -115,8 +115,8 @@ rkr->efx_Looper->changepar(10,(int)o->value());}
  rgui->getMIDIControl(270);
  return;
 }
-rkr->efx_Looper->changepar(5,(int)o->value())}
-    xywh {8 89 61 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+rkr->efx_Looper->changepar(5,(int)o->value())} selected
+    tooltip {Play Loop in Reverse} xywh {8 89 61 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Check_Button looper_ap {
     label {Auto Play}
@@ -190,7 +190,7 @@ rgui->update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(11,(int)o->value())}
-    xywh {8 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+    tooltip {Record on Track 1} xywh {8 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
   }
   Fl_Check_Button looper_r2 {
     label R2
@@ -201,7 +201,7 @@ rkr->efx_Looper->changepar(11,(int)o->value())}
  return;
 }
 rkr->efx_Looper->changepar(12,(int)o->value())}
-    xywh {27 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+    tooltip {Record on Track 2} xywh {27 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
   }
   Fl_Button looper_t1 {
     label 1
@@ -213,7 +213,7 @@ rkr->efx_Looper->changepar(12,(int)o->value())}
 }
 rkr->efx_Looper->changepar(7,(int)o->value());
 rgui->update_looper();}
-    xywh {111 147 18 18} type Toggle labelsize 10 align 16
+    tooltip {Enable Play, Stop, Record on Track 1} xywh {111 147 18 18} type Toggle labelsize 10 align 16
   }
   Fl_Button looper_t2 {
     label 2
@@ -225,13 +225,13 @@ rgui->update_looper();}
 }
 rkr->efx_Looper->changepar(8,(int)o->value());
 rgui->update_looper();}
-    xywh {134 147 18 18} type Toggle labelsize 10 align 16
+    tooltip {Enable Play, Stop, Record on Track 2} xywh {134 147 18 18} type Toggle labelsize 10 align 16
   }
   Fl_Check_Button looper_lnk {
     label Lnk
     user_data 2
     callback {rkr->efx_Looper->changepar(13,(int)o->value())}
-    xywh {27 167 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+    tooltip {Link track 1 and track 2 with the same length} xywh {27 167 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
   }
   Fl_Button looper_clear {
     label Clear
@@ -243,13 +243,13 @@ rgui->update_looper();}
 }
 rkr->efx_Looper->changepar(4,(int)o->value());
 rgui->update_looper();}
-    xywh {46 165 43 14} labelsize 10
+    tooltip {Erase the Selected Track} xywh {46 165 43 14} labelsize 10
   }
   Fl_Check_Button looper_mt {
     label M
     user_data 2
     callback {rkr->efx_Looper->changepar(16,(int)o->value())}
-    xywh {93 167 27 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip Metronome xywh {93 167 27 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Box L_TimePos {
     xywh {121 166 35 14} box DOWN_BOX align 84
