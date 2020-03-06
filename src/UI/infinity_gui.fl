@@ -46,7 +46,7 @@ infinity_stdf->value(rkr->efx_Infinity->getpar(13));
 infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
 infinity_pan->value(rkr->efx_Infinity->getpar(15));
 infinity_rev->value(rkr->efx_Infinity->getpar(16));
-infinity_stages->value(rkr->efx_Infinity->getpar(17));} selected
+infinity_stages->value(rkr->efx_Infinity->getpar(17));}
     xywh {80 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -98,7 +98,7 @@ infinity_stages->value(rkr->efx_Infinity->getpar(17));} selected
  return;
 } 
 rkr->efx_Infinity->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {52 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_Q {
@@ -109,59 +109,59 @@ rkr->efx_Infinity->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->efx_Infinity->changepar(9,(int)o->value());}
-    xywh {52 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -1000 maximum 1000 step 1 textcolor 7
+    tooltip {Resonance Filter} xywh {53 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -1000 maximum 1000 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Input infinity_1 {
     label 1
     callback {rkr->efx_Infinity->changepar(1,(int)o->value());}
-    xywh {16 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {19 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Value_Input infinity_2 {
     label 2
     callback {rkr->efx_Infinity->changepar(2,(int)o->value());}
-    xywh {52 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {55 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Value_Input infinity_3 {
     label 3
     callback {rkr->efx_Infinity->changepar(3,(int)o->value());}
-    xywh {88 55 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {91 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Value_Input infinity_4 {
     label 4
     callback {rkr->efx_Infinity->changepar(4,(int)o->value());}
-    xywh {124 55 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {130 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Value_Input infinity_5 {
     label 5
     callback {rkr->efx_Infinity->changepar(5,(int)o->value());}
-    xywh {16 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {19 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Value_Input infinity_6 {
     label 6
     callback {rkr->efx_Infinity->changepar(6,(int)o->value());}
-    xywh {52 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {55 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Value_Input infinity_7 {
     label 7
     callback {rkr->efx_Infinity->changepar(7,(int)o->value());}
-    xywh {88 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {91 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Value_Input infinity_8 {
     label 8
     callback {rkr->efx_Infinity->changepar(8,(int)o->value());}
-    xywh {124 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {130 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
   }
   Fl_Check_Button infinity_rev {
-    label Rev
+    label Reverse
     user_data 2
     callback {rkr->efx_Infinity->changepar(16,(int)o->value());}
-    tooltip {Reverse left from right directions} xywh {6 93 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
+    tooltip {Reverse Left Channel Sweep} xywh {53 94 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
   }
   Fl_Counter infinity_stages {
     label Stages
     callback {rkr->efx_Infinity->changepar(17,(int)o->value());}
-    xywh {90 93 46 15} type Simple labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 10
+    xywh {106 93 46 15} type Simple labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 10
   }
   Fl_Value_Slider infinity_pan {
     label AutoPan
@@ -171,18 +171,18 @@ rkr->efx_Infinity->changepar(9,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(15,(int)o->value());}
-    xywh {52 111 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 111 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_stdf {
-    label {St.df}
+    label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(398);
  return;
 } 
 rkr->efx_Infinity->changepar(13,(int)o->value());}
-    xywh {52 123 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {53 123 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_start {
@@ -193,7 +193,7 @@ rkr->efx_Infinity->changepar(13,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(10,(int)o->value());}
-    xywh {52 135 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 135 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_end {
@@ -204,7 +204,7 @@ rkr->efx_Infinity->changepar(10,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(11,(int)o->value());}
-    xywh {52 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_rate {
@@ -215,7 +215,7 @@ rkr->efx_Infinity->changepar(11,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(12,(int)o->value());}
-    xywh {52 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 600 step 1 textcolor 7
+    xywh {53 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_subdiv {
@@ -226,7 +226,7 @@ rkr->efx_Infinity->changepar(12,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(14,(int)o->value());}
-    xywh {52 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -16 maximum 16 step 1 textcolor 7
+    xywh {53 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -16 maximum 16 step 1 textcolor 7
     class SliderW
   }
 }
