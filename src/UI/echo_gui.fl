@@ -112,8 +112,8 @@ rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
     class SliderW
   }
   Fl_Value_Slider echo_LRdl {
-    label {LR Delay.}
-    callback {rkr->efx_Echo->changepar(3,(int)o->value());}
+    label {LR Delay}
+    callback {rkr->efx_Echo->changepar(3,(int)o->value());} selected
     xywh {53 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -135,7 +135,7 @@ rkr->efx_Echo->changepar(4,(int)(o->value()));}
  rgui->getMIDIControl(78);
  return;
 } 
-rkr->efx_Echo->changepar(5,(int)o->value());} selected
+rkr->efx_Echo->changepar(5,(int)o->value());}
     xywh {53 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

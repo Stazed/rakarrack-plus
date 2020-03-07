@@ -143,7 +143,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_preset->when(FL_WHEN_RELEASE_ALWAYS);
   otrem_preset->menu(menu_otrem_preset);
 } // Fl_Choice* otrem_preset
-{ otrem_dpth = new SliderW(52, 35, 100, 10, "Depth");
+{ otrem_dpth = new SliderW(53, 35, 100, 10, "Depth");
   otrem_dpth->type(5);
   otrem_dpth->box(FL_FLAT_BOX);
   otrem_dpth->color((Fl_Color)178);
@@ -159,7 +159,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_dpth->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_dpth
-{ otrem_freq = new SliderW(52, 55, 100, 10, "Tempo");
+{ otrem_freq = new SliderW(53, 55, 100, 10, "Tempo");
   otrem_freq->type(5);
   otrem_freq->box(FL_FLAT_BOX);
   otrem_freq->color((Fl_Color)178);
@@ -176,7 +176,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_freq->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_freq->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_freq
-{ otrem_rnd = new SliderW(52, 75, 100, 10, "Rnd");
+{ otrem_rnd = new SliderW(53, 75, 100, 10, "Random");
   otrem_rnd->type(5);
   otrem_rnd->box(FL_FLAT_BOX);
   otrem_rnd->color((Fl_Color)178);
@@ -192,7 +192,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_rnd
-{ Fl_Choice* o = otrem_lfotype = new Fl_Choice(63, 102, 72, 16, "LFO Type");
+{ Fl_Choice* o = otrem_lfotype = new Fl_Choice(78, 102, 72, 16, "LFO Type");
   otrem_lfotype->down_box(FL_BORDER_BOX);
   otrem_lfotype->selection_color(FL_FOREGROUND_COLOR);
   otrem_lfotype->labelsize(10);
@@ -202,14 +202,15 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_lfotype->callback((Fl_Callback*)cb_otrem_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* otrem_lfotype
-{ otrem_stdf = new SliderW(52, 129, 100, 10, "St.df");
+{ otrem_stdf = new SliderW(53, 129, 100, 10, "Stereo Df");
+  otrem_stdf->tooltip("LFO L/R Delay");
   otrem_stdf->type(5);
   otrem_stdf->box(FL_FLAT_BOX);
   otrem_stdf->color((Fl_Color)178);
   otrem_stdf->selection_color((Fl_Color)62);
   otrem_stdf->labeltype(FL_NORMAL_LABEL);
   otrem_stdf->labelfont(0);
-  otrem_stdf->labelsize(10);
+  otrem_stdf->labelsize(9);
   otrem_stdf->labelcolor(FL_BACKGROUND2_COLOR);
   otrem_stdf->maximum(127);
   otrem_stdf->step(1);
@@ -218,7 +219,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_stdf
-{ otrem_pan = new SliderW(52, 149, 100, 10, "Pan");
+{ otrem_pan = new SliderW(53, 149, 100, 10, "Pan");
   otrem_pan->type(5);
   otrem_pan->box(FL_FLAT_BOX);
   otrem_pan->color((Fl_Color)178);
@@ -235,7 +236,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_pan->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_pan->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_pan
-{ otrem_invert = new Fl_Check_Button(108, 167, 73, 15, "Invert");
+{ otrem_invert = new Fl_Check_Button(49, 164, 73, 15, "Invert");
   otrem_invert->tooltip("If checked it behaves more like tube preamp trem. If unchecked it behaves lik\
 e a stompbox Opto Trem");
   otrem_invert->down_box(FL_BORDER_BOX);
