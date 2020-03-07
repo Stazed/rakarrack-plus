@@ -36,7 +36,7 @@ otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
 otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
 otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
 otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
-otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));}
+otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));} open
     xywh {77 6 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -62,6 +62,10 @@ otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));}
     MenuItem {} {
       label {Hard Ramp}
       xywh {0 0 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Slow selected
+      xywh {82 82 36 21} labelsize 10
     }
   }
   Fl_Value_Slider otrem_dpth {
@@ -110,7 +114,7 @@ rkr->efx_Opticaltrem->changepar(2,(int)o->value());}
  rgui->getMIDIControl(384);
  return;
 }
-rkr->efx_Opticaltrem->changepar(4,(int)o->value());} selected
+rkr->efx_Opticaltrem->changepar(4,(int)o->value());}
     tooltip {LFO L/R Delay} xywh {53 129 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

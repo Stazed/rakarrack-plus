@@ -141,7 +141,7 @@ FIXME Help .png
 MuTroMojo   (RyanWah)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |  -64 to 63    |                   |      -64 to 63    |  STDL - LFO L/R Delay
-    Add LV2 default - wah fever as preset - done
+    Added LV2 default - wah fever as preset - done
 ---Done---
 FIXME Help .png
 
@@ -152,7 +152,9 @@ NoiseGate
 Opticaltrem
     Wet/Dry                     |                |    none       |                   |       none        |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDF - LFO L/R Delay
-FIXME LV2 default
+    Added LV2 default - slow as preset - done
+---Done---
+FIXME Help .png
 
 Overdrive
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |     DISTORTION    |

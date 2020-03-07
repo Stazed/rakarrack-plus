@@ -186,7 +186,7 @@ void
 Opticaltrem::setpreset(int npreset)
 {
     const int PRESET_SIZE = 7;
-    const int NUM_PRESETS = 6;
+    const int NUM_PRESETS = 7;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Fast
@@ -200,7 +200,9 @@ Opticaltrem::setpreset(int npreset)
         //ramp down
         {65, 200, 0, 3, 32, 64, 0},
         //hard ramp
-        {127, 480, 0, 3, 32, 64, 0}
+        {127, 480, 0, 3, 32, 64, 0},
+        //Slow
+        {64, 33, 0, 0, 80, 64, 0}
 
     };
 

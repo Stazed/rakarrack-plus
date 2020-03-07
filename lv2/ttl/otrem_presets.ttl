@@ -175,3 +175,31 @@
         ] ;
 	.
 
+<https://github.com/Stazed/rakarrack-plus#Otrem:preset:slow>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+        rdfs:label "Slow" ;
+        lv2:port [
+                lv2:symbol "DEPTH" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "TEMPO" ;
+                pset:value 33.0
+        ], [
+                lv2:symbol "RND" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "TYPE" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "STDF" ;
+                pset:value 80.0
+        ], [
+                lv2:symbol "PAN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "INV" ;
+                pset:value 0.0
+        ] ;
+	.
+
