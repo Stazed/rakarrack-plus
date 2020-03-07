@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} PanGui {
@@ -38,7 +38,7 @@ pan_lfotype->value(rkr->efx_Pan->getpar(4));
 pan_stdf->value(rkr->efx_Pan->getpar(5));
 pan_extra->value(rkr->efx_Pan->getpar(6));
 pan_autopan->value(rkr->efx_Pan->getpar(7));
-pan_extraon->value(rkr->efx_Pan->getpar(8));} selected
+pan_extraon->value(rkr->efx_Pan->getpar(8));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -58,7 +58,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));} selected
  return;
 } 
 rkr->efx_Pan->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {49 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider pan_pan {
@@ -69,7 +69,7 @@ rkr->efx_Pan->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 } 
 rkr->efx_Pan->changepar(1,(int)(o->value()+64));}
-    xywh {49 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button pan_autopan {
@@ -86,47 +86,47 @@ rkr->efx_Pan->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Pan->changepar(2,(int)o->value());}
-    xywh {49 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {53 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider pan_rnd {
-    label Rnd
+    label Random
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(110);
  return;
 } 
 rkr->efx_Pan->changepar(3,(int)o->value());}
-    xywh {49 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice pan_lfotype {
     label {LFO Type}
     callback {rkr->efx_Pan->changepar(4,(int)o->value());} open
-    xywh {61 103 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    xywh {78 103 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
   Fl_Value_Slider pan_stdf {
-    label {St.df}
+    label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(104);
  return;
 } 
 rkr->efx_Pan->changepar(5,(int)o->value());}
-    xywh {49 124 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {LFO L/R Delay} xywh {53 124 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button pan_extraon {
     label {Extra Stereo}
     user_data 2
     callback {rkr->efx_Pan->changepar(8,(int)o->value())}
-    xywh {35 140 82 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip {Enable Extra Stereo} xywh {35 140 82 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Value_Slider pan_extra {
-    label {E.S.}
-    callback {rkr->efx_Pan->changepar(6,(int)o->value());}
-    xywh {49 161 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    label {E.Stereo}
+    callback {rkr->efx_Pan->changepar(6,(int)o->value());} selected
+    tooltip {Extra Stereo Amount} xywh {53 161 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local

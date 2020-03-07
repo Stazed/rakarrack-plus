@@ -224,7 +224,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_delay->align(Fl_Align(FL_ALIGN_LEFT));
   echo_delay->when(FL_WHEN_RELEASE);
 } // SliderW* echo_delay
-{ echo_LRdl = new SliderW(53, 103, 100, 10, "LR Delay");
+{ echo_LRdl = new SliderW(53, 103, 100, 10, "L/R Delay");
   echo_LRdl->type(5);
   echo_LRdl->box(FL_FLAT_BOX);
   echo_LRdl->color((Fl_Color)178);
