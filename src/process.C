@@ -1037,7 +1037,7 @@ RKR::EQ2_setpreset(int npreset)
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Plain
-        {72, 64, 64, 1077, 64, 64, 8111, 64, 64, 64},
+        {200, 64, 64, 800, 64, 64, 12000, 64, 64, 64},
         //Pop
         {72, 73, 45, 1077, 64, 64, 8111, 69, 38, 64},
         //Jazz

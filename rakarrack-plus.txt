@@ -171,6 +171,8 @@ FIXME Help .png
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
     Mid Frequency (Mid F.)      |   800 to 8000  |  800 to 8000  |    800 to 8000    |   80 to 8000      |  MFREQ
+---Done---
+FIXME Help .png
 
 Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
