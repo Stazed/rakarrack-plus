@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class MusdelayGui {
@@ -67,13 +67,13 @@ rkr->efx_MusDelay->changepar(0,Dry_Wet((int)o->value()));}
     class SliderW
   }
   Fl_Value_Slider musdelay_LRc {
-    label {L/R cross}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(98);
  return;
 } 
-rkr->efx_MusDelay->changepar(4,(int)o->value());}
+rkr->efx_MusDelay->changepar(4,(int)o->value());} selected
     xywh {53 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -170,7 +170,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
   Fl_Choice musdelay_delay2 {
     callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(8,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} selected
+if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     tooltip {Delay 2} xywh {114 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(menu_musdelay_delay1);}
   } {}
@@ -205,25 +205,25 @@ rkr->efx_MusDelay->changepar(12,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider musdelay_fb1 {
-    label {Feedback 1}
+    label {FB 1}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(83);
  return;
 } 
 rkr->efx_MusDelay->changepar(5,(int)o->value());}
-    xywh {53 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 7 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Feedback 1} xywh {53 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider musdelay_fb2 {
-    label {Feedback 2}
+    label {FB 2}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(84);
  return;
 } 
 rkr->efx_MusDelay->changepar(9,(int)o->value());}
-    xywh {53 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 7 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Feedback 2} xywh {53 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider musdelay_damp {

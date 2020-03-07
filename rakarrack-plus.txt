@@ -135,6 +135,8 @@ MusicalDelay
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRC  - Left/Right Crossover
     Gain 1                      |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Gain 2                      |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+---Done---
+FIXME Help .png
 
 MuTroMojo   (RyanWah)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
