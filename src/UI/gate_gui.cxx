@@ -113,7 +113,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_preset->when(FL_WHEN_RELEASE_ALWAYS);
   gate_preset->menu(menu_gate_preset);
 } // Fl_Choice* gate_preset
-{ gate_ATime = new SliderW(51, 39, 100, 10, "A. Time");
+{ gate_ATime = new SliderW(53, 39, 100, 10, "A. Time");
+  gate_ATime->tooltip("Attack Time");
   gate_ATime->type(5);
   gate_ATime->box(FL_FLAT_BOX);
   gate_ATime->color((Fl_Color)178);
@@ -131,7 +132,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_ATime->align(Fl_Align(FL_ALIGN_LEFT));
   gate_ATime->when(FL_WHEN_CHANGED);
 } // SliderW* gate_ATime
-{ gate_RTime = new SliderW(50, 61, 100, 10, "R. Time");
+{ gate_RTime = new SliderW(53, 61, 100, 10, "R. Time");
+  gate_RTime->tooltip("Release Time");
   gate_RTime->type(5);
   gate_RTime->box(FL_FLAT_BOX);
   gate_RTime->color((Fl_Color)178);
@@ -149,7 +151,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_RTime->align(Fl_Align(FL_ALIGN_LEFT));
   gate_RTime->when(FL_WHEN_CHANGED);
 } // SliderW* gate_RTime
-{ gate_range = new SliderW(50, 83, 100, 10, "Range");
+{ gate_range = new SliderW(53, 83, 100, 10, "Range");
   gate_range->type(5);
   gate_range->box(FL_FLAT_BOX);
   gate_range->color((Fl_Color)178);
@@ -166,7 +168,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_range->align(Fl_Align(FL_ALIGN_LEFT));
   gate_range->when(FL_WHEN_CHANGED);
 } // SliderW* gate_range
-{ gate_threshold = new SliderW(50, 105, 100, 10, "Thrhold");
+{ gate_threshold = new SliderW(53, 105, 100, 10, "Thrhold");
   gate_threshold->type(5);
   gate_threshold->box(FL_FLAT_BOX);
   gate_threshold->color((Fl_Color)178);
@@ -183,7 +185,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_threshold->align(Fl_Align(FL_ALIGN_LEFT));
   gate_threshold->when(FL_WHEN_CHANGED);
 } // SliderW* gate_threshold
-{ gate_hold = new SliderW(50, 127, 100, 10, "Hold");
+{ gate_hold = new SliderW(53, 127, 100, 10, "Hold");
   gate_hold->type(5);
   gate_hold->box(FL_FLAT_BOX);
   gate_hold->color((Fl_Color)178);
@@ -200,7 +202,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_hold->align(Fl_Align(FL_ALIGN_LEFT));
   gate_hold->when(FL_WHEN_CHANGED);
 } // SliderW* gate_hold
-{ gate_LPF = new SliderW(50, 146, 100, 10, "LPF");
+{ gate_LPF = new SliderW(53, 146, 100, 10, "LPF");
   gate_LPF->type(5);
   gate_LPF->box(FL_FLAT_BOX);
   gate_LPF->color((Fl_Color)178);
@@ -218,7 +220,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_LPF->align(Fl_Align(FL_ALIGN_LEFT));
   gate_LPF->when(FL_WHEN_CHANGED);
 } // SliderW* gate_LPF
-{ gate_HPF = new SliderW(50, 162, 100, 10, "HPF");
+{ gate_HPF = new SliderW(53, 162, 100, 10, "HPF");
   gate_HPF->type(5);
   gate_HPF->box(FL_FLAT_BOX);
   gate_HPF->color((Fl_Color)178);

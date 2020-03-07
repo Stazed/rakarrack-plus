@@ -147,6 +147,7 @@ FIXME Help .png
 
 NoiseGate
     Wet/Dry                     |                |    none       |                   |       none        |
+---Done---
 
 Opticaltrem
     Wet/Dry                     |                |    none       |                   |       none        |
