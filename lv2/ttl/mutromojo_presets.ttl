@@ -389,3 +389,67 @@
                 pset:value 1.0
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:wah_fever>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+        rdfs:label "Wah Fever" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "Q" ;
+                pset:value 10.0
+        ], [
+                lv2:symbol "TEMPO" ;
+                pset:value 128.0
+        ], [
+                lv2:symbol "RND" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "TYPE" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "STDL" ;
+                pset:value -2.0
+        ], [
+                lv2:symbol "DEPTH" ;
+                pset:value 50.0
+        ], [
+                lv2:symbol "SENSE" ;
+                pset:value -30.0
+        ], [
+                lv2:symbol "WAH" ;
+                pset:value 2.0
+        ], [
+                lv2:symbol "SMOOTH" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "LP" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "BP" ;
+                pset:value 10.0
+        ], [
+                lv2:symbol "HP" ;
+                pset:value -30.0
+        ], [
+                lv2:symbol "STAGES" ;
+                pset:value 1.0
+        ], [
+                lv2:symbol "RANGE" ;
+                pset:value 2000.0
+        ], [
+                lv2:symbol "MINFREQ" ;
+                pset:value 300.0
+        ], [
+                lv2:symbol "VARIQ" ;
+                pset:value 1.0
+        ], [
+                lv2:symbol "QMODE" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "AMODE" ;
+                pset:value 0.0
+        ] ;
+	.

@@ -55,7 +55,7 @@ ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
 ryanwah_minfreq->value(rkr->efx_RyanWah->getpar(15));
 ryanwah_res->value(rkr->efx_RyanWah->getpar(16));
 o->value(rkr->efx_RyanWah->getpar(18));
-o->redraw();}
+o->redraw();} open
     xywh {78 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -81,6 +81,10 @@ o->redraw();}
     MenuItem {} {
       label SmoothTron
       xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Wah Fever} selected
+      xywh {112 112 36 21} labelsize 10
     }
   }
   Fl_Value_Slider ryanwah_WD {
@@ -177,7 +181,7 @@ rkr->efx_RyanWah->changepar(5,(int)o->value()+64);}
   }
   Fl_Counter svfilter_stages {
     label Stg
-    callback {rkr->efx_RyanWah->changepar(13,(int)o->value());} selected
+    callback {rkr->efx_RyanWah->changepar(13,(int)o->value());}
     tooltip {Filter Stages} xywh {27 83 27 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
   }
   Fl_Choice ryanwah_lfotype {
