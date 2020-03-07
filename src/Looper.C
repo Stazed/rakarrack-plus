@@ -43,6 +43,7 @@ ticker(samplerate, intermediate_bufsize)
     looper_qua = 0;
     dl = 0;
     dl2 = 0;
+    barlen = looper_ts = 1;
 
     //default values
     Ppreset = 0;
@@ -286,13 +287,31 @@ int Looper::cal_len(int value)
     int lenbar = lrintf((float) value * 60.0 / (float) Ptempo * fSAMPLE_RATE);
 
     looper_ts = lenbar / value;
+//    printf("looper_ts = %d: lenbar = %d: value = %d: barlen = %d: looper_bar = %d: looper_qua = %d\n",
+//            looper_ts, lenbar, value, barlen, looper_bar, looper_qua);
+    
     return (lenbar);
     // return(lrintf((float)value*60.0/(float)Ptempo*fSAMPLE_RATE));
 }
 
+/**
+ *  This function calculates the time signature that is displayed in the box to the right
+ *  of the metronome check box. It works in a limited way that sometimes appears broken.
+ *  The value sent is the range of the PERIOD for each cycle. Since this range may be less
+ *  than the full bar of the time signature when the tempo is slow, it may only show a single
+ *  beat. If the tempo is fast, it can show multiple bars and beats. It would be more useful
+ *  if the bars and beats reflected a time range equivalent to the recording length set in
+ *  Settings/Audio/Looper Size Seconds. FIXME.
+ * 
+ * @param value
+ *      The range of PERIOD.
+ */
 void
 Looper::timeposition(int value)
 {
+//    printf("looper_ts = %d: value = %d: barlen = %d: looper_bar = %d: looper_qua = %d\n",
+//            looper_ts, value, barlen, looper_bar, looper_qua);
+
     looper_bar = value / barlen + 1;
     looper_qua = (value % barlen) / looper_ts + 1;
 }
@@ -504,11 +523,11 @@ Looper::changepar(int npar, int value)
     case 5:
         Preverse = value; //Playback in reverse
         break;
-    case 6:
+    case 6:                 // Level 1
         Pfade1 = value;
         setfade();
         break;
-    case 7:
+    case 7:                 // Track 1
         if (PT1)
         {
             PT1 = 0;
@@ -530,7 +549,7 @@ Looper::changepar(int npar, int value)
         track1gain = (float) PT1;
         setfade();
         break;
-    case 8:
+    case 8:                 // Track 2
         if (PT2)
         {
             PT2 = 0;
@@ -554,17 +573,17 @@ Looper::changepar(int npar, int value)
     case 9:
         Pautoplay = value;
         break;
-    case 10:
+    case 10:                // Level 2
         Pfade2 = value;
         setfade();
         break;
-    case 11:
+    case 11:                // Record 1
         Prec1 = value;
         break;
-    case 12:
+    case 12:                // Record 2
         Prec2 = value;
         break;
-    case 13:
+    case 13:                // Link track 1 and track 2
         Plink = value;
         if (Plink)
         {
@@ -575,13 +594,13 @@ Looper::changepar(int npar, int value)
     case 14:
         settempo(value);
         break;
-    case 15:
+    case 15:                // Time Signature
         setbar(value);
         break;
-    case 16:
+    case 16:                // Play Metronome
         Pmetro = value;
         break;
-    case 17:
+    case 17:                // Set metronome sound
         Pms = value;
         if (Pms == 0) setbar(Pbar);
         if (Pms == 1) ticker.set_meter(1);
