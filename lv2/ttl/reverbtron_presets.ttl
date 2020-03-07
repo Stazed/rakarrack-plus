@@ -275,10 +275,10 @@
 	] 
     .
 
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:hall2>
+<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:large_hall>
     a pset:Preset ;
     lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-   	rdfs:label "Hall 2" ;
+   	rdfs:label "Large Hall" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
 		pset:value 39.0
