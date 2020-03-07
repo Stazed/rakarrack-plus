@@ -1,10 +1,10 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class ReverbGui {
   user_data 1 open
-  xywh {1679 213 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1679 213 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -40,7 +40,7 @@ reverb_HPF->value(rkr->efx_Rev->getpar(8));
 reverb_damp->value(rkr->efx_Rev->getpar(9));
 reverb_RS->value(rkr->efx_Rev->getpar(11));
 reverb_type->value(rkr->efx_Rev->getpar(10));
-if((int)reverb_activar->value())rkr->Reverb_Bypass=1;} selected
+if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -104,7 +104,7 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;} selected
  return;
 } 
 rkr->efx_Rev->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {51 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_pan {
@@ -114,26 +114,26 @@ rkr->efx_Rev->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(63);
  return;
 } 
-rkr->efx_Rev->changepar(1,(int)(o->value()+64));}
-    xywh {51 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Rev->changepar(1,(int)(o->value()+64));} selected
+    xywh {53 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_time {
     label Time
     callback {rkr->efx_Rev->changepar(2,(int)o->value());}
-    xywh {51 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_ldel {
     label {I.Del}
     callback {rkr->efx_Rev->changepar(3,(int)o->value());}
-    xywh {51 64 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Initial Delay} xywh {53 64 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_ldelft {
     label {Del.E/R}
     callback {rkr->efx_Rev->changepar(4,(int)o->value());}
-    xywh {51 77 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Initial Delay Feedback} xywh {53 77 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice reverb_type {
@@ -153,11 +153,11 @@ rkr->efx_Rev->changepar(1,(int)(o->value()+64));}
     }
   }
   Fl_Value_Slider reverb_RS {
-    label {R.Size}
+    label {R. Size}
     callback {rkr->Reverb_Bypass=0;
 rkr->efx_Rev->changepar(11,(int)o->value());
 if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
-    xywh {51 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
+    tooltip {Room Size} xywh {53 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_LPF {
@@ -168,7 +168,7 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
  return;
 } 
 rkr->efx_Rev->changepar(7,(int)o->value());}
-    xywh {51 131 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
+    tooltip {Lowpass Filter} xywh {53 131 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_HPF {
@@ -179,13 +179,13 @@ rkr->efx_Rev->changepar(7,(int)o->value());}
  return;
 } 
 rkr->efx_Rev->changepar(8,(int)o->value());}
-    xywh {51 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+    tooltip {Highpass Filter} xywh {53 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_damp {
-    label Damp
+    label Damping
     callback {rkr->efx_Rev->changepar(9,(int)o->value());}
-    xywh {51 163 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
+    xywh {53 163 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
     class SliderW
   }
 }
