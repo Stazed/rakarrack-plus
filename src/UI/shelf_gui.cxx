@@ -34,7 +34,7 @@ void ShelfGui::cb_shelf_preset(Fl_Choice* o, void* v) {
 Fl_Menu_Item ShelfGui::menu_shelf_preset[] = {
  {"Treble", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Mid", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Low", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Bass", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Distortion 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
@@ -120,7 +120,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shelf_preset->menu(menu_shelf_preset);
 } // Fl_Choice* shelf_preset
-{ shelf_gain = new SliderW(49, 26, 100, 10, "Gain");
+{ shelf_gain = new SliderW(53, 26, 100, 10, "Gain");
   shelf_gain->type(5);
   shelf_gain->box(FL_FLAT_BOX);
   shelf_gain->color((Fl_Color)178);
@@ -136,7 +136,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_gain->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_gain->when(FL_WHEN_CHANGED);
 } // SliderW* shelf_gain
-{ shelf_level = new SliderW(49, 86, 100, 10, "Level");
+{ shelf_level = new SliderW(53, 86, 100, 10, "Level");
   shelf_level->type(5);
   shelf_level->box(FL_FLAT_BOX);
   shelf_level->color((Fl_Color)178);
@@ -154,7 +154,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_level->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_level->when(FL_WHEN_CHANGED);
 } // SliderW* shelf_level
-{ shelf_freq1 = new SliderW(49, 106, 100, 10, "Tone");
+{ shelf_freq1 = new SliderW(53, 106, 100, 10, "Tone");
   shelf_freq1->type(5);
   shelf_freq1->box(FL_FLAT_BOX);
   shelf_freq1->color((Fl_Color)178);
@@ -172,7 +172,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_freq1->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_freq1->when(FL_WHEN_CHANGED);
 } // SliderW* shelf_freq1
-{ shelf_q1 = new SliderW(49, 126, 100, 10, "Pres.");
+{ shelf_q1 = new SliderW(53, 126, 100, 10, "Presence");
   shelf_q1->type(5);
   shelf_q1->box(FL_FLAT_BOX);
   shelf_q1->color((Fl_Color)178);

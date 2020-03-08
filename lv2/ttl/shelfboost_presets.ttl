@@ -69,24 +69,24 @@
                 pset:value 24.0
         ] .
 
-# I worry that this will not work since there is no default limiter
-# <https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:distortion_1>
-#         a pset:Preset ;
-#         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-#         rdfs:label "Distortion 1" ;
-#         lv2:port [
-#                 lv2:symbol "GAIN" ;
-#                 pset:value 6.0
-#         ], [
-#                 lv2:symbol "PRES" ;
-#                 pset:value 40.0
-#         ], [
-#                 lv2:symbol "TONE" ;
-#                 pset:value 12600.0
-#         ], [
-#                 lv2:symbol "STEREO" ;
-#                 pset:value 1.0
-#         ], [
-#                 lv2:symbol "LEVEL" ;
-#                 pset:value 127.0
-#         ] .
+
+<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:distortion_1>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
+        rdfs:label "Distortion 1" ;
+        lv2:port [
+                lv2:symbol "GAIN" ;
+                pset:value 6.0
+        ], [
+                lv2:symbol "PRES" ;
+                pset:value 40.0
+        ], [
+                lv2:symbol "TONE" ;
+                pset:value 12600.0
+        ], [
+                lv2:symbol "STEREO" ;
+                pset:value 1.0
+        ], [
+                lv2:symbol "LEVEL" ;
+                pset:value 127.0
+        ] .

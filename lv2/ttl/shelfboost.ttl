@@ -127,8 +127,8 @@
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
         rdfs:seeAlso <shelfboost_presets.ttl> .
 
-# I worry that this will not work since there is no default limiter
-# <https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:distortion_1>
-#         a pset:Preset ;
-#         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-#         rdfs:seeAlso <shelfboost_presets.ttl> .
+
+<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:distortion_1>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
+        rdfs:seeAlso <shelfboost_presets.ttl> .
