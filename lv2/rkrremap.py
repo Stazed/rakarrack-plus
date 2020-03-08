@@ -622,11 +622,11 @@ def remap(efxindex, paramindex):
          (38, 2) : (3, 'Gain', 'GAIN', -64) ,
          (38, 3) : (4, 'Attack', 'ATACK', 0) ,
          (38, 4) : (5, 'Decay', 'DECAY', 0) ,
-         (38, 5) : (6, 'Thresold', 'THRESH', 0) ,
+         (38, 5) : (6, 'Threshold', 'THRESH', 0) ,
          (38, 6) : (7, 'Interval', 'INT', 0) ,
          (38, 7) : (8, 'Shift Down', 'DN', 0) ,
          (38, 8) : (9, 'Mode', 'MODE', 0) ,
-         (38, 9) : (10, 'Interval', 'WHAMMY', 0) ,
+         (38, 9) : (10, 'Wammy', 'WHAMMY', 0) ,
          (38, 10) : (-1,) ,
 
          (39, -1) : ('RakarrackPlus StompBox', 'https://github.com/Stazed/rakarrack-plus#StompBox') ,

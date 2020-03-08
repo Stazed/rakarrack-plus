@@ -39,7 +39,7 @@ shifter_thre->value(rkr->efx_Shifter->getpar(5));
 shifter_ud->value(rkr->efx_Shifter->getpar(7));
 shifter_whammy->value(rkr->efx_Shifter->getpar(9));
 
-shifter_mode->value(rkr->efx_Shifter->getpar(8));} selected
+shifter_mode->value(rkr->efx_Shifter->getpar(8));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -62,6 +62,10 @@ shifter_mode->value(rkr->efx_Shifter->getpar(8));} selected
       label {Trig. Chorus}
       xywh {0 0 36 21} labelsize 10
     }
+    MenuItem {} {
+      label {Shifter 6}
+      xywh {10 10 36 21} labelsize 10
+    }
   }
   Fl_Value_Slider shifter_WD {
     label {Dry/Wet}
@@ -71,11 +75,11 @@ shifter_mode->value(rkr->efx_Shifter->getpar(8));} selected
  return;
 }
 rkr->efx_Shifter->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {50 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shifter_int {
-    label {Int.}
+    label Interval
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(327);
@@ -84,7 +88,7 @@ rkr->efx_Shifter->changepar(0,Dry_Wet((int)(o->value())));}
 rkr->Shifter_Bypass=0;
 rkr->efx_Shifter->changepar(6,(int)o->value());
 if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
-    xywh {50 43 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 12 step 1 textcolor 7
+    xywh {53 43 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 12 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shifter_gain {
@@ -95,7 +99,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
  return;
 }
 rkr->efx_Shifter->changepar(2,(int)(o->value()+64));}
-    xywh {50 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shifter_pan {
@@ -106,7 +110,7 @@ rkr->efx_Shifter->changepar(2,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Shifter->changepar(1,(int)(o->value()+64));}
-    xywh {50 71 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {53 71 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shifter_attack {
@@ -117,7 +121,7 @@ rkr->efx_Shifter->changepar(1,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Shifter->changepar(3,(int)o->value());}
-    xywh {51 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
+    xywh {53 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shifter_decay {
@@ -128,18 +132,18 @@ rkr->efx_Shifter->changepar(3,(int)o->value());}
  return;
 }
 rkr->efx_Shifter->changepar(4,(int)o->value());}
-    xywh {50 101 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
+    xywh {53 101 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 2000 step 1 value 100 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shifter_thre {
-    label Thrshold
+    label Thrhold
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(332);
  return;
 }
-rkr->efx_Shifter->changepar(5,(int)o->value());}
-    xywh {50 114 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 value 20 textcolor 7
+rkr->efx_Shifter->changepar(5,(int)o->value());} selected
+    tooltip Threshold xywh {53 114 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 value 20 textcolor 7
     class SliderW
   }
   Fl_Check_Button shifter_ud {
@@ -149,14 +153,14 @@ rkr->efx_Shifter->changepar(5,(int)o->value());}
     xywh {51 128 49 14} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Value_Slider shifter_whammy {
-    label Whamy
+    label Whammy
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(333);
  return;
 }
 rkr->efx_Shifter->changepar(9,(int)o->value());}
-    xywh {50 145 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 145 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice shifter_mode {

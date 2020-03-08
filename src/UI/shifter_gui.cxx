@@ -43,6 +43,7 @@ Fl_Menu_Item ShifterGui::menu_shifter_preset[] = {
  {"Slow Down", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Trig. Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Shifter 6", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -190,7 +191,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shifter_preset->menu(menu_shifter_preset);
 } // Fl_Choice* shifter_preset
-{ shifter_WD = new SliderW(50, 30, 100, 10, "Dry/Wet");
+{ shifter_WD = new SliderW(53, 30, 100, 10, "Dry/Wet");
   shifter_WD->type(5);
   shifter_WD->box(FL_FLAT_BOX);
   shifter_WD->color((Fl_Color)178);
@@ -206,7 +207,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_WD->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_WD->when(FL_WHEN_CHANGED);
 } // SliderW* shifter_WD
-{ shifter_int = new SliderW(50, 43, 100, 10, "Int.");
+{ shifter_int = new SliderW(53, 43, 100, 10, "Interval");
   shifter_int->type(5);
   shifter_int->box(FL_FLAT_BOX);
   shifter_int->color((Fl_Color)178);
@@ -222,7 +223,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_int->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_int->when(FL_WHEN_CHANGED);
 } // SliderW* shifter_int
-{ shifter_gain = new SliderW(50, 58, 100, 10, "Gain");
+{ shifter_gain = new SliderW(53, 58, 100, 10, "Gain");
   shifter_gain->type(5);
   shifter_gain->box(FL_FLAT_BOX);
   shifter_gain->color((Fl_Color)178);
@@ -239,7 +240,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_gain->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_gain->when(FL_WHEN_CHANGED);
 } // SliderW* shifter_gain
-{ shifter_pan = new SliderW(50, 71, 100, 10, "Pan");
+{ shifter_pan = new SliderW(53, 71, 100, 10, "Pan");
   shifter_pan->type(5);
   shifter_pan->box(FL_FLAT_BOX);
   shifter_pan->color((Fl_Color)178);
@@ -256,7 +257,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_pan->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_pan->when(FL_WHEN_CHANGED);
 } // SliderW* shifter_pan
-{ shifter_attack = new SliderW(51, 88, 100, 10, "Attack");
+{ shifter_attack = new SliderW(53, 88, 100, 10, "Attack");
   shifter_attack->type(5);
   shifter_attack->box(FL_FLAT_BOX);
   shifter_attack->color((Fl_Color)178);
@@ -274,7 +275,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_attack->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_attack->when(FL_WHEN_CHANGED);
 } // SliderW* shifter_attack
-{ shifter_decay = new SliderW(50, 101, 100, 10, "Decay");
+{ shifter_decay = new SliderW(53, 101, 100, 10, "Decay");
   shifter_decay->type(5);
   shifter_decay->box(FL_FLAT_BOX);
   shifter_decay->color((Fl_Color)178);
@@ -292,7 +293,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_decay->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_decay->when(FL_WHEN_CHANGED);
 } // SliderW* shifter_decay
-{ shifter_thre = new SliderW(50, 114, 100, 10, "Thrshold");
+{ shifter_thre = new SliderW(53, 114, 100, 10, "Thrhold");
+  shifter_thre->tooltip("Threshold");
   shifter_thre->type(5);
   shifter_thre->box(FL_FLAT_BOX);
   shifter_thre->color((Fl_Color)178);
@@ -316,14 +318,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_ud->labelcolor(FL_BACKGROUND2_COLOR);
   shifter_ud->callback((Fl_Callback*)cb_shifter_ud, (void*)(2));
 } // Fl_Check_Button* shifter_ud
-{ shifter_whammy = new SliderW(50, 145, 100, 10, "Whamy");
+{ shifter_whammy = new SliderW(53, 145, 100, 10, "Whammy");
   shifter_whammy->type(5);
   shifter_whammy->box(FL_FLAT_BOX);
   shifter_whammy->color((Fl_Color)178);
   shifter_whammy->selection_color((Fl_Color)62);
   shifter_whammy->labeltype(FL_NORMAL_LABEL);
   shifter_whammy->labelfont(0);
-  shifter_whammy->labelsize(10);
+  shifter_whammy->labelsize(9);
   shifter_whammy->labelcolor(FL_BACKGROUND2_COLOR);
   shifter_whammy->maximum(127);
   shifter_whammy->step(1);

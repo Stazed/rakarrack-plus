@@ -133,10 +133,10 @@
                 pset:value 0.0
         ], [
                 lv2:symbol "ATACK" ;
-                pset:value 0.0
+                pset:value 1.0
         ], [
                 lv2:symbol "DECAY" ;
-                pset:value 0.0
+                pset:value 1.0
         ], [
                 lv2:symbol "THRESH" ;
                 pset:value -20.0
@@ -189,5 +189,42 @@
         ], [
                 lv2:symbol "WHAMMY" ;
                 pset:value 25.0
+        ] ;
+	.
+
+<https://github.com/Stazed/rakarrack-plus#Shifter:preset:shifter_6>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
+        rdfs:label "Shifter 6" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "PAN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "GAIN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "ATACK" ;
+                pset:value 500.0
+        ], [
+                lv2:symbol "DECAY" ;
+                pset:value 500.0
+        ], [
+                lv2:symbol "THRESH" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "INT" ;
+                pset:value 1.0
+        ], [
+                lv2:symbol "DN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "MODE" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "WHAMMY" ;
+                pset:value 0.0
         ] ;
 	.
