@@ -65,7 +65,7 @@
                 lv2:index 5 ;
                 lv2:symbol "S1" ;
                 lv2:name "Step 1" ;
-                lv2:default 64 ;
+                lv2:default 20 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -74,7 +74,7 @@
                 lv2:index 6 ;
                 lv2:symbol "S2" ;
                 lv2:name "Step 2" ;
-                lv2:default 64 ;
+                lv2:default 100 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -83,7 +83,7 @@
                 lv2:index 7 ;
                 lv2:symbol "S3" ;
                 lv2:name "Step 3" ;
-                lv2:default 84 ;
+                lv2:default 10 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -92,7 +92,7 @@
                 lv2:index 8 ;
                 lv2:symbol "S4" ;
                 lv2:name "Step 4" ;
-                lv2:default 64 ;
+                lv2:default 50 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -101,7 +101,7 @@
                 lv2:index 9 ;
                 lv2:symbol "S5" ;
                 lv2:name "Step 5" ;
-                lv2:default 24 ;
+                lv2:default 25 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -110,7 +110,7 @@
                 lv2:index 10 ;
                 lv2:symbol "S6" ;
                 lv2:name "Step 6" ;
-                lv2:default 64 ;
+                lv2:default 120 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -119,7 +119,7 @@
                 lv2:index 11 ;
                 lv2:symbol "S7" ;
                 lv2:name "Step 7" ;
-                lv2:default 84 ;
+                lv2:default 60 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -128,7 +128,7 @@
                 lv2:index 12 ;
                 lv2:symbol "S8" ;
                 lv2:name "Step 8" ;
-                lv2:default 64 ;
+                lv2:default 127 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -146,7 +146,7 @@
                 lv2:index 14 ;
                 lv2:symbol "TEMPO" ;
                 lv2:name "Tempo" ;
-                lv2:default 120 ;
+                lv2:default 90 ;
                 lv2:minimum 1 ;
                 lv2:maximum 600 ;
                 lv2:portProperty lv2:integer ;
@@ -156,7 +156,7 @@
                 lv2:index 15 ;
                 lv2:symbol "Q" ;
                 lv2:name "Q" ;
-                lv2:default 0 ;
+                lv2:default -24 ;
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
@@ -203,7 +203,7 @@
                 lv2:index 19 ;
                 lv2:symbol "RANGE" ;
                 lv2:name "Step Adjustment Range" ;
-                lv2:default 1 ;
+                lv2:default 3 ;
                 lv2:minimum 1 ;
                 lv2:maximum 8 ;
                 lv2:portProperty lv2:integer ;
@@ -272,6 +272,11 @@
         rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:random_mode>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+        rdfs:seeAlso <sequence_presets.ttl> .
+
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:sequence_11>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
         rdfs:seeAlso <sequence_presets.ttl> .

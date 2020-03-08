@@ -915,7 +915,7 @@ void
 Sequence::setpreset(int npreset)
 {
     const int PRESET_SIZE = 15;
-    const int NUM_PRESETS = 10;
+    const int NUM_PRESETS = 11;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Jumpy
@@ -937,7 +937,9 @@ Sequence::setpreset(int npreset)
         //Boogie
         {0, 40, 50, 60, 70, 60, 40, 0, 0, 220, 64, 0, 0, 5, 1},
         //Chorus
-        {64, 30, 45, 20, 60, 25, 42, 15, 64, 120, 64, 0, 0, 6, 1}
+        {64, 30, 45, 20, 60, 25, 42, 15, 64, 120, 64, 0, 0, 6, 1},
+        //Sequence 11
+        {64, 64, 84, 64, 24, 64, 84, 64, 0, 120, 64, 0, 0, 0, 1}
 
     };
 

@@ -577,3 +577,55 @@
                 pset:value 1.0
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#Sequence:preset:sequence_11>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+        rdfs:label "Sequence 11" ;
+        lv2:port [
+                lv2:symbol "S1" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "S2" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "S3" ;
+                pset:value 84.0
+        ], [
+                lv2:symbol "S4" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "S5" ;
+                pset:value 24.0
+        ], [
+                lv2:symbol "S6" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "S7" ;
+                pset:value 84.0
+        ], [
+                lv2:symbol "S8" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "TEMPO" ;
+                pset:value 120.0
+        ], [
+                lv2:symbol "Q" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "AMP" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "LAG" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "MODE" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "RANGE" ;
+                pset:value 1.0
+        ] ;
+	.

@@ -52,6 +52,7 @@ Fl_Menu_Item SequenceGui::menu_seq_preset[] = {
  {"Zeke Trem", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Boogie", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Sequence 11", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
