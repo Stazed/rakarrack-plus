@@ -199,6 +199,7 @@ Sequence
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Added LV2 default as preset - Sequence 11 - done
 ---Done---
+FIXME Make Range a pop up menu like LV2
 FIXME Help .png
 
 ShelfBoost
