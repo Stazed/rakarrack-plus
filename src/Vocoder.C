@@ -455,7 +455,7 @@ void
 Vocoder::setpreset(int npreset)
 {
     const int PRESET_SIZE = 7;
-    const int NUM_PRESETS = 4;
+    const int NUM_PRESETS = 5;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Vocoder 1
@@ -465,7 +465,9 @@ Vocoder::setpreset(int npreset)
         //Vocoder 3
         {0, 64, 20, 90, 70, 40, 64},
         //Vocoder 4
-        {0, 64, 30, 100, 70, 40, 127}
+        {0, 64, 30, 100, 70, 40, 127},
+        //Vocoder 5
+        {0, 74, 10, 71, 10, 40, 50}
     };
 
     if (npreset > NUM_PRESETS - 1)

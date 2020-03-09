@@ -38,6 +38,7 @@ Fl_Menu_Item VocoderGui::menu_vo_preset[] = {
  {"Vocoder 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Vocoder 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Vocoder 4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Vocoder 5", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -151,7 +152,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vo_preset->menu(menu_vo_preset);
 } // Fl_Choice* vo_preset
-{ vo_WD = new SliderW(52, 30, 100, 10, "Dry/Wet");
+{ vo_WD = new SliderW(56, 30, 100, 10, "Dry/Wet");
   vo_WD->type(5);
   vo_WD->box(FL_FLAT_BOX);
   vo_WD->color((Fl_Color)178);
@@ -167,7 +168,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_WD->align(Fl_Align(FL_ALIGN_LEFT));
   vo_WD->when(FL_WHEN_CHANGED);
 } // SliderW* vo_WD
-{ vo_pan = new SliderW(52, 50, 100, 10, "Pan");
+{ vo_pan = new SliderW(56, 50, 100, 10, "Pan");
   vo_pan->type(5);
   vo_pan->box(FL_FLAT_BOX);
   vo_pan->color((Fl_Color)178);
@@ -184,7 +185,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_pan->align(Fl_Align(FL_ALIGN_LEFT));
   vo_pan->when(FL_WHEN_CHANGED);
 } // SliderW* vo_pan
-{ vo_input = new SliderW(52, 70, 100, 10, "Input");
+{ vo_input = new SliderW(56, 70, 100, 10, "Input");
   vo_input->type(5);
   vo_input->box(FL_FLAT_BOX);
   vo_input->color((Fl_Color)178);
@@ -200,7 +201,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_input->align(Fl_Align(FL_ALIGN_LEFT));
   vo_input->when(FL_WHEN_CHANGED);
 } // SliderW* vo_input
-{ vo_mu = new SliderW(52, 90, 100, 10, "Muf.");
+{ vo_mu = new SliderW(56, 90, 100, 10, "Smear");
+  vo_mu->tooltip("Muffle, Blur");
   vo_mu->type(5);
   vo_mu->box(FL_FLAT_BOX);
   vo_mu->color((Fl_Color)178);
@@ -218,7 +220,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_mu->align(Fl_Align(FL_ALIGN_LEFT));
   vo_mu->when(FL_WHEN_CHANGED);
 } // SliderW* vo_mu
-{ vo_q = new SliderW(52, 110, 100, 10, "Q");
+{ vo_q = new SliderW(56, 110, 100, 10, "Q");
+  vo_q->tooltip("Resonance");
   vo_q->type(5);
   vo_q->box(FL_FLAT_BOX);
   vo_q->color((Fl_Color)178);
@@ -236,7 +239,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_q->align(Fl_Align(FL_ALIGN_LEFT));
   vo_q->when(FL_WHEN_CHANGED);
 } // SliderW* vo_q
-{ vo_ring = new SliderW(52, 130, 100, 10, "Ring");
+{ vo_ring = new SliderW(56, 130, 100, 10, "Ring");
   vo_ring->type(5);
   vo_ring->box(FL_FLAT_BOX);
   vo_ring->color((Fl_Color)178);
@@ -252,7 +255,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_ring->align(Fl_Align(FL_ALIGN_LEFT));
   vo_ring->when(FL_WHEN_CHANGED);
 } // SliderW* vo_ring
-{ vo_level = new SliderW(52, 150, 100, 10, "Level");
+{ vo_level = new SliderW(56, 150, 100, 10, "Level");
   vo_level->type(5);
   vo_level->box(FL_FLAT_BOX);
   vo_level->color((Fl_Color)178);
