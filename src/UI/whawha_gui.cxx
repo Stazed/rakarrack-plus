@@ -188,7 +188,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
   WhaWha_preset->menu(menu_WhaWha_preset);
 } // Fl_Choice* WhaWha_preset
-{ WhaWha_WD = new SliderW(49, 29, 100, 10, "Dry/Wet");
+{ WhaWha_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
   WhaWha_WD->type(5);
   WhaWha_WD->box(FL_FLAT_BOX);
   WhaWha_WD->color((Fl_Color)178);
@@ -204,7 +204,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_WD->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_WD->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_WD
-{ WhaWha_pan = new SliderW(49, 41, 100, 10, "Pan");
+{ WhaWha_pan = new SliderW(56, 41, 100, 10, "Pan");
   WhaWha_pan->type(5);
   WhaWha_pan->box(FL_FLAT_BOX);
   WhaWha_pan->color((Fl_Color)178);
@@ -221,7 +221,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_pan->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_pan->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_pan
-{ WhaWha_freq = new SliderW(49, 53, 100, 10, "Tempo");
+{ WhaWha_freq = new SliderW(56, 53, 100, 10, "Tempo");
   WhaWha_freq->type(5);
   WhaWha_freq->box(FL_FLAT_BOX);
   WhaWha_freq->color((Fl_Color)178);
@@ -238,7 +238,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_freq->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_freq->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_freq
-{ WhaWha_rnd = new SliderW(49, 65, 100, 10, "Rnd");
+{ WhaWha_rnd = new SliderW(56, 65, 100, 10, "Random");
   WhaWha_rnd->type(5);
   WhaWha_rnd->box(FL_FLAT_BOX);
   WhaWha_rnd->color((Fl_Color)178);
@@ -254,7 +254,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_rnd
-{ Fl_Choice* o = WhaWha_lfotype = new Fl_Choice(61, 79, 72, 16, "LFO Type");
+{ Fl_Choice* o = WhaWha_lfotype = new Fl_Choice(78, 79, 72, 16, "LFO Type");
   WhaWha_lfotype->down_box(FL_BORDER_BOX);
   WhaWha_lfotype->selection_color(FL_FOREGROUND_COLOR);
   WhaWha_lfotype->labelsize(10);
@@ -264,7 +264,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_lfotype->callback((Fl_Callback*)cb_WhaWha_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* WhaWha_lfotype
-{ WhaWha_stdf = new SliderW(49, 105, 100, 10, "St.df");
+{ WhaWha_stdf = new SliderW(56, 105, 100, 10, "Stereo Df");
+  WhaWha_stdf->tooltip("LFO L/R Delay");
   WhaWha_stdf->type(5);
   WhaWha_stdf->box(FL_FLAT_BOX);
   WhaWha_stdf->color((Fl_Color)178);
@@ -280,7 +281,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_stdf
-{ WhaWha_dpth = new SliderW(49, 117, 100, 10, "Depth");
+{ WhaWha_dpth = new SliderW(56, 117, 100, 10, "Depth");
   WhaWha_dpth->type(5);
   WhaWha_dpth->box(FL_FLAT_BOX);
   WhaWha_dpth->color((Fl_Color)178);
@@ -296,7 +297,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_dpth->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_dpth
-{ WhaWha_ampsns = new SliderW(49, 129, 100, 10, "Amp.S.");
+{ WhaWha_ampsns = new SliderW(56, 129, 100, 10, "Amp.S.");
+  WhaWha_ampsns->tooltip("Amplitude Sensitivity");
   WhaWha_ampsns->type(5);
   WhaWha_ampsns->box(FL_FLAT_BOX);
   WhaWha_ampsns->color((Fl_Color)178);
@@ -312,13 +314,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_ampsns->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_ampsns
-{ WhaWha_ampsnsinv = new Fl_Check_Button(55, 147, 70, 15, "Amp.S Inv");
+{ WhaWha_ampsnsinv = new Fl_Check_Button(4, 147, 70, 15, "A.S. Inv");
+  WhaWha_ampsnsinv->tooltip("Amplitude Sensitivity Inverse");
   WhaWha_ampsnsinv->down_box(FL_BORDER_BOX);
   WhaWha_ampsnsinv->labelsize(10);
   WhaWha_ampsnsinv->labelcolor(FL_BACKGROUND2_COLOR);
   WhaWha_ampsnsinv->callback((Fl_Callback*)cb_WhaWha_ampsnsinv, (void*)(2));
 } // Fl_Check_Button* WhaWha_ampsnsinv
-{ WhaWha_smooth = new SliderW(49, 165, 100, 10, "Smooth");
+{ WhaWha_smooth = new SliderW(56, 165, 100, 10, "Smooth");
   WhaWha_smooth->type(5);
   WhaWha_smooth->box(FL_FLAT_BOX);
   WhaWha_smooth->color((Fl_Color)178);

@@ -269,6 +269,9 @@ FIXME Help .png
 
 Vocoder
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
+    Added LV2 default Vocoder 5 to presets - done
+---Done---
+FIXME Help .png
 
 WahWah  (DynamicFilter.C)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
