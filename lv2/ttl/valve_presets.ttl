@@ -141,3 +141,48 @@
                 pset:value 30.0 
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#Valve:preset:valve4>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 43.0 
+        ], [
+                lv2:symbol "PAN" ;
+                pset:value 0.0 
+        ], [
+                lv2:symbol "LRCr" ;
+                pset:value 87.0 
+        ], [
+                lv2:symbol "DRIVE" ;
+                pset:value 56.0 
+        ], [
+                lv2:symbol "LEVEL" ;
+                pset:value 40.0 
+        ], [
+                lv2:symbol "NEG" ;
+                pset:value 0.0 
+        ], [
+                lv2:symbol "LPF" ;
+                pset:value 6703.0 
+        ], [
+                lv2:symbol "HPF" ;
+                pset:value 21.0 
+        ], [
+                lv2:symbol "STEREO" ;
+                pset:value 0.0 
+        ], [
+                lv2:symbol "PREFILTER" ;
+                pset:value 0.0 
+        ], [
+                lv2:symbol "DIST" ;
+                pset:value 52.0 
+        ], [
+                lv2:symbol "ED" ;
+                pset:value 1.0 
+        ], [
+                lv2:symbol "PRES" ;
+                pset:value 18.0 
+        ] ;
+	.

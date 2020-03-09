@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class ValveGui {
@@ -41,7 +41,7 @@ valve_lpf->value(rkr->efx_Valve->getpar(6));
 valve_hpf->value(rkr->efx_Valve->getpar(7));
 valve_Q->value(rkr->efx_Valve->getpar(10));
 valve_ed->value(rkr->efx_Valve->getpar(11));
-valve_Pre->value(rkr->efx_Valve->getpar(12));} selected
+valve_Pre->value(rkr->efx_Valve->getpar(12));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -56,6 +56,10 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));} selected
       label {Valve 3}
       xywh {52 52 36 21} labelsize 10
     }
+    MenuItem {} {
+      label {Valve 4}
+      xywh {62 62 36 21} labelsize 10
+    }
   }
   Fl_Value_Slider valve_WD {
     label {Dry/Wet}
@@ -69,14 +73,14 @@ rkr->efx_Valve->changepar(0,Dry_Wet((int)(o->value())));}
     class SliderW
   }
   Fl_Value_Slider valve_LRc {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(170);
  return;
 } 
 rkr->efx_Valve->changepar(2,(int)(o->value()));}
-    xywh {53 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider valve_pan {
@@ -126,7 +130,7 @@ rkr->efx_Valve->changepar(3,(int)o->value());}
  return;
 } 
 rkr->efx_Valve->changepar(10,(int)o->value());}
-    xywh {53 112 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip Distortion xywh {53 112 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider valve_Pre {
@@ -176,7 +180,7 @@ rkr->efx_Valve->changepar(6,(int)o->value());}
  rgui->getMIDIControl(177);
  return;
 } 
-rkr->efx_Valve->changepar(7,(int)o->value());}
+rkr->efx_Valve->changepar(7,(int)o->value());} selected
     xywh {53 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
   }
