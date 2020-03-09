@@ -216,7 +216,8 @@ FIXME Help .png
 
 Shuffle
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
-Check label Rev (Rakarrack) vs. BAND - Filtered Band - rkrlv2
+    Added LV2 default as preset - Shuffle 4 - done
+---Done---
 
 StereoHarm
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

@@ -242,7 +242,7 @@ void
 Shuffle::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
-    const int NUM_PRESETS = 4;
+    const int NUM_PRESETS = 5;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Shuffle 1
@@ -251,6 +251,8 @@ Shuffle::setpreset(int npreset)
         {64, 0, 0, 0, 0, 120, 1000, 2400, 8000, -7, 1},
         //Shuffle 3
         {64, 0, 0, 0, 0, 60, 1800, 3700, 12000, 7, 0},
+        //Shuffle 4
+        {0, 0, 0, 0, 0, 200, 400, 2000, 12000, 0, 0},
         //Remover
         {0, 17, 0, 7, 5, 600, 1200, 2000, 13865, -45, 1}
     };

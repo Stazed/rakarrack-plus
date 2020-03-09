@@ -127,6 +127,46 @@
         ] ;
 	.
 
+<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_4>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
+    	rdfs:label "Shuffle 4" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "LGAIN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "M1GAIN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "M2GAIN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "HGAIN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "LFREQ" ;
+                pset:value 200.0
+        ], [
+                lv2:symbol "M1FREQ" ;
+                pset:value 400.0
+        ], [
+                lv2:symbol "M2FREQ" ;
+                pset:value 2000.0
+        ], [
+                lv2:symbol "HFREQ" ;
+                pset:value 12000.0
+        ], [
+                lv2:symbol "Q" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "BAND" ;
+                pset:value 0.0
+        ] ;
+	.
+
 <https://github.com/Stazed/rakarrack-plus#Shuffle:preset:remover>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;

@@ -41,6 +41,7 @@ Fl_Menu_Item ShuffleGui::menu_shuffle_preset[] = {
  {"Shuffle 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Shuffle 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Shuffle 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Shuffle 4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Remover", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
@@ -249,6 +250,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volL->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volL
 { shuffle_cross2 = new SliderW(55, 79, 100, 10, "M.L. Freq");
+  shuffle_cross2->tooltip("Mid Low Frequency");
   shuffle_cross2->type(5);
   shuffle_cross2->box(FL_FLAT_BOX);
   shuffle_cross2->color((Fl_Color)178);
@@ -266,6 +268,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross2->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_cross2
 { shuffle_volML = new SliderW(55, 94, 100, 10, "M.L Gain");
+  shuffle_volML->tooltip("Mid Low Gain");
   shuffle_volML->type(5);
   shuffle_volML->box(FL_FLAT_BOX);
   shuffle_volML->color((Fl_Color)178);
@@ -283,6 +286,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volML->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volML
 { shuffle_cross3 = new SliderW(55, 109, 100, 10, "M.H. Freq");
+  shuffle_cross3->tooltip("Mid High Frequency");
   shuffle_cross3->type(5);
   shuffle_cross3->box(FL_FLAT_BOX);
   shuffle_cross3->color((Fl_Color)178);
@@ -300,6 +304,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross3->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_cross3
 { shuffle_volMH = new SliderW(55, 124, 100, 10, "M.H. Gain");
+  shuffle_volMH->tooltip("Mid High Gain");
   shuffle_volMH->type(5);
   shuffle_volMH->box(FL_FLAT_BOX);
   shuffle_volMH->color((Fl_Color)178);
@@ -317,6 +322,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volMH->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volMH
 { shuffle_cross4 = new SliderW(55, 139, 100, 10, "High Freq");
+  shuffle_cross4->tooltip("High Frequency");
   shuffle_cross4->type(5);
   shuffle_cross4->box(FL_FLAT_BOX);
   shuffle_cross4->color((Fl_Color)178);
@@ -351,6 +357,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volH->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volH
 { shuffle_Q = new SliderW(55, 169, 100, 10, "Q");
+  shuffle_Q->tooltip("Width");
   shuffle_Q->type(5);
   shuffle_Q->box(FL_FLAT_BOX);
   shuffle_Q->color((Fl_Color)178);
@@ -368,6 +375,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_Q->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_Q
 { shuffle_E = new Fl_Check_Button(2, 167, 40, 15, "Rev");
+  shuffle_E->tooltip("Filtered Band - (Uncheck = Mid: Check = Side)");
   shuffle_E->down_box(FL_BORDER_BOX);
   shuffle_E->labelsize(10);
   shuffle_E->labelcolor(FL_BACKGROUND2_COLOR);
