@@ -251,7 +251,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   synthfilter_preset->menu(menu_synthfilter_preset);
 } // Fl_Choice* synthfilter_preset
-{ synthfilter_WD = new SliderW(49, 25, 100, 9, "Dry/Wet");
+{ synthfilter_WD = new SliderW(53, 25, 100, 9, "Dry/Wet");
   synthfilter_WD->type(5);
   synthfilter_WD->box(FL_FLAT_BOX);
   synthfilter_WD->color((Fl_Color)178);
@@ -267,7 +267,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_WD->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_WD->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_WD
-{ synthfilter_Distort = new SliderW(49, 36, 100, 9, "Distort");
+{ synthfilter_Distort = new SliderW(53, 36, 100, 9, "Distort");
   synthfilter_Distort->type(5);
   synthfilter_Distort->box(FL_FLAT_BOX);
   synthfilter_Distort->color((Fl_Color)178);
@@ -283,7 +283,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Distort->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_Distort->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_Distort
-{ synthfilter_freq = new SliderW(49, 48, 100, 9, "Tempo");
+{ synthfilter_freq = new SliderW(53, 48, 100, 9, "Tempo");
   synthfilter_freq->type(5);
   synthfilter_freq->box(FL_FLAT_BOX);
   synthfilter_freq->color((Fl_Color)178);
@@ -300,7 +300,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_freq->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_freq->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_freq
-{ synthfilter_rand = new SliderW(49, 59, 100, 9, "Random");
+{ synthfilter_rand = new SliderW(53, 59, 100, 9, "Random");
   synthfilter_rand->type(5);
   synthfilter_rand->box(FL_FLAT_BOX);
   synthfilter_rand->color((Fl_Color)178);
@@ -332,14 +332,15 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_subs->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
 } // Fl_Check_Button* synthfilter_subs
-{ synthfilter_stdf = new SliderW(49, 83, 100, 9, "St.df");
+{ synthfilter_stdf = new SliderW(53, 83, 100, 9, "Stereo Df");
+  synthfilter_stdf->tooltip("LFO L/R Delay");
   synthfilter_stdf->type(5);
   synthfilter_stdf->box(FL_FLAT_BOX);
   synthfilter_stdf->color((Fl_Color)178);
   synthfilter_stdf->selection_color((Fl_Color)62);
   synthfilter_stdf->labeltype(FL_NORMAL_LABEL);
   synthfilter_stdf->labelfont(0);
-  synthfilter_stdf->labelsize(10);
+  synthfilter_stdf->labelsize(9);
   synthfilter_stdf->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_stdf->maximum(127);
   synthfilter_stdf->step(1);
@@ -348,7 +349,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_stdf
-{ synthfilter_width = new SliderW(49, 94, 100, 9, "Width");
+{ synthfilter_width = new SliderW(53, 94, 100, 9, "Width");
   synthfilter_width->type(5);
   synthfilter_width->box(FL_FLAT_BOX);
   synthfilter_width->color((Fl_Color)178);
@@ -364,14 +365,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_width->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_width->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_width
-{ synthfilter_fb = new SliderW(49, 105, 100, 9, "Fb");
+{ synthfilter_fb = new SliderW(53, 105, 100, 9, "Feedback");
   synthfilter_fb->type(5);
   synthfilter_fb->box(FL_FLAT_BOX);
   synthfilter_fb->color((Fl_Color)178);
   synthfilter_fb->selection_color((Fl_Color)62);
   synthfilter_fb->labeltype(FL_NORMAL_LABEL);
   synthfilter_fb->labelfont(0);
-  synthfilter_fb->labelsize(10);
+  synthfilter_fb->labelsize(9);
   synthfilter_fb->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_fb->minimum(-64);
   synthfilter_fb->maximum(64);
@@ -407,7 +408,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Hstages->callback((Fl_Callback*)cb_synthfilter_Hstages);
   synthfilter_Hstages->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Counter* synthfilter_Hstages
-{ synthfilter_dpth = new SliderW(49, 128, 100, 9, "Depth");
+{ synthfilter_dpth = new SliderW(53, 128, 100, 9, "Depth");
   synthfilter_dpth->type(5);
   synthfilter_dpth->box(FL_FLAT_BOX);
   synthfilter_dpth->color((Fl_Color)178);
@@ -423,7 +424,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_dpth->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_dpth
-{ synthfilter_EnvSens = new SliderW(49, 139, 100, 9, "E.Sens");
+{ synthfilter_EnvSens = new SliderW(53, 139, 100, 9, "E.Sens");
+  synthfilter_EnvSens->tooltip("Envelope Sensitivity");
   synthfilter_EnvSens->type(5);
   synthfilter_EnvSens->box(FL_FLAT_BOX);
   synthfilter_EnvSens->color((Fl_Color)178);
@@ -440,7 +442,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_EnvSens->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_EnvSens->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_EnvSens
-{ synthfilter_ATime = new SliderW(49, 150, 100, 9, "A.Time");
+{ synthfilter_ATime = new SliderW(53, 149, 100, 9, "A.Time");
+  synthfilter_ATime->tooltip("Attack Time");
   synthfilter_ATime->type(5);
   synthfilter_ATime->box(FL_FLAT_BOX);
   synthfilter_ATime->color((Fl_Color)178);
@@ -458,7 +461,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_ATime->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_ATime->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_ATime
-{ synthfilter_RTime = new SliderW(49, 161, 100, 9, "R.Time");
+{ synthfilter_RTime = new SliderW(53, 160, 100, 9, "R.Time");
+  synthfilter_RTime->tooltip("Release Time");
   synthfilter_RTime->type(5);
   synthfilter_RTime->box(FL_FLAT_BOX);
   synthfilter_RTime->color((Fl_Color)178);
@@ -476,7 +480,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_RTime->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_RTime->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_RTime
-{ synthfilter_Offset = new SliderW(49, 172, 100, 9, "Offset");
+{ synthfilter_Offset = new SliderW(53, 170, 100, 9, "Offset");
+  synthfilter_Offset->tooltip("HPF/LPF Offset");
   synthfilter_Offset->type(5);
   synthfilter_Offset->box(FL_FLAT_BOX);
   synthfilter_Offset->color((Fl_Color)178);
