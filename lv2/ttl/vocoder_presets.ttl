@@ -119,3 +119,31 @@
                 pset:value 127.0
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_5>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
+        rdfs:label "Vocoder 5" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "PAN" ;
+                pset:value 10.0
+        ], [
+                lv2:symbol "MUF" ;
+                pset:value 10.0
+        ], [
+                lv2:symbol "Q" ;
+                pset:value 71.0
+        ], [
+                lv2:symbol "INGAIN" ;
+                pset:value 10.0
+        ], [
+                lv2:symbol "LEVEL" ;
+                pset:value 40.0
+        ], [
+                lv2:symbol "RING" ;
+                pset:value 50.0
+        ] ;
+	.
