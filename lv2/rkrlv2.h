@@ -101,7 +101,6 @@
 #define SEQUENCELV2_URI "https://github.com/Stazed/rakarrack-plus#Sequence"
 #define SHIFTERLV2_URI "https://github.com/Stazed/rakarrack-plus#Shifter"
 #define STOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#StompBox"
-#define STOMPFUZZLV2_URI "https://github.com/Stazed/rakarrack-plus#StompBox_fuzz"
 #define REVTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron"
 #define ECHOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Echotron"
 #define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"
@@ -192,14 +191,13 @@ enum RKRLV2_effects_
 	ISEQ,
 	ISHIFT,
 	ISTOMP,
-	IFUZZ,
 	IREVTRON,
 	IECHOTRON,
 	ISHARM_NM,
 	IMBCOMP,
 	IOPTTREM,
-	IVIBE,//40
-	IINF,
+	IVIBE,
+	IINF,//40
 	IPHASE,
 	IGATE,
 	IMIDIC,

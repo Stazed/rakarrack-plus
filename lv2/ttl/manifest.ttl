@@ -183,71 +183,66 @@
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <stomp.ttl> .
 # 34 
-<https://github.com/Stazed/rakarrack-plus#StompBox_fuzz>
-        a lv2:Plugin, lv2:DistortionPlugin ;
-        lv2:binary <rakarrack-plus-lv2.so> ;
-        rdfs:seeAlso <stompfuzz.ttl> .
-# 35 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron>
         a lv2:Plugin, lv2:ReverbPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <reverbtron.ttl> .
-# 36 
+# 35 
 <https://github.com/Stazed/rakarrack-plus#Echotron>
         a lv2:Plugin, lv2:DelayPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <echotron.ttl> .
-# 37 
+# 36 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid>
         a lv2:Plugin, lv2:PitchPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <stereoharm_no_midi.ttl> .
-# 38 
+# 37
 <https://github.com/Stazed/rakarrack-plus#CompBand>
         a lv2:Plugin, lv2:CompressorPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <compband.ttl> .
-# 39 
+# 38
 <https://github.com/Stazed/rakarrack-plus#Otrem>
         a lv2:Plugin, lv2:ModulatorPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <otrem.ttl> .
-# 40 
+# 39
 <https://github.com/Stazed/rakarrack-plus#Vibe>
         a lv2:Plugin, lv2:ModulatorPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <vibe.ttl> .
-# 41 
+# 40
 <https://github.com/Stazed/rakarrack-plus#Infinity>
         a lv2:Plugin, lv2:ModulatorPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <inf.ttl> .
-# 42
+# 41
 <https://github.com/Stazed/rakarrack-plus#phas>
         a lv2:Plugin, lv2:PhaserPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <phas.ttl> .
-# 43 
+# 42
 <https://github.com/Stazed/rakarrack-plus#gate>
         a lv2:Plugin, lv2:GatePlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <gate.ttl> .
-# 44 
+# 43
 <https://github.com/Stazed/rakarrack-plus#midi_converter>
         a lv2:Plugin, lv2:ConverterPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <midi_converter.ttl> .
-# 45
+# 44
 <https://github.com/Stazed/rakarrack-plus#Convolotron>
         a lv2:Plugin, lv2:ConvolutionPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <convolotron.ttl> .
-# 46
+# 45
 <https://github.com/Stazed/rakarrack-plus#Flange>
         a lv2:Plugin, lv2:FlangerPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <flange.ttl> .
-# 47
+# 46
 <https://github.com/Stazed/rakarrack-plus#Overdrive>
         a lv2:Plugin, lv2:DistortionPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;

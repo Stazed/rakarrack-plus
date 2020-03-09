@@ -3175,23 +3175,6 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
     xfade_check(plug,nframes);
     return;
 }
-///// StompBox Fuzz /////////
-LV2_Handle init_stomp_fuzzlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
-{
-    //this is the same but has better labeling as controls act differently
-    RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
-
-    plug->nparams = 5;
-    plug->effectindex = IFUZZ;
-    plug->prev_bypass = 1;
-
-    getFeatures(plug,host_features);
-
-    plug->stomp = new StompBox(/*oversampling*/2,/*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
-    plug->stomp->changepar(5,7);//set to fuzz
-
-    return plug;
-}
 
 ///// Reverbtron /////////
 LV2_Handle init_revtronlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
@@ -5161,7 +5144,6 @@ void cleanup_rkrlv2(LV2_Handle handle)
         delete plug->shift;
         break;
     case ISTOMP:
-    case IFUZZ:
         delete plug->stomp;
         break;
     case IREVTRON:
@@ -5804,19 +5786,6 @@ static const LV2_Descriptor stomplv2_descriptor=
     0//extension
 };
 
-static const LV2_Descriptor stompfuzzlv2_descriptor=
-{
-    STOMPFUZZLV2_URI,
-    init_stomp_fuzzlv2,
-    connect_rkrlv2_ports,
-    0,//activate
-    run_stomplv2,
-    0,//deactivate
-    cleanup_rkrlv2,
-    0//extension
-};
-
-
 static const LV2_Descriptor revtronlv2_descriptor=
 {
     REVTRONLV2_URI,
@@ -6046,8 +6015,6 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &shiftlv2_descriptor ;
     case ISTOMP:
         return &stomplv2_descriptor ;
-    case IFUZZ:
-        return &stompfuzzlv2_descriptor ;
     case IREVTRON:
         return &revtronlv2_descriptor ;
     case IECHOTRON:

@@ -229,9 +229,9 @@ FIXME Help .png
 StompBox
     Wet/Dry                     |                |     none      |                   |          none     |
     Add StompBox Fuzz preset Gnasty to presets - done
+    Removed StompBox Fuzz
 ---Done---
 FIXME Help .png
-FIXME remove stompbox fuzz
 
 Sustainer
     Wet/Dry                     |                |     none      |                   |          none     |
