@@ -29,7 +29,9 @@
 #include "FilterParams.h"
 
 FilterParams::FilterParams(unsigned char Ptype_, unsigned char Pfreq_,
-                           unsigned char Pq_, double sample_rate, uint32_t ibufsz)
+                           unsigned char Pq_, double sample_rate, uint32_t ibufsz) :
+    Pvowels(),
+    Psequence()
 {
     // setpresettype("Pfilter");
     Dtype = Ptype_;

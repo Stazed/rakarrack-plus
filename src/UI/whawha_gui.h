@@ -71,6 +71,12 @@ private:
   inline void cb_WhaWha_ampsnsinv_i(Fl_Check_Button*, void*);
   static void cb_WhaWha_ampsnsinv(Fl_Check_Button*, void*);
 public:
+  Fl_Choice *WhaWha_ftype;
+private:
+  inline void cb_WhaWha_ftype_i(Fl_Choice*, void*);
+  static void cb_WhaWha_ftype(Fl_Choice*, void*);
+  static Fl_Menu_Item menu_WhaWha_ftype[];
+public:
   SliderW *WhaWha_smooth;
 private:
   inline void cb_WhaWha_smooth_i(SliderW*, void*);

@@ -41,6 +41,7 @@ WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
 WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
 WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
 WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
+WhaWha_ftype->value(rkr->efx_WhaWha->getpar(10));
 if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
@@ -111,7 +112,7 @@ rkr->efx_WhaWha->changepar(3,(int)o->value());}
   }
   Fl_Choice WhaWha_lfotype {
     label {LFO Type}
-    callback {rkr->efx_WhaWha->changepar(4,(int)o->value())} open
+    callback {rkr->efx_WhaWha->changepar(4,(int)o->value())}
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
   } {}
@@ -149,15 +150,41 @@ rkr->efx_WhaWha->changepar(7,(int)o->value());}
     class SliderW
   }
   Fl_Check_Button WhaWha_ampsnsinv {
-    label {A.S. Inv}
+    label {A.S.I.}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(112);
  return;
 } 
-rkr->efx_WhaWha->changepar(8,(int)o->value());} selected
-    tooltip {Amplitude Sensitivity Inverse} xywh {4 147 70 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+rkr->efx_WhaWha->changepar(8,(int)o->value());}
+    tooltip {Amplitude Sensitivity Inverse} xywh {8 145 70 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+  }
+  Fl_Choice WhaWha_ftype {
+    label {F. Type}
+    callback {rkr->efx_WhaWha->changepar(10,(int)o->value())} open
+    tooltip {Filter Type} xywh {95 145 59 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+  } {
+    MenuItem {} {
+      label {Low-Pass Analog}
+      xywh {72 72 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {State Variable LPF}
+      xywh {82 82 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Band-Pass Analog}
+      xywh {92 92 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Formant 1} selected
+      xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Formant 2}
+      xywh {112 112 36 21} labelsize 10
+    }
   }
   Fl_Value_Slider WhaWha_smooth {
     label Smooth

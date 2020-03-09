@@ -58,18 +58,32 @@ public:
     unsigned char Pvowelclearness;	//how vowels are kept clean (how much try to avoid "mixed" vowels)
     unsigned char Pcenterfreq, Poctavesfreq;	//the center frequency of the res. func., and the number of octaves
 
-    struct {
-        struct {
+    struct Pvowels
+    {
+        struct formants
+        {
             unsigned char freq, amp, q;	//frequency,amplitude,Q
+            formants():
+            freq(0),
+            amp(0),
+            q(0) {}
         } formants[FF_MAX_FORMANTS];
+        
+        Pvowels():
+            formants() {}
+        
     } Pvowels[FF_MAX_VOWELS];
 
 
     unsigned char Psequencesize;	//how many vowels are in the sequence
     unsigned char Psequencestretch;	//how the sequence is stretched (how the input from filter envelopes/LFOs/etc. is "stretched")
     unsigned char Psequencereversed;	//if the input from filter envelopes/LFOs/etc. is reversed(negated)
-    struct {
+    struct Psequence
+    {
         unsigned char nvowel;	//the vowel from the position
+        Psequence():
+        nvowel(0) {}
+        
     } Psequence[FF_MAX_SEQUENCE];
 
 

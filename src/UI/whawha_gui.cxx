@@ -32,6 +32,7 @@ WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
 WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
 WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
 WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
+WhaWha_ftype->value(rkr->efx_WhaWha->getpar(10));
 if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;
 }
 void WhawhaGui::cb_WhaWha_preset(Fl_Choice* o, void* v) {
@@ -149,6 +150,22 @@ rkr->efx_WhaWha->changepar(8,(int)o->value());
 void WhawhaGui::cb_WhaWha_ampsnsinv(Fl_Check_Button* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_ampsnsinv_i(o,v);
 }
+
+void WhawhaGui::cb_WhaWha_ftype_i(Fl_Choice* o, void*) {
+  rkr->efx_WhaWha->changepar(10,(int)o->value());
+}
+void WhawhaGui::cb_WhaWha_ftype(Fl_Choice* o, void* v) {
+  ((WhawhaGui*)(o->parent()))->cb_WhaWha_ftype_i(o,v);
+}
+
+Fl_Menu_Item WhawhaGui::menu_WhaWha_ftype[] = {
+ {"Low-Pass Analog", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"State Variable LPF", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Band-Pass Analog", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Formant 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Formant 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void WhawhaGui::cb_WhaWha_smooth_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
@@ -314,13 +331,24 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_ampsns->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_ampsns
-{ WhaWha_ampsnsinv = new Fl_Check_Button(4, 147, 70, 15, "A.S. Inv");
+{ WhaWha_ampsnsinv = new Fl_Check_Button(8, 145, 70, 15, "A.S.I.");
   WhaWha_ampsnsinv->tooltip("Amplitude Sensitivity Inverse");
   WhaWha_ampsnsinv->down_box(FL_BORDER_BOX);
   WhaWha_ampsnsinv->labelsize(10);
   WhaWha_ampsnsinv->labelcolor(FL_BACKGROUND2_COLOR);
   WhaWha_ampsnsinv->callback((Fl_Callback*)cb_WhaWha_ampsnsinv, (void*)(2));
 } // Fl_Check_Button* WhaWha_ampsnsinv
+{ WhaWha_ftype = new Fl_Choice(95, 145, 59, 16, "F. Type");
+  WhaWha_ftype->tooltip("Filter Type");
+  WhaWha_ftype->down_box(FL_BORDER_BOX);
+  WhaWha_ftype->selection_color(FL_FOREGROUND_COLOR);
+  WhaWha_ftype->labelsize(10);
+  WhaWha_ftype->labelcolor(FL_BACKGROUND2_COLOR);
+  WhaWha_ftype->textsize(10);
+  WhaWha_ftype->textcolor(FL_BACKGROUND2_COLOR);
+  WhaWha_ftype->callback((Fl_Callback*)cb_WhaWha_ftype);
+  WhaWha_ftype->menu(menu_WhaWha_ftype);
+} // Fl_Choice* WhaWha_ftype
 { WhaWha_smooth = new SliderW(56, 165, 100, 10, "Smooth");
   WhaWha_smooth->type(5);
   WhaWha_smooth->box(FL_FLAT_BOX);

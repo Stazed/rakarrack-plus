@@ -47,13 +47,22 @@ private:
     void setpos (float input);
 
 
-    struct {
+    struct formantpar
+    {
         float freq, amp, q;	//frequency,amplitude,Q
+        
+        formantpar():
+        freq(0.0),
+        amp(0.0),
+        q(0.0) {}
     } formantpar[FF_MAX_VOWELS][FF_MAX_FORMANTS],
     currentformants[FF_MAX_FORMANTS];
 
-    struct {
+    struct sequence
+    {
         unsigned char nvowel;
+        sequence():
+        nvowel(0) {}
     } sequence[FF_MAX_SEQUENCE];
 
     unsigned int sequencesize, numformants, firsttime;

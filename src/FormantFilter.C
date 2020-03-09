@@ -26,7 +26,11 @@
 #include <stdio.h>
 #include "FormantFilter.h"
 
-FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf)
+FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf) :
+    formantpar(),
+    sequence(),
+    oldformantamp(),
+    formant()
 {
     numformants = pars->Pnumformants;
     
@@ -78,6 +82,7 @@ FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf)
     outgain = dB2rap(pars->getgain());
 
     oldinput = -1.0f;
+    slowinput = 0.0f;
     Qfactor = 1.0f;
     oldQfactor = Qfactor;
     firsttime = 1;
@@ -102,7 +107,7 @@ FormantFilter::cleanup()
 void
 FormantFilter::setpos(float input)
 {
-    int p1, p2;
+    int p1 = 0, p2 = 0;
 
     if (firsttime != 0)
         slowinput = input;
