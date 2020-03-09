@@ -324,6 +324,9 @@ MBVvol::setCombi(int value)
         case 10:
             Pcombi = 10331;
             break;
+        case 11:        // Added for rkrlv2 Preset Vary4
+            Pcombi = 10000;
+            break;
         }
     }
 
@@ -541,7 +544,7 @@ void
 MBVvol::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
-    const int NUM_PRESETS = 3;
+    const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Vary1
@@ -549,7 +552,9 @@ MBVvol::setpreset(int npreset)
         //Vary2
         {0, 80, 0, 64, 40, 0, 0, 120, 1000, 2300, 1}, // 0, 1, 1, 0
         //Vary3
-        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2} // 0, 1, 0, 1
+        {0, 120, 0, 64, 40, 0, 0, 800, 2300, 5200, 2}, // 0, 1, 0, 1
+        //Vary4
+        {0, 64, 0, 62, 120, 0, 62, 150, 1200, 12000, 11} // 0, 0, 0, 0
     };
 
     if (npreset > NUM_PRESETS - 1)

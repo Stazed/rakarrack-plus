@@ -153,3 +153,52 @@
                 pset:value 1.0
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary4>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
+    	rdfs:label "Vary 4" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "TEMPO1" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "TYPE1" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "STDL1" ;
+                pset:value 62.0
+        ], [
+                lv2:symbol "TEMPO2" ;
+                pset:value 120.0
+        ], [
+                lv2:symbol "TYPE2" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "STDL2" ;
+                pset:value 62.0
+        ], [
+                lv2:symbol "LMCR" ;
+                pset:value 150.0
+        ], [
+                lv2:symbol "MMCR" ;
+                pset:value 1200.0
+        ], [
+                lv2:symbol "MHCR" ;
+                pset:value 12000.0
+        ], [
+                lv2:symbol "LB" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "M1B" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "M2B" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "HB" ;
+                pset:value 0.0
+        ] ;
+	.

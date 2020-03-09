@@ -44,7 +44,7 @@ mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
 mbvvol_LB->value(rkr->efx_MBVvol->getpar(11));
 mbvvol_MB1->value(rkr->efx_MBVvol->getpar(12));
 mbvvol_MB2->value(rkr->efx_MBVvol->getpar(13));
-mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));} selected
+mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));}
     xywh {79 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -59,6 +59,10 @@ mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));} selected
       label {VaryVol 3}
       xywh {72 72 36 21} labelsize 10
     }
+    MenuItem {} {
+      label {VaryVol 4}
+      xywh {82 82 36 21} labelsize 10
+    }
   }
   Fl_Value_Slider mbvvol_WD {
     label {Dry/Wet}
@@ -67,7 +71,7 @@ mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));} selected
  rgui->getMIDIControl(248);
  return;
 }
-rkr->efx_MBVvol->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_MBVvol->changepar(0,Dry_Wet((int)(o->value())));} selected
     xywh {54 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
