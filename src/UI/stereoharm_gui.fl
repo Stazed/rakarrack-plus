@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class SharGui {
@@ -44,7 +44,7 @@ shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
 shar_MIDI->value(rkr->efx_StereoHarm->getpar(10));
-if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(1);} selected
+if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(1);}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -72,7 +72,7 @@ if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(
  return;
 }
 rkr->efx_StereoHarm->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {50 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_intl {
@@ -85,7 +85,7 @@ rkr->efx_StereoHarm->changepar(0,Dry_Wet((int)(o->value())));}
 rkr->StereoHarm_Bypass=0;
 rkr->efx_StereoHarm->changepar(2,(int)(o->value()+12));
 if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
-    xywh {50 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
+    tooltip {Left Interval} xywh {53 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_chl {
@@ -96,7 +96,7 @@ if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
  return;
 }
 rkr->efx_StereoHarm->changepar(3,(int)o->value());}
-    xywh {50 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
+    tooltip {Left Chroma} xywh {53 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_ganl {
@@ -107,7 +107,7 @@ rkr->efx_StereoHarm->changepar(3,(int)o->value());}
  return;
 }
 rkr->efx_StereoHarm->changepar(1,(int)(o->value()+64));}
-    xywh {50 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {53 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_intr {
@@ -120,7 +120,7 @@ rkr->efx_StereoHarm->changepar(1,(int)(o->value()+64));}
 rkr->StereoHarm_Bypass=0;
 rkr->efx_StereoHarm->changepar(5,(int)(o->value()+12));
 if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
-    xywh {50 78 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
+    tooltip {Right Interval} xywh {53 78 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_chr {
@@ -131,7 +131,7 @@ if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;}
  return;
 }
 rkr->efx_StereoHarm->changepar(6,(int)o->value());}
-    xywh {50 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
+    tooltip {Right Chroma} xywh {53 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_ganr {
@@ -142,18 +142,18 @@ rkr->efx_StereoHarm->changepar(6,(int)o->value());}
  return;
 }
 rkr->efx_StereoHarm->changepar(4,(int)(o->value()+64));}
-    xywh {50 104 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {53 104 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_lrc {
-    label {L/R.Cr}
+    label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(365);
  return;
 }
 rkr->efx_StereoHarm->changepar(11,(int)(o->value()));}
-    xywh {50 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button shar_MIDI {
@@ -195,7 +195,7 @@ rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 }
 rkr->efx_StereoHarm->changepar(8,(int)o->value());
 rgui->Chord(1);}
-    xywh {50 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
+    xywh {53 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider shar_type {
@@ -206,8 +206,8 @@ rgui->Chord(1);}
  return;
 }
 rkr->efx_StereoHarm->changepar(9,(int)o->value());
-rgui->Chord(1);}
-    xywh {50 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
+rgui->Chord(1);} selected
+    xywh {53 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
     class SliderW
   }
 }
