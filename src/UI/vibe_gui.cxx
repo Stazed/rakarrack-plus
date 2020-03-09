@@ -46,6 +46,7 @@ Fl_Menu_Item VibeGui::menu_vibe_preset[] = {
  {"Lush Chorus", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Sick Phaser", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Warble", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Vibe 9", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -197,7 +198,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vibe_preset->menu(menu_vibe_preset);
 } // Fl_Choice* vibe_preset
-{ vibe_WD = new SliderW(52, 29, 100, 10, "Dry/Wet");
+{ vibe_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
   vibe_WD->type(5);
   vibe_WD->box(FL_FLAT_BOX);
   vibe_WD->color((Fl_Color)178);
@@ -213,7 +214,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_WD->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_WD->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_WD
-{ vibe_width = new SliderW(52, 42, 100, 10, "Width");
+{ vibe_width = new SliderW(56, 42, 100, 10, "Width");
   vibe_width->type(5);
   vibe_width->box(FL_FLAT_BOX);
   vibe_width->color((Fl_Color)178);
@@ -229,7 +230,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_width->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_width->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_width
-{ vibe_dpth = new SliderW(52, 55, 100, 10, "Depth");
+{ vibe_dpth = new SliderW(56, 55, 100, 10, "Depth");
   vibe_dpth->type(5);
   vibe_dpth->box(FL_FLAT_BOX);
   vibe_dpth->color((Fl_Color)178);
@@ -245,7 +246,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_dpth->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_dpth
-{ vibe_freq = new SliderW(52, 68, 100, 10, "Tempo");
+{ vibe_freq = new SliderW(56, 68, 100, 10, "Tempo");
   vibe_freq->type(5);
   vibe_freq->box(FL_FLAT_BOX);
   vibe_freq->color((Fl_Color)178);
@@ -262,7 +263,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_freq->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_freq->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_freq
-{ vibe_rnd = new SliderW(52, 81, 100, 10, "Rnd");
+{ vibe_rnd = new SliderW(56, 81, 100, 10, "Random");
   vibe_rnd->type(5);
   vibe_rnd->box(FL_FLAT_BOX);
   vibe_rnd->color((Fl_Color)178);
@@ -278,7 +279,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_rnd
-{ Fl_Choice* o = vibe_lfotype = new Fl_Choice(63, 96, 72, 16, "LFO Type");
+{ Fl_Choice* o = vibe_lfotype = new Fl_Choice(78, 96, 72, 16, "LFO Type");
   vibe_lfotype->down_box(FL_BORDER_BOX);
   vibe_lfotype->selection_color(FL_FOREGROUND_COLOR);
   vibe_lfotype->labelsize(10);
@@ -288,7 +289,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_lfotype->callback((Fl_Callback*)cb_vibe_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* vibe_lfotype
-{ vibe_stdf = new SliderW(52, 118, 100, 10, "St.df");
+{ vibe_stdf = new SliderW(56, 118, 100, 10, "Stereo Df");
+  vibe_stdf->tooltip("LFO L/R Delay");
   vibe_stdf->type(5);
   vibe_stdf->box(FL_FLAT_BOX);
   vibe_stdf->color((Fl_Color)178);
@@ -304,7 +306,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_stdf
-{ vibe_fb = new SliderW(52, 131, 100, 10, "Fb");
+{ vibe_fb = new SliderW(56, 131, 100, 10, "Feedback");
   vibe_fb->type(5);
   vibe_fb->box(FL_FLAT_BOX);
   vibe_fb->color((Fl_Color)178);
@@ -321,7 +323,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_fb->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_fb->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_fb
-{ vibe_LR = new SliderW(52, 144, 100, 10, "L/R.Cr");
+{ vibe_LR = new SliderW(56, 144, 100, 10, "L/R Cross");
   vibe_LR->type(5);
   vibe_LR->box(FL_FLAT_BOX);
   vibe_LR->color((Fl_Color)178);
@@ -337,7 +339,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_LR->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_LR->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_LR
-{ vibe_pan = new SliderW(52, 157, 100, 10, "Pan");
+{ vibe_pan = new SliderW(56, 157, 100, 10, "Pan");
   vibe_pan->type(5);
   vibe_pan->box(FL_FLAT_BOX);
   vibe_pan->color((Fl_Color)178);

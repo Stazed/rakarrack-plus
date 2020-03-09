@@ -327,3 +327,43 @@
         ] ;
 	.
 
+<https://github.com/Stazed/rakarrack-plus#Vibe:preset:vibe9>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+        rdfs:label "Vibe 9" ;
+        lv2:port [
+           lv2:symbol "WIDTH" ;
+           pset:value 64.0
+        ], [
+           lv2:symbol "TEMPO" ;
+           pset:value 14.0
+        ], [
+           lv2:symbol "RND" ;
+           pset:value 0.0
+        ], [
+           lv2:symbol "TYPE" ;
+           pset:value 1.0
+        ], [
+           lv2:symbol "STDL" ;
+           pset:value 96.0
+        ], [
+           lv2:symbol "PAN" ;
+           pset:value 0.0
+        ], [
+           lv2:symbol "DRYWET" ;
+           pset:value 63.0
+        ], [
+           lv2:symbol "FB" ;
+           pset:value 40.0
+        ], [
+           lv2:symbol "DEPTH" ;
+           pset:value 64.0
+        ], [
+           lv2:symbol "LRCR" ;
+           pset:value 0.0
+        ], [
+           lv2:symbol "STEREO" ;
+           pset:value 0.0
+        ] ;
+	.
+

@@ -528,7 +528,7 @@ void
 Vibe::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
-    const int NUM_PRESETS = 8;
+    const int NUM_PRESETS = 9;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Classic
@@ -546,7 +546,9 @@ Vibe::setpreset(int npreset)
         //Sick Phaser
         {110, 75, 10, 0, 32, 64, 64, 14, 0, 30, 1},
         //Warble
-        {127, 360, 10, 0, 0, 64, 0, 0, 0, 37, 0}
+        {127, 360, 10, 0, 0, 64, 0, 0, 0, 37, 0},
+        //Vibe 9
+        {64, 14, 0, 1, 96, 64, 64, 104, 64, 0, 0}
     };
 
     if (npreset > NUM_PRESETS - 1)
