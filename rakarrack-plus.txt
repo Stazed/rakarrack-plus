@@ -235,6 +235,7 @@ FIXME Help .png
 
 Sustainer
     Wet/Dry                     |                |     none      |                   |          none     |
+---Done---
 
 Synthfilter
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

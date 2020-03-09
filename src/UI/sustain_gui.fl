@@ -3,8 +3,8 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class SustainGui {
-  user_data 1 open selected
-  xywh {1182 316 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  user_data 1 open
+  xywh {751 277 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -30,19 +30,19 @@ widget_class SustainGui {
     callback {long long ud= (long long) v;
         if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
-sus_sus->value(rkr->efx_Sustainer->getpar(1));}
+sus_sus->value(rkr->efx_Sustainer->getpar(1));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
-      label {Sustain 1}
+      label Moderate
       xywh {30 30 36 21} labelsize 10
     }
     MenuItem {} {
-      label {Sustain 2}
+      label Extreme
       xywh {20 20 36 21} labelsize 10
     }
     MenuItem {} {
-      label {Sustain 3}
+      label Mild selected
       xywh {20 20 36 21} labelsize 10
     }
   }
@@ -54,7 +54,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(1));}
  return;
 }
 rkr->efx_Sustainer->changepar(0,(int)o->value());}
-    xywh {49 60 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {53 60 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider sus_sus {
@@ -65,7 +65,7 @@ rkr->efx_Sustainer->changepar(0,(int)o->value());}
  return;
 }
 rkr->efx_Sustainer->changepar(1,(int)o->value());}
-    xywh {49 86 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
+    xywh {53 86 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
     class SliderW
   }
 }

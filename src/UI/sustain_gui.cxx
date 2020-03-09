@@ -29,9 +29,9 @@ void SustainGui::cb_sus_preset(Fl_Choice* o, void* v) {
 }
 
 Fl_Menu_Item SustainGui::menu_sus_preset[] = {
- {"Sustain 1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Sustain 2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Sustain 3", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Moderate", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Extreme", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Mild", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -85,7 +85,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   sus_preset->menu(menu_sus_preset);
 } // Fl_Choice* sus_preset
-{ sus_gain = new SliderW(49, 60, 100, 10, "Gain");
+{ sus_gain = new SliderW(53, 60, 100, 10, "Gain");
   sus_gain->type(5);
   sus_gain->box(FL_FLAT_BOX);
   sus_gain->color((Fl_Color)178);
@@ -101,7 +101,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_gain->align(Fl_Align(FL_ALIGN_LEFT));
   sus_gain->when(FL_WHEN_CHANGED);
 } // SliderW* sus_gain
-{ sus_sus = new SliderW(49, 86, 100, 10, "Sustain");
+{ sus_sus = new SliderW(53, 86, 100, 10, "Sustain");
   sus_sus->type(5);
   sus_sus->box(FL_FLAT_BOX);
   sus_sus->color((Fl_Color)178);
