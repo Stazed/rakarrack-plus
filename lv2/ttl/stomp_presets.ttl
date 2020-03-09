@@ -206,6 +206,30 @@
         ] ;
 	.
 
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:gnasty>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    	rdfs:label "Gnasty" ;
+        lv2:port [
+                lv2:symbol "LEVEL" ;
+                pset:value 48.0
+        ], [
+                lv2:symbol "HI" ;
+                pset:value 20.0
+        ], [
+                lv2:symbol "MID" ;
+                pset:value -13.0
+        ], [
+                lv2:symbol "LO" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "GAIN" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "MODE" ;
+                pset:value 7.0
+        ] ;
+	.
 
 <https://github.com/Stazed/rakarrack-plus#StompBox_fuzz:preset:classic_fuzz>
         a pset:Preset ;

@@ -879,7 +879,7 @@ void
 StompBox::setpreset(int npreset)
 {
     const int PRESET_SIZE = 6;
-    const int NUM_PRESETS = 8;
+    const int NUM_PRESETS = 9;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Odie
@@ -897,7 +897,9 @@ StompBox::setpreset(int npreset)
         //Mid Elve
         {48, 0, -12, 0, 127, 6},
         //Fuzz
-        {48, 0, 0, 0, 127, 7}
+        {48, 0, 0, 0, 127, 7},
+        //Gnasty
+        {48, 28, -13, 64, 127, 7}
     };
 
     if (npreset > NUM_PRESETS - 1)

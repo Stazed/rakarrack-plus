@@ -75,7 +75,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 6 ;
                 lv2:symbol "HI" ;
-                lv2:name "High" ;
+                lv2:name "Tone" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
@@ -93,7 +93,7 @@
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 8 ;
                 lv2:symbol "LO" ;
-                lv2:name "Low" ;
+                lv2:name "Bias" ;
                 lv2:default 0 ;
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
@@ -164,6 +164,11 @@
         rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_fuzz>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+        rdfs:seeAlso <stomp_presets.ttl> .
+
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:gnasty>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .

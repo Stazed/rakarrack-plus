@@ -631,9 +631,9 @@ def remap(efxindex, paramindex):
 
          (39, -1) : ('RakarrackPlus StompBox', 'https://github.com/Stazed/rakarrack-plus#StompBox') ,
          (39, 0) : (1, 'Level', 'LEVEL', 0) ,
-         (39, 1) : (2, 'High', 'HI', 0) ,
+         (39, 1) : (2, 'Tone', 'HI', 0) ,
          (39, 2) : (3, 'Mid', 'MID', 0) ,
-         (39, 3) : (4, 'Low', 'LO', 0) ,
+         (39, 3) : (4, 'Bias', 'LO', 0) ,
          (39, 4) : (5, 'Gain', 'GAIN', 0) ,
          (39, 5) : (6, 'Mode', 'MODE', 0) ,
          (39, 6) : (-1,) ,
