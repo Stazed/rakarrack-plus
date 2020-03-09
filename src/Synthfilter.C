@@ -300,7 +300,7 @@ void
 Synthfilter::setpreset(int npreset)
 {
     const int PRESET_SIZE = 16;
-    const int NUM_PRESETS = 7;
+    const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Low Pass
@@ -316,7 +316,9 @@ Synthfilter::setpreset(int npreset)
         //Pan Filter
         {0, 20, 100, 0, 5, 127, 127, -64, 2, 0, 0, 57, 0, 340, 288, 110},
         //Multi
-        {64, 45, 88, 0, 1, 127, 81, 0, 4, 2, 0, 67, 0, 394, 252, 61}
+        {64, 45, 88, 0, 1, 127, 81, 0, 4, 2, 0, 67, 0, 394, 252, 61},
+        //Lazy Wahble
+        {0, 0, 80, 0, 0, 62, 50, -30, 2, 1, 0, 100, -30, 80, 100, 0}
     };
 
     if (npreset > NUM_PRESETS - 1)

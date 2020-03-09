@@ -240,7 +240,9 @@ Sustainer
 Synthfilter
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL - LFO L/R Delay
-FIXME LV2 Default
+    Added LV2 Default Lazy Wahble to presets - done
+---Done---
+FIXME Help .png
 
 Valve
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

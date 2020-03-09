@@ -390,3 +390,58 @@
                 pset:value 61.0
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lazy_wahble>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    	rdfs:label "Lazy Wahble" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "DIST" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "TEMPO" ;
+                pset:value 80.0
+        ], [
+                lv2:symbol "RND" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "TYPE" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "STDL" ;
+                pset:value 62.0
+        ], [
+                lv2:symbol "WIDTH" ;
+                pset:value 50.0
+        ], [
+                lv2:symbol "FB" ;
+                pset:value -30.0
+        ], [
+                lv2:symbol "LSTAGES" ;
+                pset:value 2.0
+        ], [
+                lv2:symbol "HSTAGES" ;
+                pset:value 1.0
+        ], [
+                lv2:symbol "SUB" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "DEPTH" ;
+                pset:value 100.0
+        ], [
+                lv2:symbol "SENSE" ;
+                pset:value -30.0
+        ], [
+                lv2:symbol "ATIME" ;
+                pset:value 80.0
+        ], [
+                lv2:symbol "RTIME" ;
+                pset:value 100.0
+        ], [
+                lv2:symbol "OFFSET" ;
+                pset:value 0.0
+        ] ;
+	.

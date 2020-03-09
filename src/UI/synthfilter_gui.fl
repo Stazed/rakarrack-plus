@@ -76,6 +76,10 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));} open
       label Multi
       xywh {0 0 36 21} labelsize 10
     }
+    MenuItem {} {
+      label {Lazy Wahble} selected
+      xywh {10 10 36 21} labelsize 10
+    }
   }
   Fl_Value_Slider synthfilter_WD {
     label {Dry/Wet}
@@ -205,7 +209,7 @@ rkr->efx_Synthfilter->changepar(12,(int)(o->value()));}
  rgui->getMIDIControl(245);
  return;
 }
-rkr->efx_Synthfilter->changepar(13,(int)o->value());} selected
+rkr->efx_Synthfilter->changepar(13,(int)o->value());}
     tooltip {Attack Time} xywh {53 149 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 5 maximum 1000 step 1 value 5 textcolor 7
     class SliderW
   }
