@@ -199,7 +199,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shuffle_preset->menu(menu_shuffle_preset);
 } // Fl_Choice* shuffle_preset
-{ shuffle_WD = new SliderW(55, 31, 100, 10, "Dry/Wet");
+{ shuffle_WD = new SliderW(56, 31, 100, 10, "Dry/Wet");
   shuffle_WD->type(5);
   shuffle_WD->box(FL_FLAT_BOX);
   shuffle_WD->color((Fl_Color)178);
@@ -215,7 +215,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_WD->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_WD->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_WD
-{ shuffle_cross1 = new SliderW(55, 49, 100, 10, "Low Freq");
+{ shuffle_cross1 = new SliderW(56, 49, 100, 10, "Low Freq");
   shuffle_cross1->type(5);
   shuffle_cross1->box(FL_FLAT_BOX);
   shuffle_cross1->color((Fl_Color)178);
@@ -232,7 +232,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross1->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross1->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_cross1
-{ shuffle_volL = new SliderW(55, 64, 100, 10, "Low Gain");
+{ shuffle_volL = new SliderW(56, 64, 100, 10, "Low Gain");
   shuffle_volL->type(5);
   shuffle_volL->box(FL_FLAT_BOX);
   shuffle_volL->color((Fl_Color)178);
@@ -249,7 +249,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volL->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volL->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volL
-{ shuffle_cross2 = new SliderW(55, 79, 100, 10, "M.L. Freq");
+{ shuffle_cross2 = new SliderW(56, 79, 100, 10, "M.L. Freq");
   shuffle_cross2->tooltip("Mid Low Frequency");
   shuffle_cross2->type(5);
   shuffle_cross2->box(FL_FLAT_BOX);
@@ -267,7 +267,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross2->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross2->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_cross2
-{ shuffle_volML = new SliderW(55, 94, 100, 10, "M.L Gain");
+{ shuffle_volML = new SliderW(56, 94, 100, 10, "M.L Gain");
   shuffle_volML->tooltip("Mid Low Gain");
   shuffle_volML->type(5);
   shuffle_volML->box(FL_FLAT_BOX);
@@ -285,7 +285,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volML->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volML->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volML
-{ shuffle_cross3 = new SliderW(55, 109, 100, 10, "M.H. Freq");
+{ shuffle_cross3 = new SliderW(56, 109, 100, 10, "M.H. Freq");
   shuffle_cross3->tooltip("Mid High Frequency");
   shuffle_cross3->type(5);
   shuffle_cross3->box(FL_FLAT_BOX);
@@ -303,7 +303,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross3->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross3->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_cross3
-{ shuffle_volMH = new SliderW(55, 124, 100, 10, "M.H. Gain");
+{ shuffle_volMH = new SliderW(56, 124, 100, 10, "M.H. Gain");
   shuffle_volMH->tooltip("Mid High Gain");
   shuffle_volMH->type(5);
   shuffle_volMH->box(FL_FLAT_BOX);
@@ -321,7 +321,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volMH->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volMH->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volMH
-{ shuffle_cross4 = new SliderW(55, 139, 100, 10, "High Freq");
+{ shuffle_cross4 = new SliderW(56, 139, 100, 10, "High Freq");
   shuffle_cross4->tooltip("High Frequency");
   shuffle_cross4->type(5);
   shuffle_cross4->box(FL_FLAT_BOX);
@@ -339,7 +339,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross4->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross4->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_cross4
-{ shuffle_volH = new SliderW(55, 154, 100, 10, "High Gain");
+{ shuffle_volH = new SliderW(56, 154, 100, 10, "High Gain");
   shuffle_volH->type(5);
   shuffle_volH->box(FL_FLAT_BOX);
   shuffle_volH->color((Fl_Color)178);
@@ -356,7 +356,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volH->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volH->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_volH
-{ shuffle_Q = new SliderW(55, 169, 100, 10, "Q");
+{ shuffle_Q = new SliderW(56, 169, 100, 10, "Q");
   shuffle_Q->tooltip("Width");
   shuffle_Q->type(5);
   shuffle_Q->box(FL_FLAT_BOX);

@@ -78,7 +78,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
  return;
 } 
 rkr->efx_Phaser->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {53 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider phaser_pan {
@@ -88,8 +88,8 @@ rkr->efx_Phaser->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(60);
  return;
 } 
-rkr->efx_Phaser->changepar(1,(int)(o->value()+64));} selected
-    xywh {53 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Phaser->changepar(1,(int)(o->value()+64));}
+    xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider phaser_freq {
@@ -100,7 +100,7 @@ rkr->efx_Phaser->changepar(1,(int)(o->value()+64));} selected
  return;
 } 
 rkr->efx_Phaser->changepar(2,(int)o->value());}
-    xywh {53 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider phaser_rnd {
@@ -111,7 +111,7 @@ rkr->efx_Phaser->changepar(2,(int)o->value());}
  return;
 } 
 rkr->efx_Phaser->changepar(3,(int)o->value());}
-    xywh {53 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice phaser_lfotype {
@@ -134,7 +134,7 @@ rkr->efx_Phaser->changepar(3,(int)o->value());}
  return;
 } 
 rkr->efx_Phaser->changepar(11,(int)o->value());}
-    xywh {53 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider phaser_stdf {
@@ -145,7 +145,7 @@ rkr->efx_Phaser->changepar(11,(int)o->value());}
  return;
 } 
 rkr->efx_Phaser->changepar(5,(int)o->value());}
-    tooltip {LFO L/R Delay} xywh {53 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {LFO L/R Delay} xywh {56 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider phaser_dpth {
@@ -156,7 +156,7 @@ rkr->efx_Phaser->changepar(5,(int)o->value());}
  return;
 } 
 rkr->efx_Phaser->changepar(6,(int)o->value());}
-    tooltip {Phase Depth} xywh {53 132 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Phase Depth} xywh {56 132 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider phaser_fb {
@@ -167,7 +167,7 @@ rkr->efx_Phaser->changepar(6,(int)o->value());}
  return;
 } 
 rkr->efx_Phaser->changepar(7,(int)o->value());}
-    xywh {53 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Counter phaser_stages {
@@ -182,8 +182,8 @@ rkr->efx_Phaser->changepar(7,(int)o->value());}
  rgui->getMIDIControl(93);
  return;
 } 
-rkr->efx_Phaser->changepar(9,(int)(o->value()+64));}
-    xywh {53 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Phaser->changepar(9,(int)(o->value()+64));} selected
+    xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
