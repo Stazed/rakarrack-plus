@@ -53,8 +53,13 @@ public:
 
 
 private:
-    struct fstage {
+    struct fstage
+    {
         float c1, c2;
+
+        fstage():
+            c1(0.0),
+            c2(0.0) {}
     } x[MAX_FILTER_STAGES + 1], y[MAX_FILTER_STAGES + 1],
     oldx[MAX_FILTER_STAGES + 1], oldy[MAX_FILTER_STAGES + 1];
 
@@ -83,7 +88,7 @@ private:
 
     float oldc[3], oldd[3];	//old coefficients(used only if some filter paremeters changes very fast, and it needs interpolation)
 
-    float xd[3], yd[3];	//used if the filter is applied more times
+//    float xd[3], yd[3];	//used if the filter is applied more times - not used
 
     float* ismp; //buffer for interpolating filter
 
