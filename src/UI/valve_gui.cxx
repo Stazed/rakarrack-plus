@@ -209,7 +209,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_preset->when(FL_WHEN_RELEASE_ALWAYS);
   valve_preset->menu(menu_valve_preset);
 } // Fl_Choice* valve_preset
-{ valve_WD = new SliderW(53, 31, 100, 10, "Dry/Wet");
+{ valve_WD = new SliderW(56, 31, 100, 10, "Dry/Wet");
   valve_WD->type(5);
   valve_WD->box(FL_FLAT_BOX);
   valve_WD->color((Fl_Color)178);
@@ -225,14 +225,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_WD->align(Fl_Align(FL_ALIGN_LEFT));
   valve_WD->when(FL_WHEN_CHANGED);
 } // SliderW* valve_WD
-{ valve_LRc = new SliderW(53, 44, 100, 10, "L/R Cross");
+{ valve_LRc = new SliderW(56, 44, 100, 10, "L/R Cross");
   valve_LRc->type(5);
   valve_LRc->box(FL_FLAT_BOX);
   valve_LRc->color((Fl_Color)178);
   valve_LRc->selection_color((Fl_Color)62);
   valve_LRc->labeltype(FL_NORMAL_LABEL);
   valve_LRc->labelfont(0);
-  valve_LRc->labelsize(9);
+  valve_LRc->labelsize(10);
   valve_LRc->labelcolor(FL_BACKGROUND2_COLOR);
   valve_LRc->maximum(127);
   valve_LRc->step(1);
@@ -241,7 +241,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   valve_LRc->when(FL_WHEN_CHANGED);
 } // SliderW* valve_LRc
-{ valve_pan = new SliderW(53, 57, 100, 10, "Pan");
+{ valve_pan = new SliderW(56, 57, 100, 10, "Pan");
   valve_pan->type(5);
   valve_pan->box(FL_FLAT_BOX);
   valve_pan->color((Fl_Color)178);
@@ -258,7 +258,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_pan->align(Fl_Align(FL_ALIGN_LEFT));
   valve_pan->when(FL_WHEN_CHANGED);
 } // SliderW* valve_pan
-{ valve_level = new SliderW(53, 71, 100, 10, "Level");
+{ valve_level = new SliderW(56, 71, 100, 10, "Level");
   valve_level->type(5);
   valve_level->box(FL_FLAT_BOX);
   valve_level->color((Fl_Color)178);
@@ -274,7 +274,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_level->align(Fl_Align(FL_ALIGN_LEFT));
   valve_level->when(FL_WHEN_CHANGED);
 } // SliderW* valve_level
-{ valve_drive = new SliderW(53, 84, 100, 10, "Drive");
+{ valve_drive = new SliderW(56, 84, 100, 10, "Drive");
   valve_drive->type(5);
   valve_drive->box(FL_FLAT_BOX);
   valve_drive->color((Fl_Color)178);
@@ -296,7 +296,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_ed->labelcolor(FL_BACKGROUND2_COLOR);
   valve_ed->callback((Fl_Callback*)cb_valve_ed, (void*)(2));
 } // Fl_Check_Button* valve_ed
-{ valve_Q = new SliderW(53, 112, 100, 10, "Dist.");
+{ valve_Q = new SliderW(56, 112, 100, 10, "Dist.");
   valve_Q->tooltip("Distortion");
   valve_Q->type(5);
   valve_Q->box(FL_FLAT_BOX);
@@ -313,7 +313,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_Q->align(Fl_Align(FL_ALIGN_LEFT));
   valve_Q->when(FL_WHEN_CHANGED);
 } // SliderW* valve_Q
-{ valve_Pre = new SliderW(53, 127, 100, 10, "Presence");
+{ valve_Pre = new SliderW(56, 127, 100, 10, "Presence");
   valve_Pre->type(5);
   valve_Pre->box(FL_FLAT_BOX);
   valve_Pre->color((Fl_Color)178);
@@ -347,7 +347,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_neg->labelcolor(FL_BACKGROUND2_COLOR);
   valve_neg->callback((Fl_Callback*)cb_valve_neg, (void*)(2));
 } // Fl_Check_Button* valve_neg
-{ valve_lpf = new SliderW(53, 156, 100, 10, "LPF");
+{ valve_lpf = new SliderW(56, 156, 100, 10, "LPF");
   valve_lpf->type(5);
   valve_lpf->box(FL_FLAT_BOX);
   valve_lpf->color((Fl_Color)178);
@@ -365,7 +365,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_lpf->align(Fl_Align(FL_ALIGN_LEFT));
   valve_lpf->when(FL_WHEN_CHANGED);
 } // SliderW* valve_lpf
-{ valve_hpf = new SliderW(53, 169, 100, 10, "HPF");
+{ valve_hpf = new SliderW(56, 169, 100, 10, "HPF");
   valve_hpf->type(5);
   valve_hpf->box(FL_FLAT_BOX);
   valve_hpf->color((Fl_Color)178);
