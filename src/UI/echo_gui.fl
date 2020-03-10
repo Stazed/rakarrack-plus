@@ -85,13 +85,13 @@ echo_direct->value(rkr->efx_Echo->getpar(8));}
  return;
 } 
 rkr->efx_Echo->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {53 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_RV {
     label Reverse
     callback {rkr->efx_Echo->changepar(7,(int)o->value());}
-    xywh {53 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_pan {
@@ -102,19 +102,19 @@ rkr->efx_Echo->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 } 
 rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
-    xywh {53 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {56 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_delay {
     label Delay
     callback {rkr->efx_Echo->changepar(2,(int)o->value());}
-    xywh {53 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
+    xywh {56 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_LRdl {
     label {L/R Delay}
-    callback {rkr->efx_Echo->changepar(3,(int)o->value());} selected
-    xywh {53 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    callback {rkr->efx_Echo->changepar(3,(int)o->value());}
+    xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_LRc {
@@ -125,7 +125,7 @@ rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Echo->changepar(4,(int)(o->value()));}
-    xywh {53 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_fb {
@@ -136,7 +136,7 @@ rkr->efx_Echo->changepar(4,(int)(o->value()));}
  return;
 } 
 rkr->efx_Echo->changepar(5,(int)o->value());}
-    xywh {53 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button echo_direct {
@@ -147,8 +147,8 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
   }
   Fl_Value_Slider echo_damp {
     label Damp
-    callback {rkr->efx_Echo->changepar(6,(int)o->value());}
-    xywh {53 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    callback {rkr->efx_Echo->changepar(6,(int)o->value());} selected
+    xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
 }

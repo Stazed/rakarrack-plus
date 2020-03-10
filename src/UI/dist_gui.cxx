@@ -196,7 +196,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_preset->when(FL_WHEN_RELEASE_ALWAYS);
   dist_preset->menu(menu_dist_preset);
 } // Fl_Choice* dist_preset
-{ dist_WD = new SliderW(53, 35, 100, 10, "Dry/Wet");
+{ dist_WD = new SliderW(56, 35, 100, 10, "Dry/Wet");
   dist_WD->type(5);
   dist_WD->box(FL_FLAT_BOX);
   dist_WD->color((Fl_Color)178);
@@ -212,14 +212,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_WD->align(Fl_Align(FL_ALIGN_LEFT));
   dist_WD->when(FL_WHEN_CHANGED);
 } // SliderW* dist_WD
-{ dist_LRc = new SliderW(53, 48, 100, 10, "L/R Cross");
+{ dist_LRc = new SliderW(56, 48, 100, 10, "L/R Cross");
   dist_LRc->type(5);
   dist_LRc->box(FL_FLAT_BOX);
   dist_LRc->color((Fl_Color)178);
   dist_LRc->selection_color((Fl_Color)62);
   dist_LRc->labeltype(FL_NORMAL_LABEL);
   dist_LRc->labelfont(0);
-  dist_LRc->labelsize(9);
+  dist_LRc->labelsize(10);
   dist_LRc->labelcolor(FL_BACKGROUND2_COLOR);
   dist_LRc->maximum(127);
   dist_LRc->step(1);
@@ -228,7 +228,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   dist_LRc->when(FL_WHEN_CHANGED);
 } // SliderW* dist_LRc
-{ dist_drive = new SliderW(53, 61, 100, 10, "Drive");
+{ dist_drive = new SliderW(56, 61, 100, 10, "Drive");
   dist_drive->type(5);
   dist_drive->box(FL_FLAT_BOX);
   dist_drive->color((Fl_Color)178);
@@ -244,7 +244,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_drive->align(Fl_Align(FL_ALIGN_LEFT));
   dist_drive->when(FL_WHEN_CHANGED);
 } // SliderW* dist_drive
-{ dist_level = new SliderW(53, 75, 100, 10, "Level");
+{ dist_level = new SliderW(56, 75, 100, 10, "Level");
   dist_level->type(5);
   dist_level->box(FL_FLAT_BOX);
   dist_level->color((Fl_Color)178);
@@ -288,7 +288,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_st->labelcolor(FL_BACKGROUND2_COLOR);
   dist_st->callback((Fl_Callback*)cb_dist_st, (void*)(2));
 } // Fl_Check_Button* dist_st
-{ dist_pan = new SliderW(53, 125, 100, 10, "Pan");
+{ dist_pan = new SliderW(56, 125, 100, 10, "Pan");
   dist_pan->type(5);
   dist_pan->box(FL_FLAT_BOX);
   dist_pan->color((Fl_Color)178);
@@ -305,7 +305,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_pan->align(Fl_Align(FL_ALIGN_LEFT));
   dist_pan->when(FL_WHEN_CHANGED);
 } // SliderW* dist_pan
-{ dist_oct = new SliderW(53, 145, 100, 10, "Sub Octv");
+{ dist_oct = new SliderW(56, 145, 100, 10, "Sub Octv");
   dist_oct->type(5);
   dist_oct->box(FL_FLAT_BOX);
   dist_oct->color((Fl_Color)178);
@@ -321,7 +321,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_oct->align(Fl_Align(FL_ALIGN_LEFT));
   dist_oct->when(FL_WHEN_CHANGED);
 } // SliderW* dist_oct
-{ dist_lpf = new SliderW(53, 157, 100, 10, "LPF");
+{ dist_lpf = new SliderW(56, 157, 100, 10, "LPF");
   dist_lpf->type(5);
   dist_lpf->box(FL_FLAT_BOX);
   dist_lpf->color((Fl_Color)178);
@@ -339,7 +339,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_lpf->align(Fl_Align(FL_ALIGN_LEFT));
   dist_lpf->when(FL_WHEN_CHANGED);
 } // SliderW* dist_lpf
-{ dist_hpf = new SliderW(53, 169, 100, 10, "HPF");
+{ dist_hpf = new SliderW(56, 169, 100, 10, "HPF");
   dist_hpf->type(5);
   dist_hpf->box(FL_FLAT_BOX);
   dist_hpf->color((Fl_Color)178);
