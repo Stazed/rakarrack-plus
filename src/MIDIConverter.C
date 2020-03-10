@@ -27,8 +27,10 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     FREQS(),
     LFREQS(),
 #else
+    /* Jack */
     m_buffSize(NULL),
     m_buffMessage(NULL),
+    /* Alsa */
     port(NULL),
 #endif // LV2_SUPPORT
     fftSampleBuffer(NULL),
@@ -64,8 +66,6 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     Ptrigger = 0;
     Pfft = 0;
 
-    schmittBuffer = NULL;
-    schmittPointer = NULL;
     static const char *englishNotes[12] = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     notes = englishNotes;
     note = 0;
@@ -102,10 +102,6 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
                                SND_SEQ_PORT_CAP_READ |
                                SND_SEQ_PORT_CAP_SUBS_READ,
                                SND_SEQ_PORT_TYPE_APPLICATION);
-
-    // jack
-    m_buffSize = NULL;
-    m_buffMessage = NULL;
 
 #endif // LV2_SUPPORT
 }
