@@ -198,8 +198,8 @@ Ring
 Sequence
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Added LV2 default as preset - Sequence 11 - done
+    Make Range a pop up menu like LV2 - done
 ---Done---
-FIXME Make Range a pop up menu like LV2
 FIXME Help .png
 
 ShelfBoost
@@ -276,7 +276,9 @@ FIXME Help .png
 WahWah  (DynamicFilter.C)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  WIDTH - LFO L/R Delay
-FIXME add "MODE" - "Filter Type"                                                                  0 to 4        -- Add Selection box
+    Added menu "MODE" - "Filter Type" Selection for rakarrack - done
+---Done---
+FIXME Help .png
 
 
 ___________________________________________________________________________________________________________________________________
