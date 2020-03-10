@@ -139,9 +139,13 @@ private:
     fftwf_complex *fftOut;
     fftwf_plan fftPlan;
 
-    typedef struct {
+    typedef struct Peak {
         double freq;
         double db;
+        
+        Peak ():
+            freq(),
+            db() {}
     } Peak;
 
 };

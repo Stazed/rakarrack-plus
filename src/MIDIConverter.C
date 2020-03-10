@@ -17,7 +17,28 @@
 #define MAX_FFT_LENGTH 48000
 #define MAX_PEAKS 8
 
-MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermediate_bufsize)
+MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermediate_bufsize):
+    schmittBuffer(NULL),
+    schmittPointer(NULL),
+    notes(NULL),
+    midi_Note_Message(),
+#ifdef LV2_SUPPORT
+    plug(NULL),
+    FREQS(),
+    LFREQS(),
+#else
+    m_buffSize(NULL),
+    m_buffMessage(NULL),
+    port(NULL),
+#endif // LV2_SUPPORT
+    fftSampleBuffer(NULL),
+    fftSample(NULL),
+    fftLastPhase(NULL),
+    fftSize(),
+    fftFrameCount(),
+    fftIn(),
+    fftOut(),
+    fftPlan()
 {
     SAMPLE_RATE = sample_rate;
     fSAMPLE_RATE = (float) sample_rate;
