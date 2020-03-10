@@ -83,14 +83,6 @@ public:
     float VelVal;
     unsigned char        midi_Note_Message[3];
 
-#ifdef LV2_SUPPORT
-    _RKRLV2* plug; // for access to forge_midimessage()
-#else
-    jack_ringbuffer_t   *m_buffSize;
-    jack_ringbuffer_t   *m_buffMessage;
-    snd_seq_t *port;
-#endif // LV2_SUPPORT
-
 private:
 
     void displayFrequency (float freq, float val_sum, float *freqs, float *lfreqs);
@@ -111,7 +103,18 @@ private:
     float fSAMPLE_RATE;
     
     float Input_Gain;       // lv2 only
+    
+#ifndef LV2_SUPPORT
+public:
+    jack_ringbuffer_t   *m_buffSize;
+    jack_ringbuffer_t   *m_buffMessage;
+    snd_seq_t *port;
+private:
+#endif // LV2_SUPPORT
 #ifdef LV2_SUPPORT
+public:
+    _RKRLV2* plug; // for access to forge_midimessage()
+private:
     float FREQS[12];
     float LFREQS[12];
     float VAL_SUM;

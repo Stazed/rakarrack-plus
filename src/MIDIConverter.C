@@ -21,11 +21,36 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     schmittBuffer(NULL),
     schmittPointer(NULL),
     notes(NULL),
+    note(),
+    nfreq(),
+    afreq(),
+    freq(),
+    TrigVal(),
+    cents(),
+    channel(),
+    lanota(),
+    nota_actual(),
+    hay(),
+    preparada(),
+    ponla(),
+    velocity(),
+    Moctave(),
+    PERIOD(intermediate_bufsize),   /* Correct for rakarrack, may be adjusted by lv2 */
+    VelVal(),
     midi_Note_Message(),
+    blockSize(),
+    SAMPLE_RATE(sample_rate),
+    fSAMPLE_RATE((float) sample_rate),
+    Input_Gain(),
 #ifdef LV2_SUPPORT
     plug(NULL),
     FREQS(),
     LFREQS(),
+    VAL_SUM(),
+    old_il_sum(), // -50.0
+    old_ir_sum(), // -50.0
+    val_il_sum(),
+    val_ir_sum(),
 #else
     /* Jack */
     m_buffSize(NULL),
@@ -33,6 +58,13 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     /* Alsa */
     port(NULL),
 #endif // LV2_SUPPORT
+    Pgain(),              // lv2 only
+    Pmidi(),
+    Poctave(),
+    Ppanic(),
+    Pvelocity(),
+    Ptrigger(),
+    Pfft(),
     fftSampleBuffer(NULL),
     fftSample(NULL),
     fftLastPhase(NULL),
@@ -42,9 +74,6 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     fftOut(),
     fftPlan()
 {
-    SAMPLE_RATE = sample_rate;
-    fSAMPLE_RATE = (float) sample_rate;
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
 
     Input_Gain = 0.50f;
     Pfft = 0;
