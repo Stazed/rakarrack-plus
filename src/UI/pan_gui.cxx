@@ -155,7 +155,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_preset->when(FL_WHEN_RELEASE_ALWAYS);
   pan_preset->menu(menu_pan_preset);
 } // Fl_Choice* pan_preset
-{ pan_WD = new SliderW(53, 29, 100, 10, "Dry/Wet");
+{ pan_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
   pan_WD->type(5);
   pan_WD->box(FL_FLAT_BOX);
   pan_WD->color((Fl_Color)178);
@@ -171,7 +171,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_WD->align(Fl_Align(FL_ALIGN_LEFT));
   pan_WD->when(FL_WHEN_CHANGED);
 } // SliderW* pan_WD
-{ pan_pan = new SliderW(53, 44, 100, 10, "Pan");
+{ pan_pan = new SliderW(56, 44, 100, 10, "Pan");
   pan_pan->type(5);
   pan_pan->box(FL_FLAT_BOX);
   pan_pan->color((Fl_Color)178);
@@ -194,7 +194,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_autopan->labelcolor(FL_BACKGROUND2_COLOR);
   pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
 } // Fl_Check_Button* pan_autopan
-{ pan_freq = new SliderW(53, 73, 100, 10, "Tempo");
+{ pan_freq = new SliderW(56, 73, 100, 10, "Tempo");
   pan_freq->type(5);
   pan_freq->box(FL_FLAT_BOX);
   pan_freq->color((Fl_Color)178);
@@ -211,7 +211,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_freq->align(Fl_Align(FL_ALIGN_LEFT));
   pan_freq->when(FL_WHEN_CHANGED);
 } // SliderW* pan_freq
-{ pan_rnd = new SliderW(53, 85, 100, 10, "Random");
+{ pan_rnd = new SliderW(56, 85, 100, 10, "Random");
   pan_rnd->type(5);
   pan_rnd->box(FL_FLAT_BOX);
   pan_rnd->color((Fl_Color)178);
@@ -237,7 +237,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_lfotype->callback((Fl_Callback*)cb_pan_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* pan_lfotype
-{ pan_stdf = new SliderW(53, 124, 100, 10, "Stereo Df");
+{ pan_stdf = new SliderW(56, 124, 100, 10, "Stereo Df");
   pan_stdf->tooltip("LFO L/R Delay");
   pan_stdf->type(5);
   pan_stdf->box(FL_FLAT_BOX);
@@ -245,7 +245,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_stdf->selection_color((Fl_Color)62);
   pan_stdf->labeltype(FL_NORMAL_LABEL);
   pan_stdf->labelfont(0);
-  pan_stdf->labelsize(9);
+  pan_stdf->labelsize(10);
   pan_stdf->labelcolor(FL_BACKGROUND2_COLOR);
   pan_stdf->maximum(127);
   pan_stdf->step(1);
@@ -261,7 +261,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_extraon->labelcolor(FL_BACKGROUND2_COLOR);
   pan_extraon->callback((Fl_Callback*)cb_pan_extraon, (void*)(2));
 } // Fl_Check_Button* pan_extraon
-{ pan_extra = new SliderW(53, 161, 100, 10, "E.Stereo");
+{ pan_extra = new SliderW(56, 161, 100, 10, "E.Stereo");
   pan_extra->tooltip("Extra Stereo Amount");
   pan_extra->type(5);
   pan_extra->box(FL_FLAT_BOX);

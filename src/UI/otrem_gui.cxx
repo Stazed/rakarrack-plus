@@ -144,7 +144,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_preset->when(FL_WHEN_RELEASE_ALWAYS);
   otrem_preset->menu(menu_otrem_preset);
 } // Fl_Choice* otrem_preset
-{ otrem_dpth = new SliderW(53, 35, 100, 10, "Depth");
+{ otrem_dpth = new SliderW(56, 35, 100, 10, "Depth");
   otrem_dpth->type(5);
   otrem_dpth->box(FL_FLAT_BOX);
   otrem_dpth->color((Fl_Color)178);
@@ -160,7 +160,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_dpth->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_dpth
-{ otrem_freq = new SliderW(53, 55, 100, 10, "Tempo");
+{ otrem_freq = new SliderW(56, 55, 100, 10, "Tempo");
   otrem_freq->type(5);
   otrem_freq->box(FL_FLAT_BOX);
   otrem_freq->color((Fl_Color)178);
@@ -177,7 +177,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_freq->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_freq->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_freq
-{ otrem_rnd = new SliderW(53, 75, 100, 10, "Random");
+{ otrem_rnd = new SliderW(56, 75, 100, 10, "Random");
   otrem_rnd->type(5);
   otrem_rnd->box(FL_FLAT_BOX);
   otrem_rnd->color((Fl_Color)178);
@@ -203,7 +203,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_lfotype->callback((Fl_Callback*)cb_otrem_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* otrem_lfotype
-{ otrem_stdf = new SliderW(53, 129, 100, 10, "Stereo Df");
+{ otrem_stdf = new SliderW(56, 129, 100, 10, "Stereo Df");
   otrem_stdf->tooltip("LFO L/R Delay");
   otrem_stdf->type(5);
   otrem_stdf->box(FL_FLAT_BOX);
@@ -211,7 +211,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_stdf->selection_color((Fl_Color)62);
   otrem_stdf->labeltype(FL_NORMAL_LABEL);
   otrem_stdf->labelfont(0);
-  otrem_stdf->labelsize(9);
+  otrem_stdf->labelsize(10);
   otrem_stdf->labelcolor(FL_BACKGROUND2_COLOR);
   otrem_stdf->maximum(127);
   otrem_stdf->step(1);
@@ -220,7 +220,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_stdf
-{ otrem_pan = new SliderW(53, 149, 100, 10, "Pan");
+{ otrem_pan = new SliderW(56, 149, 100, 10, "Pan");
   otrem_pan->type(5);
   otrem_pan->box(FL_FLAT_BOX);
   otrem_pan->color((Fl_Color)178);

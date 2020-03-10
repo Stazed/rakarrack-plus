@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} RyanwahGui {
@@ -55,7 +55,7 @@ ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
 ryanwah_minfreq->value(rkr->efx_RyanWah->getpar(15));
 ryanwah_res->value(rkr->efx_RyanWah->getpar(16));
 o->value(rkr->efx_RyanWah->getpar(18));
-o->redraw();} open
+o->redraw();}
     xywh {78 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -83,7 +83,7 @@ o->redraw();} open
       xywh {102 102 36 21} labelsize 10
     }
     MenuItem {} {
-      label {Wah Fever} selected
+      label {Wah Fever}
       xywh {112 112 36 21} labelsize 10
     }
   }
@@ -95,7 +95,7 @@ o->redraw();} open
  return;
 }
 rkr->efx_RyanWah->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {53 25 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 25 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button ryanwah_qm {
@@ -116,7 +116,7 @@ rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
  return;
 }
 rkr->efx_RyanWah->changepar(10,(int)o->value());}
-    tooltip {Lowpass Level} xywh {53 34 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    tooltip {Lowpass Level} xywh {56 34 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button ryanwah_nat {
@@ -137,7 +137,7 @@ rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
  return;
 }
 rkr->efx_RyanWah->changepar(11,(int)o->value());}
-    tooltip {Bandpass Level} xywh {53 43 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    tooltip {Bandpass Level} xywh {56 43 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button ryanwah_res {
@@ -154,7 +154,7 @@ rkr->efx_RyanWah->changepar(11,(int)o->value());}
  return;
 }
 rkr->efx_RyanWah->changepar(12,(int)o->value());}
-    tooltip {Highpass Level} xywh {53 52 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    tooltip {Highpass Level} xywh {56 52 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_Rnd {
@@ -165,7 +165,7 @@ rkr->efx_RyanWah->changepar(12,(int)o->value());}
  return;
 }*/
 rkr->efx_RyanWah->changepar(3,(int)o->value());}
-    tooltip {LFO Randomness} xywh {53 62 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {LFO Randomness} xywh {56 62 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_St {
@@ -176,7 +176,7 @@ rkr->efx_RyanWah->changepar(3,(int)o->value());}
  return;
 }*/
 rkr->efx_RyanWah->changepar(5,(int)o->value()+64);}
-    tooltip {LFO L/R Delay} xywh {53 72 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    tooltip {LFO L/R Delay} xywh {56 72 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Counter svfilter_stages {
@@ -198,7 +198,7 @@ rkr->efx_RyanWah->changepar(5,(int)o->value()+64);}
  return;
 }
 rkr->efx_RyanWah->changepar(6,(int)o->value());}
-    xywh {53 102 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 102 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_freq {
@@ -209,7 +209,7 @@ rkr->efx_RyanWah->changepar(6,(int)o->value());}
  return;
 }
 rkr->efx_RyanWah->changepar(2,(int)o->value());}
-    xywh {53 112 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {56 112 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_q {
@@ -220,7 +220,7 @@ rkr->efx_RyanWah->changepar(2,(int)o->value());}
  return;
 }
 rkr->efx_RyanWah->changepar(1,(int)(o->value()));}
-    tooltip Resonance xywh {53 122 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
+    tooltip Resonance xywh {56 122 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_rng {
@@ -231,7 +231,7 @@ rkr->efx_RyanWah->changepar(1,(int)(o->value()));}
  return;
 }
 rkr->efx_RyanWah->changepar(14,(int)o->value());}
-    tooltip {Sweep Range} xywh {53 132 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 6000 step 1 textcolor 7
+    tooltip {Sweep Range} xywh {56 132 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 6000 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_ampsnsinv {
@@ -242,7 +242,7 @@ rkr->efx_RyanWah->changepar(14,(int)o->value());}
  return;
 }
 rkr->efx_RyanWah->changepar(8,(int)o->value());}
-    xywh {53 142 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 142 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_ampsns {
@@ -253,7 +253,7 @@ rkr->efx_RyanWah->changepar(8,(int)o->value());}
  return;
 }
 rkr->efx_RyanWah->changepar(7,(int)o->value());}
-    tooltip {Envelope Sensitivity} xywh {53 152 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    tooltip {Envelope Sensitivity} xywh {56 152 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_smooth {
@@ -264,7 +264,7 @@ rkr->efx_RyanWah->changepar(7,(int)o->value());}
  return;
 }
 rkr->efx_RyanWah->changepar(9,(int)o->value());}
-    tooltip {Envelope Smoothing} xywh {53 162 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Envelope Smoothing} xywh {56 162 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider ryanwah_minfreq {
@@ -274,8 +274,8 @@ rkr->efx_RyanWah->changepar(9,(int)o->value());}
  rgui->getMIDIControl(266);
  return;
 }*/
-rkr->efx_RyanWah->changepar(15,(int)o->value());}
-    tooltip {Starting Frequency} xywh {53 172 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 30 maximum 800 step 1 value 450 textcolor 7
+rkr->efx_RyanWah->changepar(15,(int)o->value());} selected
+    tooltip {Starting Frequency} xywh {56 172 100 8} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 30 maximum 800 step 1 value 450 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local

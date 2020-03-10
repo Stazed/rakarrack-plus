@@ -58,7 +58,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(8));}
  return;
 } 
 rkr->efx_Pan->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {53 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider pan_pan {
@@ -69,7 +69,7 @@ rkr->efx_Pan->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 } 
 rkr->efx_Pan->changepar(1,(int)(o->value()+64));}
-    xywh {53 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {56 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button pan_autopan {
@@ -86,7 +86,7 @@ rkr->efx_Pan->changepar(1,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_Pan->changepar(2,(int)o->value());}
-    xywh {53 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {56 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider pan_rnd {
@@ -97,7 +97,7 @@ rkr->efx_Pan->changepar(2,(int)o->value());}
  return;
 } 
 rkr->efx_Pan->changepar(3,(int)o->value());}
-    xywh {53 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice pan_lfotype {
@@ -114,7 +114,7 @@ rkr->efx_Pan->changepar(3,(int)o->value());}
  return;
 } 
 rkr->efx_Pan->changepar(5,(int)o->value());}
-    tooltip {LFO L/R Delay} xywh {53 124 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {LFO L/R Delay} xywh {56 124 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button pan_extraon {
@@ -126,7 +126,7 @@ rkr->efx_Pan->changepar(5,(int)o->value());}
   Fl_Value_Slider pan_extra {
     label {E.Stereo}
     callback {rkr->efx_Pan->changepar(6,(int)o->value());} selected
-    tooltip {Extra Stereo Amount} xywh {53 161 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Extra Stereo Amount} xywh {56 161 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local

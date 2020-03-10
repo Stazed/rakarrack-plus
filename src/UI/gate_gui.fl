@@ -52,43 +52,43 @@ gate_LPF->value(rkr->efx_Gate->getpar(5));}
   Fl_Value_Slider gate_ATime {
     label {A. Time}
     callback {rkr->efx_Gate->changepar(3,(int)o->value());}
-    tooltip {Attack Time} xywh {53 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 250 step 1 value 1 textcolor 7
+    tooltip {Attack Time} xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 250 step 1 value 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider gate_RTime {
     label {R. Time}
-    callback {rkr->efx_Gate->changepar(4, (int) o->value());} selected
-    tooltip {Release Time} xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 250 step 1 value 120 textcolor 7
+    callback {rkr->efx_Gate->changepar(4, (int) o->value());}
+    tooltip {Release Time} xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 250 step 1 value 120 textcolor 7
     class SliderW
   }
   Fl_Value_Slider gate_range {
     label Range
     callback {rkr->efx_Gate->changepar(2, (int) o->value());}
-    xywh {53 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -90 maximum 0 step 1 textcolor 7
+    xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -90 maximum 0 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider gate_threshold {
-    label Thrhold
+    label Threshold
     callback {rkr->efx_Gate->changepar(1, (int)o->value());}
-    xywh {53 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
+    xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider gate_hold {
     label Hold
     callback {rkr->efx_Gate->changepar(7,(int)o->value());}
-    xywh {53 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 500 step 1 textcolor 7
+    xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 500 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider gate_LPF {
     label LPF
     callback {rkr->efx_Gate->changepar(5, (int)o->value());}
-    xywh {53 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
+    xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class SliderW
   }
   Fl_Value_Slider gate_HPF {
     label HPF
-    callback {rkr->efx_Gate->changepar(6, (int)o->value());}
-    xywh {53 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
+    callback {rkr->efx_Gate->changepar(6, (int)o->value());} selected
+    xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
   }
 }

@@ -251,7 +251,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_preset->when(FL_WHEN_RELEASE_ALWAYS);
   infinity_preset->menu(menu_infinity_preset);
 } // Fl_Choice* infinity_preset
-{ infinity_WD = new SliderW(53, 27, 100, 10, "Dry/Wet");
+{ infinity_WD = new SliderW(56, 27, 100, 10, "Dry/Wet");
   infinity_WD->type(5);
   infinity_WD->box(FL_FLAT_BOX);
   infinity_WD->color((Fl_Color)178);
@@ -267,7 +267,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_WD->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_WD->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_WD
-{ infinity_Q = new SliderW(53, 41, 100, 10, "Res");
+{ infinity_Q = new SliderW(56, 41, 100, 10, "Res");
   infinity_Q->tooltip("Resonance Filter");
   infinity_Q->type(5);
   infinity_Q->box(FL_FLAT_BOX);
@@ -385,7 +385,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_stages->callback((Fl_Callback*)cb_infinity_stages);
   infinity_stages->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Counter* infinity_stages
-{ infinity_pan = new SliderW(53, 111, 100, 10, "AutoPan");
+{ infinity_pan = new SliderW(56, 111, 100, 10, "AutoPan");
   infinity_pan->type(5);
   infinity_pan->box(FL_FLAT_BOX);
   infinity_pan->color((Fl_Color)178);
@@ -401,7 +401,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_pan->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_pan->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_pan
-{ infinity_stdf = new SliderW(53, 123, 100, 10, "Stereo Df");
+{ infinity_stdf = new SliderW(56, 123, 100, 10, "Stereo Df");
   infinity_stdf->tooltip("Sweep L/R Delay");
   infinity_stdf->type(5);
   infinity_stdf->box(FL_FLAT_BOX);
@@ -409,7 +409,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_stdf->selection_color((Fl_Color)62);
   infinity_stdf->labeltype(FL_NORMAL_LABEL);
   infinity_stdf->labelfont(0);
-  infinity_stdf->labelsize(9);
+  infinity_stdf->labelsize(10);
   infinity_stdf->labelcolor(FL_BACKGROUND2_COLOR);
   infinity_stdf->minimum(-64);
   infinity_stdf->maximum(64);
@@ -419,7 +419,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_stdf
-{ infinity_start = new SliderW(53, 135, 100, 10, "Start");
+{ infinity_start = new SliderW(56, 135, 100, 10, "Start");
   infinity_start->type(5);
   infinity_start->box(FL_FLAT_BOX);
   infinity_start->color((Fl_Color)178);
@@ -435,7 +435,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_start->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_start->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_start
-{ infinity_end = new SliderW(53, 147, 100, 10, "End");
+{ infinity_end = new SliderW(56, 147, 100, 10, "End");
   infinity_end->type(5);
   infinity_end->box(FL_FLAT_BOX);
   infinity_end->color((Fl_Color)178);
@@ -451,7 +451,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_end->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_end->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_end
-{ infinity_rate = new SliderW(53, 159, 100, 10, "Tempo");
+{ infinity_rate = new SliderW(56, 159, 100, 10, "Tempo");
   infinity_rate->type(5);
   infinity_rate->box(FL_FLAT_BOX);
   infinity_rate->color((Fl_Color)178);
@@ -467,7 +467,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_rate->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_rate->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_rate
-{ infinity_subdiv = new SliderW(53, 170, 100, 10, "Subdiv");
+{ infinity_subdiv = new SliderW(56, 170, 100, 10, "Subdiv");
   infinity_subdiv->type(5);
   infinity_subdiv->box(FL_FLAT_BOX);
   infinity_subdiv->color((Fl_Color)178);

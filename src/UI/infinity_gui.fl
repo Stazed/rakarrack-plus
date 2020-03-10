@@ -102,7 +102,7 @@ infinity_stages->value(rkr->efx_Infinity->getpar(17));}
  return;
 } 
 rkr->efx_Infinity->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {53 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_Q {
@@ -113,7 +113,7 @@ rkr->efx_Infinity->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->efx_Infinity->changepar(9,(int)o->value());}
-    tooltip {Resonance Filter} xywh {53 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -1000 maximum 1000 step 1 textcolor 7
+    tooltip {Resonance Filter} xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -1000 maximum 1000 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Input infinity_1 {
@@ -175,7 +175,7 @@ rkr->efx_Infinity->changepar(9,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(15,(int)o->value());}
-    xywh {53 111 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 111 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_stdf {
@@ -185,8 +185,8 @@ rkr->efx_Infinity->changepar(15,(int)o->value());}
  rgui->getMIDIControl(398);
  return;
 } 
-rkr->efx_Infinity->changepar(13,(int)o->value());} selected
-    tooltip {Sweep L/R Delay} xywh {53 123 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+rkr->efx_Infinity->changepar(13,(int)o->value());}
+    tooltip {Sweep L/R Delay} xywh {56 123 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_start {
@@ -197,7 +197,7 @@ rkr->efx_Infinity->changepar(13,(int)o->value());} selected
  return;
 } 
 rkr->efx_Infinity->changepar(10,(int)o->value());}
-    xywh {53 135 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 135 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_end {
@@ -208,7 +208,7 @@ rkr->efx_Infinity->changepar(10,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(11,(int)o->value());}
-    xywh {53 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_rate {
@@ -219,7 +219,7 @@ rkr->efx_Infinity->changepar(11,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(12,(int)o->value());}
-    xywh {53 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 600 step 1 textcolor 7
+    xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_subdiv {
@@ -229,8 +229,8 @@ rkr->efx_Infinity->changepar(12,(int)o->value());}
  rgui->getMIDIControl(402);
  return;
 } 
-rkr->efx_Infinity->changepar(14,(int)o->value());}
-    xywh {53 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -16 maximum 16 step 1 textcolor 7
+rkr->efx_Infinity->changepar(14,(int)o->value());} selected
+    xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -16 maximum 16 step 1 textcolor 7
     class SliderW
   }
 }

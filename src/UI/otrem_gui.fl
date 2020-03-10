@@ -36,7 +36,7 @@ otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
 otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
 otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
 otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
-otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));} open
+otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));}
     xywh {77 6 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -64,7 +64,7 @@ otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));} open
       xywh {0 0 36 21} labelsize 10
     }
     MenuItem {} {
-      label Slow selected
+      label Slow
       xywh {82 82 36 21} labelsize 10
     }
   }
@@ -76,7 +76,7 @@ otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));} open
  return;
 }
 rkr->efx_Opticaltrem->changepar(0,(int)o->value());}
-    xywh {53 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider otrem_freq {
@@ -87,7 +87,7 @@ rkr->efx_Opticaltrem->changepar(0,(int)o->value());}
  return;
 }
 rkr->efx_Opticaltrem->changepar(1,(int)o->value());}
-    xywh {53 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {56 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider otrem_rnd {
@@ -98,7 +98,7 @@ rkr->efx_Opticaltrem->changepar(1,(int)o->value());}
  return;
 }
 rkr->efx_Opticaltrem->changepar(2,(int)o->value());}
-    xywh {53 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Choice otrem_lfotype {
@@ -115,7 +115,7 @@ rkr->efx_Opticaltrem->changepar(2,(int)o->value());}
  return;
 }
 rkr->efx_Opticaltrem->changepar(4,(int)o->value());}
-    tooltip {LFO L/R Delay} xywh {53 129 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {LFO L/R Delay} xywh {56 129 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider otrem_pan {
@@ -125,8 +125,8 @@ rkr->efx_Opticaltrem->changepar(4,(int)o->value());}
  rgui->getMIDIControl(385);
  return;
 }
-rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));}
-    xywh {53 149 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));} selected
+    xywh {56 149 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Check_Button otrem_invert {
