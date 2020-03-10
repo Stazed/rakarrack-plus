@@ -66,7 +66,7 @@ convo_fb->value(rkr->efx_Convol->getpar(10));}
  return;
 }
 rkr->efx_Convol->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {53 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider convo_pan {
@@ -77,7 +77,7 @@ rkr->efx_Convol->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
-    xywh {53 46 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {56 46 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider convo_level {
@@ -88,7 +88,7 @@ rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
  return;
 }
 rkr->efx_Convol->changepar(7,(int)o->value());}
-    xywh {53 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider convo_damp {
@@ -99,7 +99,7 @@ rkr->efx_Convol->changepar(7,(int)o->value());}
  return;
 }
 rkr->efx_Convol->changepar(6,(int)o->value());}
-    xywh {53 78 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 78 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider convo_fb {
@@ -109,8 +109,8 @@ rkr->efx_Convol->changepar(6,(int)o->value());}
  rgui->getMIDIControl(284);
  return;
 }
-rkr->efx_Convol->changepar(10,(int)o->value());} selected
-    xywh {53 94 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 9 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+rkr->efx_Convol->changepar(10,(int)o->value());}
+    xywh {56 94 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider convo_length {
@@ -120,8 +120,8 @@ rkr->efx_Convol->changepar(10,(int)o->value());} selected
  rgui->getMIDIControl(285);
  return;
 }
-rkr->efx_Convol->changepar(3,(int)o->value());}
-    xywh {53 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
+rkr->efx_Convol->changepar(3,(int)o->value());} selected
+    xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
     class SliderW
   }
   Fl_Check_Button convo_user {
