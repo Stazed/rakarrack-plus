@@ -28,6 +28,7 @@
 
 FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf) :
     formantpar(),
+    currentformants(),
     sequence(),
     oldformantamp(),
     formant()
