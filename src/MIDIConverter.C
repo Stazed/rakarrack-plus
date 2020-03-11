@@ -25,15 +25,15 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     nfreq(),
     afreq(),
     freq(),
-    TrigVal(),
+    TrigVal(.25f),
     cents(),
     channel(),
-    lanota(),
-    nota_actual(),
-    hay(),
+    lanota(-1),
+    nota_actual(-1),
+    hay(),                          /* This is used for the red light on/off display */
     preparada(),
     ponla(),
-    velocity(),
+    velocity(100),
     Moctave(),
     PERIOD(intermediate_bufsize),   /* Correct for rakarrack, may be adjusted by lv2 */
     VelVal(),
@@ -41,16 +41,16 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     blockSize(),
     SAMPLE_RATE(sample_rate),
     fSAMPLE_RATE((float) sample_rate),
-    Input_Gain(),
+    Input_Gain(0.50f),
 #ifdef LV2_SUPPORT
     plug(NULL),
     FREQS(),
     LFREQS(),
-    VAL_SUM(),
-    old_il_sum(), // -50.0
-    old_ir_sum(), // -50.0
-    val_il_sum(),
-    val_ir_sum(),
+    VAL_SUM(-50.0f),
+    old_il_sum(-50.0f),
+    old_ir_sum(-50.0f),
+    val_il_sum(-50.0f),
+    val_ir_sum(-50.0f),
 #else
     /* Jack */
     m_buffSize(NULL),
@@ -58,7 +58,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     /* Alsa */
     port(NULL),
 #endif // LV2_SUPPORT
-    Pgain(),              // lv2 only
+    Pgain(64),              // lv2 only
     Pmidi(),
     Poctave(),
     Ppanic(),
@@ -74,34 +74,8 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     fftOut(),
     fftPlan()
 {
-
-    Input_Gain = 0.50f;
-    Pfft = 0;
-    velocity = 100;
-    channel = 0;
-    lanota = -1;
-    preparada = 0;
-    nota_actual = -1;
-    TrigVal = .25f;
-    hay = 0; // This is used for the red light on/off display
-    ponla = 0;
-    Moctave = 0;
-
-    Pgain = 64; // lv2 only
-    Pmidi = 0;
-    Poctave = 0;
-    Ppanic = 0;
-    Pvelocity = 0;
-    Ptrigger = 0;
-    Pfft = 0;
-
     static const char *englishNotes[12] = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     notes = englishNotes;
-    note = 0;
-    nfreq = 0;
-    afreq = 0;
-
-    fftFrameCount = 0;
 
     schmittInit(32); // 32 == latency (tuneit default = 10)
     fftInit(32); // == latency
@@ -110,11 +84,6 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     sprintf(portname, "%s MC OUT", jname); // used by alsa - put here to avoid unused variable compiler warning on jname
 
 #ifdef LV2_SUPPORT
-    VAL_SUM = -50.0f;
-    old_il_sum = -50.0f;
-    old_ir_sum = -50.0f;
-    val_il_sum = -50.0;
-    val_ir_sum = -50.0;
     update_freqs(440.0f);
 #else
     // Open Alsa Seq
