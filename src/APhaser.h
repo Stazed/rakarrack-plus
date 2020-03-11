@@ -45,6 +45,9 @@ public:
     float outvolume;
 
 private:
+    float fPERIOD;
+    uint32_t PERIOD;
+    
     //Phaser parameters
     int Pvolume;        //Used in Process.C to set wet/dry mix
     int Pdistortion;    //Model distortion added by FET element
@@ -79,8 +82,6 @@ private:
     float Rconst;      // Handle parallel resistor relationship
     float C;	        // Capacitor
     float CFs;		// A constant derived from capacitor and resistor relationships
-    float fPERIOD;
-    uint32_t PERIOD;
 
     EffectLFO *lfo;		//Phaser modulator
     

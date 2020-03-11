@@ -41,11 +41,50 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Analog_Phaser::Analog_Phaser(double sample_rate, uint32_t intermediate_bufsize)
+Analog_Phaser::Analog_Phaser(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(0),
+    outvolume(0.5f),
+    fPERIOD(intermediate_bufsize),
+    PERIOD(intermediate_bufsize),
+    Pvolume(),
+    Pdistortion(),
+    Pwidth(),
+    Pfb(),
+    Poffset(),
+    Pstages(),
+    Poutsub(),
+    Phyper(),
+    Pdepth(),
+    Pbarber(),
+    barber(0),          //Deactivate barber pole phasing by default
+    distortion(),
+    fb(),
+    width(),
+    offsetpct(),
+    fbl(),
+    fbr(),
+    depth(),
+    lxn1(NULL),
+    lyn1(NULL),
+    rxn1(NULL),
+    ryn1(NULL),
+    offset(NULL),
+    oldlgain(),
+    oldrgain(),
+    rdiff(),
+    ldiff(),
+    invperiod(1.0f / fPERIOD),
+    mis(1.0f),
+    Rmin(625.0f),       // 2N5457 typical on resistance at Vgs = 0
+    Rmax(22000.0f),     // Resistor parallel to FET
+    Rmx(Rmin / Rmax),
+    Rconst(1.0f + Rmx), // Handle parallel resistor relationship
+    C(0.00000005f),     // 50 nF
+    CFs(),
+    lfo(NULL),
+    Fpre(NULL)
 {
     float fSAMPLE_RATE = sample_rate;
-    PERIOD = intermediate_bufsize;
-    fPERIOD = intermediate_bufsize;
 
     lxn1 = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES);
 
@@ -69,21 +108,10 @@ Analog_Phaser::Analog_Phaser(double sample_rate, uint32_t intermediate_bufsize)
     offset[10] = 0.2762545f;
     offset[11] = 0.5215785f;
 
-    barber = 0; //Deactivate barber pole phasing by default
-
-    mis = 1.0f;
-    Rmin = 625.0f; // 2N5457 typical on resistance at Vgs = 0
-    Rmax = 22000.0f; // Resistor parallel to FET
-    Rmx = Rmin / Rmax;
-    Rconst = 1.0f + Rmx; // Handle parallel resistor relationship
-    C = 0.00000005f; // 50 nF
     CFs = 2.0f * fSAMPLE_RATE*C;
-    invperiod = 1.0f / fPERIOD;
-    outvolume = 0.5f;
 
     lfo = new EffectLFO(sample_rate);
 
-    Ppreset = 0;
     setpreset(Ppreset); //this will get done before out is run
     cleanup();
 };
