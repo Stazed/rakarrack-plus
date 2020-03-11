@@ -27,27 +27,32 @@
 #include "AnalogFilter.h"
 
 AnalogFilter::AnalogFilter(unsigned char Ftype, float Ffreq, float Fq,
-                           unsigned char Fstages, double samplerate, float* interpbuf)
+                           unsigned char Fstages, double samplerate, float* interpbuf) :
+    iSAMPLE_RATE((int) samplerate),
+    ifSAMPLE_RATE(samplerate),
+    ismp(interpbuf),
+    x(),
+    y(),
+    oldx(),
+    oldy(),
+    type(Ftype),
+    stages(Fstages),
+    order(0),
+    needsinterpolation(),
+    firsttime(),
+    abovenq(),
+    oldabovenq(),
+    freq(Ffreq),
+    q(Fq),
+    gain(1.0),
+    c(),
+    d(),
+    oldc(),
+    oldd()
 {
-    iSAMPLE_RATE = (int) samplerate;
-    ifSAMPLE_RATE = samplerate;
-
-    stages = Fstages;
-    
-    for (int i = 0; i < 3; i++)
-    {
-        oldc[i] = 0.0;
-        oldd[i] = 0.0;
-        c[i] = 0.0;
-        d[i] = 0.0;
-    }
-    
-    type = Ftype;
-    freq = Ffreq;
-    q = Fq;
-    gain = 1.0;
     if (stages >= MAX_FILTER_STAGES)
         stages = MAX_FILTER_STAGES;
+    
     cleanup();
     firsttime = 0;
     abovenq = 0;
@@ -58,8 +63,6 @@ AnalogFilter::AnalogFilter(unsigned char Ftype, float Ffreq, float Fq,
     outgain = 1.0;
     order = 0;
     needsinterpolation = 0;
-
-    ismp = interpbuf;
 }
 
 AnalogFilter::~AnalogFilter()

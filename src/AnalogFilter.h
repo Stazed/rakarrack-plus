@@ -53,6 +53,11 @@ public:
 
 
 private:
+    
+    unsigned int iSAMPLE_RATE;
+    float ifSAMPLE_RATE;
+    float* ismp;        //buffer for interpolating filter
+    
     struct fstage
     {
         float c1, c2;
@@ -76,9 +81,6 @@ private:
     int abovenq;			//this is 1 if the frequency is above the nyquist
     int oldabovenq;		//if the last time was above nyquist (used to see if it needs interpolation)
 
-    unsigned int iSAMPLE_RATE;
-
-
     float freq;		//Frequency given in Hz
     float q;			//Q factor (resonance or Q factor)
     float gain;		//the gain of the filter (if are shelf/peak) filters
@@ -89,10 +91,6 @@ private:
     float oldc[3], oldd[3];	//old coefficients(used only if some filter paremeters changes very fast, and it needs interpolation)
 
 //    float xd[3], yd[3];	//used if the filter is applied more times - not used
-
-    float* ismp; //buffer for interpolating filter
-
-    float ifSAMPLE_RATE;
 
 };
 
