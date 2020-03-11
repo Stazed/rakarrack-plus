@@ -188,9 +188,20 @@ private:
     class AnalogFilter *lpfl, *lpfr;	//filters
     float* interpbuf; //buffer for filters
 
-    struct {
+    struct filterbank
+    {
         float sfreq, sq,sLP,sBP,sHP, sStg;
         class RBFilter *l, *r;
+        
+        filterbank():
+            sfreq(),
+            sq(),
+            sLP(),
+            sBP(),
+            sHP(),
+            sStg(),
+            l(),
+            r() {}
 
     } filterbank[ECHOTRON_MAXFILTERS];
 

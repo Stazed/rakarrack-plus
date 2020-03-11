@@ -64,19 +64,34 @@ private:
     int Preverse;
     int Pstages;        //filter stages
 
-    struct filterstate {
+    struct filterstate
+    {
         float sinp;
         float cosp;      //sinusoid oscillator state variables
         float ramp;      //frequency oscillator
         float level;
         float lfo;
         float vol;
+        
+        filterstate():
+            sinp(),
+            cosp(),
+            ramp(),
+            level(),
+            lfo(),
+            vol() {}
     } rbandstate[NUM_INF_BANDS], lbandstate[NUM_INF_BANDS];
 
-    struct phasevars {
+    struct phasevars
+    {
         float yn1[MAX_PHASER_STAGES];
         float xn1[MAX_PHASER_STAGES];
         float gain;
+        
+        phasevars():
+            yn1(),
+            xn1(),
+            gain() {}
     } rphaser[NUM_INF_BANDS], lphaser[NUM_INF_BANDS];
     float phaserfb;
     float phaser(phasevars *pstruct, float fxn, int j);

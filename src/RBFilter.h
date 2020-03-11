@@ -50,12 +50,25 @@ public:
 
 private:
 
-    struct fstage {
+    struct fstage
+    {
         float low, high, band, notch;
+        
+        fstage():
+            low(),
+            high(),
+            band(),
+            notch() {}
     } st[MAX_FILTER_STAGES + 1];
 
-    struct parameters {
+    struct parameters
+    {
         float f, q, q_sqrt;
+        
+        parameters():
+            f(),
+            q(),
+            q_sqrt() {}
     } par, ipar;
 
     void singlefilterout (float * smp, fstage & x, parameters & par, uint32_t period);

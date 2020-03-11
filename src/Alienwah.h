@@ -29,8 +29,13 @@
 
 
 
-struct COMPLEXTYPE {
+struct COMPLEXTYPE
+{
     float a, b;
+    
+    COMPLEXTYPE():
+        a(),
+        b() {}
 };
 
 class Alienwah

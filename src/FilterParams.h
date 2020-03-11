@@ -63,10 +63,11 @@ public:
         struct formants
         {
             unsigned char freq, amp, q;	//frequency,amplitude,Q
+            
             formants():
-            freq(0),
-            amp(0),
-            q(0) {}
+                freq(0),
+                amp(0),
+                q(0) {}
         } formants[FF_MAX_FORMANTS];
         
         Pvowels():
@@ -82,7 +83,7 @@ public:
     {
         unsigned char nvowel;	//the vowel from the position
         Psequence():
-        nvowel(0) {}
+            nvowel(0) {}
         
     } Psequence[FF_MAX_SEQUENCE];
 

@@ -59,11 +59,22 @@ public:
 
     float * interpbuf;//buffer for filter
 
-    struct {
+    struct filter
+    {
         //parameters
         int Ptype, Pfreq, Pgain, Pq, Pstages;
         //internal values
         AnalogFilter *l, *r;
+        
+        filter():
+            Ptype(),
+            Pfreq(),
+            Pgain(),
+            Pq(),
+            Pstages(),
+            l(),
+            r() {}
+        
     } filter[MAX_EQ_BANDS];
 
 };
