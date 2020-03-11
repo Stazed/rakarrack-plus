@@ -83,6 +83,14 @@ private:
         float n1;
         float d0;
         float d1;
+        
+        fparams():
+            x1(),
+            y1(),
+            n0(),
+            n1(),
+            d0(),
+            d1() {}
     } vc[8], vcvo[8], ecvc[8], vevo[8], bootstrap[8];
 
     float vibefilter(float data, fparams *ftype, int stage);

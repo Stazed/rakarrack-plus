@@ -88,10 +88,20 @@ private:
     float *tmpl, *tmpr;
     float *tsmpsl, *tsmpsr;
     float *tmpaux;
-    struct fbank {
+    struct fbank
+    {
         float sfreq, sq,speak,gain,oldgain;
         AnalogFilter *l, *r, *aux;
-
+        
+        fbank():
+            sfreq(),
+            sq(),
+            speak(),
+            gain(),
+            oldgain(),
+            l(),
+            r(),
+            aux() {}
     } *filterbank;
 
     AnalogFilter *vhp, *vlp;

@@ -44,19 +44,34 @@ public:
 
     char NombreAcorde[20];
 
-    struct TipoCh {
+    struct TipoCh
+    {
         int tipo;
         int num;
         char Nom[16];
+        
+        TipoCh():
+            tipo(),
+            num(),
+            Nom() {}
     } ChN[34];
 
-    struct NomChord {
+    struct NomChord
+    {
         char Nom[3];
+        
+        NomChord():
+            Nom() {}
     } NC[13];
 
-    struct NomChordExtended {
+    struct NomChordExtended
+    {
         char Nom[3];
         int note;
+        
+        NomChordExtended():
+            Nom(),
+            note() {}
     } NCE[25];
 
 
@@ -75,25 +90,42 @@ private:
 
     int Ch[34][13];
 
-
-    struct Ch3 {
+    struct Ch3
+    {
         int tipo;
         int fund;
         int di1;
         int di2;
         char Nom[10];
+        
+        Ch3():
+            tipo(),
+            fund(),
+            di1(),
+            di2(),
+            Nom() {}
     } Chord3[17];
 
-    struct Ch4 {
+    struct Ch4
+    {
         int tipo;
         int fund;
         int di1;
         int di2;
         int di3;
         char Nom[10];
+        
+        Ch4():
+            tipo(),
+            fund(),
+            di1(),
+            di2(),
+            di3(),
+            Nom() {}
     } Chord4[62];
 
-    struct Ch5 {
+    struct Ch5
+    {
         int tipo;
         int fund;
         int di1;
@@ -101,10 +133,16 @@ private:
         int di3;
         int di4;
         char Nom[16];
+        
+        Ch5():
+            tipo(),
+            fund(),
+            di1(),
+            di2(),
+            di3(),
+            di4(),
+            Nom() {}
     } Chord5[67];
-
-
-
 };
 
 #endif

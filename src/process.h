@@ -533,21 +533,33 @@ public:
 
 
 
-    struct Effects_Names {
+    struct Effects_Names
+    {
         char Nom[24];
         int Pos;
         int Type;
-
+        
+        Effects_Names():
+            Nom(),
+            Pos(),
+            Type() {}
     } efx_names[70];
 
-    struct Effects_Params {
+    struct Effects_Params
+    {
         char Nom[32];
         int Ato;
         int Effect;
+        
+        Effects_Params():
+            Nom(),
+            Ato(),
+            Effect() {}
     } efx_params[500];
 
 
-    struct Preset_Bank_Struct {
+    struct Preset_Bank_Struct
+    {
         char Preset_Name[64];
         char Author[64];
         char Classe[36];
@@ -566,16 +578,45 @@ public:
         int XUserMIDI[128][20];
         int XMIDIrangeMin[128];
         int XMIDIrangeMax[128];
+        
+        Preset_Bank_Struct():
+            Preset_Name(),
+            Author(),
+            Classe(),
+            Type(),
+            ConvoFiname(),
+            cInput_Gain(),
+            cMaster_Volume(),
+            cBalance(),
+            Input_Gain(),
+            Master_Volume(),
+            Balance(),
+            Bypass(),
+            RevFiname(),
+            EchoFiname(),
+            lv(),
+            XUserMIDI(),
+            XMIDIrangeMin(),
+            XMIDIrangeMax() {}
     } Bank[62];
 
 
-    struct MIDI_table {
+    struct MIDI_table
+    {
         int bank;
         int preset;
+        
+        MIDI_table():
+            bank(),
+            preset() {}
     } M_table[128];
 
-    struct Bank_Names {
+    struct Bank_Names
+    {
         char Preset_Name[64];
+        
+        Bank_Names():
+            Preset_Name() {}
     } B_Names[4][62];
 
 
@@ -584,8 +625,12 @@ public:
     snd_seq_t *midi_in, *midi_out;
 
 
-    struct JackPorts {
+    struct JackPorts
+    {
         char name[128];
+        
+        JackPorts():
+            name() {}
     } jack_po[16],jack_poi[16];
 
 
@@ -593,10 +638,16 @@ public:
 
 };
 
-struct list_element {
+struct list_element
+{
     struct list_element *forward;
     struct list_element *backward;
     char *name;
+    
+    list_element():
+        forward(),
+        backward(),
+        name() {}
 };
 
 #endif
