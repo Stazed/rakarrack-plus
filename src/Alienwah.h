@@ -49,12 +49,19 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-
+#endif // LV2
+    
     int Ppreset;
     float outvolume;
 
 private:
+    
+    float fPERIOD;
+    uint32_t PERIOD;
+    
     //Parametrii Alienwah
     int Pvolume;
     int Ppanning;
@@ -76,8 +83,6 @@ private:
     void setdelay (int Pdelay);
     void setphase (int Pphase);
     
-    float fPERIOD;
-    uint32_t PERIOD;
     EffectLFO *lfo;		//lfo-ul Alienwah
     
     //Valorile interne

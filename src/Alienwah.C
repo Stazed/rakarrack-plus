@@ -26,27 +26,41 @@
 #include "Alienwah.h"
 #include <stdio.h>
 
-Alienwah::Alienwah(double sample_rate, uint32_t intermediate_bufsize)
+Alienwah::Alienwah(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(0),
+    outvolume(0.5f),
+    fPERIOD(intermediate_bufsize),      // correct for rakarrack, may be adjusted for lv2
+    PERIOD(intermediate_bufsize),       // correct for rakarrack, may be adjusted for lv2
+    Pvolume(),
+    Ppanning(),
+    Pdepth(),
+    Pfb(),
+    Plrcross(),
+    Pdelay(),
+    Pphase(),
+    oldk(0),
+    oldpdelay(0),
+    lfo(NULL),
+    panning(0.0f),
+    fb(0.0f),
+    depth(0.0f),
+    lrcross(0.0f),
+    phase(0.0f),
+    oldl(),
+    oldr(),
+    oldclfol(),
+    oldclfor(),
+    Fpre(NULL)
 {
     lfo = new EffectLFO(sample_rate);
 
-    Ppreset = 0;
-
-    PERIOD = intermediate_bufsize; // correct for rakarrak, may be adjusted for lv2
-    fPERIOD = intermediate_bufsize; // correct for rakarrak, may be adjusted for lv2
-
-    panning = fb = depth = lrcross = phase = 0.0f;
-    outvolume = 0.5f;
-    oldk = 0;
-    oldpdelay = 0;
-
     setpreset(Ppreset);
     cleanup();
+    
     oldclfol.a = fb;
     oldclfol.b = 0.0;
     oldclfor.a = fb;
     oldclfor.b = 0.0;
-
 };
 
 Alienwah::~Alienwah()
@@ -130,6 +144,7 @@ Alienwah::cleanup()
     oldk = 0;
 }
 
+#ifdef LV2_SUPPORT
 void
 Alienwah::lv2_update_params(uint32_t period)
 {
@@ -137,7 +152,7 @@ Alienwah::lv2_update_params(uint32_t period)
     fPERIOD = period;
     lfo->updateparams(period);
 }
-
+#endif // LV2
 /*
  * Parameter control
  */
