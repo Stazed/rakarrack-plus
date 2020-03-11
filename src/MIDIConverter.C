@@ -70,8 +70,8 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     fftLastPhase(NULL),
     fftSize(),
     fftFrameCount(),
-    fftIn(),
-    fftOut(),
+    fftIn(NULL),
+    fftOut(NULL),
     fftPlan()
 {
     static const char *englishNotes[12] = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
@@ -114,7 +114,6 @@ MIDIConverter::~MIDIConverter()
 }
 
 #ifdef LV2_SUPPORT
-
 void
 MIDIConverter::out(float * efxoutl, float * efxoutr)
 {
