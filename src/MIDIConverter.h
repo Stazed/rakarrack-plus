@@ -59,17 +59,10 @@ public:
     void setTriggerAdjust (int val);
     void setVelAdjust (int val);
     void setOctAdjust(int val);
-    void setGain(int val);
-
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-    void lv2_update_params(uint32_t period);
 
-#ifdef LV2_SUPPORT
-    void update_freqs(float val);
-#endif // LV2_SUPPORT
-    
     int channel;
     int lanota;
     int nota_actual;
@@ -81,7 +74,7 @@ public:
     uint32_t PERIOD;
 
     float VelVal;
-    unsigned char        midi_Note_Message[3];
+    unsigned char  midi_Note_Message[3];
 
 private:
 
@@ -102,19 +95,14 @@ private:
     unsigned int SAMPLE_RATE;
     float fSAMPLE_RATE;
     
-    float Input_Gain;       // lv2 only
-    
-#ifndef LV2_SUPPORT
-public:
-    jack_ringbuffer_t   *m_buffSize;
-    jack_ringbuffer_t   *m_buffMessage;
-    snd_seq_t *port;
-private:
-#endif // LV2_SUPPORT
 #ifdef LV2_SUPPORT
 public:
+    void setGain(int val);
+    void lv2_update_params(uint32_t period);
+    void update_freqs(float val);
     _RKRLV2* plug; // for access to forge_midimessage()
 private:
+    float Input_Gain;
     float FREQS[12];
     float LFREQS[12];
     float VAL_SUM;
@@ -122,10 +110,15 @@ private:
     float old_ir_sum; // -50.0
     float val_il_sum;
     float val_ir_sum;
-#endif // LV2_SUPPORT
-    
+    int Pgain;
+#else // LV2_SUPPORT
+public:
+    jack_ringbuffer_t   *m_buffSize;
+    jack_ringbuffer_t   *m_buffMessage;
+    snd_seq_t *port;
+private:
+#endif
     //Parametrii
-    int Pgain;              // lv2 only
     int Pmidi;
     int Poctave;
     int Ppanic;

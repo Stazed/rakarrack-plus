@@ -41,9 +41,9 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     blockSize(),
     SAMPLE_RATE(sample_rate),
     fSAMPLE_RATE((float) sample_rate),
-    Input_Gain(0.50f),
 #ifdef LV2_SUPPORT
     plug(NULL),
+    Input_Gain(0.50f),
     FREQS(),
     LFREQS(),
     VAL_SUM(-50.0f),
@@ -51,6 +51,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     old_ir_sum(-50.0f),
     val_il_sum(-50.0f),
     val_ir_sum(-50.0f),
+    Pgain(64),
 #else
     /* Jack */
     m_buffSize(NULL),
@@ -58,7 +59,6 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     /* Alsa */
     port(NULL),
 #endif // LV2_SUPPORT
-    Pgain(64),              // lv2 only
     Pmidi(),
     Poctave(),
     Ppanic(),
@@ -171,11 +171,13 @@ MIDIConverter::cleanup()
     // nothing
 }
 
+#ifdef LV2_SUPPORT
 void
 MIDIConverter::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2_SUPPORT
 
 void
 MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float *lfreqs)
@@ -575,11 +577,13 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
 #endif // LV2_SUPPORT    
 }
 
+#ifdef LV2_SUPPORT
 void
 MIDIConverter::setGain(int value)
 {
-    Input_Gain = (float) ((value + 50) / 100.0); // lv2 only
+    Input_Gain = (float) ((value + 50) / 100.0);
 }
+#endif
 
 void
 MIDIConverter::panic()
@@ -623,8 +627,10 @@ MIDIConverter::changepar(int npar, int value)
     switch (npar)
     {
     case 0:
+#ifdef LV2_SUPPORT
         Pgain = value; // lv2 only
         setGain(value);
+#endif
         break;
     case 1:
         Ptrigger = value;
@@ -658,7 +664,11 @@ MIDIConverter::getpar(int npar)
     switch (npar)
     {
     case 0:
+#ifdef LV2_SUPPORT
         return (Pgain); // lv2 only
+#else // LV2_SUPPORT
+        return 0;
+#endif
         break;
     case 1:
         return (Ptrigger);
