@@ -267,6 +267,7 @@ Analog_Phaser::cleanup()
     };
 };
 
+#ifdef LV2_SUPPORT
 void
 Analog_Phaser::lv2_update_params(uint32_t period)
 {
@@ -275,6 +276,7 @@ Analog_Phaser::lv2_update_params(uint32_t period)
     lfo->updateparams(period);
     invperiod = 1.0f / fPERIOD;
 }
+#endif // LV2
 
 /*
  * Parameter control
