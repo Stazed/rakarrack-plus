@@ -38,11 +38,52 @@
 
 
 
-CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize)
+CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(0),
+    outvolume(0.5f),
+    level(),
+    lowl(NULL),
+    lowr(NULL),
+    midll(NULL),
+    midlr(NULL),
+    midhl(NULL),
+    midhr(NULL),
+    highl(NULL),
+    highr(NULL),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(50),
+    Plevel(),
+    PLratio(),
+    PMLratio(),
+    PMHratio(),
+    PHratio(),
+    PLthres(),
+    PMLthres(),
+    PMHthres(),
+    PHthres(),
+    Cross1(),
+    Cross2(),
+    Cross3(),
+    lpf1l(NULL),
+    lpf1r(NULL),
+    hpf1l(NULL),
+    hpf1r(NULL),
+    lpf2l(NULL),
+    lpf2r(NULL),
+    hpf2l(NULL),
+    hpf2r(NULL),
+    lpf3l(NULL),
+    lpf3r(NULL),
+    hpf3l(NULL),
+    hpf3r(NULL),
+    interpbuf(NULL),
+    CL(NULL),
+    CML(NULL),
+    CMH(NULL),
+    CH(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
     initialize();
 
     CL = new Compressor(sample_rate, PERIOD);
@@ -54,11 +95,6 @@ CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize)
     CML->setpreset(0, 6);
     CMH->setpreset(0, 6);
     CH->setpreset(0, 6);
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    outvolume = 0.5f;
 
     setpreset(Ppreset);
     cleanup();
