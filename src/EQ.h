@@ -44,7 +44,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(eq_type type, uint32_t period);
+#endif // LV2
+    
     void initialize(eq_type type);
     void clear_initialize();
     float getfreqresponse (float freq);

@@ -27,17 +27,16 @@
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ(eq_type type, double samplerate, uint32_t intermediate_bufsize)
+EQ::EQ(eq_type type, double samplerate, uint32_t intermediate_bufsize) :
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(samplerate),
+    Ppreset(0),
+    Pvolume(50),
+    outvolume(0.7f),
+    interpbuf(NULL),
+    filter()
 {
-    PERIOD = intermediate_bufsize;
-    fSAMPLE_RATE = samplerate;
-
     initialize(type);
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    outvolume = 0.7f;
 
     setpreset(Ppreset);
     cleanup();
@@ -61,6 +60,7 @@ EQ::cleanup()
     }
 }
 
+#ifdef LV2_SUPPORT
 void
 EQ::lv2_update_params(eq_type type, uint32_t period)
 {
@@ -75,6 +75,7 @@ EQ::lv2_update_params(eq_type type, uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 EQ::initialize(eq_type type)
