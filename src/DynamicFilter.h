@@ -39,12 +39,18 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
-    void lv2_update_params(uint32_t period);
 
+#ifdef LV2_SUPPORT
+    void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     int Ppreset;
     float outvolume; 
 
 private:
+    
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
     //Parametrii DynamicFilter
     int Pvolume;
     int Ppanning;
@@ -67,8 +73,6 @@ private:
     float panning, depth, ampsns, ampsmooth;
     float ms1, ms2, ms3, ms4;	//mean squares
     
-    uint32_t PERIOD;
-    double fSAMPLE_RATE;
     EffectLFO* lfo;		//lfo-ul DynamicFilter
 
     class Filter *filterl, *filterr;

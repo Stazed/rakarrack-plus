@@ -121,6 +121,7 @@ DynamicFilter::cleanup()
     ms4 = 0.0;
 }
 
+#ifdef LV2_SUPPORT
 void
 DynamicFilter::lv2_update_params(uint32_t period)
 {
@@ -138,6 +139,7 @@ DynamicFilter::lv2_update_params(uint32_t period)
     
     lfo->updateparams(period);
 }
+#endif // LV2
 
 /*
  * Parameter control
