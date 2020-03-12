@@ -44,8 +44,11 @@ public:
     void setpreset (int dgui,int npreset);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-
+#endif // LV2
+    
     // Compressor
 
     int tatt;			// attack time  (ms)
@@ -62,6 +65,9 @@ public:
 
 private:
 
+    float cSAMPLE_RATE;
+    uint32_t PERIOD;
+    
     float rvolume;
     float lvolume;
     float rvolume_db;
@@ -99,9 +105,6 @@ private:
     float rpeak;
 
     class FPreset *Fpre;
-
-    float cSAMPLE_RATE;
-    uint32_t PERIOD;
 
 };
 

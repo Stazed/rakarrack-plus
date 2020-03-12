@@ -37,7 +37,11 @@ public:
     HarmEnhancer(float *harmonics, float hfreq, float lfreq, float gain, double sample_rate, uint32_t intermediate_bufsize);
     ~HarmEnhancer();
     void cleanup();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     void chebpc(float c[], float d[]);

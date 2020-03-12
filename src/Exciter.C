@@ -61,12 +61,14 @@ Exciter::cleanup()
     harm->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 Exciter::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     harm->lv2_update_params(period);
 }
+#endif // LV2
 
 /*
  * Effect output

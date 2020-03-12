@@ -94,6 +94,7 @@ Valve::cleanup()
     itmr = 0.0f;
 }
 
+#ifdef LV2_SUPPORT
 void
 Valve::lv2_update_params(uint32_t period)
 {
@@ -114,6 +115,7 @@ Valve::lv2_update_params(uint32_t period)
 
     harm->lv2_update_params(period);
 }
+#endif // LV2
 
 void
 Valve::initialize()

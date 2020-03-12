@@ -91,11 +91,13 @@ Compressor::cleanup()
     clipping = 0;
 }
 
+#ifdef LV2_SUPPORT
 void
 Compressor::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2
 
 void
 Compressor::changepar(int np, int value)

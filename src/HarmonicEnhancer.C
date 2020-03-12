@@ -68,6 +68,7 @@ HarmEnhancer::cleanup()
     limiter->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 HarmEnhancer::lv2_update_params(uint32_t period)
 {
@@ -76,6 +77,7 @@ HarmEnhancer::lv2_update_params(uint32_t period)
     initialize();
     limiter->lv2_update_params(period);
 }
+#endif // LV2
 
 void
 HarmEnhancer::initialize()
