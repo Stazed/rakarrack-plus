@@ -6,6 +6,46 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:tremolo>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
+        rdfs:label "Tremolo" ;
+        lv2:port [
+                lv2:symbol "DRYWET" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "PAN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "TEMPO" ;
+                pset:value 126.0
+        ], [
+                lv2:symbol "LR_DELAY" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "LRCr" ;
+                pset:value 30.0
+        ], [
+                lv2:symbol "FEEDBACK" ;
+                pset:value 59.0
+        ], [
+                lv2:symbol "DAMP" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "ARP" ;
+                pset:value 127.0
+        ], [
+                lv2:symbol "HARM" ;
+                pset:value 1.0
+        ], [
+                lv2:symbol "PATTERN" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "SUBD" ;
+                pset:value 3.0
+        ] ;
+	.
+
 <https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_1>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;

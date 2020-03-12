@@ -176,6 +176,12 @@
         ] ;
 	.
 
+<https://github.com/Stazed/rakarrack-plus#Arpie:preset:tremolo>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
+        rdfs:seeAlso <arpie_presets.ttl> .
+
+
 <https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_1>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;

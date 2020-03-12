@@ -116,11 +116,13 @@ Arpie::cleanup()
     harmonic = 1;
 }
 
+#ifdef LV2_SUPPORT
 void
 Arpie::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2
 
 /*
  * Initialize the delays
