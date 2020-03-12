@@ -98,6 +98,7 @@ CompBand::cleanup()
     CH->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 CompBand::lv2_update_params(uint32_t period)
 {
@@ -120,6 +121,7 @@ CompBand::lv2_update_params(uint32_t period)
     CMH->lv2_update_params(period);
     CH->lv2_update_params(period);
 }
+#endif // LV2
 
 void
 CompBand::initialize()

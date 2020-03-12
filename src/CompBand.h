@@ -44,7 +44,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
 
@@ -72,6 +76,8 @@ private:
     void setCross2 (int value);
     void setCross3 (int value);
 
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
 
     //Parametrii
     int Pvolume;	//Volumul or E/R
@@ -99,8 +105,6 @@ private:
 
     Compressor *CL,*CML,*CMH,*CH;
     
-    uint32_t PERIOD;
-    double fSAMPLE_RATE;
     class FPreset *Fpre;
 
 };
