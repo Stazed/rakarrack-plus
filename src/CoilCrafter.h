@@ -36,14 +36,18 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-
+#endif // LV2
     int Ppreset;
 
     float outvolume;
 
 private:
 
+    uint32_t PERIOD;
+    
     void setvolume (int value);
     void sethpf (int value);
     void setfreq1();
@@ -66,8 +70,6 @@ private:
     float rm[10];
     float freq1,q1,freq2,q2;
     float att;
-    
-    uint32_t PERIOD;
 
     class HarmEnhancer *harm;
     class AnalogFilter *RB1l, *RB1r;

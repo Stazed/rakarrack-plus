@@ -25,17 +25,36 @@
 #include <math.h>
 #include "CoilCrafter.h"
 
-CoilCrafter::CoilCrafter(double sample_rate, uint32_t intermediate_bufsize)
+CoilCrafter::CoilCrafter(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(0),
+    outvolume(1.5f),
+    PERIOD(intermediate_bufsize),   // correct for rakarrack, may be adjusted for lv2
+    Pvolume(50),
+    Ppo(),
+    Ppd(),
+    Ptone(20),
+    Pq1(),
+    Pfreq1(),
+    Pq2(),
+    Pfreq2(),
+    Pmode(),
+    tfreqs(),
+    tqs(),
+    rm(),
+    freq1(),
+    q1(),
+    freq2(),
+    q2(),
+    att(16.0f * powf(PI, sample_rate / 44100.0f)),
+    harm(NULL),
+    RB1l(NULL),
+    RB1r(NULL),
+    RB2l(NULL),
+    RB2r(NULL),
+    interpbuf(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted for lv2
-
     //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ptone = 20;
-    att = 16.0f * powf(PI, sample_rate / 44100.0f);
-
-    outvolume = 1.5f;
 
     tfreqs[0] = 4000.0f;
     tfreqs[1] = 4400.0f;
@@ -107,12 +126,14 @@ CoilCrafter::cleanup()
     RB2r->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 CoilCrafter::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     harm->lv2_update_params(period);
 }
+#endif // LV2
 
 /*
  * Effect output
