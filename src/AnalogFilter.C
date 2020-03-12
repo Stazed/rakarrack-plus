@@ -60,7 +60,7 @@ AnalogFilter::AnalogFilter(unsigned char Ftype, float Ffreq, float Fq,
     setfreq_and_q(Ffreq, Fq);
     firsttime = 1;
     d[0] = 0; //this is not used
-    outgain = 1.0;
+    outgain = 1.0;                  // Base class Filter_.h
     order = 0;
     needsinterpolation = 0;
 }

@@ -26,37 +26,60 @@
 #include <math.h>
 #include "Arpie.h"
 
-Arpie::Arpie(double sample_rate, uint32_t intermediate_bufsize)
+Arpie::Arpie(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(0),
+    outvolume(0.5f),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    Pvolume(50),
+    Ppanning(64),
+    Pdelay(60),
+    Plrdelay(100),
+    Plrcross(100),
+    Pfb(40),
+    Phidamp(60),
+    Preverse(),
+    Ppattern(),
+    Pharms(3),
+    Psubdiv(1),
+    dl(),
+    dr(),
+    delay(),
+    lrdelay(0),
+    kl(),
+    kr(),
+    rvkl(),
+    rvkr(),
+    rvfl(),
+    rvfr(),
+    maxx_delay(),
+    fade(),
+    harmonic(1),
+    envcnt(0),
+    invattack(),
+    subdiv(Psubdiv + 1),
+    pattern(NULL),
+    panning(),
+    lrcross(),
+    fb(),
+    hidamp(),
+    reverse(),
+    ldelay(NULL),
+    rdelay(NULL),
+    oldl(),
+    oldr(),
+    Srate_Attack_Coeff(1.0f / (fSAMPLE_RATE * ATTACK)),
+    envattack(),
+    envswell(),
+    Fpre(NULL)
 {
     uint32_t SAMPLE_RATE = sample_rate;
-    fSAMPLE_RATE = sample_rate;
-    PERIOD = intermediate_bufsize;
 
     //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 64;
-    Pdelay = 60;
-    Plrdelay = 100;
-    Plrcross = 100;
-    Pfb = 40;
-    Phidamp = 60;
-    Pharms = 3;
-    Psubdiv = 1;
-    subdiv = Psubdiv + 1;
-
-    ldelay = NULL;
-    rdelay = NULL;
-    lrdelay = 0;
-    harmonic = 1;
-    Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
     invattack = SAMPLE_RATE / 15;
     envattack = 1.0f / (float) invattack;
-    envcnt = 0;
     maxx_delay = SAMPLE_RATE * MAX_DELAY;
     fade = SAMPLE_RATE / 10; //200ms fade time available
-
-    outvolume = 0.5f;
 
     ldelay = new float[maxx_delay];
     rdelay = new float[maxx_delay];

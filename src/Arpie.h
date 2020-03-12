@@ -43,6 +43,10 @@ public:
     float outvolume;
 
 private:
+    
+    float fSAMPLE_RATE;
+    uint32_t PERIOD;
+    
     //Parametrii
     int Pvolume;	//Volumul or E/R
     int Ppanning;	//Panning
@@ -82,9 +86,6 @@ private:
     float  Srate_Attack_Coeff, envattack, envswell;
 
     class FPreset *Fpre;
-
-    float fSAMPLE_RATE;
-    uint32_t PERIOD;
 };
 
 
