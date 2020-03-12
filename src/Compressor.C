@@ -37,42 +37,59 @@
 #include "Compressor.h"
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
-Compressor::Compressor(double samplerate, uint32_t intermediate_bufsize)
+Compressor::Compressor(double samplerate, uint32_t intermediate_bufsize) :
+    tatt(20),
+    trel(50),
+    tratio(4),
+    toutput(-10),
+    tthreshold(-24),
+    a_out(1),
+    stereo(),
+    tknee(30),
+    peak(),
+    clipping(),
+    limit(),
+    cSAMPLE_RATE(1.0 / samplerate),
+    PERIOD(intermediate_bufsize),       // correct for rakarrack, may be adjusted by lv2
+    rvolume(),
+    lvolume(),
+    rvolume_db(),
+    lvolume_db(),
+    thres_db(),
+    knee(),
+    thres_mx(),
+    kpct(),
+    ratio(1.0),
+    kratio(),
+    eratio(),
+    makeup(),
+    makeuplin(),
+    outlevel(),
+    att(),
+    attr(1.0f),
+    attl(1.0f),
+    rel(),
+    relr(1.0f),
+    rell(1.0f),
+    relcnst(),
+    attconst(),
+    ltimer(),
+    rtimer(),
+    hold((int) (samplerate * 0.0125)),  //  12.5ms
+    rgain(1.0f),
+    rgain_old(1.0f),
+    lgain(1.0f),
+    lgain_old(1.0f),
+    lgain_t(1.0f),
+    rgain_t(1.0f),
+    coeff_kratio(),
+    coeff_ratio(),
+    coeff_knee(),
+    coeff_kk(),
+    lpeak(),
+    rpeak(),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-
-    rvolume = 0.0f;
-    rvolume_db = 0.0f;
-    lvolume = 0.0f;
-    lvolume_db = 0.0f;
-    tthreshold = -24;
-    tratio = 4;
-    toutput = -10;
-    tatt = 20;
-    trel = 50;
-    a_out = 1;
-    stereo = 0;
-    tknee = 30;
-    rgain = 1.0f;
-    rgain_old = 1.0f;
-    lgain = 1.0f;
-    lgain_old = 1.0f;
-    lgain_t = 1.0f;
-    rgain_t = 1.0f;
-    ratio = 1.0;
-    kpct = 0.0f;
-    peak = 0;
-    lpeak = 0.0f;
-    rpeak = 0.0f;
-    rell = relr = attr = attl = 1.0f;
-
-    ltimer = rtimer = 0;
-    hold = (int) (samplerate * 0.0125); //12.5ms
-    clipping = 0;
-    limit = 0;
-
-    cSAMPLE_RATE = 1.0 / samplerate;
-
     setpreset(0, 0);
 }
 
