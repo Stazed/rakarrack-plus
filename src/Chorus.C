@@ -27,15 +27,46 @@
 #include <stdio.h>
 #include "FPreset.h"
 
-Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize)
+Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(0),
+    outvolume(0.5f),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    fPERIOD(intermediate_bufsize),
+    lfo(NULL),
+    Pvolume(),
+    Ppanning(),
+    Pdepth(),
+    Pdelay(),
+    Pfb(),
+    Plrcross(),
+    Pflangemode(0),
+    Poutsub(),
+    maxdelay(lrintf(MAX_CHORUS_DELAY / 1000.0 * (int) sample_rate)),
+    dlk(),
+    drk(),
+    dlhi(),
+    dlhi2(),
+    awesome_mode(0),
+    depth(),
+    delay(),
+    fb(),
+    lrcross(),
+    panning(),
+    oldr(),
+    oldl(),
+    dl1(),
+    dl2(),
+    dr1(),
+    dr2(),
+    lfol(),
+    lfor(),
+    delayl(NULL),
+    delayr(NULL),
+    dllo(),
+    mdel(),
+    Fpre(NULL)
 {
-    fSAMPLE_RATE = sample_rate;
-    PERIOD = intermediate_bufsize; //correct for rakarrack, may be adjusted for lv2
-    fPERIOD = intermediate_bufsize; //correct for rakarrack, may be adjusted for lv2
-
-    dlk = 0;
-    drk = 0;
-    maxdelay = lrintf(MAX_CHORUS_DELAY / 1000.0 * (int) sample_rate);
     delayl = new float[maxdelay];
     delayr = new float[maxdelay];
     lfo = new EffectLFO(sample_rate);
@@ -47,17 +78,6 @@ Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize)
     rdelay -> set_averaging(0.005f);
     ldelay->set_mix(0.5f);
     rdelay->set_mix(0.5f);
-
-    Ppreset = 0;
-    Pflangemode = 0;
-    delay = 0.0f;
-    depth = 0.0f;
-
-    oldr = 0.0f;
-    oldl = 0.0f;
-    awesome_mode = 0;
-
-    outvolume = 0.5f;
 
     lfo->effectlfoout(&lfol, &lfor);
     dl2 = getdelay(lfol);
@@ -218,6 +238,7 @@ Chorus::cleanup()
     }
 }
 
+#ifdef LV2_SUPPORT
 void
 Chorus::lv2_update_params(uint32_t period)
 {
@@ -225,6 +246,7 @@ Chorus::lv2_update_params(uint32_t period)
     fPERIOD = period;
     lfo->updateparams(period);
 }
+#endif // 0
 
 /*
  * Parameter control

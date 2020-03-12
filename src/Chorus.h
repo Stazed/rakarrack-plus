@@ -38,12 +38,20 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-
+#endif // LV2
+    
     int Ppreset;
     float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
 
 private:
+    
+    float fSAMPLE_RATE;
+    uint32_t PERIOD;
+    float fPERIOD;
+    
     //Parametrii Chorus
     EffectLFO* lfo;		//lfo-ul chorus
     int Pvolume;
@@ -77,10 +85,6 @@ private:
 
     class FPreset *Fpre;
     class delayline *ldelay, *rdelay;
-
-    float fSAMPLE_RATE;
-    uint32_t PERIOD;
-    float fPERIOD;
 
 };
 
