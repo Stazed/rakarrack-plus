@@ -28,37 +28,51 @@
 #include "Distorsion.h"
 #include "FPreset.h"
 
-Distorsion::Distorsion(int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize)
+Distorsion::Distorsion(int wave_res, int wave_upq,
+                       int wave_dnq, double samplerate,
+                       uint32_t intermediate_bufsize) :
+    Ppreset(),
+    octoutl(NULL),
+    octoutr(NULL),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(samplerate),
+    WAVE_RES(wave_res),
+    WAVE_UPQ(wave_upq),
+    WAVE_DNQ(wave_dnq),
+    Pvolume(50),
+    Ppanning(),
+    Plrcross(40),
+    Pdrive(90),
+    Plevel(64),
+    Ptype(),
+    Pnegate(),
+    Plpf(127),
+    Phpf(),
+    Pstereo(),
+    Pprefiltering(),
+    Poctave(),
+    panning(),
+    lrcross(),
+    octave_memoryl(-1.0),
+    togglel(1.0),
+    octave_memoryr(-1.0),
+    toggler(1.0),
+    octmix(),
+    lpfl(NULL),
+    lpfr(NULL),
+    hpfl(NULL),
+    hpfr(NULL),
+    blockDCl(NULL),
+    blockDCr(NULL),
+    DCl(NULL),
+    DCr(NULL),
+    dwshapel(NULL),
+    dwshaper(NULL),
+    Fpre(NULL),
+    interpbuf(NULL)
 {
-    PERIOD = intermediate_bufsize;
-    fSAMPLE_RATE = samplerate;
-    WAVE_RES = wave_res;
-    WAVE_UPQ = wave_upq;
-    WAVE_DNQ = wave_dnq;
-
     initialize();
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 0;
-    Plrcross = 40;
-    Pdrive = 90;
-    Plevel = 64;
-    Ptype = 0;
-    Pnegate = 0;
-    Plpf = 127;
-    Phpf = 0;
-    Pstereo = 0;
-    Pprefiltering = 0;
-    Poctave = 0;
-    togglel = 1.0;
-    octave_memoryl = -1.0;
-    toggler = 1.0;
-    octave_memoryr = -1.0;
-    octmix = 0.0;
-    panning = lrcross = 0.0f;
-    outvolume = 0.5f;
 
     setpreset(0, Ppreset);
     cleanup();
