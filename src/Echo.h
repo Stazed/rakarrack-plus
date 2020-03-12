@@ -39,7 +39,10 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
     
     int Ppreset;
     float outvolume;
@@ -47,6 +50,8 @@ public:
     void Tempo2Delay(int delay);
 
 private:
+    
+    uint32_t PERIOD;
     //Parametrii
     int Pvolume;	//Volumul or E/R
     int Ppanning;	//Panning
@@ -80,8 +85,6 @@ private:
     float oldl, oldr;		//pt. lpf
     float panning, lrcross, fb, hidamp, reverse, ireverse;
     float  Srate_Attack_Coeff;
-    
-    uint32_t PERIOD;
     
     class FPreset *Fpre;
 };

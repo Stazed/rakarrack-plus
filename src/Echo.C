@@ -77,11 +77,13 @@ Echo::cleanup()
     oldr = 0.0;
 }
 
+#ifdef LV2_SUPPORT
 void
 Echo::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2
 
 /*
  * Initialize the delays
