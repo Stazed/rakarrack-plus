@@ -43,11 +43,18 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-
+#endif // LV2
+    
     int Ppreset;
 
 private:
+    
+    float fSAMPLE_RATE;
+    uint32_t PERIOD;
+    
     void setvolume(int value);
     //Parameters
     int Pwetdry;		// 0 //Wet/Dry mix.  Range -64 to 64
@@ -92,8 +99,6 @@ private:
     delayline *ldelayline0, *rdelayline0, *ldelayline1, *rdelayline1;
     class FPreset *Fpre;
 
-    float fSAMPLE_RATE;
-    uint32_t PERIOD;
     EffectLFO *lfo;		//lfo Flanger
 
 };

@@ -131,12 +131,14 @@ Dflange::cleanup()
     oldl = oldr = 0.0f;
 }
 
+#ifdef LV2_SUPPORT
 void
 Dflange::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     lfo->updateparams(period);
 }
+#endif // LV2
 
 /*
  * Effect output
