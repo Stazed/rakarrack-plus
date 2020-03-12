@@ -85,6 +85,7 @@ Distorsion::cleanup()
     DCr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 Distorsion::lv2_update_params(uint32_t period)
 {
@@ -99,6 +100,7 @@ Distorsion::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 /*
  * Apply the filters
