@@ -32,12 +32,74 @@
 #include <math.h>
 #include "Dual_Flange.h"
 
-Dflange::Dflange(double sample_rate, uint32_t intermediate_bufsize)
+Dflange::Dflange(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    Pwetdry(),
+    Ppanning(),
+    Plrcross(),
+    Pdepth(),
+    Pwidth(),
+    Poffset(),
+    Pfb(),
+    Phidamp(),
+    Psubtract(),
+    Pzero(),
+    Pintense(),
+    wet(0.5f),
+    dry(0.5f),
+    lpan(1.0f),
+    rpan(1.0f),
+    flrcross(0.5f),
+    frlcross(0.5f),
+    fdepth(50),
+    fwidth(800),
+    foffset(),
+    ffb(),
+    fhidamp(1.0f),
+    fsubtract(0.5f),
+    logmax(logf(1000.0f) / logf(2.0f)),
+    maxx_delay((int) sample_rate * 0.055f),
+    kl(),
+    kr(),
+    zl(),
+    zr(),
+    zcenter((int) fSAMPLE_RATE / floorf(0.5f * (fdepth + fwidth))),
+    l(),
+    r(),
+    ldl(),
+    rdl(),
+    zdr(),
+    zdl(),
+    rflange0(),
+    rflange1(),
+    lflange0(),
+    lflange1(),
+    oldrflange0(),
+    oldrflange1(),
+    oldlflange0(),
+    oldlflange1(),
+    period_const(),
+    base(7.0f),         // sets curve of modulation to frequency relationship
+    ibase(1.0f / base),
+    ldelay(NULL),
+    rdelay(NULL),
+    zldelay(NULL),
+    zrdelay(NULL),
+    oldl(),
+    oldr(),
+    rsA(),
+    rsB(),
+    lsA(),
+    lsB(),
+    ldelayline0(NULL),
+    rdelayline0(NULL),
+    ldelayline1(NULL),
+    rdelayline1(NULL),
+    Fpre(NULL),
+    lfo(NULL)
 {
-    fSAMPLE_RATE = sample_rate;
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted for lv2
-
-    maxx_delay = (int) sample_rate * 0.055f;
     ldelay = new float[maxx_delay];
     rdelay = new float[maxx_delay];
     zldelay = new float[maxx_delay];
@@ -55,30 +117,6 @@ Dflange::Dflange(double sample_rate, uint32_t intermediate_bufsize)
     rdelayline1 -> set_averaging(0.05f);
     ldelayline1->set_mix(0.5f);
     rdelayline1->set_mix(0.5f);
-
-    fsubtract = 0.5f;
-    fhidamp = 1.0f;
-    fwidth = 800;
-    fdepth = 50;
-    zcenter = (int) fSAMPLE_RATE / floorf(0.5f * (fdepth + fwidth));
-    base = 7.0f; //sets curve of modulation to frequency relationship
-    ibase = 1.0f / base;
-    zdr = zdl = 0.0f;
-    dry = wet = 0.5f;
-    lpan = rpan = 1.0f;
-    flrcross = frlcross = 0.5f;
-    foffset = ffb = 0.0f;
-
-    //default values
-    Ppreset = 0;
-    Pintense = 0;
-    Pzero = 0;
-    Psubtract = 0;
-    rsA = 0.0f;
-    rsB = 0.0f;
-    lsA = 0.0f;
-    lsB = 0.0f;
-    logmax = logf(1000.0f) / logf(2.0f);
 
     lfo = new EffectLFO(sample_rate);
     setpreset(Ppreset);
