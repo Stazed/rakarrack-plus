@@ -32,6 +32,7 @@
 class Filter_
 {
 public:
+    Filter_() {outgain = 0.0;};
     virtual ~ Filter_ ()  {};
     virtual void filterout (float * /* smp */, uint32_t /* period */) { };
     virtual void setfreq (float /* frequency */) {};
