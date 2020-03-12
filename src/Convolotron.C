@@ -26,37 +26,60 @@
 #include <math.h>
 #include "Convolotron.h"
 
-Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize)
+Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize) :
+    Ppreset(0),
+    outvolume(0.5f),
+    Filename(),
+    SAMPLE_RATE((unsigned int) sample_rate),
+    fSAMPLE_RATE((float) sample_rate),
+    nSAMPLE_RATE(),
+    nfSAMPLE_RATE(),
+    PERIOD(intermediate_bufsize),
+    nPERIOD(),
+    fPERIOD(),
+    Pvolume(50),
+    Ppanning(64),
+    Plrcross(100),
+    Phidamp(60),
+    Plevel(20),
+    Psafe(1),
+    Plength(50),
+    Puser(),
+    Filenum(),
+    Pfb(),
+    offset(),
+    maxx_size(),
+    maxx_read(),
+    real_len(),
+    length(),
+    DS_state(),
+    u_up(),
+    u_down(),
+    lpanning(((float) Ppanning + 0.5f) / 127.0f),
+    rpanning(1.0f - lpanning),
+    hidamp(1.0f - (float) Phidamp / 127.1f),
+    alpha_hidamp(1.0f - hidamp),
+    convlength(.5f),
+    oldl(),
+    rbuf(NULL),
+    buf(NULL),
+    lxn(NULL),
+    templ(NULL),
+    tempr(NULL),
+    level(dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f)),
+    fb(),
+    feedback(),
+    levpanl(lpanning * level * 2.0f),
+    levpanr(rpanning * level * 2.0f),
+    infile(NULL),
+    sfinfo(),
+    M_Resample(NULL),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    Fpre(NULL),
+    impulse()
 {
-    SAMPLE_RATE = (unsigned int) sample_rate;
-    fSAMPLE_RATE = (float) sample_rate;
-    PERIOD = intermediate_bufsize;
-
     //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 64;
-    Plrcross = 100;
-    Psafe = 1;
-    Phidamp = 60;
-    Plevel = 20;
-    Filenum = 0;
-    Plength = 50;
-    Puser = 0;
-    Pfb = 0;
-    real_len = 0;
-    convlength = .5f;
-    fb = 0.0f;
-    feedback = 0.0f;
-    outvolume = 0.5f;
-    lpanning = ((float) Ppanning + 0.5f) / 127.0f;
-    rpanning = 1.0f - lpanning;
-    level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
-    levpanl = lpanning * level * 2.0f;
-    levpanr = rpanning * level * 2.0f;
-    hidamp = 1.0f - (float) Phidamp / 127.1f;
-    alpha_hidamp = 1.0f - hidamp;
-
     adjust(DS, PERIOD);
 
     initialize();
