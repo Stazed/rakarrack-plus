@@ -30,26 +30,46 @@
 #include <math.h>
 #include "Echo.h"
 
-Echo::Echo(double samplerate, uint32_t intermediate_bufsize)
+Echo::Echo(double samplerate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    Pvolume(50),
+    Ppanning(64),
+    Pdelay(60),
+    Plrdelay(100),
+    Plrcross(100),
+    Pfb(40),
+    Phidamp(60),
+    Preverse(),
+    Pdirect(),
+    dl(),
+    dr(),
+    delay(),
+    lrdelay(),
+    kl(),
+    kr(),
+    rvkl(),
+    rvkr(),
+    rvfl(),
+    rvfr(),
+    maxx_delay(samplerate * MAX_DELAY),
+    fade(samplerate / 5),               //  1/5 SR fade time available
+    ldelay(NULL),
+    rdelay(NULL),
+    ltime(),
+    rtime(),
+    oldl(),
+    oldr(),
+    panning(),
+    lrcross(),
+    fb(),
+    hidamp(),
+    reverse(),
+    ireverse(),
+    Srate_Attack_Coeff(1.0f / (samplerate * ATTACK)),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 64;
-    Pdelay = 60;
-    Plrdelay = 100;
-    Plrcross = 100;
-    Pfb = 40;
-    Phidamp = 60;
-    outvolume = 0.5f;
-
-    lrdelay = 0;
-    Srate_Attack_Coeff = 1.0f / (samplerate * ATTACK);
-    maxx_delay = samplerate * MAX_DELAY;
-    fade = samplerate / 5; //1/5 SR fade time available
-
     ldelay = new delayline(2.0f, 1, samplerate);
     rdelay = new delayline(2.0f, 1, samplerate);
 
