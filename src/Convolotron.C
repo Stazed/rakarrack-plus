@@ -109,6 +109,7 @@ Convolotron::cleanup()
     oldl = 0.0f;
 }
 
+#ifdef LV2_SUPPORT
 void
 Convolotron::lv2_update_params(uint32_t period)
 {
@@ -125,6 +126,7 @@ Convolotron::lv2_update_params(uint32_t period)
 
     adjust(DS_state, period);
 }
+#endif // LV2
 
 void
 Convolotron::initialize()

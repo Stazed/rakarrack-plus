@@ -38,7 +38,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     int setfile (int value);
@@ -52,6 +56,16 @@ public:
 
 
 private:
+    
+    unsigned int SAMPLE_RATE;
+    float fSAMPLE_RATE;
+    int nSAMPLE_RATE;
+    float nfSAMPLE_RATE;
+    
+    uint32_t PERIOD;
+    int nPERIOD;
+    float fPERIOD;
+    
     //Parametrii
     int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
     int Ppanning;	//Panning
@@ -72,18 +86,8 @@ private:
     int offset;
     int maxx_size,maxx_read,real_len,length;
     int DS_state;
-    int nPERIOD;
-    int nSAMPLE_RATE;
-
     double u_up;
     double u_down;
-    float nfSAMPLE_RATE;
-    unsigned int SAMPLE_RATE;
-    float fSAMPLE_RATE;
-    float fPERIOD;
-    uint32_t PERIOD;
-
-
     float lpanning, rpanning, hidamp, alpha_hidamp, convlength, oldl;
     float *rbuf, *buf, *lxn;
     float *templ, *tempr;
