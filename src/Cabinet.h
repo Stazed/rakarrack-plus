@@ -36,8 +36,11 @@ public:
     int Cabinet_Preset;
     void changepar(int i, int val);
     int getpar(int i);
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-
+#endif // LV2
+    
 private:
     EQ* eq;
 };
