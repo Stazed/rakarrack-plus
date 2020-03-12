@@ -26,18 +26,33 @@
 #include "DynamicFilter.h"
 #include <stdio.h>
 
-DynamicFilter::DynamicFilter(double sample_rate, uint32_t intermediate_bufsize)
+DynamicFilter::DynamicFilter(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(),
+    Ppanning(),
+    Pdepth(),
+    Pampsns(),
+    Pampsnsinv(),
+    Pampsmooth(),
+    Pmode(),
+    panning(),
+    depth(),
+    ampsns(),
+    ampsmooth(),
+    ms1(),
+    ms2(),
+    ms3(),
+    ms4(),
+    lfo(NULL),
+    filterl(NULL),
+    filterr(NULL),
+    filterpars(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, many be adjusted for lv2
-    fSAMPLE_RATE = sample_rate;
     lfo = new EffectLFO(sample_rate);
-
-    outvolume = 0.5f;
-    Ppreset = 0;
-    Pampsnsinv = 0;
-    Pampsmooth = 0;
-    filterl = NULL;
-    filterr = NULL;
     filterpars = new FilterParams(0, 64, 64, sample_rate, PERIOD);
     setpreset(Ppreset);
     cleanup();
