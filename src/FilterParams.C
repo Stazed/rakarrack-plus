@@ -30,18 +30,31 @@
 
 FilterParams::FilterParams(unsigned char Ptype_, unsigned char Pfreq_,
                            unsigned char Pq_, double sample_rate, uint32_t ibufsz) :
-    Pvowels(),
-    Psequence()
+    Pcategory(),
+    Ptype(),
+    Pfreq(),
+    Pq(),
+    Pstages(),
+    Pfreqtrack(),
+    Pgain(),
+    Pnumformants(),
+    Pformantslowness(),
+    Pvowelclearness(),
+    Pcenterfreq(),
+    Poctavesfreq(),
+    Pvowels(),  
+    Psequencesize(),
+    Psequencestretch(),
+    Psequencereversed(),
+    Psequence(),
+    changed(false),
+    fSAMPLE_RATE(sample_rate),
+    intermediate_bufsize(ibufsz),
+    SAMPLE_RATE(sample_rate),
+    Dtype(Ptype_),
+    Dfreq(Pfreq_),
+    Dq(Pq_)
 {
-    // setpresettype("Pfilter");
-    Dtype = Ptype_;
-    Dfreq = Pfreq_;
-    Dq = Pq_;
-    SAMPLE_RATE = sample_rate;
-    fSAMPLE_RATE = sample_rate;
-    intermediate_bufsize = ibufsz;
-
-    changed = false;
     defaults();
 }
 
