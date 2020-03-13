@@ -72,10 +72,9 @@ Infinity::~Infinity()
 float inline
 Infinity::phaser(phasevars *pstruct, float fxn, int j)
 {
-    int k;
     float xn = fxn + DENORMAL_GUARD;
 
-    for (k = 0; k < Pstages; k++)
+    for (int k = 0; k < Pstages; k++)
     {
         pstruct[j].yn1[k] = pstruct[j].xn1[k] - pstruct[j].gain * (xn + pstruct[j].yn1[k]);
         //pstruct[j].yn1[k] += DENORMAL_GUARD;
@@ -92,6 +91,7 @@ void inline
 Infinity::oscillator()
 {
     float rmodulate, lmodulate, ratemod;
+    rmodulate = lmodulate = ratemod = 0.0f;
 
     //master oscillator
     msin += mconst*mcos;
@@ -184,10 +184,11 @@ Infinity::oscillator()
 void
 Infinity::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i, j;
+    unsigned int j = 0;
     float tmpr, tmpl;
+    tmpr = tmpl = 0.0f;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         //modulate
         oscillator();
@@ -241,6 +242,7 @@ Infinity::cleanup()
     }
 }
 
+#ifdef LV2_SUPPORT
 void
 Infinity::lv2_update_params(uint32_t period)
 {
@@ -258,13 +260,13 @@ Infinity::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void Infinity::initialize()
 {
-    int i;
     interpbuf = new float[PERIOD];
     
-    for (i = 0; i < NUM_INF_BANDS; i++)
+    for (int i = 0; i < NUM_INF_BANDS; i++)
     {
         filterl[i] = new RBFilter(0, 80.0f, 70.0f, 1.0f, fSAMPLE_RATE, interpbuf);
         filterr[i] = new RBFilter(0, 80.0f, 70.0f, 1.0f, fSAMPLE_RATE, interpbuf);
@@ -373,7 +375,7 @@ Infinity::reinitfilter()
 void
 Infinity::adjustfreqs()
 {
-    float frate;
+    float frate = 0.0f;
     float fs = fSAMPLE_RATE;
 
     fstart = 20.0f + 6000.0f * ((float) Pstartfreq / 127.0f);

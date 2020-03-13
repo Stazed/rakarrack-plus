@@ -37,7 +37,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     
@@ -51,7 +55,10 @@ private:
     void oscillator();
     void reinitfilter ();
     void setq ();
-
+    
+    float fSAMPLE_RATE;
+    uint32_t PERIOD;
+    
     int Pvolume;		//For wet/dry mix // "Wet/Dry"
     int Pb[NUM_INF_BANDS];          //Pbx -64 to 64// "Band" each label "1" through "8" adjusts mix of each filter band
     int Pq;              //-64 to 64// "Res." filter resonance
@@ -112,9 +119,6 @@ private:
     float autopan, msin, dsin, mcos, mconst;
     float ratescale;
     int tflag;
-
-    float fSAMPLE_RATE;
-    uint32_t PERIOD;
 
     float* interpbuf; //buffer for filters
     class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
