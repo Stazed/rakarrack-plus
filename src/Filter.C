@@ -25,15 +25,15 @@
 
 #include "Filter.h"
 
-Filter::Filter(FilterParams * pars)
+Filter::Filter(FilterParams * pars) :
+    category(pars->Pcategory),
+    filter(NULL),
+    interpbuf(NULL)
 {
     unsigned char Ftype = pars->Ptype;
     unsigned char Fstages = pars->Pstages;
 
-    category = pars->Pcategory;
-
     interpbuf = new float[pars->intermediate_bufsize];
-    filter = NULL;
 
     switch (category)
     {
