@@ -316,3 +316,10 @@ Mono Arpeg.carxp:119:   <URI>https://github.com/Stazed/rakarrack-plus#Ring</URI>
 Presets that need fixes:
 
 Bank 3: Oxygenated - Parametric EQ - Mid F. (704 vs 800 min) - High F. (5896 vs 6000 min)
+
+
+-----------------------------------------------------------------------------------------------------------
+
+Crash causes:   un-initialized varibles.
+                invalid buffer (arrays) reads.
+                rakarrack  parameter changes that delete lfos, etc, used by out when it is running in separate thread.

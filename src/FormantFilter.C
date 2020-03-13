@@ -30,19 +30,40 @@ FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf) :
     formantpar(),
     currentformants(),
     sequence(),
+    sequencesize(pars->Psequencesize),
+    numformants(pars->Pnumformants),
+    firsttime(1),
     oldformantamp(),
+    oldinput(-1.0f),
+    slowinput(),
+    Qfactor(1.0f),
+    formantslowness(powf(1.0f - ((float) pars->Pformantslowness / 128.0f), 3.0f)),
+    oldQfactor(Qfactor),
+    vowelclearness(powf(10.0f, ((float) pars->Pvowelclearness - 32.0f) / 48.0f)),
+    sequencestretch(powf(0.1f, ((float) pars->Psequencestretch - 32.0f) / 48.0f)),
+    inbuffer(NULL),
+    tmpbuf(NULL),
     formant()
 {
-    numformants = pars->Pnumformants;
-    
     for (unsigned int i = 0; i < numformants; i++)
-        formant[i] = new AnalogFilter(4 /*BPF*/, 1000.0f, 10.0f, pars->Pstages, pars->fSAMPLE_RATE, interpbuf);
+    {
+        formant[i] = new AnalogFilter
+                (
+                    4 /*BPF*/,
+                    1000.0f,
+                    10.0f,
+                    pars->Pstages,
+                    pars->fSAMPLE_RATE,
+                    interpbuf
+                );
+    }
     
     cleanup();
     inbuffer = new float[pars->intermediate_bufsize];
     tmpbuf = new float[pars->intermediate_bufsize];
 
     for (int j = 0; j < FF_MAX_VOWELS; j++)
+    {
         for (unsigned int i = 0; i < numformants; i++)
         {
             formantpar[j][i].freq =
@@ -52,9 +73,12 @@ FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf) :
             formantpar[j][i].q =
                     pars->getformantq(pars->Pvowels[j].formants[i].q);
         }
+    }
     
     for (int i = 0; i < FF_MAX_FORMANTS; i++)
+    {
         oldformantamp[i] = 1.0;
+    }
     
     for (unsigned int i = 0; i < numformants; i++)
     {
@@ -63,30 +87,22 @@ FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf) :
         currentformants[i].q = 2.0f;
     }
 
-    formantslowness = powf(1.0f - ((float) pars->Pformantslowness / 128.0f), 3.0f);
-
-    sequencesize = pars->Psequencesize;
-    
     if (sequencesize == 0)
+    {
         sequencesize = 1;
+    }
     
     for (unsigned int k = 0; k < sequencesize; k++)
+    {
         sequence[k].nvowel = pars->Psequence[k].nvowel;
+    }
 
-    vowelclearness = powf(10.0f, ((float) pars->Pvowelclearness - 32.0f) / 48.0f);
-
-    sequencestretch = powf(0.1f, ((float) pars->Psequencestretch - 32.0f) / 48.0f);
-    
     if (pars->Psequencereversed)
+    {
         sequencestretch *= -1.0f;
+    }
 
     outgain = dB2rap(pars->getgain());
-
-    oldinput = -1.0f;
-    slowinput = 0.0f;
-    Qfactor = 1.0f;
-    oldQfactor = Qfactor;
-    firsttime = 1;
 }
 
 FormantFilter::~FormantFilter()
@@ -221,6 +237,7 @@ void
 FormantFilter::filterout(float * smp, uint32_t period)
 {
     unsigned int i, j;
+    i = j = 0;
     
     for (i = 0; i < period; i++)
     {
