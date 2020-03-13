@@ -100,13 +100,11 @@ public:
     int setfile (int value);
     DlyFile loadfile(char* path);
     void applyfile(DlyFile);
+    
     int Ppreset;
-
     float outvolume;
-
     char Filename[128];
     DlyFile File;
-
     int error;
 
 private:
@@ -210,9 +208,10 @@ private:
     } filterbank[ECHOTRON_MAXFILTERS];
 
     class FPreset *Fpre;
-    
-    char* FILENAME;     // for lv2 if need to re-initialize and reset .dly file
 
+#ifdef LV2_SUPPORT
+    char* FILENAME;     // for lv2 if need to re-initialize and reset .dly file
+#endif // LV2
 };
 
 

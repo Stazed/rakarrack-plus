@@ -26,50 +26,75 @@
 #include <math.h>
 #include "Echotron.h"
 
-Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize)
+Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    Filename(),
+    File(),
+    error(),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    fPERIOD(intermediate_bufsize),
+    Pvolume(50),
+    Ppanning(64),
+    Plrcross(100),
+    Phidamp(60),
+    Puser(),
+    Ptempo(76),
+    Filenum(),
+    Pfb(),
+    Pdepth(64),
+    Pwidth(64),
+    Pfilters(),
+    Pmodfilts(),
+    Pmoddly(),
+    Pstdiff(),
+    Plength(10),
+    Llength(),
+    offset(),
+    maxx_size((sample_rate * 6)),   //  6 Seconds delay time
+    initparams(),
+    ldmod(),
+    rdmod(),
+    oldldmod(),
+    oldrdmod(),
+    interpl(),
+    interpr(),
+    dlyrange(),
+    width(),
+    depth(),
+    lpanning(),
+    rpanning(),
+    hidamp(),
+    lxn(NULL),
+    rxn(NULL),
+    fb(),
+    rfeedback(),
+    lfeedback(),
+    lrcross(),
+    ilrcross(),
+    tempo_coeff(60.0f / (float) Ptempo),
+    lfo(NULL),
+    dlfo(NULL),
+    lpfl(NULL),
+    lpfr(NULL),
+    interpbuf(NULL),
+    filterbank(),
+    Fpre(NULL)
+#ifdef LV2_SUPPORT
+    ,FILENAME(NULL)
+#endif // LV2
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fPERIOD = intermediate_bufsize;
-    fSAMPLE_RATE = sample_rate;
-
-    initparams = 0;
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 64;
-    Plrcross = 100;
-    Phidamp = 60;
-    Filenum = 0;
-    Pwidth = 64;
-    Pdepth = 64;
-    Plength = 10;
-    Puser = 0;
-    Ptempo = 76;
-    fb = 0.0f;
-    lfeedback = 0.0f;
-    rfeedback = 0.0f;
-    outvolume = 0.5f;
-    ldmod = rdmod = oldldmod = oldrdmod = interpl = interpr = 0.0f;
-    interpl = interpr = 0;
-    lpanning = rpanning = 0.0f;
-    lrcross = ilrcross = 0.0f;
-
-    tempo_coeff = 60.0f / (float) Ptempo;
-
     File = loaddefault();
 
     lfo = new EffectLFO(sample_rate);
     dlfo = new EffectLFO(sample_rate);
-
-    maxx_size = (sample_rate * 6); //6 Seconds delay time
 
     lxn = new delayline(6.0f, ECHOTRON_F_SIZE, sample_rate);
     rxn = new delayline(6.0f, ECHOTRON_F_SIZE, sample_rate);
 
     lxn->set_mix(0.0f);
     rxn->set_mix(0.0f);
-
-    offset = 0;
 
     initialize();
 
@@ -398,8 +423,10 @@ Echotron::setfile(int value)
 DlyFile
 Echotron::loadfile(char* Filename)
 {
+#ifdef LV2_SUPPORT
     FILENAME = Filename; // For lv2 if need to re-initialize and reload file
-
+#endif // LV2
+    
     float tPan = 0.0f;
     float tTime = 0.0f;
     float tLevel = 0.0f;
