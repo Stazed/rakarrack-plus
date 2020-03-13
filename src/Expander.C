@@ -57,6 +57,7 @@ Expander::cleanup()
     oldgain = 0.0f;
 }
 
+#ifdef LV2_SUPPORT
 void
 Expander::lv2_update_params(uint32_t period)
 {
@@ -73,6 +74,7 @@ Expander::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 Expander::initialize()

@@ -46,7 +46,11 @@ public:
     void changepar (int np, int value);
     void setpreset (int npreset);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     int getpar (int npar);
@@ -71,7 +75,9 @@ private:
     void setlpf (int Plpf);
     void sethpf (int Phpf);
 
-
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
+    
     float sgain;
     float sfactor;
     float tfactor;
@@ -90,8 +96,6 @@ private:
 
     class FPreset *Fpre;
     
-    uint32_t PERIOD;
-    double fSAMPLE_RATE;
 };
 
 #endif
