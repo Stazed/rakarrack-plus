@@ -29,19 +29,36 @@
 #include <math.h>
 #include "Gate.h"
 
-Gate::Gate(double samplerate, uint32_t intermediate_bufsize)
+Gate::Gate(double samplerate, uint32_t intermediate_bufsize) :
+    Pthreshold(),
+    Pattack(),
+    Ohold(),
+    Pdecay(),
+    Prange(),
+    Plpf(),
+    Phpf(),
+    Phold(),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(samplerate),
+    hold_count(),
+    state(CLOSED),
+    range(),
+    cut(),
+    t_level(),
+    a_rate(),
+    d_rate(),
+    env(),
+    gate(),
+    fs(samplerate),
+    hold(),
+    interpbuf(NULL),
+    lpfl(NULL),
+    lpfr(NULL),
+    hpfl(NULL),
+    hpfr(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
-    fSAMPLE_RATE = samplerate;
-
     initialize();
-
-    env = 0.0;
-    gate = 0.0;
-    fs = samplerate;
-    state = CLOSED;
-    hold_count = 0;
-
     setpreset(0);
 }
 
