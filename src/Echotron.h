@@ -90,7 +90,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     int setfile (int value);
@@ -117,6 +121,9 @@ private:
     void modulate_filters();
     DlyFile loaddefault();
 
+    float fSAMPLE_RATE;
+    uint32_t PERIOD;
+    float fPERIOD;
 
     //User input parameters
     int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
@@ -179,9 +186,6 @@ private:
     float fb, rfeedback, lfeedback, lrcross, ilrcross;
     float tempo_coeff;
 
-    float fSAMPLE_RATE;
-    uint32_t PERIOD;
-    float fPERIOD;
     EffectLFO *lfo;
     EffectLFO *dlfo;
 

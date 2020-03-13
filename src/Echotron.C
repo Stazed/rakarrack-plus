@@ -102,6 +102,7 @@ Echotron::cleanup()
     lpfr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 Echotron::lv2_update_params(uint32_t period)
 {
@@ -127,6 +128,7 @@ Echotron::lv2_update_params(uint32_t period)
     lfo->updateparams(fPERIOD);
     dlfo->updateparams(fPERIOD);
 }
+#endif // LV2
 
 void
 Echotron::initialize()
