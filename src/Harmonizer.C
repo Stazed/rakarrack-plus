@@ -71,6 +71,7 @@ Harmonizer::cleanup()
     memset(outo, 0, sizeof (float)*nPERIOD);
 }
 
+#ifdef LV2_SUPPORT
 void
 Harmonizer::lv2_update_params(uint32_t period)
 {
@@ -90,6 +91,7 @@ Harmonizer::lv2_update_params(uint32_t period)
         adjust(DS_state, PERIOD); //readjust now that we know period size
     }
 }
+#endif // LV2
 
 void Harmonizer::initialize()
 {
@@ -131,7 +133,7 @@ Harmonizer::applyfilters(float * efxoutl, uint32_t period)
 void
 Harmonizer::out(float *efxoutl, float *efxoutr)
 {
-    int i;
+    int i = 0;
 
     if ((DS_state != 0) && (Pinterval != 12))
     {
@@ -270,19 +272,16 @@ Harmonizer::fsetfreq(int value)
 void
 Harmonizer::fsetgain(int value)
 {
-    float tmp;
-
     this->fPgain = value;
-    tmp = 30.0f * ((float) value - 64.0f) / 64.0f;
+    float tmp = 30.0f * ((float) value - 64.0f) / 64.0f;
     pl->setgain(tmp);
 }
 
 void
 Harmonizer::fsetq(int value)
 {
-    float tmp;
     this->fPq = value;
-    tmp = powf(30.0f, ((float) value - 64.0f) / 64.0f);
+    float tmp = powf(30.0f, ((float) value - 64.0f) / 64.0f);
     pl->setq(tmp);
 }
 
