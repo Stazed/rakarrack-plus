@@ -120,7 +120,7 @@ EffectLFO::updateparams(uint32_t period)
  */
 float EffectLFO::getlfoshape(float x)
 {
-    float tmpv;
+    float tmpv = 0.0;
     float out = 0.0;
     int iterations = 1; //make fractal go faster
     
@@ -230,9 +230,8 @@ float EffectLFO::getlfoshape(float x)
 void
 EffectLFO::effectlfoout(float * outl, float * outr)
 {
-    float out;
-
-    out = getlfoshape(xl);
+    float out = getlfoshape(xl);
+    
     //if ((lfotype == 0) || (lfotype == 1))         //What was that for?
     out *= (ampl1 + xl * (ampl2 - ampl1));
     xl += incx;
