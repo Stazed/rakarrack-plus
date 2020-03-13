@@ -26,16 +26,50 @@
 
 #include "Harmonizer.h"
 
-Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
+                       double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    Pinterval(),
+    PMIDI(),
+    PSELECT(),
+    mira(),
+    DS_state(),
+    nPERIOD(),
+    nSAMPLE_RATE(),
+    window(),
+    hq(Quality),
+    u_up(),
+    u_down(),
+    nfSAMPLE_RATE(),
+    outi(NULL),
+    outo(NULL),
+    templ(NULL),
+    tempr(NULL),
+    outvolume(0.5f),
+    r_ratio(),
+    Pvolume(),
+    Pgain(),
+    Ppan(),
+    Pnote(),
+    Ptype(),
+    fPfreq(),
+    fPgain(),
+    fPq(),
+    panning(),
+    gain(),
+    interval(),
+    pl(NULL),
+    interpbuf(NULL),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    PS(NULL),
+    Fpre(NULL),
+    SAMPLE_RATE((unsigned int) sample_rate),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    DS_init()
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
-    hq = Quality;
-    SAMPLE_RATE = (unsigned int) sample_rate;
     adjust(DS, PERIOD);
-    DS_init = 0;
-
     initialize();
 
     U_Resample = new Resample(dq);
@@ -44,14 +78,7 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq, double sample_r
     PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
 
-    Ppreset = 0;
-    PMIDI = 0;
-    mira = 0;
-    r_ratio = 0.0f;
-    outvolume = 0.5f;
-
     setpreset(Ppreset);
-
     cleanup();
 }
 
@@ -102,9 +129,7 @@ void Harmonizer::initialize()
     outi = (float *) malloc(sizeof (float) * PERIOD);
     outo = (float *) malloc(sizeof (float) * PERIOD);
 
-    unsigned int i;
-    
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         templ[i] = tempr[i] = 0;
         outi[i] = outo[i] = 0;
@@ -133,7 +158,6 @@ Harmonizer::applyfilters(float * efxoutl, uint32_t period)
 void
 Harmonizer::out(float *efxoutl, float *efxoutr)
 {
-    int i = 0;
 
     if ((DS_state != 0) && (Pinterval != 12))
     {
@@ -142,7 +166,7 @@ Harmonizer::out(float *efxoutl, float *efxoutr)
         U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
-    for (i = 0; i < nPERIOD; i++)
+    for (int i = 0; i < nPERIOD; i++)
     {
         outi[i] = (efxoutl[i] + efxoutr[i])*.5;
         
@@ -171,7 +195,7 @@ Harmonizer::out(float *efxoutl, float *efxoutr)
 
         applyfilters(templ, PERIOD);
 
-        for (i = 0; i < (signed int) PERIOD; i++)
+        for (int i = 0; i < (signed int) PERIOD; i++)
         {
             efxoutl[i] = templ[i] * gain * (1.0f - panning);
             efxoutr[i] = templ[i] * gain * panning;
