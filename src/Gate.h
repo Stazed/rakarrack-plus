@@ -45,7 +45,11 @@ public:
     void changepar (int npar, int value);
     void setpreset (int npreset);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     int getpar (int npar);
@@ -66,6 +70,8 @@ private:
     void setlpf (int Plpf);
     void sethpf (int Phpf);
 
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
 
     int hold_count;
     int state;
@@ -79,9 +85,6 @@ private:
     float fs;
     float hold;
     
-    uint32_t PERIOD;
-    double fSAMPLE_RATE;
-
     float* interpbuf; //buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
     class FPreset *Fpre;

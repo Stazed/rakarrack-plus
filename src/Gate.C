@@ -59,6 +59,7 @@ Gate::cleanup()
     hpfr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 Gate::lv2_update_params(uint32_t period)
 {
@@ -75,6 +76,7 @@ Gate::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 Gate::initialize()
