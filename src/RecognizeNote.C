@@ -34,19 +34,34 @@
 
 #include "RecognizeNote.h"
 
-Recognize::Recognize(float trig, float tune, double sample_rate, uint32_t intermediate_bufsize)
+Recognize::Recognize(float trig, float tune, double sample_rate, uint32_t intermediate_bufsize) :
+    note(),
+    schmittBuffer(NULL),
+    schmittPointer(NULL),
+    notes(NULL),
+    trigfact(trig),
+    lafreq(),
+    nfreq(),
+    afreq(),
+    freq(),
+    reconota(),
+    last(),
+    freqs(),
+    lfreqs(),
+    fSAMPLE_RATE((float) sample_rate),
+    dSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    ultima(-1),
+    blockSize(),
+    lpfl(NULL),
+    lpfr(NULL),
+    hpfl(NULL),
+    hpfr(NULL),
+    interpbuf(NULL),
+    Sus(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = (float) sample_rate;
-    dSAMPLE_RATE = sample_rate;
-
     static const char *englishNotes[12] ={"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     notes = englishNotes;
-    ultima = -1;
-    note = 0;
-    nfreq = 0;
-    afreq = 0;
-    trigfact = trig;
 
     Sus = new Sustainer(sample_rate, PERIOD);
     Sus->changepar(0, 101); // This approximates the original wrong settings in rakarrack ;)
