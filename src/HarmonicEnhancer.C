@@ -27,25 +27,33 @@
 #include <math.h>
 #include "HarmonicEnhancer.h"
 
-HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain, double sample_rate, uint32_t intermediate_bufsize):
-    p()
+HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain,
+                           double sample_rate, uint32_t intermediate_bufsize) :
+    realvol(gain),
+    hpffreq(hfreq),
+    lpffreq(lfreq),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    HFREQ(hfreq),
+    LFREQ(lfreq),
+    inputl(NULL),
+    inputr(NULL),
+    vol(),
+    itm1l(),
+    itm1r(),
+    otm1l(),
+    otm1r(),
+    p(),
+    hpfl(NULL),
+    hpfr(NULL),
+    lpfl(NULL),
+    lpfr(NULL),
+    interpbuf(NULL),
+    limiter(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-    HFREQ = hfreq;
-    LFREQ = lfreq;
-
     initialize();
 
-    set_vol(0, gain);
-    realvol = gain;
-    itm1l = 0.0f;
-    itm1r = 0.0f;
-    otm1l = 0.0f;
-    otm1r = 0.0f;
-
-    hpffreq = hfreq;
-    lpffreq = lfreq;
+    set_vol(0, gain);   // sets vol
 
     limiter = new Compressor(sample_rate, PERIOD);
     limiter->setpreset(0, 5);
@@ -84,7 +92,7 @@ HarmEnhancer::initialize()
 {
     inputl = (float *) malloc(sizeof (float) * PERIOD);
     inputr = (float *) malloc(sizeof (float) * PERIOD);
-    unsigned int i;
+    unsigned int i = 0;
 
     for (i = 0; i < PERIOD; i++)
     {
@@ -152,8 +160,10 @@ void
 HarmEnhancer::chebpc(float c[], float d[])
 {
     int j, k;
+    j = k = 0;
 
     float sv, dd[HARMONICS];
+    sv = 0.0;
 
     for (j = 0; j < HARMONICS; j++)
     {
@@ -187,7 +197,7 @@ HarmEnhancer::chebpc(float c[], float d[])
 void
 HarmEnhancer::calcula_mag(float *Rmag)
 {
-    int i;
+    int i = 0;
     float mag_fix = 0.0f;
 
     float mag[HARMONICS] = {
@@ -220,8 +230,8 @@ HarmEnhancer::calcula_mag(float *Rmag)
 void
 HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i;
-    int j;
+    unsigned int i = 0;
+    int j = 0;
 
     memcpy(inputl, efxoutl, sizeof (float)*PERIOD);
     memcpy(inputr, efxoutr, sizeof (float)*PERIOD);
