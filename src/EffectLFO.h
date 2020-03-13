@@ -42,7 +42,10 @@ public:
     int Pstereo;	//"64"=0
 private:
     float getlfoshape (float x);
-
+    
+    float fSAMPLE_RATE;
+    float fPERIOD;
+    float iperiod;
     float xl, xr;
     float incx;
     float ampl1, ampl2, ampr1, ampr2;	//necesar pentru "randomness"
@@ -57,7 +60,6 @@ private:
     float b;
     float c;
     float scale;
-    float iperiod;
     float ratediv;
 
     //Sample/Hold
@@ -65,7 +67,6 @@ private:
     float tca, tcb, maxrate;
     float rreg, lreg, xlreg,xrreg, oldrreg, oldlreg;
 
-    float fSAMPLE_RATE;
 };
 
 

@@ -31,28 +31,48 @@
 #include "EffectLFO.h"
 #include "f_sin.h"
 
-EffectLFO::EffectLFO(double sample_rate)
+EffectLFO::EffectLFO(double sample_rate) :
+    Pfreq(40),
+    Prandomness(),
+    PLFOtype(),
+    Pstereo(96),
+    fSAMPLE_RATE(sample_rate),
+    fPERIOD(256),       // best guess, later will be changed in updateparams()
+    iperiod(fPERIOD / fSAMPLE_RATE),
+    xl(),
+    xr(),
+    incx(),
+    ampl1(),
+    ampl2(),
+    ampr1(),
+    ampr2(),
+    lfointensity(),
+    lfornd(),
+    lfotype(),
+    x0(),
+    y0(),
+    z0(),
+    x1(),
+    y1(),
+    z1(),
+    radius(),
+    h(iperiod),
+    a(10.0f),
+    b(28.0f),
+    c(8.0f / 5.0f),
+    scale(1.0f / 36.0f),
+    ratediv(0.1f),
+    holdflag(),
+    tca(iperiod / (iperiod + 0.02)),    // 20ms default
+    tcb(1.0f - tca),
+    maxrate(),
+    rreg(),
+    lreg(),
+    xlreg(),
+    xrreg(),
+    oldrreg(),
+    oldlreg()
 {
-    float fPERIOD = 256; //this is our best guess at what it will be, later we'll correct it when we actually know fPERIOD
-    fSAMPLE_RATE = sample_rate;
-    xl = 0.0;
-    xr = 0.0;
-    Pfreq = 40;
-    Prandomness = 0;
-    PLFOtype = 0;
-    Pstereo = 96;
-
-    iperiod = fPERIOD / fSAMPLE_RATE;
-    h = iperiod;
-    a = 10.0f;
-    b = 28.0f;
-    c = 8.0f / 5.0f;
-    scale = 1.0f / 36.0f;
-    ratediv = 0.1f;
-    holdflag = 0;
-    tca = iperiod / (iperiod + 0.02); //20ms default
-    tcb = 1.0f - tca;
-    xlreg = xrreg = rreg = lreg = oldrreg = oldlreg = 0.0f;
     updateparams((uint32_t) fPERIOD);
 
     ampl1 = (1.0f - lfornd) + lfornd * (float) RND;
@@ -71,7 +91,7 @@ EffectLFO::~EffectLFO()
 void
 EffectLFO::updateparams(uint32_t period)
 {
-    float fPERIOD = period;
+    fPERIOD = period;
     //must update several parameters once we actually know the period
     iperiod = fPERIOD / fSAMPLE_RATE;
     h = iperiod;
