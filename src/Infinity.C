@@ -26,34 +26,59 @@
 #include "Infinity.h"
 #include <stdio.h>
 
-Infinity::Infinity(double sample_rate, uint32_t intermediate_bufsize)
+Infinity::Infinity(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(2),
+    outvolume(0.5f),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    Pvolume(64),
+    Pb(),
+    Pq(30),
+    Pstartfreq(5),
+    Pendfreq(80),
+    Prate(2),
+    Pstdf(),
+    Psubdiv(32),
+    Pautopan(),
+    Preverse(),
+    Pstages(),
+    rbandstate(),
+    lbandstate(),
+    rphaser(),
+    lphaser(),
+    phaserfb(),
+    cfconst(),
+    fconst(),
+    rampconst(1.0f),
+    irampconst(),
+    crampconst(),
+    cirampconst(),
+    alpha(),
+    beta(),
+    fstart(),
+    fend(),
+    linconst(),
+    logconst(),
+    minlevel(),
+    maxlevel(),
+    frmin(),
+    frmax(),
+    qq(),
+    stdiff(),
+    volmaster(0.25),
+    autopan(),
+    msin(),
+    dsin(),
+    mcos(),
+    mconst(),
+    ratescale(1.0f),
+    tflag(),
+    interpbuf(NULL),
+    filterl(),
+    filterr(),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
-    fSAMPLE_RATE = sample_rate;
-
     initialize();
-
-    Ppreset = 2;
-    Pvolume = 64;
-    outvolume = 0.5f;
-    Pq = 30;
-    Pstartfreq = 5;
-    Pendfreq = 80;
-    Prate = 2;
-    Psubdiv = 32;
-    Pstdf = 0;
-    volmaster = 0.25;
-    Preverse = 0;
-    Pautopan = 0;
-    autopan = 0.0f;
-    Pstages = 0;
-    phaserfb = 0.0f;
-    dsin = 0.0f;
-    tflag = 0;
-    ratescale = 1.0f;
-    stdiff = 0.0f;
-    rampconst = 1.0f;
-    fconst = 0.0f;
 
     float dt = 1.0f / fSAMPLE_RATE;
     alpha = dt / (0.5f + dt); //200ms time constant on parameter change -- quick but not jerky
