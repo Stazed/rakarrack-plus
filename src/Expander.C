@@ -27,18 +27,36 @@
 #include <math.h>
 #include "Expander.h"
 
-Expander::Expander(double sample_rate, uint32_t intermediate_bufsize)
+Expander::Expander(double sample_rate, uint32_t intermediate_bufsize) :
+    Pthreshold(),
+    Pattack(),
+    Pdecay(),
+    Pshape(),
+    Plpf(),
+    Phpf(),
+    Plevel(),
+    efollower(),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    sgain(),
+    sfactor(),
+    tfactor(),
+    tlevel(),
+    a_rate(),
+    d_rate(),
+    env(),
+    oldgain(),
+    gain(),
+    fs(sample_rate),
+    level(),
+    interpbuf(NULL),
+    lpfl(NULL),
+    lpfr(NULL),
+    hpfl(NULL),
+    hpfr(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
     initialize();
-
-    env = 0.0;
-    oldgain = 0.0;
-    efollower = 0;
-    fs = sample_rate;
-
     setpreset(0);
 }
 
