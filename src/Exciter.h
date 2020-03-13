@@ -50,7 +50,7 @@ private:
     void sethpf (int value);
     void sethar(int num, int value);
 
-
+    uint32_t PERIOD;
     int Prm[10];
     int Pvolume;
     int lpffreq;
@@ -58,10 +58,7 @@ private:
 
     float rm[10];
 
-    uint32_t PERIOD;
-
     class HarmEnhancer *harm;
-
     class FPreset *Fpre;
 
 };

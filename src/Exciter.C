@@ -24,23 +24,18 @@
 #include <math.h>
 #include "Exciter.h"
 
-Exciter::Exciter(double sample_rate, uint32_t intermediate_bufsize)
+Exciter::Exciter(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    Prm(),
+    Pvolume(50),
+    lpffreq(8000),
+    hpffreq(2500),
+    rm(),
+    harm(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    lpffreq = 8000;
-    hpffreq = 2500;
-    outvolume = 0.5f;
-
-    for (int i = 0; i < 10; i++)
-    {
-        Prm[i] = 0;
-        rm[i] = 0.0f;
-    }
-
     harm = new HarmEnhancer(rm, 2500.0f, 8000.0, 1.0f, sample_rate, PERIOD);
 
     cleanup();
