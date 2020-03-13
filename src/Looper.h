@@ -43,13 +43,20 @@ public:
     void cleanup ();
     void settempo(int value);
     void setmvol(int value);
+    void getstate ();
+    
+private:
+    class metronome ticker;
+    
+    float fSAMPLE_RATE;
+    unsigned int SAMPLE_RATE;
+    uint32_t PERIOD;
+    
+public:
     int looper_bar;
     int looper_qua;
     int Ppreset;
     int progstate[6];
-
-    void getstate ();
-
     float outvolume;
 
     int Pplay;	//set to 1
@@ -97,11 +104,6 @@ private:
     float mvol;
 
     class FPreset *Fpre;
-    class metronome ticker;
-    
-    float fSAMPLE_RATE;
-    unsigned int SAMPLE_RATE;
-    uint32_t PERIOD;
 
 };
 

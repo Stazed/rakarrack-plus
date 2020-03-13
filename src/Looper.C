@@ -29,46 +29,66 @@
 #include "Looper.h"
 
 Looper::Looper(float size, double samplerate, uint32_t intermediate_bufsize) :
-ticker(samplerate, intermediate_bufsize)
+    ticker(samplerate, intermediate_bufsize),
+    fSAMPLE_RATE(float(samplerate)),
+    SAMPLE_RATE(samplerate),
+    PERIOD(intermediate_bufsize),
+    looper_bar(),
+    looper_qua(),
+    Ppreset(),
+    progstate(),
+    outvolume(0.5f),
+    Pplay(),
+    Pstop(1),
+    Pvolume(),
+    Precord(),
+    Pclear(1),
+    Preverse(),
+    Pfade1(),
+    Pfade2(),
+    PT1(1),
+    PT2(),
+    Pautoplay(),
+    Prec1(),
+    Prec2(),
+    Plink(),
+    Ptempo(120),
+    Pbar(2),
+    Pmetro(),
+    Pms(),
+    kl(),
+    kl2(),
+    rvkl(),
+    rvkl2(),
+    maxx_delay(lrintf(fSAMPLE_RATE * size)),
+    fade((int) SAMPLE_RATE / 2),            // 1/2 SR fade time available
+    dl(),
+    dl2(),
+    first_time1(1),
+    first_time2(1),
+    rplaystate(),
+    barlen(1),
+    looper_ts(1),
+    ldelay(NULL),
+    rdelay(NULL),
+    t2ldelay(NULL),
+    t2rdelay(NULL),
+    oldl(),
+    oldr(),
+    Srate_Attack_Coeff(1.0f / (fSAMPLE_RATE * ATTACK)),
+    track1gain(),
+    track2gain(),
+    fade1(),
+    fade2(),
+    pregain1(),
+    pregain2(),
+    mvol(),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize;
-    SAMPLE_RATE = samplerate;
-    fSAMPLE_RATE = float(samplerate);
-
-    kl = 0;
-    kl2 = 0;
-    rvkl = 0;
-    rvkl2 = 0;
-    looper_bar = 0;
-    looper_qua = 0;
-    dl = 0;
-    dl2 = 0;
-    barlen = looper_ts = 1;
-
     //default values
-    Ppreset = 0;
-    Pclear = 1;
-    Pplay = 0;
-    Precord = 0;
-    Pstop = 1;
-    PT1 = 1;
-    PT2 = 0;
-    Pautoplay = 0;
-    rplaystate = 0;
-    first_time1 = 1;
-    first_time2 = 1;
-    Pms = 0;
-    Ptempo = 120;
-    outvolume = 0.5f;
-    Pmetro = 0;
-    Pbar = 2; // this must be set before calling settempo()
     settempo(120);
     setbar(2);
     ticker.cleanup();
-
-    Srate_Attack_Coeff = 1.0f / (fSAMPLE_RATE * ATTACK);
-    maxx_delay = lrintf(fSAMPLE_RATE * size);
-    fade = (int) SAMPLE_RATE / 2; //1/2 SR fade time available
 
     ldelay = new float[maxx_delay];
     rdelay = new float[maxx_delay];
@@ -93,9 +113,7 @@ Looper::~Looper()
 void
 Looper::cleanuppt1()
 {
-    int i;
-    
-    for (i = 0; i < maxx_delay; i++)
+    for (int i = 0; i < maxx_delay; i++)
     {
         ldelay[i] = 0.0f;
         rdelay[i] = 0.0f;
@@ -105,9 +123,7 @@ Looper::cleanuppt1()
 void
 Looper::cleanuppt2()
 {
-    int i;
-    
-    for (i = 0; i < maxx_delay; i++)
+    for (int i = 0; i < maxx_delay; i++)
     {
         t2ldelay[i] = 0.0f;
         t2rdelay[i] = 0.0f;
@@ -153,13 +169,19 @@ Looper::initdelays()
 void
 Looper::out(float * efxoutl, float * efxoutr)
 {
-    unsigned i;
     float rswell, lswell;
-    float ticktock[PERIOD];
+    rswell = lswell = 0.0f;
     
-    if ((Pmetro) && (Pplay) && (!Pstop)) ticker.metronomeout(ticktock, PERIOD);
+    float ticktock[PERIOD];
+    bool play_metro = false;
+    
+    if ((Pmetro) && (Pplay) && (!Pstop))
+    {
+        ticker.metronomeout(ticktock, PERIOD);
+        play_metro = true;
+    }
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         if ((Pplay) && (!Pstop))
         {
@@ -184,16 +206,20 @@ Looper::out(float * efxoutl, float * efxoutr)
                 
                 rvkl = dl - 1 - kl;
                 
-                if (rvkl < 0)
+                if (rvkl < 0 || rvkl >= maxx_delay)
+                {
                     rvkl = 0;
+                }
 
                 if (++kl2 >= dl2)
                     kl2 = 0;
                 
                 rvkl2 = dl2 - 1 - kl2;
                 
-                if (rvkl2 < 0)
+                if (rvkl2 < 0 || rvkl2 >= maxx_delay)
+                {
                     rvkl2 = 0;
+                }
                 
                 if ((Plink) || (PT1)) timeposition(kl);
                 else timeposition(kl2);
@@ -237,7 +263,7 @@ Looper::out(float * efxoutl, float * efxoutr)
             efxoutr[i] = 0.0f;
         }
 
-        if ((Pmetro) && (Pplay) && (!Pstop))
+        if (play_metro)
         {
             efxoutl[i] += ticktock[i] * mvol; //if you want to hear the metronome in Looper
             efxoutr[i] += ticktock[i] * mvol;
