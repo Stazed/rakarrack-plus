@@ -81,16 +81,16 @@ Recognize::schmittInit(int size, double SAMPLE_RATE)
 void
 Recognize::schmittS16LE(signed short int *indata)
 {
-    unsigned int i;
-    int j;
+    int j = 0;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         *schmittPointer++ = indata[i];
         
         if (schmittPointer - schmittBuffer >= blockSize)
         {
             int endpoint, startpoint, t1, t2, A1, A2, tc, schmittTriggered;
+            endpoint = startpoint = t1 = t2 = A1 = A2 = tc = schmittTriggered = 0;
 
             schmittPointer = schmittBuffer;
 
@@ -159,7 +159,6 @@ Recognize::sethpf(int value)
 void
 Recognize::schmittFloat(float *indatal, float *indatar)
 {
-    unsigned int i;
     signed short int buf[PERIOD]; //TODO: buf should probably be a member of this class
 
     lpfl->filterout(indatal, PERIOD);
@@ -169,7 +168,7 @@ Recognize::schmittFloat(float *indatal, float *indatar)
 
     Sus->out(indatal, indatar);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         buf[i] = (short) ((indatal[i] + indatar[i]) * 32768);
     }
@@ -180,13 +179,12 @@ Recognize::schmittFloat(float *indatal, float *indatar)
 void
 Recognize::displayFrequency(float freq)
 {
-    int i;
     int offset = 4;
     int noteoff = 0;
     int octave = 4;
 
-    float ldf, mldf;
-    float lfreq;
+    float ldf, mldf, lfreq;
+    ldf = mldf = lfreq = 0.0f;
 
     if (freq < 1E-15)
         freq = 1E-15f;
@@ -201,7 +199,7 @@ Recognize::displayFrequency(float freq)
     
     mldf = LOG_D_NOTE;
     
-    for (i = 0; i < 12; i++)
+    for (int i = 0; i < 12; i++)
     {
         ldf = fabsf(lfreq - lfreqs[i]);
         
@@ -255,18 +253,18 @@ void
 Recognize::update_freqs(float tune)
 {
     //update freqs (tables for stuff)
-    int i;
 
     freqs[0] = tune;
     lfreqs[0] = logf(freqs[0]);
     
-    for (i = 1; i < 12; i++)
+    for (int i = 1; i < 12; i++)
     {
         freqs[i] = freqs[i - 1] * D_NOTE;
         lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
     }
 }
 
+#ifdef LV2_SUPPORT
 void
 Recognize::lv2_update_params(uint32_t period)
 {
@@ -285,6 +283,7 @@ Recognize::lv2_update_params(uint32_t period)
 
     Sus->lv2_update_params(period);
 }
+#endif // LV2
 
 void Recognize::initialize()
 {

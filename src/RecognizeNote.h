@@ -28,7 +28,11 @@ public:
     void sethpf(int value);
     void setlpf(int value);
     void update_freqs(float tune);
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     int note;
@@ -51,6 +55,10 @@ private:
     void displayFrequency (float freq);
     void schmittInit (int size, double sample_rate);
     void schmittS16LE (signed short int *indata);
+    
+    float fSAMPLE_RATE;
+    double dSAMPLE_RATE;
+    uint32_t PERIOD;
 
     int ultima;
     int blockSize;
@@ -59,10 +67,6 @@ private:
     float* interpbuf; //buffer for filters
 
     class Sustainer *Sus;
-
-    float fSAMPLE_RATE;
-    double dSAMPLE_RATE;
-    uint32_t PERIOD;
 
 };
 
