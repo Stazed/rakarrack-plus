@@ -37,8 +37,15 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-    
+#endif // LV2
+
+private:
+    uint32_t PERIOD;
+    float fPERIOD;
+public:
     int Ppreset;
     float outvolume;
 
@@ -61,8 +68,6 @@ private:
     float ll, lr;
 
     class FPreset *Fpre;
-    uint32_t PERIOD;
-    float fPERIOD;
     EffectLFO* lfo;
 
 };

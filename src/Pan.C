@@ -50,6 +50,7 @@ Pan::cleanup()
 {
 }
 
+#ifdef LV2_SUPPORT
 void
 Pan::lv2_update_params(uint32_t period)
 {
@@ -57,19 +58,15 @@ Pan::lv2_update_params(uint32_t period)
     fPERIOD = period;
     lfo->updateparams(period);
 }
+#endif // LV2
 
 void
 Pan::out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i;
-    float avg, ldiff, rdiff, tmp;
-    float pp;
-    float coeff_PERIOD = 1.0 / fPERIOD;
-    float fi, P_i;
-
     if (PextraON)
     {
-        for (i = 0; i < PERIOD; i++)
+        float avg, ldiff, rdiff, tmp;   // initialized o.k.
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             avg = (efxoutl[i] + efxoutr[i]) * .5f;
 
@@ -90,7 +87,10 @@ Pan::out(float *efxoutl, float *efxoutr)
         lr = lfor;
         lfo->effectlfoout(&lfol, &lfor);
         
-        for (i = 0; i < PERIOD; i++)
+        float coeff_PERIOD = 1.0 / fPERIOD;
+        float fi, P_i, pp;  // initialized o.k.
+        
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             fi = (float) i;
             P_i = (float) (PERIOD - i);
