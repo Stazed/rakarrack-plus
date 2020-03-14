@@ -80,18 +80,16 @@ MusicDelay::~MusicDelay()
 void
 MusicDelay::cleanup()
 {
-    int i;
-    
-    for (i = 0; i < dl1; i++)
+    for (int i = 0; i < dl1; i++)
         ldelay1[i] = 0.0;
     
-    for (i = 0; i < dr1; i++)
+    for (int i = 0; i < dr1; i++)
         rdelay1[i] = 0.0;
     
-    for (i = 0; i < dl2; i++)
+    for (int i = 0; i < dl2; i++)
         ldelay2[i] = 0.0;
     
-    for (i = 0; i < dr2; i++)
+    for (int i = 0; i < dr2; i++)
         rdelay2[i] = 0.0;
 
     oldl1 = 0.0;
@@ -100,11 +98,13 @@ MusicDelay::cleanup()
     oldr2 = 0.0;
 }
 
+#ifdef LV2_SUPPORT
 void
 MusicDelay::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2
 
 /*
  * Initialize the delays
@@ -112,7 +112,6 @@ MusicDelay::lv2_update_params(uint32_t period)
 void
 MusicDelay::initdelays()
 {
-    int i;
     kl1 = 0;
     kr1 = 0;
 
@@ -141,16 +140,16 @@ MusicDelay::initdelays()
     if (dr2 < 1)
         dr2 = 1;
 
-    for (i = dl1; i < maxx_delay; i++)
+    for (int i = dl1; i < maxx_delay; i++)
         ldelay1[i] = 0.0;
     
-    for (i = dl2; i < maxx_delay; i++)
+    for (int i = dl2; i < maxx_delay; i++)
         ldelay2[i] = 0.0;
 
-    for (i = dr1; i < maxx_delay; i++)
+    for (int i = dr1; i < maxx_delay; i++)
         rdelay1[i] = 0.0;
     
-    for (i = dr2; i < maxx_delay; i++)
+    for (int i = dr2; i < maxx_delay; i++)
         rdelay2[i] = 0.0;
 
     cleanup();
@@ -162,22 +161,19 @@ MusicDelay::initdelays()
 void
 MusicDelay::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float l1, r1, ldl1, rdl1, l2, r2, ldl2, rdl2;
-
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
-        ldl1 = ldelay1[kl1];
-        rdl1 = rdelay1[kr1];
-        l1 = ldl1 * (1.0f - lrcross) + rdl1 * lrcross;
-        r1 = rdl1 * (1.0f - lrcross) + ldl1 * lrcross;
+        float ldl1 = ldelay1[kl1];
+        float rdl1 = rdelay1[kr1];
+        float l1 = ldl1 * (1.0f - lrcross) + rdl1 * lrcross;
+        float r1 = rdl1 * (1.0f - lrcross) + ldl1 * lrcross;
         ldl1 = l1;
         rdl1 = r1;
 
-        ldl2 = ldelay2[kl2];
-        rdl2 = rdelay2[kr2];
-        l2 = ldl2 * (1.0f - lrcross) + rdl2 * lrcross;
-        r2 = rdl2 * (1.0f - lrcross) + ldl2 * lrcross;
+        float ldl2 = ldelay2[kl2];
+        float rdl2 = rdelay2[kr2];
+        float l2 = ldl2 * (1.0f - lrcross) + rdl2 * lrcross;
+        float r2 = rdl2 * (1.0f - lrcross) + ldl2 * lrcross;
         ldl2 = l2;
         rdl2 = r2;
 
@@ -244,9 +240,6 @@ MusicDelay::setpanning(int num, int Ppanning)
 void
 MusicDelay::setdelay(int num, int Pdelay)
 {
-    float ntem = 60.0f / (float) Ptempo;
-    float coef;
-    
     switch (num)
     {
     case 1:
@@ -258,13 +251,16 @@ MusicDelay::setdelay(int num, int Pdelay)
     case 3:
         this->Plrdelay = Pdelay;
     }
+    
+    float ntem = 60.0f / (float) Ptempo;
+    float coef = 0.0;
 
     delay1 = lrintf((ntem / (float) Pdelay1) * fSAMPLE_RATE);
 
     if (Plrdelay != 0)
         coef = ntem / (float) Plrdelay;
     else
-        coef = 0;
+        coef = 0.0;
 
     delay2 = lrintf((coef + (ntem / (float) Pdelay2)) * fSAMPLE_RATE);
 
