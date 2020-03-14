@@ -227,12 +227,14 @@ NewDist::out(float * efxoutl, float * efxoutr)
     wshapel->waveshapesmps(PERIOD, efxoutl, Ptype, Pdrive, 2);
     wshaper->waveshapesmps(PERIOD, efxoutr, Ptype, Pdrive, 2);
 
+    float lout, rout; lout = rout = 0.0;
+    
     if (octmix > 0.01f)
     {
         for (unsigned int i = 0; i < PERIOD; i++)
         {
-            float lout = efxoutl[i];
-            float rout = efxoutr[i];
+            lout = efxoutl[i];
+            rout = efxoutr[i];
 
             if ((octave_memoryl < 0.0f) && (lout > 0.0f)) togglel *= -1.0f;
             
@@ -258,13 +260,15 @@ NewDist::out(float * efxoutl, float * efxoutr)
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
 
+    float l, r; // initialized good 
+
     for (unsigned int i = 0; i < PERIOD; i++)
     {
-        float lout = efxoutl[i];
-        float rout = efxoutr[i];
+        lout = efxoutl[i];
+        rout = efxoutr[i];
 
-        float l = lout * (1.0f - lrcross) + rout * lrcross;
-        float r = rout * (1.0f - lrcross) + lout * lrcross;
+        l = lout * (1.0f - lrcross) + rout * lrcross;
+        r = rout * (1.0f - lrcross) + lout * lrcross;
 
         if (octmix > 0.01f)
         {
