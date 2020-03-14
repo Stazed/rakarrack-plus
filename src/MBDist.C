@@ -32,31 +32,64 @@
 
 // DistBand
 
-MBDist::MBDist(int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize)
+MBDist::MBDist(int wave_res, int wave_upq, int wave_dnq,
+        double sample_rate, uint32_t intermediate_bufsize) :
+    WAVE_RES(wave_res),
+    WAVE_UPQ(wave_upq),
+    WAVE_DNQ(wave_dnq),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Ppreset(),
+    outvolume(0.5f),
+    lowl(NULL),
+    lowr(NULL),
+    midl(NULL),
+    midr(NULL),
+    highl(NULL),
+    highr(NULL),
+    Pvolume(50),
+    Ppanning(),
+    Plrcross(40),
+    Pdrive(90),
+    Plevel(64),
+    PtypeL(),
+    PtypeM(),
+    PtypeH(),
+    PvolL(),
+    PvolM(),
+    PvolH(),
+    PdriveL(),
+    PdriveM(),
+    PdriveH(),
+    Pnegate(),
+    Cross1(),
+    Cross2(),
+    Pstereo(),
+    panning(),
+    lrcross(),
+    volL(),
+    volM(),
+    volH(),
+    lpf1l(NULL),
+    lpf1r(NULL),
+    hpf1l(NULL),
+    hpf1r(NULL),
+    lpf2l(NULL),
+    lpf2r(NULL),
+    hpf2l(NULL),
+    hpf2r(NULL),
+    DCl(NULL),
+    DCr(NULL),
+    interpbuf(NULL),
+    mbwshape1l(NULL),
+    mbwshape2l(NULL),
+    mbwshape3l(NULL),
+    mbwshape1r(NULL),
+    mbwshape2r(NULL),
+    mbwshape3r(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-    WAVE_RES = wave_res;
-    WAVE_UPQ = wave_upq;
-    WAVE_DNQ = wave_dnq;
-
     initialize();
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Plrcross = 40;
-    Pdrive = 90;
-    Plevel = 64;
-    PtypeL = 0;
-    PtypeM = 0;
-    PtypeH = 0;
-    PvolL = 0;
-    PvolM = 0;
-    PvolH = 0;
-    Pnegate = 0;
-    Pstereo = 0;
-    outvolume = 0.5f;
 
     setpreset(Ppreset);
     cleanup();
