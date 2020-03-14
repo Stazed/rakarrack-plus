@@ -27,40 +27,58 @@
 #include <math.h>
 #include "MusicDelay.h"
 
-MusicDelay::MusicDelay(double sample_rate, uint32_t intermediate_bufsize)
+MusicDelay::MusicDelay(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(50),
+    Ppanning1(64),
+    Ppanning2(64),
+    Pgain1(64),
+    Pgain2(64),
+    Pdelay1(60),
+    Pdelay2(60),
+    Plrdelay(100),
+    Plrcross(100),
+    Pfb1(40),
+    Pfb2(40),
+    Phidamp(60),
+    Ptempo(100),
+    maxx_delay(sample_rate * MAX_DELAY),
+    dl1(maxx_delay - 1),
+    dr1(maxx_delay - 1),
+    dl2(maxx_delay - 1),
+    dr2(maxx_delay - 1),
+    delay1(),
+    delay2(),
+    lrdelay(),
+    kl1(),
+    kr1(),
+    kl2(),
+    kr2(),
+    panning1(),
+    panning2(),
+    lrcross(),
+    fb1(),
+    fb2(),
+    hidamp(),
+    gain1(),
+    gain2(),
+    ldelay1(NULL),
+    rdelay1(NULL),
+    ldelay2(NULL),
+    rdelay2(NULL),
+    oldl1(),
+    oldr1(),
+    oldl2(),
+    oldr2(),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack but may be adjusted for lv2 by lv2_update_params()
-    fSAMPLE_RATE = sample_rate;
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning1 = 64;
-    Ppanning2 = 64;
-    Pgain1 = 64;
-    Pgain2 = 64;
-    Pdelay1 = 60;
-    Pdelay2 = 60;
-    Plrdelay = 100;
-    Plrcross = 100;
-    Pfb1 = 40;
-    Pfb2 = 40;
-    Ptempo = 100;
-    Phidamp = 60;
-    outvolume = 0.5f;
-
-    maxx_delay = sample_rate * MAX_DELAY;
     ldelay1 = new float[maxx_delay];
     rdelay1 = new float[maxx_delay];
     ldelay2 = new float[maxx_delay];
     rdelay2 = new float[maxx_delay];
-
-    dl1 = maxx_delay - 1;
-    dl2 = maxx_delay - 1;
-    dr1 = maxx_delay - 1;
-    dr2 = maxx_delay - 1;
-
-    lrdelay = 0;
 
     setpreset(Ppreset);
     cleanup();

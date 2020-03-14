@@ -76,9 +76,9 @@ private:
     int Ptempo;
 
     //Parametrii reali
+    int maxx_delay;
     int dl1, dr1, dl2, dr2, delay1, delay2, lrdelay;
     int kl1, kr1, kl2, kr2;
-    int maxx_delay;
     float panning1, panning2, lrcross, fb1, fb2, hidamp;
     float gain1, gain2;
     float *ldelay1, *rdelay1, *ldelay2, *rdelay2;
