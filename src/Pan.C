@@ -24,15 +24,29 @@
 
 #include "Pan.h"
 
-Pan::Pan(double sample_rate, uint32_t intermediate_bufsize)
+Pan::Pan(double sample_rate, uint32_t intermediate_bufsize) :
+    PERIOD(intermediate_bufsize),
+    fPERIOD(intermediate_bufsize),
+    Ppreset(),
+    outvolume(0.5f),
+    Pvolume(),
+    Ppanning(),
+    Pextra(),
+    PAutoPan(),
+    PextraON(),
+    dvalue(),
+    cdvalue(),
+    sdvalue(),
+    panning(),
+    mul(),
+    lfol(),
+    lfor(),
+    ll(),
+    lr(),
+    Fpre(NULL),
+    lfo(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fPERIOD = intermediate_bufsize;
-
     lfo = new EffectLFO(sample_rate);
-
-    outvolume = 0.5f;
-    Ppreset = 0;
     setpreset(Ppreset);
 
     lfo->effectlfoout(&lfol, &lfor);
