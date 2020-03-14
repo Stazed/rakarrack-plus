@@ -90,6 +90,7 @@ NewDist::cleanup()
     DCr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 NewDist::lv2_update_params(uint32_t period)
 {
@@ -106,6 +107,7 @@ NewDist::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 NewDist::initialize()
@@ -113,9 +115,7 @@ NewDist::initialize()
     octoutl = (float *) malloc(sizeof (float) * PERIOD);
     octoutr = (float *) malloc(sizeof (float) * PERIOD);
 
-    unsigned int i;
-    
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         octoutl[i] = octoutr[i] = 0;
     }
@@ -195,9 +195,7 @@ NewDist::applyfilters(float * efxoutl, float * efxoutr, uint32_t period)
 void
 NewDist::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float l, r, lout, rout;
-
+    // FIXME inputvol is never used!!!
     float inputvol = .5f;
 
     if (Pnegate != 0)
@@ -212,10 +210,10 @@ NewDist::out(float * efxoutl, float * efxoutr)
 
     if (octmix > 0.01f)
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
-            lout = efxoutl[i];
-            rout = efxoutr[i];
+            float lout = efxoutl[i];
+            float rout = efxoutr[i];
 
             if ((octave_memoryl < 0.0f) && (lout > 0.0f)) togglel *= -1.0f;
             
@@ -241,13 +239,13 @@ NewDist::out(float * efxoutl, float * efxoutr)
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
-        lout = efxoutl[i];
-        rout = efxoutr[i];
+        float lout = efxoutl[i];
+        float rout = efxoutr[i];
 
-        l = lout * (1.0f - lrcross) + rout * lrcross;
-        r = rout * (1.0f - lrcross) + lout * lrcross;
+        float l = lout * (1.0f - lrcross) + rout * lrcross;
+        float r = rout * (1.0f - lrcross) + lout * lrcross;
 
         if (octmix > 0.01f)
         {

@@ -57,6 +57,7 @@ Derelict (newdist)
     Set default LV2 to rakarrack
 ---Done---
 FIXME Help .png
+FIXME Pnegate not completed
 
 DistBand (MBDist)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
