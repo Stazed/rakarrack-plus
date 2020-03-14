@@ -219,7 +219,9 @@ MBDist::out(float * efxoutl, float * efxoutr)
     float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
     
     if (Pnegate != 0)
+    {
         inputvol *= -1.0f;
+    }
 
     if (Pstereo)
     {
@@ -233,8 +235,7 @@ MBDist::out(float * efxoutl, float * efxoutr)
     {
         for (i = 0; i < PERIOD; i++)
         {
-            efxoutl[i] =
-                    (efxoutl[i] + efxoutr[i]) * inputvol;
+            efxoutl[i] = (efxoutl[i] + efxoutr[i]) * inputvol;
         }
     }
 
@@ -271,10 +272,16 @@ MBDist::out(float * efxoutl, float * efxoutr)
     {
         efxoutl[i] = lowl[i] * volL + midl[i] * volM + highl[i] * volH;
         
-        if (Pstereo) efxoutr[i] = lowr[i] * volL + midr[i] * volM + highr[i] * volH;
+        if (Pstereo)
+        {
+            efxoutr[i] = lowr[i] * volL + midr[i] * volM + highr[i] * volH;
+        }
     }
 
-    if (!Pstereo) memcpy(efxoutr, efxoutl, sizeof (float)* PERIOD);
+    if (!Pstereo)
+    {
+        memcpy(efxoutr, efxoutl, sizeof (float)* PERIOD);
+    }
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
     float l, r, lout, rout;
@@ -288,8 +295,6 @@ MBDist::out(float * efxoutl, float * efxoutr)
         l = lout * (1.0f - lrcross) + rout * lrcross;
         r = rout * (1.0f - lrcross) + lout * lrcross;
 
-        //efxoutl[i] = l * 2.0f * level * panning;
-        //efxoutr[i] = r * 2.0f * level * (1.0f - panning);
         efxoutl[i] = l * 2.0f * level * (1.0f - panning);
         efxoutr[i] = r * 2.0f * level * panning;
 

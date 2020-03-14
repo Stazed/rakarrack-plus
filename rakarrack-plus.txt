@@ -64,6 +64,7 @@ DistBand (MBDist)
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |  LRCr
 ---Done---
 FIXME Help .png
+FIXME check slight pop on Valve waveshape type.
 
 Distortion
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
