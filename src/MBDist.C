@@ -214,8 +214,6 @@ MBDist::clear_initialize()
 void
 MBDist::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i = 0;
-
     float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
     
     if (Pnegate != 0)
@@ -225,7 +223,7 @@ MBDist::out(float * efxoutl, float * efxoutr)
 
     if (Pstereo)
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             efxoutl[i] = efxoutl[i] * inputvol * 2.0f;
             efxoutr[i] = efxoutr[i] * inputvol * 2.0f;
@@ -233,7 +231,7 @@ MBDist::out(float * efxoutl, float * efxoutr)
     }
     else
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             efxoutl[i] = (efxoutl[i] + efxoutr[i]) * inputvol;
         }
@@ -268,7 +266,7 @@ MBDist::out(float * efxoutl, float * efxoutr)
         if (volH > 0) mbwshape3r->waveshapesmps(PERIOD, highr, PtypeH, PdriveH, 1);
     }
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         efxoutl[i] = lowl[i] * volL + midl[i] * volM + highl[i] * volH;
         
@@ -287,7 +285,7 @@ MBDist::out(float * efxoutl, float * efxoutr)
     float l, r, lout, rout;
     l = r = lout = rout = 0.0f;
     
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         lout = efxoutl[i];
         rout = efxoutr[i];

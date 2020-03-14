@@ -88,7 +88,7 @@ MBVvol::cleanup()
     hpf3r->cleanup();
 }
 
-#ifdef LV2_SOPPORT
+#ifdef LV2_SUPPORT
 void
 MBVvol::lv2_update_params(uint32_t period)
 {

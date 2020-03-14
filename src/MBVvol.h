@@ -78,7 +78,6 @@ private:
     void updateVols(void);
     void setSource(float** ptr, float** ptrr, int val);
 
-
     //Parametrii
     int Pvolume;	//Volumul or E/R
     int Pcombi;
@@ -100,11 +99,9 @@ private:
     AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
     AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
     AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
-    float* interpbuf; //buffer for filters
-
+    float* interpbuf;   //buffer for filters
 
     class FPreset *Fpre;
-    
     EffectLFO* lfo1,*lfo2;
 
 };

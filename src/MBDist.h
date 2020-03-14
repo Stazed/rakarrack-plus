@@ -63,8 +63,6 @@ public:
     float *midr;
     float *highl;
     float *highr;
-
-
 private:
 
     void setvolume (int Pvolume);
@@ -94,14 +92,13 @@ private:
     int Cross2;		//highpass filter
     int Pstereo;	//0=mono,1=stereo
 
-
     //Parametrii reali
     float panning, lrcross;
     float volL,volM,volH;
     AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
     AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
     AnalogFilter *DCl, *DCr;
-    float* interpbuf; //buffer for filters
+    float* interpbuf;   //buffer for filters
 
     class Waveshaper *mbwshape1l, *mbwshape2l, *mbwshape3l;
     class Waveshaper *mbwshape1r, *mbwshape2r, *mbwshape3r;
