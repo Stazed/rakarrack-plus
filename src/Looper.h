@@ -59,9 +59,9 @@ public:
     int progstate[6];
     float outvolume;
 
-    int Pplay;	//set to 1
-    int Pstop;	//set to 1
-
+    int Pplay;          //set to 1
+    int Pstop;          //set to 1
+    
 
 private:
 
@@ -77,9 +77,9 @@ private:
     //Parameters
     int Pvolume;	//Mix
     int Precord;	//set to 1
-    int Pclear;   //set to 1
+    int Pclear;         //set to 1
     int Preverse;	//0 or 1
-    int Pfade1;    //0...127//  crossfade track1 & 2
+    int Pfade1;         //0...127//  crossfade track1 & 2
     int Pfade2;
     int PT1;
     int PT2;
@@ -98,7 +98,7 @@ private:
     float *ldelay, *rdelay;
     float *t2ldelay, *t2rdelay;
 
-    float oldl, oldr;		//pt. lpf
+    float oldl, oldr;   //pt. lpf
 
     float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2, pregain1, pregain2;
     float mvol;

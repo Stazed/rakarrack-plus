@@ -169,9 +169,6 @@ Looper::initdelays()
 void
 Looper::out(float * efxoutl, float * efxoutr)
 {
-    float rswell, lswell;
-    rswell = lswell = 0.0f;
-    
     float ticktock[PERIOD];
     bool play_metro = false;
     
@@ -202,7 +199,9 @@ Looper::out(float * efxoutl, float * efxoutr)
             if (!Pclear)
             {
                 if (++kl >= dl)
+                {
                     kl = 0;
+                }
                 
                 rvkl = dl - 1 - kl;
                 
@@ -212,7 +211,9 @@ Looper::out(float * efxoutl, float * efxoutr)
                 }
 
                 if (++kl2 >= dl2)
+                {
                     kl2 = 0;
+                }
                 
                 rvkl2 = dl2 - 1 - kl2;
                 
@@ -221,13 +222,19 @@ Looper::out(float * efxoutl, float * efxoutr)
                     rvkl2 = 0;
                 }
                 
-                if ((Plink) || (PT1)) timeposition(kl);
-                else timeposition(kl2);
+                if ((Plink) || (PT1))
+                {
+                    timeposition(kl);
+                }
+                else
+                {
+                    timeposition(kl2);
+                }
             }
 
             if (Preverse)
             {
-                lswell = (float) (abs(kl - rvkl)) * Srate_Attack_Coeff;
+                float lswell = (float) (abs(kl - rvkl)) * Srate_Attack_Coeff;
                 
                 if (lswell <= PI)
                 {
@@ -239,7 +246,7 @@ Looper::out(float * efxoutl, float * efxoutr)
                     efxoutl[i] = fade1 * ldelay[rvkl] + fade2 * t2ldelay[rvkl2];
                 }
 
-                rswell = (float) (abs(kl - rvkl)) * Srate_Attack_Coeff;
+                float rswell = (float) (abs(kl - rvkl)) * Srate_Attack_Coeff;
                 
                 if (rswell <= PI)
                 {
@@ -303,7 +310,10 @@ int Looper::set_len(int value)
     a1 = abs(value - (x * barlen));
     a2 = abs(value - ((x + 1) * barlen));
 
-    if (a2 < a1) return (((x + 1) * barlen) + 1);
+    if (a2 < a1)
+    {
+        return (((x + 1) * barlen) + 1);
+    }
 
     return (x * barlen + 1);
 }
