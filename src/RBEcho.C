@@ -81,11 +81,13 @@ RBEcho::cleanup()
     oldr = 0.0;
 }
 
+#ifdef LV2_SUPPORT
 void
 RBEcho::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2
 
 /*
  * Initialize the delays
@@ -120,11 +122,10 @@ RBEcho::initdelays()
 void
 RBEcho::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float ldl, rdl;
-    float avg, ldiff, rdiff, tmp;
+    float ldl, rdl;                 // initialize o.k.
+    float avg, ldiff, rdiff, tmp;   // initialize o.k.
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         //LowPass Filter
         ldl = lfeedback * hidamp + oldl * (1.0f - hidamp);
@@ -207,8 +208,14 @@ RBEcho::setdelay(int Pdelay)
 {
     this->Pdelay = Pdelay;
     fdelay = 60.0f / ((float) Pdelay);
-    if (fdelay < 0.01f) fdelay = 0.01f;
-    if (fdelay > (float) MAX_DELAY) fdelay = (float) MAX_DELAY; //Constrains 10ms ... MAX_DELAY
+    if (fdelay < 0.01f)
+    {
+        fdelay = 0.01f;
+    }
+    if (fdelay > (float) MAX_DELAY)
+    {
+        fdelay = (float) MAX_DELAY; //Constrains 10ms ... MAX_DELAY
+    }
     delay = subdiv * fdelay;
     initdelays();
 }

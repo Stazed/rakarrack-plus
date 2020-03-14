@@ -39,7 +39,10 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
     
     int Ppreset;
     float outvolume;
@@ -55,6 +58,9 @@ private:
     void sethidamp (int Phidamp);
     void setreverse (int Preverse);
     void initdelays ();
+
+    float fSAMPLE_RATE;
+    uint32_t PERIOD;
 
     //Parametrii
     int Pvolume;	// E/R
@@ -76,8 +82,6 @@ private:
     float rpanning, lpanning, lrcross, fb, hidamp, reverse, ireverse, lfeedback, rfeedback;
     float oldl, oldr;		//pt. lpf
     float  Srate_Attack_Coeff;
-    float fSAMPLE_RATE;
-    uint32_t PERIOD;
 
     class delayline *ldelay, *rdelay;
     class FPreset *Fpre;
