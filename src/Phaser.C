@@ -28,18 +28,38 @@
 #include "FPreset.h"
 #define PHASER_LFO_SHAPE 2
 
-Phaser::Phaser(double sample_rate, uint32_t intermediate_bufsize)
+Phaser::Phaser(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    fPERIOD(intermediate_bufsize),
+    Pvolume(),
+    Ppanning(),
+    Pdepth(),
+    Pfb(),
+    Plrcross(),
+    Pstages(),
+    Poutsub(),
+    Pphase(),
+    panning(),
+    fb(),
+    depth(),
+    lrcross(),
+    fbl(),
+    fbr(),
+    phase(),
+    oldl(NULL),
+    oldr(NULL),
+    oldlgain(),
+    oldrgain(),
+    lfo(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
-    fPERIOD = intermediate_bufsize; // will be correct for rakarrack and must be adjusted for lv2 in rkrlv2.C via lv2_update_params()
-
     oldl = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES * 2);
     oldr = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES * 2);
 
     lfo = new EffectLFO(sample_rate);
 
-    outvolume = 0.5f;
-    Ppreset = 0;
     setpreset(Ppreset);
     cleanup();
 }
