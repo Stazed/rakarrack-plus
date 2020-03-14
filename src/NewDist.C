@@ -33,37 +33,56 @@
 
 // does anyone else see how funny this class is? say it out loud. Perhaps this will become so popular they will start a new_dist colony ;)
 
-NewDist::NewDist(int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize)
+NewDist::NewDist(int wave_res, int wave_upq, int wave_dnq,
+                 double sample_rate, uint32_t intermediate_bufsize) :
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    WAVE_RES(wave_res),
+    WAVE_UPQ(wave_upq),
+    WAVE_DNQ(wave_dnq),
+    Ppreset(),
+    outvolume(0.5f),
+    inpll(),
+    inplr(),
+    Pvolume(50),
+    Ppanning(),
+    Plrcross(40),
+    Pdrive(1),
+    Plevel(32),
+    Ptype(),
+    Pnegate(),
+    Plpf(127),
+    Phpf(),
+    Prfreq(64),
+    Pprefiltering(),
+    Poctave(),
+    rfreq(),
+    panning(),
+    lrcross(),
+    octave_memoryl(-1.0),
+    togglel(1.0),
+    octave_memoryr(-1.0),
+    toggler(1.0),
+    octmix(),
+    octoutl(NULL),
+    octoutr(NULL),
+    interpbuf(NULL),
+    lpfl(NULL),
+    lpfr(NULL),
+    hpfl(NULL),
+    hpfr(NULL),
+    blockDCl(NULL),
+    blockDCr(NULL),
+    DCl(NULL),
+    DCr(NULL),
+    wshapel(NULL),
+    wshaper(NULL),
+    filterl(NULL),
+    filterr(NULL),
+    filterpars(NULL),
+    Fpre(NULL)
 {
-    WAVE_RES = wave_res;
-    WAVE_UPQ = wave_upq;
-    WAVE_DNQ = wave_dnq;
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
     initialize();
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Plrcross = 40;
-    Pdrive = 1;
-    Plevel = 32;
-    Ptype = 0;
-    Pnegate = 0;
-    Plpf = 127;
-    Phpf = 0;
-    Prfreq = 64;
-    Pprefiltering = 0;
-    Poctave = 0;
-    togglel = 1.0;
-    octave_memoryl = -1.0;
-    toggler = 1.0;
-    octave_memoryr = -1.0;
-    octmix = 0.0;
-    outvolume = 0.5f;
-
-    Ppreset = 0;
 
     setpreset(Ppreset);
     cleanup();
@@ -195,12 +214,12 @@ NewDist::applyfilters(float * efxoutl, float * efxoutr, uint32_t period)
 void
 NewDist::out(float * efxoutl, float * efxoutr)
 {
-    // FIXME inputvol is never used!!!
+    // FIXME inputvol is never used, Pnegate does nothing !!!
     float inputvol = .5f;
 
     if (Pnegate != 0)
         inputvol *= -1.0f;
-
+        
     if (Pprefiltering != 0)
         applyfilters(efxoutl, efxoutr, PERIOD);
 
