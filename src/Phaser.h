@@ -36,7 +36,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+
     int Ppreset;
     float outvolume;
 
@@ -51,6 +55,8 @@ private:
 
 
     //Parametrii Phaser
+    uint32_t PERIOD;
+    float fPERIOD;
     int Pvolume;
     int Ppanning;
     int Pdepth;		//the depth of the Phaser
@@ -67,12 +73,9 @@ private:
     float *oldl, *oldr;
     float oldlgain, oldrgain;
     
-    uint32_t PERIOD;
-    float fPERIOD;
     EffectLFO *lfo;     //Phaser modulator
 
     class FPreset *Fpre;
-
 };
 
 #endif

@@ -57,32 +57,38 @@ Phaser::~Phaser()
 void
 Phaser::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    int j;
-    float lfol, lfor, lgain, rgain, tmp;
+    float lfol, lfor, lgain, rgain; // initialized o.k.
 
     lfo->effectlfoout(&lfol, &lfor);
+
     lgain = lfol;
     rgain = lfor;
-    lgain =
-            (expf(lgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
-    rgain =
-            (expf(rgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
+    lgain = (expf(lgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
+    rgain = (expf(rgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
 
     lgain = 1.0f - phase * (1.0f - depth) - (1.0f - phase) * lgain * depth;
     rgain = 1.0f - phase * (1.0f - depth) - (1.0f - phase) * rgain * depth;
 
     if (lgain > 1.0)
+    {
         lgain = 1.0f;
+    }
     else if (lgain < 0.0)
+    {
         lgain = 0.0f;
-    
-    if (rgain > 1.0)
-        rgain = 1.0f;
-    else if (rgain < 0.0)
-        rgain = 0.0f;
+    }
 
-    for (i = 0; i < PERIOD; i++)
+    if (rgain > 1.0)
+    {
+        rgain = 1.0f;
+    }
+    else if (rgain < 0.0)
+    {
+        rgain = 0.0f;
+    }
+
+    float tmp = 0.0;
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         float x = (float) i / fPERIOD;
         float x1 = 1.0f - x;
@@ -92,7 +98,7 @@ Phaser::out(float * efxoutl, float * efxoutr)
         float inr = efxoutr[i] * (1.0f - panning) + fbr;
 
         //Left channel
-        for (j = 0; j < Pstages * 2; j++)
+        for (int j = 0; j < Pstages * 2; j++)
         {
             //Phasing routine
             tmp = oldl[j] + DENORMAL_GUARD;
@@ -100,7 +106,7 @@ Phaser::out(float * efxoutl, float * efxoutr)
             inl = tmp - gl * oldl[j];
         }
         //Right channel
-        for (j = 0; j < Pstages * 2; j++)
+        for (int j = 0; j < Pstages * 2; j++)
         {
             //Phasing routine
             tmp = oldr[j] + DENORMAL_GUARD;
@@ -123,11 +129,13 @@ Phaser::out(float * efxoutl, float * efxoutr)
     oldrgain = rgain;
 
     if (Poutsub != 0)
-        for (i = 0; i < PERIOD; i++)
+    {
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         }
+    }
 }
 
 /*
@@ -148,6 +156,7 @@ Phaser::cleanup()
     }
 }
 
+#ifdef LV2_SUPPORT
 void
 Phaser::lv2_update_params(uint32_t period)
 {
@@ -155,6 +164,7 @@ Phaser::lv2_update_params(uint32_t period)
     fPERIOD = period;
     lfo->updateparams(period);
 }
+#endif // LV2
 
 /*
  * Parameter control
