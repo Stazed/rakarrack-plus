@@ -42,9 +42,14 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
     
 private:
+    float cSAMPLE_RATE;
+    uint32_t PERIOD;
     int Pdepth;
     int Ppanning;
     int Pinvert;  //Invert the opto and resistor relationship
@@ -56,12 +61,8 @@ private:
     float gr, oldgr;
     float rpanning, lpanning;
 
-    float cSAMPLE_RATE;
-    uint32_t PERIOD;
     EffectLFO* lfo;
-
     class FPreset *Fpre;
-
 };
 
 #endif

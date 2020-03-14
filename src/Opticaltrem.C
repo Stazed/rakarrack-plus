@@ -71,19 +71,19 @@ Opticaltrem::cleanup()
 {
 }
 
+#ifdef LV2_SUPPORT
 void
 Opticaltrem::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     lfo->updateparams(period);
 }
+#endif // LV2
 
 void
 Opticaltrem::out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i;
-    float lfol, lfor, xl, xr, fxl, fxr;
-    float rdiff, ldiff;
+    float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
 
     if (Pinvert)
@@ -98,57 +98,71 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
     }
 
     if (lfol > 1.0f)
+    {
         lfol = 1.0f;
+    }
     else if (lfol < 0.0f)
+    {
         lfol = 0.0f;
+    }
     
     if (lfor > 1.0f)
+    {
         lfor = 1.0f;
+    }
     else if (lfor < 0.0f)
+    {
         lfor = 0.0f;
+    }
 
     lfor = powf(lfor, 1.9f);
     lfol = powf(lfol, 1.9f); //emulate lamp turn on/off characteristic
 
     //lfo interpolation
-    rdiff = (lfor - oldgr) / (float) PERIOD;
-    ldiff = (lfol - oldgl) / (float) PERIOD;
+    float rdiff = (lfor - oldgr) / (float) PERIOD;
+    float ldiff = (lfol - oldgl) / (float) PERIOD;
     gr = lfor;
     gl = lfol;
     oldgr = lfor;
     oldgl = lfol;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         //Left Cds
         stepl = gl * (1.0f - alphal) + alphal*oldstepl;
         oldstepl = stepl;
         dRCl = dTC * f_exp(stepl * minTC);
         alphal = 1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
-        xl = CNST_E + stepl*b;
-        fxl = f_exp(Ra / logf(xl));
+        float xl = CNST_E + stepl*b;
+        float fxl = f_exp(Ra / logf(xl));
         
         if (Pinvert)
         {
             fxl = fxl * Rp / (fxl + Rp); //Parallel resistance
             fxl = fxl / (fxl + R1);
         }
-        else fxl = R1 / (fxl + R1);
+        else
+        {
+            fxl = R1 / (fxl + R1);
+        }
 
         //Right Cds
         stepr = gr * (1.0f - alphar) + alphar*oldstepr;
         oldstepr = stepr;
         dRCr = dTC * f_exp(stepr * minTC);
         alphar = 1.0f - cSAMPLE_RATE / (dRCr + cSAMPLE_RATE);
-        xr = CNST_E + stepr*b;
-        fxr = f_exp(Ra / logf(xr));
+        float xr = CNST_E + stepr*b;
+        float fxr = f_exp(Ra / logf(xr));
         
         if (Pinvert)
         {
             fxr = fxr * Rp / (fxr + Rp); //Parallel resistance
             fxr = fxr / (fxr + R1);
         }
-        else fxr = R1 / (fxr + R1);
+        else
+        {
+            fxr = R1 / (fxr + R1);
+        }
 
         //Modulate input signal
         efxoutl[i] = lpanning * fxl * efxoutl[i];
