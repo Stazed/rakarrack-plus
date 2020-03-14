@@ -192,10 +192,11 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
         lfreq -= LOG_2;
 
     float mldf = LOG_D_NOTE;
-
+    float ldf = 0.0;
+    
     for (int i = 0; i < 12; i++)
     {
-        float ldf = fabsf(lfreq - lfreqs[i]);
+        ldf = fabsf(lfreq - lfreqs[i]);
 
         if (ldf < mldf)
         {

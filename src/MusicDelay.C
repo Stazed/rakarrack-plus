@@ -179,19 +179,21 @@ MusicDelay::initdelays()
 void
 MusicDelay::out(float * efxoutl, float * efxoutr)
 {
+    float l1, r1, ldl1, rdl1, l2, r2, ldl2, rdl2;   // initialized o.k.
+    
     for (unsigned int i = 0; i < PERIOD; i++)
     {
-        float ldl1 = ldelay1[kl1];
-        float rdl1 = rdelay1[kr1];
-        float l1 = ldl1 * (1.0f - lrcross) + rdl1 * lrcross;
-        float r1 = rdl1 * (1.0f - lrcross) + ldl1 * lrcross;
+        ldl1 = ldelay1[kl1];
+        rdl1 = rdelay1[kr1];
+        l1 = ldl1 * (1.0f - lrcross) + rdl1 * lrcross;
+        r1 = rdl1 * (1.0f - lrcross) + ldl1 * lrcross;
         ldl1 = l1;
         rdl1 = r1;
 
-        float ldl2 = ldelay2[kl2];
-        float rdl2 = rdelay2[kr2];
-        float l2 = ldl2 * (1.0f - lrcross) + rdl2 * lrcross;
-        float r2 = rdl2 * (1.0f - lrcross) + ldl2 * lrcross;
+        ldl2 = ldelay2[kl2];
+        rdl2 = rdelay2[kr2];
+        l2 = ldl2 * (1.0f - lrcross) + rdl2 * lrcross;
+        r2 = rdl2 * (1.0f - lrcross) + ldl2 * lrcross;
         ldl2 = l2;
         rdl2 = r2;
 
