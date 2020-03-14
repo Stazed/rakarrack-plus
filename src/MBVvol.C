@@ -88,6 +88,7 @@ MBVvol::cleanup()
     hpf3r->cleanup();
 }
 
+#ifdef LV2_SOPPORT
 void
 MBVvol::lv2_update_params(uint32_t period)
 {
@@ -108,6 +109,7 @@ MBVvol::lv2_update_params(uint32_t period)
     lfo1->updateparams(PERIOD);
     lfo2->updateparams(PERIOD);
 }
+#endif // LV2
 
 void
 MBVvol::initialize()
@@ -120,10 +122,8 @@ MBVvol::initialize()
     midhr = (float *) malloc(sizeof (float) * PERIOD);
     highl = (float *) malloc(sizeof (float) * PERIOD);
     highr = (float *) malloc(sizeof (float) * PERIOD);
-
-    unsigned int i;
     
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         lowl[i] = lowr[i] = 0;
         midll[i] = midlr[i] = 0;
@@ -178,8 +178,6 @@ MBVvol::clear_initialize()
 void
 MBVvol::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-
     memcpy(lowl, efxoutl, sizeof (float) * PERIOD);
     memcpy(midll, efxoutl, sizeof (float) * PERIOD);
     memcpy(midhl, efxoutl, sizeof (float) * PERIOD);
@@ -212,7 +210,7 @@ MBVvol::out(float * efxoutl, float * efxoutr)
     d3 = (lfo2l - v2l) / (float) PERIOD;
     d4 = (lfo2r - v2r) / (float) PERIOD;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         updateVols();
 
