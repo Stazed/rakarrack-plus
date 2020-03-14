@@ -26,37 +26,41 @@
 #include <math.h>
 #include "Opticaltrem.h"
 
-Opticaltrem::Opticaltrem(double sample_rate, uint32_t intermediate_bufsize)
+Opticaltrem::Opticaltrem(double sample_rate, uint32_t intermediate_bufsize) :
+    cSAMPLE_RATE(1.0f / sample_rate),
+    PERIOD(intermediate_bufsize),
+    Pdepth(127),
+    Ppanning(64),
+    Pinvert(),
+    Ra(1000000.0f),     //  Cds cell dark resistance.
+    Rb(300.0f),         //  Cds cell full illumination
+    R1(2700.0f),        //  tremolo circuit series resistance
+    Rp(100000.0f),      //  Resistor in parallel with Cds cell
+    b(exp(logf(Ra) / logf(Rb)) - CNST_E),
+    dTC(0.03f),
+    dRCl(dTC),
+    dRCr(dTC),          //  Right & left channel dynamic time constants
+    minTC(logf(0.005f / dTC)),
+    alphal(1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE)),
+    alphar(alphal),
+    stepl(),
+    stepr(),
+    oldstepl(),
+    oldstepr(),
+    fdepth(1.0f),
+    lstep(),
+    rstep(),
+    cperiod(),
+    gl(),
+    oldgl(),
+    gr(),
+    oldgr(),
+    rpanning(1.0f),
+    lpanning(1.0f),
+    lfo(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    cSAMPLE_RATE = 1.0f / sample_rate;
-
-    R1 = 2700.0f; //tremolo circuit series resistance
-    Ra = 1000000.0f; //Cds cell dark resistance.
-    Ra = logf(Ra); //this is done for clarity
-    Rb = 300.0f; //Cds cell full illumination
-    Rp = 100000.0f; //Resistor in parallel with Cds cell
-    b = exp(Ra / logf(Rb)) - CNST_E;
-    dTC = 0.03f;
-    dRCl = dTC;
-    dRCr = dTC; //Right & left channel dynamic time contsants
-    minTC = logf(0.005f / dTC);
-    alphal = 1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
-    alphar = alphal;
-    lstep = 0.0f;
-    rstep = 0.0f;
-    Pdepth = 127;
-    Ppanning = 64;
-    lpanning = 1.0f;
-    rpanning = 1.0f;
-    fdepth = 1.0f;
-    Pinvert = 0;
-    oldgl = 0.0f;
-    oldgr = 0.0f;
-    gl = 0.0f;
-    gr = 0.0f;
-    oldstepl = 0.0f;
-    oldstepr = 0.0f;
+    Ra = logf(Ra);      //  this is done for clarity
 
     lfo = new EffectLFO(sample_rate);
 }
@@ -126,6 +130,8 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
     oldgr = lfor;
     oldgl = lfol;
 
+    float xl, fxl, xr, fxr; // initialized good
+    
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         //Left Cds
@@ -133,8 +139,8 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
         oldstepl = stepl;
         dRCl = dTC * f_exp(stepl * minTC);
         alphal = 1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
-        float xl = CNST_E + stepl*b;
-        float fxl = f_exp(Ra / logf(xl));
+        xl = CNST_E + stepl*b;
+        fxl = f_exp(Ra / logf(xl));
         
         if (Pinvert)
         {
@@ -151,8 +157,8 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
         oldstepr = stepr;
         dRCr = dTC * f_exp(stepr * minTC);
         alphar = 1.0f - cSAMPLE_RATE / (dRCr + cSAMPLE_RATE);
-        float xr = CNST_E + stepr*b;
-        float fxr = f_exp(Ra / logf(xr));
+        xr = CNST_E + stepr*b;
+        fxr = f_exp(Ra / logf(xr));
         
         if (Pinvert)
         {
