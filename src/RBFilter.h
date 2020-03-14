@@ -75,25 +75,25 @@ private:
     float singlefilterout_s (float smp, fstage & x, parameters & par);
     void computefiltercoefs ();
     void computefiltercoefs_hiQ ();
+    
+    float fSAMPLE_RATE;
+    float* ismp;                //buffer for interpolation
 
     int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
-    unsigned int stages;			//how many times the filter is applied (0->1,1->2,etc.)
-    int abovenq;			//this is 1 if the frequency is above the nyquist
+    float freq;                 //Frequency given in Hz
+    float q;			//Q factor (resonance or Q factor)
+    unsigned int stages;        //how many times the filter is applied (0->1,1->2,etc.)
+    
+    int abovenq;		//this is 1 if the frequency is above the nyquist
     int oldabovenq;
     int needsinterpolation, firsttime, en_mix;
-    int qmode;                   //set to true for compatibility to old presets.  0 means Q = 1/q
+    int qmode;                  //set to true for compatibility to old presets.  0 means Q = 1/q
 
-    float freq;		//Frequency given in Hz
-    float q;			//Q factor (resonance or Q factor)
-    float gain;		//the gain of the filter (if are shelf/peak) filters
+    float gain;                 //the gain of the filter (if are shelf/peak) filters
     float hpg, lpg, bpg;
     float oldq, oldsq, oldf;
     float a_smooth_tc, b_smooth_tc;
     float iper;			//inverse of PERIOD
-
-    float fSAMPLE_RATE;
-
-    float* ismp;//buffer for interpolation
 
 };
 

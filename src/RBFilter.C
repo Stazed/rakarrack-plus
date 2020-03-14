@@ -46,7 +46,9 @@ RBFilter::RBFilter(int Ftype, float Ffreq, float Fq,
     fSAMPLE_RATE = sample_rate;
     
     if (stages >= MAX_FILTER_STAGES)
+    {
         stages = MAX_FILTER_STAGES;
+    }
     
     cleanup();
     setfreq_and_q(Ffreq, Fq);
@@ -81,7 +83,9 @@ RBFilter::computefiltercoefs()
     par.f = 2.0f * sinf(PI * freq / fSAMPLE_RATE);
     
     if (par.f > 0.99999f)
+    {
         par.f = 0.99999f;
+    }
     
     par.q = 1.0f - atanf(sqrtf(q)) * 2.0f / PI;
     par.q = powf(par.q, 1.0f / (float) (stages + 1));
@@ -94,9 +98,14 @@ RBFilter::computefiltercoefs_hiQ() //potentially unstable at some settings, but 
     par.f = 2.0f * sinf(PI * freq / fSAMPLE_RATE);
     
     if (par.f > 0.99999f)
+    {
         par.f = 0.99999f;
+    }
     
-    if (q < 0.5f) q = 0.5f;
+    if (q < 0.5f)
+    {
+        q = 0.5f;
+    }
     
     par.q = 1.0f / q;
     par.q = powf(par.q, 1.0f / (float) (stages + 1));
@@ -109,7 +118,9 @@ RBFilter::directmod(float lfo) //potentially unstable at some settings, but bett
     par.f = fabsf(lfo); //cannot be less than 0
     
     if (par.f > 0.99999f)
+    {
         par.f = 0.99999f;
+    }
     //note range on input LFO should be scaled assuming the following:
     //A value of 1.0f sets a resonant frequency of SAMPLE_RATE/6.0
     //A value greater than 1 makes the filter go unstable, thus the limit.
@@ -119,22 +130,35 @@ RBFilter::directmod(float lfo) //potentially unstable at some settings, but bett
 void
 RBFilter::setmode(int mode)
 {
-    if (mode) qmode = 1;
-    else qmode = 0;
+    if (mode)
+    {
+        qmode = 1;
+    }
+    else
+    {
+        qmode = 0;
+    }
 }
 
 void
 RBFilter::setfreq(float frequency)
 {
-    if (frequency > (fSAMPLE_RATE / 2.0f - 500.0f)) frequency = fSAMPLE_RATE / 2.0f - 500.0f;
+    if (frequency > (fSAMPLE_RATE / 2.0f - 500.0f))
+    {
+        frequency = fSAMPLE_RATE / 2.0f - 500.0f;
+    }
     
     if (frequency < 0.1)
+    {
         frequency = 0.1f;
+    }
     
     float rap = freq / frequency;
     
     if (rap < 1.0)
+    {
         rap = 1.0f / rap;
+    }
 
     oldabovenq = abovenq;
     abovenq = frequency > (fSAMPLE_RATE / 2.0f - 500.0f);
@@ -145,15 +169,23 @@ RBFilter::setfreq(float frequency)
     {
         //if the frequency is changed fast, it needs interpolation (now, filter and coeficients backup)
         if (firsttime == 0)
+        {
             needsinterpolation = 1;
+        }
         
         ipar = par;
     }
     
     freq = frequency;
 
-    if (!qmode) computefiltercoefs();
-    else computefiltercoefs_hiQ();
+    if (!qmode)
+    {
+        computefiltercoefs();
+    }
+    else
+    {
+        computefiltercoefs_hiQ();
+    }
     
     firsttime = 0;
 }
@@ -170,8 +202,14 @@ RBFilter::setq(float q_)
 {
     q = q_;
     
-    if (!qmode) computefiltercoefs();
-    else computefiltercoefs_hiQ();
+    if (!qmode)
+    {
+        computefiltercoefs();
+    }
+    else
+    {
+        computefiltercoefs_hiQ();
+    }
 }
 
 void
@@ -179,8 +217,14 @@ RBFilter::settype(int type_)
 {
     type = type_;
     
-    if (!qmode) computefiltercoefs();
-    else computefiltercoefs_hiQ();
+    if (!qmode)
+    {
+        computefiltercoefs();
+    }
+    else
+    {
+        computefiltercoefs_hiQ();
+    }
 }
 
 void
@@ -188,21 +232,35 @@ RBFilter::setgain(float dBgain)
 {
     gain = dB2rap(dBgain);
     
-    if (!qmode) computefiltercoefs();
-    else computefiltercoefs_hiQ();
+    if (!qmode)
+    {
+        computefiltercoefs();
+    }
+    else
+    {
+        computefiltercoefs_hiQ();
+    }
 }
 
 void
 RBFilter::setstages(int stages_)
 {
     if (stages_ >= MAX_FILTER_STAGES)
+    {
         stages_ = MAX_FILTER_STAGES - 1;
+    }
     
     stages = stages_;
     cleanup();
     
-    if (!qmode) computefiltercoefs();
-    else computefiltercoefs_hiQ();
+    if (!qmode)
+    {
+        computefiltercoefs();
+    }
+    else
+    {
+        computefiltercoefs_hiQ();
+    }
 }
 
 void
@@ -226,7 +284,6 @@ void
 RBFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t period)
 {
     iper = 1.0f / (float) period;
-    unsigned int i;
     float *out = NULL;
     
     switch (type)
@@ -245,15 +302,14 @@ RBFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t pe
         break;
     }
 
-    float tmpq, tmpsq, tmpf, qdiff, sqdiff, fdiff;
-    qdiff = (par.q - oldq) * iper;
-    sqdiff = (par.q_sqrt - oldsq) * iper;
-    fdiff = (par.f - oldf) * iper;
-    tmpq = oldq;
-    tmpsq = oldsq;
-    tmpf = oldf;
+    float qdiff = (par.q - oldq) * iper;
+    float sqdiff = (par.q_sqrt - oldsq) * iper;
+    float fdiff = (par.f - oldf) * iper;
+    float tmpq = oldq;
+    float tmpsq = oldsq;
+    float tmpf = oldf;
 
-    for (i = 0; i < period; i++)
+    for (unsigned int i = 0; i < period; i++)
     {
         tmpq += qdiff;
         tmpsq += sqdiff;
@@ -283,41 +339,53 @@ RBFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t pe
 void
 RBFilter::filterout(float * smp, uint32_t period)
 {
-    unsigned int i;
+    unsigned int i = 0;
 
     if (needsinterpolation != 0)
     {
         for (i = 0; i < period; i++)
+        {
             ismp[i] = smp[i];
+        }
         
         for (i = 0; i < stages + 1; i++)
+        {
             singlefilterout(ismp, st[i], ipar, period);
+        }
 
         needsinterpolation = 0;
     }
 
     for (i = 0; i < stages + 1; i++)
+    {
         singlefilterout(smp, st[i], par, period);
+    }
 
     for (i = 0; i < period; i++)
+    {
         smp[i] *= outgain;
+    }
 }
 
 float
 RBFilter::filterout_s(float smp)
 {
-    unsigned int i;
+    unsigned int i = 0;
 
     if (needsinterpolation != 0)
     {
         for (i = 0; i < stages + 1; i++)
+        {
             smp = singlefilterout_s(smp, st[i], ipar);
+        }
         
         needsinterpolation = 0;
     }
 
     for (i = 0; i < stages + 1; i++)
+    {
         smp = singlefilterout_s(smp, st[i], par);
+    }
 
     return (smp *= outgain);
 }
