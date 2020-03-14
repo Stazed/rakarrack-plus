@@ -39,10 +39,21 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize ();
     void clear_initialize();
-    
+
+private:
+    int WAVE_RES;
+    int WAVE_UPQ;
+    int WAVE_DNQ;
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
+public:
     int Ppreset;
     float outvolume;
 
@@ -97,11 +108,6 @@ private:
 
     class FPreset *Fpre;
     
-    int WAVE_RES;
-    int WAVE_UPQ;
-    int WAVE_DNQ;
-    uint32_t PERIOD;
-    double fSAMPLE_RATE;
 };
 
 

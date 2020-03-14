@@ -85,6 +85,7 @@ MBDist::cleanup()
     DCr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 MBDist::lv2_update_params(uint32_t period)
 {
@@ -101,6 +102,7 @@ MBDist::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 MBDist::initialize()
@@ -111,9 +113,8 @@ MBDist::initialize()
     midr = (float *) malloc(sizeof (float) * PERIOD);
     highl = (float *) malloc(sizeof (float) * PERIOD);
     highr = (float *) malloc(sizeof (float) * PERIOD);
-    unsigned int i;
-    
-    for (i = 0; i < PERIOD; i++)
+
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         lowl[i] = lowr[i] = 0;
         midl[i] = midr[i] = 0;
@@ -180,8 +181,7 @@ MBDist::clear_initialize()
 void
 MBDist::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float l, r, lout, rout;
+    unsigned int i = 0;
 
     float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
     
@@ -244,7 +244,9 @@ MBDist::out(float * efxoutl, float * efxoutr)
     if (!Pstereo) memcpy(efxoutr, efxoutl, sizeof (float)* PERIOD);
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
-
+    float l, r, lout, rout;
+    l = r = lout = rout = 0.0f;
+    
     for (i = 0; i < PERIOD; i++)
     {
         lout = efxoutl[i];
