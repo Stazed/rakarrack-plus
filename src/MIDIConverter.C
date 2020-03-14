@@ -119,12 +119,8 @@ MIDIConverter::out(float * efxoutl, float * efxoutr)
 {
     float il_sum = 1e-12f;
     float ir_sum = 1e-12f;
-    float temp_sum;
-    float tmp;
-
-    float Log_I_Gain;
-    Log_I_Gain = powf(Input_Gain * 2.0f, 4);
-
+    float tmp = 0.0f;
+    float Log_I_Gain = powf(Input_Gain * 2.0f, 4);
 
     for (unsigned i = 0; i < PERIOD; i++)
     {
@@ -149,7 +145,7 @@ MIDIConverter::out(float * efxoutl, float * efxoutr)
         old_ir_sum = val_ir_sum;
     }
 
-    temp_sum = (float) CLAMP(rap2dB(il_sum), -48.0, 15.0);
+    float temp_sum = (float) CLAMP(rap2dB(il_sum), -48.0, 15.0);
     val_il_sum = .6f * old_il_sum + .4f * temp_sum;
 
     temp_sum = (float) CLAMP(rap2dB(ir_sum), -48.0, 15.0);
@@ -181,17 +177,13 @@ MIDIConverter::lv2_update_params(uint32_t period)
 void
 MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float *lfreqs)
 {
-    int i;
     int noteoff = 0;
     int octave = 4;
-
-    float ldf, mldf;
-    float lfreq;
 
     if (ffreq < 1E-15)
         ffreq = 1E-15f;
 
-    lfreq = logf(ffreq);
+    float lfreq = logf(ffreq);
 
     while (lfreq < lfreqs[0] - LOG_D_NOTE * .5f)
         lfreq += LOG_2;
@@ -199,11 +191,11 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
     while (lfreq >= lfreqs[0] + LOG_2 - LOG_D_NOTE * .5f)
         lfreq -= LOG_2;
 
-    mldf = LOG_D_NOTE;
+    float mldf = LOG_D_NOTE;
 
-    for (i = 0; i < 12; i++)
+    for (int i = 0; i < 12; i++)
     {
-        ldf = fabsf(lfreq - lfreqs[i]);
+        float ldf = fabsf(lfreq - lfreqs[i]);
 
         if (ldf < mldf)
         {
@@ -280,19 +272,18 @@ MIDIConverter::schmittInit(int size)
 void
 MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freqs, float *lfreqs)
 {
-    unsigned int i, j;
+    unsigned int j = 0;
     float trigfact = 0.6f;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         *schmittPointer++ = indata[i];
 
         if (schmittPointer - schmittBuffer >= blockSize)
         {
-            int endpoint, startpoint, t1, t2, A1, A2, tc, schmittTriggered;
-
             schmittPointer = schmittBuffer;
-
+            
+            int  A1, A2; A1 = A2 = 0;            
             for (j = 0, A1 = 0, A2 = 0; j < blockSize; j++)
             {
                 if (schmittBuffer[j] > 0 && A1 < schmittBuffer[j])
@@ -302,18 +293,18 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
                     A2 = -schmittBuffer[j];
             }
 
-            t1 = lrintf((float) A1 * trigfact + 0.5f);
-            t2 = -lrintf((float) A2 * trigfact + 0.5f);
-            startpoint = 0;
+            int t1 = lrintf((float) A1 * trigfact + 0.5f);
+            int t2 = -lrintf((float) A2 * trigfact + 0.5f);
 
             for (j = 1; schmittBuffer[j] <= t1 && j < blockSize; j++);
 
             for (; !(schmittBuffer[j] >= t2 &&
                  schmittBuffer[j + 1] < t2) && j < blockSize; j++);
 
-            startpoint = j;
-            schmittTriggered = 0;
-            endpoint = startpoint + 1;
+            int startpoint = j;
+            int schmittTriggered = 0;
+            int endpoint = startpoint + 1;
+            int tc = 0;
 
             for (j = startpoint, tc = 0; j < blockSize; j++)
             {
@@ -348,11 +339,9 @@ MIDIConverter::schmittFree()
 void
 MIDIConverter::schmittFloat(float * efxoutl, float * efxoutr, float val_sum, float *freqs, float *lfreqs)
 {
-    unsigned int i;
-
     signed short int buf[PERIOD];
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         buf[i] = (short) ((TrigVal * efxoutl[i] + TrigVal * efxoutr[i]) * 32768);
     }
@@ -389,7 +378,7 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
 
         if (fftSample - fftSampleBuffer >= fftSize)
         {
-            int k;
+            int k = 0;
             Peak peaks[MAX_PEAKS];
 
             for (k = 0; k < MAX_PEAKS; k++)
@@ -410,9 +399,7 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
 
             for (k = 0; k <= fftSize / 2; k++)
             {
-                long qpd;
-                float
-                real = creal(fftOut[k]), // This requires -std=gnu++98 
+                float real = creal(fftOut[k]), // This requires -std=gnu++98 
                         imag = cimag(fftOut[k]), // This requires -std=gnu++98 
                         magnitude = 20. * log10(2. * sqrt(real * real + imag * imag) / fftSize),
                         phase = atan2(imag, real),
@@ -426,7 +413,7 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
                 tmp -= (double) k*phaseDifference;
 
                 /* map delta phase into +/- Pi interval */
-                qpd = tmp / M_PI;
+                long qpd = tmp / M_PI;
 
                 if (qpd >= 0) qpd += qpd & 1;
                 else qpd -= qpd & 1;
@@ -451,10 +438,10 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
 
             if (fftFrameCount > 0 && fftFrameCount % overlap == 0)
             {
-                int l, maxharm = 0;
+                int maxharm = 0;
                 k = 0;
 
-                for (l = 1; l < MAX_PEAKS && peaks[l].freq > 0.0; l++)
+                for (int l = 1; l < MAX_PEAKS && peaks[l].freq > 0.0; l++)
                 {
                     int harmonic;
 
@@ -486,8 +473,7 @@ MIDIConverter::fftFloat(float *efxoutl, float *efxoutr, float val_sum, float *fr
 
     for (unsigned int i = 0; i < PERIOD; i++)
     {
-        buf[i] =
-                (short) ((TrigVal * efxoutl[i] + TrigVal * efxoutr[i]) * 32768);
+        buf[i] =  (short) ((TrigVal * efxoutl[i] + TrigVal * efxoutr[i]) * 32768);
     }
 
     fftS16LE(buf, val_sum, freqs, lfreqs);
@@ -587,11 +573,11 @@ MIDIConverter::setGain(int value)
 void
 MIDIConverter::panic()
 {
-    int i;
-
-    for (i = 0; i < 127; i++)
+    for (int i = 0; i < 127; i++)
+    {
         send_Midi_Note(i, 0, false); // false = note off: 0 is not used for note off
-
+    }
+    
     hay = 0;
     nota_actual = -1;
 }
