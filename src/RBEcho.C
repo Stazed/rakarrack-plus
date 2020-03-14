@@ -28,32 +28,49 @@
 #include <math.h>
 #include "RBEcho.h"     // Echoverse
 
-RBEcho::RBEcho(double sample_rate, uint32_t intermediate_bufsize)
+RBEcho::RBEcho(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    Pvolume(50),
+    Ppanning(64),
+    Pdelay(60),
+    Plrdelay(100),
+    Plrcross(100),
+    Pfb(40),
+    Phidamp(60),
+    Preverse(),
+    Psubdiv(1),
+    Pes(),
+    maxx_delay(1 + sample_rate * MAX_DELAY),
+    delay(),
+    lrdelay(),
+    ltime(),
+    rtime(),
+    fdelay(),
+    subdiv(1.0f),
+    pes(),
+    pingpong(),
+    ipingpong(1.0f),
+    rvl(),
+    rvr(),
+    rpanning(),
+    lpanning(),
+    lrcross(),
+    fb(),
+    hidamp(),
+    reverse(),
+    ireverse(),
+    lfeedback(),
+    rfeedback(),
+    oldl(),
+    oldr(),
+    Srate_Attack_Coeff(1.0f / (sample_rate * ATTACK)),
+    ldelay(NULL),
+    rdelay(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 64;
-    Pdelay = 60;
-    Plrdelay = 100;
-    Plrcross = 100;
-    Pfb = 40;
-    Phidamp = 60;
-    Psubdiv = 1;
-    subdiv = 1.0f;
-    reverse = ireverse = 0.0f;
-    lfeedback = rfeedback = 0.0f;
-    pingpong = 0.0f;
-    ipingpong = 1.0f;
-    outvolume = 0.5f;
-
-    delay = lrdelay = ltime = rtime = 0.0f;
-    Srate_Attack_Coeff = 1.0f / (sample_rate * ATTACK);
-    maxx_delay = 1 + sample_rate * MAX_DELAY;
-
     ldelay = new delayline(2.0f, 3, sample_rate);
     rdelay = new delayline(2.0f, 3, sample_rate);
 
