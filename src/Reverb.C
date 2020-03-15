@@ -131,6 +131,7 @@ Reverb::cleanup()
     lpf->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 Reverb::lv2_update_params(uint32_t period)
 {
@@ -147,14 +148,14 @@ Reverb::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 Reverb::initialize()
 {
     inputbuf = new float[PERIOD];
-    unsigned int i;
-
-    for (i = 0; i < PERIOD; i++)
+ 
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         inputbuf[i] = 0;
     }
@@ -179,8 +180,8 @@ Reverb::clear_initialize()
 void
 Reverb::processmono(unsigned int ch, float * output)
 {
-    unsigned int i, j;
-    float fbout, tmp;
+    unsigned int i, j;  // initialize o.k.
+    float fbout, tmp;   // initialize o.k.
     //TODO: implement the high part from lohidamp
 
     for (j = REV_COMBS * ch; j < REV_COMBS * (ch + 1); j++)
@@ -199,7 +200,9 @@ Reverb::processmono(unsigned int ch, float * output)
             output[i] += fbout;
 
             if ((++ck) >= comblength)
+            {
                 ck = 0;
+            }
         }
 
         combk[j] = ck;
@@ -218,7 +221,9 @@ Reverb::processmono(unsigned int ch, float * output)
             output[i] = tmp - 0.7f * ap[j][ak];
 
             if ((++ak) >= aplength)
+            {
                 ak = 0;
+            }
         }
         apk[j] = ak;
     }
@@ -230,9 +235,7 @@ Reverb::processmono(unsigned int ch, float * output)
 void
 Reverb::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         inputbuf[i] = (efxoutl[i] + efxoutr[i]) * .5f;
         //Initial delay r
@@ -287,16 +290,12 @@ Reverb::setpan(int Ppan)
 void
 Reverb::settime(int Ptime)
 {
-    int i;
-    float t;
     this->Ptime = Ptime;
-    t = powf(60.0f, (float) Ptime / 127.0f) - 0.97f;
+    float t = powf(60.0f, (float) Ptime / 127.0f) - 0.97f;
 
-    for (i = 0; i < REV_COMBS * 2; i++)
+    for (int i = 0; i < REV_COMBS * 2; i++)
     {
-        combfb[i] =
-                -expf((float) comblen[i] / fSAMPLE_RATE * logf(0.001f) /
-                      t);
+        combfb[i] =  -expf((float) comblen[i] / fSAMPLE_RATE * logf(0.001f) / t);
         //the feedback is negative because it removes the DC
     }
 }
@@ -304,10 +303,10 @@ Reverb::settime(int Ptime)
 void
 Reverb::setlohidamp(int Plohidamp)
 {
-    float x;
-
     if (Plohidamp < 64)
+    {
         Plohidamp = 64; //remove this when the high part from lohidamp will be added
+    }
 
     this->Plohidamp = Plohidamp;
 
@@ -319,12 +318,16 @@ Reverb::setlohidamp(int Plohidamp)
     else
     {
         if (Plohidamp < 64)
+        {
             lohidamptype = 1;
+        }
 
         if (Plohidamp > 64)
+        {
             lohidamptype = 2;
+        }
 
-        x = fabsf((float) (Plohidamp - 64) / 64.1f);
+        float x = fabsf((float) (Plohidamp - 64) / 64.1f);
         lohifb = x * x;
     }
 }
@@ -332,9 +335,8 @@ Reverb::setlohidamp(int Plohidamp)
 void
 Reverb::setidelay(int Pidelay)
 {
-    float delay;
     this->Pidelay = Pidelay;
-    delay = powf(50.0f * (float) Pidelay / 127.0f, 2.0f) - 1.0f;
+    float delay = powf(50.0f * (float) Pidelay / 127.0f, 2.0f) - 1.0f;
 
     idelaylen = lrintf(fSAMPLE_RATE * delay / 1000.0f);
 
@@ -343,7 +345,9 @@ Reverb::setidelay(int Pidelay)
         idelayk = 0;
 
         for (int i = 0; i < idelaylen; i++)
+        {
             idelay[i] = 0.0;
+        }
     }
 }
 
@@ -389,28 +393,38 @@ Reverb::settype(int Ptype)
     };
 
     if (Ptype >= NUM_TYPES)
+    {
         Ptype = NUM_TYPES - 1;
+    }
 
     this->Ptype = Ptype;
 
-    float tmp;
+    float tmp = 0.0;
 
     for (int i = 0; i < REV_COMBS * 2; i++)
     {
         if (Ptype == 0)
+        {
             tmp = 800.0f + (float) (RND * 1400.0f);
+        }
         else
+        {
             tmp = (float) combtunings[Ptype][i % REV_COMBS];
+        }
 
         tmp *= roomsize;
 
         if (i > REV_COMBS)
+        {
             tmp += 23.0f;
+        }
 
         tmp *= fSAMPLE_RATE / 44100.0f; //adjust the combs according to the samplerate
 
         if (tmp < 10)
+        {
             tmp = 10;
+        }
 
         comblen[i] = lrintf(tmp);
         combk[i] = 0;
@@ -420,19 +434,27 @@ Reverb::settype(int Ptype)
     for (int i = 0; i < REV_APS * 2; i++)
     {
         if (Ptype == 0)
+        {
             tmp = 500.0f + (float) (RND * 500.0f);
+        }
         else
+        {
             tmp = (float) aptunings[Ptype][i % REV_APS];
+        }
 
         tmp *= roomsize;
 
         if (i > REV_APS)
+        {
             tmp += 23.0f;
+        }
 
         tmp *= fSAMPLE_RATE / 44100.0f; //adjust the combs according to the samplerate
 
         if (tmp < 10)
+        {
             tmp = 10;
+        }
 
         aplen[i] = lrintf(tmp);
         apk[i] = 0;
@@ -446,13 +468,17 @@ void
 Reverb::setroomsize(int Proomsize)
 {
     if (Proomsize == 0)
+    {
         Proomsize = 64; //this is because the older versions consider roomsize=0
+    }
 
     this->Proomsize = Proomsize;
     roomsize = ((float) Proomsize - 64.0f) / 64.0f;
 
     if (roomsize > 0.0)
+    {
         roomsize *= 2.0f;
+    }
 
     roomsize = powf(10.0f, roomsize);
     rs = sqrtf(roomsize);
