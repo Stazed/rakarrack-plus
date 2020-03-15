@@ -186,10 +186,14 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
     float lfreq = logf(ffreq);
 
     while (lfreq < lfreqs[0] - LOG_D_NOTE * .5f)
+    {
         lfreq += LOG_2;
+    }
 
     while (lfreq >= lfreqs[0] + LOG_2 - LOG_D_NOTE * .5f)
+    {
         lfreq -= LOG_2;
+    }
 
     float mldf = LOG_D_NOTE;
     float ldf = 0.0;
@@ -256,20 +260,24 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
     }
 
     if ((lanota > 0 && lanota < 128) && (lanota != nota_actual))
+    {
         preparada = lanota;
+    }
 }
 
+// FIXME code duplication
 void
 MIDIConverter::schmittInit(int size)
 {
     blockSize = SAMPLE_RATE / size;
-    schmittBuffer =
-            (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2)); // +2 because valgrind bitches about invalid reads in schmittS16LE()
+    /* blocksize +2 because valgrind bitches about invalid reads in schmittS16LE() */
+    schmittBuffer =  (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2));
 
     memset(schmittBuffer, 0, sizeof (signed short int) * (blockSize + 2));
     schmittPointer = schmittBuffer;
 }
 
+// FIXME code duplication with same function from RecognizeNote.C
 void
 MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freqs, float *lfreqs)
 {
@@ -288,10 +296,14 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
             for (j = 0, A1 = 0, A2 = 0; j < blockSize; j++)
             {
                 if (schmittBuffer[j] > 0 && A1 < schmittBuffer[j])
+                {
                     A1 = schmittBuffer[j];
+                }
 
                 if (schmittBuffer[j] < 0 && A2 < -schmittBuffer[j])
+                {
                     A2 = -schmittBuffer[j];
+                }
             }
 
             int t1 = lrintf((float) A1 * trigfact + 0.5f);
@@ -323,8 +335,7 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
 
             if (endpoint > startpoint)
             {
-                afreq =
-                        fSAMPLE_RATE * ((float) tc / (float) (endpoint - startpoint));
+                afreq = fSAMPLE_RATE * ((float) tc / (float) (endpoint - startpoint));
                 displayFrequency(afreq, val_sum, freqs, lfreqs);
             }
         }

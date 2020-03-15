@@ -86,8 +86,8 @@ void
 Recognize::schmittInit(int size, double SAMPLE_RATE)
 {
     blockSize = SAMPLE_RATE / size;
-    schmittBuffer =
-            (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2)); // +2 because valgrind bitches about invalid reads in schmittS16LE()
+    // blocksize +2 because valgrind bitches about invalid reads in schmittS16LE()
+    schmittBuffer = (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2));
 
     memset(schmittBuffer, 0, sizeof (signed short int) * (blockSize + 2));
     schmittPointer = schmittBuffer;
@@ -104,33 +104,35 @@ Recognize::schmittS16LE(signed short int *indata)
         
         if (schmittPointer - schmittBuffer >= blockSize)
         {
-            int endpoint, startpoint, t1, t2, A1, A2, tc, schmittTriggered;
-            endpoint = startpoint = t1 = t2 = A1 = A2 = tc = schmittTriggered = 0;
-
             schmittPointer = schmittBuffer;
-
+            
+            int  A1, A2; A1 = A2 = 0;
             for (j = 0, A1 = 0, A2 = 0; j < blockSize; j++)
             {
                 if (schmittBuffer[j] > 0 && A1 < schmittBuffer[j])
+                {
                     A1 = schmittBuffer[j];
+                }
                 
                 if (schmittBuffer[j] < 0 && A2 < -schmittBuffer[j])
+                {
                     A2 = -schmittBuffer[j];
+                }
             }
             
-            t1 = lrintf((float) A1 * trigfact + 0.5f);
-            t2 = -lrintf((float) A2 * trigfact + 0.5f);
-            startpoint = 0;
+            int t1 = lrintf((float) A1 * trigfact + 0.5f);
+            int t2 = -lrintf((float) A2 * trigfact + 0.5f);
             
             for (j = 1; schmittBuffer[j] <= t1 && j < blockSize; j++);
             
             for (; !(schmittBuffer[j] >= t2 &&
                  schmittBuffer[j + 1] < t2) && j < blockSize; j++);
             
-            startpoint = j;
-            schmittTriggered = 0;
-            endpoint = startpoint + 1;
-            
+            int startpoint = j;
+            int schmittTriggered = 0;
+            int endpoint = startpoint + 1;
+            int tc = 0;
+
             for (j = startpoint, tc = 0; j < blockSize; j++)
             {
                 if (!schmittTriggered)
@@ -194,26 +196,30 @@ Recognize::schmittFloat(float *indatal, float *indatar)
 void
 Recognize::displayFrequency(float freq)
 {
-    int offset = 4;
+//    int offset = 4;
     int noteoff = 0;
     int octave = 4;
 
-    float ldf, mldf, lfreq;
-    ldf = mldf = lfreq = 0.0f;
-
     if (freq < 1E-15)
+    {
         freq = 1E-15f;
+    }
     
-    lfreq = logf(freq);
+    float lfreq = logf(freq);
     
     while (lfreq < lfreqs[0] - LOG_D_NOTE * .5f)
+    {
         lfreq += LOG_2;
+    }
     
     while (lfreq >= lfreqs[0] + LOG_2 - LOG_D_NOTE * .5f)
+    {
         lfreq -= LOG_2;
+    }
     
-    mldf = LOG_D_NOTE;
-    
+    float mldf = LOG_D_NOTE;
+    float ldf = 0;
+
     for (int i = 0; i < 12; i++)
     {
         ldf = fabsf(lfreq - lfreqs[i]);
@@ -253,7 +259,7 @@ Recognize::displayFrequency(float freq)
     if (!noteoff)
     {
         //    reconota = 24 + (octave * 12) + note - 3;
-        offset = lrintf(nfreq / 20.0);
+        int offset = lrintf(nfreq / 20.0);
         
         if (fabsf(lafreq - freq) > offset)
         {
