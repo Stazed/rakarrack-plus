@@ -24,7 +24,26 @@
 
 #include "RecChord.h"
 
-RecChord::RecChord()
+RecChord::RecChord() :
+    cc(),
+    fundi(),
+    bass(),
+    ctipo(),
+    NombreAcorde(),
+    ChN(),
+    NC(),
+    NCE(),
+    note_active(),
+    rnote(),
+    gate(),
+    r__ratio(),
+    NumChord3(),
+    NumChord4(),
+    NumChord5(),
+    Ch(),
+    Chord3(),
+    Chord4(),
+    Chord5()
 {
     memset(Ch, 0, sizeof (Ch));
 
@@ -284,9 +303,6 @@ RecChord::RecChord()
     NCE[21].note = -3;
     NCE[22].note = -2;
     NCE[23].note = -1;
-
-    ctipo = 0; //set chord type initial
-    fundi = 0; //set root note initial
 
     IniciaChords();
     memset(NombreAcorde, 0, sizeof (NombreAcorde));
