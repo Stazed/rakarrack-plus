@@ -27,23 +27,34 @@
 #include "RBFilter.h"
 
 RBFilter::RBFilter(int Ftype, float Ffreq, float Fq,
-                   int Fstages, double sample_rate, float* interpbuf)
+                   int Fstages, double sample_rate, float* interpbuf) :
+    st(),
+    par(),
+    ipar(),
+    fSAMPLE_RATE(sample_rate),
+    ismp(interpbuf),
+    type(Ftype),
+    freq(Ffreq),
+    q(Fq),
+    stages(Fstages),
+    abovenq(),
+    oldabovenq(),
+    needsinterpolation(),
+    firsttime(1),
+    en_mix(),
+    qmode(),
+    gain(1.0f),
+    hpg(),
+    lpg(),
+    bpg(),
+    oldq(),
+    oldsq(),
+    oldf(),
+    a_smooth_tc(),
+    b_smooth_tc(),
+    iper()
 {
-    stages = Fstages;
-    type = Ftype;
-    freq = Ffreq;
-    q = Fq;
-    qmode = 0;
-    gain = 1.0f;
-    outgain = 1.0f;
-    needsinterpolation = 0;
-    firsttime = 1;
-    en_mix = 0;
-    oldq = 0.0f;
-    oldsq = 0.0f;
-    oldf = 0.0f;
-    hpg = lpg = bpg = 0.0f;
-    fSAMPLE_RATE = sample_rate;
+    outgain = 1.0f;         // From Filter_.h
     
     if (stages >= MAX_FILTER_STAGES)
     {
@@ -55,7 +66,6 @@ RBFilter::RBFilter(int Ftype, float Ffreq, float Fq,
     float cSAMPLE_RATE = 1 / sample_rate;
     a_smooth_tc = cSAMPLE_RATE / (cSAMPLE_RATE + 0.01f); //10ms time constant for averaging coefficients
     b_smooth_tc = 1.0f - a_smooth_tc;
-    ismp = interpbuf;
 }
 
 RBFilter::~RBFilter()
