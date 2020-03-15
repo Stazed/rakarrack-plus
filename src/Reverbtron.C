@@ -180,12 +180,12 @@ Reverbtron::clear_initialize()
 void
 Reverbtron::out(float * efxoutl, float * efxoutr)
 {
-    int i, j, xindex, hindex;
-    float l, lyn, hyn;
-    float ldiff, rdiff;
+    int j, xindex, hindex;  j = xindex = hindex = 0;
+    float l, lyn, hyn;      l = lyn = hyn = 0.0f;
+    float ldiff, rdiff;     ldiff = rdiff = 0.0f;
     int length = Llength;
     hlength = Pdiff;
-    int doffset;
+    int doffset = 0;
 
     if (DS_state != 0)
     {
@@ -195,7 +195,7 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
     }
 
 
-    for (i = 0; i < nPERIOD; i++)
+    for (int i = 0; i < nPERIOD; i++)
     {
 
         l = 0.5f * (efxoutr[i] + efxoutl[i]);
@@ -300,7 +300,9 @@ Reverbtron::setvolume(int Pvolume)
     outvolume = (float) Pvolume / 127.0f;
     
     if (Pvolume == 0)
+    {
         cleanup();
+    }
 }
 
 void
@@ -337,6 +339,7 @@ Reverbtron::setfile(int value)
     }
 #endif // LV2_SUPPORT
 
+    /* !Puser means one of the default files, so set the Filenum to get it */
     if (!Puser)
     {
         Filenum = value;
@@ -348,7 +351,9 @@ Reverbtron::setfile(int value)
     applyfile(filedata);
     
     if (error)
+    {
         return 0;
+    }
     
     return 1;
 
@@ -409,11 +414,6 @@ Reverbtron::setfile(int value)
 RvbFile
 Reverbtron::loadfile(char* filename)
 {
-    int i;
-    float compresion = 0.0f;
-    float quality = 0.0f;
-    char wbuf[128];
-
     FILE *fs;
 
     RvbFile f;
@@ -430,7 +430,8 @@ Reverbtron::loadfile(char* filename)
     memset(f.tdata, 0, sizeof (float)*2000);
     memset(f.ftime, 0, sizeof (float)*2000);
 
-    //Name
+    //  Name
+    char wbuf[128];
     memset(wbuf, 0, sizeof (wbuf));
     
     if (fgets(wbuf, sizeof wbuf, fs) == NULL)
@@ -440,7 +441,7 @@ Reverbtron::loadfile(char* filename)
         return (f);
     }
 
-    // Subsample Compresion Skip
+    //  Subsample Compression Skip
     memset(wbuf, 0, sizeof (wbuf));
     
     if (fgets(wbuf, sizeof wbuf, fs) == NULL)
@@ -450,9 +451,11 @@ Reverbtron::loadfile(char* filename)
         return (f);
     }
 
-    sscanf(wbuf, "%f,%f\n", &compresion, &quality);
+    float compression = 0.0f;
+    float quality = 0.0f;
+    sscanf(wbuf, "%f,%f\n", &compression, &quality);
 
-    //Length
+    //  Length
     memset(wbuf, 0, sizeof (wbuf));
     
     if (fgets(wbuf, sizeof wbuf, fs) == NULL)
@@ -465,8 +468,9 @@ Reverbtron::loadfile(char* filename)
     sscanf(wbuf, "%d\n", &f.data_length);
     
     if (f.data_length > 2000) f.data_length = 2000;
-    //Time Data
-    for (i = 0; i < f.data_length; i++)
+    
+    //  Time Data
+    for (int i = 0; i < f.data_length; i++)
     {
         memset(wbuf, 0, sizeof (wbuf));
         
@@ -485,7 +489,7 @@ Reverbtron::loadfile(char* filename)
     f.maxdata = 0.0f;
     //    float averaget = 0.0f;
     //    float tempor = 0.0f;
-    for (i = 0; i < f.data_length; i++)
+    for (int i = 0; i < f.data_length; i++)
     {
         if (f.ftime[i] > f.maxtime) f.maxtime = f.ftime[i];
         if (f.tdata[i] > f.maxdata) f.maxdata = f.tdata[i]; //used to normalize so feedback is more predictable
@@ -521,25 +525,24 @@ RvbFile Reverbtron::loaddefault()
 
 void Reverbtron::convert_time()
 {
-    int i;
-    int index = 0;
-    int count;
-    float tmp;
-    float skip = 0.0f;
-    float incr = 0.0f;
-    float findex;
-    float tmpstretch = 1.0f;
-    float normal = 0.9999f / File.maxdata;
 
     memset(data, 0, sizeof (float)*(1 + hrtf_size));
     memset(time, 0, sizeof (int)*2000);
     memset(rndtime, 0, sizeof (int)*2000);
 
-    if (Llength >= File.data_length) Llength = File.data_length;
-    if (Llength == 0) Llength = 400;
-    
-    incr = ((float) Llength) / ((float) File.data_length);
+    if (Llength >= File.data_length)
+    {
+        Llength = File.data_length;
+    }
 
+    if (Llength == 0)
+    {
+        Llength = 400;
+    }
+    
+    float incr = ((float) Llength) / ((float) File.data_length);
+
+    float tmpstretch = 1.0f;
     if (fstretch > 0.0)
     {
         tmpstretch = 1.0f + fstretch * (convlength / File.maxtime);
@@ -549,15 +552,16 @@ void Reverbtron::convert_time()
         tmpstretch = 1.0f + 0.95f * fstretch;
     }
 
-    skip = 0.0f;
-    index = 0;
+    float skip = 0.0f;
+    int index = 0;
+    float normal = 0.9999f / File.maxdata;
 
     if (File.data_length > Llength)
     {
-        for (i = 0; i < File.data_length; i++)
+        for (int i = 0; i < File.data_length; i++)
         {
             skip += incr;
-            findex = (float) index;
+            float findex = (float) index;
             if (findex < skip)
             {
                 if (index < Llength)
@@ -567,60 +571,73 @@ void Reverbtron::convert_time()
                         File.ftime[i] = 0.0f; //TODO: why are we destroying the file data?
                         data[i] = 0.0f;
                     }
-                    time[index] = lrintf(tmpstretch * (idelay + File.ftime[i]) * nfSAMPLE_RATE); //Add initial delay to all the samples
+                    time[index] = lrintf(tmpstretch * (idelay + File.ftime[i]) * nfSAMPLE_RATE); // Add initial delay to all the samples
                     data[index] = normal * File.tdata[i];
                     index++;
                 }
             }
         };
         Llength = index;
-    } //endif
+    } //    endif
     else
     {
+        int i;
         for (i = 0; i < File.data_length; i++)
         {
-            if ((idelay + File.ftime[i]) > 5.9f) File.ftime[i] = 5.9f;
+            if ((idelay + File.ftime[i]) > 5.9f)
+            {
+                File.ftime[i] = 5.9f;
+            }
             
-            time[i] = lrintf(tmpstretch * (idelay + File.ftime[i]) * nfSAMPLE_RATE); //Add initial delay to all the samples
+            time[i] = lrintf(tmpstretch * (idelay + File.ftime[i]) * nfSAMPLE_RATE); // Add initial delay to all the samples
             data[i] = normal * File.tdata[i];
         }
         
         Llength = i;
     }
 
-    //generate an approximated randomized hrtf for diffusing reflections:
+    //  generate an approximated randomized hrtf for diffusing reflections:
     int tmptime = 0;
     int hrtf_tmp = Pdiff;
     
-    if (hrtf_tmp > File.data_length) hrtf_tmp = File.data_length - 1;
+    if (hrtf_tmp > File.data_length)
+    {
+        hrtf_tmp = File.data_length - 1;
+    }
     
-    if (hlength > File.data_length) hlength = File.data_length - 1;
+    if (hlength > File.data_length)
+    {
+        hlength = File.data_length - 1;
+    }
     
-    for (i = 0; i < hrtf_tmp; i++)
+    for (int i = 0; i < hrtf_tmp; i++)
     {
         tmptime = (int) (RND * hrtf_size);
-        rndtime[i] = tmptime; //randomly jumble the head of the transfer function
+        rndtime[i] = tmptime; //    randomly jumble the head of the transfer function
         rnddata[i] = 3.0f * (0.5f - RND) * data[tmptime];
     }
 
     if (Pfade > 0)
     {
-        count = lrintf(ffade * ((float) index));
-        tmp = 0.0f;
+        int count = lrintf(ffade * ((float) index));
+        float tmp = 0.0f;
         
-        for (i = 0; i < count; i++)
-        { //head fader
+        for (int i = 0; i < count; i++)
+        { //    head fader
 
             tmp = ((float) i) / ((float) count);
             data[i] *= tmp;
-            //fade the head here
+            //  fade the head here
         }
     }
 
-    //guess at room size
-    roomsize = time[0] + (time[1] - time[0]) / 2; //to help stagger left/right reflection times
+    //  guess at room size
+    roomsize = time[0] + (time[1] - time[0]) / 2; //    to help stagger left/right reflection times
     
-    if (roomsize > imax) roomsize = imax;
+    if (roomsize > imax)
+    {
+        roomsize = imax;
+    }
     
     setfb(Pfb);
 
@@ -648,9 +665,13 @@ void
 Reverbtron::setfb(int value)
 {
     if (Pfb <= 0)
+    {
         fb = (float) value / 64.0f * 0.3f;
+    }
     else
+    {
         fb = (float) value / 64.0f * 0.15f;
+    }
 
     fb *= ((1627.0f - (float) Pdiff - (float) Llength) / 1627.0f);
     fb *= (1.0f - ((float) Plevel / 127.0f));
