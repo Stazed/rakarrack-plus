@@ -26,66 +26,99 @@
 #include <math.h>
 #include "Reverbtron.h"
 
-Reverbtron::Reverbtron(int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Reverbtron::Reverbtron(int DS, int uq, int dq,
+                       double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    Filename(),
+    File(),
+    PERIOD(intermediate_bufsize),
+    nPERIOD(),
+    nSAMPLE_RATE((int) sample_rate),
+    fSAMPLE_RATE(sample_rate),
+    nfSAMPLE_RATE(sample_rate),
+    Pvolume(50),
+    Ppanning(64),
+    Plrcross(100),
+    Phidamp(60),
+    Plevel(),
+    Plength(20),
+    Puser(),
+    Pstretch(),
+    Pidelay(),
+    Filenum(),
+    Psafe(),
+    Pfb(1),
+    Pfade(1),
+    Pes(),
+    Prv(),
+    Plpf(20000),
+    Pdiff(1),
+    imctr(),
+    imax(),
+    offset(),
+    hoffset(),
+    maxx_size(),
+    error(),
+    Llength(50),
+    hrtf_size(),
+    hlength(),
+    DS_state(DS),
+    nRATIO(),
+    time(NULL),
+    rndtime(NULL),
+    u_up(),
+    u_down(),
+    fstretch(1.0f),
+    idelay(1.0f),
+    ffade(),
+    decay(),
+    diffusion(),
+    lpanning(),
+    rpanning(),
+    hidamp(0.0f),
+    alpha_hidamp(1.0f - hidamp),
+    convlength(10.0f),  //  max reverb time
+    oldl(),
+    data(NULL),
+    lxn(NULL),
+    imdelay(NULL),
+    rnddata(NULL),
+    hrtf(NULL),
+    templ(NULL),
+    tempr(NULL),
+    level(),
+    fb(),
+    feedback(),
+    levpanl(),
+    levpanr(),
+    roomsize(1.0f),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    interpbuf(NULL),
+    lpfl(NULL),
+    lpfr(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    nSAMPLE_RATE = (int) sample_rate;
-    nfSAMPLE_RATE = sample_rate;
-    fSAMPLE_RATE = sample_rate;
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 64;
-    Plrcross = 100;
-    Phidamp = 60;
-    Plevel = 0;
-    Plength = 20;
-    Filenum = 0;
-    Llength = 50;
-    Puser = 0;
-    Pstretch = 0;
-    Pidelay = 0;
-    Psafe = 0;
-    Pes = 0;
-    Prv = 0;
-    Plpf = 20000;
-    Pdiff = 1;
-    Pfade = 1;
-    Pfb = 1;
-    error = 0;
-    convlength = 10.0f; //max reverb time
-
-    level = fb = feedback = levpanl = levpanr = 0.0f;
-    roomsize = 1.0f;
-    lpanning = rpanning = 0.0f;
-    outvolume = 0.5f;
-
+    //  default values
     adjust(DS, sample_rate);
 
     hrtf_size = nSAMPLE_RATE / 2;
-    maxx_size = (int) (nfSAMPLE_RATE * convlength); //just to get the max memory allocated
+    maxx_size = (int) (nfSAMPLE_RATE * convlength); //  just to get the max memory allocated
     time = (int *) malloc(sizeof (int) * 2000);
     rndtime = (int *) malloc(sizeof (int) * 2000);
     data = (float *) malloc(sizeof (float) * (1 + hrtf_size));
     rnddata = (float *) malloc(sizeof (float) * 2000);
     lxn = (float *) malloc(sizeof (float) * (1 + maxx_size));
     hrtf = (float *) malloc(sizeof (float) * (1 + hrtf_size));
-    imax = nSAMPLE_RATE / 2; // 1/2 second available
+    imax = nSAMPLE_RATE / 2;                        // 1/2 second available
     imdelay = (float *) malloc(sizeof (float) * imax);
-    imctr = 0;
-    offset = 0;
-    hoffset = 0;
-    hlength = 0;
-    fstretch = 1.0f;
-    idelay = 1.0f;
-    ffade = diffusion = hidamp = 0.0f;
-    alpha_hidamp = 1.0f - hidamp;
-    decay = f_exp(-1.0f / (0.2f * nfSAMPLE_RATE)); //0.2 seconds
+    decay = f_exp(-1.0f / (0.2f * nfSAMPLE_RATE));  //   0.2 seconds
 
     initialize();
     File = loaddefault();
 
-    U_Resample = new Resample(dq); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
+    U_Resample = new Resample(dq);                  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
     D_Resample = new Resample(uq);
 
     setpreset(Ppreset);
