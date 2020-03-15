@@ -30,31 +30,50 @@
 
 /*TODO: EarlyReflections,Prdelay,Perbalance */
 
-Reverb::Reverb(double samplerate, uint16_t intermediate_bufsize)
+Reverb::Reverb(double samplerate, uint16_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    fSAMPLE_RATE(samplerate),
+    PERIOD(intermediate_bufsize),
+    Pvolume(48),
+    Ppan(64),
+    Ptime(64),
+    Pidelay(40),
+    Pidelayfb(),
+    Prdelay(),
+    Perbalance(64),
+    Plpf(127),
+    Phpf(),
+    Plohidamp(80),
+    Ptype(1),
+    Proomsize(64),
+    lohidamptype(),
+    idelaylen(),
+    rdelaylen(),
+    idelayk(),
+    comblen(),
+    aplen(),
+    combk(),
+    apk(),
+    lohifb(),
+    idelayfb(),
+    roomsize(1.0f),
+    rs(1.0f),
+    rs_coeff(rs / (float) REV_COMBS),
+    pan(),
+    erbalance(),
+    comb(),
+    combfb(),
+    lpcomb(),
+    ap(),
+    inputbuf(NULL),
+    idelay(NULL),
+    interpbuf(NULL),
+    lpf(NULL),
+    hpf(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = samplerate;
-
     initialize();
-
-    //defaults
-    Ppreset = 0;
-    Pvolume = 48;
-    Ppan = 64;
-    Ptime = 64;
-    Pidelay = 40;
-    Pidelayfb = 0;
-    Prdelay = 0;
-    Plpf = 127;
-    Phpf = 0;
-    Perbalance = 64;
-    Plohidamp = 80;
-    Ptype = 1;
-    Proomsize = 64;
-    roomsize = 1.0f;
-    rs = 1.0f;
-    rs_coeff = rs / (float) REV_COMBS;
-    outvolume = 0.5f;
 
     //max comb length
     unsigned int tmp = lrintf(220023.0 * samplerate / 44100.0);
