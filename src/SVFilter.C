@@ -40,7 +40,9 @@ SVFilter::SVFilter(unsigned char Ftype, float Ffreq, float Fq,
     fSAMPLE_RATE = sample_rate;
     
     if (stages >= MAX_FILTER_STAGES)
+    {
         stages = MAX_FILTER_STAGES;
+    }
     
     cleanup();
     setfreq_and_q(Ffreq, Fq);
@@ -72,7 +74,9 @@ SVFilter::computefiltercoefs()
     par.f = freq / fSAMPLE_RATE * 4.0f;
     
     if (par.f > 0.99999)
+    {
         par.f = 0.99999f;
+    }
     
     par.q = 1.0f - atanf(sqrtf(q)) * 2.0f / PI;
     par.q = powf(par.q, 1.0f / (float) (stages + 1));
@@ -83,12 +87,16 @@ void
 SVFilter::setfreq(float frequency)
 {
     if (frequency < 0.1)
+    {
         frequency = 0.1f;
+    }
     
     float rap = freq / frequency;
     
     if (rap < 1.0)
+    {
         rap = 1.0f / rap;
+    }
 
     oldabovenq = abovenq;
     abovenq = frequency > (fSAMPLE_RATE / 2.0f - 500.0f);
@@ -99,7 +107,9 @@ SVFilter::setfreq(float frequency)
     {
         //if the frequency is changed fast, it needs interpolation (now, filter and coeficients backup)
         if (firsttime == 0)
+        {
             needsinterpolation = 1;
+        }
         
         ipar = par;
     }
@@ -141,7 +151,9 @@ void
 SVFilter::setstages(int stages_)
 {
     if (stages_ >= MAX_FILTER_STAGES)
+    {
         stages_ = MAX_FILTER_STAGES - 1;
+    }
     
     stages = stages_;
     cleanup();
@@ -151,7 +163,6 @@ SVFilter::setstages(int stages_)
 void
 SVFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t period)
 {
-    unsigned int i;
     float *out = NULL;
     switch (type)
     {
@@ -169,7 +180,7 @@ SVFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t pe
         break;
     }
 
-    for (i = 0; i < period; i++)
+    for (unsigned int i = 0; i < period; i++)
     {
         x.low = x.low + par.f * x.band;
         x.high = par.q_sqrt * smp[i] - x.low - par.q * x.band;
@@ -183,19 +194,25 @@ SVFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t pe
 void
 SVFilter::filterout(float * smp, uint32_t period)
 {
-    unsigned int i;
+    unsigned int i = 0;
 
     if (needsinterpolation != 0)
     {
         for (i = 0; i < period; i++)
+        {
             ismp[i] = smp[i];
+        }
         
         for (i = 0; i < stages + 1; i++)
+        {
             singlefilterout(ismp, st[i], ipar, period);
+        }
     }
 
     for (i = 0; i < stages + 1; i++)
+    {
         singlefilterout(smp, st[i], par, period);
+    }
 
     if (needsinterpolation != 0)
     {
@@ -211,5 +228,7 @@ SVFilter::filterout(float * smp, uint32_t period)
     }
 
     for (i = 0; i < period; i++)
+    {
         smp[i] *= outgain;
+    }
 }

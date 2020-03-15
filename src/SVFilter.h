@@ -70,15 +70,16 @@ private:
     void computefiltercoefs ();
     int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
     unsigned int stages;//how many times the filter is applied (0->1,1->2,etc.)
+    float freq;		//Frequency given in Hz
+    float q;			//Q factor (resonance or Q factor)
+    float fSAMPLE_RATE;
+    float * ismp;  //buffer used if filter interpolates
+    
     int abovenq;			//this is 1 if the frequency is above the nyquist
     int oldabovenq;
     int needsinterpolation, firsttime;
-
-    float freq;		//Frequency given in Hz
-    float q;			//Q factor (resonance or Q factor)
     float gain;		//the gain of the filter (if are shelf/peak) filters
-    float fSAMPLE_RATE;
-    float * ismp;  //buffer used if filter interpolates
+
 
 };
 
