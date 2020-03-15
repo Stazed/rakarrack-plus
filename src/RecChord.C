@@ -250,10 +250,14 @@ RecChord::RecChord()
         };
 
         for (int i = 0; i <= 11; i++)
+        {
             strcpy(NC[i].Nom, stnom[i]);
+        }
         
         for (int i = 0; i <= 23; i++)
+        {
             strcpy(NCE[i].Nom, stnom[i]);
+        }
     }
     
     NCE[0].note = 0;
@@ -295,10 +299,9 @@ RecChord::~RecChord()
 void
 RecChord::cleanup()
 {
-    int i;
     memset(NombreAcorde, 0, sizeof (NombreAcorde));
     
-    for (i = 0; i < POLY; i++)
+    for (int i = 0; i < POLY; i++)
     {
         note_active[i] = 0;
         rnote[i] = 0;
@@ -311,7 +314,6 @@ RecChord::cleanup()
 void
 RecChord::IniciaChords()
 {
-    int i, j;
     int notas = 1;
     int numno[6];
 
@@ -323,12 +325,12 @@ RecChord::IniciaChords()
     memset(Chord4, 0, sizeof (Chord4));
     memset(Chord5, 0, sizeof (Chord5));
 
-    for (i = 0; i <= 33; i++)
+    for (int i = 0; i <= 33; i++)
     {
         notas = 1;
         memset(numno, 0, sizeof (numno));
 
-        for (j = 1; j <= 11; j++)
+        for (int j = 1; j <= 11; j++)
         {
             if (Ch[i][j] == 1)
             {
@@ -461,12 +463,10 @@ RecChord::IniciaChords()
 void
 RecChord::MiraChord()
 {
-    int i, j;
+    int i = 0;
+    int j = 0;
     int anote[POLY];
     int nnotes = 0;
-    int temp;
-    int di1, di2, di3, di4;
-    int labaja;
     char AName[21];
 
     for (i = 0; i < POLY; i++)
@@ -481,7 +481,7 @@ RecChord::MiraChord()
     if ((nnotes < 3) || (nnotes > 5))
         return;
 
-    labaja = anote[0];
+    int labaja = anote[0];
     
     for (i = 1; i < nnotes - 1; i++)
         if (anote[i] < labaja)
@@ -491,6 +491,7 @@ RecChord::MiraChord()
         if (anote[i] - labaja > 12)
             anote[i] -= 12;
     
+    int temp = 0;
     for (i = 1; i < nnotes; i++)
     {
         for (j = 0; j < nnotes - 1; j++)
@@ -505,6 +506,8 @@ RecChord::MiraChord()
     }
 
     bass = anote[0] % 12;
+    
+    int di1, di2, di3, di4;
 
 sigue:
 
@@ -669,62 +672,54 @@ RecChord::plus(int nota)
 void
 RecChord::Vamos(int voz, int interval, int reconota)
 {
-    int n1, h1;
-    int hm1, hp1;
-    int hm2, hp2;
-    int hm3, hp3;
     int ninterval = interval;
     int tengo = 0;
-    int nota;
-    int harmo;
-    int typo;
-
-    nota = reconota % 12;
+    int nota = reconota % 12;
 
     nota -= fundi;
     
     if (nota < 0)
         nota += 12;
 
-    harmo = (12 + nota + interval) % 12;
+    int harmo = (12 + nota + interval) % 12;
     
     if (harmo > 12)
         harmo %= 12;
 
-    hm1 = harmo - 1;
+    int hm1 = harmo - 1;
     
     if (hm1 < 0)
         hm1 += 12;
     
-    hp1 = harmo + 1;
+    int hp1 = harmo + 1;
     
     if (hp1 > 12)
         hp1 %= 12;
 
-    hm2 = harmo - 2;
+    int hm2 = harmo - 2;
     
     if (hm2 < 0)
         hm2 += 12;
     
-    hp2 = harmo + 2;
+    int hp2 = harmo + 2;
     
     if (hp2 > 12)
         hp2 %= 12;
 
-    hm3 = harmo - 3;
+    int hm3 = harmo - 3;
     
     if (hm3 < 0)
         hm3 += 12;
     
-    hp3 = harmo + 3;
+    int hp3 = harmo + 3;
     
     if (hp3 > 12)
         hp3 %= 12;
 
-    n1 = Ch[ctipo][nota];
-    h1 = Ch[ctipo][harmo];
+    int n1 = Ch[ctipo][nota];
+    int h1 = Ch[ctipo][harmo];
 
-    typo = 3;
+    int typo = 3;
 
     if ((n1 == 1) && (h1 == 1))
         typo = 0;
