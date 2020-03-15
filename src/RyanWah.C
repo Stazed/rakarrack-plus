@@ -27,37 +27,58 @@
 #include "AnalogFilter.h"
 #include <stdio.h>
 
-RyanWah::RyanWah(double sample_rate, uint32_t intermediate_bufsize)
+RyanWah::RyanWah(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    Pmode(),
+    outvolume(0.5f),
+    fSAMPLE_RATE(sample_rate),
+    PERIOD(intermediate_bufsize),
+    Pvolume(),
+    Pwidth(),
+    Pampsns(),
+    Pampsnsinv(),
+    Pampsmooth(),
+    Prange(),
+    Php(),
+    Plp(),
+    Pbp(),
+    Pq(),
+    Pqm(1),                 //  Set backward compatibility mode by default.
+    Pstages(),
+    Pminfreq(),
+    Pamode(),
+    variq(),
+    Ftype(1),
+    Fstages(1),
+    rpanning(),
+    lpanning(),
+    depth(),
+    ampsns(),
+    ampsmooth(),
+    wahsmooth(1.0f - expf(-1.0f / (0.02f * sample_rate))),  //  0.02 seconds
+    fbias(),
+    oldfbias(),
+    oldfbias1(),
+    oldfbias2(),
+    q(10.0f),
+    frequency(40.0f),
+    maxfreq(5000.0f),
+    base(7.0f),             //  sets curve of modulation to frequency relationship
+    ibase(1.0f / base),
+    minfreq(40.0f),
+    ms1(),
+    lpmix(0.5f),
+    hpmix(),
+    bpmix(2.0f),
+    centfreq(),
+    filterl(NULL),
+    filterr(NULL),
+    sidechain_filter(NULL),
+    interpbuf(NULL),
+    Fpre(NULL),
+    lfo(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
-    filterl = NULL;
-    filterr = NULL;
-
-    base = 7.0f; //sets curve of modulation to frequency relationship
-    ibase = 1.0f / base;
-
-    Pampsns = 0;
-    Pampsnsinv = 0;
-    Pampsmooth = 0;
-    Pamode = 0;
-    maxfreq = 5000.0f;
-    minfreq = 40.0f;
-    frequency = 40.0f;
-    q = 10.0f;
-    Pqm = 1; //Set backward compatibility mode by default.
-    hpmix = 0.0f;
-    lpmix = 0.5f;
-    bpmix = 2.0f;
-    Ppreset = 0;
-    wahsmooth = 1.0f - expf(-1.0f / (0.02f * sample_rate)); //0.02 seconds
-    outvolume = 0.5f;
-
     lfo = new EffectLFO(sample_rate);
-
-    Fstages = 1;
-    Ftype = 1;
 
     initialize();
     setpreset(Ppreset);
