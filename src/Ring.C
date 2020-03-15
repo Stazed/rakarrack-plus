@@ -26,11 +26,40 @@
 #include <math.h>
 #include "Ring.h"
 
-Ring::Ring(double sample_rate, uint32_t intermediate_bufsize)
+Ring::Ring(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    Pafreq(),
+    Pfreq(),
+    outvolume(0.5f),
+    SAMPLE_RATE(lrintf(sample_rate)),
+    PERIOD(intermediate_bufsize),
+    Pvolume(50),
+    Ppanning(),
+    Plrcross(40),
+    Pinput(),
+    Plevel(64),
+    Pdepthp(),
+    Psin(),
+    Ptri(),
+    Psaw(),
+    Psqu(),
+    Pstereo(),
+    offset(),
+    panning(),
+    lrcross(),
+    sin_tbl(NULL),
+    tri_tbl(NULL),
+    saw_tbl(NULL),
+    squ_tbl(NULL),
+    sin(),
+    tri(),
+    saw(),
+    squ(),
+    scale(1.0f),
+    depth(),
+    idepth(),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    SAMPLE_RATE = lrintf(sample_rate);
-
     sin_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
     tri_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
     squ_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
@@ -41,22 +70,6 @@ Ring::Ring(double sample_rate, uint32_t intermediate_bufsize)
     //saw_tbl = new float[SAMPLE_RATE];//(float *) malloc(sizeof(float) * SAMPLE_RATE);
 
     Create_Tables(sample_rate);
-
-    offset = 0;
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Plrcross = 40;
-    Plevel = 64;
-    Pstereo = 0;
-    outvolume = 0.5f;
-
-    scale = 1.0f;
-    sin = 0.0f;
-    tri = 0.0f;
-    saw = 0.0f;
-    squ = 0.0f;
 
     setpreset(Ppreset);
     cleanup();
