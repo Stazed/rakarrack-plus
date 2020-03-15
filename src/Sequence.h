@@ -35,7 +35,11 @@ public:
     Sequence (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsze);
     ~Sequence ();
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     void out (float * efxoutl, float * efxoutr);
@@ -53,7 +57,13 @@ public:
 private:
     
     void setvolume (int volume);
+    
+    uint32_t PERIOD;
+    float fSAMPLE_RATE;
+    
     //Parametrii
+    int DS_state;
+    long int hq;
     int Pvolume;	       //Output Level
     int Psequence[8];	//Sequence.  Each value is 0...127
     int Ptempo;           // Rate
@@ -65,17 +75,13 @@ private:
     int tcount, scount, dscount, intperiod;
     int subdiv;
     int rndflag;
-    int DS_state;
-    uint32_t PERIOD;
     unsigned int nPERIOD;
     int nSAMPLE_RATE;
     float nRATIO;
-    float fSAMPLE_RATE;
 
     double u_up;
     double u_down;
 
-    long int hq;
     long window;
 
     float nfSAMPLE_RATE;
