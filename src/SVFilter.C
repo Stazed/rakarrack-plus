@@ -27,18 +27,24 @@
 #include "SVFilter.h"
 
 SVFilter::SVFilter(unsigned char Ftype, float Ffreq, float Fq,
-                   unsigned char Fstages, double sample_rate, float *interpbuf)
+                   unsigned char Fstages, double sample_rate, float *interpbuf) :
+    st(),
+    par(),
+    ipar(),
+    type(Ftype),
+    stages(Fstages),
+    freq(Ffreq),
+    q(Fq),
+    fSAMPLE_RATE(sample_rate),
+    ismp(interpbuf),
+    abovenq(),
+    oldabovenq(),
+    needsinterpolation(),
+    firsttime(1),
+    gain(1.0f)
 {
-    stages = Fstages;
-    type = Ftype;
-    freq = Ffreq;
-    q = Fq;
-    gain = 1.0f;
-    outgain = 1.0f;
-    needsinterpolation = 0;
-    firsttime = 1;
-    fSAMPLE_RATE = sample_rate;
-    
+    outgain = 1.0f;     // From Filter_.h
+
     if (stages >= MAX_FILTER_STAGES)
     {
         stages = MAX_FILTER_STAGES;
@@ -46,7 +52,6 @@ SVFilter::SVFilter(unsigned char Ftype, float Ffreq, float Fq,
     
     cleanup();
     setfreq_and_q(Ffreq, Fq);
-    ismp = interpbuf;
 }
 
 SVFilter::~SVFilter()
