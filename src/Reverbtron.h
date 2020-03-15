@@ -56,7 +56,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     int setfile (int value);
@@ -80,7 +84,12 @@ private:
     void convert_time();
     RvbFile loaddefault();
 
-
+    uint32_t PERIOD;
+    int nPERIOD;
+    int nSAMPLE_RATE;
+    double fSAMPLE_RATE;
+    float nfSAMPLE_RATE;
+    
     //Parametrii
     int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
     int Ppanning;	//Panning
@@ -112,17 +121,12 @@ private:
     int hrtf_size;
     int hlength;
     int DS_state;
-    uint32_t PERIOD;
-    int nPERIOD;
-    int nSAMPLE_RATE;
-    double fSAMPLE_RATE;
     float nRATIO;
 
 
     int *time, *rndtime;
     double u_up;
     double u_down;
-    float nfSAMPLE_RATE;
 
     //float fstretch, idelay, ffade, maxtime, maxdata, decay, diffusion;
     float fstretch, idelay, ffade, decay, diffusion;

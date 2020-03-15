@@ -129,6 +129,7 @@ Reverbtron::cleanup()
     lpfr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 Reverbtron::lv2_update_params(uint32_t period)
 {
@@ -147,6 +148,7 @@ Reverbtron::lv2_update_params(uint32_t period)
         adjust(DS_state, fSAMPLE_RATE);
     }
 }
+#endif // LV2
 
 void
 Reverbtron::initialize()
