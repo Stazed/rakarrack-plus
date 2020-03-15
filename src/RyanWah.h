@@ -39,7 +39,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+
     void initialize();
     void clear_initialize();
 
@@ -53,6 +57,9 @@ private:
     void setwidth (int Pwidth);
     void setampsns (int Pampsns);
     void reinitfilter ();
+
+    float fSAMPLE_RATE;
+    uint32_t PERIOD;
 
     int Pvolume;		//For wet/dry mix
     int Pwidth;		//0/127// The width of the lfo of the RyanWah
@@ -86,9 +93,6 @@ private:
     float* interpbuf; //buffer for filters
 
     class FPreset *Fpre;
-
-    float fSAMPLE_RATE;
-    uint32_t PERIOD;
     EffectLFO *lfo;		//lfo-ul RyanWah
     
 };

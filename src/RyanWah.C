@@ -77,11 +77,10 @@ RyanWah::~RyanWah()
 void
 RyanWah::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float lmod, rmod;
-    float lfol, lfor;
+    float lmod, rmod; lmod = rmod = 0.0f;
     float rms = 0.0f;
-
+    
+    float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
     
     if (Pamode)
@@ -95,7 +94,7 @@ RyanWah::out(float * efxoutl, float * efxoutr)
         lfor *= depth * 5.0f;
     }
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         float x = (fabsf(sidechain_filter->filterout_s(efxoutl[i] + efxoutr[i]))) * 0.5f;
         ms1 = ms1 * ampsmooth + x * (1.0f - ampsmooth) + 1e-10f;
@@ -108,11 +107,19 @@ RyanWah::out(float * efxoutl, float * efxoutr)
         if (Pamode)
         {
             rms = ms1 * ampsns + oldfbias2;
-            if (rms < 0.0f) rms = 0.0f;
+            
+            if (rms < 0.0f)
+            {
+                rms = 0.0f;
+            }
+            
             lmod = (minfreq + lfol + rms) * maxfreq;
             rmod = (minfreq + lfor + rms) * maxfreq;
             
-            if (variq) q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
+            if (variq)
+            {
+                q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
+            }
             
             filterl->setq(q);
             filterr->setq(q);
@@ -136,7 +143,10 @@ RyanWah::out(float * efxoutl, float * efxoutr)
             rms = -1.0f + 1.0f / (rms * rms + 1.0f);
         }
 
-        if (variq) q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
+        if (variq)
+        {
+            q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
+        }
 
         lmod = (lfol + rms);
         rmod = (lfor + rms);
@@ -173,6 +183,7 @@ RyanWah::cleanup()
     filterr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 RyanWah::lv2_update_params(uint32_t period)
 {
@@ -194,6 +205,7 @@ RyanWah::lv2_update_params(uint32_t period)
 
     lfo->updateparams(period);
 }
+#endif // LV2
 
 void
 RyanWah::initialize()
@@ -365,41 +377,77 @@ RyanWah::changepar(int npar, int value)
         cleanup();
         break;
     case 14:
-        Prange = value;
-        if (Pamode) maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
-        else maxfreq = ((float) Prange);
+        {
+            Prange = value;
+            if (Pamode)
+            {
+                maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
+            }
+            else
+            {
+                maxfreq = ((float) Prange);
+            }
+        }
         break;
     case 15: // LV2 - Starting Frequency (legacy, no slider in rakarrack - set by presets) 30 - 300
-        Pminfreq = value;
-        if (Pamode) minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
-        else minfreq = (float) value;
+        {
+            Pminfreq = value;
+            if (Pamode)
+            {
+                minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
+            }
+            else
+            {
+                minfreq = (float) value;
+            }
+        }
         break;
     case 16: // LV2 - Modulate Resonance (legacy no checkbox in rakarrack, but set by presets)
-        variq = value;
-        if (!variq) // when variq is unset, we need to reset q back to default (case 1)
-            q = (float) Pq; // or q continues with variq values until user manually moves slider for resonance (q)
+        {
+            variq = value;
+            if (!variq) // when variq is unset, we need to reset q back to default (case 1)
+            {
+                q = (float) Pq; // or q continues with variq values until user manually moves slider for resonance (q)
+            }
+        }
         break;
     case 17:
         //legacy method of changing Pqm and Pamode, presets use this
-        Pmode = value;
-        if ((Pmode == 1) || (Pmode == 3)) Pqm = 1;
-        else Pqm = 0;
-        filterl->setmode(Pqm);
-        filterr->setmode(Pqm);
-
-        if ((Pmode == 2) || (Pmode == 3)) Pamode = 1;
-        else Pamode = 0;
-        if (Pamode)
         {
-            minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
-            maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
-        }
-        else
-        {
-            minfreq = (float) Pminfreq;
-            maxfreq = (float) Prange;
-        }
+            Pmode = value;
+            
+            if ((Pmode == 1) || (Pmode == 3))
+            {
+                Pqm = 1;
+            }
+            else
+            {
+                Pqm = 0;
+            }
+            
+            filterl->setmode(Pqm);
+            filterr->setmode(Pqm);
 
+            if ((Pmode == 2) || (Pmode == 3))
+            {
+                Pamode = 1;
+            }
+            else
+            {
+                Pamode = 0;
+            }
+            
+            if (Pamode)
+            {
+                minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
+                maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
+            }
+            else
+            {
+                minfreq = (float) Pminfreq;
+                maxfreq = (float) Prange;
+            }
+        }
         break;
     case 18: // used by rakarrack to update gui display upon new button 
         Ppreset = value;
@@ -410,16 +458,18 @@ RyanWah::changepar(int npar, int value)
         filterr->setmode(Pqm);
         break;
     case 20: // LV2 - Exponential Wah (N box in rakarrack)
-        Pamode = value;
-        if (Pamode)
         {
-            minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
-            maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
-        }
-        else
-        {
-            minfreq = (float) Pminfreq;
-            maxfreq = (float) Prange;
+            Pamode = value;
+            if (Pamode)
+            {
+                minfreq = ((float) Pminfreq) / (fSAMPLE_RATE / 6.0f);
+                maxfreq = ((float) Prange) / (fSAMPLE_RATE / 6.0f);
+            }
+            else
+            {
+                minfreq = (float) Pminfreq;
+                maxfreq = (float) Prange;
+            }
         }
         break;
     }
