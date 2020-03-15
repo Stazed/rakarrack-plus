@@ -64,10 +64,6 @@ Ring::Ring(double sample_rate, uint32_t intermediate_bufsize)
 
 Ring::~Ring()
 {
-    //delete [] sin_tbl;
-    //delete [] sin_tbl;
-    //delete [] sin_tbl;
-    //delete [] sin_tbl;
     free(sin_tbl);
     free(tri_tbl);
     free(squ_tbl);
@@ -98,11 +94,13 @@ Ring::cleanup()
 
 }
 
+#ifdef LV2_SUPPORT
 void
 Ring::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2
 
 /*
  * Apply the filters
@@ -114,15 +112,12 @@ Ring::lv2_update_params(uint32_t period)
 void
 Ring::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float l, r, lout, rout, tmpfactor;
-
     float inputvol = (float) Pinput / 127.0f;
 
     if (Pstereo != 0)
     {
         //Stereo
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             efxoutl[i] = efxoutl[i] * inputvol;
             efxoutr[i] = efxoutr[i] * inputvol;
@@ -136,16 +131,19 @@ Ring::out(float * efxoutl, float * efxoutr)
     }
     else
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
-            efxoutl[i] =
-                    (efxoutl[i] + efxoutr[i]) * inputvol;
+            efxoutl[i] = (efxoutl[i] + efxoutr[i]) * inputvol;
             
-            if (inputvol == 0.0) efxoutl[i] = 1.0;
+            if (inputvol == 0.0)
+            {
+                efxoutl[i] = 1.0;
+            }
         }
     }
 
-    for (i = 0; i < PERIOD; i++)
+    float  tmpfactor = 0.0f;
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         tmpfactor = depth * (scale * (sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset]) + idepth); //This is now mathematically equivalent, but less computation
         efxoutl[i] *= tmpfactor;
@@ -163,8 +161,9 @@ Ring::out(float * efxoutl, float * efxoutr)
     if (Pstereo == 0) memcpy(efxoutr, efxoutl, PERIOD * sizeof (float));
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
-
-    for (i = 0; i < PERIOD; i++)
+    float lout, rout, l, r ; // initialize o.k.
+    
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         lout = efxoutl[i];
         rout = efxoutr[i];
@@ -175,8 +174,6 @@ Ring::out(float * efxoutl, float * efxoutr)
         lout = l;
         rout = r;
 
-        //efxoutl[i] = lout * level * panning;
-        //efxoutr[i] = rout * level * (1.0f-panning);
         efxoutl[i] = lout * level * (1.0f - panning);
         efxoutr[i] = rout * level * panning;
     }
@@ -213,7 +210,10 @@ Ring::setscale()
 {
     scale = sin + tri + saw + squ;
     
-    if (scale == 0.0) scale = 1.0;
+    if (scale == 0.0)
+    {
+        scale = 1.0;
+    }
     
     scale = 1.0 / scale;
 }

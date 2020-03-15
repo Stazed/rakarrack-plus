@@ -37,7 +37,11 @@ public:
     int getpar (int npar);
     void setscale();
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void Create_Tables(float sample_rate);
 
     int Ppreset;
@@ -52,6 +56,8 @@ private:
     void setpanning (int Ppanning);
     void setlrcross (int Plrcross);
 
+    unsigned int SAMPLE_RATE;
+    uint32_t PERIOD;
 
     //Parametrii
     int Pvolume;	//Volumul or E/R
@@ -74,9 +80,6 @@ private:
     float sin,tri,saw,squ,scale,depth, idepth;
 
     class FPreset *Fpre;
-
-    unsigned int SAMPLE_RATE;
-    uint32_t PERIOD;
 };
 
 
