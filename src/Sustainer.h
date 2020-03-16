@@ -31,7 +31,10 @@ public:
     Sustainer (double sample_rate, uint32_t intermediate_bufsize);
     ~Sustainer ();
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
     
     void out (float * efxoutl, float * efxoutr);
     void changepar (int npar, int value);
@@ -41,6 +44,9 @@ public:
     int Ppreset;
 
 private:
+
+    uint32_t PERIOD;
+
     //Parametrii
     int Pvolume;	//Output Level
     int Psustain;	//Compression amount
@@ -50,8 +56,6 @@ private:
     float prls, compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
 
     class FPreset *Fpre;
-    
-    uint32_t PERIOD;
 };
 
 

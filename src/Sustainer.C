@@ -25,31 +25,38 @@
 #include <math.h>
 #include "Sustainer.h"
 
-Sustainer::Sustainer(double sample_rate, uint32_t intermediate_bufsize)
+Sustainer::Sustainer(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    PERIOD(intermediate_bufsize),
+    Pvolume(64),
+    Psustain(64),
+    timer(),
+    hold((int) (sample_rate * 0.0125)),     //  12.5ms
+    level(0.5f),
+    fsustain(0.5f),
+    input(),
+    tmpgain(),
+    prls(),
+    compeak(),
+    compg(),
+    compenv(),
+    oldcompenv(),
+    calpha(),
+    cbeta(),
+    cthresh(0.25f),
+    cratio(0.25f),
+    cpthresh(),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     float cSAMPLE_RATE = 1 / sample_rate;
 
-    Pvolume = 64;
-    Psustain = 64;
-    fsustain = 0.5f;
-    level = 0.5f;
-    input = tmpgain = 0.0f;
-    Ppreset = 0;
-
-    compeak = compg = compenv = oldcompenv = cpthresh = 0.0f;
-
-    float tmp = 0.01f; //10 ms decay time on peak detectorS
+    float tmp = 0.01f;      //  10 ms decay time on peak detectorS
     prls = 1.0f - (cSAMPLE_RATE / (cSAMPLE_RATE + tmp));
 
-    tmp = 0.05f; //50 ms att/rel on compressor
+    tmp = 0.05f;            //  50 ms att/rel on compressor
     calpha = cSAMPLE_RATE / (cSAMPLE_RATE + tmp);
     cbeta = 1.0f - calpha;
-    cthresh = 0.25f;
-    cratio = 0.25f;
 
-    timer = 0;
-    hold = (int) (sample_rate * 0.0125); //12.5ms
     setpreset(Ppreset);
 
     cleanup();
@@ -72,11 +79,13 @@ Sustainer::cleanup()
     cpthresh = cthresh; //dynamic threshold
 }
 
+#ifdef LV2_SUPPORT
 void
 Sustainer::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
+#endif // LV2
 
 /*
  * Effect output
@@ -84,12 +93,11 @@ Sustainer::lv2_update_params(uint32_t period)
 void
 Sustainer::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
     float auxtempl = 0.0f;
     float auxtempr = 0.0f;
     float auxcombi = 0.0f;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     { //apply compression to auxresampled
         auxtempl = input * efxoutl[i];
         auxtempr = input * efxoutr[i];
@@ -146,8 +154,7 @@ Sustainer::setpreset(int npreset)
         //Extreme
         {16, 127},
         //Mild
-        {120, 15},
-
+        {120, 15}
     };
 
     if (npreset > NUM_PRESETS - 1)
