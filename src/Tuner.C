@@ -38,25 +38,27 @@ Tuner::~Tuner()
 void
 Tuner::displayFrequency(float ffreq, float *freqs, float *lfreqs)
 {
-    int i;
-
-    float ldf, mldf;
-    float lfreq;
-
     if (ffreq < 1E-15)
+    {
         ffreq = 1E-15f;
+    }
     
-    lfreq = logf(ffreq);
+    float lfreq = logf(ffreq);
     
     while (lfreq < lfreqs[0] - LOG_D_NOTE * .5f)
+    {
         lfreq += LOG_2;
+    }
     
     while (lfreq >= lfreqs[0] + LOG_2 - LOG_D_NOTE * .5f)
+    {
         lfreq -= LOG_2;
+    }
     
-    mldf = LOG_D_NOTE;
+    float mldf = LOG_D_NOTE;
+    float ldf = 0.0f;
     
-    for (i = 0; i < 12; i++)
+    for (int i = 0; i < 12; i++)
     {
         ldf = fabsf(lfreq - lfreqs[i]);
         
@@ -73,10 +75,14 @@ Tuner::displayFrequency(float ffreq, float *freqs, float *lfreqs)
         nfreq = freqs[note];
         
         while (nfreq / ffreq > D_NOTE_SQRT)
+        {
             nfreq *= .5f;
+        }
         
         while (ffreq / nfreq > D_NOTE_SQRT)
+        {
             nfreq *= 2.0f;
+        }
         
         cents = lrintf(1200 * (logf(ffreq / nfreq) / LOG_2));
     }
@@ -84,24 +90,26 @@ Tuner::displayFrequency(float ffreq, float *freqs, float *lfreqs)
     preparada = note;
 }
 
+// FIXME code duplication
 void
 Tuner::schmittInit(int size)
 {
     blockSize = SAMPLE_RATE / size;
-    schmittBuffer =
-            (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2)); // +2 because valgrind bitches about invalid reads in schmittS16LE()
+    /* +2 blovksize because valgrind bitches about invalid reads in schmittS16LE() */
+    schmittBuffer = (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2)); 
 
     memset(schmittBuffer, 0, sizeof (signed short int) * (blockSize + 2));
     schmittPointer = schmittBuffer;
 }
 
+// FIXME code duplication
 void
 Tuner::schmittS16LE(int nframes, signed short int *indata, float *freqs, float *lfreqs)
 {
-    int i, j;
+    int j = 0.0f;
     float trigfact = 0.5f;
 
-    for (i = 0; i < nframes; i++)
+    for (int i = 0; i < nframes; i++)
     {
         *schmittPointer++ = indata[i];
         if (schmittPointer - schmittBuffer >= blockSize)
@@ -113,9 +121,13 @@ Tuner::schmittS16LE(int nframes, signed short int *indata, float *freqs, float *
             for (j = 0, A1 = 0, A2 = 0; j < blockSize; j++)
             {
                 if (schmittBuffer[j] > 0 && A1 < schmittBuffer[j])
+                {
                     A1 = schmittBuffer[j];
+                }
                 if (schmittBuffer[j] < 0 && A2 < -schmittBuffer[j])
+                {
                     A2 = -schmittBuffer[j];
+                }
             }
             
             t1 = lrintf((float) A1 * trigfact + 0.5f);
@@ -147,8 +159,7 @@ Tuner::schmittS16LE(int nframes, signed short int *indata, float *freqs, float *
             
             if (endpoint > startpoint)
             {
-                afreq =
-                        fSAMPLE_RATE * ((float) tc / (float) (endpoint - startpoint));
+                afreq = fSAMPLE_RATE * ((float) tc / (float) (endpoint - startpoint));
                 displayFrequency(afreq, freqs, lfreqs);
             }
         }
@@ -164,11 +175,9 @@ Tuner::schmittFree()
 void
 Tuner::schmittFloat(int nframes, float *indatal, float *indatar, float *freqs, float *lfreqs)
 {
-    int i;
-
     signed short int buf[nframes];
     
-    for (i = 0; i < nframes; i++)
+    for (int i = 0; i < nframes; i++)
     {
         buf[i] = (short) ((indatal[i] + indatar[i]) * 32768);
     }

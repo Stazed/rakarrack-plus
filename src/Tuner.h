@@ -24,6 +24,11 @@ public:
     ~Tuner ();
     void schmittFloat (int nframes, float *indatal, float *indatar, float *freqs, float *lfreqs);
 
+private:
+    float fSAMPLE_RATE;
+    unsigned int SAMPLE_RATE;
+public:
+
     int note;
     int preparada;
     int note_actual;
@@ -43,9 +48,6 @@ private:
     void schmittFree ();
 
     int blockSize;
-    float fSAMPLE_RATE;
-    unsigned int SAMPLE_RATE;
-
 };
 
 #endif /*TUNER_H_ */
