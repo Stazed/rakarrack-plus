@@ -85,6 +85,7 @@ StereoHarm::cleanup()
     memset(tempr, 0, sizeof (float)*PERIOD);
 }
 
+#ifdef LV2_SUPPORT
 void
 StereoHarm::lv2_update_params(uint32_t period)
 {
@@ -101,6 +102,7 @@ StereoHarm::lv2_update_params(uint32_t period)
         adjust(STE_DOWN, PERIOD);
     }
 }
+#endif // LV2
 
 void
 StereoHarm::initialize()
@@ -138,8 +140,6 @@ StereoHarm::clear_initialize()
 void
 StereoHarm::out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i;
-
     if (DS_state != 0)
     {
         U_Resample->out(efxoutl, efxoutr, templ, tempr, PERIOD, u_up);
@@ -150,7 +150,7 @@ StereoHarm::out(float *efxoutl, float *efxoutr)
         memcpy(tempr, efxoutr, sizeof (float)*PERIOD);
     }
 
-    for (i = 0; i < nPERIOD; i++)
+    for (unsigned int i = 0; i < nPERIOD; i++)
     {
         outil[i] = tempr[i];
         
@@ -204,7 +204,7 @@ StereoHarm::out(float *efxoutl, float *efxoutr)
     //efxoutr[i] = tempr[i] * gainr;
 
     //}
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         efxoutl[i] = templ[i] * gainl * (1.0f - lrcross) + tempr[i] * gainr * lrcross;
         efxoutr[i] = tempr[i] * gainr * (1.0f - lrcross) + templ[i] * gainl * lrcross;

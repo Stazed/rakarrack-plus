@@ -41,11 +41,20 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     void adjust(int DS, uint32_t period);
 
+private:
+    int STE_DOWN;
+    uint32_t PERIOD;
+    unsigned int SAMPLE_RATE;
+public:
 
     int Ppreset;
     int Pintervall;
@@ -72,15 +81,11 @@ public:
     float r_ratiol;
     float r_ratior;
 
-
 private:
 
-    int STE_DOWN;
-    uint32_t PERIOD;
     unsigned int nPERIOD;
     float nRATIO;
     int nSAMPLE_RATE;
-    unsigned int SAMPLE_RATE;
     float nfSAMPLE_RATE;
     
     int Pvolume;
@@ -91,7 +96,6 @@ private:
     int Pchromer;
     int Pnote;
     int Ptype;
-
 
     float gainl,gainr;
     float intervall;
