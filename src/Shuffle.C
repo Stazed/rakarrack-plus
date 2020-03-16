@@ -68,6 +68,7 @@ Shuffle::cleanup()
     mhr->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 Shuffle::lv2_update_params(uint32_t period)
 {
@@ -91,13 +92,13 @@ Shuffle::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 Shuffle::initialize()
 {
     inputl = (float *) malloc(sizeof (float) * PERIOD);
     inputr = (float *) malloc(sizeof (float) * PERIOD);
-
 
     interpbuf = new float[PERIOD];
     lr = new AnalogFilter(6, 300.0f, .3f, 0, fSAMPLE_RATE, interpbuf);
@@ -124,9 +125,7 @@ Shuffle::clear_initialize()
 void
 Shuffle::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
 
         inputl[i] = efxoutl[i] + efxoutr[i];
@@ -135,7 +134,6 @@ Shuffle::out(float * efxoutl, float * efxoutr)
 
     if (E)
     {
-
         lr->filterout(inputr, PERIOD);
         mlr->filterout(inputr, PERIOD);
         mhr->filterout(inputr, PERIOD);
@@ -149,7 +147,7 @@ Shuffle::out(float * efxoutl, float * efxoutr)
         hr->filterout(inputl, PERIOD);
     }
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         efxoutl[i] = (inputl[i] + inputr[i] - efxoutl[i])*.333333f;
         efxoutr[i] = (inputl[i] - inputr[i] - efxoutr[i])*.333333f;

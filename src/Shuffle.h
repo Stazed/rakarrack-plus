@@ -39,7 +39,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     
@@ -63,6 +67,9 @@ private:
     void setGainH (int value);
     void set_q(int value);
 
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
+    
     //Parametrii
     int Pvolume;	//Volumul or E/R
     int PvolL;
@@ -76,9 +83,6 @@ private:
     int Cross2;		//highpass filter
     int Cross3;
     int Cross4;
-
-    uint32_t PERIOD;
-    double fSAMPLE_RATE;
 
     //Parametrii reali
     float tmp;
