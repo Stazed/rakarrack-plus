@@ -238,6 +238,7 @@ StompBox
     Removed StompBox Fuzz
 ---Done---
 FIXME Help .png
+FIXME Add LV2 default to rakarrack.
 
 Sustainer
     Wet/Dry                     |                |     none      |                   |          none     |
