@@ -26,15 +26,49 @@
 #include <math.h>
 #include "Valve.h"
 
-Valve::Valve(double sample_rate, uint32_t intermediate_bufsize)
+Valve::Valve(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(50),
+    Ppanning(),
+    Plrcross(40),
+    Pdrive(90),
+    Plevel(64),
+    Pnegate(),
+    Plpf(127),
+    Phpf(),
+    Pstereo(),
+    Pprefiltering(),
+    Q_q(64),
+    Ped(),
+    Presence(),
+    panning(),
+    lrcross((float) Plrcross / 127.0f * 1.0f),
+    q((float) Q_q / 127.0f - 1.0f),
+    dist((float) Pdrive / 127.0f * 40.0f + .5f),
+    otml(),
+    otmr(),
+    itml(),
+    itmr(),
+    factor(1.0f - ((float) Q_q / 128.0f)),
+    atk(1.0f - 40.0f / sample_rate),
+    rm(),               // initialized to 0.0 here
+    coef(),
+    qcoef(),
+    fdist(),
+    inputvol(),
+    interpbuf(NULL),
+    lpfl(NULL),
+    lpfr(NULL),
+    hpfl(NULL),
+    hpfr(NULL),
+    harm(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
     initialize();
 
-    for (int i = 0; i < 10; i++) rm[i] = 0.0;
-    
     rm[0] = 1.0f;
     rm[2] = -1.0f;
     rm[4] = 1.0f;
@@ -43,31 +77,10 @@ Valve::Valve(double sample_rate, uint32_t intermediate_bufsize)
 
     harm = new HarmEnhancer(rm, 20.0f, 20000.0f, 1.0f, sample_rate, PERIOD);
 
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Ppanning = 0;
-    Plrcross = 40;
-    Pdrive = 90;
-    Plevel = 64;
-    Pnegate = 0;
-    Plpf = 127;
-    Phpf = 0;
-    Q_q = 64;
-    Ped = 0;
-    Pstereo = 0;
-    Pprefiltering = 0;
-    outvolume = 0.5f;
-    q = (float) Q_q / 127.0f - 1.0f;
-    factor = 1.0f - ((float) Q_q / 128.0f);
-    dist = (float) Pdrive / 127.0f * 40.0f + .5f;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
     setlpf(127);
     sethpf(1);
-    atk = 1.0f - 40.0f / sample_rate;
-    panning = otml = otmr = itml = itmr = 0.0f;
-
     init_coefs();
+
     setpreset(Ppreset);
     cleanup();
 }
