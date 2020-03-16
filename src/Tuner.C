@@ -13,20 +13,26 @@
 #include <math.h>
 #include "global.h"
 
-Tuner::Tuner(double sample_rate)
+Tuner::Tuner(double sample_rate) :
+    fSAMPLE_RATE(float(sample_rate)),
+    SAMPLE_RATE(sample_rate),
+    note(),
+    preparada(-1),
+    note_actual(),
+    cents(),
+    schmittBuffer(NULL),
+    schmittPointer(NULL),
+    notes(NULL),
+    nfreq(),
+    afreq(),
+    freq(),
+    efxoutl(NULL),
+    efxoutr(NULL),
+    blockSize()
 {
-    fSAMPLE_RATE = float(sample_rate);
-    SAMPLE_RATE = sample_rate;
-    schmittBuffer = NULL;
-    schmittPointer = NULL;
     static const char *englishNotes[12] ={"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
-    preparada = -1;
-    note_actual = 0;
+
     notes = englishNotes;
-    note = 0;
-    nfreq = 0;
-    afreq = 0;
-    cents = 0;
     schmittInit(2);
 }
 
