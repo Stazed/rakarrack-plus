@@ -90,25 +90,33 @@ Synthfilter::~Synthfilter()
 void
 Synthfilter::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    int j;
-    float lfol, lfor, lgain, rgain, rmod, lmod, d;
-    lgain = 0.0;
-    rgain = 0.0;
+    int j = 0;
+    float lgain, rgain, rmod, lmod, d;
+    lgain = rgain = rmod = lmod = d = 0.0;
 
+
+    float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
     lmod = lfol * width + depth + env*sns;
     rmod = lfor * width + depth + env*sns;
 
     if (lmod > ONE_)
+    {
         lmod = ONE_;
+    }
     else if (lmod < ZERO_)
+    {
         lmod = ZERO_;
+    }
     
     if (rmod > ONE_)
+    {
         rmod = ONE_;
+    }
     else if (rmod < ZERO_)
+    {
         rmod = ZERO_;
+    }
 
     lmod = 1.0f - lmod;
     rmod = 1.0f - rmod;
@@ -120,23 +128,27 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
     float gl = oldlgain; // Linear interpolation between LFO samples
     float gr = oldrgain;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         float lxn = bandgain * efxoutl[i];
         float rxn = bandgain * efxoutr[i]; //extra gain
 
         gl += xl;
-        gr += xr; //linear interpolation of LFO
+        gr += xr;   //  linear interpolation of LFO
 
-        //Envelope detection
-        envdelta = (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) - env; //envelope follower from Compressor.C
+        //  Envelope detection
+        envdelta = (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) - env;   //   envelope follower from Compressor.C
         
         if (delta > 0.0)
+        {
             env += att * envdelta;
+        }
         else
+        {
             env += rls * envdelta;
+        }
 
-        //End envelope power detection
+        //  End envelope power detection
         
         if (Plpstages < 1)
         {
@@ -144,27 +156,25 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
             rxn += fbr;
         }
 
-        //Left channel Low Pass Filter
+        //  Left channel Low Pass Filter
         for (j = 0; j < Plpstages; j++)
         {
             d = 1.0f + fabs(lxn) * distortion; // gain decreases as signal amplitude increases.
 
-            //low pass filter:  alpha*x[n] + (1-alpha)*y[n-1]
-            // alpha = lgain = dt/(RC + dt)
+            //  low pass filter:  alpha*x[n] + (1-alpha)*y[n-1]
+            //  alpha = lgain = dt/(RC + dt)
             lgain = delta / ((Rmax * gl * d + Rmin) * Clp + delta);
             lyn1[j] = lgain * lxn + (1.0f - lgain) * lyn1[j];
             lyn1[j] += DENORMAL_GUARD;
             lxn = lyn1[j];
             
-            if (j == 0) lxn += fbl; //Insert feedback after first filter stage
+            if (j == 0) lxn += fbl; //  Insert feedback after first filter stage
         }
 
-
-        //Left channel High Pass Filter
+        //  Left channel High Pass Filter
         for (j = 0; j < Phpstages; j++)
         {
-
-            //high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = lgain = RC/(RC + dt)
+            //  high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = lgain = RC/(RC + dt)
             lgain = (Rmax * gl + Rmin) * Chp / ((Rmax * gl + Rmin) * Chp + delta);
             ly1hp[j] = lgain * (lxn + ly1hp[j] - lx1hp[j]);
 
@@ -174,25 +184,25 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
         }
 
 
-        //Right channel Low Pass Filter
+        //  Right channel Low Pass Filter
         for (j = 0; j < Plpstages; j++)
         {
-            d = 1.0f + fabs(rxn) * distortion; //This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
+            d = 1.0f + fabs(rxn) * distortion; //   This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
 
             rgain = delta / ((Rmax * gr * d + Rmin) * Clp + delta);
             ryn1[j] = rgain * rxn + (1.0f - rgain) * ryn1[j];
             ryn1[j] += DENORMAL_GUARD;
             rxn = ryn1[j];
             
-            if (j == 0) rxn += fbr; //Insert feedback after first filter stage
+            if (j == 0) rxn += fbr; //  Insert feedback after first filter stage
         }
 
-        //Right channel High Pass Filter
+        //  Right channel High Pass Filter
         for (j = 0; j < Phpstages; j++)
         {
             d = 1.0f + fabs(rxn) * distortion; // gain decreases as signal amplitude increases.
 
-            //high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = rgain = RC/(RC + dt)
+            //  high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = rgain = RC/(RC + dt)
             rgain = (Rmax * gr + Rmin) * Chp / ((Rmax * gr + Rmin) * Chp + delta);
             ry1hp[j] = rgain * (rxn + ry1hp[j] - rx1hp[j]);
 
@@ -212,11 +222,13 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
     oldrgain = rmod;
 
     if (Poutsub != 0)
-        for (i = 0; i < PERIOD; i++)
+    {
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
         }
+    }
 }
 
 /*
@@ -244,6 +256,7 @@ Synthfilter::cleanup()
     }
 }
 
+#ifdef LV2_SUPPORT
 void
 Synthfilter::lv2_update_params(uint32_t period)
 {
@@ -251,6 +264,7 @@ Synthfilter::lv2_update_params(uint32_t period)
     lfo->updateparams(period);
     inv_period = 1.f / (float) period;
 }
+#endif // LV2
 
 /*
  * Parameter control
@@ -268,10 +282,19 @@ Synthfilter::setfb(int Pfb)
     this->Pfb = Pfb;
     fb = (float) Pfb;
     
-    if (fb < 0.0f) fb /= 18.0f;
-    else if (fb > 0.0f) fb /= 65.0f;
+    if (fb < 0.0f)
+    {
+        fb /= 18.0f;
+    }
+    else if (fb > 0.0f)
+    {
+        fb /= 65.0f;
+    }
     
-    if (Plpstages <= 2) fb *= 0.3; //keep filter stable when phase shift is small
+    if (Plpstages <= 2)
+    {
+        fb *= 0.3; //keep filter stable when phase shift is small
+    }
 }
 
 void
@@ -293,7 +316,7 @@ void
 Synthfilter::setdepth(int Pdepth)
 {
     this->Pdepth = Pdepth;
-    depth = (float) (Pdepth - 32) / 95.0f; //Pdepth input should be 0-127. .
+    depth = (float) (Pdepth - 32) / 95.0f; //   Pdepth input should be 0-127. .
 }
 
 void
@@ -374,7 +397,7 @@ Synthfilter::changepar(int npar, int value)
         Plpstages = value;
         if (Plpstages >= MAX_SFILTER_STAGES)
             Plpstages = MAX_SFILTER_STAGES;
-        if (Plpstages <= 2) fb = (float) Pfb * 0.25 / 65.0f; //keep filter stable when phase shift is small
+        if (Plpstages <= 2) fb = (float) Pfb * 0.25 / 65.0f; // keep filter stable when phase shift is small
         cleanup();
         break;
     case 9:
@@ -413,8 +436,13 @@ Synthfilter::changepar(int npar, int value)
     }
 
     if (Phpstages && Plpstages)
+    {
         bandgain = powf(((float) (Phpstages * Plpstages + 3)), (1.0f - (float) Pbandwidth / 127.0f));
-    else bandgain = 1.0f;
+    }
+    else
+    {
+        bandgain = 1.0f;
+    }
 }
 
 int

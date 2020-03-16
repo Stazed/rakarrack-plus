@@ -42,8 +42,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
-    
+#endif // LV2
+
     int Ppreset;
     float outvolume;
 
@@ -55,6 +58,8 @@ private:
     void setwidth (int Pwidth);
     void setfb (int Pfb);
     void setdepth (int Pdepth);
+
+    uint32_t PERIOD;
 
     //Phaser parameters
     int Pvolume;			 //0//Used in Process.C to set wet/dry mix
@@ -88,7 +93,6 @@ private:
 
     class FPreset *Fpre;
     
-    uint32_t PERIOD;
     EffectLFO* lfo;	         //Filter modulator
 };
 
