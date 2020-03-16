@@ -59,6 +59,7 @@ ShelfBoost::cleanup()
     RB1r->cleanup();
 }
 
+#ifdef LV2_SUPPORT
 void
 ShelfBoost::lv2_update_params(uint32_t period)
 {
@@ -76,6 +77,7 @@ ShelfBoost::lv2_update_params(uint32_t period)
         PERIOD = period;
     }
 }
+#endif // LV2
 
 void
 ShelfBoost::initialize()
@@ -99,20 +101,27 @@ ShelfBoost::clear_initialize()
 void
 ShelfBoost::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-
     RB1l->filterout(efxoutl, PERIOD);
     
-    if (Pstereo) RB1r->filterout(efxoutr, PERIOD);
+    if (Pstereo)
+    {
+        RB1r->filterout(efxoutr, PERIOD);
+    }
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         efxoutl[i] *= outvolume*u_gain;
         
-        if (Pstereo) efxoutr[i] *= outvolume * u_gain;
+        if (Pstereo)
+        {
+            efxoutr[i] *= outvolume * u_gain;
+        }
     }
 
-    if (!Pstereo) memcpy(efxoutr, efxoutl, sizeof (float)*PERIOD);
+    if (!Pstereo)
+    {
+        memcpy(efxoutr, efxoutl, sizeof (float)*PERIOD);
+    }
 }
 
 /*
