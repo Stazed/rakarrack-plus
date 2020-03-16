@@ -239,6 +239,7 @@ StompBox
 ---Done---
 FIXME Help .png
 FIXME Add LV2 default to rakarrack.
+FIXME add rakarrack default to LV2
 
 Sustainer
     Wet/Dry                     |                |     none      |                   |          none     |

@@ -23,33 +23,56 @@
 #include <math.h>
 #include "StompBox.h"
 
-StompBox::StompBox(int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize)
+StompBox::StompBox(int wave_res, int wave_upq, int wave_dnq,
+                   double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    WAVE_RES(wave_res),
+    WAVE_UPQ(wave_upq),
+    WAVE_DNQ(wave_dnq),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(50),
+    Pgain(64),
+    Phigh(),
+    Pmid(),
+    Plow(),
+    Pmode(),
+    gain(),
+    pre1gain(100.0f),
+    pre2gain(3000.0f),
+    lowb(),
+    midb(),
+    highb(),
+    volume((float) Pvolume / 127.0f),
+    LG(22.0f),
+    MG(11.0f),
+    HG(11.0f),
+    RGP2(10.0f),
+    RGPST(3.0f),
+    pgain(110.0f),
+    interpbuf(NULL),
+    linput(NULL),
+    lpre1(NULL),
+    lpre2(NULL),
+    lpost(NULL),
+    ltonehg(NULL),
+    ltonemd(NULL),
+    ltonelw(NULL),
+    rinput(NULL),
+    rpre1(NULL),
+    rpre2(NULL),
+    rpost(NULL),
+    rtonehg(NULL),
+    rtonemd(NULL),
+    rtonelw(NULL),
+    ranti(NULL),
+    lanti(NULL),
+    lwshape(NULL),
+    rwshape(NULL),
+    lwshape2(NULL),
+    rwshape2(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-    WAVE_RES = wave_res;
-    WAVE_UPQ = wave_upq;
-    WAVE_DNQ = wave_dnq;
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Pgain = 64;
-    Phigh = Pmid = Plow = 0;
-    Pmode = 0;
-    gain = 0.0f;
-    pre1gain = 100.0f;
-    pre2gain = 3000.0f;
-    lowb = midb = highb = 0.0f;
-    volume = (float) Pvolume / 127.0f;
-
-    LG = 22.0f;
-    MG = 11.0f;
-    HG = 11.0f;
-    RGP2 = 10.0f;
-    RGPST = 3.0f;
-    pgain = 110.0f;
-
     initialize();
 
     setpreset(Ppreset);
