@@ -205,11 +205,16 @@ Looper::out(float * efxoutl, float * efxoutr)
                 
                 rvkl = dl - 1 - kl;
                 
-                if (rvkl < 0 || rvkl >= maxx_delay)
+                if (rvkl < 0 )
                 {
                     rvkl = 0;
                 }
-
+                
+                if (rvkl >= maxx_delay)
+                {
+                    rvkl = maxx_delay -1;
+                }
+                
                 if (++kl2 >= dl2)
                 {
                     kl2 = 0;
@@ -217,9 +222,14 @@ Looper::out(float * efxoutl, float * efxoutr)
                 
                 rvkl2 = dl2 - 1 - kl2;
                 
-                if (rvkl2 < 0 || rvkl2 >= maxx_delay)
+                if (rvkl2 < 0)
                 {
                     rvkl2 = 0;
+                }
+                
+                if (rvkl2 >= maxx_delay)
+                {
+                    rvkl2 = maxx_delay -1;
                 }
                 
                 if ((Plink) || (PT1))
