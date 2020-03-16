@@ -23,22 +23,26 @@
 #include <math.h>
 #include "ShelfBoost.h"
 
-ShelfBoost::ShelfBoost(double sample_rate, uint32_t intermediate_bufsize)
+ShelfBoost::ShelfBoost(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(50),
+    Plevel(),
+    Pq1(),
+    Pfreq1(),
+    Pstereo(),
+    freq1(1.0f),
+    q1(1.0f),
+    gain(1.0f),
+    u_gain(1.0f),
+    RB1l(NULL),
+    RB1r(NULL),
+    interpbuf(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Pstereo = 0;
-    Pq1 = Pfreq1 = Plevel = 0;
-
-    outvolume = 0.5f;
-    freq1 = q1 = gain = u_gain = 1.0f;
-
     initialize();
-
     cleanup();
 
     setpreset(Ppreset);
