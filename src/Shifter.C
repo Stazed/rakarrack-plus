@@ -26,13 +26,54 @@
 
 #include "Shifter.h"
 
-Shifter::Shifter(long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Shifter::Shifter(long int Quality, int DS, int uq, int dq,
+                 double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    hq(Quality),
+    outvolume(0.5f),
+    outi(NULL),
+    outo(NULL),
+    DS_state(DS),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(),
+    Pgain(),
+    Ppan(),
+    Pinterval(),
+    Pupdown(),
+    Pmode(),
+    Pattack(),
+    Pdecay(),
+    Pthreshold(),
+    Pwhammy(),
+    state(IDLE),
+    nPERIOD(),
+    nSAMPLE_RATE(),
+    nRATIO(),
+    window(),
+    u_up(),
+    u_down(),
+    nfSAMPLE_RATE(),
+    env(),
+    t_level(),
+    td_level(),
+    tz_level(),
+    a_rate(),
+    d_rate(),
+    tune(),
+    range(),
+    whammy(),
+    panning(),
+    gain(),
+    interval(),
+    templ(NULL),
+    tempr(NULL),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    PS(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-    hq = Quality;
     adjust(DS, sample_rate);
-
     initialize();
 
     U_Resample = new Resample(dq);
@@ -41,16 +82,6 @@ Shifter::Shifter(long int Quality, int DS, int uq, int dq, double sample_rate, u
     PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
 
-    state = IDLE;
-    env = t_level = td_level = tz_level = 0.0f;
-    tune = a_rate = d_rate = range = whammy = 0.0f;
-    panning = gain = 0.0f;
-    interval = 0.0f;
-    Pupdown = 0;
-    Pinterval = 0;
-    outvolume = 0.5f;
-    Ppreset = 0;
-    Pmode = 0;
     setpreset(Ppreset);
     cleanup();
 }
