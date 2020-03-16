@@ -158,9 +158,14 @@ Valve::applyfilters(float * efxoutl, float * efxoutr)
 float
 Valve::Wshape(float x)
 {
-    if (x < factor) return (x);
-    if (x > factor) return (factor + (x - factor) / powf(1.0f + ((x - factor) / (1.0f - factor)), 2.0f));
-    if (x > 1.0f) return ((factor + 1.0f)*.5f);
+    if (x < factor)
+        return (x);
+
+    if (x > factor)
+        return (factor + (x - factor) / powf(1.0f + ((x - factor) / (1.0f - factor)), 2.0f));
+
+    if (x > 1.0f)
+        return ((factor + 1.0f)*.5f);
     
     return (0.0);
 }
@@ -171,14 +176,10 @@ Valve::Wshape(float x)
 void
 Valve::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-
-    float l, r, lout, rout, fx;
-
     if (Pstereo != 0)
     {
         //Stereo
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             efxoutl[i] = efxoutl[i] * inputvol;
             efxoutr[i] = efxoutr[i] * inputvol;
@@ -186,45 +187,68 @@ Valve::out(float * efxoutl, float * efxoutr)
     }
     else
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
-            efxoutl[i] =
-                    (efxoutl[i] + efxoutr[i]) * inputvol;
+            efxoutl[i] = (efxoutl[i] + efxoutr[i]) * inputvol;
         }
     }
 
     harm->harm_out(efxoutl, efxoutr);
 
     if (Pprefiltering != 0)
+    {
         applyfilters(efxoutl, efxoutr);
+    }
 
     if (Ped)
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             efxoutl[i] = Wshape(efxoutl[i]);
             
-            if (Pstereo != 0) efxoutr[i] = Wshape(efxoutr[i]);
+            if (Pstereo != 0)
+            {
+                efxoutr[i] = Wshape(efxoutr[i]);
+            }
         }
     }
 
-    for (i = 0; i < PERIOD; i++)
+    float fx = 0.0f;
+    
+    for (unsigned int i = 0; i < PERIOD; i++)
     { //soft limiting to 3.0 (max)
         fx = efxoutl[i];
-        if (fx > 1.0f) fx = 3.0f - 2.0f / sqrtf(fx);
+        
+        if (fx > 1.0f)
+        {
+            fx = 3.0f - 2.0f / sqrtf(fx);
+        }
+
         efxoutl[i] = fx;
         fx = efxoutr[i];
-        if (fx > 1.0f) fx = 3.0f - 2.0f / sqrtf(fx);
+
+        if (fx > 1.0f)
+        {
+            fx = 3.0f - 2.0f / sqrtf(fx);
+        }
+
         efxoutr[i] = fx;
     }
 
     if (q == 0.0f)
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
             //            if (efxoutl[i] == q) fx = fdist;
-            if ((fabs(efxoutl[i] - 0.0f) <= 1.19e-7f))fx = fdist; // float comparison to zero (1.19e-7f) otherwise we get inf & no sound
-            else fx = efxoutl[i] / (1.0f - powf(2.0f, -dist * efxoutl[i]));
+            if ((fabs(efxoutl[i] - 0.0f) <= 1.19e-7f))
+            {
+                fx = fdist; // float comparison to zero (1.19e-7f) otherwise we get inf & no sound
+            }
+            else
+            {
+                fx = efxoutl[i] / (1.0f - powf(2.0f, -dist * efxoutl[i]));
+            }
+
             otml = atk * otml + fx - itml;
             itml = fx;
             efxoutl[i] = otml;
@@ -232,11 +256,17 @@ Valve::out(float * efxoutl, float * efxoutr)
     }
     else
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned int i = 0; i < PERIOD; i++)
         {
-            if (efxoutl[i] == q) fx = fdist + qcoef;
-            else fx = (efxoutl[i] - q) / (1.0f - powf(2.0f, -dist * (efxoutl[i] - q))) + qcoef;
-            
+            if (efxoutl[i] == q)
+            {
+                fx = fdist + qcoef;
+            }
+            else
+            {
+                fx = (efxoutl[i] - q) / (1.0f - powf(2.0f, -dist * (efxoutl[i] - q))) + qcoef;
+            }
+
             otml = atk * otml + fx - itml;
             itml = fx;
             efxoutl[i] = otml;
@@ -247,12 +277,18 @@ Valve::out(float * efxoutl, float * efxoutr)
     {
         if (q == 0.0f)
         {
-            for (i = 0; i < PERIOD; i++)
+            for (unsigned int i = 0; i < PERIOD; i++)
             {
                 //                if (efxoutr[i] == q) fx = fdist;
-                if ((fabs(efxoutr[i] - 0.0f) <= 1.19e-7f)) fx = fdist; // float comparison to zero (1.19e-7f) otherwise we get inf & no sound
-                else fx = efxoutr[i] / (1.0f - powf(2.0f, -dist * efxoutr[i]));
-                
+                if ((fabs(efxoutr[i] - 0.0f) <= 1.19e-7f))
+                {
+                    fx = fdist; // float comparison to zero (1.19e-7f) otherwise we get inf & no sound
+                }
+                else
+                {
+                    fx = efxoutr[i] / (1.0f - powf(2.0f, -dist * efxoutr[i]));
+                }
+
                 otmr = atk * otmr + fx - itmr;
                 itmr = fx;
                 efxoutr[i] = otmr;
@@ -261,11 +297,17 @@ Valve::out(float * efxoutl, float * efxoutr)
         }
         else
         {
-            for (i = 0; i < PERIOD; i++)
+            for (unsigned int i = 0; i < PERIOD; i++)
             {
-                if (efxoutr[i] == q) fx = fdist + qcoef;
-                else fx = (efxoutr[i] - q) / (1.0f - powf(2.0f, -dist * (efxoutr[i] - q))) + qcoef;
-                
+                if (efxoutr[i] == q)
+                {
+                    fx = fdist + qcoef;
+                }
+                else
+                {
+                    fx = (efxoutr[i] - q) / (1.0f - powf(2.0f, -dist * (efxoutr[i] - q))) + qcoef;
+                }
+
                 otmr = atk * otmr + fx - itmr;
                 itmr = fx;
                 efxoutr[i] = otmr;
@@ -274,13 +316,19 @@ Valve::out(float * efxoutl, float * efxoutr)
     }
 
     if (Pprefiltering == 0)
+    {
         applyfilters(efxoutl, efxoutr);
+    }
 
-    if (Pstereo == 0) memcpy(efxoutr, efxoutl, PERIOD * sizeof (float));
+    if (Pstereo == 0)
+    {
+        memcpy(efxoutr, efxoutl, PERIOD * sizeof (float));
+    }
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
-
-    for (i = 0; i < PERIOD; i++)
+    float lout, rout, l, r;     // initialize o.k.
+    
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         lout = efxoutl[i];
         rout = efxoutr[i];
@@ -308,7 +356,9 @@ Valve::init_coefs()
     inputvol = powf(4.0f, ((float) Pdrive - 32.0f) / 127.0f);
     
     if (Pnegate != 0)
+    {
         inputvol *= -1.0f;
+    }
 }
 
 void
@@ -319,7 +369,9 @@ Valve::setvolume(int Pvolume)
     outvolume = (float) Pvolume / 127.0f;
     
     if (Pvolume == 0)
+    {
         cleanup();
+    }
 }
 
 void

@@ -59,6 +59,8 @@ private:
     void setpresence(int value);
     void init_coefs();
 
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
 
     //Parametrii
     int Pvolume;	//Volumul or E/R
@@ -88,9 +90,6 @@ private:
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
     class HarmEnhancer *harm;
     class FPreset *Fpre;
-
-    uint32_t PERIOD;
-    double fSAMPLE_RATE;
 };
 
 
