@@ -26,37 +26,67 @@
 
 #include "StereoHarm.h"
 
-StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq,
+                       double sample_rate, uint32_t intermediate_bufsize) :
+    STE_DOWN(DS),
+    PERIOD(intermediate_bufsize),
+    SAMPLE_RATE((unsigned int) sample_rate),
+    Ppreset(),
+    Pintervall(),
+    Pintervalr(),
+    PMIDI(),
+    PSELECT(),
+    mira(),
+    DS_state(STE_DOWN),
+    window(),
+    hq(Quality),
+    u_up(),
+    u_down(),
+    outil(NULL),
+    outir(NULL),
+    outol(NULL),
+    outor(NULL),
+    templ(NULL),
+    tempr(NULL),
+    outvolume(0.5f),
+    r_ratiol(),
+    r_ratior(),
+    nPERIOD(),
+    nRATIO(),
+    nSAMPLE_RATE(),
+    nfSAMPLE_RATE(),
+    Pvolume(),
+    Plrcross(),
+    Pgainl(),
+    Pgainr(),
+    Pchromel(),
+    Pchromer(),
+    Pnote(),
+    Ptype(),
+    gainl(0.5f),
+    gainr(0.5f),
+    intervall(),
+    intervalr(),
+    chromel(),
+    chromer(),
+    lrcross(0.5f),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    PSl(NULL),
+    PSr(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    STE_DOWN = DS;
-    hq = Quality;
-    SAMPLE_RATE = (unsigned int) sample_rate;
-
     adjust(STE_DOWN, PERIOD);
-
     initialize();
 
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
-
-    chromel = 0.0;
-    chromer = 0.0;
-    gainl = gainr = 0.5f;
-    intervall = intervalr = 0.0f;
-    lrcross = 0.5f;
-    r_ratiol = 0;
-    r_ratior = 0;
 
     PSl = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PSl->ratio = 1.0f;
     PSr = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PSr->ratio = 1.0f;
 
-    Ppreset = 0;
-    PMIDI = 0;
-    mira = 0;
-    outvolume = 0.5f;
     setpreset(Ppreset);
 
     cleanup();
