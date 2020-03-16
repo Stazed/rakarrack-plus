@@ -31,22 +31,38 @@
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
  */
 
-Shuffle::Shuffle(double sample_rate, uint32_t intermediate_bufsize)
+Shuffle::Shuffle(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    inputl(NULL),
+    inputr(NULL),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    Pvolume(50),
+    PvolL(),
+    PvolML(),
+    PvolMH(),
+    PvolH(),
+    PQ(),
+    E(),
+    Cross1(),
+    Cross2(),
+    Cross3(),
+    Cross4(),
+    tmp(),
+    volL(),
+    volML(),
+    volMH(),
+    volH(),
+    lr(NULL),
+    hr(NULL),
+    mlr(NULL),
+    mhr(NULL),
+    interpbuf(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
     initialize();
 
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    PvolL = 0;
-    PvolML = 0;
-    PvolMH = 0;
-    PvolH = 0;
-    E = 0;
-    outvolume = 0.5f;
     setpreset(Ppreset);
     cleanup();
 }

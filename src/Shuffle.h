@@ -53,7 +53,6 @@ public:
     float *inputl;
     float *inputr;
 
-
 private:
 
     void setvolume (int Pvolume);
