@@ -79,14 +79,12 @@ private:
     int Prelease;			 //14//0...500ms//Release Time
     int Pbandwidth;		 //15//0...127//Separate high pass & low pass
 
-
-
     //Internal Variables
+    float delta;
     float distortion, fb, width, env, envdelta, sns, att, rls, fbl, fbr, depth, bandgain;
     float *lyn1, *ryn1, *lx1hp, *ly1hp, *rx1hp, *ry1hp;
     float oldlgain, oldrgain, inv_period;
 
-    float delta;
     float Rmin;	// 2N5457 typical on resistance at Vgs = 0
     float Rmax;	// Resistor parallel to FET
     float C, Clp, Chp;	        // Capacitor

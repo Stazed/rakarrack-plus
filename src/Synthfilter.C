@@ -40,10 +40,52 @@
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.
 
-Synthfilter::Synthfilter(double sample_rate, uint32_t intermediate_bufsize)
+Synthfilter::Synthfilter(double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    Pvolume(),
+    Pdistortion(),
+    Pwidth(),
+    Pfb(),
+    Plpstages(4),
+    Phpstages(2),
+    Poutsub(),
+    Pdepth(),
+    Penvelope(),
+    Pattack(),
+    Prelease(),
+    Pbandwidth(),
+    delta(1.0 / sample_rate),
+    distortion(),
+    fb(),
+    width(),
+    env(),
+    envdelta(),
+    sns(),
+    att(delta * 5.0f),          // 200ms
+    rls(delta * 5.0f),          // 200ms
+    fbl(),
+    fbr(),
+    depth(),
+    bandgain(),
+    lyn1(NULL),
+    ryn1(NULL),
+    lx1hp(NULL),
+    ly1hp(NULL),
+    rx1hp(NULL),
+    ry1hp(NULL),
+    oldlgain(),
+    oldrgain(),
+    inv_period(1.f / (float) PERIOD),
+    Rmin(185.0f),               // 2N5457 typical on resistance at Vgs = 0
+    Rmax(22000.0f),             // Resistor
+    C(0.00000005f),             // 50 nF
+    Clp(0.00000005f),
+    Chp(0.00000005f),
+    Fpre(NULL),
+    lfo(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-
     lyn1 = new float[MAX_SFILTER_STAGES];
     ryn1 = new float[MAX_SFILTER_STAGES];
     lx1hp = new float[MAX_SFILTER_STAGES];
@@ -51,24 +93,8 @@ Synthfilter::Synthfilter(double sample_rate, uint32_t intermediate_bufsize)
     ly1hp = new float[MAX_SFILTER_STAGES];
     ry1hp = new float[MAX_SFILTER_STAGES];
 
-    Plpstages = 4;
-    Phpstages = 2;
-    Pbandwidth = 0;
-
-    delta = 1.0 / sample_rate;
-    Rmin = 185.0f; // 2N5457 typical on resistance at Vgs = 0
-    Rmax = 22000.0f; // Resistor
-    C = 0.00000005f; // 50 nF
-    Chp = 0.00000005f;
-    Clp = 0.00000005f;
-    att = delta * 5.0f; //200ms
-    rls = delta * 5.0f; //200ms
-    outvolume = 0.5f;
-
     lfo = new EffectLFO(sample_rate);
-    inv_period = 1.f / (float) PERIOD;
 
-    Ppreset = 0;
     setpreset(Ppreset);
     cleanup();
 }
@@ -92,10 +118,10 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
 {
     int j = 0;
     float lgain, rgain, rmod, lmod, d;
-    lgain = rgain = rmod = lmod = d = 0.0;
+    lgain = rgain = rmod = lmod = d = 0.0f;
 
 
-    float lfol, lfor;
+    float lfol, lfor;   // initialize o.k.
     lfo->effectlfoout(&lfol, &lfor);
     lmod = lfol * width + depth + env*sns;
     rmod = lfor * width + depth + env*sns;
