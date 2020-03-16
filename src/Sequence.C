@@ -27,11 +27,83 @@
 #include <time.h>
 #include "f_sin.h"
 
-Sequence::Sequence(long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Sequence::Sequence(long int Quality, int DS, int uq, int dq,
+                   double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    DS_state(DS),
+    hq(Quality),
+    Pvolume(),
+    Psequence(),
+    Ptempo(),
+    Pq(),
+    Pamplitude(),
+    Pstdiff(1),
+    Pmode(3),
+    Prange(),
+    tcount(),
+    scount(),
+    dscount(),
+    intperiod(),
+    subdiv(2),
+    rndflag(),
+    nPERIOD(),
+    nSAMPLE_RATE(),
+    nRATIO(),
+    u_up(),
+    u_down(),
+    window(),
+    nfSAMPLE_RATE(),
+    MINFREQ(100.0f),
+    MAXFREQ(10000.0f),
+    fsequence(),
+    fq(75.0f),
+    panning(),
+    ifperiod(),
+    fperiod(),
+    seqpower(),
+    outi(NULL),
+    outo(NULL),
+    templ(NULL),
+    tempr(NULL),
+    peakpulse(),
+    peak(),
+    envrms(),
+    peakdecay(10.0f / sample_rate),
+    trigthresh(0.15f),
+    trigtimeout(),
+    trigtime(sample_rate / 12),         //  time to take next peak
+    onset(),
+    atk(200.0f / sample_rate),
+    targatk(12.0f / sample_rate),       // for smoothing filter transition
+    lmod(0.5f),
+    rmod(0.5f),
+    maxdly(4.0f),
+    tempodiv(maxdly),
+    fb(),
+    rdlyfb(),
+    ldlyfb(),
+    avtime(0.25f),
+    avflag(1),
+    filterl(NULL),
+    filterr(NULL),
+    modfilterl(NULL),
+    modfilterr(NULL),
+    rmsfilter(NULL),
+    peaklpfilter(NULL),
+    peakhpfilter(NULL),
+    peaklpfilter2(NULL),
+    interpbuf(NULL),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    PS(NULL),
+    Fpre(NULL),
+    beats(NULL),
+    ldelay(NULL),
+    rdelay(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    hq = Quality;
-    fSAMPLE_RATE = sample_rate;
     adjust(DS, sample_rate);
 
     initialize();
@@ -39,53 +111,11 @@ Sequence::Sequence(long int Quality, int DS, int uq, int dq, double sample_rate,
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
 
-    MAXFREQ = 10000.0f;
-    MINFREQ = 100.0f;
-    fq = 75.0f;
-    Ppreset = 0;
-    Pamplitude = 0;
-    Pstdiff = 1;
-    Pmode = 3;
-    scount = 0;
-    tcount = 0;
-    dscount = 0;
-    rndflag = 0;
-    subdiv = 2;
-    lmod = 0.5f;
-    rmod = 0.5f;
-    outvolume = 0.5f;
-    panning = 0.0f;
-
-    //Trigger Filter Settings
-    peakpulse = peak = envrms = 0.0f;
-    peakdecay = 10.0f / sample_rate;
-    targatk = 12.0f / sample_rate; ///for smoothing filter transition
-    atk = 200.0f / sample_rate;
-    trigtime = sample_rate / 12; //time to take next peak
-    onset = 0;
-    trigthresh = 0.15f;
-
-    for (int i = 0; i < 8; i++)
-    {
-        fsequence[i] = Psequence[i] = 0.0f;
-    }
-
     filterl->setmix(1, 0.33f, -1.0f, 0.25f);
     filterr->setmix(1, 0.33f, -1.0f, 0.25f);
 
-    maxdly = 4.0f; //sets max time to 4 seconds
-    tempodiv = maxdly;
     ldelay = new delayline(maxdly, 1, sample_rate);
     rdelay = new delayline(maxdly, 1, sample_rate);
-    fb = 0.0f;
-    rdlyfb = 0.0f;
-    ldlyfb = 0.0f;
-    ifperiod = 0.0f;
-    intperiod = 0;
-    avtime = 0.25f;
-    avflag = 1;
-    seqpower = 0.0f;
-    trigtimeout = 0;
 
     PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
@@ -155,9 +185,6 @@ Sequence::initialize()
     outo = (float *) malloc(sizeof (float) * nPERIOD);
 
     beats = new beattracker(fSAMPLE_RATE, PERIOD);
-
-    filterl = NULL;
-    filterr = NULL;
 
     interpbuf = new float[PERIOD];
     filterl = new RBFilter(0, 80.0f, 40.0f, 2, fSAMPLE_RATE, interpbuf);
