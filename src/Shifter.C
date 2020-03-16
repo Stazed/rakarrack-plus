@@ -74,6 +74,7 @@ Shifter::cleanup()
     memset(tempr, 0, sizeof (float)*PERIOD);
 }
 
+#ifdef LV2_SUPPORT
 void
 Shifter::lv2_update_params(uint32_t period)
 {
@@ -90,7 +91,7 @@ Shifter::lv2_update_params(uint32_t period)
         adjust(DS_state, fSAMPLE_RATE);
     }
 }
-
+#endif // LV2
 void
 Shifter::initialize()
 {
@@ -197,10 +198,6 @@ Shifter::adjust(int DS, double SAMPLE_RATE)
 void
 Shifter::out(float *efxoutl, float *efxoutr)
 {
-    int i;
-    float sum;
-    float use;
-
     if (DS_state != 0)
     {
         memcpy(templ, efxoutl, sizeof (float)*PERIOD);
@@ -208,7 +205,8 @@ Shifter::out(float *efxoutl, float *efxoutr)
         U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
-    for (i = 0; i < nPERIOD; i++)
+    float sum = 0.0f;
+    for (int i = 0; i < nPERIOD; i++)
     {
         if ((Pmode == 0) || (Pmode == 2))
         {
@@ -252,26 +250,48 @@ Shifter::out(float *efxoutl, float *efxoutr)
         outi[i] = (efxoutl[i] + efxoutr[i])*.5;
         
         if (outi[i] > 1.0)
+        {
             outi[i] = 1.0f;
+        }
+
         if (outi[i] < -1.0)
+        {
             outi[i] = -1.0f;
+        }
     }
 
-    if (Pmode == 1) use = whammy;
-    else use = tune;
+    float use = 0.0f;
+    if (Pmode == 1)
+    {
+        use = whammy;
+    }
+    else
+    {
+        use = tune;
+    }
     
-    if ((Pmode == 0) && (Pinterval == 0)) use = tune * whammy;
-    if (Pmode == 2) use = 1.0f - tune;
+    if ((Pmode == 0) && (Pinterval == 0))
+    {
+        use = tune * whammy;
+    }
+
+    if (Pmode == 2)
+    {
+        use = 1.0f - tune;
+    }
 
     if (Pupdown)
+    {
         PS->ratio = 1.0f - (1.0f - range) * use;
+    }
     else
+    {
         PS->ratio = 1.0f + ((range - 1.0f) * use);
-
+    }
 
     PS->smbPitchShift(PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
 
-    for (i = 0; i < nPERIOD; i++)
+    for (int i = 0; i < nPERIOD; i++)
     {
         templ[i] = outo[i] * gain * (1.0f - panning);
         tempr[i] = outo[i] * gain * panning;
@@ -280,7 +300,6 @@ Shifter::out(float *efxoutl, float *efxoutr)
     if (DS_state != 0)
     {
         D_Resample->out(templ, tempr, efxoutl, efxoutr, nPERIOD, u_down);
-
     }
     else
     {
@@ -316,8 +335,15 @@ Shifter::setinterval(int value)
 {
     interval = (float) value;
     
-    if ((Pmode == 0) && (Pinterval == 0)) interval = 1.0f;
-    if (Pupdown) interval *= -1.0f;
+    if ((Pmode == 0) && (Pinterval == 0))
+    {
+        interval = 1.0f;
+    }
+
+    if (Pupdown)
+    {
+        interval *= -1.0f;
+    }
     
     range = powf(2.0f, interval / 12.0f);
 }

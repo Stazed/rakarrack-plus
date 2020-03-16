@@ -44,9 +44,13 @@ public:
     void out (float *efxoutl, float *efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
-    int getpar (int npar);
-    void cleanup ();
+    int getpar(int npar);
+    void cleanup();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     void applyfilters (float * efxoutl);
@@ -67,6 +71,9 @@ private:
     void setinterval (int Pinterval);
     void setgain (int Pgain);
 
+    int DS_state;
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
     int Pvolume;
     int Pgain;
     int Ppan;
@@ -78,11 +85,8 @@ private:
     int Pthreshold;
     int Pwhammy;
     int state;
-    int DS_state;
-    uint32_t PERIOD;
     int nPERIOD;
     int nSAMPLE_RATE;
-    double fSAMPLE_RATE;
     float nRATIO;
     long window;
 
