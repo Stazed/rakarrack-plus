@@ -26,60 +26,91 @@
 #include <math.h>
 #include "Vibe.h"
 
-Vibe::Vibe(double sample_rate, uint32_t intermediate_bufsize)
+Vibe::Vibe(double sample_rate, uint32_t intermediate_bufsize) :
+    outvolume(0.5f),
+    PERIOD(intermediate_bufsize),
+    cSAMPLE_RATE(1.f / sample_rate),
+    fSAMPLE_RATE(sample_rate),
+    Pwidth(0),
+    Pfb(0),
+    Plrcross(0),
+    Pdepth(127),
+    Ppanning(64),
+    Pvolume(50),
+    Pstereo(1),                 //  1 if you want to process in stereo, 0 to do mono proc
+    fwidth(((float) Pwidth) / 90.0f),
+    fdepth(1.0f),
+    rpanning(1.0f),
+    lpanning(1.0f),
+    flrcross(((float) (Plrcross - 64)) / 64.0f),
+    fcross(1.0f - fabs(flrcross)),
+    fb(((float) (Pfb - 64)) / 65.0f),
+    Ra(),
+    Rb(),
+    b(),
+    dTC(0.045f),
+    dRCl(dTC),
+    dRCr(dTC),                  //  Right & left channel dynamic time constants
+    lampTC(cSAMPLE_RATE / (0.012 + cSAMPLE_RATE)),  //  guessing twiddle factor
+    ilampTC(1.0f - lampTC),
+    minTC(logf(0.0025f / dTC)),
+    alphal(1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE)),
+    alphar(alphal),
+    stepl(),
+    stepr(),
+    oldstepl(0.5f),
+    oldstepr(0.5f),
+    fbr(0.5f),
+    fbl(0.5f),
+    dalphal(alphal),
+    dalphar(alphal),
+    lstep(),
+    rstep(),
+    gl(),
+    oldgl(),
+    gr(),
+    oldgr(),
+    vc(),
+    vcvo(),
+    ecvc(),
+    vevo(),
+    bootstrap(),
+    R1(),
+    Rv(),
+    C2(),
+    C1(),
+    beta(),
+    gain(),
+    k(),
+    oldcvolt(),
+    en1(),
+    en0(),
+    ed1(),
+    ed0(),
+    cn1(),
+    cn0(),
+    cd1(),
+    cd0(),
+    ecn1(),
+    ecn0(),
+    ecd1(),
+    ecd0(),
+    on1(),
+    on0(),
+    od1(),
+    od0(),
+    Fpre(NULL),
+    lfo(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    cSAMPLE_RATE = 1.f / sample_rate;
-    fSAMPLE_RATE = sample_rate;
-
-    //Swing was measured on operating device of: 10K to 250k.
-    //400K is reported to sound better for the "low end" (high resistance)
-    //Because of time response, Rb needs to be driven further.
-    //End resistance will max out to around 10k for most LFO freqs.
-    //pushing low end a little lower for kicks and giggles
-    Ra = 500000.0f; //Cds cell dark resistance.
-    Ra = logf(Ra); //this is done for clarity
-    Rb = 600.0f; //Cds cell full illumination
+    /* Swing was measured on operating device of: 10K to 250k.
+    400K is reported to sound better for the "low end" (high resistance)
+    Because of time response, Rb needs to be driven further.
+    End resistance will max out to around 10k for most LFO freqs.
+    pushing low end a little lower for kicks and giggles*/
+    Ra = 500000.0f; //  Cds cell dark resistance.
+    Ra = logf(Ra);  //  this is done for clarity
+    Rb = 600.0f;    //  Cds cell full illumination
     b = exp(Ra / logf(Rb)) - CNST_E;
-    dTC = 0.045f;
-    //dTC = 0.085f;
-    dRCl = dTC;
-    dRCr = dTC; //Right & left channel dynamic time contsants
-    minTC = logf(0.0025f / dTC);
-    //minTC = logf(0.0025f/dTC);
-    alphal = 1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
-    alphar = alphal;
-    dalphal = dalphar = alphal;
-    lampTC = cSAMPLE_RATE / (0.012 + cSAMPLE_RATE); //guessing twiddle factor
-    ilampTC = 1.0f - lampTC;
-    lstep = 0.0f;
-    rstep = 0.0f;
-    stepr = stepl = 0.0f;
-    oldstepl = oldstepr = 0.5f;
-    fbr = fbl = 0.5f;
-
-    Pwidth = 0;
-    Pfb = 0;
-    Plrcross = 0;
-    Pvolume = 50;
-    fwidth = ((float) Pwidth) / 90.0f;
-    flrcross = ((float) (Plrcross - 64)) / 64.0f;
-    fcross = 1.0f - fabs(flrcross);
-    fb = ((float) (Pfb - 64)) / 65.0f;
-
-    Pstereo = 1; //1 if you want to process in stereo, 0 to do mono proc
-    Pdepth = 127;
-    Ppanning = 64;
-    outvolume = 0.5f;
-    lpanning = 1.0f;
-    rpanning = 1.0f;
-    fdepth = 1.0f;
-    oldgl = 0.0f;
-    oldgr = 0.0f;
-    gl = 0.0f;
-    gr = 0.0f;
-    
-    for (int jj = 0; jj < 8; jj++) oldcvolt[jj] = 0.0f;
     
     lfo = new EffectLFO(sample_rate);
 
