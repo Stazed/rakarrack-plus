@@ -32,14 +32,14 @@ Opticaltrem::Opticaltrem(double sample_rate, uint32_t intermediate_bufsize) :
     Pdepth(127),
     Ppanning(64),
     Pinvert(),
-    Ra(1000000.0f),     //  Cds cell dark resistance.
-    Rb(300.0f),         //  Cds cell full illumination
-    R1(2700.0f),        //  tremolo circuit series resistance
-    Rp(100000.0f),      //  Resistor in parallel with Cds cell
-    b(exp(logf(Ra) / logf(Rb)) - CNST_E),
+    Ra(logf(1000000.0f)),       //  Cds cell dark resistance.
+    Rb(300.0f),                 //  Cds cell full illumination
+    R1(2700.0f),                //  tremolo circuit series resistance
+    Rp(100000.0f),              //  Resistor in parallel with Cds cell
+    b(exp(Ra / logf(Rb)) - CNST_E),
     dTC(0.03f),
     dRCl(dTC),
-    dRCr(dTC),          //  Right & left channel dynamic time constants
+    dRCr(dTC),                  //  Right & left channel dynamic time constants
     minTC(logf(0.005f / dTC)),
     alphal(1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE)),
     alphar(alphal),
@@ -60,8 +60,14 @@ Opticaltrem::Opticaltrem(double sample_rate, uint32_t intermediate_bufsize) :
     lfo(NULL),
     Fpre(NULL)
 {
+    /*  From original constructor
+    Ra = 1000000.0f;    //  Cds cell dark resistance.
     Ra = logf(Ra);      //  this is done for clarity
-
+    Rb = 300.0f;        //  Cds cell full illumination
+    Rp = 100000.0f;     //  Resistor in parallel with Cds cell
+    b = exp(Ra / logf(Rb)) - CNST_E;
+    */
+    
     lfo = new EffectLFO(sample_rate);
 }
 
@@ -274,18 +280,18 @@ Opticaltrem::changepar(int npar, int value)
         Pinvert = value;
         if (Pinvert)
         {
-            R1 = 68000.0f; //tremolo circuit series resistance
-            Ra = 500000.0f; //Cds cell dark resistance.
+            R1 = 68000.0f;      //  tremolo circuit series resistance
+            Ra = 500000.0f;     //  Cds cell dark resistance.
         }
         else
         {
-            R1 = 2700.0f; //tremolo circuit series resistance
-            Ra = 1000000.0f; //Cds cell dark resistance.
+            R1 = 2700.0f;       //  tremolo circuit series resistance
+            Ra = 1000000.0f;    //  Cds cell dark resistance.
         }
         setpanning(Ppanning);
 
-        Ra = logf(Ra); //this is done for clarity
-        Rb = 300.0f; //Cds cell full illumination
+        Ra = logf(Ra);          //  this is done for clarity
+        Rb = 300.0f;            //  Cds cell full illumination
         b = exp(Ra / logf(Rb)) - CNST_E;
         break;
     }

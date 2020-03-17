@@ -45,12 +45,12 @@ Vibe::Vibe(double sample_rate, uint32_t intermediate_bufsize) :
     flrcross(((float) (Plrcross - 64)) / 64.0f),
     fcross(1.0f - fabs(flrcross)),
     fb(((float) (Pfb - 64)) / 65.0f),
-    Ra(),
-    Rb(),
-    b(),
+    Ra(logf(500000.0f)),                            //  Cds cell dark resistance
+    Rb(600.0f),                                     //  Cds cell full illumination)
+    b(exp(Ra / logf(Rb)) - CNST_E),
     dTC(0.045f),
     dRCl(dTC),
-    dRCr(dTC),                  //  Right & left channel dynamic time constants
+    dRCr(dTC),                                      //  Right & left channel dynamic time constants
     lampTC(cSAMPLE_RATE / (0.012 + cSAMPLE_RATE)),  //  guessing twiddle factor
     ilampTC(1.0f - lampTC),
     minTC(logf(0.0025f / dTC)),
@@ -102,15 +102,17 @@ Vibe::Vibe(double sample_rate, uint32_t intermediate_bufsize) :
     Fpre(NULL),
     lfo(NULL)
 {
-    /* Swing was measured on operating device of: 10K to 250k.
+    /* From original constructor
+    Swing was measured on operating device of: 10K to 250k.
     400K is reported to sound better for the "low end" (high resistance)
     Because of time response, Rb needs to be driven further.
     End resistance will max out to around 10k for most LFO freqs.
-    pushing low end a little lower for kicks and giggles*/
+    pushing low end a little lower for kicks and giggles
     Ra = 500000.0f; //  Cds cell dark resistance.
     Ra = logf(Ra);  //  this is done for clarity
     Rb = 600.0f;    //  Cds cell full illumination
     b = exp(Ra / logf(Rb)) - CNST_E;
+    */
     
     lfo = new EffectLFO(sample_rate);
 
