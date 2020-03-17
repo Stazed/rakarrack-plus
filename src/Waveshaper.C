@@ -29,10 +29,41 @@
 #include "Resample.h"
 #include "f_sin.h"
 
-Waveshaper::Waveshaper(double samplerate, int Wave_Res_Amount, int Wave_up_q, int Wave_down_q, unsigned short tempbufsize)
+Waveshaper::Waveshaper(double samplerate, int Wave_Res_Amount, int Wave_up_q,
+                       int Wave_down_q, unsigned short tempbufsize) :
+    period_coeff(),         //  set in constructor
+    u_up(),                 //  set in constructor
+    u_down(),               //  set in constructor
+    dthresh(0.25),
+    dyno(0.0f),
+    dynodecay(),            //  set in constructor
+    compg(0.0f),            //  used by compression distortion
+    cratio(0.25f),          //  used by compression for hardness
+    tmpgain(1.0f),          //  compression distortion temp variable
+    ncSAMPLE_RATE(),        //  set in constructor
+    temps(NULL),
+    R(220000.0f),           //  Plate resistor, 220k
+    P(0.0002f),             //  constant tuning bias current for Valve 1
+    Vgbias(0.075f),         //  bias point for Valve 1 model
+    Vsupp(200.0f),
+    Ip(0.0f),
+    Vmin(Vsupp - 2.5),      //  Approximate cathode voltage when tube is saturated.
+    Vg(),
+    Vfactor(1.5f),
+    Vdyno(0.0f),
+    mu(100.0f),             //  Valve 2 gain
+    V2bias(1.5f),           //  Valve 2 bias voltage
+    Is(105 / (R * powf(V2bias*mu, 1.5f))),  //  bias point for Valve 2
+    Vg2(mu*V2bias),
+    vfact(12),              //  adjustment of valve shut-off.  Small is hard clipping, large is softer clipping
+    ffact(40),              //  Valve 2 ffact and vfact set onset of significant limiting.   Small is hard clip, large is soft clip
+    Vlv2out(0.0f),
+    V2dyno(0.0f),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    Wave_res_amount(Wave_Res_Amount)
 {
     double csamplerate = 1 / samplerate;
-    Wave_res_amount = Wave_Res_Amount;
 
     switch (Wave_res_amount)
     {
@@ -60,9 +91,8 @@ Waveshaper::Waveshaper(double samplerate, int Wave_Res_Amount, int Wave_up_q, in
 
     //create and zero temp buffer
     temps = (float *) malloc(sizeof (float) * tempbufsize * period_coeff);
-    long i;
 
-    for (i = 0; i < tempbufsize * period_coeff; i++)
+    for (long i = 0; i < tempbufsize * period_coeff; i++)
     {
         temps[i] = 0;
     }
@@ -70,32 +100,7 @@ Waveshaper::Waveshaper(double samplerate, int Wave_Res_Amount, int Wave_up_q, in
     u_up = (double) period_coeff;
     u_down = 1.0 / u_up;
 
-    compg = 0.0f; //used by compression distortion
-    cratio = 0.25f; //used by compression for hardness
-    tmpgain = 1.0f; // compression distortion temp variable
-    dthresh = 0.25;
-    dyno = 0.0f;
-
     dynodecay = 0.0167f / (ncSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
-
-    Ip = 0.0f;
-    Vsupp = 200.0f;
-    Vgbias = 0.075f; //bias point for Valve1 model
-    R = 220000.0f; //Plate resistor, 220k
-    P = 0.0002f; //constant tuning bias current for Valve1
-
-    mu = 100.0f; //Valve2 gain
-    V2bias = 1.5f; //Valve2 bias voltage
-    Is = 105 / (R * powf(V2bias*mu, 1.5f)); //bias point for Valve2
-    Vg2 = mu*V2bias;
-    vfact = 12; //adjustment of valve shut-off.  Small is hard clipping, large is softer clipping
-    ffact = 40; //Valve2 ffact and vfact set onset of significant limiting.   Small is hard clip, large is soft clip
-    Vlv2out = 0.0f;
-    V2dyno = 0.0f;
-
-    Vmin = Vsupp - 2.5; //Approximate cathode voltage when tube is saturated.
-    Vfactor = 1.5f;
-    Vdyno = 0.0f;
 
     U_Resample = new Resample(Wave_up_q); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
     D_Resample = new Resample(Wave_down_q);
