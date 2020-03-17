@@ -1,7 +1,35 @@
 #include <math.h>
 #include "beattracker.h"
 
-beattracker::beattracker(double sample_rate, uint32_t intermediate_bufsize)
+beattracker::beattracker(double sample_rate, uint32_t intermediate_bufsize) :
+    index(NULL),
+    fSAMPLE_RATE(sample_rate),
+    timeseries(),
+    tsidx(),
+    tscntr(),
+    peakpulse(),
+    peak(),
+    envrms(),
+    peakdecay(10.0f / fSAMPLE_RATE),
+    trigthresh(0.15f),
+    trigtimeout(),
+    trigtime(sample_rate / 12),             //  time to take next peak
+    onset(),
+    atk(200.0f / fSAMPLE_RATE),
+    targatk(12.0f / fSAMPLE_RATE),          //  for smoothing filter transition
+    lmod(),
+    rmod(),
+    rmsfilter(NULL),
+    peaklpfilter(NULL),
+    peakhpfilter(NULL),
+    peaklpfilter2(NULL),
+    oldbpm(),
+    oldmost(),
+    avbpm(),
+    statsbin(),
+    maxptr(),
+    bpm_change_cntr(),
+    interpbuf(NULL)
 {
     interpbuf = new float[intermediate_bufsize];
     rmsfilter = new RBFilter(0, 15.0f, 0.15f, 1, sample_rate, interpbuf);
@@ -10,23 +38,6 @@ beattracker::beattracker(double sample_rate, uint32_t intermediate_bufsize)
     peakhpfilter = new RBFilter(1, 45.0f, 0.5f, 0, sample_rate, interpbuf);
 
     index = (int *) malloc(sizeof (int) * intermediate_bufsize);
-
-    //Trigger Filter Settings
-    fSAMPLE_RATE = sample_rate;
-    peakpulse = peak = envrms = 0.0f;
-    peakdecay = 10.0f / fSAMPLE_RATE;
-    targatk = 12.0f / fSAMPLE_RATE; ///for smoothing filter transition
-    atk = 200.0f / fSAMPLE_RATE;
-    trigtime = sample_rate / 12; //time to take next peak
-    onset = 0;
-    trigthresh = 0.15f;
-    trigtimeout = 0;
-
-    tscntr = 0;
-    tsidx = 0;
-
-    oldbpm = 0.0f;
-    oldmost = 0.0f;
 
     cleanup();
 }

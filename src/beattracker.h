@@ -60,6 +60,7 @@ public:
 
 private:
 
+    float fSAMPLE_RATE;
     long timeseries[20];
     int tsidx;
     long tscntr;
@@ -75,7 +76,6 @@ private:
     int maxptr;
     int bpm_change_cntr;
 
-    float fSAMPLE_RATE;
     float* interpbuf;//buffer for filters
 
     void calc_tempo();   //called by detect() on every beat detected
