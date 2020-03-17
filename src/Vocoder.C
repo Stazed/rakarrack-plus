@@ -26,43 +26,78 @@
 #include <math.h>
 #include "Vocoder.h"
 
-Vocoder::Vocoder(float *auxresampled_, int bands, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize)
+Vocoder::Vocoder(float *auxresampled_, int bands, int DS, int uq, int dq,
+                 double sample_rate, uint32_t intermediate_bufsize) :
+    Ppreset(),
+    outvolume(0.5f),
+    vulevel(),
+    auxresampled(auxresampled_),
+    VOC_BANDS(bands),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    DS_state(DS),
+    Pvolume(50),
+    Ppanning(64),
+    Plrcross(100),
+    Plevel(),
+    Pinput(0),
+    Pband(),
+    Pmuffle(10),
+    Pqq(),
+    Pring(),
+    nPERIOD(),
+    nSAMPLE_RATE(),
+    nRATIO(),
+    ncSAMPLE_RATE(),
+    nfSAMPLE_RATE(),
+    u_up(),
+    u_down(),
+    ringworm(),
+    lpanning(),
+    rpanning(),
+    input(dB2rap(75.0f * (float) Pinput / 127.0f - 40.0f)),
+    level(),
+    alpha(),
+    beta(),
+    prls(),
+    gate(0.005f),
+    compeak(),
+    compg(),
+    compenv(),
+    oldcompenv(),
+    calpha(),
+    cbeta(),
+    cthresh(0.25f),
+    cratio(0.25f),
+    cpthresh(cthresh),      //  dynamic threshold
+    tmpl(NULL),
+    tmpr(NULL),
+    tsmpsl(NULL),
+    tsmpsr(NULL),
+    tmpaux(NULL),
+    filterbank(NULL),
+    vhp(NULL),
+    vlp(NULL),
+    interpbuf(NULL),
+    U_Resample(NULL),
+    D_Resample(NULL),
+    A_Resample(NULL),
+    Fpre(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
     adjust(DS, sample_rate);
 
-    VOC_BANDS = bands;
-    auxresampled = auxresampled_;
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Plevel = 0;
-    Pinput = 0;
-    Ppanning = 64;
-    Plrcross = 100;
-    outvolume = 0.5f;
-    input = dB2rap(75.0f * (float) Pinput / 127.0f - 40.0f);
-    vulevel = 0.0f;
-
-    initialize();
-
-    Pmuffle = 10;
-    float tmp = 0.01f; //10 ms decay time on peak detectors
+    /* These must be set after adjust() is run for ncSAMPLE_RATE */
+    float tmp = 0.01f;          //  10 ms decay time on peak detectors
     alpha = ncSAMPLE_RATE / (ncSAMPLE_RATE + tmp);
     beta = 1.0f - alpha;
     prls = beta;
-    gate = 0.005f;
-
-
-    tmp = 0.05f; //50 ms att/rel on compressor
+    
+    tmp = 0.05f;                // 50 ms att/rel on compressor
     calpha = ncSAMPLE_RATE / (ncSAMPLE_RATE + tmp);
     cbeta = 1.0f - calpha;
-    cthresh = 0.25f;
-    cpthresh = cthresh; //dynamic threshold
-    cratio = 0.25f;
-
+    
+    initialize();
+    
     A_Resample = new Resample(dq);
     U_Resample = new Resample(dq);
     D_Resample = new Resample(uq);
@@ -141,14 +176,12 @@ Vocoder::initialize()
     memset(tsmpsr, 0, sizeof (float)*nPERIOD);
     memset(tmpaux, 0, sizeof (float)*nPERIOD);
 
-    float center;
-    float qq;
     interpbuf = new float[PERIOD];
 
     for (int i = 0; i < VOC_BANDS; i++)
     {
-        center = (float) i * 20000.0f / ((float) VOC_BANDS);
-        qq = 60.0f;
+        float center = (float) i * 20000.0f / ((float) VOC_BANDS);
+        float qq = 60.0f;
 
         filterbank[i].l = new AnalogFilter(4, center, qq, 0, fSAMPLE_RATE, interpbuf);
         filterbank[i].l->setSR(nSAMPLE_RATE);
