@@ -28,6 +28,8 @@
 
 #include "EffectLFO.h"
 
+//#define VIBE_INLINE 1     // uncomment for inline
+
 class Vibe
 {
 

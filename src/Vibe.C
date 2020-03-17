@@ -112,7 +112,6 @@ Vibe::out(float *efxoutl, float *efxoutr)
 {
     unsigned int i, j;
     float lfol, lfor, xl, xr, fxl, fxr;
-    //float vbe,vin;
     float cvolt, ocvolt, evolt, input;
     float emitterfb = 0.0f;
     float outl, outr;
@@ -178,29 +177,100 @@ Vibe::out(float *efxoutl, float *efxoutr)
         //Left Channel
         input = bjt_shape(fbl + efxoutl[i]);
 
-
-        /*
-        //Inline BJT Shaper below
-            vin = 7.5f*(1.0f + fbl+efxoutl[i]);
-            if(vin<0.0f) vin = 0.0f;
-            if(vin>15.0f) vin = 15.0f;
-            vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
-            input = vin - vbe;
-            input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
-
-         */
+#ifdef VIBE_INLINE
+        //  Inline BJT Shaper below
+        float vin = 7.5f*(1.0f + fbl+efxoutl[i]);
+        if(vin<0.0f) vin = 0.0f;
+        if(vin>15.0f) vin = 15.0f;
+        float vbe = 0.8f - 0.8f/(vin + 1.0f);  //   really rough, simplistic bjt turn-on emulator
+        input = vin - vbe;
+        input = input*0.1333333333f -0.90588f;  //  some magic numbers to return gain to unity & zero the DC
+#endif //  VIBE_INLINE
 
         emitterfb = 25.0f / fxl;
         
         for (j = 0; j < 4; j++)
         { //4 stages phasing
-            /*
-            //Inline filter implementation below
+
+#ifdef VIBE_INLINE
+
+            //  Inline filter implementation below
+            float y0 = 0.0f;
+            y0 = input*ecvc[j].n0 + ecvc[j].x1*ecvc[j].n1 - ecvc[j].y1*ecvc[j].d1;
+            ecvc[j].y1 = y0 + DENORMAL_GUARD;
+            ecvc[j].x1 = input;
+
+            float x0 = 0.0f;
+            float data = input + emitterfb*oldcvolt[j];
+            x0 = data*vc[j].n0 + vc[j].x1*vc[j].n1 - vc[j].y1*vc[j].d1;
+            vc[j].y1 = x0 + DENORMAL_GUARD;
+            vc[j].x1 = data;
+
+            cvolt=y0+x0;
+
+            ocvolt= cvolt*vcvo[j].n0 + vcvo[j].x1*vcvo[j].n1 - vcvo[j].y1*vcvo[j].d1;
+            vcvo[j].y1 = ocvolt + DENORMAL_GUARD;
+            vcvo[j].x1 = cvolt;
+
+            oldcvolt[j] = ocvolt;
+
+            evolt = input*vevo[j].n0 + vevo[j].x1*vevo[j].n1 - vevo[j].y1*vevo[j].d1;
+            vevo[j].y1 = evolt + DENORMAL_GUARD;
+            vevo[j].x1 = input;
+
+            vin = 7.5f*(1.0f + ocvolt+evolt);
+            if(vin<0.0f) vin = 0.0f;
+            if(vin>15.0f) vin = 15.0f;
+            vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+            input = vin - vbe;
+            input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+            
+#else // VIBE_INLINE
+
+            cvolt = vibefilter(input, ecvc, j) + vibefilter(input + emitterfb * oldcvolt[j], vc, j);
+            ocvolt = vibefilter(cvolt, vcvo, j);
+            oldcvolt[j] = ocvolt;
+            evolt = vibefilter(input, vevo, j);
+
+            input = bjt_shape(ocvolt + evolt);
+
+#endif // ORIGINAL
+
+        }
+        
+        fbl = fb*ocvolt;
+        outl = lpanning*input;
+
+        //Right channel
+
+        if (Pstereo)
+        {
+#ifdef VIBE_INLINE
+            
+            //  Inline BJT shaper
+            vin = 7.5f*(1.0f + fbr+efxoutr[i]);
+            if(vin<0.0f) vin = 0.0f;
+            if(vin>15.0f) vin = 15.0f;
+            vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+            input = vin - vbe;
+            input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+             
+#else //  VIBE_INLINE
+
+            input = bjt_shape(fbr + efxoutr[i]);
+
+#endif // ORIGINAL
+            emitterfb = 25.0f / fxr;
+            
+            for (j = 4; j < 8; j++)
+            { //4 stages phasing
+
+#ifdef VIBE_INLINE
+
                 float y0 = 0.0f;
                 y0 = input*ecvc[j].n0 + ecvc[j].x1*ecvc[j].n1 - ecvc[j].y1*ecvc[j].d1;
                 ecvc[j].y1 = y0 + DENORMAL_GUARD;
                 ecvc[j].x1 = input;
-
 
                 float x0 = 0.0f;
                 float data = input + emitterfb*oldcvolt[j];
@@ -209,7 +279,6 @@ Vibe::out(float *efxoutl, float *efxoutr)
                 vc[j].x1 = data;
 
                 cvolt=y0+x0;
-
 
                 ocvolt= cvolt*vcvo[j].n0 + vcvo[j].x1*vcvo[j].n1 - vcvo[j].y1*vcvo[j].d1;
                 vcvo[j].y1 = ocvolt + DENORMAL_GUARD;
@@ -221,98 +290,24 @@ Vibe::out(float *efxoutl, float *efxoutr)
                 vevo[j].y1 = evolt + DENORMAL_GUARD;
                 vevo[j].x1 = input;
 
+
                 vin = 7.5f*(1.0f + ocvolt+evolt);
                 if(vin<0.0f) vin = 0.0f;
                 if(vin>15.0f) vin = 15.0f;
                 vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
                 input = vin - vbe;
                 input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
-             */
 
-            // Orig code, Comment below if instead using inline
-            cvolt = vibefilter(input, ecvc, j) + vibefilter(input + emitterfb * oldcvolt[j], vc, j);
-            ocvolt = vibefilter(cvolt, vcvo, j);
-            oldcvolt[j] = ocvolt;
-            evolt = vibefilter(input, vevo, j);
+#else //  VIBE_INLINE
 
-            input = bjt_shape(ocvolt + evolt);
-            //Close comment here if using inline
-
-        }
-        
-        fbl = fb*ocvolt;
-        outl = lpanning*input;
-
-        //Right channel
-
-        if (Pstereo)
-        {
-            /*
-            //Inline BJT shaper
-             vin = 7.5f*(1.0f + fbr+efxoutr[i]);
-             if(vin<0.0f) vin = 0.0f;
-             if(vin>15.0f) vin = 15.0f;
-             vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
-             input = vin - vbe;
-             input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
-             */
-
-
-            //Orig code
-            input = bjt_shape(fbr + efxoutr[i]);
-            //Close Comment here if using Inline instead
-
-            emitterfb = 25.0f / fxr;
-            
-            for (j = 4; j < 8; j++)
-            { //4 stages phasing
-
-                /*
-                //This is the inline version
-
-                    float y0 = 0.0f;
-                    y0 = input*ecvc[j].n0 + ecvc[j].x1*ecvc[j].n1 - ecvc[j].y1*ecvc[j].d1;
-                    ecvc[j].y1 = y0 + DENORMAL_GUARD;
-                    ecvc[j].x1 = input;
-
-
-                    float x0 = 0.0f;
-                    float data = input + emitterfb*oldcvolt[j];
-                    x0 = data*vc[j].n0 + vc[j].x1*vc[j].n1 - vc[j].y1*vc[j].d1;
-                    vc[j].y1 = x0 + DENORMAL_GUARD;
-                    vc[j].x1 = data;
-
-                    cvolt=y0+x0;
-
-
-                    ocvolt= cvolt*vcvo[j].n0 + vcvo[j].x1*vcvo[j].n1 - vcvo[j].y1*vcvo[j].d1;
-                    vcvo[j].y1 = ocvolt + DENORMAL_GUARD;
-                    vcvo[j].x1 = cvolt;
-
-                    oldcvolt[j] = ocvolt;
-
-                    evolt = input*vevo[j].n0 + vevo[j].x1*vevo[j].n1 - vevo[j].y1*vevo[j].d1;
-                    vevo[j].y1 = evolt + DENORMAL_GUARD;
-                    vevo[j].x1 = input;
-
-
-                    vin = 7.5f*(1.0f + ocvolt+evolt);
-                    if(vin<0.0f) vin = 0.0f;
-                    if(vin>15.0f) vin = 15.0f;
-                    vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
-                    input = vin - vbe;
-                    input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
-
-                 */
-
-                //  Comment block below if using inline code instead
                 cvolt = vibefilter(input, ecvc, j) + vibefilter(input + emitterfb * oldcvolt[j], vc, j);
                 ocvolt = vibefilter(cvolt, vcvo, j);
                 oldcvolt[j] = ocvolt;
                 evolt = vibefilter(input, vevo, j);
 
                 input = bjt_shape(ocvolt + evolt);
-                // Close comment here if inlining
+
+#endif // ORIGINAL
             }
 
             fbr = fb*ocvolt;
