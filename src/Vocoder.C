@@ -103,6 +103,7 @@ Vocoder::cleanup()
     compeak = compg = compenv = oldcompenv = 0.0f;
 }
 
+#ifdef LV2_SUPPORT
 void
 Vocoder::lv2_update_params(uint32_t period)
 {
@@ -122,6 +123,7 @@ Vocoder::lv2_update_params(uint32_t period)
         adjust(DS_state, fSAMPLE_RATE);
     }
 }
+#endif // LV2
 
 void
 Vocoder::initialize()
@@ -267,34 +269,34 @@ Vocoder::adjust(int DS, double SAMPLE_RATE)
 void
 Vocoder::out(float * efxoutl, float * efxoutr)
 {
-    int i, j;
-
-    float tempgain;
-    float maxgain = 0.0f;
-    float auxtemp, tmpgain;
-
     if (DS_state != 0)
     {
         A_Resample->mono_out(auxresampled, tmpaux, PERIOD, u_up, nPERIOD);
     }
     else
+    {
         memcpy(tmpaux, auxresampled, sizeof (float)*nPERIOD);
+    }
 
-
-    for (i = 0; i < nPERIOD; i++)
+    float auxtemp, tmpgain; auxtemp = tmpgain = 0.0f;
+    
+    for (int i = 0; i < nPERIOD; i++)
     { //apply compression to auxresampled
         auxtemp = input * tmpaux[i];
 
-        if (fabs(auxtemp > compeak)) compeak = fabs(auxtemp); //First do peak detection on the signal
-
+        if (fabs(auxtemp > compeak))
+        {
+            compeak = fabs(auxtemp);                        //  First do peak detection on the signal
+        }
+        
         compeak *= prls;
-        compenv = cbeta * oldcompenv + calpha * compeak; //Next average into envelope follower
+        compenv = cbeta * oldcompenv + calpha * compeak;    //  Next average into envelope follower
         oldcompenv = compenv;
 
         if (compenv > cpthresh)
         { //if envelope of signal exceeds thresh, then compress
             compg = cpthresh + cpthresh * (compenv - cpthresh) / compenv;
-            cpthresh = cthresh + cratio * (compg - cpthresh); //cpthresh changes dynamically
+            cpthresh = cthresh + cratio * (compg - cpthresh); //  cpthresh changes dynamically
             tmpgain = compg / compenv;
         }
         else
@@ -302,8 +304,15 @@ Vocoder::out(float * efxoutl, float * efxoutr)
             tmpgain = 1.0f;
         }
 
-        if (compenv < cpthresh) cpthresh = compenv;
-        if (cpthresh < cthresh) cpthresh = cthresh;
+        if (compenv < cpthresh)
+        {
+            cpthresh = compenv;
+        }
+
+        if (cpthresh < cthresh)
+        {
+            cpthresh = cthresh;
+        }
 
         tmpaux[i] = auxtemp * tmpgain;
 
@@ -328,18 +337,31 @@ Vocoder::out(float * efxoutl, float * efxoutr)
     memset(tmpl, 0, sizeof (float)*nPERIOD);
     memset(tmpr, 0, sizeof (float)*nPERIOD);
 
-    for (j = 0; j < VOC_BANDS; j++)
+    float tempgain = 0.0f;
+    float maxgain = 0.0f;
+    
+    for (int j = 0; j < VOC_BANDS; j++)
     {
-        for (i = 0; i < nPERIOD; i++)
+        for (int i = 0; i < nPERIOD; i++)
         {
             auxtemp = tmpaux[i];
 
-            if (filterbank[j].speak < gate) filterbank[j].speak = 0.0f; //gate
-            if (auxtemp > maxgain) maxgain = auxtemp; //vu meter level.
+            if (filterbank[j].speak < gate)
+            {
+                filterbank[j].speak = 0.0f; //gate
+            }
+
+            if (auxtemp > maxgain)
+            {
+                maxgain = auxtemp; //vu meter level.
+            }
 
             auxtemp = filterbank[j].aux->filterout_s(auxtemp);
 
-            if (fabs(auxtemp) > filterbank[j].speak) filterbank[j].speak = fabs(auxtemp); //Leaky Peak detector
+            if (fabs(auxtemp) > filterbank[j].speak)
+            {
+                filterbank[j].speak = fabs(auxtemp); //Leaky Peak detector
+            }
 
             filterbank[j].speak *= prls;
 
@@ -354,7 +376,7 @@ Vocoder::out(float * efxoutl, float * efxoutr)
         }
     }
 
-    for (i = 0; i < nPERIOD; i++)
+    for (int i = 0; i < nPERIOD; i++)
     {
         tmpl[i] *= lpanning*level;
         tmpr[i] *= rpanning*level;
@@ -381,14 +403,16 @@ Vocoder::setbands(int numbands, float startfreq, float endfreq)
     float endband = endfreq;
     float fnumbands = (float) numbands;
     float output[VOC_BANDS + 1];
-    int k;
 
     //calculate intermediate values
     float pwer = logf(endband / start) / log(2.0f);
 
-    for (k = 0; k <= VOC_BANDS; k++) output[k] = start * f_pow2(((float) k) * pwer / fnumbands);
+    for (int k = 0; k <= VOC_BANDS; k++)
+    {
+        output[k] = start * f_pow2(((float) k) * pwer / fnumbands);
+    }
 
-    for (k = 0; k < VOC_BANDS; k++)
+    for (int k = 0; k < VOC_BANDS; k++)
     {
         filterbank[k].sfreq = output[k] + (output[k + 1] - output[k])*0.5f;
         filterbank[k].sq = filterbank[k].sfreq / (output[k + 1] - output[k]);
@@ -424,7 +448,7 @@ Vocoder::setpanning(int Ppanning)
 void
 Vocoder::init_filters()
 {
-    float ff, qq;
+    float ff, qq; ff = qq = 0.0f;
 
     for (int ii = 0; ii < VOC_BANDS; ii++)
     {
@@ -440,8 +464,7 @@ void
 Vocoder::adjustq(int value)
 {
     Pqq = value;
-    float q = 0;
-    q = (float) value;
+    float q = (float) value;
 
     for (int ii = 0; ii < VOC_BANDS; ii++)
     {
@@ -489,7 +512,6 @@ Vocoder::setpreset(int npreset)
 void
 Vocoder::changepar(int npar, int value)
 {
-    float tmp = 0;
     switch (npar)
     {
     case 0:
@@ -499,12 +521,14 @@ Vocoder::changepar(int npar, int value)
         setpanning(value);
         break;
     case 2:
+    {
         Pmuffle = value;
-        tmp = (float) Pmuffle;
+        float tmp = (float) Pmuffle;
         tmp *= 0.0001f + tmp / 64000;
         alpha = ncSAMPLE_RATE / (ncSAMPLE_RATE + tmp);
         beta = 1.0f - alpha;
         break;
+    }
     case 3:
         adjustq(value);
         /*        Pqq = value;

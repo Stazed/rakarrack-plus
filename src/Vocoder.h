@@ -37,7 +37,11 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+
+#ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
+#endif // LV2
+    
     void initialize();
     void clear_initialize();
     void adjust(int DS, double sample_rate);
@@ -55,7 +59,12 @@ private:
     void init_filters();
     void adjustq(int value);
     void   setbands(int numbands, float startfreq, float endfreq);
+    
     int VOC_BANDS;
+    uint32_t PERIOD;
+    double fSAMPLE_RATE;
+    int DS_state;
+    
     //Parametrii
     int Pvolume;	//This is master wet/dry mix like other FX...but I am finding it is not useful
     int Ppanning;	//Panning
@@ -67,10 +76,7 @@ private:
     int Pqq;
     int Pring;
 
-    int DS_state;
-    uint32_t PERIOD;
     int nPERIOD;
-    double fSAMPLE_RATE;
     int nSAMPLE_RATE;
     float nRATIO;
 
