@@ -110,22 +110,22 @@ Vibe::lv2_update_params(uint32_t period)
 void
 Vibe::out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i, j;
-    float lfol, lfor, xl, xr, fxl, fxr;
     float cvolt, ocvolt, evolt, input;
-    float emitterfb = 0.0f;
-    float outl, outr;
-
     input = cvolt = ocvolt = evolt = 0.0f;
 
+    float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
 
     lfol = fdepth + lfol*fwidth;
     
     if (lfol > 1.0f)
+    {
         lfol = 1.0f;
+    }
     else if (lfol < 0.0f)
+    {
         lfol = 0.0f;
+    }
     
     lfol = 2.0f - 2.0f / (lfol + 1.0f); //emulate lamp turn on/off characteristic by typical curves
 
@@ -133,13 +133,19 @@ Vibe::out(float *efxoutl, float *efxoutr)
     {
         lfor = fdepth + lfor*fwidth;
         
-        if (lfor > 1.0f) lfor = 1.0f;
-        else if (lfor < 0.0f) lfor = 0.0f;
+        if (lfor > 1.0f)
+        {
+            lfor = 1.0f;
+        }
+        else if (lfor < 0.0f)
+        {
+            lfor = 0.0f;
+        }
         
-        lfor = 2.0f - 2.0f / (lfor + 1.0f); //
+        lfor = 2.0f - 2.0f / (lfor + 1.0f);
     }
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned int i = 0; i < PERIOD; i++)
     {
         //Left Lamp
         gl = lfol * lampTC + oldgl*ilampTC;
@@ -151,9 +157,9 @@ Vibe::out(float *efxoutl, float *efxoutr)
         dRCl = dTC * f_exp(stepl * minTC);
         alphal = cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
         dalphal = 1.0f - cSAMPLE_RATE / (0.5f * dRCl + cSAMPLE_RATE); //different attack & release character
-        xl = CNST_E + stepl*b;
-        fxl = f_exp(Ra / logf(xl));
-        fxr = fxl;
+        float xl = CNST_E + stepl*b;
+        float fxl = f_exp(Ra / logf(xl));
+        float fxr = fxl;
 
         //Right Lamp
         if (Pstereo)
@@ -167,7 +173,7 @@ Vibe::out(float *efxoutl, float *efxoutr)
             dRCr = dTC * f_exp(stepr * minTC);
             alphar = cSAMPLE_RATE / (dRCr + cSAMPLE_RATE);
             dalphar = 1.0f - cSAMPLE_RATE / (0.5f * dRCr + cSAMPLE_RATE); //different attack & release character
-            xr = CNST_E + stepr*b;
+            float xr = CNST_E + stepr*b;
             fxr = f_exp(Ra / logf(xr));
         }
 
@@ -187,9 +193,9 @@ Vibe::out(float *efxoutl, float *efxoutr)
         input = input*0.1333333333f -0.90588f;  //  some magic numbers to return gain to unity & zero the DC
 #endif //  VIBE_INLINE
 
-        emitterfb = 25.0f / fxl;
+        float emitterfb = 25.0f / fxl;
         
-        for (j = 0; j < 4; j++)
+        for (unsigned int j = 0; j < 4; j++)
         { //4 stages phasing
 
 #ifdef VIBE_INLINE
@@ -221,9 +227,9 @@ Vibe::out(float *efxoutl, float *efxoutr)
             vin = 7.5f*(1.0f + ocvolt+evolt);
             if(vin<0.0f) vin = 0.0f;
             if(vin>15.0f) vin = 15.0f;
-            vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+            vbe = 0.8f - 0.8f/(vin + 1.0f);  // really rough, simplistic bjt turn-on emulator
             input = vin - vbe;
-            input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+            input = input*0.1333333333f -0.90588f;  // some magic numbers to return gain to unity & zero the DC
             
 #else // VIBE_INLINE
 
@@ -239,7 +245,7 @@ Vibe::out(float *efxoutl, float *efxoutr)
         }
         
         fbl = fb*ocvolt;
-        outl = lpanning*input;
+        float outl = lpanning*input;
 
         //Right channel
 
@@ -251,9 +257,9 @@ Vibe::out(float *efxoutl, float *efxoutr)
             vin = 7.5f*(1.0f + fbr+efxoutr[i]);
             if(vin<0.0f) vin = 0.0f;
             if(vin>15.0f) vin = 15.0f;
-            vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+            vbe = 0.8f - 0.8f/(vin + 1.0f);  // really rough, simplistic bjt turn-on emulator
             input = vin - vbe;
-            input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+            input = input*0.1333333333f -0.90588f;  // some magic numbers to return gain to unity & zero the DC
              
 #else //  VIBE_INLINE
 
@@ -262,7 +268,7 @@ Vibe::out(float *efxoutl, float *efxoutr)
 #endif // ORIGINAL
             emitterfb = 25.0f / fxr;
             
-            for (j = 4; j < 8; j++)
+            for (unsigned int j = 4; j < 8; j++)
             { //4 stages phasing
 
 #ifdef VIBE_INLINE
@@ -290,13 +296,12 @@ Vibe::out(float *efxoutl, float *efxoutr)
                 vevo[j].y1 = evolt + DENORMAL_GUARD;
                 vevo[j].x1 = input;
 
-
                 vin = 7.5f*(1.0f + ocvolt+evolt);
                 if(vin<0.0f) vin = 0.0f;
                 if(vin>15.0f) vin = 15.0f;
-                vbe = 0.8f - 0.8f/(vin + 1.0f);  //really rough, simplistic bjt turn-on emulator
+                vbe = 0.8f - 0.8f/(vin + 1.0f);  //  really rough, simplistic bjt turn-on emulator
                 input = vin - vbe;
-                input = input*0.1333333333f -0.90588f;  //some magic numbers to return gain to unity & zero the DC
+                input = input*0.1333333333f -0.90588f;  //  some magic numbers to return gain to unity & zero the DC
 
 #else //  VIBE_INLINE
 
@@ -311,7 +316,7 @@ Vibe::out(float *efxoutl, float *efxoutr)
             }
 
             fbr = fb*ocvolt;
-            outr = rpanning*input;
+            float outr = rpanning*input;
 
             efxoutl[i] = outl * fcross + outr*flrcross;
             efxoutr[i] = outr * fcross + outl*flrcross;
