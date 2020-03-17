@@ -98,12 +98,14 @@ Vibe::cleanup()
 
 }
 
+#ifdef LV2_SUPPORT
 void
 Vibe::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
     lfo->updateparams(period);
 }
+#endif // LV2
 
 void
 Vibe::out(float *efxoutl, float *efxoutr)
@@ -340,15 +342,21 @@ Vibe::vibefilter(float data, fparams *ftype, int stage)
 float
 Vibe::bjt_shape(float data)
 {
-    float vbe, vout;
     float vin = 7.5f * (1.0f + data);
     
-    if (vin < 0.0f) vin = 0.0f;
-    if (vin > 15.0f) vin = 15.0f;
+    if (vin < 0.0f)
+    {
+        vin = 0.0f;
+    }
     
-    vbe = 0.8f - 0.8f / (vin + 1.0f); //really rough, simplistic bjt turn-on emulator
-    vout = vin - vbe;
-    vout = vout * 0.1333333333f - 0.90588f; //some magic numbers to return gain to unity & zero the DC
+    if (vin > 15.0f)
+    {
+        vin = 15.0f;
+    }
+    
+    float vbe = 0.8f - 0.8f / (vin + 1.0f); //  really rough, simplistic bjt turn-on emulator
+    float vout = vin - vbe;
+    vout = vout * 0.1333333333f - 0.90588f; //  some magic numbers to return gain to unity & zero the DC
     return vout;
 }
 
@@ -443,11 +451,10 @@ Vibe::init_vibes()
 void
 Vibe::modulate(float ldrl, float ldrr)
 {
-    float tmpgain;
-    float R1pRv;
-    float C2pC1;
+    float tmpgain = 0.0f;
+    float C2pC1 = 0.0f;
     Rv = 4700.0f + ldrl;
-    R1pRv = R1 + Rv;
+    float R1pRv = R1 + Rv;
 
     for (int i = 0; i < 8; i++)
     {
