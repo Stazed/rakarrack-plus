@@ -71,19 +71,30 @@ beattracker::cleanup()
 void
 beattracker::detect(float * smpsl, float * smpsr, uint32_t period)
 {
-    float tmp;
+    float tmp = 0.0f;
     int idx = 0;
-    unsigned int i = 0;
 
-    for (i = 0; i < period; i++)
+    for (unsigned int i = 0; i < period; i++)
     { //Detect dynamics onset
         index[i] = 0; //initializes all elements to zero
 
         tmp = 15.0f * fabs(smpsl[i] + smpsr[i]);
         envrms = rmsfilter->filterout_s(tmp);
-        if (tmp > peak) peak = atk + tmp;
-        if (envrms < peak) peak -= peakdecay;
-        if (peak < 0.0f) peak = 0.0f;
+        
+        if (tmp > peak)
+        {
+            peak = atk + tmp;
+        }
+
+        if (envrms < peak)
+        {
+            peak -= peakdecay;
+        }
+
+        if (peak < 0.0f)
+        {
+            peak = 0.0f;
+        }
 
         peakpulse = peaklpfilter2->filterout_s(fabs(peakhpfilter->filterout_s(peak)));
 
@@ -167,23 +178,42 @@ return(bpm);
 void
 beattracker::calc_tempo() //returns tempo in float beats per minute
 {
-    if ((oldbpm > 600.0f) || (oldbpm < 0.0f)) oldbpm = 0.0f;
+    if ((oldbpm > 600.0f) || (oldbpm < 0.0f))
+    {
+        oldbpm = 0.0f;
+    }
 
     float time = 0;
 
-    if (tsidx > 0) time = ((float) timeseries[tsidx - 1]) / fSAMPLE_RATE;
-    else time = ((float) timeseries[19]) / fSAMPLE_RATE;
-
+    if (tsidx > 0)
+    {
+        time = ((float) timeseries[tsidx - 1]) / fSAMPLE_RATE;
+    }
+    else
+    {
+        time = ((float) timeseries[19]) / fSAMPLE_RATE;
+    }
+    
     float bpm = 30.0f / time;
 
-    while (bpm < 80.0f) bpm *= 2.0f;
-    while (bpm > 160.0f) bpm *= 0.5f; //normalize by powers of 2 to 80<bpm<160
+    while (bpm < 80.0f)
+    {
+        bpm *= 2.0f;
+    }
+    
+    while (bpm > 160.0f)
+    {
+        bpm *= 0.5f; //normalize by powers of 2 to 80<bpm<160
+    }
 
     int binptr = lrintf(floorf(0.1f * bpm)); //get a bin address
     statsbin[binptr] += 1.0f; //increase count
     avbpm[binptr] = 0.6f * avbpm[binptr] + 0.4f * bpm;
 
-    if (avbpm[binptr] < 0.1f) avbpm[binptr] = 0.01f; //create a floor to avoid denormal computations
+    if (avbpm[binptr] < 0.1f)
+    {
+        avbpm[binptr] = 0.01f; //create a floor to avoid denormal computations
+    }
 
     float maxbin = 0.0f;
     maxptr = binptr;
@@ -206,7 +236,10 @@ beattracker::calc_tempo() //returns tempo in float beats per minute
             bpm_change_cntr = 0;
         }
     }
-    else oldbpm = avbpm[maxptr];
+    else 
+    {
+        oldbpm = avbpm[maxptr];
+    }
 }
 
 float
