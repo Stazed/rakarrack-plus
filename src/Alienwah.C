@@ -74,7 +74,6 @@ Alienwah::~Alienwah()
 void
 Alienwah::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
     float lfol, lfor;
     COMPLEXTYPE clfol, clfor, out, tmp;
 
@@ -86,7 +85,7 @@ Alienwah::out(float * efxoutl, float * efxoutr)
     clfor.a = cosf(lfor + phase) * fb;
     clfor.b = sinf(lfor + phase) * fb;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         float x = (float) i / fPERIOD;
         float x1 = 1.0f - x;
@@ -170,8 +169,10 @@ Alienwah::setfb(int Pfb)
     this->Pfb = Pfb;
     fb = fabsf(((float) Pfb - 64.0f) / 64.1f);
     fb = sqrtf(fb);
+
     if (fb < 0.4f)
         fb = 0.4f;
+
     if (Pfb < 64)
         fb = -fb;
 }
@@ -209,8 +210,12 @@ Alienwah::setdelay(int Pdelay)
 {
     if (Pdelay > MAX_ALIENWAH_DELAY)
         Pdelay = MAX_ALIENWAH_DELAY;
+
     this->Pdelay = Pdelay;
-    if (Pdelay > oldpdelay) cleanup();
+
+    if (Pdelay > oldpdelay)
+        cleanup();
+
     oldpdelay = Pdelay;
 }
 
