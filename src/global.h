@@ -153,25 +153,31 @@ static inline float f_pow2(float x)
 {
     float y = 0.0f;
 
-    if(x >=24) return pw2[24];
-    else if (x <= -24.0f) return ipw2[24];
-    else {
+    if(x >=24)
+    {
+        return pw2[24];
+    }
+    else if (x <= -24.0f)
+    {
+        return ipw2[24];
+    }
+    else
+    {
         float whole =  ceilf(x);
         int xint = (int) whole;
         x = x - whole;
 
-        if (xint>=0) {
+        if (xint>=0)
+        {
             y = pw2[xint]*(x*(x*(x*(x*a[4] + a[3]) + a[2]) + a[1]) + a[0]);
-
-        } else  {
-
+        }
+        else
+        {
             y = ipw2[-xint]*(x*(x*(x*(x*a[4] + a[3]) + a[2]) + a[1]) + a[0]);
-
         }
 
         return y;
     }
-
 }
 
 #define f_exp(x) f_pow2(x * LN2R)
