@@ -58,6 +58,7 @@ public:
     //stg   - number of phase stages to process
 
 private:
+    float fSAMPLE_RATE;
     int zero_index;
     int tap, maxtaps;
     float maxtime;
@@ -104,9 +105,6 @@ private:
     } *tapstruct;
 
     float *ringbuffer;
-
-    float fSAMPLE_RATE;
-
 };
 
 

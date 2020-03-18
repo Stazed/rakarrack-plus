@@ -70,17 +70,18 @@ void
 delayline::cleanup()
 {
     zero_index = 0;
-    int i, k;
 
-    for (i = 0; i < maxdelaysmps; i++)
+    for (int i = 0; i < maxdelaysmps; i++)
+    {
         ringbuffer[i] = 0.0;
+    }
 
-    for (i = 0; i < maxtaps; i++)
+    for (int i = 0; i < maxtaps; i++)
     {
         avgtime[i] = 0.0;
         time[i] = 0.0;
 
-        for (k = 0; k < 4; k++)
+        for (int k = 0; k < 4; k++)
         {
             pstruct[i].yn1[k] = 0.0f;
             pstruct[i].xn1[k] = 0.0f;
@@ -91,7 +92,7 @@ delayline::cleanup()
         }
     }
 
-    for (i = 0; i < maxtaps; i++)
+    for (int i = 0; i < maxtaps; i++)
     {
         avgtime[i] = 0.0f;
         newtime[i] = 0;
@@ -108,21 +109,24 @@ float
 delayline::delay_simple(float smps, float time_, int tap_, int touch,
                         int reverse)
 {
-    int dlytime = 0;
-    int bufptr = 0;
-
     if (tap_ >= maxtaps)
+    {
         tap = 0;
+    }
     else
+    {
         tap = tap_;
+    }
 
     time[tap] = fSAMPLE_RATE * time_; //convert to something that can be used as a delay line index
 
     //Do some checks to keep things in bounds
     if (time[tap] > maxtime)
+    {
         time[tap] = maxtime;
+    }
 
-    dlytime = lrintf(time[tap]);
+    int dlytime = lrintf(time[tap]);
 
     if (crossfade[tap])
     {
@@ -155,20 +159,29 @@ delayline::delay_simple(float smps, float time_, int tap_, int touch,
         ringbuffer[zero_index] = smps;
 
         if (--zero_index < 0)
+        {
             zero_index = maxdelaysmps - 1;
+        }
     }
+    
     //if we want reverse delay
     //you need to call this every time to keep the buffers up to date, and it's on a different tap
+    int bufptr = 0;
+    
     if (reverse)
     {
 
         bufptr = (dlytime + zero_index); //this points to the sample we want to get
 
         if (bufptr >= maxdelaysmps)
+        {
             bufptr -= maxdelaysmps;
+        }
 
         if (++rvptr >= maxdelaysmps)
+        {
             rvptr = 0;
+        }
 
         if (bufptr > zero_index)
         {
@@ -178,7 +191,9 @@ delayline::delay_simple(float smps, float time_, int tap_, int touch,
                 distance = 0;
             }
             else
+            {
                 distance = rvptr - zero_index;
+            }
         }
         else if ((bufptr < zero_index) && (rvptr < zero_index))
         {
@@ -188,11 +203,14 @@ delayline::delay_simple(float smps, float time_, int tap_, int touch,
                 distance = 0;
             }
             else
-                distance =
-                    rvptr + maxdelaysmps - zero_index;
+            {
+                distance = rvptr + maxdelaysmps - zero_index;
+            }
         }
         else
+        {
             distance = rvptr - zero_index;
+        }
 
         bufptr = rvptr; //this points to the sample we want to get
     }
@@ -201,25 +219,32 @@ delayline::delay_simple(float smps, float time_, int tap_, int touch,
         bufptr = (dlytime + zero_index); //this points to the sample we want to get
 
         if (bufptr >= maxdelaysmps)
+        {
             bufptr -= maxdelaysmps;
+        }
     }
 
     int oldnewdiff = newtime[tap] - oldtime[tap];
-    int tmpptr = 0;
 
     if (crossfade[tap] != 0)
     {
-        tmpptr = bufptr + oldnewdiff;
+        int tmpptr = bufptr + oldnewdiff;
 
         if (tmpptr >= maxdelaysmps)
+        {
             tmpptr -= maxdelaysmps;
+        }
         else if (tmpptr <= 0)
+        {
             tmpptr += maxdelaysmps;
+        }
 
         return (xfade[tap] * ringbuffer[bufptr] + (1.0f - xfade[tap]) * ringbuffer[tmpptr]); //fade nicely to new tap
     }
     else
+    {
         return (ringbuffer[bufptr]);
+    }
 }
 
 /*
@@ -230,28 +255,37 @@ float
 delayline::delay(float smps, float time_, int tap_, int touch,
                  int reverse)
 {
-    int dlytime = 0;
-    int bufptr = 0;
-
     tap = fabs(tap_);
 
     if (tap >= maxtaps)
+    {
         tap = 0;
+    }
 
-    if (reverse) avgtime[tap] = alpha * 2.0 * time_ + beta * avgtime[tap]; //smoothing the rate of time change
-    else avgtime[tap] = alpha * time_ + beta * avgtime[tap]; //smoothing the rate of time change
+    if (reverse)
+    {
+        avgtime[tap] = alpha * 2.0 * time_ + beta * avgtime[tap]; //smoothing the rate of time change
+    }
+    else
+    {
+        avgtime[tap] = alpha * time_ + beta * avgtime[tap]; //smoothing the rate of time change
+    }
 
     time[tap] = 1.0f + fSAMPLE_RATE * avgtime[tap]; //convert to something that can be used as a delay line index
 
     //Do some checks to keep things in bounds
     if (time[tap] > maxtime)
+    {
         time[tap] = maxtime;
+    }
 
     if (time[tap] < 0.0f)
+    {
         time[tap] = 0.0f;
+    }
 
     float fract = (time[tap] - floorf(time[tap])); //compute fractional delay
-    dlytime = lrintf(floorf(time[tap]));
+    int dlytime = lrintf(floorf(time[tap]));
 
     //now put in the sample
     if (touch)
@@ -259,19 +293,28 @@ delayline::delay(float smps, float time_, int tap_, int touch,
         cur_smps[tap] = ringbuffer[zero_index] = smps;
 
         if (--zero_index < 0)
+        {
             zero_index = maxdelaysmps - 1;
+        }
     }
+    
     //if we want reverse delay
     //you need to call this every time to keep the buffers up to date, and it's on a different tap
+    int bufptr = 0;
+    
     if (reverse)
     {
         bufptr = (dlytime + zero_index); //this points to the sample we want to get
 
         if (bufptr >= maxdelaysmps)
+        {
             bufptr -= maxdelaysmps;
+        }
 
         if (++rvptr > maxdelaysmps)
+        {
             rvptr = 0;
+        }
 
         if (bufptr > zero_index)
         {
@@ -281,7 +324,9 @@ delayline::delay(float smps, float time_, int tap_, int touch,
                 distance = 0;
             }
             else
+            {
                 distance = rvptr - zero_index;
+            }
         }
         else if ((bufptr < zero_index) && (rvptr < zero_index))
         {
@@ -291,21 +336,25 @@ delayline::delay(float smps, float time_, int tap_, int touch,
                 distance = 0;
             }
             else
-                distance =
-                    rvptr + maxdelaysmps - zero_index;
+            {
+                distance = rvptr + maxdelaysmps - zero_index;
+            }
         }
         else
+        {
             distance = rvptr - zero_index;
+        }
 
         bufptr = rvptr; //this points to the sample we want to get
-
     }
     else
     {
         bufptr = (dlytime + zero_index); //this points to the sample we want to get
 
         if (bufptr >= maxdelaysmps)
+        {
             bufptr -= maxdelaysmps;
+        }
     }
 
     tapstruct[tap].lvars[3] = tapstruct[tap].lvars[2];
@@ -323,8 +372,7 @@ delayline::delay(float smps, float time_, int tap_, int touch,
     tapstruct[tap].fracts[1] = tapstruct[tap].fracts[0];
     tapstruct[tap].fracts[0] = fract;
 
-    float tmpfrac =
-            0.5f * (tapstruct[tap].fracts[1] + tapstruct[tap].fracts[2]);
+    float tmpfrac = 0.5f * (tapstruct[tap].fracts[1] + tapstruct[tap].fracts[2]);
     //float itmpfrac = 1.0f - tmpfrac;
     float itmpfrac = 0.5f; //it was the original approximation 
 
@@ -348,10 +396,14 @@ delayline::get_phaser(float smps, float lfo, int tap_, int stg)
     float delta = lfo;
 
     if (delta > 1.0f)
+    {
         delta = 1.0f;
+    }
 
     if (delta < 0.0f)
+    {
         delta = 0.0f;
+    }
 
     tap = tap_;
 
@@ -374,6 +426,7 @@ delayline::phaser(float fxn) //All-pass interpolation
                 [tap].
                 yn1
                 [st]);
+        
         pstruct[tap].xn1[st] = xn;
         xn = pstruct[tap].yn1[st];
     }
@@ -444,7 +497,10 @@ void delayline::set_mix(float mix_) //mix amount of dry w/ wet
     mix = fabs(mix_);
     imix = 1.0f - mix;
 
-    if (mix_ < 0.0f) imix *= -1.0f;
+    if (mix_ < 0.0f)
+    {
+        imix *= -1.0f;
+    }
 }
 
 float delayline::envelope()
@@ -454,18 +510,23 @@ float delayline::envelope()
     if (fdist > 0.5f)
     {
         if (fdist <= 1.0f)
+        {
             fdist = 1.0f - fdist;
+        }
         else
+        {
             fdist = 0.0f;
+        }
     }
 
     if (fdist <= 0.125f)
     {
-        fdist =
-                1.0f - f_sin(M_PI * fdist * 4.0f + 1.5707963267949f);
+        fdist = 1.0f - f_sin(M_PI * fdist * 4.0f + 1.5707963267949f);
     }
     else
+    {
         fdist = 1.0f;
+    }
 
     return fdist;
 }
