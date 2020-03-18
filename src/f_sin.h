@@ -20,25 +20,39 @@ static const float fact3 = 0.148148148148148f; //can multiply by 1/fact3
 static inline float
 f_sin(float x)
 {
+    if ((x>D_PI) || (x<-D_PI))
+    {
+        x = fmod(x,D_PI);
+    }
 
-    float y;  //function output
-    float tmp;
-    bool sign;
-    if ((x>D_PI) || (x<-D_PI)) x = fmod(x,D_PI);
-    if (x < 0.0f) x+=D_PI;
-    sign = 0;
-    if(x>M_PI) {
+    if (x < 0.0f)
+    {
+        x+=D_PI;
+    }
+    
+    bool sign = 0;
+    
+    if(x>M_PI)
+    {
         x = D_PI - x;
         sign = 1;
     }
 
-    if (x <= p2) y = x - x*x*x*fact3;
-    else {
-        tmp = x - M_PI;
+    float y = 0;  //function output
+    if (x <= p2)
+    {
+        y = x - x*x*x*fact3;
+    }
+    else
+    {
+        float tmp = x - M_PI;
         y = -tmp + tmp*tmp*tmp*fact3;
     }
 
-    if (sign) y = -y;
+    if (sign)
+    {
+        y = -y;
+    }
 
     return y;
 }
