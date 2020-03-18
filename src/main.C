@@ -69,15 +69,20 @@ main(int argc, char *argv[])
 {
     // Read command Line
 
-    fprintf(stderr,
+    fprintf
+        (
+            stderr,
             "\n%s %s - Copyright (c) Josep Andreu - Ryan Billing - Douglas McClendon - Arnout Engelen\n",
-            PACKAGE, VERSION);
+            PACKAGE, VERSION
+        );
 
     if (argc == 1)
+    {
         fprintf(stderr, "Try 'rakarrack --help' for command-line options.\n");
+    }
 
-
-    struct option opts[] = {
+    struct option opts[] =
+    {
         {"load", 1, NULL, 'l'},
         {"bank", 1, NULL, 'b'},
         {"preset", 1, NULL, 'p'},
@@ -178,9 +183,16 @@ main(int argc, char *argv[])
     if (nojack)
     {
         show_help();
+        
         if (gui)
-            rkr.Message(1, "rakarrack error",
-                        "Cannot make a jack client, is jackd running?");
+        {
+            rkr.Message
+            (
+                1,
+                "rakarrack error",
+                "Cannot make a jack client, is jackd running?"
+            );
+        }
         return (0);
     }
 
@@ -200,7 +212,10 @@ main(int argc, char *argv[])
 
 
     // Launch GUI
-    if (gui) rgui = new RKRGUI(argc, argv, &rkr);
+    if (gui)
+    {
+        rgui = new RKRGUI(argc, argv, &rkr);
+    }
 
     if (gui == 0)
     {
@@ -225,7 +240,10 @@ main(int argc, char *argv[])
             usleep(1500);
             if (preset != 1000)
             {
-                if ((preset > 0) && (preset < 61)) rkr.Bank_to_Preset(preset);
+                if ((preset > 0) && (preset < 61))
+                {
+                    rkr.Bank_to_Preset(preset);
+                }
                 preset = 1000;
             }
         }
@@ -233,8 +251,7 @@ main(int argc, char *argv[])
         if ((!rkr.jdis) && (rkr.jshut))
         {
             rkr.jdis = 1;
-            rkr.Message(1, rkr.jackcliname,
-                        "Jack Shut Down, try to save your work");
+            rkr.Message(1, rkr.jackcliname, "Jack Shut Down, try to save your work");
         }
 
         rkr.miramidi();
@@ -242,8 +259,13 @@ main(int argc, char *argv[])
 
     // free memory etc.
 
-    if (needtoloadstate) rgui->save_stat(0);
+    if (needtoloadstate)
+    {
+        rgui->save_stat(0);
+    }
+
     JACKfinish();
+
     return (0);
 
 }
