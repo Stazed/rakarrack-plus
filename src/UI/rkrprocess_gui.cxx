@@ -109,10 +109,16 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_)
     Principal->show(argc, argv);
     put_icon(Principal);
     ReadIntPresets();
+    
     if (rkr->deachide)
+    {
         HideUE->label("Show");
+    }
     else
+    {
         HideUE->label("Hide");
+    }
+    
     HideUE->redraw();
 
 
@@ -571,8 +577,11 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor)
     back_color = bcolor;
 
     Label_Color_Change(label_color);
+    
     if (!rkr->EnableBackgroundImage)
+    {
         back->color_average(back_color, 0.0);
+    }
 }
 
 void RKRGUI::Label_Color_Change(Fl_Color bcolor)
@@ -667,8 +676,11 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
         {
             Fl_Widget *w = BankWindow->ob->child(t);
             long long temp = (long long) w->user_data();
+            
             if (temp > 0)
+            {
                 w->color(bcolor);
+            }
         }
 
         BankWindow->B_B1->color(bcolor);
@@ -695,7 +707,9 @@ void RKRGUI::put_icon(Fl_Window* window)
 {
     // put icon
     if (hints == NULL)
+    {
         hints = XGetWMHints(fl_display, fl_xid(window));
+    }
 
     hints->icon_pixmap = p;
     hints->icon_mask = mask;
@@ -705,8 +719,9 @@ void RKRGUI::put_icon(Fl_Window* window)
 
 void RKRGUI::load_stat()
 {
-    // load user preferences and last fltk state from ~/user/.fltk/rakarrack.sf.net/rakarrack.prefs
+    // load user preferences and last fltk state from ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
     int x, y, w, h, k, b, f, l, a;
+    x = y = w = h = k = b = f = l = a = 0;
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
@@ -776,6 +791,7 @@ void RKRGUI::load_stat()
 
     if (w < 640)
         w = 640;
+    
     if (h < 554)
         h = 554;
 
@@ -796,10 +812,8 @@ void RKRGUI::load_stat()
 
     if (!needtoloadbank)
     {
-
         switch (rkr->a_bank)
         {
-
             case 0:
                 L_B1->do_callback();
                 break;
@@ -850,10 +864,13 @@ void RKRGUI::load_stat()
     rakarrack.get(rkr->PrefNom("Limiter +6dB"), rkr->db6booster, 0);
     rakarrack.get(rkr->PrefNom("Booster"), rkr->booster, 1.0f);
     if (rkr->booster == 1.0)
+    {
         BostBut->value(0);
+    }
     else
+    {
         BostBut->value(1);
-
+    }
 
     rakarrack.get(rkr->PrefNom("FX_init_state"), rkr->init_state, 0);
     rakarrack.get(rkr->PrefNom("Auto Assign"), rkr->autoassign, 0);
@@ -863,6 +880,7 @@ void RKRGUI::load_stat()
     {
         if (!needtoloadstate)
             rkr->Bypass = 1;
+        
         rkr->calculavol(1);
         rkr->calculavol(2);
     }
@@ -983,10 +1001,13 @@ void RKRGUI::load_stat()
     {
         if (i < 60)
             k = i;
+        
         if ((i > 59)&&(i < 120))
             k = 1000 + i - 60;
+        
         if (i > 119)
             k = 0;
+        
         memset(temp, 0, sizeof (temp));
         sprintf(temp, "Midi Table Program %d", i);
         rakarrack.get(rkr->PrefNom(temp), f, k);
@@ -1021,8 +1042,8 @@ void RKRGUI::load_stat()
 
 void RKRGUI::save_stat(int whati)
 {
-    // save user preferences and last fltk state in ~/user/.fltk/rakarrack.sf.net/rakarrack.prefs
-    int i, k;
+    // save user preferences and last fltk state in ~/user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
+
     char temp1[128];
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -1208,11 +1229,15 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("MIDI Table"), rkr->midi_table);
 
 
-        i = Settings->BMidiIn->value();
+        int i = Settings->BMidiIn->value();
         char *temp;
         temp = (char*) Settings->BMidiIn->text(i);
+        
         if (temp != NULL)
+        {
             rakarrack.set(rkr->PrefNom("MIDI IN Device"), temp);
+        }
+        
         rakarrack.set(rkr->PrefNom("MIDI IN Channel"), rkr->MidiCh + 1);
         rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"), rkr->HarCh + 1);
         rakarrack.set(rkr->PrefNom("MIDI IN Stereo Harmonizer"), rkr->StereoHarCh + 1);
@@ -1222,10 +1247,7 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("Disable Warnings"), rkr->mess_dis);
         rakarrack.set(rkr->PrefNom("Enable Tooltips"), rkr->ena_tool);
 
-
-        k = 1;
-
-        for (i = 0; i < 128; i++)
+        for (int i = 0; i < 128; i++)
         {
             memset(temp1, 0, sizeof (temp1));
             sprintf(temp1, "Midi Table Program %d", i);
@@ -1236,7 +1258,8 @@ void RKRGUI::save_stat(int whati)
 
     if (whati == 3)
     {
-        for (i = 1; i <= Settings->JackCo->size(); i++)
+        int k = 1;
+        for (int i = 1; i <= Settings->JackCo->size(); i++)
         {
             if (Settings->JackCo->selected(i))
             {
@@ -1250,7 +1273,7 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("Auto Connect Num"), k - 1);
 
         k = 1;
-        for (i = 1; i <= Settings->JackIn->size(); i++)
+        for (int i = 1; i <= Settings->JackIn->size(); i++)
         {
             if (Settings->JackIn->selected(i))
             {
@@ -1268,8 +1291,6 @@ void RKRGUI::save_stat(int whati)
 void RKRGUI::Put_Loaded()
 {
     //General loading of efx default settings
-    int i;
-
 
     WPreset_Name->value(rkr->Preset_Name);
     DAuthor->copy_label(rkr->Author);
@@ -1310,7 +1331,7 @@ void RKRGUI::Put_Loaded()
         switch(rkr->efx_order[i]){
      */
 
-    for (i = 0; i < rkr->NumEffects; i++)
+    for (int i = 0; i < rkr->NumEffects; i++)
     {
         switch (i)
         {
@@ -1566,14 +1587,10 @@ void RKRGUI::preset_click(Fl_Button* o, void* v)
 inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 {
     // used when selecting/moving/right click on preset from bank window
-    int ok;
-    int num;
+
     int tecla = Fl::event_key();
     long long kk = (long long) o->user_data();
-
-
-    num = (int) kk;
-
+    int num = (int) kk;
 
     if (drag != 1000)
     {
@@ -1596,8 +1613,9 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         return;
     }
     else
+    {
         drag = 1000;
-
+    }
 
     if ((Fl::event_button() == FL_RIGHT_MOUSE) && (Fl::event() == FL_RELEASE))
     {
@@ -1607,7 +1625,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         {
             Fl_Widget *m = fl_message_icon();
             m->parent()->copy_label(rkr->jackcliname);
-            ok = fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
+            int ok = fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
             if (!ok)
             {
                 o->value(0);
@@ -1641,7 +1659,6 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 void RKRGUI::reordena()
 {
     // Reorder efx
-    int i;
     unsigned int x[10], y[10];
     ulong s[10];
 
@@ -1732,7 +1749,7 @@ void RKRGUI::reordena()
 
     // Show
 
-    for (i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
         switch (rkr->efx_order[i])
         {
@@ -2547,7 +2564,6 @@ void RKRGUI::reordena()
 void RKRGUI::show_help()
 {
     // show the help window
-    int x, y, w, h, k;
     char temp[128];
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -2556,6 +2572,7 @@ void RKRGUI::show_help()
     {
         visor = new Fl_Help_Dialog;
 
+        int x, y, w, h, k;
         rakarrack.get(rkr->PrefNom("Help X"), x, 1);
         rakarrack.get(rkr->PrefNom("Help Y"), y, 1);
         rakarrack.get(rkr->PrefNom("Help W"), w, 640);
@@ -2582,18 +2599,15 @@ void RKRGUI::show_help()
 void RKRGUI::show_lic()
 {
     // Show licenses
-    int x, y, w, h, k;
     char temp[128];
 
-
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-
-
 
     if (rkr->help_displayed == 0)
     {
         visor = new Fl_Help_Dialog;
 
+        int x, y, w, h, k;
         rakarrack.get(rkr->PrefNom("Help X"), x, 1);
         rakarrack.get(rkr->PrefNom("Help Y"), y, 1);
         rakarrack.get(rkr->PrefNom("Help W"), w, 640);
@@ -2603,11 +2617,9 @@ void RKRGUI::show_lic()
         visor->textsize((unsigned char) k);
     }
 
-
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/html/license.html", HELPDIR);
     visor->load(temp);
-
 
     rkr->help_displayed = 1;
 
@@ -2617,7 +2629,6 @@ void RKRGUI::show_lic()
 void RKRGUI::MiraClientes()
 {
     // Find Audio and midi ports
-    int i;
     char temp[128];
     char temp1[128];
     char *masque;
@@ -2641,13 +2652,14 @@ void RKRGUI::MiraClientes()
                 masque = strtok(NULL, ")");
 
                 if ((masque[2] == 'R') && (strstr(name, "rakarrack MC OUT") == 0))
+                {
                     Settings->BMidiIn->add(name);
+                }
             }
         }
     }
 
     fclose(fp);
-
 
     Settings->JackCo->clear();
 
@@ -2661,12 +2673,15 @@ void RKRGUI::MiraClientes()
     }
     else
     {
-        i = 0;
+        int i = 0;
 
         while (ports[i] != NULL)
         {
             if ((strstr(ports[i], "rakarrack:in_1") == 0) && (strstr(ports[i], "rakarrack:in_2") == 0))
+            {
                 Settings->JackCo->add(ports[i]);
+            }
+
             i++;
         }
     }
@@ -2684,12 +2699,15 @@ void RKRGUI::MiraClientes()
     }
     else
     {
-        i = 0;
+        int i = 0;
 
         while (iports[i] != NULL)
         {
             if ((strstr(iports[i], "rakarrack:out_1") == 0) && (strstr(iports[i], "rakarrack:out_2") == 0))
+            {
                 Settings->JackIn->add(iports[i]);
+            }
+
             i++;
         }
     }
@@ -2700,43 +2718,58 @@ void RKRGUI::MiraClientes()
 void RKRGUI::MiraConfig()
 {
     // Loads the settings into the settings class
-    int i = 1;
-    int k;
-    while (Settings->BMidiIn->text(i) != NULL)
     {
-        if (strcmp(Settings->BMidiIn->text(i), rkr->MID) == 0)
-            Settings->BMidiIn->select(i, 1);
-        i++;
+        int i = 1;
+        while (Settings->BMidiIn->text(i) != NULL)
+        {
+            if (strcmp(Settings->BMidiIn->text(i), rkr->MID) == 0)
+            {
+                Settings->BMidiIn->select(i, 1);
+            }
+            i++;
+        }
+    }
+    
+    {
+        int i = 1;
+        while (Settings->JackCo->text(i) != NULL)
+        {
+            for (int k = 0; k < rkr->cuan_jack; k++)
+            {
+                if (strcmp(Settings->JackCo->text(i), rkr->jack_po[k].name) == 0)
+                {
+                    Settings->JackCo->select(i, 1);
+                }
+            }
+
+            i++;
+        }
     }
 
-    i = 1;
-
-    while (Settings->JackCo->text(i) != NULL)
     {
-        for (k = 0; k < rkr->cuan_jack; k++)
-            if (strcmp(Settings->JackCo->text(i), rkr->jack_po[k].name) == 0)
-                Settings->JackCo->select(i, 1);
+        int i = 1;
+        while (Settings->JackIn->text(i) != NULL)
+        {
+            for (int k = 0; k < rkr->cuan_ijack; k++)
+            {
+                if (strcmp(Settings->JackIn->text(i), rkr->jack_poi[k].name) == 0)
+                {
+                    Settings->JackIn->select(i, 1);
+                }
+            }
 
-        i++;
+            i++;
+        }
     }
-
-
-    i = 1;
-
-    while (Settings->JackIn->text(i) != NULL)
-    {
-        for (k = 0; k < rkr->cuan_ijack; k++)
-            if (strcmp(Settings->JackIn->text(i), rkr->jack_poi[k].name) == 0)
-                Settings->JackIn->select(i, 1);
-
-        i++;
-    }
-
 
     if (rkr->MIDIway)
+    {
         Settings->Mw1->setonly();
+    }
     else
+    {
         Settings->Mw0->setonly();
+    }
 
     rkr->m_displayed = 0;
     Settings->Enable_Back->value(rkr->EnableBackgroundImage);
@@ -2865,19 +2898,31 @@ void RKRGUI::MiraConfig()
 
 
     if (rkr->aconnect_MI)
+    {
         Settings->BMidiIn->activate();
+    }
     else
+    {
         Settings->BMidiIn->deactivate();
+    }
 
     if (rkr->aconnect_JA)
+    {
         Settings->JackCo->activate();
+    }
     else
+    {
         Settings->JackCo->deactivate();
+    }
 
     if (rkr->aconnect_JIA)
+    {
         Settings->JackIn->activate();
+    }
     else
+    {
         Settings->JackIn->deactivate();
+    }
 
     Fl_Menu_Item *p;
     Fl_Menu_Item *Har = Settings->get_menu_Har_Downsample();
@@ -2922,17 +2967,21 @@ void RKRGUI::MiraConfig()
         }
 
         if ((j > 0) && ((unsigned int) rkr->sample_rate <= SR_value))
+        {
             p->deactivate();
+        }
         else
+        {
             p->activate();
+        }
     }
 
 
     Settings->Font_Bro->clear();
     Settings->Font_Bro->textcolor(label_color);
-    k = 0;
-    k = Fl::set_fonts(0);
-    for (i = 0; i < k; i++)
+
+    int k = Fl::set_fonts(0);
+    for (int i = 0; i < k; i++)
     {
         int t;
         const char *name = Fl::get_font_name((Fl_Font) i, &t);
@@ -2977,14 +3026,13 @@ void RKRGUI::BankWin_Label(char *filename)
 void RKRGUI::is_modified()
 {
     // popup dialog for modified bank saving
-    int ok;
 
     if (rkr->modified)
     {
         Fl_Widget *w = fl_message_icon();
         w->parent()->copy_label(rkr->jackcliname);
 
-        ok = fl_choice("Bank was modified, but not saved", "Discard", "Save", NULL);
+        int ok = fl_choice("Bank was modified, but not saved", "Discard", "Save", NULL);
 
         switch (ok)
         {
@@ -3062,16 +3110,14 @@ void RKRGUI::ActMIDI()
     if (rkr->Mvalue == 0)
         return;
 
-    int i;
-
-    for (i = 1; i < (rkr->NumParams + 26); i++)
-
+    for (int i = 1; i < (rkr->NumParams + 26); i++)
     {
         if (rkr->Mcontrol[i] == 0)
+        {
             continue;
+        }
 
         rkr->Mcontrol[i] = 0;
-
 
         switch (i)
         {
@@ -4594,16 +4640,22 @@ void RKRGUI::ActMIDI()
 void RKRGUI::ActOnOff()
 {
     // turn efx on or off
-    int miralo;
+    int miralo = 0;
 
     while (rkr->OnOffC > 0)
     {
         if (rkr->Mnumeff[rkr->OnOffC] > 2000)
+        {
             miralo = rkr->Mnumeff[rkr->OnOffC] - 2000;
+        }
         else if (rkr->Mnumeff[rkr->OnOffC] >= 1000)
+        {
             miralo = rkr->Mnumeff[rkr->OnOffC] - 1000;
+        }
         else
+        {
             miralo = rkr->efx_order[rkr->Mnumeff[rkr->OnOffC]];
+        }
 
         switch (miralo)
         {
@@ -4823,8 +4875,11 @@ void RKRGUI::PutBackground()
     // Put selected .png background image on everything
     delete back;
     back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage), 1600, 1200);
+    
     if (!rkr->EnableBackgroundImage)
+    {
         back->color_average(back_color, 0.0);
+    }
 
     InOut->image(back);
     EQ->image(InOut->image());
@@ -4905,10 +4960,11 @@ void RKRGUI::PutBackground()
     Fl::redraw();
 }
 
+// FIXME this is ugly, all magic numbers to identify widgets
 void RKRGUI::chfsize(int value)
 {
     // Sort through widgets and adjust font sizes
-    unsigned char k;
+    unsigned char k = 0;
 
     for (int t = 0; t < Principal->children(); t++)
     {
@@ -4917,22 +4973,36 @@ void RKRGUI::chfsize(int value)
 
         k = w->labelsize();
         k += value;
+        
         if ((ud < 770) || (ud > 779))
         {
             if ((k > 2)&&(k < 16))
+            {
                 w->labelsize(k);
+            }
         }
         else if ((k > 6)&&(k < 20))
+        {
             w->labelsize(k);
+        }
 
         if (ud != 5)
+        {
             w->labelcolor(label_color);
+        }
         else
+        {
             w->labelcolor(leds_color);
+        }
+        
         if (ud != 2)
+        {
             w->selection_color(back_color);
+        }
         else
+        {
             w->selection_color(leds_color);
+        }
 
 
         /* EFX, tuner, tap, volume control, etc */
@@ -4960,21 +5030,33 @@ void RKRGUI::chfsize(int value)
                 if ((uh == 7) || (uh == 77))
                 {
                     if ((k > 6)&&(k < 20))
+                    {
                         c->labelsize(k);
+                    }
                 }
                 else if ((k > 2)&&(k < 16))
+                {
                     c->labelsize(k);
+                }
 
                 if (uh != 5)
+                {
                     c->labelcolor(label_color);
+                }
                 else
+                {
                     c->labelcolor(leds_color);
+                }
 
                 if (uh != 7)
+                {
                     c->selection_color(back_color);
+                }
 
                 if ((uh == 2) || (uh == 7) || (uh == 77) || (uh == 78))
+                {
                     c->selection_color(leds_color);
+                }
 
                 c->color(fore_color);
                 c->labelfont(rkr->font);
@@ -4985,13 +5067,17 @@ void RKRGUI::chfsize(int value)
 
                     Fl_Menu_Item *m = (Fl_Menu_Item*) n->menu();
                     Fl_Menu_Item *p;
+                    
                     for (int s = 0; s < m->size(); s++)
                     {
                         p = m->next(s);
                         k = p->labelsize();
                         k += value;
+                        
                         if ((k > 2) &&(k < 16))
+                        {
                             p->labelsize(k);
+                        }
                     }
                 }
             }
@@ -5003,7 +5089,9 @@ void RKRGUI::chfsize(int value)
     k += value;
 
     if ((k > 10)&&(k < 32))
+    {
         WPreset_Name->textsize(k);
+    }
 
     CLIP_LED->selection_color(FL_RED);
 
@@ -5015,10 +5103,9 @@ void RKRGUI::chfsize(int value)
 void RKRGUI::adjustfont()
 {
     // change font type
-    int change, value;
 
-    change = Principal->w() - rkr->resolution;
-    value = change / 100;
+    int change = Principal->w() - rkr->resolution;
+    int value = change / 100;
     rkr->resolution = Principal->w();
     rkr->relfontsize += value;
     chfsize(value);
@@ -5094,6 +5181,7 @@ void RKRGUI::ChangeActives()
         LABEL_IO->labelcolor(on);
     else
         LABEL_IO->labelcolor(off);
+
     if ((rkr->upsample) && (rkr->Bypass))
     {
         UPS_LED->color(leds_color);
@@ -5112,7 +5200,7 @@ void RKRGUI::ChangeActives()
 void RKRGUI::findpos(int num, int value, Fl_Widget*)
 {
     // adjust efx title label colors based on active of inactive
-    int i;
+    int i = 0;
     Fl_Color on = fl_lighter(fl_lighter(label_color));
     Fl_Color off = fl_darker(label_color);
 
@@ -5235,8 +5323,7 @@ void RKRGUI::Put_Skin(int last)
 
 void RKRGUI::FillML(int type)
 {
-    // FillML
-    int i, j, k;
+    // Midi learn
     char tmp[256];
     memset(tmp, 0, sizeof (tmp));
 
@@ -5246,17 +5333,18 @@ void RKRGUI::FillML(int type)
 
     memset(rkr->ML_clist, 0, sizeof (rkr->ML_clist));
     MIDILearn->Epar->clear();
-    k = 0;
+    
+    int k = 0;
 
     switch (rkr->ML_filter)
     {
         case 0:
-            for (i = 0; i < rkr->NumParams; i++)
+            for (int i = 0; i < rkr->NumParams; i++)
                 MIDILearn->Epar->add(rkr->efx_params[i].Nom);
             break;
 
         case 1:
-            for (i = 0; i < rkr->NumParams; i++)
+            for (int i = 0; i < rkr->NumParams; i++)
             {
                 if (rkr->efx_params[i].Effect == 50)
                 {
@@ -5266,9 +5354,9 @@ void RKRGUI::FillML(int type)
                 }
             }
 
-            for (j = 0; j < 10; j++)
+            for (int j = 0; j < 10; j++)
             {
-                for (i = 0; i < rkr->NumParams; i++)
+                for (int i = 0; i < rkr->NumParams; i++)
                 {
                     if (rkr->efx_params[i].Effect == rkr->efx_order[j])
                     {
@@ -5285,8 +5373,10 @@ void RKRGUI::FillML(int type)
 
 
     MIDILearn->TPresets->clear();
-    for (i = 1; i <= 60; i++)
+    for (int i = 1; i <= 60; i++)
+    {
         MIDILearn->TPresets->add(rkr->Bank[i].Preset_Name);
+    }
 
     MIDILearn->TPresets->select(rkr->Selected_Preset, 1);
     MIDILearn->TPresets->redraw();
@@ -5297,7 +5387,6 @@ void RKRGUI::FillML(int type)
 void RKRGUI::DisAssigns()
 {
     //DisAssigns
-    int i, j, k;
     char tmp[8];
 
     int the_one = 0;
@@ -5305,16 +5394,20 @@ void RKRGUI::DisAssigns()
     if ((int) MIDILearn->Epar->value())
     {
         if (rkr->ML_filter == 0)
+        {
             the_one = rkr->efx_params[(int) MIDILearn->Epar->value() - 1].Ato;
+        }
         else
+        {
             the_one = rkr->ML_clist[(int) MIDILearn->Epar->value() - 1];
+        }
     }
 
-    k = 0;
+    int k = 0;
 
-    for (i = 0; i < 128; i++)
+    for (int i = 0; i < 128; i++)
     {
-        for (j = 0; j < 20; j++)
+        for (int j = 0; j < 20; j++)
         {
             if (rkr->XUserMIDI[i][j] == the_one)
             {
@@ -5431,7 +5524,7 @@ void RKRGUI::DisAssigns()
 
     k++;
 
-    for (i = k; i <= 20; i++)
+    for (int i = k; i <= 20; i++)
     {
         memset(tmp, 0, sizeof (tmp));
 
@@ -5543,10 +5636,9 @@ void RKRGUI::DisAssigns()
 void RKRGUI::Prepare_Order()
 {
     // prepare order
-    int i;
     Order->Order_Bro->clear();
 
-    for (i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
         rkr->new_order[i] = rkr->efx_order[i];
         rkr->saved_order[i] = rkr->efx_order[i];
@@ -5731,8 +5823,6 @@ void RKRGUI::UpdateTGUI()
 void RKRGUI::ActACI()
 {
     //ActACI
-    int value;
-    int i, amax, amin;
     float gain = 0.0;
     float tmp = 0.0;
 
@@ -5763,25 +5853,29 @@ void RKRGUI::ActACI()
     if (tmp > 1.0)
         tmp = 1.0f;
 
-    amax = rkr->Aux_Maximum;
-    amin = rkr->Aux_Minimum;
+    int amax = rkr->Aux_Maximum;
+    int amin = rkr->Aux_Minimum;
 
-    value = amin + lrintf((float) (amax - amin) * tmp);
+    int value = amin + lrintf((float) (amax - amin) * tmp);
 
     if (value != rkr->last_auxvalue)
     {
         if (rkr->MIDIway)
         {
-            for (i = 0; i < 20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 if (rkr->XUserMIDI[rkr->Aux_MIDI][i])
+                {
                     rkr->process_midi_controller_events(rkr->XUserMIDI[rkr->Aux_MIDI][i], value);
+                }
                 else
                     break;
             }
         }
         else
+        {
             rkr->process_midi_controller_events(rkr->Aux_MIDI, value);
+        }
 
         rkr->last_auxvalue = value;
     }
@@ -5790,12 +5884,14 @@ void RKRGUI::ActACI()
 int RKRGUI::Busca_Eff(int num)
 {
     // Busca_Eff
-    int i;
+    int i = 0;
 
     for (i = 0; i < rkr->NumEffects; i++)
     {
         if (rkr->efx_names[i].Pos == num)
+        {
             break;
+        }
     }
 
     return (i);
@@ -5804,19 +5900,20 @@ int RKRGUI::Busca_Eff(int num)
 void RKRGUI::Fill_Avail(int filter)
 {
     //Fill_Avail
-    int i, j, t, k;
 
     Order->Avail_Bro->clear();
 
-    t = 1;
+    int t = 1;
 
-    for (i = 0; i < rkr->NumEffects; i++)
+    for (int i = 0; i < rkr->NumEffects; i++)
     {
-        k = 0;
-        for (j = 0; j < 10; j++)
+        int k = 0;
+        for (int j = 0; j < 10; j++)
         {
             if (rkr->new_order[j] == rkr->efx_names[i].Pos)
+            {
                 k = 1;
+            }
         }
 
         if (!k)
@@ -6003,7 +6100,9 @@ int RKRGUI::prevnext(int e)
 
 
     if (e != 12)
+    {
         return 0;
+    }
     else
     {
         if ((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43))) // +(plus) key
@@ -6033,22 +6132,37 @@ int RKRGUI::prevnext(int e)
         if (Fl::event_key(FL_Insert)) // Insert key - add user preset
         {
             Fl_Widget *w = Fl::belowmouse();
+            
             if (w == NULL)
+            {
                 return 0;
+            }
+            
             long long k = (long long) w->user_data();
+            
             if ((k > 11999) && (k < 12100))
+            {
                 ((RKRGUI*) (w->parent()->parent()->user_data()))->addpreset(w, k - 12000);
+            }
+            
             return 1;
         }
 
         if (Fl::event_key(FL_Delete)) // Delete key - delete user preset
         {
             Fl_Widget *w = Fl::belowmouse();
+            
             if (w == NULL)
+            {
                 return 0;
+            }
             long long k = (long long) w->user_data();
+            
             if ((k > 11999) && (k < 12100))
+            {
                 ((RKRGUI*) (w->parent()->parent()->user_data()))->delpreset(w, k - 12000);
+            }
+            
             return 1;
         }
     }
@@ -6209,13 +6323,18 @@ void RKRGUI::add_name(Fl_Widget *w, char *name)
     Fl_Menu_*n = (Fl_Menu_*) s->menu();
     Fl_Menu_Item *m = (Fl_Menu_Item*) n;
     Fl_Menu_Item *p;
-    int k = 10;
+    
+    int k = 10; // default label size
 
     for (int i = 0; i < m->size(); i++)
     {
         p = m->next(i);
+        
         if (i == 0)
+        {
             k = p->labelsize();
+        }
+        
         p->labelsize(k);
     }
 }
@@ -6278,7 +6397,7 @@ inline void RKRGUI::delpreset(Fl_Widget *w, int num)
     // delete user preset
     if (num == 12)
         return;
-    int ok = 0;
+
     char Rname[128];
     Fl_Choice *s = (Fl_Choice *) w;
 
@@ -6288,9 +6407,12 @@ inline void RKRGUI::delpreset(Fl_Widget *w, int num)
         return;
     }
 
-    ok = fl_choice("Delete \"%s\"?", "No", "Yes", NULL, s->text());
+    int ok = fl_choice("Delete \"%s\"?", "No", "Yes", NULL, s->text());
+
     if (!ok)
+    {
         return;
+    }
 
     memset(Rname, 0, sizeof (Rname));
     sprintf(Rname, "%s", s->text());
@@ -6349,23 +6471,20 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
 void RKRGUI::RandomPreset()
 {
     // Random select button
-    int i, j, l;
     int SelEff[10];
     int numEff = (int) (RND * 6) + 1;
-    long long k;
-
-
+ 
     S_new->do_callback();
 
     SelEff[0] = (int) (RND * rkr->NumEffects);
 
-    for (i = 1; i < 10; i++)
+    for (int i = 1; i < 10; i++)
     {
-        l = 0;
+        int l = 0;
         while (l == 0)
         {
             SelEff[i] = (int) (RND * rkr->NumEffects);
-            for (j = 0; j < i; j++)
+            for (int j = 0; j < i; j++)
             {
                 if (SelEff[j] == SelEff[i])
                 {
@@ -6379,13 +6498,13 @@ void RKRGUI::RandomPreset()
     }
 
 
-    for (i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
         rkr->efx_order[i] = SelEff[i];
     }
 
 
-    for (i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
         switch (rkr->efx_order[i])
         {
@@ -6770,7 +6889,7 @@ void RKRGUI::RandomPreset()
 
         Fl_Widget *w = FindWidget(SelEff[i]);
         Fl_Choice *s = (Fl_Choice *) w;
-        k = (long long) s->user_data();
+        long long k = (long long) s->user_data();
         int Esel = (int) (RND * s->size());
         s->value(Esel);
         s->do_callback(w, k);
@@ -6793,10 +6912,16 @@ void RKRGUI::drag_effect()
         if (w != NULL)
         {
             long long k = (long long) w->user_data();
+
             if ((k < 770) || (k > 779))
+            {
                 return;
+            }
+
             if (drag != (int) k - 770)
+            {
                 Prep_Reorden(drag, (int) k - 770);
+            }
         }
         drag = 1000;
     }
@@ -6855,14 +6980,16 @@ void RKRGUI::ClearBankNames()
 char* RKRGUI::get_bank_file()
 {
     // get bank file
-    int ok;
     char *filename;
     is_modified();
     filename = fl_file_chooser("Load Bank File:", "(*.rkrb)", NULL, 0);
+
     if (filename == NULL)
         return 0;
+
     filename = fl_filename_setext(filename, ".rkrb");
-    ok = rkr->loadbank(filename);
+    int ok = rkr->loadbank(filename);
+
     if (ok)
     {
         BankWin_Label(filename);
@@ -6876,7 +7003,6 @@ char* RKRGUI::get_bank_file()
 void RKRGUI::set_save_file()
 {
     // set bank file save name
-    int ok;
     char *filename;
 
 #define EXT ".rkrb"
@@ -6887,7 +7013,7 @@ void RKRGUI::set_save_file()
 
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
-    ok = rkr->savebank(filename);
+    int ok = rkr->savebank(filename);
     if (ok)
     {
         strcpy(rkr->Bank_Saved, filename);
