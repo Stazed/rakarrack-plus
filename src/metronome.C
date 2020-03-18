@@ -28,21 +28,25 @@
 #include "global.h"
 #include "metronome.h"
 
-metronome::metronome(double samplerate, uint32_t intermediate_bufsize)
+metronome::metronome(double samplerate, uint32_t intermediate_bufsize) :
+    markctr(),
+    interpbuf(NULL),
+    fSAMPLE_RATE(float(samplerate)),
+    SAMPLE_RATE(samplerate),
+    tick_interval(SAMPLE_RATE),
+    tickctr(),
+    meter(3),
+    tickper(lrintf(0.012f * fSAMPLE_RATE)),
+    ticktype(4),
+    dulltick(NULL),
+    sharptick(NULL),
+    hpf(NULL)
 {
     interpbuf = new float[intermediate_bufsize];
-    SAMPLE_RATE = samplerate;
-    fSAMPLE_RATE = float(samplerate);
 
     dulltick = new AnalogFilter(4, 1600.0f, 80.0f, 1, samplerate, interpbuf); //BPF
     sharptick = new AnalogFilter(4, 2800.0f, 80.0f, 1, samplerate, interpbuf); //BPF
     hpf = new AnalogFilter(3, 850.0f, 60.0f, 1, samplerate, interpbuf); //HPF
-    tick_interval = SAMPLE_RATE;
-    tickctr = 0;
-    markctr = 0;
-    ticktype = 4;
-    meter = 3;
-    tickper = lrintf(0.012f * fSAMPLE_RATE);
 }
 
 metronome::~metronome()
@@ -89,12 +93,11 @@ metronome::set_meter(int counts) //how many counts to hear the "mark"
 void
 metronome::metronomeout(float * tickout, int period)
 {
-    float outsharp, outdull;
+    float outsharp, outdull; outsharp = outdull = 0.0;
     float ticker = 0.0f;
     float hipass = 0.0f;
-    int i;
 
-    for (i = 0; i < period; i++)
+    for (int i = 0; i < period; i++)
     {
         tickctr++;
 

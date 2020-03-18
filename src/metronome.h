@@ -41,14 +41,13 @@ public:
     float * interpbuf;//buffer for filter
 
 private:
+    float fSAMPLE_RATE;
+    unsigned int SAMPLE_RATE;
     int tick_interval;
     int tickctr;
     int meter;
     int tickper;
     int ticktype;
-    
-    float fSAMPLE_RATE;
-    unsigned int SAMPLE_RATE;
 
     class AnalogFilter *dulltick,*sharptick, *hpf;
     
