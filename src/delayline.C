@@ -19,12 +19,32 @@
 #include <stdlib.h>
 #include "f_sin.h"
 
-delayline::delayline(float maxdelay, int maxtaps_, double samplerate)
+delayline::delayline(float maxdelay, int maxtaps_, double samplerate) :
+    fSAMPLE_RATE(samplerate),
+    zero_index(),
+    tap(),
+    maxtaps(maxtaps_),
+    maxtime(fSAMPLE_RATE * maxdelay),
+    maxdelaysmps(fSAMPLE_RATE * lrintf(ceilf(maxdelay))),
+    rvptr(),
+    distance(),
+    avgtime(NULL),
+    time(NULL),
+    tconst(),
+    alpha(),
+    beta(),
+    mix(0.5f),
+    imix(0.5f),
+    newtime(NULL),
+    oldtime(NULL),
+    crossfade(NULL),
+    xfade(NULL),
+    fadetime(),
+    cur_smps(NULL),
+    pstruct(NULL),
+    tapstruct(NULL),
+    ringbuffer(NULL)
 {
-    fSAMPLE_RATE = samplerate;
-    maxtaps = maxtaps_;
-    maxtime = fSAMPLE_RATE * maxdelay;
-    maxdelaysmps = fSAMPLE_RATE * lrintf(ceilf(maxdelay));
     ringbuffer = (float *) malloc(sizeof (float) * (maxdelaysmps + 1));
     avgtime = (float *) malloc(sizeof (float) * maxtaps);
     time = (float *) malloc(sizeof (float) * maxtaps);
@@ -36,14 +56,6 @@ delayline::delayline(float maxdelay, int maxtaps_, double samplerate)
 
     pstruct = (phasevars *) malloc(sizeof (struct phasevars) * maxtaps);
     tapstruct = (tapvars *) malloc(sizeof (struct tapvars) * maxtaps);
-
-    zero_index = 0;
-    tap = 0;
-    rvptr = 0;
-    distance = 0;
-
-    mix = 0.5f;
-    imix = 0.5f;
 
     float dt = 1.0f / fSAMPLE_RATE;
     alpha = dt / (0.15f + dt);
