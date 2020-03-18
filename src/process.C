@@ -32,14 +32,17 @@
 #include "global.h"
 #include "process.h"
 
-int Pexitprogram, preset;
-int commandline;
-int exitwithhelp, gui, nojack;
-int error_num;
-int stecla;
-int looper_lqua;
-int needtoloadstate;
-int needtoloadbank;
+int Pexitprogram = 0;
+int preset = 0;
+int commandline = 0;
+int exitwithhelp = 0;
+int gui = 0;
+int nojack = 0;
+int error_num = 0;
+int stecla = 0;
+int looper_lqua = 0;
+int needtoloadstate = 0;
+int needtoloadbank = 0;
 char *s_uuid;
 char *statefile;
 char *filetoload = NULL;
@@ -170,21 +173,24 @@ RKR::RKR()
     rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);
     rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
 
-    int i;
     memset(temp, 0, sizeof (temp));
     char j_names[128];
 
     static const char *jack_names[] ={"system:playback_1", "system:playback_2"};
 
-    for (i = 0; i < cuan_jack; i++)
+    for (int i = 0; i < cuan_jack; i++)
     {
         memset(temp, 0, sizeof (temp));
         sprintf(temp, "Jack Port %d", i + 1);
         
         if (i < 2)
+        {
             strcpy(j_names, jack_names[i]);
+        }
         else
+        {
             strcpy(j_names, "");
+        }
         
         rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
     }
@@ -193,21 +199,26 @@ RKR::RKR()
 
     static const char *jack_inames[] ={"system:capture_1", "system:capture_2"};
 
-    for (i = 0; i < cuan_ijack; i++)
+    for (int i = 0; i < cuan_ijack; i++)
     {
         memset(temp, 0, sizeof (temp));
         sprintf(temp, "Jack Port In %d", i + 1);
         
         if (i < 1)
+        {
             strcpy(j_names, jack_inames[i]);
+        }
         else
+        {
             strcpy(j_names, "");
+        }
         
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
     }
 
     bogomips = 0.0f;
-    i = Get_Bogomips();
+    Get_Bogomips();
+    //int i = Get_Bogomips();     // compiler warning i not used
 
     efxoutl = (float *) malloc(sizeof (float) * period);
     efxoutr = (float *) malloc(sizeof (float) * period);
@@ -386,7 +397,7 @@ RKR::RKR()
 
         };
 
-        for (i = 0; i < NumEffects * 3; i += 3)
+        for (int i = 0; i < NumEffects * 3; i += 3)
         {
             strcpy(efx_names[i / 3].Nom, los_names[i]);
             sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);
@@ -778,7 +789,7 @@ RKR::RKR()
             "WahWah St_df.", "102", "10",
             "WahWah WD", "28", "10"
         };
-        for (i = 0; i < NumParams; i++)
+        for (int i = 0; i < NumParams; i++)
         {
             strcpy(efx_params[i].Nom, los_params[i * 3]);
             sscanf(los_params[i * 3 + 1], "%d", &efx_params[i].Ato);
@@ -930,7 +941,10 @@ RKR::init_rkr()
 
     tempocnt = 0;
     
-    for (int i = 0; i < 6; i++)tempobuf[i] = 0;
+    for (int i = 0; i < 6; i++)
+    {
+        tempobuf[i] = 0;
+    }
     
     Tap_timeB = 0;
     Tap_Display = 0;
@@ -1091,10 +1105,9 @@ RKR::Vol2_Efx()
 void
 RKR::Vol3_Efx()
 {
-    int i;
     float att = 2.0f;
 
-    for (i = 0; i < period; i++)
+    for (int i = 0; i < period; i++)
     {
         efxoutl[i] *= att;
         efxoutr[i] *= att;
@@ -1106,8 +1119,7 @@ RKR::Vol3_Efx()
 void
 RKR::Vol_Efx(int NumEffect, float volume)
 {
-    int i;
-    float v1, v2;
+    float v1, v2; v1 = v2 = 1.0f;
 
     if (volume < 0.5f)
     {
@@ -1121,9 +1133,11 @@ RKR::Vol_Efx(int NumEffect, float volume)
     }
 
     if ((NumEffect == 8) || (NumEffect == 15))
+    {
         v2 *= v2;
+    }
 
-    for (i = 0; i < period; i++)
+    for (int i = 0; i < period; i++)
     {
         efxoutl[i] = smpl[i] * v2 + efxoutl[i] * v1;
         efxoutr[i] = smpr[i] * v2 + efxoutr[i] * v1;
@@ -1136,22 +1150,26 @@ void
 RKR::calculavol(int i)
 {
     if (i == 1)
+    {
         Log_I_Gain = powf(Input_Gain * 2.0f, 4);
+    }
     
     if (i == 2)
+    {
         Log_M_Volume = powf(Master_Volume * 2.0f, 4);
+    }
 }
 
 int
 RKR::checkforaux()
 {
-    int i;
-
-    for (i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
+    {
         if (efx_order[i] == 35)
         {
             if (Vocoder_Bypass) return (1);
         }
+    }
 
     return (0);
 }
@@ -1159,20 +1177,23 @@ RKR::checkforaux()
 void
 RKR::Control_Gain(float *origl, float *origr)
 {
-    int i;
     float il_sum = 1e-12f;
     float ir_sum = 1e-12f;
     float a_sum = 1e-12f;
-    float temp_sum;
-    float tmp;
-
+    float tmp = 0.0;
 
     if (upsample)
     {
         U_Resample->out(origl, origr, efxoutl, efxoutr, J_PERIOD, u_up);
-        if ((checkforaux()) || (ACI_Bypass)) A_Resample->mono_out(auxdata, auxresampled, J_PERIOD, u_up, period);
+        if ((checkforaux()) || (ACI_Bypass))
+        {
+            A_Resample->mono_out(auxdata, auxresampled, J_PERIOD, u_up, period);
+        }
     }
-    else if ((checkforaux()) || (ACI_Bypass)) memcpy(auxresampled, auxdata, sizeof (float)*J_PERIOD);
+    else if ((checkforaux()) || (ACI_Bypass))
+    {
+        memcpy(auxresampled, auxdata, sizeof (float)*J_PERIOD);
+    }
 
     if (DC_Offset)
     {
@@ -1180,23 +1201,29 @@ RKR::Control_Gain(float *origl, float *origr)
         DC_Offsetr->filterout(efxoutr, period);
     }
 
-    for (i = 0; i < period; i++)
+    for (int i = 0; i < period; i++)
     {
         efxoutl[i] *= Log_I_Gain;
         efxoutr[i] *= Log_I_Gain;
         tmp = fabsf(efxoutr[i]);
         
-        if (tmp > ir_sum) ir_sum = tmp;
+        if (tmp > ir_sum)
+        {
+            ir_sum = tmp;
+        }
         
         tmp = fabsf(efxoutl[i]);
         
-        if (tmp > il_sum) il_sum = tmp;
+        if (tmp > il_sum)
+        {
+            il_sum = tmp;
+        }
     }
     
     memcpy(smpl, efxoutl, sizeof (float)*period);
     memcpy(smpr, efxoutr, sizeof (float)*period);
 
-    temp_sum = (float) CLAMP(rap2dB(il_sum), -48.0, 15.0);
+    float temp_sum = (float) CLAMP(rap2dB(il_sum), -48.0, 15.0);
     val_il_sum = .6f * old_il_sum + .4f * temp_sum;
 
     temp_sum = (float) CLAMP(rap2dB(ir_sum), -48.0, 15.0);
@@ -1209,11 +1236,14 @@ RKR::Control_Gain(float *origl, float *origr)
     {
         temp_sum = 0.0;
         tmp = 0.0;
-        for (i = 0; i < period; i++)
+        for (int i = 0; i < period; i++)
         {
             tmp = fabsf(auxresampled[i]);
             
-            if (tmp > a_sum) a_sum = tmp;
+            if (tmp > a_sum)
+            {
+                a_sum = tmp;
+            }
         }
 
         val_a_sum = .6f * old_a_sum + .4f * a_sum;
@@ -1224,19 +1254,17 @@ RKR::Control_Gain(float *origl, float *origr)
 void
 RKR::Control_Volume(float *origl, float *origr)
 {
-    int i;
     float il_sum = 1e-12f;
     float ir_sum = 1e-12f;
 
-    float temp_sum;
-    float tmp;
+    float tmp = 0.0f;
     float Temp_M_Volume = 0.0f;
 
     if ((flpos)&&(have_signal))
     {
         if (db6booster)
         { // +6dB Final Limiter in settings/audio
-            for (i = 0; i < period; i++)
+            for (int i = 0; i < period; i++)
             {
                 efxoutl[i] *= .5f;
                 efxoutr[i] *= .5f;
@@ -1247,7 +1275,7 @@ RKR::Control_Volume(float *origl, float *origr)
 
         if (db6booster)
         {
-            for (i = 0; i < period; i++)
+            for (int i = 0; i < period; i++)
             {
                 efxoutl[i] *= 2.0f;
                 efxoutr[i] *= 2.0f;
@@ -1259,16 +1287,21 @@ RKR::Control_Volume(float *origl, float *origr)
     memcpy(analr, efxoutr, sizeof (float)* period);
 
     if (upsample)
+    {
         D_Resample->out(anall, analr, efxoutl, efxoutr, period, u_down);
+    }
 
     if (OnCounter < t_periods)
     {
         Temp_M_Volume = Log_M_Volume / (float) (t_periods - OnCounter);
         OnCounter++;
     }
-    else Temp_M_Volume = Log_M_Volume;
+    else
+    {
+        Temp_M_Volume = Log_M_Volume;
+    }
 
-    for (i = 0; i < period; i++)
+    for (int i = 0; i < period; i++)
     { //control volume
 
         efxoutl[i] *= Temp_M_Volume*booster; // +10dB booster main window
@@ -1282,18 +1315,24 @@ RKR::Control_Volume(float *origl, float *origr)
 
         tmp = fabsf(efxoutl[i]);
         
-        if (tmp > il_sum) il_sum = tmp;
+        if (tmp > il_sum)
+        {
+            il_sum = tmp;
+        }
         
         tmp = fabsf(efxoutr[i]);
         
-        if (tmp > ir_sum) ir_sum = tmp;
+        if (tmp > ir_sum)
+        {
+            ir_sum = tmp;
+        }
     }
 
     if ((!flpos) && (have_signal))
     {
         if (db6booster)
         {
-            for (i = 0; i < period; i++)
+            for (int i = 0; i < period; i++)
             {
                 efxoutl[i] *= .5f;
                 efxoutr[i] *= .5f;
@@ -1304,7 +1343,7 @@ RKR::Control_Volume(float *origl, float *origr)
 
         if (db6booster)
         {
-            for (i = 0; i < period; i++)
+            for (int i = 0; i < period; i++)
             {
                 efxoutl[i] *= 2.0f;
                 efxoutr[i] *= 2.0f;
@@ -1312,21 +1351,36 @@ RKR::Control_Volume(float *origl, float *origr)
         }
     }
 
-    for (i = 0; i < period; i++)
+    for (int i = 0; i < period; i++)
     {
         tmp = fabsf(efxoutl[i]);
-        if (tmp > il_sum) il_sum = tmp;
+        
+        if (tmp > il_sum)
+        {
+            il_sum = tmp;
+        }
+        
         tmp = fabsf(efxoutr[i]);
-        if (tmp > ir_sum) ir_sum = tmp;
+        
+        if (tmp > ir_sum)
+        {
+            ir_sum = tmp;
+        }
     }
 
-    temp_sum = (float) CLAMP(rap2dB(il_sum), -48, 15);
+    float temp_sum = (float) CLAMP(rap2dB(il_sum), -48, 15);
     val_vl_sum = .6f * old_vl_sum + .4f * temp_sum;
     temp_sum = (float) CLAMP(rap2dB(ir_sum), -48, 15);
     val_vr_sum = .6f * old_vr_sum + .4f * temp_sum;
 
-    if ((il_sum + ir_sum) > 0.0004999f) have_signal = 1;
-    else have_signal = 0;
+    if ((il_sum + ir_sum) > 0.0004999f)
+    {
+        have_signal = 1;
+    }
+    else
+    {
+        have_signal = 0;
+    }
 
 }
 
@@ -1389,15 +1443,20 @@ RKR::cleanup_efx()
 void
 RKR::Alg(float *origl, float *origr, void *)
 {
-    int i;
 
-    if ((t_timeout) && (Tap_Bypass)) TapTempo_Timeout(1);
+    if ((t_timeout) && (Tap_Bypass))
+    {
+        TapTempo_Timeout(1);
+    }
 
     if (Bypass)
     {
         Control_Gain(origl, origr);
 
-        if (Metro_Bypass) M_Metronome->metronomeout(m_ticks, period);
+        if (Metro_Bypass)
+        {
+            M_Metronome->metronomeout(m_ticks, period);
+        }
 
         if ((Tap_Bypass) && (Tap_Selection == 4))
         {
@@ -1413,7 +1472,9 @@ RKR::Alg(float *origl, float *origr, void *)
         }
 
         if (Tuner_Bypass)
+        {
             efx_Tuner->schmittFloat(period, efxoutl, efxoutr, HarmRecNote->freqs, HarmRecNote->lfreqs);
+        }
 
         if (MIDIConverter_Bypass)
         {
@@ -1485,7 +1546,7 @@ RKR::Alg(float *origl, float *origr, void *)
         }
 
 
-        for (i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             switch (efx_order[i])
             {
@@ -1866,7 +1927,10 @@ RKR::Alg(float *origl, float *origr, void *)
             }
         }
 
-        if (Metro_Bypass) add_metro();
+        if (Metro_Bypass)
+        {
+            add_metro();
+        }
 
         Control_Volume(origl, origr);
     }
