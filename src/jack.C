@@ -230,7 +230,7 @@ jackprocess(jack_nframes_t nframes, void * /* arg */)
 
     /* For midi outgoing - MIDIConverter */
     jack_midi_data_t *midiData;
-    int space;
+    int space = 0;
 
     void *buffer = jack_port_get_buffer(jack_midi_out, nframes);
     jack_midi_clear_buffer(buffer);

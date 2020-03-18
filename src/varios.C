@@ -120,7 +120,6 @@ RKR::Get_Bogomips()
     char *tmp = NULL;
     char *tmp2 = NULL;
     FILE *fp;
-    int maxx_len;
 
     if ((fp = fopen("/proc/cpuinfo", "r")) != NULL)
     {
@@ -138,7 +137,7 @@ RKR::Get_Bogomips()
             }
         }
 
-        maxx_len = lrintf(150.0f / 4800.0f * bogomips);
+        int maxx_len = lrintf(150.0f / 4800.0f * bogomips);
         
         if (upsample)
         {
@@ -166,14 +165,15 @@ RKR::Get_Bogomips()
 int
 RKR::TapTempo()
 {
-    int i;
-    double AvTempo;
     double latency = 0.04;
     gettimeofday(&timeA, NULL);
 
     double Aseconds = ((double) timeA.tv_sec + (double) timeA.tv_usec * 0.000001);
     
-    if (Tap_Selection == 0) Aseconds += latency;
+    if (Tap_Selection == 0)
+    {
+        Aseconds += latency;
+    }
     
     double timediff = Aseconds - Tap_timeB;
 
@@ -184,12 +184,15 @@ RKR::TapTempo()
             tempobuf[tempocnt] = 60.0f / ((double) timediff);
         }
         
-        if ((++tempocnt) >= 5) tempocnt = 0;
+        if ((++tempocnt) >= 5)
+        {
+            tempocnt = 0;
+        }
     }
 
-    AvTempo = 0.0;
+    double AvTempo = 0.0;
     
-    for (i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
     {
         AvTempo += tempobuf[i];
     }
@@ -199,7 +202,10 @@ RKR::TapTempo()
     Tap_timeB = Aseconds;
     Tap_timeC = Aseconds;
     
-    if (Tap_Selection)Tap_Display = 1;
+    if (Tap_Selection)
+    {
+        Tap_Display = 1;
+    }
     
     Update_tempo();
     
@@ -221,13 +227,17 @@ RKR::TapTempo_Timeout(int state)
     
     double timediff = Aseconds - Tap_timeC;
     
-    if (timediff > 8.0f) Tap_Display = 2;
+    if (timediff > 8.0f)
+    {
+        Tap_Display = 2;
+    }
 }
 
 void
 RKR::Update_tempo()
 {
-    if ((Tap_TempoSet < 1) || (Tap_TempoSet > 600)) return;
+    if ((Tap_TempoSet < 1) || (Tap_TempoSet > 600))
+        return;
 
     int Tap_TempoSetD = Tap_TempoSet;
     int Tap_TempoSetL = Tap_TempoSet;
@@ -335,9 +345,15 @@ RKR::Update_tempo()
         break;
     }
 
-    if ((Tap_TempoSetL < 1) || (Tap_TempoSetL > 600)) Tap_TempoSetL = Tap_TempoSet;
+    if ((Tap_TempoSetL < 1) || (Tap_TempoSetL > 600))
+    {
+        Tap_TempoSetL = Tap_TempoSet;
+    }
     
-    if ((Tap_TempoSetD < 1) || (Tap_TempoSetD > 600)) Tap_TempoSetD = Tap_TempoSet;
+    if ((Tap_TempoSetD < 1) || (Tap_TempoSetD > 600))
+    {
+        Tap_TempoSetD = Tap_TempoSet;
+    }
 
     if (Looper_Bypass) efx_Looper->settempo(Tap_TempoSet);
 
