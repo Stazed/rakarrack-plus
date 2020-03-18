@@ -132,6 +132,8 @@ public:
     void Update_tempo();
     int checkforaux();
     void Error_Handle(int num);
+    void file_error(FILE *fn);
+    void load_skin_error(FILE *fn);
 
     class FPreset *Fpre;
     class Reverb *efx_Rev;

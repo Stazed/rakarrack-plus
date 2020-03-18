@@ -1055,7 +1055,6 @@ void RKR::getbuf(char *buf, int j)
 void
 RKR::savefile(char *filename)
 {
-    int i, j;
     FILE *fn;
     char buf[256];
     fn = fopen(filename, "w");
@@ -1077,13 +1076,19 @@ RKR::savefile(char *filename)
     memset(buf, 0, sizeof (buf));
 
     if (strlen(Author) != 0)
+    {
         sprintf(buf, "%s\n", Author);
+    }
     else
     {
         if (UserRealName != NULL)
+        {
             sprintf(buf, "%s\n", UserRealName);
+        }
         else
+        {
             sprintf(buf, "%s\n", getenv("USER"));
+        }
     }
 
     fputs(buf, fn);
@@ -1101,9 +1106,9 @@ RKR::savefile(char *filename)
     fputs(buf, fn);
 
 
-    for (i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
-        j = efx_order[i];
+        int j = efx_order[i];
         memset(buf, 0, sizeof (buf));
         getbuf(buf, j);
         fputs(buf, fn);
@@ -1119,7 +1124,7 @@ RKR::savefile(char *filename)
     fputs(buf, fn);
 
 
-    for (i = 0; i < 128; i++)
+    for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
@@ -1143,11 +1148,7 @@ RKR::savefile(char *filename)
 void
 RKR::loadfile(char *filename)
 {
-    int i, j;
-    int l[10];
     FILE *fn;
-    float in_vol, out_vol;
-    float balance = 1.0f;
     char buf[256];
 
     if ((fn = fopen(filename, "r")) == NULL)
@@ -1158,14 +1159,15 @@ RKR::loadfile(char *filename)
 
     New();
 
-    for (i = 0; i < 14; i++)
+    for (int i = 0; i < 14; i++)
     {
         memset(buf, 0, sizeof (buf));
         
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             fl_alert("Error loading %s file!\n", filename);
-            goto FILE_ERROR;
+            file_error(fn);
+            return;
         }
     }
 
@@ -1175,9 +1177,11 @@ RKR::loadfile(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error loading %s file Order!\n", filename);
-        goto FILE_ERROR;
+        file_error(fn);
+        return;
     }
 
+    int l[10];
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &l[0], &l[1], &l[2], &l[3], &l[4], &l[5], &l[6], &l[7], &l[8],
            &l[9]);
@@ -1195,7 +1199,8 @@ RKR::loadfile(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error loading %s file Version!\n", filename);
-        goto FILE_ERROR;
+        file_error(fn);
+        return;
     }
 
     //Author
@@ -1205,12 +1210,17 @@ RKR::loadfile(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error loading %s file Author!\n", filename);
-        goto FILE_ERROR;
+        file_error(fn);
+        return;
     }
 
-    for (i = 0; i < 64; i++)
+    for (int i = 0; i < 64; i++)
+    {
         if (buf[i] > 20)
+        {
             Author[i] = buf[i];
+        }
+    }
 
 
     // Preset Name
@@ -1220,12 +1230,17 @@ RKR::loadfile(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error loading %s file Preset Name!\n", filename);
-        goto FILE_ERROR;
+        file_error(fn);
+        return;
     }
 
-    for (i = 0; i < 64; i++)
+    for (int i = 0; i < 64; i++)
+    {
         if (buf[i] > 20)
+        {
             Preset_Name[i] = buf[i];
+        }
+    }
 
     //General
     memset(buf, 0, sizeof (buf));
@@ -1233,9 +1248,13 @@ RKR::loadfile(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error loading %s file General!\n", filename);
-        goto FILE_ERROR;
+        file_error(fn);
+        return;
     }
 
+    float in_vol, out_vol; in_vol = out_vol = 0.0;
+    float balance = 1.0f;
+    
     sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &Bypass_B);
 
     if ((actuvol == 0) || (needtoloadstate))
@@ -1245,15 +1264,17 @@ RKR::loadfile(char *filename)
         Master_Volume = out_vol;
     }
 
-    for (i = 0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
-        j = l[i];
+        int j = l[i];
 
         memset(buf, 0, sizeof (buf));
+
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             fl_alert("Error loading %s file General!\n", filename);
-            goto FILE_ERROR;
+            file_error(fn);
+            return;
         }
         putbuf(buf, j);
     }
@@ -1264,20 +1285,23 @@ RKR::loadfile(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error loading %s file Order!\n", filename);
-        goto FILE_ERROR;
+        file_error(fn);
+        return;
     }
 
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &lv[10][0], &lv[10][1], &lv[10][2], &lv[10][3], &lv[10][4],
            &lv[10][5], &lv[10][6], &lv[10][7], &lv[10][8], &lv[10][9]);
 
-    for (i = 0; i < 128; i++)
+    for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
+
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             fl_alert("Error loading %s file MIDI!\n", filename);
-            goto FILE_ERROR;
+            file_error(fn);
+            return;
         }
 
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
@@ -1287,22 +1311,28 @@ RKR::loadfile(char *filename)
                &XUserMIDI[i][15], &XUserMIDI[i][16], &XUserMIDI[i][17], &XUserMIDI[i][18], &XUserMIDI[i][19]);
     }
 
-FILE_ERROR:
-
     fclose(fn);
     Actualizar_Audio();
+}
 
+void
+RKR::file_error(FILE *fn)
+{
+    printf("File Error!\n");
+    
+    fclose(fn);
+    Actualizar_Audio();
 }
 
 void
 RKR::Actualizar_Audio()
 {
-    int i, j;
-
     Bypass = 0;
 
-    for (i = 0; i < 12; i++)
+    for (int i = 0; i < 12; i++)
+    {
         efx_order[i] = lv[10][i];
+    }
 
     Harmonizer_Bypass = 0;
     Ring_Bypass = 0;
@@ -1318,7 +1348,9 @@ RKR::Actualizar_Audio()
             switch(efx_order[j]) {
      */
 
-    for (j = 0; j < NumEffects; j++)
+    int i = 0;
+
+    for (int j = 0; j < NumEffects; j++)
     {
         switch (j)
         {
@@ -1774,13 +1806,12 @@ RKR::Actualizar_Audio()
 void
 RKR::loadnames()
 {
-    int j, k;
     FILE *fn;
     char temp[128];
 
     memset(B_Names, 0, sizeof (B_Names));
 
-    for (k = 0; k < 4; k++)
+    for (int k = 0; k < 4; k++)
     {
         switch (k)
         {
@@ -1812,14 +1843,20 @@ RKR::loadnames()
             while (1)
             {
                 size_t ret = fread(&Bank, sizeof (Bank), 1, fn);
+                
                 if (feof(fn))
                     break;
+                
                 if (ret != 1)
                 {
                     fl_alert("fread error in loadnames()");
                     break;
                 }
-                for (j = 1; j <= 60; j++) strcpy(B_Names[k][j].Preset_Name, Bank[j].Preset_Name);
+
+                for (int j = 1; j <= 60; j++)
+                {
+                    strcpy(B_Names[k][j].Preset_Name, Bank[j].Preset_Name);
+                }
             }
             fclose(fn);
         }
@@ -1885,7 +1922,10 @@ RKR::loadbank(char *filename)
 
         fclose(fn);
 
-        if (BigEndian()) fix_endianess();
+        if (BigEndian())
+        {
+            fix_endianess();
+        }
 
         convert_IO();
         modified = 0;
@@ -1903,24 +1943,39 @@ RKR::savebank(char *filename)
     if ((fn = fopen(filename, "wb")) != NULL)
     {
         copy_IO();
-        if (BigEndian()) fix_endianess();
+        
+        if (BigEndian())
+        {
+            fix_endianess();
+        }
+        
         fwrite(&Bank, sizeof (Bank), 1, fn);
-        if (BigEndian()) fix_endianess();
+        
+        if (BigEndian())
+        {
+            fix_endianess();
+        }
+        
         fclose(fn);
         modified = 0;
         return (1);
     }
 
-    if (errno == EACCES) Error_Handle(3);
+    if (errno == EACCES)
+    {
+        Error_Handle(3);
+    }
+    
     return (0);
 }
 
 void
 RKR::New()
 {
-    int j, k;
-
-    for (j = 0; j < 10; j++) active[j] = 0;
+    for (int j = 0; j < 10; j++)
+    {
+        active[j] = 0;
+    }
 
     memset(Preset_Name, 0, sizeof (*Preset_Name));
     memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
@@ -1934,9 +1989,9 @@ RKR::New()
     Bypass = 0;
     memset(lv, 0, sizeof (lv));
 
-    for (j = 0; j <= NumEffects; j++)
+    for (int j = 0; j <= NumEffects; j++)
     { //  <= NumEffects because presets_default has one extra #10 for order
-        for (k = 0; k < MAX_PRESET_SIZE; k++)
+        for (int k = 0; k < MAX_PRESET_SIZE; k++)
         {
             lv[j][k] = presets_default[j][k];
         }
@@ -1944,8 +1999,10 @@ RKR::New()
         lv[j][19] = 0;
     }
 
-    for (k = 0; k < 12; k++)
+    for (int k = 0; k < 12; k++)
+    {
         efx_order[k] = presets_default[10][k]; // magic number 10 is order
+    }
 
     Reverb_B = 0;
     Echo_B = 0;
@@ -2005,9 +2062,7 @@ RKR::New()
 void
 RKR::New_Bank()
 {
-    int i, j, k;
-
-    for (i = 0; i < 62; i++)
+    for (int i = 0; i < 62; i++)
     {
         memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
         memset(Bank[i].Author, 0, sizeof (Bank[i].Author));
@@ -2022,9 +2077,9 @@ RKR::New_Bank()
         Bank[i].Bypass = 0;
         memset(Bank[i].lv, 0, sizeof (Bank[i].lv));
 
-        for (j = 0; j <= NumEffects; j++)
+        for (int j = 0; j <= NumEffects; j++)
         { // <= NumEffects because presets_default has one extra #10 for order
-            for (k = 0; k < MAX_PRESET_SIZE; k++)
+            for (int k = 0; k < MAX_PRESET_SIZE; k++)
             {
                 Bank[i].lv[j][k] = presets_default[j][k];
             }
@@ -2038,8 +2093,6 @@ RKR::New_Bank()
 void
 RKR::Bank_to_Preset(int i)
 {
-    int j, k;
-
     memset(Preset_Name, 0, sizeof (*Preset_Name));
     strcpy(Preset_Name, Bank[i].Preset_Name);
     memset(Author, 0, sizeof (*Author));
@@ -2051,16 +2104,18 @@ RKR::Bank_to_Preset(int i)
     memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
     strcpy(efx_Echotron->Filename, Bank[i].EchoFiname);
 
-    for (j = 0; j <= NumEffects; j++)
+    for (int j = 0; j <= NumEffects; j++)
     { // <= NumEffects because presets_default has one extra #10 for order
-        for (k = 0; k < 20; k++)
+        for (int k = 0; k < 20; k++)
         {
             lv[j][k] = Bank[i].lv[j][k];
         }
     }
 
-    for (k = 0; k < 12; k++)
+    for (int k = 0; k < 12; k++)
+    {
         efx_order[k] = Bank[i].lv[10][k];
+    }
 
     Reverb_B = Bank[i].lv[0][19];
     Echo_B = Bank[i].lv[1][19];
@@ -2124,14 +2179,14 @@ RKR::Bank_to_Preset(int i)
     }
 
     if ((Tap_Updated) && (Tap_Bypass) && (Tap_TempoSet > 0) && (Tap_TempoSet < 601))
+    {
         Update_tempo();
-
+    }
 }
 
 void
 RKR::Preset_to_Bank(int i)
 {
-    int j, k;
     memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
     strcpy(Bank[i].Preset_Name, Preset_Name);
     memset(Bank[i].Author, 0, sizeof (Bank[i].Author));
@@ -2148,6 +2203,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].Master_Volume = Master_Volume;
     Bank[i].Balance = Fraction_Bypass;
 
+    int j = 0;
 
     for (j = 0; j <= 11; j++)
         lv[0][j] = efx_Rev->getpar(j);
@@ -2263,7 +2319,7 @@ RKR::Preset_to_Bank(int i)
 
     for (j = 0; j <= NumEffects; j++)
     {
-        for (k = 0; k < 19; k++)
+        for (int k = 0; k < 19; k++)
         {
             Bank[i].lv[j][k] = lv[j][k];
         }
@@ -2335,9 +2391,7 @@ RKR::BigEndian()
 void
 RKR::copy_IO()
 {
-    int i;
-
-    for (i = 0; i < 62; i++)
+    for (int i = 0; i < 62; i++)
     {
         memset(Bank[i].cInput_Gain, 0, sizeof (Bank[i].cInput_Gain));
         sprintf(Bank[i].cInput_Gain, "%f", Bank[i].Input_Gain);
@@ -2351,9 +2405,7 @@ RKR::copy_IO()
 void
 RKR::convert_IO()
 {
-    int i;
-
-    for (i = 0; i < 62; i++)
+    for (int i = 0; i < 62; i++)
     {
         sscanf(Bank[i].cInput_Gain, "%f", &Bank[i].Input_Gain);
         if (Bank[i].Input_Gain == 0.0) Bank[i].Input_Gain = 0.5f;
@@ -2369,19 +2421,17 @@ RKR::convert_IO()
 void
 RKR::fix_endianess()
 {
-
-    int i, j, k;
     unsigned int data;
 
-    for (i = 0; i < 62; i++)
+    for (int i = 0; i < 62; i++)
     {
         data = Bank[i].Bypass;
         data = SwapFourBytes(data);
         Bank[i].Bypass = data;
 
-        for (j = 0; j < 70; j++)
+        for (int j = 0; j < 70; j++)
         {
-            for (k = 0; k < 20; k++)
+            for (int k = 0; k < 20; k++)
             {
                 data = Bank[i].lv[j][k];
                 data = SwapFourBytes(data);
@@ -2389,9 +2439,9 @@ RKR::fix_endianess()
             }
         }
 
-        for (j = 0; j < 128; j++)
+        for (int j = 0; j < 128; j++)
         {
-            for (k = 0; k < 20; k++)
+            for (int k = 0; k < 20; k++)
             {
                 data = Bank[i].XUserMIDI[j][k];
                 data = SwapFourBytes(data);
@@ -2442,7 +2492,6 @@ RKR::saveskin(char *filename)
 void
 RKR::loadskin(char *filename)
 {
-    unsigned int i;
     char buf[256];
     FILE *fn;
 
@@ -2453,7 +2502,8 @@ RKR::loadskin(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error reading %s file!\n", filename);
-        goto FILE_ERROR;
+        load_skin_error(fn);
+        return;
     }
     sscanf(buf, "%d,%d\n", &resolution, &sh);
 
@@ -2461,7 +2511,8 @@ RKR::loadskin(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error reading %s file!\n", filename);
-        goto FILE_ERROR;
+        load_skin_error(fn);
+        return;
     }
     sscanf(buf, "%d,%d,%d,%d\n", &sback_color, &sfore_color, &slabel_color, &sleds_color);
 
@@ -2470,15 +2521,23 @@ RKR::loadskin(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error reading %s file!\n", filename);
-        goto FILE_ERROR;
+        load_skin_error(fn);
+        return;
     }
-    for (i = 0; i < 256; i++) if (buf[i] > 20) BackgroundImage[i] = buf[i];
+    for (unsigned int i = 0; i < 256; i++)
+    {
+        if (buf[i] > 20)
+        {
+            BackgroundImage[i] = buf[i];
+        }
+    }
 
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error reading %s file!\n", filename);
-        goto FILE_ERROR;
+        load_skin_error(fn);
+        return;
     }
     sscanf(buf, "%d,%d\n", &relfontsize, &font);
 
@@ -2486,33 +2545,40 @@ RKR::loadskin(char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error reading %s file!\n", filename);
-        goto FILE_ERROR;
+        load_skin_error(fn);
+        return;
     }
     sscanf(buf, "%d\n", &sschema);
 
-FILE_ERROR:
+    fclose(fn);
+}
 
+void
+RKR::load_skin_error(FILE *fn)
+{
+    printf("Load Skin File error\n");
     fclose(fn);
 }
 
 void
 RKR::dump_preset_names(void)
 {
-    int i;
-
-    for (i = 0; i < 62; i++)
+    for (int i = 0; i < 62; i++)
     {
-        fprintf(stderr,
-                "RKR_BANK_NAME:%d:%s\n",
-                i,
-                Bank[i].Preset_Name);
+        fprintf
+        (
+            stderr,
+            "RKR_BANK_NAME:%d:%s\n",
+            i,
+            Bank[i].Preset_Name
+        );
     }
 }
 
 int
 RKR::CheckOldBank(char *filename)
 {
-    long Length;
+    long Length = 0;
     FILE *fs;
 
     if ((fs = fopen(filename, "r")) != NULL)
@@ -2652,7 +2718,6 @@ RKR::MergeIntPreset(char *filename)
 void
 RKR::savemiditable(char *filename)
 {
-    int i;
     FILE *fn;
     char buf[256];
     fn = fopen(filename, "w");
@@ -2664,7 +2729,7 @@ RKR::savemiditable(char *filename)
         return;
     }
 
-    for (i = 0; i < 128; i++)
+    for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
         sprintf(buf, "%d,%d\n", M_table[i].bank, M_table[i].preset);
@@ -2677,14 +2742,13 @@ RKR::savemiditable(char *filename)
 void
 RKR::loadmiditable(char *filename)
 {
-    int i;
     char buf[256];
     FILE *fn;
 
     if ((fn = fopen(filename, "r")) == NULL)
         return;
 
-    for (i = 0; i < 128; i++)
+    for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
         if (fgets(buf, sizeof buf, fn) == NULL)
