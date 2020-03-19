@@ -141,19 +141,16 @@ CoilCrafter::lv2_update_params(uint32_t period)
 void
 CoilCrafter::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-
     if (Ppo > 0)
     {
         RB1l->filterout(efxoutl, PERIOD);
         RB1r->filterout(efxoutr, PERIOD);
 
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             efxoutl[i] *= att;
             efxoutr[i] *= att;
         }
-
     }
     
     if (Ppd > 0)
@@ -164,7 +161,7 @@ CoilCrafter::out(float * efxoutl, float * efxoutr)
 
     if (Pmode) harm->harm_out(efxoutl, efxoutr);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         efxoutl[i] *= outvolume;
         efxoutr[i] *= outvolume;
