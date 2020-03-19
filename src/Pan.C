@@ -79,15 +79,14 @@ Pan::out(float *efxoutl, float *efxoutr)
 {
     if (PextraON)
     {
-        float avg, ldiff, rdiff, tmp;   // initialized o.k.
         for (unsigned int i = 0; i < PERIOD; i++)
         {
-            avg = (efxoutl[i] + efxoutr[i]) * .5f;
+            float avg = (efxoutl[i] + efxoutr[i]) * .5f;
 
-            ldiff = efxoutl[i] - avg;
-            rdiff = efxoutr[i] - avg;
+            float ldiff = efxoutl[i] - avg;
+            float rdiff = efxoutr[i] - avg;
 
-            tmp = avg + ldiff * mul;
+            float tmp = avg + ldiff * mul;
             efxoutl[i] = tmp*cdvalue;
 
             tmp = avg + rdiff * mul;
@@ -102,14 +101,13 @@ Pan::out(float *efxoutl, float *efxoutr)
         lfo->effectlfoout(&lfol, &lfor);
         
         float coeff_PERIOD = 1.0 / fPERIOD;
-        float fi, P_i, pp;  // initialized o.k.
         
         for (unsigned int i = 0; i < PERIOD; i++)
         {
-            fi = (float) i;
-            P_i = (float) (PERIOD - i);
+            float fi = (float) i;
+            float P_i = (float) (PERIOD - i);
 
-            pp = (ll * P_i + lfol * fi) * coeff_PERIOD;
+            float pp = (ll * P_i + lfol * fi) * coeff_PERIOD;
 
             efxoutl[i] *= pp * panning;
 

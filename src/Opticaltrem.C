@@ -136,8 +136,6 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
     oldgr = lfor;
     oldgl = lfol;
 
-    float xl, fxl, xr, fxr; // initialized good
-    
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         //Left Cds
@@ -145,8 +143,8 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
         oldstepl = stepl;
         dRCl = dTC * f_exp(stepl * minTC);
         alphal = 1.0f - cSAMPLE_RATE / (dRCl + cSAMPLE_RATE);
-        xl = CNST_E + stepl*b;
-        fxl = f_exp(Ra / logf(xl));
+        float xl = CNST_E + stepl*b;
+        float fxl = f_exp(Ra / logf(xl));
         
         if (Pinvert)
         {
@@ -163,8 +161,8 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
         oldstepr = stepr;
         dRCr = dTC * f_exp(stepr * minTC);
         alphar = 1.0f - cSAMPLE_RATE / (dRCr + cSAMPLE_RATE);
-        xr = CNST_E + stepr*b;
-        fxr = f_exp(Ra / logf(xr));
+        float xr = CNST_E + stepr*b;
+        float fxr = f_exp(Ra / logf(xr));
         
         if (Pinvert)
         {
