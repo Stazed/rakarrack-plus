@@ -139,9 +139,8 @@ Distorsion::initialize()
 {
     octoutl = (float *) malloc(sizeof (float) * PERIOD);
     octoutr = (float *) malloc(sizeof (float) * PERIOD);
-    unsigned int i;
     
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         octoutl[i] = octoutr[i] = 0;
     }
@@ -188,9 +187,6 @@ Distorsion::clear_initialize()
 void
 Distorsion::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float l, r, lout, rout;
-
     float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
     
     if (Pnegate != 0)
@@ -199,7 +195,7 @@ Distorsion::out(float * efxoutl, float * efxoutr)
     if (Pstereo != 0)
     {
         //Stereo
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             efxoutl[i] = efxoutl[i] * inputvol * 2.0f;
             efxoutr[i] = efxoutr[i] * inputvol * 2.0f;
@@ -207,7 +203,7 @@ Distorsion::out(float * efxoutl, float * efxoutr)
     }
     else
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             efxoutl[i] = (efxoutl[i] + efxoutr[i]) * inputvol;
         }
@@ -230,16 +226,18 @@ Distorsion::out(float * efxoutl, float * efxoutr)
 
     if (octmix > 0.01f)
     {
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
-            lout = efxoutl[i];
-            rout = efxoutr[i];
+            float lout = efxoutl[i];
+            float rout = efxoutr[i];
 
-            if ((octave_memoryl < 0.0f) && (lout > 0.0f)) togglel *= -1.0f;
+            if ((octave_memoryl < 0.0f) && (lout > 0.0f))
+                togglel *= -1.0f;
 
             octave_memoryl = lout;
 
-            if ((octave_memoryr < 0.0f) && (rout > 0.0f)) toggler *= -1.0f;
+            if ((octave_memoryr < 0.0f) && (rout > 0.0f))
+                toggler *= -1.0f;
 
             octave_memoryr = rout;
 
@@ -253,13 +251,13 @@ Distorsion::out(float * efxoutl, float * efxoutr)
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
-        lout = efxoutl[i];
-        rout = efxoutr[i];
+        float lout = efxoutl[i];
+        float rout = efxoutr[i];
 
-        l = lout * (1.0f - lrcross) + rout * lrcross;
-        r = rout * (1.0f - lrcross) + lout * lrcross;
+        float l = lout * (1.0f - lrcross) + rout * lrcross;
+        float r = rout * (1.0f - lrcross) + lout * lrcross;
 
         if (octmix > 0.01f)
         {
@@ -272,8 +270,6 @@ Distorsion::out(float * efxoutl, float * efxoutr)
             rout = r;
         }
 
-        //efxoutl[i] = lout * 2.0f * level * panning;
-        //efxoutr[i] = rout * 2.0f * level * (1.0f -panning);
         efxoutl[i] = lout * 2.0f * level * (1.0f - panning);
         efxoutr[i] = rout * 2.0f * level * panning;
     }
