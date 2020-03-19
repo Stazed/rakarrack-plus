@@ -227,20 +227,20 @@ NewDist::out(float * efxoutl, float * efxoutr)
     wshapel->waveshapesmps(PERIOD, efxoutl, Ptype, Pdrive, 2);
     wshaper->waveshapesmps(PERIOD, efxoutr, Ptype, Pdrive, 2);
 
-    float lout, rout; lout = rout = 0.0;
-    
     if (octmix > 0.01f)
     {
         for (unsigned int i = 0; i < PERIOD; i++)
         {
-            lout = efxoutl[i];
-            rout = efxoutr[i];
+            float lout = efxoutl[i];
+            float rout = efxoutr[i];
 
-            if ((octave_memoryl < 0.0f) && (lout > 0.0f)) togglel *= -1.0f;
+            if ((octave_memoryl < 0.0f) && (lout > 0.0f))
+                togglel *= -1.0f;
             
             octave_memoryl = lout;
 
-            if ((octave_memoryr < 0.0f) && (rout > 0.0f)) toggler *= -1.0f;
+            if ((octave_memoryr < 0.0f) && (rout > 0.0f))
+                toggler *= -1.0f;
             
             octave_memoryr = rout;
 
@@ -256,19 +256,19 @@ NewDist::out(float * efxoutl, float * efxoutr)
     filterr->filterout(efxoutr, PERIOD);
 
     if (Pprefiltering == 0)
+    {
         applyfilters(efxoutl, efxoutr, PERIOD);
+    }
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
 
-    float l, r; // initialized good 
-
     for (unsigned int i = 0; i < PERIOD; i++)
     {
-        lout = efxoutl[i];
-        rout = efxoutr[i];
+        float lout = efxoutl[i];
+        float rout = efxoutr[i];
 
-        l = lout * (1.0f - lrcross) + rout * lrcross;
-        r = rout * (1.0f - lrcross) + lout * lrcross;
+        float l = lout * (1.0f - lrcross) + rout * lrcross;
+        float r = rout * (1.0f - lrcross) + lout * lrcross;
 
         if (octmix > 0.01f)
         {
