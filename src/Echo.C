@@ -129,29 +129,26 @@ Echo::initdelays()
 void
 Echo::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float l, r, ldl, rdl, ldlout, rdlout, rvl, rvr;
-
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
-        ldl = ldelay->delay_simple(oldl, ltime, 0, 1, 0);
-        rdl = rdelay->delay_simple(oldr, rtime, 0, 1, 0);
+        float ldl = ldelay->delay_simple(oldl, ltime, 0, 1, 0);
+        float rdl = rdelay->delay_simple(oldr, rtime, 0, 1, 0);
 
         if (Preverse)
         {
-            rvl = ldelay->delay_simple(oldl, ltime, 1, 0, 1) * ldelay->envelope();
-            rvr = rdelay->delay_simple(oldr, rtime, 1, 0, 1) * rdelay->envelope();
+            float rvl = ldelay->delay_simple(oldl, ltime, 1, 0, 1) * ldelay->envelope();
+            float rvr = rdelay->delay_simple(oldr, rtime, 1, 0, 1) * rdelay->envelope();
             ldl = ireverse * ldl + reverse*rvl;
             rdl = ireverse * rdl + reverse*rvr;
         }
 
-        l = ldl * (1.0f - lrcross) + rdl * lrcross;
-        r = rdl * (1.0f - lrcross) + ldl * lrcross;
+        float l = ldl * (1.0f - lrcross) + rdl * lrcross;
+        float r = rdl * (1.0f - lrcross) + ldl * lrcross;
         ldl = l;
         rdl = r;
 
-        ldlout = -ldl*fb;
-        rdlout = -rdl*fb;
+        float ldlout = -ldl*fb;
+        float rdlout = -rdl*fb;
         
         if (!Pdirect)
         {
@@ -205,7 +202,10 @@ Echo::Tempo2Delay(int value)
 {
     Pdelay = 60.0f / (float) value * 1000.0f;
     delay = (float) Pdelay / 1000.0f;
-    if ((unsigned int) delay > (MAX_DELAY)) delay = MAX_DELAY;
+
+    if ((unsigned int) delay > (MAX_DELAY))
+        delay = MAX_DELAY;
+
     ldelay->set_averaging(10.0f);
     rdelay->set_averaging(10.0f);
     initdelays();
@@ -224,10 +224,8 @@ Echo::setdelay(int Pdelay)
 void
 Echo::setlrdelay(int Plrdelay)
 {
-    float tmp;
     this->Plrdelay = Plrdelay;
-    tmp =
-            (powf(2.0, fabsf((float) Plrdelay - 64.0f) / 64.0f * 9.0f) -
+    float tmp =  (powf(2.0, fabsf((float) Plrdelay - 64.0f) / 64.0f * 9.0f) -
             1.0f) / 1000.0f;
     
     if (Plrdelay < 64.0)
