@@ -121,9 +121,14 @@ HarmEnhancer::clear_initialize()
 void
 HarmEnhancer::set_vol(int mode, float gain)
 {
-    if (!mode) vol = gain;
+    if (!mode)
+    {
+        vol = gain;
+    }
     else
+    {
         vol = realvol + gain;
+    }
 
     vol *= 2.0f;
 }
@@ -159,22 +164,19 @@ HarmEnhancer::set_freql(int mode, float freq)
 void
 HarmEnhancer::chebpc(float c[], float d[])
 {
-    int j, k;
-    j = k = 0;
 
-    float sv, dd[HARMONICS];
-    sv = 0.0;
+    float sv, dd[HARMONICS];    // initialize o.k.
 
-    for (j = 0; j < HARMONICS; j++)
+    for (int j = 0; j < HARMONICS; j++)
     {
         d[j] = dd[j] = 0.0;
     }
 
     d[0] = c[HARMONICS - 1];
 
-    for (j = HARMONICS - 2; j >= 1; j--)
+    for (int j = HARMONICS - 2; j >= 1; j--)
     {
-        for (k = HARMONICS - j; k >= 1; k--)
+        for (int k = HARMONICS - j; k >= 1; k--)
         {
             sv = d[k];
             d[k] = 2.0 * d[k - 1] - dd[k];
@@ -186,7 +188,7 @@ HarmEnhancer::chebpc(float c[], float d[])
         dd[0] = sv;
     }
 
-    for (j = HARMONICS - 1; j >= 1; j--)
+    for (int j = HARMONICS - 1; j >= 1; j--)
     {
         d[j] = d[j - 1] - dd[j];
     }
@@ -197,8 +199,6 @@ HarmEnhancer::chebpc(float c[], float d[])
 void
 HarmEnhancer::calcula_mag(float *Rmag)
 {
-    int i = 0;
-    float mag_fix = 0.0f;
 
     float mag[HARMONICS] = {
         0.0f, Rmag[0], Rmag[1], Rmag[2], Rmag[3], Rmag[4], Rmag[5],
@@ -206,8 +206,11 @@ HarmEnhancer::calcula_mag(float *Rmag)
     };
 
     // Normalise magnitudes
-    for (i = 0; i < 10; i++)
+    float mag_fix = 0.0f;
+    for (int i = 0; i < 10; i++)
+    {
         mag_fix += fabs(Rmag[i]);
+    }
 
     if (mag_fix < 1.0f)
     {
@@ -218,7 +221,7 @@ HarmEnhancer::calcula_mag(float *Rmag)
         mag_fix = 1.0f / mag_fix;
     }
 
-    for (i = 0; i < HARMONICS; i++)
+    for (int i = 0; i < HARMONICS; i++)
     {
         mag[i] *= mag_fix;
     }
@@ -230,9 +233,6 @@ HarmEnhancer::calcula_mag(float *Rmag)
 void
 HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i = 0;
-    int j = 0;
-
     memcpy(inputl, efxoutl, sizeof (float)*PERIOD);
     memcpy(inputr, efxoutr, sizeof (float)*PERIOD);
 
@@ -241,14 +241,14 @@ HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
 
     limiter->out(inputl, inputr);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         float xl = inputl[i];
         float xr = inputr[i];
         float yl = 0.0f;
         float yr = 0.0f;
 
-        for (j = 10; j > 0; j--)
+        for (unsigned j = 10; j > 0; j--)
         {
             yl = (yl + p[j]) * xl;
             yr = (yr + p[j]) * xr;
@@ -272,7 +272,7 @@ HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
     lpfl->filterout(inputl, PERIOD);
     lpfr->filterout(inputr, PERIOD);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         efxoutl[i] = (efxoutl[i] + inputl[i] * vol);
         efxoutr[i] = (efxoutr[i] + inputr[i] * vol);

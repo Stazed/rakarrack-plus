@@ -185,10 +185,6 @@ Dflange::out(float * efxoutl, float * efxoutr)
     //deal with LFO's
     period_const = 1.0f / (float) PERIOD;
 
-//    float lfol, lfor, lmod, rmod;
-//    float ldif0, ldif1, rdif0, rdif1; //Difference between fractional delay and floor(fractional delay)
-//    float drA, drB, dlA, dlB; //LFO inside the loop.
-
     float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
     float lmod = lfol;
