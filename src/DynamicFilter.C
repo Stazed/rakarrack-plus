@@ -110,10 +110,6 @@ DynamicFilter::out(float * efxoutl, float * efxoutr)
     filterr->filterout(efxoutr, PERIOD);
 
     //panning
-    //for (i = 0; i < period; i++) {
-    //efxoutl[i] *= panning;
-    //efxoutr[i] *= (1.0f - panning);
-    //};
     for (uint32_t i = 0; i < PERIOD; i++)
     {
         efxoutl[i] *= (1.0f - panning);
