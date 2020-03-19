@@ -365,8 +365,7 @@ Vibe::out(float *efxoutl, float *efxoutr)
 float
 Vibe::vibefilter(float data, fparams *ftype, int stage)
 {
-    float y0 = 0.0f;
-    y0 = data * ftype[stage].n0 + ftype[stage].x1 * ftype[stage].n1 - ftype[stage].y1 * ftype[stage].d1;
+    float y0 = data * ftype[stage].n0 + ftype[stage].x1 * ftype[stage].n1 - ftype[stage].y1 * ftype[stage].d1;
     ftype[stage].y1 = y0 + DENORMAL_GUARD;
     ftype[stage].x1 = data;
     return y0;
@@ -484,8 +483,6 @@ Vibe::init_vibes()
 void
 Vibe::modulate(float ldrl, float ldrr)
 {
-    float tmpgain = 0.0f;
-    float C2pC1 = 0.0f;
     Rv = 4700.0f + ldrl;
     float R1pRv = R1 + Rv;
 
@@ -497,7 +494,7 @@ Vibe::modulate(float ldrl, float ldrr)
             R1pRv = R1 + Rv;
         }
 
-        C2pC1 = C2 + C1[i];
+        float C2pC1 = C2 + C1[i];
         //Vo/Ve driven from emitter
         ed1[i] = k * (R1pRv) * C1[i];
         //ed1[i] = R1pRv*kC1[i];
@@ -520,7 +517,7 @@ Vibe::modulate(float ldrl, float ldrr)
         od1[i] = on1[i];
 
         //%Bilinear xform stuff
-        tmpgain = 1.0f / (cd1[i] + cd0[i]);
+        float tmpgain = 1.0f / (cd1[i] + cd0[i]);
         vc[i].n1 = tmpgain * (cn0[i] - cn1[i]);
         vc[i].n0 = tmpgain * (cn1[i] + cn0[i]);
         vc[i].d1 = tmpgain * (cd0[i] - cd1[i]);

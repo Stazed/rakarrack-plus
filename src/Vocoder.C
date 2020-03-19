@@ -311,11 +311,11 @@ Vocoder::out(float * efxoutl, float * efxoutr)
         memcpy(tmpaux, auxresampled, sizeof (float)*nPERIOD);
     }
 
-    float auxtemp, tmpgain; auxtemp = tmpgain = 0.0f;
+    float tmpgain = 0.0f;
     
     for (int i = 0; i < nPERIOD; i++)
     { //apply compression to auxresampled
-        auxtemp = input * tmpaux[i];
+        float auxtemp = input * tmpaux[i];
 
         if (fabs(auxtemp > compeak))
         {
@@ -355,8 +355,6 @@ Vocoder::out(float * efxoutl, float * efxoutr)
 
     //End compression
 
-    auxtemp = 0.0f;
-
     if (DS_state != 0)
     {
         U_Resample->out(efxoutl, efxoutr, tsmpsl, tsmpsr, PERIOD, u_up);
@@ -370,14 +368,13 @@ Vocoder::out(float * efxoutl, float * efxoutr)
     memset(tmpl, 0, sizeof (float)*nPERIOD);
     memset(tmpr, 0, sizeof (float)*nPERIOD);
 
-    float tempgain = 0.0f;
     float maxgain = 0.0f;
     
     for (int j = 0; j < VOC_BANDS; j++)
     {
         for (int i = 0; i < nPERIOD; i++)
         {
-            auxtemp = tmpaux[i];
+            float auxtemp = tmpaux[i];
 
             if (filterbank[j].speak < gate)
             {
@@ -402,7 +399,7 @@ Vocoder::out(float * efxoutl, float * efxoutr)
             filterbank[j].oldgain = filterbank[j].gain;
 
 
-            tempgain = (1.0f - ringworm) * filterbank[j].oldgain + ringworm*auxtemp;
+            float tempgain = (1.0f - ringworm) * filterbank[j].oldgain + ringworm*auxtemp;
 
             tmpl[i] += filterbank[j].l->filterout_s(tsmpsl[i]) * tempgain;
             tmpr[i] += filterbank[j].r->filterout_s(tsmpsr[i]) * tempgain;
@@ -481,12 +478,10 @@ Vocoder::setpanning(int Ppanning)
 void
 Vocoder::init_filters()
 {
-    float ff, qq; ff = qq = 0.0f;
-
     for (int ii = 0; ii < VOC_BANDS; ii++)
     {
-        ff = filterbank[ii].sfreq;
-        qq = filterbank[ii].sq;
+        float ff = filterbank[ii].sfreq;
+        float qq = filterbank[ii].sq;
         filterbank[ii].l->setfreq_and_q(ff, qq);
         filterbank[ii].r->setfreq_and_q(ff, qq);
         filterbank[ii].aux->setfreq_and_q(ff, qq);

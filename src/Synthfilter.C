@@ -116,15 +116,11 @@ Synthfilter::~Synthfilter()
 void
 Synthfilter::out(float * efxoutl, float * efxoutr)
 {
-    int j = 0;
-    float lgain, rgain, rmod, lmod, d;
-    lgain = rgain = rmod = lmod = d = 0.0f;
-
-
-    float lfol, lfor;   // initialize o.k.
+    float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
-    lmod = lfol * width + depth + env*sns;
-    rmod = lfor * width + depth + env*sns;
+    
+    float lmod = lfol * width + depth + env*sns;
+    float rmod = lfor * width + depth + env*sns;
 
     if (lmod > ONE_)
     {
@@ -154,7 +150,7 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
     float gl = oldlgain; // Linear interpolation between LFO samples
     float gr = oldrgain;
 
-    for (unsigned int i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         float lxn = bandgain * efxoutl[i];
         float rxn = bandgain * efxoutr[i]; //extra gain
@@ -183,13 +179,13 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
         }
 
         //  Left channel Low Pass Filter
-        for (j = 0; j < Plpstages; j++)
+        for (int j = 0; j < Plpstages; j++)
         {
-            d = 1.0f + fabs(lxn) * distortion; // gain decreases as signal amplitude increases.
+            float d = 1.0f + fabs(lxn) * distortion; // gain decreases as signal amplitude increases.
 
             //  low pass filter:  alpha*x[n] + (1-alpha)*y[n-1]
             //  alpha = lgain = dt/(RC + dt)
-            lgain = delta / ((Rmax * gl * d + Rmin) * Clp + delta);
+            float lgain = delta / ((Rmax * gl * d + Rmin) * Clp + delta);
             lyn1[j] = lgain * lxn + (1.0f - lgain) * lyn1[j];
             lyn1[j] += DENORMAL_GUARD;
             lxn = lyn1[j];
@@ -198,10 +194,10 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
         }
 
         //  Left channel High Pass Filter
-        for (j = 0; j < Phpstages; j++)
+        for (int j = 0; j < Phpstages; j++)
         {
             //  high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = lgain = RC/(RC + dt)
-            lgain = (Rmax * gl + Rmin) * Chp / ((Rmax * gl + Rmin) * Chp + delta);
+            float lgain = (Rmax * gl + Rmin) * Chp / ((Rmax * gl + Rmin) * Chp + delta);
             ly1hp[j] = lgain * (lxn + ly1hp[j] - lx1hp[j]);
 
             ly1hp[j] += DENORMAL_GUARD;
@@ -209,13 +205,12 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
             lxn = ly1hp[j];
         }
 
-
         //  Right channel Low Pass Filter
-        for (j = 0; j < Plpstages; j++)
+        for (int j = 0; j < Plpstages; j++)
         {
-            d = 1.0f + fabs(rxn) * distortion; //   This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
+            float d = 1.0f + fabs(rxn) * distortion; //   This is symmetrical. FET is not, so this deviates slightly, however sym dist. is better sounding than a real FET.
 
-            rgain = delta / ((Rmax * gr * d + Rmin) * Clp + delta);
+            float rgain = delta / ((Rmax * gr * d + Rmin) * Clp + delta);
             ryn1[j] = rgain * rxn + (1.0f - rgain) * ryn1[j];
             ryn1[j] += DENORMAL_GUARD;
             rxn = ryn1[j];
@@ -224,12 +219,10 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
         }
 
         //  Right channel High Pass Filter
-        for (j = 0; j < Phpstages; j++)
+        for (int j = 0; j < Phpstages; j++)
         {
-            d = 1.0f + fabs(rxn) * distortion; // gain decreases as signal amplitude increases.
-
             //  high pass filter:  alpha*(y[n-1] + x[n] - x[n-1]) // alpha = rgain = RC/(RC + dt)
-            rgain = (Rmax * gr + Rmin) * Chp / ((Rmax * gr + Rmin) * Chp + delta);
+            float rgain = (Rmax * gr + Rmin) * Chp / ((Rmax * gr + Rmin) * Chp + delta);
             ry1hp[j] = rgain * (rxn + ry1hp[j] - rx1hp[j]);
 
             ry1hp[j] += DENORMAL_GUARD;
@@ -249,7 +242,7 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
 
     if (Poutsub != 0)
     {
-        for (unsigned int i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             efxoutl[i] *= -1.0f;
             efxoutr[i] *= -1.0f;
