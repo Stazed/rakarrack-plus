@@ -128,23 +128,31 @@ Reverb::~Reverb()
 void
 Reverb::cleanup()
 {
-    int i, j;
-
-    for (i = 0; i < REV_COMBS * 2; i++)
+    for (int i = 0; i < REV_COMBS * 2; i++)
     {
         lpcomb[i] = 0.0;
 
-        for (j = 0; j < comblen[i]; j++)
+        for (int j = 0; j < comblen[i]; j++)
+        {
             comb[i][j] = 0.0;
+        }
     }
 
-    for (i = 0; i < REV_APS * 2; i++)
-        for (j = 0; j < aplen[i]; j++)
+    for (int i = 0; i < REV_APS * 2; i++)
+    {
+        for (int j = 0; j < aplen[i]; j++)
+        {
             ap[i][j] = 0.0;
+        }
+    }
 
     if (idelay != NULL)
-        for (i = 0; i < idelaylen; i++)
+    {
+        for (int i = 0; i < idelaylen; i++)
+        {
             idelay[i] = 0.0;
+        }
+    }
 
     hpf->cleanup();
     lpf->cleanup();
@@ -199,19 +207,17 @@ Reverb::clear_initialize()
 void
 Reverb::processmono(unsigned int ch, float * output)
 {
-    unsigned int i, j;  // initialize o.k.
-    float fbout, tmp;   // initialize o.k.
     //TODO: implement the high part from lohidamp
 
-    for (j = REV_COMBS * ch; j < REV_COMBS * (ch + 1); j++)
+    for (unsigned j = REV_COMBS * ch; j < REV_COMBS * (ch + 1); j++)
     {
         int ck = combk[j];
         int comblength = comblen[j];
         float lpcombj = lpcomb[j];
 
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
-            fbout = comb[j][ck] * combfb[j];
+            float fbout = comb[j][ck] * combfb[j];
             fbout = fbout * (1.0f - lohifb) + (lpcombj * lohifb);
             lpcombj = fbout;
 
@@ -228,14 +234,14 @@ Reverb::processmono(unsigned int ch, float * output)
         lpcomb[j] = lpcombj;
     }
 
-    for (j = REV_APS * ch; j < REV_APS * (1 + ch); j++)
+    for (unsigned j = REV_APS * ch; j < REV_APS * (1 + ch); j++)
     {
         int ak = apk[j];
         int aplength = aplen[j];
 
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
-            tmp = ap[j][ak];
+            float tmp = ap[j][ak];
             ap[j][ak] = 0.7f * tmp + output[i];
             output[i] = tmp - 0.7f * ap[j][ak];
 

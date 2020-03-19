@@ -213,12 +213,8 @@ Reverbtron::clear_initialize()
 void
 Reverbtron::out(float * efxoutl, float * efxoutr)
 {
-    int j, xindex, hindex;  j = xindex = hindex = 0;
-    float l, lyn, hyn;      l = lyn = hyn = 0.0f;
-    float ldiff, rdiff;     ldiff = rdiff = 0.0f;
     int length = Llength;
     hlength = Pdiff;
-    int doffset = 0;
 
     if (DS_state != 0)
     {
@@ -230,8 +226,7 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
 
     for (int i = 0; i < nPERIOD; i++)
     {
-
-        l = 0.5f * (efxoutr[i] + efxoutl[i]);
+        float l = 0.5f * (efxoutr[i] + efxoutl[i]);
         oldl = l * hidamp + oldl * (alpha_hidamp); //apply damping while I'm in the loop
         if (Prv)
         {
@@ -241,10 +236,10 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
         lxn[offset] = oldl;
 
         //Convolve
-        lyn = 0.0f;
-        xindex = offset;
+        float lyn = 0.0f;
+        int xindex = offset;
 
-        for (j = 0; j < length; j++)
+        for (int j = 0; j < length; j++)
         {
             xindex = offset + time[j];
             if (xindex >= maxx_size) xindex -= maxx_size;
@@ -256,10 +251,10 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
         if (Pdiff > 0)
         {
             //Convolve again with approximated hrtf
-            hyn = 0.0f;
-            hindex = hoffset;
+            float hyn = 0.0f;
+            int hindex = hoffset;
 
-            for (j = 0; j < hlength; j++)
+            for (int j = 0; j < hlength; j++)
             {
                 hindex = hoffset + rndtime[j];
                 if (hindex >= hrtf_size) hindex -= hrtf_size;
@@ -272,8 +267,8 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
         if (Pes)
         { // just so I have the code to get started
 
-            ldiff = lyn;
-            rdiff = imdelay[imctr];
+            float ldiff = lyn;
+            float rdiff = imdelay[imctr];
 
             ldiff = lpfl->filterout_s(ldiff);
             rdiff = lpfr->filterout_s(rdiff);
@@ -297,15 +292,24 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
 
         offset--;
         
-        if (offset < 0) offset = maxx_size;
+        if (offset < 0)
+        {
+            offset = maxx_size;
+        }
 
-        doffset = (offset + roomsize);
+        int doffset = (offset + roomsize);
         
-        if (doffset > maxx_size) doffset -= maxx_size;
+        if (doffset > maxx_size)
+        {
+            doffset -= maxx_size;
+        }
 
         hoffset--;
         
-        if (hoffset < 0) hoffset = hrtf_size;
+        if (hoffset < 0)
+        {
+            hoffset = hrtf_size;
+        }
 
         lxn[doffset] += feedback;
 
@@ -630,7 +634,6 @@ void Reverbtron::convert_time()
     }
 
     //  generate an approximated randomized hrtf for diffusing reflections:
-    int tmptime = 0;
     int hrtf_tmp = Pdiff;
     
     if (hrtf_tmp > File.data_length)
@@ -645,7 +648,7 @@ void Reverbtron::convert_time()
     
     for (int i = 0; i < hrtf_tmp; i++)
     {
-        tmptime = (int) (RND * hrtf_size);
+        int tmptime = (int) (RND * hrtf_size);
         rndtime[i] = tmptime; //    randomly jumble the head of the transfer function
         rnddata[i] = 3.0f * (0.5f - RND) * data[tmptime];
     }
