@@ -130,12 +130,11 @@ Arpie::lv2_update_params(uint32_t period)
 void
 Arpie::initdelays()
 {
-    int i;
-
     kl = 0;
     kr = 0;
 
     dl = delay - lrdelay;
+
     if (dl < 1)
         dl = 1;
     
@@ -161,11 +160,15 @@ Arpie::initdelays()
     Srate_Attack_Coeff = 15.0f / (dl + dr); // Set swell time to 1/10th of average delay time
     fade = (dl + dr) / 5;
 
-    for (i = dl; i < maxx_delay; i++)
+    for (int i = dl; i < maxx_delay; i++)
+    {
         ldelay[i] = 0.0;
+    }
     
-    for (i = dr; i < maxx_delay; i++)
+    for (int i = dr; i < maxx_delay; i++)
+    {
         rdelay[i] = 0.0;
+    }
     
     oldl = 0.0;
     oldr = 0.0;
@@ -177,15 +180,12 @@ Arpie::initdelays()
 void
 Arpie::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float l, r, ldl, rdl, rswell, lswell;
-
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
-        ldl = ldelay[kl];
-        rdl = rdelay[kr];
-        l = ldl * (1.0f - lrcross) + rdl * lrcross;
-        r = rdl * (1.0f - lrcross) + ldl * lrcross;
+        float ldl = ldelay[kl];
+        float rdl = rdelay[kr];
+        float l = ldl * (1.0f - lrcross) + rdl * lrcross;
+        float r = rdl * (1.0f - lrcross) + ldl * lrcross;
         ldl = l;
         rdl = r;
 
@@ -195,10 +195,11 @@ Arpie::out(float * efxoutl, float * efxoutr)
 
         if (reverse > 0.0)
         {
-            lswell = (float) (abs(kl - rvkl)) * Srate_Attack_Coeff;
+            float lswell = (float) (abs(kl - rvkl)) * Srate_Attack_Coeff;
             envswell = (1.0f - cosf(PI * envcnt * envattack));
             
-            if (envswell > 1.0f) envswell = 1.0f;
+            if (envswell > 1.0f)
+                envswell = 1.0f;
             
             if (lswell <= PI)
             {
@@ -210,7 +211,7 @@ Arpie::out(float * efxoutl, float * efxoutr)
                 efxoutl[i] = ((ldelay[rvkl] * reverse) + (ldl * (1 - reverse))) * envswell;
             }
 
-            rswell = (float) (abs(kr - rvkr)) * Srate_Attack_Coeff;
+            float rswell = (float) (abs(kr - rvkr)) * Srate_Attack_Coeff;
             
             if (rswell <= PI)
             {
@@ -234,15 +235,22 @@ Arpie::out(float * efxoutl, float * efxoutr)
         oldl = ldl + DENORMAL_GUARD;
         oldr = rdl + DENORMAL_GUARD;
 
-        if (++envcnt >= invattack) envcnt = invattack;
-        if (kl > (dl - invattack)) envcnt -= 2;
-        if (envcnt < 0) envcnt = 0;
+        if (++envcnt >= invattack)
+            envcnt = invattack;
+
+        if (kl > (dl - invattack))
+            envcnt -= 2;
+
+        if (envcnt < 0)
+            envcnt = 0;
 
         if (++kl >= dl)
         {
             kl = 0;
             envcnt = 0;
-            if (++harmonic >= Pharms) harmonic = 0;
+
+            if (++harmonic >= Pharms)
+                harmonic = 0;
         }
         
         if (++kr >= dr)
@@ -250,19 +258,23 @@ Arpie::out(float * efxoutl, float * efxoutr)
         
         rvkl += pattern[harmonic];
         
-        if (rvkl >= (dl)) rvkl = rvkl % (dl);
+        if (rvkl >= (dl))
+            rvkl = rvkl % (dl);
         
         rvkr += pattern[harmonic];
         
-        if (rvkr >= (dr)) rvkr = rvkr % (dr);
+        if (rvkr >= (dr))
+            rvkr = rvkr % (dr);
 
         rvfl = rvkl + fade;
         
-        if (rvfl >= (dl)) rvfl = rvfl % (dl);
+        if (rvfl >= (dl))
+            rvfl = rvfl % (dl);
         
         rvfr = rvkr + fade;
         
-        if (rvfr >= (dr)) rvfr = rvfr % (dr);
+        if (rvfr >= (dr))
+            rvfr = rvfr % (dr);
     }
 }
 
@@ -298,9 +310,11 @@ Arpie::setdelay(int Pdelay)
 {
     this->Pdelay = Pdelay;
     
-    if (Pdelay < 30) Pdelay = 30;
+    if (Pdelay < 30)
+        Pdelay = 30;
     
-    if (Pdelay > 600) Pdelay = 600; //100ms .. 2 sec constraint
+    if (Pdelay > 600)
+        Pdelay = 600; //100ms .. 2 sec constraint
     
     delay = 1 + lrintf((60.0f / ((float) (subdiv * Pdelay))) * fSAMPLE_RATE); //quarter notes
     initdelays();
