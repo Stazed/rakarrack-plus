@@ -224,17 +224,12 @@ StompBox::out(float * efxoutl, float * efxoutr)
             lpost->filterout(efxoutl, PERIOD);
             rpost->filterout(efxoutr, PERIOD);
             
-            /* Temporary variables */
-            float hfilter = 0.0f;
-            float mfilter = 0.0f;
-            float lfilter = 0.0f;
-
             for (unsigned int i = 0; i < PERIOD; i++)
             {
                 //left channel
-                lfilter = ltonelw->filterout_s(efxoutl[i]);
-                mfilter = ltonemd->filterout_s(efxoutl[i]);
-                hfilter = ltonehg->filterout_s(efxoutl[i]);
+                float lfilter = ltonelw->filterout_s(efxoutl[i]);
+                float mfilter = ltonemd->filterout_s(efxoutl[i]);
+                float hfilter = ltonehg->filterout_s(efxoutl[i]);
 
                 efxoutl[i] = 0.5f * volume * (efxoutl[i] + lowb * lfilter + midb * mfilter + highb * hfilter);
 
@@ -256,13 +251,10 @@ StompBox::out(float * efxoutl, float * efxoutr)
             linput->filterout(efxoutl, PERIOD);
             rinput->filterout(efxoutr, PERIOD);
             
-            float tempr = 0.0f;
-            float templ = 0.0f;
-
             for (unsigned int i = 0; i < PERIOD; i++)
             {
-                templ = efxoutl[i] * (gain * pgain + 0.01f);
-                tempr = efxoutr[i] * (gain * pgain + 0.01f);
+                float templ = efxoutl[i] * (gain * pgain + 0.01f);
+                float tempr = efxoutr[i] * (gain * pgain + 0.01f);
                 efxoutl[i] += lpre1->filterout_s(templ);
                 efxoutr[i] += rpre1->filterout_s(tempr);
             }
@@ -275,11 +267,6 @@ StompBox::out(float * efxoutl, float * efxoutr)
             rwshape2->waveshapesmps(PERIOD, efxoutl, 23, Pgain, 1); // hard comp
             lwshape2->waveshapesmps(PERIOD, efxoutr, 23, Pgain, 1);
 
-            /* Temporary variables */
-            float hfilter = 0.0f;
-            float mfilter = 0.0f;
-            float lfilter = 0.0f;
-            
             for (unsigned int i = 0; i < PERIOD; i++)
             {
                 efxoutl[i] = efxoutl[i] + RGP2 * lpre2->filterout_s(efxoutl[i]);
@@ -288,9 +275,9 @@ StompBox::out(float * efxoutl, float * efxoutr)
                 efxoutr[i] = efxoutr[i] + RGPST * rpost->filterout_s(efxoutr[i]);
 
                 //left channel
-                lfilter = ltonelw->filterout_s(efxoutl[i]);
-                mfilter = ltonemd->filterout_s(efxoutl[i]);
-                hfilter = ltonehg->filterout_s(efxoutl[i]);
+                float lfilter = ltonelw->filterout_s(efxoutl[i]);
+                float mfilter = ltonemd->filterout_s(efxoutl[i]);
+                float hfilter = ltonehg->filterout_s(efxoutl[i]);
 
                 efxoutl[i] = 0.1f * volume * (efxoutl[i] + lowb * lfilter + midb * mfilter + highb * hfilter);
 
@@ -310,13 +297,10 @@ StompBox::out(float * efxoutl, float * efxoutr)
             linput->filterout(efxoutl, PERIOD);
             rinput->filterout(efxoutr, PERIOD);
 
-            float tempr = 0.0f;
-            float templ = 0.0f;
-
             for (unsigned int i = 0; i < PERIOD; i++)
             {
-                templ = efxoutl[i];
-                tempr = efxoutr[i];
+                float templ = efxoutl[i];
+                float tempr = efxoutr[i];
                 efxoutl[i] += lpre1->filterout_s(pre1gain * gain * templ);
                 efxoutr[i] += rpre1->filterout_s(pre1gain * gain * tempr); //Low freq gain stage
                 efxoutl[i] += lpre2->filterout_s(pre2gain * gain * templ);
@@ -332,15 +316,11 @@ StompBox::out(float * efxoutl, float * efxoutr)
             rwshape2->waveshapesmps(PERIOD, efxoutl, 23, 1, 0); // hard comp
             lwshape2->waveshapesmps(PERIOD, efxoutr, 23, 1, 0);
 
-            /* Temporary variables */
-            float mfilter = 0.0f;
-            float lfilter = 0.0f;
-            
             for (unsigned int i = 0; i < PERIOD; i++)
             {
                 //left channel
-                lfilter = ltonelw->filterout_s(efxoutl[i]);
-                mfilter = ltonemd->filterout_s(efxoutl[i]);
+                float lfilter = ltonelw->filterout_s(efxoutl[i]);
+                float mfilter = ltonemd->filterout_s(efxoutl[i]);
 
                 efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (efxoutl[i] + lowb * lfilter + midb * mfilter));
 
@@ -357,13 +337,10 @@ StompBox::out(float * efxoutl, float * efxoutr)
             linput->filterout(efxoutl, PERIOD);
             rinput->filterout(efxoutr, PERIOD);
 
-            float tempr = 0.0f;
-            float templ = 0.0f;
-
             for (unsigned int i = 0; i < PERIOD; i++)
             {
-                templ = efxoutl[i];
-                tempr = efxoutr[i];
+                float templ = efxoutl[i];
+                float tempr = efxoutr[i];
                 efxoutl[i] += lpre1->filterout_s(pre1gain * gain * templ);
                 efxoutr[i] += rpre1->filterout_s(pre1gain * gain * tempr); //Low freq gain stage
             }
@@ -377,15 +354,11 @@ StompBox::out(float * efxoutl, float * efxoutr)
             rwshape2->waveshapesmps(PERIOD, efxoutl, 29, 1, 0); // diode limit
             lwshape2->waveshapesmps(PERIOD, efxoutr, 29, 1, 0);
 
-            /* Temporary variables */
-            float mfilter = 0.0f;
-            float lfilter = 0.0f;
-
             for (unsigned int i = 0; i < PERIOD; i++)
             {
                 //left channel
-                lfilter = ltonelw->filterout_s(efxoutl[i]);
-                mfilter = ltonemd->filterout_s(efxoutl[i]);
+                float lfilter = ltonelw->filterout_s(efxoutl[i]);
+                float mfilter = ltonemd->filterout_s(efxoutl[i]);
 
                 efxoutl[i] = 0.5f * ltonehg->filterout_s(volume * (efxoutl[i] + lowb * lfilter + midb * mfilter));
 
@@ -406,20 +379,13 @@ StompBox::out(float * efxoutl, float * efxoutr)
             rwshape->waveshapesmps(PERIOD, efxoutr, 19, 25, 1); //compress
             lwshape->waveshapesmps(PERIOD, efxoutl, 19, 25, 1);
             
-            /* Temporary variables */
-            float hfilter = 0.0f;
-            float mfilter = 0.0f;
-            float lfilter = 0.0f;
-            float tempr = 0.0f;
-            float templ = 0.0f;
-
             for (unsigned int i = 0; i < PERIOD; i++)
             {
                 //left channel
-                mfilter = ltonemd->filterout_s(efxoutl[i]);
+                float mfilter = ltonemd->filterout_s(efxoutl[i]);
 
-                templ = lpost->filterout_s(fabs(efxoutl[i]));
-                tempr = rpost->filterout_s(fabs(efxoutr[i])); //dynamic symmetry
+                float templ = lpost->filterout_s(fabs(efxoutl[i]));
+                float tempr = rpost->filterout_s(fabs(efxoutr[i])); //dynamic symmetry
 
                 efxoutl[i] += lowb * templ + midb*mfilter; //In this case, lowb control tweaks symmetry
 
@@ -438,8 +404,8 @@ StompBox::out(float * efxoutl, float * efxoutr)
             for (unsigned int i = 0; i < PERIOD; i++)
             {
                 //left channel
-                lfilter = ltonelw->filterout_s(efxoutl[i]);
-                hfilter = ltonehg->filterout_s(efxoutl[i]);
+                float lfilter = ltonelw->filterout_s(efxoutl[i]);
+                float hfilter = ltonehg->filterout_s(efxoutl[i]);
 
                 efxoutl[i] = volume * ((1.0f - highb) * lfilter + highb * hfilter); //classic BMP tone stack
 
@@ -861,65 +827,75 @@ void StompBox::init_mode(int value)
 
 void StompBox::init_tone()
 {
-    float varf = 0.0f;
-    
     switch (Pmode)
     {
-    case 0:
-        varf = 2533.0f + highb * 1733.0f; //High tone ranges from 800 to 6000Hz
-        rtonehg->setfreq(varf);
-        ltonehg->setfreq(varf);
-        if (highb > 0.0f) highb = ((float) Phigh) / 8.0f;
-        break;
+        case 0:
+        {
+            {
+            float varf = 2533.0f + highb * 1733.0f; //High tone ranges from 800 to 6000Hz
+            rtonehg->setfreq(varf);
+            ltonehg->setfreq(varf);
+            if (highb > 0.0f) highb = ((float) Phigh) / 8.0f;
+            break;
+            }
+        }
+        case 1:
+        {
+            float varf = 3333.0f + highb * 2500.0f; //High tone ranges from 833 to 8333Hz
+            rtonehg->setfreq(varf);
+            ltonehg->setfreq(varf);
 
-    case 1:
-        varf = 3333.0f + highb * 2500.0f; //High tone ranges from 833 to 8333Hz
-        rtonehg->setfreq(varf);
-        ltonehg->setfreq(varf);
+            if (highb > 0.0f) highb = ((float) Phigh) / 16.0f;
+            if (lowb > 0.0f) lowb = ((float) Plow) / 18.0f;
+            break;
+        }
+        case 2:
+        case 3:
+        {
+            float varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
+            rtonehg->setfreq(varf);
+            ltonehg->setfreq(varf);
+            break;
+        }
+        case 4:
+        {
+            float varf = gain * 700.0f + 20.0f;
+            rpre1->setfreq(varf);
+            lpre1->setfreq(varf);
+            pre1gain = 212.0f;
+            varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
+            rtonehg->setfreq(varf);
+            ltonehg->setfreq(varf);
+            break;
+        }
+        case 5: //Death Metal
+        case 6: //Mid Elves Own
+        {
+            float varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
+            rtonehg->setfreq(varf);
+            ltonehg->setfreq(varf);
 
-        if (highb > 0.0f) highb = ((float) Phigh) / 16.0f;
-        if (lowb > 0.0f) lowb = ((float) Plow) / 18.0f;
-        break;
+            if (highb > 0.0f) highb = HG * ((float) Phigh) / 64.0f;
+            if (lowb > 0.0f) lowb = LG * ((float) Plow) / 64.0f;
+            if (midb > 0.0f) midb = MG * ((float) Pmid) / 64.0f;
+            break;
+        }
+        case 7:
+        {
+            highb = ((float) Phigh + 64) / 127.0f;
+            float varf = 40.0f + gain * 200.0f;
+            linput->setfreq(varf);
+            rinput->setfreq(varf);
+            if (midb > 0.0f) midb = ((float) Pmid) / 8.0f;
+            lowb = ((float) Plow) / 64.0f;
 
-    case 2:
-    case 3:
-        varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
-        rtonehg->setfreq(varf);
-        ltonehg->setfreq(varf);
-        break;
-    case 4:
-        varf = gain * 700.0f + 20.0f;
-        rpre1->setfreq(varf);
-        lpre1->setfreq(varf);
-        pre1gain = 212.0f;
-        varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
-        rtonehg->setfreq(varf);
-        ltonehg->setfreq(varf);
-        break;
-    case 5: //Death Metal
-    case 6: //Mid Elves Own
-        varf = 3653.0f + highb * 3173.0f; //High tone ranges from ~480 to 10k
-        rtonehg->setfreq(varf);
-        ltonehg->setfreq(varf);
+            varf = 1085.0f - lowb * 1000.0f;
+            lpre1->setfreq(varf);
+            rpre1->setfreq(varf);
+            break;
+        }
+    }   // switch()
 
-        if (highb > 0.0f) highb = HG * ((float) Phigh) / 64.0f;
-        if (lowb > 0.0f) lowb = LG * ((float) Plow) / 64.0f;
-        if (midb > 0.0f) midb = MG * ((float) Pmid) / 64.0f;
-        break;
-
-    case 7:
-        highb = ((float) Phigh + 64) / 127.0f;
-        varf = 40.0f + gain * 200.0f;
-        linput->setfreq(varf);
-        rinput->setfreq(varf);
-        if (midb > 0.0f) midb = ((float) Pmid) / 8.0f;
-        lowb = ((float) Plow) / 64.0f;
-
-        varf = 1085.0f - lowb * 1000.0f;
-        lpre1->setfreq(varf);
-        rpre1->setfreq(varf);
-        break;
-    }
     cleanup();
 }
 
