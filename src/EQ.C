@@ -142,8 +142,7 @@ EQ::clear_initialize()
 void
 EQ::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    for (i = 0; i < MAX_EQ_BANDS; i++)
+    for (unsigned i = 0; i < MAX_EQ_BANDS; i++)
     {
         if (filter[i].Ptype == 0)
             continue;
@@ -152,8 +151,7 @@ EQ::out(float * efxoutl, float * efxoutr)
         filter[i].r->filterout(efxoutr, PERIOD);
     }
 
-
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         efxoutl[i] = efxoutl[i] * outvolume;
         efxoutr[i] = efxoutr[i] * outvolume;
@@ -292,8 +290,7 @@ EQ::getpar(int npar)
 
 float EQ::getfreqresponse(float freq)
 {
-    float
-    resp = 1.0f;
+    float resp = 1.0f;
 
     for (int i = 0; i < MAX_EQ_BANDS; i++)
     {
