@@ -77,12 +77,11 @@ Phaser::~Phaser()
 void
 Phaser::out(float * efxoutl, float * efxoutr)
 {
-    float lfol, lfor, lgain, rgain; // initialized o.k.
-
+    float lfol, lfor; // initialized o.k.
     lfo->effectlfoout(&lfol, &lfor);
 
-    lgain = lfol;
-    rgain = lfor;
+    float lgain = lfol;
+    float rgain = lfor;
     lgain = (expf(lgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
     rgain = (expf(rgain * PHASER_LFO_SHAPE) - 1.0f) / (expf(PHASER_LFO_SHAPE) - 1.0f);
 
@@ -107,7 +106,6 @@ Phaser::out(float * efxoutl, float * efxoutr)
         rgain = 0.0f;
     }
 
-    float tmp = 0.0;
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         float x = (float) i / fPERIOD;
@@ -121,7 +119,7 @@ Phaser::out(float * efxoutl, float * efxoutr)
         for (int j = 0; j < Pstages * 2; j++)
         {
             //Phasing routine
-            tmp = oldl[j] + DENORMAL_GUARD;
+            float tmp = oldl[j] + DENORMAL_GUARD;
             oldl[j] = gl * tmp + inl;
             inl = tmp - gl * oldl[j];
         }
@@ -129,7 +127,7 @@ Phaser::out(float * efxoutl, float * efxoutr)
         for (int j = 0; j < Pstages * 2; j++)
         {
             //Phasing routine
-            tmp = oldr[j] + DENORMAL_GUARD;
+            float tmp = oldr[j] + DENORMAL_GUARD;
             oldr[j] = (gr * tmp) + inr;
             inr = tmp - (gr * oldr[j]);
         }

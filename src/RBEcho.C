@@ -139,14 +139,11 @@ RBEcho::initdelays()
 void
 RBEcho::out(float * efxoutl, float * efxoutr)
 {
-    float ldl, rdl;                 // initialize o.k.
-    float avg, ldiff, rdiff, tmp;   // initialize o.k.
-
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         //LowPass Filter
-        ldl = lfeedback * hidamp + oldl * (1.0f - hidamp);
-        rdl = rfeedback * hidamp + oldr * (1.0f - hidamp);
+        float ldl = lfeedback * hidamp + oldl * (1.0f - hidamp);
+        float rdl = rfeedback * hidamp + oldr * (1.0f - hidamp);
         oldl = ldl + DENORMAL_GUARD;
         oldr = rdl + DENORMAL_GUARD;
 
@@ -171,11 +168,11 @@ RBEcho::out(float * efxoutl, float * efxoutr)
             ldl *= cosf(lrcross);
             rdl *= sinf(lrcross);
 
-            avg = (ldl + rdl) * 0.5f;
-            ldiff = ldl - avg;
-            rdiff = rdl - avg;
+            float avg = (ldl + rdl) * 0.5f;
+            float ldiff = ldl - avg;
+            float rdiff = rdl - avg;
 
-            tmp = avg + ldiff * pes;
+            float tmp = avg + ldiff * pes;
             ldl = 0.5 * tmp;
 
             tmp = avg + rdiff * pes;
