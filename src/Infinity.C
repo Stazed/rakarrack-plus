@@ -115,9 +115,6 @@ Infinity::phaser(phasevars *pstruct, float fxn, int j)
 void inline
 Infinity::oscillator()
 {
-    float rmodulate, lmodulate, ratemod;
-    rmodulate = lmodulate = ratemod = 0.0f;
-
     //master oscillator
     msin += mconst*mcos;
     mcos -= msin*mconst;
@@ -133,7 +130,7 @@ Infinity::oscillator()
     else
     {
         dsin = autopan * ratescale*msin;
-        ratemod = (1.0f + dsin / fSAMPLE_RATE);
+        float ratemod = (1.0f + dsin / fSAMPLE_RATE);
         //smooth parameters for tempo change
         rampconst = alpha * rampconst + beta * crampconst*ratemod;
         irampconst = 1.0f / rampconst;
@@ -192,8 +189,8 @@ Infinity::oscillator()
 
         //lmodulate = linconst*f_pow2(logconst*lbandstate[i].ramp);
         //rmodulate = linconst*f_pow2(logconst*rbandstate[i].ramp);
-        lmodulate = 1.0f - 0.25f * lbandstate[i].ramp;
-        rmodulate = 1.0f - 0.25f * rbandstate[i].ramp;
+        float lmodulate = 1.0f - 0.25f * lbandstate[i].ramp;
+        float rmodulate = 1.0f - 0.25f * rbandstate[i].ramp;
 
         filterl[i]->directmod(lbandstate[i].ramp);
         filterr[i]->directmod(rbandstate[i].ramp);
@@ -209,9 +206,7 @@ Infinity::oscillator()
 void
 Infinity::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int j = 0;
-    float tmpr, tmpl;
-    tmpr = tmpl = 0.0f;
+    float tmpr, tmpl;   // initialize o.k.
 
     for (unsigned i = 0; i < PERIOD; i++)
     {
@@ -222,7 +217,7 @@ Infinity::out(float * efxoutl, float * efxoutr)
 
         if (Pstages)
         {
-            for (j = 0; j < NUM_INF_BANDS; j++)
+            for (unsigned j = 0; j < NUM_INF_BANDS; j++)
             {
                 tmpl += phaser(lphaser, filterl[j]->filterout_s(lbandstate[j].vol * efxoutl[i]), j);
                 tmpr += phaser(rphaser, filterr[j]->filterout_s(rbandstate[j].vol * efxoutr[i]), j);
@@ -230,7 +225,7 @@ Infinity::out(float * efxoutl, float * efxoutr)
         }
         else
         {
-            for (j = 0; j < NUM_INF_BANDS; j++)
+            for (unsigned j = 0; j < NUM_INF_BANDS; j++)
             {
                 tmpl += filterl[j]->filterout_s(lbandstate[j].vol * efxoutl[i]);
                 tmpr += filterr[j]->filterout_s(rbandstate[j].vol * efxoutr[i]);
@@ -362,19 +357,17 @@ Infinity::reinitfilter()
 {
     float fbandnum = (float) (NUM_INF_BANDS);
     float halfpi = -M_PI / 2.0f; //offset so rbandstate[0].sinp = -1.0 when rbandstate[0].ramp = 0;
-    float stateconst = 0;
-    float idx = 0;
 
     for (int i = 0; i < NUM_INF_BANDS; i++)
     { //get them started on their respective phases
         //right
-        idx = (float) i;
+        float idx = (float) i;
         rbandstate[i].sinp = sinf(halfpi + D_PI * idx / fbandnum);
         rbandstate[i].cosp = cosf(halfpi + D_PI * idx / fbandnum);
         rbandstate[i].ramp = linconst * powf(2.0f, logconst * idx / fbandnum);
         rbandstate[i].lfo = 0.5f * (1.0f + rbandstate[i].sinp); //lfo modulates filter band volume
         //left
-        stateconst = fmod((stdiff + idx), fbandnum);
+        float stateconst = fmod((stdiff + idx), fbandnum);
         lbandstate[i].sinp = sinf(halfpi + D_PI * stateconst / fbandnum);
         lbandstate[i].cosp = cosf(halfpi + D_PI * stateconst / fbandnum);
         lbandstate[i].ramp = linconst * powf(2.0f, logconst * stateconst / fbandnum);
@@ -400,14 +393,20 @@ Infinity::reinitfilter()
 void
 Infinity::adjustfreqs()
 {
-    float frate = 0.0f;
+    float frate;    // initialize o.k.
     float fs = fSAMPLE_RATE;
 
     fstart = 20.0f + 6000.0f * ((float) Pstartfreq / 127.0f);
     fend = 20.0f + 6000.0f * ((float) Pendfreq / 127.0f);
     
-    if (Psubdiv > 0) frate = ((float) (1 + Prate)) / (((float) Psubdiv)*60.0f); //beats/second
-    else frate = ((float) (1 - Psubdiv))*((float) Prate) / 60.0f;
+    if (Psubdiv > 0)
+    {
+        frate = ((float) (1 + Prate)) / (((float) Psubdiv)*60.0f); //beats/second
+    }
+    else
+    {
+        frate = ((float) (1 - Psubdiv))*((float) Prate) / 60.0f;
+    }
 
     if (fstart < fend)
     {
