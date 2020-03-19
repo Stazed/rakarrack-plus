@@ -203,11 +203,7 @@ Echotron::clear_initialize()
 void
 Echotron::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    int j, k;
     int length = Plength;
-    float l, r, lyn, ryn;
-    float rxindex, lxindex;
 
     if ((Pmoddly) || (Pmodfilts)) modulate_delay();
     else interpl = interpr = 0;
@@ -215,26 +211,26 @@ Echotron::out(float * efxoutl, float * efxoutr)
     float tmpmodl = oldldmod;
     float tmpmodr = oldrdmod;
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         tmpmodl += interpl;
         tmpmodr += interpr;
 
-        l = lxn->delay((lpfl->filterout_s(efxoutl[i] + lfeedback)), 0.0f, 0, 1, 0); //High Freq damping
-        r = rxn->delay((lpfr->filterout_s(efxoutr[i] + rfeedback)), 0.0f, 0, 1, 0);
+        float l = lxn->delay((lpfl->filterout_s(efxoutl[i] + lfeedback)), 0.0f, 0, 1, 0); //High Freq damping
+        float r = rxn->delay((lpfr->filterout_s(efxoutr[i] + rfeedback)), 0.0f, 0, 1, 0);
 
         //Convolve
-        lyn = 0.0f;
-        ryn = 0.0f;
+        float lyn = 0.0f;
+        float ryn = 0.0f;
 
         if (Pfilters)
         {
-            j = 0;
+            int j = 0;
             
-            for (k = 0; k < length; k++)
+            for (int k = 0; k < length; k++)
             {
-                lxindex = File.ltime[k] + tmpmodl;
-                rxindex = File.rtime[k] + tmpmodr;
+                float lxindex = File.ltime[k] + tmpmodl;
+                float rxindex = File.rtime[k] + tmpmodr;
 
                 if ((File.iStages[k] >= 0)&&(j < ECHOTRON_MAXFILTERS))
                 {
@@ -251,10 +247,10 @@ Echotron::out(float * efxoutl, float * efxoutr)
         }
         else
         {
-            for (k = 0; k < length; k++)
+            for (int k = 0; k < length; k++)
             {
-                lxindex = File.ltime[k] + tmpmodl;
-                rxindex = File.rtime[k] + tmpmodr;
+                float lxindex = File.ltime[k] + tmpmodl;
+                float rxindex = File.rtime[k] + tmpmodr;
 
                 lyn += lxn->delay(l, lxindex, k, 0, 0) * File.ldata[k];
                 ryn += rxn->delay(r, rxindex, k, 0, 0) * File.rdata[k];
@@ -596,8 +592,6 @@ void Echotron::init_params()
     cleanup(); // should always do this on init or junk left over
 
     float hSR = fSAMPLE_RATE * 0.5f;
-    float tpanl, tpanr;
-    float tmptempo;
     int tfcnt = 0;
 
     initparams = 0;
@@ -605,7 +599,7 @@ void Echotron::init_params()
     dlyrange = 0.008 * f_pow2(4.5f * depth);
     width = ((float) Pwidth) / 127.0f;
 
-    tmptempo = (float) Ptempo;
+    float tmptempo = (float) Ptempo;
     lfo->Pfreq = lrintf(File.subdiv_fmod * tmptempo);
     dlfo->Pfreq = lrintf(File.subdiv_dmod * tmptempo);
 
@@ -617,6 +611,7 @@ void Echotron::init_params()
 
         File.ltime[i] = File.rtime[i] = File.fTime[i] * tempo_coeff;
 
+        float tpanl, tpanr; // initialize o.k.
         if (File.fPan[i] >= 0.0f)
         {
             tpanr = 1.0;
@@ -653,16 +648,16 @@ void Echotron::init_params()
 
 void Echotron::modulate_delay()
 {
-    float lfmod, rfmod, lfol, lfor, dlfol, dlfor;
     float fperiod = 1.0f / fPERIOD;
 
+    float lfol, lfor, dlfol, dlfor; // initialize o.k.
     lfo->effectlfoout(&lfol, &lfor);
     dlfo->effectlfoout(&dlfol, &dlfor);
     
     if (Pmodfilts)
     {
-        lfmod = f_pow2((lfol * width + 0.25f + depth)*4.5f);
-        rfmod = f_pow2((lfor * width + 0.25f + depth)*4.5f);
+        float lfmod = f_pow2((lfol * width + 0.25f + depth)*4.5f);
+        float rfmod = f_pow2((lfor * width + 0.25f + depth)*4.5f);
         
         for (int i = 0; i < ECHOTRON_MAXFILTERS; i++)
         {
