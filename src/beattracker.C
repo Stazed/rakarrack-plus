@@ -82,14 +82,13 @@ beattracker::cleanup()
 void
 beattracker::detect(float * smpsl, float * smpsr, uint32_t period)
 {
-    float tmp = 0.0f;
     int idx = 0;
 
     for (unsigned int i = 0; i < period; i++)
     { //Detect dynamics onset
         index[i] = 0; //initializes all elements to zero
 
-        tmp = 15.0f * fabs(smpsl[i] + smpsr[i]);
+        float tmp = 15.0f * fabs(smpsl[i] + smpsr[i]);
         envrms = rmsfilter->filterout_s(tmp);
         
         if (tmp > peak)

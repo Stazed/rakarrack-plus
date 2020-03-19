@@ -93,9 +93,7 @@ metronome::set_meter(int counts) //how many counts to hear the "mark"
 void
 metronome::metronomeout(float * tickout, int period)
 {
-    float outsharp, outdull; outsharp = outdull = 0.0;
     float ticker = 0.0f;
-    float hipass = 0.0f;
 
     for (int i = 0; i < period; i++)
     {
@@ -105,19 +103,27 @@ metronome::metronomeout(float * tickout, int period)
         {
             tickctr = 0;
             markctr++;
-            if (markctr > meter) markctr = 0;
+
+            if (markctr > meter)
+                markctr = 0;
         }
 
-        if (tickctr < tickper) ticker = 1.0f;
-        else ticker = 0.0f;
+        if (tickctr < tickper)
+        {
+            ticker = 1.0f;
+        }
+        else
+        {
+            ticker = 0.0f;
+        }
 
-        hipass = hpf->filterout_s(ticker);
+        float hipass = hpf->filterout_s(ticker);
 
         if (hipass > 0.5f) hipass = 0.5f;
         if (hipass<-0.5f) hipass = -0.5f;
 
-        outdull = dulltick->filterout_s(hipass);
-        outsharp = sharptick-> filterout_s(hipass);
+        float outdull = dulltick->filterout_s(hipass);
+        float outsharp = sharptick-> filterout_s(hipass);
 
         switch (ticktype)
         {
