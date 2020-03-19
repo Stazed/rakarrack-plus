@@ -142,9 +142,7 @@ Dflange::~Dflange()
 void
 Dflange::cleanup()
 {
-    int i;
-    
-    for (i = 0; i < maxx_delay; i++)
+    for (int i = 0; i < maxx_delay; i++)
     {
         ldelay[i] = 0.0;
         rdelay[i] = 0.0;
@@ -184,41 +182,47 @@ Dflange::lv2_update_params(uint32_t period)
 void
 Dflange::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
     //deal with LFO's
-    int tmp0, tmp1;
     period_const = 1.0f / (float) PERIOD;
 
-    float lfol, lfor, lmod, rmod, lmodfreq, rmodfreq, rx0, rx1, lx0, lx1;
-    float ldif0, ldif1, rdif0, rdif1; //Difference between fractional delay and floor(fractional delay)
-    float drA, drB, dlA, dlB; //LFO inside the loop.
+//    float lfol, lfor, lmod, rmod;
+//    float ldif0, ldif1, rdif0, rdif1; //Difference between fractional delay and floor(fractional delay)
+//    float drA, drB, dlA, dlB; //LFO inside the loop.
 
+    float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
-    lmod = lfol;
+    float lmod = lfol;
     
-    if (Pzero && Pintense) rmod = 1.0f - lfol; //using lfol is intentional
-    else rmod = lfor;
+    float rmod; // initialize o.k.
+    if (Pzero && Pintense)
+    {
+        rmod = 1.0f - lfol; //using lfol is intentional
+    }
+    else
+    {
+        rmod = lfor;
+    }
 
     if (Pintense)
     {
         //do intense stuff
-        lmodfreq = (f_pow2(lmod * lmod * logmax)) * fdepth; //2^x type sweep for musical interpretation of moving delay line.
-        rmodfreq = (f_pow2(rmod * rmod * logmax)) * fdepth; //logmax depends on depth
+        float lmodfreq = (f_pow2(lmod * lmod * logmax)) * fdepth; //2^x type sweep for musical interpretation of moving delay line.
+        float rmodfreq = (f_pow2(rmod * rmod * logmax)) * fdepth; //logmax depends on depth
         rflange0 = 0.5f / rmodfreq; //Turn the notch frequency into 1/2 period delay
         rflange1 = rflange0 + (1.0f - foffset) / fdepth; //Set relationship of second delay line
         lflange0 = 0.5f / lmodfreq;
         lflange1 = lflange0 + (1.0f - foffset) / fdepth;
 
-        rx0 = (rflange0 - oldrflange0) * period_const; //amount to add each time around the loop.  Less processing of linear LFO interp inside the loop.
-        rx1 = (rflange1 - oldrflange1) * period_const;
-        lx0 = (lflange0 - oldlflange0) * period_const;
-        lx1 = (lflange1 - oldlflange1) * period_const;
+        float rx0 = (rflange0 - oldrflange0) * period_const; //amount to add each time around the loop.  Less processing of linear LFO interp inside the loop.
+        float rx1 = (rflange1 - oldrflange1) * period_const;
+        float lx0 = (lflange0 - oldlflange0) * period_const;
+        float lx1 = (lflange1 - oldlflange1) * period_const;
 
         // Now there is a fractional amount to add
-        drA = oldrflange0;
-        drB = oldrflange1;
-        dlA = oldlflange0;
-        dlB = oldlflange1;
+        float drA = oldrflange0;
+        float drB = oldrflange1;
+        float dlA = oldlflange0;
+        float dlB = oldlflange1;
 
         oldrflange0 = rflange0;
         oldrflange1 = rflange1;
@@ -228,7 +232,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
 
         if (Pzero)
         {
-            for (i = 0; i < PERIOD; i++)
+            for (unsigned i = 0; i < PERIOD; i++)
             {
                 ldl = efxoutl[i] * lpan + ldl * ffb;
                 rdl = efxoutr[i] * rpan + rdl * ffb;
@@ -260,7 +264,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
         }
         else
         {
-            for (i = 0; i < PERIOD; i++)
+            for (unsigned i = 0; i < PERIOD; i++)
             {
                 ldl = efxoutl[i] * lpan + ldl * ffb;
                 rdl = efxoutr[i] * rpan + rdl * ffb;
@@ -296,18 +300,26 @@ Dflange::out(float * efxoutl, float * efxoutr)
     }
     else
     {
-        lmodfreq = fdepth + fwidth * (powf(base, lmod) - 1.0f) * ibase; //sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
-        rmodfreq = fdepth + fwidth * (powf(base, rmod) - 1.0f) * ibase;
+        float lmodfreq = fdepth + fwidth * (powf(base, lmod) - 1.0f) * ibase; //sets frequency of lowest notch. // 20 <= fdepth <= 4000 // 20 <= width <= 16000 //
+        float rmodfreq = fdepth + fwidth * (powf(base, rmod) - 1.0f) * ibase;
 
         if (lmodfreq > 10000.0f)
+        {
             lmodfreq = 10000.0f;
+        }
         else if (lmodfreq < 10.0f)
+        {
             lmodfreq = 10.0f;
+        }
         
         if (rmodfreq > 10000.0)
+        {
             rmodfreq = 10000.0f;
+        }
         else if (rmodfreq < 10.0f)
+        {
             rmodfreq = 10.0f;
+        }
 
         rflange0 = fSAMPLE_RATE * 0.5f / rmodfreq; //Turn the notch frequency into a number for delay
         rflange1 = rflange0 * foffset; //Set relationship of second delay line
@@ -318,16 +330,16 @@ Dflange::out(float * efxoutl, float * efxoutr)
         //will be fractional, but will use linear interpolation inside the loop to make a decent guess at
         //the numbers between samples.
 
-        rx0 = (rflange0 - oldrflange0) * period_const; //amount to add each time around the loop.  Less processing of linear LFO interp inside the loop.
-        rx1 = (rflange1 - oldrflange1) * period_const;
-        lx0 = (lflange0 - oldlflange0) * period_const;
-        lx1 = (lflange1 - oldlflange1) * period_const;
+        float rx0 = (rflange0 - oldrflange0) * period_const; //amount to add each time around the loop.  Less processing of linear LFO interp inside the loop.
+        float rx1 = (rflange1 - oldrflange1) * period_const;
+        float lx0 = (lflange0 - oldlflange0) * period_const;
+        float lx1 = (lflange1 - oldlflange1) * period_const;
         // Now there is a fractional amount to add
 
-        drA = oldrflange0;
-        drB = oldrflange1;
-        dlA = oldlflange0;
-        dlB = oldlflange1;
+        float drA = oldrflange0;
+        float drB = oldrflange1;
+        float dlA = oldlflange0;
+        float dlB = oldlflange1;
         // dr, dl variables are the LFO inside the loop.
 
         oldrflange0 = rflange0;
@@ -336,7 +348,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
         oldlflange1 = lflange1;
         //lfo ready...
 
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             //Delay line utility
             ldl = ldelay[kl];
@@ -372,16 +384,16 @@ Dflange::out(float * efxoutl, float * efxoutr)
             //End delay line management, start flanging:
 
             //Right Channel, delay A
-            rdif0 = drA - floor(drA);
-            tmp0 = (kr + (int) floor(drA)) % maxx_delay;
-            tmp1 = tmp0 + 1;
+            float rdif0 = drA - floor(drA);
+            int tmp0 = (kr + (int) floor(drA)) % maxx_delay;
+            int tmp1 = tmp0 + 1;
             
             if (tmp1 >= maxx_delay) tmp1 = 0;
             //rsA = rdelay[tmp0] + rdif0 * (rdelay[tmp1] - rdelay[tmp0] );	//here is the first right channel delay
             rsA = rdelay[tmp1] + rdif0 * (rdelay[tmp0] - rsA); //All-pass interpolator
 
             //Right Channel, delay B
-            rdif1 = drB - floor(drB);
+            float rdif1 = drB - floor(drB);
             tmp0 = (kr + (int) floor(drB)) % maxx_delay;
             tmp1 = tmp0 + 1;
             
@@ -390,7 +402,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
             rsB = rdelay[tmp1] + rdif1 * (rdelay[tmp0] - rsB);
 
             //Left Channel, delay A
-            ldif0 = dlA - floor(dlA);
+            float ldif0 = dlA - floor(dlA);
             tmp0 = (kl + (int) floor(dlA)) % maxx_delay;
             tmp1 = tmp0 + 1;
             
@@ -399,7 +411,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
             lsA = ldelay[tmp1] + ldif0 * (ldelay[tmp0] - lsA);
 
             //Left Channel, delay B
-            ldif1 = dlB - floor(dlB);
+            float ldif1 = dlB - floor(dlB);
             tmp0 = (kl + (int) floor(dlB)) % maxx_delay;
             tmp1 = tmp0 + 1;
             
