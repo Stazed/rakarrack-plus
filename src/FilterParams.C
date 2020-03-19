@@ -200,8 +200,8 @@ float FilterParams::getfreqx(float x)
     if (x > 1.0)
         x = 1.0f;
     
-    float
-    octf = powf(2.0f, getoctavesfreq());
+    float octf = powf(2.0f, getoctavesfreq());
+    
     return (getcenterfreq() / sqrtf(octf) * powf(octf, x));
 }
 
@@ -221,8 +221,6 @@ void
 FilterParams::formantfilterH(int nvowel, int nfreqs, float * freqs)
 {
     float c[3], d[3];
-    float filter_freq, filter_q, filter_amp;
-    float omega, sn, cs, alpha;
 
     for (int i = 0; i < nfreqs; i++)
         freqs[i] = 0.0;
@@ -231,21 +229,21 @@ FilterParams::formantfilterH(int nvowel, int nfreqs, float * freqs)
     for (int nformant = 0; nformant < Pnumformants; nformant++)
     {
         //compute formant parameters(frequency,amplitude,etc.)
-        filter_freq = getformantfreq(Pvowels[nvowel].formants[nformant].freq);
-        filter_q = getformantq(Pvowels[nvowel].formants[nformant].q) * getq();
+        float filter_freq = getformantfreq(Pvowels[nvowel].formants[nformant].freq);
+        float filter_q = getformantq(Pvowels[nvowel].formants[nformant].q) * getq();
         
         if (Pstages > 0)
             filter_q =
                 (filter_q > 1.0 ? powf(filter_q, 1.0f / ((float) Pstages + 1)) : filter_q);
 
-        filter_amp = getformantamp(Pvowels[nvowel].formants[nformant].amp);
+        float filter_amp = getformantamp(Pvowels[nvowel].formants[nformant].amp);
 
         if (filter_freq <= (SAMPLE_RATE / 2 - 100.0))
         {
-            omega = 2.0f * PI * filter_freq / fSAMPLE_RATE;
-            sn = sinf(omega);
-            cs = cosf(omega);
-            alpha = sn / (2.0f * filter_q);
+            float omega = 2.0f * PI * filter_freq / fSAMPLE_RATE;
+            float sn = sinf(omega);
+            float cs = cosf(omega);
+            float alpha = sn / (2.0f * filter_q);
             float tmp = 1.0f + alpha;
             c[0] = alpha / tmp * sqrtf(filter_q + 1.0f);
             c[1] = 0;
@@ -307,22 +305,22 @@ FilterParams::formantfilterH(int nvowel, int nfreqs, float * freqs)
  */
 float FilterParams::getformantfreq(unsigned char freq)
 {
-    float
-    result = getfreqx((float) freq / 127.0f);
+    float result = getfreqx((float) freq / 127.0f);
+
     return (result);
 }
 
 float FilterParams::getformantamp(unsigned char amp)
 {
-    float
-    result = powf(0.1f, (1.0f - (float) amp / 127.0f) * 4.0f);
+    float result = powf(0.1f, (1.0f - (float) amp / 127.0f) * 4.0f);
+
     return (result);
 }
 
 float FilterParams::getformantq(unsigned char q)
 {
     //temp
-    float
-    result = powf(25.0f, ((float) q - 32.0f) / 64.0f);
+    float result = powf(25.0f, ((float) q - 32.0f) / 64.0f);
+
     return (result);
 }
