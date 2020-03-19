@@ -167,8 +167,14 @@ Infinity::oscillator()
         lbandstate[i].cosp -= lbandstate[i].sinp*fconst;
         lbandstate[i].lfo = (1.0f + lbandstate[i].sinp); //lfo modulates filter band volume
         
-        if (Preverse) lbandstate[i].ramp *= irampconst; //left reversed from right
-        else lbandstate[i].ramp *= rampconst; //normal mode
+        if (Preverse)
+        {
+            lbandstate[i].ramp *= irampconst; //left reversed from right
+        }
+        else
+        {
+            lbandstate[i].ramp *= rampconst; //normal mode
+        }
         
         if (lbandstate[i].ramp > maxlevel)
         {
