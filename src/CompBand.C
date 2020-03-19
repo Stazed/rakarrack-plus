@@ -219,8 +219,6 @@ CompBand::clear_initialize()
 void
 CompBand::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-
     memcpy(lowl, efxoutl, sizeof (float) * PERIOD);
     memcpy(midll, efxoutl, sizeof (float) * PERIOD);
     memcpy(midhl, efxoutl, sizeof (float) * PERIOD);
@@ -250,7 +248,7 @@ CompBand::out(float * efxoutl, float * efxoutr)
     CMH->out(midhl, midhr);
     CH->out(highl, highr);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
         efxoutl[i] = (lowl[i] + midll[i] + midhl[i] + highl[i]) * level;
         efxoutr[i] = (lowr[i] + midlr[i] + midhr[i] + highr[i]) * level;
