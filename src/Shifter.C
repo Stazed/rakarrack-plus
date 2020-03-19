@@ -236,15 +236,20 @@ Shifter::out(float *efxoutl, float *efxoutr)
         U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
-    float sum = 0.0f;
     for (int i = 0; i < nPERIOD; i++)
     {
         if ((Pmode == 0) || (Pmode == 2))
         {
-            sum = fabsf(efxoutl[i]) + fabsf(efxoutr[i]);
+            float sum = fabsf(efxoutl[i]) + fabsf(efxoutr[i]);
             
-            if (sum > env) env = sum;
-            else env = sum * ENV_TR + env * (1.0f - ENV_TR);
+            if (sum > env)
+            {
+                env = sum;
+            }
+            else
+            {
+                env = sum * ENV_TR + env * (1.0f - ENV_TR);
+            }
 
             if (env <= tz_level)
             {
@@ -252,19 +257,27 @@ Shifter::out(float *efxoutl, float *efxoutr)
                 tune = 0.0;
             }
 
-            if ((state == IDLE) && (env >= t_level)) state = UP;
+            if ((state == IDLE) && (env >= t_level))
+            {
+                state = UP;
+            }
 
             if (state == UP)
             {
                 tune += a_rate;
-                if (tune >= 1.0f) state = WAIT;
+                if (tune >= 1.0f)
+                {
+                    state = WAIT;
+                }
             }
 
             if (state == WAIT)
             {
                 tune = 1.0f;
                 if (env < td_level)
+                {
                     state = DOWN;
+                }
             }
 
             if (state == DOWN)

@@ -93,15 +93,11 @@ Sustainer::lv2_update_params(uint32_t period)
 void
 Sustainer::out(float * efxoutl, float * efxoutr)
 {
-    float auxtempl = 0.0f;
-    float auxtempr = 0.0f;
-    float auxcombi = 0.0f;
-
     for (unsigned int i = 0; i < PERIOD; i++)
     { //apply compression to auxresampled
-        auxtempl = input * efxoutl[i];
-        auxtempr = input * efxoutr[i];
-        auxcombi = 0.5f * (auxtempl + auxtempr);
+        float auxtempl = input * efxoutl[i];
+        float auxtempr = input * efxoutr[i];
+        float auxcombi = 0.5f * (auxtempl + auxtempr);
         
         if (fabs(auxcombi) > compeak)
         {

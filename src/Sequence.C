@@ -223,9 +223,6 @@ Sequence::clear_initialize()
 void
 Sequence::out(float * efxoutl, float * efxoutr)
 {
-    float ftcount = 0.0f;
-    float ldbl, ldbr; ldbl = ldbr = 0.0f;
-
     if (avflag)
     {
         ldelay->set_averaging(avtime);
@@ -313,7 +310,7 @@ Sequence::out(float * efxoutl, float * efxoutr)
                     lfor = fsequence[dscount];
                 }
 
-                ftcount = (float) tcount;
+                float ftcount = (float) tcount;
 
 
                 lmod = lfol + ldiff * ftcount;
@@ -321,8 +318,8 @@ Sequence::out(float * efxoutl, float * efxoutr)
 
                 if (Pamplitude)
                 {
-                    ldbl = lmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
-                    ldbr = rmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
+                    float ldbl = lmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
+                    float ldbr = rmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
 
                     efxoutl[i] = ldbl * efxoutl[i];
                     efxoutr[i] = ldbr * efxoutr[i];
@@ -361,15 +358,15 @@ Sequence::out(float * efxoutl, float * efxoutr)
                     dscount = (scount + Pstdiff) % 8;
                 }
 
-                ftcount = M_PI * ifperiod * (float) (tcount);
+                float ftcount = M_PI * ifperiod * (float) (tcount);
 
                 lmod = sinf(ftcount) * fsequence[scount];
                 rmod = sinf(ftcount) * fsequence[dscount];
 
                 if (Pamplitude)
                 {
-                    ldbl = lmod * (1.0f - cosf(2.0f * ftcount));
-                    ldbr = rmod * (1.0f - cosf(2.0f * ftcount));
+                    float ldbl = lmod * (1.0f - cosf(2.0f * ftcount));
+                    float ldbr = rmod * (1.0f - cosf(2.0f * ftcount));
 
                     efxoutl[i] = ldbl * efxoutl[i];
                     efxoutr[i] = ldbr * efxoutr[i];
@@ -417,8 +414,8 @@ Sequence::out(float * efxoutl, float * efxoutr)
 
                 if (Pamplitude)
                 {
-                    ldbl = seqpower * lmod;
-                    ldbr = seqpower * rmod;
+                    float ldbl = seqpower * lmod;
+                    float ldbr = seqpower * rmod;
 
                     efxoutl[i] = ldbl * efxoutl[i];
                     efxoutr[i] = ldbr * efxoutr[i];
@@ -485,7 +482,7 @@ Sequence::out(float * efxoutl, float * efxoutr)
                     lfol = fsequence[scount];
                 }
 
-                ftcount = (float) tcount;
+                float ftcount = (float) tcount;
 
                 lmod = 1.0f + lfol + ldiff * ftcount;
 
@@ -581,12 +578,12 @@ Sequence::out(float * efxoutl, float * efxoutr)
                 //Process Amplitude modulation
                 if (Pamplitude)
                 {
-                    ftcount = (float) tcount;
+                    float ftcount = (float) tcount;
                     lmod = lfol + ldiff * ftcount;
                     rmod = lfor + rdiff * ftcount;
 
-                    ldbl = seqpower * lmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
-                    ldbr = seqpower * rmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
+                    float ldbl = seqpower * lmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
+                    float ldbr = seqpower * rmod * (1.0f - cosf(D_PI * ifperiod * ftcount));
 
                     efxoutl[i] = ldbl * efxoutl[i];
                     efxoutr[i] = ldbr * efxoutr[i];
@@ -702,7 +699,7 @@ Sequence::out(float * efxoutl, float * efxoutr)
                     lfol = fsequence[scount];
                 }
 
-                ftcount = (float) tcount;
+                float ftcount = (float) tcount;
 
                 lmod = 1.0f + (lfol + ldiff * ftcount)*.03f;
 
@@ -852,8 +849,8 @@ Sequence::out(float * efxoutl, float * efxoutr)
 
                 if (Pamplitude)
                 {
-                    ldbl = seqpower * ltarget;
-                    ldbr = seqpower * rtarget;
+                    float ldbl = seqpower * ltarget;
+                    float ldbr = seqpower * rtarget;
 
                     efxoutl[i] = ldbl * efxoutl[i];
                     efxoutr[i] = ldbr * efxoutr[i];
@@ -897,13 +894,13 @@ Sequence::out(float * efxoutl, float * efxoutr)
 
                 if (Pamplitude)
                 {
-                    ftcount = M_PI * ifperiod * (float) (tcount);
+                    float ftcount = M_PI * ifperiod * (float) (tcount);
 
                     lmod = f_sin(ftcount) * fsequence[scount];
                     rmod = f_sin(ftcount) * fsequence[dscount];
 
-                    ldbl = lmod * (1.0f - f_cos(2.0f * ftcount));
-                    ldbr = rmod * (1.0f - f_cos(2.0f * ftcount));
+                    float ldbl = lmod * (1.0f - f_cos(2.0f * ftcount));
+                    float ldbr = rmod * (1.0f - f_cos(2.0f * ftcount));
 
                     lmod = tempodiv * fsequence[scount];
                     rmod = tempodiv * fsequence[dscount];
