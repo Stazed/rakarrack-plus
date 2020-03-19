@@ -181,9 +181,13 @@ Compressor::changepar(int np, int value)
     makeuplin = dB2rap(makeup);
     
     if (a_out)
+    {
         outlevel = dB2rap((float) toutput) * makeuplin;
+    }
     else
+    {
         outlevel = dB2rap((float) toutput);
+    }
 }
 
 int
@@ -265,12 +269,8 @@ Compressor::setpreset(int dgui, int npreset)
 void
 Compressor::out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i;
-
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
-        float rdelta = 0.0f;
-        float ldelta = 0.0f;
         //Right Channel
 
         if (peak)
@@ -314,7 +314,7 @@ Compressor::out(float *efxoutl, float *efxoutr)
 
         if (stereo)
         {
-            rdelta = fabsf(rpeak);
+            float rdelta = fabsf(rpeak);
             
             if (rvolume < 0.9f)
             {
@@ -333,9 +333,13 @@ Compressor::out(float *efxoutl, float *efxoutr)
             }
 
             if (rdelta > rvolume)
+            {
                 rvolume = attr * rdelta + (1.0f - attr) * rvolume;
+            }
             else
+            {
                 rvolume = relr * rdelta + (1.0f - relr) * rvolume;
+            }
 
 
             rvolume_db = rap2dB(rvolume);
@@ -363,6 +367,7 @@ Compressor::out(float *efxoutl, float *efxoutr)
         }
 
         //Left Channel
+        float ldelta;   // initialize o.k.
         if (stereo)
         {
             ldelta = fabsf(lpeak);
@@ -389,9 +394,13 @@ Compressor::out(float *efxoutl, float *efxoutr)
         }
 
         if (ldelta > lvolume)
+        {
             lvolume = attl * ldelta + (1.0f - attl) * lvolume;
+        }
         else
+        {
             lvolume = rell * ldelta + (1.0f - rell) * lvolume;
+        }
 
         lvolume_db = rap2dB(lvolume);
 
