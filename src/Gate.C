@@ -232,27 +232,30 @@ Gate::setpreset(int npreset)
 void
 Gate::out(float *efxoutl, float *efxoutr)
 {
-    unsigned i;
-    float sum = 0.0f;
-
     lpfl->filterout(efxoutl, PERIOD);
     hpfl->filterout(efxoutl, PERIOD);
     lpfr->filterout(efxoutr, PERIOD);
     hpfr->filterout(efxoutr, PERIOD);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
-        sum = fabsf(efxoutl[i]) + fabsf(efxoutr[i]);
+        float sum = fabsf(efxoutl[i]) + fabsf(efxoutr[i]);
 
         if (sum > env)
+        {
             env = sum;
+        }
         else
+        {
             env = sum * ENV_TR + env * (1.0f - ENV_TR);
+        }
 
         if (state == CLOSED)
         {
             if (env >= t_level)
+            {
                 state = OPENING;
+            }
         }
         else if (state == OPENING)
         {
@@ -282,7 +285,9 @@ Gate::out(float *efxoutl, float *efxoutr)
             gate -= d_rate;
             
             if (env >= t_level)
+            {
                 state = OPENING;
+            }
             else if (gate <= 0.0)
             {
                 gate = 0.0;
