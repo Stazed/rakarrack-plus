@@ -282,16 +282,14 @@ MBDist::out(float * efxoutl, float * efxoutr)
     }
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
-    float l, r, lout, rout;
-    l = r = lout = rout = 0.0f;
-    
+
     for (unsigned int i = 0; i < PERIOD; i++)
     {
-        lout = efxoutl[i];
-        rout = efxoutr[i];
+        float lout = efxoutl[i];
+        float rout = efxoutr[i];
 
-        l = lout * (1.0f - lrcross) + rout * lrcross;
-        r = rout * (1.0f - lrcross) + lout * lrcross;
+        float l = lout * (1.0f - lrcross) + rout * lrcross;
+        float r = rout * (1.0f - lrcross) + lout * lrcross;
 
         efxoutl[i] = l * 2.0f * level * (1.0f - panning);
         efxoutr[i] = r * 2.0f * level * panning;

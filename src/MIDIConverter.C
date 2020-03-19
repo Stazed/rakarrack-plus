@@ -119,14 +119,13 @@ MIDIConverter::out(float * efxoutl, float * efxoutr)
 {
     float il_sum = 1e-12f;
     float ir_sum = 1e-12f;
-    float tmp = 0.0f;
     float Log_I_Gain = powf(Input_Gain * 2.0f, 4);
 
     for (unsigned i = 0; i < PERIOD; i++)
     {
         efxoutl[i] *= Log_I_Gain;
         efxoutr[i] *= Log_I_Gain;
-        tmp = fabsf(efxoutr[i]);
+        float tmp = fabsf(efxoutr[i]);
 
         if (tmp > ir_sum) ir_sum = tmp;
 

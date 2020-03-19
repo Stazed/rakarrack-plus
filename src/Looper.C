@@ -314,11 +314,9 @@ void Looper::settempo(int value)
 int Looper::set_len(int value)
 {
     int x = value / barlen;
-    int a1 = 0;
-    int a2 = 0;
 
-    a1 = abs(value - (x * barlen));
-    a2 = abs(value - ((x + 1) * barlen));
+    int a1 = abs(value - (x * barlen));
+    int a2 = abs(value - ((x + 1) * barlen));
 
     if (a2 < a1)
     {
