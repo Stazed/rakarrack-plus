@@ -67,7 +67,7 @@
                 lv2:index 5 ;
                 lv2:symbol "LEVEL" ;
                 lv2:name "Level" ;
-                lv2:default 40 ;
+                lv2:default 48 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -76,7 +76,7 @@
                 lv2:index 6 ;
                 lv2:symbol "HI" ;
                 lv2:name "Tone" ;
-                lv2:default 0 ;
+                lv2:default 32 ;
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
@@ -94,7 +94,7 @@
                 lv2:index 8 ;
                 lv2:symbol "LO" ;
                 lv2:name "Bias" ;
-                lv2:default 0 ;
+                lv2:default 32 ;
                 lv2:minimum -64 ;
                 lv2:maximum 64 ;
                 lv2:portProperty lv2:integer ;
@@ -103,7 +103,7 @@
                 lv2:index 9 ;
                 lv2:symbol "GAIN" ;
                 lv2:name "Gain" ;
-                lv2:default 64 ;
+                lv2:default 65 ;
                 lv2:minimum 0 ;
                 lv2:maximum 127 ;
                 lv2:portProperty lv2:integer ;
@@ -127,6 +127,11 @@
                 lv2:scalePoint [ rdfs:label "Fuzz"; rdf:value 7 ] ;
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_1>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+        rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:odie>
         a pset:Preset ;
@@ -169,6 +174,11 @@
         rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:gnasty>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+        rdfs:seeAlso <stomp_presets.ttl> .
+
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_2>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
         rdfs:seeAlso <stomp_presets.ttl> .

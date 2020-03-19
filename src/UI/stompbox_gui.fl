@@ -1,10 +1,10 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class StompboxGui {
   user_data 1 open
-  xywh {682 122 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {682 122 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -39,6 +39,10 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
+      label {Amp 1}
+      xywh {30 30 45 26} labelsize 10
+    }
+    MenuItem {} {
       label Odie
       xywh {20 20 45 26} labelsize 10
     }
@@ -71,8 +75,12 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
       xywh {50 50 36 21} labelsize 10
     }
     MenuItem {} {
-      label Gnasty selected
+      label Gnasty
       xywh {60 60 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Amp 2} selected
+      xywh {40 40 45 26} labelsize 10
     }
   }
   Fl_Value_Slider stomp_WD {

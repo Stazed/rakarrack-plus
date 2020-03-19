@@ -230,3 +230,54 @@
                 pset:value 7.0
         ] ;
 	.
+
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_1>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    	rdfs:label "Amp 1" ;
+        lv2:port [
+                lv2:symbol "LEVEL" ;
+                pset:value 48.0
+        ], [
+                lv2:symbol "HI" ;
+                pset:value 32.0
+        ], [
+                lv2:symbol "MID" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "LO" ;
+                pset:value 32.0
+        ], [
+                lv2:symbol "GAIN" ;
+                pset:value 65.0
+        ], [
+                lv2:symbol "MODE" ;
+                pset:value 0.0
+        ] ;
+	.
+
+
+<https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_2>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    	rdfs:label "Amp 2" ;
+        lv2:port [
+                lv2:symbol "LEVEL" ;
+                pset:value 40.0
+        ], [
+                lv2:symbol "HI" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "MID" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "LO" ;
+                pset:value 0.0
+        ], [
+                lv2:symbol "GAIN" ;
+                pset:value 64.0
+        ], [
+                lv2:symbol "MODE" ;
+                pset:value 0.0
+        ] ;
+	.

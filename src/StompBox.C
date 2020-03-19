@@ -934,9 +934,11 @@ void
 StompBox::setpreset(int npreset)
 {
     const int PRESET_SIZE = 6;
-    const int NUM_PRESETS = 9;
+    const int NUM_PRESETS = 11;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
+        // Amp 1
+        {48, 32, 0, 32, 65, 0},
         //Odie
         {80, 32, 0, 32, 10, 0},
         //Grunger
@@ -954,7 +956,9 @@ StompBox::setpreset(int npreset)
         //Fuzz
         {48, 0, 0, 0, 127, 7},
         //Gnasty
-        {48, 28, -13, 64, 127, 7}
+        {48, 28, -13, 64, 127, 7},
+        // Amp 2
+        {40, 0, 0, 0, 64, 0}
     };
 
     if (npreset > NUM_PRESETS - 1)
