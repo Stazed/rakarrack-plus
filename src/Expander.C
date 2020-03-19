@@ -233,29 +233,30 @@ Expander::setpreset(int npreset)
 void
 Expander::out(float *efxoutl, float *efxoutr)
 {
-    unsigned int i;
-    float delta = 0.0f;
-    float expenv = 0.0f;
-
     lpfl->filterout(efxoutl, PERIOD);
     hpfl->filterout(efxoutl, PERIOD);
     lpfr->filterout(efxoutr, PERIOD);
     hpfr->filterout(efxoutr, PERIOD);
 
-    for (i = 0; i < PERIOD; i++)
+    for (unsigned i = 0; i < PERIOD; i++)
     {
-        delta = 0.5f * (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) - env; //envelope follower from Compressor.C
+        float delta = 0.5f * (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) - env; //envelope follower from Compressor.C
         
         if (delta > 0.0)
+        {
             env += a_rate * delta;
+        }
         else
+        {
             env += d_rate * delta;
+        }
 
         //End envelope power detection
 
-        if (env > tlevel) env = tlevel;
+        if (env > tlevel)
+            env = tlevel;
         
-        expenv = sgain * (expf(env * sfactor * tfactor) - 1.0f); //Envelope waveshaping
+        float expenv = sgain * (expf(env * sfactor * tfactor) - 1.0f); //Envelope waveshaping
 
         gain = (1.0f - d_rate) * oldgain + d_rate * expenv;
         oldgain = gain; //smooth it out a little bit
