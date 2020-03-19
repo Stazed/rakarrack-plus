@@ -106,7 +106,9 @@ float Chorus::getdelay(float xlfo)
         result = (delay + xlfo * depth) * fSAMPLE_RATE;
     }
     else
+    {
         result = 0;
+    }
 
     //check if it is too big delay(caused bu errornous setdelay() and setdepth()
     if ((result + 0.5) >= maxdelay)
@@ -116,6 +118,7 @@ float Chorus::getdelay(float xlfo)
         printf("%f %d\n", result, maxdelay);
         result = (float) maxdelay - 1.0f;
     }
+
     return (result);
 }
 
@@ -125,8 +128,7 @@ float Chorus::getdelay(float xlfo)
 void
 Chorus::out(float * efxoutl, float * efxoutr)
 {
-    unsigned int i;
-    float tmp;
+
     dl1 = dl2;
     dr1 = dr2;
     lfo->effectlfoout(&lfol, &lfor);
@@ -137,14 +139,20 @@ Chorus::out(float * efxoutl, float * efxoutr)
 
         dl2 = delay + lfol * depth;
         dr2 = delay + lfor * depth;
-        if (Poutsub != 0) tmpsub = -1.0f;
-        else tmpsub = 1.0f;
+        if (Poutsub != 0)
+        {
+            tmpsub = -1.0f;
+        }
+        else
+        {
+            tmpsub = 1.0f;
+        }
 
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             //Left
             mdel = (dl1 * (float) (PERIOD - i) + dl2 * (float) i) / fPERIOD;
-            tmp = efxoutl[i] + oldl*fb;
+            float tmp = efxoutl[i] + oldl*fb;
             efxoutl[i] = tmpsub * ldelay->delay(tmp, mdel, 0, 1, 0);
             oldl = efxoutl[i];
 
@@ -159,7 +167,7 @@ Chorus::out(float * efxoutl, float * efxoutr)
     {
         dl2 = getdelay(lfol);
         dr2 = getdelay(lfor);
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             float inl = efxoutl[i];
             float inr = efxoutr[i];
@@ -207,17 +215,15 @@ Chorus::out(float * efxoutl, float * efxoutr)
         }
 
         if (Poutsub != 0)
-            for (i = 0; i < PERIOD; i++)
+        {
+            for (unsigned i = 0; i < PERIOD; i++)
             {
                 efxoutl[i] *= -1.0f;
                 efxoutr[i] *= -1.0f;
             }
+        }
 
-        //for (i = 0; i < period; i++) {
-        //efxoutl[i] *= panning;
-        //efxoutr[i] *= (1.0f - panning);
-        //};
-        for (i = 0; i < PERIOD; i++)
+        for (unsigned i = 0; i < PERIOD; i++)
         {
             efxoutl[i] *= (1.0f - panning);
             efxoutr[i] *= panning;
