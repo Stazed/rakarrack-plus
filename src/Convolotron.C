@@ -248,9 +248,6 @@ Convolotron::adjust(int DS, uint32_t period)
 void
 Convolotron::out(float * efxoutl, float * efxoutr)
 {
-    int i, j, xindex;
-    float l, lyn;
-
     if (DS_state != 0)
     {
         memcpy(templ, efxoutl, sizeof (float)*PERIOD);
@@ -258,19 +255,22 @@ Convolotron::out(float * efxoutl, float * efxoutr)
         U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
-    for (i = 0; i < nPERIOD; i++)
+    for (int i = 0; i < nPERIOD; i++)
     {
-        l = efxoutl[i] + efxoutr[i] + feedback;
+        float l = efxoutl[i] + efxoutr[i] + feedback;
         oldl = l * hidamp + oldl * (alpha_hidamp); //apply damping while I'm in the loop
         lxn[offset] = oldl;
 
         //Convolve left channel
-        lyn = 0;
-        xindex = offset;
+        float lyn = 0;
+        int xindex = offset;
 
-        for (j = 0; j < length; j++)
+        for (int j = 0; j < length; j++)
         {
-            if (--xindex < 0) xindex = maxx_size; //length of lxn is maxx_size.
+            if (--xindex < 0)
+            {
+                xindex = maxx_size; //length of lxn is maxx_size.
+            }
             
             lyn += buf[j] * lxn[xindex]; //this is all there is to convolution
         }
@@ -279,7 +279,8 @@ Convolotron::out(float * efxoutl, float * efxoutr)
         templ[i] = lyn * levpanl;
         tempr[i] = lyn * levpanr;
 
-        if (++offset > maxx_size) offset = 0;
+        if (++offset > maxx_size)
+            offset = 0;
     }
 
     if (DS_state != 0)
@@ -359,8 +360,14 @@ Convolotron::setfile(int value)
         return (0);
     }
 
-    if (sfinfo.frames > maxx_read) real_len = maxx_read;
-    else real_len = sfinfo.frames;
+    if (sfinfo.frames > maxx_read)
+    {
+        real_len = maxx_read;
+    }
+    else
+    {
+        real_len = sfinfo.frames;
+    }
     
     sf_seek(infile, 0, SEEK_SET);
     sf_readf_float(infile, buf, real_len);
@@ -372,7 +379,10 @@ Convolotron::setfile(int value)
         M_Resample->mono_out(buf, rbuf, real_len, sr_ratio, lrint((double) real_len * sr_ratio));
         real_len = lrintf((float) real_len * (float) sr_ratio);
     }
-    else memcpy(rbuf, buf, real_len * sizeof (float));
+    else
+    {
+        memcpy(rbuf, buf, real_len * sizeof (float));
+    }
 
     UpdateLength(); // this calls process_rbuf() as well
 
@@ -382,25 +392,26 @@ Convolotron::setfile(int value)
 void
 Convolotron::process_rbuf()
 {
-    int ii, j, N, N2;
-    float tailfader, alpha, a0, a1, a2, Nm1p, Nm1pp, IRpowa, IRpowb, ngain, maxamp;
+
     memset(buf, 0, sizeof (float)*real_len);
 
-    if (length > real_len) length = real_len;
+    if (length > real_len)
+        length = real_len;
     /*Blackman Window function
     wn = a0 - a1*cos(2*pi*n/(N-1)) + a2 * cos(4*PI*n/(N-1)
     a0 = (1 - alpha)/2; a1 = 0.5; a2 = alpha/2
      */
-    alpha = 0.16f;
-    a0 = 0.5f * (1.0f - alpha);
-    a1 = 0.5f;
-    a2 = 0.5 * alpha;
-    N = length;
-    N2 = length / 2;
-    Nm1p = D_PI / ((float) (N - 1));
-    Nm1pp = 4.0f * PI / ((float) (N - 1));
+    float alpha = 0.16f;
+    float a0 = 0.5f * (1.0f - alpha);
+    float a1 = 0.5f;
+    float a2 = 0.5 * alpha;
+    int N = length;
+    int N2 = length / 2;
+    float Nm1p = D_PI / ((float) (N - 1));
+    float Nm1pp = 4.0f * PI / ((float) (N - 1));
 
-    for (ii = 0; ii < length; ii++)
+    float tailfader;    // initialize o.k.
+    for (int ii = 0; ii < length; ii++)
     {
         if (ii < N2)
         {
@@ -416,9 +427,10 @@ Convolotron::process_rbuf()
 
     //memcpy(buf,rbuf,real_len*sizeof(float));
 
+    float IRpowa, IRpowb, maxamp;
     IRpowa = IRpowb = maxamp = 0.0f;
     //compute IR signal power
-    for (j = 0; j < length; j++)
+    for (int j = 0; j < length; j++)
     {
         IRpowa += fabsf(rbuf[j]);
         if (maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]); //find maximum level to normalize
@@ -430,11 +442,12 @@ Convolotron::process_rbuf()
     }
 
     //if(maxamp < 0.3f) maxamp = 0.3f;
-    ngain = IRpowa / IRpowb;
+    float ngain = IRpowa / IRpowb;
     
-    if (ngain > maxx_read) ngain = maxx_read;
+    if (ngain > maxx_read)
+        ngain = maxx_read;
     
-    for (j = 0; j < length; j++) buf[j] *= ngain;
+    for (int j = 0; j < length; j++) buf[j] *= ngain;
 
     if (Psafe)
     {
