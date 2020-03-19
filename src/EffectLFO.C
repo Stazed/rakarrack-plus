@@ -106,9 +106,13 @@ EffectLFO::updateparams(uint32_t period)
     lfornd = (float) Prandomness / 127.0f;
     
     if (lfornd < 0.0)
+    {
         lfornd = 0.0;
+    }
     else if (lfornd > 1.0)
+    {
         lfornd = 1.0;
+    }
 
     if (PLFOtype > 11) //this has to be updated if more lfo's are added
         PLFOtype = 0;
@@ -148,11 +152,17 @@ float EffectLFO::getlfoshape(float x)
     {
     case 1: //EffectLFO_TRIANGLE
         if ((x > 0.0) && (x < 0.25))
+        {
             out = 4.0f * x;
+        }
         else if ((x > 0.25) && (x < 0.75))
+        {
             out = 2.0f - 4.0f * x;
+        }
         else
+        {
             out = 4.0f * x - 4.0f;
+        }
         break;
     case 2: //EffectLFO_RAMP Ramp+
         out = 2.0f * x - 1.0f;
@@ -187,8 +197,12 @@ float EffectLFO::getlfoshape(float x)
         }
         if (lfotype == 7)
         {
-            if ((radius = (sqrtf(x0 * x0 + y0 * y0 + z0 * z0) * scale) - 0.25f) > 1.0f) radius = 1.0f;
-            if (radius < 0.0) radius = 0.0;
+            if ((radius = (sqrtf(x0 * x0 + y0 * y0 + z0 * z0) * scale) - 0.25f) > 1.0f)
+                radius = 1.0f;
+
+            if (radius < 0.0)
+                radius = 0.0;
+
             out = 2.0f * radius - 1.0f;
         }
 
@@ -200,12 +214,24 @@ float EffectLFO::getlfoshape(float x)
             lreg = RND1;
         }
 
-        if (xlreg < lreg) xlreg += maxrate;
-        else xlreg -= maxrate;
+        if (xlreg < lreg)
+        {
+            xlreg += maxrate;
+        }
+        else
+        {
+            xlreg -= maxrate;
+        }
         
-        if (xrreg < rreg) xrreg += maxrate;
-        else xrreg -= maxrate;
-        
+        if (xrreg < rreg)
+        {
+            xrreg += maxrate;
+        }
+        else
+        {
+            xrreg -= maxrate;
+        }
+
         oldlreg = xlreg * tca + oldlreg*tcb;
         oldrreg = xrreg * tca + oldrreg*tcb;
 
@@ -220,20 +246,36 @@ float EffectLFO::getlfoshape(float x)
         }
         break;
     case 10: //Tri-top
-        if (x <= 0.5f) out = -f_sin(x * D_PI);
+        if (x <= 0.5f)
+        {
+            out = -f_sin(x * D_PI);
+        }
         else if ((x > 0.5f) && (x < 0.75f))
+        {
             out = 6 * (x - 0.5);
+        }
         else
+        {
             out = 1.5 - 6.0f * (x - 0.75f);
+        }
+        
         out -= 0.25f;
         out *= 0.88888889f;
         break;
     case 11: //Tri-Bottom
-        if (x <= 0.5f) out = -f_sin(x * D_PI);
+        if (x <= 0.5f)
+        {
+            out = -f_sin(x * D_PI);
+        }
         else if ((x > 0.5f) && (x < 0.75f))
+        {
             out = 6 * (x - 0.5);
+        }
         else
+        {
             out = 1.5 - 6.0f * (x - 0.75f);
+        }
+
         out -= 0.25f;
         out *= -0.88888889f;
         break;
@@ -263,11 +305,21 @@ EffectLFO::effectlfoout(float * outl, float * outr)
         ampl2 = (1.0f - lfornd) + lfornd * (float) RND;
     }
     
-    if (lfotype == 8) out = scale * x0; //fractal parameter
+    if (lfotype == 8)
+    {
+        out = scale * x0; //fractal parameter
+    }
+
     *outl = (out + 1.0f) * 0.5f;
 
-    if (lfotype == 8) out = scale * y0; //fractal parameter
-    else out = getlfoshape(xr);
+    if (lfotype == 8)
+    {
+        out = scale * y0; //fractal parameter
+    }
+    else
+    {
+        out = getlfoshape(xr);
+    }
 
     //if ((lfotype == 0) || (lfotype == 1))
     out *= (ampr1 + xr * (ampr2 - ampr1));
