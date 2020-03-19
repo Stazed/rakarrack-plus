@@ -108,7 +108,9 @@ FormantFilter::FormantFilter(FilterParams * pars, float* interpbuf) :
 FormantFilter::~FormantFilter()
 {
     for (unsigned int i = 0; i < numformants; i++)
+    {
         delete (formant[i]);
+    }
     
     delete[] inbuffer;
     delete[] tmpbuf;
@@ -118,7 +120,9 @@ void
 FormantFilter::cleanup()
 {
     for (unsigned int i = 0; i < numformants; i++)
+    {
         formant[i]->cleanup();
+    }
 }
 
 void
@@ -127,10 +131,14 @@ FormantFilter::setpos(float input)
     int p1 = 0, p2 = 0;
 
     if (firsttime != 0)
+    {
         slowinput = input;
+    }
     else
+    {
         slowinput = slowinput * (1.0f - formantslowness) + input * formantslowness;
-
+    }
+    
     if ((fabsf(oldinput - input) < 0.001)
         && (fabsf(slowinput - input) < 0.001)
         && (fabsf(Qfactor - oldQfactor) < 0.001))
@@ -140,25 +148,35 @@ FormantFilter::setpos(float input)
         return;
     }
     else
+    {
         oldinput = input;
+    }
 
     float pos = fmodf(input * sequencestretch, 1.0f);
     
     if (pos < 0.0)
+    {
         pos += 1.0f;
+    }
 
     F2I(pos * (float) sequencesize, p2);
     p1 = p2 - 1;
     
     if (p1 < 0)
+    {
         p1 += sequencesize;
+    }
 
     pos = fmodf(pos * (float) sequencesize, 1.0f);
     
     if (pos < 0.0)
+    {
         pos = 0.0f;
+    }
     else if (pos > 1.0)
+    {
         pos = 1.0f;
+    }
     
     pos = (atanf((pos * 2.0f - 1.0f) * vowelclearness) / atanf(vowelclearness) +
             1.0f) * 0.5f;
@@ -236,33 +254,38 @@ FormantFilter::setfreq_and_q(float frequency, float q_)
 void
 FormantFilter::filterout(float * smp, uint32_t period)
 {
-    unsigned int i, j;
-    i = j = 0;
-    
-    for (i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     {
         inbuffer[i] = smp[i];
         smp[i] = 0.0;
     }
 
-    for (j = 0; j < numformants; j++)
+    for (unsigned j = 0; j < numformants; j++)
     {
-        for (i = 0; i < period; i++)
+        for (unsigned i = 0; i < period; i++)
+        {
             tmpbuf[i] = inbuffer[i] * outgain;
+        }
         
         formant[j]->filterout(tmpbuf, period);
 
         if (ABOVE_AMPLITUDE_THRESHOLD
             (oldformantamp[j], currentformants[j].amp))
-            for (i = 0; i < period; i++)
-                smp[i] +=
-                    tmpbuf[i] * INTERPOLATE_AMPLITUDE(oldformantamp[j],
+        {
+            for (unsigned i = 0; i < period; i++)
+            {
+                smp[i] +=  tmpbuf[i] * INTERPOLATE_AMPLITUDE(oldformantamp[j],
                                                       currentformants[j].amp, i,
                                                       period);
+            }
+        }
         else
-            for (i = 0; i < period; i++)
+        {
+            for (unsigned i = 0; i < period; i++)
+            {
                 smp[i] += tmpbuf[i] * currentformants[j].amp;
-        
+            }
+        }
         oldformantamp[j] = currentformants[j].amp;
     }
 }
