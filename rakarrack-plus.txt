@@ -237,11 +237,11 @@ FIXME Help .png
 StompBox
     Wet/Dry                     |                |     none      |                   |          none     |
     Add StompBox Fuzz preset Gnasty to presets - done
+    Added rakarrack default to LV2 and as preset - Amp 1 - done
+    Added LV2 default to rakarrack and as preset - Amp 2 - done
     Removed StompBox Fuzz
 ---Done---
 FIXME Help .png
-FIXME Add LV2 default to rakarrack.
-FIXME add rakarrack default to LV2
 
 Sustainer
     Wet/Dry                     |                |     none      |                   |          none     |
@@ -326,7 +326,7 @@ Presets that need fixes:
 
 Bank 3: Oxygenated - Parametric EQ - Mid F. (704 vs 800 min) - High F. (5896 vs 6000 min)
 
-
+Above Fixed...
 -----------------------------------------------------------------------------------------------------------
 
 Crash causes:   un-initialized varibles.
