@@ -155,10 +155,9 @@ Ring::out(float * efxoutl, float * efxoutr)
         }
     }
 
-    float  tmpfactor = 0.0f;
     for (unsigned int i = 0; i < PERIOD; i++)
     {
-        tmpfactor = depth * (scale * (sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset]) + idepth); //This is now mathematically equivalent, but less computation
+        float tmpfactor = depth * (scale * (sin * sin_tbl[offset] + tri * tri_tbl[offset] + saw * saw_tbl[offset] + squ * squ_tbl[offset]) + idepth); //This is now mathematically equivalent, but less computation
         efxoutl[i] *= tmpfactor;
 
         if (Pstereo != 0)
@@ -168,21 +167,26 @@ Ring::out(float * efxoutl, float * efxoutr)
         
         offset += Pfreq;
         
-        if (offset >= SAMPLE_RATE) offset -= SAMPLE_RATE;
+        if (offset >= SAMPLE_RATE)
+        {
+            offset -= SAMPLE_RATE;
+        }
     }
 
-    if (Pstereo == 0) memcpy(efxoutr, efxoutl, PERIOD * sizeof (float));
+    if (Pstereo == 0)
+    {
+        memcpy(efxoutr, efxoutl, PERIOD * sizeof (float));
+    }
 
     float level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
-    float lout, rout, l, r ; // initialize o.k.
     
     for (unsigned int i = 0; i < PERIOD; i++)
     {
-        lout = efxoutl[i];
-        rout = efxoutr[i];
+        float lout = efxoutl[i];
+        float rout = efxoutr[i];
 
-        l = lout * (1.0f - lrcross) + rout * lrcross;
-        r = rout * (1.0f - lrcross) + lout * lrcross;
+        float l = lout * (1.0f - lrcross) + rout * lrcross;
+        float r = rout * (1.0f - lrcross) + lout * lrcross;
 
         lout = l;
         rout = r;

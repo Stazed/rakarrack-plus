@@ -199,22 +199,20 @@ SVFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t pe
 void
 SVFilter::filterout(float * smp, uint32_t period)
 {
-    unsigned int i = 0;
-
     if (needsinterpolation != 0)
     {
-        for (i = 0; i < period; i++)
+        for (unsigned i = 0; i < period; i++)
         {
             ismp[i] = smp[i];
         }
         
-        for (i = 0; i < stages + 1; i++)
+        for (unsigned i = 0; i < stages + 1; i++)
         {
             singlefilterout(ismp, st[i], ipar, period);
         }
     }
 
-    for (i = 0; i < stages + 1; i++)
+    for (unsigned i = 0; i < stages + 1; i++)
     {
         singlefilterout(smp, st[i], par, period);
     }
@@ -223,7 +221,7 @@ SVFilter::filterout(float * smp, uint32_t period)
     {
         float fPERIOD = period;
         
-        for (i = 0; i < period; i++)
+        for (unsigned i = 0; i < period; i++)
         {
             float x = (float) i / fPERIOD;
             smp[i] = ismp[i] * (1.0f - x) + smp[i] * x;
@@ -232,7 +230,7 @@ SVFilter::filterout(float * smp, uint32_t period)
         needsinterpolation = 0;
     }
 
-    for (i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     {
         smp[i] *= outgain;
     }

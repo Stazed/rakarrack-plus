@@ -98,9 +98,6 @@ RyanWah::~RyanWah()
 void
 RyanWah::out(float * efxoutl, float * efxoutr)
 {
-    float lmod, rmod; lmod = rmod = 0.0f;
-    float rms = 0.0f;
-    
     float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
     
@@ -127,15 +124,15 @@ RyanWah::out(float * efxoutl, float * efxoutr)
 
         if (Pamode)
         {
-            rms = ms1 * ampsns + oldfbias2;
+            float rms = ms1 * ampsns + oldfbias2;
             
             if (rms < 0.0f)
             {
                 rms = 0.0f;
             }
             
-            lmod = (minfreq + lfol + rms) * maxfreq;
-            rmod = (minfreq + lfor + rms) * maxfreq;
+            float lmod = (minfreq + lfol + rms) * maxfreq;
+            float rmod = (minfreq + lfor + rms) * maxfreq;
             
             if (variq)
             {
@@ -153,7 +150,7 @@ RyanWah::out(float * efxoutl, float * efxoutr)
 
     if (!Pamode)
     {
-        rms = ms1 * ampsns + oldfbias2;
+        float rms = ms1 * ampsns + oldfbias2;
 
         if (rms > 0.0f)
         { //apply some smooth limiting
@@ -169,8 +166,8 @@ RyanWah::out(float * efxoutl, float * efxoutr)
             q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
         }
 
-        lmod = (lfol + rms);
-        rmod = (lfor + rms);
+        float lmod = (lfol + rms);
+        float rmod = (lfor + rms);
         
         if (lmod > 1.0f) lmod = 1.0f;
         if (lmod < 0.0f) lmod = 0.0f;
