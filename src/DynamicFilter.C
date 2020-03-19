@@ -72,22 +72,20 @@ DynamicFilter::~DynamicFilter()
 void
 DynamicFilter::out(float * efxoutl, float * efxoutr)
 {
-    uint32_t i;
-    float lfol, lfor;
-
     if (filterpars->changed)
     {
         filterpars->changed = false;
         cleanup();
     }
 
+    float lfol, lfor;   // initialize o.k.
     lfo->effectlfoout(&lfol, &lfor);
     lfol *= depth * 5.0f;
     lfor *= depth * 5.0f;
     float freq = filterpars->getfreq();
     float q = filterpars->getq();
 
-    for (i = 0; i < PERIOD; i++)
+    for (uint32_t i = 0; i < PERIOD; i++)
     {
         efxoutl[i] = efxoutl[i];
         efxoutr[i] = efxoutr[i];
@@ -116,7 +114,7 @@ DynamicFilter::out(float * efxoutl, float * efxoutr)
     //efxoutl[i] *= panning;
     //efxoutr[i] *= (1.0f - panning);
     //};
-    for (i = 0; i < PERIOD; i++)
+    for (uint32_t i = 0; i < PERIOD; i++)
     {
         efxoutl[i] *= (1.0f - panning);
         efxoutr[i] *= panning;
