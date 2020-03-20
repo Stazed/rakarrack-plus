@@ -2619,9 +2619,8 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
             plug->echoverse->changepar(i,val);
         }
     }
-    
-    i++;//4 angle is  offset
-    val = (int)*plug->param_p[i]+64;
+
+    val = (int)*plug->param_p[i]+64;    // 4 angle is offset
     if(plug->echoverse->getpar(i) != val)
     {
         plug->echoverse->changepar(i,val);

@@ -329,8 +329,6 @@ Bank 3: Oxygenated - Parametric EQ - Mid F. (704 vs 800 min) - High F. (5896 vs 
 Above Fixed...
 -----------------------------------------------------------------------------------------------------------
 
-Crash causes:   un-initialized varibles.
+Crash causes:   un-initialized variables.
                 invalid buffer (arrays) reads.
                 rakarrack  parameter changes that delete lfos, etc, used by out when it is running in separate thread.
-
-Infinity with zero volume ramps up CPU usage... This is due to debugging...
