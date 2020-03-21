@@ -5104,6 +5104,63 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
         plug->noteID->lv2_update_params(nframes);
     }
     
+    // Process incoming MIDI messages 
+    if(plug->harm->getpar(10))
+    {
+        LV2_ATOM_SEQUENCE_FOREACH(plug->atom_in_p , ev)
+        {
+            if (ev->body.type ==  plug->URIDs.midi_MidiEvent)
+            {
+                const uint8_t* const msg = (const uint8_t*)(ev + 1);
+                switch (lv2_midi_message_type(msg))
+                {
+                    case LV2_MIDI_MSG_NOTE_ON:
+                    {
+                        int cmdnote = msg[1];
+                        int cmdvelo = msg[2];
+                        printf("Got Note ON %d: Velocity %d\n",  cmdnote, cmdvelo);
+                        
+                        for (int i = 0; i < POLY; i++)
+                        {
+                            if(plug->chordID->note_active[i] == 0)
+                            {
+                                plug->chordID->note_active[i] = 1;
+                                plug->chordID->rnote[i] = cmdnote;
+                                plug->chordID->gate[i] = 1;
+                                plug->chordID->MiraChord();
+                                plug->chordID->cc = 1; // mark chord has changed
+                                break;
+                            }
+                        }
+                        
+                    break;
+                    }
+                    case LV2_MIDI_MSG_NOTE_OFF:
+                    {
+                        int cmdnote = msg[1];
+                        int cmdvelo = msg[2];
+                        printf("Got Note OFF %d: Velocity %d\n",  cmdnote, cmdvelo);
+
+                        for (int i = 0; i < POLY; i++)
+                        {
+                            
+                            if ((plug->chordID->note_active[i]) && (plug->chordID->rnote[i] == cmdnote))
+                            {
+                                plug->chordID->note_active[i] = 0;
+                                plug->chordID->gate[i] = 1;
+                                plug->chordID->cc = 1;  // mark chord has changed
+                                break;
+                            }
+                        }
+
+                    break;
+                    }
+                    default: break;
+                }
+            }
+        }
+    }
+
     // we are good to run now
     //check and set changed parameters
     i = 0;
@@ -5166,7 +5223,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->harm->getpar(i) != val)
     {
         plug->harm->changepar(i,val);
-        if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
+       // if(!val) plug->harm->changepar(3,plug->harm->getpar(3));  // FIXME Check this
     }
 
 /*
@@ -5179,7 +5236,7 @@ see process.C ln 1507
     {
         if(plug->harm->mira)
         {
-            if(plug->harm->PSELECT)
+            if(plug->harm->PSELECT || plug->harm->PMIDI)
             {
                 plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
                 if((plug->noteID->reconota != -1) && (plug->noteID->reconota != plug->noteID->last))
@@ -5195,7 +5252,7 @@ see process.C ln 1507
         }
     }
     
-    if(plug->harm->PSELECT)
+    if(plug->harm->PSELECT || plug->harm->PMIDI)
     {
         if (plug->chordID->cc) 
         {
