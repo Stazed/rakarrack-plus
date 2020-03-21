@@ -5077,6 +5077,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     
     int i;
     int val;
+    int bypass = 0;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -5092,6 +5093,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
         plug->harm->cleanup();
         plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
         plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
+        bypass = 1;
         return;
     }
  
@@ -5118,8 +5120,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
                     {
                         int cmdnote = msg[1];
                         int cmdvelo = msg[2];
-                        printf("Got Note ON %d: Velocity %d\n",  cmdnote, cmdvelo);
-                        
+
                         for (int i = 0; i < POLY; i++)
                         {
                             if(plug->chordID->note_active[i] == 0)
@@ -5139,11 +5140,9 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
                     {
                         int cmdnote = msg[1];
                         int cmdvelo = msg[2];
-                        printf("Got Note OFF %d: Velocity %d\n",  cmdnote, cmdvelo);
 
                         for (int i = 0; i < POLY; i++)
                         {
-                            
                             if ((plug->chordID->note_active[i]) && (plug->chordID->rnote[i] == cmdnote))
                             {
                                 plug->chordID->note_active[i] = 0;
@@ -5257,8 +5256,13 @@ see process.C ln 1507
         if (plug->chordID->cc) 
         {
             plug->chordID->cc = 0;
-            plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
-            plug->chordID->fundi = plug->harm->getpar(6);//set root note
+            
+            if(plug->harm->PSELECT || bypass)
+            {
+                bypass = 0;
+                plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
+                plug->chordID->fundi = plug->harm->getpar(6);//set root note
+            }
             plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
             plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
         }
