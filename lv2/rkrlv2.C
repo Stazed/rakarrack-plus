@@ -765,7 +765,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
-//////// harmonizer /////////
+//////// harmonizer - no MIDI /////////
 LV2_Handle init_harmnomidlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
@@ -5030,6 +5030,195 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
 }
 
 
+//////// harmonizer  /////////
+LV2_Handle init_harmonizerlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
+{
+    RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    plug->nparams = 11;
+    plug->effectindex = IHARM;
+    plug->prev_bypass = 1;
+
+    getFeatures(plug,host_features);
+
+    //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
+    plug->harm = new Harmonizer(4,5,4,2, sample_freq, plug->period_max);
+    plug->noteID = new Recognize(.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
+    plug->chordID = new RecChord();
+    plug->noteID->reconota = -1;
+
+    // set in :void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) and used by schmittFloat();
+    plug->noteID->setlpf(5500); // default user option in rakarrack
+    plug->noteID->sethpf(80); // default user option in rakarrack
+
+    plug->comp = new Compressor(sample_freq, plug->period_max);
+    plug->comp->setpreset(0,4); //Final Limiter
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+
+/*
+    plug->comp->changepar(1,-24);//threshold
+    plug->comp->changepar(2,4);  //ratio
+    plug->comp->changepar(3,-10);//output
+    plug->comp->changepar(4,20); //attack
+    plug->comp->changepar(5,50); //release
+    plug->comp->changepar(6,1);  //a_out
+    plug->comp->changepar(7,30); //knee
+*/
+    return plug;
+}
+
+void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
+{
+    if( nframes == 0)
+        return;
+    
+    int i;
+    int val;
+
+    RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        plug->harm->cleanup();
+        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
+        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->harm->lv2_update_params(nframes);
+        plug->comp->lv2_update_params(nframes);
+        plug->noteID->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //check and set changed parameters
+    i = 0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->harm->getpar(i) != val)
+    {
+        plug->harm->changepar(i,val);
+    }
+    for(i++; i<3; i++) //1-2
+    {
+        val = (int)*plug->param_p[i] + 64;
+        if(plug->harm->getpar(i) != val)
+        {
+            plug->harm->changepar(i,val);
+        }
+    }
+    val = (int)*plug->param_p[i] + 12;// 3 interval
+    if(plug->harm->getpar(i) != val)
+    {
+        plug->harm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i];//4 filter freq
+    if(plug->harm->getpar(i) != val)
+    {
+        plug->harm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i];//5 select mode
+    if(plug->harm->getpar(i) != val)
+    {
+        plug->harm->changepar(i,val);
+        plug->chordID->cleanup();
+        if(!val) plug->harm->changepar(3,plug->harm->getpar(3)); // Reset interval
+
+        plug->chordID->cc = 1;//mark chord has changed to update parameters after cleanup
+    }
+    for(i++; i<8; i++) //6-7
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->harm->getpar(i) != val)
+        {
+            plug->harm->changepar(i,val);
+        //    plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
+        //    plug->chordID->fundi = plug->harm->getpar(6);//set root note
+            plug->chordID->cc = 1;//mark chord has changed
+        }
+    }
+    for(; i<10; i++) // 8-9
+    {
+        val = (int)*plug->param_p[i] + 64;
+        if(plug->harm->getpar(i) != val)
+        {
+            plug->harm->changepar(i,val);
+        }
+    }
+
+    // midi mode
+    val = (int)*plug->param_p[i];// 10 midi mode
+    if(plug->harm->getpar(i) != val)
+    {
+        plug->harm->changepar(i,val);
+        if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
+    }
+
+/*
+see Chord() in rkr.fl
+harmonizer, need recChord and recNote.
+see process.C ln 1507
+*/
+    
+    if(have_signal(plug->output_l_p, plug->output_r_p, nframes))
+    {
+        if(plug->harm->mira)
+        {
+            if(plug->harm->PSELECT)
+            {
+                plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
+                if((plug->noteID->reconota != -1) && (plug->noteID->reconota != plug->noteID->last))
+                {
+                    if(plug->noteID->afreq > 0.0)
+                    {
+                        plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
+                        plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+                        plug->noteID->last = plug->noteID->reconota;
+                    }
+                }
+            }
+        }
+    }
+    
+    if(plug->harm->PSELECT)
+    {
+        if (plug->chordID->cc) 
+        {
+            plug->chordID->cc = 0;
+            plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
+            plug->chordID->fundi = plug->harm->getpar(6);//set root note
+            plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
+            plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+        }
+        plug->comp->out(plug->output_l_p,plug->output_r_p);
+    }
+    
+    //now run
+    plug->harm->out(plug->output_l_p,plug->output_r_p);
+
+    //and for whatever reason we have to do the wet/dry mix ourselves
+    wetdry_mix(plug, plug->harm->outvolume, nframes);
+
+    xfade_check(plug,nframes);
+    return;
+}
+
+
 /////////////////////////////////
 //       END OF FX
 /////////////////////////////////
@@ -5193,6 +5382,12 @@ void cleanup_rkrlv2(LV2_Handle handle)
         break;
     case IOVERDRIVE:
         delete plug->overdrive;
+        break;
+    case IHARM:
+        delete plug->harm;
+        delete plug->noteID;
+        delete plug->chordID;
+        delete plug->comp;
         break;
 
     }
@@ -5941,6 +6136,18 @@ static const LV2_Descriptor overdrivelv2_descriptor=
     0//extension
 };
 
+static const LV2_Descriptor harmonizerlv2_descriptor=
+{
+    HARMLV2_URI,
+    init_harmonizerlv2,
+    connect_rkrlv2_ports_w_atom,
+    0,//activate
+    run_harmonizerlv2,
+    0,//deactivate
+    cleanup_rkrlv2,
+    0//extension
+};
+
 LV2_SYMBOL_EXPORT
 const LV2_Descriptor* lv2_descriptor(uint32_t index)
 {
@@ -6040,7 +6247,8 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &flangerlv2_descriptor ;
     case IOVERDRIVE:
         return &overdrivelv2_descriptor ;
-
+    case IHARM:
+        return &harmonizerlv2_descriptor ;
     default:
         return 0;
     }

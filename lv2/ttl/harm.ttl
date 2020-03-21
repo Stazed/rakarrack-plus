@@ -4,6 +4,7 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pset: <http://lv2plug.in/ns/ext/presets#> .
+@prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
 @prefix lv2midi: <http://lv2plug.in/ns/ext/midi#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -66,7 +67,7 @@
                 lv2:symbol "NOTIFY" ;
                 lv2:name "Notify" ;
                 atom:bufferType atom:Sequence ;
-                atom:supports patch:Message ;
+#                atom:supports patch:Message ;
                 lv2:designation lv2:control ;
         ] ;
 
@@ -248,16 +249,16 @@
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:plain>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
         rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:octavador>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
         rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:3mdown>
         a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
         rdfs:seeAlso <harm_no_midi_presets.ttl> .
 

@@ -247,3 +247,8 @@
         a lv2:Plugin, lv2:DistortionPlugin ;
         lv2:binary <rakarrack-plus-lv2.so> ;
         rdfs:seeAlso <overdrive.ttl> .
+# 47
+<https://github.com/Stazed/rakarrack-plus#har>
+        a lv2:Plugin, lv2:PitchPlugin ;
+        lv2:binary <rakarrack-plus-lv2.so> ;
+        rdfs:seeAlso <harm.ttl> .
