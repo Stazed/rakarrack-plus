@@ -5119,7 +5119,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
                     case LV2_MIDI_MSG_NOTE_ON:
                     {
                         int cmdnote = msg[1];
-                        int cmdvelo = msg[2];
+                        //int cmdvelo = msg[2]; // we don't need to check for zero velocity, LV2 will send as NOTE_OFF
 
                         for (int i = 0; i < POLY; i++)
                         {
@@ -5139,7 +5139,6 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
                     case LV2_MIDI_MSG_NOTE_OFF:
                     {
                         int cmdnote = msg[1];
-                        int cmdvelo = msg[2];
 
                         for (int i = 0; i < POLY; i++)
                         {
@@ -5222,7 +5221,8 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->harm->getpar(i) != val)
     {
         plug->harm->changepar(i,val);
-       // if(!val) plug->harm->changepar(3,plug->harm->getpar(3));  // FIXME Check this
+        plug->chordID->cleanup();
+        plug->chordID->cc = 1;  //mark chord has changed to update parameters after cleanup
     }
 
 /*

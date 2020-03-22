@@ -253,21 +253,21 @@ Harmonizer::out(float *efxoutl, float *efxoutr)
 void
 Harmonizer::setvolume(int value)
 {
-    this->Pvolume = value;
+    Pvolume = value;
     outvolume = (float) Pvolume / 127.0f;
 }
 
 void
 Harmonizer::setpanning(int value)
 {
-    this->Ppan = value;
+    Ppan = value;
     panning = (float) Ppan / 127.0f;
 }
 
 void
 Harmonizer::setgain(int value)
 {
-    this->Pgain = value;
+    Pgain = value;
     gain = (float) Pgain / 127.0f;
     gain *= 2.0;
 }
@@ -275,7 +275,7 @@ Harmonizer::setgain(int value)
 void
 Harmonizer::setinterval(int value)
 {
-    this->Pinterval = value;
+    Pinterval = value;
     interval = (float) Pinterval - 12.0f;
     PS->ratio = powf(2.0f, interval / 12.0f);
     
@@ -296,7 +296,7 @@ Harmonizer::fsetfreq(int value)
 void
 Harmonizer::fsetgain(int value)
 {
-    this->fPgain = value;
+    fPgain = value;
     float tmp = 30.0f * ((float) value - 64.0f) / 64.0f;
     pl->setgain(tmp);
 }
@@ -304,7 +304,7 @@ Harmonizer::fsetgain(int value)
 void
 Harmonizer::fsetq(int value)
 {
-    this->fPq = value;
+    fPq = value;
     float tmp = powf(30.0f, ((float) value - 64.0f) / 64.0f);
     pl->setq(tmp);
 }
@@ -312,7 +312,7 @@ Harmonizer::fsetq(int value)
 void
 Harmonizer::setMIDI(int value)
 {
-    this->PMIDI = value;
+    PMIDI = value;
 }
 
 void
