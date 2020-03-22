@@ -116,6 +116,7 @@
 #define FLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Flange"
 #define OVERDRIVELV2_URI "https://github.com/Stazed/rakarrack-plus#Overdrive"
 #define HARMLV2_URI "https://github.com/Stazed/rakarrack-plus#har"
+#define STEROHARMLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm"
 
 
 #define RVBFILE_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile"
@@ -205,7 +206,8 @@ enum RKRLV2_effects_
         ICONVO,
         IFLANGE,
         IOVERDRIVE,
-        IHARM
+        IHARM,
+        ISTEREOHARM
 };
 
 typedef struct _RKRLV2

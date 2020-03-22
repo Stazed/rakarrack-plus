@@ -3789,7 +3789,7 @@ static const void* echotron_extension_data(const char* uri)
 }
 
 
-//////// stereo harmonizer /////////
+//////// stereo harmonizer no MIDI /////////
 LV2_Handle init_sharmnomidlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
@@ -5288,6 +5288,213 @@ see process.C ln 1507
     return;
 }
 
+//////// stereo harmonizer /////////
+LV2_Handle init_stereoharmlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
+{
+    RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    plug->nparams = 12;
+    plug->effectindex = ISTEREOHARM;
+    plug->prev_bypass = 1;
+
+    getFeatures(plug,host_features);
+
+    //magic numbers: shift qual 4, downsample 5, up qual 4, down qual 2,
+    plug->sharm = new StereoHarm(4,5,4,2,sample_freq, plug->period_max);
+    plug->noteID = new Recognize(.6,440.0, sample_freq, plug->period_max);//.6 is default trigger value
+    plug->chordID = new RecChord();
+    plug->noteID->reconota = -1;
+    // set in :void RKRGUI::cb_RC_Opti_i(Fl_Choice* o, void*) and used by schmittFloat();
+    plug->noteID->setlpf(5500); // default user option in rakarrack
+    plug->noteID->sethpf(80); // default user option in rakarrack
+
+    plug->comp = new Compressor(sample_freq, plug->period_max);
+    plug->comp->setpreset(0,4); //Final Limiter
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+
+/*    plug->comp->changepar(1,-24);//threshold
+    plug->comp->changepar(2,4);  //ratio
+    plug->comp->changepar(3,-10);//output
+    plug->comp->changepar(4,20); //attack
+    plug->comp->changepar(5,50); //release
+    plug->comp->changepar(6,1);  //a_out
+    plug->comp->changepar(7,30); //knee*/
+
+    return plug;
+}
+
+void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
+{
+    if( nframes == 0)
+        return;
+    
+    int i;
+    int val;
+
+    RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
+    
+    //inline copy input to output
+    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        plug->sharm->cleanup();
+        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
+        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
+        plug->chordID->cc = 1;//mark chord has changed
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->sharm->lv2_update_params(nframes);
+        plug->comp->lv2_update_params(nframes);
+        plug->noteID->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    //check and set changed parameters
+    i = 0;
+    val = Dry_Wet((int)*plug->param_p[i]);
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i] + 64;// 1 gain l
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i] + 12;// 2 interval l
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i];// 3 chroma l
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i] + 64;// 4 gain r
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i] + 12;// 5 interval r
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i];//6 set chrome 2
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+    i++;
+    val = (int)*plug->param_p[i];//7 select mode
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+        plug->chordID->cleanup();
+        if(!val){
+            plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
+            plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
+        }
+        
+        plug->chordID->cc = 1;//mark chord has changed
+    }
+    for(i++; i<10; i++) //8-9
+    {
+        val = (int)*plug->param_p[i];
+        if(plug->sharm->getpar(i) != val)
+        {
+            plug->sharm->changepar(i,val);
+//            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
+//            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+            plug->chordID->cc = 1;//mark chord has changed
+        }
+    }
+//  midi mode
+    val = (int)*plug->param_p[i];// 10 midi mode
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+        //if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
+    }
+    i++;
+    val = (int)*plug->param_p[i];// 11 lr cr.
+    if(plug->sharm->getpar(i) != val)
+    {
+        plug->sharm->changepar(i,val);
+    }
+
+    /*
+    see Chord() in rkr.fl
+    harmonizer, need recChord and recNote.
+    see process.C ln 1507
+    */
+
+    if(have_signal(plug->output_l_p, plug->output_r_p, nframes))
+    {
+        if(plug->sharm->mira)
+        {
+            if(plug->sharm->PSELECT)
+            {
+                plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
+                if((plug->noteID->reconota != -1) && (plug->noteID->reconota != plug->noteID->last))
+                {
+                    if(plug->noteID->afreq > 0.0)
+                    {
+                        plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
+                        plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
+                        plug->sharm->r_ratiol = plug->chordID->r__ratio[1];//pass the found ratio
+                        plug->sharm->r_ratior = plug->chordID->r__ratio[2];//pass the found ratio
+                        plug->noteID->last = plug->noteID->reconota;
+                    }
+                }
+            }
+        }
+    }
+
+    if(plug->sharm->PSELECT)
+    {
+        if (plug->chordID->cc) 
+        {   
+            plug->chordID->cc = 0;
+            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
+            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+            plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
+            plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
+            plug->sharm->r_ratiol = plug->chordID->r__ratio[1];
+            plug->sharm->r_ratior = plug->chordID->r__ratio[2];
+        }
+        plug->comp->out(plug->output_l_p,plug->output_r_p);
+    }
+
+    //now run
+    plug->sharm->out(plug->output_l_p,plug->output_r_p);
+
+    //and for whatever reason we have to do the wet/dry mix ourselves
+    wetdry_mix(plug, plug->sharm->outvolume, nframes);
+
+    xfade_check(plug,nframes);
+    return;
+}
 
 /////////////////////////////////
 //       END OF FX
@@ -5459,7 +5666,12 @@ void cleanup_rkrlv2(LV2_Handle handle)
         delete plug->chordID;
         delete plug->comp;
         break;
-
+    case ISTEREOHARM:
+    	delete plug->sharm;
+        delete plug->noteID;
+        delete plug->chordID;
+        delete plug->comp;
+    	break;
     }
     free(plug);
 }
@@ -6218,6 +6430,18 @@ static const LV2_Descriptor harmonizerlv2_descriptor=
     0//extension
 };
 
+static const LV2_Descriptor stereoharmlv2_descriptor=
+{
+    STEROHARMLV2_URI,
+    init_stereoharmlv2,
+    connect_rkrlv2_ports_w_atom,
+    0,//activate
+    run_stereoharmlv2,
+    0,//deactivate
+    cleanup_rkrlv2,
+    0//extension
+};
+
 LV2_SYMBOL_EXPORT
 const LV2_Descriptor* lv2_descriptor(uint32_t index)
 {
@@ -6320,6 +6544,8 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
     case IHARM:
         return &harmonizerlv2_descriptor ;
     default:
+    case ISTEREOHARM:
+    	return &stereoharmlv2_descriptor ;
         return 0;
     }
 }
