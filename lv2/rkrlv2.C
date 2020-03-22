@@ -5152,7 +5152,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
                             if ((plug->chordID->note_active[i]) && (plug->chordID->rnote[i] == cmdnote))
                             {
                                 plug->chordID->note_active[i] = 0;
-                                plug->chordID->gate[i] = 1;
+                                plug->chordID->gate[i] = 0;
                                 plug->chordID->cc = 1;  // mark chord has changed
                                 break;
                             }
@@ -5333,6 +5333,7 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     
     int i;
     int val;
+    int bypass = 0;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -5349,6 +5350,7 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
         plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
         plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         plug->chordID->cc = 1;//mark chord has changed
+        bypass = 1; // For MIDI mode upon return, need to reset default chord type and note
         return;
     }
  
@@ -5360,7 +5362,69 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
         plug->comp->lv2_update_params(nframes);
         plug->noteID->lv2_update_params(nframes);
     }
-    
+
+    // Process incoming MIDI messages 
+    if(plug->sharm->getpar(10))
+    {
+        // Get the capacity
+        const uint32_t out_capacity = plug->atom_out_p->atom.size;
+        
+        // Write an empty Sequence header to the output
+        lv2_atom_sequence_clear(plug->atom_out_p);
+        plug->atom_out_p->atom.type = plug->atom_in_p->atom.type;
+        
+        LV2_ATOM_SEQUENCE_FOREACH(plug->atom_in_p , ev)
+        {
+            if (ev->body.type ==  plug->URIDs.midi_MidiEvent)
+            {
+                const uint8_t* const msg = (const uint8_t*)(ev + 1);
+                switch (lv2_midi_message_type(msg))
+                {
+                    case LV2_MIDI_MSG_NOTE_ON:
+                    {
+                        int cmdnote = msg[1];
+                        //int cmdvelo = msg[2]; // we don't need to check for zero velocity, LV2 will send as NOTE_OFF
+
+                        for (int i = 0; i < POLY; i++)
+                        {
+                            if(plug->chordID->note_active[i] == 0)
+                            {
+                                plug->chordID->note_active[i] = 1;
+                                plug->chordID->rnote[i] = cmdnote;
+                                plug->chordID->gate[i] = 1;
+                                plug->chordID->MiraChord();
+                                plug->chordID->cc = 1; // mark chord has changed
+                                break;
+                            }
+                        }
+                        
+                    break;
+                    }
+                    case LV2_MIDI_MSG_NOTE_OFF:
+                    {
+                        int cmdnote = msg[1];
+
+                        for (int i = 0; i < POLY; i++)
+                        {
+                            if ((plug->chordID->note_active[i]) && (plug->chordID->rnote[i] == cmdnote))
+                            {
+                                plug->chordID->note_active[i] = 0;
+                                plug->chordID->gate[i] = 0;
+                                plug->chordID->cc = 1;  // mark chord has changed
+                                break;
+                            }
+                        }
+
+                    break;
+                    }
+                    default: break;
+                }
+                // Pass through all MIDI events directly to output
+                lv2_atom_sequence_append_event( plug->atom_out_p, out_capacity, ev);
+            }
+        }
+    }
+
     // we are good to run now
     //check and set changed parameters
     i = 0;
@@ -5411,7 +5475,8 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->sharm->changepar(i,val);
         plug->chordID->cleanup();
-        if(!val){
+        if(!val)
+        {
             plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
             plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         }
@@ -5429,12 +5494,13 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
             plug->chordID->cc = 1;//mark chord has changed
         }
     }
-//  midi mode
+    //  midi mode
     val = (int)*plug->param_p[i];// 10 midi mode
     if(plug->sharm->getpar(i) != val)
     {
         plug->sharm->changepar(i,val);
-        //if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
+        plug->chordID->cleanup();
+        plug->chordID->cc = 1;  //mark chord has changed to update parameters after cleanup
     }
     i++;
     val = (int)*plug->param_p[i];// 11 lr cr.
@@ -5453,7 +5519,7 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     {
         if(plug->sharm->mira)
         {
-            if(plug->sharm->PSELECT)
+            if(plug->sharm->PSELECT || plug->sharm->PMIDI)
             {
                 plug->noteID->schmittFloat(plug->output_l_p,plug->output_r_p);
                 if((plug->noteID->reconota != -1) && (plug->noteID->reconota != plug->noteID->last))
@@ -5471,13 +5537,18 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
         }
     }
 
-    if(plug->sharm->PSELECT)
+    if(plug->sharm->PSELECT || plug->sharm->PMIDI)
     {
         if (plug->chordID->cc) 
         {   
             plug->chordID->cc = 0;
-            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
-            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+            
+            if(plug->sharm->PSELECT || bypass)
+            {
+                bypass = 0;
+                plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
+                plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+            }
             plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
             plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
             plug->sharm->r_ratiol = plug->chordID->r__ratio[1];
