@@ -60,15 +60,14 @@
                 lv2:name "MIDI In" ;
                 atom:bufferType atom:Sequence ;
                 atom:supports lv2midi:MidiEvent ;
-        ] ;
-        lv2:port [
+        ] ; 
+                lv2:port [
                 a lv2:OutputPort, atom:AtomPort ;
                 lv2:index 5 ;
-                lv2:symbol "NOTIFY" ;
-                lv2:name "Notify" ;
+                lv2:symbol "MIDI_OUT" ;
+                lv2:name "MIDI Out" ;
                 atom:bufferType atom:Sequence ;
-#                atom:supports patch:Message ;
-                lv2:designation lv2:control ;
+                atom:supports lv2midi:MidiEvent ;
         ] ;
 
         lv2:port [

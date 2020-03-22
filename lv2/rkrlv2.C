@@ -5109,6 +5109,13 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     // Process incoming MIDI messages 
     if(plug->harm->getpar(10))
     {
+        // Get the capacity
+        const uint32_t out_capacity = plug->atom_out_p->atom.size;
+        
+        // Write an empty Sequence header to the output
+        lv2_atom_sequence_clear(plug->atom_out_p);
+        plug->atom_out_p->atom.type = plug->atom_in_p->atom.type;
+        
         LV2_ATOM_SEQUENCE_FOREACH(plug->atom_in_p , ev)
         {
             if (ev->body.type ==  plug->URIDs.midi_MidiEvent)
@@ -5155,6 +5162,8 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
                     }
                     default: break;
                 }
+                // Pass through all MIDI events directly to output
+                lv2_atom_sequence_append_event( plug->atom_out_p, out_capacity, ev);
             }
         }
     }

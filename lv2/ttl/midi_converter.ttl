@@ -59,7 +59,7 @@
                 lv2:symbol "MIDI_IN" ;
                 lv2:name "MIDI In" ;
                 atom:bufferType atom:Sequence ;
-                atom:supports lv2midi:MidiEvent ;
+                lv2:designation lv2:control ;
         ] ;        
         lv2:port [
                 a lv2:OutputPort, atom:AtomPort ;
