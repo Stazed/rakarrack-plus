@@ -244,7 +244,7 @@ StereoHarm::out(float *efxoutl, float *efxoutr)
 void
 StereoHarm::setvolume(int value)
 {
-    this->Pvolume = value;
+    Pvolume = value;
     outvolume = (float) Pvolume / 127.0f;
 }
 
@@ -333,7 +333,7 @@ StereoHarm::setchrome(int chan, int value)
 void
 StereoHarm::setMIDI(int value)
 {
-    this->PMIDI = value;
+    PMIDI = value;
 }
 
 void
@@ -499,7 +499,6 @@ StereoHarm::changepar(int npar, int value)
         break;
     case 7:
         PSELECT = value;
-        ;
         break;
     case 8:
         Pnote = value;
