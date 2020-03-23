@@ -332,3 +332,39 @@ Above Fixed...
 Crash causes:   un-initialized variables.
                 invalid buffer (arrays) reads.
                 rakarrack  parameter changes that delete lfos, etc, used by out when it is running in separate thread.
+
+-----------------------------------------------------------------------------------------------------------
+
+LV2 hard coded sample/quality settings:
+
+Distortion/Overdrive/DistBand/Derelict/StompBox:
+    wave_res    = 2
+    wave_upq    = 4
+    wave_dnq    = 2
+
+Vocoder:
+    bands       = 32
+    DS          = 5
+    uq          = 4
+    dq          = 2
+
+Reverbtron:
+    DS          = 5
+    uq          = 4
+    dq          = 2
+
+Sequence/Shifter:
+    DS          = 4
+    uq          = 5
+    dq          = 4
+
+Harmonizer/StereoHarmonizer
+    Quality     = 4
+    DS          = 5
+    uq          = 4
+    dq          = 2
+
+Convolotron:
+    DS          = 6
+    uq          = 4
+    dq          = 2
