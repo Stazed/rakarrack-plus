@@ -273,7 +273,7 @@ def remap(efxindex, paramindex):
          (13, 8) : (9, 'Extra Stereo Enable', 'EXTRA_ON', 0) ,
          (13, 9) : (-1,) ,
 
-         (14, -1) : ('RakarrackPlus Harmonizer (no midi)', 'https://github.com/Stazed/rakarrack-plus#har_no_mid') ,
+         (14, -1) : ('RakarrackPlus Harmonizer', 'https://github.com/Stazed/rakarrack-plus#har') ,
          (14, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (14, 1) : (2, 'Pan', 'PAN', -64) ,
          (14, 2) : (3, 'Gain', 'GAIN', -64) ,
@@ -284,8 +284,7 @@ def remap(efxindex, paramindex):
          (14, 7) : (8, 'Chord', 'CHORD', 0) ,
          (14, 8) : (9, 'Filter Gain', 'FGAIN', -64) ,
          (14, 9) : (10, 'Filter Q', 'FQ', -64) ,
-         #(14, 10) : (11, 'MIDI Mode', 'MIDI', 0) ,
-         (14, 10) : (0, 'SKIP', 'SKIP', 0) ,
+         (14, 10) : (11, 'MIDI Mode', 'MIDI', 0) ,
          (14, 11) : (-1,) ,
 
          (15, -1) : ('RakarrackPlus Musical Delay', 'https://github.com/Stazed/rakarrack-plus#delm') ,
@@ -684,7 +683,7 @@ def remap(efxindex, paramindex):
          (41, 15) : (14, 'Activate Filters', 'AF', 0) ,
          (41, 16) : (-1,) ,
 
-         (42, -1) : ('RakarrackPlus StereoHarmonizer (no midi)', 'https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid') ,
+         (42, -1) : ('RakarrackPlus StereoHarmonizer', 'https://github.com/Stazed/rakarrack-plus#StereoHarm') ,
          (42, 0) : (1, 'Dry/Wet', 'DRYWET', 0) ,
          (42, 1) : (2, 'Left Gain', 'GAINL', -64) ,
          (42, 2) : (3, 'Left Interval', 'INTL', -12) ,
@@ -695,8 +694,7 @@ def remap(efxindex, paramindex):
          (42, 7) : (8, 'Select Chord Mode', 'SELECT', 0) ,
          (42, 8) : (9, 'Note', 'NOTE', 0) ,
          (42, 9) : (10, 'Chord', 'CHORD', 0) ,
-         #(42, 10) : (11, 'MIDI Mode', 'MIDI', 0) ,
-         (42, 10) : (0, 'SKIP', 'SKIP', 0) ,
+         (42, 10) : (11, 'MIDI Mode', 'MIDI', 0) ,
          (42, 11) : (11, 'Left/Right Crossover', 'LRC', 0) ,
          (42, 12) : (-1,) ,
 
