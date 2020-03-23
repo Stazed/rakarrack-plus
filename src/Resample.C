@@ -26,7 +26,13 @@
 #include <math.h>
 #include "Resample.h"
 
-Resample::Resample(int type)
+Resample::Resample(int type) :
+    srcinfor(),
+    srcinfol(),
+    errorl(),
+    errorr(),
+    statel(NULL),
+    stater(NULL)
 {
     statel = src_new(type, 1, &errorl);
     stater = src_new(type, 1, &errorr);
@@ -34,8 +40,15 @@ Resample::Resample(int type)
 
 Resample::~Resample()
 {
-    src_delete(statel);
-    src_delete(stater);
+    if(statel != NULL)
+    {
+        src_delete(statel);
+    }
+    
+    if(stater != NULL)
+    {
+        src_delete(stater);
+    }
 }
 
 void
