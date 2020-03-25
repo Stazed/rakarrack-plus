@@ -263,7 +263,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_freq1->align(Fl_Align(FL_ALIGN_LEFT));
   har_freq1->when(FL_WHEN_CHANGED);
 } // SliderW* har_freq1
-{ har_gan1 = new SliderW(53, 100, 100, 10, "Gain");
+{ har_gan1 = new SliderW(53, 100, 100, 10, "F. Gain");
+  har_gan1->tooltip("Filter Gain");
   har_gan1->type(5);
   har_gan1->box(FL_FLAT_BOX);
   har_gan1->color((Fl_Color)178);

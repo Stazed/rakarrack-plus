@@ -111,9 +111,9 @@ rkr->efx_Har->changepar(4,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider har_gan1 {
-    label Gain
-    callback {rkr->efx_Har->changepar(8,(int)(o->value()+64));}
-    xywh {53 100 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    label {F. Gain}
+    callback {rkr->efx_Har->changepar(8,(int)(o->value()+64));} selected
+    tooltip {Filter Gain} xywh {53 100 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider har_q1 {
@@ -127,7 +127,7 @@ rkr->efx_Har->changepar(4,(int)o->value());}
     user_data 2
     callback {rkr->efx_Har->changepar(10,(int)o->value());
 rkr->RC_Harm->cleanup();
-if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));} selected
+if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));}
     xywh {9 124 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
   }
   Fl_Check_Button har_SELECT {

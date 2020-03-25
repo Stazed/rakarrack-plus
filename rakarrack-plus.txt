@@ -27,7 +27,7 @@ FIXME Help .png
 
 Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |
-
+Missing Gain MC
 Chorus
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  WIDTH
@@ -133,17 +133,20 @@ Missing Delay MC
 
 Harmonizer
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
-FIXME Add MIDI to LV2
+    Add MIDI to LV2 - Done - MIDI version added
 FIXME Help .png
+Missing Interval, Gain, Filter Q, F. Gain MC
 
 Infinity
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Add LV2 default - plain as preset - done
 ---Done---
 FIXME Help .png
+Missing Band Gain 1-8, Stages MC
 
 Looper
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |  -------------    |      ----------   |
+Missing Tempo MC
 
 MusicalDelay
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -152,6 +155,7 @@ MusicalDelay
     Gain 2                      |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
 ---Done---
 FIXME Help .png
+Missing Tempo, Damp MC
 
 MuTroMojo   (RyanWah)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -159,10 +163,12 @@ MuTroMojo   (RyanWah)
     Added LV2 default - wah fever as preset - done
 ---Done---
 FIXME Help .png
+Missing Random, Stereo Df., S. Freq MC
 
 NoiseGate
     Wet/Dry                     |                |    none       |                   |       none        |
 ---Done---
+Missing - No midi control
 
 Opticaltrem
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -182,12 +188,14 @@ Pan
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL - LFO L/R Delay
 ---Done---
 FIXME Help .png
+Missing E. Stereo MC
 
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
     Mid Frequency (Mid F.)      |   800 to 8000  |  800 to 8000  |    800 to 8000    |   80 to 8000      |  MFREQ
 ---Done---
 FIXME Help .png
+FIXME High F. MC range
 
 Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -199,11 +207,13 @@ Reverb
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
 ---Done---
 FIXME Help .png
+Missing Time, I.Del, Del.E/R, R. Size, Damping
 
 Reverbtron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
 ---Done---
 FIXME Help .png
+Missing Diffusion, LPF MC
 
 Ring
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
@@ -229,6 +239,7 @@ Shifter
     Added LV2 default as preset - Shifter 6 - done
 ---Done---
 FIXME Help .png
+FIXME Decay, Threshold ranges
 
 Shuffle
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
@@ -240,7 +251,7 @@ StereoHarm
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |  LRC - Left/Right Crossover
     Gain L                      |   -64 to 64    |  -64 to 64    |    -64 to 64      |      -64 to 63    |  GAINL -  Left Gain
 ---Done---
-FIXME Add MIDI to LV2
+    Added MIDI LV2 version
 FIXME Help .png
 
 StompBox
@@ -262,6 +273,7 @@ Synthfilter
     Added LV2 Default Lazy Wahble to presets - done
 ---Done---
 FIXME Help .png
+Missing Random MC
 
 Valve
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -286,6 +298,7 @@ Vibe
 ---Done---
 FIXME Help .png
 FIXME - inline vs original ???
+FIXME Pan MC reversed
 
 Vocoder
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
