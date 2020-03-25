@@ -1569,11 +1569,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 190:
-        efx_Exciter->changepar(11, 20 + (int) ((float) value * 157.32284f));
+        efx_Exciter->changepar(11, ret_HPF(value));
         break;
 
     case 191:
-        efx_Exciter->changepar(12, 20 + (int) ((float) value * 204.566929f));
+        efx_Exciter->changepar(12, ret_LPF(value));
         break;
 
     case 192:
@@ -1689,19 +1689,19 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 220:
-        efx_Expander->changepar(3, 10 + (int) ((float) value * 15.669291f));
+        efx_Expander->changepar(3, 1 + (int) ((float) value * 39.362205f));
         break;
 
     case 221:
-        efx_Expander->changepar(4, 10 + (int) ((float) value * 3.8582677f));
+        efx_Expander->changepar(4, 10 + (int) ((float) value * 7.7952756f));
         break;
 
     case 222:
-        efx_Expander->changepar(2, 1 + (int) ((float) value * .3858f));
+        efx_Expander->changepar(2, 1 + (int) ((float) value * .385827f));
         break;
 
     case 223:
-        efx_Expander->changepar(1, (int) ((float) value*-.629921f));
+        efx_Expander->changepar(1, (int) ((float) value*-.62992126f));
         break;
 
     case 224:
@@ -2451,12 +2451,12 @@ RKR::ret_Tempo(int value)
 int
 RKR::ret_LPF(int value)
 {
-    return ( 20 + (int) ((float) value * 204.566f));
+    return ( 20 + (int) ((float) value * 204.566929f));
 }
 
 int
 RKR::ret_HPF(int value)
 {
-    return ( 20 + (int) ((float) value * 157.322f));
+    return ( 20 + (int) ((float) value * 157.32284f));
 }
 
