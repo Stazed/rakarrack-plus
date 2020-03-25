@@ -1569,11 +1569,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 190:
-        efx_Exciter->changepar(11, 20 + (int) ((float) value * 157.3228f));
+        efx_Exciter->changepar(11, 20 + (int) ((float) value * 157.32284f));
         break;
 
     case 191:
-        efx_Exciter->changepar(12, 20 + (int) ((float) value * 157.3228f));
+        efx_Exciter->changepar(12, 20 + (int) ((float) value * 204.566929f));
         break;
 
     case 192:

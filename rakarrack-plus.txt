@@ -116,8 +116,8 @@ EQ
 
 Exciter
     Wet/Dry                     |                |    none       |                   |       none        |
+    Fixed LPF MC range.
 ---Done---
-FIXME LPF MC range
 
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
