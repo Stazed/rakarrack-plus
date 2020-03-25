@@ -1453,15 +1453,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 161:
-        efx_DFlange->changepar(3, 20 + (int) ((float) value * 3.7795f));
+        efx_DFlange->changepar(3, 20 + (int) ((float) value * 19.52756f));
         break;
 
     case 162:
-        efx_DFlange->changepar(4, (int) ((float) value * 23.622f));
+        efx_DFlange->changepar(4, (int) ((float) value * 47.2441f));
         break;
 
     case 163:
-        efx_DFlange->changepar(5, (int) ((float) value * 0.7874f));
+        efx_DFlange->changepar(5, (int) ((float) value * 0.787402f));
         break;
 
     case 164:
@@ -1469,11 +1469,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 165:
-        efx_DFlange->changepar(7, 20 + (int) ((float) value * 157.32f));
+        efx_DFlange->changepar(7, 20 + (int) ((float) value * 157.322835f));
         break;
 
     case 166:
-        efx_DFlange->changepar(10, 1 + (int) ((float) value * 4.716f));
+        efx_DFlange->changepar(10, 1 + (int) ((float) value * 4.71654f));
         break;
 
     case 167:

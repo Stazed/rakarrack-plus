@@ -68,10 +68,10 @@ DistBand (MBDist)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Pan                         |   -64 to 63    |  -64 to 64    |  -64 to 63        |      -64 to 63    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |  LRCr
+    Fixed Cross 1 & 2, L/M/H Gains for MC
 ---Done---
 FIXME Help .png
 FIXME check slight pop on Valve waveshape type.
-FIXME Cross 2 MC range
 
 Distortion
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -83,9 +83,9 @@ FIXME Help .png
 Dual Flange
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Added LV2 Preset Dual Flange 2 - Done
+    Fixed Depth and Width MC ranges.
 ---Done---
 FIXME Help .png
-FIXME Depth & Width MC ranges
 
 Echo
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
