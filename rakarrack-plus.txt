@@ -8,12 +8,14 @@ AlienWah
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCR - Left/Right Crossover 
 ---Done---
 FIXME Help .png
+Missing Delay MC
 
 Analog Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Added slider for Randomness
 ---Done---
 FIXME Help .png
+Missing Random MC
 
 Arpie
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -33,6 +35,7 @@ Chorus
     panning??
 ---Done---
 FIXME Help .png
+Missing Delay MC
 
 Coil Crafter
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -67,6 +70,7 @@ DistBand (MBDist)
 ---Done---
 FIXME Help .png
 FIXME check slight pop on Valve waveshape type.
+FIXME Cross 2 MC range
 
 Distortion
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -80,6 +84,7 @@ Dual Flange
     Added LV2 Preset Dual Flange 2 - Done
 ---Done---
 FIXME Help .png
+FIXME Depth & Width MC ranges
 
 Echo
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -87,6 +92,7 @@ Echo
     L/R Delay Offset (LRdl)     |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
 ---Done---
 FIXME Help .png
+Missing MC : Delay, L/R Delay, Damp.
 
 Echotron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
@@ -110,17 +116,20 @@ EQ
 Exciter
     Wet/Dry                     |                |    none       |                   |       none        |
 ---Done---
+FIXME LPF MC range
 
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
     Added LV2 default Another as preset - done
 ---Done---
+FIXME A. Time R. Time MC ranges
 
 Flanger
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       --------    |  
 ---Done---
 FIXME Help .png
+Missing Delay MC
 
 Harmonizer
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
