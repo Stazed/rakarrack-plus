@@ -2157,7 +2157,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 332:
-        efx_Shifter->changepar(4, -70 + (int) ((float) value * .70866142f));
+        efx_Shifter->changepar(5, -70 + (int) ((float) value * .70866142f));
         break;
 
     case 333:
