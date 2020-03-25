@@ -1405,7 +1405,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 149:
-        efx_EQ2->changepar(11, 20 + (int) ((float) value * 7.7165f));
+        efx_EQ2->changepar(11, 20 + (int) ((float) value * 7.716536f));
         break;
 
     case 150:
@@ -1417,7 +1417,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 152:
-        efx_EQ2->changepar(16, 800 + (int) ((float) value * 56.692f));
+        efx_EQ2->changepar(16, 800 + (int) ((float) value * 56.6929134f));
         break;
 
     case 153:
@@ -1429,7 +1429,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 155:
-        efx_EQ2->changepar(21, 20000 + (int) ((float) value * 157.48f));
+        efx_EQ2->changepar(21, 6000 + (int) ((float) value * 157.480315f));
         break;
 
     case 156:

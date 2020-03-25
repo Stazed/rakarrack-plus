@@ -122,8 +122,8 @@ Exciter
 Expander
     Wet/Dry                     |                |    none       |                   |       none        |
     Added LV2 default Another as preset - done
+    Fixed A. Time & R. Time MC ranges.
 ---Done---
-FIXME A. Time R. Time MC ranges
 
 Flanger
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
@@ -194,9 +194,9 @@ Missing E. Stereo MC
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
     Mid Frequency (Mid F.)      |   800 to 8000  |  800 to 8000  |    800 to 8000    |   80 to 8000      |  MFREQ
+    Fixed High F. MC range.
 ---Done---
 FIXME Help .png
-FIXME High F. MC range
 
 Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
