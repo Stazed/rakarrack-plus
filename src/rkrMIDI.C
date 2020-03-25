@@ -1633,23 +1633,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 206:
-        efx_MBDist->changepar(8, (int) ((float) value * .7874f));
+        efx_MBDist->changepar(8, (int) ((float) value * .787402f));
         break;
 
     case 207:
-        efx_MBDist->changepar(9, (int) ((float) value * .7874f));
+        efx_MBDist->changepar(9, (int) ((float) value * .787402f));
         break;
 
     case 208:
-        efx_MBDist->changepar(10, (int) ((float) value * .7874f));
+        efx_MBDist->changepar(10, (int) ((float) value * .787402f));
         break;
 
     case 209:
-        efx_MBDist->changepar(12, 40 + (int) ((float) value * 7.559f));
+        efx_MBDist->changepar(12, 20 + (int) ((float) value * 7.71654f));
         break;
 
     case 210:
-        efx_MBDist->changepar(13, 1000 + (int) ((float) value * 55.1181f));
+        efx_MBDist->changepar(13, 800 + (int) ((float) value * 88.18898f));
         break;
 
     case 211:

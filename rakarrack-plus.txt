@@ -28,6 +28,7 @@ FIXME Help .png
 Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |
 Missing Gain MC
+
 Chorus
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  WIDTH
