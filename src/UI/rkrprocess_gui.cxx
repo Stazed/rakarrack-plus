@@ -4133,7 +4133,17 @@ void RKRGUI::ActMIDI()
                 update_looper();
                 break;
             case 279:
-                LOOPER->looper_clear->value(rkr->efx_Looper->getpar(4));
+                /* Setting the looper_clear button after MIDI control really does not work. 
+                   The button for the gui is just press and release, i.e. not a toggle button.
+                   Since the clear flag Pclear is set and remains set until another button such
+                   as play or record gets pushed, the Pclear variable returned by getpar(4) is
+                   going to show pressed (value = 1) and set the button as pressed here. And it
+                   will remain in that state until restart. If pressed manually, it just does
+                   unpress and release back to press.  Would be nice to show the press and release
+                   with MIDI control, but it would probably have to be a timer issue and additional
+                   complications for very little value. MIDI control does work, but we should not show
+                   it on the gui button here with this method */
+            //    LOOPER->looper_clear->value(rkr->efx_Looper->getpar(4));
                 update_looper();
                 break;
             case 280:

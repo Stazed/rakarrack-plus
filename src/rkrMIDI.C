@@ -893,7 +893,6 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 void
 RKR::process_midi_controller_events(int parameter, int value)
 {
-    int i;
     // for real parameter changes, flag need for a GUI update
     if (parameter > 0)
     {
@@ -1323,8 +1322,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 14:
-        Input_Gain =
-                (float) value / 128.0f;
+        Input_Gain = (float) value / 128.0f;
         calculavol(1);
         break;
 
@@ -1333,7 +1331,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 131:
-        for (i = 0; i < 10; i++) efx_EQ1->changepar(i * 5 + 13, value);
+        for (int i = 0; i < 10; i++) efx_EQ1->changepar(i * 5 + 13, value);
         break;
 
     case 132:
@@ -1889,65 +1887,75 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 270:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(5, i);
         break;
-
+    }
     case 271:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(9, i);
         break;
-
+    }
     case 272:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(1, i);
         break;
-
+    }
     case 273:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(2, i);
         break;
-
+    }
     case 274:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(3, i);
         break;
-
+    }
     case 275:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(11, i);
         break;
-
+    }
     case 276:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(12, i);
         break;
-
+    }
     case 277:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(7, i);
         break;
-
+    }
     case 278:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(8, i);
         break;
-
+    }
     case 279:
+    {
+        int i = 0;
         if (value) i = 1;
-        else i = 0;
         efx_Looper->changepar(4, i);
         break;
-
+    }
     case 280:
         efx_Convol->changepar(0, Dry_Wet(value));
         break;
