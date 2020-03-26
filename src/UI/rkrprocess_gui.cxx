@@ -2651,7 +2651,7 @@ void RKRGUI::MiraClientes()
                 name = strtok(NULL, "\"");
                 masque = strtok(NULL, ")");
 
-                if ((masque[2] == 'R') && (strstr(name, "rakarrack MC OUT") == 0))
+                if ((masque[2] == 'R') && (strstr(name, "rakarrack-plus MC OUT") == 0))
                 {
                     Settings->BMidiIn->add(name);
                 }
@@ -2677,7 +2677,7 @@ void RKRGUI::MiraClientes()
 
         while (ports[i] != NULL)
         {
-            if ((strstr(ports[i], "rakarrack:in_1") == 0) && (strstr(ports[i], "rakarrack:in_2") == 0))
+            if ((strstr(ports[i], "rakarrack-plus:in_1") == 0) && (strstr(ports[i], "rakarrack-plus:in_2") == 0))
             {
                 Settings->JackCo->add(ports[i]);
             }
@@ -2703,7 +2703,7 @@ void RKRGUI::MiraClientes()
 
         while (iports[i] != NULL)
         {
-            if ((strstr(iports[i], "rakarrack:out_1") == 0) && (strstr(iports[i], "rakarrack:out_2") == 0))
+            if ((strstr(iports[i], "rakarrack-plus:out_1") == 0) && (strstr(iports[i], "rakarrack-plus:out_2") == 0))
             {
                 Settings->JackIn->add(iports[i]);
             }
@@ -5668,7 +5668,7 @@ void RKRGUI::Show_Next_Time()
 
     Fl_Widget *w = fl_message_icon();
     w->parent()->copy_label(rkr->jackcliname);
-    fl_message("This setting will be changed the next time you run rakarrack");
+    fl_message("This setting will be changed the next time you run rakarrack-plus");
 }
 
 void RKRGUI::update_looper()
