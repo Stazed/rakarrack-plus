@@ -1379,23 +1379,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 143:
-        efx_Compressor->changepar(5, 10 + (int) ((float) value * 3.858f));
+        efx_Compressor->changepar(5, 10 + (int) ((float) value * 3.85826772f));
         break;
 
     case 144:
-        efx_Compressor->changepar(2, 2 + (int) ((float) value * .314f));
+        efx_Compressor->changepar(2, 2 + (int) ((float) value * 0.314960629921f));
         break;
 
     case 145:
-        efx_Compressor->changepar(7, (int) ((float) value * .787f));
+        efx_Compressor->changepar(7, (int) ((float) value * 0.7874016f));
         break;
 
     case 146:
-        efx_Compressor->changepar(1, -60 + (int) ((float) value * .448f));
+        efx_Compressor->changepar(1, -60 + (int) ((float) value * 0.448818898f));
         break;
 
     case 147:
-        efx_Compressor->changepar(3, -40 + (int) ((float) value * .314f));
+        efx_Compressor->changepar(3, -40 + (int) ((float) value * 0.31496063f));
         break;
 
     case 148:
