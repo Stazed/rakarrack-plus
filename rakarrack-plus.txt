@@ -5,17 +5,17 @@ Effect Name                     | Rakarrack-plus | Rakarrack     | RakarrackPlus
 AlienWah
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL - rkrlv2
-    Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCR - Left/Right Crossover 
+    Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCR - Left/Right Crossover
+    Added Delay to MIDI control
 ---Done---
 FIXME Help .png
-Missing Delay MC
 
 Analog Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Added slider for Randomness
+    Added Random to MIDI control
 ---Done---
 FIXME Help .png
-Missing Random MC
 
 Arpie
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -27,7 +27,7 @@ FIXME Help .png
 
 Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |
-Missing Gain MC
+    Added Gain to MIDI control
 
 Chorus
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 379;
+    NumParams = 380;
 
     {
         static const char *los_params[] = {
@@ -442,6 +442,8 @@ RKR::RKR()
             "Arpie Damp", "219", "24",
 
             "Balance", "12", "50",
+            
+            "Cabinet Gain","405 ","12",
 
             "Chorus Depth", "23", "5",
             "Chorus Fb", "79", "5",

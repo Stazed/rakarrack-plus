@@ -4648,6 +4648,10 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_rnd->value(rkr->efx_APhaser->getpar(3));
                 APHASER->aphaser_rnd->redraw();
                 break;
+            case 405:
+                CABINET->Cabinet_output->value(rkr->efx_Cabinet->getpar(0)-64);
+                CABINET->Cabinet_output->redraw();
+                break;
         }
     }
 

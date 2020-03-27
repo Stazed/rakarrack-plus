@@ -2463,6 +2463,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 404:
         efx_APhaser->changepar(3, value);
         break;
+
+    case 405:
+        efx_Cabinet->changepar(0, value);
+        break;
     }
 }
 
