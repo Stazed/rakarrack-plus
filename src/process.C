@@ -431,15 +431,16 @@ RKR::RKR()
             "Analog Phaser Distortion", "118", "18",
             "Analog Phaser Random", "404", "18",
             "Analog Phaser Stereo Df.", "124", "18",
-            
+
+            "Arpie Dry/Wet", "212", "24",
             "Arpie Arpe's", "213", "24",
-            "Arpie Damp", "219", "24",
-            "Arpie Fb", "218", "24",
-            "Arpie LR_Cr", "217", "24",
-            "Arpie LRdl", "216", "24",
             "Arpie Pan", "214", "24",
             "Arpie Tempo", "215", "24",
-            "Arpie WD", "212", "24",
+            "Arpie L/R Delay", "216", "24",
+            "Arpie L/R Cross", "217", "24",
+            "Arpie Feedback", "218", "24",
+            "Arpie Damp", "219", "24",
+
             "AutoPan/Extra Stereo Tempo", "77", "13",
             "AutoPan/Extra Stereo Pan", "67", "13",
             "AutoPan/Extra Stereo Rnd", "110", "13",
