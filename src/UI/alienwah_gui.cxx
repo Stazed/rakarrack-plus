@@ -137,7 +137,12 @@ void AlienwahGui::cb_Alienwah_dpth(SliderW* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_delay_i(SliderW* o, void*) {
-  rkr->Alienwah_Bypass=0;
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(403);
+ return;
+} 
+rkr->Alienwah_Bypass=0;
 rkr->efx_Alienwah->changepar(8,(int)o->value());
 if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;
 }
@@ -328,7 +333,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_delay->labelfont(0);
   Alienwah_delay->labelsize(10);
   Alienwah_delay->labelcolor(FL_BACKGROUND2_COLOR);
-  Alienwah_delay->maximum(127);
+  Alienwah_delay->maximum(100);
   Alienwah_delay->step(1);
   Alienwah_delay->textcolor(FL_BACKGROUND2_COLOR);
   Alienwah_delay->callback((Fl_Callback*)cb_Alienwah_delay);

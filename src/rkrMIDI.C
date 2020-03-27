@@ -2447,6 +2447,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 402:
         efx_Infinity->changepar(14, -16 + (int) ((float) value * .2518685f));
         break;
+
+    case 403:
+        efx_Alienwah->changepar(8, (int) ((float) value * 0.787401575f));
+        break;
     }
 }
 

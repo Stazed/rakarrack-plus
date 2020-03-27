@@ -4640,6 +4640,10 @@ void RKRGUI::ActMIDI()
                 INFINIT->infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
                 INFINIT->infinity_subdiv->redraw();
                 break;
+            case 403:
+                ALIENWAH->Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
+                ALIENWAH->Alienwah_delay->redraw();
+                break;
         }
     }
 
