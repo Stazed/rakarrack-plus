@@ -401,7 +401,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_Hthres->align(Fl_Align(FL_ALIGN_LEFT));
   cband_Hthres->when(FL_WHEN_CHANGED);
 } // SliderW* cband_Hthres
-{ cband_cross1 = new SliderW(56, 147, 100, 10, "Cross1");
+{ cband_cross1 = new SliderW(56, 147, 100, 10, "Cross 1");
   cband_cross1->type(5);
   cband_cross1->box(FL_FLAT_BOX);
   cband_cross1->color((Fl_Color)178);
@@ -418,7 +418,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_cross1->align(Fl_Align(FL_ALIGN_LEFT));
   cband_cross1->when(FL_WHEN_CHANGED);
 } // SliderW* cband_cross1
-{ cband_cross2 = new SliderW(56, 159, 100, 10, "Cross2");
+{ cband_cross2 = new SliderW(56, 159, 100, 10, "Cross 2");
   cband_cross2->type(5);
   cband_cross2->box(FL_FLAT_BOX);
   cband_cross2->color((Fl_Color)178);
@@ -435,7 +435,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_cross2->align(Fl_Align(FL_ALIGN_LEFT));
   cband_cross2->when(FL_WHEN_CHANGED);
 } // SliderW* cband_cross2
-{ cband_cross3 = new SliderW(56, 171, 100, 10, "Cross3");
+{ cband_cross3 = new SliderW(56, 171, 100, 10, "Cross 3");
   cband_cross3->type(5);
   cband_cross3->box(FL_FLAT_BOX);
   cband_cross3->color((Fl_Color)178);

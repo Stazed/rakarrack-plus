@@ -32,7 +32,10 @@ const float C_MC_40_RANGE       = 0.31496063f;      /* (42 - 2) / 127 = 0.314960
 const float C_MC_100_RANGE      = 0.7874016f;       /* 100 / 127 = 0.787401574803 */
 const float C_MC_57_RANGE       = 0.448818898f;     /* (-60 - -3) / 127 = 0.448818897638 */
 const float C_MC_128_RANGE      = 1.007874015748f;  /* 128 / 127 = 1.007874015748 */
-
+const float C_MC_94_RANGE       = 0.74015748f;      /* (-70 + 24) / 127 = 0.740157480315 */
+const float C_MC_980_RANGE      = 7.716535433f;     /* (1000 - 20) / 127 = 7.716535433071 */
+const float C_MC_7000_RANGE     = 55.11811f;        /* (8000 - 1000) / 127 = 55.11811023622 */
+const float C_MC_24000_RANGE    = 188.97638f;       /* (26000 - 2000) / 127 = 188.976377952756 */
 void
 RKR::InitMIDI()
 {
@@ -2325,47 +2328,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 370:
-        efx_CompBand->changepar(1, 2 + (int) ((float) value * .31496063f));
+        efx_CompBand->changepar(1, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 371:
-        efx_CompBand->changepar(2, 2 + (int) ((float) value * .31496063f));
+        efx_CompBand->changepar(2, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 372:
-        efx_CompBand->changepar(3, 2 + (int) ((float) value * .31496063f));
+        efx_CompBand->changepar(3, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 373:
-        efx_CompBand->changepar(4, 2 + (int) ((float) value * .31496063f));
+        efx_CompBand->changepar(4, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 374:
-        efx_CompBand->changepar(5, -70 + (int) ((float) value * .74015748f));
+        efx_CompBand->changepar(5, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case 375:
-        efx_CompBand->changepar(6, -70 + (int) ((float) value * .74015748f));
+        efx_CompBand->changepar(6, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case 376:
-        efx_CompBand->changepar(7, -70 + (int) ((float) value * .74015748f));
+        efx_CompBand->changepar(7, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case 377:
-        efx_CompBand->changepar(8, -70 + (int) ((float) value * .74015748f));
+        efx_CompBand->changepar(8, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case 378:
-        efx_CompBand->changepar(9, 20 + (int) ((float) value * 7.71653f));
+        efx_CompBand->changepar(9, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 379:
-        efx_CompBand->changepar(10, 1000 + (int) ((float) value * 55.11811f));
+        efx_CompBand->changepar(10, 1000 + (int) ((float) value * C_MC_7000_RANGE));
         break;
 
     case 380:
-        efx_CompBand->changepar(11, 2000 + (int) ((float) value * 188.97638f));
+        efx_CompBand->changepar(11, 2000 + (int) ((float) value * C_MC_24000_RANGE));
         break;
 
     case 381:

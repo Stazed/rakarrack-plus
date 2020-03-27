@@ -164,12 +164,12 @@ rkr->efx_CompBand->changepar(7, (int)o->value());}
  rgui->getMIDIControl(377);
  return;
 }
-rkr->efx_CompBand->changepar(8, (int)o->value());} selected
+rkr->efx_CompBand->changepar(8, (int)o->value());}
     xywh {56 135 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider cband_cross1 {
-    label Cross1
+    label {Cross 1}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(378);
@@ -180,7 +180,7 @@ rkr->efx_CompBand->changepar(9,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider cband_cross2 {
-    label Cross2
+    label {Cross 2}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(379);
@@ -191,13 +191,13 @@ rkr->efx_CompBand->changepar(10,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider cband_cross3 {
-    label Cross3
+    label {Cross 3}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(380);
  return;
 }
-rkr->efx_CompBand->changepar(11,(int)o->value());}
+rkr->efx_CompBand->changepar(11,(int)o->value());} selected
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
     class SliderW
   }
