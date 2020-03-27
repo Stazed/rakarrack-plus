@@ -25,6 +25,14 @@
 #include "process.h"
 #include <FL/fl_ask.H>  // for error pop up
 
+/* MIDI control defines (Max - Min) / 127 - parameter ranges  */
+const float C_MC_240_RANGE      = 1.890f;           /* (250 - 10) / 127 = 1.889763779528 */
+const float C_MC_490_RANGE      = 3.85826772f;      /* (500 - 10) / 127 = 3.858267716535 */
+const float C_MC_40_RANGE       = 0.31496063f;      /* (42 - 2) / 127 = 0.314960629921 */
+const float C_MC_100_RANGE      = 0.7874016f;       /* 100 / 127 = 0.787401574803 */
+const float C_MC_57_RANGE       = 0.448818898f;     /* (-60 - -3) / 127 = 0.448818897638 */
+
+
 void
 RKR::InitMIDI()
 {
@@ -1375,27 +1383,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 142:
-        efx_Compressor->changepar(4, 10 + (int) ((float) value * 1.890f));
+        efx_Compressor->changepar(4, 10 + (int) ((float) value * C_MC_240_RANGE));
         break;
 
     case 143:
-        efx_Compressor->changepar(5, 10 + (int) ((float) value * 3.85826772f));
+        efx_Compressor->changepar(5, 10 + (int) ((float) value * C_MC_490_RANGE));
         break;
 
     case 144:
-        efx_Compressor->changepar(2, 2 + (int) ((float) value * 0.314960629921f));
+        efx_Compressor->changepar(2, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 145:
-        efx_Compressor->changepar(7, (int) ((float) value * 0.7874016f));
+        efx_Compressor->changepar(7, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 146:
-        efx_Compressor->changepar(1, -60 + (int) ((float) value * 0.448818898f));
+        efx_Compressor->changepar(1, -60 + (int) ((float) value * C_MC_57_RANGE));
         break;
 
     case 147:
-        efx_Compressor->changepar(3, -40 + (int) ((float) value * 0.31496063f));
+        efx_Compressor->changepar(3, -40 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 148:
