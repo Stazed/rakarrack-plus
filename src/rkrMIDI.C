@@ -2457,7 +2457,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 403:
-        efx_Alienwah->changepar(8, (int) ((float) value * 0.787401575f));
+        efx_Alienwah->changepar(8, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 404:
