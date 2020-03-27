@@ -445,14 +445,14 @@ RKR::RKR()
             
             "Cabinet Gain","405 ","12",
 
-            "Chorus Depth", "23", "5",
-            "Chorus Fb", "79", "5",
-            "Chorus Tempo", "72", "5",
-            "Chorus LR_Cr", "91", "5",
+            "Chorus Dry/Wet", "52", "5",
             "Chorus Pan", "50", "5",
-            "Chorus Rnd", "105", "5",
-            "Chorus St_df", "99", "5",
-            "Chorus Wet/Dry", "52", "5",
+            "Chorus Tempo", "72", "5",
+            "Chorus Random", "105", "5",
+            "Chorus Stereo Df", "99", "5",
+            "Chorus Depth", "23", "5",
+            "Chorus Feedback", "79", "5",
+            "Chorus L/R Cross", "91", "5",
 
             "CoilCrafter Freq1", "288", "33",
             "CoilCrafter Freq2", "290", "33",
