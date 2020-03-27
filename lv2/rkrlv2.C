@@ -1164,22 +1164,8 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     {
         plug->alien->changepar(i,val);
     }
-    for(i++; i< 8; i++) //2-7
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->alien->getpar(i) != val)
-        {
-            plug->alien->changepar(i,val);
-        }
-    }
 
-    // 8 delay - has max of 100 MAX_ALIENWAH_DELAY
-    val = (MAX_ALIENWAH_DELAY < (int)*plug->param_p[i]) ? MAX_ALIENWAH_DELAY: (int)*plug->param_p[i];
-    if(plug->alien->getpar(i) != val)
-    {
-        plug->alien->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //9-10
+    for(i++; i<plug->nparams; i++) //2-10
     {
         val = (int)*plug->param_p[i];
         if(plug->alien->getpar(i) != val)
