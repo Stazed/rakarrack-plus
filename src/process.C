@@ -410,17 +410,16 @@ RKR::RKR()
 
     {
         static const char *los_params[] = {
-
-            "Alienwah Depth", "20", "11",
-            "Alienwah Feedback", "82", "11",
-            "Alienwah Tempo", "76", "11",
-            "Alienwah L/R Cross", "96", "11",
-            "Alienwah Pan", "61", "11",
-            "Alienwah Phase", "115", "11",
-            "Alienwah Random", "109", "11",
-            "Alienwah Stereo Df.", "103", "11",
             "Alienwah Dry/Wet", "55", "11",
+            "Alienwah Pan", "61", "11",
+            "Alienwah Tempo", "76", "11",
+            "Alienwah Random", "109", "11",
+            "Alienwah Phase", "115", "11",
+            "Alienwah Stereo Df.", "103", "11",
+            "Alienwah Depth", "20", "11",
             "Alienwah Delay", "403", "11",
+            "Alienwah Feedback", "82", "11",
+            "Alienwah L/R Cross", "96", "11",
             "Analog Phaser Depth", "120", "18",
             "Analog Phaser Distortion", "118", "18",
             "Analog Phaser Feedback", "122", "18",
