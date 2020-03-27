@@ -455,12 +455,12 @@ RKR::RKR()
             "Chorus Feedback", "79", "5",
             "Chorus L/R Cross", "91", "5",
 
-            "CoilCrafter Freq1", "288", "33",
-            "CoilCrafter Freq2", "290", "33",
             "CoilCrafter Gain", "286", "33",
-            "CoilCrafter Q1", "289", "33",
-            "CoilCrafter Q2", "291", "33",
             "CoilCrafter Tone", "287", "33",
+            "CoilCrafter Freq 1", "288", "33",
+            "CoilCrafter Q 1", "289", "33",
+            "CoilCrafter Freq 2", "290", "33",
+            "CoilCrafter Q 2", "291", "33",
 
             "CompBand Cross 1", "378", "43",
             "CompBand Cross 2", "379", "43",
