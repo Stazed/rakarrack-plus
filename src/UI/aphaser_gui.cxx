@@ -86,12 +86,11 @@ void AphaserGui::cb_aphaser_freq(SliderW* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_rnd_i(SliderW* o, void*) {
-  // No midi control
-//if(Fl::event_button()==3)
-//{
-// rgui->getMIDIControl(121);
-// return;
-//} 
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(404);
+ return;
+} 
 rkr->efx_APhaser->changepar(3,(int)o->value());
 }
 void AphaserGui::cb_aphaser_rnd(SliderW* o, void* v) {
@@ -237,7 +236,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_distort->labelfont(0);
   aphaser_distort->labelsize(10);
   aphaser_distort->labelcolor(FL_BACKGROUND2_COLOR);
-  aphaser_distort->maximum(100);
+  aphaser_distort->maximum(127);
   aphaser_distort->step(1);
   aphaser_distort->textcolor(FL_BACKGROUND2_COLOR);
   aphaser_distort->callback((Fl_Callback*)cb_aphaser_distort);
@@ -346,7 +345,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_mismatch->labelfont(0);
   aphaser_mismatch->labelsize(10);
   aphaser_mismatch->labelcolor(FL_BACKGROUND2_COLOR);
-  aphaser_mismatch->maximum(100);
+  aphaser_mismatch->maximum(127);
   aphaser_mismatch->step(1);
   aphaser_mismatch->textcolor(FL_BACKGROUND2_COLOR);
   aphaser_mismatch->callback((Fl_Callback*)cb_aphaser_mismatch);

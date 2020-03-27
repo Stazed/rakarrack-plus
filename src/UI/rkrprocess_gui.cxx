@@ -4644,6 +4644,10 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
                 ALIENWAH->Alienwah_delay->redraw();
                 break;
+            case 404:
+                APHASER->aphaser_rnd->value(rkr->efx_APhaser->getpar(3));
+                APHASER->aphaser_rnd->redraw();
+                break;
         }
     }
 

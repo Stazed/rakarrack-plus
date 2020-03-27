@@ -89,7 +89,7 @@ rkr->efx_APhaser->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 } 
 rkr->efx_APhaser->changepar(1,(int)o->value());}
-    xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider aphaser_freq {
@@ -105,12 +105,11 @@ rkr->efx_APhaser->changepar(2,(int)o->value());}
   }
   Fl_Value_Slider aphaser_rnd {
     label Random
-    callback {// No midi control
-//if(Fl::event_button()==3)
-//{
-// rgui->getMIDIControl(121);
-// return;
-//} 
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(404);
+ return;
+} 
 rkr->efx_APhaser->changepar(3,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
@@ -161,8 +160,8 @@ rkr->efx_APhaser->changepar(7,(int)(o->value()+64));}
  rgui->getMIDIControl(123);
  return;
 } 
-rkr->efx_APhaser->changepar(9,(int)o->value());}
-    xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+rkr->efx_APhaser->changepar(9,(int)o->value());} selected
+    xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider aphaser_stdf {
@@ -184,7 +183,7 @@ rkr->efx_APhaser->changepar(5,(int)o->value());}
   Fl_Check_Button aphaser_subs {
     label Subtract
     user_data 2
-    callback {rkr->efx_APhaser->changepar(10,(int)o->value())} selected
+    callback {rkr->efx_APhaser->changepar(10,(int)o->value())}
     xywh {18 165 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Check_Button aphaser_hyper {

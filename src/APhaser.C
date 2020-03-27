@@ -417,7 +417,7 @@ Analog_Phaser::changepar(int npar, int value)
     case 8:
         setstages(value);
         break;
-    case 9:
+    case 9:     // Mismatch
         setoffset(value);
         break;
     case 10:

@@ -406,10 +406,11 @@ RKR::RKR()
     }
 
 
-    NumParams = 378;
+    NumParams = 379;
 
     {
         static const char *los_params[] = {
+
             "Alienwah Dry/Wet", "55", "11",
             "Alienwah Pan", "61", "11",
             "Alienwah Tempo", "76", "11",
@@ -420,14 +421,17 @@ RKR::RKR()
             "Alienwah Delay", "403", "11",
             "Alienwah Feedback", "82", "11",
             "Alienwah L/R Cross", "96", "11",
-            "Analog Phaser Depth", "120", "18",
-            "Analog Phaser Distortion", "118", "18",
-            "Analog Phaser Feedback", "122", "18",
+            
+            "Analog Phaser Dry/Wet", "117", "18",
             "Analog Phaser Tempo", "119", "18",
-            "Analog Phaser Mismatch", "123", "18",
-            "Analog Phaser St.df", "124", "18",
-            "Analog Phaser Wet-Dry", "117", "18",
+            "Analog Phaser P. Depth", "120", "18",
             "Analog Phaser Width", "121", "18",
+            "Analog Phaser Feedback", "122", "18",
+            "Analog Phaser Mismatch", "123", "18",
+            "Analog Phaser Distortion", "118", "18",
+            "Analog Phaser Random", "404", "18",
+            "Analog Phaser Stereo Df.", "124", "18",
+            
             "Arpie Arpe's", "213", "24",
             "Arpie Damp", "219", "24",
             "Arpie Fb", "218", "24",
