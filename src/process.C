@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 380;
+    NumParams = 381;
 
     {
         static const char *los_params[] = {
@@ -451,6 +451,7 @@ RKR::RKR()
             "Chorus Random", "105", "5",
             "Chorus Stereo Df", "99", "5",
             "Chorus Depth", "23", "5",
+            "Chorus Delay", "406", "5",
             "Chorus Feedback", "79", "5",
             "Chorus L/R Cross", "91", "5",
 

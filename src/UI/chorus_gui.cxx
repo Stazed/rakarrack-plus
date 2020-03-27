@@ -141,7 +141,13 @@ void ChorusGui::cb_chorus_dpth(SliderW* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_delay_i(SliderW* o, void*) {
-  rkr->efx_Chorus->changepar(7,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(406);
+ return;
+} 
+
+rkr->efx_Chorus->changepar(7,(int)o->value());
 }
 void ChorusGui::cb_chorus_delay(SliderW* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_delay_i(o,v);

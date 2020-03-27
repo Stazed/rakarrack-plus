@@ -4652,6 +4652,10 @@ void RKRGUI::ActMIDI()
                 CABINET->Cabinet_output->value(rkr->efx_Cabinet->getpar(0)-64);
                 CABINET->Cabinet_output->redraw();
                 break;
+            case 406:
+                CHORUS->chorus_delay->value(rkr->efx_Chorus->getpar(7));
+                CHORUS->chorus_delay->redraw();
+                break;
         }
     }
 
