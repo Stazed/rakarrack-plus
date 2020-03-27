@@ -441,12 +441,8 @@ RKR::RKR()
             "Arpie Feedback", "218", "24",
             "Arpie Damp", "219", "24",
 
-            "AutoPan/Extra Stereo Tempo", "77", "13",
-            "AutoPan/Extra Stereo Pan", "67", "13",
-            "AutoPan/Extra Stereo Rnd", "110", "13",
-            "AutoPan/Extra Stereo St_df.", "104", "13",
-            "AutoPan/Extra Stereo Wet/Dry", "58", "13",
             "Balance", "12", "50",
+
             "Chorus Depth", "23", "5",
             "Chorus Fb", "79", "5",
             "Chorus Tempo", "72", "5",
@@ -455,12 +451,14 @@ RKR::RKR()
             "Chorus Rnd", "105", "5",
             "Chorus St_df", "99", "5",
             "Chorus Wet/Dry", "52", "5",
+
             "CoilCrafter Freq1", "288", "33",
             "CoilCrafter Freq2", "290", "33",
             "CoilCrafter Gain", "286", "33",
             "CoilCrafter Q1", "289", "33",
             "CoilCrafter Q2", "291", "33",
             "CoilCrafter Tone", "287", "33",
+
             "CompBand Cross 1", "378", "43",
             "CompBand Cross 2", "379", "43",
             "CompBand Cross 3", "380", "43",
@@ -474,18 +472,21 @@ RKR::RKR()
             "CompBand ML Ratio", "371", "43",
             "CompBand ML Thres", "375", "43",
             "CompBand WD ", "368", "43",
+
             "Compressor A.Time", "142", "1",
             "Compressor Knee", "145", "1",
             "Compressor Output", "147", "1",
             "Compressor Ratio", "144", "1",
             "Compressor R.Time", "143", "1",
             "Compressor Threshold", "146", "1",
+
             "Convolotron Damp", "283", "29",
             "Convolotron Fb", "284", "29",
             "Convolotron Length", "285", "29",
             "Convolotron Level", "282", "29",
             "Convolotron Pan", "281", "29",
             "Convolotron WD", "280", "29",
+
             "Derelict Dist Color", "6", "17",
             "Derelict Dist Drive", "2", "17",
             "Derelict Dist HPF", "5", "17",
@@ -495,6 +496,7 @@ RKR::RKR()
             "Derelict Dist Pan", "126", "17",
             "Derelict Sub Octave", "8", "17",
             "Derelict Wet-Dry", "125", "17",
+
             "DistBand Cross1", "209", "23",
             "DistBand Cross2", "210", "23",
             "DistBand Drive", "204", "23",
@@ -505,6 +507,7 @@ RKR::RKR()
             "DistBand M.Gain", "207", "23",
             "DistBand Pan", "211", "23",
             "DistBand WD", "202", "23",
+
             "Distortion Drive", "69", "2",
             "Distortion HPF", "89", "2",
             "Distortion Level", "71", "2",
@@ -513,6 +516,7 @@ RKR::RKR()
             "Distortion Pan", "48", "2",
             "Distortion Sub Octave", "9", "2",
             "Distortion Wet/Dry", "30", "2",
+
             "Dual Flange Depth", "161", "20",
             "Dual Flange FB", "164", "20",
             "Dual Flange LPF", "165", "20",
@@ -524,10 +528,12 @@ RKR::RKR()
             "Dual Flange Tempo", "166", "20",
             "Dual Flange WD", "158", "20",
             "Dual Flange Width", "162", "20",
+
             "Echo Fb", "78", "4",
             "Echo LR_Cr", "97", "4",
             "Echo Pan", "46", "4",
             "Echo Wet/Dry", "59", "4",
+
             "Echotron WD", "348", "41",
             "Echotron Pan", "349", "41",
             "Echotron Tempo", "350", "41",
@@ -538,6 +544,7 @@ RKR::RKR()
             "Echotron Depth", "355", "41",
             "Echotron St_df", "356", "41",
             "Echotron #", "357", "41",
+
             "Echoverse Angle", "311", "32",
             "Echoverse Damp", "309", "32",
             "Echoverse E.S.", "310", "32",
@@ -547,6 +554,7 @@ RKR::RKR()
             "Echoverse Reverse", "304", "32",
             "Echoverse Tempo", "306", "32",
             "Echoverse WD", "303", "32",
+
             "EQ 125 Hz", "134", "0",
             "EQ 16 Khz", "141", "0",
             "EQ 1 Khz", "137", "0",
@@ -559,6 +567,7 @@ RKR::RKR()
             "EQ 8 Khz", "140", "0",
             "EQ Gain", "130", "0",
             "EQ Q", "131", "0",
+
             "Exciter Gain", "189", "22",
             "Exciter Har 10", "201", "22",
             "Exciter Har 1", "192", "22",
@@ -572,6 +581,7 @@ RKR::RKR()
             "Exciter Har 9", "200", "22",
             "Exciter HPF", "191", "22",
             "Exciter LPF", "190", "22",
+
             "Expander A.Time", "220", "25",
             "Expander HPF", "226", "25",
             "Expander Level", "224", "25",
@@ -579,6 +589,7 @@ RKR::RKR()
             "Expander R.Time", "221", "25",
             "Expander Shape", "222", "25",
             "Expander Threshold", "223", "25",
+
             "Flanger Depth", "22", "7",
             "Flanger Fb", "80", "7",
             "Flanger Tempo", "73", "7",
@@ -587,10 +598,12 @@ RKR::RKR()
             "Flanger Rnd", "106", "7",
             "Flanger St_df", "100", "7",
             "Flanger Wet/Dry", "53", "7",
+
             "Harmonizer Freq", "26", "14",
             "Harmonizer Interval", "27", "14",
             "Harmonizer Pan", "49", "14",
             "Harmonizer Wet/Dry", "31", "14",
+
             "Infinity WD", "395", "46",
             "Infinity Res", "396", "46",
             "Infinity AutoPan", "397", "46",
@@ -599,7 +612,9 @@ RKR::RKR()
             "Infinity End", "400", "46",
             "Infinity Tempo", "401", "46",
             "Infinity Subdiv", "402", "46",
+
             "Input", "14", "50",
+
             "Looper Auto Play", " 271", "30",
             "Looper Clear", "279", "30",
             "Looper Level 1", "268", "30",
@@ -613,7 +628,9 @@ RKR::RKR()
             "Looper Track 1", "277", "30",
             "Looper Track 2", "278", "30",
             "Looper WD", "267", "30",
+
             "Multi On/Off", "116", "50",
+
             "Musical Delay Fb 1", "83", "15",
             "Musical Delay Fb 2", "84", "15",
             "Musical Delay Gain 1", "24", "15",
@@ -622,6 +639,7 @@ RKR::RKR()
             "Musical Delay Pan 1", "62", "15",
             "Musical Delay Pan 2", "65", "15",
             "Musical Delay Wet/Dry", "56", "15",
+
             "MuTroMojo E. Sens", "265", "31",
             "MuTroMojo BP", "258", "31",
             "MuTroMojo HP", "259", "31",
@@ -633,11 +651,13 @@ RKR::RKR()
             "MuTroMojo Wah", "264", "31",
             "MuTroMojo WD", "256", "31",
             "MuTroMojo Width", "260", "31",
+
             "Opticaltrem Depth", "381", "44",
             "Opticaltrem Pan", "385", "44",
             "Opticaltrem Rnd", "383", "44",
             "Opticaltrem St.df", "384", "44",
             "Opticaltrem Tempo", "382", "44",
+
             "Overdrive Drive", "68", "3",
             "Overdrive Level", "70", "3",
             "Overdrive LPF", "85", "3",
@@ -645,6 +665,13 @@ RKR::RKR()
             "Overdrive LR_Cr", "94", "3",
             "Overdrive Pan", "47", "3",
             "Overdrive Wet/Dry", "29", "3",
+
+            "Pan Dry/Wet", "58", "13",
+            "Pan Pan", "67", "13",
+            "Pan Tempo", "77", "13",
+            "Pan Random", "110", "13",
+            "Pan Stereo Df", "104", "13",
+            
             "P.EQ Gain", "148", "9",
             "P.EQ High Freq", "155", "9",
             "P.EQ High Gain", "156", "9",
@@ -655,6 +682,7 @@ RKR::RKR()
             "P.EQ Mid Freq", "152", "9",
             "P.EQ Mid Gain", "153", "9",
             "P.EQ Mid Q", "154", "9",
+
             "Phaser Depth", "21", "6",
             "Phaser Fb", "81", "6",
             "Phaser Tempo", "74", "6",
@@ -664,10 +692,12 @@ RKR::RKR()
             "Phaser Rnd", "107", "6",
             "Phaser St_df", "101", "6",
             "Phaser Wet/Dry", "54", "6",
+
             "Reverb HPF", "90", "8",
             "Reverb LPF", "87", "8",
             "Reverb Pan", "63", "8",
             "Reverb Wet/Dry", "57", "8",
+
             "Reverbtron WD", "339", "40",
             "Reverbtron Pan", "340", "40",
             "Reverbtron Level", "341", "40",
@@ -677,6 +707,7 @@ RKR::RKR()
             "Reverbtron Stretch", "345", "40",
             "Reverbtron I.Del", "346", "40",
             "Reverbtron Fade", "347", "40",
+
             "Ring Depth", "183", "21",
             "Ring Freq", "184", "21",
             "Ring Input", "180", "21",
@@ -688,6 +719,7 @@ RKR::RKR()
             "Ring Squ", "188", "21",
             "Ring Tri", "186", "21",
             "Ring WD", "178", "21",
+
             "Sequence WD", "314", "37",
             "Sequence 1", "315", "37",
             "Sequence 2", "316", "37",
@@ -700,10 +732,12 @@ RKR::RKR()
             "Sequence Tempo", "323", "37",
             "Sequence Q", "324", "37",
             "Sequence St.df", "325", "37",
+
             "ShelfBoost Gain", "292", "34",
             "ShelfBoost Level", "293", "34",
             "ShelfBoost Pres", "295", "34",
             "ShelfBoost Tone", "294", "34",
+
             "Shifter WD", "326", "38",
             "Shifter Int", "327", "38",
             "Shifter Gain", "328", "38",
@@ -712,6 +746,7 @@ RKR::RKR()
             "Shifter Decay", "331", "38",
             "Shifter Thrshold", "332", "38",
             "Shifter Whamy", "333", "38",
+
             "Shuffle High Freq", "234", "26",
             "Shuffle High Gain", "235", "26",
             "Shuffle Low Freq", "228", "26",
@@ -722,6 +757,7 @@ RKR::RKR()
             "Shuffle M.L. Gain", "231", "26",
             "Shuffle Q", "236", "26",
             "Shuffle WD", "227", "26",
+
             "StereoHarm Chord", "367", "42",
             "StereoHarm Chrm L", "360", "42",
             "StereoHarm Chrm R", "363", "42",
@@ -732,13 +768,16 @@ RKR::RKR()
             "StereoHarm LR_Cr", "365", "42",
             "StereoHarm Note", "366", "42",
             "StereoHarm WD", "358", "42",
+
             "StompBox Level", "334", "39",
             "StompBox Gain", "335", "39",
             "StompBox Low", "336", "39",
             "StompBox Mid", "337", "39",
             "StompBox High", "338", "39",
+
             "Sustainer Gain", "312", "36",
             "Sustainer Sustain", "313", "36",
+
             "Synthfilter A.Time", "245", "27",
             "Synthfilter Depth", "243", "27",
             "Synthfilter Distort", "238", "27",
@@ -750,6 +789,7 @@ RKR::RKR()
             "Synthfilter Tempo", "239", "27",
             "Synthfilter WD", "237", "27",
             "Synthfilter Width", "241", "27",
+
             "Valve Dist", "174", "19",
             "Valve Drive", "173", "19",
             "Valve HPF", "177", "19",
@@ -759,6 +799,7 @@ RKR::RKR()
             "Valve Pan", "171", "19",
             "Valve Presence", "175", "19",
             "Valve WD", "169", "19",
+
             "VaryBand Cross1", "253", "28",
             "VaryBand Cross2", "254", "28",
             "VaryBand Cross3", "255", "28",
@@ -767,6 +808,7 @@ RKR::RKR()
             "VaryBand Tempo 1", "249", "28",
             "VaryBand Tempo 2", "251", "28",
             "VaryBand WD", "248", "28",
+
             "Vibe Depth", "388", "45",
             "Vibe Fb", "392", "45",
             "Vibe LR_Cr", "393", "45",
@@ -776,6 +818,7 @@ RKR::RKR()
             "Vibe Tempo", "389", "45",
             "Vibe WD", "386", "45",
             "Vibe Width", "387", "45",
+
             "Vocoder Input", "298", "35",
             "Vocoder Level", "302", "35",
             "Vocoder Muf.", "299", "35",
@@ -783,7 +826,9 @@ RKR::RKR()
             "Vocoder Q", "300", "35",
             "Vocoder Ring", "301", "35",
             "Vocoder WD", "296", "35",
+
             "Volume", "7", "50",
+
             "WahWah Amp S.", "111", "10",
             "WahWah Amp S.I.", "112", "10",
             "WahWah Depth", "1", "10",
