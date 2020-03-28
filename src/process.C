@@ -532,10 +532,10 @@ RKR::RKR()
             "Dual Flange Stereo Df", "167", "20",
             "Dual Flange Random", "168", "20",
 
-            "Echo Fb", "78", "4",
-            "Echo LR_Cr", "97", "4",
+            "Echo Dry/Wet", "59", "4",
             "Echo Pan", "46", "4",
-            "Echo Wet/Dry", "59", "4",
+            "Echo L/R Cross", "97", "4",
+            "Echo Feedback", "78", "4",
 
             "Echotron WD", "348", "41",
             "Echotron Pan", "349", "41",
