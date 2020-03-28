@@ -483,12 +483,12 @@ RKR::RKR()
             "Compressor R.Time", "143", "1",
             "Compressor Threshold", "146", "1",
 
-            "Convolotron Damp", "283", "29",
-            "Convolotron Fb", "284", "29",
-            "Convolotron Length", "285", "29",
-            "Convolotron Level", "282", "29",
+            "Convolotron Dry/Wet", "280", "29",
             "Convolotron Pan", "281", "29",
-            "Convolotron WD", "280", "29",
+            "Convolotron Level", "282", "29",
+            "Convolotron Damp", "283", "29",
+            "Convolotron Feedback", "284", "29",
+            "Convolotron Length", "285", "29",
 
             "Derelict Dist Color", "6", "17",
             "Derelict Dist Drive", "2", "17",
