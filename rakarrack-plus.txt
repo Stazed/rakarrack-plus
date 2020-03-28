@@ -128,9 +128,9 @@ Expander
 Flanger
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |      CHORUS       |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       --------    |  
+    Added missing Delay to MIDI control
 ---Done---
 FIXME Help .png
-Missing Delay MC
 
 Harmonizer
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |

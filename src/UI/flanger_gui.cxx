@@ -141,7 +141,12 @@ void FlangerGui::cb_flanger_dpth(SliderW* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_delay_i(SliderW* o, void*) {
-  rkr->efx_Flanger->changepar(7,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(411);
+ return;
+} 
+rkr->efx_Flanger->changepar(7,(int)o->value());
 }
 void FlangerGui::cb_flanger_delay(SliderW* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_delay_i(o,v);

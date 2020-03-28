@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 385;
+    NumParams = 386;
 
     {
         static const char *los_params[] = {
@@ -597,14 +597,15 @@ RKR::RKR()
             "Expander LPF", "225", "25",
             "Expander HPF", "226", "25",
 
-            "Flanger Depth", "22", "7",
-            "Flanger Fb", "80", "7",
-            "Flanger Tempo", "73", "7",
-            "Flanger LR_Cr", "92", "7",
+            "Flanger Dry/Wet", "53", "7",
             "Flanger Pan", "51", "7",
-            "Flanger Rnd", "106", "7",
-            "Flanger St_df", "100", "7",
-            "Flanger Wet/Dry", "53", "7",
+            "Flanger Tempo", "73", "7",
+            "Flanger Random", "106", "7",
+            "Flanger Stereo Df", "100", "7",
+            "Flanger Depth", "22", "7",
+            "Flanger Delay", "411", "7",
+            "Flanger Feedback", "80", "7",
+            "Flanger L/R Cross", "92", "7",
 
             "Harmonizer Freq", "26", "14",
             "Harmonizer Interval", "27", "14",

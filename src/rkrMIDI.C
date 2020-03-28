@@ -2516,6 +2516,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 410:
         efx_Echo->changepar(6, value);
         break;
+
+    case 411:
+        efx_Flanger->changepar(7, value);
+        break;
     }
 }
 

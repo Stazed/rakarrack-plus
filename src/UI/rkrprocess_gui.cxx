@@ -4672,6 +4672,10 @@ void RKRGUI::ActMIDI()
                 ECHO->echo_damp->value(rkr->efx_Echo->getpar(6));
                 ECHO->echo_damp->redraw();
                 break;
+            case 411:
+                FLANGER->flanger_delay->value(rkr->efx_Flanger->getpar(7));
+                FLANGER->flanger_delay->redraw();
+                break;
         }
     }
 
