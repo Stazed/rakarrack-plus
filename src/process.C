@@ -590,12 +590,12 @@ RKR::RKR()
             "Exciter Har 10", "201", "22",
 
             "Expander A.Time", "220", "25",
-            "Expander HPF", "226", "25",
-            "Expander Level", "224", "25",
-            "Expander LPF", "225", "25",
             "Expander R.Time", "221", "25",
             "Expander Shape", "222", "25",
             "Expander Threshold", "223", "25",
+            "Expander Out Gain", "224", "25",
+            "Expander LPF", "225", "25",
+            "Expander HPF", "226", "25",
 
             "Flanger Depth", "22", "7",
             "Flanger Fb", "80", "7",

@@ -160,7 +160,7 @@ Expander::changepar(int np, int value)
     case 6:
         sethpf(value);
         break;
-    case 7:
+    case 7: // Out Gain
         Plevel = value;
         level = dB2rap((float) value / 6.0f);
         break;
