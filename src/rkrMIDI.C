@@ -41,6 +41,10 @@ const float C_MC_1900_RANGE     = 14.96063f;        /* (4500 - 2600) / 127 = 14.
 const float C_MC_55_RANGE       = 0.43307087f;      /* (65 - 10) / 127 = 0.433070866142 */
 const float C_MC_245_RANGE      = 1.9291339f;       /* (250 - 5) / 127 = 1.929133858268 */
 const float C_MC_11200_RANGE    = 88.18898f;        /* (12000 - 800) / 127 = 88.188976377953 */
+const float C_MC_2480_RANGE     = 19.52756f;        /* (2500 - 20) / 127 =  19.527559055118 */
+const float C_MC_6000_RANGE     = 47.2441f;         /* 6000 / 127 = 47.244094488189 */
+const float C_MC_19980_RANGE    = 157.322835f;      /* (20000 - 20) / 127 = 157.322834645669 */
+const float C_MC_600_RANGE      = 4.724f;           /* 600  / 127 = 4.724409448819  */
 
 void
 RKR::InitMIDI()
@@ -1460,7 +1464,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 159:
-        efx_DFlange->changepar(1, value - 64);
+        efx_DFlange->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 160:
@@ -1468,27 +1472,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 161:
-        efx_DFlange->changepar(3, 20 + (int) ((float) value * 19.52756f));
+        efx_DFlange->changepar(3, 20 + (int) ((float) value * C_MC_2480_RANGE));
         break;
 
     case 162:
-        efx_DFlange->changepar(4, (int) ((float) value * 47.2441f));
+        efx_DFlange->changepar(4, (int) ((float) value * C_MC_6000_RANGE));
         break;
 
     case 163:
-        efx_DFlange->changepar(5, (int) ((float) value * 0.787402f));
+        efx_DFlange->changepar(5, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 164:
-        efx_DFlange->changepar(6, value - 64);
+        efx_DFlange->changepar(6, ((int) (float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 165:
-        efx_DFlange->changepar(7, 20 + (int) ((float) value * 157.322835f));
+        efx_DFlange->changepar(7, 20 + (int) ((float) value * C_MC_19980_RANGE));
         break;
 
     case 166:
-        efx_DFlange->changepar(10, 1 + (int) ((float) value * 4.71654f));
+        efx_DFlange->changepar(10, ret_Tempo(value));
         break;
 
     case 167:
@@ -2486,7 +2490,7 @@ RKR::process_midi_controller_events(int parameter, int value)
 int
 RKR::ret_Tempo(int value)
 {
-    return ( 1 + (int) ((float) value * 4.724f));
+    return ( 1 + (int) ((float) value * C_MC_600_RANGE));
 }
 
 int
