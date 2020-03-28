@@ -541,12 +541,11 @@ Echotron::loadfile(char* Filename)
     
     fclose(fs);
 
-    f.fLength = count; // to hold value for maximum limit of Plength & gui limit
+    f.fLength = count;
     
-    if (Puser)
-    {
-        if (Plength > f.fLength) Plength = f.fLength;
-    }
+    /* Limit max taps to file length */
+    if (Plength > f.fLength) Plength = f.fLength;
+
 
 #ifdef LV2_SUPPORT
     // what to do here - FIXME how does lv2 handle file errors?

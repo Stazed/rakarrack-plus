@@ -46,7 +46,7 @@ const float C_MC_6000_RANGE     = 47.2441f;         /* 6000 / 127 = 47.244094488
 const float C_MC_19980_RANGE    = 157.322835f;      /* (20000 - 20) / 127 = 157.322834645669 */
 const float C_MC_600_RANGE      = 4.724f;           /* 600  / 127 = 4.724409448819  */
 const float C_MC_1980_RANGE     = 15.59055118f;     /* (2000 - 20) / 127 = 15.5905511811 */
-
+const float C_MC_126_RANGE      = 0.99212598f;      /* (127 - 1) / 127 = 0.992125984252 */
 void
 RKR::InitMIDI()
 {
@@ -2287,9 +2287,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 357:
-        efx_Echotron->changepar(3, 1 + (int) ((float) value * .99212598f));
+    {
+        int number_taps = 1 + (int) ((float) value * C_MC_126_RANGE);
+        if(number_taps > efx_Echotron->File.fLength)
+        {
+            number_taps = efx_Echotron->File.fLength;
+        }
+        efx_Echotron->changepar(3, number_taps);
         break;
-
+    }
     case 358:
         efx_StereoHarm->changepar(0, Dry_Wet(value));
         break;
