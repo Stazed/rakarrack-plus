@@ -36,6 +36,10 @@ const float C_MC_94_RANGE       = 0.74015748f;      /* (-70 + 24) / 127 = 0.7401
 const float C_MC_980_RANGE      = 7.716535433f;     /* (1000 - 20) / 127 = 7.716535433071 */
 const float C_MC_7000_RANGE     = 55.11811f;        /* (8000 - 1000) / 127 = 55.11811023622 */
 const float C_MC_24000_RANGE    = 188.97638f;       /* (26000 - 2000) / 127 = 188.976377952756 */
+const float C_MC_4380_RANGE     = 34.488189f;       /* (4400 - 20) / 127 = 34.488188976378 */
+const float C_MC_1900_RANGE     = 14.96063f;        /* (4500 - 2600) / 127 = 14.96062992126 */
+const float C_MC_55_RANGE       = 0.43307087f;      /* (65 - 10) / 127 = 0.433070866142 */
+
 void
 RKR::InitMIDI()
 {
@@ -1996,23 +2000,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 287:
-        efx_CoilCrafter->changepar(7, 20 + (int) ((float) value * 34.488189f));
+        efx_CoilCrafter->changepar(7, 20 + (int) ((float) value * C_MC_4380_RANGE));
         break;
 
     case 288:
-        efx_CoilCrafter->changepar(3, 2600 + (int) ((float) value * 14.96063f));
+        efx_CoilCrafter->changepar(3, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
     case 289:
-        efx_CoilCrafter->changepar(4, 10 + (int) ((float) value * .43307087f));
+        efx_CoilCrafter->changepar(4, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
     case 290:
-        efx_CoilCrafter->changepar(5, 2600 + (int) ((float) value * 14.96063f));
+        efx_CoilCrafter->changepar(5, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
     case 291:
-        efx_CoilCrafter->changepar(6, 10 + (int) ((float) value * .43307087f));
+        efx_CoilCrafter->changepar(6, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
     case 292:
