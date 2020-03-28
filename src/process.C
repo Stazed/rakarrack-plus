@@ -511,14 +511,14 @@ RKR::RKR()
             "DistBand Cross 2", "210", "23",
             "DistBand Pan", "211", "23",
 
+            "Distortion Dry/Wet", "30", "2",
+            "Distortion L/R Cross", "95", "2",
             "Distortion Drive", "69", "2",
-            "Distortion HPF", "89", "2",
             "Distortion Level", "71", "2",
-            "Distortion LPF", "86", "2",
-            "Distortion LR_Cr", "95", "2",
             "Distortion Pan", "48", "2",
             "Distortion Sub Octave", "9", "2",
-            "Distortion Wet/Dry", "30", "2",
+            "Distortion LPF", "86", "2",
+            "Distortion HPF", "89", "2",
 
             "Dual Flange Depth", "161", "20",
             "Dual Flange FB", "164", "20",
