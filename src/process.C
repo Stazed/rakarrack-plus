@@ -576,7 +576,8 @@ RKR::RKR()
             "EQ 16 Khz", "141", "0",
 
             "Exciter Gain", "189", "22",
-            "Exciter Har 10", "201", "22",
+            "Exciter LPF", "190", "22",
+            "Exciter HPF", "191", "22",
             "Exciter Har 1", "192", "22",
             "Exciter Har 2", "193", "22",
             "Exciter Har 3", "194", "22",
@@ -586,8 +587,7 @@ RKR::RKR()
             "Exciter Har 7", "198", "22",
             "Exciter Har 8", "199", "22",
             "Exciter Har 9", "200", "22",
-            "Exciter HPF", "191", "22",
-            "Exciter LPF", "190", "22",
+            "Exciter Har 10", "201", "22",
 
             "Expander A.Time", "220", "25",
             "Expander HPF", "226", "25",

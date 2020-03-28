@@ -1597,43 +1597,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 192:
-        efx_Exciter->changepar(1, value - 64);
+        efx_Exciter->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 193:
-        efx_Exciter->changepar(2, value - 64);
+        efx_Exciter->changepar(2, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 194:
-        efx_Exciter->changepar(3, value - 64);
+        efx_Exciter->changepar(3, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 195:
-        efx_Exciter->changepar(4, value - 64);
+        efx_Exciter->changepar(4, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 196:
-        efx_Exciter->changepar(5, value - 64);
+        efx_Exciter->changepar(5, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 197:
-        efx_Exciter->changepar(6, value - 64);
+        efx_Exciter->changepar(6, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 198:
-        efx_Exciter->changepar(7, value - 64);
+        efx_Exciter->changepar(7, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 199:
-        efx_Exciter->changepar(8, value - 64);
+        efx_Exciter->changepar(8, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 200:
-        efx_Exciter->changepar(9, value - 64);
+        efx_Exciter->changepar(9, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 201:
-        efx_Exciter->changepar(10, value - 64);
+        efx_Exciter->changepar(10, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 202:
