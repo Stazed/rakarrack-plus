@@ -2103,7 +2103,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 311:
-        efx_RBEcho->changepar(4, value);
+        efx_RBEcho->changepar(4, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 312:
