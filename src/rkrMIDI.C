@@ -2288,6 +2288,10 @@ RKR::process_midi_controller_events(int parameter, int value)
 
     case 357:
     {
+        /* There is a minor problem with this approach. If the user sets the delay
+           file after setting the taps, then the taps will not get adjusted upward. 
+           The user will have to move the MIDI control slider to set taps upward.
+           The downward limit is checked and limited always on file loading. */
         int number_taps = 1 + (int) ((float) value * C_MC_126_RANGE);
         if(number_taps > efx_Echotron->File.fLength)
         {

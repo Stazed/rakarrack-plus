@@ -544,7 +544,10 @@ Echotron::loadfile(char* Filename)
     f.fLength = count;
     
     /* Limit max taps to file length */
-    if (Plength > f.fLength) Plength = f.fLength;
+    if (Plength > f.fLength)
+    {
+        Plength = f.fLength;
+    }
 
 
 #ifdef LV2_SUPPORT

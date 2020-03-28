@@ -3542,7 +3542,12 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
         plug->echotron->changepar(i,val);
     }
     i++;
-    // 3 taps - has max of File.fLength
+
+    /* 3 taps - has max of File.fLength.
+       This works even though the file length is set after the taps with presets.
+       Because on the next cycle, the file length will be adjusted after being set,
+       and then the taps get adjusted based on the correct file length. 
+     */
     val = (int)*plug->param_p[i] > plug->echotron->File.fLength ? plug->echotron->File.fLength: (int)*plug->param_p[i];
     if(plug->echotron->getpar(i) != val)
     {
