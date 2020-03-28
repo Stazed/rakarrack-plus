@@ -668,11 +668,6 @@ void Echotron::modulate_delay()
                 filterbank[i].l->setfreq(lfmod * File.fFreq[i]);
                 filterbank[i].r->setfreq(rfmod * File.fFreq[i]);
             }
-            else // valgrind says that these are uninitialized
-            {
-                filterbank[i].l->setfreq(0.1); // .01 is minimum
-                filterbank[i].r->setfreq(0.1); // .01 is minimum
-            }
         }
     }
 
