@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 381;
+    NumParams = 385;
 
     {
         static const char *los_params[] = {
@@ -533,9 +533,13 @@ RKR::RKR()
             "Dual Flange Random", "168", "20",
 
             "Echo Dry/Wet", "59", "4",
+            "Echo Reverse", "407", "4",
             "Echo Pan", "46", "4",
+            "Echo Delay", "408", "4",
+            "Echo L/R Delay", "409", "4",
             "Echo L/R Cross", "97", "4",
             "Echo Feedback", "78", "4",
+            "Echo Damp", "410", "4",
 
             "Echotron WD", "348", "41",
             "Echotron Pan", "349", "41",

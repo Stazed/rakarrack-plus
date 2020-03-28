@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class EchoGui {
@@ -90,7 +90,12 @@ rkr->efx_Echo->changepar(0,Dry_Wet((int)(o->value())));}
   }
   Fl_Value_Slider echo_RV {
     label Reverse
-    callback {rkr->efx_Echo->changepar(7,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(407);
+ return;
+} 
+rkr->efx_Echo->changepar(7,(int)o->value());}
     xywh {56 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -107,13 +112,23 @@ rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
   }
   Fl_Value_Slider echo_delay {
     label Delay
-    callback {rkr->efx_Echo->changepar(2,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(408);
+ return;
+} 
+rkr->efx_Echo->changepar(2,(int)o->value());}
     xywh {56 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
     class SliderW
   }
   Fl_Value_Slider echo_LRdl {
     label {L/R Delay}
-    callback {rkr->efx_Echo->changepar(3,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(409);
+ return;
+} 
+rkr->efx_Echo->changepar(3,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -147,7 +162,12 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
   }
   Fl_Value_Slider echo_damp {
     label Damp
-    callback {rkr->efx_Echo->changepar(6,(int)o->value());} selected
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(410);
+ return;
+} 
+rkr->efx_Echo->changepar(6,(int)o->value());} selected
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

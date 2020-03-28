@@ -4656,6 +4656,22 @@ void RKRGUI::ActMIDI()
                 CHORUS->chorus_delay->value(rkr->efx_Chorus->getpar(7));
                 CHORUS->chorus_delay->redraw();
                 break;
+            case 407:
+                ECHO->echo_RV->value(rkr->efx_Echo->getpar(7));
+                ECHO->echo_RV->redraw();
+                break;
+            case 408:
+                ECHO->echo_delay->value(rkr->efx_Echo->getpar(2));
+                ECHO->echo_delay->redraw();
+                break;
+            case 409:
+                ECHO->echo_LRdl->value(rkr->efx_Echo->getpar(3));
+                ECHO->echo_LRdl->redraw();
+                break;
+            case 410:
+                ECHO->echo_damp->value(rkr->efx_Echo->getpar(6));
+                ECHO->echo_damp->redraw();
+                break;
         }
     }
 
