@@ -298,7 +298,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_level->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_level->when(FL_WHEN_CHANGED);
 } // SliderW* mbdist_level
-{ mbdist_volL = new SliderW(56, 76, 100, 10, "L.Gain");
+{ mbdist_volL = new SliderW(56, 76, 100, 10, "L. Gain");
+  mbdist_volL->tooltip("Low Gain");
   mbdist_volL->type(5);
   mbdist_volL->box(FL_FLAT_BOX);
   mbdist_volL->color((Fl_Color)178);
@@ -314,7 +315,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_volL->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_volL->when(FL_WHEN_CHANGED);
 } // SliderW* mbdist_volL
-{ mbdist_volM = new SliderW(56, 89, 100, 10, "M.Gain");
+{ mbdist_volM = new SliderW(56, 89, 100, 10, "M. Gain");
+  mbdist_volM->tooltip("Mid Gain");
   mbdist_volM->type(5);
   mbdist_volM->box(FL_FLAT_BOX);
   mbdist_volM->color((Fl_Color)178);
@@ -331,6 +333,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_volM->when(FL_WHEN_CHANGED);
 } // SliderW* mbdist_volM
 { mbdist_volH = new SliderW(56, 102, 100, 10, "H. Gain");
+  mbdist_volH->tooltip("High Gain");
   mbdist_volH->type(5);
   mbdist_volH->box(FL_FLAT_BOX);
   mbdist_volH->color((Fl_Color)178);

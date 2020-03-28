@@ -125,25 +125,25 @@ rkr->efx_MBDist->changepar(4,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider mbdist_volL {
-    label {L.Gain}
+    label {L. Gain}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(206);
  return;
 } 
 rkr->efx_MBDist->changepar(8,(int)o->value());}
-    xywh {56 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    tooltip {Low Gain} xywh {56 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_volM {
-    label {M.Gain}
+    label {M. Gain}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(207);
  return;
 } 
 rkr->efx_MBDist->changepar(9,(int)o->value());}
-    xywh {56 89 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+    tooltip {Mid Gain} xywh {56 89 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_volH {
@@ -153,8 +153,8 @@ rkr->efx_MBDist->changepar(9,(int)o->value());}
  rgui->getMIDIControl(208);
  return;
 } 
-rkr->efx_MBDist->changepar(10,(int)o->value());}
-    xywh {56 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
+rkr->efx_MBDist->changepar(10,(int)o->value());} selected
+    tooltip {High Gain} xywh {56 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider mbdist_cross1 {
@@ -201,7 +201,7 @@ rkr->efx_MBDist->changepar(13,(int)o->value());}
  rgui->getMIDIControl(211);
  return;
 } 
-rkr->efx_MBDist->changepar(1,(int)(o->value()+64));} selected
+rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
     xywh {56 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
