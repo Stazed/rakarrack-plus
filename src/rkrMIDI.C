@@ -51,6 +51,7 @@ const float C_MC_4999_RANGE     = 39.362205f;       /* (5000 - 1) / 127 = 39.362
 const float C_MC_990_RANGE      = 7.7952756f;       /* (1000 - 10) / 127 = 7.795275590551 */
 const float C_MC_49_RANGE       = 0.385827f;        /* (50 - 1) / 127 = 0.385826771654 */
 const float C_MC_80_RANGE       = 0.62992126f;      /* 80 / 127 = 0.629921259843 */
+const float C_MC_24_RANGE       = 0.18897638f;      /* 24 / 127 = 0.188976377953  */
 
 void
 RKR::InitMIDI()
@@ -971,7 +972,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         if (Harmonizer_Bypass)
         {
             Harmonizer_Bypass = 0;
-            efx_Har->changepar(3, (int) ((float) value * .18897638f));
+            efx_Har->changepar(3, (int) ((float) value * C_MC_24_RANGE));
             Harmonizer_Bypass = 1;
         }
         break;

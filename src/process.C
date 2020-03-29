@@ -607,10 +607,10 @@ RKR::RKR()
             "Flanger Feedback", "80", "7",
             "Flanger L/R Cross", "92", "7",
 
-            "Harmonizer Freq", "26", "14",
+            "Harmonizer Dry/Wet", "31", "14",
             "Harmonizer Interval", "27", "14",
             "Harmonizer Pan", "49", "14",
-            "Harmonizer Wet/Dry", "31", "14",
+            "Harmonizer Freq", "26", "14",
 
             "Infinity WD", "395", "46",
             "Infinity Res", "396", "46",
