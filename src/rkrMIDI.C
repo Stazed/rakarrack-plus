@@ -54,6 +54,7 @@ const float C_MC_80_RANGE       = 0.62992126f;      /* 80 / 127 = 0.629921259843
 const float C_MC_24_RANGE       = 0.18897638f;      /* 24 / 127 = 0.188976377953  */
 const float C_MC_2000_RANGE     = 15.7480315f;      /* 2000 / 127 = 15.748031496063 */
 const float C_MC_32_RANGE       = 0.25196850393701f;  /* 32 / 127 = 0.2519685039370079 */
+const float C_MC_360_RANGE      = 2.83464567f;      /* (380 - 20) / 127 = 2.8346456692913 */
 
 void
 RKR::InitMIDI()
@@ -2566,6 +2567,10 @@ RKR::process_midi_controller_events(int parameter, int value)
 
     case 422:
         efx_Infinity->changepar(8, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 423:
+        efx_Looper->changepar(14, 20 + (int) ((float) value * C_MC_360_RANGE));
         break;
     }
 }

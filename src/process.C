@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 397;
+    NumParams = 398;
 
     {
         static const char *los_params[] = {
@@ -634,19 +634,20 @@ RKR::RKR()
 
             "Input", "14", "50",
 
-            "Looper Auto Play", " 271", "30",
-            "Looper Clear", "279", "30",
+            "Looper Dry/Wet", "267", "30",
             "Looper Level 1", "268", "30",
             "Looper Level 2", "269", "30",
+            "Looper Tempo", "423", "30",
+            "Looper Reverse", "270", "30",
+            "Looper Auto Play", " 271", "30",
             "Looper Play", "272", "30",
+            "Looper Pause", "273", "30",
+            "Looper Record", "274", "30",
             "Looper R1", "275", "30",
             "Looper R2", "276", "30",
-            "Looper Record", "274", "30",
-            "Looper Reverse", "270", "30",
-            "Looper Stop", "273", "30",
             "Looper Track 1", "277", "30",
             "Looper Track 2", "278", "30",
-            "Looper WD", "267", "30",
+            "Looper Clear", "279", "30",
 
             "Multi On/Off", "116", "50",
 

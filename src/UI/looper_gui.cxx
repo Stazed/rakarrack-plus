@@ -85,7 +85,12 @@ void LooperGui::cb_looper_level2(SliderW* o, void* v) {
 }
 
 void LooperGui::cb_looper_Tempo_i(SliderW* o, void*) {
-  rkr->efx_Looper->changepar(14,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(423);
+ return;
+}
+rkr->efx_Looper->changepar(14,(int)o->value());
 }
 void LooperGui::cb_looper_Tempo(SliderW* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_Tempo_i(o,v);

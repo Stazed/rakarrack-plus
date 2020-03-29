@@ -91,7 +91,12 @@ rkr->efx_Looper->changepar(10,(int)o->value());}
   }
   Fl_Value_Slider looper_Tempo {
     label Tempo
-    callback {rkr->efx_Looper->changepar(14,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(423);
+ return;
+}
+rkr->efx_Looper->changepar(14,(int)o->value());} selected
     xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 380 step 1 value 100 textcolor 7
     class SliderW
   }
@@ -115,7 +120,7 @@ rkr->efx_Looper->changepar(10,(int)o->value());}
  rgui->getMIDIControl(270);
  return;
 }
-rkr->efx_Looper->changepar(5,(int)o->value())} selected
+rkr->efx_Looper->changepar(5,(int)o->value())}
     tooltip {Play Loop in Reverse} xywh {8 89 61 15} down_box BORDER_BOX labelsize 10 labelcolor 7
   }
   Fl_Check_Button looper_ap {

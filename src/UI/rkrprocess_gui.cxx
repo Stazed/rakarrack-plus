@@ -4720,6 +4720,10 @@ void RKRGUI::ActMIDI()
                 INFINIT->infinity_8->value(rkr->efx_Infinity->getpar(8) - 64);
                 INFINIT->infinity_8->redraw();
                 break;
+            case 423:
+                LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(14));
+                LOOPER->looper_Tempo->redraw();
+                break;
         }
     }
 

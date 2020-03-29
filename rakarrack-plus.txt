@@ -141,13 +141,14 @@ FIXME Help .png
 Infinity
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Add LV2 default - plain as preset - done
+    Added missing Filter Band level 1 - 8 to MIDI control
 ---Done---
 FIXME Help .png
-Missing Band Gain 1-8, Stages MC
+FIXME add override class to make handle() work for Fl_Value_Input, right click MIDI control.
 
 Looper
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |  -------------    |      ----------   |
-Missing Tempo MC
+    Added Tempo to MIDI control
 
 MusicalDelay
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
