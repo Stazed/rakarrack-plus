@@ -174,7 +174,7 @@
                 lv2:symbol "TEMPO" ;
                 lv2:name "Tempo" ;
                 lv2:default 14 ;
-                lv2:minimum 0 ;
+                lv2:minimum 1 ;
                 lv2:maximum 600 ;
                 lv2:portProperty lv2:integer ;
                 units:unit units:bpm ;
