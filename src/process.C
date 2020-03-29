@@ -651,14 +651,14 @@ RKR::RKR()
 
             "Multi On/Off", "116", "50",
 
-            "Musical Delay Fb 1", "83", "15",
-            "Musical Delay Fb 2", "84", "15",
-            "Musical Delay Gain 1", "24", "15",
-            "Musical Delay Gain 2", "25", "15",
-            "Musical Delay LR_Cr", "98", "15",
+            "Musical Delay Dry/Wet", "56", "15",
+            "Musical Delay L/R Cross", "98", "15",
             "Musical Delay Pan 1", "62", "15",
             "Musical Delay Pan 2", "65", "15",
-            "Musical Delay Wet/Dry", "56", "15",
+            "Musical Delay Gain 1", "24", "15",
+            "Musical Delay Gain 2", "25", "15",
+            "Musical Delay FB 1", "83", "15",
+            "Musical Delay FB 2", "84", "15",
 
             "MuTroMojo E. Sens", "265", "31",
             "MuTroMojo BP", "258", "31",
