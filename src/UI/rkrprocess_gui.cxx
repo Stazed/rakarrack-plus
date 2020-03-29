@@ -4724,6 +4724,15 @@ void RKRGUI::ActMIDI()
                 LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(14));
                 LOOPER->looper_Tempo->redraw();
                 break;
+            case 424:
+                MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
+                MUSDELAY->musdelay_tempo->redraw();
+                break;
+            case 425:
+                MUSDELAY->musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
+                MUSDELAY->musdelay_damp->redraw();
+                break;
+        
         }
     }
 

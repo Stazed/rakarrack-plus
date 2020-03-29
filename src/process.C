@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 398;
+    NumParams = 400;
 
     {
         static const char *los_params[] = {
@@ -655,10 +655,12 @@ RKR::RKR()
             "Musical Delay L/R Cross", "98", "15",
             "Musical Delay Pan 1", "62", "15",
             "Musical Delay Pan 2", "65", "15",
+            "Musical Delay Tempo", "424", "15",
             "Musical Delay Gain 1", "24", "15",
             "Musical Delay Gain 2", "25", "15",
             "Musical Delay FB 1", "83", "15",
             "Musical Delay FB 2", "84", "15",
+            "Musical Delay Damp", "425", "15",
 
             "MuTroMojo E. Sens", "265", "31",
             "MuTroMojo BP", "258", "31",

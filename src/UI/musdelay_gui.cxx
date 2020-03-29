@@ -144,7 +144,12 @@ void MusdelayGui::cb_musdelay_delay2(Fl_Choice* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_tempo_i(SliderW* o, void*) {
-  rkr->MusDelay_Bypass=0;
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(424);
+ return;
+}
+rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(10,(int)o->value());
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;
 }
@@ -201,7 +206,12 @@ void MusdelayGui::cb_musdelay_fb2(SliderW* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_damp_i(SliderW* o, void*) {
-  rkr->efx_MusDelay->changepar(6,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(425);
+ return;
+}
+rkr->efx_MusDelay->changepar(6,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_damp(SliderW* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_damp_i(o,v);
