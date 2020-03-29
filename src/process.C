@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 400;
+    NumParams = 403;
 
     {
         static const char *los_params[] = {
@@ -666,8 +666,8 @@ RKR::RKR()
             "MuTroMojo LP", "257", "31",
             "MuTroMojo BP", "258", "31",
             "MuTroMojo HP", "259", "31",
-   //         "MuTroMojo Random", "426", "31",
-   //         "MuTroMojo Stereo Df", "427", "31",
+            "MuTroMojo Random", "426", "31",
+            "MuTroMojo Stereo Df", "427", "31",
             "MuTroMojo Depth", "260", "31",
             "MuTroMojo Tempo", "261", "31",
             "MuTroMojo Res", "262", "31",
@@ -675,7 +675,7 @@ RKR::RKR()
             "MuTroMojo Wah", "264", "31",
             "MuTroMojo E. Sens", "265", "31",
             "MuTroMojo Smooth", "266", "31",
-   //         "MuTroMojo St. Freq", "428", "31",
+            "MuTroMojo St. Freq", "428", "31",
 
             "Opticaltrem Depth", "381", "44",
             "Opticaltrem Pan", "385", "44",

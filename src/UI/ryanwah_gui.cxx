@@ -141,11 +141,11 @@ void RyanwahGui::cb_ryanwah_hp(SliderW* o, void* v) {
 }
 
 void RyanwahGui::cb_ryanwah_Rnd_i(SliderW* o, void*) {
-  /*if(Fl::event_button()==3)
+  if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(259);
+ rgui->getMIDIControl(426);
  return;
-}*/
+}
 rkr->efx_RyanWah->changepar(3,(int)o->value());
 }
 void RyanwahGui::cb_ryanwah_Rnd(SliderW* o, void* v) {
@@ -153,11 +153,11 @@ void RyanwahGui::cb_ryanwah_Rnd(SliderW* o, void* v) {
 }
 
 void RyanwahGui::cb_ryanwah_St_i(SliderW* o, void*) {
-  /*if(Fl::event_button()==3)
+  if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(259);
+ rgui->getMIDIControl(427);
  return;
-}*/
+}
 rkr->efx_RyanWah->changepar(5,(int)o->value()+64);
 }
 void RyanwahGui::cb_ryanwah_St(SliderW* o, void* v) {
@@ -263,11 +263,11 @@ void RyanwahGui::cb_ryanwah_smooth(SliderW* o, void* v) {
 }
 
 void RyanwahGui::cb_ryanwah_minfreq_i(SliderW* o, void*) {
-  /*if(Fl::event_button()==3)
+  if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(266);
+ rgui->getMIDIControl(428);
  return;
-}*/
+}
 rkr->efx_RyanWah->changepar(15,(int)o->value());
 }
 void RyanwahGui::cb_ryanwah_minfreq(SliderW* o, void* v) {

@@ -4732,7 +4732,18 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
                 MUSDELAY->musdelay_damp->redraw();
                 break;
-        
+            case 426:
+                RYANWAH->ryanwah_Rnd->value(rkr->efx_RyanWah->getpar(3));
+                RYANWAH->ryanwah_Rnd->redraw();
+                break;
+            case 427:
+                RYANWAH->ryanwah_St->value(rkr->efx_RyanWah->getpar(5) - 64);
+                RYANWAH->ryanwah_St->redraw();
+                break;
+            case 428:
+                RYANWAH->ryanwah_minfreq->value(rkr->efx_RyanWah->getpar(15));
+                RYANWAH->ryanwah_minfreq->redraw();
+                break;
         }
     }
 
