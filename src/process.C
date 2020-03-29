@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 403;
+    NumParams = 410;
 
     {
         static const char *los_params[] = {
@@ -676,6 +676,14 @@ RKR::RKR()
             "MuTroMojo E. Sens", "265", "31",
             "MuTroMojo Smooth", "266", "31",
             "MuTroMojo St. Freq", "428", "31",
+            
+            "NoiseGate A. Time", "429", "16",
+            "NoiseGate R. Time", "430", "16",
+            "NoiseGate Range", "431", "16",
+            "NoiseGate Threshold", "432", "16",
+            "NoiseGate Hold", "433", "16",
+            "NoiseGate LPF", "434", "16",
+            "NoiseGate HPF", "435", "16",
 
             "Opticaltrem Depth", "381", "44",
             "Opticaltrem Pan", "385", "44",

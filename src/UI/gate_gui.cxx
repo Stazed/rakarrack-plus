@@ -39,49 +39,84 @@ Fl_Menu_Item GateGui::menu_gate_preset[] = {
 };
 
 void GateGui::cb_gate_ATime_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(3,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(429);
+ return;
+}
+rkr->efx_Gate->changepar(3,(int)o->value());
 }
 void GateGui::cb_gate_ATime(SliderW* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_ATime_i(o,v);
 }
 
 void GateGui::cb_gate_RTime_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(4, (int) o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(430);
+ return;
+}
+rkr->efx_Gate->changepar(4, (int) o->value());
 }
 void GateGui::cb_gate_RTime(SliderW* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_RTime_i(o,v);
 }
 
 void GateGui::cb_gate_range_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(2, (int) o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(431);
+ return;
+}
+rkr->efx_Gate->changepar(2, (int) o->value());
 }
 void GateGui::cb_gate_range(SliderW* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_range_i(o,v);
 }
 
 void GateGui::cb_gate_threshold_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(1, (int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(432);
+ return;
+}
+rkr->efx_Gate->changepar(1, (int)o->value());
 }
 void GateGui::cb_gate_threshold(SliderW* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_threshold_i(o,v);
 }
 
 void GateGui::cb_gate_hold_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(7,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(433);
+ return;
+}
+rkr->efx_Gate->changepar(7,(int)o->value());
 }
 void GateGui::cb_gate_hold(SliderW* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_hold_i(o,v);
 }
 
 void GateGui::cb_gate_LPF_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(5, (int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(434);
+ return;
+}
+rkr->efx_Gate->changepar(5, (int)o->value());
 }
 void GateGui::cb_gate_LPF(SliderW* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_LPF_i(o,v);
 }
 
 void GateGui::cb_gate_HPF_i(SliderW* o, void*) {
-  rkr->efx_Gate->changepar(6, (int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(435);
+ return;
+}
+rkr->efx_Gate->changepar(6, (int)o->value());
 }
 void GateGui::cb_gate_HPF(SliderW* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_HPF_i(o,v);

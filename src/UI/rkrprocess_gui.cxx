@@ -4744,6 +4744,34 @@ void RKRGUI::ActMIDI()
                 RYANWAH->ryanwah_minfreq->value(rkr->efx_RyanWah->getpar(15));
                 RYANWAH->ryanwah_minfreq->redraw();
                 break;
+            case 429:
+                GATE->gate_ATime->value(rkr->efx_Gate->getpar(3));
+                GATE->gate_ATime->redraw();
+                break;
+            case 430:
+                GATE->gate_RTime->value(rkr->efx_Gate->getpar(4));
+                GATE->gate_RTime->redraw();
+                break;
+            case 431:
+                GATE->gate_range->value(rkr->efx_Gate->getpar(2));
+                GATE->gate_range->redraw();
+                break;
+            case 432:
+                GATE->gate_threshold->value(rkr->efx_Gate->getpar(1));
+                GATE->gate_threshold->redraw();
+                break;
+            case 433:
+                GATE->gate_hold->value(rkr->efx_Gate->getpar(7));
+                GATE->gate_hold->redraw();
+                break;
+            case 434:
+                GATE->gate_LPF->value(rkr->efx_Gate->getpar(5));
+                GATE->gate_LPF->redraw();
+                break;
+            case 435:
+                GATE->gate_HPF->value(rkr->efx_Gate->getpar(6));
+                GATE->gate_HPF->redraw();
+                break;
         }
     }
 
