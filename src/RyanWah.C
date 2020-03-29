@@ -359,7 +359,7 @@ RyanWah::changepar(int npar, int value)
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case 6: // Depth
         setwidth(value);
         break;
     case 7:
