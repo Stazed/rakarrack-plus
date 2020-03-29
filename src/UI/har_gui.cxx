@@ -74,7 +74,12 @@ void HarGui::cb_har_int(SliderW* o, void* v) {
 }
 
 void HarGui::cb_har_gan_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(2,(int)(o->value()+64));
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(412);
+ return;
+} 
+rkr->efx_Har->changepar(2,(int)(o->value()+64));
 }
 void HarGui::cb_har_gan(SliderW* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_gan_i(o,v);
@@ -105,14 +110,24 @@ void HarGui::cb_har_freq1(SliderW* o, void* v) {
 }
 
 void HarGui::cb_har_gan1_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(8,(int)(o->value()+64));
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(413);
+ return;
+} 
+rkr->efx_Har->changepar(8,(int)(o->value()+64));
 }
 void HarGui::cb_har_gan1(SliderW* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_gan1_i(o,v);
 }
 
 void HarGui::cb_har_q1_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(9,(int)(o->value()+64));
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(414);
+ return;
+} 
+rkr->efx_Har->changepar(9,(int)(o->value()+64));
 }
 void HarGui::cb_har_q1(SliderW* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_q1_i(o,v);

@@ -4676,6 +4676,18 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_delay->value(rkr->efx_Flanger->getpar(7));
                 FLANGER->flanger_delay->redraw();
                 break;
+            case 412:
+                HAR->har_gan->value(rkr->efx_Har->getpar(2) - 64);
+                HAR->har_gan->redraw();
+                break;
+            case 413:
+                HAR->har_gan1->value(rkr->efx_Har->getpar(8) - 64);
+                HAR->har_gan1->redraw();
+                break;
+            case 414:
+                HAR->har_q1->value(rkr->efx_Har->getpar(9) - 64);
+                HAR->har_q1->redraw();
+                break;
         }
     }
 

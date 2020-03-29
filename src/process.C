@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 386;
+    NumParams = 389;
 
     {
         static const char *los_params[] = {
@@ -609,8 +609,11 @@ RKR::RKR()
 
             "Harmonizer Dry/Wet", "31", "14",
             "Harmonizer Interval", "27", "14",
+            "Harmonizer Gain", "412", "14",
             "Harmonizer Pan", "49", "14",
             "Harmonizer Freq", "26", "14",
+            "Harmonizer Filter Gain", "413", "14",
+            "Harmonizer Filter Q", "414", "14",
 
             "Infinity WD", "395", "46",
             "Infinity Res", "396", "46",
