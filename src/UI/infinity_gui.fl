@@ -218,8 +218,8 @@ rkr->efx_Infinity->changepar(11,(int)o->value());}
  rgui->getMIDIControl(401);
  return;
 } 
-rkr->efx_Infinity->changepar(12,(int)o->value());}
-    xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 600 step 1 textcolor 7
+rkr->efx_Infinity->changepar(12,(int)o->value());} selected
+    xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider infinity_subdiv {
@@ -229,7 +229,7 @@ rkr->efx_Infinity->changepar(12,(int)o->value());}
  rgui->getMIDIControl(402);
  return;
 } 
-rkr->efx_Infinity->changepar(14,(int)o->value());} selected
+rkr->efx_Infinity->changepar(14,(int)o->value());}
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -16 maximum 16 step 1 textcolor 7
     class SliderW
   }

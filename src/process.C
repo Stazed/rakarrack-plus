@@ -615,10 +615,10 @@ RKR::RKR()
             "Harmonizer Filter Gain", "413", "14",
             "Harmonizer Filter Q", "414", "14",
 
-            "Infinity WD", "395", "46",
+            "Infinity Dry/Wet", "395", "46",
             "Infinity Res", "396", "46",
             "Infinity AutoPan", "397", "46",
-            "Infinity St_df", "398", "46",
+            "Infinity Stereo Df", "398", "46",
             "Infinity Start", "399", "46",
             "Infinity End", "400", "46",
             "Infinity Tempo", "401", "46",

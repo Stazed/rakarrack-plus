@@ -460,6 +460,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_rate->labelfont(0);
   infinity_rate->labelsize(10);
   infinity_rate->labelcolor(FL_BACKGROUND2_COLOR);
+  infinity_rate->minimum(1);
   infinity_rate->maximum(600);
   infinity_rate->step(1);
   infinity_rate->textcolor(FL_BACKGROUND2_COLOR);
