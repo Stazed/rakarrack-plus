@@ -2535,6 +2535,38 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 414:
         efx_Har->changepar(9, value);
         break;
+
+    case 415:
+        efx_Infinity->changepar(1, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 416:
+        efx_Infinity->changepar(2, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 417:
+        efx_Infinity->changepar(3, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 418:
+        efx_Infinity->changepar(4, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 419:
+        efx_Infinity->changepar(5, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 420:
+        efx_Infinity->changepar(6, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 421:
+        efx_Infinity->changepar(7, (int) ((float) value * C_MC_128_RANGE));
+        break;
+
+    case 422:
+        efx_Infinity->changepar(8, (int) ((float) value * C_MC_128_RANGE));
+        break;
     }
 }
 

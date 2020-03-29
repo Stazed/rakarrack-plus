@@ -4688,6 +4688,38 @@ void RKRGUI::ActMIDI()
                 HAR->har_q1->value(rkr->efx_Har->getpar(9) - 64);
                 HAR->har_q1->redraw();
                 break;
+            case 415:
+                INFINIT->infinity_1->value(rkr->efx_Infinity->getpar(1) - 64);
+                INFINIT->infinity_1->redraw();
+                break;
+            case 416:
+                INFINIT->infinity_2->value(rkr->efx_Infinity->getpar(2) - 64);
+                INFINIT->infinity_2->redraw();
+                break;
+            case 417:
+                INFINIT->infinity_3->value(rkr->efx_Infinity->getpar(3) - 64);
+                INFINIT->infinity_3->redraw();
+                break;
+            case 418:
+                INFINIT->infinity_4->value(rkr->efx_Infinity->getpar(4) - 64);
+                INFINIT->infinity_4->redraw();
+                break;
+            case 419:
+                INFINIT->infinity_5->value(rkr->efx_Infinity->getpar(5) - 64);
+                INFINIT->infinity_5->redraw();
+                break;
+            case 420:
+                INFINIT->infinity_6->value(rkr->efx_Infinity->getpar(6) - 64);
+                INFINIT->infinity_6->redraw();
+                break;
+            case 421:
+                INFINIT->infinity_7->value(rkr->efx_Infinity->getpar(7) - 64);
+                INFINIT->infinity_7->redraw();
+                break;
+            case 422:
+                INFINIT->infinity_8->value(rkr->efx_Infinity->getpar(8) - 64);
+                INFINIT->infinity_8->redraw();
+                break;
         }
     }
 

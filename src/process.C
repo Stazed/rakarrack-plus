@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 389;
+    NumParams = 397;
 
     {
         static const char *los_params[] = {
@@ -617,6 +617,14 @@ RKR::RKR()
 
             "Infinity Dry/Wet", "395", "46",
             "Infinity Res", "396", "46",
+            "Infinity Filter Band 1", "415", "46",
+            "Infinity Filter Band 2", "416", "46",
+            "Infinity Filter Band 3", "417", "46",
+            "Infinity Filter Band 4", "418", "46",
+            "Infinity Filter Band 5", "419", "46",
+            "Infinity Filter Band 6", "420", "46",
+            "Infinity Filter Band 7", "421", "46",
+            "Infinity Filter Band 8", "422", "46",
             "Infinity AutoPan", "397", "46",
             "Infinity Stereo Df", "398", "46",
             "Infinity Start", "399", "46",
