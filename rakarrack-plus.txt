@@ -207,15 +207,15 @@ FIXME Help .png
 
 Reverb
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
+    Added Time, I. Del, Del. E/R, R. Size, Damping to MIDI control
 ---Done---
 FIXME Help .png
-Missing Time, I.Del, Del.E/R, R. Size, Damping
 
 Reverbtron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
+    Added Diffusion, LPF to MIDI control
 ---Done---
 FIXME Help .png
-Missing Diffusion, LPF MC
 
 Ring
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
