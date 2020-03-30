@@ -65,6 +65,7 @@ const float C_MC_7200_RANGE     = 56.6929134f;      /* (8000 - 800) / 127 = 56.6
 const float C_MC_20000_RANGE    = 157.480315f;      /* (26000 - 6000) / 127 = 157.480314961 */
 const float C_MC_1480_RANGE     = 11.653543f;       /* (1500 - 20) / 127 = 11.6535433071 */
 const float C_MC_500_RANGE      = 3.9370079f;       /* 500 / 127 = 3.937007874 */
+const float C_MC_25980_RANGE    = 204.566929f;      /* (26000 - 20) / 127 = 204.5669291338583 */
 
 void
 RKR::InitMIDI()
@@ -1508,6 +1509,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 165:
+        /* This is labeled LPF but uses same range as HPF - FIXME check DSP */
         efx_DFlange->changepar(7, 20 + (int) ((float) value * C_MC_19980_RANGE));
         break;
 
@@ -2646,12 +2648,12 @@ RKR::ret_Tempo(int value)
 int
 RKR::ret_LPF(int value)
 {
-    return ( 20 + (int) ((float) value * 204.566929f));
+    return ( 20 + (int) ((float) value * C_MC_25980_RANGE));
 }
 
 int
 RKR::ret_HPF(int value)
 {
-    return ( 20 + (int) ((float) value * 157.32284f));
+    return ( 20 + (int) ((float) value * C_MC_19980_RANGE));
 }
 
