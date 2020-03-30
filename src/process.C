@@ -864,13 +864,13 @@ RKR::RKR()
             "Vibe L/R Cross", "393", "45",
             "Vibe Pan", "394", "45",
 
-            "Vocoder Input", "298", "35",
-            "Vocoder Level", "302", "35",
-            "Vocoder Muf.", "299", "35",
+            "Vocoder Dry/Wet", "296", "35",
             "Vocoder Pan", "297", "35",
+            "Vocoder Input", "298", "35",
+            "Vocoder Smear", "299", "35",
             "Vocoder Q", "300", "35",
             "Vocoder Ring", "301", "35",
-            "Vocoder WD", "296", "35",
+            "Vocoder Level", "302", "35",
 
             "Volume", "7", "50",
 
