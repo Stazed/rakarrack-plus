@@ -42,10 +42,10 @@ revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
 revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
 revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
-revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
+revtron_diff->value(rkr->efx_Reverbtron->getpar(15));
 
 revtron_es->value(rkr->efx_Reverbtron->getpar(12));
-revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
+revtron_rv->value(rkr->efx_Reverbtron->getpar(13));} selected
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -169,7 +169,7 @@ rkr->efx_Reverbtron->changepar(9,(int)o->value());}
  rgui->getMIDIControl(346);
  return;
 }
-rkr->efx_Reverbtron->changepar(5,(int)o->value());} selected
+rkr->efx_Reverbtron->changepar(5,(int)o->value());}
     tooltip {Initial Delay} xywh {56 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 500 step 1 textcolor 7
     class SliderW
   }
@@ -184,7 +184,7 @@ rkr->efx_Reverbtron->changepar(1,(int)o->value());}
     xywh {56 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
-  Fl_Value_Slider revtron_HPF {
+  Fl_Value_Slider revtron_diff {
     label Diffusion
     callback {if(Fl::event_button()==3)
 {

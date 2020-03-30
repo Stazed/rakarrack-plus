@@ -4797,8 +4797,8 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_damp->redraw();
                 break;
             case 442:
-                REVERBTRON->revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
-                REVERBTRON->revtron_HPF->redraw();
+                REVERBTRON->revtron_diff->value(rkr->efx_Reverbtron->getpar(15));
+                REVERBTRON->revtron_diff->redraw();
                 break;
             case 443:
                 REVERBTRON->revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));

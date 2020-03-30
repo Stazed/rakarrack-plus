@@ -71,10 +71,10 @@ private:
   inline void cb_revtron_fade_i(SliderW*, void*);
   static void cb_revtron_fade(SliderW*, void*);
 public:
-  SliderW *revtron_HPF;
+  SliderW *revtron_diff;
 private:
-  inline void cb_revtron_HPF_i(SliderW*, void*);
-  static void cb_revtron_HPF(SliderW*, void*);
+  inline void cb_revtron_diff_i(SliderW*, void*);
+  static void cb_revtron_diff(SliderW*, void*);
 public:
   SliderW *revtron_LPF;
 private:

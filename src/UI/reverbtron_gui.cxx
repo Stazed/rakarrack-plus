@@ -34,7 +34,7 @@ revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
 revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
 revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
 revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
-revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
+revtron_diff->value(rkr->efx_Reverbtron->getpar(15));
 
 revtron_es->value(rkr->efx_Reverbtron->getpar(12));
 revtron_rv->value(rkr->efx_Reverbtron->getpar(13));
@@ -164,7 +164,7 @@ void RevtronGui::cb_revtron_fade(SliderW* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_fade_i(o,v);
 }
 
-void RevtronGui::cb_revtron_HPF_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_diff_i(SliderW* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(442);
@@ -172,8 +172,8 @@ void RevtronGui::cb_revtron_HPF_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(15,(int)o->value());
 }
-void RevtronGui::cb_revtron_HPF(SliderW* o, void* v) {
-  ((RevtronGui*)(o->parent()))->cb_revtron_HPF_i(o,v);
+void RevtronGui::cb_revtron_diff(SliderW* o, void* v) {
+  ((RevtronGui*)(o->parent()))->cb_revtron_diff_i(o,v);
 }
 
 void RevtronGui::cb_revtron_LPF_i(SliderW* o, void*) {
@@ -428,22 +428,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_fade->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_fade->when(FL_WHEN_RELEASE);
 } // SliderW* revtron_fade
-{ revtron_HPF = new SliderW(56, 133, 100, 10, "Diffusion");
-  revtron_HPF->type(5);
-  revtron_HPF->box(FL_FLAT_BOX);
-  revtron_HPF->color((Fl_Color)178);
-  revtron_HPF->selection_color((Fl_Color)62);
-  revtron_HPF->labeltype(FL_NORMAL_LABEL);
-  revtron_HPF->labelfont(0);
-  revtron_HPF->labelsize(10);
-  revtron_HPF->labelcolor(FL_BACKGROUND2_COLOR);
-  revtron_HPF->maximum(127);
-  revtron_HPF->step(1);
-  revtron_HPF->textcolor(FL_BACKGROUND2_COLOR);
-  revtron_HPF->callback((Fl_Callback*)cb_revtron_HPF);
-  revtron_HPF->align(Fl_Align(FL_ALIGN_LEFT));
-  revtron_HPF->when(FL_WHEN_RELEASE);
-} // SliderW* revtron_HPF
+{ revtron_diff = new SliderW(56, 133, 100, 10, "Diffusion");
+  revtron_diff->type(5);
+  revtron_diff->box(FL_FLAT_BOX);
+  revtron_diff->color((Fl_Color)178);
+  revtron_diff->selection_color((Fl_Color)62);
+  revtron_diff->labeltype(FL_NORMAL_LABEL);
+  revtron_diff->labelfont(0);
+  revtron_diff->labelsize(10);
+  revtron_diff->labelcolor(FL_BACKGROUND2_COLOR);
+  revtron_diff->maximum(127);
+  revtron_diff->step(1);
+  revtron_diff->textcolor(FL_BACKGROUND2_COLOR);
+  revtron_diff->callback((Fl_Callback*)cb_revtron_diff);
+  revtron_diff->align(Fl_Align(FL_ALIGN_LEFT));
+  revtron_diff->when(FL_WHEN_RELEASE);
+} // SliderW* revtron_diff
 { revtron_LPF = new SliderW(56, 145, 100, 10, "LPF");
   revtron_LPF->tooltip("Lowpass Filter");
   revtron_LPF->type(5);
