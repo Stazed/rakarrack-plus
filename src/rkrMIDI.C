@@ -2471,15 +2471,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 392:
-        efx_Vibe->changepar(7, value);
+        efx_Vibe->changepar(7, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 393:
-        efx_Vibe->changepar(9, value);
+        efx_Vibe->changepar(9, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 394:
-        efx_Vibe->changepar(5, value);
+        efx_Vibe->changepar(5, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 395:
