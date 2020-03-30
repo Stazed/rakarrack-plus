@@ -72,6 +72,8 @@ const float C_MC_7_RANGE        = 0.05511811f;      /* 7 / 127 = 0.055118110236 
 const float C_MC_15780_RANGE    = 124.25197f;       /* (16000 - 220) / 127 = 124.251968503937 */
 const float C_MC_12_RANGE       = 0.094488189f;     /* 12 / 127 = 0.094488188976 */
 const float C_MC_1999_RANGE     = 15.748031f;       /* (2000 - 1) / 127 = 15.740157480315 */
+const float C_MC_3600_RANGE     = 28.34645669f;     /* (4000 - 400) / 127 = 28.3464566929134 */
+const float C_MC_6800_RANGE     = 53.54330709f;         /* (8000 - 1200) / 127 = 53.5433070866142 */
 
 void
 RKR::InitMIDI()
@@ -1768,39 +1770,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 228:
-        efx_Shuffle->changepar(5, 20 + (int) ((float) value * 7.7165));
+        efx_Shuffle->changepar(5, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 229:
-        efx_Shuffle->changepar(1, value - 64);
+        efx_Shuffle->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 230:
-        efx_Shuffle->changepar(6, 400 + (int) ((float) value * 28.3464));
+        efx_Shuffle->changepar(6, 400 + (int) ((float) value * C_MC_3600_RANGE));
         break;
 
     case 231:
-        efx_Shuffle->changepar(2, value - 64);
+        efx_Shuffle->changepar(2, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 232:
-        efx_Shuffle->changepar(7, 1200 + (int) ((float) value * 53.5433));
+        efx_Shuffle->changepar(7, 1200 + (int) ((float) value * C_MC_6800_RANGE));
         break;
 
     case 233:
-        efx_Shuffle->changepar(3, value - 64);
+        efx_Shuffle->changepar(3, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 234:
-        efx_Shuffle->changepar(8, 6000 + (int) ((float) value * 157.48031));
+        efx_Shuffle->changepar(8, 6000 + (int) ((float) value * C_MC_20000_RANGE));
         break;
 
     case 235:
-        efx_Shuffle->changepar(4, value - 64);
+        efx_Shuffle->changepar(4, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 236:
-        efx_Shuffle->changepar(9, value - 64);
+        efx_Shuffle->changepar(9, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 237:
