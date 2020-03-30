@@ -4493,12 +4493,12 @@ void RKRGUI::ActMIDI()
             case 366:
                 SHAR->shar_note->value(rkr->efx_StereoHarm->getpar(8));
                 SHAR->shar_note->redraw();
-                Chord(1);
+                Chord(1);   // update gui
                 break;
             case 367:
                 SHAR->shar_type->value(rkr->efx_StereoHarm->getpar(9));
                 SHAR->shar_type->redraw();
-                Chord(1);
+                Chord(1);   // update gui
                 break;
             case 368:
                 COMPBAND->cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(0)));
@@ -4803,7 +4803,17 @@ void RKRGUI::ActMIDI()
             case 443:
                 REVERBTRON->revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
                 REVERBTRON->revtron_LPF->redraw();
-                break; 
+                break;
+            case 444:
+                HAR->har_note->value(rkr->efx_Har->getpar(6));
+                HAR->har_note->redraw();
+                Chord(0);   // update gui
+                break;
+            case 445:
+                HAR->har_type->value(rkr->efx_Har->getpar(7));
+                HAR->har_type->redraw();
+                Chord(0);   // update gui
+                break;
         }
     }
 

@@ -122,7 +122,7 @@ rkr->efx_Har->changepar(4,(int)o->value());}
  rgui->getMIDIControl(413);
  return;
 } 
-rkr->efx_Har->changepar(8,(int)(o->value()+64));} selected
+rkr->efx_Har->changepar(8,(int)(o->value()+64));}
     tooltip {Filter Gain} xywh {53 100 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
@@ -159,15 +159,25 @@ rgui->Chord(0);}
   }
   Fl_Value_Slider har_note {
     label Note
-    callback {rkr->efx_Har->changepar(6,(unsigned char)o->value());
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(444);
+ return;
+}
+rkr->efx_Har->changepar(6,(unsigned char)o->value());
 rgui->Chord(0);}
     xywh {53 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider har_type {
     label Chord
-    callback {rkr->efx_Har->changepar(7,(unsigned char)o->value());
-rgui->Chord(0);}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(445);
+ return;
+}
+rkr->efx_Har->changepar(7,(unsigned char)o->value());
+rgui->Chord(0);} selected
     xywh {53 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
     class SliderW
   }

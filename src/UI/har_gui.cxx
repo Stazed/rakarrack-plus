@@ -153,7 +153,12 @@ void HarGui::cb_har_SELECT(Fl_Check_Button* o, void* v) {
 }
 
 void HarGui::cb_har_note_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(6,(unsigned char)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(444);
+ return;
+}
+rkr->efx_Har->changepar(6,(unsigned char)o->value());
 rgui->Chord(0);
 }
 void HarGui::cb_har_note(SliderW* o, void* v) {
@@ -161,7 +166,12 @@ void HarGui::cb_har_note(SliderW* o, void* v) {
 }
 
 void HarGui::cb_har_type_i(SliderW* o, void*) {
-  rkr->efx_Har->changepar(7,(unsigned char)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(445);
+ return;
+}
+rkr->efx_Har->changepar(7,(unsigned char)o->value());
 rgui->Chord(0);
 }
 void HarGui::cb_har_type(SliderW* o, void* v) {
