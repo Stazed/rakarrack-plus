@@ -71,7 +71,7 @@ mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));}
  rgui->getMIDIControl(248);
  return;
 }
-rkr->efx_MBVvol->changepar(0,Dry_Wet((int)(o->value())));} selected
+rkr->efx_MBVvol->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {54 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -82,7 +82,7 @@ rkr->efx_MBVvol->changepar(0,Dry_Wet((int)(o->value())));} selected
  rgui->getMIDIControl(249);
  return;
 }
-rkr->efx_MBVvol->changepar(1,(int)o->value());}
+rkr->efx_MBVvol->changepar(1,(int)o->value());} selected
     xywh {54 40 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }
@@ -132,7 +132,7 @@ rkr->efx_MBVvol->changepar(6,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider mbvvol_cross1 {
-    label Cross1
+    label {Cross 1}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(253);
@@ -143,7 +143,7 @@ rkr->efx_MBVvol->changepar(7,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider mbvvol_cross2 {
-    label Cross2
+    label {Cross 2}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(254);
@@ -154,7 +154,7 @@ rkr->efx_MBVvol->changepar(8,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider mbvvol_cross3 {
-    label Cross3
+    label {Cross 3}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(255);

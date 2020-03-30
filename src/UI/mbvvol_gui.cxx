@@ -347,7 +347,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbvvol_stdf2->align(Fl_Align(FL_ALIGN_LEFT));
   mbvvol_stdf2->when(FL_WHEN_CHANGED);
 } // SliderW* mbvvol_stdf2
-{ mbvvol_cross1 = new SliderW(54, 128, 100, 10, "Cross1");
+{ mbvvol_cross1 = new SliderW(54, 128, 100, 10, "Cross 1");
   mbvvol_cross1->type(5);
   mbvvol_cross1->box(FL_FLAT_BOX);
   mbvvol_cross1->color((Fl_Color)178);
@@ -364,7 +364,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbvvol_cross1->align(Fl_Align(FL_ALIGN_LEFT));
   mbvvol_cross1->when(FL_WHEN_CHANGED);
 } // SliderW* mbvvol_cross1
-{ mbvvol_cross2 = new SliderW(54, 140, 100, 10, "Cross2");
+{ mbvvol_cross2 = new SliderW(54, 140, 100, 10, "Cross 2");
   mbvvol_cross2->type(5);
   mbvvol_cross2->box(FL_FLAT_BOX);
   mbvvol_cross2->color((Fl_Color)178);
@@ -381,7 +381,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbvvol_cross2->align(Fl_Align(FL_ALIGN_LEFT));
   mbvvol_cross2->when(FL_WHEN_CHANGED);
 } // SliderW* mbvvol_cross2
-{ mbvvol_cross3 = new SliderW(54, 152, 100, 10, "Cross3");
+{ mbvvol_cross3 = new SliderW(54, 152, 100, 10, "Cross 3");
   mbvvol_cross3->type(5);
   mbvvol_cross3->box(FL_FLAT_BOX);
   mbvvol_cross3->color((Fl_Color)178);

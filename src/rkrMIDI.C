@@ -1875,15 +1875,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 253:
-        efx_MBVvol->changepar(7, 20 + (int) ((float) value * 7.71653));
+        efx_MBVvol->changepar(7, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 254:
-        efx_MBVvol->changepar(8, 1000 + (int) ((float) value * 55.11811));
+        efx_MBVvol->changepar(8, 1000 + (int) ((float) value * C_MC_7000_RANGE));
         break;
 
     case 255:
-        efx_MBVvol->changepar(9, 2000 + (int) ((float) value * 188.97638));
+        efx_MBVvol->changepar(9, 2000 + (int) ((float) value * C_MC_24000_RANGE));
         break;
 
     case 256:
