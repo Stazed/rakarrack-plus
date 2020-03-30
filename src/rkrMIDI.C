@@ -2235,15 +2235,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 336:
-        efx_StompBox->changepar(3, value);
+        efx_StompBox->changepar(3, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 337:
-        efx_StompBox->changepar(2, value);
+        efx_StompBox->changepar(2, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 338:
-        efx_StompBox->changepar(1, value);
+        efx_StompBox->changepar(1, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 339:

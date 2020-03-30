@@ -815,9 +815,9 @@ RKR::RKR()
 
             "StompBox Level", "334", "39",
             "StompBox Gain", "335", "39",
-            "StompBox Low", "336", "39",
+            "StompBox Bias", "336", "39",
             "StompBox Mid", "337", "39",
-            "StompBox High", "338", "39",
+            "StompBox Tone", "338", "39",
 
             "Sustainer Gain", "312", "36",
             "Sustainer Sustain", "313", "36",
