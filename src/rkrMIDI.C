@@ -77,6 +77,8 @@ const float C_MC_6800_RANGE     = 53.54330709f;     /* (8000 - 1200) / 127 = 53.
 const float C_MC_4000_RANGE     = 31.496063f;       /* 4000 / 127 = 31.496062992126 */
 const float C_MC_23_RANGE       = 0.18110236f;      /* 23 / 127 = 0.1811023622047 */
 const float C_MC_33_RANGE       = 0.25984252f;      /* 33 / 127 = 0.2598425196850 */
+const float C_MC_995_RANGE      = 7.8346457f;       /* (1000 - 5) / 127 = 7.8346456692913 */
+const float C_MC_495_RANGE      = 3.8976378f;       /* (500 - 5) / 127 = 3.8976377952756 */
 
 void
 RKR::InitMIDI()
@@ -1829,7 +1831,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 242:
-        efx_Synthfilter->changepar(7, value - 64);
+        efx_Synthfilter->changepar(7, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 243:
@@ -1837,15 +1839,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 244:
-        efx_Synthfilter->changepar(12, value - 64);
+        efx_Synthfilter->changepar(12, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 245:
-        efx_Synthfilter->changepar(13, 5 + (int) ((float) value * 7.83464));
+        efx_Synthfilter->changepar(13, 5 + (int) ((float) value * C_MC_995_RANGE));
         break;
 
     case 246:
-        efx_Synthfilter->changepar(14, 5 + (int) ((float) value * 3.8976378));
+        efx_Synthfilter->changepar(14, 5 + (int) ((float) value * C_MC_495_RANGE));
         break;
 
     case 247:
