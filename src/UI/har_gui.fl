@@ -138,7 +138,7 @@ rkr->efx_Har->changepar(9,(int)(o->value()+64));}
     class SliderW
   }
   Fl_Check_Button har_MIDI {
-    label {MIDI Mode}
+    label MIDI
     user_data 2
     callback {rkr->efx_Har->changepar(10,(int)o->value());
 rkr->RC_Harm->cleanup();
@@ -146,12 +146,17 @@ if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));}
     xywh {9 124 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
   }
   Fl_Check_Button har_SELECT {
-    label {SELECT Mode}
+    label SELECT
     user_data 2
-    callback {rkr->efx_Har->changepar(5,(int)o->value());
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(447);
+ return;
+}
+rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
-rgui->Chord(0);}
+rgui->Chord(0);} selected
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
   }
   Fl_Box har_chordname {
@@ -177,7 +182,7 @@ rgui->Chord(0);}
  return;
 }
 rkr->efx_Har->changepar(7,(unsigned char)o->value());
-rgui->Chord(0);} selected
+rgui->Chord(0);}
     xywh {53 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
     class SliderW
   }

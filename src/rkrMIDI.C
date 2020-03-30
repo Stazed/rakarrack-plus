@@ -2690,6 +2690,14 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 446:
         efx_Synthfilter->changepar(3, value);
         break;
+
+    case 447:
+        efx_Har->changepar(5, value);
+        break;
+
+    case 448:
+        efx_StereoHarm->changepar(7, value);
+        break;
     }
 }
 

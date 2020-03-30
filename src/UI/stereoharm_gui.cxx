@@ -165,7 +165,12 @@ void SharGui::cb_shar_MIDI(Fl_Check_Button* o, void* v) {
 }
 
 void SharGui::cb_shar_SELECT_i(Fl_Check_Button* o, void*) {
-  rkr->efx_StereoHarm->changepar(7,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(448);
+ return;
+}
+rkr->efx_StereoHarm->changepar(7,(int)o->value());
 rkr->RC_Stereo_Harm->cleanup();
 rgui->Chord(1);
 
@@ -375,7 +380,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shar_MIDI->callback((Fl_Callback*)cb_shar_MIDI, (void*)(2));
   shar_MIDI->align(Fl_Align(FL_ALIGN_RIGHT));
 } // Fl_Check_Button* shar_MIDI
-{ shar_SELECT = new Fl_Check_Button(9, 142, 15, 15, "SEL");
+{ shar_SELECT = new Fl_Check_Button(9, 142, 15, 15, "SELECT");
   shar_SELECT->down_box(FL_BORDER_BOX);
   shar_SELECT->labelsize(10);
   shar_SELECT->labelcolor(FL_BACKGROUND2_COLOR);

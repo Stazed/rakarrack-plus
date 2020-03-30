@@ -143,7 +143,12 @@ void HarGui::cb_har_MIDI(Fl_Check_Button* o, void* v) {
 }
 
 void HarGui::cb_har_SELECT_i(Fl_Check_Button* o, void*) {
-  rkr->efx_Har->changepar(5,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(447);
+ return;
+}
+rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 rgui->Chord(0);
@@ -323,14 +328,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_q1->align(Fl_Align(FL_ALIGN_LEFT));
   har_q1->when(FL_WHEN_CHANGED);
 } // SliderW* har_q1
-{ har_MIDI = new Fl_Check_Button(9, 124, 15, 15, "MIDI Mode");
+{ har_MIDI = new Fl_Check_Button(9, 124, 15, 15, "MIDI");
   har_MIDI->down_box(FL_BORDER_BOX);
   har_MIDI->labelsize(10);
   har_MIDI->labelcolor(FL_BACKGROUND2_COLOR);
   har_MIDI->callback((Fl_Callback*)cb_har_MIDI, (void*)(2));
   har_MIDI->align(Fl_Align(FL_ALIGN_RIGHT));
 } // Fl_Check_Button* har_MIDI
-{ har_SELECT = new Fl_Check_Button(9, 142, 15, 15, "SELECT Mode");
+{ har_SELECT = new Fl_Check_Button(9, 142, 15, 15, "SELECT");
   har_SELECT->down_box(FL_BORDER_BOX);
   har_SELECT->labelsize(10);
   har_SELECT->labelcolor(FL_BACKGROUND2_COLOR);

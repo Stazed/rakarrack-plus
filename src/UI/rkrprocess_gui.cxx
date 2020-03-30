@@ -4818,6 +4818,14 @@ void RKRGUI::ActMIDI()
                 SYNTHFILTER->synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
                 SYNTHFILTER->synthfilter_rand->redraw();
                 break;
+            case 447:
+                HAR->har_SELECT->value(rkr->efx_Har->getpar(5));
+                HAR->har_SELECT->redraw();
+                break;
+            case 448:
+                SHAR->shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
+                SHAR->shar_SELECT->redraw();
+                break;
         }
     }
 
