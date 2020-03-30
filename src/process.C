@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 416;
+    NumParams = 418;
 
     {
         static const char *los_params[] = {
@@ -745,8 +745,10 @@ RKR::RKR()
             "Reverbtron Feedback", "343", "40",
             "Reverbtron Length", "344", "40",
             "Reverbtron Stretch", "345", "40",
-            "Reverbtron I.Del", "346", "40",
+            "Reverbtron Initial Delay", "346", "40",
             "Reverbtron Fade", "347", "40",
+            "Reverbtron Diffusion", "442", "40",
+            "Reverbtron LPF", "443", "40",
 
             "Ring Depth", "183", "21",
             "Ring Freq", "184", "21",

@@ -2657,6 +2657,14 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 441:
         efx_Rev->changepar(9, 64 + (int) ((float) value * C_MC_63_RANGE));
         break;
+
+    case 442:
+        efx_Reverbtron->changepar(15, value);
+        break;
+
+    case 443:
+        efx_Reverbtron->changepar(14, ret_LPF(value));
+        break;
     }
 }
 

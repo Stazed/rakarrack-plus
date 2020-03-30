@@ -4796,6 +4796,14 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_damp->value(rkr->efx_Rev->getpar(9));
                 REVERB->reverb_damp->redraw();
                 break;
+            case 442:
+                REVERBTRON->revtron_HPF->value(rkr->efx_Reverbtron->getpar(15));
+                REVERBTRON->revtron_HPF->redraw();
+                break;
+            case 443:
+                REVERBTRON->revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
+                REVERBTRON->revtron_LPF->redraw();
+                break; 
         }
     }
 

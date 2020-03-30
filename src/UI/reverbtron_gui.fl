@@ -163,13 +163,13 @@ rkr->efx_Reverbtron->changepar(9,(int)o->value());}
     class SliderW
   }
   Fl_Value_Slider revtron_idelay {
-    label {I.Del}
+    label {I. Del}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(346);
  return;
 }
-rkr->efx_Reverbtron->changepar(5,(int)o->value());}
+rkr->efx_Reverbtron->changepar(5,(int)o->value());} selected
     tooltip {Initial Delay} xywh {56 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 500 step 1 textcolor 7
     class SliderW
   }
@@ -186,13 +186,23 @@ rkr->efx_Reverbtron->changepar(1,(int)o->value());}
   }
   Fl_Value_Slider revtron_HPF {
     label Diffusion
-    callback {rkr->efx_Reverbtron->changepar(15,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(442);
+ return;
+}
+rkr->efx_Reverbtron->changepar(15,(int)o->value());}
     xywh {56 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider revtron_LPF {
     label LPF
-    callback {rkr->efx_Reverbtron->changepar(14,(int)o->value());} selected
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(443);
+ return;
+}
+rkr->efx_Reverbtron->changepar(14,(int)o->value());}
     tooltip {Lowpass Filter} xywh {56 145 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 26000 step 1 value 20 textcolor 7
     class SliderW
   }

@@ -165,14 +165,24 @@ void RevtronGui::cb_revtron_fade(SliderW* o, void* v) {
 }
 
 void RevtronGui::cb_revtron_HPF_i(SliderW* o, void*) {
-  rkr->efx_Reverbtron->changepar(15,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(442);
+ return;
+}
+rkr->efx_Reverbtron->changepar(15,(int)o->value());
 }
 void RevtronGui::cb_revtron_HPF(SliderW* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_HPF_i(o,v);
 }
 
 void RevtronGui::cb_revtron_LPF_i(SliderW* o, void*) {
-  rkr->efx_Reverbtron->changepar(14,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(443);
+ return;
+}
+rkr->efx_Reverbtron->changepar(14,(int)o->value());
 }
 void RevtronGui::cb_revtron_LPF(SliderW* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_LPF_i(o,v);
@@ -385,7 +395,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_strech->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_strech->when(FL_WHEN_RELEASE);
 } // SliderW* revtron_strech
-{ revtron_idelay = new SliderW(56, 109, 100, 10, "I.Del");
+{ revtron_idelay = new SliderW(56, 109, 100, 10, "I. Del");
   revtron_idelay->tooltip("Initial Delay");
   revtron_idelay->type(5);
   revtron_idelay->box(FL_FLAT_BOX);
