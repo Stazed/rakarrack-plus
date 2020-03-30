@@ -2626,6 +2626,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 435:
         efx_Gate->changepar(6, ret_HPF(value));
         break;
+
+    case 436:
+        efx_Pan->changepar(6, value);
+        break;
     }
 }
 

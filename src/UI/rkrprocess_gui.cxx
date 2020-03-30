@@ -4772,6 +4772,10 @@ void RKRGUI::ActMIDI()
                 GATE->gate_HPF->value(rkr->efx_Gate->getpar(6));
                 GATE->gate_HPF->redraw();
                 break;
+            case 436:
+                PAN->pan_extra->value(rkr->efx_Pan->getpar(6));
+                PAN->pan_extra->redraw();
+                break;
         }
     }
 

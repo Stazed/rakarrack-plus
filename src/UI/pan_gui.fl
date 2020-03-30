@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class {\#include "common_gui_menu.h"} PanGui {
@@ -125,7 +125,12 @@ rkr->efx_Pan->changepar(5,(int)o->value());}
   }
   Fl_Value_Slider pan_extra {
     label {E.Stereo}
-    callback {rkr->efx_Pan->changepar(6,(int)o->value());} selected
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(436);
+ return;
+}
+rkr->efx_Pan->changepar(6,(int)o->value());} selected
     tooltip {Extra Stereo Amount} xywh {56 161 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

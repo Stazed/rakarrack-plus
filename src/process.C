@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 410;
+    NumParams = 411;
 
     {
         static const char *los_params[] = {
@@ -704,6 +704,7 @@ RKR::RKR()
             "Pan Tempo", "77", "13",
             "Pan Random", "110", "13",
             "Pan Stereo Df", "104", "13",
+            "Pan E. Stereo", "436", "13",
             
             "P.EQ Gain", "148", "9",
             "P.EQ High Freq", "155", "9",

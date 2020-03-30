@@ -188,9 +188,9 @@ FIXME Help .png
 Pan
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL - LFO L/R Delay
+    Added E. Stereo to MIDI control
 ---Done---
 FIXME Help .png
-Missing E. Stereo MC
 
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
