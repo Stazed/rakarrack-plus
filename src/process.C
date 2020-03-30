@@ -727,10 +727,10 @@ RKR::RKR()
             "Phaser Feedback", "81", "6",
             "Phaser L/R Cross", "93", "6",
 
-            "Reverb HPF", "90", "8",
-            "Reverb LPF", "87", "8",
+            "Reverb Dry/Wet", "57", "8",
             "Reverb Pan", "63", "8",
-            "Reverb Wet/Dry", "57", "8",
+            "Reverb LPF", "87", "8",
+            "Reverb HPF", "90", "8",
 
             "Reverbtron WD", "339", "40",
             "Reverbtron Pan", "340", "40",
