@@ -4814,6 +4814,10 @@ void RKRGUI::ActMIDI()
                 HAR->har_type->redraw();
                 Chord(0);   // update gui
                 break;
+            case 446:
+                SYNTHFILTER->synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
+                SYNTHFILTER->synthfilter_rand->redraw();
+                break;
         }
     }
 

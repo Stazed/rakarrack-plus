@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 420;
+    NumParams = 421;
 
     {
         static const char *los_params[] = {
@@ -825,7 +825,7 @@ RKR::RKR()
             "Synthfilter Dry/Wet", "237", "27",
             "Synthfilter Distort", "238", "27",
             "Synthfilter Tempo", "239", "27",
-            
+            "Synthfilter Random", "446", "27",
             "Synthfilter Stereo Df", "240", "27",
             "Synthfilter Width", "241", "27",
             "Synthfilter Feedback", "242", "27",

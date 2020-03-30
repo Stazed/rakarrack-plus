@@ -91,11 +91,11 @@ void SynthfilterGui::cb_synthfilter_freq(SliderW* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_rand_i(SliderW* o, void*) {
-  /*if(Fl::event_button()==3)
+  if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(240);
+ rgui->getMIDIControl(446);
  return;
-}*/
+}
 rkr->efx_Synthfilter->changepar(3,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_rand(SliderW* o, void* v) {

@@ -116,12 +116,12 @@ rkr->efx_Synthfilter->changepar(2,(int)o->value());}
   }
   Fl_Value_Slider synthfilter_rand {
     label Random
-    callback {/*if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(240);
+ rgui->getMIDIControl(446);
  return;
-}*/
-rkr->efx_Synthfilter->changepar(3,(int)o->value());}
+}
+rkr->efx_Synthfilter->changepar(3,(int)o->value());} selected
     xywh {56 59 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -231,7 +231,7 @@ rkr->efx_Synthfilter->changepar(14,(int)o->value());}
  rgui->getMIDIControl(247);
  return;
 }
-rkr->efx_Synthfilter->changepar(15,(int)o->value());} selected
+rkr->efx_Synthfilter->changepar(15,(int)o->value());}
     tooltip {HPF/LPF Offset} xywh {56 170 100 9} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

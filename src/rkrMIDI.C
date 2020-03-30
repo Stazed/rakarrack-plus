@@ -2685,6 +2685,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 445:
         efx_Har->changepar(7, (int) ((float) value * C_MC_33_RANGE));
         break;
+
+    case 446:
+        efx_Synthfilter->changepar(3, value);
+        break;
     }
 }
 
