@@ -67,6 +67,9 @@ const float C_MC_1480_RANGE     = 11.653543f;       /* (1500 - 20) / 127 = 11.65
 const float C_MC_500_RANGE      = 3.9370079f;       /* 500 / 127 = 3.937007874 */
 const float C_MC_25980_RANGE    = 204.566929f;      /* (26000 - 20) / 127 = 204.5669291338583 */
 const float C_MC_63_RANGE       = 0.49606299f;      /* (127 - 64) / 127 = 0.4960629921259843 */
+const float C_MC_19999_RANGE    = 157.472441f;         /* (20000 - 1) / 127 = 157.4724409448819 */
+const float C_MC_7_RANGE        = 0.05511811f;      /* 7 / 127 = 0.055118110236 */
+const float C_MC_15780_RANGE    = 124.25197f;       /* (16000 - 220) / 127 = 124.251968503937 */
 
 void
 RKR::InitMIDI()
@@ -1567,11 +1570,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 179:
-        efx_Ring->changepar(2, value - 64);
+        efx_Ring->changepar(2, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 180:
-        efx_Ring->changepar(11, value);
+        efx_Ring->changepar(11, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 181:
@@ -1579,31 +1582,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 182:
-        efx_Ring->changepar(1, value - 64);
+        efx_Ring->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 183:
-        efx_Ring->changepar(4, (int) ((float) value * .7874f));
+        efx_Ring->changepar(4, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 184:
-        efx_Ring->changepar(5, 1 + (int) ((float) value * 157.472f));
+        efx_Ring->changepar(5, 1 + (int) ((float) value * C_MC_19999_RANGE));
         break;
 
     case 185:
-        efx_Ring->changepar(7, (int) ((float) value * .7874f));
+        efx_Ring->changepar(7, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 186:
-        efx_Ring->changepar(8, (int) ((float) value * .7874f));
+        efx_Ring->changepar(8, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 187:
-        efx_Ring->changepar(9, (int) ((float) value * .7874f));
+        efx_Ring->changepar(9, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 188:
-        efx_Ring->changepar(10, (int) ((float) value * .7874f));
+        efx_Ring->changepar(10, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 189:
@@ -2053,15 +2056,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 293:
-        efx_ShelfBoost->changepar(4, 1 + (int) ((float) value * .992125f));
+        efx_ShelfBoost->changepar(4, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 294:
-        efx_ShelfBoost->changepar(2, 220 + (int) ((float) value * 124.25197f));
+        efx_ShelfBoost->changepar(2, 220 + (int) ((float) value * C_MC_15780_RANGE));
         break;
 
     case 295:
-        efx_ShelfBoost->changepar(1, value - 64);
+        efx_ShelfBoost->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 296:
@@ -2177,11 +2180,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 324:
-        efx_Sequence->changepar(10, value);
+        efx_Sequence->changepar(10, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 325:
-        efx_Sequence->changepar(12, (int) ((float) value * .05511811f));
+        efx_Sequence->changepar(12, (int) ((float) value * C_MC_7_RANGE));
         break;
 
     case 326:
