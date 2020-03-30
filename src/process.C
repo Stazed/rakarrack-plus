@@ -691,13 +691,13 @@ RKR::RKR()
             "Opticaltrem Stereo Df", "384", "44",
             "Opticaltrem Pan", "385", "44",
 
+            "Overdrive Dry/Wet", "29", "3",
+            "Overdrive L/R Cross", "94", "3",
             "Overdrive Drive", "68", "3",
             "Overdrive Level", "70", "3",
+            "Overdrive Pan", "47", "3",
             "Overdrive LPF", "85", "3",
             "Overdrive HPF", "88", "3",
-            "Overdrive LR_Cr", "94", "3",
-            "Overdrive Pan", "47", "3",
-            "Overdrive Wet/Dry", "29", "3",
 
             "Pan Dry/Wet", "58", "13",
             "Pan Pan", "67", "13",
