@@ -1563,7 +1563,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 175:
-        efx_Valve->changepar(12, (int) ((float) value * .7874f));
+        efx_Valve->changepar(12, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 176:
