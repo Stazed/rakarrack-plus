@@ -732,11 +732,11 @@ RKR::RKR()
             "Reverb LPF", "87", "8",
             "Reverb HPF", "90", "8",
 
-            "Reverbtron WD", "339", "40",
+            "Reverbtron Dry/Wet", "339", "40",
             "Reverbtron Pan", "340", "40",
             "Reverbtron Level", "341", "40",
             "Reverbtron Damp", "342", "40",
-            "Reverbtron Fb", "343", "40",
+            "Reverbtron Feedback", "343", "40",
             "Reverbtron Length", "344", "40",
             "Reverbtron Stretch", "345", "40",
             "Reverbtron I.Del", "346", "40",
