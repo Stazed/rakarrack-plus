@@ -70,6 +70,8 @@ const float C_MC_63_RANGE       = 0.49606299f;      /* (127 - 64) / 127 = 0.4960
 const float C_MC_19999_RANGE    = 157.472441f;         /* (20000 - 1) / 127 = 157.4724409448819 */
 const float C_MC_7_RANGE        = 0.05511811f;      /* 7 / 127 = 0.055118110236 */
 const float C_MC_15780_RANGE    = 124.25197f;       /* (16000 - 220) / 127 = 124.251968503937 */
+const float C_MC_12_RANGE       = 0.094488189f;     /* 12 / 127 = 0.094488188976 */
+const float C_MC_1999_RANGE     = 15.748031f;       /* (2000 - 1) / 127 = 15.740157480315 */
 
 void
 RKR::InitMIDI()
@@ -2192,7 +2194,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 327:
-        efx_Shifter->changepar(6, (int) ((float) value * .094488189f));
+        efx_Shifter->changepar(6, (int) ((float) value * C_MC_12_RANGE));
         break;
 
     case 328:
@@ -2204,15 +2206,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 330:
-        efx_Shifter->changepar(3, 1 + (int) ((float) value * 15.748031f));
+        efx_Shifter->changepar(3, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
     case 331:
-        efx_Shifter->changepar(4, 1 + (int) ((float) value * 15.748031f));
+        efx_Shifter->changepar(4, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
     case 332:
-        efx_Shifter->changepar(5, -70 + (int) ((float) value * .70866142f));
+        efx_Shifter->changepar(5, -70 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
     case 333:

@@ -780,14 +780,14 @@ RKR::RKR()
             "ShelfBoost Tone", "294", "34",
             "ShelfBoost Presence", "295", "34",
 
-            "Shifter WD", "326", "38",
-            "Shifter Int", "327", "38",
+            "Shifter Dry/Wet", "326", "38",
+            "Shifter Interval", "327", "38",
             "Shifter Gain", "328", "38",
             "Shifter Pan", "329", "38",
             "Shifter Attack", "330", "38",
             "Shifter Decay", "331", "38",
-            "Shifter Thrshold", "332", "38",
-            "Shifter Whamy", "333", "38",
+            "Shifter Threshold", "332", "38",
+            "Shifter Whammy", "333", "38",
 
             "Shuffle High Freq", "234", "26",
             "Shuffle High Gain", "235", "26",
