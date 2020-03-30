@@ -686,10 +686,10 @@ RKR::RKR()
             "NoiseGate HPF", "435", "16",
 
             "Opticaltrem Depth", "381", "44",
-            "Opticaltrem Pan", "385", "44",
-            "Opticaltrem Rnd", "383", "44",
-            "Opticaltrem St.df", "384", "44",
             "Opticaltrem Tempo", "382", "44",
+            "Opticaltrem Random", "383", "44",
+            "Opticaltrem Stereo Df", "384", "44",
+            "Opticaltrem Pan", "385", "44",
 
             "Overdrive Drive", "68", "3",
             "Overdrive Level", "70", "3",

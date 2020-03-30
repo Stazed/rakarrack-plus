@@ -169,8 +169,8 @@ FIXME Help .png
 
 NoiseGate
     Wet/Dry                     |                |    none       |                   |       none        |
+    Added MIDI control
 ---Done---
-Missing - No midi control
 
 Opticaltrem
     Wet/Dry                     |                |    none       |                   |       none        |
