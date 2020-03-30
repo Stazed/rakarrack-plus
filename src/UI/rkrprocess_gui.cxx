@@ -4776,6 +4776,26 @@ void RKRGUI::ActMIDI()
                 PAN->pan_extra->value(rkr->efx_Pan->getpar(6));
                 PAN->pan_extra->redraw();
                 break;
+            case 437:
+                REVERB->reverb_time->value(rkr->efx_Rev->getpar(2));
+                REVERB->reverb_time->redraw();
+                break;
+            case 438:
+                REVERB->reverb_ldel->value(rkr->efx_Rev->getpar(3));
+                REVERB->reverb_ldel->redraw();
+                break;
+            case 439:
+                REVERB->reverb_ldelft->value(rkr->efx_Rev->getpar(4));
+                REVERB->reverb_ldelft->redraw();
+                break;
+            case 440:
+                REVERB->reverb_RS->value(rkr->efx_Rev->getpar(11));
+                REVERB->reverb_RS->redraw();
+                break;
+            case 441:
+                REVERB->reverb_damp->value(rkr->efx_Rev->getpar(9));
+                REVERB->reverb_damp->redraw();
+                break;
         }
     }
 

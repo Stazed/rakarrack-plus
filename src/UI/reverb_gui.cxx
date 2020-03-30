@@ -80,21 +80,36 @@ void ReverbGui::cb_reverb_pan(SliderW* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_time_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(2,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(437);
+ return;
+}
+rkr->efx_Rev->changepar(2,(int)o->value());
 }
 void ReverbGui::cb_reverb_time(SliderW* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_time_i(o,v);
 }
 
 void ReverbGui::cb_reverb_ldel_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(3,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(438);
+ return;
+}
+rkr->efx_Rev->changepar(3,(int)o->value());
 }
 void ReverbGui::cb_reverb_ldel(SliderW* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_ldel_i(o,v);
 }
 
 void ReverbGui::cb_reverb_ldelft_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(4,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(439);
+ return;
+}
+rkr->efx_Rev->changepar(4,(int)o->value());
 }
 void ReverbGui::cb_reverb_ldelft(SliderW* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_ldelft_i(o,v);
@@ -121,7 +136,12 @@ Fl_Menu_Item ReverbGui::menu_reverb_type[] = {
 };
 
 void ReverbGui::cb_reverb_RS_i(SliderW* o, void*) {
-  rkr->Reverb_Bypass=0;
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(440);
+ return;
+}
+rkr->Reverb_Bypass=0;
 rkr->efx_Rev->changepar(11,(int)o->value());
 if((int)reverb_activar->value())rkr->Reverb_Bypass=1;
 }
@@ -154,7 +174,12 @@ void ReverbGui::cb_reverb_HPF(SliderW* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_damp_i(SliderW* o, void*) {
-  rkr->efx_Rev->changepar(9,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(441);
+ return;
+}
+rkr->efx_Rev->changepar(9,(int)o->value());
 }
 void ReverbGui::cb_reverb_damp(SliderW* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_damp_i(o,v);
@@ -235,7 +260,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_time->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_time->when(FL_WHEN_CHANGED);
 } // SliderW* reverb_time
-{ reverb_ldel = new SliderW(53, 64, 100, 10, "I.Del");
+{ reverb_ldel = new SliderW(53, 64, 100, 10, "I. Del");
   reverb_ldel->tooltip("Initial Delay");
   reverb_ldel->type(5);
   reverb_ldel->box(FL_FLAT_BOX);
@@ -252,7 +277,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_ldel->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_ldel->when(FL_WHEN_CHANGED);
 } // SliderW* reverb_ldel
-{ reverb_ldelft = new SliderW(53, 77, 100, 10, "Del.E/R");
+{ reverb_ldelft = new SliderW(53, 77, 100, 10, "Del. E/R");
   reverb_ldelft->tooltip("Initial Delay Feedback");
   reverb_ldelft->type(5);
   reverb_ldelft->box(FL_FLAT_BOX);

@@ -406,7 +406,7 @@ RKR::RKR()
     }
 
 
-    NumParams = 411;
+    NumParams = 416;
 
     {
         static const char *los_params[] = {
@@ -729,8 +729,14 @@ RKR::RKR()
 
             "Reverb Dry/Wet", "57", "8",
             "Reverb Pan", "63", "8",
+            
+            "Reverb Time", "437", "8",
+            "Reverb Initial Delay", "438", "8",
+            "Reverb Del. E/R", "439", "8",
+            "Reverb Room Size", "440", "8",
             "Reverb LPF", "87", "8",
             "Reverb HPF", "90", "8",
+            "Reverb Damping", "441", "8",
 
             "Reverbtron Dry/Wet", "339", "40",
             "Reverbtron Pan", "340", "40",

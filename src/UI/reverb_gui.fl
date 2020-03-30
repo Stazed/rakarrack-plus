@@ -114,25 +114,40 @@ rkr->efx_Rev->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(63);
  return;
 } 
-rkr->efx_Rev->changepar(1,(int)(o->value()+64));} selected
+rkr->efx_Rev->changepar(1,(int)(o->value()+64));}
     xywh {53 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_time {
     label Time
-    callback {rkr->efx_Rev->changepar(2,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(437);
+ return;
+}
+rkr->efx_Rev->changepar(2,(int)o->value());}
     xywh {53 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_ldel {
-    label {I.Del}
-    callback {rkr->efx_Rev->changepar(3,(int)o->value());}
+    label {I. Del}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(438);
+ return;
+}
+rkr->efx_Rev->changepar(3,(int)o->value());}
     tooltip {Initial Delay} xywh {53 64 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
   Fl_Value_Slider reverb_ldelft {
-    label {Del.E/R}
-    callback {rkr->efx_Rev->changepar(4,(int)o->value());}
+    label {Del. E/R}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(439);
+ return;
+}
+rkr->efx_Rev->changepar(4,(int)o->value());} selected
     tooltip {Initial Delay Feedback} xywh {53 77 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -154,7 +169,12 @@ rkr->efx_Rev->changepar(1,(int)(o->value()+64));} selected
   }
   Fl_Value_Slider reverb_RS {
     label {R. Size}
-    callback {rkr->Reverb_Bypass=0;
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(440);
+ return;
+}
+rkr->Reverb_Bypass=0;
 rkr->efx_Rev->changepar(11,(int)o->value());
 if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
     tooltip {Room Size} xywh {53 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
@@ -184,7 +204,12 @@ rkr->efx_Rev->changepar(8,(int)o->value());}
   }
   Fl_Value_Slider reverb_damp {
     label Damping
-    callback {rkr->efx_Rev->changepar(9,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(441);
+ return;
+}
+rkr->efx_Rev->changepar(9,(int)o->value());}
     xywh {53 163 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
     class SliderW
   }
