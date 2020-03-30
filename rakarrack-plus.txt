@@ -135,7 +135,7 @@ FIXME Help .png
 Harmonizer
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Add MIDI to LV2 - Done - MIDI version added
-    Added Gain, F. Gain, Filter Q to MIDI control
+    Added Gain, F. Gain, Filter Q, SELECT to MIDI control
 FIXME Help .png
 
 Infinity
@@ -252,6 +252,7 @@ StereoHarm
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |  LRC - Left/Right Crossover
     Gain L                      |   -64 to 64    |  -64 to 64    |    -64 to 64      |      -64 to 63    |  GAINL -  Left Gain
+    Added SELECT to MIDI control
 ---Done---
     Added MIDI LV2 version
 FIXME Help .png
