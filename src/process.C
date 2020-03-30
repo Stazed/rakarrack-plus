@@ -874,15 +874,15 @@ RKR::RKR()
 
             "Volume", "7", "50",
 
+            "WahWah Dry/Wet", "28", "10",
+            "WahWah Pan", "66", "10",
+            "WahWah Tempo", "75", "10",
+            "WahWah Random", "108", "10",
+            "WahWah Stereo Df", "102", "10",
+            "WahWah Depth", "1", "10",
             "WahWah Amp S.", "111", "10",
             "WahWah Amp S.I.", "112", "10",
-            "WahWah Depth", "1", "10",
-            "WahWah Tempo", "75", "10",
-            "WahWah Pan", "66", "10",
-            "WahWah Rnd.", "108", "10",
             "WahWah Smooth", "113", "10",
-            "WahWah St_df.", "102", "10",
-            "WahWah WD", "28", "10"
         };
         for (int i = 0; i < NumParams; i++)
         {
