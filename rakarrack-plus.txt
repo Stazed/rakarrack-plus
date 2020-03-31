@@ -142,9 +142,10 @@ Infinity
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Add LV2 default - plain as preset - done
     Added missing Filter Band level 1 - 8 to MIDI control
+    Added override class to make handle() work for Fl_Value_Input, right click MIDI control.
 ---Done---
 FIXME Help .png
-FIXME add override class to make handle() work for Fl_Value_Input, right click MIDI control.
+FIXME inputW class needs to handle focus and up/down keyboard entry.
 
 Looper
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |  -------------    |      ----------   |
