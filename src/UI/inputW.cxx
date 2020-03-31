@@ -40,7 +40,7 @@ inputW::handle(int event)
     {
         if (Fl::event_inside(x(), y(), w(), h()))
         {
-            if (event == FL_RELEASE  || event == FL_PUSH || event == FL_DRAG)
+            if (event == FL_RELEASE /* || event == FL_PUSH || event == FL_DRAG*/)
             {
                 /* The callback will trigger MIDI learn based on FL_RIGHT_MOUSE */
                 do_callback();
@@ -50,7 +50,15 @@ inputW::handle(int event)
         /* Ignore all other button 3 events */
         return 1;
     }
-     
+
+#if 0
+/*
+    The FL_KEYUP approach will not work either, since key up is never set as handled
+    when the key down is used. So, any FL_Up or FL_Down from any other widget, slider, etc
+    that is used for navigation, the FL_KEYUP eventually will get to this widget and adjust the value.
+    Bummer....
+ */
+
     /* Need to handle focus to get keyboard events */
     if (event == FL_FOCUS || event == FL_UNFOCUS)
     {
@@ -87,7 +95,8 @@ inputW::handle(int event)
             return 0;
         }     
     }
-
+#endif // 0
+    
     /* Normal default event handling */
     return Fl_Value_Input::handle(event);
 }
