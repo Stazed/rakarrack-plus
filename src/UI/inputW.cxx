@@ -36,13 +36,13 @@ int
 inputW::handle(int event)
 {
    /* Right mouse button - pop up MIDI learn */
-    if(Fl::event_button()== 3)
+    if(Fl::event_button()== FL_RIGHT_MOUSE)
     {
         if (Fl::event_inside(x(), y(), w(), h()))
         {
             if (event == FL_RELEASE  || event == FL_PUSH || event == FL_DRAG)
             {
-                /* The callback will trigger MIDI learn based on 3 */
+                /* The callback will trigger MIDI learn based on FL_RIGHT_MOUSE */
                 do_callback();
             }
         }
@@ -50,11 +50,21 @@ inputW::handle(int event)
         /* Ignore all other button 3 events */
         return 1;
     }
-    
-#if 0   // This is not working - need focus
-    if(event == FL_KEYBOARD)
+     
+    /* Need to handle focus to get keyboard events */
+    if (event == FL_FOCUS || event == FL_UNFOCUS)
     {
-        //printf("FL_KEYBOARD\n");
+        return 1;   // says we handed it
+    }
+    
+/* 
+ * https://stackoverflow.com/questions/40284104/fltk-fl-value-input-subclass-does-not-receive-fl-keydown-events-only-fl-keyup
+ * According to above, the Fl_Value_Input subclass in our case will not get FL_KEYDOWN events.
+ * So just gonna use FL_KEYUP, which is crappy and does not allow key repeat.
+ */
+    
+    if(event == FL_KEYUP)
+    {
         int mul = 1;
         if (Fl::event_state(FL_SHIFT))
         {
@@ -68,22 +78,16 @@ inputW::handle(int event)
         switch (Fl::event_key())
         {
             case FL_Up:
-                //printf("FL_up\n");
-                handle_drag(clamp(increment(value(), -1 * mul)));
-                handle_release();
+                handle_drag(clamp(increment(value(), 1 * mul)));
                 return 1;
             case FL_Down:
-                handle_drag(clamp(increment(value(), 1 * mul)));
-                handle_release();
+                handle_drag(clamp(increment(value(), -1 * mul)));
                 return 1;
             default:
             return 0;
         }     
     }
-#endif // 0
-    
-    //printf("Get here event = %d\n", event);
-    
+
     /* Normal default event handling */
     return Fl_Value_Input::handle(event);
 }
