@@ -1,13 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class InfinityGui {
+widget_class {\#include "inputW.h"} InfinityGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
-  code2 {\#include "rakarrack.h"} visible position_relative
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "inputW.h"} visible position_relative
 } {
   Fl_Light_Button infinity_activar {
     label On
@@ -123,8 +124,9 @@ rkr->efx_Infinity->changepar(9,(int)o->value());}
  rgui->getMIDIControl(415);
  return;
 } 
-rkr->efx_Infinity->changepar(1,(int)o->value());} selected
-    xywh {19 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+rkr->efx_Infinity->changepar(1,(int)o->value());}
+    xywh {15 56 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Value_Input infinity_2 {
     label 2
@@ -134,7 +136,8 @@ rkr->efx_Infinity->changepar(1,(int)o->value());} selected
  return;
 } 
 rkr->efx_Infinity->changepar(2,(int)o->value());}
-    xywh {55 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {54 56 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Value_Input infinity_3 {
     label 3
@@ -144,7 +147,8 @@ rkr->efx_Infinity->changepar(2,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(3,(int)o->value());}
-    xywh {91 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {93 56 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Value_Input infinity_4 {
     label 4
@@ -154,7 +158,8 @@ rkr->efx_Infinity->changepar(3,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(4,(int)o->value());}
-    xywh {130 56 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {130 56 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Value_Input infinity_5 {
     label 5
@@ -164,7 +169,8 @@ rkr->efx_Infinity->changepar(4,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(5,(int)o->value());}
-    xywh {19 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {15 74 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Value_Input infinity_6 {
     label 6
@@ -174,7 +180,8 @@ rkr->efx_Infinity->changepar(5,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(6,(int)o->value());}
-    xywh {55 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {54 74 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Value_Input infinity_7 {
     label 7
@@ -183,8 +190,9 @@ rkr->efx_Infinity->changepar(6,(int)o->value());}
  rgui->getMIDIControl(421);
  return;
 } 
-rkr->efx_Infinity->changepar(7,(int)o->value());}
-    xywh {91 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+rkr->efx_Infinity->changepar(7,(int)o->value());} selected
+    xywh {93 74 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Value_Input infinity_8 {
     label 8
@@ -194,7 +202,8 @@ rkr->efx_Infinity->changepar(7,(int)o->value());}
  return;
 } 
 rkr->efx_Infinity->changepar(8,(int)o->value());}
-    xywh {130 74 20 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    xywh {130 74 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
+    class inputW
   }
   Fl_Check_Button infinity_rev {
     label Reverse

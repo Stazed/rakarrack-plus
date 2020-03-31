@@ -15,6 +15,7 @@ set (ProgSources
     UI/newvum.cxx
     UI/tunerbar.cxx
     UI/common_gui_menu.cxx
+    UI/inputW.cxx
     UI/eq_gui.cxx
     UI/compress_gui.cxx
     UI/dist_gui.cxx
