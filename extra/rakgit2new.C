@@ -251,7 +251,8 @@ main (int argc, char *argv[])
  int option_index = 0, opt;
  int exitwithhelp = 0;
  char *OldBankFile = NULL;
- char NewFile1[256];
+ char NewFile1[280];
+ char tmpFile[256];
 
 // Read command Line
 
@@ -307,9 +308,14 @@ main (int argc, char *argv[])
 printf("converting: %s\n\n",OldBankFile);
 
 memset(NewFile1,0,sizeof(NewFile1));
+memset(tmpFile,0,sizeof(tmpFile));
 
-strncpy(NewFile1, OldBankFile, strlen(OldBankFile)-5);
-sprintf(NewFile1, "%s_new.rkrb",NewFile1);
+int size_array = sizeof(tmpFile)/sizeof(tmpFile[0]);
+int size_file = strlen(OldBankFile)-5;
+int length = (size_array > size_file) ? size_file : size_array;
+
+strncpy(tmpFile, OldBankFile, length);
+sprintf(NewFile1, "%s_new.rkrb",tmpFile);
 
 printf("generating %s\n",NewFile1);
 

@@ -478,8 +478,10 @@ main (int argc, char *argv[])
  int option_index = 0, opt;
  int exitwithhelp = 0;
  char *OldBankFile = NULL;
- char NewFile1[256];
- char NewFile2[256];
+ char NewFile1[280];
+ char NewFile2[280];
+ char tmpFile1[256];
+ char tmpFile2[256];
 
 // Read command Line
 
@@ -536,11 +538,20 @@ printf("converting: %s\n\n",OldBankFile);
 
 memset(NewFile1,0, sizeof(NewFile1));
 memset(NewFile2,0, sizeof(NewFile2));
+memset(tmpFile1,0,sizeof(tmpFile1));
+memset(tmpFile2,0,sizeof(tmpFile2));
 
-strncpy(NewFile1, OldBankFile, strlen(OldBankFile)-5);
-strncpy(NewFile2, OldBankFile, strlen(OldBankFile)-5);
-sprintf(NewFile1, "%s01_050.rkrb",NewFile1);
-sprintf(NewFile2, "%s02_050.rkrb",NewFile2);
+int size_array = sizeof(tmpFile1)/sizeof(tmpFile1[0]);
+int size_file = strlen(OldBankFile)-5;
+int length = (size_array > size_file) ? size_file : size_array;
+strncpy(tmpFile1, OldBankFile, length);
+
+size_array = sizeof(tmpFile2)/sizeof(tmpFile2[0]);
+length = (size_array > size_file) ? size_file : size_array;
+strncpy(tmpFile2, OldBankFile, length);
+
+sprintf(NewFile1, "%s01_050.rkrb",tmpFile1);
+sprintf(NewFile2, "%s02_050.rkrb",tmpFile2);
 
 printf("generating %s\n",NewFile1);
 
