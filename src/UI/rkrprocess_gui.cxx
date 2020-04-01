@@ -39,7 +39,8 @@ static XWMHints *hints = NULL;
 static volatile int got_sigint = 0;
 static volatile int got_sigusr1 = 0;
 
-RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_)
+RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
+    made()
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -6242,7 +6243,12 @@ void RKRGUI::ScanDir()
             if (rkr->CheckOldBank(nombank) == 0)
             {
                 memset(nombre, 0, sizeof (nombre));
-                strncpy(nombre, fs->d_name, strlen(fs->d_name) - 5);
+                
+                int size_array = sizeof(nombre)/sizeof(nombre[0]);
+                int name_size = strlen(fs->d_name) - 5;
+                int length = (size_array > name_size) ? name_size : size_array;
+                
+                strncpy(nombre, fs->d_name, length);
                 if (nombre != NULL)
                 {
                     BankWindow->set_bank_CH_UB(nombre, nombank);
@@ -6266,7 +6272,12 @@ void RKRGUI::ScanDir()
             if (rkr->CheckOldBank(nombank) == 0)
             {
                 memset(nombre, 0, sizeof (nombre));
-                strncpy(nombre, fs->d_name, strlen(fs->d_name) - 5);
+                
+                int size_array = sizeof(nombre)/sizeof(nombre[0]);
+                int name_size = strlen(fs->d_name) - 5;
+                int length = (size_array > name_size) ? name_size : size_array;
+                
+                strncpy(nombre, fs->d_name, length);
                 if (nombre != NULL)
                 {
                     BankWindow->set_bank_CH_UB(nombre, nombank);
