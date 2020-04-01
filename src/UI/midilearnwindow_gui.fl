@@ -1,9 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class MidiLearnWindowGui {open
-  xywh {1151 122 640 480} type Double color 22 selection_color 7 resizable
+  xywh {138 147 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -46,7 +46,7 @@ m_rkr->RControl=1;}
     callback {memcpy(m_rkr->Bank[TPresets->value()].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));}
     xywh {535 20 95 30}
   }
-  Fl_Group Ares {
+  Fl_Group Ares {open
     xywh {215 60 205 180} box THIN_DOWN_BOX align 80
   } {
     Fl_Box Ar1 {
@@ -207,7 +207,7 @@ for(i=0;i<20;i++)
  
 } 
 
-Assign->do_callback();} selected
+Assign->do_callback();}
     xywh {10 20 98 30}
   }
   Fl_Button CancelRec {
@@ -236,19 +236,19 @@ for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr
     callback {do_callback();}
     xywh {480 445 150 30}
   }
-  Fl_Group Filters_ML {
+  Fl_Group Filters_ML {open
     xywh {10 410 200 31} box DOWN_BOX
   } {
     Fl_Button M_fil_all {
       label All
       callback {m_rkr->ML_filter=0;
-      m_rgui->FillML(0);}
+      m_rgui->FillML();}
       xywh {16 415 89 20} type Radio
     }
     Fl_Button M_fil_current {
       label Current
       callback {m_rkr->ML_filter=1;
-      m_rgui->FillML(0);}
+      m_rgui->FillML();} selected
       xywh {113 415 89 20} type Radio
     }
   }

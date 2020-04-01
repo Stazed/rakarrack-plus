@@ -3063,7 +3063,7 @@ void RKRGUI::Put_Loaded_Bank()
         }
     }
 
-    FillML(2);
+    FillML();
 }
 
 void RKRGUI::Chord(int eff)
@@ -5518,7 +5518,7 @@ void RKRGUI::Put_Skin(int last)
     Fl::redraw();
 }
 
-void RKRGUI::FillML(int type)
+void RKRGUI::FillML(/*int type*/)
 {
     // Midi learn
     char tmp[256];
@@ -6485,7 +6485,7 @@ void RKRGUI::getMIDIControl(int num)
 void RKRGUI::PrepareML()
 {
     // PrepareML
-    FillML(0);
+    FillML();
     if (rkr->comemouse == 0)
     {
         MIDILearn->show();
@@ -7102,7 +7102,7 @@ void RKRGUI::RandomPreset()
         s->do_callback(w, k);
     }
 
-    FillML(0);
+    FillML();
     Prepare_Order();
     Put_Loaded();
 

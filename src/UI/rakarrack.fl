@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -1041,7 +1041,7 @@ rkr->calculavol(2);}
         class MidiGui
       } {}
       Fl_Group Metro {
-        user_data 1 open
+        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -1123,7 +1123,7 @@ switch(rkr->M_Metro_Sound)
       break;                    
        
 
- }} open selected
+ }} open
           xywh {634 118 28 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(m_looper_ms->get_metronome_sound());}
         } {}
@@ -1144,7 +1144,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1222,7 +1222,7 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
           user_data 77
           callback {rkr->New();
 DisAssigns();
-FillML(0);
+FillML();
 Prepare_Order();
 Put_Loaded();}
           tooltip {New preset - Shortcut 'N'} xywh {174 50 64 18} shortcut 0x6e color 62 labelsize 12
@@ -1294,10 +1294,10 @@ rkr->Bank_to_Preset((int) o->value());
 BankWindow->light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 rkr->OnCounter=0;
-FillML(0);
+FillML();
 Prepare_Order();
 Put_Loaded();
-if(rkr->Tap_Updated) UpdateTGUI();}
+if(rkr->Tap_Updated) UpdateTGUI();} selected
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
         Fl_Box DAuthor {
@@ -1686,7 +1686,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {Put_Skin(int last)} {open
   } {}
-  Function {FillML(int type)} {open
+  Function {FillML(/*int type*/)} {open
   } {}
   Function {DisAssigns()} {open
   } {}
