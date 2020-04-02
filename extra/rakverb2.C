@@ -6,11 +6,13 @@
 #include <string.h>
 #include <sndfile.h>
 #include <getopt.h>
+#include <string>
 
 
 #define PERIOD 128
 
- 
+/* For file .wav extension size for removing the extension from file names */
+const unsigned c_wav_ext_size = 4;
  
 
 void
@@ -134,11 +136,10 @@ main(int argc, char *argv[])
 
 if(!have_output)
 {
-    int size_array = sizeof(tempfile)/sizeof(tempfile[0]);
-    int size_file = strlen(Inputfile)-4;
-    int length = (size_array > size_file) ? size_file : size_array;
- strncpy(tempfile, Inputfile, length);
- sprintf(Outputfile, "%s.rvb",tempfile);
+    std::string file_name = Inputfile;
+    file_name = file_name.substr(0, file_name.size() - c_wav_ext_size);    // remove the file extension .wav
+
+    sprintf(Outputfile, "%s.rvb",file_name.c_str());
 }
 
 // open output and save headers
