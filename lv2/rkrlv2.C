@@ -67,7 +67,7 @@ have_signal(float* efxoutl, float* efxoutr, uint32_t period)
 }
 
 //checks if input and output buffers are shared and copies it in a temp buffer so wet/dry works
-void
+static void
 check_shared_buf(RKRLV2* plug, uint32_t nframes)
 {
     if(nframes > plug->period_max)
@@ -87,6 +87,20 @@ check_shared_buf(RKRLV2* plug, uint32_t nframes)
     {
         memcpy(plug->tmp_r,plug->input_r_p,sizeof(float)*nframes);
         plug->input_r_p = plug->tmp_r;
+    }
+}
+
+
+
+static void
+inline_check(RKRLV2* plug, uint32_t nframes)
+{
+    // copy only if needed. memcpy() src/dest memory areas must not overlap.
+    if (plug->output_l_p != plug->input_l_p) {
+        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    }
+    if (plug->output_r_p != plug->input_r_p) {
+        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
     }
 }
 
@@ -296,14 +310,11 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->eq->cleanup();
         return;
     }
  
@@ -345,6 +356,11 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
 
     xfade_check(plug,nframes);
 
+    if(plug->prev_bypass)
+    {
+        plug->eq->cleanup();
+    }
+    
     return;
 }
 
@@ -373,14 +389,11 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
+    inline_check(plug, nframes);
+    
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->comp->cleanup();
         return;
     }
  
@@ -407,6 +420,12 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
     plug->comp->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+    
+    if(plug->prev_bypass)
+    {
+        plug->comp->cleanup();
+    }
+    
     return;
 }
 
@@ -441,15 +460,11 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->dist->cleanup();
         return;
     }
  
@@ -495,6 +510,12 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->dist->outvolume, nframes);
 
     xfade_check(plug,nframes);
+    
+    if(plug->prev_bypass)
+    {
+        plug->dist->cleanup();
+    }
+    
     return;
 }
 
@@ -529,15 +550,11 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
+    inline_check(plug, nframes);
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->echo->cleanup();
         return;
     }
  
@@ -579,6 +596,12 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->echo->outvolume, nframes);
 
     xfade_check(plug,nframes);
+    
+    if(plug->prev_bypass)
+    {
+        plug->echo->cleanup();
+    }
+    
     return;
 }
 
@@ -613,15 +636,11 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
+    inline_check(plug, nframes);
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->chorus->cleanup();
         return;
     }
  
@@ -671,6 +690,12 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->chorus->outvolume, nframes);
 
     xfade_check(plug,nframes);
+    
+    if(plug->prev_bypass)
+    {
+        plug->chorus->cleanup();
+    }
+    
     return;
 }
 
@@ -705,15 +730,11 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
+    inline_check(plug, nframes);
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
-
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->aphase->cleanup();
         return;
     }
  
@@ -762,6 +783,12 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->aphase->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->aphase->cleanup();
+    }
+
     return;
 }
 
@@ -816,17 +843,14 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->harm->cleanup();
-        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
-        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
+//        plug->harm->cleanup();
+//        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
+//        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
         return;
     }
  
@@ -950,6 +974,14 @@ see process.C ln 1507
     wetdry_mix(plug, plug->harm->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->harm->cleanup();
+        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
+        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
+    }
+
     return;
 }
 
@@ -980,14 +1012,11 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->exciter->cleanup();
         return;
     }
  
@@ -1013,6 +1042,12 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
     plug->exciter->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->exciter->cleanup();
+    }
+
     return;
 }
 
@@ -1047,15 +1082,11 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->pan->cleanup();
         return;
     }
  
@@ -1097,6 +1128,12 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->pan->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->pan->cleanup();
+    }
+
     return;
 }
 
@@ -1131,15 +1168,11 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->alien->cleanup();
         return;
     }
  
@@ -1181,6 +1214,12 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->alien->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->alien->cleanup();
+    }
+
     return;
 }
 
@@ -1215,15 +1254,11 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->reve->cleanup();
         return;
     }
  
@@ -1272,6 +1307,12 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->reve->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->reve->cleanup();
+    }
+
     return;
 }
 
@@ -1301,14 +1342,11 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->eq->cleanup();
         return;
     }
  
@@ -1358,6 +1396,12 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     plug->eq->out(plug->output_l_p, plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->eq->cleanup();
+    }
+
     return;
 }
 
@@ -1386,14 +1430,11 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->cab->cleanup();
         return;
     }
  
@@ -1425,6 +1466,12 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     Vol3_Efx(plug,nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->cab->cleanup();
+    }
+
     return;
 }
 
@@ -1459,15 +1506,11 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->mdel->cleanup();
         return;
     }
  
@@ -1523,6 +1566,12 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->mdel->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->mdel->cleanup();
+    }
+
     return;
 }
 
@@ -1557,15 +1606,11 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->wah->cleanup();
         return;
     }
  
@@ -1607,6 +1652,12 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->wah->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->wah->cleanup();
+    }
+
     return;
 }
 
@@ -1641,15 +1692,11 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->dere->cleanup();
         return;
     }
  
@@ -1690,6 +1737,12 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->dere->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->dere->cleanup();
+    }
+
     return;
 }
 
@@ -1724,15 +1777,11 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->valve->cleanup();
         return;
     }
  
@@ -1773,6 +1822,12 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->valve->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->valve->cleanup();
+    }
+
     return;
 }
 
@@ -1801,14 +1856,11 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->dflange->cleanup();
         return;
     }
  
@@ -1840,6 +1892,12 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
     plug->dflange->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->dflange->cleanup();
+    }
+
     return;
 }
 
@@ -1883,15 +1941,11 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->ring->cleanup();
         return;
     }
  
@@ -1956,6 +2010,12 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->ring->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->ring->cleanup();
+    }
+
     return;
 }
 
@@ -1991,15 +2051,11 @@ void run_mbdistlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->mbdist->cleanup();
         return;
     }
  
@@ -2040,6 +2096,12 @@ void run_mbdistlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->mbdist->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->mbdist->cleanup();
+    }
+
     return;
 }
 
@@ -2074,15 +2136,11 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->arp->cleanup();
         return;
     }
  
@@ -2124,6 +2182,12 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->arp->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->arp->cleanup();
+    }
+
     return;
 }
 
@@ -2153,14 +2217,11 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->expand->cleanup();
         return;
     }
  
@@ -2186,6 +2247,12 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
     plug->expand->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->expand->cleanup();
+    }
+
     return;
 }
 
@@ -2220,15 +2287,11 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->shuf->cleanup();
         return;
     }
  
@@ -2264,6 +2327,12 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->shuf->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->shuf->cleanup();
+    }
+
     return;
 }
 
@@ -2299,15 +2368,11 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->synth->cleanup();
         return;
     }
  
@@ -2343,6 +2408,12 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->synth->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->synth->cleanup();
+    }
+
     return;
 }
 
@@ -2377,15 +2448,11 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->mbvol->cleanup();
         return;
     }
  
@@ -2430,6 +2497,12 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->mbvol->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->mbvol->cleanup();
+    }
+
     return;
 }
 
@@ -2464,15 +2537,11 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->mutro->cleanup();
         return;
     }
  
@@ -2529,6 +2598,12 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->mutro->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->mutro->cleanup();
+    }
+
     return;
 }
 
@@ -2563,15 +2638,11 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->echoverse->cleanup();
         return;
     }
  
@@ -2628,6 +2699,12 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->echoverse->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->echoverse->cleanup();
+    }
+
     return;
 }
 
@@ -2657,14 +2734,11 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->coil->cleanup();
         return;
     }
  
@@ -2696,6 +2770,12 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
     plug->coil->out(plug->output_l_p, plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->coil->cleanup();
+    }
+
     return;
 }
 
@@ -2725,14 +2805,11 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->shelf->cleanup();
         return;
     }
  
@@ -2758,6 +2835,12 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
     plug->shelf->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->shelf->cleanup();
+    }
+
     return;
 }
 
@@ -2793,15 +2876,11 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->voc->cleanup();
         return;
     }
  
@@ -2848,6 +2927,12 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
     *plug->param_p[VOCODER_VU_LEVEL] = plug->voc->vulevel;
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->voc->cleanup();
+    }
+
     return;
 }
 
@@ -2877,14 +2962,11 @@ void run_suslv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->sus->cleanup();
         return;
     }
  
@@ -2910,6 +2992,12 @@ void run_suslv2(LV2_Handle handle, uint32_t nframes)
     plug->sus->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->sus->cleanup();
+    }
+
     return;
 }
 
@@ -2945,15 +3033,11 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->seq->cleanup();
         return;
     }
  
@@ -3010,6 +3094,12 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->seq->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->seq->cleanup();
+    }
+
     return;
 }
 
@@ -3045,15 +3135,11 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->shift->cleanup();
         return;
     }
  
@@ -3096,6 +3182,12 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->shift->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->shift->cleanup();
+    }
+
     return;
 }
 
@@ -3125,14 +3217,11 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->stomp->cleanup();
         return;
     }
  
@@ -3158,6 +3247,12 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
     plug->stomp->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->stomp->cleanup();
+    }
+
     return;
 }
 
@@ -3204,15 +3299,11 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->revtron->cleanup();
         return;
     }
  
@@ -3339,6 +3430,12 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->revtron->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->revtron->cleanup();
+    }
+
     return;
 }
 
@@ -3502,15 +3599,11 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->echotron->cleanup();
         return;
     }
  
@@ -3659,6 +3752,12 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->echotron->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->echotron->cleanup();
+    }
+
     return;
 }
 
@@ -3829,18 +3928,16 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->sharm->cleanup();
+/*        plug->sharm->cleanup();
         plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
         plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         plug->chordID->cc = 1;//mark chord has changed
+ */
         return;
     }
  
@@ -3984,6 +4081,15 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->sharm->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->sharm->cleanup();
+        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
+        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
+        plug->chordID->cc = 1;//mark chord has changed
+    }
+
     return;
 }
 
@@ -4018,15 +4124,11 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->mbcomp->cleanup();
         return;
     }
  
@@ -4063,6 +4165,12 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->mbcomp->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->mbcomp->cleanup();
+    }
+
     return;
 }
 
@@ -4092,14 +4200,11 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->otrem->cleanup();
         return;
     }
  
@@ -4136,6 +4241,12 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
     plug->otrem->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->otrem->cleanup();
+    }
+
     return;
 }
 
@@ -4170,15 +4281,11 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->vibe->cleanup();
         return;
     }
  
@@ -4233,6 +4340,12 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->vibe->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->vibe->cleanup();
+    }
+
     return;
 }
 
@@ -4267,15 +4380,11 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->inf->cleanup();
         return;
     }
  
@@ -4311,6 +4420,12 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->inf->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->inf->cleanup();
+    }
+
     return;
 }
 
@@ -4353,15 +4468,11 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->phase->cleanup();
         return;
     }
  
@@ -4423,6 +4534,12 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->phase->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->phase->cleanup();
+    }
+
     return;
 }
 
@@ -4452,14 +4569,11 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
 
     RKRLV2* plug = (RKRLV2*)handle;
     
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->gate->cleanup();
         return;
     }
  
@@ -4485,6 +4599,12 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
     plug->gate->out(plug->output_l_p,plug->output_r_p);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->gate->cleanup();
+    }
+
     return;
 }
 
@@ -4526,14 +4646,11 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
 
     plug->midic->plug = plug;       // for MIDIConverter direct access to lv2 
 
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->midic->cleanup();
         return;
     }
  
@@ -4569,6 +4686,12 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
     *plug->param_p[MIDIC_NOTE_REGISTER] = plug->midic->hay;
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->midic->cleanup();
+    }
+
     return;
 }
 
@@ -4612,15 +4735,11 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->convol->cleanup();
         return;
     }
  
@@ -4740,6 +4859,12 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->convol->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->convol->cleanup();
+    }
+
     return;
 }
 
@@ -4876,15 +5001,11 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->flanger->cleanup();
         return;
     }
  
@@ -4934,6 +5055,12 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->flanger->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->flanger->cleanup();
+    }
+
     return;
 }
 
@@ -4968,15 +5095,11 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->overdrive->cleanup();
         return;
     }
  
@@ -5017,6 +5140,12 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->overdrive->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->overdrive->cleanup();
+    }
+
     return;
 }
 
@@ -5073,18 +5202,15 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->harm->cleanup();
+/*        plug->harm->cleanup();
         plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
         plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
-        bypass = 1;
+        bypass = 1;*/
         return;
     }
  
@@ -5276,6 +5402,15 @@ see process.C ln 1507
     wetdry_mix(plug, plug->harm->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->harm->cleanup();
+        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
+        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
+        bypass = 1;
+    }
+
     return;
 }
 
@@ -5329,19 +5464,17 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
-    
-    //inline copy input to output
-    memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
-    memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    inline_check(plug, nframes);
 
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-        plug->sharm->cleanup();
+/*        plug->sharm->cleanup();
         plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
         plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         plug->chordID->cc = 1;//mark chord has changed
         bypass = 1; // For MIDI mode upon return, need to reset default chord type and note
+ */
         return;
     }
  
@@ -5555,6 +5688,15 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->sharm->outvolume, nframes);
 
     xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->sharm->cleanup();
+        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
+        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
+        plug->chordID->cc = 1;//mark chord has changed
+        bypass = 1; // For MIDI mode upon return, need to reset default chord type and note
+    }
     return;
 }
 
