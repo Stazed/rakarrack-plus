@@ -848,10 +848,15 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-//        plug->harm->cleanup();
-//        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
-//        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
         return;
+    }
+    
+    /* Return from bypass, reset */
+    if(plug->prev_bypass)
+    {
+        plug->harm->cleanup();
+        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
+        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
     }
  
     /* adjust for possible variable nframes */
@@ -974,13 +979,6 @@ see process.C ln 1507
     wetdry_mix(plug, plug->harm->outvolume, nframes);
 
     xfade_check(plug,nframes);
-
-    if(plug->prev_bypass)
-    {
-        plug->harm->cleanup();
-        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
-        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
-    }
 
     return;
 }
@@ -3933,12 +3931,16 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-/*        plug->sharm->cleanup();
+        return;
+    }
+
+    /* Return from bypass - reset */
+    if(plug->prev_bypass)
+    {
+        plug->sharm->cleanup();
         plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
         plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         plug->chordID->cc = 1;//mark chord has changed
- */
-        return;
     }
  
     /* adjust for possible variable nframes */
@@ -4081,14 +4083,6 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     wetdry_mix(plug, plug->sharm->outvolume, nframes);
 
     xfade_check(plug,nframes);
-
-    if(plug->prev_bypass)
-    {
-        plug->sharm->cleanup();
-        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
-        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
-        plug->chordID->cc = 1;//mark chord has changed
-    }
 
     return;
 }
@@ -5207,11 +5201,16 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-/*        plug->harm->cleanup();
+        return;
+    }
+
+    /* Return from bypass - reset */
+    if(plug->prev_bypass)
+    {
+        plug->harm->cleanup();
         plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
         plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
-        bypass = 1;*/
-        return;
+        bypass = 1;
     }
  
     /* adjust for possible variable nframes */
@@ -5403,14 +5402,6 @@ see process.C ln 1507
 
     xfade_check(plug,nframes);
 
-    if(plug->prev_bypass)
-    {
-        plug->harm->cleanup();
-        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
-        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
-        bypass = 1;
-    }
-
     return;
 }
 
@@ -5469,15 +5460,19 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     // are we bypassing
     if(*plug->bypass_p && plug->prev_bypass)
     {
-/*        plug->sharm->cleanup();
+        return;
+    }
+    
+    /* Return from bypass - reset */
+    if(plug->prev_bypass)
+    {
+        plug->sharm->cleanup();
         plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
         plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
         plug->chordID->cc = 1;//mark chord has changed
         bypass = 1; // For MIDI mode upon return, need to reset default chord type and note
- */
-        return;
     }
- 
+    
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -5689,14 +5684,6 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
 
     xfade_check(plug,nframes);
 
-    if(plug->prev_bypass)
-    {
-        plug->sharm->cleanup();
-        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
-        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
-        plug->chordID->cc = 1;//mark chord has changed
-        bypass = 1; // For MIDI mode upon return, need to reset default chord type and note
-    }
     return;
 }
 
