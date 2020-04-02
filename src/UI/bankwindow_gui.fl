@@ -1,9 +1,9 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class BankWindowGui {open
-  xywh {199 263 800 600} type Double color 4 selection_color 7 resizable
+  xywh {204 184 800 600} type Double color 4 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -40,7 +40,7 @@ if(filename == 0)
 
 if(m_rkr->CheckOldBank(filename)==0)
 {
-	std::string filepart = strrchr(filename,'/')+1;     // get the file name w/o path
+	std::string filepart = strrchr(filename,'/')+1;     // get the file name W/O path
         std::string bank_name = filepart.substr(0, filepart.size() - c_rkrb_ext_size); // remove the file extension
         CH_UB->add((const char *)bank_name.c_str(), 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
 }} selected
