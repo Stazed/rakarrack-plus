@@ -50,7 +50,6 @@ main(int argc, char *argv[])
  SF_INFO sfinfo;
  char Outputfile[156];
  char Inputfile[128];
- char tempfile[128];
  float *buf;
  float *index, *data;
  float sample;
