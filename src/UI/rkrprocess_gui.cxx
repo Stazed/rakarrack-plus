@@ -6220,7 +6220,6 @@ int RKRGUI::search_but(int x, int y)
 void RKRGUI::ScanDir()
 {
     // scan for default and user banks
-    char nombre[64];
     char *nombank;
     nombank = (char *) calloc(1, 512);
     char * const forFree = nombank; /* <--- saving calloc() returned value */
@@ -6234,6 +6233,7 @@ void RKRGUI::ScanDir()
     if (dir == NULL)
         return;
 
+    /* Scan Default Directory for Bank files */
     while ((fs = readdir(dir)))
     {
         if (strstr(fs->d_name, ".rkrb") != NULL)
@@ -6242,23 +6242,22 @@ void RKRGUI::ScanDir()
             AddBankName(nombank);
             if (rkr->CheckOldBank(nombank) == 0)
             {
-                memset(nombre, 0, sizeof (nombre));
+                std::string s_nombre = fs->d_name;
+                s_nombre = s_nombre.substr(0, s_nombre.size() - c_rkrb_ext_size);   // remove extension
                 
-                int size_array = sizeof(nombre)/sizeof(nombre[0]);
-                int name_size = strlen(fs->d_name) - 5;
-                int length = (size_array > name_size) ? name_size : size_array;
-                
-                strncpy(nombre, fs->d_name, length);
-                if (nombre != NULL)
+                if(!s_nombre.empty())
                 {
-                    BankWindow->set_bank_CH_UB(nombre, nombank);
-                }
+                    //printf("ScanDir - Default Directory \n");
+                    char *n_nombre = &s_nombre[0];
+                    BankWindow->set_bank_CH_UB(n_nombre, nombank);
+                } 
             }
         }
     }
 
     closedir(dir);
 
+    /* Scan User Directory for bank files */
     dir = opendir(rkr->UDirFilename);
     if (dir == NULL)
         return;
@@ -6271,16 +6270,14 @@ void RKRGUI::ScanDir()
             AddBankName(nombank);
             if (rkr->CheckOldBank(nombank) == 0)
             {
-                memset(nombre, 0, sizeof (nombre));
+                std::string s_nombre = fs->d_name;
+                s_nombre = s_nombre.substr(0, s_nombre.size() - c_rkrb_ext_size);   // remove extension
                 
-                int size_array = sizeof(nombre)/sizeof(nombre[0]);
-                int name_size = strlen(fs->d_name) - 5;
-                int length = (size_array > name_size) ? name_size : size_array;
-                
-                strncpy(nombre, fs->d_name, length);
-                if (nombre != NULL)
+                if(!s_nombre.empty())
                 {
-                    BankWindow->set_bank_CH_UB(nombre, nombank);
+                    //printf("ScanDir - User Directory \n");
+                    char *n_nombre = &s_nombre[0];
+                    BankWindow->set_bank_CH_UB(n_nombre, nombank);
                 }
             }
         }
