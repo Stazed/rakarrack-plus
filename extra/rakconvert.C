@@ -3,9 +3,11 @@
 #include <strings.h>
 #include <getopt.h>
 #include <math.h>
+#include <string>
 #define SwapFourBytes(data) ( (((data) >> 24) & 0x000000ff) | (((data) >> 8) & 0x0000ff00) | (((data) << 8) & 0x00ff0000) | (((data) << 24) & 0xff000000) )
 
-
+/* For file .rkrb extension size usually for removing the extension from bank names */
+const unsigned c_rkrb_ext_size = 5;
 
   struct ML
   {
@@ -480,8 +482,6 @@ main (int argc, char *argv[])
  char *OldBankFile = NULL;
  char NewFile1[280];
  char NewFile2[280];
- char tmpFile1[256];
- char tmpFile2[256];
 
 // Read command Line
 
@@ -538,20 +538,12 @@ printf("converting: %s\n\n",OldBankFile);
 
 memset(NewFile1,0, sizeof(NewFile1));
 memset(NewFile2,0, sizeof(NewFile2));
-memset(tmpFile1,0,sizeof(tmpFile1));
-memset(tmpFile2,0,sizeof(tmpFile2));
 
-int size_array = sizeof(tmpFile1)/sizeof(tmpFile1[0]);
-int size_file = strlen(OldBankFile)-5;
-int length = (size_array > size_file) ? size_file : size_array;
-strncpy(tmpFile1, OldBankFile, length);
+std::string file_name = OldBankFile;
+file_name = file_name.substr(0, file_name.size() - c_rkrb_ext_size); // remove file extension .rkrb
 
-size_array = sizeof(tmpFile2)/sizeof(tmpFile2[0]);
-length = (size_array > size_file) ? size_file : size_array;
-strncpy(tmpFile2, OldBankFile, length);
-
-sprintf(NewFile1, "%s01_050.rkrb",tmpFile1);
-sprintf(NewFile2, "%s02_050.rkrb",tmpFile2);
+sprintf(NewFile1, "%s01_050.rkrb",file_name.c_str());
+sprintf(NewFile2, "%s02_050.rkrb",file_name.c_str());
 
 printf("generating %s\n",NewFile1);
 
