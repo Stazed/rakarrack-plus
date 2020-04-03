@@ -4,6 +4,7 @@
 
 //this is the default, host may use periods greater, it will now be adjusted.
 #define INTERMEDIATE_BUFSIZE 1024
+#define MAX_INPLACE 8192
 
 enum other_ports
 {
@@ -70,12 +71,9 @@ have_signal(float* efxoutl, float* efxoutr, uint32_t period)
 static void
 check_shared_buf(RKRLV2* plug, uint32_t nframes)
 {
-    if(nframes > plug->period_max)
+    if(nframes > MAX_INPLACE)
     {
-        free(plug->tmp_l);
-        free(plug->tmp_r);
-        plug->tmp_l = (float*)malloc(sizeof(float)*nframes);
-        plug->tmp_r = (float*)malloc(sizeof(float)*nframes);
+        return;
     }
     
     if(plug->input_l_p == plug->output_l_p )
