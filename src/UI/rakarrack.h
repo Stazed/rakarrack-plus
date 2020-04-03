@@ -595,7 +595,7 @@ public:
   void Fill_Avail(int filter);
   void highlight();
   int search_but(int x, int y);
-  void ScanDir();
+  void Scan_Bank_Dir();
   static int prevnext(int e);
   bool install_signal_handlers();
   static void sigterm_handler(int sig);

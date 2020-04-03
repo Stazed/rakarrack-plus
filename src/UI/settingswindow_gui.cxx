@@ -891,7 +891,7 @@ dir=fl_dir_chooser("Browse:",NULL,0);
 if (dir==NULL) return;
 Udir->value(dir);
 strcpy(m_rkr->UDirFilename,dir);
-m_rgui->ScanDir();
+m_rgui->Scan_Bank_Dir();
 }
 void SettingsWindowGui::cb_UD_Browser(Fl_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UD_Browser_i(o,v);

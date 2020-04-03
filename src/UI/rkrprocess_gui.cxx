@@ -6217,12 +6217,15 @@ int RKRGUI::search_but(int x, int y)
     return (1000);
 }
 
-void RKRGUI::ScanDir()
+/** 
+ Scan the default (DATADIR) and user directories for bank files (.rkrb).
+ The user directory is set in Settings/Preferences/Bank/User Directory.
+ Any directory files found are passed to the bankwindow class and listed on the
+ Bank Manager "User Banks" drop down menu.
+ */
+void RKRGUI::Scan_Bank_Dir()
 {
-    // scan for default and user banks
-    char *nombank;
-    nombank = (char *) calloc(1, 512);
-    char * const forFree = nombank; /* <--- saving calloc() returned value */
+    char nombank[FILENAME_MAX];
     DIR *dir;
     struct dirent *fs;
 
@@ -6243,14 +6246,13 @@ void RKRGUI::ScanDir()
             AddBankName(nombank);
             if (rkr->CheckOldBank(nombank) == 0)
             {
+                /* Get the name to be listed in the drop down menu */
                 std::string s_nombre = fs->d_name;
                 s_nombre = s_nombre.substr(0, s_nombre.size() - c_rkrb_ext_size);   // remove extension
                 
                 if(!s_nombre.empty())
                 {
-                    //printf("ScanDir - Default Directory \n");
-                    char *n_nombre = &s_nombre[0];
-                    BankWindow->set_bank_CH_UB(n_nombre, nombank);
+                    BankWindow->set_bank_CH_UB(&s_nombre[0], nombank);
                 } 
             }
         }
@@ -6271,14 +6273,13 @@ void RKRGUI::ScanDir()
             AddBankName(nombank);
             if (rkr->CheckOldBank(nombank) == 0)
             {
+                /* Get the name to be listed in the drop down menu */
                 std::string s_nombre = fs->d_name;
                 s_nombre = s_nombre.substr(0, s_nombre.size() - c_rkrb_ext_size);   // remove extension
                 
                 if(!s_nombre.empty())
                 {
-                    //printf("ScanDir - User Directory \n");
-                    char *n_nombre = &s_nombre[0];
-                    BankWindow->set_bank_CH_UB(n_nombre, nombank);
+                    BankWindow->set_bank_CH_UB(&s_nombre[0], nombank);
                 }
             }
         }
@@ -6287,7 +6288,6 @@ void RKRGUI::ScanDir()
     closedir(dir);
 
     BankWindow->CH_UB->value(0);
-    free(forFree);
 }
 
 int RKRGUI::prevnext(int e)

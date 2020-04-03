@@ -3,7 +3,7 @@ version 1.0305
 header_name {.h}
 code_name {.cxx}
 widget_class SettingsWindowGui {open
-  xywh {239 341 640 580} type Double
+  xywh {88 317 640 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -23,7 +23,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 open
+      user_data 1 selected
       xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -66,7 +66,7 @@ Fl::redraw();
 break;
 
 
-}} open
+}}
         xywh {60 50 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12 textcolor 7
       } {
         MenuItem {} {
@@ -82,7 +82,7 @@ break;
           xywh {40 40 45 26} labelsize 12
         }
         MenuItem {} {
-          label plastic selected
+          label plastic
           xywh {50 50 45 26} labelsize 12
         }
         MenuItem {} {
@@ -1033,7 +1033,7 @@ dir=fl_dir_chooser("Browse:",NULL,0);
 if (dir==NULL) return;
 Udir->value(dir);
 strcpy(m_rkr->UDirFilename,dir);
-m_rgui->ScanDir();}
+m_rgui->Scan_Bank_Dir();}
         xywh {415 112 65 20}
       }
     }

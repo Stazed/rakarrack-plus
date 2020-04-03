@@ -1275,10 +1275,10 @@ else
 if(!made) BankWindow->make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
-ScanDir();
+Scan_Bank_Dir();
 }
 else
-BankWindow->hide();}
+BankWindow->hide();} selected
           tooltip {Open bank window - Shortcut 'B'} xywh {448 50 64 18} shortcut 0x62 color 62 labelsize 12
         }
         Fl_Input WPreset_Name {
@@ -1297,7 +1297,7 @@ rkr->OnCounter=0;
 FillML();
 Prepare_Order();
 Put_Loaded();
-if(rkr->Tap_Updated) UpdateTGUI();} selected
+if(rkr->Tap_Updated) UpdateTGUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
         Fl_Box DAuthor {
@@ -1708,7 +1708,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {search_but(int x, int y)} {open return_type int
   } {}
-  Function {ScanDir()} {open
+  Function {Scan_Bank_Dir()} {open
   } {}
   Function {prevnext(int e)} {open return_type {static int}
   } {}

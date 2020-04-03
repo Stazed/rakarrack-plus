@@ -609,7 +609,7 @@ void RKRGUI::cb_B_preset_i(Fl_Button*, void*) {
 if(!made) BankWindow->make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
-ScanDir();
+Scan_Bank_Dir();
 }
 else
 BankWindow->hide();
