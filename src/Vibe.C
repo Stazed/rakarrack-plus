@@ -128,7 +128,14 @@ Vibe::~Vibe()
 void
 Vibe::cleanup()
 {
-
+    /* also used after bypass to reset filter state */
+    for (int i = 0; i < 8; ++i) {
+        vc[i].clear ();
+        vcvo[i].clear ();
+        ecvc[i].clear ();
+        vevo[i].clear ();
+        bootstrap[i].clear ();
+    }
 }
 
 #ifdef LV2_SUPPORT
@@ -363,7 +370,7 @@ Vibe::out(float *efxoutl, float *efxoutr)
 }
 
 float
-Vibe::vibefilter(float data, fparams *ftype, int stage)
+Vibe::vibefilter(float data, fparams *ftype, int stage) const
 {
     float y0 = data * ftype[stage].n0 + ftype[stage].x1 * ftype[stage].n1 - ftype[stage].y1 * ftype[stage].d1;
     ftype[stage].y1 = y0 + DENORMAL_GUARD;
@@ -372,7 +379,7 @@ Vibe::vibefilter(float data, fparams *ftype, int stage)
 }
 
 float
-Vibe::bjt_shape(float data)
+Vibe::bjt_shape(float data) const
 {
     float vin = 7.5f * (1.0f + data);
     

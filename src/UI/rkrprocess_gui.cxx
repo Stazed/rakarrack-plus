@@ -6220,7 +6220,7 @@ int RKRGUI::search_but(int x, int y)
 /** 
  Scan the default (DATADIR) and user directories for bank files (.rkrb).
  The user directory is set in Settings/Preferences/Bank/User Directory.
- Any directory files found are passed to the bankwindow class and listed on the
+ Any directory files found are passed to the BankWindow class and listed on the
  Bank Manager "User Banks" drop down menu.
  */
 void RKRGUI::Scan_Bank_Dir()

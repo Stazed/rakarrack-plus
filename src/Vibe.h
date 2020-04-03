@@ -98,12 +98,17 @@ private:
             n1(),
             d0(),
             d1() {}
+        
+        void clear ()
+        {
+            x1 = y1 = 0;
+        }
     } vc[8], vcvo[8], ecvc[8], vevo[8], bootstrap[8];
 
-    float vibefilter(float data, fparams *ftype, int stage);
+    float vibefilter(float data, fparams *ftype, int stage) const;
     void init_vibes();
     void modulate(float ldrl, float ldrr);
-    float bjt_shape(float data);
+    float bjt_shape(float data) const;
 
     float R1;
     float Rv;
