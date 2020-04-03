@@ -6228,6 +6228,7 @@ void RKRGUI::ScanDir()
 
     ClearBankNames(); /* This will free all memory allocated for names */
     BankWindow->CH_UB->clear();
+    BankWindow->clear_menu();
 
     dir = opendir(DATADIR);
     if (dir == NULL)

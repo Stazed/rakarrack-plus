@@ -94,5 +94,6 @@ public:
   void make_window_banks();
   void light_preset(int npreset);
   void unlight_preset(int npreset);
+  void clear_menu();
 };
 #endif

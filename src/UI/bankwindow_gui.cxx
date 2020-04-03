@@ -323,3 +323,7 @@ void BankWindowGui::unlight_preset(int npreset) {
     
     }
 }
+
+void BankWindowGui::clear_menu() {
+  m_bank_menu.clear();
+}
