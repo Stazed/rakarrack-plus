@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -1278,7 +1278,7 @@ put_icon(BankWindow);
 Scan_Bank_Dir();
 }
 else
-BankWindow->hide();} selected
+BankWindow->hide();}
           tooltip {Open bank window - Shortcut 'B'} xywh {448 50 64 18} shortcut 0x62 color 62 labelsize 12
         }
         Fl_Input WPreset_Name {
@@ -1709,6 +1709,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {search_but(int x, int y)} {open return_type int
   } {}
   Function {Scan_Bank_Dir()} {open
+  } {}
+  Function {Set_Bank(std::string directory)} {open selected private return_type void
   } {}
   Function {prevnext(int e)} {open return_type {static int}
   } {}

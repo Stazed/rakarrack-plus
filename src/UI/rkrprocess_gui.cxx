@@ -6225,28 +6225,47 @@ int RKRGUI::search_but(int x, int y)
  */
 void RKRGUI::Scan_Bank_Dir()
 {
-    char nombank[FILENAME_MAX];
-    DIR *dir;
-    struct dirent *fs;
-
     ClearBankNames(); /* This will free all memory allocated for names */
     BankWindow->CH_UB->clear();
     BankWindow->clear_menu();
+    
+    /* Scan Default Directory for Bank files */
+    Set_Bank(DATADIR);
+    
+    /* Scan User Directory for Bank files */
+    Set_Bank(rkr->UDirFilename);
+    
+    BankWindow->CH_UB->value(0);
+}
 
-    dir = opendir(DATADIR);
+/**
+ *  Scan a directory for Bank files and if valid, send it to the BankWindow class.
+ * 
+ * @param directory
+ *      The directory to be scanned.
+ */
+void RKRGUI::Set_Bank(std::string directory)
+{
+    char nombank[FILENAME_MAX];
+    DIR *dir;
+    struct dirent *fs;
+    
+    dir = opendir(directory.c_str());
     if (dir == NULL)
         return;
 
-    /* Scan Default Directory for Bank files */
     while ((fs = readdir(dir)))
     {
         if (strstr(fs->d_name, ".rkrb") != NULL)
         {
-            sprintf(nombank, "%s/%s", DATADIR, fs->d_name);
+            /* Construct full bank file name with path */
+            sprintf(nombank, "%s/%s", directory.c_str(), fs->d_name);
+            
             AddBankName(nombank);
+            
             if (rkr->CheckOldBank(nombank) == 0)
             {
-                /* Get the name to be listed in the drop down menu */
+                /* Get the name to be listed in the drop down "User Banks" menu */
                 std::string s_nombre = fs->d_name;
                 s_nombre = s_nombre.substr(0, s_nombre.size() - c_rkrb_ext_size);   // remove extension
                 
@@ -6259,35 +6278,6 @@ void RKRGUI::Scan_Bank_Dir()
     }
 
     closedir(dir);
-
-    /* Scan User Directory for bank files */
-    dir = opendir(rkr->UDirFilename);
-    if (dir == NULL)
-        return;
-
-    while ((fs = readdir(dir)))
-    {
-        if (strstr(fs->d_name, ".rkrb") != NULL)
-        {
-            sprintf(nombank, "%s/%s", rkr->UDirFilename, fs->d_name);
-            AddBankName(nombank);
-            if (rkr->CheckOldBank(nombank) == 0)
-            {
-                /* Get the name to be listed in the drop down menu */
-                std::string s_nombre = fs->d_name;
-                s_nombre = s_nombre.substr(0, s_nombre.size() - c_rkrb_ext_size);   // remove extension
-                
-                if(!s_nombre.empty())
-                {
-                    BankWindow->set_bank_CH_UB(&s_nombre[0], nombank);
-                }
-            }
-        }
-    }
-
-    closedir(dir);
-
-    BankWindow->CH_UB->value(0);
 }
 
 int RKRGUI::prevnext(int e)
