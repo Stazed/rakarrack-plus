@@ -17,7 +17,6 @@ set (ProgSources
     UI/common_gui_menu.cxx
     UI/RKR_Input.cxx
     UI/RKR_Value_Input.cxx
-    UI/inputW.cxx
     UI/eq_gui.cxx
     UI/compress_gui.cxx
     UI/dist_gui.cxx

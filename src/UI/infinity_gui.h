@@ -7,7 +7,7 @@
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include "inputW.h"
+#include "RKR_Value_Input.h"
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
@@ -37,45 +37,45 @@ private:
   inline void cb_infinity_Q_i(SliderW*, void*);
   static void cb_infinity_Q(SliderW*, void*);
 public:
-  inputW *infinity_1;
+  RKR_Value_Input *infinity_1;
 private:
-  inline void cb_infinity_1_i(inputW*, void*);
-  static void cb_infinity_1(inputW*, void*);
+  inline void cb_infinity_1_i(RKR_Value_Input*, void*);
+  static void cb_infinity_1(RKR_Value_Input*, void*);
 public:
-  inputW *infinity_2;
+  RKR_Value_Input *infinity_2;
 private:
-  inline void cb_infinity_2_i(inputW*, void*);
-  static void cb_infinity_2(inputW*, void*);
+  inline void cb_infinity_2_i(RKR_Value_Input*, void*);
+  static void cb_infinity_2(RKR_Value_Input*, void*);
 public:
-  inputW *infinity_3;
+  RKR_Value_Input *infinity_3;
 private:
-  inline void cb_infinity_3_i(inputW*, void*);
-  static void cb_infinity_3(inputW*, void*);
+  inline void cb_infinity_3_i(RKR_Value_Input*, void*);
+  static void cb_infinity_3(RKR_Value_Input*, void*);
 public:
-  inputW *infinity_4;
+  RKR_Value_Input *infinity_4;
 private:
-  inline void cb_infinity_4_i(inputW*, void*);
-  static void cb_infinity_4(inputW*, void*);
+  inline void cb_infinity_4_i(RKR_Value_Input*, void*);
+  static void cb_infinity_4(RKR_Value_Input*, void*);
 public:
-  inputW *infinity_5;
+  RKR_Value_Input *infinity_5;
 private:
-  inline void cb_infinity_5_i(inputW*, void*);
-  static void cb_infinity_5(inputW*, void*);
+  inline void cb_infinity_5_i(RKR_Value_Input*, void*);
+  static void cb_infinity_5(RKR_Value_Input*, void*);
 public:
-  inputW *infinity_6;
+  RKR_Value_Input *infinity_6;
 private:
-  inline void cb_infinity_6_i(inputW*, void*);
-  static void cb_infinity_6(inputW*, void*);
+  inline void cb_infinity_6_i(RKR_Value_Input*, void*);
+  static void cb_infinity_6(RKR_Value_Input*, void*);
 public:
-  inputW *infinity_7;
+  RKR_Value_Input *infinity_7;
 private:
-  inline void cb_infinity_7_i(inputW*, void*);
-  static void cb_infinity_7(inputW*, void*);
+  inline void cb_infinity_7_i(RKR_Value_Input*, void*);
+  static void cb_infinity_7(RKR_Value_Input*, void*);
 public:
-  inputW *infinity_8;
+  RKR_Value_Input *infinity_8;
 private:
-  inline void cb_infinity_8_i(inputW*, void*);
-  static void cb_infinity_8(inputW*, void*);
+  inline void cb_infinity_8_i(RKR_Value_Input*, void*);
+  static void cb_infinity_8(RKR_Value_Input*, void*);
 public:
   Fl_Check_Button *infinity_rev;
 private:

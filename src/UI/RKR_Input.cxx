@@ -745,11 +745,7 @@ int RKR_Input::handle(int event)
             position(size());
             break;
         case FL_Down:
-            up_down_position(0);
-            break;
         case FL_Up:
-            up_down_position(line_start(size()));
-            break;
         case FL_Tab:
             position(size(), 0);
             break;

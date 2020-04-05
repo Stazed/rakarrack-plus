@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <FL/math.h>
 
-#include "RKR_Value_Input.H"
+#include "RKR_Value_Input.h"
 
 void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 {
@@ -67,6 +67,65 @@ void RKR_Value_Input::value_damage()
 
 int RKR_Value_Input::handle(int event)
 {
+    /* Rakarrack special case events */
+
+    /* Right mouse button - pop up MIDI learn */
+    if(Fl::event_button()== FL_RIGHT_MOUSE)
+    {
+        if (Fl::event_inside(x(), y(), w(), h()))
+        {
+            if (event == FL_RELEASE /* || event == FL_PUSH || event == FL_DRAG*/)
+            {
+                /* The callback will trigger MIDI learn based on FL_RIGHT_MOUSE */
+                do_callback();
+            }
+        }
+        
+        /* Ignore all other right mouse events */
+        return 1;
+    }
+
+    /* Need to handle focus to get keyboard events */
+    if (event == FL_FOCUS || event == FL_UNFOCUS)
+    {
+        return 1;   // says we handed it
+    }
+    
+    if(event == FL_KEYBOARD)
+    {
+        int mul = 1;
+        if (Fl::event_state(FL_SHIFT))
+        {
+            mul = 10;
+        }
+        else if (Fl::event_state(FL_CTRL))
+        {
+            mul = 100;
+        }
+        
+        switch (Fl::event_key())
+        {
+            case FL_Right:
+                handle_drag(clamp(increment(value(), 1 * mul)));
+                return 1;
+            case FL_Left:
+                handle_drag(clamp(increment(value(), -1 * mul)));
+                return 1;
+            default:
+            return 0;
+        }     
+    }
+    
+    if(event == FL_MOUSEWHEEL)
+    {
+        if (Fl::e_dy == 0) return 0;
+        handle_push();
+        handle_drag(clamp(increment(value(), Fl::e_dy)));
+        handle_release();
+        return 1;
+    }
+    
+    /* Normal FL_Value_Input handling */
 
     double v;
     int delta;

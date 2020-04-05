@@ -83,7 +83,7 @@ void InfinityGui::cb_infinity_Q(SliderW* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_Q_i(o,v);
 }
 
-void InfinityGui::cb_infinity_1_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_1_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(415);
@@ -91,11 +91,11 @@ void InfinityGui::cb_infinity_1_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(1,(int)o->value());
 }
-void InfinityGui::cb_infinity_1(inputW* o, void* v) {
+void InfinityGui::cb_infinity_1(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_1_i(o,v);
 }
 
-void InfinityGui::cb_infinity_2_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_2_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(416);
@@ -103,11 +103,11 @@ void InfinityGui::cb_infinity_2_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(2,(int)o->value());
 }
-void InfinityGui::cb_infinity_2(inputW* o, void* v) {
+void InfinityGui::cb_infinity_2(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_2_i(o,v);
 }
 
-void InfinityGui::cb_infinity_3_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_3_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(417);
@@ -115,11 +115,11 @@ void InfinityGui::cb_infinity_3_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(3,(int)o->value());
 }
-void InfinityGui::cb_infinity_3(inputW* o, void* v) {
+void InfinityGui::cb_infinity_3(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_3_i(o,v);
 }
 
-void InfinityGui::cb_infinity_4_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_4_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(418);
@@ -127,11 +127,11 @@ void InfinityGui::cb_infinity_4_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(4,(int)o->value());
 }
-void InfinityGui::cb_infinity_4(inputW* o, void* v) {
+void InfinityGui::cb_infinity_4(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_4_i(o,v);
 }
 
-void InfinityGui::cb_infinity_5_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_5_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(419);
@@ -139,11 +139,11 @@ void InfinityGui::cb_infinity_5_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(5,(int)o->value());
 }
-void InfinityGui::cb_infinity_5(inputW* o, void* v) {
+void InfinityGui::cb_infinity_5(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_5_i(o,v);
 }
 
-void InfinityGui::cb_infinity_6_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_6_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(420);
@@ -151,11 +151,11 @@ void InfinityGui::cb_infinity_6_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(6,(int)o->value());
 }
-void InfinityGui::cb_infinity_6(inputW* o, void* v) {
+void InfinityGui::cb_infinity_6(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_6_i(o,v);
 }
 
-void InfinityGui::cb_infinity_7_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_7_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(421);
@@ -163,11 +163,11 @@ void InfinityGui::cb_infinity_7_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(7,(int)o->value());
 }
-void InfinityGui::cb_infinity_7(inputW* o, void* v) {
+void InfinityGui::cb_infinity_7(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_7_i(o,v);
 }
 
-void InfinityGui::cb_infinity_8_i(inputW* o, void*) {
+void InfinityGui::cb_infinity_8_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(422);
@@ -175,7 +175,7 @@ void InfinityGui::cb_infinity_8_i(inputW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(8,(int)o->value());
 }
-void InfinityGui::cb_infinity_8(inputW* o, void* v) {
+void InfinityGui::cb_infinity_8(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_8_i(o,v);
 }
 
@@ -325,7 +325,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_Q->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_Q->when(FL_WHEN_CHANGED);
 } // SliderW* infinity_Q
-{ infinity_1 = new inputW(15, 56, 23, 15, "1");
+{ infinity_1 = new RKR_Value_Input(15, 56, 23, 15, "1");
   infinity_1->box(FL_DOWN_BOX);
   infinity_1->color(FL_BACKGROUND2_COLOR);
   infinity_1->selection_color(FL_SELECTION_COLOR);
@@ -341,8 +341,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_1->callback((Fl_Callback*)cb_infinity_1);
   infinity_1->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_1->when(FL_WHEN_CHANGED);
-} // inputW* infinity_1
-{ infinity_2 = new inputW(54, 56, 23, 15, "2");
+} // RKR_Value_Input* infinity_1
+{ infinity_2 = new RKR_Value_Input(54, 56, 23, 15, "2");
   infinity_2->box(FL_DOWN_BOX);
   infinity_2->color(FL_BACKGROUND2_COLOR);
   infinity_2->selection_color(FL_SELECTION_COLOR);
@@ -358,8 +358,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_2->callback((Fl_Callback*)cb_infinity_2);
   infinity_2->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_2->when(FL_WHEN_CHANGED);
-} // inputW* infinity_2
-{ infinity_3 = new inputW(93, 56, 23, 15, "3");
+} // RKR_Value_Input* infinity_2
+{ infinity_3 = new RKR_Value_Input(93, 56, 23, 15, "3");
   infinity_3->box(FL_DOWN_BOX);
   infinity_3->color(FL_BACKGROUND2_COLOR);
   infinity_3->selection_color(FL_SELECTION_COLOR);
@@ -375,8 +375,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_3->callback((Fl_Callback*)cb_infinity_3);
   infinity_3->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_3->when(FL_WHEN_CHANGED);
-} // inputW* infinity_3
-{ infinity_4 = new inputW(130, 56, 23, 15, "4");
+} // RKR_Value_Input* infinity_3
+{ infinity_4 = new RKR_Value_Input(130, 56, 23, 15, "4");
   infinity_4->box(FL_DOWN_BOX);
   infinity_4->color(FL_BACKGROUND2_COLOR);
   infinity_4->selection_color(FL_SELECTION_COLOR);
@@ -392,8 +392,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_4->callback((Fl_Callback*)cb_infinity_4);
   infinity_4->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_4->when(FL_WHEN_CHANGED);
-} // inputW* infinity_4
-{ infinity_5 = new inputW(15, 74, 23, 15, "5");
+} // RKR_Value_Input* infinity_4
+{ infinity_5 = new RKR_Value_Input(15, 74, 23, 15, "5");
   infinity_5->box(FL_DOWN_BOX);
   infinity_5->color(FL_BACKGROUND2_COLOR);
   infinity_5->selection_color(FL_SELECTION_COLOR);
@@ -409,8 +409,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_5->callback((Fl_Callback*)cb_infinity_5);
   infinity_5->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_5->when(FL_WHEN_CHANGED);
-} // inputW* infinity_5
-{ infinity_6 = new inputW(54, 74, 23, 15, "6");
+} // RKR_Value_Input* infinity_5
+{ infinity_6 = new RKR_Value_Input(54, 74, 23, 15, "6");
   infinity_6->box(FL_DOWN_BOX);
   infinity_6->color(FL_BACKGROUND2_COLOR);
   infinity_6->selection_color(FL_SELECTION_COLOR);
@@ -426,8 +426,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_6->callback((Fl_Callback*)cb_infinity_6);
   infinity_6->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_6->when(FL_WHEN_CHANGED);
-} // inputW* infinity_6
-{ infinity_7 = new inputW(93, 74, 23, 15, "7");
+} // RKR_Value_Input* infinity_6
+{ infinity_7 = new RKR_Value_Input(93, 74, 23, 15, "7");
   infinity_7->box(FL_DOWN_BOX);
   infinity_7->color(FL_BACKGROUND2_COLOR);
   infinity_7->selection_color(FL_SELECTION_COLOR);
@@ -443,8 +443,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_7->callback((Fl_Callback*)cb_infinity_7);
   infinity_7->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_7->when(FL_WHEN_CHANGED);
-} // inputW* infinity_7
-{ infinity_8 = new inputW(130, 74, 23, 15, "8");
+} // RKR_Value_Input* infinity_7
+{ infinity_8 = new RKR_Value_Input(130, 74, 23, 15, "8");
   infinity_8->box(FL_DOWN_BOX);
   infinity_8->color(FL_BACKGROUND2_COLOR);
   infinity_8->selection_color(FL_SELECTION_COLOR);
@@ -460,7 +460,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_8->callback((Fl_Callback*)cb_infinity_8);
   infinity_8->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_8->when(FL_WHEN_CHANGED);
-} // inputW* infinity_8
+} // RKR_Value_Input* infinity_8
 { infinity_rev = new Fl_Check_Button(53, 94, 15, 15, "Reverse");
   infinity_rev->tooltip("Reverse Left Channel Sweep");
   infinity_rev->down_box(FL_BORDER_BOX);
