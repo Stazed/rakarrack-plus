@@ -14,7 +14,7 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-  This class is the custom Fl_Value_Input used by some plugins (Infinity).
+  This class is the custom RKR_Value_Input used by some plugins (Infinity).
   Allows for right click MIDI learn pop up.
  
 */
@@ -28,7 +28,7 @@
 
 #include "inputW.h"
 
-inputW::inputW(int x, int y, int w, int h, const char *label) : Fl_Value_Input(x, y, w, h, label)
+inputW::inputW(int x, int y, int w, int h, const char *label) : RKR_Value_Input(x, y, w, h, label)
 {
 }
 
@@ -47,17 +47,9 @@ inputW::handle(int event)
             }
         }
         
-        /* Ignore all other button 3 events */
+        /* Ignore all other right mouse events */
         return 1;
     }
-
-#if 0
-/*
-    The FL_KEYUP approach will not work either, since key up is never set as handled
-    when the key down is used. So, any FL_Up or FL_Down from any other widget, slider, etc
-    that is used for navigation, the FL_KEYUP eventually will get to this widget and adjust the value.
-    Bummer....
- */
 
     /* Need to handle focus to get keyboard events */
     if (event == FL_FOCUS || event == FL_UNFOCUS)
@@ -65,13 +57,7 @@ inputW::handle(int event)
         return 1;   // says we handed it
     }
     
-/* 
- * https://stackoverflow.com/questions/40284104/fltk-fl-value-input-subclass-does-not-receive-fl-keydown-events-only-fl-keyup
- * According to above, the Fl_Value_Input subclass in our case will not get FL_KEYDOWN events.
- * So just gonna use FL_KEYUP, which is crappy and does not allow key repeat.
- */
-    
-    if(event == FL_KEYUP)
+    if(event == FL_KEYBOARD)
     {
         int mul = 1;
         if (Fl::event_state(FL_SHIFT))
@@ -85,19 +71,18 @@ inputW::handle(int event)
         
         switch (Fl::event_key())
         {
-            case FL_Up:
+            case FL_Right:
                 handle_drag(clamp(increment(value(), 1 * mul)));
                 return 1;
-            case FL_Down:
+            case FL_Left:
                 handle_drag(clamp(increment(value(), -1 * mul)));
                 return 1;
             default:
             return 0;
         }     
     }
-#endif // 0
     
     /* Normal default event handling */
-    return Fl_Value_Input::handle(event);
+    return RKR_Value_Input::handle(event);
 }
 

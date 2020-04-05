@@ -27,9 +27,9 @@
 #define INPUTW_H
 
 #include <FL/Fl.H>
-#include <FL/Fl_Value_Input.H>
+#include "RKR_Value_Input.H"
 
-class inputW : public Fl_Value_Input {
+class inputW : public RKR_Value_Input {
 public:
     inputW(int x, int y, int w, int h, const char *label = 0);
     int handle(int event);
