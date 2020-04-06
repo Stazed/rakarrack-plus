@@ -26,6 +26,7 @@
 #include <FL/math.h>
 
 #include "RKR_Value_Input.h"
+#include "../global.h"
 
 void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 {
@@ -92,9 +93,25 @@ int RKR_Value_Input::handle(int event)
     }
 
     /* Need to handle focus to get keyboard events */
-    if (event == FL_FOCUS || event == FL_UNFOCUS)
+    if (event == FL_FOCUS)
     {
+        textcolor(leds_color);
+        redraw();
         return 1;   // says we handed it
+    }
+    
+    if(event == FL_UNFOCUS)
+    {
+        textcolor(label_color);
+        redraw();
+        return 1;
+    }
+    
+    /* Mouse button focus */
+    if ((Fl::focus() == &input))
+    {
+        textcolor(leds_color);
+        redraw();
     }
     
     if(event == FL_KEYBOARD)
@@ -117,9 +134,16 @@ int RKR_Value_Input::handle(int event)
             case FL_Left:
                 handle_drag(clamp(increment(value(), -1 * mul)));
                 return 1;
+                
+            case FL_Tab:
+            case FL_Down:
+            case FL_Up:
+                textcolor(label_color);
+                redraw();
+                return 0;
             default:
             return 0;
-        }     
+        }   
     }
     
     if(event == FL_MOUSEWHEEL)
