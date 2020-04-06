@@ -23,8 +23,7 @@
 #define RKR_Value_Input_H
 
 #include <FL/Fl_Valuator.H>
-//#include <FL/Fl_Input.H>
-#include "RKR_Input.H"
+#include "RKR_Input.h"
 
 /**
   The RKR_Value_Input widget displays a numeric value.

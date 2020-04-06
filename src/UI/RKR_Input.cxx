@@ -40,7 +40,7 @@
 #include <FL/Fl_Multiline_Output.H>
 #include <FL/Fl_Secret_Input.H>
 
-#include "RKR_Input.H"
+#include "RKR_Input.h"
 
 #ifdef HAVE_LOCALE_H
 #include <locale.h>

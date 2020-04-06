@@ -23,7 +23,6 @@
 #define RKR_Input_H
 
 #include <FL/Fl_Input_.H>
-//#include "Fl_Input_.H"
 
 /**
   This is the FLTK text input widget. It displays a single line
