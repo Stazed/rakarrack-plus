@@ -53,6 +53,12 @@ void RKR_Value_Input::draw()
 
 void RKR_Value_Input::resize(int X, int Y, int W, int H)
 {
+    /* Resize the text value */
+    int W_size = W* 0.4;
+    int H_size = H - 2;
+    int size_txt = (H_size > W_size) ? W_size: H_size;
+    textsize(size_txt);
+
     Fl_Valuator::resize(X, Y, W, H);
     input.resize(X, Y, W, H);
 }
