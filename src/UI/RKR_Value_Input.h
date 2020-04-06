@@ -53,7 +53,7 @@
   <P ALIGN="CENTER">\image html RKR_Value_Input.png 
   \image latex  RKR_Value_Input.png "RKR_Value_Input" width=4cm
 */
-class FL_EXPORT RKR_Value_Input : public Fl_Valuator {
+class RKR_Value_Input : public Fl_Valuator {
 public:
   /* This is the encapsulated Fl_input attribute to which 
   this class delegates the value font, color and shortcut */
