@@ -95,6 +95,8 @@ int RKR_Value_Input::handle(int event)
     /* Need to handle focus to get keyboard events */
     if (event == FL_FOCUS)
     {
+        textcolor(leds_color);
+        redraw();
         return 1;   // says we handed it
     }
     

@@ -9,27 +9,6 @@ int RKR_Input::handle(int event)
 {
     switch (event)
     {
-
-    case FL_FOCUS:
-        switch (Fl::event_key())
-        {
-        case FL_Right:
-            position(0);
-            break;
-        case FL_Left:
-            position(size());
-            break;
-        case FL_Down:
-        case FL_Up:
-        case FL_Tab:
-            position(size(), 0);
-            break;
-        default:
-            position(position(), mark()); // turns off the saved up/down arrow position
-            break;
-        }
-        break;
-
     case FL_KEYBOARD:
         /* 
          * https://stackoverflow.com/questions/40284104/fltk-fl-value-input-subclass-does-not-receive-fl-keydown-events-only-fl-keyup
@@ -39,8 +18,8 @@ int RKR_Input::handle(int event)
          */
         switch (Fl::event_key())
         {
-        case FL_Right:
-        case FL_Left:
+        /* Send all keyboard events to the parent */
+        default:
             return 0;
         }
     }
