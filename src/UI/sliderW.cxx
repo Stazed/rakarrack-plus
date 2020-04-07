@@ -420,7 +420,7 @@ void SliderW::font_resize(int X, int Y, int W, int H)
     }
     else
     {
-        textsize((W * t_ratio) * .5);
-        labelsize((W * l_ratio) * .5);
+        textsize((W * t_ratio) * .55);
+        labelsize((W * l_ratio) * .55);
     }
 }
