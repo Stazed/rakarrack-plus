@@ -46,6 +46,12 @@ void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 
 void RKR_Value_Input::draw()
 {
+    if(m_need_font_update)
+    {
+        m_need_font_update = false;
+        font_resize(x(), y(), w(), h());
+    }
+    
     if (damage()&~FL_DAMAGE_CHILD) input.clear_damage(FL_DAMAGE_ALL);
     input.box(box());
     input.color(color(), selection_color());
@@ -54,9 +60,8 @@ void RKR_Value_Input::draw()
     input.clear_damage();
 }
 
-void RKR_Value_Input::resize(int X, int Y, int W, int H)
+void RKR_Value_Input::font_resize(int X, int Y, int W, int H)
 {
-    /* Resize the text and labels */
     float ratio = (float) value_font_size / 10.0; 
     
     int W_size = W* (0.4 * ratio) ;
@@ -64,6 +69,12 @@ void RKR_Value_Input::resize(int X, int Y, int W, int H)
     int size_txt = (H_size > W_size) ? W_size: H_size;
     textsize(size_txt);
     labelsize(size_txt);
+}
+
+void RKR_Value_Input::resize(int X, int Y, int W, int H)
+{
+    /* Resize the text and labels */
+    font_resize(X, Y, W, H);
 
     Fl_Valuator::resize(X, Y, W, H);
     input.resize(X, Y, W, H);
@@ -219,6 +230,8 @@ int RKR_Value_Input::handle(int event)
 RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
 : Fl_Valuator(X, Y, W, H, l), input(X, Y, W, H, 0)
 {
+    this->user_data((void*)(VALUE_USER_DATA));
+    m_need_font_update = true;
     value_font_size = 10;
     soft_ = 0;
     if (input.parent()) // defeat automatic-add

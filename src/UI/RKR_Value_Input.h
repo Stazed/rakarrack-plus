@@ -25,6 +25,8 @@
 #include <FL/Fl_Valuator.H>
 #include "RKR_Input.h"
 
+#define VALUE_USER_DATA   99998
+
 /**
   The RKR_Value_Input widget displays a numeric value.
   The user can click in the text field and edit it - there is in
@@ -66,10 +68,15 @@ public:
   int handle(int);
 protected:
   void draw();
+private:
+  bool m_need_font_update;
+  void font_resize(int,int,int,int);
 public:
   void resize(int,int,int,int);
   RKR_Value_Input(int x,int y,int w,int h,const char *l=0);
   ~RKR_Value_Input();
+  
+  void set_font_adjustment(){m_need_font_update = true;}
 
   /** See void RKR_Value_Input::soft(char s) */
   void soft(char s) {soft_ = s;}

@@ -5222,6 +5222,12 @@ void RKRGUI::chfsize(int value)
                     s->set_font_adjustment();
                 }
                 
+                if (uh == VALUE_USER_DATA)
+                {
+                    RKR_Value_Input *vi = (RKR_Value_Input *) c;
+                    vi->set_font_adjustment();
+                }
+                
                 k = c->labelsize();
                 k += value;
 
@@ -5234,7 +5240,7 @@ void RKRGUI::chfsize(int value)
                 }
                 else if ((k > 2)&&(k < 16))
                 {
-                    if (uh != SLIDERW_USER_DATA)
+                    if (uh != SLIDERW_USER_DATA && uh != VALUE_USER_DATA)
                         c->labelsize(k);
                 }
 
