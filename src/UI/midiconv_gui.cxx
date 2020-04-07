@@ -139,7 +139,7 @@ results.");
   Use_FFT->callback((Fl_Callback*)cb_Use_FFT, (void*)(2));
   Use_FFT->align(Fl_Align(FL_ALIGN_TOP));
 } // Fl_Check_Button* Use_FFT
-{ Trig_Adj = new SliderW(147, 15, 117, 11, "Trigger");
+{ SliderW* o = Trig_Adj = new SliderW(147, 15, 117, 11, "Trigger");
   Trig_Adj->type(5);
   Trig_Adj->box(FL_FLAT_BOX);
   Trig_Adj->color((Fl_Color)178);
@@ -155,8 +155,9 @@ results.");
   Trig_Adj->callback((Fl_Callback*)cb_Trig_Adj);
   Trig_Adj->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
   Trig_Adj->when(FL_WHEN_CHANGED);
+  o->m_label_size +=5;
 } // SliderW* Trig_Adj
-{ Vel_Adj = new SliderW(147, 34, 117, 11, "Velocity");
+{ SliderW* o = Vel_Adj = new SliderW(147, 34, 117, 11, "Velocity");
   Vel_Adj->type(5);
   Vel_Adj->box(FL_FLAT_BOX);
   Vel_Adj->color((Fl_Color)178);
@@ -172,6 +173,7 @@ results.");
   Vel_Adj->callback((Fl_Callback*)cb_Vel_Adj);
   Vel_Adj->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
   Vel_Adj->when(FL_WHEN_CHANGED);
+  o->m_label_size +=5;
 } // SliderW* Vel_Adj
 { Mled = new Fl_Box(51, 5, 10, 10);
   Mled->box(FL_ROUNDED_BOX);

@@ -34,10 +34,10 @@ public:
     void draw();
     void resize(int,int,int,int);
     void set_font_adjustment(){m_need_font_update = true;}
-private:
-    
     int m_text_size;
     int m_label_size;
+private:
+    
     bool m_need_font_update;
     void font_resize(int,int,int,int);
 };

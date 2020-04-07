@@ -1972,7 +1972,7 @@ void RKRGUI::make_window() {
         MetroBar->callback((Fl_Callback*)cb_MetroBar, (void*)(12));
         o->menu(m_looper_bar->get_time_sig());
       } // Fl_Choice* MetroBar
-      { Metro_Volume = new SliderW(667, 100, 117, 11, "Volume");
+      { SliderW* o = Metro_Volume = new SliderW(667, 100, 117, 11, "Volume");
         Metro_Volume->type(5);
         Metro_Volume->box(FL_FLAT_BOX);
         Metro_Volume->color((Fl_Color)178);
@@ -1988,6 +1988,7 @@ void RKRGUI::make_window() {
         Metro_Volume->callback((Fl_Callback*)cb_Metro_Volume);
         Metro_Volume->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
         Metro_Volume->when(FL_WHEN_CHANGED);
+        o->m_label_size +=5;
       } // SliderW* Metro_Volume
       { Fl_Choice* o = MetroSound = new Fl_Choice(634, 118, 28, 16, "S");
         MetroSound->down_box(FL_BORDER_BOX);
@@ -1999,7 +2000,7 @@ void RKRGUI::make_window() {
         MetroSound->callback((Fl_Callback*)cb_MetroSound, (void*)(12));
         o->menu(m_looper_ms->get_metronome_sound());
       } // Fl_Choice* MetroSound
-      { Metro_Tempo = new SliderW(667, 119, 117, 11, "Tempo");
+      { SliderW* o = Metro_Tempo = new SliderW(667, 119, 117, 11, "Tempo");
         Metro_Tempo->type(5);
         Metro_Tempo->box(FL_FLAT_BOX);
         Metro_Tempo->color((Fl_Color)178);
@@ -2016,6 +2017,7 @@ void RKRGUI::make_window() {
         Metro_Tempo->callback((Fl_Callback*)cb_Metro_Tempo);
         Metro_Tempo->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
         Metro_Tempo->when(FL_WHEN_CHANGED);
+        o->m_label_size +=5;
       } // SliderW* Metro_Tempo
       { Metro_Led = new Fl_Box(568, 90, 10, 10);
         Metro_Led->box(FL_ROUNDED_BOX);
