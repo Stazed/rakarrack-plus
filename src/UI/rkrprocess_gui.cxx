@@ -102,8 +102,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     MIDILearn->copy_label(tmp);
     sprintf(tmp, "%s   v%s - ACI", rkr->jackcliname, VERSION);
     Trigger->copy_label(tmp);
-
-
+    
     load_stat();
     Settings->make_table_window();
     Put_Loaded();
@@ -121,7 +120,6 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     }
     
     HideUE->redraw();
-
 
     Fl::add_timeout(.04, this->TimeoutStatic, this);
     Fl::add_handler(prevnext);
@@ -565,6 +563,19 @@ void RKRGUI::GuiTimeout(void)
             }
         }
     };
+    
+    if(rkr->change_scale)
+    {
+        rkr->change_scale = 0;  // false
+        if (rkr->scalable )
+        {
+            Principal->size_range(320, 240, 3200, 2400, 0, 0, 1);
+        }
+        else
+        {
+            Principal->size_range(320, 240, 3200, 2400);
+        }
+    }
 
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
 }
@@ -751,6 +762,7 @@ void RKRGUI::load_stat()
     Settings->scheme_ch->value(k);
     Settings->scheme_ch->do_callback();
     rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide, 0);
+    rakarrack.get(rkr->PrefNom("Scale Window"), rkr->scalable, 0);
 
     Principal->resize(x, y, w, h);
 
@@ -1064,7 +1076,7 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("Labels Color"), (int) label_color);
         rakarrack.set(rkr->PrefNom("Schema"), (int) Settings->scheme_ch->value());
         rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
-
+        rakarrack.set(rkr->PrefNom("Scale Window"), (int) rkr->scalable);
 
         rakarrack.set(rkr->PrefNom("Bank Selected"), rkr->a_bank);
 
@@ -2775,6 +2787,7 @@ void RKRGUI::MiraConfig()
     rkr->m_displayed = 0;
     Settings->Enable_Back->value(rkr->EnableBackgroundImage);
     Settings->Enable_DeacHide->value(rkr->deachide);
+    Settings->Enable_Scale->value(rkr->scalable);
 
     Settings->BFiname->value(rkr->BankFilename);
     Settings->BackFiname->value(rkr->BackgroundImage);
