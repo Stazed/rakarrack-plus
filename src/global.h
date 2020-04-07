@@ -230,6 +230,9 @@ extern char *filetoload;
 extern char *banktoload;
 extern char *jack_client_name;
 
+/* The RKR_Value_Input font size */
+extern int value_font_size;
+
 #endif
 
 

@@ -28,6 +28,8 @@
 #include "RKR_Value_Input.h"
 #include "../global.h"
 
+int value_font_size;
+
 void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 {
     RKR_Value_Input& t = *(RKR_Value_Input*) v;
@@ -54,11 +56,14 @@ void RKR_Value_Input::draw()
 
 void RKR_Value_Input::resize(int X, int Y, int W, int H)
 {
-    /* Resize the text value */
-    int W_size = W* 0.4;
-    int H_size = H - 2;
+    /* Resize the text and labels */
+    float ratio = (float) value_font_size / 10.0; 
+    
+    int W_size = W* (0.4 * ratio) ;
+    int H_size = H - (2 * ratio);
     int size_txt = (H_size > W_size) ? W_size: H_size;
     textsize(size_txt);
+    labelsize(size_txt);
 
     Fl_Valuator::resize(X, Y, W, H);
     input.resize(X, Y, W, H);
@@ -214,6 +219,7 @@ int RKR_Value_Input::handle(int event)
 RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
 : Fl_Valuator(X, Y, W, H, l), input(X, Y, W, H, 0)
 {
+    value_font_size = 12;
     soft_ = 0;
     if (input.parent()) // defeat automatic-add
         input.parent()->remove(input);

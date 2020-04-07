@@ -5160,6 +5160,7 @@ void RKRGUI::PutBackground()
 // FIXME this is ugly, all magic numbers to identify widgets
 void RKRGUI::chfsize(int value)
 {
+    value_font_size += value;
     // Sort through widgets and adjust font sizes
     unsigned char k = 0;
 
