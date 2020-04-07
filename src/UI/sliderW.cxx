@@ -40,16 +40,19 @@ int SliderW::handle(int event)
     }
 
     int sxx = x(), syy = y(), sww = w(), shh = h();
-
+    int bww = w(), bhh = h();
+    
     if (horizontal())
     {
-        sxx += 35;
-        sww -= 35;
+        bww = w() * .30;        // value box width (magic number % of total width)
+        sxx += bww;             // adjust slider x location based on above box width
+        sww -= bww;             // reduce slider width by box width
     }
     else
     {
-        syy += 25;
-        shh -= 25;
+        bhh = h() * .18;        // value box height (magic number % of total height)
+        syy += bhh;             // adjust slider y location based on above box height
+        shh -= bhh;             // reduce slider height by box height
     }
 
     return handle2(event,
@@ -214,15 +217,15 @@ void SliderW::draw()
 
     if (horizontal())
     {
-        bww = 35;
-        sxx += 35;
-        sww -= 35;
+        bww = w() * .30;        // value box width (magic number % of total width)
+        sxx += bww;             // adjust slider x location based on above box width
+        sww -= bww;             // reduce slider width by box width
     }
     else
     {
-        syy += 25;
-        bhh = 25;
-        shh -= 25;
+        bhh = h() * .18;        // value box height (magic number % of total height)
+        syy += bhh;             // adjust slider y location based on above box height
+        shh -= bhh;             // reduce slider height by box height
     }
 
     //  if (damage()&FL_DAMAGE_ALL) draw_box(box(),sxx,syy,sww,shh,back_color);
@@ -389,7 +392,6 @@ void SliderW::draw()
 
 void SliderW::resize(int X, int Y, int W, int H)
 {
-    printf("W = %d: m_text_size = %d: m_label_size = %d\n",W, m_text_size,m_label_size );
     /* Resize the text and labels */
     float t_ratio = (float) slider_font_size / m_text_size; 
     float l_ratio = (float) (slider_font_size + 4) / m_label_size; 
@@ -397,7 +399,7 @@ void SliderW::resize(int X, int Y, int W, int H)
     int W_size_t = (W * 0.3) * (0.3 * t_ratio) ;
     int W_size_l = W * (0.1 * l_ratio) ;
 
-    textsize(W_size_t);
+    textsize(W_size_t + 1);
     labelsize(W_size_l);
     
     Fl_Valuator::resize(X, Y, W, H);
