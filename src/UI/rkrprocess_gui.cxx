@@ -5161,6 +5161,8 @@ void RKRGUI::PutBackground()
 void RKRGUI::chfsize(int value)
 {
     value_font_size += value;
+    slider_font_size += value;
+
     // Sort through widgets and adjust font sizes
     unsigned char k = 0;
 
@@ -5216,10 +5218,10 @@ void RKRGUI::chfsize(int value)
                 /* SliderW - for the value text size */
                 if (uh == SLIDERW_USER_DATA)
                 {
-                    SliderW *s = (SliderW *) c;
+                /*    SliderW *s = (SliderW *) c;
                     unsigned char tt = s->textsize();
                     tt += value;
-                    s->textsize(tt);
+                    s->textsize(tt);*/
                 }
                 
                 k = c->labelsize();
@@ -5234,7 +5236,8 @@ void RKRGUI::chfsize(int value)
                 }
                 else if ((k > 2)&&(k < 16))
                 {
-                    c->labelsize(k);
+                    if (uh != SLIDERW_USER_DATA)
+                        c->labelsize(k);
                 }
 
                 if (uh != 5)

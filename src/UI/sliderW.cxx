@@ -21,8 +21,13 @@
 
 #include "sliderW.h"
 
+int slider_font_size;
+
 SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
 {
+    slider_font_size = 10;
+    m_text_size = textsize();
+    m_label_size = labelsize();
     this->user_data((void*)(SLIDERW_USER_DATA));
 }
 
@@ -380,4 +385,20 @@ void SliderW::draw()
     /* The value box and amount */
     fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP, back);
     fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
+}
+
+void SliderW::resize(int X, int Y, int W, int H)
+{
+    printf("W = %d: m_text_size = %d: m_label_size = %d\n",W, m_text_size,m_label_size );
+    /* Resize the text and labels */
+    float t_ratio = (float) slider_font_size / m_text_size; 
+    float l_ratio = (float) (slider_font_size + 4) / m_label_size; 
+    
+    int W_size_t = (W * 0.3) * (0.3 * t_ratio) ;
+    int W_size_l = W * (0.1 * l_ratio) ;
+
+    textsize(W_size_t);
+    labelsize(W_size_l);
+    
+    Fl_Valuator::resize(X, Y, W, H);
 }

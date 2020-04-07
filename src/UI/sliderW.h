@@ -32,6 +32,10 @@ public:
     int handle(int event);
     int handle2(int event, int X, int Y, int W, int H);
     void draw();
+    void resize(int,int,int,int);
 private:
+    
+    int m_text_size;
+    int m_label_size;
 };
 #endif
