@@ -219,7 +219,7 @@ int RKR_Value_Input::handle(int event)
 RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
 : Fl_Valuator(X, Y, W, H, l), input(X, Y, W, H, 0)
 {
-    value_font_size = 12;
+    value_font_size = 10;
     soft_ = 0;
     if (input.parent()) // defeat automatic-add
         input.parent()->remove(input);
