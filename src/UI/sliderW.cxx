@@ -26,6 +26,7 @@ int slider_font_size;
 SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
 {
     slider_font_size = 10;
+    m_need_font_update = true;
     m_text_size = textsize();
     m_label_size = labelsize();
     this->user_data((void*)(SLIDERW_USER_DATA));
@@ -210,6 +211,12 @@ int SliderW::handle2(int event, int X, int Y, int W, int H)
 
 void SliderW::draw()
 {
+    if(m_need_font_update)
+    {
+        m_need_font_update = false;
+        font_resize(x(), y(), w(), h());
+    }
+
     int X, Y, W, H;
     int sxx = x(), syy = y(), sww = w(), shh = h();
     int bxx = x(), byy = y(), bww = w(), bhh = h();
@@ -393,6 +400,13 @@ void SliderW::draw()
 void SliderW::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
+    font_resize(X, Y, W, H);
+    
+    Fl_Valuator::resize(X, Y, W, H);
+}
+
+void SliderW::font_resize(int X, int Y, int W, int H)
+{
     float t_ratio = (float) slider_font_size / m_text_size; 
     float l_ratio = (float) (slider_font_size + 4) / m_label_size; 
     
@@ -409,6 +423,4 @@ void SliderW::resize(int X, int Y, int W, int H)
         textsize((W * t_ratio) * .5);
         labelsize((W * l_ratio) * .5);
     }
-    
-    Fl_Valuator::resize(X, Y, W, H);
 }

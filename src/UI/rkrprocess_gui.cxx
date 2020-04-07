@@ -5218,10 +5218,8 @@ void RKRGUI::chfsize(int value)
                 /* SliderW - for the value text size */
                 if (uh == SLIDERW_USER_DATA)
                 {
-                /*    SliderW *s = (SliderW *) c;
-                    unsigned char tt = s->textsize();
-                    tt += value;
-                    s->textsize(tt);*/
+                    SliderW *s = (SliderW *) c;
+                    s->set_font_adjustment();
                 }
                 
                 k = c->labelsize();
