@@ -362,15 +362,15 @@ void SliderW::draw()
      */
 
     /* The slider value text amount */
-    int datasize;
-    if (textsize() < 16)
+    int datasize = textsize();
+/*    if (textsize() < 16)
     {
         datasize = textsize();
     }
     else
     {
         datasize = 16;
-    }
+    }*/
 
     char buf[128];
     format(buf);
@@ -399,8 +399,16 @@ void SliderW::resize(int X, int Y, int W, int H)
     int W_size_t = (W * 0.3) * (0.3 * t_ratio) ;
     int W_size_l = W * (0.1 * l_ratio) ;
 
-    textsize(W_size_t + 1);
-    labelsize(W_size_l);
+    if(horizontal())
+    {
+        textsize(W_size_t + 1);
+        labelsize(W_size_l);
+    }
+    else
+    {
+        textsize((W * t_ratio) * .5);
+        labelsize((W * l_ratio) * .5);
+    }
     
     Fl_Valuator::resize(X, Y, W, H);
 }
