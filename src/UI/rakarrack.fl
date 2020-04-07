@@ -245,6 +245,12 @@ decl {Fl_Color label_color;} {private global
 decl {RKR *rkr; // extern global} {private global
 }
 
+decl {int g_value_font_size = 10;  // extern global} {private global
+}
+
+decl {int g_slider_font_size = 10;  // extern global} {selected private global
+}
+
 class RKRGUI {open
 } {
   decl {CommonGuiMenu *m_looper_bar;} {private local
@@ -1131,7 +1137,7 @@ switch(rkr->M_Metro_Sound)
         Fl_Value_Slider Metro_Tempo {
           label Tempo
           callback {rkr->M_Metro_Tempo=(int)o->value();
-rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);} selected
+rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 20 maximum 340 step 1 value 100 textcolor 7
           code0 {o->m_label_size +=5;}
           class SliderW

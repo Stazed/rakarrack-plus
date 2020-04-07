@@ -28,7 +28,6 @@
 #include "RKR_Value_Input.h"
 #include "../global.h"
 
-int value_font_size;
 
 void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 {
@@ -62,7 +61,7 @@ void RKR_Value_Input::draw()
 
 void RKR_Value_Input::font_resize(int X, int Y, int W, int H)
 {
-    float ratio = (float) value_font_size / 10.0; 
+    float ratio = (float) g_value_font_size / 10.0; 
     
     int W_size = W* (0.4 * ratio) ;
     int H_size = H - (2 * ratio);
@@ -232,7 +231,6 @@ RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
 {
     this->user_data((void*)(VALUE_USER_DATA));
     m_need_font_update = true;
-    value_font_size = 10;
     soft_ = 0;
     if (input.parent()) // defeat automatic-add
         input.parent()->remove(input);

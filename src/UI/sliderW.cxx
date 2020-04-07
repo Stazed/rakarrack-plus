@@ -21,11 +21,9 @@
 
 #include "sliderW.h"
 
-int slider_font_size;
 
 SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
 {
-    slider_font_size = 10;
     m_need_font_update = true;
     m_text_size = textsize();
     m_label_size = labelsize();
@@ -407,8 +405,8 @@ void SliderW::resize(int X, int Y, int W, int H)
 
 void SliderW::font_resize(int X, int Y, int W, int H)
 {
-    float t_ratio = (float) slider_font_size / m_text_size; 
-    float l_ratio = (float) (slider_font_size + 4) / m_label_size; 
+    float t_ratio = (float) g_slider_font_size / m_text_size; 
+    float l_ratio = (float) (g_slider_font_size + 4) / m_label_size; 
     
     int W_size_t = (W * 0.3) * (0.3 * t_ratio) ;
     int W_size_l = W * (0.1 * l_ratio) ;
