@@ -42,10 +42,10 @@ private:
   inline void cb_synthfilter_freq_i(SliderW*, void*);
   static void cb_synthfilter_freq(SliderW*, void*);
 public:
-  SliderW *synthfilter_rand;
+  RKR_Value_Input *synthfilter_rand;
 private:
-  inline void cb_synthfilter_rand_i(SliderW*, void*);
-  static void cb_synthfilter_rand(SliderW*, void*);
+  inline void cb_synthfilter_rand_i(RKR_Value_Input*, void*);
+  static void cb_synthfilter_rand(RKR_Value_Input*, void*);
 public:
   Fl_Choice *synthfilter_lfotype;
 private:
