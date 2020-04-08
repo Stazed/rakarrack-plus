@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Value_Input.h"} {selected public global
+}
+
 widget_class {\#include "common_gui_menu.h"} RyanwahGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -186,7 +189,7 @@ rkr->efx_RyanWah->changepar(6,(int)o->value());}
  rgui->getMIDIControl(261);
  return;
 }
-rkr->efx_RyanWah->changepar(2,(int)o->value());} selected
+rkr->efx_RyanWah->changepar(2,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class SliderW
   }

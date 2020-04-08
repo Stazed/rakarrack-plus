@@ -2,8 +2,11 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Value_Input.h"} {selected public global
+}
+
 widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
-  user_data 1 open selected
+  user_data 1 open
   xywh {1176 110 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}

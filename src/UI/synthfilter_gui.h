@@ -3,6 +3,7 @@
 #ifndef synthfilter_gui_h
 #define synthfilter_gui_h
 #include <FL/Fl.H>
+#include "RKR_Value_Input.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"

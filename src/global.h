@@ -230,7 +230,7 @@ extern char *filetoload;
 extern char *banktoload;
 extern char *jack_client_name;
 
-/* The RKR_Value_Input font size */
+/* The font size adjustments */
 extern int g_value_font_size;
 extern int g_slider_font_size;
 

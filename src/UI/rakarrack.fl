@@ -11,9 +11,6 @@ decl {\#include "../global.h"} {public global
 decl {\#include "sliderW.h"} {public global
 }
 
-decl {\#include "RKR_Value_Input.h"} {selected public global
-}
-
 decl {\#include "newvum.h"} {public global
 }
 
@@ -1050,7 +1047,7 @@ rkr->calculavol(2);}
         class MidiGui
       } {}
       Fl_Group Metro {
-        user_data 1 open
+        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -1155,7 +1152,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {

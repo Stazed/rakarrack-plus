@@ -64,10 +64,8 @@ void RKR_Value_Input::font_resize(int X, int Y, int W, int H)
     float ratio = (float) g_value_font_size / 10.0; 
     
     int W_size = W* (0.4 * ratio) ;
-    int H_size = H - (2 * ratio);
-    int size_txt = (H_size > W_size) ? W_size: H_size;
-    textsize(size_txt);
-    labelsize(size_txt);
+    textsize(W_size);
+    labelsize(W_size);
 }
 
 void RKR_Value_Input::resize(int X, int Y, int W, int H)
