@@ -5187,15 +5187,15 @@ void RKRGUI::chfsize(int value)
         k = w->labelsize();
         k += value;
         
-        /* Top right - (Lmt, Clip, Resample, Aux, In, Out, 0.0%) */
-        if ((ud < 770) || (ud > 779))
+        if ((ud < 770) || (ud > 779))   // EFX name labels (L1 to L10)
         {
+            /* Top right - (Lmt, Clip, Resample, Aux, In, Out, 0.0%) */
             if(ud == BOX_USER_DATA || ud == BOX_LED_DATA)
             {
                 RKR_Box *Bx = (RKR_Box *) w;
                 Bx->set_font_adjustment();
             }
-            else
+            else    // FIXME - is this needed??
             {
                 if ((k > 2)&&(k < 16))
                 {
@@ -5203,9 +5203,10 @@ void RKRGUI::chfsize(int value)
                 }
             }
         }
-        else if ((k > 6)&&(k < 20))         /* Efx Name Labels */
+        else  /* Efx Name Labels */
         {
-            w->labelsize(k);
+            RKR_Box *Bx = (RKR_Box *) w;
+            Bx->set_font_adjustment();
         }
 
         if (ud != BOX_LED_DATA)

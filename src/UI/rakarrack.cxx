@@ -1063,58 +1063,136 @@ void RKRGUI::make_window() {
       E10->hide();
       E10->deactivate();
     } // Fl_Box* E10
-    { L1 = new Fl_Box(2, 195, 158, 17, "label");
+    { RKR_Box* o = L1 = new RKR_Box(2, 195, 158, 17, "label");
+      L1->box(FL_NO_BOX);
+      L1->color(FL_BACKGROUND_COLOR);
+      L1->selection_color(FL_BACKGROUND_COLOR);
+      L1->labeltype(FL_NORMAL_LABEL);
       L1->labelfont(1);
+      L1->labelsize(14);
       L1->labelcolor(FL_BACKGROUND2_COLOR);
       L1->user_data((void*)(770));
       L1->align(Fl_Align(FL_ALIGN_CLIP));
-    } // Fl_Box* L1
-    { L2 = new Fl_Box(162, 195, 158, 17, "label");
+      L1->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L1
+    { RKR_Box* o = L2 = new RKR_Box(162, 195, 158, 17, "label");
+      L2->box(FL_NO_BOX);
+      L2->color(FL_BACKGROUND_COLOR);
+      L2->selection_color(FL_BACKGROUND_COLOR);
+      L2->labeltype(FL_NORMAL_LABEL);
       L2->labelfont(1);
+      L2->labelsize(14);
       L2->labelcolor(FL_BACKGROUND2_COLOR);
       L2->user_data((void*)(771));
       L2->align(Fl_Align(FL_ALIGN_CLIP));
-    } // Fl_Box* L2
-    { L3 = new Fl_Box(322, 195, 158, 17, "label");
+      L2->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L2
+    { RKR_Box* o = L3 = new RKR_Box(322, 195, 158, 17, "label");
+      L3->box(FL_NO_BOX);
+      L3->color(FL_BACKGROUND_COLOR);
+      L3->selection_color(FL_BACKGROUND_COLOR);
+      L3->labeltype(FL_NORMAL_LABEL);
       L3->labelfont(1);
+      L3->labelsize(14);
       L3->labelcolor(FL_BACKGROUND2_COLOR);
       L3->user_data((void*)(772));
-    } // Fl_Box* L3
-    { L4 = new Fl_Box(482, 195, 158, 17, "label");
+      L3->align(Fl_Align(FL_ALIGN_CENTER));
+      L3->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L3
+    { RKR_Box* o = L4 = new RKR_Box(482, 195, 158, 17, "label");
+      L4->box(FL_NO_BOX);
+      L4->color(FL_BACKGROUND_COLOR);
+      L4->selection_color(FL_BACKGROUND_COLOR);
+      L4->labeltype(FL_NORMAL_LABEL);
       L4->labelfont(1);
+      L4->labelsize(14);
       L4->labelcolor(FL_BACKGROUND2_COLOR);
       L4->user_data((void*)(773));
-    } // Fl_Box* L4
-    { L5 = new Fl_Box(642, 195, 157, 17, "label");
+      L4->align(Fl_Align(FL_ALIGN_CENTER));
+      L4->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L4
+    { RKR_Box* o = L5 = new RKR_Box(642, 195, 157, 17, "label");
+      L5->box(FL_NO_BOX);
+      L5->color(FL_BACKGROUND_COLOR);
+      L5->selection_color(FL_BACKGROUND_COLOR);
+      L5->labeltype(FL_NORMAL_LABEL);
       L5->labelfont(1);
+      L5->labelsize(14);
       L5->labelcolor(FL_BACKGROUND2_COLOR);
       L5->user_data((void*)(774));
-    } // Fl_Box* L5
-    { L6 = new Fl_Box(1, 396, 158, 17, "label");
+      L5->align(Fl_Align(FL_ALIGN_CENTER));
+      L5->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L5
+    { RKR_Box* o = L6 = new RKR_Box(1, 396, 158, 17, "label");
+      L6->box(FL_NO_BOX);
+      L6->color(FL_BACKGROUND_COLOR);
+      L6->selection_color(FL_BACKGROUND_COLOR);
+      L6->labeltype(FL_NORMAL_LABEL);
       L6->labelfont(1);
+      L6->labelsize(14);
       L6->labelcolor(FL_BACKGROUND2_COLOR);
       L6->user_data((void*)(775));
-    } // Fl_Box* L6
-    { L7 = new Fl_Box(162, 396, 158, 17, "label");
+      L6->align(Fl_Align(FL_ALIGN_CENTER));
+      L6->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L6
+    { RKR_Box* o = L7 = new RKR_Box(162, 396, 158, 17, "label");
+      L7->box(FL_NO_BOX);
+      L7->color(FL_BACKGROUND_COLOR);
+      L7->selection_color(FL_BACKGROUND_COLOR);
+      L7->labeltype(FL_NORMAL_LABEL);
       L7->labelfont(1);
+      L7->labelsize(14);
       L7->labelcolor(FL_BACKGROUND2_COLOR);
       L7->user_data((void*)(776));
-    } // Fl_Box* L7
-    { L8 = new Fl_Box(322, 396, 158, 17, "label");
+      L7->align(Fl_Align(FL_ALIGN_CENTER));
+      L7->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L7
+    { RKR_Box* o = L8 = new RKR_Box(322, 396, 158, 17, "label");
+      L8->box(FL_NO_BOX);
+      L8->color(FL_BACKGROUND_COLOR);
+      L8->selection_color(FL_BACKGROUND_COLOR);
+      L8->labeltype(FL_NORMAL_LABEL);
       L8->labelfont(1);
+      L8->labelsize(14);
       L8->labelcolor(FL_BACKGROUND2_COLOR);
       L8->user_data((void*)(777));
-    } // Fl_Box* L8
-    { L9 = new Fl_Box(482, 396, 158, 17, "label");
+      L8->align(Fl_Align(FL_ALIGN_CENTER));
+      L8->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L8
+    { RKR_Box* o = L9 = new RKR_Box(482, 396, 158, 17, "label");
+      L9->box(FL_NO_BOX);
+      L9->color(FL_BACKGROUND_COLOR);
+      L9->selection_color(FL_BACKGROUND_COLOR);
+      L9->labeltype(FL_NORMAL_LABEL);
       L9->labelfont(1);
+      L9->labelsize(14);
       L9->labelcolor(FL_BACKGROUND2_COLOR);
       L9->user_data((void*)(778));
-    } // Fl_Box* L9
-    { L10 = new Fl_Box(642, 396, 154, 17, "label");
+      L9->align(Fl_Align(FL_ALIGN_CENTER));
+      L9->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L9
+    { RKR_Box* o = L10 = new RKR_Box(642, 396, 154, 17, "label");
+      L10->box(FL_NO_BOX);
+      L10->color(FL_BACKGROUND_COLOR);
+      L10->selection_color(FL_BACKGROUND_COLOR);
+      L10->labeltype(FL_NORMAL_LABEL);
       L10->labelfont(1);
+      L10->labelsize(14);
       L10->labelcolor(FL_BACKGROUND2_COLOR);
       L10->user_data((void*)(779));
-    } // Fl_Box* L10
+      L10->align(Fl_Align(FL_ALIGN_CENTER));
+      L10->when(FL_WHEN_RELEASE);
+      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+    } // RKR_Box* L10
     { EQ = new EqGui(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);
       EQ->color(FL_FOREGROUND_COLOR);
