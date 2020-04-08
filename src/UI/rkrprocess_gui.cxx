@@ -5187,6 +5187,7 @@ void RKRGUI::chfsize(int value)
         k = w->labelsize();
         k += value;
         
+        /* Top right - (Lmt, Clip, Resample, Aux, In, Out, 0.0%) */
         if ((ud < 770) || (ud > 779))
         {
             if ((k > 2)&&(k < 16))
@@ -5194,27 +5195,27 @@ void RKRGUI::chfsize(int value)
                 w->labelsize(k);
             }
         }
-        else if ((k > 6)&&(k < 20))
+        else if ((k > 6)&&(k < 20))         /* Efx Name Labels */
         {
             w->labelsize(k);
         }
 
         if (ud != 5)
         {
-            w->labelcolor(label_color);
+            w->labelcolor(label_color);     /* Lmt, Clip, Resample */
         }
         else
         {
-            w->labelcolor(leds_color);
+            w->labelcolor(leds_color);      /* Aux, In, Out, 0.0% */
         }
         
         if (ud != 2)
         {
-            w->selection_color(back_color);
+            w->selection_color(back_color); /* ????? */
         }
         else
         {
-            w->selection_color(leds_color);
+            w->selection_color(leds_color); /* ???? */
         }
 
 
@@ -5244,6 +5245,8 @@ void RKRGUI::chfsize(int value)
                 k = c->labelsize();
                 k += value;
 
+                /* In/Out, All preset buttons, Create name, Tuner,
+                 * Metronome, Tap Tempo (also Apply, Tap buttons), MIDI */
                 if ((uh == 7) || (uh == 77))
                 {
                     if ((k > 6)&&(k < 20))
@@ -5254,23 +5257,26 @@ void RKRGUI::chfsize(int value)
                 else if ((k > 2)&&(k < 16))
                 {
                     if (uh != SLIDERW_USER_DATA && uh != VALUE_USER_DATA)
-                        c->labelsize(k);
+                    {
+                        c->labelsize(k);     /* All the efx labels not slider and Value Adjuster */
+                    }
                 }
 
                 if (uh != 5)
                 {
-                    c->labelcolor(label_color);
+                    c->labelcolor(label_color);     /* Labels on (almost) everything except sliders */
                 }
                 else
                 {
-                    c->labelcolor(leds_color);
+                    c->labelcolor(leds_color);      /* ????? */
                 }
 
                 if (uh != 7)
                 {
-                    c->selection_color(back_color);
+                    c->selection_color(back_color); /* ????? */
                 }
 
+                /* All efx On buttons, +10db, selections boxes, and all efx other buttons */
                 if ((uh == 2) || (uh == 7) || (uh == 77) || (uh == 78))
                 {
                     c->selection_color(leds_color);
@@ -5294,7 +5300,7 @@ void RKRGUI::chfsize(int value)
                         
                         if ((k > 2) &&(k < 16))
                         {
-                            p->labelsize(k);
+                            p->labelsize(k);   /* Drop down menus - menu list items */
                         }
                     }
                 }
@@ -5308,7 +5314,7 @@ void RKRGUI::chfsize(int value)
 
     if ((k > 10)&&(k < 32))
     {
-        WPreset_Name->textsize(k);
+        WPreset_Name->textsize(k);  /* Bank preset name */
     }
 
     CLIP_LED->selection_color(FL_RED);
