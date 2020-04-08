@@ -17,6 +17,9 @@ decl {\#include "newvum.h"} {public global
 decl {\#include "tunerbar.h"} {public global
 }
 
+decl {\#include "RKR_Box.h"} {public global
+}
+
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
 }
 
@@ -272,12 +275,12 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {231 479 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {37 209 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
@@ -474,43 +477,54 @@ Fl::focus(Open_Order);
       Fl_Box LMT_LED {
         label Lmt
         xywh {504 8 8 8} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
+        class RKR_Box
       }
       Fl_Box CLIP_LED {
         label Clip
         xywh {541 8 8 8} box DOWN_BOX color 1 labelsize 10 labelcolor 7 align 4
+        class RKR_Box
       }
       Fl_Box UPS_LED {
         label Resample
         xywh {608 8 8 8} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
+        class RKR_Box
       }
       Fl_Box P_MIN_ST {
         label {Midi In}
         user_data 5
         xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
+        code0 {o->m_start_height +=2;}
+        class RKR_Box
       }
       Fl_Box P_MOUT_ST {
         label {Midi Out}
-        user_data 5
+        user_data 5 selected
         xywh {648 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
+        code0 {o->m_start_height +=2;}
+        class RKR_Box
       }
       Fl_Box P_AUX_ST {
         label Aux
         user_data 5
         xywh {676 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
+        class RKR_Box
       }
       Fl_Box P_IN_ST {
         label In
         user_data 5
         xywh {698 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
+        class RKR_Box
       }
       Fl_Box P_OUT_ST {
         label Out
         user_data 5
         xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
+        class RKR_Box
       }
       Fl_Box CPULOAD {
         user_data 5
         xywh {750 5 45 17} labelsize 10 labelcolor 7
+        class RKR_Box
       }
       Fl_Box Sco {
         label Rakarrack

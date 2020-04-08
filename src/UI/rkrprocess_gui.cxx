@@ -5190,9 +5190,18 @@ void RKRGUI::chfsize(int value)
         /* Top right - (Lmt, Clip, Resample, Aux, In, Out, 0.0%) */
         if ((ud < 770) || (ud > 779))
         {
-            if ((k > 2)&&(k < 16))
+            if(ud == BOX_USER_DATA || ud == 5)
             {
-                w->labelsize(k);
+                RKR_Box *Bx = (RKR_Box *) w;
+                Bx->set_font_adjustment();
+            }
+            else
+            {
+                printf()
+                if ((k > 2)&&(k < 16))
+                {
+                    w->labelsize(k);        /* Nothing ??? */
+                }
             }
         }
         else if ((k > 6)&&(k < 20))         /* Efx Name Labels */

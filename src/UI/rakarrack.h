@@ -8,6 +8,7 @@
 #include "sliderW.h"
 #include "newvum.h"
 #include "tunerbar.h"
+#include "RKR_Box.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -255,15 +256,15 @@ private:
   inline void cb_TITTLE_L_i(Fl_Button*, void*);
   static void cb_TITTLE_L(Fl_Button*, void*);
 public:
-  Fl_Box *LMT_LED;
-  Fl_Box *CLIP_LED;
-  Fl_Box *UPS_LED;
-  Fl_Box *P_MIN_ST;
-  Fl_Box *P_MOUT_ST;
-  Fl_Box *P_AUX_ST;
-  Fl_Box *P_IN_ST;
-  Fl_Box *P_OUT_ST;
-  Fl_Box *CPULOAD;
+  RKR_Box *LMT_LED;
+  RKR_Box *CLIP_LED;
+  RKR_Box *UPS_LED;
+  RKR_Box *P_MIN_ST;
+  RKR_Box *P_MOUT_ST;
+  RKR_Box *P_AUX_ST;
+  RKR_Box *P_IN_ST;
+  RKR_Box *P_OUT_ST;
+  RKR_Box *CPULOAD;
   Scope *Sco;
   Fl_Box *E1;
   Fl_Box *E2;

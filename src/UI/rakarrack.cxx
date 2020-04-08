@@ -888,69 +888,118 @@ void RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
     } // Fl_Button* TITTLE_L
-    { LMT_LED = new Fl_Box(504, 8, 8, 8, "Lmt");
+    { LMT_LED = new RKR_Box(504, 8, 8, 8, "Lmt");
       LMT_LED->box(FL_DOWN_BOX);
       LMT_LED->color((Fl_Color)2);
+      LMT_LED->selection_color(FL_BACKGROUND_COLOR);
+      LMT_LED->labeltype(FL_NORMAL_LABEL);
+      LMT_LED->labelfont(0);
       LMT_LED->labelsize(10);
       LMT_LED->labelcolor(FL_BACKGROUND2_COLOR);
       LMT_LED->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Box* LMT_LED
-    { CLIP_LED = new Fl_Box(541, 8, 8, 8, "Clip");
+      LMT_LED->when(FL_WHEN_RELEASE);
+    } // RKR_Box* LMT_LED
+    { CLIP_LED = new RKR_Box(541, 8, 8, 8, "Clip");
       CLIP_LED->box(FL_DOWN_BOX);
       CLIP_LED->color((Fl_Color)1);
+      CLIP_LED->selection_color(FL_BACKGROUND_COLOR);
+      CLIP_LED->labeltype(FL_NORMAL_LABEL);
+      CLIP_LED->labelfont(0);
       CLIP_LED->labelsize(10);
       CLIP_LED->labelcolor(FL_BACKGROUND2_COLOR);
       CLIP_LED->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Box* CLIP_LED
-    { UPS_LED = new Fl_Box(608, 8, 8, 8, "Resample");
+      CLIP_LED->when(FL_WHEN_RELEASE);
+    } // RKR_Box* CLIP_LED
+    { UPS_LED = new RKR_Box(608, 8, 8, 8, "Resample");
       UPS_LED->box(FL_DOWN_BOX);
       UPS_LED->color((Fl_Color)2);
+      UPS_LED->selection_color(FL_BACKGROUND_COLOR);
+      UPS_LED->labeltype(FL_NORMAL_LABEL);
+      UPS_LED->labelfont(0);
       UPS_LED->labelsize(10);
       UPS_LED->labelcolor(FL_BACKGROUND2_COLOR);
       UPS_LED->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Box* UPS_LED
-    { P_MIN_ST = new Fl_Box(620, 3, 29, 20, "Midi In");
+      UPS_LED->when(FL_WHEN_RELEASE);
+    } // RKR_Box* UPS_LED
+    { RKR_Box* o = P_MIN_ST = new RKR_Box(620, 3, 29, 20, "Midi In");
+      P_MIN_ST->box(FL_NO_BOX);
+      P_MIN_ST->color(FL_BACKGROUND_COLOR);
+      P_MIN_ST->selection_color(FL_BACKGROUND_COLOR);
+      P_MIN_ST->labeltype(FL_NORMAL_LABEL);
       P_MIN_ST->labelfont(1);
       P_MIN_ST->labelsize(8);
       P_MIN_ST->labelcolor(FL_BACKGROUND2_COLOR);
       P_MIN_ST->user_data((void*)(5));
       P_MIN_ST->align(Fl_Align(FL_ALIGN_WRAP));
+      P_MIN_ST->when(FL_WHEN_RELEASE);
       P_MIN_ST->hide();
-    } // Fl_Box* P_MIN_ST
-    { P_MOUT_ST = new Fl_Box(648, 3, 29, 20, "Midi Out");
+      o->m_start_height +=2;
+    } // RKR_Box* P_MIN_ST
+    { RKR_Box* o = P_MOUT_ST = new RKR_Box(648, 3, 29, 20, "Midi Out");
+      P_MOUT_ST->box(FL_NO_BOX);
+      P_MOUT_ST->color(FL_BACKGROUND_COLOR);
+      P_MOUT_ST->selection_color(FL_BACKGROUND_COLOR);
+      P_MOUT_ST->labeltype(FL_NORMAL_LABEL);
       P_MOUT_ST->labelfont(1);
       P_MOUT_ST->labelsize(8);
       P_MOUT_ST->labelcolor(FL_BACKGROUND2_COLOR);
       P_MOUT_ST->user_data((void*)(5));
       P_MOUT_ST->align(Fl_Align(FL_ALIGN_WRAP));
+      P_MOUT_ST->when(FL_WHEN_RELEASE);
       P_MOUT_ST->hide();
-    } // Fl_Box* P_MOUT_ST
-    { P_AUX_ST = new Fl_Box(676, 5, 32, 17, "Aux");
+      o->m_start_height +=2;
+    } // RKR_Box* P_MOUT_ST
+    { P_AUX_ST = new RKR_Box(676, 5, 32, 17, "Aux");
+      P_AUX_ST->box(FL_NO_BOX);
+      P_AUX_ST->color(FL_BACKGROUND_COLOR);
+      P_AUX_ST->selection_color(FL_BACKGROUND_COLOR);
+      P_AUX_ST->labeltype(FL_NORMAL_LABEL);
       P_AUX_ST->labelfont(1);
       P_AUX_ST->labelsize(10);
       P_AUX_ST->labelcolor(FL_BACKGROUND2_COLOR);
       P_AUX_ST->user_data((void*)(5));
+      P_AUX_ST->align(Fl_Align(FL_ALIGN_CENTER));
+      P_AUX_ST->when(FL_WHEN_RELEASE);
       P_AUX_ST->hide();
-    } // Fl_Box* P_AUX_ST
-    { P_IN_ST = new Fl_Box(698, 5, 32, 17, "In");
+    } // RKR_Box* P_AUX_ST
+    { P_IN_ST = new RKR_Box(698, 5, 32, 17, "In");
+      P_IN_ST->box(FL_NO_BOX);
+      P_IN_ST->color(FL_BACKGROUND_COLOR);
+      P_IN_ST->selection_color(FL_BACKGROUND_COLOR);
+      P_IN_ST->labeltype(FL_NORMAL_LABEL);
       P_IN_ST->labelfont(1);
       P_IN_ST->labelsize(10);
       P_IN_ST->labelcolor(FL_BACKGROUND2_COLOR);
       P_IN_ST->user_data((void*)(5));
+      P_IN_ST->align(Fl_Align(FL_ALIGN_CENTER));
+      P_IN_ST->when(FL_WHEN_RELEASE);
       P_IN_ST->hide();
-    } // Fl_Box* P_IN_ST
-    { P_OUT_ST = new Fl_Box(719, 5, 32, 17, "Out");
+    } // RKR_Box* P_IN_ST
+    { P_OUT_ST = new RKR_Box(719, 5, 32, 17, "Out");
+      P_OUT_ST->box(FL_NO_BOX);
+      P_OUT_ST->color(FL_BACKGROUND_COLOR);
+      P_OUT_ST->selection_color(FL_BACKGROUND_COLOR);
+      P_OUT_ST->labeltype(FL_NORMAL_LABEL);
       P_OUT_ST->labelfont(1);
       P_OUT_ST->labelsize(10);
       P_OUT_ST->labelcolor(FL_BACKGROUND2_COLOR);
       P_OUT_ST->user_data((void*)(5));
+      P_OUT_ST->align(Fl_Align(FL_ALIGN_CENTER));
+      P_OUT_ST->when(FL_WHEN_RELEASE);
       P_OUT_ST->hide();
-    } // Fl_Box* P_OUT_ST
-    { CPULOAD = new Fl_Box(750, 5, 45, 17);
+    } // RKR_Box* P_OUT_ST
+    { CPULOAD = new RKR_Box(750, 5, 45, 17);
+      CPULOAD->box(FL_NO_BOX);
+      CPULOAD->color(FL_BACKGROUND_COLOR);
+      CPULOAD->selection_color(FL_BACKGROUND_COLOR);
+      CPULOAD->labeltype(FL_NORMAL_LABEL);
+      CPULOAD->labelfont(0);
       CPULOAD->labelsize(10);
       CPULOAD->labelcolor(FL_BACKGROUND2_COLOR);
       CPULOAD->user_data((void*)(5));
-    } // Fl_Box* CPULOAD
+      CPULOAD->align(Fl_Align(FL_ALIGN_CENTER));
+      CPULOAD->when(FL_WHEN_RELEASE);
+    } // RKR_Box* CPULOAD
     { Sco = new Scope(545, 25, 226, 59, "Rakarrack");
       Sco->tooltip("Click here to turn off scope");
       Sco->box(FL_NO_BOX);
