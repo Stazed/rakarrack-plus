@@ -11,6 +11,9 @@ decl {\#include "../global.h"} {public global
 decl {\#include "sliderW.h"} {public global
 }
 
+decl {\#include "RKR_Value_Input.h"} {selected public global
+}
+
 decl {\#include "newvum.h"} {public global
 }
 
@@ -248,7 +251,7 @@ decl {RKR *rkr; // extern global} {private global
 decl {int g_value_font_size = 10;  // extern global} {private global
 }
 
-decl {int g_slider_font_size = 10;  // extern global} {selected private global
+decl {int g_slider_font_size = 10;  // extern global} {private global
 }
 
 class RKRGUI {open

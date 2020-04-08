@@ -140,30 +140,6 @@ void RyanwahGui::cb_ryanwah_hp(SliderW* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_hp_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_Rnd_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- rgui->getMIDIControl(426);
- return;
-}
-rkr->efx_RyanWah->changepar(3,(int)o->value());
-}
-void RyanwahGui::cb_ryanwah_Rnd(SliderW* o, void* v) {
-  ((RyanwahGui*)(o->parent()))->cb_ryanwah_Rnd_i(o,v);
-}
-
-void RyanwahGui::cb_ryanwah_St_i(SliderW* o, void*) {
-  if(Fl::event_button()==3)
-{
- rgui->getMIDIControl(427);
- return;
-}
-rkr->efx_RyanWah->changepar(5,(int)o->value()+64);
-}
-void RyanwahGui::cb_ryanwah_St(SliderW* o, void* v) {
-  ((RyanwahGui*)(o->parent()))->cb_ryanwah_St_i(o,v);
-}
-
 void RyanwahGui::cb_svfilter_stages_i(Fl_Counter* o, void*) {
   rkr->efx_RyanWah->changepar(13,(int)o->value());
 }
@@ -250,7 +226,7 @@ void RyanwahGui::cb_ryanwah_ampsns(SliderW* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_ampsns_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_smooth_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_smooth_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(266);
@@ -258,11 +234,35 @@ void RyanwahGui::cb_ryanwah_smooth_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(9,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_smooth(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_smooth(RKR_Value_Input* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_smooth_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_minfreq_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_Rnd_i(RKR_Value_Input* o, void*) {
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(426);
+ return;
+}
+rkr->efx_RyanWah->changepar(3,(int)o->value());
+}
+void RyanwahGui::cb_ryanwah_Rnd(RKR_Value_Input* o, void* v) {
+  ((RyanwahGui*)(o->parent()))->cb_ryanwah_Rnd_i(o,v);
+}
+
+void RyanwahGui::cb_ryanwah_St_i(RKR_Value_Input* o, void*) {
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(427);
+ return;
+}
+rkr->efx_RyanWah->changepar(5,(int)o->value()+64);
+}
+void RyanwahGui::cb_ryanwah_St(RKR_Value_Input* o, void* v) {
+  ((RyanwahGui*)(o->parent()))->cb_ryanwah_St_i(o,v);
+}
+
+void RyanwahGui::cb_ryanwah_minfreq_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(428);
@@ -270,7 +270,7 @@ void RyanwahGui::cb_ryanwah_minfreq_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(15,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_minfreq(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_minfreq(RKR_Value_Input* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_minfreq_i(o,v);
 }
 RyanwahGui::RyanwahGui(int X, int Y, int W, int H, const char *L)
@@ -300,7 +300,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ryanwah_preset->menu(menu_ryanwah_preset);
 } // Fl_Choice* ryanwah_preset
-{ ryanwah_WD = new SliderW(56, 25, 100, 8, "Dry/Wet");
+{ ryanwah_WD = new SliderW(56, 25, 100, 10, "Dry/Wet");
   ryanwah_WD->type(5);
   ryanwah_WD->box(FL_FLAT_BOX);
   ryanwah_WD->color((Fl_Color)178);
@@ -324,7 +324,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_qm->callback((Fl_Callback*)cb_ryanwah_qm, (void*)(2));
   ryanwah_qm->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Check_Button* ryanwah_qm
-{ ryanwah_lp = new SliderW(56, 34, 100, 8, "LP");
+{ ryanwah_lp = new SliderW(56, 37, 100, 10, "LP");
   ryanwah_lp->tooltip("Lowpass Level");
   ryanwah_lp->type(5);
   ryanwah_lp->box(FL_FLAT_BOX);
@@ -350,7 +350,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_nat->callback((Fl_Callback*)cb_ryanwah_nat, (void*)(2));
   ryanwah_nat->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Check_Button* ryanwah_nat
-{ ryanwah_bp = new SliderW(56, 43, 100, 8, "BP");
+{ ryanwah_bp = new SliderW(56, 49, 100, 10, "BP");
   ryanwah_bp->tooltip("Bandpass Level");
   ryanwah_bp->type(5);
   ryanwah_bp->box(FL_FLAT_BOX);
@@ -376,7 +376,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_res->callback((Fl_Callback*)cb_ryanwah_res, (void*)(2));
   ryanwah_res->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Check_Button* ryanwah_res
-{ ryanwah_hp = new SliderW(56, 52, 100, 8, "HP");
+{ ryanwah_hp = new SliderW(56, 61, 100, 10, "HP");
   ryanwah_hp->tooltip("Highpass Level");
   ryanwah_hp->type(5);
   ryanwah_hp->box(FL_FLAT_BOX);
@@ -394,42 +394,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_hp->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_hp->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_hp
-{ ryanwah_Rnd = new SliderW(56, 62, 100, 8, "Rnd");
-  ryanwah_Rnd->tooltip("LFO Randomness");
-  ryanwah_Rnd->type(5);
-  ryanwah_Rnd->box(FL_FLAT_BOX);
-  ryanwah_Rnd->color((Fl_Color)178);
-  ryanwah_Rnd->selection_color((Fl_Color)62);
-  ryanwah_Rnd->labeltype(FL_NORMAL_LABEL);
-  ryanwah_Rnd->labelfont(0);
-  ryanwah_Rnd->labelsize(10);
-  ryanwah_Rnd->labelcolor(FL_BACKGROUND2_COLOR);
-  ryanwah_Rnd->maximum(127);
-  ryanwah_Rnd->step(1);
-  ryanwah_Rnd->textcolor(FL_BACKGROUND2_COLOR);
-  ryanwah_Rnd->callback((Fl_Callback*)cb_ryanwah_Rnd);
-  ryanwah_Rnd->align(Fl_Align(FL_ALIGN_LEFT));
-  ryanwah_Rnd->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_Rnd
-{ ryanwah_St = new SliderW(56, 72, 100, 8, "Stereo Df");
-  ryanwah_St->tooltip("LFO L/R Delay");
-  ryanwah_St->type(5);
-  ryanwah_St->box(FL_FLAT_BOX);
-  ryanwah_St->color((Fl_Color)178);
-  ryanwah_St->selection_color((Fl_Color)62);
-  ryanwah_St->labeltype(FL_NORMAL_LABEL);
-  ryanwah_St->labelfont(0);
-  ryanwah_St->labelsize(10);
-  ryanwah_St->labelcolor(FL_BACKGROUND2_COLOR);
-  ryanwah_St->minimum(-64);
-  ryanwah_St->maximum(63);
-  ryanwah_St->step(1);
-  ryanwah_St->textcolor(FL_BACKGROUND2_COLOR);
-  ryanwah_St->callback((Fl_Callback*)cb_ryanwah_St);
-  ryanwah_St->align(Fl_Align(FL_ALIGN_LEFT));
-  ryanwah_St->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_St
-{ svfilter_stages = new Fl_Counter(27, 83, 27, 12, "Stg");
+{ svfilter_stages = new Fl_Counter(27, 74, 27, 12, "Stg");
   svfilter_stages->tooltip("Filter Stages");
   svfilter_stages->type(1);
   svfilter_stages->box(FL_THIN_UP_BOX);
@@ -443,7 +408,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   svfilter_stages->callback((Fl_Callback*)cb_svfilter_stages);
   svfilter_stages->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Counter* svfilter_stages
-{ Fl_Choice* o = ryanwah_lfotype = new Fl_Choice(80, 82, 72, 16, "LFO");
+{ Fl_Choice* o = ryanwah_lfotype = new Fl_Choice(80, 73, 72, 16, "LFO");
   ryanwah_lfotype->down_box(FL_BORDER_BOX);
   ryanwah_lfotype->selection_color(FL_FOREGROUND_COLOR);
   ryanwah_lfotype->labelsize(10);
@@ -453,7 +418,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_lfotype->callback((Fl_Callback*)cb_ryanwah_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* ryanwah_lfotype
-{ ryanwah_dpth = new SliderW(56, 102, 100, 8, "Depth");
+{ ryanwah_dpth = new SliderW(56, 91, 100, 10, "Depth");
   ryanwah_dpth->type(5);
   ryanwah_dpth->box(FL_FLAT_BOX);
   ryanwah_dpth->color((Fl_Color)178);
@@ -469,7 +434,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_dpth->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_dpth
-{ ryanwah_freq = new SliderW(56, 112, 100, 8, "Tempo");
+{ ryanwah_freq = new SliderW(56, 103, 100, 10, "Tempo");
   ryanwah_freq->type(5);
   ryanwah_freq->box(FL_FLAT_BOX);
   ryanwah_freq->color((Fl_Color)178);
@@ -486,7 +451,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_freq->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_freq->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_freq
-{ ryanwah_q = new SliderW(56, 122, 100, 8, "Res.");
+{ ryanwah_q = new SliderW(56, 116, 100, 10, "Res.");
   ryanwah_q->tooltip("Resonance");
   ryanwah_q->type(5);
   ryanwah_q->box(FL_FLAT_BOX);
@@ -504,7 +469,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_q->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_q->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_q
-{ ryanwah_rng = new SliderW(56, 132, 100, 8, "Range");
+{ ryanwah_rng = new SliderW(56, 128, 100, 10, "Range");
   ryanwah_rng->tooltip("Sweep Range");
   ryanwah_rng->type(5);
   ryanwah_rng->box(FL_FLAT_BOX);
@@ -522,7 +487,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_rng->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_rng->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_rng
-{ ryanwah_ampsnsinv = new SliderW(56, 142, 100, 8, "Wah");
+{ ryanwah_ampsnsinv = new SliderW(56, 140, 100, 10, "Wah");
   ryanwah_ampsnsinv->type(5);
   ryanwah_ampsnsinv->box(FL_FLAT_BOX);
   ryanwah_ampsnsinv->color((Fl_Color)178);
@@ -538,7 +503,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_ampsnsinv->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_ampsnsinv
-{ ryanwah_ampsns = new SliderW(56, 152, 100, 8, "E. Sens");
+{ ryanwah_ampsns = new SliderW(56, 152, 100, 10, "E. Sens");
   ryanwah_ampsns->tooltip("Envelope Sensitivity");
   ryanwah_ampsns->type(5);
   ryanwah_ampsns->box(FL_FLAT_BOX);
@@ -556,29 +521,63 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_ampsns->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_ampsns
-{ ryanwah_smooth = new SliderW(56, 162, 100, 8, "Smooth");
+{ ryanwah_smooth = new RKR_Value_Input(13, 165, 23, 15, "S");
   ryanwah_smooth->tooltip("Envelope Smoothing");
-  ryanwah_smooth->type(5);
-  ryanwah_smooth->box(FL_FLAT_BOX);
-  ryanwah_smooth->color((Fl_Color)178);
-  ryanwah_smooth->selection_color((Fl_Color)62);
+  ryanwah_smooth->box(FL_DOWN_BOX);
+  ryanwah_smooth->color(FL_BACKGROUND2_COLOR);
+  ryanwah_smooth->selection_color(FL_SELECTION_COLOR);
   ryanwah_smooth->labeltype(FL_NORMAL_LABEL);
   ryanwah_smooth->labelfont(0);
   ryanwah_smooth->labelsize(10);
   ryanwah_smooth->labelcolor(FL_BACKGROUND2_COLOR);
   ryanwah_smooth->maximum(127);
   ryanwah_smooth->step(1);
+  ryanwah_smooth->textsize(10);
   ryanwah_smooth->textcolor(FL_BACKGROUND2_COLOR);
   ryanwah_smooth->callback((Fl_Callback*)cb_ryanwah_smooth);
   ryanwah_smooth->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_smooth->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_smooth
-{ ryanwah_minfreq = new SliderW(56, 172, 100, 8, "St. Freq");
+} // RKR_Value_Input* ryanwah_smooth
+{ ryanwah_Rnd = new RKR_Value_Input(51, 165, 23, 15, "R");
+  ryanwah_Rnd->tooltip("LFO Randomness");
+  ryanwah_Rnd->box(FL_DOWN_BOX);
+  ryanwah_Rnd->color(FL_BACKGROUND2_COLOR);
+  ryanwah_Rnd->selection_color(FL_SELECTION_COLOR);
+  ryanwah_Rnd->labeltype(FL_NORMAL_LABEL);
+  ryanwah_Rnd->labelfont(0);
+  ryanwah_Rnd->labelsize(10);
+  ryanwah_Rnd->labelcolor(FL_BACKGROUND2_COLOR);
+  ryanwah_Rnd->maximum(127);
+  ryanwah_Rnd->step(1);
+  ryanwah_Rnd->textsize(10);
+  ryanwah_Rnd->textcolor(FL_BACKGROUND2_COLOR);
+  ryanwah_Rnd->callback((Fl_Callback*)cb_ryanwah_Rnd);
+  ryanwah_Rnd->align(Fl_Align(FL_ALIGN_LEFT));
+  ryanwah_Rnd->when(FL_WHEN_CHANGED);
+} // RKR_Value_Input* ryanwah_Rnd
+{ ryanwah_St = new RKR_Value_Input(90, 165, 23, 15, "D");
+  ryanwah_St->tooltip("LFO L/R Delay");
+  ryanwah_St->box(FL_DOWN_BOX);
+  ryanwah_St->color(FL_BACKGROUND2_COLOR);
+  ryanwah_St->selection_color(FL_SELECTION_COLOR);
+  ryanwah_St->labeltype(FL_NORMAL_LABEL);
+  ryanwah_St->labelfont(0);
+  ryanwah_St->labelsize(10);
+  ryanwah_St->labelcolor(FL_BACKGROUND2_COLOR);
+  ryanwah_St->minimum(-64);
+  ryanwah_St->maximum(63);
+  ryanwah_St->step(1);
+  ryanwah_St->textsize(10);
+  ryanwah_St->textcolor(FL_BACKGROUND2_COLOR);
+  ryanwah_St->callback((Fl_Callback*)cb_ryanwah_St);
+  ryanwah_St->align(Fl_Align(FL_ALIGN_LEFT));
+  ryanwah_St->when(FL_WHEN_CHANGED);
+} // RKR_Value_Input* ryanwah_St
+{ ryanwah_minfreq = new RKR_Value_Input(127, 165, 26, 15, "F");
   ryanwah_minfreq->tooltip("Starting Frequency");
-  ryanwah_minfreq->type(5);
-  ryanwah_minfreq->box(FL_FLAT_BOX);
-  ryanwah_minfreq->color((Fl_Color)178);
-  ryanwah_minfreq->selection_color((Fl_Color)62);
+  ryanwah_minfreq->box(FL_DOWN_BOX);
+  ryanwah_minfreq->color(FL_BACKGROUND2_COLOR);
+  ryanwah_minfreq->selection_color(FL_SELECTION_COLOR);
   ryanwah_minfreq->labeltype(FL_NORMAL_LABEL);
   ryanwah_minfreq->labelfont(0);
   ryanwah_minfreq->labelsize(10);
@@ -587,11 +586,12 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_minfreq->maximum(800);
   ryanwah_minfreq->step(1);
   ryanwah_minfreq->value(450);
+  ryanwah_minfreq->textsize(10);
   ryanwah_minfreq->textcolor(FL_BACKGROUND2_COLOR);
   ryanwah_minfreq->callback((Fl_Callback*)cb_ryanwah_minfreq);
   ryanwah_minfreq->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_minfreq->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_minfreq
+} // RKR_Value_Input* ryanwah_minfreq
 position(X, Y);
 end();
 }

@@ -164,7 +164,7 @@ MuTroMojo   (RyanWah)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |                |  -64 to 63    |                   |      -64 to 63    |  STDL - LFO L/R Delay
     Added LV2 default - wah fever as preset - done
-    Added Random, Stereo Df, S. Freq to MIDI control.
+    Added Random, Stereo Df, S. Freq to MIDI control. (New items exposed by LV2)
 ---Done---
 FIXME Help .png
 

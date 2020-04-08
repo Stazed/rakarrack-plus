@@ -6,6 +6,7 @@
 #include "../process.h"
 #include "../global.h"
 #include "sliderW.h"
+#include "RKR_Value_Input.h"
 #include "newvum.h"
 #include "tunerbar.h"
 #include <FL/Fl_Value_Slider.H>

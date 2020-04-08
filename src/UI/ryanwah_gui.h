@@ -62,16 +62,6 @@ private:
   inline void cb_ryanwah_hp_i(SliderW*, void*);
   static void cb_ryanwah_hp(SliderW*, void*);
 public:
-  SliderW *ryanwah_Rnd;
-private:
-  inline void cb_ryanwah_Rnd_i(SliderW*, void*);
-  static void cb_ryanwah_Rnd(SliderW*, void*);
-public:
-  SliderW *ryanwah_St;
-private:
-  inline void cb_ryanwah_St_i(SliderW*, void*);
-  static void cb_ryanwah_St(SliderW*, void*);
-public:
   Fl_Counter *svfilter_stages;
 private:
   inline void cb_svfilter_stages_i(Fl_Counter*, void*);
@@ -112,15 +102,25 @@ private:
   inline void cb_ryanwah_ampsns_i(SliderW*, void*);
   static void cb_ryanwah_ampsns(SliderW*, void*);
 public:
-  SliderW *ryanwah_smooth;
+  RKR_Value_Input *ryanwah_smooth;
 private:
-  inline void cb_ryanwah_smooth_i(SliderW*, void*);
-  static void cb_ryanwah_smooth(SliderW*, void*);
+  inline void cb_ryanwah_smooth_i(RKR_Value_Input*, void*);
+  static void cb_ryanwah_smooth(RKR_Value_Input*, void*);
 public:
-  SliderW *ryanwah_minfreq;
+  RKR_Value_Input *ryanwah_Rnd;
 private:
-  inline void cb_ryanwah_minfreq_i(SliderW*, void*);
-  static void cb_ryanwah_minfreq(SliderW*, void*);
+  inline void cb_ryanwah_Rnd_i(RKR_Value_Input*, void*);
+  static void cb_ryanwah_Rnd(RKR_Value_Input*, void*);
+public:
+  RKR_Value_Input *ryanwah_St;
+private:
+  inline void cb_ryanwah_St_i(RKR_Value_Input*, void*);
+  static void cb_ryanwah_St(RKR_Value_Input*, void*);
+public:
+  RKR_Value_Input *ryanwah_minfreq;
+private:
+  inline void cb_ryanwah_minfreq_i(RKR_Value_Input*, void*);
+  static void cb_ryanwah_minfreq(RKR_Value_Input*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif
