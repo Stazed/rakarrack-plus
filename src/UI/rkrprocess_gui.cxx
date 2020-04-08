@@ -5190,14 +5190,13 @@ void RKRGUI::chfsize(int value)
         /* Top right - (Lmt, Clip, Resample, Aux, In, Out, 0.0%) */
         if ((ud < 770) || (ud > 779))
         {
-            if(ud == BOX_USER_DATA || ud == 5)
+            if(ud == BOX_USER_DATA || ud == BOX_LED_DATA)
             {
                 RKR_Box *Bx = (RKR_Box *) w;
                 Bx->set_font_adjustment();
             }
             else
             {
-                printf()
                 if ((k > 2)&&(k < 16))
                 {
                     w->labelsize(k);        /* Nothing ??? */
@@ -5209,7 +5208,7 @@ void RKRGUI::chfsize(int value)
             w->labelsize(k);
         }
 
-        if (ud != 5)
+        if (ud != BOX_LED_DATA)
         {
             w->labelcolor(label_color);     /* Lmt, Clip, Resample */
         }
@@ -5271,7 +5270,7 @@ void RKRGUI::chfsize(int value)
                     }
                 }
 
-                if (uh != 5)
+                if (uh != BOX_LED_DATA)
                 {
                     c->labelcolor(label_color);     /* Labels on (almost) everything except sliders */
                 }

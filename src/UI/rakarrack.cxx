@@ -929,11 +929,11 @@ void RKRGUI::make_window() {
       P_MIN_ST->labelfont(1);
       P_MIN_ST->labelsize(8);
       P_MIN_ST->labelcolor(FL_BACKGROUND2_COLOR);
-      P_MIN_ST->user_data((void*)(5));
+      P_MIN_ST->user_data((void*)(BOX_LED_DATA));
       P_MIN_ST->align(Fl_Align(FL_ALIGN_WRAP));
       P_MIN_ST->when(FL_WHEN_RELEASE);
       P_MIN_ST->hide();
-      o->m_start_height +=2;
+      o->m_start_height +=2; // (default 10) 10 - 8 = 2
     } // RKR_Box* P_MIN_ST
     { RKR_Box* o = P_MOUT_ST = new RKR_Box(648, 3, 29, 20, "Midi Out");
       P_MOUT_ST->box(FL_NO_BOX);
@@ -943,11 +943,11 @@ void RKRGUI::make_window() {
       P_MOUT_ST->labelfont(1);
       P_MOUT_ST->labelsize(8);
       P_MOUT_ST->labelcolor(FL_BACKGROUND2_COLOR);
-      P_MOUT_ST->user_data((void*)(5));
+      P_MOUT_ST->user_data((void*)(BOX_LED_DATA));
       P_MOUT_ST->align(Fl_Align(FL_ALIGN_WRAP));
       P_MOUT_ST->when(FL_WHEN_RELEASE);
       P_MOUT_ST->hide();
-      o->m_start_height +=2;
+      o->m_start_height +=2; // (default 10) 10 - 8 = 2
     } // RKR_Box* P_MOUT_ST
     { P_AUX_ST = new RKR_Box(676, 5, 32, 17, "Aux");
       P_AUX_ST->box(FL_NO_BOX);
@@ -957,7 +957,7 @@ void RKRGUI::make_window() {
       P_AUX_ST->labelfont(1);
       P_AUX_ST->labelsize(10);
       P_AUX_ST->labelcolor(FL_BACKGROUND2_COLOR);
-      P_AUX_ST->user_data((void*)(5));
+      P_AUX_ST->user_data((void*)(BOX_LED_DATA));
       P_AUX_ST->align(Fl_Align(FL_ALIGN_CENTER));
       P_AUX_ST->when(FL_WHEN_RELEASE);
       P_AUX_ST->hide();
@@ -970,7 +970,7 @@ void RKRGUI::make_window() {
       P_IN_ST->labelfont(1);
       P_IN_ST->labelsize(10);
       P_IN_ST->labelcolor(FL_BACKGROUND2_COLOR);
-      P_IN_ST->user_data((void*)(5));
+      P_IN_ST->user_data((void*)(BOX_LED_DATA));
       P_IN_ST->align(Fl_Align(FL_ALIGN_CENTER));
       P_IN_ST->when(FL_WHEN_RELEASE);
       P_IN_ST->hide();
@@ -983,7 +983,7 @@ void RKRGUI::make_window() {
       P_OUT_ST->labelfont(1);
       P_OUT_ST->labelsize(10);
       P_OUT_ST->labelcolor(FL_BACKGROUND2_COLOR);
-      P_OUT_ST->user_data((void*)(5));
+      P_OUT_ST->user_data((void*)(BOX_LED_DATA));
       P_OUT_ST->align(Fl_Align(FL_ALIGN_CENTER));
       P_OUT_ST->when(FL_WHEN_RELEASE);
       P_OUT_ST->hide();
@@ -996,7 +996,7 @@ void RKRGUI::make_window() {
       CPULOAD->labelfont(0);
       CPULOAD->labelsize(10);
       CPULOAD->labelcolor(FL_BACKGROUND2_COLOR);
-      CPULOAD->user_data((void*)(5));
+      CPULOAD->user_data((void*)(BOX_LED_DATA));
       CPULOAD->align(Fl_Align(FL_ALIGN_CENTER));
       CPULOAD->when(FL_WHEN_RELEASE);
     } // RKR_Box* CPULOAD
