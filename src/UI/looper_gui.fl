@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Box.h"} {public global
+}
+
 widget_class LooperGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -24,7 +27,7 @@ widget_class LooperGui {
 rkr->Looper_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
-rgui->findpos(30,(int)o->value(),o);} selected
+rgui->findpos(30,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -141,14 +144,17 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
   Fl_Box Box_Play {
     label {Play/Stop}
     xywh {4 103 52 14} labelsize 10 labelcolor 7
+    class RKR_Box
   }
   Fl_Box Box_P {
     label Pause
     xywh {58 103 44 14} labelsize 10 labelcolor 7
+    class RKR_Box
   }
   Fl_Box {} {
     label Record
     xywh {109 103 44 14} labelsize 10 labelcolor 7
+    class RKR_Box
   }
   Fl_Button looper_play {
     label {@|>}
@@ -161,6 +167,8 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
 rkr->efx_Looper->changepar(1,(int)o->value());
 rgui->update_looper();}
     tooltip {Play - Shortcut 'F5'} xywh {8 117 44 22} type Toggle shortcut 0xffc2
+    code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+    class RKR_Button
   }
   Fl_Button looper_stop {
     label {@||}
@@ -173,6 +181,8 @@ rgui->update_looper();}
 rkr->efx_Looper->changepar(2,(int)o->value());
 rgui->update_looper();}
     tooltip {Stop - Shortcut 'F6'} xywh {59 117 44 22} type Toggle shortcut 0xffc3
+    code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+    class RKR_Button
   }
   Fl_Button looper_record {
     label {@circle}
@@ -183,12 +193,15 @@ rgui->update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(3,(int)o->value());
-rgui->update_looper();}
+rgui->update_looper();} selected
     xywh {109 117 44 22} type Toggle labelcolor 1
+    code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+    class RKR_Button
   }
   Fl_Box {} {
     label Track
     xywh {71 149 39 14} labelsize 10 labelcolor 7
+    class RKR_Box
   }
   Fl_Check_Button looper_r1 {
     label R1
@@ -223,6 +236,7 @@ rkr->efx_Looper->changepar(12,(int)o->value())}
 rkr->efx_Looper->changepar(7,(int)o->value());
 rgui->update_looper();}
     tooltip {Enable Play, Stop, Record on Track 1} xywh {111 147 18 18} type Toggle labelsize 10 align 16
+    class RKR_Button
   }
   Fl_Button looper_t2 {
     label 2
@@ -235,6 +249,7 @@ rgui->update_looper();}
 rkr->efx_Looper->changepar(8,(int)o->value());
 rgui->update_looper();}
     tooltip {Enable Play, Stop, Record on Track 2} xywh {134 147 18 18} type Toggle labelsize 10 align 16
+    class RKR_Button
   }
   Fl_Check_Button looper_lnk {
     label Lnk
@@ -253,6 +268,7 @@ rgui->update_looper();}
 rkr->efx_Looper->changepar(4,(int)o->value());
 rgui->update_looper();}
     tooltip {Erase the Selected Track} xywh {46 165 43 14} labelsize 10
+    class RKR_Button
   }
   Fl_Check_Button looper_mt {
     label M
@@ -262,6 +278,7 @@ rgui->update_looper();}
   }
   Fl_Box L_TimePos {
     xywh {121 166 35 14} box DOWN_BOX align 84
+    class RKR_Box
   }
   decl {CommonGuiMenu *m_looper_bar;} {private local
   }

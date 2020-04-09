@@ -4,14 +4,13 @@
 #define looper_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Box.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Box.H>
-#include <FL/Fl_Button.H>
 
 class LooperGui : public Fl_Group {
 public:
@@ -67,22 +66,22 @@ private:
   inline void cb_looper_ap_i(Fl_Check_Button*, void*);
   static void cb_looper_ap(Fl_Check_Button*, void*);
 public:
-  Fl_Box *Box_Play;
-  Fl_Box *Box_P;
-  Fl_Button *looper_play;
+  RKR_Box *Box_Play;
+  RKR_Box *Box_P;
+  RKR_Button *looper_play;
 private:
-  inline void cb_looper_play_i(Fl_Button*, void*);
-  static void cb_looper_play(Fl_Button*, void*);
+  inline void cb_looper_play_i(RKR_Button*, void*);
+  static void cb_looper_play(RKR_Button*, void*);
 public:
-  Fl_Button *looper_stop;
+  RKR_Button *looper_stop;
 private:
-  inline void cb_looper_stop_i(Fl_Button*, void*);
-  static void cb_looper_stop(Fl_Button*, void*);
+  inline void cb_looper_stop_i(RKR_Button*, void*);
+  static void cb_looper_stop(RKR_Button*, void*);
 public:
-  Fl_Button *looper_record;
+  RKR_Button *looper_record;
 private:
-  inline void cb_looper_record_i(Fl_Button*, void*);
-  static void cb_looper_record(Fl_Button*, void*);
+  inline void cb_looper_record_i(RKR_Button*, void*);
+  static void cb_looper_record(RKR_Button*, void*);
 public:
   Fl_Check_Button *looper_r1;
 private:
@@ -94,32 +93,32 @@ private:
   inline void cb_looper_r2_i(Fl_Check_Button*, void*);
   static void cb_looper_r2(Fl_Check_Button*, void*);
 public:
-  Fl_Button *looper_t1;
+  RKR_Button *looper_t1;
 private:
-  inline void cb_looper_t1_i(Fl_Button*, void*);
-  static void cb_looper_t1(Fl_Button*, void*);
+  inline void cb_looper_t1_i(RKR_Button*, void*);
+  static void cb_looper_t1(RKR_Button*, void*);
 public:
-  Fl_Button *looper_t2;
+  RKR_Button *looper_t2;
 private:
-  inline void cb_looper_t2_i(Fl_Button*, void*);
-  static void cb_looper_t2(Fl_Button*, void*);
+  inline void cb_looper_t2_i(RKR_Button*, void*);
+  static void cb_looper_t2(RKR_Button*, void*);
 public:
   Fl_Check_Button *looper_lnk;
 private:
   inline void cb_looper_lnk_i(Fl_Check_Button*, void*);
   static void cb_looper_lnk(Fl_Check_Button*, void*);
 public:
-  Fl_Button *looper_clear;
+  RKR_Button *looper_clear;
 private:
-  inline void cb_looper_clear_i(Fl_Button*, void*);
-  static void cb_looper_clear(Fl_Button*, void*);
+  inline void cb_looper_clear_i(RKR_Button*, void*);
+  static void cb_looper_clear(RKR_Button*, void*);
 public:
   Fl_Check_Button *looper_mt;
 private:
   inline void cb_looper_mt_i(Fl_Check_Button*, void*);
   static void cb_looper_mt(Fl_Check_Button*, void*);
 public:
-  Fl_Box *L_TimePos;
+  RKR_Box *L_TimePos;
 private:
   CommonGuiMenu *m_looper_bar; 
   CommonGuiMenu *m_looper_ms; 
