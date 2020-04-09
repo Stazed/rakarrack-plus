@@ -218,7 +218,7 @@ void RevtronGui::cb_revtron_user(Fl_Check_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_user_i(o,v);
 }
 
-void RevtronGui::cb_B_rvb_i(Fl_Button*, void*) {
+void RevtronGui::cb_B_rvb_i(RKR_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
 if (filename==NULL) return;
@@ -226,7 +226,7 @@ filename=fl_filename_setext(filename,".rvb");
 strcpy(rkr->efx_Reverbtron->Filename,filename);
 rkr->efx_Reverbtron->setfile(USERFILE);
 }
-void RevtronGui::cb_B_rvb(Fl_Button* o, void* v) {
+void RevtronGui::cb_B_rvb(RKR_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_B_rvb_i(o,v);
 }
 
@@ -487,11 +487,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_user->labelcolor(FL_BACKGROUND2_COLOR);
   revtron_user->callback((Fl_Callback*)cb_revtron_user, (void*)(2));
 } // Fl_Check_Button* revtron_user
-{ B_rvb = new Fl_Button(106, 156, 46, 10, "Browse");
+{ B_rvb = new RKR_Button(106, 156, 46, 10, "Browse");
+  B_rvb->box(FL_UP_BOX);
+  B_rvb->color(FL_BACKGROUND_COLOR);
+  B_rvb->selection_color(FL_BACKGROUND_COLOR);
+  B_rvb->labeltype(FL_NORMAL_LABEL);
+  B_rvb->labelfont(0);
   B_rvb->labelsize(10);
+  B_rvb->labelcolor(FL_FOREGROUND_COLOR);
   B_rvb->callback((Fl_Callback*)cb_B_rvb, (void*)(2));
+  B_rvb->align(Fl_Align(FL_ALIGN_CENTER));
+  B_rvb->when(FL_WHEN_RELEASE);
   B_rvb->deactivate();
-} // Fl_Button* B_rvb
+} // RKR_Button* B_rvb
 { revtron_fnum = new Fl_Choice(51, 168, 101, 14, "File");
   revtron_fnum->down_box(FL_BORDER_BOX);
   revtron_fnum->selection_color(FL_FOREGROUND_COLOR);

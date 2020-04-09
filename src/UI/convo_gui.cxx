@@ -132,7 +132,7 @@ void ConvoGui::cb_convo_safe(Fl_Check_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_safe_i(o,v);
 }
 
-void ConvoGui::cb_B_wav_i(Fl_Button*, void*) {
+void ConvoGui::cb_B_wav_i(RKR_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
@@ -140,7 +140,7 @@ filename=fl_filename_setext(filename,".wav");
 strcpy(rkr->efx_Convol->Filename,filename);
 rkr->efx_Convol->setfile(USERFILE);
 }
-void ConvoGui::cb_B_wav(Fl_Button* o, void* v) {
+void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_B_wav_i(o,v);
 }
 
@@ -302,11 +302,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_safe->labelcolor(FL_BACKGROUND2_COLOR);
   convo_safe->callback((Fl_Callback*)cb_convo_safe, (void*)(2));
 } // Fl_Check_Button* convo_safe
-{ B_wav = new Fl_Button(106, 143, 46, 12, "Browse");
+{ B_wav = new RKR_Button(106, 143, 46, 12, "Browse");
+  B_wav->box(FL_UP_BOX);
+  B_wav->color(FL_BACKGROUND_COLOR);
+  B_wav->selection_color(FL_BACKGROUND_COLOR);
+  B_wav->labeltype(FL_NORMAL_LABEL);
+  B_wav->labelfont(0);
   B_wav->labelsize(10);
+  B_wav->labelcolor(FL_FOREGROUND_COLOR);
   B_wav->callback((Fl_Callback*)cb_B_wav, (void*)(2));
+  B_wav->align(Fl_Align(FL_ALIGN_CENTER));
+  B_wav->when(FL_WHEN_RELEASE);
   B_wav->deactivate();
-} // Fl_Button* B_wav
+} // RKR_Button* B_wav
 { convo_fnum = new Fl_Choice(51, 159, 101, 16, "Preset");
   convo_fnum->down_box(FL_BORDER_BOX);
   convo_fnum->selection_color(FL_FOREGROUND_COLOR);

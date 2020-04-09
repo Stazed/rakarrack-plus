@@ -45,7 +45,7 @@ revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
 revtron_diff->value(rkr->efx_Reverbtron->getpar(15));
 
 revtron_es->value(rkr->efx_Reverbtron->getpar(12));
-revtron_rv->value(rkr->efx_Reverbtron->getpar(13));} selected
+revtron_rv->value(rkr->efx_Reverbtron->getpar(13));}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -240,8 +240,9 @@ filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rvb");
 strcpy(rkr->efx_Reverbtron->Filename,filename);
-rkr->efx_Reverbtron->setfile(USERFILE);}
+rkr->efx_Reverbtron->setfile(USERFILE);} selected
     xywh {106 156 46 10} labelsize 10 deactivate
+    class RKR_Button
   }
   Fl_Choice revtron_fnum {
     label File

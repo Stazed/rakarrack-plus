@@ -169,7 +169,7 @@ rkr->efx_Echotron->changepar(1,((int)o->value()+64));}
  rgui->getMIDIControl(356);
  return;
 }
-rkr->efx_Echotron->changepar(9,(int)o->value());} selected
+rkr->efx_Echotron->changepar(9,(int)o->value());}
     xywh {56 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }
@@ -215,8 +215,9 @@ filename=fl_filename_setext(filename,".dly");
 strcpy(rkr->efx_Echotron->Filename,filename);
 rkr->efx_Echotron->setfile(USERFILE);
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
     xywh {106 156 46 10} labelsize 10 deactivate
+    class RKR_Button
   }
   Fl_Counter echotron_length {
     label {\#}

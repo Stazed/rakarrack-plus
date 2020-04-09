@@ -10,7 +10,6 @@
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Button.H>
 
 class ConvoGui : public Fl_Group {
 public:
@@ -66,10 +65,10 @@ private:
   inline void cb_convo_safe_i(Fl_Check_Button*, void*);
   static void cb_convo_safe(Fl_Check_Button*, void*);
 public:
-  Fl_Button *B_wav;
+  RKR_Button *B_wav;
 private:
-  inline void cb_B_wav_i(Fl_Button*, void*);
-  static void cb_B_wav(Fl_Button*, void*);
+  inline void cb_B_wav_i(RKR_Button*, void*);
+  static void cb_B_wav(RKR_Button*, void*);
 public:
   Fl_Choice *convo_fnum;
 private:

@@ -10,7 +10,6 @@
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Button.H>
 
 class RevtronGui : public Fl_Group {
 public:
@@ -101,10 +100,10 @@ private:
   inline void cb_revtron_user_i(Fl_Check_Button*, void*);
   static void cb_revtron_user(Fl_Check_Button*, void*);
 public:
-  Fl_Button *B_rvb;
+  RKR_Button *B_rvb;
 private:
-  inline void cb_B_rvb_i(Fl_Button*, void*);
-  static void cb_B_rvb(Fl_Button*, void*);
+  inline void cb_B_rvb_i(RKR_Button*, void*);
+  static void cb_B_rvb(RKR_Button*, void*);
 public:
   Fl_Choice *revtron_fnum;
 private:

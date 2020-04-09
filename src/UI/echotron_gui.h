@@ -11,7 +11,6 @@
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Button.H>
 #include <FL/Fl_Counter.H>
 
 class EchotronGui : public Fl_Group {
@@ -98,10 +97,10 @@ private:
   inline void cb_echotron_user_i(Fl_Check_Button*, void*);
   static void cb_echotron_user(Fl_Check_Button*, void*);
 public:
-  Fl_Button *B_ech;
+  RKR_Button *B_ech;
 private:
-  inline void cb_B_ech_i(Fl_Button*, void*);
-  static void cb_B_ech(Fl_Button*, void*);
+  inline void cb_B_ech_i(RKR_Button*, void*);
+  static void cb_B_ech(RKR_Button*, void*);
 public:
   Fl_Counter *echotron_length;
 private:

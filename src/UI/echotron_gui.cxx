@@ -198,7 +198,7 @@ void EchotronGui::cb_echotron_user(Fl_Check_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_user_i(o,v);
 }
 
-void EchotronGui::cb_B_ech_i(Fl_Button*, void*) {
+void EchotronGui::cb_B_ech_i(RKR_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
 if (filename==NULL) return;
@@ -208,7 +208,7 @@ rkr->efx_Echotron->setfile(USERFILE);
 echotron_length->value(rkr->efx_Echotron->getpar(3));
 echotron_length->maximum(rkr->efx_Echotron->File.fLength);
 }
-void EchotronGui::cb_B_ech(Fl_Button* o, void* v) {
+void EchotronGui::cb_B_ech(RKR_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_B_ech_i(o,v);
 }
 
@@ -458,11 +458,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_user->labelcolor(FL_BACKGROUND2_COLOR);
   echotron_user->callback((Fl_Callback*)cb_echotron_user, (void*)(2));
 } // Fl_Check_Button* echotron_user
-{ B_ech = new Fl_Button(106, 156, 46, 10, "Browse");
+{ B_ech = new RKR_Button(106, 156, 46, 10, "Browse");
+  B_ech->box(FL_UP_BOX);
+  B_ech->color(FL_BACKGROUND_COLOR);
+  B_ech->selection_color(FL_BACKGROUND_COLOR);
+  B_ech->labeltype(FL_NORMAL_LABEL);
+  B_ech->labelfont(0);
   B_ech->labelsize(10);
+  B_ech->labelcolor(FL_FOREGROUND_COLOR);
   B_ech->callback((Fl_Callback*)cb_B_ech, (void*)(2));
+  B_ech->align(Fl_Align(FL_ALIGN_CENTER));
+  B_ech->when(FL_WHEN_RELEASE);
   B_ech->deactivate();
-} // Fl_Button* B_ech
+} // RKR_Button* B_ech
 { echotron_length = new Fl_Counter(16, 167, 48, 12, "#");
   echotron_length->type(1);
   echotron_length->labelsize(10);

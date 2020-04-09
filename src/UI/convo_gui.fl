@@ -120,7 +120,7 @@ rkr->efx_Convol->changepar(10,(int)o->value());}
  rgui->getMIDIControl(285);
  return;
 }
-rkr->efx_Convol->changepar(3,(int)o->value());} selected
+rkr->efx_Convol->changepar(3,(int)o->value());}
     xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
     class SliderW
   }
@@ -146,8 +146,9 @@ filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
 strcpy(rkr->efx_Convol->Filename,filename);
-rkr->efx_Convol->setfile(USERFILE);}
+rkr->efx_Convol->setfile(USERFILE);} selected
     xywh {106 143 46 12} labelsize 10 deactivate
+    class RKR_Button
   }
   Fl_Choice convo_fnum {
     label Preset
