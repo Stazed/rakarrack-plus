@@ -10,7 +10,6 @@
 #include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Box.H>
 
 class HarGui : public Fl_Group {
 public:
@@ -71,7 +70,7 @@ private:
   inline void cb_har_SELECT_i(Fl_Check_Button*, void*);
   static void cb_har_SELECT(Fl_Check_Button*, void*);
 public:
-  Fl_Box *har_chordname;
+  RKR_Box *har_chordname;
   SliderW *har_note;
 private:
   inline void cb_har_note_i(SliderW*, void*);

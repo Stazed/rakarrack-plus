@@ -342,10 +342,18 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_SELECT->callback((Fl_Callback*)cb_har_SELECT, (void*)(2));
   har_SELECT->align(Fl_Align(FL_ALIGN_RIGHT));
 } // Fl_Check_Button* har_SELECT
-{ har_chordname = new Fl_Box(56, 126, 98, 27);
+{ RKR_Box* o = har_chordname = new RKR_Box(56, 126, 98, 27);
+  har_chordname->box(FL_NO_BOX);
+  har_chordname->color(FL_BACKGROUND_COLOR);
+  har_chordname->selection_color(FL_BACKGROUND_COLOR);
+  har_chordname->labeltype(FL_NORMAL_LABEL);
+  har_chordname->labelfont(0);
   har_chordname->labelsize(12);
   har_chordname->labelcolor(FL_BACKGROUND2_COLOR);
-} // Fl_Box* har_chordname
+  har_chordname->align(Fl_Align(FL_ALIGN_CENTER));
+  har_chordname->when(FL_WHEN_RELEASE);
+  o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+} // RKR_Box* har_chordname
 { har_note = new SliderW(53, 158, 100, 10, "Note");
   har_note->type(5);
   har_note->box(FL_FLAT_BOX);

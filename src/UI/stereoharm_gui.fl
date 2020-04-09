@@ -185,11 +185,13 @@ if(!(int)o->value())
 {
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
-}} selected
+}}
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
   }
-  Fl_Box shar_chordname {
+  Fl_Box shar_chordname {selected
     xywh {56 132 98 21} labelsize 12 labelcolor 7
+    code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+    class RKR_Box
   }
   Fl_Value_Slider shar_note {
     label Note

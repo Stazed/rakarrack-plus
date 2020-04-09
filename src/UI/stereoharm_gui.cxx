@@ -387,10 +387,18 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shar_SELECT->callback((Fl_Callback*)cb_shar_SELECT, (void*)(2));
   shar_SELECT->align(Fl_Align(FL_ALIGN_RIGHT));
 } // Fl_Check_Button* shar_SELECT
-{ shar_chordname = new Fl_Box(56, 132, 98, 21);
+{ RKR_Box* o = shar_chordname = new RKR_Box(56, 132, 98, 21);
+  shar_chordname->box(FL_NO_BOX);
+  shar_chordname->color(FL_BACKGROUND_COLOR);
+  shar_chordname->selection_color(FL_BACKGROUND_COLOR);
+  shar_chordname->labeltype(FL_NORMAL_LABEL);
+  shar_chordname->labelfont(0);
   shar_chordname->labelsize(12);
   shar_chordname->labelcolor(FL_BACKGROUND2_COLOR);
-} // Fl_Box* shar_chordname
+  shar_chordname->align(Fl_Align(FL_ALIGN_CENTER));
+  shar_chordname->when(FL_WHEN_RELEASE);
+  o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+} // RKR_Box* shar_chordname
 { shar_note = new SliderW(56, 158, 100, 10, "Note");
   shar_note->type(5);
   shar_note->box(FL_FLAT_BOX);

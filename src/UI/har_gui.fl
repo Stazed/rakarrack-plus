@@ -156,11 +156,13 @@ if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));}
 rkr->efx_Har->changepar(5,(int)o->value());
 rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
-rgui->Chord(0);} selected
+rgui->Chord(0);}
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
   }
-  Fl_Box har_chordname {
+  Fl_Box har_chordname {selected
     xywh {56 126 98 27} labelsize 12 labelcolor 7
+    code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+    class RKR_Box
   }
   Fl_Value_Slider har_note {
     label Note
