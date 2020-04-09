@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -18,6 +18,9 @@ decl {\#include "tunerbar.h"} {public global
 }
 
 decl {\#include "RKR_Box.h"} {public global
+}
+
+decl {\#include "RKR_Button.h"} {selected public global
 }
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
@@ -275,7 +278,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {738 226 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {198 177 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1282,6 +1285,8 @@ FillML();
 Prepare_Order();
 Put_Loaded();}
           tooltip {New preset - Shortcut 'N'} xywh {174 50 64 18} shortcut 0x6e color 62 labelsize 12
+          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          class RKR_Button
         }
         Fl_Button L_preset {
           label Load
@@ -1357,7 +1362,7 @@ if(rkr->Tap_Updated) UpdateTGUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
         Fl_Box DAuthor {
-          user_data 7 selected
+          user_data 7
           xywh {246 107 266 18} box DOWN_BOX color 62 align 116
           code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box

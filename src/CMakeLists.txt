@@ -16,6 +16,7 @@ set (ProgSources
     UI/tunerbar.cxx
     UI/common_gui_menu.cxx
     UI/RKR_Box.cxx
+    UI/RKR_Button.cxx
     UI/RKR_Input.cxx
     UI/RKR_Value_Input.cxx
     UI/eq_gui.cxx
