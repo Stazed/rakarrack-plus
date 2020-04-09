@@ -180,12 +180,19 @@ results.");
   Mled->color(FL_RED);
   Mled->labelsize(18);
 } // Fl_Box* Mled
-{ MIDI_LABEL = new Fl_Box(4, 32, 44, 14, "MIDI");
+{ RKR_Box* o = MIDI_LABEL = new RKR_Box(4, 32, 44, 14, "MIDI");
+  MIDI_LABEL->box(FL_NO_BOX);
+  MIDI_LABEL->color(FL_BACKGROUND_COLOR);
+  MIDI_LABEL->selection_color(FL_BACKGROUND_COLOR);
+  MIDI_LABEL->labeltype(FL_NORMAL_LABEL);
   MIDI_LABEL->labelfont(1);
+  MIDI_LABEL->labelsize(14);
   MIDI_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
   MIDI_LABEL->user_data((void*)(7));
+  MIDI_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
   MIDI_LABEL->when(FL_WHEN_NEVER);
-} // Fl_Box* MIDI_LABEL
+  o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+} // RKR_Box* MIDI_LABEL
 this->m_rgui = NULL; this->m_rkr = NULL;
 position(X, Y);
 end();

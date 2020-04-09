@@ -48,7 +48,7 @@ private:
   static void cb_Vel_Adj(SliderW*, void*);
 public:
   Fl_Box *Mled;
-  Fl_Box *MIDI_LABEL;
+  RKR_Box *MIDI_LABEL;
 private:
   RKR  *m_rkr; 
   RKRGUI *m_rgui; 

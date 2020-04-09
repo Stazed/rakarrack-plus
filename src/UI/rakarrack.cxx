@@ -1880,35 +1880,64 @@ void RKRGUI::make_window() {
         o->maximum(32);
         o->value(-32);
       } // TunerBar* tuner_bar
-      { WNote = new Fl_Box(676, 57, 28, 22);
+      { RKR_Box* o = WNote = new RKR_Box(676, 57, 28, 22);
+        WNote->box(FL_NO_BOX);
+        WNote->color(FL_BACKGROUND_COLOR);
+        WNote->selection_color(FL_BACKGROUND_COLOR);
+        WNote->labeltype(FL_NORMAL_LABEL);
         WNote->labelfont(1);
+        WNote->labelsize(14);
         WNote->labelcolor(FL_BACKGROUND2_COLOR);
         WNote->user_data((void*)(7));
         WNote->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
-      } // Fl_Box* WNote
-      { WRfreq = new Fl_Box(588, 57, 76, 22);
+        WNote->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* WNote
+      { RKR_Box* o = WRfreq = new RKR_Box(588, 57, 76, 22);
+        WRfreq->box(FL_NO_BOX);
+        WRfreq->color(FL_BACKGROUND_COLOR);
+        WRfreq->selection_color(FL_BACKGROUND_COLOR);
+        WRfreq->labeltype(FL_NORMAL_LABEL);
         WRfreq->labelfont(1);
+        WRfreq->labelsize(14);
         WRfreq->labelcolor(FL_BACKGROUND2_COLOR);
         WRfreq->user_data((void*)(7));
         WRfreq->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
-      } // Fl_Box* WRfreq
-      { WNfreq = new Fl_Box(714, 57, 76, 22);
+        WRfreq->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* WRfreq
+      { RKR_Box* o = WNfreq = new RKR_Box(714, 57, 76, 22);
+        WNfreq->box(FL_NO_BOX);
+        WNfreq->color(FL_BACKGROUND_COLOR);
+        WNfreq->selection_color(FL_BACKGROUND_COLOR);
+        WNfreq->labeltype(FL_NORMAL_LABEL);
         WNfreq->labelfont(1);
+        WNfreq->labelsize(14);
         WNfreq->labelcolor(FL_BACKGROUND2_COLOR);
         WNfreq->user_data((void*)(7));
         WNfreq->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
-      } // Fl_Box* WNfreq
+        WNfreq->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* WNfreq
       { PINCHO = new Fl_Box(673, 48, 32, 5, "@-4$8<");
         PINCHO->box(FL_FLAT_BOX);
         PINCHO->color((Fl_Color)55);
         PINCHO->labelcolor((Fl_Color)4);
         PINCHO->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
       } // Fl_Box* PINCHO
-      { TUNER_LABEL = new Fl_Box(524, 63, 57, 14, "Tuner");
+      { RKR_Box* o = TUNER_LABEL = new RKR_Box(524, 63, 57, 14, "Tuner");
+        TUNER_LABEL->box(FL_NO_BOX);
+        TUNER_LABEL->color(FL_BACKGROUND_COLOR);
+        TUNER_LABEL->selection_color(FL_BACKGROUND_COLOR);
+        TUNER_LABEL->labeltype(FL_NORMAL_LABEL);
         TUNER_LABEL->labelfont(1);
+        TUNER_LABEL->labelsize(14);
         TUNER_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
         TUNER_LABEL->user_data((void*)(7));
-      } // Fl_Box* TUNER_LABEL
+        TUNER_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
+        TUNER_LABEL->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* TUNER_LABEL
       Tuner->end();
     } // Fl_Group* Tuner
     { InOut = new Fl_Group(2, 24, 164, 170);
@@ -2053,12 +2082,19 @@ void RKRGUI::make_window() {
         output_vur->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         output_vur->when(FL_WHEN_NEVER);
       } // NewVum* output_vur
-      { LABEL_IO = new Fl_Box(60, 30, 62, 14, "In/Out");
+      { RKR_Box* o = LABEL_IO = new RKR_Box(60, 30, 62, 14, "In/Out");
+        LABEL_IO->box(FL_NO_BOX);
+        LABEL_IO->color(FL_BACKGROUND_COLOR);
+        LABEL_IO->selection_color(FL_BACKGROUND_COLOR);
+        LABEL_IO->labeltype(FL_NORMAL_LABEL);
         LABEL_IO->labelfont(1);
+        LABEL_IO->labelsize(14);
         LABEL_IO->labelcolor(FL_BACKGROUND2_COLOR);
         LABEL_IO->user_data((void*)(7));
         LABEL_IO->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
-      } // Fl_Box* LABEL_IO
+        LABEL_IO->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* LABEL_IO
       InOut->end();
     } // Fl_Group* InOut
     { MidiGui* o = MIDI = new MidiGui(520, 85, 276, 52);
@@ -2153,12 +2189,19 @@ void RKRGUI::make_window() {
         Metro_Led->color(FL_RED);
         Metro_Led->labelsize(18);
       } // Fl_Box* Metro_Led
-      { Metro_Label = new Fl_Box(522, 117, 92, 14, "Metronome");
+      { RKR_Box* o = Metro_Label = new RKR_Box(522, 117, 92, 14, "Metronome");
+        Metro_Label->box(FL_NO_BOX);
+        Metro_Label->color(FL_BACKGROUND_COLOR);
+        Metro_Label->selection_color(FL_BACKGROUND_COLOR);
+        Metro_Label->labeltype(FL_NORMAL_LABEL);
         Metro_Label->labelfont(1);
+        Metro_Label->labelsize(14);
         Metro_Label->labelcolor(FL_BACKGROUND2_COLOR);
         Metro_Label->user_data((void*)(7));
+        Metro_Label->align(Fl_Align(FL_ALIGN_CENTER));
         Metro_Label->when(FL_WHEN_NEVER);
-      } // Fl_Box* Metro_Label
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* Metro_Label
       Metro->end();
     } // Fl_Group* Metro
     { Presets = new Fl_Group(168, 24, 352, 170);
@@ -2253,12 +2296,19 @@ void RKRGUI::make_window() {
         Preset_Counter->textsize(11);
         Preset_Counter->callback((Fl_Callback*)cb_Preset_Counter);
       } // Fl_Counter* Preset_Counter
-      { DAuthor = new Fl_Box(246, 107, 266, 18);
+      { RKR_Box* o = DAuthor = new RKR_Box(246, 107, 266, 18);
         DAuthor->box(FL_DOWN_BOX);
         DAuthor->color((Fl_Color)62);
+        DAuthor->selection_color(FL_BACKGROUND_COLOR);
+        DAuthor->labeltype(FL_NORMAL_LABEL);
+        DAuthor->labelfont(0);
+        DAuthor->labelsize(14);
+        DAuthor->labelcolor(FL_FOREGROUND_COLOR);
         DAuthor->user_data((void*)(7));
         DAuthor->align(Fl_Align(100|FL_ALIGN_INSIDE));
-      } // Fl_Box* DAuthor
+        DAuthor->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* DAuthor
       { RandomP = new Fl_Button(175, 141, 59, 14, "Random");
         RandomP->tooltip("Random Preset selection - Shortcut \'F7\'");
         RandomP->shortcut(0xffc4);
@@ -2363,12 +2413,19 @@ void RKRGUI::make_window() {
         T_BUT->labelsize(12);
         T_BUT->callback((Fl_Callback*)cb_T_BUT, (void*)(77));
       } // Fl_Button* T_BUT
-      { TAP_LABEL = new Fl_Box(524, 170, 93, 14, "Tap Tempo");
+      { RKR_Box* o = TAP_LABEL = new RKR_Box(524, 170, 93, 14, "Tap Tempo");
+        TAP_LABEL->box(FL_NO_BOX);
+        TAP_LABEL->color(FL_BACKGROUND_COLOR);
+        TAP_LABEL->selection_color(FL_BACKGROUND_COLOR);
+        TAP_LABEL->labeltype(FL_NORMAL_LABEL);
         TAP_LABEL->labelfont(1);
+        TAP_LABEL->labelsize(14);
         TAP_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
         TAP_LABEL->user_data((void*)(7));
+        TAP_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
         TAP_LABEL->when(FL_WHEN_NEVER);
-      } // Fl_Box* TAP_LABEL
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* TAP_LABEL
       { T_DIS = new Fl_Value_Input(719, 165, 70, 22);
         T_DIS->minimum(20);
         T_DIS->maximum(360);

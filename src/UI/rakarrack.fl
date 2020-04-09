@@ -275,7 +275,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {1118 278 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {804 191 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -498,7 +498,7 @@ Fl::focus(Open_Order);
       }
       Fl_Box P_MOUT_ST {
         label {Midi Out}
-        user_data BOX_LED_DATA selected
+        user_data BOX_LED_DATA
         xywh {648 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
         code0 {o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2}
         class RKR_Box
@@ -915,7 +915,7 @@ Fl::focus(Open_Order);
         class InfinityGui
       } {}
       Fl_Group Tuner {
-        user_data 1
+        user_data 1 open
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
@@ -940,14 +940,20 @@ TUNER_LABEL->redraw_label();}
         Fl_Box WNote {
           user_data 7
           xywh {676 57 28 22} labelfont 1 labelcolor 7 align 16
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
         Fl_Box WRfreq {
           user_data 7
           xywh {588 57 76 22} labelfont 1 labelcolor 7 align 16
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
         Fl_Box WNfreq {
           user_data 7
           xywh {714 57 76 22} labelfont 1 labelcolor 7 align 16
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
         Fl_Box PINCHO {
           label {@-4$8<}
@@ -957,6 +963,8 @@ TUNER_LABEL->redraw_label();}
           label Tuner
           user_data 7
           xywh {524 63 57 14} labelfont 1 labelcolor 7
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
       }
       Fl_Group InOut {
@@ -1071,6 +1079,8 @@ rkr->calculavol(2);}
           label {In/Out}
           user_data 7
           xywh {60 30 62 14} labelfont 1 labelcolor 7 align 16
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
       }
       Fl_Group MIDI {
@@ -1183,6 +1193,8 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           label Metronome
           user_data 7
           xywh {522 117 92 14} labelfont 1 labelcolor 7 when 0
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
       }
       Fl_Group Presets {
@@ -1345,6 +1357,8 @@ if(rkr->Tap_Updated) UpdateTGUI();}
         Fl_Box DAuthor {
           user_data 7
           xywh {246 107 266 18} box DOWN_BOX color 62 align 116
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
         Fl_Button RandomP {
           label Random
@@ -1571,7 +1585,7 @@ TAP_LABEL->redraw_label();}
 {
 rkr->Update_tempo();
 UpdateTGUI();
-}}
+}} selected
           xywh {628 172 38 15} shortcut 0x67 labelsize 10
         }
         Fl_Button T_BUT {
@@ -1588,6 +1602,8 @@ UpdateTGUI();
           label {Tap Tempo}
           user_data 7
           xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
         Fl_Value_Input T_DIS {
           callback {if(o->value()> 360) o->value(360);

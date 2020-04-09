@@ -5256,7 +5256,7 @@ void RKRGUI::chfsize(int value)
 
                 /* In/Out, All preset buttons, Create name, Tuner,
                  * Metronome, Tap Tempo (also Apply, Tap buttons), MIDI */
-                if ((uh == 7) || (uh == 77))
+                if ((uh == 7) || (uh == 77))    // 7 = Box, 77 = Buttons
                 {
                     if ((k > 6)&&(k < 20))
                     {

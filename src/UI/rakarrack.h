@@ -340,11 +340,11 @@ private:
   static void cb_tuner_activar(Fl_Light_Button*, void*);
 public:
   TunerBar *tuner_bar;
-  Fl_Box *WNote;
-  Fl_Box *WRfreq;
-  Fl_Box *WNfreq;
+  RKR_Box *WNote;
+  RKR_Box *WRfreq;
+  RKR_Box *WNfreq;
   Fl_Box *PINCHO;
-  Fl_Box *TUNER_LABEL;
+  RKR_Box *TUNER_LABEL;
   Fl_Group *InOut;
   Fl_Light_Button *ActivarGeneral;
 private:
@@ -375,7 +375,7 @@ public:
   NewVum *input_vur;
   NewVum *output_vul;
   NewVum *output_vur;
-  Fl_Box *LABEL_IO;
+  RKR_Box *LABEL_IO;
   MidiGui *MIDI;
   Fl_Group *Metro;
   Fl_Light_Button *metro_activar;
@@ -404,7 +404,7 @@ private:
   static void cb_Metro_Tempo(SliderW*, void*);
 public:
   Fl_Box *Metro_Led;
-  Fl_Box *Metro_Label;
+  RKR_Box *Metro_Label;
   Fl_Group *Presets;
   Fl_Box *PRESETS_LABEL;
   Fl_Button *L_B1;
@@ -462,7 +462,7 @@ private:
   inline void cb_Preset_Counter_i(Fl_Counter*, void*);
   static void cb_Preset_Counter(Fl_Counter*, void*);
 public:
-  Fl_Box *DAuthor;
+  RKR_Box *DAuthor;
   Fl_Button *RandomP;
 private:
   inline void cb_RandomP_i(Fl_Button*, void*);
@@ -517,7 +517,7 @@ private:
   inline void cb_T_BUT_i(Fl_Button*, void*);
   static void cb_T_BUT(Fl_Button*, void*);
 public:
-  Fl_Box *TAP_LABEL;
+  RKR_Box *TAP_LABEL;
   Fl_Value_Input *T_DIS;
 private:
   inline void cb_T_DIS_i(Fl_Value_Input*, void*);
