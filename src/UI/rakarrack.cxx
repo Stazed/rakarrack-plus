@@ -933,7 +933,7 @@ void RKRGUI::make_window() {
       P_MIN_ST->align(Fl_Align(FL_ALIGN_WRAP));
       P_MIN_ST->when(FL_WHEN_RELEASE);
       P_MIN_ST->hide();
-      o->m_start_height +=2; // (default 10) 10 - 8 = 2
+      o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2
     } // RKR_Box* P_MIN_ST
     { RKR_Box* o = P_MOUT_ST = new RKR_Box(648, 3, 29, 20, "Midi Out");
       P_MOUT_ST->box(FL_NO_BOX);
@@ -947,7 +947,7 @@ void RKRGUI::make_window() {
       P_MOUT_ST->align(Fl_Align(FL_ALIGN_WRAP));
       P_MOUT_ST->when(FL_WHEN_RELEASE);
       P_MOUT_ST->hide();
-      o->m_start_height +=2; // (default 10) 10 - 8 = 2
+      o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2
     } // RKR_Box* P_MOUT_ST
     { P_AUX_ST = new RKR_Box(676, 5, 32, 17, "Aux");
       P_AUX_ST->box(FL_NO_BOX);
@@ -1074,7 +1074,7 @@ void RKRGUI::make_window() {
       L1->user_data((void*)(770));
       L1->align(Fl_Align(FL_ALIGN_CLIP));
       L1->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L1
     { RKR_Box* o = L2 = new RKR_Box(162, 195, 158, 17, "label");
       L2->box(FL_NO_BOX);
@@ -1087,7 +1087,7 @@ void RKRGUI::make_window() {
       L2->user_data((void*)(771));
       L2->align(Fl_Align(FL_ALIGN_CLIP));
       L2->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L2
     { RKR_Box* o = L3 = new RKR_Box(322, 195, 158, 17, "label");
       L3->box(FL_NO_BOX);
@@ -1100,7 +1100,7 @@ void RKRGUI::make_window() {
       L3->user_data((void*)(772));
       L3->align(Fl_Align(FL_ALIGN_CENTER));
       L3->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L3
     { RKR_Box* o = L4 = new RKR_Box(482, 195, 158, 17, "label");
       L4->box(FL_NO_BOX);
@@ -1113,7 +1113,7 @@ void RKRGUI::make_window() {
       L4->user_data((void*)(773));
       L4->align(Fl_Align(FL_ALIGN_CENTER));
       L4->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L4
     { RKR_Box* o = L5 = new RKR_Box(642, 195, 157, 17, "label");
       L5->box(FL_NO_BOX);
@@ -1126,7 +1126,7 @@ void RKRGUI::make_window() {
       L5->user_data((void*)(774));
       L5->align(Fl_Align(FL_ALIGN_CENTER));
       L5->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L5
     { RKR_Box* o = L6 = new RKR_Box(1, 396, 158, 17, "label");
       L6->box(FL_NO_BOX);
@@ -1139,7 +1139,7 @@ void RKRGUI::make_window() {
       L6->user_data((void*)(775));
       L6->align(Fl_Align(FL_ALIGN_CENTER));
       L6->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L6
     { RKR_Box* o = L7 = new RKR_Box(162, 396, 158, 17, "label");
       L7->box(FL_NO_BOX);
@@ -1152,7 +1152,7 @@ void RKRGUI::make_window() {
       L7->user_data((void*)(776));
       L7->align(Fl_Align(FL_ALIGN_CENTER));
       L7->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L7
     { RKR_Box* o = L8 = new RKR_Box(322, 396, 158, 17, "label");
       L8->box(FL_NO_BOX);
@@ -1165,7 +1165,7 @@ void RKRGUI::make_window() {
       L8->user_data((void*)(777));
       L8->align(Fl_Align(FL_ALIGN_CENTER));
       L8->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L8
     { RKR_Box* o = L9 = new RKR_Box(482, 396, 158, 17, "label");
       L9->box(FL_NO_BOX);
@@ -1178,7 +1178,7 @@ void RKRGUI::make_window() {
       L9->user_data((void*)(778));
       L9->align(Fl_Align(FL_ALIGN_CENTER));
       L9->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L9
     { RKR_Box* o = L10 = new RKR_Box(642, 396, 154, 17, "label");
       L10->box(FL_NO_BOX);
@@ -1191,7 +1191,7 @@ void RKRGUI::make_window() {
       L10->user_data((void*)(779));
       L10->align(Fl_Align(FL_ALIGN_CENTER));
       L10->when(FL_WHEN_RELEASE);
-      o->m_start_height -=4; // (default 10) 10 - 14 = 4
+      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L10
     { EQ = new EqGui(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);

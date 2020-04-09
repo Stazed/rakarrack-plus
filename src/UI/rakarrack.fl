@@ -275,7 +275,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {37 209 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {1118 278 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -493,14 +493,14 @@ Fl::focus(Open_Order);
         label {Midi In}
         user_data BOX_LED_DATA
         xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
-        code0 {o->m_start_height +=2; // (default 10) 10 - 8 = 2}
+        code0 {o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2}
         class RKR_Box
       }
       Fl_Box P_MOUT_ST {
         label {Midi Out}
-        user_data BOX_LED_DATA
+        user_data BOX_LED_DATA selected
         xywh {648 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
-        code0 {o->m_start_height +=2; // (default 10) 10 - 8 = 2}
+        code0 {o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2}
         class RKR_Box
       }
       Fl_Box P_AUX_ST {
@@ -566,70 +566,70 @@ Fl::focus(Open_Order);
         label label
         user_data 770
         xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L2 {
         label label
         user_data 771
         xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L3 {
         label label
-        user_data 772 selected
+        user_data 772
         xywh {322 195 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L4 {
         label label
         user_data 773
         xywh {482 195 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L5 {
         label label
         user_data 774
         xywh {642 195 157 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L6 {
         label label
         user_data 775
         xywh {1 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L7 {
         label label
         user_data 776
         xywh {162 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L8 {
         label label
         user_data 777
         xywh {322 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L9 {
         label label
         user_data 778
         xywh {482 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L10 {
         label label
         user_data 779
         xywh {642 396 154 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_height -=4; // (default 10) 10 - 14 = 4}
+        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Group EQ {

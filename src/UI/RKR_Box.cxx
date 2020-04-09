@@ -18,6 +18,7 @@ RKR_Box::RKR_Box(int X, int Y, int W, int H, const char *label) : Fl_Box(X, Y, W
 {
     m_need_font_update = true;
     m_start_height = H;
+    m_start_font_offset = 0;
     this->user_data((void*)(BOX_USER_DATA));
 }
 
@@ -36,8 +37,9 @@ void RKR_Box::draw()
 void RKR_Box::font_resize(int X, int Y, int W, int H)
 {
     float H_ratio = (float) H / m_start_height;
-    float ratio = (float) (g_value_font_size * H_ratio);
-    int H_size = ratio ;
+    int font_size = g_value_font_size + m_start_font_offset;
+    int H_size = (float) (font_size * H_ratio);
+    
     labelsize(H_size);
 }
 
