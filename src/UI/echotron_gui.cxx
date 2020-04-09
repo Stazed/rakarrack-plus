@@ -2,7 +2,7 @@
 
 #include "echotron_gui.h"
 
-void EchotronGui::cb_echotron_activar_i(Fl_Light_Button* o, void*) {
+void EchotronGui::cb_echotron_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -13,7 +13,7 @@ rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
 rgui->findpos(41,(int)o->value(),o);
 }
-void EchotronGui::cb_echotron_activar(Fl_Light_Button* o, void* v) {
+void EchotronGui::cb_echotron_activar(RKR_Light_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_activar_i(o,v);
 }
 
@@ -254,15 +254,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ echotron_activar = new Fl_Light_Button(6, 4, 34, 18, "On");
+{ echotron_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
+  echotron_activar->box(FL_UP_BOX);
   echotron_activar->shortcut(0x35);
   echotron_activar->color((Fl_Color)62);
   echotron_activar->selection_color((Fl_Color)1);
+  echotron_activar->labeltype(FL_NORMAL_LABEL);
+  echotron_activar->labelfont(0);
   echotron_activar->labelsize(10);
+  echotron_activar->labelcolor(FL_FOREGROUND_COLOR);
   echotron_activar->callback((Fl_Callback*)cb_echotron_activar, (void*)(2));
   echotron_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   echotron_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* echotron_activar
+} // RKR_Light_Button* echotron_activar
 { echotron_preset = new Fl_Choice(79, 4, 76, 18, "Preset");
   echotron_preset->down_box(FL_BORDER_BOX);
   echotron_preset->selection_color(FL_FOREGROUND_COLOR);

@@ -1,10 +1,13 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class ExciterGui {
   user_data 1 open
-  xywh {1550 57 158 184} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -21,8 +24,9 @@ widget_class ExciterGui {
 rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
-rgui->findpos(22,(int)o->value(),o);}
+rgui->findpos(22,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice exciter_preset {
     label Preset
@@ -204,7 +208,7 @@ rkr->efx_Exciter->changepar(9,(int)o->value());}
  rgui->getMIDIControl(201);
  return;
 } 
-rkr->efx_Exciter->changepar(10,(int)o->value());} selected
+rkr->efx_Exciter->changepar(10,(int)o->value());}
     xywh {53 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }

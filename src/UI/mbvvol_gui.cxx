@@ -2,7 +2,7 @@
 
 #include "mbvvol_gui.h"
 
-void MbvvolGui::cb_mbvvol_activar_i(Fl_Light_Button* o, void*) {
+void MbvvolGui::cb_mbvvol_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_MBVvol->cleanup();
 rgui->findpos(28,(int)o->value(),o);
 }
-void MbvvolGui::cb_mbvvol_activar(Fl_Light_Button* o, void* v) {
+void MbvvolGui::cb_mbvvol_activar(RKR_Light_Button* o, void* v) {
   ((MbvvolGui*)(o->parent()))->cb_mbvvol_activar_i(o,v);
 }
 
@@ -225,15 +225,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ mbvvol_activar = new Fl_Light_Button(7, 5, 34, 18, "On");
+{ mbvvol_activar = new RKR_Light_Button(7, 5, 34, 18, "On");
+  mbvvol_activar->box(FL_UP_BOX);
   mbvvol_activar->shortcut(0x38);
   mbvvol_activar->color((Fl_Color)62);
   mbvvol_activar->selection_color((Fl_Color)1);
+  mbvvol_activar->labeltype(FL_NORMAL_LABEL);
+  mbvvol_activar->labelfont(0);
   mbvvol_activar->labelsize(10);
+  mbvvol_activar->labelcolor(FL_FOREGROUND_COLOR);
   mbvvol_activar->callback((Fl_Callback*)cb_mbvvol_activar, (void*)(2));
   mbvvol_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   mbvvol_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* mbvvol_activar
+} // RKR_Light_Button* mbvvol_activar
 { mbvvol_preset = new Fl_Choice(79, 5, 76, 18, "Preset");
   mbvvol_preset->down_box(FL_BORDER_BOX);
   mbvvol_preset->selection_color(FL_FOREGROUND_COLOR);

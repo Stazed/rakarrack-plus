@@ -2,7 +2,7 @@
 
 #include "convo_gui.h"
 
-void ConvoGui::cb_convo_activar_i(Fl_Light_Button* o, void*) {
+void ConvoGui::cb_convo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
 rgui->findpos(29,(int)o->value(),o);
 }
-void ConvoGui::cb_convo_activar(Fl_Light_Button* o, void* v) {
+void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_activar_i(o,v);
 }
 
@@ -170,15 +170,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ convo_activar = new Fl_Light_Button(6, 4, 34, 18, "On");
+{ convo_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
+  convo_activar->box(FL_UP_BOX);
   convo_activar->shortcut(0x35);
   convo_activar->color((Fl_Color)62);
   convo_activar->selection_color((Fl_Color)1);
+  convo_activar->labeltype(FL_NORMAL_LABEL);
+  convo_activar->labelfont(0);
   convo_activar->labelsize(10);
+  convo_activar->labelcolor(FL_FOREGROUND_COLOR);
   convo_activar->callback((Fl_Callback*)cb_convo_activar, (void*)(2));
   convo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   convo_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* convo_activar
+} // RKR_Light_Button* convo_activar
 { convo_preset = new Fl_Choice(79, 4, 76, 18, "Preset");
   convo_preset->down_box(FL_BORDER_BOX);
   convo_preset->selection_color(FL_FOREGROUND_COLOR);

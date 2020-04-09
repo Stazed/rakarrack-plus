@@ -2,7 +2,7 @@
 
 #include "compress_gui.h"
 
-void CompressGui::cb_compress_activar_i(Fl_Light_Button* o, void*) {
+void CompressGui::cb_compress_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -13,7 +13,7 @@ rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
 rgui->findpos(1,(int)o->value(),o);
 }
-void CompressGui::cb_compress_activar(Fl_Light_Button* o, void* v) {
+void CompressGui::cb_compress_activar(RKR_Light_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_activar_i(o,v);
 }
 
@@ -144,15 +144,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ compress_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ compress_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  compress_activar->box(FL_UP_BOX);
   compress_activar->shortcut(0x32);
   compress_activar->color((Fl_Color)62);
   compress_activar->selection_color((Fl_Color)1);
+  compress_activar->labeltype(FL_NORMAL_LABEL);
+  compress_activar->labelfont(0);
   compress_activar->labelsize(10);
+  compress_activar->labelcolor(FL_FOREGROUND_COLOR);
   compress_activar->callback((Fl_Callback*)cb_compress_activar, (void*)(2));
   compress_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   compress_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* compress_activar
+} // RKR_Light_Button* compress_activar
 { compress_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   compress_preset->down_box(FL_BORDER_BOX);
   compress_preset->selection_color(FL_FOREGROUND_COLOR);

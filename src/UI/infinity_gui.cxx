@@ -2,7 +2,7 @@
 
 #include "infinity_gui.h"
 
-void InfinityGui::cb_infinity_activar_i(Fl_Light_Button* o, void*) {
+void InfinityGui::cb_infinity_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116); 
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Infinity->cleanup();
 rgui->findpos(46,(int)o->value(),o);
 }
-void InfinityGui::cb_infinity_activar(Fl_Light_Button* o, void* v) {
+void InfinityGui::cb_infinity_activar(RKR_Light_Button* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_activar_i(o,v);
 }
 
@@ -271,15 +271,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ infinity_activar = new Fl_Light_Button(8, 5, 34, 18, "On");
+{ infinity_activar = new RKR_Light_Button(8, 5, 34, 18, "On");
+  infinity_activar->box(FL_UP_BOX);
   infinity_activar->shortcut(0x31);
   infinity_activar->color((Fl_Color)62);
   infinity_activar->selection_color((Fl_Color)1);
+  infinity_activar->labeltype(FL_NORMAL_LABEL);
+  infinity_activar->labelfont(0);
   infinity_activar->labelsize(10);
+  infinity_activar->labelcolor(FL_FOREGROUND_COLOR);
   infinity_activar->callback((Fl_Callback*)cb_infinity_activar, (void*)(2));
   infinity_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   infinity_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* infinity_activar
+} // RKR_Light_Button* infinity_activar
 { infinity_preset = new Fl_Choice(80, 5, 76, 18, "Preset");
   infinity_preset->down_box(FL_BORDER_BOX);
   infinity_preset->selection_color(FL_FOREGROUND_COLOR);

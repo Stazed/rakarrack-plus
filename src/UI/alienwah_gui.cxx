@@ -2,7 +2,7 @@
 
 #include "alienwah_gui.h"
 
-void AlienwahGui::cb_Alienwah_activar_i(Fl_Light_Button* o, void*) {
+void AlienwahGui::cb_Alienwah_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
 rgui->findpos(11,(int)o->value(),o);
 }
-void AlienwahGui::cb_Alienwah_activar(Fl_Light_Button* o, void* v) {
+void AlienwahGui::cb_Alienwah_activar(RKR_Light_Button* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_activar_i(o,v);
 }
 
@@ -180,15 +180,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ Alienwah_activar = new Fl_Light_Button(4, 4, 34, 18, "On");
+{ Alienwah_activar = new RKR_Light_Button(4, 4, 34, 18, "On");
+  Alienwah_activar->box(FL_UP_BOX);
   Alienwah_activar->shortcut(0x36);
   Alienwah_activar->color((Fl_Color)62);
   Alienwah_activar->selection_color((Fl_Color)1);
+  Alienwah_activar->labeltype(FL_NORMAL_LABEL);
+  Alienwah_activar->labelfont(0);
   Alienwah_activar->labelsize(10);
+  Alienwah_activar->labelcolor(FL_FOREGROUND_COLOR);
   Alienwah_activar->callback((Fl_Callback*)cb_Alienwah_activar, (void*)(2));
   Alienwah_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   Alienwah_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* Alienwah_activar
+} // RKR_Light_Button* Alienwah_activar
 { Alienwah_preset = new Fl_Choice(76, 4, 76, 18, "Preset");
   Alienwah_preset->down_box(FL_BORDER_BOX);
   Alienwah_preset->selection_color(FL_FOREGROUND_COLOR);

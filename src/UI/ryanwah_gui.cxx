@@ -2,7 +2,7 @@
 
 #include "ryanwah_gui.h"
 
-void RyanwahGui::cb_ryanwah_activar_i(Fl_Light_Button* o, void*) {
+void RyanwahGui::cb_ryanwah_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_RyanWah->cleanup();
 rgui->findpos(31,(int)o->value(),o);
 }
-void RyanwahGui::cb_ryanwah_activar(Fl_Light_Button* o, void* v) {
+void RyanwahGui::cb_ryanwah_activar(RKR_Light_Button* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_activar_i(o,v);
 }
 
@@ -280,15 +280,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ ryanwah_activar = new Fl_Light_Button(6, 5, 34, 18, "On");
+{ ryanwah_activar = new RKR_Light_Button(6, 5, 34, 18, "On");
+  ryanwah_activar->box(FL_UP_BOX);
   ryanwah_activar->shortcut(0x36);
   ryanwah_activar->color((Fl_Color)62);
   ryanwah_activar->selection_color((Fl_Color)1);
+  ryanwah_activar->labeltype(FL_NORMAL_LABEL);
+  ryanwah_activar->labelfont(0);
   ryanwah_activar->labelsize(10);
+  ryanwah_activar->labelcolor(FL_FOREGROUND_COLOR);
   ryanwah_activar->callback((Fl_Callback*)cb_ryanwah_activar, (void*)(2));
   ryanwah_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   ryanwah_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* ryanwah_activar
+} // RKR_Light_Button* ryanwah_activar
 { ryanwah_preset = new Fl_Choice(78, 5, 76, 18, "Preset");
   ryanwah_preset->down_box(FL_BORDER_BOX);
   ryanwah_preset->selection_color(FL_FOREGROUND_COLOR);

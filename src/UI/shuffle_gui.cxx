@@ -2,7 +2,7 @@
 
 #include "shuffle_gui.h"
 
-void ShuffleGui::cb_shuffle_activar_i(Fl_Light_Button* o, void*) {
+void ShuffleGui::cb_shuffle_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Shuffle->cleanup();
 rgui->findpos(26,(int)o->value(),o);
 }
-void ShuffleGui::cb_shuffle_activar(Fl_Light_Button* o, void* v) {
+void ShuffleGui::cb_shuffle_activar(RKR_Light_Button* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_activar_i(o,v);
 }
 
@@ -179,15 +179,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ shuffle_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ shuffle_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  shuffle_activar->box(FL_UP_BOX);
   shuffle_activar->shortcut(0x33);
   shuffle_activar->color((Fl_Color)62);
   shuffle_activar->selection_color((Fl_Color)1);
+  shuffle_activar->labeltype(FL_NORMAL_LABEL);
+  shuffle_activar->labelfont(0);
   shuffle_activar->labelsize(10);
+  shuffle_activar->labelcolor(FL_FOREGROUND_COLOR);
   shuffle_activar->callback((Fl_Callback*)cb_shuffle_activar, (void*)(2));
   shuffle_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   shuffle_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* shuffle_activar
+} // RKR_Light_Button* shuffle_activar
 { shuffle_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   shuffle_preset->down_box(FL_BORDER_BOX);
   shuffle_preset->selection_color(FL_FOREGROUND_COLOR);

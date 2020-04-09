@@ -3,20 +3,20 @@
 #ifndef musdelay_gui_h
 #define musdelay_gui_h
 #include <FL/Fl.H>
+#include "RKR_Light_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 
 class MusdelayGui : public Fl_Group {
 public:
   MusdelayGui(int X, int Y, int W, int H, const char *L = 0);
-  Fl_Light_Button *musdelay_activar;
+  RKR_Light_Button *musdelay_activar;
 private:
-  inline void cb_musdelay_activar_i(Fl_Light_Button*, void*);
-  static void cb_musdelay_activar(Fl_Light_Button*, void*);
+  inline void cb_musdelay_activar_i(RKR_Light_Button*, void*);
+  static void cb_musdelay_activar(RKR_Light_Button*, void*);
 public:
   Fl_Choice *musdelay_preset;
 private:

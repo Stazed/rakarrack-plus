@@ -2,7 +2,7 @@
 
 #include "coil_gui.h"
 
-void CoilGui::cb_coil_activar_i(Fl_Light_Button* o, void*) {
+void CoilGui::cb_coil_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
 rgui->findpos(33,(int)o->value(),o);
 }
-void CoilGui::cb_coil_activar(Fl_Light_Button* o, void* v) {
+void CoilGui::cb_coil_activar(RKR_Light_Button* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_activar_i(o,v);
 }
 
@@ -157,15 +157,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ coil_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ coil_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  coil_activar->box(FL_UP_BOX);
   coil_activar->shortcut(0x31);
   coil_activar->color((Fl_Color)62);
   coil_activar->selection_color((Fl_Color)1);
+  coil_activar->labeltype(FL_NORMAL_LABEL);
+  coil_activar->labelfont(0);
   coil_activar->labelsize(10);
+  coil_activar->labelcolor(FL_FOREGROUND_COLOR);
   coil_activar->callback((Fl_Callback*)cb_coil_activar, (void*)(2));
   coil_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   coil_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* coil_activar
+} // RKR_Light_Button* coil_activar
 { coil_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   coil_preset->down_box(FL_BORDER_BOX);
   coil_preset->selection_color(FL_FOREGROUND_COLOR);

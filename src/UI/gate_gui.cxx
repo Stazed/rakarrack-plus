@@ -2,7 +2,7 @@
 
 #include "gate_gui.h"
 
-void GateGui::cb_gate_activar_i(Fl_Light_Button* o, void*) {
+void GateGui::cb_gate_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -12,7 +12,7 @@ void GateGui::cb_gate_activar_i(Fl_Light_Button* o, void*) {
 rkr->Gate_Bypass=(int)o->value();
 rgui->findpos(16,(int)o->value(),o);
 }
-void GateGui::cb_gate_activar(Fl_Light_Button* o, void* v) {
+void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_activar_i(o,v);
 }
 
@@ -128,15 +128,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ gate_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ gate_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  gate_activar->box(FL_UP_BOX);
   gate_activar->shortcut(0x32);
   gate_activar->color((Fl_Color)62);
   gate_activar->selection_color((Fl_Color)1);
+  gate_activar->labeltype(FL_NORMAL_LABEL);
+  gate_activar->labelfont(0);
   gate_activar->labelsize(10);
+  gate_activar->labelcolor(FL_FOREGROUND_COLOR);
   gate_activar->callback((Fl_Callback*)cb_gate_activar, (void*)(2));
   gate_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   gate_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* gate_activar
+} // RKR_Light_Button* gate_activar
 { gate_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   gate_preset->down_box(FL_BORDER_BOX);
   gate_preset->selection_color(FL_FOREGROUND_COLOR);

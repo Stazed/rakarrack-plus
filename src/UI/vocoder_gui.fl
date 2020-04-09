@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class {\#include "newvum.h"} VocoderGui {
   user_data 1 open
   xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -22,8 +25,9 @@ widget_class {\#include "newvum.h"} VocoderGui {
 rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-rgui->findpos(35,(int)o->value(),o);}
+rgui->findpos(35,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice vo_preset {
     label Preset
@@ -36,7 +40,7 @@ rgui->findpos(35,(int)o->value(),o);}
         vo_q->value(rkr->efx_Vocoder->getpar(3));
         vo_input->value(rkr->efx_Vocoder->getpar(4));
         vo_ring->value(rkr->efx_Vocoder->getpar(6));
-        vo_level->value(rkr->efx_Vocoder->getpar(5));} open
+        vo_level->value(rkr->efx_Vocoder->getpar(5));}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -111,7 +115,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(300);
          return;
         }
-        rkr->efx_Vocoder->changepar(3,(int)o->value());} selected
+        rkr->efx_Vocoder->changepar(3,(int)o->value());}
     tooltip Resonance xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
     class SliderW
   }

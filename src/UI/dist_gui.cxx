@@ -2,7 +2,7 @@
 
 #include "dist_gui.h"
 
-void DistGui::cb_dist_activar_i(Fl_Light_Button* o, void*) {
+void DistGui::cb_dist_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
 rgui->findpos(2,(int)o->value(),o);
 }
-void DistGui::cb_dist_activar(Fl_Light_Button* o, void* v) {
+void DistGui::cb_dist_activar(RKR_Light_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_activar_i(o,v);
 }
 
@@ -176,15 +176,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ dist_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ dist_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  dist_activar->box(FL_UP_BOX);
   dist_activar->shortcut(0x33);
   dist_activar->color((Fl_Color)62);
   dist_activar->selection_color((Fl_Color)1);
+  dist_activar->labeltype(FL_NORMAL_LABEL);
+  dist_activar->labelfont(0);
   dist_activar->labelsize(10);
+  dist_activar->labelcolor(FL_FOREGROUND_COLOR);
   dist_activar->callback((Fl_Callback*)cb_dist_activar, (void*)(2));
   dist_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   dist_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* dist_activar
+} // RKR_Light_Button* dist_activar
 { dist_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   dist_preset->down_box(FL_BORDER_BOX);
   dist_preset->selection_color(FL_FOREGROUND_COLOR);

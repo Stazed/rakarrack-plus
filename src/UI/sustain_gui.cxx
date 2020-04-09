@@ -2,7 +2,7 @@
 
 #include "sustain_gui.h"
 
-void SustainGui::cb_sus_activar_i(Fl_Light_Button* o, void*) {
+void SustainGui::cb_sus_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ void SustainGui::cb_sus_activar_i(Fl_Light_Button* o, void*) {
         rkr->efx_Sustainer->cleanup();
         rgui->findpos(36,(int)o->value(),o);
 }
-void SustainGui::cb_sus_activar(Fl_Light_Button* o, void* v) {
+void SustainGui::cb_sus_activar(RKR_Light_Button* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_activar_i(o,v);
 }
 
@@ -65,15 +65,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ sus_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ sus_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  sus_activar->box(FL_UP_BOX);
   sus_activar->shortcut(0x31);
   sus_activar->color((Fl_Color)62);
   sus_activar->selection_color((Fl_Color)1);
+  sus_activar->labeltype(FL_NORMAL_LABEL);
+  sus_activar->labelfont(0);
   sus_activar->labelsize(10);
+  sus_activar->labelcolor(FL_FOREGROUND_COLOR);
   sus_activar->callback((Fl_Callback*)cb_sus_activar, (void*)(2));
   sus_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   sus_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* sus_activar
+} // RKR_Light_Button* sus_activar
 { sus_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   sus_preset->down_box(FL_BORDER_BOX);
   sus_preset->selection_color(FL_FOREGROUND_COLOR);

@@ -2,7 +2,7 @@
 
 #include "midiconv_gui.h"
 
-void MidiGui::cb_midi_activar_i(Fl_Light_Button* o, void*) {
+void MidiGui::cb_midi_activar_i(RKR_Light_Button* o, void*) {
   if ((int)o->value()==0)
   { 
     m_rkr->efx_MIDIConverter->panic();
@@ -19,7 +19,7 @@ void MidiGui::cb_midi_activar_i(Fl_Light_Button* o, void*) {
 
   MIDI_LABEL->redraw_label();
 }
-void MidiGui::cb_midi_activar(Fl_Light_Button* o, void* v) {
+void MidiGui::cb_midi_activar(RKR_Light_Button* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_midi_activar_i(o,v);
 }
 
@@ -96,15 +96,20 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ midi_activar = new Fl_Light_Button(5, 4, 38, 18, "On");
+{ midi_activar = new RKR_Light_Button(5, 4, 38, 18, "On");
   midi_activar->tooltip("Enable MIDI Converter - Shortcut \'M\'");
+  midi_activar->box(FL_UP_BOX);
   midi_activar->shortcut(0x6d);
   midi_activar->color((Fl_Color)62);
   midi_activar->selection_color((Fl_Color)1);
+  midi_activar->labeltype(FL_NORMAL_LABEL);
+  midi_activar->labelfont(0);
   midi_activar->labelsize(10);
+  midi_activar->labelcolor(FL_FOREGROUND_COLOR);
   midi_activar->callback((Fl_Callback*)cb_midi_activar, (void*)(2));
+  midi_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   midi_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* midi_activar
+} // RKR_Light_Button* midi_activar
 { MIDIOctave = new Fl_Choice(107, 31, 37, 16, "Octave");
   MIDIOctave->tooltip("Adjust MIDI note out by octave.");
   MIDIOctave->down_box(FL_BORDER_BOX);

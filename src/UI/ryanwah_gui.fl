@@ -2,7 +2,10 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-decl {\#include "RKR_Value_Input.h"} {selected public global
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Value_Input.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} RyanwahGui {
@@ -25,8 +28,9 @@ widget_class {\#include "common_gui_menu.h"} RyanwahGui {
 rkr->RyanWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RyanWah->cleanup();
-rgui->findpos(31,(int)o->value(),o);}
+rgui->findpos(31,(int)o->value(),o);} selected
     xywh {6 5 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice ryanwah_preset {
     label Preset

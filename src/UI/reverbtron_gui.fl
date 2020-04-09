@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class RevtronGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -20,8 +23,9 @@ widget_class RevtronGui {
 }
 rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-rgui->findpos(40,(int)o->value(),o);}
+rgui->findpos(40,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice revtron_preset {
     label Preset
@@ -240,7 +244,7 @@ filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rvb");
 strcpy(rkr->efx_Reverbtron->Filename,filename);
-rkr->efx_Reverbtron->setfile(USERFILE);} selected
+rkr->efx_Reverbtron->setfile(USERFILE);}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }

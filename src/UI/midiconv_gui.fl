@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class {this->m_rgui = NULL; this->m_rkr = NULL;} MidiGui {
   user_data 1 open
   xywh {1389 231 275 50} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -32,8 +35,9 @@ m_rgui= _rgui;} {}
   if(m_rgui != NULL)
     m_rgui->ChangeActives();
 
-  MIDI_LABEL->redraw_label();}
+  MIDI_LABEL->redraw_label();} selected
     tooltip {Enable MIDI Converter - Shortcut 'M'} xywh {5 4 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
+    class RKR_Light_Button
   }
   Fl_Choice MIDIOctave {
     label Octave
@@ -116,7 +120,7 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
   }
   Fl_Box MIDI_LABEL {
     label MIDI
-    user_data 7 selected
+    user_data 7
     xywh {4 32 44 14} labelfont 1 labelcolor 7 when 0
     code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
     class RKR_Box

@@ -2,7 +2,7 @@
 
 #include "looper_gui.h"
 
-void LooperGui::cb_looper_activar_i(Fl_Light_Button* o, void*) {
+void LooperGui::cb_looper_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
 rgui->findpos(30,(int)o->value(),o);
 }
-void LooperGui::cb_looper_activar(Fl_Light_Button* o, void* v) {
+void LooperGui::cb_looper_activar(RKR_Light_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_activar_i(o,v);
 }
 
@@ -256,15 +256,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ looper_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ looper_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  looper_activar->box(FL_UP_BOX);
   looper_activar->shortcut(0x35);
   looper_activar->color((Fl_Color)62);
   looper_activar->selection_color((Fl_Color)1);
+  looper_activar->labeltype(FL_NORMAL_LABEL);
+  looper_activar->labelfont(0);
   looper_activar->labelsize(10);
+  looper_activar->labelcolor(FL_FOREGROUND_COLOR);
   looper_activar->callback((Fl_Callback*)cb_looper_activar, (void*)(2));
   looper_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   looper_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* looper_activar
+} // RKR_Light_Button* looper_activar
 { looper_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   looper_preset->down_box(FL_BORDER_BOX);
   looper_preset->selection_color(FL_FOREGROUND_COLOR);

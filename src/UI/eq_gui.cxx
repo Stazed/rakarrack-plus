@@ -2,7 +2,7 @@
 
 #include "eq_gui.h"
 
-void EqGui::cb_eq_activar_i(Fl_Light_Button* o, void*) {
+void EqGui::cb_eq_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
 rgui->findpos(0,(int)o->value(),o);
 }
-void EqGui::cb_eq_activar(Fl_Light_Button* o, void* v) {
+void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_activar_i(o,v);
 }
 
@@ -196,15 +196,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ eq_activar = new Fl_Light_Button(5, 2, 34, 18, "On");
+{ eq_activar = new RKR_Light_Button(5, 2, 34, 18, "On");
+  eq_activar->box(FL_UP_BOX);
   eq_activar->shortcut(0x31);
   eq_activar->color((Fl_Color)62);
   eq_activar->selection_color((Fl_Color)1);
+  eq_activar->labeltype(FL_NORMAL_LABEL);
+  eq_activar->labelfont(0);
   eq_activar->labelsize(10);
+  eq_activar->labelcolor(FL_FOREGROUND_COLOR);
   eq_activar->callback((Fl_Callback*)cb_eq_activar, (void*)(2));
   eq_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   eq_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* eq_activar
+} // RKR_Light_Button* eq_activar
 { eq_preset = new Fl_Choice(77, 2, 76, 18, "Preset");
   eq_preset->down_box(FL_BORDER_BOX);
   eq_preset->selection_color(FL_FOREGROUND_COLOR);

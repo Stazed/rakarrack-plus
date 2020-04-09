@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class PeqGui {
   user_data 1 open
   xywh {1514 80 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -21,8 +24,9 @@ widget_class PeqGui {
 rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
-rgui->findpos(9,(int)o->value(),o);}
+rgui->findpos(9,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+    class RKR_Light_Button
   }
   Fl_Choice eqp_preset {
     label Preset
@@ -61,7 +65,7 @@ eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);}
  rgui->getMIDIControl(148);
  return;
 } 
-rkr->efx_EQ2->changepar(0,(int)(o->value()+64));} selected
+rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
     xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class SliderW
   }

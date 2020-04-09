@@ -2,7 +2,7 @@
 
 #include "whawha_gui.h"
 
-void WhawhaGui::cb_WhaWha_activar_i(Fl_Light_Button* o, void*) {
+void WhawhaGui::cb_WhaWha_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
 rgui->findpos(10,(int)o->value(),o);
 }
-void WhawhaGui::cb_WhaWha_activar(Fl_Light_Button* o, void* v) {
+void WhawhaGui::cb_WhaWha_activar(RKR_Light_Button* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_activar_i(o,v);
 }
 
@@ -185,15 +185,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ WhaWha_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ WhaWha_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  WhaWha_activar->box(FL_UP_BOX);
   WhaWha_activar->shortcut(0x36);
   WhaWha_activar->color((Fl_Color)62);
   WhaWha_activar->selection_color((Fl_Color)1);
+  WhaWha_activar->labeltype(FL_NORMAL_LABEL);
+  WhaWha_activar->labelfont(0);
   WhaWha_activar->labelsize(10);
+  WhaWha_activar->labelcolor(FL_FOREGROUND_COLOR);
   WhaWha_activar->callback((Fl_Callback*)cb_WhaWha_activar, (void*)(2));
   WhaWha_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   WhaWha_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* WhaWha_activar
+} // RKR_Light_Button* WhaWha_activar
 { WhaWha_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   WhaWha_preset->down_box(FL_BORDER_BOX);
   WhaWha_preset->selection_color(FL_FOREGROUND_COLOR);

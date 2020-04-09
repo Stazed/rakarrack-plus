@@ -1,7 +1,10 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} PanGui {
   user_data 1 open
   xywh {1333 108 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -22,8 +25,9 @@ widget_class {\#include "common_gui_menu.h"} PanGui {
 rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
-rgui->findpos(13,(int)o->value(),o);}
+rgui->findpos(13,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice pan_preset {
     label Preset
@@ -130,7 +134,7 @@ rkr->efx_Pan->changepar(5,(int)o->value());}
  rgui->getMIDIControl(436);
  return;
 }
-rkr->efx_Pan->changepar(6,(int)o->value());} selected
+rkr->efx_Pan->changepar(6,(int)o->value());}
     tooltip {Extra Stereo Amount} xywh {56 161 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class SliderW
   }

@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {selected public global
+}
+
 widget_class GateGui {
   user_data 1 open
   xywh {1618 106 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -21,6 +24,7 @@ widget_class GateGui {
 rkr->Gate_Bypass=(int)o->value();
 rgui->findpos(16,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice gate_preset {
     label Preset
@@ -122,7 +126,7 @@ rkr->efx_Gate->changepar(5, (int)o->value());}
  rgui->getMIDIControl(435);
  return;
 }
-rkr->efx_Gate->changepar(6, (int)o->value());} selected
+rkr->efx_Gate->changepar(6, (int)o->value());}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class SliderW
   }

@@ -3,21 +3,21 @@
 #ifndef compress_gui_h
 #define compress_gui_h
 #include <FL/Fl.H>
+#include "RKR_Light_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
 
 class CompressGui : public Fl_Group {
 public:
   CompressGui(int X, int Y, int W, int H, const char *L = 0);
-  Fl_Light_Button *compress_activar;
+  RKR_Light_Button *compress_activar;
 private:
-  inline void cb_compress_activar_i(Fl_Light_Button*, void*);
-  static void cb_compress_activar(Fl_Light_Button*, void*);
+  inline void cb_compress_activar_i(RKR_Light_Button*, void*);
+  static void cb_compress_activar(RKR_Light_Button*, void*);
 public:
   Fl_Choice *compress_preset;
 private:

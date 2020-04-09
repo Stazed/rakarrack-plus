@@ -2,7 +2,10 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-decl {\#include "RKR_Value_Input.h"} {selected public global
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Value_Input.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
@@ -25,8 +28,9 @@ widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
 rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
-rgui->findpos(27,(int)o->value(),o);}
+rgui->findpos(27,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice synthfilter_preset {
     label Preset

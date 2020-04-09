@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class ConvoGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -21,8 +24,9 @@ widget_class ConvoGui {
 rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
-rgui->findpos(29,(int)o->value(),o);}
+rgui->findpos(29,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice convo_preset {
     label Preset
@@ -146,7 +150,7 @@ filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
 strcpy(rkr->efx_Convol->Filename,filename);
-rkr->efx_Convol->setfile(USERFILE);} selected
+rkr->efx_Convol->setfile(USERFILE);}
     xywh {106 143 46 12} labelsize 10 deactivate
     class RKR_Button
   }

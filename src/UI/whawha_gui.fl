@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} WhawhaGui {
   user_data 1 open
   xywh {1428 110 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -22,8 +25,9 @@ widget_class {\#include "common_gui_menu.h"} WhawhaGui {
 rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
-rgui->findpos(10,(int)o->value(),o);}
+rgui->findpos(10,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice WhaWha_preset {
     label Preset
@@ -162,7 +166,7 @@ rkr->efx_WhaWha->changepar(8,(int)o->value());}
   }
   Fl_Choice WhaWha_ftype {
     label {F. Type}
-    callback {rkr->efx_WhaWha->changepar(10,(int)o->value())} open
+    callback {rkr->efx_WhaWha->changepar(10,(int)o->value())}
     tooltip {Filter Type} xywh {95 145 59 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -178,7 +182,7 @@ rkr->efx_WhaWha->changepar(8,(int)o->value());}
       xywh {92 92 36 21} labelsize 10
     }
     MenuItem {} {
-      label {Formant 1} selected
+      label {Formant 1}
       xywh {102 102 36 21} labelsize 10
     }
     MenuItem {} {

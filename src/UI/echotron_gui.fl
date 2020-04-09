@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} EchotronGui {
   user_data 1 open
   xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -21,8 +24,9 @@ widget_class {\#include "common_gui_menu.h"} EchotronGui {
 }
 rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
-rgui->findpos(41,(int)o->value(),o);}
+rgui->findpos(41,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice echotron_preset {
     label Preset
@@ -215,7 +219,7 @@ filename=fl_filename_setext(filename,".dly");
 strcpy(rkr->efx_Echotron->Filename,filename);
 rkr->efx_Echotron->setfile(USERFILE);
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }

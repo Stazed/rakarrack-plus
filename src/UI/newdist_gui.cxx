@@ -2,7 +2,7 @@
 
 #include "newdist_gui.h"
 
-void NewdistGui::cb_newdist_activar_i(Fl_Light_Button* o, void*) {
+void NewdistGui::cb_newdist_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
 rgui->findpos(17,(int)o->value(),o);
 }
-void NewdistGui::cb_newdist_activar(Fl_Light_Button* o, void* v) {
+void NewdistGui::cb_newdist_activar(RKR_Light_Button* o, void* v) {
   ((NewdistGui*)(o->parent()))->cb_newdist_activar_i(o,v);
 }
 
@@ -180,15 +180,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ newdist_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ newdist_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  newdist_activar->box(FL_UP_BOX);
   newdist_activar->shortcut(0x33);
   newdist_activar->color((Fl_Color)62);
   newdist_activar->selection_color((Fl_Color)1);
+  newdist_activar->labeltype(FL_NORMAL_LABEL);
+  newdist_activar->labelfont(0);
   newdist_activar->labelsize(10);
+  newdist_activar->labelcolor(FL_FOREGROUND_COLOR);
   newdist_activar->callback((Fl_Callback*)cb_newdist_activar, (void*)(2));
   newdist_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   newdist_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* newdist_activar
+} // RKR_Light_Button* newdist_activar
 { newdist_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   newdist_preset->down_box(FL_BORDER_BOX);
   newdist_preset->selection_color(FL_FOREGROUND_COLOR);

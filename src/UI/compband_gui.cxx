@@ -2,7 +2,7 @@
 
 #include "compband_gui.h"
 
-void CbandGui::cb_cband_activar_i(Fl_Light_Button* o, void*) {
+void CbandGui::cb_cband_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
 rgui->findpos(43,(int)o->value(),o);
 }
-void CbandGui::cb_cband_activar(Fl_Light_Button* o, void* v) {
+void CbandGui::cb_cband_activar(RKR_Light_Button* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_activar_i(o,v);
 }
 
@@ -209,15 +209,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ cband_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ cband_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  cband_activar->box(FL_UP_BOX);
   cband_activar->shortcut(0x38);
   cband_activar->color((Fl_Color)62);
   cband_activar->selection_color((Fl_Color)1);
+  cband_activar->labeltype(FL_NORMAL_LABEL);
+  cband_activar->labelfont(0);
   cband_activar->labelsize(10);
+  cband_activar->labelcolor(FL_FOREGROUND_COLOR);
   cband_activar->callback((Fl_Callback*)cb_cband_activar, (void*)(2));
   cband_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   cband_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* cband_activar
+} // RKR_Light_Button* cband_activar
 { cband_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   cband_preset->down_box(FL_BORDER_BOX);
   cband_preset->selection_color(FL_FOREGROUND_COLOR);

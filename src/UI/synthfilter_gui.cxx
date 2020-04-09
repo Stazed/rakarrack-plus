@@ -2,7 +2,7 @@
 
 #include "synthfilter_gui.h"
 
-void SynthfilterGui::cb_synthfilter_activar_i(Fl_Light_Button* o, void*) {
+void SynthfilterGui::cb_synthfilter_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
 rgui->findpos(27,(int)o->value(),o);
 }
-void SynthfilterGui::cb_synthfilter_activar(Fl_Light_Button* o, void* v) {
+void SynthfilterGui::cb_synthfilter_activar(RKR_Light_Button* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_activar_i(o,v);
 }
 
@@ -232,15 +232,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ synthfilter_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ synthfilter_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  synthfilter_activar->box(FL_UP_BOX);
   synthfilter_activar->shortcut(0x37);
   synthfilter_activar->color((Fl_Color)62);
   synthfilter_activar->selection_color((Fl_Color)1);
+  synthfilter_activar->labeltype(FL_NORMAL_LABEL);
+  synthfilter_activar->labelfont(0);
   synthfilter_activar->labelsize(10);
+  synthfilter_activar->labelcolor(FL_FOREGROUND_COLOR);
   synthfilter_activar->callback((Fl_Callback*)cb_synthfilter_activar, (void*)(2));
   synthfilter_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   synthfilter_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* synthfilter_activar
+} // RKR_Light_Button* synthfilter_activar
 { synthfilter_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   synthfilter_preset->down_box(FL_BORDER_BOX);
   synthfilter_preset->selection_color(FL_FOREGROUND_COLOR);

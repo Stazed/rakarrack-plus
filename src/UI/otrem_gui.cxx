@@ -2,7 +2,7 @@
 
 #include "otrem_gui.h"
 
-void OtremGui::cb_otrem_activar_i(Fl_Light_Button* o, void*) {
+void OtremGui::cb_otrem_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
 rgui->findpos(44,(int)o->value(),o);
 }
-void OtremGui::cb_otrem_activar(Fl_Light_Button* o, void* v) {
+void OtremGui::cb_otrem_activar(RKR_Light_Button* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_activar_i(o,v);
 }
 
@@ -124,15 +124,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ otrem_activar = new Fl_Light_Button(5, 6, 34, 18, "On");
+{ otrem_activar = new RKR_Light_Button(5, 6, 34, 18, "On");
+  otrem_activar->box(FL_UP_BOX);
   otrem_activar->shortcut(0x38);
   otrem_activar->color((Fl_Color)62);
   otrem_activar->selection_color((Fl_Color)1);
+  otrem_activar->labeltype(FL_NORMAL_LABEL);
+  otrem_activar->labelfont(0);
   otrem_activar->labelsize(10);
+  otrem_activar->labelcolor(FL_FOREGROUND_COLOR);
   otrem_activar->callback((Fl_Callback*)cb_otrem_activar, (void*)(2));
   otrem_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   otrem_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* otrem_activar
+} // RKR_Light_Button* otrem_activar
 { otrem_preset = new Fl_Choice(77, 6, 76, 18, "Preset");
   otrem_preset->down_box(FL_BORDER_BOX);
   otrem_preset->selection_color(FL_FOREGROUND_COLOR);

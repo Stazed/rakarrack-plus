@@ -2,7 +2,7 @@
 
 #include "stompbox_gui.h"
 
-void StompboxGui::cb_stomp_activar_i(Fl_Light_Button* o, void*) {
+void StompboxGui::cb_stomp_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
 rgui->findpos(39,(int)o->value(),o);
 }
-void StompboxGui::cb_stomp_activar(Fl_Light_Button* o, void* v) {
+void StompboxGui::cb_stomp_activar(RKR_Light_Button* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_activar_i(o,v);
 }
 
@@ -133,14 +133,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ stomp_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ stomp_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  stomp_activar->box(FL_UP_BOX);
   stomp_activar->shortcut(0x30);
   stomp_activar->color((Fl_Color)62);
   stomp_activar->selection_color((Fl_Color)1);
+  stomp_activar->labeltype(FL_NORMAL_LABEL);
+  stomp_activar->labelfont(0);
   stomp_activar->labelsize(10);
+  stomp_activar->labelcolor(FL_FOREGROUND_COLOR);
   stomp_activar->callback((Fl_Callback*)cb_stomp_activar, (void*)(2));
+  stomp_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   stomp_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* stomp_activar
+} // RKR_Light_Button* stomp_activar
 { stomp_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   stomp_preset->down_box(FL_BORDER_BOX);
   stomp_preset->selection_color(FL_FOREGROUND_COLOR);

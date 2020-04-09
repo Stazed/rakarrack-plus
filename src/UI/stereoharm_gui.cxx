@@ -2,7 +2,7 @@
 
 #include "stereoharm_gui.h"
 
-void SharGui::cb_shar_activar_i(Fl_Light_Button* o, void*) {
+void SharGui::cb_shar_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -17,7 +17,7 @@ rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 rgui->Chord(1);
 rgui->findpos(42,(int)o->value(),o);
 }
-void SharGui::cb_shar_activar(Fl_Light_Button* o, void* v) {
+void SharGui::cb_shar_activar(RKR_Light_Button* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_activar_i(o,v);
 }
 
@@ -216,14 +216,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ shar_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ shar_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  shar_activar->box(FL_UP_BOX);
   shar_activar->shortcut(0x30);
   shar_activar->color((Fl_Color)62);
   shar_activar->selection_color((Fl_Color)1);
+  shar_activar->labeltype(FL_NORMAL_LABEL);
+  shar_activar->labelfont(0);
   shar_activar->labelsize(10);
+  shar_activar->labelcolor(FL_FOREGROUND_COLOR);
   shar_activar->callback((Fl_Callback*)cb_shar_activar, (void*)(2));
+  shar_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   shar_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* shar_activar
+} // RKR_Light_Button* shar_activar
 { shar_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   shar_preset->down_box(FL_BORDER_BOX);
   shar_preset->selection_color(FL_FOREGROUND_COLOR);

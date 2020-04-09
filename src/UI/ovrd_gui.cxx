@@ -2,7 +2,7 @@
 
 #include "ovrd_gui.h"
 
-void OvrdGui::cb_ovrd_activar_i(Fl_Light_Button* o, void*) {
+void OvrdGui::cb_ovrd_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
 rgui->findpos(3,(int)o->value(),o);
 }
-void OvrdGui::cb_ovrd_activar(Fl_Light_Button* o, void* v) {
+void OvrdGui::cb_ovrd_activar(RKR_Light_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_activar_i(o,v);
 }
 
@@ -161,15 +161,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ ovrd_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ ovrd_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  ovrd_activar->box(FL_UP_BOX);
   ovrd_activar->shortcut(0x34);
   ovrd_activar->color((Fl_Color)62);
   ovrd_activar->selection_color((Fl_Color)1);
+  ovrd_activar->labeltype(FL_NORMAL_LABEL);
+  ovrd_activar->labelfont(0);
   ovrd_activar->labelsize(10);
+  ovrd_activar->labelcolor(FL_FOREGROUND_COLOR);
   ovrd_activar->callback((Fl_Callback*)cb_ovrd_activar, (void*)(2));
   ovrd_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   ovrd_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* ovrd_activar
+} // RKR_Light_Button* ovrd_activar
 { ovrd_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   ovrd_preset->down_box(FL_BORDER_BOX);
   ovrd_preset->selection_color(FL_FOREGROUND_COLOR);

@@ -2,7 +2,7 @@
 
 #include "vocoder_gui.h"
 
-void VocoderGui::cb_vo_activar_i(Fl_Light_Button* o, void*) {
+void VocoderGui::cb_vo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 vu_vu->value(-48);
 rgui->findpos(35,(int)o->value(),o);
 }
-void VocoderGui::cb_vo_activar(Fl_Light_Button* o, void* v) {
+void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_activar_i(o,v);
 }
 
@@ -132,15 +132,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ vo_activar = new Fl_Light_Button(6, 4, 34, 18, "On");
+{ vo_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
+  vo_activar->box(FL_UP_BOX);
   vo_activar->shortcut(0x35);
   vo_activar->color((Fl_Color)62);
   vo_activar->selection_color((Fl_Color)1);
+  vo_activar->labeltype(FL_NORMAL_LABEL);
+  vo_activar->labelfont(0);
   vo_activar->labelsize(10);
+  vo_activar->labelcolor(FL_FOREGROUND_COLOR);
   vo_activar->callback((Fl_Callback*)cb_vo_activar, (void*)(2));
   vo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   vo_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* vo_activar
+} // RKR_Light_Button* vo_activar
 { vo_preset = new Fl_Choice(79, 4, 76, 18, "Preset");
   vo_preset->down_box(FL_BORDER_BOX);
   vo_preset->selection_color(FL_FOREGROUND_COLOR);

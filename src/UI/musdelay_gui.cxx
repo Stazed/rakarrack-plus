@@ -2,7 +2,7 @@
 
 #include "musdelay_gui.h"
 
-void MusdelayGui::cb_musdelay_activar_i(Fl_Light_Button* o, void*) {
+void MusdelayGui::cb_musdelay_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
 rgui->findpos(15,(int)o->value(),o);
 }
-void MusdelayGui::cb_musdelay_activar(Fl_Light_Button* o, void* v) {
+void MusdelayGui::cb_musdelay_activar(RKR_Light_Button* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_activar_i(o,v);
 }
 
@@ -223,15 +223,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ musdelay_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ musdelay_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  musdelay_activar->box(FL_UP_BOX);
   musdelay_activar->shortcut(0x35);
   musdelay_activar->color((Fl_Color)62);
   musdelay_activar->selection_color((Fl_Color)1);
+  musdelay_activar->labeltype(FL_NORMAL_LABEL);
+  musdelay_activar->labelfont(0);
   musdelay_activar->labelsize(10);
+  musdelay_activar->labelcolor(FL_FOREGROUND_COLOR);
   musdelay_activar->callback((Fl_Callback*)cb_musdelay_activar, (void*)(2));
   musdelay_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   musdelay_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* musdelay_activar
+} // RKR_Light_Button* musdelay_activar
 { musdelay_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   musdelay_preset->down_box(FL_BORDER_BOX);
   musdelay_preset->selection_color(FL_FOREGROUND_COLOR);

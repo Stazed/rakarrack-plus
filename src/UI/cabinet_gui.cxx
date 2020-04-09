@@ -2,7 +2,7 @@
 
 #include "cabinet_gui.h"
 
-void CabinetGui::cb_Cabinet_activar_i(Fl_Light_Button* o, void*) {
+void CabinetGui::cb_Cabinet_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -12,7 +12,7 @@ void CabinetGui::cb_Cabinet_activar_i(Fl_Light_Button* o, void*) {
 rkr->Cabinet_Bypass=(int)o->value();
 rgui->findpos(12,(int)o->value(),o);
 }
-void CabinetGui::cb_Cabinet_activar(Fl_Light_Button* o, void* v) {
+void CabinetGui::cb_Cabinet_activar(RKR_Light_Button* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_activar_i(o,v);
 }
 
@@ -57,15 +57,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ Cabinet_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ Cabinet_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  Cabinet_activar->box(FL_UP_BOX);
   Cabinet_activar->shortcut(0x32);
   Cabinet_activar->color((Fl_Color)62);
   Cabinet_activar->selection_color((Fl_Color)1);
+  Cabinet_activar->labeltype(FL_NORMAL_LABEL);
+  Cabinet_activar->labelfont(0);
   Cabinet_activar->labelsize(10);
+  Cabinet_activar->labelcolor(FL_FOREGROUND_COLOR);
   Cabinet_activar->callback((Fl_Callback*)cb_Cabinet_activar, (void*)(2));
   Cabinet_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   Cabinet_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* Cabinet_activar
+} // RKR_Light_Button* Cabinet_activar
 { Cabinet_preset = new Fl_Choice(45, 45, 106, 18, "Preset");
   Cabinet_preset->down_box(FL_BORDER_BOX);
   Cabinet_preset->selection_color(FL_FOREGROUND_COLOR);

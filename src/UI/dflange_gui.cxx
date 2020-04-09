@@ -2,7 +2,7 @@
 
 #include "dflange_gui.h"
 
-void DflangeGui::cb_dflange_activar_i(Fl_Light_Button* o, void*) {
+void DflangeGui::cb_dflange_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
 rgui->findpos(20,(int)o->value(),o);
 }
-void DflangeGui::cb_dflange_activar(Fl_Light_Button* o, void* v) {
+void DflangeGui::cb_dflange_activar(RKR_Light_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_activar_i(o,v);
 }
 
@@ -219,15 +219,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ dflange_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ dflange_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  dflange_activar->box(FL_UP_BOX);
   dflange_activar->shortcut(0x38);
   dflange_activar->color((Fl_Color)62);
   dflange_activar->selection_color((Fl_Color)1);
+  dflange_activar->labeltype(FL_NORMAL_LABEL);
+  dflange_activar->labelfont(0);
   dflange_activar->labelsize(10);
+  dflange_activar->labelcolor(FL_FOREGROUND_COLOR);
   dflange_activar->callback((Fl_Callback*)cb_dflange_activar, (void*)(2));
   dflange_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   dflange_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* dflange_activar
+} // RKR_Light_Button* dflange_activar
 { dflange_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   dflange_preset->down_box(FL_BORDER_BOX);
   dflange_preset->selection_color(FL_FOREGROUND_COLOR);

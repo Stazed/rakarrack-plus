@@ -2,7 +2,7 @@
 
 #include "reverbtron_gui.h"
 
-void RevtronGui::cb_revtron_activar_i(Fl_Light_Button* o, void*) {
+void RevtronGui::cb_revtron_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -13,7 +13,7 @@ rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
 rgui->findpos(40,(int)o->value(),o);
 }
-void RevtronGui::cb_revtron_activar(Fl_Light_Button* o, void* v) {
+void RevtronGui::cb_revtron_activar(RKR_Light_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_activar_i(o,v);
 }
 
@@ -257,15 +257,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ revtron_activar = new Fl_Light_Button(6, 4, 34, 18, "On");
+{ revtron_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
+  revtron_activar->box(FL_UP_BOX);
   revtron_activar->shortcut(0x35);
   revtron_activar->color((Fl_Color)62);
   revtron_activar->selection_color((Fl_Color)1);
+  revtron_activar->labeltype(FL_NORMAL_LABEL);
+  revtron_activar->labelfont(0);
   revtron_activar->labelsize(10);
+  revtron_activar->labelcolor(FL_FOREGROUND_COLOR);
   revtron_activar->callback((Fl_Callback*)cb_revtron_activar, (void*)(2));
   revtron_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   revtron_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* revtron_activar
+} // RKR_Light_Button* revtron_activar
 { revtron_preset = new Fl_Choice(79, 4, 76, 18, "Preset");
   revtron_preset->down_box(FL_BORDER_BOX);
   revtron_preset->selection_color(FL_FOREGROUND_COLOR);

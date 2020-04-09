@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class ShuffleGui {
   user_data 1 open
   xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -21,8 +24,9 @@ widget_class ShuffleGui {
 rkr->Shuffle_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shuffle->cleanup();
-rgui->findpos(26,(int)o->value(),o);}
+rgui->findpos(26,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice shuffle_preset {
     label Preset
@@ -169,7 +173,7 @@ rkr->efx_Shuffle->changepar(4,(int)o->value());}
  rgui->getMIDIControl(236);
  return;
 }
-rkr->efx_Shuffle->changepar(9,(int)o->value());} selected
+rkr->efx_Shuffle->changepar(9,(int)o->value());}
     tooltip Width xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class SliderW
   }

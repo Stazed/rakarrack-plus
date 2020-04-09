@@ -3,11 +3,11 @@
 #ifndef har_gui_h
 #define har_gui_h
 #include <FL/Fl.H>
+#include "RKR_Light_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include "RKR_Light_Button.h"
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
 

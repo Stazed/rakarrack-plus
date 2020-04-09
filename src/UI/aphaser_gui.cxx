@@ -2,7 +2,7 @@
 
 #include "aphaser_gui.h"
 
-void AphaserGui::cb_aphaser_activar_i(Fl_Light_Button* o, void*) {
+void AphaserGui::cb_aphaser_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
 rgui->findpos(18,(int)o->value(),o);
 }
-void AphaserGui::cb_aphaser_activar(Fl_Light_Button* o, void* v) {
+void AphaserGui::cb_aphaser_activar(RKR_Light_Button* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_activar_i(o,v);
 }
 
@@ -191,15 +191,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ aphaser_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ aphaser_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  aphaser_activar->box(FL_UP_BOX);
   aphaser_activar->shortcut(0x37);
   aphaser_activar->color((Fl_Color)62);
   aphaser_activar->selection_color((Fl_Color)1);
+  aphaser_activar->labeltype(FL_NORMAL_LABEL);
+  aphaser_activar->labelfont(0);
   aphaser_activar->labelsize(10);
+  aphaser_activar->labelcolor(FL_FOREGROUND_COLOR);
   aphaser_activar->callback((Fl_Callback*)cb_aphaser_activar, (void*)(2));
   aphaser_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   aphaser_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* aphaser_activar
+} // RKR_Light_Button* aphaser_activar
 { aphaser_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   aphaser_preset->down_box(FL_BORDER_BOX);
   aphaser_preset->selection_color(FL_FOREGROUND_COLOR);

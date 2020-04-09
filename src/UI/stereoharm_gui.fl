@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class SharGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -24,8 +27,9 @@ rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 rgui->Chord(1);
-rgui->findpos(42,(int)o->value(),o);}
+rgui->findpos(42,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+    class RKR_Light_Button
   }
   Fl_Choice shar_preset {
     label Preset
@@ -188,7 +192,7 @@ rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 }}
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
   }
-  Fl_Box shar_chordname {selected
+  Fl_Box shar_chordname {
     xywh {56 132 98 21} labelsize 12 labelcolor 7
     code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
     class RKR_Box

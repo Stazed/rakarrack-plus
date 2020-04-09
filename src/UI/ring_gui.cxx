@@ -2,7 +2,7 @@
 
 #include "ring_gui.h"
 
-void RingGui::cb_ring_activar_i(Fl_Light_Button* o, void*) {
+void RingGui::cb_ring_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
 rgui->findpos(21,(int)o->value(),o);
 }
-void RingGui::cb_ring_activar(Fl_Light_Button* o, void* v) {
+void RingGui::cb_ring_activar(RKR_Light_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_activar_i(o,v);
 }
 
@@ -201,15 +201,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ ring_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ ring_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  ring_activar->box(FL_UP_BOX);
   ring_activar->shortcut(0x34);
   ring_activar->color((Fl_Color)62);
   ring_activar->selection_color((Fl_Color)1);
+  ring_activar->labeltype(FL_NORMAL_LABEL);
+  ring_activar->labelfont(0);
   ring_activar->labelsize(10);
+  ring_activar->labelcolor(FL_FOREGROUND_COLOR);
   ring_activar->callback((Fl_Callback*)cb_ring_activar, (void*)(2));
   ring_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   ring_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* ring_activar
+} // RKR_Light_Button* ring_activar
 { ring_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   ring_preset->down_box(FL_BORDER_BOX);
   ring_preset->selection_color(FL_FOREGROUND_COLOR);

@@ -2,7 +2,7 @@
 
 #include "shelf_gui.h"
 
-void ShelfGui::cb_shelf_activar_i(Fl_Light_Button* o, void*) {
+void ShelfGui::cb_shelf_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_ShelfBoost->cleanup();
 rgui->findpos(34,(int)o->value(),o);
 }
-void ShelfGui::cb_shelf_activar(Fl_Light_Button* o, void* v) {
+void ShelfGui::cb_shelf_activar(RKR_Light_Button* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_activar_i(o,v);
 }
 
@@ -100,15 +100,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ shelf_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ shelf_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  shelf_activar->box(FL_UP_BOX);
   shelf_activar->shortcut(0x31);
   shelf_activar->color((Fl_Color)62);
   shelf_activar->selection_color((Fl_Color)1);
+  shelf_activar->labeltype(FL_NORMAL_LABEL);
+  shelf_activar->labelfont(0);
   shelf_activar->labelsize(10);
+  shelf_activar->labelcolor(FL_FOREGROUND_COLOR);
   shelf_activar->callback((Fl_Callback*)cb_shelf_activar, (void*)(2));
   shelf_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   shelf_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* shelf_activar
+} // RKR_Light_Button* shelf_activar
 { shelf_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   shelf_preset->down_box(FL_BORDER_BOX);
   shelf_preset->selection_color(FL_FOREGROUND_COLOR);

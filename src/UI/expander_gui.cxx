@@ -2,7 +2,7 @@
 
 #include "expander_gui.h"
 
-void ExpanderGui::cb_expander_activar_i(Fl_Light_Button* o, void*) {
+void ExpanderGui::cb_expander_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -12,7 +12,7 @@ void ExpanderGui::cb_expander_activar_i(Fl_Light_Button* o, void*) {
 rkr->Expander_Bypass=(int)o->value();
 rgui->findpos(25,(int)o->value(),o);
 }
-void ExpanderGui::cb_expander_activar(Fl_Light_Button* o, void* v) {
+void ExpanderGui::cb_expander_activar(RKR_Light_Button* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_activar_i(o,v);
 }
 
@@ -129,15 +129,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ expander_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ expander_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  expander_activar->box(FL_UP_BOX);
   expander_activar->shortcut(0x32);
   expander_activar->color((Fl_Color)62);
   expander_activar->selection_color((Fl_Color)1);
+  expander_activar->labeltype(FL_NORMAL_LABEL);
+  expander_activar->labelfont(0);
   expander_activar->labelsize(10);
+  expander_activar->labelcolor(FL_FOREGROUND_COLOR);
   expander_activar->callback((Fl_Callback*)cb_expander_activar, (void*)(2));
   expander_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   expander_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* expander_activar
+} // RKR_Light_Button* expander_activar
 { expander_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   expander_preset->down_box(FL_BORDER_BOX);
   expander_preset->selection_color(FL_FOREGROUND_COLOR);

@@ -2,6 +2,9 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} VibeGui {
   user_data 1 open
   xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -22,8 +25,9 @@ widget_class {\#include "common_gui_menu.h"} VibeGui {
 rkr->Vibe_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Vibe->cleanup();
-rgui->findpos(45,(int)o->value(),o);}
+rgui->findpos(45,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
+    class RKR_Light_Button
   }
   Fl_Choice vibe_preset {
     label Preset
@@ -40,7 +44,7 @@ vibe_stdf->value(rkr->efx_Vibe->getpar(4));
 vibe_pan->value(rkr->efx_Vibe->getpar(5)-64);
 vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
 vibe_LR->value(rkr->efx_Vibe->getpar(9));
-vibe_stereo->value(rkr->efx_Vibe->getpar(10));} open
+vibe_stereo->value(rkr->efx_Vibe->getpar(10));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -76,7 +80,7 @@ vibe_stereo->value(rkr->efx_Vibe->getpar(10));} open
       xywh {0 0 36 21} labelsize 10
     }
     MenuItem {} {
-      label {Vibe 9} selected
+      label {Vibe 9}
       xywh {10 10 36 21} labelsize 10
     }
   }

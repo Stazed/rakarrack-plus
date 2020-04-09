@@ -2,7 +2,7 @@
 
 #include "flanger_gui.h"
 
-void FlangerGui::cb_flanger_activar_i(Fl_Light_Button* o, void*) {
+void FlangerGui::cb_flanger_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
 rgui->findpos(7,(int)o->value(),o);
 }
-void FlangerGui::cb_flanger_activar(Fl_Light_Button* o, void* v) {
+void FlangerGui::cb_flanger_activar(RKR_Light_Button* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_activar_i(o,v);
 }
 
@@ -182,15 +182,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ flanger_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ flanger_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  flanger_activar->box(FL_UP_BOX);
   flanger_activar->shortcut(0x38);
   flanger_activar->color((Fl_Color)62);
   flanger_activar->selection_color((Fl_Color)1);
+  flanger_activar->labeltype(FL_NORMAL_LABEL);
+  flanger_activar->labelfont(0);
   flanger_activar->labelsize(10);
+  flanger_activar->labelcolor(FL_FOREGROUND_COLOR);
   flanger_activar->callback((Fl_Callback*)cb_flanger_activar, (void*)(2));
   flanger_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   flanger_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* flanger_activar
+} // RKR_Light_Button* flanger_activar
 { flanger_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   flanger_preset->down_box(FL_BORDER_BOX);
   flanger_preset->selection_color(FL_FOREGROUND_COLOR);

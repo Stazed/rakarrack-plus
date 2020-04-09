@@ -3,11 +3,11 @@
 #ifndef midiconv_gui_h
 #define midiconv_gui_h
 #include <FL/Fl.H>
+#include "RKR_Light_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include <FL/Fl_Light_Button.H>
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Counter.H>
 #include <FL/Fl_Check_Button.H>
@@ -16,10 +16,10 @@
 class MidiGui : public Fl_Group {
 public:
   MidiGui(int X, int Y, int W, int H, const char *L = 0);
-  Fl_Light_Button *midi_activar;
+  RKR_Light_Button *midi_activar;
 private:
-  inline void cb_midi_activar_i(Fl_Light_Button*, void*);
-  static void cb_midi_activar(Fl_Light_Button*, void*);
+  inline void cb_midi_activar_i(RKR_Light_Button*, void*);
+  static void cb_midi_activar(RKR_Light_Button*, void*);
 public:
   Fl_Choice *MIDIOctave;
 private:

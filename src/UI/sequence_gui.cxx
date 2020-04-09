@@ -2,7 +2,7 @@
 
 #include "sequence_gui.h"
 
-void SequenceGui::cb_seq_activar_i(Fl_Light_Button* o, void*) {
+void SequenceGui::cb_seq_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
 rgui->findpos(37,(int)o->value(),o);
 }
-void SequenceGui::cb_seq_activar(Fl_Light_Button* o, void* v) {
+void SequenceGui::cb_seq_activar(RKR_Light_Button* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_activar_i(o,v);
 }
 
@@ -252,15 +252,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ seq_activar = new Fl_Light_Button(5, 4, 34, 16, "On");
+{ seq_activar = new RKR_Light_Button(5, 4, 34, 16, "On");
+  seq_activar->box(FL_UP_BOX);
   seq_activar->shortcut(0x36);
   seq_activar->color((Fl_Color)62);
   seq_activar->selection_color((Fl_Color)1);
+  seq_activar->labeltype(FL_NORMAL_LABEL);
+  seq_activar->labelfont(0);
   seq_activar->labelsize(10);
+  seq_activar->labelcolor(FL_FOREGROUND_COLOR);
   seq_activar->callback((Fl_Callback*)cb_seq_activar, (void*)(2));
   seq_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   seq_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* seq_activar
+} // RKR_Light_Button* seq_activar
 { seq_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   seq_preset->down_box(FL_BORDER_BOX);
   seq_preset->selection_color(FL_FOREGROUND_COLOR);
