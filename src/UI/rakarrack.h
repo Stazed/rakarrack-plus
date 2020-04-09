@@ -5,6 +5,7 @@
 #include <FL/Fl.H>
 #include "../process.h"
 #include "../global.h"
+#include "RKR_Entry_Input.h"
 #include "sliderW.h"
 #include "newvum.h"
 #include "tunerbar.h"
@@ -136,7 +137,6 @@ class TrigWindowGui; // forward declaration
 #include <FL/Fl_Group.H>
 #include "midiconv_gui.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Input.H>
 #include <FL/Fl_Counter.H>
 #include "analyzer.h"
 #include <FL/Fl_Value_Input.H>
@@ -453,10 +453,10 @@ private:
   inline void cb_B_preset_i(RKR_Button*, void*);
   static void cb_B_preset(RKR_Button*, void*);
 public:
-  Fl_Input *WPreset_Name;
+  RKR_Entry_Input *WPreset_Name;
 private:
-  inline void cb_WPreset_Name_i(Fl_Input*, void*);
-  static void cb_WPreset_Name(Fl_Input*, void*);
+  inline void cb_WPreset_Name_i(RKR_Entry_Input*, void*);
+  static void cb_WPreset_Name(RKR_Entry_Input*, void*);
 public:
   Fl_Counter *Preset_Counter;
 private:

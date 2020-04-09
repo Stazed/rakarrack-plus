@@ -8,6 +8,9 @@ decl {\#include "../process.h"} {public local
 decl {\#include "../global.h"} {public global
 }
 
+decl {\#include "RKR_Entry_Input.h"} {public global
+}
+
 decl {\#include "sliderW.h"} {public global
 }
 
@@ -23,7 +26,7 @@ decl {\#include "RKR_Box.h"} {public global
 decl {\#include "RKR_Button.h"} {public global
 }
 
-decl {\#include "RKR_Light_Button.h"} {selected public global
+decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
@@ -1363,9 +1366,11 @@ BankWindow->hide();}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
-          callback {strcpy(rkr->Preset_Name,o->value());}
+          callback {strcpy(rkr->Preset_Name,o->value());} selected
           xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
-          code0 {o->maximum_size(22);}
+          code0 {o->m_start_font_offset = 14; // (default 10) 10 - 24 = 14}
+          code1 {o->maximum_size(22);}
+          class RKR_Entry_Input
         }
         Fl_Counter Preset_Counter {
           label Preset
