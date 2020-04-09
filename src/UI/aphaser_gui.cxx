@@ -171,17 +171,17 @@ void AphaserGui::cb_aphaser_stages(Fl_Counter* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stages_i(o,v);
 }
 
-void AphaserGui::cb_aphaser_subs_i(Fl_Check_Button* o, void*) {
+void AphaserGui::cb_aphaser_subs_i(RKR_Check_Button* o, void*) {
   rkr->efx_APhaser->changepar(10,(int)o->value());
 }
-void AphaserGui::cb_aphaser_subs(Fl_Check_Button* o, void* v) {
+void AphaserGui::cb_aphaser_subs(RKR_Check_Button* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_subs_i(o,v);
 }
 
-void AphaserGui::cb_aphaser_hyper_i(Fl_Check_Button* o, void*) {
+void AphaserGui::cb_aphaser_hyper_i(RKR_Check_Button* o, void*) {
   rkr->efx_APhaser->changepar(12,(int)o->value());
 }
-void AphaserGui::cb_aphaser_hyper(Fl_Check_Button* o, void* v) {
+void AphaserGui::cb_aphaser_hyper(RKR_Check_Button* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_hyper_i(o,v);
 }
 AphaserGui::AphaserGui(int X, int Y, int W, int H, const char *L)
@@ -386,18 +386,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_stages->callback((Fl_Callback*)cb_aphaser_stages);
   aphaser_stages->align(Fl_Align(FL_ALIGN_LEFT));
 } // Fl_Counter* aphaser_stages
-{ aphaser_subs = new Fl_Check_Button(18, 165, 64, 15, "Subtract");
+{ aphaser_subs = new RKR_Check_Button(18, 165, 64, 15, "Subtract");
+  aphaser_subs->box(FL_NO_BOX);
   aphaser_subs->down_box(FL_BORDER_BOX);
+  aphaser_subs->color(FL_BACKGROUND_COLOR);
+  aphaser_subs->selection_color(FL_FOREGROUND_COLOR);
+  aphaser_subs->labeltype(FL_NORMAL_LABEL);
+  aphaser_subs->labelfont(0);
   aphaser_subs->labelsize(10);
   aphaser_subs->labelcolor(FL_BACKGROUND2_COLOR);
   aphaser_subs->callback((Fl_Callback*)cb_aphaser_subs, (void*)(2));
-} // Fl_Check_Button* aphaser_subs
-{ aphaser_hyper = new Fl_Check_Button(90, 165, 53, 15, "Hyper");
+  aphaser_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  aphaser_subs->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* aphaser_subs
+{ aphaser_hyper = new RKR_Check_Button(90, 165, 53, 15, "Hyper");
+  aphaser_hyper->box(FL_NO_BOX);
   aphaser_hyper->down_box(FL_BORDER_BOX);
+  aphaser_hyper->color(FL_BACKGROUND_COLOR);
+  aphaser_hyper->selection_color(FL_FOREGROUND_COLOR);
+  aphaser_hyper->labeltype(FL_NORMAL_LABEL);
+  aphaser_hyper->labelfont(0);
   aphaser_hyper->labelsize(10);
   aphaser_hyper->labelcolor(FL_BACKGROUND2_COLOR);
   aphaser_hyper->callback((Fl_Callback*)cb_aphaser_hyper, (void*)(2));
-} // Fl_Check_Button* aphaser_hyper
+  aphaser_hyper->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  aphaser_hyper->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* aphaser_hyper
 position(X, Y);
 end();
 }

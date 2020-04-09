@@ -4,6 +4,7 @@
 #define aphaser_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
@@ -11,7 +12,6 @@
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Counter.H>
-#include <FL/Fl_Check_Button.H>
 
 class AphaserGui : public Fl_Group {
 public:
@@ -82,15 +82,15 @@ private:
   inline void cb_aphaser_stages_i(Fl_Counter*, void*);
   static void cb_aphaser_stages(Fl_Counter*, void*);
 public:
-  Fl_Check_Button *aphaser_subs;
+  RKR_Check_Button *aphaser_subs;
 private:
-  inline void cb_aphaser_subs_i(Fl_Check_Button*, void*);
-  static void cb_aphaser_subs(Fl_Check_Button*, void*);
+  inline void cb_aphaser_subs_i(RKR_Check_Button*, void*);
+  static void cb_aphaser_subs(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *aphaser_hyper;
+  RKR_Check_Button *aphaser_hyper;
 private:
-  inline void cb_aphaser_hyper_i(Fl_Check_Button*, void*);
-  static void cb_aphaser_hyper(Fl_Check_Button*, void*);
+  inline void cb_aphaser_hyper_i(RKR_Check_Button*, void*);
+  static void cb_aphaser_hyper(RKR_Check_Button*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif
