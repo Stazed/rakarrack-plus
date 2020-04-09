@@ -4,12 +4,12 @@
 #define shifter_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class ShifterGui : public Fl_Group {
 public:
@@ -60,10 +60,10 @@ private:
   inline void cb_shifter_thre_i(SliderW*, void*);
   static void cb_shifter_thre(SliderW*, void*);
 public:
-  Fl_Check_Button *shifter_ud;
+  RKR_Check_Button *shifter_ud;
 private:
-  inline void cb_shifter_ud_i(Fl_Check_Button*, void*);
-  static void cb_shifter_ud(Fl_Check_Button*, void*);
+  inline void cb_shifter_ud_i(RKR_Check_Button*, void*);
+  static void cb_shifter_ud(RKR_Check_Button*, void*);
 public:
   SliderW *shifter_whammy;
 private:

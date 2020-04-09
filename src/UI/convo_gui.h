@@ -4,12 +4,12 @@
 #define convo_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class ConvoGui : public Fl_Group {
 public:
@@ -55,15 +55,15 @@ private:
   inline void cb_convo_length_i(SliderW*, void*);
   static void cb_convo_length(SliderW*, void*);
 public:
-  Fl_Check_Button *convo_user;
+  RKR_Check_Button *convo_user;
 private:
-  inline void cb_convo_user_i(Fl_Check_Button*, void*);
-  static void cb_convo_user(Fl_Check_Button*, void*);
+  inline void cb_convo_user_i(RKR_Check_Button*, void*);
+  static void cb_convo_user(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *convo_safe;
+  RKR_Check_Button *convo_safe;
 private:
-  inline void cb_convo_safe_i(Fl_Check_Button*, void*);
-  static void cb_convo_safe(Fl_Check_Button*, void*);
+  inline void cb_convo_safe_i(RKR_Check_Button*, void*);
+  static void cb_convo_safe(RKR_Check_Button*, void*);
 public:
   RKR_Button *B_wav;
 private:

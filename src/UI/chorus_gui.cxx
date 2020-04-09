@@ -102,17 +102,17 @@ void ChorusGui::cb_chorus_lfotype(Fl_Choice* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_lfotype_i(o,v);
 }
 
-void ChorusGui::cb_chorus_subs_i(Fl_Check_Button* o, void*) {
+void ChorusGui::cb_chorus_subs_i(RKR_Check_Button* o, void*) {
   rkr->efx_Chorus->changepar(11,(int)o->value());
 }
-void ChorusGui::cb_chorus_subs(Fl_Check_Button* o, void* v) {
+void ChorusGui::cb_chorus_subs(RKR_Check_Button* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_subs_i(o,v);
 }
 
-void ChorusGui::cb_chorus_awesome_i(Fl_Check_Button* o, void*) {
+void ChorusGui::cb_chorus_awesome_i(RKR_Check_Button* o, void*) {
   rkr->efx_Chorus->changepar(12,(int)o->value());
 }
-void ChorusGui::cb_chorus_awesome(Fl_Check_Button* o, void* v) {
+void ChorusGui::cb_chorus_awesome(RKR_Check_Button* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_awesome_i(o,v);
 }
 
@@ -283,18 +283,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype, (void*)(12));
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* chorus_lfotype
-{ chorus_subs = new Fl_Check_Button(25, 94, 62, 15, "Subtract");
+{ chorus_subs = new RKR_Check_Button(25, 94, 62, 15, "Subtract");
+  chorus_subs->box(FL_NO_BOX);
   chorus_subs->down_box(FL_BORDER_BOX);
+  chorus_subs->color(FL_BACKGROUND_COLOR);
+  chorus_subs->selection_color(FL_FOREGROUND_COLOR);
+  chorus_subs->labeltype(FL_NORMAL_LABEL);
+  chorus_subs->labelfont(0);
   chorus_subs->labelsize(10);
   chorus_subs->labelcolor(FL_BACKGROUND2_COLOR);
   chorus_subs->callback((Fl_Callback*)cb_chorus_subs, (void*)(2));
-} // Fl_Check_Button* chorus_subs
-{ chorus_awesome = new Fl_Check_Button(88, 95, 56, 15, "Intense");
+  chorus_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  chorus_subs->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* chorus_subs
+{ chorus_awesome = new RKR_Check_Button(88, 95, 56, 15, "Intense");
+  chorus_awesome->box(FL_NO_BOX);
   chorus_awesome->down_box(FL_BORDER_BOX);
+  chorus_awesome->color(FL_BACKGROUND_COLOR);
+  chorus_awesome->selection_color(FL_FOREGROUND_COLOR);
+  chorus_awesome->labeltype(FL_NORMAL_LABEL);
+  chorus_awesome->labelfont(0);
   chorus_awesome->labelsize(10);
   chorus_awesome->labelcolor(FL_BACKGROUND2_COLOR);
   chorus_awesome->callback((Fl_Callback*)cb_chorus_awesome, (void*)(2));
-} // Fl_Check_Button* chorus_awesome
+  chorus_awesome->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  chorus_awesome->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* chorus_awesome
 { chorus_stdf = new SliderW(56, 115, 100, 10, "Stereo Df");
   chorus_stdf->type(5);
   chorus_stdf->box(FL_FLAT_BOX);

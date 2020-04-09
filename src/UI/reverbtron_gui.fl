@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class RevtronGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -23,7 +26,7 @@ widget_class RevtronGui {
 }
 rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-rgui->findpos(40,(int)o->value(),o);} selected
+rgui->findpos(40,(int)o->value(),o);}
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -215,26 +218,30 @@ rkr->efx_Reverbtron->changepar(14,(int)o->value());}
     user_data 2
     callback {rkr->efx_Reverbtron->changepar(13,(int)o->value());}
     xywh {2 151 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button revtron_es {
     label ES
     user_data 2
     callback {rkr->efx_Reverbtron->changepar(12,(int)o->value());}
     xywh {2 164 29 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button revtron_safe {
     label Safe
     user_data 2
     callback {rkr->efx_Reverbtron->changepar(2,(int)o->value());}
     xywh {30 154 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button revtron_user {
     label User
     user_data 2
     callback {rkr->efx_Reverbtron->changepar(4,(int)o->value());
 
-if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
+if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();} selected
     xywh {67 154 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Button B_rvb {
     label Browse

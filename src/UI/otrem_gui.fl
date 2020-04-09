@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} OtremGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -25,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} OtremGui {
 rkr->Opticaltrem_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
-rgui->findpos(44,(int)o->value(),o);} selected
+rgui->findpos(44,(int)o->value(),o);}
     xywh {5 6 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -136,8 +139,9 @@ rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));}
   Fl_Check_Button otrem_invert {
     label Invert
     user_data 2
-    callback {rkr->efx_Opticaltrem->changepar(6,(int)o->value())}
+    callback {rkr->efx_Opticaltrem->changepar(6,(int)o->value())} selected
     tooltip {If checked it behaves more like tube preamp trem. If unchecked it behaves like a stompbox Opto Trem} xywh {49 164 73 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
   }

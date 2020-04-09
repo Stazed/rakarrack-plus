@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class SharGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -27,7 +30,7 @@ rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 rgui->Chord(1);
-rgui->findpos(42,(int)o->value(),o);} selected
+rgui->findpos(42,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -172,6 +175,7 @@ rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 }}
     xywh {9 129 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
+    class RKR_Check_Button
   }
   Fl_Check_Button shar_SELECT {
     label SELECT
@@ -189,8 +193,9 @@ if(!(int)o->value())
 {
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
-}}
+}} selected
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
+    class RKR_Check_Button
   }
   Fl_Box shar_chordname {
     xywh {56 132 98 21} labelsize 12 labelcolor 7

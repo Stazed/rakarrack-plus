@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class ShifterGui {
   user_data 1 open
   xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -24,7 +27,7 @@ widget_class ShifterGui {
 rkr->Shifter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
-rgui->findpos(38,(int)o->value(),o);} selected
+rgui->findpos(38,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -153,8 +156,9 @@ rkr->efx_Shifter->changepar(5,(int)o->value());}
   Fl_Check_Button shifter_ud {
     label Down
     user_data 2
-    callback {rkr->efx_Shifter->changepar(7,(int)o->value())}
+    callback {rkr->efx_Shifter->changepar(7,(int)o->value())} selected
     xywh {51 128 49 14} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider shifter_whammy {
     label Whammy

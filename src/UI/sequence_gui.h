@@ -4,12 +4,12 @@
 #define sequence_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class SequenceGui : public Fl_Group {
 public:
@@ -85,10 +85,10 @@ private:
   inline void cb_seq_stdf_i(SliderW*, void*);
   static void cb_seq_stdf(SliderW*, void*);
 public:
-  Fl_Check_Button *seq_amp;
+  RKR_Check_Button *seq_amp;
 private:
-  inline void cb_seq_amp_i(Fl_Check_Button*, void*);
-  static void cb_seq_amp(Fl_Check_Button*, void*);
+  inline void cb_seq_amp_i(RKR_Check_Button*, void*);
+  static void cb_seq_amp(RKR_Check_Button*, void*);
 public:
   Fl_Choice *seq_mode;
 private:

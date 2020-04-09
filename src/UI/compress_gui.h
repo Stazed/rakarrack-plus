@@ -4,12 +4,12 @@
 #define compress_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class CompressGui : public Fl_Group {
 public:
@@ -55,19 +55,19 @@ private:
   inline void cb_compress_output_i(SliderW*, void*);
   static void cb_compress_output(SliderW*, void*);
 public:
-  Fl_Check_Button *Auto_Output;
+  RKR_Check_Button *Auto_Output;
 private:
-  inline void cb_Auto_Output_i(Fl_Check_Button*, void*);
-  static void cb_Auto_Output(Fl_Check_Button*, void*);
+  inline void cb_Auto_Output_i(RKR_Check_Button*, void*);
+  static void cb_Auto_Output(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *Stereo;
+  RKR_Check_Button *Stereo;
 private:
-  inline void cb_Stereo_i(Fl_Check_Button*, void*);
-  static void cb_Stereo(Fl_Check_Button*, void*);
+  inline void cb_Stereo_i(RKR_Check_Button*, void*);
+  static void cb_Stereo(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *Peak;
+  RKR_Check_Button *Peak;
 private:
-  inline void cb_Peak_i(Fl_Check_Button*, void*);
-  static void cb_Peak(Fl_Check_Button*, void*);
+  inline void cb_Peak_i(RKR_Check_Button*, void*);
+  static void cb_Peak(RKR_Check_Button*, void*);
 };
 #endif

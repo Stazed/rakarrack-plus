@@ -4,12 +4,12 @@
 #define har_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class HarGui : public Fl_Group {
 public:
@@ -60,15 +60,15 @@ private:
   inline void cb_har_q1_i(SliderW*, void*);
   static void cb_har_q1(SliderW*, void*);
 public:
-  Fl_Check_Button *har_MIDI;
+  RKR_Check_Button *har_MIDI;
 private:
-  inline void cb_har_MIDI_i(Fl_Check_Button*, void*);
-  static void cb_har_MIDI(Fl_Check_Button*, void*);
+  inline void cb_har_MIDI_i(RKR_Check_Button*, void*);
+  static void cb_har_MIDI(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *har_SELECT;
+  RKR_Check_Button *har_SELECT;
 private:
-  inline void cb_har_SELECT_i(Fl_Check_Button*, void*);
-  static void cb_har_SELECT(Fl_Check_Button*, void*);
+  inline void cb_har_SELECT_i(RKR_Check_Button*, void*);
+  static void cb_har_SELECT(RKR_Check_Button*, void*);
 public:
   RKR_Box *har_chordname;
   SliderW *har_note;

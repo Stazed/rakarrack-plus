@@ -166,10 +166,10 @@ void ShuffleGui::cb_shuffle_Q(SliderW* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_Q_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_E_i(Fl_Check_Button* o, void*) {
+void ShuffleGui::cb_shuffle_E_i(RKR_Check_Button* o, void*) {
   rkr->efx_Shuffle->changepar(10,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_E(Fl_Check_Button* o, void* v) {
+void ShuffleGui::cb_shuffle_E(RKR_Check_Button* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_E_i(o,v);
 }
 ShuffleGui::ShuffleGui(int X, int Y, int W, int H, const char *L)
@@ -378,13 +378,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_Q->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_Q->when(FL_WHEN_CHANGED);
 } // SliderW* shuffle_Q
-{ shuffle_E = new Fl_Check_Button(2, 167, 40, 15, "Rev");
+{ shuffle_E = new RKR_Check_Button(2, 167, 40, 15, "Rev");
   shuffle_E->tooltip("Filtered Band - (Uncheck = Mid: Check = Side)");
+  shuffle_E->box(FL_NO_BOX);
   shuffle_E->down_box(FL_BORDER_BOX);
+  shuffle_E->color(FL_BACKGROUND_COLOR);
+  shuffle_E->selection_color(FL_FOREGROUND_COLOR);
+  shuffle_E->labeltype(FL_NORMAL_LABEL);
+  shuffle_E->labelfont(0);
   shuffle_E->labelsize(10);
   shuffle_E->labelcolor(FL_BACKGROUND2_COLOR);
   shuffle_E->callback((Fl_Callback*)cb_shuffle_E, (void*)(2));
-} // Fl_Check_Button* shuffle_E
+  shuffle_E->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  shuffle_E->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* shuffle_E
 position(X, Y);
 end();
 }

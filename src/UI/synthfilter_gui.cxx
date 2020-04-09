@@ -109,10 +109,10 @@ void SynthfilterGui::cb_synthfilter_lfotype(Fl_Choice* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_lfotype_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_subs_i(Fl_Check_Button* o, void*) {
+void SynthfilterGui::cb_synthfilter_subs_i(RKR_Check_Button* o, void*) {
   rkr->efx_Synthfilter->changepar(10,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_subs(Fl_Check_Button* o, void* v) {
+void SynthfilterGui::cb_synthfilter_subs(RKR_Check_Button* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_subs_i(o,v);
 }
 
@@ -332,14 +332,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* synthfilter_lfotype
-{ synthfilter_subs = new Fl_Check_Button(143, 63, 46, 15, "Sub");
+{ synthfilter_subs = new RKR_Check_Button(143, 63, 46, 15, "Sub");
   synthfilter_subs->tooltip("Subtract - Make output of filter negative");
+  synthfilter_subs->box(FL_NO_BOX);
   synthfilter_subs->down_box(FL_BORDER_BOX);
+  synthfilter_subs->color(FL_BACKGROUND_COLOR);
+  synthfilter_subs->selection_color(FL_FOREGROUND_COLOR);
+  synthfilter_subs->labeltype(FL_NORMAL_LABEL);
+  synthfilter_subs->labelfont(0);
   synthfilter_subs->labelsize(10);
   synthfilter_subs->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
   synthfilter_subs->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Check_Button* synthfilter_subs
+  synthfilter_subs->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* synthfilter_subs
 { synthfilter_stdf = new SliderW(56, 80, 100, 10, "Stereo Df");
   synthfilter_stdf->tooltip("LFO L/R Delay");
   synthfilter_stdf->type(5);

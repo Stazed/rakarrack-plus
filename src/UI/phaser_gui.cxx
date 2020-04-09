@@ -104,10 +104,10 @@ void PhaserGui::cb_phaser_lfotype(Fl_Choice* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_lfotype_i(o,v);
 }
 
-void PhaserGui::cb_phaser_subs_i(Fl_Check_Button* o, void*) {
+void PhaserGui::cb_phaser_subs_i(RKR_Check_Button* o, void*) {
   rkr->efx_Phaser->changepar(10,(int)o->value());
 }
-void PhaserGui::cb_phaser_subs(Fl_Check_Button* o, void* v) {
+void PhaserGui::cb_phaser_subs(RKR_Check_Button* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_subs_i(o,v);
 }
 
@@ -284,12 +284,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   phaser_lfotype->callback((Fl_Callback*)cb_phaser_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* phaser_lfotype
-{ phaser_subs = new Fl_Check_Button(40, 94, 65, 15, "Subtract");
+{ phaser_subs = new RKR_Check_Button(40, 94, 65, 15, "Subtract");
+  phaser_subs->box(FL_NO_BOX);
   phaser_subs->down_box(FL_BORDER_BOX);
+  phaser_subs->color(FL_BACKGROUND_COLOR);
+  phaser_subs->selection_color(FL_FOREGROUND_COLOR);
+  phaser_subs->labeltype(FL_NORMAL_LABEL);
+  phaser_subs->labelfont(0);
   phaser_subs->labelsize(10);
   phaser_subs->labelcolor(FL_BACKGROUND2_COLOR);
   phaser_subs->callback((Fl_Callback*)cb_phaser_subs, (void*)(2));
-} // Fl_Check_Button* phaser_subs
+  phaser_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  phaser_subs->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* phaser_subs
 { phaser_phase = new SliderW(56, 110, 100, 10, "Phase");
   phaser_phase->type(5);
   phaser_phase->box(FL_FLAT_BOX);

@@ -116,19 +116,19 @@ void ConvoGui::cb_convo_length(SliderW* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_length_i(o,v);
 }
 
-void ConvoGui::cb_convo_user_i(Fl_Check_Button* o, void*) {
+void ConvoGui::cb_convo_user_i(RKR_Check_Button* o, void*) {
   rkr->efx_Convol->changepar(4,(int)o->value());
 
 if((int)o->value())B_wav->activate(); else B_wav->deactivate();
 }
-void ConvoGui::cb_convo_user(Fl_Check_Button* o, void* v) {
+void ConvoGui::cb_convo_user(RKR_Check_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_user_i(o,v);
 }
 
-void ConvoGui::cb_convo_safe_i(Fl_Check_Button* o, void*) {
+void ConvoGui::cb_convo_safe_i(RKR_Check_Button* o, void*) {
   rkr->efx_Convol->changepar(2,(int)o->value());
 }
-void ConvoGui::cb_convo_safe(Fl_Check_Button* o, void* v) {
+void ConvoGui::cb_convo_safe(RKR_Check_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_safe_i(o,v);
 }
 
@@ -294,18 +294,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_length->align(Fl_Align(FL_ALIGN_LEFT));
   convo_length->when(FL_WHEN_RELEASE);
 } // SliderW* convo_length
-{ convo_user = new Fl_Check_Button(110, 126, 43, 15, "User");
+{ convo_user = new RKR_Check_Button(110, 126, 43, 15, "User");
+  convo_user->box(FL_NO_BOX);
   convo_user->down_box(FL_BORDER_BOX);
+  convo_user->color(FL_BACKGROUND_COLOR);
+  convo_user->selection_color(FL_FOREGROUND_COLOR);
+  convo_user->labeltype(FL_NORMAL_LABEL);
+  convo_user->labelfont(0);
   convo_user->labelsize(10);
   convo_user->labelcolor(FL_BACKGROUND2_COLOR);
   convo_user->callback((Fl_Callback*)cb_convo_user, (void*)(2));
-} // Fl_Check_Button* convo_user
-{ convo_safe = new Fl_Check_Button(19, 141, 73, 15, "Safe Mode");
+  convo_user->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  convo_user->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* convo_user
+{ convo_safe = new RKR_Check_Button(19, 141, 73, 15, "Safe Mode");
+  convo_safe->box(FL_NO_BOX);
   convo_safe->down_box(FL_BORDER_BOX);
+  convo_safe->color(FL_BACKGROUND_COLOR);
+  convo_safe->selection_color(FL_FOREGROUND_COLOR);
+  convo_safe->labeltype(FL_NORMAL_LABEL);
+  convo_safe->labelfont(0);
   convo_safe->labelsize(10);
   convo_safe->labelcolor(FL_BACKGROUND2_COLOR);
   convo_safe->callback((Fl_Callback*)cb_convo_safe, (void*)(2));
-} // Fl_Check_Button* convo_safe
+  convo_safe->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  convo_safe->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* convo_safe
 { B_wav = new RKR_Button(106, 143, 46, 12, "Browse");
   B_wav->box(FL_UP_BOX);
   B_wav->color(FL_BACKGROUND_COLOR);

@@ -139,7 +139,7 @@ void WhawhaGui::cb_WhaWha_ampsns(SliderW* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_ampsns_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_ampsnsinv_i(Fl_Check_Button* o, void*) {
+void WhawhaGui::cb_WhaWha_ampsnsinv_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(112);
@@ -147,7 +147,7 @@ void WhawhaGui::cb_WhaWha_ampsnsinv_i(Fl_Check_Button* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(8,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_ampsnsinv(Fl_Check_Button* o, void* v) {
+void WhawhaGui::cb_WhaWha_ampsnsinv(RKR_Check_Button* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_ampsnsinv_i(o,v);
 }
 
@@ -335,13 +335,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_ampsns->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_ampsns
-{ WhaWha_ampsnsinv = new Fl_Check_Button(8, 145, 70, 15, "A.S.I.");
+{ WhaWha_ampsnsinv = new RKR_Check_Button(8, 145, 70, 15, "A.S.I.");
   WhaWha_ampsnsinv->tooltip("Amplitude Sensitivity Inverse");
+  WhaWha_ampsnsinv->box(FL_NO_BOX);
   WhaWha_ampsnsinv->down_box(FL_BORDER_BOX);
+  WhaWha_ampsnsinv->color(FL_BACKGROUND_COLOR);
+  WhaWha_ampsnsinv->selection_color(FL_FOREGROUND_COLOR);
+  WhaWha_ampsnsinv->labeltype(FL_NORMAL_LABEL);
+  WhaWha_ampsnsinv->labelfont(0);
   WhaWha_ampsnsinv->labelsize(10);
   WhaWha_ampsnsinv->labelcolor(FL_BACKGROUND2_COLOR);
   WhaWha_ampsnsinv->callback((Fl_Callback*)cb_WhaWha_ampsnsinv, (void*)(2));
-} // Fl_Check_Button* WhaWha_ampsnsinv
+  WhaWha_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  WhaWha_ampsnsinv->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* WhaWha_ampsnsinv
 { WhaWha_ftype = new Fl_Choice(95, 145, 59, 16, "F. Type");
   WhaWha_ftype->tooltip("Filter Type");
   WhaWha_ftype->down_box(FL_BORDER_BOX);

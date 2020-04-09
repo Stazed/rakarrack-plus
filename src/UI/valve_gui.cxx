@@ -107,10 +107,10 @@ void ValveGui::cb_valve_drive(SliderW* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_drive_i(o,v);
 }
 
-void ValveGui::cb_valve_ed_i(Fl_Check_Button* o, void*) {
+void ValveGui::cb_valve_ed_i(RKR_Check_Button* o, void*) {
   rkr->efx_Valve->changepar(11,(int)o->value());
 }
-void ValveGui::cb_valve_ed(Fl_Check_Button* o, void* v) {
+void ValveGui::cb_valve_ed(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_ed_i(o,v);
 }
 
@@ -138,24 +138,24 @@ void ValveGui::cb_valve_Pre(SliderW* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_Pre_i(o,v);
 }
 
-void ValveGui::cb_valve_pf_i(Fl_Check_Button* o, void*) {
+void ValveGui::cb_valve_pf_i(RKR_Check_Button* o, void*) {
   rkr->efx_Valve->changepar(9,(int)o->value());
 }
-void ValveGui::cb_valve_pf(Fl_Check_Button* o, void* v) {
+void ValveGui::cb_valve_pf(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_pf_i(o,v);
 }
 
-void ValveGui::cb_valve_st_i(Fl_Check_Button* o, void*) {
+void ValveGui::cb_valve_st_i(RKR_Check_Button* o, void*) {
   rkr->efx_Valve->changepar(8,(int)o->value());
 }
-void ValveGui::cb_valve_st(Fl_Check_Button* o, void* v) {
+void ValveGui::cb_valve_st(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_st_i(o,v);
 }
 
-void ValveGui::cb_valve_neg_i(Fl_Check_Button* o, void*) {
+void ValveGui::cb_valve_neg_i(RKR_Check_Button* o, void*) {
   rkr->efx_Valve->changepar(5,(int)o->value());
 }
-void ValveGui::cb_valve_neg(Fl_Check_Button* o, void* v) {
+void ValveGui::cb_valve_neg(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_neg_i(o,v);
 }
 
@@ -294,12 +294,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_drive->align(Fl_Align(FL_ALIGN_LEFT));
   valve_drive->when(FL_WHEN_CHANGED);
 } // SliderW* valve_drive
-{ valve_ed = new Fl_Check_Button(15, 96, 72, 15, "Extra Dist.");
+{ valve_ed = new RKR_Check_Button(15, 96, 72, 15, "Extra Dist.");
+  valve_ed->box(FL_NO_BOX);
   valve_ed->down_box(FL_BORDER_BOX);
+  valve_ed->color(FL_BACKGROUND_COLOR);
+  valve_ed->selection_color(FL_FOREGROUND_COLOR);
+  valve_ed->labeltype(FL_NORMAL_LABEL);
+  valve_ed->labelfont(0);
   valve_ed->labelsize(10);
   valve_ed->labelcolor(FL_BACKGROUND2_COLOR);
   valve_ed->callback((Fl_Callback*)cb_valve_ed, (void*)(2));
-} // Fl_Check_Button* valve_ed
+  valve_ed->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  valve_ed->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* valve_ed
 { valve_Q = new SliderW(56, 112, 100, 10, "Dist.");
   valve_Q->tooltip("Distortion");
   valve_Q->type(5);
@@ -333,24 +340,45 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_Pre->align(Fl_Align(FL_ALIGN_LEFT));
   valve_Pre->when(FL_WHEN_CHANGED);
 } // SliderW* valve_Pre
-{ valve_pf = new Fl_Check_Button(5, 139, 62, 15, "Pre Filter");
+{ valve_pf = new RKR_Check_Button(5, 139, 62, 15, "Pre Filter");
+  valve_pf->box(FL_NO_BOX);
   valve_pf->down_box(FL_BORDER_BOX);
+  valve_pf->color(FL_BACKGROUND_COLOR);
+  valve_pf->selection_color(FL_FOREGROUND_COLOR);
+  valve_pf->labeltype(FL_NORMAL_LABEL);
+  valve_pf->labelfont(0);
   valve_pf->labelsize(10);
   valve_pf->labelcolor(FL_BACKGROUND2_COLOR);
   valve_pf->callback((Fl_Callback*)cb_valve_pf, (void*)(2));
-} // Fl_Check_Button* valve_pf
-{ valve_st = new Fl_Check_Button(65, 139, 50, 15, "Stereo");
+  valve_pf->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  valve_pf->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* valve_pf
+{ valve_st = new RKR_Check_Button(65, 139, 50, 15, "Stereo");
+  valve_st->box(FL_NO_BOX);
   valve_st->down_box(FL_BORDER_BOX);
+  valve_st->color(FL_BACKGROUND_COLOR);
+  valve_st->selection_color(FL_FOREGROUND_COLOR);
+  valve_st->labeltype(FL_NORMAL_LABEL);
+  valve_st->labelfont(0);
   valve_st->labelsize(10);
   valve_st->labelcolor(FL_BACKGROUND2_COLOR);
   valve_st->callback((Fl_Callback*)cb_valve_st, (void*)(2));
-} // Fl_Check_Button* valve_st
-{ valve_neg = new Fl_Check_Button(114, 139, 40, 15, "Neg.");
+  valve_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  valve_st->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* valve_st
+{ valve_neg = new RKR_Check_Button(114, 139, 40, 15, "Neg.");
+  valve_neg->box(FL_NO_BOX);
   valve_neg->down_box(FL_BORDER_BOX);
+  valve_neg->color(FL_BACKGROUND_COLOR);
+  valve_neg->selection_color(FL_FOREGROUND_COLOR);
+  valve_neg->labeltype(FL_NORMAL_LABEL);
+  valve_neg->labelfont(0);
   valve_neg->labelsize(10);
   valve_neg->labelcolor(FL_BACKGROUND2_COLOR);
   valve_neg->callback((Fl_Callback*)cb_valve_neg, (void*)(2));
-} // Fl_Check_Button* valve_neg
+  valve_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  valve_neg->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* valve_neg
 { valve_lpf = new SliderW(56, 156, 100, 10, "LPF");
   valve_lpf->type(5);
   valve_lpf->box(FL_FLAT_BOX);

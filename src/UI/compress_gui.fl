@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class CompressGui {
   user_data 1 open
   xywh {1505 143 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -23,7 +26,7 @@ widget_class CompressGui {
 }
 rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
-rgui->findpos(1,(int)o->value(),o);} selected
+rgui->findpos(1,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -132,6 +135,7 @@ rkr->efx_Compressor->changepar(3,(int)o->value());}
     callback {rkr->efx_Compressor->changepar(6,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
     xywh {19 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button Stereo {
     label Stereo
@@ -139,12 +143,14 @@ if ((int) o->value() == 0) compress_output->do_callback();}
     callback {rkr->efx_Compressor->changepar(8,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
     tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {104 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button Peak {
     label Peak
     user_data 2
     callback {rkr->efx_Compressor->changepar(9,(int)o->value());
-if ((int) o->value() == 0) compress_output->do_callback();}
+if ((int) o->value() == 0) compress_output->do_callback();} selected
     tooltip {Peak Mode Compression} xywh {19 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
 }

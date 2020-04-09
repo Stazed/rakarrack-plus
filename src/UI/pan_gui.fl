@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} PanGui {
   user_data 1 open
   xywh {1333 108 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -25,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} PanGui {
 rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
-rgui->findpos(13,(int)o->value(),o);} selected
+rgui->findpos(13,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -81,6 +84,7 @@ rkr->efx_Pan->changepar(1,(int)(o->value()+64));}
     user_data 2
     callback {rkr->efx_Pan->changepar(7,(int)o->value())}
     xywh {35 56 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider pan_freq {
     label Tempo
@@ -124,8 +128,9 @@ rkr->efx_Pan->changepar(5,(int)o->value());}
   Fl_Check_Button pan_extraon {
     label {Extra Stereo}
     user_data 2
-    callback {rkr->efx_Pan->changepar(8,(int)o->value())}
+    callback {rkr->efx_Pan->changepar(8,(int)o->value())} selected
     tooltip {Enable Extra Stereo} xywh {35 140 82 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider pan_extra {
     label {E.Stereo}

@@ -69,10 +69,10 @@ void MidiGui::cb_Midi_out_Counter(Fl_Counter* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Midi_out_Counter_i(o,v);
 }
 
-void MidiGui::cb_Use_FFT_i(Fl_Check_Button* o, void*) {
+void MidiGui::cb_Use_FFT_i(RKR_Check_Button* o, void*) {
   m_rkr->efx_MIDIConverter->changepar(5, (int)o->value());
 }
-void MidiGui::cb_Use_FFT(Fl_Check_Button* o, void* v) {
+void MidiGui::cb_Use_FFT(RKR_Check_Button* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Use_FFT_i(o,v);
 }
 
@@ -135,15 +135,21 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Midi_out_Counter->textsize(11);
   Midi_out_Counter->callback((Fl_Callback*)cb_Midi_out_Counter);
 } // Fl_Counter* Midi_out_Counter
-{ Use_FFT = new Fl_Check_Button(51, 34, 15, 15, "FFT");
+{ Use_FFT = new RKR_Check_Button(51, 34, 15, 15, "FFT");
   Use_FFT->tooltip("FFT based algorithm which is much more\nCPU intensive but may provide better \
 results.");
+  Use_FFT->box(FL_NO_BOX);
   Use_FFT->down_box(FL_BORDER_BOX);
+  Use_FFT->color(FL_BACKGROUND_COLOR);
+  Use_FFT->selection_color(FL_FOREGROUND_COLOR);
+  Use_FFT->labeltype(FL_NORMAL_LABEL);
+  Use_FFT->labelfont(0);
   Use_FFT->labelsize(10);
   Use_FFT->labelcolor(FL_BACKGROUND2_COLOR);
   Use_FFT->callback((Fl_Callback*)cb_Use_FFT, (void*)(2));
   Use_FFT->align(Fl_Align(FL_ALIGN_TOP));
-} // Fl_Check_Button* Use_FFT
+  Use_FFT->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* Use_FFT
 { SliderW* o = Trig_Adj = new SliderW(147, 15, 117, 11, "Trigger");
   Trig_Adj->type(5);
   Trig_Adj->box(FL_FLAT_BOX);

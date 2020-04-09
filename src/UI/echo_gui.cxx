@@ -132,10 +132,10 @@ void EchoGui::cb_echo_fb(SliderW* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_fb_i(o,v);
 }
 
-void EchoGui::cb_echo_direct_i(Fl_Check_Button* o, void*) {
+void EchoGui::cb_echo_direct_i(RKR_Check_Button* o, void*) {
   rkr->efx_Echo->changepar(8,(int)o->value());
 }
-void EchoGui::cb_echo_direct(Fl_Check_Button* o, void* v) {
+void EchoGui::cb_echo_direct(RKR_Check_Button* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_direct_i(o,v);
 }
 
@@ -296,12 +296,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_fb->align(Fl_Align(FL_ALIGN_LEFT));
   echo_fb->when(FL_WHEN_CHANGED);
 } // SliderW* echo_fb
-{ echo_direct = new Fl_Check_Button(51, 148, 53, 15, "Direct");
+{ echo_direct = new RKR_Check_Button(51, 148, 53, 15, "Direct");
+  echo_direct->box(FL_NO_BOX);
   echo_direct->down_box(FL_BORDER_BOX);
+  echo_direct->color(FL_BACKGROUND_COLOR);
+  echo_direct->selection_color(FL_FOREGROUND_COLOR);
+  echo_direct->labeltype(FL_NORMAL_LABEL);
+  echo_direct->labelfont(0);
   echo_direct->labelsize(10);
   echo_direct->labelcolor(FL_BACKGROUND2_COLOR);
   echo_direct->callback((Fl_Callback*)cb_echo_direct, (void*)(2));
-} // Fl_Check_Button* echo_direct
+  echo_direct->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  echo_direct->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* echo_direct
 { echo_damp = new SliderW(56, 167, 100, 10, "Damp");
   echo_damp->type(5);
   echo_damp->box(FL_FLAT_BOX);

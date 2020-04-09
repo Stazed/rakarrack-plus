@@ -4,13 +4,13 @@
 #define dflange_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class DflangeGui : public Fl_Group {
 public:
@@ -66,20 +66,20 @@ private:
   inline void cb_dflange_lpf_i(SliderW*, void*);
   static void cb_dflange_lpf(SliderW*, void*);
 public:
-  Fl_Check_Button *dflange_subs;
+  RKR_Check_Button *dflange_subs;
 private:
-  inline void cb_dflange_subs_i(Fl_Check_Button*, void*);
-  static void cb_dflange_subs(Fl_Check_Button*, void*);
+  inline void cb_dflange_subs_i(RKR_Check_Button*, void*);
+  static void cb_dflange_subs(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *dflange_tz;
+  RKR_Check_Button *dflange_tz;
 private:
-  inline void cb_dflange_tz_i(Fl_Check_Button*, void*);
-  static void cb_dflange_tz(Fl_Check_Button*, void*);
+  inline void cb_dflange_tz_i(RKR_Check_Button*, void*);
+  static void cb_dflange_tz(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *dflange_intense;
+  RKR_Check_Button *dflange_intense;
 private:
-  inline void cb_dflange_intense_i(Fl_Check_Button*, void*);
-  static void cb_dflange_intense(Fl_Check_Button*, void*);
+  inline void cb_dflange_intense_i(RKR_Check_Button*, void*);
+  static void cb_dflange_intense(RKR_Check_Button*, void*);
 public:
   SliderW *dflange_freq;
 private:

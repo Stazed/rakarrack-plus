@@ -149,24 +149,24 @@ void DflangeGui::cb_dflange_lpf(SliderW* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_lpf_i(o,v);
 }
 
-void DflangeGui::cb_dflange_subs_i(Fl_Check_Button* o, void*) {
+void DflangeGui::cb_dflange_subs_i(RKR_Check_Button* o, void*) {
   rkr->efx_DFlange->changepar(8,(int)o->value());
 }
-void DflangeGui::cb_dflange_subs(Fl_Check_Button* o, void* v) {
+void DflangeGui::cb_dflange_subs(RKR_Check_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_subs_i(o,v);
 }
 
-void DflangeGui::cb_dflange_tz_i(Fl_Check_Button* o, void*) {
+void DflangeGui::cb_dflange_tz_i(RKR_Check_Button* o, void*) {
   rkr->efx_DFlange->changepar(9,(int)o->value());
 }
-void DflangeGui::cb_dflange_tz(Fl_Check_Button* o, void* v) {
+void DflangeGui::cb_dflange_tz(RKR_Check_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_tz_i(o,v);
 }
 
-void DflangeGui::cb_dflange_intense_i(Fl_Check_Button* o, void*) {
+void DflangeGui::cb_dflange_intense_i(RKR_Check_Button* o, void*) {
   rkr->efx_DFlange->changepar(14,(int)o->value());
 }
-void DflangeGui::cb_dflange_intense(Fl_Check_Button* o, void* v) {
+void DflangeGui::cb_dflange_intense(RKR_Check_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_intense_i(o,v);
 }
 
@@ -377,24 +377,45 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dflange_lpf->align(Fl_Align(FL_ALIGN_LEFT));
   dflange_lpf->when(FL_WHEN_CHANGED);
 } // SliderW* dflange_lpf
-{ dflange_subs = new Fl_Check_Button(5, 113, 46, 15, "Subtr");
+{ dflange_subs = new RKR_Check_Button(5, 113, 46, 15, "Subtr");
+  dflange_subs->box(FL_NO_BOX);
   dflange_subs->down_box(FL_BORDER_BOX);
+  dflange_subs->color(FL_BACKGROUND_COLOR);
+  dflange_subs->selection_color(FL_FOREGROUND_COLOR);
+  dflange_subs->labeltype(FL_NORMAL_LABEL);
+  dflange_subs->labelfont(0);
   dflange_subs->labelsize(10);
   dflange_subs->labelcolor(FL_BACKGROUND2_COLOR);
   dflange_subs->callback((Fl_Callback*)cb_dflange_subs, (void*)(2));
-} // Fl_Check_Button* dflange_subs
-{ dflange_tz = new Fl_Check_Button(48, 113, 55, 15, "Th. zero");
+  dflange_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  dflange_subs->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* dflange_subs
+{ dflange_tz = new RKR_Check_Button(48, 113, 55, 15, "Th. zero");
+  dflange_tz->box(FL_NO_BOX);
   dflange_tz->down_box(FL_BORDER_BOX);
+  dflange_tz->color(FL_BACKGROUND_COLOR);
+  dflange_tz->selection_color(FL_FOREGROUND_COLOR);
+  dflange_tz->labeltype(FL_NORMAL_LABEL);
+  dflange_tz->labelfont(0);
   dflange_tz->labelsize(10);
   dflange_tz->labelcolor(FL_BACKGROUND2_COLOR);
   dflange_tz->callback((Fl_Callback*)cb_dflange_tz, (void*)(2));
-} // Fl_Check_Button* dflange_tz
-{ dflange_intense = new Fl_Check_Button(102, 113, 52, 15, "Intense");
+  dflange_tz->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  dflange_tz->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* dflange_tz
+{ dflange_intense = new RKR_Check_Button(102, 113, 52, 15, "Intense");
+  dflange_intense->box(FL_NO_BOX);
   dflange_intense->down_box(FL_BORDER_BOX);
+  dflange_intense->color(FL_BACKGROUND_COLOR);
+  dflange_intense->selection_color(FL_FOREGROUND_COLOR);
+  dflange_intense->labeltype(FL_NORMAL_LABEL);
+  dflange_intense->labelfont(0);
   dflange_intense->labelsize(10);
   dflange_intense->labelcolor(FL_BACKGROUND2_COLOR);
   dflange_intense->callback((Fl_Callback*)cb_dflange_intense, (void*)(2));
-} // Fl_Check_Button* dflange_intense
+  dflange_intense->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  dflange_intense->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* dflange_intense
 { dflange_freq = new SliderW(56, 128, 100, 10, "Tempo");
   dflange_freq->type(5);
   dflange_freq->box(FL_FLAT_BOX);

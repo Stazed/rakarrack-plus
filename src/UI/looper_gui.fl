@@ -8,6 +8,9 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Box.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class LooperGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -129,6 +132,7 @@ rkr->efx_Looper->changepar(14,(int)o->value());}
 }
 rkr->efx_Looper->changepar(5,(int)o->value())}
     tooltip {Play Loop in Reverse} xywh {8 89 61 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button looper_ap {
     label {Auto Play}
@@ -140,6 +144,7 @@ rkr->efx_Looper->changepar(5,(int)o->value())}
 }
 rkr->efx_Looper->changepar(9,(int)o->value())}
     xywh {78 89 67 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Box Box_Play {
     label {Play/Stop}
@@ -193,7 +198,7 @@ rgui->update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(3,(int)o->value());
-rgui->update_looper();} selected
+rgui->update_looper();}
     xywh {109 117 44 22} type Toggle labelcolor 1
     code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
     class RKR_Button
@@ -213,6 +218,7 @@ rgui->update_looper();} selected
 }
 rkr->efx_Looper->changepar(11,(int)o->value())}
     tooltip {Record on Track 1} xywh {8 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+    class RKR_Check_Button
   }
   Fl_Check_Button looper_r2 {
     label R2
@@ -224,6 +230,7 @@ rkr->efx_Looper->changepar(11,(int)o->value())}
 }
 rkr->efx_Looper->changepar(12,(int)o->value())}
     tooltip {Record on Track 2} xywh {27 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
+    class RKR_Check_Button
   }
   Fl_Button looper_t1 {
     label 1
@@ -256,6 +263,7 @@ rgui->update_looper();}
     user_data 2
     callback {rkr->efx_Looper->changepar(13,(int)o->value())}
     tooltip {Link track 1 and track 2 with the same length} xywh {27 167 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+    class RKR_Check_Button
   }
   Fl_Button looper_clear {
     label Clear
@@ -273,8 +281,9 @@ rgui->update_looper();}
   Fl_Check_Button looper_mt {
     label M
     user_data 2
-    callback {rkr->efx_Looper->changepar(16,(int)o->value())}
+    callback {rkr->efx_Looper->changepar(16,(int)o->value())} selected
     tooltip Metronome xywh {93 167 27 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Box L_TimePos {
     xywh {121 166 35 14} box DOWN_BOX align 84

@@ -4,12 +4,12 @@
 #define shelf_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class ShelfGui : public Fl_Group {
 public:
@@ -45,9 +45,9 @@ private:
   inline void cb_shelf_q1_i(SliderW*, void*);
   static void cb_shelf_q1(SliderW*, void*);
 public:
-  Fl_Check_Button *shelf_mode;
+  RKR_Check_Button *shelf_mode;
 private:
-  inline void cb_shelf_mode_i(Fl_Check_Button*, void*);
-  static void cb_shelf_mode(Fl_Check_Button*, void*);
+  inline void cb_shelf_mode_i(RKR_Check_Button*, void*);
+  static void cb_shelf_mode(RKR_Check_Button*, void*);
 };
 #endif

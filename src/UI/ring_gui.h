@@ -4,12 +4,12 @@
 #define ring_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class RingGui : public Fl_Group {
 public:
@@ -50,15 +50,15 @@ private:
   inline void cb_ring_pan_i(SliderW*, void*);
   static void cb_ring_pan(SliderW*, void*);
 public:
-  Fl_Check_Button *ring_st;
+  RKR_Check_Button *ring_st;
 private:
-  inline void cb_ring_st_i(Fl_Check_Button*, void*);
-  static void cb_ring_st(Fl_Check_Button*, void*);
+  inline void cb_ring_st_i(RKR_Check_Button*, void*);
+  static void cb_ring_st(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *ring_afreq;
+  RKR_Check_Button *ring_afreq;
 private:
-  inline void cb_ring_afreq_i(Fl_Check_Button*, void*);
-  static void cb_ring_afreq(Fl_Check_Button*, void*);
+  inline void cb_ring_afreq_i(RKR_Check_Button*, void*);
+  static void cb_ring_afreq(RKR_Check_Button*, void*);
 public:
   SliderW *ring_depth;
 private:

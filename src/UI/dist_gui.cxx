@@ -101,24 +101,24 @@ void DistGui::cb_dist_tipo(Fl_Choice* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_tipo_i(o,v);
 }
 
-void DistGui::cb_dist_neg_i(Fl_Check_Button* o, void*) {
+void DistGui::cb_dist_neg_i(RKR_Check_Button* o, void*) {
   rkr->efx_Distorsion->changepar(6,(int)o->value());
 }
-void DistGui::cb_dist_neg(Fl_Check_Button* o, void* v) {
+void DistGui::cb_dist_neg(RKR_Check_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_neg_i(o,v);
 }
 
-void DistGui::cb_dist_pf_i(Fl_Check_Button* o, void*) {
+void DistGui::cb_dist_pf_i(RKR_Check_Button* o, void*) {
   rkr->efx_Distorsion->changepar(10,(int)o->value());
 }
-void DistGui::cb_dist_pf(Fl_Check_Button* o, void* v) {
+void DistGui::cb_dist_pf(RKR_Check_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_pf_i(o,v);
 }
 
-void DistGui::cb_dist_st_i(Fl_Check_Button* o, void*) {
+void DistGui::cb_dist_st_i(RKR_Check_Button* o, void*) {
   rkr->efx_Distorsion->changepar(9,(int)o->value());
 }
-void DistGui::cb_dist_st(Fl_Check_Button* o, void* v) {
+void DistGui::cb_dist_st(RKR_Check_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_st_i(o,v);
 }
 
@@ -274,24 +274,45 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_tipo->callback((Fl_Callback*)cb_dist_tipo, (void*)(12));
   o->menu(m_dist_menu->get_distortion_type());
 } // Fl_Choice* dist_tipo
-{ dist_neg = new Fl_Check_Button(110, 92, 41, 15, "Neg.");
+{ dist_neg = new RKR_Check_Button(110, 92, 41, 15, "Neg.");
+  dist_neg->box(FL_NO_BOX);
   dist_neg->down_box(FL_BORDER_BOX);
+  dist_neg->color(FL_BACKGROUND_COLOR);
+  dist_neg->selection_color(FL_FOREGROUND_COLOR);
+  dist_neg->labeltype(FL_NORMAL_LABEL);
+  dist_neg->labelfont(0);
   dist_neg->labelsize(10);
   dist_neg->labelcolor(FL_BACKGROUND2_COLOR);
   dist_neg->callback((Fl_Callback*)cb_dist_neg, (void*)(2));
-} // Fl_Check_Button* dist_neg
-{ dist_pf = new Fl_Check_Button(9, 108, 67, 15, "Pre Filter");
+  dist_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  dist_neg->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* dist_neg
+{ dist_pf = new RKR_Check_Button(9, 108, 67, 15, "Pre Filter");
+  dist_pf->box(FL_NO_BOX);
   dist_pf->down_box(FL_BORDER_BOX);
+  dist_pf->color(FL_BACKGROUND_COLOR);
+  dist_pf->selection_color(FL_FOREGROUND_COLOR);
+  dist_pf->labeltype(FL_NORMAL_LABEL);
+  dist_pf->labelfont(0);
   dist_pf->labelsize(10);
   dist_pf->labelcolor(FL_BACKGROUND2_COLOR);
   dist_pf->callback((Fl_Callback*)cb_dist_pf, (void*)(2));
-} // Fl_Check_Button* dist_pf
-{ dist_st = new Fl_Check_Button(74, 108, 57, 15, "Stereo");
+  dist_pf->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  dist_pf->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* dist_pf
+{ dist_st = new RKR_Check_Button(74, 108, 57, 15, "Stereo");
+  dist_st->box(FL_NO_BOX);
   dist_st->down_box(FL_BORDER_BOX);
+  dist_st->color(FL_BACKGROUND_COLOR);
+  dist_st->selection_color(FL_FOREGROUND_COLOR);
+  dist_st->labeltype(FL_NORMAL_LABEL);
+  dist_st->labelfont(0);
   dist_st->labelsize(10);
   dist_st->labelcolor(FL_BACKGROUND2_COLOR);
   dist_st->callback((Fl_Callback*)cb_dist_st, (void*)(2));
-} // Fl_Check_Button* dist_st
+  dist_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  dist_st->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* dist_st
 { dist_pan = new SliderW(56, 125, 100, 10, "Pan");
   dist_pan->type(5);
   dist_pan->box(FL_FLAT_BOX);

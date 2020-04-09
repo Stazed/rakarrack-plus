@@ -102,17 +102,17 @@ void FlangerGui::cb_flanger_lfotype(Fl_Choice* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_lfotype_i(o,v);
 }
 
-void FlangerGui::cb_flanger_subs_i(Fl_Check_Button* o, void*) {
+void FlangerGui::cb_flanger_subs_i(RKR_Check_Button* o, void*) {
   rkr->efx_Flanger->changepar(11,(int)o->value());
 }
-void FlangerGui::cb_flanger_subs(Fl_Check_Button* o, void* v) {
+void FlangerGui::cb_flanger_subs(RKR_Check_Button* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_subs_i(o,v);
 }
 
-void FlangerGui::cb_flanger_awesome_i(Fl_Check_Button* o, void*) {
+void FlangerGui::cb_flanger_awesome_i(RKR_Check_Button* o, void*) {
   rkr->efx_Flanger->changepar(12,(int)o->value());
 }
-void FlangerGui::cb_flanger_awesome(Fl_Check_Button* o, void* v) {
+void FlangerGui::cb_flanger_awesome(RKR_Check_Button* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_awesome_i(o,v);
 }
 
@@ -282,18 +282,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   flanger_lfotype->callback((Fl_Callback*)cb_flanger_lfotype);
   o->menu(m_lfo_menu->get_lfo_type());
 } // Fl_Choice* flanger_lfotype
-{ flanger_subs = new Fl_Check_Button(32, 94, 62, 15, "Subtract");
+{ flanger_subs = new RKR_Check_Button(32, 94, 62, 15, "Subtract");
+  flanger_subs->box(FL_NO_BOX);
   flanger_subs->down_box(FL_BORDER_BOX);
+  flanger_subs->color(FL_BACKGROUND_COLOR);
+  flanger_subs->selection_color(FL_FOREGROUND_COLOR);
+  flanger_subs->labeltype(FL_NORMAL_LABEL);
+  flanger_subs->labelfont(0);
   flanger_subs->labelsize(10);
   flanger_subs->labelcolor(FL_BACKGROUND2_COLOR);
   flanger_subs->callback((Fl_Callback*)cb_flanger_subs, (void*)(2));
-} // Fl_Check_Button* flanger_subs
-{ flanger_awesome = new Fl_Check_Button(94, 94, 58, 15, "Intense");
+  flanger_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  flanger_subs->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* flanger_subs
+{ flanger_awesome = new RKR_Check_Button(94, 94, 58, 15, "Intense");
+  flanger_awesome->box(FL_NO_BOX);
   flanger_awesome->down_box(FL_BORDER_BOX);
+  flanger_awesome->color(FL_BACKGROUND_COLOR);
+  flanger_awesome->selection_color(FL_FOREGROUND_COLOR);
+  flanger_awesome->labeltype(FL_NORMAL_LABEL);
+  flanger_awesome->labelfont(0);
   flanger_awesome->labelsize(10);
   flanger_awesome->labelcolor(FL_BACKGROUND2_COLOR);
   flanger_awesome->callback((Fl_Callback*)cb_flanger_awesome, (void*)(2));
-} // Fl_Check_Button* flanger_awesome
+  flanger_awesome->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  flanger_awesome->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* flanger_awesome
 { flanger_stdf = new SliderW(56, 115, 100, 10, "Stereo Df");
   flanger_stdf->type(5);
   flanger_stdf->box(FL_FLAT_BOX);

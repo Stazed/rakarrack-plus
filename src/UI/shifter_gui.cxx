@@ -133,10 +133,10 @@ void ShifterGui::cb_shifter_thre(SliderW* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_thre_i(o,v);
 }
 
-void ShifterGui::cb_shifter_ud_i(Fl_Check_Button* o, void*) {
+void ShifterGui::cb_shifter_ud_i(RKR_Check_Button* o, void*) {
   rkr->efx_Shifter->changepar(7,(int)o->value());
 }
-void ShifterGui::cb_shifter_ud(Fl_Check_Button* o, void* v) {
+void ShifterGui::cb_shifter_ud(RKR_Check_Button* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_ud_i(o,v);
 }
 
@@ -317,12 +317,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shifter_thre->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_thre->when(FL_WHEN_CHANGED);
 } // SliderW* shifter_thre
-{ shifter_ud = new Fl_Check_Button(51, 128, 49, 14, "Down");
+{ shifter_ud = new RKR_Check_Button(51, 128, 49, 14, "Down");
+  shifter_ud->box(FL_NO_BOX);
   shifter_ud->down_box(FL_BORDER_BOX);
+  shifter_ud->color(FL_BACKGROUND_COLOR);
+  shifter_ud->selection_color(FL_FOREGROUND_COLOR);
+  shifter_ud->labeltype(FL_NORMAL_LABEL);
+  shifter_ud->labelfont(0);
   shifter_ud->labelsize(10);
   shifter_ud->labelcolor(FL_BACKGROUND2_COLOR);
   shifter_ud->callback((Fl_Callback*)cb_shifter_ud, (void*)(2));
-} // Fl_Check_Button* shifter_ud
+  shifter_ud->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  shifter_ud->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* shifter_ud
 { shifter_whammy = new SliderW(56, 145, 100, 10, "Whammy");
   shifter_whammy->type(5);
   shifter_whammy->box(FL_FLAT_BOX);

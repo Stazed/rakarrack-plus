@@ -179,10 +179,10 @@ void InfinityGui::cb_infinity_8(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_8_i(o,v);
 }
 
-void InfinityGui::cb_infinity_rev_i(Fl_Check_Button* o, void*) {
+void InfinityGui::cb_infinity_rev_i(RKR_Check_Button* o, void*) {
   rkr->efx_Infinity->changepar(16,(int)o->value());
 }
-void InfinityGui::cb_infinity_rev(Fl_Check_Button* o, void* v) {
+void InfinityGui::cb_infinity_rev(RKR_Check_Button* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_rev_i(o,v);
 }
 
@@ -465,14 +465,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_8->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_8->when(FL_WHEN_CHANGED);
 } // RKR_Value_Input* infinity_8
-{ infinity_rev = new Fl_Check_Button(53, 94, 15, 15, "Reverse");
+{ infinity_rev = new RKR_Check_Button(53, 94, 15, 15, "Reverse");
   infinity_rev->tooltip("Reverse Left Channel Sweep");
+  infinity_rev->box(FL_NO_BOX);
   infinity_rev->down_box(FL_BORDER_BOX);
+  infinity_rev->color(FL_BACKGROUND_COLOR);
+  infinity_rev->selection_color(FL_FOREGROUND_COLOR);
+  infinity_rev->labeltype(FL_NORMAL_LABEL);
+  infinity_rev->labelfont(0);
   infinity_rev->labelsize(10);
   infinity_rev->labelcolor(FL_BACKGROUND2_COLOR);
   infinity_rev->callback((Fl_Callback*)cb_infinity_rev, (void*)(2));
   infinity_rev->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Check_Button* infinity_rev
+  infinity_rev->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* infinity_rev
 { infinity_stages = new Fl_Counter(106, 93, 46, 15, "Stages");
   infinity_stages->type(1);
   infinity_stages->labelsize(10);

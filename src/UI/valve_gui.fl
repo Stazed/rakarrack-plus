@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class ValveGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -24,7 +27,7 @@ widget_class ValveGui {
 rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
-rgui->findpos(19,(int)o->value(),o);} selected
+rgui->findpos(19,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -125,6 +128,7 @@ rkr->efx_Valve->changepar(3,(int)o->value());}
     user_data 2
     callback {rkr->efx_Valve->changepar(11,(int)o->value());}
     xywh {15 96 72 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider valve_Q {
     label {Dist.}
@@ -153,18 +157,21 @@ rkr->efx_Valve->changepar(12,(int)o->value());}
     user_data 2
     callback {rkr->efx_Valve->changepar(9,(int)o->value());}
     xywh {5 139 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button valve_st {
     label Stereo
     user_data 2
     callback {rkr->efx_Valve->changepar(8,(int)o->value());}
     xywh {65 139 50 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button valve_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Valve->changepar(5,(int)o->value());}
+    callback {rkr->efx_Valve->changepar(5,(int)o->value());} selected
     xywh {114 139 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider valve_lpf {
     label LPF

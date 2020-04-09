@@ -65,10 +65,10 @@ void PanGui::cb_pan_pan(SliderW* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_pan_i(o,v);
 }
 
-void PanGui::cb_pan_autopan_i(Fl_Check_Button* o, void*) {
+void PanGui::cb_pan_autopan_i(RKR_Check_Button* o, void*) {
   rkr->efx_Pan->changepar(7,(int)o->value());
 }
-void PanGui::cb_pan_autopan(Fl_Check_Button* o, void* v) {
+void PanGui::cb_pan_autopan(RKR_Check_Button* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_autopan_i(o,v);
 }
 
@@ -115,10 +115,10 @@ void PanGui::cb_pan_stdf(SliderW* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_stdf_i(o,v);
 }
 
-void PanGui::cb_pan_extraon_i(Fl_Check_Button* o, void*) {
+void PanGui::cb_pan_extraon_i(RKR_Check_Button* o, void*) {
   rkr->efx_Pan->changepar(8,(int)o->value());
 }
-void PanGui::cb_pan_extraon(Fl_Check_Button* o, void* v) {
+void PanGui::cb_pan_extraon(RKR_Check_Button* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_extraon_i(o,v);
 }
 
@@ -197,12 +197,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_pan->align(Fl_Align(FL_ALIGN_LEFT));
   pan_pan->when(FL_WHEN_CHANGED);
 } // SliderW* pan_pan
-{ pan_autopan = new Fl_Check_Button(35, 56, 70, 18, "AutoPan");
+{ pan_autopan = new RKR_Check_Button(35, 56, 70, 18, "AutoPan");
+  pan_autopan->box(FL_NO_BOX);
   pan_autopan->down_box(FL_BORDER_BOX);
+  pan_autopan->color(FL_BACKGROUND_COLOR);
+  pan_autopan->selection_color(FL_FOREGROUND_COLOR);
+  pan_autopan->labeltype(FL_NORMAL_LABEL);
+  pan_autopan->labelfont(0);
   pan_autopan->labelsize(10);
   pan_autopan->labelcolor(FL_BACKGROUND2_COLOR);
   pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
-} // Fl_Check_Button* pan_autopan
+  pan_autopan->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  pan_autopan->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* pan_autopan
 { pan_freq = new SliderW(56, 73, 100, 10, "Tempo");
   pan_freq->type(5);
   pan_freq->box(FL_FLAT_BOX);
@@ -263,13 +270,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   pan_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* pan_stdf
-{ pan_extraon = new Fl_Check_Button(35, 140, 82, 15, "Extra Stereo");
+{ pan_extraon = new RKR_Check_Button(35, 140, 82, 15, "Extra Stereo");
   pan_extraon->tooltip("Enable Extra Stereo");
+  pan_extraon->box(FL_NO_BOX);
   pan_extraon->down_box(FL_BORDER_BOX);
+  pan_extraon->color(FL_BACKGROUND_COLOR);
+  pan_extraon->selection_color(FL_FOREGROUND_COLOR);
+  pan_extraon->labeltype(FL_NORMAL_LABEL);
+  pan_extraon->labelfont(0);
   pan_extraon->labelsize(10);
   pan_extraon->labelcolor(FL_BACKGROUND2_COLOR);
   pan_extraon->callback((Fl_Callback*)cb_pan_extraon, (void*)(2));
-} // Fl_Check_Button* pan_extraon
+  pan_extraon->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  pan_extraon->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* pan_extraon
 { pan_extra = new SliderW(56, 161, 100, 10, "E.Stereo");
   pan_extra->tooltip("Extra Stereo Amount");
   pan_extra->type(5);

@@ -110,7 +110,7 @@ void LooperGui::cb_looper_ms(Fl_Choice* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_ms_i(o,v);
 }
 
-void LooperGui::cb_looper_rv_i(Fl_Check_Button* o, void*) {
+void LooperGui::cb_looper_rv_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(270);
@@ -118,11 +118,11 @@ void LooperGui::cb_looper_rv_i(Fl_Check_Button* o, void*) {
 }
 rkr->efx_Looper->changepar(5,(int)o->value());
 }
-void LooperGui::cb_looper_rv(Fl_Check_Button* o, void* v) {
+void LooperGui::cb_looper_rv(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_rv_i(o,v);
 }
 
-void LooperGui::cb_looper_ap_i(Fl_Check_Button* o, void*) {
+void LooperGui::cb_looper_ap_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(271);
@@ -130,7 +130,7 @@ void LooperGui::cb_looper_ap_i(Fl_Check_Button* o, void*) {
 }
 rkr->efx_Looper->changepar(9,(int)o->value());
 }
-void LooperGui::cb_looper_ap(Fl_Check_Button* o, void* v) {
+void LooperGui::cb_looper_ap(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_ap_i(o,v);
 }
 
@@ -173,7 +173,7 @@ void LooperGui::cb_looper_record(RKR_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_record_i(o,v);
 }
 
-void LooperGui::cb_looper_r1_i(Fl_Check_Button* o, void*) {
+void LooperGui::cb_looper_r1_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(275);
@@ -181,11 +181,11 @@ void LooperGui::cb_looper_r1_i(Fl_Check_Button* o, void*) {
 }
 rkr->efx_Looper->changepar(11,(int)o->value());
 }
-void LooperGui::cb_looper_r1(Fl_Check_Button* o, void* v) {
+void LooperGui::cb_looper_r1(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_r1_i(o,v);
 }
 
-void LooperGui::cb_looper_r2_i(Fl_Check_Button* o, void*) {
+void LooperGui::cb_looper_r2_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(276);
@@ -193,7 +193,7 @@ void LooperGui::cb_looper_r2_i(Fl_Check_Button* o, void*) {
 }
 rkr->efx_Looper->changepar(12,(int)o->value());
 }
-void LooperGui::cb_looper_r2(Fl_Check_Button* o, void* v) {
+void LooperGui::cb_looper_r2(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_r2_i(o,v);
 }
 
@@ -223,10 +223,10 @@ void LooperGui::cb_looper_t2(RKR_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_t2_i(o,v);
 }
 
-void LooperGui::cb_looper_lnk_i(Fl_Check_Button* o, void*) {
+void LooperGui::cb_looper_lnk_i(RKR_Check_Button* o, void*) {
   rkr->efx_Looper->changepar(13,(int)o->value());
 }
-void LooperGui::cb_looper_lnk(Fl_Check_Button* o, void* v) {
+void LooperGui::cb_looper_lnk(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_lnk_i(o,v);
 }
 
@@ -243,10 +243,10 @@ void LooperGui::cb_looper_clear(RKR_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_clear_i(o,v);
 }
 
-void LooperGui::cb_looper_mt_i(Fl_Check_Button* o, void*) {
+void LooperGui::cb_looper_mt_i(RKR_Check_Button* o, void*) {
   rkr->efx_Looper->changepar(16,(int)o->value());
 }
-void LooperGui::cb_looper_mt(Fl_Check_Button* o, void* v) {
+void LooperGui::cb_looper_mt(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_mt_i(o,v);
 }
 LooperGui::LooperGui(int X, int Y, int W, int H, const char *L)
@@ -368,19 +368,33 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_ms->when(FL_WHEN_RELEASE_ALWAYS);
   o->menu(m_looper_ms->get_metronome_sound());
 } // Fl_Choice* looper_ms
-{ looper_rv = new Fl_Check_Button(8, 89, 61, 15, "Reverse");
+{ looper_rv = new RKR_Check_Button(8, 89, 61, 15, "Reverse");
   looper_rv->tooltip("Play Loop in Reverse");
+  looper_rv->box(FL_NO_BOX);
   looper_rv->down_box(FL_BORDER_BOX);
+  looper_rv->color(FL_BACKGROUND_COLOR);
+  looper_rv->selection_color(FL_FOREGROUND_COLOR);
+  looper_rv->labeltype(FL_NORMAL_LABEL);
+  looper_rv->labelfont(0);
   looper_rv->labelsize(10);
   looper_rv->labelcolor(FL_BACKGROUND2_COLOR);
   looper_rv->callback((Fl_Callback*)cb_looper_rv, (void*)(2));
-} // Fl_Check_Button* looper_rv
-{ looper_ap = new Fl_Check_Button(78, 89, 67, 15, "Auto Play");
+  looper_rv->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  looper_rv->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* looper_rv
+{ looper_ap = new RKR_Check_Button(78, 89, 67, 15, "Auto Play");
+  looper_ap->box(FL_NO_BOX);
   looper_ap->down_box(FL_BORDER_BOX);
+  looper_ap->color(FL_BACKGROUND_COLOR);
+  looper_ap->selection_color(FL_FOREGROUND_COLOR);
+  looper_ap->labeltype(FL_NORMAL_LABEL);
+  looper_ap->labelfont(0);
   looper_ap->labelsize(10);
   looper_ap->labelcolor(FL_BACKGROUND2_COLOR);
   looper_ap->callback((Fl_Callback*)cb_looper_ap, (void*)(2));
-} // Fl_Check_Button* looper_ap
+  looper_ap->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  looper_ap->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* looper_ap
 { Box_Play = new RKR_Box(4, 103, 52, 14, "Play/Stop");
   Box_Play->box(FL_NO_BOX);
   Box_Play->color(FL_BACKGROUND_COLOR);
@@ -471,22 +485,34 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   o->align(Fl_Align(FL_ALIGN_CENTER));
   o->when(FL_WHEN_RELEASE);
 } // RKR_Box* o
-{ looper_r1 = new Fl_Check_Button(8, 153, 15, 15, "R1");
+{ looper_r1 = new RKR_Check_Button(8, 153, 15, 15, "R1");
   looper_r1->tooltip("Record on Track 1");
+  looper_r1->box(FL_NO_BOX);
   looper_r1->down_box(FL_BORDER_BOX);
+  looper_r1->color(FL_BACKGROUND_COLOR);
+  looper_r1->selection_color(FL_FOREGROUND_COLOR);
+  looper_r1->labeltype(FL_NORMAL_LABEL);
+  looper_r1->labelfont(0);
   looper_r1->labelsize(10);
   looper_r1->labelcolor(FL_BACKGROUND2_COLOR);
   looper_r1->callback((Fl_Callback*)cb_looper_r1, (void*)(2));
   looper_r1->align(Fl_Align(FL_ALIGN_TOP));
-} // Fl_Check_Button* looper_r1
-{ looper_r2 = new Fl_Check_Button(27, 153, 15, 15, "R2");
+  looper_r1->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* looper_r1
+{ looper_r2 = new RKR_Check_Button(27, 153, 15, 15, "R2");
   looper_r2->tooltip("Record on Track 2");
+  looper_r2->box(FL_NO_BOX);
   looper_r2->down_box(FL_BORDER_BOX);
+  looper_r2->color(FL_BACKGROUND_COLOR);
+  looper_r2->selection_color(FL_FOREGROUND_COLOR);
+  looper_r2->labeltype(FL_NORMAL_LABEL);
+  looper_r2->labelfont(0);
   looper_r2->labelsize(10);
   looper_r2->labelcolor(FL_BACKGROUND2_COLOR);
   looper_r2->callback((Fl_Callback*)cb_looper_r2, (void*)(2));
   looper_r2->align(Fl_Align(FL_ALIGN_TOP));
-} // Fl_Check_Button* looper_r2
+  looper_r2->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* looper_r2
 { looper_t1 = new RKR_Button(111, 147, 18, 18, "1");
   looper_t1->tooltip("Enable Play, Stop, Record on Track 1");
   looper_t1->type(1);
@@ -515,14 +541,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_t2->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
   looper_t2->when(FL_WHEN_RELEASE);
 } // RKR_Button* looper_t2
-{ looper_lnk = new Fl_Check_Button(27, 167, 15, 15, "Lnk");
+{ looper_lnk = new RKR_Check_Button(27, 167, 15, 15, "Lnk");
   looper_lnk->tooltip("Link track 1 and track 2 with the same length");
+  looper_lnk->box(FL_NO_BOX);
   looper_lnk->down_box(FL_BORDER_BOX);
+  looper_lnk->color(FL_BACKGROUND_COLOR);
+  looper_lnk->selection_color(FL_FOREGROUND_COLOR);
+  looper_lnk->labeltype(FL_NORMAL_LABEL);
+  looper_lnk->labelfont(0);
   looper_lnk->labelsize(10);
   looper_lnk->labelcolor(FL_BACKGROUND2_COLOR);
   looper_lnk->callback((Fl_Callback*)cb_looper_lnk, (void*)(2));
   looper_lnk->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Check_Button* looper_lnk
+  looper_lnk->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* looper_lnk
 { looper_clear = new RKR_Button(46, 165, 43, 14, "Clear");
   looper_clear->tooltip("Erase the Selected Track");
   looper_clear->box(FL_UP_BOX);
@@ -536,13 +568,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_clear->align(Fl_Align(FL_ALIGN_CENTER));
   looper_clear->when(FL_WHEN_RELEASE);
 } // RKR_Button* looper_clear
-{ looper_mt = new Fl_Check_Button(93, 167, 27, 15, "M");
+{ looper_mt = new RKR_Check_Button(93, 167, 27, 15, "M");
   looper_mt->tooltip("Metronome");
+  looper_mt->box(FL_NO_BOX);
   looper_mt->down_box(FL_BORDER_BOX);
+  looper_mt->color(FL_BACKGROUND_COLOR);
+  looper_mt->selection_color(FL_FOREGROUND_COLOR);
+  looper_mt->labeltype(FL_NORMAL_LABEL);
+  looper_mt->labelfont(0);
   looper_mt->labelsize(10);
   looper_mt->labelcolor(FL_BACKGROUND2_COLOR);
   looper_mt->callback((Fl_Callback*)cb_looper_mt, (void*)(2));
-} // Fl_Check_Button* looper_mt
+  looper_mt->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  looper_mt->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* looper_mt
 { L_TimePos = new RKR_Box(121, 166, 35, 14);
   L_TimePos->box(FL_DOWN_BOX);
   L_TimePos->color(FL_BACKGROUND_COLOR);

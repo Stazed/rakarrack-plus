@@ -87,10 +87,10 @@ void ShelfGui::cb_shelf_q1(SliderW* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_q1_i(o,v);
 }
 
-void ShelfGui::cb_shelf_mode_i(Fl_Check_Button* o, void*) {
+void ShelfGui::cb_shelf_mode_i(RKR_Check_Button* o, void*) {
   rkr->efx_ShelfBoost->changepar(3,(int)o->value());
 }
-void ShelfGui::cb_shelf_mode(Fl_Check_Button* o, void* v) {
+void ShelfGui::cb_shelf_mode(RKR_Check_Button* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_mode_i(o,v);
 }
 ShelfGui::ShelfGui(int X, int Y, int W, int H, const char *L)
@@ -193,12 +193,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_q1->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_q1->when(FL_WHEN_CHANGED);
 } // SliderW* shelf_q1
-{ shelf_mode = new Fl_Check_Button(13, 161, 54, 15, "Stereo");
+{ shelf_mode = new RKR_Check_Button(13, 161, 54, 15, "Stereo");
+  shelf_mode->box(FL_NO_BOX);
   shelf_mode->down_box(FL_BORDER_BOX);
+  shelf_mode->color(FL_BACKGROUND_COLOR);
+  shelf_mode->selection_color(FL_FOREGROUND_COLOR);
+  shelf_mode->labeltype(FL_NORMAL_LABEL);
+  shelf_mode->labelfont(0);
   shelf_mode->labelsize(10);
   shelf_mode->labelcolor(FL_BACKGROUND2_COLOR);
   shelf_mode->callback((Fl_Callback*)cb_shelf_mode, (void*)(2));
-} // Fl_Check_Button* shelf_mode
+  shelf_mode->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  shelf_mode->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* shelf_mode
 position(X, Y);
 end();
 }

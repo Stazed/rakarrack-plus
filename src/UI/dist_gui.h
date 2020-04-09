@@ -4,13 +4,13 @@
 #define dist_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class DistGui : public Fl_Group {
 public:
@@ -51,20 +51,20 @@ private:
   inline void cb_dist_tipo_i(Fl_Choice*, void*);
   static void cb_dist_tipo(Fl_Choice*, void*);
 public:
-  Fl_Check_Button *dist_neg;
+  RKR_Check_Button *dist_neg;
 private:
-  inline void cb_dist_neg_i(Fl_Check_Button*, void*);
-  static void cb_dist_neg(Fl_Check_Button*, void*);
+  inline void cb_dist_neg_i(RKR_Check_Button*, void*);
+  static void cb_dist_neg(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *dist_pf;
+  RKR_Check_Button *dist_pf;
 private:
-  inline void cb_dist_pf_i(Fl_Check_Button*, void*);
-  static void cb_dist_pf(Fl_Check_Button*, void*);
+  inline void cb_dist_pf_i(RKR_Check_Button*, void*);
+  static void cb_dist_pf(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *dist_st;
+  RKR_Check_Button *dist_st;
 private:
-  inline void cb_dist_st_i(Fl_Check_Button*, void*);
-  static void cb_dist_st(Fl_Check_Button*, void*);
+  inline void cb_dist_st_i(RKR_Check_Button*, void*);
+  static void cb_dist_st(RKR_Check_Button*, void*);
 public:
   SliderW *dist_pan;
 private:

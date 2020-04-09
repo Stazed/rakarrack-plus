@@ -4,13 +4,13 @@
 #define newdist_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class NewdistGui : public Fl_Group {
 public:
@@ -51,10 +51,10 @@ private:
   inline void cb_newdist_tipo_i(Fl_Choice*, void*);
   static void cb_newdist_tipo(Fl_Choice*, void*);
 public:
-  Fl_Check_Button *newdist_neg;
+  RKR_Check_Button *newdist_neg;
 private:
-  inline void cb_newdist_neg_i(Fl_Check_Button*, void*);
-  static void cb_newdist_neg(Fl_Check_Button*, void*);
+  inline void cb_newdist_neg_i(RKR_Check_Button*, void*);
+  static void cb_newdist_neg(RKR_Check_Button*, void*);
 public:
   SliderW *newdist_st;
 private:
@@ -71,10 +71,10 @@ private:
   inline void cb_newdist_pan_i(SliderW*, void*);
   static void cb_newdist_pan(SliderW*, void*);
 public:
-  Fl_Check_Button *newdist_pf;
+  RKR_Check_Button *newdist_pf;
 private:
-  inline void cb_newdist_pf_i(Fl_Check_Button*, void*);
-  static void cb_newdist_pf(Fl_Check_Button*, void*);
+  inline void cb_newdist_pf_i(RKR_Check_Button*, void*);
+  static void cb_newdist_pf(RKR_Check_Button*, void*);
 public:
   SliderW *newdist_lpf;
 private:

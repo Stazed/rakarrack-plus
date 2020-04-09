@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} NewdistGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -25,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} NewdistGui {
 rkr->NewDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_NewDist->cleanup();
-rgui->findpos(17,(int)o->value(),o);} selected
+rgui->findpos(17,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -116,6 +119,7 @@ rkr->efx_NewDist->changepar(4,(int)o->value());}
     user_data 2
     callback {rkr->efx_NewDist->changepar(6,(int)o->value());}
     xywh {110 84 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider newdist_st {
     label Color
@@ -153,8 +157,9 @@ rkr->efx_NewDist->changepar(1,(int)(o->value()+64));}
   Fl_Check_Button newdist_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_NewDist->changepar(10,(int)o->value());}
+    callback {rkr->efx_NewDist->changepar(10,(int)o->value());} selected
     xywh {50 144 66 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider newdist_lpf {
     label LPF

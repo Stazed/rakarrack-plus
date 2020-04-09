@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} WhawhaGui {
   user_data 1 open
   xywh {1428 110 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -25,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} WhawhaGui {
 rkr->WhaWha_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WhaWha->cleanup();
-rgui->findpos(10,(int)o->value(),o);} selected
+rgui->findpos(10,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -161,8 +164,9 @@ rkr->efx_WhaWha->changepar(7,(int)o->value());}
  rgui->getMIDIControl(112);
  return;
 } 
-rkr->efx_WhaWha->changepar(8,(int)o->value());}
+rkr->efx_WhaWha->changepar(8,(int)o->value());} selected
     tooltip {Amplitude Sensitivity Inverse} xywh {8 145 70 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Choice WhaWha_ftype {
     label {F. Type}

@@ -4,13 +4,13 @@
 #define whawha_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class WhawhaGui : public Fl_Group {
 public:
@@ -66,10 +66,10 @@ private:
   inline void cb_WhaWha_ampsns_i(SliderW*, void*);
   static void cb_WhaWha_ampsns(SliderW*, void*);
 public:
-  Fl_Check_Button *WhaWha_ampsnsinv;
+  RKR_Check_Button *WhaWha_ampsnsinv;
 private:
-  inline void cb_WhaWha_ampsnsinv_i(Fl_Check_Button*, void*);
-  static void cb_WhaWha_ampsnsinv(Fl_Check_Button*, void*);
+  inline void cb_WhaWha_ampsnsinv_i(RKR_Check_Button*, void*);
+  static void cb_WhaWha_ampsnsinv(RKR_Check_Button*, void*);
 public:
   Fl_Choice *WhaWha_ftype;
 private:

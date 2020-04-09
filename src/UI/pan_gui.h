@@ -4,13 +4,13 @@
 #define pan_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class PanGui : public Fl_Group {
 public:
@@ -36,10 +36,10 @@ private:
   inline void cb_pan_pan_i(SliderW*, void*);
   static void cb_pan_pan(SliderW*, void*);
 public:
-  Fl_Check_Button *pan_autopan;
+  RKR_Check_Button *pan_autopan;
 private:
-  inline void cb_pan_autopan_i(Fl_Check_Button*, void*);
-  static void cb_pan_autopan(Fl_Check_Button*, void*);
+  inline void cb_pan_autopan_i(RKR_Check_Button*, void*);
+  static void cb_pan_autopan(RKR_Check_Button*, void*);
 public:
   SliderW *pan_freq;
 private:
@@ -61,10 +61,10 @@ private:
   inline void cb_pan_stdf_i(SliderW*, void*);
   static void cb_pan_stdf(SliderW*, void*);
 public:
-  Fl_Check_Button *pan_extraon;
+  RKR_Check_Button *pan_extraon;
 private:
-  inline void cb_pan_extraon_i(Fl_Check_Button*, void*);
-  static void cb_pan_extraon(Fl_Check_Button*, void*);
+  inline void cb_pan_extraon_i(RKR_Check_Button*, void*);
+  static void cb_pan_extraon(RKR_Check_Button*, void*);
 public:
   SliderW *pan_extra;
 private:

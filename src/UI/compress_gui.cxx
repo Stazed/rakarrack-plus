@@ -114,27 +114,27 @@ void CompressGui::cb_compress_output(SliderW* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_output_i(o,v);
 }
 
-void CompressGui::cb_Auto_Output_i(Fl_Check_Button* o, void*) {
+void CompressGui::cb_Auto_Output_i(RKR_Check_Button* o, void*) {
   rkr->efx_Compressor->changepar(6,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();
 }
-void CompressGui::cb_Auto_Output(Fl_Check_Button* o, void* v) {
+void CompressGui::cb_Auto_Output(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Auto_Output_i(o,v);
 }
 
-void CompressGui::cb_Stereo_i(Fl_Check_Button* o, void*) {
+void CompressGui::cb_Stereo_i(RKR_Check_Button* o, void*) {
   rkr->efx_Compressor->changepar(8,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();
 }
-void CompressGui::cb_Stereo(Fl_Check_Button* o, void* v) {
+void CompressGui::cb_Stereo(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Stereo_i(o,v);
 }
 
-void CompressGui::cb_Peak_i(Fl_Check_Button* o, void*) {
+void CompressGui::cb_Peak_i(RKR_Check_Button* o, void*) {
   rkr->efx_Compressor->changepar(9,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();
 }
-void CompressGui::cb_Peak(Fl_Check_Button* o, void* v) {
+void CompressGui::cb_Peak(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Peak_i(o,v);
 }
 CompressGui::CompressGui(int X, int Y, int W, int H, const char *L)
@@ -274,27 +274,48 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_output->align(Fl_Align(FL_ALIGN_LEFT));
   compress_output->when(FL_WHEN_CHANGED);
 } // SliderW* compress_output
-{ Auto_Output = new Fl_Check_Button(19, 166, 15, 15, "Auto Output");
+{ Auto_Output = new RKR_Check_Button(19, 166, 15, 15, "Auto Output");
+  Auto_Output->box(FL_NO_BOX);
   Auto_Output->down_box(FL_BORDER_BOX);
+  Auto_Output->color(FL_BACKGROUND_COLOR);
+  Auto_Output->selection_color(FL_FOREGROUND_COLOR);
+  Auto_Output->labeltype(FL_NORMAL_LABEL);
+  Auto_Output->labelfont(0);
   Auto_Output->labelsize(10);
   Auto_Output->labelcolor(FL_BACKGROUND2_COLOR);
   Auto_Output->callback((Fl_Callback*)cb_Auto_Output, (void*)(2));
-} // Fl_Check_Button* Auto_Output
-{ Stereo = new Fl_Check_Button(104, 166, 15, 15, "Stereo");
+  Auto_Output->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  Auto_Output->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* Auto_Output
+{ Stereo = new RKR_Check_Button(104, 166, 15, 15, "Stereo");
   Stereo->tooltip("Level detect Left and Right separately.  Unchecked compresses according to L/\
 R average.");
+  Stereo->box(FL_NO_BOX);
   Stereo->down_box(FL_BORDER_BOX);
+  Stereo->color(FL_BACKGROUND_COLOR);
+  Stereo->selection_color(FL_FOREGROUND_COLOR);
+  Stereo->labeltype(FL_NORMAL_LABEL);
+  Stereo->labelfont(0);
   Stereo->labelsize(10);
   Stereo->labelcolor(FL_BACKGROUND2_COLOR);
   Stereo->callback((Fl_Callback*)cb_Stereo, (void*)(2));
-} // Fl_Check_Button* Stereo
-{ Peak = new Fl_Check_Button(19, 153, 15, 15, "Peak");
+  Stereo->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  Stereo->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* Stereo
+{ Peak = new RKR_Check_Button(19, 153, 15, 15, "Peak");
   Peak->tooltip("Peak Mode Compression");
+  Peak->box(FL_NO_BOX);
   Peak->down_box(FL_BORDER_BOX);
+  Peak->color(FL_BACKGROUND_COLOR);
+  Peak->selection_color(FL_FOREGROUND_COLOR);
+  Peak->labeltype(FL_NORMAL_LABEL);
+  Peak->labelfont(0);
   Peak->labelsize(10);
   Peak->labelcolor(FL_BACKGROUND2_COLOR);
   Peak->callback((Fl_Callback*)cb_Peak, (void*)(2));
-} // Fl_Check_Button* Peak
+  Peak->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  Peak->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* Peak
 position(X, Y);
 end();
 }

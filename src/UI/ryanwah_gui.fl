@@ -28,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} RyanwahGui {
 rkr->RyanWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RyanWah->cleanup();
-rgui->findpos(31,(int)o->value(),o);} selected
+rgui->findpos(31,(int)o->value(),o);}
     xywh {6 5 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -114,6 +114,7 @@ else
 rkr->efx_RyanWah->Pmode -=1;
 rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
     tooltip {Analog Gain Mode} xywh {18 34 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+    class RKR_Check_Button
   }
   Fl_Value_Slider ryanwah_lp {
     label LP
@@ -135,6 +136,7 @@ else
 rkr->efx_RyanWah->Pmode -=2;
 rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
     tooltip {Exponential Wah} xywh {18 44 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+    class RKR_Check_Button
   }
   Fl_Value_Slider ryanwah_bp {
     label BP
@@ -150,8 +152,9 @@ rkr->efx_RyanWah->changepar(11,(int)o->value());}
   Fl_Check_Button ryanwah_res {
     label R
     user_data 2
-    callback {rkr->efx_RyanWah->changepar(16,(int)o->value());}
+    callback {rkr->efx_RyanWah->changepar(16,(int)o->value());} selected
     tooltip {Modulate Resonance} xywh {18 54 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+    class RKR_Check_Button
   }
   Fl_Value_Slider ryanwah_hp {
     label HP
@@ -287,4 +290,7 @@ rkr->efx_RyanWah->changepar(15,(int)o->value());}
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
   }
+}
+
+decl {\#include "RKR_Check_Button.h"} {public global
 }

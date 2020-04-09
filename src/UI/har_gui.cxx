@@ -133,16 +133,16 @@ void HarGui::cb_har_q1(SliderW* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_q1_i(o,v);
 }
 
-void HarGui::cb_har_MIDI_i(Fl_Check_Button* o, void*) {
+void HarGui::cb_har_MIDI_i(RKR_Check_Button* o, void*) {
   rkr->efx_Har->changepar(10,(int)o->value());
 rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 }
-void HarGui::cb_har_MIDI(Fl_Check_Button* o, void* v) {
+void HarGui::cb_har_MIDI(RKR_Check_Button* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_MIDI_i(o,v);
 }
 
-void HarGui::cb_har_SELECT_i(Fl_Check_Button* o, void*) {
+void HarGui::cb_har_SELECT_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(447);
@@ -153,7 +153,7 @@ rkr->RC_Harm->cleanup();
 if(!(int)o->value())rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 rgui->Chord(0);
 }
-void HarGui::cb_har_SELECT(Fl_Check_Button* o, void* v) {
+void HarGui::cb_har_SELECT(RKR_Check_Button* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_SELECT_i(o,v);
 }
 
@@ -333,20 +333,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_q1->align(Fl_Align(FL_ALIGN_LEFT));
   har_q1->when(FL_WHEN_CHANGED);
 } // SliderW* har_q1
-{ har_MIDI = new Fl_Check_Button(9, 124, 15, 15, "MIDI");
+{ har_MIDI = new RKR_Check_Button(9, 124, 15, 15, "MIDI");
+  har_MIDI->box(FL_NO_BOX);
   har_MIDI->down_box(FL_BORDER_BOX);
+  har_MIDI->color(FL_BACKGROUND_COLOR);
+  har_MIDI->selection_color(FL_FOREGROUND_COLOR);
+  har_MIDI->labeltype(FL_NORMAL_LABEL);
+  har_MIDI->labelfont(0);
   har_MIDI->labelsize(10);
   har_MIDI->labelcolor(FL_BACKGROUND2_COLOR);
   har_MIDI->callback((Fl_Callback*)cb_har_MIDI, (void*)(2));
   har_MIDI->align(Fl_Align(FL_ALIGN_RIGHT));
-} // Fl_Check_Button* har_MIDI
-{ har_SELECT = new Fl_Check_Button(9, 142, 15, 15, "SELECT");
+  har_MIDI->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* har_MIDI
+{ har_SELECT = new RKR_Check_Button(9, 142, 15, 15, "SELECT");
+  har_SELECT->box(FL_NO_BOX);
   har_SELECT->down_box(FL_BORDER_BOX);
+  har_SELECT->color(FL_BACKGROUND_COLOR);
+  har_SELECT->selection_color(FL_FOREGROUND_COLOR);
+  har_SELECT->labeltype(FL_NORMAL_LABEL);
+  har_SELECT->labelfont(0);
   har_SELECT->labelsize(10);
   har_SELECT->labelcolor(FL_BACKGROUND2_COLOR);
   har_SELECT->callback((Fl_Callback*)cb_har_SELECT, (void*)(2));
   har_SELECT->align(Fl_Align(FL_ALIGN_RIGHT));
-} // Fl_Check_Button* har_SELECT
+  har_SELECT->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* har_SELECT
 { RKR_Box* o = har_chordname = new RKR_Box(56, 126, 98, 27);
   har_chordname->box(FL_NO_BOX);
   har_chordname->color(FL_BACKGROUND_COLOR);

@@ -144,10 +144,10 @@ void CoilGui::cb_coil_q2(SliderW* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_q2_i(o,v);
 }
 
-void CoilGui::cb_coil_mode_i(Fl_Check_Button* o, void*) {
+void CoilGui::cb_coil_mode_i(RKR_Check_Button* o, void*) {
   rkr->efx_CoilCrafter->changepar(8,(int)o->value());
 }
-void CoilGui::cb_coil_mode(Fl_Check_Button* o, void* v) {
+void CoilGui::cb_coil_mode(RKR_Check_Button* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_mode_i(o,v);
 }
 CoilGui::CoilGui(int X, int Y, int W, int H, const char *L)
@@ -313,12 +313,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_q2->align(Fl_Align(FL_ALIGN_LEFT));
   coil_q2->when(FL_WHEN_CHANGED);
 } // SliderW* coil_q2
-{ coil_mode = new Fl_Check_Button(13, 161, 41, 15, "Neck Pickup");
+{ coil_mode = new RKR_Check_Button(13, 161, 41, 15, "Neck Pickup");
+  coil_mode->box(FL_NO_BOX);
   coil_mode->down_box(FL_BORDER_BOX);
+  coil_mode->color(FL_BACKGROUND_COLOR);
+  coil_mode->selection_color(FL_FOREGROUND_COLOR);
+  coil_mode->labeltype(FL_NORMAL_LABEL);
+  coil_mode->labelfont(0);
   coil_mode->labelsize(10);
   coil_mode->labelcolor(FL_BACKGROUND2_COLOR);
   coil_mode->callback((Fl_Callback*)cb_coil_mode, (void*)(2));
-} // Fl_Check_Button* coil_mode
+  coil_mode->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  coil_mode->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* coil_mode
 position(X, Y);
 end();
 }

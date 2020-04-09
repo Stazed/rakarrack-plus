@@ -4,13 +4,13 @@
 #define ovrd_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class OvrdGui : public Fl_Group {
 public:
@@ -51,25 +51,25 @@ private:
   inline void cb_ovrd_tipo_i(Fl_Choice*, void*);
   static void cb_ovrd_tipo(Fl_Choice*, void*);
 public:
-  Fl_Check_Button *ovrd_neg;
+  RKR_Check_Button *ovrd_neg;
 private:
-  inline void cb_ovrd_neg_i(Fl_Check_Button*, void*);
-  static void cb_ovrd_neg(Fl_Check_Button*, void*);
+  inline void cb_ovrd_neg_i(RKR_Check_Button*, void*);
+  static void cb_ovrd_neg(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *ovrd_st;
+  RKR_Check_Button *ovrd_st;
 private:
-  inline void cb_ovrd_st_i(Fl_Check_Button*, void*);
-  static void cb_ovrd_st(Fl_Check_Button*, void*);
+  inline void cb_ovrd_st_i(RKR_Check_Button*, void*);
+  static void cb_ovrd_st(RKR_Check_Button*, void*);
 public:
   SliderW *ovrd_pan;
 private:
   inline void cb_ovrd_pan_i(SliderW*, void*);
   static void cb_ovrd_pan(SliderW*, void*);
 public:
-  Fl_Check_Button *ovrd_pf;
+  RKR_Check_Button *ovrd_pf;
 private:
-  inline void cb_ovrd_pf_i(Fl_Check_Button*, void*);
-  static void cb_ovrd_pf(Fl_Check_Button*, void*);
+  inline void cb_ovrd_pf_i(RKR_Check_Button*, void*);
+  static void cb_ovrd_pf(RKR_Check_Button*, void*);
 public:
   SliderW *ovrd_lpf;
 private:

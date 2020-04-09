@@ -4,13 +4,13 @@
 #define midiconv_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Counter.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Box.H>
 
 class MidiGui : public Fl_Group {
@@ -32,10 +32,10 @@ private:
   inline void cb_Midi_out_Counter_i(Fl_Counter*, void*);
   static void cb_Midi_out_Counter(Fl_Counter*, void*);
 public:
-  Fl_Check_Button *Use_FFT;
+  RKR_Check_Button *Use_FFT;
 private:
-  inline void cb_Use_FFT_i(Fl_Check_Button*, void*);
-  static void cb_Use_FFT(Fl_Check_Button*, void*);
+  inline void cb_Use_FFT_i(RKR_Check_Button*, void*);
+  static void cb_Use_FFT(RKR_Check_Button*, void*);
 public:
   SliderW *Trig_Adj;
 private:

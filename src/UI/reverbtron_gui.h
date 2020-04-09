@@ -4,12 +4,12 @@
 #define reverbtron_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class RevtronGui : public Fl_Group {
 public:
@@ -80,25 +80,25 @@ private:
   inline void cb_revtron_LPF_i(SliderW*, void*);
   static void cb_revtron_LPF(SliderW*, void*);
 public:
-  Fl_Check_Button *revtron_rv;
+  RKR_Check_Button *revtron_rv;
 private:
-  inline void cb_revtron_rv_i(Fl_Check_Button*, void*);
-  static void cb_revtron_rv(Fl_Check_Button*, void*);
+  inline void cb_revtron_rv_i(RKR_Check_Button*, void*);
+  static void cb_revtron_rv(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *revtron_es;
+  RKR_Check_Button *revtron_es;
 private:
-  inline void cb_revtron_es_i(Fl_Check_Button*, void*);
-  static void cb_revtron_es(Fl_Check_Button*, void*);
+  inline void cb_revtron_es_i(RKR_Check_Button*, void*);
+  static void cb_revtron_es(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *revtron_safe;
+  RKR_Check_Button *revtron_safe;
 private:
-  inline void cb_revtron_safe_i(Fl_Check_Button*, void*);
-  static void cb_revtron_safe(Fl_Check_Button*, void*);
+  inline void cb_revtron_safe_i(RKR_Check_Button*, void*);
+  static void cb_revtron_safe(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *revtron_user;
+  RKR_Check_Button *revtron_user;
 private:
-  inline void cb_revtron_user_i(Fl_Check_Button*, void*);
-  static void cb_revtron_user(Fl_Check_Button*, void*);
+  inline void cb_revtron_user_i(RKR_Check_Button*, void*);
+  static void cb_revtron_user(RKR_Check_Button*, void*);
 public:
   RKR_Button *B_rvb;
 private:

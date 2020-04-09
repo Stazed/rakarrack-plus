@@ -111,10 +111,10 @@ void OtremGui::cb_otrem_pan(SliderW* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_pan_i(o,v);
 }
 
-void OtremGui::cb_otrem_invert_i(Fl_Check_Button* o, void*) {
+void OtremGui::cb_otrem_invert_i(RKR_Check_Button* o, void*) {
   rkr->efx_Opticaltrem->changepar(6,(int)o->value());
 }
-void OtremGui::cb_otrem_invert(Fl_Check_Button* o, void* v) {
+void OtremGui::cb_otrem_invert(RKR_Check_Button* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_invert_i(o,v);
 }
 OtremGui::OtremGui(int X, int Y, int W, int H, const char *L)
@@ -241,14 +241,21 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_pan->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_pan->when(FL_WHEN_CHANGED);
 } // SliderW* otrem_pan
-{ otrem_invert = new Fl_Check_Button(49, 164, 73, 15, "Invert");
+{ otrem_invert = new RKR_Check_Button(49, 164, 73, 15, "Invert");
   otrem_invert->tooltip("If checked it behaves more like tube preamp trem. If unchecked it behaves lik\
 e a stompbox Opto Trem");
+  otrem_invert->box(FL_NO_BOX);
   otrem_invert->down_box(FL_BORDER_BOX);
+  otrem_invert->color(FL_BACKGROUND_COLOR);
+  otrem_invert->selection_color(FL_FOREGROUND_COLOR);
+  otrem_invert->labeltype(FL_NORMAL_LABEL);
+  otrem_invert->labelfont(0);
   otrem_invert->labelsize(10);
   otrem_invert->labelcolor(FL_BACKGROUND2_COLOR);
   otrem_invert->callback((Fl_Callback*)cb_otrem_invert, (void*)(2));
-} // Fl_Check_Button* otrem_invert
+  otrem_invert->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  otrem_invert->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* otrem_invert
 position(X, Y);
 end();
 }

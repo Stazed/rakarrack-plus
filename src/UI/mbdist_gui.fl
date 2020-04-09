@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} MbdistGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -25,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} MbdistGui {
 rkr->MBDist_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MBDist->cleanup();
-rgui->findpos(23,(int)o->value(),o);} selected
+rgui->findpos(23,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -214,12 +217,14 @@ rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
     user_data 2
     callback {rkr->efx_MBDist->changepar(14,(int)o->value());}
     xywh {32 168 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Check_Button mbdist_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_MBDist->changepar(11,(int)o->value());}
+    callback {rkr->efx_MBDist->changepar(11,(int)o->value());} selected
     xywh {101 167 44 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   decl {CommonGuiMenu *m_dist_menu;} {private local
   }

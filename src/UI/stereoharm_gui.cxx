@@ -150,7 +150,7 @@ void SharGui::cb_shar_lrc(SliderW* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_lrc_i(o,v);
 }
 
-void SharGui::cb_shar_MIDI_i(Fl_Check_Button* o, void*) {
+void SharGui::cb_shar_MIDI_i(RKR_Check_Button* o, void*) {
   rkr->efx_StereoHarm->changepar(10,(int)o->value());
 rkr->RC_Stereo_Harm->cleanup();
 
@@ -160,11 +160,11 @@ rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 };
 }
-void SharGui::cb_shar_MIDI(Fl_Check_Button* o, void* v) {
+void SharGui::cb_shar_MIDI(RKR_Check_Button* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_MIDI_i(o,v);
 }
 
-void SharGui::cb_shar_SELECT_i(Fl_Check_Button* o, void*) {
+void SharGui::cb_shar_SELECT_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(448);
@@ -180,7 +180,7 @@ rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
 };
 }
-void SharGui::cb_shar_SELECT(Fl_Check_Button* o, void* v) {
+void SharGui::cb_shar_SELECT(RKR_Check_Button* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_SELECT_i(o,v);
 }
 
@@ -378,20 +378,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shar_lrc->align(Fl_Align(FL_ALIGN_LEFT));
   shar_lrc->when(FL_WHEN_CHANGED);
 } // SliderW* shar_lrc
-{ shar_MIDI = new Fl_Check_Button(9, 129, 15, 15, "MIDI");
+{ shar_MIDI = new RKR_Check_Button(9, 129, 15, 15, "MIDI");
+  shar_MIDI->box(FL_NO_BOX);
   shar_MIDI->down_box(FL_BORDER_BOX);
+  shar_MIDI->color(FL_BACKGROUND_COLOR);
+  shar_MIDI->selection_color(FL_FOREGROUND_COLOR);
+  shar_MIDI->labeltype(FL_NORMAL_LABEL);
+  shar_MIDI->labelfont(0);
   shar_MIDI->labelsize(10);
   shar_MIDI->labelcolor(FL_BACKGROUND2_COLOR);
   shar_MIDI->callback((Fl_Callback*)cb_shar_MIDI, (void*)(2));
   shar_MIDI->align(Fl_Align(FL_ALIGN_RIGHT));
-} // Fl_Check_Button* shar_MIDI
-{ shar_SELECT = new Fl_Check_Button(9, 142, 15, 15, "SELECT");
+  shar_MIDI->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* shar_MIDI
+{ shar_SELECT = new RKR_Check_Button(9, 142, 15, 15, "SELECT");
+  shar_SELECT->box(FL_NO_BOX);
   shar_SELECT->down_box(FL_BORDER_BOX);
+  shar_SELECT->color(FL_BACKGROUND_COLOR);
+  shar_SELECT->selection_color(FL_FOREGROUND_COLOR);
+  shar_SELECT->labeltype(FL_NORMAL_LABEL);
+  shar_SELECT->labelfont(0);
   shar_SELECT->labelsize(10);
   shar_SELECT->labelcolor(FL_BACKGROUND2_COLOR);
   shar_SELECT->callback((Fl_Callback*)cb_shar_SELECT, (void*)(2));
   shar_SELECT->align(Fl_Align(FL_ALIGN_RIGHT));
-} // Fl_Check_Button* shar_SELECT
+  shar_SELECT->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* shar_SELECT
 { RKR_Box* o = shar_chordname = new RKR_Box(56, 132, 98, 21);
   shar_chordname->box(FL_NO_BOX);
   shar_chordname->color(FL_BACKGROUND_COLOR);

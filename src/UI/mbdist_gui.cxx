@@ -194,17 +194,17 @@ void MbdistGui::cb_mbdist_pan(SliderW* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_pan_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_st_i(Fl_Check_Button* o, void*) {
+void MbdistGui::cb_mbdist_st_i(RKR_Check_Button* o, void*) {
   rkr->efx_MBDist->changepar(14,(int)o->value());
 }
-void MbdistGui::cb_mbdist_st(Fl_Check_Button* o, void* v) {
+void MbdistGui::cb_mbdist_st(RKR_Check_Button* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_st_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_neg_i(Fl_Check_Button* o, void*) {
+void MbdistGui::cb_mbdist_neg_i(RKR_Check_Button* o, void*) {
   rkr->efx_MBDist->changepar(11,(int)o->value());
 }
-void MbdistGui::cb_mbdist_neg(Fl_Check_Button* o, void* v) {
+void MbdistGui::cb_mbdist_neg(RKR_Check_Button* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_neg_i(o,v);
 }
 MbdistGui::MbdistGui(int X, int Y, int W, int H, const char *L)
@@ -434,18 +434,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_pan->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_pan->when(FL_WHEN_CHANGED);
 } // SliderW* mbdist_pan
-{ mbdist_st = new Fl_Check_Button(32, 168, 54, 15, "Stereo");
+{ mbdist_st = new RKR_Check_Button(32, 168, 54, 15, "Stereo");
+  mbdist_st->box(FL_NO_BOX);
   mbdist_st->down_box(FL_BORDER_BOX);
+  mbdist_st->color(FL_BACKGROUND_COLOR);
+  mbdist_st->selection_color(FL_FOREGROUND_COLOR);
+  mbdist_st->labeltype(FL_NORMAL_LABEL);
+  mbdist_st->labelfont(0);
   mbdist_st->labelsize(10);
   mbdist_st->labelcolor(FL_BACKGROUND2_COLOR);
   mbdist_st->callback((Fl_Callback*)cb_mbdist_st, (void*)(2));
-} // Fl_Check_Button* mbdist_st
-{ mbdist_neg = new Fl_Check_Button(101, 167, 44, 15, "Neg.");
+  mbdist_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  mbdist_st->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* mbdist_st
+{ mbdist_neg = new RKR_Check_Button(101, 167, 44, 15, "Neg.");
+  mbdist_neg->box(FL_NO_BOX);
   mbdist_neg->down_box(FL_BORDER_BOX);
+  mbdist_neg->color(FL_BACKGROUND_COLOR);
+  mbdist_neg->selection_color(FL_FOREGROUND_COLOR);
+  mbdist_neg->labeltype(FL_NORMAL_LABEL);
+  mbdist_neg->labelfont(0);
   mbdist_neg->labelsize(10);
   mbdist_neg->labelcolor(FL_BACKGROUND2_COLOR);
   mbdist_neg->callback((Fl_Callback*)cb_mbdist_neg, (void*)(2));
-} // Fl_Check_Button* mbdist_neg
+  mbdist_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  mbdist_neg->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* mbdist_neg
 position(X, Y);
 end();
 }

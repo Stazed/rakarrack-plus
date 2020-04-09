@@ -165,10 +165,10 @@ void VibeGui::cb_vibe_pan(SliderW* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_pan_i(o,v);
 }
 
-void VibeGui::cb_vibe_stereo_i(Fl_Check_Button* o, void*) {
+void VibeGui::cb_vibe_stereo_i(RKR_Check_Button* o, void*) {
   rkr->efx_Vibe->changepar(10,(int)o->value());
 }
-void VibeGui::cb_vibe_stereo(Fl_Check_Button* o, void* v) {
+void VibeGui::cb_vibe_stereo(RKR_Check_Button* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_stereo_i(o,v);
 }
 VibeGui::VibeGui(int X, int Y, int W, int H, const char *L)
@@ -360,12 +360,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_pan->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_pan->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_pan
-{ vibe_stereo = new Fl_Check_Button(103, 169, 43, 14, "Stereo");
+{ vibe_stereo = new RKR_Check_Button(103, 169, 43, 14, "Stereo");
+  vibe_stereo->box(FL_NO_BOX);
   vibe_stereo->down_box(FL_BORDER_BOX);
+  vibe_stereo->color(FL_BACKGROUND_COLOR);
+  vibe_stereo->selection_color(FL_FOREGROUND_COLOR);
+  vibe_stereo->labeltype(FL_NORMAL_LABEL);
+  vibe_stereo->labelfont(0);
   vibe_stereo->labelsize(10);
   vibe_stereo->labelcolor(FL_BACKGROUND2_COLOR);
   vibe_stereo->callback((Fl_Callback*)cb_vibe_stereo, (void*)(2));
-} // Fl_Check_Button* vibe_stereo
+  vibe_stereo->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  vibe_stereo->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* vibe_stereo
 position(X, Y);
 end();
 }

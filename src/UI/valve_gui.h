@@ -4,12 +4,12 @@
 #define valve_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class ValveGui : public Fl_Group {
 public:
@@ -50,10 +50,10 @@ private:
   inline void cb_valve_drive_i(SliderW*, void*);
   static void cb_valve_drive(SliderW*, void*);
 public:
-  Fl_Check_Button *valve_ed;
+  RKR_Check_Button *valve_ed;
 private:
-  inline void cb_valve_ed_i(Fl_Check_Button*, void*);
-  static void cb_valve_ed(Fl_Check_Button*, void*);
+  inline void cb_valve_ed_i(RKR_Check_Button*, void*);
+  static void cb_valve_ed(RKR_Check_Button*, void*);
 public:
   SliderW *valve_Q;
 private:
@@ -65,20 +65,20 @@ private:
   inline void cb_valve_Pre_i(SliderW*, void*);
   static void cb_valve_Pre(SliderW*, void*);
 public:
-  Fl_Check_Button *valve_pf;
+  RKR_Check_Button *valve_pf;
 private:
-  inline void cb_valve_pf_i(Fl_Check_Button*, void*);
-  static void cb_valve_pf(Fl_Check_Button*, void*);
+  inline void cb_valve_pf_i(RKR_Check_Button*, void*);
+  static void cb_valve_pf(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *valve_st;
+  RKR_Check_Button *valve_st;
 private:
-  inline void cb_valve_st_i(Fl_Check_Button*, void*);
-  static void cb_valve_st(Fl_Check_Button*, void*);
+  inline void cb_valve_st_i(RKR_Check_Button*, void*);
+  static void cb_valve_st(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *valve_neg;
+  RKR_Check_Button *valve_neg;
 private:
-  inline void cb_valve_neg_i(Fl_Check_Button*, void*);
-  static void cb_valve_neg(Fl_Check_Button*, void*);
+  inline void cb_valve_neg_i(RKR_Check_Button*, void*);
+  static void cb_valve_neg(RKR_Check_Button*, void*);
 public:
   SliderW *valve_lpf;
 private:

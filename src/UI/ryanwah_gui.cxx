@@ -75,14 +75,14 @@ void RyanwahGui::cb_ryanwah_WD(SliderW* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_WD_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_qm_i(Fl_Check_Button* o, void*) {
+void RyanwahGui::cb_ryanwah_qm_i(RKR_Check_Button* o, void*) {
   if((int)o->value()) 
 rkr->efx_RyanWah->Pmode +=1;
 else
 rkr->efx_RyanWah->Pmode -=1;
 rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);
 }
-void RyanwahGui::cb_ryanwah_qm(Fl_Check_Button* o, void* v) {
+void RyanwahGui::cb_ryanwah_qm(RKR_Check_Button* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_qm_i(o,v);
 }
 
@@ -98,14 +98,14 @@ void RyanwahGui::cb_ryanwah_lp(SliderW* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_lp_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_nat_i(Fl_Check_Button* o, void*) {
+void RyanwahGui::cb_ryanwah_nat_i(RKR_Check_Button* o, void*) {
   if((int)o->value()) 
 rkr->efx_RyanWah->Pmode +=2;
 else
 rkr->efx_RyanWah->Pmode -=2;
 rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);
 }
-void RyanwahGui::cb_ryanwah_nat(Fl_Check_Button* o, void* v) {
+void RyanwahGui::cb_ryanwah_nat(RKR_Check_Button* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_nat_i(o,v);
 }
 
@@ -121,10 +121,10 @@ void RyanwahGui::cb_ryanwah_bp(SliderW* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_bp_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_res_i(Fl_Check_Button* o, void*) {
+void RyanwahGui::cb_ryanwah_res_i(RKR_Check_Button* o, void*) {
   rkr->efx_RyanWah->changepar(16,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_res(Fl_Check_Button* o, void* v) {
+void RyanwahGui::cb_ryanwah_res(RKR_Check_Button* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_res_i(o,v);
 }
 
@@ -320,14 +320,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_WD->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_WD->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_WD
-{ ryanwah_qm = new Fl_Check_Button(18, 34, 15, 15, "M");
+{ ryanwah_qm = new RKR_Check_Button(18, 34, 15, 15, "M");
   ryanwah_qm->tooltip("Analog Gain Mode");
+  ryanwah_qm->box(FL_NO_BOX);
   ryanwah_qm->down_box(FL_BORDER_BOX);
+  ryanwah_qm->color(FL_BACKGROUND_COLOR);
+  ryanwah_qm->selection_color(FL_FOREGROUND_COLOR);
+  ryanwah_qm->labeltype(FL_NORMAL_LABEL);
+  ryanwah_qm->labelfont(0);
   ryanwah_qm->labelsize(10);
   ryanwah_qm->labelcolor(FL_BACKGROUND2_COLOR);
   ryanwah_qm->callback((Fl_Callback*)cb_ryanwah_qm, (void*)(2));
   ryanwah_qm->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Check_Button* ryanwah_qm
+  ryanwah_qm->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* ryanwah_qm
 { ryanwah_lp = new SliderW(56, 37, 100, 10, "LP");
   ryanwah_lp->tooltip("Lowpass Level");
   ryanwah_lp->type(5);
@@ -346,14 +352,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_lp->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_lp->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_lp
-{ ryanwah_nat = new Fl_Check_Button(18, 44, 15, 15, "N");
+{ ryanwah_nat = new RKR_Check_Button(18, 44, 15, 15, "N");
   ryanwah_nat->tooltip("Exponential Wah");
+  ryanwah_nat->box(FL_NO_BOX);
   ryanwah_nat->down_box(FL_BORDER_BOX);
+  ryanwah_nat->color(FL_BACKGROUND_COLOR);
+  ryanwah_nat->selection_color(FL_FOREGROUND_COLOR);
+  ryanwah_nat->labeltype(FL_NORMAL_LABEL);
+  ryanwah_nat->labelfont(0);
   ryanwah_nat->labelsize(10);
   ryanwah_nat->labelcolor(FL_BACKGROUND2_COLOR);
   ryanwah_nat->callback((Fl_Callback*)cb_ryanwah_nat, (void*)(2));
   ryanwah_nat->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Check_Button* ryanwah_nat
+  ryanwah_nat->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* ryanwah_nat
 { ryanwah_bp = new SliderW(56, 49, 100, 10, "BP");
   ryanwah_bp->tooltip("Bandpass Level");
   ryanwah_bp->type(5);
@@ -372,14 +384,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_bp->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_bp->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_bp
-{ ryanwah_res = new Fl_Check_Button(18, 54, 15, 15, "R");
+{ ryanwah_res = new RKR_Check_Button(18, 54, 15, 15, "R");
   ryanwah_res->tooltip("Modulate Resonance");
+  ryanwah_res->box(FL_NO_BOX);
   ryanwah_res->down_box(FL_BORDER_BOX);
+  ryanwah_res->color(FL_BACKGROUND_COLOR);
+  ryanwah_res->selection_color(FL_FOREGROUND_COLOR);
+  ryanwah_res->labeltype(FL_NORMAL_LABEL);
+  ryanwah_res->labelfont(0);
   ryanwah_res->labelsize(10);
   ryanwah_res->labelcolor(FL_BACKGROUND2_COLOR);
   ryanwah_res->callback((Fl_Callback*)cb_ryanwah_res, (void*)(2));
   ryanwah_res->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Check_Button* ryanwah_res
+  ryanwah_res->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* ryanwah_res
 { ryanwah_hp = new SliderW(56, 61, 100, 10, "HP");
   ryanwah_hp->tooltip("Highpass Level");
   ryanwah_hp->type(5);

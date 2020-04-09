@@ -11,7 +11,6 @@
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
 
 class RyanwahGui : public Fl_Group {
@@ -33,30 +32,30 @@ private:
   inline void cb_ryanwah_WD_i(SliderW*, void*);
   static void cb_ryanwah_WD(SliderW*, void*);
 public:
-  Fl_Check_Button *ryanwah_qm;
+  RKR_Check_Button *ryanwah_qm;
 private:
-  inline void cb_ryanwah_qm_i(Fl_Check_Button*, void*);
-  static void cb_ryanwah_qm(Fl_Check_Button*, void*);
+  inline void cb_ryanwah_qm_i(RKR_Check_Button*, void*);
+  static void cb_ryanwah_qm(RKR_Check_Button*, void*);
 public:
   SliderW *ryanwah_lp;
 private:
   inline void cb_ryanwah_lp_i(SliderW*, void*);
   static void cb_ryanwah_lp(SliderW*, void*);
 public:
-  Fl_Check_Button *ryanwah_nat;
+  RKR_Check_Button *ryanwah_nat;
 private:
-  inline void cb_ryanwah_nat_i(Fl_Check_Button*, void*);
-  static void cb_ryanwah_nat(Fl_Check_Button*, void*);
+  inline void cb_ryanwah_nat_i(RKR_Check_Button*, void*);
+  static void cb_ryanwah_nat(RKR_Check_Button*, void*);
 public:
   SliderW *ryanwah_bp;
 private:
   inline void cb_ryanwah_bp_i(SliderW*, void*);
   static void cb_ryanwah_bp(SliderW*, void*);
 public:
-  Fl_Check_Button *ryanwah_res;
+  RKR_Check_Button *ryanwah_res;
 private:
-  inline void cb_ryanwah_res_i(Fl_Check_Button*, void*);
-  static void cb_ryanwah_res(Fl_Check_Button*, void*);
+  inline void cb_ryanwah_res_i(RKR_Check_Button*, void*);
+  static void cb_ryanwah_res(RKR_Check_Button*, void*);
 public:
   SliderW *ryanwah_hp;
 private:
@@ -124,4 +123,5 @@ private:
   static void cb_ryanwah_minfreq(RKR_Value_Input*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
+#include "RKR_Check_Button.h"
 #endif

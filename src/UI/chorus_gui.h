@@ -4,13 +4,13 @@
 #define chorus_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 
 class ChorusGui : public Fl_Group {
 public:
@@ -51,15 +51,15 @@ private:
   inline void cb_chorus_lfotype_i(Fl_Choice*, void*);
   static void cb_chorus_lfotype(Fl_Choice*, void*);
 public:
-  Fl_Check_Button *chorus_subs;
+  RKR_Check_Button *chorus_subs;
 private:
-  inline void cb_chorus_subs_i(Fl_Check_Button*, void*);
-  static void cb_chorus_subs(Fl_Check_Button*, void*);
+  inline void cb_chorus_subs_i(RKR_Check_Button*, void*);
+  static void cb_chorus_subs(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *chorus_awesome;
+  RKR_Check_Button *chorus_awesome;
 private:
-  inline void cb_chorus_awesome_i(Fl_Check_Button*, void*);
-  static void cb_chorus_awesome(Fl_Check_Button*, void*);
+  inline void cb_chorus_awesome_i(RKR_Check_Button*, void*);
+  static void cb_chorus_awesome(RKR_Check_Button*, void*);
 public:
   SliderW *chorus_stdf;
 private:

@@ -109,17 +109,17 @@ void RingGui::cb_ring_pan(SliderW* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_pan_i(o,v);
 }
 
-void RingGui::cb_ring_st_i(Fl_Check_Button* o, void*) {
+void RingGui::cb_ring_st_i(RKR_Check_Button* o, void*) {
   rkr->efx_Ring->changepar(6,(int)o->value());
 }
-void RingGui::cb_ring_st(Fl_Check_Button* o, void* v) {
+void RingGui::cb_ring_st(RKR_Check_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_st_i(o,v);
 }
 
-void RingGui::cb_ring_afreq_i(Fl_Check_Button* o, void*) {
+void RingGui::cb_ring_afreq_i(RKR_Check_Button* o, void*) {
   rkr->efx_Ring->changepar(12,(int)o->value());
 }
-void RingGui::cb_ring_afreq(Fl_Check_Button* o, void* v) {
+void RingGui::cb_ring_afreq(RKR_Check_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_afreq_i(o,v);
 }
 
@@ -309,18 +309,32 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_pan->align(Fl_Align(FL_ALIGN_LEFT));
   ring_pan->when(FL_WHEN_CHANGED);
 } // SliderW* ring_pan
-{ ring_st = new Fl_Check_Button(28, 92, 52, 15, "Stereo");
+{ ring_st = new RKR_Check_Button(28, 92, 52, 15, "Stereo");
+  ring_st->box(FL_NO_BOX);
   ring_st->down_box(FL_BORDER_BOX);
+  ring_st->color(FL_BACKGROUND_COLOR);
+  ring_st->selection_color(FL_FOREGROUND_COLOR);
+  ring_st->labeltype(FL_NORMAL_LABEL);
+  ring_st->labelfont(0);
   ring_st->labelsize(10);
   ring_st->labelcolor(FL_BACKGROUND2_COLOR);
   ring_st->callback((Fl_Callback*)cb_ring_st, (void*)(2));
-} // Fl_Check_Button* ring_st
-{ ring_afreq = new Fl_Check_Button(80, 92, 69, 15, "Auto Freq");
+  ring_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  ring_st->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* ring_st
+{ ring_afreq = new RKR_Check_Button(80, 92, 69, 15, "Auto Freq");
+  ring_afreq->box(FL_NO_BOX);
   ring_afreq->down_box(FL_BORDER_BOX);
+  ring_afreq->color(FL_BACKGROUND_COLOR);
+  ring_afreq->selection_color(FL_FOREGROUND_COLOR);
+  ring_afreq->labeltype(FL_NORMAL_LABEL);
+  ring_afreq->labelfont(0);
   ring_afreq->labelsize(10);
   ring_afreq->labelcolor(FL_BACKGROUND2_COLOR);
   ring_afreq->callback((Fl_Callback*)cb_ring_afreq, (void*)(2));
-} // Fl_Check_Button* ring_afreq
+  ring_afreq->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  ring_afreq->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* ring_afreq
 { ring_depth = new SliderW(56, 106, 100, 10, "Depth");
   ring_depth->type(5);
   ring_depth->box(FL_FLAT_BOX);

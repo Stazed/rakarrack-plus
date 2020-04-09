@@ -200,10 +200,10 @@ void SequenceGui::cb_seq_stdf(SliderW* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_stdf_i(o,v);
 }
 
-void SequenceGui::cb_seq_amp_i(Fl_Check_Button* o, void*) {
+void SequenceGui::cb_seq_amp_i(RKR_Check_Button* o, void*) {
   rkr->efx_Sequence->changepar(11,(int)o->value());
 }
-void SequenceGui::cb_seq_amp(Fl_Check_Button* o, void* v) {
+void SequenceGui::cb_seq_amp(RKR_Check_Button* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_amp_i(o,v);
 }
 
@@ -472,14 +472,20 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   seq_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   seq_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* seq_stdf
-{ seq_amp = new Fl_Check_Button(9, 111, 43, 14, "Amp");
+{ seq_amp = new RKR_Check_Button(9, 111, 43, 14, "Amp");
   seq_amp->tooltip("Amplitude/Alt. Mode");
+  seq_amp->box(FL_NO_BOX);
   seq_amp->down_box(FL_BORDER_BOX);
+  seq_amp->color(FL_BACKGROUND_COLOR);
+  seq_amp->selection_color(FL_FOREGROUND_COLOR);
+  seq_amp->labeltype(FL_NORMAL_LABEL);
+  seq_amp->labelfont(0);
   seq_amp->labelsize(10);
   seq_amp->labelcolor(FL_BACKGROUND2_COLOR);
   seq_amp->callback((Fl_Callback*)cb_seq_amp, (void*)(2));
   seq_amp->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-} // Fl_Check_Button* seq_amp
+  seq_amp->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* seq_amp
 { seq_mode = new Fl_Choice(90, 169, 62, 13, "M");
   seq_mode->tooltip("Modulation Mode");
   seq_mode->down_box(FL_BORDER_BOX);

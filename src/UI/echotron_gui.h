@@ -4,13 +4,13 @@
 #define echotron_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Counter.H>
 
 class EchotronGui : public Fl_Group {
@@ -72,30 +72,30 @@ private:
   inline void cb_echotron_stdf_i(SliderW*, void*);
   static void cb_echotron_stdf(SliderW*, void*);
 public:
-  Fl_Check_Button *echotron_af;
+  RKR_Check_Button *echotron_af;
 private:
-  inline void cb_echotron_af_i(Fl_Check_Button*, void*);
-  static void cb_echotron_af(Fl_Check_Button*, void*);
+  inline void cb_echotron_af_i(RKR_Check_Button*, void*);
+  static void cb_echotron_af(RKR_Check_Button*, void*);
 public:
   Fl_Choice *echotron_lfotype;
 private:
   inline void cb_echotron_lfotype_i(Fl_Choice*, void*);
   static void cb_echotron_lfotype(Fl_Choice*, void*);
 public:
-  Fl_Check_Button *echotron_mf;
+  RKR_Check_Button *echotron_mf;
 private:
-  inline void cb_echotron_mf_i(Fl_Check_Button*, void*);
-  static void cb_echotron_mf(Fl_Check_Button*, void*);
+  inline void cb_echotron_mf_i(RKR_Check_Button*, void*);
+  static void cb_echotron_mf(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *echotron_md;
+  RKR_Check_Button *echotron_md;
 private:
-  inline void cb_echotron_md_i(Fl_Check_Button*, void*);
-  static void cb_echotron_md(Fl_Check_Button*, void*);
+  inline void cb_echotron_md_i(RKR_Check_Button*, void*);
+  static void cb_echotron_md(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *echotron_user;
+  RKR_Check_Button *echotron_user;
 private:
-  inline void cb_echotron_user_i(Fl_Check_Button*, void*);
-  static void cb_echotron_user(Fl_Check_Button*, void*);
+  inline void cb_echotron_user_i(RKR_Check_Button*, void*);
+  static void cb_echotron_user(RKR_Check_Button*, void*);
 public:
   RKR_Button *B_ech;
 private:

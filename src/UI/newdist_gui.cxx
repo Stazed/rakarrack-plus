@@ -100,10 +100,10 @@ void NewdistGui::cb_newdist_tipo(Fl_Choice* o, void* v) {
   ((NewdistGui*)(o->parent()))->cb_newdist_tipo_i(o,v);
 }
 
-void NewdistGui::cb_newdist_neg_i(Fl_Check_Button* o, void*) {
+void NewdistGui::cb_newdist_neg_i(RKR_Check_Button* o, void*) {
   rkr->efx_NewDist->changepar(6,(int)o->value());
 }
-void NewdistGui::cb_newdist_neg(Fl_Check_Button* o, void* v) {
+void NewdistGui::cb_newdist_neg(RKR_Check_Button* o, void* v) {
   ((NewdistGui*)(o->parent()))->cb_newdist_neg_i(o,v);
 }
 
@@ -143,10 +143,10 @@ void NewdistGui::cb_newdist_pan(SliderW* o, void* v) {
   ((NewdistGui*)(o->parent()))->cb_newdist_pan_i(o,v);
 }
 
-void NewdistGui::cb_newdist_pf_i(Fl_Check_Button* o, void*) {
+void NewdistGui::cb_newdist_pf_i(RKR_Check_Button* o, void*) {
   rkr->efx_NewDist->changepar(10,(int)o->value());
 }
-void NewdistGui::cb_newdist_pf(Fl_Check_Button* o, void* v) {
+void NewdistGui::cb_newdist_pf(RKR_Check_Button* o, void* v) {
   ((NewdistGui*)(o->parent()))->cb_newdist_pf_i(o,v);
 }
 
@@ -280,12 +280,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   newdist_tipo->callback((Fl_Callback*)cb_newdist_tipo);
   o->menu(m_dist_menu->get_distortion_type());
 } // Fl_Choice* newdist_tipo
-{ newdist_neg = new Fl_Check_Button(110, 84, 42, 15, "Neg.");
+{ newdist_neg = new RKR_Check_Button(110, 84, 42, 15, "Neg.");
+  newdist_neg->box(FL_NO_BOX);
   newdist_neg->down_box(FL_BORDER_BOX);
+  newdist_neg->color(FL_BACKGROUND_COLOR);
+  newdist_neg->selection_color(FL_FOREGROUND_COLOR);
+  newdist_neg->labeltype(FL_NORMAL_LABEL);
+  newdist_neg->labelfont(0);
   newdist_neg->labelsize(10);
   newdist_neg->labelcolor(FL_BACKGROUND2_COLOR);
   newdist_neg->callback((Fl_Callback*)cb_newdist_neg, (void*)(2));
-} // Fl_Check_Button* newdist_neg
+  newdist_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  newdist_neg->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* newdist_neg
 { newdist_st = new SliderW(56, 106, 100, 10, "Color");
   newdist_st->type(5);
   newdist_st->box(FL_FLAT_BOX);
@@ -335,12 +342,19 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   newdist_pan->align(Fl_Align(FL_ALIGN_LEFT));
   newdist_pan->when(FL_WHEN_CHANGED);
 } // SliderW* newdist_pan
-{ newdist_pf = new Fl_Check_Button(50, 144, 66, 15, "Pre Filter");
+{ newdist_pf = new RKR_Check_Button(50, 144, 66, 15, "Pre Filter");
+  newdist_pf->box(FL_NO_BOX);
   newdist_pf->down_box(FL_BORDER_BOX);
+  newdist_pf->color(FL_BACKGROUND_COLOR);
+  newdist_pf->selection_color(FL_FOREGROUND_COLOR);
+  newdist_pf->labeltype(FL_NORMAL_LABEL);
+  newdist_pf->labelfont(0);
   newdist_pf->labelsize(10);
   newdist_pf->labelcolor(FL_BACKGROUND2_COLOR);
   newdist_pf->callback((Fl_Callback*)cb_newdist_pf, (void*)(2));
-} // Fl_Check_Button* newdist_pf
+  newdist_pf->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  newdist_pf->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* newdist_pf
 { newdist_lpf = new SliderW(56, 159, 100, 10, "LPF");
   newdist_lpf->type(5);
   newdist_lpf->box(FL_FLAT_BOX);

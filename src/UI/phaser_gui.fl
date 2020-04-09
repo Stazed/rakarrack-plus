@@ -5,9 +5,12 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} PhaserGui {
   user_data 1 open
-  xywh {1064 123 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1285 103 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -25,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} PhaserGui {
 rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
-rgui->findpos(6,(int)o->value(),o);} selected
+rgui->findpos(6,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -127,8 +130,9 @@ rkr->efx_Phaser->changepar(3,(int)o->value());}
   Fl_Check_Button phaser_subs {
     label Subtract
     user_data 2
-    callback {rkr->efx_Phaser->changepar(10,(int)o->value())}
+    callback {rkr->efx_Phaser->changepar(10,(int)o->value())} selected
     xywh {40 94 65 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   Fl_Value_Slider phaser_phase {
     label Phase
