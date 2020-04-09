@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -21,6 +21,9 @@ decl {\#include "RKR_Box.h"} {public global
 }
 
 decl {\#include "RKR_Button.h"} {public global
+}
+
+decl {\#include "RKR_Light_Button.h"} {selected public global
 }
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
@@ -932,6 +935,7 @@ WNfreq->copy_label("");
 ChangeActives();
 TUNER_LABEL->redraw_label();}
           tooltip {Enable Tuner - Shortcut 'T'} xywh {526 28 38 18} shortcut 0x74 color 62 selection_color 1 labelsize 10 when 1
+          class RKR_Light_Button
         }
         Fl_Progress tuner_bar {
           xywh {586 31 205 14} box THIN_DOWN_BOX color 47 selection_color 88 align 80
@@ -1018,6 +1022,7 @@ rkr->cleanup_efx();
 
 }}
           tooltip {Enable rakarrack - Shortcut 'R'} xywh {6 30 52 18} down_box BORDER_BOX shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
+          class RKR_Light_Button
         }
         Fl_Button BostBut {
           label {+10dB}
@@ -1115,6 +1120,7 @@ rkr->Metro_Bypass=(int)o->value();
 ChangeActives();
 Metro_Label->redraw_label();}
           tooltip {Enable Metronome - Shortcut 'M'} xywh {525 89 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
+          class RKR_Light_Button
         }
         Fl_Choice MetroBar {
           label {Time Sig.}
@@ -1203,7 +1209,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1337,6 +1343,8 @@ else
  Put_Loaded();
 }}
           tooltip {Compare to bank preset - Shortcut 'P'} xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
+          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          class RKR_Light_Button
         }
         Fl_Button B_preset {
           label Bank
@@ -1456,7 +1464,7 @@ Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsi
         }
       }
       Fl_Group Tap {
-        user_data 1 open
+        user_data 1
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -1467,6 +1475,7 @@ if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
 ChangeActives();
 TAP_LABEL->redraw_label();}
           tooltip {Enable Tap Tempo - Shortcut 'H'} xywh {525 144 38 18} shortcut 0x68 color 62 selection_color 1 labelsize 10 when 1
+          class RKR_Light_Button
         }
         Fl_Choice T_SEL {
           label Input
@@ -1620,7 +1629,7 @@ UpdateTGUI();
 {
 T_DIS->value(rkr->TapTempo());
 UpdateTGUI();
-}} selected
+}}
           tooltip {Tap tempo set - Shortcut 'G'} xywh {671 165 38 23} shortcut 0x67 labelsize 12
           code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
           class RKR_Button
