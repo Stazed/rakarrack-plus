@@ -627,7 +627,7 @@ void RKRGUI::cb_WPreset_Name(RKR_Entry_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WPreset_Name_i(o,v);
 }
 
-void RKRGUI::cb_Preset_Counter_i(Fl_Counter* o, void*) {
+void RKRGUI::cb_Preset_Counter_i(RKR_Counter* o, void*) {
   rkr->new_bank_loaded=0;
 BankWindow->unlight_preset(rkr->Selected_Preset);
 rkr->Bank_to_Preset((int) o->value());
@@ -639,7 +639,7 @@ Prepare_Order();
 Put_Loaded();
 if(rkr->Tap_Updated) UpdateTGUI();
 }
-void RKRGUI::cb_Preset_Counter(Fl_Counter* o, void* v) {
+void RKRGUI::cb_Preset_Counter(RKR_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Preset_Counter_i(o,v);
 }
 
@@ -2384,11 +2384,14 @@ void RKRGUI::make_window() {
         o->m_start_font_offset = 14; // (default 10) 10 - 24 = 14
         o->maximum_size(22);
       } // RKR_Entry_Input* WPreset_Name
-      { Preset_Counter = new Fl_Counter(174, 106, 60, 20, "Preset");
+      { RKR_Counter* o = Preset_Counter = new RKR_Counter(174, 106, 60, 20, "Preset");
         Preset_Counter->tooltip("Next or previous preset - Shortcut +(plus) or -(minus)");
         Preset_Counter->type(1);
+        Preset_Counter->box(FL_UP_BOX);
         Preset_Counter->color((Fl_Color)62);
         Preset_Counter->selection_color(FL_FOREGROUND_COLOR);
+        Preset_Counter->labeltype(FL_NORMAL_LABEL);
+        Preset_Counter->labelfont(0);
         Preset_Counter->labelsize(11);
         Preset_Counter->labelcolor(FL_BACKGROUND2_COLOR);
         Preset_Counter->minimum(1);
@@ -2397,7 +2400,11 @@ void RKRGUI::make_window() {
         Preset_Counter->value(1);
         Preset_Counter->textsize(11);
         Preset_Counter->callback((Fl_Callback*)cb_Preset_Counter);
-      } // Fl_Counter* Preset_Counter
+        Preset_Counter->align(Fl_Align(FL_ALIGN_BOTTOM));
+        Preset_Counter->when(FL_WHEN_CHANGED);
+        o->m_start_label_offset = 1; // (10 - 11)
+        o->m_start_text_offset = 1; // (10 - 11)
+      } // RKR_Counter* Preset_Counter
       { RKR_Box* o = DAuthor = new RKR_Box(246, 107, 266, 18);
         DAuthor->box(FL_DOWN_BOX);
         DAuthor->color((Fl_Color)62);

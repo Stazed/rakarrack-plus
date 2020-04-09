@@ -11,6 +11,7 @@
 #include "tunerbar.h"
 #include "RKR_Box.h"
 #include "RKR_Button.h"
+#include "RKR_Counter.h"
 #include "RKR_Light_Button.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
@@ -137,7 +138,6 @@ class TrigWindowGui; // forward declaration
 #include <FL/Fl_Group.H>
 #include "midiconv_gui.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 #include "analyzer.h"
 #include <FL/Fl_Value_Input.H>
 #include "bankwindow_gui.h"
@@ -458,10 +458,10 @@ private:
   inline void cb_WPreset_Name_i(RKR_Entry_Input*, void*);
   static void cb_WPreset_Name(RKR_Entry_Input*, void*);
 public:
-  Fl_Counter *Preset_Counter;
+  RKR_Counter *Preset_Counter;
 private:
-  inline void cb_Preset_Counter_i(Fl_Counter*, void*);
-  static void cb_Preset_Counter(Fl_Counter*, void*);
+  inline void cb_Preset_Counter_i(RKR_Counter*, void*);
+  static void cb_Preset_Counter(RKR_Counter*, void*);
 public:
   RKR_Box *DAuthor;
   RKR_Button *RandomP;

@@ -26,6 +26,9 @@ decl {\#include "RKR_Box.h"} {public global
 decl {\#include "RKR_Button.h"} {public global
 }
 
+decl {\#include "RKR_Counter.h"} {public global
+}
+
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
@@ -1366,7 +1369,7 @@ BankWindow->hide();}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
-          callback {strcpy(rkr->Preset_Name,o->value());} selected
+          callback {strcpy(rkr->Preset_Name,o->value());}
           xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->m_start_font_offset = 14; // (default 10) 10 - 24 = 14}
           code1 {o->maximum_size(22);}
@@ -1383,8 +1386,11 @@ rkr->OnCounter=0;
 FillML();
 Prepare_Order();
 Put_Loaded();
-if(rkr->Tap_Updated) UpdateTGUI();}
+if(rkr->Tap_Updated) UpdateTGUI();} selected
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
+          code0 {o->m_start_label_offset = 1; // (10 - 11)}
+          code1 {o->m_start_text_offset = 1; // (10 - 11)}
+          class RKR_Counter
         }
         Fl_Box DAuthor {
           user_data 7

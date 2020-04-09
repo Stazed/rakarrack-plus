@@ -19,6 +19,7 @@ set (ProgSources
     UI/RKR_Box.cxx
     UI/RKR_Button.cxx
     UI/RKR_Check_Button.cxx
+    UI/RKR_Counter.cxx
     UI/RKR_Light_Button
     UI/RKR_Input.cxx
     UI/RKR_Value_Input.cxx
