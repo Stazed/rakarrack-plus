@@ -20,7 +20,7 @@ decl {\#include "tunerbar.h"} {public global
 decl {\#include "RKR_Box.h"} {public global
 }
 
-decl {\#include "RKR_Button.h"} {selected public global
+decl {\#include "RKR_Button.h"} {public global
 }
 
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
@@ -971,7 +971,7 @@ TUNER_LABEL->redraw_label();}
         }
       }
       Fl_Group InOut {
-        user_data 1 open
+        user_data 1
         xywh {2 24 164 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button ActivarGeneral {
@@ -1025,6 +1025,8 @@ rkr->cleanup_efx();
           callback {if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;}
           tooltip {+10 dB Booster - Shortcut 'F10'} xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
+          code0 {o->m_start_font_offset = -4; // (default 10) 10 - 6 = -4}
+          class RKR_Button
         }
         Fl_Value_Slider Balance {
           label {FX%}
@@ -1201,7 +1203,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1227,6 +1229,7 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {418 30 22 16} color 62 labelsize 10
+          class RKR_Button
         }
         Fl_Button L_B2 {
           label 2
@@ -1244,6 +1247,7 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {442 30 22 16} color 62 labelsize 10
+          class RKR_Button
         }
         Fl_Button L_B3 {
           label 3
@@ -1261,6 +1265,7 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {466 30 22 16} color 62 labelsize 10
+          class RKR_Button
         }
         Fl_Button L_B4 {
           label U
@@ -1275,6 +1280,7 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 }}
           xywh {490 30 22 16} color 62 labelsize 10
+          class RKR_Button
         }
         Fl_Button S_new {
           label New
@@ -1298,6 +1304,8 @@ filename=fl_filename_setext(filename,".rkr");
 rkr->loadfile(filename);
 Put_Loaded();}
           tooltip {Open load preset window - Shortcut 'L'} xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
+          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          class RKR_Button
         }
         Fl_Button S_preset {
           label Save
@@ -1310,6 +1318,8 @@ filename=fl_filename_setext(filename,EXT);
 \#undef EXT
 rkr->savefile(filename);}
           tooltip {Open save preset window - Shortcut 'S'} xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
+          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          class RKR_Button
         }
         Fl_Light_Button Compare {
           label Compare
@@ -1341,6 +1351,8 @@ Scan_Bank_Dir();
 else
 BankWindow->hide();}
           tooltip {Open bank window - Shortcut 'B'} xywh {448 50 64 18} shortcut 0x62 color 62 labelsize 12
+          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          class RKR_Button
         }
         Fl_Input WPreset_Name {
           callback {strcpy(rkr->Preset_Name,o->value());}
@@ -1372,6 +1384,7 @@ if(rkr->Tap_Updated) UpdateTGUI();}
           user_data 77
           callback {RandomPreset();}
           tooltip {Random Preset selection - Shortcut 'F7'} xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
+          class RKR_Button
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
@@ -1387,6 +1400,8 @@ put_icon(Order);
 else
 Order->hide();}
           tooltip {Open preset order window - Shortcut 'O'} xywh {247 132 195 24} shortcut 0x6f color 62 align 80 when 6
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Button
         }
         Fl_Button Etit {
           callback {if(rkr->Bypass)
@@ -1418,6 +1433,7 @@ rkr->deachide=1;
  
 reordena();}
           tooltip {Hide/Show unused Effects - Shortcut 'F9'} xywh {445 137 32 18} shortcut 0xffc6 color 62 labelsize 10 align 80 when 6
+          class RKR_Button
         }
         Fl_Button SwitchMod {
           label Sw
@@ -1436,10 +1452,11 @@ else
  }}
           tooltip {Switch between Midi Converter &
 Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsize 10 align 80 when 6
+          class RKR_Button
         }
       }
       Fl_Group Tap {
-        user_data 1
+        user_data 1 open
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -1594,6 +1611,7 @@ rkr->Update_tempo();
 UpdateTGUI();
 }}
           xywh {628 172 38 15} shortcut 0x67 labelsize 10
+          class RKR_Button
         }
         Fl_Button T_BUT {
           label Tap
@@ -1602,8 +1620,10 @@ UpdateTGUI();
 {
 T_DIS->value(rkr->TapTempo());
 UpdateTGUI();
-}}
+}} selected
           tooltip {Tap tempo set - Shortcut 'G'} xywh {671 165 38 23} shortcut 0x67 labelsize 12
+          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          class RKR_Button
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}

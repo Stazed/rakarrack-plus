@@ -342,11 +342,11 @@ void RKRGUI::cb_ActivarGeneral(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ActivarGeneral_i(o,v);
 }
 
-void RKRGUI::cb_BostBut_i(Fl_Button* o, void*) {
+void RKRGUI::cb_BostBut_i(RKR_Button* o, void*) {
   if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;
 }
-void RKRGUI::cb_BostBut(Fl_Button* o, void* v) {
+void RKRGUI::cb_BostBut(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
 }
 
@@ -482,7 +482,7 @@ void RKRGUI::cb_Metro_Tempo(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Tempo_i(o,v);
 }
 
-void RKRGUI::cb_L_B1_i(Fl_Button*, void*) {
+void RKRGUI::cb_L_B1_i(RKR_Button*, void*) {
   is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -496,11 +496,11 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
-void RKRGUI::cb_L_B1(Fl_Button* o, void* v) {
+void RKRGUI::cb_L_B1(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B1_i(o,v);
 }
 
-void RKRGUI::cb_L_B2_i(Fl_Button*, void*) {
+void RKRGUI::cb_L_B2_i(RKR_Button*, void*) {
   is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -514,11 +514,11 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
-void RKRGUI::cb_L_B2(Fl_Button* o, void* v) {
+void RKRGUI::cb_L_B2(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B2_i(o,v);
 }
 
-void RKRGUI::cb_L_B3_i(Fl_Button*, void*) {
+void RKRGUI::cb_L_B3_i(RKR_Button*, void*) {
   is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -532,11 +532,11 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
-void RKRGUI::cb_L_B3(Fl_Button* o, void* v) {
+void RKRGUI::cb_L_B3(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B3_i(o,v);
 }
 
-void RKRGUI::cb_L_B4_i(Fl_Button*, void*) {
+void RKRGUI::cb_L_B4_i(RKR_Button*, void*) {
   is_modified();
 int ok=rkr->loadbank(rkr->BankFilename);
 if(ok) 
@@ -547,7 +547,7 @@ Put_Loaded_Bank();
 BankWindow->unlight_preset(rkr->Selected_Preset);
 };
 }
-void RKRGUI::cb_L_B4(Fl_Button* o, void* v) {
+void RKRGUI::cb_L_B4(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B4_i(o,v);
 }
 
@@ -562,7 +562,7 @@ void RKRGUI::cb_S_new(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_new_i(o,v);
 }
 
-void RKRGUI::cb_L_preset_i(Fl_Button*, void*) {
+void RKRGUI::cb_L_preset_i(RKR_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
@@ -570,11 +570,11 @@ filename=fl_filename_setext(filename,".rkr");
 rkr->loadfile(filename);
 Put_Loaded();
 }
-void RKRGUI::cb_L_preset(Fl_Button* o, void* v) {
+void RKRGUI::cb_L_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_preset_i(o,v);
 }
 
-void RKRGUI::cb_S_preset_i(Fl_Button*, void*) {
+void RKRGUI::cb_S_preset_i(RKR_Button*, void*) {
   char *filename;
 #define EXT ".rkr"
 filename=fl_file_chooser("Save Preset:","(*" EXT")",rkr->Preset_Name,0);
@@ -583,7 +583,7 @@ filename=fl_filename_setext(filename,EXT);
 #undef EXT
 rkr->savefile(filename);
 }
-void RKRGUI::cb_S_preset(Fl_Button* o, void* v) {
+void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_preset_i(o,v);
 }
 
@@ -605,7 +605,7 @@ void RKRGUI::cb_Compare(Fl_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Compare_i(o,v);
 }
 
-void RKRGUI::cb_B_preset_i(Fl_Button*, void*) {
+void RKRGUI::cb_B_preset_i(RKR_Button*, void*) {
   if(!BankWindow->visible())
 {
 if(!made) BankWindow->make_window_banks();
@@ -616,7 +616,7 @@ Scan_Bank_Dir();
 else
 BankWindow->hide();
 }
-void RKRGUI::cb_B_preset(Fl_Button* o, void* v) {
+void RKRGUI::cb_B_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_preset_i(o,v);
 }
 
@@ -643,14 +643,14 @@ void RKRGUI::cb_Preset_Counter(Fl_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Preset_Counter_i(o,v);
 }
 
-void RKRGUI::cb_RandomP_i(Fl_Button*, void*) {
+void RKRGUI::cb_RandomP_i(RKR_Button*, void*) {
   RandomPreset();
 }
-void RKRGUI::cb_RandomP(Fl_Button* o, void* v) {
+void RKRGUI::cb_RandomP(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_RandomP_i(o,v);
 }
 
-void RKRGUI::cb_Open_Order_i(Fl_Button*, void*) {
+void RKRGUI::cb_Open_Order_i(RKR_Button*, void*) {
   if (!Order->visible())
 {
 Prepare_Order();
@@ -662,7 +662,7 @@ put_icon(Order);
 else
 Order->hide();
 }
-void RKRGUI::cb_Open_Order(Fl_Button* o, void* v) {
+void RKRGUI::cb_Open_Order(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Open_Order_i(o,v);
 }
 
@@ -678,7 +678,7 @@ void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Etit_i(o,v);
 }
 
-void RKRGUI::cb_HideUE_i(Fl_Button* o, void*) {
+void RKRGUI::cb_HideUE_i(RKR_Button* o, void*) {
   if(rkr->deachide)
 {
  rkr->deachide=0;
@@ -692,11 +692,11 @@ rkr->deachide=1;
  
 reordena();
 }
-void RKRGUI::cb_HideUE(Fl_Button* o, void* v) {
+void RKRGUI::cb_HideUE(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_HideUE_i(o,v);
 }
 
-void RKRGUI::cb_SwitchMod_i(Fl_Button*, void*) {
+void RKRGUI::cb_SwitchMod_i(RKR_Button*, void*) {
   if(rkr->sw_stat==0) 
 { 
   rkr->sw_stat = 1;
@@ -710,7 +710,7 @@ else
   MIDI->show();
  };
 }
-void RKRGUI::cb_SwitchMod(Fl_Button* o, void* v) {
+void RKRGUI::cb_SwitchMod(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_SwitchMod_i(o,v);
 }
 
@@ -776,25 +776,25 @@ Fl_Menu_Item RKRGUI::menu_T_SET[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RKRGUI::cb_T_Apply_i(Fl_Button*, void*) {
+void RKRGUI::cb_T_Apply_i(RKR_Button*, void*) {
   if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
 {
 rkr->Update_tempo();
 UpdateTGUI();
 };
 }
-void RKRGUI::cb_T_Apply(Fl_Button* o, void* v) {
+void RKRGUI::cb_T_Apply(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_Apply_i(o,v);
 }
 
-void RKRGUI::cb_T_BUT_i(Fl_Button*, void*) {
+void RKRGUI::cb_T_BUT_i(RKR_Button*, void*) {
   if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
 T_DIS->value(rkr->TapTempo());
 UpdateTGUI();
 };
 }
-void RKRGUI::cb_T_BUT(Fl_Button* o, void* v) {
+void RKRGUI::cb_T_BUT(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_BUT_i(o,v);
 }
 
@@ -1957,14 +1957,22 @@ void RKRGUI::make_window() {
         ActivarGeneral->align(Fl_Align(68|FL_ALIGN_INSIDE));
         ActivarGeneral->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* ActivarGeneral
-      { BostBut = new Fl_Button(132, 30, 30, 14, "+10dB");
+      { RKR_Button* o = BostBut = new RKR_Button(132, 30, 30, 14, "+10dB");
         BostBut->tooltip("+10 dB Booster - Shortcut \'F10\'");
         BostBut->type(1);
+        BostBut->box(FL_UP_BOX);
         BostBut->shortcut(0xffc7);
         BostBut->color((Fl_Color)62);
+        BostBut->selection_color(FL_BACKGROUND_COLOR);
+        BostBut->labeltype(FL_NORMAL_LABEL);
+        BostBut->labelfont(0);
         BostBut->labelsize(6);
+        BostBut->labelcolor(FL_FOREGROUND_COLOR);
         BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(78));
-      } // Fl_Button* BostBut
+        BostBut->align(Fl_Align(FL_ALIGN_CENTER));
+        BostBut->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = -4; // (default 10) 10 - 6 = -4
+      } // RKR_Button* BostBut
       { Balance = new SliderW(15, 48, 19, 126, "FX%");
         Balance->type(4);
         Balance->box(FL_FLAT_BOX);
@@ -2223,26 +2231,54 @@ void RKRGUI::make_window() {
         PRESETS_LABEL->when(FL_WHEN_RELEASE);
         o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* PRESETS_LABEL
-      { L_B1 = new Fl_Button(418, 30, 22, 16, "1");
+      { L_B1 = new RKR_Button(418, 30, 22, 16, "1");
+        L_B1->box(FL_UP_BOX);
         L_B1->color((Fl_Color)62);
+        L_B1->selection_color(FL_BACKGROUND_COLOR);
+        L_B1->labeltype(FL_NORMAL_LABEL);
+        L_B1->labelfont(0);
         L_B1->labelsize(10);
+        L_B1->labelcolor(FL_FOREGROUND_COLOR);
         L_B1->callback((Fl_Callback*)cb_L_B1, (void*)(77));
-      } // Fl_Button* L_B1
-      { L_B2 = new Fl_Button(442, 30, 22, 16, "2");
+        L_B1->align(Fl_Align(FL_ALIGN_CENTER));
+        L_B1->when(FL_WHEN_RELEASE);
+      } // RKR_Button* L_B1
+      { L_B2 = new RKR_Button(442, 30, 22, 16, "2");
+        L_B2->box(FL_UP_BOX);
         L_B2->color((Fl_Color)62);
+        L_B2->selection_color(FL_BACKGROUND_COLOR);
+        L_B2->labeltype(FL_NORMAL_LABEL);
+        L_B2->labelfont(0);
         L_B2->labelsize(10);
+        L_B2->labelcolor(FL_FOREGROUND_COLOR);
         L_B2->callback((Fl_Callback*)cb_L_B2, (void*)(77));
-      } // Fl_Button* L_B2
-      { L_B3 = new Fl_Button(466, 30, 22, 16, "3");
+        L_B2->align(Fl_Align(FL_ALIGN_CENTER));
+        L_B2->when(FL_WHEN_RELEASE);
+      } // RKR_Button* L_B2
+      { L_B3 = new RKR_Button(466, 30, 22, 16, "3");
+        L_B3->box(FL_UP_BOX);
         L_B3->color((Fl_Color)62);
+        L_B3->selection_color(FL_BACKGROUND_COLOR);
+        L_B3->labeltype(FL_NORMAL_LABEL);
+        L_B3->labelfont(0);
         L_B3->labelsize(10);
+        L_B3->labelcolor(FL_FOREGROUND_COLOR);
         L_B3->callback((Fl_Callback*)cb_L_B3, (void*)(77));
-      } // Fl_Button* L_B3
-      { L_B4 = new Fl_Button(490, 30, 22, 16, "U");
+        L_B3->align(Fl_Align(FL_ALIGN_CENTER));
+        L_B3->when(FL_WHEN_RELEASE);
+      } // RKR_Button* L_B3
+      { L_B4 = new RKR_Button(490, 30, 22, 16, "U");
+        L_B4->box(FL_UP_BOX);
         L_B4->color((Fl_Color)62);
+        L_B4->selection_color(FL_BACKGROUND_COLOR);
+        L_B4->labeltype(FL_NORMAL_LABEL);
+        L_B4->labelfont(0);
         L_B4->labelsize(10);
+        L_B4->labelcolor(FL_FOREGROUND_COLOR);
         L_B4->callback((Fl_Callback*)cb_L_B4, (void*)(77));
-      } // Fl_Button* L_B4
+        L_B4->align(Fl_Align(FL_ALIGN_CENTER));
+        L_B4->when(FL_WHEN_RELEASE);
+      } // RKR_Button* L_B4
       { RKR_Button* o = S_new = new RKR_Button(174, 50, 64, 18, "New");
         S_new->tooltip("New preset - Shortcut \'N\'");
         S_new->box(FL_UP_BOX);
@@ -2258,20 +2294,36 @@ void RKRGUI::make_window() {
         S_new->when(FL_WHEN_RELEASE);
         o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
       } // RKR_Button* S_new
-      { L_preset = new Fl_Button(240, 50, 64, 18, "Load");
+      { RKR_Button* o = L_preset = new RKR_Button(240, 50, 64, 18, "Load");
         L_preset->tooltip("Open load preset window - Shortcut \'L\'");
+        L_preset->box(FL_UP_BOX);
         L_preset->shortcut(0x6c);
         L_preset->color((Fl_Color)62);
+        L_preset->selection_color(FL_BACKGROUND_COLOR);
+        L_preset->labeltype(FL_NORMAL_LABEL);
+        L_preset->labelfont(0);
         L_preset->labelsize(12);
+        L_preset->labelcolor(FL_FOREGROUND_COLOR);
         L_preset->callback((Fl_Callback*)cb_L_preset, (void*)(77));
-      } // Fl_Button* L_preset
-      { S_preset = new Fl_Button(306, 50, 64, 18, "Save");
+        L_preset->align(Fl_Align(FL_ALIGN_CENTER));
+        L_preset->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+      } // RKR_Button* L_preset
+      { RKR_Button* o = S_preset = new RKR_Button(306, 50, 64, 18, "Save");
         S_preset->tooltip("Open save preset window - Shortcut \'S\'");
+        S_preset->box(FL_UP_BOX);
         S_preset->shortcut(0x73);
         S_preset->color((Fl_Color)62);
+        S_preset->selection_color(FL_BACKGROUND_COLOR);
+        S_preset->labeltype(FL_NORMAL_LABEL);
+        S_preset->labelfont(0);
         S_preset->labelsize(12);
+        S_preset->labelcolor(FL_FOREGROUND_COLOR);
         S_preset->callback((Fl_Callback*)cb_S_preset, (void*)(77));
-      } // Fl_Button* S_preset
+        S_preset->align(Fl_Align(FL_ALIGN_CENTER));
+        S_preset->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+      } // RKR_Button* S_preset
       { Compare = new Fl_Light_Button(373, 50, 72, 18, "Compare");
         Compare->tooltip("Compare to bank preset - Shortcut \'P\'");
         Compare->shortcut(0x70);
@@ -2282,13 +2334,21 @@ void RKRGUI::make_window() {
         Compare->align(Fl_Align(68|FL_ALIGN_INSIDE));
         Compare->when(FL_WHEN_CHANGED);
       } // Fl_Light_Button* Compare
-      { B_preset = new Fl_Button(448, 50, 64, 18, "Bank");
+      { RKR_Button* o = B_preset = new RKR_Button(448, 50, 64, 18, "Bank");
         B_preset->tooltip("Open bank window - Shortcut \'B\'");
+        B_preset->box(FL_UP_BOX);
         B_preset->shortcut(0x62);
         B_preset->color((Fl_Color)62);
+        B_preset->selection_color(FL_BACKGROUND_COLOR);
+        B_preset->labeltype(FL_NORMAL_LABEL);
+        B_preset->labelfont(0);
         B_preset->labelsize(12);
+        B_preset->labelcolor(FL_FOREGROUND_COLOR);
         B_preset->callback((Fl_Callback*)cb_B_preset, (void*)(77));
-      } // Fl_Button* B_preset
+        B_preset->align(Fl_Align(FL_ALIGN_CENTER));
+        B_preset->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+      } // RKR_Button* B_preset
       { Fl_Input* o = WPreset_Name = new Fl_Input(174, 72, 338, 30);
         WPreset_Name->color((Fl_Color)62);
         WPreset_Name->labelcolor(FL_BACKGROUND2_COLOR);
@@ -2325,23 +2385,35 @@ void RKRGUI::make_window() {
         DAuthor->when(FL_WHEN_RELEASE);
         o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* DAuthor
-      { RandomP = new Fl_Button(175, 141, 59, 14, "Random");
+      { RandomP = new RKR_Button(175, 141, 59, 14, "Random");
         RandomP->tooltip("Random Preset selection - Shortcut \'F7\'");
+        RandomP->box(FL_UP_BOX);
         RandomP->shortcut(0xffc4);
         RandomP->color((Fl_Color)62);
+        RandomP->selection_color(FL_BACKGROUND_COLOR);
+        RandomP->labeltype(FL_NORMAL_LABEL);
+        RandomP->labelfont(0);
         RandomP->labelsize(10);
+        RandomP->labelcolor(FL_FOREGROUND_COLOR);
         RandomP->callback((Fl_Callback*)cb_RandomP, (void*)(77));
         RandomP->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         RandomP->when(FL_WHEN_RELEASE_ALWAYS);
-      } // Fl_Button* RandomP
-      { Open_Order = new Fl_Button(247, 132, 195, 24, "Put Order in your Rack");
+      } // RKR_Button* RandomP
+      { RKR_Button* o = Open_Order = new RKR_Button(247, 132, 195, 24, "Put Order in your Rack");
         Open_Order->tooltip("Open preset order window - Shortcut \'O\'");
+        Open_Order->box(FL_UP_BOX);
         Open_Order->shortcut(0x6f);
         Open_Order->color((Fl_Color)62);
+        Open_Order->selection_color(FL_BACKGROUND_COLOR);
+        Open_Order->labeltype(FL_NORMAL_LABEL);
+        Open_Order->labelfont(0);
+        Open_Order->labelsize(14);
+        Open_Order->labelcolor(FL_FOREGROUND_COLOR);
         Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(77));
         Open_Order->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
-      } // Fl_Button* Open_Order
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Button* Open_Order
       { Etit = new Fl_Button(174, 160, 340, 28);
         Etit->tooltip("Click here to toggle analyzer ON/OFF");
         Etit->type(1);
@@ -2365,24 +2437,34 @@ void RKRGUI::make_window() {
         Analy->when(FL_WHEN_RELEASE);
         Analy->hide();
       } // Analyzer* Analy
-      { HideUE = new Fl_Button(445, 137, 32, 18, "Hide");
+      { HideUE = new RKR_Button(445, 137, 32, 18, "Hide");
         HideUE->tooltip("Hide/Show unused Effects - Shortcut \'F9\'");
+        HideUE->box(FL_UP_BOX);
         HideUE->shortcut(0xffc6);
         HideUE->color((Fl_Color)62);
+        HideUE->selection_color(FL_BACKGROUND_COLOR);
+        HideUE->labeltype(FL_NORMAL_LABEL);
+        HideUE->labelfont(0);
         HideUE->labelsize(10);
+        HideUE->labelcolor(FL_FOREGROUND_COLOR);
         HideUE->callback((Fl_Callback*)cb_HideUE, (void*)(77));
         HideUE->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         HideUE->when(FL_WHEN_RELEASE_ALWAYS);
-      } // Fl_Button* HideUE
-      { SwitchMod = new Fl_Button(480, 137, 32, 18, "Sw");
+      } // RKR_Button* HideUE
+      { SwitchMod = new RKR_Button(480, 137, 32, 18, "Sw");
         SwitchMod->tooltip("Switch between Midi Converter &\nMetronome - Shortcut \'F8\'");
+        SwitchMod->box(FL_UP_BOX);
         SwitchMod->shortcut(0xffc5);
         SwitchMod->color((Fl_Color)62);
+        SwitchMod->selection_color(FL_BACKGROUND_COLOR);
+        SwitchMod->labeltype(FL_NORMAL_LABEL);
+        SwitchMod->labelfont(0);
         SwitchMod->labelsize(10);
+        SwitchMod->labelcolor(FL_FOREGROUND_COLOR);
         SwitchMod->callback((Fl_Callback*)cb_SwitchMod, (void*)(77));
         SwitchMod->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         SwitchMod->when(FL_WHEN_RELEASE_ALWAYS);
-      } // Fl_Button* SwitchMod
+      } // RKR_Button* SwitchMod
       Presets->end();
     } // Fl_Group* Presets
     { Tap = new Fl_Group(520, 140, 276, 54);
@@ -2418,17 +2500,34 @@ void RKRGUI::make_window() {
         T_SET->callback((Fl_Callback*)cb_T_SET, (void*)(12));
         T_SET->menu(menu_T_SET);
       } // Fl_Choice* T_SET
-      { T_Apply = new Fl_Button(628, 172, 38, 15, "Apply");
+      { T_Apply = new RKR_Button(628, 172, 38, 15, "Apply");
+        T_Apply->box(FL_UP_BOX);
         T_Apply->shortcut(0x67);
+        T_Apply->color(FL_BACKGROUND_COLOR);
+        T_Apply->selection_color(FL_BACKGROUND_COLOR);
+        T_Apply->labeltype(FL_NORMAL_LABEL);
+        T_Apply->labelfont(0);
         T_Apply->labelsize(10);
+        T_Apply->labelcolor(FL_FOREGROUND_COLOR);
         T_Apply->callback((Fl_Callback*)cb_T_Apply, (void*)(77));
-      } // Fl_Button* T_Apply
-      { T_BUT = new Fl_Button(671, 165, 38, 23, "Tap");
+        T_Apply->align(Fl_Align(FL_ALIGN_CENTER));
+        T_Apply->when(FL_WHEN_RELEASE);
+      } // RKR_Button* T_Apply
+      { RKR_Button* o = T_BUT = new RKR_Button(671, 165, 38, 23, "Tap");
         T_BUT->tooltip("Tap tempo set - Shortcut \'G\'");
+        T_BUT->box(FL_UP_BOX);
         T_BUT->shortcut(0x67);
+        T_BUT->color(FL_BACKGROUND_COLOR);
+        T_BUT->selection_color(FL_BACKGROUND_COLOR);
+        T_BUT->labeltype(FL_NORMAL_LABEL);
+        T_BUT->labelfont(0);
         T_BUT->labelsize(12);
+        T_BUT->labelcolor(FL_FOREGROUND_COLOR);
         T_BUT->callback((Fl_Callback*)cb_T_BUT, (void*)(77));
-      } // Fl_Button* T_BUT
+        T_BUT->align(Fl_Align(FL_ALIGN_CENTER));
+        T_BUT->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+      } // RKR_Button* T_BUT
       { RKR_Box* o = TAP_LABEL = new RKR_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->box(FL_NO_BOX);
         TAP_LABEL->color(FL_BACKGROUND_COLOR);

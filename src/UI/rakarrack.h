@@ -352,10 +352,10 @@ private:
   inline void cb_ActivarGeneral_i(Fl_Light_Button*, void*);
   static void cb_ActivarGeneral(Fl_Light_Button*, void*);
 public:
-  Fl_Button *BostBut;
+  RKR_Button *BostBut;
 private:
-  inline void cb_BostBut_i(Fl_Button*, void*);
-  static void cb_BostBut(Fl_Button*, void*);
+  inline void cb_BostBut_i(RKR_Button*, void*);
+  static void cb_BostBut(RKR_Button*, void*);
 public:
   SliderW *Balance;
 private:
@@ -408,50 +408,50 @@ public:
   RKR_Box *Metro_Label;
   Fl_Group *Presets;
   RKR_Box *PRESETS_LABEL;
-  Fl_Button *L_B1;
+  RKR_Button *L_B1;
 private:
-  inline void cb_L_B1_i(Fl_Button*, void*);
-  static void cb_L_B1(Fl_Button*, void*);
+  inline void cb_L_B1_i(RKR_Button*, void*);
+  static void cb_L_B1(RKR_Button*, void*);
 public:
-  Fl_Button *L_B2;
+  RKR_Button *L_B2;
 private:
-  inline void cb_L_B2_i(Fl_Button*, void*);
-  static void cb_L_B2(Fl_Button*, void*);
+  inline void cb_L_B2_i(RKR_Button*, void*);
+  static void cb_L_B2(RKR_Button*, void*);
 public:
-  Fl_Button *L_B3;
+  RKR_Button *L_B3;
 private:
-  inline void cb_L_B3_i(Fl_Button*, void*);
-  static void cb_L_B3(Fl_Button*, void*);
+  inline void cb_L_B3_i(RKR_Button*, void*);
+  static void cb_L_B3(RKR_Button*, void*);
 public:
-  Fl_Button *L_B4;
+  RKR_Button *L_B4;
 private:
-  inline void cb_L_B4_i(Fl_Button*, void*);
-  static void cb_L_B4(Fl_Button*, void*);
+  inline void cb_L_B4_i(RKR_Button*, void*);
+  static void cb_L_B4(RKR_Button*, void*);
 public:
   RKR_Button *S_new;
 private:
   inline void cb_S_new_i(RKR_Button*, void*);
   static void cb_S_new(RKR_Button*, void*);
 public:
-  Fl_Button *L_preset;
+  RKR_Button *L_preset;
 private:
-  inline void cb_L_preset_i(Fl_Button*, void*);
-  static void cb_L_preset(Fl_Button*, void*);
+  inline void cb_L_preset_i(RKR_Button*, void*);
+  static void cb_L_preset(RKR_Button*, void*);
 public:
-  Fl_Button *S_preset;
+  RKR_Button *S_preset;
 private:
-  inline void cb_S_preset_i(Fl_Button*, void*);
-  static void cb_S_preset(Fl_Button*, void*);
+  inline void cb_S_preset_i(RKR_Button*, void*);
+  static void cb_S_preset(RKR_Button*, void*);
 public:
   Fl_Light_Button *Compare;
 private:
   inline void cb_Compare_i(Fl_Light_Button*, void*);
   static void cb_Compare(Fl_Light_Button*, void*);
 public:
-  Fl_Button *B_preset;
+  RKR_Button *B_preset;
 private:
-  inline void cb_B_preset_i(Fl_Button*, void*);
-  static void cb_B_preset(Fl_Button*, void*);
+  inline void cb_B_preset_i(RKR_Button*, void*);
+  static void cb_B_preset(RKR_Button*, void*);
 public:
   Fl_Input *WPreset_Name;
 private:
@@ -464,15 +464,15 @@ private:
   static void cb_Preset_Counter(Fl_Counter*, void*);
 public:
   RKR_Box *DAuthor;
-  Fl_Button *RandomP;
+  RKR_Button *RandomP;
 private:
-  inline void cb_RandomP_i(Fl_Button*, void*);
-  static void cb_RandomP(Fl_Button*, void*);
+  inline void cb_RandomP_i(RKR_Button*, void*);
+  static void cb_RandomP(RKR_Button*, void*);
 public:
-  Fl_Button *Open_Order;
+  RKR_Button *Open_Order;
 private:
-  inline void cb_Open_Order_i(Fl_Button*, void*);
-  static void cb_Open_Order(Fl_Button*, void*);
+  inline void cb_Open_Order_i(RKR_Button*, void*);
+  static void cb_Open_Order(RKR_Button*, void*);
 public:
   Fl_Button *Etit;
 private:
@@ -480,15 +480,15 @@ private:
   static void cb_Etit(Fl_Button*, void*);
 public:
   Analyzer *Analy;
-  Fl_Button *HideUE;
+  RKR_Button *HideUE;
 private:
-  inline void cb_HideUE_i(Fl_Button*, void*);
-  static void cb_HideUE(Fl_Button*, void*);
+  inline void cb_HideUE_i(RKR_Button*, void*);
+  static void cb_HideUE(RKR_Button*, void*);
 public:
-  Fl_Button *SwitchMod;
+  RKR_Button *SwitchMod;
 private:
-  inline void cb_SwitchMod_i(Fl_Button*, void*);
-  static void cb_SwitchMod(Fl_Button*, void*);
+  inline void cb_SwitchMod_i(RKR_Button*, void*);
+  static void cb_SwitchMod(RKR_Button*, void*);
 public:
   Fl_Group *Tap;
   Fl_Light_Button *Tap_activar;
@@ -508,15 +508,15 @@ private:
   static void cb_T_SET(Fl_Choice*, void*);
   static Fl_Menu_Item menu_T_SET[];
 public:
-  Fl_Button *T_Apply;
+  RKR_Button *T_Apply;
 private:
-  inline void cb_T_Apply_i(Fl_Button*, void*);
-  static void cb_T_Apply(Fl_Button*, void*);
+  inline void cb_T_Apply_i(RKR_Button*, void*);
+  static void cb_T_Apply(RKR_Button*, void*);
 public:
-  Fl_Button *T_BUT;
+  RKR_Button *T_BUT;
 private:
-  inline void cb_T_BUT_i(Fl_Button*, void*);
-  static void cb_T_BUT(Fl_Button*, void*);
+  inline void cb_T_BUT_i(RKR_Button*, void*);
+  static void cb_T_BUT(RKR_Button*, void*);
 public:
   RKR_Box *TAP_LABEL;
   Fl_Value_Input *T_DIS;
