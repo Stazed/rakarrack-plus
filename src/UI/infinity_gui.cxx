@@ -186,10 +186,10 @@ void InfinityGui::cb_infinity_rev(RKR_Check_Button* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_rev_i(o,v);
 }
 
-void InfinityGui::cb_infinity_stages_i(Fl_Counter* o, void*) {
+void InfinityGui::cb_infinity_stages_i(RKR_Counter* o, void*) {
   rkr->efx_Infinity->changepar(17,(int)o->value());
 }
-void InfinityGui::cb_infinity_stages(Fl_Counter* o, void* v) {
+void InfinityGui::cb_infinity_stages(RKR_Counter* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_stages_i(o,v);
 }
 
@@ -479,18 +479,25 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_rev->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_rev->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* infinity_rev
-{ infinity_stages = new Fl_Counter(106, 93, 46, 15, "Stages");
+{ RKR_Counter* o = infinity_stages = new RKR_Counter(106, 93, 46, 15, "Stages");
   infinity_stages->type(1);
+  infinity_stages->box(FL_UP_BOX);
+  infinity_stages->color(FL_BACKGROUND_COLOR);
+  infinity_stages->selection_color(FL_INACTIVE_COLOR);
+  infinity_stages->labeltype(FL_NORMAL_LABEL);
+  infinity_stages->labelfont(0);
   infinity_stages->labelsize(10);
   infinity_stages->labelcolor(FL_BACKGROUND2_COLOR);
   infinity_stages->minimum(1);
   infinity_stages->maximum(12);
   infinity_stages->step(1);
   infinity_stages->value(1);
-  infinity_stages->textsize(10);
+  infinity_stages->textsize(9);
   infinity_stages->callback((Fl_Callback*)cb_infinity_stages);
   infinity_stages->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Counter* infinity_stages
+  infinity_stages->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* infinity_stages
 { infinity_pan = new SliderW(56, 111, 100, 10, "AutoPan");
   infinity_pan->type(5);
   infinity_pan->box(FL_FLAT_BOX);

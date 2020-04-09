@@ -6,13 +6,13 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Value_Input.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 
 class SynthfilterGui : public Fl_Group {
 public:
@@ -73,15 +73,15 @@ private:
   inline void cb_synthfilter_fb_i(SliderW*, void*);
   static void cb_synthfilter_fb(SliderW*, void*);
 public:
-  Fl_Counter *synthfilter_Lstages;
+  RKR_Counter *synthfilter_Lstages;
 private:
-  inline void cb_synthfilter_Lstages_i(Fl_Counter*, void*);
-  static void cb_synthfilter_Lstages(Fl_Counter*, void*);
+  inline void cb_synthfilter_Lstages_i(RKR_Counter*, void*);
+  static void cb_synthfilter_Lstages(RKR_Counter*, void*);
 public:
-  Fl_Counter *synthfilter_Hstages;
+  RKR_Counter *synthfilter_Hstages;
 private:
-  inline void cb_synthfilter_Hstages_i(Fl_Counter*, void*);
-  static void cb_synthfilter_Hstages(Fl_Counter*, void*);
+  inline void cb_synthfilter_Hstages_i(RKR_Counter*, void*);
+  static void cb_synthfilter_Hstages(RKR_Counter*, void*);
 public:
   SliderW *synthfilter_dpth;
 private:

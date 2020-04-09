@@ -212,7 +212,7 @@ void EchotronGui::cb_B_ech(RKR_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_B_ech_i(o,v);
 }
 
-void EchotronGui::cb_echotron_length_i(Fl_Counter* o, void*) {
+void EchotronGui::cb_echotron_length_i(RKR_Counter* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(357);
@@ -220,7 +220,7 @@ void EchotronGui::cb_echotron_length_i(Fl_Counter* o, void*) {
 }
 rkr->efx_Echotron->changepar(3,(int)o->value());
 }
-void EchotronGui::cb_echotron_length(Fl_Counter* o, void* v) {
+void EchotronGui::cb_echotron_length(RKR_Counter* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_length_i(o,v);
 }
 
@@ -503,8 +503,13 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   B_ech->when(FL_WHEN_RELEASE);
   B_ech->deactivate();
 } // RKR_Button* B_ech
-{ echotron_length = new Fl_Counter(16, 167, 48, 12, "#");
+{ RKR_Counter* o = echotron_length = new RKR_Counter(16, 167, 48, 12, "#");
   echotron_length->type(1);
+  echotron_length->box(FL_UP_BOX);
+  echotron_length->color(FL_BACKGROUND_COLOR);
+  echotron_length->selection_color(FL_INACTIVE_COLOR);
+  echotron_length->labeltype(FL_NORMAL_LABEL);
+  echotron_length->labelfont(0);
   echotron_length->labelsize(10);
   echotron_length->labelcolor(FL_BACKGROUND2_COLOR);
   echotron_length->minimum(1);
@@ -515,7 +520,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_length->callback((Fl_Callback*)cb_echotron_length);
   echotron_length->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_length->when(FL_WHEN_RELEASE);
-} // Fl_Counter* echotron_length
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* echotron_length
 { echotron_fnum = new Fl_Choice(88, 168, 64, 14, "File");
   echotron_fnum->down_box(FL_BORDER_BOX);
   echotron_fnum->selection_color(FL_FOREGROUND_COLOR);

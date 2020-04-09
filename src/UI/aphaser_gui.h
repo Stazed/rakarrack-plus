@@ -5,13 +5,13 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 
 class AphaserGui : public Fl_Group {
 public:
@@ -77,10 +77,10 @@ private:
   inline void cb_aphaser_stdf_i(SliderW*, void*);
   static void cb_aphaser_stdf(SliderW*, void*);
 public:
-  Fl_Counter *aphaser_stages;
+  RKR_Counter *aphaser_stages;
 private:
-  inline void cb_aphaser_stages_i(Fl_Counter*, void*);
-  static void cb_aphaser_stages(Fl_Counter*, void*);
+  inline void cb_aphaser_stages_i(RKR_Counter*, void*);
+  static void cb_aphaser_stages(RKR_Counter*, void*);
 public:
   RKR_Check_Button *aphaser_subs;
 private:

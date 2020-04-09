@@ -159,10 +159,10 @@ void PhaserGui::cb_phaser_fb(SliderW* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_fb_i(o,v);
 }
 
-void PhaserGui::cb_phaser_stages_i(Fl_Counter* o, void*) {
+void PhaserGui::cb_phaser_stages_i(RKR_Counter* o, void*) {
   rkr->efx_Phaser->changepar(8,(int)o->value());
 }
-void PhaserGui::cb_phaser_stages(Fl_Counter* o, void* v) {
+void PhaserGui::cb_phaser_stages(RKR_Counter* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_stages_i(o,v);
 }
 
@@ -363,9 +363,13 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   phaser_fb->align(Fl_Align(FL_ALIGN_LEFT));
   phaser_fb->when(FL_WHEN_CHANGED);
 } // SliderW* phaser_fb
-{ phaser_stages = new Fl_Counter(72, 156, 52, 12, "Stages");
+{ RKR_Counter* o = phaser_stages = new RKR_Counter(72, 156, 52, 12, "Stages");
   phaser_stages->type(1);
   phaser_stages->box(FL_THIN_UP_BOX);
+  phaser_stages->color(FL_BACKGROUND_COLOR);
+  phaser_stages->selection_color(FL_INACTIVE_COLOR);
+  phaser_stages->labeltype(FL_NORMAL_LABEL);
+  phaser_stages->labelfont(0);
   phaser_stages->labelsize(10);
   phaser_stages->labelcolor(FL_BACKGROUND2_COLOR);
   phaser_stages->minimum(1);
@@ -375,7 +379,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   phaser_stages->textsize(9);
   phaser_stages->callback((Fl_Callback*)cb_phaser_stages);
   phaser_stages->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Counter* phaser_stages
+  phaser_stages->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* phaser_stages
 { phaser_LR = new SliderW(56, 171, 100, 10, "L/R Cross");
   phaser_LR->type(5);
   phaser_LR->box(FL_FLAT_BOX);

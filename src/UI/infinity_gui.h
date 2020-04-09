@@ -5,13 +5,13 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "RKR_Value_Input.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 
 class InfinityGui : public Fl_Group {
 public:
@@ -82,10 +82,10 @@ private:
   inline void cb_infinity_rev_i(RKR_Check_Button*, void*);
   static void cb_infinity_rev(RKR_Check_Button*, void*);
 public:
-  Fl_Counter *infinity_stages;
+  RKR_Counter *infinity_stages;
 private:
-  inline void cb_infinity_stages_i(Fl_Counter*, void*);
-  static void cb_infinity_stages(Fl_Counter*, void*);
+  inline void cb_infinity_stages_i(RKR_Counter*, void*);
+  static void cb_infinity_stages(RKR_Counter*, void*);
 public:
   SliderW *infinity_pan;
 private:

@@ -62,10 +62,10 @@ Fl_Menu_Item MidiGui::menu_MIDIOctave[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void MidiGui::cb_Midi_out_Counter_i(Fl_Counter* o, void*) {
+void MidiGui::cb_Midi_out_Counter_i(RKR_Counter* o, void*) {
   m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());
 }
-void MidiGui::cb_Midi_out_Counter(Fl_Counter* o, void* v) {
+void MidiGui::cb_Midi_out_Counter(RKR_Counter* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Midi_out_Counter_i(o,v);
 }
 
@@ -122,10 +122,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   MIDIOctave->when(FL_WHEN_CHANGED);
   MIDIOctave->menu(menu_MIDIOctave);
 } // Fl_Choice* MIDIOctave
-{ Midi_out_Counter = new Fl_Counter(94, 4, 50, 15, "Channel");
+{ RKR_Counter* o = Midi_out_Counter = new RKR_Counter(94, 4, 50, 15, "Channel");
   Midi_out_Counter->tooltip("Channel to send MIDI out.");
   Midi_out_Counter->type(1);
+  Midi_out_Counter->box(FL_UP_BOX);
   Midi_out_Counter->color((Fl_Color)62);
+  Midi_out_Counter->selection_color(FL_INACTIVE_COLOR);
+  Midi_out_Counter->labeltype(FL_NORMAL_LABEL);
+  Midi_out_Counter->labelfont(0);
   Midi_out_Counter->labelsize(9);
   Midi_out_Counter->labelcolor(FL_BACKGROUND2_COLOR);
   Midi_out_Counter->minimum(1);
@@ -134,7 +138,11 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Midi_out_Counter->value(1);
   Midi_out_Counter->textsize(11);
   Midi_out_Counter->callback((Fl_Callback*)cb_Midi_out_Counter);
-} // Fl_Counter* Midi_out_Counter
+  Midi_out_Counter->align(Fl_Align(FL_ALIGN_BOTTOM));
+  Midi_out_Counter->when(FL_WHEN_CHANGED);
+  o->m_start_label_offset = -1; // 10 - 9
+  o->m_start_text_offset = 1; // 10 - 11
+} // RKR_Counter* Midi_out_Counter
 { Use_FFT = new RKR_Check_Button(51, 34, 15, 15, "FFT");
   Use_FFT->tooltip("FFT based algorithm which is much more\nCPU intensive but may provide better \
 results.");

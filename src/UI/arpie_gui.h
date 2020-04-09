@@ -4,13 +4,13 @@
 #define arpie_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 
 class ArpieGui : public Fl_Group {
 public:
@@ -71,10 +71,10 @@ private:
   inline void cb_arpie_damp_i(SliderW*, void*);
   static void cb_arpie_damp(SliderW*, void*);
 public:
-  Fl_Counter *arpie_harm;
+  RKR_Counter *arpie_harm;
 private:
-  inline void cb_arpie_harm_i(Fl_Counter*, void*);
-  static void cb_arpie_harm(Fl_Counter*, void*);
+  inline void cb_arpie_harm_i(RKR_Counter*, void*);
+  static void cb_arpie_harm(RKR_Counter*, void*);
 public:
   Fl_Choice *arpie_pattern;
 private:

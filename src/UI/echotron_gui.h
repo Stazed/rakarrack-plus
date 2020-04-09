@@ -5,13 +5,13 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 
 class EchotronGui : public Fl_Group {
 public:
@@ -102,10 +102,10 @@ private:
   inline void cb_B_ech_i(RKR_Button*, void*);
   static void cb_B_ech(RKR_Button*, void*);
 public:
-  Fl_Counter *echotron_length;
+  RKR_Counter *echotron_length;
 private:
-  inline void cb_echotron_length_i(Fl_Counter*, void*);
-  static void cb_echotron_length(Fl_Counter*, void*);
+  inline void cb_echotron_length_i(RKR_Counter*, void*);
+  static void cb_echotron_length(RKR_Counter*, void*);
 public:
   Fl_Choice *echotron_fnum;
 private:

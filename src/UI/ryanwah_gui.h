@@ -5,13 +5,14 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Value_Input.h"
+#include "RKR_Check_Button.h"
+#include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 #include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 
 class RyanwahGui : public Fl_Group {
 public:
@@ -62,10 +63,10 @@ private:
   inline void cb_ryanwah_hp_i(SliderW*, void*);
   static void cb_ryanwah_hp(SliderW*, void*);
 public:
-  Fl_Counter *svfilter_stages;
+  RKR_Counter *svfilter_stages;
 private:
-  inline void cb_svfilter_stages_i(Fl_Counter*, void*);
-  static void cb_svfilter_stages(Fl_Counter*, void*);
+  inline void cb_svfilter_stages_i(RKR_Counter*, void*);
+  static void cb_svfilter_stages(RKR_Counter*, void*);
 public:
   Fl_Choice *ryanwah_lfotype;
 private:
@@ -123,5 +124,4 @@ private:
   static void cb_ryanwah_minfreq(RKR_Value_Input*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
-#include "RKR_Check_Button.h"
 #endif

@@ -154,10 +154,10 @@ void ArpieGui::cb_arpie_damp(SliderW* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_damp_i(o,v);
 }
 
-void ArpieGui::cb_arpie_harm_i(Fl_Counter* o, void*) {
+void ArpieGui::cb_arpie_harm_i(RKR_Counter* o, void*) {
   rkr->efx_Arpie->changepar(8,(int)o->value());
 }
-void ArpieGui::cb_arpie_harm(Fl_Counter* o, void* v) {
+void ArpieGui::cb_arpie_harm(RKR_Counter* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_harm_i(o,v);
 }
 
@@ -350,10 +350,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_damp->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_damp->when(FL_WHEN_CHANGED);
 } // SliderW* arpie_damp
-{ arpie_harm = new Fl_Counter(20, 150, 52, 12, "H");
+{ RKR_Counter* o = arpie_harm = new RKR_Counter(20, 150, 52, 12, "H");
   arpie_harm->tooltip("Number of steps in the pattern");
   arpie_harm->type(1);
   arpie_harm->box(FL_THIN_UP_BOX);
+  arpie_harm->color(FL_BACKGROUND_COLOR);
+  arpie_harm->selection_color(FL_INACTIVE_COLOR);
+  arpie_harm->labeltype(FL_NORMAL_LABEL);
+  arpie_harm->labelfont(0);
   arpie_harm->labelsize(10);
   arpie_harm->labelcolor(FL_BACKGROUND2_COLOR);
   arpie_harm->minimum(1);
@@ -363,7 +367,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_harm->textsize(9);
   arpie_harm->callback((Fl_Callback*)cb_arpie_harm);
   arpie_harm->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Counter* arpie_harm
+  arpie_harm->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* arpie_harm
 { arpie_pattern = new Fl_Choice(77, 147, 76, 18);
   arpie_pattern->down_box(FL_BORDER_BOX);
   arpie_pattern->selection_color(FL_FOREGROUND_COLOR);

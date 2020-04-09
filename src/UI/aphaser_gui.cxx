@@ -164,10 +164,10 @@ void AphaserGui::cb_aphaser_stdf(SliderW* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stdf_i(o,v);
 }
 
-void AphaserGui::cb_aphaser_stages_i(Fl_Counter* o, void*) {
+void AphaserGui::cb_aphaser_stages_i(RKR_Counter* o, void*) {
   rkr->efx_APhaser->changepar(8,(int)o->value());
 }
-void AphaserGui::cb_aphaser_stages(Fl_Counter* o, void* v) {
+void AphaserGui::cb_aphaser_stages(RKR_Counter* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stages_i(o,v);
 }
 
@@ -373,9 +373,13 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_stdf->when(FL_WHEN_CHANGED);
 } // SliderW* aphaser_stdf
-{ aphaser_stages = new Fl_Counter(80, 151, 52, 12, "Stages");
+{ RKR_Counter* o = aphaser_stages = new RKR_Counter(80, 151, 52, 12, "Stages");
   aphaser_stages->type(1);
   aphaser_stages->box(FL_THIN_UP_BOX);
+  aphaser_stages->color(FL_BACKGROUND_COLOR);
+  aphaser_stages->selection_color(FL_INACTIVE_COLOR);
+  aphaser_stages->labeltype(FL_NORMAL_LABEL);
+  aphaser_stages->labelfont(0);
   aphaser_stages->labelsize(10);
   aphaser_stages->labelcolor(FL_BACKGROUND2_COLOR);
   aphaser_stages->minimum(1);
@@ -385,7 +389,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_stages->textsize(9);
   aphaser_stages->callback((Fl_Callback*)cb_aphaser_stages);
   aphaser_stages->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Counter* aphaser_stages
+  aphaser_stages->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* aphaser_stages
 { aphaser_subs = new RKR_Check_Button(18, 165, 64, 15, "Subtract");
   aphaser_subs->box(FL_NO_BOX);
   aphaser_subs->down_box(FL_BORDER_BOX);

@@ -8,9 +8,12 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Check_Button.h"} {public global
 }
 
+decl {\#include "RKR_Counter.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} EchotronGui {
   user_data 1 open
-  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1576 112 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -212,7 +215,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
     user_data 2
     callback {rkr->efx_Echotron->changepar(4,(int)o->value());
 
-if((int)o->value())B_ech->activate(); else B_ech->deactivate();} selected
+if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
     xywh {67 154 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -237,8 +240,10 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
  rgui->getMIDIControl(357);
  return;
 }
-rkr->efx_Echotron->changepar(3,(int)o->value());}
+rkr->efx_Echotron->changepar(3,(int)o->value());} selected
     xywh {16 167 48 12} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textsize 9
+    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    class RKR_Counter
   }
   Fl_Choice echotron_fnum {
     label File

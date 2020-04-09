@@ -140,10 +140,10 @@ void RyanwahGui::cb_ryanwah_hp(SliderW* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_hp_i(o,v);
 }
 
-void RyanwahGui::cb_svfilter_stages_i(Fl_Counter* o, void*) {
+void RyanwahGui::cb_svfilter_stages_i(RKR_Counter* o, void*) {
   rkr->efx_RyanWah->changepar(13,(int)o->value());
 }
-void RyanwahGui::cb_svfilter_stages(Fl_Counter* o, void* v) {
+void RyanwahGui::cb_svfilter_stages(RKR_Counter* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_svfilter_stages_i(o,v);
 }
 
@@ -416,10 +416,14 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_hp->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_hp->when(FL_WHEN_CHANGED);
 } // SliderW* ryanwah_hp
-{ svfilter_stages = new Fl_Counter(27, 74, 27, 12, "Stg");
+{ RKR_Counter* o = svfilter_stages = new RKR_Counter(27, 74, 27, 12, "Stg");
   svfilter_stages->tooltip("Filter Stages");
   svfilter_stages->type(1);
   svfilter_stages->box(FL_THIN_UP_BOX);
+  svfilter_stages->color(FL_BACKGROUND_COLOR);
+  svfilter_stages->selection_color(FL_INACTIVE_COLOR);
+  svfilter_stages->labeltype(FL_NORMAL_LABEL);
+  svfilter_stages->labelfont(0);
   svfilter_stages->labelsize(10);
   svfilter_stages->labelcolor(FL_BACKGROUND2_COLOR);
   svfilter_stages->minimum(1);
@@ -429,7 +433,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   svfilter_stages->textsize(9);
   svfilter_stages->callback((Fl_Callback*)cb_svfilter_stages);
   svfilter_stages->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Counter* svfilter_stages
+  svfilter_stages->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* svfilter_stages
 { Fl_Choice* o = ryanwah_lfotype = new Fl_Choice(80, 73, 72, 16, "LFO");
   ryanwah_lfotype->down_box(FL_BORDER_BOX);
   ryanwah_lfotype->selection_color(FL_FOREGROUND_COLOR);

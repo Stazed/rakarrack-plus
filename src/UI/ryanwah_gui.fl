@@ -8,6 +8,12 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Value_Input.h"} {public global
 }
 
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Counter.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} RyanwahGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -152,7 +158,7 @@ rkr->efx_RyanWah->changepar(11,(int)o->value());}
   Fl_Check_Button ryanwah_res {
     label R
     user_data 2
-    callback {rkr->efx_RyanWah->changepar(16,(int)o->value());} selected
+    callback {rkr->efx_RyanWah->changepar(16,(int)o->value());}
     tooltip {Modulate Resonance} xywh {18 54 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button
   }
@@ -169,8 +175,10 @@ rkr->efx_RyanWah->changepar(12,(int)o->value());}
   }
   Fl_Counter svfilter_stages {
     label Stg
-    callback {rkr->efx_RyanWah->changepar(13,(int)o->value());}
+    callback {rkr->efx_RyanWah->changepar(13,(int)o->value());} selected
     tooltip {Filter Stages} xywh {27 74 27 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    class RKR_Counter
   }
   Fl_Choice ryanwah_lfotype {
     label LFO
@@ -290,7 +298,4 @@ rkr->efx_RyanWah->changepar(15,(int)o->value());}
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
   }
-}
-
-decl {\#include "RKR_Check_Button.h"} {public global
 }

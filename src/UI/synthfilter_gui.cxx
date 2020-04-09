@@ -152,17 +152,17 @@ void SynthfilterGui::cb_synthfilter_fb(SliderW* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_fb_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_Lstages_i(Fl_Counter* o, void*) {
+void SynthfilterGui::cb_synthfilter_Lstages_i(RKR_Counter* o, void*) {
   rkr->efx_Synthfilter->changepar(8,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_Lstages(Fl_Counter* o, void* v) {
+void SynthfilterGui::cb_synthfilter_Lstages(RKR_Counter* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Lstages_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_Hstages_i(Fl_Counter* o, void*) {
+void SynthfilterGui::cb_synthfilter_Hstages_i(RKR_Counter* o, void*) {
   rkr->efx_Synthfilter->changepar(9,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_Hstages(Fl_Counter* o, void* v) {
+void SynthfilterGui::cb_synthfilter_Hstages(RKR_Counter* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Hstages_i(o,v);
 }
 
@@ -396,9 +396,13 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_fb->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_fb->when(FL_WHEN_CHANGED);
 } // SliderW* synthfilter_fb
-{ synthfilter_Lstages = new Fl_Counter(48, 114, 28, 11, "LPF Stg.");
+{ RKR_Counter* o = synthfilter_Lstages = new RKR_Counter(48, 114, 28, 11, "LPF Stg.");
   synthfilter_Lstages->type(1);
   synthfilter_Lstages->box(FL_THIN_UP_BOX);
+  synthfilter_Lstages->color(FL_BACKGROUND_COLOR);
+  synthfilter_Lstages->selection_color(FL_INACTIVE_COLOR);
+  synthfilter_Lstages->labeltype(FL_NORMAL_LABEL);
+  synthfilter_Lstages->labelfont(0);
   synthfilter_Lstages->labelsize(10);
   synthfilter_Lstages->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_Lstages->minimum(0);
@@ -408,10 +412,16 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Lstages->textsize(9);
   synthfilter_Lstages->callback((Fl_Callback*)cb_synthfilter_Lstages);
   synthfilter_Lstages->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Counter* synthfilter_Lstages
-{ synthfilter_Hstages = new Fl_Counter(125, 114, 28, 11, "HPF Stg.");
+  synthfilter_Lstages->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* synthfilter_Lstages
+{ RKR_Counter* o = synthfilter_Hstages = new RKR_Counter(125, 114, 28, 11, "HPF Stg.");
   synthfilter_Hstages->type(1);
   synthfilter_Hstages->box(FL_THIN_UP_BOX);
+  synthfilter_Hstages->color(FL_BACKGROUND_COLOR);
+  synthfilter_Hstages->selection_color(FL_INACTIVE_COLOR);
+  synthfilter_Hstages->labeltype(FL_NORMAL_LABEL);
+  synthfilter_Hstages->labelfont(0);
   synthfilter_Hstages->labelsize(10);
   synthfilter_Hstages->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_Hstages->minimum(0);
@@ -421,7 +431,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Hstages->textsize(9);
   synthfilter_Hstages->callback((Fl_Callback*)cb_synthfilter_Hstages);
   synthfilter_Hstages->align(Fl_Align(FL_ALIGN_LEFT));
-} // Fl_Counter* synthfilter_Hstages
+  synthfilter_Hstages->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Counter* synthfilter_Hstages
 { synthfilter_dpth = new SliderW(56, 126, 100, 10, "Depth");
   synthfilter_dpth->type(5);
   synthfilter_dpth->box(FL_FLAT_BOX);
