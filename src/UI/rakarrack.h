@@ -406,7 +406,7 @@ public:
   Fl_Box *Metro_Led;
   RKR_Box *Metro_Label;
   Fl_Group *Presets;
-  Fl_Box *PRESETS_LABEL;
+  RKR_Box *PRESETS_LABEL;
   Fl_Button *L_B1;
 private:
   inline void cb_L_B1_i(Fl_Button*, void*);

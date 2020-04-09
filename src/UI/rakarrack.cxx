@@ -2210,11 +2210,19 @@ void RKRGUI::make_window() {
       Presets->selection_color(FL_FOREGROUND_COLOR);
       Presets->user_data((void*)(1));
       Presets->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      { PRESETS_LABEL = new Fl_Box(174, 28, 62, 14, "Presets");
+      { RKR_Box* o = PRESETS_LABEL = new RKR_Box(174, 28, 62, 14, "Presets");
+        PRESETS_LABEL->box(FL_NO_BOX);
+        PRESETS_LABEL->color(FL_BACKGROUND_COLOR);
+        PRESETS_LABEL->selection_color(FL_BACKGROUND_COLOR);
+        PRESETS_LABEL->labeltype(FL_NORMAL_LABEL);
         PRESETS_LABEL->labelfont(1);
+        PRESETS_LABEL->labelsize(14);
         PRESETS_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
         PRESETS_LABEL->user_data((void*)(7));
-      } // Fl_Box* PRESETS_LABEL
+        PRESETS_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
+        PRESETS_LABEL->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+      } // RKR_Box* PRESETS_LABEL
       { L_B1 = new Fl_Button(418, 30, 22, 16, "1");
         L_B1->color((Fl_Color)62);
         L_B1->labelsize(10);

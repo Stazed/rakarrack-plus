@@ -275,7 +275,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {804 191 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {738 226 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -284,7 +284,7 @@ Pexitprogram=1;} open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -388,7 +388,7 @@ Show_Next_Time();}
           xywh {0 0 45 26} shortcut 0x62
         }
         Submenu {} {
-          label {&Settings} open
+          label {&Settings}
           xywh {0 0 70 21}
         } {
           MenuItem Ajustes {
@@ -442,7 +442,7 @@ rkr->ACI_Bypass = 0;
           }
         }
         Submenu Ayuda {
-          label {&Help} open
+          label {&Help}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Contenido {
@@ -915,7 +915,7 @@ Fl::focus(Open_Order);
         class InfinityGui
       } {}
       Fl_Group Tuner {
-        user_data 1 open
+        user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
@@ -968,7 +968,7 @@ TUNER_LABEL->redraw_label();}
         }
       }
       Fl_Group InOut {
-        user_data 1
+        user_data 1 open
         xywh {2 24 164 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button ActivarGeneral {
@@ -1198,13 +1198,15 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
           label Presets
           user_data 7
           xywh {174 28 62 14} labelfont 1 labelcolor 7
+          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          class RKR_Box
         }
         Fl_Button L_B1 {
           label 1
@@ -1355,7 +1357,7 @@ if(rkr->Tap_Updated) UpdateTGUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
         }
         Fl_Box DAuthor {
-          user_data 7
+          user_data 7 selected
           xywh {246 107 266 18} box DOWN_BOX color 62 align 116
           code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
@@ -1585,7 +1587,7 @@ TAP_LABEL->redraw_label();}
 {
 rkr->Update_tempo();
 UpdateTGUI();
-}} selected
+}}
           xywh {628 172 38 15} shortcut 0x67 labelsize 10
         }
         Fl_Button T_BUT {
