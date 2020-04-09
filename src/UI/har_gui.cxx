@@ -2,7 +2,7 @@
 
 #include "har_gui.h"
 
-void HarGui::cb_har_activar_i(Fl_Light_Button* o, void*) {
+void HarGui::cb_har_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
@@ -16,7 +16,7 @@ rkr->efx_Har->changepar(3,rkr->efx_Har->getpar(3));
 rgui->Chord(0);
 rgui->findpos(14,(int)o->value(),o);
 }
-void HarGui::cb_har_activar(Fl_Light_Button* o, void* v) {
+void HarGui::cb_har_activar(RKR_Light_Button* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_activar_i(o,v);
 }
 
@@ -189,14 +189,19 @@ this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ har_activar = new Fl_Light_Button(5, 4, 34, 18, "On");
+{ har_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  har_activar->box(FL_UP_BOX);
   har_activar->shortcut(0x30);
   har_activar->color((Fl_Color)62);
   har_activar->selection_color((Fl_Color)1);
+  har_activar->labeltype(FL_NORMAL_LABEL);
+  har_activar->labelfont(0);
   har_activar->labelsize(10);
+  har_activar->labelcolor(FL_FOREGROUND_COLOR);
   har_activar->callback((Fl_Callback*)cb_har_activar, (void*)(2));
+  har_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   har_activar->when(FL_WHEN_CHANGED);
-} // Fl_Light_Button* har_activar
+} // RKR_Light_Button* har_activar
 { har_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
   har_preset->down_box(FL_BORDER_BOX);
   har_preset->selection_color(FL_FOREGROUND_COLOR);

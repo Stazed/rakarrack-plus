@@ -7,17 +7,17 @@
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include <FL/Fl_Light_Button.H>
+#include "RKR_Light_Button.h"
 #include <FL/Fl_Choice.H>
 #include <FL/Fl_Check_Button.H>
 
 class HarGui : public Fl_Group {
 public:
   HarGui(int X, int Y, int W, int H, const char *L = 0);
-  Fl_Light_Button *har_activar;
+  RKR_Light_Button *har_activar;
 private:
-  inline void cb_har_activar_i(Fl_Light_Button*, void*);
-  static void cb_har_activar(Fl_Light_Button*, void*);
+  inline void cb_har_activar_i(RKR_Light_Button*, void*);
+  static void cb_har_activar(RKR_Light_Button*, void*);
 public:
   Fl_Choice *har_preset;
 private:
