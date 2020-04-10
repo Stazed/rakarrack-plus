@@ -40,10 +40,11 @@ public:
     void draw();
     void resize(int,int,int,int);
     void set_font_adjustment(){m_need_font_update = true;}
-    int m_start_height;
     int m_start_font_offset;
 private:
     
+    int m_start_height;
+    int m_start_width;
     bool m_need_font_update;
     void font_resize(int,int,int,int);
 
