@@ -26,6 +26,9 @@ decl {\#include "RKR_Box.h"} {public global
 decl {\#include "RKR_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 decl {\#include "RKR_Counter.h"} {public global
 }
 
@@ -287,7 +290,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {198 177 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {122 209 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1164,6 +1167,9 @@ switch(rkr->M_Metro_Bar)
  }} open
           xywh {624 98 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(m_looper_bar->get_time_sig());}
+          code1 {o->m_start_label_offset = -2; // 10 - 8}
+          code2 {o->m_start_text_offset = -2; // 10 - 8}
+          class RKR_Choice
         } {}
         Fl_Value_Slider Metro_Volume {
           label Volume
@@ -1194,6 +1200,9 @@ switch(rkr->M_Metro_Sound)
  }} open
           xywh {634 118 28 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(m_looper_ms->get_metronome_sound());}
+          code1 {o->m_start_label_offset = -2; // 10 - 8}
+          code2 {o->m_start_text_offset = -1; // 10 - 9}
+          class RKR_Choice
         } {}
         Fl_Value_Slider Metro_Tempo {
           label Tempo
@@ -1215,7 +1224,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1386,7 +1395,7 @@ rkr->OnCounter=0;
 FillML();
 Prepare_Order();
 Put_Loaded();
-if(rkr->Tap_Updated) UpdateTGUI();} selected
+if(rkr->Tap_Updated) UpdateTGUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
           code0 {o->m_start_label_offset = 1; // (10 - 11)}
           code1 {o->m_start_text_offset = 1; // (10 - 11)}
@@ -1475,7 +1484,7 @@ Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsi
         }
       }
       Fl_Group Tap {
-        user_data 1
+        user_data 1 open
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -1491,8 +1500,10 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SEL {
           label Input
           user_data 12
-          callback {rkr->Tap_Selection=(int)o->value();}
+          callback {rkr->Tap_Selection=(int)o->value();} selected
           xywh {600 145 87 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->m_start_text_offset = -1; // 10 - 9}
+          class RKR_Choice
         } {
           MenuItem {} {
             label GUI
@@ -1520,6 +1531,8 @@ TAP_LABEL->redraw_label();}
           user_data 12
           callback {rkr->Tap_SetValue=(int)o->value();}
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->m_start_text_offset = -1; // 10 - 9}
+          class RKR_Choice
         } {
           MenuItem {} {
             label {Dl. 1 LFO 1}

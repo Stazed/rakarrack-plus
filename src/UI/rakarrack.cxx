@@ -407,7 +407,7 @@ void RKRGUI::cb_metro_activar(RKR_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_metro_activar_i(o,v);
 }
 
-void RKRGUI::cb_MetroBar_i(Fl_Choice* o, void*) {
+void RKRGUI::cb_MetroBar_i(RKR_Choice* o, void*) {
   rkr->M_Metro_Bar=(int)o->value();
 
 switch(rkr->M_Metro_Bar)
@@ -440,7 +440,7 @@ switch(rkr->M_Metro_Bar)
 
  };
 }
-void RKRGUI::cb_MetroBar(Fl_Choice* o, void* v) {
+void RKRGUI::cb_MetroBar(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroBar_i(o,v);
 }
 
@@ -451,7 +451,7 @@ void RKRGUI::cb_Metro_Volume(SliderW* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Volume_i(o,v);
 }
 
-void RKRGUI::cb_MetroSound_i(Fl_Choice* o, void*) {
+void RKRGUI::cb_MetroSound_i(RKR_Choice* o, void*) {
   rkr->M_Metro_Sound=(int)o->value();
 
 switch(rkr->M_Metro_Sound)
@@ -470,7 +470,7 @@ switch(rkr->M_Metro_Sound)
 
  };
 }
-void RKRGUI::cb_MetroSound(Fl_Choice* o, void* v) {
+void RKRGUI::cb_MetroSound(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroSound_i(o,v);
 }
 
@@ -724,10 +724,10 @@ void RKRGUI::cb_Tap_activar(RKR_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Tap_activar_i(o,v);
 }
 
-void RKRGUI::cb_T_SEL_i(Fl_Choice* o, void*) {
+void RKRGUI::cb_T_SEL_i(RKR_Choice* o, void*) {
   rkr->Tap_Selection=(int)o->value();
 }
-void RKRGUI::cb_T_SEL(Fl_Choice* o, void* v) {
+void RKRGUI::cb_T_SEL(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_SEL_i(o,v);
 }
 
@@ -740,10 +740,10 @@ Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RKRGUI::cb_T_SET_i(Fl_Choice* o, void*) {
+void RKRGUI::cb_T_SET_i(RKR_Choice* o, void*) {
   rkr->Tap_SetValue=(int)o->value();
 }
-void RKRGUI::cb_T_SET(Fl_Choice* o, void* v) {
+void RKRGUI::cb_T_SET(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_SET_i(o,v);
 }
 
@@ -2149,16 +2149,24 @@ void RKRGUI::make_window() {
         metro_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
         metro_activar->when(FL_WHEN_CHANGED);
       } // RKR_Light_Button* metro_activar
-      { Fl_Choice* o = MetroBar = new Fl_Choice(624, 98, 37, 16, "Time Sig.");
+      { RKR_Choice* o = MetroBar = new RKR_Choice(624, 98, 37, 16, "Time Sig.");
+        MetroBar->box(FL_FLAT_BOX);
         MetroBar->down_box(FL_BORDER_BOX);
+        MetroBar->color(FL_BACKGROUND_COLOR);
         MetroBar->selection_color(FL_FOREGROUND_COLOR);
+        MetroBar->labeltype(FL_NORMAL_LABEL);
+        MetroBar->labelfont(0);
         MetroBar->labelsize(8);
         MetroBar->labelcolor(FL_BACKGROUND2_COLOR);
         MetroBar->textsize(10);
         MetroBar->textcolor(FL_BACKGROUND2_COLOR);
         MetroBar->callback((Fl_Callback*)cb_MetroBar, (void*)(12));
+        MetroBar->align(Fl_Align(FL_ALIGN_LEFT));
+        MetroBar->when(FL_WHEN_RELEASE);
         o->menu(m_looper_bar->get_time_sig());
-      } // Fl_Choice* MetroBar
+        o->m_start_label_offset = -2; // 10 - 8
+        o->m_start_text_offset = -2; // 10 - 8
+      } // RKR_Choice* MetroBar
       { SliderW* o = Metro_Volume = new SliderW(667, 100, 117, 11, "Volume");
         Metro_Volume->type(5);
         Metro_Volume->box(FL_FLAT_BOX);
@@ -2177,16 +2185,24 @@ void RKRGUI::make_window() {
         Metro_Volume->when(FL_WHEN_CHANGED);
         o->m_label_size +=5;
       } // SliderW* Metro_Volume
-      { Fl_Choice* o = MetroSound = new Fl_Choice(634, 118, 28, 16, "S");
+      { RKR_Choice* o = MetroSound = new RKR_Choice(634, 118, 28, 16, "S");
+        MetroSound->box(FL_FLAT_BOX);
         MetroSound->down_box(FL_BORDER_BOX);
+        MetroSound->color(FL_BACKGROUND_COLOR);
         MetroSound->selection_color(FL_FOREGROUND_COLOR);
+        MetroSound->labeltype(FL_NORMAL_LABEL);
+        MetroSound->labelfont(0);
         MetroSound->labelsize(8);
         MetroSound->labelcolor(FL_BACKGROUND2_COLOR);
         MetroSound->textsize(10);
         MetroSound->textcolor(FL_BACKGROUND2_COLOR);
         MetroSound->callback((Fl_Callback*)cb_MetroSound, (void*)(12));
+        MetroSound->align(Fl_Align(FL_ALIGN_LEFT));
+        MetroSound->when(FL_WHEN_RELEASE);
         o->menu(m_looper_ms->get_metronome_sound());
-      } // Fl_Choice* MetroSound
+        o->m_start_label_offset = -2; // 10 - 8
+        o->m_start_text_offset = -1; // 10 - 9
+      } // RKR_Choice* MetroSound
       { SliderW* o = Metro_Tempo = new SliderW(667, 119, 117, 11, "Tempo");
         Metro_Tempo->type(5);
         Metro_Tempo->box(FL_FLAT_BOX);
@@ -2520,24 +2536,40 @@ void RKRGUI::make_window() {
         Tap_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
         Tap_activar->when(FL_WHEN_CHANGED);
       } // RKR_Light_Button* Tap_activar
-      { T_SEL = new Fl_Choice(600, 145, 87, 15, "Input");
+      { RKR_Choice* o = T_SEL = new RKR_Choice(600, 145, 87, 15, "Input");
+        T_SEL->box(FL_FLAT_BOX);
         T_SEL->down_box(FL_BORDER_BOX);
+        T_SEL->color(FL_BACKGROUND_COLOR);
+        T_SEL->selection_color(FL_SELECTION_COLOR);
+        T_SEL->labeltype(FL_NORMAL_LABEL);
+        T_SEL->labelfont(0);
         T_SEL->labelsize(10);
         T_SEL->labelcolor(FL_BACKGROUND2_COLOR);
         T_SEL->textsize(10);
         T_SEL->textcolor(FL_BACKGROUND2_COLOR);
         T_SEL->callback((Fl_Callback*)cb_T_SEL, (void*)(12));
+        T_SEL->align(Fl_Align(FL_ALIGN_LEFT));
+        T_SEL->when(FL_WHEN_RELEASE);
         T_SEL->menu(menu_T_SEL);
-      } // Fl_Choice* T_SEL
-      { T_SET = new Fl_Choice(714, 145, 76, 15, "Set");
+        o->m_start_text_offset = -1; // 10 - 9
+      } // RKR_Choice* T_SEL
+      { RKR_Choice* o = T_SET = new RKR_Choice(714, 145, 76, 15, "Set");
+        T_SET->box(FL_FLAT_BOX);
         T_SET->down_box(FL_BORDER_BOX);
+        T_SET->color(FL_BACKGROUND_COLOR);
+        T_SET->selection_color(FL_SELECTION_COLOR);
+        T_SET->labeltype(FL_NORMAL_LABEL);
+        T_SET->labelfont(0);
         T_SET->labelsize(10);
         T_SET->labelcolor(FL_BACKGROUND2_COLOR);
         T_SET->textsize(10);
         T_SET->textcolor(FL_BACKGROUND2_COLOR);
         T_SET->callback((Fl_Callback*)cb_T_SET, (void*)(12));
+        T_SET->align(Fl_Align(FL_ALIGN_LEFT));
+        T_SET->when(FL_WHEN_RELEASE);
         T_SET->menu(menu_T_SET);
-      } // Fl_Choice* T_SET
+        o->m_start_text_offset = -1; // 10 - 9
+      } // RKR_Choice* T_SET
       { T_Apply = new RKR_Button(628, 172, 38, 15, "Apply");
         T_Apply->box(FL_UP_BOX);
         T_Apply->shortcut(0x67);

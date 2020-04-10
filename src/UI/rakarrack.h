@@ -11,6 +11,7 @@
 #include "tunerbar.h"
 #include "RKR_Box.h"
 #include "RKR_Button.h"
+#include "RKR_Choice.h"
 #include "RKR_Counter.h"
 #include "RKR_Light_Button.h"
 #include <FL/Fl_Value_Slider.H>
@@ -137,7 +138,6 @@ class TrigWindowGui; // forward declaration
 #include "infinity_gui.h"
 #include <FL/Fl_Group.H>
 #include "midiconv_gui.h"
-#include <FL/Fl_Choice.H>
 #include "analyzer.h"
 #include <FL/Fl_Value_Input.H>
 #include "bankwindow_gui.h"
@@ -384,20 +384,20 @@ private:
   inline void cb_metro_activar_i(RKR_Light_Button*, void*);
   static void cb_metro_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *MetroBar;
+  RKR_Choice *MetroBar;
 private:
-  inline void cb_MetroBar_i(Fl_Choice*, void*);
-  static void cb_MetroBar(Fl_Choice*, void*);
+  inline void cb_MetroBar_i(RKR_Choice*, void*);
+  static void cb_MetroBar(RKR_Choice*, void*);
 public:
   SliderW *Metro_Volume;
 private:
   inline void cb_Metro_Volume_i(SliderW*, void*);
   static void cb_Metro_Volume(SliderW*, void*);
 public:
-  Fl_Choice *MetroSound;
+  RKR_Choice *MetroSound;
 private:
-  inline void cb_MetroSound_i(Fl_Choice*, void*);
-  static void cb_MetroSound(Fl_Choice*, void*);
+  inline void cb_MetroSound_i(RKR_Choice*, void*);
+  static void cb_MetroSound(RKR_Choice*, void*);
 public:
   SliderW *Metro_Tempo;
 private:
@@ -496,16 +496,16 @@ private:
   inline void cb_Tap_activar_i(RKR_Light_Button*, void*);
   static void cb_Tap_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *T_SEL;
+  RKR_Choice *T_SEL;
 private:
-  inline void cb_T_SEL_i(Fl_Choice*, void*);
-  static void cb_T_SEL(Fl_Choice*, void*);
+  inline void cb_T_SEL_i(RKR_Choice*, void*);
+  static void cb_T_SEL(RKR_Choice*, void*);
   static Fl_Menu_Item menu_T_SEL[];
 public:
-  Fl_Choice *T_SET;
+  RKR_Choice *T_SET;
 private:
-  inline void cb_T_SET_i(Fl_Choice*, void*);
-  static void cb_T_SET(Fl_Choice*, void*);
+  inline void cb_T_SET_i(RKR_Choice*, void*);
+  static void cb_T_SET(RKR_Choice*, void*);
   static Fl_Menu_Item menu_T_SET[];
 public:
   RKR_Button *T_Apply;
