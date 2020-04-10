@@ -5246,13 +5246,18 @@ void RKRGUI::chfsize(int value)
 
 void RKRGUI::adjustfont()
 {
-    // change font type
+    /* The adjustment for chfsize() and relfontsize used to be 
+       necessary before the auto resize of fonts was added. Does not
+       work with F12 full screen and occasionally changed the font size.
+       This function is somewhat useless now, could be eliminated
+       with direct setting of resolution at called location.
+     */
 
-    int change = Principal->w() - rkr->resolution;
-    int value = change / 100;
+//    int change = Principal->w() - rkr->resolution;
+//    int value = change / 100;
     rkr->resolution = Principal->w();
-    rkr->relfontsize += value;
-    chfsize(value);
+//    rkr->relfontsize += value;
+//    chfsize(value);
 }
 
 void RKRGUI::ChangeActives()
