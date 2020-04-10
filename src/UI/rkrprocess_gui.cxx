@@ -5174,7 +5174,6 @@ void RKRGUI::PutBackground()
 void RKRGUI::chfsize(int value)
 {
     g_value_font_size += value;
-    g_slider_font_size += value;
 
     // Sort through widgets and adjust font sizes
     unsigned char k = 0;

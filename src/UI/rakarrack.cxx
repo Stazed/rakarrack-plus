@@ -8,7 +8,6 @@ Fl_Color fore_color;
 Fl_Color label_color; 
 RKR *rkr; // extern global
 int g_value_font_size = 10; // extern global
-int g_slider_font_size = 10; // extern global
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();
