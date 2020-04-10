@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class {\#include "newvum.h"} VocoderGui {
   user_data 1 open
   xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -25,7 +28,7 @@ widget_class {\#include "newvum.h"} VocoderGui {
 rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-rgui->findpos(35,(int)o->value(),o);} selected
+rgui->findpos(35,(int)o->value(),o);}
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -40,8 +43,9 @@ rgui->findpos(35,(int)o->value(),o);} selected
         vo_q->value(rkr->efx_Vocoder->getpar(3));
         vo_input->value(rkr->efx_Vocoder->getpar(4));
         vo_ring->value(rkr->efx_Vocoder->getpar(6));
-        vo_level->value(rkr->efx_Vocoder->getpar(5));}
+        vo_level->value(rkr->efx_Vocoder->getpar(5));} selected
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Vocoder 1}

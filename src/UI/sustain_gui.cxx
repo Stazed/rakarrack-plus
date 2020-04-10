@@ -18,13 +18,13 @@ void SustainGui::cb_sus_activar(RKR_Light_Button* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_activar_i(o,v);
 }
 
-void SustainGui::cb_sus_preset_i(Fl_Choice* o, void* v) {
+void SustainGui::cb_sus_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
         if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
 sus_sus->value(rkr->efx_Sustainer->getpar(1));
 }
-void SustainGui::cb_sus_preset(Fl_Choice* o, void* v) {
+void SustainGui::cb_sus_preset(RKR_Choice* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_preset_i(o,v);
 }
 
@@ -78,17 +78,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   sus_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* sus_activar
-{ sus_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
+{ sus_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+  sus_preset->box(FL_FLAT_BOX);
   sus_preset->down_box(FL_BORDER_BOX);
+  sus_preset->color(FL_BACKGROUND_COLOR);
   sus_preset->selection_color(FL_FOREGROUND_COLOR);
+  sus_preset->labeltype(FL_NORMAL_LABEL);
+  sus_preset->labelfont(0);
   sus_preset->labelsize(10);
   sus_preset->labelcolor(FL_BACKGROUND2_COLOR);
   sus_preset->textsize(10);
   sus_preset->textcolor(FL_BACKGROUND2_COLOR);
   sus_preset->callback((Fl_Callback*)cb_sus_preset, (void*)(12036));
+  sus_preset->align(Fl_Align(FL_ALIGN_LEFT));
   sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   sus_preset->menu(menu_sus_preset);
-} // Fl_Choice* sus_preset
+} // RKR_Choice* sus_preset
 { sus_gain = new SliderW(53, 60, 100, 10, "Gain");
   sus_gain->type(5);
   sus_gain->box(FL_FLAT_BOX);

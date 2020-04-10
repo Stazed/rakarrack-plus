@@ -18,7 +18,7 @@ void VibeGui::cb_vibe_activar(RKR_Light_Button* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_activar_i(o,v);
 }
 
-void VibeGui::cb_vibe_preset_i(Fl_Choice* o, void* v) {
+void VibeGui::cb_vibe_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12045))rkr->efx_Vibe->setpreset((int)o->value());
 vibe_WD->value(Dry_Wet(rkr->efx_Vibe->getpar(6)));
@@ -33,7 +33,7 @@ vibe_fb->value(rkr->efx_Vibe->getpar(7)-64);
 vibe_LR->value(rkr->efx_Vibe->getpar(9));
 vibe_stereo->value(rkr->efx_Vibe->getpar(10));
 }
-void VibeGui::cb_vibe_preset(Fl_Choice* o, void* v) {
+void VibeGui::cb_vibe_preset(RKR_Choice* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_preset_i(o,v);
 }
 
@@ -110,10 +110,10 @@ void VibeGui::cb_vibe_rnd(SliderW* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_rnd_i(o,v);
 }
 
-void VibeGui::cb_vibe_lfotype_i(Fl_Choice* o, void*) {
+void VibeGui::cb_vibe_lfotype_i(RKR_Choice* o, void*) {
   rkr->efx_Vibe->changepar(3,(int)o->value());
 }
-void VibeGui::cb_vibe_lfotype(Fl_Choice* o, void* v) {
+void VibeGui::cb_vibe_lfotype(RKR_Choice* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_lfotype_i(o,v);
 }
 
@@ -191,17 +191,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   vibe_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* vibe_activar
-{ vibe_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
+{ vibe_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+  vibe_preset->box(FL_FLAT_BOX);
   vibe_preset->down_box(FL_BORDER_BOX);
+  vibe_preset->color(FL_BACKGROUND_COLOR);
   vibe_preset->selection_color(FL_FOREGROUND_COLOR);
+  vibe_preset->labeltype(FL_NORMAL_LABEL);
+  vibe_preset->labelfont(0);
   vibe_preset->labelsize(10);
   vibe_preset->labelcolor(FL_BACKGROUND2_COLOR);
   vibe_preset->textsize(10);
   vibe_preset->textcolor(FL_BACKGROUND2_COLOR);
   vibe_preset->callback((Fl_Callback*)cb_vibe_preset, (void*)(12045));
+  vibe_preset->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vibe_preset->menu(menu_vibe_preset);
-} // Fl_Choice* vibe_preset
+} // RKR_Choice* vibe_preset
 { vibe_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
   vibe_WD->type(5);
   vibe_WD->box(FL_FLAT_BOX);
@@ -283,16 +288,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* vibe_rnd
-{ Fl_Choice* o = vibe_lfotype = new Fl_Choice(78, 96, 72, 16, "LFO Type");
+{ RKR_Choice* o = vibe_lfotype = new RKR_Choice(78, 96, 72, 16, "LFO Type");
+  vibe_lfotype->box(FL_FLAT_BOX);
   vibe_lfotype->down_box(FL_BORDER_BOX);
+  vibe_lfotype->color(FL_BACKGROUND_COLOR);
   vibe_lfotype->selection_color(FL_FOREGROUND_COLOR);
+  vibe_lfotype->labeltype(FL_NORMAL_LABEL);
+  vibe_lfotype->labelfont(0);
   vibe_lfotype->labelsize(10);
   vibe_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
   vibe_lfotype->textsize(10);
   vibe_lfotype->textcolor(FL_BACKGROUND2_COLOR);
   vibe_lfotype->callback((Fl_Callback*)cb_vibe_lfotype);
+  vibe_lfotype->align(Fl_Align(FL_ALIGN_LEFT));
+  vibe_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
-} // Fl_Choice* vibe_lfotype
+} // RKR_Choice* vibe_lfotype
 { vibe_stdf = new SliderW(56, 118, 100, 10, "Stereo Df");
   vibe_stdf->tooltip("LFO L/R Delay");
   vibe_stdf->type(5);

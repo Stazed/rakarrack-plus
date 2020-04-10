@@ -18,7 +18,7 @@ void ValveGui::cb_valve_activar(RKR_Light_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_activar_i(o,v);
 }
 
-void ValveGui::cb_valve_preset_i(Fl_Choice* o, void* v) {
+void ValveGui::cb_valve_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
 valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(0)));
@@ -35,7 +35,7 @@ valve_Q->value(rkr->efx_Valve->getpar(10));
 valve_ed->value(rkr->efx_Valve->getpar(11));
 valve_Pre->value(rkr->efx_Valve->getpar(12));
 }
-void ValveGui::cb_valve_preset(Fl_Choice* o, void* v) {
+void ValveGui::cb_valve_preset(RKR_Choice* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_preset_i(o,v);
 }
 
@@ -202,17 +202,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   valve_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   valve_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* valve_activar
-{ valve_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
+{ valve_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+  valve_preset->box(FL_FLAT_BOX);
   valve_preset->down_box(FL_BORDER_BOX);
+  valve_preset->color(FL_BACKGROUND_COLOR);
   valve_preset->selection_color(FL_FOREGROUND_COLOR);
+  valve_preset->labeltype(FL_NORMAL_LABEL);
+  valve_preset->labelfont(0);
   valve_preset->labelsize(10);
   valve_preset->labelcolor(FL_BACKGROUND2_COLOR);
   valve_preset->textsize(10);
   valve_preset->textcolor(FL_BACKGROUND2_COLOR);
   valve_preset->callback((Fl_Callback*)cb_valve_preset, (void*)(12019));
+  valve_preset->align(Fl_Align(FL_ALIGN_LEFT));
   valve_preset->when(FL_WHEN_RELEASE_ALWAYS);
   valve_preset->menu(menu_valve_preset);
-} // Fl_Choice* valve_preset
+} // RKR_Choice* valve_preset
 { valve_WD = new SliderW(56, 31, 100, 10, "Dry/Wet");
   valve_WD->type(5);
   valve_WD->box(FL_FLAT_BOX);

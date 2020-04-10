@@ -18,7 +18,7 @@ void WhawhaGui::cb_WhaWha_activar(RKR_Light_Button* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_activar_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_preset_i(Fl_Choice* o, void* v) {
+void WhawhaGui::cb_WhaWha_preset_i(RKR_Choice* o, void* v) {
   rkr->WhaWha_Bypass=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
@@ -35,7 +35,7 @@ WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
 WhaWha_ftype->value(rkr->efx_WhaWha->getpar(10));
 if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;
 }
-void WhawhaGui::cb_WhaWha_preset(Fl_Choice* o, void* v) {
+void WhawhaGui::cb_WhaWha_preset(RKR_Choice* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_preset_i(o,v);
 }
 
@@ -96,10 +96,10 @@ void WhawhaGui::cb_WhaWha_rnd(SliderW* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_rnd_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_lfotype_i(Fl_Choice* o, void*) {
+void WhawhaGui::cb_WhaWha_lfotype_i(RKR_Choice* o, void*) {
   rkr->efx_WhaWha->changepar(4,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_lfotype(Fl_Choice* o, void* v) {
+void WhawhaGui::cb_WhaWha_lfotype(RKR_Choice* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_lfotype_i(o,v);
 }
 
@@ -151,10 +151,10 @@ void WhawhaGui::cb_WhaWha_ampsnsinv(RKR_Check_Button* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_ampsnsinv_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_ftype_i(Fl_Choice* o, void*) {
+void WhawhaGui::cb_WhaWha_ftype_i(RKR_Choice* o, void*) {
   rkr->efx_WhaWha->changepar(10,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_ftype(Fl_Choice* o, void* v) {
+void WhawhaGui::cb_WhaWha_ftype(RKR_Choice* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_ftype_i(o,v);
 }
 
@@ -198,17 +198,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   WhaWha_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* WhaWha_activar
-{ WhaWha_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
+{ WhaWha_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+  WhaWha_preset->box(FL_FLAT_BOX);
   WhaWha_preset->down_box(FL_BORDER_BOX);
+  WhaWha_preset->color(FL_BACKGROUND_COLOR);
   WhaWha_preset->selection_color(FL_FOREGROUND_COLOR);
+  WhaWha_preset->labeltype(FL_NORMAL_LABEL);
+  WhaWha_preset->labelfont(0);
   WhaWha_preset->labelsize(10);
   WhaWha_preset->labelcolor(FL_BACKGROUND2_COLOR);
   WhaWha_preset->textsize(10);
   WhaWha_preset->textcolor(FL_BACKGROUND2_COLOR);
   WhaWha_preset->callback((Fl_Callback*)cb_WhaWha_preset, (void*)(12010));
+  WhaWha_preset->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
   WhaWha_preset->menu(menu_WhaWha_preset);
-} // Fl_Choice* WhaWha_preset
+} // RKR_Choice* WhaWha_preset
 { WhaWha_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
   WhaWha_WD->type(5);
   WhaWha_WD->box(FL_FLAT_BOX);
@@ -275,16 +280,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_rnd->when(FL_WHEN_CHANGED);
 } // SliderW* WhaWha_rnd
-{ Fl_Choice* o = WhaWha_lfotype = new Fl_Choice(78, 79, 72, 16, "LFO Type");
+{ RKR_Choice* o = WhaWha_lfotype = new RKR_Choice(78, 79, 72, 16, "LFO Type");
+  WhaWha_lfotype->box(FL_FLAT_BOX);
   WhaWha_lfotype->down_box(FL_BORDER_BOX);
+  WhaWha_lfotype->color(FL_BACKGROUND_COLOR);
   WhaWha_lfotype->selection_color(FL_FOREGROUND_COLOR);
+  WhaWha_lfotype->labeltype(FL_NORMAL_LABEL);
+  WhaWha_lfotype->labelfont(0);
   WhaWha_lfotype->labelsize(10);
   WhaWha_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
   WhaWha_lfotype->textsize(10);
   WhaWha_lfotype->textcolor(FL_BACKGROUND2_COLOR);
   WhaWha_lfotype->callback((Fl_Callback*)cb_WhaWha_lfotype);
+  WhaWha_lfotype->align(Fl_Align(FL_ALIGN_LEFT));
+  WhaWha_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
-} // Fl_Choice* WhaWha_lfotype
+} // RKR_Choice* WhaWha_lfotype
 { WhaWha_stdf = new SliderW(56, 105, 100, 10, "Stereo Df");
   WhaWha_stdf->tooltip("LFO L/R Delay");
   WhaWha_stdf->type(5);
@@ -349,17 +360,23 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   WhaWha_ampsnsinv->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* WhaWha_ampsnsinv
-{ WhaWha_ftype = new Fl_Choice(95, 145, 59, 16, "F. Type");
+{ WhaWha_ftype = new RKR_Choice(95, 145, 59, 16, "F. Type");
   WhaWha_ftype->tooltip("Filter Type");
+  WhaWha_ftype->box(FL_FLAT_BOX);
   WhaWha_ftype->down_box(FL_BORDER_BOX);
+  WhaWha_ftype->color(FL_BACKGROUND_COLOR);
   WhaWha_ftype->selection_color(FL_FOREGROUND_COLOR);
+  WhaWha_ftype->labeltype(FL_NORMAL_LABEL);
+  WhaWha_ftype->labelfont(0);
   WhaWha_ftype->labelsize(10);
   WhaWha_ftype->labelcolor(FL_BACKGROUND2_COLOR);
   WhaWha_ftype->textsize(10);
   WhaWha_ftype->textcolor(FL_BACKGROUND2_COLOR);
   WhaWha_ftype->callback((Fl_Callback*)cb_WhaWha_ftype);
+  WhaWha_ftype->align(Fl_Align(FL_ALIGN_LEFT));
+  WhaWha_ftype->when(FL_WHEN_RELEASE);
   WhaWha_ftype->menu(menu_WhaWha_ftype);
-} // Fl_Choice* WhaWha_ftype
+} // RKR_Choice* WhaWha_ftype
 { WhaWha_smooth = new SliderW(56, 165, 100, 10, "Smooth");
   WhaWha_smooth->type(5);
   WhaWha_smooth->box(FL_FLAT_BOX);

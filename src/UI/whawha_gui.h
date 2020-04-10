@@ -5,12 +5,12 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
-#include <FL/Fl_Choice.H>
 
 class WhawhaGui : public Fl_Group {
 public:
@@ -20,10 +20,10 @@ private:
   inline void cb_WhaWha_activar_i(RKR_Light_Button*, void*);
   static void cb_WhaWha_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *WhaWha_preset;
+  RKR_Choice *WhaWha_preset;
 private:
-  inline void cb_WhaWha_preset_i(Fl_Choice*, void*);
-  static void cb_WhaWha_preset(Fl_Choice*, void*);
+  inline void cb_WhaWha_preset_i(RKR_Choice*, void*);
+  static void cb_WhaWha_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_WhaWha_preset[];
 public:
   SliderW *WhaWha_WD;
@@ -46,10 +46,10 @@ private:
   inline void cb_WhaWha_rnd_i(SliderW*, void*);
   static void cb_WhaWha_rnd(SliderW*, void*);
 public:
-  Fl_Choice *WhaWha_lfotype;
+  RKR_Choice *WhaWha_lfotype;
 private:
-  inline void cb_WhaWha_lfotype_i(Fl_Choice*, void*);
-  static void cb_WhaWha_lfotype(Fl_Choice*, void*);
+  inline void cb_WhaWha_lfotype_i(RKR_Choice*, void*);
+  static void cb_WhaWha_lfotype(RKR_Choice*, void*);
 public:
   SliderW *WhaWha_stdf;
 private:
@@ -71,10 +71,10 @@ private:
   inline void cb_WhaWha_ampsnsinv_i(RKR_Check_Button*, void*);
   static void cb_WhaWha_ampsnsinv(RKR_Check_Button*, void*);
 public:
-  Fl_Choice *WhaWha_ftype;
+  RKR_Choice *WhaWha_ftype;
 private:
-  inline void cb_WhaWha_ftype_i(Fl_Choice*, void*);
-  static void cb_WhaWha_ftype(Fl_Choice*, void*);
+  inline void cb_WhaWha_ftype_i(RKR_Choice*, void*);
+  static void cb_WhaWha_ftype(RKR_Choice*, void*);
   static Fl_Menu_Item menu_WhaWha_ftype[];
 public:
   SliderW *WhaWha_smooth;

@@ -8,6 +8,9 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Check_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} WhawhaGui {
   user_data 1 open
   xywh {1428 110 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -51,6 +54,7 @@ WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
 WhaWha_ftype->value(rkr->efx_WhaWha->getpar(10));
 if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label WahWah
@@ -122,6 +126,7 @@ rkr->efx_WhaWha->changepar(3,(int)o->value());}
     callback {rkr->efx_WhaWha->changepar(4,(int)o->value())}
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
+    class RKR_Choice
   } {}
   Fl_Value_Slider WhaWha_stdf {
     label {Stereo Df}
@@ -164,7 +169,7 @@ rkr->efx_WhaWha->changepar(7,(int)o->value());}
  rgui->getMIDIControl(112);
  return;
 } 
-rkr->efx_WhaWha->changepar(8,(int)o->value());} selected
+rkr->efx_WhaWha->changepar(8,(int)o->value());}
     tooltip {Amplitude Sensitivity Inverse} xywh {8 145 70 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -172,9 +177,10 @@ rkr->efx_WhaWha->changepar(8,(int)o->value());} selected
     label {F. Type}
     callback {rkr->efx_WhaWha->changepar(10,(int)o->value())}
     tooltip {Filter Type} xywh {95 145 59 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
-      label {Low-Pass Analog}
+      label {Low-Pass Analog} selected
       xywh {72 72 36 21} labelsize 10
     }
     MenuItem {} {

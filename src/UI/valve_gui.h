@@ -5,11 +5,11 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include <FL/Fl_Choice.H>
 
 class ValveGui : public Fl_Group {
 public:
@@ -19,10 +19,10 @@ private:
   inline void cb_valve_activar_i(RKR_Light_Button*, void*);
   static void cb_valve_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *valve_preset;
+  RKR_Choice *valve_preset;
 private:
-  inline void cb_valve_preset_i(Fl_Choice*, void*);
-  static void cb_valve_preset(Fl_Choice*, void*);
+  inline void cb_valve_preset_i(RKR_Choice*, void*);
+  static void cb_valve_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_valve_preset[];
 public:
   SliderW *valve_WD;

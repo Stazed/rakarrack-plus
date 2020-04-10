@@ -18,7 +18,7 @@ void SynthfilterGui::cb_synthfilter_activar(RKR_Light_Button* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_activar_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_preset_i(Fl_Choice* o, void* v) {
+void SynthfilterGui::cb_synthfilter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
 synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(0)));
@@ -38,7 +38,7 @@ synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
 synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
 }
-void SynthfilterGui::cb_synthfilter_preset(Fl_Choice* o, void* v) {
+void SynthfilterGui::cb_synthfilter_preset(RKR_Choice* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_preset_i(o,v);
 }
 
@@ -102,10 +102,10 @@ void SynthfilterGui::cb_synthfilter_rand(RKR_Value_Input* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_rand_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_lfotype_i(Fl_Choice* o, void*) {
+void SynthfilterGui::cb_synthfilter_lfotype_i(RKR_Choice* o, void*) {
   rkr->efx_Synthfilter->changepar(4,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_lfotype(Fl_Choice* o, void* v) {
+void SynthfilterGui::cb_synthfilter_lfotype(RKR_Choice* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_lfotype_i(o,v);
 }
 
@@ -245,17 +245,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   synthfilter_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* synthfilter_activar
-{ synthfilter_preset = new Fl_Choice(77, 4, 76, 18, "Preset");
+{ synthfilter_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+  synthfilter_preset->box(FL_FLAT_BOX);
   synthfilter_preset->down_box(FL_BORDER_BOX);
+  synthfilter_preset->color(FL_BACKGROUND_COLOR);
   synthfilter_preset->selection_color(FL_FOREGROUND_COLOR);
+  synthfilter_preset->labeltype(FL_NORMAL_LABEL);
+  synthfilter_preset->labelfont(0);
   synthfilter_preset->labelsize(10);
   synthfilter_preset->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_preset->textsize(10);
   synthfilter_preset->textcolor(FL_BACKGROUND2_COLOR);
   synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset, (void*)(12027));
+  synthfilter_preset->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   synthfilter_preset->menu(menu_synthfilter_preset);
-} // Fl_Choice* synthfilter_preset
+} // RKR_Choice* synthfilter_preset
 { synthfilter_WD = new SliderW(56, 25, 100, 10, "Dry/Wet");
   synthfilter_WD->type(5);
   synthfilter_WD->box(FL_FLAT_BOX);
@@ -322,16 +327,23 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_rand->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_rand->when(FL_WHEN_CHANGED);
 } // RKR_Value_Input* synthfilter_rand
-{ Fl_Choice* o = synthfilter_lfotype = new Fl_Choice(65, 63, 52, 13, "LFO");
+{ RKR_Choice* o = synthfilter_lfotype = new RKR_Choice(65, 63, 52, 13, "LFO");
+  synthfilter_lfotype->box(FL_FLAT_BOX);
   synthfilter_lfotype->down_box(FL_BORDER_BOX);
+  synthfilter_lfotype->color(FL_BACKGROUND_COLOR);
   synthfilter_lfotype->selection_color(FL_FOREGROUND_COLOR);
+  synthfilter_lfotype->labeltype(FL_NORMAL_LABEL);
+  synthfilter_lfotype->labelfont(0);
   synthfilter_lfotype->labelsize(10);
   synthfilter_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_lfotype->textsize(10);
   synthfilter_lfotype->textcolor(FL_BACKGROUND2_COLOR);
   synthfilter_lfotype->callback((Fl_Callback*)cb_synthfilter_lfotype);
+  synthfilter_lfotype->align(Fl_Align(FL_ALIGN_LEFT));
+  synthfilter_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
-} // Fl_Choice* synthfilter_lfotype
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Choice* synthfilter_lfotype
 { synthfilter_subs = new RKR_Check_Button(143, 63, 46, 15, "Sub");
   synthfilter_subs->tooltip("Subtract - Make output of filter negative");
   synthfilter_subs->box(FL_NO_BOX);

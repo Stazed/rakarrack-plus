@@ -8,6 +8,9 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Check_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class ValveGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -48,8 +51,9 @@ valve_lpf->value(rkr->efx_Valve->getpar(6));
 valve_hpf->value(rkr->efx_Valve->getpar(7));
 valve_Q->value(rkr->efx_Valve->getpar(10));
 valve_ed->value(rkr->efx_Valve->getpar(11));
-valve_Pre->value(rkr->efx_Valve->getpar(12));}
+valve_Pre->value(rkr->efx_Valve->getpar(12));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Valve 1}
@@ -169,7 +173,7 @@ rkr->efx_Valve->changepar(12,(int)o->value());}
   Fl_Check_Button valve_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Valve->changepar(5,(int)o->value());} selected
+    callback {rkr->efx_Valve->changepar(5,(int)o->value());}
     xywh {114 139 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

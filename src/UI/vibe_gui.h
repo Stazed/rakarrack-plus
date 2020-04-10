@@ -5,12 +5,12 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
-#include <FL/Fl_Choice.H>
 
 class VibeGui : public Fl_Group {
 public:
@@ -20,10 +20,10 @@ private:
   inline void cb_vibe_activar_i(RKR_Light_Button*, void*);
   static void cb_vibe_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *vibe_preset;
+  RKR_Choice *vibe_preset;
 private:
-  inline void cb_vibe_preset_i(Fl_Choice*, void*);
-  static void cb_vibe_preset(Fl_Choice*, void*);
+  inline void cb_vibe_preset_i(RKR_Choice*, void*);
+  static void cb_vibe_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_vibe_preset[];
 public:
   SliderW *vibe_WD;
@@ -51,10 +51,10 @@ private:
   inline void cb_vibe_rnd_i(SliderW*, void*);
   static void cb_vibe_rnd(SliderW*, void*);
 public:
-  Fl_Choice *vibe_lfotype;
+  RKR_Choice *vibe_lfotype;
 private:
-  inline void cb_vibe_lfotype_i(Fl_Choice*, void*);
-  static void cb_vibe_lfotype(Fl_Choice*, void*);
+  inline void cb_vibe_lfotype_i(RKR_Choice*, void*);
+  static void cb_vibe_lfotype(RKR_Choice*, void*);
 public:
   SliderW *vibe_stdf;
 private:

@@ -7,12 +7,12 @@
 #include "RKR_Value_Input.h"
 #include "RKR_Check_Button.h"
 #include "RKR_Counter.h"
+#include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
-#include <FL/Fl_Choice.H>
 
 class SynthfilterGui : public Fl_Group {
 public:
@@ -22,10 +22,10 @@ private:
   inline void cb_synthfilter_activar_i(RKR_Light_Button*, void*);
   static void cb_synthfilter_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *synthfilter_preset;
+  RKR_Choice *synthfilter_preset;
 private:
-  inline void cb_synthfilter_preset_i(Fl_Choice*, void*);
-  static void cb_synthfilter_preset(Fl_Choice*, void*);
+  inline void cb_synthfilter_preset_i(RKR_Choice*, void*);
+  static void cb_synthfilter_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_synthfilter_preset[];
 public:
   SliderW *synthfilter_WD;
@@ -48,10 +48,10 @@ private:
   inline void cb_synthfilter_rand_i(RKR_Value_Input*, void*);
   static void cb_synthfilter_rand(RKR_Value_Input*, void*);
 public:
-  Fl_Choice *synthfilter_lfotype;
+  RKR_Choice *synthfilter_lfotype;
 private:
-  inline void cb_synthfilter_lfotype_i(Fl_Choice*, void*);
-  static void cb_synthfilter_lfotype(Fl_Choice*, void*);
+  inline void cb_synthfilter_lfotype_i(RKR_Choice*, void*);
+  static void cb_synthfilter_lfotype(RKR_Choice*, void*);
 public:
   RKR_Check_Button *synthfilter_subs;
 private:

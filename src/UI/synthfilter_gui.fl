@@ -14,6 +14,9 @@ decl {\#include "RKR_Check_Button.h"} {public global
 decl {\#include "RKR_Counter.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
   user_data 1 open
   xywh {1176 110 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -60,6 +63,7 @@ synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
 synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Low Pass}
@@ -140,9 +144,11 @@ rkr->efx_Synthfilter->changepar(3,(int)o->value());}
   }
   Fl_Choice synthfilter_lfotype {
     label LFO
-    callback {rkr->efx_Synthfilter->changepar(4,(int)o->value());}
+    callback {rkr->efx_Synthfilter->changepar(4,(int)o->value());} selected
     xywh {65 63 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
+    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    class RKR_Choice
   } {}
   Fl_Check_Button synthfilter_subs {
     label Sub
@@ -193,7 +199,7 @@ rkr->efx_Synthfilter->changepar(7,(int)o->value());}
   }
   Fl_Counter synthfilter_Hstages {
     label {HPF Stg.}
-    callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());} selected
+    callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());}
     xywh {125 114 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
     code0 {o->m_start_text_offset = -1; // 10 - 9}
     class RKR_Counter

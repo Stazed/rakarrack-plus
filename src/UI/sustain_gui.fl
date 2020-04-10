@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class SustainGui {
   user_data 1 open
   xywh {1582 168 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
@@ -24,7 +27,7 @@ widget_class SustainGui {
         rkr->Sustainer_Bypass=(int)o->value();
         if((int) o->value()==0)
         rkr->efx_Sustainer->cleanup();
-        rgui->findpos(36,(int)o->value(),o);} selected
+        rgui->findpos(36,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -34,8 +37,9 @@ widget_class SustainGui {
     callback {long long ud= (long long) v;
         if((ud==0)||(ud==12036))rkr->efx_Sustainer->setpreset((int) o->value());
 sus_gain->value(rkr->efx_Sustainer->getpar(0));
-sus_sus->value(rkr->efx_Sustainer->getpar(1));} open
+sus_sus->value(rkr->efx_Sustainer->getpar(1));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Moderate

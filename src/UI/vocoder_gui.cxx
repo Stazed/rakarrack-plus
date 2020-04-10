@@ -18,7 +18,7 @@ void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_activar_i(o,v);
 }
 
-void VocoderGui::cb_vo_preset_i(Fl_Choice* o, void* v) {
+void VocoderGui::cb_vo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
         if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
         vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(0)));
@@ -29,7 +29,7 @@ void VocoderGui::cb_vo_preset_i(Fl_Choice* o, void* v) {
         vo_ring->value(rkr->efx_Vocoder->getpar(6));
         vo_level->value(rkr->efx_Vocoder->getpar(5));
 }
-void VocoderGui::cb_vo_preset(Fl_Choice* o, void* v) {
+void VocoderGui::cb_vo_preset(RKR_Choice* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_preset_i(o,v);
 }
 
@@ -145,17 +145,22 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   vo_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* vo_activar
-{ vo_preset = new Fl_Choice(79, 4, 76, 18, "Preset");
+{ vo_preset = new RKR_Choice(79, 4, 76, 18, "Preset");
+  vo_preset->box(FL_FLAT_BOX);
   vo_preset->down_box(FL_BORDER_BOX);
+  vo_preset->color(FL_BACKGROUND_COLOR);
   vo_preset->selection_color(FL_FOREGROUND_COLOR);
+  vo_preset->labeltype(FL_NORMAL_LABEL);
+  vo_preset->labelfont(0);
   vo_preset->labelsize(10);
   vo_preset->labelcolor(FL_BACKGROUND2_COLOR);
   vo_preset->textsize(10);
   vo_preset->textcolor(FL_BACKGROUND2_COLOR);
   vo_preset->callback((Fl_Callback*)cb_vo_preset, (void*)(12035));
+  vo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vo_preset->menu(menu_vo_preset);
-} // Fl_Choice* vo_preset
+} // RKR_Choice* vo_preset
 { vo_WD = new SliderW(56, 30, 100, 10, "Dry/Wet");
   vo_WD->type(5);
   vo_WD->box(FL_FLAT_BOX);

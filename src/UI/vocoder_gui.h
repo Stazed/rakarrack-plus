@@ -4,12 +4,12 @@
 #define vocoder_gui_h
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
+#include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "newvum.h"
-#include <FL/Fl_Choice.H>
 
 class VocoderGui : public Fl_Group {
 public:
@@ -19,10 +19,10 @@ private:
   inline void cb_vo_activar_i(RKR_Light_Button*, void*);
   static void cb_vo_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *vo_preset;
+  RKR_Choice *vo_preset;
 private:
-  inline void cb_vo_preset_i(Fl_Choice*, void*);
-  static void cb_vo_preset(Fl_Choice*, void*);
+  inline void cb_vo_preset_i(RKR_Choice*, void*);
+  static void cb_vo_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_vo_preset[];
 public:
   SliderW *vo_WD;
