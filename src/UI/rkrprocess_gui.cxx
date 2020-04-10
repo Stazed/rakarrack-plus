@@ -5245,8 +5245,7 @@ void RKRGUI::chfsize(int value)
                 
                 if (uh == VALUE_USER_DATA)
                 {
-                    RKR_Value_Input *vi = (RKR_Value_Input *) c;
-                    vi->set_font_adjustment();
+                    // FIXME remove when done
                 }
                 
                 k = c->labelsize();

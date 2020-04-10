@@ -45,9 +45,10 @@ void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 
 void RKR_Value_Input::draw()
 {
-    if(m_need_font_update)
+    /* To update the font size if user changes the value in settings */
+    if(g_value_font_size != m_previous_font_size)
     {
-        m_need_font_update = false;
+        m_previous_font_size = g_value_font_size;
         font_resize(x(), y(), w(), h());
     }
     
@@ -236,12 +237,11 @@ RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
 : Fl_Valuator(X, Y, W, H, l), input(X, Y, W, H, 0)
 {
     this->user_data((void*)(VALUE_USER_DATA));
-    m_need_font_update = true;
     m_start_width = W;
     m_start_height = H;
     m_start_label_offset = 0;
     m_start_text_offset = 0;
-
+    m_previous_font_size = g_value_font_size;
 
     soft_ = 0;
     if (input.parent()) // defeat automatic-add

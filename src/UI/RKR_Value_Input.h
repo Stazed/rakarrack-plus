@@ -72,7 +72,7 @@ private:
 
     int m_start_height;
     int m_start_width;
-    bool m_need_font_update;
+    int m_previous_font_size;
     void font_resize(int, int, int, int);
 public:
     void resize(int, int, int, int);
@@ -81,10 +81,6 @@ public:
 
     int m_start_label_offset;
     int m_start_text_offset;
-    void set_font_adjustment()
-    {
-        m_need_font_update = true;
-    }
 
     /** See void RKR_Value_Input::soft(char s) */
     void soft(char s) {
