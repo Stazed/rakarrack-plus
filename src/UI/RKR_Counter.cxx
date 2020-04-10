@@ -29,6 +29,7 @@
 RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) : Fl_Counter(X, Y, W, H, label)
 {
     m_need_font_update = true;
+    m_start_width = W;
     m_start_height = H;
     m_start_label_offset = 0;
     m_start_text_offset = 0;
@@ -48,16 +49,19 @@ void RKR_Counter::draw()
 
 void RKR_Counter::font_resize(int X, int Y, int W, int H)
 {
+    float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;
-    int label_font_size = g_value_font_size + m_start_label_offset;
-    int H_label_size = (float) (label_font_size * H_ratio);
+    float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
     
-    labelsize(H_label_size);
+    int font_size = g_value_font_size + m_start_label_offset;
+    int adjusted_label_size = (float) (font_size * resize_ratio);
+    
+    labelsize(adjusted_label_size);
     
     int text_font_size = g_value_font_size + m_start_text_offset;
-    int H_text_size = (float) (text_font_size * H_ratio);
+    int adjusted_text_size = (float) (text_font_size * resize_ratio);
     
-    textsize(H_text_size);
+    textsize(adjusted_text_size);
 }
 
 void RKR_Counter::resize(int X, int Y, int W, int H)
