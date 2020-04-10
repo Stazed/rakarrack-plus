@@ -38,6 +38,7 @@ public:
     void resize(int,int,int,int);
     void set_font_adjustment(){m_need_font_update = true;}
     int m_start_height;
+    int m_start_width;
     int m_start_label_offset;
     int m_start_text_offset;
 private:
