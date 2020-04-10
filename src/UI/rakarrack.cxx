@@ -797,7 +797,7 @@ void RKRGUI::cb_T_BUT(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_BUT_i(o,v);
 }
 
-void RKRGUI::cb_T_DIS_i(Fl_Value_Input* o, void*) {
+void RKRGUI::cb_T_DIS_i(RKR_Value_Input* o, void*) {
   if(o->value()> 360) o->value(360);
 if(o->value()< 20) o->value(20);
 if(rkr->Tap_Bypass)
@@ -807,7 +807,7 @@ rkr->Update_tempo();
 UpdateTGUI();
 };
 }
-void RKRGUI::cb_T_DIS(Fl_Value_Input* o, void* v) {
+void RKRGUI::cb_T_DIS(RKR_Value_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_DIS_i(o,v);
 }
 
@@ -2610,7 +2610,14 @@ void RKRGUI::make_window() {
         TAP_LABEL->when(FL_WHEN_NEVER);
         o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* TAP_LABEL
-      { T_DIS = new Fl_Value_Input(719, 165, 70, 22);
+      { RKR_Value_Input* o = T_DIS = new RKR_Value_Input(719, 165, 70, 22);
+        T_DIS->box(FL_DOWN_BOX);
+        T_DIS->color(FL_BACKGROUND2_COLOR);
+        T_DIS->selection_color(FL_SELECTION_COLOR);
+        T_DIS->labeltype(FL_NORMAL_LABEL);
+        T_DIS->labelfont(0);
+        T_DIS->labelsize(14);
+        T_DIS->labelcolor(FL_FOREGROUND_COLOR);
         T_DIS->minimum(20);
         T_DIS->maximum(360);
         T_DIS->step(1);
@@ -2618,7 +2625,10 @@ void RKRGUI::make_window() {
         T_DIS->textcolor(FL_BACKGROUND2_COLOR);
         T_DIS->callback((Fl_Callback*)cb_T_DIS);
         T_DIS->align(Fl_Align(FL_ALIGN_CENTER));
-      } // Fl_Value_Input* T_DIS
+        T_DIS->when(FL_WHEN_CHANGED);
+        o->m_start_text_offset = 4; // 10 - 14
+        o->m_start_label_offset = 4; // 10 - 14
+      } // RKR_Value_Input* T_DIS
       Tap->end();
     } // Fl_Group* Tap
     Principal->size_range(320, 240, 3200, 2400);

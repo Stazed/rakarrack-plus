@@ -1107,7 +1107,7 @@ rkr->calculavol(2);}
         class MidiGui
       } {}
       Fl_Group Metro {
-        user_data 1 open
+        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -1670,8 +1670,11 @@ if(rkr->Tap_Bypass)
 rkr->Tap_TempoSet=(int)o->value();
 rkr->Update_tempo();
 UpdateTGUI();
-}}
+}} selected
           xywh {719 165 70 22} align 0 minimum 20 maximum 360 step 1 value 100 textcolor 7
+          code0 {o->m_start_text_offset = 4; // 10 - 14}
+          code1 {o->m_start_label_offset = 4; // 10 - 14}
+          class RKR_Value_Input
         }
       }
     }

@@ -139,7 +139,6 @@ class TrigWindowGui; // forward declaration
 #include <FL/Fl_Group.H>
 #include "midiconv_gui.h"
 #include "analyzer.h"
-#include <FL/Fl_Value_Input.H>
 #include "bankwindow_gui.h"
 #include "orderwindow_gui.h"
 #include "settingswindow_gui.h"
@@ -519,10 +518,10 @@ private:
   static void cb_T_BUT(RKR_Button*, void*);
 public:
   RKR_Box *TAP_LABEL;
-  Fl_Value_Input *T_DIS;
+  RKR_Value_Input *T_DIS;
 private:
-  inline void cb_T_DIS_i(Fl_Value_Input*, void*);
-  static void cb_T_DIS(Fl_Value_Input*, void*);
+  inline void cb_T_DIS_i(RKR_Value_Input*, void*);
+  static void cb_T_DIS(RKR_Value_Input*, void*);
 public:
   BankWindowGui *BankWindow;
 private:
