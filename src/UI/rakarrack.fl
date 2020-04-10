@@ -263,7 +263,7 @@ decl {Fl_Color label_color;} {private global
 decl {RKR *rkr; // extern global} {private global
 }
 
-decl {int g_value_font_size = 10;  // extern global} {private global
+decl {int g_default_font_size = 10;  // extern global} {private global
 }
 
 class RKRGUI {open

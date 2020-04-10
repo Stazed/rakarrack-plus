@@ -28,7 +28,7 @@
 
 RKR_Entry_Input::RKR_Entry_Input(int X, int Y, int W, int H, const char *label) : Fl_Input(X, Y, W, H, label)
 {
-    m_previous_font_size = g_value_font_size;
+    m_previous_font_size = g_default_font_size;
     m_start_width = W;
     m_start_height = H;
     m_start_font_offset = 0;
@@ -37,9 +37,9 @@ RKR_Entry_Input::RKR_Entry_Input(int X, int Y, int W, int H, const char *label) 
 void RKR_Entry_Input::draw()
 {
     /* To update the font size if user changes the value in settings */
-    if(g_value_font_size != m_previous_font_size)
+    if(g_default_font_size != m_previous_font_size)
     {
-        m_previous_font_size = g_value_font_size;
+        m_previous_font_size = g_default_font_size;
         font_resize(x(), y(), w(), h());
     }
 
@@ -52,7 +52,7 @@ void RKR_Entry_Input::font_resize(int X, int Y, int W, int H)
     float H_ratio = (float) H / m_start_height;
     float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
     
-    int font_size = g_value_font_size + m_start_font_offset;
+    int font_size = g_default_font_size + m_start_font_offset;
     int adjusted_text_size = (float) (font_size * resize_ratio);
     
     textsize(adjusted_text_size);

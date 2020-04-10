@@ -5170,11 +5170,19 @@ void RKRGUI::PutBackground()
     Fl::redraw();
 }
 
-// FIXME this is ugly, all magic numbers to identify widgets
+/**
+ *  Changes the font size, colors and font type.
+ * 
+ * @param value
+ *      The amount to change the font size. When != 0, it comes from the
+ *      user adjusting the font up or down from the Settings/Preferences/Look
+ *      + or - buttons for font size.
+ */
 void RKRGUI::chfsize(int value)
 {
-    /* This is used by all RKR widget overrides to adjust font size in draw() */
-    g_value_font_size += value;
+    /* This is used by all RKR widget overrides to adjust font size in draw().
+     * This variable should only be adjusted here. */
+    g_default_font_size += value;
 
     /* Sort through widgets and adjust font colors and type */
     for (int t = 0; t < Principal->children(); t++)
