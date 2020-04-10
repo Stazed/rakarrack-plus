@@ -5191,8 +5191,7 @@ void RKRGUI::chfsize(int value)
             /* Top right - (Lmt, Clip, Resample, Aux, In, Out, 0.0%) */
             if(ud == BOX_USER_DATA || ud == BOX_LED_DATA)
             {
-                RKR_Box *Bx = (RKR_Box *) w;
-                Bx->set_font_adjustment();
+                // FIXME remove when done
             }
             else    // FIXME - is this needed??
             {
@@ -5204,8 +5203,7 @@ void RKRGUI::chfsize(int value)
         }
         else  /* Efx Name Labels */
         {
-            RKR_Box *Bx = (RKR_Box *) w;
-            Bx->set_font_adjustment();
+            // FIXME remove when done
         }
 
         if (ud != BOX_LED_DATA)
