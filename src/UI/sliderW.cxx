@@ -25,8 +25,10 @@
 SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
 {
     m_need_font_update = true;
-    m_text_size = textsize();
-    m_label_size = labelsize();
+    m_start_width = w;
+    m_start_height = h;
+    m_start_label_offset = 0;
+    m_start_text_offset = 0;
     this->user_data((void*)(SLIDERW_USER_DATA));
 }
 
@@ -405,20 +407,17 @@ void SliderW::resize(int X, int Y, int W, int H)
 
 void SliderW::font_resize(int X, int Y, int W, int H)
 {
-    float t_ratio = (float) g_slider_font_size / m_text_size; 
-    float l_ratio = (float) (g_slider_font_size + 4) / m_label_size; 
+    float W_ratio = (float) W / m_start_width;
+    float H_ratio = (float) H / m_start_height;
+    float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
     
-    int W_size_t = (W * 0.3) * (0.3 * t_ratio) ;
-    int W_size_l = W * (0.1 * l_ratio) ;
-
-    if(horizontal())
-    {
-        textsize(W_size_t + 1);
-        labelsize(W_size_l);
-    }
-    else
-    {
-        textsize((W * t_ratio) * .55);
-        labelsize((W * l_ratio) * .55);
-    }
+    int font_size = g_value_font_size + m_start_label_offset;
+    int adjusted_label_size = (float) (font_size * resize_ratio);
+    
+    labelsize(adjusted_label_size);
+    
+    int text_font_size = g_value_font_size + m_start_text_offset;
+    int adjusted_text_size = (float) (text_font_size * resize_ratio);
+    
+    textsize(adjusted_text_size);
 }

@@ -181,7 +181,7 @@ results.");
   Trig_Adj->callback((Fl_Callback*)cb_Trig_Adj);
   Trig_Adj->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
   Trig_Adj->when(FL_WHEN_CHANGED);
-  o->m_label_size +=5;
+  o->m_start_label_offset = -2; // 10 - 8
 } // SliderW* Trig_Adj
 { SliderW* o = Vel_Adj = new SliderW(147, 34, 117, 11, "Velocity");
   Vel_Adj->type(5);
@@ -199,7 +199,7 @@ results.");
   Vel_Adj->callback((Fl_Callback*)cb_Vel_Adj);
   Vel_Adj->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
   Vel_Adj->when(FL_WHEN_CHANGED);
-  o->m_label_size +=5;
+  o->m_start_label_offset = -2; // 10 - 8
 } // SliderW* Vel_Adj
 { Mled = new Fl_Box(51, 5, 10, 10);
   Mled->box(FL_ROUNDED_BOX);

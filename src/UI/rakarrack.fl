@@ -290,7 +290,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {122 209 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {1002 117 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1110,7 +1110,7 @@ rkr->calculavol(2);}
         class MidiGui
       } {}
       Fl_Group Metro {
-        user_data 1
+        user_data 1 open
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -1175,7 +1175,7 @@ switch(rkr->M_Metro_Bar)
           label Volume
           callback {rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;}
           xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 maximum 100 step 1 value 50 textcolor 7
-          code0 {o->m_label_size +=5;}
+          code0 {o->m_start_label_offset = -2; // 10 - 8}
           class SliderW
         }
         Fl_Choice MetroSound {
@@ -1207,9 +1207,9 @@ switch(rkr->M_Metro_Sound)
         Fl_Value_Slider Metro_Tempo {
           label Tempo
           callback {rkr->M_Metro_Tempo=(int)o->value();
-rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
+rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);} selected
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 20 maximum 340 step 1 value 100 textcolor 7
-          code0 {o->m_label_size +=5;}
+          code0 {o->m_start_label_offset = -2; // 10 - 8}
           class SliderW
         }
         Fl_Box Metro_Led {
@@ -1484,7 +1484,7 @@ Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsi
         }
       }
       Fl_Group Tap {
-        user_data 1 open
+        user_data 1
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {
@@ -1500,7 +1500,7 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SEL {
           label Input
           user_data 12
-          callback {rkr->Tap_Selection=(int)o->value();} selected
+          callback {rkr->Tap_Selection=(int)o->value();}
           xywh {600 145 87 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->m_start_text_offset = -1; // 10 - 9}
           class RKR_Choice

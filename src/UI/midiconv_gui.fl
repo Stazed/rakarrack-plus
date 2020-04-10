@@ -74,7 +74,7 @@ m_rgui= _rgui;} {}
   m_rkr->efx_MIDIConverter->changepar(4,2);
   break;
 
-}} open selected
+}}
     tooltip {Adjust MIDI note out by octave.} xywh {107 31 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
     code0 {o->m_start_label_offset = -2; // 10 - 8}
     code1 {o->m_start_text_offset = -1; // 10 - 9}
@@ -121,14 +121,14 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
     label Trigger
     callback {m_rkr->efx_MIDIConverter->changepar(1,(int)o->value());}
     xywh {147 15 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 2 maximum 60 step 1 textcolor 7
-    code0 {o->m_label_size +=5;}
+    code0 {o->m_start_label_offset = -2; // 10 - 8}
     class SliderW
   }
   Fl_Value_Slider Vel_Adj {
     label Velocity
-    callback {m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());}
+    callback {m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());} selected
     xywh {147 34 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 1 maximum 100 step 1 textcolor 7
-    code0 {o->m_label_size +=5;}
+    code0 {o->m_start_label_offset = -2; // 10 - 8}
     class SliderW
   }
   Fl_Box Mled {
