@@ -38,13 +38,12 @@ public:
     RKR_Button(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
-    void set_font_adjustment(){m_need_font_update = true;}
     int m_start_font_offset;
 private:
 
     int m_start_height;
     int m_start_width;
-    bool m_need_font_update;
+    int m_previous_font_size;
     void font_resize(int,int,int,int);
 
 private:

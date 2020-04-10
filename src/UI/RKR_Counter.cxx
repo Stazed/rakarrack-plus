@@ -28,7 +28,7 @@
 
 RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) : Fl_Counter(X, Y, W, H, label)
 {
-    m_need_font_update = true;
+    m_previous_font_size = g_value_font_size;
     m_start_width = W;
     m_start_height = H;
     m_start_label_offset = 0;
@@ -38,9 +38,10 @@ RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) : Fl_Cou
 
 void RKR_Counter::draw()
 {
-    if(m_need_font_update)
+    /* To update the font size if user changes the value in settings */
+    if(g_value_font_size != m_previous_font_size)
     {
-        m_need_font_update = false;
+        m_previous_font_size = g_value_font_size;
         font_resize(x(), y(), w(), h());
     }
 

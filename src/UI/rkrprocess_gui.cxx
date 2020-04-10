@@ -5173,38 +5173,14 @@ void RKRGUI::PutBackground()
 // FIXME this is ugly, all magic numbers to identify widgets
 void RKRGUI::chfsize(int value)
 {
+    /* This is used by all RKR widget overrides to adjust font size in draw() */
     g_value_font_size += value;
 
-    // Sort through widgets and adjust font sizes
-    unsigned char k = 0;
-
+    /* Sort through widgets and adjust font colors and type */
     for (int t = 0; t < Principal->children(); t++)
     {
         Fl_Widget *w = Principal->child(t);
         long long ud = (long long) w->user_data();
-
-        k = w->labelsize();
-        k += value;
-        
-        if ((ud < 770) || (ud > 779))   // EFX name labels (L1 to L10)
-        {
-            /* Top right - (Lmt, Clip, Resample, Aux, In, Out, 0.0%) */
-            if(ud == BOX_USER_DATA || ud == BOX_LED_DATA)
-            {
-                // FIXME remove when done
-            }
-            else    // FIXME - is this needed??
-            {
-                if ((k > 2)&&(k < 16))
-                {
-                    w->labelsize(k);        /* Nothing ??? */
-                }
-            }
-        }
-        else  /* Efx Name Labels */
-        {
-            // FIXME remove when done
-        }
 
         if (ud != BOX_LED_DATA)
         {
@@ -5234,37 +5210,6 @@ void RKRGUI::chfsize(int value)
             {
                 Fl_Widget *c = g->child(i);
                 long long uh = (long long) c->user_data();
-                
-                /* SliderW - for the value text size */
-                if (uh == SLIDERW_USER_DATA)
-                {
-                    // FIXME remove when done
-                }
-                
-                if (uh == VALUE_USER_DATA)
-                {
-                    // FIXME remove when done
-                }
-                
-                k = c->labelsize();
-                k += value;
-
-                /* In/Out, All preset buttons, Create name, Tuner,
-                 * Metronome, Tap Tempo (also Apply, Tap buttons), MIDI */
-                if ((uh == 7) || (uh == 77))    // 7 = Box, 77 = Buttons
-                {
-                    if ((k > 6)&&(k < 20))
-                    {
-                        c->labelsize(k);
-                    }
-                }
-                else if ((k > 2)&&(k < 16))
-                {
-                    if (uh != SLIDERW_USER_DATA && uh != VALUE_USER_DATA)
-                    {
-                        c->labelsize(k);     /* All the efx labels not slider and Value Adjuster */
-                    }
-                }
 
                 if (uh != BOX_LED_DATA)
                 {
@@ -5288,37 +5233,8 @@ void RKRGUI::chfsize(int value)
 
                 c->color(fore_color);
                 c->labelfont(rkr->font);
-
-                if (((uh >= 12000) && (uh <= 12100)) || (uh == 12))
-                {
-                    Fl_Menu_*n = (Fl_Menu_*) c;
-
-                    Fl_Menu_Item *m = (Fl_Menu_Item*) n->menu();
-                    Fl_Menu_Item *p;
-                    
-                    for (int s = 0; s < m->size(); s++)
-                    {
-                        p = m->next(s);
-                        k = p->labelsize();
-                        k += value;
-                        
-                        if ((k > 2) &&(k < 16))
-                        {
-                            p->labelsize(k);   /* Drop down menus - menu list items */
-                        }
-                    }
-                }
             }
         }
-    }
-
-
-    k = WPreset_Name->textsize();
-    k += value;
-
-    if ((k > 10)&&(k < 32))
-    {
-        WPreset_Name->textsize(k);  /* Bank preset name */
     }
 
     CLIP_LED->selection_color(FL_RED);
