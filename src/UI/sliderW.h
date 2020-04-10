@@ -33,14 +33,14 @@ public:
     int handle2(int event, int X, int Y, int W, int H);
     void draw();
     void resize(int,int,int,int);
-    void set_font_adjustment(){m_need_font_update = true;}
     int m_start_label_offset;
     int m_start_text_offset;
 private:
 
     int m_start_height;
     int m_start_width;
-    bool m_need_font_update;
+    int m_previous_font_size;
+    
     void font_resize(int,int,int,int);
 };
 #endif
