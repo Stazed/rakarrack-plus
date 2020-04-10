@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class ConvoGui {
@@ -47,6 +50,7 @@ convo_user->do_callback();
 convo_safe->value(rkr->efx_Convol->getpar(2));
 convo_fb->value(rkr->efx_Convol->getpar(10));}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Marshall JCM200}
@@ -143,7 +147,7 @@ if((int)o->value())B_wav->activate(); else B_wav->deactivate();}
   Fl_Check_Button convo_safe {
     label {Safe Mode}
     user_data 2
-    callback {rkr->efx_Convol->changepar(2,(int)o->value())} selected
+    callback {rkr->efx_Convol->changepar(2,(int)o->value())}
     xywh {19 141 73 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -162,8 +166,9 @@ rkr->efx_Convol->setfile(USERFILE);}
   Fl_Choice convo_fnum {
     label Preset
     user_data 12
-    callback {rkr->efx_Convol->changepar(8,(int)o->value());}
+    callback {rkr->efx_Convol->changepar(8,(int)o->value());} selected
     xywh {51 159 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Marshall JCM200}

@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class CbandGui {
@@ -24,7 +27,7 @@ widget_class CbandGui {
 rkr->CompBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
-rgui->findpos(43,(int)o->value(),o);} selected
+rgui->findpos(43,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -46,8 +49,9 @@ cband_cross1->value(rkr->efx_CompBand->getpar(9));
 cband_cross2->value(rkr->efx_CompBand->getpar(10));
 cband_cross3->value(rkr->efx_CompBand->getpar(11));
 cband_cross3->value(rkr->efx_CompBand->getpar(11));
-cband_gain->value(rkr->efx_CompBand->getpar(12));}
+cband_gain->value(rkr->efx_CompBand->getpar(12));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Good Start}

@@ -1,7 +1,10 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
@@ -22,15 +25,16 @@ widget_class CabinetGui {
  return;
 }
 rkr->Cabinet_Bypass=(int)o->value();
-rgui->findpos(12,(int)o->value(),o);} selected
+rgui->findpos(12,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
   Fl_Choice Cabinet_preset {
     label Preset
     user_data 12012
-    callback {rkr->efx_Cabinet->setpreset((int) o->value());}
+    callback {rkr->efx_Cabinet->setpreset((int) o->value());} open
     xywh {45 45 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Marshall-4-12}

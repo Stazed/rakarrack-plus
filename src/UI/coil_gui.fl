@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class CoilGui {
@@ -46,6 +49,7 @@ coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
 coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
 coil_mode->value(rkr->efx_CoilCrafter->getpar(8));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {H to S}
@@ -85,6 +89,7 @@ rkr->efx_CoilCrafter->changepar(7,(int)o->value());}
 coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
 coil_q1->value(rkr->efx_CoilCrafter->getpar(4));}
     xywh {61 55 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Off
@@ -149,9 +154,10 @@ rkr->efx_CoilCrafter->changepar(4,(int)o->value());}
     label Destiny
     callback {rkr->efx_CoilCrafter->changepar(2,(int)o->value());
 coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open
+coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open selected
     xywh {61 107 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(menu_coil_origin);}
+    class RKR_Choice
   } {}
   Fl_Value_Slider coil_freq2 {
     label {Freq 2}
@@ -178,7 +184,7 @@ rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
   Fl_Check_Button coil_mode {
     label {Neck Pickup}
     user_data 2
-    callback {rkr->efx_CoilCrafter->changepar(8,(int)o->value());} selected
+    callback {rkr->efx_CoilCrafter->changepar(8,(int)o->value());}
     xywh {13 161 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

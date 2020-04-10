@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
-decl {\#include "RKR_Light_Button.h"} {selected public global
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class GateGui {
@@ -37,8 +40,9 @@ gate_range->value(rkr->efx_Gate->getpar(2));
 gate_threshold->value(rkr->efx_Gate->getpar(1));
 gate_hold->value(rkr->efx_Gate->getpar(7));
 gate_HPF->value(rkr->efx_Gate->getpar(6));
-gate_LPF->value(rkr->efx_Gate->getpar(5));}
+gate_LPF->value(rkr->efx_Gate->getpar(5));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label 0dB

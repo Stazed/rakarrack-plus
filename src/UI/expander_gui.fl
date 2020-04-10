@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class ExpanderGui {
@@ -22,7 +25,7 @@ widget_class ExpanderGui {
  return;
 }
 rkr->Expander_Bypass=(int)o->value();
-rgui->findpos(25,(int)o->value(),o);} selected
+rgui->findpos(25,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -37,8 +40,9 @@ expander_shape->value(rkr->efx_Expander->getpar(2));
 expander_threshold->value(rkr->efx_Expander->getpar(1));
 expander_HPF->value(rkr->efx_Expander->getpar(6));
 expander_LPF->value(rkr->efx_Expander->getpar(5));
-expander_level->value(rkr->efx_Expander->getpar(7));}
+expander_level->value(rkr->efx_Expander->getpar(7));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Noise Gate}

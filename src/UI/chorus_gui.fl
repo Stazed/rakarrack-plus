@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} ChorusGui {
@@ -50,6 +53,7 @@ chorus_LR->value(rkr->efx_Chorus->getpar(9));
 chorus_subs->value(rkr->efx_Chorus->getpar(11));
 chorus_awesome->value(rkr->efx_Chorus->getpar(12));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Chorus 1}
@@ -119,9 +123,10 @@ rkr->efx_Chorus->changepar(3,(int)o->value());}
   Fl_Choice chorus_lfotype {
     label {LFO Type}
     user_data 12
-    callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open
+    callback {rkr->efx_Chorus->changepar(4,(int)o->value())} open selected
     xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
+    class RKR_Choice
   } {}
   Fl_Check_Button chorus_subs {
     label Subtract
@@ -133,7 +138,7 @@ rkr->efx_Chorus->changepar(3,(int)o->value());}
   Fl_Check_Button chorus_awesome {
     label Intense
     user_data 2
-    callback {rkr->efx_Chorus->changepar(12,(int)o->value())} selected
+    callback {rkr->efx_Chorus->changepar(12,(int)o->value())}
     xywh {88 95 56 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

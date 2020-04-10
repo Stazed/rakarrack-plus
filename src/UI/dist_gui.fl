@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} DistGui {
@@ -50,6 +53,7 @@ dist_st->value(rkr->efx_Distorsion->getpar(9));
 dist_pf->value(rkr->efx_Distorsion->getpar(10));
 dist_oct->value(rkr->efx_Distorsion->getpar(12));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Distorsion 1}
@@ -115,9 +119,10 @@ rkr->efx_Distorsion->changepar(4,(int)o->value());}
   Fl_Choice dist_tipo {
     label Type
     user_data 12
-    callback {rkr->efx_Distorsion->changepar(5,(int)o->value());}
+    callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} selected
     xywh {34 91 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
+    class RKR_Choice
   } {}
   Fl_Check_Button dist_neg {
     label {Neg.}
@@ -136,7 +141,7 @@ rkr->efx_Distorsion->changepar(4,(int)o->value());}
   Fl_Check_Button dist_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_Distorsion->changepar(9,(int)o->value());} selected
+    callback {rkr->efx_Distorsion->changepar(9,(int)o->value());}
     xywh {74 108 57 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

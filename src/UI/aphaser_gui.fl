@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 decl {\#include "RKR_Counter.h"} {public global
@@ -54,6 +57,7 @@ aphaser_subs->value(rkr->efx_APhaser->getpar(10));
 aphaser_phase->value(rkr->efx_APhaser->getpar(11));
 aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Phaser 1}
@@ -126,9 +130,10 @@ rkr->efx_APhaser->changepar(3,(int)o->value());}
   }
   Fl_Choice aphaser_lfotype {
     label {LFO Type}
-    callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open
+    callback {rkr->efx_APhaser->changepar(4,(int)o->value());} open selected
     xywh {78 37 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
+    class RKR_Choice
   } {}
   Fl_Value_Slider aphaser_width {
     label Width
@@ -187,7 +192,7 @@ rkr->efx_APhaser->changepar(5,(int)o->value());}
   }
   Fl_Counter aphaser_stages {
     label Stages
-    callback {rkr->efx_APhaser->changepar(8,(int)o->value());} selected
+    callback {rkr->efx_APhaser->changepar(8,(int)o->value());}
     xywh {80 151 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
     code0 {o->m_start_text_offset = -1; // 10 - 9}
     class RKR_Counter

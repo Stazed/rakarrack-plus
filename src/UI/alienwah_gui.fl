@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
-decl {\#include "RKR_Light_Button.h"} {selected public global
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} AlienwahGui {
@@ -46,6 +49,7 @@ Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
 Alienwah_LR->value(rkr->efx_Alienwah->getpar(9));
 Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));}
     xywh {76 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label AlienWah1
@@ -110,9 +114,10 @@ rkr->efx_Alienwah->changepar(3,(int)o->value());}
   }
   Fl_Choice Alienwah_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open
+    callback {rkr->efx_Alienwah->changepar(4,(int)o->value())} open selected
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
+    class RKR_Choice
   } {}
   Fl_Value_Slider Alienwah_phase {
     label Phase

@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class CompressGui {
@@ -43,8 +46,9 @@ compress_RTime->value(rkr->efx_Compressor->getpar(5));
 Auto_Output->value(rkr->efx_Compressor->getpar(6));
 compress_Knee->value(rkr->efx_Compressor->getpar(7));
 Stereo->value(rkr->efx_Compressor->getpar(8));
-Peak->value(rkr->efx_Compressor->getpar(9));} open
+Peak->value(rkr->efx_Compressor->getpar(9));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {2:1}
@@ -149,7 +153,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
     label Peak
     user_data 2
     callback {rkr->efx_Compressor->changepar(9,(int)o->value());
-if ((int) o->value() == 0) compress_output->do_callback();} selected
+if ((int) o->value() == 0) compress_output->do_callback();}
     tooltip {Peak Mode Compression} xywh {19 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

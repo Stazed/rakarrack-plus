@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -9,6 +9,9 @@ decl {\#include "RKR_Check_Button.h"} {public global
 }
 
 decl {\#include "RKR_Counter.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} EchotronGui {
@@ -58,6 +61,7 @@ echotron_md->value(rkr->efx_Echotron->getpar(12));
 echotron_length->value(rkr->efx_Echotron->getpar(3));
 echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Summer
@@ -195,6 +199,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
     callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
     xywh {88 135 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
+    class RKR_Choice
   } {}
   Fl_Check_Button echotron_mf {
     label MF
@@ -240,7 +245,7 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
  rgui->getMIDIControl(357);
  return;
 }
-rkr->efx_Echotron->changepar(3,(int)o->value());} selected
+rkr->efx_Echotron->changepar(3,(int)o->value());}
     xywh {16 167 48 12} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textsize 9
     code0 {o->m_start_text_offset = -1; // 10 - 9}
     class RKR_Counter
@@ -250,8 +255,9 @@ rkr->efx_Echotron->changepar(3,(int)o->value());} selected
     user_data 12
     callback {rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
     xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label SwingPong

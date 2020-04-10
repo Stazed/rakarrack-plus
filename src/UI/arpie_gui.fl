@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 decl {\#include "RKR_Counter.h"} {public global
@@ -10,7 +13,7 @@ decl {\#include "RKR_Counter.h"} {public global
 
 widget_class {\#include "common_gui_menu.h"} ArpieGui {
   user_data 1 open
-  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -49,6 +52,7 @@ arpie_harm->value(rkr->efx_Arpie->getpar(8));
 arpie_pattern->value(rkr->efx_Arpie->getpar(9));
 arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Tremolo
@@ -141,6 +145,7 @@ rkr->efx_Arpie->changepar(2,(int)o->value());}
     callback {rkr->efx_Arpie->changepar(10,(int)o->value());} open
     xywh {78 82 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
+    class RKR_Choice
   } {}
   Fl_Value_Slider arpie_LRdl {
     label {L/R Delay}
@@ -188,15 +193,16 @@ rkr->efx_Arpie->changepar(6,(int)o->value());}
   }
   Fl_Counter arpie_harm {
     label H
-    callback {rkr->efx_Arpie->changepar(8,(int)o->value());} selected
+    callback {rkr->efx_Arpie->changepar(8,(int)o->value());}
     tooltip {Number of steps in the pattern} xywh {20 150 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
     code0 {o->m_start_text_offset = -1; // 10 - 9}
     class RKR_Counter
   }
   Fl_Choice arpie_pattern {
     user_data 12
-    callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
+    callback {rkr->efx_Arpie->changepar(9,(int)o->value());} selected
     xywh {77 147 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Ascending

@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} MbdistGui {
@@ -53,6 +56,7 @@ mbdist_pan->value(rkr->efx_MBDist->getpar(1)-64);
 mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
 mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Saturation
@@ -190,16 +194,19 @@ rkr->efx_MBDist->changepar(13,(int)o->value());}
     callback {rkr->efx_MBDist->changepar(5,(int)o->value());} open
     xywh {3 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
+    class RKR_Choice
   } {}
   Fl_Choice mbdist_tipoM {
     callback {rkr->efx_MBDist->changepar(6,(int)o->value());} open
     xywh {54 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
+    class RKR_Choice
   } {}
   Fl_Choice mbdist_tipoH {
-    callback {rkr->efx_MBDist->changepar(7,(int)o->value());} open
+    callback {rkr->efx_MBDist->changepar(7,(int)o->value());} open selected
     xywh {105 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
+    class RKR_Choice
   } {}
   Fl_Value_Slider mbdist_pan {
     label Pan
@@ -222,7 +229,7 @@ rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
   Fl_Check_Button mbdist_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_MBDist->changepar(11,(int)o->value());} selected
+    callback {rkr->efx_MBDist->changepar(11,(int)o->value());}
     xywh {101 167 44 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
