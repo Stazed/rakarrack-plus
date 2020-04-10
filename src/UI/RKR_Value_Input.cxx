@@ -61,11 +61,19 @@ void RKR_Value_Input::draw()
 
 void RKR_Value_Input::font_resize(int X, int Y, int W, int H)
 {
-    float ratio = (float) g_value_font_size / 10.0; 
+    float W_ratio = (float) W / m_start_width;
+    float H_ratio = (float) H / m_start_height;
+    float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
     
-    int W_size = W* (0.4 * ratio) ;
-    textsize(W_size);
-    labelsize(W_size);
+    int font_size = g_value_font_size + m_start_label_offset;
+    int adjusted_label_size = (float) (font_size * resize_ratio);
+    
+    labelsize(adjusted_label_size);
+    
+    int text_font_size = g_value_font_size + m_start_text_offset;
+    int adjusted_text_size = (float) (text_font_size * resize_ratio);
+    
+    textsize(adjusted_text_size);
 }
 
 void RKR_Value_Input::resize(int X, int Y, int W, int H)
@@ -229,6 +237,12 @@ RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
 {
     this->user_data((void*)(VALUE_USER_DATA));
     m_need_font_update = true;
+    m_start_width = W;
+    m_start_height = H;
+    m_start_label_offset = 0;
+    m_start_text_offset = 0;
+
+
     soft_ = 0;
     if (input.parent()) // defeat automatic-add
         input.parent()->remove(input);

@@ -69,6 +69,9 @@ public:
 protected:
     void draw();
 private:
+
+    int m_start_height;
+    int m_start_width;
     bool m_need_font_update;
     void font_resize(int, int, int, int);
 public:
@@ -76,7 +79,10 @@ public:
     RKR_Value_Input(int x, int y, int w, int h, const char *l = 0);
     ~RKR_Value_Input();
 
-    void set_font_adjustment() {
+    int m_start_label_offset;
+    int m_start_text_offset;
+    void set_font_adjustment()
+    {
         m_need_font_update = true;
     }
 
