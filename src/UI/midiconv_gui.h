@@ -5,12 +5,12 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
+#include "RKR_Choice.h"
 #include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
 #include "sliderW.h"
 #include "../process.h"
 #include "rakarrack.h"
-#include <FL/Fl_Choice.H>
 #include <FL/Fl_Box.H>
 
 class MidiGui : public Fl_Group {
@@ -21,10 +21,10 @@ private:
   inline void cb_midi_activar_i(RKR_Light_Button*, void*);
   static void cb_midi_activar(RKR_Light_Button*, void*);
 public:
-  Fl_Choice *MIDIOctave;
+  RKR_Choice *MIDIOctave;
 private:
-  inline void cb_MIDIOctave_i(Fl_Choice*, void*);
-  static void cb_MIDIOctave(Fl_Choice*, void*);
+  inline void cb_MIDIOctave_i(RKR_Choice*, void*);
+  static void cb_MIDIOctave(RKR_Choice*, void*);
   static Fl_Menu_Item menu_MIDIOctave[];
 public:
   RKR_Counter *Midi_out_Counter;

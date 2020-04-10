@@ -23,7 +23,7 @@ void MidiGui::cb_midi_activar(RKR_Light_Button* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_midi_activar_i(o,v);
 }
 
-void MidiGui::cb_MIDIOctave_i(Fl_Choice* o, void*) {
+void MidiGui::cb_MIDIOctave_i(RKR_Choice* o, void*) {
   switch((int)o->value())
 {
   case 0:
@@ -49,13 +49,13 @@ void MidiGui::cb_MIDIOctave_i(Fl_Choice* o, void*) {
 
 };
 }
-void MidiGui::cb_MIDIOctave(Fl_Choice* o, void* v) {
+void MidiGui::cb_MIDIOctave(RKR_Choice* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_MIDIOctave_i(o,v);
 }
 
 Fl_Menu_Item MidiGui::menu_MIDIOctave[] = {
- {"-2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"-1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"-2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
+ {"-1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"0", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"1", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
@@ -110,18 +110,25 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   midi_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   midi_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* midi_activar
-{ MIDIOctave = new Fl_Choice(107, 31, 37, 16, "Octave");
+{ RKR_Choice* o = MIDIOctave = new RKR_Choice(107, 31, 37, 16, "Octave");
   MIDIOctave->tooltip("Adjust MIDI note out by octave.");
+  MIDIOctave->box(FL_FLAT_BOX);
   MIDIOctave->down_box(FL_BORDER_BOX);
+  MIDIOctave->color(FL_BACKGROUND_COLOR);
   MIDIOctave->selection_color(FL_FOREGROUND_COLOR);
+  MIDIOctave->labeltype(FL_NORMAL_LABEL);
+  MIDIOctave->labelfont(0);
   MIDIOctave->labelsize(8);
   MIDIOctave->labelcolor(FL_BACKGROUND2_COLOR);
   MIDIOctave->textsize(10);
   MIDIOctave->textcolor(FL_BACKGROUND2_COLOR);
   MIDIOctave->callback((Fl_Callback*)cb_MIDIOctave, (void*)(12));
+  MIDIOctave->align(Fl_Align(FL_ALIGN_LEFT));
   MIDIOctave->when(FL_WHEN_CHANGED);
   MIDIOctave->menu(menu_MIDIOctave);
-} // Fl_Choice* MIDIOctave
+  o->m_start_label_offset = -2; // 10 - 8
+  o->m_start_text_offset = -1; // 10 - 9
+} // RKR_Choice* MIDIOctave
 { RKR_Counter* o = Midi_out_Counter = new RKR_Counter(94, 4, 50, 15, "Channel");
   Midi_out_Counter->tooltip("Channel to send MIDI out.");
   Midi_out_Counter->type(1);

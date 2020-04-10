@@ -8,6 +8,9 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Check_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 decl {\#include "RKR_Counter.h"} {public global
 }
 
@@ -71,16 +74,19 @@ m_rgui= _rgui;} {}
   m_rkr->efx_MIDIConverter->changepar(4,2);
   break;
 
-}}
+}} open selected
     tooltip {Adjust MIDI note out by octave.} xywh {107 31 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
+    code0 {o->m_start_label_offset = -2; // 10 - 8}
+    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    class RKR_Choice
   } {
     MenuItem {} {
       label {-2}
-      xywh {62 62 36 21} labelsize 10
+      xywh {62 62 36 21} labelsize 9
     }
     MenuItem {} {
       label {-1}
-      xywh {62 62 36 21} labelsize 10
+      xywh {62 62 36 21} labelsize 9
     }
     MenuItem {} {
       label 0
@@ -97,7 +103,7 @@ m_rgui= _rgui;} {}
   }
   Fl_Counter Midi_out_Counter {
     label Channel
-    callback {m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());} selected
+    callback {m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());}
     tooltip {Channel to send MIDI out.} xywh {94 4 50 15} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
     code0 {o->m_start_label_offset = -1; // 10 - 9}
     code1 {o->m_start_text_offset = 1; // 10 - 11}
