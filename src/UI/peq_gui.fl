@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class PeqGui {
@@ -24,7 +27,7 @@ widget_class PeqGui {
 rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
-rgui->findpos(9,(int)o->value(),o);} selected
+rgui->findpos(9,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -42,8 +45,9 @@ eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
 eqp_HF->value(rkr->efx_EQ2->getpar(21));
 eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
 eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
-eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);}
+eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Plain

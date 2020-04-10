@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -8,9 +8,12 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Check_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class ShifterGui {
   user_data 1 open
-  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -48,6 +51,7 @@ shifter_whammy->value(rkr->efx_Shifter->getpar(9));
 
 shifter_mode->value(rkr->efx_Shifter->getpar(8));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Fast
@@ -156,7 +160,7 @@ rkr->efx_Shifter->changepar(5,(int)o->value());}
   Fl_Check_Button shifter_ud {
     label Down
     user_data 2
-    callback {rkr->efx_Shifter->changepar(7,(int)o->value())} selected
+    callback {rkr->efx_Shifter->changepar(7,(int)o->value())}
     xywh {51 128 49 14} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -174,8 +178,11 @@ rkr->efx_Shifter->changepar(9,(int)o->value());}
   Fl_Choice shifter_mode {
     label Mode
     user_data 12
-    callback {rkr->efx_Shifter->changepar(8,(int)o->value())}
+    callback {rkr->efx_Shifter->changepar(8,(int)o->value())} selected
     xywh {43 165 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
+    code0 {o->m_start_label_offset = -1; // 10 - 9}
+    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    class RKR_Choice
   } {
     MenuItem {} {
       label Trigger

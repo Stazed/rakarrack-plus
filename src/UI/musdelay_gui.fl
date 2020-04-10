@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class MusdelayGui {
@@ -24,7 +27,7 @@ widget_class MusdelayGui {
 rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
-rgui->findpos(15,(int)o->value(),o);} selected
+rgui->findpos(15,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -49,6 +52,7 @@ musdelay_gain2->value(rkr->efx_MusDelay->getpar(12));
 musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Echo 1}
@@ -109,6 +113,7 @@ rkr->efx_MusDelay->changepar(7,(int)o->value()+64);}
 rkr->efx_MusDelay->changepar(2,o->value()+1);
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     tooltip {Delay 1} xywh {10 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label 1
@@ -139,8 +144,9 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     user_data 12
     callback {rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(3,o->value()+1);
-if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
+if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;} selected
     tooltip {Delay Offset} xywh {62 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label 1
@@ -177,6 +183,7 @@ rkr->efx_MusDelay->changepar(8,o->value()+1);
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     tooltip {Delay 2} xywh {114 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(menu_musdelay_delay1);}
+    class RKR_Choice
   } {}
   Fl_Value_Slider musdelay_tempo {
     label Tempo

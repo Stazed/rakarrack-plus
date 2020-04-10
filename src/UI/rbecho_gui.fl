@@ -1,13 +1,16 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} RbechoGui {
   user_data 1 open
-  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -25,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} RbechoGui {
 rkr->RBEcho_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_RBEcho->cleanup();
-rgui->findpos(32,(int)o->value(),o);} selected
+rgui->findpos(32,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -45,6 +48,7 @@ rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
 rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
 rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Echo 1}
@@ -131,9 +135,10 @@ rkr->efx_RBEcho->changepar(5,(int)o->value());}
   }
   Fl_Choice rbecho_subdiv {
     label SubDivision
-    callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open
+    callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open selected
     xywh {77 111 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
+    class RKR_Choice
   } {}
   Fl_Value_Slider rbecho_damp {
     label Damp

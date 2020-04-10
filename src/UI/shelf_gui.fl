@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -8,9 +8,12 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Check_Button.h"} {public global
 }
 
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class ShelfGui {
   user_data 1 open
-  xywh {1550 56 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "sliderW.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -40,8 +43,9 @@ shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
 shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
 shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
 shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
-shelf_level->value(rkr->efx_ShelfBoost->getpar(4));}
+shelf_level->value(rkr->efx_ShelfBoost->getpar(4));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Treble
@@ -107,7 +111,7 @@ rkr->efx_ShelfBoost->changepar(1,(int)o->value());}
   Fl_Check_Button shelf_mode {
     label Stereo
     user_data 2
-    callback {rkr->efx_ShelfBoost->changepar(3,(int)o->value());} selected
+    callback {rkr->efx_ShelfBoost->changepar(3,(int)o->value());}
     xywh {13 161 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

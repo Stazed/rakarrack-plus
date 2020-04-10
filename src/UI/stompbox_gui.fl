@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class StompboxGui {
@@ -24,7 +27,7 @@ widget_class StompboxGui {
 rkr->StompBox_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
-rgui->findpos(39,(int)o->value(),o);} selected
+rgui->findpos(39,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -41,6 +44,7 @@ stomp_high->value(rkr->efx_StompBox->getpar(1));
 
 stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Amp 1}
@@ -145,40 +149,41 @@ rkr->efx_StompBox->changepar(1,(int)o->value());}
   Fl_Choice stomp_mode {
     label Mode
     user_data 12
-    callback {rkr->efx_StompBox->changepar(5,(int)o->value())}
-    xywh {43 165 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
+    callback {rkr->efx_StompBox->changepar(5,(int)o->value())} open selected
+    xywh {60 139 78 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Amp
-      xywh {20 20 36 21} labelsize 9
+      xywh {20 20 36 21} labelsize 10
     }
     MenuItem {} {
       label Grunge
-      xywh {30 30 36 21} labelsize 9
+      xywh {30 30 36 21} labelsize 10
     }
     MenuItem {} {
       label Rat
-      xywh {40 40 36 21} labelsize 9
+      xywh {40 40 36 21} labelsize 10
     }
     MenuItem {} {
       label {Fat Cat}
-      xywh {50 50 36 21} labelsize 9
+      xywh {50 50 36 21} labelsize 10
     }
     MenuItem {} {
       label {Dist+}
-      xywh {60 60 36 21} labelsize 9
+      xywh {60 60 36 21} labelsize 10
     }
     MenuItem {} {
       label Death
-      xywh {70 70 36 21} labelsize 9
+      xywh {70 70 36 21} labelsize 10
     }
     MenuItem {} {
       label {Mid Elves Own}
-      xywh {80 80 36 21} labelsize 9
+      xywh {80 80 36 21} labelsize 10
     }
     MenuItem {} {
       label Fuzz
-      xywh {90 90 36 21} labelsize 9
+      xywh {90 90 36 21} labelsize 10
     }
   }
 }

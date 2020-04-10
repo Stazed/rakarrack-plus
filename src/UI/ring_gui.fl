@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class RingGui {
@@ -48,8 +51,9 @@ ring_tri->value(rkr->efx_Ring->getpar(8));
 ring_saw->value(rkr->efx_Ring->getpar(9));
 ring_squ->value(rkr->efx_Ring->getpar(10));
 ring_pan->value(rkr->efx_Ring->getpar(1));
-ring_afreq->value(rkr->efx_Ring->getpar(12));}
+ring_afreq->value(rkr->efx_Ring->getpar(12));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Saw_Sin
@@ -141,7 +145,7 @@ rkr->efx_Ring->changepar(1,(int)o->value());}
   Fl_Check_Button ring_afreq {
     label {Auto Freq}
     user_data 2
-    callback {rkr->efx_Ring->changepar(12,(int)o->value());} selected
+    callback {rkr->efx_Ring->changepar(12,(int)o->value());}
     xywh {80 92 69 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

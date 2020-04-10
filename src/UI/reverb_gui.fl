@@ -1,8 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class ReverbGui {
@@ -24,7 +27,7 @@ widget_class ReverbGui {
 rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
-rgui->findpos(8,(int)o->value(),o);} selected
+rgui->findpos(8,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x39 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -46,6 +49,7 @@ reverb_RS->value(rkr->efx_Rev->getpar(11));
 reverb_type->value(rkr->efx_Rev->getpar(10));
 if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label {Cathedral 1}
@@ -158,8 +162,9 @@ rkr->efx_Rev->changepar(4,(int)o->value());}
   Fl_Choice reverb_type {
     label Type
     user_data 12
-    callback {rkr->efx_Rev->changepar(10,(int)o->value());}
+    callback {rkr->efx_Rev->changepar(10,(int)o->value());} selected
     xywh {62 92 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Freeverb

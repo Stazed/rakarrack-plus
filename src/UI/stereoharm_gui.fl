@@ -1,11 +1,14 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
 decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
 }
 
 widget_class SharGui {
@@ -51,8 +54,9 @@ shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
 shar_note->value(rkr->efx_StereoHarm->getpar(8));
 shar_type->value(rkr->efx_StereoHarm->getpar(9));
 shar_MIDI->value(rkr->efx_StereoHarm->getpar(10));
-if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(1);}
+if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(1);} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    class RKR_Choice
   } {
     MenuItem {} {
       label Plain
@@ -193,7 +197,7 @@ if(!(int)o->value())
 {
 rkr->efx_StereoHarm->changepar(3,rkr->efx_StereoHarm->getpar(3));
 rkr->efx_StereoHarm->changepar(6,rkr->efx_StereoHarm->getpar(6));
-}} selected
+}}
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
     class RKR_Check_Button
   }
