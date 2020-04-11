@@ -5084,7 +5084,7 @@ void RKRGUI::PutBackground()
 {
     // Put selected .png background image on everything
     delete back;
-    back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage), 1600, 1200);
+    back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage), 2400, 1800);
     
     if (!rkr->EnableBackgroundImage)
     {
