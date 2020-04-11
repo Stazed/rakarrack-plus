@@ -1,14 +1,20 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class {\#include <vector>} BankWindowGui {open
-  xywh {129 261 800 600} type Double color 4 selection_color 7 hide resizable
+  xywh {129 261 800 600} type Double color 4 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
   code3 {\#include <vector>}
-  class Fl_Double_Window size_range {640 480 3200 2400}
+  class Fl_Double_Window size_range {640 480 3200 2400} visible
 } {
   Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
   } {
@@ -18,7 +24,7 @@ m_rgui= _rgui;} {}
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
-  Fl_Menu_Bar MenuB {open
+  Fl_Menu_Bar MenuB {
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
   } {
     Submenu ArchivoB {
@@ -106,24 +112,32 @@ m_rgui->put_icon(m_rgui->AboutWin);}
     user_data 77
     callback {m_rgui->L_B1->do_callback();}
     xywh {258 14 32 24} color 62 labelsize 10
+    code0 {o->m_start_font_offset = 2;}
+    class RKR_Button
   }
   Fl_Button B_B2 {
     label 2
     user_data 77
     callback {m_rgui->L_B2->do_callback();}
     xywh {298 14 32 24} color 62 labelsize 10
+    code0 {o->m_start_font_offset = 2;}
+    class RKR_Button
   }
   Fl_Button B_B3 {
     label 3
     user_data 77
     callback {m_rgui->L_B3->do_callback();}
     xywh {338 14 32 24} color 62 labelsize 10
+    code0 {o->m_start_font_offset = 2;}
+    class RKR_Button
   }
   Fl_Button B_B4 {
     label U
     user_data 77
     callback {m_rgui->L_B4->do_callback();}
     xywh {378 14 32 24} color 62 labelsize 10
+    code0 {o->m_start_font_offset = 2;}
+    class RKR_Button
   }
   Fl_Choice CH_UB {
     label {User Banks       }
@@ -135,8 +149,11 @@ m_rgui->Put_Loaded_Bank();
 unlight_preset(m_rkr->Selected_Preset);
 }} open
     xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
+    code0 {o->m_start_label_offset = 4;}
+    code1 {o->m_start_text_offset = 4;}
+    class RKR_Choice
   } {}
-  Fl_Group ob {
+  Fl_Group ob {open
     xywh {0 60 800 540} labelsize 18
   } {}
   Function {set_bank_CH_UB(char* nombre, char* nombank)} {C return_type void
@@ -144,7 +161,8 @@ unlight_preset(m_rkr->Selected_Preset);
     code {m_bank_menu.push_back(nombank);
 CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)&m_bank_menu.back()[0], 0);} {}
   }
-  Function {make_window_banks()} {} {
+  Function {make_window_banks()} {open
+  } {
     code {int i,j,x,y;
 int elw,elh;
 intptr_t num;
@@ -166,7 +184,7 @@ y +=elh+2;
 for (j=1; j<5; j++)
 {
    
-     Fl_Button* butX = new Fl_Button(x+1, y+1, elw,elh,m_rkr->Bank[num].Preset_Name);
+     RKR_Button* butX = new RKR_Button(x+1, y+1, elw,elh,m_rkr->Bank[num].Preset_Name);
       butX->type(0);
       butX->color(fore_color);
       butX->box(FL_UP_BOX);
@@ -178,6 +196,7 @@ for (j=1; j<5; j++)
       butX->value(0);
       butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
       butX->callback((Fl_Callback *)m_rgui->preset_click);
+      butX->m_start_font_offset = 4;
       ob->add(butX);
 
 x +=elw+4;
@@ -198,7 +217,8 @@ B_B3->color(fore_color);
 B_B4->color(fore_color);
 CH_UB->color(fore_color);
 
-light_preset(m_rkr->Selected_Preset);} {}
+light_preset(m_rkr->Selected_Preset);} {selected
+    }
   }
   Function {light_preset(int npreset)} {} {
     code {if((m_rgui == NULL) ||(!m_rgui->get_bank_made())) return;
@@ -232,8 +252,7 @@ for (int t=0; t<ob->children();t++)
   }
   Function {clear_menu()} {return_type void
   } {
-    code {m_bank_menu.clear();} {selected
-    }
+    code {m_bank_menu.clear();} {}
   }
   decl {RKR* m_rkr} {private local
   }

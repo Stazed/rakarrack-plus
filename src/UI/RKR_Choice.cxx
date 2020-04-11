@@ -63,6 +63,12 @@ void RKR_Choice::font_resize(int X, int Y, int W, int H)
     int adjusted_text_size = (float) (text_font_size * resize_ratio);
     
     Fl_Menu_Item *m = (Fl_Menu_Item*) menu();
+    
+    if(!m)
+    {
+        return;
+    }
+    
     Fl_Menu_Item *p;
     
     for (int s = 0; s < m->size(); s++)
