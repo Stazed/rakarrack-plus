@@ -40,13 +40,13 @@ void RKR_Entry_Input::draw()
     if(g_default_font_size != m_previous_font_size)
     {
         m_previous_font_size = g_default_font_size;
-        font_resize(x(), y(), w(), h());
+        font_resize(w(), h());
     }
 
     Fl_Input::draw();
 }
 
-void RKR_Entry_Input::font_resize(int X, int Y, int W, int H)
+void RKR_Entry_Input::font_resize(int W, int H)
 {
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;
@@ -61,7 +61,7 @@ void RKR_Entry_Input::font_resize(int X, int Y, int W, int H)
 void RKR_Entry_Input::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
-    font_resize(X, Y, W, H);
+    font_resize(W, H);
 
     Fl_Input::resize(X, Y, W, H);
 }

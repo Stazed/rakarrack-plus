@@ -49,7 +49,7 @@ void RKR_Value_Input::draw()
     if(g_default_font_size != m_previous_font_size)
     {
         m_previous_font_size = g_default_font_size;
-        font_resize(x(), y(), w(), h());
+        font_resize(w(), h());
     }
     
     if (damage()&~FL_DAMAGE_CHILD) input.clear_damage(FL_DAMAGE_ALL);
@@ -60,7 +60,7 @@ void RKR_Value_Input::draw()
     input.clear_damage();
 }
 
-void RKR_Value_Input::font_resize(int X, int Y, int W, int H)
+void RKR_Value_Input::font_resize(int W, int H)
 {
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;
@@ -80,7 +80,7 @@ void RKR_Value_Input::font_resize(int X, int Y, int W, int H)
 void RKR_Value_Input::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
-    font_resize(X, Y, W, H);
+    font_resize(W, H);
 
     Fl_Valuator::resize(X, Y, W, H);
     input.resize(X, Y, W, H);

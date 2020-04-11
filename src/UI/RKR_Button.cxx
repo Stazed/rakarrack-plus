@@ -41,13 +41,13 @@ void RKR_Button::draw()
     if(g_default_font_size != m_previous_font_size)
     {
         m_previous_font_size = g_default_font_size;
-        font_resize(x(), y(), w(), h());
+        font_resize(w(), h());
     }
 
     Fl_Button::draw();
 }
 
-void RKR_Button::font_resize(int X, int Y, int W, int H)
+void RKR_Button::font_resize(int W, int H)
 {
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;
@@ -62,7 +62,7 @@ void RKR_Button::font_resize(int X, int Y, int W, int H)
 void RKR_Button::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
-    font_resize(X, Y, W, H);
+    font_resize(W, H);
 
     Fl_Button::resize(X, Y, W, H);
 }

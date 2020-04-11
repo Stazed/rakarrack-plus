@@ -215,7 +215,7 @@ void SliderW::draw()
     if(g_default_font_size != m_previous_font_size)
     {
         m_previous_font_size = g_default_font_size;
-        font_resize(x(), y(), w(), h());
+        font_resize(w(), h());
     }
 
     int X, Y, W, H;
@@ -401,12 +401,12 @@ void SliderW::draw()
 void SliderW::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
-    font_resize(X, Y, W, H);
+    font_resize(W, H);
     
     Fl_Valuator::resize(X, Y, W, H);
 }
 
-void SliderW::font_resize(int X, int Y, int W, int H)
+void SliderW::font_resize(int W, int H)
 {
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;

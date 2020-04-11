@@ -73,7 +73,7 @@ private:
     int m_start_height;
     int m_start_width;
     int m_previous_font_size;
-    void font_resize(int, int, int, int);
+    void font_resize(int, int);
 public:
     void resize(int, int, int, int);
     RKR_Value_Input(int x, int y, int w, int h, const char *l = 0);

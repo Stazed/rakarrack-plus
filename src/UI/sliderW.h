@@ -41,6 +41,6 @@ private:
     int m_start_width;
     int m_previous_font_size;
     
-    void font_resize(int,int,int,int);
+    void font_resize(int,int);
 };
 #endif
