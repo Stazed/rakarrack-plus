@@ -3,13 +3,13 @@
 #ifndef bankwindow_gui_h
 #define bankwindow_gui_h
 #include <FL/Fl.H>
+#include <vector>
+#include "rakarrack.h"
 #include "RKR_Button.h"
 #include "RKR_Choice.h"
+#include "RKR_Menu_Bar.h"
 #include <FL/Fl_Double_Window.H>
-#include "rakarrack.h"
-#include <vector>
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Group.H>
 
 class BankWindowGui : public Fl_Double_Window {
@@ -19,7 +19,7 @@ public:
   BankWindowGui(int W, int H, const char *L = 0);
   BankWindowGui();
   Fl_Box *Fondo3;
-  Fl_Menu_Bar *MenuB;
+  RKR_Menu_Bar *MenuB;
   static Fl_Menu_Item menu_MenuB[];
   static Fl_Menu_Item *ArchivoB;
   static Fl_Menu_Item *NewB;

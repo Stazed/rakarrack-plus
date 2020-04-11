@@ -178,15 +178,20 @@ this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo3 = new Fl_Box(1, 1, 800, 600);
 } // Fl_Box* Fondo3
-{ MenuB = new Fl_Menu_Bar(0, 0, 253, 20);
+{ RKR_Menu_Bar* o = MenuB = new RKR_Menu_Bar(0, 0, 253, 20);
   MenuB->box(FL_NO_BOX);
   MenuB->color((Fl_Color)55);
   MenuB->selection_color(FL_BACKGROUND2_COLOR);
+  MenuB->labeltype(FL_NORMAL_LABEL);
+  MenuB->labelfont(0);
+  MenuB->labelsize(14);
   MenuB->labelcolor(FL_BACKGROUND2_COLOR);
   MenuB->textcolor(FL_BACKGROUND2_COLOR);
   MenuB->align(Fl_Align(96|FL_ALIGN_INSIDE));
+  MenuB->when(FL_WHEN_RELEASE_ALWAYS);
   MenuB->menu(menu_MenuB);
-} // Fl_Menu_Bar* MenuB
+  o->m_start_font_offset = 6; // 10 - 16
+} // RKR_Menu_Bar* MenuB
 { RKR_Button* o = B_B1 = new RKR_Button(258, 14, 32, 24, "1");
   B_B1->box(FL_UP_BOX);
   B_B1->color((Fl_Color)62);

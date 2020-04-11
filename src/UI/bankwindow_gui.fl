@@ -2,18 +2,25 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include <vector>} {public global
+}
+
+decl {\#include "rakarrack.h"} {public global
+}
+
 decl {\#include "RKR_Button.h"} {public global
 }
 
 decl {\#include "RKR_Choice.h"} {public global
 }
 
-widget_class {\#include <vector>} BankWindowGui {open
-  xywh {129 261 800 600} type Double color 4 selection_color 7 resizable
-  code0 {\#include "rakarrack.h"}
+decl {\#include "RKR_Menu_Bar.h"} {public global
+}
+
+widget_class BankWindowGui {open selected
+  xywh {130 158 800 600} type Double color 4 selection_color 7 resizable
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
-  code3 {\#include <vector>}
   class Fl_Double_Window size_range {640 480 3200 2400} visible
 } {
   Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
@@ -26,6 +33,8 @@ m_rgui= _rgui;} {}
   }
   Fl_Menu_Bar MenuB {
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
+    code0 {o->m_start_font_offset = 6; // 10 - 16}
+    class RKR_Menu_Bar
   } {
     Submenu ArchivoB {
       label {&File} open
@@ -156,7 +165,7 @@ unlight_preset(m_rkr->Selected_Preset);
   Fl_Group ob {open
     xywh {0 60 800 540} labelsize 18
   } {}
-  Function {set_bank_CH_UB(char* nombre, char* nombank)} {C return_type void
+  Function {set_bank_CH_UB(char* nombre, char* nombank)} {open C return_type void
   } {
     code {m_bank_menu.push_back(nombank);
 CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)&m_bank_menu.back()[0], 0);} {}
@@ -217,8 +226,7 @@ B_B3->color(fore_color);
 B_B4->color(fore_color);
 CH_UB->color(fore_color);
 
-light_preset(m_rkr->Selected_Preset);} {selected
-    }
+light_preset(m_rkr->Selected_Preset);} {}
   }
   Function {light_preset(int npreset)} {} {
     code {if((m_rgui == NULL) ||(!m_rgui->get_bank_made())) return;
