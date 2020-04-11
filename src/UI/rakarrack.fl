@@ -35,6 +35,9 @@ decl {\#include "RKR_Counter.h"} {public global
 decl {\#include "RKR_Light_Button.h"} {public global
 }
 
+decl {\#include "RKR_Menu_Bar.h"} {public global
+}
+
 decl {\#include <FL/Fl_Value_Slider.H>} {public local
 }
 
@@ -287,13 +290,15 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {1002 117 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {290 137 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {selected
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Menu_Bar
       } {
         Submenu Archivo {
           label {&File}
@@ -1670,7 +1675,7 @@ if(rkr->Tap_Bypass)
 rkr->Tap_TempoSet=(int)o->value();
 rkr->Update_tempo();
 UpdateTGUI();
-}} selected
+}}
           xywh {719 165 70 22} align 0 minimum 20 maximum 360 step 1 value 100 textcolor 7
           code0 {o->m_start_text_offset = 4; // 10 - 14}
           code1 {o->m_start_label_offset = 4; // 10 - 14}

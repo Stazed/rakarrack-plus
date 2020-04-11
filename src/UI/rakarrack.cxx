@@ -868,15 +868,20 @@ void RKRGUI::make_window() {
     { fondo = new Fl_Box(1, 1, 800, 600);
       fondo->align(Fl_Align(96|FL_ALIGN_INSIDE));
     } // Fl_Box* fondo
-    { MenuP = new Fl_Menu_Bar(2, 2, 518, 18);
+    { RKR_Menu_Bar* o = MenuP = new RKR_Menu_Bar(2, 2, 518, 18);
       MenuP->box(FL_NO_BOX);
       MenuP->color((Fl_Color)178);
       MenuP->selection_color(FL_BACKGROUND2_COLOR);
+      MenuP->labeltype(FL_NORMAL_LABEL);
+      MenuP->labelfont(0);
+      MenuP->labelsize(14);
       MenuP->labelcolor(FL_BACKGROUND2_COLOR);
       MenuP->textcolor(FL_BACKGROUND2_COLOR);
       MenuP->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      MenuP->when(FL_WHEN_RELEASE_ALWAYS);
       MenuP->menu(menu_MenuP);
-    } // Fl_Menu_Bar* MenuP
+      o->m_start_font_offset = 4; // 10 - 14
+    } // RKR_Menu_Bar* MenuP
     { TITTLE_L = new Fl_Button(521, 2, 276, 21);
       TITTLE_L->tooltip("Click here to activate scope");
       TITTLE_L->type(1);

@@ -21,8 +21,9 @@ set (ProgSources
     UI/RKR_Check_Button.cxx
     UI/RKR_Choice.cxx
     UI/RKR_Counter.cxx
-    UI/RKR_Light_Button
     UI/RKR_Input.cxx
+    UI/RKR_Light_Button.cxx
+    UI/RKR_Menu_Bar.cxx
     UI/RKR_Value_Input.cxx
     UI/eq_gui.cxx
     UI/compress_gui.cxx

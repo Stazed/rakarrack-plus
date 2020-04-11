@@ -14,6 +14,7 @@
 #include "RKR_Choice.h"
 #include "RKR_Counter.h"
 #include "RKR_Light_Button.h"
+#include "RKR_Menu_Bar.h"
 #include <FL/Fl_Value_Slider.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Progress.H>
@@ -86,7 +87,6 @@ class AboutWindowGui; // forward declaration
 class TrigWindowGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Menu_Bar.H>
 #include <FL/Fl_Button.H>
 #include "scope.h"
 #include "eq_gui.h"
@@ -161,7 +161,7 @@ private:
   static void cb_Principal(Fl_Double_Window*, void*);
 public:
   Fl_Box *fondo;
-  Fl_Menu_Bar *MenuP;
+  RKR_Menu_Bar *MenuP;
   static Fl_Menu_Item menu_MenuP[];
   static Fl_Menu_Item *Archivo;
   static Fl_Menu_Item *Menu_New;
