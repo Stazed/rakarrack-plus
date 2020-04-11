@@ -17,11 +17,11 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_Menu_Bar.h"} {public global
 }
 
-widget_class BankWindowGui {open selected
-  xywh {130 158 800 600} type Double color 4 selection_color 7 resizable
+widget_class BankWindowGui {open
+  xywh {90 89 800 600} type Double color 4 selection_color 7 hide resizable
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
-  class Fl_Double_Window size_range {640 480 3200 2400} visible
+  class Fl_Double_Window size_range {320 240 3200 2400}
 } {
   Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
   } {
@@ -165,13 +165,12 @@ unlight_preset(m_rkr->Selected_Preset);
   Fl_Group ob {open
     xywh {0 60 800 540} labelsize 18
   } {}
-  Function {set_bank_CH_UB(char* nombre, char* nombank)} {open C return_type void
+  Function {set_bank_CH_UB(char* nombre, char* nombank)} {C return_type void
   } {
     code {m_bank_menu.push_back(nombank);
 CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)&m_bank_menu.back()[0], 0);} {}
   }
-  Function {make_window_banks()} {open
-  } {
+  Function {make_window_banks()} {} {
     code {int i,j,x,y;
 int elw,elh;
 intptr_t num;
@@ -206,10 +205,14 @@ for (j=1; j<5; j++)
       butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
       butX->callback((Fl_Callback *)m_rgui->preset_click);
       butX->m_start_font_offset = 4;
+      butX->set_start_width(176);
+      butX->set_start_height(32);;
       ob->add(butX);
 
 x +=elw+4;
 num++;
+
+butX->font_resize(butX->get_width(), butX->get_height());
 
 }
  x=40;
@@ -226,7 +229,8 @@ B_B3->color(fore_color);
 B_B4->color(fore_color);
 CH_UB->color(fore_color);
 
-light_preset(m_rkr->Selected_Preset);} {}
+light_preset(m_rkr->Selected_Preset);} {selected
+    }
   }
   Function {light_preset(int npreset)} {} {
     code {if((m_rgui == NULL) ||(!m_rgui->get_bank_made())) return;

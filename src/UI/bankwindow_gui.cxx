@@ -315,10 +315,14 @@ void BankWindowGui::make_window_banks() {
         butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
         butX->callback((Fl_Callback *)m_rgui->preset_click);
         butX->m_start_font_offset = 4;
+        butX->set_start_width(176);
+        butX->set_start_height(32);;
         ob->add(butX);
   
   x +=elw+4;
   num++;
+  
+  butX->font_resize(butX->get_width(), butX->get_height());
   
   }
    x=40;
