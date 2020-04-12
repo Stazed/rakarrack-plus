@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include <vector>} {public global
@@ -204,7 +204,7 @@ CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)&m_bank_men
               butX->value(0);
               butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
               butX->callback((Fl_Callback *)m_rgui->preset_click);
-              butX->m_start_font_offset = 4;
+              butX->m_start_font_offset = 5;
               butX->set_start_width(button_w);
               butX->set_start_height(button_h);;
               ob->add(butX);
