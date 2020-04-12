@@ -14,7 +14,7 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
-*/
+ */
 
 /* 
  * File:   RKR_Choice.cxx
@@ -33,19 +33,130 @@ RKR_Choice::RKR_Choice(int X, int Y, int W, int H, const char *label) : Fl_Choic
     m_start_height = H;
     m_start_label_offset = 0;
     m_start_text_offset = 0;
-//    this->user_data((void*)(BUTTON_USER_DATA));
+    //    this->user_data((void*)(BUTTON_USER_DATA));
 }
 
 void RKR_Choice::draw()
 {
     /* To update the font size if user changes the value in settings */
-    if(g_default_font_size != m_previous_font_size)
+    if (g_default_font_size != m_previous_font_size)
     {
         m_previous_font_size = g_default_font_size;
         font_resize(w(), h());
     }
 
-    Fl_Choice::draw();
+    Fl_Boxtype btype = Fl::scheme() ? FL_UP_BOX // non-default uses up box
+            : FL_DOWN_BOX; // default scheme uses down box
+    int dx = Fl::box_dx(btype);
+    int dy = Fl::box_dy(btype);
+
+    // Arrow area
+    int H = h() - 2 * dy;
+    int W = Fl::is_scheme("gtk+") ? 20 : // gtk+  -- fixed size
+            Fl::is_scheme("gleam") ? 20 : // gleam -- fixed size
+            Fl::is_scheme("plastic") ? ((H > 20) ? 20 : H) // plastic: shrink if H<20
+            : ((H > 20) ? 20 : H); // default: shrink if H<20
+    int X = x() + w() - W - dx;
+    int Y = y() + dy;
+
+    // Arrow object
+    int w1 = (W - 4) / 3;
+    if (w1 < 1) w1 = 1;
+    int x1 = X + (W - 2 * w1 - 1) / 2;
+    int y1 = Y + (H - w1 - 1) / 2;
+
+    if (Fl::scheme())
+    {
+        // NON-DEFAULT SCHEME
+
+        // Draw widget box
+        draw_box(btype, color());
+
+        // Draw arrow area
+        fl_color(active_r() ? labelcolor() : fl_inactive(labelcolor()));
+        if (Fl::is_scheme("plastic"))
+        {
+            // Show larger up/down arrows...
+            fl_polygon(x1, y1 + 3, x1 + w1, y1 + w1 + 3, x1 + 2 * w1, y1 + 3); // Up arrow
+            fl_polygon(x1, y1 + 1, x1 + w1, y1 - w1 + 1, x1 + 2 * w1, y1 + 1); // Down arrow
+        }
+        else
+        {
+            // Show smaller up/down arrows with a divider...
+            x1 = x() + w() - 13 - dx;
+            y1 = y() + h() / 2;
+            fl_polygon(x1, y1 - 2, x1 + 3, y1 - 5, x1 + 6, y1 - 2); // Up arrow
+            fl_polygon(x1, y1 + 2, x1 + 3, y1 + 5, x1 + 6, y1 + 2); // Down arrow
+
+            /* Divider - two lines with different shading */
+            fl_color(fl_darker(color()));
+            fl_yxline(x1 - 7, y1 - 8, y1 + 8);
+
+            fl_color(fl_lighter(color()));
+            fl_yxline(x1 - 6, y1 - 8, y1 + 8);
+        }
+    }
+    else
+    {
+        // DEFAULT SCHEME
+
+        // Draw widget box
+        if (fl_contrast(textcolor(), FL_BACKGROUND2_COLOR) == textcolor())
+        {
+            draw_box(btype, FL_BACKGROUND2_COLOR);
+        }
+        else
+        {
+            draw_box(btype, fl_lighter(color()));
+        }
+
+        // Draw arrow area
+        draw_box(FL_UP_BOX, X, Y, W, H, color());
+        fl_color(active_r() ? labelcolor() : fl_inactive(labelcolor()));
+        fl_polygon(x1, y1, x1 + w1, y1 + w1, x1 + 2 * w1, y1); // Down arrow
+    }
+
+    W += 2 * dx;
+
+    // Draw menu item's label
+    if (mvalue())
+    {
+        Fl_Menu_Item m = *mvalue();
+        if (active_r()) m.activate();
+        else m.deactivate();
+
+        // Clip
+        int xx = x() + dx, yy = y() + dy + 1, ww = w() - W, hh = H - 2;
+        fl_push_clip(xx, yy, ww, hh);
+
+        if (Fl::scheme())
+        {
+            Fl_Label l;
+            l.value = m.text;
+            l.image = 0;
+            l.deimage = 0;
+            l.type = m.labeltype_;
+            l.font = m.labelsize_ || m.labelfont_ ? m.labelfont_ : textfont();
+            l.size = m.labelsize_ ? m.labelsize_ : textsize();
+            l.color = m.labelcolor_ ? m.labelcolor_ : textcolor();
+            if (!m.active()) l.color = fl_inactive((Fl_Color) l.color);
+            fl_draw_shortcut = 2; // hack value to make '&' disappear
+            l.draw(xx + 3, yy, ww > 6 ? ww - 6 : 0, hh, FL_ALIGN_LEFT);
+            fl_draw_shortcut = 0;
+            if (Fl::focus() == this) draw_focus(box(), xx, yy, ww, hh);
+        }
+        else
+        {
+            fl_draw_shortcut = 2; // hack value to make '&' disappear
+            m.draw(xx, yy, ww, hh, this, Fl::focus() == this);
+            fl_draw_shortcut = 0;
+        }
+
+        fl_pop_clip();
+    }
+
+    // Widget's label
+    draw_label();
 }
 
 void RKR_Choice::font_resize(int W, int H)
@@ -53,30 +164,30 @@ void RKR_Choice::font_resize(int W, int H)
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;
     float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
-    
+
     int label_font_size = g_default_font_size + m_start_label_offset;
     int adjusted_label_size = (float) (label_font_size * resize_ratio);
-    
+
     labelsize(adjusted_label_size);
-    
+
     int text_font_size = g_default_font_size + m_start_text_offset;
     int adjusted_text_size = (float) (text_font_size * resize_ratio);
-    
+
     Fl_Menu_Item *m = (Fl_Menu_Item*) menu();
-    
-    if(!m)
+
+    if (!m)
     {
         return;
     }
-    
+
     Fl_Menu_Item *p;
-    
+
     for (int s = 0; s < m->size(); s++)
     {
         p = m->next(s);
-        p->labelsize(adjusted_text_size);   /* Drop down menus - menu list items */
+        p->labelsize(adjusted_text_size); /* Drop down menus - menu list items */
     }
-    
+
     textsize(adjusted_text_size);
 }
 
