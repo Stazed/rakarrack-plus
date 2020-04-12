@@ -52,10 +52,15 @@ void RKR_Choice::draw()
 
     // Arrow area
     int H = h() - 2 * dy;
+
+#if 1
+    int W = H;  // Always shrink
+#else
     int W = Fl::is_scheme("gtk+") ? 20 : // gtk+  -- fixed size
             Fl::is_scheme("gleam") ? 20 : // gleam -- fixed size
             Fl::is_scheme("plastic") ? ((H > 20) ? 20 : H) // plastic: shrink if H<20
             : ((H > 20) ? 20 : H); // default: shrink if H<20
+#endif // 1
     int X = x() + w() - W - dx;
     int Y = y() + dy;
 
@@ -80,8 +85,14 @@ void RKR_Choice::draw()
             fl_polygon(x1, y1 + 3, x1 + w1, y1 + w1 + 3, x1 + 2 * w1, y1 + 3); // Up arrow
             fl_polygon(x1, y1 + 1, x1 + w1, y1 - w1 + 1, x1 + 2 * w1, y1 + 1); // Down arrow
         }
-        else
+        else    // Gtk and Gleam 
         {
+#if 1
+            /* Draw Box and single down arrow, looks better to me */
+            draw_box(FL_UP_BOX, X, Y, W, H, color());
+            fl_color(active_r() ? labelcolor() : fl_inactive(labelcolor()));
+            fl_polygon(x1, y1, x1 + w1, y1 + w1, x1 + 2 * w1, y1); // Down arrow
+#else
             // Show smaller up/down arrows with a divider...
             x1 = x() + w() - 13 - dx;
             y1 = y() + h() / 2;
@@ -94,6 +105,7 @@ void RKR_Choice::draw()
 
             fl_color(fl_lighter(color()));
             fl_yxline(x1 - 6, y1 - 8, y1 + 8);
+#endif // 0
         }
     }
     else
