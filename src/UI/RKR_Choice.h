@@ -38,12 +38,14 @@ public:
     void resize(int,int,int,int);
     int m_start_label_offset;
     int m_start_text_offset;
+    void font_resize(int,int);
+    int get_width(){return w();};
+    int get_height(){return h();};
 private:
  
     int m_start_height;
     int m_start_width;
     int m_previous_font_size;
-    void font_resize(int,int);
 };
 
 #endif /* RKR_CHOICE_H */
