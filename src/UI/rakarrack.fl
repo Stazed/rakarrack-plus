@@ -295,7 +295,7 @@ Pexitprogram=1;} open
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {selected
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Menu_Bar
@@ -1685,12 +1685,12 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_stat(1);
-o->hide();} open
+o->hide();} open selected
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
       code1 {o->initialize(rkr, this);}
       code2 {o->hide();}
-      class BankWindowGui size_range {640 480 3200 2400}
+      class BankWindowGui size_range {320 240 3200 2400}
     } {}
     Fl_Window Order {
       callback {save_stat(2);

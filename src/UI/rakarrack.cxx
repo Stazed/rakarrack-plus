@@ -2653,7 +2653,7 @@ void RKRGUI::make_window() {
     BankWindow->when(FL_WHEN_RELEASE);
     o->initialize(rkr, this);
     o->hide();
-    BankWindow->size_range(640, 480, 3200, 2400);
+    BankWindow->size_range(320, 240, 3200, 2400);
     BankWindow->end();
     BankWindow->resizable(BankWindow);
   } // BankWindowGui* BankWindow

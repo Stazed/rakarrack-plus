@@ -281,65 +281,62 @@ void BankWindowGui::set_bank_CH_UB(char* nombre, char* nombank) {
 }
 
 void BankWindowGui::make_window_banks() {
-  int i,j,x,y;
-  int elw,elh;
-  intptr_t num;
+  int button_w = 176;
+    int button_h = 32;
+    float w_ratio = (float) w()/800;
+    float h_ratio = (float) h()/600;
+    
+    float elw = (float) button_w * w_ratio;
+    float elh = (float) button_h * h_ratio;
+    
+    ob->begin();
+    
+    float x = (float) 40 * w_ratio;
+    float y = (float) 40 * h_ratio ;
+    intptr_t num=1;
+    
+    for (int i = 1; i < 16; i++)
+    {
+          y += elh + (2.0f * h_ratio);
   
-  elw=176*w()/800;
-  elh=32*h()/600;
+          for (int j=1; j<5; j++)
+          {
+               RKR_Button* butX = new RKR_Button(x+1, y+1, elw,elh,m_rkr->Bank[num].Preset_Name);
+                butX->type(0);
+                butX->color(fore_color);
+                butX->box(FL_UP_BOX);
+                butX->selection_color(leds_color);
+                butX->labelcolor(label_color);
+                butX->labelsize(14);
+                butX->align(68|FL_ALIGN_INSIDE);
+                butX->user_data((void*) (num));
+                butX->value(0);
+                butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
+                butX->callback((Fl_Callback *)m_rgui->preset_click);
+                butX->m_start_font_offset = 4;
+                butX->set_start_width(button_w);
+                butX->set_start_height(button_h);;
+                ob->add(butX);
   
+                x += elw + (4.0f * w_ratio) ;
+                num++;
   
-  
-  ob->begin();
-  
-  x=40;y=40;
-  num=1;
-  
-  for (i=1;i<16;i++)
-  {
-  y +=elh+2;
-  
-  for (j=1; j<5; j++)
-  {
-     
-       RKR_Button* butX = new RKR_Button(x+1, y+1, elw,elh,m_rkr->Bank[num].Preset_Name);
-        butX->type(0);
-        butX->color(fore_color);
-        butX->box(FL_UP_BOX);
-        butX->selection_color(leds_color);
-        butX->labelcolor(label_color);
-        butX->labelsize(14);
-        butX->align(68|FL_ALIGN_INSIDE);
-        butX->user_data((void*) (num));
-        butX->value(0);
-        butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
-        butX->callback((Fl_Callback *)m_rgui->preset_click);
-        butX->m_start_font_offset = 4;
-        butX->set_start_width(176);
-        butX->set_start_height(32);;
-        ob->add(butX);
-  
-  x +=elw+4;
-  num++;
-  
-  butX->font_resize(butX->get_width(), butX->get_height());
-  
-  }
-   x=40;
-  
-  }
-  
-  
-  ob->end();
-  m_rgui->set_bank_made(1);
-  
-  B_B1->color(fore_color);
-  B_B2->color(fore_color);
-  B_B3->color(fore_color);
-  B_B4->color(fore_color);
-  CH_UB->color(fore_color);
-  
-  light_preset(m_rkr->Selected_Preset);
+                butX->font_resize(butX->get_width(), butX->get_height());
+          }
+          x = (float) 40 * w_ratio;
+    }
+    
+    
+    ob->end();
+    m_rgui->set_bank_made(1);
+    
+    B_B1->color(fore_color);
+    B_B2->color(fore_color);
+    B_B3->color(fore_color);
+    B_B4->color(fore_color);
+    CH_UB->color(fore_color);
+    
+    light_preset(m_rkr->Selected_Preset);
 }
 
 void BankWindowGui::light_preset(int npreset) {
