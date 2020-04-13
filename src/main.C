@@ -33,7 +33,7 @@
 void
 show_help()
 {
-    fprintf(stderr, "Usage: rakarrack [OPTION]\n\n");
+    fprintf(stderr, "Usage: rakarrack-plus [OPTION]\n\n");
     fprintf(stderr,
             "  -h ,     --help \t\t\t display command-line help and exit\n");
     fprintf(stderr, "  -n ,     --no-gui \t\t\t disable GUI\n");
@@ -189,7 +189,7 @@ main(int argc, char *argv[])
             rkr.Message
             (
                 1,
-                "rakarrack error",
+                "rakarrack-plus error",
                 "Cannot make a jack client, is jackd running?"
             );
         }
