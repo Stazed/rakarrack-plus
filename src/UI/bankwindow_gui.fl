@@ -17,6 +17,20 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_Menu_Bar.h"} {public global
 }
 
+decl {/* All the sub menu paths for resizing */
+const std::vector<std::string> bank_submenu_paths
+{
+    /* Bank Window - From BankWindowGui::menu_MenuB[] */
+    "&File/&New",
+    "&File/&Load Bank",
+    "&File/&Save Bank",
+    "&File/Convert &Old Bank",
+    "&File/&Close",
+    "&Help/Help &Contents",
+    "&Help/&About..."
+};} {selected private global
+}
+
 widget_class BankWindowGui {open
   xywh {90 89 800 600} type Double color 4 selection_color 7 hide resizable
   code1 {this->m_rkr = NULL;}
@@ -34,6 +48,7 @@ m_rgui= _rgui;} {}
   Fl_Menu_Bar MenuB {
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
     code0 {o->m_start_font_offset = 6; // 10 - 16}
+    code1 {o->set_submenu_paths(bank_submenu_paths);}
     class RKR_Menu_Bar
   } {
     Submenu ArchivoB {
@@ -169,8 +184,7 @@ unlight_preset(m_rkr->Selected_Preset);
   } {
     code {m_bank_menu.push_back(nombank);
 CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)&m_bank_menu.back()[0], 0);
-CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {selected
-    }
+CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
   }
   Function {make_window_banks()} {open
   } {

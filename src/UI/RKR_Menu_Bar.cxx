@@ -24,41 +24,7 @@
  */
 
 #include "RKR_Menu_Bar.h"
-#include <vector>
-#include <string>
 #include "../global.h"
-
-/* All the sub menu paths for resizing - ugly hack... */
-const std::vector<std::string> menu_paths
-{
-    /* Main Window - From RKRGUI::menu_MenuP[] */
-    "&File/New",
-    "&File/Load Preset",
-    "&File/Save Preset",
-    "&File/Load &Bank",
-    "&File/Save B&ank",
-    "&File/Load S&kin",
-    "&File/Save Sk&in",
-    "&File/Load MIDI Table",
-    "&File/Save MIDI Table",
-    "&File/&Convert Reverb IR File",
-    "&File/Import Internal Presets",
-    "&File/Exit",
-    "&Settings/Preferences",
-    "&Settings/MIDI Learn",
-    "&Settings/ACI",
-    "&Settings/Fullscreen",
-    "&Help/Help Contents",
-    "&Help/About...",
-    /* Bank Window - From BankWindowGui::menu_MenuB[] */
-    "&File/&New",
-    "&File/&Load Bank",
-    "&File/&Save Bank",
-    "&File/Convert &Old Bank",
-    "&File/&Close",
-    "&Help/Help &Contents",
-    "&Help/&About..."
-};
 
 RKR_Menu_Bar::RKR_Menu_Bar(int X, int Y, int W, int H, const char *label) : Fl_Menu_Bar(X, Y, W, H, label)
 {
@@ -91,9 +57,9 @@ void RKR_Menu_Bar::font_resize(int W, int H)
     int adjusted_label_size = (float) (font_size * resize_ratio);
     
     /* The submenu items */
-    for(unsigned i = 0; i < menu_paths.size(); i++)
+    for(unsigned i = 0; i < m_submenu_paths.size(); i++)
     {
-        Fl_Menu_Item *sm = (Fl_Menu_Item*) find_item(menu_paths[i].c_str());
+        Fl_Menu_Item *sm = (Fl_Menu_Item*) find_item(m_submenu_paths[i].c_str());
     
         if(sm)
         {
@@ -114,7 +80,10 @@ void RKR_Menu_Bar::font_resize(int W, int H)
     for (int s = 0; s < m->size(); s++)
     {
         p = m->next(s);
-        p->labelsize(adjusted_label_size);   /* Menu bar items */
+        if(p->label())
+        {
+            p->labelsize(adjusted_label_size);   /* Menu bar items */
+        }
     }
 }
 

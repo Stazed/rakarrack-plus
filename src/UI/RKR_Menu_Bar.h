@@ -26,6 +26,8 @@
 #ifndef RKR_MENU_BAR_H
 #define RKR_MENU_BAR_H
 
+#include <vector>
+#include <string>
 #include <FL/Fl.H>
 #include <FL/Fl_Menu_Bar.H>
 #include <FL/fl_draw.H>
@@ -37,12 +39,14 @@ public:
     RKR_Menu_Bar(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
+    void set_submenu_paths(std::vector<std::string> submenu){m_submenu_paths = submenu;};
     int m_start_font_offset;
 private:
     
     int m_start_height;
     int m_start_width;
     int m_previous_font_size;
+    std::vector<std::string> m_submenu_paths;
     void font_resize(int,int);
 
 };

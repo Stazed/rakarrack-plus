@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -69,6 +69,31 @@ decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 }
 
 decl {\#include <X11/xpm.h>} {public global
+}
+
+decl {/* All the sub menu paths for resizing */
+const std::vector<std::string> main_submenu_paths
+{
+    /* Main Window - From RKRGUI::menu_MenuP[] */
+    "&File/New",
+    "&File/Load Preset",
+    "&File/Save Preset",
+    "&File/Load &Bank",
+    "&File/Save B&ank",
+    "&File/Load S&kin",
+    "&File/Save Sk&in",
+    "&File/Load MIDI Table",
+    "&File/Save MIDI Table",
+    "&File/&Convert Reverb IR File",
+    "&File/Import Internal Presets",
+    "&File/Exit",
+    "&Settings/Preferences",
+    "&Settings/MIDI Learn",
+    "&Settings/ACI",
+    "&Settings/Fullscreen",
+    "&Help/Help Contents",
+    "&Help/About...",
+};} {private global
 }
 
 decl {class RKR;  // forward declaration} {public global
@@ -295,9 +320,10 @@ Pexitprogram=1;} open
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {selected
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code1 {o->set_submenu_paths(main_submenu_paths);}
         class RKR_Menu_Bar
       } {
         Submenu Archivo {
@@ -1440,7 +1466,7 @@ Order->hide();}
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-//}} selected
+//}}
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
           code0 {o->m_start_font_offset = 15; // 10 - 25}
           class RKR_Button
