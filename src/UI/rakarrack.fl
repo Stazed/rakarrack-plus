@@ -290,7 +290,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {290 137 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {166 94 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1226,7 +1226,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1434,13 +1434,16 @@ Order->hide();}
           class RKR_Button
         }
         Fl_Button Etit {
-          callback {if(rkr->Bypass)
-{
+          label {Rakarrack +}
+          callback {//if(rkr->Bypass)
+//{
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-}}
-          tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 align 17
+//}} selected
+          tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
+          code0 {o->m_start_font_offset = 13; // 10 - 23}
+          class RKR_Button
         }
         Fl_Box Analy {
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} labeltype EMBOSSED_LABEL labelfont 1 labelsize 22 align 80 hide
@@ -1685,7 +1688,7 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_stat(1);
-o->hide();} open selected
+o->hide();} open
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
       code1 {o->initialize(rkr, this);}

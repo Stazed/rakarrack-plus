@@ -473,10 +473,10 @@ private:
   inline void cb_Open_Order_i(RKR_Button*, void*);
   static void cb_Open_Order(RKR_Button*, void*);
 public:
-  Fl_Button *Etit;
+  RKR_Button *Etit;
 private:
-  inline void cb_Etit_i(Fl_Button*, void*);
-  static void cb_Etit(Fl_Button*, void*);
+  inline void cb_Etit_i(RKR_Button*, void*);
+  static void cb_Etit(RKR_Button*, void*);
 public:
   Analyzer *Analy;
   RKR_Button *HideUE;

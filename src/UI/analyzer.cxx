@@ -19,6 +19,7 @@
 */
 
 #include "analyzer.h"
+#include "rakarrack.h"
 
 Analyzer::Analyzer(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h, label)
 {
@@ -111,6 +112,8 @@ int Analyzer::handle(int event)
             if (Analyzer_ON)    // toggle
             {
                 Analyzer_ON = false;
+                rgui->Etit->show();
+                rgui->Etit->redraw();
             }
             return (1);
             break;

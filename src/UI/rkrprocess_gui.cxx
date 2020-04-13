@@ -444,9 +444,16 @@ void RKRGUI::GuiTimeout(void)
         if (tta)
         {
             tta = 0;
-            Analy->hide();
-            Etit->show();
-            Etit->redraw();
+            if(Analy->visible())
+            {
+                Analy->hide();
+            }
+            
+            if(!Etit->visible())
+            {
+                Etit->show();
+                Etit->redraw();
+            }
         }
 
 
@@ -5246,6 +5253,7 @@ void RKRGUI::chfsize(int value)
     }
 
     CLIP_LED->selection_color(FL_RED);
+    Etit->labelcolor(leds_color);
 
     ChangeActives();
 

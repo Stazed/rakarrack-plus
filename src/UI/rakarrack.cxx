@@ -665,15 +665,15 @@ void RKRGUI::cb_Open_Order(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Open_Order_i(o,v);
 }
 
-void RKRGUI::cb_Etit_i(Fl_Button* o, void*) {
-  if(rkr->Bypass)
-{
+void RKRGUI::cb_Etit_i(RKR_Button* o, void*) {
+  //if(rkr->Bypass)
+//{
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-};
+//};
 }
-void RKRGUI::cb_Etit(Fl_Button* o, void* v) {
+void RKRGUI::cb_Etit(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Etit_i(o,v);
 }
 
@@ -2467,16 +2467,21 @@ void RKRGUI::make_window() {
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
         o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Button* Open_Order
-      { Etit = new Fl_Button(174, 160, 340, 28);
+      { RKR_Button* o = Etit = new RKR_Button(174, 160, 340, 28, "Rakarrack +");
         Etit->tooltip("Click here to toggle analyzer ON/OFF");
         Etit->type(1);
         Etit->box(FL_NO_BOX);
+        Etit->color((Fl_Color)2);
+        Etit->selection_color(FL_BACKGROUND_COLOR);
         Etit->labeltype(FL_EMBOSSED_LABEL);
         Etit->labelfont(1);
         Etit->labelsize(21);
+        Etit->labelcolor((Fl_Color)1);
         Etit->callback((Fl_Callback*)cb_Etit);
-        Etit->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
-      } // Fl_Button* Etit
+        Etit->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
+        Etit->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 13; // 10 - 23
+      } // RKR_Button* Etit
       { Analy = new Analyzer(174, 160, 340, 28);
         Analy->tooltip("Click here to toggle analyzer ON/OFF");
         Analy->box(FL_NO_BOX);
