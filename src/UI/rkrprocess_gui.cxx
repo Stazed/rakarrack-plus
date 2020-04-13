@@ -1,5 +1,5 @@
 /*
-  rakarrack - a guitar efects software
+  rakarrack - a guitar effects software
 
   rkrprocess_gui.cxx  -  RKRGUI class definitions
   Copyright (C) 2008-2010 Josep Andreu
@@ -5235,6 +5235,8 @@ void RKRGUI::chfsize(int value)
 
     CLIP_LED->selection_color(FL_RED);
     Etit->labelcolor(leds_color);
+    Trigger->aux_midi->color(fore_color);
+    Trigger->aux_midi->textcolor(FL_BACKGROUND2_COLOR);
 
     ChangeActives();
 

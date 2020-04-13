@@ -2,10 +2,10 @@
 
 #include "trigwindow_gui.h"
 
-void TrigWindowGui::cb_aux_source_i(Fl_Choice* o, void*) {
+void TrigWindowGui::cb_aux_source_i(RKR_Choice* o, void*) {
   m_rkr->Aux_Source = (int) o->value();
 }
-void TrigWindowGui::cb_aux_source(Fl_Choice* o, void* v) {
+void TrigWindowGui::cb_aux_source(RKR_Choice* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_source_i(o,v);
 }
 
@@ -30,12 +30,12 @@ void TrigWindowGui::cb_aux_thres(SliderW* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_thres_i(o,v);
 }
 
-void TrigWindowGui::cb_aux_midi_i(Fl_Value_Input* o, void*) {
+void TrigWindowGui::cb_aux_midi_i(RKR_Value_Input* o, void*) {
   if(o->value()> 127) o->value(127);
 if(o->value()< 1) o->value(1);
 m_rkr->Aux_MIDI = (int)o->value();
 }
-void TrigWindowGui::cb_aux_midi(Fl_Value_Input* o, void* v) {
+void TrigWindowGui::cb_aux_midi(RKR_Value_Input* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_midi_i(o,v);
 }
 
@@ -64,7 +64,7 @@ TrigWindowGui::TrigWindowGui(int W, int H, const char *L)
 }
 
 TrigWindowGui::TrigWindowGui()
-  : Fl_Double_Window(0, 0, 205, 165, 0) {
+  : Fl_Double_Window(0, 0, 200, 180, 0) {
   clear_flag(16);
   _TrigWindowGui();
 }
@@ -79,13 +79,21 @@ this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
 this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
-{ Fondo5 = new Fl_Box(0, 1, 210, 164);
+{ Fondo5 = new Fl_Box(0, 1, 200, 180);
 } // Fl_Box* Fondo5
-{ ACI_LABEL = new Fl_Box(25, 8, 135, 24, "Analog Control");
+{ RKR_Box* o = ACI_LABEL = new RKR_Box(34, 8, 135, 24, "Analog Control");
+  ACI_LABEL->box(FL_NO_BOX);
+  ACI_LABEL->color(FL_BACKGROUND_COLOR);
+  ACI_LABEL->selection_color(FL_BACKGROUND_COLOR);
+  ACI_LABEL->labeltype(FL_NORMAL_LABEL);
   ACI_LABEL->labelfont(1);
+  ACI_LABEL->labelsize(14);
   ACI_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-} // Fl_Box* ACI_LABEL
-{ aux_vu = new NewVum(5, 18, 16, 144);
+  ACI_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
+  ACI_LABEL->when(FL_WHEN_RELEASE);
+  o->m_start_font_offset = 4; // 10 - 14
+} // RKR_Box* ACI_LABEL
+{ aux_vu = new NewVum(172, 18, 16, 144);
   aux_vu->type(2);
   aux_vu->box(FL_NO_BOX);
   aux_vu->color((Fl_Color)178);
@@ -101,16 +109,23 @@ this->when(FL_WHEN_RELEASE);
   aux_vu->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
   aux_vu->when(FL_WHEN_NEVER);
 } // NewVum* aux_vu
-{ aux_source = new Fl_Choice(100, 37, 50, 17, "Source");
+{ aux_source = new RKR_Choice(100, 37, 50, 17, "Source");
+  aux_source->box(FL_FLAT_BOX);
   aux_source->down_box(FL_BORDER_BOX);
+  aux_source->color(FL_BACKGROUND_COLOR);
+  aux_source->selection_color(FL_SELECTION_COLOR);
+  aux_source->labeltype(FL_NORMAL_LABEL);
+  aux_source->labelfont(0);
   aux_source->labelsize(10);
   aux_source->labelcolor(FL_BACKGROUND2_COLOR);
   aux_source->textsize(10);
   aux_source->textcolor(FL_BACKGROUND2_COLOR);
   aux_source->callback((Fl_Callback*)cb_aux_source);
+  aux_source->align(Fl_Align(FL_ALIGN_LEFT));
+  aux_source->when(FL_WHEN_RELEASE);
   aux_source->menu(menu_aux_source);
-} // Fl_Choice* aux_source
-{ aux_gain = new SliderW(99, 59, 100, 10, "Gain");
+} // RKR_Choice* aux_source
+{ aux_gain = new SliderW(56, 59, 100, 10, "Gain");
   aux_gain->type(5);
   aux_gain->box(FL_FLAT_BOX);
   aux_gain->color((Fl_Color)178);
@@ -127,7 +142,7 @@ this->when(FL_WHEN_RELEASE);
   aux_gain->align(Fl_Align(FL_ALIGN_LEFT));
   aux_gain->when(FL_WHEN_CHANGED);
 } // SliderW* aux_gain
-{ aux_thres = new SliderW(100, 75, 100, 10, "Threshold");
+{ aux_thres = new SliderW(55, 75, 100, 10, "Threshold");
   aux_thres->type(5);
   aux_thres->box(FL_FLAT_BOX);
   aux_thres->color((Fl_Color)178);
@@ -144,17 +159,25 @@ this->when(FL_WHEN_RELEASE);
   aux_thres->align(Fl_Align(FL_ALIGN_LEFT));
   aux_thres->when(FL_WHEN_CHANGED);
 } // SliderW* aux_thres
-{ aux_midi = new Fl_Value_Input(98, 96, 39, 22, "Midi Control");
-  aux_midi->labelsize(10);
+{ RKR_Value_Input* o = aux_midi = new RKR_Value_Input(111, 96, 32, 24, "Midi Control");
+  aux_midi->box(FL_DOWN_BOX);
+  aux_midi->color(FL_BACKGROUND2_COLOR);
+  aux_midi->selection_color(FL_SELECTION_COLOR);
+  aux_midi->labeltype(FL_NORMAL_LABEL);
+  aux_midi->labelfont(0);
+  aux_midi->labelsize(14);
   aux_midi->labelcolor(FL_BACKGROUND2_COLOR);
   aux_midi->minimum(1);
   aux_midi->maximum(127);
   aux_midi->step(1);
   aux_midi->value(1);
-  aux_midi->textsize(10);
   aux_midi->callback((Fl_Callback*)cb_aux_midi);
-} // Fl_Value_Input* aux_midi
-{ aux_min = new SliderW(100, 130, 100, 10, "Minimum");
+  aux_midi->align(Fl_Align(FL_ALIGN_LEFT));
+  aux_midi->when(FL_WHEN_CHANGED);
+  o->m_start_text_offset = 4; // 10 - 14
+  o->m_start_label_offset = 4; // 10 - 14
+} // RKR_Value_Input* aux_midi
+{ aux_min = new SliderW(56, 130, 100, 10, "Minimum");
   aux_min->type(5);
   aux_min->box(FL_FLAT_BOX);
   aux_min->color((Fl_Color)178);
@@ -170,7 +193,7 @@ this->when(FL_WHEN_RELEASE);
   aux_min->align(Fl_Align(FL_ALIGN_LEFT));
   aux_min->when(FL_WHEN_CHANGED);
 } // SliderW* aux_min
-{ aux_max = new SliderW(100, 150, 100, 10, "Maximum");
+{ aux_max = new SliderW(56, 150, 100, 10, "Maximum");
   aux_max->type(5);
   aux_max->box(FL_FLAT_BOX);
   aux_max->color((Fl_Color)178);
@@ -189,6 +212,7 @@ this->when(FL_WHEN_RELEASE);
 } // SliderW* aux_max
 this->m_rkr = NULL;
 end();
+resizable(this);
 }
 
 void TrigWindowGui::initialize(RKR *_rkr) {
