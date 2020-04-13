@@ -33,7 +33,6 @@ static int last_tecla;
 static int drag;
 static int at;
 static int nt;
-static int tta;
 static Pixmap p, mask;
 static XWMHints *hints = NULL;
 static volatile int got_sigint = 0;
@@ -73,7 +72,6 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     drag = 1000;
     nt = 0;
     at = 0;
-    tta = 0;
     Analy->set_analyzer_ON(false);
     Sco->set_scope_ON(false);
 
@@ -438,24 +436,7 @@ void RKRGUI::GuiTimeout(void)
         else
         {
             at = 0;
-            tta = 1;
         }
-
-        if (tta)
-        {
-            tta = 0;
-            if(Analy->visible())
-            {
-                Analy->hide();
-            }
-            
-            if(!Etit->visible())
-            {
-                Etit->show();
-                Etit->redraw();
-            }
-        }
-
 
         if (rkr->Looper_Bypass)
         {
