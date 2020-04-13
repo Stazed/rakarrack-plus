@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -1442,7 +1442,7 @@ Analy->show();
 Analy->set_analyzer_ON(true);
 //}} selected
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
-          code0 {o->m_start_font_offset = 13; // 10 - 23}
+          code0 {o->m_start_font_offset = 15; // 10 - 25}
           class RKR_Button
         }
         Fl_Box Analy {
