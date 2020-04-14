@@ -203,13 +203,22 @@ this->when(FL_WHEN_RELEASE);
   O_TITLE->when(FL_WHEN_RELEASE);
   o->m_start_font_offset = 23; // 10 - 33
 } // RKR_Box* O_TITLE
-{ Avail_Bro = new Fl_Browser(15, 50, 175, 225);
+{ RKR_Browser* o = Avail_Bro = new RKR_Browser(15, 50, 175, 225);
   Avail_Bro->type(2);
+  Avail_Bro->box(FL_NO_BOX);
+  Avail_Bro->color(FL_BACKGROUND2_COLOR);
+  Avail_Bro->selection_color(FL_SELECTION_COLOR);
+  Avail_Bro->labeltype(FL_NORMAL_LABEL);
+  Avail_Bro->labelfont(0);
   Avail_Bro->labelsize(18);
+  Avail_Bro->labelcolor(FL_FOREGROUND_COLOR);
   Avail_Bro->textsize(18);
   Avail_Bro->textcolor(FL_BACKGROUND2_COLOR);
   Avail_Bro->user_data((void*)(99));
-} // Fl_Browser* Avail_Bro
+  Avail_Bro->align(Fl_Align(FL_ALIGN_BOTTOM));
+  Avail_Bro->when(FL_WHEN_RELEASE_ALWAYS);
+  o->m_start_font_offset = 8; // 10 - 18
+} // RKR_Browser* Avail_Bro
 { RKR_Button* o = Pon = new RKR_Button(200, 145, 50, 25, "@<->");
   Pon->box(FL_UP_BOX);
   Pon->color(FL_BACKGROUND_COLOR);
@@ -223,12 +232,21 @@ this->when(FL_WHEN_RELEASE);
   Pon->when(FL_WHEN_RELEASE);
   o->m_start_font_offset = 8; // 10 - 18
 } // RKR_Button* Pon
-{ Order_Bro = new Fl_Browser(260, 50, 175, 225);
+{ RKR_Browser* o = Order_Bro = new RKR_Browser(260, 50, 175, 225);
   Order_Bro->type(2);
+  Order_Bro->box(FL_NO_BOX);
+  Order_Bro->color(FL_BACKGROUND2_COLOR);
+  Order_Bro->selection_color(FL_SELECTION_COLOR);
+  Order_Bro->labeltype(FL_NORMAL_LABEL);
+  Order_Bro->labelfont(0);
   Order_Bro->labelsize(18);
+  Order_Bro->labelcolor(FL_FOREGROUND_COLOR);
   Order_Bro->textsize(18);
   Order_Bro->textcolor(FL_BACKGROUND2_COLOR);
-} // Fl_Browser* Order_Bro
+  Order_Bro->align(Fl_Align(FL_ALIGN_BOTTOM));
+  Order_Bro->when(FL_WHEN_RELEASE_ALWAYS);
+  o->m_start_font_offset = 8; // 10 - 18
+} // RKR_Browser* Order_Bro
 { RKR_Button* o = Sube = new RKR_Button(442, 120, 50, 25, "@$2->");
   Sube->box(FL_UP_BOX);
   Sube->color(FL_BACKGROUND_COLOR);

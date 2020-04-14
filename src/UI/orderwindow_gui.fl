@@ -5,6 +5,9 @@ code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
 }
 
+decl {\#include "RKR_Browser.h"} {selected public global
+}
+
 decl {\#include "RKR_Button.h"} {public global
 }
 
@@ -35,6 +38,8 @@ m_rgui= _rgui;} {}
   Fl_Browser Avail_Bro {
     user_data 99
     xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
+    code0 {o->m_start_font_offset = 8; // 10 - 18}
+    class RKR_Browser
   }
   Fl_Button Pon {
     label {@<->}
@@ -57,6 +62,8 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
   }
   Fl_Browser Order_Bro {
     xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
+    code0 {o->m_start_font_offset = 8; // 10 - 18}
+    class RKR_Browser
   }
   Fl_Button Sube {
     label {@$2->}
@@ -164,7 +171,7 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
     Fl_Button Fil128 {
       label Synthesis
       callback {m_rkr->eff_filter=128;
-m_rgui->Fill_Avail(m_rkr->eff_filter);} selected
+m_rgui->Fill_Avail(m_rkr->eff_filter);}
       xywh {15 365 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }

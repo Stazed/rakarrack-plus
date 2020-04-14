@@ -4,12 +4,12 @@
 #define orderwindow_gui_h
 #include <FL/Fl.H>
 #include "RKR_Box.h"
+#include "RKR_Browser.h"
 #include "RKR_Button.h"
 #include "RKR_Check_Button.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Browser.H>
 #include <FL/Fl_Group.H>
 
 class OrderWindowGui : public Fl_Double_Window {
@@ -20,13 +20,13 @@ public:
   OrderWindowGui();
   Fl_Box *Fondo1;
   RKR_Box *O_TITLE;
-  Fl_Browser *Avail_Bro;
+  RKR_Browser *Avail_Bro;
   RKR_Button *Pon;
 private:
   inline void cb_Pon_i(RKR_Button*, void*);
   static void cb_Pon(RKR_Button*, void*);
 public:
-  Fl_Browser *Order_Bro;
+  RKR_Browser *Order_Bro;
   RKR_Button *Sube;
 private:
   inline void cb_Sube_i(RKR_Button*, void*);
