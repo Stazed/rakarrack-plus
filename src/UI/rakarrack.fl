@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -320,7 +320,7 @@ Pexitprogram=1;} open
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {selected
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         code1 {o->set_submenu_paths(main_submenu_paths);}
@@ -1252,7 +1252,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1728,7 +1728,7 @@ o->hide();} open
       code0 {\#include "orderwindow_gui.h"}
       code1 {o->initialize(rkr, this);}
       code2 {o->hide();}
-      class OrderWindowGui size_range {500 400 3200 2400}
+      class OrderWindowGui size_range {250 200 3200 2400}
     } {}
     Fl_Window Settings {
       callback {save_stat(3);
@@ -1742,12 +1742,12 @@ o->hide();} open
     Fl_Window MIDILearn {
       callback {MIDILearn->CancelRec->do_callback();
 save_stat(5);
-o->hide();} open
+o->hide();} open selected
       xywh {165 106 640 480} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "midilearnwindow_gui.h"}
       code1 {o->initialize(rkr, this);}
       code2 {o->hide();}
-      class MidiLearnWindowGui
+      class MidiLearnWindowGui size_range {320 240 3200 2400}
     } {}
     Fl_Window AboutWin {
       label {About Rakarrack}
@@ -1762,7 +1762,7 @@ o->hide();} open
       callback {rkr->ACI_Bypass=0;
 save_stat(6);
 o->hide();} open
-      xywh {123 390 205 165} type Double box NO_BOX color 4 selection_color 7 hide
+      xywh {711 533 205 165} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "trigwindow_gui.h"}
       code1 {o->initialize(rkr);}
       code2 {o->hide();}
