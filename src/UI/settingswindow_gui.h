@@ -8,6 +8,7 @@
 #include "RKR_Browser.h"
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
+#include "RKR_Counter.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
@@ -15,9 +16,8 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Choice.H>
-#include <FL/Fl_Counter.H>
 #include <FL/Fl_Browser.H>
+#include <FL/Fl_Counter.H>
 #include <FL/Fl_Scroll.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Input.H>
@@ -103,237 +103,237 @@ private:
 public:
   Fl_Group *AUDIO_SET;
   Fl_Box *Fondo7;
-  Fl_Check_Button *INSTATE;
+  RKR_Check_Button *INSTATE;
 private:
-  inline void cb_INSTATE_i(Fl_Check_Button*, void*);
-  static void cb_INSTATE(Fl_Check_Button*, void*);
+  inline void cb_INSTATE_i(RKR_Check_Button*, void*);
+  static void cb_INSTATE(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *Filter_DC;
+  RKR_Check_Button *Filter_DC;
 private:
-  inline void cb_Filter_DC_i(Fl_Check_Button*, void*);
-  static void cb_Filter_DC(Fl_Check_Button*, void*);
+  inline void cb_Filter_DC_i(RKR_Check_Button*, void*);
+  static void cb_Filter_DC(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *Pre_Serve;
+  RKR_Check_Button *Pre_Serve;
 private:
-  inline void cb_Pre_Serve_i(Fl_Check_Button*, void*);
-  static void cb_Pre_Serve(Fl_Check_Button*, void*);
+  inline void cb_Pre_Serve_i(RKR_Check_Button*, void*);
+  static void cb_Pre_Serve(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *Update_TAP;
+  RKR_Check_Button *Update_TAP;
 private:
-  inline void cb_Update_TAP_i(Fl_Check_Button*, void*);
-  static void cb_Update_TAP(Fl_Check_Button*, void*);
+  inline void cb_Update_TAP_i(RKR_Check_Button*, void*);
+  static void cb_Update_TAP(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *UPSAMPLE_C;
+  RKR_Check_Button *UPSAMPLE_C;
 private:
-  inline void cb_UPSAMPLE_C_i(Fl_Check_Button*, void*);
-  static void cb_UPSAMPLE_C(Fl_Check_Button*, void*);
+  inline void cb_UPSAMPLE_C_i(RKR_Check_Button*, void*);
+  static void cb_UPSAMPLE_C(RKR_Check_Button*, void*);
 public:
-  Fl_Choice *Upr_Amo;
+  RKR_Choice *Upr_Amo;
 private:
-  inline void cb_Upr_Amo_i(Fl_Choice*, void*);
-  static void cb_Upr_Amo(Fl_Choice*, void*);
+  inline void cb_Upr_Amo_i(RKR_Choice*, void*);
+  static void cb_Upr_Amo(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Upr_Amo[];
 public:
-  Fl_Choice *Upr_Qual;
+  RKR_Choice *Upr_Qual;
 private:
-  inline void cb_Upr_Qual_i(Fl_Choice*, void*);
-  static void cb_Upr_Qual(Fl_Choice*, void*);
+  inline void cb_Upr_Qual_i(RKR_Choice*, void*);
+  static void cb_Upr_Qual(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Upr_Qual[];
 public:
-  Fl_Choice *Downr_Qual;
+  RKR_Choice *Downr_Qual;
 private:
-  inline void cb_Downr_Qual_i(Fl_Choice*, void*);
-  static void cb_Downr_Qual(Fl_Choice*, void*);
+  inline void cb_Downr_Qual_i(RKR_Choice*, void*);
+  static void cb_Downr_Qual(RKR_Choice*, void*);
 public:
-  Fl_Counter *L_SIZE;
+  RKR_Counter *L_SIZE;
 private:
-  inline void cb_L_SIZE_i(Fl_Counter*, void*);
-  static void cb_L_SIZE(Fl_Counter*, void*);
+  inline void cb_L_SIZE_i(RKR_Counter*, void*);
+  static void cb_L_SIZE(RKR_Counter*, void*);
 public:
-  Fl_Counter *LM_Volume;
+  RKR_Counter *LM_Volume;
 private:
-  inline void cb_LM_Volume_i(Fl_Counter*, void*);
-  static void cb_LM_Volume(Fl_Counter*, void*);
+  inline void cb_LM_Volume_i(RKR_Counter*, void*);
+  static void cb_LM_Volume(RKR_Counter*, void*);
 public:
-  Fl_Choice *Har_Qual;
+  RKR_Choice *Har_Qual;
 private:
-  inline void cb_Har_Qual_i(Fl_Choice*, void*);
-  static void cb_Har_Qual(Fl_Choice*, void*);
+  inline void cb_Har_Qual_i(RKR_Choice*, void*);
+  static void cb_Har_Qual(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Har_Qual[];
 public:
-  Fl_Choice *Ste_Qual;
+  RKR_Choice *Ste_Qual;
 private:
-  inline void cb_Ste_Qual_i(Fl_Choice*, void*);
-  static void cb_Ste_Qual(Fl_Choice*, void*);
+  inline void cb_Ste_Qual_i(RKR_Choice*, void*);
+  static void cb_Ste_Qual(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Ste_Qual[];
 public:
-  Fl_Choice *Voc_Bands;
+  RKR_Choice *Voc_Bands;
 private:
-  inline void cb_Voc_Bands_i(Fl_Choice*, void*);
-  static void cb_Voc_Bands(Fl_Choice*, void*);
+  inline void cb_Voc_Bands_i(RKR_Choice*, void*);
+  static void cb_Voc_Bands(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Voc_Bands[];
 public:
-  Fl_Check_Button *FLPosition;
+  RKR_Check_Button *FLPosition;
 private:
-  inline void cb_FLPosition_i(Fl_Check_Button*, void*);
-  static void cb_FLPosition(Fl_Check_Button*, void*);
+  inline void cb_FLPosition_i(RKR_Check_Button*, void*);
+  static void cb_FLPosition(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *DB6B;
+  RKR_Check_Button *DB6B;
 private:
-  inline void cb_DB6B_i(Fl_Check_Button*, void*);
-  static void cb_DB6B(Fl_Check_Button*, void*);
+  inline void cb_DB6B_i(RKR_Check_Button*, void*);
+  static void cb_DB6B(RKR_Check_Button*, void*);
 public:
-  Fl_Counter *Calibration;
+  RKR_Counter *Calibration;
 private:
-  inline void cb_Calibration_i(Fl_Counter*, void*);
-  static void cb_Calibration(Fl_Counter*, void*);
+  inline void cb_Calibration_i(RKR_Counter*, void*);
+  static void cb_Calibration(RKR_Counter*, void*);
 public:
-  Fl_Counter *RTrigger;
+  RKR_Counter *RTrigger;
 private:
-  inline void cb_RTrigger_i(Fl_Counter*, void*);
-  static void cb_RTrigger(Fl_Counter*, void*);
+  inline void cb_RTrigger_i(RKR_Counter*, void*);
+  static void cb_RTrigger(RKR_Counter*, void*);
 public:
-  Fl_Choice *RC_Harm_Opti;
+  RKR_Choice *RC_Harm_Opti;
 private:
-  inline void cb_RC_Harm_Opti_i(Fl_Choice*, void*);
-  static void cb_RC_Harm_Opti(Fl_Choice*, void*);
+  inline void cb_RC_Harm_Opti_i(RKR_Choice*, void*);
+  static void cb_RC_Harm_Opti(RKR_Choice*, void*);
   static Fl_Menu_Item menu_RC_Harm_Opti[];
 public:
-  Fl_Choice *RC_St_Harm_Opti;
+  RKR_Choice *RC_St_Harm_Opti;
 private:
-  inline void cb_RC_St_Harm_Opti_i(Fl_Choice*, void*);
-  static void cb_RC_St_Harm_Opti(Fl_Choice*, void*);
+  inline void cb_RC_St_Harm_Opti_i(RKR_Choice*, void*);
+  static void cb_RC_St_Harm_Opti(RKR_Choice*, void*);
   static Fl_Menu_Item menu_RC_St_Harm_Opti[];
 public:
-  Fl_Choice *RC_Ring_Opti;
+  RKR_Choice *RC_Ring_Opti;
 private:
-  inline void cb_RC_Ring_Opti_i(Fl_Choice*, void*);
-  static void cb_RC_Ring_Opti(Fl_Choice*, void*);
+  inline void cb_RC_Ring_Opti_i(RKR_Choice*, void*);
+  static void cb_RC_Ring_Opti(RKR_Choice*, void*);
   static Fl_Menu_Item menu_RC_Ring_Opti[];
 public:
-  Fl_Choice *Har_Downsample;
+  RKR_Choice *Har_Downsample;
 private:
-  inline void cb_Har_Downsample_i(Fl_Choice*, void*);
-  static void cb_Har_Downsample(Fl_Choice*, void*);
+  inline void cb_Har_Downsample_i(RKR_Choice*, void*);
+  static void cb_Har_Downsample(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Har_Downsample[];
 public:
-  Fl_Choice *Har_Down_Qua;
+  RKR_Choice *Har_Down_Qua;
 private:
-  inline void cb_Har_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Har_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Har_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Har_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Har_Up_Qua;
+  RKR_Choice *Har_Up_Qua;
 private:
-  inline void cb_Har_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Har_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Har_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Har_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Rev_Downsample;
+  RKR_Choice *Rev_Downsample;
 private:
-  inline void cb_Rev_Downsample_i(Fl_Choice*, void*);
-  static void cb_Rev_Downsample(Fl_Choice*, void*);
+  inline void cb_Rev_Downsample_i(RKR_Choice*, void*);
+  static void cb_Rev_Downsample(RKR_Choice*, void*);
 public:
-  Fl_Choice *Rev_Down_Qua;
+  RKR_Choice *Rev_Down_Qua;
 private:
-  inline void cb_Rev_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Rev_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Rev_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Rev_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Rev_Up_Qua;
+  RKR_Choice *Rev_Up_Qua;
 private:
-  inline void cb_Rev_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Rev_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Rev_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Rev_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Con_Downsample;
+  RKR_Choice *Con_Downsample;
 private:
-  inline void cb_Con_Downsample_i(Fl_Choice*, void*);
-  static void cb_Con_Downsample(Fl_Choice*, void*);
+  inline void cb_Con_Downsample_i(RKR_Choice*, void*);
+  static void cb_Con_Downsample(RKR_Choice*, void*);
 public:
-  Fl_Choice *Con_Down_Qua;
+  RKR_Choice *Con_Down_Qua;
 private:
-  inline void cb_Con_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Con_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Con_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Con_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Con_Up_Qua;
+  RKR_Choice *Con_Up_Qua;
 private:
-  inline void cb_Con_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Con_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Con_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Con_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Seq_Downsample;
+  RKR_Choice *Seq_Downsample;
 private:
-  inline void cb_Seq_Downsample_i(Fl_Choice*, void*);
-  static void cb_Seq_Downsample(Fl_Choice*, void*);
+  inline void cb_Seq_Downsample_i(RKR_Choice*, void*);
+  static void cb_Seq_Downsample(RKR_Choice*, void*);
 public:
-  Fl_Choice *Seq_Down_Qua;
+  RKR_Choice *Seq_Down_Qua;
 private:
-  inline void cb_Seq_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Seq_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Seq_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Seq_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Seq_Up_Qua;
+  RKR_Choice *Seq_Up_Qua;
 private:
-  inline void cb_Seq_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Seq_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Seq_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Seq_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Shi_Downsample;
+  RKR_Choice *Shi_Downsample;
 private:
-  inline void cb_Shi_Downsample_i(Fl_Choice*, void*);
-  static void cb_Shi_Downsample(Fl_Choice*, void*);
+  inline void cb_Shi_Downsample_i(RKR_Choice*, void*);
+  static void cb_Shi_Downsample(RKR_Choice*, void*);
 public:
-  Fl_Choice *Shi_Down_Qua;
+  RKR_Choice *Shi_Down_Qua;
 private:
-  inline void cb_Shi_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Shi_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Shi_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Shi_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Shi_Up_Qua;
+  RKR_Choice *Shi_Up_Qua;
 private:
-  inline void cb_Shi_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Shi_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Shi_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Shi_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Voc_Downsample;
+  RKR_Choice *Voc_Downsample;
 private:
-  inline void cb_Voc_Downsample_i(Fl_Choice*, void*);
-  static void cb_Voc_Downsample(Fl_Choice*, void*);
+  inline void cb_Voc_Downsample_i(RKR_Choice*, void*);
+  static void cb_Voc_Downsample(RKR_Choice*, void*);
 public:
-  Fl_Choice *Voc_Down_Qua;
+  RKR_Choice *Voc_Down_Qua;
 private:
-  inline void cb_Voc_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Voc_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Voc_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Voc_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Voc_Up_Qua;
+  RKR_Choice *Voc_Up_Qua;
 private:
-  inline void cb_Voc_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Voc_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Voc_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Voc_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Ste_Downsample;
+  RKR_Choice *Ste_Downsample;
 private:
-  inline void cb_Ste_Downsample_i(Fl_Choice*, void*);
-  static void cb_Ste_Downsample(Fl_Choice*, void*);
+  inline void cb_Ste_Downsample_i(RKR_Choice*, void*);
+  static void cb_Ste_Downsample(RKR_Choice*, void*);
 public:
-  Fl_Choice *Ste_Down_Qua;
+  RKR_Choice *Ste_Down_Qua;
 private:
-  inline void cb_Ste_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Ste_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Ste_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Ste_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Ste_Up_Qua;
+  RKR_Choice *Ste_Up_Qua;
 private:
-  inline void cb_Ste_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Ste_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Ste_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Ste_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Wave_Amo;
+  RKR_Choice *Wave_Amo;
 private:
-  inline void cb_Wave_Amo_i(Fl_Choice*, void*);
-  static void cb_Wave_Amo(Fl_Choice*, void*);
+  inline void cb_Wave_Amo_i(RKR_Choice*, void*);
+  static void cb_Wave_Amo(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Wave_Amo[];
 public:
-  Fl_Choice *Wave_Down_Qua;
+  RKR_Choice *Wave_Down_Qua;
 private:
-  inline void cb_Wave_Down_Qua_i(Fl_Choice*, void*);
-  static void cb_Wave_Down_Qua(Fl_Choice*, void*);
+  inline void cb_Wave_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Wave_Down_Qua(RKR_Choice*, void*);
 public:
-  Fl_Choice *Wave_Up_Qua;
+  RKR_Choice *Wave_Up_Qua;
 private:
-  inline void cb_Wave_Up_Qua_i(Fl_Choice*, void*);
-  static void cb_Wave_Up_Qua(Fl_Choice*, void*);
+  inline void cb_Wave_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Wave_Up_Qua(RKR_Choice*, void*);
 public:
-  Fl_Box *Recognize_Label;
+  RKR_Box *Recognize_Label;
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;
