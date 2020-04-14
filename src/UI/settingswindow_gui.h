@@ -145,6 +145,7 @@ private:
   inline void cb_Downr_Qual_i(RKR_Choice*, void*);
   static void cb_Downr_Qual(RKR_Choice*, void*);
 public:
+  RKR_Box *loop_Label;
   RKR_Counter *L_SIZE;
 private:
   inline void cb_L_SIZE_i(RKR_Counter*, void*);
@@ -155,6 +156,7 @@ private:
   inline void cb_LM_Volume_i(RKR_Counter*, void*);
   static void cb_LM_Volume(RKR_Counter*, void*);
 public:
+  RKR_Box *Har_Q_Label;
   RKR_Choice *Har_Qual;
 private:
   inline void cb_Har_Qual_i(RKR_Choice*, void*);
@@ -167,6 +169,7 @@ private:
   static void cb_Ste_Qual(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Ste_Qual[];
 public:
+  RKR_Box *Voc_Band_Label;
   RKR_Choice *Voc_Bands;
 private:
   inline void cb_Voc_Bands_i(RKR_Choice*, void*);
@@ -183,6 +186,7 @@ private:
   inline void cb_DB6B_i(RKR_Check_Button*, void*);
   static void cb_DB6B(RKR_Check_Button*, void*);
 public:
+  RKR_Box *Calibration_Label;
   RKR_Counter *Calibration;
 private:
   inline void cb_Calibration_i(RKR_Counter*, void*);
@@ -211,6 +215,7 @@ private:
   static void cb_RC_Ring_Opti(RKR_Choice*, void*);
   static Fl_Menu_Item menu_RC_Ring_Opti[];
 public:
+  RKR_Box *Harm_Label;
   RKR_Choice *Har_Downsample;
 private:
   inline void cb_Har_Downsample_i(RKR_Choice*, void*);
@@ -227,6 +232,7 @@ private:
   inline void cb_Har_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Har_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Box *Rev_Label;
   RKR_Choice *Rev_Downsample;
 private:
   inline void cb_Rev_Downsample_i(RKR_Choice*, void*);
@@ -242,6 +248,7 @@ private:
   inline void cb_Rev_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Rev_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Box *con_Label;
   RKR_Choice *Con_Downsample;
 private:
   inline void cb_Con_Downsample_i(RKR_Choice*, void*);
@@ -257,6 +264,7 @@ private:
   inline void cb_Con_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Con_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Box *seq_Label;
   RKR_Choice *Seq_Downsample;
 private:
   inline void cb_Seq_Downsample_i(RKR_Choice*, void*);
@@ -272,6 +280,7 @@ private:
   inline void cb_Seq_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Seq_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Box *shi_Label;
   RKR_Choice *Shi_Downsample;
 private:
   inline void cb_Shi_Downsample_i(RKR_Choice*, void*);
@@ -287,6 +296,7 @@ private:
   inline void cb_Shi_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Shi_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Box *Voc_Label;
   RKR_Choice *Voc_Downsample;
 private:
   inline void cb_Voc_Downsample_i(RKR_Choice*, void*);
@@ -302,6 +312,7 @@ private:
   inline void cb_Voc_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Voc_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Box *Ste_Label;
   RKR_Choice *Ste_Downsample;
 private:
   inline void cb_Ste_Downsample_i(RKR_Choice*, void*);
@@ -317,6 +328,7 @@ private:
   inline void cb_Ste_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Ste_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Box *Wave_Label;
   RKR_Choice *Wave_Amo;
 private:
   inline void cb_Wave_Amo_i(RKR_Choice*, void*);
