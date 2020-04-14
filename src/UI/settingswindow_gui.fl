@@ -2,8 +2,23 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Box.h"} {public global
+}
+
+decl {\#include "RKR_Button.h"} {public global
+}
+
+decl {\#include "RKR_Browser.h"} {public global
+}
+
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
+}
+
 widget_class SettingsWindowGui {open
-  xywh {327 202 640 580} type Double
+  xywh {84 168 640 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -23,7 +38,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
+      user_data 1 open
       xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -68,6 +83,9 @@ break;
 
 }}
         xywh {60 50 88 20} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 12 textcolor 7
+        code0 {o->m_start_label_offset = 1; // 10 - 11}
+        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        class RKR_Choice
       } {
         MenuItem {} {
           label X11
@@ -93,12 +111,17 @@ break;
       Fl_Browser Font_Bro {
         label Font
         callback {m_rkr->font = (int)o->value()-1;
-m_rgui->chfsize(0);}
-        xywh {20 100 400 225} type Select labelsize 11 labelcolor 7 align 1 when 1
+m_rgui->chfsize(0);} selected
+        xywh {20 100 400 225} type Select labelcolor 7 align 1 when 1
+        code0 {o->m_start_label_offset = 4; // 10 - 14}
+        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        class RKR_Browser
       }
       Fl_Box FSLabel {
         label {Font Size}
         xywh {10 333 60 17} labelsize 11 labelcolor 7
+        code0 {o->m_start_font_offset = 1; // 10 - 11}
+        class RKR_Box
       }
       Fl_Button FSless {
         label {-}
@@ -106,6 +129,8 @@ m_rgui->chfsize(0);}
         callback {m_rkr->relfontsize--;
 m_rgui->chfsize(-1);}
         xywh {78 330 30 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Button FSplus {
         label {+}
@@ -113,6 +138,8 @@ m_rgui->chfsize(-1);}
         callback {m_rkr->relfontsize++;
 m_rgui->chfsize(1);}
         xywh {113 330 30 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Button FSReset {
         label Reset
@@ -121,10 +148,14 @@ m_rgui->chfsize(1);}
   m_rkr->relfontsize=0;
   m_rgui->chfsize(-size);}
         xywh {148 330 57 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Box CLLabel {
         label Colors
         xywh {10 358 40 19} labelsize 11 labelcolor 7
+        code0 {o->m_start_font_offset = 1; // 10 - 11}
+        class RKR_Box
       }
       Fl_Button B_C {
         label Buttons
@@ -136,6 +167,8 @@ if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
 fore_color=fl_rgb_color(r,g,b);
 m_rgui->Buttons_Color_Change(fore_color);}
         xywh {15 380 90 25}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Button A_C {
         label Labels
@@ -146,6 +179,8 @@ if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
 m_rgui->Label_Color_Change(label_color);}
         xywh {120 380 90 25}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Button L_C {
         label Leds
@@ -156,6 +191,8 @@ if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
 leds_color=fl_rgb_color(r,g,b);
 m_rgui->Leds_Color_Change(leds_color);}
         xywh {225 380 90 25}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Button K_C {
         label Background
@@ -166,12 +203,16 @@ if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
 back_color=fl_rgb_color(r,g,b);
 m_rgui->Background_Color_Change(back_color);}
         xywh {330 380 90 25}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Check_Button Enable_Back {
         label {Enable Background Image}
         callback {m_rkr->EnableBackgroundImage=(int) o->value();
 m_rgui->PutBackground();}
         xywh {162 409 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        code0 {o->m_start_font_offset = 1; // 10 - 11}
+        class RKR_Check_Button
       }
       Fl_File_Input BackFiname {
         label {Background Image}
@@ -188,18 +229,24 @@ BackFiname->value(filename);
 strcpy(m_rkr->BackgroundImage,filename);
 m_rgui->PutBackground();}
         xywh {410 455 65 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Check_Button Enable_DeacHide {
         label {Hide Unused Effect Widgets}
         callback {m_rkr->deachide=(int) o->value();
   m_rgui->reordena();}
         xywh {169 500 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        code0 {o->m_start_font_offset = 1; // 10 - 11}
+        class RKR_Check_Button
       }
       Fl_Check_Button Enable_Scale {
         label {Set Main Window Scalable}
         callback {m_rkr->scalable=(int) o->value();
-m_rkr->change_scale = 1; // true} selected
+m_rkr->change_scale = 1; // true}
         xywh {390 500 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        code0 {o->m_start_font_offset = 1; // 10 - 11}
+        class RKR_Check_Button
       }
     }
     Fl_Group AUDIO_SET {

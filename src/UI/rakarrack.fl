@@ -511,7 +511,7 @@ put_icon(AboutWin);}
         callback {Tuner->hide();
 Sco->show();
 Sco->set_scope_ON(true);
-Fl::focus(Open_Order);} selected
+Fl::focus(Open_Order);}
         tooltip {Click here to activate scope} xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
       }
       Fl_Box LMT_LED {
@@ -1729,12 +1729,12 @@ o->hide();} open
     } {}
     Fl_Window Settings {
       callback {save_stat(3);
-o->hide();} open
-      xywh {390 434 640 580} type Double box NO_BOX color 4 selection_color 7 hide
+o->hide();} open selected
+      xywh {390 434 640 580} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "settingswindow_gui.h"}
       code1 {o->initialize(rkr, this);}
       code2 {o->hide();}
-      class SettingsWindowGui size_range {740 554 0 0}
+      class SettingsWindowGui size_range {320 290 3200 2900}
     } {}
     Fl_Window MIDILearn {
       callback {MIDILearn->CancelRec->do_callback();

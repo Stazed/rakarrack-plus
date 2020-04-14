@@ -3,18 +3,23 @@
 #ifndef settingswindow_gui_h
 #define settingswindow_gui_h
 #include <FL/Fl.H>
+#include "RKR_Box.h"
+#include "RKR_Button.h"
+#include "RKR_Browser.h"
+#include "RKR_Check_Button.h"
+#include "RKR_Choice.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Tabs.H>
 #include <FL/Fl_Group.H>
-#include <FL/Fl_Choice.H>
-#include <FL/Fl_Browser.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_File_Input.H>
+#include <FL/Fl_Check_Button.H>
+#include <FL/Fl_Choice.H>
 #include <FL/Fl_Counter.H>
+#include <FL/Fl_Browser.H>
 #include <FL/Fl_Scroll.H>
+#include <FL/Fl_Button.H>
 #include <FL/Fl_Input.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
@@ -27,74 +32,74 @@ public:
   Fl_Tabs *STabs;
   Fl_Group *Look;
   Fl_Box *Fondo6;
-  Fl_Choice *scheme_ch;
+  RKR_Choice *scheme_ch;
 private:
-  inline void cb_scheme_ch_i(Fl_Choice*, void*);
-  static void cb_scheme_ch(Fl_Choice*, void*);
+  inline void cb_scheme_ch_i(RKR_Choice*, void*);
+  static void cb_scheme_ch(RKR_Choice*, void*);
   static Fl_Menu_Item menu_scheme_ch[];
 public:
-  Fl_Browser *Font_Bro;
+  RKR_Browser *Font_Bro;
 private:
-  inline void cb_Font_Bro_i(Fl_Browser*, void*);
-  static void cb_Font_Bro(Fl_Browser*, void*);
+  inline void cb_Font_Bro_i(RKR_Browser*, void*);
+  static void cb_Font_Bro(RKR_Browser*, void*);
 public:
-  Fl_Box *FSLabel;
-  Fl_Button *FSless;
+  RKR_Box *FSLabel;
+  RKR_Button *FSless;
 private:
-  inline void cb_FSless_i(Fl_Button*, void*);
-  static void cb_FSless(Fl_Button*, void*);
+  inline void cb_FSless_i(RKR_Button*, void*);
+  static void cb_FSless(RKR_Button*, void*);
 public:
-  Fl_Button *FSplus;
+  RKR_Button *FSplus;
 private:
-  inline void cb_FSplus_i(Fl_Button*, void*);
-  static void cb_FSplus(Fl_Button*, void*);
+  inline void cb_FSplus_i(RKR_Button*, void*);
+  static void cb_FSplus(RKR_Button*, void*);
 public:
-  Fl_Button *FSReset;
+  RKR_Button *FSReset;
 private:
-  inline void cb_FSReset_i(Fl_Button*, void*);
-  static void cb_FSReset(Fl_Button*, void*);
+  inline void cb_FSReset_i(RKR_Button*, void*);
+  static void cb_FSReset(RKR_Button*, void*);
 public:
-  Fl_Box *CLLabel;
-  Fl_Button *B_C;
+  RKR_Box *CLLabel;
+  RKR_Button *B_C;
 private:
-  inline void cb_B_C_i(Fl_Button*, void*);
-  static void cb_B_C(Fl_Button*, void*);
+  inline void cb_B_C_i(RKR_Button*, void*);
+  static void cb_B_C(RKR_Button*, void*);
 public:
-  Fl_Button *A_C;
+  RKR_Button *A_C;
 private:
-  inline void cb_A_C_i(Fl_Button*, void*);
-  static void cb_A_C(Fl_Button*, void*);
+  inline void cb_A_C_i(RKR_Button*, void*);
+  static void cb_A_C(RKR_Button*, void*);
 public:
-  Fl_Button *L_C;
+  RKR_Button *L_C;
 private:
-  inline void cb_L_C_i(Fl_Button*, void*);
-  static void cb_L_C(Fl_Button*, void*);
+  inline void cb_L_C_i(RKR_Button*, void*);
+  static void cb_L_C(RKR_Button*, void*);
 public:
-  Fl_Button *K_C;
+  RKR_Button *K_C;
 private:
-  inline void cb_K_C_i(Fl_Button*, void*);
-  static void cb_K_C(Fl_Button*, void*);
+  inline void cb_K_C_i(RKR_Button*, void*);
+  static void cb_K_C(RKR_Button*, void*);
 public:
-  Fl_Check_Button *Enable_Back;
+  RKR_Check_Button *Enable_Back;
 private:
-  inline void cb_Enable_Back_i(Fl_Check_Button*, void*);
-  static void cb_Enable_Back(Fl_Check_Button*, void*);
+  inline void cb_Enable_Back_i(RKR_Check_Button*, void*);
+  static void cb_Enable_Back(RKR_Check_Button*, void*);
 public:
   Fl_File_Input *BackFiname;
-  Fl_Button *BI_Browser;
+  RKR_Button *BI_Browser;
 private:
-  inline void cb_BI_Browser_i(Fl_Button*, void*);
-  static void cb_BI_Browser(Fl_Button*, void*);
+  inline void cb_BI_Browser_i(RKR_Button*, void*);
+  static void cb_BI_Browser(RKR_Button*, void*);
 public:
-  Fl_Check_Button *Enable_DeacHide;
+  RKR_Check_Button *Enable_DeacHide;
 private:
-  inline void cb_Enable_DeacHide_i(Fl_Check_Button*, void*);
-  static void cb_Enable_DeacHide(Fl_Check_Button*, void*);
+  inline void cb_Enable_DeacHide_i(RKR_Check_Button*, void*);
+  static void cb_Enable_DeacHide(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *Enable_Scale;
+  RKR_Check_Button *Enable_Scale;
 private:
-  inline void cb_Enable_Scale_i(Fl_Check_Button*, void*);
-  static void cb_Enable_Scale(Fl_Check_Button*, void*);
+  inline void cb_Enable_Scale_i(RKR_Check_Button*, void*);
+  static void cb_Enable_Scale(RKR_Check_Button*, void*);
 public:
   Fl_Group *AUDIO_SET;
   Fl_Box *Fondo7;

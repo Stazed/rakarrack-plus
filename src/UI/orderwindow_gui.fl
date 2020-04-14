@@ -5,7 +5,7 @@ code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
 }
 
-decl {\#include "RKR_Browser.h"} {selected public global
+decl {\#include "RKR_Browser.h"} {public global
 }
 
 decl {\#include "RKR_Button.h"} {public global
@@ -15,7 +15,7 @@ decl {\#include "RKR_Check_Button.h"} {public global
 }
 
 widget_class OrderWindowGui {open
-  xywh {453 201 500 400} type Double color 4 resizable
+  xywh {681 201 500 400} type Double color 4 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -38,7 +38,7 @@ m_rgui= _rgui;} {}
   Fl_Browser Avail_Bro {
     user_data 99
     xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
-    code0 {o->m_start_font_offset = 8; // 10 - 18}
+    code0 {o->m_start_text_offset = 8; // 10 - 18}
     class RKR_Browser
   }
   Fl_Button Pon {
@@ -60,9 +60,9 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
     code0 {o->m_start_font_offset = 8; // 10 - 18}
     class RKR_Button
   }
-  Fl_Browser Order_Bro {
+  Fl_Browser Order_Bro {selected
     xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
-    code0 {o->m_start_font_offset = 8; // 10 - 18}
+    code0 {o->m_start_text_offset = 8; // 10 - 18}
     class RKR_Browser
   }
   Fl_Button Sube {

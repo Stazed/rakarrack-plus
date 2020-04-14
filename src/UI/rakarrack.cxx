@@ -2713,8 +2713,9 @@ void RKRGUI::make_window() {
     Settings->when(FL_WHEN_RELEASE);
     o->initialize(rkr, this);
     o->hide();
-    Settings->size_range(740, 554);
+    Settings->size_range(320, 290, 3200, 2900);
     Settings->end();
+    Settings->resizable(Settings);
   } // SettingsWindowGui* Settings
   { MidiLearnWindowGui* o = MIDILearn = new MidiLearnWindowGui(640, 480);
     MIDILearn->box(FL_NO_BOX);
