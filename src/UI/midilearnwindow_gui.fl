@@ -1,7 +1,16 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
+decl {\#include "RKR_Box.h"} {public global
+}
+
+decl {\#include "RKR_Button.h"} {public global
+}
+
+decl {\#include "RKR_Value_Input.h"} {selected public global
+}
+
 widget_class MidiLearnWindowGui {open
   xywh {138 147 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
@@ -29,6 +38,8 @@ m_rgui= _rgui;} {}
 m_rkr->CountWait=0;
 m_rkr->RControl=1;}
     xywh {10 445 135 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Browser TPresets {
     xywh {430 61 201 348} type Hold when 3 textcolor 7
@@ -39,75 +50,119 @@ m_rkr->RControl=1;}
     callback {memcpy(m_rkr->XUserMIDI,m_rkr->Bank[TPresets->value()].XUserMIDI,sizeof(m_rkr->XUserMIDI));
   m_rgui->DisAssigns();}
     xywh {430 20 95 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Button CopyT {
     label {Copy to: }
     user_data 77
     callback {memcpy(m_rkr->Bank[TPresets->value()].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));}
     xywh {535 20 95 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
-  Fl_Group Ares {open
+  Fl_Group Ares {
     xywh {215 60 205 180} box THIN_DOWN_BOX align 80
   } {
     Fl_Box Ar1 {
       xywh {220 65 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar2 {
       xywh {270 65 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar3 {
       xywh {320 65 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar4 {
       xywh {370 65 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar5 {
       xywh {220 100 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar6 {
       xywh {270 100 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar7 {
       xywh {320 100 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar8 {
       xywh {370 100 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar9 {
       xywh {220 135 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar10 {
       xywh {270 135 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar11 {
       xywh {320 135 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar12 {
       xywh {370 135 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar13 {
       xywh {220 170 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar14 {
       xywh {270 170 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar15 {
       xywh {320 170 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar16 {
       xywh {370 170 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar17 {
       xywh {220 205 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar18 {
       xywh {270 205 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar19 {
       xywh {320 205 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
     Fl_Box Ar20 {
       xywh {370 205 45 30} box DOWN_BOX
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Box
     }
   }
   Fl_Button ClearA {
@@ -137,6 +192,8 @@ for(i=0; i<128; i++)
    
     m_rgui->DisAssigns();}
     xywh {245 250 150 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Button ClearP {
     label {Clear Preset}
@@ -144,6 +201,8 @@ for(i=0; i<128; i++)
     callback {memset(m_rkr->XUserMIDI, 0, sizeof(m_rkr->XUserMIDI));
     m_rgui->DisAssigns();}
     xywh {245 285 150 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Button Assign {
     label Assign
@@ -175,6 +234,8 @@ for(i=0;i<20;i++)
  
     m_rgui->DisAssigns();}
     xywh {112 20 98 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Button AssignA {
     label {Assign to All}
@@ -209,6 +270,8 @@ for(i=0;i<20;i++)
 
 Assign->do_callback();}
     xywh {10 20 98 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Button CancelRec {
     label Cancel
@@ -217,11 +280,15 @@ Assign->do_callback();}
 GMM->color(fore_color);
 GMM->redraw();}
     xywh {200 450 60 20}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Value_Input Disp_Control {
     callback {if(o->value()> 127) o->value(127);
 if(o->value()< 1) o->value(1);}
     xywh {155 445 40 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
+    code0 {o->m_start_text_offset = 4; // 10 - 14}
+    class RKR_Value_Input
   }
   Fl_Button CopyTAll {
     label {Copy to All}
@@ -229,12 +296,16 @@ if(o->value()< 1) o->value(1);}
     callback {int i;
 for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));}
     xywh {480 412 150 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Button CloseML {
     label Close
     user_data 77
     callback {do_callback();}
     xywh {480 445 150 30}
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Button
   }
   Fl_Group Filters_ML {open
     xywh {10 410 200 31} box DOWN_BOX
@@ -244,12 +315,16 @@ for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr
       callback {m_rkr->ML_filter=0;
       m_rgui->FillML();}
       xywh {16 415 89 20} type Radio
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Button
     }
     Fl_Button M_fil_current {
       label Current
       callback {m_rkr->ML_filter=1;
-      m_rgui->FillML();} selected
+      m_rgui->FillML();}
       xywh {113 415 89 20} type Radio
+      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      class RKR_Button
     }
   }
   decl {RKR* m_rkr} {private local
