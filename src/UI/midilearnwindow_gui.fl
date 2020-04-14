@@ -1,11 +1,11 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
 }
 
-decl {\#include "RKR_Browser.h"} {selected public global
+decl {\#include "RKR_Browser.h"} {public global
 }
 
 decl {\#include "RKR_Button.h"} {public global
@@ -15,7 +15,7 @@ decl {\#include "RKR_Value_Input.h"} {public global
 }
 
 widget_class MidiLearnWindowGui {open
-  xywh {118 191 640 480} type Double color 22 selection_color 7 resizable
+  xywh {437 362 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -28,6 +28,12 @@ m_rgui= _rgui;} {}
   }
   Fl_Box Fondo4 {
     xywh {1 1 640 480}
+  }
+  Fl_Box midi_learn {
+    label {MIDI Learn} selected
+    xywh {282 18 81 32} labelsize 23
+    code0 {o->m_start_font_offset = 13; // 10 - 23}
+    class RKR_Box
   }
   Fl_Browser Epar {
     user_data 99
@@ -68,7 +74,7 @@ m_rkr->RControl=1;}
     code0 {o->m_start_font_offset = 4; // 10 - 14}
     class RKR_Button
   }
-  Fl_Group Ares {
+  Fl_Group Ares {open
     xywh {215 60 205 180} box THIN_DOWN_BOX align 80
   } {
     Fl_Box Ar1 {
