@@ -19,6 +19,7 @@
 */
 
 #include "scope.h"
+#include "rakarrack.h"
 
 Scope::Scope(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h, label)
 {
@@ -127,6 +128,8 @@ int Scope::handle(int event)
             if (Scope_ON)
             {
                 Scope_ON = false;
+                rgui->Tuner->show();
+                rgui->Tuner->redraw();
             }
             return (1);
             break;

@@ -32,7 +32,6 @@ static Fl_Widget *old;
 static int last_tecla;
 static int drag;
 static int at;
-static int nt;
 static Pixmap p, mask;
 static XWMHints *hints = NULL;
 static volatile int got_sigint = 0;
@@ -70,7 +69,6 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     made = 0;
     char tmp[256];
     drag = 1000;
-    nt = 0;
     at = 0;
     Analy->set_analyzer_ON(false);
     Sco->set_scope_ON(false);
@@ -410,19 +408,6 @@ void RKRGUI::GuiTimeout(void)
         {
             Sco->redraw();
         }
-        else
-        {
-            nt = 1;
-        }
-
-        if (nt)
-        {
-            nt = 0;
-            Sco->hide();
-            Tuner->show();
-            Tuner->redraw();
-        }
-
 
         if (Analy->get_analyzer_ON())
         {

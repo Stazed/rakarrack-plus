@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -508,13 +508,10 @@ put_icon(AboutWin);}
         }
       }
       Fl_Button TITTLE_L {
-        callback {if(rkr->Bypass)
-{
-Tuner->hide();
+        callback {Tuner->hide();
 Sco->show();
 Sco->set_scope_ON(true);
-Fl::focus(Open_Order);
-}}
+Fl::focus(Open_Order);} selected
         tooltip {Click here to activate scope} xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
       }
       Fl_Box LMT_LED {
@@ -1742,7 +1739,7 @@ o->hide();} open
     Fl_Window MIDILearn {
       callback {MIDILearn->CancelRec->do_callback();
 save_stat(5);
-o->hide();} open selected
+o->hide();} open
       xywh {165 106 640 480} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "midilearnwindow_gui.h"}
       code1 {o->initialize(rkr, this);}
