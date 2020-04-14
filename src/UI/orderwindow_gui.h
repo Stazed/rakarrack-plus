@@ -3,13 +3,14 @@
 #ifndef orderwindow_gui_h
 #define orderwindow_gui_h
 #include <FL/Fl.H>
+#include "RKR_Box.h"
+#include "RKR_Button.h"
+#include "RKR_Check_Button.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Browser.H>
-#include <FL/Fl_Button.H>
 #include <FL/Fl_Group.H>
-#include <FL/Fl_Check_Button.H>
 
 class OrderWindowGui : public Fl_Double_Window {
   void _OrderWindowGui();
@@ -18,84 +19,84 @@ public:
   OrderWindowGui(int W, int H, const char *L = 0);
   OrderWindowGui();
   Fl_Box *Fondo1;
-  Fl_Box *O_TITLE;
+  RKR_Box *O_TITLE;
   Fl_Browser *Avail_Bro;
-  Fl_Button *Pon;
+  RKR_Button *Pon;
 private:
-  inline void cb_Pon_i(Fl_Button*, void*);
-  static void cb_Pon(Fl_Button*, void*);
+  inline void cb_Pon_i(RKR_Button*, void*);
+  static void cb_Pon(RKR_Button*, void*);
 public:
   Fl_Browser *Order_Bro;
-  Fl_Button *Sube;
+  RKR_Button *Sube;
 private:
-  inline void cb_Sube_i(Fl_Button*, void*);
-  static void cb_Sube(Fl_Button*, void*);
+  inline void cb_Sube_i(RKR_Button*, void*);
+  static void cb_Sube(RKR_Button*, void*);
 public:
-  Fl_Button *Baja;
+  RKR_Button *Baja;
 private:
-  inline void cb_Baja_i(Fl_Button*, void*);
-  static void cb_Baja(Fl_Button*, void*);
+  inline void cb_Baja_i(RKR_Button*, void*);
+  static void cb_Baja(RKR_Button*, void*);
 public:
   Fl_Group *Filters;
-  Fl_Button *Fil0;
+  RKR_Button *Fil0;
 private:
-  inline void cb_Fil0_i(Fl_Button*, void*);
-  static void cb_Fil0(Fl_Button*, void*);
+  inline void cb_Fil0_i(RKR_Button*, void*);
+  static void cb_Fil0(RKR_Button*, void*);
 public:
-  Fl_Button *Fil1;
+  RKR_Button *Fil1;
 private:
-  inline void cb_Fil1_i(Fl_Button*, void*);
-  static void cb_Fil1(Fl_Button*, void*);
+  inline void cb_Fil1_i(RKR_Button*, void*);
+  static void cb_Fil1(RKR_Button*, void*);
 public:
-  Fl_Button *Fil2;
+  RKR_Button *Fil2;
 private:
-  inline void cb_Fil2_i(Fl_Button*, void*);
-  static void cb_Fil2(Fl_Button*, void*);
+  inline void cb_Fil2_i(RKR_Button*, void*);
+  static void cb_Fil2(RKR_Button*, void*);
 public:
-  Fl_Button *Fil4;
+  RKR_Button *Fil4;
 private:
-  inline void cb_Fil4_i(Fl_Button*, void*);
-  static void cb_Fil4(Fl_Button*, void*);
+  inline void cb_Fil4_i(RKR_Button*, void*);
+  static void cb_Fil4(RKR_Button*, void*);
 public:
-  Fl_Button *Fil8;
+  RKR_Button *Fil8;
 private:
-  inline void cb_Fil8_i(Fl_Button*, void*);
-  static void cb_Fil8(Fl_Button*, void*);
+  inline void cb_Fil8_i(RKR_Button*, void*);
+  static void cb_Fil8(RKR_Button*, void*);
 public:
-  Fl_Button *Fil16;
+  RKR_Button *Fil16;
 private:
-  inline void cb_Fil16_i(Fl_Button*, void*);
-  static void cb_Fil16(Fl_Button*, void*);
+  inline void cb_Fil16_i(RKR_Button*, void*);
+  static void cb_Fil16(RKR_Button*, void*);
 public:
-  Fl_Button *Fil32;
+  RKR_Button *Fil32;
 private:
-  inline void cb_Fil32_i(Fl_Button*, void*);
-  static void cb_Fil32(Fl_Button*, void*);
+  inline void cb_Fil32_i(RKR_Button*, void*);
+  static void cb_Fil32(RKR_Button*, void*);
 public:
-  Fl_Button *Fil64;
+  RKR_Button *Fil64;
 private:
-  inline void cb_Fil64_i(Fl_Button*, void*);
-  static void cb_Fil64(Fl_Button*, void*);
+  inline void cb_Fil64_i(RKR_Button*, void*);
+  static void cb_Fil64(RKR_Button*, void*);
 public:
-  Fl_Button *Fil128;
+  RKR_Button *Fil128;
 private:
-  inline void cb_Fil128_i(Fl_Button*, void*);
-  static void cb_Fil128(Fl_Button*, void*);
+  inline void cb_Fil128_i(RKR_Button*, void*);
+  static void cb_Fil128(RKR_Button*, void*);
 public:
-  Fl_Check_Button *Order_DeacHide;
+  RKR_Check_Button *Order_DeacHide;
 private:
-  inline void cb_Order_DeacHide_i(Fl_Check_Button*, void*);
-  static void cb_Order_DeacHide(Fl_Check_Button*, void*);
+  inline void cb_Order_DeacHide_i(RKR_Check_Button*, void*);
+  static void cb_Order_DeacHide(RKR_Check_Button*, void*);
 public:
-  Fl_Button *ok_order;
+  RKR_Button *ok_order;
 private:
-  inline void cb_ok_order_i(Fl_Button*, void*);
-  static void cb_ok_order(Fl_Button*, void*);
+  inline void cb_ok_order_i(RKR_Button*, void*);
+  static void cb_ok_order(RKR_Button*, void*);
 public:
-  Fl_Button *Cancel_order;
+  RKR_Button *Cancel_order;
 private:
-  inline void cb_Cancel_order_i(Fl_Button*, void*);
-  static void cb_Cancel_order(Fl_Button*, void*);
+  inline void cb_Cancel_order_i(RKR_Button*, void*);
+  static void cb_Cancel_order(RKR_Button*, void*);
   RKR* m_rkr; 
   RKRGUI* m_rgui; 
 public:
