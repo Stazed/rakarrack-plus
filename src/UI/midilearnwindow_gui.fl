@@ -5,14 +5,17 @@ code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
 }
 
+decl {\#include "RKR_Browser.h"} {selected public global
+}
+
 decl {\#include "RKR_Button.h"} {public global
 }
 
-decl {\#include "RKR_Value_Input.h"} {selected public global
+decl {\#include "RKR_Value_Input.h"} {public global
 }
 
 widget_class MidiLearnWindowGui {open
-  xywh {138 147 640 480} type Double color 22 selection_color 7 resizable
+  xywh {118 191 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -30,6 +33,8 @@ m_rgui= _rgui;} {}
     user_data 99
     callback {m_rgui->DisAssigns();}
     xywh {10 58 201 348} type Hold textcolor 7
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Browser
   }
   Fl_Button GMM {
     label {Get MIDI Message}
@@ -43,6 +48,8 @@ m_rkr->RControl=1;}
   }
   Fl_Browser TPresets {
     xywh {430 61 201 348} type Hold when 3 textcolor 7
+    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    class RKR_Browser
   }
   Fl_Button CopyF {
     label {Copy from: }

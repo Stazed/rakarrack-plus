@@ -17,6 +17,7 @@ set (ProgSources
     UI/common_gui_menu.cxx
     UI/RKR_Entry_Input.cxx
     UI/RKR_Box.cxx
+    UI/RKR_Browser.cxx
     UI/RKR_Button.cxx
     UI/RKR_Check_Button.cxx
     UI/RKR_Choice.cxx

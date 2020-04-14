@@ -2,10 +2,10 @@
 
 #include "midilearnwindow_gui.h"
 
-void MidiLearnWindowGui::cb_Epar_i(Fl_Browser*, void*) {
+void MidiLearnWindowGui::cb_Epar_i(RKR_Browser*, void*) {
   m_rgui->DisAssigns();
 }
-void MidiLearnWindowGui::cb_Epar(Fl_Browser* o, void* v) {
+void MidiLearnWindowGui::cb_Epar(RKR_Browser* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_Epar_i(o,v);
 }
 
@@ -213,11 +213,21 @@ this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo4 = new Fl_Box(1, 1, 640, 480);
 } // Fl_Box* Fondo4
-{ Epar = new Fl_Browser(10, 58, 201, 348);
+{ RKR_Browser* o = Epar = new RKR_Browser(10, 58, 201, 348);
   Epar->type(2);
+  Epar->box(FL_NO_BOX);
+  Epar->color(FL_BACKGROUND2_COLOR);
+  Epar->selection_color(FL_SELECTION_COLOR);
+  Epar->labeltype(FL_NORMAL_LABEL);
+  Epar->labelfont(0);
+  Epar->labelsize(14);
+  Epar->labelcolor(FL_FOREGROUND_COLOR);
   Epar->textcolor(FL_BACKGROUND2_COLOR);
   Epar->callback((Fl_Callback*)cb_Epar, (void*)(99));
-} // Fl_Browser* Epar
+  Epar->align(Fl_Align(FL_ALIGN_BOTTOM));
+  Epar->when(FL_WHEN_RELEASE_ALWAYS);
+  o->m_start_font_offset = 4; // 10 - 14
+} // RKR_Browser* Epar
 { RKR_Button* o = GMM = new RKR_Button(10, 445, 135, 30, "Get MIDI Message");
   GMM->box(FL_UP_BOX);
   GMM->color(FL_BACKGROUND_COLOR);
@@ -231,11 +241,20 @@ this->when(FL_WHEN_RELEASE);
   GMM->when(FL_WHEN_RELEASE);
   o->m_start_font_offset = 4; // 10 - 14
 } // RKR_Button* GMM
-{ TPresets = new Fl_Browser(430, 61, 201, 348);
+{ RKR_Browser* o = TPresets = new RKR_Browser(430, 61, 201, 348);
   TPresets->type(2);
+  TPresets->box(FL_NO_BOX);
+  TPresets->color(FL_BACKGROUND2_COLOR);
+  TPresets->selection_color(FL_SELECTION_COLOR);
+  TPresets->labeltype(FL_NORMAL_LABEL);
+  TPresets->labelfont(0);
+  TPresets->labelsize(14);
+  TPresets->labelcolor(FL_FOREGROUND_COLOR);
   TPresets->textcolor(FL_BACKGROUND2_COLOR);
+  TPresets->align(Fl_Align(FL_ALIGN_BOTTOM));
   TPresets->when(3);
-} // Fl_Browser* TPresets
+  o->m_start_font_offset = 4; // 10 - 14
+} // RKR_Browser* TPresets
 { RKR_Button* o = CopyF = new RKR_Button(430, 20, 95, 30, "Copy from: ");
   CopyF->box(FL_UP_BOX);
   CopyF->color(FL_BACKGROUND_COLOR);

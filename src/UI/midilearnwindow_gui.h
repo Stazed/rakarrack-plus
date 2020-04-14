@@ -4,12 +4,12 @@
 #define midilearnwindow_gui_h
 #include <FL/Fl.H>
 #include "RKR_Box.h"
+#include "RKR_Browser.h"
 #include "RKR_Button.h"
 #include "RKR_Value_Input.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Browser.H>
 #include <FL/Fl_Group.H>
 
 class MidiLearnWindowGui : public Fl_Double_Window {
@@ -19,17 +19,17 @@ public:
   MidiLearnWindowGui(int W, int H, const char *L = 0);
   MidiLearnWindowGui();
   Fl_Box *Fondo4;
-  Fl_Browser *Epar;
+  RKR_Browser *Epar;
 private:
-  inline void cb_Epar_i(Fl_Browser*, void*);
-  static void cb_Epar(Fl_Browser*, void*);
+  inline void cb_Epar_i(RKR_Browser*, void*);
+  static void cb_Epar(RKR_Browser*, void*);
 public:
   RKR_Button *GMM;
 private:
   inline void cb_GMM_i(RKR_Button*, void*);
   static void cb_GMM(RKR_Button*, void*);
 public:
-  Fl_Browser *TPresets;
+  RKR_Browser *TPresets;
   RKR_Button *CopyF;
 private:
   inline void cb_CopyF_i(RKR_Button*, void*);
