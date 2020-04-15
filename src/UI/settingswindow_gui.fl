@@ -44,11 +44,11 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo6 {
-        xywh {5 26 630 554}
+        xywh {5 26 518 554}
       }
       Fl_Choice scheme_ch {
         label Schema
@@ -261,7 +261,7 @@ m_rkr->change_scale = 1; // true}
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo7 {
-        xywh {5 26 630 554}
+        xywh {5 26 518 554}
       }
       Fl_Check_Button INSTATE {
         label {FX On at start}
@@ -1032,7 +1032,7 @@ m_rgui->Show_Next_Time();}
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo8 {
-        xywh {5 26 630 554}
+        xywh {5 26 518 554}
       }
       Fl_Check_Button D_A_Connect {
         label {Auto Connect MIDI In}
@@ -1144,7 +1144,7 @@ scroll->deactivate();}
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo9 {
-        xywh {5 26 630 554}
+        xywh {5 26 518 554}
       }
       Fl_Check_Button D_J_Connect {
         label {Auto Connect Out}
@@ -1185,7 +1185,7 @@ else JackIn->deactivate();}
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo10 {
-        xywh {5 26 630 554}
+        xywh {5 26 518 554}
       }
       Fl_Input Username {
         label Username
@@ -1220,11 +1220,11 @@ Fl_Tooltip::enable(m_rkr->ena_tool);}
     }
     Fl_Group BANK_SET {
       label Bank
-      user_data 1
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 selected
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo11 {
-        xywh {5 26 630 554}
+        xywh {5 26 518 554}
       }
       Fl_File_Input BFiname {
         label {Bank Filename}

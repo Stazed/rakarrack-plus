@@ -941,7 +941,8 @@ this->when(FL_WHEN_RELEASE);
     Look->labelcolor(FL_BACKGROUND2_COLOR);
     Look->user_data((void*)(1));
     Look->align(Fl_Align(FL_ALIGN_LEFT));
-    { Fondo6 = new Fl_Box(5, 26, 630, 554);
+    Look->hide();
+    { Fondo6 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo6
     { RKR_Choice* o = scheme_ch = new RKR_Choice(30, 59, 88, 20, "Schema");
       scheme_ch->box(FL_FLAT_BOX);
@@ -1162,7 +1163,7 @@ this->when(FL_WHEN_RELEASE);
     AUDIO_SET->user_data((void*)(1));
     AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
     AUDIO_SET->hide();
-    { Fondo7 = new Fl_Box(5, 26, 630, 554);
+    { Fondo7 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo7
     { RKR_Check_Button* o = INSTATE = new RKR_Check_Button(30, 29, 23, 20, "FX On at start");
       INSTATE->box(FL_NO_BOX);
@@ -2025,7 +2026,7 @@ this->when(FL_WHEN_RELEASE);
     MIDI_SET->user_data((void*)(1));
     MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
     MIDI_SET->hide();
-    { Fondo8 = new Fl_Box(5, 26, 630, 554);
+    { Fondo8 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo8
     { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 18, 20, "Auto Connect MIDI In");
       D_A_Connect->box(FL_NO_BOX);
@@ -2225,7 +2226,7 @@ this->when(FL_WHEN_RELEASE);
     JACK_SET->user_data((void*)(1));
     JACK_SET->align(Fl_Align(FL_ALIGN_LEFT));
     JACK_SET->hide();
-    { Fondo9 = new Fl_Box(5, 26, 630, 554);
+    { Fondo9 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo9
     { RKR_Check_Button* o = D_J_Connect = new RKR_Check_Button(30, 45, 25, 20, "Auto Connect Out");
       D_J_Connect->box(FL_NO_BOX);
@@ -2294,7 +2295,7 @@ this->when(FL_WHEN_RELEASE);
     MISC_SET->user_data((void*)(1));
     MISC_SET->align(Fl_Align(FL_ALIGN_LEFT));
     MISC_SET->hide();
-    { Fondo10 = new Fl_Box(5, 26, 630, 554);
+    { Fondo10 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo10
     { RKR_Entry_Input* o = Username = new RKR_Entry_Input(30, 58, 240, 21, "Username");
       Username->box(FL_DOWN_BOX);
@@ -2361,8 +2362,7 @@ this->when(FL_WHEN_RELEASE);
     BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
     BANK_SET->user_data((void*)(1));
     BANK_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    BANK_SET->hide();
-    { Fondo11 = new Fl_Box(5, 26, 630, 554);
+    { Fondo11 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo11
     { BFiname = new Fl_File_Input(20, 50, 390, 30, "Bank Filename");
       BFiname->labelsize(11);
