@@ -1025,8 +1025,8 @@ m_rgui->Show_Next_Time();}
     }
     Fl_Group MIDI_SET {
       label MIDI
-      user_data 1 open
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo8 {
         xywh {5 26 630 554}
@@ -1049,7 +1049,7 @@ if(o->text(valor) != NULL)
 strcpy(m_rkr->MID,o->text(valor));
 else return;
 o->select(valor,1);
-m_rkr->Conecta();} selected
+m_rkr->Conecta();}
         xywh {30 83 190 111} type Hold selection_color 0 labelsize 12 labelcolor 7 align 5 textsize 12 textcolor 7
         code0 {o->m_start_label_offset = 2; // 10 - 12}
         code1 {o->m_start_text_offset = 2; // 10 - 12}
@@ -1137,8 +1137,8 @@ scroll->deactivate();}
     }
     Fl_Group JACK_SET {
       label Jack
-      user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 open
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo9 {
         xywh {5 26 630 554}
@@ -1148,22 +1148,32 @@ scroll->deactivate();}
         callback {m_rkr->aconnect_JA=(int) o->value();
 if (m_rkr->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();}
-        xywh {114 40 25 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        xywh {30 45 25 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
       Fl_Browser JackCo {
-        label {Output Ports}
-        xywh {10 72 235 138} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+        label {Output Ports} selected
+        xywh {30 85 260 140} type Multi selection_color 0 labelcolor 7 align 5 textcolor 7
+        code0 {o->m_start_label_offset = 4; // 10 - 14}
+        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        class RKR_Browser
       }
       Fl_Check_Button D_IJ_Connect {
         label {Auto Connect In}
         callback {m_rkr->aconnect_JIA=(int) o->value();
 if (m_rkr->aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();}
-        xywh {104 228 25 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        xywh {30 245 25 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
       Fl_Browser JackIn {
         label {Input Ports}
-        xywh {10 259 235 131} type Multi selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+        xywh {30 285 260 140} type Multi selection_color 0 labelcolor 7 align 5 textcolor 7
+        code0 {o->m_start_label_offset = 4; // 10 - 14}
+        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        class RKR_Browser
       }
     }
     Fl_Group MISC_SET {

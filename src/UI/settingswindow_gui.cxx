@@ -834,21 +834,21 @@ void SettingsWindowGui::cb_Save(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Save_i(o,v);
 }
 
-void SettingsWindowGui::cb_D_J_Connect_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_D_J_Connect_i(RKR_Check_Button* o, void*) {
   m_rkr->aconnect_JA=(int) o->value();
 if (m_rkr->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();
 }
-void SettingsWindowGui::cb_D_J_Connect(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_D_J_Connect(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_D_J_Connect_i(o,v);
 }
 
-void SettingsWindowGui::cb_D_IJ_Connect_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_D_IJ_Connect_i(RKR_Check_Button* o, void*) {
   m_rkr->aconnect_JIA=(int) o->value();
 if (m_rkr->aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();
 }
-void SettingsWindowGui::cb_D_IJ_Connect(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_D_IJ_Connect_i(o,v);
 }
 
@@ -2025,6 +2025,7 @@ this->when(FL_WHEN_RELEASE);
     MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
     MIDI_SET->user_data((void*)(1));
     MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    MIDI_SET->hide();
     { Fondo8 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo8
     { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 18, 20, "Auto Connect MIDI In");
@@ -2224,41 +2225,66 @@ this->when(FL_WHEN_RELEASE);
     JACK_SET->labelcolor(FL_BACKGROUND2_COLOR);
     JACK_SET->user_data((void*)(1));
     JACK_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    JACK_SET->hide();
     { Fondo9 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo9
-    { D_J_Connect = new Fl_Check_Button(114, 40, 25, 20, "Auto Connect Out");
+    { RKR_Check_Button* o = D_J_Connect = new RKR_Check_Button(30, 45, 25, 20, "Auto Connect Out");
+      D_J_Connect->box(FL_NO_BOX);
       D_J_Connect->down_box(FL_DOWN_BOX);
-      D_J_Connect->labelsize(11);
+      D_J_Connect->color(FL_BACKGROUND_COLOR);
+      D_J_Connect->selection_color(FL_FOREGROUND_COLOR);
+      D_J_Connect->labeltype(FL_NORMAL_LABEL);
+      D_J_Connect->labelfont(0);
+      D_J_Connect->labelsize(12);
       D_J_Connect->labelcolor(FL_BACKGROUND2_COLOR);
       D_J_Connect->callback((Fl_Callback*)cb_D_J_Connect);
-      D_J_Connect->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* D_J_Connect
-    { JackCo = new Fl_Browser(10, 72, 235, 138, "Output Ports");
+      D_J_Connect->align(Fl_Align(FL_ALIGN_RIGHT));
+      D_J_Connect->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* D_J_Connect
+    { RKR_Browser* o = JackCo = new RKR_Browser(30, 85, 260, 140, "Output Ports");
       JackCo->type(3);
+      JackCo->box(FL_NO_BOX);
+      JackCo->color(FL_BACKGROUND2_COLOR);
       JackCo->selection_color(FL_FOREGROUND_COLOR);
-      JackCo->labelsize(11);
+      JackCo->labeltype(FL_NORMAL_LABEL);
+      JackCo->labelfont(0);
+      JackCo->labelsize(14);
       JackCo->labelcolor(FL_BACKGROUND2_COLOR);
-      JackCo->textsize(12);
       JackCo->textcolor(FL_BACKGROUND2_COLOR);
       JackCo->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-    } // Fl_Browser* JackCo
-    { D_IJ_Connect = new Fl_Check_Button(104, 228, 25, 20, "Auto Connect In");
+      JackCo->when(FL_WHEN_RELEASE_ALWAYS);
+      o->m_start_label_offset = 4; // 10 - 14
+      o->m_start_text_offset = 4; // 10 - 14
+    } // RKR_Browser* JackCo
+    { RKR_Check_Button* o = D_IJ_Connect = new RKR_Check_Button(30, 245, 25, 20, "Auto Connect In");
+      D_IJ_Connect->box(FL_NO_BOX);
       D_IJ_Connect->down_box(FL_DOWN_BOX);
-      D_IJ_Connect->labelsize(11);
+      D_IJ_Connect->color(FL_BACKGROUND_COLOR);
+      D_IJ_Connect->selection_color(FL_FOREGROUND_COLOR);
+      D_IJ_Connect->labeltype(FL_NORMAL_LABEL);
+      D_IJ_Connect->labelfont(0);
+      D_IJ_Connect->labelsize(12);
       D_IJ_Connect->labelcolor(FL_BACKGROUND2_COLOR);
       D_IJ_Connect->callback((Fl_Callback*)cb_D_IJ_Connect);
-      D_IJ_Connect->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* D_IJ_Connect
-    { JackIn = new Fl_Browser(10, 259, 235, 131, "Input Ports");
+      D_IJ_Connect->align(Fl_Align(FL_ALIGN_RIGHT));
+      D_IJ_Connect->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* D_IJ_Connect
+    { RKR_Browser* o = JackIn = new RKR_Browser(30, 285, 260, 140, "Input Ports");
       JackIn->type(3);
+      JackIn->box(FL_NO_BOX);
+      JackIn->color(FL_BACKGROUND2_COLOR);
       JackIn->selection_color(FL_FOREGROUND_COLOR);
-      JackIn->labelsize(11);
+      JackIn->labeltype(FL_NORMAL_LABEL);
+      JackIn->labelfont(0);
+      JackIn->labelsize(14);
       JackIn->labelcolor(FL_BACKGROUND2_COLOR);
-      JackIn->textsize(12);
       JackIn->textcolor(FL_BACKGROUND2_COLOR);
       JackIn->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-    } // Fl_Browser* JackIn
+      JackIn->when(FL_WHEN_RELEASE_ALWAYS);
+      o->m_start_label_offset = 4; // 10 - 14
+      o->m_start_text_offset = 4; // 10 - 14
+    } // RKR_Browser* JackIn
     JACK_SET->end();
   } // Fl_Group* JACK_SET
   { MISC_SET = new Fl_Group(5, 26, 630, 554, "Misc");

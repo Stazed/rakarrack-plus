@@ -16,9 +16,8 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
-#include <FL/Fl_Check_Button.H>
-#include <FL/Fl_Browser.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Button.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
@@ -400,18 +399,18 @@ public:
   Fl_Scroll *scroll;
   Fl_Group *JACK_SET;
   Fl_Box *Fondo9;
-  Fl_Check_Button *D_J_Connect;
+  RKR_Check_Button *D_J_Connect;
 private:
-  inline void cb_D_J_Connect_i(Fl_Check_Button*, void*);
-  static void cb_D_J_Connect(Fl_Check_Button*, void*);
+  inline void cb_D_J_Connect_i(RKR_Check_Button*, void*);
+  static void cb_D_J_Connect(RKR_Check_Button*, void*);
 public:
-  Fl_Browser *JackCo;
-  Fl_Check_Button *D_IJ_Connect;
+  RKR_Browser *JackCo;
+  RKR_Check_Button *D_IJ_Connect;
 private:
-  inline void cb_D_IJ_Connect_i(Fl_Check_Button*, void*);
-  static void cb_D_IJ_Connect(Fl_Check_Button*, void*);
+  inline void cb_D_IJ_Connect_i(RKR_Check_Button*, void*);
+  static void cb_D_IJ_Connect(RKR_Check_Button*, void*);
 public:
-  Fl_Browser *JackIn;
+  RKR_Browser *JackIn;
   Fl_Group *MISC_SET;
   Fl_Box *Fondo10;
   Fl_Input *Username;
