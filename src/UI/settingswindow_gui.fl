@@ -27,7 +27,7 @@ decl {\#include "RKR_File_Input.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {105 95 530 580} type Double
+  xywh {324 159 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -47,8 +47,8 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 open
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo6 {
         xywh {5 26 518 554}
@@ -239,7 +239,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
 strcpy(m_rkr->BackgroundImage,filename);
-m_rgui->PutBackground();} selected
+m_rgui->PutBackground();}
         xywh {427 470 65 20}
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Button
@@ -264,7 +264,7 @@ m_rkr->change_scale = 1; // true}
     Fl_Group AUDIO_SET {
       label Audio
       user_data 1
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo7 {
         xywh {5 26 518 554}
@@ -272,28 +272,28 @@ m_rkr->change_scale = 1; // true}
       Fl_Check_Button INSTATE {
         label {FX On at start}
         callback {m_rkr->init_state=(int) o->value();}
-        xywh {30 29 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
+        xywh {30 40 20 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
         code0 {o->m_start_font_offset = 1; // 10 - 11}
         class RKR_Check_Button
       }
       Fl_Check_Button Filter_DC {
         label {Filter Input DC Offset}
         callback {m_rkr->DC_Offset=(int) o->value();}
-        xywh {30 53 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
+        xywh {30 60 20 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
         code0 {o->m_start_font_offset = 1; // 10 - 11}
         class RKR_Check_Button
       }
       Fl_Check_Button Pre_Serve {
         label {Preserve Gain/Master when Preset change}
         callback {m_rkr->actuvol=(int) o->value();}
-        xywh {30 77 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
+        xywh {30 80 20 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
         code0 {o->m_start_font_offset = 1; // 10 - 11}
         class RKR_Check_Button
       }
       Fl_Check_Button Update_TAP {
         label {Update TapTempo when Preset change}
         callback {m_rkr->Tap_Updated = (int) o->value();}
-        xywh {30 100 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
+        xywh {30 100 20 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
         code0 {o->m_start_font_offset = 1; // 10 - 11}
         class RKR_Check_Button
       }
@@ -301,7 +301,7 @@ m_rkr->change_scale = 1; // true}
         label Upsampling
         callback {m_rkr->upsample=(int)o->value();
 m_rgui->Show_Next_Time();}
-        xywh {30 124 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8 when 1
+        xywh {30 140 20 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8 when 1
         code0 {o->m_start_font_offset = 1; // 10 - 11}
         class RKR_Check_Button
       }
@@ -310,7 +310,7 @@ m_rgui->Show_Next_Time();}
         callback {m_rkr->UpAmo =(int) o->value();
 
 m_rgui->Show_Next_Time();}
-        xywh {179 126 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        xywh {179 142 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
         MenuItem {} {
@@ -363,7 +363,7 @@ m_rgui->Show_Next_Time();}
         callback {m_rkr->UpQual =(int) o->value();
 
 m_rgui->Show_Next_Time();}
-        xywh {252 126 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        xywh {252 142 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
         MenuItem {} {
@@ -391,15 +391,15 @@ m_rgui->Show_Next_Time();}
         label Down
         callback {m_rkr->DownQual =(int) o->value();
 
-m_rgui->Show_Next_Time();}
-        xywh {364 126 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+m_rgui->Show_Next_Time();} selected
+        xywh {364 142 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         class RKR_Choice
       } {}
       Fl_Box loop_Label {
         label {Looper Size Seconds}
         user_data 7
-        xywh {30 149 121 17} labelsize 10 align 20 when 0
+        xywh {30 170 113 17} labelsize 10 align 20 when 0
         class RKR_Box
       }
       Fl_Counter L_SIZE {
@@ -409,20 +409,20 @@ if(!m_rkr->m_displayed)
 m_rgui->Show_Next_Time();
 m_rkr->m_displayed=1;
 }}
-        xywh {144 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
+        xywh {144 170 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0.5 maximum 30 step 0.5 value 0.5 textsize 10
         class RKR_Counter
       }
       Fl_Counter LM_Volume {
         label {Looper Metronome Volume  }
         callback {m_rkr->Metro_Vol=(int)o->value();
 m_rkr->efx_Looper->setmvol(m_rkr->Metro_Vol);}
-        xywh {389 149 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
+        xywh {389 170 47 18} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
         class RKR_Counter
       }
       Fl_Box Har_Q_Label {
         label {Harmonizer Quality}
         user_data 7
-        xywh {30 173 121 17} labelsize 10 align 20 when 0
+        xywh {30 195 110 17} labelsize 10 align 20 when 0
         class RKR_Box
       }
       Fl_Choice Har_Qual {
@@ -449,7 +449,7 @@ switch(i)
 
 
 m_rgui->Show_Next_Time();}
-        xywh {144 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        xywh {144 195 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
         MenuItem {} {
@@ -493,7 +493,7 @@ switch(i)
 
 
 m_rgui->Show_Next_Time();}
-        xywh {307 173 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        xywh {307 195 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
         MenuItem {} {
@@ -516,7 +516,7 @@ m_rgui->Show_Next_Time();}
       Fl_Box Voc_Band_Label {
         label {Vocoder Bands}
         user_data 7
-        xywh {30 196 121 17} labelsize 10 align 20 when 0
+        xywh {30 222 121 17} labelsize 10 align 20 when 0
         class RKR_Box
       }
       Fl_Choice Voc_Bands {
@@ -546,7 +546,7 @@ m_rgui->Show_Next_Time();}
 }
 
 m_rgui->Show_Next_Time();}
-        xywh {144 196 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+        xywh {144 222 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
         MenuItem {} {
@@ -573,14 +573,14 @@ m_rgui->Show_Next_Time();}
       Fl_Check_Button FLPosition {
         label {Limiter before Output Volume}
         callback {m_rkr->flpos=(int)o->value();}
-        xywh {30 222 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
+        xywh {30 118 20 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
         code0 {o->m_start_font_offset = 1; // 10 - 11}
         class RKR_Check_Button
       }
       Fl_Check_Button DB6B {
         label {+6dB Final Limiter }
         callback {m_rkr->db6booster=(int)o->value();}
-        xywh {240 222 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
+        xywh {240 120 20 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 8
         code0 {o->m_start_font_offset = 1; // 10 - 11}
         class RKR_Check_Button
       }

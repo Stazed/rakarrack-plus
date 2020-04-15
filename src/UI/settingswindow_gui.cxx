@@ -941,6 +941,7 @@ this->when(FL_WHEN_RELEASE);
     Look->labelcolor(FL_BACKGROUND2_COLOR);
     Look->user_data((void*)(1));
     Look->align(Fl_Align(FL_ALIGN_LEFT));
+    Look->hide();
     { Fondo6 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo6
     { RKR_Choice* o = scheme_ch = new RKR_Choice(30, 59, 88, 20, "Schema");
@@ -1168,10 +1169,9 @@ this->when(FL_WHEN_RELEASE);
     AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
     AUDIO_SET->user_data((void*)(1));
     AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    AUDIO_SET->hide();
     { Fondo7 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo7
-    { RKR_Check_Button* o = INSTATE = new RKR_Check_Button(30, 29, 23, 20, "FX On at start");
+    { RKR_Check_Button* o = INSTATE = new RKR_Check_Button(30, 40, 20, 20, "FX On at start");
       INSTATE->box(FL_NO_BOX);
       INSTATE->down_box(FL_DOWN_BOX);
       INSTATE->color(FL_BACKGROUND_COLOR);
@@ -1185,7 +1185,7 @@ this->when(FL_WHEN_RELEASE);
       INSTATE->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 1; // 10 - 11
     } // RKR_Check_Button* INSTATE
-    { RKR_Check_Button* o = Filter_DC = new RKR_Check_Button(30, 53, 23, 20, "Filter Input DC Offset");
+    { RKR_Check_Button* o = Filter_DC = new RKR_Check_Button(30, 60, 20, 20, "Filter Input DC Offset");
       Filter_DC->box(FL_NO_BOX);
       Filter_DC->down_box(FL_DOWN_BOX);
       Filter_DC->color(FL_BACKGROUND_COLOR);
@@ -1199,7 +1199,7 @@ this->when(FL_WHEN_RELEASE);
       Filter_DC->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 1; // 10 - 11
     } // RKR_Check_Button* Filter_DC
-    { RKR_Check_Button* o = Pre_Serve = new RKR_Check_Button(30, 77, 21, 20, "Preserve Gain/Master when Preset change");
+    { RKR_Check_Button* o = Pre_Serve = new RKR_Check_Button(30, 80, 20, 20, "Preserve Gain/Master when Preset change");
       Pre_Serve->box(FL_NO_BOX);
       Pre_Serve->down_box(FL_DOWN_BOX);
       Pre_Serve->color(FL_BACKGROUND_COLOR);
@@ -1213,7 +1213,7 @@ this->when(FL_WHEN_RELEASE);
       Pre_Serve->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 1; // 10 - 11
     } // RKR_Check_Button* Pre_Serve
-    { RKR_Check_Button* o = Update_TAP = new RKR_Check_Button(30, 100, 21, 20, "Update TapTempo when Preset change");
+    { RKR_Check_Button* o = Update_TAP = new RKR_Check_Button(30, 100, 20, 20, "Update TapTempo when Preset change");
       Update_TAP->box(FL_NO_BOX);
       Update_TAP->down_box(FL_DOWN_BOX);
       Update_TAP->color(FL_BACKGROUND_COLOR);
@@ -1227,7 +1227,7 @@ this->when(FL_WHEN_RELEASE);
       Update_TAP->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 1; // 10 - 11
     } // RKR_Check_Button* Update_TAP
-    { RKR_Check_Button* o = UPSAMPLE_C = new RKR_Check_Button(30, 124, 23, 20, "Upsampling");
+    { RKR_Check_Button* o = UPSAMPLE_C = new RKR_Check_Button(30, 140, 20, 20, "Upsampling");
       UPSAMPLE_C->box(FL_NO_BOX);
       UPSAMPLE_C->down_box(FL_DOWN_BOX);
       UPSAMPLE_C->color(FL_BACKGROUND_COLOR);
@@ -1241,7 +1241,7 @@ this->when(FL_WHEN_RELEASE);
       UPSAMPLE_C->when(FL_WHEN_CHANGED);
       o->m_start_font_offset = 1; // 10 - 11
     } // RKR_Check_Button* UPSAMPLE_C
-    { Upr_Amo = new RKR_Choice(179, 126, 47, 18, "Amount");
+    { Upr_Amo = new RKR_Choice(179, 142, 47, 18, "Amount");
       Upr_Amo->box(FL_FLAT_BOX);
       Upr_Amo->down_box(FL_BORDER_BOX);
       Upr_Amo->color(FL_BACKGROUND_COLOR);
@@ -1257,7 +1257,7 @@ this->when(FL_WHEN_RELEASE);
       Upr_Amo->when(FL_WHEN_RELEASE);
       Upr_Amo->menu(menu_Upr_Amo);
     } // RKR_Choice* Upr_Amo
-    { Upr_Qual = new RKR_Choice(252, 126, 72, 18, "Up");
+    { Upr_Qual = new RKR_Choice(252, 142, 72, 18, "Up");
       Upr_Qual->box(FL_FLAT_BOX);
       Upr_Qual->down_box(FL_BORDER_BOX);
       Upr_Qual->color(FL_BACKGROUND_COLOR);
@@ -1273,7 +1273,7 @@ this->when(FL_WHEN_RELEASE);
       Upr_Qual->when(FL_WHEN_RELEASE);
       Upr_Qual->menu(menu_Upr_Qual);
     } // RKR_Choice* Upr_Qual
-    { RKR_Choice* o = Downr_Qual = new RKR_Choice(364, 126, 73, 18, "Down");
+    { RKR_Choice* o = Downr_Qual = new RKR_Choice(364, 142, 73, 18, "Down");
       Downr_Qual->box(FL_FLAT_BOX);
       Downr_Qual->down_box(FL_BORDER_BOX);
       Downr_Qual->color(FL_BACKGROUND_COLOR);
@@ -1289,7 +1289,7 @@ this->when(FL_WHEN_RELEASE);
       Downr_Qual->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
     } // RKR_Choice* Downr_Qual
-    { loop_Label = new RKR_Box(30, 149, 121, 17, "Looper Size Seconds");
+    { loop_Label = new RKR_Box(30, 170, 113, 17, "Looper Size Seconds");
       loop_Label->box(FL_NO_BOX);
       loop_Label->color(FL_BACKGROUND_COLOR);
       loop_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1301,7 +1301,7 @@ this->when(FL_WHEN_RELEASE);
       loop_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       loop_Label->when(FL_WHEN_NEVER);
     } // RKR_Box* loop_Label
-    { L_SIZE = new RKR_Counter(144, 149, 47, 18);
+    { L_SIZE = new RKR_Counter(144, 170, 47, 18);
       L_SIZE->type(1);
       L_SIZE->box(FL_UP_BOX);
       L_SIZE->color(FL_BACKGROUND_COLOR);
@@ -1319,7 +1319,7 @@ this->when(FL_WHEN_RELEASE);
       L_SIZE->align(Fl_Align(FL_ALIGN_LEFT));
       L_SIZE->when(FL_WHEN_RELEASE);
     } // RKR_Counter* L_SIZE
-    { LM_Volume = new RKR_Counter(389, 149, 47, 18, "Looper Metronome Volume  ");
+    { LM_Volume = new RKR_Counter(389, 170, 47, 18, "Looper Metronome Volume  ");
       LM_Volume->type(1);
       LM_Volume->box(FL_UP_BOX);
       LM_Volume->color(FL_BACKGROUND_COLOR);
@@ -1337,7 +1337,7 @@ this->when(FL_WHEN_RELEASE);
       LM_Volume->align(Fl_Align(FL_ALIGN_LEFT));
       LM_Volume->when(FL_WHEN_RELEASE);
     } // RKR_Counter* LM_Volume
-    { Har_Q_Label = new RKR_Box(30, 173, 121, 17, "Harmonizer Quality");
+    { Har_Q_Label = new RKR_Box(30, 195, 110, 17, "Harmonizer Quality");
       Har_Q_Label->box(FL_NO_BOX);
       Har_Q_Label->color(FL_BACKGROUND_COLOR);
       Har_Q_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1349,7 +1349,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Q_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Har_Q_Label->when(FL_WHEN_NEVER);
     } // RKR_Box* Har_Q_Label
-    { Har_Qual = new RKR_Choice(144, 173, 47, 18, "   ");
+    { Har_Qual = new RKR_Choice(144, 195, 47, 18, "   ");
       Har_Qual->box(FL_FLAT_BOX);
       Har_Qual->down_box(FL_BORDER_BOX);
       Har_Qual->color(FL_BACKGROUND_COLOR);
@@ -1365,7 +1365,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Qual->when(FL_WHEN_RELEASE);
       Har_Qual->menu(menu_Har_Qual);
     } // RKR_Choice* Har_Qual
-    { Ste_Qual = new RKR_Choice(307, 173, 47, 18, "StereoHarm Quality");
+    { Ste_Qual = new RKR_Choice(307, 195, 47, 18, "StereoHarm Quality");
       Ste_Qual->box(FL_FLAT_BOX);
       Ste_Qual->down_box(FL_BORDER_BOX);
       Ste_Qual->color(FL_BACKGROUND_COLOR);
@@ -1381,7 +1381,7 @@ this->when(FL_WHEN_RELEASE);
       Ste_Qual->when(FL_WHEN_RELEASE);
       Ste_Qual->menu(menu_Ste_Qual);
     } // RKR_Choice* Ste_Qual
-    { Voc_Band_Label = new RKR_Box(30, 196, 121, 17, "Vocoder Bands");
+    { Voc_Band_Label = new RKR_Box(30, 222, 121, 17, "Vocoder Bands");
       Voc_Band_Label->box(FL_NO_BOX);
       Voc_Band_Label->color(FL_BACKGROUND_COLOR);
       Voc_Band_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1393,7 +1393,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Band_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Voc_Band_Label->when(FL_WHEN_NEVER);
     } // RKR_Box* Voc_Band_Label
-    { Voc_Bands = new RKR_Choice(144, 196, 47, 18, "        ");
+    { Voc_Bands = new RKR_Choice(144, 222, 47, 18, "        ");
       Voc_Bands->box(FL_FLAT_BOX);
       Voc_Bands->down_box(FL_BORDER_BOX);
       Voc_Bands->color(FL_BACKGROUND_COLOR);
@@ -1409,7 +1409,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Bands->when(FL_WHEN_RELEASE);
       Voc_Bands->menu(menu_Voc_Bands);
     } // RKR_Choice* Voc_Bands
-    { RKR_Check_Button* o = FLPosition = new RKR_Check_Button(30, 222, 23, 20, "Limiter before Output Volume");
+    { RKR_Check_Button* o = FLPosition = new RKR_Check_Button(30, 118, 20, 20, "Limiter before Output Volume");
       FLPosition->box(FL_NO_BOX);
       FLPosition->down_box(FL_DOWN_BOX);
       FLPosition->color(FL_BACKGROUND_COLOR);
@@ -1423,7 +1423,7 @@ this->when(FL_WHEN_RELEASE);
       FLPosition->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 1; // 10 - 11
     } // RKR_Check_Button* FLPosition
-    { RKR_Check_Button* o = DB6B = new RKR_Check_Button(240, 222, 23, 20, "+6dB Final Limiter ");
+    { RKR_Check_Button* o = DB6B = new RKR_Check_Button(240, 120, 20, 20, "+6dB Final Limiter ");
       DB6B->box(FL_NO_BOX);
       DB6B->down_box(FL_DOWN_BOX);
       DB6B->color(FL_BACKGROUND_COLOR);
