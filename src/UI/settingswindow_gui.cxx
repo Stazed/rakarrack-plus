@@ -950,7 +950,6 @@ this->when(FL_WHEN_RELEASE);
     Look->labelcolor(FL_BACKGROUND2_COLOR);
     Look->user_data((void*)(1));
     Look->align(Fl_Align(FL_ALIGN_LEFT));
-    Look->hide();
     { Fondo6 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo6
     { RKR_Choice* o = scheme_ch = new RKR_Choice(30, 59, 88, 20, "Schema");
@@ -2041,6 +2040,7 @@ this->when(FL_WHEN_RELEASE);
     MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
     MIDI_SET->user_data((void*)(1));
     MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    MIDI_SET->hide();
     { Fondo8 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo8
     { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 18, 20, "Auto Connect MIDI In");
@@ -2233,11 +2233,21 @@ this->when(FL_WHEN_RELEASE);
       o->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* o
-    { scroll = new Fl_Scroll(30, 366, 480, 162);
+    { RKR_Scroll* o = scroll = new RKR_Scroll(30, 366, 480, 162);
       scroll->type(6);
+      scroll->box(FL_NO_BOX);
+      scroll->color(FL_BACKGROUND_COLOR);
+      scroll->selection_color(FL_BACKGROUND_COLOR);
+      scroll->labeltype(FL_NORMAL_LABEL);
+      scroll->labelfont(0);
+      scroll->labelsize(14);
+      scroll->labelcolor(FL_FOREGROUND_COLOR);
       scroll->user_data((void*)(5000));
+      scroll->align(Fl_Align(FL_ALIGN_TOP));
+      scroll->when(FL_WHEN_RELEASE);
+      o->m_start_label_offset = 4; // 10 - 14
       scroll->end();
-    } // Fl_Scroll* scroll
+    } // RKR_Scroll* scroll
     MIDI_SET->end();
   } // Fl_Group* MIDI_SET
   { JACK_SET = new Fl_Group(5, 26, 518, 554, "Jack");
@@ -2461,72 +2471,78 @@ Fl_Menu_Item * SettingsWindowGui::get_menu_Har_Downsample() {
 
 void SettingsWindowGui::make_table_window() {
   // Fill settings midi table scroll
-    scroll->begin();
-  
-    for (intptr_t y=0; y<128; y++)
-    {
-        char buf[20];
-        sprintf(buf,"%d",(int)y);
-        Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
-        b->box(FL_DOWN_BOX);
-        b->copy_label(buf);
-        b->labelcolor(FL_WHITE);
-        b->user_data((void *) c_bank_number);
-  
-        Fl_Choice* cb = new Fl_Choice(120,y*25+25,60,20);
-        cb->copy_label("Bank");
-        cb->labelcolor(FL_WHITE);
-        cb->add("1");
-        cb->add("2");
-        cb->add("3");
-        cb->add("U");
-        cb->user_data((void *) (c_bank_used + y));
-        cb->callback((Fl_Callback *)m_rgui->bank_click);
-  
-        Fl_Choice* cp = new Fl_Choice(240,y*25+25,230,20);
-        cp->copy_label("Preset");
-        cp->labelcolor(FL_WHITE);
-        cp->user_data((void *) (c_preset_used + y));
-        cp->callback((Fl_Callback *)m_rgui->p_click);
-    }
-  
-    scroll->end();
-  
-    Put_MidiTable();
-    scroll->scroll_to(-10,-344);
+      scroll->begin();
+    
+      for (intptr_t y=0; y<128; y++)
+      {
+          char buf[20];
+          sprintf(buf,"%d",(int)y);
+          Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+          b->box(FL_DOWN_BOX);
+          b->copy_label(buf);
+          b->labelcolor(FL_WHITE);
+          b->user_data((void *) c_bank_number);
+    
+          RKR_Choice* cb = new RKR_Choice(120,y*25+25,60,20);
+          cb->copy_label("Bank");
+          cb->labelcolor(FL_WHITE);
+          cb->add("1");
+          cb->add("2");
+          cb->add("3");
+          cb->add("U");
+          cb->user_data((void *) (c_bank_used + y));
+          cb->callback((Fl_Callback *)m_rgui->bank_click);
+          cb->m_start_label_offset = 4;
+          cb->m_start_text_offset = 4;
+    
+          RKR_Choice* cp = new RKR_Choice(240,y*25+25,230,20);
+          cp->copy_label("Preset");
+          cp->labelcolor(FL_WHITE);
+          cp->user_data((void *) (c_preset_used + y));
+          cp->callback((Fl_Callback *)m_rgui->p_click);
+          cp->m_start_label_offset = 4;
+          cp->m_start_text_offset = 4;
+      }
+    
+      scroll->end();
+    
+      Put_MidiTable();
+      scroll->scroll_to(-30,-384);
 }
 
 void SettingsWindowGui::fill_mptable(int num,int value) {
   // Fill settings scroll
-    for (int t=0; t < scroll->children(); t++)
-    {
-        Fl_Widget *w = scroll->child(t);
-        long long temp = (long long) w->user_data();
-        if ((int)temp == num)
-        {
-            Fl_Choice *p = (Fl_Choice * ) w;
-            p->clear();
-            for(int i=1; i<=60; i++)
-                p->add(m_rkr->B_Names[value][i].Preset_Name);
-            p->redraw();
-            break;
-        }
-    }
+      for (int t=0; t < scroll->children(); t++)
+      {
+          Fl_Widget *w = scroll->child(t);
+          long long temp = (long long) w->user_data();
+          if ((int)temp == num)
+          {
+              RKR_Choice *p = (RKR_Choice * ) w;
+              p->clear();
+              for(int i=1; i<=60; i++)
+              {
+                  p->add(m_rkr->B_Names[value][i].Preset_Name);
+              }
+              p->redraw();
+              break;
+          }
+      }
 }
 
 void SettingsWindowGui::mtfillvalue(int num,int value) {
   // fill settings scroll midi table
-    for (int t=0; t < scroll->children(); t++)
-    {
-        Fl_Widget *w = scroll->child(t);
-        long long temp = (long long) w->user_data();
-        if ((int)temp == num)
-        {
-            Fl_Choice *p = (Fl_Choice * ) w;
-            p->value(value);
-            break;
-        }
-    }
+      for (int t=0; t < scroll->children(); t++)
+      {
+          Fl_Widget *w = scroll->child(t);
+          long long temp = (long long) w->user_data();
+          if ((int)temp == num)
+          {
+              RKR_Choice *p = (RKR_Choice * ) w;
+              p->value(value);
+              break;
+          }
+      }
 }
 
 void SettingsWindowGui::Put_MidiTable() {

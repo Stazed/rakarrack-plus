@@ -12,12 +12,12 @@
 #include "RKR_Entry_Input.h"
 #include "RKR_File_Input.h"
 #include "RKR_Group.h"
+#include "RKR_Scroll.h"
 #include "RKR_Tabs.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Group.H>
-#include <FL/Fl_Scroll.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
   void _SettingsWindowGui();
@@ -395,7 +395,7 @@ private:
   inline void cb_Save_i(RKR_Button*, void*);
   static void cb_Save(RKR_Button*, void*);
 public:
-  Fl_Scroll *scroll;
+  RKR_Scroll *scroll;
   Fl_Group *JACK_SET;
   Fl_Box *Fondo9;
   RKR_Check_Button *D_J_Connect;
