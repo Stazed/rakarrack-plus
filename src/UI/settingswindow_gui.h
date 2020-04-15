@@ -197,6 +197,7 @@ private:
   inline void cb_RTrigger_i(RKR_Counter*, void*);
   static void cb_RTrigger(RKR_Counter*, void*);
 public:
+  RKR_Box *Recognize_Label;
   RKR_Choice *RC_Harm_Opti;
 private:
   inline void cb_RC_Harm_Opti_i(RKR_Choice*, void*);
@@ -345,7 +346,6 @@ private:
   inline void cb_Wave_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Wave_Up_Qua(RKR_Choice*, void*);
 public:
-  RKR_Box *Recognize_Label;
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
   Fl_Check_Button *D_A_Connect;
