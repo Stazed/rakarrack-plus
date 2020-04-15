@@ -35,6 +35,8 @@ public:
     RKR_Scroll(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
+    void set_start_height(int H){m_start_height = H;};
+    void set_start_width(int W){m_start_width = W;};
     int m_start_label_offset;
 private:
 

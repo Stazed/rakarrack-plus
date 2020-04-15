@@ -29,6 +29,8 @@
 RKR_Choice::RKR_Choice(int X, int Y, int W, int H, const char *label) : Fl_Choice(X, Y, W, H, label)
 {
     m_previous_font_size = g_default_font_size;
+    m_start_x = X;
+    m_start_y = Y;
     m_start_width = W;
     m_start_height = H;
     m_start_label_offset = 0;

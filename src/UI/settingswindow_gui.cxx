@@ -2477,11 +2477,12 @@ void SettingsWindowGui::make_table_window() {
       {
           char buf[20];
           sprintf(buf,"%d",(int)y);
-          Fl_Box* b = new Fl_Box(6,y*25+22,60,25);
+          RKR_Box* b = new RKR_Box(6,y*25+22,60,25);
           b->box(FL_DOWN_BOX);
           b->copy_label(buf);
-          b->labelcolor(FL_WHITE);
+          b->labelcolor(FL_BLACK);
           b->user_data((void *) c_bank_number);
+          b->m_start_font_offset = 4;
     
           RKR_Choice* cb = new RKR_Choice(120,y*25+25,60,20);
           cb->copy_label("Bank");
@@ -2505,9 +2506,13 @@ void SettingsWindowGui::make_table_window() {
       }
     
       scroll->end();
-    
+  
+      scroll->set_start_width(580);
+      scroll->set_start_height(177);
+  
       Put_MidiTable();
-      scroll->scroll_to(-30,-384);
+  
+      scroll->scroll_to(-30,-330);
 }
 
 void SettingsWindowGui::fill_mptable(int num,int value) {
