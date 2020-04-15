@@ -933,8 +933,17 @@ this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo2 = new Fl_Box(1, 1, 525, 575);
 } // Fl_Box* Fondo2
-{ STabs = new Fl_Tabs(0, 0, 530, 580);
+{ RKR_Tabs* o = STabs = new RKR_Tabs(0, 0, 530, 580);
+  STabs->box(FL_THIN_UP_BOX);
+  STabs->color(FL_BACKGROUND_COLOR);
+  STabs->selection_color(FL_BACKGROUND_COLOR);
+  STabs->labeltype(FL_NORMAL_LABEL);
+  STabs->labelfont(0);
+  STabs->labelsize(14);
+  STabs->labelcolor(FL_FOREGROUND_COLOR);
   STabs->user_data((void*)(1));
+  STabs->align(Fl_Align(FL_ALIGN_TOP));
+  STabs->when(FL_WHEN_RELEASE);
   { Look = new Fl_Group(5, 26, 518, 554, "Look");
     Look->box(FL_DOWN_FRAME);
     Look->labelfont(1);
@@ -2433,8 +2442,9 @@ this->when(FL_WHEN_RELEASE);
     } // RKR_Button* UD_Browser
     BANK_SET->end();
   } // Fl_Group* BANK_SET
+  o->m_start_label_offset = 4; // 10 - 4
   STabs->end();
-} // Fl_Tabs* STabs
+} // RKR_Tabs* STabs
 this->m_rkr = NULL;
 this->m_rgui = NULL;
 end();

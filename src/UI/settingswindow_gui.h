@@ -12,10 +12,10 @@
 #include "RKR_Entry_Input.h"
 #include "RKR_File_Input.h"
 #include "RKR_Group.h"
+#include "RKR_Tabs.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Tabs.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Scroll.H>
 
@@ -26,7 +26,7 @@ public:
   SettingsWindowGui(int W, int H, const char *L = 0);
   SettingsWindowGui();
   Fl_Box *Fondo2;
-  Fl_Tabs *STabs;
+  RKR_Tabs *STabs;
   Fl_Group *Look;
   Fl_Box *Fondo6;
   RKR_Choice *scheme_ch;

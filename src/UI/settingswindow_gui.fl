@@ -26,7 +26,10 @@ decl {\#include "RKR_Entry_Input.h"} {public global
 decl {\#include "RKR_File_Input.h"} {public global
 }
 
-decl {\#include "RKR_Group.h"} {selected public global
+decl {\#include "RKR_Group.h"} {public global
+}
+
+decl {\#include "RKR_Tabs.h"} {selected public global
 }
 
 widget_class SettingsWindowGui {open
@@ -47,6 +50,8 @@ m_rgui= _rgui;} {}
   Fl_Tabs STabs {
     user_data 1 open
     xywh {0 0 530 580}
+    code0 {o->m_start_label_offset = 4; // 10 - 4}
+    class RKR_Tabs
   } {
     Fl_Group Look {
       label Look
