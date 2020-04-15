@@ -941,28 +941,27 @@ this->when(FL_WHEN_RELEASE);
     Look->labelcolor(FL_BACKGROUND2_COLOR);
     Look->user_data((void*)(1));
     Look->align(Fl_Align(FL_ALIGN_LEFT));
-    Look->hide();
     { Fondo6 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo6
-    { RKR_Choice* o = scheme_ch = new RKR_Choice(60, 50, 88, 20, "Schema");
+    { RKR_Choice* o = scheme_ch = new RKR_Choice(30, 59, 88, 20, "Schema");
       scheme_ch->box(FL_FLAT_BOX);
       scheme_ch->down_box(FL_BORDER_BOX);
       scheme_ch->color(FL_BACKGROUND_COLOR);
       scheme_ch->selection_color(FL_SELECTION_COLOR);
       scheme_ch->labeltype(FL_NORMAL_LABEL);
       scheme_ch->labelfont(0);
-      scheme_ch->labelsize(11);
+      scheme_ch->labelsize(13);
       scheme_ch->labelcolor(FL_BACKGROUND2_COLOR);
       scheme_ch->textsize(12);
       scheme_ch->textcolor(FL_BACKGROUND2_COLOR);
       scheme_ch->callback((Fl_Callback*)cb_scheme_ch);
-      scheme_ch->align(Fl_Align(FL_ALIGN_LEFT));
+      scheme_ch->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       scheme_ch->when(FL_WHEN_RELEASE);
       scheme_ch->menu(menu_scheme_ch);
-      o->m_start_label_offset = 1; // 10 - 11
+      o->m_start_label_offset = 3; // 10 - 13
       o->m_start_text_offset = 2; // 10 - 12
     } // RKR_Choice* scheme_ch
-    { RKR_Browser* o = Font_Bro = new RKR_Browser(20, 100, 400, 225, "Font");
+    { RKR_Browser* o = Font_Bro = new RKR_Browser(30, 100, 400, 225, "Font");
       Font_Bro->type(1);
       Font_Bro->box(FL_NO_BOX);
       Font_Bro->color(FL_BACKGROUND2_COLOR);
@@ -977,19 +976,19 @@ this->when(FL_WHEN_RELEASE);
       o->m_start_label_offset = 4; // 10 - 14
       o->m_start_text_offset = 4; // 10 - 14
     } // RKR_Browser* Font_Bro
-    { RKR_Box* o = FSLabel = new RKR_Box(10, 333, 60, 17, "Font Size");
+    { RKR_Box* o = FSLabel = new RKR_Box(30, 333, 60, 17, "Font Size");
       FSLabel->box(FL_NO_BOX);
       FSLabel->color(FL_BACKGROUND_COLOR);
       FSLabel->selection_color(FL_BACKGROUND_COLOR);
       FSLabel->labeltype(FL_NORMAL_LABEL);
       FSLabel->labelfont(0);
-      FSLabel->labelsize(11);
+      FSLabel->labelsize(13);
       FSLabel->labelcolor(FL_BACKGROUND2_COLOR);
-      FSLabel->align(Fl_Align(FL_ALIGN_CENTER));
+      FSLabel->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       FSLabel->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 1; // 10 - 11
+      o->m_start_font_offset = 3; // 10 - 13
     } // RKR_Box* FSLabel
-    { RKR_Button* o = FSless = new RKR_Button(78, 330, 30, 20, "-");
+    { RKR_Button* o = FSless = new RKR_Button(95, 330, 30, 20, "-");
       FSless->box(FL_UP_BOX);
       FSless->color(FL_BACKGROUND_COLOR);
       FSless->selection_color(FL_BACKGROUND_COLOR);
@@ -1002,7 +1001,7 @@ this->when(FL_WHEN_RELEASE);
       FSless->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* FSless
-    { RKR_Button* o = FSplus = new RKR_Button(113, 330, 30, 20, "+");
+    { RKR_Button* o = FSplus = new RKR_Button(130, 330, 30, 20, "+");
       FSplus->box(FL_UP_BOX);
       FSplus->color(FL_BACKGROUND_COLOR);
       FSplus->selection_color(FL_BACKGROUND_COLOR);
@@ -1015,7 +1014,7 @@ this->when(FL_WHEN_RELEASE);
       FSplus->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* FSplus
-    { RKR_Button* o = FSReset = new RKR_Button(148, 330, 57, 20, "Reset");
+    { RKR_Button* o = FSReset = new RKR_Button(165, 330, 57, 20, "Reset");
       FSReset->box(FL_UP_BOX);
       FSReset->color(FL_BACKGROUND_COLOR);
       FSReset->selection_color(FL_BACKGROUND_COLOR);
@@ -1028,19 +1027,19 @@ this->when(FL_WHEN_RELEASE);
       FSReset->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* FSReset
-    { RKR_Box* o = CLLabel = new RKR_Box(10, 358, 40, 19, "Colors");
+    { RKR_Box* o = CLLabel = new RKR_Box(30, 358, 40, 19, "Colors");
       CLLabel->box(FL_NO_BOX);
       CLLabel->color(FL_BACKGROUND_COLOR);
       CLLabel->selection_color(FL_BACKGROUND_COLOR);
       CLLabel->labeltype(FL_NORMAL_LABEL);
       CLLabel->labelfont(0);
-      CLLabel->labelsize(11);
+      CLLabel->labelsize(13);
       CLLabel->labelcolor(FL_BACKGROUND2_COLOR);
-      CLLabel->align(Fl_Align(FL_ALIGN_CENTER));
+      CLLabel->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       CLLabel->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 1; // 10 - 11
+      o->m_start_font_offset = 3; // 10 - 13
     } // RKR_Box* CLLabel
-    { RKR_Button* o = B_C = new RKR_Button(15, 380, 90, 25, "Buttons");
+    { RKR_Button* o = B_C = new RKR_Button(30, 380, 90, 25, "Buttons");
       B_C->box(FL_UP_BOX);
       B_C->color(FL_BACKGROUND_COLOR);
       B_C->selection_color(FL_BACKGROUND_COLOR);
@@ -1053,7 +1052,7 @@ this->when(FL_WHEN_RELEASE);
       B_C->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* B_C
-    { RKR_Button* o = A_C = new RKR_Button(120, 380, 90, 25, "Labels");
+    { RKR_Button* o = A_C = new RKR_Button(130, 380, 90, 25, "Labels");
       A_C->box(FL_UP_BOX);
       A_C->color(FL_BACKGROUND_COLOR);
       A_C->selection_color(FL_BACKGROUND_COLOR);
@@ -1066,7 +1065,7 @@ this->when(FL_WHEN_RELEASE);
       A_C->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* A_C
-    { RKR_Button* o = L_C = new RKR_Button(225, 380, 90, 25, "Leds");
+    { RKR_Button* o = L_C = new RKR_Button(230, 380, 90, 25, "Leds");
       L_C->box(FL_UP_BOX);
       L_C->color(FL_BACKGROUND_COLOR);
       L_C->selection_color(FL_BACKGROUND_COLOR);
@@ -1092,28 +1091,28 @@ this->when(FL_WHEN_RELEASE);
       K_C->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* K_C
-    { RKR_Check_Button* o = Enable_Back = new RKR_Check_Button(162, 409, 23, 20, "Enable Background Image");
+    { RKR_Check_Button* o = Enable_Back = new RKR_Check_Button(30, 415, 23, 20, "Enable Background Image");
       Enable_Back->box(FL_NO_BOX);
       Enable_Back->down_box(FL_DOWN_BOX);
       Enable_Back->color(FL_BACKGROUND_COLOR);
       Enable_Back->selection_color(FL_FOREGROUND_COLOR);
       Enable_Back->labeltype(FL_NORMAL_LABEL);
       Enable_Back->labelfont(0);
-      Enable_Back->labelsize(11);
+      Enable_Back->labelsize(12);
       Enable_Back->labelcolor(FL_BACKGROUND2_COLOR);
       Enable_Back->callback((Fl_Callback*)cb_Enable_Back);
-      Enable_Back->align(Fl_Align(FL_ALIGN_LEFT));
+      Enable_Back->align(Fl_Align(FL_ALIGN_RIGHT));
       Enable_Back->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 1; // 10 - 11
+      o->m_start_font_offset = 2; // 10 - 12
     } // RKR_Check_Button* Enable_Back
-    { BackFiname = new Fl_File_Input(10, 445, 390, 30, "Background Image");
-      BackFiname->labelsize(11);
+    { BackFiname = new Fl_File_Input(30, 455, 390, 30, "Background Image");
+      BackFiname->labelsize(12);
       BackFiname->labelcolor(FL_BACKGROUND2_COLOR);
       BackFiname->textsize(12);
       BackFiname->textcolor(FL_BACKGROUND2_COLOR);
       BackFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
     } // Fl_File_Input* BackFiname
-    { RKR_Button* o = BI_Browser = new RKR_Button(410, 455, 65, 20, "Browse");
+    { RKR_Button* o = BI_Browser = new RKR_Button(427, 465, 65, 20, "Browse");
       BI_Browser->box(FL_UP_BOX);
       BI_Browser->color(FL_BACKGROUND_COLOR);
       BI_Browser->selection_color(FL_BACKGROUND_COLOR);
@@ -1126,33 +1125,33 @@ this->when(FL_WHEN_RELEASE);
       BI_Browser->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* BI_Browser
-    { RKR_Check_Button* o = Enable_DeacHide = new RKR_Check_Button(169, 500, 23, 20, "Hide Unused Effect Widgets");
+    { RKR_Check_Button* o = Enable_DeacHide = new RKR_Check_Button(30, 500, 23, 20, "Hide Unused Effect Widgets");
       Enable_DeacHide->box(FL_NO_BOX);
       Enable_DeacHide->down_box(FL_DOWN_BOX);
       Enable_DeacHide->color(FL_BACKGROUND_COLOR);
       Enable_DeacHide->selection_color(FL_FOREGROUND_COLOR);
       Enable_DeacHide->labeltype(FL_NORMAL_LABEL);
       Enable_DeacHide->labelfont(0);
-      Enable_DeacHide->labelsize(11);
+      Enable_DeacHide->labelsize(12);
       Enable_DeacHide->labelcolor(FL_BACKGROUND2_COLOR);
       Enable_DeacHide->callback((Fl_Callback*)cb_Enable_DeacHide);
-      Enable_DeacHide->align(Fl_Align(FL_ALIGN_LEFT));
+      Enable_DeacHide->align(Fl_Align(FL_ALIGN_RIGHT));
       Enable_DeacHide->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 1; // 10 - 11
+      o->m_start_font_offset = 2; // 10 - 12
     } // RKR_Check_Button* Enable_DeacHide
-    { RKR_Check_Button* o = Enable_Scale = new RKR_Check_Button(390, 500, 23, 20, "Set Main Window Scalable");
+    { RKR_Check_Button* o = Enable_Scale = new RKR_Check_Button(30, 525, 23, 20, "Set Main Window Scalable");
       Enable_Scale->box(FL_NO_BOX);
       Enable_Scale->down_box(FL_DOWN_BOX);
       Enable_Scale->color(FL_BACKGROUND_COLOR);
       Enable_Scale->selection_color(FL_FOREGROUND_COLOR);
       Enable_Scale->labeltype(FL_NORMAL_LABEL);
       Enable_Scale->labelfont(0);
-      Enable_Scale->labelsize(11);
+      Enable_Scale->labelsize(12);
       Enable_Scale->labelcolor(FL_BACKGROUND2_COLOR);
       Enable_Scale->callback((Fl_Callback*)cb_Enable_Scale);
-      Enable_Scale->align(Fl_Align(FL_ALIGN_LEFT));
+      Enable_Scale->align(Fl_Align(FL_ALIGN_RIGHT));
       Enable_Scale->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 1; // 10 - 11
+      o->m_start_font_offset = 2; // 10 - 12
     } // RKR_Check_Button* Enable_Scale
     Look->end();
   } // Fl_Group* Look
@@ -1162,6 +1161,7 @@ this->when(FL_WHEN_RELEASE);
     AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
     AUDIO_SET->user_data((void*)(1));
     AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    AUDIO_SET->hide();
     { Fondo7 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo7
     { RKR_Check_Button* o = INSTATE = new RKR_Check_Button(30, 29, 23, 20, "FX On at start");
