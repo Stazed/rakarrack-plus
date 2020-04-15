@@ -1169,6 +1169,7 @@ this->when(FL_WHEN_RELEASE);
     AUDIO_SET->labelcolor(FL_BACKGROUND2_COLOR);
     AUDIO_SET->user_data((void*)(1));
     AUDIO_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    AUDIO_SET->hide();
     { Fondo7 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo7
     { RKR_Check_Button* o = INSTATE = new RKR_Check_Button(30, 40, 20, 20, "FX On at start");
@@ -2031,7 +2032,6 @@ this->when(FL_WHEN_RELEASE);
     MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
     MIDI_SET->user_data((void*)(1));
     MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    MIDI_SET->hide();
     { Fondo8 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo8
     { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 18, 20, "Auto Connect MIDI In");
@@ -2125,11 +2125,16 @@ this->when(FL_WHEN_RELEASE);
       o->m_start_label_offset = 1; // 10 - 11
       o->m_start_text_offset = 2; // 10 - 12
     } // RKR_Counter* Stereo_Har_In_Counter
-    { wMIDI = new Fl_Group(30, 266, 180, 23, "MIDI implementation");
+    { RKR_Group* o = wMIDI = new RKR_Group(30, 266, 180, 23, "MIDI implementation");
       wMIDI->box(FL_DOWN_FRAME);
+      wMIDI->color(FL_BACKGROUND_COLOR);
+      wMIDI->selection_color(FL_BACKGROUND_COLOR);
+      wMIDI->labeltype(FL_NORMAL_LABEL);
+      wMIDI->labelfont(0);
       wMIDI->labelsize(12);
       wMIDI->labelcolor(FL_BACKGROUND2_COLOR);
       wMIDI->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+      wMIDI->when(FL_WHEN_RELEASE);
       { RKR_Check_Button* o = Mw0 = new RKR_Check_Button(35, 268, 18, 18, "Default");
         Mw0->type(102);
         Mw0->box(FL_NO_BOX);
@@ -2160,8 +2165,9 @@ this->when(FL_WHEN_RELEASE);
         Mw1->when(FL_WHEN_RELEASE);
         o->m_start_font_offset = 2; // 10 - 12
       } // RKR_Check_Button* Mw1
+      o->m_start_label_offset = 2; // 10 - 12
       wMIDI->end();
-    } // Fl_Group* wMIDI
+    } // RKR_Group* wMIDI
     { RKR_Check_Button* o = AAssign = new RKR_Check_Button(30, 308, 16, 15, "Auto Assign MIDI Learn");
       AAssign->box(FL_NO_BOX);
       AAssign->down_box(FL_DOWN_BOX);

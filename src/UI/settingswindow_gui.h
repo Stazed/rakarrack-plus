@@ -11,6 +11,7 @@
 #include "RKR_Counter.h"
 #include "RKR_Entry_Input.h"
 #include "RKR_File_Input.h"
+#include "RKR_Group.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
@@ -369,7 +370,7 @@ private:
   inline void cb_Stereo_Har_In_Counter_i(RKR_Counter*, void*);
   static void cb_Stereo_Har_In_Counter(RKR_Counter*, void*);
 public:
-  Fl_Group *wMIDI;
+  RKR_Group *wMIDI;
   RKR_Check_Button *Mw0;
 private:
   inline void cb_Mw0_i(RKR_Check_Button*, void*);

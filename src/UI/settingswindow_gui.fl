@@ -26,6 +26,9 @@ decl {\#include "RKR_Entry_Input.h"} {public global
 decl {\#include "RKR_File_Input.h"} {public global
 }
 
+decl {\#include "RKR_Group.h"} {selected public global
+}
+
 widget_class SettingsWindowGui {open
   xywh {324 159 530 580} type Double
   code0 {\#include "rakarrack.h"}
@@ -264,7 +267,7 @@ m_rkr->change_scale = 1; // true}
     Fl_Group AUDIO_SET {
       label Audio
       user_data 1
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo7 {
         xywh {5 26 518 554}
@@ -391,7 +394,7 @@ m_rgui->Show_Next_Time();}
         label Down
         callback {m_rkr->DownQual =(int) o->value();
 
-m_rgui->Show_Next_Time();} selected
+m_rgui->Show_Next_Time();}
         xywh {364 142 73 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         class RKR_Choice
@@ -1035,7 +1038,7 @@ m_rgui->Show_Next_Time();}
     Fl_Group MIDI_SET {
       label MIDI
       user_data 1
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo8 {
         xywh {5 26 518 554}
@@ -1091,6 +1094,8 @@ m_rkr->Conecta();}
       Fl_Group wMIDI {
         label {MIDI implementation}
         xywh {30 266 180 23} box DOWN_FRAME labelsize 12 labelcolor 7 align 5
+        code0 {o->m_start_label_offset = 2; // 10 - 12}
+        class RKR_Group
       } {
         Fl_Check_Button Mw0 {
           label Default
