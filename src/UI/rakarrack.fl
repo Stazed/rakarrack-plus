@@ -1249,7 +1249,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1403,9 +1403,9 @@ BankWindow->hide();}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
-          callback {strcpy(rkr->Preset_Name,o->value());}
+          callback {strcpy(rkr->Preset_Name,o->value());} selected
           xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
-          code0 {o->m_start_font_offset = 14; // (default 10) 10 - 24 = 14}
+          code0 {o->m_start_text_offset = 14; // (default 10) 10 - 24 = 14}
           code1 {o->maximum_size(22);}
           class RKR_Entry_Input
         }
@@ -1729,7 +1729,7 @@ o->hide();} open
     } {}
     Fl_Window Settings {
       callback {save_stat(3);
-o->hide();} open selected
+o->hide();} open
       xywh {390 434 640 580} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "settingswindow_gui.h"}
       code1 {o->initialize(rkr, this);}

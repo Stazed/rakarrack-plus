@@ -20,8 +20,11 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_Counter.h"} {public global
 }
 
+decl {\#include "RKR_Entry_Input.h"} {public global
+}
+
 widget_class SettingsWindowGui {open
-  xywh {88 171 640 580} type Double
+  xywh {153 204 640 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -1138,7 +1141,7 @@ scroll->deactivate();}
     Fl_Group JACK_SET {
       label Jack
       user_data 1 open
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo9 {
         xywh {5 26 630 554}
@@ -1153,7 +1156,7 @@ else JackCo->deactivate();}
         class RKR_Check_Button
       }
       Fl_Browser JackCo {
-        label {Output Ports} selected
+        label {Output Ports}
         xywh {30 85 260 140} type Multi selection_color 0 labelcolor 7 align 5 textcolor 7
         code0 {o->m_start_label_offset = 4; // 10 - 14}
         code1 {o->m_start_text_offset = 4; // 10 - 14}
@@ -1178,32 +1181,41 @@ else JackIn->deactivate();}
     }
     Fl_Group MISC_SET {
       label Misc
-      user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 open
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo10 {
         xywh {5 26 630 554}
       }
       Fl_Input Username {
-        label {Username:}
-        callback {m_rkr->UserRealName=(char*) o->value();}
-        xywh {80 32 240 21} labelsize 11 labelcolor 7 textsize 11 textcolor 7
+        label Username
+        callback {m_rkr->UserRealName=(char*) o->value();} selected
+        xywh {30 58 240 21} labelcolor 7 align 5 textcolor 7
+        code0 {o->m_start_label_offset = 4; // 10 - 14}
+        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        class RKR_Entry_Input
       }
       Fl_Check_Button MES_DIS {
         label {Disable Warnings    }
         callback {m_rkr->mess_dis=(int) o->value();}
-        xywh {132 68 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        xywh {30 90 21 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
       Fl_Check_Button T_TIMEOUT {
         label {Tap Tempo Timeout}
         callback {m_rkr->t_timeout=(int) o->value();}
-        xywh {132 88 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        xywh {30 110 21 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
       Fl_Check_Button ENA_TOOL {
         label {Enable Tooltips       }
         callback {m_rkr->ena_tool=(int) o->value();
 Fl_Tooltip::enable(m_rkr->ena_tool);}
-        xywh {132 108 21 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        xywh {30 130 21 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
     }
     Fl_Group BANK_SET {

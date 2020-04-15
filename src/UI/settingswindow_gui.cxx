@@ -852,32 +852,32 @@ void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_D_IJ_Connect_i(o,v);
 }
 
-void SettingsWindowGui::cb_Username_i(Fl_Input* o, void*) {
+void SettingsWindowGui::cb_Username_i(RKR_Entry_Input* o, void*) {
   m_rkr->UserRealName=(char*) o->value();
 }
-void SettingsWindowGui::cb_Username(Fl_Input* o, void* v) {
+void SettingsWindowGui::cb_Username(RKR_Entry_Input* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);
 }
 
-void SettingsWindowGui::cb_MES_DIS_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_MES_DIS_i(RKR_Check_Button* o, void*) {
   m_rkr->mess_dis=(int) o->value();
 }
-void SettingsWindowGui::cb_MES_DIS(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_MES_DIS(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MES_DIS_i(o,v);
 }
 
-void SettingsWindowGui::cb_T_TIMEOUT_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_T_TIMEOUT_i(RKR_Check_Button* o, void*) {
   m_rkr->t_timeout=(int) o->value();
 }
-void SettingsWindowGui::cb_T_TIMEOUT(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_T_TIMEOUT(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_T_TIMEOUT_i(o,v);
 }
 
-void SettingsWindowGui::cb_ENA_TOOL_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_ENA_TOOL_i(RKR_Check_Button* o, void*) {
   m_rkr->ena_tool=(int) o->value();
 Fl_Tooltip::enable(m_rkr->ena_tool);
 }
-void SettingsWindowGui::cb_ENA_TOOL(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_ENA_TOOL(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_ENA_TOOL_i(o,v);
 }
 
@@ -2225,6 +2225,7 @@ this->when(FL_WHEN_RELEASE);
     JACK_SET->labelcolor(FL_BACKGROUND2_COLOR);
     JACK_SET->user_data((void*)(1));
     JACK_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    JACK_SET->hide();
     { Fondo9 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo9
     { RKR_Check_Button* o = D_J_Connect = new RKR_Check_Button(30, 45, 25, 20, "Auto Connect Out");
@@ -2293,37 +2294,65 @@ this->when(FL_WHEN_RELEASE);
     MISC_SET->labelcolor(FL_BACKGROUND2_COLOR);
     MISC_SET->user_data((void*)(1));
     MISC_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    MISC_SET->hide();
     { Fondo10 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo10
-    { Username = new Fl_Input(80, 32, 240, 21, "Username:");
-      Username->labelsize(11);
+    { RKR_Entry_Input* o = Username = new RKR_Entry_Input(30, 58, 240, 21, "Username");
+      Username->box(FL_DOWN_BOX);
+      Username->color(FL_BACKGROUND2_COLOR);
+      Username->selection_color(FL_SELECTION_COLOR);
+      Username->labeltype(FL_NORMAL_LABEL);
+      Username->labelfont(0);
+      Username->labelsize(14);
       Username->labelcolor(FL_BACKGROUND2_COLOR);
-      Username->textsize(11);
       Username->textcolor(FL_BACKGROUND2_COLOR);
       Username->callback((Fl_Callback*)cb_Username);
-    } // Fl_Input* Username
-    { MES_DIS = new Fl_Check_Button(132, 68, 21, 20, "Disable Warnings    ");
+      Username->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+      Username->when(FL_WHEN_RELEASE);
+      o->m_start_label_offset = 4; // 10 - 14
+      o->m_start_text_offset = 4; // 10 - 14
+    } // RKR_Entry_Input* Username
+    { RKR_Check_Button* o = MES_DIS = new RKR_Check_Button(30, 90, 21, 20, "Disable Warnings    ");
+      MES_DIS->box(FL_NO_BOX);
       MES_DIS->down_box(FL_DOWN_BOX);
-      MES_DIS->labelsize(11);
+      MES_DIS->color(FL_BACKGROUND_COLOR);
+      MES_DIS->selection_color(FL_FOREGROUND_COLOR);
+      MES_DIS->labeltype(FL_NORMAL_LABEL);
+      MES_DIS->labelfont(0);
+      MES_DIS->labelsize(12);
       MES_DIS->labelcolor(FL_BACKGROUND2_COLOR);
       MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
-      MES_DIS->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* MES_DIS
-    { T_TIMEOUT = new Fl_Check_Button(132, 88, 21, 20, "Tap Tempo Timeout");
+      MES_DIS->align(Fl_Align(FL_ALIGN_RIGHT));
+      MES_DIS->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* MES_DIS
+    { RKR_Check_Button* o = T_TIMEOUT = new RKR_Check_Button(30, 110, 21, 20, "Tap Tempo Timeout");
+      T_TIMEOUT->box(FL_NO_BOX);
       T_TIMEOUT->down_box(FL_DOWN_BOX);
-      T_TIMEOUT->labelsize(11);
+      T_TIMEOUT->color(FL_BACKGROUND_COLOR);
+      T_TIMEOUT->selection_color(FL_FOREGROUND_COLOR);
+      T_TIMEOUT->labeltype(FL_NORMAL_LABEL);
+      T_TIMEOUT->labelfont(0);
+      T_TIMEOUT->labelsize(12);
       T_TIMEOUT->labelcolor(FL_BACKGROUND2_COLOR);
       T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
-      T_TIMEOUT->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* T_TIMEOUT
-    { ENA_TOOL = new Fl_Check_Button(132, 108, 21, 20, "Enable Tooltips       ");
+      T_TIMEOUT->align(Fl_Align(FL_ALIGN_RIGHT));
+      T_TIMEOUT->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* T_TIMEOUT
+    { RKR_Check_Button* o = ENA_TOOL = new RKR_Check_Button(30, 130, 21, 20, "Enable Tooltips       ");
+      ENA_TOOL->box(FL_NO_BOX);
       ENA_TOOL->down_box(FL_DOWN_BOX);
-      ENA_TOOL->labelsize(11);
+      ENA_TOOL->color(FL_BACKGROUND_COLOR);
+      ENA_TOOL->selection_color(FL_FOREGROUND_COLOR);
+      ENA_TOOL->labeltype(FL_NORMAL_LABEL);
+      ENA_TOOL->labelfont(0);
+      ENA_TOOL->labelsize(12);
       ENA_TOOL->labelcolor(FL_BACKGROUND2_COLOR);
       ENA_TOOL->callback((Fl_Callback*)cb_ENA_TOOL);
-      ENA_TOOL->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* ENA_TOOL
+      ENA_TOOL->align(Fl_Align(FL_ALIGN_RIGHT));
+      ENA_TOOL->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* ENA_TOOL
     MISC_SET->end();
   } // Fl_Group* MISC_SET
   { BANK_SET = new Fl_Group(5, 26, 630, 554, "Bank");

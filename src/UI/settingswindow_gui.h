@@ -9,6 +9,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include "RKR_Counter.h"
+#include "RKR_Entry_Input.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
@@ -16,8 +17,6 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
-#include <FL/Fl_Input.H>
-#include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Button.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
@@ -413,25 +412,25 @@ public:
   RKR_Browser *JackIn;
   Fl_Group *MISC_SET;
   Fl_Box *Fondo10;
-  Fl_Input *Username;
+  RKR_Entry_Input *Username;
 private:
-  inline void cb_Username_i(Fl_Input*, void*);
-  static void cb_Username(Fl_Input*, void*);
+  inline void cb_Username_i(RKR_Entry_Input*, void*);
+  static void cb_Username(RKR_Entry_Input*, void*);
 public:
-  Fl_Check_Button *MES_DIS;
+  RKR_Check_Button *MES_DIS;
 private:
-  inline void cb_MES_DIS_i(Fl_Check_Button*, void*);
-  static void cb_MES_DIS(Fl_Check_Button*, void*);
+  inline void cb_MES_DIS_i(RKR_Check_Button*, void*);
+  static void cb_MES_DIS(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *T_TIMEOUT;
+  RKR_Check_Button *T_TIMEOUT;
 private:
-  inline void cb_T_TIMEOUT_i(Fl_Check_Button*, void*);
-  static void cb_T_TIMEOUT(Fl_Check_Button*, void*);
+  inline void cb_T_TIMEOUT_i(RKR_Check_Button*, void*);
+  static void cb_T_TIMEOUT(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *ENA_TOOL;
+  RKR_Check_Button *ENA_TOOL;
 private:
-  inline void cb_ENA_TOOL_i(Fl_Check_Button*, void*);
-  static void cb_ENA_TOOL(Fl_Check_Button*, void*);
+  inline void cb_ENA_TOOL_i(RKR_Check_Button*, void*);
+  static void cb_ENA_TOOL(RKR_Check_Button*, void*);
 public:
   Fl_Group *BANK_SET;
   Fl_Box *Fondo11;
