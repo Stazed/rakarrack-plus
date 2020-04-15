@@ -21,7 +21,7 @@ decl {\#include "RKR_Counter.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {84 168 640 580} type Double
+  xywh {88 171 640 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -41,8 +41,8 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 open
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo6 {
         xywh {5 26 630 554}
@@ -212,7 +212,7 @@ m_rgui->Background_Color_Change(back_color);}
       Fl_Check_Button Enable_Back {
         label {Enable Background Image}
         callback {m_rkr->EnableBackgroundImage=(int) o->value();
-m_rgui->PutBackground();} selected
+m_rgui->PutBackground();}
         xywh {30 415 23 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
         code0 {o->m_start_font_offset = 2; // 10 - 12}
         class RKR_Check_Button
@@ -1025,8 +1025,8 @@ m_rgui->Show_Next_Time();}
     }
     Fl_Group MIDI_SET {
       label MIDI
-      user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 open
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo8 {
         xywh {5 26 630 554}
@@ -1037,7 +1037,9 @@ m_rgui->Show_Next_Time();}
 
 if (m_rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();}
-        xywh {135 38 105 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+        xywh {30 38 18 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
       Fl_Browser BMidiIn {
         label {ALSA Sequencer Ports}
@@ -1047,67 +1049,91 @@ if(o->text(valor) != NULL)
 strcpy(m_rkr->MID,o->text(valor));
 else return;
 o->select(valor,1);
-m_rkr->Conecta();}
-        xywh {15 72 190 111} type Hold selection_color 0 labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+m_rkr->Conecta();} selected
+        xywh {30 83 190 111} type Hold selection_color 0 labelsize 12 labelcolor 7 align 5 textsize 12 textcolor 7
+        code0 {o->m_start_label_offset = 2; // 10 - 12}
+        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        class RKR_Browser
       }
       Fl_Counter Midi_In_Counter {
-        label {Receive Channel}
+        label {Effects Receive Channel}
         callback {m_rkr->MidiCh=(int)o->value()-1;}
-        xywh {31 211 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 1 minimum 1 maximum 16 step 1 value 1 textsize 11
+        xywh {30 210 60 24} type Simple color 25 labelsize 11 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
+        code0 {o->m_start_label_offset = 1; // 10 - 11}
+        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        class RKR_Counter
       }
       Fl_Counter Har_In_Counter {
         label {Harmonizer Receive Channel}
         callback {m_rkr->HarCh=(int)o->value()-1;}
-        xywh {162 211 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 1 minimum 1 maximum 16 step 1 value 1 textsize 11
+        xywh {245 171 60 24} type Simple color 25 labelsize 11 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
+        code0 {o->m_start_label_offset = 1; // 10 - 11}
+        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        class RKR_Counter
       }
       Fl_Counter Stereo_Har_In_Counter {
         label {Stereo Harmonizer Receive Channel}
         callback {m_rkr->StereoHarCh=(int)o->value()-1;}
-        xywh {355 211 60 24} type Simple color 25 labelsize 10 labelcolor 7 align 1 minimum 1 maximum 16 step 1 value 1 textsize 11
+        xywh {245 210 60 24} type Simple color 25 labelsize 11 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
+        code0 {o->m_start_label_offset = 1; // 10 - 11}
+        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        class RKR_Counter
       }
       Fl_Group wMIDI {
         label {MIDI implementation}
-        xywh {15 266 273 23} box DOWN_FRAME labelsize 10 labelcolor 7 align 5
+        xywh {30 266 180 23} box DOWN_FRAME labelsize 12 labelcolor 7 align 5
       } {
         Fl_Check_Button Mw0 {
           label Default
           callback {m_rkr->MIDIway=0;
 m_rgui->ML_Menu->deactivate();}
-          xywh {72 268 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          xywh {35 268 18 18} type Radio down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+          code0 {o->m_start_font_offset = 2; // 10 - 12}
+          class RKR_Check_Button
         }
         Fl_Check_Button Mw1 {
           label {MIDI Learn}
           callback {m_rkr->MIDIway=1;
 m_rgui->ML_Menu->activate();}
-          xywh {183 268 18 18} type Radio down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
+          xywh {119 268 18 18} type Radio down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+          code0 {o->m_start_font_offset = 2; // 10 - 12}
+          class RKR_Check_Button
         }
       }
       Fl_Check_Button AAssign {
         label {Auto Assign MIDI Learn}
         callback {m_rkr->autoassign=o->value();}
-        xywh {134 308 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+        xywh {30 308 16 15} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
       Fl_Check_Button MTable {
         label {MIDI Program Change Table}
         callback {m_rkr->midi_table=o->value();
 if(m_rkr->midi_table) scroll->activate(); else 
 scroll->deactivate();}
-        xywh {157 336 16 15} down_box DOWN_BOX labelsize 10 labelcolor 7 align 4
+        xywh {30 336 16 15} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
+        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        class RKR_Check_Button
       }
-      Fl_Scroll scroll {
-        user_data 5000 open
-        xywh {15 366 500 162} type VERTICAL_ALWAYS
-      } {}
       Fl_Button {} {
         label Load
         callback {m_rgui->Load_Midi_Program_Change_Table();}
-        tooltip {Load program change table from file} xywh {231 331 70 20}
+        tooltip {Load program change table from file} xywh {254 331 70 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_Button {} {
         label Save
         callback {m_rgui->Save_Midi_Program_Change_Table();}
-        tooltip {Save current program change table to file} xywh {357 331 70 20}
+        tooltip {Save current program change table to file} xywh {338 331 70 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
+      Fl_Scroll scroll {
+        user_data 5000
+        xywh {30 366 500 162} type VERTICAL_ALWAYS
+      } {}
     }
     Fl_Group JACK_SET {
       label Jack

@@ -744,17 +744,17 @@ void SettingsWindowGui::cb_Wave_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Wave_Up_Qua_i(o,v);
 }
 
-void SettingsWindowGui::cb_D_A_Connect_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_D_A_Connect_i(RKR_Check_Button* o, void*) {
   m_rkr->aconnect_MI=(int) o->value();
 
 if (m_rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 }
-void SettingsWindowGui::cb_D_A_Connect(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_D_A_Connect(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_D_A_Connect_i(o,v);
 }
 
-void SettingsWindowGui::cb_BMidiIn_i(Fl_Browser* o, void*) {
+void SettingsWindowGui::cb_BMidiIn_i(RKR_Browser* o, void*) {
   int valor;
 valor = (int) o->value();
 if(o->text(valor) != NULL)
@@ -763,74 +763,74 @@ else return;
 o->select(valor,1);
 m_rkr->Conecta();
 }
-void SettingsWindowGui::cb_BMidiIn(Fl_Browser* o, void* v) {
+void SettingsWindowGui::cb_BMidiIn(RKR_Browser* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BMidiIn_i(o,v);
 }
 
-void SettingsWindowGui::cb_Midi_In_Counter_i(Fl_Counter* o, void*) {
+void SettingsWindowGui::cb_Midi_In_Counter_i(RKR_Counter* o, void*) {
   m_rkr->MidiCh=(int)o->value()-1;
 }
-void SettingsWindowGui::cb_Midi_In_Counter(Fl_Counter* o, void* v) {
+void SettingsWindowGui::cb_Midi_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Midi_In_Counter_i(o,v);
 }
 
-void SettingsWindowGui::cb_Har_In_Counter_i(Fl_Counter* o, void*) {
+void SettingsWindowGui::cb_Har_In_Counter_i(RKR_Counter* o, void*) {
   m_rkr->HarCh=(int)o->value()-1;
 }
-void SettingsWindowGui::cb_Har_In_Counter(Fl_Counter* o, void* v) {
+void SettingsWindowGui::cb_Har_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_In_Counter_i(o,v);
 }
 
-void SettingsWindowGui::cb_Stereo_Har_In_Counter_i(Fl_Counter* o, void*) {
+void SettingsWindowGui::cb_Stereo_Har_In_Counter_i(RKR_Counter* o, void*) {
   m_rkr->StereoHarCh=(int)o->value()-1;
 }
-void SettingsWindowGui::cb_Stereo_Har_In_Counter(Fl_Counter* o, void* v) {
+void SettingsWindowGui::cb_Stereo_Har_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Stereo_Har_In_Counter_i(o,v);
 }
 
-void SettingsWindowGui::cb_Mw0_i(Fl_Check_Button*, void*) {
+void SettingsWindowGui::cb_Mw0_i(RKR_Check_Button*, void*) {
   m_rkr->MIDIway=0;
 m_rgui->ML_Menu->deactivate();
 }
-void SettingsWindowGui::cb_Mw0(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_Mw0(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Mw0_i(o,v);
 }
 
-void SettingsWindowGui::cb_Mw1_i(Fl_Check_Button*, void*) {
+void SettingsWindowGui::cb_Mw1_i(RKR_Check_Button*, void*) {
   m_rkr->MIDIway=1;
 m_rgui->ML_Menu->activate();
 }
-void SettingsWindowGui::cb_Mw1(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_Mw1(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Mw1_i(o,v);
 }
 
-void SettingsWindowGui::cb_AAssign_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_AAssign_i(RKR_Check_Button* o, void*) {
   m_rkr->autoassign=o->value();
 }
-void SettingsWindowGui::cb_AAssign(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_AAssign(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_AAssign_i(o,v);
 }
 
-void SettingsWindowGui::cb_MTable_i(Fl_Check_Button* o, void*) {
+void SettingsWindowGui::cb_MTable_i(RKR_Check_Button* o, void*) {
   m_rkr->midi_table=o->value();
 if(m_rkr->midi_table) scroll->activate(); else 
 scroll->deactivate();
 }
-void SettingsWindowGui::cb_MTable(Fl_Check_Button* o, void* v) {
+void SettingsWindowGui::cb_MTable(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MTable_i(o,v);
 }
 
-void SettingsWindowGui::cb_Load_i(Fl_Button*, void*) {
+void SettingsWindowGui::cb_Load_i(RKR_Button*, void*) {
   m_rgui->Load_Midi_Program_Change_Table();
 }
-void SettingsWindowGui::cb_Load(Fl_Button* o, void* v) {
+void SettingsWindowGui::cb_Load(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Load_i(o,v);
 }
 
-void SettingsWindowGui::cb_Save_i(Fl_Button*, void*) {
+void SettingsWindowGui::cb_Save_i(RKR_Button*, void*) {
   m_rgui->Save_Midi_Program_Change_Table();
 }
-void SettingsWindowGui::cb_Save(Fl_Button* o, void* v) {
+void SettingsWindowGui::cb_Save(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Save_i(o,v);
 }
 
@@ -941,6 +941,7 @@ this->when(FL_WHEN_RELEASE);
     Look->labelcolor(FL_BACKGROUND2_COLOR);
     Look->user_data((void*)(1));
     Look->align(Fl_Align(FL_ALIGN_LEFT));
+    Look->hide();
     { Fondo6 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo6
     { RKR_Choice* o = scheme_ch = new RKR_Choice(30, 59, 88, 20, "Schema");
@@ -2024,115 +2025,197 @@ this->when(FL_WHEN_RELEASE);
     MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
     MIDI_SET->user_data((void*)(1));
     MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    MIDI_SET->hide();
     { Fondo8 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo8
-    { D_A_Connect = new Fl_Check_Button(135, 38, 105, 20, "Auto Connect MIDI In");
+    { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 18, 20, "Auto Connect MIDI In");
+      D_A_Connect->box(FL_NO_BOX);
       D_A_Connect->down_box(FL_DOWN_BOX);
-      D_A_Connect->labelsize(11);
+      D_A_Connect->color(FL_BACKGROUND_COLOR);
+      D_A_Connect->selection_color(FL_FOREGROUND_COLOR);
+      D_A_Connect->labeltype(FL_NORMAL_LABEL);
+      D_A_Connect->labelfont(0);
+      D_A_Connect->labelsize(12);
       D_A_Connect->labelcolor(FL_BACKGROUND2_COLOR);
       D_A_Connect->callback((Fl_Callback*)cb_D_A_Connect);
-      D_A_Connect->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* D_A_Connect
-    { BMidiIn = new Fl_Browser(15, 72, 190, 111, "ALSA Sequencer Ports");
+      D_A_Connect->align(Fl_Align(FL_ALIGN_RIGHT));
+      D_A_Connect->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* D_A_Connect
+    { RKR_Browser* o = BMidiIn = new RKR_Browser(30, 83, 190, 111, "ALSA Sequencer Ports");
       BMidiIn->type(2);
+      BMidiIn->box(FL_NO_BOX);
+      BMidiIn->color(FL_BACKGROUND2_COLOR);
       BMidiIn->selection_color(FL_FOREGROUND_COLOR);
-      BMidiIn->labelsize(11);
+      BMidiIn->labeltype(FL_NORMAL_LABEL);
+      BMidiIn->labelfont(0);
+      BMidiIn->labelsize(12);
       BMidiIn->labelcolor(FL_BACKGROUND2_COLOR);
       BMidiIn->textsize(12);
       BMidiIn->textcolor(FL_BACKGROUND2_COLOR);
       BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
       BMidiIn->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-    } // Fl_Browser* BMidiIn
-    { Midi_In_Counter = new Fl_Counter(31, 211, 60, 24, "Receive Channel");
+      BMidiIn->when(FL_WHEN_RELEASE_ALWAYS);
+      o->m_start_label_offset = 2; // 10 - 12
+      o->m_start_text_offset = 2; // 10 - 12
+    } // RKR_Browser* BMidiIn
+    { RKR_Counter* o = Midi_In_Counter = new RKR_Counter(30, 210, 60, 24, "Effects Receive Channel");
       Midi_In_Counter->type(1);
+      Midi_In_Counter->box(FL_UP_BOX);
       Midi_In_Counter->color((Fl_Color)25);
-      Midi_In_Counter->labelsize(10);
+      Midi_In_Counter->selection_color(FL_INACTIVE_COLOR);
+      Midi_In_Counter->labeltype(FL_NORMAL_LABEL);
+      Midi_In_Counter->labelfont(0);
+      Midi_In_Counter->labelsize(11);
       Midi_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
       Midi_In_Counter->minimum(1);
       Midi_In_Counter->maximum(16);
       Midi_In_Counter->step(1);
       Midi_In_Counter->value(1);
-      Midi_In_Counter->textsize(11);
+      Midi_In_Counter->textsize(12);
       Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
-      Midi_In_Counter->align(Fl_Align(FL_ALIGN_TOP));
-    } // Fl_Counter* Midi_In_Counter
-    { Har_In_Counter = new Fl_Counter(162, 211, 60, 24, "Harmonizer Receive Channel");
+      Midi_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
+      Midi_In_Counter->when(FL_WHEN_CHANGED);
+      o->m_start_label_offset = 1; // 10 - 11
+      o->m_start_text_offset = 2; // 10 - 12
+    } // RKR_Counter* Midi_In_Counter
+    { RKR_Counter* o = Har_In_Counter = new RKR_Counter(245, 171, 60, 24, "Harmonizer Receive Channel");
       Har_In_Counter->type(1);
+      Har_In_Counter->box(FL_UP_BOX);
       Har_In_Counter->color((Fl_Color)25);
-      Har_In_Counter->labelsize(10);
+      Har_In_Counter->selection_color(FL_INACTIVE_COLOR);
+      Har_In_Counter->labeltype(FL_NORMAL_LABEL);
+      Har_In_Counter->labelfont(0);
+      Har_In_Counter->labelsize(11);
       Har_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
       Har_In_Counter->minimum(1);
       Har_In_Counter->maximum(16);
       Har_In_Counter->step(1);
       Har_In_Counter->value(1);
-      Har_In_Counter->textsize(11);
+      Har_In_Counter->textsize(12);
       Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
-      Har_In_Counter->align(Fl_Align(FL_ALIGN_TOP));
-    } // Fl_Counter* Har_In_Counter
-    { Stereo_Har_In_Counter = new Fl_Counter(355, 211, 60, 24, "Stereo Harmonizer Receive Channel");
+      Har_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
+      Har_In_Counter->when(FL_WHEN_CHANGED);
+      o->m_start_label_offset = 1; // 10 - 11
+      o->m_start_text_offset = 2; // 10 - 12
+    } // RKR_Counter* Har_In_Counter
+    { RKR_Counter* o = Stereo_Har_In_Counter = new RKR_Counter(245, 210, 60, 24, "Stereo Harmonizer Receive Channel");
       Stereo_Har_In_Counter->type(1);
+      Stereo_Har_In_Counter->box(FL_UP_BOX);
       Stereo_Har_In_Counter->color((Fl_Color)25);
-      Stereo_Har_In_Counter->labelsize(10);
+      Stereo_Har_In_Counter->selection_color(FL_INACTIVE_COLOR);
+      Stereo_Har_In_Counter->labeltype(FL_NORMAL_LABEL);
+      Stereo_Har_In_Counter->labelfont(0);
+      Stereo_Har_In_Counter->labelsize(11);
       Stereo_Har_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
       Stereo_Har_In_Counter->minimum(1);
       Stereo_Har_In_Counter->maximum(16);
       Stereo_Har_In_Counter->step(1);
       Stereo_Har_In_Counter->value(1);
-      Stereo_Har_In_Counter->textsize(11);
+      Stereo_Har_In_Counter->textsize(12);
       Stereo_Har_In_Counter->callback((Fl_Callback*)cb_Stereo_Har_In_Counter);
-      Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_TOP));
-    } // Fl_Counter* Stereo_Har_In_Counter
-    { wMIDI = new Fl_Group(15, 266, 273, 23, "MIDI implementation");
+      Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
+      Stereo_Har_In_Counter->when(FL_WHEN_CHANGED);
+      o->m_start_label_offset = 1; // 10 - 11
+      o->m_start_text_offset = 2; // 10 - 12
+    } // RKR_Counter* Stereo_Har_In_Counter
+    { wMIDI = new Fl_Group(30, 266, 180, 23, "MIDI implementation");
       wMIDI->box(FL_DOWN_FRAME);
-      wMIDI->labelsize(10);
+      wMIDI->labelsize(12);
       wMIDI->labelcolor(FL_BACKGROUND2_COLOR);
       wMIDI->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-      { Mw0 = new Fl_Check_Button(72, 268, 18, 18, "Default");
+      { RKR_Check_Button* o = Mw0 = new RKR_Check_Button(35, 268, 18, 18, "Default");
         Mw0->type(102);
+        Mw0->box(FL_NO_BOX);
         Mw0->down_box(FL_DOWN_BOX);
-        Mw0->labelsize(11);
+        Mw0->color(FL_BACKGROUND_COLOR);
+        Mw0->selection_color(FL_FOREGROUND_COLOR);
+        Mw0->labeltype(FL_NORMAL_LABEL);
+        Mw0->labelfont(0);
+        Mw0->labelsize(12);
         Mw0->labelcolor(FL_BACKGROUND2_COLOR);
         Mw0->callback((Fl_Callback*)cb_Mw0);
-        Mw0->align(Fl_Align(FL_ALIGN_LEFT));
-      } // Fl_Check_Button* Mw0
-      { Mw1 = new Fl_Check_Button(183, 268, 18, 18, "MIDI Learn");
+        Mw0->align(Fl_Align(FL_ALIGN_RIGHT));
+        Mw0->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 2; // 10 - 12
+      } // RKR_Check_Button* Mw0
+      { RKR_Check_Button* o = Mw1 = new RKR_Check_Button(119, 268, 18, 18, "MIDI Learn");
         Mw1->type(102);
+        Mw1->box(FL_NO_BOX);
         Mw1->down_box(FL_DOWN_BOX);
-        Mw1->labelsize(11);
+        Mw1->color(FL_BACKGROUND_COLOR);
+        Mw1->selection_color(FL_FOREGROUND_COLOR);
+        Mw1->labeltype(FL_NORMAL_LABEL);
+        Mw1->labelfont(0);
+        Mw1->labelsize(12);
         Mw1->labelcolor(FL_BACKGROUND2_COLOR);
         Mw1->callback((Fl_Callback*)cb_Mw1);
-        Mw1->align(Fl_Align(FL_ALIGN_LEFT));
-      } // Fl_Check_Button* Mw1
+        Mw1->align(Fl_Align(FL_ALIGN_RIGHT));
+        Mw1->when(FL_WHEN_RELEASE);
+        o->m_start_font_offset = 2; // 10 - 12
+      } // RKR_Check_Button* Mw1
       wMIDI->end();
     } // Fl_Group* wMIDI
-    { AAssign = new Fl_Check_Button(134, 308, 16, 15, "Auto Assign MIDI Learn");
+    { RKR_Check_Button* o = AAssign = new RKR_Check_Button(30, 308, 16, 15, "Auto Assign MIDI Learn");
+      AAssign->box(FL_NO_BOX);
       AAssign->down_box(FL_DOWN_BOX);
-      AAssign->labelsize(10);
+      AAssign->color(FL_BACKGROUND_COLOR);
+      AAssign->selection_color(FL_FOREGROUND_COLOR);
+      AAssign->labeltype(FL_NORMAL_LABEL);
+      AAssign->labelfont(0);
+      AAssign->labelsize(12);
       AAssign->labelcolor(FL_BACKGROUND2_COLOR);
       AAssign->callback((Fl_Callback*)cb_AAssign);
-      AAssign->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* AAssign
-    { MTable = new Fl_Check_Button(157, 336, 16, 15, "MIDI Program Change Table");
+      AAssign->align(Fl_Align(FL_ALIGN_RIGHT));
+      AAssign->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* AAssign
+    { RKR_Check_Button* o = MTable = new RKR_Check_Button(30, 336, 16, 15, "MIDI Program Change Table");
+      MTable->box(FL_NO_BOX);
       MTable->down_box(FL_DOWN_BOX);
-      MTable->labelsize(10);
+      MTable->color(FL_BACKGROUND_COLOR);
+      MTable->selection_color(FL_FOREGROUND_COLOR);
+      MTable->labeltype(FL_NORMAL_LABEL);
+      MTable->labelfont(0);
+      MTable->labelsize(12);
       MTable->labelcolor(FL_BACKGROUND2_COLOR);
       MTable->callback((Fl_Callback*)cb_MTable);
-      MTable->align(Fl_Align(FL_ALIGN_LEFT));
-    } // Fl_Check_Button* MTable
-    { scroll = new Fl_Scroll(15, 366, 500, 162);
+      MTable->align(Fl_Align(FL_ALIGN_RIGHT));
+      MTable->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 2; // 10 - 12
+    } // RKR_Check_Button* MTable
+    { RKR_Button* o = new RKR_Button(254, 331, 70, 20, "Load");
+      o->tooltip("Load program change table from file");
+      o->box(FL_UP_BOX);
+      o->color(FL_BACKGROUND_COLOR);
+      o->selection_color(FL_BACKGROUND_COLOR);
+      o->labeltype(FL_NORMAL_LABEL);
+      o->labelfont(0);
+      o->labelsize(14);
+      o->labelcolor(FL_FOREGROUND_COLOR);
+      o->callback((Fl_Callback*)cb_Load);
+      o->align(Fl_Align(FL_ALIGN_CENTER));
+      o->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 4; // 10 - 14
+    } // RKR_Button* o
+    { RKR_Button* o = new RKR_Button(338, 331, 70, 20, "Save");
+      o->tooltip("Save current program change table to file");
+      o->box(FL_UP_BOX);
+      o->color(FL_BACKGROUND_COLOR);
+      o->selection_color(FL_BACKGROUND_COLOR);
+      o->labeltype(FL_NORMAL_LABEL);
+      o->labelfont(0);
+      o->labelsize(14);
+      o->labelcolor(FL_FOREGROUND_COLOR);
+      o->callback((Fl_Callback*)cb_Save);
+      o->align(Fl_Align(FL_ALIGN_CENTER));
+      o->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 4; // 10 - 14
+    } // RKR_Button* o
+    { scroll = new Fl_Scroll(30, 366, 500, 162);
       scroll->type(6);
       scroll->user_data((void*)(5000));
       scroll->end();
     } // Fl_Scroll* scroll
-    { Fl_Button* o = new Fl_Button(231, 331, 70, 20, "Load");
-      o->tooltip("Load program change table from file");
-      o->callback((Fl_Callback*)cb_Load);
-    } // Fl_Button* o
-    { Fl_Button* o = new Fl_Button(357, 331, 70, 20, "Save");
-      o->tooltip("Save current program change table to file");
-      o->callback((Fl_Callback*)cb_Save);
-    } // Fl_Button* o
     MIDI_SET->end();
   } // Fl_Group* MIDI_SET
   { JACK_SET = new Fl_Group(5, 26, 630, 554, "Jack");

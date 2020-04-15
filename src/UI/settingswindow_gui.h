@@ -15,12 +15,11 @@
 #include <FL/Fl_Tabs.H>
 #include <FL/Fl_Group.H>
 #include <FL/Fl_File_Input.H>
+#include <FL/Fl_Scroll.H>
 #include <FL/Fl_Check_Button.H>
 #include <FL/Fl_Browser.H>
-#include <FL/Fl_Counter.H>
-#include <FL/Fl_Scroll.H>
-#include <FL/Fl_Button.H>
 #include <FL/Fl_Input.H>
+#include <FL/Fl_Button.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
   void _SettingsWindowGui();
@@ -348,59 +347,57 @@ private:
 public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;
-  Fl_Check_Button *D_A_Connect;
+  RKR_Check_Button *D_A_Connect;
 private:
-  inline void cb_D_A_Connect_i(Fl_Check_Button*, void*);
-  static void cb_D_A_Connect(Fl_Check_Button*, void*);
+  inline void cb_D_A_Connect_i(RKR_Check_Button*, void*);
+  static void cb_D_A_Connect(RKR_Check_Button*, void*);
 public:
-  Fl_Browser *BMidiIn;
+  RKR_Browser *BMidiIn;
 private:
-  inline void cb_BMidiIn_i(Fl_Browser*, void*);
-  static void cb_BMidiIn(Fl_Browser*, void*);
+  inline void cb_BMidiIn_i(RKR_Browser*, void*);
+  static void cb_BMidiIn(RKR_Browser*, void*);
 public:
-  Fl_Counter *Midi_In_Counter;
+  RKR_Counter *Midi_In_Counter;
 private:
-  inline void cb_Midi_In_Counter_i(Fl_Counter*, void*);
-  static void cb_Midi_In_Counter(Fl_Counter*, void*);
+  inline void cb_Midi_In_Counter_i(RKR_Counter*, void*);
+  static void cb_Midi_In_Counter(RKR_Counter*, void*);
 public:
-  Fl_Counter *Har_In_Counter;
+  RKR_Counter *Har_In_Counter;
 private:
-  inline void cb_Har_In_Counter_i(Fl_Counter*, void*);
-  static void cb_Har_In_Counter(Fl_Counter*, void*);
+  inline void cb_Har_In_Counter_i(RKR_Counter*, void*);
+  static void cb_Har_In_Counter(RKR_Counter*, void*);
 public:
-  Fl_Counter *Stereo_Har_In_Counter;
+  RKR_Counter *Stereo_Har_In_Counter;
 private:
-  inline void cb_Stereo_Har_In_Counter_i(Fl_Counter*, void*);
-  static void cb_Stereo_Har_In_Counter(Fl_Counter*, void*);
+  inline void cb_Stereo_Har_In_Counter_i(RKR_Counter*, void*);
+  static void cb_Stereo_Har_In_Counter(RKR_Counter*, void*);
 public:
   Fl_Group *wMIDI;
-  Fl_Check_Button *Mw0;
+  RKR_Check_Button *Mw0;
 private:
-  inline void cb_Mw0_i(Fl_Check_Button*, void*);
-  static void cb_Mw0(Fl_Check_Button*, void*);
+  inline void cb_Mw0_i(RKR_Check_Button*, void*);
+  static void cb_Mw0(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *Mw1;
+  RKR_Check_Button *Mw1;
 private:
-  inline void cb_Mw1_i(Fl_Check_Button*, void*);
-  static void cb_Mw1(Fl_Check_Button*, void*);
+  inline void cb_Mw1_i(RKR_Check_Button*, void*);
+  static void cb_Mw1(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *AAssign;
+  RKR_Check_Button *AAssign;
 private:
-  inline void cb_AAssign_i(Fl_Check_Button*, void*);
-  static void cb_AAssign(Fl_Check_Button*, void*);
+  inline void cb_AAssign_i(RKR_Check_Button*, void*);
+  static void cb_AAssign(RKR_Check_Button*, void*);
 public:
-  Fl_Check_Button *MTable;
+  RKR_Check_Button *MTable;
 private:
-  inline void cb_MTable_i(Fl_Check_Button*, void*);
-  static void cb_MTable(Fl_Check_Button*, void*);
+  inline void cb_MTable_i(RKR_Check_Button*, void*);
+  static void cb_MTable(RKR_Check_Button*, void*);
+  inline void cb_Load_i(RKR_Button*, void*);
+  static void cb_Load(RKR_Button*, void*);
+  inline void cb_Save_i(RKR_Button*, void*);
+  static void cb_Save(RKR_Button*, void*);
 public:
   Fl_Scroll *scroll;
-private:
-  inline void cb_Load_i(Fl_Button*, void*);
-  static void cb_Load(Fl_Button*, void*);
-  inline void cb_Save_i(Fl_Button*, void*);
-  static void cb_Save(Fl_Button*, void*);
-public:
   Fl_Group *JACK_SET;
   Fl_Box *Fondo9;
   Fl_Check_Button *D_J_Connect;
