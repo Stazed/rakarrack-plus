@@ -17,7 +17,6 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_File_Input.H>
 #include <FL/Fl_Scroll.H>
-#include <FL/Fl_Button.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
   void _SettingsWindowGui();
@@ -435,16 +434,16 @@ public:
   Fl_Group *BANK_SET;
   Fl_Box *Fondo11;
   Fl_File_Input *BFiname;
-  Fl_Button *BF_Browser;
+  RKR_Button *BF_Browser;
 private:
-  inline void cb_BF_Browser_i(Fl_Button*, void*);
-  static void cb_BF_Browser(Fl_Button*, void*);
+  inline void cb_BF_Browser_i(RKR_Button*, void*);
+  static void cb_BF_Browser(RKR_Button*, void*);
 public:
   Fl_File_Input *Udir;
-  Fl_Button *UD_Browser;
+  RKR_Button *UD_Browser;
 private:
-  inline void cb_UD_Browser_i(Fl_Button*, void*);
-  static void cb_UD_Browser(Fl_Button*, void*);
+  inline void cb_UD_Browser_i(RKR_Button*, void*);
+  static void cb_UD_Browser(RKR_Button*, void*);
   RKR* m_rkr; 
   RKRGUI* m_rgui; 
 public:

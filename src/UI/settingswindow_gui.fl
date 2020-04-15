@@ -1140,7 +1140,7 @@ scroll->deactivate();}
     }
     Fl_Group JACK_SET {
       label Jack
-      user_data 1 open
+      user_data 1
       xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo9 {
@@ -1181,15 +1181,15 @@ else JackIn->deactivate();}
     }
     Fl_Group MISC_SET {
       label Misc
-      user_data 1 open
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo10 {
         xywh {5 26 630 554}
       }
       Fl_Input Username {
         label Username
-        callback {m_rkr->UserRealName=(char*) o->value();} selected
+        callback {m_rkr->UserRealName=(char*) o->value();}
         xywh {30 58 240 21} labelcolor 7 align 5 textcolor 7
         code0 {o->m_start_label_offset = 4; // 10 - 14}
         code1 {o->m_start_text_offset = 4; // 10 - 14}
@@ -1220,8 +1220,8 @@ Fl_Tooltip::enable(m_rkr->ena_tool);}
     }
     Fl_Group BANK_SET {
       label Bank
-      user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 open
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo11 {
         xywh {5 26 630 554}
@@ -1238,8 +1238,10 @@ filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
-strcpy(m_rkr->BankFilename,filename);}
+strcpy(m_rkr->BankFilename,filename);} selected
         xywh {415 60 65 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        class RKR_Button
       }
       Fl_File_Input Udir {
         label {User Directory}
@@ -1255,6 +1257,8 @@ Udir->value(dir);
 strcpy(m_rkr->UDirFilename,dir);
 m_rgui->Scan_Bank_Dir();}
         xywh {415 112 65 20}
+        code0 {o->m_start_font_offset = 4; // 10 - 11}
+        class RKR_Button
       }
     }
   }

@@ -881,7 +881,7 @@ void SettingsWindowGui::cb_ENA_TOOL(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_ENA_TOOL_i(o,v);
 }
 
-void SettingsWindowGui::cb_BF_Browser_i(Fl_Button*, void*) {
+void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
@@ -889,11 +889,11 @@ filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
 strcpy(m_rkr->BankFilename,filename);
 }
-void SettingsWindowGui::cb_BF_Browser(Fl_Button* o, void* v) {
+void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BF_Browser_i(o,v);
 }
 
-void SettingsWindowGui::cb_UD_Browser_i(Fl_Button*, void*) {
+void SettingsWindowGui::cb_UD_Browser_i(RKR_Button*, void*) {
   char *dir;
 dir=fl_dir_chooser("Browse:",NULL,0);
 if (dir==NULL) return;
@@ -901,7 +901,7 @@ Udir->value(dir);
 strcpy(m_rkr->UDirFilename,dir);
 m_rgui->Scan_Bank_Dir();
 }
-void SettingsWindowGui::cb_UD_Browser(Fl_Button* o, void* v) {
+void SettingsWindowGui::cb_UD_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UD_Browser_i(o,v);
 }
 SettingsWindowGui::SettingsWindowGui(int X, int Y, int W, int H, const char *L)
@@ -2294,6 +2294,7 @@ this->when(FL_WHEN_RELEASE);
     MISC_SET->labelcolor(FL_BACKGROUND2_COLOR);
     MISC_SET->user_data((void*)(1));
     MISC_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    MISC_SET->hide();
     { Fondo10 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo10
     { RKR_Entry_Input* o = Username = new RKR_Entry_Input(30, 58, 240, 21, "Username");
@@ -2361,7 +2362,6 @@ this->when(FL_WHEN_RELEASE);
     BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
     BANK_SET->user_data((void*)(1));
     BANK_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    BANK_SET->hide();
     { Fondo11 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo11
     { BFiname = new Fl_File_Input(20, 50, 390, 30, "Bank Filename");
@@ -2371,9 +2371,19 @@ this->when(FL_WHEN_RELEASE);
       BFiname->textcolor(FL_BACKGROUND2_COLOR);
       BFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
     } // Fl_File_Input* BFiname
-    { BF_Browser = new Fl_Button(415, 60, 65, 20, "Browse");
+    { RKR_Button* o = BF_Browser = new RKR_Button(415, 60, 65, 20, "Browse");
+      BF_Browser->box(FL_UP_BOX);
+      BF_Browser->color(FL_BACKGROUND_COLOR);
+      BF_Browser->selection_color(FL_BACKGROUND_COLOR);
+      BF_Browser->labeltype(FL_NORMAL_LABEL);
+      BF_Browser->labelfont(0);
+      BF_Browser->labelsize(14);
+      BF_Browser->labelcolor(FL_FOREGROUND_COLOR);
       BF_Browser->callback((Fl_Callback*)cb_BF_Browser, (void*)(77));
-    } // Fl_Button* BF_Browser
+      BF_Browser->align(Fl_Align(FL_ALIGN_CENTER));
+      BF_Browser->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 4; // 10 - 14
+    } // RKR_Button* BF_Browser
     { Udir = new Fl_File_Input(20, 102, 390, 30, "User Directory");
       Udir->labelsize(11);
       Udir->labelcolor(FL_BACKGROUND2_COLOR);
@@ -2381,9 +2391,19 @@ this->when(FL_WHEN_RELEASE);
       Udir->textcolor(FL_BACKGROUND2_COLOR);
       Udir->align(Fl_Align(FL_ALIGN_TOP_LEFT));
     } // Fl_File_Input* Udir
-    { UD_Browser = new Fl_Button(415, 112, 65, 20, "Browse");
+    { RKR_Button* o = UD_Browser = new RKR_Button(415, 112, 65, 20, "Browse");
+      UD_Browser->box(FL_UP_BOX);
+      UD_Browser->color(FL_BACKGROUND_COLOR);
+      UD_Browser->selection_color(FL_BACKGROUND_COLOR);
+      UD_Browser->labeltype(FL_NORMAL_LABEL);
+      UD_Browser->labelfont(0);
+      UD_Browser->labelsize(14);
+      UD_Browser->labelcolor(FL_FOREGROUND_COLOR);
       UD_Browser->callback((Fl_Callback*)cb_UD_Browser, (void*)(77));
-    } // Fl_Button* UD_Browser
+      UD_Browser->align(Fl_Align(FL_ALIGN_CENTER));
+      UD_Browser->when(FL_WHEN_RELEASE);
+      o->m_start_font_offset = 4; // 10 - 11
+    } // RKR_Button* UD_Browser
     BANK_SET->end();
   } // Fl_Group* BANK_SET
   STabs->end();
