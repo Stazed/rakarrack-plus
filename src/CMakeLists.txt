@@ -22,6 +22,7 @@ set (ProgSources
     UI/RKR_Check_Button.cxx
     UI/RKR_Choice.cxx
     UI/RKR_Counter.cxx
+    UI/RKR_File_Input.cxx
     UI/RKR_Input.cxx
     UI/RKR_Light_Button.cxx
     UI/RKR_Menu_Bar.cxx

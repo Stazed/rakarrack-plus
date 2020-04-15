@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -23,8 +23,11 @@ decl {\#include "RKR_Counter.h"} {public global
 decl {\#include "RKR_Entry_Input.h"} {public global
 }
 
+decl {\#include "RKR_File_Input.h"} {public global
+}
+
 widget_class SettingsWindowGui {open
-  xywh {153 204 530 580} type Double
+  xywh {105 95 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -44,8 +47,8 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 open
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
         xywh {5 26 518 554}
@@ -222,7 +225,10 @@ m_rgui->PutBackground();}
       }
       Fl_File_Input BackFiname {
         label {Background Image}
-        xywh {30 455 390 30} labelsize 12 labelcolor 7 align 5 textsize 12 textcolor 7
+        xywh {30 455 390 40} labelsize 12 labelcolor 7 align 5 textcolor 7
+        code0 {o->m_start_label_offset = 2; // 10 - 12}
+        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        class RKR_File_Input
       }
       Fl_Button BI_Browser {
         label Browse
@@ -233,8 +239,8 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
 strcpy(m_rkr->BackgroundImage,filename);
-m_rgui->PutBackground();}
-        xywh {427 465 65 20}
+m_rgui->PutBackground();} selected
+        xywh {427 470 65 20}
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Button
       }
@@ -1220,15 +1226,18 @@ Fl_Tooltip::enable(m_rkr->ena_tool);}
     }
     Fl_Group BANK_SET {
       label Bank
-      user_data 1 selected
-      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo11 {
         xywh {5 26 518 554}
       }
       Fl_File_Input BFiname {
         label {Bank Filename}
-        xywh {20 50 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+        xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 textcolor 7
+        code0 {o->m_start_label_offset = 2; // 10 - 12}
+        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        class RKR_File_Input
       }
       Fl_Button BF_Browser {
         label Browse
@@ -1239,13 +1248,16 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
 strcpy(m_rkr->BankFilename,filename);}
-        xywh {415 60 65 20}
+        xywh {415 65 65 20}
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Button
       }
       Fl_File_Input Udir {
         label {User Directory}
-        xywh {20 102 390 30} labelsize 11 labelcolor 7 align 5 textsize 12 textcolor 7
+        xywh {20 120 390 40} labelsize 12 labelcolor 7 align 5 textcolor 7
+        code0 {o->m_start_label_offset = 2; // 10 - 12}
+        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        class RKR_File_Input
       }
       Fl_Button UD_Browser {
         label Browse
@@ -1256,7 +1268,7 @@ if (dir==NULL) return;
 Udir->value(dir);
 strcpy(m_rkr->UDirFilename,dir);
 m_rgui->Scan_Bank_Dir();}
-        xywh {415 112 65 20}
+        xywh {415 135 65 20}
         code0 {o->m_start_font_offset = 4; // 10 - 11}
         class RKR_Button
       }
