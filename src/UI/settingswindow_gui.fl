@@ -24,7 +24,7 @@ decl {\#include "RKR_Entry_Input.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {153 204 640 580} type Double
+  xywh {153 204 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -36,7 +36,7 @@ widget_class SettingsWindowGui {open
 m_rgui= _rgui;} {}
   }
   Fl_Box Fondo2 {
-    xywh {1 1 640 580}
+    xywh {1 1 530 580}
   }
   Fl_Tabs STabs {
     user_data 1 open
@@ -1028,8 +1028,8 @@ m_rgui->Show_Next_Time();}
     }
     Fl_Group MIDI_SET {
       label MIDI
-      user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 open
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo8 {
         xywh {5 26 630 554}
@@ -1134,8 +1134,8 @@ scroll->deactivate();}
         class RKR_Button
       }
       Fl_Scroll scroll {
-        user_data 5000
-        xywh {30 366 500 162} type VERTICAL_ALWAYS
+        user_data 5000 selected
+        xywh {30 366 480 162} type VERTICAL_ALWAYS
       } {}
     }
     Fl_Group JACK_SET {
@@ -1220,8 +1220,8 @@ Fl_Tooltip::enable(m_rkr->ena_tool);}
     }
     Fl_Group BANK_SET {
       label Bank
-      user_data 1 open
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo11 {
         xywh {5 26 630 554}
@@ -1238,7 +1238,7 @@ filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
-strcpy(m_rkr->BankFilename,filename);} selected
+strcpy(m_rkr->BankFilename,filename);}
         xywh {415 60 65 20}
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Button

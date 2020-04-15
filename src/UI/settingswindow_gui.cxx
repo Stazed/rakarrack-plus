@@ -916,7 +916,7 @@ SettingsWindowGui::SettingsWindowGui(int W, int H, const char *L)
 }
 
 SettingsWindowGui::SettingsWindowGui()
-  : Fl_Double_Window(0, 0, 640, 580, 0) {
+  : Fl_Double_Window(0, 0, 530, 580, 0) {
   clear_flag(16);
   _SettingsWindowGui();
 }
@@ -931,7 +931,7 @@ this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
 this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
-{ Fondo2 = new Fl_Box(1, 1, 640, 580);
+{ Fondo2 = new Fl_Box(1, 1, 530, 580);
 } // Fl_Box* Fondo2
 { STabs = new Fl_Tabs(0, 0, 636, 606);
   STabs->user_data((void*)(1));
@@ -2025,7 +2025,6 @@ this->when(FL_WHEN_RELEASE);
     MIDI_SET->labelcolor(FL_BACKGROUND2_COLOR);
     MIDI_SET->user_data((void*)(1));
     MIDI_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    MIDI_SET->hide();
     { Fondo8 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo8
     { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 18, 20, "Auto Connect MIDI In");
@@ -2212,7 +2211,7 @@ this->when(FL_WHEN_RELEASE);
       o->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* o
-    { scroll = new Fl_Scroll(30, 366, 500, 162);
+    { scroll = new Fl_Scroll(30, 366, 480, 162);
       scroll->type(6);
       scroll->user_data((void*)(5000));
       scroll->end();
@@ -2362,6 +2361,7 @@ this->when(FL_WHEN_RELEASE);
     BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
     BANK_SET->user_data((void*)(1));
     BANK_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    BANK_SET->hide();
     { Fondo11 = new Fl_Box(5, 26, 630, 554);
     } // Fl_Box* Fondo11
     { BFiname = new Fl_File_Input(20, 50, 390, 30, "Bank Filename");

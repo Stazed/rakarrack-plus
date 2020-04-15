@@ -2700,7 +2700,7 @@ void RKRGUI::make_window() {
     Order->end();
     Order->resizable(Order);
   } // OrderWindowGui* Order
-  { SettingsWindowGui* o = Settings = new SettingsWindowGui(640, 580);
+  { SettingsWindowGui* o = Settings = new SettingsWindowGui(530, 580);
     Settings->box(FL_NO_BOX);
     Settings->color((Fl_Color)4);
     Settings->selection_color(FL_BACKGROUND2_COLOR);
