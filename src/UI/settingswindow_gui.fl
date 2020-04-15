@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -36,16 +36,16 @@ widget_class SettingsWindowGui {open
 m_rgui= _rgui;} {}
   }
   Fl_Box Fondo2 {
-    xywh {1 1 530 580}
+    xywh {1 1 525 575}
   }
   Fl_Tabs STabs {
     user_data 1 open
-    xywh {0 0 636 606}
+    xywh {0 0 530 580}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      user_data 1 selected
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
         xywh {5 26 630 554}
@@ -258,7 +258,7 @@ m_rkr->change_scale = 1; // true}
     Fl_Group AUDIO_SET {
       label Audio
       user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo7 {
         xywh {5 26 630 554}
@@ -1028,8 +1028,8 @@ m_rgui->Show_Next_Time();}
     }
     Fl_Group MIDI_SET {
       label MIDI
-      user_data 1 open
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
+      user_data 1
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo8 {
         xywh {5 26 630 554}
@@ -1134,14 +1134,14 @@ scroll->deactivate();}
         class RKR_Button
       }
       Fl_Scroll scroll {
-        user_data 5000 selected
+        user_data 5000
         xywh {30 366 480 162} type VERTICAL_ALWAYS
       } {}
     }
     Fl_Group JACK_SET {
       label Jack
       user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo9 {
         xywh {5 26 630 554}
@@ -1182,7 +1182,7 @@ else JackIn->deactivate();}
     Fl_Group MISC_SET {
       label Misc
       user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo10 {
         xywh {5 26 630 554}
@@ -1221,7 +1221,7 @@ Fl_Tooltip::enable(m_rkr->ena_tool);}
     Fl_Group BANK_SET {
       label Bank
       user_data 1
-      xywh {5 26 630 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
+      xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo11 {
         xywh {5 26 630 554}
