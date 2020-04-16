@@ -91,7 +91,7 @@ public:
     void MergeIntPreset(char *filename);
     void loadmiditable (char *filename);
     void savemiditable (char *filename);
-    void loadskin (char *filename);
+    bool loadskin (char *filename);
     void saveskin (char *filename);
     int loadbank (char *filename);
     void loadnames();

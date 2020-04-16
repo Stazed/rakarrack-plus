@@ -291,7 +291,7 @@ decl {Fl_Color label_color;} {private global
 decl {RKR *rkr; // extern global} {private global
 }
 
-decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {selected private global
+decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private global
 }
 
 class RKRGUI {open
@@ -358,12 +358,14 @@ Pexitprogram=1;} open
           MenuItem Load_Skin {
             label {Load S&kin}
             callback {char *filename;
-filename=fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrs");
+filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
+if (filename == NULL) return;
+filename = fl_filename_setext(filename,".rkrs");
 int last = rkr->relfontsize;
-rkr->loadskin(filename);
-Put_Skin(last);}
+if(rkr->loadskin(filename))
+{
+    Put_Skin(last);
+}} selected
             xywh {0 0 36 21}
           }
           MenuItem Save_Skin {

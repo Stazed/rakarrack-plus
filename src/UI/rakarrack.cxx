@@ -79,12 +79,14 @@ void RKRGUI::cb_BankWindow1(Fl_Menu_* o, void* v) {
 
 void RKRGUI::cb_Load_Skin_i(Fl_Menu_*, void*) {
   char *filename;
-filename=fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrs");
+filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
+if (filename == NULL) return;
+filename = fl_filename_setext(filename,".rkrs");
 int last = rkr->relfontsize;
-rkr->loadskin(filename);
-Put_Skin(last);
+if(rkr->loadskin(filename))
+{
+    Put_Skin(last);
+};
 }
 void RKRGUI::cb_Load_Skin(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Load_Skin_i(o,v);

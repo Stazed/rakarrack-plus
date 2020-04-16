@@ -2489,21 +2489,24 @@ RKR::saveskin(char *filename)
 
 }
 
-void
+bool
 RKR::loadskin(char *filename)
 {
     char buf[256];
     FILE *fn;
 
     if ((fn = fopen(filename, "r")) == NULL)
-        return;
+    {
+        fl_alert("Error reading %s file!\n", filename);
+        return 0;
+    }
 
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         fl_alert("Error reading %s file!\n", filename);
         load_skin_error(fn);
-        return;
+        return 0;
     }
     sscanf(buf, "%d,%d\n", &resolution, &sh);
 
@@ -2512,7 +2515,7 @@ RKR::loadskin(char *filename)
     {
         fl_alert("Error reading %s file!\n", filename);
         load_skin_error(fn);
-        return;
+        return 0;
     }
     sscanf(buf, "%d,%d,%d,%d\n", &sback_color, &sfore_color, &slabel_color, &sleds_color);
 
@@ -2522,7 +2525,7 @@ RKR::loadskin(char *filename)
     {
         fl_alert("Error reading %s file!\n", filename);
         load_skin_error(fn);
-        return;
+        return 0;
     }
     for (unsigned int i = 0; i < 256; i++)
     {
@@ -2537,7 +2540,7 @@ RKR::loadskin(char *filename)
     {
         fl_alert("Error reading %s file!\n", filename);
         load_skin_error(fn);
-        return;
+        return 0;
     }
     sscanf(buf, "%d,%d\n", &relfontsize, &font);
 
@@ -2546,11 +2549,13 @@ RKR::loadskin(char *filename)
     {
         fl_alert("Error reading %s file!\n", filename);
         load_skin_error(fn);
-        return;
+        return 0;
     }
     sscanf(buf, "%d\n", &sschema);
 
     fclose(fn);
+    
+    return 1; // no errors
 }
 
 void
