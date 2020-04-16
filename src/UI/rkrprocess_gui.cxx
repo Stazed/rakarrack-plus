@@ -775,12 +775,6 @@ void RKRGUI::load_stat()
     rakarrack.get(rkr->PrefNom("Settings W"), w, 640);
     rakarrack.get(rkr->PrefNom("Settings H"), h, 554);
 
-    if (w < 640)
-        w = 640;
-    
-    if (h < 554)
-        h = 554;
-
     Settings->resize(x, y, w, h);
 
 
