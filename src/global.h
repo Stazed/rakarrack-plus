@@ -231,7 +231,9 @@ extern char *banktoload;
 extern char *jack_client_name;
 
 /* The font size adjustments */
-extern int g_default_font_size;
+extern int global_font_size;
+const int C_DEFAULT_FONT_SIZE = 10;
+const int C_DONT_CHANGE_FONT_SIZE = 0;
 
 
 #endif

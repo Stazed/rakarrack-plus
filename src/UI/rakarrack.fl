@@ -291,7 +291,7 @@ decl {Fl_Color label_color;} {private global
 decl {RKR *rkr; // extern global} {private global
 }
 
-decl {int g_default_font_size = 10;  // extern global} {private global
+decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {selected private global
 }
 
 class RKRGUI {open
@@ -1729,12 +1729,12 @@ o->hide();} open
     } {}
     Fl_Window Settings {
       callback {save_stat(3);
-o->hide();} open selected
-      xywh {390 434 530 580} type Double box NO_BOX color 4 selection_color 7 resizable
+o->hide();} open
+      xywh {390 434 530 580} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "settingswindow_gui.h"}
       code1 {o->initialize(rkr, this);}
       code2 {o->hide();}
-      class SettingsWindowGui size_range {320 290 3200 2900} visible
+      class SettingsWindowGui size_range {320 290 3200 2900}
     } {}
     Fl_Window MIDILearn {
       callback {MIDILearn->CancelRec->do_callback();

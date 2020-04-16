@@ -28,7 +28,7 @@
 
 RKR_Menu_Bar::RKR_Menu_Bar(int X, int Y, int W, int H, const char *label) : Fl_Menu_Bar(X, Y, W, H, label)
 {
-    m_previous_font_size = g_default_font_size;
+    m_previous_font_size = global_font_size;
     m_start_width = W;
     m_start_height = H;
     m_start_font_offset = 0;
@@ -38,9 +38,9 @@ RKR_Menu_Bar::RKR_Menu_Bar(int X, int Y, int W, int H, const char *label) : Fl_M
 void RKR_Menu_Bar::draw()
 {
     /* To update the font size if user changes the value in settings */
-    if(g_default_font_size != m_previous_font_size)
+    if(global_font_size != m_previous_font_size)
     {
-        m_previous_font_size = g_default_font_size;
+        m_previous_font_size = global_font_size;
         font_resize(w(), h());
     }
 
@@ -53,7 +53,7 @@ void RKR_Menu_Bar::font_resize(int W, int H)
     float H_ratio = (float) H / m_start_height;
     float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
     
-    int font_size = g_default_font_size + m_start_font_offset;
+    int font_size = global_font_size + m_start_font_offset;
     int adjusted_label_size = (float) (font_size * resize_ratio);
     
     /* The submenu items */

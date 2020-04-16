@@ -573,7 +573,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 {
     // change the label colors
     label_color = bcolor;
-    chfsize(0);
+    chfsize(C_DONT_CHANGE_FONT_SIZE);
 
 
     for (int t = 0; t < Settings->STabs->children(); t++)
@@ -685,7 +685,7 @@ void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
 {
     // change the leds color
     leds_color = bcolor;
-    chfsize(0);
+    chfsize(C_DONT_CHANGE_FONT_SIZE);
 }
 
 void RKRGUI::put_icon(Fl_Window* window)
@@ -5146,7 +5146,7 @@ void RKRGUI::chfsize(int value)
 {
     /* This is used by all RKR widget overrides to adjust font size in draw().
      * This variable should only be adjusted here. */
-    g_default_font_size += value;
+    global_font_size += value;
 
     /* Sort through widgets and adjust font colors and type */
     for (int t = 0; t < Principal->children(); t++)

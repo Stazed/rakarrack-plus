@@ -30,7 +30,7 @@ Fl_Color back_color;
 Fl_Color fore_color; 
 Fl_Color label_color; 
 RKR *rkr; // extern global
-int g_default_font_size = 10; // extern global
+int global_font_size = C_DEFAULT_FONT_SIZE; // extern global
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();
