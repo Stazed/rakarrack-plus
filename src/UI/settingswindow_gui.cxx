@@ -2476,14 +2476,14 @@ void SettingsWindowGui::make_table_window() {
         {
             char buf[20];
             sprintf(buf,"%d",(int)y);
-            RKR_Box* b = new RKR_Box(6,y*25+22,60,25);
+            RKR_Box* b = new RKR_Box(6,y*25+22,40,25);
             b->box(FL_DOWN_BOX);
             b->copy_label(buf);
             b->labelcolor(FL_BLACK);
             b->user_data((void *) c_bank_number);
             b->m_start_font_offset = 4;
       
-            RKR_Choice* cb = new RKR_Choice(140,y*25+25,40,20);
+            RKR_Choice* cb = new RKR_Choice(120,y*25+25,40,20);
             cb->copy_label("Bank");
             cb->labelcolor(FL_WHITE);
             cb->add("1");
@@ -2495,7 +2495,7 @@ void SettingsWindowGui::make_table_window() {
             cb->m_start_label_offset = 4;
             cb->m_start_text_offset = 4;
       
-            RKR_Choice* cp = new RKR_Choice(245,y*25+25,130,20);
+            RKR_Choice* cp = new RKR_Choice(225,y*25+25,130,20);
             cp->copy_label("Preset");
             cp->labelcolor(FL_WHITE);
             cp->user_data((void *) (c_preset_used + y));
@@ -2508,9 +2508,12 @@ void SettingsWindowGui::make_table_window() {
         
         Put_MidiTable();
         
-        /* Resize because the starting window may have been resized */
-        int MIDI_set_start_width = 518;
-        int MIDI_set_start_height = 554;
+        /* Resize because the starting window may have been resized.
+         * Adjusted to the current size of the window group which is
+         * MIDI_SET->w(), MIDI_SET->h(). If the group default size is
+         * ever changed in fluid, the magic numbers must be changed to match */
+        int MIDI_set_start_width = 518;     // The MIDI group default width - set in fluid
+        int MIDI_set_start_height = 554;    // The MIDI group default height - set in fluid
         float W_midi_set_ratio = (float) MIDI_SET->w() / MIDI_set_start_width;
         float H_midi_set_ratio = (float) MIDI_SET->h() / MIDI_set_start_height;
         
