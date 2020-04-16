@@ -56,7 +56,7 @@ void RKR_Scroll::resize(int X, int Y, int W, int H)
             c_choice->resize
             (
                 (c_choice->get_start_x()* W_ratio),
-                (c_choice->get_start_y() + 346) * H_ratio,
+                (c_choice->get_start_y() + m_start_y - 20) * H_ratio,   // 20 is height of RKR_Choice
                 (c_choice->get_start_width()) * W_ratio ,
                 c_choice->get_start_height() * H_ratio
             );
@@ -66,8 +66,8 @@ void RKR_Scroll::resize(int X, int Y, int W, int H)
             RKR_Box *c_box = (RKR_Box *) c;
             c_box->resize
             (
-                (c_box->get_start_x() + 30 )* W_ratio,
-                (c_box->get_start_y() + 346) * H_ratio,
+                (c_box->get_start_x() + m_start_x )* W_ratio,
+                (c_box->get_start_y() + m_start_y - 20) * H_ratio,      // 20 is height of RKR_Choice
                 (c_box->get_start_width() * W_ratio),
                 c_box->get_start_height() * H_ratio
             );
