@@ -542,7 +542,7 @@ void RKRGUI::GuiTimeout(void)
         rkr->change_scale = 0;  // false
         if (rkr->scalable )
         {
-            Principal->size_range(320, 240, 3200, 2400, 0, 0, 1);
+            Principal->size_range(384, 216, 3840, 2160, 0, 0, 1);
         }
         else
         {
@@ -712,9 +712,9 @@ void RKRGUI::load_stat()
 
     rakarrack.get(rkr->PrefNom("Principal X"), x, 1);
     rakarrack.get(rkr->PrefNom("Principal Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Principal W"), w, 800);
+    rakarrack.get(rkr->PrefNom("Principal W"), w, 960);
     rkr->resolution = w;
-    rakarrack.get(rkr->PrefNom("Principal H"), h, 600);
+    rakarrack.get(rkr->PrefNom("Principal H"), h, 540);
 
     char tmp[256];
     sprintf(tmp, "%s/bg.png", DATADIR);
@@ -727,11 +727,11 @@ void RKRGUI::load_stat()
         chfsize(rkr->relfontsize);
     rakarrack.get(rkr->PrefNom("Font"), rkr->font, 0);
 
-    rakarrack.get(rkr->PrefNom("Background Color"), b, 774778368);
-    rakarrack.get(rkr->PrefNom("Foreground Color"), f, 1602392832);
+    rakarrack.get(rkr->PrefNom("Background Color"), b, 56);
+    rakarrack.get(rkr->PrefNom("Foreground Color"), f, 34499072);
     rakarrack.get(rkr->PrefNom("Leds Color"), l, -13485824);
     rakarrack.get(rkr->PrefNom("Labels Color"), a, -1075849984);
-    rakarrack.get(rkr->PrefNom("Schema"), k, 0);
+    rakarrack.get(rkr->PrefNom("Schema"), k, 4);
     Settings->scheme_ch->value(k);
     Settings->scheme_ch->do_callback();
     rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide, 0);
@@ -741,39 +741,36 @@ void RKRGUI::load_stat()
 
     rakarrack.get(rkr->PrefNom("BankWindow X"), x, 1);
     rakarrack.get(rkr->PrefNom("BankWindow Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("BankWindow W"), w, 800);
-    rakarrack.get(rkr->PrefNom("BankWindow H"), h, 600);
+    rakarrack.get(rkr->PrefNom("BankWindow W"), w, 680);
+    rakarrack.get(rkr->PrefNom("BankWindow H"), h, 425);
 
     BankWindow->resize(x, y, w, h);
 
     rakarrack.get(rkr->PrefNom("Order X"), x, 1);
     rakarrack.get(rkr->PrefNom("Order Y"), y, 1);
     rakarrack.get(rkr->PrefNom("Order W"), w, 600);
-    rakarrack.get(rkr->PrefNom("Order H"), h, 480);
+    rakarrack.get(rkr->PrefNom("Order H"), h, 330);
 
     Order->resize(x, y, w, h);
 
     rakarrack.get(rkr->PrefNom("MIDI Learn X"), x, 1);
     rakarrack.get(rkr->PrefNom("MIDI Learn Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("MIDI Learn W"), w, 640);
-    rakarrack.get(rkr->PrefNom("MIDI Learn H"), h, 480);
+    rakarrack.get(rkr->PrefNom("MIDI Learn W"), w, 600);
+    rakarrack.get(rkr->PrefNom("MIDI Learn H"), h, 360);
 
     MIDILearn->resize(x, y, w, h);
 
     rakarrack.get(rkr->PrefNom("Trigger X"), x, 1);
     rakarrack.get(rkr->PrefNom("Trigger Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Trigger W"), w, 205);
+    rakarrack.get(rkr->PrefNom("Trigger W"), w, 280);
     rakarrack.get(rkr->PrefNom("Trigger H"), h, 165);
-
-    if (h < 165)
-        h = 165;
 
     Trigger->resize(x, y, w, h);
 
     rakarrack.get(rkr->PrefNom("Settings X"), x, 1);
     rakarrack.get(rkr->PrefNom("Settings Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Settings W"), w, 640);
-    rakarrack.get(rkr->PrefNom("Settings H"), h, 554);
+    rakarrack.get(rkr->PrefNom("Settings W"), w, 620);
+    rakarrack.get(rkr->PrefNom("Settings H"), h, 410);
 
     Settings->resize(x, y, w, h);
 
