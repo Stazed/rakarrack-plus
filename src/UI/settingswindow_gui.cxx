@@ -2233,7 +2233,7 @@ this->when(FL_WHEN_RELEASE);
       o->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* o
-    { RKR_Scroll* o = scroll = new RKR_Scroll(30, 366, 480, 162);
+    { scroll = new RKR_Scroll(30, 366, 360, 162);
       scroll->type(6);
       scroll->box(FL_NO_BOX);
       scroll->color(FL_BACKGROUND_COLOR);
@@ -2245,7 +2245,6 @@ this->when(FL_WHEN_RELEASE);
       scroll->user_data((void*)(5000));
       scroll->align(Fl_Align(FL_ALIGN_TOP));
       scroll->when(FL_WHEN_RELEASE);
-      o->m_start_label_offset = 4; // 10 - 14
       scroll->end();
     } // RKR_Scroll* scroll
     MIDI_SET->end();
@@ -2471,48 +2470,57 @@ Fl_Menu_Item * SettingsWindowGui::get_menu_Har_Downsample() {
 
 void SettingsWindowGui::make_table_window() {
   // Fill settings midi table scroll
-      scroll->begin();
-    
-      for (intptr_t y=0; y<128; y++)
-      {
-          char buf[20];
-          sprintf(buf,"%d",(int)y);
-          RKR_Box* b = new RKR_Box(6,y*25+22,60,25);
-          b->box(FL_DOWN_BOX);
-          b->copy_label(buf);
-          b->labelcolor(FL_BLACK);
-          b->user_data((void *) c_bank_number);
-          b->m_start_font_offset = 4;
-    
-          RKR_Choice* cb = new RKR_Choice(120,y*25+25,60,20);
-          cb->copy_label("Bank");
-          cb->labelcolor(FL_WHITE);
-          cb->add("1");
-          cb->add("2");
-          cb->add("3");
-          cb->add("U");
-          cb->user_data((void *) (c_bank_used + y));
-          cb->callback((Fl_Callback *)m_rgui->bank_click);
-          cb->m_start_label_offset = 4;
-          cb->m_start_text_offset = 4;
-    
-          RKR_Choice* cp = new RKR_Choice(240,y*25+25,230,20);
-          cp->copy_label("Preset");
-          cp->labelcolor(FL_WHITE);
-          cp->user_data((void *) (c_preset_used + y));
-          cp->callback((Fl_Callback *)m_rgui->p_click);
-          cp->m_start_label_offset = 4;
-          cp->m_start_text_offset = 4;
-      }
-    
-      scroll->end();
-  
-      scroll->set_start_width(580);
-      scroll->set_start_height(177);
-  
-      Put_MidiTable();
-  
-      scroll->scroll_to(-30,-330);
+        scroll->begin();
+      
+        for (intptr_t y=0; y<128; y++)
+        {
+            char buf[20];
+            sprintf(buf,"%d",(int)y);
+            RKR_Box* b = new RKR_Box(6,y*25+22,60,25);
+            b->box(FL_DOWN_BOX);
+            b->copy_label(buf);
+            b->labelcolor(FL_BLACK);
+            b->user_data((void *) c_bank_number);
+            b->m_start_font_offset = 4;
+      
+            RKR_Choice* cb = new RKR_Choice(140,y*25+25,40,20);
+            cb->copy_label("Bank");
+            cb->labelcolor(FL_WHITE);
+            cb->add("1");
+            cb->add("2");
+            cb->add("3");
+            cb->add("U");
+            cb->user_data((void *) (c_bank_used + y));
+            cb->callback((Fl_Callback *)m_rgui->bank_click);
+            cb->m_start_label_offset = 4;
+            cb->m_start_text_offset = 4;
+      
+            RKR_Choice* cp = new RKR_Choice(245,y*25+25,130,20);
+            cp->copy_label("Preset");
+            cp->labelcolor(FL_WHITE);
+            cp->user_data((void *) (c_preset_used + y));
+            cp->callback((Fl_Callback *)m_rgui->p_click);
+            cp->m_start_label_offset = 4;
+            cp->m_start_text_offset = 4;
+        }
+      
+        scroll->end();
+        
+        Put_MidiTable();
+        
+        /* Resize because the starting window may have been resized */
+        int MIDI_set_start_width = 518;
+        int MIDI_set_start_height = 554;
+        float W_midi_set_ratio = (float) MIDI_SET->w() / MIDI_set_start_width;
+        float H_midi_set_ratio = (float) MIDI_SET->h() / MIDI_set_start_height;
+        
+        scroll->resize
+        (
+          (float) scroll->get_start_x() * W_midi_set_ratio,
+          (float) scroll->get_start_y() * H_midi_set_ratio,
+          ((float) scroll->get_start_width() * W_midi_set_ratio),
+          (float) scroll->get_start_height() * H_midi_set_ratio
+        );
 }
 
 void SettingsWindowGui::fill_mptable(int num,int value) {
