@@ -711,7 +711,7 @@ void RKRGUI::load_stat()
     rakarrack.get(rkr->PrefNom("Principal H"), h, 540);
 
     char tmp[256];
-    sprintf(tmp, "%s/bg.png", DATADIR);
+    sprintf(tmp, "%s/blackbg.png", DATADIR);
 
     rakarrack.get(rkr->PrefNom("Enable Background Image"), rkr->EnableBackgroundImage, 1);
     rakarrack.get(rkr->PrefNom("Background Image"), rkr->BackgroundImage, tmp, 256);

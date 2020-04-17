@@ -43,6 +43,7 @@ install (FILES Default.rkrb
     bg6.png
     bg_gray_furr.png
     bg.png
+    blackbg.png
     DESTINATION share/rakarrack-plus)
 
 
