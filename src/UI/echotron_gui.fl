@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -232,9 +232,14 @@ filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".dly");
 strcpy(rkr->efx_Echotron->Filename,filename);
-rkr->efx_Echotron->setfile(USERFILE);
+
+if(!rkr->efx_Echotron->setfile(USERFILE))
+{
+    fl_alert("Error loading %s file!\\n", filename);
+}
+
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }
@@ -255,7 +260,7 @@ rkr->efx_Echotron->changepar(3,(int)o->value());}
     user_data 12
     callback {rkr->efx_Echotron->changepar(8,(int)o->value());
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
