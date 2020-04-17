@@ -147,10 +147,15 @@ void RKRGUI::cb_ConvertReverb(Fl_Menu_* o, void* v) {
 
 void RKRGUI::cb_ImportPresets_i(Fl_Menu_*, void*) {
   char *filename;
-filename=fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
-if (filename==NULL) return;
-rkr->MergeIntPreset(filename);
-Show_Next_Time();
+  
+filename = fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
+
+if (filename == NULL) return;
+
+if(rkr->MergeIntPreset(filename))
+{
+    Show_Next_Time();
+};
 }
 void RKRGUI::cb_ImportPresets(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ImportPresets_i(o,v);

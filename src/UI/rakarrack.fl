@@ -298,7 +298,7 @@ class RKRGUI {open
 } {
   decl {CommonGuiMenu *m_looper_bar;} {private local
   }
-  decl {CommonGuiMenu *m_looper_ms;} {selected private local
+  decl {CommonGuiMenu *m_looper_ms;} {private local
   }
   decl {int made;} {private local
   }
@@ -314,8 +314,8 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
-      xywh {166 94 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+Pexitprogram=1;} open selected
+      xywh {55 97 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -327,7 +327,7 @@ Pexitprogram=1;} open
         class RKR_Menu_Bar
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -416,10 +416,15 @@ rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
           MenuItem ImportPresets {
             label {Import Internal Presets}
             callback {char *filename;
-filename=fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
-if (filename==NULL) return;
-rkr->MergeIntPreset(filename);
-Show_Next_Time();}
+  
+filename = fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
+
+if (filename == NULL) return;
+
+if(rkr->MergeIntPreset(filename))
+{
+    Show_Next_Time();
+}}
             xywh {0 0 36 21} divider
           }
           MenuItem salir {

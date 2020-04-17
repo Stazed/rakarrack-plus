@@ -2695,9 +2695,29 @@ RKR::DelIntPreset(int num, char *name)
         fl_alert("Error removing internal preset");
 }
 
-void
+/**
+ *  This adds to the list of internal presets that are user defined. It can result in
+ *  duplicate preset names for the same effect. FIXME
+ * 
+ * @param filename
+ *      The file that holds the internal presets to be added.
+ * 
+ * @return 
+ *      Zero(0) if error.
+ *      One(1) on success.
+ */
+bool
 RKR::MergeIntPreset(char *filename)
 {
+    FILE *fn;
+    if ((fn = fopen(filename, "r")) == NULL)
+    {
+        fl_alert("Error reading %s file!\n", filename);
+        return 0;
+    }
+    
+    fclose(fn);
+        
     char orden[1024];
     char tempfile[256];
     char tempfile2[256];
@@ -2709,16 +2729,24 @@ RKR::MergeIntPreset(char *filename)
     sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
     sprintf(tempfile2, "%s%s", getenv("HOME"), "/.rkrtemp");
 
-    sprintf(orden, "cat %s %s > %s\n", tempfile, filename, tempfile2);
-
+    sprintf(orden, "cat %s '%s' > %s\n", tempfile, filename, tempfile2);
+    
     if (system(orden) == -1)
+    {
         fl_alert("Error merging internal presets!");
-
+        return 0;
+    }
+    
     memset(orden, 0, sizeof (orden));
 
     sprintf(orden, "mv %s %s\n", tempfile2, tempfile);
     if (system(orden) == -1)
+    {
         fl_alert("Error merging internal presets!");
+        return 0;
+    }
+
+    return 1;
 }
 
 void

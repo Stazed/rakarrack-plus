@@ -88,7 +88,7 @@ public:
     void savefile (char *filename);
     void SaveIntPreset(int num, char *name);
     void DelIntPreset(int num, char *name);
-    void MergeIntPreset(char *filename);
+    bool MergeIntPreset(char *filename);
     void loadmiditable (char *filename);
     void savemiditable (char *filename);
     bool loadskin (char *filename);
