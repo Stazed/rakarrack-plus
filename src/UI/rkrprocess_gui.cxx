@@ -185,11 +185,6 @@ void RKRGUI::GuiTimeout(void)
         }
     }
 
-
-    if (Principal->w() != rkr->resolution)
-        adjustfont();
-
-
     if (stecla == 1)
     {
         if (rkr->Selected_Preset < 60)
@@ -713,7 +708,6 @@ void RKRGUI::load_stat()
     rakarrack.get(rkr->PrefNom("Principal X"), x, 1);
     rakarrack.get(rkr->PrefNom("Principal Y"), y, 1);
     rakarrack.get(rkr->PrefNom("Principal W"), w, 960);
-    rkr->resolution = w;
     rakarrack.get(rkr->PrefNom("Principal H"), h, 540);
 
     char tmp[256];
@@ -5220,22 +5214,6 @@ void RKRGUI::chfsize(int font_size)
     ChangeActives();
 
     Fl::redraw();
-}
-
-void RKRGUI::adjustfont()
-{
-    /* The adjustment for chfsize() and fontsize used to be 
-       necessary before the auto resize of fonts was added. Does not
-       work with F12 full screen and occasionally changed the font size.
-       This function is somewhat useless now, could be eliminated
-       with direct setting of resolution at called location.
-     */
-
-//    int change = Principal->w() - rkr->resolution;
-//    int value = change / 100;
-    rkr->resolution = Principal->w();
-//    rkr->fontsize += value;
-//    chfsize(value);
 }
 
 void RKRGUI::ChangeActives()

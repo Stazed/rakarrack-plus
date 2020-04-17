@@ -8,7 +8,7 @@ decl {\#include "../process.h"} {public local
 decl {\#include "../global.h"} {public global
 }
 
-decl {\#include "RKR_Entry_Input.h"} {public global
+decl {\#include "RKR_Entry_Input.h"} {selected public global
 }
 
 decl {\#include "sliderW.h"} {public global
@@ -320,7 +320,7 @@ Pexitprogram=1;} open
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         code1 {o->set_submenu_paths(main_submenu_paths);}
@@ -365,7 +365,7 @@ filename = fl_filename_setext(filename,".rkrs");
 if(rkr->loadskin(filename))
 {
     Put_Skin();
-}} selected
+}}
             xywh {0 0 36 21}
           }
           MenuItem Save_Skin {
@@ -381,6 +381,7 @@ rkr->slabel_color = (int) label_color;
 rkr->sback_color = (int) back_color;
 rkr->sfore_color = (int) fore_color;
 rkr->sleds_color = (int) leds_color;
+rkr->resolution = (int) Principal->w();
 rkr->sh = (int) Principal->h();
 rkr->sschema = Settings->scheme_ch->value();
 
@@ -1828,8 +1829,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {PutBackground()} {open
   } {}
   Function {chfsize(int font_size)} {open
-  } {}
-  Function {adjustfont()} {open
   } {}
   Function {ChangeActives()} {open
   } {}
