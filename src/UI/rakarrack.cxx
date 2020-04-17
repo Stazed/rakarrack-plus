@@ -104,8 +104,8 @@ rkr->slabel_color = (int) label_color;
 rkr->sback_color = (int) back_color;
 rkr->sfore_color = (int) fore_color;
 rkr->sleds_color = (int) leds_color;
-rkr->resolution = (int) Principal->w();
-rkr->sh = (int) Principal->h();
+rkr->swidth = (int) Principal->w();
+rkr->sheight = (int) Principal->h();
 rkr->sschema = Settings->scheme_ch->value();
 
 

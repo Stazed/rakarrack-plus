@@ -8,7 +8,7 @@ decl {\#include "../process.h"} {public local
 decl {\#include "../global.h"} {public global
 }
 
-decl {\#include "RKR_Entry_Input.h"} {selected public global
+decl {\#include "RKR_Entry_Input.h"} {public global
 }
 
 decl {\#include "sliderW.h"} {public global
@@ -298,7 +298,7 @@ class RKRGUI {open
 } {
   decl {CommonGuiMenu *m_looper_bar;} {private local
   }
-  decl {CommonGuiMenu *m_looper_ms;} {private local
+  decl {CommonGuiMenu *m_looper_ms;} {selected private local
   }
   decl {int made;} {private local
   }
@@ -381,8 +381,8 @@ rkr->slabel_color = (int) label_color;
 rkr->sback_color = (int) back_color;
 rkr->sfore_color = (int) fore_color;
 rkr->sleds_color = (int) leds_color;
-rkr->resolution = (int) Principal->w();
-rkr->sh = (int) Principal->h();
+rkr->swidth = (int) Principal->w();
+rkr->sheight = (int) Principal->h();
 rkr->sschema = Settings->scheme_ch->value();
 
 

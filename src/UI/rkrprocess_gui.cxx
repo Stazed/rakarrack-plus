@@ -5407,7 +5407,7 @@ void RKRGUI::findpos(int num, int value, Fl_Widget*)
 void RKRGUI::Put_Skin()
 {
     // adjust based on theme selected in settings-look
-    Principal->resize(Principal->x(), Principal->y(), rkr->resolution, rkr->sh);
+    Principal->resize(Principal->x(), Principal->y(), rkr->swidth, rkr->sheight);
 
     back_color = (Fl_Color) rkr->sback_color;
     fore_color = (Fl_Color) rkr->sfore_color;

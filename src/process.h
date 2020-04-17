@@ -406,8 +406,8 @@ public:
     int NumParams;
     int NumEffects;
     int fontsize;
-    int resolution;
-    int sh;
+    int swidth;
+    int sheight;
     int sschema;
     int slabel_color;
     int sfore_color;
