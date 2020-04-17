@@ -1154,6 +1154,7 @@ RKR::loadfile(char *filename)
     if ((fn = fopen(filename, "r")) == NULL)
     {
         filetoload = NULL; // bad file name
+        fl_alert("Error loading %s file!\n", filename);
         return;
     }
 
