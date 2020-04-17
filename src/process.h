@@ -405,7 +405,7 @@ public:
     int MIDIway;
     int NumParams;
     int NumEffects;
-    int relfontsize;
+    int fontsize;
     int resolution;
     int sh;
     int sschema;

@@ -722,9 +722,9 @@ void RKRGUI::load_stat()
     rakarrack.get(rkr->PrefNom("Enable Background Image"), rkr->EnableBackgroundImage, 1);
     rakarrack.get(rkr->PrefNom("Background Image"), rkr->BackgroundImage, tmp, 256);
     PutBackground();
-    rakarrack.get(rkr->PrefNom("FontSize"), rkr->relfontsize, C_DEFAULT_FONT_SIZE);
-    if (rkr->relfontsize != C_DEFAULT_FONT_SIZE)
-        chfsize(rkr->relfontsize);
+    rakarrack.get(rkr->PrefNom("FontSize"), rkr->fontsize, C_DEFAULT_FONT_SIZE);
+    if (rkr->fontsize != C_DEFAULT_FONT_SIZE)
+        chfsize(rkr->fontsize);
     rakarrack.get(rkr->PrefNom("Font"), rkr->font, 0);
 
     rakarrack.get(rkr->PrefNom("Background Color"), b, 56);
@@ -1031,7 +1031,7 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("Principal Y"), Principal->y());
         rakarrack.set(rkr->PrefNom("Principal W"), Principal->w());
         rakarrack.set(rkr->PrefNom("Principal H"), Principal->h());
-        rakarrack.set(rkr->PrefNom("FontSize"), rkr->relfontsize);
+        rakarrack.set(rkr->PrefNom("FontSize"), rkr->fontsize);
         rakarrack.set(rkr->PrefNom("Font"), rkr->font);
 
         rakarrack.set(rkr->PrefNom("Background Color"), (int) back_color);
@@ -5148,7 +5148,7 @@ void RKRGUI::chfsize(int font_size)
      * This variable should only be adjusted here. */
     if(font_size)
     {
-        global_font_size = rkr->relfontsize = font_size;
+        global_font_size = rkr->fontsize = font_size;
     }
 
     /* Sort through widgets and adjust font colors and type */
@@ -5224,7 +5224,7 @@ void RKRGUI::chfsize(int font_size)
 
 void RKRGUI::adjustfont()
 {
-    /* The adjustment for chfsize() and relfontsize used to be 
+    /* The adjustment for chfsize() and fontsize used to be 
        necessary before the auto resize of fonts was added. Does not
        work with F12 full screen and occasionally changed the font size.
        This function is somewhat useless now, could be eliminated
@@ -5234,7 +5234,7 @@ void RKRGUI::adjustfont()
 //    int change = Principal->w() - rkr->resolution;
 //    int value = change / 100;
     rkr->resolution = Principal->w();
-//    rkr->relfontsize += value;
+//    rkr->fontsize += value;
 //    chfsize(value);
 }
 
@@ -5439,7 +5439,7 @@ void RKRGUI::Put_Skin()
     Settings->scheme_ch->value(rkr->sschema);
     Settings->scheme_ch->do_callback();
     PutBackground();
-    chfsize(rkr->relfontsize);
+    chfsize(rkr->fontsize);
     Leds_Color_Change(leds_color);
     Buttons_Color_Change(fore_color);
 
