@@ -36,11 +36,11 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {81 268 530 580} type Double hide
+  xywh {81 268 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
-  class Fl_Double_Window size_range {740 554 0 0}
+  class Fl_Double_Window size_range {740 554 0 0} visible
 } {
   Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
   } {
@@ -131,7 +131,7 @@ break;
       Fl_Browser Font_Bro {
         label Font
         callback {m_rkr->font = (int)o->value()-1;
-m_rgui->chfsize(0);}
+m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
         xywh {30 100 400 225} type Select labelcolor 7 align 1 when 1
         code0 {o->m_start_label_offset = 4; // 10 - 14}
         code1 {o->m_start_text_offset = 4; // 10 - 14}
@@ -146,8 +146,7 @@ m_rgui->chfsize(0);}
       Fl_Button FSless {
         label {-}
         user_data 77
-        callback {m_rkr->relfontsize--;
-m_rgui->chfsize(-1);}
+        callback {m_rgui->chfsize(global_font_size - 1);}
         xywh {95 330 30 20}
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Button
@@ -155,8 +154,7 @@ m_rgui->chfsize(-1);}
       Fl_Button FSplus {
         label {+}
         user_data 77
-        callback {m_rkr->relfontsize++;
-m_rgui->chfsize(1);}
+        callback {m_rgui->chfsize(global_font_size + 1);}
         xywh {130 330 30 20}
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Button
@@ -164,9 +162,7 @@ m_rgui->chfsize(1);}
       Fl_Button FSReset {
         label Reset
         user_data 77
-        callback {int size = m_rkr->relfontsize;
-  m_rkr->relfontsize=0;
-  m_rgui->chfsize(-size);}
+        callback {m_rgui->chfsize(C_DEFAULT_FONT_SIZE);} selected
         xywh {165 330 57 20}
         code0 {o->m_start_font_offset = 4; // 10 - 14}
         class RKR_Button
@@ -1352,8 +1348,7 @@ m_rgui->Scan_Bank_Dir();}
         (float) scroll->get_start_y() * H_midi_set_ratio,
         ((float) scroll->get_start_width() * W_midi_set_ratio),
         (float) scroll->get_start_height() * H_midi_set_ratio
-      );} {selected
-    }
+      );} {}
   }
   Function {fill_mptable(int num,int value)} {} {
     code {// Fill settings scroll

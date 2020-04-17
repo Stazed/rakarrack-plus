@@ -722,8 +722,8 @@ void RKRGUI::load_stat()
     rakarrack.get(rkr->PrefNom("Enable Background Image"), rkr->EnableBackgroundImage, 1);
     rakarrack.get(rkr->PrefNom("Background Image"), rkr->BackgroundImage, tmp, 256);
     PutBackground();
-    rakarrack.get(rkr->PrefNom("FontSize"), rkr->relfontsize, 0);
-    if (rkr->relfontsize != 0)
+    rakarrack.get(rkr->PrefNom("FontSize"), rkr->relfontsize, C_DEFAULT_FONT_SIZE);
+    if (rkr->relfontsize != C_DEFAULT_FONT_SIZE)
         chfsize(rkr->relfontsize);
     rakarrack.get(rkr->PrefNom("Font"), rkr->font, 0);
 
@@ -5137,16 +5137,19 @@ void RKRGUI::PutBackground()
 /**
  *  Changes the font size, colors and font type.
  * 
- * @param value
+ * @param font_size
  *      The amount to change the font size. When != 0, it comes from the
  *      user adjusting the font up or down from the Settings/Preferences/Look
  *      + or - buttons for font size.
  */
-void RKRGUI::chfsize(int value)
+void RKRGUI::chfsize(int font_size)
 {
-    /* This is used by all RKR widget overrides to adjust font size in draw().
+    /* global_font_size is used by all RKR widget overrides to adjust font size in draw().
      * This variable should only be adjusted here. */
-    global_font_size += value;
+    if(font_size)
+    {
+        global_font_size = rkr->relfontsize = font_size;
+    }
 
     /* Sort through widgets and adjust font colors and type */
     for (int t = 0; t < Principal->children(); t++)
@@ -5423,7 +5426,7 @@ void RKRGUI::findpos(int num, int value, Fl_Widget*)
     }
 }
 
-void RKRGUI::Put_Skin(int last)
+void RKRGUI::Put_Skin()
 {
     // adjust based on theme selected in settings-look
     Principal->resize(Principal->x(), Principal->y(), rkr->resolution, rkr->sh);
@@ -5436,7 +5439,7 @@ void RKRGUI::Put_Skin(int last)
     Settings->scheme_ch->value(rkr->sschema);
     Settings->scheme_ch->do_callback();
     PutBackground();
-    chfsize(rkr->relfontsize - last);
+    chfsize(rkr->relfontsize);
     Leds_Color_Change(leds_color);
     Buttons_Color_Change(fore_color);
 

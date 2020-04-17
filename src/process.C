@@ -308,7 +308,7 @@ RKR::RKR() :
     MIDIway(),
     NumParams(423),
     NumEffects(47),
-    relfontsize(),
+    relfontsize(C_DEFAULT_FONT_SIZE),
     resolution(),
     sh(),
     sschema(),

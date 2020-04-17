@@ -82,10 +82,10 @@ void RKRGUI::cb_Load_Skin_i(Fl_Menu_*, void*) {
 filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
 if (filename == NULL) return;
 filename = fl_filename_setext(filename,".rkrs");
-int last = rkr->relfontsize;
+
 if(rkr->loadskin(filename))
 {
-    Put_Skin(last);
+    Put_Skin();
 };
 }
 void RKRGUI::cb_Load_Skin(Fl_Menu_* o, void* v) {

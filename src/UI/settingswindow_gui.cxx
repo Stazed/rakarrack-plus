@@ -55,32 +55,28 @@ Fl_Menu_Item SettingsWindowGui::menu_scheme_ch[] = {
 
 void SettingsWindowGui::cb_Font_Bro_i(RKR_Browser* o, void*) {
   m_rkr->font = (int)o->value()-1;
-m_rgui->chfsize(0);
+m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);
 }
 void SettingsWindowGui::cb_Font_Bro(RKR_Browser* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Font_Bro_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSless_i(RKR_Button*, void*) {
-  m_rkr->relfontsize--;
-m_rgui->chfsize(-1);
+  m_rgui->chfsize(global_font_size - 1);
 }
 void SettingsWindowGui::cb_FSless(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSless_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSplus_i(RKR_Button*, void*) {
-  m_rkr->relfontsize++;
-m_rgui->chfsize(1);
+  m_rgui->chfsize(global_font_size + 1);
 }
 void SettingsWindowGui::cb_FSplus(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSplus_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSReset_i(RKR_Button*, void*) {
-  int size = m_rkr->relfontsize;
-  m_rkr->relfontsize=0;
-  m_rgui->chfsize(-size);
+  m_rgui->chfsize(C_DEFAULT_FONT_SIZE);
 }
 void SettingsWindowGui::cb_FSReset(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSReset_i(o,v);

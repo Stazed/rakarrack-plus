@@ -580,11 +580,11 @@ public:
   void ActMIDI();
   void ActOnOff();
   void PutBackground();
-  void chfsize(int value);
+  void chfsize(int font_size);
   void adjustfont();
   void ChangeActives();
   void findpos(int num, int value, Fl_Widget*);
-  void Put_Skin(int last);
+  void Put_Skin();
   void FillML(/*int type*/);
   void DisAssigns();
   void Prepare_Order();
