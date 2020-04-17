@@ -2752,7 +2752,10 @@ RKR::loadmiditable(char *filename)
     FILE *fn;
 
     if ((fn = fopen(filename, "r")) == NULL)
+    {
+        fl_alert("Error loading %s file!\n", filename);
         return;
+    }
 
     for (int i = 0; i < 128; i++)
     {
