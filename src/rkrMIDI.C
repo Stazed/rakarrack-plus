@@ -423,8 +423,8 @@ RKR::ActiveUn(int value)
         else Exciter_Bypass = 0;
         break;
     case 23:
-        if (inoff) MBDist_Bypass = 1;
-        else MBDist_Bypass = 0;
+        if (inoff) DistBand_Bypass = 1;
+        else DistBand_Bypass = 0;
         break;
     case 24:
         if (inoff) Arpie_Bypass = 1;
@@ -614,7 +614,7 @@ RKR::checkonoff(int miraque)
         if (Exciter_Bypass) return (0);
         break;
     case 23:
-        if (MBDist_Bypass) return (0);
+        if (DistBand_Bypass) return (0);
         break;
     case 24:
         if (Arpie_Bypass) return (0);
@@ -1673,43 +1673,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 202:
-        efx_MBDist->changepar(0, Dry_Wet(value));
+        efx_DistBand->changepar(0, Dry_Wet(value));
         break;
 
     case 203:
-        efx_MBDist->changepar(2, value);
+        efx_DistBand->changepar(2, value);
         break;
 
     case 204:
-        efx_MBDist->changepar(3, value);
+        efx_DistBand->changepar(3, value);
         break;
 
     case 205:
-        efx_MBDist->changepar(4, value);
+        efx_DistBand->changepar(4, value);
         break;
 
     case 206:
-        efx_MBDist->changepar(8, (int) ((float) value * C_MC_100_RANGE));
+        efx_DistBand->changepar(8, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 207:
-        efx_MBDist->changepar(9, (int) ((float) value * C_MC_100_RANGE));
+        efx_DistBand->changepar(9, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 208:
-        efx_MBDist->changepar(10, (int) ((float) value * C_MC_100_RANGE));
+        efx_DistBand->changepar(10, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 209:
-        efx_MBDist->changepar(12, 20 + (int) ((float) value * C_MC_980_RANGE));
+        efx_DistBand->changepar(12, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 210:
-        efx_MBDist->changepar(13, 800 + (int) ((float) value * C_MC_11200_RANGE));
+        efx_DistBand->changepar(13, 800 + (int) ((float) value * C_MC_11200_RANGE));
         break;
 
     case 211:
-        efx_MBDist->changepar(1, value);
+        efx_DistBand->changepar(1, value);
         break;
 
     case 212:

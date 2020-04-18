@@ -1,6 +1,6 @@
 /*
 
-  MBDist.h - Distorsion Effect
+  DistBand.h - Distorsion Effect
 
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -23,17 +23,17 @@
 
 */
 
-#ifndef MBDIST_H
-#define MBDIST_H
+#ifndef DISTBAND_H
+#define DISTBAND_H
 
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 
-class MBDist
+class DistBand
 {
 public:
-    MBDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
-    ~MBDist ();
+    DistBand (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
+    ~DistBand ();
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
@@ -86,7 +86,7 @@ private:
     int PdriveL;
     int PdriveM;
     int PdriveH;
-    //MBDist type
+    //DistBand type
     int Pnegate;	//if the input is negated
     int Cross1;		//lowpass filter
     int Cross2;		//highpass filter

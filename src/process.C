@@ -86,7 +86,7 @@ RKR::RKR() :
     efx_DFlange(NULL),
     efx_Ring(NULL),
     efx_Exciter(NULL),
-    efx_MBDist(NULL),
+    efx_DistBand(NULL),
     efx_Arpie(NULL),
     efx_Expander(NULL),
     efx_Synthfilter(NULL),
@@ -152,7 +152,7 @@ RKR::RKR() :
     DFlange_Bypass(),
     Ring_Bypass(),
     Exciter_Bypass(),
-    MBDist_Bypass(),
+    DistBand_Bypass(),
     Arpie_Bypass(),
     Expander_Bypass(),
     Shuffle_Bypass(),
@@ -200,7 +200,7 @@ RKR::RKR() :
     Valve_B(),
     Ring_B(),
     Exciter_B(),
-    MBDist_B(),
+    DistBand_B(),
     Arpie_B(),
     Expander_B(),
     Shuffle_B(),
@@ -619,7 +619,7 @@ RKR::RKR() :
     efx_DFlange = new Dflange(fSample_rate, period);
     efx_Ring = new Ring(fSample_rate, period);
     efx_Exciter = new Exciter(fSample_rate, period);
-    efx_MBDist = new MBDist(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
+    efx_DistBand = new DistBand(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_Arpie = new Arpie(fSample_rate, period);
     efx_Expander = new Expander(fSample_rate, period);
     efx_Shuffle = new Shuffle(fSample_rate, period);
@@ -1272,7 +1272,7 @@ RKR::~RKR()
     delete efx_DFlange;
     delete efx_Ring;
     delete efx_Exciter;
-    delete efx_MBDist;
+    delete efx_DistBand;
     delete efx_Arpie;
     delete efx_Expander;
     delete efx_Shuffle;
@@ -1845,7 +1845,7 @@ RKR::cleanup_efx()
     efx_DFlange->cleanup();
     efx_Ring->cleanup();
     efx_Exciter->cleanup();
-    efx_MBDist->cleanup();
+    efx_DistBand->cleanup();
     efx_Arpie->cleanup();
     efx_Expander->cleanup();
     efx_Shuffle->cleanup();
@@ -2170,10 +2170,10 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case 23:
-                if (MBDist_Bypass)
+                if (DistBand_Bypass)
                 {
-                    efx_MBDist->out(efxoutl, efxoutr);
-                    Vol_Efx(23, efx_MBDist->outvolume);
+                    efx_DistBand->out(efxoutl, efxoutr);
+                    Vol_Efx(23, efx_DistBand->outvolume);
                 }
                 break;
 

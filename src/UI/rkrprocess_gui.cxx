@@ -1423,9 +1423,9 @@ void RKRGUI::Put_Loaded()
                 EXCITER->exciter_preset->do_callback(EXCITER->exciter_preset, 1);
                 break;
 
-            case 23://MBDist
-                MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
-                MBDIST->mbdist_preset->do_callback(MBDIST->mbdist_preset, 1);
+            case 23://DistBand
+                DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
+                DISTBAND->distband_preset->do_callback(DISTBAND->distband_preset, 1);
                 break;
 
             case 24://Arpie
@@ -1692,7 +1692,7 @@ void RKRGUI::reordena()
     DFLANGE->hide();
     RING->hide();
     EXCITER->hide();
-    MBDIST->hide();
+    DISTBAND->hide();
     ARPIE->hide();
     EXPANDER->hide();
     SHUFFLE->hide();
@@ -2085,15 +2085,15 @@ void RKRGUI::reordena()
                 break;
 
             case 23:
-                MBDIST->position(x[i], y[i]);
-                MBDIST->mbdist_activar->shortcut(s[i]);
+                DISTBAND->position(x[i], y[i]);
+                DISTBAND->distband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
-                    MBDIST->show();
-                if (rkr->MBDist_Bypass)
+                    DISTBAND->show();
+                if (rkr->DistBand_Bypass)
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
-                        MBDIST->show();
+                        DISTBAND->show();
                 }
                 else
                     rkr->active[i] = 0;
@@ -3797,44 +3797,44 @@ void RKRGUI::ActMIDI()
                 EXCITER->ex_10->redraw();
                 break;
             case 202:
-                MBDIST->mbdist_WD->value(Dry_Wet(rkr->efx_MBDist->getpar(0)));
-                MBDIST->mbdist_WD->redraw();
+                DISTBAND->distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(0)));
+                DISTBAND->distband_WD->redraw();
                 break;
             case 203:
-                MBDIST->mbdist_LRc->value(rkr->efx_MBDist->getpar(2));
-                MBDIST->mbdist_LRc->redraw();
+                DISTBAND->distband_LRc->value(rkr->efx_DistBand->getpar(2));
+                DISTBAND->distband_LRc->redraw();
                 break;
             case 204:
-                MBDIST->mbdist_drive->value(rkr->efx_MBDist->getpar(3));
-                MBDIST->mbdist_drive->redraw();
+                DISTBAND->distband_drive->value(rkr->efx_DistBand->getpar(3));
+                DISTBAND->distband_drive->redraw();
                 break;
             case 205:
-                MBDIST->mbdist_level->value(rkr->efx_MBDist->getpar(4));
-                MBDIST->mbdist_level->redraw();
+                DISTBAND->distband_level->value(rkr->efx_DistBand->getpar(4));
+                DISTBAND->distband_level->redraw();
                 break;
             case 206:
-                MBDIST->mbdist_volL->value(rkr->efx_MBDist->getpar(8));
-                MBDIST->mbdist_volL->redraw();
+                DISTBAND->distband_volL->value(rkr->efx_DistBand->getpar(8));
+                DISTBAND->distband_volL->redraw();
                 break;
             case 207:
-                MBDIST->mbdist_volM->value(rkr->efx_MBDist->getpar(9));
-                MBDIST->mbdist_volM->redraw();
+                DISTBAND->distband_volM->value(rkr->efx_DistBand->getpar(9));
+                DISTBAND->distband_volM->redraw();
                 break;
             case 208:
-                MBDIST->mbdist_volH->value(rkr->efx_MBDist->getpar(10));
-                MBDIST->mbdist_volH->redraw();
+                DISTBAND->distband_volH->value(rkr->efx_DistBand->getpar(10));
+                DISTBAND->distband_volH->redraw();
                 break;
             case 209:
-                MBDIST->mbdist_cross1->value(rkr->efx_MBDist->getpar(12));
-                MBDIST->mbdist_cross1->redraw();
+                DISTBAND->distband_cross1->value(rkr->efx_DistBand->getpar(12));
+                DISTBAND->distband_cross1->redraw();
                 break;
             case 210:
-                MBDIST->mbdist_cross2->value(rkr->efx_MBDist->getpar(13));
-                MBDIST->mbdist_cross2->redraw();
+                DISTBAND->distband_cross2->value(rkr->efx_DistBand->getpar(13));
+                DISTBAND->distband_cross2->redraw();
                 break;
             case 211:
-                MBDIST->mbdist_pan->value(rkr->efx_MBDist->getpar(1) - 64);
-                MBDIST->mbdist_pan->redraw();
+                DISTBAND->distband_pan->value(rkr->efx_DistBand->getpar(1) - 64);
+                DISTBAND->distband_pan->redraw();
                 break;
             case 212:
                 ARPIE->arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
@@ -4920,8 +4920,8 @@ void RKRGUI::ActOnOff()
                 EXCITER->exciter_activar->do_callback();
                 break;
             case 23:
-                MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
-                MBDIST->mbdist_activar->do_callback();
+                DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
+                DISTBAND->distband_activar->do_callback();
                 break;
             case 24:
                 ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
@@ -5073,7 +5073,7 @@ void RKRGUI::PutBackground()
     DFLANGE->image(InOut->image());
     RING->image(InOut->image());
     EXCITER->image(InOut->image());
-    MBDIST->image(InOut->image());
+    DISTBAND->image(InOut->image());
     ARPIE->image(InOut->image());
     EXPANDER->image(InOut->image());
     SHUFFLE->image(InOut->image());
@@ -6796,12 +6796,12 @@ void RKRGUI::RandomPreset()
                 EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
                 break;
 
-            case 23://MBDist
+            case 23://DistBand
                 if (i < numEff)
-                    rkr->MBDist_Bypass = 1;
+                    rkr->DistBand_Bypass = 1;
                 else
-                    rkr->MBDist_Bypass = 0;
-                MBDIST->mbdist_activar->value(rkr->MBDist_Bypass);
+                    rkr->DistBand_Bypass = 0;
+                DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
                 break;
 
             case 24://Arpie

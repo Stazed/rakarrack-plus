@@ -1548,20 +1548,20 @@ void RKRGUI::make_window() {
       EXCITER->hide();
       EXCITER->end();
     } // ExciterGui* EXCITER
-    { MBDIST = new MbdistGui(480, 212, 158, 184);
-      MBDIST->box(FL_UP_BOX);
-      MBDIST->color(FL_FOREGROUND_COLOR);
-      MBDIST->selection_color(FL_FOREGROUND_COLOR);
-      MBDIST->labeltype(FL_NORMAL_LABEL);
-      MBDIST->labelfont(1);
-      MBDIST->labelsize(14);
-      MBDIST->labelcolor(FL_FOREGROUND_COLOR);
-      MBDIST->user_data((void*)(1));
-      MBDIST->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      MBDIST->when(FL_WHEN_RELEASE);
-      MBDIST->hide();
-      MBDIST->end();
-    } // MbdistGui* MBDIST
+    { DISTBAND = new DistBandGui(480, 212, 158, 184);
+      DISTBAND->box(FL_UP_BOX);
+      DISTBAND->color(FL_FOREGROUND_COLOR);
+      DISTBAND->selection_color(FL_FOREGROUND_COLOR);
+      DISTBAND->labeltype(FL_NORMAL_LABEL);
+      DISTBAND->labelfont(1);
+      DISTBAND->labelsize(14);
+      DISTBAND->labelcolor(FL_FOREGROUND_COLOR);
+      DISTBAND->user_data((void*)(1));
+      DISTBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      DISTBAND->when(FL_WHEN_RELEASE);
+      DISTBAND->hide();
+      DISTBAND->end();
+    } // DistBandGui* DISTBAND
     { ARPIE = new ArpieGui(639, 212, 158, 184);
       ARPIE->box(FL_UP_BOX);
       ARPIE->color(FL_FOREGROUND_COLOR);

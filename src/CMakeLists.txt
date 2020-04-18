@@ -53,7 +53,7 @@ set (ProgSources
     UI/dflange_gui.cxx
     UI/ring_gui.cxx
     UI/exciter_gui.cxx
-    UI/mbdist_gui.cxx
+    UI/distband_gui.cxx
     UI/arpie_gui.cxx
     UI/expander_gui.cxx
     UI/shuffle_gui.cxx
@@ -121,7 +121,7 @@ set (ProgSources
     APhaser.C
     Dual_Flange.C
     Exciter.C
-    MBDist.C
+    DistBand.C
     Valve.C
     Arpie.C
     Expander.C

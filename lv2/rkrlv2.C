@@ -2034,18 +2034,18 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
 }
 
 
-///// mbdist /////////
-LV2_Handle init_mbdistlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
+///// distband /////////
+LV2_Handle init_distbandlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
     plug->nparams = 15;
-    plug->effectindex = IMBDIST;
+    plug->effectindex = IDISTBAND;
     plug->prev_bypass = 1;
 
     getFeatures(plug,host_features);
 
-    plug->mbdist = new MBDist( /*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
+    plug->distband = new DistBand( /*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -2054,7 +2054,7 @@ LV2_Handle init_mbdistlv2(const LV2_Descriptor* /* descriptor */,double sample_f
     return plug;
 }
 
-void run_mbdistlv2(LV2_Handle handle, uint32_t nframes)
+void run_distbandlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
@@ -2077,43 +2077,43 @@ void run_mbdistlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-        plug->mbdist->lv2_update_params(nframes);
+        plug->distband->lv2_update_params(nframes);
     }
     
     // we are good to run now
     //check and set changed parameters
     i=0;
     val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->mbdist->getpar(i) != val)
+    if(plug->distband->getpar(i) != val)
     {
-        plug->mbdist->changepar(i,val);
+        plug->distband->changepar(i,val);
     }
     i++;
     val = (int)*plug->param_p[i]+64;//1 pan
-    if(plug->mbdist->getpar(i) != val)
+    if(plug->distband->getpar(i) != val)
     {
-        plug->mbdist->changepar(i,val);
+        plug->distband->changepar(i,val);
     }
     for(i++; i<plug->nparams; i++) //2-14
     {
         val = (int)*plug->param_p[i];
-        if(plug->mbdist->getpar(i) != val)
+        if(plug->distband->getpar(i) != val)
         {
-            plug->mbdist->changepar(i,val);
+            plug->distband->changepar(i,val);
         }
     }
 
     //now run
-    plug->mbdist->out(plug->output_l_p,plug->output_r_p);
+    plug->distband->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
-    wetdry_mix(plug, plug->mbdist->outvolume, nframes);
+    wetdry_mix(plug, plug->distband->outvolume, nframes);
 
     xfade_check(plug,nframes);
 
     if(plug->prev_bypass)
     {
-        plug->mbdist->cleanup();
+        plug->distband->cleanup();
     }
 
     return;
@@ -5773,8 +5773,8 @@ void cleanup_rkrlv2(LV2_Handle handle)
         delete plug->noteID;
         delete plug->ring;
         break;
-    case IMBDIST:
-        delete plug->mbdist;
+    case IDISTBAND:
+        delete plug->distband;
         break;
     case IARPIE:
         delete plug->arp;
@@ -6289,13 +6289,13 @@ static const LV2_Descriptor ringlv2_descriptor=
     0//extension
 };
 
-static const LV2_Descriptor mbdistlv2_descriptor=
+static const LV2_Descriptor distbandlv2_descriptor=
 {
-    MBDISTLV2_URI,
-    init_mbdistlv2,
+    DISTBANDLV2_URI,
+    init_distbandlv2,
     connect_rkrlv2_ports,
     0,//activate
-    run_mbdistlv2,
+    run_distbandlv2,
     0,//deactivate
     cleanup_rkrlv2,
     0//extension
@@ -6692,8 +6692,8 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &dflangelv2_descriptor ;
     case IRING:
         return &ringlv2_descriptor ;
-    case IMBDIST:
-        return &mbdistlv2_descriptor ;
+    case IDISTBAND:
+        return &distbandlv2_descriptor ;
     case IARPIE:
         return &arplv2_descriptor ;
     case IEXPAND:

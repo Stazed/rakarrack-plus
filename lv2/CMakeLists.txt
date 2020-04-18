@@ -39,7 +39,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/Valve.C
   ../src/Dual_Flange.C
   ../src/Ring.C
-  ../src/MBDist.C
+  ../src/DistBand.C
   ../src/Arpie.C
   ../src/Expander.C
   ../src/Shuffle.C

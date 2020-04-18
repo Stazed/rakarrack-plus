@@ -1,6 +1,6 @@
 /*
 
-  MBDist.h - Distorsion Effect
+  MBVvol.h - Distorsion Effect
 
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul

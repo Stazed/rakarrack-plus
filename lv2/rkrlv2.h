@@ -56,7 +56,7 @@
 #include"Valve.h"
 #include"Dual_Flange.h"
 #include"Ring.h"
-#include"MBDist.h"
+#include"DistBand.h"
 #include"Arpie.h"
 #include"Expander.h"
 #include"Shuffle.h"
@@ -104,7 +104,7 @@
 #define VALVELV2_URI "https://github.com/Stazed/rakarrack-plus#Valve"
 #define DFLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Dual_Flange"
 #define RINGLV2_URI "https://github.com/Stazed/rakarrack-plus#Ring"
-#define MBDISTLV2_URI "https://github.com/Stazed/rakarrack-plus#DistBand"
+#define DISTBANDLV2_URI "https://github.com/Stazed/rakarrack-plus#DistBand"
 #define ARPIELV2_URI "https://github.com/Stazed/rakarrack-plus#Arpie"
 #define EXPANDLV2_URI "https://github.com/Stazed/rakarrack-plus#Expander"
 #define SHUFFLELV2_URI "https://github.com/Stazed/rakarrack-plus#Shuffle"
@@ -196,7 +196,7 @@ enum RKRLV2_effects_
 	IVALVE,
 	IDFLANGE,
 	IRING,
-	IMBDIST,
+	IDISTBAND,
 	IARPIE,//20
 	IEXPAND,
 	ISHUFF,
@@ -300,7 +300,7 @@ typedef struct _RKRLV2
     Valve* valve;		//16
     Dflange* dflange;   //17
     Ring* ring;			//18
-    MBDist* mbdist;		//19
+    DistBand* distband;		//19
     Arpie* arp;			//20
     Expander* expand;	//21
     Shuffle* shuf;		//22

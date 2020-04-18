@@ -54,7 +54,7 @@ class ValveGui; // forward declaration
 class DflangeGui; // forward declaration
 class RingGui; // forward declaration
 class ExciterGui; // forward declaration
-class MbdistGui; // forward declaration
+class DistBandGui; // forward declaration
 class ArpieGui; // forward declaration
 class ExpanderGui; // forward declaration
 class ShuffleGui; // forward declaration
@@ -112,7 +112,7 @@ class TrigWindowGui; // forward declaration
 #include "dflange_gui.h"
 #include "ring_gui.h"
 #include "exciter_gui.h"
-#include "mbdist_gui.h"
+#include "distband_gui.h"
 #include "arpie_gui.h"
 #include "expander_gui.h"
 #include "shuffle_gui.h"
@@ -309,7 +309,7 @@ public:
   DflangeGui *DFLANGE;
   RingGui *RING;
   ExciterGui *EXCITER;
-  MbdistGui *MBDIST;
+  DistBandGui *DISTBAND;
   ArpieGui *ARPIE;
   ExpanderGui *EXPANDER;
   ShuffleGui *SHUFFLE;

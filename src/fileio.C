@@ -74,7 +74,7 @@ const int presets_default[48][MAX_PRESET_SIZE] = {
     {0, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0, 0, 0, 0, 0},
     //Exciter
     {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0, 0, 0, 0},
-    //MBDist
+    //DistBand
     {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0, 0, 0, 0},
     //Arpie
     {0, 64, 126, 64, 30, 59, 0, 127, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -312,12 +312,12 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case 23:
-        //MBDist
+        //DistBand
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[24][0], &lv[24][1], &lv[24][2], &lv[24][3], &lv[24][4],
                &lv[24][5], &lv[24][6], &lv[24][7], &lv[24][8], &lv[24][9],
                &lv[24][10], &lv[24][11], &lv[24][12], &lv[24][13], &lv[24][14],
-               &MBDist_B);
+               &DistBand_B);
         break;
 
     case 24:
@@ -778,16 +778,16 @@ void RKR::getbuf(char *buf, int j)
         break;
 
     case 23:
-        //MBDist
+        //DistBand
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_MBDist->getpar(0), efx_MBDist->getpar(1),
-                efx_MBDist->getpar(2), efx_MBDist->getpar(3),
-                efx_MBDist->getpar(4), efx_MBDist->getpar(5),
-                efx_MBDist->getpar(6), efx_MBDist->getpar(7),
-                efx_MBDist->getpar(8), efx_MBDist->getpar(9),
-                efx_MBDist->getpar(10), efx_MBDist->getpar(11),
-                efx_MBDist->getpar(12), efx_MBDist->getpar(13),
-                efx_MBDist->getpar(14), MBDist_Bypass);
+                efx_DistBand->getpar(0), efx_DistBand->getpar(1),
+                efx_DistBand->getpar(2), efx_DistBand->getpar(3),
+                efx_DistBand->getpar(4), efx_DistBand->getpar(5),
+                efx_DistBand->getpar(6), efx_DistBand->getpar(7),
+                efx_DistBand->getpar(8), efx_DistBand->getpar(9),
+                efx_DistBand->getpar(10), efx_DistBand->getpar(11),
+                efx_DistBand->getpar(12), efx_DistBand->getpar(13),
+                efx_DistBand->getpar(14), DistBand_Bypass);
         break;
 
     case 24:
@@ -1571,13 +1571,13 @@ RKR::Actualizar_Audio()
             Exciter_Bypass = Exciter_B;
             break;
 
-        case 23://MBDist
+        case 23://DistBand
 
-            MBDist_Bypass = 0;
-            efx_MBDist->cleanup();
+            DistBand_Bypass = 0;
+            efx_DistBand->cleanup();
             for (i = 0; i <= 14; i++)
-                efx_MBDist->changepar(i, lv[24][i]);
-            MBDist_Bypass = MBDist_B;
+                efx_DistBand->changepar(i, lv[24][i]);
+            DistBand_Bypass = DistBand_B;
             break;
 
         case 24://Arpie
@@ -2028,7 +2028,7 @@ RKR::New()
     DFlange_B = 0;
     Ring_B = 0;
     Exciter_B = 0;
-    MBDist_B = 0;
+    DistBand_B = 0;
     Arpie_B = 0;
     Expander_B = 0;
     Shuffle_B = 0;
@@ -2141,7 +2141,7 @@ RKR::Bank_to_Preset(int i)
     DFlange_B = Bank[i].lv[21][19];
     Ring_B = Bank[i].lv[22][19];
     Exciter_B = Bank[i].lv[23][19];
-    MBDist_B = Bank[i].lv[24][19];
+    DistBand_B = Bank[i].lv[24][19];
     Arpie_B = Bank[i].lv[25][19];
     Expander_B = Bank[i].lv[26][19];
     Shuffle_B = Bank[i].lv[27][19];
@@ -2247,7 +2247,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j <= 12; j++)
         lv[23][j] = efx_Exciter->getpar(j);
     for (j = 0; j <= 14; j++)
-        lv[24][j] = efx_MBDist->getpar(j);
+        lv[24][j] = efx_DistBand->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[25][j] = efx_Arpie->getpar(j);
     for (j = 0; j <= 6; j++)
@@ -2352,7 +2352,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].lv[21][19] = DFlange_Bypass;
     Bank[i].lv[22][19] = Ring_Bypass;
     Bank[i].lv[23][19] = Exciter_Bypass;
-    Bank[i].lv[24][19] = MBDist_Bypass;
+    Bank[i].lv[24][19] = DistBand_Bypass;
     Bank[i].lv[25][19] = Arpie_Bypass;
     Bank[i].lv[26][19] = Expander_Bypass;
     Bank[i].lv[27][19] = Shuffle_Bypass;

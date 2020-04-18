@@ -1,5 +1,5 @@
 /*
-  MBDist.C - Distorsion effect
+  DistBand.C - Distorsion effect
 
   ZynAddSubFX - a software synthesizer
   Copyright (C) 2002-2005 Nasca Octavian Paul
@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "MBDist.h"
+#include "DistBand.h"
 
 /*
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
@@ -32,7 +32,7 @@
 
 // DistBand
 
-MBDist::MBDist(int wave_res, int wave_upq, int wave_dnq,
+DistBand::DistBand(int wave_res, int wave_upq, int wave_dnq,
         double sample_rate, uint32_t intermediate_bufsize) :
     WAVE_RES(wave_res),
     WAVE_UPQ(wave_upq),
@@ -95,7 +95,7 @@ MBDist::MBDist(int wave_res, int wave_upq, int wave_dnq,
     cleanup();
 }
 
-MBDist::~MBDist()
+DistBand::~DistBand()
 {
     clear_initialize();
 }
@@ -104,7 +104,7 @@ MBDist::~MBDist()
  * Cleanup the effect
  */
 void
-MBDist::cleanup()
+DistBand::cleanup()
 {
     lpf1l->cleanup();
     hpf1l->cleanup();
@@ -120,7 +120,7 @@ MBDist::cleanup()
 
 #ifdef LV2_SUPPORT
 void
-MBDist::lv2_update_params(uint32_t period)
+DistBand::lv2_update_params(uint32_t period)
 {
     if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
@@ -138,7 +138,7 @@ MBDist::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-MBDist::initialize()
+DistBand::initialize()
 {
     lowl = (float *) malloc(sizeof (float) * PERIOD);
     lowr = (float *) malloc(sizeof (float) * PERIOD);
@@ -178,7 +178,7 @@ MBDist::initialize()
 }
 
 void
-MBDist::clear_initialize()
+DistBand::clear_initialize()
 {
     free(lowl);
     free(lowr);
@@ -212,7 +212,7 @@ MBDist::clear_initialize()
  * Effect output
  */
 void
-MBDist::out(float * efxoutl, float * efxoutr)
+DistBand::out(float * efxoutl, float * efxoutr)
 {
     float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
     
@@ -304,28 +304,28 @@ MBDist::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-MBDist::setvolume(int value)
+DistBand::setvolume(int value)
 {
     Pvolume = value;
     outvolume = (float) Pvolume / 127.0f;
 }
 
 void
-MBDist::setpanning(int Ppanning)
+DistBand::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
     panning = ((float) Ppanning + 0.5f) / 127.0f;
 }
 
 void
-MBDist::setlrcross(int Plrcross)
+DistBand::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
     lrcross = (float) Plrcross / 127.0f * 1.0f;
 }
 
 void
-MBDist::setCross1(int value)
+DistBand::setCross1(int value)
 {
     Cross1 = value;
     lpf1l->setfreq((float) value);
@@ -335,7 +335,7 @@ MBDist::setCross1(int value)
 }
 
 void
-MBDist::setCross2(int value)
+DistBand::setCross2(int value)
 {
     Cross2 = value;
     hpf2l->setfreq((float) value);
@@ -345,7 +345,7 @@ MBDist::setCross2(int value)
 }
 
 void
-MBDist::setpreset(int npreset)
+DistBand::setpreset(int npreset)
 {
     const int PRESET_SIZE = 15;
     const int NUM_PRESETS = 8;
@@ -387,7 +387,7 @@ MBDist::setpreset(int npreset)
 }
 
 void
-MBDist::changepar(int npar, int value)
+DistBand::changepar(int npar, int value)
 {
     switch (npar)
     {
@@ -449,7 +449,7 @@ MBDist::changepar(int npar, int value)
 }
 
 int
-MBDist::getpar(int npar)
+DistBand::getpar(int npar)
 {
     switch (npar)
     {

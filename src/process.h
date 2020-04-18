@@ -30,7 +30,7 @@
 #include "Dual_Flange.h"
 #include "Ring.h"
 #include "Exciter.h"
-#include "MBDist.h"
+#include "DistBand.h"
 #include "Arpie.h"
 #include "Expander.h"
 #include "Shuffle.h"
@@ -170,7 +170,7 @@ public:
     class Dflange *efx_DFlange;
     class Ring *efx_Ring;
     class Exciter *efx_Exciter;
-    class MBDist *efx_MBDist;
+    class DistBand *efx_DistBand;
     class Arpie *efx_Arpie;
     class Expander *efx_Expander;
     class Synthfilter *efx_Synthfilter;
@@ -238,7 +238,7 @@ public:
     int DFlange_Bypass;
     int Ring_Bypass;
     int Exciter_Bypass;
-    int MBDist_Bypass;
+    int DistBand_Bypass;
     int Arpie_Bypass;
     int Expander_Bypass;
     int Shuffle_Bypass;
@@ -286,7 +286,7 @@ public:
     int Valve_B;
     int Ring_B;
     int Exciter_B;
-    int MBDist_B;
+    int DistBand_B;
     int Arpie_B;
     int Expander_B;
     int Shuffle_B;
