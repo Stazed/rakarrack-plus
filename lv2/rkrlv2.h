@@ -52,7 +52,7 @@
 #include"Cabinet.h"
 #include"MusicDelay.h"
 #include"DynamicFilter.h"
-#include"NewDist.h"
+#include"Derelict.h"
 #include"Valve.h"
 #include"Dual_Flange.h"
 #include"Ring.h"
@@ -296,7 +296,7 @@ typedef struct _RKRLV2
     Cabinet* cab;       //12
     MusicDelay* mdel; 	//13
     DynamicFilter* wah; //14
-    NewDist* dere; 		//15
+    Derelict* dere; 		//15
     Valve* valve;		//16
     Dflange* dflange;   //17
     Ring* ring;			//18

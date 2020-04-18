@@ -1393,9 +1393,9 @@ void RKRGUI::Put_Loaded()
                 GATE->gate_preset->do_callback(GATE->gate_preset, 1);
                 break;
 
-            case 17://NewDist
-                NEWDIST->newdist_activar->value(rkr->NewDist_Bypass);
-                NEWDIST->newdist_preset->do_callback(NEWDIST->newdist_preset, 1);
+            case 17://Derelict
+                DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
+                DERELICT->derelict_preset->do_callback(DERELICT->derelict_preset, 1);
                 break;
 
             case 18://APhaser
@@ -1686,7 +1686,7 @@ void RKRGUI::reordena()
     HAR->hide();
     MUSDELAY->hide();
     GATE->hide();
-    NEWDIST->hide();
+    DERELICT->hide();
     APHASER->hide();
     VALVE->hide();
     DFLANGE->hide();
@@ -1995,15 +1995,15 @@ void RKRGUI::reordena()
                 break;
 
             case 17:
-                NEWDIST->position(x[i], y[i]);
-                NEWDIST->newdist_activar->shortcut(s[i]);
+                DERELICT->position(x[i], y[i]);
+                DERELICT->derelict_activar->shortcut(s[i]);
                 if (!rkr->deachide)
-                    NEWDIST->show();
-                if (rkr->NewDist_Bypass)
+                    DERELICT->show();
+                if (rkr->Derelict_Bypass)
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
-                        NEWDIST->show();
+                        DERELICT->show();
                 }
                 else
                     rkr->active[i] = 0;
@@ -3469,40 +3469,40 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_stdf->redraw();
                 break;
             case 125:
-                NEWDIST->newdist_WD->value(Dry_Wet(rkr->efx_NewDist->getpar(0)));
-                NEWDIST->newdist_WD->redraw();
+                DERELICT->derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(0)));
+                DERELICT->derelict_WD->redraw();
                 break;
             case 126:
-                NEWDIST->newdist_pan->value(rkr->efx_NewDist->getpar(1) - 64);
-                NEWDIST->newdist_pan->redraw();
+                DERELICT->derelict_pan->value(rkr->efx_Derelict->getpar(1) - 64);
+                DERELICT->derelict_pan->redraw();
                 break;
             case 127:
-                NEWDIST->newdist_LRc->value(rkr->efx_NewDist->getpar(2));
-                NEWDIST->newdist_LRc->redraw();
+                DERELICT->derelict_LRc->value(rkr->efx_Derelict->getpar(2));
+                DERELICT->derelict_LRc->redraw();
                 break;
             case 2:
-                NEWDIST->newdist_drive->value(rkr->efx_NewDist->getpar(3));
-                NEWDIST->newdist_drive->redraw();
+                DERELICT->derelict_drive->value(rkr->efx_Derelict->getpar(3));
+                DERELICT->derelict_drive->redraw();
                 break;
             case 3:
-                NEWDIST->newdist_level->value(rkr->efx_NewDist->getpar(4));
-                NEWDIST->newdist_level->redraw();
+                DERELICT->derelict_level->value(rkr->efx_Derelict->getpar(4));
+                DERELICT->derelict_level->redraw();
                 break;
             case 4:
-                NEWDIST->newdist_lpf->value(rkr->efx_NewDist->getpar(7));
-                NEWDIST->newdist_lpf->redraw();
+                DERELICT->derelict_lpf->value(rkr->efx_Derelict->getpar(7));
+                DERELICT->derelict_lpf->redraw();
                 break;
             case 5:
-                NEWDIST->newdist_hpf->value(rkr->efx_NewDist->getpar(8));
-                NEWDIST->newdist_hpf->redraw();
+                DERELICT->derelict_hpf->value(rkr->efx_Derelict->getpar(8));
+                DERELICT->derelict_hpf->redraw();
                 break;
             case 6:
-                NEWDIST->newdist_st->value(rkr->efx_NewDist->getpar(9));
-                NEWDIST->newdist_st->redraw();
+                DERELICT->derelict_st->value(rkr->efx_Derelict->getpar(9));
+                DERELICT->derelict_st->redraw();
                 break;
             case 8:
-                NEWDIST->newdist_oct->value(rkr->efx_NewDist->getpar(11));
-                NEWDIST->newdist_oct->redraw();
+                DERELICT->derelict_oct->value(rkr->efx_Derelict->getpar(11));
+                DERELICT->derelict_oct->redraw();
                 break;
             case 9:
                 DIST->dist_oct->value(rkr->efx_Distorsion->getpar(12));
@@ -4896,8 +4896,8 @@ void RKRGUI::ActOnOff()
                 GATE->gate_activar->do_callback();
                 break;
             case 17:
-                NEWDIST->newdist_activar->value(rkr->NewDist_Bypass);
-                NEWDIST->newdist_activar->do_callback();
+                DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
+                DERELICT->derelict_activar->do_callback();
                 break;
             case 18:
                 APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
@@ -5067,7 +5067,7 @@ void RKRGUI::PutBackground()
     HAR->image(InOut->image());
     MUSDELAY->image(InOut->image());
     GATE->image(InOut->image());
-    NEWDIST->image(InOut->image());
+    DERELICT->image(InOut->image());
     APHASER->image(InOut->image());
     VALVE->image(InOut->image());
     DFLANGE->image(InOut->image());
@@ -6748,12 +6748,12 @@ void RKRGUI::RandomPreset()
                 GATE->gate_activar->value(rkr->Gate_Bypass);
                 break;
 
-            case 17://NewDist
+            case 17://Derelict
                 if (i < numEff)
-                    rkr->NewDist_Bypass = 1;
+                    rkr->Derelict_Bypass = 1;
                 else
-                    rkr->NewDist_Bypass = 0;
-                NEWDIST->newdist_activar->value(rkr->NewDist_Bypass);
+                    rkr->Derelict_Bypass = 0;
+                DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
                 break;
 
             case 18://APhaser

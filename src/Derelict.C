@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "NewDist.h"    // Derelict
+#include "Derelict.h"    // Derelict
 
 /*
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
@@ -33,7 +33,7 @@
 
 // does anyone else see how funny this class is? say it out loud. Perhaps this will become so popular they will start a new_dist colony ;)
 
-NewDist::NewDist(int wave_res, int wave_upq, int wave_dnq,
+Derelict::Derelict(int wave_res, int wave_upq, int wave_dnq,
                  double sample_rate, uint32_t intermediate_bufsize) :
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
@@ -88,7 +88,7 @@ NewDist::NewDist(int wave_res, int wave_upq, int wave_dnq,
     cleanup();
 }
 
-NewDist::~NewDist()
+Derelict::~Derelict()
 {
     clear_initialize();
 }
@@ -97,7 +97,7 @@ NewDist::~NewDist()
  * Cleanup the effect
  */
 void
-NewDist::cleanup()
+Derelict::cleanup()
 {
     lpfl->cleanup();
     hpfl->cleanup();
@@ -111,7 +111,7 @@ NewDist::cleanup()
 
 #ifdef LV2_SUPPORT
 void
-NewDist::lv2_update_params(uint32_t period)
+Derelict::lv2_update_params(uint32_t period)
 {
     if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
@@ -129,7 +129,7 @@ NewDist::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-NewDist::initialize()
+Derelict::initialize()
 {
     octoutl = (float *) malloc(sizeof (float) * PERIOD);
     octoutr = (float *) malloc(sizeof (float) * PERIOD);
@@ -172,7 +172,7 @@ NewDist::initialize()
 }
 
 void
-NewDist::clear_initialize()
+Derelict::clear_initialize()
 {
     free(octoutl);
     free(octoutr);
@@ -200,7 +200,7 @@ NewDist::clear_initialize()
  */
 
 void
-NewDist::applyfilters(float * efxoutl, float * efxoutr, uint32_t period)
+Derelict::applyfilters(float * efxoutl, float * efxoutr, uint32_t period)
 {
     lpfl->filterout(efxoutl, period);
     hpfl->filterout(efxoutl, period);
@@ -212,7 +212,7 @@ NewDist::applyfilters(float * efxoutl, float * efxoutr, uint32_t period)
  * Effect output
  */
 void
-NewDist::out(float * efxoutl, float * efxoutr)
+Derelict::out(float * efxoutl, float * efxoutr)
 {
     // FIXME inputvol is never used, Pnegate does nothing !!!
     float inputvol = .5f;
@@ -293,7 +293,7 @@ NewDist::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-NewDist::setvolume(int Pvolume)
+Derelict::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
 
@@ -303,21 +303,21 @@ NewDist::setvolume(int Pvolume)
 }
 
 void
-NewDist::setpanning(int Ppanning)
+Derelict::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
     panning = ((float) Ppanning + 0.5f) / 127.0f;
 }
 
 void
-NewDist::setlrcross(int Plrcross)
+Derelict::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
     lrcross = (float) Plrcross / 127.0f * 1.0f;
 }
 
 void
-NewDist::setlpf(int value)
+Derelict::setlpf(int value)
 {
     Plpf = value;
     float fr = (float) Plpf;
@@ -326,7 +326,7 @@ NewDist::setlpf(int value)
 }
 
 void
-NewDist::sethpf(int value)
+Derelict::sethpf(int value)
 {
     Phpf = value;
     float fr = (float) Phpf;
@@ -335,24 +335,24 @@ NewDist::sethpf(int value)
 }
 
 void
-NewDist::setoctave(int Poctave)
+Derelict::setoctave(int Poctave)
 {
     this->Poctave = Poctave;
     octmix = (float) (Poctave) / 127.0f;
 }
 
 void
-NewDist::setpreset(int npreset)
+Derelict::setpreset(int npreset)
 {
     const int PRESET_SIZE = 12;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //NewDist 1
+        //Derelict 1
         {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0, 0},
-        //NewDist 2
+        //Derelict 2
         {0, 64, 64, 95, 45, 6, 0, 3459, 209, 60, 1, 0},
-        //NewDist 3
+        //Derelict 3
         {0, 64, 64, 43, 77, 16, 0, 2983, 118, 83, 0, 0}
     };
 
@@ -374,7 +374,7 @@ NewDist::setpreset(int npreset)
 }
 
 void
-NewDist::changepar(int npar, int value)
+Derelict::changepar(int npar, int value)
 {
     switch (npar)
     {
@@ -424,7 +424,7 @@ NewDist::changepar(int npar, int value)
 }
 
 int
-NewDist::getpar(int npar)
+Derelict::getpar(int npar)
 {
     switch (npar)
     {

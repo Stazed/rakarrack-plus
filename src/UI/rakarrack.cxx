@@ -1464,20 +1464,20 @@ void RKRGUI::make_window() {
       GATE->hide();
       GATE->end();
     } // GateGui* GATE
-    { NEWDIST = new NewdistGui(321, 413, 158, 184);
-      NEWDIST->box(FL_UP_BOX);
-      NEWDIST->color(FL_FOREGROUND_COLOR);
-      NEWDIST->selection_color(FL_FOREGROUND_COLOR);
-      NEWDIST->labeltype(FL_NORMAL_LABEL);
-      NEWDIST->labelfont(1);
-      NEWDIST->labelsize(14);
-      NEWDIST->labelcolor(FL_FOREGROUND_COLOR);
-      NEWDIST->user_data((void*)(1));
-      NEWDIST->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      NEWDIST->when(FL_WHEN_RELEASE);
-      NEWDIST->hide();
-      NEWDIST->end();
-    } // NewdistGui* NEWDIST
+    { DERELICT = new DerelictGui(321, 413, 158, 184);
+      DERELICT->box(FL_UP_BOX);
+      DERELICT->color(FL_FOREGROUND_COLOR);
+      DERELICT->selection_color(FL_FOREGROUND_COLOR);
+      DERELICT->labeltype(FL_NORMAL_LABEL);
+      DERELICT->labelfont(1);
+      DERELICT->labelsize(14);
+      DERELICT->labelcolor(FL_FOREGROUND_COLOR);
+      DERELICT->user_data((void*)(1));
+      DERELICT->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      DERELICT->when(FL_WHEN_RELEASE);
+      DERELICT->hide();
+      DERELICT->end();
+    } // DerelictGui* DERELICT
     { APHASER = new AphaserGui(480, 413, 158, 184);
       APHASER->box(FL_UP_BOX);
       APHASER->color(FL_FOREGROUND_COLOR);

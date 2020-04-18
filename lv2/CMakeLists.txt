@@ -35,7 +35,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/FilterParams.C
   ../src/SVFilter.C
   ../src/FormantFilter.C
-  ../src/NewDist.C
+  ../src/Derelict.C
   ../src/Valve.C
   ../src/Dual_Flange.C
   ../src/Ring.C

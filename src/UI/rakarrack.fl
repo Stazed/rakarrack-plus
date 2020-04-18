@@ -162,7 +162,7 @@ decl {class MusdelayGui; // forward declaration} {public global
 decl {class GateGui; // forward declaration} {public global
 }
 
-decl {class NewdistGui; // forward declaration} {public global
+decl {class DerelictGui; // forward declaration} {public global
 }
 
 decl {class AphaserGui; // forward declaration} {public global
@@ -782,11 +782,11 @@ Fl::focus(Open_Order);}
         code0 {\#include "gate_gui.h"}
         class GateGui
       } {}
-      Fl_Group NEWDIST {
+      Fl_Group DERELICT {
         user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "newdist_gui.h"}
-        class NewdistGui
+        class DerelictGui
       } {}
       Fl_Group APHASER {
         user_data 1

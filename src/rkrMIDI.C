@@ -399,8 +399,8 @@ RKR::ActiveUn(int value)
         else Gate_Bypass = 0;
         break;
     case 17:
-        if (inoff) NewDist_Bypass = 1;
-        else NewDist_Bypass = 0;
+        if (inoff) Derelict_Bypass = 1;
+        else Derelict_Bypass = 0;
         break;
     case 18:
         if (inoff) APhaser_Bypass = 1;
@@ -596,7 +596,7 @@ RKR::checkonoff(int miraque)
         if (Gate_Bypass) return (0);
         break;
     case 17:
-        if (NewDist_Bypass) return (0);
+        if (Derelict_Bypass) return (0);
         break;
     case 18:
         if (APhaser_Bypass) return (0);
@@ -1335,39 +1335,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 125:
-        efx_NewDist->changepar(0, Dry_Wet(value));
+        efx_Derelict->changepar(0, Dry_Wet(value));
         break;
 
     case 126:
-        efx_NewDist->changepar(1, value);
+        efx_Derelict->changepar(1, value);
         break;
 
     case 127:
-        efx_NewDist->changepar(2, value);
+        efx_Derelict->changepar(2, value);
         break;
 
     case 2:
-        efx_NewDist->changepar(3, value);
+        efx_Derelict->changepar(3, value);
         break;
 
     case 3:
-        efx_NewDist->changepar(4, value);
+        efx_Derelict->changepar(4, value);
         break;
 
     case 4:
-        efx_NewDist->changepar(7, ret_LPF(value));
+        efx_Derelict->changepar(7, ret_LPF(value));
         break;
 
     case 5:
-        efx_NewDist->changepar(8, ret_HPF(value));
+        efx_Derelict->changepar(8, ret_HPF(value));
         break;
 
     case 6:
-        efx_NewDist->changepar(9, value);
+        efx_Derelict->changepar(9, value);
         break;
 
     case 8:
-        efx_NewDist->changepar(11, value);
+        efx_Derelict->changepar(11, value);
         break;
 
     case 9:

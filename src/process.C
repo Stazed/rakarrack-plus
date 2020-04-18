@@ -71,7 +71,7 @@ RKR::RKR() :
     efx_Har(NULL),
     efx_MusDelay(NULL),
     efx_Gate(NULL),
-    efx_NewDist(NULL),
+    efx_Derelict(NULL),
     efx_Tuner(NULL),
     efx_MIDIConverter(NULL),
     M_Metronome(NULL),
@@ -146,7 +146,7 @@ RKR::RKR() :
     Harmonizer_Bypass(),
     MusDelay_Bypass(),
     Gate_Bypass(),
-    NewDist_Bypass(),
+    Derelict_Bypass(),
     APhaser_Bypass(),
     Valve_Bypass(),
     DFlange_Bypass(),
@@ -196,7 +196,7 @@ RKR::RKR() :
     Harmonizer_B(),
     MusDelay_B(),
     Gate_B(),
-    NewDist_B(),
+    Derelict_B(),
     Valve_B(),
     Ring_B(),
     Exciter_B(),
@@ -613,7 +613,7 @@ RKR::RKR() :
     efx_Har = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     efx_MusDelay = new MusicDelay(fSample_rate, period);
     efx_Gate = new Gate(fSample_rate, period);
-    efx_NewDist = new NewDist(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
+    efx_Derelict = new Derelict(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_FLimiter = new Compressor(fSample_rate, period);
     efx_Valve = new Valve(fSample_rate, period);
     efx_DFlange = new Dflange(fSample_rate, period);
@@ -1266,7 +1266,7 @@ RKR::~RKR()
     delete efx_Har;
     delete efx_MusDelay;
     delete efx_Gate;
-    delete efx_NewDist;
+    delete efx_Derelict;
     delete efx_FLimiter;
     delete efx_Valve;
     delete efx_DFlange;
@@ -1839,7 +1839,7 @@ RKR::cleanup_efx()
     efx_Har->cleanup();
     efx_MusDelay->cleanup();
     efx_Gate->cleanup();
-    efx_NewDist->cleanup();
+    efx_Derelict->cleanup();
     efx_APhaser->cleanup();
     efx_Valve->cleanup();
     efx_DFlange->cleanup();
@@ -2122,10 +2122,10 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case 17:
-                if (NewDist_Bypass)
+                if (Derelict_Bypass)
                 {
-                    efx_NewDist->out(efxoutl, efxoutr);
-                    Vol_Efx(17, efx_NewDist->outvolume);
+                    efx_Derelict->out(efxoutl, efxoutr);
+                    Vol_Efx(17, efx_Derelict->outvolume);
                 }
                 break;
 

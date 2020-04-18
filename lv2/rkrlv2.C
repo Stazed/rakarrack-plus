@@ -1686,7 +1686,7 @@ LV2_Handle init_derelv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 
     getFeatures(plug,host_features);
 
-    plug->dere = new NewDist( /*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max); 
+    plug->dere = new Derelict( /*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max); 
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);

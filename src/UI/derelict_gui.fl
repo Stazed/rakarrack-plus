@@ -11,7 +11,7 @@ decl {\#include "RKR_Check_Button.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
-widget_class {\#include "common_gui_menu.h"} NewdistGui {
+widget_class {\#include "common_gui_menu.h"} DerelictGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
@@ -19,39 +19,39 @@ widget_class {\#include "common_gui_menu.h"} NewdistGui {
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
 } {
-  Fl_Light_Button newdist_activar {
+  Fl_Light_Button derelict_activar {
     label On
     user_data 2
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
- o->value(rkr->NewDist_Bypass);
+ o->value(rkr->Derelict_Bypass);
  return;
 }
-rkr->NewDist_Bypass=(int)o->value();
+rkr->Derelict_Bypass=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_NewDist->cleanup();
+rkr->efx_Derelict->cleanup();
 rgui->findpos(17,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
-  Fl_Choice newdist_preset {
+  Fl_Choice derelict_preset {
     label Preset
     user_data 12017
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12017))rkr->efx_NewDist->setpreset((int) o->value());
-newdist_WD->value(Dry_Wet(rkr->efx_NewDist->getpar(0)));
-newdist_LRc->value(rkr->efx_NewDist->getpar(2));
-newdist_drive->value(rkr->efx_NewDist->getpar(3));
-newdist_level->value(rkr->efx_NewDist->getpar(4));
-newdist_tipo->value(rkr->efx_NewDist->getpar(5));
-newdist_neg->value(rkr->efx_NewDist->getpar(6));
-newdist_st->value(rkr->efx_NewDist->getpar(9));
-newdist_oct->value(rkr->efx_NewDist->getpar(11));
-newdist_pan->value(rkr->efx_NewDist->getpar(1)-64);
-newdist_pf->value(rkr->efx_NewDist->getpar(10));
-newdist_lpf->value(rkr->efx_NewDist->getpar(7));
-newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
+if((ud==0)||(ud==12017))rkr->efx_Derelict->setpreset((int) o->value());
+derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(0)));
+derelict_LRc->value(rkr->efx_Derelict->getpar(2));
+derelict_drive->value(rkr->efx_Derelict->getpar(3));
+derelict_level->value(rkr->efx_Derelict->getpar(4));
+derelict_tipo->value(rkr->efx_Derelict->getpar(5));
+derelict_neg->value(rkr->efx_Derelict->getpar(6));
+derelict_st->value(rkr->efx_Derelict->getpar(9));
+derelict_oct->value(rkr->efx_Derelict->getpar(11));
+derelict_pan->value(rkr->efx_Derelict->getpar(1)-64);
+derelict_pf->value(rkr->efx_Derelict->getpar(10));
+derelict_lpf->value(rkr->efx_Derelict->getpar(7));
+derelict_hpf->value(rkr->efx_Derelict->getpar(8));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -68,123 +68,123 @@ newdist_hpf->value(rkr->efx_NewDist->getpar(8));}
       xywh {52 52 36 21} labelsize 10
     }
   }
-  Fl_Value_Slider newdist_WD {
+  Fl_Value_Slider derelict_WD {
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(125);
  return;
 } 
-rkr->efx_NewDist->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Derelict->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider newdist_LRc {
+  Fl_Value_Slider derelict_LRc {
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(127);
  return;
 } 
-rkr->efx_NewDist->changepar(2,(int)(o->value()));}
+rkr->efx_Derelict->changepar(2,(int)(o->value()));}
     xywh {56 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider newdist_drive {
+  Fl_Value_Slider derelict_drive {
     label Drive
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(2);
  return;
 } 
-rkr->efx_NewDist->changepar(3,(int)o->value());}
+rkr->efx_Derelict->changepar(3,(int)o->value());}
     xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider newdist_level {
+  Fl_Value_Slider derelict_level {
     label Level
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(3);
  return;
 } 
-rkr->efx_NewDist->changepar(4,(int)o->value());}
+rkr->efx_Derelict->changepar(4,(int)o->value());}
     xywh {56 70 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Choice newdist_tipo {
+  Fl_Choice derelict_tipo {
     label Type
-    callback {rkr->efx_NewDist->changepar(5,(int)o->value());} selected
+    callback {rkr->efx_Derelict->changepar(5,(int)o->value());} selected
     xywh {34 84 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
   } {}
-  Fl_Check_Button newdist_neg {
+  Fl_Check_Button derelict_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_NewDist->changepar(6,(int)o->value());}
+    callback {rkr->efx_Derelict->changepar(6,(int)o->value());}
     xywh {110 84 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  Fl_Value_Slider newdist_st {
+  Fl_Value_Slider derelict_st {
     label Color
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(6);
  return;
 } 
-rkr->efx_NewDist->changepar(9,(int)o->value());}
+rkr->efx_Derelict->changepar(9,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider newdist_oct {
+  Fl_Value_Slider derelict_oct {
     label {Sub Octv}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(8);
  return;
 } 
-rkr->efx_NewDist->changepar(11,(int)o->value());}
+rkr->efx_Derelict->changepar(11,(int)o->value());}
     xywh {56 120 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider newdist_pan {
+  Fl_Value_Slider derelict_pan {
     label Pan
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(126);
  return;
 } 
-rkr->efx_NewDist->changepar(1,(int)(o->value()+64));}
+rkr->efx_Derelict->changepar(1,(int)(o->value()+64));}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Check_Button newdist_pf {
+  Fl_Check_Button derelict_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_NewDist->changepar(10,(int)o->value());}
+    callback {rkr->efx_Derelict->changepar(10,(int)o->value());}
     xywh {50 144 66 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  Fl_Value_Slider newdist_lpf {
+  Fl_Value_Slider derelict_lpf {
     label LPF
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(4);
  return;
 } 
-rkr->efx_NewDist->changepar(7,(int)o->value());}
+rkr->efx_Derelict->changepar(7,(int)o->value());}
     xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider newdist_hpf {
+  Fl_Value_Slider derelict_hpf {
     label HPF
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(5);
  return;
 } 
-rkr->efx_NewDist->changepar(8,(int)o->value());}
+rkr->efx_Derelict->changepar(8,(int)o->value());}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

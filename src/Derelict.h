@@ -22,8 +22,8 @@
 
 */
 
-#ifndef NEWDIST_H
-#define NEWDIST_H
+#ifndef DERELICT_H
+#define DERELICT_H
 
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
@@ -34,11 +34,11 @@
 // void waveshapesmps (int n, float * smps, int type,
 // 		    int drive);
 
-class NewDist
+class Derelict
 {
 public:
-    NewDist (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
-    ~NewDist ();
+    Derelict (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
+    ~Derelict ();
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);

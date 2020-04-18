@@ -24,7 +24,7 @@
 #include "MIDIConverter.h"
 #include "RecognizeNote.h"
 #include "RecChord.h"
-#include "NewDist.h"
+#include "Derelict.h"
 #include "APhaser.h"
 #include "Valve.h"
 #include "Dual_Flange.h"
@@ -154,7 +154,7 @@ public:
     class Harmonizer *efx_Har;
     class MusicDelay *efx_MusDelay;
     class Gate *efx_Gate;
-    class NewDist *efx_NewDist;
+    class Derelict *efx_Derelict;
     class Tuner *efx_Tuner;
     class MIDIConverter *efx_MIDIConverter;
     class metronome *M_Metronome;
@@ -232,7 +232,7 @@ public:
     int Harmonizer_Bypass;
     int MusDelay_Bypass;
     int Gate_Bypass;
-    int NewDist_Bypass;
+    int Derelict_Bypass;
     int APhaser_Bypass;
     int Valve_Bypass;
     int DFlange_Bypass;
@@ -282,7 +282,7 @@ public:
     int Harmonizer_B;
     int MusDelay_B;
     int Gate_B;
-    int NewDist_B;
+    int Derelict_B;
     int Valve_B;
     int Ring_B;
     int Exciter_B;

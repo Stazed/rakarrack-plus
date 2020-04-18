@@ -62,7 +62,7 @@ const int presets_default[48][MAX_PRESET_SIZE] = {
     {64, 0, 2, 7, 0, 59, 0, 127, 4, 59, 106, 75, 75, 0, 0, 0, 0, 0, 0},
     //NoiseGate
     {0, 0, 1, 2, 6703, 76, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //NewDist
+    //Derelict
     {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //APhaser
     {64, 20, 14, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0, 0, 0, 0},
@@ -263,11 +263,11 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case 17:
-        //NewDist
+        //Derelict
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[18][0], &lv[18][1], &lv[18][2], &lv[18][3], &lv[18][4],
                &lv[18][5], &lv[18][6], &lv[18][7], &lv[18][8], &lv[18][9],
-               &lv[18][10], &lv[18][11], &NewDist_B);
+               &lv[18][10], &lv[18][11], &Derelict_B);
         break;
 
     case 18:
@@ -705,15 +705,15 @@ void RKR::getbuf(char *buf, int j)
         break;
 
     case 17:
-        //NewDist
+        //Derelict
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_NewDist->getpar(0), efx_NewDist->getpar(1),
-                efx_NewDist->getpar(2), efx_NewDist->getpar(3),
-                efx_NewDist->getpar(4), efx_NewDist->getpar(5),
-                efx_NewDist->getpar(6), efx_NewDist->getpar(7),
-                efx_NewDist->getpar(8), efx_NewDist->getpar(9),
-                efx_NewDist->getpar(10), efx_NewDist->getpar(11),
-                efx_NewDist->getpar(12), NewDist_Bypass);
+                efx_Derelict->getpar(0), efx_Derelict->getpar(1),
+                efx_Derelict->getpar(2), efx_Derelict->getpar(3),
+                efx_Derelict->getpar(4), efx_Derelict->getpar(5),
+                efx_Derelict->getpar(6), efx_Derelict->getpar(7),
+                efx_Derelict->getpar(8), efx_Derelict->getpar(9),
+                efx_Derelict->getpar(10), efx_Derelict->getpar(11),
+                efx_Derelict->getpar(12), Derelict_Bypass);
         break;
 
     case 18:
@@ -1517,13 +1517,13 @@ RKR::Actualizar_Audio()
             Gate_Bypass = Gate_B;
             break;
 
-        case 17://NewDist
+        case 17://Derelict
 
-            NewDist_Bypass = 0;
-            efx_NewDist->cleanup();
+            Derelict_Bypass = 0;
+            efx_Derelict->cleanup();
             for (i = 0; i <= 11; i++)
-                efx_NewDist->changepar(i, lv[18][i]);
-            NewDist_Bypass = NewDist_B;
+                efx_Derelict->changepar(i, lv[18][i]);
+            Derelict_Bypass = Derelict_B;
             break;
 
         case 18://APhaser
@@ -2022,7 +2022,7 @@ RKR::New()
     Harmonizer_B = 0;
     MusDelay_B = 0;
     Gate_B = 0;
-    NewDist_B = 0;
+    Derelict_B = 0;
     APhaser_B = 0;
     Valve_B = 0;
     DFlange_B = 0;
@@ -2135,7 +2135,7 @@ RKR::Bank_to_Preset(int i)
     Harmonizer_B = Bank[i].lv[15][19];
     MusDelay_B = Bank[i].lv[16][19];
     Gate_B = Bank[i].lv[17][19];
-    NewDist_B = Bank[i].lv[18][19];
+    Derelict_B = Bank[i].lv[18][19];
     APhaser_B = Bank[i].lv[19][19];
     Valve_B = Bank[i].lv[20][19];
     DFlange_B = Bank[i].lv[21][19];
@@ -2235,7 +2235,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j <= 6; j++)
         lv[17][j] = efx_Gate->getpar(j + 1);
     for (j = 0; j <= 11; j++)
-        lv[18][j] = efx_NewDist->getpar(j);
+        lv[18][j] = efx_Derelict->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[19][j] = efx_APhaser->getpar(j);
     for (j = 0; j <= 12; j++)
@@ -2346,7 +2346,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].lv[15][19] = Harmonizer_Bypass;
     Bank[i].lv[16][19] = MusDelay_Bypass;
     Bank[i].lv[17][19] = Gate_Bypass;
-    Bank[i].lv[18][19] = NewDist_Bypass;
+    Bank[i].lv[18][19] = Derelict_Bypass;
     Bank[i].lv[19][19] = APhaser_Bypass;
     Bank[i].lv[20][19] = Valve_Bypass;
     Bank[i].lv[21][19] = DFlange_Bypass;

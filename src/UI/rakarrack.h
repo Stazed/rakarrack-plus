@@ -48,7 +48,7 @@ class PanGui; // forward declaration
 class HarGui; // forward declaration
 class MusdelayGui; // forward declaration
 class GateGui; // forward declaration
-class NewdistGui; // forward declaration
+class DerelictGui; // forward declaration
 class AphaserGui; // forward declaration
 class ValveGui; // forward declaration
 class DflangeGui; // forward declaration
@@ -106,7 +106,7 @@ class TrigWindowGui; // forward declaration
 #include "har_gui.h"
 #include "musdelay_gui.h"
 #include "gate_gui.h"
-#include "newdist_gui.h"
+#include "derelict_gui.h"
 #include "aphaser_gui.h"
 #include "valve_gui.h"
 #include "dflange_gui.h"
@@ -303,7 +303,7 @@ public:
   HarGui *HAR;
   MusdelayGui *MUSDELAY;
   GateGui *GATE;
-  NewdistGui *NEWDIST;
+  DerelictGui *DERELICT;
   AphaserGui *APHASER;
   ValveGui *VALVE;
   DflangeGui *DFLANGE;

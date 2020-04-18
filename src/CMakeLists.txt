@@ -47,7 +47,7 @@ set (ProgSources
     UI/har_gui.cxx
     UI/musdelay_gui.cxx
     UI/gate_gui.cxx
-    UI/newdist_gui.cxx
+    UI/derelict_gui.cxx
     UI/aphaser_gui.cxx
     UI/valve_gui.cxx
     UI/dflange_gui.cxx
@@ -117,7 +117,7 @@ set (ProgSources
     RecognizeNote.C
     RecChord.C
     rkrMIDI.C
-    NewDist.C
+    Derelict.C
     APhaser.C
     Dual_Flange.C
     Exciter.C
