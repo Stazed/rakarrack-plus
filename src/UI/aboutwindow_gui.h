@@ -22,14 +22,14 @@ public:
   Fl_Box *AB_A1;
   Fl_Box *AB_A2;
   Fl_Box *AB_A3;
+  Fl_Box *AB_A4;
+  Fl_Box *AB_A5;
+  Fl_Box *AB_A6;
 private:
   inline void cb_LICENSE_i(Fl_Button*, void*);
   static void cb_LICENSE(Fl_Button*, void*);
   inline void cb_OK_i(Fl_Button*, void*);
   static void cb_OK(Fl_Button*, void*);
-public:
-  Fl_Box *AB_A4;
-private:
   RKRGUI* m_rgui; 
 public:
   void initialize(RKRGUI *_rgui );

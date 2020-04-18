@@ -2743,7 +2743,7 @@ void RKRGUI::make_window() {
     MIDILearn->size_range(320, 240, 3200, 2400);
     MIDILearn->end();
   } // MidiLearnWindowGui* MIDILearn
-  { AboutWindowGui* o = AboutWin = new AboutWindowGui(375, 235, "About Rakarrack");
+  { AboutWindowGui* o = AboutWin = new AboutWindowGui(375, 280, "About Rakarrack-plus");
     AboutWin->box(FL_FLAT_BOX);
     AboutWin->color(FL_INACTIVE_COLOR);
     AboutWin->selection_color(FL_BACKGROUND2_COLOR);

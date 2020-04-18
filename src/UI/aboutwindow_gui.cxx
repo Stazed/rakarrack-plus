@@ -27,7 +27,7 @@ AboutWindowGui::AboutWindowGui(int W, int H, const char *L)
 }
 
 AboutWindowGui::AboutWindowGui()
-  : Fl_Double_Window(0, 0, 375, 235, "About Rakarrack") {
+  : Fl_Double_Window(0, 0, 375, 280, "About Rakarrack-Plus") {
   clear_flag(16);
   _AboutWindowGui();
 }
@@ -42,7 +42,7 @@ this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
 this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
-{ AB_Title = new Fl_Box(56, 4, 259, 41, "Rakarrack");
+{ AB_Title = new Fl_Box(56, 4, 259, 41, "Rakarrack +");
   AB_Title->labelfont(1);
   AB_Title->labelsize(40);
   AB_Title->labelcolor(FL_BACKGROUND2_COLOR);
@@ -57,13 +57,13 @@ this->when(FL_WHEN_RELEASE);
   About_Version->labelcolor(FL_BACKGROUND2_COLOR);
   About_Version->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
 } // Fl_Box* About_Version
-{ AB_url = new Fl_Box(68, 77, 234, 22, "http://rakarrack.sourceforge.net");
+{ AB_url = new Fl_Box(30, 77, 314, 22, "https://github.com/Stazed/rakarrack-plus");
   AB_url->labelfont(1);
   AB_url->labelsize(13);
   AB_url->labelcolor((Fl_Color)6);
 } // Fl_Box* AB_url
-{ AB_Authors = new Fl_Box(20, 96, 345, 26, "Copyrigth Josep Andreu Ryan Billing Douglas McClendon Arnout Engelen <2007 - \
-2010>");
+{ AB_Authors = new Fl_Box(20, 96, 345, 26, "Copyright Josep Andreu, Ryan Billing, Douglas McClendon, Arnout Engelen <2007\
+ - 2010>");
   AB_Authors->labelfont(1);
   AB_Authors->labelsize(8);
   AB_Authors->labelcolor(FL_BACKGROUND2_COLOR);
@@ -76,7 +76,7 @@ n");
   AB_A1->labelcolor(FL_BACKGROUND2_COLOR);
   AB_A1->align(Fl_Align(FL_ALIGN_WRAP));
 } // Fl_Box* AB_A1
-{ AB_A2 = new Fl_Box(66, 172, 240, 15, "Code of Tuner taked from tuneit by Mario Lang");
+{ AB_A2 = new Fl_Box(66, 172, 240, 15, "Code of Tuner taken from tuneit by Mario Lang");
   AB_A2->labelfont(1);
   AB_A2->labelsize(8);
   AB_A2->labelcolor(FL_BACKGROUND2_COLOR);
@@ -88,20 +88,32 @@ ld");
   AB_A3->labelcolor(FL_BACKGROUND2_COLOR);
   AB_A3->align(Fl_Align(FL_ALIGN_WRAP));
 } // Fl_Box* AB_A3
-{ Fl_Button* o = new Fl_Button(48, 215, 92, 16, "LICENSE");
-  o->labelsize(10);
-  o->callback((Fl_Callback*)cb_LICENSE);
-} // Fl_Button* o
-{ Fl_Button* o = new Fl_Button(276, 215, 92, 16, "OK");
-  o->labelsize(10);
-  o->callback((Fl_Callback*)cb_OK);
-} // Fl_Button* o
 { AB_A4 = new Fl_Box(64, 151, 250, 20, "Code of some effects based on swh-plugins LADSPA by Steve Harris");
   AB_A4->labelfont(1);
   AB_A4->labelsize(8);
   AB_A4->labelcolor(FL_BACKGROUND2_COLOR);
   AB_A4->align(Fl_Align(FL_ALIGN_WRAP));
 } // Fl_Box* AB_A4
+{ AB_A5 = new Fl_Box(74, 208, 250, 20, "LV2 Plugins (From rkrlv2) by Spencer Jackson");
+  AB_A5->labelfont(1);
+  AB_A5->labelsize(8);
+  AB_A5->labelcolor(FL_BACKGROUND2_COLOR);
+  AB_A5->align(Fl_Align(FL_ALIGN_WRAP));
+} // Fl_Box* AB_A5
+{ AB_A6 = new Fl_Box(84, 224, 250, 20, "Rakarrack + modifications by Stazed");
+  AB_A6->labelfont(1);
+  AB_A6->labelsize(8);
+  AB_A6->labelcolor(FL_BACKGROUND2_COLOR);
+  AB_A6->align(Fl_Align(FL_ALIGN_WRAP));
+} // Fl_Box* AB_A6
+{ Fl_Button* o = new Fl_Button(48, 252, 92, 16, "LICENSE");
+  o->labelsize(10);
+  o->callback((Fl_Callback*)cb_LICENSE);
+} // Fl_Button* o
+{ Fl_Button* o = new Fl_Button(239, 252, 92, 16, "OK");
+  o->labelsize(10);
+  o->callback((Fl_Callback*)cb_OK);
+} // Fl_Button* o
 this->m_rgui = NULL;
 end();
 }

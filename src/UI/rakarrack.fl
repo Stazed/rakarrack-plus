@@ -1143,7 +1143,7 @@ rkr->calculavol(2);}
         class MidiGui
       } {}
       Fl_Group Metro {
-        user_data 1 open
+        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -1241,7 +1241,7 @@ switch(rkr->M_Metro_Sound)
         Fl_Value_Slider Metro_Tempo {
           label Tempo
           callback {rkr->M_Metro_Tempo=(int)o->value();
-rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);} selected
+rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 20 maximum 340 step 1 value 100 textcolor 7
           code0 {o->m_start_label_offset = -2; // 10 - 8}
           code1 {o->shut_off_pixel_adjustment();}
@@ -1757,9 +1757,9 @@ o->hide();} open
       class MidiLearnWindowGui size_range {320 240 3200 2400}
     } {}
     Fl_Window AboutWin {
-      label {About Rakarrack}
-      callback {o->hide();} open
-      xywh {575 380 375 235} type Double color 8 selection_color 7 hide
+      label {About Rakarrack-plus}
+      callback {o->hide();} open selected
+      xywh {575 380 375 280} type Double color 8 selection_color 7 hide
       code0 {\#include "aboutwindow_gui.h"}
       code1 {o->initialize(this);}
       code2 {o->hide();}
