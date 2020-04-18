@@ -32,7 +32,6 @@ RKR_Slider::RKR_Slider(int x, int y, int w, int h, const char *label) : Fl_Value
     m_start_text_offset = 0;
     m_previous_font_size = global_font_size;
     m_use_pixel_adjustment = true;  // main window sliders use this
-    this->user_data((void*)(SLIDERW_USER_DATA));
 }
 
 int RKR_Slider::handle(int event)

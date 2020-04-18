@@ -1,3 +1,20 @@
+/*
+  RKR_Value_Input.cxx
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of version 2 of the GNU General Public License
+  as published by the Free Software Foundation.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License (version 2) for more details.
+
+  You should have received a copy of the GNU General Public License (version 2)
+  along with this program; if not, write to the Free Software Foundation,
+  Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+
+*/
 //
 // "$Id: RKR_Value_Input.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
 //
@@ -236,7 +253,6 @@ int RKR_Value_Input::handle(int event)
 RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
 : Fl_Valuator(X, Y, W, H, l), input(X, Y, W, H, 0)
 {
-    this->user_data((void*)(VALUE_USER_DATA));
     m_start_width = W;
     m_start_height = H;
     m_start_label_offset = 0;

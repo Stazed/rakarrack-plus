@@ -26,8 +26,6 @@
 #include <FL/fl_draw.H>
 #include "../global.h"
 
-#define SLIDERW_USER_DATA   99999
-
 class RKR_Slider : public Fl_Value_Slider {
 public:
     RKR_Slider(int x, int y, int w, int h, const char *label = 0);
