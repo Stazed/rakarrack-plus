@@ -22,6 +22,8 @@
 
  */
 
+// Renamed from NewDist.C on 4/18/2020 by Stazed
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -31,7 +33,6 @@
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
  */
 
-// does anyone else see how funny this class is? say it out loud. Perhaps this will become so popular they will start a new_dist colony ;)
 
 Derelict::Derelict(int wave_res, int wave_upq, int wave_dnq,
                  double sample_rate, uint32_t intermediate_bufsize) :
@@ -348,11 +349,11 @@ Derelict::setpreset(int npreset)
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //Derelict 1
+        //Distortion 1
         {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0, 0},
-        //Derelict 2
+        //Distortion 2
         {0, 64, 64, 95, 45, 6, 0, 3459, 209, 60, 1, 0},
-        //Derelict 3
+        //Distortion 3
         {0, 64, 64, 43, 77, 16, 0, 2983, 118, 83, 0, 0}
     };
 

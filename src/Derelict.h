@@ -22,6 +22,8 @@
 
 */
 
+// Renamed from NewDist.h on 4/18/2020 by Stazed
+
 #ifndef DERELICT_H
 #define DERELICT_H
 
