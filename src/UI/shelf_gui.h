@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,25 +25,25 @@ private:
   static void cb_shelf_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_shelf_preset[];
 public:
-  SliderW *shelf_gain;
+  RKR_Slider *shelf_gain;
 private:
-  inline void cb_shelf_gain_i(SliderW*, void*);
-  static void cb_shelf_gain(SliderW*, void*);
+  inline void cb_shelf_gain_i(RKR_Slider*, void*);
+  static void cb_shelf_gain(RKR_Slider*, void*);
 public:
-  SliderW *shelf_level;
+  RKR_Slider *shelf_level;
 private:
-  inline void cb_shelf_level_i(SliderW*, void*);
-  static void cb_shelf_level(SliderW*, void*);
+  inline void cb_shelf_level_i(RKR_Slider*, void*);
+  static void cb_shelf_level(RKR_Slider*, void*);
 public:
-  SliderW *shelf_freq1;
+  RKR_Slider *shelf_freq1;
 private:
-  inline void cb_shelf_freq1_i(SliderW*, void*);
-  static void cb_shelf_freq1(SliderW*, void*);
+  inline void cb_shelf_freq1_i(RKR_Slider*, void*);
+  static void cb_shelf_freq1(RKR_Slider*, void*);
 public:
-  SliderW *shelf_q1;
+  RKR_Slider *shelf_q1;
 private:
-  inline void cb_shelf_q1_i(SliderW*, void*);
-  static void cb_shelf_q1(SliderW*, void*);
+  inline void cb_shelf_q1_i(RKR_Slider*, void*);
+  static void cb_shelf_q1(RKR_Slider*, void*);
 public:
   RKR_Check_Button *shelf_mode;
 private:

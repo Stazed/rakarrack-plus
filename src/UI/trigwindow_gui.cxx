@@ -16,17 +16,17 @@ Fl_Menu_Item TrigWindowGui::menu_aux_source[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void TrigWindowGui::cb_aux_gain_i(SliderW* o, void*) {
+void TrigWindowGui::cb_aux_gain_i(RKR_Slider* o, void*) {
   m_rkr->Aux_Gain = (int)o->value();
 }
-void TrigWindowGui::cb_aux_gain(SliderW* o, void* v) {
+void TrigWindowGui::cb_aux_gain(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_gain_i(o,v);
 }
 
-void TrigWindowGui::cb_aux_thres_i(SliderW* o, void*) {
+void TrigWindowGui::cb_aux_thres_i(RKR_Slider* o, void*) {
   m_rkr->Aux_Threshold = (int) o->value();
 }
-void TrigWindowGui::cb_aux_thres(SliderW* o, void* v) {
+void TrigWindowGui::cb_aux_thres(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_thres_i(o,v);
 }
 
@@ -39,17 +39,17 @@ void TrigWindowGui::cb_aux_midi(RKR_Value_Input* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_midi_i(o,v);
 }
 
-void TrigWindowGui::cb_aux_min_i(SliderW* o, void*) {
+void TrigWindowGui::cb_aux_min_i(RKR_Slider* o, void*) {
   m_rkr->Aux_Minimum = (int) o->value();
 }
-void TrigWindowGui::cb_aux_min(SliderW* o, void* v) {
+void TrigWindowGui::cb_aux_min(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_min_i(o,v);
 }
 
-void TrigWindowGui::cb_aux_max_i(SliderW* o, void*) {
+void TrigWindowGui::cb_aux_max_i(RKR_Slider* o, void*) {
   m_rkr->Aux_Maximum = (int) o->value();
 }
-void TrigWindowGui::cb_aux_max(SliderW* o, void* v) {
+void TrigWindowGui::cb_aux_max(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_max_i(o,v);
 }
 TrigWindowGui::TrigWindowGui(int X, int Y, int W, int H, const char *L)
@@ -125,7 +125,7 @@ this->when(FL_WHEN_RELEASE);
   aux_source->when(FL_WHEN_RELEASE);
   aux_source->menu(menu_aux_source);
 } // RKR_Choice* aux_source
-{ aux_gain = new SliderW(56, 59, 100, 10, "Gain");
+{ aux_gain = new RKR_Slider(56, 59, 100, 10, "Gain");
   aux_gain->type(5);
   aux_gain->box(FL_FLAT_BOX);
   aux_gain->color((Fl_Color)178);
@@ -141,8 +141,8 @@ this->when(FL_WHEN_RELEASE);
   aux_gain->callback((Fl_Callback*)cb_aux_gain);
   aux_gain->align(Fl_Align(FL_ALIGN_LEFT));
   aux_gain->when(FL_WHEN_CHANGED);
-} // SliderW* aux_gain
-{ aux_thres = new SliderW(55, 75, 100, 10, "Threshold");
+} // RKR_Slider* aux_gain
+{ aux_thres = new RKR_Slider(55, 75, 100, 10, "Threshold");
   aux_thres->type(5);
   aux_thres->box(FL_FLAT_BOX);
   aux_thres->color((Fl_Color)178);
@@ -158,7 +158,7 @@ this->when(FL_WHEN_RELEASE);
   aux_thres->callback((Fl_Callback*)cb_aux_thres);
   aux_thres->align(Fl_Align(FL_ALIGN_LEFT));
   aux_thres->when(FL_WHEN_CHANGED);
-} // SliderW* aux_thres
+} // RKR_Slider* aux_thres
 { RKR_Value_Input* o = aux_midi = new RKR_Value_Input(111, 96, 32, 24, "Midi Control");
   aux_midi->box(FL_DOWN_BOX);
   aux_midi->color(FL_BACKGROUND2_COLOR);
@@ -177,7 +177,7 @@ this->when(FL_WHEN_RELEASE);
   o->m_start_text_offset = 4; // 10 - 14
   o->m_start_label_offset = 4; // 10 - 14
 } // RKR_Value_Input* aux_midi
-{ aux_min = new SliderW(56, 130, 100, 10, "Minimum");
+{ aux_min = new RKR_Slider(56, 130, 100, 10, "Minimum");
   aux_min->type(5);
   aux_min->box(FL_FLAT_BOX);
   aux_min->color((Fl_Color)178);
@@ -192,8 +192,8 @@ this->when(FL_WHEN_RELEASE);
   aux_min->callback((Fl_Callback*)cb_aux_min);
   aux_min->align(Fl_Align(FL_ALIGN_LEFT));
   aux_min->when(FL_WHEN_CHANGED);
-} // SliderW* aux_min
-{ aux_max = new SliderW(56, 150, 100, 10, "Maximum");
+} // RKR_Slider* aux_min
+{ aux_max = new RKR_Slider(56, 150, 100, 10, "Maximum");
   aux_max->type(5);
   aux_max->box(FL_FLAT_BOX);
   aux_max->color((Fl_Color)178);
@@ -209,7 +209,7 @@ this->when(FL_WHEN_RELEASE);
   aux_max->callback((Fl_Callback*)cb_aux_max);
   aux_max->align(Fl_Align(FL_ALIGN_LEFT));
   aux_max->when(FL_WHEN_CHANGED);
-} // SliderW* aux_max
+} // RKR_Slider* aux_max
 this->m_rkr = NULL;
 end();
 resizable(this);

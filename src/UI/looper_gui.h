@@ -8,7 +8,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -26,25 +26,25 @@ private:
   static void cb_looper_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_looper_preset[];
 public:
-  SliderW *looper_WD;
+  RKR_Slider *looper_WD;
 private:
-  inline void cb_looper_WD_i(SliderW*, void*);
-  static void cb_looper_WD(SliderW*, void*);
+  inline void cb_looper_WD_i(RKR_Slider*, void*);
+  static void cb_looper_WD(RKR_Slider*, void*);
 public:
-  SliderW *looper_level1;
+  RKR_Slider *looper_level1;
 private:
-  inline void cb_looper_level1_i(SliderW*, void*);
-  static void cb_looper_level1(SliderW*, void*);
+  inline void cb_looper_level1_i(RKR_Slider*, void*);
+  static void cb_looper_level1(RKR_Slider*, void*);
 public:
-  SliderW *looper_level2;
+  RKR_Slider *looper_level2;
 private:
-  inline void cb_looper_level2_i(SliderW*, void*);
-  static void cb_looper_level2(SliderW*, void*);
+  inline void cb_looper_level2_i(RKR_Slider*, void*);
+  static void cb_looper_level2(RKR_Slider*, void*);
 public:
-  SliderW *looper_Tempo;
+  RKR_Slider *looper_Tempo;
 private:
-  inline void cb_looper_Tempo_i(SliderW*, void*);
-  static void cb_looper_Tempo(SliderW*, void*);
+  inline void cb_looper_Tempo_i(RKR_Slider*, void*);
+  static void cb_looper_Tempo(RKR_Slider*, void*);
 public:
   RKR_Choice *looper_bar;
 private:

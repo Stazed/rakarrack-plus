@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,25 +26,25 @@ private:
   static void cb_ovrd_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_ovrd_preset[];
 public:
-  SliderW *ovrd_WD;
+  RKR_Slider *ovrd_WD;
 private:
-  inline void cb_ovrd_WD_i(SliderW*, void*);
-  static void cb_ovrd_WD(SliderW*, void*);
+  inline void cb_ovrd_WD_i(RKR_Slider*, void*);
+  static void cb_ovrd_WD(RKR_Slider*, void*);
 public:
-  SliderW *ovrd_LRc;
+  RKR_Slider *ovrd_LRc;
 private:
-  inline void cb_ovrd_LRc_i(SliderW*, void*);
-  static void cb_ovrd_LRc(SliderW*, void*);
+  inline void cb_ovrd_LRc_i(RKR_Slider*, void*);
+  static void cb_ovrd_LRc(RKR_Slider*, void*);
 public:
-  SliderW *ovrd_drive;
+  RKR_Slider *ovrd_drive;
 private:
-  inline void cb_ovrd_drive_i(SliderW*, void*);
-  static void cb_ovrd_drive(SliderW*, void*);
+  inline void cb_ovrd_drive_i(RKR_Slider*, void*);
+  static void cb_ovrd_drive(RKR_Slider*, void*);
 public:
-  SliderW *ovrd_level;
+  RKR_Slider *ovrd_level;
 private:
-  inline void cb_ovrd_level_i(SliderW*, void*);
-  static void cb_ovrd_level(SliderW*, void*);
+  inline void cb_ovrd_level_i(RKR_Slider*, void*);
+  static void cb_ovrd_level(RKR_Slider*, void*);
 public:
   RKR_Choice *ovrd_tipo;
 private:
@@ -61,25 +61,25 @@ private:
   inline void cb_ovrd_st_i(RKR_Check_Button*, void*);
   static void cb_ovrd_st(RKR_Check_Button*, void*);
 public:
-  SliderW *ovrd_pan;
+  RKR_Slider *ovrd_pan;
 private:
-  inline void cb_ovrd_pan_i(SliderW*, void*);
-  static void cb_ovrd_pan(SliderW*, void*);
+  inline void cb_ovrd_pan_i(RKR_Slider*, void*);
+  static void cb_ovrd_pan(RKR_Slider*, void*);
 public:
   RKR_Check_Button *ovrd_pf;
 private:
   inline void cb_ovrd_pf_i(RKR_Check_Button*, void*);
   static void cb_ovrd_pf(RKR_Check_Button*, void*);
 public:
-  SliderW *ovrd_lpf;
+  RKR_Slider *ovrd_lpf;
 private:
-  inline void cb_ovrd_lpf_i(SliderW*, void*);
-  static void cb_ovrd_lpf(SliderW*, void*);
+  inline void cb_ovrd_lpf_i(RKR_Slider*, void*);
+  static void cb_ovrd_lpf(RKR_Slider*, void*);
 public:
-  SliderW *ovrd_hpf;
+  RKR_Slider *ovrd_hpf;
 private:
-  inline void cb_ovrd_hpf_i(SliderW*, void*);
-  static void cb_ovrd_hpf(SliderW*, void*);
+  inline void cb_ovrd_hpf_i(RKR_Slider*, void*);
+  static void cb_ovrd_hpf(RKR_Slider*, void*);
   CommonGuiMenu *m_dist_menu; 
 };
 #endif

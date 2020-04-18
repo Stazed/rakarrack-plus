@@ -48,7 +48,7 @@ Fl_Menu_Item ExciterGui::menu_exciter_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ExciterGui::cb_ex_Gain_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_Gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(189);
@@ -56,11 +56,11 @@ void ExciterGui::cb_ex_Gain_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(0,(int)o->value());
 }
-void ExciterGui::cb_ex_Gain(SliderW* o, void* v) {
+void ExciterGui::cb_ex_Gain(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_Gain_i(o,v);
 }
 
-void ExciterGui::cb_ex_lfreq_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_lfreq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(190);
@@ -68,11 +68,11 @@ void ExciterGui::cb_ex_lfreq_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(11,(int)o->value());
 }
-void ExciterGui::cb_ex_lfreq(SliderW* o, void* v) {
+void ExciterGui::cb_ex_lfreq(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_lfreq_i(o,v);
 }
 
-void ExciterGui::cb_ex_hfreq_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_hfreq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(191);
@@ -80,11 +80,11 @@ void ExciterGui::cb_ex_hfreq_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(12,(int)o->value());
 }
-void ExciterGui::cb_ex_hfreq(SliderW* o, void* v) {
+void ExciterGui::cb_ex_hfreq(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_hfreq_i(o,v);
 }
 
-void ExciterGui::cb_ex_1_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(192);
@@ -92,11 +92,11 @@ void ExciterGui::cb_ex_1_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(1,(int)o->value());
 }
-void ExciterGui::cb_ex_1(SliderW* o, void* v) {
+void ExciterGui::cb_ex_1(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_1_i(o,v);
 }
 
-void ExciterGui::cb_ex_2_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(193);
@@ -104,11 +104,11 @@ void ExciterGui::cb_ex_2_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(2,(int)o->value());
 }
-void ExciterGui::cb_ex_2(SliderW* o, void* v) {
+void ExciterGui::cb_ex_2(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_2_i(o,v);
 }
 
-void ExciterGui::cb_ex_3_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(194);
@@ -116,11 +116,11 @@ void ExciterGui::cb_ex_3_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(3,(int)o->value());
 }
-void ExciterGui::cb_ex_3(SliderW* o, void* v) {
+void ExciterGui::cb_ex_3(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_3_i(o,v);
 }
 
-void ExciterGui::cb_ex_4_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_4_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(195);
@@ -128,11 +128,11 @@ void ExciterGui::cb_ex_4_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(4,(int)o->value());
 }
-void ExciterGui::cb_ex_4(SliderW* o, void* v) {
+void ExciterGui::cb_ex_4(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_4_i(o,v);
 }
 
-void ExciterGui::cb_ex_5_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_5_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(196);
@@ -140,11 +140,11 @@ void ExciterGui::cb_ex_5_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(5,(int)o->value());
 }
-void ExciterGui::cb_ex_5(SliderW* o, void* v) {
+void ExciterGui::cb_ex_5(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_5_i(o,v);
 }
 
-void ExciterGui::cb_ex_6_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_6_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(197);
@@ -152,11 +152,11 @@ void ExciterGui::cb_ex_6_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(6,(int)o->value());
 }
-void ExciterGui::cb_ex_6(SliderW* o, void* v) {
+void ExciterGui::cb_ex_6(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_6_i(o,v);
 }
 
-void ExciterGui::cb_ex_7_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_7_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(198);
@@ -164,11 +164,11 @@ void ExciterGui::cb_ex_7_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(7,(int)o->value());
 }
-void ExciterGui::cb_ex_7(SliderW* o, void* v) {
+void ExciterGui::cb_ex_7(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_7_i(o,v);
 }
 
-void ExciterGui::cb_ex_8_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_8_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(199);
@@ -176,11 +176,11 @@ void ExciterGui::cb_ex_8_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(8,(int)o->value());
 }
-void ExciterGui::cb_ex_8(SliderW* o, void* v) {
+void ExciterGui::cb_ex_8(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_8_i(o,v);
 }
 
-void ExciterGui::cb_ex_9_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_9_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(200);
@@ -188,11 +188,11 @@ void ExciterGui::cb_ex_9_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(9,(int)o->value());
 }
-void ExciterGui::cb_ex_9(SliderW* o, void* v) {
+void ExciterGui::cb_ex_9(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_9_i(o,v);
 }
 
-void ExciterGui::cb_ex_10_i(SliderW* o, void*) {
+void ExciterGui::cb_ex_10_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(201);
@@ -200,7 +200,7 @@ void ExciterGui::cb_ex_10_i(SliderW* o, void*) {
 } 
 rkr->efx_Exciter->changepar(10,(int)o->value());
 }
-void ExciterGui::cb_ex_10(SliderW* o, void* v) {
+void ExciterGui::cb_ex_10(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_10_i(o,v);
 }
 ExciterGui::ExciterGui(int X, int Y, int W, int H, const char *L)
@@ -239,7 +239,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   exciter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   exciter_preset->menu(menu_exciter_preset);
 } // RKR_Choice* exciter_preset
-{ ex_Gain = new SliderW(53, 25, 100, 10, "Gain");
+{ ex_Gain = new RKR_Slider(53, 25, 100, 10, "Gain");
   ex_Gain->type(5);
   ex_Gain->box(FL_FLAT_BOX);
   ex_Gain->color((Fl_Color)178);
@@ -254,8 +254,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_Gain->callback((Fl_Callback*)cb_ex_Gain);
   ex_Gain->align(Fl_Align(FL_ALIGN_LEFT));
   ex_Gain->when(FL_WHEN_CHANGED);
-} // SliderW* ex_Gain
-{ ex_lfreq = new SliderW(53, 37, 100, 10, "LPF");
+} // RKR_Slider* ex_Gain
+{ ex_lfreq = new RKR_Slider(53, 37, 100, 10, "LPF");
   ex_lfreq->type(5);
   ex_lfreq->box(FL_FLAT_BOX);
   ex_lfreq->color((Fl_Color)178);
@@ -272,8 +272,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_lfreq->callback((Fl_Callback*)cb_ex_lfreq);
   ex_lfreq->align(Fl_Align(FL_ALIGN_LEFT));
   ex_lfreq->when(FL_WHEN_CHANGED);
-} // SliderW* ex_lfreq
-{ ex_hfreq = new SliderW(53, 49, 100, 10, "HPF");
+} // RKR_Slider* ex_lfreq
+{ ex_hfreq = new RKR_Slider(53, 49, 100, 10, "HPF");
   ex_hfreq->type(5);
   ex_hfreq->box(FL_FLAT_BOX);
   ex_hfreq->color((Fl_Color)178);
@@ -290,8 +290,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_hfreq->callback((Fl_Callback*)cb_ex_hfreq);
   ex_hfreq->align(Fl_Align(FL_ALIGN_LEFT));
   ex_hfreq->when(FL_WHEN_CHANGED);
-} // SliderW* ex_hfreq
-{ ex_1 = new SliderW(53, 61, 100, 10, "Har 1");
+} // RKR_Slider* ex_hfreq
+{ ex_1 = new RKR_Slider(53, 61, 100, 10, "Har 1");
   ex_1->type(5);
   ex_1->box(FL_FLAT_BOX);
   ex_1->color((Fl_Color)178);
@@ -307,8 +307,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_1->callback((Fl_Callback*)cb_ex_1);
   ex_1->align(Fl_Align(FL_ALIGN_LEFT));
   ex_1->when(FL_WHEN_CHANGED);
-} // SliderW* ex_1
-{ ex_2 = new SliderW(53, 73, 100, 10, "Har 2");
+} // RKR_Slider* ex_1
+{ ex_2 = new RKR_Slider(53, 73, 100, 10, "Har 2");
   ex_2->type(5);
   ex_2->box(FL_FLAT_BOX);
   ex_2->color((Fl_Color)178);
@@ -324,8 +324,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_2->callback((Fl_Callback*)cb_ex_2);
   ex_2->align(Fl_Align(FL_ALIGN_LEFT));
   ex_2->when(FL_WHEN_CHANGED);
-} // SliderW* ex_2
-{ ex_3 = new SliderW(53, 85, 100, 10, "Har 3");
+} // RKR_Slider* ex_2
+{ ex_3 = new RKR_Slider(53, 85, 100, 10, "Har 3");
   ex_3->type(5);
   ex_3->box(FL_FLAT_BOX);
   ex_3->color((Fl_Color)178);
@@ -341,8 +341,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_3->callback((Fl_Callback*)cb_ex_3);
   ex_3->align(Fl_Align(FL_ALIGN_LEFT));
   ex_3->when(FL_WHEN_CHANGED);
-} // SliderW* ex_3
-{ ex_4 = new SliderW(53, 97, 100, 10, "Har 4");
+} // RKR_Slider* ex_3
+{ ex_4 = new RKR_Slider(53, 97, 100, 10, "Har 4");
   ex_4->type(5);
   ex_4->box(FL_FLAT_BOX);
   ex_4->color((Fl_Color)178);
@@ -358,8 +358,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_4->callback((Fl_Callback*)cb_ex_4);
   ex_4->align(Fl_Align(FL_ALIGN_LEFT));
   ex_4->when(FL_WHEN_CHANGED);
-} // SliderW* ex_4
-{ ex_5 = new SliderW(53, 109, 100, 10, "Har 5");
+} // RKR_Slider* ex_4
+{ ex_5 = new RKR_Slider(53, 109, 100, 10, "Har 5");
   ex_5->type(5);
   ex_5->box(FL_FLAT_BOX);
   ex_5->color((Fl_Color)178);
@@ -375,8 +375,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_5->callback((Fl_Callback*)cb_ex_5);
   ex_5->align(Fl_Align(FL_ALIGN_LEFT));
   ex_5->when(FL_WHEN_CHANGED);
-} // SliderW* ex_5
-{ ex_6 = new SliderW(53, 121, 100, 10, "Har 6");
+} // RKR_Slider* ex_5
+{ ex_6 = new RKR_Slider(53, 121, 100, 10, "Har 6");
   ex_6->type(5);
   ex_6->box(FL_FLAT_BOX);
   ex_6->color((Fl_Color)178);
@@ -392,8 +392,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_6->callback((Fl_Callback*)cb_ex_6);
   ex_6->align(Fl_Align(FL_ALIGN_LEFT));
   ex_6->when(FL_WHEN_CHANGED);
-} // SliderW* ex_6
-{ ex_7 = new SliderW(53, 134, 100, 10, "Har 7");
+} // RKR_Slider* ex_6
+{ ex_7 = new RKR_Slider(53, 134, 100, 10, "Har 7");
   ex_7->type(5);
   ex_7->box(FL_FLAT_BOX);
   ex_7->color((Fl_Color)178);
@@ -409,8 +409,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_7->callback((Fl_Callback*)cb_ex_7);
   ex_7->align(Fl_Align(FL_ALIGN_LEFT));
   ex_7->when(FL_WHEN_CHANGED);
-} // SliderW* ex_7
-{ ex_8 = new SliderW(53, 146, 100, 10, "Har 8");
+} // RKR_Slider* ex_7
+{ ex_8 = new RKR_Slider(53, 146, 100, 10, "Har 8");
   ex_8->type(5);
   ex_8->box(FL_FLAT_BOX);
   ex_8->color((Fl_Color)178);
@@ -426,8 +426,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_8->callback((Fl_Callback*)cb_ex_8);
   ex_8->align(Fl_Align(FL_ALIGN_LEFT));
   ex_8->when(FL_WHEN_CHANGED);
-} // SliderW* ex_8
-{ ex_9 = new SliderW(53, 158, 100, 10, "Har 9");
+} // RKR_Slider* ex_8
+{ ex_9 = new RKR_Slider(53, 158, 100, 10, "Har 9");
   ex_9->type(5);
   ex_9->box(FL_FLAT_BOX);
   ex_9->color((Fl_Color)178);
@@ -443,8 +443,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_9->callback((Fl_Callback*)cb_ex_9);
   ex_9->align(Fl_Align(FL_ALIGN_LEFT));
   ex_9->when(FL_WHEN_CHANGED);
-} // SliderW* ex_9
-{ ex_10 = new SliderW(53, 169, 100, 10, "Har 10");
+} // RKR_Slider* ex_9
+{ ex_10 = new RKR_Slider(53, 169, 100, 10, "Har 10");
   ex_10->type(5);
   ex_10->box(FL_FLAT_BOX);
   ex_10->color((Fl_Color)178);
@@ -460,7 +460,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ex_10->callback((Fl_Callback*)cb_ex_10);
   ex_10->align(Fl_Align(FL_ALIGN_LEFT));
   ex_10->when(FL_WHEN_CHANGED);
-} // SliderW* ex_10
+} // RKR_Slider* ex_10
 position(X, Y);
 end();
 }

@@ -1,5 +1,7 @@
 /*
-  sliderW.cxx
+  Renamed from sliderW.h on 4/18/2020 by stazed.
+
+  RKR_Slider.cxx
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -19,10 +21,10 @@
  
 */
 
-#include "sliderW.h"
+#include "RKR_Slider.h"
 
 
-SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
+RKR_Slider::RKR_Slider(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
 {
     m_start_width = w;
     m_start_height = h;
@@ -33,7 +35,7 @@ SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slide
     this->user_data((void*)(SLIDERW_USER_DATA));
 }
 
-int SliderW::handle(int event)
+int RKR_Slider::handle(int event)
 {
     if (event == FL_PUSH && Fl::visible_focus())
     {
@@ -64,7 +66,7 @@ int SliderW::handle(int event)
                    shh - Fl::box_dh(box()));
 }
 
-int SliderW::handle2(int event, int X, int Y, int W, int H)
+int RKR_Slider::handle2(int event, int X, int Y, int W, int H)
 {
     int mul = 1;
     switch (event)
@@ -210,7 +212,7 @@ int SliderW::handle2(int event, int X, int Y, int W, int H)
     }
 }
 
-void SliderW::draw()
+void RKR_Slider::draw()
 {
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
@@ -399,7 +401,7 @@ void SliderW::draw()
     fl_draw(buf, bxx, byy, bww, bhh, FL_ALIGN_CLIP);
 }
 
-void SliderW::resize(int X, int Y, int W, int H)
+void RKR_Slider::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
     font_resize(W, H);
@@ -407,7 +409,7 @@ void SliderW::resize(int X, int Y, int W, int H)
     Fl_Valuator::resize(X, Y, W, H);
 }
 
-void SliderW::font_resize(int W, int H)
+void RKR_Slider::font_resize(int W, int H)
 {
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;

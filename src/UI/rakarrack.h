@@ -6,7 +6,7 @@
 #include "../process.h"
 #include "../global.h"
 #include "RKR_Entry_Input.h"
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "newvum.h"
 #include "tunerbar.h"
 #include "RKR_Box.h"
@@ -356,20 +356,20 @@ private:
   inline void cb_BostBut_i(RKR_Button*, void*);
   static void cb_BostBut(RKR_Button*, void*);
 public:
-  SliderW *Balance;
+  RKR_Slider *Balance;
 private:
-  inline void cb_Balance_i(SliderW*, void*);
-  static void cb_Balance(SliderW*, void*);
+  inline void cb_Balance_i(RKR_Slider*, void*);
+  static void cb_Balance(RKR_Slider*, void*);
 public:
-  SliderW *Nivel_Entrada;
+  RKR_Slider *Nivel_Entrada;
 private:
-  inline void cb_Nivel_Entrada_i(SliderW*, void*);
-  static void cb_Nivel_Entrada(SliderW*, void*);
+  inline void cb_Nivel_Entrada_i(RKR_Slider*, void*);
+  static void cb_Nivel_Entrada(RKR_Slider*, void*);
 public:
-  SliderW *Nivel_Salida;
+  RKR_Slider *Nivel_Salida;
 private:
-  inline void cb_Nivel_Salida_i(SliderW*, void*);
-  static void cb_Nivel_Salida(SliderW*, void*);
+  inline void cb_Nivel_Salida_i(RKR_Slider*, void*);
+  static void cb_Nivel_Salida(RKR_Slider*, void*);
 public:
   NewVum *input_vul;
   NewVum *input_vur;
@@ -388,20 +388,20 @@ private:
   inline void cb_MetroBar_i(RKR_Choice*, void*);
   static void cb_MetroBar(RKR_Choice*, void*);
 public:
-  SliderW *Metro_Volume;
+  RKR_Slider *Metro_Volume;
 private:
-  inline void cb_Metro_Volume_i(SliderW*, void*);
-  static void cb_Metro_Volume(SliderW*, void*);
+  inline void cb_Metro_Volume_i(RKR_Slider*, void*);
+  static void cb_Metro_Volume(RKR_Slider*, void*);
 public:
   RKR_Choice *MetroSound;
 private:
   inline void cb_MetroSound_i(RKR_Choice*, void*);
   static void cb_MetroSound(RKR_Choice*, void*);
 public:
-  SliderW *Metro_Tempo;
+  RKR_Slider *Metro_Tempo;
 private:
-  inline void cb_Metro_Tempo_i(SliderW*, void*);
-  static void cb_Metro_Tempo(SliderW*, void*);
+  inline void cb_Metro_Tempo_i(RKR_Slider*, void*);
+  static void cb_Metro_Tempo(RKR_Slider*, void*);
 public:
   Fl_Box *Metro_Led;
   RKR_Box *Metro_Label;

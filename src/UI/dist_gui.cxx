@@ -46,7 +46,7 @@ Fl_Menu_Item DistGui::menu_dist_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void DistGui::cb_dist_WD_i(SliderW* o, void*) {
+void DistGui::cb_dist_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(30);
@@ -54,11 +54,11 @@ void DistGui::cb_dist_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(0,Dry_Wet((int)(o->value())));
 }
-void DistGui::cb_dist_WD(SliderW* o, void* v) {
+void DistGui::cb_dist_WD(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_WD_i(o,v);
 }
 
-void DistGui::cb_dist_LRc_i(SliderW* o, void*) {
+void DistGui::cb_dist_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(95);
@@ -66,11 +66,11 @@ void DistGui::cb_dist_LRc_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(2,(int)(o->value()));
 }
-void DistGui::cb_dist_LRc(SliderW* o, void* v) {
+void DistGui::cb_dist_LRc(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_LRc_i(o,v);
 }
 
-void DistGui::cb_dist_drive_i(SliderW* o, void*) {
+void DistGui::cb_dist_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(69);
@@ -78,11 +78,11 @@ void DistGui::cb_dist_drive_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(3,(int)o->value());
 }
-void DistGui::cb_dist_drive(SliderW* o, void* v) {
+void DistGui::cb_dist_drive(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_drive_i(o,v);
 }
 
-void DistGui::cb_dist_level_i(SliderW* o, void*) {
+void DistGui::cb_dist_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(71);
@@ -90,7 +90,7 @@ void DistGui::cb_dist_level_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(4,(int)o->value());
 }
-void DistGui::cb_dist_level(SliderW* o, void* v) {
+void DistGui::cb_dist_level(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_level_i(o,v);
 }
 
@@ -122,7 +122,7 @@ void DistGui::cb_dist_st(RKR_Check_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_st_i(o,v);
 }
 
-void DistGui::cb_dist_pan_i(SliderW* o, void*) {
+void DistGui::cb_dist_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(48);
@@ -130,11 +130,11 @@ void DistGui::cb_dist_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));
 }
-void DistGui::cb_dist_pan(SliderW* o, void* v) {
+void DistGui::cb_dist_pan(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_pan_i(o,v);
 }
 
-void DistGui::cb_dist_oct_i(SliderW* o, void*) {
+void DistGui::cb_dist_oct_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(9);
@@ -142,11 +142,11 @@ void DistGui::cb_dist_oct_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(12,(int)o->value());
 }
-void DistGui::cb_dist_oct(SliderW* o, void* v) {
+void DistGui::cb_dist_oct(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_oct_i(o,v);
 }
 
-void DistGui::cb_dist_lpf_i(SliderW* o, void*) {
+void DistGui::cb_dist_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(86);
@@ -154,11 +154,11 @@ void DistGui::cb_dist_lpf_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(7,(int)o->value());
 }
-void DistGui::cb_dist_lpf(SliderW* o, void* v) {
+void DistGui::cb_dist_lpf(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_lpf_i(o,v);
 }
 
-void DistGui::cb_dist_hpf_i(SliderW* o, void*) {
+void DistGui::cb_dist_hpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(89);
@@ -166,7 +166,7 @@ void DistGui::cb_dist_hpf_i(SliderW* o, void*) {
 } 
 rkr->efx_Distorsion->changepar(8,(int)o->value());
 }
-void DistGui::cb_dist_hpf(SliderW* o, void* v) {
+void DistGui::cb_dist_hpf(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_hpf_i(o,v);
 }
 DistGui::DistGui(int X, int Y, int W, int H, const char *L)
@@ -205,7 +205,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_preset->when(FL_WHEN_RELEASE_ALWAYS);
   dist_preset->menu(menu_dist_preset);
 } // RKR_Choice* dist_preset
-{ dist_WD = new SliderW(56, 35, 100, 10, "Dry/Wet");
+{ dist_WD = new RKR_Slider(56, 35, 100, 10, "Dry/Wet");
   dist_WD->type(5);
   dist_WD->box(FL_FLAT_BOX);
   dist_WD->color((Fl_Color)178);
@@ -220,8 +220,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_WD->callback((Fl_Callback*)cb_dist_WD);
   dist_WD->align(Fl_Align(FL_ALIGN_LEFT));
   dist_WD->when(FL_WHEN_CHANGED);
-} // SliderW* dist_WD
-{ dist_LRc = new SliderW(56, 48, 100, 10, "L/R Cross");
+} // RKR_Slider* dist_WD
+{ dist_LRc = new RKR_Slider(56, 48, 100, 10, "L/R Cross");
   dist_LRc->type(5);
   dist_LRc->box(FL_FLAT_BOX);
   dist_LRc->color((Fl_Color)178);
@@ -236,8 +236,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_LRc->callback((Fl_Callback*)cb_dist_LRc);
   dist_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   dist_LRc->when(FL_WHEN_CHANGED);
-} // SliderW* dist_LRc
-{ dist_drive = new SliderW(56, 61, 100, 10, "Drive");
+} // RKR_Slider* dist_LRc
+{ dist_drive = new RKR_Slider(56, 61, 100, 10, "Drive");
   dist_drive->type(5);
   dist_drive->box(FL_FLAT_BOX);
   dist_drive->color((Fl_Color)178);
@@ -252,8 +252,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_drive->callback((Fl_Callback*)cb_dist_drive);
   dist_drive->align(Fl_Align(FL_ALIGN_LEFT));
   dist_drive->when(FL_WHEN_CHANGED);
-} // SliderW* dist_drive
-{ dist_level = new SliderW(56, 75, 100, 10, "Level");
+} // RKR_Slider* dist_drive
+{ dist_level = new RKR_Slider(56, 75, 100, 10, "Level");
   dist_level->type(5);
   dist_level->box(FL_FLAT_BOX);
   dist_level->color((Fl_Color)178);
@@ -268,7 +268,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_level->callback((Fl_Callback*)cb_dist_level);
   dist_level->align(Fl_Align(FL_ALIGN_LEFT));
   dist_level->when(FL_WHEN_CHANGED);
-} // SliderW* dist_level
+} // RKR_Slider* dist_level
 { RKR_Choice* o = dist_tipo = new RKR_Choice(34, 91, 70, 16, "Type");
   dist_tipo->box(FL_FLAT_BOX);
   dist_tipo->down_box(FL_BORDER_BOX);
@@ -324,7 +324,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   dist_st->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* dist_st
-{ dist_pan = new SliderW(56, 125, 100, 10, "Pan");
+{ dist_pan = new RKR_Slider(56, 125, 100, 10, "Pan");
   dist_pan->type(5);
   dist_pan->box(FL_FLAT_BOX);
   dist_pan->color((Fl_Color)178);
@@ -340,8 +340,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_pan->callback((Fl_Callback*)cb_dist_pan);
   dist_pan->align(Fl_Align(FL_ALIGN_LEFT));
   dist_pan->when(FL_WHEN_CHANGED);
-} // SliderW* dist_pan
-{ dist_oct = new SliderW(56, 145, 100, 10, "Sub Octv");
+} // RKR_Slider* dist_pan
+{ dist_oct = new RKR_Slider(56, 145, 100, 10, "Sub Octv");
   dist_oct->type(5);
   dist_oct->box(FL_FLAT_BOX);
   dist_oct->color((Fl_Color)178);
@@ -356,8 +356,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_oct->callback((Fl_Callback*)cb_dist_oct);
   dist_oct->align(Fl_Align(FL_ALIGN_LEFT));
   dist_oct->when(FL_WHEN_CHANGED);
-} // SliderW* dist_oct
-{ dist_lpf = new SliderW(56, 157, 100, 10, "LPF");
+} // RKR_Slider* dist_oct
+{ dist_lpf = new RKR_Slider(56, 157, 100, 10, "LPF");
   dist_lpf->type(5);
   dist_lpf->box(FL_FLAT_BOX);
   dist_lpf->color((Fl_Color)178);
@@ -374,8 +374,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_lpf->callback((Fl_Callback*)cb_dist_lpf);
   dist_lpf->align(Fl_Align(FL_ALIGN_LEFT));
   dist_lpf->when(FL_WHEN_CHANGED);
-} // SliderW* dist_lpf
-{ dist_hpf = new SliderW(56, 169, 100, 10, "HPF");
+} // RKR_Slider* dist_lpf
+{ dist_hpf = new RKR_Slider(56, 169, 100, 10, "HPF");
   dist_hpf->type(5);
   dist_hpf->box(FL_FLAT_BOX);
   dist_hpf->color((Fl_Color)178);
@@ -392,7 +392,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dist_hpf->callback((Fl_Callback*)cb_dist_hpf);
   dist_hpf->align(Fl_Align(FL_ALIGN_LEFT));
   dist_hpf->when(FL_WHEN_CHANGED);
-} // SliderW* dist_hpf
+} // RKR_Slider* dist_hpf
 position(X, Y);
 end();
 }

@@ -38,7 +38,7 @@ Fl_Menu_Item GateGui::menu_gate_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void GateGui::cb_gate_ATime_i(SliderW* o, void*) {
+void GateGui::cb_gate_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(429);
@@ -46,11 +46,11 @@ void GateGui::cb_gate_ATime_i(SliderW* o, void*) {
 }
 rkr->efx_Gate->changepar(3,(int)o->value());
 }
-void GateGui::cb_gate_ATime(SliderW* o, void* v) {
+void GateGui::cb_gate_ATime(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_ATime_i(o,v);
 }
 
-void GateGui::cb_gate_RTime_i(SliderW* o, void*) {
+void GateGui::cb_gate_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(430);
@@ -58,11 +58,11 @@ void GateGui::cb_gate_RTime_i(SliderW* o, void*) {
 }
 rkr->efx_Gate->changepar(4, (int) o->value());
 }
-void GateGui::cb_gate_RTime(SliderW* o, void* v) {
+void GateGui::cb_gate_RTime(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_RTime_i(o,v);
 }
 
-void GateGui::cb_gate_range_i(SliderW* o, void*) {
+void GateGui::cb_gate_range_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(431);
@@ -70,11 +70,11 @@ void GateGui::cb_gate_range_i(SliderW* o, void*) {
 }
 rkr->efx_Gate->changepar(2, (int) o->value());
 }
-void GateGui::cb_gate_range(SliderW* o, void* v) {
+void GateGui::cb_gate_range(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_range_i(o,v);
 }
 
-void GateGui::cb_gate_threshold_i(SliderW* o, void*) {
+void GateGui::cb_gate_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(432);
@@ -82,11 +82,11 @@ void GateGui::cb_gate_threshold_i(SliderW* o, void*) {
 }
 rkr->efx_Gate->changepar(1, (int)o->value());
 }
-void GateGui::cb_gate_threshold(SliderW* o, void* v) {
+void GateGui::cb_gate_threshold(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_threshold_i(o,v);
 }
 
-void GateGui::cb_gate_hold_i(SliderW* o, void*) {
+void GateGui::cb_gate_hold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(433);
@@ -94,11 +94,11 @@ void GateGui::cb_gate_hold_i(SliderW* o, void*) {
 }
 rkr->efx_Gate->changepar(7,(int)o->value());
 }
-void GateGui::cb_gate_hold(SliderW* o, void* v) {
+void GateGui::cb_gate_hold(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_hold_i(o,v);
 }
 
-void GateGui::cb_gate_LPF_i(SliderW* o, void*) {
+void GateGui::cb_gate_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(434);
@@ -106,11 +106,11 @@ void GateGui::cb_gate_LPF_i(SliderW* o, void*) {
 }
 rkr->efx_Gate->changepar(5, (int)o->value());
 }
-void GateGui::cb_gate_LPF(SliderW* o, void* v) {
+void GateGui::cb_gate_LPF(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_LPF_i(o,v);
 }
 
-void GateGui::cb_gate_HPF_i(SliderW* o, void*) {
+void GateGui::cb_gate_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(435);
@@ -118,7 +118,7 @@ void GateGui::cb_gate_HPF_i(SliderW* o, void*) {
 }
 rkr->efx_Gate->changepar(6, (int)o->value());
 }
-void GateGui::cb_gate_HPF(SliderW* o, void* v) {
+void GateGui::cb_gate_HPF(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_HPF_i(o,v);
 }
 GateGui::GateGui(int X, int Y, int W, int H, const char *L)
@@ -157,7 +157,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_preset->when(FL_WHEN_RELEASE_ALWAYS);
   gate_preset->menu(menu_gate_preset);
 } // RKR_Choice* gate_preset
-{ gate_ATime = new SliderW(56, 39, 100, 10, "A. Time");
+{ gate_ATime = new RKR_Slider(56, 39, 100, 10, "A. Time");
   gate_ATime->tooltip("Attack Time");
   gate_ATime->type(5);
   gate_ATime->box(FL_FLAT_BOX);
@@ -175,8 +175,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_ATime->callback((Fl_Callback*)cb_gate_ATime);
   gate_ATime->align(Fl_Align(FL_ALIGN_LEFT));
   gate_ATime->when(FL_WHEN_CHANGED);
-} // SliderW* gate_ATime
-{ gate_RTime = new SliderW(56, 61, 100, 10, "R. Time");
+} // RKR_Slider* gate_ATime
+{ gate_RTime = new RKR_Slider(56, 61, 100, 10, "R. Time");
   gate_RTime->tooltip("Release Time");
   gate_RTime->type(5);
   gate_RTime->box(FL_FLAT_BOX);
@@ -194,8 +194,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_RTime->callback((Fl_Callback*)cb_gate_RTime);
   gate_RTime->align(Fl_Align(FL_ALIGN_LEFT));
   gate_RTime->when(FL_WHEN_CHANGED);
-} // SliderW* gate_RTime
-{ gate_range = new SliderW(56, 83, 100, 10, "Range");
+} // RKR_Slider* gate_RTime
+{ gate_range = new RKR_Slider(56, 83, 100, 10, "Range");
   gate_range->type(5);
   gate_range->box(FL_FLAT_BOX);
   gate_range->color((Fl_Color)178);
@@ -211,8 +211,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_range->callback((Fl_Callback*)cb_gate_range);
   gate_range->align(Fl_Align(FL_ALIGN_LEFT));
   gate_range->when(FL_WHEN_CHANGED);
-} // SliderW* gate_range
-{ gate_threshold = new SliderW(56, 105, 100, 10, "Threshold");
+} // RKR_Slider* gate_range
+{ gate_threshold = new RKR_Slider(56, 105, 100, 10, "Threshold");
   gate_threshold->type(5);
   gate_threshold->box(FL_FLAT_BOX);
   gate_threshold->color((Fl_Color)178);
@@ -228,8 +228,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_threshold->callback((Fl_Callback*)cb_gate_threshold);
   gate_threshold->align(Fl_Align(FL_ALIGN_LEFT));
   gate_threshold->when(FL_WHEN_CHANGED);
-} // SliderW* gate_threshold
-{ gate_hold = new SliderW(56, 127, 100, 10, "Hold");
+} // RKR_Slider* gate_threshold
+{ gate_hold = new RKR_Slider(56, 127, 100, 10, "Hold");
   gate_hold->type(5);
   gate_hold->box(FL_FLAT_BOX);
   gate_hold->color((Fl_Color)178);
@@ -245,8 +245,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_hold->callback((Fl_Callback*)cb_gate_hold);
   gate_hold->align(Fl_Align(FL_ALIGN_LEFT));
   gate_hold->when(FL_WHEN_CHANGED);
-} // SliderW* gate_hold
-{ gate_LPF = new SliderW(56, 146, 100, 10, "LPF");
+} // RKR_Slider* gate_hold
+{ gate_LPF = new RKR_Slider(56, 146, 100, 10, "LPF");
   gate_LPF->type(5);
   gate_LPF->box(FL_FLAT_BOX);
   gate_LPF->color((Fl_Color)178);
@@ -263,8 +263,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_LPF->callback((Fl_Callback*)cb_gate_LPF);
   gate_LPF->align(Fl_Align(FL_ALIGN_LEFT));
   gate_LPF->when(FL_WHEN_CHANGED);
-} // SliderW* gate_LPF
-{ gate_HPF = new SliderW(56, 162, 100, 10, "HPF");
+} // RKR_Slider* gate_LPF
+{ gate_HPF = new RKR_Slider(56, 162, 100, 10, "HPF");
   gate_HPF->type(5);
   gate_HPF->box(FL_FLAT_BOX);
   gate_HPF->color((Fl_Color)178);
@@ -281,7 +281,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   gate_HPF->callback((Fl_Callback*)cb_gate_HPF);
   gate_HPF->align(Fl_Align(FL_ALIGN_LEFT));
   gate_HPF->when(FL_WHEN_CHANGED);
-} // SliderW* gate_HPF
+} // RKR_Slider* gate_HPF
 position(X, Y);
 end();
 }

@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,50 +26,50 @@ private:
   static void cb_pan_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_pan_preset[];
 public:
-  SliderW *pan_WD;
+  RKR_Slider *pan_WD;
 private:
-  inline void cb_pan_WD_i(SliderW*, void*);
-  static void cb_pan_WD(SliderW*, void*);
+  inline void cb_pan_WD_i(RKR_Slider*, void*);
+  static void cb_pan_WD(RKR_Slider*, void*);
 public:
-  SliderW *pan_pan;
+  RKR_Slider *pan_pan;
 private:
-  inline void cb_pan_pan_i(SliderW*, void*);
-  static void cb_pan_pan(SliderW*, void*);
+  inline void cb_pan_pan_i(RKR_Slider*, void*);
+  static void cb_pan_pan(RKR_Slider*, void*);
 public:
   RKR_Check_Button *pan_autopan;
 private:
   inline void cb_pan_autopan_i(RKR_Check_Button*, void*);
   static void cb_pan_autopan(RKR_Check_Button*, void*);
 public:
-  SliderW *pan_freq;
+  RKR_Slider *pan_freq;
 private:
-  inline void cb_pan_freq_i(SliderW*, void*);
-  static void cb_pan_freq(SliderW*, void*);
+  inline void cb_pan_freq_i(RKR_Slider*, void*);
+  static void cb_pan_freq(RKR_Slider*, void*);
 public:
-  SliderW *pan_rnd;
+  RKR_Slider *pan_rnd;
 private:
-  inline void cb_pan_rnd_i(SliderW*, void*);
-  static void cb_pan_rnd(SliderW*, void*);
+  inline void cb_pan_rnd_i(RKR_Slider*, void*);
+  static void cb_pan_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *pan_lfotype;
 private:
   inline void cb_pan_lfotype_i(RKR_Choice*, void*);
   static void cb_pan_lfotype(RKR_Choice*, void*);
 public:
-  SliderW *pan_stdf;
+  RKR_Slider *pan_stdf;
 private:
-  inline void cb_pan_stdf_i(SliderW*, void*);
-  static void cb_pan_stdf(SliderW*, void*);
+  inline void cb_pan_stdf_i(RKR_Slider*, void*);
+  static void cb_pan_stdf(RKR_Slider*, void*);
 public:
   RKR_Check_Button *pan_extraon;
 private:
   inline void cb_pan_extraon_i(RKR_Check_Button*, void*);
   static void cb_pan_extraon(RKR_Check_Button*, void*);
 public:
-  SliderW *pan_extra;
+  RKR_Slider *pan_extra;
 private:
-  inline void cb_pan_extra_i(SliderW*, void*);
-  static void cb_pan_extra(SliderW*, void*);
+  inline void cb_pan_extra_i(RKR_Slider*, void*);
+  static void cb_pan_extra(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif

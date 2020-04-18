@@ -11,7 +11,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class ExpanderGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
 } {
@@ -70,7 +70,7 @@ expander_level->value(rkr->efx_Expander->getpar(7));} selected
 } 
 rkr->efx_Expander->changepar(3,(int)o->value());}
     xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 5000 step 1 value 10 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider expander_RTime {
     label {R. Time}
@@ -81,7 +81,7 @@ rkr->efx_Expander->changepar(3,(int)o->value());}
 } 
 rkr->efx_Expander->changepar(4,(int) o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 1000 step 1 value 500 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider expander_shape {
     label Shape
@@ -92,7 +92,7 @@ rkr->efx_Expander->changepar(4,(int) o->value());}
 } 
 rkr->efx_Expander->changepar(2, (int) o->value());}
     xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 50 step 1 value 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider expander_threshold {
     label Threshold
@@ -103,7 +103,7 @@ rkr->efx_Expander->changepar(2, (int) o->value());}
 } 
 rkr->efx_Expander->changepar(1, (int)o->value());}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -80 maximum 0 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider expander_level {
     label {Out Gain}
@@ -114,7 +114,7 @@ rkr->efx_Expander->changepar(1, (int)o->value());}
 } 
 rkr->efx_Expander->changepar(7, (int) o->value());}
     xywh {56 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider expander_LPF {
     label LPF
@@ -125,7 +125,7 @@ rkr->efx_Expander->changepar(7, (int) o->value());}
 } 
 rkr->efx_Expander->changepar(5, (int)o->value());}
     xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider expander_HPF {
     label HPF
@@ -136,6 +136,6 @@ rkr->efx_Expander->changepar(5, (int)o->value());}
 } 
 rkr->efx_Expander->changepar(6, (int)o->value());}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
 }

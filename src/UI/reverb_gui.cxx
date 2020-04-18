@@ -55,7 +55,7 @@ Fl_Menu_Item ReverbGui::menu_reverb_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ReverbGui::cb_reverb_WD_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(57);
@@ -63,11 +63,11 @@ void ReverbGui::cb_reverb_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Rev->changepar(0,Dry_Wet((int)(o->value())));
 }
-void ReverbGui::cb_reverb_WD(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_WD(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_WD_i(o,v);
 }
 
-void ReverbGui::cb_reverb_pan_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(63);
@@ -75,11 +75,11 @@ void ReverbGui::cb_reverb_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Rev->changepar(1,(int)(o->value()+64));
 }
-void ReverbGui::cb_reverb_pan(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_pan(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_pan_i(o,v);
 }
 
-void ReverbGui::cb_reverb_time_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_time_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(437);
@@ -87,11 +87,11 @@ void ReverbGui::cb_reverb_time_i(SliderW* o, void*) {
 }
 rkr->efx_Rev->changepar(2,(int)o->value());
 }
-void ReverbGui::cb_reverb_time(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_time(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_time_i(o,v);
 }
 
-void ReverbGui::cb_reverb_ldel_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_ldel_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(438);
@@ -99,11 +99,11 @@ void ReverbGui::cb_reverb_ldel_i(SliderW* o, void*) {
 }
 rkr->efx_Rev->changepar(3,(int)o->value());
 }
-void ReverbGui::cb_reverb_ldel(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_ldel(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_ldel_i(o,v);
 }
 
-void ReverbGui::cb_reverb_ldelft_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_ldelft_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(439);
@@ -111,7 +111,7 @@ void ReverbGui::cb_reverb_ldelft_i(SliderW* o, void*) {
 }
 rkr->efx_Rev->changepar(4,(int)o->value());
 }
-void ReverbGui::cb_reverb_ldelft(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_ldelft(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_ldelft_i(o,v);
 }
 
@@ -135,7 +135,7 @@ Fl_Menu_Item ReverbGui::menu_reverb_type[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ReverbGui::cb_reverb_RS_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_RS_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(440);
@@ -145,11 +145,11 @@ rkr->Reverb_Bypass=0;
 rkr->efx_Rev->changepar(11,(int)o->value());
 if((int)reverb_activar->value())rkr->Reverb_Bypass=1;
 }
-void ReverbGui::cb_reverb_RS(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_RS(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_RS_i(o,v);
 }
 
-void ReverbGui::cb_reverb_LPF_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(87);
@@ -157,11 +157,11 @@ void ReverbGui::cb_reverb_LPF_i(SliderW* o, void*) {
 } 
 rkr->efx_Rev->changepar(7,(int)o->value());
 }
-void ReverbGui::cb_reverb_LPF(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_LPF(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_LPF_i(o,v);
 }
 
-void ReverbGui::cb_reverb_HPF_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(90);
@@ -169,11 +169,11 @@ void ReverbGui::cb_reverb_HPF_i(SliderW* o, void*) {
 } 
 rkr->efx_Rev->changepar(8,(int)o->value());
 }
-void ReverbGui::cb_reverb_HPF(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_HPF(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_HPF_i(o,v);
 }
 
-void ReverbGui::cb_reverb_damp_i(SliderW* o, void*) {
+void ReverbGui::cb_reverb_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(441);
@@ -181,7 +181,7 @@ void ReverbGui::cb_reverb_damp_i(SliderW* o, void*) {
 }
 rkr->efx_Rev->changepar(9,(int)o->value());
 }
-void ReverbGui::cb_reverb_damp(SliderW* o, void* v) {
+void ReverbGui::cb_reverb_damp(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_damp_i(o,v);
 }
 ReverbGui::ReverbGui(int X, int Y, int W, int H, const char *L)
@@ -220,7 +220,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_preset->when(FL_WHEN_RELEASE_ALWAYS);
   reverb_preset->menu(menu_reverb_preset);
 } // RKR_Choice* reverb_preset
-{ reverb_WD = new SliderW(53, 27, 100, 10, "Dry/Wet");
+{ reverb_WD = new RKR_Slider(53, 27, 100, 10, "Dry/Wet");
   reverb_WD->type(5);
   reverb_WD->box(FL_FLAT_BOX);
   reverb_WD->color((Fl_Color)178);
@@ -235,8 +235,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_WD->callback((Fl_Callback*)cb_reverb_WD);
   reverb_WD->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_WD->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_WD
-{ reverb_pan = new SliderW(53, 39, 100, 10, "Pan");
+} // RKR_Slider* reverb_WD
+{ reverb_pan = new RKR_Slider(53, 39, 100, 10, "Pan");
   reverb_pan->type(5);
   reverb_pan->box(FL_FLAT_BOX);
   reverb_pan->color((Fl_Color)178);
@@ -252,8 +252,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_pan->callback((Fl_Callback*)cb_reverb_pan);
   reverb_pan->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_pan->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_pan
-{ reverb_time = new SliderW(53, 52, 100, 10, "Time");
+} // RKR_Slider* reverb_pan
+{ reverb_time = new RKR_Slider(53, 52, 100, 10, "Time");
   reverb_time->type(5);
   reverb_time->box(FL_FLAT_BOX);
   reverb_time->color((Fl_Color)178);
@@ -268,8 +268,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_time->callback((Fl_Callback*)cb_reverb_time);
   reverb_time->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_time->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_time
-{ reverb_ldel = new SliderW(53, 64, 100, 10, "I. Del");
+} // RKR_Slider* reverb_time
+{ reverb_ldel = new RKR_Slider(53, 64, 100, 10, "I. Del");
   reverb_ldel->tooltip("Initial Delay");
   reverb_ldel->type(5);
   reverb_ldel->box(FL_FLAT_BOX);
@@ -285,8 +285,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_ldel->callback((Fl_Callback*)cb_reverb_ldel);
   reverb_ldel->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_ldel->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_ldel
-{ reverb_ldelft = new SliderW(53, 77, 100, 10, "Del. E/R");
+} // RKR_Slider* reverb_ldel
+{ reverb_ldelft = new RKR_Slider(53, 77, 100, 10, "Del. E/R");
   reverb_ldelft->tooltip("Initial Delay Feedback");
   reverb_ldelft->type(5);
   reverb_ldelft->box(FL_FLAT_BOX);
@@ -302,7 +302,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_ldelft->callback((Fl_Callback*)cb_reverb_ldelft);
   reverb_ldelft->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_ldelft->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_ldelft
+} // RKR_Slider* reverb_ldelft
 { reverb_type = new RKR_Choice(62, 92, 72, 16, "Type");
   reverb_type->box(FL_FLAT_BOX);
   reverb_type->down_box(FL_BORDER_BOX);
@@ -319,7 +319,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_type->when(FL_WHEN_RELEASE);
   reverb_type->menu(menu_reverb_type);
 } // RKR_Choice* reverb_type
-{ reverb_RS = new SliderW(53, 116, 100, 10, "R. Size");
+{ reverb_RS = new RKR_Slider(53, 116, 100, 10, "R. Size");
   reverb_RS->tooltip("Room Size");
   reverb_RS->type(5);
   reverb_RS->box(FL_FLAT_BOX);
@@ -337,8 +337,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_RS->callback((Fl_Callback*)cb_reverb_RS);
   reverb_RS->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_RS->when(FL_WHEN_RELEASE);
-} // SliderW* reverb_RS
-{ reverb_LPF = new SliderW(53, 131, 100, 10, "LPF");
+} // RKR_Slider* reverb_RS
+{ reverb_LPF = new RKR_Slider(53, 131, 100, 10, "LPF");
   reverb_LPF->tooltip("Lowpass Filter");
   reverb_LPF->type(5);
   reverb_LPF->box(FL_FLAT_BOX);
@@ -356,8 +356,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_LPF->callback((Fl_Callback*)cb_reverb_LPF);
   reverb_LPF->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_LPF->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_LPF
-{ reverb_HPF = new SliderW(53, 147, 100, 10, "HPF");
+} // RKR_Slider* reverb_LPF
+{ reverb_HPF = new RKR_Slider(53, 147, 100, 10, "HPF");
   reverb_HPF->tooltip("Highpass Filter");
   reverb_HPF->type(5);
   reverb_HPF->box(FL_FLAT_BOX);
@@ -375,8 +375,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_HPF->callback((Fl_Callback*)cb_reverb_HPF);
   reverb_HPF->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_HPF->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_HPF
-{ reverb_damp = new SliderW(53, 163, 100, 10, "Damping");
+} // RKR_Slider* reverb_HPF
+{ reverb_damp = new RKR_Slider(53, 163, 100, 10, "Damping");
   reverb_damp->type(5);
   reverb_damp->box(FL_FLAT_BOX);
   reverb_damp->color((Fl_Color)178);
@@ -393,7 +393,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_damp->callback((Fl_Callback*)cb_reverb_damp);
   reverb_damp->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_damp->when(FL_WHEN_CHANGED);
-} // SliderW* reverb_damp
+} // RKR_Slider* reverb_damp
 position(X, Y);
 end();
 }

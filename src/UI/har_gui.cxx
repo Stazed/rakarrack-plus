@@ -47,7 +47,7 @@ Fl_Menu_Item HarGui::menu_har_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void HarGui::cb_har_WD_i(SliderW* o, void*) {
+void HarGui::cb_har_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(31);
@@ -55,11 +55,11 @@ void HarGui::cb_har_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Har->changepar(0,Dry_Wet((int)(o->value())));
 }
-void HarGui::cb_har_WD(SliderW* o, void* v) {
+void HarGui::cb_har_WD(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_WD_i(o,v);
 }
 
-void HarGui::cb_har_int_i(SliderW* o, void*) {
+void HarGui::cb_har_int_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(27);
@@ -69,11 +69,11 @@ rkr->Harmonizer_Bypass=0;
 rkr->efx_Har->changepar(3,(int)(o->value()+12));
 if((int)har_activar->value())rkr->Harmonizer_Bypass=1;
 }
-void HarGui::cb_har_int(SliderW* o, void* v) {
+void HarGui::cb_har_int(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_int_i(o,v);
 }
 
-void HarGui::cb_har_gan_i(SliderW* o, void*) {
+void HarGui::cb_har_gan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(412);
@@ -81,11 +81,11 @@ void HarGui::cb_har_gan_i(SliderW* o, void*) {
 } 
 rkr->efx_Har->changepar(2,(int)(o->value()+64));
 }
-void HarGui::cb_har_gan(SliderW* o, void* v) {
+void HarGui::cb_har_gan(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_gan_i(o,v);
 }
 
-void HarGui::cb_har_pan_i(SliderW* o, void*) {
+void HarGui::cb_har_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(49);
@@ -93,11 +93,11 @@ void HarGui::cb_har_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Har->changepar(1,(int)(o->value()+64));
 }
-void HarGui::cb_har_pan(SliderW* o, void* v) {
+void HarGui::cb_har_pan(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_pan_i(o,v);
 }
 
-void HarGui::cb_har_freq1_i(SliderW* o, void*) {
+void HarGui::cb_har_freq1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(26);
@@ -105,11 +105,11 @@ void HarGui::cb_har_freq1_i(SliderW* o, void*) {
 } 
 rkr->efx_Har->changepar(4,(int)o->value());
 }
-void HarGui::cb_har_freq1(SliderW* o, void* v) {
+void HarGui::cb_har_freq1(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_freq1_i(o,v);
 }
 
-void HarGui::cb_har_gan1_i(SliderW* o, void*) {
+void HarGui::cb_har_gan1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(413);
@@ -117,11 +117,11 @@ void HarGui::cb_har_gan1_i(SliderW* o, void*) {
 } 
 rkr->efx_Har->changepar(8,(int)(o->value()+64));
 }
-void HarGui::cb_har_gan1(SliderW* o, void* v) {
+void HarGui::cb_har_gan1(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_gan1_i(o,v);
 }
 
-void HarGui::cb_har_q1_i(SliderW* o, void*) {
+void HarGui::cb_har_q1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(414);
@@ -129,7 +129,7 @@ void HarGui::cb_har_q1_i(SliderW* o, void*) {
 } 
 rkr->efx_Har->changepar(9,(int)(o->value()+64));
 }
-void HarGui::cb_har_q1(SliderW* o, void* v) {
+void HarGui::cb_har_q1(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_q1_i(o,v);
 }
 
@@ -157,7 +157,7 @@ void HarGui::cb_har_SELECT(RKR_Check_Button* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_SELECT_i(o,v);
 }
 
-void HarGui::cb_har_note_i(SliderW* o, void*) {
+void HarGui::cb_har_note_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(444);
@@ -166,11 +166,11 @@ void HarGui::cb_har_note_i(SliderW* o, void*) {
 rkr->efx_Har->changepar(6,(unsigned char)o->value());
 rgui->Chord(0);
 }
-void HarGui::cb_har_note(SliderW* o, void* v) {
+void HarGui::cb_har_note(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_note_i(o,v);
 }
 
-void HarGui::cb_har_type_i(SliderW* o, void*) {
+void HarGui::cb_har_type_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(445);
@@ -179,7 +179,7 @@ void HarGui::cb_har_type_i(SliderW* o, void*) {
 rkr->efx_Har->changepar(7,(unsigned char)o->value());
 rgui->Chord(0);
 }
-void HarGui::cb_har_type(SliderW* o, void* v) {
+void HarGui::cb_har_type(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_type_i(o,v);
 }
 HarGui::HarGui(int X, int Y, int W, int H, const char *L)
@@ -218,7 +218,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_preset->when(FL_WHEN_RELEASE_ALWAYS);
   har_preset->menu(menu_har_preset);
 } // RKR_Choice* har_preset
-{ har_WD = new SliderW(53, 30, 100, 10, "Dry/Wet");
+{ har_WD = new RKR_Slider(53, 30, 100, 10, "Dry/Wet");
   har_WD->type(5);
   har_WD->box(FL_FLAT_BOX);
   har_WD->color((Fl_Color)178);
@@ -233,8 +233,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_WD->callback((Fl_Callback*)cb_har_WD);
   har_WD->align(Fl_Align(FL_ALIGN_LEFT));
   har_WD->when(FL_WHEN_CHANGED);
-} // SliderW* har_WD
-{ har_int = new SliderW(53, 43, 100, 10, "Interval");
+} // RKR_Slider* har_WD
+{ har_int = new RKR_Slider(53, 43, 100, 10, "Interval");
   har_int->type(5);
   har_int->box(FL_FLAT_BOX);
   har_int->color((Fl_Color)178);
@@ -250,8 +250,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_int->callback((Fl_Callback*)cb_har_int);
   har_int->align(Fl_Align(FL_ALIGN_LEFT));
   har_int->when(FL_WHEN_CHANGED);
-} // SliderW* har_int
-{ har_gan = new SliderW(53, 58, 100, 10, "Gain");
+} // RKR_Slider* har_int
+{ har_gan = new RKR_Slider(53, 58, 100, 10, "Gain");
   har_gan->type(5);
   har_gan->box(FL_FLAT_BOX);
   har_gan->color((Fl_Color)178);
@@ -267,8 +267,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_gan->callback((Fl_Callback*)cb_har_gan);
   har_gan->align(Fl_Align(FL_ALIGN_LEFT));
   har_gan->when(FL_WHEN_CHANGED);
-} // SliderW* har_gan
-{ har_pan = new SliderW(53, 71, 100, 10, "Pan");
+} // RKR_Slider* har_gan
+{ har_pan = new RKR_Slider(53, 71, 100, 10, "Pan");
   har_pan->type(5);
   har_pan->box(FL_FLAT_BOX);
   har_pan->color((Fl_Color)178);
@@ -284,8 +284,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_pan->callback((Fl_Callback*)cb_har_pan);
   har_pan->align(Fl_Align(FL_ALIGN_LEFT));
   har_pan->when(FL_WHEN_CHANGED);
-} // SliderW* har_pan
-{ har_freq1 = new SliderW(52, 88, 100, 10, "Freq");
+} // RKR_Slider* har_pan
+{ har_freq1 = new RKR_Slider(52, 88, 100, 10, "Freq");
   har_freq1->type(5);
   har_freq1->box(FL_FLAT_BOX);
   har_freq1->color((Fl_Color)178);
@@ -302,8 +302,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_freq1->callback((Fl_Callback*)cb_har_freq1);
   har_freq1->align(Fl_Align(FL_ALIGN_LEFT));
   har_freq1->when(FL_WHEN_CHANGED);
-} // SliderW* har_freq1
-{ har_gan1 = new SliderW(53, 100, 100, 10, "F. Gain");
+} // RKR_Slider* har_freq1
+{ har_gan1 = new RKR_Slider(53, 100, 100, 10, "F. Gain");
   har_gan1->tooltip("Filter Gain");
   har_gan1->type(5);
   har_gan1->box(FL_FLAT_BOX);
@@ -320,8 +320,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_gan1->callback((Fl_Callback*)cb_har_gan1);
   har_gan1->align(Fl_Align(FL_ALIGN_LEFT));
   har_gan1->when(FL_WHEN_CHANGED);
-} // SliderW* har_gan1
-{ har_q1 = new SliderW(53, 112, 100, 10, "Filter Q");
+} // RKR_Slider* har_gan1
+{ har_q1 = new RKR_Slider(53, 112, 100, 10, "Filter Q");
   har_q1->type(5);
   har_q1->box(FL_FLAT_BOX);
   har_q1->color((Fl_Color)178);
@@ -337,7 +337,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_q1->callback((Fl_Callback*)cb_har_q1);
   har_q1->align(Fl_Align(FL_ALIGN_LEFT));
   har_q1->when(FL_WHEN_CHANGED);
-} // SliderW* har_q1
+} // RKR_Slider* har_q1
 { har_MIDI = new RKR_Check_Button(9, 124, 15, 15, "MIDI");
   har_MIDI->box(FL_NO_BOX);
   har_MIDI->down_box(FL_BORDER_BOX);
@@ -376,7 +376,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_chordname->when(FL_WHEN_RELEASE);
   o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
 } // RKR_Box* har_chordname
-{ har_note = new SliderW(53, 158, 100, 10, "Note");
+{ har_note = new RKR_Slider(53, 158, 100, 10, "Note");
   har_note->type(5);
   har_note->box(FL_FLAT_BOX);
   har_note->color((Fl_Color)178);
@@ -391,8 +391,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_note->callback((Fl_Callback*)cb_har_note);
   har_note->align(Fl_Align(FL_ALIGN_LEFT));
   har_note->when(FL_WHEN_CHANGED);
-} // SliderW* har_note
-{ har_type = new SliderW(53, 170, 100, 10, "Chord");
+} // RKR_Slider* har_note
+{ har_type = new RKR_Slider(53, 170, 100, 10, "Chord");
   har_type->type(5);
   har_type->box(FL_FLAT_BOX);
   har_type->color((Fl_Color)178);
@@ -407,7 +407,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_type->callback((Fl_Callback*)cb_har_type);
   har_type->align(Fl_Align(FL_ALIGN_LEFT));
   har_type->when(FL_WHEN_CHANGED);
-} // SliderW* har_type
+} // RKR_Slider* har_type
 position(X, Y);
 end();
 }

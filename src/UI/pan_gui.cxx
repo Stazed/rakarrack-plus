@@ -41,7 +41,7 @@ Fl_Menu_Item PanGui::menu_pan_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void PanGui::cb_pan_WD_i(SliderW* o, void*) {
+void PanGui::cb_pan_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(58);
@@ -49,11 +49,11 @@ void PanGui::cb_pan_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Pan->changepar(0,Dry_Wet((int)(o->value())));
 }
-void PanGui::cb_pan_WD(SliderW* o, void* v) {
+void PanGui::cb_pan_WD(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_WD_i(o,v);
 }
 
-void PanGui::cb_pan_pan_i(SliderW* o, void*) {
+void PanGui::cb_pan_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(67);
@@ -61,7 +61,7 @@ void PanGui::cb_pan_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Pan->changepar(1,(int)(o->value()+64));
 }
-void PanGui::cb_pan_pan(SliderW* o, void* v) {
+void PanGui::cb_pan_pan(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_pan_i(o,v);
 }
 
@@ -72,7 +72,7 @@ void PanGui::cb_pan_autopan(RKR_Check_Button* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_autopan_i(o,v);
 }
 
-void PanGui::cb_pan_freq_i(SliderW* o, void*) {
+void PanGui::cb_pan_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(77);
@@ -80,11 +80,11 @@ void PanGui::cb_pan_freq_i(SliderW* o, void*) {
 } 
 rkr->efx_Pan->changepar(2,(int)o->value());
 }
-void PanGui::cb_pan_freq(SliderW* o, void* v) {
+void PanGui::cb_pan_freq(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_freq_i(o,v);
 }
 
-void PanGui::cb_pan_rnd_i(SliderW* o, void*) {
+void PanGui::cb_pan_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(110);
@@ -92,7 +92,7 @@ void PanGui::cb_pan_rnd_i(SliderW* o, void*) {
 } 
 rkr->efx_Pan->changepar(3,(int)o->value());
 }
-void PanGui::cb_pan_rnd(SliderW* o, void* v) {
+void PanGui::cb_pan_rnd(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_rnd_i(o,v);
 }
 
@@ -103,7 +103,7 @@ void PanGui::cb_pan_lfotype(RKR_Choice* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_lfotype_i(o,v);
 }
 
-void PanGui::cb_pan_stdf_i(SliderW* o, void*) {
+void PanGui::cb_pan_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(104);
@@ -111,7 +111,7 @@ void PanGui::cb_pan_stdf_i(SliderW* o, void*) {
 } 
 rkr->efx_Pan->changepar(5,(int)o->value());
 }
-void PanGui::cb_pan_stdf(SliderW* o, void* v) {
+void PanGui::cb_pan_stdf(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_stdf_i(o,v);
 }
 
@@ -122,7 +122,7 @@ void PanGui::cb_pan_extraon(RKR_Check_Button* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_extraon_i(o,v);
 }
 
-void PanGui::cb_pan_extra_i(SliderW* o, void*) {
+void PanGui::cb_pan_extra_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(436);
@@ -130,7 +130,7 @@ void PanGui::cb_pan_extra_i(SliderW* o, void*) {
 }
 rkr->efx_Pan->changepar(6,(int)o->value());
 }
-void PanGui::cb_pan_extra(SliderW* o, void* v) {
+void PanGui::cb_pan_extra(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_extra_i(o,v);
 }
 PanGui::PanGui(int X, int Y, int W, int H, const char *L)
@@ -169,7 +169,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_preset->when(FL_WHEN_RELEASE_ALWAYS);
   pan_preset->menu(menu_pan_preset);
 } // RKR_Choice* pan_preset
-{ pan_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
+{ pan_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   pan_WD->type(5);
   pan_WD->box(FL_FLAT_BOX);
   pan_WD->color((Fl_Color)178);
@@ -184,8 +184,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_WD->callback((Fl_Callback*)cb_pan_WD);
   pan_WD->align(Fl_Align(FL_ALIGN_LEFT));
   pan_WD->when(FL_WHEN_CHANGED);
-} // SliderW* pan_WD
-{ pan_pan = new SliderW(56, 44, 100, 10, "Pan");
+} // RKR_Slider* pan_WD
+{ pan_pan = new RKR_Slider(56, 44, 100, 10, "Pan");
   pan_pan->type(5);
   pan_pan->box(FL_FLAT_BOX);
   pan_pan->color((Fl_Color)178);
@@ -201,7 +201,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_pan->callback((Fl_Callback*)cb_pan_pan);
   pan_pan->align(Fl_Align(FL_ALIGN_LEFT));
   pan_pan->when(FL_WHEN_CHANGED);
-} // SliderW* pan_pan
+} // RKR_Slider* pan_pan
 { pan_autopan = new RKR_Check_Button(35, 56, 70, 18, "AutoPan");
   pan_autopan->box(FL_NO_BOX);
   pan_autopan->down_box(FL_BORDER_BOX);
@@ -215,7 +215,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_autopan->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   pan_autopan->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* pan_autopan
-{ pan_freq = new SliderW(56, 73, 100, 10, "Tempo");
+{ pan_freq = new RKR_Slider(56, 73, 100, 10, "Tempo");
   pan_freq->type(5);
   pan_freq->box(FL_FLAT_BOX);
   pan_freq->color((Fl_Color)178);
@@ -231,8 +231,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_freq->callback((Fl_Callback*)cb_pan_freq);
   pan_freq->align(Fl_Align(FL_ALIGN_LEFT));
   pan_freq->when(FL_WHEN_CHANGED);
-} // SliderW* pan_freq
-{ pan_rnd = new SliderW(56, 85, 100, 10, "Random");
+} // RKR_Slider* pan_freq
+{ pan_rnd = new RKR_Slider(56, 85, 100, 10, "Random");
   pan_rnd->type(5);
   pan_rnd->box(FL_FLAT_BOX);
   pan_rnd->color((Fl_Color)178);
@@ -247,7 +247,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_rnd->callback((Fl_Callback*)cb_pan_rnd);
   pan_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   pan_rnd->when(FL_WHEN_CHANGED);
-} // SliderW* pan_rnd
+} // RKR_Slider* pan_rnd
 { RKR_Choice* o = pan_lfotype = new RKR_Choice(78, 103, 72, 16, "LFO Type");
   pan_lfotype->box(FL_FLAT_BOX);
   pan_lfotype->down_box(FL_BORDER_BOX);
@@ -264,7 +264,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* pan_lfotype
-{ pan_stdf = new SliderW(56, 124, 100, 10, "Stereo Df");
+{ pan_stdf = new RKR_Slider(56, 124, 100, 10, "Stereo Df");
   pan_stdf->tooltip("LFO L/R Delay");
   pan_stdf->type(5);
   pan_stdf->box(FL_FLAT_BOX);
@@ -280,7 +280,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_stdf->callback((Fl_Callback*)cb_pan_stdf);
   pan_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   pan_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* pan_stdf
+} // RKR_Slider* pan_stdf
 { pan_extraon = new RKR_Check_Button(35, 140, 82, 15, "Extra Stereo");
   pan_extraon->tooltip("Enable Extra Stereo");
   pan_extraon->box(FL_NO_BOX);
@@ -295,7 +295,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_extraon->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   pan_extraon->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* pan_extraon
-{ pan_extra = new SliderW(56, 161, 100, 10, "E.Stereo");
+{ pan_extra = new RKR_Slider(56, 161, 100, 10, "E.Stereo");
   pan_extra->tooltip("Extra Stereo Amount");
   pan_extra->type(5);
   pan_extra->box(FL_FLAT_BOX);
@@ -311,7 +311,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_extra->callback((Fl_Callback*)cb_pan_extra);
   pan_extra->align(Fl_Align(FL_ALIGN_LEFT));
   pan_extra->when(FL_WHEN_CHANGED);
-} // SliderW* pan_extra
+} // RKR_Slider* pan_extra
 position(X, Y);
 end();
 }

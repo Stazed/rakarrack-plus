@@ -43,7 +43,7 @@ Fl_Menu_Item OvrdGui::menu_ovrd_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void OvrdGui::cb_ovrd_WD_i(SliderW* o, void*) {
+void OvrdGui::cb_ovrd_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(29);
@@ -51,11 +51,11 @@ void OvrdGui::cb_ovrd_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Overdrive->changepar(0,Dry_Wet((int)(o->value())));
 }
-void OvrdGui::cb_ovrd_WD(SliderW* o, void* v) {
+void OvrdGui::cb_ovrd_WD(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_WD_i(o,v);
 }
 
-void OvrdGui::cb_ovrd_LRc_i(SliderW* o, void*) {
+void OvrdGui::cb_ovrd_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(94);
@@ -63,11 +63,11 @@ void OvrdGui::cb_ovrd_LRc_i(SliderW* o, void*) {
 } 
 rkr->efx_Overdrive->changepar(2,(int)(o->value()));
 }
-void OvrdGui::cb_ovrd_LRc(SliderW* o, void* v) {
+void OvrdGui::cb_ovrd_LRc(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_LRc_i(o,v);
 }
 
-void OvrdGui::cb_ovrd_drive_i(SliderW* o, void*) {
+void OvrdGui::cb_ovrd_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(68);
@@ -75,11 +75,11 @@ void OvrdGui::cb_ovrd_drive_i(SliderW* o, void*) {
 } 
 rkr->efx_Overdrive->changepar(3,(int)o->value());
 }
-void OvrdGui::cb_ovrd_drive(SliderW* o, void* v) {
+void OvrdGui::cb_ovrd_drive(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_drive_i(o,v);
 }
 
-void OvrdGui::cb_ovrd_level_i(SliderW* o, void*) {
+void OvrdGui::cb_ovrd_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(70);
@@ -87,7 +87,7 @@ void OvrdGui::cb_ovrd_level_i(SliderW* o, void*) {
 } 
 rkr->efx_Overdrive->changepar(4,(int)o->value());
 }
-void OvrdGui::cb_ovrd_level(SliderW* o, void* v) {
+void OvrdGui::cb_ovrd_level(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_level_i(o,v);
 }
 
@@ -112,7 +112,7 @@ void OvrdGui::cb_ovrd_st(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_st_i(o,v);
 }
 
-void OvrdGui::cb_ovrd_pan_i(SliderW* o, void*) {
+void OvrdGui::cb_ovrd_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(47);
@@ -120,7 +120,7 @@ void OvrdGui::cb_ovrd_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));
 }
-void OvrdGui::cb_ovrd_pan(SliderW* o, void* v) {
+void OvrdGui::cb_ovrd_pan(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_pan_i(o,v);
 }
 
@@ -131,7 +131,7 @@ void OvrdGui::cb_ovrd_pf(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_pf_i(o,v);
 }
 
-void OvrdGui::cb_ovrd_lpf_i(SliderW* o, void*) {
+void OvrdGui::cb_ovrd_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(85);
@@ -139,11 +139,11 @@ void OvrdGui::cb_ovrd_lpf_i(SliderW* o, void*) {
 } 
 rkr->efx_Overdrive->changepar(7,(int)o->value());
 }
-void OvrdGui::cb_ovrd_lpf(SliderW* o, void* v) {
+void OvrdGui::cb_ovrd_lpf(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_lpf_i(o,v);
 }
 
-void OvrdGui::cb_ovrd_hpf_i(SliderW* o, void*) {
+void OvrdGui::cb_ovrd_hpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(88);
@@ -151,7 +151,7 @@ void OvrdGui::cb_ovrd_hpf_i(SliderW* o, void*) {
 } 
 rkr->efx_Overdrive->changepar(8,(int)o->value());
 }
-void OvrdGui::cb_ovrd_hpf(SliderW* o, void* v) {
+void OvrdGui::cb_ovrd_hpf(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_hpf_i(o,v);
 }
 OvrdGui::OvrdGui(int X, int Y, int W, int H, const char *L)
@@ -190,7 +190,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ovrd_preset->menu(menu_ovrd_preset);
 } // RKR_Choice* ovrd_preset
-{ ovrd_WD = new SliderW(56, 35, 100, 10, "Dry/Wet");
+{ ovrd_WD = new RKR_Slider(56, 35, 100, 10, "Dry/Wet");
   ovrd_WD->type(5);
   ovrd_WD->box(FL_FLAT_BOX);
   ovrd_WD->color((Fl_Color)178);
@@ -205,8 +205,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_WD->callback((Fl_Callback*)cb_ovrd_WD);
   ovrd_WD->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_WD->when(FL_WHEN_CHANGED);
-} // SliderW* ovrd_WD
-{ ovrd_LRc = new SliderW(56, 48, 100, 10, "L/R Cross");
+} // RKR_Slider* ovrd_WD
+{ ovrd_LRc = new RKR_Slider(56, 48, 100, 10, "L/R Cross");
   ovrd_LRc->type(5);
   ovrd_LRc->box(FL_FLAT_BOX);
   ovrd_LRc->color((Fl_Color)178);
@@ -221,8 +221,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_LRc->callback((Fl_Callback*)cb_ovrd_LRc);
   ovrd_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_LRc->when(FL_WHEN_CHANGED);
-} // SliderW* ovrd_LRc
-{ ovrd_drive = new SliderW(56, 61, 100, 10, "Drive");
+} // RKR_Slider* ovrd_LRc
+{ ovrd_drive = new RKR_Slider(56, 61, 100, 10, "Drive");
   ovrd_drive->type(5);
   ovrd_drive->box(FL_FLAT_BOX);
   ovrd_drive->color((Fl_Color)178);
@@ -237,8 +237,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_drive->callback((Fl_Callback*)cb_ovrd_drive);
   ovrd_drive->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_drive->when(FL_WHEN_CHANGED);
-} // SliderW* ovrd_drive
-{ ovrd_level = new SliderW(56, 75, 100, 10, "Level");
+} // RKR_Slider* ovrd_drive
+{ ovrd_level = new RKR_Slider(56, 75, 100, 10, "Level");
   ovrd_level->type(5);
   ovrd_level->box(FL_FLAT_BOX);
   ovrd_level->color((Fl_Color)178);
@@ -253,7 +253,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_level->callback((Fl_Callback*)cb_ovrd_level);
   ovrd_level->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_level->when(FL_WHEN_CHANGED);
-} // SliderW* ovrd_level
+} // RKR_Slider* ovrd_level
 { RKR_Choice* o = ovrd_tipo = new RKR_Choice(33, 91, 72, 16, "Type");
   ovrd_tipo->box(FL_FLAT_BOX);
   ovrd_tipo->down_box(FL_BORDER_BOX);
@@ -296,7 +296,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ovrd_st->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ovrd_st
-{ ovrd_pan = new SliderW(56, 125, 100, 10, "Pan");
+{ ovrd_pan = new RKR_Slider(56, 125, 100, 10, "Pan");
   ovrd_pan->type(5);
   ovrd_pan->box(FL_FLAT_BOX);
   ovrd_pan->color((Fl_Color)178);
@@ -312,7 +312,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_pan->callback((Fl_Callback*)cb_ovrd_pan);
   ovrd_pan->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_pan->when(FL_WHEN_CHANGED);
-} // SliderW* ovrd_pan
+} // RKR_Slider* ovrd_pan
 { ovrd_pf = new RKR_Check_Button(41, 138, 68, 15, "Pre Filter");
   ovrd_pf->box(FL_NO_BOX);
   ovrd_pf->down_box(FL_BORDER_BOX);
@@ -326,7 +326,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_pf->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ovrd_pf->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ovrd_pf
-{ ovrd_lpf = new SliderW(56, 157, 100, 10, "LPF");
+{ ovrd_lpf = new RKR_Slider(56, 157, 100, 10, "LPF");
   ovrd_lpf->type(5);
   ovrd_lpf->box(FL_FLAT_BOX);
   ovrd_lpf->color((Fl_Color)178);
@@ -343,8 +343,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_lpf->callback((Fl_Callback*)cb_ovrd_lpf);
   ovrd_lpf->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_lpf->when(FL_WHEN_CHANGED);
-} // SliderW* ovrd_lpf
-{ ovrd_hpf = new SliderW(56, 169, 100, 10, "HPF");
+} // RKR_Slider* ovrd_lpf
+{ ovrd_hpf = new RKR_Slider(56, 169, 100, 10, "HPF");
   ovrd_hpf->type(5);
   ovrd_hpf->box(FL_FLAT_BOX);
   ovrd_hpf->color((Fl_Color)178);
@@ -361,7 +361,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ovrd_hpf->callback((Fl_Callback*)cb_ovrd_hpf);
   ovrd_hpf->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_hpf->when(FL_WHEN_CHANGED);
-} // SliderW* ovrd_hpf
+} // RKR_Slider* ovrd_hpf
 position(X, Y);
 end();
 }

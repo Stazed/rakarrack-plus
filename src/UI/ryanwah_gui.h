@@ -9,7 +9,7 @@
 #include "RKR_Counter.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -28,40 +28,40 @@ private:
   static void cb_ryanwah_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_ryanwah_preset[];
 public:
-  SliderW *ryanwah_WD;
+  RKR_Slider *ryanwah_WD;
 private:
-  inline void cb_ryanwah_WD_i(SliderW*, void*);
-  static void cb_ryanwah_WD(SliderW*, void*);
+  inline void cb_ryanwah_WD_i(RKR_Slider*, void*);
+  static void cb_ryanwah_WD(RKR_Slider*, void*);
 public:
   RKR_Check_Button *ryanwah_qm;
 private:
   inline void cb_ryanwah_qm_i(RKR_Check_Button*, void*);
   static void cb_ryanwah_qm(RKR_Check_Button*, void*);
 public:
-  SliderW *ryanwah_lp;
+  RKR_Slider *ryanwah_lp;
 private:
-  inline void cb_ryanwah_lp_i(SliderW*, void*);
-  static void cb_ryanwah_lp(SliderW*, void*);
+  inline void cb_ryanwah_lp_i(RKR_Slider*, void*);
+  static void cb_ryanwah_lp(RKR_Slider*, void*);
 public:
   RKR_Check_Button *ryanwah_nat;
 private:
   inline void cb_ryanwah_nat_i(RKR_Check_Button*, void*);
   static void cb_ryanwah_nat(RKR_Check_Button*, void*);
 public:
-  SliderW *ryanwah_bp;
+  RKR_Slider *ryanwah_bp;
 private:
-  inline void cb_ryanwah_bp_i(SliderW*, void*);
-  static void cb_ryanwah_bp(SliderW*, void*);
+  inline void cb_ryanwah_bp_i(RKR_Slider*, void*);
+  static void cb_ryanwah_bp(RKR_Slider*, void*);
 public:
   RKR_Check_Button *ryanwah_res;
 private:
   inline void cb_ryanwah_res_i(RKR_Check_Button*, void*);
   static void cb_ryanwah_res(RKR_Check_Button*, void*);
 public:
-  SliderW *ryanwah_hp;
+  RKR_Slider *ryanwah_hp;
 private:
-  inline void cb_ryanwah_hp_i(SliderW*, void*);
-  static void cb_ryanwah_hp(SliderW*, void*);
+  inline void cb_ryanwah_hp_i(RKR_Slider*, void*);
+  static void cb_ryanwah_hp(RKR_Slider*, void*);
 public:
   RKR_Counter *svfilter_stages;
 private:
@@ -73,35 +73,35 @@ private:
   inline void cb_ryanwah_lfotype_i(RKR_Choice*, void*);
   static void cb_ryanwah_lfotype(RKR_Choice*, void*);
 public:
-  SliderW *ryanwah_dpth;
+  RKR_Slider *ryanwah_dpth;
 private:
-  inline void cb_ryanwah_dpth_i(SliderW*, void*);
-  static void cb_ryanwah_dpth(SliderW*, void*);
+  inline void cb_ryanwah_dpth_i(RKR_Slider*, void*);
+  static void cb_ryanwah_dpth(RKR_Slider*, void*);
 public:
-  SliderW *ryanwah_freq;
+  RKR_Slider *ryanwah_freq;
 private:
-  inline void cb_ryanwah_freq_i(SliderW*, void*);
-  static void cb_ryanwah_freq(SliderW*, void*);
+  inline void cb_ryanwah_freq_i(RKR_Slider*, void*);
+  static void cb_ryanwah_freq(RKR_Slider*, void*);
 public:
-  SliderW *ryanwah_q;
+  RKR_Slider *ryanwah_q;
 private:
-  inline void cb_ryanwah_q_i(SliderW*, void*);
-  static void cb_ryanwah_q(SliderW*, void*);
+  inline void cb_ryanwah_q_i(RKR_Slider*, void*);
+  static void cb_ryanwah_q(RKR_Slider*, void*);
 public:
-  SliderW *ryanwah_rng;
+  RKR_Slider *ryanwah_rng;
 private:
-  inline void cb_ryanwah_rng_i(SliderW*, void*);
-  static void cb_ryanwah_rng(SliderW*, void*);
+  inline void cb_ryanwah_rng_i(RKR_Slider*, void*);
+  static void cb_ryanwah_rng(RKR_Slider*, void*);
 public:
-  SliderW *ryanwah_ampsnsinv;
+  RKR_Slider *ryanwah_ampsnsinv;
 private:
-  inline void cb_ryanwah_ampsnsinv_i(SliderW*, void*);
-  static void cb_ryanwah_ampsnsinv(SliderW*, void*);
+  inline void cb_ryanwah_ampsnsinv_i(RKR_Slider*, void*);
+  static void cb_ryanwah_ampsnsinv(RKR_Slider*, void*);
 public:
-  SliderW *ryanwah_ampsns;
+  RKR_Slider *ryanwah_ampsns;
 private:
-  inline void cb_ryanwah_ampsns_i(SliderW*, void*);
-  static void cb_ryanwah_ampsns(SliderW*, void*);
+  inline void cb_ryanwah_ampsns_i(RKR_Slider*, void*);
+  static void cb_ryanwah_ampsns(RKR_Slider*, void*);
 public:
   RKR_Value_Input *ryanwah_smooth;
 private:

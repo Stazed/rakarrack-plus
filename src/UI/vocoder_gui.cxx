@@ -42,7 +42,7 @@ Fl_Menu_Item VocoderGui::menu_vo_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void VocoderGui::cb_vo_WD_i(SliderW* o, void*) {
+void VocoderGui::cb_vo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(296);
@@ -50,11 +50,11 @@ void VocoderGui::cb_vo_WD_i(SliderW* o, void*) {
         }
         rkr->efx_Vocoder->changepar(0,Dry_Wet((int)(o->value())));
 }
-void VocoderGui::cb_vo_WD(SliderW* o, void* v) {
+void VocoderGui::cb_vo_WD(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_WD_i(o,v);
 }
 
-void VocoderGui::cb_vo_pan_i(SliderW* o, void*) {
+void VocoderGui::cb_vo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(297);
@@ -62,11 +62,11 @@ void VocoderGui::cb_vo_pan_i(SliderW* o, void*) {
         }
         rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));
 }
-void VocoderGui::cb_vo_pan(SliderW* o, void* v) {
+void VocoderGui::cb_vo_pan(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_pan_i(o,v);
 }
 
-void VocoderGui::cb_vo_input_i(SliderW* o, void*) {
+void VocoderGui::cb_vo_input_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(298);
@@ -74,11 +74,11 @@ void VocoderGui::cb_vo_input_i(SliderW* o, void*) {
         }
         rkr->efx_Vocoder->changepar(4,(int)o->value());
 }
-void VocoderGui::cb_vo_input(SliderW* o, void* v) {
+void VocoderGui::cb_vo_input(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_input_i(o,v);
 }
 
-void VocoderGui::cb_vo_mu_i(SliderW* o, void*) {
+void VocoderGui::cb_vo_mu_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(299);
@@ -86,11 +86,11 @@ void VocoderGui::cb_vo_mu_i(SliderW* o, void*) {
         }
         rkr->efx_Vocoder->changepar(2,(int)o->value());
 }
-void VocoderGui::cb_vo_mu(SliderW* o, void* v) {
+void VocoderGui::cb_vo_mu(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_mu_i(o,v);
 }
 
-void VocoderGui::cb_vo_q_i(SliderW* o, void*) {
+void VocoderGui::cb_vo_q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(300);
@@ -98,11 +98,11 @@ void VocoderGui::cb_vo_q_i(SliderW* o, void*) {
         }
         rkr->efx_Vocoder->changepar(3,(int)o->value());
 }
-void VocoderGui::cb_vo_q(SliderW* o, void* v) {
+void VocoderGui::cb_vo_q(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_q_i(o,v);
 }
 
-void VocoderGui::cb_vo_ring_i(SliderW* o, void*) {
+void VocoderGui::cb_vo_ring_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(301);
@@ -110,11 +110,11 @@ void VocoderGui::cb_vo_ring_i(SliderW* o, void*) {
         }
         rkr->efx_Vocoder->changepar(6,(int)o->value());
 }
-void VocoderGui::cb_vo_ring(SliderW* o, void* v) {
+void VocoderGui::cb_vo_ring(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_ring_i(o,v);
 }
 
-void VocoderGui::cb_vo_level_i(SliderW* o, void*) {
+void VocoderGui::cb_vo_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(302);
@@ -122,7 +122,7 @@ void VocoderGui::cb_vo_level_i(SliderW* o, void*) {
         }
         rkr->efx_Vocoder->changepar(5,(int)o->value());
 }
-void VocoderGui::cb_vo_level(SliderW* o, void* v) {
+void VocoderGui::cb_vo_level(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_level_i(o,v);
 }
 VocoderGui::VocoderGui(int X, int Y, int W, int H, const char *L)
@@ -161,7 +161,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vo_preset->menu(menu_vo_preset);
 } // RKR_Choice* vo_preset
-{ vo_WD = new SliderW(56, 30, 100, 10, "Dry/Wet");
+{ vo_WD = new RKR_Slider(56, 30, 100, 10, "Dry/Wet");
   vo_WD->type(5);
   vo_WD->box(FL_FLAT_BOX);
   vo_WD->color((Fl_Color)178);
@@ -176,8 +176,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_WD->callback((Fl_Callback*)cb_vo_WD);
   vo_WD->align(Fl_Align(FL_ALIGN_LEFT));
   vo_WD->when(FL_WHEN_CHANGED);
-} // SliderW* vo_WD
-{ vo_pan = new SliderW(56, 50, 100, 10, "Pan");
+} // RKR_Slider* vo_WD
+{ vo_pan = new RKR_Slider(56, 50, 100, 10, "Pan");
   vo_pan->type(5);
   vo_pan->box(FL_FLAT_BOX);
   vo_pan->color((Fl_Color)178);
@@ -193,8 +193,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_pan->callback((Fl_Callback*)cb_vo_pan);
   vo_pan->align(Fl_Align(FL_ALIGN_LEFT));
   vo_pan->when(FL_WHEN_CHANGED);
-} // SliderW* vo_pan
-{ vo_input = new SliderW(56, 70, 100, 10, "Input");
+} // RKR_Slider* vo_pan
+{ vo_input = new RKR_Slider(56, 70, 100, 10, "Input");
   vo_input->type(5);
   vo_input->box(FL_FLAT_BOX);
   vo_input->color((Fl_Color)178);
@@ -209,8 +209,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_input->callback((Fl_Callback*)cb_vo_input);
   vo_input->align(Fl_Align(FL_ALIGN_LEFT));
   vo_input->when(FL_WHEN_CHANGED);
-} // SliderW* vo_input
-{ vo_mu = new SliderW(56, 90, 100, 10, "Smear");
+} // RKR_Slider* vo_input
+{ vo_mu = new RKR_Slider(56, 90, 100, 10, "Smear");
   vo_mu->tooltip("Muffle, Blur");
   vo_mu->type(5);
   vo_mu->box(FL_FLAT_BOX);
@@ -228,8 +228,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_mu->callback((Fl_Callback*)cb_vo_mu);
   vo_mu->align(Fl_Align(FL_ALIGN_LEFT));
   vo_mu->when(FL_WHEN_CHANGED);
-} // SliderW* vo_mu
-{ vo_q = new SliderW(56, 110, 100, 10, "Q");
+} // RKR_Slider* vo_mu
+{ vo_q = new RKR_Slider(56, 110, 100, 10, "Q");
   vo_q->tooltip("Resonance");
   vo_q->type(5);
   vo_q->box(FL_FLAT_BOX);
@@ -247,8 +247,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_q->callback((Fl_Callback*)cb_vo_q);
   vo_q->align(Fl_Align(FL_ALIGN_LEFT));
   vo_q->when(FL_WHEN_CHANGED);
-} // SliderW* vo_q
-{ vo_ring = new SliderW(56, 130, 100, 10, "Ring");
+} // RKR_Slider* vo_q
+{ vo_ring = new RKR_Slider(56, 130, 100, 10, "Ring");
   vo_ring->type(5);
   vo_ring->box(FL_FLAT_BOX);
   vo_ring->color((Fl_Color)178);
@@ -263,8 +263,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_ring->callback((Fl_Callback*)cb_vo_ring);
   vo_ring->align(Fl_Align(FL_ALIGN_LEFT));
   vo_ring->when(FL_WHEN_CHANGED);
-} // SliderW* vo_ring
-{ vo_level = new SliderW(56, 150, 100, 10, "Level");
+} // RKR_Slider* vo_ring
+{ vo_level = new RKR_Slider(56, 150, 100, 10, "Level");
   vo_level->type(5);
   vo_level->box(FL_FLAT_BOX);
   vo_level->color((Fl_Color)178);
@@ -279,7 +279,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_level->callback((Fl_Callback*)cb_vo_level);
   vo_level->align(Fl_Align(FL_ALIGN_LEFT));
   vo_level->when(FL_WHEN_CHANGED);
-} // SliderW* vo_level
+} // RKR_Slider* vo_level
 { vu_vu = new NewVum(7, 55, 11, 122);
   vu_vu->type(2);
   vu_vu->box(FL_NO_BOX);

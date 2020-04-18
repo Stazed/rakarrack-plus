@@ -8,7 +8,7 @@
 #include "RKR_Counter.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -27,50 +27,50 @@ private:
   static void cb_echotron_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_echotron_preset[];
 public:
-  SliderW *echotron_WD;
+  RKR_Slider *echotron_WD;
 private:
-  inline void cb_echotron_WD_i(SliderW*, void*);
-  static void cb_echotron_WD(SliderW*, void*);
+  inline void cb_echotron_WD_i(RKR_Slider*, void*);
+  static void cb_echotron_WD(RKR_Slider*, void*);
 public:
-  SliderW *echotron_pan;
+  RKR_Slider *echotron_pan;
 private:
-  inline void cb_echotron_pan_i(SliderW*, void*);
-  static void cb_echotron_pan(SliderW*, void*);
+  inline void cb_echotron_pan_i(RKR_Slider*, void*);
+  static void cb_echotron_pan(RKR_Slider*, void*);
 public:
-  SliderW *echotron_tempo;
+  RKR_Slider *echotron_tempo;
 private:
-  inline void cb_echotron_tempo_i(SliderW*, void*);
-  static void cb_echotron_tempo(SliderW*, void*);
+  inline void cb_echotron_tempo_i(RKR_Slider*, void*);
+  static void cb_echotron_tempo(RKR_Slider*, void*);
 public:
-  SliderW *echotron_damp;
+  RKR_Slider *echotron_damp;
 private:
-  inline void cb_echotron_damp_i(SliderW*, void*);
-  static void cb_echotron_damp(SliderW*, void*);
+  inline void cb_echotron_damp_i(RKR_Slider*, void*);
+  static void cb_echotron_damp(RKR_Slider*, void*);
 public:
-  SliderW *echotron_fb;
+  RKR_Slider *echotron_fb;
 private:
-  inline void cb_echotron_fb_i(SliderW*, void*);
-  static void cb_echotron_fb(SliderW*, void*);
+  inline void cb_echotron_fb_i(RKR_Slider*, void*);
+  static void cb_echotron_fb(RKR_Slider*, void*);
 public:
-  SliderW *echotron_lrcross;
+  RKR_Slider *echotron_lrcross;
 private:
-  inline void cb_echotron_lrcross_i(SliderW*, void*);
-  static void cb_echotron_lrcross(SliderW*, void*);
+  inline void cb_echotron_lrcross_i(RKR_Slider*, void*);
+  static void cb_echotron_lrcross(RKR_Slider*, void*);
 public:
-  SliderW *echotron_width;
+  RKR_Slider *echotron_width;
 private:
-  inline void cb_echotron_width_i(SliderW*, void*);
-  static void cb_echotron_width(SliderW*, void*);
+  inline void cb_echotron_width_i(RKR_Slider*, void*);
+  static void cb_echotron_width(RKR_Slider*, void*);
 public:
-  SliderW *echotron_deep;
+  RKR_Slider *echotron_deep;
 private:
-  inline void cb_echotron_deep_i(SliderW*, void*);
-  static void cb_echotron_deep(SliderW*, void*);
+  inline void cb_echotron_deep_i(RKR_Slider*, void*);
+  static void cb_echotron_deep(RKR_Slider*, void*);
 public:
-  SliderW *echotron_stdf;
+  RKR_Slider *echotron_stdf;
 private:
-  inline void cb_echotron_stdf_i(SliderW*, void*);
-  static void cb_echotron_stdf(SliderW*, void*);
+  inline void cb_echotron_stdf_i(RKR_Slider*, void*);
+  static void cb_echotron_stdf(RKR_Slider*, void*);
 public:
   RKR_Check_Button *echotron_af;
 private:

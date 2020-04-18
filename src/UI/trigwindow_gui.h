@@ -24,30 +24,30 @@ private:
   static void cb_aux_source(RKR_Choice*, void*);
   static Fl_Menu_Item menu_aux_source[];
 public:
-  SliderW *aux_gain;
+  RKR_Slider *aux_gain;
 private:
-  inline void cb_aux_gain_i(SliderW*, void*);
-  static void cb_aux_gain(SliderW*, void*);
+  inline void cb_aux_gain_i(RKR_Slider*, void*);
+  static void cb_aux_gain(RKR_Slider*, void*);
 public:
-  SliderW *aux_thres;
+  RKR_Slider *aux_thres;
 private:
-  inline void cb_aux_thres_i(SliderW*, void*);
-  static void cb_aux_thres(SliderW*, void*);
+  inline void cb_aux_thres_i(RKR_Slider*, void*);
+  static void cb_aux_thres(RKR_Slider*, void*);
 public:
   RKR_Value_Input *aux_midi;
 private:
   inline void cb_aux_midi_i(RKR_Value_Input*, void*);
   static void cb_aux_midi(RKR_Value_Input*, void*);
 public:
-  SliderW *aux_min;
+  RKR_Slider *aux_min;
 private:
-  inline void cb_aux_min_i(SliderW*, void*);
-  static void cb_aux_min(SliderW*, void*);
+  inline void cb_aux_min_i(RKR_Slider*, void*);
+  static void cb_aux_min(RKR_Slider*, void*);
 public:
-  SliderW *aux_max;
+  RKR_Slider *aux_max;
 private:
-  inline void cb_aux_max_i(SliderW*, void*);
-  static void cb_aux_max(SliderW*, void*);
+  inline void cb_aux_max_i(RKR_Slider*, void*);
+  static void cb_aux_max(RKR_Slider*, void*);
   RKR* m_rkr; 
 public:
   void initialize(RKR *_rkr);

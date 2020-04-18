@@ -14,7 +14,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class {\#include "common_gui_menu.h"} OvrdGui {
   user_data 1 open
   xywh {1703 220 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
@@ -72,7 +72,7 @@ ovrd_pf->value(rkr->efx_Overdrive->getpar(10));}
 } 
 rkr->efx_Overdrive->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ovrd_LRc {
     label {L/R Cross}
@@ -83,7 +83,7 @@ rkr->efx_Overdrive->changepar(0,Dry_Wet((int)(o->value())));}
 } 
 rkr->efx_Overdrive->changepar(2,(int)(o->value()));}
     xywh {56 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ovrd_drive {
     label Drive
@@ -94,7 +94,7 @@ rkr->efx_Overdrive->changepar(2,(int)(o->value()));}
 } 
 rkr->efx_Overdrive->changepar(3,(int)o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ovrd_level {
     label Level
@@ -105,7 +105,7 @@ rkr->efx_Overdrive->changepar(3,(int)o->value());}
 } 
 rkr->efx_Overdrive->changepar(4,(int)o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Choice ovrd_tipo {
     label Type
@@ -137,7 +137,7 @@ rkr->efx_Overdrive->changepar(4,(int)o->value());}
 } 
 rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));}
     xywh {56 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Check_Button ovrd_pf {
     label {Pre Filter}
@@ -155,7 +155,7 @@ rkr->efx_Overdrive->changepar(1,(int)(o->value()+64));}
 } 
 rkr->efx_Overdrive->changepar(7,(int)o->value());}
     xywh {56 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ovrd_hpf {
     label HPF
@@ -166,7 +166,7 @@ rkr->efx_Overdrive->changepar(7,(int)o->value());}
 } 
 rkr->efx_Overdrive->changepar(8,(int)o->value());}
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   decl {CommonGuiMenu *m_dist_menu;} {private local
   }

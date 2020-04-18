@@ -9,7 +9,7 @@
 #include "RKR_Counter.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -28,20 +28,20 @@ private:
   static void cb_synthfilter_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_synthfilter_preset[];
 public:
-  SliderW *synthfilter_WD;
+  RKR_Slider *synthfilter_WD;
 private:
-  inline void cb_synthfilter_WD_i(SliderW*, void*);
-  static void cb_synthfilter_WD(SliderW*, void*);
+  inline void cb_synthfilter_WD_i(RKR_Slider*, void*);
+  static void cb_synthfilter_WD(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_Distort;
+  RKR_Slider *synthfilter_Distort;
 private:
-  inline void cb_synthfilter_Distort_i(SliderW*, void*);
-  static void cb_synthfilter_Distort(SliderW*, void*);
+  inline void cb_synthfilter_Distort_i(RKR_Slider*, void*);
+  static void cb_synthfilter_Distort(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_freq;
+  RKR_Slider *synthfilter_freq;
 private:
-  inline void cb_synthfilter_freq_i(SliderW*, void*);
-  static void cb_synthfilter_freq(SliderW*, void*);
+  inline void cb_synthfilter_freq_i(RKR_Slider*, void*);
+  static void cb_synthfilter_freq(RKR_Slider*, void*);
 public:
   RKR_Value_Input *synthfilter_rand;
 private:
@@ -58,20 +58,20 @@ private:
   inline void cb_synthfilter_subs_i(RKR_Check_Button*, void*);
   static void cb_synthfilter_subs(RKR_Check_Button*, void*);
 public:
-  SliderW *synthfilter_stdf;
+  RKR_Slider *synthfilter_stdf;
 private:
-  inline void cb_synthfilter_stdf_i(SliderW*, void*);
-  static void cb_synthfilter_stdf(SliderW*, void*);
+  inline void cb_synthfilter_stdf_i(RKR_Slider*, void*);
+  static void cb_synthfilter_stdf(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_width;
+  RKR_Slider *synthfilter_width;
 private:
-  inline void cb_synthfilter_width_i(SliderW*, void*);
-  static void cb_synthfilter_width(SliderW*, void*);
+  inline void cb_synthfilter_width_i(RKR_Slider*, void*);
+  static void cb_synthfilter_width(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_fb;
+  RKR_Slider *synthfilter_fb;
 private:
-  inline void cb_synthfilter_fb_i(SliderW*, void*);
-  static void cb_synthfilter_fb(SliderW*, void*);
+  inline void cb_synthfilter_fb_i(RKR_Slider*, void*);
+  static void cb_synthfilter_fb(RKR_Slider*, void*);
 public:
   RKR_Counter *synthfilter_Lstages;
 private:
@@ -83,30 +83,30 @@ private:
   inline void cb_synthfilter_Hstages_i(RKR_Counter*, void*);
   static void cb_synthfilter_Hstages(RKR_Counter*, void*);
 public:
-  SliderW *synthfilter_dpth;
+  RKR_Slider *synthfilter_dpth;
 private:
-  inline void cb_synthfilter_dpth_i(SliderW*, void*);
-  static void cb_synthfilter_dpth(SliderW*, void*);
+  inline void cb_synthfilter_dpth_i(RKR_Slider*, void*);
+  static void cb_synthfilter_dpth(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_EnvSens;
+  RKR_Slider *synthfilter_EnvSens;
 private:
-  inline void cb_synthfilter_EnvSens_i(SliderW*, void*);
-  static void cb_synthfilter_EnvSens(SliderW*, void*);
+  inline void cb_synthfilter_EnvSens_i(RKR_Slider*, void*);
+  static void cb_synthfilter_EnvSens(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_ATime;
+  RKR_Slider *synthfilter_ATime;
 private:
-  inline void cb_synthfilter_ATime_i(SliderW*, void*);
-  static void cb_synthfilter_ATime(SliderW*, void*);
+  inline void cb_synthfilter_ATime_i(RKR_Slider*, void*);
+  static void cb_synthfilter_ATime(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_RTime;
+  RKR_Slider *synthfilter_RTime;
 private:
-  inline void cb_synthfilter_RTime_i(SliderW*, void*);
-  static void cb_synthfilter_RTime(SliderW*, void*);
+  inline void cb_synthfilter_RTime_i(RKR_Slider*, void*);
+  static void cb_synthfilter_RTime(RKR_Slider*, void*);
 public:
-  SliderW *synthfilter_Offset;
+  RKR_Slider *synthfilter_Offset;
 private:
-  inline void cb_synthfilter_Offset_i(SliderW*, void*);
-  static void cb_synthfilter_Offset(SliderW*, void*);
+  inline void cb_synthfilter_Offset_i(RKR_Slider*, void*);
+  static void cb_synthfilter_Offset(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif

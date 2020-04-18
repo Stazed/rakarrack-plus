@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,60 +25,60 @@ private:
   static void cb_revtron_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_revtron_preset[];
 public:
-  SliderW *revtron_WD;
+  RKR_Slider *revtron_WD;
 private:
-  inline void cb_revtron_WD_i(SliderW*, void*);
-  static void cb_revtron_WD(SliderW*, void*);
+  inline void cb_revtron_WD_i(RKR_Slider*, void*);
+  static void cb_revtron_WD(RKR_Slider*, void*);
 public:
-  SliderW *revtron_pan;
+  RKR_Slider *revtron_pan;
 private:
-  inline void cb_revtron_pan_i(SliderW*, void*);
-  static void cb_revtron_pan(SliderW*, void*);
+  inline void cb_revtron_pan_i(RKR_Slider*, void*);
+  static void cb_revtron_pan(RKR_Slider*, void*);
 public:
-  SliderW *revtron_level;
+  RKR_Slider *revtron_level;
 private:
-  inline void cb_revtron_level_i(SliderW*, void*);
-  static void cb_revtron_level(SliderW*, void*);
+  inline void cb_revtron_level_i(RKR_Slider*, void*);
+  static void cb_revtron_level(RKR_Slider*, void*);
 public:
-  SliderW *revtron_damp;
+  RKR_Slider *revtron_damp;
 private:
-  inline void cb_revtron_damp_i(SliderW*, void*);
-  static void cb_revtron_damp(SliderW*, void*);
+  inline void cb_revtron_damp_i(RKR_Slider*, void*);
+  static void cb_revtron_damp(RKR_Slider*, void*);
 public:
-  SliderW *revtron_fb;
+  RKR_Slider *revtron_fb;
 private:
-  inline void cb_revtron_fb_i(SliderW*, void*);
-  static void cb_revtron_fb(SliderW*, void*);
+  inline void cb_revtron_fb_i(RKR_Slider*, void*);
+  static void cb_revtron_fb(RKR_Slider*, void*);
 public:
-  SliderW *revtron_length;
+  RKR_Slider *revtron_length;
 private:
-  inline void cb_revtron_length_i(SliderW*, void*);
-  static void cb_revtron_length(SliderW*, void*);
+  inline void cb_revtron_length_i(RKR_Slider*, void*);
+  static void cb_revtron_length(RKR_Slider*, void*);
 public:
-  SliderW *revtron_strech;
+  RKR_Slider *revtron_strech;
 private:
-  inline void cb_revtron_strech_i(SliderW*, void*);
-  static void cb_revtron_strech(SliderW*, void*);
+  inline void cb_revtron_strech_i(RKR_Slider*, void*);
+  static void cb_revtron_strech(RKR_Slider*, void*);
 public:
-  SliderW *revtron_idelay;
+  RKR_Slider *revtron_idelay;
 private:
-  inline void cb_revtron_idelay_i(SliderW*, void*);
-  static void cb_revtron_idelay(SliderW*, void*);
+  inline void cb_revtron_idelay_i(RKR_Slider*, void*);
+  static void cb_revtron_idelay(RKR_Slider*, void*);
 public:
-  SliderW *revtron_fade;
+  RKR_Slider *revtron_fade;
 private:
-  inline void cb_revtron_fade_i(SliderW*, void*);
-  static void cb_revtron_fade(SliderW*, void*);
+  inline void cb_revtron_fade_i(RKR_Slider*, void*);
+  static void cb_revtron_fade(RKR_Slider*, void*);
 public:
-  SliderW *revtron_diff;
+  RKR_Slider *revtron_diff;
 private:
-  inline void cb_revtron_diff_i(SliderW*, void*);
-  static void cb_revtron_diff(SliderW*, void*);
+  inline void cb_revtron_diff_i(RKR_Slider*, void*);
+  static void cb_revtron_diff(RKR_Slider*, void*);
 public:
-  SliderW *revtron_LPF;
+  RKR_Slider *revtron_LPF;
 private:
-  inline void cb_revtron_LPF_i(SliderW*, void*);
-  static void cb_revtron_LPF(SliderW*, void*);
+  inline void cb_revtron_LPF_i(RKR_Slider*, void*);
+  static void cb_revtron_LPF(RKR_Slider*, void*);
 public:
   RKR_Check_Button *revtron_rv;
 private:

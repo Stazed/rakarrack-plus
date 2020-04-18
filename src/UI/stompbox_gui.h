@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,30 +24,30 @@ private:
   static void cb_stomp_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_stomp_preset[];
 public:
-  SliderW *stomp_WD;
+  RKR_Slider *stomp_WD;
 private:
-  inline void cb_stomp_WD_i(SliderW*, void*);
-  static void cb_stomp_WD(SliderW*, void*);
+  inline void cb_stomp_WD_i(RKR_Slider*, void*);
+  static void cb_stomp_WD(RKR_Slider*, void*);
 public:
-  SliderW *stomp_gain;
+  RKR_Slider *stomp_gain;
 private:
-  inline void cb_stomp_gain_i(SliderW*, void*);
-  static void cb_stomp_gain(SliderW*, void*);
+  inline void cb_stomp_gain_i(RKR_Slider*, void*);
+  static void cb_stomp_gain(RKR_Slider*, void*);
 public:
-  SliderW *stomp_low;
+  RKR_Slider *stomp_low;
 private:
-  inline void cb_stomp_low_i(SliderW*, void*);
-  static void cb_stomp_low(SliderW*, void*);
+  inline void cb_stomp_low_i(RKR_Slider*, void*);
+  static void cb_stomp_low(RKR_Slider*, void*);
 public:
-  SliderW *stomp_mid;
+  RKR_Slider *stomp_mid;
 private:
-  inline void cb_stomp_mid_i(SliderW*, void*);
-  static void cb_stomp_mid(SliderW*, void*);
+  inline void cb_stomp_mid_i(RKR_Slider*, void*);
+  static void cb_stomp_mid(RKR_Slider*, void*);
 public:
-  SliderW *stomp_high;
+  RKR_Slider *stomp_high;
 private:
-  inline void cb_stomp_high_i(SliderW*, void*);
-  static void cb_stomp_high(SliderW*, void*);
+  inline void cb_stomp_high_i(RKR_Slider*, void*);
+  static void cb_stomp_high(RKR_Slider*, void*);
 public:
   RKR_Choice *stomp_mode;
 private:

@@ -48,7 +48,7 @@ Fl_Menu_Item StompboxGui::menu_stomp_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void StompboxGui::cb_stomp_WD_i(SliderW* o, void*) {
+void StompboxGui::cb_stomp_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(334);
@@ -56,11 +56,11 @@ void StompboxGui::cb_stomp_WD_i(SliderW* o, void*) {
 }
 rkr->efx_StompBox->changepar(0,(int)o->value());
 }
-void StompboxGui::cb_stomp_WD(SliderW* o, void* v) {
+void StompboxGui::cb_stomp_WD(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_WD_i(o,v);
 }
 
-void StompboxGui::cb_stomp_gain_i(SliderW* o, void*) {
+void StompboxGui::cb_stomp_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(335);
@@ -68,11 +68,11 @@ void StompboxGui::cb_stomp_gain_i(SliderW* o, void*) {
 }
 rkr->efx_StompBox->changepar(4,(int)o->value());
 }
-void StompboxGui::cb_stomp_gain(SliderW* o, void* v) {
+void StompboxGui::cb_stomp_gain(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_gain_i(o,v);
 }
 
-void StompboxGui::cb_stomp_low_i(SliderW* o, void*) {
+void StompboxGui::cb_stomp_low_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(336);
@@ -80,11 +80,11 @@ void StompboxGui::cb_stomp_low_i(SliderW* o, void*) {
 }
 rkr->efx_StompBox->changepar(3,(int)o->value());
 }
-void StompboxGui::cb_stomp_low(SliderW* o, void* v) {
+void StompboxGui::cb_stomp_low(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_low_i(o,v);
 }
 
-void StompboxGui::cb_stomp_mid_i(SliderW* o, void*) {
+void StompboxGui::cb_stomp_mid_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(337);
@@ -92,11 +92,11 @@ void StompboxGui::cb_stomp_mid_i(SliderW* o, void*) {
 }
 rkr->efx_StompBox->changepar(2,(int)o->value());
 }
-void StompboxGui::cb_stomp_mid(SliderW* o, void* v) {
+void StompboxGui::cb_stomp_mid(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_mid_i(o,v);
 }
 
-void StompboxGui::cb_stomp_high_i(SliderW* o, void*) {
+void StompboxGui::cb_stomp_high_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(338);
@@ -104,7 +104,7 @@ void StompboxGui::cb_stomp_high_i(SliderW* o, void*) {
 }
 rkr->efx_StompBox->changepar(1,(int)o->value());
 }
-void StompboxGui::cb_stomp_high(SliderW* o, void* v) {
+void StompboxGui::cb_stomp_high(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_high_i(o,v);
 }
 
@@ -162,7 +162,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_preset->when(FL_WHEN_RELEASE_ALWAYS);
   stomp_preset->menu(menu_stomp_preset);
 } // RKR_Choice* stomp_preset
-{ stomp_WD = new SliderW(53, 30, 100, 10, "Level");
+{ stomp_WD = new RKR_Slider(53, 30, 100, 10, "Level");
   stomp_WD->type(5);
   stomp_WD->box(FL_FLAT_BOX);
   stomp_WD->color((Fl_Color)178);
@@ -177,8 +177,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_WD->callback((Fl_Callback*)cb_stomp_WD);
   stomp_WD->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_WD->when(FL_WHEN_CHANGED);
-} // SliderW* stomp_WD
-{ stomp_gain = new SliderW(53, 58, 100, 10, "Gain");
+} // RKR_Slider* stomp_WD
+{ stomp_gain = new RKR_Slider(53, 58, 100, 10, "Gain");
   stomp_gain->type(5);
   stomp_gain->box(FL_FLAT_BOX);
   stomp_gain->color((Fl_Color)178);
@@ -193,8 +193,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_gain->callback((Fl_Callback*)cb_stomp_gain);
   stomp_gain->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_gain->when(FL_WHEN_CHANGED);
-} // SliderW* stomp_gain
-{ stomp_low = new SliderW(53, 75, 100, 10, "Bias");
+} // RKR_Slider* stomp_gain
+{ stomp_low = new RKR_Slider(53, 75, 100, 10, "Bias");
   stomp_low->type(5);
   stomp_low->box(FL_FLAT_BOX);
   stomp_low->color((Fl_Color)178);
@@ -210,8 +210,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_low->callback((Fl_Callback*)cb_stomp_low);
   stomp_low->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_low->when(FL_WHEN_CHANGED);
-} // SliderW* stomp_low
-{ stomp_mid = new SliderW(53, 92, 100, 10, "Mid");
+} // RKR_Slider* stomp_low
+{ stomp_mid = new RKR_Slider(53, 92, 100, 10, "Mid");
   stomp_mid->type(5);
   stomp_mid->box(FL_FLAT_BOX);
   stomp_mid->color((Fl_Color)178);
@@ -227,8 +227,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_mid->callback((Fl_Callback*)cb_stomp_mid);
   stomp_mid->align(Fl_Align(36));
   stomp_mid->when(FL_WHEN_CHANGED);
-} // SliderW* stomp_mid
-{ stomp_high = new SliderW(53, 109, 100, 10, "Tone");
+} // RKR_Slider* stomp_mid
+{ stomp_high = new RKR_Slider(53, 109, 100, 10, "Tone");
   stomp_high->type(5);
   stomp_high->box(FL_FLAT_BOX);
   stomp_high->color((Fl_Color)178);
@@ -244,7 +244,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_high->callback((Fl_Callback*)cb_stomp_high);
   stomp_high->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_high->when(FL_WHEN_CHANGED);
-} // SliderW* stomp_high
+} // RKR_Slider* stomp_high
 { stomp_mode = new RKR_Choice(60, 139, 78, 18, "Mode");
   stomp_mode->box(FL_FLAT_BOX);
   stomp_mode->down_box(FL_BORDER_BOX);

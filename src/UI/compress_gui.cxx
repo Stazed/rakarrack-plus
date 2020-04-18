@@ -42,7 +42,7 @@ Fl_Menu_Item CompressGui::menu_compress_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void CompressGui::cb_compress_ATime_i(SliderW* o, void*) {
+void CompressGui::cb_compress_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(142);
@@ -50,11 +50,11 @@ void CompressGui::cb_compress_ATime_i(SliderW* o, void*) {
 } 
 rkr->efx_Compressor->changepar(4,(int)o->value());
 }
-void CompressGui::cb_compress_ATime(SliderW* o, void* v) {
+void CompressGui::cb_compress_ATime(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_ATime_i(o,v);
 }
 
-void CompressGui::cb_compress_RTime_i(SliderW* o, void*) {
+void CompressGui::cb_compress_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(143);
@@ -62,11 +62,11 @@ void CompressGui::cb_compress_RTime_i(SliderW* o, void*) {
 } 
 rkr->efx_Compressor->changepar(5, (int) o->value());
 }
-void CompressGui::cb_compress_RTime(SliderW* o, void* v) {
+void CompressGui::cb_compress_RTime(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_RTime_i(o,v);
 }
 
-void CompressGui::cb_compress_Ratio_i(SliderW* o, void*) {
+void CompressGui::cb_compress_Ratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(144);
@@ -74,11 +74,11 @@ void CompressGui::cb_compress_Ratio_i(SliderW* o, void*) {
 } 
 rkr->efx_Compressor->changepar(2, (int) o->value());
 }
-void CompressGui::cb_compress_Ratio(SliderW* o, void* v) {
+void CompressGui::cb_compress_Ratio(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_Ratio_i(o,v);
 }
 
-void CompressGui::cb_compress_Knee_i(SliderW* o, void*) {
+void CompressGui::cb_compress_Knee_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(145);
@@ -86,11 +86,11 @@ void CompressGui::cb_compress_Knee_i(SliderW* o, void*) {
 } 
 rkr->efx_Compressor->changepar(7, (int) o->value());
 }
-void CompressGui::cb_compress_Knee(SliderW* o, void* v) {
+void CompressGui::cb_compress_Knee(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_Knee_i(o,v);
 }
 
-void CompressGui::cb_compress_threshold_i(SliderW* o, void*) {
+void CompressGui::cb_compress_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(146);
@@ -98,11 +98,11 @@ void CompressGui::cb_compress_threshold_i(SliderW* o, void*) {
 } 
 rkr->efx_Compressor->changepar(1, (int)o->value());
 }
-void CompressGui::cb_compress_threshold(SliderW* o, void* v) {
+void CompressGui::cb_compress_threshold(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_threshold_i(o,v);
 }
 
-void CompressGui::cb_compress_output_i(SliderW* o, void*) {
+void CompressGui::cb_compress_output_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(147);
@@ -110,7 +110,7 @@ void CompressGui::cb_compress_output_i(SliderW* o, void*) {
 } 
 rkr->efx_Compressor->changepar(3,(int)o->value());
 }
-void CompressGui::cb_compress_output(SliderW* o, void* v) {
+void CompressGui::cb_compress_output(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_output_i(o,v);
 }
 
@@ -173,7 +173,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_preset->when(FL_WHEN_RELEASE_ALWAYS);
   compress_preset->menu(menu_compress_preset);
 } // RKR_Choice* compress_preset
-{ compress_ATime = new SliderW(53, 39, 100, 10, "A. Time");
+{ compress_ATime = new RKR_Slider(53, 39, 100, 10, "A. Time");
   compress_ATime->type(5);
   compress_ATime->box(FL_FLAT_BOX);
   compress_ATime->color((Fl_Color)178);
@@ -190,8 +190,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_ATime->callback((Fl_Callback*)cb_compress_ATime);
   compress_ATime->align(Fl_Align(FL_ALIGN_LEFT));
   compress_ATime->when(FL_WHEN_CHANGED);
-} // SliderW* compress_ATime
-{ compress_RTime = new SliderW(53, 59, 100, 10, "R. Time");
+} // RKR_Slider* compress_ATime
+{ compress_RTime = new RKR_Slider(53, 59, 100, 10, "R. Time");
   compress_RTime->type(5);
   compress_RTime->box(FL_FLAT_BOX);
   compress_RTime->color((Fl_Color)178);
@@ -208,8 +208,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_RTime->callback((Fl_Callback*)cb_compress_RTime);
   compress_RTime->align(Fl_Align(FL_ALIGN_LEFT));
   compress_RTime->when(FL_WHEN_CHANGED);
-} // SliderW* compress_RTime
-{ compress_Ratio = new SliderW(53, 79, 100, 10, "Ratio");
+} // RKR_Slider* compress_RTime
+{ compress_Ratio = new RKR_Slider(53, 79, 100, 10, "Ratio");
   compress_Ratio->type(5);
   compress_Ratio->box(FL_FLAT_BOX);
   compress_Ratio->color((Fl_Color)178);
@@ -226,8 +226,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_Ratio->callback((Fl_Callback*)cb_compress_Ratio);
   compress_Ratio->align(Fl_Align(FL_ALIGN_LEFT));
   compress_Ratio->when(FL_WHEN_CHANGED);
-} // SliderW* compress_Ratio
-{ compress_Knee = new SliderW(53, 99, 100, 10, "Knee");
+} // RKR_Slider* compress_Ratio
+{ compress_Knee = new RKR_Slider(53, 99, 100, 10, "Knee");
   compress_Knee->type(5);
   compress_Knee->box(FL_FLAT_BOX);
   compress_Knee->color((Fl_Color)178);
@@ -243,8 +243,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_Knee->callback((Fl_Callback*)cb_compress_Knee);
   compress_Knee->align(Fl_Align(FL_ALIGN_LEFT));
   compress_Knee->when(FL_WHEN_CHANGED);
-} // SliderW* compress_Knee
-{ compress_threshold = new SliderW(53, 119, 100, 10, "Thrhold");
+} // RKR_Slider* compress_Knee
+{ compress_threshold = new RKR_Slider(53, 119, 100, 10, "Thrhold");
   compress_threshold->type(5);
   compress_threshold->box(FL_FLAT_BOX);
   compress_threshold->color((Fl_Color)178);
@@ -261,8 +261,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_threshold->callback((Fl_Callback*)cb_compress_threshold);
   compress_threshold->align(Fl_Align(FL_ALIGN_LEFT));
   compress_threshold->when(FL_WHEN_CHANGED);
-} // SliderW* compress_threshold
-{ compress_output = new SliderW(53, 139, 100, 10, "Output");
+} // RKR_Slider* compress_threshold
+{ compress_output = new RKR_Slider(53, 139, 100, 10, "Output");
   compress_output->type(5);
   compress_output->box(FL_FLAT_BOX);
   compress_output->color((Fl_Color)178);
@@ -278,7 +278,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_output->callback((Fl_Callback*)cb_compress_output);
   compress_output->align(Fl_Align(FL_ALIGN_LEFT));
   compress_output->when(FL_WHEN_CHANGED);
-} // SliderW* compress_output
+} // RKR_Slider* compress_output
 { Auto_Output = new RKR_Check_Button(19, 166, 15, 15, "Auto Output");
   Auto_Output->box(FL_NO_BOX);
   Auto_Output->down_box(FL_BORDER_BOX);

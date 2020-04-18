@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,64 +24,64 @@ private:
   static void cb_eq_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_eq_preset[];
 public:
-  SliderW *eq_Gain;
+  RKR_Slider *eq_Gain;
 private:
-  inline void cb_eq_Gain_i(SliderW*, void*);
-  static void cb_eq_Gain(SliderW*, void*);
+  inline void cb_eq_Gain_i(RKR_Slider*, void*);
+  static void cb_eq_Gain(RKR_Slider*, void*);
 public:
-  SliderW *eq_Q;
+  RKR_Slider *eq_Q;
 private:
-  inline void cb_eq_Q_i(SliderW*, void*);
-  static void cb_eq_Q(SliderW*, void*);
+  inline void cb_eq_Q_i(RKR_Slider*, void*);
+  static void cb_eq_Q(RKR_Slider*, void*);
 public:
-  SliderW *eq_1;
+  RKR_Slider *eq_1;
 private:
-  inline void cb_eq_1_i(SliderW*, void*);
-  static void cb_eq_1(SliderW*, void*);
+  inline void cb_eq_1_i(RKR_Slider*, void*);
+  static void cb_eq_1(RKR_Slider*, void*);
 public:
-  SliderW *eq_2;
+  RKR_Slider *eq_2;
 private:
-  inline void cb_eq_2_i(SliderW*, void*);
-  static void cb_eq_2(SliderW*, void*);
+  inline void cb_eq_2_i(RKR_Slider*, void*);
+  static void cb_eq_2(RKR_Slider*, void*);
 public:
-  SliderW *eq_3;
+  RKR_Slider *eq_3;
 private:
-  inline void cb_eq_3_i(SliderW*, void*);
-  static void cb_eq_3(SliderW*, void*);
+  inline void cb_eq_3_i(RKR_Slider*, void*);
+  static void cb_eq_3(RKR_Slider*, void*);
 public:
-  SliderW *eq_4;
+  RKR_Slider *eq_4;
 private:
-  inline void cb_eq_4_i(SliderW*, void*);
-  static void cb_eq_4(SliderW*, void*);
+  inline void cb_eq_4_i(RKR_Slider*, void*);
+  static void cb_eq_4(RKR_Slider*, void*);
 public:
-  SliderW *eq_5;
+  RKR_Slider *eq_5;
 private:
-  inline void cb_eq_5_i(SliderW*, void*);
-  static void cb_eq_5(SliderW*, void*);
+  inline void cb_eq_5_i(RKR_Slider*, void*);
+  static void cb_eq_5(RKR_Slider*, void*);
 public:
-  SliderW *eq_6;
+  RKR_Slider *eq_6;
 private:
-  inline void cb_eq_6_i(SliderW*, void*);
-  static void cb_eq_6(SliderW*, void*);
+  inline void cb_eq_6_i(RKR_Slider*, void*);
+  static void cb_eq_6(RKR_Slider*, void*);
 public:
-  SliderW *eq_7;
+  RKR_Slider *eq_7;
 private:
-  inline void cb_eq_7_i(SliderW*, void*);
-  static void cb_eq_7(SliderW*, void*);
+  inline void cb_eq_7_i(RKR_Slider*, void*);
+  static void cb_eq_7(RKR_Slider*, void*);
 public:
-  SliderW *eq_8;
+  RKR_Slider *eq_8;
 private:
-  inline void cb_eq_8_i(SliderW*, void*);
-  static void cb_eq_8(SliderW*, void*);
+  inline void cb_eq_8_i(RKR_Slider*, void*);
+  static void cb_eq_8(RKR_Slider*, void*);
 public:
-  SliderW *eq_9;
+  RKR_Slider *eq_9;
 private:
-  inline void cb_eq_9_i(SliderW*, void*);
-  static void cb_eq_9(SliderW*, void*);
+  inline void cb_eq_9_i(RKR_Slider*, void*);
+  static void cb_eq_9(RKR_Slider*, void*);
 public:
-  SliderW *eq_10;
+  RKR_Slider *eq_10;
 private:
-  inline void cb_eq_10_i(SliderW*, void*);
-  static void cb_eq_10(SliderW*, void*);
+  inline void cb_eq_10_i(RKR_Slider*, void*);
+  static void cb_eq_10(RKR_Slider*, void*);
 };
 #endif

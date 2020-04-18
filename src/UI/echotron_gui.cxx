@@ -53,7 +53,7 @@ Fl_Menu_Item EchotronGui::menu_echotron_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void EchotronGui::cb_echotron_WD_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(348);
@@ -61,11 +61,11 @@ void EchotronGui::cb_echotron_WD_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(0,Dry_Wet((int)(o->value())));
 }
-void EchotronGui::cb_echotron_WD(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_WD(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_WD_i(o,v);
 }
 
-void EchotronGui::cb_echotron_pan_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(349);
@@ -73,11 +73,11 @@ void EchotronGui::cb_echotron_pan_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(11,(int)(o->value()+64));
 }
-void EchotronGui::cb_echotron_pan(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_pan(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_pan_i(o,v);
 }
 
-void EchotronGui::cb_echotron_tempo_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(350);
@@ -85,11 +85,11 @@ void EchotronGui::cb_echotron_tempo_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(5,(int)o->value());
 }
-void EchotronGui::cb_echotron_tempo(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_tempo(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_tempo_i(o,v);
 }
 
-void EchotronGui::cb_echotron_damp_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(351);
@@ -97,11 +97,11 @@ void EchotronGui::cb_echotron_damp_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(6,(int)o->value());
 }
-void EchotronGui::cb_echotron_damp(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_damp(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_damp_i(o,v);
 }
 
-void EchotronGui::cb_echotron_fb_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(352);
@@ -109,11 +109,11 @@ void EchotronGui::cb_echotron_fb_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(10,(int)o->value());
 }
-void EchotronGui::cb_echotron_fb(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_fb(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_fb_i(o,v);
 }
 
-void EchotronGui::cb_echotron_lrcross_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_lrcross_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(353);
@@ -121,11 +121,11 @@ void EchotronGui::cb_echotron_lrcross_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(7,(int)(o->value()+64));
 }
-void EchotronGui::cb_echotron_lrcross(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_lrcross(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_lrcross_i(o,v);
 }
 
-void EchotronGui::cb_echotron_width_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_width_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(354);
@@ -133,11 +133,11 @@ void EchotronGui::cb_echotron_width_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(2,(int)o->value());
 }
-void EchotronGui::cb_echotron_width(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_width(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_width_i(o,v);
 }
 
-void EchotronGui::cb_echotron_deep_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_deep_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(355);
@@ -145,11 +145,11 @@ void EchotronGui::cb_echotron_deep_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(1,((int)o->value()+64));
 }
-void EchotronGui::cb_echotron_deep(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_deep(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_deep_i(o,v);
 }
 
-void EchotronGui::cb_echotron_stdf_i(SliderW* o, void*) {
+void EchotronGui::cb_echotron_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(356);
@@ -157,7 +157,7 @@ void EchotronGui::cb_echotron_stdf_i(SliderW* o, void*) {
 }
 rkr->efx_Echotron->changepar(9,(int)o->value());
 }
-void EchotronGui::cb_echotron_stdf(SliderW* o, void* v) {
+void EchotronGui::cb_echotron_stdf(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_stdf_i(o,v);
 }
 
@@ -288,7 +288,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echotron_preset->menu(menu_echotron_preset);
 } // RKR_Choice* echotron_preset
-{ echotron_WD = new SliderW(56, 25, 100, 10, "Dry/Wet");
+{ echotron_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
   echotron_WD->type(5);
   echotron_WD->box(FL_FLAT_BOX);
   echotron_WD->color((Fl_Color)178);
@@ -303,8 +303,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_WD->callback((Fl_Callback*)cb_echotron_WD);
   echotron_WD->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_WD->when(FL_WHEN_CHANGED);
-} // SliderW* echotron_WD
-{ echotron_pan = new SliderW(56, 37, 100, 10, "Pan");
+} // RKR_Slider* echotron_WD
+{ echotron_pan = new RKR_Slider(56, 37, 100, 10, "Pan");
   echotron_pan->type(5);
   echotron_pan->box(FL_FLAT_BOX);
   echotron_pan->color((Fl_Color)178);
@@ -320,8 +320,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_pan->callback((Fl_Callback*)cb_echotron_pan);
   echotron_pan->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_pan->when(FL_WHEN_CHANGED);
-} // SliderW* echotron_pan
-{ echotron_tempo = new SliderW(56, 49, 100, 10, "Tempo");
+} // RKR_Slider* echotron_pan
+{ echotron_tempo = new RKR_Slider(56, 49, 100, 10, "Tempo");
   echotron_tempo->type(5);
   echotron_tempo->box(FL_FLAT_BOX);
   echotron_tempo->color((Fl_Color)178);
@@ -338,8 +338,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_tempo->callback((Fl_Callback*)cb_echotron_tempo);
   echotron_tempo->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_tempo->when(FL_WHEN_RELEASE);
-} // SliderW* echotron_tempo
-{ echotron_damp = new SliderW(56, 61, 100, 10, "Damp");
+} // RKR_Slider* echotron_tempo
+{ echotron_damp = new RKR_Slider(56, 61, 100, 10, "Damp");
   echotron_damp->type(5);
   echotron_damp->box(FL_FLAT_BOX);
   echotron_damp->color((Fl_Color)178);
@@ -354,8 +354,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_damp->callback((Fl_Callback*)cb_echotron_damp);
   echotron_damp->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_damp->when(FL_WHEN_CHANGED);
-} // SliderW* echotron_damp
-{ echotron_fb = new SliderW(56, 73, 100, 10, "Feedback");
+} // RKR_Slider* echotron_damp
+{ echotron_fb = new RKR_Slider(56, 73, 100, 10, "Feedback");
   echotron_fb->type(5);
   echotron_fb->box(FL_FLAT_BOX);
   echotron_fb->color((Fl_Color)178);
@@ -371,8 +371,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_fb->callback((Fl_Callback*)cb_echotron_fb);
   echotron_fb->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_fb->when(FL_WHEN_CHANGED);
-} // SliderW* echotron_fb
-{ echotron_lrcross = new SliderW(56, 85, 100, 10, "L/R Cross");
+} // RKR_Slider* echotron_fb
+{ echotron_lrcross = new RKR_Slider(56, 85, 100, 10, "L/R Cross");
   echotron_lrcross->type(5);
   echotron_lrcross->box(FL_FLAT_BOX);
   echotron_lrcross->color((Fl_Color)178);
@@ -388,8 +388,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_lrcross->callback((Fl_Callback*)cb_echotron_lrcross);
   echotron_lrcross->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_lrcross->when(FL_WHEN_CHANGED);
-} // SliderW* echotron_lrcross
-{ echotron_width = new SliderW(56, 97, 100, 10, "Width");
+} // RKR_Slider* echotron_lrcross
+{ echotron_width = new RKR_Slider(56, 97, 100, 10, "Width");
   echotron_width->type(5);
   echotron_width->box(FL_FLAT_BOX);
   echotron_width->color((Fl_Color)178);
@@ -404,8 +404,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_width->callback((Fl_Callback*)cb_echotron_width);
   echotron_width->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_width->when(FL_WHEN_RELEASE);
-} // SliderW* echotron_width
-{ echotron_deep = new SliderW(56, 109, 100, 10, "Depth");
+} // RKR_Slider* echotron_width
+{ echotron_deep = new RKR_Slider(56, 109, 100, 10, "Depth");
   echotron_deep->type(5);
   echotron_deep->box(FL_FLAT_BOX);
   echotron_deep->color((Fl_Color)178);
@@ -421,8 +421,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_deep->callback((Fl_Callback*)cb_echotron_deep);
   echotron_deep->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_deep->when(FL_WHEN_RELEASE);
-} // SliderW* echotron_deep
-{ echotron_stdf = new SliderW(56, 121, 100, 10, "Stereo Df");
+} // RKR_Slider* echotron_deep
+{ echotron_stdf = new RKR_Slider(56, 121, 100, 10, "Stereo Df");
   echotron_stdf->type(5);
   echotron_stdf->box(FL_FLAT_BOX);
   echotron_stdf->color((Fl_Color)178);
@@ -437,7 +437,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_stdf->callback((Fl_Callback*)cb_echotron_stdf);
   echotron_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* echotron_stdf
+} // RKR_Slider* echotron_stdf
 { echotron_af = new RKR_Check_Button(2, 136, 32, 15, "AF");
   echotron_af->box(FL_NO_BOX);
   echotron_af->down_box(FL_BORDER_BOX);

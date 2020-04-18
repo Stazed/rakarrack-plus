@@ -46,7 +46,7 @@ Fl_Menu_Item ShuffleGui::menu_shuffle_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ShuffleGui::cb_shuffle_WD_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(227);
@@ -54,11 +54,11 @@ void ShuffleGui::cb_shuffle_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Shuffle->changepar(0,Dry_Wet((int)o->value()));
 }
-void ShuffleGui::cb_shuffle_WD(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_WD(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_WD_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_cross1_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_cross1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(228);
@@ -66,11 +66,11 @@ void ShuffleGui::cb_shuffle_cross1_i(SliderW* o, void*) {
 } 
 rkr->efx_Shuffle->changepar(5,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_cross1(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_cross1(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross1_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_volL_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_volL_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(229);
@@ -78,11 +78,11 @@ void ShuffleGui::cb_shuffle_volL_i(SliderW* o, void*) {
 } 
 rkr->efx_Shuffle->changepar(1,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_volL(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_volL(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volL_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_cross2_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_cross2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(230);
@@ -90,11 +90,11 @@ void ShuffleGui::cb_shuffle_cross2_i(SliderW* o, void*) {
 } 
 rkr->efx_Shuffle->changepar(6,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_cross2(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_cross2(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross2_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_volML_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_volML_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(231);
@@ -102,11 +102,11 @@ void ShuffleGui::cb_shuffle_volML_i(SliderW* o, void*) {
 }
 rkr->efx_Shuffle->changepar(2,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_volML(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_volML(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volML_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_cross3_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_cross3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(232);
@@ -114,11 +114,11 @@ void ShuffleGui::cb_shuffle_cross3_i(SliderW* o, void*) {
 }
 rkr->efx_Shuffle->changepar(7,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_cross3(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_cross3(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross3_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_volMH_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_volMH_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(233);
@@ -126,11 +126,11 @@ void ShuffleGui::cb_shuffle_volMH_i(SliderW* o, void*) {
 }
 rkr->efx_Shuffle->changepar(3,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_volMH(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_volMH(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volMH_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_cross4_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_cross4_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(234);
@@ -138,11 +138,11 @@ void ShuffleGui::cb_shuffle_cross4_i(SliderW* o, void*) {
 }
 rkr->efx_Shuffle->changepar(8,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_cross4(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_cross4(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross4_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_volH_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_volH_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(235);
@@ -150,11 +150,11 @@ void ShuffleGui::cb_shuffle_volH_i(SliderW* o, void*) {
 }
 rkr->efx_Shuffle->changepar(4,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_volH(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_volH(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volH_i(o,v);
 }
 
-void ShuffleGui::cb_shuffle_Q_i(SliderW* o, void*) {
+void ShuffleGui::cb_shuffle_Q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(236);
@@ -162,7 +162,7 @@ void ShuffleGui::cb_shuffle_Q_i(SliderW* o, void*) {
 }
 rkr->efx_Shuffle->changepar(9,(int)o->value());
 }
-void ShuffleGui::cb_shuffle_Q(SliderW* o, void* v) {
+void ShuffleGui::cb_shuffle_Q(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_Q_i(o,v);
 }
 
@@ -208,7 +208,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shuffle_preset->menu(menu_shuffle_preset);
 } // RKR_Choice* shuffle_preset
-{ shuffle_WD = new SliderW(56, 31, 100, 10, "Dry/Wet");
+{ shuffle_WD = new RKR_Slider(56, 31, 100, 10, "Dry/Wet");
   shuffle_WD->type(5);
   shuffle_WD->box(FL_FLAT_BOX);
   shuffle_WD->color((Fl_Color)178);
@@ -223,8 +223,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_WD->callback((Fl_Callback*)cb_shuffle_WD);
   shuffle_WD->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_WD->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_WD
-{ shuffle_cross1 = new SliderW(56, 49, 100, 10, "Low Freq");
+} // RKR_Slider* shuffle_WD
+{ shuffle_cross1 = new RKR_Slider(56, 49, 100, 10, "Low Freq");
   shuffle_cross1->type(5);
   shuffle_cross1->box(FL_FLAT_BOX);
   shuffle_cross1->color((Fl_Color)178);
@@ -240,8 +240,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross1->callback((Fl_Callback*)cb_shuffle_cross1);
   shuffle_cross1->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross1->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_cross1
-{ shuffle_volL = new SliderW(56, 64, 100, 10, "Low Gain");
+} // RKR_Slider* shuffle_cross1
+{ shuffle_volL = new RKR_Slider(56, 64, 100, 10, "Low Gain");
   shuffle_volL->type(5);
   shuffle_volL->box(FL_FLAT_BOX);
   shuffle_volL->color((Fl_Color)178);
@@ -257,8 +257,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volL->callback((Fl_Callback*)cb_shuffle_volL);
   shuffle_volL->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volL->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_volL
-{ shuffle_cross2 = new SliderW(56, 79, 100, 10, "M.L. Freq");
+} // RKR_Slider* shuffle_volL
+{ shuffle_cross2 = new RKR_Slider(56, 79, 100, 10, "M.L. Freq");
   shuffle_cross2->tooltip("Mid Low Frequency");
   shuffle_cross2->type(5);
   shuffle_cross2->box(FL_FLAT_BOX);
@@ -275,8 +275,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross2->callback((Fl_Callback*)cb_shuffle_cross2);
   shuffle_cross2->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross2->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_cross2
-{ shuffle_volML = new SliderW(56, 94, 100, 10, "M.L Gain");
+} // RKR_Slider* shuffle_cross2
+{ shuffle_volML = new RKR_Slider(56, 94, 100, 10, "M.L Gain");
   shuffle_volML->tooltip("Mid Low Gain");
   shuffle_volML->type(5);
   shuffle_volML->box(FL_FLAT_BOX);
@@ -293,8 +293,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volML->callback((Fl_Callback*)cb_shuffle_volML);
   shuffle_volML->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volML->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_volML
-{ shuffle_cross3 = new SliderW(56, 109, 100, 10, "M.H. Freq");
+} // RKR_Slider* shuffle_volML
+{ shuffle_cross3 = new RKR_Slider(56, 109, 100, 10, "M.H. Freq");
   shuffle_cross3->tooltip("Mid High Frequency");
   shuffle_cross3->type(5);
   shuffle_cross3->box(FL_FLAT_BOX);
@@ -311,8 +311,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross3->callback((Fl_Callback*)cb_shuffle_cross3);
   shuffle_cross3->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross3->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_cross3
-{ shuffle_volMH = new SliderW(56, 124, 100, 10, "M.H. Gain");
+} // RKR_Slider* shuffle_cross3
+{ shuffle_volMH = new RKR_Slider(56, 124, 100, 10, "M.H. Gain");
   shuffle_volMH->tooltip("Mid High Gain");
   shuffle_volMH->type(5);
   shuffle_volMH->box(FL_FLAT_BOX);
@@ -329,8 +329,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volMH->callback((Fl_Callback*)cb_shuffle_volMH);
   shuffle_volMH->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volMH->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_volMH
-{ shuffle_cross4 = new SliderW(56, 139, 100, 10, "High Freq");
+} // RKR_Slider* shuffle_volMH
+{ shuffle_cross4 = new RKR_Slider(56, 139, 100, 10, "High Freq");
   shuffle_cross4->tooltip("High Frequency");
   shuffle_cross4->type(5);
   shuffle_cross4->box(FL_FLAT_BOX);
@@ -347,8 +347,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_cross4->callback((Fl_Callback*)cb_shuffle_cross4);
   shuffle_cross4->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_cross4->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_cross4
-{ shuffle_volH = new SliderW(56, 154, 100, 10, "High Gain");
+} // RKR_Slider* shuffle_cross4
+{ shuffle_volH = new RKR_Slider(56, 154, 100, 10, "High Gain");
   shuffle_volH->type(5);
   shuffle_volH->box(FL_FLAT_BOX);
   shuffle_volH->color((Fl_Color)178);
@@ -364,8 +364,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_volH->callback((Fl_Callback*)cb_shuffle_volH);
   shuffle_volH->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_volH->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_volH
-{ shuffle_Q = new SliderW(56, 169, 100, 10, "Q");
+} // RKR_Slider* shuffle_volH
+{ shuffle_Q = new RKR_Slider(56, 169, 100, 10, "Q");
   shuffle_Q->tooltip("Width");
   shuffle_Q->type(5);
   shuffle_Q->box(FL_FLAT_BOX);
@@ -382,7 +382,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_Q->callback((Fl_Callback*)cb_shuffle_Q);
   shuffle_Q->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_Q->when(FL_WHEN_CHANGED);
-} // SliderW* shuffle_Q
+} // RKR_Slider* shuffle_Q
 { shuffle_E = new RKR_Check_Button(2, 167, 40, 15, "Rev");
   shuffle_E->tooltip("Filtered Band - (Uncheck = Mid: Check = Side)");
   shuffle_E->box(FL_NO_BOX);

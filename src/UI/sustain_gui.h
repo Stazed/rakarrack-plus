@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,14 +24,14 @@ private:
   static void cb_sus_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_sus_preset[];
 public:
-  SliderW *sus_gain;
+  RKR_Slider *sus_gain;
 private:
-  inline void cb_sus_gain_i(SliderW*, void*);
-  static void cb_sus_gain(SliderW*, void*);
+  inline void cb_sus_gain_i(RKR_Slider*, void*);
+  static void cb_sus_gain(RKR_Slider*, void*);
 public:
-  SliderW *sus_sus;
+  RKR_Slider *sus_sus;
 private:
-  inline void cb_sus_sus_i(SliderW*, void*);
-  static void cb_sus_sus(SliderW*, void*);
+  inline void cb_sus_sus_i(RKR_Slider*, void*);
+  static void cb_sus_sus(RKR_Slider*, void*);
 };
 #endif

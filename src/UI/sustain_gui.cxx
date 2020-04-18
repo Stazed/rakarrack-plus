@@ -35,7 +35,7 @@ Fl_Menu_Item SustainGui::menu_sus_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void SustainGui::cb_sus_gain_i(SliderW* o, void*) {
+void SustainGui::cb_sus_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(312);
@@ -43,11 +43,11 @@ void SustainGui::cb_sus_gain_i(SliderW* o, void*) {
 }
 rkr->efx_Sustainer->changepar(0,(int)o->value());
 }
-void SustainGui::cb_sus_gain(SliderW* o, void* v) {
+void SustainGui::cb_sus_gain(RKR_Slider* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_gain_i(o,v);
 }
 
-void SustainGui::cb_sus_sus_i(SliderW* o, void*) {
+void SustainGui::cb_sus_sus_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(313);
@@ -55,7 +55,7 @@ void SustainGui::cb_sus_sus_i(SliderW* o, void*) {
 }
 rkr->efx_Sustainer->changepar(1,(int)o->value());
 }
-void SustainGui::cb_sus_sus(SliderW* o, void* v) {
+void SustainGui::cb_sus_sus(RKR_Slider* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_sus_i(o,v);
 }
 SustainGui::SustainGui(int X, int Y, int W, int H, const char *L)
@@ -94,7 +94,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   sus_preset->menu(menu_sus_preset);
 } // RKR_Choice* sus_preset
-{ sus_gain = new SliderW(53, 60, 100, 10, "Gain");
+{ sus_gain = new RKR_Slider(53, 60, 100, 10, "Gain");
   sus_gain->type(5);
   sus_gain->box(FL_FLAT_BOX);
   sus_gain->color((Fl_Color)178);
@@ -109,8 +109,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_gain->callback((Fl_Callback*)cb_sus_gain);
   sus_gain->align(Fl_Align(FL_ALIGN_LEFT));
   sus_gain->when(FL_WHEN_CHANGED);
-} // SliderW* sus_gain
-{ sus_sus = new SliderW(53, 86, 100, 10, "Sustain");
+} // RKR_Slider* sus_gain
+{ sus_sus = new RKR_Slider(53, 86, 100, 10, "Sustain");
   sus_sus->type(5);
   sus_sus->box(FL_FLAT_BOX);
   sus_sus->color((Fl_Color)178);
@@ -127,7 +127,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_sus->callback((Fl_Callback*)cb_sus_sus);
   sus_sus->align(Fl_Align(FL_ALIGN_LEFT));
   sus_sus->when(FL_WHEN_CHANGED);
-} // SliderW* sus_sus
+} // RKR_Slider* sus_sus
 position(X, Y);
 end();
 }

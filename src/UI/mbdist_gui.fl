@@ -14,7 +14,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class {\#include "common_gui_menu.h"} MbdistGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
@@ -100,7 +100,7 @@ mbdist_cross2->value(rkr->efx_MBDist->getpar(13));}
 } 
 rkr->efx_MBDist->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_LRc {
     label {L/R Cross}
@@ -111,7 +111,7 @@ rkr->efx_MBDist->changepar(0,Dry_Wet((int)(o->value())));}
 } 
 rkr->efx_MBDist->changepar(2,(int)(o->value()));}
     xywh {56 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_drive {
     label Drive
@@ -122,7 +122,7 @@ rkr->efx_MBDist->changepar(2,(int)(o->value()));}
 } 
 rkr->efx_MBDist->changepar(3,(int)o->value());}
     xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_level {
     label Level
@@ -133,7 +133,7 @@ rkr->efx_MBDist->changepar(3,(int)o->value());}
 } 
 rkr->efx_MBDist->changepar(4,(int)o->value());}
     xywh {56 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_volL {
     label {L. Gain}
@@ -144,7 +144,7 @@ rkr->efx_MBDist->changepar(4,(int)o->value());}
 } 
 rkr->efx_MBDist->changepar(8,(int)o->value());}
     tooltip {Low Gain} xywh {56 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_volM {
     label {M. Gain}
@@ -155,7 +155,7 @@ rkr->efx_MBDist->changepar(8,(int)o->value());}
 } 
 rkr->efx_MBDist->changepar(9,(int)o->value());}
     tooltip {Mid Gain} xywh {56 89 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_volH {
     label {H. Gain}
@@ -166,7 +166,7 @@ rkr->efx_MBDist->changepar(9,(int)o->value());}
 } 
 rkr->efx_MBDist->changepar(10,(int)o->value());}
     tooltip {High Gain} xywh {56 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_cross1 {
     label {Cross 1}
@@ -177,7 +177,7 @@ rkr->efx_MBDist->changepar(10,(int)o->value());}
 } 
 rkr->efx_MBDist->changepar(12,(int)o->value());}
     xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider mbdist_cross2 {
     label {Cross 2}
@@ -188,7 +188,7 @@ rkr->efx_MBDist->changepar(12,(int)o->value());}
 } 
 rkr->efx_MBDist->changepar(13,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 12000 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Choice mbdist_tipoL {
     callback {rkr->efx_MBDist->changepar(5,(int)o->value());} open
@@ -217,7 +217,7 @@ rkr->efx_MBDist->changepar(13,(int)o->value());}
 } 
 rkr->efx_MBDist->changepar(1,(int)(o->value()+64));}
     xywh {56 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Check_Button mbdist_st {
     label Stereo

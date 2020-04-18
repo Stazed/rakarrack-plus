@@ -44,7 +44,7 @@ Fl_Menu_Item OtremGui::menu_otrem_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void OtremGui::cb_otrem_dpth_i(SliderW* o, void*) {
+void OtremGui::cb_otrem_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(381);
@@ -52,11 +52,11 @@ void OtremGui::cb_otrem_dpth_i(SliderW* o, void*) {
 }
 rkr->efx_Opticaltrem->changepar(0,(int)o->value());
 }
-void OtremGui::cb_otrem_dpth(SliderW* o, void* v) {
+void OtremGui::cb_otrem_dpth(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_dpth_i(o,v);
 }
 
-void OtremGui::cb_otrem_freq_i(SliderW* o, void*) {
+void OtremGui::cb_otrem_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(382);
@@ -64,11 +64,11 @@ void OtremGui::cb_otrem_freq_i(SliderW* o, void*) {
 }
 rkr->efx_Opticaltrem->changepar(1,(int)o->value());
 }
-void OtremGui::cb_otrem_freq(SliderW* o, void* v) {
+void OtremGui::cb_otrem_freq(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_freq_i(o,v);
 }
 
-void OtremGui::cb_otrem_rnd_i(SliderW* o, void*) {
+void OtremGui::cb_otrem_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(383);
@@ -76,7 +76,7 @@ void OtremGui::cb_otrem_rnd_i(SliderW* o, void*) {
 }
 rkr->efx_Opticaltrem->changepar(2,(int)o->value());
 }
-void OtremGui::cb_otrem_rnd(SliderW* o, void* v) {
+void OtremGui::cb_otrem_rnd(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_rnd_i(o,v);
 }
 
@@ -87,7 +87,7 @@ void OtremGui::cb_otrem_lfotype(RKR_Choice* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_lfotype_i(o,v);
 }
 
-void OtremGui::cb_otrem_stdf_i(SliderW* o, void*) {
+void OtremGui::cb_otrem_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(384);
@@ -95,11 +95,11 @@ void OtremGui::cb_otrem_stdf_i(SliderW* o, void*) {
 }
 rkr->efx_Opticaltrem->changepar(4,(int)o->value());
 }
-void OtremGui::cb_otrem_stdf(SliderW* o, void* v) {
+void OtremGui::cb_otrem_stdf(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_stdf_i(o,v);
 }
 
-void OtremGui::cb_otrem_pan_i(SliderW* o, void*) {
+void OtremGui::cb_otrem_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(385);
@@ -107,7 +107,7 @@ void OtremGui::cb_otrem_pan_i(SliderW* o, void*) {
 }
 rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));
 }
-void OtremGui::cb_otrem_pan(SliderW* o, void* v) {
+void OtremGui::cb_otrem_pan(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_pan_i(o,v);
 }
 
@@ -153,7 +153,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_preset->when(FL_WHEN_RELEASE_ALWAYS);
   otrem_preset->menu(menu_otrem_preset);
 } // RKR_Choice* otrem_preset
-{ otrem_dpth = new SliderW(56, 35, 100, 10, "Depth");
+{ otrem_dpth = new RKR_Slider(56, 35, 100, 10, "Depth");
   otrem_dpth->type(5);
   otrem_dpth->box(FL_FLAT_BOX);
   otrem_dpth->color((Fl_Color)178);
@@ -168,8 +168,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_dpth->callback((Fl_Callback*)cb_otrem_dpth);
   otrem_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_dpth->when(FL_WHEN_CHANGED);
-} // SliderW* otrem_dpth
-{ otrem_freq = new SliderW(56, 55, 100, 10, "Tempo");
+} // RKR_Slider* otrem_dpth
+{ otrem_freq = new RKR_Slider(56, 55, 100, 10, "Tempo");
   otrem_freq->type(5);
   otrem_freq->box(FL_FLAT_BOX);
   otrem_freq->color((Fl_Color)178);
@@ -185,8 +185,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_freq->callback((Fl_Callback*)cb_otrem_freq);
   otrem_freq->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_freq->when(FL_WHEN_CHANGED);
-} // SliderW* otrem_freq
-{ otrem_rnd = new SliderW(56, 75, 100, 10, "Random");
+} // RKR_Slider* otrem_freq
+{ otrem_rnd = new RKR_Slider(56, 75, 100, 10, "Random");
   otrem_rnd->type(5);
   otrem_rnd->box(FL_FLAT_BOX);
   otrem_rnd->color((Fl_Color)178);
@@ -201,7 +201,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_rnd->callback((Fl_Callback*)cb_otrem_rnd);
   otrem_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_rnd->when(FL_WHEN_CHANGED);
-} // SliderW* otrem_rnd
+} // RKR_Slider* otrem_rnd
 { RKR_Choice* o = otrem_lfotype = new RKR_Choice(78, 102, 72, 16, "LFO Type");
   otrem_lfotype->box(FL_FLAT_BOX);
   otrem_lfotype->down_box(FL_BORDER_BOX);
@@ -218,7 +218,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* otrem_lfotype
-{ otrem_stdf = new SliderW(56, 129, 100, 10, "Stereo Df");
+{ otrem_stdf = new RKR_Slider(56, 129, 100, 10, "Stereo Df");
   otrem_stdf->tooltip("LFO L/R Delay");
   otrem_stdf->type(5);
   otrem_stdf->box(FL_FLAT_BOX);
@@ -234,8 +234,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_stdf->callback((Fl_Callback*)cb_otrem_stdf);
   otrem_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* otrem_stdf
-{ otrem_pan = new SliderW(56, 149, 100, 10, "Pan");
+} // RKR_Slider* otrem_stdf
+{ otrem_pan = new RKR_Slider(56, 149, 100, 10, "Pan");
   otrem_pan->type(5);
   otrem_pan->box(FL_FLAT_BOX);
   otrem_pan->color((Fl_Color)178);
@@ -251,7 +251,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_pan->callback((Fl_Callback*)cb_otrem_pan);
   otrem_pan->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_pan->when(FL_WHEN_CHANGED);
-} // SliderW* otrem_pan
+} // RKR_Slider* otrem_pan
 { otrem_invert = new RKR_Check_Button(49, 164, 73, 15, "Invert");
   otrem_invert->tooltip("If checked it behaves more like tube preamp trem. If unchecked it behaves lik\
 e a stompbox Opto Trem");

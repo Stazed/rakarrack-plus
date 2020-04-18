@@ -11,7 +11,6 @@ set (ProgSources
     UI/rakarrack.cxx
     UI/analyzer.cxx
     UI/scope.cxx
-    UI/sliderW.cxx
     UI/newvum.cxx
     UI/tunerbar.cxx
     UI/common_gui_menu.cxx
@@ -27,6 +26,7 @@ set (ProgSources
     UI/RKR_Input.cxx
     UI/RKR_Light_Button.cxx
     UI/RKR_Menu_Bar.cxx
+    UI/RKR_Slider.cxx
     UI/RKR_Scroll.cxx
     UI/RKR_Tabs.cxx
     UI/RKR_Value_Input.cxx

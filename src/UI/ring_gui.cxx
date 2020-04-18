@@ -49,7 +49,7 @@ Fl_Menu_Item RingGui::menu_ring_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RingGui::cb_ring_WD_i(SliderW* o, void*) {
+void RingGui::cb_ring_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(178);
@@ -57,11 +57,11 @@ void RingGui::cb_ring_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(0,Dry_Wet((int)o->value()));
 }
-void RingGui::cb_ring_WD(SliderW* o, void* v) {
+void RingGui::cb_ring_WD(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_WD_i(o,v);
 }
 
-void RingGui::cb_ring_LRc_i(SliderW* o, void*) {
+void RingGui::cb_ring_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(179);
@@ -69,11 +69,11 @@ void RingGui::cb_ring_LRc_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(2,(int)o->value());
 }
-void RingGui::cb_ring_LRc(SliderW* o, void* v) {
+void RingGui::cb_ring_LRc(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_LRc_i(o,v);
 }
 
-void RingGui::cb_ring_input_i(SliderW* o, void*) {
+void RingGui::cb_ring_input_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(180);
@@ -81,11 +81,11 @@ void RingGui::cb_ring_input_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(11,(int)o->value());
 }
-void RingGui::cb_ring_input(SliderW* o, void* v) {
+void RingGui::cb_ring_input(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_input_i(o,v);
 }
 
-void RingGui::cb_ring_level_i(SliderW* o, void*) {
+void RingGui::cb_ring_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(181);
@@ -93,11 +93,11 @@ void RingGui::cb_ring_level_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(3,(int)o->value());
 }
-void RingGui::cb_ring_level(SliderW* o, void* v) {
+void RingGui::cb_ring_level(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_level_i(o,v);
 }
 
-void RingGui::cb_ring_pan_i(SliderW* o, void*) {
+void RingGui::cb_ring_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(182);
@@ -105,7 +105,7 @@ void RingGui::cb_ring_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(1,(int)o->value());
 }
-void RingGui::cb_ring_pan(SliderW* o, void* v) {
+void RingGui::cb_ring_pan(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_pan_i(o,v);
 }
 
@@ -123,7 +123,7 @@ void RingGui::cb_ring_afreq(RKR_Check_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_afreq_i(o,v);
 }
 
-void RingGui::cb_ring_depth_i(SliderW* o, void*) {
+void RingGui::cb_ring_depth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(183);
@@ -131,11 +131,11 @@ void RingGui::cb_ring_depth_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(4,(int)o->value());
 }
-void RingGui::cb_ring_depth(SliderW* o, void* v) {
+void RingGui::cb_ring_depth(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_depth_i(o,v);
 }
 
-void RingGui::cb_ring_freq_i(SliderW* o, void*) {
+void RingGui::cb_ring_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(184);
@@ -143,11 +143,11 @@ void RingGui::cb_ring_freq_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(5,(int)o->value());
 }
-void RingGui::cb_ring_freq(SliderW* o, void* v) {
+void RingGui::cb_ring_freq(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_freq_i(o,v);
 }
 
-void RingGui::cb_ring_sin_i(SliderW* o, void*) {
+void RingGui::cb_ring_sin_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(185);
@@ -155,11 +155,11 @@ void RingGui::cb_ring_sin_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(7,(int)o->value());
 }
-void RingGui::cb_ring_sin(SliderW* o, void* v) {
+void RingGui::cb_ring_sin(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_sin_i(o,v);
 }
 
-void RingGui::cb_ring_tri_i(SliderW* o, void*) {
+void RingGui::cb_ring_tri_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(186);
@@ -167,11 +167,11 @@ void RingGui::cb_ring_tri_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(8,(int)o->value());
 }
-void RingGui::cb_ring_tri(SliderW* o, void* v) {
+void RingGui::cb_ring_tri(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_tri_i(o,v);
 }
 
-void RingGui::cb_ring_saw_i(SliderW* o, void*) {
+void RingGui::cb_ring_saw_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(187);
@@ -179,11 +179,11 @@ void RingGui::cb_ring_saw_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(9,(int)o->value());
 }
-void RingGui::cb_ring_saw(SliderW* o, void* v) {
+void RingGui::cb_ring_saw(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_saw_i(o,v);
 }
 
-void RingGui::cb_ring_squ_i(SliderW* o, void*) {
+void RingGui::cb_ring_squ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(188);
@@ -191,7 +191,7 @@ void RingGui::cb_ring_squ_i(SliderW* o, void*) {
 } 
 rkr->efx_Ring->changepar(10,(int)o->value());
 }
-void RingGui::cb_ring_squ(SliderW* o, void* v) {
+void RingGui::cb_ring_squ(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_squ_i(o,v);
 }
 RingGui::RingGui(int X, int Y, int W, int H, const char *L)
@@ -230,7 +230,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ring_preset->menu(menu_ring_preset);
 } // RKR_Choice* ring_preset
-{ ring_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
+{ ring_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   ring_WD->type(5);
   ring_WD->box(FL_FLAT_BOX);
   ring_WD->color((Fl_Color)178);
@@ -245,8 +245,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_WD->callback((Fl_Callback*)cb_ring_WD);
   ring_WD->align(Fl_Align(FL_ALIGN_LEFT));
   ring_WD->when(FL_WHEN_CHANGED);
-} // SliderW* ring_WD
-{ ring_LRc = new SliderW(56, 42, 100, 10, "L/R Cross");
+} // RKR_Slider* ring_WD
+{ ring_LRc = new RKR_Slider(56, 42, 100, 10, "L/R Cross");
   ring_LRc->type(5);
   ring_LRc->box(FL_FLAT_BOX);
   ring_LRc->color((Fl_Color)178);
@@ -262,8 +262,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_LRc->callback((Fl_Callback*)cb_ring_LRc);
   ring_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   ring_LRc->when(FL_WHEN_CHANGED);
-} // SliderW* ring_LRc
-{ ring_input = new SliderW(56, 55, 100, 10, "Input");
+} // RKR_Slider* ring_LRc
+{ ring_input = new RKR_Slider(56, 55, 100, 10, "Input");
   ring_input->type(5);
   ring_input->box(FL_FLAT_BOX);
   ring_input->color((Fl_Color)178);
@@ -280,8 +280,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_input->callback((Fl_Callback*)cb_ring_input);
   ring_input->align(Fl_Align(FL_ALIGN_LEFT));
   ring_input->when(FL_WHEN_CHANGED);
-} // SliderW* ring_input
-{ ring_level = new SliderW(56, 68, 100, 10, "Level");
+} // RKR_Slider* ring_input
+{ ring_level = new RKR_Slider(56, 68, 100, 10, "Level");
   ring_level->type(5);
   ring_level->box(FL_FLAT_BOX);
   ring_level->color((Fl_Color)178);
@@ -296,8 +296,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_level->callback((Fl_Callback*)cb_ring_level);
   ring_level->align(Fl_Align(FL_ALIGN_LEFT));
   ring_level->when(FL_WHEN_CHANGED);
-} // SliderW* ring_level
-{ ring_pan = new SliderW(56, 81, 100, 10, "Pan");
+} // RKR_Slider* ring_level
+{ ring_pan = new RKR_Slider(56, 81, 100, 10, "Pan");
   ring_pan->type(5);
   ring_pan->box(FL_FLAT_BOX);
   ring_pan->color((Fl_Color)178);
@@ -313,7 +313,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_pan->callback((Fl_Callback*)cb_ring_pan);
   ring_pan->align(Fl_Align(FL_ALIGN_LEFT));
   ring_pan->when(FL_WHEN_CHANGED);
-} // SliderW* ring_pan
+} // RKR_Slider* ring_pan
 { ring_st = new RKR_Check_Button(28, 92, 52, 15, "Stereo");
   ring_st->box(FL_NO_BOX);
   ring_st->down_box(FL_BORDER_BOX);
@@ -340,7 +340,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_afreq->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ring_afreq->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ring_afreq
-{ ring_depth = new SliderW(56, 106, 100, 10, "Depth");
+{ ring_depth = new RKR_Slider(56, 106, 100, 10, "Depth");
   ring_depth->type(5);
   ring_depth->box(FL_FLAT_BOX);
   ring_depth->color((Fl_Color)178);
@@ -355,8 +355,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_depth->callback((Fl_Callback*)cb_ring_depth);
   ring_depth->align(Fl_Align(FL_ALIGN_LEFT));
   ring_depth->when(FL_WHEN_CHANGED);
-} // SliderW* ring_depth
-{ ring_freq = new SliderW(56, 118, 100, 10, "Freq");
+} // RKR_Slider* ring_depth
+{ ring_freq = new RKR_Slider(56, 118, 100, 10, "Freq");
   ring_freq->tooltip("Frequency");
   ring_freq->type(5);
   ring_freq->box(FL_FLAT_BOX);
@@ -373,8 +373,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_freq->callback((Fl_Callback*)cb_ring_freq);
   ring_freq->align(Fl_Align(FL_ALIGN_LEFT));
   ring_freq->when(FL_WHEN_CHANGED);
-} // SliderW* ring_freq
-{ ring_sin = new SliderW(56, 130, 100, 10, "Sine");
+} // RKR_Slider* ring_freq
+{ ring_sin = new RKR_Slider(56, 130, 100, 10, "Sine");
   ring_sin->type(5);
   ring_sin->box(FL_FLAT_BOX);
   ring_sin->color((Fl_Color)178);
@@ -389,8 +389,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_sin->callback((Fl_Callback*)cb_ring_sin);
   ring_sin->align(Fl_Align(FL_ALIGN_LEFT));
   ring_sin->when(FL_WHEN_CHANGED);
-} // SliderW* ring_sin
-{ ring_tri = new SliderW(56, 142, 100, 10, "Triangle");
+} // RKR_Slider* ring_sin
+{ ring_tri = new RKR_Slider(56, 142, 100, 10, "Triangle");
   ring_tri->type(5);
   ring_tri->box(FL_FLAT_BOX);
   ring_tri->color((Fl_Color)178);
@@ -405,8 +405,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_tri->callback((Fl_Callback*)cb_ring_tri);
   ring_tri->align(Fl_Align(FL_ALIGN_LEFT));
   ring_tri->when(FL_WHEN_CHANGED);
-} // SliderW* ring_tri
-{ ring_saw = new SliderW(56, 154, 100, 10, "Sawtooth");
+} // RKR_Slider* ring_tri
+{ ring_saw = new RKR_Slider(56, 154, 100, 10, "Sawtooth");
   ring_saw->type(5);
   ring_saw->box(FL_FLAT_BOX);
   ring_saw->color((Fl_Color)178);
@@ -421,8 +421,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_saw->callback((Fl_Callback*)cb_ring_saw);
   ring_saw->align(Fl_Align(FL_ALIGN_LEFT));
   ring_saw->when(FL_WHEN_CHANGED);
-} // SliderW* ring_saw
-{ ring_squ = new SliderW(56, 167, 100, 10, "Square");
+} // RKR_Slider* ring_saw
+{ ring_squ = new RKR_Slider(56, 167, 100, 10, "Square");
   ring_squ->type(5);
   ring_squ->box(FL_FLAT_BOX);
   ring_squ->color((Fl_Color)178);
@@ -437,7 +437,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ring_squ->callback((Fl_Callback*)cb_ring_squ);
   ring_squ->align(Fl_Align(FL_ALIGN_LEFT));
   ring_squ->when(FL_WHEN_CHANGED);
-} // SliderW* ring_squ
+} // RKR_Slider* ring_squ
 position(X, Y);
 end();
 }

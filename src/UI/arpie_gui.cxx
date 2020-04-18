@@ -51,7 +51,7 @@ Fl_Menu_Item ArpieGui::menu_arpie_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ArpieGui::cb_arpie_WD_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(212);
@@ -59,11 +59,11 @@ void ArpieGui::cb_arpie_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));
 }
-void ArpieGui::cb_arpie_WD(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_WD(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_WD_i(o,v);
 }
 
-void ArpieGui::cb_arpie_arpe_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_arpe_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(213);
@@ -71,11 +71,11 @@ void ArpieGui::cb_arpie_arpe_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(7,(int)o->value());
 }
-void ArpieGui::cb_arpie_arpe(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_arpe(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_arpe_i(o,v);
 }
 
-void ArpieGui::cb_arpie_pan_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(214);
@@ -83,11 +83,11 @@ void ArpieGui::cb_arpie_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(1,(int)(o->value()+64));
 }
-void ArpieGui::cb_arpie_pan(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_pan(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_pan_i(o,v);
 }
 
-void ArpieGui::cb_arpie_delay_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(215);
@@ -95,7 +95,7 @@ void ArpieGui::cb_arpie_delay_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(2,(int)o->value());
 }
-void ArpieGui::cb_arpie_delay(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_delay(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_delay_i(o,v);
 }
 
@@ -106,7 +106,7 @@ void ArpieGui::cb_arpie_subdiv(RKR_Choice* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_subdiv_i(o,v);
 }
 
-void ArpieGui::cb_arpie_LRdl_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_LRdl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(216);
@@ -114,11 +114,11 @@ void ArpieGui::cb_arpie_LRdl_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(3,(int)o->value());
 }
-void ArpieGui::cb_arpie_LRdl(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_LRdl(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_LRdl_i(o,v);
 }
 
-void ArpieGui::cb_arpie_LRc_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(217);
@@ -126,11 +126,11 @@ void ArpieGui::cb_arpie_LRc_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(4,(int)(o->value()));
 }
-void ArpieGui::cb_arpie_LRc(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_LRc(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_LRc_i(o,v);
 }
 
-void ArpieGui::cb_arpie_fb_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(218);
@@ -138,11 +138,11 @@ void ArpieGui::cb_arpie_fb_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(5,(int)o->value());
 }
-void ArpieGui::cb_arpie_fb(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_fb(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_fb_i(o,v);
 }
 
-void ArpieGui::cb_arpie_damp_i(SliderW* o, void*) {
+void ArpieGui::cb_arpie_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(219);
@@ -150,7 +150,7 @@ void ArpieGui::cb_arpie_damp_i(SliderW* o, void*) {
 } 
 rkr->efx_Arpie->changepar(6,(int)o->value());
 }
-void ArpieGui::cb_arpie_damp(SliderW* o, void* v) {
+void ArpieGui::cb_arpie_damp(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_damp_i(o,v);
 }
 
@@ -213,7 +213,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
   arpie_preset->menu(menu_arpie_preset);
 } // RKR_Choice* arpie_preset
-{ arpie_WD = new SliderW(56, 28, 100, 10, "Dry/Wet");
+{ arpie_WD = new RKR_Slider(56, 28, 100, 10, "Dry/Wet");
   arpie_WD->type(5);
   arpie_WD->box(FL_FLAT_BOX);
   arpie_WD->color((Fl_Color)178);
@@ -228,8 +228,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_WD->callback((Fl_Callback*)cb_arpie_WD);
   arpie_WD->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_WD->when(FL_WHEN_CHANGED);
-} // SliderW* arpie_WD
-{ arpie_arpe = new SliderW(56, 42, 100, 10, "Arpe\'s");
+} // RKR_Slider* arpie_WD
+{ arpie_arpe = new RKR_Slider(56, 42, 100, 10, "Arpe\'s");
   arpie_arpe->type(5);
   arpie_arpe->box(FL_FLAT_BOX);
   arpie_arpe->color((Fl_Color)178);
@@ -244,8 +244,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_arpe->callback((Fl_Callback*)cb_arpie_arpe);
   arpie_arpe->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_arpe->when(FL_WHEN_CHANGED);
-} // SliderW* arpie_arpe
-{ arpie_pan = new SliderW(56, 56, 100, 10, "Pan");
+} // RKR_Slider* arpie_arpe
+{ arpie_pan = new RKR_Slider(56, 56, 100, 10, "Pan");
   arpie_pan->type(5);
   arpie_pan->box(FL_FLAT_BOX);
   arpie_pan->color((Fl_Color)178);
@@ -261,8 +261,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_pan->callback((Fl_Callback*)cb_arpie_pan);
   arpie_pan->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_pan->when(FL_WHEN_CHANGED);
-} // SliderW* arpie_pan
-{ arpie_delay = new SliderW(56, 70, 100, 10, "Tempo");
+} // RKR_Slider* arpie_pan
+{ arpie_delay = new RKR_Slider(56, 70, 100, 10, "Tempo");
   arpie_delay->type(5);
   arpie_delay->box(FL_FLAT_BOX);
   arpie_delay->color((Fl_Color)178);
@@ -279,7 +279,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_delay->callback((Fl_Callback*)cb_arpie_delay);
   arpie_delay->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_delay->when(FL_WHEN_RELEASE);
-} // SliderW* arpie_delay
+} // RKR_Slider* arpie_delay
 { RKR_Choice* o = arpie_subdiv = new RKR_Choice(78, 82, 76, 18, "SubDivision");
   arpie_subdiv->box(FL_FLAT_BOX);
   arpie_subdiv->down_box(FL_BORDER_BOX);
@@ -296,7 +296,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_subdiv->when(FL_WHEN_RELEASE_ALWAYS);
   o->menu(m_subdiv_menu->get_subdiv_type());
 } // RKR_Choice* arpie_subdiv
-{ arpie_LRdl = new SliderW(56, 103, 100, 10, "L/R Delay");
+{ arpie_LRdl = new RKR_Slider(56, 103, 100, 10, "L/R Delay");
   arpie_LRdl->type(5);
   arpie_LRdl->box(FL_FLAT_BOX);
   arpie_LRdl->color((Fl_Color)178);
@@ -311,8 +311,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_LRdl->callback((Fl_Callback*)cb_arpie_LRdl);
   arpie_LRdl->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_LRdl->when(FL_WHEN_RELEASE);
-} // SliderW* arpie_LRdl
-{ arpie_LRc = new SliderW(56, 118, 100, 10, "L/R Cross");
+} // RKR_Slider* arpie_LRdl
+{ arpie_LRc = new RKR_Slider(56, 118, 100, 10, "L/R Cross");
   arpie_LRc->type(5);
   arpie_LRc->box(FL_FLAT_BOX);
   arpie_LRc->color((Fl_Color)178);
@@ -327,8 +327,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_LRc->callback((Fl_Callback*)cb_arpie_LRc);
   arpie_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_LRc->when(FL_WHEN_CHANGED);
-} // SliderW* arpie_LRc
-{ arpie_fb = new SliderW(56, 133, 100, 10, "Feedback");
+} // RKR_Slider* arpie_LRc
+{ arpie_fb = new RKR_Slider(56, 133, 100, 10, "Feedback");
   arpie_fb->type(5);
   arpie_fb->box(FL_FLAT_BOX);
   arpie_fb->color((Fl_Color)178);
@@ -343,8 +343,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_fb->callback((Fl_Callback*)cb_arpie_fb);
   arpie_fb->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_fb->when(FL_WHEN_CHANGED);
-} // SliderW* arpie_fb
-{ arpie_damp = new SliderW(56, 167, 100, 10, "Damp");
+} // RKR_Slider* arpie_fb
+{ arpie_damp = new RKR_Slider(56, 167, 100, 10, "Damp");
   arpie_damp->type(5);
   arpie_damp->box(FL_FLAT_BOX);
   arpie_damp->color((Fl_Color)178);
@@ -359,7 +359,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_damp->callback((Fl_Callback*)cb_arpie_damp);
   arpie_damp->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_damp->when(FL_WHEN_CHANGED);
-} // SliderW* arpie_damp
+} // RKR_Slider* arpie_damp
 { RKR_Counter* o = arpie_harm = new RKR_Counter(20, 150, 52, 12, "H");
   arpie_harm->tooltip("Number of steps in the pattern");
   arpie_harm->type(1);

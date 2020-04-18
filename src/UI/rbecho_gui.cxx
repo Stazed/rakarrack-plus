@@ -44,7 +44,7 @@ Fl_Menu_Item RbechoGui::menu_rbecho_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RbechoGui::cb_rbecho_WD_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(303);
@@ -52,11 +52,11 @@ void RbechoGui::cb_rbecho_WD_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(0,Dry_Wet((int)(o->value())));
 }
-void RbechoGui::cb_rbecho_WD(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_WD(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_WD_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_RV_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_RV_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(304);
@@ -64,11 +64,11 @@ void RbechoGui::cb_rbecho_RV_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(7,(int)o->value());
 }
-void RbechoGui::cb_rbecho_RV(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_RV(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_RV_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_pan_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(305);
@@ -76,11 +76,11 @@ void RbechoGui::cb_rbecho_pan_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(1,(int)(o->value()+64));
 }
-void RbechoGui::cb_rbecho_pan(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_pan(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_pan_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_delay_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(306);
@@ -88,11 +88,11 @@ void RbechoGui::cb_rbecho_delay_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(2,(int)o->value());
 }
-void RbechoGui::cb_rbecho_delay(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_delay(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_delay_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_LRdl_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_LRdl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(307);
@@ -100,11 +100,11 @@ void RbechoGui::cb_rbecho_LRdl_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(3,(int)o->value());
 }
-void RbechoGui::cb_rbecho_LRdl(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_LRdl(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_LRdl_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_fb_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(308);
@@ -112,7 +112,7 @@ void RbechoGui::cb_rbecho_fb_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(5,(int)o->value());
 }
-void RbechoGui::cb_rbecho_fb(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_fb(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_fb_i(o,v);
 }
 
@@ -123,7 +123,7 @@ void RbechoGui::cb_rbecho_subdiv(RKR_Choice* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_subdiv_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_damp_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(309);
@@ -131,11 +131,11 @@ void RbechoGui::cb_rbecho_damp_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(6,(int)o->value());
 }
-void RbechoGui::cb_rbecho_damp(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_damp(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_damp_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_es_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_es_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(310);
@@ -143,11 +143,11 @@ void RbechoGui::cb_rbecho_es_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(9,(int)o->value());
 }
-void RbechoGui::cb_rbecho_es(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_es(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_es_i(o,v);
 }
 
-void RbechoGui::cb_rbecho_angle_i(SliderW* o, void*) {
+void RbechoGui::cb_rbecho_angle_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(311);
@@ -155,7 +155,7 @@ void RbechoGui::cb_rbecho_angle_i(SliderW* o, void*) {
 }
 rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));
 }
-void RbechoGui::cb_rbecho_angle(SliderW* o, void* v) {
+void RbechoGui::cb_rbecho_angle(RKR_Slider* o, void* v) {
   ((RbechoGui*)(o->parent()))->cb_rbecho_angle_i(o,v);
 }
 RbechoGui::RbechoGui(int X, int Y, int W, int H, const char *L)
@@ -194,7 +194,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_preset->when(FL_WHEN_RELEASE_ALWAYS);
   rbecho_preset->menu(menu_rbecho_preset);
 } // RKR_Choice* rbecho_preset
-{ rbecho_WD = new SliderW(56, 27, 100, 10, "Dry/Wet");
+{ rbecho_WD = new RKR_Slider(56, 27, 100, 10, "Dry/Wet");
   rbecho_WD->type(5);
   rbecho_WD->box(FL_FLAT_BOX);
   rbecho_WD->color((Fl_Color)178);
@@ -209,8 +209,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_WD->callback((Fl_Callback*)cb_rbecho_WD);
   rbecho_WD->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_WD->when(FL_WHEN_CHANGED);
-} // SliderW* rbecho_WD
-{ rbecho_RV = new SliderW(56, 41, 100, 10, "Reverse");
+} // RKR_Slider* rbecho_WD
+{ rbecho_RV = new RKR_Slider(56, 41, 100, 10, "Reverse");
   rbecho_RV->type(5);
   rbecho_RV->box(FL_FLAT_BOX);
   rbecho_RV->color((Fl_Color)178);
@@ -225,8 +225,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_RV->callback((Fl_Callback*)cb_rbecho_RV);
   rbecho_RV->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_RV->when(FL_WHEN_CHANGED);
-} // SliderW* rbecho_RV
-{ rbecho_pan = new SliderW(56, 55, 100, 10, "Pan");
+} // RKR_Slider* rbecho_RV
+{ rbecho_pan = new RKR_Slider(56, 55, 100, 10, "Pan");
   rbecho_pan->type(5);
   rbecho_pan->box(FL_FLAT_BOX);
   rbecho_pan->color((Fl_Color)178);
@@ -242,8 +242,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_pan->callback((Fl_Callback*)cb_rbecho_pan);
   rbecho_pan->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_pan->when(FL_WHEN_CHANGED);
-} // SliderW* rbecho_pan
-{ rbecho_delay = new SliderW(56, 69, 100, 10, "Tempo");
+} // RKR_Slider* rbecho_pan
+{ rbecho_delay = new RKR_Slider(56, 69, 100, 10, "Tempo");
   rbecho_delay->type(5);
   rbecho_delay->box(FL_FLAT_BOX);
   rbecho_delay->color((Fl_Color)178);
@@ -260,8 +260,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_delay->callback((Fl_Callback*)cb_rbecho_delay);
   rbecho_delay->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_delay->when(FL_WHEN_RELEASE);
-} // SliderW* rbecho_delay
-{ rbecho_LRdl = new SliderW(56, 83, 100, 10, "L/R Delay");
+} // RKR_Slider* rbecho_delay
+{ rbecho_LRdl = new RKR_Slider(56, 83, 100, 10, "L/R Delay");
   rbecho_LRdl->type(5);
   rbecho_LRdl->box(FL_FLAT_BOX);
   rbecho_LRdl->color((Fl_Color)178);
@@ -276,8 +276,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_LRdl->callback((Fl_Callback*)cb_rbecho_LRdl);
   rbecho_LRdl->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_LRdl->when(FL_WHEN_RELEASE);
-} // SliderW* rbecho_LRdl
-{ rbecho_fb = new SliderW(56, 97, 100, 10, "Feedback");
+} // RKR_Slider* rbecho_LRdl
+{ rbecho_fb = new RKR_Slider(56, 97, 100, 10, "Feedback");
   rbecho_fb->type(5);
   rbecho_fb->box(FL_FLAT_BOX);
   rbecho_fb->color((Fl_Color)178);
@@ -292,7 +292,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_fb->callback((Fl_Callback*)cb_rbecho_fb);
   rbecho_fb->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_fb->when(FL_WHEN_CHANGED);
-} // SliderW* rbecho_fb
+} // RKR_Slider* rbecho_fb
 { RKR_Choice* o = rbecho_subdiv = new RKR_Choice(77, 111, 76, 18, "SubDivision");
   rbecho_subdiv->box(FL_FLAT_BOX);
   rbecho_subdiv->down_box(FL_BORDER_BOX);
@@ -309,7 +309,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_subdiv->when(FL_WHEN_RELEASE_ALWAYS);
   o->menu(m_subdiv_menu->get_subdiv_type());
 } // RKR_Choice* rbecho_subdiv
-{ rbecho_damp = new SliderW(56, 134, 100, 10, "Damp");
+{ rbecho_damp = new RKR_Slider(56, 134, 100, 10, "Damp");
   rbecho_damp->type(5);
   rbecho_damp->box(FL_FLAT_BOX);
   rbecho_damp->color((Fl_Color)178);
@@ -324,8 +324,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_damp->callback((Fl_Callback*)cb_rbecho_damp);
   rbecho_damp->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_damp->when(FL_WHEN_CHANGED);
-} // SliderW* rbecho_damp
-{ rbecho_es = new SliderW(56, 148, 100, 10, "Ex Stereo");
+} // RKR_Slider* rbecho_damp
+{ rbecho_es = new RKR_Slider(56, 148, 100, 10, "Ex Stereo");
   rbecho_es->tooltip("Extra Stereo");
   rbecho_es->type(5);
   rbecho_es->box(FL_FLAT_BOX);
@@ -341,8 +341,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_es->callback((Fl_Callback*)cb_rbecho_es);
   rbecho_es->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_es->when(FL_WHEN_CHANGED);
-} // SliderW* rbecho_es
-{ rbecho_angle = new SliderW(56, 162, 100, 10, "Angle");
+} // RKR_Slider* rbecho_es
+{ rbecho_angle = new RKR_Slider(56, 162, 100, 10, "Angle");
   rbecho_angle->type(5);
   rbecho_angle->box(FL_FLAT_BOX);
   rbecho_angle->color((Fl_Color)178);
@@ -358,7 +358,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   rbecho_angle->callback((Fl_Callback*)cb_rbecho_angle);
   rbecho_angle->align(Fl_Align(FL_ALIGN_LEFT));
   rbecho_angle->when(FL_WHEN_CHANGED);
-} // SliderW* rbecho_angle
+} // RKR_Slider* rbecho_angle
 position(X, Y);
 end();
 }

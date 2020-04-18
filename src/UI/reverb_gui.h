@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,30 +24,30 @@ private:
   static void cb_reverb_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_reverb_preset[];
 public:
-  SliderW *reverb_WD;
+  RKR_Slider *reverb_WD;
 private:
-  inline void cb_reverb_WD_i(SliderW*, void*);
-  static void cb_reverb_WD(SliderW*, void*);
+  inline void cb_reverb_WD_i(RKR_Slider*, void*);
+  static void cb_reverb_WD(RKR_Slider*, void*);
 public:
-  SliderW *reverb_pan;
+  RKR_Slider *reverb_pan;
 private:
-  inline void cb_reverb_pan_i(SliderW*, void*);
-  static void cb_reverb_pan(SliderW*, void*);
+  inline void cb_reverb_pan_i(RKR_Slider*, void*);
+  static void cb_reverb_pan(RKR_Slider*, void*);
 public:
-  SliderW *reverb_time;
+  RKR_Slider *reverb_time;
 private:
-  inline void cb_reverb_time_i(SliderW*, void*);
-  static void cb_reverb_time(SliderW*, void*);
+  inline void cb_reverb_time_i(RKR_Slider*, void*);
+  static void cb_reverb_time(RKR_Slider*, void*);
 public:
-  SliderW *reverb_ldel;
+  RKR_Slider *reverb_ldel;
 private:
-  inline void cb_reverb_ldel_i(SliderW*, void*);
-  static void cb_reverb_ldel(SliderW*, void*);
+  inline void cb_reverb_ldel_i(RKR_Slider*, void*);
+  static void cb_reverb_ldel(RKR_Slider*, void*);
 public:
-  SliderW *reverb_ldelft;
+  RKR_Slider *reverb_ldelft;
 private:
-  inline void cb_reverb_ldelft_i(SliderW*, void*);
-  static void cb_reverb_ldelft(SliderW*, void*);
+  inline void cb_reverb_ldelft_i(RKR_Slider*, void*);
+  static void cb_reverb_ldelft(RKR_Slider*, void*);
 public:
   RKR_Choice *reverb_type;
 private:
@@ -57,24 +57,24 @@ private:
   inline void cb_Random_i(Fl_Menu_*, void*);
   static void cb_Random(Fl_Menu_*, void*);
 public:
-  SliderW *reverb_RS;
+  RKR_Slider *reverb_RS;
 private:
-  inline void cb_reverb_RS_i(SliderW*, void*);
-  static void cb_reverb_RS(SliderW*, void*);
+  inline void cb_reverb_RS_i(RKR_Slider*, void*);
+  static void cb_reverb_RS(RKR_Slider*, void*);
 public:
-  SliderW *reverb_LPF;
+  RKR_Slider *reverb_LPF;
 private:
-  inline void cb_reverb_LPF_i(SliderW*, void*);
-  static void cb_reverb_LPF(SliderW*, void*);
+  inline void cb_reverb_LPF_i(RKR_Slider*, void*);
+  static void cb_reverb_LPF(RKR_Slider*, void*);
 public:
-  SliderW *reverb_HPF;
+  RKR_Slider *reverb_HPF;
 private:
-  inline void cb_reverb_HPF_i(SliderW*, void*);
-  static void cb_reverb_HPF(SliderW*, void*);
+  inline void cb_reverb_HPF_i(RKR_Slider*, void*);
+  static void cb_reverb_HPF(RKR_Slider*, void*);
 public:
-  SliderW *reverb_damp;
+  RKR_Slider *reverb_damp;
 private:
-  inline void cb_reverb_damp_i(SliderW*, void*);
-  static void cb_reverb_damp(SliderW*, void*);
+  inline void cb_reverb_damp_i(RKR_Slider*, void*);
+  static void cb_reverb_damp(RKR_Slider*, void*);
 };
 #endif

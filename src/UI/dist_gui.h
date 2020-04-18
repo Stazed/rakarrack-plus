@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,25 +26,25 @@ private:
   static void cb_dist_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_dist_preset[];
 public:
-  SliderW *dist_WD;
+  RKR_Slider *dist_WD;
 private:
-  inline void cb_dist_WD_i(SliderW*, void*);
-  static void cb_dist_WD(SliderW*, void*);
+  inline void cb_dist_WD_i(RKR_Slider*, void*);
+  static void cb_dist_WD(RKR_Slider*, void*);
 public:
-  SliderW *dist_LRc;
+  RKR_Slider *dist_LRc;
 private:
-  inline void cb_dist_LRc_i(SliderW*, void*);
-  static void cb_dist_LRc(SliderW*, void*);
+  inline void cb_dist_LRc_i(RKR_Slider*, void*);
+  static void cb_dist_LRc(RKR_Slider*, void*);
 public:
-  SliderW *dist_drive;
+  RKR_Slider *dist_drive;
 private:
-  inline void cb_dist_drive_i(SliderW*, void*);
-  static void cb_dist_drive(SliderW*, void*);
+  inline void cb_dist_drive_i(RKR_Slider*, void*);
+  static void cb_dist_drive(RKR_Slider*, void*);
 public:
-  SliderW *dist_level;
+  RKR_Slider *dist_level;
 private:
-  inline void cb_dist_level_i(SliderW*, void*);
-  static void cb_dist_level(SliderW*, void*);
+  inline void cb_dist_level_i(RKR_Slider*, void*);
+  static void cb_dist_level(RKR_Slider*, void*);
 public:
   RKR_Choice *dist_tipo;
 private:
@@ -66,25 +66,25 @@ private:
   inline void cb_dist_st_i(RKR_Check_Button*, void*);
   static void cb_dist_st(RKR_Check_Button*, void*);
 public:
-  SliderW *dist_pan;
+  RKR_Slider *dist_pan;
 private:
-  inline void cb_dist_pan_i(SliderW*, void*);
-  static void cb_dist_pan(SliderW*, void*);
+  inline void cb_dist_pan_i(RKR_Slider*, void*);
+  static void cb_dist_pan(RKR_Slider*, void*);
 public:
-  SliderW *dist_oct;
+  RKR_Slider *dist_oct;
 private:
-  inline void cb_dist_oct_i(SliderW*, void*);
-  static void cb_dist_oct(SliderW*, void*);
+  inline void cb_dist_oct_i(RKR_Slider*, void*);
+  static void cb_dist_oct(RKR_Slider*, void*);
 public:
-  SliderW *dist_lpf;
+  RKR_Slider *dist_lpf;
 private:
-  inline void cb_dist_lpf_i(SliderW*, void*);
-  static void cb_dist_lpf(SliderW*, void*);
+  inline void cb_dist_lpf_i(RKR_Slider*, void*);
+  static void cb_dist_lpf(RKR_Slider*, void*);
 public:
-  SliderW *dist_hpf;
+  RKR_Slider *dist_hpf;
 private:
-  inline void cb_dist_hpf_i(SliderW*, void*);
-  static void cb_dist_hpf(SliderW*, void*);
+  inline void cb_dist_hpf_i(RKR_Slider*, void*);
+  static void cb_dist_hpf(RKR_Slider*, void*);
   CommonGuiMenu *m_dist_menu; 
 };
 #endif

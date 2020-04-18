@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,35 +25,35 @@ private:
   static void cb_convo_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_convo_preset[];
 public:
-  SliderW *convo_WD;
+  RKR_Slider *convo_WD;
 private:
-  inline void cb_convo_WD_i(SliderW*, void*);
-  static void cb_convo_WD(SliderW*, void*);
+  inline void cb_convo_WD_i(RKR_Slider*, void*);
+  static void cb_convo_WD(RKR_Slider*, void*);
 public:
-  SliderW *convo_pan;
+  RKR_Slider *convo_pan;
 private:
-  inline void cb_convo_pan_i(SliderW*, void*);
-  static void cb_convo_pan(SliderW*, void*);
+  inline void cb_convo_pan_i(RKR_Slider*, void*);
+  static void cb_convo_pan(RKR_Slider*, void*);
 public:
-  SliderW *convo_level;
+  RKR_Slider *convo_level;
 private:
-  inline void cb_convo_level_i(SliderW*, void*);
-  static void cb_convo_level(SliderW*, void*);
+  inline void cb_convo_level_i(RKR_Slider*, void*);
+  static void cb_convo_level(RKR_Slider*, void*);
 public:
-  SliderW *convo_damp;
+  RKR_Slider *convo_damp;
 private:
-  inline void cb_convo_damp_i(SliderW*, void*);
-  static void cb_convo_damp(SliderW*, void*);
+  inline void cb_convo_damp_i(RKR_Slider*, void*);
+  static void cb_convo_damp(RKR_Slider*, void*);
 public:
-  SliderW *convo_fb;
+  RKR_Slider *convo_fb;
 private:
-  inline void cb_convo_fb_i(SliderW*, void*);
-  static void cb_convo_fb(SliderW*, void*);
+  inline void cb_convo_fb_i(RKR_Slider*, void*);
+  static void cb_convo_fb(RKR_Slider*, void*);
 public:
-  SliderW *convo_length;
+  RKR_Slider *convo_length;
 private:
-  inline void cb_convo_length_i(SliderW*, void*);
-  static void cb_convo_length(SliderW*, void*);
+  inline void cb_convo_length_i(RKR_Slider*, void*);
+  static void cb_convo_length(RKR_Slider*, void*);
 public:
   RKR_Check_Button *convo_user;
 private:

@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,45 +25,45 @@ private:
   static void cb_valve_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_valve_preset[];
 public:
-  SliderW *valve_WD;
+  RKR_Slider *valve_WD;
 private:
-  inline void cb_valve_WD_i(SliderW*, void*);
-  static void cb_valve_WD(SliderW*, void*);
+  inline void cb_valve_WD_i(RKR_Slider*, void*);
+  static void cb_valve_WD(RKR_Slider*, void*);
 public:
-  SliderW *valve_LRc;
+  RKR_Slider *valve_LRc;
 private:
-  inline void cb_valve_LRc_i(SliderW*, void*);
-  static void cb_valve_LRc(SliderW*, void*);
+  inline void cb_valve_LRc_i(RKR_Slider*, void*);
+  static void cb_valve_LRc(RKR_Slider*, void*);
 public:
-  SliderW *valve_pan;
+  RKR_Slider *valve_pan;
 private:
-  inline void cb_valve_pan_i(SliderW*, void*);
-  static void cb_valve_pan(SliderW*, void*);
+  inline void cb_valve_pan_i(RKR_Slider*, void*);
+  static void cb_valve_pan(RKR_Slider*, void*);
 public:
-  SliderW *valve_level;
+  RKR_Slider *valve_level;
 private:
-  inline void cb_valve_level_i(SliderW*, void*);
-  static void cb_valve_level(SliderW*, void*);
+  inline void cb_valve_level_i(RKR_Slider*, void*);
+  static void cb_valve_level(RKR_Slider*, void*);
 public:
-  SliderW *valve_drive;
+  RKR_Slider *valve_drive;
 private:
-  inline void cb_valve_drive_i(SliderW*, void*);
-  static void cb_valve_drive(SliderW*, void*);
+  inline void cb_valve_drive_i(RKR_Slider*, void*);
+  static void cb_valve_drive(RKR_Slider*, void*);
 public:
   RKR_Check_Button *valve_ed;
 private:
   inline void cb_valve_ed_i(RKR_Check_Button*, void*);
   static void cb_valve_ed(RKR_Check_Button*, void*);
 public:
-  SliderW *valve_Q;
+  RKR_Slider *valve_Q;
 private:
-  inline void cb_valve_Q_i(SliderW*, void*);
-  static void cb_valve_Q(SliderW*, void*);
+  inline void cb_valve_Q_i(RKR_Slider*, void*);
+  static void cb_valve_Q(RKR_Slider*, void*);
 public:
-  SliderW *valve_Pre;
+  RKR_Slider *valve_Pre;
 private:
-  inline void cb_valve_Pre_i(SliderW*, void*);
-  static void cb_valve_Pre(SliderW*, void*);
+  inline void cb_valve_Pre_i(RKR_Slider*, void*);
+  static void cb_valve_Pre(RKR_Slider*, void*);
 public:
   RKR_Check_Button *valve_pf;
 private:
@@ -80,14 +80,14 @@ private:
   inline void cb_valve_neg_i(RKR_Check_Button*, void*);
   static void cb_valve_neg(RKR_Check_Button*, void*);
 public:
-  SliderW *valve_lpf;
+  RKR_Slider *valve_lpf;
 private:
-  inline void cb_valve_lpf_i(SliderW*, void*);
-  static void cb_valve_lpf(SliderW*, void*);
+  inline void cb_valve_lpf_i(RKR_Slider*, void*);
+  static void cb_valve_lpf(RKR_Slider*, void*);
 public:
-  SliderW *valve_hpf;
+  RKR_Slider *valve_hpf;
 private:
-  inline void cb_valve_hpf_i(SliderW*, void*);
-  static void cb_valve_hpf(SliderW*, void*);
+  inline void cb_valve_hpf_i(RKR_Slider*, void*);
+  static void cb_valve_hpf(RKR_Slider*, void*);
 };
 #endif

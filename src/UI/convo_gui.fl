@@ -14,7 +14,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class ConvoGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
 } {
@@ -78,7 +78,7 @@ convo_fb->value(rkr->efx_Convol->getpar(10));}
 }
 rkr->efx_Convol->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider convo_pan {
     label Pan
@@ -89,7 +89,7 @@ rkr->efx_Convol->changepar(0,Dry_Wet((int)(o->value())));}
 }
 rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
     xywh {56 46 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider convo_level {
     label Level
@@ -100,7 +100,7 @@ rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
 }
 rkr->efx_Convol->changepar(7,(int)o->value());}
     xywh {56 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider convo_damp {
     label Damp
@@ -111,7 +111,7 @@ rkr->efx_Convol->changepar(7,(int)o->value());}
 }
 rkr->efx_Convol->changepar(6,(int)o->value());}
     xywh {56 78 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider convo_fb {
     label Feedback
@@ -122,7 +122,7 @@ rkr->efx_Convol->changepar(6,(int)o->value());}
 }
 rkr->efx_Convol->changepar(10,(int)o->value());}
     xywh {56 94 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider convo_length {
     label Length
@@ -133,7 +133,7 @@ rkr->efx_Convol->changepar(10,(int)o->value());}
 }
 rkr->efx_Convol->changepar(3,(int)o->value());}
     xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Check_Button convo_user {
     label User

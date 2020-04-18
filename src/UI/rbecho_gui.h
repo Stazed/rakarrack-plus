@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -25,55 +25,55 @@ private:
   static void cb_rbecho_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_rbecho_preset[];
 public:
-  SliderW *rbecho_WD;
+  RKR_Slider *rbecho_WD;
 private:
-  inline void cb_rbecho_WD_i(SliderW*, void*);
-  static void cb_rbecho_WD(SliderW*, void*);
+  inline void cb_rbecho_WD_i(RKR_Slider*, void*);
+  static void cb_rbecho_WD(RKR_Slider*, void*);
 public:
-  SliderW *rbecho_RV;
+  RKR_Slider *rbecho_RV;
 private:
-  inline void cb_rbecho_RV_i(SliderW*, void*);
-  static void cb_rbecho_RV(SliderW*, void*);
+  inline void cb_rbecho_RV_i(RKR_Slider*, void*);
+  static void cb_rbecho_RV(RKR_Slider*, void*);
 public:
-  SliderW *rbecho_pan;
+  RKR_Slider *rbecho_pan;
 private:
-  inline void cb_rbecho_pan_i(SliderW*, void*);
-  static void cb_rbecho_pan(SliderW*, void*);
+  inline void cb_rbecho_pan_i(RKR_Slider*, void*);
+  static void cb_rbecho_pan(RKR_Slider*, void*);
 public:
-  SliderW *rbecho_delay;
+  RKR_Slider *rbecho_delay;
 private:
-  inline void cb_rbecho_delay_i(SliderW*, void*);
-  static void cb_rbecho_delay(SliderW*, void*);
+  inline void cb_rbecho_delay_i(RKR_Slider*, void*);
+  static void cb_rbecho_delay(RKR_Slider*, void*);
 public:
-  SliderW *rbecho_LRdl;
+  RKR_Slider *rbecho_LRdl;
 private:
-  inline void cb_rbecho_LRdl_i(SliderW*, void*);
-  static void cb_rbecho_LRdl(SliderW*, void*);
+  inline void cb_rbecho_LRdl_i(RKR_Slider*, void*);
+  static void cb_rbecho_LRdl(RKR_Slider*, void*);
 public:
-  SliderW *rbecho_fb;
+  RKR_Slider *rbecho_fb;
 private:
-  inline void cb_rbecho_fb_i(SliderW*, void*);
-  static void cb_rbecho_fb(SliderW*, void*);
+  inline void cb_rbecho_fb_i(RKR_Slider*, void*);
+  static void cb_rbecho_fb(RKR_Slider*, void*);
 public:
   RKR_Choice *rbecho_subdiv;
 private:
   inline void cb_rbecho_subdiv_i(RKR_Choice*, void*);
   static void cb_rbecho_subdiv(RKR_Choice*, void*);
 public:
-  SliderW *rbecho_damp;
+  RKR_Slider *rbecho_damp;
 private:
-  inline void cb_rbecho_damp_i(SliderW*, void*);
-  static void cb_rbecho_damp(SliderW*, void*);
+  inline void cb_rbecho_damp_i(RKR_Slider*, void*);
+  static void cb_rbecho_damp(RKR_Slider*, void*);
 public:
-  SliderW *rbecho_es;
+  RKR_Slider *rbecho_es;
 private:
-  inline void cb_rbecho_es_i(SliderW*, void*);
-  static void cb_rbecho_es(SliderW*, void*);
+  inline void cb_rbecho_es_i(RKR_Slider*, void*);
+  static void cb_rbecho_es(RKR_Slider*, void*);
 public:
-  SliderW *rbecho_angle;
+  RKR_Slider *rbecho_angle;
 private:
-  inline void cb_rbecho_angle_i(SliderW*, void*);
-  static void cb_rbecho_angle(SliderW*, void*);
+  inline void cb_rbecho_angle_i(RKR_Slider*, void*);
+  static void cb_rbecho_angle(RKR_Slider*, void*);
   CommonGuiMenu *m_subdiv_menu; 
 };
 #endif

@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -25,60 +25,60 @@ private:
   static void cb_Alienwah_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Alienwah_preset[];
 public:
-  SliderW *Alienwah_WD;
+  RKR_Slider *Alienwah_WD;
 private:
-  inline void cb_Alienwah_WD_i(SliderW*, void*);
-  static void cb_Alienwah_WD(SliderW*, void*);
+  inline void cb_Alienwah_WD_i(RKR_Slider*, void*);
+  static void cb_Alienwah_WD(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_pan;
+  RKR_Slider *Alienwah_pan;
 private:
-  inline void cb_Alienwah_pan_i(SliderW*, void*);
-  static void cb_Alienwah_pan(SliderW*, void*);
+  inline void cb_Alienwah_pan_i(RKR_Slider*, void*);
+  static void cb_Alienwah_pan(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_freq;
+  RKR_Slider *Alienwah_freq;
 private:
-  inline void cb_Alienwah_freq_i(SliderW*, void*);
-  static void cb_Alienwah_freq(SliderW*, void*);
+  inline void cb_Alienwah_freq_i(RKR_Slider*, void*);
+  static void cb_Alienwah_freq(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_rnd;
+  RKR_Slider *Alienwah_rnd;
 private:
-  inline void cb_Alienwah_rnd_i(SliderW*, void*);
-  static void cb_Alienwah_rnd(SliderW*, void*);
+  inline void cb_Alienwah_rnd_i(RKR_Slider*, void*);
+  static void cb_Alienwah_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *Alienwah_lfotype;
 private:
   inline void cb_Alienwah_lfotype_i(RKR_Choice*, void*);
   static void cb_Alienwah_lfotype(RKR_Choice*, void*);
 public:
-  SliderW *Alienwah_phase;
+  RKR_Slider *Alienwah_phase;
 private:
-  inline void cb_Alienwah_phase_i(SliderW*, void*);
-  static void cb_Alienwah_phase(SliderW*, void*);
+  inline void cb_Alienwah_phase_i(RKR_Slider*, void*);
+  static void cb_Alienwah_phase(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_stdf;
+  RKR_Slider *Alienwah_stdf;
 private:
-  inline void cb_Alienwah_stdf_i(SliderW*, void*);
-  static void cb_Alienwah_stdf(SliderW*, void*);
+  inline void cb_Alienwah_stdf_i(RKR_Slider*, void*);
+  static void cb_Alienwah_stdf(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_dpth;
+  RKR_Slider *Alienwah_dpth;
 private:
-  inline void cb_Alienwah_dpth_i(SliderW*, void*);
-  static void cb_Alienwah_dpth(SliderW*, void*);
+  inline void cb_Alienwah_dpth_i(RKR_Slider*, void*);
+  static void cb_Alienwah_dpth(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_delay;
+  RKR_Slider *Alienwah_delay;
 private:
-  inline void cb_Alienwah_delay_i(SliderW*, void*);
-  static void cb_Alienwah_delay(SliderW*, void*);
+  inline void cb_Alienwah_delay_i(RKR_Slider*, void*);
+  static void cb_Alienwah_delay(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_fb;
+  RKR_Slider *Alienwah_fb;
 private:
-  inline void cb_Alienwah_fb_i(SliderW*, void*);
-  static void cb_Alienwah_fb(SliderW*, void*);
+  inline void cb_Alienwah_fb_i(RKR_Slider*, void*);
+  static void cb_Alienwah_fb(RKR_Slider*, void*);
 public:
-  SliderW *Alienwah_LR;
+  RKR_Slider *Alienwah_LR;
 private:
-  inline void cb_Alienwah_LR_i(SliderW*, void*);
-  static void cb_Alienwah_LR(SliderW*, void*);
+  inline void cb_Alienwah_LR_i(RKR_Slider*, void*);
+  static void cb_Alienwah_LR(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif

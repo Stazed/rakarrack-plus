@@ -38,7 +38,7 @@ Fl_Menu_Item CabinetGui::menu_Cabinet_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void CabinetGui::cb_Cabinet_output_i(SliderW* o, void*) {
+void CabinetGui::cb_Cabinet_output_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(405);
@@ -47,7 +47,7 @@ void CabinetGui::cb_Cabinet_output_i(SliderW* o, void*) {
 
 rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));
 }
-void CabinetGui::cb_Cabinet_output(SliderW* o, void* v) {
+void CabinetGui::cb_Cabinet_output(RKR_Slider* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_output_i(o,v);
 }
 CabinetGui::CabinetGui(int X, int Y, int W, int H, const char *L)
@@ -86,7 +86,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Cabinet_preset->when(FL_WHEN_RELEASE_ALWAYS);
   Cabinet_preset->menu(menu_Cabinet_preset);
 } // RKR_Choice* Cabinet_preset
-{ Cabinet_output = new SliderW(53, 92, 100, 10, "Gain");
+{ Cabinet_output = new RKR_Slider(53, 92, 100, 10, "Gain");
   Cabinet_output->type(5);
   Cabinet_output->box(FL_FLAT_BOX);
   Cabinet_output->color((Fl_Color)178);
@@ -102,7 +102,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Cabinet_output->callback((Fl_Callback*)cb_Cabinet_output);
   Cabinet_output->align(Fl_Align(FL_ALIGN_LEFT));
   Cabinet_output->when(FL_WHEN_CHANGED);
-} // SliderW* Cabinet_output
+} // RKR_Slider* Cabinet_output
 position(X, Y);
 end();
 }

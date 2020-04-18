@@ -39,7 +39,7 @@ Fl_Menu_Item ShelfGui::menu_shelf_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ShelfGui::cb_shelf_gain_i(SliderW* o, void*) {
+void ShelfGui::cb_shelf_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(292);
@@ -47,11 +47,11 @@ void ShelfGui::cb_shelf_gain_i(SliderW* o, void*) {
 }
 rkr->efx_ShelfBoost->changepar(0,(int)o->value());
 }
-void ShelfGui::cb_shelf_gain(SliderW* o, void* v) {
+void ShelfGui::cb_shelf_gain(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_gain_i(o,v);
 }
 
-void ShelfGui::cb_shelf_level_i(SliderW* o, void*) {
+void ShelfGui::cb_shelf_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(293);
@@ -59,11 +59,11 @@ void ShelfGui::cb_shelf_level_i(SliderW* o, void*) {
 }
 rkr->efx_ShelfBoost->changepar(4,(int)o->value());
 }
-void ShelfGui::cb_shelf_level(SliderW* o, void* v) {
+void ShelfGui::cb_shelf_level(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_level_i(o,v);
 }
 
-void ShelfGui::cb_shelf_freq1_i(SliderW* o, void*) {
+void ShelfGui::cb_shelf_freq1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(294);
@@ -71,11 +71,11 @@ void ShelfGui::cb_shelf_freq1_i(SliderW* o, void*) {
 }
 rkr->efx_ShelfBoost->changepar(2,(int)o->value());
 }
-void ShelfGui::cb_shelf_freq1(SliderW* o, void* v) {
+void ShelfGui::cb_shelf_freq1(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_freq1_i(o,v);
 }
 
-void ShelfGui::cb_shelf_q1_i(SliderW* o, void*) {
+void ShelfGui::cb_shelf_q1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(295);
@@ -83,7 +83,7 @@ void ShelfGui::cb_shelf_q1_i(SliderW* o, void*) {
 }
 rkr->efx_ShelfBoost->changepar(1,(int)o->value());
 }
-void ShelfGui::cb_shelf_q1(SliderW* o, void* v) {
+void ShelfGui::cb_shelf_q1(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_q1_i(o,v);
 }
 
@@ -129,7 +129,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shelf_preset->menu(menu_shelf_preset);
 } // RKR_Choice* shelf_preset
-{ shelf_gain = new SliderW(56, 26, 100, 10, "Gain");
+{ shelf_gain = new RKR_Slider(56, 26, 100, 10, "Gain");
   shelf_gain->type(5);
   shelf_gain->box(FL_FLAT_BOX);
   shelf_gain->color((Fl_Color)178);
@@ -144,8 +144,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_gain->callback((Fl_Callback*)cb_shelf_gain);
   shelf_gain->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_gain->when(FL_WHEN_CHANGED);
-} // SliderW* shelf_gain
-{ shelf_level = new SliderW(56, 86, 100, 10, "Level");
+} // RKR_Slider* shelf_gain
+{ shelf_level = new RKR_Slider(56, 86, 100, 10, "Level");
   shelf_level->type(5);
   shelf_level->box(FL_FLAT_BOX);
   shelf_level->color((Fl_Color)178);
@@ -162,8 +162,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_level->callback((Fl_Callback*)cb_shelf_level);
   shelf_level->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_level->when(FL_WHEN_CHANGED);
-} // SliderW* shelf_level
-{ shelf_freq1 = new SliderW(56, 106, 100, 10, "Tone");
+} // RKR_Slider* shelf_level
+{ shelf_freq1 = new RKR_Slider(56, 106, 100, 10, "Tone");
   shelf_freq1->type(5);
   shelf_freq1->box(FL_FLAT_BOX);
   shelf_freq1->color((Fl_Color)178);
@@ -180,8 +180,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_freq1->callback((Fl_Callback*)cb_shelf_freq1);
   shelf_freq1->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_freq1->when(FL_WHEN_CHANGED);
-} // SliderW* shelf_freq1
-{ shelf_q1 = new SliderW(56, 126, 100, 10, "Presence");
+} // RKR_Slider* shelf_freq1
+{ shelf_q1 = new RKR_Slider(56, 126, 100, 10, "Presence");
   shelf_q1->type(5);
   shelf_q1->box(FL_FLAT_BOX);
   shelf_q1->color((Fl_Color)178);
@@ -197,7 +197,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shelf_q1->callback((Fl_Callback*)cb_shelf_q1);
   shelf_q1->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_q1->when(FL_WHEN_CHANGED);
-} // SliderW* shelf_q1
+} // RKR_Slider* shelf_q1
 { shelf_mode = new RKR_Check_Button(13, 161, 54, 15, "Stereo");
   shelf_mode->box(FL_NO_BOX);
   shelf_mode->down_box(FL_BORDER_BOX);

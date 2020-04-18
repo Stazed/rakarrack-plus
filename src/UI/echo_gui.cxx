@@ -48,7 +48,7 @@ Fl_Menu_Item EchoGui::menu_echo_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void EchoGui::cb_echo_WD_i(SliderW* o, void*) {
+void EchoGui::cb_echo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(59);
@@ -56,11 +56,11 @@ void EchoGui::cb_echo_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(0,Dry_Wet((int)(o->value())));
 }
-void EchoGui::cb_echo_WD(SliderW* o, void* v) {
+void EchoGui::cb_echo_WD(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_WD_i(o,v);
 }
 
-void EchoGui::cb_echo_RV_i(SliderW* o, void*) {
+void EchoGui::cb_echo_RV_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(407);
@@ -68,11 +68,11 @@ void EchoGui::cb_echo_RV_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(7,(int)o->value());
 }
-void EchoGui::cb_echo_RV(SliderW* o, void* v) {
+void EchoGui::cb_echo_RV(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_RV_i(o,v);
 }
 
-void EchoGui::cb_echo_pan_i(SliderW* o, void*) {
+void EchoGui::cb_echo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(46);
@@ -80,11 +80,11 @@ void EchoGui::cb_echo_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(1,(int)(o->value()+64));
 }
-void EchoGui::cb_echo_pan(SliderW* o, void* v) {
+void EchoGui::cb_echo_pan(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_pan_i(o,v);
 }
 
-void EchoGui::cb_echo_delay_i(SliderW* o, void*) {
+void EchoGui::cb_echo_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(408);
@@ -92,11 +92,11 @@ void EchoGui::cb_echo_delay_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(2,(int)o->value());
 }
-void EchoGui::cb_echo_delay(SliderW* o, void* v) {
+void EchoGui::cb_echo_delay(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_delay_i(o,v);
 }
 
-void EchoGui::cb_echo_LRdl_i(SliderW* o, void*) {
+void EchoGui::cb_echo_LRdl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(409);
@@ -104,11 +104,11 @@ void EchoGui::cb_echo_LRdl_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(3,(int)o->value());
 }
-void EchoGui::cb_echo_LRdl(SliderW* o, void* v) {
+void EchoGui::cb_echo_LRdl(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_LRdl_i(o,v);
 }
 
-void EchoGui::cb_echo_LRc_i(SliderW* o, void*) {
+void EchoGui::cb_echo_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(97);
@@ -116,11 +116,11 @@ void EchoGui::cb_echo_LRc_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(4,(int)(o->value()));
 }
-void EchoGui::cb_echo_LRc(SliderW* o, void* v) {
+void EchoGui::cb_echo_LRc(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_LRc_i(o,v);
 }
 
-void EchoGui::cb_echo_fb_i(SliderW* o, void*) {
+void EchoGui::cb_echo_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(78);
@@ -128,7 +128,7 @@ void EchoGui::cb_echo_fb_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(5,(int)o->value());
 }
-void EchoGui::cb_echo_fb(SliderW* o, void* v) {
+void EchoGui::cb_echo_fb(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_fb_i(o,v);
 }
 
@@ -139,7 +139,7 @@ void EchoGui::cb_echo_direct(RKR_Check_Button* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_direct_i(o,v);
 }
 
-void EchoGui::cb_echo_damp_i(SliderW* o, void*) {
+void EchoGui::cb_echo_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(410);
@@ -147,7 +147,7 @@ void EchoGui::cb_echo_damp_i(SliderW* o, void*) {
 } 
 rkr->efx_Echo->changepar(6,(int)o->value());
 }
-void EchoGui::cb_echo_damp(SliderW* o, void* v) {
+void EchoGui::cb_echo_damp(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_damp_i(o,v);
 }
 EchoGui::EchoGui(int X, int Y, int W, int H, const char *L)
@@ -186,7 +186,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echo_preset->menu(menu_echo_preset);
 } // RKR_Choice* echo_preset
-{ echo_WD = new SliderW(56, 35, 100, 10, "Dry/Wet");
+{ echo_WD = new RKR_Slider(56, 35, 100, 10, "Dry/Wet");
   echo_WD->type(5);
   echo_WD->box(FL_FLAT_BOX);
   echo_WD->color((Fl_Color)178);
@@ -201,8 +201,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_WD->callback((Fl_Callback*)cb_echo_WD);
   echo_WD->align(Fl_Align(FL_ALIGN_LEFT));
   echo_WD->when(FL_WHEN_CHANGED);
-} // SliderW* echo_WD
-{ echo_RV = new SliderW(56, 58, 100, 10, "Reverse");
+} // RKR_Slider* echo_WD
+{ echo_RV = new RKR_Slider(56, 58, 100, 10, "Reverse");
   echo_RV->type(5);
   echo_RV->box(FL_FLAT_BOX);
   echo_RV->color((Fl_Color)178);
@@ -217,8 +217,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_RV->callback((Fl_Callback*)cb_echo_RV);
   echo_RV->align(Fl_Align(FL_ALIGN_LEFT));
   echo_RV->when(FL_WHEN_CHANGED);
-} // SliderW* echo_RV
-{ echo_pan = new SliderW(56, 73, 100, 10, "Pan");
+} // RKR_Slider* echo_RV
+{ echo_pan = new RKR_Slider(56, 73, 100, 10, "Pan");
   echo_pan->type(5);
   echo_pan->box(FL_FLAT_BOX);
   echo_pan->color((Fl_Color)178);
@@ -234,8 +234,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_pan->callback((Fl_Callback*)cb_echo_pan);
   echo_pan->align(Fl_Align(FL_ALIGN_LEFT));
   echo_pan->when(FL_WHEN_CHANGED);
-} // SliderW* echo_pan
-{ echo_delay = new SliderW(56, 88, 100, 10, "Delay");
+} // RKR_Slider* echo_pan
+{ echo_delay = new RKR_Slider(56, 88, 100, 10, "Delay");
   echo_delay->type(5);
   echo_delay->box(FL_FLAT_BOX);
   echo_delay->color((Fl_Color)178);
@@ -252,8 +252,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_delay->callback((Fl_Callback*)cb_echo_delay);
   echo_delay->align(Fl_Align(FL_ALIGN_LEFT));
   echo_delay->when(FL_WHEN_RELEASE);
-} // SliderW* echo_delay
-{ echo_LRdl = new SliderW(56, 103, 100, 10, "L/R Delay");
+} // RKR_Slider* echo_delay
+{ echo_LRdl = new RKR_Slider(56, 103, 100, 10, "L/R Delay");
   echo_LRdl->type(5);
   echo_LRdl->box(FL_FLAT_BOX);
   echo_LRdl->color((Fl_Color)178);
@@ -268,8 +268,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_LRdl->callback((Fl_Callback*)cb_echo_LRdl);
   echo_LRdl->align(Fl_Align(FL_ALIGN_LEFT));
   echo_LRdl->when(FL_WHEN_RELEASE);
-} // SliderW* echo_LRdl
-{ echo_LRc = new SliderW(56, 118, 100, 10, "L/R Cross");
+} // RKR_Slider* echo_LRdl
+{ echo_LRc = new RKR_Slider(56, 118, 100, 10, "L/R Cross");
   echo_LRc->type(5);
   echo_LRc->box(FL_FLAT_BOX);
   echo_LRc->color((Fl_Color)178);
@@ -284,8 +284,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_LRc->callback((Fl_Callback*)cb_echo_LRc);
   echo_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   echo_LRc->when(FL_WHEN_CHANGED);
-} // SliderW* echo_LRc
-{ echo_fb = new SliderW(56, 133, 100, 10, "Feedback");
+} // RKR_Slider* echo_LRc
+{ echo_fb = new RKR_Slider(56, 133, 100, 10, "Feedback");
   echo_fb->type(5);
   echo_fb->box(FL_FLAT_BOX);
   echo_fb->color((Fl_Color)178);
@@ -300,7 +300,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_fb->callback((Fl_Callback*)cb_echo_fb);
   echo_fb->align(Fl_Align(FL_ALIGN_LEFT));
   echo_fb->when(FL_WHEN_CHANGED);
-} // SliderW* echo_fb
+} // RKR_Slider* echo_fb
 { echo_direct = new RKR_Check_Button(51, 148, 53, 15, "Direct");
   echo_direct->box(FL_NO_BOX);
   echo_direct->down_box(FL_BORDER_BOX);
@@ -314,7 +314,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_direct->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   echo_direct->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* echo_direct
-{ echo_damp = new SliderW(56, 167, 100, 10, "Damp");
+{ echo_damp = new RKR_Slider(56, 167, 100, 10, "Damp");
   echo_damp->type(5);
   echo_damp->box(FL_FLAT_BOX);
   echo_damp->color((Fl_Color)178);
@@ -329,7 +329,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_damp->callback((Fl_Callback*)cb_echo_damp);
   echo_damp->align(Fl_Align(FL_ALIGN_LEFT));
   echo_damp->when(FL_WHEN_CHANGED);
-} // SliderW* echo_damp
+} // RKR_Slider* echo_damp
 position(X, Y);
 end();
 }

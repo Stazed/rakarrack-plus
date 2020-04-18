@@ -11,7 +11,7 @@ decl {\#include "../global.h"} {public global
 decl {\#include "RKR_Entry_Input.h"} {public global
 }
 
-decl {\#include "sliderW.h"} {public global
+decl {\#include "RKR_Slider.h"} {public global
 }
 
 decl {\#include "newvum.h"} {public global
@@ -1084,7 +1084,7 @@ else rkr->booster=1.0f;}
 } 
 rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
           xywh {15 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 100 maximum 0 step 1 value 100 textcolor 7
-          class SliderW
+          class RKR_Slider
         }
         Fl_Value_Slider Nivel_Entrada {
           label Input
@@ -1096,7 +1096,7 @@ rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
 rkr->Input_Gain=(float)((o->value()+50)/100.0);
 rkr->calculavol(1);}
           xywh {57 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
-          class SliderW
+          class RKR_Slider
         }
         Fl_Value_Slider Nivel_Salida {
           label Output
@@ -1109,7 +1109,7 @@ rkr->calculavol(1);}
 rkr->Master_Volume=(float)((o->value()+50)/100.0);
 rkr->calculavol(2);}
           tooltip {Shortcut 'F2' decrease volume, 'F3' Increase volume} xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
-          class SliderW
+          class RKR_Slider
         }
         Fl_Slider input_vul {
           xywh {84 50 8 122} type {Vert Fill} box NO_BOX color 178 selection_color 90 align 80 when 0 minimum 15 maximum -48 step 1 value -48
@@ -1210,7 +1210,7 @@ switch(rkr->M_Metro_Bar)
           xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 maximum 100 step 1 value 50 textcolor 7
           code0 {o->m_start_label_offset = -2; // 10 - 8}
           code1 {o->shut_off_pixel_adjustment();}
-          class SliderW
+          class RKR_Slider
         }
         Fl_Choice MetroSound {
           label S
@@ -1245,7 +1245,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 20 maximum 340 step 1 value 100 textcolor 7
           code0 {o->m_start_label_offset = -2; // 10 - 8}
           code1 {o->shut_off_pixel_adjustment();}
-          class SliderW
+          class RKR_Slider
         }
         Fl_Box Metro_Led {
           xywh {568 90 10 10} box ROUNDED_BOX color 88 labelsize 18

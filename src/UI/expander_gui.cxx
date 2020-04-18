@@ -39,7 +39,7 @@ Fl_Menu_Item ExpanderGui::menu_expander_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ExpanderGui::cb_expander_ATime_i(SliderW* o, void*) {
+void ExpanderGui::cb_expander_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(220);
@@ -47,11 +47,11 @@ void ExpanderGui::cb_expander_ATime_i(SliderW* o, void*) {
 } 
 rkr->efx_Expander->changepar(3,(int)o->value());
 }
-void ExpanderGui::cb_expander_ATime(SliderW* o, void* v) {
+void ExpanderGui::cb_expander_ATime(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_ATime_i(o,v);
 }
 
-void ExpanderGui::cb_expander_RTime_i(SliderW* o, void*) {
+void ExpanderGui::cb_expander_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(221);
@@ -59,11 +59,11 @@ void ExpanderGui::cb_expander_RTime_i(SliderW* o, void*) {
 } 
 rkr->efx_Expander->changepar(4,(int) o->value());
 }
-void ExpanderGui::cb_expander_RTime(SliderW* o, void* v) {
+void ExpanderGui::cb_expander_RTime(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_RTime_i(o,v);
 }
 
-void ExpanderGui::cb_expander_shape_i(SliderW* o, void*) {
+void ExpanderGui::cb_expander_shape_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(222);
@@ -71,11 +71,11 @@ void ExpanderGui::cb_expander_shape_i(SliderW* o, void*) {
 } 
 rkr->efx_Expander->changepar(2, (int) o->value());
 }
-void ExpanderGui::cb_expander_shape(SliderW* o, void* v) {
+void ExpanderGui::cb_expander_shape(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_shape_i(o,v);
 }
 
-void ExpanderGui::cb_expander_threshold_i(SliderW* o, void*) {
+void ExpanderGui::cb_expander_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(223);
@@ -83,11 +83,11 @@ void ExpanderGui::cb_expander_threshold_i(SliderW* o, void*) {
 } 
 rkr->efx_Expander->changepar(1, (int)o->value());
 }
-void ExpanderGui::cb_expander_threshold(SliderW* o, void* v) {
+void ExpanderGui::cb_expander_threshold(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_threshold_i(o,v);
 }
 
-void ExpanderGui::cb_expander_level_i(SliderW* o, void*) {
+void ExpanderGui::cb_expander_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(224);
@@ -95,11 +95,11 @@ void ExpanderGui::cb_expander_level_i(SliderW* o, void*) {
 } 
 rkr->efx_Expander->changepar(7, (int) o->value());
 }
-void ExpanderGui::cb_expander_level(SliderW* o, void* v) {
+void ExpanderGui::cb_expander_level(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_level_i(o,v);
 }
 
-void ExpanderGui::cb_expander_LPF_i(SliderW* o, void*) {
+void ExpanderGui::cb_expander_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(225);
@@ -107,11 +107,11 @@ void ExpanderGui::cb_expander_LPF_i(SliderW* o, void*) {
 } 
 rkr->efx_Expander->changepar(5, (int)o->value());
 }
-void ExpanderGui::cb_expander_LPF(SliderW* o, void* v) {
+void ExpanderGui::cb_expander_LPF(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_LPF_i(o,v);
 }
 
-void ExpanderGui::cb_expander_HPF_i(SliderW* o, void*) {
+void ExpanderGui::cb_expander_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(226);
@@ -119,7 +119,7 @@ void ExpanderGui::cb_expander_HPF_i(SliderW* o, void*) {
 } 
 rkr->efx_Expander->changepar(6, (int)o->value());
 }
-void ExpanderGui::cb_expander_HPF(SliderW* o, void* v) {
+void ExpanderGui::cb_expander_HPF(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_HPF_i(o,v);
 }
 ExpanderGui::ExpanderGui(int X, int Y, int W, int H, const char *L)
@@ -158,7 +158,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
   expander_preset->menu(menu_expander_preset);
 } // RKR_Choice* expander_preset
-{ expander_ATime = new SliderW(56, 39, 100, 10, "A. Time");
+{ expander_ATime = new RKR_Slider(56, 39, 100, 10, "A. Time");
   expander_ATime->type(5);
   expander_ATime->box(FL_FLAT_BOX);
   expander_ATime->color((Fl_Color)178);
@@ -175,8 +175,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_ATime->callback((Fl_Callback*)cb_expander_ATime);
   expander_ATime->align(Fl_Align(FL_ALIGN_LEFT));
   expander_ATime->when(FL_WHEN_CHANGED);
-} // SliderW* expander_ATime
-{ expander_RTime = new SliderW(56, 61, 100, 10, "R. Time");
+} // RKR_Slider* expander_ATime
+{ expander_RTime = new RKR_Slider(56, 61, 100, 10, "R. Time");
   expander_RTime->type(5);
   expander_RTime->box(FL_FLAT_BOX);
   expander_RTime->color((Fl_Color)178);
@@ -193,8 +193,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_RTime->callback((Fl_Callback*)cb_expander_RTime);
   expander_RTime->align(Fl_Align(FL_ALIGN_LEFT));
   expander_RTime->when(FL_WHEN_CHANGED);
-} // SliderW* expander_RTime
-{ expander_shape = new SliderW(56, 83, 100, 10, "Shape");
+} // RKR_Slider* expander_RTime
+{ expander_shape = new RKR_Slider(56, 83, 100, 10, "Shape");
   expander_shape->type(5);
   expander_shape->box(FL_FLAT_BOX);
   expander_shape->color((Fl_Color)178);
@@ -211,8 +211,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_shape->callback((Fl_Callback*)cb_expander_shape);
   expander_shape->align(Fl_Align(FL_ALIGN_LEFT));
   expander_shape->when(FL_WHEN_CHANGED);
-} // SliderW* expander_shape
-{ expander_threshold = new SliderW(56, 105, 100, 10, "Threshold");
+} // RKR_Slider* expander_shape
+{ expander_threshold = new RKR_Slider(56, 105, 100, 10, "Threshold");
   expander_threshold->type(5);
   expander_threshold->box(FL_FLAT_BOX);
   expander_threshold->color((Fl_Color)178);
@@ -228,8 +228,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_threshold->callback((Fl_Callback*)cb_expander_threshold);
   expander_threshold->align(Fl_Align(FL_ALIGN_LEFT));
   expander_threshold->when(FL_WHEN_CHANGED);
-} // SliderW* expander_threshold
-{ expander_level = new SliderW(56, 125, 100, 10, "Out Gain");
+} // RKR_Slider* expander_threshold
+{ expander_level = new RKR_Slider(56, 125, 100, 10, "Out Gain");
   expander_level->type(5);
   expander_level->box(FL_FLAT_BOX);
   expander_level->color((Fl_Color)178);
@@ -246,8 +246,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_level->callback((Fl_Callback*)cb_expander_level);
   expander_level->align(Fl_Align(FL_ALIGN_LEFT));
   expander_level->when(FL_WHEN_CHANGED);
-} // SliderW* expander_level
-{ expander_LPF = new SliderW(56, 146, 100, 10, "LPF");
+} // RKR_Slider* expander_level
+{ expander_LPF = new RKR_Slider(56, 146, 100, 10, "LPF");
   expander_LPF->type(5);
   expander_LPF->box(FL_FLAT_BOX);
   expander_LPF->color((Fl_Color)178);
@@ -264,8 +264,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_LPF->callback((Fl_Callback*)cb_expander_LPF);
   expander_LPF->align(Fl_Align(FL_ALIGN_LEFT));
   expander_LPF->when(FL_WHEN_CHANGED);
-} // SliderW* expander_LPF
-{ expander_HPF = new SliderW(56, 162, 100, 10, "HPF");
+} // RKR_Slider* expander_LPF
+{ expander_HPF = new RKR_Slider(56, 162, 100, 10, "HPF");
   expander_HPF->type(5);
   expander_HPF->box(FL_FLAT_BOX);
   expander_HPF->color((Fl_Color)178);
@@ -282,7 +282,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_HPF->callback((Fl_Callback*)cb_expander_HPF);
   expander_HPF->align(Fl_Align(FL_ALIGN_LEFT));
   expander_HPF->when(FL_WHEN_CHANGED);
-} // SliderW* expander_HPF
+} // RKR_Slider* expander_HPF
 position(X, Y);
 end();
 }

@@ -53,7 +53,7 @@ Fl_Menu_Item MbdistGui::menu_mbdist_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void MbdistGui::cb_mbdist_WD_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(202);
@@ -61,11 +61,11 @@ void MbdistGui::cb_mbdist_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(0,Dry_Wet((int)(o->value())));
 }
-void MbdistGui::cb_mbdist_WD(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_WD(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_WD_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_LRc_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(203);
@@ -73,11 +73,11 @@ void MbdistGui::cb_mbdist_LRc_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(2,(int)(o->value()));
 }
-void MbdistGui::cb_mbdist_LRc(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_LRc(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_LRc_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_drive_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(204);
@@ -85,11 +85,11 @@ void MbdistGui::cb_mbdist_drive_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(3,(int)o->value());
 }
-void MbdistGui::cb_mbdist_drive(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_drive(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_drive_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_level_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(205);
@@ -97,11 +97,11 @@ void MbdistGui::cb_mbdist_level_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(4,(int)o->value());
 }
-void MbdistGui::cb_mbdist_level(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_level(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_level_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_volL_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_volL_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(206);
@@ -109,11 +109,11 @@ void MbdistGui::cb_mbdist_volL_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(8,(int)o->value());
 }
-void MbdistGui::cb_mbdist_volL(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_volL(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_volL_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_volM_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_volM_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(207);
@@ -121,11 +121,11 @@ void MbdistGui::cb_mbdist_volM_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(9,(int)o->value());
 }
-void MbdistGui::cb_mbdist_volM(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_volM(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_volM_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_volH_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_volH_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(208);
@@ -133,11 +133,11 @@ void MbdistGui::cb_mbdist_volH_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(10,(int)o->value());
 }
-void MbdistGui::cb_mbdist_volH(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_volH(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_volH_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_cross1_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_cross1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(209);
@@ -145,11 +145,11 @@ void MbdistGui::cb_mbdist_cross1_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(12,(int)o->value());
 }
-void MbdistGui::cb_mbdist_cross1(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_cross1(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_cross1_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_cross2_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_cross2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(210);
@@ -157,7 +157,7 @@ void MbdistGui::cb_mbdist_cross2_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(13,(int)o->value());
 }
-void MbdistGui::cb_mbdist_cross2(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_cross2(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_cross2_i(o,v);
 }
 
@@ -182,7 +182,7 @@ void MbdistGui::cb_mbdist_tipoH(RKR_Choice* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_tipoH_i(o,v);
 }
 
-void MbdistGui::cb_mbdist_pan_i(SliderW* o, void*) {
+void MbdistGui::cb_mbdist_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(211);
@@ -190,7 +190,7 @@ void MbdistGui::cb_mbdist_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_MBDist->changepar(1,(int)(o->value()+64));
 }
-void MbdistGui::cb_mbdist_pan(SliderW* o, void* v) {
+void MbdistGui::cb_mbdist_pan(RKR_Slider* o, void* v) {
   ((MbdistGui*)(o->parent()))->cb_mbdist_pan_i(o,v);
 }
 
@@ -243,7 +243,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_preset->when(FL_WHEN_RELEASE_ALWAYS);
   mbdist_preset->menu(menu_mbdist_preset);
 } // RKR_Choice* mbdist_preset
-{ mbdist_WD = new SliderW(56, 26, 100, 10, "Dry/Wet");
+{ mbdist_WD = new RKR_Slider(56, 26, 100, 10, "Dry/Wet");
   mbdist_WD->type(5);
   mbdist_WD->box(FL_FLAT_BOX);
   mbdist_WD->color((Fl_Color)178);
@@ -258,8 +258,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_WD->callback((Fl_Callback*)cb_mbdist_WD);
   mbdist_WD->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_WD->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_WD
-{ mbdist_LRc = new SliderW(56, 38, 100, 10, "L/R Cross");
+} // RKR_Slider* mbdist_WD
+{ mbdist_LRc = new RKR_Slider(56, 38, 100, 10, "L/R Cross");
   mbdist_LRc->type(5);
   mbdist_LRc->box(FL_FLAT_BOX);
   mbdist_LRc->color((Fl_Color)178);
@@ -274,8 +274,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_LRc->callback((Fl_Callback*)cb_mbdist_LRc);
   mbdist_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_LRc->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_LRc
-{ mbdist_drive = new SliderW(56, 50, 100, 10, "Drive");
+} // RKR_Slider* mbdist_LRc
+{ mbdist_drive = new RKR_Slider(56, 50, 100, 10, "Drive");
   mbdist_drive->type(5);
   mbdist_drive->box(FL_FLAT_BOX);
   mbdist_drive->color((Fl_Color)178);
@@ -290,8 +290,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_drive->callback((Fl_Callback*)cb_mbdist_drive);
   mbdist_drive->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_drive->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_drive
-{ mbdist_level = new SliderW(56, 62, 100, 10, "Level");
+} // RKR_Slider* mbdist_drive
+{ mbdist_level = new RKR_Slider(56, 62, 100, 10, "Level");
   mbdist_level->type(5);
   mbdist_level->box(FL_FLAT_BOX);
   mbdist_level->color((Fl_Color)178);
@@ -306,8 +306,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_level->callback((Fl_Callback*)cb_mbdist_level);
   mbdist_level->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_level->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_level
-{ mbdist_volL = new SliderW(56, 76, 100, 10, "L. Gain");
+} // RKR_Slider* mbdist_level
+{ mbdist_volL = new RKR_Slider(56, 76, 100, 10, "L. Gain");
   mbdist_volL->tooltip("Low Gain");
   mbdist_volL->type(5);
   mbdist_volL->box(FL_FLAT_BOX);
@@ -323,8 +323,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_volL->callback((Fl_Callback*)cb_mbdist_volL);
   mbdist_volL->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_volL->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_volL
-{ mbdist_volM = new SliderW(56, 89, 100, 10, "M. Gain");
+} // RKR_Slider* mbdist_volL
+{ mbdist_volM = new RKR_Slider(56, 89, 100, 10, "M. Gain");
   mbdist_volM->tooltip("Mid Gain");
   mbdist_volM->type(5);
   mbdist_volM->box(FL_FLAT_BOX);
@@ -340,8 +340,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_volM->callback((Fl_Callback*)cb_mbdist_volM);
   mbdist_volM->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_volM->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_volM
-{ mbdist_volH = new SliderW(56, 102, 100, 10, "H. Gain");
+} // RKR_Slider* mbdist_volM
+{ mbdist_volH = new RKR_Slider(56, 102, 100, 10, "H. Gain");
   mbdist_volH->tooltip("High Gain");
   mbdist_volH->type(5);
   mbdist_volH->box(FL_FLAT_BOX);
@@ -357,8 +357,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_volH->callback((Fl_Callback*)cb_mbdist_volH);
   mbdist_volH->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_volH->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_volH
-{ mbdist_cross1 = new SliderW(56, 115, 100, 10, "Cross 1");
+} // RKR_Slider* mbdist_volH
+{ mbdist_cross1 = new RKR_Slider(56, 115, 100, 10, "Cross 1");
   mbdist_cross1->type(5);
   mbdist_cross1->box(FL_FLAT_BOX);
   mbdist_cross1->color((Fl_Color)178);
@@ -374,8 +374,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_cross1->callback((Fl_Callback*)cb_mbdist_cross1);
   mbdist_cross1->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_cross1->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_cross1
-{ mbdist_cross2 = new SliderW(56, 127, 100, 10, "Cross 2");
+} // RKR_Slider* mbdist_cross1
+{ mbdist_cross2 = new RKR_Slider(56, 127, 100, 10, "Cross 2");
   mbdist_cross2->type(5);
   mbdist_cross2->box(FL_FLAT_BOX);
   mbdist_cross2->color((Fl_Color)178);
@@ -391,7 +391,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_cross2->callback((Fl_Callback*)cb_mbdist_cross2);
   mbdist_cross2->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_cross2->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_cross2
+} // RKR_Slider* mbdist_cross2
 { RKR_Choice* o = mbdist_tipoL = new RKR_Choice(3, 139, 50, 16);
   mbdist_tipoL->box(FL_FLAT_BOX);
   mbdist_tipoL->down_box(FL_BORDER_BOX);
@@ -440,7 +440,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_tipoH->when(FL_WHEN_RELEASE);
   o->menu(m_dist_menu->get_distortion_type());
 } // RKR_Choice* mbdist_tipoH
-{ mbdist_pan = new SliderW(56, 158, 100, 10, "Pan");
+{ mbdist_pan = new RKR_Slider(56, 158, 100, 10, "Pan");
   mbdist_pan->type(5);
   mbdist_pan->box(FL_FLAT_BOX);
   mbdist_pan->color((Fl_Color)178);
@@ -456,7 +456,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mbdist_pan->callback((Fl_Callback*)cb_mbdist_pan);
   mbdist_pan->align(Fl_Align(FL_ALIGN_LEFT));
   mbdist_pan->when(FL_WHEN_CHANGED);
-} // SliderW* mbdist_pan
+} // RKR_Slider* mbdist_pan
 { mbdist_st = new RKR_Check_Button(32, 168, 54, 15, "Stereo");
   mbdist_st->box(FL_NO_BOX);
   mbdist_st->down_box(FL_BORDER_BOX);

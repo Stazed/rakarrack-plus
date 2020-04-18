@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,15 +25,15 @@ private:
   static void cb_coil_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_coil_preset[];
 public:
-  SliderW *coil_WD;
+  RKR_Slider *coil_WD;
 private:
-  inline void cb_coil_WD_i(SliderW*, void*);
-  static void cb_coil_WD(SliderW*, void*);
+  inline void cb_coil_WD_i(RKR_Slider*, void*);
+  static void cb_coil_WD(RKR_Slider*, void*);
 public:
-  SliderW *coil_tone;
+  RKR_Slider *coil_tone;
 private:
-  inline void cb_coil_tone_i(SliderW*, void*);
-  static void cb_coil_tone(SliderW*, void*);
+  inline void cb_coil_tone_i(RKR_Slider*, void*);
+  static void cb_coil_tone(RKR_Slider*, void*);
 public:
   RKR_Choice *coil_origin;
 private:
@@ -41,30 +41,30 @@ private:
   static void cb_coil_origin(RKR_Choice*, void*);
   static Fl_Menu_Item menu_coil_origin[];
 public:
-  SliderW *coil_freq1;
+  RKR_Slider *coil_freq1;
 private:
-  inline void cb_coil_freq1_i(SliderW*, void*);
-  static void cb_coil_freq1(SliderW*, void*);
+  inline void cb_coil_freq1_i(RKR_Slider*, void*);
+  static void cb_coil_freq1(RKR_Slider*, void*);
 public:
-  SliderW *coil_q1;
+  RKR_Slider *coil_q1;
 private:
-  inline void cb_coil_q1_i(SliderW*, void*);
-  static void cb_coil_q1(SliderW*, void*);
+  inline void cb_coil_q1_i(RKR_Slider*, void*);
+  static void cb_coil_q1(RKR_Slider*, void*);
 public:
   RKR_Choice *coil_destiny;
 private:
   inline void cb_coil_destiny_i(RKR_Choice*, void*);
   static void cb_coil_destiny(RKR_Choice*, void*);
 public:
-  SliderW *coil_freq2;
+  RKR_Slider *coil_freq2;
 private:
-  inline void cb_coil_freq2_i(SliderW*, void*);
-  static void cb_coil_freq2(SliderW*, void*);
+  inline void cb_coil_freq2_i(RKR_Slider*, void*);
+  static void cb_coil_freq2(RKR_Slider*, void*);
 public:
-  SliderW *coil_q2;
+  RKR_Slider *coil_q2;
 private:
-  inline void cb_coil_q2_i(SliderW*, void*);
-  static void cb_coil_q2(SliderW*, void*);
+  inline void cb_coil_q2_i(RKR_Slider*, void*);
+  static void cb_coil_q2(RKR_Slider*, void*);
 public:
   RKR_Check_Button *coil_mode;
 private:

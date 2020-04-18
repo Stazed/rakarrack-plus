@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,69 +24,69 @@ private:
   static void cb_cband_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_cband_preset[];
 public:
-  SliderW *cband_WD;
+  RKR_Slider *cband_WD;
 private:
-  inline void cb_cband_WD_i(SliderW*, void*);
-  static void cb_cband_WD(SliderW*, void*);
+  inline void cb_cband_WD_i(RKR_Slider*, void*);
+  static void cb_cband_WD(RKR_Slider*, void*);
 public:
-  SliderW *cband_gain;
+  RKR_Slider *cband_gain;
 private:
-  inline void cb_cband_gain_i(SliderW*, void*);
-  static void cb_cband_gain(SliderW*, void*);
+  inline void cb_cband_gain_i(RKR_Slider*, void*);
+  static void cb_cband_gain(RKR_Slider*, void*);
 public:
-  SliderW *cband_Lratio;
+  RKR_Slider *cband_Lratio;
 private:
-  inline void cb_cband_Lratio_i(SliderW*, void*);
-  static void cb_cband_Lratio(SliderW*, void*);
+  inline void cb_cband_Lratio_i(RKR_Slider*, void*);
+  static void cb_cband_Lratio(RKR_Slider*, void*);
 public:
-  SliderW *cband_MLratio;
+  RKR_Slider *cband_MLratio;
 private:
-  inline void cb_cband_MLratio_i(SliderW*, void*);
-  static void cb_cband_MLratio(SliderW*, void*);
+  inline void cb_cband_MLratio_i(RKR_Slider*, void*);
+  static void cb_cband_MLratio(RKR_Slider*, void*);
 public:
-  SliderW *cband_MHratio;
+  RKR_Slider *cband_MHratio;
 private:
-  inline void cb_cband_MHratio_i(SliderW*, void*);
-  static void cb_cband_MHratio(SliderW*, void*);
+  inline void cb_cband_MHratio_i(RKR_Slider*, void*);
+  static void cb_cband_MHratio(RKR_Slider*, void*);
 public:
-  SliderW *cband_Hratio;
+  RKR_Slider *cband_Hratio;
 private:
-  inline void cb_cband_Hratio_i(SliderW*, void*);
-  static void cb_cband_Hratio(SliderW*, void*);
+  inline void cb_cband_Hratio_i(RKR_Slider*, void*);
+  static void cb_cband_Hratio(RKR_Slider*, void*);
 public:
-  SliderW *cband_Lthres;
+  RKR_Slider *cband_Lthres;
 private:
-  inline void cb_cband_Lthres_i(SliderW*, void*);
-  static void cb_cband_Lthres(SliderW*, void*);
+  inline void cb_cband_Lthres_i(RKR_Slider*, void*);
+  static void cb_cband_Lthres(RKR_Slider*, void*);
 public:
-  SliderW *cband_MLthres;
+  RKR_Slider *cband_MLthres;
 private:
-  inline void cb_cband_MLthres_i(SliderW*, void*);
-  static void cb_cband_MLthres(SliderW*, void*);
+  inline void cb_cband_MLthres_i(RKR_Slider*, void*);
+  static void cb_cband_MLthres(RKR_Slider*, void*);
 public:
-  SliderW *cband_MHthres;
+  RKR_Slider *cband_MHthres;
 private:
-  inline void cb_cband_MHthres_i(SliderW*, void*);
-  static void cb_cband_MHthres(SliderW*, void*);
+  inline void cb_cband_MHthres_i(RKR_Slider*, void*);
+  static void cb_cband_MHthres(RKR_Slider*, void*);
 public:
-  SliderW *cband_Hthres;
+  RKR_Slider *cband_Hthres;
 private:
-  inline void cb_cband_Hthres_i(SliderW*, void*);
-  static void cb_cband_Hthres(SliderW*, void*);
+  inline void cb_cband_Hthres_i(RKR_Slider*, void*);
+  static void cb_cband_Hthres(RKR_Slider*, void*);
 public:
-  SliderW *cband_cross1;
+  RKR_Slider *cband_cross1;
 private:
-  inline void cb_cband_cross1_i(SliderW*, void*);
-  static void cb_cband_cross1(SliderW*, void*);
+  inline void cb_cband_cross1_i(RKR_Slider*, void*);
+  static void cb_cband_cross1(RKR_Slider*, void*);
 public:
-  SliderW *cband_cross2;
+  RKR_Slider *cband_cross2;
 private:
-  inline void cb_cband_cross2_i(SliderW*, void*);
-  static void cb_cband_cross2(SliderW*, void*);
+  inline void cb_cband_cross2_i(RKR_Slider*, void*);
+  static void cb_cband_cross2(RKR_Slider*, void*);
 public:
-  SliderW *cband_cross3;
+  RKR_Slider *cband_cross3;
 private:
-  inline void cb_cband_cross3_i(SliderW*, void*);
-  static void cb_cband_cross3(SliderW*, void*);
+  inline void cb_cband_cross3_i(RKR_Slider*, void*);
+  static void cb_cband_cross3(RKR_Slider*, void*);
 };
 #endif

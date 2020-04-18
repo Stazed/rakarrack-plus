@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,55 +26,55 @@ private:
   static void cb_vibe_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_vibe_preset[];
 public:
-  SliderW *vibe_WD;
+  RKR_Slider *vibe_WD;
 private:
-  inline void cb_vibe_WD_i(SliderW*, void*);
-  static void cb_vibe_WD(SliderW*, void*);
+  inline void cb_vibe_WD_i(RKR_Slider*, void*);
+  static void cb_vibe_WD(RKR_Slider*, void*);
 public:
-  SliderW *vibe_width;
+  RKR_Slider *vibe_width;
 private:
-  inline void cb_vibe_width_i(SliderW*, void*);
-  static void cb_vibe_width(SliderW*, void*);
+  inline void cb_vibe_width_i(RKR_Slider*, void*);
+  static void cb_vibe_width(RKR_Slider*, void*);
 public:
-  SliderW *vibe_dpth;
+  RKR_Slider *vibe_dpth;
 private:
-  inline void cb_vibe_dpth_i(SliderW*, void*);
-  static void cb_vibe_dpth(SliderW*, void*);
+  inline void cb_vibe_dpth_i(RKR_Slider*, void*);
+  static void cb_vibe_dpth(RKR_Slider*, void*);
 public:
-  SliderW *vibe_freq;
+  RKR_Slider *vibe_freq;
 private:
-  inline void cb_vibe_freq_i(SliderW*, void*);
-  static void cb_vibe_freq(SliderW*, void*);
+  inline void cb_vibe_freq_i(RKR_Slider*, void*);
+  static void cb_vibe_freq(RKR_Slider*, void*);
 public:
-  SliderW *vibe_rnd;
+  RKR_Slider *vibe_rnd;
 private:
-  inline void cb_vibe_rnd_i(SliderW*, void*);
-  static void cb_vibe_rnd(SliderW*, void*);
+  inline void cb_vibe_rnd_i(RKR_Slider*, void*);
+  static void cb_vibe_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *vibe_lfotype;
 private:
   inline void cb_vibe_lfotype_i(RKR_Choice*, void*);
   static void cb_vibe_lfotype(RKR_Choice*, void*);
 public:
-  SliderW *vibe_stdf;
+  RKR_Slider *vibe_stdf;
 private:
-  inline void cb_vibe_stdf_i(SliderW*, void*);
-  static void cb_vibe_stdf(SliderW*, void*);
+  inline void cb_vibe_stdf_i(RKR_Slider*, void*);
+  static void cb_vibe_stdf(RKR_Slider*, void*);
 public:
-  SliderW *vibe_fb;
+  RKR_Slider *vibe_fb;
 private:
-  inline void cb_vibe_fb_i(SliderW*, void*);
-  static void cb_vibe_fb(SliderW*, void*);
+  inline void cb_vibe_fb_i(RKR_Slider*, void*);
+  static void cb_vibe_fb(RKR_Slider*, void*);
 public:
-  SliderW *vibe_LR;
+  RKR_Slider *vibe_LR;
 private:
-  inline void cb_vibe_LR_i(SliderW*, void*);
-  static void cb_vibe_LR(SliderW*, void*);
+  inline void cb_vibe_LR_i(RKR_Slider*, void*);
+  static void cb_vibe_LR(RKR_Slider*, void*);
 public:
-  SliderW *vibe_pan;
+  RKR_Slider *vibe_pan;
 private:
-  inline void cb_vibe_pan_i(SliderW*, void*);
-  static void cb_vibe_pan(SliderW*, void*);
+  inline void cb_vibe_pan_i(RKR_Slider*, void*);
+  static void cb_vibe_pan(RKR_Slider*, void*);
 public:
   RKR_Check_Button *vibe_stereo;
 private:

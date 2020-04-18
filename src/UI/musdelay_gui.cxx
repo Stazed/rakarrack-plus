@@ -47,7 +47,7 @@ Fl_Menu_Item MusdelayGui::menu_musdelay_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void MusdelayGui::cb_musdelay_WD_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(56);
@@ -55,11 +55,11 @@ void MusdelayGui::cb_musdelay_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(0,Dry_Wet((int)o->value()));
 }
-void MusdelayGui::cb_musdelay_WD(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_WD(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_WD_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_LRc_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(98);
@@ -67,11 +67,11 @@ void MusdelayGui::cb_musdelay_LRc_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(4,(int)o->value());
 }
-void MusdelayGui::cb_musdelay_LRc(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_LRc(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_LRc_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_pan1_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_pan1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(62);
@@ -79,11 +79,11 @@ void MusdelayGui::cb_musdelay_pan1_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(1,(int)o->value()+64);
 }
-void MusdelayGui::cb_musdelay_pan1(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_pan1(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_pan1_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_pan2_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_pan2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(65);
@@ -91,7 +91,7 @@ void MusdelayGui::cb_musdelay_pan2_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(7,(int)o->value()+64);
 }
-void MusdelayGui::cb_musdelay_pan2(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_pan2(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_pan2_i(o,v);
 }
 
@@ -143,7 +143,7 @@ void MusdelayGui::cb_musdelay_delay2(RKR_Choice* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_delay2_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_tempo_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(424);
@@ -153,11 +153,11 @@ rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(10,(int)o->value());
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;
 }
-void MusdelayGui::cb_musdelay_tempo(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_tempo(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_tempo_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_gain1_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_gain1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(24);
@@ -165,11 +165,11 @@ void MusdelayGui::cb_musdelay_gain1_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(11,(int)o->value());
 }
-void MusdelayGui::cb_musdelay_gain1(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_gain1(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_gain1_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_gain2_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_gain2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(25);
@@ -177,11 +177,11 @@ void MusdelayGui::cb_musdelay_gain2_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(12,(int)o->value());
 }
-void MusdelayGui::cb_musdelay_gain2(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_gain2(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_gain2_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_fb1_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_fb1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(83);
@@ -189,11 +189,11 @@ void MusdelayGui::cb_musdelay_fb1_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(5,(int)o->value());
 }
-void MusdelayGui::cb_musdelay_fb1(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_fb1(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_fb1_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_fb2_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_fb2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(84);
@@ -201,11 +201,11 @@ void MusdelayGui::cb_musdelay_fb2_i(SliderW* o, void*) {
 } 
 rkr->efx_MusDelay->changepar(9,(int)o->value());
 }
-void MusdelayGui::cb_musdelay_fb2(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_fb2(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_fb2_i(o,v);
 }
 
-void MusdelayGui::cb_musdelay_damp_i(SliderW* o, void*) {
+void MusdelayGui::cb_musdelay_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(425);
@@ -213,7 +213,7 @@ void MusdelayGui::cb_musdelay_damp_i(SliderW* o, void*) {
 }
 rkr->efx_MusDelay->changepar(6,(int)o->value());
 }
-void MusdelayGui::cb_musdelay_damp(SliderW* o, void* v) {
+void MusdelayGui::cb_musdelay_damp(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_damp_i(o,v);
 }
 MusdelayGui::MusdelayGui(int X, int Y, int W, int H, const char *L)
@@ -252,7 +252,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_preset->when(FL_WHEN_RELEASE_ALWAYS);
   musdelay_preset->menu(menu_musdelay_preset);
 } // RKR_Choice* musdelay_preset
-{ musdelay_WD = new SliderW(56, 26, 100, 10, "Dry/Wet");
+{ musdelay_WD = new RKR_Slider(56, 26, 100, 10, "Dry/Wet");
   musdelay_WD->type(5);
   musdelay_WD->box(FL_FLAT_BOX);
   musdelay_WD->color((Fl_Color)178);
@@ -267,8 +267,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_WD->callback((Fl_Callback*)cb_musdelay_WD);
   musdelay_WD->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_WD->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_WD
-{ musdelay_LRc = new SliderW(56, 38, 100, 10, "L/R Cross");
+} // RKR_Slider* musdelay_WD
+{ musdelay_LRc = new RKR_Slider(56, 38, 100, 10, "L/R Cross");
   musdelay_LRc->type(5);
   musdelay_LRc->box(FL_FLAT_BOX);
   musdelay_LRc->color((Fl_Color)178);
@@ -283,8 +283,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_LRc->callback((Fl_Callback*)cb_musdelay_LRc);
   musdelay_LRc->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_LRc->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_LRc
-{ musdelay_pan1 = new SliderW(56, 50, 100, 10, "Pan 1");
+} // RKR_Slider* musdelay_LRc
+{ musdelay_pan1 = new RKR_Slider(56, 50, 100, 10, "Pan 1");
   musdelay_pan1->type(5);
   musdelay_pan1->box(FL_FLAT_BOX);
   musdelay_pan1->color((Fl_Color)178);
@@ -300,8 +300,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_pan1->callback((Fl_Callback*)cb_musdelay_pan1);
   musdelay_pan1->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_pan1->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_pan1
-{ musdelay_pan2 = new SliderW(56, 62, 100, 10, "Pan 2");
+} // RKR_Slider* musdelay_pan1
+{ musdelay_pan2 = new RKR_Slider(56, 62, 100, 10, "Pan 2");
   musdelay_pan2->type(5);
   musdelay_pan2->box(FL_FLAT_BOX);
   musdelay_pan2->color((Fl_Color)178);
@@ -317,7 +317,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_pan2->callback((Fl_Callback*)cb_musdelay_pan2);
   musdelay_pan2->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_pan2->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_pan2
+} // RKR_Slider* musdelay_pan2
 { musdelay_delay1 = new RKR_Choice(10, 82, 38, 14);
   musdelay_delay1->tooltip("Delay 1");
   musdelay_delay1->box(FL_FLAT_BOX);
@@ -369,7 +369,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_delay2->when(FL_WHEN_RELEASE);
   o->menu(menu_musdelay_delay1);
 } // RKR_Choice* musdelay_delay2
-{ musdelay_tempo = new SliderW(56, 103, 100, 10, "Tempo");
+{ musdelay_tempo = new RKR_Slider(56, 103, 100, 10, "Tempo");
   musdelay_tempo->type(5);
   musdelay_tempo->box(FL_FLAT_BOX);
   musdelay_tempo->color((Fl_Color)178);
@@ -385,8 +385,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_tempo->callback((Fl_Callback*)cb_musdelay_tempo);
   musdelay_tempo->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_tempo->when(FL_WHEN_RELEASE);
-} // SliderW* musdelay_tempo
-{ musdelay_gain1 = new SliderW(56, 122, 100, 10, "Gain 1");
+} // RKR_Slider* musdelay_tempo
+{ musdelay_gain1 = new RKR_Slider(56, 122, 100, 10, "Gain 1");
   musdelay_gain1->type(5);
   musdelay_gain1->box(FL_FLAT_BOX);
   musdelay_gain1->color((Fl_Color)178);
@@ -401,8 +401,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_gain1->callback((Fl_Callback*)cb_musdelay_gain1);
   musdelay_gain1->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_gain1->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_gain1
-{ musdelay_gain2 = new SliderW(56, 134, 100, 10, "Gain 2");
+} // RKR_Slider* musdelay_gain1
+{ musdelay_gain2 = new RKR_Slider(56, 134, 100, 10, "Gain 2");
   musdelay_gain2->type(5);
   musdelay_gain2->box(FL_FLAT_BOX);
   musdelay_gain2->color((Fl_Color)178);
@@ -417,8 +417,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_gain2->callback((Fl_Callback*)cb_musdelay_gain2);
   musdelay_gain2->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_gain2->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_gain2
-{ musdelay_fb1 = new SliderW(56, 146, 100, 10, "FB 1");
+} // RKR_Slider* musdelay_gain2
+{ musdelay_fb1 = new RKR_Slider(56, 146, 100, 10, "FB 1");
   musdelay_fb1->tooltip("Feedback 1");
   musdelay_fb1->type(5);
   musdelay_fb1->box(FL_FLAT_BOX);
@@ -434,8 +434,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_fb1->callback((Fl_Callback*)cb_musdelay_fb1);
   musdelay_fb1->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_fb1->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_fb1
-{ musdelay_fb2 = new SliderW(56, 158, 100, 10, "FB 2");
+} // RKR_Slider* musdelay_fb1
+{ musdelay_fb2 = new RKR_Slider(56, 158, 100, 10, "FB 2");
   musdelay_fb2->tooltip("Feedback 2");
   musdelay_fb2->type(5);
   musdelay_fb2->box(FL_FLAT_BOX);
@@ -451,8 +451,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_fb2->callback((Fl_Callback*)cb_musdelay_fb2);
   musdelay_fb2->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_fb2->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_fb2
-{ musdelay_damp = new SliderW(56, 170, 100, 10, "Damp");
+} // RKR_Slider* musdelay_fb2
+{ musdelay_damp = new RKR_Slider(56, 170, 100, 10, "Damp");
   musdelay_damp->type(5);
   musdelay_damp->box(FL_FLAT_BOX);
   musdelay_damp->color((Fl_Color)178);
@@ -467,7 +467,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   musdelay_damp->callback((Fl_Callback*)cb_musdelay_damp);
   musdelay_damp->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_damp->when(FL_WHEN_CHANGED);
-} // SliderW* musdelay_damp
+} // RKR_Slider* musdelay_damp
 position(X, Y);
 end();
 }

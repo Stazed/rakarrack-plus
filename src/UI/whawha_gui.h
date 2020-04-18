@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,45 +26,45 @@ private:
   static void cb_WhaWha_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_WhaWha_preset[];
 public:
-  SliderW *WhaWha_WD;
+  RKR_Slider *WhaWha_WD;
 private:
-  inline void cb_WhaWha_WD_i(SliderW*, void*);
-  static void cb_WhaWha_WD(SliderW*, void*);
+  inline void cb_WhaWha_WD_i(RKR_Slider*, void*);
+  static void cb_WhaWha_WD(RKR_Slider*, void*);
 public:
-  SliderW *WhaWha_pan;
+  RKR_Slider *WhaWha_pan;
 private:
-  inline void cb_WhaWha_pan_i(SliderW*, void*);
-  static void cb_WhaWha_pan(SliderW*, void*);
+  inline void cb_WhaWha_pan_i(RKR_Slider*, void*);
+  static void cb_WhaWha_pan(RKR_Slider*, void*);
 public:
-  SliderW *WhaWha_freq;
+  RKR_Slider *WhaWha_freq;
 private:
-  inline void cb_WhaWha_freq_i(SliderW*, void*);
-  static void cb_WhaWha_freq(SliderW*, void*);
+  inline void cb_WhaWha_freq_i(RKR_Slider*, void*);
+  static void cb_WhaWha_freq(RKR_Slider*, void*);
 public:
-  SliderW *WhaWha_rnd;
+  RKR_Slider *WhaWha_rnd;
 private:
-  inline void cb_WhaWha_rnd_i(SliderW*, void*);
-  static void cb_WhaWha_rnd(SliderW*, void*);
+  inline void cb_WhaWha_rnd_i(RKR_Slider*, void*);
+  static void cb_WhaWha_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *WhaWha_lfotype;
 private:
   inline void cb_WhaWha_lfotype_i(RKR_Choice*, void*);
   static void cb_WhaWha_lfotype(RKR_Choice*, void*);
 public:
-  SliderW *WhaWha_stdf;
+  RKR_Slider *WhaWha_stdf;
 private:
-  inline void cb_WhaWha_stdf_i(SliderW*, void*);
-  static void cb_WhaWha_stdf(SliderW*, void*);
+  inline void cb_WhaWha_stdf_i(RKR_Slider*, void*);
+  static void cb_WhaWha_stdf(RKR_Slider*, void*);
 public:
-  SliderW *WhaWha_dpth;
+  RKR_Slider *WhaWha_dpth;
 private:
-  inline void cb_WhaWha_dpth_i(SliderW*, void*);
-  static void cb_WhaWha_dpth(SliderW*, void*);
+  inline void cb_WhaWha_dpth_i(RKR_Slider*, void*);
+  static void cb_WhaWha_dpth(RKR_Slider*, void*);
 public:
-  SliderW *WhaWha_ampsns;
+  RKR_Slider *WhaWha_ampsns;
 private:
-  inline void cb_WhaWha_ampsns_i(SliderW*, void*);
-  static void cb_WhaWha_ampsns(SliderW*, void*);
+  inline void cb_WhaWha_ampsns_i(RKR_Slider*, void*);
+  static void cb_WhaWha_ampsns(RKR_Slider*, void*);
 public:
   RKR_Check_Button *WhaWha_ampsnsinv;
 private:
@@ -77,10 +77,10 @@ private:
   static void cb_WhaWha_ftype(RKR_Choice*, void*);
   static Fl_Menu_Item menu_WhaWha_ftype[];
 public:
-  SliderW *WhaWha_smooth;
+  RKR_Slider *WhaWha_smooth;
 private:
-  inline void cb_WhaWha_smooth_i(SliderW*, void*);
-  static void cb_WhaWha_smooth(SliderW*, void*);
+  inline void cb_WhaWha_smooth_i(RKR_Slider*, void*);
+  static void cb_WhaWha_smooth(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif

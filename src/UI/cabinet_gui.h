@@ -6,7 +6,7 @@
 #include "RKR_Choice.h"
 #include "RKR_Light_Button.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,9 +24,9 @@ private:
   static void cb_Cabinet_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Cabinet_preset[];
 public:
-  SliderW *Cabinet_output;
+  RKR_Slider *Cabinet_output;
 private:
-  inline void cb_Cabinet_output_i(SliderW*, void*);
-  static void cb_Cabinet_output(SliderW*, void*);
+  inline void cb_Cabinet_output_i(RKR_Slider*, void*);
+  static void cb_Cabinet_output(RKR_Slider*, void*);
 };
 #endif

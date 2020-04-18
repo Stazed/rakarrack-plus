@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,30 +25,30 @@ private:
   static void cb_ring_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_ring_preset[];
 public:
-  SliderW *ring_WD;
+  RKR_Slider *ring_WD;
 private:
-  inline void cb_ring_WD_i(SliderW*, void*);
-  static void cb_ring_WD(SliderW*, void*);
+  inline void cb_ring_WD_i(RKR_Slider*, void*);
+  static void cb_ring_WD(RKR_Slider*, void*);
 public:
-  SliderW *ring_LRc;
+  RKR_Slider *ring_LRc;
 private:
-  inline void cb_ring_LRc_i(SliderW*, void*);
-  static void cb_ring_LRc(SliderW*, void*);
+  inline void cb_ring_LRc_i(RKR_Slider*, void*);
+  static void cb_ring_LRc(RKR_Slider*, void*);
 public:
-  SliderW *ring_input;
+  RKR_Slider *ring_input;
 private:
-  inline void cb_ring_input_i(SliderW*, void*);
-  static void cb_ring_input(SliderW*, void*);
+  inline void cb_ring_input_i(RKR_Slider*, void*);
+  static void cb_ring_input(RKR_Slider*, void*);
 public:
-  SliderW *ring_level;
+  RKR_Slider *ring_level;
 private:
-  inline void cb_ring_level_i(SliderW*, void*);
-  static void cb_ring_level(SliderW*, void*);
+  inline void cb_ring_level_i(RKR_Slider*, void*);
+  static void cb_ring_level(RKR_Slider*, void*);
 public:
-  SliderW *ring_pan;
+  RKR_Slider *ring_pan;
 private:
-  inline void cb_ring_pan_i(SliderW*, void*);
-  static void cb_ring_pan(SliderW*, void*);
+  inline void cb_ring_pan_i(RKR_Slider*, void*);
+  static void cb_ring_pan(RKR_Slider*, void*);
 public:
   RKR_Check_Button *ring_st;
 private:
@@ -60,34 +60,34 @@ private:
   inline void cb_ring_afreq_i(RKR_Check_Button*, void*);
   static void cb_ring_afreq(RKR_Check_Button*, void*);
 public:
-  SliderW *ring_depth;
+  RKR_Slider *ring_depth;
 private:
-  inline void cb_ring_depth_i(SliderW*, void*);
-  static void cb_ring_depth(SliderW*, void*);
+  inline void cb_ring_depth_i(RKR_Slider*, void*);
+  static void cb_ring_depth(RKR_Slider*, void*);
 public:
-  SliderW *ring_freq;
+  RKR_Slider *ring_freq;
 private:
-  inline void cb_ring_freq_i(SliderW*, void*);
-  static void cb_ring_freq(SliderW*, void*);
+  inline void cb_ring_freq_i(RKR_Slider*, void*);
+  static void cb_ring_freq(RKR_Slider*, void*);
 public:
-  SliderW *ring_sin;
+  RKR_Slider *ring_sin;
 private:
-  inline void cb_ring_sin_i(SliderW*, void*);
-  static void cb_ring_sin(SliderW*, void*);
+  inline void cb_ring_sin_i(RKR_Slider*, void*);
+  static void cb_ring_sin(RKR_Slider*, void*);
 public:
-  SliderW *ring_tri;
+  RKR_Slider *ring_tri;
 private:
-  inline void cb_ring_tri_i(SliderW*, void*);
-  static void cb_ring_tri(SliderW*, void*);
+  inline void cb_ring_tri_i(RKR_Slider*, void*);
+  static void cb_ring_tri(RKR_Slider*, void*);
 public:
-  SliderW *ring_saw;
+  RKR_Slider *ring_saw;
 private:
-  inline void cb_ring_saw_i(SliderW*, void*);
-  static void cb_ring_saw(SliderW*, void*);
+  inline void cb_ring_saw_i(RKR_Slider*, void*);
+  static void cb_ring_saw(RKR_Slider*, void*);
 public:
-  SliderW *ring_squ;
+  RKR_Slider *ring_squ;
 private:
-  inline void cb_ring_squ_i(SliderW*, void*);
-  static void cb_ring_squ(SliderW*, void*);
+  inline void cb_ring_squ_i(RKR_Slider*, void*);
+  static void cb_ring_squ(RKR_Slider*, void*);
 };
 #endif

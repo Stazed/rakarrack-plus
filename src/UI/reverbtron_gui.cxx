@@ -56,7 +56,7 @@ Fl_Menu_Item RevtronGui::menu_revtron_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RevtronGui::cb_revtron_WD_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(339);
@@ -64,11 +64,11 @@ void RevtronGui::cb_revtron_WD_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(0,Dry_Wet((int)(o->value())));
 }
-void RevtronGui::cb_revtron_WD(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_WD(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_WD_i(o,v);
 }
 
-void RevtronGui::cb_revtron_pan_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(340);
@@ -76,11 +76,11 @@ void RevtronGui::cb_revtron_pan_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(11,(int)(o->value()+64));
 }
-void RevtronGui::cb_revtron_pan(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_pan(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_pan_i(o,v);
 }
 
-void RevtronGui::cb_revtron_level_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(341);
@@ -88,11 +88,11 @@ void RevtronGui::cb_revtron_level_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(7,(int)o->value());
 }
-void RevtronGui::cb_revtron_level(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_level(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_level_i(o,v);
 }
 
-void RevtronGui::cb_revtron_damp_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(342);
@@ -100,11 +100,11 @@ void RevtronGui::cb_revtron_damp_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(6,(int)o->value());
 }
-void RevtronGui::cb_revtron_damp(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_damp(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_damp_i(o,v);
 }
 
-void RevtronGui::cb_revtron_fb_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(343);
@@ -112,11 +112,11 @@ void RevtronGui::cb_revtron_fb_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(10,(int)o->value());
 }
-void RevtronGui::cb_revtron_fb(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_fb(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_fb_i(o,v);
 }
 
-void RevtronGui::cb_revtron_length_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_length_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(344);
@@ -124,11 +124,11 @@ void RevtronGui::cb_revtron_length_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(3,(int)o->value());
 }
-void RevtronGui::cb_revtron_length(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_length(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_length_i(o,v);
 }
 
-void RevtronGui::cb_revtron_strech_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_strech_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(345);
@@ -136,11 +136,11 @@ void RevtronGui::cb_revtron_strech_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(9,(int)o->value());
 }
-void RevtronGui::cb_revtron_strech(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_strech(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_strech_i(o,v);
 }
 
-void RevtronGui::cb_revtron_idelay_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_idelay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(346);
@@ -148,11 +148,11 @@ void RevtronGui::cb_revtron_idelay_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(5,(int)o->value());
 }
-void RevtronGui::cb_revtron_idelay(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_idelay(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_idelay_i(o,v);
 }
 
-void RevtronGui::cb_revtron_fade_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_fade_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(347);
@@ -160,11 +160,11 @@ void RevtronGui::cb_revtron_fade_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(1,(int)o->value());
 }
-void RevtronGui::cb_revtron_fade(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_fade(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_fade_i(o,v);
 }
 
-void RevtronGui::cb_revtron_diff_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_diff_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(442);
@@ -172,11 +172,11 @@ void RevtronGui::cb_revtron_diff_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(15,(int)o->value());
 }
-void RevtronGui::cb_revtron_diff(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_diff(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_diff_i(o,v);
 }
 
-void RevtronGui::cb_revtron_LPF_i(SliderW* o, void*) {
+void RevtronGui::cb_revtron_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(443);
@@ -184,7 +184,7 @@ void RevtronGui::cb_revtron_LPF_i(SliderW* o, void*) {
 }
 rkr->efx_Reverbtron->changepar(14,(int)o->value());
 }
-void RevtronGui::cb_revtron_LPF(SliderW* o, void* v) {
+void RevtronGui::cb_revtron_LPF(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_LPF_i(o,v);
 }
 
@@ -290,7 +290,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_preset->when(FL_WHEN_RELEASE_ALWAYS);
   revtron_preset->menu(menu_revtron_preset);
 } // RKR_Choice* revtron_preset
-{ revtron_WD = new SliderW(56, 25, 100, 10, "Dry/Wet");
+{ revtron_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
   revtron_WD->type(5);
   revtron_WD->box(FL_FLAT_BOX);
   revtron_WD->color((Fl_Color)178);
@@ -305,8 +305,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_WD->callback((Fl_Callback*)cb_revtron_WD);
   revtron_WD->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_WD->when(FL_WHEN_CHANGED);
-} // SliderW* revtron_WD
-{ revtron_pan = new SliderW(56, 37, 100, 10, "Pan");
+} // RKR_Slider* revtron_WD
+{ revtron_pan = new RKR_Slider(56, 37, 100, 10, "Pan");
   revtron_pan->type(5);
   revtron_pan->box(FL_FLAT_BOX);
   revtron_pan->color((Fl_Color)178);
@@ -322,8 +322,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_pan->callback((Fl_Callback*)cb_revtron_pan);
   revtron_pan->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_pan->when(FL_WHEN_CHANGED);
-} // SliderW* revtron_pan
-{ revtron_level = new SliderW(56, 49, 100, 10, "Level");
+} // RKR_Slider* revtron_pan
+{ revtron_level = new RKR_Slider(56, 49, 100, 10, "Level");
   revtron_level->type(5);
   revtron_level->box(FL_FLAT_BOX);
   revtron_level->color((Fl_Color)178);
@@ -338,8 +338,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_level->callback((Fl_Callback*)cb_revtron_level);
   revtron_level->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_level->when(FL_WHEN_CHANGED);
-} // SliderW* revtron_level
-{ revtron_damp = new SliderW(56, 61, 100, 10, "Damp");
+} // RKR_Slider* revtron_level
+{ revtron_damp = new RKR_Slider(56, 61, 100, 10, "Damp");
   revtron_damp->type(5);
   revtron_damp->box(FL_FLAT_BOX);
   revtron_damp->color((Fl_Color)178);
@@ -354,8 +354,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_damp->callback((Fl_Callback*)cb_revtron_damp);
   revtron_damp->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_damp->when(FL_WHEN_CHANGED);
-} // SliderW* revtron_damp
-{ revtron_fb = new SliderW(56, 73, 100, 10, "Feedback");
+} // RKR_Slider* revtron_damp
+{ revtron_fb = new RKR_Slider(56, 73, 100, 10, "Feedback");
   revtron_fb->type(5);
   revtron_fb->box(FL_FLAT_BOX);
   revtron_fb->color((Fl_Color)178);
@@ -371,8 +371,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_fb->callback((Fl_Callback*)cb_revtron_fb);
   revtron_fb->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_fb->when(FL_WHEN_CHANGED);
-} // SliderW* revtron_fb
-{ revtron_length = new SliderW(56, 85, 100, 10, "Length");
+} // RKR_Slider* revtron_fb
+{ revtron_length = new RKR_Slider(56, 85, 100, 10, "Length");
   revtron_length->type(5);
   revtron_length->box(FL_FLAT_BOX);
   revtron_length->color((Fl_Color)178);
@@ -389,8 +389,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_length->callback((Fl_Callback*)cb_revtron_length);
   revtron_length->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_length->when(FL_WHEN_RELEASE);
-} // SliderW* revtron_length
-{ revtron_strech = new SliderW(56, 97, 100, 10, "Stretch");
+} // RKR_Slider* revtron_length
+{ revtron_strech = new RKR_Slider(56, 97, 100, 10, "Stretch");
   revtron_strech->tooltip("Time Stretch");
   revtron_strech->type(5);
   revtron_strech->box(FL_FLAT_BOX);
@@ -407,8 +407,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_strech->callback((Fl_Callback*)cb_revtron_strech);
   revtron_strech->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_strech->when(FL_WHEN_RELEASE);
-} // SliderW* revtron_strech
-{ revtron_idelay = new SliderW(56, 109, 100, 10, "I. Del");
+} // RKR_Slider* revtron_strech
+{ revtron_idelay = new RKR_Slider(56, 109, 100, 10, "I. Del");
   revtron_idelay->tooltip("Initial Delay");
   revtron_idelay->type(5);
   revtron_idelay->box(FL_FLAT_BOX);
@@ -424,8 +424,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_idelay->callback((Fl_Callback*)cb_revtron_idelay);
   revtron_idelay->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_idelay->when(FL_WHEN_RELEASE);
-} // SliderW* revtron_idelay
-{ revtron_fade = new SliderW(56, 121, 100, 10, "Fade");
+} // RKR_Slider* revtron_idelay
+{ revtron_fade = new RKR_Slider(56, 121, 100, 10, "Fade");
   revtron_fade->type(5);
   revtron_fade->box(FL_FLAT_BOX);
   revtron_fade->color((Fl_Color)178);
@@ -440,8 +440,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_fade->callback((Fl_Callback*)cb_revtron_fade);
   revtron_fade->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_fade->when(FL_WHEN_RELEASE);
-} // SliderW* revtron_fade
-{ revtron_diff = new SliderW(56, 133, 100, 10, "Diffusion");
+} // RKR_Slider* revtron_fade
+{ revtron_diff = new RKR_Slider(56, 133, 100, 10, "Diffusion");
   revtron_diff->type(5);
   revtron_diff->box(FL_FLAT_BOX);
   revtron_diff->color((Fl_Color)178);
@@ -456,8 +456,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_diff->callback((Fl_Callback*)cb_revtron_diff);
   revtron_diff->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_diff->when(FL_WHEN_RELEASE);
-} // SliderW* revtron_diff
-{ revtron_LPF = new SliderW(56, 145, 100, 10, "LPF");
+} // RKR_Slider* revtron_diff
+{ revtron_LPF = new RKR_Slider(56, 145, 100, 10, "LPF");
   revtron_LPF->tooltip("Lowpass Filter");
   revtron_LPF->type(5);
   revtron_LPF->box(FL_FLAT_BOX);
@@ -475,7 +475,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_LPF->callback((Fl_Callback*)cb_revtron_LPF);
   revtron_LPF->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_LPF->when(FL_WHEN_RELEASE);
-} // SliderW* revtron_LPF
+} // RKR_Slider* revtron_LPF
 { revtron_rv = new RKR_Check_Button(2, 151, 30, 15, "Sh");
   revtron_rv->box(FL_NO_BOX);
   revtron_rv->down_box(FL_BORDER_BOX);

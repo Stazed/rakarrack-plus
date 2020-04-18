@@ -8,7 +8,7 @@
 #include "RKR_Counter.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -27,25 +27,25 @@ private:
   static void cb_phaser_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_phaser_preset[];
 public:
-  SliderW *phaser_WD;
+  RKR_Slider *phaser_WD;
 private:
-  inline void cb_phaser_WD_i(SliderW*, void*);
-  static void cb_phaser_WD(SliderW*, void*);
+  inline void cb_phaser_WD_i(RKR_Slider*, void*);
+  static void cb_phaser_WD(RKR_Slider*, void*);
 public:
-  SliderW *phaser_pan;
+  RKR_Slider *phaser_pan;
 private:
-  inline void cb_phaser_pan_i(SliderW*, void*);
-  static void cb_phaser_pan(SliderW*, void*);
+  inline void cb_phaser_pan_i(RKR_Slider*, void*);
+  static void cb_phaser_pan(RKR_Slider*, void*);
 public:
-  SliderW *phaser_freq;
+  RKR_Slider *phaser_freq;
 private:
-  inline void cb_phaser_freq_i(SliderW*, void*);
-  static void cb_phaser_freq(SliderW*, void*);
+  inline void cb_phaser_freq_i(RKR_Slider*, void*);
+  static void cb_phaser_freq(RKR_Slider*, void*);
 public:
-  SliderW *phaser_rnd;
+  RKR_Slider *phaser_rnd;
 private:
-  inline void cb_phaser_rnd_i(SliderW*, void*);
-  static void cb_phaser_rnd(SliderW*, void*);
+  inline void cb_phaser_rnd_i(RKR_Slider*, void*);
+  static void cb_phaser_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *phaser_lfotype;
 private:
@@ -57,35 +57,35 @@ private:
   inline void cb_phaser_subs_i(RKR_Check_Button*, void*);
   static void cb_phaser_subs(RKR_Check_Button*, void*);
 public:
-  SliderW *phaser_phase;
+  RKR_Slider *phaser_phase;
 private:
-  inline void cb_phaser_phase_i(SliderW*, void*);
-  static void cb_phaser_phase(SliderW*, void*);
+  inline void cb_phaser_phase_i(RKR_Slider*, void*);
+  static void cb_phaser_phase(RKR_Slider*, void*);
 public:
-  SliderW *phaser_stdf;
+  RKR_Slider *phaser_stdf;
 private:
-  inline void cb_phaser_stdf_i(SliderW*, void*);
-  static void cb_phaser_stdf(SliderW*, void*);
+  inline void cb_phaser_stdf_i(RKR_Slider*, void*);
+  static void cb_phaser_stdf(RKR_Slider*, void*);
 public:
-  SliderW *phaser_dpth;
+  RKR_Slider *phaser_dpth;
 private:
-  inline void cb_phaser_dpth_i(SliderW*, void*);
-  static void cb_phaser_dpth(SliderW*, void*);
+  inline void cb_phaser_dpth_i(RKR_Slider*, void*);
+  static void cb_phaser_dpth(RKR_Slider*, void*);
 public:
-  SliderW *phaser_fb;
+  RKR_Slider *phaser_fb;
 private:
-  inline void cb_phaser_fb_i(SliderW*, void*);
-  static void cb_phaser_fb(SliderW*, void*);
+  inline void cb_phaser_fb_i(RKR_Slider*, void*);
+  static void cb_phaser_fb(RKR_Slider*, void*);
 public:
   RKR_Counter *phaser_stages;
 private:
   inline void cb_phaser_stages_i(RKR_Counter*, void*);
   static void cb_phaser_stages(RKR_Counter*, void*);
 public:
-  SliderW *phaser_LR;
+  RKR_Slider *phaser_LR;
 private:
-  inline void cb_phaser_LR_i(SliderW*, void*);
-  static void cb_phaser_LR(SliderW*, void*);
+  inline void cb_phaser_LR_i(RKR_Slider*, void*);
+  static void cb_phaser_LR(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif

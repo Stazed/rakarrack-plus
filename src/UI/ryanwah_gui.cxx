@@ -63,7 +63,7 @@ Fl_Menu_Item RyanwahGui::menu_ryanwah_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void RyanwahGui::cb_ryanwah_WD_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(256);
@@ -71,7 +71,7 @@ void RyanwahGui::cb_ryanwah_WD_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(0,Dry_Wet((int)(o->value())));
 }
-void RyanwahGui::cb_ryanwah_WD(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_WD(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_WD_i(o,v);
 }
 
@@ -86,7 +86,7 @@ void RyanwahGui::cb_ryanwah_qm(RKR_Check_Button* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_qm_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_lp_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_lp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(257);
@@ -94,7 +94,7 @@ void RyanwahGui::cb_ryanwah_lp_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(10,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_lp(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_lp(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_lp_i(o,v);
 }
 
@@ -109,7 +109,7 @@ void RyanwahGui::cb_ryanwah_nat(RKR_Check_Button* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_nat_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_bp_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_bp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(258);
@@ -117,7 +117,7 @@ void RyanwahGui::cb_ryanwah_bp_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(11,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_bp(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_bp(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_bp_i(o,v);
 }
 
@@ -128,7 +128,7 @@ void RyanwahGui::cb_ryanwah_res(RKR_Check_Button* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_res_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_hp_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_hp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(259);
@@ -136,7 +136,7 @@ void RyanwahGui::cb_ryanwah_hp_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(12,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_hp(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_hp(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_hp_i(o,v);
 }
 
@@ -154,7 +154,7 @@ void RyanwahGui::cb_ryanwah_lfotype(RKR_Choice* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_lfotype_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_dpth_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(260);
@@ -162,11 +162,11 @@ void RyanwahGui::cb_ryanwah_dpth_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(6,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_dpth(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_dpth(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_dpth_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_freq_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(261);
@@ -174,11 +174,11 @@ void RyanwahGui::cb_ryanwah_freq_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(2,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_freq(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_freq(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_freq_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_q_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(262);
@@ -186,11 +186,11 @@ void RyanwahGui::cb_ryanwah_q_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(1,(int)(o->value()));
 }
-void RyanwahGui::cb_ryanwah_q(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_q(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_q_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_rng_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_rng_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(263);
@@ -198,11 +198,11 @@ void RyanwahGui::cb_ryanwah_rng_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(14,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_rng(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_rng(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_rng_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_ampsnsinv_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_ampsnsinv_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(264);
@@ -210,11 +210,11 @@ void RyanwahGui::cb_ryanwah_ampsnsinv_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(8,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_ampsnsinv(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_ampsnsinv(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_ampsnsinv_i(o,v);
 }
 
-void RyanwahGui::cb_ryanwah_ampsns_i(SliderW* o, void*) {
+void RyanwahGui::cb_ryanwah_ampsns_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(265);
@@ -222,7 +222,7 @@ void RyanwahGui::cb_ryanwah_ampsns_i(SliderW* o, void*) {
 }
 rkr->efx_RyanWah->changepar(7,(int)o->value());
 }
-void RyanwahGui::cb_ryanwah_ampsns(SliderW* o, void* v) {
+void RyanwahGui::cb_ryanwah_ampsns(RKR_Slider* o, void* v) {
   ((RyanwahGui*)(o->parent()))->cb_ryanwah_ampsns_i(o,v);
 }
 
@@ -309,7 +309,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ryanwah_preset->menu(menu_ryanwah_preset);
 } // RKR_Choice* ryanwah_preset
-{ ryanwah_WD = new SliderW(56, 25, 100, 10, "Dry/Wet");
+{ ryanwah_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
   ryanwah_WD->type(5);
   ryanwah_WD->box(FL_FLAT_BOX);
   ryanwah_WD->color((Fl_Color)178);
@@ -324,7 +324,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_WD->callback((Fl_Callback*)cb_ryanwah_WD);
   ryanwah_WD->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_WD->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_WD
+} // RKR_Slider* ryanwah_WD
 { ryanwah_qm = new RKR_Check_Button(18, 34, 15, 15, "M");
   ryanwah_qm->tooltip("Analog Gain Mode");
   ryanwah_qm->box(FL_NO_BOX);
@@ -339,7 +339,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_qm->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_qm->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ryanwah_qm
-{ ryanwah_lp = new SliderW(56, 37, 100, 10, "LP");
+{ ryanwah_lp = new RKR_Slider(56, 37, 100, 10, "LP");
   ryanwah_lp->tooltip("Lowpass Level");
   ryanwah_lp->type(5);
   ryanwah_lp->box(FL_FLAT_BOX);
@@ -356,7 +356,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_lp->callback((Fl_Callback*)cb_ryanwah_lp);
   ryanwah_lp->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_lp->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_lp
+} // RKR_Slider* ryanwah_lp
 { ryanwah_nat = new RKR_Check_Button(18, 44, 15, 15, "N");
   ryanwah_nat->tooltip("Exponential Wah");
   ryanwah_nat->box(FL_NO_BOX);
@@ -371,7 +371,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_nat->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_nat->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ryanwah_nat
-{ ryanwah_bp = new SliderW(56, 49, 100, 10, "BP");
+{ ryanwah_bp = new RKR_Slider(56, 49, 100, 10, "BP");
   ryanwah_bp->tooltip("Bandpass Level");
   ryanwah_bp->type(5);
   ryanwah_bp->box(FL_FLAT_BOX);
@@ -388,7 +388,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_bp->callback((Fl_Callback*)cb_ryanwah_bp);
   ryanwah_bp->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_bp->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_bp
+} // RKR_Slider* ryanwah_bp
 { ryanwah_res = new RKR_Check_Button(18, 54, 15, 15, "R");
   ryanwah_res->tooltip("Modulate Resonance");
   ryanwah_res->box(FL_NO_BOX);
@@ -403,7 +403,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_res->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_res->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ryanwah_res
-{ ryanwah_hp = new SliderW(56, 61, 100, 10, "HP");
+{ ryanwah_hp = new RKR_Slider(56, 61, 100, 10, "HP");
   ryanwah_hp->tooltip("Highpass Level");
   ryanwah_hp->type(5);
   ryanwah_hp->box(FL_FLAT_BOX);
@@ -420,7 +420,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_hp->callback((Fl_Callback*)cb_ryanwah_hp);
   ryanwah_hp->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_hp->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_hp
+} // RKR_Slider* ryanwah_hp
 { RKR_Counter* o = svfilter_stages = new RKR_Counter(27, 74, 27, 12, "Stg");
   svfilter_stages->tooltip("Filter Stages");
   svfilter_stages->type(1);
@@ -457,7 +457,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* ryanwah_lfotype
-{ ryanwah_dpth = new SliderW(56, 91, 100, 10, "Depth");
+{ ryanwah_dpth = new RKR_Slider(56, 91, 100, 10, "Depth");
   ryanwah_dpth->type(5);
   ryanwah_dpth->box(FL_FLAT_BOX);
   ryanwah_dpth->color((Fl_Color)178);
@@ -472,8 +472,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_dpth->callback((Fl_Callback*)cb_ryanwah_dpth);
   ryanwah_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_dpth->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_dpth
-{ ryanwah_freq = new SliderW(56, 103, 100, 10, "Tempo");
+} // RKR_Slider* ryanwah_dpth
+{ ryanwah_freq = new RKR_Slider(56, 103, 100, 10, "Tempo");
   ryanwah_freq->type(5);
   ryanwah_freq->box(FL_FLAT_BOX);
   ryanwah_freq->color((Fl_Color)178);
@@ -489,8 +489,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_freq->callback((Fl_Callback*)cb_ryanwah_freq);
   ryanwah_freq->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_freq->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_freq
-{ ryanwah_q = new SliderW(56, 116, 100, 10, "Res.");
+} // RKR_Slider* ryanwah_freq
+{ ryanwah_q = new RKR_Slider(56, 116, 100, 10, "Res.");
   ryanwah_q->tooltip("Resonance");
   ryanwah_q->type(5);
   ryanwah_q->box(FL_FLAT_BOX);
@@ -507,8 +507,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_q->callback((Fl_Callback*)cb_ryanwah_q);
   ryanwah_q->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_q->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_q
-{ ryanwah_rng = new SliderW(56, 128, 100, 10, "Range");
+} // RKR_Slider* ryanwah_q
+{ ryanwah_rng = new RKR_Slider(56, 128, 100, 10, "Range");
   ryanwah_rng->tooltip("Sweep Range");
   ryanwah_rng->type(5);
   ryanwah_rng->box(FL_FLAT_BOX);
@@ -525,8 +525,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_rng->callback((Fl_Callback*)cb_ryanwah_rng);
   ryanwah_rng->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_rng->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_rng
-{ ryanwah_ampsnsinv = new SliderW(56, 140, 100, 10, "Wah");
+} // RKR_Slider* ryanwah_rng
+{ ryanwah_ampsnsinv = new RKR_Slider(56, 140, 100, 10, "Wah");
   ryanwah_ampsnsinv->type(5);
   ryanwah_ampsnsinv->box(FL_FLAT_BOX);
   ryanwah_ampsnsinv->color((Fl_Color)178);
@@ -541,8 +541,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_ampsnsinv->callback((Fl_Callback*)cb_ryanwah_ampsnsinv);
   ryanwah_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_ampsnsinv->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_ampsnsinv
-{ ryanwah_ampsns = new SliderW(56, 152, 100, 10, "E. Sens");
+} // RKR_Slider* ryanwah_ampsnsinv
+{ ryanwah_ampsns = new RKR_Slider(56, 152, 100, 10, "E. Sens");
   ryanwah_ampsns->tooltip("Envelope Sensitivity");
   ryanwah_ampsns->type(5);
   ryanwah_ampsns->box(FL_FLAT_BOX);
@@ -559,7 +559,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   ryanwah_ampsns->callback((Fl_Callback*)cb_ryanwah_ampsns);
   ryanwah_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
   ryanwah_ampsns->when(FL_WHEN_CHANGED);
-} // SliderW* ryanwah_ampsns
+} // RKR_Slider* ryanwah_ampsns
 { ryanwah_smooth = new RKR_Value_Input(13, 165, 23, 15, "S");
   ryanwah_smooth->tooltip("Envelope Smoothing");
   ryanwah_smooth->box(FL_DOWN_BOX);

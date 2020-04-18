@@ -11,7 +11,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class PeqGui {
   user_data 1 open
   xywh {1514 80 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
 } {
@@ -71,7 +71,7 @@ eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);} selected
 } 
 rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
     xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_LF {
     label {Low F.}
@@ -82,7 +82,7 @@ rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
 } 
 rkr->efx_EQ2->changepar(11,(int)o->value());}
     tooltip {Low Frequency} xywh {53 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 value 200 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_LFg {
     label {Low G.}
@@ -93,7 +93,7 @@ rkr->efx_EQ2->changepar(11,(int)o->value());}
 } 
 rkr->efx_EQ2->changepar(12,(int)(o->value()+64));}
     tooltip {Low Gain} xywh {53 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_LQ {
     label {Low Q.}
@@ -104,7 +104,7 @@ rkr->efx_EQ2->changepar(12,(int)(o->value()+64));}
 } 
 rkr->efx_EQ2->changepar(13,(int)(o->value()+64));}
     tooltip {Low Width} xywh {53 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_MF {
     label {Mid F.}
@@ -115,7 +115,7 @@ rkr->efx_EQ2->changepar(13,(int)(o->value()+64));}
 } 
 rkr->efx_EQ2->changepar(5+11,(int)o->value());}
     tooltip {Mid Frequency} xywh {53 98 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 8000 step 1 value 800 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_MFg {
     label {Mid G.}
@@ -126,7 +126,7 @@ rkr->efx_EQ2->changepar(5+11,(int)o->value());}
 } 
 rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));}
     tooltip {Mid Gain} xywh {53 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_MQ {
     label {Mid Q.}
@@ -137,7 +137,7 @@ rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));}
 } 
 rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));}
     tooltip {Mid Width} xywh {53 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_HF {
     label {High F.}
@@ -148,7 +148,7 @@ rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));}
 } 
 rkr->efx_EQ2->changepar(10+11,(int)o->value());}
     tooltip {High Frequency} xywh {53 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 value 12000 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_HFg {
     label {High G.}
@@ -159,7 +159,7 @@ rkr->efx_EQ2->changepar(10+11,(int)o->value());}
 } 
 rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));}
     tooltip {High Gain} xywh {53 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider eqp_HQ {
     label {High Q.}
@@ -170,6 +170,6 @@ rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));}
 } 
 rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));}
     tooltip {High Width} xywh {53 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
 }

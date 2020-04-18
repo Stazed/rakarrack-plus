@@ -59,7 +59,7 @@ Fl_Menu_Item InfinityGui::menu_infinity_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void InfinityGui::cb_infinity_WD_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(395);
@@ -67,11 +67,11 @@ void InfinityGui::cb_infinity_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(0,Dry_Wet((int)(o->value())));
 }
-void InfinityGui::cb_infinity_WD(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_WD(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_WD_i(o,v);
 }
 
-void InfinityGui::cb_infinity_Q_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_Q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(396);
@@ -79,7 +79,7 @@ void InfinityGui::cb_infinity_Q_i(SliderW* o, void*) {
 }
 rkr->efx_Infinity->changepar(9,(int)o->value());
 }
-void InfinityGui::cb_infinity_Q(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_Q(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_Q_i(o,v);
 }
 
@@ -193,7 +193,7 @@ void InfinityGui::cb_infinity_stages(RKR_Counter* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_stages_i(o,v);
 }
 
-void InfinityGui::cb_infinity_pan_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(397);
@@ -201,11 +201,11 @@ void InfinityGui::cb_infinity_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(15,(int)o->value());
 }
-void InfinityGui::cb_infinity_pan(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_pan(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_pan_i(o,v);
 }
 
-void InfinityGui::cb_infinity_stdf_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(398);
@@ -213,11 +213,11 @@ void InfinityGui::cb_infinity_stdf_i(SliderW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(13,(int)o->value());
 }
-void InfinityGui::cb_infinity_stdf(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_stdf(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_stdf_i(o,v);
 }
 
-void InfinityGui::cb_infinity_start_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_start_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(399);
@@ -225,11 +225,11 @@ void InfinityGui::cb_infinity_start_i(SliderW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(10,(int)o->value());
 }
-void InfinityGui::cb_infinity_start(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_start(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_start_i(o,v);
 }
 
-void InfinityGui::cb_infinity_end_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_end_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(400);
@@ -237,11 +237,11 @@ void InfinityGui::cb_infinity_end_i(SliderW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(11,(int)o->value());
 }
-void InfinityGui::cb_infinity_end(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_end(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_end_i(o,v);
 }
 
-void InfinityGui::cb_infinity_rate_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_rate_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(401);
@@ -249,11 +249,11 @@ void InfinityGui::cb_infinity_rate_i(SliderW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(12,(int)o->value());
 }
-void InfinityGui::cb_infinity_rate(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_rate(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_rate_i(o,v);
 }
 
-void InfinityGui::cb_infinity_subdiv_i(SliderW* o, void*) {
+void InfinityGui::cb_infinity_subdiv_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(402);
@@ -261,7 +261,7 @@ void InfinityGui::cb_infinity_subdiv_i(SliderW* o, void*) {
 } 
 rkr->efx_Infinity->changepar(14,(int)o->value());
 }
-void InfinityGui::cb_infinity_subdiv(SliderW* o, void* v) {
+void InfinityGui::cb_infinity_subdiv(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_subdiv_i(o,v);
 }
 InfinityGui::InfinityGui(int X, int Y, int W, int H, const char *L)
@@ -300,7 +300,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_preset->when(FL_WHEN_RELEASE_ALWAYS);
   infinity_preset->menu(menu_infinity_preset);
 } // RKR_Choice* infinity_preset
-{ infinity_WD = new SliderW(56, 27, 100, 10, "Dry/Wet");
+{ infinity_WD = new RKR_Slider(56, 27, 100, 10, "Dry/Wet");
   infinity_WD->type(5);
   infinity_WD->box(FL_FLAT_BOX);
   infinity_WD->color((Fl_Color)178);
@@ -315,8 +315,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_WD->callback((Fl_Callback*)cb_infinity_WD);
   infinity_WD->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_WD->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_WD
-{ infinity_Q = new SliderW(56, 41, 100, 10, "Res");
+} // RKR_Slider* infinity_WD
+{ infinity_Q = new RKR_Slider(56, 41, 100, 10, "Res");
   infinity_Q->tooltip("Resonance Filter");
   infinity_Q->type(5);
   infinity_Q->box(FL_FLAT_BOX);
@@ -333,7 +333,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_Q->callback((Fl_Callback*)cb_infinity_Q);
   infinity_Q->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_Q->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_Q
+} // RKR_Slider* infinity_Q
 { infinity_1 = new RKR_Value_Input(15, 56, 23, 15, "1");
   infinity_1->box(FL_DOWN_BOX);
   infinity_1->color(FL_BACKGROUND2_COLOR);
@@ -503,7 +503,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_stages->when(FL_WHEN_CHANGED);
   o->m_start_text_offset = -1; // 10 - 9
 } // RKR_Counter* infinity_stages
-{ infinity_pan = new SliderW(56, 111, 100, 10, "AutoPan");
+{ infinity_pan = new RKR_Slider(56, 111, 100, 10, "AutoPan");
   infinity_pan->type(5);
   infinity_pan->box(FL_FLAT_BOX);
   infinity_pan->color((Fl_Color)178);
@@ -518,8 +518,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_pan->callback((Fl_Callback*)cb_infinity_pan);
   infinity_pan->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_pan->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_pan
-{ infinity_stdf = new SliderW(56, 123, 100, 10, "Stereo Df");
+} // RKR_Slider* infinity_pan
+{ infinity_stdf = new RKR_Slider(56, 123, 100, 10, "Stereo Df");
   infinity_stdf->tooltip("Sweep L/R Delay");
   infinity_stdf->type(5);
   infinity_stdf->box(FL_FLAT_BOX);
@@ -536,8 +536,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_stdf->callback((Fl_Callback*)cb_infinity_stdf);
   infinity_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_stdf
-{ infinity_start = new SliderW(56, 135, 100, 10, "Start");
+} // RKR_Slider* infinity_stdf
+{ infinity_start = new RKR_Slider(56, 135, 100, 10, "Start");
   infinity_start->type(5);
   infinity_start->box(FL_FLAT_BOX);
   infinity_start->color((Fl_Color)178);
@@ -552,8 +552,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_start->callback((Fl_Callback*)cb_infinity_start);
   infinity_start->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_start->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_start
-{ infinity_end = new SliderW(56, 147, 100, 10, "End");
+} // RKR_Slider* infinity_start
+{ infinity_end = new RKR_Slider(56, 147, 100, 10, "End");
   infinity_end->type(5);
   infinity_end->box(FL_FLAT_BOX);
   infinity_end->color((Fl_Color)178);
@@ -568,8 +568,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_end->callback((Fl_Callback*)cb_infinity_end);
   infinity_end->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_end->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_end
-{ infinity_rate = new SliderW(56, 159, 100, 10, "Tempo");
+} // RKR_Slider* infinity_end
+{ infinity_rate = new RKR_Slider(56, 159, 100, 10, "Tempo");
   infinity_rate->type(5);
   infinity_rate->box(FL_FLAT_BOX);
   infinity_rate->color((Fl_Color)178);
@@ -585,8 +585,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_rate->callback((Fl_Callback*)cb_infinity_rate);
   infinity_rate->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_rate->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_rate
-{ infinity_subdiv = new SliderW(56, 170, 100, 10, "Subdiv");
+} // RKR_Slider* infinity_rate
+{ infinity_subdiv = new RKR_Slider(56, 170, 100, 10, "Subdiv");
   infinity_subdiv->type(5);
   infinity_subdiv->box(FL_FLAT_BOX);
   infinity_subdiv->color((Fl_Color)178);
@@ -602,7 +602,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_subdiv->callback((Fl_Callback*)cb_infinity_subdiv);
   infinity_subdiv->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_subdiv->when(FL_WHEN_CHANGED);
-} // SliderW* infinity_subdiv
+} // RKR_Slider* infinity_subdiv
 position(X, Y);
 end();
 }

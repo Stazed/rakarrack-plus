@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,45 +25,45 @@ private:
   static void cb_shar_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_shar_preset[];
 public:
-  SliderW *shar_WD;
+  RKR_Slider *shar_WD;
 private:
-  inline void cb_shar_WD_i(SliderW*, void*);
-  static void cb_shar_WD(SliderW*, void*);
+  inline void cb_shar_WD_i(RKR_Slider*, void*);
+  static void cb_shar_WD(RKR_Slider*, void*);
 public:
-  SliderW *shar_intl;
+  RKR_Slider *shar_intl;
 private:
-  inline void cb_shar_intl_i(SliderW*, void*);
-  static void cb_shar_intl(SliderW*, void*);
+  inline void cb_shar_intl_i(RKR_Slider*, void*);
+  static void cb_shar_intl(RKR_Slider*, void*);
 public:
-  SliderW *shar_chl;
+  RKR_Slider *shar_chl;
 private:
-  inline void cb_shar_chl_i(SliderW*, void*);
-  static void cb_shar_chl(SliderW*, void*);
+  inline void cb_shar_chl_i(RKR_Slider*, void*);
+  static void cb_shar_chl(RKR_Slider*, void*);
 public:
-  SliderW *shar_ganl;
+  RKR_Slider *shar_ganl;
 private:
-  inline void cb_shar_ganl_i(SliderW*, void*);
-  static void cb_shar_ganl(SliderW*, void*);
+  inline void cb_shar_ganl_i(RKR_Slider*, void*);
+  static void cb_shar_ganl(RKR_Slider*, void*);
 public:
-  SliderW *shar_intr;
+  RKR_Slider *shar_intr;
 private:
-  inline void cb_shar_intr_i(SliderW*, void*);
-  static void cb_shar_intr(SliderW*, void*);
+  inline void cb_shar_intr_i(RKR_Slider*, void*);
+  static void cb_shar_intr(RKR_Slider*, void*);
 public:
-  SliderW *shar_chr;
+  RKR_Slider *shar_chr;
 private:
-  inline void cb_shar_chr_i(SliderW*, void*);
-  static void cb_shar_chr(SliderW*, void*);
+  inline void cb_shar_chr_i(RKR_Slider*, void*);
+  static void cb_shar_chr(RKR_Slider*, void*);
 public:
-  SliderW *shar_ganr;
+  RKR_Slider *shar_ganr;
 private:
-  inline void cb_shar_ganr_i(SliderW*, void*);
-  static void cb_shar_ganr(SliderW*, void*);
+  inline void cb_shar_ganr_i(RKR_Slider*, void*);
+  static void cb_shar_ganr(RKR_Slider*, void*);
 public:
-  SliderW *shar_lrc;
+  RKR_Slider *shar_lrc;
 private:
-  inline void cb_shar_lrc_i(SliderW*, void*);
-  static void cb_shar_lrc(SliderW*, void*);
+  inline void cb_shar_lrc_i(RKR_Slider*, void*);
+  static void cb_shar_lrc(RKR_Slider*, void*);
 public:
   RKR_Check_Button *shar_MIDI;
 private:
@@ -76,14 +76,14 @@ private:
   static void cb_shar_SELECT(RKR_Check_Button*, void*);
 public:
   RKR_Box *shar_chordname;
-  SliderW *shar_note;
+  RKR_Slider *shar_note;
 private:
-  inline void cb_shar_note_i(SliderW*, void*);
-  static void cb_shar_note(SliderW*, void*);
+  inline void cb_shar_note_i(RKR_Slider*, void*);
+  static void cb_shar_note(RKR_Slider*, void*);
 public:
-  SliderW *shar_type;
+  RKR_Slider *shar_type;
 private:
-  inline void cb_shar_type_i(SliderW*, void*);
-  static void cb_shar_type(SliderW*, void*);
+  inline void cb_shar_type_i(RKR_Slider*, void*);
+  static void cb_shar_type(RKR_Slider*, void*);
 };
 #endif

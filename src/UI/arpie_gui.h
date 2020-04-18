@@ -7,7 +7,7 @@
 #include "RKR_Choice.h"
 #include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,50 +26,50 @@ private:
   static void cb_arpie_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_arpie_preset[];
 public:
-  SliderW *arpie_WD;
+  RKR_Slider *arpie_WD;
 private:
-  inline void cb_arpie_WD_i(SliderW*, void*);
-  static void cb_arpie_WD(SliderW*, void*);
+  inline void cb_arpie_WD_i(RKR_Slider*, void*);
+  static void cb_arpie_WD(RKR_Slider*, void*);
 public:
-  SliderW *arpie_arpe;
+  RKR_Slider *arpie_arpe;
 private:
-  inline void cb_arpie_arpe_i(SliderW*, void*);
-  static void cb_arpie_arpe(SliderW*, void*);
+  inline void cb_arpie_arpe_i(RKR_Slider*, void*);
+  static void cb_arpie_arpe(RKR_Slider*, void*);
 public:
-  SliderW *arpie_pan;
+  RKR_Slider *arpie_pan;
 private:
-  inline void cb_arpie_pan_i(SliderW*, void*);
-  static void cb_arpie_pan(SliderW*, void*);
+  inline void cb_arpie_pan_i(RKR_Slider*, void*);
+  static void cb_arpie_pan(RKR_Slider*, void*);
 public:
-  SliderW *arpie_delay;
+  RKR_Slider *arpie_delay;
 private:
-  inline void cb_arpie_delay_i(SliderW*, void*);
-  static void cb_arpie_delay(SliderW*, void*);
+  inline void cb_arpie_delay_i(RKR_Slider*, void*);
+  static void cb_arpie_delay(RKR_Slider*, void*);
 public:
   RKR_Choice *arpie_subdiv;
 private:
   inline void cb_arpie_subdiv_i(RKR_Choice*, void*);
   static void cb_arpie_subdiv(RKR_Choice*, void*);
 public:
-  SliderW *arpie_LRdl;
+  RKR_Slider *arpie_LRdl;
 private:
-  inline void cb_arpie_LRdl_i(SliderW*, void*);
-  static void cb_arpie_LRdl(SliderW*, void*);
+  inline void cb_arpie_LRdl_i(RKR_Slider*, void*);
+  static void cb_arpie_LRdl(RKR_Slider*, void*);
 public:
-  SliderW *arpie_LRc;
+  RKR_Slider *arpie_LRc;
 private:
-  inline void cb_arpie_LRc_i(SliderW*, void*);
-  static void cb_arpie_LRc(SliderW*, void*);
+  inline void cb_arpie_LRc_i(RKR_Slider*, void*);
+  static void cb_arpie_LRc(RKR_Slider*, void*);
 public:
-  SliderW *arpie_fb;
+  RKR_Slider *arpie_fb;
 private:
-  inline void cb_arpie_fb_i(SliderW*, void*);
-  static void cb_arpie_fb(SliderW*, void*);
+  inline void cb_arpie_fb_i(RKR_Slider*, void*);
+  static void cb_arpie_fb(RKR_Slider*, void*);
 public:
-  SliderW *arpie_damp;
+  RKR_Slider *arpie_damp;
 private:
-  inline void cb_arpie_damp_i(SliderW*, void*);
-  static void cb_arpie_damp(SliderW*, void*);
+  inline void cb_arpie_damp_i(RKR_Slider*, void*);
+  static void cb_arpie_damp(RKR_Slider*, void*);
 public:
   RKR_Counter *arpie_harm;
 private:

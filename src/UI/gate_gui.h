@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,39 +24,39 @@ private:
   static void cb_gate_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_gate_preset[];
 public:
-  SliderW *gate_ATime;
+  RKR_Slider *gate_ATime;
 private:
-  inline void cb_gate_ATime_i(SliderW*, void*);
-  static void cb_gate_ATime(SliderW*, void*);
+  inline void cb_gate_ATime_i(RKR_Slider*, void*);
+  static void cb_gate_ATime(RKR_Slider*, void*);
 public:
-  SliderW *gate_RTime;
+  RKR_Slider *gate_RTime;
 private:
-  inline void cb_gate_RTime_i(SliderW*, void*);
-  static void cb_gate_RTime(SliderW*, void*);
+  inline void cb_gate_RTime_i(RKR_Slider*, void*);
+  static void cb_gate_RTime(RKR_Slider*, void*);
 public:
-  SliderW *gate_range;
+  RKR_Slider *gate_range;
 private:
-  inline void cb_gate_range_i(SliderW*, void*);
-  static void cb_gate_range(SliderW*, void*);
+  inline void cb_gate_range_i(RKR_Slider*, void*);
+  static void cb_gate_range(RKR_Slider*, void*);
 public:
-  SliderW *gate_threshold;
+  RKR_Slider *gate_threshold;
 private:
-  inline void cb_gate_threshold_i(SliderW*, void*);
-  static void cb_gate_threshold(SliderW*, void*);
+  inline void cb_gate_threshold_i(RKR_Slider*, void*);
+  static void cb_gate_threshold(RKR_Slider*, void*);
 public:
-  SliderW *gate_hold;
+  RKR_Slider *gate_hold;
 private:
-  inline void cb_gate_hold_i(SliderW*, void*);
-  static void cb_gate_hold(SliderW*, void*);
+  inline void cb_gate_hold_i(RKR_Slider*, void*);
+  static void cb_gate_hold(RKR_Slider*, void*);
 public:
-  SliderW *gate_LPF;
+  RKR_Slider *gate_LPF;
 private:
-  inline void cb_gate_LPF_i(SliderW*, void*);
-  static void cb_gate_LPF(SliderW*, void*);
+  inline void cb_gate_LPF_i(RKR_Slider*, void*);
+  static void cb_gate_LPF(RKR_Slider*, void*);
 public:
-  SliderW *gate_HPF;
+  RKR_Slider *gate_HPF;
 private:
-  inline void cb_gate_HPF_i(SliderW*, void*);
-  static void cb_gate_HPF(SliderW*, void*);
+  inline void cb_gate_HPF_i(RKR_Slider*, void*);
+  static void cb_gate_HPF(RKR_Slider*, void*);
 };
 #endif

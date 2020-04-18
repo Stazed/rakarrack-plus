@@ -41,7 +41,7 @@ Fl_Menu_Item CoilGui::menu_coil_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void CoilGui::cb_coil_WD_i(SliderW* o, void*) {
+void CoilGui::cb_coil_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(286);
@@ -49,11 +49,11 @@ void CoilGui::cb_coil_WD_i(SliderW* o, void*) {
 }
 rkr->efx_CoilCrafter->changepar(0,(int)o->value());
 }
-void CoilGui::cb_coil_WD(SliderW* o, void* v) {
+void CoilGui::cb_coil_WD(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_WD_i(o,v);
 }
 
-void CoilGui::cb_coil_tone_i(SliderW* o, void*) {
+void CoilGui::cb_coil_tone_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(287);
@@ -61,7 +61,7 @@ void CoilGui::cb_coil_tone_i(SliderW* o, void*) {
 }
 rkr->efx_CoilCrafter->changepar(7,(int)o->value());
 }
-void CoilGui::cb_coil_tone(SliderW* o, void* v) {
+void CoilGui::cb_coil_tone(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_tone_i(o,v);
 }
 
@@ -87,7 +87,7 @@ Fl_Menu_Item CoilGui::menu_coil_origin[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void CoilGui::cb_coil_freq1_i(SliderW* o, void*) {
+void CoilGui::cb_coil_freq1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(288);
@@ -95,11 +95,11 @@ void CoilGui::cb_coil_freq1_i(SliderW* o, void*) {
 }
 rkr->efx_CoilCrafter->changepar(3,(int)o->value());
 }
-void CoilGui::cb_coil_freq1(SliderW* o, void* v) {
+void CoilGui::cb_coil_freq1(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_freq1_i(o,v);
 }
 
-void CoilGui::cb_coil_q1_i(SliderW* o, void*) {
+void CoilGui::cb_coil_q1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(289);
@@ -107,7 +107,7 @@ void CoilGui::cb_coil_q1_i(SliderW* o, void*) {
 }
 rkr->efx_CoilCrafter->changepar(4,(int)o->value());
 }
-void CoilGui::cb_coil_q1(SliderW* o, void* v) {
+void CoilGui::cb_coil_q1(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_q1_i(o,v);
 }
 
@@ -120,7 +120,7 @@ void CoilGui::cb_coil_destiny(RKR_Choice* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_destiny_i(o,v);
 }
 
-void CoilGui::cb_coil_freq2_i(SliderW* o, void*) {
+void CoilGui::cb_coil_freq2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(290);
@@ -128,11 +128,11 @@ void CoilGui::cb_coil_freq2_i(SliderW* o, void*) {
 }
 rkr->efx_CoilCrafter->changepar(5,(int)o->value());
 }
-void CoilGui::cb_coil_freq2(SliderW* o, void* v) {
+void CoilGui::cb_coil_freq2(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_freq2_i(o,v);
 }
 
-void CoilGui::cb_coil_q2_i(SliderW* o, void*) {
+void CoilGui::cb_coil_q2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(291);
@@ -140,7 +140,7 @@ void CoilGui::cb_coil_q2_i(SliderW* o, void*) {
 }
 rkr->efx_CoilCrafter->changepar(6,(int)o->value());
 }
-void CoilGui::cb_coil_q2(SliderW* o, void* v) {
+void CoilGui::cb_coil_q2(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_q2_i(o,v);
 }
 
@@ -186,7 +186,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_preset->when(FL_WHEN_RELEASE_ALWAYS);
   coil_preset->menu(menu_coil_preset);
 } // RKR_Choice* coil_preset
-{ coil_WD = new SliderW(53, 25, 100, 10, "Gain");
+{ coil_WD = new RKR_Slider(53, 25, 100, 10, "Gain");
   coil_WD->type(5);
   coil_WD->box(FL_FLAT_BOX);
   coil_WD->color((Fl_Color)178);
@@ -202,8 +202,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_WD->callback((Fl_Callback*)cb_coil_WD);
   coil_WD->align(Fl_Align(FL_ALIGN_LEFT));
   coil_WD->when(FL_WHEN_CHANGED);
-} // SliderW* coil_WD
-{ coil_tone = new SliderW(53, 41, 100, 10, "Tone");
+} // RKR_Slider* coil_WD
+{ coil_tone = new RKR_Slider(53, 41, 100, 10, "Tone");
   coil_tone->type(5);
   coil_tone->box(FL_FLAT_BOX);
   coil_tone->color((Fl_Color)178);
@@ -220,7 +220,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_tone->callback((Fl_Callback*)cb_coil_tone);
   coil_tone->align(Fl_Align(FL_ALIGN_LEFT));
   coil_tone->when(FL_WHEN_CHANGED);
-} // SliderW* coil_tone
+} // RKR_Slider* coil_tone
 { coil_origin = new RKR_Choice(61, 55, 90, 18, "Origin");
   coil_origin->box(FL_FLAT_BOX);
   coil_origin->down_box(FL_BORDER_BOX);
@@ -237,7 +237,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_origin->when(FL_WHEN_RELEASE_ALWAYS);
   coil_origin->menu(menu_coil_origin);
 } // RKR_Choice* coil_origin
-{ coil_freq1 = new SliderW(53, 79, 100, 10, "Freq 1");
+{ coil_freq1 = new RKR_Slider(53, 79, 100, 10, "Freq 1");
   coil_freq1->tooltip("Origin Pickup Frequency");
   coil_freq1->type(5);
   coil_freq1->box(FL_FLAT_BOX);
@@ -255,8 +255,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_freq1->callback((Fl_Callback*)cb_coil_freq1);
   coil_freq1->align(Fl_Align(FL_ALIGN_LEFT));
   coil_freq1->when(FL_WHEN_CHANGED);
-} // SliderW* coil_freq1
-{ coil_q1 = new SliderW(53, 94, 100, 10, "Q 1");
+} // RKR_Slider* coil_freq1
+{ coil_q1 = new RKR_Slider(53, 94, 100, 10, "Q 1");
   coil_q1->tooltip("Origin Pickup Resonance");
   coil_q1->type(5);
   coil_q1->box(FL_FLAT_BOX);
@@ -273,7 +273,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_q1->callback((Fl_Callback*)cb_coil_q1);
   coil_q1->align(Fl_Align(FL_ALIGN_LEFT));
   coil_q1->when(FL_WHEN_CHANGED);
-} // SliderW* coil_q1
+} // RKR_Slider* coil_q1
 { RKR_Choice* o = coil_destiny = new RKR_Choice(61, 107, 90, 18, "Destiny");
   coil_destiny->box(FL_FLAT_BOX);
   coil_destiny->down_box(FL_BORDER_BOX);
@@ -290,7 +290,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_destiny->when(FL_WHEN_RELEASE_ALWAYS);
   o->menu(menu_coil_origin);
 } // RKR_Choice* coil_destiny
-{ coil_freq2 = new SliderW(53, 132, 100, 10, "Freq 2");
+{ coil_freq2 = new RKR_Slider(53, 132, 100, 10, "Freq 2");
   coil_freq2->tooltip("Destination Pickup Frequency");
   coil_freq2->type(5);
   coil_freq2->box(FL_FLAT_BOX);
@@ -308,8 +308,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_freq2->callback((Fl_Callback*)cb_coil_freq2);
   coil_freq2->align(Fl_Align(FL_ALIGN_LEFT));
   coil_freq2->when(FL_WHEN_CHANGED);
-} // SliderW* coil_freq2
-{ coil_q2 = new SliderW(53, 147, 100, 10, "Q 2");
+} // RKR_Slider* coil_freq2
+{ coil_q2 = new RKR_Slider(53, 147, 100, 10, "Q 2");
   coil_q2->tooltip("Destination Pickup Resonance");
   coil_q2->type(5);
   coil_q2->box(FL_FLAT_BOX);
@@ -327,7 +327,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_q2->callback((Fl_Callback*)cb_coil_q2);
   coil_q2->align(Fl_Align(FL_ALIGN_LEFT));
   coil_q2->when(FL_WHEN_CHANGED);
-} // SliderW* coil_q2
+} // RKR_Slider* coil_q2
 { coil_mode = new RKR_Check_Button(13, 161, 41, 15, "Neck Pickup");
   coil_mode->box(FL_NO_BOX);
   coil_mode->down_box(FL_BORDER_BOX);

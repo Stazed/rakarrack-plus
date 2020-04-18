@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -25,55 +25,55 @@ private:
   static void cb_mbvvol_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_mbvvol_preset[];
 public:
-  SliderW *mbvvol_WD;
+  RKR_Slider *mbvvol_WD;
 private:
-  inline void cb_mbvvol_WD_i(SliderW*, void*);
-  static void cb_mbvvol_WD(SliderW*, void*);
+  inline void cb_mbvvol_WD_i(RKR_Slider*, void*);
+  static void cb_mbvvol_WD(RKR_Slider*, void*);
 public:
-  SliderW *mbvvol_freq1;
+  RKR_Slider *mbvvol_freq1;
 private:
-  inline void cb_mbvvol_freq1_i(SliderW*, void*);
-  static void cb_mbvvol_freq1(SliderW*, void*);
+  inline void cb_mbvvol_freq1_i(RKR_Slider*, void*);
+  static void cb_mbvvol_freq1(RKR_Slider*, void*);
 public:
   RKR_Choice *mbvvol_lfotype1;
 private:
   inline void cb_mbvvol_lfotype1_i(RKR_Choice*, void*);
   static void cb_mbvvol_lfotype1(RKR_Choice*, void*);
 public:
-  SliderW *mbvvol_stdf1;
+  RKR_Slider *mbvvol_stdf1;
 private:
-  inline void cb_mbvvol_stdf1_i(SliderW*, void*);
-  static void cb_mbvvol_stdf1(SliderW*, void*);
+  inline void cb_mbvvol_stdf1_i(RKR_Slider*, void*);
+  static void cb_mbvvol_stdf1(RKR_Slider*, void*);
 public:
-  SliderW *mbvvol_freq2;
+  RKR_Slider *mbvvol_freq2;
 private:
-  inline void cb_mbvvol_freq2_i(SliderW*, void*);
-  static void cb_mbvvol_freq2(SliderW*, void*);
+  inline void cb_mbvvol_freq2_i(RKR_Slider*, void*);
+  static void cb_mbvvol_freq2(RKR_Slider*, void*);
 public:
   RKR_Choice *mbvvol_lfotype2;
 private:
   inline void cb_mbvvol_lfotype2_i(RKR_Choice*, void*);
   static void cb_mbvvol_lfotype2(RKR_Choice*, void*);
 public:
-  SliderW *mbvvol_stdf2;
+  RKR_Slider *mbvvol_stdf2;
 private:
-  inline void cb_mbvvol_stdf2_i(SliderW*, void*);
-  static void cb_mbvvol_stdf2(SliderW*, void*);
+  inline void cb_mbvvol_stdf2_i(RKR_Slider*, void*);
+  static void cb_mbvvol_stdf2(RKR_Slider*, void*);
 public:
-  SliderW *mbvvol_cross1;
+  RKR_Slider *mbvvol_cross1;
 private:
-  inline void cb_mbvvol_cross1_i(SliderW*, void*);
-  static void cb_mbvvol_cross1(SliderW*, void*);
+  inline void cb_mbvvol_cross1_i(RKR_Slider*, void*);
+  static void cb_mbvvol_cross1(RKR_Slider*, void*);
 public:
-  SliderW *mbvvol_cross2;
+  RKR_Slider *mbvvol_cross2;
 private:
-  inline void cb_mbvvol_cross2_i(SliderW*, void*);
-  static void cb_mbvvol_cross2(SliderW*, void*);
+  inline void cb_mbvvol_cross2_i(RKR_Slider*, void*);
+  static void cb_mbvvol_cross2(RKR_Slider*, void*);
 public:
-  SliderW *mbvvol_cross3;
+  RKR_Slider *mbvvol_cross3;
 private:
-  inline void cb_mbvvol_cross3_i(SliderW*, void*);
-  static void cb_mbvvol_cross3(SliderW*, void*);
+  inline void cb_mbvvol_cross3_i(RKR_Slider*, void*);
+  static void cb_mbvvol_cross3(RKR_Slider*, void*);
 public:
   RKR_Choice *mbvvol_LB;
 private:

@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,65 +25,65 @@ private:
   static void cb_seq_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_seq_preset[];
 public:
-  SliderW *seq_WD;
+  RKR_Slider *seq_WD;
 private:
-  inline void cb_seq_WD_i(SliderW*, void*);
-  static void cb_seq_WD(SliderW*, void*);
+  inline void cb_seq_WD_i(RKR_Slider*, void*);
+  static void cb_seq_WD(RKR_Slider*, void*);
 public:
-  SliderW *seq_1;
+  RKR_Slider *seq_1;
 private:
-  inline void cb_seq_1_i(SliderW*, void*);
-  static void cb_seq_1(SliderW*, void*);
+  inline void cb_seq_1_i(RKR_Slider*, void*);
+  static void cb_seq_1(RKR_Slider*, void*);
 public:
-  SliderW *seq_2;
+  RKR_Slider *seq_2;
 private:
-  inline void cb_seq_2_i(SliderW*, void*);
-  static void cb_seq_2(SliderW*, void*);
+  inline void cb_seq_2_i(RKR_Slider*, void*);
+  static void cb_seq_2(RKR_Slider*, void*);
 public:
-  SliderW *seq_3;
+  RKR_Slider *seq_3;
 private:
-  inline void cb_seq_3_i(SliderW*, void*);
-  static void cb_seq_3(SliderW*, void*);
+  inline void cb_seq_3_i(RKR_Slider*, void*);
+  static void cb_seq_3(RKR_Slider*, void*);
 public:
-  SliderW *seq_4;
+  RKR_Slider *seq_4;
 private:
-  inline void cb_seq_4_i(SliderW*, void*);
-  static void cb_seq_4(SliderW*, void*);
+  inline void cb_seq_4_i(RKR_Slider*, void*);
+  static void cb_seq_4(RKR_Slider*, void*);
 public:
-  SliderW *seq_5;
+  RKR_Slider *seq_5;
 private:
-  inline void cb_seq_5_i(SliderW*, void*);
-  static void cb_seq_5(SliderW*, void*);
+  inline void cb_seq_5_i(RKR_Slider*, void*);
+  static void cb_seq_5(RKR_Slider*, void*);
 public:
-  SliderW *seq_6;
+  RKR_Slider *seq_6;
 private:
-  inline void cb_seq_6_i(SliderW*, void*);
-  static void cb_seq_6(SliderW*, void*);
+  inline void cb_seq_6_i(RKR_Slider*, void*);
+  static void cb_seq_6(RKR_Slider*, void*);
 public:
-  SliderW *seq_7;
+  RKR_Slider *seq_7;
 private:
-  inline void cb_seq_7_i(SliderW*, void*);
-  static void cb_seq_7(SliderW*, void*);
+  inline void cb_seq_7_i(RKR_Slider*, void*);
+  static void cb_seq_7(RKR_Slider*, void*);
 public:
-  SliderW *seq_8;
+  RKR_Slider *seq_8;
 private:
-  inline void cb_seq_8_i(SliderW*, void*);
-  static void cb_seq_8(SliderW*, void*);
+  inline void cb_seq_8_i(RKR_Slider*, void*);
+  static void cb_seq_8(RKR_Slider*, void*);
 public:
-  SliderW *seq_tempo;
+  RKR_Slider *seq_tempo;
 private:
-  inline void cb_seq_tempo_i(SliderW*, void*);
-  static void cb_seq_tempo(SliderW*, void*);
+  inline void cb_seq_tempo_i(RKR_Slider*, void*);
+  static void cb_seq_tempo(RKR_Slider*, void*);
 public:
-  SliderW *seq_q;
+  RKR_Slider *seq_q;
 private:
-  inline void cb_seq_q_i(SliderW*, void*);
-  static void cb_seq_q(SliderW*, void*);
+  inline void cb_seq_q_i(RKR_Slider*, void*);
+  static void cb_seq_q(RKR_Slider*, void*);
 public:
-  SliderW *seq_stdf;
+  RKR_Slider *seq_stdf;
 private:
-  inline void cb_seq_stdf_i(SliderW*, void*);
-  static void cb_seq_stdf(SliderW*, void*);
+  inline void cb_seq_stdf_i(RKR_Slider*, void*);
+  static void cb_seq_stdf(RKR_Slider*, void*);
 public:
   RKR_Check_Button *seq_amp;
 private:

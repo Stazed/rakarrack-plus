@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,50 +25,50 @@ private:
   static void cb_shifter_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_shifter_preset[];
 public:
-  SliderW *shifter_WD;
+  RKR_Slider *shifter_WD;
 private:
-  inline void cb_shifter_WD_i(SliderW*, void*);
-  static void cb_shifter_WD(SliderW*, void*);
+  inline void cb_shifter_WD_i(RKR_Slider*, void*);
+  static void cb_shifter_WD(RKR_Slider*, void*);
 public:
-  SliderW *shifter_int;
+  RKR_Slider *shifter_int;
 private:
-  inline void cb_shifter_int_i(SliderW*, void*);
-  static void cb_shifter_int(SliderW*, void*);
+  inline void cb_shifter_int_i(RKR_Slider*, void*);
+  static void cb_shifter_int(RKR_Slider*, void*);
 public:
-  SliderW *shifter_gain;
+  RKR_Slider *shifter_gain;
 private:
-  inline void cb_shifter_gain_i(SliderW*, void*);
-  static void cb_shifter_gain(SliderW*, void*);
+  inline void cb_shifter_gain_i(RKR_Slider*, void*);
+  static void cb_shifter_gain(RKR_Slider*, void*);
 public:
-  SliderW *shifter_pan;
+  RKR_Slider *shifter_pan;
 private:
-  inline void cb_shifter_pan_i(SliderW*, void*);
-  static void cb_shifter_pan(SliderW*, void*);
+  inline void cb_shifter_pan_i(RKR_Slider*, void*);
+  static void cb_shifter_pan(RKR_Slider*, void*);
 public:
-  SliderW *shifter_attack;
+  RKR_Slider *shifter_attack;
 private:
-  inline void cb_shifter_attack_i(SliderW*, void*);
-  static void cb_shifter_attack(SliderW*, void*);
+  inline void cb_shifter_attack_i(RKR_Slider*, void*);
+  static void cb_shifter_attack(RKR_Slider*, void*);
 public:
-  SliderW *shifter_decay;
+  RKR_Slider *shifter_decay;
 private:
-  inline void cb_shifter_decay_i(SliderW*, void*);
-  static void cb_shifter_decay(SliderW*, void*);
+  inline void cb_shifter_decay_i(RKR_Slider*, void*);
+  static void cb_shifter_decay(RKR_Slider*, void*);
 public:
-  SliderW *shifter_thre;
+  RKR_Slider *shifter_thre;
 private:
-  inline void cb_shifter_thre_i(SliderW*, void*);
-  static void cb_shifter_thre(SliderW*, void*);
+  inline void cb_shifter_thre_i(RKR_Slider*, void*);
+  static void cb_shifter_thre(RKR_Slider*, void*);
 public:
   RKR_Check_Button *shifter_ud;
 private:
   inline void cb_shifter_ud_i(RKR_Check_Button*, void*);
   static void cb_shifter_ud(RKR_Check_Button*, void*);
 public:
-  SliderW *shifter_whammy;
+  RKR_Slider *shifter_whammy;
 private:
-  inline void cb_shifter_whammy_i(SliderW*, void*);
-  static void cb_shifter_whammy(SliderW*, void*);
+  inline void cb_shifter_whammy_i(RKR_Slider*, void*);
+  static void cb_shifter_whammy(RKR_Slider*, void*);
 public:
   RKR_Choice *shifter_mode;
 private:

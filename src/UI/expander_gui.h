@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,39 +24,39 @@ private:
   static void cb_expander_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_expander_preset[];
 public:
-  SliderW *expander_ATime;
+  RKR_Slider *expander_ATime;
 private:
-  inline void cb_expander_ATime_i(SliderW*, void*);
-  static void cb_expander_ATime(SliderW*, void*);
+  inline void cb_expander_ATime_i(RKR_Slider*, void*);
+  static void cb_expander_ATime(RKR_Slider*, void*);
 public:
-  SliderW *expander_RTime;
+  RKR_Slider *expander_RTime;
 private:
-  inline void cb_expander_RTime_i(SliderW*, void*);
-  static void cb_expander_RTime(SliderW*, void*);
+  inline void cb_expander_RTime_i(RKR_Slider*, void*);
+  static void cb_expander_RTime(RKR_Slider*, void*);
 public:
-  SliderW *expander_shape;
+  RKR_Slider *expander_shape;
 private:
-  inline void cb_expander_shape_i(SliderW*, void*);
-  static void cb_expander_shape(SliderW*, void*);
+  inline void cb_expander_shape_i(RKR_Slider*, void*);
+  static void cb_expander_shape(RKR_Slider*, void*);
 public:
-  SliderW *expander_threshold;
+  RKR_Slider *expander_threshold;
 private:
-  inline void cb_expander_threshold_i(SliderW*, void*);
-  static void cb_expander_threshold(SliderW*, void*);
+  inline void cb_expander_threshold_i(RKR_Slider*, void*);
+  static void cb_expander_threshold(RKR_Slider*, void*);
 public:
-  SliderW *expander_level;
+  RKR_Slider *expander_level;
 private:
-  inline void cb_expander_level_i(SliderW*, void*);
-  static void cb_expander_level(SliderW*, void*);
+  inline void cb_expander_level_i(RKR_Slider*, void*);
+  static void cb_expander_level(RKR_Slider*, void*);
 public:
-  SliderW *expander_LPF;
+  RKR_Slider *expander_LPF;
 private:
-  inline void cb_expander_LPF_i(SliderW*, void*);
-  static void cb_expander_LPF(SliderW*, void*);
+  inline void cb_expander_LPF_i(RKR_Slider*, void*);
+  static void cb_expander_LPF(RKR_Slider*, void*);
 public:
-  SliderW *expander_HPF;
+  RKR_Slider *expander_HPF;
 private:
-  inline void cb_expander_HPF_i(SliderW*, void*);
-  static void cb_expander_HPF(SliderW*, void*);
+  inline void cb_expander_HPF_i(RKR_Slider*, void*);
+  static void cb_expander_HPF(RKR_Slider*, void*);
 };
 #endif

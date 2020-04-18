@@ -54,7 +54,7 @@ Fl_Menu_Item SynthfilterGui::menu_synthfilter_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void SynthfilterGui::cb_synthfilter_WD_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(237);
@@ -62,11 +62,11 @@ void SynthfilterGui::cb_synthfilter_WD_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(0,Dry_Wet((int)(o->value())));
 }
-void SynthfilterGui::cb_synthfilter_WD(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_WD(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_WD_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_Distort_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_Distort_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(238);
@@ -74,11 +74,11 @@ void SynthfilterGui::cb_synthfilter_Distort_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(1,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_Distort(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_Distort(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Distort_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_freq_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(239);
@@ -86,7 +86,7 @@ void SynthfilterGui::cb_synthfilter_freq_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(2,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_freq(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_freq(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_freq_i(o,v);
 }
 
@@ -116,7 +116,7 @@ void SynthfilterGui::cb_synthfilter_subs(RKR_Check_Button* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_subs_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_stdf_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(240);
@@ -124,11 +124,11 @@ void SynthfilterGui::cb_synthfilter_stdf_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(5,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_stdf(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_stdf(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_stdf_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_width_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_width_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(241);
@@ -136,11 +136,11 @@ void SynthfilterGui::cb_synthfilter_width_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(6,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_width(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_width(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_width_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_fb_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(242);
@@ -148,7 +148,7 @@ void SynthfilterGui::cb_synthfilter_fb_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(7,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_fb(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_fb(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_fb_i(o,v);
 }
 
@@ -166,7 +166,7 @@ void SynthfilterGui::cb_synthfilter_Hstages(RKR_Counter* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Hstages_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_dpth_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(243);
@@ -174,11 +174,11 @@ void SynthfilterGui::cb_synthfilter_dpth_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(11,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_dpth(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_dpth(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_dpth_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_EnvSens_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_EnvSens_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(244);
@@ -186,11 +186,11 @@ void SynthfilterGui::cb_synthfilter_EnvSens_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(12,(int)(o->value()));
 }
-void SynthfilterGui::cb_synthfilter_EnvSens(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_EnvSens(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_EnvSens_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_ATime_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(245);
@@ -198,11 +198,11 @@ void SynthfilterGui::cb_synthfilter_ATime_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(13,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_ATime(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_ATime(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_ATime_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_RTime_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(246);
@@ -210,11 +210,11 @@ void SynthfilterGui::cb_synthfilter_RTime_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(14,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_RTime(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_RTime(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_RTime_i(o,v);
 }
 
-void SynthfilterGui::cb_synthfilter_Offset_i(SliderW* o, void*) {
+void SynthfilterGui::cb_synthfilter_Offset_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(247);
@@ -222,7 +222,7 @@ void SynthfilterGui::cb_synthfilter_Offset_i(SliderW* o, void*) {
 }
 rkr->efx_Synthfilter->changepar(15,(int)o->value());
 }
-void SynthfilterGui::cb_synthfilter_Offset(SliderW* o, void* v) {
+void SynthfilterGui::cb_synthfilter_Offset(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Offset_i(o,v);
 }
 SynthfilterGui::SynthfilterGui(int X, int Y, int W, int H, const char *L)
@@ -261,7 +261,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   synthfilter_preset->menu(menu_synthfilter_preset);
 } // RKR_Choice* synthfilter_preset
-{ synthfilter_WD = new SliderW(56, 25, 100, 10, "Dry/Wet");
+{ synthfilter_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
   synthfilter_WD->type(5);
   synthfilter_WD->box(FL_FLAT_BOX);
   synthfilter_WD->color((Fl_Color)178);
@@ -276,8 +276,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_WD->callback((Fl_Callback*)cb_synthfilter_WD);
   synthfilter_WD->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_WD->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_WD
-{ synthfilter_Distort = new SliderW(56, 37, 100, 10, "Distort");
+} // RKR_Slider* synthfilter_WD
+{ synthfilter_Distort = new RKR_Slider(56, 37, 100, 10, "Distort");
   synthfilter_Distort->type(5);
   synthfilter_Distort->box(FL_FLAT_BOX);
   synthfilter_Distort->color((Fl_Color)178);
@@ -292,8 +292,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Distort->callback((Fl_Callback*)cb_synthfilter_Distort);
   synthfilter_Distort->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_Distort->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_Distort
-{ synthfilter_freq = new SliderW(56, 49, 100, 10, "Tempo");
+} // RKR_Slider* synthfilter_Distort
+{ synthfilter_freq = new RKR_Slider(56, 49, 100, 10, "Tempo");
   synthfilter_freq->type(5);
   synthfilter_freq->box(FL_FLAT_BOX);
   synthfilter_freq->color((Fl_Color)178);
@@ -309,7 +309,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_freq->callback((Fl_Callback*)cb_synthfilter_freq);
   synthfilter_freq->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_freq->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_freq
+} // RKR_Slider* synthfilter_freq
 { synthfilter_rand = new RKR_Value_Input(16, 62, 23, 15, "R");
   synthfilter_rand->tooltip("LFO Randomness");
   synthfilter_rand->box(FL_DOWN_BOX);
@@ -358,7 +358,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_subs->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* synthfilter_subs
-{ synthfilter_stdf = new SliderW(56, 80, 100, 10, "Stereo Df");
+{ synthfilter_stdf = new RKR_Slider(56, 80, 100, 10, "Stereo Df");
   synthfilter_stdf->tooltip("LFO L/R Delay");
   synthfilter_stdf->type(5);
   synthfilter_stdf->box(FL_FLAT_BOX);
@@ -374,8 +374,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_stdf->callback((Fl_Callback*)cb_synthfilter_stdf);
   synthfilter_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_stdf
-{ synthfilter_width = new SliderW(56, 91, 100, 10, "Width");
+} // RKR_Slider* synthfilter_stdf
+{ synthfilter_width = new RKR_Slider(56, 91, 100, 10, "Width");
   synthfilter_width->type(5);
   synthfilter_width->box(FL_FLAT_BOX);
   synthfilter_width->color((Fl_Color)178);
@@ -390,8 +390,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_width->callback((Fl_Callback*)cb_synthfilter_width);
   synthfilter_width->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_width->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_width
-{ synthfilter_fb = new SliderW(56, 102, 100, 10, "Feedback");
+} // RKR_Slider* synthfilter_width
+{ synthfilter_fb = new RKR_Slider(56, 102, 100, 10, "Feedback");
   synthfilter_fb->type(5);
   synthfilter_fb->box(FL_FLAT_BOX);
   synthfilter_fb->color((Fl_Color)178);
@@ -407,7 +407,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_fb->callback((Fl_Callback*)cb_synthfilter_fb);
   synthfilter_fb->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_fb->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_fb
+} // RKR_Slider* synthfilter_fb
 { RKR_Counter* o = synthfilter_Lstages = new RKR_Counter(48, 114, 28, 11, "LPF Stg.");
   synthfilter_Lstages->type(1);
   synthfilter_Lstages->box(FL_THIN_UP_BOX);
@@ -446,7 +446,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Hstages->when(FL_WHEN_CHANGED);
   o->m_start_text_offset = -1; // 10 - 9
 } // RKR_Counter* synthfilter_Hstages
-{ synthfilter_dpth = new SliderW(56, 126, 100, 10, "Depth");
+{ synthfilter_dpth = new RKR_Slider(56, 126, 100, 10, "Depth");
   synthfilter_dpth->type(5);
   synthfilter_dpth->box(FL_FLAT_BOX);
   synthfilter_dpth->color((Fl_Color)178);
@@ -461,8 +461,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_dpth->callback((Fl_Callback*)cb_synthfilter_dpth);
   synthfilter_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_dpth->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_dpth
-{ synthfilter_EnvSens = new SliderW(56, 137, 100, 10, "E.Sens");
+} // RKR_Slider* synthfilter_dpth
+{ synthfilter_EnvSens = new RKR_Slider(56, 137, 100, 10, "E.Sens");
   synthfilter_EnvSens->tooltip("Envelope Sensitivity");
   synthfilter_EnvSens->type(5);
   synthfilter_EnvSens->box(FL_FLAT_BOX);
@@ -479,8 +479,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_EnvSens->callback((Fl_Callback*)cb_synthfilter_EnvSens);
   synthfilter_EnvSens->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_EnvSens->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_EnvSens
-{ synthfilter_ATime = new SliderW(56, 148, 100, 10, "A.Time");
+} // RKR_Slider* synthfilter_EnvSens
+{ synthfilter_ATime = new RKR_Slider(56, 148, 100, 10, "A.Time");
   synthfilter_ATime->tooltip("Attack Time");
   synthfilter_ATime->type(5);
   synthfilter_ATime->box(FL_FLAT_BOX);
@@ -498,8 +498,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_ATime->callback((Fl_Callback*)cb_synthfilter_ATime);
   synthfilter_ATime->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_ATime->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_ATime
-{ synthfilter_RTime = new SliderW(56, 159, 100, 10, "R.Time");
+} // RKR_Slider* synthfilter_ATime
+{ synthfilter_RTime = new RKR_Slider(56, 159, 100, 10, "R.Time");
   synthfilter_RTime->tooltip("Release Time");
   synthfilter_RTime->type(5);
   synthfilter_RTime->box(FL_FLAT_BOX);
@@ -517,8 +517,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_RTime->callback((Fl_Callback*)cb_synthfilter_RTime);
   synthfilter_RTime->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_RTime->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_RTime
-{ synthfilter_Offset = new SliderW(56, 170, 100, 10, "Offset");
+} // RKR_Slider* synthfilter_RTime
+{ synthfilter_Offset = new RKR_Slider(56, 170, 100, 10, "Offset");
   synthfilter_Offset->tooltip("HPF/LPF Offset");
   synthfilter_Offset->type(5);
   synthfilter_Offset->box(FL_FLAT_BOX);
@@ -534,7 +534,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Offset->callback((Fl_Callback*)cb_synthfilter_Offset);
   synthfilter_Offset->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_Offset->when(FL_WHEN_CHANGED);
-} // SliderW* synthfilter_Offset
+} // RKR_Slider* synthfilter_Offset
 position(X, Y);
 end();
 }

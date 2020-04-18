@@ -14,7 +14,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class RingGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
 } {
@@ -89,7 +89,7 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));} selected
 } 
 rkr->efx_Ring->changepar(0,Dry_Wet((int)o->value()));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_LRc {
     label {L/R Cross}
@@ -100,7 +100,7 @@ rkr->efx_Ring->changepar(0,Dry_Wet((int)o->value()));}
 } 
 rkr->efx_Ring->changepar(2,(int)o->value());}
     xywh {56 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_input {
     label Input
@@ -111,7 +111,7 @@ rkr->efx_Ring->changepar(2,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(11,(int)o->value());}
     xywh {56 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_level {
     label Level
@@ -122,7 +122,7 @@ rkr->efx_Ring->changepar(11,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(3,(int)o->value());}
     xywh {56 68 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_pan {
     label Pan
@@ -133,7 +133,7 @@ rkr->efx_Ring->changepar(3,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(1,(int)o->value());}
     xywh {56 81 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Check_Button ring_st {
     label Stereo
@@ -158,7 +158,7 @@ rkr->efx_Ring->changepar(1,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(4,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_freq {
     label Freq
@@ -169,7 +169,7 @@ rkr->efx_Ring->changepar(4,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(5,(int)o->value());}
     tooltip Frequency xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 20000 step 10 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_sin {
     label Sine
@@ -180,7 +180,7 @@ rkr->efx_Ring->changepar(5,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(7,(int)o->value());}
     xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_tri {
     label Triangle
@@ -191,7 +191,7 @@ rkr->efx_Ring->changepar(7,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(8,(int)o->value());}
     xywh {56 142 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_saw {
     label Sawtooth
@@ -202,7 +202,7 @@ rkr->efx_Ring->changepar(8,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(9,(int)o->value());}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider ring_squ {
     label Square
@@ -213,6 +213,6 @@ rkr->efx_Ring->changepar(9,(int)o->value());}
 } 
 rkr->efx_Ring->changepar(10,(int)o->value());}
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
 }

@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,35 +25,35 @@ private:
   static void cb_compress_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_compress_preset[];
 public:
-  SliderW *compress_ATime;
+  RKR_Slider *compress_ATime;
 private:
-  inline void cb_compress_ATime_i(SliderW*, void*);
-  static void cb_compress_ATime(SliderW*, void*);
+  inline void cb_compress_ATime_i(RKR_Slider*, void*);
+  static void cb_compress_ATime(RKR_Slider*, void*);
 public:
-  SliderW *compress_RTime;
+  RKR_Slider *compress_RTime;
 private:
-  inline void cb_compress_RTime_i(SliderW*, void*);
-  static void cb_compress_RTime(SliderW*, void*);
+  inline void cb_compress_RTime_i(RKR_Slider*, void*);
+  static void cb_compress_RTime(RKR_Slider*, void*);
 public:
-  SliderW *compress_Ratio;
+  RKR_Slider *compress_Ratio;
 private:
-  inline void cb_compress_Ratio_i(SliderW*, void*);
-  static void cb_compress_Ratio(SliderW*, void*);
+  inline void cb_compress_Ratio_i(RKR_Slider*, void*);
+  static void cb_compress_Ratio(RKR_Slider*, void*);
 public:
-  SliderW *compress_Knee;
+  RKR_Slider *compress_Knee;
 private:
-  inline void cb_compress_Knee_i(SliderW*, void*);
-  static void cb_compress_Knee(SliderW*, void*);
+  inline void cb_compress_Knee_i(RKR_Slider*, void*);
+  static void cb_compress_Knee(RKR_Slider*, void*);
 public:
-  SliderW *compress_threshold;
+  RKR_Slider *compress_threshold;
 private:
-  inline void cb_compress_threshold_i(SliderW*, void*);
-  static void cb_compress_threshold(SliderW*, void*);
+  inline void cb_compress_threshold_i(RKR_Slider*, void*);
+  static void cb_compress_threshold(RKR_Slider*, void*);
 public:
-  SliderW *compress_output;
+  RKR_Slider *compress_output;
 private:
-  inline void cb_compress_output_i(SliderW*, void*);
-  static void cb_compress_output(SliderW*, void*);
+  inline void cb_compress_output_i(RKR_Slider*, void*);
+  static void cb_compress_output(RKR_Slider*, void*);
 public:
   RKR_Check_Button *Auto_Output;
 private:

@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,25 +26,25 @@ private:
   static void cb_newdist_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_newdist_preset[];
 public:
-  SliderW *newdist_WD;
+  RKR_Slider *newdist_WD;
 private:
-  inline void cb_newdist_WD_i(SliderW*, void*);
-  static void cb_newdist_WD(SliderW*, void*);
+  inline void cb_newdist_WD_i(RKR_Slider*, void*);
+  static void cb_newdist_WD(RKR_Slider*, void*);
 public:
-  SliderW *newdist_LRc;
+  RKR_Slider *newdist_LRc;
 private:
-  inline void cb_newdist_LRc_i(SliderW*, void*);
-  static void cb_newdist_LRc(SliderW*, void*);
+  inline void cb_newdist_LRc_i(RKR_Slider*, void*);
+  static void cb_newdist_LRc(RKR_Slider*, void*);
 public:
-  SliderW *newdist_drive;
+  RKR_Slider *newdist_drive;
 private:
-  inline void cb_newdist_drive_i(SliderW*, void*);
-  static void cb_newdist_drive(SliderW*, void*);
+  inline void cb_newdist_drive_i(RKR_Slider*, void*);
+  static void cb_newdist_drive(RKR_Slider*, void*);
 public:
-  SliderW *newdist_level;
+  RKR_Slider *newdist_level;
 private:
-  inline void cb_newdist_level_i(SliderW*, void*);
-  static void cb_newdist_level(SliderW*, void*);
+  inline void cb_newdist_level_i(RKR_Slider*, void*);
+  static void cb_newdist_level(RKR_Slider*, void*);
 public:
   RKR_Choice *newdist_tipo;
 private:
@@ -56,35 +56,35 @@ private:
   inline void cb_newdist_neg_i(RKR_Check_Button*, void*);
   static void cb_newdist_neg(RKR_Check_Button*, void*);
 public:
-  SliderW *newdist_st;
+  RKR_Slider *newdist_st;
 private:
-  inline void cb_newdist_st_i(SliderW*, void*);
-  static void cb_newdist_st(SliderW*, void*);
+  inline void cb_newdist_st_i(RKR_Slider*, void*);
+  static void cb_newdist_st(RKR_Slider*, void*);
 public:
-  SliderW *newdist_oct;
+  RKR_Slider *newdist_oct;
 private:
-  inline void cb_newdist_oct_i(SliderW*, void*);
-  static void cb_newdist_oct(SliderW*, void*);
+  inline void cb_newdist_oct_i(RKR_Slider*, void*);
+  static void cb_newdist_oct(RKR_Slider*, void*);
 public:
-  SliderW *newdist_pan;
+  RKR_Slider *newdist_pan;
 private:
-  inline void cb_newdist_pan_i(SliderW*, void*);
-  static void cb_newdist_pan(SliderW*, void*);
+  inline void cb_newdist_pan_i(RKR_Slider*, void*);
+  static void cb_newdist_pan(RKR_Slider*, void*);
 public:
   RKR_Check_Button *newdist_pf;
 private:
   inline void cb_newdist_pf_i(RKR_Check_Button*, void*);
   static void cb_newdist_pf(RKR_Check_Button*, void*);
 public:
-  SliderW *newdist_lpf;
+  RKR_Slider *newdist_lpf;
 private:
-  inline void cb_newdist_lpf_i(SliderW*, void*);
-  static void cb_newdist_lpf(SliderW*, void*);
+  inline void cb_newdist_lpf_i(RKR_Slider*, void*);
+  static void cb_newdist_lpf(RKR_Slider*, void*);
 public:
-  SliderW *newdist_hpf;
+  RKR_Slider *newdist_hpf;
 private:
-  inline void cb_newdist_hpf_i(SliderW*, void*);
-  static void cb_newdist_hpf(SliderW*, void*);
+  inline void cb_newdist_hpf_i(RKR_Slider*, void*);
+  static void cb_newdist_hpf(RKR_Slider*, void*);
   CommonGuiMenu *m_dist_menu; 
 };
 #endif

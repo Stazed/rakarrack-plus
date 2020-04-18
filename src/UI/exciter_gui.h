@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,69 +24,69 @@ private:
   static void cb_exciter_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_exciter_preset[];
 public:
-  SliderW *ex_Gain;
+  RKR_Slider *ex_Gain;
 private:
-  inline void cb_ex_Gain_i(SliderW*, void*);
-  static void cb_ex_Gain(SliderW*, void*);
+  inline void cb_ex_Gain_i(RKR_Slider*, void*);
+  static void cb_ex_Gain(RKR_Slider*, void*);
 public:
-  SliderW *ex_lfreq;
+  RKR_Slider *ex_lfreq;
 private:
-  inline void cb_ex_lfreq_i(SliderW*, void*);
-  static void cb_ex_lfreq(SliderW*, void*);
+  inline void cb_ex_lfreq_i(RKR_Slider*, void*);
+  static void cb_ex_lfreq(RKR_Slider*, void*);
 public:
-  SliderW *ex_hfreq;
+  RKR_Slider *ex_hfreq;
 private:
-  inline void cb_ex_hfreq_i(SliderW*, void*);
-  static void cb_ex_hfreq(SliderW*, void*);
+  inline void cb_ex_hfreq_i(RKR_Slider*, void*);
+  static void cb_ex_hfreq(RKR_Slider*, void*);
 public:
-  SliderW *ex_1;
+  RKR_Slider *ex_1;
 private:
-  inline void cb_ex_1_i(SliderW*, void*);
-  static void cb_ex_1(SliderW*, void*);
+  inline void cb_ex_1_i(RKR_Slider*, void*);
+  static void cb_ex_1(RKR_Slider*, void*);
 public:
-  SliderW *ex_2;
+  RKR_Slider *ex_2;
 private:
-  inline void cb_ex_2_i(SliderW*, void*);
-  static void cb_ex_2(SliderW*, void*);
+  inline void cb_ex_2_i(RKR_Slider*, void*);
+  static void cb_ex_2(RKR_Slider*, void*);
 public:
-  SliderW *ex_3;
+  RKR_Slider *ex_3;
 private:
-  inline void cb_ex_3_i(SliderW*, void*);
-  static void cb_ex_3(SliderW*, void*);
+  inline void cb_ex_3_i(RKR_Slider*, void*);
+  static void cb_ex_3(RKR_Slider*, void*);
 public:
-  SliderW *ex_4;
+  RKR_Slider *ex_4;
 private:
-  inline void cb_ex_4_i(SliderW*, void*);
-  static void cb_ex_4(SliderW*, void*);
+  inline void cb_ex_4_i(RKR_Slider*, void*);
+  static void cb_ex_4(RKR_Slider*, void*);
 public:
-  SliderW *ex_5;
+  RKR_Slider *ex_5;
 private:
-  inline void cb_ex_5_i(SliderW*, void*);
-  static void cb_ex_5(SliderW*, void*);
+  inline void cb_ex_5_i(RKR_Slider*, void*);
+  static void cb_ex_5(RKR_Slider*, void*);
 public:
-  SliderW *ex_6;
+  RKR_Slider *ex_6;
 private:
-  inline void cb_ex_6_i(SliderW*, void*);
-  static void cb_ex_6(SliderW*, void*);
+  inline void cb_ex_6_i(RKR_Slider*, void*);
+  static void cb_ex_6(RKR_Slider*, void*);
 public:
-  SliderW *ex_7;
+  RKR_Slider *ex_7;
 private:
-  inline void cb_ex_7_i(SliderW*, void*);
-  static void cb_ex_7(SliderW*, void*);
+  inline void cb_ex_7_i(RKR_Slider*, void*);
+  static void cb_ex_7(RKR_Slider*, void*);
 public:
-  SliderW *ex_8;
+  RKR_Slider *ex_8;
 private:
-  inline void cb_ex_8_i(SliderW*, void*);
-  static void cb_ex_8(SliderW*, void*);
+  inline void cb_ex_8_i(RKR_Slider*, void*);
+  static void cb_ex_8(RKR_Slider*, void*);
 public:
-  SliderW *ex_9;
+  RKR_Slider *ex_9;
 private:
-  inline void cb_ex_9_i(SliderW*, void*);
-  static void cb_ex_9(SliderW*, void*);
+  inline void cb_ex_9_i(RKR_Slider*, void*);
+  static void cb_ex_9(RKR_Slider*, void*);
 public:
-  SliderW *ex_10;
+  RKR_Slider *ex_10;
 private:
-  inline void cb_ex_10_i(SliderW*, void*);
-  static void cb_ex_10(SliderW*, void*);
+  inline void cb_ex_10_i(RKR_Slider*, void*);
+  static void cb_ex_10(RKR_Slider*, void*);
 };
 #endif

@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,35 +26,35 @@ private:
   static void cb_otrem_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_otrem_preset[];
 public:
-  SliderW *otrem_dpth;
+  RKR_Slider *otrem_dpth;
 private:
-  inline void cb_otrem_dpth_i(SliderW*, void*);
-  static void cb_otrem_dpth(SliderW*, void*);
+  inline void cb_otrem_dpth_i(RKR_Slider*, void*);
+  static void cb_otrem_dpth(RKR_Slider*, void*);
 public:
-  SliderW *otrem_freq;
+  RKR_Slider *otrem_freq;
 private:
-  inline void cb_otrem_freq_i(SliderW*, void*);
-  static void cb_otrem_freq(SliderW*, void*);
+  inline void cb_otrem_freq_i(RKR_Slider*, void*);
+  static void cb_otrem_freq(RKR_Slider*, void*);
 public:
-  SliderW *otrem_rnd;
+  RKR_Slider *otrem_rnd;
 private:
-  inline void cb_otrem_rnd_i(SliderW*, void*);
-  static void cb_otrem_rnd(SliderW*, void*);
+  inline void cb_otrem_rnd_i(RKR_Slider*, void*);
+  static void cb_otrem_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *otrem_lfotype;
 private:
   inline void cb_otrem_lfotype_i(RKR_Choice*, void*);
   static void cb_otrem_lfotype(RKR_Choice*, void*);
 public:
-  SliderW *otrem_stdf;
+  RKR_Slider *otrem_stdf;
 private:
-  inline void cb_otrem_stdf_i(SliderW*, void*);
-  static void cb_otrem_stdf(SliderW*, void*);
+  inline void cb_otrem_stdf_i(RKR_Slider*, void*);
+  static void cb_otrem_stdf(RKR_Slider*, void*);
 public:
-  SliderW *otrem_pan;
+  RKR_Slider *otrem_pan;
 private:
-  inline void cb_otrem_pan_i(SliderW*, void*);
-  static void cb_otrem_pan(SliderW*, void*);
+  inline void cb_otrem_pan_i(RKR_Slider*, void*);
+  static void cb_otrem_pan(RKR_Slider*, void*);
 public:
   RKR_Check_Button *otrem_invert;
 private:

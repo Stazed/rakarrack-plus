@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,50 +26,50 @@ private:
   static void cb_mbdist_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_mbdist_preset[];
 public:
-  SliderW *mbdist_WD;
+  RKR_Slider *mbdist_WD;
 private:
-  inline void cb_mbdist_WD_i(SliderW*, void*);
-  static void cb_mbdist_WD(SliderW*, void*);
+  inline void cb_mbdist_WD_i(RKR_Slider*, void*);
+  static void cb_mbdist_WD(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_LRc;
+  RKR_Slider *mbdist_LRc;
 private:
-  inline void cb_mbdist_LRc_i(SliderW*, void*);
-  static void cb_mbdist_LRc(SliderW*, void*);
+  inline void cb_mbdist_LRc_i(RKR_Slider*, void*);
+  static void cb_mbdist_LRc(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_drive;
+  RKR_Slider *mbdist_drive;
 private:
-  inline void cb_mbdist_drive_i(SliderW*, void*);
-  static void cb_mbdist_drive(SliderW*, void*);
+  inline void cb_mbdist_drive_i(RKR_Slider*, void*);
+  static void cb_mbdist_drive(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_level;
+  RKR_Slider *mbdist_level;
 private:
-  inline void cb_mbdist_level_i(SliderW*, void*);
-  static void cb_mbdist_level(SliderW*, void*);
+  inline void cb_mbdist_level_i(RKR_Slider*, void*);
+  static void cb_mbdist_level(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_volL;
+  RKR_Slider *mbdist_volL;
 private:
-  inline void cb_mbdist_volL_i(SliderW*, void*);
-  static void cb_mbdist_volL(SliderW*, void*);
+  inline void cb_mbdist_volL_i(RKR_Slider*, void*);
+  static void cb_mbdist_volL(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_volM;
+  RKR_Slider *mbdist_volM;
 private:
-  inline void cb_mbdist_volM_i(SliderW*, void*);
-  static void cb_mbdist_volM(SliderW*, void*);
+  inline void cb_mbdist_volM_i(RKR_Slider*, void*);
+  static void cb_mbdist_volM(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_volH;
+  RKR_Slider *mbdist_volH;
 private:
-  inline void cb_mbdist_volH_i(SliderW*, void*);
-  static void cb_mbdist_volH(SliderW*, void*);
+  inline void cb_mbdist_volH_i(RKR_Slider*, void*);
+  static void cb_mbdist_volH(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_cross1;
+  RKR_Slider *mbdist_cross1;
 private:
-  inline void cb_mbdist_cross1_i(SliderW*, void*);
-  static void cb_mbdist_cross1(SliderW*, void*);
+  inline void cb_mbdist_cross1_i(RKR_Slider*, void*);
+  static void cb_mbdist_cross1(RKR_Slider*, void*);
 public:
-  SliderW *mbdist_cross2;
+  RKR_Slider *mbdist_cross2;
 private:
-  inline void cb_mbdist_cross2_i(SliderW*, void*);
-  static void cb_mbdist_cross2(SliderW*, void*);
+  inline void cb_mbdist_cross2_i(RKR_Slider*, void*);
+  static void cb_mbdist_cross2(RKR_Slider*, void*);
 public:
   RKR_Choice *mbdist_tipoL;
 private:
@@ -86,10 +86,10 @@ private:
   inline void cb_mbdist_tipoH_i(RKR_Choice*, void*);
   static void cb_mbdist_tipoH(RKR_Choice*, void*);
 public:
-  SliderW *mbdist_pan;
+  RKR_Slider *mbdist_pan;
 private:
-  inline void cb_mbdist_pan_i(SliderW*, void*);
-  static void cb_mbdist_pan(SliderW*, void*);
+  inline void cb_mbdist_pan_i(RKR_Slider*, void*);
+  static void cb_mbdist_pan(RKR_Slider*, void*);
 public:
   RKR_Check_Button *mbdist_st;
 private:

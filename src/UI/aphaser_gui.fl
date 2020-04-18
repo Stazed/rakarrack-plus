@@ -17,7 +17,7 @@ decl {\#include "RKR_Counter.h"} {public global
 widget_class {\#include "common_gui_menu.h"} AphaserGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
@@ -93,7 +93,7 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(12));}
 } 
 rkr->efx_APhaser->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider aphaser_distort {
     label Distort
@@ -104,7 +104,7 @@ rkr->efx_APhaser->changepar(0,Dry_Wet((int)(o->value())));}
 } 
 rkr->efx_APhaser->changepar(1,(int)o->value());}
     xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider aphaser_freq {
     label Tempo
@@ -115,7 +115,7 @@ rkr->efx_APhaser->changepar(1,(int)o->value());}
 } 
 rkr->efx_APhaser->changepar(2,(int)o->value());}
     xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider aphaser_rnd {
     label Random
@@ -126,7 +126,7 @@ rkr->efx_APhaser->changepar(2,(int)o->value());}
 } 
 rkr->efx_APhaser->changepar(3,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Choice aphaser_lfotype {
     label {LFO Type}
@@ -144,7 +144,7 @@ rkr->efx_APhaser->changepar(3,(int)o->value());}
 } 
 rkr->efx_APhaser->changepar(6,(int)o->value());}
     xywh {56 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider aphaser_phase {
     label {P. Depth}
@@ -155,7 +155,7 @@ rkr->efx_APhaser->changepar(6,(int)o->value());}
 } 
 rkr->efx_APhaser->changepar(11,(int)o->value());}
     tooltip {Phase Depth} xywh {56 67 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider aphaser_fb {
     label Feedback
@@ -166,7 +166,7 @@ rkr->efx_APhaser->changepar(11,(int)o->value());}
 } 
 rkr->efx_APhaser->changepar(7,(int)(o->value()+64));}
     xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider aphaser_mismatch {
     label Mismatch
@@ -177,7 +177,7 @@ rkr->efx_APhaser->changepar(7,(int)(o->value()+64));}
 } 
 rkr->efx_APhaser->changepar(9,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider aphaser_stdf {
     label {Stereo Df}
@@ -188,7 +188,7 @@ rkr->efx_APhaser->changepar(9,(int)o->value());}
 } 
 rkr->efx_APhaser->changepar(5,(int)o->value());}
     tooltip {LFO L/R Delay} xywh {56 138 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Counter aphaser_stages {
     label Stages

@@ -50,7 +50,7 @@ Fl_Menu_Item VibeGui::menu_vibe_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void VibeGui::cb_vibe_WD_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(386);
@@ -58,11 +58,11 @@ void VibeGui::cb_vibe_WD_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(6,Dry_Wet((int)(o->value())));
 }
-void VibeGui::cb_vibe_WD(SliderW* o, void* v) {
+void VibeGui::cb_vibe_WD(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_WD_i(o,v);
 }
 
-void VibeGui::cb_vibe_width_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_width_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(387);
@@ -70,11 +70,11 @@ void VibeGui::cb_vibe_width_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(0,(int)o->value());
 }
-void VibeGui::cb_vibe_width(SliderW* o, void* v) {
+void VibeGui::cb_vibe_width(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_width_i(o,v);
 }
 
-void VibeGui::cb_vibe_dpth_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(388);
@@ -82,11 +82,11 @@ void VibeGui::cb_vibe_dpth_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(8,(int)o->value());
 }
-void VibeGui::cb_vibe_dpth(SliderW* o, void* v) {
+void VibeGui::cb_vibe_dpth(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_dpth_i(o,v);
 }
 
-void VibeGui::cb_vibe_freq_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(389);
@@ -94,11 +94,11 @@ void VibeGui::cb_vibe_freq_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(1,(int)o->value());
 }
-void VibeGui::cb_vibe_freq(SliderW* o, void* v) {
+void VibeGui::cb_vibe_freq(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_freq_i(o,v);
 }
 
-void VibeGui::cb_vibe_rnd_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(390);
@@ -106,7 +106,7 @@ void VibeGui::cb_vibe_rnd_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(2,(int)o->value());
 }
-void VibeGui::cb_vibe_rnd(SliderW* o, void* v) {
+void VibeGui::cb_vibe_rnd(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_rnd_i(o,v);
 }
 
@@ -117,7 +117,7 @@ void VibeGui::cb_vibe_lfotype(RKR_Choice* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_lfotype_i(o,v);
 }
 
-void VibeGui::cb_vibe_stdf_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(391);
@@ -125,11 +125,11 @@ void VibeGui::cb_vibe_stdf_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(4,(int)o->value());
 }
-void VibeGui::cb_vibe_stdf(SliderW* o, void* v) {
+void VibeGui::cb_vibe_stdf(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_stdf_i(o,v);
 }
 
-void VibeGui::cb_vibe_fb_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(392);
@@ -137,11 +137,11 @@ void VibeGui::cb_vibe_fb_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(7,(int)(o->value()+64));
 }
-void VibeGui::cb_vibe_fb(SliderW* o, void* v) {
+void VibeGui::cb_vibe_fb(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_fb_i(o,v);
 }
 
-void VibeGui::cb_vibe_LR_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(393);
@@ -149,11 +149,11 @@ void VibeGui::cb_vibe_LR_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(9,(int)(o->value()));
 }
-void VibeGui::cb_vibe_LR(SliderW* o, void* v) {
+void VibeGui::cb_vibe_LR(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_LR_i(o,v);
 }
 
-void VibeGui::cb_vibe_pan_i(SliderW* o, void*) {
+void VibeGui::cb_vibe_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(394);
@@ -161,7 +161,7 @@ void VibeGui::cb_vibe_pan_i(SliderW* o, void*) {
 }
 rkr->efx_Vibe->changepar(5,(int)(o->value()+64));
 }
-void VibeGui::cb_vibe_pan(SliderW* o, void* v) {
+void VibeGui::cb_vibe_pan(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_pan_i(o,v);
 }
 
@@ -207,7 +207,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vibe_preset->menu(menu_vibe_preset);
 } // RKR_Choice* vibe_preset
-{ vibe_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
+{ vibe_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   vibe_WD->type(5);
   vibe_WD->box(FL_FLAT_BOX);
   vibe_WD->color((Fl_Color)178);
@@ -222,8 +222,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_WD->callback((Fl_Callback*)cb_vibe_WD);
   vibe_WD->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_WD->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_WD
-{ vibe_width = new SliderW(56, 42, 100, 10, "Width");
+} // RKR_Slider* vibe_WD
+{ vibe_width = new RKR_Slider(56, 42, 100, 10, "Width");
   vibe_width->type(5);
   vibe_width->box(FL_FLAT_BOX);
   vibe_width->color((Fl_Color)178);
@@ -238,8 +238,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_width->callback((Fl_Callback*)cb_vibe_width);
   vibe_width->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_width->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_width
-{ vibe_dpth = new SliderW(56, 55, 100, 10, "Depth");
+} // RKR_Slider* vibe_width
+{ vibe_dpth = new RKR_Slider(56, 55, 100, 10, "Depth");
   vibe_dpth->type(5);
   vibe_dpth->box(FL_FLAT_BOX);
   vibe_dpth->color((Fl_Color)178);
@@ -254,8 +254,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_dpth->callback((Fl_Callback*)cb_vibe_dpth);
   vibe_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_dpth->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_dpth
-{ vibe_freq = new SliderW(56, 68, 100, 10, "Tempo");
+} // RKR_Slider* vibe_dpth
+{ vibe_freq = new RKR_Slider(56, 68, 100, 10, "Tempo");
   vibe_freq->type(5);
   vibe_freq->box(FL_FLAT_BOX);
   vibe_freq->color((Fl_Color)178);
@@ -271,8 +271,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_freq->callback((Fl_Callback*)cb_vibe_freq);
   vibe_freq->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_freq->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_freq
-{ vibe_rnd = new SliderW(56, 81, 100, 10, "Random");
+} // RKR_Slider* vibe_freq
+{ vibe_rnd = new RKR_Slider(56, 81, 100, 10, "Random");
   vibe_rnd->type(5);
   vibe_rnd->box(FL_FLAT_BOX);
   vibe_rnd->color((Fl_Color)178);
@@ -287,7 +287,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_rnd->callback((Fl_Callback*)cb_vibe_rnd);
   vibe_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_rnd->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_rnd
+} // RKR_Slider* vibe_rnd
 { RKR_Choice* o = vibe_lfotype = new RKR_Choice(78, 96, 72, 16, "LFO Type");
   vibe_lfotype->box(FL_FLAT_BOX);
   vibe_lfotype->down_box(FL_BORDER_BOX);
@@ -304,7 +304,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* vibe_lfotype
-{ vibe_stdf = new SliderW(56, 118, 100, 10, "Stereo Df");
+{ vibe_stdf = new RKR_Slider(56, 118, 100, 10, "Stereo Df");
   vibe_stdf->tooltip("LFO L/R Delay");
   vibe_stdf->type(5);
   vibe_stdf->box(FL_FLAT_BOX);
@@ -320,8 +320,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_stdf->callback((Fl_Callback*)cb_vibe_stdf);
   vibe_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_stdf
-{ vibe_fb = new SliderW(56, 131, 100, 10, "Feedback");
+} // RKR_Slider* vibe_stdf
+{ vibe_fb = new RKR_Slider(56, 131, 100, 10, "Feedback");
   vibe_fb->type(5);
   vibe_fb->box(FL_FLAT_BOX);
   vibe_fb->color((Fl_Color)178);
@@ -337,8 +337,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_fb->callback((Fl_Callback*)cb_vibe_fb);
   vibe_fb->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_fb->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_fb
-{ vibe_LR = new SliderW(56, 144, 100, 10, "L/R Cross");
+} // RKR_Slider* vibe_fb
+{ vibe_LR = new RKR_Slider(56, 144, 100, 10, "L/R Cross");
   vibe_LR->type(5);
   vibe_LR->box(FL_FLAT_BOX);
   vibe_LR->color((Fl_Color)178);
@@ -353,8 +353,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_LR->callback((Fl_Callback*)cb_vibe_LR);
   vibe_LR->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_LR->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_LR
-{ vibe_pan = new SliderW(56, 157, 100, 10, "Pan");
+} // RKR_Slider* vibe_LR
+{ vibe_pan = new RKR_Slider(56, 157, 100, 10, "Pan");
   vibe_pan->type(5);
   vibe_pan->box(FL_FLAT_BOX);
   vibe_pan->color((Fl_Color)178);
@@ -370,7 +370,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vibe_pan->callback((Fl_Callback*)cb_vibe_pan);
   vibe_pan->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_pan->when(FL_WHEN_CHANGED);
-} // SliderW* vibe_pan
+} // RKR_Slider* vibe_pan
 { vibe_stereo = new RKR_Check_Button(103, 169, 43, 14, "Stereo");
   vibe_stereo->box(FL_NO_BOX);
   vibe_stereo->down_box(FL_BORDER_BOX);

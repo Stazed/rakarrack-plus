@@ -47,7 +47,7 @@ Fl_Menu_Item ChorusGui::menu_chorus_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ChorusGui::cb_chorus_WD_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(52);
@@ -55,11 +55,11 @@ void ChorusGui::cb_chorus_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(0,Dry_Wet((int)(o->value())));
 }
-void ChorusGui::cb_chorus_WD(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_WD(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_WD_i(o,v);
 }
 
-void ChorusGui::cb_chorus_pan_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(50);
@@ -67,11 +67,11 @@ void ChorusGui::cb_chorus_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(1,(int)(o->value()+64));
 }
-void ChorusGui::cb_chorus_pan(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_pan(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_pan_i(o,v);
 }
 
-void ChorusGui::cb_chorus_freq_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(72);
@@ -79,11 +79,11 @@ void ChorusGui::cb_chorus_freq_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(2,(int)o->value());
 }
-void ChorusGui::cb_chorus_freq(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_freq(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_freq_i(o,v);
 }
 
-void ChorusGui::cb_chorus_rnd_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(105);
@@ -91,7 +91,7 @@ void ChorusGui::cb_chorus_rnd_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(3,(int)o->value());
 }
-void ChorusGui::cb_chorus_rnd(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_rnd(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_rnd_i(o,v);
 }
 
@@ -116,7 +116,7 @@ void ChorusGui::cb_chorus_awesome(RKR_Check_Button* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_awesome_i(o,v);
 }
 
-void ChorusGui::cb_chorus_stdf_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(99);
@@ -124,11 +124,11 @@ void ChorusGui::cb_chorus_stdf_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(5,(int)o->value());
 }
-void ChorusGui::cb_chorus_stdf(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_stdf(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_stdf_i(o,v);
 }
 
-void ChorusGui::cb_chorus_dpth_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(23);
@@ -136,11 +136,11 @@ void ChorusGui::cb_chorus_dpth_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(6,(int)o->value());
 }
-void ChorusGui::cb_chorus_dpth(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_dpth(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_dpth_i(o,v);
 }
 
-void ChorusGui::cb_chorus_delay_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(406);
@@ -149,11 +149,11 @@ void ChorusGui::cb_chorus_delay_i(SliderW* o, void*) {
 
 rkr->efx_Chorus->changepar(7,(int)o->value());
 }
-void ChorusGui::cb_chorus_delay(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_delay(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_delay_i(o,v);
 }
 
-void ChorusGui::cb_chorus_fb_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(79);
@@ -161,11 +161,11 @@ void ChorusGui::cb_chorus_fb_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(8,(int)o->value());
 }
-void ChorusGui::cb_chorus_fb(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_fb(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_fb_i(o,v);
 }
 
-void ChorusGui::cb_chorus_LR_i(SliderW* o, void*) {
+void ChorusGui::cb_chorus_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(91);
@@ -173,7 +173,7 @@ void ChorusGui::cb_chorus_LR_i(SliderW* o, void*) {
 } 
 rkr->efx_Chorus->changepar(9,(int)(o->value()));
 }
-void ChorusGui::cb_chorus_LR(SliderW* o, void* v) {
+void ChorusGui::cb_chorus_LR(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_LR_i(o,v);
 }
 ChorusGui::ChorusGui(int X, int Y, int W, int H, const char *L)
@@ -212,7 +212,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   chorus_preset->menu(menu_chorus_preset);
 } // RKR_Choice* chorus_preset
-{ chorus_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
+{ chorus_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   chorus_WD->type(5);
   chorus_WD->box(FL_FLAT_BOX);
   chorus_WD->color((Fl_Color)178);
@@ -227,8 +227,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_WD->callback((Fl_Callback*)cb_chorus_WD);
   chorus_WD->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_WD->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_WD
-{ chorus_pan = new SliderW(56, 41, 100, 10, "Pan");
+} // RKR_Slider* chorus_WD
+{ chorus_pan = new RKR_Slider(56, 41, 100, 10, "Pan");
   chorus_pan->type(5);
   chorus_pan->box(FL_FLAT_BOX);
   chorus_pan->color((Fl_Color)178);
@@ -244,8 +244,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_pan->callback((Fl_Callback*)cb_chorus_pan);
   chorus_pan->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_pan->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_pan
-{ chorus_freq = new SliderW(56, 53, 100, 10, "Tempo");
+} // RKR_Slider* chorus_pan
+{ chorus_freq = new RKR_Slider(56, 53, 100, 10, "Tempo");
   chorus_freq->type(5);
   chorus_freq->box(FL_FLAT_BOX);
   chorus_freq->color((Fl_Color)178);
@@ -261,8 +261,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_freq->callback((Fl_Callback*)cb_chorus_freq);
   chorus_freq->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_freq->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_freq
-{ chorus_rnd = new SliderW(56, 65, 100, 10, "Random");
+} // RKR_Slider* chorus_freq
+{ chorus_rnd = new RKR_Slider(56, 65, 100, 10, "Random");
   chorus_rnd->type(5);
   chorus_rnd->box(FL_FLAT_BOX);
   chorus_rnd->color((Fl_Color)178);
@@ -277,7 +277,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_rnd->callback((Fl_Callback*)cb_chorus_rnd);
   chorus_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_rnd->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_rnd
+} // RKR_Slider* chorus_rnd
 { RKR_Choice* o = chorus_lfotype = new RKR_Choice(78, 77, 72, 16, "LFO Type");
   chorus_lfotype->box(FL_FLAT_BOX);
   chorus_lfotype->down_box(FL_BORDER_BOX);
@@ -320,7 +320,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_awesome->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   chorus_awesome->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* chorus_awesome
-{ chorus_stdf = new SliderW(56, 115, 100, 10, "Stereo Df");
+{ chorus_stdf = new RKR_Slider(56, 115, 100, 10, "Stereo Df");
   chorus_stdf->type(5);
   chorus_stdf->box(FL_FLAT_BOX);
   chorus_stdf->color((Fl_Color)178);
@@ -335,8 +335,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_stdf->callback((Fl_Callback*)cb_chorus_stdf);
   chorus_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_stdf
-{ chorus_dpth = new SliderW(56, 128, 100, 10, "Depth");
+} // RKR_Slider* chorus_stdf
+{ chorus_dpth = new RKR_Slider(56, 128, 100, 10, "Depth");
   chorus_dpth->type(5);
   chorus_dpth->box(FL_FLAT_BOX);
   chorus_dpth->color((Fl_Color)178);
@@ -351,8 +351,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_dpth->callback((Fl_Callback*)cb_chorus_dpth);
   chorus_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_dpth->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_dpth
-{ chorus_delay = new SliderW(56, 141, 100, 10, "Delay");
+} // RKR_Slider* chorus_dpth
+{ chorus_delay = new RKR_Slider(56, 141, 100, 10, "Delay");
   chorus_delay->type(5);
   chorus_delay->box(FL_FLAT_BOX);
   chorus_delay->color((Fl_Color)178);
@@ -367,8 +367,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_delay->callback((Fl_Callback*)cb_chorus_delay);
   chorus_delay->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_delay->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_delay
-{ chorus_fb = new SliderW(56, 154, 100, 10, "Feedback");
+} // RKR_Slider* chorus_delay
+{ chorus_fb = new RKR_Slider(56, 154, 100, 10, "Feedback");
   chorus_fb->type(5);
   chorus_fb->box(FL_FLAT_BOX);
   chorus_fb->color((Fl_Color)178);
@@ -383,8 +383,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_fb->callback((Fl_Callback*)cb_chorus_fb);
   chorus_fb->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_fb->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_fb
-{ chorus_LR = new SliderW(55, 168, 100, 10, "L/R Cross");
+} // RKR_Slider* chorus_fb
+{ chorus_LR = new RKR_Slider(55, 168, 100, 10, "L/R Cross");
   chorus_LR->type(5);
   chorus_LR->box(FL_FLAT_BOX);
   chorus_LR->color((Fl_Color)178);
@@ -399,7 +399,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_LR->callback((Fl_Callback*)cb_chorus_LR);
   chorus_LR->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_LR->when(FL_WHEN_CHANGED);
-} // SliderW* chorus_LR
+} // RKR_Slider* chorus_LR
 position(X, Y);
 end();
 }

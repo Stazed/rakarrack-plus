@@ -11,7 +11,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class {\#include "common_gui_menu.h"} RbechoGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
@@ -76,7 +76,7 @@ rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
 }
 rkr->efx_RBEcho->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider rbecho_RV {
     label Reverse
@@ -87,7 +87,7 @@ rkr->efx_RBEcho->changepar(0,Dry_Wet((int)(o->value())));}
 }
 rkr->efx_RBEcho->changepar(7,(int)o->value());}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider rbecho_pan {
     label Pan
@@ -98,7 +98,7 @@ rkr->efx_RBEcho->changepar(7,(int)o->value());}
 }
 rkr->efx_RBEcho->changepar(1,(int)(o->value()+64));}
     xywh {56 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider rbecho_delay {
     label Tempo
@@ -109,7 +109,7 @@ rkr->efx_RBEcho->changepar(1,(int)(o->value()+64));}
 }
 rkr->efx_RBEcho->changepar(2,(int)o->value());}
     xywh {56 69 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 20 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider rbecho_LRdl {
     label {L/R Delay}
@@ -120,7 +120,7 @@ rkr->efx_RBEcho->changepar(2,(int)o->value());}
 }
 rkr->efx_RBEcho->changepar(3,(int)o->value());}
     xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider rbecho_fb {
     label Feedback
@@ -131,7 +131,7 @@ rkr->efx_RBEcho->changepar(3,(int)o->value());}
 }
 rkr->efx_RBEcho->changepar(5,(int)o->value());}
     xywh {56 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Choice rbecho_subdiv {
     label SubDivision
@@ -149,7 +149,7 @@ rkr->efx_RBEcho->changepar(5,(int)o->value());}
 }
 rkr->efx_RBEcho->changepar(6,(int)o->value());}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider rbecho_es {
     label {Ex Stereo}
@@ -160,7 +160,7 @@ rkr->efx_RBEcho->changepar(6,(int)o->value());}
 }
 rkr->efx_RBEcho->changepar(9,(int)o->value());}
     tooltip {Extra Stereo} xywh {56 148 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider rbecho_angle {
     label Angle
@@ -171,7 +171,7 @@ rkr->efx_RBEcho->changepar(9,(int)o->value());}
 }
 rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   decl {CommonGuiMenu *m_subdiv_menu;} {private local
   }

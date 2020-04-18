@@ -1,5 +1,7 @@
 /*
-  slider.h
+  Renamed from sliderW.h on 4/18/2020 by stazed.
+
+  RKR_Slider.h
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -16,8 +18,8 @@
 
 */
 
-#ifndef sliderW_h
-#define sliderW_h
+#ifndef RKR_Slider_h
+#define RKR_Slider_h
 
 #include <FL/Fl.H>
 #include <FL/Fl_Value_Slider.H>
@@ -26,9 +28,9 @@
 
 #define SLIDERW_USER_DATA   99999
 
-class SliderW : public Fl_Value_Slider {
+class RKR_Slider : public Fl_Value_Slider {
 public:
-    SliderW(int x, int y, int w, int h, const char *label = 0);
+    RKR_Slider(int x, int y, int w, int h, const char *label = 0);
     int handle(int event);
     int handle2(int event, int X, int Y, int W, int H);
     void draw();

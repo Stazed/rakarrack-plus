@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,25 +26,25 @@ private:
   static void cb_chorus_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_chorus_preset[];
 public:
-  SliderW *chorus_WD;
+  RKR_Slider *chorus_WD;
 private:
-  inline void cb_chorus_WD_i(SliderW*, void*);
-  static void cb_chorus_WD(SliderW*, void*);
+  inline void cb_chorus_WD_i(RKR_Slider*, void*);
+  static void cb_chorus_WD(RKR_Slider*, void*);
 public:
-  SliderW *chorus_pan;
+  RKR_Slider *chorus_pan;
 private:
-  inline void cb_chorus_pan_i(SliderW*, void*);
-  static void cb_chorus_pan(SliderW*, void*);
+  inline void cb_chorus_pan_i(RKR_Slider*, void*);
+  static void cb_chorus_pan(RKR_Slider*, void*);
 public:
-  SliderW *chorus_freq;
+  RKR_Slider *chorus_freq;
 private:
-  inline void cb_chorus_freq_i(SliderW*, void*);
-  static void cb_chorus_freq(SliderW*, void*);
+  inline void cb_chorus_freq_i(RKR_Slider*, void*);
+  static void cb_chorus_freq(RKR_Slider*, void*);
 public:
-  SliderW *chorus_rnd;
+  RKR_Slider *chorus_rnd;
 private:
-  inline void cb_chorus_rnd_i(SliderW*, void*);
-  static void cb_chorus_rnd(SliderW*, void*);
+  inline void cb_chorus_rnd_i(RKR_Slider*, void*);
+  static void cb_chorus_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *chorus_lfotype;
 private:
@@ -61,30 +61,30 @@ private:
   inline void cb_chorus_awesome_i(RKR_Check_Button*, void*);
   static void cb_chorus_awesome(RKR_Check_Button*, void*);
 public:
-  SliderW *chorus_stdf;
+  RKR_Slider *chorus_stdf;
 private:
-  inline void cb_chorus_stdf_i(SliderW*, void*);
-  static void cb_chorus_stdf(SliderW*, void*);
+  inline void cb_chorus_stdf_i(RKR_Slider*, void*);
+  static void cb_chorus_stdf(RKR_Slider*, void*);
 public:
-  SliderW *chorus_dpth;
+  RKR_Slider *chorus_dpth;
 private:
-  inline void cb_chorus_dpth_i(SliderW*, void*);
-  static void cb_chorus_dpth(SliderW*, void*);
+  inline void cb_chorus_dpth_i(RKR_Slider*, void*);
+  static void cb_chorus_dpth(RKR_Slider*, void*);
 public:
-  SliderW *chorus_delay;
+  RKR_Slider *chorus_delay;
 private:
-  inline void cb_chorus_delay_i(SliderW*, void*);
-  static void cb_chorus_delay(SliderW*, void*);
+  inline void cb_chorus_delay_i(RKR_Slider*, void*);
+  static void cb_chorus_delay(RKR_Slider*, void*);
 public:
-  SliderW *chorus_fb;
+  RKR_Slider *chorus_fb;
 private:
-  inline void cb_chorus_fb_i(SliderW*, void*);
-  static void cb_chorus_fb(SliderW*, void*);
+  inline void cb_chorus_fb_i(RKR_Slider*, void*);
+  static void cb_chorus_fb(RKR_Slider*, void*);
 public:
-  SliderW *chorus_LR;
+  RKR_Slider *chorus_LR;
 private:
-  inline void cb_chorus_LR_i(SliderW*, void*);
-  static void cb_chorus_LR(SliderW*, void*);
+  inline void cb_chorus_LR_i(RKR_Slider*, void*);
+  static void cb_chorus_LR(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif

@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,55 +25,55 @@ private:
   static void cb_shuffle_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_shuffle_preset[];
 public:
-  SliderW *shuffle_WD;
+  RKR_Slider *shuffle_WD;
 private:
-  inline void cb_shuffle_WD_i(SliderW*, void*);
-  static void cb_shuffle_WD(SliderW*, void*);
+  inline void cb_shuffle_WD_i(RKR_Slider*, void*);
+  static void cb_shuffle_WD(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_cross1;
+  RKR_Slider *shuffle_cross1;
 private:
-  inline void cb_shuffle_cross1_i(SliderW*, void*);
-  static void cb_shuffle_cross1(SliderW*, void*);
+  inline void cb_shuffle_cross1_i(RKR_Slider*, void*);
+  static void cb_shuffle_cross1(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_volL;
+  RKR_Slider *shuffle_volL;
 private:
-  inline void cb_shuffle_volL_i(SliderW*, void*);
-  static void cb_shuffle_volL(SliderW*, void*);
+  inline void cb_shuffle_volL_i(RKR_Slider*, void*);
+  static void cb_shuffle_volL(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_cross2;
+  RKR_Slider *shuffle_cross2;
 private:
-  inline void cb_shuffle_cross2_i(SliderW*, void*);
-  static void cb_shuffle_cross2(SliderW*, void*);
+  inline void cb_shuffle_cross2_i(RKR_Slider*, void*);
+  static void cb_shuffle_cross2(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_volML;
+  RKR_Slider *shuffle_volML;
 private:
-  inline void cb_shuffle_volML_i(SliderW*, void*);
-  static void cb_shuffle_volML(SliderW*, void*);
+  inline void cb_shuffle_volML_i(RKR_Slider*, void*);
+  static void cb_shuffle_volML(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_cross3;
+  RKR_Slider *shuffle_cross3;
 private:
-  inline void cb_shuffle_cross3_i(SliderW*, void*);
-  static void cb_shuffle_cross3(SliderW*, void*);
+  inline void cb_shuffle_cross3_i(RKR_Slider*, void*);
+  static void cb_shuffle_cross3(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_volMH;
+  RKR_Slider *shuffle_volMH;
 private:
-  inline void cb_shuffle_volMH_i(SliderW*, void*);
-  static void cb_shuffle_volMH(SliderW*, void*);
+  inline void cb_shuffle_volMH_i(RKR_Slider*, void*);
+  static void cb_shuffle_volMH(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_cross4;
+  RKR_Slider *shuffle_cross4;
 private:
-  inline void cb_shuffle_cross4_i(SliderW*, void*);
-  static void cb_shuffle_cross4(SliderW*, void*);
+  inline void cb_shuffle_cross4_i(RKR_Slider*, void*);
+  static void cb_shuffle_cross4(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_volH;
+  RKR_Slider *shuffle_volH;
 private:
-  inline void cb_shuffle_volH_i(SliderW*, void*);
-  static void cb_shuffle_volH(SliderW*, void*);
+  inline void cb_shuffle_volH_i(RKR_Slider*, void*);
+  static void cb_shuffle_volH(RKR_Slider*, void*);
 public:
-  SliderW *shuffle_Q;
+  RKR_Slider *shuffle_Q;
 private:
-  inline void cb_shuffle_Q_i(SliderW*, void*);
-  static void cb_shuffle_Q(SliderW*, void*);
+  inline void cb_shuffle_Q_i(RKR_Slider*, void*);
+  static void cb_shuffle_Q(RKR_Slider*, void*);
 public:
   RKR_Check_Button *shuffle_E;
 private:

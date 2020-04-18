@@ -6,7 +6,7 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -24,25 +24,25 @@ private:
   static void cb_musdelay_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_musdelay_preset[];
 public:
-  SliderW *musdelay_WD;
+  RKR_Slider *musdelay_WD;
 private:
-  inline void cb_musdelay_WD_i(SliderW*, void*);
-  static void cb_musdelay_WD(SliderW*, void*);
+  inline void cb_musdelay_WD_i(RKR_Slider*, void*);
+  static void cb_musdelay_WD(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_LRc;
+  RKR_Slider *musdelay_LRc;
 private:
-  inline void cb_musdelay_LRc_i(SliderW*, void*);
-  static void cb_musdelay_LRc(SliderW*, void*);
+  inline void cb_musdelay_LRc_i(RKR_Slider*, void*);
+  static void cb_musdelay_LRc(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_pan1;
+  RKR_Slider *musdelay_pan1;
 private:
-  inline void cb_musdelay_pan1_i(SliderW*, void*);
-  static void cb_musdelay_pan1(SliderW*, void*);
+  inline void cb_musdelay_pan1_i(RKR_Slider*, void*);
+  static void cb_musdelay_pan1(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_pan2;
+  RKR_Slider *musdelay_pan2;
 private:
-  inline void cb_musdelay_pan2_i(SliderW*, void*);
-  static void cb_musdelay_pan2(SliderW*, void*);
+  inline void cb_musdelay_pan2_i(RKR_Slider*, void*);
+  static void cb_musdelay_pan2(RKR_Slider*, void*);
 public:
   RKR_Choice *musdelay_delay1;
 private:
@@ -61,34 +61,34 @@ private:
   inline void cb_musdelay_delay2_i(RKR_Choice*, void*);
   static void cb_musdelay_delay2(RKR_Choice*, void*);
 public:
-  SliderW *musdelay_tempo;
+  RKR_Slider *musdelay_tempo;
 private:
-  inline void cb_musdelay_tempo_i(SliderW*, void*);
-  static void cb_musdelay_tempo(SliderW*, void*);
+  inline void cb_musdelay_tempo_i(RKR_Slider*, void*);
+  static void cb_musdelay_tempo(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_gain1;
+  RKR_Slider *musdelay_gain1;
 private:
-  inline void cb_musdelay_gain1_i(SliderW*, void*);
-  static void cb_musdelay_gain1(SliderW*, void*);
+  inline void cb_musdelay_gain1_i(RKR_Slider*, void*);
+  static void cb_musdelay_gain1(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_gain2;
+  RKR_Slider *musdelay_gain2;
 private:
-  inline void cb_musdelay_gain2_i(SliderW*, void*);
-  static void cb_musdelay_gain2(SliderW*, void*);
+  inline void cb_musdelay_gain2_i(RKR_Slider*, void*);
+  static void cb_musdelay_gain2(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_fb1;
+  RKR_Slider *musdelay_fb1;
 private:
-  inline void cb_musdelay_fb1_i(SliderW*, void*);
-  static void cb_musdelay_fb1(SliderW*, void*);
+  inline void cb_musdelay_fb1_i(RKR_Slider*, void*);
+  static void cb_musdelay_fb1(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_fb2;
+  RKR_Slider *musdelay_fb2;
 private:
-  inline void cb_musdelay_fb2_i(SliderW*, void*);
-  static void cb_musdelay_fb2(SliderW*, void*);
+  inline void cb_musdelay_fb2_i(RKR_Slider*, void*);
+  static void cb_musdelay_fb2(RKR_Slider*, void*);
 public:
-  SliderW *musdelay_damp;
+  RKR_Slider *musdelay_damp;
 private:
-  inline void cb_musdelay_damp_i(SliderW*, void*);
-  static void cb_musdelay_damp(SliderW*, void*);
+  inline void cb_musdelay_damp_i(RKR_Slider*, void*);
+  static void cb_musdelay_damp(RKR_Slider*, void*);
 };
 #endif

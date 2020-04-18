@@ -45,7 +45,7 @@ Fl_Menu_Item AlienwahGui::menu_Alienwah_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void AlienwahGui::cb_Alienwah_WD_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(55);
@@ -53,11 +53,11 @@ void AlienwahGui::cb_Alienwah_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(0,Dry_Wet((int)(o->value())));
 }
-void AlienwahGui::cb_Alienwah_WD(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_WD(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_WD_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_pan_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(61);
@@ -65,11 +65,11 @@ void AlienwahGui::cb_Alienwah_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(1,(int)(o->value()+64));
 }
-void AlienwahGui::cb_Alienwah_pan(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_pan(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_pan_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_freq_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(76);
@@ -77,11 +77,11 @@ void AlienwahGui::cb_Alienwah_freq_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(2,(int)o->value());
 }
-void AlienwahGui::cb_Alienwah_freq(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_freq(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_freq_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_rnd_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(109);
@@ -89,7 +89,7 @@ void AlienwahGui::cb_Alienwah_rnd_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(3,(int)o->value());
 }
-void AlienwahGui::cb_Alienwah_rnd(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_rnd(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_rnd_i(o,v);
 }
 
@@ -100,7 +100,7 @@ void AlienwahGui::cb_Alienwah_lfotype(RKR_Choice* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_lfotype_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_phase_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_phase_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(115);
@@ -108,11 +108,11 @@ void AlienwahGui::cb_Alienwah_phase_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(10,(int)o->value());
 }
-void AlienwahGui::cb_Alienwah_phase(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_phase(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_phase_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_stdf_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(103);
@@ -120,11 +120,11 @@ void AlienwahGui::cb_Alienwah_stdf_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(5,(int)o->value());
 }
-void AlienwahGui::cb_Alienwah_stdf(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_stdf(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_stdf_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_dpth_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(20);
@@ -132,11 +132,11 @@ void AlienwahGui::cb_Alienwah_dpth_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(6,(int)o->value());
 }
-void AlienwahGui::cb_Alienwah_dpth(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_dpth(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_dpth_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_delay_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(403);
@@ -146,11 +146,11 @@ rkr->Alienwah_Bypass=0;
 rkr->efx_Alienwah->changepar(8,(int)o->value());
 if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;
 }
-void AlienwahGui::cb_Alienwah_delay(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_delay(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_delay_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_fb_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(82);
@@ -158,11 +158,11 @@ void AlienwahGui::cb_Alienwah_fb_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(7,(int)o->value());
 }
-void AlienwahGui::cb_Alienwah_fb(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_fb(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_fb_i(o,v);
 }
 
-void AlienwahGui::cb_Alienwah_LR_i(SliderW* o, void*) {
+void AlienwahGui::cb_Alienwah_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(96);
@@ -170,7 +170,7 @@ void AlienwahGui::cb_Alienwah_LR_i(SliderW* o, void*) {
 } 
 rkr->efx_Alienwah->changepar(9,(int)(o->value()));
 }
-void AlienwahGui::cb_Alienwah_LR(SliderW* o, void* v) {
+void AlienwahGui::cb_Alienwah_LR(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_LR_i(o,v);
 }
 AlienwahGui::AlienwahGui(int X, int Y, int W, int H, const char *L)
@@ -209,7 +209,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
   Alienwah_preset->menu(menu_Alienwah_preset);
 } // RKR_Choice* Alienwah_preset
-{ Alienwah_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
+{ Alienwah_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   Alienwah_WD->type(5);
   Alienwah_WD->box(FL_FLAT_BOX);
   Alienwah_WD->color((Fl_Color)178);
@@ -224,8 +224,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_WD->callback((Fl_Callback*)cb_Alienwah_WD);
   Alienwah_WD->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_WD->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_WD
-{ Alienwah_pan = new SliderW(56, 41, 100, 10, "Pan");
+} // RKR_Slider* Alienwah_WD
+{ Alienwah_pan = new RKR_Slider(56, 41, 100, 10, "Pan");
   Alienwah_pan->type(5);
   Alienwah_pan->box(FL_FLAT_BOX);
   Alienwah_pan->color((Fl_Color)178);
@@ -241,8 +241,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_pan->callback((Fl_Callback*)cb_Alienwah_pan);
   Alienwah_pan->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_pan->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_pan
-{ Alienwah_freq = new SliderW(56, 53, 100, 10, "Tempo");
+} // RKR_Slider* Alienwah_pan
+{ Alienwah_freq = new RKR_Slider(56, 53, 100, 10, "Tempo");
   Alienwah_freq->type(5);
   Alienwah_freq->box(FL_FLAT_BOX);
   Alienwah_freq->color((Fl_Color)178);
@@ -258,8 +258,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_freq->callback((Fl_Callback*)cb_Alienwah_freq);
   Alienwah_freq->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_freq->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_freq
-{ Alienwah_rnd = new SliderW(56, 65, 100, 10, "Random");
+} // RKR_Slider* Alienwah_freq
+{ Alienwah_rnd = new RKR_Slider(56, 65, 100, 10, "Random");
   Alienwah_rnd->type(5);
   Alienwah_rnd->box(FL_FLAT_BOX);
   Alienwah_rnd->color((Fl_Color)178);
@@ -274,7 +274,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_rnd->callback((Fl_Callback*)cb_Alienwah_rnd);
   Alienwah_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_rnd->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_rnd
+} // RKR_Slider* Alienwah_rnd
 { RKR_Choice* o = Alienwah_lfotype = new RKR_Choice(78, 79, 72, 16, "LFO Type");
   Alienwah_lfotype->box(FL_FLAT_BOX);
   Alienwah_lfotype->down_box(FL_BORDER_BOX);
@@ -291,7 +291,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* Alienwah_lfotype
-{ Alienwah_phase = new SliderW(56, 105, 100, 10, "Phase");
+{ Alienwah_phase = new RKR_Slider(56, 105, 100, 10, "Phase");
   Alienwah_phase->type(5);
   Alienwah_phase->box(FL_FLAT_BOX);
   Alienwah_phase->color((Fl_Color)178);
@@ -306,8 +306,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_phase->callback((Fl_Callback*)cb_Alienwah_phase);
   Alienwah_phase->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_phase->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_phase
-{ Alienwah_stdf = new SliderW(56, 117, 100, 10, "Stereo Df");
+} // RKR_Slider* Alienwah_phase
+{ Alienwah_stdf = new RKR_Slider(56, 117, 100, 10, "Stereo Df");
   Alienwah_stdf->type(5);
   Alienwah_stdf->box(FL_FLAT_BOX);
   Alienwah_stdf->color((Fl_Color)178);
@@ -322,8 +322,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_stdf->callback((Fl_Callback*)cb_Alienwah_stdf);
   Alienwah_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_stdf
-{ Alienwah_dpth = new SliderW(56, 129, 100, 10, "Depth");
+} // RKR_Slider* Alienwah_stdf
+{ Alienwah_dpth = new RKR_Slider(56, 129, 100, 10, "Depth");
   Alienwah_dpth->type(5);
   Alienwah_dpth->box(FL_FLAT_BOX);
   Alienwah_dpth->color((Fl_Color)178);
@@ -338,8 +338,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_dpth->callback((Fl_Callback*)cb_Alienwah_dpth);
   Alienwah_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_dpth->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_dpth
-{ Alienwah_delay = new SliderW(56, 141, 100, 10, "Delay");
+} // RKR_Slider* Alienwah_dpth
+{ Alienwah_delay = new RKR_Slider(56, 141, 100, 10, "Delay");
   Alienwah_delay->type(5);
   Alienwah_delay->box(FL_FLAT_BOX);
   Alienwah_delay->color((Fl_Color)178);
@@ -354,8 +354,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_delay->callback((Fl_Callback*)cb_Alienwah_delay);
   Alienwah_delay->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_delay->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_delay
-{ Alienwah_fb = new SliderW(56, 153, 100, 10, "Feedback");
+} // RKR_Slider* Alienwah_delay
+{ Alienwah_fb = new RKR_Slider(56, 153, 100, 10, "Feedback");
   Alienwah_fb->type(5);
   Alienwah_fb->box(FL_FLAT_BOX);
   Alienwah_fb->color((Fl_Color)178);
@@ -370,8 +370,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_fb->callback((Fl_Callback*)cb_Alienwah_fb);
   Alienwah_fb->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_fb->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_fb
-{ Alienwah_LR = new SliderW(56, 166, 100, 10, "L/R Cross");
+} // RKR_Slider* Alienwah_fb
+{ Alienwah_LR = new RKR_Slider(56, 166, 100, 10, "L/R Cross");
   Alienwah_LR->type(5);
   Alienwah_LR->box(FL_FLAT_BOX);
   Alienwah_LR->color((Fl_Color)178);
@@ -386,7 +386,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Alienwah_LR->callback((Fl_Callback*)cb_Alienwah_LR);
   Alienwah_LR->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_LR->when(FL_WHEN_CHANGED);
-} // SliderW* Alienwah_LR
+} // RKR_Slider* Alienwah_LR
 position(X, Y);
 end();
 }

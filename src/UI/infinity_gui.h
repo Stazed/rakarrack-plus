@@ -8,7 +8,7 @@
 #include "RKR_Counter.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "RKR_Value_Input.h"
@@ -27,15 +27,15 @@ private:
   static void cb_infinity_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_infinity_preset[];
 public:
-  SliderW *infinity_WD;
+  RKR_Slider *infinity_WD;
 private:
-  inline void cb_infinity_WD_i(SliderW*, void*);
-  static void cb_infinity_WD(SliderW*, void*);
+  inline void cb_infinity_WD_i(RKR_Slider*, void*);
+  static void cb_infinity_WD(RKR_Slider*, void*);
 public:
-  SliderW *infinity_Q;
+  RKR_Slider *infinity_Q;
 private:
-  inline void cb_infinity_Q_i(SliderW*, void*);
-  static void cb_infinity_Q(SliderW*, void*);
+  inline void cb_infinity_Q_i(RKR_Slider*, void*);
+  static void cb_infinity_Q(RKR_Slider*, void*);
 public:
   RKR_Value_Input *infinity_1;
 private:
@@ -87,34 +87,34 @@ private:
   inline void cb_infinity_stages_i(RKR_Counter*, void*);
   static void cb_infinity_stages(RKR_Counter*, void*);
 public:
-  SliderW *infinity_pan;
+  RKR_Slider *infinity_pan;
 private:
-  inline void cb_infinity_pan_i(SliderW*, void*);
-  static void cb_infinity_pan(SliderW*, void*);
+  inline void cb_infinity_pan_i(RKR_Slider*, void*);
+  static void cb_infinity_pan(RKR_Slider*, void*);
 public:
-  SliderW *infinity_stdf;
+  RKR_Slider *infinity_stdf;
 private:
-  inline void cb_infinity_stdf_i(SliderW*, void*);
-  static void cb_infinity_stdf(SliderW*, void*);
+  inline void cb_infinity_stdf_i(RKR_Slider*, void*);
+  static void cb_infinity_stdf(RKR_Slider*, void*);
 public:
-  SliderW *infinity_start;
+  RKR_Slider *infinity_start;
 private:
-  inline void cb_infinity_start_i(SliderW*, void*);
-  static void cb_infinity_start(SliderW*, void*);
+  inline void cb_infinity_start_i(RKR_Slider*, void*);
+  static void cb_infinity_start(RKR_Slider*, void*);
 public:
-  SliderW *infinity_end;
+  RKR_Slider *infinity_end;
 private:
-  inline void cb_infinity_end_i(SliderW*, void*);
-  static void cb_infinity_end(SliderW*, void*);
+  inline void cb_infinity_end_i(RKR_Slider*, void*);
+  static void cb_infinity_end(RKR_Slider*, void*);
 public:
-  SliderW *infinity_rate;
+  RKR_Slider *infinity_rate;
 private:
-  inline void cb_infinity_rate_i(SliderW*, void*);
-  static void cb_infinity_rate(SliderW*, void*);
+  inline void cb_infinity_rate_i(RKR_Slider*, void*);
+  static void cb_infinity_rate(RKR_Slider*, void*);
 public:
-  SliderW *infinity_subdiv;
+  RKR_Slider *infinity_subdiv;
 private:
-  inline void cb_infinity_subdiv_i(SliderW*, void*);
-  static void cb_infinity_subdiv(SliderW*, void*);
+  inline void cb_infinity_subdiv_i(RKR_Slider*, void*);
+  static void cb_infinity_subdiv(RKR_Slider*, void*);
 };
 #endif

@@ -8,7 +8,7 @@
 #include "RKR_Choice.h"
 #include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -27,55 +27,55 @@ private:
   static void cb_aphaser_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_aphaser_preset[];
 public:
-  SliderW *aphaser_WD;
+  RKR_Slider *aphaser_WD;
 private:
-  inline void cb_aphaser_WD_i(SliderW*, void*);
-  static void cb_aphaser_WD(SliderW*, void*);
+  inline void cb_aphaser_WD_i(RKR_Slider*, void*);
+  static void cb_aphaser_WD(RKR_Slider*, void*);
 public:
-  SliderW *aphaser_distort;
+  RKR_Slider *aphaser_distort;
 private:
-  inline void cb_aphaser_distort_i(SliderW*, void*);
-  static void cb_aphaser_distort(SliderW*, void*);
+  inline void cb_aphaser_distort_i(RKR_Slider*, void*);
+  static void cb_aphaser_distort(RKR_Slider*, void*);
 public:
-  SliderW *aphaser_freq;
+  RKR_Slider *aphaser_freq;
 private:
-  inline void cb_aphaser_freq_i(SliderW*, void*);
-  static void cb_aphaser_freq(SliderW*, void*);
+  inline void cb_aphaser_freq_i(RKR_Slider*, void*);
+  static void cb_aphaser_freq(RKR_Slider*, void*);
 public:
-  SliderW *aphaser_rnd;
+  RKR_Slider *aphaser_rnd;
 private:
-  inline void cb_aphaser_rnd_i(SliderW*, void*);
-  static void cb_aphaser_rnd(SliderW*, void*);
+  inline void cb_aphaser_rnd_i(RKR_Slider*, void*);
+  static void cb_aphaser_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *aphaser_lfotype;
 private:
   inline void cb_aphaser_lfotype_i(RKR_Choice*, void*);
   static void cb_aphaser_lfotype(RKR_Choice*, void*);
 public:
-  SliderW *aphaser_width;
+  RKR_Slider *aphaser_width;
 private:
-  inline void cb_aphaser_width_i(SliderW*, void*);
-  static void cb_aphaser_width(SliderW*, void*);
+  inline void cb_aphaser_width_i(RKR_Slider*, void*);
+  static void cb_aphaser_width(RKR_Slider*, void*);
 public:
-  SliderW *aphaser_phase;
+  RKR_Slider *aphaser_phase;
 private:
-  inline void cb_aphaser_phase_i(SliderW*, void*);
-  static void cb_aphaser_phase(SliderW*, void*);
+  inline void cb_aphaser_phase_i(RKR_Slider*, void*);
+  static void cb_aphaser_phase(RKR_Slider*, void*);
 public:
-  SliderW *aphaser_fb;
+  RKR_Slider *aphaser_fb;
 private:
-  inline void cb_aphaser_fb_i(SliderW*, void*);
-  static void cb_aphaser_fb(SliderW*, void*);
+  inline void cb_aphaser_fb_i(RKR_Slider*, void*);
+  static void cb_aphaser_fb(RKR_Slider*, void*);
 public:
-  SliderW *aphaser_mismatch;
+  RKR_Slider *aphaser_mismatch;
 private:
-  inline void cb_aphaser_mismatch_i(SliderW*, void*);
-  static void cb_aphaser_mismatch(SliderW*, void*);
+  inline void cb_aphaser_mismatch_i(RKR_Slider*, void*);
+  static void cb_aphaser_mismatch(RKR_Slider*, void*);
 public:
-  SliderW *aphaser_stdf;
+  RKR_Slider *aphaser_stdf;
 private:
-  inline void cb_aphaser_stdf_i(SliderW*, void*);
-  static void cb_aphaser_stdf(SliderW*, void*);
+  inline void cb_aphaser_stdf_i(RKR_Slider*, void*);
+  static void cb_aphaser_stdf(RKR_Slider*, void*);
 public:
   RKR_Counter *aphaser_stages;
 private:

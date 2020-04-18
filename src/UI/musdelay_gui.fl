@@ -11,7 +11,7 @@ decl {\#include "RKR_Choice.h"} {public global
 widget_class MusdelayGui {
   user_data 1 open
   xywh {1640 159 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
-  code0 {\#include "sliderW.h"}
+  code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
 } {
@@ -72,7 +72,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
 } 
 rkr->efx_MusDelay->changepar(0,Dry_Wet((int)o->value()));}
     xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_LRc {
     label {L/R Cross}
@@ -83,7 +83,7 @@ rkr->efx_MusDelay->changepar(0,Dry_Wet((int)o->value()));}
 } 
 rkr->efx_MusDelay->changepar(4,(int)o->value());}
     xywh {56 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_pan1 {
     label {Pan 1}
@@ -94,7 +94,7 @@ rkr->efx_MusDelay->changepar(4,(int)o->value());}
 } 
 rkr->efx_MusDelay->changepar(1,(int)o->value()+64);}
     xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_pan2 {
     label {Pan 2}
@@ -105,7 +105,7 @@ rkr->efx_MusDelay->changepar(1,(int)o->value()+64);}
 } 
 rkr->efx_MusDelay->changepar(7,(int)o->value()+64);}
     xywh {56 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Choice musdelay_delay1 {
     user_data 12
@@ -196,7 +196,7 @@ rkr->MusDelay_Bypass=0;
 rkr->efx_MusDelay->changepar(10,(int)o->value());
 if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 10 maximum 480 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_gain1 {
     label {Gain 1}
@@ -207,7 +207,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
 } 
 rkr->efx_MusDelay->changepar(11,(int)o->value());}
     xywh {56 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_gain2 {
     label {Gain 2}
@@ -218,7 +218,7 @@ rkr->efx_MusDelay->changepar(11,(int)o->value());}
 } 
 rkr->efx_MusDelay->changepar(12,(int)o->value());}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_fb1 {
     label {FB 1}
@@ -229,7 +229,7 @@ rkr->efx_MusDelay->changepar(12,(int)o->value());}
 } 
 rkr->efx_MusDelay->changepar(5,(int)o->value());}
     tooltip {Feedback 1} xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_fb2 {
     label {FB 2}
@@ -240,7 +240,7 @@ rkr->efx_MusDelay->changepar(5,(int)o->value());}
 } 
 rkr->efx_MusDelay->changepar(9,(int)o->value());}
     tooltip {Feedback 2} xywh {56 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
   Fl_Value_Slider musdelay_damp {
     label Damp
@@ -251,6 +251,6 @@ rkr->efx_MusDelay->changepar(9,(int)o->value());}
 }
 rkr->efx_MusDelay->changepar(6,(int)o->value());}
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
-    class SliderW
+    class RKR_Slider
   }
 }

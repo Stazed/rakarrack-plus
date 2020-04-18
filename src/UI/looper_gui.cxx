@@ -48,7 +48,7 @@ Fl_Menu_Item LooperGui::menu_looper_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void LooperGui::cb_looper_WD_i(SliderW* o, void*) {
+void LooperGui::cb_looper_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(267);
@@ -56,11 +56,11 @@ void LooperGui::cb_looper_WD_i(SliderW* o, void*) {
 }
 rkr->efx_Looper->changepar(0,Dry_Wet((int)(o->value())));
 }
-void LooperGui::cb_looper_WD(SliderW* o, void* v) {
+void LooperGui::cb_looper_WD(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_WD_i(o,v);
 }
 
-void LooperGui::cb_looper_level1_i(SliderW* o, void*) {
+void LooperGui::cb_looper_level1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(268);
@@ -68,11 +68,11 @@ void LooperGui::cb_looper_level1_i(SliderW* o, void*) {
 }
 rkr->efx_Looper->changepar(6,(int)o->value());
 }
-void LooperGui::cb_looper_level1(SliderW* o, void* v) {
+void LooperGui::cb_looper_level1(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_level1_i(o,v);
 }
 
-void LooperGui::cb_looper_level2_i(SliderW* o, void*) {
+void LooperGui::cb_looper_level2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(269);
@@ -80,11 +80,11 @@ void LooperGui::cb_looper_level2_i(SliderW* o, void*) {
 }
 rkr->efx_Looper->changepar(10,(int)o->value());
 }
-void LooperGui::cb_looper_level2(SliderW* o, void* v) {
+void LooperGui::cb_looper_level2(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_level2_i(o,v);
 }
 
-void LooperGui::cb_looper_Tempo_i(SliderW* o, void*) {
+void LooperGui::cb_looper_Tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(423);
@@ -92,7 +92,7 @@ void LooperGui::cb_looper_Tempo_i(SliderW* o, void*) {
 }
 rkr->efx_Looper->changepar(14,(int)o->value());
 }
-void LooperGui::cb_looper_Tempo(SliderW* o, void* v) {
+void LooperGui::cb_looper_Tempo(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_Tempo_i(o,v);
 }
 
@@ -285,7 +285,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_preset->when(FL_WHEN_RELEASE_ALWAYS);
   looper_preset->menu(menu_looper_preset);
 } // RKR_Choice* looper_preset
-{ looper_WD = new SliderW(53, 25, 100, 10, "Dry/Wet");
+{ looper_WD = new RKR_Slider(53, 25, 100, 10, "Dry/Wet");
   looper_WD->type(5);
   looper_WD->box(FL_FLAT_BOX);
   looper_WD->color((Fl_Color)178);
@@ -300,8 +300,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_WD->callback((Fl_Callback*)cb_looper_WD);
   looper_WD->align(Fl_Align(FL_ALIGN_LEFT));
   looper_WD->when(FL_WHEN_CHANGED);
-} // SliderW* looper_WD
-{ looper_level1 = new SliderW(53, 37, 100, 10, "Level 1");
+} // RKR_Slider* looper_WD
+{ looper_level1 = new RKR_Slider(53, 37, 100, 10, "Level 1");
   looper_level1->type(5);
   looper_level1->box(FL_FLAT_BOX);
   looper_level1->color((Fl_Color)178);
@@ -316,8 +316,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_level1->callback((Fl_Callback*)cb_looper_level1);
   looper_level1->align(Fl_Align(FL_ALIGN_LEFT));
   looper_level1->when(FL_WHEN_RELEASE);
-} // SliderW* looper_level1
-{ looper_level2 = new SliderW(53, 49, 100, 10, "Level 2");
+} // RKR_Slider* looper_level1
+{ looper_level2 = new RKR_Slider(53, 49, 100, 10, "Level 2");
   looper_level2->type(5);
   looper_level2->box(FL_FLAT_BOX);
   looper_level2->color((Fl_Color)178);
@@ -332,8 +332,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_level2->callback((Fl_Callback*)cb_looper_level2);
   looper_level2->align(Fl_Align(FL_ALIGN_LEFT));
   looper_level2->when(FL_WHEN_RELEASE);
-} // SliderW* looper_level2
-{ looper_Tempo = new SliderW(53, 61, 100, 10, "Tempo");
+} // RKR_Slider* looper_level2
+{ looper_Tempo = new RKR_Slider(53, 61, 100, 10, "Tempo");
   looper_Tempo->type(5);
   looper_Tempo->box(FL_FLAT_BOX);
   looper_Tempo->color((Fl_Color)178);
@@ -350,7 +350,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_Tempo->callback((Fl_Callback*)cb_looper_Tempo);
   looper_Tempo->align(Fl_Align(FL_ALIGN_LEFT));
   looper_Tempo->when(FL_WHEN_RELEASE);
-} // SliderW* looper_Tempo
+} // RKR_Slider* looper_Tempo
 { RKR_Choice* o = looper_bar = new RKR_Choice(57, 73, 40, 15, "Time Sig.");
   looper_bar->box(FL_FLAT_BOX);
   looper_bar->down_box(FL_BORDER_BOX);

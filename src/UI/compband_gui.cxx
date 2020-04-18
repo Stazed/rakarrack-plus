@@ -47,7 +47,7 @@ Fl_Menu_Item CbandGui::menu_cband_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void CbandGui::cb_cband_WD_i(SliderW* o, void*) {
+void CbandGui::cb_cband_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(368);
@@ -55,11 +55,11 @@ void CbandGui::cb_cband_WD_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(0,Dry_Wet((int)(o->value())));
 }
-void CbandGui::cb_cband_WD(SliderW* o, void* v) {
+void CbandGui::cb_cband_WD(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_WD_i(o,v);
 }
 
-void CbandGui::cb_cband_gain_i(SliderW* o, void*) {
+void CbandGui::cb_cband_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(369);
@@ -67,11 +67,11 @@ void CbandGui::cb_cband_gain_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(12,(int)o->value());
 }
-void CbandGui::cb_cband_gain(SliderW* o, void* v) {
+void CbandGui::cb_cband_gain(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_gain_i(o,v);
 }
 
-void CbandGui::cb_cband_Lratio_i(SliderW* o, void*) {
+void CbandGui::cb_cband_Lratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(370);
@@ -79,11 +79,11 @@ void CbandGui::cb_cband_Lratio_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(1, (int) o->value());
 }
-void CbandGui::cb_cband_Lratio(SliderW* o, void* v) {
+void CbandGui::cb_cband_Lratio(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_Lratio_i(o,v);
 }
 
-void CbandGui::cb_cband_MLratio_i(SliderW* o, void*) {
+void CbandGui::cb_cband_MLratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(371);
@@ -91,11 +91,11 @@ void CbandGui::cb_cband_MLratio_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(2, (int) o->value());
 }
-void CbandGui::cb_cband_MLratio(SliderW* o, void* v) {
+void CbandGui::cb_cband_MLratio(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_MLratio_i(o,v);
 }
 
-void CbandGui::cb_cband_MHratio_i(SliderW* o, void*) {
+void CbandGui::cb_cband_MHratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(372);
@@ -103,11 +103,11 @@ void CbandGui::cb_cband_MHratio_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(3, (int) o->value());
 }
-void CbandGui::cb_cband_MHratio(SliderW* o, void* v) {
+void CbandGui::cb_cband_MHratio(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_MHratio_i(o,v);
 }
 
-void CbandGui::cb_cband_Hratio_i(SliderW* o, void*) {
+void CbandGui::cb_cband_Hratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(373);
@@ -115,11 +115,11 @@ void CbandGui::cb_cband_Hratio_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(4, (int) o->value());
 }
-void CbandGui::cb_cband_Hratio(SliderW* o, void* v) {
+void CbandGui::cb_cband_Hratio(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_Hratio_i(o,v);
 }
 
-void CbandGui::cb_cband_Lthres_i(SliderW* o, void*) {
+void CbandGui::cb_cband_Lthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(374);
@@ -127,11 +127,11 @@ void CbandGui::cb_cband_Lthres_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(5, (int)o->value());
 }
-void CbandGui::cb_cband_Lthres(SliderW* o, void* v) {
+void CbandGui::cb_cband_Lthres(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_Lthres_i(o,v);
 }
 
-void CbandGui::cb_cband_MLthres_i(SliderW* o, void*) {
+void CbandGui::cb_cband_MLthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(375);
@@ -139,11 +139,11 @@ void CbandGui::cb_cband_MLthres_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(6, (int)o->value());
 }
-void CbandGui::cb_cband_MLthres(SliderW* o, void* v) {
+void CbandGui::cb_cband_MLthres(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_MLthres_i(o,v);
 }
 
-void CbandGui::cb_cband_MHthres_i(SliderW* o, void*) {
+void CbandGui::cb_cband_MHthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(376);
@@ -151,11 +151,11 @@ void CbandGui::cb_cband_MHthres_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(7, (int)o->value());
 }
-void CbandGui::cb_cband_MHthres(SliderW* o, void* v) {
+void CbandGui::cb_cband_MHthres(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_MHthres_i(o,v);
 }
 
-void CbandGui::cb_cband_Hthres_i(SliderW* o, void*) {
+void CbandGui::cb_cband_Hthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(377);
@@ -163,11 +163,11 @@ void CbandGui::cb_cband_Hthres_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(8, (int)o->value());
 }
-void CbandGui::cb_cband_Hthres(SliderW* o, void* v) {
+void CbandGui::cb_cband_Hthres(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_Hthres_i(o,v);
 }
 
-void CbandGui::cb_cband_cross1_i(SliderW* o, void*) {
+void CbandGui::cb_cband_cross1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(378);
@@ -175,11 +175,11 @@ void CbandGui::cb_cband_cross1_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(9,(int)o->value());
 }
-void CbandGui::cb_cband_cross1(SliderW* o, void* v) {
+void CbandGui::cb_cband_cross1(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_cross1_i(o,v);
 }
 
-void CbandGui::cb_cband_cross2_i(SliderW* o, void*) {
+void CbandGui::cb_cband_cross2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(379);
@@ -187,11 +187,11 @@ void CbandGui::cb_cband_cross2_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(10,(int)o->value());
 }
-void CbandGui::cb_cband_cross2(SliderW* o, void* v) {
+void CbandGui::cb_cband_cross2(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_cross2_i(o,v);
 }
 
-void CbandGui::cb_cband_cross3_i(SliderW* o, void*) {
+void CbandGui::cb_cband_cross3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(380);
@@ -199,7 +199,7 @@ void CbandGui::cb_cband_cross3_i(SliderW* o, void*) {
 }
 rkr->efx_CompBand->changepar(11,(int)o->value());
 }
-void CbandGui::cb_cband_cross3(SliderW* o, void* v) {
+void CbandGui::cb_cband_cross3(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_cross3_i(o,v);
 }
 CbandGui::CbandGui(int X, int Y, int W, int H, const char *L)
@@ -238,7 +238,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   cband_preset->menu(menu_cband_preset);
 } // RKR_Choice* cband_preset
-{ cband_WD = new SliderW(56, 27, 100, 10, "Dry/Wet");
+{ cband_WD = new RKR_Slider(56, 27, 100, 10, "Dry/Wet");
   cband_WD->type(5);
   cband_WD->box(FL_FLAT_BOX);
   cband_WD->color((Fl_Color)178);
@@ -253,8 +253,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_WD->callback((Fl_Callback*)cb_cband_WD);
   cband_WD->align(Fl_Align(FL_ALIGN_LEFT));
   cband_WD->when(FL_WHEN_CHANGED);
-} // SliderW* cband_WD
-{ cband_gain = new SliderW(56, 39, 100, 10, "Gain");
+} // RKR_Slider* cband_WD
+{ cband_gain = new RKR_Slider(56, 39, 100, 10, "Gain");
   cband_gain->type(5);
   cband_gain->box(FL_FLAT_BOX);
   cband_gain->color((Fl_Color)178);
@@ -269,8 +269,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_gain->callback((Fl_Callback*)cb_cband_gain);
   cband_gain->align(Fl_Align(FL_ALIGN_LEFT));
   cband_gain->when(FL_WHEN_CHANGED);
-} // SliderW* cband_gain
-{ cband_Lratio = new SliderW(56, 51, 100, 10, "L Ratio");
+} // RKR_Slider* cband_gain
+{ cband_Lratio = new RKR_Slider(56, 51, 100, 10, "L Ratio");
   cband_Lratio->type(5);
   cband_Lratio->box(FL_FLAT_BOX);
   cband_Lratio->color((Fl_Color)178);
@@ -287,8 +287,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_Lratio->callback((Fl_Callback*)cb_cband_Lratio);
   cband_Lratio->align(Fl_Align(FL_ALIGN_LEFT));
   cband_Lratio->when(FL_WHEN_CHANGED);
-} // SliderW* cband_Lratio
-{ cband_MLratio = new SliderW(56, 63, 100, 10, "ML Ratio");
+} // RKR_Slider* cband_Lratio
+{ cband_MLratio = new RKR_Slider(56, 63, 100, 10, "ML Ratio");
   cband_MLratio->type(5);
   cband_MLratio->box(FL_FLAT_BOX);
   cband_MLratio->color((Fl_Color)178);
@@ -305,8 +305,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_MLratio->callback((Fl_Callback*)cb_cband_MLratio);
   cband_MLratio->align(Fl_Align(FL_ALIGN_LEFT));
   cband_MLratio->when(FL_WHEN_CHANGED);
-} // SliderW* cband_MLratio
-{ cband_MHratio = new SliderW(56, 75, 100, 10, "MH Ratio");
+} // RKR_Slider* cband_MLratio
+{ cband_MHratio = new RKR_Slider(56, 75, 100, 10, "MH Ratio");
   cband_MHratio->type(5);
   cband_MHratio->box(FL_FLAT_BOX);
   cband_MHratio->color((Fl_Color)178);
@@ -323,8 +323,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_MHratio->callback((Fl_Callback*)cb_cband_MHratio);
   cband_MHratio->align(Fl_Align(FL_ALIGN_LEFT));
   cband_MHratio->when(FL_WHEN_CHANGED);
-} // SliderW* cband_MHratio
-{ cband_Hratio = new SliderW(56, 87, 100, 10, "H Ratio");
+} // RKR_Slider* cband_MHratio
+{ cband_Hratio = new RKR_Slider(56, 87, 100, 10, "H Ratio");
   cband_Hratio->type(5);
   cband_Hratio->box(FL_FLAT_BOX);
   cband_Hratio->color((Fl_Color)178);
@@ -341,8 +341,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_Hratio->callback((Fl_Callback*)cb_cband_Hratio);
   cband_Hratio->align(Fl_Align(FL_ALIGN_LEFT));
   cband_Hratio->when(FL_WHEN_CHANGED);
-} // SliderW* cband_Hratio
-{ cband_Lthres = new SliderW(56, 99, 100, 10, "L Thres");
+} // RKR_Slider* cband_Hratio
+{ cband_Lthres = new RKR_Slider(56, 99, 100, 10, "L Thres");
   cband_Lthres->type(5);
   cband_Lthres->box(FL_FLAT_BOX);
   cband_Lthres->color((Fl_Color)178);
@@ -358,8 +358,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_Lthres->callback((Fl_Callback*)cb_cband_Lthres);
   cband_Lthres->align(Fl_Align(FL_ALIGN_LEFT));
   cband_Lthres->when(FL_WHEN_CHANGED);
-} // SliderW* cband_Lthres
-{ cband_MLthres = new SliderW(56, 111, 100, 10, "ML Thres");
+} // RKR_Slider* cband_Lthres
+{ cband_MLthres = new RKR_Slider(56, 111, 100, 10, "ML Thres");
   cband_MLthres->type(5);
   cband_MLthres->box(FL_FLAT_BOX);
   cband_MLthres->color((Fl_Color)178);
@@ -375,8 +375,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_MLthres->callback((Fl_Callback*)cb_cband_MLthres);
   cband_MLthres->align(Fl_Align(FL_ALIGN_LEFT));
   cband_MLthres->when(FL_WHEN_CHANGED);
-} // SliderW* cband_MLthres
-{ cband_MHthres = new SliderW(56, 123, 100, 10, "MH Thres");
+} // RKR_Slider* cband_MLthres
+{ cband_MHthres = new RKR_Slider(56, 123, 100, 10, "MH Thres");
   cband_MHthres->type(5);
   cband_MHthres->box(FL_FLAT_BOX);
   cband_MHthres->color((Fl_Color)178);
@@ -392,8 +392,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_MHthres->callback((Fl_Callback*)cb_cband_MHthres);
   cband_MHthres->align(Fl_Align(FL_ALIGN_LEFT));
   cband_MHthres->when(FL_WHEN_CHANGED);
-} // SliderW* cband_MHthres
-{ cband_Hthres = new SliderW(56, 135, 100, 10, "H Thres");
+} // RKR_Slider* cband_MHthres
+{ cband_Hthres = new RKR_Slider(56, 135, 100, 10, "H Thres");
   cband_Hthres->type(5);
   cband_Hthres->box(FL_FLAT_BOX);
   cband_Hthres->color((Fl_Color)178);
@@ -409,8 +409,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_Hthres->callback((Fl_Callback*)cb_cband_Hthres);
   cband_Hthres->align(Fl_Align(FL_ALIGN_LEFT));
   cband_Hthres->when(FL_WHEN_CHANGED);
-} // SliderW* cband_Hthres
-{ cband_cross1 = new SliderW(56, 147, 100, 10, "Cross 1");
+} // RKR_Slider* cband_Hthres
+{ cband_cross1 = new RKR_Slider(56, 147, 100, 10, "Cross 1");
   cband_cross1->type(5);
   cband_cross1->box(FL_FLAT_BOX);
   cband_cross1->color((Fl_Color)178);
@@ -426,8 +426,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_cross1->callback((Fl_Callback*)cb_cband_cross1);
   cband_cross1->align(Fl_Align(FL_ALIGN_LEFT));
   cband_cross1->when(FL_WHEN_CHANGED);
-} // SliderW* cband_cross1
-{ cband_cross2 = new SliderW(56, 159, 100, 10, "Cross 2");
+} // RKR_Slider* cband_cross1
+{ cband_cross2 = new RKR_Slider(56, 159, 100, 10, "Cross 2");
   cband_cross2->type(5);
   cband_cross2->box(FL_FLAT_BOX);
   cband_cross2->color((Fl_Color)178);
@@ -443,8 +443,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_cross2->callback((Fl_Callback*)cb_cband_cross2);
   cband_cross2->align(Fl_Align(FL_ALIGN_LEFT));
   cband_cross2->when(FL_WHEN_CHANGED);
-} // SliderW* cband_cross2
-{ cband_cross3 = new SliderW(56, 171, 100, 10, "Cross 3");
+} // RKR_Slider* cband_cross2
+{ cband_cross3 = new RKR_Slider(56, 171, 100, 10, "Cross 3");
   cband_cross3->type(5);
   cband_cross3->box(FL_FLAT_BOX);
   cband_cross3->color((Fl_Color)178);
@@ -460,7 +460,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_cross3->callback((Fl_Callback*)cb_cband_cross3);
   cband_cross3->align(Fl_Align(FL_ALIGN_LEFT));
   cband_cross3->when(FL_WHEN_CHANGED);
-} // SliderW* cband_cross3
+} // RKR_Slider* cband_cross3
 position(X, Y);
 end();
 }

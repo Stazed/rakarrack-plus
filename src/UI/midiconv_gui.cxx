@@ -76,17 +76,17 @@ void MidiGui::cb_Use_FFT(RKR_Check_Button* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Use_FFT_i(o,v);
 }
 
-void MidiGui::cb_Trig_Adj_i(SliderW* o, void*) {
+void MidiGui::cb_Trig_Adj_i(RKR_Slider* o, void*) {
   m_rkr->efx_MIDIConverter->changepar(1,(int)o->value());
 }
-void MidiGui::cb_Trig_Adj(SliderW* o, void* v) {
+void MidiGui::cb_Trig_Adj(RKR_Slider* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Trig_Adj_i(o,v);
 }
 
-void MidiGui::cb_Vel_Adj_i(SliderW* o, void*) {
+void MidiGui::cb_Vel_Adj_i(RKR_Slider* o, void*) {
   m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());
 }
-void MidiGui::cb_Vel_Adj(SliderW* o, void* v) {
+void MidiGui::cb_Vel_Adj(RKR_Slider* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Vel_Adj_i(o,v);
 }
 MidiGui::MidiGui(int X, int Y, int W, int H, const char *L)
@@ -165,7 +165,7 @@ results.");
   Use_FFT->align(Fl_Align(FL_ALIGN_TOP));
   Use_FFT->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* Use_FFT
-{ SliderW* o = Trig_Adj = new SliderW(147, 15, 117, 11, "Trigger");
+{ RKR_Slider* o = Trig_Adj = new RKR_Slider(147, 15, 117, 11, "Trigger");
   Trig_Adj->type(5);
   Trig_Adj->box(FL_FLAT_BOX);
   Trig_Adj->color((Fl_Color)178);
@@ -183,8 +183,8 @@ results.");
   Trig_Adj->when(FL_WHEN_CHANGED);
   o->m_start_label_offset = -2; // 10 - 8
   o->shut_off_pixel_adjustment();
-} // SliderW* Trig_Adj
-{ SliderW* o = Vel_Adj = new SliderW(147, 34, 117, 11, "Velocity");
+} // RKR_Slider* Trig_Adj
+{ RKR_Slider* o = Vel_Adj = new RKR_Slider(147, 34, 117, 11, "Velocity");
   Vel_Adj->type(5);
   Vel_Adj->box(FL_FLAT_BOX);
   Vel_Adj->color((Fl_Color)178);
@@ -202,7 +202,7 @@ results.");
   Vel_Adj->when(FL_WHEN_CHANGED);
   o->m_start_label_offset = -2; // 10 - 8
   o->shut_off_pixel_adjustment();
-} // SliderW* Vel_Adj
+} // RKR_Slider* Vel_Adj
 { Mled = new Fl_Box(51, 5, 10, 10);
   Mled->box(FL_ROUNDED_BOX);
   Mled->color(FL_RED);

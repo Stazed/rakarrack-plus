@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
@@ -26,25 +26,25 @@ private:
   static void cb_flanger_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_flanger_preset[];
 public:
-  SliderW *flanger_WD;
+  RKR_Slider *flanger_WD;
 private:
-  inline void cb_flanger_WD_i(SliderW*, void*);
-  static void cb_flanger_WD(SliderW*, void*);
+  inline void cb_flanger_WD_i(RKR_Slider*, void*);
+  static void cb_flanger_WD(RKR_Slider*, void*);
 public:
-  SliderW *flanger_pan;
+  RKR_Slider *flanger_pan;
 private:
-  inline void cb_flanger_pan_i(SliderW*, void*);
-  static void cb_flanger_pan(SliderW*, void*);
+  inline void cb_flanger_pan_i(RKR_Slider*, void*);
+  static void cb_flanger_pan(RKR_Slider*, void*);
 public:
-  SliderW *flanger_freq;
+  RKR_Slider *flanger_freq;
 private:
-  inline void cb_flanger_freq_i(SliderW*, void*);
-  static void cb_flanger_freq(SliderW*, void*);
+  inline void cb_flanger_freq_i(RKR_Slider*, void*);
+  static void cb_flanger_freq(RKR_Slider*, void*);
 public:
-  SliderW *flanger_rnd;
+  RKR_Slider *flanger_rnd;
 private:
-  inline void cb_flanger_rnd_i(SliderW*, void*);
-  static void cb_flanger_rnd(SliderW*, void*);
+  inline void cb_flanger_rnd_i(RKR_Slider*, void*);
+  static void cb_flanger_rnd(RKR_Slider*, void*);
 public:
   RKR_Choice *flanger_lfotype;
 private:
@@ -61,30 +61,30 @@ private:
   inline void cb_flanger_awesome_i(RKR_Check_Button*, void*);
   static void cb_flanger_awesome(RKR_Check_Button*, void*);
 public:
-  SliderW *flanger_stdf;
+  RKR_Slider *flanger_stdf;
 private:
-  inline void cb_flanger_stdf_i(SliderW*, void*);
-  static void cb_flanger_stdf(SliderW*, void*);
+  inline void cb_flanger_stdf_i(RKR_Slider*, void*);
+  static void cb_flanger_stdf(RKR_Slider*, void*);
 public:
-  SliderW *flanger_dpth;
+  RKR_Slider *flanger_dpth;
 private:
-  inline void cb_flanger_dpth_i(SliderW*, void*);
-  static void cb_flanger_dpth(SliderW*, void*);
+  inline void cb_flanger_dpth_i(RKR_Slider*, void*);
+  static void cb_flanger_dpth(RKR_Slider*, void*);
 public:
-  SliderW *flanger_delay;
+  RKR_Slider *flanger_delay;
 private:
-  inline void cb_flanger_delay_i(SliderW*, void*);
-  static void cb_flanger_delay(SliderW*, void*);
+  inline void cb_flanger_delay_i(RKR_Slider*, void*);
+  static void cb_flanger_delay(RKR_Slider*, void*);
 public:
-  SliderW *flanger_fb;
+  RKR_Slider *flanger_fb;
 private:
-  inline void cb_flanger_fb_i(SliderW*, void*);
-  static void cb_flanger_fb(SliderW*, void*);
+  inline void cb_flanger_fb_i(RKR_Slider*, void*);
+  static void cb_flanger_fb(RKR_Slider*, void*);
 public:
-  SliderW *flanger_LR;
+  RKR_Slider *flanger_LR;
 private:
-  inline void cb_flanger_LR_i(SliderW*, void*);
-  static void cb_flanger_LR(SliderW*, void*);
+  inline void cb_flanger_LR_i(RKR_Slider*, void*);
+  static void cb_flanger_LR(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
 };
 #endif

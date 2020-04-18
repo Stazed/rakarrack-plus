@@ -8,7 +8,7 @@
 #include "RKR_Choice.h"
 #include "RKR_Counter.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
@@ -37,15 +37,15 @@ private:
   inline void cb_Use_FFT_i(RKR_Check_Button*, void*);
   static void cb_Use_FFT(RKR_Check_Button*, void*);
 public:
-  SliderW *Trig_Adj;
+  RKR_Slider *Trig_Adj;
 private:
-  inline void cb_Trig_Adj_i(SliderW*, void*);
-  static void cb_Trig_Adj(SliderW*, void*);
+  inline void cb_Trig_Adj_i(RKR_Slider*, void*);
+  static void cb_Trig_Adj(RKR_Slider*, void*);
 public:
-  SliderW *Vel_Adj;
+  RKR_Slider *Vel_Adj;
 private:
-  inline void cb_Vel_Adj_i(SliderW*, void*);
-  static void cb_Vel_Adj(SliderW*, void*);
+  inline void cb_Vel_Adj_i(RKR_Slider*, void*);
+  static void cb_Vel_Adj(RKR_Slider*, void*);
 public:
   Fl_Box *Mled;
   RKR_Box *MIDI_LABEL;

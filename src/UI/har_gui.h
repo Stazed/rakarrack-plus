@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,40 +25,40 @@ private:
   static void cb_har_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_har_preset[];
 public:
-  SliderW *har_WD;
+  RKR_Slider *har_WD;
 private:
-  inline void cb_har_WD_i(SliderW*, void*);
-  static void cb_har_WD(SliderW*, void*);
+  inline void cb_har_WD_i(RKR_Slider*, void*);
+  static void cb_har_WD(RKR_Slider*, void*);
 public:
-  SliderW *har_int;
+  RKR_Slider *har_int;
 private:
-  inline void cb_har_int_i(SliderW*, void*);
-  static void cb_har_int(SliderW*, void*);
+  inline void cb_har_int_i(RKR_Slider*, void*);
+  static void cb_har_int(RKR_Slider*, void*);
 public:
-  SliderW *har_gan;
+  RKR_Slider *har_gan;
 private:
-  inline void cb_har_gan_i(SliderW*, void*);
-  static void cb_har_gan(SliderW*, void*);
+  inline void cb_har_gan_i(RKR_Slider*, void*);
+  static void cb_har_gan(RKR_Slider*, void*);
 public:
-  SliderW *har_pan;
+  RKR_Slider *har_pan;
 private:
-  inline void cb_har_pan_i(SliderW*, void*);
-  static void cb_har_pan(SliderW*, void*);
+  inline void cb_har_pan_i(RKR_Slider*, void*);
+  static void cb_har_pan(RKR_Slider*, void*);
 public:
-  SliderW *har_freq1;
+  RKR_Slider *har_freq1;
 private:
-  inline void cb_har_freq1_i(SliderW*, void*);
-  static void cb_har_freq1(SliderW*, void*);
+  inline void cb_har_freq1_i(RKR_Slider*, void*);
+  static void cb_har_freq1(RKR_Slider*, void*);
 public:
-  SliderW *har_gan1;
+  RKR_Slider *har_gan1;
 private:
-  inline void cb_har_gan1_i(SliderW*, void*);
-  static void cb_har_gan1(SliderW*, void*);
+  inline void cb_har_gan1_i(RKR_Slider*, void*);
+  static void cb_har_gan1(RKR_Slider*, void*);
 public:
-  SliderW *har_q1;
+  RKR_Slider *har_q1;
 private:
-  inline void cb_har_q1_i(SliderW*, void*);
-  static void cb_har_q1(SliderW*, void*);
+  inline void cb_har_q1_i(RKR_Slider*, void*);
+  static void cb_har_q1(RKR_Slider*, void*);
 public:
   RKR_Check_Button *har_MIDI;
 private:
@@ -71,14 +71,14 @@ private:
   static void cb_har_SELECT(RKR_Check_Button*, void*);
 public:
   RKR_Box *har_chordname;
-  SliderW *har_note;
+  RKR_Slider *har_note;
 private:
-  inline void cb_har_note_i(SliderW*, void*);
-  static void cb_har_note(SliderW*, void*);
+  inline void cb_har_note_i(RKR_Slider*, void*);
+  static void cb_har_note(RKR_Slider*, void*);
 public:
-  SliderW *har_type;
+  RKR_Slider *har_type;
 private:
-  inline void cb_har_type_i(SliderW*, void*);
-  static void cb_har_type(SliderW*, void*);
+  inline void cb_har_type_i(RKR_Slider*, void*);
+  static void cb_har_type(RKR_Slider*, void*);
 };
 #endif

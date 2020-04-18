@@ -48,7 +48,7 @@ Fl_Menu_Item WhawhaGui::menu_WhaWha_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void WhawhaGui::cb_WhaWha_WD_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(28);
@@ -56,11 +56,11 @@ void WhawhaGui::cb_WhaWha_WD_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(0,Dry_Wet((int)(o->value())));
 }
-void WhawhaGui::cb_WhaWha_WD(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_WD(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_WD_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_pan_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(66);
@@ -68,11 +68,11 @@ void WhawhaGui::cb_WhaWha_pan_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(1,(int)(o->value()+64));
 }
-void WhawhaGui::cb_WhaWha_pan(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_pan(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_pan_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_freq_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(75);
@@ -80,11 +80,11 @@ void WhawhaGui::cb_WhaWha_freq_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(2,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_freq(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_freq(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_freq_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_rnd_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(108);
@@ -92,7 +92,7 @@ void WhawhaGui::cb_WhaWha_rnd_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(3,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_rnd(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_rnd(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_rnd_i(o,v);
 }
 
@@ -103,7 +103,7 @@ void WhawhaGui::cb_WhaWha_lfotype(RKR_Choice* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_lfotype_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_stdf_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(102);
@@ -111,11 +111,11 @@ void WhawhaGui::cb_WhaWha_stdf_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(5,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_stdf(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_stdf(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_stdf_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_dpth_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(1);
@@ -123,11 +123,11 @@ void WhawhaGui::cb_WhaWha_dpth_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(6,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_dpth(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_dpth(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_dpth_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_ampsns_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_ampsns_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(111);
@@ -135,7 +135,7 @@ void WhawhaGui::cb_WhaWha_ampsns_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(7,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_ampsns(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_ampsns(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_ampsns_i(o,v);
 }
 
@@ -167,7 +167,7 @@ Fl_Menu_Item WhawhaGui::menu_WhaWha_ftype[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void WhawhaGui::cb_WhaWha_smooth_i(SliderW* o, void*) {
+void WhawhaGui::cb_WhaWha_smooth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(113);
@@ -175,7 +175,7 @@ void WhawhaGui::cb_WhaWha_smooth_i(SliderW* o, void*) {
 } 
 rkr->efx_WhaWha->changepar(9,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_smooth(SliderW* o, void* v) {
+void WhawhaGui::cb_WhaWha_smooth(RKR_Slider* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_smooth_i(o,v);
 }
 WhawhaGui::WhawhaGui(int X, int Y, int W, int H, const char *L)
@@ -214,7 +214,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
   WhaWha_preset->menu(menu_WhaWha_preset);
 } // RKR_Choice* WhaWha_preset
-{ WhaWha_WD = new SliderW(56, 29, 100, 10, "Dry/Wet");
+{ WhaWha_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   WhaWha_WD->type(5);
   WhaWha_WD->box(FL_FLAT_BOX);
   WhaWha_WD->color((Fl_Color)178);
@@ -229,8 +229,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_WD->callback((Fl_Callback*)cb_WhaWha_WD);
   WhaWha_WD->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_WD->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_WD
-{ WhaWha_pan = new SliderW(56, 41, 100, 10, "Pan");
+} // RKR_Slider* WhaWha_WD
+{ WhaWha_pan = new RKR_Slider(56, 41, 100, 10, "Pan");
   WhaWha_pan->type(5);
   WhaWha_pan->box(FL_FLAT_BOX);
   WhaWha_pan->color((Fl_Color)178);
@@ -246,8 +246,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_pan->callback((Fl_Callback*)cb_WhaWha_pan);
   WhaWha_pan->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_pan->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_pan
-{ WhaWha_freq = new SliderW(56, 53, 100, 10, "Tempo");
+} // RKR_Slider* WhaWha_pan
+{ WhaWha_freq = new RKR_Slider(56, 53, 100, 10, "Tempo");
   WhaWha_freq->type(5);
   WhaWha_freq->box(FL_FLAT_BOX);
   WhaWha_freq->color((Fl_Color)178);
@@ -263,8 +263,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_freq->callback((Fl_Callback*)cb_WhaWha_freq);
   WhaWha_freq->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_freq->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_freq
-{ WhaWha_rnd = new SliderW(56, 65, 100, 10, "Random");
+} // RKR_Slider* WhaWha_freq
+{ WhaWha_rnd = new RKR_Slider(56, 65, 100, 10, "Random");
   WhaWha_rnd->type(5);
   WhaWha_rnd->box(FL_FLAT_BOX);
   WhaWha_rnd->color((Fl_Color)178);
@@ -279,7 +279,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_rnd->callback((Fl_Callback*)cb_WhaWha_rnd);
   WhaWha_rnd->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_rnd->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_rnd
+} // RKR_Slider* WhaWha_rnd
 { RKR_Choice* o = WhaWha_lfotype = new RKR_Choice(78, 79, 72, 16, "LFO Type");
   WhaWha_lfotype->box(FL_FLAT_BOX);
   WhaWha_lfotype->down_box(FL_BORDER_BOX);
@@ -296,7 +296,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* WhaWha_lfotype
-{ WhaWha_stdf = new SliderW(56, 105, 100, 10, "Stereo Df");
+{ WhaWha_stdf = new RKR_Slider(56, 105, 100, 10, "Stereo Df");
   WhaWha_stdf->tooltip("LFO L/R Delay");
   WhaWha_stdf->type(5);
   WhaWha_stdf->box(FL_FLAT_BOX);
@@ -312,8 +312,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_stdf->callback((Fl_Callback*)cb_WhaWha_stdf);
   WhaWha_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_stdf->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_stdf
-{ WhaWha_dpth = new SliderW(56, 117, 100, 10, "Depth");
+} // RKR_Slider* WhaWha_stdf
+{ WhaWha_dpth = new RKR_Slider(56, 117, 100, 10, "Depth");
   WhaWha_dpth->type(5);
   WhaWha_dpth->box(FL_FLAT_BOX);
   WhaWha_dpth->color((Fl_Color)178);
@@ -328,8 +328,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_dpth->callback((Fl_Callback*)cb_WhaWha_dpth);
   WhaWha_dpth->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_dpth->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_dpth
-{ WhaWha_ampsns = new SliderW(56, 129, 100, 10, "Amp.S.");
+} // RKR_Slider* WhaWha_dpth
+{ WhaWha_ampsns = new RKR_Slider(56, 129, 100, 10, "Amp.S.");
   WhaWha_ampsns->tooltip("Amplitude Sensitivity");
   WhaWha_ampsns->type(5);
   WhaWha_ampsns->box(FL_FLAT_BOX);
@@ -345,7 +345,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_ampsns->callback((Fl_Callback*)cb_WhaWha_ampsns);
   WhaWha_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_ampsns->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_ampsns
+} // RKR_Slider* WhaWha_ampsns
 { WhaWha_ampsnsinv = new RKR_Check_Button(8, 145, 70, 15, "A.S.I.");
   WhaWha_ampsnsinv->tooltip("Amplitude Sensitivity Inverse");
   WhaWha_ampsnsinv->box(FL_NO_BOX);
@@ -377,7 +377,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_ftype->when(FL_WHEN_RELEASE);
   WhaWha_ftype->menu(menu_WhaWha_ftype);
 } // RKR_Choice* WhaWha_ftype
-{ WhaWha_smooth = new SliderW(56, 165, 100, 10, "Smooth");
+{ WhaWha_smooth = new RKR_Slider(56, 165, 100, 10, "Smooth");
   WhaWha_smooth->type(5);
   WhaWha_smooth->box(FL_FLAT_BOX);
   WhaWha_smooth->color((Fl_Color)178);
@@ -392,7 +392,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   WhaWha_smooth->callback((Fl_Callback*)cb_WhaWha_smooth);
   WhaWha_smooth->align(Fl_Align(FL_ALIGN_LEFT));
   WhaWha_smooth->when(FL_WHEN_CHANGED);
-} // SliderW* WhaWha_smooth
+} // RKR_Slider* WhaWha_smooth
 position(X, Y);
 end();
 }

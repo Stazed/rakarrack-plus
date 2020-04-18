@@ -7,7 +7,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include <FL/Fl_Group.H>
-#include "sliderW.h"
+#include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
@@ -25,49 +25,49 @@ private:
   static void cb_echo_preset(RKR_Choice*, void*);
   static Fl_Menu_Item menu_echo_preset[];
 public:
-  SliderW *echo_WD;
+  RKR_Slider *echo_WD;
 private:
-  inline void cb_echo_WD_i(SliderW*, void*);
-  static void cb_echo_WD(SliderW*, void*);
+  inline void cb_echo_WD_i(RKR_Slider*, void*);
+  static void cb_echo_WD(RKR_Slider*, void*);
 public:
-  SliderW *echo_RV;
+  RKR_Slider *echo_RV;
 private:
-  inline void cb_echo_RV_i(SliderW*, void*);
-  static void cb_echo_RV(SliderW*, void*);
+  inline void cb_echo_RV_i(RKR_Slider*, void*);
+  static void cb_echo_RV(RKR_Slider*, void*);
 public:
-  SliderW *echo_pan;
+  RKR_Slider *echo_pan;
 private:
-  inline void cb_echo_pan_i(SliderW*, void*);
-  static void cb_echo_pan(SliderW*, void*);
+  inline void cb_echo_pan_i(RKR_Slider*, void*);
+  static void cb_echo_pan(RKR_Slider*, void*);
 public:
-  SliderW *echo_delay;
+  RKR_Slider *echo_delay;
 private:
-  inline void cb_echo_delay_i(SliderW*, void*);
-  static void cb_echo_delay(SliderW*, void*);
+  inline void cb_echo_delay_i(RKR_Slider*, void*);
+  static void cb_echo_delay(RKR_Slider*, void*);
 public:
-  SliderW *echo_LRdl;
+  RKR_Slider *echo_LRdl;
 private:
-  inline void cb_echo_LRdl_i(SliderW*, void*);
-  static void cb_echo_LRdl(SliderW*, void*);
+  inline void cb_echo_LRdl_i(RKR_Slider*, void*);
+  static void cb_echo_LRdl(RKR_Slider*, void*);
 public:
-  SliderW *echo_LRc;
+  RKR_Slider *echo_LRc;
 private:
-  inline void cb_echo_LRc_i(SliderW*, void*);
-  static void cb_echo_LRc(SliderW*, void*);
+  inline void cb_echo_LRc_i(RKR_Slider*, void*);
+  static void cb_echo_LRc(RKR_Slider*, void*);
 public:
-  SliderW *echo_fb;
+  RKR_Slider *echo_fb;
 private:
-  inline void cb_echo_fb_i(SliderW*, void*);
-  static void cb_echo_fb(SliderW*, void*);
+  inline void cb_echo_fb_i(RKR_Slider*, void*);
+  static void cb_echo_fb(RKR_Slider*, void*);
 public:
   RKR_Check_Button *echo_direct;
 private:
   inline void cb_echo_direct_i(RKR_Check_Button*, void*);
   static void cb_echo_direct(RKR_Check_Button*, void*);
 public:
-  SliderW *echo_damp;
+  RKR_Slider *echo_damp;
 private:
-  inline void cb_echo_damp_i(SliderW*, void*);
-  static void cb_echo_damp(SliderW*, void*);
+  inline void cb_echo_damp_i(RKR_Slider*, void*);
+  static void cb_echo_damp(RKR_Slider*, void*);
 };
 #endif

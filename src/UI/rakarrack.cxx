@@ -377,7 +377,7 @@ void RKRGUI::cb_BostBut(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
 }
 
-void RKRGUI::cb_Balance_i(SliderW* o, void*) {
+void RKRGUI::cb_Balance_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  getMIDIControl(12);
@@ -385,11 +385,11 @@ void RKRGUI::cb_Balance_i(SliderW* o, void*) {
 } 
 rkr->Fraction_Bypass=(float)(o->value()/100.0f);
 }
-void RKRGUI::cb_Balance(SliderW* o, void* v) {
+void RKRGUI::cb_Balance(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Balance_i(o,v);
 }
 
-void RKRGUI::cb_Nivel_Entrada_i(SliderW* o, void*) {
+void RKRGUI::cb_Nivel_Entrada_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  getMIDIControl(14);
@@ -398,11 +398,11 @@ void RKRGUI::cb_Nivel_Entrada_i(SliderW* o, void*) {
 rkr->Input_Gain=(float)((o->value()+50)/100.0);
 rkr->calculavol(1);
 }
-void RKRGUI::cb_Nivel_Entrada(SliderW* o, void* v) {
+void RKRGUI::cb_Nivel_Entrada(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Entrada_i(o,v);
 }
 
-void RKRGUI::cb_Nivel_Salida_i(SliderW* o, void*) {
+void RKRGUI::cb_Nivel_Salida_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  getMIDIControl(7);
@@ -412,7 +412,7 @@ void RKRGUI::cb_Nivel_Salida_i(SliderW* o, void*) {
 rkr->Master_Volume=(float)((o->value()+50)/100.0);
 rkr->calculavol(2);
 }
-void RKRGUI::cb_Nivel_Salida(SliderW* o, void* v) {
+void RKRGUI::cb_Nivel_Salida(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Salida_i(o,v);
 }
 
@@ -471,10 +471,10 @@ void RKRGUI::cb_MetroBar(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroBar_i(o,v);
 }
 
-void RKRGUI::cb_Metro_Volume_i(SliderW* o, void*) {
+void RKRGUI::cb_Metro_Volume_i(RKR_Slider* o, void*) {
   rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;
 }
-void RKRGUI::cb_Metro_Volume(SliderW* o, void* v) {
+void RKRGUI::cb_Metro_Volume(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Volume_i(o,v);
 }
 
@@ -501,11 +501,11 @@ void RKRGUI::cb_MetroSound(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_MetroSound_i(o,v);
 }
 
-void RKRGUI::cb_Metro_Tempo_i(SliderW* o, void*) {
+void RKRGUI::cb_Metro_Tempo_i(RKR_Slider* o, void*) {
   rkr->M_Metro_Tempo=(int)o->value();
 rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);
 }
-void RKRGUI::cb_Metro_Tempo(SliderW* o, void* v) {
+void RKRGUI::cb_Metro_Tempo(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Tempo_i(o,v);
 }
 
@@ -2015,7 +2015,7 @@ void RKRGUI::make_window() {
         BostBut->when(FL_WHEN_RELEASE);
         o->m_start_font_offset = -4; // (default 10) 10 - 6 = -4
       } // RKR_Button* BostBut
-      { Balance = new SliderW(15, 48, 19, 126, "FX%");
+      { Balance = new RKR_Slider(15, 48, 19, 126, "FX%");
         Balance->type(4);
         Balance->box(FL_FLAT_BOX);
         Balance->color(FL_FOREGROUND_COLOR);
@@ -2032,8 +2032,8 @@ void RKRGUI::make_window() {
         Balance->callback((Fl_Callback*)cb_Balance);
         Balance->align(Fl_Align(FL_ALIGN_BOTTOM));
         Balance->when(FL_WHEN_CHANGED);
-      } // SliderW* Balance
-      { Nivel_Entrada = new SliderW(57, 48, 19, 126, "Input");
+      } // RKR_Slider* Balance
+      { Nivel_Entrada = new RKR_Slider(57, 48, 19, 126, "Input");
         Nivel_Entrada->type(4);
         Nivel_Entrada->box(FL_FLAT_BOX);
         Nivel_Entrada->color(FL_FOREGROUND_COLOR);
@@ -2049,8 +2049,8 @@ void RKRGUI::make_window() {
         Nivel_Entrada->callback((Fl_Callback*)cb_Nivel_Entrada);
         Nivel_Entrada->align(Fl_Align(FL_ALIGN_BOTTOM));
         Nivel_Entrada->when(FL_WHEN_CHANGED);
-      } // SliderW* Nivel_Entrada
-      { Nivel_Salida = new SliderW(115, 48, 19, 126, "Output");
+      } // RKR_Slider* Nivel_Entrada
+      { Nivel_Salida = new RKR_Slider(115, 48, 19, 126, "Output");
         Nivel_Salida->tooltip("Shortcut \'F2\' decrease volume, \'F3\' Increase volume");
         Nivel_Salida->type(4);
         Nivel_Salida->box(FL_FLAT_BOX);
@@ -2067,7 +2067,7 @@ void RKRGUI::make_window() {
         Nivel_Salida->callback((Fl_Callback*)cb_Nivel_Salida);
         Nivel_Salida->align(Fl_Align(FL_ALIGN_BOTTOM));
         Nivel_Salida->when(FL_WHEN_CHANGED);
-      } // SliderW* Nivel_Salida
+      } // RKR_Slider* Nivel_Salida
       { input_vul = new NewVum(84, 50, 8, 122);
         input_vul->type(2);
         input_vul->box(FL_NO_BOX);
@@ -2200,7 +2200,7 @@ void RKRGUI::make_window() {
         o->m_start_label_offset = -2; // 10 - 8
         o->m_start_text_offset = -2; // 10 - 8
       } // RKR_Choice* MetroBar
-      { SliderW* o = Metro_Volume = new SliderW(667, 100, 117, 11, "Volume");
+      { RKR_Slider* o = Metro_Volume = new RKR_Slider(667, 100, 117, 11, "Volume");
         Metro_Volume->type(5);
         Metro_Volume->box(FL_FLAT_BOX);
         Metro_Volume->color((Fl_Color)178);
@@ -2218,7 +2218,7 @@ void RKRGUI::make_window() {
         Metro_Volume->when(FL_WHEN_CHANGED);
         o->m_start_label_offset = -2; // 10 - 8
         o->shut_off_pixel_adjustment();
-      } // SliderW* Metro_Volume
+      } // RKR_Slider* Metro_Volume
       { RKR_Choice* o = MetroSound = new RKR_Choice(634, 118, 28, 16, "S");
         MetroSound->box(FL_FLAT_BOX);
         MetroSound->down_box(FL_BORDER_BOX);
@@ -2237,7 +2237,7 @@ void RKRGUI::make_window() {
         o->m_start_label_offset = -2; // 10 - 8
         o->m_start_text_offset = -1; // 10 - 9
       } // RKR_Choice* MetroSound
-      { SliderW* o = Metro_Tempo = new SliderW(667, 119, 117, 11, "Tempo");
+      { RKR_Slider* o = Metro_Tempo = new RKR_Slider(667, 119, 117, 11, "Tempo");
         Metro_Tempo->type(5);
         Metro_Tempo->box(FL_FLAT_BOX);
         Metro_Tempo->color((Fl_Color)178);
@@ -2256,7 +2256,7 @@ void RKRGUI::make_window() {
         Metro_Tempo->when(FL_WHEN_CHANGED);
         o->m_start_label_offset = -2; // 10 - 8
         o->shut_off_pixel_adjustment();
-      } // SliderW* Metro_Tempo
+      } // RKR_Slider* Metro_Tempo
       { Metro_Led = new Fl_Box(568, 90, 10, 10);
         Metro_Led->box(FL_ROUNDED_BOX);
         Metro_Led->color(FL_RED);

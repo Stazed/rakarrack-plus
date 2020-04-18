@@ -30,7 +30,7 @@ int RKR_Input::handle(int event)
          * https://stackoverflow.com/questions/40284104/fltk-fl-value-input-subclass-does-not-receive-fl-keydown-events-only-fl-keyup
          * According to above, the RKR_Value_Input subclass in our case will not get FL_KEYDOWN events.
          * So this case of right and left keys is the reason for this class. To send to parent class via return 0;
-         * We want the value input to use the same keys as the sliderW class for keyboard input.
+         * We want the value input to use the same keys as the RKR_Slider class for keyboard input.
          */
         switch (Fl::event_key())
         {

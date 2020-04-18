@@ -44,7 +44,7 @@ Fl_Menu_Item ConvoGui::menu_convo_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void ConvoGui::cb_convo_WD_i(SliderW* o, void*) {
+void ConvoGui::cb_convo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(280);
@@ -52,11 +52,11 @@ void ConvoGui::cb_convo_WD_i(SliderW* o, void*) {
 }
 rkr->efx_Convol->changepar(0,Dry_Wet((int)(o->value())));
 }
-void ConvoGui::cb_convo_WD(SliderW* o, void* v) {
+void ConvoGui::cb_convo_WD(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_WD_i(o,v);
 }
 
-void ConvoGui::cb_convo_pan_i(SliderW* o, void*) {
+void ConvoGui::cb_convo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(281);
@@ -64,11 +64,11 @@ void ConvoGui::cb_convo_pan_i(SliderW* o, void*) {
 }
 rkr->efx_Convol->changepar(1,(int)(o->value()+64));
 }
-void ConvoGui::cb_convo_pan(SliderW* o, void* v) {
+void ConvoGui::cb_convo_pan(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_pan_i(o,v);
 }
 
-void ConvoGui::cb_convo_level_i(SliderW* o, void*) {
+void ConvoGui::cb_convo_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(282);
@@ -76,11 +76,11 @@ void ConvoGui::cb_convo_level_i(SliderW* o, void*) {
 }
 rkr->efx_Convol->changepar(7,(int)o->value());
 }
-void ConvoGui::cb_convo_level(SliderW* o, void* v) {
+void ConvoGui::cb_convo_level(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_level_i(o,v);
 }
 
-void ConvoGui::cb_convo_damp_i(SliderW* o, void*) {
+void ConvoGui::cb_convo_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(283);
@@ -88,11 +88,11 @@ void ConvoGui::cb_convo_damp_i(SliderW* o, void*) {
 }
 rkr->efx_Convol->changepar(6,(int)o->value());
 }
-void ConvoGui::cb_convo_damp(SliderW* o, void* v) {
+void ConvoGui::cb_convo_damp(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_damp_i(o,v);
 }
 
-void ConvoGui::cb_convo_fb_i(SliderW* o, void*) {
+void ConvoGui::cb_convo_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(284);
@@ -100,11 +100,11 @@ void ConvoGui::cb_convo_fb_i(SliderW* o, void*) {
 }
 rkr->efx_Convol->changepar(10,(int)o->value());
 }
-void ConvoGui::cb_convo_fb(SliderW* o, void* v) {
+void ConvoGui::cb_convo_fb(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_fb_i(o,v);
 }
 
-void ConvoGui::cb_convo_length_i(SliderW* o, void*) {
+void ConvoGui::cb_convo_length_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(285);
@@ -112,7 +112,7 @@ void ConvoGui::cb_convo_length_i(SliderW* o, void*) {
 }
 rkr->efx_Convol->changepar(3,(int)o->value());
 }
-void ConvoGui::cb_convo_length(SliderW* o, void* v) {
+void ConvoGui::cb_convo_length(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_length_i(o,v);
 }
 
@@ -202,7 +202,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   convo_preset->menu(menu_convo_preset);
 } // RKR_Choice* convo_preset
-{ convo_WD = new SliderW(56, 30, 100, 10, "Dry/Wet");
+{ convo_WD = new RKR_Slider(56, 30, 100, 10, "Dry/Wet");
   convo_WD->type(5);
   convo_WD->box(FL_FLAT_BOX);
   convo_WD->color((Fl_Color)178);
@@ -217,8 +217,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_WD->callback((Fl_Callback*)cb_convo_WD);
   convo_WD->align(Fl_Align(FL_ALIGN_LEFT));
   convo_WD->when(FL_WHEN_CHANGED);
-} // SliderW* convo_WD
-{ convo_pan = new SliderW(56, 46, 100, 10, "Pan");
+} // RKR_Slider* convo_WD
+{ convo_pan = new RKR_Slider(56, 46, 100, 10, "Pan");
   convo_pan->type(5);
   convo_pan->box(FL_FLAT_BOX);
   convo_pan->color((Fl_Color)178);
@@ -234,8 +234,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_pan->callback((Fl_Callback*)cb_convo_pan);
   convo_pan->align(Fl_Align(FL_ALIGN_LEFT));
   convo_pan->when(FL_WHEN_CHANGED);
-} // SliderW* convo_pan
-{ convo_level = new SliderW(56, 62, 100, 10, "Level");
+} // RKR_Slider* convo_pan
+{ convo_level = new RKR_Slider(56, 62, 100, 10, "Level");
   convo_level->type(5);
   convo_level->box(FL_FLAT_BOX);
   convo_level->color((Fl_Color)178);
@@ -250,8 +250,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_level->callback((Fl_Callback*)cb_convo_level);
   convo_level->align(Fl_Align(FL_ALIGN_LEFT));
   convo_level->when(FL_WHEN_CHANGED);
-} // SliderW* convo_level
-{ convo_damp = new SliderW(56, 78, 100, 10, "Damp");
+} // RKR_Slider* convo_level
+{ convo_damp = new RKR_Slider(56, 78, 100, 10, "Damp");
   convo_damp->type(5);
   convo_damp->box(FL_FLAT_BOX);
   convo_damp->color((Fl_Color)178);
@@ -266,8 +266,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_damp->callback((Fl_Callback*)cb_convo_damp);
   convo_damp->align(Fl_Align(FL_ALIGN_LEFT));
   convo_damp->when(FL_WHEN_CHANGED);
-} // SliderW* convo_damp
-{ convo_fb = new SliderW(56, 94, 100, 10, "Feedback");
+} // RKR_Slider* convo_damp
+{ convo_fb = new RKR_Slider(56, 94, 100, 10, "Feedback");
   convo_fb->type(5);
   convo_fb->box(FL_FLAT_BOX);
   convo_fb->color((Fl_Color)178);
@@ -283,8 +283,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_fb->callback((Fl_Callback*)cb_convo_fb);
   convo_fb->align(Fl_Align(FL_ALIGN_LEFT));
   convo_fb->when(FL_WHEN_CHANGED);
-} // SliderW* convo_fb
-{ convo_length = new SliderW(56, 110, 100, 10, "Length");
+} // RKR_Slider* convo_fb
+{ convo_length = new RKR_Slider(56, 110, 100, 10, "Length");
   convo_length->type(5);
   convo_length->box(FL_FLAT_BOX);
   convo_length->color((Fl_Color)178);
@@ -301,7 +301,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   convo_length->callback((Fl_Callback*)cb_convo_length);
   convo_length->align(Fl_Align(FL_ALIGN_LEFT));
   convo_length->when(FL_WHEN_RELEASE);
-} // SliderW* convo_length
+} // RKR_Slider* convo_length
 { convo_user = new RKR_Check_Button(110, 126, 43, 15, "User");
   convo_user->box(FL_NO_BOX);
   convo_user->down_box(FL_BORDER_BOX);
