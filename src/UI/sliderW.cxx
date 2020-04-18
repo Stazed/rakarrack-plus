@@ -29,6 +29,7 @@ SliderW::SliderW(int x, int y, int w, int h, const char *label) : Fl_Value_Slide
     m_start_label_offset = 0;
     m_start_text_offset = 0;
     m_previous_font_size = global_font_size;
+    m_use_pixel_adjustment = true;  // main window sliders use this
     this->user_data((void*)(SLIDERW_USER_DATA));
 }
 
@@ -415,6 +416,25 @@ void SliderW::font_resize(int W, int H)
     int font_size = global_font_size + m_start_label_offset;
     int adjusted_label_size = (float) (font_size * resize_ratio);
     
+    /* Used by EFX only for larger size on wide window - default */
+    if(m_use_pixel_adjustment && horizontal())
+    {
+        int W_pixels = adjusted_label_size * C_DEFAULT_FONT_SIZE;
+        W_pixels += C_DEFAULT_FONT_SIZE;
+        int H_pixels = adjusted_label_size;
+        while(1)
+        {
+            if(W_pixels > W)
+                break;
+            if(H_pixels > (H + 1))  // slightly larger on height
+                break;
+
+            adjusted_label_size++;
+
+            W_pixels += C_DEFAULT_FONT_SIZE;    // add because of larger font
+            H_pixels++;
+        }
+    }
     labelsize(adjusted_label_size);
     
     int text_font_size = global_font_size + m_start_text_offset;
