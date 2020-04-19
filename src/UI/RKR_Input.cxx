@@ -28,14 +28,15 @@ int RKR_Input::handle(int event)
     case FL_KEYBOARD:
         /* 
          * https://stackoverflow.com/questions/40284104/fltk-fl-value-input-subclass-does-not-receive-fl-keydown-events-only-fl-keyup
-         * According to above, the RKR_Value_Input subclass in our case will not get FL_KEYDOWN events.
-         * So this case of right and left keys is the reason for this class. To send to parent class via return 0;
-         * We want the value input to use the same keys as the RKR_Slider class for keyboard input.
+         * According to above, the RKR_Value_Input in our case will not get FL_KEYDOWN events.
+         * This is because the Fl_Input class captures all of the keys and indicates they were used. 
+         * So the entire reason for this class is to hijack all key events here and send to the parent
+         * (RKR_Value_Input) class via return 0; This is necessary because we want the RKR_Value_Input
+         * to use the same keys as the RKR_Slider class for keyboard input.
          */
-        switch (Fl::event_key())
+        if(Fl::event_key())
         {
-        /* Send all keyboard events to the parent */
-        default:
+            /* Send all keyboard events to the parent */
             return 0;
         }
     }
