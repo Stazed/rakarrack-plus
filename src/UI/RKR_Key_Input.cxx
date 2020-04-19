@@ -1,5 +1,5 @@
 /*
-  RKR_Input.cxx
+  RKR_Key_Input.cxx
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -18,10 +18,10 @@
 
 #include <FL/Fl.H>
 
-#include "RKR_Input.h"
+#include "RKR_Key_Input.h"
 
 
-int RKR_Input::handle(int event)
+int RKR_Key_Input::handle(int event)
 {
     switch (event)
     {
@@ -48,7 +48,7 @@ int RKR_Input::handle(int event)
  Creates a new Fl_Input widget using the given position, size,
  and label string. The default boxtype is FL_DOWN_BOX.
  */
-RKR_Input::RKR_Input(int X, int Y, int W, int H, const char *l)
+RKR_Key_Input::RKR_Key_Input(int X, int Y, int W, int H, const char *l)
 : Fl_Input(X, Y, W, H, l)
 {
 }

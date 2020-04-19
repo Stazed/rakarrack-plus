@@ -15,23 +15,11 @@
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
 */
-//
-// "$Id: RKR_Value_Input.cxx 8864 2011-07-19 04:49:30Z greg.ercolano $"
-//
-// Value input widget for the Fast Light Tool Kit (FLTK).
-//
-// Copyright 1998-2010 by Bill Spitzak and others.
-//
-// This library is free software. Distribution and use rights are outlined in
-// the file "COPYING" which should have been included with this file.  If this
-// file is missing or damaged, see the license at:
-//
-//     http://www.fltk.org/COPYING.php
-//
-// Please report all bugs and problems on the following page:
-//
-//     http://www.fltk.org/str.php
-//
+
+/*
+  This override class had been modified from the original Fl_Value_Input class to 
+  allow for keyboard input handling and auto resizing of fonts. 
+ */
 
 // FLTK widget for drag-adjusting a floating point value.
 // Warning: this works by making a child Fl_Input object, even

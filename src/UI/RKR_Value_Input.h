@@ -16,24 +16,11 @@
 
 */
 
+/*
+  This override class had been modified from the original Fl_Value_Input class to 
+  allow for keyboard input handling and auto resizing of fonts. 
+ */
 
-//
-// "$Id: RKR_Value_Input.H 8864 2011-07-19 04:49:30Z greg.ercolano $"
-//
-// Value input header file for the Fast Light Tool Kit (FLTK).
-//
-// Copyright 1998-2010 by Bill Spitzak and others.
-//
-// This library is free software. Distribution and use rights are outlined in
-// the file "COPYING" which should have been included with this file.  If this
-// file is missing or damaged, see the license at:
-//
-//     http://www.fltk.org/COPYING.php
-//
-// Please report all bugs and problems on the following page:
-//
-//     http://www.fltk.org/str.php
-//
 
 /* \file
    RKR_Value_Input widget . */
@@ -42,7 +29,7 @@
 #define RKR_Value_Input_H
 
 #include <FL/Fl_Valuator.H>
-#include "RKR_Input.h"
+#include "RKR_Key_Input.h"
 
 
 /**
@@ -77,7 +64,7 @@ class RKR_Value_Input : public Fl_Valuator {
 public:
     /* This is the encapsulated Fl_input attribute to which 
     this class delegates the value font, color and shortcut */
-    RKR_Input input;
+    RKR_Key_Input input;
 private:
     char soft_;
     static void input_cb(Fl_Widget*, void*);

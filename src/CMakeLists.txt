@@ -23,7 +23,7 @@ set (ProgSources
     UI/RKR_Counter.cxx
     UI/RKR_File_Input.cxx
     UI/RKR_Group.cxx
-    UI/RKR_Input.cxx
+    UI/RKR_Key_Input.cxx
     UI/RKR_Light_Button.cxx
     UI/RKR_Menu_Bar.cxx
     UI/RKR_Slider.cxx

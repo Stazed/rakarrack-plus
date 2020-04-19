@@ -1,5 +1,5 @@
 /*
-  RKR_Input.h
+  RKR_Key_Input.h
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -16,18 +16,18 @@
 
 */
 
-#ifndef RKR_Input_H
-#define RKR_Input_H
+#ifndef RKR_Key_Input_H
+#define RKR_Key_Input_H
 
 #include <FL/Fl_Input.H>
 
 
-class RKR_Input : public Fl_Input
+class RKR_Key_Input : public Fl_Input
 {
 protected:
 public:
     int handle(int);
-    RKR_Input(int,int,int,int,const char * = 0);
+    RKR_Key_Input(int,int,int,int,const char * = 0);
 };
 
 #endif 
