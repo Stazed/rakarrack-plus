@@ -785,7 +785,7 @@ Fl::focus(Open_Order);}
       Fl_Group DERELICT {
         user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-        code0 {\#include "newdist_gui.h"}
+        code0 {\#include "derelict_gui.h"}
         class DerelictGui
       } {}
       Fl_Group APHASER {
