@@ -22,6 +22,8 @@
 
 */
 
+// Renamed from RyanWah.h 4/18/2020 by stazed
+
 #ifndef MUTROMOJO_H
 #define MUTROMOJO_H
 #include "EffectLFO.h"

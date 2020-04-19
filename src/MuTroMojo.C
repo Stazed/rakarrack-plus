@@ -22,6 +22,8 @@
 
  */
 
+// Renamed from RyanWah.C 4/18/2020 by stazed
+
 #include <math.h>
 #include "MuTroMojo.h"        // Mutromojo
 #include "AnalogFilter.h"
