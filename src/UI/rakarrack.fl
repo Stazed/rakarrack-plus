@@ -8,7 +8,7 @@ decl {\#include "../process.h"} {public local
 decl {\#include "../global.h"} {public global
 }
 
-decl {\#include "RKR_Entry_Input.h"} {public global
+decl {\#include "RKR_Input.h"} {public global
 }
 
 decl {\#include "RKR_Slider.h"} {public global
@@ -1417,7 +1417,7 @@ BankWindow->hide();}
           xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->m_start_text_offset = 14; // (default 10) 10 - 24 = 14}
           code1 {o->maximum_size(22);}
-          class RKR_Entry_Input
+          class RKR_Input
         }
         Fl_Counter Preset_Counter {
           label Preset

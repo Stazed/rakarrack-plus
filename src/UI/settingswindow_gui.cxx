@@ -848,10 +848,10 @@ void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_D_IJ_Connect_i(o,v);
 }
 
-void SettingsWindowGui::cb_Username_i(RKR_Entry_Input* o, void*) {
+void SettingsWindowGui::cb_Username_i(RKR_Input* o, void*) {
   m_rkr->UserRealName=(char*) o->value();
 }
-void SettingsWindowGui::cb_Username(RKR_Entry_Input* o, void* v) {
+void SettingsWindowGui::cb_Username(RKR_Input* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);
 }
 
@@ -2323,7 +2323,7 @@ this->when(FL_WHEN_RELEASE);
     MISC_SET->hide();
     { Fondo10 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo10
-    { RKR_Entry_Input* o = Username = new RKR_Entry_Input(30, 58, 240, 21, "Username");
+    { RKR_Input* o = Username = new RKR_Input(30, 58, 240, 21, "Username");
       Username->box(FL_DOWN_BOX);
       Username->color(FL_BACKGROUND2_COLOR);
       Username->selection_color(FL_SELECTION_COLOR);
@@ -2337,7 +2337,7 @@ this->when(FL_WHEN_RELEASE);
       Username->when(FL_WHEN_RELEASE);
       o->m_start_label_offset = 4; // 10 - 14
       o->m_start_text_offset = 4; // 10 - 14
-    } // RKR_Entry_Input* Username
+    } // RKR_Input* Username
     { RKR_Check_Button* o = MES_DIS = new RKR_Check_Button(30, 90, 21, 20, "Disable Warnings    ");
       MES_DIS->box(FL_NO_BOX);
       MES_DIS->down_box(FL_DOWN_BOX);

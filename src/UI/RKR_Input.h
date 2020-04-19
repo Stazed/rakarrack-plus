@@ -1,5 +1,5 @@
 /*
-  RKR_Entry_Input.h
+  RKR_Input.h
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -17,22 +17,22 @@
 */
 
 /* 
- * File:   RKR_Entry_Input.h
+ * File:   RKR_Input.h
  * Author: sspresto
  *
  * Created on April 9, 2020, 12:33 PM
  */
 
-#ifndef RKR_ENTRY_INPUT_H
-#define RKR_ENTRY_INPUT_H
+#ifndef RKR_INPUT_H
+#define RKR_INPUT_H
 
 #include <FL/Fl_Input.H>
 
 
-class RKR_Entry_Input  : public Fl_Input
+class RKR_Input  : public Fl_Input
 {
 public:
-    RKR_Entry_Input(int X, int Y, int W, int H, const char *label=0);
+    RKR_Input(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
     int m_start_label_offset;
@@ -45,5 +45,5 @@ private:
     void font_resize(int,int);
 };
 
-#endif /* RKR_ENTRY_INPUT_H */
+#endif /* RKR_INPUT_H */
 

@@ -647,10 +647,10 @@ void RKRGUI::cb_B_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_B_preset_i(o,v);
 }
 
-void RKRGUI::cb_WPreset_Name_i(RKR_Entry_Input* o, void*) {
+void RKRGUI::cb_WPreset_Name_i(RKR_Input* o, void*) {
   strcpy(rkr->Preset_Name,o->value());
 }
-void RKRGUI::cb_WPreset_Name(RKR_Entry_Input* o, void* v) {
+void RKRGUI::cb_WPreset_Name(RKR_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WPreset_Name_i(o,v);
 }
 
@@ -2419,7 +2419,7 @@ void RKRGUI::make_window() {
         B_preset->when(FL_WHEN_RELEASE);
         o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
       } // RKR_Button* B_preset
-      { RKR_Entry_Input* o = WPreset_Name = new RKR_Entry_Input(174, 72, 338, 30);
+      { RKR_Input* o = WPreset_Name = new RKR_Input(174, 72, 338, 30);
         WPreset_Name->box(FL_DOWN_BOX);
         WPreset_Name->color((Fl_Color)62);
         WPreset_Name->selection_color(FL_SELECTION_COLOR);
@@ -2434,7 +2434,7 @@ void RKRGUI::make_window() {
         WPreset_Name->when(FL_WHEN_RELEASE);
         o->m_start_text_offset = 14; // (default 10) 10 - 24 = 14
         o->maximum_size(22);
-      } // RKR_Entry_Input* WPreset_Name
+      } // RKR_Input* WPreset_Name
       { RKR_Counter* o = Preset_Counter = new RKR_Counter(174, 106, 60, 20, "Preset");
         Preset_Counter->tooltip("Next or previous preset - Shortcut +(plus) or -(minus)");
         Preset_Counter->type(1);

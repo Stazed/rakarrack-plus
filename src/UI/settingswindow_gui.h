@@ -9,7 +9,7 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
 #include "RKR_Counter.h"
-#include "RKR_Entry_Input.h"
+#include "RKR_Input.h"
 #include "RKR_File_Input.h"
 #include "RKR_Group.h"
 #include "RKR_Scroll.h"
@@ -412,10 +412,10 @@ public:
   RKR_Browser *JackIn;
   Fl_Group *MISC_SET;
   Fl_Box *Fondo10;
-  RKR_Entry_Input *Username;
+  RKR_Input *Username;
 private:
-  inline void cb_Username_i(RKR_Entry_Input*, void*);
-  static void cb_Username(RKR_Entry_Input*, void*);
+  inline void cb_Username_i(RKR_Input*, void*);
+  static void cb_Username(RKR_Input*, void*);
 public:
   RKR_Check_Button *MES_DIS;
 private:

@@ -1,5 +1,5 @@
 /*
-  RKR_Entry_Input.cxx
+  RKR_Input.cxx
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -17,16 +17,16 @@
 */
 
 /* 
- * File:   RKR_Entry_Input.cxx
+ * File:   RKR_Input.cxx
  * Author: sspresto
  * 
  * Created on April 9, 2020, 12:33 PM
  */
 
-#include "RKR_Entry_Input.h"
+#include "RKR_Input.h"
 #include "../global.h"
 
-RKR_Entry_Input::RKR_Entry_Input(int X, int Y, int W, int H, const char *label) : Fl_Input(X, Y, W, H, label)
+RKR_Input::RKR_Input(int X, int Y, int W, int H, const char *label) : Fl_Input(X, Y, W, H, label)
 {
     m_previous_font_size = global_font_size;
     m_start_width = W;
@@ -35,7 +35,7 @@ RKR_Entry_Input::RKR_Entry_Input(int X, int Y, int W, int H, const char *label) 
     m_start_text_offset = 0;
 }
 
-void RKR_Entry_Input::draw()
+void RKR_Input::draw()
 {
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
@@ -47,7 +47,7 @@ void RKR_Entry_Input::draw()
     Fl_Input::draw();
 }
 
-void RKR_Entry_Input::font_resize(int W, int H)
+void RKR_Input::font_resize(int W, int H)
 {
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;
@@ -64,7 +64,7 @@ void RKR_Entry_Input::font_resize(int W, int H)
     textsize(adjusted_text_size);
 }
 
-void RKR_Entry_Input::resize(int X, int Y, int W, int H)
+void RKR_Input::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
     font_resize(W, H);

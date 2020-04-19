@@ -5,7 +5,7 @@
 #include <FL/Fl.H>
 #include "../process.h"
 #include "../global.h"
-#include "RKR_Entry_Input.h"
+#include "RKR_Input.h"
 #include "RKR_Slider.h"
 #include "newvum.h"
 #include "tunerbar.h"
@@ -452,10 +452,10 @@ private:
   inline void cb_B_preset_i(RKR_Button*, void*);
   static void cb_B_preset(RKR_Button*, void*);
 public:
-  RKR_Entry_Input *WPreset_Name;
+  RKR_Input *WPreset_Name;
 private:
-  inline void cb_WPreset_Name_i(RKR_Entry_Input*, void*);
-  static void cb_WPreset_Name(RKR_Entry_Input*, void*);
+  inline void cb_WPreset_Name_i(RKR_Input*, void*);
+  static void cb_WPreset_Name(RKR_Input*, void*);
 public:
   RKR_Counter *Preset_Counter;
 private:
