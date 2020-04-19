@@ -642,6 +642,36 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         }
         case 23: //Super Soft
         {
+#if 1
+            /* This is the best guess at what is should do... see comments below - stazed.
+             * It sounds the same and does not pop, no sound any more */
+            ws = powf(20.0f, ws * ws) + 0.5f;
+            float factor = 1.0f / ws;
+
+            for (int i = 0; i < nn; i++)
+            {
+                if (temps[i] > 1.0)
+                {
+                    temps[i] = (factor + 1.0f)*.5f;
+                }
+
+                if (temps[i] < -1.0)
+                {
+                    temps[i] = -1.0f;
+                }
+
+                if (temps[i] > factor)
+                {
+                    temps[i] = factor + (temps[i] - factor) / powf(1.0f + ((temps[i] - factor) / (1.0f - temps[i])), 2.0f);
+                }
+
+                temps[i] *= ws;
+            }
+            break;
+#else
+            /* This is the original code. It is obviously wrong.. caused pop then no sound
+             * See the FIXME comments on the lines below */
+            
             ws = powf(20.0f, ws * ws) + 0.5f;
             float factor = 1.0f / ws;
 
@@ -659,13 +689,13 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
 
                 if (temps[i] < factor)
                 {
-                    temps[i] = temps[i];
+                    temps[i] = temps[i];    // FIXME This just copies to itself....
                 }
                 else if (temps[i] > factor)
                 {
                     temps[i] = factor + (temps[i] - factor) / powf(1.0f + ((temps[i] - factor) / (1.0f - temps[i])), 2.0f);
                 }
-                else if (temps[i] > 1.0f)
+                else if (temps[i] > 1.0f)   // FIXME This is never done because of the first if() above
                 {
                     temps[i] = (factor + 1.0f)*.5f;
                 }
@@ -673,6 +703,7 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
                 temps[i] *= ws;
             }
             break;
+#endif // 0
         }
         case 24: // Hard Compression (used by stompboxes)
         {
