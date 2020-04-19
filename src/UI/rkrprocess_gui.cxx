@@ -1464,9 +1464,9 @@ void RKRGUI::Put_Loaded()
                 update_looper();
                 break;
 
-            case 31://RyanWah
-                RYANWAH->ryanwah_activar->value(rkr->RyanWah_Bypass);
-                RYANWAH->ryanwah_preset->do_callback(RYANWAH->ryanwah_preset, 1);
+            case 31://MuTroMojo
+                MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
+                MUTROMOJO->mutromojo_preset->do_callback(MUTROMOJO->mutromojo_preset, 1);
                 break;
 
             case 32:// RBEcho
@@ -1700,7 +1700,7 @@ void RKRGUI::reordena()
     VARYBAND->hide();
     CONVOLOTRON->hide();
     LOOPER->hide();
-    RYANWAH->hide();
+    MUTROMOJO->hide();
     RBECHO->hide();
     COILCRAFTER->hide();
     SHELFBOOST->hide();
@@ -2206,15 +2206,15 @@ void RKRGUI::reordena()
                 break;
 
             case 31:
-                RYANWAH->position(x[i], y[i]);
-                RYANWAH->ryanwah_activar->shortcut(s[i]);
+                MUTROMOJO->position(x[i], y[i]);
+                MUTROMOJO->mutromojo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
-                    RYANWAH->show();
-                if (rkr->RyanWah_Bypass)
+                    MUTROMOJO->show();
+                if (rkr->MuTroMojo_Bypass)
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
-                        RYANWAH->show();
+                        MUTROMOJO->show();
                 }
                 else
                     rkr->active[i] = 0;
@@ -4013,48 +4013,48 @@ void RKRGUI::ActMIDI()
                 VARYBAND->varyband_cross3->redraw();
                 break;
             case 256:
-                RYANWAH->ryanwah_WD->value(Dry_Wet(rkr->efx_RyanWah->getpar(0)));
-                RYANWAH->ryanwah_WD->redraw();
+                MUTROMOJO->mutromojo_WD->value(Dry_Wet(rkr->efx_MuTroMojo->getpar(0)));
+                MUTROMOJO->mutromojo_WD->redraw();
                 break;
             case 257:
-                RYANWAH->ryanwah_lp->value(rkr->efx_RyanWah->getpar(10));
-                RYANWAH->ryanwah_lp->redraw();
+                MUTROMOJO->mutromojo_lp->value(rkr->efx_MuTroMojo->getpar(10));
+                MUTROMOJO->mutromojo_lp->redraw();
                 break;
             case 258:
-                RYANWAH->ryanwah_bp->value(rkr->efx_RyanWah->getpar(11));
-                RYANWAH->ryanwah_bp->redraw();
+                MUTROMOJO->mutromojo_bp->value(rkr->efx_MuTroMojo->getpar(11));
+                MUTROMOJO->mutromojo_bp->redraw();
                 break;
             case 259:
-                RYANWAH->ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
-                RYANWAH->ryanwah_hp->redraw();
+                MUTROMOJO->mutromojo_hp->value(rkr->efx_MuTroMojo->getpar(12));
+                MUTROMOJO->mutromojo_hp->redraw();
                 break;
             case 260:
-                RYANWAH->ryanwah_dpth->value(rkr->efx_RyanWah->getpar(6));
-                RYANWAH->ryanwah_dpth->redraw();
+                MUTROMOJO->mutromojo_dpth->value(rkr->efx_MuTroMojo->getpar(6));
+                MUTROMOJO->mutromojo_dpth->redraw();
                 break;
             case 261:
-                RYANWAH->ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
-                RYANWAH->ryanwah_freq->redraw();
+                MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(2));
+                MUTROMOJO->mutromojo_freq->redraw();
                 break;
             case 262:
-                RYANWAH->ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
-                RYANWAH->ryanwah_q->redraw();
+                MUTROMOJO->mutromojo_q->value(rkr->efx_MuTroMojo->getpar(1));
+                MUTROMOJO->mutromojo_q->redraw();
                 break;
             case 263:
-                RYANWAH->ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
-                RYANWAH->ryanwah_rng->redraw();
+                MUTROMOJO->mutromojo_rng->value(rkr->efx_MuTroMojo->getpar(14));
+                MUTROMOJO->mutromojo_rng->redraw();
                 break;
             case 264:
-                RYANWAH->ryanwah_ampsnsinv->value(rkr->efx_RyanWah->getpar(8));
-                RYANWAH->ryanwah_ampsnsinv->redraw();
+                MUTROMOJO->mutromojo_ampsnsinv->value(rkr->efx_MuTroMojo->getpar(8));
+                MUTROMOJO->mutromojo_ampsnsinv->redraw();
                 break;
             case 265:
-                RYANWAH->ryanwah_ampsns->value(rkr->efx_RyanWah->getpar(7));
-                RYANWAH->ryanwah_ampsns->redraw();
+                MUTROMOJO->mutromojo_ampsns->value(rkr->efx_MuTroMojo->getpar(7));
+                MUTROMOJO->mutromojo_ampsns->redraw();
                 break;
             case 266:
-                RYANWAH->ryanwah_smooth->value(rkr->efx_RyanWah->getpar(9));
-                RYANWAH->ryanwah_smooth->redraw();
+                MUTROMOJO->mutromojo_smooth->value(rkr->efx_MuTroMojo->getpar(9));
+                MUTROMOJO->mutromojo_smooth->redraw();
                 break;
             case 267:
                 LOOPER->looper_WD->value(Dry_Wet(rkr->efx_Looper->getpar(0)));
@@ -4705,16 +4705,16 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_damp->redraw();
                 break;
             case 426:
-                RYANWAH->ryanwah_Rnd->value(rkr->efx_RyanWah->getpar(3));
-                RYANWAH->ryanwah_Rnd->redraw();
+                MUTROMOJO->mutromojo_Rnd->value(rkr->efx_MuTroMojo->getpar(3));
+                MUTROMOJO->mutromojo_Rnd->redraw();
                 break;
             case 427:
-                RYANWAH->ryanwah_St->value(rkr->efx_RyanWah->getpar(5) - 64);
-                RYANWAH->ryanwah_St->redraw();
+                MUTROMOJO->mutromojo_St->value(rkr->efx_MuTroMojo->getpar(5) - 64);
+                MUTROMOJO->mutromojo_St->redraw();
                 break;
             case 428:
-                RYANWAH->ryanwah_minfreq->value(rkr->efx_RyanWah->getpar(15));
-                RYANWAH->ryanwah_minfreq->redraw();
+                MUTROMOJO->mutromojo_minfreq->value(rkr->efx_MuTroMojo->getpar(15));
+                MUTROMOJO->mutromojo_minfreq->redraw();
                 break;
             case 429:
                 GATE->gate_ATime->value(rkr->efx_Gate->getpar(3));
@@ -4952,8 +4952,8 @@ void RKRGUI::ActOnOff()
                 LOOPER->looper_activar->do_callback();
                 break;
             case 31:
-                RYANWAH->ryanwah_activar->value(rkr->RyanWah_Bypass);
-                RYANWAH->ryanwah_activar->do_callback();
+                MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
+                MUTROMOJO->mutromojo_activar->do_callback();
                 break;
             case 32:
                 RBECHO->rbecho_activar->value(rkr->RBEcho_Bypass);
@@ -5081,7 +5081,7 @@ void RKRGUI::PutBackground()
     VARYBAND->image(InOut->image());
     CONVOLOTRON->image(InOut->image());
     LOOPER->image(InOut->image());
-    RYANWAH->image(InOut->image());
+    MUTROMOJO->image(InOut->image());
     RBECHO->image(InOut->image());
     COILCRAFTER->image(InOut->image());
     SHELFBOOST->image(InOut->image());
@@ -5864,10 +5864,10 @@ void RKRGUI::UpdateTGUI()
         SYNTHFILTER->synthfilter_freq->redraw();
     }
 
-    if (rkr->RyanWah_Bypass)
+    if (rkr->MuTroMojo_Bypass)
     {
-        RYANWAH->ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
-        RYANWAH->ryanwah_freq->redraw();
+        MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(2));
+        MUTROMOJO->mutromojo_freq->redraw();
     }
 
     if (rkr->VaryBand_Bypass)
@@ -6861,12 +6861,12 @@ void RKRGUI::RandomPreset()
                 update_looper();
                 break;
 
-            case 31://RyanWah
+            case 31://MuTroMojo
                 if (i < numEff)
-                    rkr->RyanWah_Bypass = 1;
+                    rkr->MuTroMojo_Bypass = 1;
                 else
-                    rkr->RyanWah_Bypass = 0;
-                RYANWAH->ryanwah_activar->value(rkr->RyanWah_Bypass);
+                    rkr->MuTroMojo_Bypass = 0;
+                MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
                 break;
 
             case 32:// RBEcho

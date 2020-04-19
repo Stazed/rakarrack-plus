@@ -1,7 +1,7 @@
 /*
   ZynAddSubFX - a software synthesizer
 
-  RyanWah.h - "WahWah" effect and others
+  MuTroMojo.h - "WahWah" effect and others
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
@@ -22,17 +22,17 @@
 
 */
 
-#ifndef RYANWAH_H
-#define RYANWAH_H
+#ifndef MUTROMOJO_H
+#define MUTROMOJO_H
 #include "EffectLFO.h"
 #include "RBFilter.h"
 #include "AnalogFilter.h"
 
-class RyanWah
+class MuTroMojo
 {
 public:
-    RyanWah (double sample_rate, uint32_t intermediate_bufsize);
-    ~RyanWah ();
+    MuTroMojo (double sample_rate, uint32_t intermediate_bufsize);
+    ~MuTroMojo ();
     void out (float * efxoutl, float * efxoutr);
 
     void setpreset (int npreset);
@@ -62,7 +62,7 @@ private:
     uint32_t PERIOD;
 
     int Pvolume;		//For wet/dry mix
-    int Pwidth;		//0/127// The width of the lfo of the RyanWah
+    int Pwidth;		//0/127// The width of the lfo of the MuTroMojo
     int Pampsns;	        //0/127//how the filter varies according to the input amplitude
     int Pampsnsinv;	//-64/64//bias of the filter
     int Pampsmooth;	//0/127//how smooth the input amplitude changes the filter, also for Pampsinsinv smoothing for wah wah pedal
@@ -93,7 +93,7 @@ private:
     float* interpbuf; //buffer for filters
 
     class FPreset *Fpre;
-    EffectLFO *lfo;		//lfo-ul RyanWah
+    EffectLFO *lfo;		//lfo-ul MuTroMojo
     
 };
 

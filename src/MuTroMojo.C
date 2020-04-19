@@ -1,7 +1,7 @@
 /*
   ZynAddSubFX - a software synthesizer
 
-  RyanWah.C - "WahWah" effect and others
+  MuTroMojo.C - "WahWah" effect and others
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
@@ -23,11 +23,11 @@
  */
 
 #include <math.h>
-#include "RyanWah.h"        // Mutromojo
+#include "MuTroMojo.h"        // Mutromojo
 #include "AnalogFilter.h"
 #include <stdio.h>
 
-RyanWah::RyanWah(double sample_rate, uint32_t intermediate_bufsize) :
+MuTroMojo::MuTroMojo(double sample_rate, uint32_t intermediate_bufsize) :
     Ppreset(),
     Pmode(),
     outvolume(0.5f),
@@ -86,7 +86,7 @@ RyanWah::RyanWah(double sample_rate, uint32_t intermediate_bufsize) :
     cleanup();
 }
 
-RyanWah::~RyanWah()
+MuTroMojo::~MuTroMojo()
 {
     delete lfo;
     clear_initialize();
@@ -96,7 +96,7 @@ RyanWah::~RyanWah()
  * Apply the effect
  */
 void
-RyanWah::out(float * efxoutl, float * efxoutr)
+MuTroMojo::out(float * efxoutl, float * efxoutr)
 {
     float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
@@ -192,7 +192,7 @@ RyanWah::out(float * efxoutl, float * efxoutr)
  * Cleanup the effect
  */
 void
-RyanWah::cleanup()
+MuTroMojo::cleanup()
 {
     reinitfilter();
     ms1 = 0.0;
@@ -203,7 +203,7 @@ RyanWah::cleanup()
 
 #ifdef LV2_SUPPORT
 void
-RyanWah::lv2_update_params(uint32_t period)
+MuTroMojo::lv2_update_params(uint32_t period)
 {
     if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
@@ -226,7 +226,7 @@ RyanWah::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-RyanWah::initialize()
+MuTroMojo::initialize()
 {
     interpbuf = new float[PERIOD];
     filterl = new RBFilter(0, 80.0f, 70.0f, 1, fSAMPLE_RATE, interpbuf);
@@ -236,7 +236,7 @@ RyanWah::initialize()
 }
 
 void
-RyanWah::clear_initialize()
+MuTroMojo::clear_initialize()
 {
     delete filterl;
     delete filterr;
@@ -249,21 +249,21 @@ RyanWah::clear_initialize()
  */
 
 void
-RyanWah::setwidth(int Pwidth)
+MuTroMojo::setwidth(int Pwidth)
 {
     this->Pwidth = Pwidth;
     depth = powf(((float) Pwidth / 127.0f), 2.0f);
 }
 
 void
-RyanWah::setvolume(int Pvolume)
+MuTroMojo::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
     outvolume = (float) Pvolume / 127.0f;
 }
 
 void
-RyanWah::setampsns(int Pp)
+MuTroMojo::setampsns(int Pp)
 {
     Pampsns = Pp;
     
@@ -282,7 +282,7 @@ RyanWah::setampsns(int Pp)
 }
 
 void
-RyanWah::reinitfilter()
+MuTroMojo::reinitfilter()
 {
     //setmix (int mix, float lpmix, float bpmix, float hpmix)
     filterl->setmix(1, lpmix, bpmix, hpmix);
@@ -290,7 +290,7 @@ RyanWah::reinitfilter()
 }
 
 void
-RyanWah::setpreset(int npreset)
+MuTroMojo::setpreset(int npreset)
 {
     const int PRESET_SIZE = 19;
     const int NUM_PRESETS = 7;
@@ -332,7 +332,7 @@ RyanWah::setpreset(int npreset)
 }
 
 void
-RyanWah::changepar(int npar, int value)
+MuTroMojo::changepar(int npar, int value)
 {
     switch (npar)
     {
@@ -494,7 +494,7 @@ RyanWah::changepar(int npar, int value)
 }
 
 int
-RyanWah::getpar(int npar)
+MuTroMojo::getpar(int npar)
 {
     switch (npar)
     {

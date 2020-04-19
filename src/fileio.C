@@ -90,7 +90,7 @@ const int presets_default[48][MAX_PRESET_SIZE] = {
     {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Looper
     {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0},
-    //RyanWah
+    //MuTroMojo
     {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1, 0},
     //Echoverse
     {64, 64, 90, 64, 64, 64, 64, 0, 1, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -381,12 +381,12 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case 31:
-        //RyanWah
+        //MuTroMojo
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[32][0], &lv[32][1], &lv[32][2], &lv[32][3], &lv[32][4],
                &lv[32][5], &lv[32][6], &lv[32][7], &lv[32][8], &lv[32][9],
                &lv[32][10], &lv[32][11], &lv[32][12], &lv[32][13], &lv[32][14],
-               &lv[32][15], &lv[32][16], &lv[32][17], &RyanWah_B);
+               &lv[32][15], &lv[32][16], &lv[32][17], &MuTroMojo_B);
         break;
 
     case 32:
@@ -870,18 +870,18 @@ void RKR::getbuf(char *buf, int j)
         break;
 
     case 31:
-        //RyanWah
+        //MuTroMojo
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_RyanWah->getpar(0), efx_RyanWah->getpar(1),
-                efx_RyanWah->getpar(2), efx_RyanWah->getpar(3),
-                efx_RyanWah->getpar(4), efx_RyanWah->getpar(5),
-                efx_RyanWah->getpar(6), efx_RyanWah->getpar(7),
-                efx_RyanWah->getpar(8), efx_RyanWah->getpar(9),
-                efx_RyanWah->getpar(10), efx_RyanWah->getpar(11),
-                efx_RyanWah->getpar(12), efx_RyanWah->getpar(13),
-                efx_RyanWah->getpar(14), efx_RyanWah->getpar(15),
-                efx_RyanWah->getpar(16), efx_RyanWah->getpar(17),
-                efx_RyanWah->getpar(18), RyanWah_Bypass);
+                efx_MuTroMojo->getpar(0), efx_MuTroMojo->getpar(1),
+                efx_MuTroMojo->getpar(2), efx_MuTroMojo->getpar(3),
+                efx_MuTroMojo->getpar(4), efx_MuTroMojo->getpar(5),
+                efx_MuTroMojo->getpar(6), efx_MuTroMojo->getpar(7),
+                efx_MuTroMojo->getpar(8), efx_MuTroMojo->getpar(9),
+                efx_MuTroMojo->getpar(10), efx_MuTroMojo->getpar(11),
+                efx_MuTroMojo->getpar(12), efx_MuTroMojo->getpar(13),
+                efx_MuTroMojo->getpar(14), efx_MuTroMojo->getpar(15),
+                efx_MuTroMojo->getpar(16), efx_MuTroMojo->getpar(17),
+                efx_MuTroMojo->getpar(18), MuTroMojo_Bypass);
 
         break;
     case 32:
@@ -1643,13 +1643,13 @@ RKR::Actualizar_Audio()
             Looper_Bypass = Looper_B;
             break;
 
-        case 31://RyanWah
+        case 31://MuTroMojo
 
-            RyanWah_Bypass = 0;
-            efx_RyanWah->cleanup();
+            MuTroMojo_Bypass = 0;
+            efx_MuTroMojo->cleanup();
             for (i = 0; i <= 18; i++)
-                efx_RyanWah->changepar(i, lv[32][i]);
-            RyanWah_Bypass = RyanWah_B;
+                efx_MuTroMojo->changepar(i, lv[32][i]);
+            MuTroMojo_Bypass = MuTroMojo_B;
             break;
 
         case 32://RBEcho
@@ -2036,7 +2036,7 @@ RKR::New()
     VaryBand_B = 0;
     Convol_B = 0;
     Looper_B = 0;
-    RyanWah_B = 0;
+    MuTroMojo_B = 0;
     RBEcho_B = 0;
     CoilCrafter_B = 0;
     ShelfBoost_B = 0;
@@ -2149,7 +2149,7 @@ RKR::Bank_to_Preset(int i)
     VaryBand_B = Bank[i].lv[29][19];
     Convol_B = Bank[i].lv[30][19];
     Looper_B = Bank[i].lv[31][19];
-    RyanWah_B = Bank[i].lv[32][19];
+    MuTroMojo_B = Bank[i].lv[32][19];
     RBEcho_B = Bank[i].lv[33][19];
     CoilCrafter_B = Bank[i].lv[34][19];
     ShelfBoost_B = Bank[i].lv[35][19];
@@ -2263,7 +2263,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j <= 13; j++)
         lv[31][j] = efx_Looper->getpar(j);
     for (j = 0; j <= 18; j++)
-        lv[32][j] = efx_RyanWah->getpar(j);
+        lv[32][j] = efx_MuTroMojo->getpar(j);
     for (j = 0; j <= 9; j++)
         lv[33][j] = efx_RBEcho->getpar(j);
     for (j = 0; j <= 8; j++)
@@ -2360,7 +2360,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].lv[29][19] = VaryBand_Bypass;
     Bank[i].lv[30][19] = Convol_Bypass;
     Bank[i].lv[31][19] = Looper_Bypass;
-    Bank[i].lv[32][19] = RyanWah_Bypass;
+    Bank[i].lv[32][19] = MuTroMojo_Bypass;
     Bank[i].lv[33][19] = RBEcho_Bypass;
     Bank[i].lv[34][19] = CoilCrafter_Bypass;
     Bank[i].lv[35][19] = ShelfBoost_Bypass;

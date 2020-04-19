@@ -367,7 +367,7 @@ RKR::Update_tempo()
     if (APhaser_Bypass) efx_APhaser->changepar(2, Tap_TempoSetL);
     if (DFlange_Bypass) efx_DFlange->changepar(10, Tap_TempoSetL);
     if (Synthfilter_Bypass) efx_Synthfilter->changepar(2, Tap_TempoSetL);
-    if (RyanWah_Bypass) efx_RyanWah->changepar(2, Tap_TempoSetL);
+    if (MuTroMojo_Bypass) efx_MuTroMojo->changepar(2, Tap_TempoSetL);
     if (VaryBand_Bypass) efx_VaryBand->changepar(1, Tap_TempoSetL);
     if (VaryBand_Bypass) efx_VaryBand->changepar(4, Tap_TempoSetL);
     if (Arpie_Bypass) efx_Arpie->changepar(2, Tap_TempoSetD);

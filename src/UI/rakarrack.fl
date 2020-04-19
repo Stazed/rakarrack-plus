@@ -204,7 +204,7 @@ decl {class ConvoGui; // forward declaration} {public global
 decl {class LooperGui; // forward declaration} {public global
 }
 
-decl {class RyanwahGui; // forward declaration} {public global
+decl {class MutromojoGui; // forward declaration} {public global
 }
 
 decl {class RbechoGui; // forward declaration} {public global
@@ -866,11 +866,11 @@ Fl::focus(Open_Order);}
         code0 {\#include "looper_gui.h"}
         class LooperGui
       } {}
-      Fl_Group RYANWAH {
+      Fl_Group MUTROMOJO {
         user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-        code0 {\#include "ryanwah_gui.h"}
-        class RyanwahGui
+        code0 {\#include "mutromojo_gui.h"}
+        class MutromojoGui
       } {}
       Fl_Group RBECHO {
         user_data 1

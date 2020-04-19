@@ -2531,7 +2531,7 @@ LV2_Handle init_mutrolv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 
     getFeatures(plug,host_features);
 
-    plug->mutro = new RyanWah(sample_freq, plug->period_max);
+    plug->mutro = new MuTroMojo(sample_freq, plug->period_max);
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);

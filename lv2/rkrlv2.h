@@ -62,7 +62,7 @@
 #include"Shuffle.h"
 #include"Synthfilter.h"
 #include"VaryBand.h"
-#include"RyanWah.h"
+#include"MuTroMojo.h"
 #include"RBEcho.h"
 #include"CoilCrafter.h"
 #include"ShelfBoost.h"
@@ -306,7 +306,7 @@ typedef struct _RKRLV2
     Shuffle* shuf;		//22
     Synthfilter* synth; //23
     VaryBand* varyband;		//24
-    RyanWah* mutro; 	//25
+    MuTroMojo* mutro; 	//25
     RBEcho* echoverse;	//26
     CoilCrafter* coil;	//27
     ShelfBoost* shelf;	//28

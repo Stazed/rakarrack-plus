@@ -61,7 +61,7 @@ set (ProgSources
     UI/varyband_gui.cxx
     UI/convo_gui.cxx
     UI/looper_gui.cxx
-    UI/ryanwah_gui.cxx
+    UI/mutromojo_gui.cxx
     UI/rbecho_gui.cxx
     UI/coil_gui.cxx
     UI/shelf_gui.cxx
@@ -134,7 +134,7 @@ set (ProgSources
     Synthfilter.C
     Resample.C
     Looper.C
-    RyanWah.C
+    MuTroMojo.C
     RBEcho.C
     CoilCrafter.C
     ShelfBoost.C

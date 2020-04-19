@@ -62,7 +62,7 @@ class SynthfilterGui; // forward declaration
 class VarybandGui; // forward declaration
 class ConvoGui; // forward declaration
 class LooperGui; // forward declaration
-class RyanwahGui; // forward declaration
+class MutromojoGui; // forward declaration
 class RbechoGui; // forward declaration
 class CoilGui; // forward declaration
 class ShelfGui; // forward declaration
@@ -120,7 +120,7 @@ class TrigWindowGui; // forward declaration
 #include "varyband_gui.h"
 #include "convo_gui.h"
 #include "looper_gui.h"
-#include "ryanwah_gui.h"
+#include "mutromojo_gui.h"
 #include "rbecho_gui.h"
 #include "coil_gui.h"
 #include "shelf_gui.h"
@@ -317,7 +317,7 @@ public:
   VarybandGui *VARYBAND;
   ConvoGui *CONVOLOTRON;
   LooperGui *LOOPER;
-  RyanwahGui *RYANWAH;
+  MutromojoGui *MUTROMOJO;
   RbechoGui *RBECHO;
   CoilGui *COILCRAFTER;
   ShelfGui *SHELFBOOST;

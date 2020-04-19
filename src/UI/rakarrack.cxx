@@ -1660,20 +1660,20 @@ void RKRGUI::make_window() {
       LOOPER->hide();
       LOOPER->end();
     } // LooperGui* LOOPER
-    { RYANWAH = new RyanwahGui(161, 212, 158, 184);
-      RYANWAH->box(FL_UP_BOX);
-      RYANWAH->color(FL_FOREGROUND_COLOR);
-      RYANWAH->selection_color(FL_FOREGROUND_COLOR);
-      RYANWAH->labeltype(FL_NORMAL_LABEL);
-      RYANWAH->labelfont(1);
-      RYANWAH->labelsize(14);
-      RYANWAH->labelcolor(FL_FOREGROUND_COLOR);
-      RYANWAH->user_data((void*)(1));
-      RYANWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      RYANWAH->when(FL_WHEN_RELEASE);
-      RYANWAH->hide();
-      RYANWAH->end();
-    } // RyanwahGui* RYANWAH
+    { MUTROMOJO = new MutromojoGui(161, 212, 158, 184);
+      MUTROMOJO->box(FL_UP_BOX);
+      MUTROMOJO->color(FL_FOREGROUND_COLOR);
+      MUTROMOJO->selection_color(FL_FOREGROUND_COLOR);
+      MUTROMOJO->labeltype(FL_NORMAL_LABEL);
+      MUTROMOJO->labelfont(1);
+      MUTROMOJO->labelsize(14);
+      MUTROMOJO->labelcolor(FL_FOREGROUND_COLOR);
+      MUTROMOJO->user_data((void*)(1));
+      MUTROMOJO->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      MUTROMOJO->when(FL_WHEN_RELEASE);
+      MUTROMOJO->hide();
+      MUTROMOJO->end();
+    } // MutromojoGui* MUTROMOJO
     { RBECHO = new RbechoGui(320, 212, 158, 184);
       RBECHO->box(FL_UP_BOX);
       RBECHO->color(FL_FOREGROUND_COLOR);

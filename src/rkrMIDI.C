@@ -455,8 +455,8 @@ RKR::ActiveUn(int value)
         else Looper_Bypass = 0;
         break;
     case 31:
-        if (inoff) RyanWah_Bypass = 1;
-        else RyanWah_Bypass = 0;
+        if (inoff) MuTroMojo_Bypass = 1;
+        else MuTroMojo_Bypass = 0;
         break;
     case 32:
         if (inoff) RBEcho_Bypass = 1;
@@ -638,7 +638,7 @@ RKR::checkonoff(int miraque)
         if (Looper_Bypass) return (0);
         break;
     case 31:
-        if (RyanWah_Bypass) return (0);
+        if (MuTroMojo_Bypass) return (0);
         break;
     case 32:
         if (RBEcho_Bypass) return (0);
@@ -1889,47 +1889,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 256:
-        efx_RyanWah->changepar(0, Dry_Wet(value));
+        efx_MuTroMojo->changepar(0, Dry_Wet(value));
         break;
 
     case 257:
-        efx_RyanWah->changepar(10, value - 64);
+        efx_MuTroMojo->changepar(10, value - 64);
         break;
 
     case 258:
-        efx_RyanWah->changepar(11, value - 64);
+        efx_MuTroMojo->changepar(11, value - 64);
         break;
 
     case 259:
-        efx_RyanWah->changepar(12, value - 64);
+        efx_MuTroMojo->changepar(12, value - 64);
         break;
 
     case 260:
-        efx_RyanWah->changepar(6, value);
+        efx_MuTroMojo->changepar(6, value);
         break;
 
     case 261:
-        efx_RyanWah->changepar(2, ret_Tempo(value));
+        efx_MuTroMojo->changepar(2, ret_Tempo(value));
         break;
 
     case 262:
-        efx_RyanWah->changepar(1, value);
+        efx_MuTroMojo->changepar(1, value);
         break;
 
     case 263:
-        efx_RyanWah->changepar(14, 10 + (int) ((float) value * C_MC_5990_RANGE));
+        efx_MuTroMojo->changepar(14, 10 + (int) ((float) value * C_MC_5990_RANGE));
         break;
 
     case 264:
-        efx_RyanWah->changepar(8, value);
+        efx_MuTroMojo->changepar(8, value);
         break;
 
     case 265:
-        efx_RyanWah->changepar(7, value - 64);
+        efx_MuTroMojo->changepar(7, value - 64);
         break;
 
     case 266:
-        efx_RyanWah->changepar(9, value);
+        efx_MuTroMojo->changepar(9, value);
         break;
 
     case 267:
@@ -2609,15 +2609,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 426:
-        efx_RyanWah->changepar(3, value);
+        efx_MuTroMojo->changepar(3, value);
         break;
 
     case 427:
-        efx_RyanWah->changepar(5, value);
+        efx_MuTroMojo->changepar(5, value);
         break;
 
     case 428:
-        efx_RyanWah->changepar(15, 30 + (int) ((float) value * C_MC_770_RANGE));
+        efx_MuTroMojo->changepar(15, 30 + (int) ((float) value * C_MC_770_RANGE));
         break;
 
     case 429:

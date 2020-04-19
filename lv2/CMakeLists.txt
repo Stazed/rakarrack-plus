@@ -46,7 +46,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/Synthfilter.C
   ../src/VaryBand.C
   ../src/RBFilter.C
-  ../src/RyanWah.C
+  ../src/MuTroMojo.C
   ../src/RBEcho.C
   ../src/CoilCrafter.C
   ../src/ShelfBoost.C

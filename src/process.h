@@ -39,7 +39,7 @@
 #include "Convolotron.h"
 #include "Resample.h"
 #include "Looper.h"
-#include "RyanWah.h"
+#include "MuTroMojo.h"
 #include "RBEcho.h"
 #include "CoilCrafter.h"
 #include "ShelfBoost.h"
@@ -183,7 +183,7 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
     class Looper *efx_Looper;
-    class RyanWah *efx_RyanWah;
+    class MuTroMojo *efx_MuTroMojo;
     class RBEcho *efx_RBEcho;
     class CoilCrafter *efx_CoilCrafter;
     class ShelfBoost *efx_ShelfBoost;
@@ -246,7 +246,7 @@ public:
     int VaryBand_Bypass;
     int Convol_Bypass;
     int Looper_Bypass;
-    int RyanWah_Bypass;
+    int MuTroMojo_Bypass;
     int RBEcho_Bypass;
     int CoilCrafter_Bypass;
     int ShelfBoost_Bypass;
@@ -294,7 +294,7 @@ public:
     int VaryBand_B;
     int Convol_B;
     int Looper_B;
-    int RyanWah_B;
+    int MuTroMojo_B;
     int RBEcho_B;
     int CoilCrafter_B;
     int ShelfBoost_B;

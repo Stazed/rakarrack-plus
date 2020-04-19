@@ -17,7 +17,7 @@ decl {\#include "RKR_Counter.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
-widget_class {\#include "common_gui_menu.h"} RyanwahGui {
+widget_class {\#include "common_gui_menu.h"} MutromojoGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
@@ -25,52 +25,52 @@ widget_class {\#include "common_gui_menu.h"} RyanwahGui {
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
 } {
-  Fl_Light_Button ryanwah_activar {
+  Fl_Light_Button mutromojo_activar {
     label On
     user_data 2
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
- o->value(rkr->RyanWah_Bypass);
+ o->value(rkr->MuTroMojo_Bypass);
  return;
 }
-rkr->RyanWah_Bypass=(int)o->value();
+rkr->MuTroMojo_Bypass=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_RyanWah->cleanup();
+rkr->efx_MuTroMojo->cleanup();
 rgui->findpos(31,(int)o->value(),o);}
     xywh {6 5 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
-  Fl_Choice ryanwah_preset {
+  Fl_Choice mutromojo_preset {
     label Preset
     user_data 12031
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12031))rkr->efx_RyanWah->setpreset((int) o->value());
-ryanwah_WD->value(Dry_Wet(rkr->efx_RyanWah->getpar(0)));
+if((ud==0)||(ud==12031))rkr->efx_MuTroMojo->setpreset((int) o->value());
+mutromojo_WD->value(Dry_Wet(rkr->efx_MuTroMojo->getpar(0)));
 
-int temp=rkr->efx_RyanWah->getpar(17);
+int temp=rkr->efx_MuTroMojo->getpar(17);
 
-if((temp==1) || (temp==3)) ryanwah_qm->value(1); else ryanwah_qm->value(0);
-if((temp==2) || (temp==3)) ryanwah_nat->value(1); else ryanwah_nat->value(0);
+if((temp==1) || (temp==3)) mutromojo_qm->value(1); else mutromojo_qm->value(0);
+if((temp==2) || (temp==3)) mutromojo_nat->value(1); else mutromojo_nat->value(0);
 
 
-ryanwah_q->value(rkr->efx_RyanWah->getpar(1));
-ryanwah_freq->value(rkr->efx_RyanWah->getpar(2));
-ryanwah_Rnd->value(rkr->efx_RyanWah->getpar(3));
-ryanwah_lfotype->value(rkr->efx_RyanWah->getpar(4));
-ryanwah_St->value(rkr->efx_RyanWah->getpar(5)-64);
-ryanwah_dpth->value(rkr->efx_RyanWah->getpar(6));
-ryanwah_ampsns->value(rkr->efx_RyanWah->getpar(7));
-ryanwah_ampsnsinv->value(rkr->efx_RyanWah->getpar(8));
-ryanwah_smooth->value(rkr->efx_RyanWah->getpar(9));
-ryanwah_lp->value(rkr->efx_RyanWah->getpar(10));
-ryanwah_bp->value(rkr->efx_RyanWah->getpar(11));
-ryanwah_hp->value(rkr->efx_RyanWah->getpar(12));
-svfilter_stages->value(rkr->efx_RyanWah->getpar(13));
-ryanwah_rng->value(rkr->efx_RyanWah->getpar(14));
-ryanwah_minfreq->value(rkr->efx_RyanWah->getpar(15));
-ryanwah_res->value(rkr->efx_RyanWah->getpar(16));
-o->value(rkr->efx_RyanWah->getpar(18));
+mutromojo_q->value(rkr->efx_MuTroMojo->getpar(1));
+mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(2));
+mutromojo_Rnd->value(rkr->efx_MuTroMojo->getpar(3));
+mutromojo_lfotype->value(rkr->efx_MuTroMojo->getpar(4));
+mutromojo_St->value(rkr->efx_MuTroMojo->getpar(5)-64);
+mutromojo_dpth->value(rkr->efx_MuTroMojo->getpar(6));
+mutromojo_ampsns->value(rkr->efx_MuTroMojo->getpar(7));
+mutromojo_ampsnsinv->value(rkr->efx_MuTroMojo->getpar(8));
+mutromojo_smooth->value(rkr->efx_MuTroMojo->getpar(9));
+mutromojo_lp->value(rkr->efx_MuTroMojo->getpar(10));
+mutromojo_bp->value(rkr->efx_MuTroMojo->getpar(11));
+mutromojo_hp->value(rkr->efx_MuTroMojo->getpar(12));
+svfilter_stages->value(rkr->efx_MuTroMojo->getpar(13));
+mutromojo_rng->value(rkr->efx_MuTroMojo->getpar(14));
+mutromojo_minfreq->value(rkr->efx_MuTroMojo->getpar(15));
+mutromojo_res->value(rkr->efx_MuTroMojo->getpar(16));
+o->value(rkr->efx_MuTroMojo->getpar(18));
 o->redraw();}
     xywh {78 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
@@ -104,200 +104,200 @@ o->redraw();}
       xywh {112 112 36 21} labelsize 10
     }
   }
-  Fl_Value_Slider ryanwah_WD {
+  Fl_Value_Slider mutromojo_WD {
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(256);
  return;
 }
-rkr->efx_RyanWah->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_MuTroMojo->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Check_Button ryanwah_qm {
+  Fl_Check_Button mutromojo_qm {
     label M
     user_data 2
     callback {if((int)o->value()) 
-rkr->efx_RyanWah->Pmode +=1;
+rkr->efx_MuTroMojo->Pmode +=1;
 else
-rkr->efx_RyanWah->Pmode -=1;
-rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
+rkr->efx_MuTroMojo->Pmode -=1;
+rkr->efx_MuTroMojo->changepar(17,rkr->efx_MuTroMojo->Pmode);}
     tooltip {Analog Gain Mode} xywh {18 34 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button
   }
-  Fl_Value_Slider ryanwah_lp {
+  Fl_Value_Slider mutromojo_lp {
     label LP
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(257);
  return;
 }
-rkr->efx_RyanWah->changepar(10,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(10,(int)o->value());}
     tooltip {Lowpass Level} xywh {56 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Check_Button ryanwah_nat {
+  Fl_Check_Button mutromojo_nat {
     label N
     user_data 2
     callback {if((int)o->value()) 
-rkr->efx_RyanWah->Pmode +=2;
+rkr->efx_MuTroMojo->Pmode +=2;
 else
-rkr->efx_RyanWah->Pmode -=2;
-rkr->efx_RyanWah->changepar(17,rkr->efx_RyanWah->Pmode);}
+rkr->efx_MuTroMojo->Pmode -=2;
+rkr->efx_MuTroMojo->changepar(17,rkr->efx_MuTroMojo->Pmode);}
     tooltip {Exponential Wah} xywh {18 44 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button
   }
-  Fl_Value_Slider ryanwah_bp {
+  Fl_Value_Slider mutromojo_bp {
     label BP
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(258);
  return;
 }
-rkr->efx_RyanWah->changepar(11,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(11,(int)o->value());}
     tooltip {Bandpass Level} xywh {56 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Check_Button ryanwah_res {
+  Fl_Check_Button mutromojo_res {
     label R
     user_data 2
-    callback {rkr->efx_RyanWah->changepar(16,(int)o->value());}
+    callback {rkr->efx_MuTroMojo->changepar(16,(int)o->value());}
     tooltip {Modulate Resonance} xywh {18 54 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button
   }
-  Fl_Value_Slider ryanwah_hp {
+  Fl_Value_Slider mutromojo_hp {
     label HP
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(259);
  return;
 }
-rkr->efx_RyanWah->changepar(12,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(12,(int)o->value());}
     tooltip {Highpass Level} xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Counter svfilter_stages {
     label Stg
-    callback {rkr->efx_RyanWah->changepar(13,(int)o->value());}
+    callback {rkr->efx_MuTroMojo->changepar(13,(int)o->value());}
     tooltip {Filter Stages} xywh {27 74 27 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
     code0 {o->m_start_text_offset = -1; // 10 - 9}
     class RKR_Counter
   }
-  Fl_Choice ryanwah_lfotype {
+  Fl_Choice mutromojo_lfotype {
     label LFO
-    callback {rkr->efx_RyanWah->changepar(4,(int)o->value())} selected
+    callback {rkr->efx_MuTroMojo->changepar(4,(int)o->value())} selected
     xywh {80 73 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
   } {}
-  Fl_Value_Slider ryanwah_dpth {
+  Fl_Value_Slider mutromojo_dpth {
     label Depth
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(260);
  return;
 }
-rkr->efx_RyanWah->changepar(6,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(6,(int)o->value());}
     xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider ryanwah_freq {
+  Fl_Value_Slider mutromojo_freq {
     label Tempo
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(261);
  return;
 }
-rkr->efx_RyanWah->changepar(2,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(2,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider ryanwah_q {
+  Fl_Value_Slider mutromojo_q {
     label {Res.}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(262);
  return;
 }
-rkr->efx_RyanWah->changepar(1,(int)(o->value()));}
+rkr->efx_MuTroMojo->changepar(1,(int)(o->value()));}
     tooltip Resonance xywh {56 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider ryanwah_rng {
+  Fl_Value_Slider mutromojo_rng {
     label Range
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(263);
  return;
 }
-rkr->efx_RyanWah->changepar(14,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(14,(int)o->value());}
     tooltip {Sweep Range} xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 6000 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider ryanwah_ampsnsinv {
+  Fl_Value_Slider mutromojo_ampsnsinv {
     label Wah
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(264);
  return;
 }
-rkr->efx_RyanWah->changepar(8,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(8,(int)o->value());}
     xywh {56 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider ryanwah_ampsns {
+  Fl_Value_Slider mutromojo_ampsns {
     label {E. Sens}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(265);
  return;
 }
-rkr->efx_RyanWah->changepar(7,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(7,(int)o->value());}
     tooltip {Envelope Sensitivity} xywh {56 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Input ryanwah_smooth {
+  Fl_Value_Input mutromojo_smooth {
     label S
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(266);
  return;
 }
-rkr->efx_RyanWah->changepar(9,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(9,(int)o->value());}
     tooltip {Envelope Smoothing} xywh {13 165 23 15} labelsize 10 labelcolor 7 maximum 127 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }
-  Fl_Value_Input ryanwah_Rnd {
+  Fl_Value_Input mutromojo_Rnd {
     label R
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(426);
  return;
 }
-rkr->efx_RyanWah->changepar(3,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(3,(int)o->value());}
     tooltip {LFO Randomness} xywh {51 165 23 15} labelsize 10 labelcolor 7 maximum 127 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }
-  Fl_Value_Input ryanwah_St {
+  Fl_Value_Input mutromojo_St {
     label D
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(427);
  return;
 }
-rkr->efx_RyanWah->changepar(5,(int)o->value()+64);}
+rkr->efx_MuTroMojo->changepar(5,(int)o->value()+64);}
     tooltip {LFO L/R Delay} xywh {90 165 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 63 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }
-  Fl_Value_Input ryanwah_minfreq {
+  Fl_Value_Input mutromojo_minfreq {
     label F
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(428);
  return;
 }
-rkr->efx_RyanWah->changepar(15,(int)o->value());}
+rkr->efx_MuTroMojo->changepar(15,(int)o->value());}
     tooltip {Starting Frequency} xywh {127 165 26 15} labelsize 10 labelcolor 7 minimum 30 maximum 800 step 1 value 450 textsize 10 textcolor 7
     class RKR_Value_Input
   }

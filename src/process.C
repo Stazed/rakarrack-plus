@@ -99,7 +99,7 @@ RKR::RKR() :
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
     efx_Looper(NULL),
-    efx_RyanWah(NULL),
+    efx_MuTroMojo(NULL),
     efx_RBEcho(NULL),
     efx_CoilCrafter(NULL),
     efx_ShelfBoost(NULL),
@@ -160,7 +160,7 @@ RKR::RKR() :
     VaryBand_Bypass(),
     Convol_Bypass(),
     Looper_Bypass(),
-    RyanWah_Bypass(),
+    MuTroMojo_Bypass(),
     RBEcho_Bypass(),
     CoilCrafter_Bypass(),
     ShelfBoost_Bypass(),
@@ -208,7 +208,7 @@ RKR::RKR() :
     VaryBand_B(),
     Convol_B(),
     Looper_B(),
-    RyanWah_B(),
+    MuTroMojo_B(),
     RBEcho_B(),
     CoilCrafter_B(),
     ShelfBoost_B(),
@@ -627,7 +627,7 @@ RKR::RKR() :
     efx_VaryBand = new VaryBand(fSample_rate, period);
     efx_Convol = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
     efx_Looper = new Looper(looper_size, fSample_rate, period);
-    efx_RyanWah = new RyanWah(fSample_rate, period);
+    efx_MuTroMojo = new MuTroMojo(fSample_rate, period);
     efx_RBEcho = new RBEcho(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
@@ -1280,7 +1280,7 @@ RKR::~RKR()
     delete efx_VaryBand;
     delete efx_Convol;
     delete efx_Looper;
-    delete efx_RyanWah;
+    delete efx_MuTroMojo;
     delete efx_RBEcho;
     delete efx_CoilCrafter;
     delete efx_ShelfBoost;
@@ -1853,7 +1853,7 @@ RKR::cleanup_efx()
     efx_VaryBand->cleanup();
     efx_Convol->cleanup();
     efx_Looper->cleanup();
-    efx_RyanWah->cleanup();
+    efx_MuTroMojo->cleanup();
     efx_RBEcho->cleanup();
     efx_CoilCrafter->cleanup();
     efx_ShelfBoost->cleanup();
@@ -2234,10 +2234,10 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case 31:
-                if (RyanWah_Bypass)
+                if (MuTroMojo_Bypass)
                 {
-                    efx_RyanWah->out(efxoutl, efxoutr);
-                    Vol_Efx(31, efx_RyanWah->outvolume);
+                    efx_MuTroMojo->out(efxoutl, efxoutr);
+                    Vol_Efx(31, efx_MuTroMojo->outvolume);
                 }
                 break;
 
