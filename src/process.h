@@ -35,7 +35,7 @@
 #include "Expander.h"
 #include "Shuffle.h"
 #include "Synthfilter.h"
-#include "MBVvol.h"
+#include "VaryBand.h"
 #include "Convolotron.h"
 #include "Resample.h"
 #include "Looper.h"
@@ -175,7 +175,7 @@ public:
     class Expander *efx_Expander;
     class Synthfilter *efx_Synthfilter;
     class Shuffle *efx_Shuffle;
-    class MBVvol *efx_MBVvol;
+    class VaryBand *efx_VaryBand;
     class Convolotron *efx_Convol;
     class Resample *U_Resample;
     class Resample *D_Resample;
@@ -243,7 +243,7 @@ public:
     int Expander_Bypass;
     int Shuffle_Bypass;
     int Synthfilter_Bypass;
-    int MBVvol_Bypass;
+    int VaryBand_Bypass;
     int Convol_Bypass;
     int Looper_Bypass;
     int RyanWah_Bypass;
@@ -291,7 +291,7 @@ public:
     int Expander_B;
     int Shuffle_B;
     int Synthfilter_B;
-    int MBVvol_B;
+    int VaryBand_B;
     int Convol_B;
     int Looper_B;
     int RyanWah_B;

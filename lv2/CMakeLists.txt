@@ -44,7 +44,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/Expander.C
   ../src/Shuffle.C
   ../src/Synthfilter.C
-  ../src/MBVvol.C
+  ../src/VaryBand.C
   ../src/RBFilter.C
   ../src/RyanWah.C
   ../src/RBEcho.C

@@ -91,7 +91,7 @@ RKR::RKR() :
     efx_Expander(NULL),
     efx_Synthfilter(NULL),
     efx_Shuffle(NULL),
-    efx_MBVvol(NULL),
+    efx_VaryBand(NULL),
     efx_Convol(NULL),
     U_Resample(NULL),
     D_Resample(NULL),
@@ -157,7 +157,7 @@ RKR::RKR() :
     Expander_Bypass(),
     Shuffle_Bypass(),
     Synthfilter_Bypass(),
-    MBVvol_Bypass(),
+    VaryBand_Bypass(),
     Convol_Bypass(),
     Looper_Bypass(),
     RyanWah_Bypass(),
@@ -205,7 +205,7 @@ RKR::RKR() :
     Expander_B(),
     Shuffle_B(),
     Synthfilter_B(),
-    MBVvol_B(),
+    VaryBand_B(),
     Convol_B(),
     Looper_B(),
     RyanWah_B(),
@@ -624,7 +624,7 @@ RKR::RKR() :
     efx_Expander = new Expander(fSample_rate, period);
     efx_Shuffle = new Shuffle(fSample_rate, period);
     efx_Synthfilter = new Synthfilter(fSample_rate, period);
-    efx_MBVvol = new MBVvol(fSample_rate, period);
+    efx_VaryBand = new VaryBand(fSample_rate, period);
     efx_Convol = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
     efx_Looper = new Looper(looper_size, fSample_rate, period);
     efx_RyanWah = new RyanWah(fSample_rate, period);
@@ -1277,7 +1277,7 @@ RKR::~RKR()
     delete efx_Expander;
     delete efx_Shuffle;
     delete efx_Synthfilter;
-    delete efx_MBVvol;
+    delete efx_VaryBand;
     delete efx_Convol;
     delete efx_Looper;
     delete efx_RyanWah;
@@ -1850,7 +1850,7 @@ RKR::cleanup_efx()
     efx_Expander->cleanup();
     efx_Shuffle->cleanup();
     efx_Synthfilter->cleanup();
-    efx_MBVvol->cleanup();
+    efx_VaryBand->cleanup();
     efx_Convol->cleanup();
     efx_Looper->cleanup();
     efx_RyanWah->cleanup();
@@ -2210,10 +2210,10 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case 28:
-                if (MBVvol_Bypass)
+                if (VaryBand_Bypass)
                 {
-                    efx_MBVvol->out(efxoutl, efxoutr);
-                    Vol_Efx(28, efx_MBVvol->outvolume);
+                    efx_VaryBand->out(efxoutl, efxoutr);
+                    Vol_Efx(28, efx_VaryBand->outvolume);
                 }
                 break;
 

@@ -1449,8 +1449,8 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case 28://VaryBand
-                MBVVOL->mbvvol_activar->value(rkr->MBVvol_Bypass);
-                MBVVOL->mbvvol_preset->do_callback(MBVVOL->mbvvol_preset, 1);
+                VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
+                VARYBAND->varyband_preset->do_callback(VARYBAND->varyband_preset, 1);
                 break;
 
             case 29://Convolotron
@@ -1697,7 +1697,7 @@ void RKRGUI::reordena()
     EXPANDER->hide();
     SHUFFLE->hide();
     SYNTHFILTER->hide();
-    MBVVOL->hide();
+    VARYBAND->hide();
     CONVOLOTRON->hide();
     LOOPER->hide();
     RYANWAH->hide();
@@ -2161,15 +2161,15 @@ void RKRGUI::reordena()
                 break;
 
             case 28:
-                MBVVOL->position(x[i], y[i]);
-                MBVVOL->mbvvol_activar->shortcut(s[i]);
+                VARYBAND->position(x[i], y[i]);
+                VARYBAND->varyband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
-                    MBVVOL->show();
-                if (rkr->MBVvol_Bypass)
+                    VARYBAND->show();
+                if (rkr->VaryBand_Bypass)
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
-                        MBVVOL->show();
+                        VARYBAND->show();
                 }
                 else
                     rkr->active[i] = 0;
@@ -3981,36 +3981,36 @@ void RKRGUI::ActMIDI()
                 SYNTHFILTER->synthfilter_Offset->redraw();
                 break;
             case 248:
-                MBVVOL->mbvvol_WD->value(Dry_Wet(rkr->efx_MBVvol->getpar(0)));
-                MBVVOL->mbvvol_WD->redraw();
+                VARYBAND->varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(0)));
+                VARYBAND->varyband_WD->redraw();
                 break;
             case 249:
-                MBVVOL->mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
-                MBVVOL->mbvvol_freq1->redraw();
+                VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(1));
+                VARYBAND->varyband_freq1->redraw();
                 break;
             case 250:
-                MBVVOL->mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
-                MBVVOL->mbvvol_stdf1->redraw();
+                VARYBAND->varyband_stdf1->value(rkr->efx_VaryBand->getpar(3));
+                VARYBAND->varyband_stdf1->redraw();
                 break;
             case 251:
-                MBVVOL->mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
-                MBVVOL->mbvvol_freq2->redraw();
+                VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(4));
+                VARYBAND->varyband_freq2->redraw();
                 break;
             case 252:
-                MBVVOL->mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
-                MBVVOL->mbvvol_stdf2->redraw();
+                VARYBAND->varyband_stdf2->value(rkr->efx_VaryBand->getpar(6));
+                VARYBAND->varyband_stdf2->redraw();
                 break;
             case 253:
-                MBVVOL->mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
-                MBVVOL->mbvvol_cross1->redraw();
+                VARYBAND->varyband_cross1->value(rkr->efx_VaryBand->getpar(7));
+                VARYBAND->varyband_cross1->redraw();
                 break;
             case 254:
-                MBVVOL->mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
-                MBVVOL->mbvvol_cross2->redraw();
+                VARYBAND->varyband_cross2->value(rkr->efx_VaryBand->getpar(8));
+                VARYBAND->varyband_cross2->redraw();
                 break;
             case 255:
-                MBVVOL->mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
-                MBVVOL->mbvvol_cross3->redraw();
+                VARYBAND->varyband_cross3->value(rkr->efx_VaryBand->getpar(9));
+                VARYBAND->varyband_cross3->redraw();
                 break;
             case 256:
                 RYANWAH->ryanwah_WD->value(Dry_Wet(rkr->efx_RyanWah->getpar(0)));
@@ -4940,8 +4940,8 @@ void RKRGUI::ActOnOff()
                 SYNTHFILTER->synthfilter_activar->do_callback();
                 break;
             case 28:
-                MBVVOL->mbvvol_activar->value(rkr->MBVvol_Bypass);
-                MBVVOL->mbvvol_activar->do_callback();
+                VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
+                VARYBAND->varyband_activar->do_callback();
                 break;
             case 29:
                 CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
@@ -5078,7 +5078,7 @@ void RKRGUI::PutBackground()
     EXPANDER->image(InOut->image());
     SHUFFLE->image(InOut->image());
     SYNTHFILTER->image(InOut->image());
-    MBVVOL->image(InOut->image());
+    VARYBAND->image(InOut->image());
     CONVOLOTRON->image(InOut->image());
     LOOPER->image(InOut->image());
     RYANWAH->image(InOut->image());
@@ -5870,16 +5870,16 @@ void RKRGUI::UpdateTGUI()
         RYANWAH->ryanwah_freq->redraw();
     }
 
-    if (rkr->MBVvol_Bypass)
+    if (rkr->VaryBand_Bypass)
     {
-        MBVVOL->mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
-        MBVVOL->mbvvol_freq1->redraw();
+        VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(1));
+        VARYBAND->varyband_freq1->redraw();
     }
 
-    if (rkr->MBVvol_Bypass)
+    if (rkr->VaryBand_Bypass)
     {
-        MBVVOL->mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
-        MBVVOL->mbvvol_freq2->redraw();
+        VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(4));
+        VARYBAND->varyband_freq2->redraw();
     }
 
     if (rkr->Arpie_Bypass)
@@ -6838,10 +6838,10 @@ void RKRGUI::RandomPreset()
 
             case 28://VaryBand
                 if (i < numEff)
-                    rkr->MBVvol_Bypass = 1;
+                    rkr->VaryBand_Bypass = 1;
                 else
-                    rkr->MBVvol_Bypass = 0;
-                MBVVOL->mbvvol_activar->value(rkr->MBVvol_Bypass);
+                    rkr->VaryBand_Bypass = 0;
+                VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
                 break;
 
             case 29://Convolotron

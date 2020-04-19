@@ -1618,20 +1618,20 @@ void RKRGUI::make_window() {
       SYNTHFILTER->hide();
       SYNTHFILTER->end();
     } // SynthfilterGui* SYNTHFILTER
-    { MBVVOL = new MbvvolGui(480, 413, 158, 184);
-      MBVVOL->box(FL_UP_BOX);
-      MBVVOL->color(FL_FOREGROUND_COLOR);
-      MBVVOL->selection_color(FL_FOREGROUND_COLOR);
-      MBVVOL->labeltype(FL_NORMAL_LABEL);
-      MBVVOL->labelfont(1);
-      MBVVOL->labelsize(14);
-      MBVVOL->labelcolor(FL_FOREGROUND_COLOR);
-      MBVVOL->user_data((void*)(1));
-      MBVVOL->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      MBVVOL->when(FL_WHEN_RELEASE);
-      MBVVOL->hide();
-      MBVVOL->end();
-    } // MbvvolGui* MBVVOL
+    { VARYBAND = new VarybandGui(480, 413, 158, 184);
+      VARYBAND->box(FL_UP_BOX);
+      VARYBAND->color(FL_FOREGROUND_COLOR);
+      VARYBAND->selection_color(FL_FOREGROUND_COLOR);
+      VARYBAND->labeltype(FL_NORMAL_LABEL);
+      VARYBAND->labelfont(1);
+      VARYBAND->labelsize(14);
+      VARYBAND->labelcolor(FL_FOREGROUND_COLOR);
+      VARYBAND->user_data((void*)(1));
+      VARYBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      VARYBAND->when(FL_WHEN_RELEASE);
+      VARYBAND->hide();
+      VARYBAND->end();
+    } // VarybandGui* VARYBAND
     { CONVOLOTRON = new ConvoGui(639, 413, 158, 184);
       CONVOLOTRON->box(FL_UP_BOX);
       CONVOLOTRON->color(FL_FOREGROUND_COLOR);

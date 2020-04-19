@@ -195,7 +195,7 @@ decl {class ShuffleGui; // forward declaration} {public global
 decl {class SynthfilterGui; // forward declaration} {public global
 }
 
-decl {class MbvvolGui; // forward declaration} {public global
+decl {class VarybandGui; // forward declaration} {public global
 }
 
 decl {class ConvoGui; // forward declaration} {public global
@@ -848,11 +848,11 @@ Fl::focus(Open_Order);}
         code0 {\#include "synthfilter_gui.h"}
         class SynthfilterGui
       } {}
-      Fl_Group MBVVOL {
+      Fl_Group VARYBAND {
         user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-        code0 {\#include "mbvvol_gui.h"}
-        class MbvvolGui
+        code0 {\#include "varyband_gui.h"}
+        class VarybandGui
       } {}
       Fl_Group CONVOLOTRON {
         user_data 1

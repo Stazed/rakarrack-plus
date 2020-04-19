@@ -84,7 +84,7 @@ const int presets_default[48][MAX_PRESET_SIZE] = {
     {64, 10, 0, 0, 0, 600, 1200, 2000, 6000, -14, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     //Synthfilter
     {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0, 0, 0, 0},
-    //MBVvol
+    //VaryBand
     {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     //Convolotron 1
     {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -354,11 +354,11 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case 28:
-        //MBVvol
+        //VaryBand
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[29][0], &lv[29][1], &lv[29][2], &lv[29][3], &lv[29][4],
                &lv[29][5], &lv[29][6], &lv[29][7], &lv[29][8], &lv[29][9],
-               &lv[29][10], &MBVvol_B);
+               &lv[29][10], &VaryBand_B);
         break;
 
     case 29:
@@ -836,14 +836,14 @@ void RKR::getbuf(char *buf, int j)
         break;
 
     case 28:
-        //MBVvol
+        //VaryBand
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_MBVvol->getpar(0), efx_MBVvol->getpar(1),
-                efx_MBVvol->getpar(2), efx_MBVvol->getpar(3),
-                efx_MBVvol->getpar(4), efx_MBVvol->getpar(5),
-                efx_MBVvol->getpar(6), efx_MBVvol->getpar(7),
-                efx_MBVvol->getpar(8), efx_MBVvol->getpar(9),
-                efx_MBVvol->getpar(10), MBVvol_Bypass);
+                efx_VaryBand->getpar(0), efx_VaryBand->getpar(1),
+                efx_VaryBand->getpar(2), efx_VaryBand->getpar(3),
+                efx_VaryBand->getpar(4), efx_VaryBand->getpar(5),
+                efx_VaryBand->getpar(6), efx_VaryBand->getpar(7),
+                efx_VaryBand->getpar(8), efx_VaryBand->getpar(9),
+                efx_VaryBand->getpar(10), VaryBand_Bypass);
         break;
 
     case 29:
@@ -1616,13 +1616,13 @@ RKR::Actualizar_Audio()
             Synthfilter_Bypass = Synthfilter_B;
             break;
 
-        case 28://MBVvol
+        case 28://VaryBand
 
-            MBVvol_Bypass = 0;
-            efx_MBVvol->cleanup();
+            VaryBand_Bypass = 0;
+            efx_VaryBand->cleanup();
             for (i = 0; i <= 10; i++)
-                efx_MBVvol->changepar(i, lv[29][i]);
-            MBVvol_Bypass = MBVvol_B;
+                efx_VaryBand->changepar(i, lv[29][i]);
+            VaryBand_Bypass = VaryBand_B;
             break;
 
         case 29://Convolotron
@@ -2033,7 +2033,7 @@ RKR::New()
     Expander_B = 0;
     Shuffle_B = 0;
     Synthfilter_B = 0;
-    MBVvol_B = 0;
+    VaryBand_B = 0;
     Convol_B = 0;
     Looper_B = 0;
     RyanWah_B = 0;
@@ -2146,7 +2146,7 @@ RKR::Bank_to_Preset(int i)
     Expander_B = Bank[i].lv[26][19];
     Shuffle_B = Bank[i].lv[27][19];
     Synthfilter_B = Bank[i].lv[28][19];
-    MBVvol_B = Bank[i].lv[29][19];
+    VaryBand_B = Bank[i].lv[29][19];
     Convol_B = Bank[i].lv[30][19];
     Looper_B = Bank[i].lv[31][19];
     RyanWah_B = Bank[i].lv[32][19];
@@ -2257,7 +2257,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j <= 15; j++)
         lv[28][j] = efx_Synthfilter->getpar(j);
     for (j = 0; j <= 10; j++)
-        lv[29][j] = efx_MBVvol->getpar(j);
+        lv[29][j] = efx_VaryBand->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[30][j] = efx_Convol->getpar(j);
     for (j = 0; j <= 13; j++)
@@ -2357,7 +2357,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].lv[26][19] = Expander_Bypass;
     Bank[i].lv[27][19] = Shuffle_Bypass;
     Bank[i].lv[28][19] = Synthfilter_Bypass;
-    Bank[i].lv[29][19] = MBVvol_Bypass;
+    Bank[i].lv[29][19] = VaryBand_Bypass;
     Bank[i].lv[30][19] = Convol_Bypass;
     Bank[i].lv[31][19] = Looper_Bypass;
     Bank[i].lv[32][19] = RyanWah_Bypass;

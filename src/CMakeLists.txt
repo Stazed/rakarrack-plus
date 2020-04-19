@@ -58,7 +58,7 @@ set (ProgSources
     UI/expander_gui.cxx
     UI/shuffle_gui.cxx
     UI/synthfilter_gui.cxx
-    UI/mbvvol_gui.cxx
+    UI/varyband_gui.cxx
     UI/convo_gui.cxx
     UI/looper_gui.cxx
     UI/ryanwah_gui.cxx
@@ -128,7 +128,7 @@ set (ProgSources
     Ring.C
     Shuffle.C
     mayer_fft.C
-    MBVvol.C
+    VaryBand.C
     metronome.C
     Convolotron.C
     Synthfilter.C

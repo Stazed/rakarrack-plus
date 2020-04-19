@@ -159,7 +159,7 @@ def efxorder2structindex(x):
         25 : 26, # expander
         26 : 27, # shuffle
         27 : 28, # synth
-        28 : 29, # mbvol
+        28 : 29, # varyband
         29 : 30, # convol
         30 : 31, # looper
         31 : 32, # mutro

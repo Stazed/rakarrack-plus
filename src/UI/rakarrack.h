@@ -59,7 +59,7 @@ class ArpieGui; // forward declaration
 class ExpanderGui; // forward declaration
 class ShuffleGui; // forward declaration
 class SynthfilterGui; // forward declaration
-class MbvvolGui; // forward declaration
+class VarybandGui; // forward declaration
 class ConvoGui; // forward declaration
 class LooperGui; // forward declaration
 class RyanwahGui; // forward declaration
@@ -117,7 +117,7 @@ class TrigWindowGui; // forward declaration
 #include "expander_gui.h"
 #include "shuffle_gui.h"
 #include "synthfilter_gui.h"
-#include "mbvvol_gui.h"
+#include "varyband_gui.h"
 #include "convo_gui.h"
 #include "looper_gui.h"
 #include "ryanwah_gui.h"
@@ -314,7 +314,7 @@ public:
   ExpanderGui *EXPANDER;
   ShuffleGui *SHUFFLE;
   SynthfilterGui *SYNTHFILTER;
-  MbvvolGui *MBVVOL;
+  VarybandGui *VARYBAND;
   ConvoGui *CONVOLOTRON;
   LooperGui *LOOPER;
   RyanwahGui *RYANWAH;

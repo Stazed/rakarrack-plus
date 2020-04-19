@@ -23,6 +23,8 @@
 
 */
 
+// Renamed from MBDist.h on 4/18/2020 by stazed.
+
 #ifndef DISTBAND_H
 #define DISTBAND_H
 

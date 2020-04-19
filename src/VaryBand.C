@@ -1,5 +1,5 @@
 /*
-  MBVvol.C - Vary Band Volumen effect
+  VaryBand.C - Vary Band Volumen effect
 
   ZynAddSubFX - a software synthesizer
   Copyright (C) 2002-2005 Nasca Octavian Paul
@@ -21,10 +21,12 @@
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
  */
 
+// Renamed from MBVvol.h 4/18/2020 by stazed
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "MBVvol.h"
+#include "VaryBand.h"
 
 /*
  * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
@@ -32,7 +34,7 @@
 
 
 
-MBVvol::MBVvol(double sample_rate, uint32_t intermediate_bufsize)
+VaryBand::VaryBand(double sample_rate, uint32_t intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;
@@ -61,7 +63,7 @@ MBVvol::MBVvol(double sample_rate, uint32_t intermediate_bufsize)
     cleanup();
 }
 
-MBVvol::~MBVvol()
+VaryBand::~VaryBand()
 {
     clear_initialize();
     delete lfo1;
@@ -72,7 +74,7 @@ MBVvol::~MBVvol()
  * Cleanup the effect
  */
 void
-MBVvol::cleanup()
+VaryBand::cleanup()
 {
     lpf1l->cleanup();
     hpf1l->cleanup();
@@ -90,7 +92,7 @@ MBVvol::cleanup()
 
 #ifdef LV2_SUPPORT
 void
-MBVvol::lv2_update_params(uint32_t period)
+VaryBand::lv2_update_params(uint32_t period)
 {
     if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
@@ -112,7 +114,7 @@ MBVvol::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-MBVvol::initialize()
+VaryBand::initialize()
 {
     lowl = (float *) malloc(sizeof (float) * PERIOD);
     lowr = (float *) malloc(sizeof (float) * PERIOD);
@@ -147,7 +149,7 @@ MBVvol::initialize()
 }
 
 void
-MBVvol::clear_initialize()
+VaryBand::clear_initialize()
 {
     free(lowl);
     free(lowr);
@@ -176,7 +178,7 @@ MBVvol::clear_initialize()
  * Effect output
  */
 void
-MBVvol::out(float * efxoutl, float * efxoutr)
+VaryBand::out(float * efxoutl, float * efxoutr)
 {
     memcpy(lowl, efxoutl, sizeof (float) * PERIOD);
     memcpy(midll, efxoutl, sizeof (float) * PERIOD);
@@ -223,14 +225,14 @@ MBVvol::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-MBVvol::setvolume(int value)
+VaryBand::setvolume(int value)
 {
     Pvolume = value;
     outvolume = (float) Pvolume / 127.0f;
 }
 
 void
-MBVvol::updateVols(void)
+VaryBand::updateVols(void)
 {
     v1l += d1;
     v1r += d2;
@@ -249,7 +251,7 @@ MBVvol::updateVols(void)
 
 //legacy support
 void
-MBVvol::setCombi(int value)
+VaryBand::setCombi(int value)
 {
     /*
     NEW         LEGACY
@@ -452,7 +454,7 @@ MBVvol::setCombi(int value)
 
 // rakarrack only, not lv2
 void
-MBVvol::calcCombi()
+VaryBand::calcCombi()
 {
     /* To save all four variables in the one Pcombi variable */
     Pcombi = ((PsL * 1000) + (PsML * 100) + (PsMH * 10) + PsH) + 10000;
@@ -460,7 +462,7 @@ MBVvol::calcCombi()
 
 // rakarrack only, not lv2
 void
-MBVvol::parseCombi(int value)
+VaryBand::parseCombi(int value)
 {
     /* New file saving for the rkr.lv2 method - four variables saved in one variable location */
     value -= 10000;
@@ -481,7 +483,7 @@ MBVvol::parseCombi(int value)
 }
 
 void
-MBVvol::setCross1(int value)
+VaryBand::setCross1(int value)
 {
     Cross1 = value;
     lpf1l->setfreq((float) value);
@@ -491,7 +493,7 @@ MBVvol::setCross1(int value)
 }
 
 void
-MBVvol::setCross2(int value)
+VaryBand::setCross2(int value)
 {
     Cross2 = value;
     hpf2l->setfreq((float) value);
@@ -501,7 +503,7 @@ MBVvol::setCross2(int value)
 }
 
 void
-MBVvol::setCross3(int value)
+VaryBand::setCross3(int value)
 {
     Cross3 = value;
     hpf3l->setfreq((float) value);
@@ -511,7 +513,7 @@ MBVvol::setCross3(int value)
 }
 
 void
-MBVvol::setSource(float** ptr, float** ptrr, int val)
+VaryBand::setSource(float** ptr, float** ptrr, int val)
 {
     switch (val)
     {
@@ -539,7 +541,7 @@ MBVvol::setSource(float** ptr, float** ptrr, int val)
 }
 
 void
-MBVvol::setpreset(int npreset)
+VaryBand::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 4;
@@ -574,7 +576,7 @@ MBVvol::setpreset(int npreset)
 }
 
 void
-MBVvol::changepar(int npar, int value)
+VaryBand::changepar(int npar, int value)
 {
     switch (npar)
     {
@@ -638,7 +640,7 @@ MBVvol::changepar(int npar, int value)
 }
 
 int
-MBVvol::getpar(int npar)
+VaryBand::getpar(int npar)
 {
     switch (npar)
     {

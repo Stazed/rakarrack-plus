@@ -443,8 +443,8 @@ RKR::ActiveUn(int value)
         else Synthfilter_Bypass = 0;
         break;
     case 28:
-        if (inoff) MBVvol_Bypass = 1;
-        else MBVvol_Bypass = 0;
+        if (inoff) VaryBand_Bypass = 1;
+        else VaryBand_Bypass = 0;
         break;
     case 29:
         if (inoff) Convol_Bypass = 1;
@@ -629,7 +629,7 @@ RKR::checkonoff(int miraque)
         if (Synthfilter_Bypass) return (0);
         break;
     case 28:
-        if (MBVvol_Bypass) return (0);
+        if (VaryBand_Bypass) return (0);
         break;
     case 29:
         if (Convol_Bypass) return (0);
@@ -1857,35 +1857,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 248:
-        efx_MBVvol->changepar(0, Dry_Wet(value));
+        efx_VaryBand->changepar(0, Dry_Wet(value));
         break;
 
     case 249:
-        efx_MBVvol->changepar(1, ret_Tempo(value));
+        efx_VaryBand->changepar(1, ret_Tempo(value));
         break;
 
     case 250:
-        efx_MBVvol->changepar(3, value);
+        efx_VaryBand->changepar(3, value);
         break;
 
     case 251:
-        efx_MBVvol->changepar(4, ret_Tempo(value));
+        efx_VaryBand->changepar(4, ret_Tempo(value));
         break;
 
     case 252:
-        efx_MBVvol->changepar(6, value);
+        efx_VaryBand->changepar(6, value);
         break;
 
     case 253:
-        efx_MBVvol->changepar(7, 20 + (int) ((float) value * C_MC_980_RANGE));
+        efx_VaryBand->changepar(7, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 254:
-        efx_MBVvol->changepar(8, 1000 + (int) ((float) value * C_MC_7000_RANGE));
+        efx_VaryBand->changepar(8, 1000 + (int) ((float) value * C_MC_7000_RANGE));
         break;
 
     case 255:
-        efx_MBVvol->changepar(9, 2000 + (int) ((float) value * C_MC_24000_RANGE));
+        efx_VaryBand->changepar(9, 2000 + (int) ((float) value * C_MC_24000_RANGE));
         break;
 
     case 256:

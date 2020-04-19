@@ -1,6 +1,6 @@
 /*
 
-  MBVvol.h - Distorsion Effect
+  VaryBand.h - Distorsion Effect
 
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
@@ -23,18 +23,20 @@
 
 */
 
-#ifndef MBVVOL_H
-#define MBVVOL_H
+// Renamed from MBVvol.h 4/18/2020 by stazed
+
+#ifndef VARYBAND_H
+#define VARYBAND_H
 
 #include "EffectLFO.h"
 #include "AnalogFilter.h"
 
 
-class MBVvol
+class VaryBand
 {
 public:
-    MBVvol (double sample_rate, uint32_t intermediate_bufsize);
-    ~MBVvol ();
+    VaryBand (double sample_rate, uint32_t intermediate_bufsize);
+    ~VaryBand ();
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);

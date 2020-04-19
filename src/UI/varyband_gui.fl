@@ -8,7 +8,7 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
-widget_class {\#include "common_gui_menu.h"} MbvvolGui {
+widget_class {\#include "common_gui_menu.h"} VarybandGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
@@ -16,42 +16,42 @@ widget_class {\#include "common_gui_menu.h"} MbvvolGui {
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
 } {
-  Fl_Light_Button mbvvol_activar {
+  Fl_Light_Button varyband_activar {
     label On
     user_data 2
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
- o->value(rkr->MBVvol_Bypass);
+ o->value(rkr->VaryBand_Bypass);
  return;
 }
-rkr->MBVvol_Bypass=(int)o->value();
+rkr->VaryBand_Bypass=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_MBVvol->cleanup();
+rkr->efx_VaryBand->cleanup();
 rgui->findpos(28,(int)o->value(),o);}
     xywh {7 5 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
-  Fl_Choice mbvvol_preset {
+  Fl_Choice varyband_preset {
     label Preset
     user_data 12028
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12028))rkr->efx_MBVvol->setpreset((int)o->value());
-mbvvol_WD->value(Dry_Wet(rkr->efx_MBVvol->getpar(0)));
-mbvvol_freq1->value(rkr->efx_MBVvol->getpar(1));
-mbvvol_lfotype1->value(rkr->efx_MBVvol->getpar(2));
-mbvvol_stdf1->value(rkr->efx_MBVvol->getpar(3));
-mbvvol_freq2->value(rkr->efx_MBVvol->getpar(4));
-mbvvol_lfotype2->value(rkr->efx_MBVvol->getpar(5));
-mbvvol_stdf2->value(rkr->efx_MBVvol->getpar(6));
-mbvvol_cross1->value(rkr->efx_MBVvol->getpar(7));
-mbvvol_cross2->value(rkr->efx_MBVvol->getpar(8));
-mbvvol_cross3->value(rkr->efx_MBVvol->getpar(9));
-//mbvvol_combi->value(rkr->efx_MBVvol->getpar(10));
-mbvvol_LB->value(rkr->efx_MBVvol->getpar(11));
-mbvvol_MB1->value(rkr->efx_MBVvol->getpar(12));
-mbvvol_MB2->value(rkr->efx_MBVvol->getpar(13));
-mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));}
+if((ud==0)||(ud==12028))rkr->efx_VaryBand->setpreset((int)o->value());
+varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(0)));
+varyband_freq1->value(rkr->efx_VaryBand->getpar(1));
+varyband_lfotype1->value(rkr->efx_VaryBand->getpar(2));
+varyband_stdf1->value(rkr->efx_VaryBand->getpar(3));
+varyband_freq2->value(rkr->efx_VaryBand->getpar(4));
+varyband_lfotype2->value(rkr->efx_VaryBand->getpar(5));
+varyband_stdf2->value(rkr->efx_VaryBand->getpar(6));
+varyband_cross1->value(rkr->efx_VaryBand->getpar(7));
+varyband_cross2->value(rkr->efx_VaryBand->getpar(8));
+varyband_cross3->value(rkr->efx_VaryBand->getpar(9));
+//varyband_combi->value(rkr->efx_VaryBand->getpar(10));
+varyband_LB->value(rkr->efx_VaryBand->getpar(11));
+varyband_MB1->value(rkr->efx_VaryBand->getpar(12));
+varyband_MB2->value(rkr->efx_VaryBand->getpar(13));
+varyband_HB->value(rkr->efx_VaryBand->getpar(14));}
     xywh {79 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -72,112 +72,112 @@ mbvvol_HB->value(rkr->efx_MBVvol->getpar(14));}
       xywh {82 82 36 21} labelsize 10
     }
   }
-  Fl_Value_Slider mbvvol_WD {
+  Fl_Value_Slider varyband_WD {
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(248);
  return;
 }
-rkr->efx_MBVvol->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_VaryBand->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {54 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider mbvvol_freq1 {
+  Fl_Value_Slider varyband_freq1 {
     label {Tempo 1}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(249);
  return;
 }
-rkr->efx_MBVvol->changepar(1,(int)o->value());}
+rkr->efx_VaryBand->changepar(1,(int)o->value());}
     xywh {54 40 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Choice mbvvol_lfotype1 {
+  Fl_Choice varyband_lfotype1 {
     label {LFO 1 Type}
-    callback {rkr->efx_MBVvol->changepar(2,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(2,(int)o->value());}
     xywh {65 53 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
   } {}
-  Fl_Value_Slider mbvvol_stdf1 {
+  Fl_Value_Slider varyband_stdf1 {
     label {St.df 1}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(250);
  return;
 }
-rkr->efx_MBVvol->changepar(3,(int)o->value());}
+rkr->efx_VaryBand->changepar(3,(int)o->value());}
     xywh {54 72 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider mbvvol_freq2 {
+  Fl_Value_Slider varyband_freq2 {
     label {Tempo 2}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(251);
  return;
 }
-rkr->efx_MBVvol->changepar(4,(int)o->value());}
+rkr->efx_VaryBand->changepar(4,(int)o->value());}
     xywh {54 84 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Choice mbvvol_lfotype2 {
+  Fl_Choice varyband_lfotype2 {
     label {LFO 2 Type}
-    callback {rkr->efx_MBVvol->changepar(5,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(5,(int)o->value());}
     xywh {65 97 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
   } {}
-  Fl_Value_Slider mbvvol_stdf2 {
+  Fl_Value_Slider varyband_stdf2 {
     label {St.df 2}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(252);
  return;
 }
-rkr->efx_MBVvol->changepar(6,(int)o->value());}
+rkr->efx_VaryBand->changepar(6,(int)o->value());}
     xywh {54 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider mbvvol_cross1 {
+  Fl_Value_Slider varyband_cross1 {
     label {Cross 1}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(253);
  return;
 }
-rkr->efx_MBVvol->changepar(7,(int)o->value());}
+rkr->efx_VaryBand->changepar(7,(int)o->value());}
     xywh {54 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider mbvvol_cross2 {
+  Fl_Value_Slider varyband_cross2 {
     label {Cross 2}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(254);
  return;
 }
-rkr->efx_MBVvol->changepar(8,(int)o->value());}
+rkr->efx_VaryBand->changepar(8,(int)o->value());}
     xywh {54 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider mbvvol_cross3 {
+  Fl_Value_Slider varyband_cross3 {
     label {Cross 3}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(255);
  return;
 }
-rkr->efx_MBVvol->changepar(9,(int)o->value());}
+rkr->efx_VaryBand->changepar(9,(int)o->value());}
     xywh {54 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Choice mbvvol_LB {
+  Fl_Choice varyband_LB {
     label L
     user_data 12
-    callback {rkr->efx_MBVvol->changepar(11,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(11,(int)o->value());}
     tooltip {Low Band Volume} xywh {11 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->m_start_label_offset = -2; // 10 - 8}
     code1 {o->m_start_text_offset = -1; // 10 - 9}
@@ -200,10 +200,10 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
       xywh {0 0 36 21} labelsize 10
     }
   }
-  Fl_Choice mbvvol_MB1 {
+  Fl_Choice varyband_MB1 {
     label M
     user_data 12
-    callback {rkr->efx_MBVvol->changepar(12,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(12,(int)o->value());}
     tooltip {Mid Band 1 Volume} xywh {50 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->m_start_label_offset = -2; // 10 - 8}
     code1 {o->m_start_text_offset = -1; // 10 - 9}
@@ -226,10 +226,10 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
       xywh {10 10 36 21} labelsize 10
     }
   }
-  Fl_Choice mbvvol_MB2 {
+  Fl_Choice varyband_MB2 {
     label M
     user_data 12
-    callback {rkr->efx_MBVvol->changepar(13,(int)o->value());} selected
+    callback {rkr->efx_VaryBand->changepar(13,(int)o->value());} selected
     tooltip {Mid Band 2 Volume} xywh {90 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->m_start_label_offset = -2; // 10 - 8}
     code1 {o->m_start_text_offset = -1; // 10 - 9}
@@ -252,10 +252,10 @@ rkr->efx_MBVvol->changepar(9,(int)o->value());}
       xywh {456 375 36 21} labelsize 10
     }
   }
-  Fl_Choice mbvvol_HB {
+  Fl_Choice varyband_HB {
     label H
     user_data 12
-    callback {rkr->efx_MBVvol->changepar(14,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(14,(int)o->value());}
     tooltip {High Band Volume} xywh {128 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->m_start_label_offset = -2; // 10 - 8}
     code1 {o->m_start_text_offset = -1; // 10 - 9}

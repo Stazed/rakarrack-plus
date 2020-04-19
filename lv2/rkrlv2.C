@@ -2431,18 +2431,18 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
-///// mbvol /////////
-LV2_Handle init_mbvollv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
+///// varyband /////////
+LV2_Handle init_varybandlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
     plug->nparams = 14; // 15 minus legacy skipped
-    plug->effectindex = IMBVOL;
+    plug->effectindex = IVBAND;
     plug->prev_bypass = 1;
 
     getFeatures(plug,host_features);
 
-    plug->mbvol = new MBVvol(sample_freq,plug->period_max);
+    plug->varyband = new VaryBand(sample_freq,plug->period_max);
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -2451,7 +2451,7 @@ LV2_Handle init_mbvollv2(const LV2_Descriptor* /* descriptor */,double sample_fr
     return plug;
 }
 
-void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
+void run_varybandlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
@@ -2474,47 +2474,47 @@ void run_mbvollv2(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-        plug->mbvol->lv2_update_params(nframes);
+        plug->varyband->lv2_update_params(nframes);
     }
     
     // we are good to run now
     //check and set changed parameters
     i=0;
     val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->mbvol->getpar(i) != val)
+    if(plug->varyband->getpar(i) != val)
     {
-        plug->mbvol->changepar(i,val);
+        plug->varyband->changepar(i,val);
     }
 
     for(i++; i<10; i++)  // 1-9
     {
         val = (int)*plug->param_p[i];
-        if(plug->mbvol->getpar(i) != val)
+        if(plug->varyband->getpar(i) != val)
         {
-            plug->mbvol->changepar(i,val);
+            plug->varyband->changepar(i,val);
         }
     }
 
     for(i=10; i<plug->nparams; i++)
     {
         val = (int)*plug->param_p[i];
-        if(plug->mbvol->getpar(i+1) != val) // +1 = skip legacy combi setting
+        if(plug->varyband->getpar(i+1) != val) // +1 = skip legacy combi setting
         {
-            plug->mbvol->changepar(i+1,val);
+            plug->varyband->changepar(i+1,val);
         }
     }
 
     //now run
-    plug->mbvol->out(plug->output_l_p,plug->output_r_p);
+    plug->varyband->out(plug->output_l_p,plug->output_r_p);
 
     //and for whatever reason we have to do the wet/dry mix ourselves
-    wetdry_mix(plug, plug->mbvol->outvolume, nframes);
+    wetdry_mix(plug, plug->varyband->outvolume, nframes);
 
     xfade_check(plug,nframes);
 
     if(plug->prev_bypass)
     {
-        plug->mbvol->cleanup();
+        plug->varyband->cleanup();
     }
 
     return;
@@ -5788,8 +5788,8 @@ void cleanup_rkrlv2(LV2_Handle handle)
     case ISYNTH:
         delete plug->synth;
         break;
-    case IMBVOL:
-        delete plug->mbvol;
+    case IVBAND:
+        delete plug->varyband;
         break;
     case IMUTRO:
         delete plug->mutro;
@@ -6349,13 +6349,13 @@ static const LV2_Descriptor synthlv2_descriptor=
     0//extension
 };
 
-static const LV2_Descriptor mbvollv2_descriptor=
+static const LV2_Descriptor varybandlv2_descriptor=
 {
-    MBVOLLV2_URI,
-    init_mbvollv2,
+    VARYBANDLV2_URI,
+    init_varybandlv2,
     connect_rkrlv2_ports,
     0,//activate
-    run_mbvollv2,
+    run_varybandlv2,
     0,//deactivate
     cleanup_rkrlv2,
     0//extension
@@ -6702,8 +6702,8 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &shuflv2_descriptor ;
     case ISYNTH:
         return &synthlv2_descriptor ;
-    case IMBVOL:
-        return &mbvollv2_descriptor ;
+    case IVBAND:
+        return &varybandlv2_descriptor ;
     case IMUTRO:
         return &mutrolv2_descriptor ;
     case IECHOVERSE:

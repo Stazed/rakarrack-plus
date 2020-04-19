@@ -61,7 +61,7 @@
 #include"Expander.h"
 #include"Shuffle.h"
 #include"Synthfilter.h"
-#include"MBVvol.h"
+#include"VaryBand.h"
 #include"RyanWah.h"
 #include"RBEcho.h"
 #include"CoilCrafter.h"
@@ -109,7 +109,7 @@
 #define EXPANDLV2_URI "https://github.com/Stazed/rakarrack-plus#Expander"
 #define SHUFFLELV2_URI "https://github.com/Stazed/rakarrack-plus#Shuffle"
 #define SYNTHLV2_URI "https://github.com/Stazed/rakarrack-plus#Synthfilter"
-#define MBVOLLV2_URI "https://github.com/Stazed/rakarrack-plus#VaryBand"
+#define VARYBANDLV2_URI "https://github.com/Stazed/rakarrack-plus#VaryBand"
 #define MUTROLV2_URI "https://github.com/Stazed/rakarrack-plus#MuTroMojo"
 #define ECHOVERSELV2_URI "https://github.com/Stazed/rakarrack-plus#Echoverse"
 #define COILLV2_URI "https://github.com/Stazed/rakarrack-plus#CoilCrafter"
@@ -201,7 +201,7 @@ enum RKRLV2_effects_
 	IEXPAND,
 	ISHUFF,
 	ISYNTH,
-	IMBVOL,
+	IVBAND,
 	IMUTRO,
 	IECHOVERSE,
 	ICOIL,
@@ -305,7 +305,7 @@ typedef struct _RKRLV2
     Expander* expand;	//21
     Shuffle* shuf;		//22
     Synthfilter* synth; //23
-    MBVvol* mbvol;		//24
+    VaryBand* varyband;		//24
     RyanWah* mutro; 	//25
     RBEcho* echoverse;	//26
     CoilCrafter* coil;	//27
