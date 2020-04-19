@@ -459,8 +459,8 @@ RKR::ActiveUn(int value)
         else MuTroMojo_Bypass = 0;
         break;
     case 32:
-        if (inoff) RBEcho_Bypass = 1;
-        else RBEcho_Bypass = 0;
+        if (inoff) Echoverse_Bypass = 1;
+        else Echoverse_Bypass = 0;
         break;
     case 33:
         if (inoff) CoilCrafter_Bypass = 1;
@@ -641,7 +641,7 @@ RKR::checkonoff(int miraque)
         if (MuTroMojo_Bypass) return (0);
         break;
     case 32:
-        if (RBEcho_Bypass) return (0);
+        if (Echoverse_Bypass) return (0);
         break;
     case 33:
         if (CoilCrafter_Bypass) return (0);
@@ -2107,39 +2107,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 303:
-        efx_RBEcho->changepar(0, Dry_Wet(value));
+        efx_Echoverse->changepar(0, Dry_Wet(value));
         break;
 
     case 304:
-        efx_RBEcho->changepar(7, value);
+        efx_Echoverse->changepar(7, value);
         break;
 
     case 305:
-        efx_RBEcho->changepar(1, value);
+        efx_Echoverse->changepar(1, value);
         break;
 
     case 306:
-        efx_RBEcho->changepar(2, ret_Tempo(value));
+        efx_Echoverse->changepar(2, ret_Tempo(value));
         break;
 
     case 307:
-        efx_RBEcho->changepar(3, value);
+        efx_Echoverse->changepar(3, value);
         break;
 
     case 308:
-        efx_RBEcho->changepar(5, value);
+        efx_Echoverse->changepar(5, value);
         break;
 
     case 309:
-        efx_RBEcho->changepar(6, value);
+        efx_Echoverse->changepar(6, value);
         break;
 
     case 310:
-        efx_RBEcho->changepar(9, value);
+        efx_Echoverse->changepar(9, value);
         break;
 
     case 311:
-        efx_RBEcho->changepar(4, (int) ((float) value * C_MC_128_RANGE));
+        efx_Echoverse->changepar(4, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 312:

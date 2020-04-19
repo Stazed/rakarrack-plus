@@ -1469,9 +1469,9 @@ void RKRGUI::Put_Loaded()
                 MUTROMOJO->mutromojo_preset->do_callback(MUTROMOJO->mutromojo_preset, 1);
                 break;
 
-            case 32:// RBEcho
-                RBECHO->rbecho_activar->value(rkr->RBEcho_Bypass);
-                RBECHO->rbecho_preset->do_callback(RBECHO->rbecho_preset, 1);
+            case 32:// Echoverse
+                ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
+                ECHOVERSE->echoverse_preset->do_callback(ECHOVERSE->echoverse_preset, 1);
                 break;
 
             case 33:// CoilCrafter
@@ -1701,7 +1701,7 @@ void RKRGUI::reordena()
     CONVOLOTRON->hide();
     LOOPER->hide();
     MUTROMOJO->hide();
-    RBECHO->hide();
+    ECHOVERSE->hide();
     COILCRAFTER->hide();
     SHELFBOOST->hide();
     VOCODER->hide();
@@ -2221,15 +2221,15 @@ void RKRGUI::reordena()
                 break;
 
             case 32:
-                RBECHO->position(x[i], y[i]);
-                RBECHO->rbecho_activar->shortcut(s[i]);
+                ECHOVERSE->position(x[i], y[i]);
+                ECHOVERSE->echoverse_activar->shortcut(s[i]);
                 if (!rkr->deachide)
-                    RBECHO->show();
-                if (rkr->RBEcho_Bypass)
+                    ECHOVERSE->show();
+                if (rkr->Echoverse_Bypass)
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
-                        RBECHO->show();
+                        ECHOVERSE->show();
                 }
                 else
                     rkr->active[i] = 0;
@@ -4211,40 +4211,40 @@ void RKRGUI::ActMIDI()
                 VOCODER->vo_level->redraw();
                 break;
             case 303:
-                RBECHO->rbecho_WD->value(Dry_Wet(rkr->efx_RBEcho->getpar(0)));
-                RBECHO->rbecho_WD->redraw();
+                ECHOVERSE->echoverse_WD->value(Dry_Wet(rkr->efx_Echoverse->getpar(0)));
+                ECHOVERSE->echoverse_WD->redraw();
                 break;
             case 304:
-                RBECHO->rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
-                RBECHO->rbecho_RV->redraw();
+                ECHOVERSE->echoverse_RV->value(rkr->efx_Echoverse->getpar(7));
+                ECHOVERSE->echoverse_RV->redraw();
                 break;
             case 305:
-                RBECHO->rbecho_pan->value(rkr->efx_RBEcho->getpar(1) - 64);
-                RBECHO->rbecho_pan->redraw();
+                ECHOVERSE->echoverse_pan->value(rkr->efx_Echoverse->getpar(1) - 64);
+                ECHOVERSE->echoverse_pan->redraw();
                 break;
             case 306:
-                RBECHO->rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
-                RBECHO->rbecho_delay->redraw();
+                ECHOVERSE->echoverse_delay->value(rkr->efx_Echoverse->getpar(2));
+                ECHOVERSE->echoverse_delay->redraw();
                 break;
             case 307:
-                RBECHO->rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
-                RBECHO->rbecho_LRdl->redraw();
+                ECHOVERSE->echoverse_LRdl->value(rkr->efx_Echoverse->getpar(3));
+                ECHOVERSE->echoverse_LRdl->redraw();
                 break;
             case 308:
-                RBECHO->rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
-                RBECHO->rbecho_fb->redraw();
+                ECHOVERSE->echoverse_fb->value(rkr->efx_Echoverse->getpar(5));
+                ECHOVERSE->echoverse_fb->redraw();
                 break;
             case 309:
-                RBECHO->rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
-                RBECHO->rbecho_damp->redraw();
+                ECHOVERSE->echoverse_damp->value(rkr->efx_Echoverse->getpar(6));
+                ECHOVERSE->echoverse_damp->redraw();
                 break;
             case 310:
-                RBECHO->rbecho_es->value(rkr->efx_RBEcho->getpar(9));
-                RBECHO->rbecho_es->redraw();
+                ECHOVERSE->echoverse_es->value(rkr->efx_Echoverse->getpar(9));
+                ECHOVERSE->echoverse_es->redraw();
                 break;
             case 311:
-                RBECHO->rbecho_angle->value(rkr->efx_RBEcho->getpar(4) - 64);
-                RBECHO->rbecho_angle->redraw();
+                ECHOVERSE->echoverse_angle->value(rkr->efx_Echoverse->getpar(4) - 64);
+                ECHOVERSE->echoverse_angle->redraw();
                 break;
             case 312:
                 SUSTAINER->sus_gain->value(rkr->efx_Sustainer->getpar(0));
@@ -4956,8 +4956,8 @@ void RKRGUI::ActOnOff()
                 MUTROMOJO->mutromojo_activar->do_callback();
                 break;
             case 32:
-                RBECHO->rbecho_activar->value(rkr->RBEcho_Bypass);
-                RBECHO->rbecho_activar->do_callback();
+                ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
+                ECHOVERSE->echoverse_activar->do_callback();
                 break;
             case 33:
                 COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
@@ -5082,7 +5082,7 @@ void RKRGUI::PutBackground()
     CONVOLOTRON->image(InOut->image());
     LOOPER->image(InOut->image());
     MUTROMOJO->image(InOut->image());
-    RBECHO->image(InOut->image());
+    ECHOVERSE->image(InOut->image());
     COILCRAFTER->image(InOut->image());
     SHELFBOOST->image(InOut->image());
     VOCODER->image(InOut->image());
@@ -5888,10 +5888,10 @@ void RKRGUI::UpdateTGUI()
         ARPIE->arpie_delay->redraw();
     }
 
-    if (rkr->RBEcho_Bypass)
+    if (rkr->Echoverse_Bypass)
     {
-        RBECHO->rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
-        RBECHO->rbecho_delay->redraw();
+        ECHOVERSE->echoverse_delay->value(rkr->efx_Echoverse->getpar(2));
+        ECHOVERSE->echoverse_delay->redraw();
     }
     if (rkr->Sequence_Bypass)
     {
@@ -6869,12 +6869,12 @@ void RKRGUI::RandomPreset()
                 MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
                 break;
 
-            case 32:// RBEcho
+            case 32:// Echoverse
                 if (i < numEff)
-                    rkr->RBEcho_Bypass = 1;
+                    rkr->Echoverse_Bypass = 1;
                 else
-                    rkr->RBEcho_Bypass = 0;
-                RBECHO->rbecho_activar->value(rkr->RBEcho_Bypass);
+                    rkr->Echoverse_Bypass = 0;
+                ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
                 break;
 
             case 33:// CoilCrafter

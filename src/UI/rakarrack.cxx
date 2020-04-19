@@ -1674,20 +1674,20 @@ void RKRGUI::make_window() {
       MUTROMOJO->hide();
       MUTROMOJO->end();
     } // MutromojoGui* MUTROMOJO
-    { RBECHO = new RbechoGui(320, 212, 158, 184);
-      RBECHO->box(FL_UP_BOX);
-      RBECHO->color(FL_FOREGROUND_COLOR);
-      RBECHO->selection_color(FL_FOREGROUND_COLOR);
-      RBECHO->labeltype(FL_NORMAL_LABEL);
-      RBECHO->labelfont(1);
-      RBECHO->labelsize(14);
-      RBECHO->labelcolor(FL_FOREGROUND_COLOR);
-      RBECHO->user_data((void*)(1));
-      RBECHO->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      RBECHO->when(FL_WHEN_RELEASE);
-      RBECHO->hide();
-      RBECHO->end();
-    } // RbechoGui* RBECHO
+    { ECHOVERSE = new EchoverseGui(320, 212, 158, 184);
+      ECHOVERSE->box(FL_UP_BOX);
+      ECHOVERSE->color(FL_FOREGROUND_COLOR);
+      ECHOVERSE->selection_color(FL_FOREGROUND_COLOR);
+      ECHOVERSE->labeltype(FL_NORMAL_LABEL);
+      ECHOVERSE->labelfont(1);
+      ECHOVERSE->labelsize(14);
+      ECHOVERSE->labelcolor(FL_FOREGROUND_COLOR);
+      ECHOVERSE->user_data((void*)(1));
+      ECHOVERSE->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      ECHOVERSE->when(FL_WHEN_RELEASE);
+      ECHOVERSE->hide();
+      ECHOVERSE->end();
+    } // EchoverseGui* ECHOVERSE
     { COILCRAFTER = new CoilGui(480, 212, 158, 184);
       COILCRAFTER->box(FL_UP_BOX);
       COILCRAFTER->color(FL_FOREGROUND_COLOR);

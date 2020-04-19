@@ -62,7 +62,7 @@ set (ProgSources
     UI/convo_gui.cxx
     UI/looper_gui.cxx
     UI/mutromojo_gui.cxx
-    UI/rbecho_gui.cxx
+    UI/echoverse_gui.cxx
     UI/coil_gui.cxx
     UI/shelf_gui.cxx
     UI/vocoder_gui.cxx
@@ -135,7 +135,7 @@ set (ProgSources
     Resample.C
     Looper.C
     MuTroMojo.C
-    RBEcho.C
+    Echoverse.C
     CoilCrafter.C
     ShelfBoost.C
     Vocoder.C

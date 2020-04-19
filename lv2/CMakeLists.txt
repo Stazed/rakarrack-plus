@@ -47,7 +47,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/VaryBand.C
   ../src/RBFilter.C
   ../src/MuTroMojo.C
-  ../src/RBEcho.C
+  ../src/Echoverse.C
   ../src/CoilCrafter.C
   ../src/ShelfBoost.C
   ../src/Vocoder.C

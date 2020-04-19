@@ -100,7 +100,7 @@ RKR::RKR() :
     DC_Offsetr(NULL),
     efx_Looper(NULL),
     efx_MuTroMojo(NULL),
-    efx_RBEcho(NULL),
+    efx_Echoverse(NULL),
     efx_CoilCrafter(NULL),
     efx_ShelfBoost(NULL),
     efx_Vocoder(NULL),
@@ -161,7 +161,7 @@ RKR::RKR() :
     Convol_Bypass(),
     Looper_Bypass(),
     MuTroMojo_Bypass(),
-    RBEcho_Bypass(),
+    Echoverse_Bypass(),
     CoilCrafter_Bypass(),
     ShelfBoost_Bypass(),
     Vocoder_Bypass(),
@@ -209,7 +209,7 @@ RKR::RKR() :
     Convol_B(),
     Looper_B(),
     MuTroMojo_B(),
-    RBEcho_B(),
+    Echoverse_B(),
     CoilCrafter_B(),
     ShelfBoost_B(),
     Vocoder_B(),
@@ -628,7 +628,7 @@ RKR::RKR() :
     efx_Convol = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
     efx_Looper = new Looper(looper_size, fSample_rate, period);
     efx_MuTroMojo = new MuTroMojo(fSample_rate, period);
-    efx_RBEcho = new RBEcho(fSample_rate, period);
+    efx_Echoverse = new Echoverse(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
     efx_Vocoder = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
@@ -1281,7 +1281,7 @@ RKR::~RKR()
     delete efx_Convol;
     delete efx_Looper;
     delete efx_MuTroMojo;
-    delete efx_RBEcho;
+    delete efx_Echoverse;
     delete efx_CoilCrafter;
     delete efx_ShelfBoost;
     delete efx_Vocoder;
@@ -1854,7 +1854,7 @@ RKR::cleanup_efx()
     efx_Convol->cleanup();
     efx_Looper->cleanup();
     efx_MuTroMojo->cleanup();
-    efx_RBEcho->cleanup();
+    efx_Echoverse->cleanup();
     efx_CoilCrafter->cleanup();
     efx_ShelfBoost->cleanup();
     efx_Vocoder->cleanup();
@@ -2242,10 +2242,10 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case 32:
-                if (RBEcho_Bypass)
+                if (Echoverse_Bypass)
                 {
-                    efx_RBEcho->out(efxoutl, efxoutr);
-                    Vol_Efx(32, efx_RBEcho->outvolume);
+                    efx_Echoverse->out(efxoutl, efxoutr);
+                    Vol_Efx(32, efx_Echoverse->outvolume);
                 }
                 break;
 

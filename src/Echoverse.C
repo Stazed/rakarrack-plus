@@ -1,7 +1,7 @@
 /*
   ZynAddSubFX - a software synthesizer
 
-  RBEcho.C - Echo effect
+  Echoverse.C - Echo effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
@@ -26,9 +26,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "RBEcho.h"     // Echoverse
+#include "Echoverse.h"     // Echoverse
 
-RBEcho::RBEcho(double sample_rate, uint32_t intermediate_bufsize) :
+Echoverse::Echoverse(double sample_rate, uint32_t intermediate_bufsize) :
     Ppreset(),
     outvolume(0.5f),
     fSAMPLE_RATE(sample_rate),
@@ -78,7 +78,7 @@ RBEcho::RBEcho(double sample_rate, uint32_t intermediate_bufsize) :
     cleanup();
 }
 
-RBEcho::~RBEcho()
+Echoverse::~Echoverse()
 {
     delete ldelay;
     delete rdelay;
@@ -88,7 +88,7 @@ RBEcho::~RBEcho()
  * Cleanup the effect
  */
 void
-RBEcho::cleanup()
+Echoverse::cleanup()
 {
     ldelay->cleanup();
     rdelay->cleanup();
@@ -100,7 +100,7 @@ RBEcho::cleanup()
 
 #ifdef LV2_SUPPORT
 void
-RBEcho::lv2_update_params(uint32_t period)
+Echoverse::lv2_update_params(uint32_t period)
 {
     PERIOD = period;
 }
@@ -110,7 +110,7 @@ RBEcho::lv2_update_params(uint32_t period)
  * Initialize the delays
  */
 void
-RBEcho::initdelays()
+Echoverse::initdelays()
 {
     oldl = 0.0;
     oldr = 0.0;
@@ -137,7 +137,7 @@ RBEcho::initdelays()
  * Effect output
  */
 void
-RBEcho::out(float * efxoutl, float * efxoutr)
+Echoverse::out(float * efxoutl, float * efxoutr)
 {
     for (unsigned int i = 0; i < PERIOD; i++)
     {
@@ -189,14 +189,14 @@ RBEcho::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-RBEcho::setvolume(int Pvolume)
+Echoverse::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
     outvolume = (float) Pvolume / 127.0f;
 }
 
 void
-RBEcho::setpanning(int Ppanning)
+Echoverse::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
     lpanning = ((float) Ppanning) / 64.0f;
@@ -210,7 +210,7 @@ RBEcho::setpanning(int Ppanning)
 }
 
 void
-RBEcho::setreverse(int Preverse)
+Echoverse::setreverse(int Preverse)
 {
     this->Preverse = Preverse;
     reverse = (float) Preverse / 127.0f;
@@ -218,7 +218,7 @@ RBEcho::setreverse(int Preverse)
 }
 
 void
-RBEcho::setdelay(int Pdelay)
+Echoverse::setdelay(int Pdelay)
 {
     this->Pdelay = Pdelay;
     fdelay = 60.0f / ((float) Pdelay);
@@ -235,7 +235,7 @@ RBEcho::setdelay(int Pdelay)
 }
 
 void
-RBEcho::setlrdelay(int Plrdelay)
+Echoverse::setlrdelay(int Plrdelay)
 {
     float tmp;
     this->Plrdelay = Plrdelay;
@@ -249,28 +249,28 @@ RBEcho::setlrdelay(int Plrdelay)
 }
 
 void
-RBEcho::setlrcross(int Plrcross)
+Echoverse::setlrcross(int Plrcross)
 {
     this->Plrcross = Plrcross;
     lrcross = D_PI * (float) Plrcross / 128.0f;
 }
 
 void
-RBEcho::setfb(int Pfb)
+Echoverse::setfb(int Pfb)
 {
     this->Pfb = Pfb;
     fb = (float) Pfb / 128.0f;
 }
 
 void
-RBEcho::sethidamp(int Phidamp)
+Echoverse::sethidamp(int Phidamp)
 {
     this->Phidamp = Phidamp;
     hidamp = f_exp(-D_PI * 500.0f * ((float) Phidamp) / fSAMPLE_RATE);
 }
 
 void
-RBEcho::setpreset(int npreset)
+Echoverse::setpreset(int npreset)
 {
     const int PRESET_SIZE = 10;
     const int NUM_PRESETS = 4;
@@ -303,7 +303,7 @@ RBEcho::setpreset(int npreset)
 }
 
 void
-RBEcho::changepar(int npar, int value)
+Echoverse::changepar(int npar, int value)
 {
     switch (npar)
     {
@@ -345,7 +345,7 @@ RBEcho::changepar(int npar, int value)
 }
 
 int
-RBEcho::getpar(int npar)
+Echoverse::getpar(int npar)
 {
     switch (npar)
     {

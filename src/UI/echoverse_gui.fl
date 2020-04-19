@@ -8,7 +8,7 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
-widget_class {\#include "common_gui_menu.h"} RbechoGui {
+widget_class {\#include "common_gui_menu.h"} EchoverseGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
@@ -16,37 +16,37 @@ widget_class {\#include "common_gui_menu.h"} RbechoGui {
   code2 {\#include "rakarrack.h"}
   code3 {\#include "common_gui_menu.h"} visible position_relative
 } {
-  Fl_Light_Button rbecho_activar {
+  Fl_Light_Button echoverse_activar {
     label On
     user_data 2
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
- o->value(rkr->RBEcho_Bypass);
+ o->value(rkr->Echoverse_Bypass);
  return;
 }
-rkr->RBEcho_Bypass=(int)o->value();
+rkr->Echoverse_Bypass=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_RBEcho->cleanup();
+rkr->efx_Echoverse->cleanup();
 rgui->findpos(32,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
-  Fl_Choice rbecho_preset {
+  Fl_Choice echoverse_preset {
     label Preset
     user_data 12032
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12032))rkr->efx_RBEcho->setpreset((int) o->value());
-rbecho_WD->value(Dry_Wet(rkr->efx_RBEcho->getpar(0)));
-rbecho_pan->value(rkr->efx_RBEcho->getpar(1)-64);
-rbecho_delay->value(rkr->efx_RBEcho->getpar(2));
-rbecho_LRdl->value(rkr->efx_RBEcho->getpar(3));
-rbecho_angle->value(rkr->efx_RBEcho->getpar(4)-64);
-rbecho_fb->value(rkr->efx_RBEcho->getpar(5));
-rbecho_damp->value(rkr->efx_RBEcho->getpar(6));
-rbecho_RV->value(rkr->efx_RBEcho->getpar(7));
-rbecho_subdiv->value(rkr->efx_RBEcho->getpar(8));
-rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
+if((ud==0)||(ud==12032))rkr->efx_Echoverse->setpreset((int) o->value());
+echoverse_WD->value(Dry_Wet(rkr->efx_Echoverse->getpar(0)));
+echoverse_pan->value(rkr->efx_Echoverse->getpar(1)-64);
+echoverse_delay->value(rkr->efx_Echoverse->getpar(2));
+echoverse_LRdl->value(rkr->efx_Echoverse->getpar(3));
+echoverse_angle->value(rkr->efx_Echoverse->getpar(4)-64);
+echoverse_fb->value(rkr->efx_Echoverse->getpar(5));
+echoverse_damp->value(rkr->efx_Echoverse->getpar(6));
+echoverse_RV->value(rkr->efx_Echoverse->getpar(7));
+echoverse_subdiv->value(rkr->efx_Echoverse->getpar(8));
+echoverse_es->value(rkr->efx_Echoverse->getpar(9));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -67,109 +67,109 @@ rbecho_es->value(rkr->efx_RBEcho->getpar(9));}
       xywh {77 77 36 21} labelsize 10
     }
   }
-  Fl_Value_Slider rbecho_WD {
+  Fl_Value_Slider echoverse_WD {
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(303);
  return;
 }
-rkr->efx_RBEcho->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Echoverse->changepar(0,Dry_Wet((int)(o->value())));}
     xywh {56 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider rbecho_RV {
+  Fl_Value_Slider echoverse_RV {
     label Reverse
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(304);
  return;
 }
-rkr->efx_RBEcho->changepar(7,(int)o->value());}
+rkr->efx_Echoverse->changepar(7,(int)o->value());}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider rbecho_pan {
+  Fl_Value_Slider echoverse_pan {
     label Pan
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(305);
  return;
 }
-rkr->efx_RBEcho->changepar(1,(int)(o->value()+64));}
+rkr->efx_Echoverse->changepar(1,(int)(o->value()+64));}
     xywh {56 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider rbecho_delay {
+  Fl_Value_Slider echoverse_delay {
     label Tempo
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(306);
  return;
 }
-rkr->efx_RBEcho->changepar(2,(int)o->value());}
+rkr->efx_Echoverse->changepar(2,(int)o->value());}
     xywh {56 69 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 20 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider rbecho_LRdl {
+  Fl_Value_Slider echoverse_LRdl {
     label {L/R Delay}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(307);
  return;
 }
-rkr->efx_RBEcho->changepar(3,(int)o->value());}
+rkr->efx_Echoverse->changepar(3,(int)o->value());}
     xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider rbecho_fb {
+  Fl_Value_Slider echoverse_fb {
     label Feedback
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(308);
  return;
 }
-rkr->efx_RBEcho->changepar(5,(int)o->value());}
+rkr->efx_Echoverse->changepar(5,(int)o->value());}
     xywh {56 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Choice rbecho_subdiv {
+  Fl_Choice echoverse_subdiv {
     label SubDivision
-    callback {rkr->efx_RBEcho->changepar(8,(int)o->value());} open selected
+    callback {rkr->efx_Echoverse->changepar(8,(int)o->value());} open selected
     xywh {77 111 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
     class RKR_Choice
   } {}
-  Fl_Value_Slider rbecho_damp {
+  Fl_Value_Slider echoverse_damp {
     label Damp
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(309);
  return;
 }
-rkr->efx_RBEcho->changepar(6,(int)o->value());}
+rkr->efx_Echoverse->changepar(6,(int)o->value());}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider rbecho_es {
+  Fl_Value_Slider echoverse_es {
     label {Ex Stereo}
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(310);
  return;
 }
-rkr->efx_RBEcho->changepar(9,(int)o->value());}
+rkr->efx_Echoverse->changepar(9,(int)o->value());}
     tooltip {Extra Stereo} xywh {56 148 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
-  Fl_Value_Slider rbecho_angle {
+  Fl_Value_Slider echoverse_angle {
     label Angle
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(311);
  return;
 }
-rkr->efx_RBEcho->changepar(4,(int)(o->value()+64));}
+rkr->efx_Echoverse->changepar(4,(int)(o->value()+64));}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }

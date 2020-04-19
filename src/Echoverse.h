@@ -24,16 +24,16 @@
 
 */
 
-#ifndef RBECHO_H
-#define RBECHO_H
+#ifndef ECHOVERSE_H
+#define ECHOVERSE_H
 
 #include "delayline.h"
 
-class RBEcho
+class Echoverse
 {
 public:
-    RBEcho (double sample_rate, uint32_t intermediate_bufsize);
-    ~RBEcho ();
+    Echoverse (double sample_rate, uint32_t intermediate_bufsize);
+    ~Echoverse ();
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);

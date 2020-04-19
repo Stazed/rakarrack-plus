@@ -207,7 +207,7 @@ decl {class LooperGui; // forward declaration} {public global
 decl {class MutromojoGui; // forward declaration} {public global
 }
 
-decl {class RbechoGui; // forward declaration} {public global
+decl {class EchoverseGui; // forward declaration} {public global
 }
 
 decl {class CoilGui; // forward declaration} {public global
@@ -872,11 +872,11 @@ Fl::focus(Open_Order);}
         code0 {\#include "mutromojo_gui.h"}
         class MutromojoGui
       } {}
-      Fl_Group RBECHO {
+      Fl_Group ECHOVERSE {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-        code0 {\#include "rbecho_gui.h"}
-        class RbechoGui
+        code0 {\#include "echoverse_gui.h"}
+        class EchoverseGui
       } {}
       Fl_Group COILCRAFTER {
         user_data 1

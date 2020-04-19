@@ -40,7 +40,7 @@
 #include "Resample.h"
 #include "Looper.h"
 #include "MuTroMojo.h"
-#include "RBEcho.h"
+#include "Echoverse.h"
 #include "CoilCrafter.h"
 #include "ShelfBoost.h"
 #include "Vocoder.h"
@@ -184,7 +184,7 @@ public:
     class AnalogFilter *DC_Offsetr;
     class Looper *efx_Looper;
     class MuTroMojo *efx_MuTroMojo;
-    class RBEcho *efx_RBEcho;
+    class Echoverse *efx_Echoverse;
     class CoilCrafter *efx_CoilCrafter;
     class ShelfBoost *efx_ShelfBoost;
     class Vocoder *efx_Vocoder;
@@ -247,7 +247,7 @@ public:
     int Convol_Bypass;
     int Looper_Bypass;
     int MuTroMojo_Bypass;
-    int RBEcho_Bypass;
+    int Echoverse_Bypass;
     int CoilCrafter_Bypass;
     int ShelfBoost_Bypass;
     int Vocoder_Bypass;
@@ -295,7 +295,7 @@ public:
     int Convol_B;
     int Looper_B;
     int MuTroMojo_B;
-    int RBEcho_B;
+    int Echoverse_B;
     int CoilCrafter_B;
     int ShelfBoost_B;
     int Vocoder_B;

@@ -393,7 +393,7 @@ void RKR::putbuf(char *buf, int j)
         //Echoverse
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[33][0], &lv[33][1], &lv[33][2], &lv[33][3], &lv[33][4],
-               &lv[33][5], &lv[33][6], &lv[33][7], &lv[33][8], &lv[33][9], &RBEcho_B);
+               &lv[33][5], &lv[33][6], &lv[33][7], &lv[33][8], &lv[33][9], &Echoverse_B);
         break;
 
 
@@ -887,11 +887,11 @@ void RKR::getbuf(char *buf, int j)
     case 32:
         //Echoverse
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_RBEcho->getpar(0), efx_RBEcho->getpar(1),
-                efx_RBEcho->getpar(2), efx_RBEcho->getpar(3),
-                efx_RBEcho->getpar(4), efx_RBEcho->getpar(5),
-                efx_RBEcho->getpar(6), efx_RBEcho->getpar(7),
-                efx_RBEcho->getpar(8), efx_RBEcho->getpar(9), RBEcho_Bypass);
+                efx_Echoverse->getpar(0), efx_Echoverse->getpar(1),
+                efx_Echoverse->getpar(2), efx_Echoverse->getpar(3),
+                efx_Echoverse->getpar(4), efx_Echoverse->getpar(5),
+                efx_Echoverse->getpar(6), efx_Echoverse->getpar(7),
+                efx_Echoverse->getpar(8), efx_Echoverse->getpar(9), Echoverse_Bypass);
         break;
 
 
@@ -1652,13 +1652,13 @@ RKR::Actualizar_Audio()
             MuTroMojo_Bypass = MuTroMojo_B;
             break;
 
-        case 32://RBEcho
+        case 32://Echoverse
 
-            RBEcho_Bypass = 0;
-            efx_RBEcho->cleanup();
+            Echoverse_Bypass = 0;
+            efx_Echoverse->cleanup();
             for (i = 0; i <= 9; i++)
-                efx_RBEcho->changepar(i, lv[33][i]);
-            RBEcho_Bypass = RBEcho_B;
+                efx_Echoverse->changepar(i, lv[33][i]);
+            Echoverse_Bypass = Echoverse_B;
             break;
 
         case 33://CoilCrafter
@@ -2037,7 +2037,7 @@ RKR::New()
     Convol_B = 0;
     Looper_B = 0;
     MuTroMojo_B = 0;
-    RBEcho_B = 0;
+    Echoverse_B = 0;
     CoilCrafter_B = 0;
     ShelfBoost_B = 0;
     Vocoder_B = 0;
@@ -2150,7 +2150,7 @@ RKR::Bank_to_Preset(int i)
     Convol_B = Bank[i].lv[30][19];
     Looper_B = Bank[i].lv[31][19];
     MuTroMojo_B = Bank[i].lv[32][19];
-    RBEcho_B = Bank[i].lv[33][19];
+    Echoverse_B = Bank[i].lv[33][19];
     CoilCrafter_B = Bank[i].lv[34][19];
     ShelfBoost_B = Bank[i].lv[35][19];
     Vocoder_B = Bank[i].lv[36][19];
@@ -2265,7 +2265,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j <= 18; j++)
         lv[32][j] = efx_MuTroMojo->getpar(j);
     for (j = 0; j <= 9; j++)
-        lv[33][j] = efx_RBEcho->getpar(j);
+        lv[33][j] = efx_Echoverse->getpar(j);
     for (j = 0; j <= 8; j++)
         lv[34][j] = efx_CoilCrafter->getpar(j);
     for (j = 0; j <= 4; j++)
@@ -2361,7 +2361,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].lv[30][19] = Convol_Bypass;
     Bank[i].lv[31][19] = Looper_Bypass;
     Bank[i].lv[32][19] = MuTroMojo_Bypass;
-    Bank[i].lv[33][19] = RBEcho_Bypass;
+    Bank[i].lv[33][19] = Echoverse_Bypass;
     Bank[i].lv[34][19] = CoilCrafter_Bypass;
     Bank[i].lv[35][19] = ShelfBoost_Bypass;
     Bank[i].lv[36][19] = Vocoder_Bypass;
