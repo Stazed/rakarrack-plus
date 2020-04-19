@@ -103,7 +103,7 @@ set (ProgSources
     delayline.C
     Filter.C
     HarmonicEnhancer.C
-    DynamicFilter.C
+    WahWah.C
     SVFilter.C
     RBFilter.C
     FormantFilter.C

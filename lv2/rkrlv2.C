@@ -1600,7 +1600,7 @@ LV2_Handle init_wahlv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 
     getFeatures(plug,host_features);
 
-    plug->wah = new DynamicFilter(sample_freq, plug->period_max);
+    plug->wah = new WahWah(sample_freq, plug->period_max);
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);

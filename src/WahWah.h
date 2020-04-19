@@ -1,7 +1,7 @@
 /*
   ZynAddSubFX - a software synthesizer
 
-  DynamicFilter.h - "WahWah" effect and others
+  WahWah.h - "WahWah" effect and others
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
@@ -22,17 +22,19 @@
 
 */
 
-#ifndef DYNAMICFILTER_H
-#define DYNAMICFILTER_H
+// Renamed from DynamicFilter.h on 4/19/2020 by stazed
+
+#ifndef WAHWAH_H
+#define WAHWAH_H
 
 #include "EffectLFO.h"
 #include "Filter.h"
 
-class DynamicFilter
+class WahWah
 {
 public:
-    DynamicFilter (double sample_rate, uint32_t intermediate_bufsize);
-    ~DynamicFilter ();
+    WahWah (double sample_rate, uint32_t intermediate_bufsize);
+    ~WahWah ();
     void out (float * efxoutl, float * efxoutr);
 
     void setpreset (int npreset);
@@ -51,10 +53,10 @@ private:
     
     uint32_t PERIOD;
     double fSAMPLE_RATE;
-    //Parametrii DynamicFilter
+    //Parametrii WahWah
     int Pvolume;
     int Ppanning;
-    int Pdepth;		//the depth of the lfo of the DynamicFilter
+    int Pdepth;		//the depth of the lfo of the WahWah
     int Pampsns;	//how the filter varies according to the input amplitude
     int Pampsnsinv;	//if the filter freq is lowered if the input amplitude rises
     int Pampsmooth;	//how smooth the input amplitude changes the filter
@@ -73,7 +75,7 @@ private:
     float panning, depth, ampsns, ampsmooth;
     float ms1, ms2, ms3, ms4;	//mean squares
     
-    EffectLFO* lfo;		//lfo-ul DynamicFilter
+    EffectLFO* lfo;		//lfo-ul WahWah
 
     class Filter *filterl, *filterr;
     class FilterParams *filterpars;

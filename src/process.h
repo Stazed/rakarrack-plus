@@ -15,7 +15,7 @@
 #include "Compressor.h"
 #include "Alienwah.h"
 #include "Cabinet.h"
-#include "DynamicFilter.h"
+#include "WahWah.h"
 #include "Pan.h"
 #include "Harmonizer.h"
 #include "MusicDelay.h"
@@ -147,7 +147,7 @@ public:
     class Distorsion *efx_Distorsion;
     class Distorsion *efx_Overdrive;
     class Compressor *efx_Compressor;
-    class DynamicFilter *efx_WhaWha;
+    class WahWah *efx_WhaWha;
     class Alienwah *efx_Alienwah;
     class Cabinet *efx_Cabinet;
     class Pan *efx_Pan;

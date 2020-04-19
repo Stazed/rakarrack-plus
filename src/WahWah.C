@@ -1,7 +1,7 @@
 /*
   ZynAddSubFX - a software synthesizer
 
-  DynamicFilter.C - "WahWah" effect and others
+  WahWah.C - "WahWah" effect and others
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
@@ -22,11 +22,13 @@
 
  */
 
+// Renamed from DynamicFilter.C on 4/19/2020 by stazed
+
 #include <math.h>
-#include "DynamicFilter.h"
+#include "WahWah.h"
 #include <stdio.h>
 
-DynamicFilter::DynamicFilter(double sample_rate, uint32_t intermediate_bufsize) :
+WahWah::WahWah(double sample_rate, uint32_t intermediate_bufsize) :
     Ppreset(),
     outvolume(0.5f),
     PERIOD(intermediate_bufsize),
@@ -58,7 +60,7 @@ DynamicFilter::DynamicFilter(double sample_rate, uint32_t intermediate_bufsize) 
     cleanup();
 }
 
-DynamicFilter::~DynamicFilter()
+WahWah::~WahWah()
 {
     delete lfo;
     delete filterpars;
@@ -70,7 +72,7 @@ DynamicFilter::~DynamicFilter()
  * Apply the effect
  */
 void
-DynamicFilter::out(float * efxoutl, float * efxoutr)
+WahWah::out(float * efxoutl, float * efxoutr)
 {
     if (filterpars->changed)
     {
@@ -121,7 +123,7 @@ DynamicFilter::out(float * efxoutl, float * efxoutr)
  * Cleanup the effect
  */
 void
-DynamicFilter::cleanup()
+WahWah::cleanup()
 {
     reinitfilter();
     ms1 = 0.0;
@@ -132,7 +134,7 @@ DynamicFilter::cleanup()
 
 #ifdef LV2_SUPPORT
 void
-DynamicFilter::lv2_update_params(uint32_t period)
+WahWah::lv2_update_params(uint32_t period)
 {
     if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
@@ -155,28 +157,28 @@ DynamicFilter::lv2_update_params(uint32_t period)
  */
 
 void
-DynamicFilter::setdepth(int Pdepth)
+WahWah::setdepth(int Pdepth)
 {
     this->Pdepth = Pdepth;
     depth = powf(((float) Pdepth / 127.0f), 2.0f);
 }
 
 void
-DynamicFilter::setvolume(int Pvolume)
+WahWah::setvolume(int Pvolume)
 {
     this->Pvolume = Pvolume;
     outvolume = (float) Pvolume / 127.0f;
 }
 
 void
-DynamicFilter::setpanning(int Ppanning)
+WahWah::setpanning(int Ppanning)
 {
     this->Ppanning = Ppanning;
     panning = ((float) Ppanning + .5f) / 127.0f;
 }
 
 void
-DynamicFilter::setampsns(int Pampsns)
+WahWah::setampsns(int Pampsns)
 {
     ampsns = powf((float) Pampsns / 127.0f, 2.5f) * 10.0f;
     
@@ -188,7 +190,7 @@ DynamicFilter::setampsns(int Pampsns)
 }
 
 void
-DynamicFilter::reinitfilter()
+WahWah::reinitfilter()
 {
     if (filterl != NULL)
         delete (filterl);
@@ -201,7 +203,7 @@ DynamicFilter::reinitfilter()
 }
 
 void
-DynamicFilter::setpreset(int npreset)
+WahWah::setpreset(int npreset)
 {
     const int PRESET_SIZE = 11;
     const int NUM_PRESETS = 5;
@@ -241,7 +243,7 @@ DynamicFilter::setpreset(int npreset)
 }
 
 void
-DynamicFilter::changepar(int npar, int value)
+WahWah::changepar(int npar, int value)
 {
     switch (npar)
     {
@@ -380,7 +382,7 @@ DynamicFilter::changepar(int npar, int value)
 }
 
 int
-DynamicFilter::getpar(int npar)
+WahWah::getpar(int npar)
 {
     switch (npar)
     {

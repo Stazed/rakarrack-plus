@@ -30,7 +30,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/Reverb.C
   ../src/Cabinet.C
   ../src/MusicDelay.C
-  ../src/DynamicFilter.C
+  ../src/WahWah.C
   ../src/Filter.C
   ../src/FilterParams.C
   ../src/SVFilter.C

@@ -51,7 +51,7 @@
 #include"Reverb.h"
 #include"Cabinet.h"
 #include"MusicDelay.h"
-#include"DynamicFilter.h"
+#include"WahWah.h"
 #include"Derelict.h"
 #include"Valve.h"
 #include"Dual_Flange.h"
@@ -295,7 +295,7 @@ typedef struct _RKRLV2
     Reverb* reve;       //10
     Cabinet* cab;       //12
     MusicDelay* mdel; 	//13
-    DynamicFilter* wah; //14
+    WahWah* wah; //14
     Derelict* dere; 		//15
     Valve* valve;		//16
     Dflange* dflange;   //17
