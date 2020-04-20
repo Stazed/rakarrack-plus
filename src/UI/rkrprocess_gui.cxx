@@ -763,7 +763,7 @@ void RKRGUI::load_stat()
 
     rakarrack.get(rkr->PrefNom("Settings X"), x, 1);
     rakarrack.get(rkr->PrefNom("Settings Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Settings W"), w, 620);
+    rakarrack.get(rkr->PrefNom("Settings W"), w, 440);
     rakarrack.get(rkr->PrefNom("Settings H"), h, 410);
 
     Settings->resize(x, y, w, h);
