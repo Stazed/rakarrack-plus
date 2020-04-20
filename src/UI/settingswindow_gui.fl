@@ -1109,24 +1109,24 @@ m_rkr->Conecta();}
       Fl_Counter Midi_In_Counter {
         label {Effects Receive Channel}
         callback {m_rkr->MidiCh=(int)o->value()-1;}
-        xywh {30 210 60 24} type Simple color 25 labelsize 11 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
-        code0 {o->m_start_label_offset = 1; // 10 - 11}
+        xywh {30 210 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
+        code0 {o->m_start_label_offset = 2; // 10 - 12}
         code1 {o->m_start_text_offset = 2; // 10 - 12}
         class RKR_Counter
       }
       Fl_Counter Har_In_Counter {
         label {Harmonizer Receive Channel}
         callback {m_rkr->HarCh=(int)o->value()-1;}
-        xywh {245 171 60 24} type Simple color 25 labelsize 11 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
-        code0 {o->m_start_label_offset = 1; // 10 - 11}
+        xywh {245 210 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
+        code0 {o->m_start_label_offset = 2; // 10 - 12}
         code1 {o->m_start_text_offset = 2; // 10 - 12}
         class RKR_Counter
       }
       Fl_Counter Stereo_Har_In_Counter {
-        label {Stereo Harmonizer Receive Channel}
+        label {Stereo Harm Receive Channel}
         callback {m_rkr->StereoHarCh=(int)o->value()-1;}
-        xywh {245 210 60 24} type Simple color 25 labelsize 11 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
-        code0 {o->m_start_label_offset = 1; // 10 - 11}
+        xywh {245 265 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
+        code0 {o->m_start_label_offset = 2; // 10 - 11}
         code1 {o->m_start_text_offset = 2; // 10 - 12}
         class RKR_Counter
       }

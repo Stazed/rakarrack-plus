@@ -2113,7 +2113,7 @@ this->when(FL_WHEN_RELEASE);
       Midi_In_Counter->selection_color(FL_INACTIVE_COLOR);
       Midi_In_Counter->labeltype(FL_NORMAL_LABEL);
       Midi_In_Counter->labelfont(0);
-      Midi_In_Counter->labelsize(11);
+      Midi_In_Counter->labelsize(12);
       Midi_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
       Midi_In_Counter->minimum(1);
       Midi_In_Counter->maximum(16);
@@ -2123,17 +2123,17 @@ this->when(FL_WHEN_RELEASE);
       Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
       Midi_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
       Midi_In_Counter->when(FL_WHEN_CHANGED);
-      o->m_start_label_offset = 1; // 10 - 11
+      o->m_start_label_offset = 2; // 10 - 12
       o->m_start_text_offset = 2; // 10 - 12
     } // RKR_Counter* Midi_In_Counter
-    { RKR_Counter* o = Har_In_Counter = new RKR_Counter(245, 171, 60, 24, "Harmonizer Receive Channel");
+    { RKR_Counter* o = Har_In_Counter = new RKR_Counter(245, 210, 60, 24, "Harmonizer Receive Channel");
       Har_In_Counter->type(1);
       Har_In_Counter->box(FL_UP_BOX);
       Har_In_Counter->color((Fl_Color)25);
       Har_In_Counter->selection_color(FL_INACTIVE_COLOR);
       Har_In_Counter->labeltype(FL_NORMAL_LABEL);
       Har_In_Counter->labelfont(0);
-      Har_In_Counter->labelsize(11);
+      Har_In_Counter->labelsize(12);
       Har_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
       Har_In_Counter->minimum(1);
       Har_In_Counter->maximum(16);
@@ -2143,17 +2143,17 @@ this->when(FL_WHEN_RELEASE);
       Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
       Har_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
       Har_In_Counter->when(FL_WHEN_CHANGED);
-      o->m_start_label_offset = 1; // 10 - 11
+      o->m_start_label_offset = 2; // 10 - 12
       o->m_start_text_offset = 2; // 10 - 12
     } // RKR_Counter* Har_In_Counter
-    { RKR_Counter* o = Stereo_Har_In_Counter = new RKR_Counter(245, 210, 60, 24, "Stereo Harmonizer Receive Channel");
+    { RKR_Counter* o = Stereo_Har_In_Counter = new RKR_Counter(245, 265, 60, 24, "Stereo Harm Receive Channel");
       Stereo_Har_In_Counter->type(1);
       Stereo_Har_In_Counter->box(FL_UP_BOX);
       Stereo_Har_In_Counter->color((Fl_Color)25);
       Stereo_Har_In_Counter->selection_color(FL_INACTIVE_COLOR);
       Stereo_Har_In_Counter->labeltype(FL_NORMAL_LABEL);
       Stereo_Har_In_Counter->labelfont(0);
-      Stereo_Har_In_Counter->labelsize(11);
+      Stereo_Har_In_Counter->labelsize(12);
       Stereo_Har_In_Counter->labelcolor(FL_BACKGROUND2_COLOR);
       Stereo_Har_In_Counter->minimum(1);
       Stereo_Har_In_Counter->maximum(16);
@@ -2163,7 +2163,7 @@ this->when(FL_WHEN_RELEASE);
       Stereo_Har_In_Counter->callback((Fl_Callback*)cb_Stereo_Har_In_Counter);
       Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
       Stereo_Har_In_Counter->when(FL_WHEN_CHANGED);
-      o->m_start_label_offset = 1; // 10 - 11
+      o->m_start_label_offset = 2; // 10 - 11
       o->m_start_text_offset = 2; // 10 - 12
     } // RKR_Counter* Stereo_Har_In_Counter
     { RKR_Group* o = wMIDI = new RKR_Group(30, 266, 180, 23, "MIDI implementation");
