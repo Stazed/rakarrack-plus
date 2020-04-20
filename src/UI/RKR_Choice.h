@@ -35,6 +35,7 @@ class RKR_Choice : public Fl_Choice
 public:
     RKR_Choice(int X, int Y, int W, int H, const char *label=0);
     void draw();
+    int handle(int);
     void resize(int,int,int,int);
     int m_start_label_offset;
     int m_start_text_offset;

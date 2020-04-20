@@ -30,6 +30,7 @@ const float C_MC_7_RANGE        = 0.05511811f;      /* 7 / 127 = 0.055118110236 
 const float C_MC_12_RANGE       = 0.094488189f;     /* 12 / 127 = 0.094488188976 */
 const float C_MC_23_RANGE       = 0.18110236f;      /* 23 / 127 = 0.1811023622047 */
 const float C_MC_24_RANGE       = 0.18897638f;      /* 24 / 127 = 0.188976377953  */
+const float C_MC_30_RANGE       = 0.236220472441f;  /* 30 / 127 = 0.2362204724409449 */
 const float C_MC_32_RANGE       = 0.25196850393701f;  /* 32 / 127 = 0.2519685039370079 */
 const float C_MC_33_RANGE       = 0.25984252f;      /* 33 / 127 = 0.2598425196850 */
 const float C_MC_40_RANGE       = 0.31496063f;      /* (42 - 2) / 127 = 0.314960629921 */
@@ -2698,6 +2699,14 @@ RKR::process_midi_controller_events(int parameter, int value)
 
     case 448:
         efx_StereoHarm->changepar(7, value);
+        break;
+
+    case 449:
+        efx_Distorsion->changepar(5, (int) ((float) value * C_MC_30_RANGE));
+        break;
+
+    case 450:
+        efx_Overdrive->changepar(5, (int) ((float) value * C_MC_30_RANGE));
         break;
     }
 }

@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 423;
+    NumParams = 425;
 
     {
         static const char *los_params[] = {
@@ -853,6 +853,7 @@ RKR::RKR() :
             "Distortion L/R Cross", "95", "2",
             "Distortion Drive", "69", "2",
             "Distortion Level", "71", "2",
+            "Distortion Type", "449", "2",
             "Distortion Pan", "48", "2",
             "Distortion Sub Octave", "9", "2",
             "Distortion LPF", "86", "2",
@@ -1036,6 +1037,7 @@ RKR::RKR() :
             "Overdrive L/R Cross", "94", "3",
             "Overdrive Drive", "68", "3",
             "Overdrive Level", "70", "3",
+            "Overdrive Type", "450", "3",
             "Overdrive Pan", "47", "3",
             "Overdrive LPF", "85", "3",
             "Overdrive HPF", "88", "3",

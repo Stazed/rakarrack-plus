@@ -173,6 +173,28 @@ void RKR_Choice::draw()
     draw_label();
 }
 
+int RKR_Choice::handle(int event)
+{
+    /* Right mouse button - pop up MIDI learn */
+    if(Fl::event_button()== FL_RIGHT_MOUSE)
+    {
+        if (Fl::event_inside(x(), y(), w(), h()))
+        {
+            if (event == FL_RELEASE /* || event == FL_PUSH || event == FL_DRAG*/)
+            {
+                /* The callback will trigger MIDI learn based on FL_RIGHT_MOUSE */
+                do_callback();
+            }
+        }
+        
+        /* Ignore all other right mouse events */
+        return 1;
+    }
+    
+    /* Normal processing */
+    Fl_Choice::handle(event);
+}
+
 void RKR_Choice::font_resize(int W, int H)
 {
     float W_ratio = (float) W / m_start_width;

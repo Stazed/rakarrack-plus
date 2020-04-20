@@ -4798,6 +4798,14 @@ void RKRGUI::ActMIDI()
                 SHAR->shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
                 SHAR->shar_SELECT->redraw();
                 break;
+            case 449:
+                DIST->dist_tipo->value(rkr->efx_Distorsion->getpar(5));
+                DIST->dist_tipo->redraw();
+                break;
+            case 450:
+                OVRD->ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
+                OVRD->ovrd_tipo->redraw();
+                break;
         }
     }
 

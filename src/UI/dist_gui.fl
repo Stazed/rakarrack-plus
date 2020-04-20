@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -13,7 +13,7 @@ decl {\#include "RKR_Choice.h"} {public global
 
 widget_class {\#include "common_gui_menu.h"} DistGui {
   user_data 1 open
-  xywh {1176 113 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1066 89 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -119,7 +119,13 @@ rkr->efx_Distorsion->changepar(4,(int)o->value());}
   Fl_Choice dist_tipo {
     label Type
     user_data 12
-    callback {rkr->efx_Distorsion->changepar(5,(int)o->value());} selected
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(449);
+ return;
+} 
+
+rkr->efx_Distorsion->changepar(5,(int)o->value());} selected
     xywh {34 91 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
