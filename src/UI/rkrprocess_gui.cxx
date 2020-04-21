@@ -4842,6 +4842,10 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_lfotype->value(rkr->efx_Flanger->getpar(4));
                 FLANGER->flanger_lfotype->redraw();
                 break;
+            case 460:
+                DFLANGE->dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
+                DFLANGE->dflange_lfotype->redraw();
+                break;
         }
     }
 

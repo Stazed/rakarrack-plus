@@ -2746,6 +2746,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 459:
         efx_Flanger->changepar(4, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 460:
+        efx_DFlange->changepar(12, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 

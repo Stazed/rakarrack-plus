@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 434;
+    NumParams = 435;
 
     {
         static const char *los_params[] = {
@@ -876,6 +876,7 @@ RKR::RKR() :
             "Dual Flange LPF", "165", "20",
             "Dual Flange Tempo", "166", "20",
             "Dual Flange Stereo Df", "167", "20",
+            "Dual Flange LFO Type", "460", "20",
             "Dual Flange Random", "168", "20",
 
             "Echo Dry/Wet", "59", "4",
