@@ -192,7 +192,7 @@ int RKR_Choice::handle(int event)
     }
     
     /* Normal processing */
-    Fl_Choice::handle(event);
+    return Fl_Choice::handle(event);
 }
 
 void RKR_Choice::font_resize(int W, int H)

@@ -644,7 +644,7 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         {
 #if 1
             /* This is the best guess at what is should do... see comments below - stazed.
-             * It sounds the same and does not pop, no sound any more */
+             * It sounds the same and does not pop, silence any more */
             ws = powf(20.0f, ws * ws) + 0.5f;
             float factor = 1.0f / ws;
 
@@ -669,7 +669,7 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
             }
             break;
 #else
-            /* This is the original code. It is obviously wrong.. caused pop then no sound
+            /* This is the original code. It is obviously wrong.. caused pop then silence.
              * See the FIXME comments on the lines below */
             
             ws = powf(20.0f, ws * ws) + 0.5f;
