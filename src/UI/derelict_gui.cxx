@@ -94,7 +94,13 @@ void DerelictGui::cb_derelict_level(RKR_Slider* o, void* v) {
 }
 
 void DerelictGui::cb_derelict_tipo_i(RKR_Choice* o, void*) {
-  rkr->efx_Derelict->changepar(5,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(451);
+ return;
+} 
+
+rkr->efx_Derelict->changepar(5,(int)o->value());
 }
 void DerelictGui::cb_derelict_tipo(RKR_Choice* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_tipo_i(o,v);

@@ -4806,6 +4806,10 @@ void RKRGUI::ActMIDI()
                 OVRD->ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
                 OVRD->ovrd_tipo->redraw();
                 break;
+            case 451:
+                DERELICT->derelict_tipo->value(rkr->efx_Derelict->getpar(5));
+                DERELICT->derelict_tipo->redraw();
+                break;
         }
     }
 

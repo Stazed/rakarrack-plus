@@ -2708,6 +2708,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 450:
         efx_Overdrive->changepar(5, (int) ((float) value * C_MC_30_RANGE));
         break;
+
+    case 451:
+        efx_Derelict->changepar(5, (int) ((float) value * C_MC_30_RANGE));
+        break;
     }
 }
 

@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 425;
+    NumParams = 426;
 
     {
         static const char *los_params[] = {
@@ -832,6 +832,7 @@ RKR::RKR() :
             "Derelict L/R Cross", "127", "17",
             "Derelict Drive", "2", "17",
             "Derelict Level", "3", "17",
+            "Derelict Level", "451", "17",
             "Derelict Color", "6", "17",
             "Derelict Sub Octave", "8", "17",
             "Derelict Pan", "126", "17",
