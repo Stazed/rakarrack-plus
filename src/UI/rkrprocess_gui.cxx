@@ -4878,6 +4878,10 @@ void RKRGUI::ActMIDI()
                 VARYBAND->varyband_lfotype2->value(rkr->efx_VaryBand->getpar(5));
                 VARYBAND->varyband_lfotype2->redraw();
                 break;
+            case 469:
+                VIBE->vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
+                VIBE->vibe_lfotype->redraw();
+                break;
         }
     }
 

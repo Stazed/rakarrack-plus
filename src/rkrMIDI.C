@@ -2782,6 +2782,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 468:
         efx_VaryBand->changepar(5, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 469:
+        efx_Vibe->changepar(3, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 

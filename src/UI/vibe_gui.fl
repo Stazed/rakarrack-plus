@@ -148,7 +148,13 @@ rkr->efx_Vibe->changepar(2,(int)o->value());}
   }
   Fl_Choice vibe_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Vibe->changepar(3,(int)o->value());} selected
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(469);
+ return;
+}
+
+rkr->efx_Vibe->changepar(3,(int)o->value());} selected
     xywh {78 96 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice

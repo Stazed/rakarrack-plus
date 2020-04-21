@@ -111,7 +111,13 @@ void VibeGui::cb_vibe_rnd(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_lfotype_i(RKR_Choice* o, void*) {
-  rkr->efx_Vibe->changepar(3,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(469);
+ return;
+}
+
+rkr->efx_Vibe->changepar(3,(int)o->value());
 }
 void VibeGui::cb_vibe_lfotype(RKR_Choice* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_lfotype_i(o,v);

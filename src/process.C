@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 443;
+    NumParams = 444;
 
     {
         static const char *los_params[] = {
@@ -1219,6 +1219,7 @@ RKR::RKR() :
             "Vibe Depth", "388", "45",
             "Vibe Tempo", "389", "45",
             "Vibe Random", "390", "45",
+            "Vibe LFO Type", "469", "45",
             "Vibe Stereo Df", "391", "45",
             "Vibe Feedback", "392", "45",
             "Vibe L/R Cross", "393", "45",
