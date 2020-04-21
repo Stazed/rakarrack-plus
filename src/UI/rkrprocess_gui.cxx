@@ -4858,6 +4858,10 @@ void RKRGUI::ActMIDI()
                 OTREM->otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
                 OTREM->otrem_lfotype->redraw();
                 break;
+            case 464:
+                PAN->pan_lfotype->value(rkr->efx_Pan->getpar(4));
+                PAN->pan_lfotype->redraw();
+                break;
         }
     }
 
