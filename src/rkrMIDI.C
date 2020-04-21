@@ -2766,6 +2766,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 464:
         efx_Pan->changepar(4, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 465:
+        efx_Phaser->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -130,7 +130,13 @@ rkr->efx_Phaser->changepar(3,(int)o->value());}
   }
   Fl_Choice phaser_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Phaser->changepar(4,(int)o->value());} open selected
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(465);
+ return;
+} 
+
+rkr->efx_Phaser->changepar(4,(int)o->value());} open selected
     xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice

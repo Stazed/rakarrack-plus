@@ -4862,6 +4862,10 @@ void RKRGUI::ActMIDI()
                 PAN->pan_lfotype->value(rkr->efx_Pan->getpar(4));
                 PAN->pan_lfotype->redraw();
                 break;
+            case 465:
+                PHASER->phaser_lfotype->value(rkr->efx_Phaser->getpar(4));
+                PHASER->phaser_lfotype->redraw();
+                break;
         }
     }
 

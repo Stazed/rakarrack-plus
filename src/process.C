@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 439;
+    NumParams = 440;
 
     {
         static const char *los_params[] = {
@@ -1077,6 +1077,7 @@ RKR::RKR() :
             "Phaser Pan", "60", "6",
             "Phaser Tempo", "74", "6",
             "Phaser Random", "107", "6",
+            "Phaser LFO Type", "465", "6",
             "Phaser Phase", "114", "6",
             "Phaser Stereo Df", "101", "6",
             "Phaser Depth", "21", "6",
