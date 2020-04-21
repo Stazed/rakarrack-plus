@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 429;
+    NumParams = 430;
 
     {
         static const char *los_params[] = {
@@ -1164,6 +1164,7 @@ RKR::RKR() :
             "StompBox Bias", "336", "39",
             "StompBox Mid", "337", "39",
             "StompBox Tone", "338", "39",
+            "StompBox Mode", "455", "39",
 
             "Sustainer Gain", "312", "36",
             "Sustainer Sustain", "313", "36",

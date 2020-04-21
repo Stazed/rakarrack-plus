@@ -4822,6 +4822,10 @@ void RKRGUI::ActMIDI()
                 DISTBAND->distband_tipoH->value(rkr->efx_DistBand->getpar(7));
                 DISTBAND->distband_tipoH->redraw();
                 break;
+            case 455:
+                STOMPBOX->stomp_mode->value(rkr->efx_StompBox->getpar(5));
+                STOMPBOX->stomp_mode->redraw();
+                break;
         }
     }
 

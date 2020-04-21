@@ -27,6 +27,7 @@
 
 /* MIDI control defines (Max - Min) / 127 - parameter ranges  */
 const float C_MC_7_RANGE        = 0.05511811f;      /* 7 / 127 = 0.055118110236 */
+const float C_MC_8_RANGE        = 0.06299f;         /* 8 / 127 = 0.062992125984252 */
 const float C_MC_12_RANGE       = 0.094488189f;     /* 12 / 127 = 0.094488188976 */
 const float C_MC_23_RANGE       = 0.18110236f;      /* 23 / 127 = 0.1811023622047 */
 const float C_MC_24_RANGE       = 0.18897638f;      /* 24 / 127 = 0.188976377953  */
@@ -2723,6 +2724,10 @@ RKR::process_midi_controller_events(int parameter, int value)
 
     case 454:
         efx_DistBand->changepar(7, (int) ((float) value * C_MC_30_RANGE));
+        break;
+
+    case 455:
+        efx_StompBox->changepar(5, (int) ((float) value * C_MC_8_RANGE));
         break;
     }
 }

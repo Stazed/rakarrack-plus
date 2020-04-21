@@ -30,7 +30,7 @@ Fl_Menu_Item CommonGuiMenu::menu_lfo_type[] = {
 
 Fl_Menu_Item CommonGuiMenu::menu_distortion_type[] = {
  /*
-  The dist_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
+  The dist_tipo menu items are used by distortion, overdrive, derelict, and distband.
   If any of these menu items change here, then they must be changed in the others.
   */
  {"Atan", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
