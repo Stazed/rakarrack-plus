@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 432;
+    NumParams = 434;
 
     {
         static const char *los_params[] = {
@@ -789,6 +789,7 @@ RKR::RKR() :
             "Chorus Pan", "50", "5",
             "Chorus Tempo", "72", "5",
             "Chorus Random", "105", "5",
+            "Chorus LFO Type", "458", "5",
             "Chorus Stereo Df", "99", "5",
             "Chorus Depth", "23", "5",
             "Chorus Delay", "406", "5",
@@ -946,6 +947,7 @@ RKR::RKR() :
             "Flanger Pan", "51", "7",
             "Flanger Tempo", "73", "7",
             "Flanger Random", "106", "7",
+            "Flanger LFO Type", "459", "7",
             "Flanger Stereo Df", "100", "7",
             "Flanger Depth", "22", "7",
             "Flanger Delay", "411", "7",

@@ -2738,6 +2738,14 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 457:
         efx_APhaser->changepar(4, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 458:
+        efx_Chorus->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        break;
+
+    case 459:
+        efx_Flanger->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 

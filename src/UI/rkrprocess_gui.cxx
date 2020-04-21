@@ -4834,6 +4834,14 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_lfotype->value(rkr->efx_APhaser->getpar(4));
                 APHASER->aphaser_lfotype->redraw();
                 break;
+            case 458:
+                CHORUS->chorus_lfotype->value(rkr->efx_Chorus->getpar(4));
+                CHORUS->chorus_lfotype->redraw();
+                break;
+            case 459:
+                FLANGER->flanger_lfotype->value(rkr->efx_Flanger->getpar(4));
+                FLANGER->flanger_lfotype->redraw();
+                break;
         }
     }
 
