@@ -4826,6 +4826,10 @@ void RKRGUI::ActMIDI()
                 STOMPBOX->stomp_mode->value(rkr->efx_StompBox->getpar(5));
                 STOMPBOX->stomp_mode->redraw();
                 break;
+            case 456:
+                ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(4));
+                ALIENWAH->Alienwah_lfotype->redraw();
+                break;
         }
     }
 

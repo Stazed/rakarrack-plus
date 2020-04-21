@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 430;
+    NumParams = 431;
 
     {
         static const char *los_params[] = {
@@ -753,6 +753,7 @@ RKR::RKR() :
             "Alienwah Pan", "61", "11",
             "Alienwah Tempo", "76", "11",
             "Alienwah Random", "109", "11",
+            "Alienwah LFO Type", "456", "11",
             "Alienwah Phase", "115", "11",
             "Alienwah Stereo Df.", "103", "11",
             "Alienwah Depth", "20", "11",
