@@ -4870,6 +4870,14 @@ void RKRGUI::ActMIDI()
                 SYNTHFILTER->synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
                 SYNTHFILTER->synthfilter_lfotype->redraw();
                 break;
+            case 467:
+                VARYBAND->varyband_lfotype1->value(rkr->efx_VaryBand->getpar(2));
+                VARYBAND->varyband_lfotype1->redraw();
+                break;
+            case 468:
+                VARYBAND->varyband_lfotype2->value(rkr->efx_VaryBand->getpar(5));
+                VARYBAND->varyband_lfotype2->redraw();
+                break;
         }
     }
 

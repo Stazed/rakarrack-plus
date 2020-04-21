@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 441;
+    NumParams = 443;
 
     {
         static const char *los_params[] = {
@@ -1205,8 +1205,10 @@ RKR::RKR() :
 
             "VaryBand Dry/Wet", "248", "28",
             "VaryBand Tempo 1", "249", "28",
+            "VaryBand LFO 1 Type", "467", "28",
             "VaryBand St.df 1", "250", "28",
             "VaryBand Tempo 2", "251", "28",
+            "VaryBand LFO 2 Type", "468", "28",
             "VaryBand St.df 2", "252", "28",
             "VaryBand Cross 1", "253", "28",
             "VaryBand Cross 2", "254", "28",

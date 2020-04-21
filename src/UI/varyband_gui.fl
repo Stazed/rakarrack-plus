@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -96,7 +96,13 @@ rkr->efx_VaryBand->changepar(1,(int)o->value());}
   }
   Fl_Choice varyband_lfotype1 {
     label {LFO 1 Type}
-    callback {rkr->efx_VaryBand->changepar(2,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(467);
+ return;
+}
+
+rkr->efx_VaryBand->changepar(2,(int)o->value());}
     xywh {65 53 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -125,7 +131,13 @@ rkr->efx_VaryBand->changepar(4,(int)o->value());}
   }
   Fl_Choice varyband_lfotype2 {
     label {LFO 2 Type}
-    callback {rkr->efx_VaryBand->changepar(5,(int)o->value());}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(468);
+ return;
+}
+
+rkr->efx_VaryBand->changepar(5,(int)o->value());} selected
     xywh {65 97 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -229,7 +241,7 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());}
   Fl_Choice varyband_MB2 {
     label M
     user_data 12
-    callback {rkr->efx_VaryBand->changepar(13,(int)o->value());} selected
+    callback {rkr->efx_VaryBand->changepar(13,(int)o->value());}
     tooltip {Mid Band 2 Volume} xywh {90 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->m_start_label_offset = -2; // 10 - 8}
     code1 {o->m_start_text_offset = -1; // 10 - 9}

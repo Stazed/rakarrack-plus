@@ -2774,6 +2774,14 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 466:
         efx_Synthfilter->changepar(4, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 467:
+        efx_VaryBand->changepar(2, (int) ((float) value * C_MC_11_RANGE));
+        break;
+
+    case 468:
+        efx_VaryBand->changepar(5, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 
