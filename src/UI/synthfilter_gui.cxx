@@ -103,7 +103,13 @@ void SynthfilterGui::cb_synthfilter_rand(RKR_Value_Input* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_lfotype_i(RKR_Choice* o, void*) {
-  rkr->efx_Synthfilter->changepar(4,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(466);
+ return;
+}
+
+rkr->efx_Synthfilter->changepar(4,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_lfotype(RKR_Choice* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_lfotype_i(o,v);

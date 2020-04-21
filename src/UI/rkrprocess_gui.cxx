@@ -4866,6 +4866,10 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_lfotype->value(rkr->efx_Phaser->getpar(4));
                 PHASER->phaser_lfotype->redraw();
                 break;
+            case 466:
+                SYNTHFILTER->synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
+                SYNTHFILTER->synthfilter_lfotype->redraw();
+                break;
         }
     }
 
