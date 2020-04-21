@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 437;
+    NumParams = 438;
 
     {
         static const char *los_params[] = {
@@ -1041,6 +1041,7 @@ RKR::RKR() :
             "Opticaltrem Depth", "381", "44",
             "Opticaltrem Tempo", "382", "44",
             "Opticaltrem Random", "383", "44",
+            "Opticaltrem LFO Type", "463", "44",
             "Opticaltrem Stereo Df", "384", "44",
             "Opticaltrem Pan", "385", "44",
 

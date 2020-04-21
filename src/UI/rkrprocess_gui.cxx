@@ -4854,6 +4854,10 @@ void RKRGUI::ActMIDI()
                 MUTROMOJO->mutromojo_lfotype->value(rkr->efx_MuTroMojo->getpar(4));
                 MUTROMOJO->mutromojo_lfotype->redraw();
                 break;
+            case 463:
+                OTREM->otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
+                OTREM->otrem_lfotype->redraw();
+                break;
         }
     }
 

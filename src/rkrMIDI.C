@@ -2758,6 +2758,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 462:
         efx_MuTroMojo->changepar(4, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 463:
+        efx_Opticaltrem->changepar(3, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 
