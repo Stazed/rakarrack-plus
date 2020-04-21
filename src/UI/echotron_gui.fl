@@ -196,7 +196,13 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
   }
   Fl_Choice echotron_lfotype {
     label {LFO Type}
-    callback {rkr->efx_Echotron->changepar(14,(int)o->value());} open
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(461);
+ return;
+}
+
+rkr->efx_Echotron->changepar(14,(int)o->value());} open selected
     xywh {88 135 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -239,7 +245,7 @@ if(!rkr->efx_Echotron->setfile(USERFILE))
 }
 
 echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }

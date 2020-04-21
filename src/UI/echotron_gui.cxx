@@ -169,7 +169,13 @@ void EchotronGui::cb_echotron_af(RKR_Check_Button* o, void* v) {
 }
 
 void EchotronGui::cb_echotron_lfotype_i(RKR_Choice* o, void*) {
-  rkr->efx_Echotron->changepar(14,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(461);
+ return;
+}
+
+rkr->efx_Echotron->changepar(14,(int)o->value());
 }
 void EchotronGui::cb_echotron_lfotype(RKR_Choice* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_lfotype_i(o,v);

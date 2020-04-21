@@ -4846,6 +4846,10 @@ void RKRGUI::ActMIDI()
                 DFLANGE->dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
                 DFLANGE->dflange_lfotype->redraw();
                 break;
+            case 461:
+                ECHOTRON->echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
+                ECHOTRON->echotron_lfotype->redraw();
+                break;
         }
     }
 

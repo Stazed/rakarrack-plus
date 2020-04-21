@@ -2750,6 +2750,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 460:
         efx_DFlange->changepar(12, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 461:
+        efx_Echotron->changepar(14, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 

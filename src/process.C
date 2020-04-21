@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 435;
+    NumParams = 436;
 
     {
         static const char *los_params[] = {
@@ -897,6 +897,7 @@ RKR::RKR() :
             "Echotron Width", "354", "41",
             "Echotron Depth", "355", "41",
             "Echotron Stereo Df", "356", "41",
+            "Echotron LFO Type", "461", "41",
             "Echotron #", "357", "41",
 
             "Echoverse Dry/Wet", "303", "32",
