@@ -4830,6 +4830,10 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(4));
                 ALIENWAH->Alienwah_lfotype->redraw();
                 break;
+            case 457:
+                APHASER->aphaser_lfotype->value(rkr->efx_APhaser->getpar(4));
+                APHASER->aphaser_lfotype->redraw();
+                break;
         }
     }
 

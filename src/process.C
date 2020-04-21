@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 431;
+    NumParams = 432;
 
     {
         static const char *los_params[] = {
@@ -762,6 +762,7 @@ RKR::RKR() :
             "Alienwah L/R Cross", "96", "11",
             
             "Analog Phaser Dry/Wet", "117", "18",
+            "Analog Phaser LFO Type", "457", "18",
             "Analog Phaser Tempo", "119", "18",
             "Analog Phaser P. Depth", "120", "18",
             "Analog Phaser Width", "121", "18",
