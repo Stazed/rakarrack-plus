@@ -43,6 +43,30 @@ void RKR_Light_Button::draw()
         m_previous_font_size = global_font_size;
         font_resize(w(), h());
     }
+    
+    if(value())
+    {
+        if(label() == "Off")
+        {
+            label("On");
+        }
+        else if(label() == "FX Off")
+        {
+            label("FX On");
+        }   
+    }
+    else
+    {
+        if(label() == "On")
+        {
+            label("Off");
+        }
+        else if(label() == "FX On")
+        {
+            label("FX Off");
+        }
+    }
+
 
     Fl_Light_Button::draw();
 }
