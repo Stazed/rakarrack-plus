@@ -4882,6 +4882,10 @@ void RKRGUI::ActMIDI()
                 VIBE->vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
                 VIBE->vibe_lfotype->redraw();
                 break;
+            case 470:
+                WHAWHA->WhaWha_lfotype->value(rkr->efx_WhaWha->getpar(4));
+                WHAWHA->WhaWha_lfotype->redraw();
+                break;
         }
     }
 

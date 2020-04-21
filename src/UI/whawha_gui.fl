@@ -123,7 +123,13 @@ rkr->efx_WhaWha->changepar(3,(int)o->value());}
   }
   Fl_Choice WhaWha_lfotype {
     label {LFO Type}
-    callback {rkr->efx_WhaWha->changepar(4,(int)o->value())}
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(470);
+ return;
+} 
+
+rkr->efx_WhaWha->changepar(4,(int)o->value())} selected
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -180,7 +186,7 @@ rkr->efx_WhaWha->changepar(8,(int)o->value());}
     class RKR_Choice
   } {
     MenuItem {} {
-      label {Low-Pass Analog} selected
+      label {Low-Pass Analog}
       xywh {72 72 36 21} labelsize 10
     }
     MenuItem {} {

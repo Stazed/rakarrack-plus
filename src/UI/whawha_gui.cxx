@@ -97,7 +97,13 @@ void WhawhaGui::cb_WhaWha_rnd(RKR_Slider* o, void* v) {
 }
 
 void WhawhaGui::cb_WhaWha_lfotype_i(RKR_Choice* o, void*) {
-  rkr->efx_WhaWha->changepar(4,(int)o->value());
+  if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(470);
+ return;
+} 
+
+rkr->efx_WhaWha->changepar(4,(int)o->value());
 }
 void WhawhaGui::cb_WhaWha_lfotype(RKR_Choice* o, void* v) {
   ((WhawhaGui*)(o->parent()))->cb_WhaWha_lfotype_i(o,v);

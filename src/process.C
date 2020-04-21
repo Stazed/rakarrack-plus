@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 444;
+    NumParams = 445;
 
     {
         static const char *los_params[] = {
@@ -1239,6 +1239,7 @@ RKR::RKR() :
             "WahWah Pan", "66", "10",
             "WahWah Tempo", "75", "10",
             "WahWah Random", "108", "10",
+            "WahWah LFO Type", "470", "10",
             "WahWah Stereo Df", "102", "10",
             "WahWah Depth", "1", "10",
             "WahWah Amp S.", "111", "10",
