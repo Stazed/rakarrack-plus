@@ -4850,6 +4850,10 @@ void RKRGUI::ActMIDI()
                 ECHOTRON->echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
                 ECHOTRON->echotron_lfotype->redraw();
                 break;
+            case 462:
+                MUTROMOJO->mutromojo_lfotype->value(rkr->efx_MuTroMojo->getpar(4));
+                MUTROMOJO->mutromojo_lfotype->redraw();
+                break;
         }
     }
 

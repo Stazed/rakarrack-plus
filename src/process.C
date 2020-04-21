@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 436;
+    NumParams = 437;
 
     {
         static const char *los_params[] = {
@@ -1018,6 +1018,7 @@ RKR::RKR() :
             "MuTroMojo LP", "257", "31",
             "MuTroMojo BP", "258", "31",
             "MuTroMojo HP", "259", "31",
+            "MuTroMojo LFO Type", "462", "31",
             "MuTroMojo Depth", "260", "31",
             "MuTroMojo Tempo", "261", "31",
             "MuTroMojo Res", "262", "31",

@@ -2754,6 +2754,10 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 461:
         efx_Echotron->changepar(14, (int) ((float) value * C_MC_11_RANGE));
         break;
+
+    case 462:
+        efx_MuTroMojo->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        break;
     }
 }
 
