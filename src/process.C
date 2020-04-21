@@ -744,7 +744,7 @@ RKR::RKR() :
     }
 
 
-    NumParams = 426;
+    NumParams = 429;
 
     {
         static const char *los_params[] = {
@@ -848,8 +848,11 @@ RKR::RKR() :
             "DistBand H. Gain", "208", "23",
             "DistBand Cross 1", "209", "23",
             "DistBand Cross 2", "210", "23",
+            "DistBand Type Low", "452", "23",
+            "DistBand Type Med", "453", "23",
+            "DistBand Type High", "454", "23",
             "DistBand Pan", "211", "23",
-
+            
             "Distortion Dry/Wet", "30", "2",
             "Distortion L/R Cross", "95", "2",
             "Distortion Drive", "69", "2",

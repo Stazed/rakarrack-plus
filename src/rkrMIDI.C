@@ -2712,6 +2712,18 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 451:
         efx_Derelict->changepar(5, (int) ((float) value * C_MC_30_RANGE));
         break;
+
+    case 452:
+        efx_DistBand->changepar(5, (int) ((float) value * C_MC_30_RANGE));
+        break;
+
+    case 453:
+        efx_DistBand->changepar(6, (int) ((float) value * C_MC_30_RANGE));
+        break;
+
+    case 454:
+        efx_DistBand->changepar(7, (int) ((float) value * C_MC_30_RANGE));
+        break;
     }
 }
 

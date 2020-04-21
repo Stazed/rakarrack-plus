@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -191,20 +191,38 @@ rkr->efx_DistBand->changepar(13,(int)o->value());}
     class RKR_Slider
   }
   Fl_Choice distband_tipoL {
-    callback {rkr->efx_DistBand->changepar(5,(int)o->value());} open
-    xywh {3 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(452);
+ return;
+} 
+
+rkr->efx_DistBand->changepar(5,(int)o->value());} open selected
+    tooltip {Distortion Type Low} xywh {3 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
   } {}
   Fl_Choice distband_tipoM {
-    callback {rkr->efx_DistBand->changepar(6,(int)o->value());} open
-    xywh {54 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(453);
+ return;
+} 
+
+rkr->efx_DistBand->changepar(6,(int)o->value());} open
+    tooltip {Distortion Type Medium} xywh {54 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
   } {}
   Fl_Choice distband_tipoH {
-    callback {rkr->efx_DistBand->changepar(7,(int)o->value());} open selected
-    xywh {105 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    callback {if(Fl::event_button()==3)
+{
+ rgui->getMIDIControl(454);
+ return;
+} 
+
+rkr->efx_DistBand->changepar(7,(int)o->value());} open
+    tooltip {Distortion Type High} xywh {105 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
   } {}

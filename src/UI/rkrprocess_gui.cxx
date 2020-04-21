@@ -4810,6 +4810,18 @@ void RKRGUI::ActMIDI()
                 DERELICT->derelict_tipo->value(rkr->efx_Derelict->getpar(5));
                 DERELICT->derelict_tipo->redraw();
                 break;
+            case 452:
+                DISTBAND->distband_tipoL->value(rkr->efx_DistBand->getpar(5));
+                DISTBAND->distband_tipoL->redraw();
+                break;
+            case 453:
+                DISTBAND->distband_tipoM->value(rkr->efx_DistBand->getpar(6));
+                DISTBAND->distband_tipoM->redraw();
+                break;
+            case 454:
+                DISTBAND->distband_tipoH->value(rkr->efx_DistBand->getpar(7));
+                DISTBAND->distband_tipoH->redraw();
+                break;
         }
     }
 
