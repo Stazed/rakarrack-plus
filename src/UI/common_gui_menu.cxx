@@ -14,12 +14,12 @@ Fl_Menu_Item CommonGuiMenu::menu_subdiv_type[] = {
 
 Fl_Menu_Item CommonGuiMenu::menu_lfo_type[] = {
  {"Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Tri", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Triangle", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Ramp Up", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"Ramp Down", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"ZigZag", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M. Sqare", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"M.Saw", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
+ {"M. Square", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
+ {"M. Saw", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"L. Fractal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"L. Fractal XY", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"S/H Random", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
