@@ -43,8 +43,8 @@ public:
     int m_start_font_offset;
 private:
     
-    int m_start_height;
     int m_start_width;
+    int m_start_height;
     int m_previous_font_size;
     std::vector<std::string> m_submenu_paths;
     void font_resize(int,int);
