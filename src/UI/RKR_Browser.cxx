@@ -26,13 +26,14 @@
 #include "RKR_Browser.h"
 #include "../global.h"
 
-RKR_Browser::RKR_Browser(int X, int Y, int W, int H, const char *label) : Fl_Browser(X, Y, W, H, label)
+RKR_Browser::RKR_Browser(int X, int Y, int W, int H, const char *label) :
+    Fl_Browser(X, Y, W, H, label),
+    m_start_label_offset(0),
+    m_start_text_offset(0),
+    m_start_width(W),
+    m_start_height(H),
+    m_previous_font_size(global_font_size)
 {
-    m_previous_font_size = global_font_size;
-    m_start_width = W;
-    m_start_height = H;
-    m_start_label_offset = 0;
-    m_start_text_offset = 0;
 //    this->user_data((void*)(BOX_USER_DATA));
 }
 
