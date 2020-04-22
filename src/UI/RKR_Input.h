@@ -35,12 +35,13 @@ public:
     RKR_Input(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
+
     int m_start_label_offset;
     int m_start_text_offset;
 private:
 
-    int m_start_height;
     int m_start_width;
+    int m_start_height;
     int m_previous_font_size;
     void font_resize(int,int);
 };
