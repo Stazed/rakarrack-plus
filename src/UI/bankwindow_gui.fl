@@ -31,7 +31,7 @@ const std::vector<std::string> bank_submenu_paths
 };} {private global
 }
 
-widget_class BankWindowGui {open selected
+widget_class BankWindowGui {open
   xywh {90 89 800 600} type Double color 4 selection_color 7 resizable
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -171,10 +171,10 @@ if(ok)
 m_rgui->BankWin_Label((char *)v);
 m_rgui->Put_Loaded_Bank();
 unlight_preset(m_rkr->Selected_Preset);
-}} open
+}} open selected
     xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
-    code0 {o->m_start_label_offset = 4;}
-    code1 {o->m_start_text_offset = 4;}
+    code0 {o->set_label_offset(4);}
+    code1 {o->set_text_offset(4);}
     class RKR_Choice
   } {}
   Fl_Group ob {open

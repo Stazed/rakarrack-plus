@@ -126,8 +126,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   MIDIOctave->align(Fl_Align(FL_ALIGN_LEFT));
   MIDIOctave->when(FL_WHEN_CHANGED);
   MIDIOctave->menu(menu_MIDIOctave);
-  o->m_start_label_offset = -2; // 10 - 8
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_label_offset(-2);
+  o->set_text_offset(-1);
 } // RKR_Choice* MIDIOctave
 { RKR_Counter* o = Midi_out_Counter = new RKR_Counter(94, 4, 50, 15, "Channel");
   Midi_out_Counter->tooltip("Channel to send MIDI out.");

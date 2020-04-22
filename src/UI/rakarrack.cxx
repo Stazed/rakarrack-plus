@@ -2189,8 +2189,8 @@ void RKRGUI::make_window() {
         MetroBar->align(Fl_Align(FL_ALIGN_LEFT));
         MetroBar->when(FL_WHEN_RELEASE);
         o->menu(m_looper_bar->get_time_sig());
-        o->m_start_label_offset = -2; // 10 - 8
-        o->m_start_text_offset = -2; // 10 - 8
+        o->set_label_offset(-2);
+        o->set_text_offset(-2);
       } // RKR_Choice* MetroBar
       { RKR_Slider* o = Metro_Volume = new RKR_Slider(667, 100, 117, 11, "Volume");
         Metro_Volume->type(5);
@@ -2226,8 +2226,8 @@ void RKRGUI::make_window() {
         MetroSound->align(Fl_Align(FL_ALIGN_LEFT));
         MetroSound->when(FL_WHEN_RELEASE);
         o->menu(m_looper_ms->get_metronome_sound());
-        o->m_start_label_offset = -2; // 10 - 8
-        o->m_start_text_offset = -1; // 10 - 9
+        o->set_label_offset(-2);
+        o->set_text_offset(-1);
       } // RKR_Choice* MetroSound
       { RKR_Slider* o = Metro_Tempo = new RKR_Slider(667, 119, 117, 11, "Tempo");
         Metro_Tempo->type(5);
@@ -2580,7 +2580,7 @@ void RKRGUI::make_window() {
         T_SEL->align(Fl_Align(FL_ALIGN_LEFT));
         T_SEL->when(FL_WHEN_RELEASE);
         T_SEL->menu(menu_T_SEL);
-        o->m_start_text_offset = -1; // 10 - 9
+        o->set_text_offset(-1);
       } // RKR_Choice* T_SEL
       { RKR_Choice* o = T_SET = new RKR_Choice(714, 145, 76, 15, "Set");
         T_SET->box(FL_FLAT_BOX);
@@ -2597,7 +2597,7 @@ void RKRGUI::make_window() {
         T_SET->align(Fl_Align(FL_ALIGN_LEFT));
         T_SET->when(FL_WHEN_RELEASE);
         T_SET->menu(menu_T_SET);
-        o->m_start_text_offset = -1; // 10 - 9
+        o->set_text_offset(-1);
       } // RKR_Choice* T_SET
       { T_Apply = new RKR_Button(628, 172, 38, 15, "Apply");
         T_Apply->box(FL_UP_BOX);

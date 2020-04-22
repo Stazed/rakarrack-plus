@@ -348,7 +348,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_lfotype->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_text_offset(-1);
 } // RKR_Choice* synthfilter_lfotype
 { synthfilter_subs = new RKR_Check_Button(143, 63, 46, 15, "Sub");
   synthfilter_subs->tooltip("Subtract - Make output of filter negative");

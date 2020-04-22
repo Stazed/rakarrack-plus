@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -244,10 +244,10 @@ rkr->efx_Sequence->changepar(12,(int)o->value());}
   Fl_Choice seq_mode {
     label M
     user_data 12
-    callback {rkr->efx_Sequence->changepar(13,(int)o->value())}
+    callback {rkr->efx_Sequence->changepar(13,(int)o->value())} selected
     tooltip {Modulation Mode} xywh {90 169 62 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
-    code0 {o->m_start_label_offset = -1; // 10 - 9}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-1);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {
@@ -290,10 +290,10 @@ rkr->efx_Sequence->changepar(12,(int)o->value());}
   Fl_Choice seq_range {
     label R
     user_data 12
-    callback {rkr->efx_Sequence->changepar(14,(int)o->value())} selected
+    callback {rkr->efx_Sequence->changepar(14,(int)o->value())}
     tooltip {Step Adjustment Range} xywh {16 169 57 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
-    code0 {o->m_start_label_offset = -1; // 10 - 9}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-1);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {

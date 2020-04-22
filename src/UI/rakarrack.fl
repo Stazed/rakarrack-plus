@@ -314,7 +314,7 @@ class RKRGUI {open
       callback {is_modified();
 save_stat(0);
 
-Pexitprogram=1;} open
+Pexitprogram=1;} open selected
       xywh {55 97 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1192,8 +1192,8 @@ switch(rkr->M_Metro_Bar)
  }} open
           xywh {624 98 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(m_looper_bar->get_time_sig());}
-          code1 {o->m_start_label_offset = -2; // 10 - 8}
-          code2 {o->m_start_text_offset = -2; // 10 - 8}
+          code1 {o->set_label_offset(-2);}
+          code2 {o->set_text_offset(-2);}
           class RKR_Choice
         } {}
         Fl_Value_Slider Metro_Volume {
@@ -1226,8 +1226,8 @@ switch(rkr->M_Metro_Sound)
  }} open
           xywh {634 118 28 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(m_looper_ms->get_metronome_sound());}
-          code1 {o->m_start_label_offset = -2; // 10 - 8}
-          code2 {o->m_start_text_offset = -1; // 10 - 9}
+          code1 {o->set_label_offset(-2);}
+          code2 {o->set_text_offset(-1);}
           class RKR_Choice
         } {}
         Fl_Value_Slider Metro_Tempo {
@@ -1462,7 +1462,7 @@ Order->hide();}
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-//}} selected
+//}}
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
           code0 {o->set_label_offset(15);}
           class RKR_Button
@@ -1529,7 +1529,7 @@ TAP_LABEL->redraw_label();}
           user_data 12
           callback {rkr->Tap_Selection=(int)o->value();}
           xywh {600 145 87 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->m_start_text_offset = -1; // 10 - 9}
+          code0 {o->set_text_offset(-1);}
           class RKR_Choice
         } {
           MenuItem {} {
@@ -1558,7 +1558,7 @@ TAP_LABEL->redraw_label();}
           user_data 12
           callback {rkr->Tap_SetValue=(int)o->value();}
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
-          code0 {o->m_start_text_offset = -1; // 10 - 9}
+          code0 {o->set_text_offset(-1);}
           class RKR_Choice
         } {
           MenuItem {} {

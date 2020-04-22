@@ -191,8 +191,8 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());}
     user_data 12
     callback {rkr->efx_VaryBand->changepar(11,(int)o->value());}
     tooltip {Low Band Volume} xywh {11 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-    code0 {o->m_start_label_offset = -2; // 10 - 8}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-2);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {
@@ -217,8 +217,8 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());}
     user_data 12
     callback {rkr->efx_VaryBand->changepar(12,(int)o->value());}
     tooltip {Mid Band 1 Volume} xywh {50 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-    code0 {o->m_start_label_offset = -2; // 10 - 8}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-2);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {
@@ -243,8 +243,8 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());}
     user_data 12
     callback {rkr->efx_VaryBand->changepar(13,(int)o->value());}
     tooltip {Mid Band 2 Volume} xywh {90 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-    code0 {o->m_start_label_offset = -2; // 10 - 8}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-2);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {
@@ -269,8 +269,8 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());}
     user_data 12
     callback {rkr->efx_VaryBand->changepar(14,(int)o->value());}
     tooltip {High Band Volume} xywh {128 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
-    code0 {o->m_start_label_offset = -2; // 10 - 8}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-2);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {

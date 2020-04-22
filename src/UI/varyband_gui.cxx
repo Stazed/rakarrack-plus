@@ -447,8 +447,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_LB->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_LB->when(FL_WHEN_RELEASE);
   varyband_LB->menu(menu_varyband_LB);
-  o->m_start_label_offset = -2; // 10 - 8
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_label_offset(-2);
+  o->set_text_offset(-1);
 } // RKR_Choice* varyband_LB
 { RKR_Choice* o = varyband_MB1 = new RKR_Choice(50, 164, 27, 16, "M");
   varyband_MB1->tooltip("Mid Band 1 Volume");
@@ -466,8 +466,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_MB1->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_MB1->when(FL_WHEN_RELEASE);
   varyband_MB1->menu(menu_varyband_MB1);
-  o->m_start_label_offset = -2; // 10 - 8
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_label_offset(-2);
+  o->set_text_offset(-1);
 } // RKR_Choice* varyband_MB1
 { RKR_Choice* o = varyband_MB2 = new RKR_Choice(90, 164, 27, 16, "M");
   varyband_MB2->tooltip("Mid Band 2 Volume");
@@ -485,8 +485,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_MB2->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_MB2->when(FL_WHEN_RELEASE);
   varyband_MB2->menu(menu_varyband_MB2);
-  o->m_start_label_offset = -2; // 10 - 8
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_label_offset(-2);
+  o->set_text_offset(-1);
 } // RKR_Choice* varyband_MB2
 { RKR_Choice* o = varyband_HB = new RKR_Choice(128, 164, 27, 16, "H");
   varyband_HB->tooltip("High Band Volume");
@@ -504,8 +504,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_HB->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_HB->when(FL_WHEN_RELEASE);
   varyband_HB->menu(menu_varyband_HB);
-  o->m_start_label_offset = -2; // 10 - 8
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_label_offset(-2);
+  o->set_text_offset(-1);
 } // RKR_Choice* varyband_HB
 position(X, Y);
 end();

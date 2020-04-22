@@ -270,8 +270,8 @@ this->when(FL_WHEN_RELEASE);
   CH_UB->callback((Fl_Callback*)cb_CH_UB);
   CH_UB->align(Fl_Align(FL_ALIGN_LEFT));
   CH_UB->when(FL_WHEN_RELEASE_ALWAYS);
-  o->m_start_label_offset = 4;
-  o->m_start_text_offset = 4;
+  o->set_label_offset(4);
+  o->set_text_offset(4);
 } // RKR_Choice* CH_UB
 { ob = new Fl_Group(0, 60, 800, 540);
   ob->labelsize(18);

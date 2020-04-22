@@ -153,7 +153,7 @@ rkr->efx_Synthfilter->changepar(3,(int)o->value());}
 rkr->efx_Synthfilter->changepar(4,(int)o->value());} selected
     xywh {65 63 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {}
   Fl_Check_Button synthfilter_subs {

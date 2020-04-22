@@ -963,8 +963,8 @@ this->when(FL_WHEN_RELEASE);
       scheme_ch->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       scheme_ch->when(FL_WHEN_RELEASE);
       scheme_ch->menu(menu_scheme_ch);
-      o->m_start_label_offset = 3; // 10 - 13
-      o->m_start_text_offset = 2; // 10 - 12
+      o->set_label_offset(3);
+      o->set_text_offset(2);
     } // RKR_Choice* scheme_ch
     { Font_Bro = new RKR_Browser(30, 100, 400, 225, "Font");
       Font_Bro->type(1);
@@ -1259,7 +1259,7 @@ this->when(FL_WHEN_RELEASE);
       Upr_Amo->align(Fl_Align(FL_ALIGN_LEFT));
       Upr_Amo->when(FL_WHEN_RELEASE);
       Upr_Amo->menu(menu_Upr_Amo);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Upr_Amo
     { RKR_Choice* o = Upr_Qual = new RKR_Choice(252, 139, 72, 18, "Up");
       Upr_Qual->box(FL_FLAT_BOX);
@@ -1276,7 +1276,7 @@ this->when(FL_WHEN_RELEASE);
       Upr_Qual->align(Fl_Align(FL_ALIGN_LEFT));
       Upr_Qual->when(FL_WHEN_RELEASE);
       Upr_Qual->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Upr_Qual
     { RKR_Choice* o = Downr_Qual = new RKR_Choice(364, 139, 73, 18, "Down");
       Downr_Qual->box(FL_FLAT_BOX);
@@ -1293,7 +1293,7 @@ this->when(FL_WHEN_RELEASE);
       Downr_Qual->align(Fl_Align(FL_ALIGN_LEFT));
       Downr_Qual->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Downr_Qual
     { RKR_Box* o = loop_Label = new RKR_Box(30, 170, 136, 17, "Looper Size Seconds");
       loop_Label->box(FL_NO_BOX);
@@ -1389,7 +1389,7 @@ this->when(FL_WHEN_RELEASE);
       Ste_Qual->align(Fl_Align(FL_ALIGN_RIGHT));
       Ste_Qual->when(FL_WHEN_RELEASE);
       Ste_Qual->menu(menu_Ste_Qual);
-      o->m_start_label_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Choice* Ste_Qual
     { RKR_Box* o = Voc_Band_Label = new RKR_Box(30, 222, 136, 17, "Vocoder Bands");
       Voc_Band_Label->box(FL_NO_BOX);
@@ -1602,7 +1602,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Har_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Har_Down_Qua
     { RKR_Choice* o = Har_Up_Qua = new RKR_Choice(400, 336, 72, 18, "Up");
       Har_Up_Qua->box(FL_FLAT_BOX);
@@ -1619,7 +1619,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Har_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Har_Up_Qua
     { RKR_Box* o = Rev_Label = new RKR_Box(30, 359, 156, 17, "Reverbtron Downsample");
       Rev_Label->box(FL_NO_BOX);
@@ -1665,7 +1665,7 @@ this->when(FL_WHEN_RELEASE);
       Rev_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Rev_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Rev_Down_Qua
     { RKR_Choice* o = Rev_Up_Qua = new RKR_Choice(400, 359, 72, 18, "Up");
       Rev_Up_Qua->box(FL_FLAT_BOX);
@@ -1682,7 +1682,7 @@ this->when(FL_WHEN_RELEASE);
       Rev_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Rev_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Rev_Up_Qua
     { RKR_Box* o = con_Label = new RKR_Box(30, 382, 156, 17, "Convolotron Downsample");
       con_Label->box(FL_NO_BOX);
@@ -1728,7 +1728,7 @@ this->when(FL_WHEN_RELEASE);
       Con_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Con_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Con_Down_Qua
     { RKR_Choice* o = Con_Up_Qua = new RKR_Choice(400, 382, 72, 18, "Up");
       Con_Up_Qua->box(FL_FLAT_BOX);
@@ -1745,7 +1745,7 @@ this->when(FL_WHEN_RELEASE);
       Con_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Con_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Con_Up_Qua
     { RKR_Box* o = seq_Label = new RKR_Box(30, 405, 156, 17, "Sequence Downsample");
       seq_Label->box(FL_NO_BOX);
@@ -1791,7 +1791,7 @@ this->when(FL_WHEN_RELEASE);
       Seq_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Seq_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Seq_Down_Qua
     { RKR_Choice* o = Seq_Up_Qua = new RKR_Choice(400, 405, 72, 18, "Up");
       Seq_Up_Qua->box(FL_FLAT_BOX);
@@ -1808,7 +1808,7 @@ this->when(FL_WHEN_RELEASE);
       Seq_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Seq_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Seq_Up_Qua
     { RKR_Box* o = shi_Label = new RKR_Box(30, 428, 156, 17, "Shifter Downsample");
       shi_Label->box(FL_NO_BOX);
@@ -1854,7 +1854,7 @@ this->when(FL_WHEN_RELEASE);
       Shi_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Shi_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Shi_Down_Qua
     { RKR_Choice* o = Shi_Up_Qua = new RKR_Choice(400, 428, 72, 18, "Up");
       Shi_Up_Qua->box(FL_FLAT_BOX);
@@ -1871,7 +1871,7 @@ this->when(FL_WHEN_RELEASE);
       Shi_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Shi_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Shi_Up_Qua
     { RKR_Box* o = Voc_Label = new RKR_Box(30, 452, 156, 17, "Vocoder Downsample");
       Voc_Label->box(FL_NO_BOX);
@@ -1917,7 +1917,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Voc_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Voc_Down_Qua
     { RKR_Choice* o = Voc_Up_Qua = new RKR_Choice(400, 452, 72, 18, "Up");
       Voc_Up_Qua->box(FL_FLAT_BOX);
@@ -1934,7 +1934,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Voc_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Voc_Up_Qua
     { RKR_Box* o = Ste_Label = new RKR_Box(30, 477, 156, 17, "StereoHarm Downsample");
       Ste_Label->box(FL_NO_BOX);
@@ -1980,7 +1980,7 @@ this->when(FL_WHEN_RELEASE);
       Ste_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Ste_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Ste_Down_Qua
     { RKR_Choice* o = Ste_Up_Qua = new RKR_Choice(400, 477, 72, 18, "Up");
       Ste_Up_Qua->box(FL_FLAT_BOX);
@@ -1997,7 +1997,7 @@ this->when(FL_WHEN_RELEASE);
       Ste_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Ste_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Ste_Up_Qua
     { RKR_Box* o = Wave_Label = new RKR_Box(30, 527, 156, 17, "Waveshape Downsample");
       Wave_Label->box(FL_NO_BOX);
@@ -2043,7 +2043,7 @@ this->when(FL_WHEN_RELEASE);
       Wave_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Wave_Down_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Wave_Down_Qua
     { RKR_Choice* o = Wave_Up_Qua = new RKR_Choice(400, 527, 72, 18, "Up");
       Wave_Up_Qua->box(FL_FLAT_BOX);
@@ -2060,7 +2060,7 @@ this->when(FL_WHEN_RELEASE);
       Wave_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
       Wave_Up_Qua->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
-      o->m_start_label_offset = 1;
+      o->set_label_offset(1);
     } // RKR_Choice* Wave_Up_Qua
     AUDIO_SET->end();
   } // Fl_Group* AUDIO_SET
@@ -2514,16 +2514,16 @@ void SettingsWindowGui::make_table_window() {
             cb->add("U");
             cb->user_data((void *) (c_bank_used + y));
             cb->callback((Fl_Callback *)m_rgui->bank_click);
-            cb->m_start_label_offset = 4;
-            cb->m_start_text_offset = 4;
+            cb->set_label_offset(4);
+            cb->set_text_offset(4);
       
             RKR_Choice* cp = new RKR_Choice(225,y*25+25,130,20);
             cp->copy_label("Preset");
             cp->labelcolor(FL_WHITE);
             cp->user_data((void *) (c_preset_used + y));
             cp->callback((Fl_Callback *)m_rgui->p_click);
-            cp->m_start_label_offset = 4;
-            cp->m_start_text_offset = 4;
+            cp->set_label_offset(4);
+            cp->set_text_offset(4);
         }
       
         scroll->end();

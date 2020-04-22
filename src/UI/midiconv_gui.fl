@@ -15,14 +15,14 @@ decl {\#include "RKR_Counter.h"} {public global
 }
 
 widget_class {this->m_rgui = NULL; this->m_rkr = NULL;} MidiGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1389 231 275 50} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
   code3 {this->m_rgui = NULL; this->m_rkr = NULL;} visible position_relative
 } {
-  Function {initialize(RKR* _rkr, RKRGUI* _rgui)} {open C return_type void
+  Function {initialize(RKR* _rkr, RKRGUI* _rgui)} {C return_type void
   } {
     code {m_rkr = _rkr;
 m_rgui= _rgui;} {}
@@ -76,8 +76,8 @@ m_rgui= _rgui;} {}
 
 }}
     tooltip {Adjust MIDI note out by octave.} xywh {107 31 37 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 when 1 textsize 10 textcolor 7
-    code0 {o->m_start_label_offset = -2; // 10 - 8}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-2);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {
@@ -138,7 +138,7 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
   }
   Fl_Box MIDI_LABEL {
     label MIDI
-    user_data 7 selected
+    user_data 7
     xywh {4 32 44 14} labelfont 1 labelcolor 7 when 0
     class RKR_Box
   }

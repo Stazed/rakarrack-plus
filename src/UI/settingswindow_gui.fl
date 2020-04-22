@@ -58,7 +58,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -103,8 +103,8 @@ break;
 
 }}
         xywh {30 59 88 20} down_box BORDER_BOX labelsize 13 labelcolor 7 align 5 textsize 12 textcolor 7
-        code0 {o->m_start_label_offset = 3; // 10 - 13}
-        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(3);}
+        code1 {o->set_text_offset(2);}
         class RKR_Choice
       } {
         MenuItem {} {
@@ -316,7 +316,7 @@ m_rgui->Show_Next_Time();}
 
 m_rgui->Show_Next_Time();}
         xywh {180 139 47 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
-        code0 {o->m_start_label_offset = 1;}
+        code0 {o->set_label_offset(1);}
         class RKR_Choice
       } {
         MenuItem {} {
@@ -370,7 +370,7 @@ m_rgui->Show_Next_Time();}
 
 m_rgui->Show_Next_Time();}
         xywh {252 139 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
-        code0 {o->m_start_label_offset = 1;}
+        code0 {o->set_label_offset(1);}
         class RKR_Choice
       } {
         MenuItem {} {
@@ -401,7 +401,7 @@ m_rgui->Show_Next_Time();}
 m_rgui->Show_Next_Time();}
         xywh {364 139 73 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box loop_Label {
@@ -505,7 +505,7 @@ switch(i)
 
 m_rgui->Show_Next_Time();}
         xywh {223 195 47 18} down_box BORDER_BOX labelsize 12 labelcolor 7 align 8 textsize 10 textcolor 7
-        code0 {o->m_start_label_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Choice
       } {
         MenuItem {} {
@@ -814,7 +814,7 @@ m_rgui->Show_Next_Time();}
 m_rgui->Show_Next_Time();} open
         xywh {300 336 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Har_Up_Qua {
@@ -823,7 +823,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {400 336 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box Rev_Label {
@@ -846,7 +846,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();}
         xywh {300 359 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Rev_Up_Qua {
@@ -855,7 +855,7 @@ m_rgui->Show_Next_Time();}
 m_rgui->Show_Next_Time();} open
         xywh {400 359 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box con_Label {
@@ -878,7 +878,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {300 382 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Con_Up_Qua {
@@ -887,7 +887,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {400 382 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box seq_Label {
@@ -910,7 +910,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {300 405 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Seq_Up_Qua {
@@ -919,7 +919,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {400 405 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box shi_Label {
@@ -942,7 +942,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {300 428 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Shi_Up_Qua {
@@ -951,7 +951,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {400 428 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box Voc_Label {
@@ -975,7 +975,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {300 452 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Voc_Up_Qua {
@@ -984,7 +984,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {400 452 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box Ste_Label {
@@ -1007,7 +1007,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {300 477 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Ste_Up_Qua {
@@ -1016,7 +1016,7 @@ m_rgui->Show_Next_Time();} open
 m_rgui->Show_Next_Time();} open
         xywh {400 477 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Box Wave_Label {
@@ -1059,7 +1059,7 @@ m_rgui->Show_Next_Time();}
 m_rgui->Show_Next_Time();}
         xywh {300 527 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
       Fl_Choice Wave_Up_Qua {
@@ -1068,7 +1068,7 @@ m_rgui->Show_Next_Time();}
 m_rgui->Show_Next_Time();}
         xywh {400 527 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
-        code1 {o->m_start_label_offset = 1;}
+        code1 {o->set_label_offset(1);}
         class RKR_Choice
       } {}
     }
@@ -1343,16 +1343,16 @@ m_rgui->Scan_Bank_Dir();}
           cb->add("U");
           cb->user_data((void *) (c_bank_used + y));
           cb->callback((Fl_Callback *)m_rgui->bank_click);
-          cb->m_start_label_offset = 4;
-          cb->m_start_text_offset = 4;
+          cb->set_label_offset(4);
+          cb->set_text_offset(4);
     
           RKR_Choice* cp = new RKR_Choice(225,y*25+25,130,20);
           cp->copy_label("Preset");
           cp->labelcolor(FL_WHITE);
           cp->user_data((void *) (c_preset_used + y));
           cp->callback((Fl_Callback *)m_rgui->p_click);
-          cp->m_start_label_offset = 4;
-          cp->m_start_text_offset = 4;
+          cp->set_label_offset(4);
+          cp->set_text_offset(4);
       }
     
       scroll->end();
@@ -1374,7 +1374,8 @@ m_rgui->Scan_Bank_Dir();}
         (float) scroll->get_start_y() * H_midi_set_ratio,
         ((float) scroll->get_start_width() * W_midi_set_ratio),
         (float) scroll->get_start_height() * H_midi_set_ratio
-      );} {}
+      );} {selected
+    }
   }
   Function {fill_mptable(int num,int value)} {} {
     code {// Fill settings scroll

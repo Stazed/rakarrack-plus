@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -180,8 +180,8 @@ rkr->efx_Shifter->changepar(9,(int)o->value());}
     user_data 12
     callback {rkr->efx_Shifter->changepar(8,(int)o->value())} selected
     xywh {43 165 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
-    code0 {o->m_start_label_offset = -1; // 10 - 9}
-    code1 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_label_offset(-1);}
+    code1 {o->set_text_offset(-1);}
     class RKR_Choice
   } {
     MenuItem {} {
