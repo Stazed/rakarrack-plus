@@ -26,13 +26,14 @@
 #include "RKR_Box.h"
 #include "../global.h"
 
-RKR_Box::RKR_Box(int X, int Y, int W, int H, const char *label) : Fl_Box(X, Y, W, H, label)
+RKR_Box::RKR_Box(int X, int Y, int W, int H, const char *label) :
+    Fl_Box(X, Y, W, H, label),
+    m_start_x(X),
+    m_start_y(Y),
+    m_start_width(W),
+    m_start_height(H),
+    m_previous_font_size(global_font_size)
 {
-    m_previous_font_size = global_font_size;
-    m_start_x = X;
-    m_start_y = Y;
-    m_start_width = W;
-    m_start_height = H;
     m_start_font_offset = 0;
     this->user_data((void*)(BOX_USER_DATA));
 }
