@@ -1200,7 +1200,7 @@ switch(rkr->M_Metro_Bar)
           label Volume
           callback {rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;}
           xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 maximum 100 step 1 value 50 textcolor 7
-          code0 {o->m_start_label_offset = -2; // 10 - 8}
+          code0 {o->set_label_offset(-2);}
           code1 {o->shut_off_pixel_adjustment();}
           class RKR_Slider
         }
@@ -1235,7 +1235,7 @@ switch(rkr->M_Metro_Sound)
           callback {rkr->M_Metro_Tempo=(int)o->value();
 rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 20 maximum 340 step 1 value 100 textcolor 7
-          code0 {o->m_start_label_offset = -2; // 10 - 8}
+          code0 {o->set_label_offset(-2);}
           code1 {o->shut_off_pixel_adjustment();}
           class RKR_Slider
         }

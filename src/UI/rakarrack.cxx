@@ -2208,7 +2208,7 @@ void RKRGUI::make_window() {
         Metro_Volume->callback((Fl_Callback*)cb_Metro_Volume);
         Metro_Volume->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
         Metro_Volume->when(FL_WHEN_CHANGED);
-        o->m_start_label_offset = -2; // 10 - 8
+        o->set_label_offset(-2);
         o->shut_off_pixel_adjustment();
       } // RKR_Slider* Metro_Volume
       { RKR_Choice* o = MetroSound = new RKR_Choice(634, 118, 28, 16, "S");
@@ -2246,7 +2246,7 @@ void RKRGUI::make_window() {
         Metro_Tempo->callback((Fl_Callback*)cb_Metro_Tempo);
         Metro_Tempo->align(Fl_Align(FL_ALIGN_TOP_RIGHT));
         Metro_Tempo->when(FL_WHEN_CHANGED);
-        o->m_start_label_offset = -2; // 10 - 8
+        o->set_label_offset(-2);
         o->shut_off_pixel_adjustment();
       } // RKR_Slider* Metro_Tempo
       { Metro_Led = new Fl_Box(568, 90, 10, 10);

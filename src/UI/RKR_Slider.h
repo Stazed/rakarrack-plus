@@ -34,11 +34,13 @@ public:
     void draw();
     void resize(int,int,int,int);
     void shut_off_pixel_adjustment(){m_use_pixel_adjustment = false;};
+    void set_label_offset(int offset){m_label_offset = offset;};
+    void set_text_offset(int offset){m_text_offset = offset;};
 
-    int m_start_label_offset;
-    int m_start_text_offset;
 private:
 
+    int m_label_offset;
+    int m_text_offset;
     int m_start_width;
     int m_start_height;
     int m_previous_font_size;
