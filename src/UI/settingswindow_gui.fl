@@ -51,14 +51,13 @@ m_rgui= _rgui;} {}
     xywh {1 1 525 575}
   }
   Fl_Tabs STabs {
-    user_data 1 open
+    user_data 1 open selected
     xywh {0 0 530 580}
-    code0 {o->m_start_label_offset = 4; // 10 - 4}
     class RKR_Tabs
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
