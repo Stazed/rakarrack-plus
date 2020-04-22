@@ -1234,8 +1234,8 @@ else JackIn->deactivate();}
         label Username
         callback {m_rkr->UserRealName=(char*) o->value();}
         xywh {30 58 240 21} labelcolor 7 align 5 textcolor 7
-        code0 {o->m_start_label_offset = 4; // 10 - 14}
-        code1 {o->m_start_text_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
+        code1 {o->set_text_offset(4);}
         class RKR_Input
       }
       Fl_Check_Button MES_DIS {

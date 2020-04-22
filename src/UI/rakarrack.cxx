@@ -2422,7 +2422,7 @@ void RKRGUI::make_window() {
         WPreset_Name->callback((Fl_Callback*)cb_WPreset_Name);
         WPreset_Name->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
         WPreset_Name->when(FL_WHEN_RELEASE);
-        o->m_start_text_offset = 14; // (default 10) 10 - 24 = 14
+        o->set_text_offset(14);
         o->maximum_size(22);
       } // RKR_Input* WPreset_Name
       { RKR_Counter* o = Preset_Counter = new RKR_Counter(174, 106, 60, 20, "Preset");

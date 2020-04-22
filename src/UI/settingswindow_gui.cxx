@@ -2362,8 +2362,8 @@ this->when(FL_WHEN_RELEASE);
       Username->callback((Fl_Callback*)cb_Username);
       Username->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       Username->when(FL_WHEN_RELEASE);
-      o->m_start_label_offset = 4; // 10 - 14
-      o->m_start_text_offset = 4; // 10 - 14
+      o->set_label_offset(4);
+      o->set_text_offset(4);
     } // RKR_Input* Username
     { RKR_Check_Button* o = MES_DIS = new RKR_Check_Button(30, 90, 16, 16, "Disable Warnings    ");
       MES_DIS->box(FL_NO_BOX);
