@@ -1096,7 +1096,7 @@ this->when(FL_WHEN_RELEASE);
       K_C->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* K_C
-    { RKR_Check_Button* o = Enable_Back = new RKR_Check_Button(30, 415, 23, 20, "Enable Background Image");
+    { RKR_Check_Button* o = Enable_Back = new RKR_Check_Button(30, 415, 16, 16, "Enable Background Image");
       Enable_Back->box(FL_NO_BOX);
       Enable_Back->down_box(FL_DOWN_BOX);
       Enable_Back->color(FL_BACKGROUND_COLOR);
@@ -1137,7 +1137,7 @@ this->when(FL_WHEN_RELEASE);
       BI_Browser->when(FL_WHEN_RELEASE);
       o->m_start_font_offset = 4; // 10 - 14
     } // RKR_Button* BI_Browser
-    { RKR_Check_Button* o = Enable_DeacHide = new RKR_Check_Button(30, 500, 23, 20, "Hide Unused Effect Widgets");
+    { RKR_Check_Button* o = Enable_DeacHide = new RKR_Check_Button(30, 500, 16, 16, "Hide Unused Effect Widgets");
       Enable_DeacHide->box(FL_NO_BOX);
       Enable_DeacHide->down_box(FL_DOWN_BOX);
       Enable_DeacHide->color(FL_BACKGROUND_COLOR);
@@ -1151,7 +1151,7 @@ this->when(FL_WHEN_RELEASE);
       Enable_DeacHide->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* Enable_DeacHide
-    { RKR_Check_Button* o = Enable_Scale = new RKR_Check_Button(30, 525, 23, 20, "Set Main Window Scalable");
+    { RKR_Check_Button* o = Enable_Scale = new RKR_Check_Button(30, 525, 16, 16, "Set Main Window Scalable");
       Enable_Scale->box(FL_NO_BOX);
       Enable_Scale->down_box(FL_DOWN_BOX);
       Enable_Scale->color(FL_BACKGROUND_COLOR);
@@ -2075,7 +2075,7 @@ this->when(FL_WHEN_RELEASE);
     MIDI_SET->hide();
     { Fondo8 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo8
-    { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 18, 20, "Auto Connect MIDI In");
+    { RKR_Check_Button* o = D_A_Connect = new RKR_Check_Button(30, 38, 16, 16, "Auto Connect MIDI In");
       D_A_Connect->box(FL_NO_BOX);
       D_A_Connect->down_box(FL_DOWN_BOX);
       D_A_Connect->color(FL_BACKGROUND_COLOR);
@@ -2176,7 +2176,7 @@ this->when(FL_WHEN_RELEASE);
       wMIDI->labelcolor(FL_BACKGROUND2_COLOR);
       wMIDI->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       wMIDI->when(FL_WHEN_RELEASE);
-      { RKR_Check_Button* o = Mw0 = new RKR_Check_Button(35, 268, 18, 18, "Default");
+      { RKR_Check_Button* o = Mw0 = new RKR_Check_Button(35, 268, 16, 16, "Default");
         Mw0->type(102);
         Mw0->box(FL_NO_BOX);
         Mw0->down_box(FL_DOWN_BOX);
@@ -2191,7 +2191,7 @@ this->when(FL_WHEN_RELEASE);
         Mw0->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
       } // RKR_Check_Button* Mw0
-      { RKR_Check_Button* o = Mw1 = new RKR_Check_Button(119, 268, 18, 18, "MIDI Learn");
+      { RKR_Check_Button* o = Mw1 = new RKR_Check_Button(119, 268, 16, 16, "MIDI Learn");
         Mw1->type(102);
         Mw1->box(FL_NO_BOX);
         Mw1->down_box(FL_DOWN_BOX);
@@ -2209,7 +2209,7 @@ this->when(FL_WHEN_RELEASE);
       o->m_start_label_offset = 2; // 10 - 12
       wMIDI->end();
     } // RKR_Group* wMIDI
-    { RKR_Check_Button* o = AAssign = new RKR_Check_Button(30, 308, 16, 15, "Auto Assign MIDI Learn");
+    { RKR_Check_Button* o = AAssign = new RKR_Check_Button(30, 308, 16, 16, "Auto Assign MIDI Learn");
       AAssign->box(FL_NO_BOX);
       AAssign->down_box(FL_DOWN_BOX);
       AAssign->color(FL_BACKGROUND_COLOR);
@@ -2223,7 +2223,7 @@ this->when(FL_WHEN_RELEASE);
       AAssign->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* AAssign
-    { RKR_Check_Button* o = MTable = new RKR_Check_Button(30, 336, 16, 15, "MIDI Program Change Table");
+    { RKR_Check_Button* o = MTable = new RKR_Check_Button(30, 336, 16, 16, "MIDI Program Change Table");
       MTable->box(FL_NO_BOX);
       MTable->down_box(FL_DOWN_BOX);
       MTable->color(FL_BACKGROUND_COLOR);
@@ -2290,7 +2290,7 @@ this->when(FL_WHEN_RELEASE);
     JACK_SET->hide();
     { Fondo9 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo9
-    { RKR_Check_Button* o = D_J_Connect = new RKR_Check_Button(30, 45, 25, 20, "Auto Connect Out");
+    { RKR_Check_Button* o = D_J_Connect = new RKR_Check_Button(30, 45, 16, 16, "Auto Connect Out");
       D_J_Connect->box(FL_NO_BOX);
       D_J_Connect->down_box(FL_DOWN_BOX);
       D_J_Connect->color(FL_BACKGROUND_COLOR);
@@ -2319,7 +2319,7 @@ this->when(FL_WHEN_RELEASE);
       o->m_start_label_offset = 4; // 10 - 14
       o->m_start_text_offset = 4; // 10 - 14
     } // RKR_Browser* JackCo
-    { RKR_Check_Button* o = D_IJ_Connect = new RKR_Check_Button(30, 245, 25, 20, "Auto Connect In");
+    { RKR_Check_Button* o = D_IJ_Connect = new RKR_Check_Button(30, 245, 16, 16, "Auto Connect In");
       D_IJ_Connect->box(FL_NO_BOX);
       D_IJ_Connect->down_box(FL_DOWN_BOX);
       D_IJ_Connect->color(FL_BACKGROUND_COLOR);
@@ -2374,7 +2374,7 @@ this->when(FL_WHEN_RELEASE);
       o->m_start_label_offset = 4; // 10 - 14
       o->m_start_text_offset = 4; // 10 - 14
     } // RKR_Input* Username
-    { RKR_Check_Button* o = MES_DIS = new RKR_Check_Button(30, 90, 21, 20, "Disable Warnings    ");
+    { RKR_Check_Button* o = MES_DIS = new RKR_Check_Button(30, 90, 16, 16, "Disable Warnings    ");
       MES_DIS->box(FL_NO_BOX);
       MES_DIS->down_box(FL_DOWN_BOX);
       MES_DIS->color(FL_BACKGROUND_COLOR);
@@ -2388,7 +2388,7 @@ this->when(FL_WHEN_RELEASE);
       MES_DIS->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* MES_DIS
-    { RKR_Check_Button* o = T_TIMEOUT = new RKR_Check_Button(30, 110, 21, 20, "Tap Tempo Timeout");
+    { RKR_Check_Button* o = T_TIMEOUT = new RKR_Check_Button(30, 110, 16, 16, "Tap Tempo Timeout");
       T_TIMEOUT->box(FL_NO_BOX);
       T_TIMEOUT->down_box(FL_DOWN_BOX);
       T_TIMEOUT->color(FL_BACKGROUND_COLOR);
@@ -2402,7 +2402,7 @@ this->when(FL_WHEN_RELEASE);
       T_TIMEOUT->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* T_TIMEOUT
-    { RKR_Check_Button* o = ENA_TOOL = new RKR_Check_Button(30, 130, 21, 20, "Enable Tooltips       ");
+    { RKR_Check_Button* o = ENA_TOOL = new RKR_Check_Button(30, 130, 16, 16, "Enable Tooltips       ");
       ENA_TOOL->box(FL_NO_BOX);
       ENA_TOOL->down_box(FL_DOWN_BOX);
       ENA_TOOL->color(FL_BACKGROUND_COLOR);
