@@ -28,8 +28,8 @@
 
 RKR_Browser::RKR_Browser(int X, int Y, int W, int H, const char *label) :
     Fl_Browser(X, Y, W, H, label),
-    m_start_label_offset(0),
-    m_start_text_offset(0),
+    m_label_offset(4),      // default 14pt - (C_DEFAULT_FONT_SIZE + 4)
+    m_text_offset(4),       // default 14pt - (C_DEFAULT_FONT_SIZE + 4)
     m_start_width(W),
     m_start_height(H),
     m_previous_font_size(global_font_size)
@@ -55,12 +55,12 @@ void RKR_Browser::font_resize(int W, int H)
     float H_ratio = (float) H / m_start_height;
     float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
     
-    int label_font_size = global_font_size + m_start_label_offset;
+    int label_font_size = global_font_size + m_label_offset;
     int adjusted_label_size = (float) (label_font_size * resize_ratio);
 
     labelsize(adjusted_label_size);
 
-    int text_font_size = global_font_size + m_start_text_offset;
+    int text_font_size = global_font_size + m_text_offset;
     int adjusted_text_size = (float) (text_font_size * resize_ratio);
     
     textsize(adjusted_text_size);

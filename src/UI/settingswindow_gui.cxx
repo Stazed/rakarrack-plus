@@ -966,7 +966,7 @@ this->when(FL_WHEN_RELEASE);
       o->m_start_label_offset = 3; // 10 - 13
       o->m_start_text_offset = 2; // 10 - 12
     } // RKR_Choice* scheme_ch
-    { RKR_Browser* o = Font_Bro = new RKR_Browser(30, 100, 400, 225, "Font");
+    { Font_Bro = new RKR_Browser(30, 100, 400, 225, "Font");
       Font_Bro->type(1);
       Font_Bro->box(FL_NO_BOX);
       Font_Bro->color(FL_BACKGROUND2_COLOR);
@@ -978,8 +978,6 @@ this->when(FL_WHEN_RELEASE);
       Font_Bro->callback((Fl_Callback*)cb_Font_Bro);
       Font_Bro->align(Fl_Align(FL_ALIGN_TOP));
       Font_Bro->when(FL_WHEN_CHANGED);
-      o->m_start_label_offset = 4; // 10 - 14
-      o->m_start_text_offset = 4; // 10 - 14
     } // RKR_Browser* Font_Bro
     { RKR_Box* o = FSLabel = new RKR_Box(30, 333, 60, 17, "Font Size");
       FSLabel->box(FL_NO_BOX);
@@ -2089,22 +2087,19 @@ this->when(FL_WHEN_RELEASE);
       D_A_Connect->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* D_A_Connect
-    { RKR_Browser* o = BMidiIn = new RKR_Browser(30, 83, 190, 111, "ALSA Sequencer Ports");
+    { BMidiIn = new RKR_Browser(30, 83, 190, 111, "ALSA Sequencer Ports");
       BMidiIn->type(2);
       BMidiIn->box(FL_NO_BOX);
       BMidiIn->color(FL_BACKGROUND2_COLOR);
       BMidiIn->selection_color(FL_FOREGROUND_COLOR);
       BMidiIn->labeltype(FL_NORMAL_LABEL);
       BMidiIn->labelfont(0);
-      BMidiIn->labelsize(12);
+      BMidiIn->labelsize(14);
       BMidiIn->labelcolor(FL_BACKGROUND2_COLOR);
-      BMidiIn->textsize(12);
       BMidiIn->textcolor(FL_BACKGROUND2_COLOR);
       BMidiIn->callback((Fl_Callback*)cb_BMidiIn);
       BMidiIn->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       BMidiIn->when(FL_WHEN_RELEASE_ALWAYS);
-      o->m_start_label_offset = 2; // 10 - 12
-      o->m_start_text_offset = 2; // 10 - 12
     } // RKR_Browser* BMidiIn
     { RKR_Counter* o = Midi_In_Counter = new RKR_Counter(30, 210, 60, 24, "Effects Receive Channel");
       Midi_In_Counter->type(1);
@@ -2304,7 +2299,7 @@ this->when(FL_WHEN_RELEASE);
       D_J_Connect->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* D_J_Connect
-    { RKR_Browser* o = JackCo = new RKR_Browser(30, 85, 260, 140, "Output Ports");
+    { JackCo = new RKR_Browser(30, 85, 260, 140, "Output Ports");
       JackCo->type(3);
       JackCo->box(FL_NO_BOX);
       JackCo->color(FL_BACKGROUND2_COLOR);
@@ -2316,8 +2311,6 @@ this->when(FL_WHEN_RELEASE);
       JackCo->textcolor(FL_BACKGROUND2_COLOR);
       JackCo->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       JackCo->when(FL_WHEN_RELEASE_ALWAYS);
-      o->m_start_label_offset = 4; // 10 - 14
-      o->m_start_text_offset = 4; // 10 - 14
     } // RKR_Browser* JackCo
     { RKR_Check_Button* o = D_IJ_Connect = new RKR_Check_Button(30, 245, 16, 16, "Auto Connect In");
       D_IJ_Connect->box(FL_NO_BOX);
@@ -2333,7 +2326,7 @@ this->when(FL_WHEN_RELEASE);
       D_IJ_Connect->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* D_IJ_Connect
-    { RKR_Browser* o = JackIn = new RKR_Browser(30, 285, 260, 140, "Input Ports");
+    { JackIn = new RKR_Browser(30, 285, 260, 140, "Input Ports");
       JackIn->type(3);
       JackIn->box(FL_NO_BOX);
       JackIn->color(FL_BACKGROUND2_COLOR);
@@ -2345,8 +2338,6 @@ this->when(FL_WHEN_RELEASE);
       JackIn->textcolor(FL_BACKGROUND2_COLOR);
       JackIn->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       JackIn->when(FL_WHEN_RELEASE_ALWAYS);
-      o->m_start_label_offset = 4; // 10 - 14
-      o->m_start_text_offset = 4; // 10 - 14
     } // RKR_Browser* JackIn
     JACK_SET->end();
   } // Fl_Group* JACK_SET

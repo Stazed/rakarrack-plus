@@ -133,8 +133,6 @@ break;
         callback {m_rkr->font = (int)o->value()-1;
 m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
         xywh {30 100 400 225} type Select labelcolor 7 align 1 when 1
-        code0 {o->m_start_label_offset = 4; // 10 - 14}
-        code1 {o->m_start_text_offset = 4; // 10 - 14}
         class RKR_Browser
       }
       Fl_Box FSLabel {
@@ -1101,9 +1099,7 @@ strcpy(m_rkr->MID,o->text(valor));
 else return;
 o->select(valor,1);
 m_rkr->Conecta();}
-        xywh {30 83 190 111} type Hold selection_color 0 labelsize 12 labelcolor 7 align 5 textsize 12 textcolor 7
-        code0 {o->m_start_label_offset = 2; // 10 - 12}
-        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        xywh {30 83 190 111} type Hold selection_color 0 labelcolor 7 align 5 textcolor 7
         class RKR_Browser
       }
       Fl_Counter Midi_In_Counter {
@@ -1209,8 +1205,6 @@ else JackCo->deactivate();}
       Fl_Browser JackCo {
         label {Output Ports}
         xywh {30 85 260 140} type Multi selection_color 0 labelcolor 7 align 5 textcolor 7
-        code0 {o->m_start_label_offset = 4; // 10 - 14}
-        code1 {o->m_start_text_offset = 4; // 10 - 14}
         class RKR_Browser
       }
       Fl_Check_Button D_IJ_Connect {
@@ -1225,8 +1219,6 @@ else JackIn->deactivate();}
       Fl_Browser JackIn {
         label {Input Ports}
         xywh {30 285 260 140} type Multi selection_color 0 labelcolor 7 align 5 textcolor 7
-        code0 {o->m_start_label_offset = 4; // 10 - 14}
-        code1 {o->m_start_text_offset = 4; // 10 - 14}
         class RKR_Browser
       }
     }

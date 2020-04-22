@@ -30,7 +30,7 @@ m_rgui= _rgui;} {}
     xywh {1 1 640 480}
   }
   Fl_Box midi_learn {
-    label {MIDI Learn} selected
+    label {MIDI Learn}
     xywh {250 18 134 32} labelsize 23
     code0 {o->set_label_offset(13); // 10 - 23}
     class RKR_Box
@@ -39,7 +39,6 @@ m_rgui= _rgui;} {}
     user_data 99
     callback {m_rgui->DisAssigns();}
     xywh {10 58 201 348} type Hold textcolor 7
-    code0 {o->m_start_text_offset = 4; // 10 - 14}
     class RKR_Browser
   }
   Fl_Button GMM {
@@ -52,9 +51,8 @@ m_rkr->RControl=1;}
     code0 {o->m_start_font_offset = 4; // 10 - 14}
     class RKR_Button
   }
-  Fl_Browser TPresets {
+  Fl_Browser TPresets {selected
     xywh {430 61 201 348} type Hold when 3 textcolor 7
-    code0 {o->m_start_text_offset = 4; // 10 - 14}
     class RKR_Browser
   }
   Fl_Button CopyF {

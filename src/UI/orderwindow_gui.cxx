@@ -217,7 +217,7 @@ this->when(FL_WHEN_RELEASE);
   Avail_Bro->user_data((void*)(99));
   Avail_Bro->align(Fl_Align(FL_ALIGN_BOTTOM));
   Avail_Bro->when(FL_WHEN_RELEASE_ALWAYS);
-  o->m_start_text_offset = 8; // 10 - 18
+  o->set_text_offset(8);
 } // RKR_Browser* Avail_Bro
 { RKR_Button* o = Pon = new RKR_Button(200, 145, 50, 25, "@<->");
   Pon->box(FL_UP_BOX);
@@ -245,7 +245,7 @@ this->when(FL_WHEN_RELEASE);
   Order_Bro->textcolor(FL_BACKGROUND2_COLOR);
   Order_Bro->align(Fl_Align(FL_ALIGN_BOTTOM));
   Order_Bro->when(FL_WHEN_RELEASE_ALWAYS);
-  o->m_start_text_offset = 8; // 10 - 18
+  o->set_text_offset(8);
 } // RKR_Browser* Order_Bro
 { RKR_Button* o = Sube = new RKR_Button(442, 120, 50, 25, "@$2->");
   Sube->box(FL_UP_BOX);

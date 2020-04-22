@@ -28,7 +28,7 @@
 
 RKR_Box::RKR_Box(int X, int Y, int W, int H, const char *label) :
     Fl_Box(X, Y, W, H, label),
-    m_label_offset(4),     // default 14pt (10 + 4)
+    m_label_offset(4),     // default 14pt - (C_DEFAULT_FONT_SIZE + 4)
     m_start_x(X),
     m_start_y(Y),
     m_start_width(W),

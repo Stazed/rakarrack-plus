@@ -30,7 +30,7 @@ m_rgui= _rgui;} {}
     xywh {1 1 600 400}
   }
   Fl_Box O_TITLE {
-    label {Put Order in your Rack} selected
+    label {Put Order in your Rack}
     xywh {25 3 438 37} labelfont 1 labelsize 33 labelcolor 7
     code0 {o->set_label_offset(23);}
     class RKR_Box
@@ -38,7 +38,7 @@ m_rgui= _rgui;} {}
   Fl_Browser Avail_Bro {
     user_data 99
     xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
-    code0 {o->m_start_text_offset = 8; // 10 - 18}
+    code0 {o->set_text_offset(8);}
     class RKR_Browser
   }
   Fl_Button Pon {
@@ -60,9 +60,9 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
     code0 {o->m_start_font_offset = 8; // 10 - 18}
     class RKR_Button
   }
-  Fl_Browser Order_Bro {
+  Fl_Browser Order_Bro {selected
     xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
-    code0 {o->m_start_text_offset = 8; // 10 - 18}
+    code0 {o->set_text_offset(8);}
     class RKR_Browser
   }
   Fl_Button Sube {

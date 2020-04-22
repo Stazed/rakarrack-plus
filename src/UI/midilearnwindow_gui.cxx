@@ -225,7 +225,7 @@ this->when(FL_WHEN_RELEASE);
   midi_learn->when(FL_WHEN_RELEASE);
   o->set_label_offset(13); // 10 - 23
 } // RKR_Box* midi_learn
-{ RKR_Browser* o = Epar = new RKR_Browser(10, 58, 201, 348);
+{ Epar = new RKR_Browser(10, 58, 201, 348);
   Epar->type(2);
   Epar->box(FL_NO_BOX);
   Epar->color(FL_BACKGROUND2_COLOR);
@@ -238,7 +238,6 @@ this->when(FL_WHEN_RELEASE);
   Epar->callback((Fl_Callback*)cb_Epar, (void*)(99));
   Epar->align(Fl_Align(FL_ALIGN_BOTTOM));
   Epar->when(FL_WHEN_RELEASE_ALWAYS);
-  o->m_start_text_offset = 4; // 10 - 14
 } // RKR_Browser* Epar
 { RKR_Button* o = GMM = new RKR_Button(10, 445, 135, 30, "Get MIDI Message");
   GMM->box(FL_UP_BOX);
@@ -253,7 +252,7 @@ this->when(FL_WHEN_RELEASE);
   GMM->when(FL_WHEN_RELEASE);
   o->m_start_font_offset = 4; // 10 - 14
 } // RKR_Button* GMM
-{ RKR_Browser* o = TPresets = new RKR_Browser(430, 61, 201, 348);
+{ TPresets = new RKR_Browser(430, 61, 201, 348);
   TPresets->type(2);
   TPresets->box(FL_NO_BOX);
   TPresets->color(FL_BACKGROUND2_COLOR);
@@ -265,7 +264,6 @@ this->when(FL_WHEN_RELEASE);
   TPresets->textcolor(FL_BACKGROUND2_COLOR);
   TPresets->align(Fl_Align(FL_ALIGN_BOTTOM));
   TPresets->when(3);
-  o->m_start_text_offset = 4; // 10 - 14
 } // RKR_Browser* TPresets
 { RKR_Button* o = CopyF = new RKR_Button(430, 20, 95, 30, "Copy from: ");
   CopyF->box(FL_UP_BOX);
