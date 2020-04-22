@@ -1119,8 +1119,8 @@ this->when(FL_WHEN_RELEASE);
       BackFiname->textcolor(FL_BACKGROUND2_COLOR);
       BackFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       BackFiname->when(FL_WHEN_RELEASE);
-      o->m_start_label_offset = 2; // 10 - 12
-      o->m_start_text_offset = 4; // 10 - 14
+      o->set_label_offset(2);
+      o->set_text_offset(4);
     } // RKR_File_Input* BackFiname
     { RKR_Button* o = BI_Browser = new RKR_Button(427, 470, 65, 20, "Browse");
       BI_Browser->box(FL_UP_BOX);
@@ -2429,8 +2429,8 @@ this->when(FL_WHEN_RELEASE);
       BFiname->textcolor(FL_BACKGROUND2_COLOR);
       BFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       BFiname->when(FL_WHEN_RELEASE);
-      o->m_start_label_offset = 2; // 10 - 12
-      o->m_start_text_offset = 4; // 10 - 14
+      o->set_label_offset(2);
+      o->set_text_offset(4);
     } // RKR_File_Input* BFiname
     { RKR_Button* o = BF_Browser = new RKR_Button(415, 65, 65, 20, "Browse");
       BF_Browser->box(FL_UP_BOX);
@@ -2456,8 +2456,8 @@ this->when(FL_WHEN_RELEASE);
       Udir->textcolor(FL_BACKGROUND2_COLOR);
       Udir->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       Udir->when(FL_WHEN_RELEASE);
-      o->m_start_label_offset = 2; // 10 - 12
-      o->m_start_text_offset = 4; // 10 - 14
+      o->set_label_offset(2);
+      o->set_text_offset(4);
     } // RKR_File_Input* Udir
     { RKR_Button* o = UD_Browser = new RKR_Button(415, 135, 65, 20, "Browse");
       UD_Browser->box(FL_UP_BOX);
