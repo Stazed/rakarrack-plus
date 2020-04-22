@@ -28,12 +28,13 @@
 #include "RKR_Choice.h"
 #include "RKR_Box.h"
 
-RKR_Scroll::RKR_Scroll(int X, int Y, int W, int H, const char *label) : Fl_Scroll(X, Y, W, H, label)
+RKR_Scroll::RKR_Scroll(int X, int Y, int W, int H, const char *label) :
+    Fl_Scroll(X, Y, W, H, label),
+    m_start_x(X),
+    m_start_y(Y),
+    m_start_width(W),
+    m_start_height(H)
 {
-    m_start_x = X;
-    m_start_y = Y;
-    m_start_width = W;
-    m_start_height = H;
 }
 
 void RKR_Scroll::resize(int X, int Y, int W, int H)
