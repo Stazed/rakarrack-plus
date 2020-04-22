@@ -405,7 +405,7 @@ this->when(FL_WHEN_RELEASE);
   Order_DeacHide->callback((Fl_Callback*)cb_Order_DeacHide);
   Order_DeacHide->align(Fl_Align(FL_ALIGN_LEFT));
   Order_DeacHide->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 1; // 10 - 11
+  o->set_label_offset(2);
 } // RKR_Check_Button* Order_DeacHide
 { RKR_Button* o = ok_order = new RKR_Button(333, 349, 72, 26, "Ok");
   ok_order->box(FL_UP_BOX);

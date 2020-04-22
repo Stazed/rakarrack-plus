@@ -58,7 +58,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1 open
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -168,7 +168,7 @@ m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
         class RKR_Button
       }
       Fl_Box CLLabel {
-        label Colors
+        label Colors selected
         xywh {30 358 40 19} labelsize 13 labelcolor 7 align 20
         code0 {o->m_start_font_offset = 3; // 10 - 13}
         class RKR_Box
@@ -227,7 +227,7 @@ m_rgui->Background_Color_Change(back_color);}
         callback {m_rkr->EnableBackgroundImage=(int) o->value();
 m_rgui->PutBackground();}
         xywh {30 415 23 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_File_Input BackFiname {
@@ -256,7 +256,7 @@ m_rgui->PutBackground();}
         callback {m_rkr->deachide=(int) o->value();
   m_rgui->reordena();}
         xywh {30 500 23 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button Enable_Scale {
@@ -264,7 +264,7 @@ m_rgui->PutBackground();}
         callback {m_rkr->scalable=(int) o->value();
 m_rkr->change_scale = 1; // true}
         xywh {30 525 23 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
     }
@@ -280,28 +280,28 @@ m_rkr->change_scale = 1; // true}
         label {FX On at start}
         callback {m_rkr->init_state=(int) o->value();}
         xywh {30 40 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button Filter_DC {
         label {Filter Input DC Offset}
         callback {m_rkr->DC_Offset=(int) o->value();}
         xywh {30 60 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button Pre_Serve {
         label {Preserve Gain/Master when Preset change}
         callback {m_rkr->actuvol=(int) o->value();}
         xywh {30 80 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button Update_TAP {
         label {Update TapTempo when Preset change}
         callback {m_rkr->Tap_Updated = (int) o->value();}
         xywh {30 100 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button UPSAMPLE_C {
@@ -309,7 +309,7 @@ m_rkr->change_scale = 1; // true}
         callback {m_rkr->upsample=(int)o->value();
 m_rgui->Show_Next_Time();}
         xywh {30 140 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8 when 1
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Choice Upr_Amo {
@@ -589,14 +589,14 @@ m_rgui->Show_Next_Time();}
         label {Limiter before Output Volume}
         callback {m_rkr->flpos=(int)o->value();}
         xywh {30 118 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button DB6B {
         label {+6dB Final Limiter }
         callback {m_rkr->db6booster=(int)o->value();}
         xywh {240 118 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Box Calibration_Label {
@@ -1089,7 +1089,7 @@ m_rgui->Show_Next_Time();}
 if (m_rkr->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();}
         xywh {30 38 18 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Browser BMidiIn {
@@ -1141,7 +1141,7 @@ m_rkr->Conecta();}
           callback {m_rkr->MIDIway=0;
 m_rgui->ML_Menu->deactivate();}
           xywh {35 268 18 18} type Radio down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-          code0 {o->m_start_font_offset = 2; // 10 - 12}
+          code0 {o->set_label_offset(2);}
           class RKR_Check_Button
         }
         Fl_Check_Button Mw1 {
@@ -1149,7 +1149,7 @@ m_rgui->ML_Menu->deactivate();}
           callback {m_rkr->MIDIway=1;
 m_rgui->ML_Menu->activate();}
           xywh {119 268 18 18} type Radio down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-          code0 {o->m_start_font_offset = 2; // 10 - 12}
+          code0 {o->set_label_offset(2);}
           class RKR_Check_Button
         }
       }
@@ -1157,7 +1157,7 @@ m_rgui->ML_Menu->activate();}
         label {Auto Assign MIDI Learn}
         callback {m_rkr->autoassign=o->value();}
         xywh {30 308 16 15} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button MTable {
@@ -1166,7 +1166,7 @@ m_rgui->ML_Menu->activate();}
 if(m_rkr->midi_table) scroll->activate(); else 
 scroll->deactivate();}
         xywh {30 336 16 15} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Button {} {
@@ -1203,7 +1203,7 @@ scroll->deactivate();}
 if (m_rkr->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();}
         xywh {30 45 25 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Browser JackCo {
@@ -1219,7 +1219,7 @@ else JackCo->deactivate();}
 if (m_rkr->aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();}
         xywh {30 245 25 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Browser JackIn {
@@ -1250,14 +1250,14 @@ else JackIn->deactivate();}
         label {Disable Warnings    }
         callback {m_rkr->mess_dis=(int) o->value();}
         xywh {30 90 21 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button T_TIMEOUT {
         label {Tap Tempo Timeout}
         callback {m_rkr->t_timeout=(int) o->value();}
         xywh {30 110 21 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button ENA_TOOL {
@@ -1265,7 +1265,7 @@ else JackIn->deactivate();}
         callback {m_rkr->ena_tool=(int) o->value();
 Fl_Tooltip::enable(m_rkr->ena_tool);}
         xywh {30 130 21 20} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
-        code0 {o->m_start_font_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
     }

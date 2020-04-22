@@ -1391,9 +1391,9 @@ else
 {
  rkr->Bank_to_Preset(0);
  Put_Loaded();
-}}
+}} selected
           tooltip {Compare to bank preset - Shortcut 'P'} xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
-          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          code0 {o->set_label_offset(2);}
           class RKR_Light_Button
         }
         Fl_Button B_preset {
@@ -1758,7 +1758,7 @@ o->hide();} open
     } {}
     Fl_Window AboutWin {
       label {About Rakarrack-plus}
-      callback {o->hide();} open selected
+      callback {o->hide();} open
       xywh {575 380 375 280} type Double color 8 selection_color 7 hide
       code0 {\#include "aboutwindow_gui.h"}
       code1 {o->initialize(this);}

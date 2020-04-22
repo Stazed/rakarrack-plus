@@ -2402,7 +2402,7 @@ void RKRGUI::make_window() {
         Compare->callback((Fl_Callback*)cb_Compare, (void*)(7));
         Compare->align(Fl_Align(68|FL_ALIGN_INSIDE));
         Compare->when(FL_WHEN_CHANGED);
-        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+        o->set_label_offset(2);
       } // RKR_Light_Button* Compare
       { RKR_Button* o = B_preset = new RKR_Button(448, 50, 64, 18, "Bank");
         B_preset->tooltip("Open bank window - Shortcut \'B\'");

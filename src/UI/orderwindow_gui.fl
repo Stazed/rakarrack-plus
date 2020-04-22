@@ -15,7 +15,7 @@ decl {\#include "RKR_Check_Button.h"} {public global
 }
 
 widget_class OrderWindowGui {open
-  xywh {681 201 500 400} type Double color 4 resizable
+  xywh {143 143 500 400} type Double color 4 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -60,7 +60,7 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
     code0 {o->m_start_font_offset = 8; // 10 - 18}
     class RKR_Button
   }
-  Fl_Browser Order_Bro {selected
+  Fl_Browser Order_Bro {
     xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
     code0 {o->m_start_text_offset = 8; // 10 - 18}
     class RKR_Browser
@@ -180,7 +180,7 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
     label {Hide Unused Effect Widgets}
     callback {m_rkr->deachide=(int) o->value();}
     xywh {420 286 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
-    code0 {o->m_start_font_offset = 1; // 10 - 11}
+    code0 {o->set_label_offset(2);}
     class RKR_Check_Button
   }
   Fl_Button ok_order {

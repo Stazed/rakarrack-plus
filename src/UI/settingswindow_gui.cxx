@@ -1108,7 +1108,7 @@ this->when(FL_WHEN_RELEASE);
       Enable_Back->callback((Fl_Callback*)cb_Enable_Back);
       Enable_Back->align(Fl_Align(FL_ALIGN_RIGHT));
       Enable_Back->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* Enable_Back
     { RKR_File_Input* o = BackFiname = new RKR_File_Input(30, 455, 390, 40, "Background Image");
       BackFiname->box(FL_DOWN_BOX);
@@ -1149,7 +1149,7 @@ this->when(FL_WHEN_RELEASE);
       Enable_DeacHide->callback((Fl_Callback*)cb_Enable_DeacHide);
       Enable_DeacHide->align(Fl_Align(FL_ALIGN_RIGHT));
       Enable_DeacHide->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* Enable_DeacHide
     { RKR_Check_Button* o = Enable_Scale = new RKR_Check_Button(30, 525, 23, 20, "Set Main Window Scalable");
       Enable_Scale->box(FL_NO_BOX);
@@ -1163,7 +1163,7 @@ this->when(FL_WHEN_RELEASE);
       Enable_Scale->callback((Fl_Callback*)cb_Enable_Scale);
       Enable_Scale->align(Fl_Align(FL_ALIGN_RIGHT));
       Enable_Scale->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* Enable_Scale
     Look->end();
   } // Fl_Group* Look
@@ -1188,7 +1188,7 @@ this->when(FL_WHEN_RELEASE);
       INSTATE->callback((Fl_Callback*)cb_INSTATE);
       INSTATE->align(Fl_Align(FL_ALIGN_RIGHT));
       INSTATE->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Check_Button* INSTATE
     { RKR_Check_Button* o = Filter_DC = new RKR_Check_Button(30, 60, 16, 16, "Filter Input DC Offset");
       Filter_DC->box(FL_NO_BOX);
@@ -1202,7 +1202,7 @@ this->when(FL_WHEN_RELEASE);
       Filter_DC->callback((Fl_Callback*)cb_Filter_DC);
       Filter_DC->align(Fl_Align(FL_ALIGN_RIGHT));
       Filter_DC->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Check_Button* Filter_DC
     { RKR_Check_Button* o = Pre_Serve = new RKR_Check_Button(30, 80, 16, 16, "Preserve Gain/Master when Preset change");
       Pre_Serve->box(FL_NO_BOX);
@@ -1216,7 +1216,7 @@ this->when(FL_WHEN_RELEASE);
       Pre_Serve->callback((Fl_Callback*)cb_Pre_Serve);
       Pre_Serve->align(Fl_Align(FL_ALIGN_RIGHT));
       Pre_Serve->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Check_Button* Pre_Serve
     { RKR_Check_Button* o = Update_TAP = new RKR_Check_Button(30, 100, 16, 16, "Update TapTempo when Preset change");
       Update_TAP->box(FL_NO_BOX);
@@ -1230,7 +1230,7 @@ this->when(FL_WHEN_RELEASE);
       Update_TAP->callback((Fl_Callback*)cb_Update_TAP);
       Update_TAP->align(Fl_Align(FL_ALIGN_RIGHT));
       Update_TAP->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Check_Button* Update_TAP
     { RKR_Check_Button* o = UPSAMPLE_C = new RKR_Check_Button(30, 140, 16, 16, "Upsampling");
       UPSAMPLE_C->box(FL_NO_BOX);
@@ -1244,7 +1244,7 @@ this->when(FL_WHEN_RELEASE);
       UPSAMPLE_C->callback((Fl_Callback*)cb_UPSAMPLE_C);
       UPSAMPLE_C->align(Fl_Align(FL_ALIGN_RIGHT));
       UPSAMPLE_C->when(FL_WHEN_CHANGED);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Check_Button* UPSAMPLE_C
     { RKR_Choice* o = Upr_Amo = new RKR_Choice(180, 139, 47, 18, "Amount");
       Upr_Amo->box(FL_FLAT_BOX);
@@ -1434,7 +1434,7 @@ this->when(FL_WHEN_RELEASE);
       FLPosition->callback((Fl_Callback*)cb_FLPosition);
       FLPosition->align(Fl_Align(FL_ALIGN_RIGHT));
       FLPosition->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Check_Button* FLPosition
     { RKR_Check_Button* o = DB6B = new RKR_Check_Button(240, 118, 16, 16, "+6dB Final Limiter ");
       DB6B->box(FL_NO_BOX);
@@ -1448,7 +1448,7 @@ this->when(FL_WHEN_RELEASE);
       DB6B->callback((Fl_Callback*)cb_DB6B);
       DB6B->align(Fl_Align(FL_ALIGN_RIGHT));
       DB6B->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Check_Button* DB6B
     { RKR_Box* o = Calibration_Label = new RKR_Box(30, 252, 136, 17, "Tuner Calibration A4");
       Calibration_Label->box(FL_NO_BOX);
@@ -2087,7 +2087,7 @@ this->when(FL_WHEN_RELEASE);
       D_A_Connect->callback((Fl_Callback*)cb_D_A_Connect);
       D_A_Connect->align(Fl_Align(FL_ALIGN_RIGHT));
       D_A_Connect->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* D_A_Connect
     { RKR_Browser* o = BMidiIn = new RKR_Browser(30, 83, 190, 111, "ALSA Sequencer Ports");
       BMidiIn->type(2);
@@ -2189,7 +2189,7 @@ this->when(FL_WHEN_RELEASE);
         Mw0->callback((Fl_Callback*)cb_Mw0);
         Mw0->align(Fl_Align(FL_ALIGN_RIGHT));
         Mw0->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 2; // 10 - 12
+        o->set_label_offset(2);
       } // RKR_Check_Button* Mw0
       { RKR_Check_Button* o = Mw1 = new RKR_Check_Button(119, 268, 18, 18, "MIDI Learn");
         Mw1->type(102);
@@ -2204,7 +2204,7 @@ this->when(FL_WHEN_RELEASE);
         Mw1->callback((Fl_Callback*)cb_Mw1);
         Mw1->align(Fl_Align(FL_ALIGN_RIGHT));
         Mw1->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 2; // 10 - 12
+        o->set_label_offset(2);
       } // RKR_Check_Button* Mw1
       o->m_start_label_offset = 2; // 10 - 12
       wMIDI->end();
@@ -2221,7 +2221,7 @@ this->when(FL_WHEN_RELEASE);
       AAssign->callback((Fl_Callback*)cb_AAssign);
       AAssign->align(Fl_Align(FL_ALIGN_RIGHT));
       AAssign->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* AAssign
     { RKR_Check_Button* o = MTable = new RKR_Check_Button(30, 336, 16, 15, "MIDI Program Change Table");
       MTable->box(FL_NO_BOX);
@@ -2235,7 +2235,7 @@ this->when(FL_WHEN_RELEASE);
       MTable->callback((Fl_Callback*)cb_MTable);
       MTable->align(Fl_Align(FL_ALIGN_RIGHT));
       MTable->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* MTable
     { RKR_Button* o = new RKR_Button(254, 331, 70, 20, "Load");
       o->tooltip("Load program change table from file");
@@ -2302,7 +2302,7 @@ this->when(FL_WHEN_RELEASE);
       D_J_Connect->callback((Fl_Callback*)cb_D_J_Connect);
       D_J_Connect->align(Fl_Align(FL_ALIGN_RIGHT));
       D_J_Connect->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* D_J_Connect
     { RKR_Browser* o = JackCo = new RKR_Browser(30, 85, 260, 140, "Output Ports");
       JackCo->type(3);
@@ -2331,7 +2331,7 @@ this->when(FL_WHEN_RELEASE);
       D_IJ_Connect->callback((Fl_Callback*)cb_D_IJ_Connect);
       D_IJ_Connect->align(Fl_Align(FL_ALIGN_RIGHT));
       D_IJ_Connect->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* D_IJ_Connect
     { RKR_Browser* o = JackIn = new RKR_Browser(30, 285, 260, 140, "Input Ports");
       JackIn->type(3);
@@ -2386,7 +2386,7 @@ this->when(FL_WHEN_RELEASE);
       MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
       MES_DIS->align(Fl_Align(FL_ALIGN_RIGHT));
       MES_DIS->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* MES_DIS
     { RKR_Check_Button* o = T_TIMEOUT = new RKR_Check_Button(30, 110, 21, 20, "Tap Tempo Timeout");
       T_TIMEOUT->box(FL_NO_BOX);
@@ -2400,7 +2400,7 @@ this->when(FL_WHEN_RELEASE);
       T_TIMEOUT->callback((Fl_Callback*)cb_T_TIMEOUT);
       T_TIMEOUT->align(Fl_Align(FL_ALIGN_RIGHT));
       T_TIMEOUT->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* T_TIMEOUT
     { RKR_Check_Button* o = ENA_TOOL = new RKR_Check_Button(30, 130, 21, 20, "Enable Tooltips       ");
       ENA_TOOL->box(FL_NO_BOX);
@@ -2414,7 +2414,7 @@ this->when(FL_WHEN_RELEASE);
       ENA_TOOL->callback((Fl_Callback*)cb_ENA_TOOL);
       ENA_TOOL->align(Fl_Align(FL_ALIGN_RIGHT));
       ENA_TOOL->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 2; // 10 - 12
+      o->set_label_offset(2);
     } // RKR_Check_Button* ENA_TOOL
     MISC_SET->end();
   } // Fl_Group* MISC_SET

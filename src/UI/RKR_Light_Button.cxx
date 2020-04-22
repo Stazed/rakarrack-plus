@@ -28,7 +28,7 @@
 
 RKR_Light_Button::RKR_Light_Button(int X, int Y, int W, int H, const char *label) :
     Fl_Light_Button(X, Y, W, H, label),
-    m_start_font_offset(0),
+    m_start_label_offset(1), // 10 + 1 = 11 pt
     m_start_width(W),
     m_start_height(H),
     m_previous_font_size(global_font_size)
@@ -77,7 +77,7 @@ void RKR_Light_Button::font_resize(int W, int H)
     float H_ratio = (float) H / m_start_height;
     float resize_ratio = (W_ratio < H_ratio) ? W_ratio : H_ratio;
     
-    int font_size = global_font_size + m_start_font_offset;
+    int font_size = global_font_size + m_start_label_offset;
     int adjusted_label_size = (float) (font_size * resize_ratio);
     
     labelsize(adjusted_label_size);
