@@ -28,16 +28,16 @@ const std::vector<std::string> bank_submenu_paths
     "&File/&Close",
     "&Help/Help &Contents",
     "&Help/&About..."
-};} {selected private global
+};} {private global
 }
 
-widget_class BankWindowGui {open
-  xywh {90 89 800 600} type Double color 4 selection_color 7 hide resizable
+widget_class BankWindowGui {open selected
+  xywh {90 89 800 600} type Double color 4 selection_color 7 resizable
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
-  class Fl_Double_Window size_range {320 240 3200 2400}
+  class Fl_Double_Window size_range {320 240 3200 2400} visible
 } {
-  Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
+  Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {C return_type void
   } {
     code {m_rkr = _rkr;
 m_rgui= _rgui;} {}
@@ -136,7 +136,7 @@ m_rgui->put_icon(m_rgui->AboutWin);}
     user_data 77
     callback {m_rgui->L_B1->do_callback();}
     xywh {258 14 32 24} color 62 labelsize 10
-    code0 {o->m_start_font_offset = 2;}
+    code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B2 {
@@ -144,7 +144,7 @@ m_rgui->put_icon(m_rgui->AboutWin);}
     user_data 77
     callback {m_rgui->L_B2->do_callback();}
     xywh {298 14 32 24} color 62 labelsize 10
-    code0 {o->m_start_font_offset = 2;}
+    code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B3 {
@@ -152,7 +152,7 @@ m_rgui->put_icon(m_rgui->AboutWin);}
     user_data 77
     callback {m_rgui->L_B3->do_callback();}
     xywh {338 14 32 24} color 62 labelsize 10
-    code0 {o->m_start_font_offset = 2;}
+    code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B4 {
@@ -160,7 +160,7 @@ m_rgui->put_icon(m_rgui->AboutWin);}
     user_data 77
     callback {m_rgui->L_B4->do_callback();}
     xywh {378 14 32 24} color 62 labelsize 10
-    code0 {o->m_start_font_offset = 2;}
+    code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Choice CH_UB {
@@ -186,8 +186,7 @@ unlight_preset(m_rkr->Selected_Preset);
 CH_UB->add((const char *)nombre, 0, (Fl_Callback *)cb_CH_UB, (void *)&m_bank_menu.back()[0], 0);
 CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
   }
-  Function {make_window_banks()} {open
-  } {
+  Function {make_window_banks()} {} {
     code {int button_w = 176;
   int button_h = 32;
   float w_ratio = (float) w()/800;
@@ -214,13 +213,13 @@ CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
               butX->box(FL_UP_BOX);
               butX->selection_color(leds_color);
               butX->labelcolor(label_color);
-              butX->labelsize(14);
+              butX->labelsize(15);
               butX->align(68|FL_ALIGN_INSIDE);
               butX->user_data((void*) (num));
               butX->value(0);
               butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
               butX->callback((Fl_Callback *)m_rgui->preset_click);
-              butX->m_start_font_offset = 5;
+              butX->set_label_offset(5);
               butX->set_start_width(button_w);
               butX->set_start_height(button_h);;
               ob->add(butX);

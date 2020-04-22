@@ -216,7 +216,7 @@ this->when(FL_WHEN_RELEASE);
   B_B1->callback((Fl_Callback*)cb_B_B1, (void*)(77));
   B_B1->align(Fl_Align(FL_ALIGN_CENTER));
   B_B1->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 2;
+  o->set_label_offset(2);
 } // RKR_Button* B_B1
 { RKR_Button* o = B_B2 = new RKR_Button(298, 14, 32, 24, "2");
   B_B2->box(FL_UP_BOX);
@@ -229,7 +229,7 @@ this->when(FL_WHEN_RELEASE);
   B_B2->callback((Fl_Callback*)cb_B_B2, (void*)(77));
   B_B2->align(Fl_Align(FL_ALIGN_CENTER));
   B_B2->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 2;
+  o->set_label_offset(2);
 } // RKR_Button* B_B2
 { RKR_Button* o = B_B3 = new RKR_Button(338, 14, 32, 24, "3");
   B_B3->box(FL_UP_BOX);
@@ -242,7 +242,7 @@ this->when(FL_WHEN_RELEASE);
   B_B3->callback((Fl_Callback*)cb_B_B3, (void*)(77));
   B_B3->align(Fl_Align(FL_ALIGN_CENTER));
   B_B3->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 2;
+  o->set_label_offset(2);
 } // RKR_Button* B_B3
 { RKR_Button* o = B_B4 = new RKR_Button(378, 14, 32, 24, "U");
   B_B4->box(FL_UP_BOX);
@@ -255,7 +255,7 @@ this->when(FL_WHEN_RELEASE);
   B_B4->callback((Fl_Callback*)cb_B_B4, (void*)(77));
   B_B4->align(Fl_Align(FL_ALIGN_CENTER));
   B_B4->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 2;
+  o->set_label_offset(2);
 } // RKR_Button* B_B4
 { RKR_Choice* o = CH_UB = new RKR_Choice(549, 14, 117, 24, "User Banks       ");
   CH_UB->box(FL_FLAT_BOX);
@@ -321,13 +321,13 @@ void BankWindowGui::make_window_banks() {
                 butX->box(FL_UP_BOX);
                 butX->selection_color(leds_color);
                 butX->labelcolor(label_color);
-                butX->labelsize(14);
+                butX->labelsize(15);
                 butX->align(68|FL_ALIGN_INSIDE);
                 butX->user_data((void*) (num));
                 butX->value(0);
                 butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
                 butX->callback((Fl_Callback *)m_rgui->preset_click);
-                butX->m_start_font_offset = 5;
+                butX->set_label_offset(5);
                 butX->set_start_width(button_w);
                 butX->set_start_height(button_h);;
                 ob->add(butX);

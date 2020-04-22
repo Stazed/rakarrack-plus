@@ -1065,7 +1065,7 @@ rkr->cleanup_efx();
           callback {if(o->value()) rkr->booster = dB2rap(10);
 else rkr->booster=1.0f;}
           tooltip {+10 dB Booster - Shortcut 'F10'} xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
-          code0 {o->m_start_font_offset = -4; // (default 10) 10 - 6 = -4}
+          code0 {o->set_label_offset(-4);}
           class RKR_Button
         }
         Fl_Value_Slider Balance {
@@ -1337,7 +1337,7 @@ FillML();
 Prepare_Order();
 Put_Loaded();}
           tooltip {New preset - Shortcut 'N'} xywh {174 50 64 18} shortcut 0x6e color 62 labelsize 12
-          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          code0 {o->set_label_offset(2);}
           class RKR_Button
         }
         Fl_Button L_preset {
@@ -1350,7 +1350,7 @@ filename=fl_filename_setext(filename,".rkr");
 rkr->loadfile(filename);
 Put_Loaded();}
           tooltip {Open load preset window - Shortcut 'L'} xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
-          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          code0 {o->set_label_offset(2);}
           class RKR_Button
         }
         Fl_Button S_preset {
@@ -1364,7 +1364,7 @@ filename=fl_filename_setext(filename,EXT);
 \#undef EXT
 rkr->savefile(filename);}
           tooltip {Open save preset window - Shortcut 'S'} xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
-          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          code0 {o->set_label_offset(2);}
           class RKR_Button
         }
         Fl_Light_Button Compare {
@@ -1399,7 +1399,7 @@ Scan_Bank_Dir();
 else
 BankWindow->hide();}
           tooltip {Open bank window - Shortcut 'B'} xywh {448 50 64 18} shortcut 0x62 color 62 labelsize 12
-          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          code0 {o->set_label_offset(2);}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
@@ -1452,7 +1452,7 @@ put_icon(Order);
 else
 Order->hide();}
           tooltip {Open preset order window - Shortcut 'O'} xywh {247 132 195 24} shortcut 0x6f color 62 align 80 when 6
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+          code0 {o->set_label_offset(4);}
           class RKR_Button
         }
         Fl_Button Etit {
@@ -1462,9 +1462,9 @@ Order->hide();}
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-//}}
+//}} selected
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
-          code0 {o->m_start_font_offset = 15; // 10 - 25}
+          code0 {o->set_label_offset(15);}
           class RKR_Button
         }
         Fl_Box Analy {
@@ -1682,12 +1682,12 @@ T_DIS->value(rkr->TapTempo());
 UpdateTGUI();
 }}
           tooltip {Tap tempo set - Shortcut 'G'} xywh {671 165 38 23} shortcut 0x67 labelsize 12
-          code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+          code0 {o->set_label_offset(2);}
           class RKR_Button
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
-          user_data 7 selected
+          user_data 7
           xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
           class RKR_Box
         }

@@ -146,7 +146,7 @@ m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
         user_data 77
         callback {m_rgui->chfsize(global_font_size - 1);}
         xywh {95 330 30 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Button FSplus {
@@ -154,7 +154,7 @@ m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
         user_data 77
         callback {m_rgui->chfsize(global_font_size + 1);}
         xywh {130 330 30 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Button FSReset {
@@ -162,7 +162,7 @@ m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
         user_data 77
         callback {m_rgui->chfsize(C_DEFAULT_FONT_SIZE);}
         xywh {165 330 57 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Box CLLabel {
@@ -181,7 +181,7 @@ if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
 fore_color=fl_rgb_color(r,g,b);
 m_rgui->Buttons_Color_Change(fore_color);}
         xywh {30 380 90 25}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Button A_C {
@@ -193,7 +193,7 @@ if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
 m_rgui->Label_Color_Change(label_color);}
         xywh {130 380 90 25}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Button L_C {
@@ -205,7 +205,7 @@ if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
 leds_color=fl_rgb_color(r,g,b);
 m_rgui->Leds_Color_Change(leds_color);}
         xywh {230 380 90 25}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Button K_C {
@@ -217,7 +217,7 @@ if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
 back_color=fl_rgb_color(r,g,b);
 m_rgui->Background_Color_Change(back_color);}
         xywh {330 380 90 25}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Check_Button Enable_Back {
@@ -246,7 +246,7 @@ BackFiname->value(filename);
 strcpy(m_rkr->BackgroundImage,filename);
 m_rgui->PutBackground();}
         xywh {427 470 65 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Check_Button Enable_DeacHide {
@@ -1169,14 +1169,14 @@ scroll->deactivate();}
         label Load
         callback {m_rgui->Load_Midi_Program_Change_Table();}
         tooltip {Load program change table from file} xywh {254 331 70 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Button {} {
         label Save
         callback {m_rgui->Save_Midi_Program_Change_Table();}
         tooltip {Save current program change table to file} xywh {338 331 70 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_Scroll scroll {
@@ -1286,7 +1286,7 @@ filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
 strcpy(m_rkr->BankFilename,filename);}
         xywh {415 65 65 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
       Fl_File_Input Udir {
@@ -1306,7 +1306,7 @@ Udir->value(dir);
 strcpy(m_rkr->UDirFilename,dir);
 m_rgui->Scan_Bank_Dir();}
         xywh {415 135 65 20}
-        code0 {o->m_start_font_offset = 4; // 10 - 11}
+        code0 {o->set_label_offset(4);}
         class RKR_Button
       }
     }

@@ -1002,7 +1002,7 @@ this->when(FL_WHEN_RELEASE);
       FSless->callback((Fl_Callback*)cb_FSless, (void*)(77));
       FSless->align(Fl_Align(FL_ALIGN_CENTER));
       FSless->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* FSless
     { RKR_Button* o = FSplus = new RKR_Button(130, 330, 30, 20, "+");
       FSplus->box(FL_UP_BOX);
@@ -1015,7 +1015,7 @@ this->when(FL_WHEN_RELEASE);
       FSplus->callback((Fl_Callback*)cb_FSplus, (void*)(77));
       FSplus->align(Fl_Align(FL_ALIGN_CENTER));
       FSplus->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* FSplus
     { RKR_Button* o = FSReset = new RKR_Button(165, 330, 57, 20, "Reset");
       FSReset->box(FL_UP_BOX);
@@ -1028,7 +1028,7 @@ this->when(FL_WHEN_RELEASE);
       FSReset->callback((Fl_Callback*)cb_FSReset, (void*)(77));
       FSReset->align(Fl_Align(FL_ALIGN_CENTER));
       FSReset->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* FSReset
     { RKR_Box* o = CLLabel = new RKR_Box(30, 358, 40, 19, "Colors");
       CLLabel->box(FL_NO_BOX);
@@ -1053,7 +1053,7 @@ this->when(FL_WHEN_RELEASE);
       B_C->callback((Fl_Callback*)cb_B_C, (void*)(77));
       B_C->align(Fl_Align(FL_ALIGN_CENTER));
       B_C->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* B_C
     { RKR_Button* o = A_C = new RKR_Button(130, 380, 90, 25, "Labels");
       A_C->box(FL_UP_BOX);
@@ -1066,7 +1066,7 @@ this->when(FL_WHEN_RELEASE);
       A_C->callback((Fl_Callback*)cb_A_C, (void*)(77));
       A_C->align(Fl_Align(FL_ALIGN_CENTER));
       A_C->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* A_C
     { RKR_Button* o = L_C = new RKR_Button(230, 380, 90, 25, "Leds");
       L_C->box(FL_UP_BOX);
@@ -1079,7 +1079,7 @@ this->when(FL_WHEN_RELEASE);
       L_C->callback((Fl_Callback*)cb_L_C, (void*)(77));
       L_C->align(Fl_Align(FL_ALIGN_CENTER));
       L_C->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* L_C
     { RKR_Button* o = K_C = new RKR_Button(330, 380, 90, 25, "Background");
       K_C->box(FL_UP_BOX);
@@ -1092,7 +1092,7 @@ this->when(FL_WHEN_RELEASE);
       K_C->callback((Fl_Callback*)cb_K_C, (void*)(77));
       K_C->align(Fl_Align(FL_ALIGN_CENTER));
       K_C->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* K_C
     { RKR_Check_Button* o = Enable_Back = new RKR_Check_Button(30, 415, 16, 16, "Enable Background Image");
       Enable_Back->box(FL_NO_BOX);
@@ -1133,7 +1133,7 @@ this->when(FL_WHEN_RELEASE);
       BI_Browser->callback((Fl_Callback*)cb_BI_Browser, (void*)(77));
       BI_Browser->align(Fl_Align(FL_ALIGN_CENTER));
       BI_Browser->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* BI_Browser
     { RKR_Check_Button* o = Enable_DeacHide = new RKR_Check_Button(30, 500, 16, 16, "Hide Unused Effect Widgets");
       Enable_DeacHide->box(FL_NO_BOX);
@@ -2244,7 +2244,7 @@ this->when(FL_WHEN_RELEASE);
       o->callback((Fl_Callback*)cb_Load);
       o->align(Fl_Align(FL_ALIGN_CENTER));
       o->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* o
     { RKR_Button* o = new RKR_Button(338, 331, 70, 20, "Save");
       o->tooltip("Save current program change table to file");
@@ -2258,7 +2258,7 @@ this->when(FL_WHEN_RELEASE);
       o->callback((Fl_Callback*)cb_Save);
       o->align(Fl_Align(FL_ALIGN_CENTER));
       o->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* o
     { scroll = new RKR_Scroll(30, 366, 360, 162);
       scroll->type(6);
@@ -2443,7 +2443,7 @@ this->when(FL_WHEN_RELEASE);
       BF_Browser->callback((Fl_Callback*)cb_BF_Browser, (void*)(77));
       BF_Browser->align(Fl_Align(FL_ALIGN_CENTER));
       BF_Browser->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
     } // RKR_Button* BF_Browser
     { RKR_File_Input* o = Udir = new RKR_File_Input(20, 120, 390, 40, "User Directory");
       Udir->box(FL_DOWN_BOX);
@@ -2470,7 +2470,7 @@ this->when(FL_WHEN_RELEASE);
       UD_Browser->callback((Fl_Callback*)cb_UD_Browser, (void*)(77));
       UD_Browser->align(Fl_Align(FL_ALIGN_CENTER));
       UD_Browser->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // 10 - 11
+      o->set_label_offset(4);
     } // RKR_Button* UD_Browser
     BANK_SET->end();
   } // Fl_Group* BANK_SET

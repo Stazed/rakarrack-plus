@@ -15,7 +15,7 @@ decl {\#include "RKR_Value_Input.h"} {public global
 }
 
 widget_class MidiLearnWindowGui {open
-  xywh {128 213 640 480} type Double color 22 selection_color 7 resizable
+  xywh {24 108 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -48,10 +48,10 @@ m_rgui= _rgui;} {}
 m_rkr->CountWait=0;
 m_rkr->RControl=1;}
     xywh {10 445 135 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
-  Fl_Browser TPresets {selected
+  Fl_Browser TPresets {
     xywh {430 61 201 348} type Hold when 3 textcolor 7
     class RKR_Browser
   }
@@ -61,7 +61,7 @@ m_rkr->RControl=1;}
     callback {memcpy(m_rkr->XUserMIDI,m_rkr->Bank[TPresets->value()].XUserMIDI,sizeof(m_rkr->XUserMIDI));
   m_rgui->DisAssigns();}
     xywh {430 20 95 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button CopyT {
@@ -69,7 +69,7 @@ m_rkr->RControl=1;}
     user_data 77
     callback {memcpy(m_rkr->Bank[TPresets->value()].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));}
     xywh {535 20 95 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Group Ares {
@@ -183,7 +183,7 @@ for(i=0; i<128; i++)
    
     m_rgui->DisAssigns();}
     xywh {245 250 150 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button ClearP {
@@ -192,7 +192,7 @@ for(i=0; i<128; i++)
     callback {memset(m_rkr->XUserMIDI, 0, sizeof(m_rkr->XUserMIDI));
     m_rgui->DisAssigns();}
     xywh {245 285 150 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button Assign {
@@ -225,7 +225,7 @@ for(i=0;i<20;i++)
  
     m_rgui->DisAssigns();}
     xywh {112 20 98 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button AssignA {
@@ -261,7 +261,7 @@ for(i=0;i<20;i++)
 
 Assign->do_callback();}
     xywh {10 20 98 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button CancelRec {
@@ -271,7 +271,7 @@ Assign->do_callback();}
 GMM->color(fore_color);
 GMM->redraw();}
     xywh {200 450 60 20}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Value_Input Disp_Control {
@@ -287,18 +287,18 @@ if(o->value()< 1) o->value(1);}
     callback {int i;
 for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));}
     xywh {480 412 150 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button CloseML {
     label Close
     user_data 77
-    callback {do_callback();}
+    callback {do_callback();} selected
     xywh {480 445 150 30}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
-  Fl_Group Filters_ML {open
+  Fl_Group Filters_ML {
     xywh {10 410 200 31} box DOWN_BOX
   } {
     Fl_Button M_fil_all {
@@ -306,7 +306,7 @@ for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr
       callback {m_rkr->ML_filter=0;
       m_rgui->FillML();}
       xywh {16 415 89 20} type Radio
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      code0 {o->set_label_offset(4);}
       class RKR_Button
     }
     Fl_Button M_fil_current {
@@ -314,7 +314,7 @@ for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr
       callback {m_rkr->ML_filter=1;
       m_rgui->FillML();}
       xywh {113 415 89 20} type Radio
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
+      code0 {o->set_label_offset(4);}
       class RKR_Button
     }
   }

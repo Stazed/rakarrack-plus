@@ -57,10 +57,10 @@ Order_Bro->select(1);
 m_rkr->new_order[i-1]=m_rkr->availables[j];
 m_rgui->Fill_Avail(m_rkr->eff_filter);}
     xywh {200 145 50 25} labelsize 18
-    code0 {o->m_start_font_offset = 8; // 10 - 18}
+    code0 {o->set_label_offset(8);}
     class RKR_Button
   }
-  Fl_Browser Order_Bro {selected
+  Fl_Browser Order_Bro {
     xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
     code0 {o->set_text_offset(8);}
     class RKR_Browser
@@ -84,7 +84,7 @@ m_rkr->new_order[i]=x1;
 m_rkr->new_order[i-1]=x;
 }}
     xywh {442 120 50 25} labelsize 18
-    code0 {o->m_start_font_offset = 8; // 10 - 18}
+    code0 {o->set_label_offset(8);}
     class RKR_Button
   }
   Fl_Button Baja {
@@ -106,7 +106,7 @@ m_rkr->new_order[i]=x1;
 m_rkr->new_order[i+1]=x;
 }}
     xywh {442 160 50 25} labelsize 18
-    code0 {o->m_start_font_offset = 8; // 10 - 18}
+    code0 {o->set_label_offset(8);}
     class RKR_Button
   }
   Fl_Group Filters {
@@ -188,9 +188,9 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
     callback {int i;
 for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->new_order[i];
 m_rgui->reordena();
-do_callback();}
+do_callback();} selected
     xywh {333 349 72 26}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button Cancel_order {
@@ -199,7 +199,7 @@ do_callback();}
 for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->saved_order[i];
 do_callback();}
     xywh {415 349 72 26}
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   decl {RKR* m_rkr} {private local

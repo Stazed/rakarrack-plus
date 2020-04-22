@@ -250,7 +250,7 @@ this->when(FL_WHEN_RELEASE);
   GMM->callback((Fl_Callback*)cb_GMM, (void*)(77));
   GMM->align(Fl_Align(FL_ALIGN_CENTER));
   GMM->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* GMM
 { TPresets = new RKR_Browser(430, 61, 201, 348);
   TPresets->type(2);
@@ -276,7 +276,7 @@ this->when(FL_WHEN_RELEASE);
   CopyF->callback((Fl_Callback*)cb_CopyF, (void*)(77));
   CopyF->align(Fl_Align(FL_ALIGN_CENTER));
   CopyF->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* CopyF
 { RKR_Button* o = CopyT = new RKR_Button(535, 20, 95, 30, "Copy to: ");
   CopyT->box(FL_UP_BOX);
@@ -289,7 +289,7 @@ this->when(FL_WHEN_RELEASE);
   CopyT->callback((Fl_Callback*)cb_CopyT, (void*)(77));
   CopyT->align(Fl_Align(FL_ALIGN_CENTER));
   CopyT->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* CopyT
 { Ares = new Fl_Group(215, 60, 205, 180);
   Ares->box(FL_THIN_DOWN_BOX);
@@ -527,7 +527,7 @@ this->when(FL_WHEN_RELEASE);
   ClearA->callback((Fl_Callback*)cb_ClearA, (void*)(77));
   ClearA->align(Fl_Align(FL_ALIGN_CENTER));
   ClearA->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* ClearA
 { RKR_Button* o = ClearP = new RKR_Button(245, 285, 150, 30, "Clear Preset");
   ClearP->box(FL_UP_BOX);
@@ -540,7 +540,7 @@ this->when(FL_WHEN_RELEASE);
   ClearP->callback((Fl_Callback*)cb_ClearP, (void*)(77));
   ClearP->align(Fl_Align(FL_ALIGN_CENTER));
   ClearP->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* ClearP
 { RKR_Button* o = Assign = new RKR_Button(112, 20, 98, 30, "Assign");
   Assign->box(FL_UP_BOX);
@@ -553,7 +553,7 @@ this->when(FL_WHEN_RELEASE);
   Assign->callback((Fl_Callback*)cb_Assign, (void*)(77));
   Assign->align(Fl_Align(FL_ALIGN_CENTER));
   Assign->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* Assign
 { RKR_Button* o = AssignA = new RKR_Button(10, 20, 98, 30, "Assign to All");
   AssignA->box(FL_UP_BOX);
@@ -566,7 +566,7 @@ this->when(FL_WHEN_RELEASE);
   AssignA->callback((Fl_Callback*)cb_AssignA, (void*)(77));
   AssignA->align(Fl_Align(FL_ALIGN_CENTER));
   AssignA->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* AssignA
 { RKR_Button* o = CancelRec = new RKR_Button(200, 450, 60, 20, "Cancel");
   CancelRec->box(FL_UP_BOX);
@@ -579,7 +579,7 @@ this->when(FL_WHEN_RELEASE);
   CancelRec->callback((Fl_Callback*)cb_CancelRec, (void*)(77));
   CancelRec->align(Fl_Align(FL_ALIGN_CENTER));
   CancelRec->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* CancelRec
 { RKR_Value_Input* o = Disp_Control = new RKR_Value_Input(155, 445, 40, 30);
   Disp_Control->box(FL_DOWN_BOX);
@@ -610,7 +610,7 @@ this->when(FL_WHEN_RELEASE);
   CopyTAll->callback((Fl_Callback*)cb_CopyTAll, (void*)(77));
   CopyTAll->align(Fl_Align(FL_ALIGN_CENTER));
   CopyTAll->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* CopyTAll
 { RKR_Button* o = CloseML = new RKR_Button(480, 445, 150, 30, "Close");
   CloseML->box(FL_UP_BOX);
@@ -623,7 +623,7 @@ this->when(FL_WHEN_RELEASE);
   CloseML->callback((Fl_Callback*)cb_CloseML, (void*)(77));
   CloseML->align(Fl_Align(FL_ALIGN_CENTER));
   CloseML->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* CloseML
 { Filters_ML = new Fl_Group(10, 410, 200, 31);
   Filters_ML->box(FL_DOWN_BOX);
@@ -639,7 +639,7 @@ this->when(FL_WHEN_RELEASE);
     M_fil_all->callback((Fl_Callback*)cb_M_fil_all);
     M_fil_all->align(Fl_Align(FL_ALIGN_CENTER));
     M_fil_all->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
+    o->set_label_offset(4);
   } // RKR_Button* M_fil_all
   { RKR_Button* o = M_fil_current = new RKR_Button(113, 415, 89, 20, "Current");
     M_fil_current->type(102);
@@ -653,7 +653,7 @@ this->when(FL_WHEN_RELEASE);
     M_fil_current->callback((Fl_Callback*)cb_M_fil_current);
     M_fil_current->align(Fl_Align(FL_ALIGN_CENTER));
     M_fil_current->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
+    o->set_label_offset(4);
   } // RKR_Button* M_fil_current
   Filters_ML->end();
 } // Fl_Group* Filters_ML

@@ -181,7 +181,7 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
 rkr->efx_Looper->changepar(1,(int)o->value());
 rgui->update_looper();}
     tooltip {Play - Shortcut 'F5'} xywh {8 117 44 22} type Toggle shortcut 0xffc2
-    code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button looper_stop {
@@ -195,7 +195,7 @@ rgui->update_looper();}
 rkr->efx_Looper->changepar(2,(int)o->value());
 rgui->update_looper();}
     tooltip {Stop - Shortcut 'F6'} xywh {59 117 44 22} type Toggle shortcut 0xffc3
-    code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button looper_record {
@@ -209,7 +209,7 @@ rgui->update_looper();}
 rkr->efx_Looper->changepar(3,(int)o->value());
 rgui->update_looper();}
     xywh {109 117 44 22} type Toggle labelcolor 1
-    code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
+    code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Box {} {
@@ -284,7 +284,7 @@ rgui->update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(4,(int)o->value());
-rgui->update_looper();}
+rgui->update_looper();} selected
     tooltip {Erase the Selected Track} xywh {46 165 43 14} labelsize 10
     class RKR_Button
   }
@@ -295,7 +295,7 @@ rgui->update_looper();}
     tooltip Metronome xywh {93 167 27 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  Fl_Box L_TimePos {selected
+  Fl_Box L_TimePos {
     xywh {121 166 35 14} box DOWN_BOX align 84
     class RKR_Box
   }

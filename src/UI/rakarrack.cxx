@@ -2006,7 +2006,7 @@ void RKRGUI::make_window() {
         BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(78));
         BostBut->align(Fl_Align(FL_ALIGN_CENTER));
         BostBut->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = -4; // (default 10) 10 - 6 = -4
+        o->set_label_offset(-4);
       } // RKR_Button* BostBut
       { Balance = new RKR_Slider(15, 48, 19, 126, "FX%");
         Balance->type(4);
@@ -2347,7 +2347,7 @@ void RKRGUI::make_window() {
         S_new->callback((Fl_Callback*)cb_S_new, (void*)(77));
         S_new->align(Fl_Align(FL_ALIGN_CENTER));
         S_new->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+        o->set_label_offset(2);
       } // RKR_Button* S_new
       { RKR_Button* o = L_preset = new RKR_Button(240, 50, 64, 18, "Load");
         L_preset->tooltip("Open load preset window - Shortcut \'L\'");
@@ -2362,7 +2362,7 @@ void RKRGUI::make_window() {
         L_preset->callback((Fl_Callback*)cb_L_preset, (void*)(77));
         L_preset->align(Fl_Align(FL_ALIGN_CENTER));
         L_preset->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+        o->set_label_offset(2);
       } // RKR_Button* L_preset
       { RKR_Button* o = S_preset = new RKR_Button(306, 50, 64, 18, "Save");
         S_preset->tooltip("Open save preset window - Shortcut \'S\'");
@@ -2377,7 +2377,7 @@ void RKRGUI::make_window() {
         S_preset->callback((Fl_Callback*)cb_S_preset, (void*)(77));
         S_preset->align(Fl_Align(FL_ALIGN_CENTER));
         S_preset->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+        o->set_label_offset(2);
       } // RKR_Button* S_preset
       { RKR_Light_Button* o = Compare = new RKR_Light_Button(373, 50, 72, 18, "Compare");
         Compare->tooltip("Compare to bank preset - Shortcut \'P\'");
@@ -2407,7 +2407,7 @@ void RKRGUI::make_window() {
         B_preset->callback((Fl_Callback*)cb_B_preset, (void*)(77));
         B_preset->align(Fl_Align(FL_ALIGN_CENTER));
         B_preset->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+        o->set_label_offset(2);
       } // RKR_Button* B_preset
       { RKR_Input* o = WPreset_Name = new RKR_Input(174, 72, 338, 30);
         WPreset_Name->box(FL_DOWN_BOX);
@@ -2485,7 +2485,7 @@ void RKRGUI::make_window() {
         Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(77));
         Open_Order->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+        o->set_label_offset(4);
       } // RKR_Button* Open_Order
       { RKR_Button* o = Etit = new RKR_Button(174, 160, 340, 28, "Rakarrack +");
         Etit->tooltip("Click here to toggle analyzer ON/OFF");
@@ -2500,7 +2500,7 @@ void RKRGUI::make_window() {
         Etit->callback((Fl_Callback*)cb_Etit);
         Etit->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         Etit->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 15; // 10 - 25
+        o->set_label_offset(15);
       } // RKR_Button* Etit
       { Analy = new Analyzer(174, 160, 340, 28);
         Analy->tooltip("Click here to toggle analyzer ON/OFF");
@@ -2625,7 +2625,7 @@ void RKRGUI::make_window() {
         T_BUT->callback((Fl_Callback*)cb_T_BUT, (void*)(77));
         T_BUT->align(Fl_Align(FL_ALIGN_CENTER));
         T_BUT->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
+        o->set_label_offset(2);
       } // RKR_Button* T_BUT
       { TAP_LABEL = new RKR_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->box(FL_NO_BOX);

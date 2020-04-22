@@ -460,7 +460,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_play->callback((Fl_Callback*)cb_looper_play, (void*)(2));
   looper_play->align(Fl_Align(FL_ALIGN_CENTER));
   looper_play->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+  o->set_label_offset(4);
 } // RKR_Button* looper_play
 { RKR_Button* o = looper_stop = new RKR_Button(59, 117, 44, 22, "@||");
   looper_stop->tooltip("Stop - Shortcut \'F6\'");
@@ -476,7 +476,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_stop->callback((Fl_Callback*)cb_looper_stop, (void*)(2));
   looper_stop->align(Fl_Align(FL_ALIGN_CENTER));
   looper_stop->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+  o->set_label_offset(4);
 } // RKR_Button* looper_stop
 { RKR_Button* o = looper_record = new RKR_Button(109, 117, 44, 22, "@circle");
   looper_record->type(1);
@@ -490,7 +490,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_record->callback((Fl_Callback*)cb_looper_record, (void*)(2));
   looper_record->align(Fl_Align(FL_ALIGN_CENTER));
   looper_record->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
+  o->set_label_offset(4);
 } // RKR_Button* looper_record
 { RKR_Box* o = new RKR_Box(71, 149, 39, 14, "Track");
   o->box(FL_NO_BOX);

@@ -230,7 +230,7 @@ this->when(FL_WHEN_RELEASE);
   Pon->callback((Fl_Callback*)cb_Pon);
   Pon->align(Fl_Align(FL_ALIGN_CENTER));
   Pon->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 8; // 10 - 18
+  o->set_label_offset(8);
 } // RKR_Button* Pon
 { RKR_Browser* o = Order_Bro = new RKR_Browser(260, 50, 175, 225);
   Order_Bro->type(2);
@@ -258,7 +258,7 @@ this->when(FL_WHEN_RELEASE);
   Sube->callback((Fl_Callback*)cb_Sube);
   Sube->align(Fl_Align(FL_ALIGN_CENTER));
   Sube->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 8; // 10 - 18
+  o->set_label_offset(8);
 } // RKR_Button* Sube
 { RKR_Button* o = Baja = new RKR_Button(442, 160, 50, 25, "@$8->");
   Baja->box(FL_UP_BOX);
@@ -271,7 +271,7 @@ this->when(FL_WHEN_RELEASE);
   Baja->callback((Fl_Callback*)cb_Baja);
   Baja->align(Fl_Align(FL_ALIGN_CENTER));
   Baja->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 8; // 10 - 18
+  o->set_label_offset(8);
 } // RKR_Button* Baja
 { Filters = new Fl_Group(15, 280, 180, 110);
   { Fil0 = new RKR_Button(15, 284, 177, 15, "All");
@@ -418,7 +418,7 @@ this->when(FL_WHEN_RELEASE);
   ok_order->callback((Fl_Callback*)cb_ok_order);
   ok_order->align(Fl_Align(FL_ALIGN_CENTER));
   ok_order->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* ok_order
 { RKR_Button* o = Cancel_order = new RKR_Button(415, 349, 72, 26, "Cancel");
   Cancel_order->box(FL_UP_BOX);
@@ -431,7 +431,7 @@ this->when(FL_WHEN_RELEASE);
   Cancel_order->callback((Fl_Callback*)cb_Cancel_order);
   Cancel_order->align(Fl_Align(FL_ALIGN_CENTER));
   Cancel_order->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
+  o->set_label_offset(4);
 } // RKR_Button* Cancel_order
 this->m_rkr = NULL;
 this->m_rgui = NULL;
