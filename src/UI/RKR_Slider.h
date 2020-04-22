@@ -28,18 +28,19 @@
 
 class RKR_Slider : public Fl_Value_Slider {
 public:
-    RKR_Slider(int x, int y, int w, int h, const char *label = 0);
+    RKR_Slider(int X, int Y, int W, int H, const char *label = 0);
     int handle(int event);
     int handle2(int event, int X, int Y, int W, int H);
     void draw();
     void resize(int,int,int,int);
     void shut_off_pixel_adjustment(){m_use_pixel_adjustment = false;};
+
     int m_start_label_offset;
     int m_start_text_offset;
 private:
 
-    int m_start_height;
     int m_start_width;
+    int m_start_height;
     int m_previous_font_size;
     bool m_use_pixel_adjustment;
     

@@ -24,14 +24,15 @@
 #include "RKR_Slider.h"
 
 
-RKR_Slider::RKR_Slider(int x, int y, int w, int h, const char *label) : Fl_Value_Slider(x, y, w, h, label)
+RKR_Slider::RKR_Slider(int X, int Y, int W, int H, const char *label) :
+    Fl_Value_Slider(X, Y, W, H, label),
+    m_start_label_offset(0),
+    m_start_text_offset(0),
+    m_start_width(W),
+    m_start_height(H),
+    m_previous_font_size(global_font_size),
+    m_use_pixel_adjustment(true)    // main window efx sliders use this
 {
-    m_start_width = w;
-    m_start_height = h;
-    m_start_label_offset = 0;
-    m_start_text_offset = 0;
-    m_previous_font_size = global_font_size;
-    m_use_pixel_adjustment = true;  // main window sliders use this
 }
 
 int RKR_Slider::handle(int event)
