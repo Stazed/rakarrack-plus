@@ -33,6 +33,40 @@
 #include "RKR_Value_Input.h"
 #include "../global.h"
 
+/**
+  Creates a new RKR_Value_Input widget using the given
+  position, size, and label string. The default boxtype is
+  FL_DOWN_BOX.
+ */
+RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l) :
+    Fl_Valuator(X, Y, W, H, l),
+    input(X, Y, W, H, 0),
+    soft_(0),
+    m_start_width(W),
+    m_start_height(H),
+    m_previous_font_size(global_font_size),
+    m_start_label_offset(0),
+    m_start_text_offset(0)
+{
+    if (input.parent()) // defeat automatic-add
+        input.parent()->remove(input);
+    input.parent((Fl_Group *)this); // kludge!
+    input.callback(input_cb, this);
+    input.when(FL_WHEN_CHANGED);
+    box(input.box());
+    color(input.color());
+    selection_color(input.selection_color());
+    align(FL_ALIGN_LEFT);
+    value_damage();
+    set_flag(SHORTCUT_LABEL);
+}
+
+RKR_Value_Input::~RKR_Value_Input()
+{
+
+    if (input.parent() == (Fl_Group *)this)
+        input.parent(0); // *revert* ctor kludge!
+}
 
 void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 {
@@ -231,41 +265,6 @@ int RKR_Value_Input::handle(int event)
                 input.type(((step() - floor(step())) > 0.0 || step() == 0.0) ? FL_FLOAT_INPUT : FL_INT_INPUT);
         return input.handle(event);
     }
-}
-
-/**
-  Creates a new RKR_Value_Input widget using the given
-  position, size, and label string. The default boxtype is
-  FL_DOWN_BOX.
- */
-RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l)
-: Fl_Valuator(X, Y, W, H, l), input(X, Y, W, H, 0)
-{
-    m_start_width = W;
-    m_start_height = H;
-    m_start_label_offset = 0;
-    m_start_text_offset = 0;
-    m_previous_font_size = global_font_size;
-
-    soft_ = 0;
-    if (input.parent()) // defeat automatic-add
-        input.parent()->remove(input);
-    input.parent((Fl_Group *)this); // kludge!
-    input.callback(input_cb, this);
-    input.when(FL_WHEN_CHANGED);
-    box(input.box());
-    color(input.color());
-    selection_color(input.selection_color());
-    align(FL_ALIGN_LEFT);
-    value_damage();
-    set_flag(SHORTCUT_LABEL);
-}
-
-RKR_Value_Input::~RKR_Value_Input()
-{
-
-    if (input.parent() == (Fl_Group *)this)
-        input.parent(0); // *revert* ctor kludge!
 }
 
 //
