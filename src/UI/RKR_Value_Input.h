@@ -18,7 +18,8 @@
 
 /*
   This override class had been modified from the original Fl_Value_Input class to 
-  allow for keyboard input handling and auto resizing of fonts. 
+  allow for keyboard input handling and auto resizing of fonts.
+  Copied from fltk-1.3.4-1.
  */
 
 
@@ -60,10 +61,13 @@
   <P ALIGN="CENTER">\image html RKR_Value_Input.png 
   \image latex  RKR_Value_Input.png "RKR_Value_Input" width=4cm
  */
-class RKR_Value_Input : public Fl_Valuator {
+class RKR_Value_Input : public Fl_Valuator
+{
 public:
     /* This is the encapsulated Fl_input attribute to which 
-    this class delegates the value font, color and shortcut */
+    this class delegates the value font, color and shortcut.
+    The RKR_Key_Input override class hijacks all keyboard events
+    and sends them to this parent class for special key usage. */
     RKR_Key_Input input;
 private:
     char soft_;
@@ -75,20 +79,26 @@ protected:
     void draw();
 private:
 
+    /* The font resize variables added to this class for rakarrack+ */
+    int m_label_offset;
+    int m_text_offset;
     int m_start_width;
     int m_start_height;
     int m_previous_font_size;
     void font_resize(int, int);
+    
 public:
+    void set_label_offset(int offset){m_label_offset = offset;};
+    void set_text_offset(int offset){m_text_offset = offset;};
+    /* End of RKR rakarrack+ modifications */
+
     void resize(int, int, int, int);
     RKR_Value_Input(int x, int y, int w, int h, const char *l = 0);
     ~RKR_Value_Input();
 
-    int m_start_label_offset;
-    int m_start_text_offset;
-
     /** See void RKR_Value_Input::soft(char s) */
-    void soft(char s) {
+    void soft(char s)
+    {
         soft_ = s;
     }
 
@@ -98,7 +108,8 @@ public:
       the ends, let go, then grab again and continue to drag, they can
       get to any value. The default is true.
      */
-    char soft() const {
+    char soft() const
+    {
         return soft_;
     }
 
@@ -106,7 +117,8 @@ public:
      Returns the current shortcut key for the Input.
      \see RKR_Value_Input::shortcut(int) 
      */
-    int shortcut() const {
+    int shortcut() const
+    {
         return input.shortcut();
     }
 
@@ -127,47 +139,56 @@ public:
      the shift flags (zero for the other bits indicates a "don't care"
      setting).
      */
-    void shortcut(int s) {
+    void shortcut(int s)
+    {
         input.shortcut(s);
     }
 
     /** Gets the typeface of the text in the value box.  */
-    Fl_Font textfont() const {
+    Fl_Font textfont() const
+    {
         return input.textfont();
     }
 
     /** Sets the typeface of the text in the value box.  */
-    void textfont(Fl_Font s) {
+    void textfont(Fl_Font s)
+    {
         input.textfont(s);
     }
 
     /** Gets the size of the text in the value box.  */
-    Fl_Fontsize textsize() const {
+    Fl_Fontsize textsize() const
+    {
         return input.textsize();
     }
 
     /** Sets the size of the text in the value box.  */
-    void textsize(Fl_Fontsize s) {
+    void textsize(Fl_Fontsize s)
+    {
         input.textsize(s);
     }
 
     /** Gets the color of the text in the value box.  */
-    Fl_Color textcolor() const {
+    Fl_Color textcolor() const
+    {
         return input.textcolor();
     }
 
     /** Sets the color of the text in the value box.*/
-    void textcolor(Fl_Color n) {
+    void textcolor(Fl_Color n)
+    {
         input.textcolor(n);
     }
 
     /** Gets the color of the text cursor. The text cursor is black by default. */
-    Fl_Color cursor_color() const {
+    Fl_Color cursor_color() const
+    {
         return input.cursor_color();
     }
 
     /** Sets the color of the text cursor. The text cursor is black by default. */
-    void cursor_color(Fl_Color n) {
+    void cursor_color(Fl_Color n)
+    {
         input.cursor_color(n);
     }
 

@@ -173,8 +173,8 @@ this->when(FL_WHEN_RELEASE);
   aux_midi->callback((Fl_Callback*)cb_aux_midi);
   aux_midi->align(Fl_Align(FL_ALIGN_LEFT));
   aux_midi->when(FL_WHEN_CHANGED);
-  o->m_start_text_offset = 4; // 10 - 14
-  o->m_start_label_offset = 4; // 10 - 14
+  o->set_text_offset(4);
+  o->set_label_offset(4);
 } // RKR_Value_Input* aux_midi
 { aux_min = new RKR_Slider(56, 130, 100, 10, "Minimum");
   aux_min->type(5);

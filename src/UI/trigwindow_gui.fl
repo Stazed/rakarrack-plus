@@ -22,7 +22,7 @@ widget_class TrigWindowGui {open
     xywh {0 1 200 180}
   }
   Fl_Box ACI_LABEL {
-    label {Analog Control} selected
+    label {Analog Control}
     xywh {34 8 135 24} labelfont 1 labelcolor 7
     class RKR_Box
   }
@@ -65,10 +65,10 @@ widget_class TrigWindowGui {open
     label {Midi Control}
     callback {if(o->value()> 127) o->value(127);
 if(o->value()< 1) o->value(1);
-m_rkr->Aux_MIDI = (int)o->value();}
+m_rkr->Aux_MIDI = (int)o->value();} selected
     xywh {111 96 32 24} labelcolor 7 minimum 1 maximum 127 step 1 value 1
-    code0 {o->m_start_text_offset = 4; // 10 - 14}
-    code1 {o->m_start_label_offset = 4; // 10 - 14}
+    code0 {o->set_text_offset(4);}
+    code1 {o->set_label_offset(4);}
     class RKR_Value_Input
   }
   Fl_Value_Slider aux_min {

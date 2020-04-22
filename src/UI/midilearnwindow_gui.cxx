@@ -597,7 +597,7 @@ this->when(FL_WHEN_RELEASE);
   Disp_Control->callback((Fl_Callback*)cb_Disp_Control);
   Disp_Control->align(Fl_Align(FL_ALIGN_LEFT));
   Disp_Control->when(FL_WHEN_CHANGED);
-  o->m_start_text_offset = 4; // 10 - 14
+  o->set_text_offset(4);
 } // RKR_Value_Input* Disp_Control
 { RKR_Button* o = CopyTAll = new RKR_Button(480, 412, 150, 30, "Copy to All");
   CopyTAll->box(FL_UP_BOX);

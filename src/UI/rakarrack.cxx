@@ -2655,8 +2655,8 @@ void RKRGUI::make_window() {
         T_DIS->callback((Fl_Callback*)cb_T_DIS);
         T_DIS->align(Fl_Align(FL_ALIGN_CENTER));
         T_DIS->when(FL_WHEN_CHANGED);
-        o->m_start_text_offset = 4; // 10 - 14
-        o->m_start_label_offset = 4; // 10 - 14
+        o->set_text_offset(4);
+        o->set_label_offset(4);
       } // RKR_Value_Input* T_DIS
       Tap->end();
     } // Fl_Group* Tap
