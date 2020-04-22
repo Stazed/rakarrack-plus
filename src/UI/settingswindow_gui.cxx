@@ -2201,7 +2201,7 @@ this->when(FL_WHEN_RELEASE);
         Mw1->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
       } // RKR_Check_Button* Mw1
-      o->m_start_label_offset = 2; // 10 - 12
+      o->set_label_offset(2);
       wMIDI->end();
     } // RKR_Group* wMIDI
     { RKR_Check_Button* o = AAssign = new RKR_Check_Button(30, 308, 16, 16, "Auto Assign MIDI Learn");

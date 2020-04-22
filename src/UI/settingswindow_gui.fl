@@ -1129,7 +1129,7 @@ m_rkr->Conecta();}
       Fl_Group wMIDI {
         label {MIDI implementation}
         xywh {30 266 180 23} box DOWN_FRAME labelsize 12 labelcolor 7 align 5
-        code0 {o->m_start_label_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
         class RKR_Group
       } {
         Fl_Check_Button Mw0 {
