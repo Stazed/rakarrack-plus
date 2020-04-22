@@ -26,13 +26,14 @@
 #include "RKR_Counter.h"
 #include "../global.h"
 
-RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) : Fl_Counter(X, Y, W, H, label)
+RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) :
+    Fl_Counter(X, Y, W, H, label),
+    m_start_label_offset(0),
+    m_start_text_offset(0),
+    m_start_width(W),
+    m_start_height(H),
+    m_previous_font_size(global_font_size)
 {
-    m_previous_font_size = global_font_size;
-    m_start_width = W;
-    m_start_height = H;
-    m_start_label_offset = 0;
-    m_start_text_offset = 0;
 //    this->user_data((void*)(BUTTON_USER_DATA));
 }
 
