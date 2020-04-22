@@ -525,53 +525,60 @@ Fl::focus(Open_Order);}
       Fl_Box LMT_LED {
         label Lmt
         xywh {504 8 8 8} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
+        code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box CLIP_LED {
         label Clip
         xywh {541 8 8 8} box DOWN_BOX color 1 labelsize 10 labelcolor 7 align 4
+        code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box UPS_LED {
         label Resample
         xywh {608 8 8 8} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
+        code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box P_MIN_ST {
         label {Midi In}
         user_data BOX_LED_DATA
         xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
-        code0 {o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2}
+        code0 {o->set_label_offset(-2);}
         class RKR_Box
       }
       Fl_Box P_MOUT_ST {
         label {Midi Out}
         user_data BOX_LED_DATA
         xywh {648 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
-        code0 {o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2}
+        code0 {o->set_label_offset(-2);}
         class RKR_Box
       }
       Fl_Box P_AUX_ST {
         label Aux
         user_data BOX_LED_DATA
         xywh {676 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
+        code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box P_IN_ST {
         label In
         user_data BOX_LED_DATA
         xywh {698 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
+        code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box P_OUT_ST {
         label Out
         user_data BOX_LED_DATA
         xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
+        code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box CPULOAD {
         user_data BOX_LED_DATA
         xywh {750 5 45 17} labelsize 10 labelcolor 7
+        code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box Sco {
@@ -614,70 +621,60 @@ Fl::focus(Open_Order);}
         label label
         user_data 770
         xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L2 {
         label label
         user_data 771
         xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L3 {
         label label
         user_data 772
         xywh {322 195 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L4 {
         label label
         user_data 773
         xywh {482 195 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L5 {
         label label
         user_data 774
         xywh {642 195 157 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L6 {
         label label
         user_data 775
         xywh {1 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L7 {
         label label
         user_data 776
         xywh {162 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L8 {
         label label
         user_data 777
         xywh {322 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L9 {
         label label
         user_data 778
         xywh {482 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Box L10 {
         label label
         user_data 779
         xywh {642 396 154 17} labelfont 1 labelcolor 7
-        code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
         class RKR_Box
       }
       Fl_Group EQ {
@@ -989,19 +986,16 @@ TUNER_LABEL->redraw_label();}
         Fl_Box WNote {
           user_data 7
           xywh {676 57 28 22} labelfont 1 labelcolor 7 align 16
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
         Fl_Box WRfreq {
           user_data 7
           xywh {588 57 76 22} labelfont 1 labelcolor 7 align 16
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
         Fl_Box WNfreq {
           user_data 7
           xywh {714 57 76 22} labelfont 1 labelcolor 7 align 16
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
         Fl_Box PINCHO {
@@ -1012,7 +1006,6 @@ TUNER_LABEL->redraw_label();}
           label Tuner
           user_data 7
           xywh {524 63 57 14} labelfont 1 labelcolor 7
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
       }
@@ -1131,7 +1124,6 @@ rkr->calculavol(2);}
           label {In/Out}
           user_data 7
           xywh {60 30 62 14} labelfont 1 labelcolor 7 align 16
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
       }
@@ -1254,7 +1246,6 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           label Metronome
           user_data 7
           xywh {522 117 92 14} labelfont 1 labelcolor 7 when 0
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
       }
@@ -1266,7 +1257,6 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
           label Presets
           user_data 7
           xywh {174 28 62 14} labelfont 1 labelcolor 7
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
         Fl_Button L_B1 {
@@ -1391,7 +1381,7 @@ else
 {
  rkr->Bank_to_Preset(0);
  Put_Loaded();
-}} selected
+}}
           tooltip {Compare to bank preset - Shortcut 'P'} xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
           code0 {o->set_label_offset(2);}
           class RKR_Light_Button
@@ -1439,7 +1429,6 @@ if(rkr->Tap_Updated) UpdateTGUI();}
         Fl_Box DAuthor {
           user_data 7
           xywh {246 107 266 18} box DOWN_BOX color 62 align 116
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
         Fl_Button RandomP {
@@ -1698,9 +1687,8 @@ UpdateTGUI();
         }
         Fl_Box TAP_LABEL {
           label {Tap Tempo}
-          user_data 7
+          user_data 7 selected
           xywh {524 170 93 14} labelfont 1 labelcolor 7 when 0
-          code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
           class RKR_Box
         }
         Fl_Value_Input T_DIS {

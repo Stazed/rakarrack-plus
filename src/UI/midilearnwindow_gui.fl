@@ -15,7 +15,7 @@ decl {\#include "RKR_Value_Input.h"} {public global
 }
 
 widget_class MidiLearnWindowGui {open
-  xywh {437 362 640 480} type Double color 22 selection_color 7 resizable
+  xywh {128 213 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -30,9 +30,9 @@ m_rgui= _rgui;} {}
     xywh {1 1 640 480}
   }
   Fl_Box midi_learn {
-    label {MIDI Learn}
-    xywh {282 18 81 32} labelsize 23
-    code0 {o->m_start_font_offset = 13; // 10 - 23}
+    label {MIDI Learn} selected
+    xywh {250 18 134 32} labelsize 23
+    code0 {o->set_label_offset(13); // 10 - 23}
     class RKR_Box
   }
   Fl_Browser Epar {
@@ -52,7 +52,7 @@ m_rkr->RControl=1;}
     code0 {o->m_start_font_offset = 4; // 10 - 14}
     class RKR_Button
   }
-  Fl_Browser TPresets {selected
+  Fl_Browser TPresets {
     xywh {430 61 201 348} type Hold when 3 textcolor 7
     code0 {o->m_start_text_offset = 4; // 10 - 14}
     class RKR_Browser
@@ -74,107 +74,87 @@ m_rkr->RControl=1;}
     code0 {o->m_start_font_offset = 4; // 10 - 14}
     class RKR_Button
   }
-  Fl_Group Ares {open
+  Fl_Group Ares {
     xywh {215 60 205 180} box THIN_DOWN_BOX align 80
   } {
     Fl_Box Ar1 {
       xywh {220 65 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar2 {
       xywh {270 65 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar3 {
       xywh {320 65 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar4 {
       xywh {370 65 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar5 {
       xywh {220 100 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar6 {
       xywh {270 100 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar7 {
       xywh {320 100 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar8 {
       xywh {370 100 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar9 {
       xywh {220 135 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar10 {
       xywh {270 135 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar11 {
       xywh {320 135 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar12 {
       xywh {370 135 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar13 {
       xywh {220 170 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar14 {
       xywh {270 170 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar15 {
       xywh {320 170 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar16 {
       xywh {370 170 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar17 {
       xywh {220 205 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar18 {
       xywh {270 205 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar19 {
       xywh {320 205 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
     Fl_Box Ar20 {
       xywh {370 205 45 30} box DOWN_BOX
-      code0 {o->m_start_font_offset = 4; // 10 - 14}
       class RKR_Box
     }
   }

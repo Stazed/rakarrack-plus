@@ -991,7 +991,7 @@ this->when(FL_WHEN_RELEASE);
       FSLabel->labelcolor(FL_BACKGROUND2_COLOR);
       FSLabel->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       FSLabel->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 3; // 10 - 13
+      o->set_label_offset(3);
     } // RKR_Box* FSLabel
     { RKR_Button* o = FSless = new RKR_Button(95, 330, 30, 20, "-");
       FSless->box(FL_UP_BOX);
@@ -1042,7 +1042,7 @@ this->when(FL_WHEN_RELEASE);
       CLLabel->labelcolor(FL_BACKGROUND2_COLOR);
       CLLabel->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       CLLabel->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 3; // 10 - 13
+      o->set_label_offset(3);
     } // RKR_Box* CLLabel
     { RKR_Button* o = B_C = new RKR_Button(30, 380, 90, 25, "Buttons");
       B_C->box(FL_UP_BOX);
@@ -1308,7 +1308,7 @@ this->when(FL_WHEN_RELEASE);
       loop_Label->user_data((void*)(7));
       loop_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       loop_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* loop_Label
     { L_SIZE = new RKR_Counter(163, 170, 47, 18);
       L_SIZE->type(1);
@@ -1358,7 +1358,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Q_Label->user_data((void*)(7));
       Har_Q_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Har_Q_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Har_Q_Label
     { Har_Qual = new RKR_Choice(165, 195, 47, 18, "   ");
       Har_Qual->box(FL_FLAT_BOX);
@@ -1404,7 +1404,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Band_Label->user_data((void*)(7));
       Voc_Band_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Voc_Band_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Voc_Band_Label
     { Voc_Bands = new RKR_Choice(165, 222, 47, 18, "        ");
       Voc_Bands->box(FL_FLAT_BOX);
@@ -1461,7 +1461,7 @@ this->when(FL_WHEN_RELEASE);
       Calibration_Label->user_data((void*)(7));
       Calibration_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Calibration_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Calibration_Label
     { Calibration = new RKR_Counter(163, 249, 116, 21);
       Calibration->box(FL_UP_BOX);
@@ -1510,7 +1510,7 @@ this->when(FL_WHEN_RELEASE);
       Recognize_Label->user_data((void*)(7));
       Recognize_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Recognize_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Recognize_Label
     { RC_Harm_Opti = new RKR_Choice(210, 297, 72, 18, "Harmonizer");
       RC_Harm_Opti->box(FL_FLAT_BOX);
@@ -1571,7 +1571,7 @@ this->when(FL_WHEN_RELEASE);
       Harm_Label->user_data((void*)(7));
       Harm_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Harm_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Harm_Label
     { Har_Downsample = new RKR_Choice(190, 336, 70, 18, " ");
       Har_Downsample->box(FL_FLAT_BOX);
@@ -1634,7 +1634,7 @@ this->when(FL_WHEN_RELEASE);
       Rev_Label->user_data((void*)(7));
       Rev_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Rev_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Rev_Label
     { RKR_Choice* o = Rev_Downsample = new RKR_Choice(190, 359, 70, 18);
       Rev_Downsample->box(FL_FLAT_BOX);
@@ -1697,7 +1697,7 @@ this->when(FL_WHEN_RELEASE);
       con_Label->user_data((void*)(7));
       con_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       con_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* con_Label
     { RKR_Choice* o = Con_Downsample = new RKR_Choice(190, 382, 70, 18);
       Con_Downsample->box(FL_FLAT_BOX);
@@ -1760,7 +1760,7 @@ this->when(FL_WHEN_RELEASE);
       seq_Label->user_data((void*)(7));
       seq_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       seq_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* seq_Label
     { RKR_Choice* o = Seq_Downsample = new RKR_Choice(190, 405, 70, 18);
       Seq_Downsample->box(FL_FLAT_BOX);
@@ -1823,7 +1823,7 @@ this->when(FL_WHEN_RELEASE);
       shi_Label->user_data((void*)(7));
       shi_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       shi_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* shi_Label
     { RKR_Choice* o = Shi_Downsample = new RKR_Choice(190, 428, 70, 18);
       Shi_Downsample->box(FL_FLAT_BOX);
@@ -1886,7 +1886,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Label->user_data((void*)(7));
       Voc_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Voc_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Voc_Label
     { RKR_Choice* o = Voc_Downsample = new RKR_Choice(190, 452, 70, 18, "   ");
       Voc_Downsample->box(FL_FLAT_BOX);
@@ -1949,7 +1949,7 @@ this->when(FL_WHEN_RELEASE);
       Ste_Label->user_data((void*)(7));
       Ste_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Ste_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Ste_Label
     { RKR_Choice* o = Ste_Downsample = new RKR_Choice(190, 477, 70, 18);
       Ste_Downsample->box(FL_FLAT_BOX);
@@ -2012,7 +2012,7 @@ this->when(FL_WHEN_RELEASE);
       Wave_Label->user_data((void*)(7));
       Wave_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       Wave_Label->when(FL_WHEN_NEVER);
-      o->m_start_font_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Box* Wave_Label
     { Wave_Amo = new RKR_Choice(190, 527, 70, 18);
       Wave_Amo->box(FL_FLAT_BOX);
@@ -2513,7 +2513,6 @@ void SettingsWindowGui::make_table_window() {
             b->copy_label(buf);
             b->labelcolor(FL_BLACK);
             b->user_data((void *) c_bank_number);
-            b->m_start_font_offset = 4;
       
             RKR_Choice* cb = new RKR_Choice(120,y*25+25,40,20);
             cb->copy_label("Bank");

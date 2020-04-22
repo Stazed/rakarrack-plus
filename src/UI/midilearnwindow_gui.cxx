@@ -213,7 +213,7 @@ this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo4 = new Fl_Box(1, 1, 640, 480);
 } // Fl_Box* Fondo4
-{ RKR_Box* o = midi_learn = new RKR_Box(282, 18, 81, 32, "MIDI Learn");
+{ RKR_Box* o = midi_learn = new RKR_Box(250, 18, 134, 32, "MIDI Learn");
   midi_learn->box(FL_NO_BOX);
   midi_learn->color(FL_BACKGROUND_COLOR);
   midi_learn->selection_color(FL_BACKGROUND_COLOR);
@@ -223,7 +223,7 @@ this->when(FL_WHEN_RELEASE);
   midi_learn->labelcolor(FL_FOREGROUND_COLOR);
   midi_learn->align(Fl_Align(FL_ALIGN_CENTER));
   midi_learn->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 13; // 10 - 23
+  o->set_label_offset(13); // 10 - 23
 } // RKR_Box* midi_learn
 { RKR_Browser* o = Epar = new RKR_Browser(10, 58, 201, 348);
   Epar->type(2);
@@ -296,7 +296,7 @@ this->when(FL_WHEN_RELEASE);
 { Ares = new Fl_Group(215, 60, 205, 180);
   Ares->box(FL_THIN_DOWN_BOX);
   Ares->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
-  { RKR_Box* o = Ar1 = new RKR_Box(220, 65, 45, 30);
+  { Ar1 = new RKR_Box(220, 65, 45, 30);
     Ar1->box(FL_DOWN_BOX);
     Ar1->color(FL_BACKGROUND_COLOR);
     Ar1->selection_color(FL_BACKGROUND_COLOR);
@@ -306,9 +306,8 @@ this->when(FL_WHEN_RELEASE);
     Ar1->labelcolor(FL_FOREGROUND_COLOR);
     Ar1->align(Fl_Align(FL_ALIGN_CENTER));
     Ar1->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar1
-  { RKR_Box* o = Ar2 = new RKR_Box(270, 65, 45, 30);
+  { Ar2 = new RKR_Box(270, 65, 45, 30);
     Ar2->box(FL_DOWN_BOX);
     Ar2->color(FL_BACKGROUND_COLOR);
     Ar2->selection_color(FL_BACKGROUND_COLOR);
@@ -318,9 +317,8 @@ this->when(FL_WHEN_RELEASE);
     Ar2->labelcolor(FL_FOREGROUND_COLOR);
     Ar2->align(Fl_Align(FL_ALIGN_CENTER));
     Ar2->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar2
-  { RKR_Box* o = Ar3 = new RKR_Box(320, 65, 45, 30);
+  { Ar3 = new RKR_Box(320, 65, 45, 30);
     Ar3->box(FL_DOWN_BOX);
     Ar3->color(FL_BACKGROUND_COLOR);
     Ar3->selection_color(FL_BACKGROUND_COLOR);
@@ -330,9 +328,8 @@ this->when(FL_WHEN_RELEASE);
     Ar3->labelcolor(FL_FOREGROUND_COLOR);
     Ar3->align(Fl_Align(FL_ALIGN_CENTER));
     Ar3->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar3
-  { RKR_Box* o = Ar4 = new RKR_Box(370, 65, 45, 30);
+  { Ar4 = new RKR_Box(370, 65, 45, 30);
     Ar4->box(FL_DOWN_BOX);
     Ar4->color(FL_BACKGROUND_COLOR);
     Ar4->selection_color(FL_BACKGROUND_COLOR);
@@ -342,9 +339,8 @@ this->when(FL_WHEN_RELEASE);
     Ar4->labelcolor(FL_FOREGROUND_COLOR);
     Ar4->align(Fl_Align(FL_ALIGN_CENTER));
     Ar4->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar4
-  { RKR_Box* o = Ar5 = new RKR_Box(220, 100, 45, 30);
+  { Ar5 = new RKR_Box(220, 100, 45, 30);
     Ar5->box(FL_DOWN_BOX);
     Ar5->color(FL_BACKGROUND_COLOR);
     Ar5->selection_color(FL_BACKGROUND_COLOR);
@@ -354,9 +350,8 @@ this->when(FL_WHEN_RELEASE);
     Ar5->labelcolor(FL_FOREGROUND_COLOR);
     Ar5->align(Fl_Align(FL_ALIGN_CENTER));
     Ar5->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar5
-  { RKR_Box* o = Ar6 = new RKR_Box(270, 100, 45, 30);
+  { Ar6 = new RKR_Box(270, 100, 45, 30);
     Ar6->box(FL_DOWN_BOX);
     Ar6->color(FL_BACKGROUND_COLOR);
     Ar6->selection_color(FL_BACKGROUND_COLOR);
@@ -366,9 +361,8 @@ this->when(FL_WHEN_RELEASE);
     Ar6->labelcolor(FL_FOREGROUND_COLOR);
     Ar6->align(Fl_Align(FL_ALIGN_CENTER));
     Ar6->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar6
-  { RKR_Box* o = Ar7 = new RKR_Box(320, 100, 45, 30);
+  { Ar7 = new RKR_Box(320, 100, 45, 30);
     Ar7->box(FL_DOWN_BOX);
     Ar7->color(FL_BACKGROUND_COLOR);
     Ar7->selection_color(FL_BACKGROUND_COLOR);
@@ -378,9 +372,8 @@ this->when(FL_WHEN_RELEASE);
     Ar7->labelcolor(FL_FOREGROUND_COLOR);
     Ar7->align(Fl_Align(FL_ALIGN_CENTER));
     Ar7->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar7
-  { RKR_Box* o = Ar8 = new RKR_Box(370, 100, 45, 30);
+  { Ar8 = new RKR_Box(370, 100, 45, 30);
     Ar8->box(FL_DOWN_BOX);
     Ar8->color(FL_BACKGROUND_COLOR);
     Ar8->selection_color(FL_BACKGROUND_COLOR);
@@ -390,9 +383,8 @@ this->when(FL_WHEN_RELEASE);
     Ar8->labelcolor(FL_FOREGROUND_COLOR);
     Ar8->align(Fl_Align(FL_ALIGN_CENTER));
     Ar8->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar8
-  { RKR_Box* o = Ar9 = new RKR_Box(220, 135, 45, 30);
+  { Ar9 = new RKR_Box(220, 135, 45, 30);
     Ar9->box(FL_DOWN_BOX);
     Ar9->color(FL_BACKGROUND_COLOR);
     Ar9->selection_color(FL_BACKGROUND_COLOR);
@@ -402,9 +394,8 @@ this->when(FL_WHEN_RELEASE);
     Ar9->labelcolor(FL_FOREGROUND_COLOR);
     Ar9->align(Fl_Align(FL_ALIGN_CENTER));
     Ar9->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar9
-  { RKR_Box* o = Ar10 = new RKR_Box(270, 135, 45, 30);
+  { Ar10 = new RKR_Box(270, 135, 45, 30);
     Ar10->box(FL_DOWN_BOX);
     Ar10->color(FL_BACKGROUND_COLOR);
     Ar10->selection_color(FL_BACKGROUND_COLOR);
@@ -414,9 +405,8 @@ this->when(FL_WHEN_RELEASE);
     Ar10->labelcolor(FL_FOREGROUND_COLOR);
     Ar10->align(Fl_Align(FL_ALIGN_CENTER));
     Ar10->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar10
-  { RKR_Box* o = Ar11 = new RKR_Box(320, 135, 45, 30);
+  { Ar11 = new RKR_Box(320, 135, 45, 30);
     Ar11->box(FL_DOWN_BOX);
     Ar11->color(FL_BACKGROUND_COLOR);
     Ar11->selection_color(FL_BACKGROUND_COLOR);
@@ -426,9 +416,8 @@ this->when(FL_WHEN_RELEASE);
     Ar11->labelcolor(FL_FOREGROUND_COLOR);
     Ar11->align(Fl_Align(FL_ALIGN_CENTER));
     Ar11->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar11
-  { RKR_Box* o = Ar12 = new RKR_Box(370, 135, 45, 30);
+  { Ar12 = new RKR_Box(370, 135, 45, 30);
     Ar12->box(FL_DOWN_BOX);
     Ar12->color(FL_BACKGROUND_COLOR);
     Ar12->selection_color(FL_BACKGROUND_COLOR);
@@ -438,9 +427,8 @@ this->when(FL_WHEN_RELEASE);
     Ar12->labelcolor(FL_FOREGROUND_COLOR);
     Ar12->align(Fl_Align(FL_ALIGN_CENTER));
     Ar12->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar12
-  { RKR_Box* o = Ar13 = new RKR_Box(220, 170, 45, 30);
+  { Ar13 = new RKR_Box(220, 170, 45, 30);
     Ar13->box(FL_DOWN_BOX);
     Ar13->color(FL_BACKGROUND_COLOR);
     Ar13->selection_color(FL_BACKGROUND_COLOR);
@@ -450,9 +438,8 @@ this->when(FL_WHEN_RELEASE);
     Ar13->labelcolor(FL_FOREGROUND_COLOR);
     Ar13->align(Fl_Align(FL_ALIGN_CENTER));
     Ar13->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar13
-  { RKR_Box* o = Ar14 = new RKR_Box(270, 170, 45, 30);
+  { Ar14 = new RKR_Box(270, 170, 45, 30);
     Ar14->box(FL_DOWN_BOX);
     Ar14->color(FL_BACKGROUND_COLOR);
     Ar14->selection_color(FL_BACKGROUND_COLOR);
@@ -462,9 +449,8 @@ this->when(FL_WHEN_RELEASE);
     Ar14->labelcolor(FL_FOREGROUND_COLOR);
     Ar14->align(Fl_Align(FL_ALIGN_CENTER));
     Ar14->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar14
-  { RKR_Box* o = Ar15 = new RKR_Box(320, 170, 45, 30);
+  { Ar15 = new RKR_Box(320, 170, 45, 30);
     Ar15->box(FL_DOWN_BOX);
     Ar15->color(FL_BACKGROUND_COLOR);
     Ar15->selection_color(FL_BACKGROUND_COLOR);
@@ -474,9 +460,8 @@ this->when(FL_WHEN_RELEASE);
     Ar15->labelcolor(FL_FOREGROUND_COLOR);
     Ar15->align(Fl_Align(FL_ALIGN_CENTER));
     Ar15->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar15
-  { RKR_Box* o = Ar16 = new RKR_Box(370, 170, 45, 30);
+  { Ar16 = new RKR_Box(370, 170, 45, 30);
     Ar16->box(FL_DOWN_BOX);
     Ar16->color(FL_BACKGROUND_COLOR);
     Ar16->selection_color(FL_BACKGROUND_COLOR);
@@ -486,9 +471,8 @@ this->when(FL_WHEN_RELEASE);
     Ar16->labelcolor(FL_FOREGROUND_COLOR);
     Ar16->align(Fl_Align(FL_ALIGN_CENTER));
     Ar16->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar16
-  { RKR_Box* o = Ar17 = new RKR_Box(220, 205, 45, 30);
+  { Ar17 = new RKR_Box(220, 205, 45, 30);
     Ar17->box(FL_DOWN_BOX);
     Ar17->color(FL_BACKGROUND_COLOR);
     Ar17->selection_color(FL_BACKGROUND_COLOR);
@@ -498,9 +482,8 @@ this->when(FL_WHEN_RELEASE);
     Ar17->labelcolor(FL_FOREGROUND_COLOR);
     Ar17->align(Fl_Align(FL_ALIGN_CENTER));
     Ar17->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar17
-  { RKR_Box* o = Ar18 = new RKR_Box(270, 205, 45, 30);
+  { Ar18 = new RKR_Box(270, 205, 45, 30);
     Ar18->box(FL_DOWN_BOX);
     Ar18->color(FL_BACKGROUND_COLOR);
     Ar18->selection_color(FL_BACKGROUND_COLOR);
@@ -510,9 +493,8 @@ this->when(FL_WHEN_RELEASE);
     Ar18->labelcolor(FL_FOREGROUND_COLOR);
     Ar18->align(Fl_Align(FL_ALIGN_CENTER));
     Ar18->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar18
-  { RKR_Box* o = Ar19 = new RKR_Box(320, 205, 45, 30);
+  { Ar19 = new RKR_Box(320, 205, 45, 30);
     Ar19->box(FL_DOWN_BOX);
     Ar19->color(FL_BACKGROUND_COLOR);
     Ar19->selection_color(FL_BACKGROUND_COLOR);
@@ -522,9 +504,8 @@ this->when(FL_WHEN_RELEASE);
     Ar19->labelcolor(FL_FOREGROUND_COLOR);
     Ar19->align(Fl_Align(FL_ALIGN_CENTER));
     Ar19->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar19
-  { RKR_Box* o = Ar20 = new RKR_Box(370, 205, 45, 30);
+  { Ar20 = new RKR_Box(370, 205, 45, 30);
     Ar20->box(FL_DOWN_BOX);
     Ar20->color(FL_BACKGROUND_COLOR);
     Ar20->selection_color(FL_BACKGROUND_COLOR);
@@ -534,7 +515,6 @@ this->when(FL_WHEN_RELEASE);
     Ar20->labelcolor(FL_FOREGROUND_COLOR);
     Ar20->align(Fl_Align(FL_ALIGN_CENTER));
     Ar20->when(FL_WHEN_RELEASE);
-    o->m_start_font_offset = 4; // 10 - 14
   } // RKR_Box* Ar20
   Ares->end();
 } // Fl_Group* Ares

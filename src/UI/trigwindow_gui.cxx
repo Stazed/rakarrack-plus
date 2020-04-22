@@ -81,7 +81,7 @@ this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo5 = new Fl_Box(0, 1, 200, 180);
 } // Fl_Box* Fondo5
-{ RKR_Box* o = ACI_LABEL = new RKR_Box(34, 8, 135, 24, "Analog Control");
+{ ACI_LABEL = new RKR_Box(34, 8, 135, 24, "Analog Control");
   ACI_LABEL->box(FL_NO_BOX);
   ACI_LABEL->color(FL_BACKGROUND_COLOR);
   ACI_LABEL->selection_color(FL_BACKGROUND_COLOR);
@@ -91,7 +91,6 @@ this->when(FL_WHEN_RELEASE);
   ACI_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
   ACI_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
   ACI_LABEL->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 4; // 10 - 14
 } // RKR_Box* ACI_LABEL
 { aux_vu = new NewVum(172, 18, 16, 144);
   aux_vu->type(2);

@@ -127,7 +127,7 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
   }
   Fl_Value_Slider Vel_Adj {
     label Velocity
-    callback {m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());} selected
+    callback {m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());}
     xywh {147 34 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 1 maximum 100 step 1 textcolor 7
     code0 {o->m_start_label_offset = -2; // 10 - 8}
     code1 {o->shut_off_pixel_adjustment();}
@@ -138,9 +138,8 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
   }
   Fl_Box MIDI_LABEL {
     label MIDI
-    user_data 7
+    user_data 7 selected
     xywh {4 32 44 14} labelfont 1 labelcolor 7 when 0
-    code0 {o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4}
     class RKR_Box
   }
   decl {RKR  *m_rkr} {private local

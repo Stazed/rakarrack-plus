@@ -58,7 +58,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 open
+      user_data 1 selected
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -140,7 +140,7 @@ m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
       Fl_Box FSLabel {
         label {Font Size}
         xywh {30 333 60 17} labelsize 13 labelcolor 7 align 20
-        code0 {o->m_start_font_offset = 3; // 10 - 13}
+        code0 {o->set_label_offset(3);}
         class RKR_Box
       }
       Fl_Button FSless {
@@ -170,7 +170,7 @@ m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);}
       Fl_Box CLLabel {
         label Colors
         xywh {30 358 40 19} labelsize 13 labelcolor 7 align 20
-        code0 {o->m_start_font_offset = 3; // 10 - 13}
+        code0 {o->set_label_offset(3);}
         class RKR_Box
       }
       Fl_Button B_C {
@@ -262,7 +262,7 @@ m_rgui->PutBackground();}
       Fl_Check_Button Enable_Scale {
         label {Set Main Window Scalable}
         callback {m_rkr->scalable=(int) o->value();
-m_rkr->change_scale = 1; // true} selected
+m_rkr->change_scale = 1; // true}
         xywh {30 525 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
@@ -410,7 +410,7 @@ m_rgui->Show_Next_Time();}
         label {Looper Size Seconds}
         user_data 7
         xywh {30 170 136 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Counter L_SIZE {
@@ -435,7 +435,7 @@ m_rkr->efx_Looper->setmvol(m_rkr->Metro_Vol);}
         label {Harmonizer Quality}
         user_data 7
         xywh {30 195 136 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Har_Qual {
@@ -531,7 +531,7 @@ m_rgui->Show_Next_Time();}
         label {Vocoder Bands}
         user_data 7
         xywh {30 222 136 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Voc_Bands {
@@ -603,7 +603,7 @@ m_rgui->Show_Next_Time();}
         label {Tuner Calibration A4}
         user_data 7
         xywh {30 252 136 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Counter Calibration {
@@ -629,7 +629,7 @@ m_rkr->RingRecNote->trigfact = o->value();}
         label {Recognize Note Optimization}
         user_data 7
         xywh {30 298 176 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice RC_Harm_Opti {
@@ -759,7 +759,7 @@ switch(m_rkr->RCOpti_Ring)
         label {Harmonizer Downsample}
         user_data 7
         xywh {30 336 156 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Har_Downsample {
@@ -832,7 +832,7 @@ m_rgui->Show_Next_Time();} open
         label {Reverbtron Downsample}
         user_data 7
         xywh {30 359 156 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Rev_Downsample {
@@ -864,7 +864,7 @@ m_rgui->Show_Next_Time();} open
         label {Convolotron Downsample}
         user_data 7
         xywh {30 382 156 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Con_Downsample {
@@ -896,7 +896,7 @@ m_rgui->Show_Next_Time();} open
         label {Sequence Downsample}
         user_data 7
         xywh {30 405 156 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Seq_Downsample {
@@ -928,7 +928,7 @@ m_rgui->Show_Next_Time();} open
         label {Shifter Downsample}
         user_data 7
         xywh {30 428 156 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Shi_Downsample {
@@ -960,7 +960,7 @@ m_rgui->Show_Next_Time();} open
         label {Vocoder Downsample}
         user_data 7
         xywh {30 452 156 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Voc_Downsample {
@@ -993,7 +993,7 @@ m_rgui->Show_Next_Time();} open
         label {StereoHarm Downsample}
         user_data 7
         xywh {30 477 156 17} labelsize 12 align 20 when 0
-        code1 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Ste_Downsample {
@@ -1025,7 +1025,7 @@ m_rgui->Show_Next_Time();} open
         label {Waveshape Downsample}
         user_data 7
         xywh {30 527 156 17} labelsize 12 align 20 when 0
-        code0 {o->m_start_font_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Choice Wave_Amo {
@@ -1341,7 +1341,6 @@ m_rgui->Scan_Bank_Dir();}
           b->copy_label(buf);
           b->labelcolor(FL_BLACK);
           b->user_data((void *) c_bank_number);
-          b->m_start_font_offset = 4;
     
           RKR_Choice* cb = new RKR_Choice(120,y*25+25,40,20);
           cb->copy_label("Bank");

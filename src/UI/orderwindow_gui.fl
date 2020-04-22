@@ -30,9 +30,9 @@ m_rgui= _rgui;} {}
     xywh {1 1 600 400}
   }
   Fl_Box O_TITLE {
-    label {Put Order in your Rack}
+    label {Put Order in your Rack} selected
     xywh {25 3 438 37} labelfont 1 labelsize 33 labelcolor 7
-    code0 {o->m_start_font_offset = 23; // 10 - 33}
+    code0 {o->set_label_offset(23);}
     class RKR_Box
   }
   Fl_Browser Avail_Bro {

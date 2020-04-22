@@ -18,13 +18,12 @@ widget_class TrigWindowGui {open
   } {
     code {m_rkr = _rkr;} {}
   }
-  Fl_Box Fondo5 {selected
+  Fl_Box Fondo5 {
     xywh {0 1 200 180}
   }
   Fl_Box ACI_LABEL {
-    label {Analog Control}
+    label {Analog Control} selected
     xywh {34 8 135 24} labelfont 1 labelcolor 7
-    code0 {o->m_start_font_offset = 4; // 10 - 14}
     class RKR_Box
   }
   Fl_Slider aux_vu {

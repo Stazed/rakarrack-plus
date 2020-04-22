@@ -921,7 +921,7 @@ void RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
     } // Fl_Button* TITTLE_L
-    { LMT_LED = new RKR_Box(504, 8, 8, 8, "Lmt");
+    { RKR_Box* o = LMT_LED = new RKR_Box(504, 8, 8, 8, "Lmt");
       LMT_LED->box(FL_DOWN_BOX);
       LMT_LED->color((Fl_Color)2);
       LMT_LED->selection_color(FL_BACKGROUND_COLOR);
@@ -931,8 +931,9 @@ void RKRGUI::make_window() {
       LMT_LED->labelcolor(FL_BACKGROUND2_COLOR);
       LMT_LED->align(Fl_Align(FL_ALIGN_LEFT));
       LMT_LED->when(FL_WHEN_RELEASE);
+      o->set_label_offset(0);
     } // RKR_Box* LMT_LED
-    { CLIP_LED = new RKR_Box(541, 8, 8, 8, "Clip");
+    { RKR_Box* o = CLIP_LED = new RKR_Box(541, 8, 8, 8, "Clip");
       CLIP_LED->box(FL_DOWN_BOX);
       CLIP_LED->color((Fl_Color)1);
       CLIP_LED->selection_color(FL_BACKGROUND_COLOR);
@@ -942,8 +943,9 @@ void RKRGUI::make_window() {
       CLIP_LED->labelcolor(FL_BACKGROUND2_COLOR);
       CLIP_LED->align(Fl_Align(FL_ALIGN_LEFT));
       CLIP_LED->when(FL_WHEN_RELEASE);
+      o->set_label_offset(0);
     } // RKR_Box* CLIP_LED
-    { UPS_LED = new RKR_Box(608, 8, 8, 8, "Resample");
+    { RKR_Box* o = UPS_LED = new RKR_Box(608, 8, 8, 8, "Resample");
       UPS_LED->box(FL_DOWN_BOX);
       UPS_LED->color((Fl_Color)2);
       UPS_LED->selection_color(FL_BACKGROUND_COLOR);
@@ -953,6 +955,7 @@ void RKRGUI::make_window() {
       UPS_LED->labelcolor(FL_BACKGROUND2_COLOR);
       UPS_LED->align(Fl_Align(FL_ALIGN_LEFT));
       UPS_LED->when(FL_WHEN_RELEASE);
+      o->set_label_offset(0);
     } // RKR_Box* UPS_LED
     { RKR_Box* o = P_MIN_ST = new RKR_Box(620, 3, 29, 20, "Midi In");
       P_MIN_ST->box(FL_NO_BOX);
@@ -966,7 +969,7 @@ void RKRGUI::make_window() {
       P_MIN_ST->align(Fl_Align(FL_ALIGN_WRAP));
       P_MIN_ST->when(FL_WHEN_RELEASE);
       P_MIN_ST->hide();
-      o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2
+      o->set_label_offset(-2);
     } // RKR_Box* P_MIN_ST
     { RKR_Box* o = P_MOUT_ST = new RKR_Box(648, 3, 29, 20, "Midi Out");
       P_MOUT_ST->box(FL_NO_BOX);
@@ -980,9 +983,9 @@ void RKRGUI::make_window() {
       P_MOUT_ST->align(Fl_Align(FL_ALIGN_WRAP));
       P_MOUT_ST->when(FL_WHEN_RELEASE);
       P_MOUT_ST->hide();
-      o->m_start_font_offset = -2; // (default 10) 10 - 8 = 2
+      o->set_label_offset(-2);
     } // RKR_Box* P_MOUT_ST
-    { P_AUX_ST = new RKR_Box(676, 5, 32, 17, "Aux");
+    { RKR_Box* o = P_AUX_ST = new RKR_Box(676, 5, 32, 17, "Aux");
       P_AUX_ST->box(FL_NO_BOX);
       P_AUX_ST->color(FL_BACKGROUND_COLOR);
       P_AUX_ST->selection_color(FL_BACKGROUND_COLOR);
@@ -994,8 +997,9 @@ void RKRGUI::make_window() {
       P_AUX_ST->align(Fl_Align(FL_ALIGN_CENTER));
       P_AUX_ST->when(FL_WHEN_RELEASE);
       P_AUX_ST->hide();
+      o->set_label_offset(0);
     } // RKR_Box* P_AUX_ST
-    { P_IN_ST = new RKR_Box(698, 5, 32, 17, "In");
+    { RKR_Box* o = P_IN_ST = new RKR_Box(698, 5, 32, 17, "In");
       P_IN_ST->box(FL_NO_BOX);
       P_IN_ST->color(FL_BACKGROUND_COLOR);
       P_IN_ST->selection_color(FL_BACKGROUND_COLOR);
@@ -1007,8 +1011,9 @@ void RKRGUI::make_window() {
       P_IN_ST->align(Fl_Align(FL_ALIGN_CENTER));
       P_IN_ST->when(FL_WHEN_RELEASE);
       P_IN_ST->hide();
+      o->set_label_offset(0);
     } // RKR_Box* P_IN_ST
-    { P_OUT_ST = new RKR_Box(719, 5, 32, 17, "Out");
+    { RKR_Box* o = P_OUT_ST = new RKR_Box(719, 5, 32, 17, "Out");
       P_OUT_ST->box(FL_NO_BOX);
       P_OUT_ST->color(FL_BACKGROUND_COLOR);
       P_OUT_ST->selection_color(FL_BACKGROUND_COLOR);
@@ -1020,8 +1025,9 @@ void RKRGUI::make_window() {
       P_OUT_ST->align(Fl_Align(FL_ALIGN_CENTER));
       P_OUT_ST->when(FL_WHEN_RELEASE);
       P_OUT_ST->hide();
+      o->set_label_offset(0);
     } // RKR_Box* P_OUT_ST
-    { CPULOAD = new RKR_Box(750, 5, 45, 17);
+    { RKR_Box* o = CPULOAD = new RKR_Box(750, 5, 45, 17);
       CPULOAD->box(FL_NO_BOX);
       CPULOAD->color(FL_BACKGROUND_COLOR);
       CPULOAD->selection_color(FL_BACKGROUND_COLOR);
@@ -1032,6 +1038,7 @@ void RKRGUI::make_window() {
       CPULOAD->user_data((void*)(BOX_LED_DATA));
       CPULOAD->align(Fl_Align(FL_ALIGN_CENTER));
       CPULOAD->when(FL_WHEN_RELEASE);
+      o->set_label_offset(0);
     } // RKR_Box* CPULOAD
     { Sco = new Scope(545, 25, 226, 59, "Rakarrack");
       Sco->tooltip("Click here to turn off scope");
@@ -1096,7 +1103,7 @@ void RKRGUI::make_window() {
       E10->hide();
       E10->deactivate();
     } // Fl_Box* E10
-    { RKR_Box* o = L1 = new RKR_Box(2, 195, 158, 17, "label");
+    { L1 = new RKR_Box(2, 195, 158, 17, "label");
       L1->box(FL_NO_BOX);
       L1->color(FL_BACKGROUND_COLOR);
       L1->selection_color(FL_BACKGROUND_COLOR);
@@ -1107,9 +1114,8 @@ void RKRGUI::make_window() {
       L1->user_data((void*)(770));
       L1->align(Fl_Align(FL_ALIGN_CLIP));
       L1->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L1
-    { RKR_Box* o = L2 = new RKR_Box(162, 195, 158, 17, "label");
+    { L2 = new RKR_Box(162, 195, 158, 17, "label");
       L2->box(FL_NO_BOX);
       L2->color(FL_BACKGROUND_COLOR);
       L2->selection_color(FL_BACKGROUND_COLOR);
@@ -1120,9 +1126,8 @@ void RKRGUI::make_window() {
       L2->user_data((void*)(771));
       L2->align(Fl_Align(FL_ALIGN_CLIP));
       L2->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L2
-    { RKR_Box* o = L3 = new RKR_Box(322, 195, 158, 17, "label");
+    { L3 = new RKR_Box(322, 195, 158, 17, "label");
       L3->box(FL_NO_BOX);
       L3->color(FL_BACKGROUND_COLOR);
       L3->selection_color(FL_BACKGROUND_COLOR);
@@ -1133,9 +1138,8 @@ void RKRGUI::make_window() {
       L3->user_data((void*)(772));
       L3->align(Fl_Align(FL_ALIGN_CENTER));
       L3->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L3
-    { RKR_Box* o = L4 = new RKR_Box(482, 195, 158, 17, "label");
+    { L4 = new RKR_Box(482, 195, 158, 17, "label");
       L4->box(FL_NO_BOX);
       L4->color(FL_BACKGROUND_COLOR);
       L4->selection_color(FL_BACKGROUND_COLOR);
@@ -1146,9 +1150,8 @@ void RKRGUI::make_window() {
       L4->user_data((void*)(773));
       L4->align(Fl_Align(FL_ALIGN_CENTER));
       L4->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L4
-    { RKR_Box* o = L5 = new RKR_Box(642, 195, 157, 17, "label");
+    { L5 = new RKR_Box(642, 195, 157, 17, "label");
       L5->box(FL_NO_BOX);
       L5->color(FL_BACKGROUND_COLOR);
       L5->selection_color(FL_BACKGROUND_COLOR);
@@ -1159,9 +1162,8 @@ void RKRGUI::make_window() {
       L5->user_data((void*)(774));
       L5->align(Fl_Align(FL_ALIGN_CENTER));
       L5->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L5
-    { RKR_Box* o = L6 = new RKR_Box(1, 396, 158, 17, "label");
+    { L6 = new RKR_Box(1, 396, 158, 17, "label");
       L6->box(FL_NO_BOX);
       L6->color(FL_BACKGROUND_COLOR);
       L6->selection_color(FL_BACKGROUND_COLOR);
@@ -1172,9 +1174,8 @@ void RKRGUI::make_window() {
       L6->user_data((void*)(775));
       L6->align(Fl_Align(FL_ALIGN_CENTER));
       L6->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L6
-    { RKR_Box* o = L7 = new RKR_Box(162, 396, 158, 17, "label");
+    { L7 = new RKR_Box(162, 396, 158, 17, "label");
       L7->box(FL_NO_BOX);
       L7->color(FL_BACKGROUND_COLOR);
       L7->selection_color(FL_BACKGROUND_COLOR);
@@ -1185,9 +1186,8 @@ void RKRGUI::make_window() {
       L7->user_data((void*)(776));
       L7->align(Fl_Align(FL_ALIGN_CENTER));
       L7->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L7
-    { RKR_Box* o = L8 = new RKR_Box(322, 396, 158, 17, "label");
+    { L8 = new RKR_Box(322, 396, 158, 17, "label");
       L8->box(FL_NO_BOX);
       L8->color(FL_BACKGROUND_COLOR);
       L8->selection_color(FL_BACKGROUND_COLOR);
@@ -1198,9 +1198,8 @@ void RKRGUI::make_window() {
       L8->user_data((void*)(777));
       L8->align(Fl_Align(FL_ALIGN_CENTER));
       L8->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L8
-    { RKR_Box* o = L9 = new RKR_Box(482, 396, 158, 17, "label");
+    { L9 = new RKR_Box(482, 396, 158, 17, "label");
       L9->box(FL_NO_BOX);
       L9->color(FL_BACKGROUND_COLOR);
       L9->selection_color(FL_BACKGROUND_COLOR);
@@ -1211,9 +1210,8 @@ void RKRGUI::make_window() {
       L9->user_data((void*)(778));
       L9->align(Fl_Align(FL_ALIGN_CENTER));
       L9->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L9
-    { RKR_Box* o = L10 = new RKR_Box(642, 396, 154, 17, "label");
+    { L10 = new RKR_Box(642, 396, 154, 17, "label");
       L10->box(FL_NO_BOX);
       L10->color(FL_BACKGROUND_COLOR);
       L10->selection_color(FL_BACKGROUND_COLOR);
@@ -1224,7 +1222,6 @@ void RKRGUI::make_window() {
       L10->user_data((void*)(779));
       L10->align(Fl_Align(FL_ALIGN_CENTER));
       L10->when(FL_WHEN_RELEASE);
-      o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
     } // RKR_Box* L10
     { EQ = new EqGui(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);
@@ -1918,7 +1915,7 @@ void RKRGUI::make_window() {
         o->maximum(32);
         o->value(-32);
       } // TunerBar* tuner_bar
-      { RKR_Box* o = WNote = new RKR_Box(676, 57, 28, 22);
+      { WNote = new RKR_Box(676, 57, 28, 22);
         WNote->box(FL_NO_BOX);
         WNote->color(FL_BACKGROUND_COLOR);
         WNote->selection_color(FL_BACKGROUND_COLOR);
@@ -1929,9 +1926,8 @@ void RKRGUI::make_window() {
         WNote->user_data((void*)(7));
         WNote->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         WNote->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* WNote
-      { RKR_Box* o = WRfreq = new RKR_Box(588, 57, 76, 22);
+      { WRfreq = new RKR_Box(588, 57, 76, 22);
         WRfreq->box(FL_NO_BOX);
         WRfreq->color(FL_BACKGROUND_COLOR);
         WRfreq->selection_color(FL_BACKGROUND_COLOR);
@@ -1942,9 +1938,8 @@ void RKRGUI::make_window() {
         WRfreq->user_data((void*)(7));
         WRfreq->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         WRfreq->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* WRfreq
-      { RKR_Box* o = WNfreq = new RKR_Box(714, 57, 76, 22);
+      { WNfreq = new RKR_Box(714, 57, 76, 22);
         WNfreq->box(FL_NO_BOX);
         WNfreq->color(FL_BACKGROUND_COLOR);
         WNfreq->selection_color(FL_BACKGROUND_COLOR);
@@ -1955,7 +1950,6 @@ void RKRGUI::make_window() {
         WNfreq->user_data((void*)(7));
         WNfreq->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         WNfreq->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* WNfreq
       { PINCHO = new Fl_Box(673, 48, 32, 5, "@-4$8<");
         PINCHO->box(FL_FLAT_BOX);
@@ -1963,7 +1957,7 @@ void RKRGUI::make_window() {
         PINCHO->labelcolor((Fl_Color)4);
         PINCHO->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
       } // Fl_Box* PINCHO
-      { RKR_Box* o = TUNER_LABEL = new RKR_Box(524, 63, 57, 14, "Tuner");
+      { TUNER_LABEL = new RKR_Box(524, 63, 57, 14, "Tuner");
         TUNER_LABEL->box(FL_NO_BOX);
         TUNER_LABEL->color(FL_BACKGROUND_COLOR);
         TUNER_LABEL->selection_color(FL_BACKGROUND_COLOR);
@@ -1974,7 +1968,6 @@ void RKRGUI::make_window() {
         TUNER_LABEL->user_data((void*)(7));
         TUNER_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
         TUNER_LABEL->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* TUNER_LABEL
       Tuner->end();
     } // Fl_Group* Tuner
@@ -2132,7 +2125,7 @@ void RKRGUI::make_window() {
         output_vur->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         output_vur->when(FL_WHEN_NEVER);
       } // NewVum* output_vur
-      { RKR_Box* o = LABEL_IO = new RKR_Box(60, 30, 62, 14, "In/Out");
+      { LABEL_IO = new RKR_Box(60, 30, 62, 14, "In/Out");
         LABEL_IO->box(FL_NO_BOX);
         LABEL_IO->color(FL_BACKGROUND_COLOR);
         LABEL_IO->selection_color(FL_BACKGROUND_COLOR);
@@ -2143,7 +2136,6 @@ void RKRGUI::make_window() {
         LABEL_IO->user_data((void*)(7));
         LABEL_IO->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         LABEL_IO->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* LABEL_IO
       InOut->end();
     } // Fl_Group* InOut
@@ -2262,7 +2254,7 @@ void RKRGUI::make_window() {
         Metro_Led->color(FL_RED);
         Metro_Led->labelsize(18);
       } // Fl_Box* Metro_Led
-      { RKR_Box* o = Metro_Label = new RKR_Box(522, 117, 92, 14, "Metronome");
+      { Metro_Label = new RKR_Box(522, 117, 92, 14, "Metronome");
         Metro_Label->box(FL_NO_BOX);
         Metro_Label->color(FL_BACKGROUND_COLOR);
         Metro_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2273,7 +2265,6 @@ void RKRGUI::make_window() {
         Metro_Label->user_data((void*)(7));
         Metro_Label->align(Fl_Align(FL_ALIGN_CENTER));
         Metro_Label->when(FL_WHEN_NEVER);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* Metro_Label
       Metro->end();
     } // Fl_Group* Metro
@@ -2283,7 +2274,7 @@ void RKRGUI::make_window() {
       Presets->selection_color(FL_FOREGROUND_COLOR);
       Presets->user_data((void*)(1));
       Presets->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      { RKR_Box* o = PRESETS_LABEL = new RKR_Box(174, 28, 62, 14, "Presets");
+      { PRESETS_LABEL = new RKR_Box(174, 28, 62, 14, "Presets");
         PRESETS_LABEL->box(FL_NO_BOX);
         PRESETS_LABEL->color(FL_BACKGROUND_COLOR);
         PRESETS_LABEL->selection_color(FL_BACKGROUND_COLOR);
@@ -2294,7 +2285,6 @@ void RKRGUI::make_window() {
         PRESETS_LABEL->user_data((void*)(7));
         PRESETS_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
         PRESETS_LABEL->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* PRESETS_LABEL
       { L_B1 = new RKR_Button(418, 30, 22, 16, "1");
         L_B1->box(FL_UP_BOX);
@@ -2456,7 +2446,7 @@ void RKRGUI::make_window() {
         o->m_start_label_offset = 1; // (10 - 11)
         o->m_start_text_offset = 1; // (10 - 11)
       } // RKR_Counter* Preset_Counter
-      { RKR_Box* o = DAuthor = new RKR_Box(246, 107, 266, 18);
+      { DAuthor = new RKR_Box(246, 107, 266, 18);
         DAuthor->box(FL_DOWN_BOX);
         DAuthor->color((Fl_Color)62);
         DAuthor->selection_color(FL_BACKGROUND_COLOR);
@@ -2467,7 +2457,6 @@ void RKRGUI::make_window() {
         DAuthor->user_data((void*)(7));
         DAuthor->align(Fl_Align(100|FL_ALIGN_INSIDE));
         DAuthor->when(FL_WHEN_RELEASE);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* DAuthor
       { RandomP = new RKR_Button(175, 141, 59, 14, "Random");
         RandomP->tooltip("Random Preset selection - Shortcut \'F7\'");
@@ -2638,7 +2627,7 @@ void RKRGUI::make_window() {
         T_BUT->when(FL_WHEN_RELEASE);
         o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2
       } // RKR_Button* T_BUT
-      { RKR_Box* o = TAP_LABEL = new RKR_Box(524, 170, 93, 14, "Tap Tempo");
+      { TAP_LABEL = new RKR_Box(524, 170, 93, 14, "Tap Tempo");
         TAP_LABEL->box(FL_NO_BOX);
         TAP_LABEL->color(FL_BACKGROUND_COLOR);
         TAP_LABEL->selection_color(FL_BACKGROUND_COLOR);
@@ -2649,7 +2638,6 @@ void RKRGUI::make_window() {
         TAP_LABEL->user_data((void*)(7));
         TAP_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
         TAP_LABEL->when(FL_WHEN_NEVER);
-        o->m_start_font_offset = 4; // (default 10) 10 - 14 = 4
       } // RKR_Box* TAP_LABEL
       { RKR_Value_Input* o = T_DIS = new RKR_Value_Input(719, 165, 70, 22);
         T_DIS->box(FL_DOWN_BOX);

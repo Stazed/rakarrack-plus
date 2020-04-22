@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -52,7 +52,7 @@ har_freq1->value(rkr->efx_Har->getpar(4));
 har_gan1->value(rkr->efx_Har->getpar(8)-64);
 har_q1->value(rkr->efx_Har->getpar(9)-64);
 har_MIDI->value(rkr->efx_Har->getpar(10));
-if ((rkr->efx_Har->PMIDI) || (rkr->efx_Har->PSELECT)) rgui->Chord(0);} selected
+if ((rkr->efx_Har->PMIDI) || (rkr->efx_Har->PSELECT)) rgui->Chord(0);}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -172,9 +172,9 @@ rgui->Chord(0);}
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
     class RKR_Check_Button
   }
-  Fl_Box har_chordname {
+  Fl_Box har_chordname {selected
     xywh {56 126 98 27} labelsize 12 labelcolor 7
-    code0 {o->m_start_font_offset = 2; // (default 10) 10 - 12 = 2}
+    code0 {o->set_label_offset(2);}
     class RKR_Box
   }
   Fl_Value_Slider har_note {

@@ -201,7 +201,7 @@ this->when(FL_WHEN_RELEASE);
   O_TITLE->labelcolor(FL_BACKGROUND2_COLOR);
   O_TITLE->align(Fl_Align(FL_ALIGN_CENTER));
   O_TITLE->when(FL_WHEN_RELEASE);
-  o->m_start_font_offset = 23; // 10 - 33
+  o->set_label_offset(23);
 } // RKR_Box* O_TITLE
 { RKR_Browser* o = Avail_Bro = new RKR_Browser(15, 50, 175, 225);
   Avail_Bro->type(2);

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -123,7 +123,7 @@ rkr->efx_Looper->changepar(14,(int)o->value());}
   } {}
   Fl_Choice looper_ms {
     label MS
-    callback {rkr->efx_Looper->changepar(17,(int)o->value());} open selected
+    callback {rkr->efx_Looper->changepar(17,(int)o->value());} open
     xywh {121 73 29 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_looper_ms->get_metronome_sound());}
     class RKR_Choice
@@ -155,16 +155,19 @@ rkr->efx_Looper->changepar(9,(int)o->value())}
   Fl_Box Box_Play {
     label {Play/Stop}
     xywh {4 103 52 14} labelsize 10 labelcolor 7
+    code0 {o->set_label_offset(0);}
     class RKR_Box
   }
   Fl_Box Box_P {
     label Pause
     xywh {58 103 44 14} labelsize 10 labelcolor 7
+    code0 {o->set_label_offset(0);}
     class RKR_Box
   }
   Fl_Box {} {
     label Record
     xywh {109 103 44 14} labelsize 10 labelcolor 7
+    code0 {o->set_label_offset(0);}
     class RKR_Box
   }
   Fl_Button looper_play {
@@ -212,6 +215,7 @@ rgui->update_looper();}
   Fl_Box {} {
     label Track
     xywh {71 149 39 14} labelsize 10 labelcolor 7
+    code0 {o->set_label_offset(0);}
     class RKR_Box
   }
   Fl_Check_Button looper_r1 {
@@ -291,7 +295,7 @@ rgui->update_looper();}
     tooltip Metronome xywh {93 167 27 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  Fl_Box L_TimePos {
+  Fl_Box L_TimePos {selected
     xywh {121 166 35 14} box DOWN_BOX align 84
     class RKR_Box
   }
