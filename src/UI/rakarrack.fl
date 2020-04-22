@@ -1422,8 +1422,8 @@ Prepare_Order();
 Put_Loaded();
 if(rkr->Tap_Updated) UpdateTGUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
-          code0 {o->m_start_label_offset = 1; // (10 - 11)}
-          code1 {o->m_start_text_offset = 1; // (10 - 11)}
+          code0 {o->set_label_offset(1);}
+          code1 {o->set_text_offset(1);}
           class RKR_Counter
         }
         Fl_Box DAuthor {

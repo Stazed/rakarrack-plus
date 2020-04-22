@@ -431,7 +431,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Lstages->callback((Fl_Callback*)cb_synthfilter_Lstages);
   synthfilter_Lstages->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_Lstages->when(FL_WHEN_CHANGED);
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_text_offset(-1);
 } // RKR_Counter* synthfilter_Lstages
 { RKR_Counter* o = synthfilter_Hstages = new RKR_Counter(125, 114, 28, 11, "HPF Stg.");
   synthfilter_Hstages->type(1);
@@ -450,7 +450,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   synthfilter_Hstages->callback((Fl_Callback*)cb_synthfilter_Hstages);
   synthfilter_Hstages->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_Hstages->when(FL_WHEN_CHANGED);
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_text_offset(-1);
 } // RKR_Counter* synthfilter_Hstages
 { synthfilter_dpth = new RKR_Slider(56, 126, 100, 10, "Depth");
   synthfilter_dpth->type(5);

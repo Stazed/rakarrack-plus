@@ -397,7 +397,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   phaser_stages->callback((Fl_Callback*)cb_phaser_stages);
   phaser_stages->align(Fl_Align(FL_ALIGN_LEFT));
   phaser_stages->when(FL_WHEN_CHANGED);
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_text_offset(-1);
 } // RKR_Counter* phaser_stages
 { phaser_LR = new RKR_Slider(56, 171, 100, 10, "L/R Cross");
   phaser_LR->type(5);

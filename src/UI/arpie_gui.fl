@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -193,14 +193,14 @@ rkr->efx_Arpie->changepar(6,(int)o->value());}
   }
   Fl_Counter arpie_harm {
     label H
-    callback {rkr->efx_Arpie->changepar(8,(int)o->value());}
+    callback {rkr->efx_Arpie->changepar(8,(int)o->value());} selected
     tooltip {Number of steps in the pattern} xywh {20 150 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
-    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Choice arpie_pattern {
     user_data 12
-    callback {rkr->efx_Arpie->changepar(9,(int)o->value());} selected
+    callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
     xywh {77 147 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

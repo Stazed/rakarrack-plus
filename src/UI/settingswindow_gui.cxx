@@ -1343,7 +1343,7 @@ this->when(FL_WHEN_RELEASE);
       LM_Volume->callback((Fl_Callback*)cb_LM_Volume);
       LM_Volume->align(Fl_Align(FL_ALIGN_RIGHT));
       LM_Volume->when(FL_WHEN_RELEASE);
-      o->m_start_label_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Counter* LM_Volume
     { RKR_Box* o = Har_Q_Label = new RKR_Box(30, 195, 136, 17, "Harmonizer Quality");
       Har_Q_Label->box(FL_NO_BOX);
@@ -1495,7 +1495,7 @@ this->when(FL_WHEN_RELEASE);
       RTrigger->align(Fl_Align(FL_ALIGN_RIGHT));
       RTrigger->when(FL_WHEN_CHANGED);
       o->lstep(0.1);
-      o->m_start_label_offset = 2;
+      o->set_label_offset(2);
     } // RKR_Counter* RTrigger
     { RKR_Box* o = Recognize_Label = new RKR_Box(30, 298, 176, 17, "Recognize Note Optimization");
       Recognize_Label->box(FL_NO_BOX);
@@ -2118,8 +2118,8 @@ this->when(FL_WHEN_RELEASE);
       Midi_In_Counter->callback((Fl_Callback*)cb_Midi_In_Counter);
       Midi_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
       Midi_In_Counter->when(FL_WHEN_CHANGED);
-      o->m_start_label_offset = 2; // 10 - 12
-      o->m_start_text_offset = 2; // 10 - 12
+      o->set_label_offset(2);
+      o->set_text_offset(2);
     } // RKR_Counter* Midi_In_Counter
     { RKR_Counter* o = Har_In_Counter = new RKR_Counter(245, 210, 60, 24, "Harmonizer Receive Channel");
       Har_In_Counter->type(1);
@@ -2138,8 +2138,8 @@ this->when(FL_WHEN_RELEASE);
       Har_In_Counter->callback((Fl_Callback*)cb_Har_In_Counter);
       Har_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
       Har_In_Counter->when(FL_WHEN_CHANGED);
-      o->m_start_label_offset = 2; // 10 - 12
-      o->m_start_text_offset = 2; // 10 - 12
+      o->set_label_offset(2);
+      o->set_text_offset(2);
     } // RKR_Counter* Har_In_Counter
     { RKR_Counter* o = Stereo_Har_In_Counter = new RKR_Counter(245, 265, 60, 24, "Stereo Harm Receive Channel");
       Stereo_Har_In_Counter->type(1);
@@ -2158,8 +2158,8 @@ this->when(FL_WHEN_RELEASE);
       Stereo_Har_In_Counter->callback((Fl_Callback*)cb_Stereo_Har_In_Counter);
       Stereo_Har_In_Counter->align(Fl_Align(FL_ALIGN_RIGHT));
       Stereo_Har_In_Counter->when(FL_WHEN_CHANGED);
-      o->m_start_label_offset = 2; // 10 - 11
-      o->m_start_text_offset = 2; // 10 - 12
+      o->set_label_offset(2);
+      o->set_text_offset(2);
     } // RKR_Counter* Stereo_Har_In_Counter
     { RKR_Group* o = wMIDI = new RKR_Group(30, 266, 180, 23, "MIDI implementation");
       wMIDI->box(FL_DOWN_FRAME);

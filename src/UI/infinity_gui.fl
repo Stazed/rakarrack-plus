@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -60,7 +60,7 @@ infinity_stdf->value(rkr->efx_Infinity->getpar(13));
 infinity_subdiv->value(rkr->efx_Infinity->getpar(14));
 infinity_pan->value(rkr->efx_Infinity->getpar(15));
 infinity_rev->value(rkr->efx_Infinity->getpar(16));
-infinity_stages->value(rkr->efx_Infinity->getpar(17));} selected
+infinity_stages->value(rkr->efx_Infinity->getpar(17));}
     xywh {80 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -228,9 +228,9 @@ rkr->efx_Infinity->changepar(8,(int)o->value());}
   }
   Fl_Counter infinity_stages {
     label Stages
-    callback {rkr->efx_Infinity->changepar(17,(int)o->value());}
+    callback {rkr->efx_Infinity->changepar(17,(int)o->value());} selected
     xywh {106 93 46 15} type Simple labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
-    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Value_Slider infinity_pan {

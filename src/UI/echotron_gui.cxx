@@ -542,7 +542,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_length->callback((Fl_Callback*)cb_echotron_length);
   echotron_length->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_length->when(FL_WHEN_RELEASE);
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_text_offset(-1);
 } // RKR_Counter* echotron_length
 { echotron_fnum = new RKR_Choice(88, 168, 64, 14, "File");
   echotron_fnum->box(FL_FLAT_BOX);

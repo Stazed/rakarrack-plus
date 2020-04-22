@@ -445,7 +445,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   svfilter_stages->callback((Fl_Callback*)cb_svfilter_stages);
   svfilter_stages->align(Fl_Align(FL_ALIGN_LEFT));
   svfilter_stages->when(FL_WHEN_CHANGED);
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_text_offset(-1);
 } // RKR_Counter* svfilter_stages
 { RKR_Choice* o = mutromojo_lfotype = new RKR_Choice(80, 73, 72, 16, "LFO");
   mutromojo_lfotype->box(FL_FLAT_BOX);

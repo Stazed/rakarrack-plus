@@ -179,9 +179,9 @@ rkr->efx_MuTroMojo->changepar(12,(int)o->value());}
   }
   Fl_Counter svfilter_stages {
     label Stg
-    callback {rkr->efx_MuTroMojo->changepar(13,(int)o->value());}
+    callback {rkr->efx_MuTroMojo->changepar(13,(int)o->value());} selected
     tooltip {Filter Stages} xywh {27 74 27 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
-    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Choice mutromojo_lfotype {
@@ -192,7 +192,7 @@ rkr->efx_MuTroMojo->changepar(12,(int)o->value());}
  return;
 }
 
-rkr->efx_MuTroMojo->changepar(4,(int)o->value())} selected
+rkr->efx_MuTroMojo->changepar(4,(int)o->value())}
     xywh {80 73 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice

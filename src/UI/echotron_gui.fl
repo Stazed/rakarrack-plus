@@ -202,7 +202,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
  return;
 }
 
-rkr->efx_Echotron->changepar(14,(int)o->value());} open selected
+rkr->efx_Echotron->changepar(14,(int)o->value());} open
     xywh {88 135 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -256,9 +256,9 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
  rgui->getMIDIControl(357);
  return;
 }
-rkr->efx_Echotron->changepar(3,(int)o->value());}
+rkr->efx_Echotron->changepar(3,(int)o->value());} selected
     xywh {16 167 48 12} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textsize 9
-    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Choice echotron_fnum {

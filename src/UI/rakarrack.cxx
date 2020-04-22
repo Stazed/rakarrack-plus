@@ -2443,8 +2443,8 @@ void RKRGUI::make_window() {
         Preset_Counter->callback((Fl_Callback*)cb_Preset_Counter);
         Preset_Counter->align(Fl_Align(FL_ALIGN_BOTTOM));
         Preset_Counter->when(FL_WHEN_CHANGED);
-        o->m_start_label_offset = 1; // (10 - 11)
-        o->m_start_text_offset = 1; // (10 - 11)
+        o->set_label_offset(1);
+        o->set_text_offset(1);
       } // RKR_Counter* Preset_Counter
       { DAuthor = new RKR_Box(246, 107, 266, 18);
         DAuthor->box(FL_DOWN_BOX);

@@ -150,7 +150,7 @@ rkr->efx_Synthfilter->changepar(3,(int)o->value());}
  return;
 }
 
-rkr->efx_Synthfilter->changepar(4,(int)o->value());} selected
+rkr->efx_Synthfilter->changepar(4,(int)o->value());}
     xywh {65 63 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     code1 {o->set_text_offset(-1);}
@@ -200,14 +200,14 @@ rkr->efx_Synthfilter->changepar(7,(int)o->value());}
     label {LPF Stg.}
     callback {rkr->efx_Synthfilter->changepar(8,(int)o->value());}
     xywh {48 114 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
-    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Counter synthfilter_Hstages {
     label {HPF Stg.}
-    callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());}
+    callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());} selected
     xywh {125 114 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
-    code0 {o->m_start_text_offset = -1; // 10 - 9}
+    code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Value_Slider synthfilter_dpth {

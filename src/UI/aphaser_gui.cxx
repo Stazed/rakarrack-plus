@@ -407,7 +407,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_stages->callback((Fl_Callback*)cb_aphaser_stages);
   aphaser_stages->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_stages->when(FL_WHEN_CHANGED);
-  o->m_start_text_offset = -1; // 10 - 9
+  o->set_text_offset(-1);
 } // RKR_Counter* aphaser_stages
 { aphaser_subs = new RKR_Check_Button(18, 165, 64, 15, "Subtract");
   aphaser_subs->box(FL_NO_BOX);

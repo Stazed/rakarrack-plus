@@ -15,7 +15,7 @@ decl {\#include "RKR_Counter.h"} {public global
 }
 
 widget_class {this->m_rgui = NULL; this->m_rkr = NULL;} MidiGui {
-  user_data 1 open selected
+  user_data 1 open
   xywh {1389 231 275 50} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -103,10 +103,10 @@ m_rgui= _rgui;} {}
   }
   Fl_Counter Midi_out_Counter {
     label Channel
-    callback {m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());}
+    callback {m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());} selected
     tooltip {Channel to send MIDI out.} xywh {94 4 50 15} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
-    code0 {o->m_start_label_offset = -1; // 10 - 9}
-    code1 {o->m_start_text_offset = 1; // 10 - 11}
+    code0 {o->set_label_offset(-1);}
+    code1 {o->set_text_offset(1);}
     class RKR_Counter
   }
   Fl_Check_Button Use_FFT {

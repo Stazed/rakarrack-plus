@@ -147,8 +147,8 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Midi_out_Counter->callback((Fl_Callback*)cb_Midi_out_Counter);
   Midi_out_Counter->align(Fl_Align(FL_ALIGN_BOTTOM));
   Midi_out_Counter->when(FL_WHEN_CHANGED);
-  o->m_start_label_offset = -1; // 10 - 9
-  o->m_start_text_offset = 1; // 10 - 11
+  o->set_label_offset(-1);
+  o->set_text_offset(1);
 } // RKR_Counter* Midi_out_Counter
 { Use_FFT = new RKR_Check_Button(51, 34, 15, 15, "FFT");
   Use_FFT->tooltip("FFT based algorithm which is much more\nCPU intensive but may provide better \

@@ -58,7 +58,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
+      user_data 1 selected
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -426,7 +426,7 @@ m_rkr->m_displayed=1;
         callback {m_rkr->Metro_Vol=(int)o->value();
 m_rkr->efx_Looper->setmvol(m_rkr->Metro_Vol);}
         xywh {220 170 47 18} type Simple labelsize 12 labelcolor 7 align 8 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
-        code0 {o->m_start_label_offset = 2;}
+        code0 {o->set_label_offset(2);}
         class RKR_Counter
       }
       Fl_Box Har_Q_Label {
@@ -620,7 +620,7 @@ m_rkr->StHarmRecNote->trigfact = o->value();
 m_rkr->RingRecNote->trigfact = o->value();}
         tooltip {Recognize Note Trigger} xywh {300 249 116 21} labelsize 12 labelcolor 7 align 8 minimum 0.01 maximum 0.99 step 0.01 value 0.6 textsize 10
         code0 {o->lstep(0.1);}
-        code1 {o->m_start_label_offset = 2;}
+        code1 {o->set_label_offset(2);}
         class RKR_Counter
       }
       Fl_Box Recognize_Label {
@@ -1106,24 +1106,24 @@ m_rkr->Conecta();}
         label {Effects Receive Channel}
         callback {m_rkr->MidiCh=(int)o->value()-1;}
         xywh {30 210 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
-        code0 {o->m_start_label_offset = 2; // 10 - 12}
-        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
+        code1 {o->set_text_offset(2);}
         class RKR_Counter
       }
       Fl_Counter Har_In_Counter {
         label {Harmonizer Receive Channel}
         callback {m_rkr->HarCh=(int)o->value()-1;}
         xywh {245 210 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
-        code0 {o->m_start_label_offset = 2; // 10 - 12}
-        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
+        code1 {o->set_text_offset(2);}
         class RKR_Counter
       }
       Fl_Counter Stereo_Har_In_Counter {
         label {Stereo Harm Receive Channel}
         callback {m_rkr->StereoHarCh=(int)o->value()-1;}
         xywh {245 265 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
-        code0 {o->m_start_label_offset = 2; // 10 - 11}
-        code1 {o->m_start_text_offset = 2; // 10 - 12}
+        code0 {o->set_label_offset(2);}
+        code1 {o->set_text_offset(2);}
         class RKR_Counter
       }
       Fl_Group wMIDI {
@@ -1374,8 +1374,7 @@ m_rgui->Scan_Bank_Dir();}
         (float) scroll->get_start_y() * H_midi_set_ratio,
         ((float) scroll->get_start_width() * W_midi_set_ratio),
         (float) scroll->get_start_height() * H_midi_set_ratio
-      );} {selected
-    }
+      );} {}
   }
   Function {fill_mptable(int num,int value)} {} {
     code {// Fill settings scroll
