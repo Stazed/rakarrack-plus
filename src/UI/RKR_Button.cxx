@@ -26,12 +26,13 @@
 #include "RKR_Button.h"
 #include "../global.h"
 
-RKR_Button::RKR_Button(int X, int Y, int W, int H, const char *label) : Fl_Button(X, Y, W, H, label)
+RKR_Button::RKR_Button(int X, int Y, int W, int H, const char *label) :
+    Fl_Button(X, Y, W, H, label),
+    m_start_font_offset(0),
+    m_start_width(W),
+    m_start_height(H),
+    m_previous_font_size(global_font_size)
 {
-    m_previous_font_size = global_font_size;
-    m_start_width = W;
-    m_start_height = H;
-    m_start_font_offset = 0;
     this->user_data((void*)(BUTTON_USER_DATA));
 }
 
