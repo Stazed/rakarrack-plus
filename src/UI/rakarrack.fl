@@ -320,9 +320,9 @@ Pexitprogram=1;} open
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
-        code0 {o->m_start_font_offset = 4; // 10 - 14}
+        code0 {o->set_label_offset(4);}
         code1 {o->set_submenu_paths(main_submenu_paths);}
         class RKR_Menu_Bar
       } {

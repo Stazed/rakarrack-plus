@@ -45,9 +45,9 @@ m_rgui= _rgui;} {}
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
-  Fl_Menu_Bar MenuB {
+  Fl_Menu_Bar MenuB {selected
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
-    code0 {o->m_start_font_offset = 6; // 10 - 16}
+    code0 {o->set_label_offset(6);}
     code1 {o->set_submenu_paths(bank_submenu_paths);}
     class RKR_Menu_Bar
   } {
@@ -171,7 +171,7 @@ if(ok)
 m_rgui->BankWin_Label((char *)v);
 m_rgui->Put_Loaded_Bank();
 unlight_preset(m_rkr->Selected_Preset);
-}} open selected
+}} open
     xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
     code0 {o->set_label_offset(4);}
     code1 {o->set_text_offset(4);}

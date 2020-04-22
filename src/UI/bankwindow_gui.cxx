@@ -202,7 +202,7 @@ this->when(FL_WHEN_RELEASE);
   MenuB->align(Fl_Align(96|FL_ALIGN_INSIDE));
   MenuB->when(FL_WHEN_RELEASE_ALWAYS);
   MenuB->menu(menu_MenuB);
-  o->m_start_font_offset = 6; // 10 - 16
+  o->set_label_offset(6);
   o->set_submenu_paths(bank_submenu_paths);
 } // RKR_Menu_Bar* MenuB
 { RKR_Button* o = B_B1 = new RKR_Button(258, 14, 32, 24, "1");

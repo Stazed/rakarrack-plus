@@ -908,7 +908,7 @@ void RKRGUI::make_window() {
       MenuP->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MenuP->when(FL_WHEN_RELEASE_ALWAYS);
       MenuP->menu(menu_MenuP);
-      o->m_start_font_offset = 4; // 10 - 14
+      o->set_label_offset(4);
       o->set_submenu_paths(main_submenu_paths);
     } // RKR_Menu_Bar* MenuP
     { TITTLE_L = new Fl_Button(521, 2, 276, 21);
