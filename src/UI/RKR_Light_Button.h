@@ -41,8 +41,8 @@ public:
     int m_start_font_offset;
 private:
 
-    int m_start_height;
     int m_start_width;
+    int m_start_height;
     int m_previous_font_size;
     void font_resize(int,int);
 

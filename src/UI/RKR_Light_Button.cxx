@@ -26,12 +26,13 @@
 #include "RKR_Light_Button.h"
 #include "../global.h"
 
-RKR_Light_Button::RKR_Light_Button(int X, int Y, int W, int H, const char *label) : Fl_Light_Button(X, Y, W, H, label)
+RKR_Light_Button::RKR_Light_Button(int X, int Y, int W, int H, const char *label) :
+    Fl_Light_Button(X, Y, W, H, label),
+    m_start_font_offset(0),
+    m_start_width(W),
+    m_start_height(H),
+    m_previous_font_size(global_font_size)
 {
-    m_previous_font_size = global_font_size;
-    m_start_width = W;
-    m_start_height = H;
-    m_start_font_offset = 0;
     this->user_data((void*)(LIGHT_BUTTON_USER_DATA));
 }
 
@@ -46,27 +47,26 @@ void RKR_Light_Button::draw()
     
     if(value())
     {
-        if(label() == "Off")
+        if(strcmp(label(), "Off") == 0)
         {
             label("On");
         }
-        else if(label() == "FX Off")
+        else if(strcmp(label(), "FX Off") == 0)
         {
             label("FX On");
         }   
     }
     else
     {
-        if(label() == "On")
+        if(strcmp(label(), "On") == 0)
         {
             label("Off");
         }
-        else if(label() == "FX On")
+        else if(strcmp(label(), "FX On") == 0)
         {
             label("FX Off");
         }
     }
-
 
     Fl_Light_Button::draw();
 }
