@@ -51,7 +51,12 @@ public:
     void clear_initialize();
     void applyfilters (float * efxoutl, uint32_t period);
     void adjust(int DS, uint32_t period);
-
+    
+    /* Change resample quality, etc */
+    void change_quality(int Quality);
+    void change_downsample(int DS);
+    void change_up_q(int uq);
+    void change_down_q(int dq);
 
     int Ppreset;
     int Pinterval;
@@ -79,6 +84,7 @@ public:
 
 private:
 
+    bool m_adjust_quality;
     int Pvolume;
     int Pgain;
     int Ppan;
@@ -92,7 +98,12 @@ private:
     float panning;
     float gain;
     float interval;
-
+    
+    /* Change quality */
+    int m_hold_parameters[11];  // hold the current parameters to reset on quality change
+    void save_parameters();
+    void reset_parameters();
+    
     void setvolume (int Pvolume);
     void setpanning (int Ppan);
     void setinterval (int Pinterval);

@@ -287,13 +287,12 @@ switch(i)
 	break;
      case 3:
        m_rkr->HarQual=32;	
-	break;
-
-		
+	break;	
 }
 
+m_rkr->efx_Har->change_quality(m_rkr->HarQual);
 
-m_rgui->Show_Next_Time();
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Qual_i(o,v);
@@ -527,7 +526,8 @@ Fl_Menu_Item SettingsWindowGui::menu_RC_Ring_Opti[] = {
 
 void SettingsWindowGui::cb_Har_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Har_Down=(int)o->value();
-m_rgui->Show_Next_Time();
+m_rkr->efx_Har->change_downsample(m_rkr->Har_Down);
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Downsample_i(o,v);
@@ -549,7 +549,8 @@ Fl_Menu_Item SettingsWindowGui::menu_Har_Downsample[] = {
 
 void SettingsWindowGui::cb_Har_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Har_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+m_rkr->efx_Har->change_down_q(m_rkr->Har_D_Q);
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Down_Qua_i(o,v);
@@ -557,7 +558,8 @@ void SettingsWindowGui::cb_Har_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Har_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Har_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+m_rkr->efx_Har->change_up_q(m_rkr->Har_U_Q);
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Har_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Up_Qua_i(o,v);

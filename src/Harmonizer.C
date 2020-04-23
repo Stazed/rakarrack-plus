@@ -47,6 +47,7 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
     tempr(NULL),
     outvolume(0.5f),
     r_ratio(),
+    m_adjust_quality(false),
     Pvolume(),
     Pgain(),
     Ppan(),
@@ -58,6 +59,7 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
     panning(),
     gain(),
     interval(),
+    m_hold_parameters(),
     pl(NULL),
     interpbuf(NULL),
     U_Resample(NULL),
@@ -96,6 +98,90 @@ Harmonizer::cleanup()
     mira = 0;
     memset(outi, 0, sizeof (float)*nPERIOD);
     memset(outo, 0, sizeof (float)*nPERIOD);
+}
+
+void 
+Harmonizer::change_quality(int Quality)
+{
+    m_adjust_quality = true;
+    save_parameters();
+
+    cleanup();
+    hq = Quality;
+    delete PS;
+    PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
+    PS->ratio = 1.0f;
+
+    reset_parameters();
+    m_adjust_quality = false;
+}
+
+void 
+Harmonizer::change_downsample(int DS)
+{
+    m_adjust_quality = true;
+    save_parameters();
+
+    adjust(DS, PERIOD);
+    clear_initialize();
+    initialize();
+    cleanup();
+
+    delete PS;
+    PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
+    PS->ratio = 1.0f;
+
+    reset_parameters();
+    m_adjust_quality = false;
+}
+
+void 
+Harmonizer::change_up_q(int uq)
+{
+    m_adjust_quality = true;
+    save_parameters();
+    cleanup();
+
+    delete U_Resample;
+    U_Resample = new Resample(uq);
+
+    reset_parameters();
+    m_adjust_quality = false;
+}
+
+void 
+Harmonizer::change_down_q(int dq)
+{
+    m_adjust_quality = true;
+    save_parameters();
+    cleanup();
+
+    delete D_Resample;
+    D_Resample = new Resample(dq);
+    
+    reset_parameters();
+    m_adjust_quality = false;
+}
+
+void
+Harmonizer::save_parameters()
+{
+    const int preset_size = 11;
+    for(int i = 0; i < preset_size; i++)
+    {
+        m_hold_parameters[i] = getpar(i);
+    }
+}
+
+void
+Harmonizer::reset_parameters()
+{
+    const int preset_size = 11;
+    
+    for(int i = 0; i < preset_size; i++)
+    {
+        changepar(i, m_hold_parameters[i]);
+    }
 }
 
 #ifdef LV2_SUPPORT
@@ -158,6 +244,8 @@ Harmonizer::applyfilters(float * efxoutl, uint32_t period)
 void
 Harmonizer::out(float *efxoutl, float *efxoutr)
 {
+    if(m_adjust_quality)
+        return;
 
     if ((DS_state != 0) && (Pinterval != 12))
     {
