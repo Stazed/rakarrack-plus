@@ -72,8 +72,8 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
     adjust(DS, PERIOD);
     initialize();
 
-    U_Resample = new Resample(dq);
-    D_Resample = new Resample(uq);
+    U_Resample = new Resample(uq);
+    D_Resample = new Resample(dq);
 
     PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;

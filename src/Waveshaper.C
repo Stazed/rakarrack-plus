@@ -102,8 +102,8 @@ Waveshaper::Waveshaper(double samplerate, int Wave_Res_Amount, int Wave_up_q,
 
     dynodecay = 0.0167f / (ncSAMPLE_RATE + 0.0167f); //about 60Hz sub modulation from this
 
-    U_Resample = new Resample(Wave_up_q); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
-    D_Resample = new Resample(Wave_down_q);
+    U_Resample = new Resample(Wave_up_q);
+    D_Resample = new Resample(Wave_down_q);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
 }
 
 Waveshaper::~Waveshaper()

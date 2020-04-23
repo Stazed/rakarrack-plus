@@ -108,8 +108,8 @@ Sequence::Sequence(long int Quality, int DS, int uq, int dq,
 
     initialize();
 
-    U_Resample = new Resample(dq);
-    D_Resample = new Resample(uq);
+    U_Resample = new Resample(uq);
+    D_Resample = new Resample(dq);
 
     filterl->setmix(1, 0.33f, -1.0f, 0.25f);
     filterr->setmix(1, 0.33f, -1.0f, 0.25f);

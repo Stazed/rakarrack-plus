@@ -98,9 +98,9 @@ Vocoder::Vocoder(float *auxresampled_, int bands, int DS, int uq, int dq,
     
     initialize();
     
-    A_Resample = new Resample(dq);
-    U_Resample = new Resample(dq);
-    D_Resample = new Resample(uq);
+    A_Resample = new Resample(uq);
+    U_Resample = new Resample(uq);
+    D_Resample = new Resample(dq);
 
     setbands(VOC_BANDS, 200.0f, 4000.0f);
     init_filters();

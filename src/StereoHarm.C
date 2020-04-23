@@ -79,8 +79,8 @@ StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq,
     adjust(STE_DOWN, PERIOD);
     initialize();
 
-    U_Resample = new Resample(dq);
-    D_Resample = new Resample(uq);
+    U_Resample = new Resample(uq);
+    D_Resample = new Resample(dq);
 
     PSl = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PSl->ratio = 1.0f;

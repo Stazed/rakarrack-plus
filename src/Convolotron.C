@@ -98,8 +98,8 @@ Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t in
     oldl = 0.0f;
 
     M_Resample = new Resample(0);
-    U_Resample = new Resample(dq); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
-    D_Resample = new Resample(uq);
+    U_Resample = new Resample(uq);
+    D_Resample = new Resample(dq); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
 
     setpreset(Ppreset);
     cleanup();
