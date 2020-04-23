@@ -40,12 +40,12 @@ Resample::Resample(int type) :
 
 Resample::~Resample()
 {
-    if(statel != NULL)
+    if(statel)
     {
         src_delete(statel);
     }
     
-    if(stater != NULL)
+    if(stater)
     {
         src_delete(stater);
     }
@@ -54,8 +54,15 @@ Resample::~Resample()
 void
 Resample::cleanup()
 {
-    src_reset(statel);
-    src_reset(stater);
+    if(statel)
+    {
+        src_reset(statel);
+    }
+    
+    if(stater)
+    {
+        src_reset(stater);
+    }
 }
 
 void
@@ -76,8 +83,15 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
     srcinfor.src_ratio = ratio;
     srcinfor.end_of_input = 0;
 
-    errorl = src_process(statel, &srcinfol);
-    errorr = src_process(stater, &srcinfor);
+    if(statel)
+    {
+        errorl = src_process(statel, &srcinfol);
+    }
+    
+    if(stater)
+    {
+        errorr = src_process(stater, &srcinfor);
+    }
 }
 
 void
@@ -90,7 +104,10 @@ Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_fram
     srcinfol.src_ratio = ratio;
     srcinfol.end_of_input = 0;
 
-    errorl = src_process(statel, &srcinfol);
+    if(statel)
+    {
+        errorl = src_process(statel, &srcinfol);
+    }
 }
 
 
