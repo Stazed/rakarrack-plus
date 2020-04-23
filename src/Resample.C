@@ -68,6 +68,11 @@ Resample::cleanup()
 void
 Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, double ratio)
 {
+    if(!statel)
+        return;
+    if(!stater)
+        return;
+    
     long int o_frames = lrint((double) frames * ratio);
     srcinfol.data_in = inl;
     srcinfol.input_frames = frames;
@@ -83,20 +88,17 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
     srcinfor.src_ratio = ratio;
     srcinfor.end_of_input = 0;
 
-    if(statel)
-    {
-        errorl = src_process(statel, &srcinfol);
-    }
+    errorl = src_process(statel, &srcinfol);
+    errorr = src_process(stater, &srcinfor);
     
-    if(stater)
-    {
-        errorr = src_process(stater, &srcinfor);
-    }
 }
 
 void
 Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_frames)
 {
+    if(!statel)
+        return;
+    
     srcinfol.data_in = inl;
     srcinfol.input_frames = frames;
     srcinfol.data_out = outl;
@@ -104,10 +106,7 @@ Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_fram
     srcinfol.src_ratio = ratio;
     srcinfol.end_of_input = 0;
 
-    if(statel)
-    {
-        errorl = src_process(statel, &srcinfol);
-    }
+    errorl = src_process(statel, &srcinfol);
 }
 
 
