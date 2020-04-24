@@ -47,7 +47,6 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
     tempr(NULL),
     outvolume(0.5f),
     r_ratio(),
-    m_adjust_quality(false),
     Pvolume(),
     Pgain(),
     Ppan(),
@@ -103,7 +102,6 @@ Harmonizer::cleanup()
 void 
 Harmonizer::change_quality(int Quality)
 {
-    m_adjust_quality = true;
     save_parameters();
 
     cleanup();
@@ -113,13 +111,11 @@ Harmonizer::change_quality(int Quality)
     PS->ratio = 1.0f;
 
     reset_parameters();
-    m_adjust_quality = false;
 }
 
 void 
 Harmonizer::change_downsample(int DS)
 {
-    m_adjust_quality = true;
     save_parameters();
 
     adjust(DS, PERIOD);
@@ -132,13 +128,11 @@ Harmonizer::change_downsample(int DS)
     PS->ratio = 1.0f;
 
     reset_parameters();
-    m_adjust_quality = false;
 }
 
 void 
 Harmonizer::change_up_q(int uq)
 {
-    m_adjust_quality = true;
     save_parameters();
     cleanup();
 
@@ -146,13 +140,11 @@ Harmonizer::change_up_q(int uq)
     U_Resample = new Resample(uq);
 
     reset_parameters();
-    m_adjust_quality = false;
 }
 
 void 
 Harmonizer::change_down_q(int dq)
 {
-    m_adjust_quality = true;
     save_parameters();
     cleanup();
 
@@ -160,14 +152,12 @@ Harmonizer::change_down_q(int dq)
     D_Resample = new Resample(dq);
     
     reset_parameters();
-    m_adjust_quality = false;
 }
 
 void
 Harmonizer::save_parameters()
 {
-    const int preset_size = 11;
-    for(int i = 0; i < preset_size; i++)
+    for(int i = 0; i < HARM_PRESET_SIZE; i++)
     {
         m_hold_parameters[i] = getpar(i);
     }
@@ -176,9 +166,7 @@ Harmonizer::save_parameters()
 void
 Harmonizer::reset_parameters()
 {
-    const int preset_size = 11;
-    
-    for(int i = 0; i < preset_size; i++)
+    for(int i = 0; i < HARM_PRESET_SIZE; i++)
     {
         changepar(i, m_hold_parameters[i]);
     }
@@ -244,9 +232,6 @@ Harmonizer::applyfilters(float * efxoutl, uint32_t period)
 void
 Harmonizer::out(float *efxoutl, float *efxoutr)
 {
-    if(m_adjust_quality)
-        return;
-
     if ((DS_state != 0) && (Pinterval != 12))
     {
         memcpy(templ, efxoutl, sizeof (float)*PERIOD);
@@ -491,7 +476,7 @@ Harmonizer::adjust(int DS, uint32_t period)
 void
 Harmonizer::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 11;
+    const int PRESET_SIZE = HARM_PRESET_SIZE;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

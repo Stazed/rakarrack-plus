@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {470 82 530 580} type Double
+  xywh {23 68 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -455,7 +455,13 @@ switch(i)
 	break;	
 }
 
+int hold_bypass = rkr->Harmonizer_Bypass;
+rkr->Harmonizer_Bypass = 0;
+usleep(250000);
 m_rkr->efx_Har->change_quality(m_rkr->HarQual);
+usleep(500000);
+rkr->Harmonizer_Bypass = hold_bypass;
+
 
 //m_rgui->Show_Next_Time();}
         xywh {165 195 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
@@ -761,7 +767,13 @@ switch(m_rkr->RCOpti_Ring)
       Fl_Choice Har_Downsample {
         label { }
         callback {m_rkr->Har_Down=(int)o->value();
+
+int hold_bypass = rkr->Harmonizer_Bypass;
+rkr->Harmonizer_Bypass = 0;
+usleep(250000);
 m_rkr->efx_Har->change_downsample(m_rkr->Har_Down);
+usleep(500000);
+rkr->Harmonizer_Bypass = hold_bypass;
 //m_rgui->Show_Next_Time();}
         xywh {190 336 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
@@ -810,7 +822,14 @@ m_rkr->efx_Har->change_downsample(m_rkr->Har_Down);
       Fl_Choice Har_Down_Qua {
         label Down
         callback {m_rkr->Har_D_Q=(int)o->value();
+
+int hold_bypass = rkr->Harmonizer_Bypass;
+rkr->Harmonizer_Bypass = 0;
+usleep(250000);
 m_rkr->efx_Har->change_down_q(m_rkr->Har_D_Q);
+usleep(500000);
+rkr->Harmonizer_Bypass = hold_bypass;
+
 //m_rgui->Show_Next_Time();} open
         xywh {300 336 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
@@ -820,7 +839,15 @@ m_rkr->efx_Har->change_down_q(m_rkr->Har_D_Q);
       Fl_Choice Har_Up_Qua {
         label Up
         callback {m_rkr->Har_U_Q=(int)o->value();
+
+int hold_bypass = rkr->Harmonizer_Bypass;
+rkr->Harmonizer_Bypass = 0;
+usleep(250000);
 m_rkr->efx_Har->change_up_q(m_rkr->Har_U_Q);
+usleep(500000);
+rkr->Harmonizer_Bypass = hold_bypass;
+
+
 //m_rgui->Show_Next_Time();} open
         xywh {400 336 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}

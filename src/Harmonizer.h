@@ -30,6 +30,7 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
+#define HARM_PRESET_SIZE 11
 
 class Harmonizer
 {
@@ -84,7 +85,6 @@ public:
 
 private:
 
-    bool m_adjust_quality;
     int Pvolume;
     int Pgain;
     int Ppan;
