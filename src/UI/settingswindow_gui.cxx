@@ -598,7 +598,15 @@ void SettingsWindowGui::cb_Har_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Rev_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Rev_Down=(int)o->value();
-m_rgui->Show_Next_Time();
+
+int hold_bypass = rkr->Reverbtron_Bypass;
+rkr->Reverbtron_Bypass = 0;
+usleep(250000);
+m_rkr->efx_Reverbtron->change_downsample(m_rkr->Rev_Down);
+usleep(500000);
+rkr->Reverbtron_Bypass = hold_bypass;
+
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Rev_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Rev_Downsample_i(o,v);
@@ -606,7 +614,16 @@ void SettingsWindowGui::cb_Rev_Downsample(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Rev_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Rev_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+
+int hold_bypass = rkr->Reverbtron_Bypass;
+rkr->Reverbtron_Bypass = 0;
+usleep(250000);
+m_rkr->efx_Reverbtron->change_down_q(m_rkr->Rev_D_Q);
+usleep(500000);
+rkr->Reverbtron_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Rev_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Rev_Down_Qua_i(o,v);
@@ -614,7 +631,16 @@ void SettingsWindowGui::cb_Rev_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Rev_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Rev_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+
+int hold_bypass = rkr->Reverbtron_Bypass;
+rkr->Reverbtron_Bypass = 0;
+usleep(250000);
+m_rkr->efx_Reverbtron->change_up_q(m_rkr->Rev_U_Q);
+usleep(500000);
+rkr->Reverbtron_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Rev_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Rev_Up_Qua_i(o,v);

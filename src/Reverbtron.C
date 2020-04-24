@@ -162,6 +162,61 @@ Reverbtron::cleanup()
     lpfr->cleanup();
 }
 
+void 
+Reverbtron::change_downsample(int DS)
+{
+    save_parameters();
+
+    adjust(DS, fSAMPLE_RATE);
+    clear_initialize();
+    initialize();
+    cleanup();
+
+    reset_parameters();
+}
+
+void 
+Reverbtron::change_up_q(int uq)
+{
+    save_parameters();
+    cleanup();
+
+    delete U_Resample;
+    U_Resample = new Resample(uq);
+
+    reset_parameters();
+}
+
+void 
+Reverbtron::change_down_q(int dq)
+{
+    save_parameters();
+    cleanup();
+
+    delete D_Resample;
+    D_Resample = new Resample(dq);
+    
+    reset_parameters();
+}
+
+void
+Reverbtron::save_parameters()
+{
+    for(int i = 0; i < REVTRON_PRESET_SIZE; i++)
+    {
+        m_hold_parameters[i] = getpar(i);
+    }
+}
+
+void
+Reverbtron::reset_parameters()
+{
+    for(int i = 0; i < REVTRON_PRESET_SIZE; i++)
+    {
+        changepar(i, m_hold_parameters[i]);
+    }
+}
+
 #ifdef LV2_SUPPORT
 void
 Reverbtron::lv2_update_params(uint32_t period)
@@ -791,7 +846,7 @@ Reverbtron::adjust(int DS, double fSAMPLE_RATE)
 void
 Reverbtron::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 16;
+    const int PRESET_SIZE = REVTRON_PRESET_SIZE;
     const int NUM_PRESETS = 9;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

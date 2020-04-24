@@ -867,7 +867,15 @@ rkr->Harmonizer_Bypass = hold_bypass;
       }
       Fl_Choice Rev_Downsample {
         callback {m_rkr->Rev_Down=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+int hold_bypass = rkr->Reverbtron_Bypass;
+rkr->Reverbtron_Bypass = 0;
+usleep(250000);
+m_rkr->efx_Reverbtron->change_downsample(m_rkr->Rev_Down);
+usleep(500000);
+rkr->Reverbtron_Bypass = hold_bypass;
+
+//m_rgui->Show_Next_Time();} open
         xywh {190 359 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
         class RKR_Choice
@@ -875,7 +883,16 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Rev_Down_Qua {
         label Down
         callback {m_rkr->Rev_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();}
+
+int hold_bypass = rkr->Reverbtron_Bypass;
+rkr->Reverbtron_Bypass = 0;
+usleep(250000);
+m_rkr->efx_Reverbtron->change_down_q(m_rkr->Rev_D_Q);
+usleep(500000);
+rkr->Reverbtron_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();}
         xywh {300 359 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -884,7 +901,16 @@ m_rgui->Show_Next_Time();}
       Fl_Choice Rev_Up_Qua {
         label Up
         callback {m_rkr->Rev_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+int hold_bypass = rkr->Reverbtron_Bypass;
+rkr->Reverbtron_Bypass = 0;
+usleep(250000);
+m_rkr->efx_Reverbtron->change_up_q(m_rkr->Rev_U_Q);
+usleep(500000);
+rkr->Reverbtron_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();} open
         xywh {400 359 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}

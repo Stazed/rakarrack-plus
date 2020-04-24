@@ -27,6 +27,8 @@
 #include "AnalogFilter.h"
 #include "Resample.h"
 
+#define REVTRON_PRESET_SIZE 16
+
 class RvbFile
 {
 public:
@@ -67,6 +69,11 @@ public:
     void adjust(int DS, double sample_rate);
     RvbFile loadfile(char* filename);
     void applyfile(RvbFile file);
+    
+    /* Change resample quality, etc */
+    void change_downsample(int DS);
+    void change_up_q(int uq);
+    void change_down_q(int dq);
 
     int Ppreset;
     float outvolume;
@@ -75,6 +82,11 @@ public:
     RvbFile File;
 
 private:
+
+    /* Change quality */
+    int m_hold_parameters[REVTRON_PRESET_SIZE];  // hold the current parameters to reset on quality change
+    void save_parameters();
+    void reset_parameters();
 
     void setvolume (int Pvolume);
     void setpanning (int Ppanning);
