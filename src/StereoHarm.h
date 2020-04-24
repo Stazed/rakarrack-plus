@@ -29,6 +29,7 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
+#define SHARM_PRESET_SIZE 12
 
 class StereoHarm
 {
@@ -49,6 +50,12 @@ public:
     void initialize();
     void clear_initialize();
     void adjust(int DS, uint32_t period);
+
+    /* Change resample quality, etc */
+    void change_quality(int Quality);
+    void change_downsample(int DS);
+    void change_up_q(int uq);
+    void change_down_q(int dq);
 
 private:
     int STE_DOWN;
@@ -103,6 +110,12 @@ private:
     float chromel;
     float chromer;
     float lrcross;
+    
+    /* Change quality */
+    int m_hold_parameters[SHARM_PRESET_SIZE];  // hold the current parameters to reset on quality change
+    void save_parameters();
+    void reset_parameters();
+
     void setvolume (int Pvolume);
     void setinterval (int chan, int value);
     void setchrome(int chan, int value);

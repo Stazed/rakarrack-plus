@@ -501,13 +501,17 @@ switch(i)
 	break;
      case 3:
        m_rkr->SteQual=32;	
-	break;
-
-		
+	break;	
 }
 
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_quality(m_rkr->SteQual);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
 
-m_rgui->Show_Next_Time();}
+//m_rgui->Show_Next_Time();}
         xywh {223 195 47 18} down_box BORDER_BOX labelsize 12 labelcolor 7 align 8 textsize 10 textcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Choice
@@ -1024,7 +1028,16 @@ m_rgui->Show_Next_Time();} open
       }
       Fl_Choice Ste_Downsample {
         callback {m_rkr->Ste_Down=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_downsample(m_rkr->Ste_Down);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();} open
         xywh {190 477 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
         class RKR_Choice
@@ -1032,7 +1045,16 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Ste_Down_Qua {
         label Down
         callback {m_rkr->Ste_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_down_q(m_rkr->Ste_D_Q);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();} open
         xywh {300 477 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -1041,7 +1063,16 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Ste_Up_Qua {
         label Up
         callback {m_rkr->Ste_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_up_q(m_rkr->Ste_U_Q);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();} open
         xywh {400 477 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}

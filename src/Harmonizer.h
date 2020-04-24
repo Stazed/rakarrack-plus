@@ -100,7 +100,7 @@ private:
     float interval;
     
     /* Change quality */
-    int m_hold_parameters[11];  // hold the current parameters to reset on quality change
+    int m_hold_parameters[HARM_PRESET_SIZE];  // hold the current parameters to reset on quality change
     void save_parameters();
     void reset_parameters();
     

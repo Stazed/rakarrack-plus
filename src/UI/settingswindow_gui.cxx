@@ -328,13 +328,17 @@ switch(i)
 	break;
      case 3:
        m_rkr->SteQual=32;	
-	break;
-
-		
+	break;	
 }
 
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_quality(m_rkr->SteQual);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
 
-m_rgui->Show_Next_Time();
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Qual_i(o,v);
@@ -714,7 +718,16 @@ void SettingsWindowGui::cb_Voc_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Ste_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Ste_Down=(int)o->value();
-m_rgui->Show_Next_Time();
+
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_downsample(m_rkr->Ste_Down);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Downsample_i(o,v);
@@ -722,7 +735,16 @@ void SettingsWindowGui::cb_Ste_Downsample(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Ste_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Ste_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_down_q(m_rkr->Ste_D_Q);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Down_Qua_i(o,v);
@@ -730,7 +752,16 @@ void SettingsWindowGui::cb_Ste_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Ste_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Ste_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+
+int hold_bypass = rkr->StereoHarm_Bypass;
+rkr->StereoHarm_Bypass = 0;
+usleep(250000);
+m_rkr->efx_StereoHarm->change_up_q(m_rkr->Ste_U_Q);
+usleep(500000);
+rkr->StereoHarm_Bypass = hold_bypass;
+
+
+//m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ste_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Up_Qua_i(o,v);
