@@ -153,6 +153,29 @@ Sequence::cleanup()
     rdelay->set_averaging(0.25f);
 }
 
+std::vector<int>
+Sequence::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < SEQUENCE_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+Sequence::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < SEQUENCE_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
+    
+    cleanup();
+}
+
 #ifdef LV2_SUPPORT
 void
 Sequence::lv2_update_params(uint32_t period)
@@ -1091,7 +1114,7 @@ Sequence::settempo(int value)
 void
 Sequence::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 15;
+    const int PRESET_SIZE = SEQUENCE_PRESET_SIZE;
     const int NUM_PRESETS = 11;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

@@ -23,11 +23,14 @@
 #ifndef SEQUENCE_H
 #define SEQUENCE_H
 
+#include <vector>
 #include "RBFilter.h"
 #include "smbPitchShift.h"
 #include "beattracker.h"
 #include "delayline.h"
 #include "Resample.h"
+
+#define SEQUENCE_PRESET_SIZE 15
 
 class Sequence
 {
@@ -49,6 +52,10 @@ public:
     void setranges(int value);
     void settempo(int value);
     void adjust(int DS, double sample_rate);
+
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
     int Ppreset;
 

@@ -291,6 +291,7 @@ switch(i)
 }
 
 update_harmonizer_quality();
+update_sequence_quality();
 }
 void SettingsWindowGui::cb_Har_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Qual_i(o,v);
@@ -616,7 +617,7 @@ void SettingsWindowGui::cb_Con_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Seq_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Seq_Down=(int)o->value();
-m_rgui->Show_Next_Time();
+update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Seq_Downsample_i(o,v);
@@ -624,7 +625,7 @@ void SettingsWindowGui::cb_Seq_Downsample(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Seq_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Seq_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Seq_Down_Qua_i(o,v);
@@ -632,7 +633,7 @@ void SettingsWindowGui::cb_Seq_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Seq_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Seq_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Seq_Up_Qua_i(o,v);
@@ -2746,4 +2747,35 @@ void SettingsWindowGui::update_stereoharm_quality() {
       rkr->RC_Stereo_Harm->cleanup();
       rgui->Chord(1);
   }
+}
+
+void SettingsWindowGui::update_sequence_quality() {
+  /* shut off all processing */
+  rkr->quality_update = true;
+  
+  /* This is for the gui bypass */
+  int hold_bypass = rkr->Sequence_Bypass;
+  rkr->Sequence_Bypass = 0;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_Sequence->save_parameters();
+  
+  /* Delete and re-create the efx with new downsample settings */
+  delete m_rkr->efx_Sequence;
+  m_rkr->efx_Sequence = new Sequence((long) rkr->HarQual, rkr->Seq_Down, rkr->Seq_U_Q, rkr->Seq_D_Q, rkr->fSample_rate, rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters */
+  m_rkr->efx_Sequence->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  rkr->quality_update = false;
+  
+  /* Reset bypass */ 
+  rkr->Sequence_Bypass = hold_bypass;
 }

@@ -458,5 +458,6 @@ public:
   void update_revtron_quality();
   void update_harmonizer_quality();
   void update_stereoharm_quality();
+  void update_sequence_quality();
 };
 #endif
