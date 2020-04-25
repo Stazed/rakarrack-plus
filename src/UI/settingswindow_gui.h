@@ -455,5 +455,6 @@ public:
   void mtfillvalue(int num,int value);
   void Put_MidiTable();
   void update_convo_quality();
+  void update_revtron_quality();
 };
 #endif

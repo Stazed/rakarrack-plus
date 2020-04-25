@@ -24,6 +24,7 @@
 #ifndef REVERBTRON_H
 #define REVERBTRON_H
 
+#include <vector>
 #include "AnalogFilter.h"
 #include "Resample.h"
 
@@ -70,11 +71,10 @@ public:
     RvbFile loadfile(char* filename);
     void applyfile(RvbFile file);
     
-    /* Change resample quality, etc */
-    void change_downsample(int DS);
-    void change_up_q(int uq);
-    void change_down_q(int dq);
-
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
+    
     int Ppreset;
     float outvolume;
 
@@ -82,11 +82,6 @@ public:
     RvbFile File;
 
 private:
-
-    /* Change quality */
-    int m_hold_parameters[REVTRON_PRESET_SIZE];  // hold the current parameters to reset on quality change
-    void save_parameters();
-    void reset_parameters();
 
     void setvolume (int Pvolume);
     void setpanning (int Ppanning);

@@ -868,14 +868,7 @@ rkr->Harmonizer_Bypass = hold_bypass;
       Fl_Choice Rev_Downsample {
         callback {m_rkr->Rev_Down=(int)o->value();
 
-int hold_bypass = rkr->Reverbtron_Bypass;
-rkr->Reverbtron_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Reverbtron->change_downsample(m_rkr->Rev_Down);
-usleep(500000);
-rkr->Reverbtron_Bypass = hold_bypass;
-
-//m_rgui->Show_Next_Time();} open
+update_revtron_quality();} open
         xywh {190 359 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
         class RKR_Choice
@@ -884,15 +877,7 @@ rkr->Reverbtron_Bypass = hold_bypass;
         label Down
         callback {m_rkr->Rev_D_Q=(int)o->value();
 
-int hold_bypass = rkr->Reverbtron_Bypass;
-rkr->Reverbtron_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Reverbtron->change_down_q(m_rkr->Rev_D_Q);
-usleep(500000);
-rkr->Reverbtron_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();}
+update_revtron_quality();}
         xywh {300 359 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -902,15 +887,7 @@ rkr->Reverbtron_Bypass = hold_bypass;
         label Up
         callback {m_rkr->Rev_U_Q=(int)o->value();
 
-int hold_bypass = rkr->Reverbtron_Bypass;
-rkr->Reverbtron_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Reverbtron->change_up_q(m_rkr->Rev_U_Q);
-usleep(500000);
-rkr->Reverbtron_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();} open
+update_revtron_quality();} open
         xywh {400 359 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -1541,7 +1518,44 @@ if(m_rkr->efx_Convol->getpar(4))
 }
 
 /* Turn processing back on */
-rkr->quality_update = true;} {selected
+rkr->quality_update = false;} {selected
     }
+  }
+  Function {update_revtron_quality()} {return_type void
+  } {
+    code {/* shut off all processing */
+rkr->quality_update = true;
+
+/* Wait a bit */
+usleep(250000);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_Reverbtron->save_parameters();
+
+/* Save current file name and path */
+std::string filename(rkr->efx_Reverbtron->Filename);
+
+/* Delete and re-create the efx with new downsample settings */
+delete m_rkr->efx_Reverbtron;
+m_rkr->efx_Reverbtron = new Reverbtron(m_rkr->Rev_Down, m_rkr->Rev_U_Q, m_rkr->Rev_D_Q, m_rkr->fSample_rate, m_rkr->period);
+
+/* Wait for things to complete */
+usleep(500000);
+
+/* Reset parameters and filename */
+m_rkr->efx_Reverbtron->reset_parameters(save_state);
+
+/* Check for user file and re-load if present */
+if(m_rkr->efx_Reverbtron->getpar(4))
+{
+    strcpy(rkr->efx_Reverbtron->Filename,filename.c_str());
+    if(!rkr->efx_Reverbtron->setfile(USERFILE))
+    {
+        fl_alert("Error loading %s file!\\n", filename.c_str());
+    };
+}
+
+/* Turn processing back on */
+rkr->quality_update = false;} {}
   }
 }

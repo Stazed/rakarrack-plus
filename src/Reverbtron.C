@@ -162,59 +162,27 @@ Reverbtron::cleanup()
     lpfr->cleanup();
 }
 
-void 
-Reverbtron::change_downsample(int DS)
-{
-    save_parameters();
-
-    adjust(DS, fSAMPLE_RATE);
-    clear_initialize();
-    initialize();
-    cleanup();
-
-    reset_parameters();
-}
-
-void 
-Reverbtron::change_up_q(int uq)
-{
-    save_parameters();
-    cleanup();
-
-    delete U_Resample;
-    U_Resample = new Resample(uq);
-
-    reset_parameters();
-}
-
-void 
-Reverbtron::change_down_q(int dq)
-{
-    save_parameters();
-    cleanup();
-
-    delete D_Resample;
-    D_Resample = new Resample(dq);
-    
-    reset_parameters();
-}
-
-void
+std::vector<int>
 Reverbtron::save_parameters()
 {
+    std::vector<int> parameters;
     for(int i = 0; i < REVTRON_PRESET_SIZE; i++)
     {
-        m_hold_parameters[i] = getpar(i);
+        parameters.push_back(getpar(i));
     }
+    
+    return parameters;
 }
 
 void
-Reverbtron::reset_parameters()
+Reverbtron::reset_parameters(std::vector<int> parameters)
 {
     for(int i = 0; i < REVTRON_PRESET_SIZE; i++)
     {
-        changepar(i, m_hold_parameters[i]);
+        changepar(i, parameters[i]);
     }
+    
+    cleanup();
 }
 
 #ifdef LV2_SUPPORT
