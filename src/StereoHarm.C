@@ -115,83 +115,27 @@ StereoHarm::cleanup()
     memset(tempr, 0, sizeof (float)*PERIOD);
 }
 
-void 
-StereoHarm::change_quality(int Quality)
-{
-    save_parameters();
-
-    cleanup();
-    hq = Quality;
-    delete PSl;
-    delete PSr;
-    PSl = new PitchShifter(window, hq, nfSAMPLE_RATE);
-    PSl->ratio = 1.0f;
-    PSr = new PitchShifter(window, hq, nfSAMPLE_RATE);
-    PSr->ratio = 1.0f;
-
-    reset_parameters();
-}
-
-void 
-StereoHarm::change_downsample(int DS)
-{
-    save_parameters();
-
-    adjust(DS, PERIOD);
-    clear_initialize();
-    initialize();
-    cleanup();
-
-    delete PSl;
-    delete PSr;
-    PSl = new PitchShifter(window, hq, nfSAMPLE_RATE);
-    PSl->ratio = 1.0f;
-    PSr = new PitchShifter(window, hq, nfSAMPLE_RATE);
-    PSr->ratio = 1.0f;
-
-    reset_parameters();
-}
-
-void 
-StereoHarm::change_up_q(int uq)
-{
-    save_parameters();
-    cleanup();
-
-    delete U_Resample;
-    U_Resample = new Resample(uq);
-
-    reset_parameters();
-}
-
-void 
-StereoHarm::change_down_q(int dq)
-{
-    save_parameters();
-    cleanup();
-
-    delete D_Resample;
-    D_Resample = new Resample(dq);
-    
-    reset_parameters();
-}
-
-void
+std::vector<int>
 StereoHarm::save_parameters()
 {
+    std::vector<int> parameters;
     for(int i = 0; i < SHARM_PRESET_SIZE; i++)
     {
-        m_hold_parameters[i] = getpar(i);
+        parameters.push_back(getpar(i));
     }
+    
+    return parameters;
 }
 
 void
-StereoHarm::reset_parameters()
+StereoHarm::reset_parameters(std::vector<int> parameters)
 {
     for(int i = 0; i < SHARM_PRESET_SIZE; i++)
     {
-        changepar(i, m_hold_parameters[i]);
+        changepar(i, parameters[i]);
     }
+    
+    cleanup();
 }
 
 #ifdef LV2_SUPPORT

@@ -323,14 +323,7 @@ switch(i)
 	break;	
 }
 
-int hold_bypass = rkr->StereoHarm_Bypass;
-rkr->StereoHarm_Bypass = 0;
-usleep(250000);
-m_rkr->efx_StereoHarm->change_quality(m_rkr->SteQual);
-usleep(500000);
-rkr->StereoHarm_Bypass = hold_bypass;
-
-//m_rgui->Show_Next_Time();
+update_stereoharm_quality();
 }
 void SettingsWindowGui::cb_Ste_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Qual_i(o,v);
@@ -696,15 +689,7 @@ void SettingsWindowGui::cb_Voc_Up_Qua(RKR_Choice* o, void* v) {
 void SettingsWindowGui::cb_Ste_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Ste_Down=(int)o->value();
 
-int hold_bypass = rkr->StereoHarm_Bypass;
-rkr->StereoHarm_Bypass = 0;
-usleep(250000);
-m_rkr->efx_StereoHarm->change_downsample(m_rkr->Ste_Down);
-usleep(500000);
-rkr->StereoHarm_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();
+update_stereoharm_quality();
 }
 void SettingsWindowGui::cb_Ste_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Downsample_i(o,v);
@@ -713,15 +698,7 @@ void SettingsWindowGui::cb_Ste_Downsample(RKR_Choice* o, void* v) {
 void SettingsWindowGui::cb_Ste_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Ste_D_Q=(int)o->value();
 
-int hold_bypass = rkr->StereoHarm_Bypass;
-rkr->StereoHarm_Bypass = 0;
-usleep(250000);
-m_rkr->efx_StereoHarm->change_down_q(m_rkr->Ste_D_Q);
-usleep(500000);
-rkr->StereoHarm_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();
+update_stereoharm_quality();
 }
 void SettingsWindowGui::cb_Ste_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Down_Qua_i(o,v);
@@ -730,15 +707,7 @@ void SettingsWindowGui::cb_Ste_Down_Qua(RKR_Choice* o, void* v) {
 void SettingsWindowGui::cb_Ste_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Ste_U_Q=(int)o->value();
 
-int hold_bypass = rkr->StereoHarm_Bypass;
-rkr->StereoHarm_Bypass = 0;
-usleep(250000);
-m_rkr->efx_StereoHarm->change_up_q(m_rkr->Ste_U_Q);
-usleep(500000);
-rkr->StereoHarm_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();
+update_stereoharm_quality();
 }
 void SettingsWindowGui::cb_Ste_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Up_Qua_i(o,v);
@@ -2738,5 +2707,43 @@ void SettingsWindowGui::update_harmonizer_quality() {
       rkr->efx_Har->changepar(5,rkr->efx_Har->getpar(5));
       rkr->RC_Harm->cleanup();
       rgui->Chord(0);
+  }
+}
+
+void SettingsWindowGui::update_stereoharm_quality() {
+  /* shut off all processing */
+  rkr->quality_update = true;
+  
+  /* This is for the gui bypass */
+  int hold_bypass = rkr->StereoHarm_Bypass;
+  rkr->StereoHarm_Bypass = 0;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_StereoHarm->save_parameters();
+  
+  /* Delete and re-create the efx with new downsample settings */
+  delete m_rkr->efx_StereoHarm;
+  m_rkr->efx_StereoHarm = new StereoHarm((long) m_rkr->SteQual, m_rkr->Ste_Down, m_rkr->Ste_U_Q, m_rkr->Ste_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters and filename */
+  m_rkr->efx_StereoHarm->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  rkr->quality_update = false;
+  
+  /* Reset bypass */ 
+  rkr->StereoHarm_Bypass = hold_bypass;
+  
+  /* Reset user select */
+  if(rkr->efx_StereoHarm->getpar(7))
+  {
+      rkr->efx_StereoHarm->changepar(7,rkr->efx_StereoHarm->getpar(7));
+      rkr->RC_Stereo_Harm->cleanup();
+      rgui->Chord(1);
   }
 }

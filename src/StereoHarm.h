@@ -26,6 +26,7 @@
 #ifndef STEREOHARM_H
 #define STEREOHARM_H
 
+#include <vector>
 #include "smbPitchShift.h"
 #include "Resample.h"
 
@@ -51,11 +52,9 @@ public:
     void clear_initialize();
     void adjust(int DS, uint32_t period);
 
-    /* Change resample quality, etc */
-    void change_quality(int Quality);
-    void change_downsample(int DS);
-    void change_up_q(int uq);
-    void change_down_q(int dq);
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
 private:
     int STE_DOWN;
@@ -111,11 +110,6 @@ private:
     float chromer;
     float lrcross;
     
-    /* Change quality */
-    int m_hold_parameters[SHARM_PRESET_SIZE];  // hold the current parameters to reset on quality change
-    void save_parameters();
-    void reset_parameters();
-
     void setvolume (int Pvolume);
     void setinterval (int chan, int value);
     void setchrome(int chan, int value);
