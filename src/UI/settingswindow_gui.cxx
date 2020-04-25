@@ -292,6 +292,7 @@ switch(i)
 
 update_harmonizer_quality();
 update_sequence_quality();
+update_shifter_quality();
 }
 void SettingsWindowGui::cb_Har_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Qual_i(o,v);
@@ -641,7 +642,7 @@ void SettingsWindowGui::cb_Seq_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Shi_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Shi_Down=(int)o->value();
-m_rgui->Show_Next_Time();
+update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shi_Downsample_i(o,v);
@@ -649,7 +650,7 @@ void SettingsWindowGui::cb_Shi_Downsample(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Shi_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Shi_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shi_Down_Qua_i(o,v);
@@ -657,7 +658,7 @@ void SettingsWindowGui::cb_Shi_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Shi_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Shi_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shi_Up_Qua_i(o,v);
@@ -2601,7 +2602,7 @@ void SettingsWindowGui::Put_MidiTable() {
 
 void SettingsWindowGui::update_convo_quality() {
   /* shut off all processing */
-  rkr->quality_update = true;
+  m_rkr->quality_update = true;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -2610,7 +2611,7 @@ void SettingsWindowGui::update_convo_quality() {
   std::vector<int> save_state = m_rkr->efx_Convol->save_parameters();
   
   /* Save current file name and path */
-  std::string filename(rkr->efx_Convol->Filename);
+  std::string filename(m_rkr->efx_Convol->Filename);
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_rkr->efx_Convol;
@@ -2625,20 +2626,20 @@ void SettingsWindowGui::update_convo_quality() {
   /* Check for user file and re-load if present */
   if(m_rkr->efx_Convol->getpar(4))
   {
-      strcpy(rkr->efx_Convol->Filename,filename.c_str());
-      if(!rkr->efx_Convol->setfile(USERFILE))
+      strcpy(m_rkr->efx_Convol->Filename,filename.c_str());
+      if(!m_rkr->efx_Convol->setfile(USERFILE))
       {
           fl_alert("Error loading %s file!\n", filename.c_str());
       };
   }
   
   /* Turn processing back on */
-  rkr->quality_update = false;
+  m_rkr->quality_update = false;
 }
 
 void SettingsWindowGui::update_revtron_quality() {
   /* shut off all processing */
-  rkr->quality_update = true;
+  m_rkr->quality_update = true;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -2647,7 +2648,7 @@ void SettingsWindowGui::update_revtron_quality() {
   std::vector<int> save_state = m_rkr->efx_Reverbtron->save_parameters();
   
   /* Save current file name and path */
-  std::string filename(rkr->efx_Reverbtron->Filename);
+  std::string filename(m_rkr->efx_Reverbtron->Filename);
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_rkr->efx_Reverbtron;
@@ -2662,24 +2663,24 @@ void SettingsWindowGui::update_revtron_quality() {
   /* Check for user file and re-load if present */
   if(m_rkr->efx_Reverbtron->getpar(4))
   {
-      strcpy(rkr->efx_Reverbtron->Filename,filename.c_str());
-      if(!rkr->efx_Reverbtron->setfile(USERFILE))
+      strcpy(m_rkr->efx_Reverbtron->Filename,filename.c_str());
+      if(!m_rkr->efx_Reverbtron->setfile(USERFILE))
       {
           fl_alert("Error loading %s file!\n", filename.c_str());
       };
   }
   
   /* Turn processing back on */
-  rkr->quality_update = false;
+  m_rkr->quality_update = false;
 }
 
 void SettingsWindowGui::update_harmonizer_quality() {
   /* shut off all processing */
-  rkr->quality_update = true;
+  m_rkr->quality_update = true;
   
   /* This is for the gui bypass */
-  int hold_bypass = rkr->Harmonizer_Bypass;
-  rkr->Harmonizer_Bypass = 0;
+  int hold_bypass = m_rkr->Harmonizer_Bypass;
+  m_rkr->Harmonizer_Bypass = 0;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -2697,27 +2698,27 @@ void SettingsWindowGui::update_harmonizer_quality() {
   m_rkr->efx_Har->reset_parameters(save_state);
   
   /* Turn processing back on */
-  rkr->quality_update = false;
+  m_rkr->quality_update = false;
   
   /* Reset bypass */ 
-  rkr->Harmonizer_Bypass = hold_bypass;
+  m_rkr->Harmonizer_Bypass = hold_bypass;
   
   /* Reset user select */
-  if(rkr->efx_Har->getpar(5))
+  if(m_rkr->efx_Har->getpar(5))
   {
-      rkr->efx_Har->changepar(5,rkr->efx_Har->getpar(5));
-      rkr->RC_Harm->cleanup();
-      rgui->Chord(0);
+      m_rkr->efx_Har->changepar(5, m_rkr->efx_Har->getpar(5));
+      m_rkr->RC_Harm->cleanup();
+      m_rgui->Chord(0);
   }
 }
 
 void SettingsWindowGui::update_stereoharm_quality() {
   /* shut off all processing */
-  rkr->quality_update = true;
+  m_rkr->quality_update = true;
   
   /* This is for the gui bypass */
-  int hold_bypass = rkr->StereoHarm_Bypass;
-  rkr->StereoHarm_Bypass = 0;
+  int hold_bypass = m_rkr->StereoHarm_Bypass;
+  m_rkr->StereoHarm_Bypass = 0;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -2735,27 +2736,27 @@ void SettingsWindowGui::update_stereoharm_quality() {
   m_rkr->efx_StereoHarm->reset_parameters(save_state);
   
   /* Turn processing back on */
-  rkr->quality_update = false;
+  m_rkr->quality_update = false;
   
   /* Reset bypass */ 
-  rkr->StereoHarm_Bypass = hold_bypass;
+  m_rkr->StereoHarm_Bypass = hold_bypass;
   
   /* Reset user select */
-  if(rkr->efx_StereoHarm->getpar(7))
+  if(m_rkr->efx_StereoHarm->getpar(7))
   {
-      rkr->efx_StereoHarm->changepar(7,rkr->efx_StereoHarm->getpar(7));
-      rkr->RC_Stereo_Harm->cleanup();
-      rgui->Chord(1);
+      m_rkr->efx_StereoHarm->changepar(7, m_rkr->efx_StereoHarm->getpar(7));
+      m_rkr->RC_Stereo_Harm->cleanup();
+      m_rgui->Chord(1);
   }
 }
 
 void SettingsWindowGui::update_sequence_quality() {
-  /* shut off all processing */
-  rkr->quality_update = true;
+  /* This is for the gui bypass, tempo change */
+  int hold_bypass = m_rkr->Sequence_Bypass;
+  m_rkr->Sequence_Bypass = 0;
   
-  /* This is for the gui bypass */
-  int hold_bypass = rkr->Sequence_Bypass;
-  rkr->Sequence_Bypass = 0;
+  /* shut off all processing */
+  m_rkr->quality_update = true;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -2765,7 +2766,7 @@ void SettingsWindowGui::update_sequence_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_rkr->efx_Sequence;
-  m_rkr->efx_Sequence = new Sequence((long) rkr->HarQual, rkr->Seq_Down, rkr->Seq_U_Q, rkr->Seq_D_Q, rkr->fSample_rate, rkr->period);
+  m_rkr->efx_Sequence = new Sequence((long) m_rkr->HarQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -2774,8 +2775,32 @@ void SettingsWindowGui::update_sequence_quality() {
   m_rkr->efx_Sequence->reset_parameters(save_state);
   
   /* Turn processing back on */
-  rkr->quality_update = false;
+  m_rkr->quality_update = false;
   
   /* Reset bypass */ 
-  rkr->Sequence_Bypass = hold_bypass;
+  m_rkr->Sequence_Bypass = hold_bypass;
+}
+
+void SettingsWindowGui::update_shifter_quality() {
+  /* shut off all processing */
+  m_rkr->quality_update = true;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_Shifter->save_parameters();
+  
+  /* Delete and re-create the efx with new downsample settings */
+  delete m_rkr->efx_Shifter;
+  m_rkr->efx_Shifter = new Shifter((long) m_rkr->HarQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters */
+  m_rkr->efx_Shifter->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  m_rkr->quality_update = false;
 }

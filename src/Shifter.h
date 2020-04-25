@@ -24,6 +24,7 @@
 #ifndef SHIFTER_H
 #define SHIFTER_H
 
+#include <vector>
 #include "smbPitchShift.h"
 #include "Resample.h"
 
@@ -33,7 +34,7 @@
 #define WAIT 2
 #define DOWN 3
 
-
+#define SHIFTER_PRESET_SIZE 10
 
 class Shifter
 {
@@ -55,6 +56,10 @@ public:
     void clear_initialize();
     void applyfilters (float * efxoutl);
     void adjust(int DS, double sample_rate);
+    
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
     int Ppreset;
     long int hq;

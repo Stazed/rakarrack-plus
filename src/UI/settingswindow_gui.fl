@@ -456,7 +456,8 @@ switch(i)
 }
 
 update_harmonizer_quality();
-update_sequence_quality();} open
+update_sequence_quality();
+update_shifter_quality();} open
         xywh {165 195 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
@@ -934,7 +935,7 @@ update_sequence_quality();} open
       }
       Fl_Choice Shi_Downsample {
         callback {m_rkr->Shi_Down=(int)o->value();
-m_rgui->Show_Next_Time();} open
+update_shifter_quality();} open
         xywh {190 428 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
         class RKR_Choice
@@ -942,7 +943,7 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Shi_Down_Qua {
         label Down
         callback {m_rkr->Shi_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+update_shifter_quality();} open
         xywh {300 428 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -951,7 +952,7 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Shi_Up_Qua {
         label Up
         callback {m_rkr->Shi_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+update_shifter_quality();} open
         xywh {400 428 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -1426,7 +1427,7 @@ m_rgui->Scan_Bank_Dir();}
   Function {update_convo_quality()} {return_type void
   } {
     code {/* shut off all processing */
-rkr->quality_update = true;
+m_rkr->quality_update = true;
 
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
@@ -1435,7 +1436,7 @@ usleep(C_MILLISECONDS_25);
 std::vector<int> save_state = m_rkr->efx_Convol->save_parameters();
 
 /* Save current file name and path */
-std::string filename(rkr->efx_Convol->Filename);
+std::string filename(m_rkr->efx_Convol->Filename);
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->efx_Convol;
@@ -1450,20 +1451,20 @@ m_rkr->efx_Convol->reset_parameters(save_state);
 /* Check for user file and re-load if present */
 if(m_rkr->efx_Convol->getpar(4))
 {
-    strcpy(rkr->efx_Convol->Filename,filename.c_str());
-    if(!rkr->efx_Convol->setfile(USERFILE))
+    strcpy(m_rkr->efx_Convol->Filename,filename.c_str());
+    if(!m_rkr->efx_Convol->setfile(USERFILE))
     {
         fl_alert("Error loading %s file!\\n", filename.c_str());
     };
 }
 
 /* Turn processing back on */
-rkr->quality_update = false;} {}
+m_rkr->quality_update = false;} {}
   }
   Function {update_revtron_quality()} {return_type void
   } {
     code {/* shut off all processing */
-rkr->quality_update = true;
+m_rkr->quality_update = true;
 
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
@@ -1472,7 +1473,7 @@ usleep(C_MILLISECONDS_25);
 std::vector<int> save_state = m_rkr->efx_Reverbtron->save_parameters();
 
 /* Save current file name and path */
-std::string filename(rkr->efx_Reverbtron->Filename);
+std::string filename(m_rkr->efx_Reverbtron->Filename);
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->efx_Reverbtron;
@@ -1487,24 +1488,24 @@ m_rkr->efx_Reverbtron->reset_parameters(save_state);
 /* Check for user file and re-load if present */
 if(m_rkr->efx_Reverbtron->getpar(4))
 {
-    strcpy(rkr->efx_Reverbtron->Filename,filename.c_str());
-    if(!rkr->efx_Reverbtron->setfile(USERFILE))
+    strcpy(m_rkr->efx_Reverbtron->Filename,filename.c_str());
+    if(!m_rkr->efx_Reverbtron->setfile(USERFILE))
     {
         fl_alert("Error loading %s file!\\n", filename.c_str());
     };
 }
 
 /* Turn processing back on */
-rkr->quality_update = false;} {}
+m_rkr->quality_update = false;} {}
   }
   Function {update_harmonizer_quality()} {return_type void
   } {
     code {/* shut off all processing */
-rkr->quality_update = true;
+m_rkr->quality_update = true;
 
 /* This is for the gui bypass */
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
+int hold_bypass = m_rkr->Harmonizer_Bypass;
+m_rkr->Harmonizer_Bypass = 0;
 
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
@@ -1522,27 +1523,27 @@ usleep(C_MILLISECONDS_50);
 m_rkr->efx_Har->reset_parameters(save_state);
 
 /* Turn processing back on */
-rkr->quality_update = false;
+m_rkr->quality_update = false;
 
 /* Reset bypass */ 
-rkr->Harmonizer_Bypass = hold_bypass;
+m_rkr->Harmonizer_Bypass = hold_bypass;
 
 /* Reset user select */
-if(rkr->efx_Har->getpar(5))
+if(m_rkr->efx_Har->getpar(5))
 {
-    rkr->efx_Har->changepar(5,rkr->efx_Har->getpar(5));
-    rkr->RC_Harm->cleanup();
-    rgui->Chord(0);
+    m_rkr->efx_Har->changepar(5, m_rkr->efx_Har->getpar(5));
+    m_rkr->RC_Harm->cleanup();
+    m_rgui->Chord(0);
 }} {}
   }
   Function {update_stereoharm_quality()} {return_type void
   } {
     code {/* shut off all processing */
-rkr->quality_update = true;
+m_rkr->quality_update = true;
 
 /* This is for the gui bypass */
-int hold_bypass = rkr->StereoHarm_Bypass;
-rkr->StereoHarm_Bypass = 0;
+int hold_bypass = m_rkr->StereoHarm_Bypass;
+m_rkr->StereoHarm_Bypass = 0;
 
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
@@ -1560,27 +1561,27 @@ usleep(C_MILLISECONDS_50);
 m_rkr->efx_StereoHarm->reset_parameters(save_state);
 
 /* Turn processing back on */
-rkr->quality_update = false;
+m_rkr->quality_update = false;
 
 /* Reset bypass */ 
-rkr->StereoHarm_Bypass = hold_bypass;
+m_rkr->StereoHarm_Bypass = hold_bypass;
 
 /* Reset user select */
-if(rkr->efx_StereoHarm->getpar(7))
+if(m_rkr->efx_StereoHarm->getpar(7))
 {
-    rkr->efx_StereoHarm->changepar(7,rkr->efx_StereoHarm->getpar(7));
-    rkr->RC_Stereo_Harm->cleanup();
-    rgui->Chord(1);
+    m_rkr->efx_StereoHarm->changepar(7, m_rkr->efx_StereoHarm->getpar(7));
+    m_rkr->RC_Stereo_Harm->cleanup();
+    m_rgui->Chord(1);
 }} {}
   }
   Function {update_sequence_quality()} {return_type void
   } {
-    code {/* shut off all processing */
-rkr->quality_update = true;
+    code {/* This is for the gui bypass, tempo change */
+int hold_bypass = m_rkr->Sequence_Bypass;
+m_rkr->Sequence_Bypass = 0;
 
-/* This is for the gui bypass */
-int hold_bypass = rkr->Sequence_Bypass;
-rkr->Sequence_Bypass = 0;
+/* shut off all processing */
+m_rkr->quality_update = true;
 
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
@@ -1590,7 +1591,7 @@ std::vector<int> save_state = m_rkr->efx_Sequence->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->efx_Sequence;
-m_rkr->efx_Sequence = new Sequence((long) rkr->HarQual, rkr->Seq_Down, rkr->Seq_U_Q, rkr->Seq_D_Q, rkr->fSample_rate, rkr->period);
+m_rkr->efx_Sequence = new Sequence((long) m_rkr->HarQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -1599,9 +1600,33 @@ usleep(C_MILLISECONDS_50);
 m_rkr->efx_Sequence->reset_parameters(save_state);
 
 /* Turn processing back on */
-rkr->quality_update = false;
+m_rkr->quality_update = false;
 
 /* Reset bypass */ 
-rkr->Sequence_Bypass = hold_bypass;} {}
+m_rkr->Sequence_Bypass = hold_bypass;} {}
+  }
+  Function {update_shifter_quality()} {return_type void
+  } {
+    code {/* shut off all processing */
+m_rkr->quality_update = true;
+
+/* Wait a bit */
+usleep(C_MILLISECONDS_25);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_Shifter->save_parameters();
+
+/* Delete and re-create the efx with new downsample settings */
+delete m_rkr->efx_Shifter;
+m_rkr->efx_Shifter = new Shifter((long) m_rkr->HarQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
+
+/* Wait for things to complete */
+usleep(C_MILLISECONDS_50);
+
+/* Reset parameters */
+m_rkr->efx_Shifter->reset_parameters(save_state);
+
+/* Turn processing back on */
+m_rkr->quality_update = false;} {}
   }
 }

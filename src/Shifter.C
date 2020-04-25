@@ -105,6 +105,29 @@ Shifter::cleanup()
     memset(tempr, 0, sizeof (float)*PERIOD);
 }
 
+std::vector<int>
+Shifter::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < SHIFTER_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+Shifter::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < SHIFTER_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
+    
+    cleanup();
+}
+
 #ifdef LV2_SUPPORT
 void
 Shifter::lv2_update_params(uint32_t period)
@@ -395,7 +418,7 @@ Shifter::setinterval(int value)
 void
 Shifter::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 10;
+    const int PRESET_SIZE = SHIFTER_PRESET_SIZE;
     const int NUM_PRESETS = 6;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

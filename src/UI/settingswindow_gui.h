@@ -459,5 +459,6 @@ public:
   void update_harmonizer_quality();
   void update_stereoharm_quality();
   void update_sequence_quality();
+  void update_shifter_quality();
 };
 #endif
