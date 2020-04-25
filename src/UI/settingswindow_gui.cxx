@@ -648,7 +648,8 @@ void SettingsWindowGui::cb_Rev_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Con_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Con_Down=(int)o->value();
-m_rgui->Show_Next_Time();
+
+update_convo_quality();
 }
 void SettingsWindowGui::cb_Con_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Con_Downsample_i(o,v);
@@ -656,7 +657,8 @@ void SettingsWindowGui::cb_Con_Downsample(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Con_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Con_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+
+update_convo_quality();
 }
 void SettingsWindowGui::cb_Con_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Con_Down_Qua_i(o,v);
@@ -664,7 +666,8 @@ void SettingsWindowGui::cb_Con_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Con_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Con_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+
+update_convo_quality();
 }
 void SettingsWindowGui::cb_Con_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Con_Up_Qua_i(o,v);
@@ -2676,4 +2679,41 @@ void SettingsWindowGui::Put_MidiTable() {
         fill_mptable(i + c_preset_used, m_rkr->M_table[i].bank);
         mtfillvalue(i + c_preset_used, m_rkr->M_table[i].preset);
     }
+}
+
+void SettingsWindowGui::update_convo_quality() {
+  /* shut off all processing */
+  rkr->quality_update = true;
+  
+  /* Wait a bit */
+  usleep(250000);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_Convol->save_parameters();
+  
+  /* Save current file name and path */
+  std::string filename(rkr->efx_Convol->Filename);
+  
+  /* Delete and re-create the efx with new downsample settings */
+  delete m_rkr->efx_Convol;
+  m_rkr->efx_Convol = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(500000);
+  
+  /* Reset parameters and filename */
+  m_rkr->efx_Convol->reset_parameters(save_state);
+  
+  /* Check for user file and re-load if present */
+  if(m_rkr->efx_Convol->getpar(4))
+  {
+      strcpy(rkr->efx_Convol->Filename,filename.c_str());
+      if(!rkr->efx_Convol->setfile(USERFILE))
+      {
+          fl_alert("Error loading %s file!\n", filename.c_str());
+      };
+  }
+  
+  /* Turn processing back on */
+  rkr->quality_update = true;
 }

@@ -953,6 +953,11 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 void
 RKR::process_midi_controller_events(int parameter, int value)
 {
+    /* Don't process MIDI control when updating quality since
+       the efx may be deleted */
+    if(quality_update)
+        return;
+    
     // for real parameter changes, flag need for a GUI update
     if (parameter > 0)
     {

@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <vector>
 #include "Convolotron.h"
 
 Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize) :
@@ -100,7 +101,7 @@ Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t in
     M_Resample = new Resample(0);
     U_Resample = new Resample(uq);
     D_Resample = new Resample(dq); //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
-
+    
     setpreset(Ppreset);
     cleanup();
 };
@@ -130,6 +131,28 @@ Convolotron::cleanup()
     fb = 0.0f;
     feedback = 0.0f;
     oldl = 0.0f;
+}
+
+
+std::vector<int>
+Convolotron::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < CONVO_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+Convolotron::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < CONVO_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
 }
 
 #ifdef LV2_SUPPORT
@@ -481,7 +504,7 @@ Convolotron::sethidamp(int Phidamp)
 void
 Convolotron::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 11;
+    const int PRESET_SIZE = CONVO_PRESET_SIZE;
     const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

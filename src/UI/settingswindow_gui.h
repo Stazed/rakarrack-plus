@@ -454,5 +454,6 @@ public:
   void fill_mptable(int num,int value);
   void mtfillvalue(int num,int value);
   void Put_MidiTable();
+  void update_convo_quality();
 };
 #endif

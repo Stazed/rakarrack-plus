@@ -27,6 +27,9 @@
 #include <sndfile.h>
 #include "Resample.h"
 #include "mayer_fft.h"
+#include <vector>
+
+#define CONVO_PRESET_SIZE 11
 
 class Convolotron
 {
@@ -48,6 +51,10 @@ public:
     int setfile (int value);
     void adjust(int DS, uint32_t period);
     void loaddefault();
+    
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
     int Ppreset;
     float outvolume;

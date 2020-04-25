@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -925,7 +925,8 @@ rkr->Reverbtron_Bypass = hold_bypass;
       }
       Fl_Choice Con_Downsample {
         callback {m_rkr->Con_Down=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+update_convo_quality();} open
         xywh {190 382 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
         class RKR_Choice
@@ -933,7 +934,8 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Con_Down_Qua {
         label Down
         callback {m_rkr->Con_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+update_convo_quality();} open
         xywh {300 382 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -942,7 +944,8 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Con_Up_Qua {
         label Up
         callback {m_rkr->Con_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+
+update_convo_quality();} open
         xywh {400 382 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -1502,5 +1505,43 @@ m_rgui->Scan_Bank_Dir();}
       fill_mptable(i + c_preset_used, m_rkr->M_table[i].bank);
       mtfillvalue(i + c_preset_used, m_rkr->M_table[i].preset);
   }} {}
+  }
+  Function {update_convo_quality()} {return_type void
+  } {
+    code {/* shut off all processing */
+rkr->quality_update = true;
+
+/* Wait a bit */
+usleep(250000);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_Convol->save_parameters();
+
+/* Save current file name and path */
+std::string filename(rkr->efx_Convol->Filename);
+
+/* Delete and re-create the efx with new downsample settings */
+delete m_rkr->efx_Convol;
+m_rkr->efx_Convol = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
+
+/* Wait for things to complete */
+usleep(500000);
+
+/* Reset parameters and filename */
+m_rkr->efx_Convol->reset_parameters(save_state);
+
+/* Check for user file and re-load if present */
+if(m_rkr->efx_Convol->getpar(4))
+{
+    strcpy(rkr->efx_Convol->Filename,filename.c_str());
+    if(!rkr->efx_Convol->setfile(USERFILE))
+    {
+        fl_alert("Error loading %s file!\\n", filename.c_str());
+    };
+}
+
+/* Turn processing back on */
+rkr->quality_update = true;} {selected
+    }
   }
 }

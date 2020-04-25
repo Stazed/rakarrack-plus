@@ -256,6 +256,7 @@ RKR::RKR() :
     CountWait(),
     XUserMIDI(),
     eff_filter(),
+    quality_update(false),
     Har_Down(),
     Har_U_Q(),
     Har_D_Q(),
@@ -1900,6 +1901,9 @@ RKR::cleanup_efx()
 void
 RKR::Alg(float *origl, float *origr, void *)
 {
+    /* Don't process when updating quality since the efx may be deleted */
+    if(quality_update)
+        return;
 
     if ((t_timeout) && (Tap_Bypass))
     {

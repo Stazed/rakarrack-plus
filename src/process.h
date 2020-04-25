@@ -347,6 +347,7 @@ public:
     int CountWait;
     int XUserMIDI[128][20];
 
+    bool quality_update;
     int eff_filter;
     int Har_Down;
     int Har_U_Q;
