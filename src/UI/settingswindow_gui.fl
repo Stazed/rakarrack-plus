@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {23 68 530 580} type Double
+  xywh {52 171 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
+      user_data 1 selected
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -455,15 +455,7 @@ switch(i)
 	break;	
 }
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_quality(m_rkr->HarQual);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();}
+update_harmonizer_quality();}
         xywh {165 195 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
@@ -772,13 +764,7 @@ switch(m_rkr->RCOpti_Ring)
         label { }
         callback {m_rkr->Har_Down=(int)o->value();
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_downsample(m_rkr->Har_Down);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-//m_rgui->Show_Next_Time();}
+update_harmonizer_quality();}
         xywh {190 336 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
@@ -827,14 +813,7 @@ rkr->Harmonizer_Bypass = hold_bypass;
         label Down
         callback {m_rkr->Har_D_Q=(int)o->value();
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_down_q(m_rkr->Har_D_Q);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-
-//m_rgui->Show_Next_Time();} open
+update_harmonizer_quality();} open
         xywh {300 336 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -844,15 +823,7 @@ rkr->Harmonizer_Bypass = hold_bypass;
         label Up
         callback {m_rkr->Har_U_Q=(int)o->value();
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_up_q(m_rkr->Har_U_Q);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();} open
+update_harmonizer_quality();} open
         xywh {400 336 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -1384,8 +1355,7 @@ m_rgui->Scan_Bank_Dir();}
   } {
     code {return menu_Har_Downsample;} {}
   }
-  Function {make_table_window()} {open
-  } {
+  Function {make_table_window()} {} {
     code {// Fill settings midi table scroll
       scroll->begin();
     
@@ -1555,7 +1525,44 @@ if(m_rkr->efx_Reverbtron->getpar(4))
 }
 
 /* Turn processing back on */
-rkr->quality_update = false;} {selected
-    }
+rkr->quality_update = false;} {}
+  }
+  Function {update_harmonizer_quality()} {return_type void
+  } {
+    code {/* shut off all processing */
+rkr->quality_update = true;
+
+/* This is for the gui bypass */
+int hold_bypass = rkr->Harmonizer_Bypass;
+rkr->Harmonizer_Bypass = 0;
+
+/* Wait a bit */
+usleep(C_MILLISECONDS_25);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_Har->save_parameters();
+
+/* Delete and re-create the efx with new downsample settings */
+delete m_rkr->efx_Har;
+m_rkr->efx_Har = new Harmonizer((long) rkr->HarQual, rkr->Har_Down, rkr->Har_U_Q, rkr->Har_D_Q, rkr->fSample_rate, rkr->period);
+/* Wait for things to complete */
+usleep(C_MILLISECONDS_50);
+
+/* Reset parameters and filename */
+m_rkr->efx_Har->reset_parameters(save_state);
+
+/* Turn processing back on */
+rkr->quality_update = false;
+
+/* Reset bypass */ 
+rkr->Harmonizer_Bypass = hold_bypass;
+
+/* Reset user select */
+if(rkr->efx_Har->getpar(5))
+{
+    rkr->efx_Har->changepar(5,rkr->efx_Har->getpar(5));
+    rkr->RC_Harm->cleanup();
+    rgui->Chord(0);
+}} {}
   }
 }

@@ -58,7 +58,6 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
     panning(),
     gain(),
     interval(),
-    m_hold_parameters(),
     pl(NULL),
     interpbuf(NULL),
     U_Resample(NULL),
@@ -99,77 +98,27 @@ Harmonizer::cleanup()
     memset(outo, 0, sizeof (float)*nPERIOD);
 }
 
-void 
-Harmonizer::change_quality(int Quality)
-{
-    save_parameters();
-
-    cleanup();
-    hq = Quality;
-    delete PS;
-    PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
-    PS->ratio = 1.0f;
-
-    reset_parameters();
-}
-
-void 
-Harmonizer::change_downsample(int DS)
-{
-    save_parameters();
-
-    adjust(DS, PERIOD);
-    clear_initialize();
-    initialize();
-    cleanup();
-
-    delete PS;
-    PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
-    PS->ratio = 1.0f;
-
-    reset_parameters();
-}
-
-void 
-Harmonizer::change_up_q(int uq)
-{
-    save_parameters();
-    cleanup();
-
-    delete U_Resample;
-    U_Resample = new Resample(uq);
-
-    reset_parameters();
-}
-
-void 
-Harmonizer::change_down_q(int dq)
-{
-    save_parameters();
-    cleanup();
-
-    delete D_Resample;
-    D_Resample = new Resample(dq);
-    
-    reset_parameters();
-}
-
-void
+std::vector<int>
 Harmonizer::save_parameters()
 {
+    std::vector<int> parameters;
     for(int i = 0; i < HARM_PRESET_SIZE; i++)
     {
-        m_hold_parameters[i] = getpar(i);
+        parameters.push_back(getpar(i));
     }
+    
+    return parameters;
 }
 
 void
-Harmonizer::reset_parameters()
+Harmonizer::reset_parameters(std::vector<int> parameters)
 {
     for(int i = 0; i < HARM_PRESET_SIZE; i++)
     {
-        changepar(i, m_hold_parameters[i]);
+        changepar(i, parameters[i]);
     }
+    
+    cleanup();
 }
 
 #ifdef LV2_SUPPORT

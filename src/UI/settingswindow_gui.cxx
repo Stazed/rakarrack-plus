@@ -290,15 +290,7 @@ switch(i)
 	break;	
 }
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_quality(m_rkr->HarQual);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();
+update_harmonizer_quality();
 }
 void SettingsWindowGui::cb_Har_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Qual_i(o,v);
@@ -537,13 +529,7 @@ Fl_Menu_Item SettingsWindowGui::menu_RC_Ring_Opti[] = {
 void SettingsWindowGui::cb_Har_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Har_Down=(int)o->value();
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_downsample(m_rkr->Har_Down);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-//m_rgui->Show_Next_Time();
+update_harmonizer_quality();
 }
 void SettingsWindowGui::cb_Har_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Downsample_i(o,v);
@@ -566,14 +552,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Har_Downsample[] = {
 void SettingsWindowGui::cb_Har_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Har_D_Q=(int)o->value();
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_down_q(m_rkr->Har_D_Q);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-
-//m_rgui->Show_Next_Time();
+update_harmonizer_quality();
 }
 void SettingsWindowGui::cb_Har_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Down_Qua_i(o,v);
@@ -582,15 +561,7 @@ void SettingsWindowGui::cb_Har_Down_Qua(RKR_Choice* o, void* v) {
 void SettingsWindowGui::cb_Har_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Har_U_Q=(int)o->value();
 
-int hold_bypass = rkr->Harmonizer_Bypass;
-rkr->Harmonizer_Bypass = 0;
-usleep(250000);
-m_rkr->efx_Har->change_up_q(m_rkr->Har_U_Q);
-usleep(500000);
-rkr->Harmonizer_Bypass = hold_bypass;
-
-
-//m_rgui->Show_Next_Time();
+update_harmonizer_quality();
 }
 void SettingsWindowGui::cb_Har_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_Up_Qua_i(o,v);
@@ -2730,4 +2701,42 @@ void SettingsWindowGui::update_revtron_quality() {
   
   /* Turn processing back on */
   rkr->quality_update = false;
+}
+
+void SettingsWindowGui::update_harmonizer_quality() {
+  /* shut off all processing */
+  rkr->quality_update = true;
+  
+  /* This is for the gui bypass */
+  int hold_bypass = rkr->Harmonizer_Bypass;
+  rkr->Harmonizer_Bypass = 0;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_Har->save_parameters();
+  
+  /* Delete and re-create the efx with new downsample settings */
+  delete m_rkr->efx_Har;
+  m_rkr->efx_Har = new Harmonizer((long) rkr->HarQual, rkr->Har_Down, rkr->Har_U_Q, rkr->Har_D_Q, rkr->fSample_rate, rkr->period);
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters and filename */
+  m_rkr->efx_Har->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  rkr->quality_update = false;
+  
+  /* Reset bypass */ 
+  rkr->Harmonizer_Bypass = hold_bypass;
+  
+  /* Reset user select */
+  if(rkr->efx_Har->getpar(5))
+  {
+      rkr->efx_Har->changepar(5,rkr->efx_Har->getpar(5));
+      rkr->RC_Harm->cleanup();
+      rgui->Chord(0);
+  }
 }

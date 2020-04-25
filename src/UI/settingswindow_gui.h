@@ -456,5 +456,6 @@ public:
   void Put_MidiTable();
   void update_convo_quality();
   void update_revtron_quality();
+  void update_harmonizer_quality();
 };
 #endif
