@@ -24,8 +24,11 @@
 #ifndef VOCODER_H
 #define VOCODER_H
 
+#include <vector>
 #include "AnalogFilter.h"
 #include "Resample.h"
+
+#define VOCODER_PRESET_SIZE 7
 
 class Vocoder
 {
@@ -45,6 +48,10 @@ public:
     void initialize();
     void clear_initialize();
     void adjust(int DS, double sample_rate);
+
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
     int Ppreset;
     float outvolume;

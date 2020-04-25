@@ -553,7 +553,7 @@ update_stereoharm_quality();}
 
 }
 
-m_rgui->Show_Next_Time();}
+update_vocoder_quality();}
         xywh {165 222 47 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         class RKR_Choice
       } {
@@ -968,7 +968,7 @@ update_shifter_quality();} open
       Fl_Choice Voc_Downsample {
         label {   }
         callback {m_rkr->Voc_Down=(int)o->value();
-m_rgui->Show_Next_Time();} open
+update_vocoder_quality();} open
         xywh {190 452 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
         class RKR_Choice
@@ -976,7 +976,7 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Voc_Down_Qua {
         label Down
         callback {m_rkr->Voc_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+update_vocoder_quality();} open
         xywh {300 452 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -985,7 +985,7 @@ m_rgui->Show_Next_Time();} open
       Fl_Choice Voc_Up_Qua {
         label Up
         callback {m_rkr->Voc_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();} open
+update_vocoder_quality();} open
         xywh {400 452 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
@@ -1628,5 +1628,36 @@ m_rkr->efx_Shifter->reset_parameters(save_state);
 
 /* Turn processing back on */
 m_rkr->quality_update = false;} {}
+  }
+  Function {update_vocoder_quality()} {return_type void
+  } {
+    code {/* This is for the gui volume meter */
+int hold_bypass = m_rkr->Vocoder_Bypass;
+m_rkr->Vocoder_Bypass = 0;
+
+/* shut off all processing */
+m_rkr->quality_update = true;
+
+/* Wait a bit */
+usleep(C_MILLISECONDS_25);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_Vocoder->save_parameters();
+
+/* Delete and re-create the efx with new downsample settings */
+delete m_rkr->efx_Vocoder;
+m_rkr->efx_Vocoder = new Vocoder(m_rkr->auxresampled, m_rkr->VocBands, m_rkr->Voc_Down, m_rkr->Voc_U_Q, m_rkr->Voc_D_Q, m_rkr->fSample_rate, m_rkr->period);
+
+/* Wait for things to complete */
+usleep(C_MILLISECONDS_50);
+
+/* Reset parameters */
+m_rkr->efx_Vocoder->reset_parameters(save_state);
+
+/* Turn processing back on */
+m_rkr->quality_update = false;
+
+/* Reset bypass */
+m_rkr->Vocoder_Bypass = hold_bypass;} {}
   }
 }

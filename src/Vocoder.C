@@ -138,6 +138,29 @@ Vocoder::cleanup()
     compeak = compg = compenv = oldcompenv = 0.0f;
 }
 
+std::vector<int>
+Vocoder::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < VOCODER_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+Vocoder::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < VOCODER_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
+    
+    cleanup();
+}
+
 #ifdef LV2_SUPPORT
 void
 Vocoder::lv2_update_params(uint32_t period)
@@ -505,7 +528,7 @@ Vocoder::adjustq(int value)
 void
 Vocoder::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 7;
+    const int PRESET_SIZE = VOCODER_PRESET_SIZE;
     const int NUM_PRESETS = 5;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

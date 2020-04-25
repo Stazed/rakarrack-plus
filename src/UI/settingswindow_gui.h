@@ -460,5 +460,6 @@ public:
   void update_stereoharm_quality();
   void update_sequence_quality();
   void update_shifter_quality();
+  void update_vocoder_quality();
 };
 #endif

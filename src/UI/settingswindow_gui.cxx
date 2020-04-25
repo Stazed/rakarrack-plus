@@ -364,7 +364,7 @@ void SettingsWindowGui::cb_Voc_Bands_i(RKR_Choice* o, void*) {
 
 }
 
-m_rgui->Show_Next_Time();
+update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Bands(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Bands_i(o,v);
@@ -666,7 +666,7 @@ void SettingsWindowGui::cb_Shi_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Voc_Downsample_i(RKR_Choice* o, void*) {
   m_rkr->Voc_Down=(int)o->value();
-m_rgui->Show_Next_Time();
+update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Downsample(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Downsample_i(o,v);
@@ -674,7 +674,7 @@ void SettingsWindowGui::cb_Voc_Downsample(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Voc_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Voc_D_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Down_Qua_i(o,v);
@@ -682,7 +682,7 @@ void SettingsWindowGui::cb_Voc_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Voc_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Voc_U_Q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Voc_Up_Qua_i(o,v);
@@ -2803,4 +2803,35 @@ void SettingsWindowGui::update_shifter_quality() {
   
   /* Turn processing back on */
   m_rkr->quality_update = false;
+}
+
+void SettingsWindowGui::update_vocoder_quality() {
+  /* This is for the gui volume meter */
+  int hold_bypass = m_rkr->Vocoder_Bypass;
+  m_rkr->Vocoder_Bypass = 0;
+  
+  /* shut off all processing */
+  m_rkr->quality_update = true;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_Vocoder->save_parameters();
+  
+  /* Delete and re-create the efx with new downsample settings */
+  delete m_rkr->efx_Vocoder;
+  m_rkr->efx_Vocoder = new Vocoder(m_rkr->auxresampled, m_rkr->VocBands, m_rkr->Voc_Down, m_rkr->Voc_U_Q, m_rkr->Voc_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters */
+  m_rkr->efx_Vocoder->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  m_rkr->quality_update = false;
+  
+  /* Reset bypass */
+  m_rkr->Vocoder_Bypass = hold_bypass;
 }
