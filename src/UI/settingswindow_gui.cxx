@@ -2663,7 +2663,7 @@ void SettingsWindowGui::update_convo_quality() {
   rkr->quality_update = true;
   
   /* Wait a bit */
-  usleep(250000);
+  usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
   std::vector<int> save_state = m_rkr->efx_Convol->save_parameters();
@@ -2676,7 +2676,7 @@ void SettingsWindowGui::update_convo_quality() {
   m_rkr->efx_Convol = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
-  usleep(500000);
+  usleep(C_MILLISECONDS_50);
   
   /* Reset parameters and filename */
   m_rkr->efx_Convol->reset_parameters(save_state);
@@ -2700,7 +2700,7 @@ void SettingsWindowGui::update_revtron_quality() {
   rkr->quality_update = true;
   
   /* Wait a bit */
-  usleep(250000);
+  usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
   std::vector<int> save_state = m_rkr->efx_Reverbtron->save_parameters();
@@ -2713,7 +2713,7 @@ void SettingsWindowGui::update_revtron_quality() {
   m_rkr->efx_Reverbtron = new Reverbtron(m_rkr->Rev_Down, m_rkr->Rev_U_Q, m_rkr->Rev_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
-  usleep(500000);
+  usleep(C_MILLISECONDS_50);
   
   /* Reset parameters and filename */
   m_rkr->efx_Reverbtron->reset_parameters(save_state);

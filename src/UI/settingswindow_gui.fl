@@ -1489,7 +1489,7 @@ m_rgui->Scan_Bank_Dir();}
 rkr->quality_update = true;
 
 /* Wait a bit */
-usleep(250000);
+usleep(C_MILLISECONDS_25);
 
 /* Save current parameters */
 std::vector<int> save_state = m_rkr->efx_Convol->save_parameters();
@@ -1502,7 +1502,7 @@ delete m_rkr->efx_Convol;
 m_rkr->efx_Convol = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
-usleep(500000);
+usleep(C_MILLISECONDS_50);
 
 /* Reset parameters and filename */
 m_rkr->efx_Convol->reset_parameters(save_state);
@@ -1518,8 +1518,7 @@ if(m_rkr->efx_Convol->getpar(4))
 }
 
 /* Turn processing back on */
-rkr->quality_update = false;} {selected
-    }
+rkr->quality_update = false;} {}
   }
   Function {update_revtron_quality()} {return_type void
   } {
@@ -1527,7 +1526,7 @@ rkr->quality_update = false;} {selected
 rkr->quality_update = true;
 
 /* Wait a bit */
-usleep(250000);
+usleep(C_MILLISECONDS_25);
 
 /* Save current parameters */
 std::vector<int> save_state = m_rkr->efx_Reverbtron->save_parameters();
@@ -1540,7 +1539,7 @@ delete m_rkr->efx_Reverbtron;
 m_rkr->efx_Reverbtron = new Reverbtron(m_rkr->Rev_Down, m_rkr->Rev_U_Q, m_rkr->Rev_D_Q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
-usleep(500000);
+usleep(C_MILLISECONDS_50);
 
 /* Reset parameters and filename */
 m_rkr->efx_Reverbtron->reset_parameters(save_state);
@@ -1556,6 +1555,7 @@ if(m_rkr->efx_Reverbtron->getpar(4))
 }
 
 /* Turn processing back on */
-rkr->quality_update = false;} {}
+rkr->quality_update = false;} {selected
+    }
   }
 }

@@ -235,6 +235,13 @@ extern int global_font_size;
 const int C_DEFAULT_FONT_SIZE = 10;
 const int C_DONT_CHANGE_FONT_SIZE = 0;
 
+/* Milliseconds - used for quality changes by usleep().
+   The amounts are much greater than necessary for the 
+   delete and re-initialize. But the delay is useful to
+   let the user know that something has changed and it
+   is not real time safe. */
+const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
+const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
 
 #endif
 
