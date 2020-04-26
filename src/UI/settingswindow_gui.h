@@ -120,6 +120,40 @@ private:
   inline void cb_Update_TAP_i(RKR_Check_Button*, void*);
   static void cb_Update_TAP(RKR_Check_Button*, void*);
 public:
+  RKR_Box *loop_Label;
+  RKR_Counter *L_SIZE;
+private:
+  inline void cb_L_SIZE_i(RKR_Counter*, void*);
+  static void cb_L_SIZE(RKR_Counter*, void*);
+public:
+  RKR_Counter *LM_Volume;
+private:
+  inline void cb_LM_Volume_i(RKR_Counter*, void*);
+  static void cb_LM_Volume(RKR_Counter*, void*);
+public:
+  RKR_Check_Button *FLPosition;
+private:
+  inline void cb_FLPosition_i(RKR_Check_Button*, void*);
+  static void cb_FLPosition(RKR_Check_Button*, void*);
+public:
+  RKR_Check_Button *DB6B;
+private:
+  inline void cb_DB6B_i(RKR_Check_Button*, void*);
+  static void cb_DB6B(RKR_Check_Button*, void*);
+public:
+  RKR_Box *Calibration_Label;
+  RKR_Counter *Calibration;
+private:
+  inline void cb_Calibration_i(RKR_Counter*, void*);
+  static void cb_Calibration(RKR_Counter*, void*);
+public:
+  RKR_Counter *RTrigger;
+private:
+  inline void cb_RTrigger_i(RKR_Counter*, void*);
+  static void cb_RTrigger(RKR_Counter*, void*);
+public:
+  Fl_Group *QUALITY_SET;
+  Fl_Box *Fondo12;
   RKR_Check_Button *UPSAMPLE_C;
 private:
   inline void cb_UPSAMPLE_C_i(RKR_Check_Button*, void*);
@@ -142,17 +176,6 @@ private:
   inline void cb_Downr_Qual_i(RKR_Choice*, void*);
   static void cb_Downr_Qual(RKR_Choice*, void*);
 public:
-  RKR_Box *loop_Label;
-  RKR_Counter *L_SIZE;
-private:
-  inline void cb_L_SIZE_i(RKR_Counter*, void*);
-  static void cb_L_SIZE(RKR_Counter*, void*);
-public:
-  RKR_Counter *LM_Volume;
-private:
-  inline void cb_LM_Volume_i(RKR_Counter*, void*);
-  static void cb_LM_Volume(RKR_Counter*, void*);
-public:
   RKR_Box *Har_Q_Label;
   RKR_Choice *Har_Qual;
 private:
@@ -160,6 +183,7 @@ private:
   static void cb_Har_Qual(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Har_Qual[];
 public:
+  RKR_Box *Sharm_Q_Label;
   RKR_Choice *Ste_Qual;
 private:
   inline void cb_Ste_Qual_i(RKR_Choice*, void*);
@@ -172,27 +196,6 @@ private:
   inline void cb_Voc_Bands_i(RKR_Choice*, void*);
   static void cb_Voc_Bands(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Voc_Bands[];
-public:
-  RKR_Check_Button *FLPosition;
-private:
-  inline void cb_FLPosition_i(RKR_Check_Button*, void*);
-  static void cb_FLPosition(RKR_Check_Button*, void*);
-public:
-  RKR_Check_Button *DB6B;
-private:
-  inline void cb_DB6B_i(RKR_Check_Button*, void*);
-  static void cb_DB6B(RKR_Check_Button*, void*);
-public:
-  RKR_Box *Calibration_Label;
-  RKR_Counter *Calibration;
-private:
-  inline void cb_Calibration_i(RKR_Counter*, void*);
-  static void cb_Calibration(RKR_Counter*, void*);
-public:
-  RKR_Counter *RTrigger;
-private:
-  inline void cb_RTrigger_i(RKR_Counter*, void*);
-  static void cb_RTrigger(RKR_Counter*, void*);
 public:
   RKR_Box *Recognize_Label;
   RKR_Choice *RC_Harm_Opti;
@@ -326,22 +329,92 @@ private:
   inline void cb_Ste_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Ste_Up_Qua(RKR_Choice*, void*);
 public:
+  RKR_Group *Wave_Down;
   RKR_Box *Wave_Label;
-  RKR_Choice *Wave_Amo;
+  RKR_Box *Dist_Label;
+  RKR_Choice *Dist_Amo;
 private:
-  inline void cb_Wave_Amo_i(RKR_Choice*, void*);
-  static void cb_Wave_Amo(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_Wave_Amo[];
+  inline void cb_Dist_Amo_i(RKR_Choice*, void*);
+  static void cb_Dist_Amo(RKR_Choice*, void*);
+  static Fl_Menu_Item menu_Dist_Amo[];
 public:
-  RKR_Choice *Wave_Down_Qua;
+  RKR_Choice *Dist_Down_Qua;
 private:
-  inline void cb_Wave_Down_Qua_i(RKR_Choice*, void*);
-  static void cb_Wave_Down_Qua(RKR_Choice*, void*);
+  inline void cb_Dist_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Dist_Down_Qua(RKR_Choice*, void*);
 public:
-  RKR_Choice *Wave_Up_Qua;
+  RKR_Choice *Dist_Up_Qua;
 private:
-  inline void cb_Wave_Up_Qua_i(RKR_Choice*, void*);
-  static void cb_Wave_Up_Qua(RKR_Choice*, void*);
+  inline void cb_Dist_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Dist_Up_Qua(RKR_Choice*, void*);
+public:
+  RKR_Box *Ovrd_Label;
+  RKR_Choice *Ovrd_Amo;
+private:
+  inline void cb_Ovrd_Amo_i(RKR_Choice*, void*);
+  static void cb_Ovrd_Amo(RKR_Choice*, void*);
+  static Fl_Menu_Item menu_Ovrd_Amo[];
+public:
+  RKR_Choice *Ovrd_Down_Qua;
+private:
+  inline void cb_Ovrd_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Ovrd_Down_Qua(RKR_Choice*, void*);
+public:
+  RKR_Choice *Ovrd_Up_Qua;
+private:
+  inline void cb_Ovrd_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Ovrd_Up_Qua(RKR_Choice*, void*);
+public:
+  RKR_Box *Dere_Label;
+  RKR_Choice *Dere_Amo;
+private:
+  inline void cb_Dere_Amo_i(RKR_Choice*, void*);
+  static void cb_Dere_Amo(RKR_Choice*, void*);
+  static Fl_Menu_Item menu_Dere_Amo[];
+public:
+  RKR_Choice *Dere_Down_Qua;
+private:
+  inline void cb_Dere_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Dere_Down_Qua(RKR_Choice*, void*);
+public:
+  RKR_Choice *Dere_Up_Qua;
+private:
+  inline void cb_Dere_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Dere_Up_Qua(RKR_Choice*, void*);
+public:
+  RKR_Box *DB_Label;
+  RKR_Choice *DB_Amo;
+private:
+  inline void cb_DB_Amo_i(RKR_Choice*, void*);
+  static void cb_DB_Amo(RKR_Choice*, void*);
+  static Fl_Menu_Item menu_DB_Amo[];
+public:
+  RKR_Choice *DB_Down_Qua;
+private:
+  inline void cb_DB_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_DB_Down_Qua(RKR_Choice*, void*);
+public:
+  RKR_Choice *DB_Up_Qua;
+private:
+  inline void cb_DB_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_DB_Up_Qua(RKR_Choice*, void*);
+public:
+  RKR_Box *Stomp_Label;
+  RKR_Choice *Stomp_Amo;
+private:
+  inline void cb_Stomp_Amo_i(RKR_Choice*, void*);
+  static void cb_Stomp_Amo(RKR_Choice*, void*);
+  static Fl_Menu_Item menu_Stomp_Amo[];
+public:
+  RKR_Choice *Stomp_Down_Qua;
+private:
+  inline void cb_Stomp_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_Stomp_Down_Qua(RKR_Choice*, void*);
+public:
+  RKR_Choice *Stomp_Up_Qua;
+private:
+  inline void cb_Stomp_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_Stomp_Up_Qua(RKR_Choice*, void*);
 public:
   Fl_Group *MIDI_SET;
   Fl_Box *Fondo8;

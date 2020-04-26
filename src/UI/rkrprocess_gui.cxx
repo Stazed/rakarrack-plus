@@ -2777,9 +2777,29 @@ void RKRGUI::MiraConfig()
     Settings->Ste_Downsample->value(rkr->Ste_Down);
     Settings->Ste_Down_Qua->value(rkr->Ste_D_Q);
     Settings->Ste_Up_Qua->value(rkr->Ste_U_Q);
-    Settings->Wave_Amo->value(rkr->Wave_res_amount);
-    Settings->Wave_Up_Qua->value(rkr->Wave_up_q);
-    Settings->Wave_Down_Qua->value(rkr->Wave_down_q);
+    
+// FIXME
+    Settings->Dist_Amo->value(rkr->Wave_res_amount);
+    Settings->Dist_Up_Qua->value(rkr->Wave_up_q);
+    Settings->Dist_Down_Qua->value(rkr->Wave_down_q);
+    
+    Settings->Ovrd_Amo->value(rkr->Wave_res_amount);
+    Settings->Ovrd_Up_Qua->value(rkr->Wave_up_q);
+    Settings->Ovrd_Down_Qua->value(rkr->Wave_down_q);
+    
+    Settings->Dere_Amo->value(rkr->Wave_res_amount);
+    Settings->Dere_Up_Qua->value(rkr->Wave_up_q);
+    Settings->Dere_Down_Qua->value(rkr->Wave_down_q);
+    
+    Settings->DB_Amo->value(rkr->Wave_res_amount);
+    Settings->DB_Up_Qua->value(rkr->Wave_up_q);
+    Settings->DB_Down_Qua->value(rkr->Wave_down_q);
+    
+    Settings->Stomp_Amo->value(rkr->Wave_res_amount);
+    Settings->Stomp_Up_Qua->value(rkr->Wave_up_q);
+    Settings->Stomp_Down_Qua->value(rkr->Wave_down_q);
+// FIXME
+
     Settings->Calibration->value(rkr->aFreq);
     Settings->RTrigger->value(rkr->HarmRecNote->trigfact);
     Settings->RC_Harm_Opti->value(rkr->RCOpti_Harm);
@@ -5204,6 +5224,7 @@ void RKRGUI::PutBackground()
     Settings->Fondo9->image(InOut->image());
     Settings->Fondo10->image(InOut->image());
     Settings->Fondo11->image(InOut->image());
+    Settings->Fondo12->image(InOut->image());
 
 
     Etit->image(InOut->image());
