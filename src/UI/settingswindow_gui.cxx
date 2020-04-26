@@ -784,15 +784,6 @@ void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Ovrd_Amo_i(o,v);
 }
 
-Fl_Menu_Item SettingsWindowGui::menu_Ovrd_Amo[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void SettingsWindowGui::cb_Ovrd_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Wave_down_q=(int)o->value();
 m_rgui->Show_Next_Time();
@@ -816,15 +807,6 @@ m_rgui->Show_Next_Time();
 void SettingsWindowGui::cb_Dere_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Dere_Amo_i(o,v);
 }
-
-Fl_Menu_Item SettingsWindowGui::menu_Dere_Amo[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void SettingsWindowGui::cb_Dere_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Wave_down_q=(int)o->value();
@@ -850,15 +832,6 @@ void SettingsWindowGui::cb_DB_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_DB_Amo_i(o,v);
 }
 
-Fl_Menu_Item SettingsWindowGui::menu_DB_Amo[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
 void SettingsWindowGui::cb_DB_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Wave_down_q=(int)o->value();
 m_rgui->Show_Next_Time();
@@ -882,15 +855,6 @@ m_rgui->Show_Next_Time();
 void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Stomp_Amo_i(o,v);
 }
-
-Fl_Menu_Item SettingsWindowGui::menu_Stomp_Amo[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x2", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x4", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x8", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"x12", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
 
 void SettingsWindowGui::cb_Stomp_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Wave_down_q=(int)o->value();
@@ -2350,7 +2314,7 @@ this->when(FL_WHEN_RELEASE);
         Ovrd_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Ovrd_Label
-      { Ovrd_Amo = new RKR_Choice(178, 425, 70, 18);
+      { RKR_Choice* o = Ovrd_Amo = new RKR_Choice(178, 425, 70, 18);
         Ovrd_Amo->box(FL_FLAT_BOX);
         Ovrd_Amo->down_box(FL_BORDER_BOX);
         Ovrd_Amo->color(FL_BACKGROUND_COLOR);
@@ -2364,7 +2328,7 @@ this->when(FL_WHEN_RELEASE);
         Ovrd_Amo->callback((Fl_Callback*)cb_Ovrd_Amo);
         Ovrd_Amo->align(Fl_Align(FL_ALIGN_LEFT));
         Ovrd_Amo->when(FL_WHEN_RELEASE);
-        Ovrd_Amo->menu(menu_Ovrd_Amo);
+        o->menu(menu_Dist_Amo);
       } // RKR_Choice* Ovrd_Amo
       { RKR_Choice* o = Ovrd_Down_Qua = new RKR_Choice(290, 425, 72, 18, "Down");
         Ovrd_Down_Qua->box(FL_FLAT_BOX);
@@ -2413,7 +2377,7 @@ this->when(FL_WHEN_RELEASE);
         Dere_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Dere_Label
-      { Dere_Amo = new RKR_Choice(178, 450, 70, 18);
+      { RKR_Choice* o = Dere_Amo = new RKR_Choice(178, 450, 70, 18);
         Dere_Amo->box(FL_FLAT_BOX);
         Dere_Amo->down_box(FL_BORDER_BOX);
         Dere_Amo->color(FL_BACKGROUND_COLOR);
@@ -2427,7 +2391,7 @@ this->when(FL_WHEN_RELEASE);
         Dere_Amo->callback((Fl_Callback*)cb_Dere_Amo);
         Dere_Amo->align(Fl_Align(FL_ALIGN_LEFT));
         Dere_Amo->when(FL_WHEN_RELEASE);
-        Dere_Amo->menu(menu_Dere_Amo);
+        o->menu(menu_Dist_Amo);
       } // RKR_Choice* Dere_Amo
       { RKR_Choice* o = Dere_Down_Qua = new RKR_Choice(290, 450, 72, 18, "Down");
         Dere_Down_Qua->box(FL_FLAT_BOX);
@@ -2476,7 +2440,7 @@ this->when(FL_WHEN_RELEASE);
         DB_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* DB_Label
-      { DB_Amo = new RKR_Choice(178, 475, 70, 18);
+      { RKR_Choice* o = DB_Amo = new RKR_Choice(178, 475, 70, 18);
         DB_Amo->box(FL_FLAT_BOX);
         DB_Amo->down_box(FL_BORDER_BOX);
         DB_Amo->color(FL_BACKGROUND_COLOR);
@@ -2490,7 +2454,7 @@ this->when(FL_WHEN_RELEASE);
         DB_Amo->callback((Fl_Callback*)cb_DB_Amo);
         DB_Amo->align(Fl_Align(FL_ALIGN_LEFT));
         DB_Amo->when(FL_WHEN_RELEASE);
-        DB_Amo->menu(menu_DB_Amo);
+        o->menu(menu_Dist_Amo);
       } // RKR_Choice* DB_Amo
       { RKR_Choice* o = DB_Down_Qua = new RKR_Choice(290, 475, 72, 18, "Down");
         DB_Down_Qua->box(FL_FLAT_BOX);
@@ -2539,7 +2503,7 @@ this->when(FL_WHEN_RELEASE);
         Stomp_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Stomp_Label
-      { Stomp_Amo = new RKR_Choice(178, 500, 70, 18);
+      { RKR_Choice* o = Stomp_Amo = new RKR_Choice(178, 500, 70, 18);
         Stomp_Amo->box(FL_FLAT_BOX);
         Stomp_Amo->down_box(FL_BORDER_BOX);
         Stomp_Amo->color(FL_BACKGROUND_COLOR);
@@ -2553,7 +2517,7 @@ this->when(FL_WHEN_RELEASE);
         Stomp_Amo->callback((Fl_Callback*)cb_Stomp_Amo);
         Stomp_Amo->align(Fl_Align(FL_ALIGN_LEFT));
         Stomp_Amo->when(FL_WHEN_RELEASE);
-        Stomp_Amo->menu(menu_Stomp_Amo);
+        o->menu(menu_Dist_Amo);
       } // RKR_Choice* Stomp_Amo
       { RKR_Choice* o = Stomp_Down_Qua = new RKR_Choice(290, 500, 72, 18, "Down");
         Stomp_Down_Qua->box(FL_FLAT_BOX);

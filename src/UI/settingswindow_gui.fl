@@ -1134,29 +1134,9 @@ m_rgui->Show_Next_Time();}
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {178 425 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_Dist_Amo);}
           class RKR_Choice
-        } {
-          MenuItem {} {
-            label Normal
-            xywh {100 425 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x2
-            xywh {100 425 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x4
-            xywh {90 425 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x8
-            xywh {80 425 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x12
-            xywh {80 425 36 21} labelsize 10
-          }
-        }
+        } {}
         Fl_Choice Ovrd_Down_Qua {
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
@@ -1184,31 +1164,11 @@ m_rgui->Show_Next_Time();}
         }
         Fl_Choice Dere_Amo {
           callback {m_rkr->Wave_res_amount=(int)o->value();
-m_rgui->Show_Next_Time();}
+m_rgui->Show_Next_Time();} open
           xywh {178 450 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_Dist_Amo);}
           class RKR_Choice
-        } {
-          MenuItem {} {
-            label Normal
-            xywh {110 450 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x2
-            xywh {110 450 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x4
-            xywh {100 450 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x8
-            xywh {90 450 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x12
-            xywh {90 450 36 21} labelsize 10
-          }
-        }
+        } {}
         Fl_Choice Dere_Down_Qua {
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
@@ -1238,29 +1198,9 @@ m_rgui->Show_Next_Time();}
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {178 475 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_Dist_Amo);}
           class RKR_Choice
-        } {
-          MenuItem {} {
-            label Normal
-            xywh {120 475 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x2
-            xywh {120 475 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x4
-            xywh {110 475 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x8
-            xywh {100 475 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x12
-            xywh {100 475 36 21} labelsize 10
-          }
-        }
+        } {}
         Fl_Choice DB_Down_Qua {
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
@@ -1290,29 +1230,9 @@ m_rgui->Show_Next_Time();}
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {178 500 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
+          code0 {o->menu(menu_Dist_Amo);}
           class RKR_Choice
-        } {
-          MenuItem {} {
-            label Normal
-            xywh {130 500 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x2
-            xywh {130 500 45 26} labelsize 10
-          }
-          MenuItem {} {
-            label x4
-            xywh {120 500 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x8
-            xywh {110 500 36 21} labelsize 10
-          }
-          MenuItem {} {
-            label x12
-            xywh {110 500 36 21} labelsize 10
-          }
-        }
+        } {}
         Fl_Choice Stomp_Down_Qua {
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();

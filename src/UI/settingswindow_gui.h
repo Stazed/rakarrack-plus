@@ -362,7 +362,6 @@ public:
 private:
   inline void cb_Ovrd_Amo_i(RKR_Choice*, void*);
   static void cb_Ovrd_Amo(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_Ovrd_Amo[];
 public:
   RKR_Choice *Ovrd_Down_Qua;
 private:
@@ -379,7 +378,6 @@ public:
 private:
   inline void cb_Dere_Amo_i(RKR_Choice*, void*);
   static void cb_Dere_Amo(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_Dere_Amo[];
 public:
   RKR_Choice *Dere_Down_Qua;
 private:
@@ -396,7 +394,6 @@ public:
 private:
   inline void cb_DB_Amo_i(RKR_Choice*, void*);
   static void cb_DB_Amo(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_DB_Amo[];
 public:
   RKR_Choice *DB_Down_Qua;
 private:
@@ -413,7 +410,6 @@ public:
 private:
   inline void cb_Stomp_Amo_i(RKR_Choice*, void*);
   static void cb_Stomp_Amo(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_Stomp_Amo[];
 public:
   RKR_Choice *Stomp_Down_Qua;
 private:
