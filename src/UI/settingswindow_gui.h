@@ -176,6 +176,23 @@ private:
   static void cb_Downr_Qual(RKR_Choice*, void*);
 public:
   RKR_Box *note_trig_Label;
+  RKR_Box *Recognize_Label;
+  RKR_Choice *RC_Harm_Opti;
+private:
+  inline void cb_RC_Harm_Opti_i(RKR_Choice*, void*);
+  static void cb_RC_Harm_Opti(RKR_Choice*, void*);
+  static Fl_Menu_Item menu_RC_Harm_Opti[];
+public:
+  RKR_Choice *RC_St_Harm_Opti;
+private:
+  inline void cb_RC_St_Harm_Opti_i(RKR_Choice*, void*);
+  static void cb_RC_St_Harm_Opti(RKR_Choice*, void*);
+public:
+  RKR_Choice *RC_Ring_Opti;
+private:
+  inline void cb_RC_Ring_Opti_i(RKR_Choice*, void*);
+  static void cb_RC_Ring_Opti(RKR_Choice*, void*);
+public:
   Fl_Group *QUALITY_SET;
   Fl_Box *Fondo12;
   RKR_Box *Har_Q_Label;
@@ -207,25 +224,6 @@ private:
   inline void cb_Voc_Bands_i(RKR_Choice*, void*);
   static void cb_Voc_Bands(RKR_Choice*, void*);
   static Fl_Menu_Item menu_Voc_Bands[];
-public:
-  RKR_Box *Recognize_Label;
-  RKR_Choice *RC_Harm_Opti;
-private:
-  inline void cb_RC_Harm_Opti_i(RKR_Choice*, void*);
-  static void cb_RC_Harm_Opti(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_RC_Harm_Opti[];
-public:
-  RKR_Choice *RC_St_Harm_Opti;
-private:
-  inline void cb_RC_St_Harm_Opti_i(RKR_Choice*, void*);
-  static void cb_RC_St_Harm_Opti(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_RC_St_Harm_Opti[];
-public:
-  RKR_Choice *RC_Ring_Opti;
-private:
-  inline void cb_RC_Ring_Opti_i(RKR_Choice*, void*);
-  static void cb_RC_Ring_Opti(RKR_Choice*, void*);
-  static Fl_Menu_Item menu_RC_Ring_Opti[];
 public:
   RKR_Box *Harm_Label;
   RKR_Choice *Har_Downsample;

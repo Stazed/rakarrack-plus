@@ -305,6 +305,100 @@ void SettingsWindowGui::cb_Downr_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Downr_Qual_i(o,v);
 }
 
+void SettingsWindowGui::cb_RC_Harm_Opti_i(RKR_Choice* o, void*) {
+  m_rkr->RCOpti_Harm =(int) o->value();
+
+switch(m_rkr->RCOpti_Harm)
+  {
+  
+  
+    case 0:
+    	m_rkr->HarmRecNote->setlpf(5500);
+    	m_rkr->HarmRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	m_rkr->HarmRecNote->setlpf(4500);
+    	m_rkr->HarmRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	m_rkr->HarmRecNote->setlpf(3000);
+    	m_rkr->HarmRecNote->sethpf(300);
+    	break;
+
+};
+}
+void SettingsWindowGui::cb_RC_Harm_Opti(RKR_Choice* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RC_Harm_Opti_i(o,v);
+}
+
+Fl_Menu_Item SettingsWindowGui::menu_RC_Harm_Opti[] = {
+ {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
+
+void SettingsWindowGui::cb_RC_St_Harm_Opti_i(RKR_Choice* o, void*) {
+  m_rkr->RCOpti_Stereo =(int) o->value();
+
+switch(m_rkr->RCOpti_Stereo)
+  {
+  
+  
+    case 0:
+    	m_rkr->StHarmRecNote->setlpf(5500);
+    	m_rkr->StHarmRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	m_rkr->StHarmRecNote->setlpf(4500);
+    	m_rkr->StHarmRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	m_rkr->StHarmRecNote->setlpf(3000);
+    	m_rkr->StHarmRecNote->sethpf(300);
+    	break;
+
+};
+}
+void SettingsWindowGui::cb_RC_St_Harm_Opti(RKR_Choice* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RC_St_Harm_Opti_i(o,v);
+}
+
+void SettingsWindowGui::cb_RC_Ring_Opti_i(RKR_Choice* o, void*) {
+  m_rkr->RCOpti_Ring =(int) o->value();
+
+switch(m_rkr->RCOpti_Ring)
+  {
+  
+  
+    case 0:
+    	m_rkr->RingRecNote->setlpf(5500);
+    	m_rkr->RingRecNote->sethpf(80);
+    	break;
+    	
+
+    case 1:
+    	m_rkr->RingRecNote->setlpf(4500);
+    	m_rkr->RingRecNote->sethpf(80);
+    	break;
+    	
+    case 2:
+    	m_rkr->RingRecNote->setlpf(3000);
+    	m_rkr->RingRecNote->sethpf(300);
+    	break;
+
+};
+}
+void SettingsWindowGui::cb_RC_Ring_Opti(RKR_Choice* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RC_Ring_Opti_i(o,v);
+}
+
 void SettingsWindowGui::cb_Har_Qual_i(RKR_Choice* o, void*) {
   int i = (int) o->value();
 
@@ -452,114 +546,6 @@ Fl_Menu_Item SettingsWindowGui::menu_Voc_Bands[] = {
  {"64", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"128", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"256", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void SettingsWindowGui::cb_RC_Harm_Opti_i(RKR_Choice* o, void*) {
-  m_rkr->RCOpti_Harm =(int) o->value();
-
-switch(m_rkr->RCOpti_Harm)
-  {
-  
-  
-    case 0:
-    	m_rkr->HarmRecNote->setlpf(5500);
-    	m_rkr->HarmRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	m_rkr->HarmRecNote->setlpf(4500);
-    	m_rkr->HarmRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	m_rkr->HarmRecNote->setlpf(3000);
-    	m_rkr->HarmRecNote->sethpf(300);
-    	break;
-
-};
-}
-void SettingsWindowGui::cb_RC_Harm_Opti(RKR_Choice* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RC_Harm_Opti_i(o,v);
-}
-
-Fl_Menu_Item SettingsWindowGui::menu_RC_Harm_Opti[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void SettingsWindowGui::cb_RC_St_Harm_Opti_i(RKR_Choice* o, void*) {
-  m_rkr->RCOpti_Stereo =(int) o->value();
-
-switch(m_rkr->RCOpti_Stereo)
-  {
-  
-  
-    case 0:
-    	m_rkr->StHarmRecNote->setlpf(5500);
-    	m_rkr->StHarmRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	m_rkr->StHarmRecNote->setlpf(4500);
-    	m_rkr->StHarmRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	m_rkr->StHarmRecNote->setlpf(3000);
-    	m_rkr->StHarmRecNote->sethpf(300);
-    	break;
-
-};
-}
-void SettingsWindowGui::cb_RC_St_Harm_Opti(RKR_Choice* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RC_St_Harm_Opti_i(o,v);
-}
-
-Fl_Menu_Item SettingsWindowGui::menu_RC_St_Harm_Opti[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {0,0,0,0,0,0,0,0,0}
-};
-
-void SettingsWindowGui::cb_RC_Ring_Opti_i(RKR_Choice* o, void*) {
-  m_rkr->RCOpti_Ring =(int) o->value();
-
-switch(m_rkr->RCOpti_Ring)
-  {
-  
-  
-    case 0:
-    	m_rkr->RingRecNote->setlpf(5500);
-    	m_rkr->RingRecNote->sethpf(80);
-    	break;
-    	
-
-    case 1:
-    	m_rkr->RingRecNote->setlpf(4500);
-    	m_rkr->RingRecNote->sethpf(80);
-    	break;
-    	
-    case 2:
-    	m_rkr->RingRecNote->setlpf(3000);
-    	m_rkr->RingRecNote->sethpf(300);
-    	break;
-
-};
-}
-void SettingsWindowGui::cb_RC_Ring_Opti(RKR_Choice* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RC_Ring_Opti_i(o,v);
-}
-
-Fl_Menu_Item SettingsWindowGui::menu_RC_Ring_Opti[] = {
- {"Normal", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Guitar", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
- {"Voice", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 
@@ -1631,6 +1617,67 @@ this->when(FL_WHEN_RELEASE);
       note_trig_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* note_trig_Label
+    { RKR_Box* o = Recognize_Label = new RKR_Box(30, 360, 176, 17, "Recognize Note Optimization");
+      Recognize_Label->box(FL_NO_BOX);
+      Recognize_Label->color(FL_BACKGROUND_COLOR);
+      Recognize_Label->selection_color(FL_BACKGROUND_COLOR);
+      Recognize_Label->labeltype(FL_NORMAL_LABEL);
+      Recognize_Label->labelfont(0);
+      Recognize_Label->labelsize(12);
+      Recognize_Label->labelcolor(FL_FOREGROUND_COLOR);
+      Recognize_Label->user_data((void*)(7));
+      Recognize_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+      Recognize_Label->when(FL_WHEN_NEVER);
+      o->set_label_offset(2);
+    } // RKR_Box* Recognize_Label
+    { RC_Harm_Opti = new RKR_Choice(206, 360, 72, 18, "Harmonizer");
+      RC_Harm_Opti->box(FL_FLAT_BOX);
+      RC_Harm_Opti->down_box(FL_BORDER_BOX);
+      RC_Harm_Opti->color(FL_BACKGROUND_COLOR);
+      RC_Harm_Opti->selection_color(FL_SELECTION_COLOR);
+      RC_Harm_Opti->labeltype(FL_NORMAL_LABEL);
+      RC_Harm_Opti->labelfont(0);
+      RC_Harm_Opti->labelsize(10);
+      RC_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
+      RC_Harm_Opti->textsize(10);
+      RC_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
+      RC_Harm_Opti->callback((Fl_Callback*)cb_RC_Harm_Opti);
+      RC_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
+      RC_Harm_Opti->when(FL_WHEN_RELEASE);
+      RC_Harm_Opti->menu(menu_RC_Harm_Opti);
+    } // RKR_Choice* RC_Harm_Opti
+    { RKR_Choice* o = RC_St_Harm_Opti = new RKR_Choice(300, 360, 72, 18, "Stereo Harmonizer");
+      RC_St_Harm_Opti->box(FL_FLAT_BOX);
+      RC_St_Harm_Opti->down_box(FL_BORDER_BOX);
+      RC_St_Harm_Opti->color(FL_BACKGROUND_COLOR);
+      RC_St_Harm_Opti->selection_color(FL_SELECTION_COLOR);
+      RC_St_Harm_Opti->labeltype(FL_NORMAL_LABEL);
+      RC_St_Harm_Opti->labelfont(0);
+      RC_St_Harm_Opti->labelsize(10);
+      RC_St_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
+      RC_St_Harm_Opti->textsize(10);
+      RC_St_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
+      RC_St_Harm_Opti->callback((Fl_Callback*)cb_RC_St_Harm_Opti);
+      RC_St_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
+      RC_St_Harm_Opti->when(FL_WHEN_RELEASE);
+      o->menu(menu_RC_Harm_Opti);
+    } // RKR_Choice* RC_St_Harm_Opti
+    { RKR_Choice* o = RC_Ring_Opti = new RKR_Choice(390, 360, 72, 18, "Ring");
+      RC_Ring_Opti->box(FL_FLAT_BOX);
+      RC_Ring_Opti->down_box(FL_BORDER_BOX);
+      RC_Ring_Opti->color(FL_BACKGROUND_COLOR);
+      RC_Ring_Opti->selection_color(FL_SELECTION_COLOR);
+      RC_Ring_Opti->labeltype(FL_NORMAL_LABEL);
+      RC_Ring_Opti->labelfont(0);
+      RC_Ring_Opti->labelsize(10);
+      RC_Ring_Opti->labelcolor(FL_BACKGROUND2_COLOR);
+      RC_Ring_Opti->textsize(10);
+      RC_Ring_Opti->textcolor(FL_BACKGROUND2_COLOR);
+      RC_Ring_Opti->callback((Fl_Callback*)cb_RC_Ring_Opti);
+      RC_Ring_Opti->align(Fl_Align(FL_ALIGN_TOP));
+      RC_Ring_Opti->when(FL_WHEN_RELEASE);
+      o->menu(menu_RC_Harm_Opti);
+    } // RKR_Choice* RC_Ring_Opti
     AUDIO_SET->end();
   } // Fl_Group* AUDIO_SET
   { QUALITY_SET = new Fl_Group(5, 26, 518, 554, "Quality");
@@ -1642,7 +1689,7 @@ this->when(FL_WHEN_RELEASE);
     QUALITY_SET->hide();
     { Fondo12 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo12
-    { RKR_Box* o = Har_Q_Label = new RKR_Box(30, 82, 136, 17, "Harmonizer Quality");
+    { RKR_Box* o = Har_Q_Label = new RKR_Box(30, 49, 136, 17, "Harmonizer Quality");
       Har_Q_Label->box(FL_NO_BOX);
       Har_Q_Label->color(FL_BACKGROUND_COLOR);
       Har_Q_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1655,7 +1702,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Q_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* Har_Q_Label
-    { Har_Qual = new RKR_Choice(156, 82, 47, 18);
+    { Har_Qual = new RKR_Choice(156, 49, 47, 18);
       Har_Qual->box(FL_FLAT_BOX);
       Har_Qual->down_box(FL_BORDER_BOX);
       Har_Qual->color(FL_BACKGROUND_COLOR);
@@ -1671,7 +1718,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Qual->when(FL_WHEN_RELEASE);
       Har_Qual->menu(menu_Har_Qual);
     } // RKR_Choice* Har_Qual
-    { RKR_Choice* o = Seq_Qual = new RKR_Choice(230, 82, 47, 18, "Sequence Quality");
+    { RKR_Choice* o = Seq_Qual = new RKR_Choice(230, 49, 47, 18, "Sequence Quality");
       Seq_Qual->box(FL_FLAT_BOX);
       Seq_Qual->down_box(FL_BORDER_BOX);
       Seq_Qual->color(FL_BACKGROUND_COLOR);
@@ -1688,7 +1735,7 @@ this->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
       o->menu(menu_Har_Qual);
     } // RKR_Choice* Seq_Qual
-    { RKR_Box* o = Sharm_Q_Label = new RKR_Box(30, 109, 136, 17, "StereoHarm Quality");
+    { RKR_Box* o = Sharm_Q_Label = new RKR_Box(30, 76, 136, 17, "StereoHarm Quality");
       Sharm_Q_Label->box(FL_NO_BOX);
       Sharm_Q_Label->color(FL_BACKGROUND_COLOR);
       Sharm_Q_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1701,7 +1748,7 @@ this->when(FL_WHEN_RELEASE);
       Sharm_Q_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* Sharm_Q_Label
-    { RKR_Choice* o = Ste_Qual = new RKR_Choice(156, 109, 47, 18);
+    { RKR_Choice* o = Ste_Qual = new RKR_Choice(156, 76, 47, 18);
       Ste_Qual->box(FL_FLAT_BOX);
       Ste_Qual->down_box(FL_BORDER_BOX);
       Ste_Qual->color(FL_BACKGROUND_COLOR);
@@ -1718,7 +1765,7 @@ this->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
       o->menu(menu_Har_Qual);
     } // RKR_Choice* Ste_Qual
-    { RKR_Choice* o = Shift_Qual = new RKR_Choice(230, 109, 47, 18, "Shifter Quality");
+    { RKR_Choice* o = Shift_Qual = new RKR_Choice(230, 76, 47, 18, "Shifter Quality");
       Shift_Qual->box(FL_FLAT_BOX);
       Shift_Qual->down_box(FL_BORDER_BOX);
       Shift_Qual->color(FL_BACKGROUND_COLOR);
@@ -1735,7 +1782,7 @@ this->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
       o->menu(menu_Har_Qual);
     } // RKR_Choice* Shift_Qual
-    { RKR_Box* o = Voc_Band_Label = new RKR_Box(30, 136, 136, 17, "Vocoder Bands");
+    { RKR_Box* o = Voc_Band_Label = new RKR_Box(30, 104, 136, 17, "Vocoder Bands");
       Voc_Band_Label->box(FL_NO_BOX);
       Voc_Band_Label->color(FL_BACKGROUND_COLOR);
       Voc_Band_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1748,7 +1795,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Band_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* Voc_Band_Label
-    { Voc_Bands = new RKR_Choice(156, 136, 47, 18, "        ");
+    { Voc_Bands = new RKR_Choice(156, 104, 47, 18);
       Voc_Bands->box(FL_FLAT_BOX);
       Voc_Bands->down_box(FL_BORDER_BOX);
       Voc_Bands->color(FL_BACKGROUND_COLOR);
@@ -1760,72 +1807,11 @@ this->when(FL_WHEN_RELEASE);
       Voc_Bands->textsize(10);
       Voc_Bands->textcolor(FL_BACKGROUND2_COLOR);
       Voc_Bands->callback((Fl_Callback*)cb_Voc_Bands);
-      Voc_Bands->align(Fl_Align(FL_ALIGN_LEFT));
+      Voc_Bands->align(Fl_Align(FL_ALIGN_RIGHT));
       Voc_Bands->when(FL_WHEN_RELEASE);
       Voc_Bands->menu(menu_Voc_Bands);
     } // RKR_Choice* Voc_Bands
-    { RKR_Box* o = Recognize_Label = new RKR_Box(30, 168, 176, 17, "Recognize Note Optimization");
-      Recognize_Label->box(FL_NO_BOX);
-      Recognize_Label->color(FL_BACKGROUND_COLOR);
-      Recognize_Label->selection_color(FL_BACKGROUND_COLOR);
-      Recognize_Label->labeltype(FL_NORMAL_LABEL);
-      Recognize_Label->labelfont(0);
-      Recognize_Label->labelsize(12);
-      Recognize_Label->labelcolor(FL_FOREGROUND_COLOR);
-      Recognize_Label->user_data((void*)(7));
-      Recognize_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
-      Recognize_Label->when(FL_WHEN_NEVER);
-      o->set_label_offset(2);
-    } // RKR_Box* Recognize_Label
-    { RC_Harm_Opti = new RKR_Choice(225, 168, 72, 18, "Harmonizer");
-      RC_Harm_Opti->box(FL_FLAT_BOX);
-      RC_Harm_Opti->down_box(FL_BORDER_BOX);
-      RC_Harm_Opti->color(FL_BACKGROUND_COLOR);
-      RC_Harm_Opti->selection_color(FL_SELECTION_COLOR);
-      RC_Harm_Opti->labeltype(FL_NORMAL_LABEL);
-      RC_Harm_Opti->labelfont(0);
-      RC_Harm_Opti->labelsize(10);
-      RC_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
-      RC_Harm_Opti->textsize(10);
-      RC_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
-      RC_Harm_Opti->callback((Fl_Callback*)cb_RC_Harm_Opti);
-      RC_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
-      RC_Harm_Opti->when(FL_WHEN_RELEASE);
-      RC_Harm_Opti->menu(menu_RC_Harm_Opti);
-    } // RKR_Choice* RC_Harm_Opti
-    { RC_St_Harm_Opti = new RKR_Choice(315, 168, 72, 18, "Stereo Harmonizer");
-      RC_St_Harm_Opti->box(FL_FLAT_BOX);
-      RC_St_Harm_Opti->down_box(FL_BORDER_BOX);
-      RC_St_Harm_Opti->color(FL_BACKGROUND_COLOR);
-      RC_St_Harm_Opti->selection_color(FL_SELECTION_COLOR);
-      RC_St_Harm_Opti->labeltype(FL_NORMAL_LABEL);
-      RC_St_Harm_Opti->labelfont(0);
-      RC_St_Harm_Opti->labelsize(10);
-      RC_St_Harm_Opti->labelcolor(FL_BACKGROUND2_COLOR);
-      RC_St_Harm_Opti->textsize(10);
-      RC_St_Harm_Opti->textcolor(FL_BACKGROUND2_COLOR);
-      RC_St_Harm_Opti->callback((Fl_Callback*)cb_RC_St_Harm_Opti);
-      RC_St_Harm_Opti->align(Fl_Align(FL_ALIGN_TOP));
-      RC_St_Harm_Opti->when(FL_WHEN_RELEASE);
-      RC_St_Harm_Opti->menu(menu_RC_St_Harm_Opti);
-    } // RKR_Choice* RC_St_Harm_Opti
-    { RC_Ring_Opti = new RKR_Choice(403, 168, 72, 18, "Ring");
-      RC_Ring_Opti->box(FL_FLAT_BOX);
-      RC_Ring_Opti->down_box(FL_BORDER_BOX);
-      RC_Ring_Opti->color(FL_BACKGROUND_COLOR);
-      RC_Ring_Opti->selection_color(FL_SELECTION_COLOR);
-      RC_Ring_Opti->labeltype(FL_NORMAL_LABEL);
-      RC_Ring_Opti->labelfont(0);
-      RC_Ring_Opti->labelsize(10);
-      RC_Ring_Opti->labelcolor(FL_BACKGROUND2_COLOR);
-      RC_Ring_Opti->textsize(10);
-      RC_Ring_Opti->textcolor(FL_BACKGROUND2_COLOR);
-      RC_Ring_Opti->callback((Fl_Callback*)cb_RC_Ring_Opti);
-      RC_Ring_Opti->align(Fl_Align(FL_ALIGN_TOP));
-      RC_Ring_Opti->when(FL_WHEN_RELEASE);
-      RC_Ring_Opti->menu(menu_RC_Ring_Opti);
-    } // RKR_Choice* RC_Ring_Opti
-    { RKR_Box* o = Harm_Label = new RKR_Box(30, 196, 156, 17, "Harmonizer Downsample");
+    { RKR_Box* o = Harm_Label = new RKR_Box(30, 140, 156, 15, "Harmonizer Downsample");
       Harm_Label->box(FL_NO_BOX);
       Harm_Label->color(FL_BACKGROUND_COLOR);
       Harm_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1838,7 +1824,7 @@ this->when(FL_WHEN_RELEASE);
       Harm_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* Harm_Label
-    { Har_Downsample = new RKR_Choice(205, 196, 70, 18, " ");
+    { Har_Downsample = new RKR_Choice(205, 140, 70, 18);
       Har_Downsample->box(FL_FLAT_BOX);
       Har_Downsample->down_box(FL_BORDER_BOX);
       Har_Downsample->color(FL_BACKGROUND_COLOR);
@@ -1854,7 +1840,7 @@ this->when(FL_WHEN_RELEASE);
       Har_Downsample->when(FL_WHEN_RELEASE);
       Har_Downsample->menu(menu_Har_Downsample);
     } // RKR_Choice* Har_Downsample
-    { RKR_Choice* o = Har_Down_Qua = new RKR_Choice(315, 196, 72, 18, "Down");
+    { RKR_Choice* o = Har_Down_Qua = new RKR_Choice(315, 140, 72, 18, "Down");
       Har_Down_Qua->box(FL_FLAT_BOX);
       Har_Down_Qua->down_box(FL_BORDER_BOX);
       Har_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -1871,7 +1857,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Har_Down_Qua
-    { RKR_Choice* o = Har_Up_Qua = new RKR_Choice(415, 196, 72, 18, "Up");
+    { RKR_Choice* o = Har_Up_Qua = new RKR_Choice(415, 140, 72, 18, "Up");
       Har_Up_Qua->box(FL_FLAT_BOX);
       Har_Up_Qua->down_box(FL_BORDER_BOX);
       Har_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -1888,7 +1874,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Har_Up_Qua
-    { RKR_Box* o = Rev_Label = new RKR_Box(30, 224, 156, 17, "Reverbtron Downsample");
+    { RKR_Box* o = Rev_Label = new RKR_Box(30, 170, 156, 17, "Reverbtron Downsample");
       Rev_Label->box(FL_NO_BOX);
       Rev_Label->color(FL_BACKGROUND_COLOR);
       Rev_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1901,7 +1887,7 @@ this->when(FL_WHEN_RELEASE);
       Rev_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* Rev_Label
-    { RKR_Choice* o = Rev_Downsample = new RKR_Choice(205, 224, 70, 18);
+    { RKR_Choice* o = Rev_Downsample = new RKR_Choice(205, 170, 70, 18);
       Rev_Downsample->box(FL_FLAT_BOX);
       Rev_Downsample->down_box(FL_BORDER_BOX);
       Rev_Downsample->color(FL_BACKGROUND_COLOR);
@@ -1917,7 +1903,7 @@ this->when(FL_WHEN_RELEASE);
       Rev_Downsample->when(FL_WHEN_RELEASE);
       o->menu(menu_Har_Downsample);
     } // RKR_Choice* Rev_Downsample
-    { RKR_Choice* o = Rev_Down_Qua = new RKR_Choice(315, 224, 72, 18, "Down");
+    { RKR_Choice* o = Rev_Down_Qua = new RKR_Choice(315, 170, 72, 18, "Down");
       Rev_Down_Qua->box(FL_FLAT_BOX);
       Rev_Down_Qua->down_box(FL_BORDER_BOX);
       Rev_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -1934,7 +1920,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Rev_Down_Qua
-    { RKR_Choice* o = Rev_Up_Qua = new RKR_Choice(415, 224, 72, 18, "Up");
+    { RKR_Choice* o = Rev_Up_Qua = new RKR_Choice(415, 170, 72, 18, "Up");
       Rev_Up_Qua->box(FL_FLAT_BOX);
       Rev_Up_Qua->down_box(FL_BORDER_BOX);
       Rev_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -1951,7 +1937,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Rev_Up_Qua
-    { RKR_Box* o = con_Label = new RKR_Box(30, 254, 156, 17, "Convolotron Downsample");
+    { RKR_Box* o = con_Label = new RKR_Box(30, 200, 156, 17, "Convolotron Downsample");
       con_Label->box(FL_NO_BOX);
       con_Label->color(FL_BACKGROUND_COLOR);
       con_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -1964,7 +1950,7 @@ this->when(FL_WHEN_RELEASE);
       con_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* con_Label
-    { RKR_Choice* o = Con_Downsample = new RKR_Choice(205, 254, 70, 18);
+    { RKR_Choice* o = Con_Downsample = new RKR_Choice(205, 200, 70, 18);
       Con_Downsample->box(FL_FLAT_BOX);
       Con_Downsample->down_box(FL_BORDER_BOX);
       Con_Downsample->color(FL_BACKGROUND_COLOR);
@@ -1980,7 +1966,7 @@ this->when(FL_WHEN_RELEASE);
       Con_Downsample->when(FL_WHEN_RELEASE);
       o->menu(menu_Har_Downsample);
     } // RKR_Choice* Con_Downsample
-    { RKR_Choice* o = Con_Down_Qua = new RKR_Choice(315, 254, 72, 18, "Down");
+    { RKR_Choice* o = Con_Down_Qua = new RKR_Choice(315, 200, 72, 18, "Down");
       Con_Down_Qua->box(FL_FLAT_BOX);
       Con_Down_Qua->down_box(FL_BORDER_BOX);
       Con_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -1997,7 +1983,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Con_Down_Qua
-    { RKR_Choice* o = Con_Up_Qua = new RKR_Choice(415, 254, 72, 18, "Up");
+    { RKR_Choice* o = Con_Up_Qua = new RKR_Choice(415, 200, 72, 18, "Up");
       Con_Up_Qua->box(FL_FLAT_BOX);
       Con_Up_Qua->down_box(FL_BORDER_BOX);
       Con_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2014,7 +2000,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Con_Up_Qua
-    { RKR_Box* o = seq_Label = new RKR_Box(30, 284, 156, 17, "Sequence Downsample");
+    { RKR_Box* o = seq_Label = new RKR_Box(30, 230, 156, 17, "Sequence Downsample");
       seq_Label->box(FL_NO_BOX);
       seq_Label->color(FL_BACKGROUND_COLOR);
       seq_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2027,7 +2013,7 @@ this->when(FL_WHEN_RELEASE);
       seq_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* seq_Label
-    { RKR_Choice* o = Seq_Downsample = new RKR_Choice(205, 284, 70, 18);
+    { RKR_Choice* o = Seq_Downsample = new RKR_Choice(205, 230, 70, 18);
       Seq_Downsample->box(FL_FLAT_BOX);
       Seq_Downsample->down_box(FL_BORDER_BOX);
       Seq_Downsample->color(FL_BACKGROUND_COLOR);
@@ -2043,7 +2029,7 @@ this->when(FL_WHEN_RELEASE);
       Seq_Downsample->when(FL_WHEN_RELEASE);
       o->menu(menu_Har_Downsample);
     } // RKR_Choice* Seq_Downsample
-    { RKR_Choice* o = Seq_Down_Qua = new RKR_Choice(315, 284, 72, 18, "Down");
+    { RKR_Choice* o = Seq_Down_Qua = new RKR_Choice(315, 230, 72, 18, "Down");
       Seq_Down_Qua->box(FL_FLAT_BOX);
       Seq_Down_Qua->down_box(FL_BORDER_BOX);
       Seq_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2060,7 +2046,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Seq_Down_Qua
-    { RKR_Choice* o = Seq_Up_Qua = new RKR_Choice(415, 285, 72, 18, "Up");
+    { RKR_Choice* o = Seq_Up_Qua = new RKR_Choice(415, 230, 72, 18, "Up");
       Seq_Up_Qua->box(FL_FLAT_BOX);
       Seq_Up_Qua->down_box(FL_BORDER_BOX);
       Seq_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2077,7 +2063,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Seq_Up_Qua
-    { RKR_Box* o = shi_Label = new RKR_Box(30, 312, 156, 17, "Shifter Downsample");
+    { RKR_Box* o = shi_Label = new RKR_Box(30, 260, 156, 17, "Shifter Downsample");
       shi_Label->box(FL_NO_BOX);
       shi_Label->color(FL_BACKGROUND_COLOR);
       shi_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2090,7 +2076,7 @@ this->when(FL_WHEN_RELEASE);
       shi_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* shi_Label
-    { RKR_Choice* o = Shi_Downsample = new RKR_Choice(205, 314, 70, 18);
+    { RKR_Choice* o = Shi_Downsample = new RKR_Choice(205, 260, 70, 18);
       Shi_Downsample->box(FL_FLAT_BOX);
       Shi_Downsample->down_box(FL_BORDER_BOX);
       Shi_Downsample->color(FL_BACKGROUND_COLOR);
@@ -2106,7 +2092,7 @@ this->when(FL_WHEN_RELEASE);
       Shi_Downsample->when(FL_WHEN_RELEASE);
       o->menu(menu_Har_Downsample);
     } // RKR_Choice* Shi_Downsample
-    { RKR_Choice* o = Shi_Down_Qua = new RKR_Choice(315, 314, 72, 18, "Down");
+    { RKR_Choice* o = Shi_Down_Qua = new RKR_Choice(315, 260, 72, 18, "Down");
       Shi_Down_Qua->box(FL_FLAT_BOX);
       Shi_Down_Qua->down_box(FL_BORDER_BOX);
       Shi_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2123,7 +2109,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Shi_Down_Qua
-    { RKR_Choice* o = Shi_Up_Qua = new RKR_Choice(415, 314, 72, 18, "Up");
+    { RKR_Choice* o = Shi_Up_Qua = new RKR_Choice(415, 260, 72, 18, "Up");
       Shi_Up_Qua->box(FL_FLAT_BOX);
       Shi_Up_Qua->down_box(FL_BORDER_BOX);
       Shi_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2140,7 +2126,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Shi_Up_Qua
-    { RKR_Box* o = Voc_Label = new RKR_Box(30, 344, 156, 17, "Vocoder Downsample");
+    { RKR_Box* o = Voc_Label = new RKR_Box(30, 290, 156, 17, "Vocoder Downsample");
       Voc_Label->box(FL_NO_BOX);
       Voc_Label->color(FL_BACKGROUND_COLOR);
       Voc_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2153,7 +2139,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* Voc_Label
-    { RKR_Choice* o = Voc_Downsample = new RKR_Choice(205, 344, 70, 18, "   ");
+    { RKR_Choice* o = Voc_Downsample = new RKR_Choice(205, 290, 70, 18);
       Voc_Downsample->box(FL_FLAT_BOX);
       Voc_Downsample->down_box(FL_BORDER_BOX);
       Voc_Downsample->color(FL_BACKGROUND_COLOR);
@@ -2169,7 +2155,7 @@ this->when(FL_WHEN_RELEASE);
       Voc_Downsample->when(FL_WHEN_RELEASE);
       o->menu(menu_Har_Downsample);
     } // RKR_Choice* Voc_Downsample
-    { RKR_Choice* o = Voc_Down_Qua = new RKR_Choice(315, 344, 72, 18, "Down");
+    { RKR_Choice* o = Voc_Down_Qua = new RKR_Choice(315, 290, 72, 18, "Down");
       Voc_Down_Qua->box(FL_FLAT_BOX);
       Voc_Down_Qua->down_box(FL_BORDER_BOX);
       Voc_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2186,7 +2172,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Voc_Down_Qua
-    { RKR_Choice* o = Voc_Up_Qua = new RKR_Choice(415, 344, 72, 18, "Up");
+    { RKR_Choice* o = Voc_Up_Qua = new RKR_Choice(415, 290, 72, 18, "Up");
       Voc_Up_Qua->box(FL_FLAT_BOX);
       Voc_Up_Qua->down_box(FL_BORDER_BOX);
       Voc_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2203,7 +2189,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Voc_Up_Qua
-    { RKR_Box* o = Ste_Label = new RKR_Box(30, 374, 156, 17, "StereoHarm Downsample");
+    { RKR_Box* o = Ste_Label = new RKR_Box(30, 320, 156, 17, "StereoHarm Downsample");
       Ste_Label->box(FL_NO_BOX);
       Ste_Label->color(FL_BACKGROUND_COLOR);
       Ste_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2216,7 +2202,7 @@ this->when(FL_WHEN_RELEASE);
       Ste_Label->when(FL_WHEN_NEVER);
       o->set_label_offset(2);
     } // RKR_Box* Ste_Label
-    { RKR_Choice* o = Ste_Downsample = new RKR_Choice(205, 374, 70, 18);
+    { RKR_Choice* o = Ste_Downsample = new RKR_Choice(205, 320, 70, 18);
       Ste_Downsample->box(FL_FLAT_BOX);
       Ste_Downsample->down_box(FL_BORDER_BOX);
       Ste_Downsample->color(FL_BACKGROUND_COLOR);
@@ -2232,7 +2218,7 @@ this->when(FL_WHEN_RELEASE);
       Ste_Downsample->when(FL_WHEN_RELEASE);
       o->menu(menu_Har_Downsample);
     } // RKR_Choice* Ste_Downsample
-    { RKR_Choice* o = Ste_Down_Qua = new RKR_Choice(315, 374, 72, 18, "Down");
+    { RKR_Choice* o = Ste_Down_Qua = new RKR_Choice(315, 320, 72, 18, "Down");
       Ste_Down_Qua->box(FL_FLAT_BOX);
       Ste_Down_Qua->down_box(FL_BORDER_BOX);
       Ste_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2249,7 +2235,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Ste_Down_Qua
-    { RKR_Choice* o = Ste_Up_Qua = new RKR_Choice(415, 374, 72, 18, "Up");
+    { RKR_Choice* o = Ste_Up_Qua = new RKR_Choice(415, 320, 72, 18, "Up");
       Ste_Up_Qua->box(FL_FLAT_BOX);
       Ste_Up_Qua->down_box(FL_BORDER_BOX);
       Ste_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2266,7 +2252,7 @@ this->when(FL_WHEN_RELEASE);
       o->menu(menu_Upr_Qual);
       o->set_label_offset(1);
     } // RKR_Choice* Ste_Up_Qua
-    { Wave_Down = new RKR_Group(16, 403, 494, 164);
+    { Wave_Down = new RKR_Group(16, 370, 494, 164);
       Wave_Down->box(FL_DOWN_FRAME);
       Wave_Down->color(FL_BACKGROUND_COLOR);
       Wave_Down->selection_color(FL_BACKGROUND_COLOR);
@@ -2276,7 +2262,7 @@ this->when(FL_WHEN_RELEASE);
       Wave_Down->labelcolor(FL_BACKGROUND2_COLOR);
       Wave_Down->align(Fl_Align(FL_ALIGN_TOP));
       Wave_Down->when(FL_WHEN_RELEASE);
-      { RKR_Box* o = Wave_Label = new RKR_Box(191, 414, 156, 17, "Waveshape Resampling");
+      { RKR_Box* o = Wave_Label = new RKR_Box(191, 375, 156, 17, "Waveshape Resampling");
         Wave_Label->box(FL_NO_BOX);
         Wave_Label->color(FL_BACKGROUND_COLOR);
         Wave_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2288,7 +2274,7 @@ this->when(FL_WHEN_RELEASE);
         Wave_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Wave_Label
-      { RKR_Box* o = Dist_Label = new RKR_Box(30, 440, 156, 17, "Distortion Resampling");
+      { RKR_Box* o = Dist_Label = new RKR_Box(30, 400, 156, 17, "Distortion Resampling");
         Dist_Label->box(FL_NO_BOX);
         Dist_Label->color(FL_BACKGROUND_COLOR);
         Dist_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2301,7 +2287,7 @@ this->when(FL_WHEN_RELEASE);
         Dist_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Dist_Label
-      { Dist_Amo = new RKR_Choice(178, 440, 70, 18);
+      { Dist_Amo = new RKR_Choice(178, 400, 70, 18);
         Dist_Amo->box(FL_FLAT_BOX);
         Dist_Amo->down_box(FL_BORDER_BOX);
         Dist_Amo->color(FL_BACKGROUND_COLOR);
@@ -2317,7 +2303,7 @@ this->when(FL_WHEN_RELEASE);
         Dist_Amo->when(FL_WHEN_RELEASE);
         Dist_Amo->menu(menu_Dist_Amo);
       } // RKR_Choice* Dist_Amo
-      { RKR_Choice* o = Dist_Down_Qua = new RKR_Choice(290, 440, 72, 18, "Down");
+      { RKR_Choice* o = Dist_Down_Qua = new RKR_Choice(290, 400, 72, 18, "Down");
         Dist_Down_Qua->box(FL_FLAT_BOX);
         Dist_Down_Qua->down_box(FL_BORDER_BOX);
         Dist_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2334,7 +2320,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Dist_Down_Qua
-      { RKR_Choice* o = Dist_Up_Qua = new RKR_Choice(390, 440, 72, 18, "Up");
+      { RKR_Choice* o = Dist_Up_Qua = new RKR_Choice(390, 400, 72, 18, "Up");
         Dist_Up_Qua->box(FL_FLAT_BOX);
         Dist_Up_Qua->down_box(FL_BORDER_BOX);
         Dist_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2351,7 +2337,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Dist_Up_Qua
-      { RKR_Box* o = Ovrd_Label = new RKR_Box(30, 464, 156, 17, "Overdrive Resampling");
+      { RKR_Box* o = Ovrd_Label = new RKR_Box(30, 425, 156, 17, "Overdrive Resampling");
         Ovrd_Label->box(FL_NO_BOX);
         Ovrd_Label->color(FL_BACKGROUND_COLOR);
         Ovrd_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2364,7 +2350,7 @@ this->when(FL_WHEN_RELEASE);
         Ovrd_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Ovrd_Label
-      { Ovrd_Amo = new RKR_Choice(178, 464, 70, 18);
+      { Ovrd_Amo = new RKR_Choice(178, 425, 70, 18);
         Ovrd_Amo->box(FL_FLAT_BOX);
         Ovrd_Amo->down_box(FL_BORDER_BOX);
         Ovrd_Amo->color(FL_BACKGROUND_COLOR);
@@ -2380,7 +2366,7 @@ this->when(FL_WHEN_RELEASE);
         Ovrd_Amo->when(FL_WHEN_RELEASE);
         Ovrd_Amo->menu(menu_Ovrd_Amo);
       } // RKR_Choice* Ovrd_Amo
-      { RKR_Choice* o = Ovrd_Down_Qua = new RKR_Choice(290, 464, 72, 18, "Down");
+      { RKR_Choice* o = Ovrd_Down_Qua = new RKR_Choice(290, 425, 72, 18, "Down");
         Ovrd_Down_Qua->box(FL_FLAT_BOX);
         Ovrd_Down_Qua->down_box(FL_BORDER_BOX);
         Ovrd_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2397,7 +2383,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Ovrd_Down_Qua
-      { RKR_Choice* o = Ovrd_Up_Qua = new RKR_Choice(390, 464, 72, 18, "Up");
+      { RKR_Choice* o = Ovrd_Up_Qua = new RKR_Choice(390, 425, 72, 18, "Up");
         Ovrd_Up_Qua->box(FL_FLAT_BOX);
         Ovrd_Up_Qua->down_box(FL_BORDER_BOX);
         Ovrd_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2414,7 +2400,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Ovrd_Up_Qua
-      { RKR_Box* o = Dere_Label = new RKR_Box(30, 488, 156, 17, "Derelict Resampling");
+      { RKR_Box* o = Dere_Label = new RKR_Box(30, 450, 156, 17, "Derelict Resampling");
         Dere_Label->box(FL_NO_BOX);
         Dere_Label->color(FL_BACKGROUND_COLOR);
         Dere_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2427,7 +2413,7 @@ this->when(FL_WHEN_RELEASE);
         Dere_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Dere_Label
-      { Dere_Amo = new RKR_Choice(178, 488, 70, 18);
+      { Dere_Amo = new RKR_Choice(178, 450, 70, 18);
         Dere_Amo->box(FL_FLAT_BOX);
         Dere_Amo->down_box(FL_BORDER_BOX);
         Dere_Amo->color(FL_BACKGROUND_COLOR);
@@ -2443,7 +2429,7 @@ this->when(FL_WHEN_RELEASE);
         Dere_Amo->when(FL_WHEN_RELEASE);
         Dere_Amo->menu(menu_Dere_Amo);
       } // RKR_Choice* Dere_Amo
-      { RKR_Choice* o = Dere_Down_Qua = new RKR_Choice(290, 488, 72, 18, "Down");
+      { RKR_Choice* o = Dere_Down_Qua = new RKR_Choice(290, 450, 72, 18, "Down");
         Dere_Down_Qua->box(FL_FLAT_BOX);
         Dere_Down_Qua->down_box(FL_BORDER_BOX);
         Dere_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2460,7 +2446,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Dere_Down_Qua
-      { RKR_Choice* o = Dere_Up_Qua = new RKR_Choice(390, 488, 72, 18, "Up");
+      { RKR_Choice* o = Dere_Up_Qua = new RKR_Choice(390, 450, 72, 18, "Up");
         Dere_Up_Qua->box(FL_FLAT_BOX);
         Dere_Up_Qua->down_box(FL_BORDER_BOX);
         Dere_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2477,7 +2463,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Dere_Up_Qua
-      { RKR_Box* o = DB_Label = new RKR_Box(30, 512, 156, 17, "DistBand Resampling");
+      { RKR_Box* o = DB_Label = new RKR_Box(30, 475, 156, 17, "DistBand Resampling");
         DB_Label->box(FL_NO_BOX);
         DB_Label->color(FL_BACKGROUND_COLOR);
         DB_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2490,7 +2476,7 @@ this->when(FL_WHEN_RELEASE);
         DB_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* DB_Label
-      { DB_Amo = new RKR_Choice(178, 512, 70, 18);
+      { DB_Amo = new RKR_Choice(178, 475, 70, 18);
         DB_Amo->box(FL_FLAT_BOX);
         DB_Amo->down_box(FL_BORDER_BOX);
         DB_Amo->color(FL_BACKGROUND_COLOR);
@@ -2506,7 +2492,7 @@ this->when(FL_WHEN_RELEASE);
         DB_Amo->when(FL_WHEN_RELEASE);
         DB_Amo->menu(menu_DB_Amo);
       } // RKR_Choice* DB_Amo
-      { RKR_Choice* o = DB_Down_Qua = new RKR_Choice(290, 512, 72, 18, "Down");
+      { RKR_Choice* o = DB_Down_Qua = new RKR_Choice(290, 475, 72, 18, "Down");
         DB_Down_Qua->box(FL_FLAT_BOX);
         DB_Down_Qua->down_box(FL_BORDER_BOX);
         DB_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2523,7 +2509,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* DB_Down_Qua
-      { RKR_Choice* o = DB_Up_Qua = new RKR_Choice(390, 512, 72, 18, "Up");
+      { RKR_Choice* o = DB_Up_Qua = new RKR_Choice(390, 475, 72, 18, "Up");
         DB_Up_Qua->box(FL_FLAT_BOX);
         DB_Up_Qua->down_box(FL_BORDER_BOX);
         DB_Up_Qua->color(FL_BACKGROUND_COLOR);
@@ -2540,7 +2526,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* DB_Up_Qua
-      { RKR_Box* o = Stomp_Label = new RKR_Box(30, 536, 156, 17, "StompBox Resampling");
+      { RKR_Box* o = Stomp_Label = new RKR_Box(30, 500, 156, 17, "StompBox Resampling");
         Stomp_Label->box(FL_NO_BOX);
         Stomp_Label->color(FL_BACKGROUND_COLOR);
         Stomp_Label->selection_color(FL_BACKGROUND_COLOR);
@@ -2553,7 +2539,7 @@ this->when(FL_WHEN_RELEASE);
         Stomp_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
       } // RKR_Box* Stomp_Label
-      { Stomp_Amo = new RKR_Choice(178, 536, 70, 18);
+      { Stomp_Amo = new RKR_Choice(178, 500, 70, 18);
         Stomp_Amo->box(FL_FLAT_BOX);
         Stomp_Amo->down_box(FL_BORDER_BOX);
         Stomp_Amo->color(FL_BACKGROUND_COLOR);
@@ -2569,7 +2555,7 @@ this->when(FL_WHEN_RELEASE);
         Stomp_Amo->when(FL_WHEN_RELEASE);
         Stomp_Amo->menu(menu_Stomp_Amo);
       } // RKR_Choice* Stomp_Amo
-      { RKR_Choice* o = Stomp_Down_Qua = new RKR_Choice(290, 536, 72, 18, "Down");
+      { RKR_Choice* o = Stomp_Down_Qua = new RKR_Choice(290, 500, 72, 18, "Down");
         Stomp_Down_Qua->box(FL_FLAT_BOX);
         Stomp_Down_Qua->down_box(FL_BORDER_BOX);
         Stomp_Down_Qua->color(FL_BACKGROUND_COLOR);
@@ -2586,7 +2572,7 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Stomp_Down_Qua
-      { RKR_Choice* o = Stomp_Up_Qua = new RKR_Choice(390, 536, 72, 18, "Up");
+      { RKR_Choice* o = Stomp_Up_Qua = new RKR_Choice(390, 500, 72, 18, "Up");
         Stomp_Up_Qua->box(FL_FLAT_BOX);
         Stomp_Up_Qua->down_box(FL_BORDER_BOX);
         Stomp_Up_Qua->color(FL_BACKGROUND_COLOR);
