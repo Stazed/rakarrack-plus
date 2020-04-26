@@ -322,6 +322,8 @@ RKR::RKR() :
     t_periods(),
     HarQual(),
     SteQual(),
+    SeqQual(),
+    ShiQual(),
     tempocnt(),
     Tap_Display(),
     Tap_Selection(),
@@ -503,6 +505,9 @@ RKR::RKR() :
 
     rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
     rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);
+    
+    rakarrack.get(PrefNom("Sequence Quality"), SeqQual, 4);
+    rakarrack.get(PrefNom("Shifter Quality"), ShiQual, 4);
 
     rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);
     
@@ -634,8 +639,8 @@ RKR::RKR() :
     efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
     efx_Vocoder = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
     efx_Sustainer = new Sustainer(fSample_rate, period);
-    efx_Sequence = new Sequence((long) HarQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
-    efx_Shifter = new Shifter((long) HarQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
+    efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
+    efx_Shifter = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
     efx_StompBox = new StompBox(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
     efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     efx_Echotron = new Echotron(fSample_rate, period);

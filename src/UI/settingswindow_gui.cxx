@@ -435,20 +435,19 @@ Fl_Menu_Item SettingsWindowGui::menu_Har_Qual[] = {
 void SettingsWindowGui::cb_Seq_Qual_i(RKR_Choice* o, void*) {
   int i = (int) o->value();
 
-// FIXME
 switch(i)
 {
      case 0:
-       m_rkr->HarQual=4;
+       m_rkr->SeqQual=4;
        break;
      case 1:
-       m_rkr->HarQual=8;
+       m_rkr->SeqQual=8;
        break;
      case 2:
-       m_rkr->HarQual=16;	
+       m_rkr->SeqQual=16;	
 	break;
      case 3:
-       m_rkr->HarQual=32;	
+       m_rkr->SeqQual=32;	
 	break;	
 }
 
@@ -483,30 +482,29 @@ void SettingsWindowGui::cb_Ste_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Ste_Qual_i(o,v);
 }
 
-void SettingsWindowGui::cb_Shift_Qual_i(RKR_Choice* o, void*) {
+void SettingsWindowGui::cb_Shi_Qual_i(RKR_Choice* o, void*) {
   int i = (int) o->value();
 
-// FIXME
 switch(i)
 {
      case 0:
-       m_rkr->HarQual=4;
+       m_rkr->ShiQual=4;
        break;
      case 1:
-       m_rkr->HarQual=8;
+       m_rkr->ShiQual=8;
        break;
      case 2:
-       m_rkr->HarQual=16;	
+       m_rkr->ShiQual=16;	
 	break;
      case 3:
-       m_rkr->HarQual=32;	
+       m_rkr->ShiQual=32;	
 	break;	
 }
 
 update_shifter_quality();
 }
-void SettingsWindowGui::cb_Shift_Qual(RKR_Choice* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shift_Qual_i(o,v);
+void SettingsWindowGui::cb_Shi_Qual(RKR_Choice* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Shi_Qual_i(o,v);
 }
 
 void SettingsWindowGui::cb_Voc_Bands_i(RKR_Choice* o, void*) {
@@ -1729,23 +1727,23 @@ this->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
       o->menu(menu_Har_Qual);
     } // RKR_Choice* Ste_Qual
-    { RKR_Choice* o = Shift_Qual = new RKR_Choice(230, 76, 47, 18, "Shifter Quality");
-      Shift_Qual->box(FL_FLAT_BOX);
-      Shift_Qual->down_box(FL_BORDER_BOX);
-      Shift_Qual->color(FL_BACKGROUND_COLOR);
-      Shift_Qual->selection_color(FL_SELECTION_COLOR);
-      Shift_Qual->labeltype(FL_NORMAL_LABEL);
-      Shift_Qual->labelfont(0);
-      Shift_Qual->labelsize(12);
-      Shift_Qual->labelcolor(FL_BACKGROUND2_COLOR);
-      Shift_Qual->textsize(10);
-      Shift_Qual->textcolor(FL_BACKGROUND2_COLOR);
-      Shift_Qual->callback((Fl_Callback*)cb_Shift_Qual);
-      Shift_Qual->align(Fl_Align(FL_ALIGN_RIGHT));
-      Shift_Qual->when(FL_WHEN_RELEASE);
+    { RKR_Choice* o = Shi_Qual = new RKR_Choice(230, 76, 47, 18, "Shifter Quality");
+      Shi_Qual->box(FL_FLAT_BOX);
+      Shi_Qual->down_box(FL_BORDER_BOX);
+      Shi_Qual->color(FL_BACKGROUND_COLOR);
+      Shi_Qual->selection_color(FL_SELECTION_COLOR);
+      Shi_Qual->labeltype(FL_NORMAL_LABEL);
+      Shi_Qual->labelfont(0);
+      Shi_Qual->labelsize(12);
+      Shi_Qual->labelcolor(FL_BACKGROUND2_COLOR);
+      Shi_Qual->textsize(10);
+      Shi_Qual->textcolor(FL_BACKGROUND2_COLOR);
+      Shi_Qual->callback((Fl_Callback*)cb_Shi_Qual);
+      Shi_Qual->align(Fl_Align(FL_ALIGN_RIGHT));
+      Shi_Qual->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
       o->menu(menu_Har_Qual);
-    } // RKR_Choice* Shift_Qual
+    } // RKR_Choice* Shi_Qual
     { RKR_Box* o = Voc_Band_Label = new RKR_Box(30, 104, 136, 17, "Vocoder Bands");
       Voc_Band_Label->box(FL_NO_BOX);
       Voc_Band_Label->color(FL_BACKGROUND_COLOR);
@@ -3251,7 +3249,7 @@ void SettingsWindowGui::update_sequence_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_rkr->efx_Sequence;
-  m_rkr->efx_Sequence = new Sequence((long) m_rkr->HarQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  m_rkr->efx_Sequence = new Sequence((long) m_rkr->SeqQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3278,7 +3276,7 @@ void SettingsWindowGui::update_shifter_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_rkr->efx_Shifter;
-  m_rkr->efx_Shifter = new Shifter((long) m_rkr->HarQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  m_rkr->efx_Shifter = new Shifter((long) m_rkr->ShiQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);

@@ -646,20 +646,19 @@ update_harmonizer_quality();}
         label {Sequence Quality}
         callback {int i = (int) o->value();
 
-// FIXME
 switch(i)
 {
      case 0:
-       m_rkr->HarQual=4;
+       m_rkr->SeqQual=4;
        break;
      case 1:
-       m_rkr->HarQual=8;
+       m_rkr->SeqQual=8;
        break;
      case 2:
-       m_rkr->HarQual=16;	
+       m_rkr->SeqQual=16;	
 	break;
      case 3:
-       m_rkr->HarQual=32;	
+       m_rkr->SeqQual=32;	
 	break;	
 }
 
@@ -701,24 +700,23 @@ update_stereoharm_quality();} open
         code1 {o->menu(menu_Har_Qual);}
         class RKR_Choice
       } {}
-      Fl_Choice Shift_Qual {
+      Fl_Choice Shi_Qual {
         label {Shifter Quality}
         callback {int i = (int) o->value();
 
-// FIXME
 switch(i)
 {
      case 0:
-       m_rkr->HarQual=4;
+       m_rkr->ShiQual=4;
        break;
      case 1:
-       m_rkr->HarQual=8;
+       m_rkr->ShiQual=8;
        break;
      case 2:
-       m_rkr->HarQual=16;	
+       m_rkr->ShiQual=16;	
 	break;
      case 3:
-       m_rkr->HarQual=32;	
+       m_rkr->ShiQual=32;	
 	break;	
 }
 
@@ -1765,7 +1763,7 @@ std::vector<int> save_state = m_rkr->efx_Sequence->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->efx_Sequence;
-m_rkr->efx_Sequence = new Sequence((long) m_rkr->HarQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
+m_rkr->efx_Sequence = new Sequence((long) m_rkr->SeqQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -1792,7 +1790,7 @@ std::vector<int> save_state = m_rkr->efx_Shifter->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->efx_Shifter;
-m_rkr->efx_Shifter = new Shifter((long) m_rkr->HarQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
+m_rkr->efx_Shifter = new Shifter((long) m_rkr->ShiQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);

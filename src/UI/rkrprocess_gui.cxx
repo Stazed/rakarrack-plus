@@ -1230,6 +1230,8 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("MIDI IN Stereo Harmonizer"), rkr->StereoHarCh + 1);
         rakarrack.set(rkr->PrefNom("Harmonizer Quality"), rkr->HarQual);
         rakarrack.set(rkr->PrefNom("StereoHarm Quality"), rkr->SteQual);
+        rakarrack.set(rkr->PrefNom("Sequence Quality"), rkr->SeqQual);
+        rakarrack.set(rkr->PrefNom("Shifter Quality"), rkr->ShiQual);
         rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"), rkr->t_timeout);
         rakarrack.set(rkr->PrefNom("Disable Warnings"), rkr->mess_dis);
         rakarrack.set(rkr->PrefNom("Enable Tooltips"), rkr->ena_tool);
@@ -2901,6 +2903,44 @@ void RKRGUI::MiraConfig()
 
         case 32:
             Settings->Ste_Qual->value(3);
+            break;
+    }
+    
+    switch (rkr->SeqQual)
+    {
+        case 4:
+            Settings->Seq_Qual->value(0);
+            break;
+
+        case 8:
+            Settings->Seq_Qual->value(1);
+            break;
+
+        case 16:
+            Settings->Seq_Qual->value(2);
+            break;
+
+        case 32:
+            Settings->Seq_Qual->value(3);
+            break;
+    }
+
+    switch (rkr->ShiQual)
+    {
+        case 4:
+            Settings->Shi_Qual->value(0);
+            break;
+
+        case 8:
+            Settings->Shi_Qual->value(1);
+            break;
+
+        case 16:
+            Settings->Shi_Qual->value(2);
+            break;
+
+        case 32:
+            Settings->Shi_Qual->value(3);
             break;
     }
 

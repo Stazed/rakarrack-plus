@@ -213,10 +213,10 @@ private:
   inline void cb_Ste_Qual_i(RKR_Choice*, void*);
   static void cb_Ste_Qual(RKR_Choice*, void*);
 public:
-  RKR_Choice *Shift_Qual;
+  RKR_Choice *Shi_Qual;
 private:
-  inline void cb_Shift_Qual_i(RKR_Choice*, void*);
-  static void cb_Shift_Qual(RKR_Choice*, void*);
+  inline void cb_Shi_Qual_i(RKR_Choice*, void*);
+  static void cb_Shi_Qual(RKR_Choice*, void*);
 public:
   RKR_Box *Voc_Band_Label;
   RKR_Choice *Voc_Bands;

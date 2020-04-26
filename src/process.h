@@ -422,6 +422,9 @@ public:
     // Harmonizer
     int HarQual;
     int SteQual;
+    int SeqQual;
+    int ShiQual;
+    
 
     // Tap Tempo
 
