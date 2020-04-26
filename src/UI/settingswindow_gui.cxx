@@ -743,7 +743,7 @@ void SettingsWindowGui::cb_Ste_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Dist_Amo_i(RKR_Choice* o, void*) {
   m_rkr->Dist_res_amount=(int)o->value();
-m_rgui->Show_Next_Time();
+update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Dist_Amo_i(o,v);
@@ -760,7 +760,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Dist_Amo[] = {
 
 void SettingsWindowGui::cb_Dist_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Dist_down_q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Dist_Down_Qua_i(o,v);
@@ -768,7 +768,7 @@ void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Dist_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Dist_up_q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Dist_Up_Qua_i(o,v);
@@ -776,7 +776,7 @@ void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Ovrd_Amo_i(RKR_Choice* o, void*) {
   m_rkr->Ovrd_res_amount=(int)o->value();
-m_rgui->Show_Next_Time();
+update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Ovrd_Amo_i(o,v);
@@ -784,7 +784,7 @@ void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Ovrd_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Ovrd_down_q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Ovrd_Down_Qua_i(o,v);
@@ -792,7 +792,7 @@ void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Ovrd_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Ovrd_up_q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Ovrd_Up_Qua_i(o,v);
@@ -3317,4 +3317,52 @@ void SettingsWindowGui::update_vocoder_quality() {
   
   /* Reset bypass */
   m_rkr->Vocoder_Bypass = hold_bypass;
+}
+
+void SettingsWindowGui::update_distortion_quality() {
+  /* shut off all processing */
+  m_rkr->quality_update = true;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_Distorsion->save_parameters();
+  
+  /* Delete and re-create the efx with new resample settings */
+  delete m_rkr->efx_Distorsion;
+  m_rkr->efx_Distorsion = new Distorsion(m_rkr->Dist_res_amount, m_rkr->Dist_up_q, m_rkr->Dist_down_q, m_rkr->fSample_rate, m_rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters */
+  m_rkr->efx_Distorsion->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  m_rkr->quality_update = false;
+}
+
+void SettingsWindowGui::update_overdrive_quality() {
+  /* shut off all processing */
+  m_rkr->quality_update = true;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_Overdrive->save_parameters();
+  
+  /* Delete and re-create the efx with new resample settings */
+  delete m_rkr->efx_Overdrive;
+  m_rkr->efx_Overdrive = new Distorsion(m_rkr->Ovrd_res_amount, m_rkr->Ovrd_up_q, m_rkr->Ovrd_down_q, m_rkr->fSample_rate, m_rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters */
+  m_rkr->efx_Overdrive->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  m_rkr->quality_update = false;
 }

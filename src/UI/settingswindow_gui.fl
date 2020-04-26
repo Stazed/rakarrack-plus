@@ -1078,7 +1078,7 @@ update_stereoharm_quality();} open
         }
         Fl_Choice Dist_Amo {
           callback {m_rkr->Dist_res_amount=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_distortion_quality();}
           xywh {178 400 70 18} down_box BORDER_BOX selection_color 137 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
         } {
@@ -1106,7 +1106,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice Dist_Down_Qua {
           label Down
           callback {m_rkr->Dist_down_q=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_distortion_quality();}
           xywh {290 400 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
@@ -1115,7 +1115,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice Dist_Up_Qua {
           label Up
           callback {m_rkr->Dist_up_q=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_distortion_quality();}
           xywh {390 400 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
@@ -1130,7 +1130,7 @@ m_rgui->Show_Next_Time();}
         }
         Fl_Choice Ovrd_Amo {
           callback {m_rkr->Ovrd_res_amount=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_overdrive_quality();}
           xywh {178 425 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
           class RKR_Choice
@@ -1138,7 +1138,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice Ovrd_Down_Qua {
           label Down
           callback {m_rkr->Ovrd_down_q=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_overdrive_quality();}
           xywh {290 425 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
@@ -1147,7 +1147,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice Ovrd_Up_Qua {
           label Up
           callback {m_rkr->Ovrd_up_q=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_overdrive_quality();}
           xywh {390 425 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
@@ -1831,5 +1831,53 @@ m_rkr->quality_update = false;
 
 /* Reset bypass */
 m_rkr->Vocoder_Bypass = hold_bypass;} {}
+  }
+  Function {update_distortion_quality()} {return_type void
+  } {
+    code {/* shut off all processing */
+m_rkr->quality_update = true;
+
+/* Wait a bit */
+usleep(C_MILLISECONDS_25);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_Distorsion->save_parameters();
+
+/* Delete and re-create the efx with new resample settings */
+delete m_rkr->efx_Distorsion;
+m_rkr->efx_Distorsion = new Distorsion(m_rkr->Dist_res_amount, m_rkr->Dist_up_q, m_rkr->Dist_down_q, m_rkr->fSample_rate, m_rkr->period);
+
+/* Wait for things to complete */
+usleep(C_MILLISECONDS_50);
+
+/* Reset parameters */
+m_rkr->efx_Distorsion->reset_parameters(save_state);
+
+/* Turn processing back on */
+m_rkr->quality_update = false;} {}
+  }
+  Function {update_overdrive_quality()} {return_type void
+  } {
+    code {/* shut off all processing */
+m_rkr->quality_update = true;
+
+/* Wait a bit */
+usleep(C_MILLISECONDS_25);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_Overdrive->save_parameters();
+
+/* Delete and re-create the efx with new resample settings */
+delete m_rkr->efx_Overdrive;
+m_rkr->efx_Overdrive = new Distorsion(m_rkr->Ovrd_res_amount, m_rkr->Ovrd_up_q, m_rkr->Ovrd_down_q, m_rkr->fSample_rate, m_rkr->period);
+
+/* Wait for things to complete */
+usleep(C_MILLISECONDS_50);
+
+/* Reset parameters */
+m_rkr->efx_Overdrive->reset_parameters(save_state);
+
+/* Turn processing back on */
+m_rkr->quality_update = false;} {}
   }
 }

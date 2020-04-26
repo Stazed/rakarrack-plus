@@ -25,8 +25,11 @@
 #ifndef DISTORSION_H
 #define DISTORSION_H
 
+#include <vector>
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
+
+#define DIST_PRESET_SIZE 13
 
 class Distorsion
 {
@@ -46,6 +49,10 @@ public:
     void applyfilters (float * efxoutl, float * efxoutr);
     void initialize ();
     void clear_initialize();
+
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
     int Ppreset;
     float *octoutl;

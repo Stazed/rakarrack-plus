@@ -539,5 +539,7 @@ public:
   void update_sequence_quality();
   void update_shifter_quality();
   void update_vocoder_quality();
+  void update_distortion_quality();
+  void update_overdrive_quality();
 };
 #endif

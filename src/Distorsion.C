@@ -99,6 +99,29 @@ Distorsion::cleanup()
     DCr->cleanup();
 }
 
+std::vector<int>
+Distorsion::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < DIST_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+Distorsion::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < DIST_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
+    
+    cleanup();
+}
+
 #ifdef LV2_SUPPORT
 void
 Distorsion::lv2_update_params(uint32_t period)
@@ -336,7 +359,7 @@ Distorsion::setoctave(int Poctave)
 void
 Distorsion::setpreset(int dgui, int npreset)
 {
-    const int PRESET_SIZE = 13;
+    const int PRESET_SIZE = DIST_PRESET_SIZE;
     const int NUM_PRESETS = 6;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
