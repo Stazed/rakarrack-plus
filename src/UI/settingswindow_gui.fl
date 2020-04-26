@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -51,13 +51,13 @@ m_rgui= _rgui;} {}
     xywh {1 1 525 575}
   }
   Fl_Tabs STabs {
-    user_data 1 open selected
+    user_data 1 open
     xywh {0 0 530 580}
     class RKR_Tabs
   } {
     Fl_Group Look {
       label Look
-      user_data 1
+      user_data 1 selected
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -1046,13 +1046,13 @@ update_stereoharm_quality();} open
         class RKR_Group
       } {
         Fl_Box Wave_Label {
-          label {Waveshape Downsample}
+          label {Waveshape Resampling}
           xywh {191 414 156 17} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
           class RKR_Box
         }
         Fl_Box Dist_Label {
-          label {Distortion Downsample}
+          label {Distortion Resampling}
           user_data 7
           xywh {30 440 156 17} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
@@ -1061,7 +1061,7 @@ update_stereoharm_quality();} open
         Fl_Choice Dist_Amo {
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {178 440 70 18} down_box BORDER_BOX selection_color 137 labelsize 10 labelcolor 7 textsize 10
+          xywh {178 440 70 18} down_box BORDER_BOX selection_color 137 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
         } {
           MenuItem {} {
@@ -1089,7 +1089,7 @@ m_rgui->Show_Next_Time();}
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {290 440 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {290 440 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
@@ -1098,13 +1098,13 @@ m_rgui->Show_Next_Time();}
           label Up
           callback {m_rkr->Wave_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {390 440 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {390 440 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
         } {}
         Fl_Box Ovrd_Label {
-          label {Overdrive Downsample}
+          label {Overdrive Resampling}
           user_data 7
           xywh {30 464 156 17} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
@@ -1113,7 +1113,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice Ovrd_Amo {
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {178 464 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {178 464 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
         } {
           MenuItem {} {
@@ -1141,7 +1141,7 @@ m_rgui->Show_Next_Time();}
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {290 464 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {290 464 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
@@ -1150,13 +1150,13 @@ m_rgui->Show_Next_Time();}
           label Up
           callback {m_rkr->Wave_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {390 464 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {390 464 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
         } {}
         Fl_Box Dere_Label {
-          label {Derelict Downsample}
+          label {Derelict Resampling}
           user_data 7
           xywh {30 488 156 17} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
@@ -1165,7 +1165,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice Dere_Amo {
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {178 488 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {178 488 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
         } {
           MenuItem {} {
@@ -1193,7 +1193,7 @@ m_rgui->Show_Next_Time();}
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {290 488 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {290 488 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
@@ -1202,13 +1202,13 @@ m_rgui->Show_Next_Time();}
           label Up
           callback {m_rkr->Wave_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {390 488 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {390 488 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
         } {}
         Fl_Box DB_Label {
-          label {DistBand Downsample}
+          label {DistBand Resampling}
           user_data 7
           xywh {30 512 156 17} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
@@ -1217,7 +1217,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice DB_Amo {
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {178 512 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {178 512 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
         } {
           MenuItem {} {
@@ -1245,7 +1245,7 @@ m_rgui->Show_Next_Time();}
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {290 512 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {290 512 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
@@ -1254,13 +1254,13 @@ m_rgui->Show_Next_Time();}
           label Up
           callback {m_rkr->Wave_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {390 512 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {390 512 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
         } {}
         Fl_Box Stomp_Label {
-          label {StompBox Downsample}
+          label {StompBox Resampling}
           user_data 7
           xywh {30 536 156 17} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
@@ -1269,7 +1269,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice Stomp_Amo {
           callback {m_rkr->Wave_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {178 536 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10
+          xywh {178 536 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
         } {
           MenuItem {} {
@@ -1297,7 +1297,7 @@ m_rgui->Show_Next_Time();}
           label Down
           callback {m_rkr->Wave_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {290 536 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {290 536 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
@@ -1306,7 +1306,7 @@ m_rgui->Show_Next_Time();}
           label Up
           callback {m_rkr->Wave_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
-          xywh {390 536 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10
+          xywh {390 536 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice

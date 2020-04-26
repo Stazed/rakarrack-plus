@@ -33,6 +33,7 @@ RKR_Group::RKR_Group(int X, int Y, int W, int H, const char *label) :
     m_start_height(H),
     m_previous_font_size(global_font_size)
 {
+    this->user_data((void*)(GROUP_USER_DATA));
 }
 
 void RKR_Group::draw()

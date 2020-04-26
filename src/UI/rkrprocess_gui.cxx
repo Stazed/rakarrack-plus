@@ -591,6 +591,22 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
                 w->labelcolor(label_color);
                 w->selection_color(back_color);
                 w->color(fore_color);
+                
+                long long ugd = (long long) w->user_data();
+                
+                if(ugd == GROUP_USER_DATA)
+                {
+                    Fl_Group *gg = (Fl_Group *) w;
+                    for (int i = 0; i < gg->children(); i++)
+                    {
+                        Fl_Widget *ww = gg->child(i);
+
+                        ww->labelcolor(label_color);
+                        ww->selection_color(back_color);
+                        ww->color(fore_color);
+                    }
+                }
+                
             }
         }
     }

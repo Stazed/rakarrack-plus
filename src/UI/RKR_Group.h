@@ -29,6 +29,8 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
 
+#define GROUP_USER_DATA   99996
+
 class RKR_Group : public Fl_Group
 {
 public:
