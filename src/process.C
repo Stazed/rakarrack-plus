@@ -302,9 +302,28 @@ RKR::RKR() :
     fSample_rate(),
     cSample_rate(),
     interpbuf(NULL),
+
+    /* FIXME remove */
     Wave_res_amount(),
     Wave_up_q(),
     Wave_down_q(),
+
+    Dist_res_amount(),
+    Dist_up_q(),
+    Dist_down_q(),
+    Ovrd_res_amount(),
+    Ovrd_up_q(),
+    Ovrd_down_q(),
+    Dere_res_amount(),
+    Dere_up_q(),
+    Dere_down_q(),
+    DBand_res_amount(),
+    DBand_up_q(),
+    DBand_down_q(),
+    Stomp_res_amount(),
+    Stomp_up_q(),
+    Stomp_down_q(),
+
     sw_stat(),
     MIDIway(),
     NumParams(423),
@@ -499,9 +518,30 @@ RKR::RKR() :
     rakarrack.get(PrefNom("Vocoder Up Quality"), Voc_U_Q, 4);
     rakarrack.get(PrefNom("Vocoder Down Quality"), Voc_D_Q, 2);
 
+    /* FIXME remove */
     rakarrack.get(PrefNom("Waveshape Resampling"), Wave_res_amount, 2);
     rakarrack.get(PrefNom("Waveshape Up Quality"), Wave_up_q, 4);
     rakarrack.get(PrefNom("Waveshape Down Quality"), Wave_down_q, 2);
+
+    rakarrack.get(PrefNom("Distortion Resampling"), Dist_res_amount, 2);
+    rakarrack.get(PrefNom("Distortion Up Quality"), Dist_up_q, 4);
+    rakarrack.get(PrefNom("Distortion Down Quality"), Dist_down_q, 2);
+
+    rakarrack.get(PrefNom("Overdrive Resampling"), Ovrd_res_amount, 2);
+    rakarrack.get(PrefNom("Overdrive Up Quality"), Ovrd_up_q, 4);
+    rakarrack.get(PrefNom("Overdrive Down Quality"), Ovrd_down_q, 2);
+
+    rakarrack.get(PrefNom("Derelict Resampling"), Dere_res_amount, 2);
+    rakarrack.get(PrefNom("Derelict Up Quality"), Dere_up_q, 4);
+    rakarrack.get(PrefNom("Derelict Down Quality"), Dere_down_q, 2);
+
+    rakarrack.get(PrefNom("DistBand Resampling"), DBand_res_amount, 2);
+    rakarrack.get(PrefNom("DistBand Up Quality"), DBand_up_q, 4);
+    rakarrack.get(PrefNom("DistBand Down Quality"), DBand_down_q, 2);
+
+    rakarrack.get(PrefNom("StompBox Resampling"), Stomp_res_amount, 2);
+    rakarrack.get(PrefNom("StompBox Up Quality"), Stomp_up_q, 4);
+    rakarrack.get(PrefNom("StompBox Down Quality"), Stomp_down_q, 2);
 
     rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
     rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);

@@ -1185,9 +1185,12 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("StereoHarm Up Quality"), rkr->Ste_U_Q);
         rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"), rkr->Ste_D_Q);
 
+        /* FIXME remove */
         rakarrack.set(rkr->PrefNom("Waveshape Resampling"), rkr->Wave_res_amount);
         rakarrack.set(rkr->PrefNom("Waveshape Up Quality"), rkr->Wave_up_q);
         rakarrack.set(rkr->PrefNom("Waveshape Down Quality"), rkr->Wave_down_q);
+
+
         rakarrack.set(rkr->PrefNom("Calibration"), rkr->aFreq);
         rakarrack.set(rkr->PrefNom("Recognize Trigger"), rkr->rtrig);
 
