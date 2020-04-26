@@ -302,12 +302,6 @@ RKR::RKR() :
     fSample_rate(),
     cSample_rate(),
     interpbuf(NULL),
-
-    /* FIXME remove */
-    Wave_res_amount(),
-    Wave_up_q(),
-    Wave_down_q(),
-
     Dist_res_amount(),
     Dist_up_q(),
     Dist_down_q(),
@@ -323,7 +317,6 @@ RKR::RKR() :
     Stomp_res_amount(),
     Stomp_up_q(),
     Stomp_down_q(),
-
     sw_stat(),
     MIDIway(),
     NumParams(423),
@@ -518,11 +511,6 @@ RKR::RKR() :
     rakarrack.get(PrefNom("Vocoder Up Quality"), Voc_U_Q, 4);
     rakarrack.get(PrefNom("Vocoder Down Quality"), Voc_D_Q, 2);
 
-    /* FIXME remove */
-    rakarrack.get(PrefNom("Waveshape Resampling"), Wave_res_amount, 2);
-    rakarrack.get(PrefNom("Waveshape Up Quality"), Wave_up_q, 4);
-    rakarrack.get(PrefNom("Waveshape Down Quality"), Wave_down_q, 2);
-
     rakarrack.get(PrefNom("Distortion Resampling"), Dist_res_amount, 2);
     rakarrack.get(PrefNom("Distortion Up Quality"), Dist_up_q, 4);
     rakarrack.get(PrefNom("Distortion Down Quality"), Dist_down_q, 2);
@@ -647,8 +635,8 @@ RKR::RKR() :
     efx_Echo = new Echo(fSample_rate, period);
     efx_Phaser = new Phaser(fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
-    efx_Distorsion = new Distorsion(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
-    efx_Overdrive = new Distorsion(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
+    efx_Distorsion = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
+    efx_Overdrive = new Distorsion(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
     efx_EQ2 = new EQ(EQ2_PARAMETRIC, fSample_rate, period);
     efx_EQ1 = new EQ(EQ1_REGULAR, fSample_rate, period);
     efx_Compressor = new Compressor(fSample_rate, period);
@@ -659,13 +647,13 @@ RKR::RKR() :
     efx_Har = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     efx_MusDelay = new MusicDelay(fSample_rate, period);
     efx_Gate = new Gate(fSample_rate, period);
-    efx_Derelict = new Derelict(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
+    efx_Derelict = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
     efx_FLimiter = new Compressor(fSample_rate, period);
     efx_Valve = new Valve(fSample_rate, period);
     efx_DFlange = new Dflange(fSample_rate, period);
     efx_Ring = new Ring(fSample_rate, period);
     efx_Exciter = new Exciter(fSample_rate, period);
-    efx_DistBand = new DistBand(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
+    efx_DistBand = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
     efx_Arpie = new Arpie(fSample_rate, period);
     efx_Expander = new Expander(fSample_rate, period);
     efx_Shuffle = new Shuffle(fSample_rate, period);
@@ -681,7 +669,7 @@ RKR::RKR() :
     efx_Sustainer = new Sustainer(fSample_rate, period);
     efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
-    efx_StompBox = new StompBox(Wave_res_amount, Wave_up_q, Wave_down_q, fSample_rate, period);
+    efx_StompBox = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
     efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     efx_Echotron = new Echotron(fSample_rate, period);
     efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);

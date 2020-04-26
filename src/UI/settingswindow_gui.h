@@ -389,21 +389,21 @@ private:
   inline void cb_Dere_Up_Qua_i(RKR_Choice*, void*);
   static void cb_Dere_Up_Qua(RKR_Choice*, void*);
 public:
-  RKR_Box *DB_Label;
-  RKR_Choice *DB_Amo;
+  RKR_Box *DBand_Label;
+  RKR_Choice *DBand_Amo;
 private:
-  inline void cb_DB_Amo_i(RKR_Choice*, void*);
-  static void cb_DB_Amo(RKR_Choice*, void*);
+  inline void cb_DBand_Amo_i(RKR_Choice*, void*);
+  static void cb_DBand_Amo(RKR_Choice*, void*);
 public:
-  RKR_Choice *DB_Down_Qua;
+  RKR_Choice *DBand_Down_Qua;
 private:
-  inline void cb_DB_Down_Qua_i(RKR_Choice*, void*);
-  static void cb_DB_Down_Qua(RKR_Choice*, void*);
+  inline void cb_DBand_Down_Qua_i(RKR_Choice*, void*);
+  static void cb_DBand_Down_Qua(RKR_Choice*, void*);
 public:
-  RKR_Choice *DB_Up_Qua;
+  RKR_Choice *DBand_Up_Qua;
 private:
-  inline void cb_DB_Up_Qua_i(RKR_Choice*, void*);
-  static void cb_DB_Up_Qua(RKR_Choice*, void*);
+  inline void cb_DBand_Up_Qua_i(RKR_Choice*, void*);
+  static void cb_DBand_Up_Qua(RKR_Choice*, void*);
 public:
   RKR_Box *Stomp_Label;
   RKR_Choice *Stomp_Amo;

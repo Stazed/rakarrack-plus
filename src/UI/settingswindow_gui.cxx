@@ -742,7 +742,7 @@ void SettingsWindowGui::cb_Ste_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dist_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_res_amount=(int)o->value();
+  m_rkr->Dist_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Dist_Amo(RKR_Choice* o, void* v) {
@@ -759,7 +759,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Dist_Amo[] = {
 };
 
 void SettingsWindowGui::cb_Dist_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_down_q=(int)o->value();
+  m_rkr->Dist_down_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
@@ -767,7 +767,7 @@ void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dist_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_up_q=(int)o->value();
+  m_rkr->Dist_up_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
@@ -775,7 +775,7 @@ void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_res_amount=(int)o->value();
+  m_rkr->Ovrd_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
@@ -783,7 +783,7 @@ void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_down_q=(int)o->value();
+  m_rkr->Ovrd_down_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
@@ -791,7 +791,7 @@ void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_up_q=(int)o->value();
+  m_rkr->Ovrd_up_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Ovrd_Up_Qua(RKR_Choice* o, void* v) {
@@ -799,7 +799,7 @@ void SettingsWindowGui::cb_Ovrd_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_res_amount=(int)o->value();
+  m_rkr->Dere_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Dere_Amo(RKR_Choice* o, void* v) {
@@ -807,7 +807,7 @@ void SettingsWindowGui::cb_Dere_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_down_q=(int)o->value();
+  m_rkr->Dere_down_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Dere_Down_Qua(RKR_Choice* o, void* v) {
@@ -815,39 +815,39 @@ void SettingsWindowGui::cb_Dere_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_up_q=(int)o->value();
+  m_rkr->Dere_up_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Dere_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Dere_Up_Qua_i(o,v);
 }
 
-void SettingsWindowGui::cb_DB_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_res_amount=(int)o->value();
+void SettingsWindowGui::cb_DBand_Amo_i(RKR_Choice* o, void*) {
+  m_rkr->DBand_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();
 }
-void SettingsWindowGui::cb_DB_Amo(RKR_Choice* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_DB_Amo_i(o,v);
+void SettingsWindowGui::cb_DBand_Amo(RKR_Choice* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_DBand_Amo_i(o,v);
 }
 
-void SettingsWindowGui::cb_DB_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_down_q=(int)o->value();
+void SettingsWindowGui::cb_DBand_Down_Qua_i(RKR_Choice* o, void*) {
+  m_rkr->DBand_down_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
-void SettingsWindowGui::cb_DB_Down_Qua(RKR_Choice* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_DB_Down_Qua_i(o,v);
+void SettingsWindowGui::cb_DBand_Down_Qua(RKR_Choice* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_DBand_Down_Qua_i(o,v);
 }
 
-void SettingsWindowGui::cb_DB_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_up_q=(int)o->value();
+void SettingsWindowGui::cb_DBand_Up_Qua_i(RKR_Choice* o, void*) {
+  m_rkr->DBand_up_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
-void SettingsWindowGui::cb_DB_Up_Qua(RKR_Choice* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_DB_Up_Qua_i(o,v);
+void SettingsWindowGui::cb_DBand_Up_Qua(RKR_Choice* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_DBand_Up_Qua_i(o,v);
 }
 
 void SettingsWindowGui::cb_Stomp_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_res_amount=(int)o->value();
+  m_rkr->Stomp_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
@@ -855,7 +855,7 @@ void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_down_q=(int)o->value();
+  m_rkr->Stomp_down_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
@@ -863,7 +863,7 @@ void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Wave_up_q=(int)o->value();
+  m_rkr->Stomp_up_q=(int)o->value();
 m_rgui->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Stomp_Up_Qua(RKR_Choice* o, void* v) {
@@ -2425,69 +2425,69 @@ this->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
       } // RKR_Choice* Dere_Up_Qua
-      { RKR_Box* o = DB_Label = new RKR_Box(30, 475, 156, 17, "DistBand Resampling");
-        DB_Label->box(FL_NO_BOX);
-        DB_Label->color(FL_BACKGROUND_COLOR);
-        DB_Label->selection_color(FL_BACKGROUND_COLOR);
-        DB_Label->labeltype(FL_NORMAL_LABEL);
-        DB_Label->labelfont(0);
-        DB_Label->labelsize(12);
-        DB_Label->labelcolor(FL_BACKGROUND2_COLOR);
-        DB_Label->user_data((void*)(7));
-        DB_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
-        DB_Label->when(FL_WHEN_NEVER);
+      { RKR_Box* o = DBand_Label = new RKR_Box(30, 475, 156, 17, "DistBand Resampling");
+        DBand_Label->box(FL_NO_BOX);
+        DBand_Label->color(FL_BACKGROUND_COLOR);
+        DBand_Label->selection_color(FL_BACKGROUND_COLOR);
+        DBand_Label->labeltype(FL_NORMAL_LABEL);
+        DBand_Label->labelfont(0);
+        DBand_Label->labelsize(12);
+        DBand_Label->labelcolor(FL_BACKGROUND2_COLOR);
+        DBand_Label->user_data((void*)(7));
+        DBand_Label->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+        DBand_Label->when(FL_WHEN_NEVER);
         o->set_label_offset(2);
-      } // RKR_Box* DB_Label
-      { RKR_Choice* o = DB_Amo = new RKR_Choice(178, 475, 70, 18);
-        DB_Amo->box(FL_FLAT_BOX);
-        DB_Amo->down_box(FL_BORDER_BOX);
-        DB_Amo->color(FL_BACKGROUND_COLOR);
-        DB_Amo->selection_color(FL_SELECTION_COLOR);
-        DB_Amo->labeltype(FL_NORMAL_LABEL);
-        DB_Amo->labelfont(0);
-        DB_Amo->labelsize(10);
-        DB_Amo->labelcolor(FL_BACKGROUND2_COLOR);
-        DB_Amo->textsize(10);
-        DB_Amo->textcolor(FL_BACKGROUND2_COLOR);
-        DB_Amo->callback((Fl_Callback*)cb_DB_Amo);
-        DB_Amo->align(Fl_Align(FL_ALIGN_LEFT));
-        DB_Amo->when(FL_WHEN_RELEASE);
+      } // RKR_Box* DBand_Label
+      { RKR_Choice* o = DBand_Amo = new RKR_Choice(178, 475, 70, 18);
+        DBand_Amo->box(FL_FLAT_BOX);
+        DBand_Amo->down_box(FL_BORDER_BOX);
+        DBand_Amo->color(FL_BACKGROUND_COLOR);
+        DBand_Amo->selection_color(FL_SELECTION_COLOR);
+        DBand_Amo->labeltype(FL_NORMAL_LABEL);
+        DBand_Amo->labelfont(0);
+        DBand_Amo->labelsize(10);
+        DBand_Amo->labelcolor(FL_BACKGROUND2_COLOR);
+        DBand_Amo->textsize(10);
+        DBand_Amo->textcolor(FL_BACKGROUND2_COLOR);
+        DBand_Amo->callback((Fl_Callback*)cb_DBand_Amo);
+        DBand_Amo->align(Fl_Align(FL_ALIGN_LEFT));
+        DBand_Amo->when(FL_WHEN_RELEASE);
         o->menu(menu_Dist_Amo);
-      } // RKR_Choice* DB_Amo
-      { RKR_Choice* o = DB_Down_Qua = new RKR_Choice(290, 475, 72, 18, "Down");
-        DB_Down_Qua->box(FL_FLAT_BOX);
-        DB_Down_Qua->down_box(FL_BORDER_BOX);
-        DB_Down_Qua->color(FL_BACKGROUND_COLOR);
-        DB_Down_Qua->selection_color(FL_SELECTION_COLOR);
-        DB_Down_Qua->labeltype(FL_NORMAL_LABEL);
-        DB_Down_Qua->labelfont(0);
-        DB_Down_Qua->labelsize(11);
-        DB_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-        DB_Down_Qua->textsize(10);
-        DB_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
-        DB_Down_Qua->callback((Fl_Callback*)cb_DB_Down_Qua);
-        DB_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
-        DB_Down_Qua->when(FL_WHEN_RELEASE);
+      } // RKR_Choice* DBand_Amo
+      { RKR_Choice* o = DBand_Down_Qua = new RKR_Choice(290, 475, 72, 18, "Down");
+        DBand_Down_Qua->box(FL_FLAT_BOX);
+        DBand_Down_Qua->down_box(FL_BORDER_BOX);
+        DBand_Down_Qua->color(FL_BACKGROUND_COLOR);
+        DBand_Down_Qua->selection_color(FL_SELECTION_COLOR);
+        DBand_Down_Qua->labeltype(FL_NORMAL_LABEL);
+        DBand_Down_Qua->labelfont(0);
+        DBand_Down_Qua->labelsize(11);
+        DBand_Down_Qua->labelcolor(FL_BACKGROUND2_COLOR);
+        DBand_Down_Qua->textsize(10);
+        DBand_Down_Qua->textcolor(FL_BACKGROUND2_COLOR);
+        DBand_Down_Qua->callback((Fl_Callback*)cb_DBand_Down_Qua);
+        DBand_Down_Qua->align(Fl_Align(FL_ALIGN_LEFT));
+        DBand_Down_Qua->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
-      } // RKR_Choice* DB_Down_Qua
-      { RKR_Choice* o = DB_Up_Qua = new RKR_Choice(390, 475, 72, 18, "Up");
-        DB_Up_Qua->box(FL_FLAT_BOX);
-        DB_Up_Qua->down_box(FL_BORDER_BOX);
-        DB_Up_Qua->color(FL_BACKGROUND_COLOR);
-        DB_Up_Qua->selection_color(FL_SELECTION_COLOR);
-        DB_Up_Qua->labeltype(FL_NORMAL_LABEL);
-        DB_Up_Qua->labelfont(0);
-        DB_Up_Qua->labelsize(11);
-        DB_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
-        DB_Up_Qua->textsize(10);
-        DB_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
-        DB_Up_Qua->callback((Fl_Callback*)cb_DB_Up_Qua);
-        DB_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
-        DB_Up_Qua->when(FL_WHEN_RELEASE);
+      } // RKR_Choice* DBand_Down_Qua
+      { RKR_Choice* o = DBand_Up_Qua = new RKR_Choice(390, 475, 72, 18, "Up");
+        DBand_Up_Qua->box(FL_FLAT_BOX);
+        DBand_Up_Qua->down_box(FL_BORDER_BOX);
+        DBand_Up_Qua->color(FL_BACKGROUND_COLOR);
+        DBand_Up_Qua->selection_color(FL_SELECTION_COLOR);
+        DBand_Up_Qua->labeltype(FL_NORMAL_LABEL);
+        DBand_Up_Qua->labelfont(0);
+        DBand_Up_Qua->labelsize(11);
+        DBand_Up_Qua->labelcolor(FL_BACKGROUND2_COLOR);
+        DBand_Up_Qua->textsize(10);
+        DBand_Up_Qua->textcolor(FL_BACKGROUND2_COLOR);
+        DBand_Up_Qua->callback((Fl_Callback*)cb_DBand_Up_Qua);
+        DBand_Up_Qua->align(Fl_Align(FL_ALIGN_LEFT));
+        DBand_Up_Qua->when(FL_WHEN_RELEASE);
         o->menu(menu_Upr_Qual);
         o->set_label_offset(1);
-      } // RKR_Choice* DB_Up_Qua
+      } // RKR_Choice* DBand_Up_Qua
       { RKR_Box* o = Stomp_Label = new RKR_Box(30, 500, 156, 17, "StompBox Resampling");
         Stomp_Label->box(FL_NO_BOX);
         Stomp_Label->color(FL_BACKGROUND_COLOR);

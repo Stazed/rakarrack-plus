@@ -1185,11 +1185,25 @@ void RKRGUI::save_stat(int whati)
         rakarrack.set(rkr->PrefNom("StereoHarm Up Quality"), rkr->Ste_U_Q);
         rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"), rkr->Ste_D_Q);
 
-        /* FIXME remove */
-        rakarrack.set(rkr->PrefNom("Waveshape Resampling"), rkr->Wave_res_amount);
-        rakarrack.set(rkr->PrefNom("Waveshape Up Quality"), rkr->Wave_up_q);
-        rakarrack.set(rkr->PrefNom("Waveshape Down Quality"), rkr->Wave_down_q);
+        rakarrack.set(rkr->PrefNom("Distortion Resampling"), rkr->Dist_res_amount);
+        rakarrack.set(rkr->PrefNom("Distortion Up Quality"), rkr->Dist_up_q);
+        rakarrack.set(rkr->PrefNom("Distortion Down Quality"), rkr->Dist_down_q);
 
+        rakarrack.set(rkr->PrefNom("Overdrive Resampling"), rkr->Ovrd_res_amount);
+        rakarrack.set(rkr->PrefNom("Overdrive Up Quality"), rkr->Ovrd_up_q);
+        rakarrack.set(rkr->PrefNom("Overdrive Down Quality"), rkr->Ovrd_down_q);
+
+        rakarrack.set(rkr->PrefNom("Derelict Resampling"), rkr->Dere_res_amount);
+        rakarrack.set(rkr->PrefNom("Derelict Up Quality"), rkr->Dere_up_q);
+        rakarrack.set(rkr->PrefNom("Derelict Down Quality"), rkr->Dere_down_q);
+        
+        rakarrack.set(rkr->PrefNom("DistBand Resampling"), rkr->DBand_res_amount);
+        rakarrack.set(rkr->PrefNom("DistBand Up Quality"), rkr->DBand_up_q);
+        rakarrack.set(rkr->PrefNom("DistBand Down Quality"), rkr->DBand_down_q);
+
+        rakarrack.set(rkr->PrefNom("StompBox Resampling"), rkr->Stomp_res_amount);
+        rakarrack.set(rkr->PrefNom("StompBox Up Quality"), rkr->Stomp_up_q);
+        rakarrack.set(rkr->PrefNom("StompBox Down Quality"), rkr->Stomp_down_q);
 
         rakarrack.set(rkr->PrefNom("Calibration"), rkr->aFreq);
         rakarrack.set(rkr->PrefNom("Recognize Trigger"), rkr->rtrig);
@@ -2799,27 +2813,25 @@ void RKRGUI::MiraConfig()
     Settings->Ste_Down_Qua->value(rkr->Ste_D_Q);
     Settings->Ste_Up_Qua->value(rkr->Ste_U_Q);
     
-// FIXME
-    Settings->Dist_Amo->value(rkr->Wave_res_amount);
-    Settings->Dist_Up_Qua->value(rkr->Wave_up_q);
-    Settings->Dist_Down_Qua->value(rkr->Wave_down_q);
+    Settings->Dist_Amo->value(rkr->Dist_res_amount);
+    Settings->Dist_Up_Qua->value(rkr->Dist_up_q);
+    Settings->Dist_Down_Qua->value(rkr->Dist_down_q);
     
-    Settings->Ovrd_Amo->value(rkr->Wave_res_amount);
-    Settings->Ovrd_Up_Qua->value(rkr->Wave_up_q);
-    Settings->Ovrd_Down_Qua->value(rkr->Wave_down_q);
+    Settings->Ovrd_Amo->value(rkr->Ovrd_res_amount);
+    Settings->Ovrd_Up_Qua->value(rkr->Ovrd_up_q);
+    Settings->Ovrd_Down_Qua->value(rkr->Ovrd_down_q);
     
-    Settings->Dere_Amo->value(rkr->Wave_res_amount);
-    Settings->Dere_Up_Qua->value(rkr->Wave_up_q);
-    Settings->Dere_Down_Qua->value(rkr->Wave_down_q);
+    Settings->Dere_Amo->value(rkr->Dere_res_amount);
+    Settings->Dere_Up_Qua->value(rkr->Dere_up_q);
+    Settings->Dere_Down_Qua->value(rkr->Dere_down_q);
     
-    Settings->DB_Amo->value(rkr->Wave_res_amount);
-    Settings->DB_Up_Qua->value(rkr->Wave_up_q);
-    Settings->DB_Down_Qua->value(rkr->Wave_down_q);
+    Settings->DBand_Amo->value(rkr->DBand_res_amount);
+    Settings->DBand_Up_Qua->value(rkr->DBand_up_q);
+    Settings->DBand_Down_Qua->value(rkr->DBand_down_q);
     
-    Settings->Stomp_Amo->value(rkr->Wave_res_amount);
-    Settings->Stomp_Up_Qua->value(rkr->Wave_up_q);
-    Settings->Stomp_Down_Qua->value(rkr->Wave_down_q);
-// FIXME
+    Settings->Stomp_Amo->value(rkr->Stomp_res_amount);
+    Settings->Stomp_Up_Qua->value(rkr->Stomp_up_q);
+    Settings->Stomp_Down_Qua->value(rkr->Stomp_down_q);
 
     Settings->Calibration->value(rkr->aFreq);
     Settings->RTrigger->value(rkr->HarmRecNote->trigfact);

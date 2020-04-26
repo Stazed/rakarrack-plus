@@ -1077,7 +1077,7 @@ update_stereoharm_quality();} open
           class RKR_Box
         }
         Fl_Choice Dist_Amo {
-          callback {m_rkr->Wave_res_amount=(int)o->value();
+          callback {m_rkr->Dist_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {178 400 70 18} down_box BORDER_BOX selection_color 137 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
@@ -1105,7 +1105,7 @@ m_rgui->Show_Next_Time();}
         }
         Fl_Choice Dist_Down_Qua {
           label Down
-          callback {m_rkr->Wave_down_q=(int)o->value();
+          callback {m_rkr->Dist_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {290 400 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1114,7 +1114,7 @@ m_rgui->Show_Next_Time();}
         } {}
         Fl_Choice Dist_Up_Qua {
           label Up
-          callback {m_rkr->Wave_up_q=(int)o->value();
+          callback {m_rkr->Dist_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {390 400 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1129,7 +1129,7 @@ m_rgui->Show_Next_Time();}
           class RKR_Box
         }
         Fl_Choice Ovrd_Amo {
-          callback {m_rkr->Wave_res_amount=(int)o->value();
+          callback {m_rkr->Ovrd_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {178 425 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
@@ -1137,7 +1137,7 @@ m_rgui->Show_Next_Time();}
         } {}
         Fl_Choice Ovrd_Down_Qua {
           label Down
-          callback {m_rkr->Wave_down_q=(int)o->value();
+          callback {m_rkr->Ovrd_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {290 425 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1146,7 +1146,7 @@ m_rgui->Show_Next_Time();}
         } {}
         Fl_Choice Ovrd_Up_Qua {
           label Up
-          callback {m_rkr->Wave_up_q=(int)o->value();
+          callback {m_rkr->Ovrd_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {390 425 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1161,7 +1161,7 @@ m_rgui->Show_Next_Time();}
           class RKR_Box
         }
         Fl_Choice Dere_Amo {
-          callback {m_rkr->Wave_res_amount=(int)o->value();
+          callback {m_rkr->Dere_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();} open
           xywh {178 450 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
@@ -1169,7 +1169,7 @@ m_rgui->Show_Next_Time();} open
         } {}
         Fl_Choice Dere_Down_Qua {
           label Down
-          callback {m_rkr->Wave_down_q=(int)o->value();
+          callback {m_rkr->Dere_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {290 450 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1178,39 +1178,39 @@ m_rgui->Show_Next_Time();}
         } {}
         Fl_Choice Dere_Up_Qua {
           label Up
-          callback {m_rkr->Wave_up_q=(int)o->value();
+          callback {m_rkr->Dere_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {390 450 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
         } {}
-        Fl_Box DB_Label {
+        Fl_Box DBand_Label {
           label {DistBand Resampling}
           user_data 7
           xywh {30 475 156 17} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
           class RKR_Box
         }
-        Fl_Choice DB_Amo {
-          callback {m_rkr->Wave_res_amount=(int)o->value();
+        Fl_Choice DBand_Amo {
+          callback {m_rkr->DBand_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {178 475 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
           class RKR_Choice
         } {}
-        Fl_Choice DB_Down_Qua {
+        Fl_Choice DBand_Down_Qua {
           label Down
-          callback {m_rkr->Wave_down_q=(int)o->value();
+          callback {m_rkr->DBand_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {290 475 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
           class RKR_Choice
         } {}
-        Fl_Choice DB_Up_Qua {
+        Fl_Choice DBand_Up_Qua {
           label Up
-          callback {m_rkr->Wave_up_q=(int)o->value();
+          callback {m_rkr->DBand_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {390 475 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1225,7 +1225,7 @@ m_rgui->Show_Next_Time();}
           class RKR_Box
         }
         Fl_Choice Stomp_Amo {
-          callback {m_rkr->Wave_res_amount=(int)o->value();
+          callback {m_rkr->Stomp_res_amount=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {178 500 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
@@ -1233,7 +1233,7 @@ m_rgui->Show_Next_Time();}
         } {}
         Fl_Choice Stomp_Down_Qua {
           label Down
-          callback {m_rkr->Wave_down_q=(int)o->value();
+          callback {m_rkr->Stomp_down_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {290 500 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1242,7 +1242,7 @@ m_rgui->Show_Next_Time();}
         } {}
         Fl_Choice Stomp_Up_Qua {
           label Up
-          callback {m_rkr->Wave_up_q=(int)o->value();
+          callback {m_rkr->Stomp_up_q=(int)o->value();
 m_rgui->Show_Next_Time();}
           xywh {390 500 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}

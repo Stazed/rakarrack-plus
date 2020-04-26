@@ -398,11 +398,6 @@ public:
     float cSample_rate;
     float *interpbuf;//buffer for analog filters to interpolate (shared)
 
-    /* FIXME remove */
-    int Wave_res_amount;
-    int Wave_up_q;
-    int Wave_down_q;
-
     /* WaveShape Resampling */
     int Dist_res_amount;
     int Dist_up_q;
