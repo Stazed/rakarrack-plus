@@ -734,50 +734,7 @@ improperly configured.</p>
 <p><a href="effects.html">Effects</a></p>
 
 <p><a href="help.html">Table of Contents</a></p>
-<h3><a name="wha"></a>WahWah</h3>
 
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;">
-      <p><img src="imagenes/ww.jpg" alt="rakarrack WahWah" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td bgcolor="#fbfbfb">
-      <p>  Adapted from the ZynAddSubFX
-DynamicFilter</p>
-      <p>By now you're saying, "Ok, I get the Pan,
-Freq, Random, Stereo Df, and Depth thing, but what the..."</p>
-      <p>In addition to use as Auto-wah (LFO-modulated
-Wah-Wah), this is also an envelope filter. </p>
-      <p>Currently, here are the three parameters
-related to envelope control:</p>
-      <p><b>Amp S.</b>: Amplitude sensitivity. This is like
-the sweep range. If sensitivity is set low, you have to pluck really
-hard to make the filter move. If set high, then the filter will sweep
-to the limit.</p>
-      <p><b>A.S.I.</b>: This stands for "Amplitude
-Sensitivity Inverse", but is applied in a somewhat interesting way.
-This slider offsets the base frequency for the wah wah filter
-resonance. At the same time, it acts as a logical check for which
-direction to sweep. When this is set less than 64, the filter responds
-to plucking by sweeping upward in frequency. When this is set higher
-than 64, then the filter responds to plucking by sweeping downward in
-frequency. <b>Tip: If you want to control wah-wah with a MIDI foot
-pedal, this is the parameter you will want to map. For pure
-pedal-controlled wah-wah, set Amp. S and Depth to zero.</b></p>
-      <p><b>Smooth</b>: How much to smooth the signal
-envelope. At a low level, the sound is like a bubble maker. At a high
-level, the filter responds very slowly to signal attack.</p>
-      <p><b>F. Type</b>: Filter Type.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
 <h3><a name="awha"></a>AlienWah</h3>
 
 
@@ -849,27 +806,7 @@ right, right from left, while greater than 64 adds them.
 <p><a href="effects.html">Effects</a></p>
 
 <p><a href="help.html">Table of Contents</a></p>
-<h3><a name="Valve"></a>Valve</h3>
 
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/val.jpg" alt="rakarrack Valve"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>New Effect based on Valve, Steve Harris LADSPA
-plugin, filters, harmonic enhancer and some extra distortion where
-added.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
 <h3><a name="Dual_Flange"></a>Dual Flange</h3>
 
 
@@ -1139,153 +1076,8 @@ frequencies on the M/S channels.</p>
 <p><a href="effects.html">Effects</a></p>
 
 <p><a href="help.html">Table of Contents</a></p>
-<h3><a name="Synthfilter"></a>Synthfilter</h3>
 
 
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/syn.jpg" alt="rakarrack Synthfilter"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-<p>A different type of view of the Analog Phaser effect revealed a basic
-      structure supporting high-order filters with adjustable number of
-      filter stages ...most of the work was already done, so thanks again to
-      Paul Nasca for this piece of code from the original ZynAddSubFX
-      Phaser.</p>
-    <p>Starting with a phaser (as opposed to wah-wah or EQ) was inspired by a
-      phaser circuit modification suggested by Mark Hammer, a frequent forum
-      poster at diystompboxes.com/smfforum. This modification allowed two
-      phase stages to be converted to low-pass stages with a switch in an
-      analog phaser. This is the type of effect marketed as a "phase-wah".
-      Of course, converting all of these phase stages to low pass stages
-      makes this circuit look an awful lot like what is found inside the old
-      Korg Delta DL-50 synthesizer.</p>
-      <p>Converting a normal OTA phaser into a synth filter would be a
-      relatively ugly hack in the circuit bending world, but a simple
-      exercise in software bending, and with a more elegant final product.
-      With a little bit of experimentation, I had a filter sounding much
-      like something found in an analog synthesizer. Thinking back to an
-      analog envelope filter I once built, I determined high pass filter
-      stages would also be of great utility. The final result: A very
-      flexible filter module able to accomplish many flavors of low pass,
-      band pass and high pass filter shapes. Possibilities range anywhere
-      from simple wah-wah sounds to definite mushy filters from
-      synthland.</p>
-      <p>You can operate up to 12 high-pass and 12 low pass stages
-      simultaneously. At present, the user is protected from resonance near
-      instability. If you are a synth filter lover and want to be able to
-      make your filter unstable, then it is a very minor adjustment to the
-      source code if you wish to internally amp up the feedback range to
-      allow this. Finally, the SynthFilter comes with wet/dry mix so you can
-      accomplish interesting phase-wah sounds.</p>
-      
-      <p><b>Dry/Wet</b>:  Like many other filtering effects, it is not as simple as
-      Dry/Wet.  Destructive interference happens between the wet and dry
-      signals to varying degrees as this slider is adjusted, so new &amp;
-      interesting notch and comb filtering effects evolve as you move this
-      from wet to dry.</p>
-      
-      <p><b>Distort</b>:  This adds some nonlinear response to the filter.  In addition
-      to adding audible distortion, this parameter has the effect of making
-      the filter less resonant.  Set to zero for a "clean" filter sound.</p>
-      
-      <p><b>Tempo</b>: The filter can be modulated by an LFO.  This sets the
-       rate.</p>
-      
-      <p><b>Random</b>: Adds some randomized "noise" to the LFO to help make it sound less
-      mechanical.</p>
-      
-      <p><b>LFO Type</b>:  The shape of LFO you wish to use.</p>
-      
-      <p><b>Subtr.</b>: Subtract.  Make output of filter negative, thus changing which
-      parts of the signal will cancel when using Dry/Wet mix.</p>
-      
-      <p><b>Stereo Df</b>: Stereo Difference.  Delay between LFO's for left and right
-      channels.</p>
-      
-      <p><b>Width</b>: Width of the LFO, also think of this parameter as LFO
-      Amplitude.</p>
-      
-      <p><b>Feedback</b>: Positive or negative values make the
-      feedback positive or negative.  This parameter makes the filter more
-      resonant.</p>
-      
-      <p><b>LPF Stg</b>: Number of first order low pass filter stages.</p>
-       <p><b>HPF Stg</b>: Number of first order high pass filter stages.  HPF and LPF
-      are series processed, so combining the two creates a band pass
-       filter.</p>
-      
-      <p><b>Depth</b>: Filter "start frequency".  Set Width and E. Sens to zero then
-      use this to manually sweep the filter with a MIDI message.  More
-      simply, use this parameter with a MIDI expression pedal to make
-      Synthfilter behave as an interesting type of wahwah.</p>
-      
-      <p><b>E. Sens</b>: Envelope Sensitivity.  This adjusts how much the filter
-      sweep responds to the dynamics of the input signal.  Numbers greater
-      than zero cause the filter to sweep upward as your playing gets
-      louder.  Numbers less than zero cause the filter to sweep downward as
-      your playing gets louder.  Set to zero for no effect.  Use "Depth" to
-      adjust the filter start frequency.  For example, if filter is to sweep
-      downward, set Depth to a large number and E. Sens to a negative
-      number.</p>
-      
-      <p><b>A. Time</b>: Attack Time.  Sets how quickly the envelope detector responds
-      to input dynamics.</p>
-      <p><b>R. Time</b>: Release Time.  Sets amount of time for envelope detector to
-      release the build-up from loud dynamics.</p>
-      <p>*Attack and Release are measured in milliseconds.</p>
-      <p>*Attack and Release times have no effect if E. Sens is set to
-      zero.</p>
-      
-       <p><b>Offset</b>: Separation between High Pass and Low Pass filters.  If both HP
-      and LP filters have stages 1 or more, this adjusts the bandwidth of the
-      resulting bandpass filter.  Set to zero, a bandpass filter with a
-      narrow peak will result, or set large, the bandpass filter will be
-      wider.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="VaryBand"></a>VaryBand</h3>
-
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/var.jpg" alt="rakarrack VaryBand"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Four
-Bands volume modulated with two LFOs. You can select for each LFO the
-type, Tempo(speed) and LR difference (St.df). Cross points are to
-defining the band frequency range.</p>
-      <p>20-&gt; Cross1 = Low<br>
-Cross1-&gt;Cross2 = Mid Low<br>
-Cross2-&gt;Cross3 = High Low<br>
-Cross3-&gt;26 KHz = High<br>
-      </p>
-      <p>Select the LFO type for each band</p>
-      <p>1 = LFO1<br>
-2 = LFO2<br>
-C = Constant (Bypass)<br>
-M = Muted (Disable band)</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
 <h3><a name="Convolotron"></a>Convolotron</h3>
 
 <table cellpadding="5" cellspacing="2">
@@ -1678,97 +1470,6 @@ the "invisible" Compressor/Limiter that rakarrack has on the end of the
 chain, if you try that be sure to low the main Output volume.</p>
 
       </td></tr></tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="Vocoder"></a>Vocoder</h3>
-
-<table cellpadding="5" cellspacing="2">
-<tbody><tr><td style="vertical-align: top;">
-      <p><img src="imagenes/voc.jpg" alt="rakarrack Vocoder"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Vocoder</p>
-      <p>For those not already familiar with vocoders, this is the effect responsible for many robot sounds on several popular
-      songs.</p>
-<p>The basic structure is this:</p>
-<p>Your voice from a microphone needs to be connected to the "Aux" input
-of Rakarrack.  Second, you will have some sound source coming
-through Rakarrack's normal processing chain.  This is likely a
-guitar or synthesizer.  When you speak into the mic, you will hear
-the sound of your instrument with a robot-like voice.  The best
-types of signals are constant and rich in frequency content.  For
-example, distorted guitar chords are a good "carrier" for the
-Vocoder.  Various synthesizer strings sounds or brass emulations
-are also good sources for the voice.</p>
-<p>This particular implementation uses the analog Vocoder model. 
-These units were implemented with several parallel filter banks. 
-One filter bank was used on the voice, and the other on the
-instrument.  The bank on the voice was used to "find out" what
-frequency bands are being used by the voice, then the power from each
-of these bands was used to scale the corresponding bands on the
-instrument so it has more or less power in these bands.  Briefly
-put, the power in the signal of each frequency band from the mic was
-used to control the volume on each corresponding frequency band for the
-incoming instrument.  Think of two 32 band equalizers.  The
-first 32 band EQ has a mic plugged into it.  As you speak into the
-mic, you can see the VU meter bars bounce on each corresponding band (if
-this is the kind of EQ that displays VU bars for every band). 
-Imagine something being linked to the VU meter bars that can push the
-sliders up and down on the Equalizer used to process the
-instrument.  This is what a vocoder does.</p>
-<p>Rakarrack uses a 32-band filter bank to implement the effect. 
-These are all second-order band pass filters spaced evenly on a
-logarithmic scale from 300Hz to 3600Hz, thus covering most of the
-important formant frequencies.</p>
-<p>Additionally there are some basic hard-coded utilities to help in processing the voice channel:<br>
-Gate:  Anything below -75dB is gated.  You can "cheat" the
-gate with the Input level adjustment.  If too much noise is
-getting through to the vocoder when you're not talking, you can
-decrease the input level until the noise floor disappears.  Of
-course, if you have a noisy preamp, mic, lots of background
-noise...etc, this gives you poor signal/noise ratio, then there is
-little we can program into the application to help improve the dynamics
-:-(.  </p>
-<p>Compressor:  A simple compressor is applied to the vocals with a
-ratio of approximately 2:1.  It is implemented using
-add/subtract/multiply/divide instructions to avoid CPU costly log and
-pow functions.  As a result, the compression curve looks more like
-saturation on a vacuum tube or JFET, and the compression ratio
-increases steadily with the input signal level.  Consequently, it
-is a soft-knee compressor and lends itself well to vocal processing as
-a easy soft-knee compressor.  Because of the way this compressor
-behaves, increasing the Input level is tantamount to decreasing the
-threshold and increasing ratio simultaneously.  It is designed
-this way so it works effectively without the user needing to know
-anything about it.  Incidentally, this same compressor is used to
-create the Sustainer effect.</p>
-<p>The take-home message with regard to the "invisible" utilities is that
-the Input level parameter gives you a lot of power over the dynamics of
-the microphone input, and can help in getting a good consistent vocal
-sound onto the instrument being processed.</p>
-<p>Here is the list of parameters:</p>
-<p><b>Dry/Wet</b>: We have been over this many times.</p>
-<p><b>Pan</b>: Move the processed signal to the left or right</p>
-<p><b>Input</b>: Microphone input level.  Explained in detail above.</p>
-<p><b>Smear</b>: "Muffle", "blur" or
-"smear".  This increases the averaging time on the power coming
-into each frequency band.  Adjusting to a large level has an
-effect of making it sound like the voice is in a very large reverberant
-room.  Lower levels achieve a more articulate sound.</p>
-<p><b>Q</b>: Resonance of the
-filters.  Increasing this number makes the filter bands more
-narrow.  Extremely high values make the filters so resonant it
-sounds like metallic reverberation.  This also "smears" the
-vocals.  Unless you are going for extreme sounds, the best range
-is 65 to 90.</p>
-<p><b>Ring</b>: If you are going for extreme sounds, this
-is the ticket.  This causes the voice from each mic band to be
-multiplied with each instrument band.  The adjustment is basically
-modulation depth.</p>
-<p><b>Level</b>: Final output level. </p>
-</td></tr></tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
 
@@ -2438,87 +2139,6 @@ pulses.</p>
 </table>
 <p><a href="effects.html">Effects</a></p>
 <p><a href="help.html">Table of Contents</a></p>
-<h3><a name="Vibe"></a>Vibe</h3>
-<br>
-<table cellpadding="5" cellspacing="2">
-<tbody><tr><td style="vertical-align: top;">
-      <p><img style="width: 180px; height: 250px;" src="imagenes/vib.jpg" alt="rakarrack Vibe"></p>
-      </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      
-<p>Vibe</p>
-<p> Chorus/Phaser effect emulating a rotating speaker.</p>
-<p>This effect was added at the request of a Rakarrack user wishing to have a
-software UniVibe.  This effect is based on the original UniVibe circuit and
-mathematically models components most likely to contribute to the overall
-effect.  Of course, the originals varied widely from one unit to the next
-due to some components being manufactured under less advanced process
-control.  On these components we made our best guess and tuned by ear.  This
-is the same situation for those attempting the same kind of thing with
-modern analog clones.</p>
-
-<p>The sound of the original type of unit can be easily found by searching the
-internet for "Vibe effect demo".  Its popularity among guitar players makes
-for the proliferation of clones and audio clip demonstrations, and
-ultimately an attempt by the Rakarrack team to emulate this.  We hope you
-will find our version satisfactory and useful.</p>
-
-<p>Things not available in the original units are the inclusion of stereo
-processing paths and feedback, not to mention the variety of LFO's standard
-to all Rakarrack modulation effects.  Consequently, this effect can be taken
-to sonic destinations the original was never able to achieve.  The feedback
-scheme applied in software, for example, would require a messy modification
-using several extra electronics components to properly apply to a real
-analog unit.  In software this is more elegant and produces a lovely phasing
-effect.</p>
-
-<p><b>Dry/Wet</b>: The original 'Vibe had a switch allowing you to select "Chorus" or
-"Vibrato".  Internal to the circuit, this switch only selected between
-different amounts of wet/dry in the final mix.  The "Chorus" setting is a
-bit of a misnomer because it is actually more of a Phaser.  A Dry/Wet of 64
-(50/50) corresponds to the "Chorus" setting.  A wet/dry setting of 127 (all
-wet) corresponds to the "Vibrato" setting of the original analog unit. 
-Later clones of the circuit added the wet/dry mix as a pot so you could mix
-anything in between.  Rakarrack applies this philosophy.</p>
-
-<p><b>Width</b>: Width of modulation (LFO) sweep.</p>
-
-<p><b>Depth</b>: How deep the modulation can go on the lowest end of the sweep.  A
-small number will introduce more "thump" in the response.</p>
-
-<p><b>Tempo</b>: Speed of the LFO sweep</p>
-
-<p><b>Random</b>: Adds some randomized "noise" to the LFO to help make it sound less
-mechanical.</p>
-
-<p><b>LFO</b>: Type  Modulation Shape</p>
-
-<p><b>Stereo Df</b>: Amount of delay between left and right channel LFO's.  At 0 or 127
-the LFO's are 180 degrees out of phase.  At 32 or 96 means there is a
-quadrature relationship between the two.  If you don't know what that means,
-then you only need to know this setting to makes left and right channels
-sound different by adding stereo width to the effect.  Anything near 64 will
-have minimal stereo spreading.</p>
-
-<p><b>Feedback</b>: 0 is no feedback. The original Vibe does not use feedback.  A
-setting of -64 is extreme negative feedback and causes a more intense phaser
-sound.   +64 makes the whole effect sound more "full".</p>
-
-<p><b>L/R Cross</b>: Left/Right channel crossing.  Mix left channel into right channel
-and right channel into left channel.  Less than zero mixes the channels out
-of phase from each other, greater than zero mixes left and right like a
-normal mixer.  This parameter can have an interesting outcome depending on
-the setting on St.df.  In some cases the interference between left and right
-can be used to make a tremolo effect, particularly when St.df is set to 32
-(quadrature).</p>
-
-<p><b>Pan</b>: Pan the effect to the left or right.  This can be used to change the
-color of the effect between left and right channels if Dry/Wet mix is set to
-a certain amount dry.</p>
-</td></tr></tbody>
-</table>
-<br>
-<p><a href="effects.html">Effects</a></p>
-<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
 <h3><a name="Infinity"></a>Infinity</h3>
 <br>
@@ -2609,5 +2229,391 @@ is hard-coded to cycle every full measure at Tempo.</p>
 <p><a href="effects.html">Effects</a></p>
 <p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
+<h3><a name="Synthfilter"></a>Synthfilter</h3>
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/syn.jpg" alt="rakarrack Synthfilter"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+<p>A different type of view of the Analog Phaser effect revealed a basic
+      structure supporting high-order filters with adjustable number of
+      filter stages ...most of the work was already done, so thanks again to
+      Paul Nasca for this piece of code from the original ZynAddSubFX
+      Phaser.</p>
+    <p>Starting with a phaser (as opposed to wah-wah or EQ) was inspired by a
+      phaser circuit modification suggested by Mark Hammer, a frequent forum
+      poster at diystompboxes.com/smfforum. This modification allowed two
+      phase stages to be converted to low-pass stages with a switch in an
+      analog phaser. This is the type of effect marketed as a "phase-wah".
+      Of course, converting all of these phase stages to low pass stages
+      makes this circuit look an awful lot like what is found inside the old
+      Korg Delta DL-50 synthesizer.</p>
+      <p>Converting a normal OTA phaser into a synth filter would be a
+      relatively ugly hack in the circuit bending world, but a simple
+      exercise in software bending, and with a more elegant final product.
+      With a little bit of experimentation, I had a filter sounding much
+      like something found in an analog synthesizer. Thinking back to an
+      analog envelope filter I once built, I determined high pass filter
+      stages would also be of great utility. The final result: A very
+      flexible filter module able to accomplish many flavors of low pass,
+      band pass and high pass filter shapes. Possibilities range anywhere
+      from simple wah-wah sounds to definite mushy filters from
+      synthland.</p>
+      <p>You can operate up to 12 high-pass and 12 low pass stages
+      simultaneously. At present, the user is protected from resonance near
+      instability. If you are a synth filter lover and want to be able to
+      make your filter unstable, then it is a very minor adjustment to the
+      source code if you wish to internally amp up the feedback range to
+      allow this. Finally, the SynthFilter comes with wet/dry mix so you can
+      accomplish interesting phase-wah sounds.</p>
+      
+      <p><b>Dry/Wet</b>:  Like many other filtering effects, it is not as simple as
+      Dry/Wet.  Destructive interference happens between the wet and dry
+      signals to varying degrees as this slider is adjusted, so new &amp;
+      interesting notch and comb filtering effects evolve as you move this
+      from wet to dry.</p>
+      
+      <p><b>Distort</b>:  This adds some nonlinear response to the filter.  In addition
+      to adding audible distortion, this parameter has the effect of making
+      the filter less resonant.  Set to zero for a "clean" filter sound.</p>
+      
+      <p><b>Tempo</b>: The filter can be modulated by an LFO.  This sets the
+       rate.</p>
+      
+      <p><b>Random</b>: Adds some randomized "noise" to the LFO to help make it sound less
+      mechanical.</p>
+      
+      <p><b>LFO Type</b>:  The shape of LFO you wish to use.</p>
+      
+      <p><b>Subtr.</b>: Subtract.  Make output of filter negative, thus changing which
+      parts of the signal will cancel when using Dry/Wet mix.</p>
+      
+      <p><b>Stereo Df</b>: Stereo Difference.  Delay between LFO's for left and right
+      channels.</p>
+      
+      <p><b>Width</b>: Width of the LFO, also think of this parameter as LFO
+      Amplitude.</p>
+      
+      <p><b>Feedback</b>: Positive or negative values make the
+      feedback positive or negative.  This parameter makes the filter more
+      resonant.</p>
+      
+      <p><b>LPF Stg</b>: Number of first order low pass filter stages.</p>
+       <p><b>HPF Stg</b>: Number of first order high pass filter stages.  HPF and LPF
+      are series processed, so combining the two creates a band pass
+       filter.</p>
+      
+      <p><b>Depth</b>: Filter "start frequency".  Set Width and E. Sens to zero then
+      use this to manually sweep the filter with a MIDI message.  More
+      simply, use this parameter with a MIDI expression pedal to make
+      Synthfilter behave as an interesting type of wahwah.</p>
+      
+      <p><b>E. Sens</b>: Envelope Sensitivity.  This adjusts how much the filter
+      sweep responds to the dynamics of the input signal.  Numbers greater
+      than zero cause the filter to sweep upward as your playing gets
+      louder.  Numbers less than zero cause the filter to sweep downward as
+      your playing gets louder.  Set to zero for no effect.  Use "Depth" to
+      adjust the filter start frequency.  For example, if filter is to sweep
+      downward, set Depth to a large number and E. Sens to a negative
+      number.</p>
+      
+      <p><b>A. Time</b>: Attack Time.  Sets how quickly the envelope detector responds
+      to input dynamics.</p>
+      <p><b>R. Time</b>: Release Time.  Sets amount of time for envelope detector to
+      release the build-up from loud dynamics.</p>
+      <p>*Attack and Release are measured in milliseconds.</p>
+      <p>*Attack and Release times have no effect if E. Sens is set to
+      zero.</p>
+      
+       <p><b>Offset</b>: Separation between High Pass and Low Pass filters.  If both HP
+      and LP filters have stages 1 or more, this adjusts the bandwidth of the
+      resulting bandpass filter.  Set to zero, a bandpass filter with a
+      narrow peak will result, or set large, the bandpass filter will be
+      wider.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="Valve"></a>Valve</h3>
+
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/val.jpg" alt="rakarrack Valve"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>New Effect based on Valve, Steve Harris LADSPA
+plugin, filters, harmonic enhancer and some extra distortion where
+added.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="VaryBand"></a>VaryBand</h3>
+
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/var.jpg" alt="rakarrack VaryBand"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Four
+Bands volume modulated with two LFOs. You can select for each LFO the
+type, Tempo(speed) and LR difference (St.df). Cross points are to
+defining the band frequency range.</p>
+      <p>20-&gt; Cross1 = Low<br>
+Cross1-&gt;Cross2 = Mid Low<br>
+Cross2-&gt;Cross3 = High Low<br>
+Cross3-&gt;26 KHz = High<br>
+      </p>
+      <p>Select the LFO type for each band</p>
+      <p>1 = LFO1<br>
+2 = LFO2<br>
+C = Constant (Bypass)<br>
+M = Muted (Disable band)</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="Vibe"></a>Vibe</h3>
+<br>
+<table cellpadding="5" cellspacing="2">
+<tbody><tr><td style="vertical-align: top;">
+      <p><img style="width: 180px; height: 250px;" src="imagenes/vib.jpg" alt="rakarrack Vibe"></p>
+      </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      
+<p>Vibe</p>
+<p> Chorus/Phaser effect emulating a rotating speaker.</p>
+<p>This effect was added at the request of a Rakarrack user wishing to have a
+software UniVibe.  This effect is based on the original UniVibe circuit and
+mathematically models components most likely to contribute to the overall
+effect.  Of course, the originals varied widely from one unit to the next
+due to some components being manufactured under less advanced process
+control.  On these components we made our best guess and tuned by ear.  This
+is the same situation for those attempting the same kind of thing with
+modern analog clones.</p>
+
+<p>The sound of the original type of unit can be easily found by searching the
+internet for "Vibe effect demo".  Its popularity among guitar players makes
+for the proliferation of clones and audio clip demonstrations, and
+ultimately an attempt by the Rakarrack team to emulate this.  We hope you
+will find our version satisfactory and useful.</p>
+
+<p>Things not available in the original units are the inclusion of stereo
+processing paths and feedback, not to mention the variety of LFO's standard
+to all Rakarrack modulation effects.  Consequently, this effect can be taken
+to sonic destinations the original was never able to achieve.  The feedback
+scheme applied in software, for example, would require a messy modification
+using several extra electronics components to properly apply to a real
+analog unit.  In software this is more elegant and produces a lovely phasing
+effect.</p>
+
+<p><b>Dry/Wet</b>: The original 'Vibe had a switch allowing you to select "Chorus" or
+"Vibrato".  Internal to the circuit, this switch only selected between
+different amounts of wet/dry in the final mix.  The "Chorus" setting is a
+bit of a misnomer because it is actually more of a Phaser.  A Dry/Wet of 64
+(50/50) corresponds to the "Chorus" setting.  A wet/dry setting of 127 (all
+wet) corresponds to the "Vibrato" setting of the original analog unit. 
+Later clones of the circuit added the wet/dry mix as a pot so you could mix
+anything in between.  Rakarrack applies this philosophy.</p>
+
+<p><b>Width</b>: Width of modulation (LFO) sweep.</p>
+
+<p><b>Depth</b>: How deep the modulation can go on the lowest end of the sweep.  A
+small number will introduce more "thump" in the response.</p>
+
+<p><b>Tempo</b>: Speed of the LFO sweep</p>
+
+<p><b>Random</b>: Adds some randomized "noise" to the LFO to help make it sound less
+mechanical.</p>
+
+<p><b>LFO</b>: Type  Modulation Shape</p>
+
+<p><b>Stereo Df</b>: Amount of delay between left and right channel LFO's.  At 0 or 127
+the LFO's are 180 degrees out of phase.  At 32 or 96 means there is a
+quadrature relationship between the two.  If you don't know what that means,
+then you only need to know this setting to makes left and right channels
+sound different by adding stereo width to the effect.  Anything near 64 will
+have minimal stereo spreading.</p>
+
+<p><b>Feedback</b>: 0 is no feedback. The original Vibe does not use feedback.  A
+setting of -64 is extreme negative feedback and causes a more intense phaser
+sound.   +64 makes the whole effect sound more "full".</p>
+
+<p><b>L/R Cross</b>: Left/Right channel crossing.  Mix left channel into right channel
+and right channel into left channel.  Less than zero mixes the channels out
+of phase from each other, greater than zero mixes left and right like a
+normal mixer.  This parameter can have an interesting outcome depending on
+the setting on St.df.  In some cases the interference between left and right
+can be used to make a tremolo effect, particularly when St.df is set to 32
+(quadrature).</p>
+
+<p><b>Pan</b>: Pan the effect to the left or right.  This can be used to change the
+color of the effect between left and right channels if Dry/Wet mix is set to
+a certain amount dry.</p>
+</td></tr></tbody>
+</table>
+<br>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="Vocoder"></a>Vocoder</h3>
+
+<table cellpadding="5" cellspacing="2">
+<tbody><tr><td style="vertical-align: top;">
+      <p><img src="imagenes/voc.jpg" alt="rakarrack Vocoder"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Vocoder</p>
+      <p>For those not already familiar with vocoders, this is the effect responsible for many robot sounds on several popular
+      songs.</p>
+<p>The basic structure is this:</p>
+<p>Your voice from a microphone needs to be connected to the "Aux" input
+of Rakarrack.  Second, you will have some sound source coming
+through Rakarrack's normal processing chain.  This is likely a
+guitar or synthesizer.  When you speak into the mic, you will hear
+the sound of your instrument with a robot-like voice.  The best
+types of signals are constant and rich in frequency content.  For
+example, distorted guitar chords are a good "carrier" for the
+Vocoder.  Various synthesizer strings sounds or brass emulations
+are also good sources for the voice.</p>
+<p>This particular implementation uses the analog Vocoder model. 
+These units were implemented with several parallel filter banks. 
+One filter bank was used on the voice, and the other on the
+instrument.  The bank on the voice was used to "find out" what
+frequency bands are being used by the voice, then the power from each
+of these bands was used to scale the corresponding bands on the
+instrument so it has more or less power in these bands.  Briefly
+put, the power in the signal of each frequency band from the mic was
+used to control the volume on each corresponding frequency band for the
+incoming instrument.  Think of two 32 band equalizers.  The
+first 32 band EQ has a mic plugged into it.  As you speak into the
+mic, you can see the VU meter bars bounce on each corresponding band (if
+this is the kind of EQ that displays VU bars for every band). 
+Imagine something being linked to the VU meter bars that can push the
+sliders up and down on the Equalizer used to process the
+instrument.  This is what a vocoder does.</p>
+<p>Rakarrack uses a 32-band filter bank to implement the effect. 
+These are all second-order band pass filters spaced evenly on a
+logarithmic scale from 300Hz to 3600Hz, thus covering most of the
+important formant frequencies.</p>
+<p>Additionally there are some basic hard-coded utilities to help in processing the voice channel:<br>
+Gate:  Anything below -75dB is gated.  You can "cheat" the
+gate with the Input level adjustment.  If too much noise is
+getting through to the vocoder when you're not talking, you can
+decrease the input level until the noise floor disappears.  Of
+course, if you have a noisy preamp, mic, lots of background
+noise...etc, this gives you poor signal/noise ratio, then there is
+little we can program into the application to help improve the dynamics
+:-(.  </p>
+<p>Compressor:  A simple compressor is applied to the vocals with a
+ratio of approximately 2:1.  It is implemented using
+add/subtract/multiply/divide instructions to avoid CPU costly log and
+pow functions.  As a result, the compression curve looks more like
+saturation on a vacuum tube or JFET, and the compression ratio
+increases steadily with the input signal level.  Consequently, it
+is a soft-knee compressor and lends itself well to vocal processing as
+a easy soft-knee compressor.  Because of the way this compressor
+behaves, increasing the Input level is tantamount to decreasing the
+threshold and increasing ratio simultaneously.  It is designed
+this way so it works effectively without the user needing to know
+anything about it.  Incidentally, this same compressor is used to
+create the Sustainer effect.</p>
+<p>The take-home message with regard to the "invisible" utilities is that
+the Input level parameter gives you a lot of power over the dynamics of
+the microphone input, and can help in getting a good consistent vocal
+sound onto the instrument being processed.</p>
+<p>Here is the list of parameters:</p>
+<p><b>Dry/Wet</b>: We have been over this many times.</p>
+<p><b>Pan</b>: Move the processed signal to the left or right</p>
+<p><b>Input</b>: Microphone input level.  Explained in detail above.</p>
+<p><b>Smear</b>: "Muffle", "blur" or
+"smear".  This increases the averaging time on the power coming
+into each frequency band.  Adjusting to a large level has an
+effect of making it sound like the voice is in a very large reverberant
+room.  Lower levels achieve a more articulate sound.</p>
+<p><b>Q</b>: Resonance of the
+filters.  Increasing this number makes the filter bands more
+narrow.  Extremely high values make the filters so resonant it
+sounds like metallic reverberation.  This also "smears" the
+vocals.  Unless you are going for extreme sounds, the best range
+is 65 to 90.</p>
+<p><b>Ring</b>: If you are going for extreme sounds, this
+is the ticket.  This causes the voice from each mic band to be
+multiplied with each instrument band.  The adjustment is basically
+modulation depth.</p>
+<p><b>Level</b>: Final output level. </p>
+</td></tr></tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="wha"></a>WahWah</h3>
+
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/ww.jpg" alt="rakarrack WahWah" align="bottom" border="1" height="250" width="185"></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>  Adapted from the ZynAddSubFX
+DynamicFilter</p>
+      <p>By now you're saying, "Ok, I get the Pan,
+Freq, Random, Stereo Df, and Depth thing, but what the..."</p>
+      <p>In addition to use as Auto-wah (LFO-modulated
+Wah-Wah), this is also an envelope filter. </p>
+      <p>Currently, here are the three parameters
+related to envelope control:</p>
+      <p><b>Amp S.</b>: Amplitude sensitivity. This is like
+the sweep range. If sensitivity is set low, you have to pluck really
+hard to make the filter move. If set high, then the filter will sweep
+to the limit.</p>
+      <p><b>A.S.I.</b>: This stands for "Amplitude
+Sensitivity Inverse", but is applied in a somewhat interesting way.
+This slider offsets the base frequency for the wah wah filter
+resonance. At the same time, it acts as a logical check for which
+direction to sweep. When this is set less than 64, the filter responds
+to plucking by sweeping upward in frequency. When this is set higher
+than 64, then the filter responds to plucking by sweeping downward in
+frequency. <b>Tip: If you want to control wah-wah with a MIDI foot
+pedal, this is the parameter you will want to map. For pure
+pedal-controlled wah-wah, set Amp. S and Depth to zero.</b></p>
+      <p><b>Smooth</b>: How much to smooth the signal
+envelope. At a low level, the sound is like a bubble maker. At a high
+level, the filter responds very slowly to signal attack.</p>
+      <p><b>F. Type</b>: Filter Type.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
 </body></html>
