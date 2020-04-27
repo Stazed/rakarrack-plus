@@ -543,5 +543,6 @@ public:
   void update_overdrive_quality();
   void update_derelict_quality();
   void update_distband_quality();
+  void update_stompbox_quality();
 };
 #endif

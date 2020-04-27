@@ -115,6 +115,29 @@ StompBox::cleanup()
     lwshape2->cleanup();
 }
 
+std::vector<int>
+StompBox::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < STOMP_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+StompBox::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < STOMP_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
+    
+    cleanup();
+}
+
 #ifdef LV2_SUPPORT
 void
 StompBox::lv2_update_params(uint32_t period)
@@ -909,7 +932,7 @@ StompBox::setvolume(int value)
 void
 StompBox::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 6;
+    const int PRESET_SIZE = STOMP_PRESET_SIZE;
     const int NUM_PRESETS = 11;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

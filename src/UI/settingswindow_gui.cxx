@@ -848,7 +848,7 @@ void SettingsWindowGui::cb_DBand_Up_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Stomp_Amo_i(RKR_Choice* o, void*) {
   m_rkr->Stomp_res_amount=(int)o->value();
-m_rgui->Show_Next_Time();
+update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Stomp_Amo_i(o,v);
@@ -856,7 +856,7 @@ void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Stomp_Down_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Stomp_down_q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Stomp_Down_Qua_i(o,v);
@@ -864,7 +864,7 @@ void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
 
 void SettingsWindowGui::cb_Stomp_Up_Qua_i(RKR_Choice* o, void*) {
   m_rkr->Stomp_up_q=(int)o->value();
-m_rgui->Show_Next_Time();
+update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Up_Qua(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Stomp_Up_Qua_i(o,v);
@@ -3410,6 +3410,30 @@ void SettingsWindowGui::update_distband_quality() {
   
   /* Reset parameters */
   m_rkr->efx_DistBand->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  m_rkr->quality_update = false;
+}
+
+void SettingsWindowGui::update_stompbox_quality() {
+  /* shut off all processing */
+  m_rkr->quality_update = true;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->efx_StompBox->save_parameters();
+  
+  /* Delete and re-create the efx with new resample settings */
+  delete m_rkr->efx_StompBox;
+  m_rkr->efx_StompBox = new StompBox(m_rkr->Stomp_res_amount, m_rkr->Stomp_up_q, m_rkr->Stomp_down_q, m_rkr->fSample_rate, m_rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters */
+  m_rkr->efx_StompBox->reset_parameters(save_state);
   
   /* Turn processing back on */
   m_rkr->quality_update = false;

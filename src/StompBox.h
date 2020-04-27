@@ -22,8 +22,11 @@
 #ifndef STOMPBOX_H
 #define STOMPBOX_H
 
+#include <vector>
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
+
+#define STOMP_PRESET_SIZE 6
 
 class StompBox
 {
@@ -42,6 +45,10 @@ public:
     
     void initialize();
     void clear_initialize();
+
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
     int Ppreset;
 
