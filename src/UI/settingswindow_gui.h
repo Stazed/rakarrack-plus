@@ -542,5 +542,6 @@ public:
   void update_distortion_quality();
   void update_overdrive_quality();
   void update_derelict_quality();
+  void update_distband_quality();
 };
 #endif

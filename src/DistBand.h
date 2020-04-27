@@ -28,8 +28,11 @@
 #ifndef DISTBAND_H
 #define DISTBAND_H
 
+#include <vector>
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
+
+#define DBAND_PRESET_SIZE 15
 
 class DistBand
 {
@@ -48,6 +51,10 @@ public:
     
     void initialize ();
     void clear_initialize();
+
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
 private:
     int WAVE_RES;

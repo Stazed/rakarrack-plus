@@ -1194,7 +1194,7 @@ update_derelict_quality();}
         }
         Fl_Choice DBand_Amo {
           callback {m_rkr->DBand_res_amount=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_distband_quality();}
           xywh {178 475 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
           class RKR_Choice
@@ -1202,7 +1202,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice DBand_Down_Qua {
           label Down
           callback {m_rkr->DBand_down_q=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_distband_quality();}
           xywh {290 475 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
@@ -1211,7 +1211,7 @@ m_rgui->Show_Next_Time();}
         Fl_Choice DBand_Up_Qua {
           label Up
           callback {m_rkr->DBand_up_q=(int)o->value();
-m_rgui->Show_Next_Time();}
+update_distband_quality();}
           xywh {390 475 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
           code1 {o->set_label_offset(1);}
@@ -1900,6 +1900,30 @@ usleep(C_MILLISECONDS_50);
 
 /* Reset parameters */
 m_rkr->efx_Derelict->reset_parameters(save_state);
+
+/* Turn processing back on */
+m_rkr->quality_update = false;} {}
+  }
+  Function {update_distband_quality()} {open return_type void
+  } {
+    code {/* shut off all processing */
+m_rkr->quality_update = true;
+
+/* Wait a bit */
+usleep(C_MILLISECONDS_25);
+
+/* Save current parameters */
+std::vector<int> save_state = m_rkr->efx_DistBand->save_parameters();
+
+/* Delete and re-create the efx with new resample settings */
+delete m_rkr->efx_DistBand;
+m_rkr->efx_DistBand = new DistBand(m_rkr->DBand_res_amount, m_rkr->DBand_up_q, m_rkr->DBand_down_q, m_rkr->fSample_rate, m_rkr->period);
+
+/* Wait for things to complete */
+usleep(C_MILLISECONDS_50);
+
+/* Reset parameters */
+m_rkr->efx_DistBand->reset_parameters(save_state);
 
 /* Turn processing back on */
 m_rkr->quality_update = false;} {}

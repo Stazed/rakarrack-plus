@@ -120,6 +120,29 @@ DistBand::cleanup()
     DCr->cleanup();
 }
 
+std::vector<int>
+DistBand::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < DBAND_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+DistBand::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < DBAND_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
+    
+    cleanup();
+}
+
 #ifdef LV2_SUPPORT
 void
 DistBand::lv2_update_params(uint32_t period)
@@ -349,7 +372,7 @@ DistBand::setCross2(int value)
 void
 DistBand::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 15;
+    const int PRESET_SIZE = DBAND_PRESET_SIZE;
     const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
