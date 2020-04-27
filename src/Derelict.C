@@ -110,6 +110,29 @@ Derelict::cleanup()
     DCr->cleanup();
 }
 
+std::vector<int>
+Derelict::save_parameters()
+{
+    std::vector<int> parameters;
+    for(int i = 0; i < DERE_PRESET_SIZE; i++)
+    {
+        parameters.push_back(getpar(i));
+    }
+    
+    return parameters;
+}
+
+void
+Derelict::reset_parameters(std::vector<int> parameters)
+{
+    for(int i = 0; i < DERE_PRESET_SIZE; i++)
+    {
+        changepar(i, parameters[i]);
+    }
+    
+    cleanup();
+}
+
 #ifdef LV2_SUPPORT
 void
 Derelict::lv2_update_params(uint32_t period)

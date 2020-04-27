@@ -541,5 +541,6 @@ public:
   void update_vocoder_quality();
   void update_distortion_quality();
   void update_overdrive_quality();
+  void update_derelict_quality();
 };
 #endif

@@ -27,11 +27,14 @@
 #ifndef DERELICT_H
 #define DERELICT_H
 
+#include <vector>
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 #include "FilterParams.h"
 #include "Filter.h"
 
+
+#define DERE_PRESET_SIZE 12
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
 // void waveshapesmps (int n, float * smps, int type,
 // 		    int drive);
@@ -54,6 +57,10 @@ public:
     void initialize();
     void clear_initialize();
     void applyfilters (float * efxoutl, float * efxoutr, uint32_t period);
+
+    /* Change quality */
+    std::vector<int> save_parameters();
+    void reset_parameters(std::vector<int> parameters);
 
 private:
     uint32_t PERIOD;
