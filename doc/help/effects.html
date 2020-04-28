@@ -110,232 +110,77 @@ You can import presets from other sources from the main window menu:
 File/Import Internal Presets.
 
 
-</p><h3><a name="eql"></a>EQ Lineal</h3>
-<table border="0" cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/eq.jpg" alt="rakarrack Lineal EQ" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Adapted from the ZynAddSubFX Equalizer.</p>
-      <p>Gain: Overall output level</p>
-      <p><b>Q</b>: Resonance of individual filters. Generally helps smooth
-extreme settings...or make extreme settings yet more extreme.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="#top">Contents</a></p>
-<h3><a name="comp"></a>Compressor</h3>
-
-
-<table border="0" cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;">
-      <p><img src="imagenes/compresor.jpg" alt="rakarrack Compressor" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td bgcolor="#fbfbfb">
-      <p>Originally adapted from ArtsCompressor. DSP routine has been
-rewritten entirely as the code had been adapted at a stage in
-ArtsCompressor development prior to many bug fixes that occurred later
-in its evolution which unfortunately removed calculation of a
-soft-knee compression characteristic. This is mentioned to give hope to
-those who were aware of the bugs in compressor in Rakarrack 0.3.0.
-These bugs have been fixed, and this compressor has been traced using
-test signals to confirm it does what we think it does. </p>
-      <p><b>A. Time</b>: Attack Time. Time in milliseconds for attack to
-settle to 64% of final amount of compression.</p>
-      <p><b>R. Time</b>: Release Time. Time in milliseconds for gain to return
-to 64% of it's initial setting.</p>
-      <p>Note: For the curious, the strange number, 64%, relates to the
-RC time constant (RC means Resistor-Capacitor), which follows a natural
-exponential curve. The use of this behavior will make this compressor
-feel more natural to one who is most familiar with rack-mounted analog
-compressors.</p>
-      <p><b>Ratio</b>: For every Ratio (dB) that the input exceeds the
-Threshold, the output will be allowed to increase by 1 dB. For example,
-using compression ratio of 2, if the signal gets 2dB above the
-threshold, the output will only go 1dB above the threshold.</p>
-      <p><b>Knee</b>: Percentage of the region in dB of space between
-Threshold and 0dB (basically is Knee X -Threshold). Within this region,
-the ratio increases from 1 to log2(ratio). Threshold + Knee marks the
-point of full compression onset. For example, if knee is set to 100%, a
-very gradual compression characteristic will be obtained, but the
-maximum compression available is log2(ratio). A ratio of 32 will result
-in a real ratio ranging from 1 to 5. This is useful for processing
-cymbals as it does not crunch the dynamic attack quite so badly, but
-helps sustain the trailing resonance.</p>
-      <p><b>Thrhold</b>: Threshold. Defines the onset of compression. </p>
-      <p><b>Output</b>: How much gain to remove from the final stage of the
-compressor.</p>
-      <p><b>Peek</b>: Enable/Disable peek compression.</p>
-      <p><b>Auto Output</b>: Automatically calculate makeup gain. If this is
-unchecked, then adjustments of Ratio, Knee, and Thrhold will make
-changes to the overall output level. Unchecking may be useful to
-interpret Thrhold as a limiting threshold, and one would likely use a
-high ratio in this case.</p>
-      <p><b>Stereo</b>: Process each channel separately.</p>       	
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="dist"></a>Distortion</h3>
-
-
-<table border="0" cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;">
-      <p><img src="imagenes/dist.jpg" alt="rakarrack Distortion" align="bottom" border="1" height="250" width="184"></p>
-      </td>
-      <td bgcolor="#fbfbfb">
-      <p>Adapted from the ZynAddSubFX 'Distortion'</p>
-      <p>This is a waveshaper, and not particularly an amp or stompbox
-modeling effect. This must be used judiciously with EQ's as well as the
-LPF and HPF settings (Low Pass Filter, High Pass Filter).</p>
-      <p>Tip: Your classic green stompbox has a Pre Filter curve with
-cutoff at 720Hz. This corresponds to approximately 51 on the HPF
-setting. If trying to emulate stompbox or amp sounds, it is highly
-advisable to use the Pre Filter option with HPF higher than 30 and LPF
-lower than 70. As you increase drive, decrease LPF. </p>
-      <p>Rakarrack attempts to be friendly to computers limited in both
-RAM and CPU. Because of this, the waveshaper does not use oversampling
-to reduce the effects of digital aliasing. Without going deep into DSP
-theory, this means that hard clipping with a lot of drive will create
-harmonics that are greater than half the sampling rate. These harmonics
-get mirrored back into the audio range. If they are significant in
-magnitude, then there will be a "grainy" non-musical sound. This is
-what most guitarists are talking about when making reference to
-"digital distortion". Functions like Sine, Pow and Atan generate a lot
-of harmonics, and even at lower signal levels. Lmt, Clip and Zigzag are
-among the worst, but these are generally used for nasty noisy sounds,
-so a little digital aliasing may not be a bad thing.</p>
-      <p>Fortunately, for instruments such as guitars, you can
-significantly limit the bandwidth of the input signal without
-catastrophically discoloring the timbre of the instrument by applying
-Low Pass Pre-filtering. By reducing the high frequency content of the
-input, you can greatly minimize the level of aliasing harmonics present
-in the output. </p>
-      <p>The main point is that great sounding distortions can be
-obtained from Rakarrack, but the distortion module is not meant to
-emulate your favorite stompbox, but to off the flexibility create these
-sounds as well as unique flavors of distortion.</p>
-      <p>The Crunch waveshaping type is the most physically informed of
-the waveshaping functions currently used. The clipping characteristic
-is most closely related to curve produced by a JFET amplifier stage.
-With proper EQ settings, a sound reminiscent of high gain British
-stacks can be obtained.</p>
-      <p><b>Sub Octv</b>: Allows you to mix some sub-octave rumble into the
-output. Technically speaking, this modulates the output with a square
-wave at half the fundamental frequency (sub octave). </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-
-<h3><a name="eco"></a>Echo</h3>
-
-
-<table border="0" cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;">
-      <p><img src="imagenes/eco.jpg" alt="rakarrack Echo" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td bgcolor="#fbfbfb">
-      <p>Adapted from the ZynAddSubFX Echo</p>
-      <p><b>Dry/Wet</b>: Mix level of echo with original.</p>
-      <p><b>Reverse</b>: Mixes reverse delay with forward delay.</p>
-      <p>More about reverse: Echo works by storing audio samples in
-memory and playing back samples that were stored a while ago. At a
-sample rate of 48kHz, the number of samples stored in memory for a 1
-second delay is 48,000. To play back audio from 1 second ago, there is
-a reader that increments through, right in front of the write. The
-reader reads a sample from a second ago, and the writer writes that
-memory location with a new sample from the present.</p>
-      <p>Now, what if we could read this block of memory backwards?
-Then everything stored in memory comes out in reverse, and has an
-interesting reverse envelop sound. In the digital word, we can read it
-forward as easily as backwards, so why not keep track of both and let
-you mix them together?</p>
-      <p><b>Pan</b>: Sends the delay more to the right or left. Zero balances
-it in the middle.</p>
-      <p><b>Delay</b>: Amount of time before you hear the echo.</p>
-      <p><b>L/R Delay.</b>: Left/Right delay difference. A setting of 64 means
-that the delay time is the same for left and right channels. If larger
-than 64, the right channel is delayed longer than the left channel.
-Less than 64 the reverse is true. This allows you to achieve the stereo
-'Ping Pong' effect.</p>
-      <p><b>L/R Cross</b>: Left/Right Crossing. This mixes left and right
-channels.</p>
-      <p><b>Feedback</b>: How much of the delayed output to add to the
-input. This makes the echo regenerate, like it's bouncing around in a
-canyon.</p>
-      <p><b>Direct</b>: When is on, the effect only play the echoes.</p>
-
-      <p><b>Damp</b>: Low pass filter on the delayed signal. This rolls off
-the high frequencies on every regeneration. Setting to a higher level
-will make the echo sound more natural. </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="chor"></a>Chorus</h3>
-
+<h3><a name="awha"></a>AlienWah</h3>
 
 <table cellpadding="5" cellspacing="2">
 
   <tbody>
     <tr>
-      <td>
-      <p><img src="imagenes/chorus.jpg" alt="rakarrack Chorus" align="bottom" border="1" height="250" width="185"></p>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/aw.jpg" alt="rakarrack AlienWah" align="bottom" border="1" height="250" width="185"></p>
       </td>
-      <td bgcolor="#fbfbfb">
-      <p>Adapted from the ZynAddSubFX Chorus</p>
-      <p>Tips</p>
-      <p><b>Tempo</b>: LFO Rate</p>
-      <p><b>Random</b>: Add noise to LFO to make it more natural sounding.</p>
-      <p><b>Intense</b>: Increase effect intensity.  A digital Flanger or
-      Chorus uses a delay line with several hundred to several thousand
-      taps.  When it changes taps to modulate the delay time, there is a
-      discontinuous change in the signal called "zipper noise".  To
-      eliminate this, fractional delay times need to be calculated in order
-      to smoothly transition from one delay line tap to the next.  The
-      default Rakarrack Phaser and Chorus use linear interpolation.  This
-      mode makes use of a Lagrange interpolation polynomial to estimate
-      fractional delay times and some other tricks to maximize the flanger
-      depth and flatten the frequency response on the chorus.  Adding the
-      mode switch adds the feature without breaking old presets.</p>
-      <p><b>Stereo Df.</b> : Stereo difference of LFO.</p>
-      <p><b>L/R Cross</b> : Mix left into right, Right into left. At maximum
-level, left and right channels are swapped.</p>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>AlienWah - Created by our hero, Paul Nasca Octavian originally for the ZynAddSubFX synthesizer.<br>
+AlienWah fits into the comb filter category, similar to phasers and
+flangers.&nbsp; AlienWah amplitude modulates two delay lines each with
+a phase separation of "Phase", then feeds them into each other in a
+somewhat circular fashion making each delay line a cascade of low order
+digital filters. In this manner it is similar to a Phaser.&nbsp; It's
+sort of like a digital low-pass filter that spirals down a pair of
+delay lines causing an interesting interference pattern.&nbsp; Some
+people may think of this effect as a "Flaser".</p>
+<p>For the less technically minded, the AlienWah configuration produces
+mostly vocal sounds with a strange timbre sounding much like sci-fi
+depictions of a language spoken by invading space aliens, or some
+strange creature found near the center of the earth. </p>
+<p>Even though some of the more extreme settings create weird alien
+sounds, it can also be configured for interesting subtle comb filtering
+sounds for shaping a rather beautiful timbre onto an instrument.&nbsp;
+It is a truly amazing effect.</p>
+<p>Here is a description of the parameters:</p>
+<p><b>Dry/Wet</b>: Being a delay-based effect, Dry/Wet does more than
+simply mix Dry/Wet sounds.&nbsp; Destructive interference occurs
+between the effected signal and clean so a proper blend can be used
+also to voice the effect.</p>
+<p><b>Pan</b>: Put effect more to the left or right channel.&nbsp; Used in
+conjunction with Dry/Wet mix, one can voice the effect differently
+between left right.</p>
+<p><b>Tempo</b>: LFO rate</p>
+<p><b>Rnd</b>: Add random noise to LFO to make it sound somewhat more
+"analog".</p>
+<p><b>LFO Type</b>: Self explanatory</p>
+<p><b>Phase</b>: This is a very interesting parameter.&nbsp; It sets the
+modulation offset between the two delay lines.&nbsp; On either extreme
+it has a lower "closed mouth" sound, while in the middle it creates
+more of an "open mouth" sound.&nbsp; This parameter "centers" the LFO
+around the point it is set.</p>
+<p><b>Stereo Df.</b>: Stereo Difference between left &amp; right LFO.&nbsp; A setting
+of 64 has both LFOs in phase between left/right.&nbsp; This parameter
+used with L/R Cr. is like having a second "Phase" parameter, so more
+interesting interaction can be achieved by using this control.&nbsp;
+It's more than what meets the eye.</p>
+<p><b>Depth</b>: This would be better termed "width" as this parameter adjusts the amplitude of the
+LFO.</p>
+<p><b>Delay</b>: Length of the delay line in samples.&nbsp; In a sense, this
+also is the filter order.&nbsp; The longer the delay time, the deeper
+the sound of the filter.</p>
+<p><b>Fb</b>: Feedback.&nbsp; Less than 64 is negative feedback, more than
+64 is positive feedback.&nbsp; 64 corresponds to zero feedback. Without
+feedback, the effect is rather dull.&nbsp; It's the perpetual
+regeneration along the delay line that creates&nbsp; the interesting
+phase cancellations and resonances that sound alien.</p>
+<p><b>L/R cross</b>: Left/Right Crossing.&nbsp; Amount of left to mix into
+right and right into left.&nbsp; Less than 64 subtracts left from
+right, right from left, while greater than 64 adds them.
+</p>
       </td>
     </tr>
   </tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
 <h3><a name="aphas"></a>Analog Phaser</h3>
-
 
 <table cellpadding="5" cellspacing="2">
 
@@ -437,330 +282,10 @@ To our ears, musical pitch increases exponentially with frequency.</p>
   </tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="flan"></a>Flanger</h3>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
 
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/flanger.jpg" alt="rakarrack Flanger" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Adapted from the ZynAddSubFX Chorus</p>
-      <p><b>Intense</b>: Increase effect intensity.  A digital Flanger or
-      Chorus uses a delay line with several hundred to several thousand
-      taps.  When it changes taps to modulate the delay time, there is a
-      discontinuous change in the signal called "zipper noise".  To
-      eliminate this, fractional delay times need to be calculated in order
-      to smoothly transition from one delay line tap to the next.  The
-      default Rakarrack Phaser and Chorus use linear interpolation.  This
-      mode makes use of a Lagrange interpolation polynomial to estimate
-      fractional delay times and some other tricks to maximize the flanger
-      depth and flatten the frequency response on the chorus.  Adding the
-      mode switch adds the feature without breaking old presets.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-
-<h3><a name="cabe"></a>Cabinet Emulation</h3>
-
-
-<table cellpadding="5" cellspacing="2">
-<tbody>
-    <tr>
-      <td>
-      <br>
-</td><td style="vertical-align: top;">
-      <p><img src="imagenes/cabinet.jpg" alt="rakarrack Cabinet" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251);">
-      <p>  Effect using the ZynAddSubFx Equalizer
-engine</p>
-      <p>This applies an approximation of certain
-speakers, cabinets,speaker/cabinet combinations according to publicly
-available frequency plots. For those wanting convolution-based cabinet
-modeling you can use Convolotron, but this cost a little bit of CPU resources.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-
-<h3><a name="har"></a>Harmonizer</h3>
-
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;">
-      <p><img src="imagenes/har.jpg" alt="rakarrack Harmonizer" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251);">
-      <h3>Intelligent Harmonizer Explained</h3>
-      <p>Rakarrack harmonizer effect use the audio
-engine of the smbPtichShifter.cpp located at
-http://www.dspdimension.com. In order to save CPU use only a mono
-pitch-shifter in the lowest quality available, you can change this on
-the program <a href="#settings">Settings</a> window, but only for a
-low quality values because high quality ones use too much CPU. The
-audio signal converted to mono is send it to the pitch-shifter and
-returned to the two pole Peak filter, panned and send it to both
-channels L/R. The rakarrack Harmonizer has 3 modes:</p>
-      <h4>Normal Mode</h4>
-      <p>Is how a normal pitchshifter run, the pitch
-ratio is fixed and can be selected in the <b>Interval</b> effect
-parameter of the effect.</p>
-      <h4>Select Mode</h4>
-      <p>In this mode the pitch ratio is variable, this
-value depends of the selected <b>Interval</b> parameter, and the <b>Note</b>
-and <b>Chord</b> effect parameters. Rakarrack then recognize the audio
-note played (Only "melodies" monophonic data can be played in this
-mode) and modifies the pitch ratio in order to do a musical
-harmonization with the Tonality/Chord selected in the parameters, of
-course the twelve tonality's are available and 33 chords:</p>
-      <p>,6,Maj7,lyd,Maj(9),Maj7(9),6/9,+,m,m6,m7,m7(b5),m9,m7(9),m7(11)<br>
-,m(Maj7),m(Maj7)(9),dim,dim7,7,7(Sus4),7(b5),7(9),7(#11),7(13),7(b9)<br>
-,7(b13),7(#9),+Maj7,+7,1+8,1+5,(Sus4),2</p>
-      <h4>MIDI Mode</h4>
-      <p>This mode run in the same way as <b>Select
-Mode</b> but the Tonality/Chord is recognized via MIDI notes, the MIDI
-chord recognizer recognizes all the above chords plus all the
-inversions and bass changed chords, also has memory, they use the chord
-just another chord is send it and recognized. The MIDI channel can be
-selected in the <a href="#settings">Settings</a> window, then the
-Harmonizer adjust the pitch ratio with the audio note recognized,
-played by the user, and the Tonality/Chord received via MIDI.
-(Sequencer track ... )</p>
-    </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-
-<h3><a name="dere"></a>Derelict</h3>
-
-
-<table border="0" cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/derelict.jpg" alt="Derelict" align="bottom" border="0" height="250" width="185"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Distortion using resonant filter engine and standard
-Distortion waveshaping functions. Controls are mostly like Distortion
-module, but includes "Color" to add resonance to the waveshaper signal.
-This allows for a "bigger" sound that is useful for fuzzes and so on.
-Your imagination will take it where you want. Addition of this module
-also allows the user to have up to 3 simultaneous distortion modules, 2
-of with can have sub-octave modulation.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-
-<h3><a name="awha"></a>AlienWah</h3>
-
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/aw.jpg" alt="rakarrack AlienWah" align="bottom" border="1" height="250" width="185"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>AlienWah - Created by our hero, Paul Nasca Octavian originally for the ZynAddSubFX synthesizer.<br>
-AlienWah fits into the comb filter category, similar to phasers and
-flangers.&nbsp; AlienWah amplitude modulates two delay lines each with
-a phase separation of "Phase", then feeds them into each other in a
-somewhat circular fashion making each delay line a cascade of low order
-digital filters. In this manner it is similar to a Phaser.&nbsp; It's
-sort of like a digital low-pass filter that spirals down a pair of
-delay lines causing an interesting interference pattern.&nbsp; Some
-people may think of this effect as a "Flaser".</p>
-<p>For the less technically minded, the AlienWah configuration produces
-mostly vocal sounds with a strange timbre sounding much like sci-fi
-depictions of a language spoken by invading space aliens, or some
-strange creature found near the center of the earth. </p>
-<p>Even though some of the more extreme settings create weird alien
-sounds, it can also be configured for interesting subtle comb filtering
-sounds for shaping a rather beautiful timbre onto an instrument.&nbsp;
-It is a truly amazing effect.</p>
-<p>Here is a description of the parameters:</p>
-<p><b>Dry/Wet</b>: Being a delay-based effect, Dry/Wet does more than
-simply mix Dry/Wet sounds.&nbsp; Destructive interference occurs
-between the effected signal and clean so a proper blend can be used
-also to voice the effect.</p>
-<p><b>Pan</b>: Put effect more to the left or right channel.&nbsp; Used in
-conjunction with Dry/Wet mix, one can voice the effect differently
-between left right.</p>
-<p><b>Tempo</b>: LFO rate</p>
-<p><b>Rnd</b>: Add random noise to LFO to make it sound somewhat more
-"analog".</p>
-<p><b>LFO Type</b>: Self explanatory</p>
-<p><b>Phase</b>: This is a very interesting parameter.&nbsp; It sets the
-modulation offset between the two delay lines.&nbsp; On either extreme
-it has a lower "closed mouth" sound, while in the middle it creates
-more of an "open mouth" sound.&nbsp; This parameter "centers" the LFO
-around the point it is set.</p>
-<p><b>Stereo Df.</b>: Stereo Difference between left &amp; right LFO.&nbsp; A setting
-of 64 has both LFOs in phase between left/right.&nbsp; This parameter
-used with L/R Cr. is like having a second "Phase" parameter, so more
-interesting interaction can be achieved by using this control.&nbsp;
-It's more than what meets the eye.</p>
-<p><b>Depth</b>: This would be better termed "width" as this parameter adjusts the amplitude of the
-LFO.</p>
-<p><b>Delay</b>: Length of the delay line in samples.&nbsp; In a sense, this
-also is the filter order.&nbsp; The longer the delay time, the deeper
-the sound of the filter.</p>
-<p><b>Fb</b>: Feedback.&nbsp; Less than 64 is negative feedback, more than
-64 is positive feedback.&nbsp; 64 corresponds to zero feedback. Without
-feedback, the effect is rather dull.&nbsp; It's the perpetual
-regeneration along the delay line that creates&nbsp; the interesting
-phase cancellations and resonances that sound alien.</p>
-<p><b>L/R cross</b>: Left/Right Crossing.&nbsp; Amount of left to mix into
-right and right into left.&nbsp; Less than 64 subtracts left from
-right, right from left, while greater than 64 adds them.
-</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-
-<h3><a name="Dual_Flange"></a>Dual Flange</h3>
-
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td style="vertical-align: top;">
-      <p><img src="imagenes/df.jpg" alt="rakarrack Dual Flange"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Another Flanger alternative.  <br>
-Basic operation of a flanger:  Delay the incoming signal and add
-it to the input signal.  This creates destructive interference in
-a similar manner to a Phaser, but the notch filter frequencies are
-evenly spaced from the lowest notch up to infinity (in theory).
-
-Dual Flange picks two different delays and adds them to the input
-signal.  The two separately delayed paths have a spacing relationship that follows the other by a percentage, and not a constant
-offset.  At maximum wet, these two delay "taps" are added equally,
-thus the notches between the two are infinitely deep, and the effect is
-at its maximum severity.  Mixing in the clean signal reduces the
-depth of the notches, but also creates a complex and interesting
-frequency response.  The result is a unique color to the tone not
-available by a standard flanger.</p>
-      <p><b>Dry/Wet</b>:  Mix delayed
-signal with Dry</p>
-      <p><b>Pan</b>:</p>
-      <p><b>L/R Cross</b>:</p>
-      <p><b>Depth</b>: Frequency (Hz) of
-the lowest notch frequency on lowest end of sweep range</p>
-      <p><b>Width</b>: LFO sweep width,
-deviation measured in Hz. </p>
-      <p><b>Offset</b>: Percent
-difference in delay between delay A and delay B.</p>
-      <p><b>Feedback</b>: Zero is
-none, negative and positive.</p>
-      <p><b>LPF</b>: Damp the delay
-line.  This makes the high frequency notches more shallow, thus
-the sound approaches that of a Phaser or other mellow 
-sweeping      comb filter</p>
-      <p><b>Subtract</b>: Subtract delayed
-signal instead of add</p>
-      <p><b>Th. zero</b>: Through
-Zero.  Delay Dry signal to 1/2 way between high and low delay
-deviations of delayed signal.</p>
-      <p><b>Tempo</b>: Sweep speed </p>
-      <p><b>Stereo Df</b>: Stereo Difference
-between LFO's</p>
-      <p><b>LFO Type</b>:</p>
-      <p><b>Random</b>: Randomness.  Add
-random noise to LFO to help reduce unmusical effects of linear
-interpolation between samples.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-
-<h3><a name="Exciter"></a>Exciter</h3>
-
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/ex.jpg" alt="rakarrack Exciter"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>New Effect based on Harmonic, Steve Harris
-LADSPA
-plugin.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="DistBand"></a>DistBand</h3>
-
-
-<table cellpadding="5" cellspacing="2">
-
-  <tbody>
-    <tr>
-      <td>
-      <p><img src="imagenes/db.jpg" alt="rakarrack DistBand"></p>
-      </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>Multi Band Distortion, use the Cross1 and
-Cross2 to select the ranges of each band.</p>
-      <p><br>
-20Hz -&gt; Cross1 = Low<br>
-Cross1 -&gt; Cross2 = Mid<br>
-Cross2 -&gt; 20KHz = High<br>
-      </p>
-      <p>You can select a waveshape type for each band.<br>
-      </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<p><a href="effects.html">Effects</a></p>
-
-<p><a href="help.html">Table of Contents</a></p>
 <h3><a name="Arpie"></a>Arpie</h3>
-
-
 
 <table cellpadding="5" cellspacing="2">
 
@@ -806,70 +331,207 @@ canyon.</p>
     </tr>
   </tbody>
 </table>
-
 <p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="Expander"></a>Expander</h3>
+<h3><a name="cabe"></a>Cabinet Emulation</h3>
 
 
+<table cellpadding="5" cellspacing="2">
+<tbody>
+    <tr>
+      <td>
+      <br>
+</td><td style="vertical-align: top;">
+      <p><img src="imagenes/cabinet.jpg" alt="rakarrack Cabinet" align="bottom" border="1" height="250" width="185"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251);">
+      <p>  Effect using the ZynAddSubFx Equalizer
+engine</p>
+      <p>This applies an approximation of certain
+speakers, cabinets,speaker/cabinet combinations according to publicly
+available frequency plots. For those wanting convolution-based cabinet
+modeling you can use Convolotron, but this cost a little bit of CPU resources.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="chor"></a>Chorus</h3>
 
 <table cellpadding="5" cellspacing="2">
 
   <tbody>
     <tr>
       <td style="vertical-align: top;">
-      <p><img src="imagenes/exp.jpg" alt="rakarrack Expander"></p>
+      <p><img src="imagenes/chorus.jpg" alt="rakarrack Chorus" align="bottom" border="1" height="250" width="185"></p>
       </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>The
-primary purpose for this effect is to offer a differently natured Noise
-Gate than the "Noise Gate" module.  The turn-on characteristic is
-modeled after that of a BJT transistor, thus it behaves more similarly
-to an analog noise gate.  It is likely that Expander uses less CPU
-resources than Noise Gate, but neither are very resource intensive
-modules.</p>
-<p>The basic behavior is the louder you play, the louder it gets until it
-gets pinned at the maximum "Level".  As a noise gate, the volume
-is exponentially increased in the lower volume levels until Threshold,
-at which point the gate is entirely open.</p>
-<p>To use the effect as an expander, it is best to set the threshold at
-higher levels, and shape at moderate levels (less than 10). Short
-attack/release times in this mode will cause it to work much like one
-would expect from a dynamics expander.  In this mode it is
-essentially a compressor in reverse.</p>
-<p>To take the idea of expander a little further, one can set long attack
-times and short release times to achieve a string swell effect akin to
-adjusting the volume pot on the guitar...only the effect does it
-automatically for you.</p>
-<p>Finally, the filters may be used for a bit of frequency shaping before
-a distortion effect, or used in front of the Compressor to help brighten
-the tone.</p>
-
-      <p><b>A. Time</b>: Attack Time, time to open the gate</p>
-      <p><b>R. Time</b>: Release Time, time it takes the gate to return to off
-      state</p>
-      <p><b>Shape</b>: Gate transition
-shape.  Large number means gate turns on suddenly at
-threshold.  Small number means gate gradually turns on Noise
-suppression is best at higher numbers, but the gradual expansion above
-the threshold can be a more musical way for gate  to turn on.</p>
-      <p><b>Thrhold</b>: Threshold. 
-The gate is reducing signal volume below this level.  Moderate
-threshold setting with smaller number for shape is useful for string
-swell effects.</p>
-      <p><b>Level</b>: Boost the output. 1 ... 127 represents a fractional increase in volume
-from 0dB to 20dB</p>
-      <p><b>HPF</b>: High Pass Filter</p>
-      <p><b>LPF</b>: Low Pass Filter</p>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Chorus</p>
+      <p>Tips</p>
+      <p><b>Tempo</b>: LFO Rate</p>
+      <p><b>Random</b>: Add noise to LFO to make it more natural sounding.</p>
+      <p><b>Intense</b>: Increase effect intensity.  A digital Flanger or
+      Chorus uses a delay line with several hundred to several thousand
+      taps.  When it changes taps to modulate the delay time, there is a
+      discontinuous change in the signal called "zipper noise".  To
+      eliminate this, fractional delay times need to be calculated in order
+      to smoothly transition from one delay line tap to the next.  The
+      default Rakarrack Phaser and Chorus use linear interpolation.  This
+      mode makes use of a Lagrange interpolation polynomial to estimate
+      fractional delay times and some other tricks to maximize the flanger
+      depth and flatten the frequency response on the chorus.  Adding the
+      mode switch adds the feature without breaking old presets.</p>
+      <p><b>Stereo Df.</b> : Stereo difference of LFO.</p>
+      <p><b>L/R Cross</b> : Mix left into right, Right into left. At maximum
+level, left and right channels are swapped.</p>
       </td>
     </tr>
   </tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
-<p><a href="help.html">Table of Contents</a></p>
+<h3><a name="CoilCrafter"></a>Coil Crafter</h3>
+<table cellpadding="5" cellspacing="2">
+<tbody><tr><td style="vertical-align: top;">
+      <p><img src="imagenes/coi.jpg" alt="rakarrack CoilCrafter"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      
+      <p>Coil Crafter - Pickup Emulation/Converter</p>
+      <p>
+This unit contains two filters tuned to typical pickup frequency
+responses. Origin is used to match the pickup you're using. This
+filter "undoes", or reverses, the frequency response of your source
+pickup. "Destiny" is what kind of pickups you want it to sound like is
+in your guitar. This applies the frequency response of the pickups
+selected.</p>
 
+<p>Two caveats:</p>
+
+<p>A) This does not make your Gibson Les Paul sound like a strat. It
+makes it sound like you put single coil pickups in your Les Paul. The
+Tone control helps to take off some of the lows so you can somewhat
+emulate different guitar body types.</p>
+
+<p>B) You have to adjust parameters for the "Origin" pickup in order to
+cancel the effects of the pickups you are actually using. Without good
+electronics lab test equipment, this is largely guesswork tuned into
+range by your ears. If it sounds good, then who cares if it's
+technically right.</p>
+
+
+<p><b>Gain</b>: Volume control</p>
+
+<p><b>Tone</b>: Simple low cut</p>
+
+<p><b>Origin</b>: Pickups you are using. This will "undo" your pickup's
+response.</p>
+
+<p><b>Freq 1</b>: Resonant frequency of origin pickup.</p>
+
+<p><b>Q 1</b>: Resonance of origin pickup.</p>
+
+<p><b>Destiny</b>: This is the type of pickup you wish to emulate.</p>
+
+<p><b>Freq 2</b>: Resonant frequency of desired pickup response.</p>
+
+<p><b>Q 2</b>: Resonance of desired pickup.</p>
+
+<p><b>Neck Pickup</b>: Uses harmonic exciter to emulate switching to neck position pickup.</p>
+
+</td></tr></tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="CompBand"></a>CompBand</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+<tbody><tr><td style="vertical-align: top;">
+      <p><img style="width: 185px; height: 250px;" src="imagenes/cpb.jpg" alt="rakarrack CompBand"></p>
+      </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>CompBand</p>
+<p>Is Four band Compressor, using the Compressor effect, the Dry/Wet
+parameter is included&nbsp; for&nbsp; mastering purposes,&nbsp;
+probably if you use with a single instrument you will want to hear the
+Wet. </p>
+
+<p>Four bands are availables&nbsp; L(Low), ML (Mid Low), MH (Mid High), H
+(High). You can control the ratio and threshold for each one of this
+bands.</p>
+<p>The Cross Sliders is to determine the frequency range of&nbsp; each band in the
+form:</p>
+
+<p>0-&gt; Cross1 = Low</p>
+<p>Cross1-&gt;Cross2 = Mid Low</p>
+<p>Cross2-&gt;Cross3 = High Low</p>
+<p>Cross3-&gt;26 KHz = High</p>
+</td></tr></tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="comp"></a>Compressor</h3>
+
+<table border="0" cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/compresor.jpg" alt="rakarrack Compressor" align="bottom" border="1" height="250" width="185"></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Originally adapted from ArtsCompressor. DSP routine has been
+rewritten entirely as the code had been adapted at a stage in
+ArtsCompressor development prior to many bug fixes that occurred later
+in its evolution which unfortunately removed calculation of a
+soft-knee compression characteristic. This is mentioned to give hope to
+those who were aware of the bugs in compressor in Rakarrack 0.3.0.
+These bugs have been fixed, and this compressor has been traced using
+test signals to confirm it does what we think it does. </p>
+      <p><b>A. Time</b>: Attack Time. Time in milliseconds for attack to
+settle to 64% of final amount of compression.</p>
+      <p><b>R. Time</b>: Release Time. Time in milliseconds for gain to return
+to 64% of it's initial setting.</p>
+      <p>Note: For the curious, the strange number, 64%, relates to the
+RC time constant (RC means Resistor-Capacitor), which follows a natural
+exponential curve. The use of this behavior will make this compressor
+feel more natural to one who is most familiar with rack-mounted analog
+compressors.</p>
+      <p><b>Ratio</b>: For every Ratio (dB) that the input exceeds the
+Threshold, the output will be allowed to increase by 1 dB. For example,
+using compression ratio of 2, if the signal gets 2dB above the
+threshold, the output will only go 1dB above the threshold.</p>
+      <p><b>Knee</b>: Percentage of the region in dB of space between
+Threshold and 0dB (basically is Knee X -Threshold). Within this region,
+the ratio increases from 1 to log2(ratio). Threshold + Knee marks the
+point of full compression onset. For example, if knee is set to 100%, a
+very gradual compression characteristic will be obtained, but the
+maximum compression available is log2(ratio). A ratio of 32 will result
+in a real ratio ranging from 1 to 5. This is useful for processing
+cymbals as it does not crunch the dynamic attack quite so badly, but
+helps sustain the trailing resonance.</p>
+      <p><b>Thrhold</b>: Threshold. Defines the onset of compression. </p>
+      <p><b>Output</b>: How much gain to remove from the final stage of the
+compressor.</p>
+      <p><b>Peek</b>: Enable/Disable peek compression.</p>
+      <p><b>Auto Output</b>: Automatically calculate makeup gain. If this is
+unchecked, then adjustments of Ratio, Knee, and Thrhold will make
+changes to the overall output level. Unchecking may be useful to
+interpret Thrhold as a limiting threshold, and one would likely use a
+high ratio in this case.</p>
+      <p><b>Stereo</b>: Process each channel separately.</p>       	
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
 <h3><a name="Convolotron"></a>Convolotron</h3>
 
@@ -960,107 +622,225 @@ you will get nothing but silence on the output.</p>
   </tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
-<p><a href="help.html">Table of Contents</a></p>
+<h3><a name="dere"></a>Derelict</h3>
 
-<h3><a name="Echoverse"></a>Echoverse</h3>
+<table border="0" cellpadding="5" cellspacing="2">
 
-<table cellpadding="5" cellspacing="2">
-<tbody><tr><td style="vertical-align: top;">
-      <p><img src="imagenes/ecv.jpg" alt="rakarrack Echoverse"></p>
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/derelict.jpg" alt="Derelict" align="bottom" border="0" height="250" width="185"></p>
       </td>
       <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      
-      <p>Echoverse</p>
-<p>This effect is intended to be an "in your face" wall of sound.<br>
-This has been adapted from the normal "Echo" effect, but with some
-modifications that help improve the sound and behavior.  With
-Dry/Wet mix, you will  notice it is possible to get 100% wet
-(echoes only).  The reverse is a little more "clean".  More
-importantly, this effect synchronizes to master Tempo, and is
-responsive to TapTempo control.</p>
-<p>SubDivision allows you to divide delay times to 2,3,4... beats per
-measure.  Also added is "Extra Stereo" effect that makes the
-effect come alive in 3D space (assuming you're amplifying or recording
-in stereo).</p>
-<p><b>Dry/Wet</b>: Direct/Reverberant mix. It's like
-changing the distance you are located from the sound source.</p>
-<p><b>Reverse</b>: Same as Echo</p>
-<p><b>Pan</b>: Move the effect to the left or right</p>
-<p><b>Tempo</b>: Beats per minute.  This is synchronized to TapTempo when
-active.</p>
-<p><b>L/R Delay</b>: Difference between left channel and right channel delay
-times.</p>
-<p><b>Feedback</b>: Other descriptive words are Repeat, Regen or
-Tail.</p>
-<p><b>SubDivision</b>: Delay time can by synchronized to the length of
-a musical measure subdivision.  For example, the image to the left
-indicates delay time is set to 1/2 notes of a song played at a Tempo of
-90 beats per minute. </p>
-<p><b>Damp</b>: High frequency damping.</p>
-<p><b>Ex Stereo.</b>: Extra Stereo.  This is the amount of the effect
-applied.</p>
-<p><b>Angle</b>: This is the angle from which the sound appears to be coming.</p>
-</td></tr></tbody>
+      <p>Distortion using resonant filter engine and standard
+Distortion waveshaping functions. Controls are mostly like Distortion
+module, but includes "Color" to add resonance to the waveshaper signal.
+This allows for a "bigger" sound that is useful for fuzzes and so on.
+Your imagination will take it where you want. Addition of this module
+also allows the user to have up to 3 simultaneous distortion modules, 2
+of with can have sub-octave modulation.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="DistBand"></a>DistBand</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/db.jpg" alt="rakarrack DistBand"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Multi Band Distortion, use the Cross1 and
+Cross2 to select the ranges of each band.</p>
+      <p><br>
+20Hz -&gt; Cross1 = Low<br>
+Cross1 -&gt; Cross2 = Mid<br>
+Cross2 -&gt; 20KHz = High<br>
+      </p>
+      <p>You can select a waveshape type for each band.<br>
+      </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="dist"></a>Distortion</h3>
+
+<table border="0" cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/dist.jpg" alt="rakarrack Distortion" align="bottom" border="1" height="250" width="184"></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX 'Distortion'</p>
+      <p>This is a waveshaper, and not particularly an amp or stompbox
+modeling effect. This must be used judiciously with EQ's as well as the
+LPF and HPF settings (Low Pass Filter, High Pass Filter).</p>
+      <p>Tip: Your classic green stompbox has a Pre Filter curve with
+cutoff at 720Hz. This corresponds to approximately 51 on the HPF
+setting. If trying to emulate stompbox or amp sounds, it is highly
+advisable to use the Pre Filter option with HPF higher than 30 and LPF
+lower than 70. As you increase drive, decrease LPF. </p>
+      <p>Rakarrack attempts to be friendly to computers limited in both
+RAM and CPU. Because of this, the waveshaper does not use oversampling
+to reduce the effects of digital aliasing. Without going deep into DSP
+theory, this means that hard clipping with a lot of drive will create
+harmonics that are greater than half the sampling rate. These harmonics
+get mirrored back into the audio range. If they are significant in
+magnitude, then there will be a "grainy" non-musical sound. This is
+what most guitarists are talking about when making reference to
+"digital distortion". Functions like Sine, Pow and Atan generate a lot
+of harmonics, and even at lower signal levels. Lmt, Clip and Zigzag are
+among the worst, but these are generally used for nasty noisy sounds,
+so a little digital aliasing may not be a bad thing.</p>
+      <p>Fortunately, for instruments such as guitars, you can
+significantly limit the bandwidth of the input signal without
+catastrophically discoloring the timbre of the instrument by applying
+Low Pass Pre-filtering. By reducing the high frequency content of the
+input, you can greatly minimize the level of aliasing harmonics present
+in the output. </p>
+      <p>The main point is that great sounding distortions can be
+obtained from Rakarrack, but the distortion module is not meant to
+emulate your favorite stompbox, but to off the flexibility create these
+sounds as well as unique flavors of distortion.</p>
+      <p>The Crunch waveshaping type is the most physically informed of
+the waveshaping functions currently used. The clipping characteristic
+is most closely related to curve produced by a JFET amplifier stage.
+With proper EQ settings, a sound reminiscent of high gain British
+stacks can be obtained.</p>
+      <p><b>Sub Octv</b>: Allows you to mix some sub-octave rumble into the
+output. Technically speaking, this modulates the output with a square
+wave at half the fundamental frequency (sub octave). </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="Dual_Flange"></a>Dual Flange</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/df.jpg" alt="rakarrack Dual Flange"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Another Flanger alternative.  <br>
+Basic operation of a flanger:  Delay the incoming signal and add
+it to the input signal.  This creates destructive interference in
+a similar manner to a Phaser, but the notch filter frequencies are
+evenly spaced from the lowest notch up to infinity (in theory).
+
+Dual Flange picks two different delays and adds them to the input
+signal.  The two separately delayed paths have a spacing relationship that follows the other by a percentage, and not a constant
+offset.  At maximum wet, these two delay "taps" are added equally,
+thus the notches between the two are infinitely deep, and the effect is
+at its maximum severity.  Mixing in the clean signal reduces the
+depth of the notches, but also creates a complex and interesting
+frequency response.  The result is a unique color to the tone not
+available by a standard flanger.</p>
+      <p><b>Dry/Wet</b>:  Mix delayed
+signal with Dry</p>
+      <p><b>Pan</b>:</p>
+      <p><b>L/R Cross</b>:</p>
+      <p><b>Depth</b>: Frequency (Hz) of
+the lowest notch frequency on lowest end of sweep range</p>
+      <p><b>Width</b>: LFO sweep width,
+deviation measured in Hz. </p>
+      <p><b>Offset</b>: Percent
+difference in delay between delay A and delay B.</p>
+      <p><b>Feedback</b>: Zero is
+none, negative and positive.</p>
+      <p><b>LPF</b>: Damp the delay
+line.  This makes the high frequency notches more shallow, thus
+the sound approaches that of a Phaser or other mellow 
+sweeping      comb filter</p>
+      <p><b>Subtract</b>: Subtract delayed
+signal instead of add</p>
+      <p><b>Th. zero</b>: Through
+Zero.  Delay Dry signal to 1/2 way between high and low delay
+deviations of delayed signal.</p>
+      <p><b>Tempo</b>: Sweep speed </p>
+      <p><b>Stereo Df</b>: Stereo Difference
+between LFO's</p>
+      <p><b>LFO Type</b>:</p>
+      <p><b>Random</b>: Randomness.  Add
+random noise to LFO to help reduce unmusical effects of linear
+interpolation between samples.</p>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
 
-<p><a href="help.html">Table of Contents</a></p>
-<h3><a name="CoilCrafter"></a>Coil Crafter</h3>
-<table cellpadding="5" cellspacing="2">
-<tbody><tr><td style="vertical-align: top;">
-      <p><img src="imagenes/coi.jpg" alt="rakarrack CoilCrafter"></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="eco"></a>Echo</h3>
+
+<table border="0" cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/eco.jpg" alt="rakarrack Echo" align="bottom" border="1" height="250" width="185"></p>
       </td>
-      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      
-      <p>Coil Crafter - Pickup Emulation/Converter</p>
-      <p>
-This unit contains two filters tuned to typical pickup frequency
-responses. Origin is used to match the pickup you're using. This
-filter "undoes", or reverses, the frequency response of your source
-pickup. "Destiny" is what kind of pickups you want it to sound like is
-in your guitar. This applies the frequency response of the pickups
-selected.</p>
+      <td bgcolor="#fbfbfb">
+      <p>Adapted from the ZynAddSubFX Echo</p>
+      <p><b>Dry/Wet</b>: Mix level of echo with original.</p>
+      <p><b>Reverse</b>: Mixes reverse delay with forward delay.</p>
+      <p>More about reverse: Echo works by storing audio samples in
+memory and playing back samples that were stored a while ago. At a
+sample rate of 48kHz, the number of samples stored in memory for a 1
+second delay is 48,000. To play back audio from 1 second ago, there is
+a reader that increments through, right in front of the write. The
+reader reads a sample from a second ago, and the writer writes that
+memory location with a new sample from the present.</p>
+      <p>Now, what if we could read this block of memory backwards?
+Then everything stored in memory comes out in reverse, and has an
+interesting reverse envelop sound. In the digital word, we can read it
+forward as easily as backwards, so why not keep track of both and let
+you mix them together?</p>
+      <p><b>Pan</b>: Sends the delay more to the right or left. Zero balances
+it in the middle.</p>
+      <p><b>Delay</b>: Amount of time before you hear the echo.</p>
+      <p><b>L/R Delay.</b>: Left/Right delay difference. A setting of 64 means
+that the delay time is the same for left and right channels. If larger
+than 64, the right channel is delayed longer than the left channel.
+Less than 64 the reverse is true. This allows you to achieve the stereo
+'Ping Pong' effect.</p>
+      <p><b>L/R Cross</b>: Left/Right Crossing. This mixes left and right
+channels.</p>
+      <p><b>Feedback</b>: How much of the delayed output to add to the
+input. This makes the echo regenerate, like it's bouncing around in a
+canyon.</p>
+      <p><b>Direct</b>: When is on, the effect only play the echoes.</p>
 
-<p>Two caveats:</p>
-
-<p>A) This does not make your Gibson Les Paul sound like a strat. It
-makes it sound like you put single coil pickups in your Les Paul. The
-Tone control helps to take off some of the lows so you can somewhat
-emulate different guitar body types.</p>
-
-<p>B) You have to adjust parameters for the "Origin" pickup in order to
-cancel the effects of the pickups you are actually using. Without good
-electronics lab test equipment, this is largely guesswork tuned into
-range by your ears. If it sounds good, then who cares if it's
-technically right.</p>
-
-
-<p><b>Gain</b>: Volume control</p>
-
-<p><b>Tone</b>: Simple low cut</p>
-
-<p><b>Origin</b>: Pickups you are using. This will "undo" your pickup's
-response.</p>
-
-<p><b>Freq 1</b>: Resonant frequency of origin pickup.</p>
-
-<p><b>Q 1</b>: Resonance of origin pickup.</p>
-
-<p><b>Destiny</b>: This is the type of pickup you wish to emulate.</p>
-
-<p><b>Freq 2</b>: Resonant frequency of desired pickup response.</p>
-
-<p><b>Q 2</b>: Resonance of desired pickup.</p>
-
-<p><b>Neck Pickup</b>: Uses harmonic exciter to emulate switching to neck position pickup.</p>
-
-</td></tr></tbody>
+      <p><b>Damp</b>: Low pass filter on the delayed signal. This rolls off
+the high frequencies on every regeneration. Setting to a higher level
+will make the echo sound more natural. </p>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
 
-<p><a href="help.html">Table of Contents</a></p>
-
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
 <h3><a name="Echotron"></a>Echotron</h3>
 <table cellpadding="5" cellspacing="2">
@@ -1203,36 +983,233 @@ don't confuse it with other kinds of text files. </p>
 </table>
 
 <p><a href="effects.html">Effects</a></p>
-<p><a href="help.html">Table of Contents</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
-<h3><a name="CompBand"></a>CompBand</h3>
-<br>
+<h3><a name="Echoverse"></a>Echoverse</h3>
 
 <table cellpadding="5" cellspacing="2">
-
 <tbody><tr><td style="vertical-align: top;">
-      <p><img style="width: 185px; height: 250px;" src="imagenes/cpb.jpg" alt="rakarrack CompBand"></p>
-      </td><td style="background-color: rgb(251, 251, 251); vertical-align: top;">
-      <p>CompBand</p>
-<p>Is Four band Compressor, using the Compressor effect, the Dry/Wet
-parameter is included&nbsp; for&nbsp; mastering purposes,&nbsp;
-probably if you use with a single instrument you will want to hear the
-Wet. </p>
-
-<p>Four bands are availables&nbsp; L(Low), ML (Mid Low), MH (Mid High), H
-(High). You can control the ratio and threshold for each one of this
-bands.</p>
-<p>The Cross Sliders is to determine the frequency range of&nbsp; each band in the
-form:</p>
-
-<p>0-&gt; Cross1 = Low</p>
-<p>Cross1-&gt;Cross2 = Mid Low</p>
-<p>Cross2-&gt;Cross3 = High Low</p>
-<p>Cross3-&gt;26 KHz = High</p>
+      <p><img src="imagenes/ecv.jpg" alt="rakarrack Echoverse"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      
+      <p>Echoverse</p>
+<p>This effect is intended to be an "in your face" wall of sound.<br>
+This has been adapted from the normal "Echo" effect, but with some
+modifications that help improve the sound and behavior.  With
+Dry/Wet mix, you will  notice it is possible to get 100% wet
+(echoes only).  The reverse is a little more "clean".  More
+importantly, this effect synchronizes to master Tempo, and is
+responsive to TapTempo control.</p>
+<p>SubDivision allows you to divide delay times to 2,3,4... beats per
+measure.  Also added is "Extra Stereo" effect that makes the
+effect come alive in 3D space (assuming you're amplifying or recording
+in stereo).</p>
+<p><b>Dry/Wet</b>: Direct/Reverberant mix. It's like
+changing the distance you are located from the sound source.</p>
+<p><b>Reverse</b>: Same as Echo</p>
+<p><b>Pan</b>: Move the effect to the left or right</p>
+<p><b>Tempo</b>: Beats per minute.  This is synchronized to TapTempo when
+active.</p>
+<p><b>L/R Delay</b>: Difference between left channel and right channel delay
+times.</p>
+<p><b>Feedback</b>: Other descriptive words are Repeat, Regen or
+Tail.</p>
+<p><b>SubDivision</b>: Delay time can by synchronized to the length of
+a musical measure subdivision.  For example, the image to the left
+indicates delay time is set to 1/2 notes of a song played at a Tempo of
+90 beats per minute. </p>
+<p><b>Damp</b>: High frequency damping.</p>
+<p><b>Ex Stereo.</b>: Extra Stereo.  This is the amount of the effect
+applied.</p>
+<p><b>Angle</b>: This is the angle from which the sound appears to be coming.</p>
 </td></tr></tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="eql"></a>EQ Lineal</h3>
+<table border="0" cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/eq.jpg" alt="rakarrack Lineal EQ" align="bottom" border="1" height="250" width="185"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Adapted from the ZynAddSubFX Equalizer.</p>
+      <p>Gain: Overall output level</p>
+      <p><b>Q</b>: Resonance of individual filters. Generally helps smooth
+extreme settings...or make extreme settings yet more extreme.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="Exciter"></a>Exciter</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/ex.jpg" alt="rakarrack Exciter"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>New Effect based on Harmonic, Steve Harris
+LADSPA
+plugin.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
 <p><a href="help.html">Table of Contents</a></p>
+
+<h3><a name="Expander"></a>Expander</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/exp.jpg" alt="rakarrack Expander"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>The
+primary purpose for this effect is to offer a differently natured Noise
+Gate than the "Noise Gate" module.  The turn-on characteristic is
+modeled after that of a BJT transistor, thus it behaves more similarly
+to an analog noise gate.  It is likely that Expander uses less CPU
+resources than Noise Gate, but neither are very resource intensive
+modules.</p>
+<p>The basic behavior is the louder you play, the louder it gets until it
+gets pinned at the maximum "Level".  As a noise gate, the volume
+is exponentially increased in the lower volume levels until Threshold,
+at which point the gate is entirely open.</p>
+<p>To use the effect as an expander, it is best to set the threshold at
+higher levels, and shape at moderate levels (less than 10). Short
+attack/release times in this mode will cause it to work much like one
+would expect from a dynamics expander.  In this mode it is
+essentially a compressor in reverse.</p>
+<p>To take the idea of expander a little further, one can set long attack
+times and short release times to achieve a string swell effect akin to
+adjusting the volume pot on the guitar...only the effect does it
+automatically for you.</p>
+<p>Finally, the filters may be used for a bit of frequency shaping before
+a distortion effect, or used in front of the Compressor to help brighten
+the tone.</p>
+
+      <p><b>A. Time</b>: Attack Time, time to open the gate</p>
+      <p><b>R. Time</b>: Release Time, time it takes the gate to return to off
+      state</p>
+      <p><b>Shape</b>: Gate transition
+shape.  Large number means gate turns on suddenly at
+threshold.  Small number means gate gradually turns on Noise
+suppression is best at higher numbers, but the gradual expansion above
+the threshold can be a more musical way for gate  to turn on.</p>
+      <p><b>Thrhold</b>: Threshold. 
+The gate is reducing signal volume below this level.  Moderate
+threshold setting with smaller number for shape is useful for string
+swell effects.</p>
+      <p><b>Level</b>: Boost the output. 1 ... 127 represents a fractional increase in volume
+from 0dB to 20dB</p>
+      <p><b>HPF</b>: High Pass Filter</p>
+      <p><b>LPF</b>: Low Pass Filter</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="flan"></a>Flanger</h3>
+
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td>
+      <p><img src="imagenes/flanger.jpg" alt="rakarrack Flanger" align="bottom" border="1" height="250" width="185"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251); vertical-align: top;">
+      <p>Adapted from the ZynAddSubFX Chorus</p>
+      <p><b>Intense</b>: Increase effect intensity.  A digital Flanger or
+      Chorus uses a delay line with several hundred to several thousand
+      taps.  When it changes taps to modulate the delay time, there is a
+      discontinuous change in the signal called "zipper noise".  To
+      eliminate this, fractional delay times need to be calculated in order
+      to smoothly transition from one delay line tap to the next.  The
+      default Rakarrack Phaser and Chorus use linear interpolation.  This
+      mode makes use of a Lagrange interpolation polynomial to estimate
+      fractional delay times and some other tricks to maximize the flanger
+      depth and flatten the frequency response on the chorus.  Adding the
+      mode switch adds the feature without breaking old presets.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="har"></a>Harmonizer</h3>
+
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/har.jpg" alt="rakarrack Harmonizer" align="bottom" border="1" height="250" width="185"></p>
+      </td>
+      <td style="background-color: rgb(251, 251, 251);">
+      <h3>Intelligent Harmonizer Explained</h3>
+      <p>Rakarrack harmonizer effect use the audio
+engine of the smbPtichShifter.cpp located at
+http://www.dspdimension.com. In order to save CPU use only a mono
+pitch-shifter in the lowest quality available, you can change this on
+the program <a href="#settings">Settings</a> window, but only for a
+low quality values because high quality ones use too much CPU. The
+audio signal converted to mono is send it to the pitch-shifter and
+returned to the two pole Peak filter, panned and send it to both
+channels L/R. The rakarrack Harmonizer has 3 modes:</p>
+      <h4>Normal Mode</h4>
+      <p>Is how a normal pitchshifter run, the pitch
+ratio is fixed and can be selected in the <b>Interval</b> effect
+parameter of the effect.</p>
+      <h4>Select Mode</h4>
+      <p>In this mode the pitch ratio is variable, this
+value depends of the selected <b>Interval</b> parameter, and the <b>Note</b>
+and <b>Chord</b> effect parameters. Rakarrack then recognize the audio
+note played (Only "melodies" monophonic data can be played in this
+mode) and modifies the pitch ratio in order to do a musical
+harmonization with the Tonality/Chord selected in the parameters, of
+course the twelve tonality's are available and 33 chords:</p>
+      <p>,6,Maj7,lyd,Maj(9),Maj7(9),6/9,+,m,m6,m7,m7(b5),m9,m7(9),m7(11)<br>
+,m(Maj7),m(Maj7)(9),dim,dim7,7,7(Sus4),7(b5),7(9),7(#11),7(13),7(b9)<br>
+,7(b13),7(#9),+Maj7,+7,1+8,1+5,(Sus4),2</p>
+      <h4>MIDI Mode</h4>
+      <p>This mode run in the same way as <b>Select
+Mode</b> but the Tonality/Chord is recognized via MIDI notes, the MIDI
+chord recognizer recognizes all the above chords plus all the
+inversions and bass changed chords, also has memory, they use the chord
+just another chord is send it and recognized. The MIDI channel can be
+selected in the <a href="#settings">Settings</a> window, then the
+Harmonizer adjust the pitch ratio with the audio note recognized,
+played by the user, and the Tonality/Chord received via MIDI.
+(Sequencer track ... )</p>
+    </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
 
 <h3><a name="Infinity"></a>Infinity</h3>
 <br>
