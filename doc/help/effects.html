@@ -1111,11 +1111,11 @@ shape.  Large number means gate turns on suddenly at
 threshold.  Small number means gate gradually turns on Noise
 suppression is best at higher numbers, but the gradual expansion above
 the threshold can be a more musical way for gate  to turn on.</p>
-      <p><b>Thrhold</b>: Threshold. 
+      <p><b>Threshold</b>: 
 The gate is reducing signal volume below this level.  Moderate
 threshold setting with smaller number for shape is useful for string
 swell effects.</p>
-      <p><b>Level</b>: Boost the output. 1 ... 127 represents a fractional increase in volume
+      <p><b>Out Gain</b>: Boost the output. 1 ... 127 represents a fractional increase in volume
 from 0dB to 20dB</p>
       <p><b>HPF</b>: High Pass Filter</p>
       <p><b>LPF</b>: Low Pass Filter</p>
@@ -1465,9 +1465,6 @@ types of destructive interference between filter bands.  For the
 more technically minded, you can dust off your filter cookbook and tune
 in to a wide variety of filter responses.  This can also be used
 as a sort of parametric EQ or tone stack.</p>
-<p><b>Rnd</b>: Adds some randomized "noise" to the LFO to help make it sound less
-mechanical.</p>
-<p><b>St.df</b> : Stereo difference of LFO.</p>
 <p><b>Stg</b>: Stages. Each filter stage is a second order
 filter.  "Stg" sets the number of filters in series.  The
 number of stages will improve the amount of rejection above/below the
@@ -1503,17 +1500,19 @@ that sound good to you, and forget about the technical details of why.</p>
 Positive number means the filter center frequency sweeps upwared, negative
 means it sweeps downward.  Zero means the filter does not respond to
 dynamics of the input.</p>
-
-<p><b>Smooth</b>:  Smooth the envelope detector shape.  This has no effect unless you
+<p><b>S</b>:  Smooth the envelope detector shape.  This has no effect unless you
 have E. Sens set to something other than zero.  If E. Sens is set to a
 useful level, then the Smooth parameter adjusts how quickly the filter
 center frequency responds to changes in signal dynamics.</p>
+<p><b>R</b>: Randomness. Adds some randomized "noise" to the LFO to help make it sound less
+mechanical.</p>
+<p><b>D</b> : LFO L/R Delay. Stereo difference of LFO.</p>
+<p><b>St. Freq</b>: Starting frequency.
 
 <p><b>M</b>: Analog gain mode.
 <p><b>N</b>: Exponential wah.
 <p><b>R</b>: Modulate resonance.
 
-<p><b>St. Freq</b>: Starting frequency.
 
 </td>
 </tr>
@@ -1604,6 +1603,8 @@ pulses.</p>
 <p><b>LFO Type</b>: The shape you want it to use.</p>
 <p><b>Stereo Df</b>: Stereo difference between left and right LFO's.</p>
 <p><b>Pan</b>: The effect can be panned to the left or to the right.</p>
+<p><b>Invert</b>: If checked it behaves more like a tube preamp trem.
+If un-checked it behaves like a StompBox Opto Trem.</p>
 </td></tr></tbody>
 </table>
 <p><a href="effects.html">Effects</a></p>
@@ -2281,7 +2282,7 @@ increases.  Adjust anywhere from mild compression to a more extreme
       <p><b>Tempo</b>: The filter can be modulated by an LFO.  This sets the
        rate.</p>
       
-      <p><b>Random</b>: Adds some randomized "noise" to the LFO to help make it sound less
+      <p><b>R</b>: Randomness. Adds some randomized "noise" to the LFO to help make it sound less
       mechanical.</p>
       
       <p><b>LFO Type</b>:  The shape of LFO you wish to use.</p>
