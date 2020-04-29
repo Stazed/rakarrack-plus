@@ -396,7 +396,7 @@ set in <a href="#bprefs">Bank preferences</a>.</p>
 
 <p><img src="imagenes/bank_mgmt.jpg" alt="rakarrack Bank Window" align="bottom" border="1" height="500" width="640"></p>
 
-<p>At the top of the Bank windows, the tittle bar shows the loaded bank.
+<p>At the top of the Bank windows, the title bar shows the loaded bank.
 Click on the individual preset buttons or use the preset counter in the Preset
 section to change the preset. The hot keys '+' and '-' can also be used to cycle
 through the presets.</p>
@@ -504,10 +504,11 @@ may prove to be a useful tool.</p>
 <p><b>+6dB Final Limiter</b></p>
 <p>This option add 6 dB to the final chain Limiter output signal.</p>
 
-<p><b>Upsampling</b></p>
-<p>Enable upsampling using libsamplerate.  With this enabled, Rakarrack will
+<p><b>Master Upsampling</b></p>
+<p>Enable upsampling using libsamplerate. This is the master upsampling that
+will affect all sound processing. With this enabled, Rakarrack will
 process the effects with a higher sample rate than received from the
-sound card.  All the resample parameters will take effect the next time you
+sound card.  The master upsample parameters will take effect the next time you
 launch rakarrack. Enabling upsampling in Rakarrack will use a lot more computer
 CPU resources, and will result in very professional sounding effects.
 Take care to adjust all the upsampling settings in small

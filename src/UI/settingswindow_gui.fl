@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -304,7 +304,7 @@ m_rkr->change_scale = 1; // true}
       Fl_Box loop_Label {
         label {Looper Size Seconds}
         user_data 7
-        xywh {30 210 136 17} labelsize 12 align 20 when 0
+        xywh {30 211 136 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -321,7 +321,7 @@ m_rkr->m_displayed=1;
       Fl_Box loop_metro_Label {
         label {Looper Metro Volume}
         user_data 7
-        xywh {30 237 136 17} labelsize 12 align 20 when 0
+        xywh {30 237 136 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -349,7 +349,7 @@ m_rkr->efx_Looper->setmvol(m_rkr->Metro_Vol);}
       Fl_Box Calibration_Label {
         label {Tuner Calibration A4}
         user_data 7
-        xywh {30 280 136 17} labelsize 12 align 20 when 0
+        xywh {30 283 136 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -372,10 +372,10 @@ m_rkr->RingRecNote->trigfact = o->value();}
         class RKR_Counter
       }
       Fl_Check_Button UPSAMPLE_C {
-        label Upsampling
+        label {Master Upsampling}
         callback {m_rkr->upsample=(int)o->value();
 m_rgui->Show_Next_Time();}
-        xywh {30 175 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8 when 1
+        tooltip {Check to Activate Master Upsampling} xywh {30 175 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8 when 1
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
@@ -384,7 +384,7 @@ m_rgui->Show_Next_Time();}
         callback {m_rkr->UpAmo =(int) o->value();
 
 m_rgui->Show_Next_Time();}
-        xywh {200 175 47 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
+        xywh {241 175 47 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->set_label_offset(1);}
         class RKR_Choice
       } {
@@ -438,7 +438,7 @@ m_rgui->Show_Next_Time();}
         callback {m_rkr->UpQual =(int) o->value();
 
 m_rgui->Show_Next_Time();}
-        xywh {272 175 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
+        xywh {313 175 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->set_label_offset(1);}
         class RKR_Choice
       } {
@@ -468,7 +468,7 @@ m_rgui->Show_Next_Time();}
         callback {m_rkr->DownQual =(int) o->value();
 
 m_rgui->Show_Next_Time();}
-        xywh {384 175 73 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
+        xywh {425 175 73 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
         class RKR_Choice
@@ -476,14 +476,14 @@ m_rgui->Show_Next_Time();}
       Fl_Box note_trig_Label {
         label {Note Trigger}
         user_data 7
-        xywh {30 310 136 17} labelsize 12 align 20 when 0
+        xywh {30 312 136 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
       Fl_Box Recognize_Label {
         label {Recognize Note Optimization}
         user_data 7
-        xywh {30 360 176 17} labelsize 12 align 20 when 0
+        xywh {30 360 176 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -512,7 +512,7 @@ switch(m_rkr->RCOpti_Harm)
     	break;
 
 }}
-        xywh {206 360 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
+        xywh {216 360 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
         class RKR_Choice
       } {
         MenuItem {} {
@@ -553,7 +553,7 @@ switch(m_rkr->RCOpti_Stereo)
     	break;
 
 }}
-        xywh {300 360 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
+        xywh {312 360 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
         code0 {o->menu(menu_RC_Harm_Opti);}
         class RKR_Choice
       } {}
@@ -582,7 +582,7 @@ switch(m_rkr->RCOpti_Ring)
     	break;
 
 }}
-        xywh {390 360 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
+        xywh {408 360 72 18} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1 textsize 10 textcolor 7
         code0 {o->menu(menu_RC_Harm_Opti);}
         class RKR_Choice
       } {}
@@ -598,7 +598,7 @@ switch(m_rkr->RCOpti_Ring)
       Fl_Box Har_Q_Label {
         label {Harmonizer Quality}
         user_data 7
-        xywh {30 49 136 17} labelsize 12 align 20 when 0
+        xywh {30 49 136 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -671,7 +671,7 @@ update_sequence_quality();} open
       Fl_Box Sharm_Q_Label {
         label {StereoHarm Quality}
         user_data 7
-        xywh {30 76 136 17} labelsize 12 align 20 when 0
+        xywh {30 76 136 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -729,7 +729,7 @@ update_shifter_quality();} open
       Fl_Box Voc_Band_Label {
         label {Vocoder Bands}
         user_data 7
-        xywh {30 104 136 17} labelsize 12 align 20 when 0
+        xywh {30 104 136 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -786,7 +786,7 @@ update_vocoder_quality();}
       Fl_Box Harm_Label {
         label {Harmonizer Downsample}
         user_data 7
-        xywh {30 140 156 15} labelsize 12 align 20 when 0
+        xywh {30 140 156 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -861,7 +861,7 @@ update_harmonizer_quality();} open
       Fl_Box Rev_Label {
         label {Reverbtron Downsample}
         user_data 7
-        xywh {30 170 156 17} labelsize 12 align 20 when 0
+        xywh {30 170 156 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -896,7 +896,7 @@ update_revtron_quality();} open
       Fl_Box con_Label {
         label {Convolotron Downsample}
         user_data 7
-        xywh {30 200 156 17} labelsize 12 align 20 when 0
+        xywh {30 200 156 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -931,7 +931,7 @@ update_convo_quality();} open
       Fl_Box seq_Label {
         label {Sequence Downsample}
         user_data 7
-        xywh {30 230 156 17} labelsize 12 align 20 when 0
+        xywh {30 230 156 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -963,7 +963,7 @@ update_sequence_quality();} open
       Fl_Box shi_Label {
         label {Shifter Downsample}
         user_data 7
-        xywh {30 260 156 17} labelsize 12 align 20 when 0
+        xywh {30 260 156 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -995,7 +995,7 @@ update_shifter_quality();} open
       Fl_Box Voc_Label {
         label {Vocoder Downsample}
         user_data 7
-        xywh {30 290 156 17} labelsize 12 align 20 when 0
+        xywh {30 290 156 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -1027,7 +1027,7 @@ update_vocoder_quality();} open
       Fl_Box Ste_Label {
         label {StereoHarm Downsample}
         user_data 7
-        xywh {30 320 156 17} labelsize 12 align 20 when 0
+        xywh {30 320 156 18} labelsize 12 align 20 when 0
         code0 {o->set_label_offset(2);}
         class RKR_Box
       }
@@ -1068,7 +1068,7 @@ update_stereoharm_quality();} open
         Fl_Box Dist_Label {
           label {Distortion Resampling}
           user_data 7
-          xywh {45 400 156 17} labelsize 12 labelcolor 7 align 20 when 0
+          xywh {45 400 156 18} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
           class RKR_Box
         }
@@ -1120,7 +1120,7 @@ update_distortion_quality();}
         Fl_Box Ovrd_Label {
           label {Overdrive Resampling}
           user_data 7
-          xywh {45 425 156 17} labelsize 12 labelcolor 7 align 20 when 0
+          xywh {45 425 156 18} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
           class RKR_Box
         }
@@ -1152,7 +1152,7 @@ update_overdrive_quality();}
         Fl_Box Dere_Label {
           label {Derelict Resampling}
           user_data 7
-          xywh {45 450 156 17} labelsize 12 labelcolor 7 align 20 when 0
+          xywh {45 450 156 18} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
           class RKR_Box
         }
@@ -1184,7 +1184,7 @@ update_derelict_quality();}
         Fl_Box DBand_Label {
           label {DistBand Resampling}
           user_data 7
-          xywh {45 475 156 17} labelsize 12 labelcolor 7 align 20 when 0
+          xywh {45 475 156 18} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
           class RKR_Box
         }
@@ -1216,7 +1216,7 @@ update_distband_quality();}
         Fl_Box Stomp_Label {
           label {StompBox Resampling}
           user_data 7
-          xywh {45 500 156 17} labelsize 12 labelcolor 7 align 20 when 0
+          xywh {45 500 156 18} labelsize 12 labelcolor 7 align 20 when 0
           code0 {o->set_label_offset(2);}
           class RKR_Box
         }
