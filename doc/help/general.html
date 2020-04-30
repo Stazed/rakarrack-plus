@@ -704,7 +704,7 @@ up/down, then 2x Waveshaper resample with linear up, fastest sinc down.</p>
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
 
-<h2>MIDI Preferences</h2>
+<h2><a name="midi"></a>MIDI Preferences</h2>
 <p><img alt="Settings MIDI" src="imagenes/settings2.jpg"></p>
 
 <p><b>Auto Connect MIDI In</b></p>
@@ -720,18 +720,19 @@ Qjackctl, Patchage, or other utilities to do so.</p>
 <p>Specify the MIDI Receive Channel for rakarrack. There are also specific channels
 to receive the MIDI Chords for the Harmonizer and Stereo Harmonizer.</p>
 
-<p><b>Midi Implementation</b></p>
+<h4><a name="midi-imp"></a>MIDI Implementation</h4>
 <p>The MIDI Implementation radio buttons select how
 rakarrack interprets the incoming MIDI Control messages. By default rakarrack
 uses the <a href="midiic.html">MIDI Implementation Chart</a>.
 If the MIDI Learn button is checked, the default
 tables will be ignored and the user created tables from <a href="midilearn.html">MIDI Learn</a> will be
-used.</p>
+used. In order to access the MIDI learn window you must first check the
+box for "MIDI Learn".</p>
 
-<p><b>Auto Assign MIDI Learn</b></p>
+<h4><a name="midi-auto"></a>Auto Assign MIDI Learn</h4>
 <p>If you enable this option you will not see the <a href="midilearn.html">MIDI Learn</a> window when
 you right click over a MIDI controllable effect parameter. The incoming MIDI
-control message will be assigned "automagically".
+control message will be assigned "automatically".
 
 <p><b>MIDI Program Change Table</b></p>
 <p>Use the scroll table to select the Bank/Preset you want when a MIDI Program change

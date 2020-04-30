@@ -21,36 +21,39 @@
 
 <h2><img alt="MIDI Learn window" src="imagenes/midilearn.jpg"></h2>
 
-<p>This is the MIDI Learn window, that brings the possibility to create
-a MIDI implementation table for each preset in the bank. You can see
-two browsers, one at the left with all the available effect parameters,
+<p>In order to access the MIDI learn window you must first check the
+box for "MIDI Learn" in <a href="general.html#midi">Settings/Preferences/MIDI</a>
+of the <a href="general.html#midi-imp">MIDI Implementation</a> section.</p>
+
+<p>The MIDI Learn window allows you to create a MIDI implementation
+table for each preset in a bank. There are two browsers,
+one at the left with all the available effect parameters,
 and another at the right with all the presets in the Bank.</p>
 
-<p> You can open this window clicking the rigth mouse over a effect
+<p> You can open this window clicking the right mouse over an effect
 parameter that can be controllable by MIDI. Also you can auto assign the
-incoming MIDI Control message "automagically" if you enbale on the
-settings.</p>
+incoming MIDI Control message "automatically" if you enable in
+<a href="general.html#midi">Settings/Preferences/MIDI</a> -
+<a href="general.html#midi-auto">Auto Assign MIDI Learn</a>.</p>
 
 <p>The radio buttons "All" and "Current" select the parameters listed in the
-browser, "Current" display only the actual preset parameters availables in
+browser. "Current" displays only the actual preset parameters available in
 MIDI learn.</p>
 
 <p>The most important thing here is the input box located below the
-parameter browser, here you can select the number of the MIDI Control
-Message, you can edit by hand, or selecting and dragging, or capturing
-an incoming MIDI message clicking on the Get MIDI Message button. When
-you have the desired control number you need to assign to the effect
-parameters, clicking on the button assign, this message will be engaged
-to the selected effect parameter on the browser.</p>
+parameter browser. The MIDI control message can be edited by selecting and dragging,
+or capturing an incoming MIDI message by clicking on the Get MIDI Message button.
+When the desired control number is selected, it must be assigned to the effect by clicking
+on the assign button. The MIDI control will then be assigned to the selected
+effect parameter on the browser.</p>
 
-<p>You can "Assign" up to 20 effects parameter for a single
-control number message, also you can use different control
+<p>You can "Assign" up to 20 effects parameters for a single
+control number message. Also you can use different control
 messages to manage only one effect parameter.</p>
-<p>The "Assign to All" <b>add</b> this
+<p>The "Assign to All" <b>adds</b> this
 single assignment to all the presets in the bank, preserving
-everything that you have previously assigned in all the presets,
-contrary to what is doing in the "Copy to All" button that overwrite
-all the assignments.</p>
+everything that you have previously assigned in all the presets.
+The "Copy to All" button that overwrites all the assignments.</p>
 
 
 <p>The grid boxes in the middle display the engaged MIDI
