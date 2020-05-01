@@ -8,12 +8,12 @@
   
    scp help.html raboofje,rakarrack@web.sourceforge.net:htdocs
 -->
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack-plus Help
   General</title>
   <meta name="AUTHOR" content="Josep Andreu">
   <meta name="CREATED" content="0;0">
   <meta name="CHANGED" content="20100112;22402500">
-  <meta name="DESCRIPTION" content="rakarrack help in html file"></head>
+  <meta name="DESCRIPTION" content="rakarrack-plus help in html file"></head>
   <body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
       <h3>General</h3>
       <p><a href="#cmd">Command line options</a> <a href="#screen">The Main Screen</a> 
@@ -21,7 +21,7 @@
       <a href="#settings">Preferences</a> <a href="#scuts">Shortcuts</a> 
       <a href="#session">Session Support</a>
 
-<p>RAKARRACK is a multi-effect processor for guitar players but the
+<p>RAKARRACK-PLUS is a multi-effect processor for guitar players but the
 signal processing engine allows a full range of parameter adjustment
 making it suitable for almost any audio processing task.
 Forty-seven effects are included in this version: Arpie, Cabinet, Chorus,
@@ -32,16 +32,16 @@ Overdrive, Pan, Parametric EQ, Phaser, Reverb, Reverbtron, Ring, Sequence,
 ShelfBoost, Shifter, Shuffle, StereoHarm, StompBox, Sustainer, Synthfilter,
 Valve, VaryBand, Vibe, Vocoder, WahWah .</p>
 <p>Ten can be used simultaneously on a chain.</p> 
-<p>Also Rakarrack has a Tuner and a monophonic MIDI
+<p>Also Rakarrack-plus has a Tuner and a monophonic MIDI
 Converter and other features like resampling and Tap Tempo.</p> 
-<p>Rakarrack can be managed externally by MIDI. The program receives Program Change and parameters 
+<p>Rakarrack-plus can be managed externally by MIDI. The program receives Program Change and parameters 
 can be controlled from Control Change MIDI messages.</p>
 
 <p>The above effects and the MIDIConverter are included as LV2 plugins with the package. In
 addition, the Harmonizer and StereoHarm LV2s have extra versions for both MIDI control and
 non-MIDI control.</p>
 
-<p>One of the most important things of RAKARRACK is that everything
+<p>One of the most important things of RAKARRACK-PLUS is that everything
 works on a single mouse click. All the effect parameters are on the
 screen.</p>
 
@@ -51,7 +51,7 @@ all the effects parameters. These presets can be grouped into banks
 to manage more efficiently. Saving a preset is as easy as typing a
 name.</p>
 
-<p>Rakarrack is capable of generating high volume output. It has Gain
+<p>Rakarrack-plus is capable of generating high volume output. It has Gain
 controls in general and some of the effects allow high gain
 adjustments. Use these gains with caution because they can produce
 unwanted effects. However, a limiter is applied to the final output
@@ -60,9 +60,9 @@ mind, for high gains triggering limiting in the output will initiate
 high-ratio hard-knee compression. This is better than hard clipping
 distortion, but the audio effect can be undesirable.</p>
 
-<p align="left">Rakarrack is a JACK application, Dave Phillips wrote
+<p align="left">Rakarrack-plus is a JACK application, Dave Phillips wrote
 some good articles in their blog on how to use Linux audio with jack.
-If you don't know about jack, or you have problems running rakarrack,
+If you don't know about jack, or you have problems running rakarrack-plus,
 please read this series of articles:</p>
 
 <p align="left"><a href="http://www.linuxjournal.com/node/1000244">Troubleshooting
@@ -79,7 +79,7 @@ Linux Audio, Part 3b</a></p>
 <h3>INSTALL</h3>
 
 <p>Please read the INSTALL, README and PACKAGERS.README files provided
-with rakarrack. You will find there a  list of required dependency
+with rakarrack-plus. You will find there a  list of required dependency
 packages and detailed configuration options.</p>
 
 
@@ -129,12 +129,12 @@ You have been warned.</p>
 
 <p><b>About Clipping and limiting.</b></p>
 
-<p>Rakarrack includes an output limiter to help you keep the signal at or below
+<p>Rakarrack-plus includes an output limiter to help you keep the signal at or below
 maximum recording levels.  There are two indicator lights along the top of
 the display to indicate when limiting and clipping is active.</p>
 
 <p><b>Lmt</b>   Limit.  This is the compressor part of the limiting function.  This
-lets you know when the Rakarrack output limiter is automatically reducing volume
+lets you know when the Rakarrack-plus output limiter is automatically reducing volume
 because the signal level is too high.</p>
 
 <p><b>Clip</b>  The output limiter is clipping the peaks of the signal.  Usually the
@@ -152,9 +152,9 @@ time.</p>
 
 <p>This is not an arbitrary limit.  This is at the limit where the input to a
 recording program such as Ardour or Qtractor will be too hot.  If it was not
-clipping in Rakarrack, it would be clipping in Ardour, and would be worse
+clipping in Rakarrack-plus, it would be clipping in Ardour, and would be worse
 sounding.  Most sound cards will physically clip on the hardware output at
-these levels.  The full range in Rakarrack will produce a full range signal
+these levels.  The full range in Rakarrack-plus will produce a full range signal
 swing.</p>
 
 
@@ -250,7 +250,7 @@ swing.</p>
       <p>Dump Bank preset names</p>
       </td>
     </tr>
-    <tr>
+<!--    <tr>
       <td>
       <p>-u uuid </p>
       </td>
@@ -260,7 +260,7 @@ swing.</p>
       <td>
       <p>set jack session uuid</p>
       </td>
-    </tr>
+    </tr> -->
     <tr>
       <td>
       <p>-j Name</p>
@@ -269,7 +269,7 @@ swing.</p>
       <p>--jack-client-name=Name</p>
       </td>
       <td>
-      <p>set alternate jack/alsa name: default=rakarrack</p>
+      <p>set alternate jack/alsa name: default=rakarrack-plus</p>
       </td>
     </tr>
   </tbody>
@@ -277,11 +277,11 @@ swing.</p>
 
 <h4>Examples:</h4>
 
-<p>rakarrack -l mypreset.rkr     Starts Rakarrack and
-load the preset file mypreset.rkr</p>
+<p>rakarrack-plus -l mypreset.rkr     Starts Rakarrack-plus and
+loads the preset file mypreset.rkr</p>
 
-<p>rakarrack -n -b mybank.rkrb    Starts Rakarrack
-without GUI and load the bank file mybank.rkrb</p>
+<p>rakarrack-plus -n -b mybank.rkrb    Starts Rakarrack-plus
+without the GUI and loads the bank file mybank.rkrb</p>
 
 
 <p><a href="general.html">General</a></p>
@@ -302,7 +302,7 @@ without GUI and load the bank file mybank.rkrb</p>
 <p>The connections shown in the screenshot correspond to a
 motherboard sound card. The guitar is connected to the input line.
 Obviously this configuration can vary depending of your sound card.
-RAKARRACK has two inputs to allow use of stereo devices. The
+Rakarrack-plus has two inputs to allow use of stereo devices. The
 screenshot shows the connection of a guitar, usually mono aural.</p>
 
 <p><img src="imagenes/jack_conections.jpg" alt="rakarrack Qjackctl Connect" align="bottom" border="1" height="313" vspace="10" width="562"></p>
@@ -311,7 +311,7 @@ screenshot shows the connection of a guitar, usually mono aural.</p>
 
 <p>The state of the rack can be saved to a file at any
 time, either pressing the "Save" buttons or via the menu
-File-&gt;Save Preset. Rakarrack suggest the preset name for the
+File-&gt;Save Preset. Rakarrack-plus suggests the preset name for the
 filename.rkr in the save operation, but you can put what you want.
 You can assign the preset name here:</p>
 
@@ -319,7 +319,7 @@ You can assign the preset name here:</p>
 
 <p>If the user modifies any preset bank, The "compare"
 button allows you to compare the sound of the current state of
-rakarrack with the original bank preset from which it departed.</p>
+rakarrack-plus with the original bank preset from which it departed.</p>
 
 <p>You can use banks to store groups of presets. Sixty presets can be
 saved on a bank. To include a preset in a bank you must first indicate
@@ -375,12 +375,12 @@ you wish to overwrite it.</p>
 
 
 
-<p>When rakarrack starts it will load the last bank used from the previous session
+<p>When rakarrack-plus starts it will load the last bank used from the previous session
 unless you specify another bank on the <a href="#cmd">command line</a>.
 You can also load/save any bank from the menu File. By default, the
 installation included banks are installed with root privileges and cannot be overwritten.
 They are installed in the data directory selected during the configure process,
-normally in "/usr/share/rakarrack" or "/usr/local/share/rakarrack".
+normally in "/usr/share/rakarrack-plus" or "/usr/local/share/rakarrack-plus".
 These banks, Default.rkrb, Extra.rkrb and Extra1.rkrb should be copied to another
 location if you wish to modify them.
 The banks contain default presets developed by <a href="#autores">the
@@ -458,9 +458,9 @@ default width X height scale. This may give better results for font resizing
 in some cases. Un-check to allow full resize capability.
 
 <p>The Skin save/load menu options located in the main
-menu, save or restore the rakarrack look. If you have made a nice look
+menu, save or restore the rakarrack-plus look. If you have made a nice look
 and you want to share, please send this file and the background picture
-to any of the rakarrack team members and it will be included on the website.</p>
+to any of the rakarrack-plus team members and it will be included on the website.</p>
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
@@ -489,7 +489,7 @@ Tap Tempo value/settings. By default, the saved Tempo settings from the preset a
 used.</p>
 
 <p><b>Limiter before Output Volume</b></p>
-<p> Rakarrack uses an invisible end chain Limiter to limit the output signal
+<p> Rakarrack-plus uses an invisible end chain Limiter to limit the output signal
 level. This option puts the limiter before the Output Volume slider.</p>
 <p>The Limiter is a hard-knee compressor with a fast attack time followed by
 peak clipping.  It is best to leave this as default since it will have no
@@ -506,10 +506,10 @@ may prove to be a useful tool.</p>
 
 <p><b>Master Upsampling</b></p>
 <p>Enable upsampling using libsamplerate. This is the master upsampling that
-will affect all sound processing. With this enabled, Rakarrack will
+will affect all sound processing. With this enabled, Rakarrack-plus will
 process the effects with a higher sample rate than received from the
 sound card.  The master upsample parameters will take effect the next time you
-launch rakarrack. Enabling upsampling in Rakarrack will use a lot more computer
+launch rakarrack-plus. Enabling upsampling in Rakarrack-plus will use a lot more computer
 CPU resources, and will result in very professional sounding effects.
 Take care to adjust all the upsampling settings in small
 increments because you can hang your computer if your main processor can not
@@ -631,9 +631,9 @@ for the upsampling procedure.</p>
 
 <p><b>Looper Size Seconds</b></p>
 <p>Is the size in seconds of the buffer for the Looper effect. The memory is
-allocated when Rakarrack starts, so you will need to restart Rakarrack for
+allocated when Rakarrack-plus starts, so you will need to restart Rakarrack-plus for
 this to take effect.  If you do not plan to use the Looper, then make this a
-small number so Rakarrack does not hog memory you are not going to use.</p>
+small number so Rakarrack-plus does not hog memory you are not going to use.</p>
 
 <p><b>Looper Metronome Volume</b></p>
 <p>This is to adjust the Looper Metronome Volume</p>
@@ -659,7 +659,7 @@ the specified frequency range of various instruments</p>
 <p><img alt="Settings Quality" src="imagenes/settings6.jpg"></p>
 
 <p>All settings on the Quality tab are now immediate. There is no
-longer a need to restart Rakarrack for the settings to take affect.
+longer a need to restart Rakarrack-plus for the settings to take affect.
 The process of changing the quality settings is NOT real-time safe.
 For this reason, all effect processing must be bypassed briefly during
 the quality change. If a sound is being played during the change you
@@ -709,20 +709,20 @@ up/down, then 2x Waveshaper resample with linear up, fastest sinc down.</p>
 
 <p><b>Auto Connect MIDI In</b></p>
 <p>Check this box if you want to auto connect the ALSA
-rakarrack MIDI IN to another device when the program starts. Use the scroll
+rakarrack-plus MIDI IN to another device when the program starts. Use the scroll
 window to select the device you wish to connect with. The devices selected will
-auto connect to MIDI IN when rakarrack is first started. Connections made when
-rakarrack is running will be immediate and set as startup connections.
+auto connect to MIDI IN when rakarrack-plus is first started. Connections made when
+rakarrack-plus is running will be immediate and set as startup connections.
 If you wish to make connections that are not auto connected on start, use
 Qjackctl, Patchage, or other utilities to do so.</p>
 
 <p><b>Midi Channels</b></p>
-<p>Specify the MIDI Receive Channel for rakarrack. There are also specific channels
+<p>Specify the MIDI Receive Channel for rakarrack-plus. There are also specific channels
 to receive the MIDI Chords for the Harmonizer and Stereo Harmonizer.</p>
 
 <h4><a name="midi-imp"></a>MIDI Implementation</h4>
 <p>The MIDI Implementation radio buttons select how
-rakarrack interprets the incoming MIDI Control messages. By default rakarrack
+rakarrack-plus interprets the incoming MIDI Control messages. By default rakarrack-plus
 uses the <a href="midiic.html">MIDI Implementation Chart</a>.
 If the MIDI Learn button is checked, the default
 tables will be ignored and the user created tables from <a href="midilearn.html">MIDI Learn</a> will be
@@ -736,7 +736,7 @@ control message will be assigned "automatically".
 
 <p><b>MIDI Program Change Table</b></p>
 <p>Use the scroll table to select the Bank/Preset you want when a MIDI Program change
-message is received (0~127). If the option is disabled rakarrack will only
+message is received (0~127). If the option is disabled rakarrack-plus will only
 recognize program change (1~60) in the current bank. Use the Save and Load
 buttons for saving and loading multiple user defined program change tables.</p>
 
@@ -748,11 +748,11 @@ buttons for saving and loading multiple user defined program change tables.</p>
 <p><img alt="Settings Jack" src="imagenes/settings3.jpg"></p>
 
 <p><b>Jack auto connection ports</b></p>
-<p>Select the "Auto Connect Out" box if you want to automatically connect the rakarrack Output.</p>
-<p>Select the "Auto Connect In" box if you want to automatically connect the rakarrack Input.</p>
+<p>Select the "Auto Connect Out" box if you want to automatically connect the rakarrack-plus Output.</p>
+<p>Select the "Auto Connect In" box if you want to automatically connect the rakarrack-plus Input.</p>
 <p>Select the ports to be connected by left mouse click on the ports listed.
     Shift click for multiple ports.</p>
-<p>If you select a single Input port, it will be connected to the both rakarrack Input Ports.</p>
+<p>If you select a single Input port, it will be connected to the both rakarrack-plus Input Ports.</p>
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
@@ -781,7 +781,7 @@ be included in future versions, send it to this address
 will shut off if no (tap) input is received for 8 seconds after the last signal.</p>
 
 <p><b>Enable Tooltips</b></p>
-<p>Check this box to enable rakarrack tooltips.</p>
+<p>Check this box to enable rakarrack-plus tooltips.</p>
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a></p>
@@ -792,7 +792,7 @@ will shut off if no (tap) input is received for 8 seconds after the last signal.
 <p>Specify the directory and file for the bank file to be loaded and
 associated to the "U" button when the program starts.</p>
 <p><b>User Directory</b></p>
-<p>Specify the directory where rakarrack should look for user banks that
+<p>Specify the directory where rakarrack-plus should look for user banks that
 will be displayed in the Bank Window "User Banks" scroll choice.</p>
 
 <p><a href="general.html">General</a></p>
@@ -801,7 +801,7 @@ will be displayed in the Bank Window "User Banks" scroll choice.</p>
 
 <h3><a name="scuts"></a>Shortcuts</h3>
 
-<p>The following keyboard shortcuts are available from the main rakarrack window.</p>
+<p>The following keyboard shortcuts are available from the main rakarrack-plus window.</p>
 
 <table bgcolor="#fbfbfb" border="1" cellpadding="2" cellspacing="2">
 
@@ -812,7 +812,7 @@ will be displayed in the Bank Window "User Banks" scroll choice.</p>
     </tr>
     <tr>
       <td>R</td>
-      <td>Enable rakarrack</td>
+      <td>Enable rakarrack-plus</td>
     </tr>
     <tr>
       <td>T</td>
@@ -959,20 +959,20 @@ with the space bar keys.</p>
 
 <h3><a name="session"></a>Session Support</h3>
 
-<p>Rakarrack supports Jack session management and SIGUSR1 & SIGINT signal capture.
+<p>Rakarrack-plus supports Jack session management and SIGUSR1 & SIGINT signal capture.
 For session management, only the active current preset is saved per session. Use
 SIGUSR1 for preset saving and SIGINT to quit without saving. LADISH and Non Session
 Manager (NSM) are able to send SIGUSR1 and SIGINT signals. For signal capture, use the
 <a href="#cmd">Command line options</a> -p preset option to set the file to save.
 For NSM use the NSM Proxy to set command line options.</p>
 
-<p>Rakarrack supports multiple occurrences of the program. By default jack will
+<p>Rakarrack-plus supports multiple occurrences of the program. By default jack will
 name each occurrence with the same name by appending the occurrence number to
-the name: ex "rakarrack-01". For NSM support, using multiple occurrences, the 
+the name: ex "rakarrack-plus-01". For NSM support, using multiple occurrences, the 
 manager will not always start each occurrence in the same order for each session.
 This will result in occasional incorrect jack connections being made from different
 sessions. To solve this problem, use the Command line option "-j Name" to set the
-rakarrack client name to a unique id for each occurrence.</p>
+rakarrack-plus client name to a unique id for each occurrence.</p>
 
 
 
