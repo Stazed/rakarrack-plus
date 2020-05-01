@@ -37,15 +37,17 @@ If you want to compile you will also need the development packages:
 
 To build both rakarrack-plus and LV2s:
 From top checkout directory:
+```bash
     mkdir build
     cd build
     cmake ..
     make
     make install (as root)
-    
+```
 To remove:
+```bash
     make uninstall (as root)
-
+```
 Carla presets can be generated and installed by setting the "BuildCarlaPresets"
 flag (OFF by default). Use:
 
