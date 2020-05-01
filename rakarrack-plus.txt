@@ -8,14 +8,12 @@ AlienWah
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCR - Left/Right Crossover
     Added Delay to MIDI control
 ---Done---
-FIXME Help .png
 
 Analog Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Added slider for Randomness
     Added Random to MIDI control
 ---Done---
-FIXME Help .png
 
 Arpie
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -23,7 +21,6 @@ Arpie
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr - Left/Right Crossover
     Added Default LV2 preset 'Tremolo'
 ---Done---
-FIXME Help .png
 
 Cabinet
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -36,7 +33,6 @@ Chorus
     Added Delay to MIDI control
     panning??
 ---Done---
-FIXME Help .png
 
 Coil Crafter
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -54,14 +50,12 @@ Compressor
 Convolotron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
 ---Done---
-FIXME Help .png
 
 Derelict (newdist)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr
     Set default LV2 to rakarrack
 ---Done---
-FIXME Help .png
 FIXME Pnegate not completed
 
 DistBand (MBDist)
@@ -70,22 +64,18 @@ DistBand (MBDist)
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |  LRCr
     Fixed Cross 1 & 2, L/M/H Gains for MC
 ---Done---
-FIXME Help .png
-FIXME check slight pop on Valve waveshape type.
 
 Distortion
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr
     panning?
 ---Done---
-FIXME Help .png
 
 Dual Flange
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Added LV2 Preset Dual Flange 2 - Done
     Fixed Depth and Width MC ranges.
 ---Done---
-FIXME Help .png
 
 Echo
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -93,14 +83,12 @@ Echo
     L/R Delay Offset (LRdl)     |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  LR_DELAY - Left/Right Delay Offset
     Added Reverse, Delay, L/R Delay, Damp to MIDI control.
 ---Done---
-FIXME Help .png
 
 Echotron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 64    |  STDF - LFO L/R Delay
     Added LV2 preset Soft - Done
 ---Done---
-FIXME Help .png
 
 Echoverse (RBEcho)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -108,7 +96,6 @@ Echoverse (RBEcho)
     Angle                       |   -64 to 64    |  -64 to 64    |   -64 to 64       |      -64 to 63    |  ANGLE
     Added LV2 default Echo 4 - Done
 ---Done---
-FIXME Help .png
 
 EQ
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -130,13 +117,12 @@ Flanger
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       --------    |  
     Added missing Delay to MIDI control
 ---Done---
-FIXME Help .png
 
 Harmonizer
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Add MIDI to LV2 - Done - MIDI version added
     Added Gain, F. Gain, Filter Q, SELECT to MIDI control
-FIXME Help .png
+---Done---
 
 Infinity
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -144,8 +130,6 @@ Infinity
     Added missing Filter Band level 1 - 8 to MIDI control
     Added override class to make handle() work for Fl_Value_Input, right click MIDI control.
 ---Done---
-FIXME Help .png
-FIXME inputW class needs to handle focus and up/down keyboard entry.
 
 Looper
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |  -------------    |      ----------   |
@@ -158,7 +142,6 @@ MusicalDelay
     Gain 2                      |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Added Tempo, Damp to MIDI control
 ---Done---
-FIXME Help .png
 
 MuTroMojo   (RyanWah)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -166,7 +149,6 @@ MuTroMojo   (RyanWah)
     Added LV2 default - wah fever as preset - done
     Added Random, Stereo Df, S. Freq to MIDI control. (New items exposed by LV2)
 ---Done---
-FIXME Help .png
 
 NoiseGate
     Wet/Dry                     |                |    none       |                   |       none        |
@@ -178,45 +160,38 @@ Opticaltrem
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDF - LFO L/R Delay
     Added LV2 default - slow as preset - done
 ---Done---
-FIXME Help .png
 
 Overdrive
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |     DISTORTION    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr
 ---Done---
-FIXME Help .png
 
 Pan
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     LFO L/R Delay  (St.df)      |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL - LFO L/R Delay
     Added E. Stereo to MIDI control
 ---Done---
-FIXME Help .png
 
 Parametric EQ
     Wet/Dry                     |                |    none       |                   |       none        |
     Mid Frequency (Mid F.)      |   800 to 8000  |  800 to 8000  |    800 to 8000    |   80 to 8000      |  MFREQ
     Fixed High F. MC range.
 ---Done---
-FIXME Help .png
 
 Phaser
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |   -64 to 63    |  -64 to 63    |     -64 to 63     |      -64 to 64    |  LRCR
 ---Done---
-FIXME Help .png
 
 Reverb
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Added Time, I. Del, Del. E/R, R. Size, Damping to MIDI control
 ---Done---
-FIXME Help .png
 
 Reverbtron
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Added Diffusion, LPF to MIDI control
 ---Done---
-FIXME Help .png
 
 Ring
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
@@ -229,20 +204,18 @@ Sequence
     Added LV2 default as preset - Sequence 11 - done
     Make Range a pop up menu like LV2 - done
 ---Done---
-FIXME Help .png
 
 ShelfBoost
     Wet/Dry                     |                |     none      |                   |         none      |
 ---Done---
 FIXME the Distortion 1 does not work for rakarrack, but does for LV2 - Limiter....
-FIXME Help .png
+
 
 Shifter
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Added LV2 default as preset - Shifter 6 - done
     Fixed Decay, Threshold MC ranges.
 ---Done---
-FIXME Help .png
 
 Shuffle
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
@@ -256,7 +229,7 @@ StereoHarm
     Added SELECT to MIDI control
 ---Done---
     Added MIDI LV2 version
-FIXME Help .png
+
 
 StompBox
     Wet/Dry                     |                |     none      |                   |          none     |
@@ -265,7 +238,7 @@ StompBox
     Added LV2 default to rakarrack and as preset - Amp 2 - done
     Removed StompBox Fuzz
 ---Done---
-FIXME Help .png
+
 
 Sustainer
     Wet/Dry                     |                |     none      |                   |          none     |
@@ -277,14 +250,13 @@ Synthfilter
     Added LV2 Default Lazy Wahble to presets - done
     Added Random to MIDI control
 ---Done---
-FIXME Help .png
+
 
 Valve
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
     Left/Right Cross (L/R.Cr)   |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |  LRCr - Left/Right Crossover
     Added LV2 Default Valve 4 to presets - done
 ---Done---
-FIXME Help .png
 
 VaryBand    (MBVvol)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -292,7 +264,6 @@ VaryBand    (MBVvol)
     LFO L/R Delay  (St.df)   2  |    0 to 127    |   0 to 127    |   0 to 127        |      -64 to 63    |  STDL2 - LFO L/R Delay 2
     Added LV2 default Vary 4 to presets - done
 ---Done---
-FIXME Help .png
 
 Vibe
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 128    |
@@ -301,14 +272,11 @@ Vibe
     Added LV2 Default Vibe 9 to presets - done
     Fixed Pan MC
 ---Done---
-FIXME Help .png
-FIXME - inline vs original ???
 
 Vocoder
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 64    |   0 to 127        |       0 to 127    |
     Added LV2 default Vocoder 5 to presets - done
 ---Done---
-FIXME Help .png
 
 WahWah  (DynamicFilter.C)
     Wet/Dry ---> Dry/Wet        |    0 to 127    |  -64 to 63    |   0 to 127        |       0 to 127    |
@@ -316,7 +284,6 @@ WahWah  (DynamicFilter.C)
     Added menu "MODE" - "Filter Type" Selection for rakarrack - done
     panning?
 ---Done---
-FIXME Help .png
 
 
 ___________________________________________________________________________________________________________________________________

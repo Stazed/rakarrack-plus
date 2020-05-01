@@ -6,7 +6,7 @@ This notice will be removed when updates are completed.
 
 
 
-To build both rakarrack and rkr.lv2:
+To build both rakarrack-plus and LV2s:
 From top checkout directory:
     mkdir build
     cd build
@@ -17,19 +17,18 @@ From top checkout directory:
 To remove:
     make uninstall (as root)
 
-The Carla presets originally included with rkr.lv2 are no longer included with
-the download. They can be generated and installed by setting the "BuildCarlaPresets"
+Carla presets can be generated and installed by setting the "BuildCarlaPresets"
 flag (OFF by default). Use:
 
     cmake -DBuildCarlaPresets=ON ..
 
-To build Rakarrack only set "BuildLV2Plugins" to OFF:
+To build Rakarrack-plus only set "BuildLV2Plugins" to OFF:
 
     cmake -DBuildLV2Plugins=OFF ..
     
-To build rkr.lv2 only set "BuildRakarrack" to OFF
+To build LV2s only set "BuildRakarrack-plus" to OFF
 
-    cmake -DBuildRakarrack=OFF ..
+    cmake -DBuildRakarrackPlus=OFF ..
 
 ---------------------------------------------------------------------------------
 
