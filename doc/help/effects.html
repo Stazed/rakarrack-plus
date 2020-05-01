@@ -12,11 +12,11 @@
 
 
 
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack Help Effects</title>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8"><title>Rakarrack-plus Help Effects</title>
   <meta name="AUTHOR" content="Josep Andreu">
   <meta name="CREATED" content="0;0">
   <meta name="CHANGED" content="20100112;22402500">
-  <meta name="DESCRIPTION" content="rakarrack help in html file"></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
+  <meta name="DESCRIPTION" content="rakarrack-plus help in html file"></head><body dir="ltr" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);" lang="en-US">
 
   <h2>EFFECTS</h2>
       <p>
@@ -56,8 +56,8 @@ chain.</p>
 
 <p> We don't want to cut the user creativity doing effects, but they are
 some good rules positioning effects, almost for the Noise Gate and the
-Expander if it's used to this purpose, as we say on the FAQ, rakarrack don't
-generate any noise, or not should :-), what rakarrack does is amplify the
+Expander if it's used to this purpose, as we say on the FAQ, rakarrack-plus don't
+generate any noise, or not should :-), what rakarrack-plus does is amplify the
 external noises, then for better control parameters to reduce this noises is a good
 rule put the Noise Gate or the Expander at the first position on the chain.
 
@@ -88,7 +88,7 @@ space bar keys.</p>
 <p>    For control the parameter values via MIDI see
 the <a href="#MIDI_Implementation_Chart">MIDI Implementation Chart</a> 
 for the complete list of MIDI message commands recognized, to easy
-control rakarrack with MIDI messages use the MIDI Learn way.</p>
+control rakarrack-plus with MIDI messages use the MIDI Learn way.</p>
 
 <h3>Saving preset considerations</h3>
 
@@ -196,7 +196,7 @@ right, right from left, while greater than 64 adds them.
 forget to spit after chewing that mouthful.</p>
       <p>When should you want to use Phaser instead?</p>
       <p>A) Next to the pitch shifter, Analog Phaser is one of the most
-CPU intensive FX in Rakarrack. If you find your computer can't handle
+CPU intensive FX in Rakarrack-plus. If you find your computer can't handle
 it, then Phaser is much more friendly to slow processors.</p>
       <p>B) You just plain like the original Phaser Effect and want to
 use it.</p>
@@ -379,7 +379,7 @@ modeling you can use Convolotron, but this cost a little bit of CPU resources.</
       discontinuous change in the signal called "zipper noise".  To
       eliminate this, fractional delay times need to be calculated in order
       to smoothly transition from one delay line tap to the next.  The
-      default Rakarrack Phaser and Chorus use linear interpolation.  This
+      default Rakarrack-plus Phaser and Chorus use linear interpolation.  This
       mode makes use of a Lagrange interpolation polynomial to estimate
       fractional delay times and some other tricks to maximize the flanger
       depth and flatten the frequency response on the chorus.  Adding the
@@ -491,7 +491,7 @@ rewritten entirely as the code had been adapted at a stage in
 ArtsCompressor development prior to many bug fixes that occurred later
 in its evolution which unfortunately removed calculation of a
 soft-knee compression characteristic. This is mentioned to give hope to
-those who were aware of the bugs in compressor in Rakarrack 0.3.0.
+those who were aware of the bugs in compressor in Rakarrack-plus 0.3.0.
 These bugs have been fixed, and this compressor has been traced using
 test signals to confirm it does what we think it does. </p>
       <p><b>A. Time</b>: Attack Time. Time in milliseconds for attack to
@@ -573,17 +573,17 @@ so we can
 ignore the future and apply the effects only for what has already
 occurred.</p>
       <p><b>Convolotron</b>.  A
-rakarrack module that takes an audio file as an IR, and convolves it
+rakarrack-plus module that takes an audio file as an IR, and convolves it
 with the input signal.  This signal may be an IR recorded from an
 amplifier, a microphone,  a cheap computer speaker system, horns,
 bells, gongs, reverb...kicking a door...</p>
       <p>Some caveats:  Convolotron is very CPU hungry. 
-Rakarrack
+Rakarrack-plus
 does straight-forward time-domain convolution.  Another Linux
 software application to compare is  JConv, which is not as CPU
 hungry because there are
 some frequency domain math tricks which allow the user to sacrifice
-some quality to reduce  processing load.  As a result, Rakarrack requires some
+some quality to reduce  processing load.  As a result, Rakarrack-plus requires some
 "horsepower", but is better suited to amplifier/cabinet modeling
 assuming your CPU can handle it.</p>
       <p> <b>Parameters</b></p>
@@ -694,7 +694,7 @@ cutoff at 720Hz. This corresponds to approximately 51 on the HPF
 setting. If trying to emulate stompbox or amp sounds, it is highly
 advisable to use the Pre Filter option with HPF higher than 30 and LPF
 lower than 70. As you increase drive, decrease LPF. </p>
-      <p>Rakarrack attempts to be friendly to computers limited in both
+      <p>Rakarrack-plus attempts to be friendly to computers limited in both
 RAM and CPU. Because of this, the waveshaper does not use oversampling
 to reduce the effects of digital aliasing. Without going deep into DSP
 theory, this means that hard clipping with a lot of drive will create
@@ -713,7 +713,7 @@ Low Pass Pre-filtering. By reducing the high frequency content of the
 input, you can greatly minimize the level of aliasing harmonics present
 in the output. </p>
       <p>The main point is that great sounding distortions can be
-obtained from Rakarrack, but the distortion module is not meant to
+obtained from Rakarrack-plus, but the distortion module is not meant to
 emulate your favorite stompbox, but to off the flexibility create these
 sounds as well as unique flavors of distortion.</p>
       <p>The Crunch waveshaping type is the most physically informed of
@@ -886,7 +886,7 @@ processed from the file.</p>
 delays, flangers, phasers (thanks to state variable filter) and even
 stereo spatialization techniques.&nbsp; Hopefully we have done a good
 job demonstrating the most noteworthy possibilities in the default
-files installed with Rakarrack.</p>
+files installed with Rakarrack-plus.</p>
 <p>Here is a description of the parameters:</p>
 <p><b>Dry/Wet</b>: Mix unprocessed signal with processed output.</p>
 <p><b>Pan</b>: Pan processed output to left or right channel.</p>
@@ -917,7 +917,7 @@ modulated (like a chorus or flanger).</p>
 file.&nbsp; For example, if you have a text file that defines 20
 echoes, you can limit it to use the first 2 or 3 or....whatever you
 want up to 127.</p>
-<p><b>File</b>: Select from several files supplied by the Rakarrack team.&nbsp; This
+<p><b>File</b>: Select from several files supplied by Rakarrack-plus.&nbsp; This
 will include a broad spectrum of uses so you can get started using
 Echotron without ever touching a text file.</p>
 <p><b>User</b>: So you want to do
@@ -976,7 +976,7 @@ unstable.</p>
 <p>It is not wise to set Level greater in magnitude to +/-1.0.&nbsp; There
 is some normalization internal to Echotron, but it is best to think of
 1.0 as the volume knob's maximum range.</p>
-<p>It is best to copy one of the default files distributed with Rakarrack
+<p>It is best to copy one of the default files distributed with Rakarrack-plus
 and edit it as desired.&nbsp; Always save with an extension .dly so you
 don't confuse it with other kinds of text files. </p>
 </td></tr></tbody>
@@ -1145,7 +1145,7 @@ from 0dB to 20dB</p>
       discontinuous change in the signal called "zipper noise".  To
       eliminate this, fractional delay times need to be calculated in order
       to smoothly transition from one delay line tap to the next.  The
-      default Rakarrack Phaser and Chorus use linear interpolation.  This
+      default Rakarrack-plus Phaser and Chorus use linear interpolation.  This
       mode makes use of a Lagrange interpolation polynomial to estimate
       fractional delay times and some other tricks to maximize the flanger
       depth and flatten the frequency response on the chorus.  Adding the
@@ -1169,7 +1169,7 @@ from 0dB to 20dB</p>
       </td>
       <td style="background-color: rgb(251, 251, 251);">
       <h3>Intelligent Harmonizer Explained</h3>
-      <p>Rakarrack harmonizer effect use the audio
+      <p>Rakarrack-plus harmonizer effect use the audio
 engine of the smbPtichShifter.cpp located at
 http://www.dspdimension.com. In order to save CPU use only a mono
 pitch-shifter in the lowest quality available, you can change this on
@@ -1177,7 +1177,7 @@ the program <a href="#settings">Settings</a> window, but only for a
 low quality values because high quality ones use too much CPU. The
 audio signal converted to mono is send it to the pitch-shifter and
 returned to the two pole Peak filter, panned and send it to both
-channels L/R. The rakarrack Harmonizer has 3 modes:</p>
+channels L/R. The rakarrack-plus Harmonizer has 3 modes:</p>
       <h4>Normal Mode</h4>
       <p>Is how a normal pitchshifter run, the pitch
 ratio is fixed and can be selected in the <b>Interval</b> effect
@@ -1185,7 +1185,7 @@ parameter of the effect.</p>
       <h4>Select Mode</h4>
       <p>In this mode the pitch ratio is variable, this
 value depends of the selected <b>Interval</b> parameter, and the <b>Note</b>
-and <b>Chord</b> effect parameters. Rakarrack then recognize the audio
+and <b>Chord</b> effect parameters. Rakarrack-plus then recognize the audio
 note played (Only "melodies" monophonic data can be played in this
 mode) and modifies the pitch ratio in order to do a musical
 harmonization with the Tonality/Chord selected in the parameters, of
@@ -1447,7 +1447,7 @@ processor than to compute the three filter bands as separate filters.</p>
 want.  This flexibility allows anything from various wahwah
 effects to synth filter effects, and possibly even sounds of the
 moogerfooger (though Synthfilter structure is better suited to
-"moog-like" sounds).  Like any good Rakarrack effect, it has an
+"moog-like" sounds).  Like any good Rakarrack-plus effect, it has an
 LFO synchronized to Tempo.  This means Tap Tempo will set the rate
 of the LFO effect. </p>
 <p>Additionally, you have the envelope follower applied with the E. Sens
@@ -1557,7 +1557,7 @@ effects:&nbsp; A tremolo is like an automatic volume knob.&nbsp; You
 set the rate and depth, and it's like having somebody change the volume
 knob up and down at the set rate and amount set by depth.&nbsp; No
 effects processor would be complete without a tremolo.&nbsp; In prior
-versions of Rakarrack, there is the AutoPan function in the stereo Pan
+versions of Rakarrack-plus, there is the AutoPan function in the stereo Pan
 effect.&nbsp; In Auto mode, the Pan is a tremolo, but is not a
 "classic" sounding tremolo.</p>
 <p>This module emulates the tremolo found in classic guitar amplifiers
@@ -1593,7 +1593,7 @@ Then, the Cds cell itself has some "memory".&nbsp; The resistance does
 not change instantly when light is applied and removed, nor does it
 work the same for charging and discharging.</p>
 <p>Perhaps that explains why there is a need for a special "Opticaltrem"
-module in Rakarrack to emulate this behavior.&nbsp; We hope this will
+module in Rakarrack-plus to emulate this behavior.&nbsp; We hope this will
 bring to mind the sound of the tremolo in an old tube amp.</p>
 
 <p><b>Depth</b>: Amount of effect.&nbsp; At full depth it is almost turning off entirely between
@@ -1739,7 +1739,7 @@ sacrificed for lower processing requirements.</p>
 from the head to the tail, but true replication of the frequency
 response is sacrificed. In short, the "magic" actually happens in the
 IR conversion utility used to convert the .wav IR file to a .rvb file
-for Rakarrack.  Various elements of the waveform are considered,
+for Rakarrack-plus.  Various elements of the waveform are considered,
 then the .rvb file is constructed as a list of pairs: Time, Reflection
 Amplitude.  This file is actually a plain text file, and you may
 edit this file or generate your own custom files.  In fact you
@@ -1834,7 +1834,7 @@ generated by invoking the rakverb command on a .wav format IR file.
 "rakverb -i foo.wav" will generate a file called "foo.rbv" in the same
 directory.  This is the file you would want to load into
 Reverbtron.</p>
-<p><b>Preset</b>: Rakarrack comes with several IR files already processed
+<p><b>Preset</b>: Rakarrack-plus comes with several IR files already processed
 and ready to go so you don't need to search the web looking for impulse
 responses.</p>
 </td></tr></tbody>
@@ -1955,7 +1955,7 @@ corresponding slider.</p>
 used as Tone Booster, is good to put after Distortion effects in order
 to adjust the distortion tone or cut undesired freqs. Also with a
 really hard gain you can obtain a nice distortion in combination with
-the "invisible" Compressor/Limiter that rakarrack has on the end of the
+the "invisible" Compressor/Limiter that rakarrack-plus has on the end of the
 chain, if you try that be sure to low the main Output volume.</p>
 
       </td></tr></tbody>
@@ -2062,7 +2062,7 @@ program.</p>
       <p>StompBox</p>
       <p>A stand-alone stompbox emulator.</p>
 <p>Between the various equalization tools and distortion modules,
-Rakarrack offers great flexibility to get a wide range of distortion
+Rakarrack-plus offers great flexibility to get a wide range of distortion
 sounds, but this method requires much experimentation, while some
 things are simply not possible.  What if you are a person who
 wants to dial in a good sound quickly, and don't enjoy tweaking
@@ -2082,12 +2082,12 @@ example, an Overdrive pedal is basically the same circuit for almost
 all models marketed as "overdrive".  The differences are minor
 variations that the specific designer determined produced a better
 sound.  Even though the names of the modes indicate one model or
-the other, the internal signal processing in Rakarrack includes
+the other, the internal signal processing in Rakarrack-plus includes
 variations of its own: some to counteract unfortunate digital artifacts
 and some applied as common "mods" that tweakers apply to their physical
 stompboxes.</p>
 <p>Perhaps a good analogy would be that of an artistic painting versus a
-photograph.  The Rakarrack stompbox models are more like an
+photograph.  The Rakarrack-plus stompbox models are more like an
 artistic painting, where the artist (programmer) looks at the object
 (schematic), "paint" (write code) the prominent features, then add
 details that make it become an identifiable image of the original
@@ -2126,7 +2126,7 @@ symmetry with a soft clipping function somewhat emulating the behavior
 of a vacuum tube.  The reason it is considered twice derived is
 because the overdrive pedal originally used the frequency contouring of
 a tube preamp along with a soft diode clipper to (poorly) emulate the
-characteristics of an overdriven tube.  Rakarrack "Amp" model
+characteristics of an overdriven tube.  Rakarrack-plus "Amp" model
 therefore is a model of a model, but the clipping routine is much more
 dynamic and "alive" than the average diode clipper.  The
 pre-emphasis filter was modified somewhat to pick up more of the lower
@@ -2137,7 +2137,7 @@ pedal tone control.  If Low and Mid bands are left flat (zero),
 then the high band behaves like the OD pedal Tone control.</p>
 <p><i>Grunge</i>: This will explain itself to those who are familiar
 with the source model.  The original has only high and low EQ
-bands.  The Rakarrack model implements the mid band to allow for
+bands.  The Rakarrack-plus model implements the mid band to allow for
 some mid scooping, or a mid boost if desired.  Set mid at "zero"
 to get the most true behavior of the original.</p>
 <p><i>Rat</i></p>
@@ -2164,7 +2164,7 @@ excludes the sweepable mid-band EQ.  Instead, the mid-band picks a
 good place and leaves it fixed there.  It is an intentional design
 decision not to include the extra slider for mid sweep.  This is
 to maintain the simplicity of a generic interface for all models. The
-Rakarrack Parametric EQ as well as MuTroMojo modules are capable of
+Rakarrack-plus Parametric EQ as well as MuTroMojo modules are capable of
 providing a sweepable mid scoop or boost if desired.</p>
 <p><i>Fuzz</i>: 
 The first kind of distortion to come in a stompbox.  It makes
@@ -2405,7 +2405,7 @@ M = Muted (Disable band)</p>
       
 <p>Vibe</p>
 <p> Chorus/Phaser effect emulating a rotating speaker.</p>
-<p>This effect was added at the request of a Rakarrack user wishing to have a
+<p>This effect was added at the request of a Rakarrack-plus user wishing to have a
 software UniVibe.  This effect is based on the original UniVibe circuit and
 mathematically models components most likely to contribute to the overall
 effect.  Of course, the originals varied widely from one unit to the next
@@ -2417,12 +2417,12 @@ modern analog clones.</p>
 <p>The sound of the original type of unit can be easily found by searching the
 internet for "Vibe effect demo".  Its popularity among guitar players makes
 for the proliferation of clones and audio clip demonstrations, and
-ultimately an attempt by the Rakarrack team to emulate this.  We hope you
+ultimately an attempt by the Rakarrack-plus team to emulate this.  We hope you
 will find our version satisfactory and useful.</p>
 
 <p>Things not available in the original units are the inclusion of stereo
 processing paths and feedback, not to mention the variety of LFO's standard
-to all Rakarrack modulation effects.  Consequently, this effect can be taken
+to all Rakarrack-plus modulation effects.  Consequently, this effect can be taken
 to sonic destinations the original was never able to achieve.  The feedback
 scheme applied in software, for example, would require a messy modification
 using several extra electronics components to properly apply to a real
@@ -2436,7 +2436,7 @@ bit of a misnomer because it is actually more of a Phaser.  A Dry/Wet of 64
 (50/50) corresponds to the "Chorus" setting.  A wet/dry setting of 127 (all
 wet) corresponds to the "Vibrato" setting of the original analog unit. 
 Later clones of the circuit added the wet/dry mix as a pot so you could mix
-anything in between.  Rakarrack applies this philosophy.</p>
+anything in between.  Rakarrack-plus applies this philosophy.</p>
 
 <p><b>Width</b>: Width of modulation (LFO) sweep.</p>
 
@@ -2490,8 +2490,8 @@ a certain amount dry.</p>
       songs.</p>
 <p>The basic structure is this:</p>
 <p>Your voice from a microphone needs to be connected to the "Aux" input
-of Rakarrack.  Second, you will have some sound source coming
-through Rakarrack's normal processing chain.  This is likely a
+of Rakarrack-plus.  Second, you will have some sound source coming
+through Rakarrack-plus's normal processing chain.  This is likely a
 guitar or synthesizer.  When you speak into the mic, you will hear
 the sound of your instrument with a robot-like voice.  The best
 types of signals are constant and rich in frequency content.  For
@@ -2514,7 +2514,7 @@ this is the kind of EQ that displays VU bars for every band).
 Imagine something being linked to the VU meter bars that can push the
 sliders up and down on the Equalizer used to process the
 instrument.  This is what a vocoder does.</p>
-<p>Rakarrack uses a 32-band filter bank to implement the effect. 
+<p>Rakarrack-plus uses a 32-band filter bank to implement the effect. 
 These are all second-order band pass filters spaced evenly on a
 logarithmic scale from 300Hz to 3600Hz, thus covering most of the
 important formant frequencies.</p>
