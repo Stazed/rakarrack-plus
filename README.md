@@ -1,13 +1,18 @@
 Rakarack-plus
 =============
 
-Rakarrack plus LV2s.
-
 Screenshot
 ----------
 
 ![screenshot](https://raw.github.com/Stazed/rakarrack-plus/wip/doc/rakarrack-plus-1.0.0.png "Rakarrack-plus Gleam Theme")
 
+
+About
+-----
+This project is a merging of original rakarrack (http://rakarrack.sourceforge.net)
+and the program's effects ported to LV2 from (https://github.com/ssj71/rkrlv2).
+In addition there are many bug fixes and enhancements to rakarrack and the LV2s.
+Rakarrack-plus-1.0.0 is the first version under the new name.
 
 Install
 -------
@@ -88,7 +93,7 @@ Important changes from earlier versions - Rakarrack-plus:
 
 LV2s - RakarrackPlus
 --------------------
-*   The URI's were changed and the plugin names, jack names will now indicate "RakarrackPlus"
+*   The URI's were changed and the plugin names and jack names will now indicate "RakarrackPlus"
 *   "Wet/Dry" is now "Dry/Wet"
 *   Some parameter ranges were changed to be consistent with the GUI program
 *   "Overdrive" LV2 added
@@ -106,8 +111,9 @@ Under The Hood
 
 Additional Information
 ----------------------
+*   File bug reports at (https://github.com/Stazed/rakarrack-plus)
 *   See the "rakarrack-plut.txt" file for individual effect and LV2 changes
 *   See README.legacy for previous version information
-*   You may find additional information on the original rakarrack site http://rakarrack.sourceforge.net
-*   This project was forked from https://github.com/ssj71/rakarrack >> https://github.com/Stazed/rakarrack
+*   You may find additional information on the official rakarrack site (http://rakarrack.sourceforge.net)
+*   This project was forked from (https://github.com/ssj71/rakarrack) >> (https://github.com/Stazed/rakarrack)
 *   Special thanks to Spencer Jackson (https://github.com/ssj71/rkrlv2)
