@@ -72,7 +72,7 @@ Rakarrack-plus-1.0.0
 --------------------
 
 First release under the new name "Rakarrack-plus".
-Important changes from earlier versions - Rakarrack-plus:
+Important changes from earlier versions:
 *   FLTK version required >= 1.3
 *   All text fonts are auto resized for the GUI
 *   "Wet/Dry" sliders are now "Dry/Wet" (backwards compatible except Dual Flange and Ring)
@@ -112,7 +112,7 @@ Under The Hood
 Additional Information
 ----------------------
 *   File bug reports at (https://github.com/Stazed/rakarrack-plus)
-*   See the "rakarrack-plut.txt" file for individual effect and LV2 changes
+*   See the "rakarrack-plus.txt" file for individual effect and LV2 changes
 *   See README.legacy for previous version information
 *   You may find additional information on the official rakarrack site (http://rakarrack.sourceforge.net)
 *   This project was forked from (https://github.com/ssj71/rakarrack) >> (https://github.com/Stazed/rakarrack)
