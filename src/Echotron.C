@@ -457,7 +457,7 @@ Echotron::loadfile(char* Filename)
     }
 
     sscanf(wbuf, "%f\t%f\t%d", &f.subdiv_fmod, &f.subdiv_dmod, &f.f_qmode); //Second line has tempo subdivision
-    //printf("subdivs:\t%f\t%f\n",subdiv_fmod,subdiv_dmod);
+//    printf("subdivs:%f\t%f\t%d\n",f.subdiv_fmod,f.subdiv_dmod, f.f_qmode);
 
     int count = 0;
     memset(f.iStages, 0, sizeof (f.iStages));

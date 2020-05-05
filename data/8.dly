@@ -1,5 +1,5 @@
 #Filter	Delay	#LFO Tempo rate adjustment
-0.5	2   0
+0.5	2	0
 #Multichorus effect
 #Pan	Time	Level	LP	BP	HP	Freq	Q	Stages
 -0.75	0.0025	0.15	1.0	-1.0	1.0	50	1	1

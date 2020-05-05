@@ -1,5 +1,5 @@
 #Filter	Delay	#LFO Tempo rate adjustment
-0.5	0.5 0
+0.5	0.5	0
 #Pan	Time	Level	LP	BP	HP	Freq	Q	Stages
 0.0	0.00006	-1.75	0.5	0.0	0.0	10000	0.5	1
 0.0	0.00012	2.0	0.0	0.0	0.5	5000	0.5	1

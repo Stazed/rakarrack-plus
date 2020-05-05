@@ -236,7 +236,7 @@ if (BuildLV2Plugins)
         endforeach(INDX)
         # 2 more dly file 
         list(GET DLY 10 NEWNAME)
-        configure_file(data/11.dly lv2data/${NEWNAME}.dly COPYONLY)
+        configure_file(data/10.dly lv2data/${NEWNAME}.dly COPYONLY)
         list(GET DLY 11 NEWNAME)
         configure_file(data/11.dly lv2data/${NEWNAME}.dly COPYONLY)
 
