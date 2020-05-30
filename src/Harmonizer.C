@@ -181,13 +181,15 @@ Harmonizer::applyfilters(float * efxoutl, uint32_t period)
 void
 Harmonizer::out(float *efxoutl, float *efxoutr)
 {
-    if ((DS_state != 0) && (Pinterval != 12))
+    if (DS_state != 0)
     {
+        /* copy to temp then replace efxoutl and efxoutr with up sample */
         memcpy(templ, efxoutl, sizeof (float)*PERIOD);
         memcpy(tempr, efxoutr, sizeof (float)*PERIOD);
         U_Resample->out(templ, tempr, efxoutl, efxoutr, PERIOD, u_up);
     }
 
+    /* Here we mix down the stereo inputs to mono */
     for (int i = 0; i < nPERIOD; i++)
     {
         outi[i] = (efxoutl[i] + efxoutr[i])*.5;
@@ -200,76 +202,33 @@ Harmonizer::out(float *efxoutl, float *efxoutr)
     }
 
     if ((PMIDI) || (PSELECT))
+    {
         PS->ratio = r_ratio; // rakarrack value passed from r__ratio[0] in process
-
-    if (Pinterval != 12)
-    {
-        PS->smbPitchShift(PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
-
-        if ((DS_state != 0) && (Pinterval != 12))
-        {
-            D_Resample->mono_out(outo, templ, nPERIOD, u_down, PERIOD);
-        }
-        else
-        {
-            memcpy(templ, outo, sizeof (float)*PERIOD);
-        }
-
-        applyfilters(templ, PERIOD);
-
-        for (int i = 0; i < (signed int) PERIOD; i++)
-        {
-            efxoutl[i] = templ[i] * gain * (1.0f - panning);
-            efxoutr[i] = templ[i] * gain * panning;
-        }
     }
 
-#if 0 // rkrlv2
-    if ((DS_state != 0) && (Pinterval != 12))
+    /* This changes the pitch */
+    PS->smbPitchShift(PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
+
+    if (DS_state != 0)
     {
-        U_Resample->out(smpsl, smpsr, templ, tempr, PERIOD, u_up);
-    }
-
-
-    for (i = 0; i < nPERIOD; i++)
-    {
-        outi[i] = (templ[i] + tempr[i])*.5;
-        if (outi[i] > 1.0)
-            outi[i] = 1.0f;
-        if (outi[i] < -1.0)
-            outi[i] = -1.0f;
-    }
-
-    if ((PMIDI) || (PSELECT))
-        PS->ratio = r_ratio;
-
-    if (Pinterval != 12)
-    {
-        PS->smbPitchShift(PS->ratio, nPERIOD, window, hq, nfSAMPLE_RATE, outi, outo);
-    }
-
-    if ((DS_state != 0) && (Pinterval != 12))
-    {
+        /* We mixed down the stereo to mono above so we only need to down sample mono here.
+         * Using templ for the result out. The tempr is not needed. */
         D_Resample->mono_out(outo, templ, nPERIOD, u_down, PERIOD);
     }
     else
     {
-        memcpy(templ, smpsl, sizeof (float)*PERIOD);
+        /* Down sample not used so copy pitch changed outo to the mono templ */
+        memcpy(templ, outo, sizeof (float)*PERIOD);
     }
 
     applyfilters(templ, PERIOD);
 
-    //for (i = 0; i < (signed int)period; i++) {
-    //efxoutl[i] = templ[i] * gain * panning;
-    //efxoutr[i] = templ[i] * gain * (1.0f - panning);
-    //}
-    for (i = 0; i < (signed int) PERIOD; i++)
+    /* Sets templ mono to both channels */
+    for (int i = 0; i < (signed int) PERIOD; i++)
     {
         efxoutl[i] = templ[i] * gain * (1.0f - panning);
         efxoutr[i] = templ[i] * gain * panning;
     }
-#endif // 0
-
 }
 
 void
