@@ -205,7 +205,7 @@ StereoHarm::out(float *efxoutl, float *efxoutr)
 
     for (unsigned int i = 0; i < nPERIOD; i++)
     {
-        outil[i] = tempr[i];
+        outil[i] = templ[i];
         
         if (outil[i] > 1.0)
             outil[i] = 1.0f;
@@ -213,7 +213,7 @@ StereoHarm::out(float *efxoutl, float *efxoutr)
         if (outil[i] < -1.0)
             outil[i] = -1.0f;
 
-        outir[i] = templ[i];
+        outir[i] = tempr[i];
         
         if (outir[i] > 1.0)
             outir[i] = 1.0f;
