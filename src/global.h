@@ -217,6 +217,7 @@ const unsigned c_rkr_ext_size = 4;
 
 //TODO: move these values into the RKR object
 extern int Pexitprogram, preset;
+extern int preserve;  // See the PRSRV_* constants below.
 extern int commandline, gui;
 extern int exitwithhelp, nojack;
 extern int error_num;
@@ -242,6 +243,492 @@ const int C_DONT_CHANGE_FONT_SIZE = 0;
    is not real time safe. */
 const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
 const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
+
+/* Each effect has a unique numeric identifier. */
+enum EffectIndex {
+    FX_EQ1 = 0,
+    FX_Compressor,
+    FX_Distortion,
+    FX_Overdrive,
+    FX_Echo,
+    FX_Chorus,
+    FX_Phaser,
+    FX_Flanger,
+    FX_Reverb,
+    FX_EQ2,
+    FX_WahWah,
+    FX_Alienwah,
+    FX_Cabinet,
+    FX_Pan,
+    FX_Harmonizer,
+    FX_MusDelay,
+    FX_Gate,
+    FX_Derelict,
+    FX_APhaser,
+    FX_Valve,
+    FX_DFlange,
+    FX_Ring,
+    FX_Exciter,
+    FX_DistBand,
+    FX_Arpie,
+    FX_Expander,
+    FX_Shuffle,
+    FX_Synthfilter,
+    FX_VaryBand,
+    FX_Convolotron,
+    FX_Looper,
+    FX_MuTroMojo,
+    FX_Echoverse,
+    FX_CoilCrafter,
+    FX_ShelfBoost,
+    FX_Vocoder,
+    FX_Sustainer,
+    FX_Sequence,
+    FX_Shifter,
+    FX_StompBox,
+    FX_Reverbtron,
+    FX_Echotron,
+    FX_StereoHarm,
+    FX_CompBand,
+    FX_OpticalTrem,
+    FX_Vibe,
+    FX_Infinity,
+
+    /* "Main" isn't really an affect, we just use this to reference global
+       settings like master volume and gain.  It must be the last element in
+       the enum. */
+    FX_Main
+};
+
+const int FXCount = FX_Main + 1;
+
+/* Parameter index. */
+enum ParmIndex {
+    // Exciter, CoilCrafter, ShelfBoost, Sustainer, StompBox, EQ1/EQ2/Cabinet
+    Parm_Volume = 0,
+
+    // WahWah, Distortion/Overdrive, Harmonizer, Chorus/Flanger, Phaser,
+    // Alienwah, MusDelay, Reverb, Pan, Echo, Derelict, Valve, Ring, DistBand,
+    // Arpie, Convolotron, Vocoder, Echoverse, Shifter, DFlange
+    Parm_Pan = 1,
+
+    // WahWah, Distortion/Overdrive, Harmonizer, Chorus/Flanger, Phaser,
+    // Alienwah, MusDelay, Reverb, Pan, Echo, Derelict
+    // APhaser, Valve, Ring, DistBand, Arpie, Shuffle, Synthfilter, VaryBand,
+    // MuTroMojo, Looper, Convolotron, Vocoder, Echoverse, Shifter,
+    // Reverbtron, Echotron, StereoHarm, CompBand, Infinity, DFlange
+    Parm_DryWet = 0,
+
+    // Chorus/Flanger, Phaser, WahWah, Alienwah, Distortion/Overdrive, APhaser,
+    // Synthfilter, MuTroMojo, Pan
+    Parm_LFOFreq = 2,
+
+    // Distortion/Overdrive, Derelict, Valve, DistBand
+    Parm_Drive = 3,
+    Parm_Level = 4,
+
+    // Distortion/Overdrive, Derelict, DFlange, Valve, Ring, DistBand
+    Parm_Dist_LRCross = 2,
+
+    // Distortion/Overdrive, Reverb, Derelict
+    Parm_LowPassFilter = 7,
+    Parm_HighPassFilter = 8,
+
+    // Distortion/Overdrive
+    Parm_Dist_Octave = 12,
+
+    // Distortion/Overdrive, Derelict
+    Parm_Distortion_Type = 5,
+
+    // Harmonizer
+    Parm_Interval = 3,
+    Parm_Freq = 4,
+    Parm_Note = 6,
+    Parm_FGain = 8,
+    Parm_Harmonizer_Type = 7,
+    Parm_Harmonizer_Select = 5,
+
+    // Chorus/Flanger, Phaser, Alienwah, Vibe
+    Parm_LRCross = 9,
+
+    // Echo, MusDelay, Arpie, Echoverse
+    Parm_Feedback = 5,
+
+    // Echo, Arpie, MusDelay, Echoverse
+    Parm_Echo_LRCross = 4,
+
+    // WahWah, Alienwah, Phaser, Flanger/Chorus, MuTroMojo
+    Parm_Depth = 6,
+
+    // WahWah
+    Parm_AmpSns = 7,
+    Parm_AmpSnsNS = 8,
+    Parm_AmpSnsSmooth = 9,
+
+    // Phaser, Alienwah, APhaser, Synthfilter, Vibe
+    Parm_Phaser_Feedback = 7,
+
+    // Phaser
+    Parm_Phase = 11,
+
+    // Alienwah
+    Parm_Alien_Phase = 10,
+    Parm_Alien_Delay = 8,
+
+    // Chorus/Flanger
+    Parm_Chorus_Feedback = 8,
+    Parm_Chorus_Delay = 7,
+
+    // Chorus/Flanger, Alienwah, APhaser, MuTroMojo, Pan, Phaser, Synthfilter,
+    // WahWah
+    Parm_LFOType = 4,
+
+    // Chorus/Flanger, Phaser, Alienwah, APhaser, Synthfilter, MuTroMojo,
+    // WahWah, Pan
+    Parm_LFOStereo = 5,
+
+    // Chorus/Flanger, Phaser, WahWah, Alienwah, APhaser, MuTroMojo,
+    // Synthfilter, Pan
+    Parm_LFORandomness = 3,
+
+    // MusDelay
+    Parm_MusDelay_Feedback2 = 9,
+
+    // MusDelay
+    Parm_Pan2 = 7,
+    Parm_Gain1 = 11,
+    Parm_Gain2 = 12,
+    Parm_MusDelay_Tempo = 10,
+
+    // DFlange
+    Parm_DFlange_Depth = 3,
+    Parm_DFlange_Width = 4,
+    Parm_DFlange_Offset = 5,
+    Parm_DFlange_Feedback = 6,
+    Parm_DFlange_HiDamp = 7,
+    Parm_DFlange_LFOFreq = 10,
+    Parm_DFlange_LFOStereo = 11,
+    Parm_DFlange_LFOType = 12,
+    Parm_DFlange_LFORandomness = 13,
+
+    // APhaser, Synthfilter
+    Parm_Distortion = 1,
+    Parm_Width = 6,
+    Parm_APhaser_Depth = 11,
+
+    // APhaser
+    Parm_Offset = 9,
+
+    // Derelict
+    Parm_RFreq = 9,
+    Parm_Octave = 11,
+
+    // Compressor, Gate
+    Parm_Threshold = 1,
+
+    // Compressor
+    Parm_Ratio = 2,
+    Parm_Output = 3,
+    Parm_AttTime = 4,
+    Parm_RelTime = 5,
+    Parm_Knee = 7,
+
+    // Main
+    Parm_FractionBypass = 1,
+
+    // Main, Shifter, StereoHarm, Harmonizer
+    Parm_InputGain = 2,
+
+    // Valve
+    Parm_Q = 10,
+    Parm_Presence = 12,
+    Parm_Valve_LowPass = 6,
+    Parm_Valve_HighPass = 7,
+
+    // Ring
+    Parm_Input = 11,
+    Parm_Ring_Level = 3,
+    Parm_Ring_Depth = 4,
+    Parm_Ring_Freq = 5,
+    Parm_Ring_Sine = 7,
+    Parm_Ring_Tri = 8,
+    Parm_Ring_Saw = 9,
+    Parm_Ring_Square = 10,
+
+    // Exciter
+    Parm_Exciter_LowPassFilter = 11,
+    Parm_Exciter_HighPassFilter = 12,
+    Parm_Exciter_H1 = 1,
+    Parm_Exciter_H2 = 2,
+    Parm_Exciter_H3 = 3,
+    Parm_Exciter_H4 = 4,
+    Parm_Exciter_H5 = 5,
+    Parm_Exciter_H6 = 6,
+    Parm_Exciter_H7 = 7,
+    Parm_Exciter_H8 = 8,
+    Parm_Exciter_H9 = 9,
+    Parm_Exciter_H10 = 10,
+
+    // DistBand
+    Parm_DistBand_TypeLow = 5,
+    Parm_DistBand_TypeMid = 6,
+    Parm_DistBand_TypeHigh = 7,
+    Parm_DistBand_LowVol = 8,
+    Parm_DistBand_MidVol = 9,
+    Parm_DistBand_HighVol = 10,
+    Parm_DistBand_Cross1 = 12,
+    Parm_DistBand_Cross2 = 13,
+
+    // Arpie, Echoverse, Echo
+    Parm_Arpie_Reverse = 7,
+
+    // Arpie
+    Parm_Arpie_Tempo = 2,
+
+    // Arpie, Echoverse, Echo
+    Parm_Arpie_LRDelay = 3,
+
+    // Arpie, Convolotron, Echoverse, Reverbtron, Echotron, Echo, MusDelay
+    Parm_Arpie_HiDamp = 6,
+
+    // Expander
+    Parm_Expander_Threshold = 1,
+    Parm_Expander_Shape = 2,
+    Parm_Expander_OutGain = 7,
+
+    // Expander, Gate
+    Parm_Expander_LowPassFilter = 5,
+    Parm_Expander_HighPassFilter = 6,
+
+    // Expander, Shifter, Gate
+    Parm_Expander_Attack = 3,
+    Parm_Expander_Decay = 4,
+
+    // Shuffle
+    Parm_Shuffle_GainLow = 1,
+    Parm_Shuffle_GainMidLow = 2,
+    Parm_Shuffle_GainMidHigh = 3,
+    Parm_Shuffle_GainHigh = 4,
+    Parm_Shuffle_Cross1 = 5,
+    Parm_Shuffle_Cross2 = 6,
+    Parm_Shuffle_Cross3 = 7,
+    Parm_Shuffle_Cross4 = 8,
+
+    // Shuffle, Infinity, Harmonizer
+    Parm_Shuffle_Q = 9,
+
+    // Synthfilter
+    Parm_Synthfilter_Envelope = 12,
+    Parm_Synthfilter_Attack = 13,
+    Parm_Synthfilter_Release = 14,
+    Parm_Synthfilter_Bandwidth = 15,
+
+    // VaryBand
+    Parm_VaryBand_LFOType = 2,
+    Parm_VaryBand_LFOStereo = 3,
+    Parm_VaryBand_LFO2Freq = 4,
+    Parm_VaryBand_LFO2Type = 5,
+    Parm_VaryBand_LFO2Stereo = 6,
+    Parm_VaryBand_Cross1 = 7,
+    Parm_VaryBand_Cross2 = 8,
+    Parm_VaryBand_Cross3 = 9,
+
+    // VaryBand, OpticalTrem, Vibe
+    Parm_VaryBand_LFOFreq = 1,
+
+    // MuTroMojo, ShelfBoost
+    Parm_MuTroMojo_Q = 1,
+
+    // MuTroMojo, Sequence
+    Parm_Range = 14,
+
+    // MuTroMojo,
+    Parm_MuTroMojo_AmpSns = 7,
+    Parm_MuTroMojo_AmpSnsInv = 8,
+    Parm_MuTroMojo_AmpSmooth = 9,
+    Parm_MuTroMojo_LowPassLvl = 10,
+    Parm_MuTroMojo_BandPassLvl = 11,
+    Parm_MuTroMojo_HighPassLvl = 12,
+    Parm_MuTroMojo_MinFreq = 15,
+
+    // Looper
+    Parm_Looper_Play = 1,
+    Parm_Looper_Stop = 2,
+    Parm_Looper_Record = 3,
+    Parm_Looper_Clear = 4,
+    Parm_Looper_Fade1 = 6,
+    Parm_Looper_Track1 = 7,
+    Parm_Looper_Track2 = 8,
+    Parm_Looper_Autoplay = 9,
+    Parm_Looper_Fade2 = 10,
+    Parm_Looper_Record1 = 11,
+    Parm_Looper_Record2 = 12,
+    Parm_Looper_Reverse = 5,
+    Parm_Looper_Tempo = 14,
+
+    // Convolotron, Reverbtron
+    Parm_Convolotron_Level = 7,
+
+    // Convolotron, Reverbtron, Echotron
+    Parm_Convolotron_Length = 3,
+    Parm_Convolotron_Feedback = 10,
+
+    // CoilCrafter
+    Parm_CoilCrafter_Freq1 = 3,
+    Parm_CoilCrafter_Q1 = 4,
+    Parm_CoilCrafter_Freq2 = 5,
+    Parm_CoilCrafter_Q2 = 6,
+    Parm_CoilCrafter_HighPassFilter = 7,
+
+    // ShelfBoost
+    Parm_ShelfBoost_Freq = 2,
+
+    // ShelfBoost, StompBox
+    Parm_ShelfBoost_Gain = 4,
+
+    // Vocoder
+    Parm_Vocoder_Muffle = 2,
+    Parm_Vocoder_Q = 3,
+    Parm_Vocoder_Input = 4,
+    Parm_Vocoder_Level = 5,
+    Parm_Vocoder_Ring = 6,
+
+    // Echoverse, Echo
+    Parm_Echoverse_Delay = 2,
+
+    // Echoverse
+    Parm_Echoverse_ExStereo = 9,
+
+    // Sustainer
+    Parm_Sustain = 1,
+
+    // Sequence
+    Parm_Sequence_1 = 0,
+    Parm_Sequence_2 = 1,
+    Parm_Sequence_3 = 2,
+    Parm_Sequence_4 = 3,
+    Parm_Sequence_5 = 4,
+    Parm_Sequence_6 = 5,
+    Parm_Sequence_7 = 6,
+    Parm_Sequence_8 = 7,
+    Parm_Sequence_DryWet = 8,
+    Parm_Sequence_Tempo = 9,
+    Parm_Sequence_Q = 10,
+    Parm_Sequence_Amp = 11,
+    Parm_Sequence_StereoDiff = 12,
+    Parm_Sequence_Mode = 13,
+
+    // Shifter
+    Parm_Shifter_Threshold = 5,
+    Parm_Shifter_Interval = 6,
+    Parm_Shifter_Whammy = 9,
+
+    // StompBox
+    Parm_StompBox_High = 1,
+    Parm_StompBox_Mid = 2,
+    Parm_StompBox_Low = 3,
+    Parm_StompBox_Mode = 5,
+
+    // Reverbtron
+    Parm_Reverbtron_Fade = 1,
+    Parm_Reverbtron_InitialDelay = 5,
+    Parm_Reverbtron_Stretch = 9,
+
+    // Reverbtron, Echotron
+    Parm_Reverbtron_Pan = 11,
+
+    // Echotron
+    Parm_Echotron_Depth = 1,
+    Parm_Echotron_Width = 2,
+    Parm_Echotron_Tempo = 5,
+    Parm_Echotron_LRCross = 7,
+    Parm_Echotron_LFOStereo = 9,
+    Parm_Echotron_LFOType = 14,
+
+    // StereoHarm
+    Parm_StereoHarm_GainLeft = 1,
+    Parm_StereoHarm_IntervalLeft = 2,
+    Parm_StereoHarm_ChromeLeft = 3,
+    Parm_StereoHarm_GainRight = 4,
+    Parm_StereoHarm_IntervalRight = 5,
+    Parm_StereoHarm_ChromeRight = 6,
+    Parm_StereoHarm_Select = 7,
+    Parm_StereoHarm_Note = 8,
+    Parm_StereoHarm_Type = 9,
+    Parm_StereoHarm_LRCross = 11,
+
+    // CompBand
+    Parm_CompBand_LowRatio = 1,
+    Parm_CompBand_MidLowRatio = 2,
+    Parm_CompBand_MidHighRatio = 3,
+    Parm_CompBand_HighRatio = 4,
+    Parm_CompBand_LowThreshold = 5,
+    Parm_CompBand_MidLowThreshold = 6,
+    Parm_CompBand_MidHighThreshold = 7,
+    Parm_CompBand_HighThreshold = 8,
+    Parm_CompBand_Cross1 = 9,
+    Parm_CompBand_Cross2 = 10,
+    Parm_CompBand_Cross3 = 11,
+    Parm_CompBand_Level = 12,
+
+    // OpticalTrem
+    Parm_OpticalTrem_Depth = 0,
+
+    // OpticalTrem, Vibe
+    Parm_OpticalTrem_LFOType = 3,
+
+    // OpticalTrem, Vibe
+    Parm_OpticalTrem_Randomness = 2,
+    Parm_OpticalTrem_LFOStereo = 4,
+    Parm_OpticalTrem_Pan = 5,
+
+    // Vibe
+    Parm_Vibe_Width = 0,
+    Parm_Vibe_DryWet = 6,
+    Parm_Vibe_Depth = 8,
+
+    // Infinity
+    Parm_Infinity_P1 = 1,
+    Parm_Infinity_P2 = 2,
+    Parm_Infinity_P3 = 3,
+    Parm_Infinity_P4 = 4,
+    Parm_Infinity_P5 = 5,
+    Parm_Infinity_P6 = 6,
+    Parm_Infinity_P7 = 7,
+    Parm_Infinity_P8 = 8,
+    Parm_Infinity_StartFreq = 10,
+    Parm_Infinity_EndFreq = 11,
+    Parm_Infinity_Rate = 12,
+    Parm_Infinity_StereoDiff = 13,
+    Parm_Infinity_Subdiv = 14,
+    Parm_Infinity_Autopan = 15,
+
+    // Gate
+    Parm_Gate_Range = 2,
+    Parm_Hold = 7,
+
+    // Pan
+    Parm_Extra = 6,
+
+    // Reverb
+    Parm_Reverb_Time = 2,
+    Parm_Reverb_InitialDelay = 3,
+    Parm_Reverb_DelayFeedback = 4,
+    Parm_Reverb_RoomSize = 11,
+    Parm_Reverb_LoHiDamp = 9,
+
+    // Reverbtron
+    Parm_Reverbtron_Diffusion = 15,
+    Parm_Reverbtron_LowPassFilter = 14,
+
+    /* This value is used to determine the size of the "preserve" array.  It
+       must be large enough to accommodate any parameter number used in a
+       changepar() method.  It's currently 63 because of the number of EQ
+       params. */
+    Parm_Last = 63
+};
+
+const int ParmCount = Parm_Last + 1;
 
 #endif
 

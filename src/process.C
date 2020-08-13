@@ -441,6 +441,7 @@ RKR::RKR() :
     error_num = 0;
     nojack = 0;
     memset(Mcontrol, 0, sizeof (Mcontrol));
+    clear_preserved();
     sprintf(temp, "%s", jack_client_name);
 
 #ifdef JACK_SESSION

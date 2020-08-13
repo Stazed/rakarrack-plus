@@ -660,8 +660,17 @@ public:
     } jack_po[16],jack_poi[16];
 
 
+    /* this array indicates that the value of a parameter should be preserved
+       after the next program change. */
+    bool preserve[FXCount][ParmCount];
 
-
+private:
+    void preserve_parm(EffectIndex effect, int parm);
+    inline bool canset(EffectIndex effect, ParmIndex parm) {
+        return !preserve[effect][parm];
+    }
+    bool canset(int effect, int parm);
+    void clear_preserved();
 };
 
 struct list_element
