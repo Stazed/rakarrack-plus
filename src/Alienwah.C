@@ -95,7 +95,9 @@ Alienwah::out(float * efxoutl, float * efxoutr)
 
         out.a = tmp.a * oldl[oldk].a - tmp.b * oldl[oldk].b
                 + (1.0f - fabsf(fb)) * efxoutl[i] * (1.0f - panning);
+        out.a += DENORMAL_GUARD;
         out.b = tmp.a * oldl[oldk].b + tmp.b * oldl[oldk].a;
+        out.b += DENORMAL_GUARD;
         oldl[oldk].a = out.a;
         oldl[oldk].b = out.b;
         float l = out.a * 10.0f * (fb + 0.1f);
@@ -106,7 +108,9 @@ Alienwah::out(float * efxoutl, float * efxoutr)
 
         out.a = tmp.a * oldr[oldk].a - tmp.b * oldr[oldk].b
                 + (1.0f - fabsf(fb)) * efxoutr[i] * panning;
+        out.a += DENORMAL_GUARD;
         out.b = tmp.a * oldr[oldk].b + tmp.b * oldr[oldk].a;
+        out.b += DENORMAL_GUARD;
         oldr[oldk].a = out.a;
         oldr[oldk].b = out.b;
         float r = out.a * 10.0f * (fb + 0.1f);
