@@ -329,6 +329,7 @@ RBFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t pe
         x.high = tmpsq * smp[i] - x.low - tmpq * x.band;
         //x.high = smp[i] - x.low - tmpq * x.band;
         x.band = tmpf * x.high + x.band;
+        x.band += DENORMAL_GUARD;
 
         if (en_mix)
         {
@@ -425,14 +426,9 @@ RBFilter::singlefilterout_s(float smp, fstage & x, parameters & par)
     oldf = b_smooth_tc * oldf + a_smooth_tc * par.f; //modulation interpolation
 
     x.low = x.low + oldf * x.band;
-#ifdef LV2_SUPPORT
-    x.low += DENORMAL_GUARD;
-#endif
     x.high = oldsq * smp - x.low - oldq * x.band;
     x.band = oldf * x.high + x.band;
-#ifdef LV2_SUPPORT
     x.band += DENORMAL_GUARD;
-#endif
 
     if (en_mix)
     {
