@@ -3040,7 +3040,16 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
               p->clear();
               for(int i=1; i<=60; i++)
               {
-                  p->add(m_rkr->B_Names[value][i].Preset_Name);
+                  if(m_rkr->B_Names[value][i].Preset_Name[0] != 0)
+                  {
+                      p->add(m_rkr->B_Names[value][i].Preset_Name);
+                  }
+                  else
+                  {
+                      char buf[64];
+                      sprintf(buf,"Untitled (%d)", i);
+                      p->add(buf);
+                  }
               }
               p->redraw();
               break;

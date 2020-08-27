@@ -642,7 +642,10 @@ public:
         char Preset_Name[64];
         
         Bank_Names():
-            Preset_Name() {}
+            Preset_Name()
+        {
+            Preset_Name[0] = 0;
+        }
     } B_Names[4][62];
 
 

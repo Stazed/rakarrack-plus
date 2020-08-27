@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {52 171 530 580} type Double
+  xywh {374 295 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -1562,12 +1562,22 @@ m_rgui->Scan_Bank_Dir();}
             p->clear();
             for(int i=1; i<=60; i++)
             {
-                p->add(m_rkr->B_Names[value][i].Preset_Name);
+                if(m_rkr->B_Names[value][i].Preset_Name[0] != 0)
+                {
+                    p->add(m_rkr->B_Names[value][i].Preset_Name);
+                }
+                else
+                {
+                    char buf[64];
+                    sprintf(buf,"Untitled (%d)", i);
+                    p->add(buf);
+                }
             }
             p->redraw();
             break;
         }
-    }} {}
+    }} {selected
+    }
   }
   Function {mtfillvalue(int num,int value)} {} {
     code {// fill settings scroll midi table
