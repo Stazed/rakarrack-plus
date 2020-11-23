@@ -7,8 +7,8 @@
         a doap:Project;
         doap:license <http://opensource.org/licenses/GPL-2.0> ;
         doap:maintainer [
-                foaf:name "Rakarrack Team" ;
-                foaf:homepage <http://rakarrack.sourceforge.net>;
+                foaf:name "Rakarrack-plus Team" ;
+                foaf:homepage <https://github.com/Stazed/rakarrack-plus>;
                 foaf:mbox <mailto:Stazed@web.de> ;
         ] .
 
