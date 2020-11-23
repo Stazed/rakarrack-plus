@@ -78,7 +78,7 @@ main(int argc, char *argv[])
 
     if (argc == 1)
     {
-        fprintf(stderr, "Try 'rakarrack --help' for command-line options.\n");
+        fprintf(stderr, "Try 'rakarrack-plus --help' for command-line options.\n");
     }
 
     struct option opts[] =
