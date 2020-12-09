@@ -27,15 +27,10 @@
 #include "jack.h"
 #include "global.h"
 
-
-RKR *JackOUT;
-
-jack_client_t *jackclient;
 jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
 
-int jackprocess(jack_nframes_t nframes, void *arg);
 
 // JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
 #ifdef JACK_SESSION
@@ -44,24 +39,24 @@ void session_callback(jack_session_event_t *event, void *arg);
 #endif
 
 int
-JACKstart(RKR * rkr_, jack_client_t * jackclient_)
+JACKstart(RKR * rkr_)
 {
-    JackOUT = rkr_;
-    jackclient = jackclient_;
+    RKR *JackOUT = rkr_;
+    jack_client_t *jackclient = JackOUT->jackclient;
 
     // Initialize output ringbuffers for MIDIConverter
     JackOUT->efx_MIDIConverter->m_buffSize = jack_ringbuffer_create(JACK_RINGBUFFER_SIZE);
     JackOUT->efx_MIDIConverter->m_buffMessage = jack_ringbuffer_create(JACK_RINGBUFFER_SIZE);
 
-    jack_set_sync_callback(jackclient, timebase, NULL);
-    jack_set_process_callback(jackclient, jackprocess, 0);
+    jack_set_sync_callback(jackclient, timebase, JackOUT);
+    jack_set_process_callback(jackclient, jackprocess, JackOUT);
 
 // JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
 #ifdef JACK_SESSION
-    jack_set_session_callback(jackclient, session_callback, NULL);
+    jack_set_session_callback(jackclient, session_callback, JackOUT);
 #endif
 
-    jack_on_shutdown(jackclient, jackshutdown, 0);
+    jack_on_shutdown(jackclient, jackshutdown, JackOUT);
 
 
     inputport_left =
@@ -127,8 +122,10 @@ JACKstart(RKR * rkr_, jack_client_t * jackclient_)
 }
 
 int
-jackprocess(jack_nframes_t nframes, void * /* arg */)
+jackprocess(jack_nframes_t nframes, void *arg)
 {
+    RKR *JackOUT = (RKR *) arg;
+    
     jack_midi_event_t midievent;
     jack_position_t pos;
     jack_transport_state_t astate;
@@ -148,17 +145,17 @@ jackprocess(jack_nframes_t nframes, void * /* arg */)
             jack_port_get_buffer(inputport_aux, nframes);
 
 
-    JackOUT->cpuload = jack_cpu_load(jackclient);
+    JackOUT->cpuload = jack_cpu_load(JackOUT->jackclient);
 
 
     if ((JackOUT->Tap_Bypass) && (JackOUT->Tap_Selection == 2))
     {
-        astate = jack_transport_query(jackclient, &pos);
+        astate = jack_transport_query(JackOUT->jackclient, &pos);
         
         if (astate > 0)
         {
             if (JackOUT->jt_tempo != pos.beats_per_minute)
-                actualiza_tap(pos.beats_per_minute);
+                actualiza_tap(pos.beats_per_minute, JackOUT);
         }
 
         if (JackOUT->Looper_Bypass)
@@ -272,11 +269,11 @@ jackprocess(jack_nframes_t nframes, void * /* arg */)
 }
 
 void
-JACKfinish()
+JACKfinish(RKR * JackOUT)
 {
-    if(jackclient)
+    if(JackOUT->jackclient)
     {
-        jack_client_close(jackclient);
+        jack_client_close(JackOUT->jackclient);
     }
     
     if(JackOUT->efx_MIDIConverter->m_buffSize != NULL && JackOUT->efx_MIDIConverter->m_buffMessage != NULL)
@@ -289,8 +286,9 @@ JACKfinish()
 }
 
 void
-jackshutdown(void * /* arg */)
+jackshutdown(void *arg)
 {
+    RKR *JackOUT = (RKR *) arg;
     if (gui == 0)
     {
         printf("Jack Shut Down, sorry.\n");
@@ -302,8 +300,10 @@ jackshutdown(void * /* arg */)
 }
 
 int
-timebase(jack_transport_state_t state, jack_position_t *pos, void * /* arg */)
+timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
 {
+    RKR *JackOUT = (RKR *) arg;
+    
     JackOUT->jt_state = state;
 
     if ((JackOUT->Tap_Bypass) && (JackOUT->Tap_Selection == 2))
@@ -327,7 +327,7 @@ timebase(jack_transport_state_t state, jack_position_t *pos, void * /* arg */)
 }
 
 void
-actualiza_tap(double val)
+actualiza_tap(double val, RKR * JackOUT)
 {
     JackOUT->jt_tempo = val;
     JackOUT->Tap_TempoSet = lrint(JackOUT->jt_tempo);
@@ -338,8 +338,10 @@ actualiza_tap(double val)
 // JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
 #ifdef JACK_SESSION
 
-void session_callback(jack_session_event_t *event, void * /* arg */)
+void session_callback(jack_session_event_t *event, void *arg)
 {
+    RKR *JackOUT = (RKR *) arg;
+    
     char filename[256];
     char command[256];
 
@@ -348,7 +350,7 @@ void session_callback(jack_session_event_t *event, void * /* arg */)
     snprintf(command, sizeof (command), "rakarrack -u %s ${SESSION_DIR}rackstate.rkr", s_event->client_uuid);
 
     s_event->command_line = strdup(command);
-    jack_session_reply(jackclient, s_event);
+    jack_session_reply(JackOUT->jackclient, s_event);
 
     if (s_event->type == JackSessionSave)
     {

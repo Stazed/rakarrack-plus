@@ -202,7 +202,7 @@ main(int argc, char *argv[])
         exit(1);
     }
 
-    JACKstart(&rkr, rkr.jackclient);
+    JACKstart(&rkr);
     rkr.InitMIDI();
     rkr.ConnectMIDI();
 
@@ -264,7 +264,7 @@ main(int argc, char *argv[])
         rgui->save_stat(0);
     }
 
-    JACKfinish();
+    JACKfinish(&rkr);
 
     return (0);
 

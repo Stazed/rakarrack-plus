@@ -30,10 +30,11 @@
 #include <jack/session.h>
 #endif
 
-int JACKstart (RKR * rkr_, jack_client_t * jackclient);
-void JACKfinish ();
+int JACKstart (RKR * rkr_);
+void JACKfinish (RKR * JackOUT);
+int jackprocess(jack_nframes_t nframes, void *arg);
 int timebase(jack_transport_state_t state, jack_position_t *pos, void *arg);
-void actualiza_tap(double val);
+void actualiza_tap(double val, RKR * JackOUT);
 void jackshutdown (void *arg);
 
 #endif
