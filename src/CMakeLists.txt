@@ -2,6 +2,7 @@
 
 project (rakarrack-plus)
 
+# JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
 if (EnableJackSessionSupport)
     add_definitions(-DJACK_SESSION=1)
 endif (EnableJackSessionSupport)

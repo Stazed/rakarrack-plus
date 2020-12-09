@@ -65,6 +65,7 @@ set (BuildOptionsDebug
 
 
 # Check for jack session availability
+# JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
 check_c_source_compiles (
     "#include <jack/session.h>
     int main(int argc, char **argv)
@@ -74,8 +75,9 @@ check_c_source_compiles (
     }" HasJackSession
 )
 
+# JACK_SESSION is deprecated as of JACK2 v1.9.15 - setting default to OFF
 if (HasJackSession)
-    option (EnableJackSessionSupport "Include Jack Session Support" ON)
+    option (EnableJackSessionSupport "Include Jack Session Support" OFF)
 else (HasJackSession)
     set (EnableJackSessionSupport OFF)
 endif (HasJackSession)
