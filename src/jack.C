@@ -31,11 +31,9 @@ jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
 
-
 // JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
 #ifdef JACK_SESSION
 jack_session_event_t *s_event;
-void session_callback(jack_session_event_t *event, void *arg);
 #endif
 
 int

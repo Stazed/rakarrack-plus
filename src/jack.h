@@ -15,7 +15,7 @@
   GNU General Public License (version 2) for more details.
 
   You should have received a copy of the GNU General Public License
-(version2)
+  (version2)
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
@@ -26,15 +26,17 @@
 #include "global.h"
 #include "process.h"
 
+// JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
 #ifdef JACK_SESSION
 #include <jack/session.h>
+void session_callback(jack_session_event_t *event, void *arg);
 #endif
 
 int JACKstart (RKR * rkr_);
-void JACKfinish (RKR * JackOUT);
 int jackprocess(jack_nframes_t nframes, void *arg);
+void JACKfinish (RKR * JackOUT);
+void jackshutdown (void *arg);
 int timebase(jack_transport_state_t state, jack_position_t *pos, void *arg);
 void actualiza_tap(double val, RKR * JackOUT);
-void jackshutdown (void *arg);
 
 #endif
