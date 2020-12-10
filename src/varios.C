@@ -67,7 +67,7 @@ RKR::Error_Handle(int num)
         sprintf(error_msg, "%s", "Reverbtron is unable to open the IR .rvb file");
         break;
     case 3:
-        sprintf(error_msg, "%s", "Error writing the file probably you dont have permission to write in this directory");
+        sprintf(error_msg, "%s", "Error writing the file. Do you have permission to write to this directory?");
         break;
     case 4:
         sprintf(error_msg, "%s", "Echotron is unable to open the .dly file");
@@ -151,7 +151,7 @@ RKR::Get_Bogomips()
         {
             if (maxx_len < 2) maxx_len = 2;
             
-            Message(0, "!! Rakarrack CPU Usage Warning !!", "It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
+            Message(0, "!! Rakarrack-plus CPU Usage Warning !!", "It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
         }
 
         fclose(fp);
@@ -384,24 +384,4 @@ RKR::Update_tempo()
     }
 
 }
-
-/*
-void
-RKR::update_freqs(float val)
-{
-    int i;
-
-    aFreq=val;
-    freqs[0] = aFreq;
-    lfreqs[0] = logf (freqs[0]);
-    for (i = 1; i < 12; i++) {
-        freqs[i] = freqs[i - 1] * D_NOTE;
-        lfreqs[i] = lfreqs[i - 1] + LOG_D_NOTE;
-    }
-
-}
- */
-
-
-
 
