@@ -384,51 +384,51 @@ Analog_Phaser::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case APhase_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case APhase_Distortion:
         setdistortion(value);
         break;
-    case 2:
+    case APhase_LFOFreq:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case APhase_LFORand:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case APhase_LFOType:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         barber = 0;
         if (value == 2) barber = 1;
         break;
-    case 5:
+    case APhase_LFOStereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case APhase_Width:
         setwidth(value);
         break;
-    case 7:
+    case APhase_Feedback:
         setfb(value);
         break;
-    case 8:
+    case APhase_Stages:
         setstages(value);
         break;
-    case 9:     // Mismatch
+    case APhase_Mismatch:
         setoffset(value);
         break;
-    case 10:
+    case APhase_Subtract:
         if (value > 1)
             value = 1;
         Poutsub = value;
         break;
-    case 11:
+    case APhase_Depth:
         setdepth(value);
         break;
-    case 12:
+    case APhase_Hyper:
         if (value > 1)
             value = 1;
         Phyper = value;
@@ -441,43 +441,43 @@ Analog_Phaser::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case APhase_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case APhase_Distortion:
         return (Pdistortion);
         break;
-    case 2:
+    case APhase_LFOFreq:
         return (lfo->Pfreq);
         break;
-    case 3:
+    case APhase_LFORand:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case APhase_LFOType:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case APhase_LFOStereo:
         return (lfo->Pstereo);
         break;
-    case 6:
+    case APhase_Width:
         return (Pwidth);
         break;
-    case 7:
+    case APhase_Feedback:
         return (Pfb);
         break;
-    case 8:
+    case APhase_Stages:
         return (Pstages);
         break;
-    case 9:
+    case APhase_Mismatch:
         return (Poffset);
         break;
-    case 10:
+    case APhase_Subtract:
         return (Poutsub);
         break;
-    case 11:
+    case APhase_Depth:
         return (Pdepth);
         break;
-    case 12:
+    case APhase_Hyper:
         return (Phyper);
         break;
 

@@ -28,6 +28,22 @@
 #define APHASER_H
 #include "EffectLFO.h"
 
+enum APhaser_Index
+{
+    APhase_DryWet = 0,
+    APhase_Distortion,
+    APhase_LFOFreq,
+    APhase_LFORand,
+    APhase_LFOType,
+    APhase_LFOStereo,
+    APhase_Width,
+    APhase_Feedback,
+    APhase_Stages,
+    APhase_Mismatch,
+    APhase_Subtract,
+    APhase_Depth,
+    APhase_Hyper
+};
 
 class Analog_Phaser
 {
