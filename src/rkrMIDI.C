@@ -1311,35 +1311,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 117:
-        efx_APhaser->changepar(0, Dry_Wet(value));
+        efx_APhaser->changepar(APhase_DryWet, Dry_Wet(value));
         break;
 
     case 118:
-        efx_APhaser->changepar(1, value);
+        efx_APhaser->changepar(APhase_Distortion, value);
         break;
 
     case 119:
-        efx_APhaser->changepar(2, ret_Tempo(value));
+        efx_APhaser->changepar(APhase_LFOFreq, ret_Tempo(value));
         break;
 
     case 120:
-        efx_APhaser->changepar(11, value);
+        efx_APhaser->changepar(APhase_Depth, value);
         break;
 
     case 121:
-        efx_APhaser->changepar(6, value);
+        efx_APhaser->changepar(APhase_Width, value);
         break;
 
     case 122:
-        efx_APhaser->changepar(7, (int) ((float) value * C_MC_128_RANGE));
+        efx_APhaser->changepar(APhase_Feedback, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 123:
-        efx_APhaser->changepar(9, value);
+        efx_APhaser->changepar(APhase_Mismatch, value);
         break;
 
     case 124:
-        efx_APhaser->changepar(5, value);
+        efx_APhaser->changepar(APhase_LFOStereo, value);
         break;
 
     case 125:
@@ -2529,7 +2529,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 404:
-        efx_APhaser->changepar(3, value);
+        efx_APhaser->changepar(APhase_LFORand, value);
         break;
 
     case 405:
@@ -2741,7 +2741,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 457:
-        efx_APhaser->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_APhaser->changepar(APhase_LFOType, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 458:
