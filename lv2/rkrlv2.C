@@ -739,9 +739,6 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -762,33 +759,57 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->aphase->getpar(i) != val)
-    {
-        plug->aphase->changepar(i,val);
-    }
     
-    for(i++; i<7; i++) //1-6
+    //check and set changed parameters
+    int val = 0;
+    
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->aphase->getpar(i) != val)
+        switch(i)
         {
-            plug->aphase->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64;// 7 Fb offset
-    if(plug->aphase->getpar(i) != val)
-    {
-        plug->aphase->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->aphase->getpar(i) != val)
-        {
-            plug->aphase->changepar(i,val);
+            // Normal processing
+            case APhase_Distortion:
+            case APhase_LFOFreq:
+            case APhase_LFORand:
+            case APhase_LFOType:
+            case APhase_LFOStereo:
+            case APhase_Width:
+            case APhase_Stages:
+            case APhase_Mismatch:
+            case APhase_Subtract:
+            case APhase_Depth:
+            case APhase_Hyper:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->aphase->getpar(i) != val)
+                {
+                    plug->aphase->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case APhase_DryWet: 
+            {
+                val = Dry_Wet((int)*plug->param_p[APhase_DryWet]);
+                if(plug->aphase->getpar(APhase_DryWet) != val)
+                {
+                    plug->aphase->changepar(APhase_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case APhase_Feedback:
+            {
+                val = (int)*plug->param_p[APhase_Feedback] + 64;  // offset
+                if(plug->aphase->getpar(APhase_Feedback) != val)
+                {
+                    plug->aphase->changepar(APhase_Feedback,val);
+                }
+            }
+            break;
         }
     }
 
