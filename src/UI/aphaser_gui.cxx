@@ -55,7 +55,7 @@ void AphaserGui::cb_aphaser_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(117);
  return;
 } 
-rkr->efx_APhaser->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_APhaser->changepar(APhase_DryWet,Dry_Wet((int)(o->value())));
 }
 void AphaserGui::cb_aphaser_WD(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_WD_i(o,v);
@@ -67,7 +67,7 @@ void AphaserGui::cb_aphaser_distort_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(118);
  return;
 } 
-rkr->efx_APhaser->changepar(1,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_Distortion,(int)o->value());
 }
 void AphaserGui::cb_aphaser_distort(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_distort_i(o,v);
@@ -79,7 +79,7 @@ void AphaserGui::cb_aphaser_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(119);
  return;
 } 
-rkr->efx_APhaser->changepar(2,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFOFreq,(int)o->value());
 }
 void AphaserGui::cb_aphaser_freq(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_freq_i(o,v);
@@ -91,7 +91,7 @@ void AphaserGui::cb_aphaser_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(404);
  return;
 } 
-rkr->efx_APhaser->changepar(3,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFORand,(int)o->value());
 }
 void AphaserGui::cb_aphaser_rnd(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_rnd_i(o,v);
@@ -104,7 +104,7 @@ void AphaserGui::cb_aphaser_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_APhaser->changepar(4,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFOType,(int)o->value());
 }
 void AphaserGui::cb_aphaser_lfotype(RKR_Choice* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_lfotype_i(o,v);
@@ -116,7 +116,7 @@ void AphaserGui::cb_aphaser_width_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(121);
  return;
 } 
-rkr->efx_APhaser->changepar(6,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_Width,(int)o->value());
 }
 void AphaserGui::cb_aphaser_width(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_width_i(o,v);
@@ -128,7 +128,7 @@ void AphaserGui::cb_aphaser_phase_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(120);
  return;
 } 
-rkr->efx_APhaser->changepar(11,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_Depth,(int)o->value());
 }
 void AphaserGui::cb_aphaser_phase(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_phase_i(o,v);
@@ -140,7 +140,7 @@ void AphaserGui::cb_aphaser_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(122);
  return;
 } 
-rkr->efx_APhaser->changepar(7,(int)(o->value()+64));
+rkr->efx_APhaser->changepar(APhase_Feedback,(int)(o->value()+64));
 }
 void AphaserGui::cb_aphaser_fb(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_fb_i(o,v);
@@ -152,7 +152,7 @@ void AphaserGui::cb_aphaser_mismatch_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(123);
  return;
 } 
-rkr->efx_APhaser->changepar(9,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_Mismatch,(int)o->value());
 }
 void AphaserGui::cb_aphaser_mismatch(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_mismatch_i(o,v);
@@ -164,28 +164,28 @@ void AphaserGui::cb_aphaser_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(124);
  return;
 } 
-rkr->efx_APhaser->changepar(5,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFOStereo,(int)o->value());
 }
 void AphaserGui::cb_aphaser_stdf(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stdf_i(o,v);
 }
 
 void AphaserGui::cb_aphaser_stages_i(RKR_Counter* o, void*) {
-  rkr->efx_APhaser->changepar(8,(int)o->value());
+  rkr->efx_APhaser->changepar(APhase_Stages,(int)o->value());
 }
 void AphaserGui::cb_aphaser_stages(RKR_Counter* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stages_i(o,v);
 }
 
 void AphaserGui::cb_aphaser_subs_i(RKR_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(10,(int)o->value());
+  rkr->efx_APhaser->changepar(APhase_Subtract,(int)o->value());
 }
 void AphaserGui::cb_aphaser_subs(RKR_Check_Button* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_subs_i(o,v);
 }
 
 void AphaserGui::cb_aphaser_hyper_i(RKR_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(12,(int)o->value());
+  rkr->efx_APhaser->changepar(APhase_Hyper,(int)o->value());
 }
 void AphaserGui::cb_aphaser_hyper(RKR_Check_Button* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_hyper_i(o,v);
