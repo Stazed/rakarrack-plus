@@ -719,13 +719,13 @@ void RKR::getbuf(char *buf, int j)
     case 18:
         //Analog Phaser
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_APhaser->getpar(0), efx_APhaser->getpar(1),
-                efx_APhaser->getpar(2), efx_APhaser->getpar(3),
-                efx_APhaser->getpar(4), efx_APhaser->getpar(5),
-                efx_APhaser->getpar(6), efx_APhaser->getpar(7),
-                efx_APhaser->getpar(8), efx_APhaser->getpar(9),
-                efx_APhaser->getpar(10), efx_APhaser->getpar(11),
-                efx_APhaser->getpar(12), APhaser_Bypass);
+                efx_APhaser->getpar(APhase_DryWet), efx_APhaser->getpar(APhase_Distortion),
+                efx_APhaser->getpar(APhase_LFOFreq), efx_APhaser->getpar(APhase_LFORand),
+                efx_APhaser->getpar(APhase_LFOType), efx_APhaser->getpar(APhase_LFOStereo),
+                efx_APhaser->getpar(APhase_Width), efx_APhaser->getpar(APhase_Feedback),
+                efx_APhaser->getpar(APhase_Stages), efx_APhaser->getpar(APhase_Mismatch),
+                efx_APhaser->getpar(APhase_Subtract), efx_APhaser->getpar(APhase_Depth),
+                efx_APhaser->getpar(APhase_Hyper), APhaser_Bypass);
         break;
 
     case 19:

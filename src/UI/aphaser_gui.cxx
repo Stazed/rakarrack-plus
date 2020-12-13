@@ -21,19 +21,19 @@ void AphaserGui::cb_aphaser_activar(RKR_Light_Button* o, void* v) {
 void AphaserGui::cb_aphaser_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
-aphaser_WD->value(Dry_Wet(rkr->efx_APhaser->getpar(0)));
-aphaser_distort->value(rkr->efx_APhaser->getpar(1));
-aphaser_freq->value(rkr->efx_APhaser->getpar(2));
-aphaser_rnd->value(rkr->efx_APhaser->getpar(3));
-aphaser_lfotype->value(rkr->efx_APhaser->getpar(4));
-aphaser_stdf->value(rkr->efx_APhaser->getpar(5));
-aphaser_width->value(rkr->efx_APhaser->getpar(6));
-aphaser_stages->value(rkr->efx_APhaser->getpar(8));
-aphaser_fb->value(rkr->efx_APhaser->getpar(7)-64);
-aphaser_mismatch->value(rkr->efx_APhaser->getpar(9));
-aphaser_subs->value(rkr->efx_APhaser->getpar(10));
-aphaser_phase->value(rkr->efx_APhaser->getpar(11));
-aphaser_hyper->value(rkr->efx_APhaser->getpar(12));
+aphaser_WD->value(Dry_Wet(rkr->efx_APhaser->getpar(APhase_DryWet)));
+aphaser_distort->value(rkr->efx_APhaser->getpar(APhase_Distortion));
+aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFOFreq));
+aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFORand));
+aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFOType));
+aphaser_stdf->value(rkr->efx_APhaser->getpar(APhase_LFOStereo));
+aphaser_width->value(rkr->efx_APhaser->getpar(APhase_Width));
+aphaser_stages->value(rkr->efx_APhaser->getpar(APhase_Stages));
+aphaser_fb->value(rkr->efx_APhaser->getpar(APhase_Feedback)-64);
+aphaser_mismatch->value(rkr->efx_APhaser->getpar(APhase_Mismatch));
+aphaser_subs->value(rkr->efx_APhaser->getpar(APhase_Subtract));
+aphaser_phase->value(rkr->efx_APhaser->getpar(APhase_Depth));
+aphaser_hyper->value(rkr->efx_APhaser->getpar(APhase_Hyper));
 }
 void AphaserGui::cb_aphaser_preset(RKR_Choice* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_preset_i(o,v);
