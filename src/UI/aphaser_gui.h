@@ -57,10 +57,10 @@ private:
   inline void cb_aphaser_width_i(RKR_Slider*, void*);
   static void cb_aphaser_width(RKR_Slider*, void*);
 public:
-  RKR_Slider *aphaser_phase;
+  RKR_Slider *aphaser_depth;
 private:
-  inline void cb_aphaser_phase_i(RKR_Slider*, void*);
-  static void cb_aphaser_phase(RKR_Slider*, void*);
+  inline void cb_aphaser_depth_i(RKR_Slider*, void*);
+  static void cb_aphaser_depth(RKR_Slider*, void*);
 public:
   RKR_Slider *aphaser_fb;
 private:

@@ -3540,8 +3540,8 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_freq->redraw();
                 break;
             case 120:
-                APHASER->aphaser_phase->value(rkr->efx_APhaser->getpar(APhase_Depth));
-                APHASER->aphaser_phase->redraw();
+                APHASER->aphaser_depth->value(rkr->efx_APhaser->getpar(APhase_Depth));
+                APHASER->aphaser_depth->redraw();
                 break;
             case 121:
                 APHASER->aphaser_width->value(rkr->efx_APhaser->getpar(APhase_Width));

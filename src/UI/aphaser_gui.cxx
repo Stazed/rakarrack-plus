@@ -32,7 +32,7 @@ aphaser_stages->value(rkr->efx_APhaser->getpar(APhase_Stages));
 aphaser_fb->value(rkr->efx_APhaser->getpar(APhase_Feedback)-64);
 aphaser_mismatch->value(rkr->efx_APhaser->getpar(APhase_Mismatch));
 aphaser_subs->value(rkr->efx_APhaser->getpar(APhase_Subtract));
-aphaser_phase->value(rkr->efx_APhaser->getpar(APhase_Depth));
+aphaser_depth->value(rkr->efx_APhaser->getpar(APhase_Depth));
 aphaser_hyper->value(rkr->efx_APhaser->getpar(APhase_Hyper));
 }
 void AphaserGui::cb_aphaser_preset(RKR_Choice* o, void* v) {
@@ -122,7 +122,7 @@ void AphaserGui::cb_aphaser_width(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_width_i(o,v);
 }
 
-void AphaserGui::cb_aphaser_phase_i(RKR_Slider* o, void*) {
+void AphaserGui::cb_aphaser_depth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(120);
@@ -130,8 +130,8 @@ void AphaserGui::cb_aphaser_phase_i(RKR_Slider* o, void*) {
 } 
 rkr->efx_APhaser->changepar(APhase_Depth,(int)o->value());
 }
-void AphaserGui::cb_aphaser_phase(RKR_Slider* o, void* v) {
-  ((AphaserGui*)(o->parent()))->cb_aphaser_phase_i(o,v);
+void AphaserGui::cb_aphaser_depth(RKR_Slider* o, void* v) {
+  ((AphaserGui*)(o->parent()))->cb_aphaser_depth_i(o,v);
 }
 
 void AphaserGui::cb_aphaser_fb_i(RKR_Slider* o, void*) {
@@ -323,23 +323,23 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   aphaser_width->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_width->when(FL_WHEN_CHANGED);
 } // RKR_Slider* aphaser_width
-{ aphaser_phase = new RKR_Slider(56, 67, 100, 10, "P. Depth");
-  aphaser_phase->tooltip("Phase Depth");
-  aphaser_phase->type(5);
-  aphaser_phase->box(FL_FLAT_BOX);
-  aphaser_phase->color((Fl_Color)178);
-  aphaser_phase->selection_color((Fl_Color)62);
-  aphaser_phase->labeltype(FL_NORMAL_LABEL);
-  aphaser_phase->labelfont(0);
-  aphaser_phase->labelsize(10);
-  aphaser_phase->labelcolor(FL_BACKGROUND2_COLOR);
-  aphaser_phase->maximum(127);
-  aphaser_phase->step(1);
-  aphaser_phase->textcolor(FL_BACKGROUND2_COLOR);
-  aphaser_phase->callback((Fl_Callback*)cb_aphaser_phase);
-  aphaser_phase->align(Fl_Align(FL_ALIGN_LEFT));
-  aphaser_phase->when(FL_WHEN_CHANGED);
-} // RKR_Slider* aphaser_phase
+{ aphaser_depth = new RKR_Slider(56, 67, 100, 10, "P. Depth");
+  aphaser_depth->tooltip("Phase Depth");
+  aphaser_depth->type(5);
+  aphaser_depth->box(FL_FLAT_BOX);
+  aphaser_depth->color((Fl_Color)178);
+  aphaser_depth->selection_color((Fl_Color)62);
+  aphaser_depth->labeltype(FL_NORMAL_LABEL);
+  aphaser_depth->labelfont(0);
+  aphaser_depth->labelsize(10);
+  aphaser_depth->labelcolor(FL_BACKGROUND2_COLOR);
+  aphaser_depth->maximum(127);
+  aphaser_depth->step(1);
+  aphaser_depth->textcolor(FL_BACKGROUND2_COLOR);
+  aphaser_depth->callback((Fl_Callback*)cb_aphaser_depth);
+  aphaser_depth->align(Fl_Align(FL_ALIGN_LEFT));
+  aphaser_depth->when(FL_WHEN_CHANGED);
+} // RKR_Slider* aphaser_depth
 { aphaser_fb = new RKR_Slider(56, 91, 100, 10, "Feedback");
   aphaser_fb->type(5);
   aphaser_fb->box(FL_FLAT_BOX);
