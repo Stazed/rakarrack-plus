@@ -260,41 +260,41 @@ Alienwah::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Alien_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Alien_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Alien_LFOFreq:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case Alien_LFORand:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case Alien_LFOType:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5:
+    case Alien_LFOStereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case Alien_Depth:
         setdepth(value);
         break;
-    case 7:
+    case Alien_Feedback:
         setfb(value);
         break;
-    case 8:
+    case Alien_Delay:
         setdelay(value);
         break;
-    case 9:
+    case Alien_LRCross:
         setlrcross(value);
         break;
-    case 10:
+    case Alien_Phase:
         setphase(value);
         break;
     }
@@ -305,37 +305,37 @@ Alienwah::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Alien_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Alien_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Alien_LFOFreq:
         return (lfo->Pfreq);
         break;
-    case 3:
+    case Alien_LFORand:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case Alien_LFOType:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case Alien_LFOStereo:
         return (lfo->Pstereo);
         break;
-    case 6:
+    case Alien_Depth:
         return (Pdepth);
         break;
-    case 7:
+    case Alien_Feedback:
         return (Pfb);
         break;
-    case 8:
+    case Alien_Delay:
         return (Pdelay);
         break;
-    case 9:
+    case Alien_LRCross:
         return (Plrcross);
         break;
-    case 10:
+    case Alien_Phase:
         return (Pphase);
         break;
     default:

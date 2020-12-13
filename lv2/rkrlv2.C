@@ -1197,9 +1197,6 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     if( nframes == 0)
         return;
     
-    int i;
-    int val;
-
     RKRLV2* plug = (RKRLV2*)handle;
     
     check_shared_buf(plug,nframes);
@@ -1219,29 +1216,58 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+    
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);//0 Wet/Dry
-    if(plug->alien->getpar(i) != val)
+    int val = 0;
+    
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->alien->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] +64;// 1 pan is offset
-    if(plug->alien->getpar(i) != val)
-    {
-        plug->alien->changepar(i,val);
-    }
-
-    for(i++; i<plug->nparams; i++) //2-10
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->alien->getpar(i) != val)
+        switch(i)
         {
-            plug->alien->changepar(i,val);
+            // Normal processing
+            case Alien_LFOFreq:
+            case Alien_LFORand:
+            case Alien_LFOType:
+            case Alien_LFOStereo:
+            case Alien_Depth:
+            case Alien_Feedback:
+            case Alien_Delay:
+            case Alien_LRCross:
+            case Alien_Phase:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->alien->getpar(i) != val)
+                {
+                    plug->alien->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Alien_DryWet: 
+            {
+                val = Dry_Wet((int)*plug->param_p[Alien_DryWet]);
+                if(plug->alien->getpar(Alien_DryWet) != val)
+                {
+                    plug->alien->changepar(Alien_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case Alien_Pan:
+            {
+                val = (int)*plug->param_p[Alien_Pan] + 64;   // offset
+                if(plug->alien->getpar(Alien_Pan) != val)
+                {
+                    plug->alien->changepar(Alien_Pan,val);
+                }
+            }
+            break;
         }
     }
-
+    
     //now run
     plug->alien->out(plug->output_l_p, plug->output_r_p);
 

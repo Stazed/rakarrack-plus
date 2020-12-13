@@ -3201,7 +3201,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_dpth->redraw();
                 break;
             case 20:
-                ALIENWAH->Alienwah_dpth->value(rkr->efx_Alienwah->getpar(6));
+                ALIENWAH->Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
                 ALIENWAH->Alienwah_dpth->redraw();
                 break;
             case 21:
@@ -3261,7 +3261,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_WD->redraw();
                 break;
             case 55:
-                ALIENWAH->Alienwah_WD->value(Dry_Wet(rkr->efx_Alienwah->getpar(0)));
+                ALIENWAH->Alienwah_WD->value(Dry_Wet(rkr->efx_Alienwah->getpar(Alien_DryWet)));
                 ALIENWAH->Alienwah_WD->redraw();
                 break;
             case 56:
@@ -3309,7 +3309,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_pan->redraw();
                 break;
             case 61:
-                ALIENWAH->Alienwah_pan->value(rkr->efx_Alienwah->getpar(1) - 64);
+                ALIENWAH->Alienwah_pan->value(rkr->efx_Alienwah->getpar(Alien_Pan) - 64);
                 ALIENWAH->Alienwah_pan->redraw();
                 break;
             case 62:
@@ -3365,7 +3365,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_freq->redraw();
                 break;
             case 76:
-                ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+                ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFOFreq));
                 ALIENWAH->Alienwah_freq->redraw();
                 break;
             case 77:
@@ -3389,7 +3389,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_fb->redraw();
                 break;
             case 82:
-                ALIENWAH->Alienwah_fb->value(rkr->efx_Alienwah->getpar(7));
+                ALIENWAH->Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
                 ALIENWAH->Alienwah_fb->redraw();
                 break;
             case 83:
@@ -3445,7 +3445,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_LRc->redraw();
                 break;
             case 96:
-                ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(9));
+                ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LRCross));
                 ALIENWAH->Alienwah_LR->redraw();
                 break;
             case 97:
@@ -3473,7 +3473,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_stdf->redraw();
                 break;
             case 103:
-                ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(5));
+                ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFOStereo));
                 ALIENWAH->Alienwah_stdf->redraw();
                 break;
             case 104:
@@ -3497,7 +3497,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_rnd->redraw();
                 break;
             case 109:
-                ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(3));
+                ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFORand));
                 ALIENWAH->Alienwah_rnd->redraw();
                 break;
             case 110:
@@ -3521,7 +3521,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_phase->redraw();
                 break;
             case 115:
-                ALIENWAH->Alienwah_phase->value(rkr->efx_Alienwah->getpar(10));
+                ALIENWAH->Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));
                 ALIENWAH->Alienwah_phase->redraw();
                 break;
             case 116:
@@ -4704,7 +4704,7 @@ void RKRGUI::ActMIDI()
                 INFINIT->infinity_subdiv->redraw();
                 break;
             case 403:
-                ALIENWAH->Alienwah_delay->value(rkr->efx_Alienwah->getpar(8));
+                ALIENWAH->Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
                 ALIENWAH->Alienwah_delay->redraw();
                 break;
             case 404:
@@ -4918,7 +4918,7 @@ void RKRGUI::ActMIDI()
                 STOMPBOX->stomp_mode->redraw();
                 break;
             case 456:
-                ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(4));
+                ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFOType));
                 ALIENWAH->Alienwah_lfotype->redraw();
                 break;
             case 457:

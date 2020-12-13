@@ -362,7 +362,7 @@ RKR::Update_tempo()
     if (Phaser_Bypass) efx_Phaser->changepar(2, Tap_TempoSetL);
     if (Pan_Bypass) efx_Pan->changepar(2, Tap_TempoSetL);
     if (WhaWha_Bypass) efx_WhaWha->changepar(2, Tap_TempoSetL);
-    if (Alienwah_Bypass) efx_Alienwah->changepar(2, Tap_TempoSetL);
+    if (Alienwah_Bypass) efx_Alienwah->changepar(Alien_LFOFreq, Tap_TempoSetL);
     if (MusDelay_Bypass) efx_MusDelay->changepar(10, Tap_TempoSetD);
     if (APhaser_Bypass) efx_APhaser->changepar(APhase_LFOFreq, Tap_TempoSetL);
     if (DFlange_Bypass) efx_DFlange->changepar(10, Tap_TempoSetL);

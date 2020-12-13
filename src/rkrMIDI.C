@@ -978,7 +978,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 20:
-        efx_Alienwah->changepar(6, value);
+        efx_Alienwah->changepar(Alien_Depth, value);
         break;
 
     case 21:
@@ -1043,7 +1043,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 55:
-        efx_Alienwah->changepar(0, Dry_Wet(value));
+        efx_Alienwah->changepar(Alien_DryWet, Dry_Wet(value));
         break;
 
     case 56:
@@ -1091,7 +1091,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 61:
-        efx_Alienwah->changepar(1, value);
+        efx_Alienwah->changepar(Alien_Pan, value);
         break;
 
     case 62:
@@ -1147,7 +1147,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 76:
-        efx_Alienwah->changepar(2, ret_Tempo(value));
+        efx_Alienwah->changepar(Alien_LFOFreq, ret_Tempo(value));
         break;
 
     case 77:
@@ -1171,7 +1171,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 82:
-        efx_Alienwah->changepar(7, value);
+        efx_Alienwah->changepar(Alien_Feedback, value);
         break;
 
     case 83:
@@ -1227,7 +1227,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 96:
-        efx_Alienwah->changepar(9, value);
+        efx_Alienwah->changepar(Alien_LRCross, value);
         break;
 
     case 97:
@@ -1255,7 +1255,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 103:
-        efx_Alienwah->changepar(5, value);
+        efx_Alienwah->changepar(Alien_LFOStereo, value);
         break;
 
     case 104:
@@ -1279,7 +1279,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 109:
-        efx_Alienwah->changepar(3, value);
+        efx_Alienwah->changepar(Alien_LFORand, value);
         break;
 
     case 110:
@@ -1303,7 +1303,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 115:
-        efx_Alienwah->changepar(10, value);
+        efx_Alienwah->changepar(Alien_Phase, value);
         break;
 
     case 116:
@@ -2525,7 +2525,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 403:
-        efx_Alienwah->changepar(8, (int) ((float) value * C_MC_100_RANGE));
+        efx_Alienwah->changepar(Alien_Delay, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 404:
@@ -2737,7 +2737,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 456:
-        efx_Alienwah->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_Alienwah->changepar(Alien_LFOType, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 457:

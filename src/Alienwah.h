@@ -27,7 +27,20 @@
 #define ALIENWAH_H
 #include "EffectLFO.h"
 
-
+enum AlienWah_Index
+{
+    Alien_DryWet = 0,
+    Alien_Pan,
+    Alien_LFOFreq,
+    Alien_LFORand,
+    Alien_LFOType,
+    Alien_LFOStereo,
+    Alien_Depth,
+    Alien_Feedback,
+    Alien_Delay,
+    Alien_LRCross,
+    Alien_Phase
+};
 
 struct COMPLEXTYPE
 {
