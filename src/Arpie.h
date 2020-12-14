@@ -27,6 +27,21 @@
 
 #include "global.h"
 
+enum Arpie_Index
+{
+    Arpie_DryWet = 0,
+    Arpie_Pan,
+    Arpie_Tempo,
+    Arpie_LRDelay,
+    Arpie_LRCross,
+    Arpie_Feedback,
+    Arpie_Damp,
+    Arpie_ArpeWD,
+    Arpie_Harm,
+    Arpie_Pattern,
+    Arpie_Subdivision
+};
+
 class Arpie
 {
 public:

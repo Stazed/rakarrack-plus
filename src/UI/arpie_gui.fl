@@ -40,17 +40,17 @@ rgui->findpos(24,(int)o->value(),o);}
     user_data 12024
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
-arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
-arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
-arpie_delay->value(rkr->efx_Arpie->getpar(2));
-arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
-arpie_LRc->value(rkr->efx_Arpie->getpar(4));
-arpie_fb->value(rkr->efx_Arpie->getpar(5));
-arpie_damp->value(rkr->efx_Arpie->getpar(6));
-arpie_arpe->value(rkr->efx_Arpie->getpar(7));
-arpie_harm->value(rkr->efx_Arpie->getpar(8));
-arpie_pattern->value(rkr->efx_Arpie->getpar(9));
-arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
+arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(Arpie_DryWet)));
+arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan)-64);
+arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
+arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LRDelay));
+arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LRCross));
+arpie_fb->value(rkr->efx_Arpie->getpar(Arpie_Feedback));
+arpie_damp->value(rkr->efx_Arpie->getpar(Arpie_Damp));
+arpie_arpe->value(rkr->efx_Arpie->getpar(Arpie_ArpeWD));
+arpie_harm->value(rkr->efx_Arpie->getpar(Arpie_Harm));
+arpie_pattern->value(rkr->efx_Arpie->getpar(Arpie_Pattern));
+arpie_subdiv->value(rkr->efx_Arpie->getpar(Arpie_Subdivision));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -102,7 +102,7 @@ arpie_subdiv->value(rkr->efx_Arpie->getpar(10));}
  rgui->getMIDIControl(212);
  return;
 } 
-rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Arpie->changepar(Arpie_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -113,7 +113,7 @@ rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(213);
  return;
 } 
-rkr->efx_Arpie->changepar(7,(int)o->value());}
+rkr->efx_Arpie->changepar(Arpie_ArpeWD,(int)o->value());} selected
     xywh {56 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -124,7 +124,7 @@ rkr->efx_Arpie->changepar(7,(int)o->value());}
  rgui->getMIDIControl(214);
  return;
 } 
-rkr->efx_Arpie->changepar(1,(int)(o->value()+64));}
+rkr->efx_Arpie->changepar(Arpie_Pan,(int)(o->value()+64));}
     xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -135,14 +135,14 @@ rkr->efx_Arpie->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(215);
  return;
 } 
-rkr->efx_Arpie->changepar(2,(int)o->value());}
+rkr->efx_Arpie->changepar(Arpie_Tempo,(int)o->value());}
     xywh {56 70 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice arpie_subdiv {
     label SubDivision
     user_data 12
-    callback {rkr->efx_Arpie->changepar(10,(int)o->value());} open
+    callback {rkr->efx_Arpie->changepar(Arpie_Subdivision,(int)o->value());} open
     xywh {78 82 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
     class RKR_Choice
@@ -154,7 +154,7 @@ rkr->efx_Arpie->changepar(2,(int)o->value());}
  rgui->getMIDIControl(216);
  return;
 } 
-rkr->efx_Arpie->changepar(3,(int)o->value());}
+rkr->efx_Arpie->changepar(Arpie_LRDelay,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -165,7 +165,7 @@ rkr->efx_Arpie->changepar(3,(int)o->value());}
  rgui->getMIDIControl(217);
  return;
 } 
-rkr->efx_Arpie->changepar(4,(int)(o->value()));}
+rkr->efx_Arpie->changepar(Arpie_LRCross,(int)(o->value()));}
     xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -176,7 +176,7 @@ rkr->efx_Arpie->changepar(4,(int)(o->value()));}
  rgui->getMIDIControl(218);
  return;
 } 
-rkr->efx_Arpie->changepar(5,(int)o->value());}
+rkr->efx_Arpie->changepar(Arpie_Feedback,(int)o->value());}
     xywh {56 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -187,20 +187,20 @@ rkr->efx_Arpie->changepar(5,(int)o->value());}
  rgui->getMIDIControl(219);
  return;
 } 
-rkr->efx_Arpie->changepar(6,(int)o->value());}
+rkr->efx_Arpie->changepar(Arpie_Damp,(int)o->value());}
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Counter arpie_harm {
     label H
-    callback {rkr->efx_Arpie->changepar(8,(int)o->value());} selected
+    callback {rkr->efx_Arpie->changepar(Arpie_Harm,(int)o->value());}
     tooltip {Number of steps in the pattern} xywh {20 150 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 8 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Choice arpie_pattern {
     user_data 12
-    callback {rkr->efx_Arpie->changepar(9,(int)o->value());}
+    callback {rkr->efx_Arpie->changepar(Arpie_Pattern,(int)o->value());}
     xywh {77 147 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

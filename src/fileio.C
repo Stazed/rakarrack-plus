@@ -793,12 +793,12 @@ void RKR::getbuf(char *buf, int j)
     case 24:
         //Arpie
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Arpie->getpar(0), efx_Arpie->getpar(1),
-                efx_Arpie->getpar(2), efx_Arpie->getpar(3),
-                efx_Arpie->getpar(4), efx_Arpie->getpar(5),
-                efx_Arpie->getpar(6), efx_Arpie->getpar(7),
-                efx_Arpie->getpar(8), efx_Arpie->getpar(9),
-                efx_Arpie->getpar(10), Arpie_Bypass);
+                efx_Arpie->getpar(Arpie_DryWet), efx_Arpie->getpar(Arpie_Pan),
+                efx_Arpie->getpar(Arpie_Tempo), efx_Arpie->getpar(Arpie_LRDelay),
+                efx_Arpie->getpar(Arpie_LRCross), efx_Arpie->getpar(Arpie_Feedback),
+                efx_Arpie->getpar(Arpie_Damp), efx_Arpie->getpar(Arpie_ArpeWD),
+                efx_Arpie->getpar(Arpie_Harm), efx_Arpie->getpar(Arpie_Pattern),
+                efx_Arpie->getpar(Arpie_Subdivision), Arpie_Bypass);
         break;
 
     case 25:

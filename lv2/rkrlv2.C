@@ -2190,9 +2190,6 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2214,25 +2211,53 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->arp->getpar(i) != val)
+    int val = 0;
+    
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->arp->changepar(i,val);
-    }
-    i++;//panning is offset
-    val = (int)*plug->param_p[i]+64;
-    if(plug->arp->getpar(i) != val)
-    {
-        plug->arp->changepar(i,val);
-    }
-
-    for(i++; i<plug->nparams; i++) //rest are not offset
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->arp->getpar(i) != val)
+        switch(i)
         {
-            plug->arp->changepar(i,val);
+            // Normal processing
+            case Arpie_Tempo:
+            case Arpie_LRDelay:
+            case Arpie_LRCross:
+            case Arpie_Feedback:
+            case Arpie_Damp:
+            case Arpie_ArpeWD:
+            case Arpie_Harm:
+            case Arpie_Pattern:
+            case Arpie_Subdivision:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->arp->getpar(i) != val)
+                {
+                    plug->arp->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Arpie_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[Arpie_DryWet]);
+                if(plug->arp->getpar(Arpie_DryWet) != val)
+                {
+                    plug->arp->changepar(Arpie_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case Arpie_Pan:
+            {
+                val = (int)*plug->param_p[Arpie_Pan] + 64;  // offset
+                if(plug->arp->getpar(Arpie_Pan) != val)
+                {
+                    plug->arp->changepar(Arpie_Pan,val);
+                }
+            }
+            break;
         }
     }
 

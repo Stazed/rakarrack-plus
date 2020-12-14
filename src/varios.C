@@ -370,7 +370,7 @@ RKR::Update_tempo()
     if (MuTroMojo_Bypass) efx_MuTroMojo->changepar(2, Tap_TempoSetL);
     if (VaryBand_Bypass) efx_VaryBand->changepar(1, Tap_TempoSetL);
     if (VaryBand_Bypass) efx_VaryBand->changepar(4, Tap_TempoSetL);
-    if (Arpie_Bypass) efx_Arpie->changepar(2, Tap_TempoSetD);
+    if (Arpie_Bypass) efx_Arpie->changepar(Arpie_Tempo, Tap_TempoSetD);
     if (Echoverse_Bypass) efx_Echoverse->changepar(2, Tap_TempoSetD);
     if (Sequence_Bypass) efx_Sequence->changepar(9, Tap_TempoSetD);
     if (Echotron_Bypass) efx_Echotron->changepar(5, Tap_TempoSetD);

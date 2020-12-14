@@ -21,17 +21,17 @@ void ArpieGui::cb_arpie_activar(RKR_Light_Button* o, void* v) {
 void ArpieGui::cb_arpie_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
-arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
-arpie_pan->value(rkr->efx_Arpie->getpar(1)-64);
-arpie_delay->value(rkr->efx_Arpie->getpar(2));
-arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
-arpie_LRc->value(rkr->efx_Arpie->getpar(4));
-arpie_fb->value(rkr->efx_Arpie->getpar(5));
-arpie_damp->value(rkr->efx_Arpie->getpar(6));
-arpie_arpe->value(rkr->efx_Arpie->getpar(7));
-arpie_harm->value(rkr->efx_Arpie->getpar(8));
-arpie_pattern->value(rkr->efx_Arpie->getpar(9));
-arpie_subdiv->value(rkr->efx_Arpie->getpar(10));
+arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(Arpie_DryWet)));
+arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan)-64);
+arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
+arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LRDelay));
+arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LRCross));
+arpie_fb->value(rkr->efx_Arpie->getpar(Arpie_Feedback));
+arpie_damp->value(rkr->efx_Arpie->getpar(Arpie_Damp));
+arpie_arpe->value(rkr->efx_Arpie->getpar(Arpie_ArpeWD));
+arpie_harm->value(rkr->efx_Arpie->getpar(Arpie_Harm));
+arpie_pattern->value(rkr->efx_Arpie->getpar(Arpie_Pattern));
+arpie_subdiv->value(rkr->efx_Arpie->getpar(Arpie_Subdivision));
 }
 void ArpieGui::cb_arpie_preset(RKR_Choice* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_preset_i(o,v);
@@ -57,7 +57,7 @@ void ArpieGui::cb_arpie_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(212);
  return;
 } 
-rkr->efx_Arpie->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_Arpie->changepar(Arpie_DryWet,Dry_Wet((int)(o->value())));
 }
 void ArpieGui::cb_arpie_WD(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_WD_i(o,v);
@@ -69,7 +69,7 @@ void ArpieGui::cb_arpie_arpe_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(213);
  return;
 } 
-rkr->efx_Arpie->changepar(7,(int)o->value());
+rkr->efx_Arpie->changepar(Arpie_ArpeWD,(int)o->value());
 }
 void ArpieGui::cb_arpie_arpe(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_arpe_i(o,v);
@@ -81,7 +81,7 @@ void ArpieGui::cb_arpie_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(214);
  return;
 } 
-rkr->efx_Arpie->changepar(1,(int)(o->value()+64));
+rkr->efx_Arpie->changepar(Arpie_Pan,(int)(o->value()+64));
 }
 void ArpieGui::cb_arpie_pan(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_pan_i(o,v);
@@ -93,14 +93,14 @@ void ArpieGui::cb_arpie_delay_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(215);
  return;
 } 
-rkr->efx_Arpie->changepar(2,(int)o->value());
+rkr->efx_Arpie->changepar(Arpie_Tempo,(int)o->value());
 }
 void ArpieGui::cb_arpie_delay(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_delay_i(o,v);
 }
 
 void ArpieGui::cb_arpie_subdiv_i(RKR_Choice* o, void*) {
-  rkr->efx_Arpie->changepar(10,(int)o->value());
+  rkr->efx_Arpie->changepar(Arpie_Subdivision,(int)o->value());
 }
 void ArpieGui::cb_arpie_subdiv(RKR_Choice* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_subdiv_i(o,v);
@@ -112,7 +112,7 @@ void ArpieGui::cb_arpie_LRdl_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(216);
  return;
 } 
-rkr->efx_Arpie->changepar(3,(int)o->value());
+rkr->efx_Arpie->changepar(Arpie_LRDelay,(int)o->value());
 }
 void ArpieGui::cb_arpie_LRdl(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_LRdl_i(o,v);
@@ -124,7 +124,7 @@ void ArpieGui::cb_arpie_LRc_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(217);
  return;
 } 
-rkr->efx_Arpie->changepar(4,(int)(o->value()));
+rkr->efx_Arpie->changepar(Arpie_LRCross,(int)(o->value()));
 }
 void ArpieGui::cb_arpie_LRc(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_LRc_i(o,v);
@@ -136,7 +136,7 @@ void ArpieGui::cb_arpie_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(218);
  return;
 } 
-rkr->efx_Arpie->changepar(5,(int)o->value());
+rkr->efx_Arpie->changepar(Arpie_Feedback,(int)o->value());
 }
 void ArpieGui::cb_arpie_fb(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_fb_i(o,v);
@@ -148,21 +148,21 @@ void ArpieGui::cb_arpie_damp_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(219);
  return;
 } 
-rkr->efx_Arpie->changepar(6,(int)o->value());
+rkr->efx_Arpie->changepar(Arpie_Damp,(int)o->value());
 }
 void ArpieGui::cb_arpie_damp(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_damp_i(o,v);
 }
 
 void ArpieGui::cb_arpie_harm_i(RKR_Counter* o, void*) {
-  rkr->efx_Arpie->changepar(8,(int)o->value());
+  rkr->efx_Arpie->changepar(Arpie_Harm,(int)o->value());
 }
 void ArpieGui::cb_arpie_harm(RKR_Counter* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_harm_i(o,v);
 }
 
 void ArpieGui::cb_arpie_pattern_i(RKR_Choice* o, void*) {
-  rkr->efx_Arpie->changepar(9,(int)o->value());
+  rkr->efx_Arpie->changepar(Arpie_Pattern,(int)o->value());
 }
 void ArpieGui::cb_arpie_pattern(RKR_Choice* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_pattern_i(o,v);

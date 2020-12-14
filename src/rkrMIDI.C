@@ -1721,35 +1721,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 212:
-        efx_Arpie->changepar(0, Dry_Wet(value));
+        efx_Arpie->changepar(Arpie_DryWet, Dry_Wet(value));
         break;
 
     case 213:
-        efx_Arpie->changepar(7, value);
+        efx_Arpie->changepar(Arpie_ArpeWD, value);
         break;
 
     case 214:
-        efx_Arpie->changepar(1, value - 64);
+        efx_Arpie->changepar(Arpie_Pan, value - 64);
         break;
 
     case 215:
-        efx_Arpie->changepar(2, ret_Tempo(value));
+        efx_Arpie->changepar(Arpie_Tempo, ret_Tempo(value));
         break;
 
     case 216:
-        efx_Arpie->changepar(3, value);
+        efx_Arpie->changepar(Arpie_LRDelay, value);
         break;
 
     case 217:
-        efx_Arpie->changepar(4, value);
+        efx_Arpie->changepar(Arpie_LRCross, value);
         break;
 
     case 218:
-        efx_Arpie->changepar(5, value);
+        efx_Arpie->changepar(Arpie_Feedback, value);
         break;
 
     case 219:
-        efx_Arpie->changepar(6, value);
+        efx_Arpie->changepar(Arpie_Damp, value);
         break;
 
     case 220:

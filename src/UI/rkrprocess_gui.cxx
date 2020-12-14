@@ -3928,35 +3928,35 @@ void RKRGUI::ActMIDI()
                 DISTBAND->distband_pan->redraw();
                 break;
             case 212:
-                ARPIE->arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(0)));
+                ARPIE->arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(Arpie_DryWet)));
                 ARPIE->arpie_WD->redraw();
                 break;
             case 213:
-                ARPIE->arpie_arpe->value(rkr->efx_Arpie->getpar(7));
+                ARPIE->arpie_arpe->value(rkr->efx_Arpie->getpar(Arpie_ArpeWD));
                 ARPIE->arpie_arpe->redraw();
                 break;
             case 214:
-                ARPIE->arpie_pan->value(rkr->efx_Arpie->getpar(1));
+                ARPIE->arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan));
                 ARPIE->arpie_pan->redraw();
                 break;
             case 215:
-                ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(2));
+                ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
                 ARPIE->arpie_delay->redraw();
                 break;
             case 216:
-                ARPIE->arpie_LRdl->value(rkr->efx_Arpie->getpar(3));
+                ARPIE->arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LRDelay));
                 ARPIE->arpie_LRdl->redraw();
                 break;
             case 217:
-                ARPIE->arpie_LRc->value(rkr->efx_Arpie->getpar(4));
+                ARPIE->arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LRCross));
                 ARPIE->arpie_LRc->redraw();
                 break;
             case 218:
-                ARPIE->arpie_fb->value(rkr->efx_Arpie->getpar(5));
+                ARPIE->arpie_fb->value(rkr->efx_Arpie->getpar(Arpie_Feedback));
                 ARPIE->arpie_fb->redraw();
                 break;
             case 219:
-                ARPIE->arpie_damp->value(rkr->efx_Arpie->getpar(6));
+                ARPIE->arpie_damp->value(rkr->efx_Arpie->getpar(Arpie_Damp));
                 ARPIE->arpie_damp->redraw();
                 break;
             case 220:
@@ -6064,7 +6064,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->Arpie_Bypass)
     {
-        ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(2));
+        ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
         ARPIE->arpie_delay->redraw();
     }
 

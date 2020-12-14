@@ -430,41 +430,41 @@ Arpie::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Arpie_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Arpie_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Arpie_Tempo:
         setdelay(value);
         break;
-    case 3:
+    case Arpie_LRDelay:
         setlrdelay(value);
         break;
-    case 4:
+    case Arpie_LRCross:
         setlrcross(value);
         break;
-    case 5:
+    case Arpie_Feedback:
         setfb(value);
         break;
-    case 6:
+    case Arpie_Damp:
         sethidamp(value);
         break;
-    case 7:
+    case Arpie_ArpeWD:
         setreverse(value);
         break;
-    case 8:
+    case Arpie_Harm:
         Pharms = value;
         if ((Pharms < 2) && (Pharms >= MAXHARMS))
         {
             Pharms = 2;
         }
         break;
-    case 9:
+    case Arpie_Pattern:
         setpattern(value);
         break;
-    case 10:
+    case Arpie_Subdivision:
         Psubdiv = value;
         subdiv = Psubdiv + 1;
         setdelay(Pdelay);
@@ -477,37 +477,37 @@ Arpie::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Arpie_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Arpie_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Arpie_Tempo:
         return (Pdelay);
         break;
-    case 3:
+    case Arpie_LRDelay:
         return (Plrdelay);
         break;
-    case 4:
+    case Arpie_LRCross:
         return (Plrcross);
         break;
-    case 5:
+    case Arpie_Feedback:
         return (Pfb);
         break;
-    case 6:
+    case Arpie_Damp:
         return (Phidamp);
         break;
-    case 7:
+    case Arpie_ArpeWD:
         return (Preverse);
         break;
-    case 8:
+    case Arpie_Harm:
         return (Pharms);
         break;
-    case 9:
+    case Arpie_Pattern:
         return (Ppattern);
         break;
-    case 10:
+    case Arpie_Subdivision:
         return (Psubdiv);
         break;
     }
