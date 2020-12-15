@@ -266,19 +266,19 @@ Alienwah::changepar(int npar, int value)
     case Alien_Pan:
         setpanning(value);
         break;
-    case Alien_LFOFreq:
+    case Alien_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case Alien_LFORand:
+    case Alien_LFO_Rand:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case Alien_LFOType:
+    case Alien_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case Alien_LFOStereo:
+    case Alien_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
@@ -311,16 +311,16 @@ Alienwah::getpar(int npar)
     case Alien_Pan:
         return (Ppanning);
         break;
-    case Alien_LFOFreq:
+    case Alien_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case Alien_LFORand:
+    case Alien_LFO_Rand:
         return (lfo->Prandomness);
         break;
-    case Alien_LFOType:
+    case Alien_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case Alien_LFOStereo:
+    case Alien_LFO_Stereo:
         return (lfo->Pstereo);
         break;
     case Alien_Depth:

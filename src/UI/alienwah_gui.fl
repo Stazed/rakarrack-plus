@@ -39,10 +39,10 @@ rgui->findpos(11,(int)o->value(),o);}
 if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(Dry_Wet(rkr->efx_Alienwah->getpar(Alien_DryWet)));
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(Alien_Pan)-64);
-Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFOFreq));
-Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFORand));
-Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFOType));
-Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFOStereo));
+Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
+Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Rand));
+Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFO_Type));
+Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
 Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
 Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
 Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
@@ -97,7 +97,7 @@ rkr->efx_Alienwah->changepar(Alien_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(76);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFOFreq,(int)o->value());}
+rkr->efx_Alienwah->changepar(Alien_LFO_Tempo,(int)o->value());}
     xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -108,7 +108,7 @@ rkr->efx_Alienwah->changepar(Alien_LFOFreq,(int)o->value());}
  rgui->getMIDIControl(109);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFORand,(int)o->value());}
+rkr->efx_Alienwah->changepar(Alien_LFO_Rand,(int)o->value());}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -120,7 +120,7 @@ rkr->efx_Alienwah->changepar(Alien_LFORand,(int)o->value());}
  return;
 } 
 
-rkr->efx_Alienwah->changepar(Alien_LFOType,(int)o->value())} open
+rkr->efx_Alienwah->changepar(Alien_LFO_Type,(int)o->value())} open
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -143,7 +143,7 @@ rkr->efx_Alienwah->changepar(Alien_Phase,(int)o->value());}
  rgui->getMIDIControl(103);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFOStereo,(int)o->value());}
+rkr->efx_Alienwah->changepar(Alien_LFO_Stereo,(int)o->value());}
     xywh {56 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

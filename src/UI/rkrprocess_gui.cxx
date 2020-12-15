@@ -3365,7 +3365,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_freq->redraw();
                 break;
             case 76:
-                ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFOFreq));
+                ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
                 ALIENWAH->Alienwah_freq->redraw();
                 break;
             case 77:
@@ -3473,7 +3473,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_stdf->redraw();
                 break;
             case 103:
-                ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFOStereo));
+                ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
                 ALIENWAH->Alienwah_stdf->redraw();
                 break;
             case 104:
@@ -3497,7 +3497,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_rnd->redraw();
                 break;
             case 109:
-                ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFORand));
+                ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Rand));
                 ALIENWAH->Alienwah_rnd->redraw();
                 break;
             case 110:
@@ -4918,7 +4918,7 @@ void RKRGUI::ActMIDI()
                 STOMPBOX->stomp_mode->redraw();
                 break;
             case 456:
-                ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFOType));
+                ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFO_Type));
                 ALIENWAH->Alienwah_lfotype->redraw();
                 break;
             case 457:

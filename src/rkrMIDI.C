@@ -1147,7 +1147,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 76:
-        efx_Alienwah->changepar(Alien_LFOFreq, ret_Tempo(value));
+        efx_Alienwah->changepar(Alien_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 77:
@@ -1255,7 +1255,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 103:
-        efx_Alienwah->changepar(Alien_LFOStereo, value);
+        efx_Alienwah->changepar(Alien_LFO_Stereo, value);
         break;
 
     case 104:
@@ -1279,7 +1279,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 109:
-        efx_Alienwah->changepar(Alien_LFORand, value);
+        efx_Alienwah->changepar(Alien_LFO_Rand, value);
         break;
 
     case 110:
@@ -2737,7 +2737,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 456:
-        efx_Alienwah->changepar(Alien_LFOType, (int) ((float) value * C_MC_11_RANGE));
+        efx_Alienwah->changepar(Alien_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 457:

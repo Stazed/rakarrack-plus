@@ -649,8 +649,8 @@ void RKR::getbuf(char *buf, int j)
         //Alienwah
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Alienwah->getpar(Alien_DryWet), efx_Alienwah->getpar(Alien_Pan),
-                efx_Alienwah->getpar(Alien_LFOFreq), efx_Alienwah->getpar(Alien_LFORand),
-                efx_Alienwah->getpar(Alien_LFOType), efx_Alienwah->getpar(Alien_LFOStereo),
+                efx_Alienwah->getpar(Alien_LFO_Tempo), efx_Alienwah->getpar(Alien_LFO_Rand),
+                efx_Alienwah->getpar(Alien_LFO_Type), efx_Alienwah->getpar(Alien_LFO_Stereo),
                 efx_Alienwah->getpar(Alien_Depth), efx_Alienwah->getpar(Alien_Feedback),
                 efx_Alienwah->getpar(Alien_Delay), efx_Alienwah->getpar(Alien_LRCross),
                 efx_Alienwah->getpar(Alien_Phase), Alienwah_Bypass);

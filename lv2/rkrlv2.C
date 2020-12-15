@@ -1261,10 +1261,10 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
         switch(i)
         {
             // Normal processing
-            case Alien_LFOFreq:
-            case Alien_LFORand:
-            case Alien_LFOType:
-            case Alien_LFOStereo:
+            case Alien_LFO_Tempo:
+            case Alien_LFO_Rand:
+            case Alien_LFO_Type:
+            case Alien_LFO_Stereo:
             case Alien_Depth:
             case Alien_Feedback:
             case Alien_Delay:
