@@ -23,10 +23,10 @@ void AphaserGui::cb_aphaser_preset_i(RKR_Choice* o, void* v) {
 if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(Dry_Wet(rkr->efx_APhaser->getpar(APhase_DryWet)));
 aphaser_distort->value(rkr->efx_APhaser->getpar(APhase_Distortion));
-aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFOFreq));
-aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFORand));
-aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFOType));
-aphaser_stdf->value(rkr->efx_APhaser->getpar(APhase_LFOStereo));
+aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFO_Tempo));
+aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Rand));
+aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFO_Type));
+aphaser_stdf->value(rkr->efx_APhaser->getpar(APhase_LFO_Stereo));
 aphaser_width->value(rkr->efx_APhaser->getpar(APhase_Width));
 aphaser_stages->value(rkr->efx_APhaser->getpar(APhase_Stages));
 aphaser_fb->value(rkr->efx_APhaser->getpar(APhase_Feedback)-64);
@@ -79,7 +79,7 @@ void AphaserGui::cb_aphaser_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(119);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFOFreq,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFO_Tempo,(int)o->value());
 }
 void AphaserGui::cb_aphaser_freq(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_freq_i(o,v);
@@ -91,7 +91,7 @@ void AphaserGui::cb_aphaser_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(404);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFORand,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFO_Rand,(int)o->value());
 }
 void AphaserGui::cb_aphaser_rnd(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_rnd_i(o,v);
@@ -104,7 +104,7 @@ void AphaserGui::cb_aphaser_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_APhaser->changepar(APhase_LFOType,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFO_Type,(int)o->value());
 }
 void AphaserGui::cb_aphaser_lfotype(RKR_Choice* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_lfotype_i(o,v);
@@ -164,7 +164,7 @@ void AphaserGui::cb_aphaser_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(124);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFOStereo,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFO_Stereo,(int)o->value());
 }
 void AphaserGui::cb_aphaser_stdf(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stdf_i(o,v);

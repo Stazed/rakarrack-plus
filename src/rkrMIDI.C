@@ -1319,7 +1319,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 119:
-        efx_APhaser->changepar(APhase_LFOFreq, ret_Tempo(value));
+        efx_APhaser->changepar(APhase_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 120:
@@ -1339,7 +1339,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 124:
-        efx_APhaser->changepar(APhase_LFOStereo, value);
+        efx_APhaser->changepar(APhase_LFO_Stereo, value);
         break;
 
     case 125:
@@ -2529,7 +2529,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 404:
-        efx_APhaser->changepar(APhase_LFORand, value);
+        efx_APhaser->changepar(APhase_LFO_Rand, value);
         break;
 
     case 405:
@@ -2741,7 +2741,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 457:
-        efx_APhaser->changepar(APhase_LFOType, (int) ((float) value * C_MC_11_RANGE));
+        efx_APhaser->changepar(APhase_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 458:

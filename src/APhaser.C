@@ -390,21 +390,21 @@ Analog_Phaser::changepar(int npar, int value)
     case APhase_Distortion:
         setdistortion(value);
         break;
-    case APhase_LFOFreq:
+    case APhase_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case APhase_LFORand:
+    case APhase_LFO_Rand:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case APhase_LFOType:
+    case APhase_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         barber = 0;
         if (value == 2) barber = 1;
         break;
-    case APhase_LFOStereo:
+    case APhase_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
@@ -447,16 +447,16 @@ Analog_Phaser::getpar(int npar)
     case APhase_Distortion:
         return (Pdistortion);
         break;
-    case APhase_LFOFreq:
+    case APhase_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case APhase_LFORand:
+    case APhase_LFO_Rand:
         return (lfo->Prandomness);
         break;
-    case APhase_LFOType:
+    case APhase_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case APhase_LFOStereo:
+    case APhase_LFO_Stereo:
         return (lfo->Pstereo);
         break;
     case APhase_Width:

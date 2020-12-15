@@ -720,8 +720,8 @@ void RKR::getbuf(char *buf, int j)
         //Analog Phaser
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_APhaser->getpar(APhase_DryWet), efx_APhaser->getpar(APhase_Distortion),
-                efx_APhaser->getpar(APhase_LFOFreq), efx_APhaser->getpar(APhase_LFORand),
-                efx_APhaser->getpar(APhase_LFOType), efx_APhaser->getpar(APhase_LFOStereo),
+                efx_APhaser->getpar(APhase_LFO_Tempo), efx_APhaser->getpar(APhase_LFO_Rand),
+                efx_APhaser->getpar(APhase_LFO_Type), efx_APhaser->getpar(APhase_LFO_Stereo),
                 efx_APhaser->getpar(APhase_Width), efx_APhaser->getpar(APhase_Feedback),
                 efx_APhaser->getpar(APhase_Stages), efx_APhaser->getpar(APhase_Mismatch),
                 efx_APhaser->getpar(APhase_Subtract), efx_APhaser->getpar(APhase_Depth),

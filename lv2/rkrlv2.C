@@ -805,10 +805,10 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
         {
             // Normal processing
             case APhase_Distortion:
-            case APhase_LFOFreq:
-            case APhase_LFORand:
-            case APhase_LFOType:
-            case APhase_LFOStereo:
+            case APhase_LFO_Tempo:
+            case APhase_LFO_Rand:
+            case APhase_LFO_Type:
+            case APhase_LFO_Stereo:
             case APhase_Width:
             case APhase_Stages:
             case APhase_Mismatch:
