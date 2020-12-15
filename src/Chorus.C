@@ -110,7 +110,7 @@ float Chorus::getdelay(float xlfo)
         result = 0;
     }
 
-    //check if it is too big delay(caused bu errornous setdelay() and setdepth()
+    //check if it is too big delay(caused by erroneous setdelay() and setdepth()
     if ((result + 0.5) >= maxdelay)
     {
         fprintf(stderr, "%s",
@@ -365,51 +365,51 @@ Chorus::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Chorus_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Chorus_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Chorus_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case Chorus_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case Chorus_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5:
+    case Chorus_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case Chorus_Depth:
         setdepth(value);
         break;
-    case 7:
+    case Chorus_Delay:
         setdelay(value);
         break;
-    case 8:
+    case Chorus_Feedback:
         setfb(value);
         break;
-    case 9:
+    case Chorus_LR_Cross:
         setlrcross(value);
         break;
-    case 10:
+    case Chorus_SKIP_Flange_10:
         if (value > 1)
             value = 1;
         Pflangemode = value;
         break;
-    case 11:
+    case Chorus_Subtract:
         if (value > 1)
             value = 1;
         Poutsub = value;
         break;
-    case 12:
+    case Chorus_Intense:
         awesome_mode = value;
         if (awesome_mode)
         {
@@ -426,43 +426,43 @@ Chorus::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Chorus_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Chorus_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Chorus_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case 3:
+    case Chorus_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case Chorus_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case Chorus_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 6:
+    case Chorus_Depth:
         return (Pdepth);
         break;
-    case 7:
+    case Chorus_Delay:
         return (Pdelay);
         break;
-    case 8:
+    case Chorus_Feedback:
         return (Pfb);
         break;
-    case 9:
+    case Chorus_LR_Cross:
         return (Plrcross);
         break;
-    case 10:
+    case Chorus_SKIP_Flange_10:
         return (Pflangemode);
         break;
-    case 11:
+    case Chorus_Subtract:
         return (Poutsub);
         break;
-    case 12:
+    case Chorus_Intense:
         return (awesome_mode);
         break;
     default:

@@ -357,8 +357,8 @@ RKR::Update_tempo()
 
     if (Looper_Bypass) efx_Looper->settempo(Tap_TempoSet);
 
-    if (Chorus_Bypass) efx_Chorus->changepar(2, Tap_TempoSetL);
-    if (Flanger_Bypass) efx_Flanger->changepar(2, Tap_TempoSetL);
+    if (Chorus_Bypass) efx_Chorus->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
+    if (Flanger_Bypass) efx_Flanger->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
     if (Phaser_Bypass) efx_Phaser->changepar(2, Tap_TempoSetL);
     if (Pan_Bypass) efx_Pan->changepar(2, Tap_TempoSetL);
     if (WhaWha_Bypass) efx_WhaWha->changepar(2, Tap_TempoSetL);

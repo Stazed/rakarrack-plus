@@ -544,25 +544,25 @@ void RKR::getbuf(char *buf, int j)
     case 5:
         //Chorus
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Chorus->getpar(0), efx_Chorus->getpar(1),
-                efx_Chorus->getpar(2), efx_Chorus->getpar(3),
-                efx_Chorus->getpar(4), efx_Chorus->getpar(5),
-                efx_Chorus->getpar(6), efx_Chorus->getpar(7),
-                efx_Chorus->getpar(8), efx_Chorus->getpar(9),
-                efx_Chorus->getpar(10), efx_Chorus->getpar(11),
-                efx_Chorus->getpar(12), Chorus_Bypass);
+                efx_Chorus->getpar(Chorus_DryWet), efx_Chorus->getpar(Chorus_Pan),
+                efx_Chorus->getpar(Chorus_LFO_Tempo), efx_Chorus->getpar(Chorus_LFO_Random),
+                efx_Chorus->getpar(Chorus_LFO_Type), efx_Chorus->getpar(Chorus_LFO_Stereo),
+                efx_Chorus->getpar(Chorus_Depth), efx_Chorus->getpar(Chorus_Delay),
+                efx_Chorus->getpar(Chorus_Feedback), efx_Chorus->getpar(Chorus_LR_Cross),
+                efx_Chorus->getpar(Chorus_SKIP_Flange_10), efx_Chorus->getpar(Chorus_Subtract),
+                efx_Chorus->getpar(Chorus_Intense), Chorus_Bypass);
         break;
 
     case 7:
         //Flanger
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Flanger->getpar(0), efx_Flanger->getpar(1),
-                efx_Flanger->getpar(2), efx_Flanger->getpar(3),
-                efx_Flanger->getpar(4), efx_Flanger->getpar(5),
-                efx_Flanger->getpar(6), efx_Flanger->getpar(7),
-                efx_Flanger->getpar(8), efx_Flanger->getpar(9),
-                efx_Flanger->getpar(10), efx_Flanger->getpar(11),
-                efx_Flanger->getpar(12), Flanger_Bypass);
+                efx_Flanger->getpar(Chorus_DryWet), efx_Flanger->getpar(Chorus_Pan),
+                efx_Flanger->getpar(Chorus_LFO_Tempo), efx_Flanger->getpar(Chorus_LFO_Random),
+                efx_Flanger->getpar(Chorus_LFO_Type), efx_Flanger->getpar(Chorus_LFO_Stereo),
+                efx_Flanger->getpar(Chorus_Depth), efx_Flanger->getpar(Chorus_Delay),
+                efx_Flanger->getpar(Chorus_Feedback), efx_Flanger->getpar(Chorus_LR_Cross),
+                efx_Flanger->getpar(Chorus_SKIP_Flange_10), efx_Flanger->getpar(Chorus_Subtract),
+                efx_Flanger->getpar(Chorus_Intense), Flanger_Bypass);
         break;
 
     case 6:

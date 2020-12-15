@@ -3209,11 +3209,11 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_dpth->redraw();
                 break;
             case 22:
-                FLANGER->flanger_dpth->value(rkr->efx_Flanger->getpar(6));
+                FLANGER->flanger_dpth->value(rkr->efx_Flanger->getpar(Chorus_Depth));
                 FLANGER->flanger_dpth->redraw();
                 break;
             case 23:
-                CHORUS->chorus_dpth->value(rkr->efx_Chorus->getpar(6));
+                CHORUS->chorus_dpth->value(rkr->efx_Chorus->getpar(Chorus_Depth));
                 CHORUS->chorus_dpth->redraw();
                 break;
             case 24:
@@ -3249,11 +3249,11 @@ void RKRGUI::ActMIDI()
                 HAR->har_WD->redraw();
                 break;
             case 52:
-                CHORUS->chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(0)));
+                CHORUS->chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(Chorus_DryWet)));
                 CHORUS->chorus_WD->redraw();
                 break;
             case 53:
-                FLANGER->flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(0)));
+                FLANGER->flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Chorus_DryWet)));
                 FLANGER->flanger_WD->redraw();
                 break;
             case 54:
@@ -3297,11 +3297,11 @@ void RKRGUI::ActMIDI()
                 HAR->har_pan->redraw();
                 break;
             case 50:
-                CHORUS->chorus_pan->value(rkr->efx_Chorus->getpar(1) - 64);
+                CHORUS->chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan) - 64);
                 CHORUS->chorus_pan->redraw();
                 break;
             case 51:
-                FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(1) - 64);
+                FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(Chorus_Pan) - 64);
                 FLANGER->flanger_pan->redraw();
                 break;
             case 60:
@@ -3349,11 +3349,11 @@ void RKRGUI::ActMIDI()
                 DIST->dist_level->redraw();
                 break;
             case 72:
-                CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(2));
+                CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
                 CHORUS->chorus_freq->redraw();
                 break;
             case 73:
-                FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(2));
+                FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(Chorus_LFO_Tempo));
                 FLANGER->flanger_freq->redraw();
                 break;
             case 74:
@@ -3377,11 +3377,11 @@ void RKRGUI::ActMIDI()
                 ECHO->echo_fb->redraw();
                 break;
             case 79:
-                CHORUS->chorus_fb->value(rkr->efx_Chorus->getpar(8));
+                CHORUS->chorus_fb->value(rkr->efx_Chorus->getpar(Chorus_Feedback));
                 CHORUS->chorus_fb->redraw();
                 break;
             case 80:
-                FLANGER->flanger_fb->value(rkr->efx_Flanger->getpar(8));
+                FLANGER->flanger_fb->value(rkr->efx_Flanger->getpar(Chorus_Feedback));
                 FLANGER->flanger_fb->redraw();
                 break;
             case 81:
@@ -3425,11 +3425,11 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_HPF->redraw();
                 break;
             case 91:
-                CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(9));
+                CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(Chorus_LR_Cross));
                 CHORUS->chorus_LR->redraw();
                 break;
             case 92:
-                FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(9));
+                FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(Chorus_LR_Cross));
                 FLANGER->flanger_LR->redraw();
                 break;
             case 93:
@@ -3457,11 +3457,11 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_LRc->redraw();
                 break;
             case 99:
-                CHORUS->chorus_stdf->value(rkr->efx_Chorus->getpar(5));
+                CHORUS->chorus_stdf->value(rkr->efx_Chorus->getpar(Chorus_LFO_Stereo));
                 CHORUS->chorus_stdf->redraw();
                 break;
             case 100:
-                FLANGER->flanger_stdf->value(rkr->efx_Flanger->getpar(5));
+                FLANGER->flanger_stdf->value(rkr->efx_Flanger->getpar(Chorus_LFO_Stereo));
                 FLANGER->flanger_stdf->redraw();
                 break;
             case 101:
@@ -3481,11 +3481,11 @@ void RKRGUI::ActMIDI()
                 PAN->pan_stdf->redraw();
                 break;
             case 105:
-                CHORUS->chorus_rnd->value(rkr->efx_Chorus->getpar(3));
+                CHORUS->chorus_rnd->value(rkr->efx_Chorus->getpar(Chorus_LFO_Random));
                 CHORUS->chorus_rnd->redraw();
                 break;
             case 106:
-                FLANGER->flanger_rnd->value(rkr->efx_Flanger->getpar(3));
+                FLANGER->flanger_rnd->value(rkr->efx_Flanger->getpar(Chorus_LFO_Random));
                 FLANGER->flanger_rnd->redraw();
                 break;
             case 107:
@@ -4716,7 +4716,7 @@ void RKRGUI::ActMIDI()
                 CABINET->Cabinet_output->redraw();
                 break;
             case 406:
-                CHORUS->chorus_delay->value(rkr->efx_Chorus->getpar(7));
+                CHORUS->chorus_delay->value(rkr->efx_Chorus->getpar(Chorus_Delay));
                 CHORUS->chorus_delay->redraw();
                 break;
             case 407:
@@ -4736,7 +4736,7 @@ void RKRGUI::ActMIDI()
                 ECHO->echo_damp->redraw();
                 break;
             case 411:
-                FLANGER->flanger_delay->value(rkr->efx_Flanger->getpar(7));
+                FLANGER->flanger_delay->value(rkr->efx_Flanger->getpar(Chorus_Delay));
                 FLANGER->flanger_delay->redraw();
                 break;
             case 412:
@@ -4926,11 +4926,11 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_lfotype->redraw();
                 break;
             case 458:
-                CHORUS->chorus_lfotype->value(rkr->efx_Chorus->getpar(4));
+                CHORUS->chorus_lfotype->value(rkr->efx_Chorus->getpar(Chorus_LFO_Type));
                 CHORUS->chorus_lfotype->redraw();
                 break;
             case 459:
-                FLANGER->flanger_lfotype->value(rkr->efx_Flanger->getpar(4));
+                FLANGER->flanger_lfotype->value(rkr->efx_Flanger->getpar(Chorus_LFO_Type));
                 FLANGER->flanger_lfotype->redraw();
                 break;
             case 460:
@@ -5986,13 +5986,13 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->Chorus_Bypass)
     {
-        CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(2));
+        CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
         CHORUS->chorus_freq->redraw();
     }
 
     if (rkr->Flanger_Bypass)
     {
-        FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(2));
+        FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(Chorus_LFO_Tempo));
         FLANGER->flanger_freq->redraw();
     }
 

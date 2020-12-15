@@ -21,18 +21,18 @@ void ChorusGui::cb_chorus_activar(RKR_Light_Button* o, void* v) {
 void ChorusGui::cb_chorus_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
-chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(0)));
-chorus_pan->value(rkr->efx_Chorus->getpar(1)-64);
-chorus_freq->value(rkr->efx_Chorus->getpar(2));
-chorus_rnd->value(rkr->efx_Chorus->getpar(3));
-chorus_lfotype->value(rkr->efx_Chorus->getpar(4));
-chorus_stdf->value(rkr->efx_Chorus->getpar(5));
-chorus_dpth->value(rkr->efx_Chorus->getpar(6));
-chorus_delay->value(rkr->efx_Chorus->getpar(7));
-chorus_fb->value(rkr->efx_Chorus->getpar(8));
-chorus_LR->value(rkr->efx_Chorus->getpar(9));
-chorus_subs->value(rkr->efx_Chorus->getpar(11));
-chorus_awesome->value(rkr->efx_Chorus->getpar(12));
+chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(Chorus_DryWet)));
+chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan)-64);
+chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
+chorus_rnd->value(rkr->efx_Chorus->getpar(Chorus_LFO_Random));
+chorus_lfotype->value(rkr->efx_Chorus->getpar(Chorus_LFO_Type));
+chorus_stdf->value(rkr->efx_Chorus->getpar(Chorus_LFO_Stereo));
+chorus_dpth->value(rkr->efx_Chorus->getpar(Chorus_Depth));
+chorus_delay->value(rkr->efx_Chorus->getpar(Chorus_Delay));
+chorus_fb->value(rkr->efx_Chorus->getpar(Chorus_Feedback));
+chorus_LR->value(rkr->efx_Chorus->getpar(Chorus_LR_Cross));
+chorus_subs->value(rkr->efx_Chorus->getpar(Chorus_Subtract));
+chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));
 }
 void ChorusGui::cb_chorus_preset(RKR_Choice* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_preset_i(o,v);
@@ -53,7 +53,7 @@ void ChorusGui::cb_chorus_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(52);
  return;
 } 
-rkr->efx_Chorus->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_Chorus->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));
 }
 void ChorusGui::cb_chorus_WD(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_WD_i(o,v);
@@ -65,7 +65,7 @@ void ChorusGui::cb_chorus_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(50);
  return;
 } 
-rkr->efx_Chorus->changepar(1,(int)(o->value()+64));
+rkr->efx_Chorus->changepar(Chorus_Pan,(int)(o->value()+64));
 }
 void ChorusGui::cb_chorus_pan(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_pan_i(o,v);
@@ -77,7 +77,7 @@ void ChorusGui::cb_chorus_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(72);
  return;
 } 
-rkr->efx_Chorus->changepar(2,(int)o->value());
+rkr->efx_Chorus->changepar(Chorus_LFO_Tempo,(int)o->value());
 }
 void ChorusGui::cb_chorus_freq(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_freq_i(o,v);
@@ -89,7 +89,7 @@ void ChorusGui::cb_chorus_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(105);
  return;
 } 
-rkr->efx_Chorus->changepar(3,(int)o->value());
+rkr->efx_Chorus->changepar(Chorus_LFO_Random,(int)o->value());
 }
 void ChorusGui::cb_chorus_rnd(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_rnd_i(o,v);
@@ -102,21 +102,21 @@ void ChorusGui::cb_chorus_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_Chorus->changepar(4,(int)o->value());
+rkr->efx_Chorus->changepar(Chorus_LFO_Type,(int)o->value());
 }
 void ChorusGui::cb_chorus_lfotype(RKR_Choice* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_lfotype_i(o,v);
 }
 
 void ChorusGui::cb_chorus_subs_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Chorus->changepar(11,(int)o->value());
+  rkr->efx_Chorus->changepar(Chorus_Subtract,(int)o->value());
 }
 void ChorusGui::cb_chorus_subs(RKR_Check_Button* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_subs_i(o,v);
 }
 
 void ChorusGui::cb_chorus_awesome_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Chorus->changepar(12,(int)o->value());
+  rkr->efx_Chorus->changepar(Chorus_Intense,(int)o->value());
 }
 void ChorusGui::cb_chorus_awesome(RKR_Check_Button* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_awesome_i(o,v);
@@ -128,7 +128,7 @@ void ChorusGui::cb_chorus_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(99);
  return;
 } 
-rkr->efx_Chorus->changepar(5,(int)o->value());
+rkr->efx_Chorus->changepar(Chorus_LFO_Stereo,(int)o->value());
 }
 void ChorusGui::cb_chorus_stdf(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_stdf_i(o,v);
@@ -140,7 +140,7 @@ void ChorusGui::cb_chorus_dpth_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(23);
  return;
 } 
-rkr->efx_Chorus->changepar(6,(int)o->value());
+rkr->efx_Chorus->changepar(Chorus_Depth,(int)o->value());
 }
 void ChorusGui::cb_chorus_dpth(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_dpth_i(o,v);
@@ -153,7 +153,7 @@ void ChorusGui::cb_chorus_delay_i(RKR_Slider* o, void*) {
  return;
 } 
 
-rkr->efx_Chorus->changepar(7,(int)o->value());
+rkr->efx_Chorus->changepar(Chorus_Delay,(int)o->value());
 }
 void ChorusGui::cb_chorus_delay(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_delay_i(o,v);
@@ -165,7 +165,7 @@ void ChorusGui::cb_chorus_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(79);
  return;
 } 
-rkr->efx_Chorus->changepar(8,(int)o->value());
+rkr->efx_Chorus->changepar(Chorus_Feedback,(int)o->value());
 }
 void ChorusGui::cb_chorus_fb(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_fb_i(o,v);
@@ -177,7 +177,7 @@ void ChorusGui::cb_chorus_LR_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(91);
  return;
 } 
-rkr->efx_Chorus->changepar(9,(int)(o->value()));
+rkr->efx_Chorus->changepar(Chorus_LR_Cross,(int)(o->value()));
 }
 void ChorusGui::cb_chorus_LR(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_LR_i(o,v);

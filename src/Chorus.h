@@ -27,6 +27,23 @@
 #include "EffectLFO.h"
 #include "delayline.h"
 
+enum Chorus_Index
+{
+    Chorus_DryWet = 0,
+    Chorus_Pan,
+    Chorus_LFO_Tempo,
+    Chorus_LFO_Random,
+    Chorus_LFO_Type,
+    Chorus_LFO_Stereo,
+    Chorus_Depth,
+    Chorus_Delay,
+    Chorus_Feedback,
+    Chorus_LR_Cross,
+    Chorus_SKIP_Flange_10,
+    Chorus_Subtract,
+    Chorus_Intense
+};
+
 class Chorus
 {
 

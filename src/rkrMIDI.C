@@ -986,11 +986,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 22:
-        efx_Flanger->changepar(6, value);
+        efx_Flanger->changepar(Chorus_Depth, value);
         break;
 
     case 23:
-        efx_Chorus->changepar(6, value);
+        efx_Chorus->changepar(Chorus_Depth, value);
         break;
 
     case 24:
@@ -1031,11 +1031,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 52:
-        efx_Chorus->changepar(0, Dry_Wet(value));
+        efx_Chorus->changepar(Chorus_DryWet, Dry_Wet(value));
         break;
 
     case 53:
-        efx_Flanger->changepar(0, Dry_Wet(value));
+        efx_Flanger->changepar(Chorus_DryWet, Dry_Wet(value));
         break;
 
     case 54:
@@ -1079,11 +1079,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 50:
-        efx_Chorus->changepar(1, value);
+        efx_Chorus->changepar(Chorus_Pan, value);
         break;
 
     case 51:
-        efx_Flanger->changepar(1, value);
+        efx_Flanger->changepar(Chorus_Pan, value);
         break;
 
     case 60:
@@ -1131,11 +1131,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 72:
-        efx_Chorus->changepar(2, ret_Tempo(value));
+        efx_Chorus->changepar(Chorus_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 73:
-        efx_Flanger->changepar(2, ret_Tempo(value));
+        efx_Flanger->changepar(Chorus_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 74:
@@ -1159,11 +1159,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 79:
-        efx_Chorus->changepar(8, value);
+        efx_Chorus->changepar(Chorus_Feedback, value);
         break;
 
     case 80:
-        efx_Flanger->changepar(8, value);
+        efx_Flanger->changepar(Chorus_Feedback, value);
         break;
 
     case 81:
@@ -1207,11 +1207,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 91:
-        efx_Chorus->changepar(9, value);
+        efx_Chorus->changepar(Chorus_LR_Cross, value);
         break;
 
     case 92:
-        efx_Flanger->changepar(9, value);
+        efx_Flanger->changepar(Chorus_LR_Cross, value);
         break;
 
     case 93:
@@ -1239,11 +1239,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 99:
-        efx_Chorus->changepar(5, value);
+        efx_Chorus->changepar(Chorus_LFO_Stereo, value);
         break;
 
     case 100:
-        efx_Flanger->changepar(5, value);
+        efx_Flanger->changepar(Chorus_LFO_Stereo, value);
         break;
 
     case 101:
@@ -1263,11 +1263,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 105:
-        efx_Chorus->changepar(3, value);
+        efx_Chorus->changepar(Chorus_LFO_Random, value);
         break;
 
     case 106:
-        efx_Flanger->changepar(3, value);
+        efx_Flanger->changepar(Chorus_LFO_Random, value);
         break;
 
     case 107:
@@ -2537,7 +2537,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 406:
-        efx_Chorus->changepar(7, value);
+        efx_Chorus->changepar(Chorus_Delay, value);
         break;
     
     case 407:
@@ -2557,7 +2557,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 411:
-        efx_Flanger->changepar(7, value);
+        efx_Flanger->changepar(Chorus_Delay, value);
         break;
         
     case 412:
@@ -2745,11 +2745,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 458:
-        efx_Chorus->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_Chorus->changepar(Chorus_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 459:
-        efx_Flanger->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_Flanger->changepar(Chorus_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 460:
