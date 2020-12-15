@@ -43,8 +43,8 @@ if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
 arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(Arpie_DryWet)));
 arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
-arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LRDelay));
-arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LRCross));
+arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LR_Delay));
+arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LR_Cross));
 arpie_fb->value(rkr->efx_Arpie->getpar(Arpie_Feedback));
 arpie_damp->value(rkr->efx_Arpie->getpar(Arpie_Damp));
 arpie_arpe->value(rkr->efx_Arpie->getpar(Arpie_ArpeWD));
@@ -154,7 +154,7 @@ rkr->efx_Arpie->changepar(Arpie_Tempo,(int)o->value());}
  rgui->getMIDIControl(216);
  return;
 } 
-rkr->efx_Arpie->changepar(Arpie_LRDelay,(int)o->value());}
+rkr->efx_Arpie->changepar(Arpie_LR_Delay,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -165,7 +165,7 @@ rkr->efx_Arpie->changepar(Arpie_LRDelay,(int)o->value());}
  rgui->getMIDIControl(217);
  return;
 } 
-rkr->efx_Arpie->changepar(Arpie_LRCross,(int)(o->value()));}
+rkr->efx_Arpie->changepar(Arpie_LR_Cross,(int)(o->value()));}
     xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

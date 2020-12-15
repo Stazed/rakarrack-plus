@@ -2255,8 +2255,8 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
         {
             // Normal processing
             case Arpie_Tempo:
-            case Arpie_LRDelay:
-            case Arpie_LRCross:
+            case Arpie_LR_Delay:
+            case Arpie_LR_Cross:
             case Arpie_Feedback:
             case Arpie_Damp:
             case Arpie_ArpeWD:

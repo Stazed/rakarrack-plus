@@ -439,10 +439,10 @@ Arpie::changepar(int npar, int value)
     case Arpie_Tempo:
         setdelay(value);
         break;
-    case Arpie_LRDelay:
+    case Arpie_LR_Delay:
         setlrdelay(value);
         break;
-    case Arpie_LRCross:
+    case Arpie_LR_Cross:
         setlrcross(value);
         break;
     case Arpie_Feedback:
@@ -486,10 +486,10 @@ Arpie::getpar(int npar)
     case Arpie_Tempo:
         return (Pdelay);
         break;
-    case Arpie_LRDelay:
+    case Arpie_LR_Delay:
         return (Plrdelay);
         break;
-    case Arpie_LRCross:
+    case Arpie_LR_Cross:
         return (Plrcross);
         break;
     case Arpie_Feedback:

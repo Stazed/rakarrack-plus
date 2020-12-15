@@ -24,8 +24,8 @@ if((ud==0)||(ud==12024))rkr->efx_Arpie->setpreset((int) o->value());
 arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(Arpie_DryWet)));
 arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan)-64);
 arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
-arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LRDelay));
-arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LRCross));
+arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LR_Delay));
+arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LR_Cross));
 arpie_fb->value(rkr->efx_Arpie->getpar(Arpie_Feedback));
 arpie_damp->value(rkr->efx_Arpie->getpar(Arpie_Damp));
 arpie_arpe->value(rkr->efx_Arpie->getpar(Arpie_ArpeWD));
@@ -112,7 +112,7 @@ void ArpieGui::cb_arpie_LRdl_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(216);
  return;
 } 
-rkr->efx_Arpie->changepar(Arpie_LRDelay,(int)o->value());
+rkr->efx_Arpie->changepar(Arpie_LR_Delay,(int)o->value());
 }
 void ArpieGui::cb_arpie_LRdl(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_LRdl_i(o,v);
@@ -124,7 +124,7 @@ void ArpieGui::cb_arpie_LRc_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(217);
  return;
 } 
-rkr->efx_Arpie->changepar(Arpie_LRCross,(int)(o->value()));
+rkr->efx_Arpie->changepar(Arpie_LR_Cross,(int)(o->value()));
 }
 void ArpieGui::cb_arpie_LRc(RKR_Slider* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_LRc_i(o,v);

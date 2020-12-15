@@ -3944,11 +3944,11 @@ void RKRGUI::ActMIDI()
                 ARPIE->arpie_delay->redraw();
                 break;
             case 216:
-                ARPIE->arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LRDelay));
+                ARPIE->arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LR_Delay));
                 ARPIE->arpie_LRdl->redraw();
                 break;
             case 217:
-                ARPIE->arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LRCross));
+                ARPIE->arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LR_Cross));
                 ARPIE->arpie_LRc->redraw();
                 break;
             case 218:

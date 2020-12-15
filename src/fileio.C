@@ -794,8 +794,8 @@ void RKR::getbuf(char *buf, int j)
         //Arpie
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Arpie->getpar(Arpie_DryWet), efx_Arpie->getpar(Arpie_Pan),
-                efx_Arpie->getpar(Arpie_Tempo), efx_Arpie->getpar(Arpie_LRDelay),
-                efx_Arpie->getpar(Arpie_LRCross), efx_Arpie->getpar(Arpie_Feedback),
+                efx_Arpie->getpar(Arpie_Tempo), efx_Arpie->getpar(Arpie_LR_Delay),
+                efx_Arpie->getpar(Arpie_LR_Cross), efx_Arpie->getpar(Arpie_Feedback),
                 efx_Arpie->getpar(Arpie_Damp), efx_Arpie->getpar(Arpie_ArpeWD),
                 efx_Arpie->getpar(Arpie_Harm), efx_Arpie->getpar(Arpie_Pattern),
                 efx_Arpie->getpar(Arpie_Subdivision), Arpie_Bypass);
