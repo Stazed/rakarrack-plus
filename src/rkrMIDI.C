@@ -2047,27 +2047,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 286:
-        efx_CoilCrafter->changepar(0, value);
+        efx_CoilCrafter->changepar(Coil_Gain, value);
         break;
 
     case 287:
-        efx_CoilCrafter->changepar(7, 20 + (int) ((float) value * C_MC_4380_RANGE));
+        efx_CoilCrafter->changepar(Coil_Tone, 20 + (int) ((float) value * C_MC_4380_RANGE));
         break;
 
     case 288:
-        efx_CoilCrafter->changepar(3, 2600 + (int) ((float) value * C_MC_1900_RANGE));
+        efx_CoilCrafter->changepar(Coil_Freq_1, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
     case 289:
-        efx_CoilCrafter->changepar(4, 10 + (int) ((float) value * C_MC_55_RANGE));
+        efx_CoilCrafter->changepar(Coil_Q_1, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
     case 290:
-        efx_CoilCrafter->changepar(5, 2600 + (int) ((float) value * C_MC_1900_RANGE));
+        efx_CoilCrafter->changepar(Coil_Freq_2, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
     case 291:
-        efx_CoilCrafter->changepar(6, 10 + (int) ((float) value * C_MC_55_RANGE));
+        efx_CoilCrafter->changepar(Coil_Q_2, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
     case 292:

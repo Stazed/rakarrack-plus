@@ -4234,27 +4234,27 @@ void RKRGUI::ActMIDI()
                 CONVOLOTRON->convo_length->redraw();
                 break;
             case 286:
-                COILCRAFTER->coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
+                COILCRAFTER->coil_WD->value(rkr->efx_CoilCrafter->getpar(Coil_Gain));
                 COILCRAFTER->coil_WD->redraw();
                 break;
             case 287:
-                COILCRAFTER->coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
+                COILCRAFTER->coil_tone->value(rkr->efx_CoilCrafter->getpar(Coil_Tone));
                 COILCRAFTER->coil_tone->redraw();
                 break;
             case 288:
-                COILCRAFTER->coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
+                COILCRAFTER->coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
                 COILCRAFTER->coil_freq1->redraw();
                 break;
             case 289:
-                COILCRAFTER->coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
+                COILCRAFTER->coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));
                 COILCRAFTER->coil_q1->redraw();
                 break;
             case 290:
-                COILCRAFTER->coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
+                COILCRAFTER->coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
                 COILCRAFTER->coil_freq2->redraw();
                 break;
             case 291:
-                COILCRAFTER->coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
+                COILCRAFTER->coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));
                 COILCRAFTER->coil_q2->redraw();
                 break;
             case 292:

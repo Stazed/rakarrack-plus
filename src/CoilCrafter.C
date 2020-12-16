@@ -257,10 +257,10 @@ CoilCrafter::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Coil_Gain:
         setvolume(value);
         break;
-    case 1:
+    case Coil_Origin:
         Ppo = value;
         if (Ppo > 0)
         {
@@ -272,7 +272,7 @@ CoilCrafter::changepar(int npar, int value)
             setq1();
         }
         break;
-    case 2:
+    case Coil_Destiny:
         Ppd = value;
         if (Ppd > 0)
         {
@@ -284,31 +284,31 @@ CoilCrafter::changepar(int npar, int value)
             setq2();
         }
         break;
-    case 3:
+    case Coil_Freq_1:
         Pfreq1 = value;
         freq1 = (float) value;
         setfreq1();
         break;
-    case 4:
+    case Coil_Q_1:
         Pq1 = value;
         q1 = (float) value / 10.0f;
         setq1();
         break;
-    case 5:
+    case Coil_Freq_2:
         Pfreq2 = value;
         freq2 = (float) value;
         setfreq2();
         break;
-    case 6:
+    case Coil_Q_2:
         Pq2 = value;
         q2 = (float) value / 10.0f;
         setq2();
         break;
-    case 7:
+    case Coil_Tone:
         Ptone = value;
         sethpf(value);
         break;
-    case 8:
+    case Coil_NeckMode:
         Pmode = value;
         break;
     }
@@ -319,31 +319,31 @@ CoilCrafter::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Coil_Gain:
         return (Pvolume);
         break;
-    case 1:
+    case Coil_Origin:
         return (Ppo);
         break;
-    case 2:
+    case Coil_Destiny:
         return (Ppd);
         break;
-    case 3:
+    case Coil_Freq_1:
         return (Pfreq1);
         break;
-    case 4:
+    case Coil_Q_1:
         return (Pq1);
         break;
-    case 5:
+    case Coil_Freq_2:
         return (Pfreq2);
         break;
-    case 6:
+    case Coil_Q_2:
         return (Pq2);
         break;
-    case 7:
+    case Coil_Tone:
         return (Ptone);
         break;
-    case 8:
+    case Coil_NeckMode:
         return (Pmode);
         break;
     }

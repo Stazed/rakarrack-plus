@@ -26,6 +26,19 @@
 #include "HarmonicEnhancer.h"
 #include "AnalogFilter.h"
 
+enum Coil_Index
+{
+    Coil_Gain,
+    Coil_Origin,
+    Coil_Destiny,
+    Coil_Freq_1,
+    Coil_Q_1,
+    Coil_Freq_2,
+    Coil_Q_2,
+    Coil_Tone,
+    Coil_NeckMode
+};
+
 class CoilCrafter
 {
 public:

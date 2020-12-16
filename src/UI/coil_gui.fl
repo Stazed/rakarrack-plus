@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -13,7 +13,7 @@ decl {\#include "RKR_Choice.h"} {public global
 
 widget_class CoilGui {
   user_data 1 open
-  xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1675 72 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -39,15 +39,15 @@ rgui->findpos(33,(int)o->value(),o);}
     user_data 12033
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12033))rkr->efx_CoilCrafter->setpreset((int) o->value());
-coil_WD->value(rkr->efx_CoilCrafter->getpar(0));
-coil_tone->value(rkr->efx_CoilCrafter->getpar(7));
-coil_origin->value(rkr->efx_CoilCrafter->getpar(1));
-coil_destiny->value(rkr->efx_CoilCrafter->getpar(2));
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(6));
-coil_mode->value(rkr->efx_CoilCrafter->getpar(8));}
+coil_WD->value(rkr->efx_CoilCrafter->getpar(Coil_Gain));
+coil_tone->value(rkr->efx_CoilCrafter->getpar(Coil_Tone));
+coil_origin->value(rkr->efx_CoilCrafter->getpar(Coil_Origin));
+coil_destiny->value(rkr->efx_CoilCrafter->getpar(Coil_Destiny));
+coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
+coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));
+coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
+coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));
+coil_mode->value(rkr->efx_CoilCrafter->getpar(Coil_NeckMode));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -67,7 +67,7 @@ coil_mode->value(rkr->efx_CoilCrafter->getpar(8));}
  rgui->getMIDIControl(286);
  return;
 }
-rkr->efx_CoilCrafter->changepar(0,(int)o->value());}
+rkr->efx_CoilCrafter->changepar(Coil_Gain,(int)o->value());}
     xywh {53 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
     class RKR_Slider
   }
@@ -78,16 +78,16 @@ rkr->efx_CoilCrafter->changepar(0,(int)o->value());}
  rgui->getMIDIControl(287);
  return;
 }
-rkr->efx_CoilCrafter->changepar(7,(int)o->value());}
+rkr->efx_CoilCrafter->changepar(Coil_Tone,(int)o->value());}
     xywh {53 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 4400 step 1 value 20 textcolor 7
     class RKR_Slider
   }
   Fl_Choice coil_origin {
     label Origin
     user_data 12
-    callback {rkr->efx_CoilCrafter->changepar(1,(int)o->value());
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(3));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(4));}
+    callback {rkr->efx_CoilCrafter->changepar(Coil_Origin,(int)o->value());
+coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
+coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));}
     xywh {61 55 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -135,7 +135,7 @@ coil_q1->value(rkr->efx_CoilCrafter->getpar(4));}
  rgui->getMIDIControl(288);
  return;
 }
-rkr->efx_CoilCrafter->changepar(3,(int)o->value());}
+rkr->efx_CoilCrafter->changepar(Coil_Freq_1,(int)o->value());}
     tooltip {Origin Pickup Frequency} xywh {53 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2600 maximum 4500 step 1 value 3200 textcolor 7
     class RKR_Slider
   }
@@ -146,15 +146,15 @@ rkr->efx_CoilCrafter->changepar(3,(int)o->value());}
  rgui->getMIDIControl(289);
  return;
 }
-rkr->efx_CoilCrafter->changepar(4,(int)o->value());}
+rkr->efx_CoilCrafter->changepar(Coil_Q_1,(int)o->value());}
     tooltip {Origin Pickup Resonance} xywh {53 94 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice coil_destiny {
     label Destiny
-    callback {rkr->efx_CoilCrafter->changepar(2,(int)o->value());
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(5));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open selected
+    callback {rkr->efx_CoilCrafter->changepar(Coil_Destiny,(int)o->value());
+coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
+coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));} open
     xywh {61 107 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(menu_coil_origin);}
     class RKR_Choice
@@ -166,7 +166,7 @@ coil_q2->value(rkr->efx_CoilCrafter->getpar(6));} open selected
  rgui->getMIDIControl(290);
  return;
 }
-rkr->efx_CoilCrafter->changepar(5,(int)o->value());}
+rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());}
     tooltip {Destination Pickup Frequency} xywh {53 132 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2600 maximum 4500 step 1 value 3200 textcolor 7
     class RKR_Slider
   }
@@ -177,14 +177,14 @@ rkr->efx_CoilCrafter->changepar(5,(int)o->value());}
  rgui->getMIDIControl(291);
  return;
 }
-rkr->efx_CoilCrafter->changepar(6,(int)o->value());}
+rkr->efx_CoilCrafter->changepar(Coil_Q_2,(int)o->value());}
     tooltip {Destination Pickup Resonance} xywh {53 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 value 20 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button coil_mode {
     label {Neck Pickup}
     user_data 2
-    callback {rkr->efx_CoilCrafter->changepar(8,(int)o->value());}
+    callback {rkr->efx_CoilCrafter->changepar(Coil_NeckMode,(int)o->value());}
     xywh {13 161 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

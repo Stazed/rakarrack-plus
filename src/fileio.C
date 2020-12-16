@@ -899,11 +899,11 @@ void RKR::getbuf(char *buf, int j)
     case 33:
         //CoilCrafter
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_CoilCrafter->getpar(0), efx_CoilCrafter->getpar(1),
-                efx_CoilCrafter->getpar(2), efx_CoilCrafter->getpar(3),
-                efx_CoilCrafter->getpar(4), efx_CoilCrafter->getpar(5),
-                efx_CoilCrafter->getpar(6), efx_CoilCrafter->getpar(7),
-                efx_CoilCrafter->getpar(8), CoilCrafter_Bypass);
+                efx_CoilCrafter->getpar(Coil_Gain), efx_CoilCrafter->getpar(Coil_Origin),
+                efx_CoilCrafter->getpar(Coil_Destiny), efx_CoilCrafter->getpar(Coil_Freq_1),
+                efx_CoilCrafter->getpar(Coil_Q_1), efx_CoilCrafter->getpar(Coil_Freq_2),
+                efx_CoilCrafter->getpar(Coil_Q_2), efx_CoilCrafter->getpar(Coil_Tone),
+                efx_CoilCrafter->getpar(Coil_NeckMode), CoilCrafter_Bypass);
         break;
 
     case 34:

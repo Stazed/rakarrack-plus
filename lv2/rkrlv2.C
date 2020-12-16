@@ -2850,9 +2850,6 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2872,20 +2869,46 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = (int)*plug->param_p[i];//wet/dry
-    if(plug->coil->getpar(i) != val)
+    int val = 0;
+    int param_case_offset = 0;
+    
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->coil->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //skip origin and destinations
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->coil->getpar(i+2) != val)
+        switch(param_case_offset)
         {
-            plug->coil->changepar(i+2,val);
+            // Normal processing
+            case Coil_Freq_1:
+            case Coil_Q_1:
+            case Coil_Freq_2:
+            case Coil_Q_2:
+            case Coil_Tone:
+            case Coil_NeckMode:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->coil->getpar(param_case_offset) != val)
+                {
+                    plug->coil->changepar(param_case_offset,val);
+                }
+            }
+            break;
+            
+            //  Coil_Origin, Coil_Destiny, are skipped after gain
+            case Coil_Gain:
+            {
+                param_case_offset += 2;  // skip Coil_Origin, Coil_Destiny
+                
+                val = (int)*plug->param_p[Coil_Gain];
+                if(plug->coil->getpar(Coil_Gain) != val)
+                {
+                    plug->coil->changepar(Coil_Gain,val);
+                }
+            }
+            break;
         }
+        
+        param_case_offset++;
     }
 
     //now run
