@@ -30,6 +30,19 @@
 
 #include "FPreset.h"
 
+enum Compress_Index
+{
+    Compress_Threshold = 1, // Starts at 1 !!!!
+    Compress_Ratio,
+    Compress_Output,
+    Compress_Attack,
+    Compress_Release,
+    Compress_Auto_Out,
+    Compress_Knee,
+    Compress_Stereo,
+    Compress_Peak
+};
+
 class Compressor
 {
 
@@ -40,7 +53,7 @@ public:
 
     void out (float *efxoutl, float *efxoutr);
 
-    void changepar (int np, int value);
+    void changepar (int npar, int value);
     void setpreset (int dgui,int npreset);
     int getpar (int npar);
     void cleanup ();

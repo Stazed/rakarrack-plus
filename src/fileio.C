@@ -626,11 +626,11 @@ void RKR::getbuf(char *buf, int j)
     case 1:
         // Compressor
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Compressor->getpar(1), efx_Compressor->getpar(2),
-                efx_Compressor->getpar(3), efx_Compressor->getpar(4),
-                efx_Compressor->getpar(5), efx_Compressor->getpar(6),
-                efx_Compressor->getpar(7), efx_Compressor->getpar(8),
-                efx_Compressor->getpar(9), Compressor_Bypass);
+                efx_Compressor->getpar(Compress_Threshold), efx_Compressor->getpar(Compress_Ratio),
+                efx_Compressor->getpar(Compress_Output), efx_Compressor->getpar(Compress_Attack),
+                efx_Compressor->getpar(Compress_Release), efx_Compressor->getpar(Compress_Auto_Out),
+                efx_Compressor->getpar(Compress_Knee), efx_Compressor->getpar(Compress_Stereo),
+                efx_Compressor->getpar(Compress_Peak), Compressor_Bypass);
         break;
 
 

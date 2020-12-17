@@ -278,16 +278,16 @@ CompBand::setratio(int ch, int value)
     switch (ch)
     {
     case 0:
-        CL->changepar(2, value);
+        CL->changepar(Compress_Ratio, value);
         break;
     case 1:
-        CML->changepar(2, value);
+        CML->changepar(Compress_Ratio, value);
         break;
     case 2:
-        CMH->changepar(2, value);
+        CMH->changepar(Compress_Ratio, value);
         break;
     case 3:
-        CH->changepar(2, value);
+        CH->changepar(Compress_Ratio, value);
         break;
     }
 }
@@ -298,16 +298,16 @@ CompBand::setthres(int ch, int value)
     switch (ch)
     {
     case 0:
-        CL->changepar(1, value);
+        CL->changepar(Compress_Threshold, value);
         break;
     case 1:
-        CML->changepar(1, value);
+        CML->changepar(Compress_Threshold, value);
         break;
     case 2:
-        CMH->changepar(1, value);
+        CMH->changepar(Compress_Threshold, value);
         break;
     case 3:
-        CH->changepar(1, value);
+        CH->changepar(Compress_Threshold, value);
         break;
     }
 }

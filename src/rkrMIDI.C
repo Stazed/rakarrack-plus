@@ -1440,27 +1440,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 142:
-        efx_Compressor->changepar(4, 10 + (int) ((float) value * C_MC_240_RANGE));
+        efx_Compressor->changepar(Compress_Attack, 10 + (int) ((float) value * C_MC_240_RANGE));
         break;
 
     case 143:
-        efx_Compressor->changepar(5, 10 + (int) ((float) value * C_MC_490_RANGE));
+        efx_Compressor->changepar(Compress_Release, 10 + (int) ((float) value * C_MC_490_RANGE));
         break;
 
     case 144:
-        efx_Compressor->changepar(2, 2 + (int) ((float) value * C_MC_40_RANGE));
+        efx_Compressor->changepar(Compress_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 145:
-        efx_Compressor->changepar(7, (int) ((float) value * C_MC_100_RANGE));
+        efx_Compressor->changepar(Compress_Knee, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 146:
-        efx_Compressor->changepar(1, -60 + (int) ((float) value * C_MC_57_RANGE));
+        efx_Compressor->changepar(Compress_Threshold, -60 + (int) ((float) value * C_MC_57_RANGE));
         break;
 
     case 147:
-        efx_Compressor->changepar(3, -40 + (int) ((float) value * C_MC_40_RANGE));
+        efx_Compressor->changepar(Compress_Output, -40 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case 148:

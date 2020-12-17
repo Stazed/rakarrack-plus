@@ -117,51 +117,52 @@ Compressor::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-Compressor::changepar(int np, int value)
+Compressor::changepar(int npar, int value)
 {
-    switch (np)
+    printf("npar %d: value %d\n", npar, value);
+    switch (npar)
     {
-    case 1:
+    case Compress_Threshold:
         tthreshold = value;
         thres_db = (float) tthreshold; //implicit type cast int to float
         break;
 
-    case 2:
+    case Compress_Ratio:
         tratio = value;
         ratio = (float) tratio;
         break;
 
-    case 3:
+    case Compress_Output:
         toutput = value;
         break;
 
-    case 4:
+    case Compress_Attack:
         tatt = value;
         att = cSAMPLE_RATE / (((float) value / 1000.0f) + cSAMPLE_RATE);
         attr = att;
         attl = att;
         break;
 
-    case 5:
+    case Compress_Release:
         trel = value;
         rel = cSAMPLE_RATE / (((float) value / 1000.0f) + cSAMPLE_RATE);
         rell = rel;
         relr = rel;
         break;
 
-    case 6:
+    case Compress_Auto_Out:
         a_out = value;
         break;
 
-    case 7:
+    case Compress_Knee:
         tknee = value; //knee expressed a percentage of range between thresh and zero dB
         kpct = (float) tknee / 100.1f;
         break;
 
-    case 8:
+    case Compress_Stereo:
         stereo = value;
         break;
-    case 9:
+    case Compress_Peak:
         peak = value;
         break;
     }
@@ -191,35 +192,35 @@ Compressor::changepar(int np, int value)
 }
 
 int
-Compressor::getpar(int np)
+Compressor::getpar(int npar)
 {
-    switch (np)
+    switch (npar)
     {
-    case 1:
+    case Compress_Threshold:
         return (tthreshold);
         break;
-    case 2:
+    case Compress_Ratio:
         return (tratio);
         break;
-    case 3:
+    case Compress_Output:
         return (toutput);
         break;
-    case 4:
+    case Compress_Attack:
         return (tatt);
         break;
-    case 5:
+    case Compress_Release:
         return (trel);
         break;
-    case 6:
+    case Compress_Auto_Out:
         return (a_out);
         break;
-    case 7:
+    case Compress_Knee:
         return (tknee);
         break;
-    case 8:
+    case Compress_Stereo:
         return (stereo);
         break;
-    case 9:
+    case Compress_Peak:
         return (peak);
         break;
     }

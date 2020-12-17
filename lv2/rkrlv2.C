@@ -400,9 +400,6 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
     if( nframes == 0)
         return;
     
-    int i;
-    int val;
-
     RKRLV2* plug = (RKRLV2*)handle;
     
     inline_check(plug, nframes);
@@ -423,13 +420,33 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    int param_case_offset = 1; // This effect is 1 indexed
+
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->comp->getpar(i+1) != val)//this effect is 1 indexed
+        switch(param_case_offset)
         {
-            plug->comp->changepar(i+1,val);
+            case Compress_Threshold:
+            case Compress_Ratio:
+            case Compress_Output:
+            case Compress_Attack:
+            case Compress_Release:
+            case Compress_Auto_Out:
+            case Compress_Knee:
+            case Compress_Stereo:
+            case Compress_Peak:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->comp->getpar(param_case_offset) != val)
+                {
+                    plug->comp->changepar(param_case_offset, val);
+                }
+            }
+            break;
         }
+        
+        param_case_offset++;
     }
 
     //now run

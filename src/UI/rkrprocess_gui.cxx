@@ -3648,27 +3648,27 @@ void RKRGUI::ActMIDI()
                 EQ->eq_10->redraw();
                 break;
             case 142:
-                COMPRESS->compress_ATime->value(rkr->efx_Compressor->getpar(4));
+                COMPRESS->compress_ATime->value(rkr->efx_Compressor->getpar(Compress_Attack));
                 COMPRESS->compress_ATime->redraw();
                 break;
             case 143:
-                COMPRESS->compress_RTime->value(rkr->efx_Compressor->getpar(5));
+                COMPRESS->compress_RTime->value(rkr->efx_Compressor->getpar(Compress_Release));
                 COMPRESS->compress_RTime->redraw();
                 break;
             case 144:
-                COMPRESS->compress_Ratio->value(rkr->efx_Compressor->getpar(2));
+                COMPRESS->compress_Ratio->value(rkr->efx_Compressor->getpar(Compress_Ratio));
                 COMPRESS->compress_Ratio->redraw();
                 break;
             case 145:
-                COMPRESS->compress_Knee->value(rkr->efx_Compressor->getpar(7));
+                COMPRESS->compress_Knee->value(rkr->efx_Compressor->getpar(Compress_Knee));
                 COMPRESS->compress_Knee->redraw();
                 break;
             case 146:
-                COMPRESS->compress_threshold->value(rkr->efx_Compressor->getpar(1));
+                COMPRESS->compress_threshold->value(rkr->efx_Compressor->getpar(Compress_Threshold));
                 COMPRESS->compress_threshold->redraw();
                 break;
             case 147:
-                COMPRESS->compress_output->value(rkr->efx_Compressor->getpar(3));
+                COMPRESS->compress_output->value(rkr->efx_Compressor->getpar(Compress_Output));
                 COMPRESS->compress_output->redraw();
                 break;
             case 148:

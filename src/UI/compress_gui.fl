@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -38,15 +38,15 @@ rgui->findpos(1,(int)o->value(),o);}
     user_data 12001
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12001))rkr->efx_Compressor->setpreset(1,(int) o->value());
-compress_threshold->value(rkr->efx_Compressor->getpar(1));
-compress_Ratio->value(rkr->efx_Compressor->getpar(2));
-compress_output->value(rkr->efx_Compressor->getpar(3));
-compress_ATime->value(rkr->efx_Compressor->getpar(4));
-compress_RTime->value(rkr->efx_Compressor->getpar(5));
-Auto_Output->value(rkr->efx_Compressor->getpar(6));
-compress_Knee->value(rkr->efx_Compressor->getpar(7));
-Stereo->value(rkr->efx_Compressor->getpar(8));
-Peak->value(rkr->efx_Compressor->getpar(9));} selected
+compress_threshold->value(rkr->efx_Compressor->getpar(Compress_Threshold));
+compress_Ratio->value(rkr->efx_Compressor->getpar(Compress_Ratio));
+compress_output->value(rkr->efx_Compressor->getpar(Compress_Output));
+compress_ATime->value(rkr->efx_Compressor->getpar(Compress_Attack));
+compress_RTime->value(rkr->efx_Compressor->getpar(Compress_Release));
+Auto_Output->value(rkr->efx_Compressor->getpar(Compress_Auto_Out));
+compress_Knee->value(rkr->efx_Compressor->getpar(Compress_Knee));
+Stereo->value(rkr->efx_Compressor->getpar(Compress_Stereo));
+Peak->value(rkr->efx_Compressor->getpar(Compress_Peak));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -74,7 +74,7 @@ Peak->value(rkr->efx_Compressor->getpar(9));} selected
  rgui->getMIDIControl(142);
  return;
 } 
-rkr->efx_Compressor->changepar(4,(int)o->value());}
+rkr->efx_Compressor->changepar(Compress_Attack,(int)o->value());}
     xywh {53 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 250 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -85,7 +85,7 @@ rkr->efx_Compressor->changepar(4,(int)o->value());}
  rgui->getMIDIControl(143);
  return;
 } 
-rkr->efx_Compressor->changepar(5, (int) o->value());}
+rkr->efx_Compressor->changepar(Compress_Release, (int) o->value());}
     xywh {53 59 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 500 step 1 value 120 textcolor 7
     class RKR_Slider
   }
@@ -96,7 +96,7 @@ rkr->efx_Compressor->changepar(5, (int) o->value());}
  rgui->getMIDIControl(144);
  return;
 } 
-rkr->efx_Compressor->changepar(2, (int) o->value());}
+rkr->efx_Compressor->changepar(Compress_Ratio, (int) o->value());}
     xywh {53 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -107,7 +107,7 @@ rkr->efx_Compressor->changepar(2, (int) o->value());}
  rgui->getMIDIControl(145);
  return;
 } 
-rkr->efx_Compressor->changepar(7, (int) o->value());}
+rkr->efx_Compressor->changepar(Compress_Knee, (int) o->value());}
     xywh {53 99 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 value 3 textcolor 7
     class RKR_Slider
   }
@@ -118,7 +118,7 @@ rkr->efx_Compressor->changepar(7, (int) o->value());}
  rgui->getMIDIControl(146);
  return;
 } 
-rkr->efx_Compressor->changepar(1, (int)o->value());}
+rkr->efx_Compressor->changepar(Compress_Threshold, (int)o->value());}
     xywh {53 119 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
     class RKR_Slider
   }
@@ -129,14 +129,14 @@ rkr->efx_Compressor->changepar(1, (int)o->value());}
  rgui->getMIDIControl(147);
  return;
 } 
-rkr->efx_Compressor->changepar(3,(int)o->value());}
+rkr->efx_Compressor->changepar(Compress_Output,(int)o->value());}
     xywh {53 139 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -40 maximum 0 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button Auto_Output {
     label {Auto Output}
     user_data 2
-    callback {rkr->efx_Compressor->changepar(6,(int)o->value());
+    callback {rkr->efx_Compressor->changepar(Compress_Auto_Out,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
     xywh {19 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
@@ -144,7 +144,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
   Fl_Check_Button Stereo {
     label Stereo
     user_data 2
-    callback {rkr->efx_Compressor->changepar(8,(int)o->value());
+    callback {rkr->efx_Compressor->changepar(Compress_Stereo,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
     tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {104 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
@@ -152,7 +152,7 @@ if ((int) o->value() == 0) compress_output->do_callback();}
   Fl_Check_Button Peak {
     label Peak
     user_data 2
-    callback {rkr->efx_Compressor->changepar(9,(int)o->value());
+    callback {rkr->efx_Compressor->changepar(Compress_Peak,(int)o->value());
 if ((int) o->value() == 0) compress_output->do_callback();}
     tooltip {Peak Mode Compression} xywh {19 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
