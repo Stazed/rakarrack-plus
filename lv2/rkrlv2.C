@@ -2894,13 +2894,14 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
             //  Coil_Origin, Coil_Destiny, are skipped after gain
             case Coil_Gain:
             {
-                param_case_offset += 2;  // skip Coil_Origin, Coil_Destiny
-                
-                val = (int)*plug->param_p[Coil_Gain];
+                val = (int)*plug->param_p[i];
                 if(plug->coil->getpar(Coil_Gain) != val)
                 {
                     plug->coil->changepar(Coil_Gain,val);
                 }
+
+                // skip Coil_Origin, Coil_Destiny
+                param_case_offset += 2;
             }
             break;
         }
