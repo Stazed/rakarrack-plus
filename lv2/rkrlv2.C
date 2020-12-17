@@ -828,7 +828,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
             // wet/dry -> dry/wet reversal
             case APhase_DryWet: 
             {
-                val = Dry_Wet((int)*plug->param_p[APhase_DryWet]);
+                val = Dry_Wet((int)*plug->param_p[i]);
                 if(plug->aphase->getpar(APhase_DryWet) != val)
                 {
                     plug->aphase->changepar(APhase_DryWet,val);
@@ -839,7 +839,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
             // Offset
             case APhase_Feedback:
             {
-                val = (int)*plug->param_p[APhase_Feedback] + 64;  // offset
+                val = (int)*plug->param_p[i] + 64;  // offset
                 if(plug->aphase->getpar(APhase_Feedback) != val)
                 {
                     plug->aphase->changepar(APhase_Feedback,val);
@@ -1283,7 +1283,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
             // wet/dry -> dry/wet reversal
             case Alien_DryWet: 
             {
-                val = Dry_Wet((int)*plug->param_p[Alien_DryWet]);
+                val = Dry_Wet((int)*plug->param_p[i]);
                 if(plug->alien->getpar(Alien_DryWet) != val)
                 {
                     plug->alien->changepar(Alien_DryWet,val);
@@ -1294,7 +1294,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
             // Offset
             case Alien_Pan:
             {
-                val = (int)*plug->param_p[Alien_Pan] + 64;   // offset
+                val = (int)*plug->param_p[i] + 64;   // offset
                 if(plug->alien->getpar(Alien_Pan) != val)
                 {
                     plug->alien->changepar(Alien_Pan,val);
@@ -2276,7 +2276,7 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
             // wet/dry -> dry/wet reversal
             case Arpie_DryWet:
             {
-                val = Dry_Wet((int)*plug->param_p[Arpie_DryWet]);
+                val = Dry_Wet((int)*plug->param_p[i]);
                 if(plug->arp->getpar(Arpie_DryWet) != val)
                 {
                     plug->arp->changepar(Arpie_DryWet,val);
@@ -2287,7 +2287,7 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
             // Offset
             case Arpie_Pan:
             {
-                val = (int)*plug->param_p[Arpie_Pan] + 64;  // offset
+                val = (int)*plug->param_p[i] + 64;  // offset
                 if(plug->arp->getpar(Arpie_Pan) != val)
                 {
                     plug->arp->changepar(Arpie_Pan,val);
