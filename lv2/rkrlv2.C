@@ -682,7 +682,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
             case Chorus_Depth:
             case Chorus_Delay:
             case Chorus_Feedback:
-            case Chorus_LR_Cross:
+            case Chorus_Subtract:
             case Chorus_Intense:
             {
                 val = (int)*plug->param_p[i];
@@ -697,7 +697,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
             // wet/dry -> dry/wet reversal
             case Chorus_DryWet:
             {
-                val = Dry_Wet((int)*plug->param_p[Chorus_DryWet]);
+                val = Dry_Wet((int)*plug->param_p[i]);
                 if(plug->chorus->getpar(Chorus_DryWet) != val)
                 {
                     plug->chorus->changepar(Chorus_DryWet,val);
@@ -708,7 +708,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
             // Offset
             case Chorus_Pan:
             {
-                val = (int)*plug->param_p[Chorus_Pan] + 64; // offset
+                val = (int)*plug->param_p[i] + 64; // offset
                 if(plug->chorus->getpar(Chorus_Pan) != val)
                 {
                     plug->chorus->changepar(Chorus_Pan,val);
@@ -716,19 +716,16 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
             }
             break;
             
-            // Skip 10
-            case Chorus_SKIP_Flange_10:
-            // case Chorus_Subtract:
+            // Skip after this one
+            case Chorus_LR_Cross:
             {
+                val = (int)*plug->param_p[i];
+                if(plug->chorus->getpar(Chorus_LR_Cross) != val)
+                {
+                    plug->chorus->changepar(Chorus_LR_Cross,val);
+                }
                 // increment for skipped parameter
                 param_case_offset++;
-                
-                // This becomes Chorus_Subtract
-                val = (int)*plug->param_p[i];
-                if(plug->chorus->getpar(Chorus_Subtract) != val)
-                {
-                    plug->chorus->changepar(Chorus_Subtract,val);
-                }
             }
             break;
         }
@@ -5172,7 +5169,7 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
             case Chorus_Depth:
             case Chorus_Delay:
             case Chorus_Feedback:
-            case Chorus_LR_Cross:
+            case Chorus_Subtract:
             case Chorus_Intense:
             {
                 val = (int)*plug->param_p[i];
@@ -5187,7 +5184,7 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
             // wet/dry -> dry/wet reversal
             case Chorus_DryWet:
             {
-                val = Dry_Wet((int)*plug->param_p[Chorus_DryWet]);
+                val = Dry_Wet((int)*plug->param_p[i]);
                 if(plug->flanger->getpar(Chorus_DryWet) != val)
                 {
                     plug->flanger->changepar(Chorus_DryWet,val);
@@ -5198,7 +5195,7 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
             // Offset
             case Chorus_Pan:
             {
-                val = (int)*plug->param_p[Chorus_Pan] + 64; // offset
+                val = (int)*plug->param_p[i] + 64; // offset
                 if(plug->flanger->getpar(Chorus_Pan) != val)
                 {
                     plug->flanger->changepar(Chorus_Pan,val);
@@ -5206,19 +5203,16 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
             }
             break;
             
-            // Skip 10
-            case Chorus_SKIP_Flange_10:
-            // case Chorus_Subtract:
+            // Skip after this one
+            case Chorus_LR_Cross:
             {
+                val = (int)*plug->param_p[i];
+                if(plug->flanger->getpar(Chorus_LR_Cross) != val)
+                {
+                    plug->flanger->changepar(Chorus_LR_Cross,val);
+                }
                 // increment for skipped parameter
                 param_case_offset++;
-                
-                // This becomes Chorus_Subtract
-                val = (int)*plug->param_p[i];
-                if(plug->flanger->getpar(Chorus_Subtract) != val)
-                {
-                    plug->flanger->changepar(Chorus_Subtract,val);
-                }
             }
             break;
         }
