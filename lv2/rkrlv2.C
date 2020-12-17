@@ -4256,9 +4256,6 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -4281,19 +4278,45 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->mbcomp->getpar(i) != val)
-    {
-        plug->mbcomp->changepar(i,val);
-    }
+    int val = 0;
 
-    for(i++; i<plug->nparams; i++)
+    for(int i; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->mbcomp->getpar(i) != val)
+        switch(i)
         {
-            plug->mbcomp->changepar(i,val);
+            // Normal processing
+            case CompBand_Low_Ratio:
+            case CompBand_Mid_1_Ratio:
+            case CompBand_Mid_2_Ratio:
+            case CompBand_High_Ratio:
+            case CompBand_Low_Thresh:
+            case CompBand_Mid_1_Thresh:
+            case CompBand_Mid_2_Thresh:
+            case CompBand_High_Thresh:
+            case CompBand_Cross_1:
+            case CompBand_Cross_2:
+            case CompBand_Cross_3:
+            case CompBand_Gain:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->mbcomp->getpar(i) != val)
+                {
+                    plug->mbcomp->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case CompBand_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->mbcomp->getpar(CompBand_DryWet) != val)
+                {
+                    plug->mbcomp->changepar(CompBand_DryWet,val);
+                }
+            }
+            break;
         }
     }
 

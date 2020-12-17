@@ -381,65 +381,65 @@ CompBand::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case CompBand_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case CompBand_Low_Ratio:
         if (value < 2) // some old bank files have garbage in them
             value = 2;
         PLratio = value;
         setratio(0, value);
         break;
-    case 2:
+    case CompBand_Mid_1_Ratio:
         if (value < 2) // some old bank files have garbage in them
             value = 2;
         PMLratio = value;
         setratio(1, value);
         break;
-    case 3:
+    case CompBand_Mid_2_Ratio:
         if (value < 2) // some old bank files have garbage in them
             value = 2;
         PMHratio = value;
         setratio(2, value);
         break;
-    case 4:
+    case CompBand_High_Ratio:
         if (value < 2) // some old bank files have garbage in them
             value = 2;
         PHratio = value;
         setratio(3, value);
         break;
-    case 5:
+    case CompBand_Low_Thresh:
         PLthres = value;
         setthres(0, value);
         break;
-    case 6:
+    case CompBand_Mid_1_Thresh:
         PMLthres = value;
         setthres(1, value);
         break;
-    case 7:
+    case CompBand_Mid_2_Thresh:
         PMHthres = value;
         setthres(2, value);
         break;
-    case 8:
+    case CompBand_High_Thresh:
         PHthres = value;
         setthres(3, value);
         break;
-    case 9:
+    case CompBand_Cross_1:
         if (value < 20) // some old bank files have garbage in them
             value = 20;
         setCross1(value);
         break;
-    case 10:
+    case CompBand_Cross_2:
         if (value < 1000) // some old bank files have garbage in them
             value = 1000;
         setCross2(value);
         break;
-    case 11:
+    case CompBand_Cross_3:
         if (value < 2000) // some old bank files have garbage in them
             value = 2000;
         setCross3(value);
         break;
-    case 12:
+    case CompBand_Gain:
         setlevel(value);
         break;
     }
@@ -450,43 +450,43 @@ CompBand::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case CompBand_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case CompBand_Low_Ratio:
         return (PLratio);
         break;
-    case 2:
+    case CompBand_Mid_1_Ratio:
         return (PMLratio);
         break;
-    case 3:
+    case CompBand_Mid_2_Ratio:
         return (PMHratio);
         break;
-    case 4:
+    case CompBand_High_Ratio:
         return (PHratio);
         break;
-    case 5:
+    case CompBand_Low_Thresh:
         return (PLthres);
         break;
-    case 6:
+    case CompBand_Mid_1_Thresh:
         return (PMLthres);
         break;
-    case 7:
+    case CompBand_Mid_2_Thresh:
         return (PMHthres);
         break;
-    case 8:
+    case CompBand_High_Thresh:
         return (PHthres);
         break;
-    case 9:
+    case CompBand_Cross_1:
         return (Cross1);
         break;
-    case 10:
+    case CompBand_Cross_2:
         return (Cross2);
         break;
-    case 11:
+    case CompBand_Cross_3:
         return (Cross3);
         break;
-    case 12:
+    case CompBand_Gain:
         return (Plevel);
         break;
     }

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -36,20 +36,19 @@ rgui->findpos(43,(int)o->value(),o);}
     user_data 12043
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12043))rkr->efx_CompBand->setpreset((int)o->value());
-cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(0)));
-cband_Lratio->value(rkr->efx_CompBand->getpar(1));
-cband_MLratio->value(rkr->efx_CompBand->getpar(2));
-cband_MHratio->value(rkr->efx_CompBand->getpar(3));
-cband_Hratio->value(rkr->efx_CompBand->getpar(4));
-cband_Lthres->value(rkr->efx_CompBand->getpar(5));
-cband_MLthres->value(rkr->efx_CompBand->getpar(6));
-cband_MHthres->value(rkr->efx_CompBand->getpar(7));
-cband_Hthres->value(rkr->efx_CompBand->getpar(8));
-cband_cross1->value(rkr->efx_CompBand->getpar(9));
-cband_cross2->value(rkr->efx_CompBand->getpar(10));
-cband_cross3->value(rkr->efx_CompBand->getpar(11));
-cband_cross3->value(rkr->efx_CompBand->getpar(11));
-cband_gain->value(rkr->efx_CompBand->getpar(12));} selected
+cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(CompBand_DryWet)));
+cband_Lratio->value(rkr->efx_CompBand->getpar(CompBand_Low_Ratio));
+cband_MLratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Ratio));
+cband_MHratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Ratio));
+cband_Hratio->value(rkr->efx_CompBand->getpar(CompBand_High_Ratio));
+cband_Lthres->value(rkr->efx_CompBand->getpar(CompBand_Low_Thresh));
+cband_MLthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Thresh));
+cband_MHthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Thresh));
+cband_Hthres->value(rkr->efx_CompBand->getpar(CompBand_High_Thresh));
+cband_cross1->value(rkr->efx_CompBand->getpar(CompBand_Cross_1));
+cband_cross2->value(rkr->efx_CompBand->getpar(CompBand_Cross_2));
+cband_cross3->value(rkr->efx_CompBand->getpar(CompBand_Cross_3));
+cband_gain->value(rkr->efx_CompBand->getpar(CompBand_Gain));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -73,7 +72,7 @@ cband_gain->value(rkr->efx_CompBand->getpar(12));} selected
  rgui->getMIDIControl(368);
  return;
 }
-rkr->efx_CompBand->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_CompBand->changepar(CompBand_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -84,7 +83,7 @@ rkr->efx_CompBand->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(369);
  return;
 }
-rkr->efx_CompBand->changepar(12,(int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_Gain,(int)o->value());} selected
     xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -95,7 +94,7 @@ rkr->efx_CompBand->changepar(12,(int)o->value());}
  rgui->getMIDIControl(370);
  return;
 }
-rkr->efx_CompBand->changepar(1, (int) o->value());}
+rkr->efx_CompBand->changepar(CompBand_Low_Ratio, (int) o->value());}
     xywh {56 51 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -106,7 +105,7 @@ rkr->efx_CompBand->changepar(1, (int) o->value());}
  rgui->getMIDIControl(371);
  return;
 }
-rkr->efx_CompBand->changepar(2, (int) o->value());}
+rkr->efx_CompBand->changepar(CompBand_Mid_1_Ratio, (int) o->value());}
     xywh {56 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -117,7 +116,7 @@ rkr->efx_CompBand->changepar(2, (int) o->value());}
  rgui->getMIDIControl(372);
  return;
 }
-rkr->efx_CompBand->changepar(3, (int) o->value());}
+rkr->efx_CompBand->changepar(CompBand_Mid_2_Ratio, (int) o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -128,7 +127,7 @@ rkr->efx_CompBand->changepar(3, (int) o->value());}
  rgui->getMIDIControl(373);
  return;
 }
-rkr->efx_CompBand->changepar(4, (int) o->value());}
+rkr->efx_CompBand->changepar(CompBand_High_Ratio, (int) o->value());}
     xywh {56 87 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -139,7 +138,7 @@ rkr->efx_CompBand->changepar(4, (int) o->value());}
  rgui->getMIDIControl(374);
  return;
 }
-rkr->efx_CompBand->changepar(5, (int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_Low_Thresh, (int)o->value());}
     xywh {56 99 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -150,7 +149,7 @@ rkr->efx_CompBand->changepar(5, (int)o->value());}
  rgui->getMIDIControl(375);
  return;
 }
-rkr->efx_CompBand->changepar(6, (int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_Mid_1_Thresh, (int)o->value());}
     xywh {56 111 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -161,7 +160,7 @@ rkr->efx_CompBand->changepar(6, (int)o->value());}
  rgui->getMIDIControl(376);
  return;
 }
-rkr->efx_CompBand->changepar(7, (int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_Mid_2_Thresh, (int)o->value());}
     xywh {56 123 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -172,7 +171,7 @@ rkr->efx_CompBand->changepar(7, (int)o->value());}
  rgui->getMIDIControl(377);
  return;
 }
-rkr->efx_CompBand->changepar(8, (int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_High_Thresh, (int)o->value());}
     xywh {56 135 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -183,7 +182,7 @@ rkr->efx_CompBand->changepar(8, (int)o->value());}
  rgui->getMIDIControl(378);
  return;
 }
-rkr->efx_CompBand->changepar(9,(int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_Cross_1,(int)o->value());}
     xywh {56 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -194,7 +193,7 @@ rkr->efx_CompBand->changepar(9,(int)o->value());}
  rgui->getMIDIControl(379);
  return;
 }
-rkr->efx_CompBand->changepar(10,(int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_Cross_2,(int)o->value());}
     xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -205,7 +204,7 @@ rkr->efx_CompBand->changepar(10,(int)o->value());}
  rgui->getMIDIControl(380);
  return;
 }
-rkr->efx_CompBand->changepar(11,(int)o->value());}
+rkr->efx_CompBand->changepar(CompBand_Cross_3,(int)o->value());}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
     class RKR_Slider
   }

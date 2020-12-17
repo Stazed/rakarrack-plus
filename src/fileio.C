@@ -1005,13 +1005,13 @@ void RKR::getbuf(char *buf, int j)
     case 43:
         //CompBand
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_CompBand->getpar(0), efx_CompBand->getpar(1),
-                efx_CompBand->getpar(2), efx_CompBand->getpar(3),
-                efx_CompBand->getpar(4), efx_CompBand->getpar(5),
-                efx_CompBand->getpar(6), efx_CompBand->getpar(7),
-                efx_CompBand->getpar(8), efx_CompBand->getpar(9),
-                efx_CompBand->getpar(10), efx_CompBand->getpar(11),
-                efx_CompBand->getpar(12), CompBand_Bypass);
+                efx_CompBand->getpar(CompBand_DryWet), efx_CompBand->getpar(CompBand_Low_Ratio),
+                efx_CompBand->getpar(CompBand_Mid_1_Ratio), efx_CompBand->getpar(CompBand_Mid_2_Ratio),
+                efx_CompBand->getpar(CompBand_High_Ratio), efx_CompBand->getpar(CompBand_Low_Thresh),
+                efx_CompBand->getpar(CompBand_Mid_1_Thresh), efx_CompBand->getpar(CompBand_Mid_2_Thresh),
+                efx_CompBand->getpar(CompBand_High_Thresh), efx_CompBand->getpar(CompBand_Cross_1),
+                efx_CompBand->getpar(CompBand_Cross_2), efx_CompBand->getpar(CompBand_Cross_3),
+                efx_CompBand->getpar(CompBand_Gain), CompBand_Bypass);
         break;
 
     case 44:

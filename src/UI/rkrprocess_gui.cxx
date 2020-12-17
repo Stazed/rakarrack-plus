@@ -4564,55 +4564,55 @@ void RKRGUI::ActMIDI()
                 Chord(1);   // update gui
                 break;
             case 368:
-                COMPBAND->cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(0)));
+                COMPBAND->cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(CompBand_DryWet)));
                 COMPBAND->cband_WD->redraw();
                 break;
             case 369:
-                COMPBAND->cband_gain->value(rkr->efx_CompBand->getpar(12));
+                COMPBAND->cband_gain->value(rkr->efx_CompBand->getpar(CompBand_Gain));
                 COMPBAND->cband_gain->redraw();
                 break;
             case 370:
-                COMPBAND->cband_Lratio->value(rkr->efx_CompBand->getpar(1));
+                COMPBAND->cband_Lratio->value(rkr->efx_CompBand->getpar(CompBand_Low_Ratio));
                 COMPBAND->cband_Lratio->redraw();
                 break;
             case 371:
-                COMPBAND->cband_MLratio->value(rkr->efx_CompBand->getpar(2));
+                COMPBAND->cband_MLratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Ratio));
                 COMPBAND->cband_MLratio->redraw();
                 break;
             case 372:
-                COMPBAND->cband_MHratio->value(rkr->efx_CompBand->getpar(3));
+                COMPBAND->cband_MHratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Ratio));
                 COMPBAND->cband_MHratio->redraw();
                 break;
             case 373:
-                COMPBAND->cband_Hratio->value(rkr->efx_CompBand->getpar(4));
+                COMPBAND->cband_Hratio->value(rkr->efx_CompBand->getpar(CompBand_High_Ratio));
                 COMPBAND->cband_Hratio->redraw();
                 break;
             case 374:
-                COMPBAND->cband_Lthres->value(rkr->efx_CompBand->getpar(5));
+                COMPBAND->cband_Lthres->value(rkr->efx_CompBand->getpar(CompBand_Low_Thresh));
                 COMPBAND->cband_Lthres->redraw();
                 break;
             case 375:
-                COMPBAND->cband_MLthres->value(rkr->efx_CompBand->getpar(6));
+                COMPBAND->cband_MLthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Thresh));
                 COMPBAND->cband_MLthres->redraw();
                 break;
             case 376:
-                COMPBAND->cband_MHthres->value(rkr->efx_CompBand->getpar(7));
+                COMPBAND->cband_MHthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Thresh));
                 COMPBAND->cband_MHthres->redraw();
                 break;
             case 377:
-                COMPBAND->cband_Hthres->value(rkr->efx_CompBand->getpar(8));
+                COMPBAND->cband_Hthres->value(rkr->efx_CompBand->getpar(CompBand_High_Thresh));
                 COMPBAND->cband_Hthres->redraw();
                 break;
             case 378:
-                COMPBAND->cband_cross1->value(rkr->efx_CompBand->getpar(9));
+                COMPBAND->cband_cross1->value(rkr->efx_CompBand->getpar(CompBand_Cross_1));
                 COMPBAND->cband_cross1->redraw();
                 break;
             case 379:
-                COMPBAND->cband_cross2->value(rkr->efx_CompBand->getpar(10));
+                COMPBAND->cband_cross2->value(rkr->efx_CompBand->getpar(CompBand_Cross_2));
                 COMPBAND->cband_cross2->redraw();
                 break;
             case 380:
-                COMPBAND->cband_cross3->value(rkr->efx_CompBand->getpar(11));
+                COMPBAND->cband_cross3->value(rkr->efx_CompBand->getpar(CompBand_Cross_3));
                 COMPBAND->cband_cross3->redraw();
                 break;
             case 381:

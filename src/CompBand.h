@@ -33,6 +33,22 @@
 #include "Compressor.h"
 #include "AnalogFilter.h"
 
+enum CompBand_Index
+{
+    CompBand_DryWet = 0,
+    CompBand_Low_Ratio,
+    CompBand_Mid_1_Ratio,
+    CompBand_Mid_2_Ratio,
+    CompBand_High_Ratio,
+    CompBand_Low_Thresh,
+    CompBand_Mid_1_Thresh,
+    CompBand_Mid_2_Thresh,
+    CompBand_High_Thresh,
+    CompBand_Cross_1,
+    CompBand_Cross_2,
+    CompBand_Cross_3,
+    CompBand_Gain
+};
 
 class CompBand
 {
