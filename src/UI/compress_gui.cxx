@@ -173,7 +173,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_preset->when(FL_WHEN_RELEASE_ALWAYS);
   compress_preset->menu(menu_compress_preset);
 } // RKR_Choice* compress_preset
-{ compress_ATime = new RKR_Slider(53, 39, 100, 10, "A. Time");
+{ compress_ATime = new RKR_Slider(56, 39, 100, 10, "A. Time");
   compress_ATime->type(5);
   compress_ATime->box(FL_FLAT_BOX);
   compress_ATime->color((Fl_Color)178);
@@ -191,7 +191,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_ATime->align(Fl_Align(FL_ALIGN_LEFT));
   compress_ATime->when(FL_WHEN_CHANGED);
 } // RKR_Slider* compress_ATime
-{ compress_RTime = new RKR_Slider(53, 59, 100, 10, "R. Time");
+{ compress_RTime = new RKR_Slider(56, 59, 100, 10, "R. Time");
   compress_RTime->type(5);
   compress_RTime->box(FL_FLAT_BOX);
   compress_RTime->color((Fl_Color)178);
@@ -209,7 +209,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_RTime->align(Fl_Align(FL_ALIGN_LEFT));
   compress_RTime->when(FL_WHEN_CHANGED);
 } // RKR_Slider* compress_RTime
-{ compress_Ratio = new RKR_Slider(53, 79, 100, 10, "Ratio");
+{ compress_Ratio = new RKR_Slider(56, 79, 100, 10, "Ratio");
   compress_Ratio->type(5);
   compress_Ratio->box(FL_FLAT_BOX);
   compress_Ratio->color((Fl_Color)178);
@@ -227,7 +227,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_Ratio->align(Fl_Align(FL_ALIGN_LEFT));
   compress_Ratio->when(FL_WHEN_CHANGED);
 } // RKR_Slider* compress_Ratio
-{ compress_Knee = new RKR_Slider(53, 99, 100, 10, "Knee");
+{ compress_Knee = new RKR_Slider(56, 99, 100, 10, "Knee");
   compress_Knee->type(5);
   compress_Knee->box(FL_FLAT_BOX);
   compress_Knee->color((Fl_Color)178);
@@ -244,7 +244,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_Knee->align(Fl_Align(FL_ALIGN_LEFT));
   compress_Knee->when(FL_WHEN_CHANGED);
 } // RKR_Slider* compress_Knee
-{ compress_threshold = new RKR_Slider(53, 119, 100, 10, "Thrhold");
+{ compress_threshold = new RKR_Slider(56, 119, 100, 10, "Threshold");
   compress_threshold->type(5);
   compress_threshold->box(FL_FLAT_BOX);
   compress_threshold->color((Fl_Color)178);
@@ -262,7 +262,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   compress_threshold->align(Fl_Align(FL_ALIGN_LEFT));
   compress_threshold->when(FL_WHEN_CHANGED);
 } // RKR_Slider* compress_threshold
-{ compress_output = new RKR_Slider(53, 139, 100, 10, "Output");
+{ compress_output = new RKR_Slider(56, 139, 100, 10, "Output");
   compress_output->type(5);
   compress_output->box(FL_FLAT_BOX);
   compress_output->color((Fl_Color)178);

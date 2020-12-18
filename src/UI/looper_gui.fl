@@ -78,7 +78,7 @@ looper_ms->value(rkr->efx_Looper->getpar(17));}
  return;
 }
 rkr->efx_Looper->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {53 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider looper_level1 {
@@ -89,7 +89,7 @@ rkr->efx_Looper->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->efx_Looper->changepar(6,(int)o->value());}
-    xywh {53 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    xywh {56 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider looper_level2 {
@@ -100,7 +100,7 @@ rkr->efx_Looper->changepar(6,(int)o->value());}
  return;
 }
 rkr->efx_Looper->changepar(10,(int)o->value());}
-    xywh {53 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
+    xywh {56 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider looper_Tempo {
@@ -110,8 +110,8 @@ rkr->efx_Looper->changepar(10,(int)o->value());}
  rgui->getMIDIControl(423);
  return;
 }
-rkr->efx_Looper->changepar(14,(int)o->value());}
-    xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 380 step 1 value 100 textcolor 7
+rkr->efx_Looper->changepar(14,(int)o->value());} selected
+    xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 380 step 1 value 100 textcolor 7
     class RKR_Slider
   }
   Fl_Choice looper_bar {
@@ -284,7 +284,7 @@ rgui->update_looper();}
  return;
 }
 rkr->efx_Looper->changepar(4,(int)o->value());
-rgui->update_looper();} selected
+rgui->update_looper();}
     tooltip {Erase the Selected Track} xywh {46 165 43 14} labelsize 10
     class RKR_Button
   }

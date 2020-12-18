@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -45,7 +45,7 @@ eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
 eqp_HF->value(rkr->efx_EQ2->getpar(21));
 eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
 eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
-eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);} selected
+eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -70,7 +70,7 @@ eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);} selected
  return;
 } 
 rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
-    xywh {53 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_LF {
@@ -81,7 +81,7 @@ rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_EQ2->changepar(11,(int)o->value());}
-    tooltip {Low Frequency} xywh {53 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 value 200 textcolor 7
+    tooltip {Low Frequency} xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 value 200 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_LFg {
@@ -92,7 +92,7 @@ rkr->efx_EQ2->changepar(11,(int)o->value());}
  return;
 } 
 rkr->efx_EQ2->changepar(12,(int)(o->value()+64));}
-    tooltip {Low Gain} xywh {53 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    tooltip {Low Gain} xywh {56 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_LQ {
@@ -103,7 +103,7 @@ rkr->efx_EQ2->changepar(12,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_EQ2->changepar(13,(int)(o->value()+64));}
-    tooltip {Low Width} xywh {53 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    tooltip {Low Width} xywh {56 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_MF {
@@ -114,7 +114,7 @@ rkr->efx_EQ2->changepar(13,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_EQ2->changepar(5+11,(int)o->value());}
-    tooltip {Mid Frequency} xywh {53 98 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 8000 step 1 value 800 textcolor 7
+    tooltip {Mid Frequency} xywh {56 98 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 8000 step 1 value 800 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_MFg {
@@ -125,7 +125,7 @@ rkr->efx_EQ2->changepar(5+11,(int)o->value());}
  return;
 } 
 rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));}
-    tooltip {Mid Gain} xywh {53 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    tooltip {Mid Gain} xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_MQ {
@@ -136,7 +136,7 @@ rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));}
-    tooltip {Mid Width} xywh {53 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    tooltip {Mid Width} xywh {56 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_HF {
@@ -147,7 +147,7 @@ rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));}
  return;
 } 
 rkr->efx_EQ2->changepar(10+11,(int)o->value());}
-    tooltip {High Frequency} xywh {53 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 value 12000 textcolor 7
+    tooltip {High Frequency} xywh {56 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 value 12000 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_HFg {
@@ -158,7 +158,7 @@ rkr->efx_EQ2->changepar(10+11,(int)o->value());}
  return;
 } 
 rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));}
-    tooltip {High Gain} xywh {53 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+    tooltip {High Gain} xywh {56 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider eqp_HQ {
@@ -168,8 +168,8 @@ rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));}
  rgui->getMIDIControl(157);
  return;
 } 
-rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));}
-    tooltip {High Width} xywh {53 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));} selected
+    tooltip {High Width} xywh {56 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
 }

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Choice.h"} {public global
@@ -89,8 +89,8 @@ rgui->findpos(12,(int)o->value(),o);}
  return;
 } 
 
-rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));}
-    xywh {53 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
+rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));} selected
+    xywh {56 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
 }

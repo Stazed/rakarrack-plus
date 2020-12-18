@@ -94,7 +94,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   sus_preset->menu(menu_sus_preset);
 } // RKR_Choice* sus_preset
-{ sus_gain = new RKR_Slider(53, 60, 100, 10, "Gain");
+{ sus_gain = new RKR_Slider(56, 60, 100, 10, "Gain");
   sus_gain->type(5);
   sus_gain->box(FL_FLAT_BOX);
   sus_gain->color((Fl_Color)178);
@@ -110,7 +110,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   sus_gain->align(Fl_Align(FL_ALIGN_LEFT));
   sus_gain->when(FL_WHEN_CHANGED);
 } // RKR_Slider* sus_gain
-{ sus_sus = new RKR_Slider(53, 86, 100, 10, "Sustain");
+{ sus_sus = new RKR_Slider(56, 86, 100, 10, "Sustain");
   sus_sus->type(5);
   sus_sus->box(FL_FLAT_BOX);
   sus_sus->color((Fl_Color)178);

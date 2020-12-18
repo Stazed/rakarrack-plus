@@ -218,7 +218,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_preset->when(FL_WHEN_RELEASE_ALWAYS);
   har_preset->menu(menu_har_preset);
 } // RKR_Choice* har_preset
-{ har_WD = new RKR_Slider(53, 30, 100, 10, "Dry/Wet");
+{ har_WD = new RKR_Slider(56, 30, 100, 10, "Dry/Wet");
   har_WD->type(5);
   har_WD->box(FL_FLAT_BOX);
   har_WD->color((Fl_Color)178);
@@ -234,7 +234,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_WD->align(Fl_Align(FL_ALIGN_LEFT));
   har_WD->when(FL_WHEN_CHANGED);
 } // RKR_Slider* har_WD
-{ har_int = new RKR_Slider(53, 43, 100, 10, "Interval");
+{ har_int = new RKR_Slider(56, 43, 100, 10, "Interval");
   har_int->type(5);
   har_int->box(FL_FLAT_BOX);
   har_int->color((Fl_Color)178);
@@ -251,7 +251,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_int->align(Fl_Align(FL_ALIGN_LEFT));
   har_int->when(FL_WHEN_CHANGED);
 } // RKR_Slider* har_int
-{ har_gan = new RKR_Slider(53, 58, 100, 10, "Gain");
+{ har_gan = new RKR_Slider(56, 58, 100, 10, "Gain");
   har_gan->type(5);
   har_gan->box(FL_FLAT_BOX);
   har_gan->color((Fl_Color)178);
@@ -268,7 +268,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_gan->align(Fl_Align(FL_ALIGN_LEFT));
   har_gan->when(FL_WHEN_CHANGED);
 } // RKR_Slider* har_gan
-{ har_pan = new RKR_Slider(53, 71, 100, 10, "Pan");
+{ har_pan = new RKR_Slider(56, 71, 100, 10, "Pan");
   har_pan->type(5);
   har_pan->box(FL_FLAT_BOX);
   har_pan->color((Fl_Color)178);
@@ -285,7 +285,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_pan->align(Fl_Align(FL_ALIGN_LEFT));
   har_pan->when(FL_WHEN_CHANGED);
 } // RKR_Slider* har_pan
-{ har_freq1 = new RKR_Slider(52, 88, 100, 10, "Freq");
+{ har_freq1 = new RKR_Slider(56, 88, 100, 10, "Freq");
   har_freq1->type(5);
   har_freq1->box(FL_FLAT_BOX);
   har_freq1->color((Fl_Color)178);
@@ -303,7 +303,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_freq1->align(Fl_Align(FL_ALIGN_LEFT));
   har_freq1->when(FL_WHEN_CHANGED);
 } // RKR_Slider* har_freq1
-{ har_gan1 = new RKR_Slider(53, 100, 100, 10, "F. Gain");
+{ har_gan1 = new RKR_Slider(56, 100, 100, 10, "F. Gain");
   har_gan1->tooltip("Filter Gain");
   har_gan1->type(5);
   har_gan1->box(FL_FLAT_BOX);
@@ -321,7 +321,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_gan1->align(Fl_Align(FL_ALIGN_LEFT));
   har_gan1->when(FL_WHEN_CHANGED);
 } // RKR_Slider* har_gan1
-{ har_q1 = new RKR_Slider(53, 112, 100, 10, "Filter Q");
+{ har_q1 = new RKR_Slider(56, 112, 100, 10, "Filter Q");
   har_q1->type(5);
   har_q1->box(FL_FLAT_BOX);
   har_q1->color((Fl_Color)178);
@@ -376,7 +376,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_chordname->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Box* har_chordname
-{ har_note = new RKR_Slider(53, 158, 100, 10, "Note");
+{ har_note = new RKR_Slider(56, 158, 100, 10, "Note");
   har_note->type(5);
   har_note->box(FL_FLAT_BOX);
   har_note->color((Fl_Color)178);
@@ -392,7 +392,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   har_note->align(Fl_Align(FL_ALIGN_LEFT));
   har_note->when(FL_WHEN_CHANGED);
 } // RKR_Slider* har_note
-{ har_type = new RKR_Slider(53, 170, 100, 10, "Chord");
+{ har_type = new RKR_Slider(56, 170, 100, 10, "Chord");
   har_type->type(5);
   har_type->box(FL_FLAT_BOX);
   har_type->color((Fl_Color)178);

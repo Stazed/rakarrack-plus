@@ -266,7 +266,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   varyband_preset->menu(menu_varyband_preset);
 } // RKR_Choice* varyband_preset
-{ varyband_WD = new RKR_Slider(54, 28, 100, 10, "Dry/Wet");
+{ varyband_WD = new RKR_Slider(56, 28, 100, 10, "Dry/Wet");
   varyband_WD->type(5);
   varyband_WD->box(FL_FLAT_BOX);
   varyband_WD->color((Fl_Color)178);
@@ -282,7 +282,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_WD->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_WD->when(FL_WHEN_CHANGED);
 } // RKR_Slider* varyband_WD
-{ varyband_freq1 = new RKR_Slider(54, 40, 100, 10, "Tempo 1");
+{ varyband_freq1 = new RKR_Slider(56, 40, 100, 10, "Tempo 1");
   varyband_freq1->type(5);
   varyband_freq1->box(FL_FLAT_BOX);
   varyband_freq1->color((Fl_Color)178);
@@ -315,7 +315,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_lfotype1->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* varyband_lfotype1
-{ varyband_stdf1 = new RKR_Slider(54, 72, 100, 10, "St.df 1");
+{ varyband_stdf1 = new RKR_Slider(56, 72, 100, 10, "St.df 1");
   varyband_stdf1->type(5);
   varyband_stdf1->box(FL_FLAT_BOX);
   varyband_stdf1->color((Fl_Color)178);
@@ -331,7 +331,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_stdf1->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_stdf1->when(FL_WHEN_CHANGED);
 } // RKR_Slider* varyband_stdf1
-{ varyband_freq2 = new RKR_Slider(54, 84, 100, 10, "Tempo 2");
+{ varyband_freq2 = new RKR_Slider(56, 84, 100, 10, "Tempo 2");
   varyband_freq2->type(5);
   varyband_freq2->box(FL_FLAT_BOX);
   varyband_freq2->color((Fl_Color)178);
@@ -364,7 +364,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_lfotype2->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
 } // RKR_Choice* varyband_lfotype2
-{ varyband_stdf2 = new RKR_Slider(54, 116, 100, 10, "St.df 2");
+{ varyband_stdf2 = new RKR_Slider(56, 116, 100, 10, "St.df 2");
   varyband_stdf2->type(5);
   varyband_stdf2->box(FL_FLAT_BOX);
   varyband_stdf2->color((Fl_Color)178);
@@ -380,7 +380,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_stdf2->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_stdf2->when(FL_WHEN_CHANGED);
 } // RKR_Slider* varyband_stdf2
-{ varyband_cross1 = new RKR_Slider(54, 128, 100, 10, "Cross 1");
+{ varyband_cross1 = new RKR_Slider(56, 128, 100, 10, "Cross 1");
   varyband_cross1->type(5);
   varyband_cross1->box(FL_FLAT_BOX);
   varyband_cross1->color((Fl_Color)178);
@@ -397,7 +397,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_cross1->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_cross1->when(FL_WHEN_CHANGED);
 } // RKR_Slider* varyband_cross1
-{ varyband_cross2 = new RKR_Slider(54, 140, 100, 10, "Cross 2");
+{ varyband_cross2 = new RKR_Slider(56, 140, 100, 10, "Cross 2");
   varyband_cross2->type(5);
   varyband_cross2->box(FL_FLAT_BOX);
   varyband_cross2->color((Fl_Color)178);
@@ -414,7 +414,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_cross2->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_cross2->when(FL_WHEN_CHANGED);
 } // RKR_Slider* varyband_cross2
-{ varyband_cross3 = new RKR_Slider(54, 152, 100, 10, "Cross 3");
+{ varyband_cross3 = new RKR_Slider(56, 152, 100, 10, "Cross 3");
   varyband_cross3->type(5);
   varyband_cross3->box(FL_FLAT_BOX);
   varyband_cross3->color((Fl_Color)178);

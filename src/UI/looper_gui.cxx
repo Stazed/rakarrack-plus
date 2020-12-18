@@ -285,7 +285,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_preset->when(FL_WHEN_RELEASE_ALWAYS);
   looper_preset->menu(menu_looper_preset);
 } // RKR_Choice* looper_preset
-{ looper_WD = new RKR_Slider(53, 25, 100, 10, "Dry/Wet");
+{ looper_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
   looper_WD->type(5);
   looper_WD->box(FL_FLAT_BOX);
   looper_WD->color((Fl_Color)178);
@@ -301,7 +301,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_WD->align(Fl_Align(FL_ALIGN_LEFT));
   looper_WD->when(FL_WHEN_CHANGED);
 } // RKR_Slider* looper_WD
-{ looper_level1 = new RKR_Slider(53, 37, 100, 10, "Level 1");
+{ looper_level1 = new RKR_Slider(56, 37, 100, 10, "Level 1");
   looper_level1->type(5);
   looper_level1->box(FL_FLAT_BOX);
   looper_level1->color((Fl_Color)178);
@@ -317,7 +317,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_level1->align(Fl_Align(FL_ALIGN_LEFT));
   looper_level1->when(FL_WHEN_RELEASE);
 } // RKR_Slider* looper_level1
-{ looper_level2 = new RKR_Slider(53, 49, 100, 10, "Level 2");
+{ looper_level2 = new RKR_Slider(56, 49, 100, 10, "Level 2");
   looper_level2->type(5);
   looper_level2->box(FL_FLAT_BOX);
   looper_level2->color((Fl_Color)178);
@@ -333,7 +333,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   looper_level2->align(Fl_Align(FL_ALIGN_LEFT));
   looper_level2->when(FL_WHEN_RELEASE);
 } // RKR_Slider* looper_level2
-{ looper_Tempo = new RKR_Slider(53, 61, 100, 10, "Tempo");
+{ looper_Tempo = new RKR_Slider(56, 61, 100, 10, "Tempo");
   looper_Tempo->type(5);
   looper_Tempo->box(FL_FLAT_BOX);
   looper_Tempo->color((Fl_Color)178);

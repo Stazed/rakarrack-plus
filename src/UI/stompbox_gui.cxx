@@ -168,7 +168,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_preset->when(FL_WHEN_RELEASE_ALWAYS);
   stomp_preset->menu(menu_stomp_preset);
 } // RKR_Choice* stomp_preset
-{ stomp_WD = new RKR_Slider(53, 30, 100, 10, "Level");
+{ stomp_WD = new RKR_Slider(56, 30, 100, 10, "Level");
   stomp_WD->type(5);
   stomp_WD->box(FL_FLAT_BOX);
   stomp_WD->color((Fl_Color)178);
@@ -184,7 +184,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_WD->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_WD->when(FL_WHEN_CHANGED);
 } // RKR_Slider* stomp_WD
-{ stomp_gain = new RKR_Slider(53, 58, 100, 10, "Gain");
+{ stomp_gain = new RKR_Slider(56, 58, 100, 10, "Gain");
   stomp_gain->type(5);
   stomp_gain->box(FL_FLAT_BOX);
   stomp_gain->color((Fl_Color)178);
@@ -200,7 +200,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_gain->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_gain->when(FL_WHEN_CHANGED);
 } // RKR_Slider* stomp_gain
-{ stomp_low = new RKR_Slider(53, 75, 100, 10, "Bias");
+{ stomp_low = new RKR_Slider(56, 75, 100, 10, "Bias");
   stomp_low->type(5);
   stomp_low->box(FL_FLAT_BOX);
   stomp_low->color((Fl_Color)178);
@@ -217,7 +217,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_low->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_low->when(FL_WHEN_CHANGED);
 } // RKR_Slider* stomp_low
-{ stomp_mid = new RKR_Slider(53, 92, 100, 10, "Mid");
+{ stomp_mid = new RKR_Slider(56, 92, 100, 10, "Mid");
   stomp_mid->type(5);
   stomp_mid->box(FL_FLAT_BOX);
   stomp_mid->color((Fl_Color)178);
@@ -234,7 +234,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_mid->align(Fl_Align(36));
   stomp_mid->when(FL_WHEN_CHANGED);
 } // RKR_Slider* stomp_mid
-{ stomp_high = new RKR_Slider(53, 109, 100, 10, "Tone");
+{ stomp_high = new RKR_Slider(56, 109, 100, 10, "Tone");
   stomp_high->type(5);
   stomp_high->box(FL_FLAT_BOX);
   stomp_high->color((Fl_Color)178);

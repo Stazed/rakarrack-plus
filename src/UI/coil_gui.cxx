@@ -186,7 +186,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_preset->when(FL_WHEN_RELEASE_ALWAYS);
   coil_preset->menu(menu_coil_preset);
 } // RKR_Choice* coil_preset
-{ coil_WD = new RKR_Slider(53, 25, 100, 10, "Gain");
+{ coil_WD = new RKR_Slider(56, 25, 100, 10, "Gain");
   coil_WD->type(5);
   coil_WD->box(FL_FLAT_BOX);
   coil_WD->color((Fl_Color)178);
@@ -203,7 +203,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_WD->align(Fl_Align(FL_ALIGN_LEFT));
   coil_WD->when(FL_WHEN_CHANGED);
 } // RKR_Slider* coil_WD
-{ coil_tone = new RKR_Slider(53, 41, 100, 10, "Tone");
+{ coil_tone = new RKR_Slider(56, 41, 100, 10, "Tone");
   coil_tone->type(5);
   coil_tone->box(FL_FLAT_BOX);
   coil_tone->color((Fl_Color)178);
@@ -237,7 +237,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_origin->when(FL_WHEN_RELEASE_ALWAYS);
   coil_origin->menu(menu_coil_origin);
 } // RKR_Choice* coil_origin
-{ coil_freq1 = new RKR_Slider(53, 79, 100, 10, "Freq 1");
+{ coil_freq1 = new RKR_Slider(56, 79, 100, 10, "Freq 1");
   coil_freq1->tooltip("Origin Pickup Frequency");
   coil_freq1->type(5);
   coil_freq1->box(FL_FLAT_BOX);
@@ -256,7 +256,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_freq1->align(Fl_Align(FL_ALIGN_LEFT));
   coil_freq1->when(FL_WHEN_CHANGED);
 } // RKR_Slider* coil_freq1
-{ coil_q1 = new RKR_Slider(53, 94, 100, 10, "Q 1");
+{ coil_q1 = new RKR_Slider(56, 94, 100, 10, "Q 1");
   coil_q1->tooltip("Origin Pickup Resonance");
   coil_q1->type(5);
   coil_q1->box(FL_FLAT_BOX);
@@ -290,7 +290,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_destiny->when(FL_WHEN_RELEASE_ALWAYS);
   o->menu(menu_coil_origin);
 } // RKR_Choice* coil_destiny
-{ coil_freq2 = new RKR_Slider(53, 132, 100, 10, "Freq 2");
+{ coil_freq2 = new RKR_Slider(56, 132, 100, 10, "Freq 2");
   coil_freq2->tooltip("Destination Pickup Frequency");
   coil_freq2->type(5);
   coil_freq2->box(FL_FLAT_BOX);
@@ -309,7 +309,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   coil_freq2->align(Fl_Align(FL_ALIGN_LEFT));
   coil_freq2->when(FL_WHEN_CHANGED);
 } // RKR_Slider* coil_freq2
-{ coil_q2 = new RKR_Slider(53, 147, 100, 10, "Q 2");
+{ coil_q2 = new RKR_Slider(56, 147, 100, 10, "Q 2");
   coil_q2->tooltip("Destination Pickup Resonance");
   coil_q2->type(5);
   coil_q2->box(FL_FLAT_BOX);

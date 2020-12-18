@@ -80,7 +80,7 @@ varyband_HB->value(rkr->efx_VaryBand->getpar(14));}
  return;
 }
 rkr->efx_VaryBand->changepar(0,Dry_Wet((int)(o->value())));}
-    xywh {54 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider varyband_freq1 {
@@ -91,7 +91,7 @@ rkr->efx_VaryBand->changepar(0,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->efx_VaryBand->changepar(1,(int)o->value());}
-    xywh {54 40 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {56 40 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice varyband_lfotype1 {
@@ -115,7 +115,7 @@ rkr->efx_VaryBand->changepar(2,(int)o->value());}
  return;
 }
 rkr->efx_VaryBand->changepar(3,(int)o->value());}
-    xywh {54 72 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 72 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider varyband_freq2 {
@@ -126,7 +126,7 @@ rkr->efx_VaryBand->changepar(3,(int)o->value());}
  return;
 }
 rkr->efx_VaryBand->changepar(4,(int)o->value());}
-    xywh {54 84 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {56 84 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice varyband_lfotype2 {
@@ -137,7 +137,7 @@ rkr->efx_VaryBand->changepar(4,(int)o->value());}
  return;
 }
 
-rkr->efx_VaryBand->changepar(5,(int)o->value());} selected
+rkr->efx_VaryBand->changepar(5,(int)o->value());}
     xywh {65 97 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -150,7 +150,7 @@ rkr->efx_VaryBand->changepar(5,(int)o->value());} selected
  return;
 }
 rkr->efx_VaryBand->changepar(6,(int)o->value());}
-    xywh {54 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider varyband_cross1 {
@@ -161,7 +161,7 @@ rkr->efx_VaryBand->changepar(6,(int)o->value());}
  return;
 }
 rkr->efx_VaryBand->changepar(7,(int)o->value());}
-    xywh {54 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
+    xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider varyband_cross2 {
@@ -172,7 +172,7 @@ rkr->efx_VaryBand->changepar(7,(int)o->value());}
  return;
 }
 rkr->efx_VaryBand->changepar(8,(int)o->value());}
-    xywh {54 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
+    xywh {56 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider varyband_cross3 {
@@ -182,8 +182,8 @@ rkr->efx_VaryBand->changepar(8,(int)o->value());}
  rgui->getMIDIControl(255);
  return;
 }
-rkr->efx_VaryBand->changepar(9,(int)o->value());}
-    xywh {54 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
+rkr->efx_VaryBand->changepar(9,(int)o->value());} selected
+    xywh {56 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice varyband_LB {

@@ -119,7 +119,6 @@ Compressor::lv2_update_params(uint32_t period)
 void
 Compressor::changepar(int npar, int value)
 {
-    printf("npar %d: value %d\n", npar, value);
     switch (npar)
     {
     case Compress_Threshold:
