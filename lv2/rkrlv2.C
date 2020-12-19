@@ -421,11 +421,10 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
 
     //check and set changed parameters
     int val = 0;
-    int param_case_offset = 1; // This effect is 1 indexed
 
     for(int i = 0; i < plug->nparams; i++)
     {
-        switch(param_case_offset)
+        switch(i)
         {
             case Compress_Threshold:
             case Compress_Ratio:
@@ -438,15 +437,13 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
             case Compress_Peak:
             {
                 val = (int)*plug->param_p[i];
-                if(plug->comp->getpar(param_case_offset) != val)
+                if(plug->comp->getpar(i) != val)
                 {
-                    plug->comp->changepar(param_case_offset, val);
+                    plug->comp->changepar(i, val);
                 }
             }
             break;
         }
-        
-        param_case_offset++;
     }
 
     //now run

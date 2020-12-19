@@ -1371,8 +1371,8 @@ RKR::Actualizar_Audio()
         case 1:// Compressor
             Compressor_Bypass = 0;
             efx_Compressor->cleanup();
-            for (i = 0; i <= 9; i++)
-                efx_Compressor->changepar(i + 1, lv[9][i]);
+            for (i = 0; i <= 8; i++)
+                efx_Compressor->changepar(i, lv[9][i]);
             Compressor_Bypass = Compressor_B;
             break;
 
@@ -2221,7 +2221,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j <= 12; j++)
         lv[6][j] = efx_Distorsion->getpar(j);
     for (j = 0; j <= 8; j++)
-        lv[9][j] = efx_Compressor->getpar(j + 1);
+        lv[9][j] = efx_Compressor->getpar(j);
     for (j = 0; j <= 9; j++)
         lv[11][j] = efx_WhaWha->getpar(j);
     for (j = 0; j <= 10; j++)

@@ -32,7 +32,7 @@
 
 enum Compress_Index
 {
-    Compress_Threshold = 1, // Starts at 1 !!!!
+    Compress_Threshold = 0,
     Compress_Ratio,
     Compress_Output,
     Compress_Attack,

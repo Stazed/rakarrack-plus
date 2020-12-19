@@ -230,7 +230,7 @@ Compressor::getpar(int npar)
 void
 Compressor::setpreset(int dgui, int npreset)
 {
-    const int PRESET_SIZE = 10;
+    const int PRESET_SIZE = 9;
     const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
@@ -256,13 +256,13 @@ Compressor::setpreset(int dgui, int npreset)
     {
         Fpre->ReadPreset(1, npreset - 3, pdata);
         
-        for (int n = 1; n < PRESET_SIZE; n++)
-            changepar(n, pdata[n - 1]);
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, pdata[n]);
     }
     else
     {
-        for (int n = 1; n < PRESET_SIZE; n++)
-            changepar(n, presets[npreset][n - 1]);
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
     }
 }
 
