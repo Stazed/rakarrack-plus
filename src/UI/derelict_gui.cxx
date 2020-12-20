@@ -21,18 +21,18 @@ void DerelictGui::cb_derelict_activar(RKR_Light_Button* o, void* v) {
 void DerelictGui::cb_derelict_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12017))rkr->efx_Derelict->setpreset((int) o->value());
-derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(0)));
-derelict_LRc->value(rkr->efx_Derelict->getpar(2));
-derelict_drive->value(rkr->efx_Derelict->getpar(3));
-derelict_level->value(rkr->efx_Derelict->getpar(4));
-derelict_tipo->value(rkr->efx_Derelict->getpar(5));
-derelict_neg->value(rkr->efx_Derelict->getpar(6));
-derelict_st->value(rkr->efx_Derelict->getpar(9));
-derelict_oct->value(rkr->efx_Derelict->getpar(11));
-derelict_pan->value(rkr->efx_Derelict->getpar(1)-64);
-derelict_pf->value(rkr->efx_Derelict->getpar(10));
-derelict_lpf->value(rkr->efx_Derelict->getpar(7));
-derelict_hpf->value(rkr->efx_Derelict->getpar(8));
+derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(Dere_DryWet)));
+derelict_LRc->value(rkr->efx_Derelict->getpar(Dere_LR_Cross));
+derelict_drive->value(rkr->efx_Derelict->getpar(Dere_Drive));
+derelict_level->value(rkr->efx_Derelict->getpar(Dere_Level));
+derelict_tipo->value(rkr->efx_Derelict->getpar(Dere_Type));
+derelict_neg->value(rkr->efx_Derelict->getpar(Dere_Negate));
+derelict_st->value(rkr->efx_Derelict->getpar(Dere_Color));
+derelict_oct->value(rkr->efx_Derelict->getpar(Dere_Suboctave));
+derelict_pan->value(rkr->efx_Derelict->getpar(Dere_Pan)-64);
+derelict_pf->value(rkr->efx_Derelict->getpar(Dere_Prefilter));
+derelict_lpf->value(rkr->efx_Derelict->getpar(Dere_LPF));
+derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));
 }
 void DerelictGui::cb_derelict_preset(RKR_Choice* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_preset_i(o,v);
@@ -51,7 +51,7 @@ void DerelictGui::cb_derelict_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(125);
  return;
 } 
-rkr->efx_Derelict->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_Derelict->changepar(Dere_DryWet,Dry_Wet((int)(o->value())));
 }
 void DerelictGui::cb_derelict_WD(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_WD_i(o,v);
@@ -63,7 +63,7 @@ void DerelictGui::cb_derelict_LRc_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(127);
  return;
 } 
-rkr->efx_Derelict->changepar(2,(int)(o->value()));
+rkr->efx_Derelict->changepar(Dere_LR_Cross,(int)(o->value()));
 }
 void DerelictGui::cb_derelict_LRc(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_LRc_i(o,v);
@@ -75,7 +75,7 @@ void DerelictGui::cb_derelict_drive_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(2);
  return;
 } 
-rkr->efx_Derelict->changepar(3,(int)o->value());
+rkr->efx_Derelict->changepar(Dere_Drive,(int)o->value());
 }
 void DerelictGui::cb_derelict_drive(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_drive_i(o,v);
@@ -87,7 +87,7 @@ void DerelictGui::cb_derelict_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(3);
  return;
 } 
-rkr->efx_Derelict->changepar(4,(int)o->value());
+rkr->efx_Derelict->changepar(Dere_Level,(int)o->value());
 }
 void DerelictGui::cb_derelict_level(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_level_i(o,v);
@@ -100,14 +100,14 @@ void DerelictGui::cb_derelict_tipo_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_Derelict->changepar(5,(int)o->value());
+rkr->efx_Derelict->changepar(Dere_Type,(int)o->value());
 }
 void DerelictGui::cb_derelict_tipo(RKR_Choice* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_tipo_i(o,v);
 }
 
 void DerelictGui::cb_derelict_neg_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Derelict->changepar(6,(int)o->value());
+  rkr->efx_Derelict->changepar(Dere_Negate,(int)o->value());
 }
 void DerelictGui::cb_derelict_neg(RKR_Check_Button* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_neg_i(o,v);
@@ -119,7 +119,7 @@ void DerelictGui::cb_derelict_st_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(6);
  return;
 } 
-rkr->efx_Derelict->changepar(9,(int)o->value());
+rkr->efx_Derelict->changepar(Dere_Color,(int)o->value());
 }
 void DerelictGui::cb_derelict_st(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_st_i(o,v);
@@ -131,7 +131,7 @@ void DerelictGui::cb_derelict_oct_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(8);
  return;
 } 
-rkr->efx_Derelict->changepar(11,(int)o->value());
+rkr->efx_Derelict->changepar(Dere_Suboctave,(int)o->value());
 }
 void DerelictGui::cb_derelict_oct(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_oct_i(o,v);
@@ -143,14 +143,14 @@ void DerelictGui::cb_derelict_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(126);
  return;
 } 
-rkr->efx_Derelict->changepar(1,(int)(o->value()+64));
+rkr->efx_Derelict->changepar(Dere_Pan,(int)(o->value()+64));
 }
 void DerelictGui::cb_derelict_pan(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_pan_i(o,v);
 }
 
 void DerelictGui::cb_derelict_pf_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Derelict->changepar(10,(int)o->value());
+  rkr->efx_Derelict->changepar(Dere_Prefilter,(int)o->value());
 }
 void DerelictGui::cb_derelict_pf(RKR_Check_Button* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_pf_i(o,v);
@@ -162,7 +162,7 @@ void DerelictGui::cb_derelict_lpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(4);
  return;
 } 
-rkr->efx_Derelict->changepar(7,(int)o->value());
+rkr->efx_Derelict->changepar(Dere_LPF,(int)o->value());
 }
 void DerelictGui::cb_derelict_lpf(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_lpf_i(o,v);
@@ -174,7 +174,7 @@ void DerelictGui::cb_derelict_hpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(5);
  return;
 } 
-rkr->efx_Derelict->changepar(8,(int)o->value());
+rkr->efx_Derelict->changepar(Dere_HPF,(int)o->value());
 }
 void DerelictGui::cb_derelict_hpf(RKR_Slider* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_hpf_i(o,v);

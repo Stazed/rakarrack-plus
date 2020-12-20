@@ -40,18 +40,18 @@ rgui->findpos(17,(int)o->value(),o);}
     user_data 12017
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12017))rkr->efx_Derelict->setpreset((int) o->value());
-derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(0)));
-derelict_LRc->value(rkr->efx_Derelict->getpar(2));
-derelict_drive->value(rkr->efx_Derelict->getpar(3));
-derelict_level->value(rkr->efx_Derelict->getpar(4));
-derelict_tipo->value(rkr->efx_Derelict->getpar(5));
-derelict_neg->value(rkr->efx_Derelict->getpar(6));
-derelict_st->value(rkr->efx_Derelict->getpar(9));
-derelict_oct->value(rkr->efx_Derelict->getpar(11));
-derelict_pan->value(rkr->efx_Derelict->getpar(1)-64);
-derelict_pf->value(rkr->efx_Derelict->getpar(10));
-derelict_lpf->value(rkr->efx_Derelict->getpar(7));
-derelict_hpf->value(rkr->efx_Derelict->getpar(8));} open
+derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(Dere_DryWet)));
+derelict_LRc->value(rkr->efx_Derelict->getpar(Dere_LR_Cross));
+derelict_drive->value(rkr->efx_Derelict->getpar(Dere_Drive));
+derelict_level->value(rkr->efx_Derelict->getpar(Dere_Level));
+derelict_tipo->value(rkr->efx_Derelict->getpar(Dere_Type));
+derelict_neg->value(rkr->efx_Derelict->getpar(Dere_Negate));
+derelict_st->value(rkr->efx_Derelict->getpar(Dere_Color));
+derelict_oct->value(rkr->efx_Derelict->getpar(Dere_Suboctave));
+derelict_pan->value(rkr->efx_Derelict->getpar(Dere_Pan)-64);
+derelict_pf->value(rkr->efx_Derelict->getpar(Dere_Prefilter));
+derelict_lpf->value(rkr->efx_Derelict->getpar(Dere_LPF));
+derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -75,7 +75,7 @@ derelict_hpf->value(rkr->efx_Derelict->getpar(8));} open
  rgui->getMIDIControl(125);
  return;
 } 
-rkr->efx_Derelict->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Derelict->changepar(Dere_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -86,7 +86,7 @@ rkr->efx_Derelict->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(127);
  return;
 } 
-rkr->efx_Derelict->changepar(2,(int)(o->value()));}
+rkr->efx_Derelict->changepar(Dere_LR_Cross,(int)(o->value()));}
     xywh {56 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -97,7 +97,7 @@ rkr->efx_Derelict->changepar(2,(int)(o->value()));}
  rgui->getMIDIControl(2);
  return;
 } 
-rkr->efx_Derelict->changepar(3,(int)o->value());}
+rkr->efx_Derelict->changepar(Dere_Drive,(int)o->value());}
     xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -108,7 +108,7 @@ rkr->efx_Derelict->changepar(3,(int)o->value());}
  rgui->getMIDIControl(3);
  return;
 } 
-rkr->efx_Derelict->changepar(4,(int)o->value());}
+rkr->efx_Derelict->changepar(Dere_Level,(int)o->value());}
     xywh {56 70 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -120,7 +120,7 @@ rkr->efx_Derelict->changepar(4,(int)o->value());}
  return;
 } 
 
-rkr->efx_Derelict->changepar(5,(int)o->value());} selected
+rkr->efx_Derelict->changepar(Dere_Type,(int)o->value());}
     xywh {34 84 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -128,7 +128,7 @@ rkr->efx_Derelict->changepar(5,(int)o->value());} selected
   Fl_Check_Button derelict_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Derelict->changepar(6,(int)o->value());}
+    callback {rkr->efx_Derelict->changepar(Dere_Negate,(int)o->value());}
     xywh {110 84 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -139,7 +139,7 @@ rkr->efx_Derelict->changepar(5,(int)o->value());} selected
  rgui->getMIDIControl(6);
  return;
 } 
-rkr->efx_Derelict->changepar(9,(int)o->value());}
+rkr->efx_Derelict->changepar(Dere_Color,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -150,7 +150,7 @@ rkr->efx_Derelict->changepar(9,(int)o->value());}
  rgui->getMIDIControl(8);
  return;
 } 
-rkr->efx_Derelict->changepar(11,(int)o->value());}
+rkr->efx_Derelict->changepar(Dere_Suboctave,(int)o->value());}
     xywh {56 120 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -161,14 +161,14 @@ rkr->efx_Derelict->changepar(11,(int)o->value());}
  rgui->getMIDIControl(126);
  return;
 } 
-rkr->efx_Derelict->changepar(1,(int)(o->value()+64));}
+rkr->efx_Derelict->changepar(Dere_Pan,(int)(o->value()+64));}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button derelict_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_Derelict->changepar(10,(int)o->value());}
+    callback {rkr->efx_Derelict->changepar(Dere_Prefilter,(int)o->value());}
     xywh {50 144 66 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -179,7 +179,7 @@ rkr->efx_Derelict->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(4);
  return;
 } 
-rkr->efx_Derelict->changepar(7,(int)o->value());}
+rkr->efx_Derelict->changepar(Dere_LPF,(int)o->value());}
     xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -190,7 +190,7 @@ rkr->efx_Derelict->changepar(7,(int)o->value());}
  rgui->getMIDIControl(5);
  return;
 } 
-rkr->efx_Derelict->changepar(8,(int)o->value());}
+rkr->efx_Derelict->changepar(Dere_HPF,(int)o->value());}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

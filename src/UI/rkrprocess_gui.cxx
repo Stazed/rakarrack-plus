@@ -3560,39 +3560,39 @@ void RKRGUI::ActMIDI()
                 APHASER->aphaser_stdf->redraw();
                 break;
             case 125:
-                DERELICT->derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(0)));
+                DERELICT->derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(Dere_DryWet)));
                 DERELICT->derelict_WD->redraw();
                 break;
             case 126:
-                DERELICT->derelict_pan->value(rkr->efx_Derelict->getpar(1) - 64);
+                DERELICT->derelict_pan->value(rkr->efx_Derelict->getpar(Dere_Pan) - 64);
                 DERELICT->derelict_pan->redraw();
                 break;
             case 127:
-                DERELICT->derelict_LRc->value(rkr->efx_Derelict->getpar(2));
+                DERELICT->derelict_LRc->value(rkr->efx_Derelict->getpar(Dere_LR_Cross));
                 DERELICT->derelict_LRc->redraw();
                 break;
             case 2:
-                DERELICT->derelict_drive->value(rkr->efx_Derelict->getpar(3));
+                DERELICT->derelict_drive->value(rkr->efx_Derelict->getpar(Dere_Drive));
                 DERELICT->derelict_drive->redraw();
                 break;
             case 3:
-                DERELICT->derelict_level->value(rkr->efx_Derelict->getpar(4));
+                DERELICT->derelict_level->value(rkr->efx_Derelict->getpar(Dere_Level));
                 DERELICT->derelict_level->redraw();
                 break;
             case 4:
-                DERELICT->derelict_lpf->value(rkr->efx_Derelict->getpar(7));
+                DERELICT->derelict_lpf->value(rkr->efx_Derelict->getpar(Dere_LPF));
                 DERELICT->derelict_lpf->redraw();
                 break;
             case 5:
-                DERELICT->derelict_hpf->value(rkr->efx_Derelict->getpar(8));
+                DERELICT->derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));
                 DERELICT->derelict_hpf->redraw();
                 break;
             case 6:
-                DERELICT->derelict_st->value(rkr->efx_Derelict->getpar(9));
+                DERELICT->derelict_st->value(rkr->efx_Derelict->getpar(Dere_Color));
                 DERELICT->derelict_st->redraw();
                 break;
             case 8:
-                DERELICT->derelict_oct->value(rkr->efx_Derelict->getpar(11));
+                DERELICT->derelict_oct->value(rkr->efx_Derelict->getpar(Dere_Suboctave));
                 DERELICT->derelict_oct->redraw();
                 break;
             case 9:
@@ -4898,7 +4898,7 @@ void RKRGUI::ActMIDI()
                 OVRD->ovrd_tipo->redraw();
                 break;
             case 451:
-                DERELICT->derelict_tipo->value(rkr->efx_Derelict->getpar(5));
+                DERELICT->derelict_tipo->value(rkr->efx_Derelict->getpar(Dere_Type));
                 DERELICT->derelict_tipo->redraw();
                 break;
             case 452:

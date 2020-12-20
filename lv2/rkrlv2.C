@@ -1793,9 +1793,6 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1816,25 +1813,55 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->dere->getpar(i) != val)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->dere->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//1 pan
-    if(plug->dere->getpar(i) != val)
-    {
-        plug->dere->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //2-11
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->dere->getpar(i) != val)
+        switch(i)
         {
-            plug->dere->changepar(i,val);
+            // Normal processing
+            case Dere_LR_Cross:
+            case Dere_Drive:
+            case Dere_Level:
+            case Dere_Type:
+            case Dere_Negate:
+            case Dere_LPF:
+            case Dere_HPF:
+            case Dere_Color:
+            case Dere_Prefilter:
+            case Dere_Suboctave:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->dere->getpar(i) != val)
+                {
+                    plug->dere->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Dere_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->dere->getpar(Dere_DryWet) != val)
+                {
+                    plug->dere->changepar(Dere_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case Dere_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->dere->getpar(Dere_Pan) != val)
+                {
+                    plug->dere->changepar(Dere_Pan,val);
+                }
+            }
+            break;
         }
     }
 

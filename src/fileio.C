@@ -707,13 +707,13 @@ void RKR::getbuf(char *buf, int j)
     case 17:
         //Derelict
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Derelict->getpar(0), efx_Derelict->getpar(1),
-                efx_Derelict->getpar(2), efx_Derelict->getpar(3),
-                efx_Derelict->getpar(4), efx_Derelict->getpar(5),
-                efx_Derelict->getpar(6), efx_Derelict->getpar(7),
-                efx_Derelict->getpar(8), efx_Derelict->getpar(9),
-                efx_Derelict->getpar(10), efx_Derelict->getpar(11),
-                efx_Derelict->getpar(12), Derelict_Bypass);
+                efx_Derelict->getpar(Dere_DryWet), efx_Derelict->getpar(Dere_Pan),
+                efx_Derelict->getpar(Dere_LR_Cross), efx_Derelict->getpar(Dere_Drive),
+                efx_Derelict->getpar(Dere_Level), efx_Derelict->getpar(Dere_Type),
+                efx_Derelict->getpar(Dere_Negate), efx_Derelict->getpar(Dere_LPF),
+                efx_Derelict->getpar(Dere_HPF), efx_Derelict->getpar(Dere_Color),
+                efx_Derelict->getpar(Dere_Prefilter), efx_Derelict->getpar(Dere_Suboctave),
+                efx_Derelict->getpar(12), Derelict_Bypass); // 12 is invalid...
         break;
 
     case 18:

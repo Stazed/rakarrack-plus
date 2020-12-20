@@ -402,46 +402,46 @@ Derelict::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Dere_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Dere_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Dere_LR_Cross:
         setlrcross(value);
         break;
-    case 3:
+    case Dere_Drive:
         Pdrive = value;
         break;
-    case 4:
+    case Dere_Level:
         Plevel = value;
         break;
-    case 5:
+    case Dere_Type:
         Ptype = value;
         break;
-    case 6:
+    case Dere_Negate:
         if (value > 1)
             value = 1;
         Pnegate = value;
         break;
-    case 7:
+    case Dere_LPF:
         setlpf(value);
         break;
-    case 8:
+    case Dere_HPF:
         sethpf(value);
         break;
-    case 9:
+    case Dere_Color:
         Prfreq = value;
         rfreq = expf(powf((float) value / 127.0f, 0.5f) * logf(25000.0f)) + 40.0f;
         filterl->setfreq(rfreq);
         filterr->setfreq(rfreq);
 
         break;
-    case 10:
+    case Dere_Prefilter:
         Pprefiltering = value;
         break;
-    case 11:
+    case Dere_Suboctave:
         setoctave(value);
         break;
     }
@@ -452,40 +452,40 @@ Derelict::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Dere_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Dere_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Dere_LR_Cross:
         return (Plrcross);
         break;
-    case 3:
+    case Dere_Drive:
         return (Pdrive);
         break;
-    case 4:
+    case Dere_Level:
         return (Plevel);
         break;
-    case 5:
+    case Dere_Type:
         return (Ptype);
         break;
-    case 6:
+    case Dere_Negate:
         return (Pnegate);
         break;
-    case 7:
+    case Dere_LPF:
         return (Plpf);
         break;
-    case 8:
+    case Dere_HPF:
         return (Phpf);
         break;
-    case 9:
+    case Dere_Color:
         return (Prfreq);
         break;
-    case 10:
+    case Dere_Prefilter:
         return (Pprefiltering);
         break;
-    case 11:
+    case Dere_Suboctave:
         return (Poctave);
         break;
     }

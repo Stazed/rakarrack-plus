@@ -35,6 +35,22 @@
 
 
 #define DERE_PRESET_SIZE 12
+
+enum Dere_Index
+{
+    Dere_DryWet = 0,
+    Dere_Pan,
+    Dere_LR_Cross,
+    Dere_Drive,
+    Dere_Level,
+    Dere_Type,
+    Dere_Negate,
+    Dere_LPF,
+    Dere_HPF,
+    Dere_Color,
+    Dere_Prefilter,
+    Dere_Suboctave,
+};
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
 // void waveshapesmps (int n, float * smps, int type,
 // 		    int drive);

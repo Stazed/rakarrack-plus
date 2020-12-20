@@ -1343,39 +1343,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 125:
-        efx_Derelict->changepar(0, Dry_Wet(value));
+        efx_Derelict->changepar(Dere_DryWet, Dry_Wet(value));
         break;
 
     case 126:
-        efx_Derelict->changepar(1, value);
+        efx_Derelict->changepar(Dere_Pan, value);
         break;
 
     case 127:
-        efx_Derelict->changepar(2, value);
+        efx_Derelict->changepar(Dere_LR_Cross, value);
         break;
 
     case 2:
-        efx_Derelict->changepar(3, value);
+        efx_Derelict->changepar(Dere_Drive, value);
         break;
 
     case 3:
-        efx_Derelict->changepar(4, value);
+        efx_Derelict->changepar(Dere_Level, value);
         break;
 
     case 4:
-        efx_Derelict->changepar(7, ret_LPF(value));
+        efx_Derelict->changepar(Dere_LPF, ret_LPF(value));
         break;
 
     case 5:
-        efx_Derelict->changepar(8, ret_HPF(value));
+        efx_Derelict->changepar(Dere_HPF, ret_HPF(value));
         break;
 
     case 6:
-        efx_Derelict->changepar(9, value);
+        efx_Derelict->changepar(Dere_Color, value);
         break;
 
     case 8:
-        efx_Derelict->changepar(11, value);
+        efx_Derelict->changepar(Dere_Suboctave, value);
         break;
 
     case 9:
@@ -2717,7 +2717,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 451:
-        efx_Derelict->changepar(5, (int) ((float) value * C_MC_30_RANGE));
+        efx_Derelict->changepar(Dere_Type, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case 452:
