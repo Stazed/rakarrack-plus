@@ -2023,27 +2023,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
     }
     case 280:
-        efx_Convol->changepar(0, Dry_Wet(value));
+        efx_Convol->changepar(Convo_DryWet, Dry_Wet(value));
         break;
 
     case 281:
-        efx_Convol->changepar(1, value);
+        efx_Convol->changepar(Convo_Pan, value);
         break;
 
     case 282:
-        efx_Convol->changepar(7, value);
+        efx_Convol->changepar(Convo_Level, value);
         break;
 
     case 283:
-        efx_Convol->changepar(6, value);
+        efx_Convol->changepar(Convo_Damp, value);
         break;
 
     case 284:
-        efx_Convol->changepar(10, ((int) (float) value * C_MC_128_RANGE) - 64);
+        efx_Convol->changepar(Convo_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 285:
-        efx_Convol->changepar(3, 5 + (int) ((float) value * C_MC_245_RANGE));
+        efx_Convol->changepar(Convo_Length, 5 + (int) ((float) value * C_MC_245_RANGE));
         break;
 
     case 286:

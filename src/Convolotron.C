@@ -548,44 +548,44 @@ Convolotron::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Convo_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Convo_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Convo_Safe:
         Psafe = value;
         UpdateLength();
         break;
-    case 3:
+    case Convo_Length:
         Plength = value;
         UpdateLength();
         break;
-    case 4:
+    case Convo_User_File:
         Puser = value;
         break;
-    case 5:
+    case Convo_SKIP_5:
         break;
-    case 6:
+    case Convo_Damp:
         sethidamp(value);
         break;
-    case 7:
+    case Convo_Level:
         Plevel = value;
         level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
         levpanl = lpanning * level * 2.0f;
         levpanr = rpanning * level * 2.0f;
         break;
-    case 8:
+    case Convo_Set_File:
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
 #else
         if (!setfile(value)) error_num = 1;
 #endif
         break;
-    case 9:
+    case Convo_SKIP_9:
         break;
-    case 10:
+    case Convo_Feedback:
         Pfb = value;
         if (Pfb < 0)
         {
@@ -604,37 +604,37 @@ Convolotron::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Convo_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Convo_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Convo_Safe:
         return (Psafe);
         break;
-    case 3:
+    case Convo_Length:
         return (Plength);
         break;
-    case 4:
+    case Convo_User_File:
         return (Puser);
         break;
-    case 5:
+    case Convo_SKIP_5:
         return (0);
         break;
-    case 6:
+    case Convo_Damp:
         return (Phidamp);
         break;
-    case 7:
+    case Convo_Level:
         return (Plevel);
         break;
-    case 8:
+    case Convo_Set_File:
         return (Filenum);
         break;
-    case 9:
+    case Convo_SKIP_9:
         return (0);
         break;
-    case 10:
+    case Convo_Feedback:
         return (Pfb);
         break;
     }

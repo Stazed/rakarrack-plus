@@ -4210,27 +4210,27 @@ void RKRGUI::ActMIDI()
                 update_looper();
                 break;
             case 280:
-                CONVOLOTRON->convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(0)));
+                CONVOLOTRON->convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(Convo_DryWet)));
                 CONVOLOTRON->convo_WD->redraw();
                 break;
             case 281:
-                CONVOLOTRON->convo_pan->value(rkr->efx_Convol->getpar(1) - 64);
+                CONVOLOTRON->convo_pan->value(rkr->efx_Convol->getpar(Convo_Pan) - 64);
                 CONVOLOTRON->convo_pan->redraw();
                 break;
             case 282:
-                CONVOLOTRON->convo_level->value(rkr->efx_Convol->getpar(7));
+                CONVOLOTRON->convo_level->value(rkr->efx_Convol->getpar(Convo_Level));
                 CONVOLOTRON->convo_level->redraw();
                 break;
             case 283:
-                CONVOLOTRON->convo_damp->value(rkr->efx_Convol->getpar(6));
+                CONVOLOTRON->convo_damp->value(rkr->efx_Convol->getpar(Convo_Damp));
                 CONVOLOTRON->convo_damp->redraw();
                 break;
             case 284:
-                CONVOLOTRON->convo_fb->value(rkr->efx_Convol->getpar(10));
+                CONVOLOTRON->convo_fb->value(rkr->efx_Convol->getpar(Convo_Feedback));
                 CONVOLOTRON->convo_fb->redraw();
                 break;
             case 285:
-                CONVOLOTRON->convo_length->value(rkr->efx_Convol->getpar(3));
+                CONVOLOTRON->convo_length->value(rkr->efx_Convol->getpar(Convo_Length));
                 CONVOLOTRON->convo_length->redraw();
                 break;
             case 286:

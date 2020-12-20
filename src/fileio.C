@@ -849,12 +849,12 @@ void RKR::getbuf(char *buf, int j)
     case 29:
         //Convolotron
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                efx_Convol->getpar(0), efx_Convol->getpar(1),
-                efx_Convol->getpar(2), efx_Convol->getpar(3),
-                efx_Convol->getpar(4), efx_Convol->getpar(5),
-                efx_Convol->getpar(6), efx_Convol->getpar(7),
-                efx_Convol->getpar(8), efx_Convol->getpar(9),
-                efx_Convol->getpar(10), Convol_Bypass, efx_Convol->Filename);
+                efx_Convol->getpar(Convo_DryWet), efx_Convol->getpar(Convo_Pan),
+                efx_Convol->getpar(Convo_Safe), efx_Convol->getpar(Convo_Length),
+                efx_Convol->getpar(Convo_User_File), efx_Convol->getpar(Convo_SKIP_5),
+                efx_Convol->getpar(Convo_Damp), efx_Convol->getpar(Convo_Level),
+                efx_Convol->getpar(Convo_Set_File), efx_Convol->getpar(Convo_SKIP_9),
+                efx_Convol->getpar(Convo_Feedback), Convol_Bypass, efx_Convol->Filename);
         break;
 
     case 30:

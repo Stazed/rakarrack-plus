@@ -39,16 +39,16 @@ rgui->findpos(29,(int)o->value(),o);}
     user_data 12029
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12029))rkr->efx_Convol->setpreset((int) o->value());
-convo_pan->value(rkr->efx_Convol->getpar(1)-64);
-convo_level->value(rkr->efx_Convol->getpar(7));
-convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(0)));
-convo_damp->value(rkr->efx_Convol->getpar(6));
-convo_fnum->value(rkr->efx_Convol->getpar(8));
-convo_length->value(rkr->efx_Convol->getpar(3));
-convo_user->value(rkr->efx_Convol->getpar(4));
+convo_pan->value(rkr->efx_Convol->getpar(Convo_Pan)-64);
+convo_level->value(rkr->efx_Convol->getpar(Convo_Level));
+convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(Convo_DryWet)));
+convo_damp->value(rkr->efx_Convol->getpar(Convo_Damp));
+convo_fnum->value(rkr->efx_Convol->getpar(Convo_Set_File));
+convo_length->value(rkr->efx_Convol->getpar(Convo_Length));
+convo_user->value(rkr->efx_Convol->getpar(Convo_User_File));
 convo_user->do_callback();
-convo_safe->value(rkr->efx_Convol->getpar(2));
-convo_fb->value(rkr->efx_Convol->getpar(10));}
+convo_safe->value(rkr->efx_Convol->getpar(Convo_Safe));
+convo_fb->value(rkr->efx_Convol->getpar(Convo_Feedback));} selected
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -76,7 +76,7 @@ convo_fb->value(rkr->efx_Convol->getpar(10));}
  rgui->getMIDIControl(280);
  return;
 }
-rkr->efx_Convol->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Convol->changepar(Convo_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -87,7 +87,7 @@ rkr->efx_Convol->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(281);
  return;
 }
-rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
+rkr->efx_Convol->changepar(Convo_Pan,(int)(o->value()+64));}
     xywh {56 46 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -98,7 +98,7 @@ rkr->efx_Convol->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(282);
  return;
 }
-rkr->efx_Convol->changepar(7,(int)o->value());}
+rkr->efx_Convol->changepar(Convo_Level,(int)o->value());}
     xywh {56 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -109,7 +109,7 @@ rkr->efx_Convol->changepar(7,(int)o->value());}
  rgui->getMIDIControl(283);
  return;
 }
-rkr->efx_Convol->changepar(6,(int)o->value());}
+rkr->efx_Convol->changepar(Convo_Damp,(int)o->value());}
     xywh {56 78 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -120,7 +120,7 @@ rkr->efx_Convol->changepar(6,(int)o->value());}
  rgui->getMIDIControl(284);
  return;
 }
-rkr->efx_Convol->changepar(10,(int)o->value());}
+rkr->efx_Convol->changepar(Convo_Feedback,(int)o->value());}
     xywh {56 94 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -131,14 +131,14 @@ rkr->efx_Convol->changepar(10,(int)o->value());}
  rgui->getMIDIControl(285);
  return;
 }
-rkr->efx_Convol->changepar(3,(int)o->value());}
+rkr->efx_Convol->changepar(Convo_Length,(int)o->value());}
     xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 5 maximum 250 step 1 value 100 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button convo_user {
     label User
     user_data 2
-    callback {rkr->efx_Convol->changepar(4,(int)o->value());
+    callback {rkr->efx_Convol->changepar(Convo_User_File,(int)o->value());
 
 if((int)o->value())B_wav->activate(); else B_wav->deactivate();}
     xywh {110 126 43 15} down_box BORDER_BOX labelsize 10 labelcolor 7
@@ -147,7 +147,7 @@ if((int)o->value())B_wav->activate(); else B_wav->deactivate();}
   Fl_Check_Button convo_safe {
     label {Safe Mode}
     user_data 2
-    callback {rkr->efx_Convol->changepar(2,(int)o->value())}
+    callback {rkr->efx_Convol->changepar(Convo_Safe,(int)o->value())}
     xywh {19 141 73 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -162,14 +162,14 @@ strcpy(rkr->efx_Convol->Filename,filename);
 if(!rkr->efx_Convol->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\\n", filename);
-}} selected
+}}
     xywh {106 143 46 12} labelsize 10 deactivate
     class RKR_Button
   }
   Fl_Choice convo_fnum {
     label Preset
     user_data 12
-    callback {rkr->efx_Convol->changepar(8,(int)o->value());}
+    callback {rkr->efx_Convol->changepar(Convo_Set_File,(int)o->value());}
     xywh {51 159 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {

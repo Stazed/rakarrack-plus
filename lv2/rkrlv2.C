@@ -4891,7 +4891,7 @@ LV2_Handle init_convollv2(const LV2_Descriptor* /* descriptor */,double sample_f
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
     plug->convol = new Convolotron( /*downsample*/6, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
-    plug->convol->changepar(4,1);//set to user selected files
+    plug->convol->changepar(Convo_User_File,1);//set to user selected files
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -4904,9 +4904,6 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -4927,43 +4924,66 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
     }
 
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->convol->getpar(i) != val)
-    {
-        plug->convol->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] +64;// 1 pan offset
-    if(plug->convol->getpar(i) != val)
-    {
-        plug->convol->changepar(i,val);
-    }
+    int val = 0;
+    int param_case_offset = 0;
     
-    for(i++; i<4; i++)//skip user #4  & missing #5
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->convol->getpar(i) != val)
+        switch(param_case_offset)
         {
-            plug->convol->changepar(i,val);
+            // Normal processing
+            case Convo_Safe:
+            case Convo_Damp:
+            case Convo_Feedback:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->convol->getpar(param_case_offset) != val)
+                {
+                    plug->convol->changepar(param_case_offset,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Convo_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->convol->getpar(Convo_DryWet) != val)
+                {
+                    plug->convol->changepar(Convo_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case Convo_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;   //  offset
+                if(plug->convol->getpar(Convo_Pan) != val)
+                {
+                    plug->convol->changepar(Convo_Pan,val);
+                }
+            }
+            break;
+            
+            // Skip two after these
+            case Convo_Length:
+            case Convo_Level:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->convol->getpar(param_case_offset) != val)
+                {
+                    plug->convol->changepar(param_case_offset,val);
+                }
+                // increment for two skipped parameters
+                param_case_offset += 2;
+            }
+            break;
         }
-    }
-    for(; i+2<8; i++)//skip file num #8 & missing #9
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->convol->getpar(i+2) != val)
-        {
-            plug->convol->changepar(i+2,val);
-        }
-    }
-    for(; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->convol->getpar(i+4) != val)
-        {
-            plug->convol->changepar(i+4,val);
-        }
+        param_case_offset++;
     }
 
     // Set up forge to write directly to notify output port.

@@ -3106,7 +3106,7 @@ void SettingsWindowGui::update_convo_quality() {
   m_rkr->efx_Convol->reset_parameters(save_state);
   
   /* Check for user file and re-load if present */
-  if(m_rkr->efx_Convol->getpar(4))
+  if(m_rkr->efx_Convol->getpar(Convo_User_File))
   {
       strcpy(m_rkr->efx_Convol->Filename,filename.c_str());
       if(!m_rkr->efx_Convol->setfile(USERFILE))
