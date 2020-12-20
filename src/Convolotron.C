@@ -502,6 +502,14 @@ Convolotron::sethidamp(int Phidamp)
 }
 
 void
+Convolotron::UpdateLength()
+{
+    convlength = ((float) Plength) / 1000.0f; //time in seconds
+    length = (int) (nfSAMPLE_RATE * convlength); //time in samples
+    process_rbuf();
+}
+
+void
 Convolotron::setpreset(int npreset)
 {
     const int PRESET_SIZE = CONVO_PRESET_SIZE;
@@ -536,14 +544,6 @@ Convolotron::setpreset(int npreset)
 }
 
 void
-Convolotron::UpdateLength()
-{
-    convlength = ((float) Plength) / 1000.0f; //time in seconds
-    length = (int) (nfSAMPLE_RATE * convlength); //time in samples
-    process_rbuf();
-}
-
-void
 Convolotron::changepar(int npar, int value)
 {
     switch (npar)
@@ -562,12 +562,8 @@ Convolotron::changepar(int npar, int value)
         Plength = value;
         UpdateLength();
         break;
-    case 8:
-#ifdef LV2_SUPPORT
-        setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
-#else
-        if (!setfile(value)) error_num = 1;
-#endif
+    case 4:
+        Puser = value;
         break;
     case 5:
         break;
@@ -580,8 +576,12 @@ Convolotron::changepar(int npar, int value)
         levpanl = lpanning * level * 2.0f;
         levpanr = rpanning * level * 2.0f;
         break;
-    case 4:
-        Puser = value;
+    case 8:
+#ifdef LV2_SUPPORT
+        setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
+#else
+        if (!setfile(value)) error_num = 1;
+#endif
         break;
     case 9:
         break;
@@ -616,8 +616,8 @@ Convolotron::getpar(int npar)
     case 3:
         return (Plength);
         break;
-    case 8:
-        return (Filenum);
+    case 4:
+        return (Puser);
         break;
     case 5:
         return (0);
@@ -628,8 +628,8 @@ Convolotron::getpar(int npar)
     case 7:
         return (Plevel);
         break;
-    case 4:
-        return (Puser);
+    case 8:
+        return (Filenum);
         break;
     case 9:
         return (0);

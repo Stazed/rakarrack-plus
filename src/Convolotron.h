@@ -31,6 +31,21 @@
 
 #define CONVO_PRESET_SIZE 11
 
+enum Convo_Index
+{
+    Convo_DryWet = 0,
+    Convo_Pan,
+    Convo_Safe,
+    Convo_Length,
+    Convo_User_File,
+    Convo_SKIP_5,
+    Convo_Damp,
+    Convo_Level,
+    Convo_Set_File,
+    Convo_SKIP_9,
+    Convo_Feedback
+};
+
 class Convolotron
 {
 public:
