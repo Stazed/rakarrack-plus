@@ -116,7 +116,6 @@ void CompressGui::cb_compress_output(RKR_Slider* o, void* v) {
 
 void CompressGui::cb_Auto_Output_i(RKR_Check_Button* o, void*) {
   rkr->efx_Compressor->changepar(Compress_Auto_Out,(int)o->value());
-if ((int) o->value() == 0) compress_output->do_callback();
 }
 void CompressGui::cb_Auto_Output(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Auto_Output_i(o,v);
@@ -124,7 +123,6 @@ void CompressGui::cb_Auto_Output(RKR_Check_Button* o, void* v) {
 
 void CompressGui::cb_Stereo_i(RKR_Check_Button* o, void*) {
   rkr->efx_Compressor->changepar(Compress_Stereo,(int)o->value());
-if ((int) o->value() == 0) compress_output->do_callback();
 }
 void CompressGui::cb_Stereo(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Stereo_i(o,v);
@@ -132,7 +130,6 @@ void CompressGui::cb_Stereo(RKR_Check_Button* o, void* v) {
 
 void CompressGui::cb_Peak_i(RKR_Check_Button* o, void*) {
   rkr->efx_Compressor->changepar(Compress_Peak,(int)o->value());
-if ((int) o->value() == 0) compress_output->do_callback();
 }
 void CompressGui::cb_Peak(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Peak_i(o,v);

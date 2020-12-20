@@ -117,156 +117,6 @@ Compressor::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-Compressor::changepar(int npar, int value)
-{
-    switch (npar)
-    {
-    case Compress_Threshold:
-        tthreshold = value;
-        thres_db = (float) tthreshold; //implicit type cast int to float
-        break;
-
-    case Compress_Ratio:
-        tratio = value;
-        ratio = (float) tratio;
-        break;
-
-    case Compress_Output:
-        toutput = value;
-        break;
-
-    case Compress_Attack:
-        tatt = value;
-        att = cSAMPLE_RATE / (((float) value / 1000.0f) + cSAMPLE_RATE);
-        attr = att;
-        attl = att;
-        break;
-
-    case Compress_Release:
-        trel = value;
-        rel = cSAMPLE_RATE / (((float) value / 1000.0f) + cSAMPLE_RATE);
-        rell = rel;
-        relr = rel;
-        break;
-
-    case Compress_Auto_Out:
-        a_out = value;
-        break;
-
-    case Compress_Knee:
-        tknee = value; //knee expressed a percentage of range between thresh and zero dB
-        kpct = (float) tknee / 100.1f;
-        break;
-
-    case Compress_Stereo:
-        stereo = value;
-        break;
-    case Compress_Peak:
-        peak = value;
-        break;
-    }
-
-    kratio = logf(ratio) / LOG_2; //  Log base 2 relationship matches slope
-    knee = -kpct*thres_db;
-
-    coeff_kratio = 1.0 / kratio;
-    coeff_ratio = 1.0 / ratio;
-    coeff_knee = 1.0 / knee;
-
-    coeff_kk = knee * coeff_kratio;
-
-
-    thres_mx = thres_db + knee; //This is the value of the input when the output is at t+k
-    makeup = -thres_db - knee / kratio + thres_mx / ratio;
-    makeuplin = dB2rap(makeup);
-    
-    if (a_out)
-    {
-        outlevel = dB2rap((float) toutput) * makeuplin;
-    }
-    else
-    {
-        outlevel = dB2rap((float) toutput);
-    }
-}
-
-int
-Compressor::getpar(int npar)
-{
-    switch (npar)
-    {
-    case Compress_Threshold:
-        return (tthreshold);
-        break;
-    case Compress_Ratio:
-        return (tratio);
-        break;
-    case Compress_Output:
-        return (toutput);
-        break;
-    case Compress_Attack:
-        return (tatt);
-        break;
-    case Compress_Release:
-        return (trel);
-        break;
-    case Compress_Auto_Out:
-        return (a_out);
-        break;
-    case Compress_Knee:
-        return (tknee);
-        break;
-    case Compress_Stereo:
-        return (stereo);
-        break;
-    case Compress_Peak:
-        return (peak);
-        break;
-    }
-
-    return (0);
-}
-
-void
-Compressor::setpreset(int dgui, int npreset)
-{
-    const int PRESET_SIZE = 9;
-    const int NUM_PRESETS = 8;
-    int pdata[MAX_PDATA_SIZE];
-    int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //2:1
-        {-30, 2, -6, 20, 120, 1, 0, 0, 0},
-        //4:1
-        {-26, 4, -8, 20, 120, 1, 10, 0, 0},
-        //8:1
-        {-24, 8, -12, 20, 35, 1, 30, 0, 0},
-        //limiter - from rkrlv2
-        {-3, 15, 0, 10, 250, 0, 0, 1, 1},
-        //Final Limiter
-        {-1, 15, 0, 5, 250, 0, 0, 1, 1},
-        //HarmonicEnhancer
-        {-20, 15, -3, 5, 50, 0, 0, 1, 1},
-        //Band CompBand
-        {-3, 2, 0, 5, 50, 1, 0, 1, 0},
-        //End CompBand
-        {-60, 2, 0, 10, 500, 1, 0, 1, 1},
-    };
-
-    if ((dgui)&&(npreset > 3))
-    {
-        Fpre->ReadPreset(1, npreset - 3, pdata);
-        
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n, pdata[n]);
-    }
-    else
-    {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n, presets[npreset][n]);
-    }
-}
-
-void
 Compressor::out(float *efxoutl, float *efxoutr)
 {
     for (unsigned i = 0; i < PERIOD; i++)
@@ -467,3 +317,152 @@ Compressor::out(float *efxoutl, float *efxoutr)
     }
 }
 
+void
+Compressor::setpreset(int dgui, int npreset)
+{
+    const int PRESET_SIZE = 9;
+    const int NUM_PRESETS = 8;
+    int pdata[MAX_PDATA_SIZE];
+    int presets[NUM_PRESETS][PRESET_SIZE] = {
+        //2:1
+        {-30, 2, -6, 20, 120, 1, 0, 0, 0},
+        //4:1
+        {-26, 4, -8, 20, 120, 1, 10, 0, 0},
+        //8:1
+        {-24, 8, -12, 20, 35, 1, 30, 0, 0},
+        //limiter - from rkrlv2
+        {-3, 15, 0, 10, 250, 0, 0, 1, 1},
+        //Final Limiter
+        {-1, 15, 0, 5, 250, 0, 0, 1, 1},
+        //HarmonicEnhancer
+        {-20, 15, -3, 5, 50, 0, 0, 1, 1},
+        //Band CompBand
+        {-3, 2, 0, 5, 50, 1, 0, 1, 0},
+        //End CompBand
+        {-60, 2, 0, 10, 500, 1, 0, 1, 1},
+    };
+
+    if ((dgui)&&(npreset > 3))
+    {
+        Fpre->ReadPreset(1, npreset - 3, pdata);
+        
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, pdata[n]);
+    }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n, presets[npreset][n]);
+    }
+}
+
+void
+Compressor::changepar(int npar, int value)
+{
+    switch (npar)
+    {
+    case Compress_Threshold:
+        tthreshold = value;
+        thres_db = (float) tthreshold; //implicit type cast int to float
+        break;
+
+    case Compress_Ratio:
+        tratio = value;
+        ratio = (float) tratio;
+        break;
+
+    case Compress_Output:
+        toutput = value;
+        break;
+
+    case Compress_Attack:
+        tatt = value;
+        att = cSAMPLE_RATE / (((float) value / 1000.0f) + cSAMPLE_RATE);
+        attr = att;
+        attl = att;
+        break;
+
+    case Compress_Release:
+        trel = value;
+        rel = cSAMPLE_RATE / (((float) value / 1000.0f) + cSAMPLE_RATE);
+        rell = rel;
+        relr = rel;
+        break;
+
+    case Compress_Auto_Out:
+        a_out = value;
+        break;
+
+    case Compress_Knee:
+        tknee = value; //knee expressed a percentage of range between thresh and zero dB
+        kpct = (float) tknee / 100.1f;
+        break;
+
+    case Compress_Stereo:
+        stereo = value;
+        break;
+    case Compress_Peak:
+        peak = value;
+        break;
+    }
+
+    kratio = logf(ratio) / LOG_2; //  Log base 2 relationship matches slope
+    knee = -kpct*thres_db;
+
+    coeff_kratio = 1.0 / kratio;
+    coeff_ratio = 1.0 / ratio;
+    coeff_knee = 1.0 / knee;
+
+    coeff_kk = knee * coeff_kratio;
+
+
+    thres_mx = thres_db + knee; //This is the value of the input when the output is at t+k
+    makeup = -thres_db - knee / kratio + thres_mx / ratio;
+    makeuplin = dB2rap(makeup);
+    
+    if (a_out)
+    {
+        outlevel = dB2rap((float) toutput) * makeuplin;
+    }
+    else
+    {
+        outlevel = dB2rap((float) toutput);
+    }
+}
+
+int
+Compressor::getpar(int npar)
+{
+    switch (npar)
+    {
+    case Compress_Threshold:
+        return (tthreshold);
+        break;
+    case Compress_Ratio:
+        return (tratio);
+        break;
+    case Compress_Output:
+        return (toutput);
+        break;
+    case Compress_Attack:
+        return (tatt);
+        break;
+    case Compress_Release:
+        return (trel);
+        break;
+    case Compress_Auto_Out:
+        return (a_out);
+        break;
+    case Compress_Knee:
+        return (tknee);
+        break;
+    case Compress_Stereo:
+        return (stereo);
+        break;
+    case Compress_Peak:
+        return (peak);
+        break;
+    }
+
+    return (0);
+}

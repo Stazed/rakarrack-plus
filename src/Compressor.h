@@ -52,9 +52,8 @@ public:
     ~Compressor ();
 
     void out (float *efxoutl, float *efxoutr);
-
-    void changepar (int npar, int value);
     void setpreset (int dgui,int npreset);
+    void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
     
