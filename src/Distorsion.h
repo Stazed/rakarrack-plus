@@ -31,6 +31,23 @@
 
 #define DIST_PRESET_SIZE 13
 
+enum Dist_Index
+{
+    Dist_DryWet = 0,
+    Dist_Pan,
+    Dist_LR_Cross,
+    Dist_Drive,
+    Dist_Level,
+    Dist_Type,
+    Dist_Negate,
+    Dist_LPF,
+    Dist_HPF,
+    Dist_Stereo,
+    Dist_Prefilter,
+    Dist_SKIP_11,
+    Dist_Suboctave
+};
+
 class Distorsion
 {
 public:

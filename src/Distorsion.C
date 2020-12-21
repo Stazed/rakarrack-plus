@@ -407,46 +407,46 @@ Distorsion::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Dist_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Dist_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Dist_LR_Cross:
         setlrcross(value);
         break;
-    case 3:
+    case Dist_Drive:
         Pdrive = value;
         break;
-    case 4:
+    case Dist_Level:
         Plevel = value;
         break;
-    case 5:
+    case Dist_Type:
         Ptype = value;
         break;
-    case 6:
+    case Dist_Negate:
         if (value > 1)
             value = 1;
         Pnegate = value;
         break;
-    case 7:
+    case Dist_LPF:
         setlpf(value);
         break;
-    case 8:
+    case Dist_HPF:
         sethpf(value);
         break;
-    case 9:
+    case Dist_Stereo:
         if (value > 1)
             value = 1;
         Pstereo = value;
         break;
-    case 10:
+    case Dist_Prefilter:
         Pprefiltering = value;
         break;
-    case 11:
+    case Dist_SKIP_11:
         break;
-    case 12:
+    case Dist_Suboctave:
         setoctave(value);
         break;
     }
@@ -457,43 +457,43 @@ Distorsion::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Dist_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Dist_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Dist_LR_Cross:
         return (Plrcross);
         break;
-    case 3:
+    case Dist_Drive:
         return (Pdrive);
         break;
-    case 4:
+    case Dist_Level:
         return (Plevel);
         break;
-    case 5:
+    case Dist_Type:
         return (Ptype);
         break;
-    case 6:
+    case Dist_Negate:
         return (Pnegate);
         break;
-    case 7:
+    case Dist_LPF:
         return (Plpf);
         break;
-    case 8:
+    case Dist_HPF:
         return (Phpf);
         break;
-    case 9:
+    case Dist_Stereo:
         return (Pstereo);
         break;
-    case 10:
+    case Dist_Prefilter:
         return (Pprefiltering);
         break;
-    case 11:
+    case Dist_SKIP_11:
         return (0);
         break;
-    case 12:
+    case Dist_Suboctave:
         return (Poctave);
         break;
     }

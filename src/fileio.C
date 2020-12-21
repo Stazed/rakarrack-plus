@@ -580,25 +580,25 @@ void RKR::getbuf(char *buf, int j)
     case 3:
         //Overdrive
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Overdrive->getpar(0), efx_Overdrive->getpar(1),
-                efx_Overdrive->getpar(2), efx_Overdrive->getpar(3),
-                efx_Overdrive->getpar(4), efx_Overdrive->getpar(5),
-                efx_Overdrive->getpar(6), efx_Overdrive->getpar(7),
-                efx_Overdrive->getpar(8), efx_Overdrive->getpar(9),
-                efx_Overdrive->getpar(10), efx_Overdrive->getpar(11),
-                efx_Overdrive->getpar(12), Overdrive_Bypass);
+                efx_Overdrive->getpar(Dist_DryWet), efx_Overdrive->getpar(Dist_Pan),
+                efx_Overdrive->getpar(Dist_LR_Cross), efx_Overdrive->getpar(Dist_Drive),
+                efx_Overdrive->getpar(Dist_Level), efx_Overdrive->getpar(Dist_Type),
+                efx_Overdrive->getpar(Dist_Negate), efx_Overdrive->getpar(Dist_LPF),
+                efx_Overdrive->getpar(Dist_HPF), efx_Overdrive->getpar(Dist_Stereo),
+                efx_Overdrive->getpar(Dist_Prefilter), efx_Overdrive->getpar(Dist_SKIP_11),
+                efx_Overdrive->getpar(Dist_Suboctave), Overdrive_Bypass);
         break;
 
     case 2:
         //Distorsion
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Distorsion->getpar(0), efx_Distorsion->getpar(1),
-                efx_Distorsion->getpar(2), efx_Distorsion->getpar(3),
-                efx_Distorsion->getpar(4), efx_Distorsion->getpar(5),
-                efx_Distorsion->getpar(6), efx_Distorsion->getpar(7),
-                efx_Distorsion->getpar(8), efx_Distorsion->getpar(9),
-                efx_Distorsion->getpar(10), efx_Distorsion->getpar(11),
-                efx_Distorsion->getpar(12), Distorsion_Bypass);
+                efx_Distorsion->getpar(Dist_DryWet), efx_Distorsion->getpar(Dist_Pan),
+                efx_Distorsion->getpar(Dist_LR_Cross), efx_Distorsion->getpar(Dist_Drive),
+                efx_Distorsion->getpar(Dist_Level), efx_Distorsion->getpar(Dist_Type),
+                efx_Distorsion->getpar(Dist_Negate), efx_Distorsion->getpar(Dist_LPF),
+                efx_Distorsion->getpar(Dist_HPF), efx_Distorsion->getpar(Dist_Stereo),
+                efx_Distorsion->getpar(Dist_Prefilter), efx_Distorsion->getpar(Dist_SKIP_11),
+                efx_Distorsion->getpar(Dist_Suboctave), Distorsion_Bypass);
         break;
 
     case 0:

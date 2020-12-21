@@ -3237,11 +3237,11 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_WD->redraw();
                 break;
             case 29:
-                OVRD->ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(0)));
+                OVRD->ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Dist_DryWet)));
                 OVRD->ovrd_WD->redraw();
                 break;
             case 30:
-                DIST->dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(0)));
+                DIST->dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(Dist_DryWet)));
                 DIST->dist_WD->redraw();
                 break;
             case 31:
@@ -3285,11 +3285,11 @@ void RKRGUI::ActMIDI()
                 ECHO->echo_pan->redraw();
                 break;
             case 47:
-                OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(1) - 64);
+                OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(Dist_Pan) - 64);
                 OVRD->ovrd_pan->redraw();
                 break;
             case 48:
-                DIST->dist_pan->value(rkr->efx_Distorsion->getpar(1) - 64);
+                DIST->dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan) - 64);
                 DIST->dist_pan->redraw();
                 break;
             case 49:
@@ -3333,19 +3333,19 @@ void RKRGUI::ActMIDI()
                 PAN->pan_pan->redraw();
                 break;
             case 68:
-                OVRD->ovrd_drive->value(rkr->efx_Overdrive->getpar(3));
+                OVRD->ovrd_drive->value(rkr->efx_Overdrive->getpar(Dist_Drive));
                 OVRD->ovrd_drive->redraw();
                 break;
             case 69:
-                DIST->dist_drive->value(rkr->efx_Distorsion->getpar(3));
+                DIST->dist_drive->value(rkr->efx_Distorsion->getpar(Dist_Drive));
                 DIST->dist_drive->redraw();
                 break;
             case 70:
-                OVRD->ovrd_level->value(rkr->efx_Overdrive->getpar(4));
+                OVRD->ovrd_level->value(rkr->efx_Overdrive->getpar(Dist_Level));
                 OVRD->ovrd_level->redraw();
                 break;
             case 71:
-                DIST->dist_level->value(rkr->efx_Distorsion->getpar(4));
+                DIST->dist_level->value(rkr->efx_Distorsion->getpar(Dist_Level));
                 DIST->dist_level->redraw();
                 break;
             case 72:
@@ -3401,11 +3401,11 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_fb2->redraw();
                 break;
             case 85:
-                OVRD->ovrd_lpf->value(rkr->efx_Overdrive->getpar(7));
+                OVRD->ovrd_lpf->value(rkr->efx_Overdrive->getpar(Dist_LPF));
                 OVRD->ovrd_lpf->redraw();
                 break;
             case 86:
-                DIST->dist_lpf->value(rkr->efx_Distorsion->getpar(7));
+                DIST->dist_lpf->value(rkr->efx_Distorsion->getpar(Dist_LPF));
                 DIST->dist_lpf->redraw();
                 break;
             case 87:
@@ -3413,11 +3413,11 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_LPF->redraw();
                 break;
             case 88:
-                OVRD->ovrd_hpf->value(rkr->efx_Overdrive->getpar(8));
+                OVRD->ovrd_hpf->value(rkr->efx_Overdrive->getpar(Dist_HPF));
                 OVRD->ovrd_hpf->redraw();
                 break;
             case 89:
-                DIST->dist_hpf->value(rkr->efx_Distorsion->getpar(8));
+                DIST->dist_hpf->value(rkr->efx_Distorsion->getpar(Dist_HPF));
                 DIST->dist_hpf->redraw();
                 break;
             case 90:
@@ -3437,11 +3437,11 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_LR->redraw();
                 break;
             case 94:
-                OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(2));
+                OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(Dist_LR_Cross));
                 OVRD->ovrd_LRc->redraw();
                 break;
             case 95:
-                DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(2));
+                DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(Dist_LR_Cross));
                 DIST->dist_LRc->redraw();
                 break;
             case 96:
@@ -3596,7 +3596,7 @@ void RKRGUI::ActMIDI()
                 DERELICT->derelict_oct->redraw();
                 break;
             case 9:
-                DIST->dist_oct->value(rkr->efx_Distorsion->getpar(12));
+                DIST->dist_oct->value(rkr->efx_Distorsion->getpar(Dist_Suboctave));
                 DIST->dist_oct->redraw();
                 break;
             case 130:
@@ -4890,11 +4890,11 @@ void RKRGUI::ActMIDI()
                 SHAR->shar_SELECT->redraw();
                 break;
             case 449:
-                DIST->dist_tipo->value(rkr->efx_Distorsion->getpar(5));
+                DIST->dist_tipo->value(rkr->efx_Distorsion->getpar(Dist_Type));
                 DIST->dist_tipo->redraw();
                 break;
             case 450:
-                OVRD->ovrd_tipo->value(rkr->efx_Overdrive->getpar(5));
+                OVRD->ovrd_tipo->value(rkr->efx_Overdrive->getpar(Dist_Type));
                 OVRD->ovrd_tipo->redraw();
                 break;
             case 451:

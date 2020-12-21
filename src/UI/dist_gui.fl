@@ -40,18 +40,18 @@ rgui->findpos(2,(int)o->value(),o);}
     user_data 12002
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset(0,(int)(o->value()+2));
-dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(0)));
-dist_pan->value(rkr->efx_Distorsion->getpar(1)-64);
-dist_LRc->value(rkr->efx_Distorsion->getpar(2));
-dist_drive->value(rkr->efx_Distorsion->getpar(3));
-dist_level->value(rkr->efx_Distorsion->getpar(4));
-dist_tipo->value(rkr->efx_Distorsion->getpar(5));
-dist_neg->value(rkr->efx_Distorsion->getpar(6));
-dist_lpf->value(rkr->efx_Distorsion->getpar(7));
-dist_hpf->value(rkr->efx_Distorsion->getpar(8));
-dist_st->value(rkr->efx_Distorsion->getpar(9));
-dist_pf->value(rkr->efx_Distorsion->getpar(10));
-dist_oct->value(rkr->efx_Distorsion->getpar(12));}
+dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(Dist_DryWet)));
+dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan)-64);
+dist_LRc->value(rkr->efx_Distorsion->getpar(Dist_LR_Cross));
+dist_drive->value(rkr->efx_Distorsion->getpar(Dist_Drive));
+dist_level->value(rkr->efx_Distorsion->getpar(Dist_Level));
+dist_tipo->value(rkr->efx_Distorsion->getpar(Dist_Type));
+dist_neg->value(rkr->efx_Distorsion->getpar(Dist_Negate));
+dist_lpf->value(rkr->efx_Distorsion->getpar(Dist_LPF));
+dist_hpf->value(rkr->efx_Distorsion->getpar(Dist_HPF));
+dist_st->value(rkr->efx_Distorsion->getpar(Dist_Stereo));
+dist_pf->value(rkr->efx_Distorsion->getpar(Dist_Prefilter));
+dist_oct->value(rkr->efx_Distorsion->getpar(Dist_Suboctave));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -79,7 +79,7 @@ dist_oct->value(rkr->efx_Distorsion->getpar(12));}
  rgui->getMIDIControl(30);
  return;
 } 
-rkr->efx_Distorsion->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Distorsion->changepar(Dist_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -90,7 +90,7 @@ rkr->efx_Distorsion->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(95);
  return;
 } 
-rkr->efx_Distorsion->changepar(2,(int)(o->value()));}
+rkr->efx_Distorsion->changepar(Dist_LR_Cross,(int)(o->value()));}
     xywh {56 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -101,7 +101,7 @@ rkr->efx_Distorsion->changepar(2,(int)(o->value()));}
  rgui->getMIDIControl(69);
  return;
 } 
-rkr->efx_Distorsion->changepar(3,(int)o->value());}
+rkr->efx_Distorsion->changepar(Dist_Drive,(int)o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -112,7 +112,7 @@ rkr->efx_Distorsion->changepar(3,(int)o->value());}
  rgui->getMIDIControl(71);
  return;
 } 
-rkr->efx_Distorsion->changepar(4,(int)o->value());}
+rkr->efx_Distorsion->changepar(Dist_Level,(int)o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -125,7 +125,7 @@ rkr->efx_Distorsion->changepar(4,(int)o->value());}
  return;
 } 
 
-rkr->efx_Distorsion->changepar(5,(int)o->value());} selected
+rkr->efx_Distorsion->changepar(Dist_Type,(int)o->value());}
     xywh {34 91 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -133,21 +133,21 @@ rkr->efx_Distorsion->changepar(5,(int)o->value());} selected
   Fl_Check_Button dist_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Distorsion->changepar(6,(int)o->value());}
+    callback {rkr->efx_Distorsion->changepar(Dist_Negate,(int)o->value());}
     xywh {110 92 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dist_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_Distorsion->changepar(10,(int)o->value());}
+    callback {rkr->efx_Distorsion->changepar(Dist_Prefilter,(int)o->value());}
     xywh {9 108 67 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dist_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_Distorsion->changepar(9,(int)o->value());}
+    callback {rkr->efx_Distorsion->changepar(Dist_Stereo,(int)o->value());}
     xywh {74 108 57 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -158,7 +158,7 @@ rkr->efx_Distorsion->changepar(5,(int)o->value());} selected
  rgui->getMIDIControl(48);
  return;
 } 
-rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));}
+rkr->efx_Distorsion->changepar(Dist_Pan,(int)(o->value()+64));}
     xywh {56 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -169,7 +169,7 @@ rkr->efx_Distorsion->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(9);
  return;
 } 
-rkr->efx_Distorsion->changepar(12,(int)o->value());}
+rkr->efx_Distorsion->changepar(Dist_Suboctave,(int)o->value());} selected
     xywh {56 145 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -180,7 +180,7 @@ rkr->efx_Distorsion->changepar(12,(int)o->value());}
  rgui->getMIDIControl(86);
  return;
 } 
-rkr->efx_Distorsion->changepar(7,(int)o->value());}
+rkr->efx_Distorsion->changepar(Dist_LPF,(int)o->value());}
     xywh {56 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -191,7 +191,7 @@ rkr->efx_Distorsion->changepar(7,(int)o->value());}
  rgui->getMIDIControl(89);
  return;
 } 
-rkr->efx_Distorsion->changepar(8,(int)o->value());}
+rkr->efx_Distorsion->changepar(Dist_HPF,(int)o->value());}
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

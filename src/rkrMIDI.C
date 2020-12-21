@@ -1019,11 +1019,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 29:
-        efx_Overdrive->changepar(0, Dry_Wet(value));
+        efx_Overdrive->changepar(Dist_DryWet, Dry_Wet(value));
         break;
 
     case 30:
-        efx_Distorsion->changepar(0, Dry_Wet(value));
+        efx_Distorsion->changepar(Dist_DryWet, Dry_Wet(value));
         break;
 
     case 31:
@@ -1067,11 +1067,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 47:
-        efx_Overdrive->changepar(1, value);
+        efx_Overdrive->changepar(Dist_Pan, value);
         break;
 
     case 48:
-        efx_Distorsion->changepar(1, value);
+        efx_Distorsion->changepar(Dist_Pan, value);
         break;
 
     case 49:
@@ -1115,19 +1115,19 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 68:
-        efx_Overdrive->changepar(3, value);
+        efx_Overdrive->changepar(Dist_Drive, value);
         break;
 
     case 69:
-        efx_Distorsion->changepar(3, value);
+        efx_Distorsion->changepar(Dist_Drive, value);
         break;
 
     case 70:
-        efx_Overdrive->changepar(4, value);
+        efx_Overdrive->changepar(Dist_Level, value);
         break;
 
     case 71:
-        efx_Distorsion->changepar(4, value);
+        efx_Distorsion->changepar(Dist_Level, value);
         break;
 
     case 72:
@@ -1183,11 +1183,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 85:
-        efx_Overdrive->changepar(7, ret_LPF(value));
+        efx_Overdrive->changepar(Dist_LPF, ret_LPF(value));
         break;
 
     case 86:
-        efx_Distorsion->changepar(7, ret_LPF(value));
+        efx_Distorsion->changepar(Dist_LPF, ret_LPF(value));
         break;
 
     case 87:
@@ -1195,11 +1195,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 88:
-        efx_Overdrive->changepar(8, ret_HPF(value));
+        efx_Overdrive->changepar(Dist_HPF, ret_HPF(value));
         break;
 
     case 89:
-        efx_Distorsion->changepar(8, ret_HPF(value));
+        efx_Distorsion->changepar(Dist_HPF, ret_HPF(value));
         break;
 
     case 90:
@@ -1219,11 +1219,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 94:
-        efx_Overdrive->changepar(2, value);
+        efx_Overdrive->changepar(Dist_LR_Cross, value);
         break;
 
     case 95:
-        efx_Distorsion->changepar(2, value);
+        efx_Distorsion->changepar(Dist_LR_Cross, value);
         break;
 
     case 96:
@@ -1379,7 +1379,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 9:
-        efx_Distorsion->changepar(12, value);
+        efx_Distorsion->changepar(Dist_Suboctave, value);
         break;
 
     case 12:
@@ -2709,11 +2709,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 449:
-        efx_Distorsion->changepar(5, (int) ((float) value * C_MC_30_RANGE));
+        efx_Distorsion->changepar(Dist_Type, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case 450:
-        efx_Overdrive->changepar(5, (int) ((float) value * C_MC_30_RANGE));
+        efx_Overdrive->changepar(Dist_Type, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case 451:

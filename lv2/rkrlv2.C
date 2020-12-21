@@ -464,7 +464,7 @@ LV2_Handle init_distlv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
+    plug->nparams = (DIST_PRESET_SIZE - 1); // -1 for skipped parameter 11
     plug->effectindex = IDIST;
     plug->prev_bypass = 1;
 
@@ -483,9 +483,6 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -506,31 +503,74 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->dist->getpar(i) != val)
+    int val = 0;
+    int param_case_offset = 0;
+    
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->dist->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//1 pan
-    if(plug->dist->getpar(i) != val)
-    {
-        plug->dist->changepar(i,val);
-    }
-    for(i++; i<plug->nparams-1; i++) //2-10
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->dist->getpar(i) != val)
+        switch(param_case_offset)
         {
-            plug->dist->changepar(i,val);
+            // Normal processing
+            case Dist_LR_Cross:
+            case Dist_Drive:
+            case Dist_Level:
+            case Dist_Type:
+            case Dist_Negate:
+            case Dist_LPF:
+            case Dist_HPF:
+            case Dist_Stereo:
+            case Dist_Suboctave:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->dist->getpar(param_case_offset) != val)
+                {
+                    plug->dist->changepar(param_case_offset,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Dist_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->dist->getpar(Dist_DryWet) != val)
+                {
+                    plug->dist->changepar(Dist_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case Dist_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;    // offset
+                if(plug->dist->getpar(Dist_Pan) != val)
+                {
+                    plug->dist->changepar(Dist_Pan,val);
+                }
+            }
+            break;
+            
+            // Skip 1 parameter after this
+            case Dist_Prefilter:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->dist->getpar(Dist_Prefilter) != val)
+                {
+                    plug->dist->changepar(Dist_Prefilter,val);
+                }
+
+                // increment for skipped Dist_SKIP_11
+                param_case_offset++;
+            }
+            break;
+            
         }
-    }
-    val = (int)*plug->param_p[i++];//skip one index, 12 octave
-    if(plug->dist->getpar(i) != val)
-    {
-        plug->dist->changepar(i,val);
+        // increment offset
+        param_case_offset++;
     }
 
     //now run
@@ -5355,7 +5395,7 @@ LV2_Handle init_overdrivelv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = (DIST_PRESET_SIZE - 2); // -2 for Skipped param 11 and Suboctave
     plug->effectindex = IOVERDRIVE;
     plug->prev_bypass = 1;
 
@@ -5374,9 +5414,6 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -5397,25 +5434,55 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->overdrive->getpar(i) != val)
+    int val = 0;
+
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->overdrive->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//1 pan
-    if(plug->overdrive->getpar(i) != val)
-    {
-        plug->overdrive->changepar(i,val);
-    }
-    for(i++; i < plug->nparams; i++) //2-10
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->overdrive->getpar(i) != val)
+        switch(i)
         {
-            plug->overdrive->changepar(i,val);
+            // Normal processing
+            case Dist_LR_Cross:
+            case Dist_Drive:
+            case Dist_Level:
+            case Dist_Type:
+            case Dist_Negate:
+            case Dist_LPF:
+            case Dist_HPF:
+            case Dist_Stereo:
+            case Dist_Prefilter:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->overdrive->getpar(i) != val)
+                {
+                    plug->overdrive->changepar(i,val);
+                }
+            }
+            break;
+            
+            //Special cases
+            // wet/dry -> dry/wet reversal
+            case Dist_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->overdrive->getpar(Dist_DryWet) != val)
+                {
+                    plug->overdrive->changepar(Dist_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Dist_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->overdrive->getpar(Dist_Pan) != val)
+                {
+                    plug->overdrive->changepar(Dist_Pan,val);
+                }
+            }
+            break;
         }
     }
 
