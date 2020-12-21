@@ -40,21 +40,21 @@ rgui->findpos(23,(int)o->value(),o);}
     user_data 12023
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12023))rkr->efx_DistBand->setpreset((int)o->value());
-distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(0)));
-distband_LRc->value(rkr->efx_DistBand->getpar(2));
-distband_drive->value(rkr->efx_DistBand->getpar(3));
-distband_level->value(rkr->efx_DistBand->getpar(4));
-distband_tipoL->value(rkr->efx_DistBand->getpar(5));
-distband_tipoM->value(rkr->efx_DistBand->getpar(6));
-distband_tipoH->value(rkr->efx_DistBand->getpar(7));
-distband_volL->value(rkr->efx_DistBand->getpar(8));
-distband_volM->value(rkr->efx_DistBand->getpar(9));
-distband_volH->value(rkr->efx_DistBand->getpar(10));
-distband_neg->value(rkr->efx_DistBand->getpar(11));
-distband_st->value(rkr->efx_DistBand->getpar(14));
-distband_pan->value(rkr->efx_DistBand->getpar(1)-64);
-distband_cross1->value(rkr->efx_DistBand->getpar(12));
-distband_cross2->value(rkr->efx_DistBand->getpar(13));}
+distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(DistBand_DryWet)));
+distband_LRc->value(rkr->efx_DistBand->getpar(DistBand_LR_Cross));
+distband_drive->value(rkr->efx_DistBand->getpar(DistBand_Drive));
+distband_level->value(rkr->efx_DistBand->getpar(DistBand_Level));
+distband_tipoL->value(rkr->efx_DistBand->getpar(DistBand_Type_Low));
+distband_tipoM->value(rkr->efx_DistBand->getpar(DistBand_Type_Mid));
+distband_tipoH->value(rkr->efx_DistBand->getpar(DistBand_Type_Hi));
+distband_volL->value(rkr->efx_DistBand->getpar(DistBand_Gain_Low));
+distband_volM->value(rkr->efx_DistBand->getpar(DistBand_Gain_Mid));
+distband_volH->value(rkr->efx_DistBand->getpar(DistBand_Gain_Hi));
+distband_neg->value(rkr->efx_DistBand->getpar(DistBand_Negate));
+distband_st->value(rkr->efx_DistBand->getpar(DistBand_Stereo));
+distband_pan->value(rkr->efx_DistBand->getpar(DistBand_Pan)-64);
+distband_cross1->value(rkr->efx_DistBand->getpar(DistBand_Cross_1));
+distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -98,7 +98,7 @@ distband_cross2->value(rkr->efx_DistBand->getpar(13));}
  rgui->getMIDIControl(202);
  return;
 } 
-rkr->efx_DistBand->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_DistBand->changepar(DistBand_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -109,7 +109,7 @@ rkr->efx_DistBand->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(203);
  return;
 } 
-rkr->efx_DistBand->changepar(2,(int)(o->value()));}
+rkr->efx_DistBand->changepar(DistBand_LR_Cross,(int)(o->value()));}
     xywh {56 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -120,7 +120,7 @@ rkr->efx_DistBand->changepar(2,(int)(o->value()));}
  rgui->getMIDIControl(204);
  return;
 } 
-rkr->efx_DistBand->changepar(3,(int)o->value());}
+rkr->efx_DistBand->changepar(DistBand_Drive,(int)o->value());}
     xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -131,7 +131,7 @@ rkr->efx_DistBand->changepar(3,(int)o->value());}
  rgui->getMIDIControl(205);
  return;
 } 
-rkr->efx_DistBand->changepar(4,(int)o->value());}
+rkr->efx_DistBand->changepar(DistBand_Level,(int)o->value());}
     xywh {56 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -142,7 +142,7 @@ rkr->efx_DistBand->changepar(4,(int)o->value());}
  rgui->getMIDIControl(206);
  return;
 } 
-rkr->efx_DistBand->changepar(8,(int)o->value());}
+rkr->efx_DistBand->changepar(DistBand_Gain_Low,(int)o->value());}
     tooltip {Low Gain} xywh {56 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -153,7 +153,7 @@ rkr->efx_DistBand->changepar(8,(int)o->value());}
  rgui->getMIDIControl(207);
  return;
 } 
-rkr->efx_DistBand->changepar(9,(int)o->value());}
+rkr->efx_DistBand->changepar(DistBand_Gain_Mid,(int)o->value());}
     tooltip {Mid Gain} xywh {56 89 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -164,7 +164,7 @@ rkr->efx_DistBand->changepar(9,(int)o->value());}
  rgui->getMIDIControl(208);
  return;
 } 
-rkr->efx_DistBand->changepar(10,(int)o->value());}
+rkr->efx_DistBand->changepar(DistBand_Gain_Hi,(int)o->value());}
     tooltip {High Gain} xywh {56 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -175,7 +175,7 @@ rkr->efx_DistBand->changepar(10,(int)o->value());}
  rgui->getMIDIControl(209);
  return;
 } 
-rkr->efx_DistBand->changepar(12,(int)o->value());}
+rkr->efx_DistBand->changepar(DistBand_Cross_1,(int)o->value());}
     xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -186,7 +186,7 @@ rkr->efx_DistBand->changepar(12,(int)o->value());}
  rgui->getMIDIControl(210);
  return;
 } 
-rkr->efx_DistBand->changepar(13,(int)o->value());}
+rkr->efx_DistBand->changepar(DistBand_Cross_2,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 12000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -197,7 +197,7 @@ rkr->efx_DistBand->changepar(13,(int)o->value());}
  return;
 } 
 
-rkr->efx_DistBand->changepar(5,(int)o->value());} open selected
+rkr->efx_DistBand->changepar(DistBand_Type_Low,(int)o->value());} open
     tooltip {Distortion Type Low} xywh {3 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -209,7 +209,7 @@ rkr->efx_DistBand->changepar(5,(int)o->value());} open selected
  return;
 } 
 
-rkr->efx_DistBand->changepar(6,(int)o->value());} open
+rkr->efx_DistBand->changepar(DistBand_Type_Mid,(int)o->value());} open
     tooltip {Distortion Type Medium} xywh {54 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -221,7 +221,7 @@ rkr->efx_DistBand->changepar(6,(int)o->value());} open
  return;
 } 
 
-rkr->efx_DistBand->changepar(7,(int)o->value());} open
+rkr->efx_DistBand->changepar(DistBand_Type_Hi,(int)o->value());} open
     tooltip {Distortion Type High} xywh {105 139 50 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -233,21 +233,21 @@ rkr->efx_DistBand->changepar(7,(int)o->value());} open
  rgui->getMIDIControl(211);
  return;
 } 
-rkr->efx_DistBand->changepar(1,(int)(o->value()+64));}
+rkr->efx_DistBand->changepar(DistBand_Pan,(int)(o->value()+64));}
     xywh {56 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button distband_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_DistBand->changepar(14,(int)o->value());}
+    callback {rkr->efx_DistBand->changepar(DistBand_Stereo,(int)o->value());}
     xywh {32 168 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button distband_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_DistBand->changepar(11,(int)o->value());}
+    callback {rkr->efx_DistBand->changepar(DistBand_Negate,(int)o->value());}
     xywh {101 167 44 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

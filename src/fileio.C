@@ -780,14 +780,14 @@ void RKR::getbuf(char *buf, int j)
     case 23:
         //DistBand
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_DistBand->getpar(0), efx_DistBand->getpar(1),
-                efx_DistBand->getpar(2), efx_DistBand->getpar(3),
-                efx_DistBand->getpar(4), efx_DistBand->getpar(5),
-                efx_DistBand->getpar(6), efx_DistBand->getpar(7),
-                efx_DistBand->getpar(8), efx_DistBand->getpar(9),
-                efx_DistBand->getpar(10), efx_DistBand->getpar(11),
-                efx_DistBand->getpar(12), efx_DistBand->getpar(13),
-                efx_DistBand->getpar(14), DistBand_Bypass);
+                efx_DistBand->getpar(DistBand_DryWet), efx_DistBand->getpar(DistBand_Pan),
+                efx_DistBand->getpar(DistBand_LR_Cross), efx_DistBand->getpar(DistBand_Drive),
+                efx_DistBand->getpar(DistBand_Level), efx_DistBand->getpar(DistBand_Type_Low),
+                efx_DistBand->getpar(DistBand_Type_Mid), efx_DistBand->getpar(DistBand_Type_Hi),
+                efx_DistBand->getpar(DistBand_Gain_Low), efx_DistBand->getpar(DistBand_Gain_Mid),
+                efx_DistBand->getpar(DistBand_Gain_Hi), efx_DistBand->getpar(DistBand_Negate),
+                efx_DistBand->getpar(DistBand_Cross_1), efx_DistBand->getpar(DistBand_Cross_2),
+                efx_DistBand->getpar(DistBand_Stereo), DistBand_Bypass);
         break;
 
     case 24:

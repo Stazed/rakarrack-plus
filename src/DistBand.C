@@ -416,58 +416,58 @@ DistBand::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case DistBand_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case DistBand_Pan:
         setpanning(value);
         break;
-    case 2:
+    case DistBand_LR_Cross:
         setlrcross(value);
         break;
-    case 3:
+    case DistBand_Drive:
         Pdrive = value;
         PdriveL = (int) ((float) Pdrive * volL);
         PdriveM = (int) ((float) Pdrive * volM);
         PdriveH = (int) ((float) Pdrive * volH);
         break;
-    case 4:
+    case DistBand_Level:
         Plevel = value;
         break;
-    case 5:
+    case DistBand_Type_Low:
         PtypeL = value;
         break;
-    case 6:
+    case DistBand_Type_Mid:
         PtypeM = value;
         break;
-    case 7:
+    case DistBand_Type_Hi:
         PtypeH = value;
         break;
-    case 8:
+    case DistBand_Gain_Low:
         PvolL = value;
         volL = (float) value / 100.0;
         PdriveL = (int) ((float) Pdrive * volL);
         break;
-    case 9:
+    case DistBand_Gain_Mid:
         PvolM = value;
         volM = (float) value / 100.0;
         PdriveM = (int) ((float) Pdrive * volM);
         break;
-    case 10:
+    case DistBand_Gain_Hi:
         PvolH = value;
         volH = (float) value / 100.0;
         PdriveH = (int) ((float) Pdrive * volH);
         break;
-    case 11:
+    case DistBand_Negate:
         Pnegate = value;
         break;
-    case 12:
+    case DistBand_Cross_1:
         setCross1(value);
         break;
-    case 13:
+    case DistBand_Cross_2:
         setCross2(value);
         break;
-    case 14:
+    case DistBand_Stereo:
         Pstereo = value;
         break;
     }
@@ -478,49 +478,49 @@ DistBand::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case DistBand_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case DistBand_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case DistBand_LR_Cross:
         return (Plrcross);
         break;
-    case 3:
+    case DistBand_Drive:
         return (Pdrive);
         break;
-    case 4:
+    case DistBand_Level:
         return (Plevel);
         break;
-    case 5:
+    case DistBand_Type_Low:
         return (PtypeL);
         break;
-    case 6:
+    case DistBand_Type_Mid:
         return (PtypeM);
         break;
-    case 7:
+    case DistBand_Type_Hi:
         return (PtypeH);
         break;
-    case 8:
+    case DistBand_Gain_Low:
         return (PvolL);
         break;
-    case 9:
+    case DistBand_Gain_Mid:
         return (PvolM);
         break;
-    case 10:
+    case DistBand_Gain_Hi:
         return (PvolH);
         break;
-    case 11:
+    case DistBand_Negate:
         return (Pnegate);
         break;
-    case 12:
+    case DistBand_Cross_1:
         return (Cross1);
         break;
-    case 13:
+    case DistBand_Cross_2:
         return (Cross2);
         break;
-    case 14:
+    case DistBand_Stereo:
         return (Pstereo);
         break;
     }

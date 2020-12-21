@@ -1681,43 +1681,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 202:
-        efx_DistBand->changepar(0, Dry_Wet(value));
+        efx_DistBand->changepar(DistBand_DryWet, Dry_Wet(value));
         break;
 
     case 203:
-        efx_DistBand->changepar(2, value);
+        efx_DistBand->changepar(DistBand_LR_Cross, value);
         break;
 
     case 204:
-        efx_DistBand->changepar(3, value);
+        efx_DistBand->changepar(DistBand_Drive, value);
         break;
 
     case 205:
-        efx_DistBand->changepar(4, value);
+        efx_DistBand->changepar(DistBand_Level, value);
         break;
 
     case 206:
-        efx_DistBand->changepar(8, (int) ((float) value * C_MC_100_RANGE));
+        efx_DistBand->changepar(DistBand_Gain_Low, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 207:
-        efx_DistBand->changepar(9, (int) ((float) value * C_MC_100_RANGE));
+        efx_DistBand->changepar(DistBand_Gain_Mid, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 208:
-        efx_DistBand->changepar(10, (int) ((float) value * C_MC_100_RANGE));
+        efx_DistBand->changepar(DistBand_Gain_Hi, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 209:
-        efx_DistBand->changepar(12, 20 + (int) ((float) value * C_MC_980_RANGE));
+        efx_DistBand->changepar(DistBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 210:
-        efx_DistBand->changepar(13, 800 + (int) ((float) value * C_MC_11200_RANGE));
+        efx_DistBand->changepar(DistBand_Cross_2, 800 + (int) ((float) value * C_MC_11200_RANGE));
         break;
 
     case 211:
-        efx_DistBand->changepar(1, value);
+        efx_DistBand->changepar(DistBand_Pan, value);
         break;
 
     case 212:
@@ -2721,15 +2721,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 452:
-        efx_DistBand->changepar(5, (int) ((float) value * C_MC_30_RANGE));
+        efx_DistBand->changepar(DistBand_Type_Low, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case 453:
-        efx_DistBand->changepar(6, (int) ((float) value * C_MC_30_RANGE));
+        efx_DistBand->changepar(DistBand_Type_Mid, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case 454:
-        efx_DistBand->changepar(7, (int) ((float) value * C_MC_30_RANGE));
+        efx_DistBand->changepar(DistBand_Type_Hi, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case 455:

@@ -3888,43 +3888,43 @@ void RKRGUI::ActMIDI()
                 EXCITER->ex_10->redraw();
                 break;
             case 202:
-                DISTBAND->distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(0)));
+                DISTBAND->distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(DistBand_DryWet)));
                 DISTBAND->distband_WD->redraw();
                 break;
             case 203:
-                DISTBAND->distband_LRc->value(rkr->efx_DistBand->getpar(2));
+                DISTBAND->distband_LRc->value(rkr->efx_DistBand->getpar(DistBand_LR_Cross));
                 DISTBAND->distband_LRc->redraw();
                 break;
             case 204:
-                DISTBAND->distband_drive->value(rkr->efx_DistBand->getpar(3));
+                DISTBAND->distband_drive->value(rkr->efx_DistBand->getpar(DistBand_Drive));
                 DISTBAND->distband_drive->redraw();
                 break;
             case 205:
-                DISTBAND->distband_level->value(rkr->efx_DistBand->getpar(4));
+                DISTBAND->distband_level->value(rkr->efx_DistBand->getpar(DistBand_Level));
                 DISTBAND->distband_level->redraw();
                 break;
             case 206:
-                DISTBAND->distband_volL->value(rkr->efx_DistBand->getpar(8));
+                DISTBAND->distband_volL->value(rkr->efx_DistBand->getpar(DistBand_Gain_Low));
                 DISTBAND->distband_volL->redraw();
                 break;
             case 207:
-                DISTBAND->distband_volM->value(rkr->efx_DistBand->getpar(9));
+                DISTBAND->distband_volM->value(rkr->efx_DistBand->getpar(DistBand_Gain_Mid));
                 DISTBAND->distband_volM->redraw();
                 break;
             case 208:
-                DISTBAND->distband_volH->value(rkr->efx_DistBand->getpar(10));
+                DISTBAND->distband_volH->value(rkr->efx_DistBand->getpar(DistBand_Gain_Hi));
                 DISTBAND->distband_volH->redraw();
                 break;
             case 209:
-                DISTBAND->distband_cross1->value(rkr->efx_DistBand->getpar(12));
+                DISTBAND->distband_cross1->value(rkr->efx_DistBand->getpar(DistBand_Cross_1));
                 DISTBAND->distband_cross1->redraw();
                 break;
             case 210:
-                DISTBAND->distband_cross2->value(rkr->efx_DistBand->getpar(13));
+                DISTBAND->distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));
                 DISTBAND->distband_cross2->redraw();
                 break;
             case 211:
-                DISTBAND->distband_pan->value(rkr->efx_DistBand->getpar(1) - 64);
+                DISTBAND->distband_pan->value(rkr->efx_DistBand->getpar(DistBand_Pan) - 64);
                 DISTBAND->distband_pan->redraw();
                 break;
             case 212:
@@ -4902,15 +4902,15 @@ void RKRGUI::ActMIDI()
                 DERELICT->derelict_tipo->redraw();
                 break;
             case 452:
-                DISTBAND->distband_tipoL->value(rkr->efx_DistBand->getpar(5));
+                DISTBAND->distband_tipoL->value(rkr->efx_DistBand->getpar(DistBand_Type_Low));
                 DISTBAND->distband_tipoL->redraw();
                 break;
             case 453:
-                DISTBAND->distband_tipoM->value(rkr->efx_DistBand->getpar(6));
+                DISTBAND->distband_tipoM->value(rkr->efx_DistBand->getpar(DistBand_Type_Mid));
                 DISTBAND->distband_tipoM->redraw();
                 break;
             case 454:
-                DISTBAND->distband_tipoH->value(rkr->efx_DistBand->getpar(7));
+                DISTBAND->distband_tipoH->value(rkr->efx_DistBand->getpar(DistBand_Type_Hi));
                 DISTBAND->distband_tipoH->redraw();
                 break;
             case 455:

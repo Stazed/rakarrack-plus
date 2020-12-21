@@ -2179,9 +2179,6 @@ void run_distbandlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2202,25 +2199,58 @@ void run_distbandlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->distband->getpar(i) != val)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->distband->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//1 pan
-    if(plug->distband->getpar(i) != val)
-    {
-        plug->distband->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //2-14
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->distband->getpar(i) != val)
+        switch(i)
         {
-            plug->distband->changepar(i,val);
+            // Normal processing
+            case DistBand_LR_Cross:
+            case DistBand_Drive:
+            case DistBand_Level:
+            case DistBand_Type_Low:
+            case DistBand_Type_Mid:
+            case DistBand_Type_Hi:
+            case DistBand_Gain_Low:
+            case DistBand_Gain_Mid:
+            case DistBand_Gain_Hi:
+            case DistBand_Negate:
+            case DistBand_Cross_1:
+            case DistBand_Cross_2:
+            case DistBand_Stereo:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->distband->getpar(i) != val)
+                {
+                    plug->distband->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case DistBand_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->distband->getpar(DistBand_DryWet) != val)
+                {
+                    plug->distband->changepar(DistBand_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case DistBand_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->distband->getpar(DistBand_Pan) != val)
+                {
+                    plug->distband->changepar(DistBand_Pan,val);
+                }
+            }
+            break;
         }
     }
 

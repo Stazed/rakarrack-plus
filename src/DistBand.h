@@ -34,6 +34,25 @@
 
 #define DBAND_PRESET_SIZE 15
 
+enum DistBand_Index
+{
+    DistBand_DryWet = 0,
+    DistBand_Pan,
+    DistBand_LR_Cross,
+    DistBand_Drive,
+    DistBand_Level,
+    DistBand_Type_Low,
+    DistBand_Type_Mid,
+    DistBand_Type_Hi,
+    DistBand_Gain_Low,
+    DistBand_Gain_Mid,
+    DistBand_Gain_Hi,
+    DistBand_Negate,
+    DistBand_Cross_1,
+    DistBand_Cross_2,
+    DistBand_Stereo
+};
+
 class DistBand
 {
 public:
