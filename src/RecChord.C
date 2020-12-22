@@ -239,8 +239,6 @@ RecChord::RecChord() :
     Ch[11][10] = 1;
     Ch[23][10] = 1;
 
-    memset(ChN, 0, sizeof (ChN));
-
     {
         static const char *stnom[] = {
             "", "6", "Maj7", "lyd", "Maj(9)", "Maj7(9)", "6/9", "+", "m",
@@ -336,10 +334,6 @@ RecChord::IniciaChords()
     NumChord3 = 0;
     NumChord4 = 0;
     NumChord5 = 0;
-
-    memset(Chord3, 0, sizeof (Chord3));
-    memset(Chord4, 0, sizeof (Chord4));
-    memset(Chord5, 0, sizeof (Chord5));
 
     for (int i = 0; i <= 33; i++)
     {
