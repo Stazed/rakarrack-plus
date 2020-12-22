@@ -33,6 +33,25 @@
 #include "EffectLFO.h"
 #include "delayline.h"
 
+enum DFlange_Index
+{
+    DFlange_DryWet = 0,
+    DFlange_Pan,
+    DFlange_LR_Cross,
+    DFlange_Depth,
+    DFlange_Width,
+    DFlange_Offset,
+    DFlange_Feedback,
+    DFlange_LPF,
+    DFlange_Subtract,
+    DFlange_Zero,
+    DFlange_LFO_Tempo,
+    DFlange_LFO_Stereo,
+    DFlange_LFO_Type,
+    DFlange_LFO_Rand,
+    DFlange_Intense
+};
+
 class Dflange
 {
 public:

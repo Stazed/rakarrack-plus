@@ -471,147 +471,6 @@ Dflange::setvolume(int value)
 }
 
 void
-Dflange::changepar(int npar, int value)
-{
-    switch (npar)
-    {
-    case 0:
-        setvolume(value);
-        break;
-    case 1:
-        Ppanning = value;
-        if (value < 0)
-        {
-            rpan = 1.0f + (float) Ppanning / 64.0;
-            lpan = 1.0f;
-        }
-        else
-        {
-            lpan = 1.0f - (float) Ppanning / 64.0;
-            rpan = 1.0f;
-        };
-        break;
-    case 2:
-        Plrcross = value;
-        flrcross = (float) Plrcross / 127.0;
-        frlcross = 1.0f - flrcross; //keep this out of the DSP loop
-        break;
-    case 3:
-        Pdepth = value;
-        fdepth = (float) Pdepth;
-        zcenter = (int) fSAMPLE_RATE / floor(0.5f * (fdepth + fwidth));
-        logmax = logf((fdepth + fwidth) / fdepth) / LOG_2;
-        break;
-    case 4:
-        Pwidth = value;
-        fwidth = (float) Pwidth;
-        zcenter = (int) fSAMPLE_RATE / floor(0.5f * (fdepth + fwidth));
-        logmax = logf((fdepth + fwidth) / fdepth) / LOG_2;
-        break;
-    case 5:
-        Poffset = value;
-        foffset = 0.5f + (float) Poffset / 255.0;
-        break;
-    case 6:
-        Pfb = value;
-        ffb = (float) Pfb / 64.5f;
-        break;
-    case 7:
-        Phidamp = value;
-        fhidamp = f_exp(-D_PI * (float) Phidamp / fSAMPLE_RATE);
-        break;
-    case 8:
-        Psubtract = value;
-        fsubtract = 0.5f;
-        if (Psubtract)
-        {
-            fsubtract = -0.5f; //In loop a mult by 0.5f is necessary, so this kills 2 birds with 1...
-            ldelayline0->set_mix(-dry);
-            rdelayline0->set_mix(-dry);
-            ldelayline1->set_mix(-dry);
-            rdelayline1->set_mix(-dry);
-        }
-        break;
-    case 9:
-        Pzero = value;
-        break;
-    case 10:
-        lfo->Pfreq = value;
-        lfo->updateparams(PERIOD);
-        break;
-    case 11:
-        lfo->Pstereo = value;
-        lfo->updateparams(PERIOD);
-        break;
-    case 12:
-        lfo->PLFOtype = value;
-        lfo->updateparams(PERIOD);
-        break;
-    case 13:
-        lfo->Prandomness = value;
-        lfo->updateparams(PERIOD);
-        break;
-    case 14:
-        Pintense = value;
-        break;
-    }
-}
-
-int
-Dflange::getpar(int npar)
-{
-    switch (npar)
-    {
-    case 0:
-        return (Pwetdry);
-        break;
-    case 1:
-        return (Ppanning);
-        break;
-    case 2:
-        return (Plrcross);
-        break;
-    case 3:
-        return (Pdepth);
-        break;
-    case 4:
-        return (Pwidth);
-        break;
-    case 5:
-        return (Poffset);
-        break;
-    case 6:
-        return (Pfb);
-        break;
-    case 7:
-        return (Phidamp);
-        break;
-    case 8:
-        return (Psubtract);
-        break;
-    case 9:
-        return (Pzero);
-        break;
-    case 10:
-        return (lfo->Pfreq);
-        break;
-    case 11:
-        return (lfo->Pstereo);
-        break;
-    case 12:
-        return (lfo->PLFOtype);
-        break;
-    case 13:
-        return (lfo->Prandomness);
-        break;
-    case 14:
-        return Pintense;
-        break;
-    }
-    return (0); //in case of bogus parameter number
-}
-
-void
 Dflange::setpreset(int npreset)
 {
     const int PRESET_SIZE = 15;
@@ -650,4 +509,145 @@ Dflange::setpreset(int npreset)
     }
     
     Ppreset = npreset;
+}
+
+void
+Dflange::changepar(int npar, int value)
+{
+    switch (npar)
+    {
+    case DFlange_DryWet:
+        setvolume(value);
+        break;
+    case DFlange_Pan:
+        Ppanning = value;
+        if (value < 0)
+        {
+            rpan = 1.0f + (float) Ppanning / 64.0;
+            lpan = 1.0f;
+        }
+        else
+        {
+            lpan = 1.0f - (float) Ppanning / 64.0;
+            rpan = 1.0f;
+        };
+        break;
+    case DFlange_LR_Cross:
+        Plrcross = value;
+        flrcross = (float) Plrcross / 127.0;
+        frlcross = 1.0f - flrcross; //keep this out of the DSP loop
+        break;
+    case DFlange_Depth:
+        Pdepth = value;
+        fdepth = (float) Pdepth;
+        zcenter = (int) fSAMPLE_RATE / floor(0.5f * (fdepth + fwidth));
+        logmax = logf((fdepth + fwidth) / fdepth) / LOG_2;
+        break;
+    case DFlange_Width:
+        Pwidth = value;
+        fwidth = (float) Pwidth;
+        zcenter = (int) fSAMPLE_RATE / floor(0.5f * (fdepth + fwidth));
+        logmax = logf((fdepth + fwidth) / fdepth) / LOG_2;
+        break;
+    case DFlange_Offset:
+        Poffset = value;
+        foffset = 0.5f + (float) Poffset / 255.0;
+        break;
+    case DFlange_Feedback:
+        Pfb = value;
+        ffb = (float) Pfb / 64.5f;
+        break;
+    case DFlange_LPF:
+        Phidamp = value;
+        fhidamp = f_exp(-D_PI * (float) Phidamp / fSAMPLE_RATE);
+        break;
+    case DFlange_Subtract:
+        Psubtract = value;
+        fsubtract = 0.5f;
+        if (Psubtract)
+        {
+            fsubtract = -0.5f; //In loop a mult by 0.5f is necessary, so this kills 2 birds with 1...
+            ldelayline0->set_mix(-dry);
+            rdelayline0->set_mix(-dry);
+            ldelayline1->set_mix(-dry);
+            rdelayline1->set_mix(-dry);
+        }
+        break;
+    case DFlange_Zero:
+        Pzero = value;
+        break;
+    case DFlange_LFO_Tempo:
+        lfo->Pfreq = value;
+        lfo->updateparams(PERIOD);
+        break;
+    case DFlange_LFO_Stereo:
+        lfo->Pstereo = value;
+        lfo->updateparams(PERIOD);
+        break;
+    case DFlange_LFO_Type:
+        lfo->PLFOtype = value;
+        lfo->updateparams(PERIOD);
+        break;
+    case DFlange_LFO_Rand:
+        lfo->Prandomness = value;
+        lfo->updateparams(PERIOD);
+        break;
+    case DFlange_Intense:
+        Pintense = value;
+        break;
+    }
+}
+
+int
+Dflange::getpar(int npar)
+{
+    switch (npar)
+    {
+    case DFlange_DryWet:
+        return (Pwetdry);
+        break;
+    case DFlange_Pan:
+        return (Ppanning);
+        break;
+    case DFlange_LR_Cross:
+        return (Plrcross);
+        break;
+    case DFlange_Depth:
+        return (Pdepth);
+        break;
+    case DFlange_Width:
+        return (Pwidth);
+        break;
+    case DFlange_Offset:
+        return (Poffset);
+        break;
+    case DFlange_Feedback:
+        return (Pfb);
+        break;
+    case DFlange_LPF:
+        return (Phidamp);
+        break;
+    case DFlange_Subtract:
+        return (Psubtract);
+        break;
+    case DFlange_Zero:
+        return (Pzero);
+        break;
+    case DFlange_LFO_Tempo:
+        return (lfo->Pfreq);
+        break;
+    case DFlange_LFO_Stereo:
+        return (lfo->Pstereo);
+        break;
+    case DFlange_LFO_Type:
+        return (lfo->PLFOtype);
+        break;
+    case DFlange_LFO_Rand:
+        return (lfo->Prandomness);
+        break;
+    case DFlange_Intense:
+        return Pintense;
+        break;
+    }
+    return (0); //in case of bogus parameter number
 }

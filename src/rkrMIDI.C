@@ -1504,48 +1504,48 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 158:
-        efx_DFlange->changepar(0, Dry_Wet(value));
+        efx_DFlange->changepar(DFlange_DryWet, Dry_Wet(value));
         break;
 
     case 159:
-        efx_DFlange->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_DFlange->changepar(DFlange_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 160:
-        efx_DFlange->changepar(2, value);
+        efx_DFlange->changepar(DFlange_LR_Cross, value);
         break;
 
     case 161:
-        efx_DFlange->changepar(3, 20 + (int) ((float) value * C_MC_2480_RANGE));
+        efx_DFlange->changepar(DFlange_Depth, 20 + (int) ((float) value * C_MC_2480_RANGE));
         break;
 
     case 162:
-        efx_DFlange->changepar(4, (int) ((float) value * C_MC_6000_RANGE));
+        efx_DFlange->changepar(DFlange_Width, (int) ((float) value * C_MC_6000_RANGE));
         break;
 
     case 163:
-        efx_DFlange->changepar(5, (int) ((float) value * C_MC_100_RANGE));
+        efx_DFlange->changepar(DFlange_Offset, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 164:
-        efx_DFlange->changepar(6, ((int) (float) value * C_MC_128_RANGE) - 64);
+        efx_DFlange->changepar(DFlange_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 165:
         /* This is labeled LPF but uses same range as HPF - FIXME check DSP */
-        efx_DFlange->changepar(7, 20 + (int) ((float) value * C_MC_19980_RANGE));
+        efx_DFlange->changepar(DFlange_LPF, 20 + (int) ((float) value * C_MC_19980_RANGE));
         break;
 
     case 166:
-        efx_DFlange->changepar(10, ret_Tempo(value));
+        efx_DFlange->changepar(DFlange_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 167:
-        efx_DFlange->changepar(11, value);
+        efx_DFlange->changepar(DFlange_LFO_Stereo, value);
         break;
 
     case 168:
-        efx_DFlange->changepar(13, value);
+        efx_DFlange->changepar(DFlange_LFO_Rand, value);
         break;
 
     case 169:
@@ -2753,7 +2753,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 460:
-        efx_DFlange->changepar(12, (int) ((float) value * C_MC_11_RANGE));
+        efx_DFlange->changepar(DFlange_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 461:

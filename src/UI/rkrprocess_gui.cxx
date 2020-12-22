@@ -3712,47 +3712,47 @@ void RKRGUI::ActMIDI()
                 PEQ->eqp_HQ->redraw();
                 break;
             case 158:
-                DFLANGE->dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(0)));
+                DFLANGE->dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(DFlange_DryWet)));
                 DFLANGE->dflange_WD->redraw();
                 break;
             case 159:
-                DFLANGE->dflange_pan->value(rkr->efx_DFlange->getpar(1));
+                DFLANGE->dflange_pan->value(rkr->efx_DFlange->getpar(DFlange_Pan));
                 DFLANGE->dflange_pan->redraw();
                 break;
             case 160:
-                DFLANGE->dflange_LR->value(rkr->efx_DFlange->getpar(2));
+                DFLANGE->dflange_LR->value(rkr->efx_DFlange->getpar(DFlange_LR_Cross));
                 DFLANGE->dflange_LR->redraw();
                 break;
             case 161:
-                DFLANGE->dflange_depth->value(rkr->efx_DFlange->getpar(3));
+                DFLANGE->dflange_depth->value(rkr->efx_DFlange->getpar(DFlange_Depth));
                 DFLANGE->dflange_depth->redraw();
                 break;
             case 162:
-                DFLANGE->dflange_width->value(rkr->efx_DFlange->getpar(4));
+                DFLANGE->dflange_width->value(rkr->efx_DFlange->getpar(DFlange_Width));
                 DFLANGE->dflange_width->redraw();
                 break;
             case 163:
-                DFLANGE->dflange_offset->value(rkr->efx_DFlange->getpar(5));
+                DFLANGE->dflange_offset->value(rkr->efx_DFlange->getpar(DFlange_Offset));
                 DFLANGE->dflange_offset->redraw();
                 break;
             case 164:
-                DFLANGE->dflange_fb->value(rkr->efx_DFlange->getpar(6));
+                DFLANGE->dflange_fb->value(rkr->efx_DFlange->getpar(DFlange_Feedback));
                 DFLANGE->dflange_fb->redraw();
                 break;
             case 165:
-                DFLANGE->dflange_lpf->value(rkr->efx_DFlange->getpar(7));
+                DFLANGE->dflange_lpf->value(rkr->efx_DFlange->getpar(DFlange_LPF));
                 DFLANGE->dflange_lpf->redraw();
                 break;
             case 166:
-                DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(10));
+                DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
                 DFLANGE->dflange_freq->redraw();
                 break;
             case 167:
-                DFLANGE->dflange_stdf->value(rkr->efx_DFlange->getpar(11));
+                DFLANGE->dflange_stdf->value(rkr->efx_DFlange->getpar(DFlange_LFO_Stereo));
                 DFLANGE->dflange_stdf->redraw();
                 break;
             case 168:
-                DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(13));
+                DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Rand));
                 DFLANGE->dflange_rnd->redraw();
                 break;
             case 169:
@@ -4934,7 +4934,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_lfotype->redraw();
                 break;
             case 460:
-                DFLANGE->dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
+                DFLANGE->dflange_lfotype->value(rkr->efx_DFlange->getpar(DFlange_LFO_Type));
                 DFLANGE->dflange_lfotype->redraw();
                 break;
             case 461:
@@ -6034,7 +6034,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->DFlange_Bypass)
     {
-        DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(10));
+        DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
         DFLANGE->dflange_freq->redraw();
     }
 

@@ -21,21 +21,21 @@ void DflangeGui::cb_dflange_activar(RKR_Light_Button* o, void* v) {
 void DflangeGui::cb_dflange_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
-dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(0)));
-dflange_pan->value(rkr->efx_DFlange->getpar(1));
-dflange_freq->value(rkr->efx_DFlange->getpar(10));
-dflange_rnd->value(rkr->efx_DFlange->getpar(13));
-dflange_lfotype->value(rkr->efx_DFlange->getpar(12));
-dflange_stdf->value(rkr->efx_DFlange->getpar(11));
-dflange_width->value(rkr->efx_DFlange->getpar(4));
-dflange_depth->value(rkr->efx_DFlange->getpar(3));
-dflange_fb->value(rkr->efx_DFlange->getpar(6));
-dflange_LR->value(rkr->efx_DFlange->getpar(2));
-dflange_subs->value(rkr->efx_DFlange->getpar(8));
-dflange_tz->value(rkr->efx_DFlange->getpar(9));
-dflange_offset->value(rkr->efx_DFlange->getpar(5));
-dflange_lpf->value(rkr->efx_DFlange->getpar(7));
-dflange_intense->value(rkr->efx_DFlange->getpar(14));
+dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(DFlange_DryWet)));
+dflange_pan->value(rkr->efx_DFlange->getpar(DFlange_Pan));
+dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
+dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Rand));
+dflange_lfotype->value(rkr->efx_DFlange->getpar(DFlange_LFO_Type));
+dflange_stdf->value(rkr->efx_DFlange->getpar(DFlange_LFO_Stereo));
+dflange_width->value(rkr->efx_DFlange->getpar(DFlange_Width));
+dflange_depth->value(rkr->efx_DFlange->getpar(DFlange_Depth));
+dflange_fb->value(rkr->efx_DFlange->getpar(DFlange_Feedback));
+dflange_LR->value(rkr->efx_DFlange->getpar(DFlange_LR_Cross));
+dflange_subs->value(rkr->efx_DFlange->getpar(DFlange_Subtract));
+dflange_tz->value(rkr->efx_DFlange->getpar(DFlange_Zero));
+dflange_offset->value(rkr->efx_DFlange->getpar(DFlange_Offset));
+dflange_lpf->value(rkr->efx_DFlange->getpar(DFlange_LPF));
+dflange_intense->value(rkr->efx_DFlange->getpar(DFlange_Intense));
 }
 void DflangeGui::cb_dflange_preset(RKR_Choice* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_preset_i(o,v);
@@ -59,7 +59,7 @@ void DflangeGui::cb_dflange_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(158);
  return;
 } 
-rkr->efx_DFlange->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_DFlange->changepar(DFlange_DryWet,Dry_Wet((int)(o->value())));
 }
 void DflangeGui::cb_dflange_WD(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_WD_i(o,v);
@@ -71,7 +71,7 @@ void DflangeGui::cb_dflange_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(159);
  return;
 } 
-rkr->efx_DFlange->changepar(1,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_Pan,(int)o->value());
 }
 void DflangeGui::cb_dflange_pan(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_pan_i(o,v);
@@ -83,7 +83,7 @@ void DflangeGui::cb_dflange_LR_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(160);
  return;
 } 
-rkr->efx_DFlange->changepar(2,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_LR_Cross,(int)o->value());
 }
 void DflangeGui::cb_dflange_LR(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_LR_i(o,v);
@@ -95,7 +95,7 @@ void DflangeGui::cb_dflange_depth_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(161);
  return;
 } 
-rkr->efx_DFlange->changepar(3,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_Depth,(int)o->value());
 }
 void DflangeGui::cb_dflange_depth(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_depth_i(o,v);
@@ -107,7 +107,7 @@ void DflangeGui::cb_dflange_width_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(162);
  return;
 } 
-rkr->efx_DFlange->changepar(4,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_Width,(int)o->value());
 }
 void DflangeGui::cb_dflange_width(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_width_i(o,v);
@@ -119,7 +119,7 @@ void DflangeGui::cb_dflange_offset_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(163);
  return;
 } 
-rkr->efx_DFlange->changepar(5,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_Offset,(int)o->value());
 }
 void DflangeGui::cb_dflange_offset(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_offset_i(o,v);
@@ -131,7 +131,7 @@ void DflangeGui::cb_dflange_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(164);
  return;
 } 
-rkr->efx_DFlange->changepar(6,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_Feedback,(int)o->value());
 }
 void DflangeGui::cb_dflange_fb(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_fb_i(o,v);
@@ -143,28 +143,28 @@ void DflangeGui::cb_dflange_lpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(165);
  return;
 } 
-rkr->efx_DFlange->changepar(7,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_LPF,(int)o->value());
 }
 void DflangeGui::cb_dflange_lpf(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_lpf_i(o,v);
 }
 
 void DflangeGui::cb_dflange_subs_i(RKR_Check_Button* o, void*) {
-  rkr->efx_DFlange->changepar(8,(int)o->value());
+  rkr->efx_DFlange->changepar(DFlange_Subtract,(int)o->value());
 }
 void DflangeGui::cb_dflange_subs(RKR_Check_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_subs_i(o,v);
 }
 
 void DflangeGui::cb_dflange_tz_i(RKR_Check_Button* o, void*) {
-  rkr->efx_DFlange->changepar(9,(int)o->value());
+  rkr->efx_DFlange->changepar(DFlange_Zero,(int)o->value());
 }
 void DflangeGui::cb_dflange_tz(RKR_Check_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_tz_i(o,v);
 }
 
 void DflangeGui::cb_dflange_intense_i(RKR_Check_Button* o, void*) {
-  rkr->efx_DFlange->changepar(14,(int)o->value());
+  rkr->efx_DFlange->changepar(DFlange_Intense,(int)o->value());
 }
 void DflangeGui::cb_dflange_intense(RKR_Check_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_intense_i(o,v);
@@ -176,7 +176,7 @@ void DflangeGui::cb_dflange_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(166);
  return;
 } 
-rkr->efx_DFlange->changepar(10,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_LFO_Tempo,(int)o->value());
 }
 void DflangeGui::cb_dflange_freq(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_freq_i(o,v);
@@ -188,7 +188,7 @@ void DflangeGui::cb_dflange_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(167);
  return;
 } 
-rkr->efx_DFlange->changepar(11,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_LFO_Stereo,(int)o->value());
 }
 void DflangeGui::cb_dflange_stdf(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_stdf_i(o,v);
@@ -201,7 +201,7 @@ void DflangeGui::cb_dflange_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_DFlange->changepar(12,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_LFO_Type,(int)o->value());
 }
 void DflangeGui::cb_dflange_lfotype(RKR_Choice* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_lfotype_i(o,v);
@@ -213,7 +213,7 @@ void DflangeGui::cb_dflange_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(168);
  return;
 } 
-rkr->efx_DFlange->changepar(13,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_LFO_Rand,(int)o->value());
 }
 void DflangeGui::cb_dflange_rnd(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_rnd_i(o,v);

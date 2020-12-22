@@ -743,14 +743,14 @@ void RKR::getbuf(char *buf, int j)
     case 20:
         //Dual_Flange
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_DFlange->getpar(0), efx_DFlange->getpar(1),
-                efx_DFlange->getpar(2), efx_DFlange->getpar(3),
-                efx_DFlange->getpar(4), efx_DFlange->getpar(5),
-                efx_DFlange->getpar(6), efx_DFlange->getpar(7),
-                efx_DFlange->getpar(8), efx_DFlange->getpar(9),
-                efx_DFlange->getpar(10), efx_DFlange->getpar(11),
-                efx_DFlange->getpar(12), efx_DFlange->getpar(13),
-                efx_DFlange->getpar(14), DFlange_Bypass);
+                efx_DFlange->getpar(DFlange_DryWet), efx_DFlange->getpar(DFlange_Pan),
+                efx_DFlange->getpar(DFlange_LR_Cross), efx_DFlange->getpar(DFlange_Depth),
+                efx_DFlange->getpar(DFlange_Width), efx_DFlange->getpar(DFlange_Offset),
+                efx_DFlange->getpar(DFlange_Feedback), efx_DFlange->getpar(DFlange_LPF),
+                efx_DFlange->getpar(DFlange_Subtract), efx_DFlange->getpar(DFlange_Zero),
+                efx_DFlange->getpar(DFlange_LFO_Tempo), efx_DFlange->getpar(DFlange_LFO_Stereo),
+                efx_DFlange->getpar(DFlange_LFO_Type), efx_DFlange->getpar(DFlange_LFO_Rand),
+                efx_DFlange->getpar(DFlange_Intense), DFlange_Bypass);
         break;
 
     case 21:

@@ -2025,9 +2025,6 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2047,19 +2044,47 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->dflange->getpar(i) != val)
+    int val = 0;
+    
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->dflange->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //1-14
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->dflange->getpar(i) != val)
+        switch(i)
         {
-            plug->dflange->changepar(i,val);
+            case DFlange_Pan:
+            case DFlange_LR_Cross:
+            case DFlange_Depth:
+            case DFlange_Width:
+            case DFlange_Offset:
+            case DFlange_Feedback:
+            case DFlange_LPF:
+            case DFlange_Subtract:
+            case DFlange_Zero:
+            case DFlange_LFO_Tempo:
+            case DFlange_LFO_Stereo:
+            case DFlange_LFO_Type:
+            case DFlange_LFO_Rand:
+            case DFlange_Intense:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->dflange->getpar(i) != val)
+                {
+                    plug->dflange->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case DFlange_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->dflange->getpar(DFlange_DryWet) != val)
+                {
+                    plug->dflange->changepar(DFlange_DryWet,val);
+                }
+            }
         }
     }
 
