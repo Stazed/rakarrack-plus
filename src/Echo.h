@@ -29,6 +29,19 @@
 
 #include "delayline.h"
 
+enum Echo_Index
+{
+    Echo_DryWet = 0,
+    Echo_Pan,
+    Echo_Delay,
+    Echo_LR_Delay,
+    Echo_LR_Cross,
+    Echo_Feedback,
+    Echo_Damp,
+    Echo_Reverse,
+    Echo_Direct
+};
+
 class Echo
 {
 public:

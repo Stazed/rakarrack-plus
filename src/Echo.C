@@ -314,31 +314,31 @@ Echo::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Echo_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Echo_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Echo_Delay:
         setdelay(value);
         break;
-    case 3:
+    case Echo_LR_Delay:
         setlrdelay(value);
         break;
-    case 4:
+    case Echo_LR_Cross:
         setlrcross(value);
         break;
-    case 5:
+    case Echo_Feedback:
         setfb(value);
         break;
-    case 6:
+    case Echo_Damp:
         sethidamp(value);
         break;
-    case 7:
+    case Echo_Reverse:
         setreverse(value);
         break;
-    case 8:
+    case Echo_Direct:
         setdirect(value);
         break;
     }
@@ -349,31 +349,31 @@ Echo::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Echo_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Echo_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Echo_Delay:
         return (Pdelay);
         break;
-    case 3:
+    case Echo_LR_Delay:
         return (Plrdelay);
         break;
-    case 4:
+    case Echo_LR_Cross:
         return (Plrcross);
         break;
-    case 5:
+    case Echo_Feedback:
         return (Pfb);
         break;
-    case 6:
+    case Echo_Damp:
         return (Phidamp);
         break;
-    case 7:
+    case Echo_Reverse:
         return (Preverse);
         break;
-    case 8:
+    case Echo_Direct:
         return (Pdirect);
         break;
     };

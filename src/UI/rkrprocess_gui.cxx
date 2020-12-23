@@ -3277,11 +3277,11 @@ void RKRGUI::ActMIDI()
                 PAN->pan_WD->redraw();
                 break;
             case 59:
-                ECHO->echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(0)));
+                ECHO->echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(Echo_DryWet)));
                 ECHO->echo_WD->redraw();
                 break;
             case 46:
-                ECHO->echo_pan->value(rkr->efx_Echo->getpar(1) - 64);
+                ECHO->echo_pan->value(rkr->efx_Echo->getpar(Echo_Pan) - 64);
                 ECHO->echo_pan->redraw();
                 break;
             case 47:
@@ -3373,7 +3373,7 @@ void RKRGUI::ActMIDI()
                 PAN->pan_freq->redraw();
                 break;
             case 78:
-                ECHO->echo_fb->value(rkr->efx_Echo->getpar(5));
+                ECHO->echo_fb->value(rkr->efx_Echo->getpar(Echo_Feedback));
                 ECHO->echo_fb->redraw();
                 break;
             case 79:
@@ -3449,7 +3449,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_LR->redraw();
                 break;
             case 97:
-                ECHO->echo_LRc->value(rkr->efx_Echo->getpar(4));
+                ECHO->echo_LRc->value(rkr->efx_Echo->getpar(Echo_LR_Cross));
                 ECHO->echo_LRc->redraw();
                 break;
             case 98:
@@ -4720,19 +4720,19 @@ void RKRGUI::ActMIDI()
                 CHORUS->chorus_delay->redraw();
                 break;
             case 407:
-                ECHO->echo_RV->value(rkr->efx_Echo->getpar(7));
+                ECHO->echo_RV->value(rkr->efx_Echo->getpar(Echo_Reverse));
                 ECHO->echo_RV->redraw();
                 break;
             case 408:
-                ECHO->echo_delay->value(rkr->efx_Echo->getpar(2));
+                ECHO->echo_delay->value(rkr->efx_Echo->getpar(Echo_Delay));
                 ECHO->echo_delay->redraw();
                 break;
             case 409:
-                ECHO->echo_LRdl->value(rkr->efx_Echo->getpar(3));
+                ECHO->echo_LRdl->value(rkr->efx_Echo->getpar(Echo_LR_Delay));
                 ECHO->echo_LRdl->redraw();
                 break;
             case 410:
-                ECHO->echo_damp->value(rkr->efx_Echo->getpar(6));
+                ECHO->echo_damp->value(rkr->efx_Echo->getpar(Echo_Damp));
                 ECHO->echo_damp->redraw();
                 break;
             case 411:
@@ -6080,7 +6080,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->Echo_Bypass)
     {
-        ECHO->echo_delay->value(rkr->efx_Echo->getpar(2));
+        ECHO->echo_delay->value(rkr->efx_Echo->getpar(Echo_Delay));
         ECHO->echo_delay->redraw();
     }
     if (rkr->Echotron_Bypass)

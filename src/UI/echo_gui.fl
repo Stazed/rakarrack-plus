@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -13,7 +13,7 @@ decl {\#include "RKR_Choice.h"} {public global
 
 widget_class EchoGui {
   user_data 1 open
-  xywh {1277 80 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1616 79 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -39,15 +39,15 @@ rgui->findpos(4,(int)o->value(),o);}
     user_data 12004
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12004))rkr->efx_Echo->setpreset((int) o->value());
-echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(0)));
-echo_pan->value(rkr->efx_Echo->getpar(1)-64);
-echo_delay->value(rkr->efx_Echo->getpar(2));
-echo_LRdl->value(rkr->efx_Echo->getpar(3));
-echo_LRc->value(rkr->efx_Echo->getpar(4));
-echo_fb->value(rkr->efx_Echo->getpar(5));
-echo_damp->value(rkr->efx_Echo->getpar(6));
-echo_RV->value(rkr->efx_Echo->getpar(7));
-echo_direct->value(rkr->efx_Echo->getpar(8));} selected
+echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(Echo_DryWet)));
+echo_pan->value(rkr->efx_Echo->getpar(Echo_Pan)-64);
+echo_delay->value(rkr->efx_Echo->getpar(Echo_Delay));
+echo_LRdl->value(rkr->efx_Echo->getpar(Echo_LR_Delay));
+echo_LRc->value(rkr->efx_Echo->getpar(Echo_LR_Cross));
+echo_fb->value(rkr->efx_Echo->getpar(Echo_Feedback));
+echo_damp->value(rkr->efx_Echo->getpar(Echo_Damp));
+echo_RV->value(rkr->efx_Echo->getpar(Echo_Reverse));
+echo_direct->value(rkr->efx_Echo->getpar(Echo_Direct));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -95,7 +95,7 @@ echo_direct->value(rkr->efx_Echo->getpar(8));} selected
  rgui->getMIDIControl(59);
  return;
 } 
-rkr->efx_Echo->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Echo->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -106,7 +106,7 @@ rkr->efx_Echo->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(407);
  return;
 } 
-rkr->efx_Echo->changepar(7,(int)o->value());}
+rkr->efx_Echo->changepar(Echo_Reverse,(int)o->value());}
     xywh {56 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -117,7 +117,7 @@ rkr->efx_Echo->changepar(7,(int)o->value());}
  rgui->getMIDIControl(46);
  return;
 } 
-rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
+rkr->efx_Echo->changepar(Echo_Pan,(int)(o->value()+64));}
     xywh {56 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -128,7 +128,7 @@ rkr->efx_Echo->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(408);
  return;
 } 
-rkr->efx_Echo->changepar(2,(int)o->value());}
+rkr->efx_Echo->changepar(Echo_Delay,(int)o->value());}
     xywh {56 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -139,7 +139,7 @@ rkr->efx_Echo->changepar(2,(int)o->value());}
  rgui->getMIDIControl(409);
  return;
 } 
-rkr->efx_Echo->changepar(3,(int)o->value());}
+rkr->efx_Echo->changepar(Echo_LR_Delay,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -150,7 +150,7 @@ rkr->efx_Echo->changepar(3,(int)o->value());}
  rgui->getMIDIControl(97);
  return;
 } 
-rkr->efx_Echo->changepar(4,(int)(o->value()));}
+rkr->efx_Echo->changepar(Echo_LR_Cross,(int)(o->value()));}
     xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -161,14 +161,14 @@ rkr->efx_Echo->changepar(4,(int)(o->value()));}
  rgui->getMIDIControl(78);
  return;
 } 
-rkr->efx_Echo->changepar(5,(int)o->value());}
+rkr->efx_Echo->changepar(Echo_Feedback,(int)o->value());}
     xywh {56 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button echo_direct {
     label Direct
     user_data 2
-    callback {rkr->efx_Echo->changepar(8,(int)o->value());}
+    callback {rkr->efx_Echo->changepar(Echo_Direct,(int)o->value());}
     xywh {51 148 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -179,7 +179,7 @@ rkr->efx_Echo->changepar(5,(int)o->value());}
  rgui->getMIDIControl(410);
  return;
 } 
-rkr->efx_Echo->changepar(6,(int)o->value());}
+rkr->efx_Echo->changepar(Echo_Damp,(int)o->value());}
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

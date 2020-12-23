@@ -613,9 +613,6 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -636,26 +633,51 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->echo->getpar(i) != val)
-    {
-        plug->echo->changepar(i,val);
-    }
-    i++;//panning is offset
-    val = (int)*plug->param_p[i]+64;
-    if(plug->echo->getpar(i) != val)
-    {
-        plug->echo->changepar(i,val);
-    }
 
-    for(i++; i<plug->nparams; i++)
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->echo->getpar(i) != val)
+        switch(i)
         {
-            plug->echo->changepar(i,val);
+            // Normal processing
+            case Echo_Delay:
+            case Echo_LR_Delay:
+            case Echo_LR_Cross:
+            case Echo_Feedback:
+            case Echo_Damp:
+            case Echo_Reverse:
+            case Echo_Direct:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->echo->getpar(i) != val)
+                {
+                    plug->echo->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Echo_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->echo->getpar(Echo_DryWet) != val)
+                {
+                    plug->echo->changepar(Echo_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Echo_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->echo->getpar(i) != val)
+                {
+                    plug->echo->changepar(i,val);
+                }
+            }
         }
     }
 

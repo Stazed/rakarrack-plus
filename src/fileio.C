@@ -534,11 +534,11 @@ void RKR::getbuf(char *buf, int j)
     case 4:
         //Echo
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Echo->getpar(0), efx_Echo->getpar(1),
-                efx_Echo->getpar(2), efx_Echo->getpar(3),
-                efx_Echo->getpar(4), efx_Echo->getpar(5),
-                efx_Echo->getpar(6), efx_Echo->getpar(7),
-                efx_Echo->getpar(8), Echo_Bypass);
+                efx_Echo->getpar(Echo_DryWet), efx_Echo->getpar(Echo_Pan),
+                efx_Echo->getpar(Echo_Delay), efx_Echo->getpar(Echo_LR_Delay),
+                efx_Echo->getpar(Echo_LR_Cross), efx_Echo->getpar(Echo_Feedback),
+                efx_Echo->getpar(Echo_Damp), efx_Echo->getpar(Echo_Reverse),
+                efx_Echo->getpar(Echo_Direct), Echo_Bypass);
         break;
 
     case 5:

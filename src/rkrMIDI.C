@@ -1059,11 +1059,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 59:
-        efx_Echo->changepar(0, Dry_Wet(value));
+        efx_Echo->changepar(Echo_DryWet, Dry_Wet(value));
         break;
 
     case 46:
-        efx_Echo->changepar(1, value);
+        efx_Echo->changepar(Echo_Pan, value);
         break;
 
     case 47:
@@ -1155,7 +1155,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 78:
-        efx_Echo->changepar(5, value);
+        efx_Echo->changepar(Echo_Feedback, value);
         break;
 
     case 79:
@@ -1231,7 +1231,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 97:
-        efx_Echo->changepar(4, value);
+        efx_Echo->changepar(Echo_LR_Cross, value);
         break;
 
     case 98:
@@ -2541,19 +2541,19 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
     
     case 407:
-        efx_Echo->changepar(7, value);
+        efx_Echo->changepar(Echo_Reverse, value);
         break;
 
     case 408:
-        efx_Echo->changepar(2, 20 + (int) ((float) value * C_MC_1980_RANGE));
+        efx_Echo->changepar(Echo_Delay, 20 + (int) ((float) value * C_MC_1980_RANGE));
         break;
 
     case 409:
-        efx_Echo->changepar(3, value);
+        efx_Echo->changepar(Echo_LR_Delay, value);
         break;
 
     case 410:
-        efx_Echo->changepar(6, value);
+        efx_Echo->changepar(Echo_Damp, value);
         break;
 
     case 411:
