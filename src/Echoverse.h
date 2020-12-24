@@ -31,6 +31,20 @@
 
 #include "delayline.h"
 
+enum Echoverse_Index
+{
+    Echoverse_DryWet = 0,
+    Echoverse_Pan,
+    Echoverse_Tempo,
+    Echoverse_LR_Delay,
+    Echoverse_Angle,
+    Echoverse_Feedback,
+    Echoverse_Damp,
+    Echoverse_Reverse,
+    Echoverse_Subdivision,
+    Echoverse_Ext_Stereo
+};
+
 class Echoverse
 {
 public:

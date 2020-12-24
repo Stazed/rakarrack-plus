@@ -887,11 +887,12 @@ void RKR::getbuf(char *buf, int j)
     case 32:
         //Echoverse
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Echoverse->getpar(0), efx_Echoverse->getpar(1),
-                efx_Echoverse->getpar(2), efx_Echoverse->getpar(3),
-                efx_Echoverse->getpar(4), efx_Echoverse->getpar(5),
-                efx_Echoverse->getpar(6), efx_Echoverse->getpar(7),
-                efx_Echoverse->getpar(8), efx_Echoverse->getpar(9), Echoverse_Bypass);
+                efx_Echoverse->getpar(Echoverse_DryWet), efx_Echoverse->getpar(Echoverse_Pan),
+                efx_Echoverse->getpar(Echoverse_Tempo), efx_Echoverse->getpar(Echoverse_LR_Delay),
+                efx_Echoverse->getpar(Echoverse_Angle), efx_Echoverse->getpar(Echoverse_Feedback),
+                efx_Echoverse->getpar(Echoverse_Damp), efx_Echoverse->getpar(Echoverse_Reverse),
+                efx_Echoverse->getpar(Echoverse_Subdivision), efx_Echoverse->getpar(Echoverse_Ext_Stereo),
+                Echoverse_Bypass);
         break;
 
 

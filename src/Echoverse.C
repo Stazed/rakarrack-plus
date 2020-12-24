@@ -309,37 +309,37 @@ Echoverse::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Echoverse_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Echoverse_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Echoverse_Tempo:
         setdelay(value);
         break;
-    case 3:
+    case Echoverse_LR_Delay:
         setlrdelay(value);
         break;
-    case 4:
+    case Echoverse_Angle:
         setlrcross(value);
         break;
-    case 5:
+    case Echoverse_Feedback:
         setfb(value);
         break;
-    case 6:
+    case Echoverse_Damp:
         sethidamp(value);
         break;
-    case 7:
+    case Echoverse_Reverse:
         setreverse(value);
         break;
-    case 8:
+    case Echoverse_Subdivision:
         Psubdiv = value;
         subdiv = 1.0f / ((float) (value + 1));
         delay = subdiv * fdelay;
         initdelays();
         break;
-    case 9:
+    case Echoverse_Ext_Stereo:
         Pes = value;
         pes = 8.0f * (float) Pes / 127.0f;
         break;
@@ -351,34 +351,34 @@ Echoverse::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Echoverse_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Echoverse_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Echoverse_Tempo:
         return (Pdelay);
         break;
-    case 3:
+    case Echoverse_LR_Delay:
         return (Plrdelay);
         break;
-    case 4:
+    case Echoverse_Angle:
         return (Plrcross);
         break;
-    case 5:
+    case Echoverse_Feedback:
         return (Pfb);
         break;
-    case 6:
+    case Echoverse_Damp:
         return (Phidamp);
         break;
-    case 7:
+    case Echoverse_Reverse:
         return (Preverse);
         break;
-    case 8:
+    case Echoverse_Subdivision:
         return (Psubdiv);
         break;
-    case 9:
+    case Echoverse_Ext_Stereo:
         return (Pes);
         break;
     }

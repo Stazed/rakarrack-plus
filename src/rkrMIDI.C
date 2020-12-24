@@ -2115,39 +2115,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 303:
-        efx_Echoverse->changepar(0, Dry_Wet(value));
+        efx_Echoverse->changepar(Echoverse_DryWet, Dry_Wet(value));
         break;
 
     case 304:
-        efx_Echoverse->changepar(7, value);
+        efx_Echoverse->changepar(Echoverse_Reverse, value);
         break;
 
     case 305:
-        efx_Echoverse->changepar(1, value);
+        efx_Echoverse->changepar(Echoverse_Pan, value);
         break;
 
     case 306:
-        efx_Echoverse->changepar(2, ret_Tempo(value));
+        efx_Echoverse->changepar(Echoverse_Tempo, ret_Tempo(value));
         break;
 
     case 307:
-        efx_Echoverse->changepar(3, value);
+        efx_Echoverse->changepar(Echoverse_LR_Delay, value);
         break;
 
     case 308:
-        efx_Echoverse->changepar(5, value);
+        efx_Echoverse->changepar(Echoverse_Feedback, value);
         break;
 
     case 309:
-        efx_Echoverse->changepar(6, value);
+        efx_Echoverse->changepar(Echoverse_Damp, value);
         break;
 
     case 310:
-        efx_Echoverse->changepar(9, value);
+        efx_Echoverse->changepar(Echoverse_Ext_Stereo, value);
         break;
 
     case 311:
-        efx_Echoverse->changepar(4, (int) ((float) value * C_MC_128_RANGE));
+        efx_Echoverse->changepar(Echoverse_Angle, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 312:

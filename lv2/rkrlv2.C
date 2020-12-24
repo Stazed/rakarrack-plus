@@ -2908,9 +2908,6 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2931,41 +2928,53 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->echoverse->getpar(i) != val)
-    {
-        plug->echoverse->changepar(i,val);
-    }
-    i++;//1 panning is offset
-    val = (int)*plug->param_p[i]+64;
-    if(plug->echoverse->getpar(i) != val)
-    {
-        plug->echoverse->changepar(i,val);
-    }
-    
-    for(i++; i<4; i++) //2,3 Delay, LR delay not offset
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->echoverse->getpar(i) != val)
-        {
-            plug->echoverse->changepar(i,val);
-        }
-    }
 
-    val = (int)*plug->param_p[i]+64;    // 4 angle is offset
-    if(plug->echoverse->getpar(i) != val)
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->echoverse->changepar(i,val);
-    }
-   
-    for(i++; i<plug->nparams; i++)  // 5-9 no offset
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->echoverse->getpar(i) != val)
+        switch(i)
         {
-            plug->echoverse->changepar(i,val);
+            // Normal processing
+            case Echoverse_Tempo:
+            case Echoverse_LR_Delay:
+            case Echoverse_Feedback:
+            case Echoverse_Damp:
+            case Echoverse_Reverse:
+            case Echoverse_Subdivision:
+            case Echoverse_Ext_Stereo:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->echoverse->getpar(i) != val)
+                {
+                    plug->echoverse->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Echoverse_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->echoverse->getpar(Echoverse_DryWet) != val)
+                {
+                    plug->echoverse->changepar(Echoverse_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Echoverse_Pan:
+            case Echoverse_Angle:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->echoverse->getpar(i) != val)
+                {
+                    plug->echoverse->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 
