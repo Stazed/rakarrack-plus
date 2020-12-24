@@ -980,14 +980,14 @@ void RKR::getbuf(char *buf, int j)
     case 41:
         //Echotron
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                efx_Echotron->getpar(0), efx_Echotron->getpar(1),
-                efx_Echotron->getpar(2), efx_Echotron->getpar(3),
-                efx_Echotron->getpar(4), efx_Echotron->getpar(5),
-                efx_Echotron->getpar(6), efx_Echotron->getpar(7),
-                efx_Echotron->getpar(8), efx_Echotron->getpar(9),
-                efx_Echotron->getpar(10), efx_Echotron->getpar(11),
-                efx_Echotron->getpar(12), efx_Echotron->getpar(13),
-                efx_Echotron->getpar(14), efx_Echotron->getpar(15),
+                efx_Echotron->getpar(Echotron_DryWet), efx_Echotron->getpar(Echotron_Depth),
+                efx_Echotron->getpar(Echotron_LFO_Width), efx_Echotron->getpar(Echotron_Taps),
+                efx_Echotron->getpar(Echotron_User_File), efx_Echotron->getpar(Echotron_Tempo),
+                efx_Echotron->getpar(Echotron_Damp), efx_Echotron->getpar(Echotron_LR_Cross),
+                efx_Echotron->getpar(Echotron_Set_File), efx_Echotron->getpar(Echotron_LFO_Stereo),
+                efx_Echotron->getpar(Echotron_Feedback), efx_Echotron->getpar(Echotron_Pan),
+                efx_Echotron->getpar(Echotron_Mod_Delay), efx_Echotron->getpar(Echotron_Mod_Filter),
+                efx_Echotron->getpar(Echotron_LFO_Type), efx_Echotron->getpar(Echotron_Filters),
                 Echotron_Bypass, efx_Echotron->Filename);
         break;
     case 42:

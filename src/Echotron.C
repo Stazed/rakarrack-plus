@@ -755,26 +755,26 @@ Echotron::changepar(int npar, int value)
     float tmptempo;
     switch (npar)
     {
-    case 0:
+    case Echotron_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Echotron_Depth:
         Pdepth = value;
         initparams = 1;
         break;
-    case 2:
+    case Echotron_LFO_Width:
         Pwidth = value;
         initparams = 1;
         break;
-    case 3:
+    case Echotron_Taps:
         Plength = value;
         if (Plength > 127) Plength = 127;
         initparams = 1;
         break;
-    case 4:
+    case Echotron_User_File:
         Puser = value;
         break;
-    case 5:
+    case Echotron_Tempo:
         Ptempo = value;
 
         tmptempo = (float) Ptempo;
@@ -785,49 +785,49 @@ Echotron::changepar(int npar, int value)
         dlfo->updateparams(fPERIOD);
         initparams = 1;
         break;
-    case 6:
+    case Echotron_Damp:
         sethidamp(value);
         break;
-    case 7:
+    case Echotron_LR_Cross:
         Plrcross = value;
         lrcross = ((float) (Plrcross) - 64) / 64.0;
         ilrcross = 1.0f - abs(lrcross);
         break;
-    case 8:
+    case Echotron_Set_File:
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called by changepar() upon initialization for lv2 and is ignored.
 #else
         if (!setfile(value)) error_num = 4;
 #endif
         break;
-    case 9:
+    case Echotron_LFO_Stereo:
         lfo->Pstereo = value;
         dlfo->Pstereo = value;
         lfo->updateparams(fPERIOD);
         dlfo->updateparams(fPERIOD);
         break;
-    case 10:
+    case Echotron_Feedback:
         Pfb = value;
         setfb(value);
         break;
-    case 11:
+    case Echotron_Pan:
         setpanning(value);
         break;
-    case 12:
+    case Echotron_Mod_Delay:
         Pmoddly = value; //delay modulation on/off
         break;
-    case 13:
+    case Echotron_Mod_Filter:
         Pmodfilts = value; //filter modulation on/off
         if (!Pmodfilts) initparams = 1;
         break;
-    case 14:
+    case Echotron_LFO_Type:
         //LFO Type
         lfo->PLFOtype = value;
         lfo->updateparams(fPERIOD);
         dlfo->PLFOtype = value;
         dlfo->updateparams(fPERIOD);
         break;
-    case 15:
+    case Echotron_Filters:
         Pfilters = value; //Pfilters
         break;
     }
@@ -838,52 +838,52 @@ Echotron::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Echotron_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Echotron_Depth:
         return (Pdepth);
         break;
-    case 2:
+    case Echotron_LFO_Width:
         return (Pwidth);
         break;
-    case 3:
+    case Echotron_Taps:
         return (Plength);
         break;
-    case 8:
-        return (Filenum);
-        break;
-    case 5:
-        return (Ptempo);
-        break;
-    case 6:
-        return (Phidamp);
-        break;
-    case 7:
-        return (Plrcross);
-        break;
-    case 4:
+    case Echotron_User_File:
         return (Puser);
         break;
-    case 9:
+    case Echotron_Tempo:
+        return (Ptempo);
+        break;
+    case Echotron_Damp:
+        return (Phidamp);
+        break;
+    case Echotron_LR_Cross:
+        return (Plrcross);
+        break;
+    case Echotron_Set_File:
+        return (Filenum);
+        break;
+    case Echotron_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 10:
+    case Echotron_Feedback:
         return (Pfb);
         break;
-    case 11:
+    case Echotron_Pan:
         return (Ppanning);
         break;
-    case 12:
+    case Echotron_Mod_Delay:
         return (Pmoddly); //modulate delays
         break;
-    case 13:
+    case Echotron_Mod_Filter:
         return (Pmodfilts); //modulate filters
         break;
-    case 14:
+    case Echotron_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 15:
+    case Echotron_Filters:
         return (Pfilters); //Filter delay line on/off
         break;
     }

@@ -4482,43 +4482,43 @@ void RKRGUI::ActMIDI()
                 REVERBTRON->revtron_fade->redraw();
                 break;
             case 348:
-                ECHOTRON->echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(0)));
+                ECHOTRON->echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(Echotron_DryWet)));
                 ECHOTRON->echotron_WD->redraw();
                 break;
             case 349:
-                ECHOTRON->echotron_pan->value(rkr->efx_Echotron->getpar(11) - 64);
+                ECHOTRON->echotron_pan->value(rkr->efx_Echotron->getpar(Echotron_Pan) - 64);
                 ECHOTRON->echotron_pan->redraw();
                 break;
             case 350:
-                ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(5));
+                ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
                 ECHOTRON->echotron_tempo->redraw();
                 break;
             case 351:
-                ECHOTRON->echotron_damp->value(rkr->efx_Echotron->getpar(6));
+                ECHOTRON->echotron_damp->value(rkr->efx_Echotron->getpar(Echotron_Damp));
                 ECHOTRON->echotron_damp->redraw();
                 break;
             case 352:
-                ECHOTRON->echotron_fb->value(rkr->efx_Echotron->getpar(10) - 64);
+                ECHOTRON->echotron_fb->value(rkr->efx_Echotron->getpar(Echotron_Feedback) - 64);
                 ECHOTRON->echotron_fb->redraw();
                 break;
             case 353:
-                ECHOTRON->echotron_lrcross->value(rkr->efx_Echotron->getpar(7) - 64);
+                ECHOTRON->echotron_lrcross->value(rkr->efx_Echotron->getpar(Echotron_LR_Cross) - 64);
                 ECHOTRON->echotron_lrcross->redraw();
                 break;
             case 354:
-                ECHOTRON->echotron_width->value(rkr->efx_Echotron->getpar(2));
+                ECHOTRON->echotron_width->value(rkr->efx_Echotron->getpar(Echotron_LFO_Width));
                 ECHOTRON->echotron_width->redraw();
                 break;
             case 355:
-                ECHOTRON->echotron_deep->value(rkr->efx_Echotron->getpar(1) - 64);
+                ECHOTRON->echotron_deep->value(rkr->efx_Echotron->getpar(Echotron_Depth) - 64);
                 ECHOTRON->echotron_deep->redraw();
                 break;
             case 356:
-                ECHOTRON->echotron_stdf->value(rkr->efx_Echotron->getpar(9));
+                ECHOTRON->echotron_stdf->value(rkr->efx_Echotron->getpar(Echotron_LFO_Stereo));
                 ECHOTRON->echotron_stdf->redraw();
                 break;
             case 357:
-                ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(3));
+                ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
                 ECHOTRON->echotron_length->redraw();
                 break;
             case 358:
@@ -4938,7 +4938,7 @@ void RKRGUI::ActMIDI()
                 DFLANGE->dflange_lfotype->redraw();
                 break;
             case 461:
-                ECHOTRON->echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
+                ECHOTRON->echotron_lfotype->value(rkr->efx_Echotron->getpar(Echotron_LFO_Type));
                 ECHOTRON->echotron_lfotype->redraw();
                 break;
             case 462:
@@ -6085,7 +6085,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->Echotron_Bypass)
     {
-        ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(5));
+        ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
         ECHOTRON->echotron_tempo->redraw();
     }
     if (rkr->Opticaltrem_Bypass)

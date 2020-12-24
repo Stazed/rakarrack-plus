@@ -42,23 +42,23 @@ rgui->findpos(41,(int)o->value(),o);}
     user_data 12041
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12041))rkr->efx_Echotron->setpreset((int) o->value());
-echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
-echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(0)));
-echotron_damp->value(rkr->efx_Echotron->getpar(6));
-echotron_fnum->value(rkr->efx_Echotron->getpar(8));
-echotron_user->value(rkr->efx_Echotron->getpar(4));
+echotron_pan->value(rkr->efx_Echotron->getpar(Echotron_Pan)-64);
+echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(Echotron_DryWet)));
+echotron_damp->value(rkr->efx_Echotron->getpar(Echotron_Damp));
+echotron_fnum->value(rkr->efx_Echotron->getpar(Echotron_Set_File));
+echotron_user->value(rkr->efx_Echotron->getpar(Echotron_User_File));
 echotron_user->do_callback();
-echotron_fb->value(rkr->efx_Echotron->getpar(10));
-echotron_tempo->value(rkr->efx_Echotron->getpar(5));
-echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
-echotron_width->value(rkr->efx_Echotron->getpar(2));
-echotron_deep->value(rkr->efx_Echotron->getpar(1)-64);
-echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
-echotron_stdf->value(rkr->efx_Echotron->getpar(9));
-echotron_af->value(rkr->efx_Echotron->getpar(15));
-echotron_mf->value(rkr->efx_Echotron->getpar(13));
-echotron_md->value(rkr->efx_Echotron->getpar(12));
-echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_fb->value(rkr->efx_Echotron->getpar(Echotron_Feedback));
+echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
+echotron_lfotype->value(rkr->efx_Echotron->getpar(Echotron_LFO_Type));
+echotron_width->value(rkr->efx_Echotron->getpar(Echotron_LFO_Width));
+echotron_deep->value(rkr->efx_Echotron->getpar(Echotron_Depth)-64);
+echotron_lrcross->value(rkr->efx_Echotron->getpar(Echotron_LR_Cross)-64);
+echotron_stdf->value(rkr->efx_Echotron->getpar(Echotron_LFO_Stereo));
+echotron_af->value(rkr->efx_Echotron->getpar(Echotron_Filters));
+echotron_mf->value(rkr->efx_Echotron->getpar(Echotron_Mod_Filter));
+echotron_md->value(rkr->efx_Echotron->getpar(Echotron_Mod_Delay));
+echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
 echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
@@ -95,7 +95,7 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
  rgui->getMIDIControl(348);
  return;
 }
-rkr->efx_Echotron->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Echotron->changepar(Echotron_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -106,7 +106,7 @@ rkr->efx_Echotron->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(349);
  return;
 }
-rkr->efx_Echotron->changepar(11,(int)(o->value()+64));}
+rkr->efx_Echotron->changepar(Echotron_Pan,(int)(o->value()+64));}
     xywh {56 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -117,7 +117,7 @@ rkr->efx_Echotron->changepar(11,(int)(o->value()+64));}
  rgui->getMIDIControl(350);
  return;
 }
-rkr->efx_Echotron->changepar(5,(int)o->value());}
+rkr->efx_Echotron->changepar(Echotron_Tempo,(int)o->value());}
     xywh {56 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 600 step 1 value 60 textcolor 7
     class RKR_Slider
   }
@@ -128,7 +128,7 @@ rkr->efx_Echotron->changepar(5,(int)o->value());}
  rgui->getMIDIControl(351);
  return;
 }
-rkr->efx_Echotron->changepar(6,(int)o->value());}
+rkr->efx_Echotron->changepar(Echotron_Damp,(int)o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -139,7 +139,7 @@ rkr->efx_Echotron->changepar(6,(int)o->value());}
  rgui->getMIDIControl(352);
  return;
 }
-rkr->efx_Echotron->changepar(10,(int)o->value());}
+rkr->efx_Echotron->changepar(Echotron_Feedback,(int)o->value());}
     xywh {56 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -150,7 +150,7 @@ rkr->efx_Echotron->changepar(10,(int)o->value());}
  rgui->getMIDIControl(353);
  return;
 }
-rkr->efx_Echotron->changepar(7,(int)(o->value()+64));}
+rkr->efx_Echotron->changepar(Echotron_LR_Cross,(int)(o->value()+64));}
     xywh {56 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -161,7 +161,7 @@ rkr->efx_Echotron->changepar(7,(int)(o->value()+64));}
  rgui->getMIDIControl(354);
  return;
 }
-rkr->efx_Echotron->changepar(2,(int)o->value());}
+rkr->efx_Echotron->changepar(Echotron_LFO_Width,(int)o->value());}
     xywh {56 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -172,7 +172,7 @@ rkr->efx_Echotron->changepar(2,(int)o->value());}
  rgui->getMIDIControl(355);
  return;
 }
-rkr->efx_Echotron->changepar(1,((int)o->value()+64));}
+rkr->efx_Echotron->changepar(Echotron_Depth,((int)o->value()+64));}
     xywh {56 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -183,14 +183,14 @@ rkr->efx_Echotron->changepar(1,((int)o->value()+64));}
  rgui->getMIDIControl(356);
  return;
 }
-rkr->efx_Echotron->changepar(9,(int)o->value());}
+rkr->efx_Echotron->changepar(Echotron_LFO_Stereo,(int)o->value());}
     xywh {56 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button echotron_af {
     label AF
     user_data 2
-    callback {rkr->efx_Echotron->changepar(15,(int)o->value());}
+    callback {rkr->efx_Echotron->changepar(Echotron_Filters,(int)o->value());}
     xywh {2 136 32 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -202,7 +202,7 @@ rkr->efx_Echotron->changepar(9,(int)o->value());}
  return;
 }
 
-rkr->efx_Echotron->changepar(14,(int)o->value());} open
+rkr->efx_Echotron->changepar(Echotron_LFO_Type,(int)o->value());} open
     xywh {88 135 64 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -210,21 +210,21 @@ rkr->efx_Echotron->changepar(14,(int)o->value());} open
   Fl_Check_Button echotron_mf {
     label MF
     user_data 2
-    callback {rkr->efx_Echotron->changepar(13,(int)o->value());}
+    callback {rkr->efx_Echotron->changepar(Echotron_Mod_Filter,(int)o->value());}
     xywh {2 151 33 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button echotron_md {
     label MD
     user_data 2
-    callback {rkr->efx_Echotron->changepar(12,(int)o->value());}
+    callback {rkr->efx_Echotron->changepar(Echotron_Mod_Delay,(int)o->value());}
     xywh {33 151 34 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button echotron_user {
     label User
     user_data 2
-    callback {rkr->efx_Echotron->changepar(4,(int)o->value());
+    callback {rkr->efx_Echotron->changepar(Echotron_User_File,(int)o->value());
 
 if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
     xywh {67 154 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
@@ -244,8 +244,8 @@ if(!rkr->efx_Echotron->setfile(USERFILE))
     fl_alert("Error loading %s file!\\n", filename);
 }
 
-echotron_length->value(rkr->efx_Echotron->getpar(3));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
+echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }
@@ -256,7 +256,7 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
  rgui->getMIDIControl(357);
  return;
 }
-rkr->efx_Echotron->changepar(3,(int)o->value());} selected
+rkr->efx_Echotron->changepar(Echotron_Taps,(int)o->value());}
     xywh {16 167 48 12} type Simple labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
@@ -264,8 +264,8 @@ rkr->efx_Echotron->changepar(3,(int)o->value());} selected
   Fl_Choice echotron_fnum {
     label File
     user_data 12
-    callback {rkr->efx_Echotron->changepar(8,(int)o->value());
-echotron_length->value(rkr->efx_Echotron->getpar(3));
+    callback {rkr->efx_Echotron->changepar(Echotron_Set_File,(int)o->value());
+echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
 echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice

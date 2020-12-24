@@ -32,6 +32,26 @@
 #define  ECHOTRON_F_SIZE   128       //Allow up to 150 points in the file
 #define  ECHOTRON_MAXFILTERS  32      //filters available
 
+enum Echotron_Index
+{
+    Echotron_DryWet = 0,
+    Echotron_Depth,
+    Echotron_LFO_Width,
+    Echotron_Taps,
+    Echotron_User_File,
+    Echotron_Tempo,
+    Echotron_Damp,
+    Echotron_LR_Cross,
+    Echotron_Set_File,
+    Echotron_LFO_Stereo,
+    Echotron_Feedback,
+    Echotron_Pan,
+    Echotron_Mod_Delay,
+    Echotron_Mod_Filter,
+    Echotron_LFO_Type,
+    Echotron_Filters
+};
+
 class DlyFile
 {
 public:

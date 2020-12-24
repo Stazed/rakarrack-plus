@@ -2295,39 +2295,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 348:
-        efx_Echotron->changepar(0, Dry_Wet(value));
+        efx_Echotron->changepar(Echotron_DryWet, Dry_Wet(value));
         break;
 
     case 349:
-        efx_Echotron->changepar(11, value);
+        efx_Echotron->changepar(Echotron_Pan, value);
         break;
 
     case 350:
-        efx_Echotron->changepar(5, ret_Tempo(value));
+        efx_Echotron->changepar(Echotron_Tempo, ret_Tempo(value));
         break;
 
     case 351:
-        efx_Echotron->changepar(6, value);
+        efx_Echotron->changepar(Echotron_Damp, value);
         break;
 
     case 352:
-        efx_Echotron->changepar(10, value);
+        efx_Echotron->changepar(Echotron_Feedback, value);
         break;
 
     case 353:
-        efx_Echotron->changepar(7, value);
+        efx_Echotron->changepar(Echotron_LR_Cross, value);
         break;
 
     case 354:
-        efx_Echotron->changepar(2, value);
+        efx_Echotron->changepar(Echotron_LFO_Width, value);
         break;
 
     case 355:
-        efx_Echotron->changepar(1, value);
+        efx_Echotron->changepar(Echotron_Depth, value);
         break;
 
     case 356:
-        efx_Echotron->changepar(9, value);
+        efx_Echotron->changepar(Echotron_LFO_Stereo, value);
         break;
 
     case 357:
@@ -2341,7 +2341,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         {
             number_taps = efx_Echotron->File.fLength;
         }
-        efx_Echotron->changepar(3, number_taps);
+        efx_Echotron->changepar(Echotron_Taps, number_taps);
         break;
     }
     case 358:
@@ -2757,7 +2757,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 461:
-        efx_Echotron->changepar(14, (int) ((float) value * C_MC_11_RANGE));
+        efx_Echotron->changepar(Echotron_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 462:

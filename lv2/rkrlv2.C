@@ -3876,7 +3876,7 @@ LV2_Handle init_echotronlv2(const LV2_Descriptor* /* descriptor */,double sample
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
     plug->echotron = new Echotron(sample_freq, plug->period_max);
-    plug->echotron->changepar(4,1);//set to user selected files
+    plug->echotron->changepar(Echotron_User_File,1);    // set to user selected files
     
 #ifdef OLDRKRLV2
     plug->dlyfile = new DlyFile;
@@ -3893,9 +3893,6 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3916,72 +3913,89 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->echotron->getpar(i) != val)
+    int val = 0;
+    int param_case_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->echotron->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//1 fliter depth
-    if(plug->echotron->getpar(i) != val)
-    {
-        plug->echotron->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];  //2 width
-    if(plug->echotron->getpar(i) != val)
-    {
-        plug->echotron->changepar(i,val);
-    }
-    i++;
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Echotron_LFO_Width:
+            case Echotron_Tempo:
+            case Echotron_Damp:
+            case Echotron_LFO_Stereo:
+            case Echotron_Feedback:
+            case Echotron_Mod_Delay:
+            case Echotron_Mod_Filter:
+            case Echotron_LFO_Type:
+            case Echotron_Filters:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->echotron->getpar(param_case_offset) != val)
+                {
+                    plug->echotron->changepar(param_case_offset,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Echotron_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->echotron->getpar(Echotron_DryWet) != val)
+                {
+                    plug->echotron->changepar(Echotron_DryWet,val);
+                }
+            }
+            break;
 
-    /* 3 taps - has max of File.fLength.
-       This works even though the file length is set after the taps with presets.
-       Because on the next cycle, the file length will be adjusted after being set,
-       and then the taps get adjusted based on the correct file length. 
-     */
-    val = (int)*plug->param_p[i] > plug->echotron->File.fLength ? plug->echotron->File.fLength: (int)*plug->param_p[i];
-    if(plug->echotron->getpar(i) != val)
-    {
-        plug->echotron->changepar(i,val);
-    }
-    i++;                //skip #4 user select
-    for(; i+1<7; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->echotron->getpar(i+1) != val)
-        {
-            plug->echotron->changepar(i+1,val);
-        }
-    }
-    val = (int)*plug->param_p[i]+64;//7 l/R cross
-    if(plug->echotron->getpar(i+1) != val)
-    {
-        plug->echotron->changepar(i+1,val);
-    }
+            // Offset
+            case Echotron_Depth:
+            case Echotron_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->echotron->getpar(param_case_offset) != val)
+                {
+                    plug->echotron->changepar(param_case_offset,val);
+                }
+            }
+            break;
 
-    for(i++; i+2<11; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->echotron->getpar(i+2) != val)
-        {
-            plug->echotron->changepar(i+2,val);
+            // Adjust file length, Skip user file
+            case Echotron_Taps:
+            {
+                /* 3 taps - has max of File.fLength.
+                This works even though the file length is set after the taps with presets.
+                Because on the next cycle, the file length will be adjusted after being set,
+                and then the taps get adjusted based on the correct file length. */
+                val = (int)*plug->param_p[i] > plug->echotron->File.fLength ? plug->echotron->File.fLength: (int)*plug->param_p[i];
+                if(plug->echotron->getpar(Echotron_Taps) != val)
+                {
+                    plug->echotron->changepar(Echotron_Taps,val);
+                }
+                
+                param_case_offset++;    // skip user file
+            }
+            break;
+            
+            // Offset & skip Set file
+            case Echotron_LR_Cross:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->echotron->getpar(Echotron_LR_Cross) != val)
+                {
+                    plug->echotron->changepar(Echotron_LR_Cross,val);
+                }
+
+                param_case_offset++;    // skip set file
+            }
+            break;
         }
-    }
-    val = (int)*plug->param_p[i]+64;//11 panning
-    if(plug->echotron->getpar(i+2) != val)
-    {
-        plug->echotron->changepar(i+2,val);
-    }
-    for(i++; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->echotron->getpar(i+2) != val)
-        {
-            plug->echotron->changepar(i+2,val);
-        }
+
+        param_case_offset++;
     }
 
     // Set up forge to write directly to notify output port.

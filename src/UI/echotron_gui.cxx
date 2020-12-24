@@ -20,23 +20,23 @@ void EchotronGui::cb_echotron_activar(RKR_Light_Button* o, void* v) {
 void EchotronGui::cb_echotron_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12041))rkr->efx_Echotron->setpreset((int) o->value());
-echotron_pan->value(rkr->efx_Echotron->getpar(11)-64);
-echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(0)));
-echotron_damp->value(rkr->efx_Echotron->getpar(6));
-echotron_fnum->value(rkr->efx_Echotron->getpar(8));
-echotron_user->value(rkr->efx_Echotron->getpar(4));
+echotron_pan->value(rkr->efx_Echotron->getpar(Echotron_Pan)-64);
+echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(Echotron_DryWet)));
+echotron_damp->value(rkr->efx_Echotron->getpar(Echotron_Damp));
+echotron_fnum->value(rkr->efx_Echotron->getpar(Echotron_Set_File));
+echotron_user->value(rkr->efx_Echotron->getpar(Echotron_User_File));
 echotron_user->do_callback();
-echotron_fb->value(rkr->efx_Echotron->getpar(10));
-echotron_tempo->value(rkr->efx_Echotron->getpar(5));
-echotron_lfotype->value(rkr->efx_Echotron->getpar(14));
-echotron_width->value(rkr->efx_Echotron->getpar(2));
-echotron_deep->value(rkr->efx_Echotron->getpar(1)-64);
-echotron_lrcross->value(rkr->efx_Echotron->getpar(7)-64);
-echotron_stdf->value(rkr->efx_Echotron->getpar(9));
-echotron_af->value(rkr->efx_Echotron->getpar(15));
-echotron_mf->value(rkr->efx_Echotron->getpar(13));
-echotron_md->value(rkr->efx_Echotron->getpar(12));
-echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_fb->value(rkr->efx_Echotron->getpar(Echotron_Feedback));
+echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
+echotron_lfotype->value(rkr->efx_Echotron->getpar(Echotron_LFO_Type));
+echotron_width->value(rkr->efx_Echotron->getpar(Echotron_LFO_Width));
+echotron_deep->value(rkr->efx_Echotron->getpar(Echotron_Depth)-64);
+echotron_lrcross->value(rkr->efx_Echotron->getpar(Echotron_LR_Cross)-64);
+echotron_stdf->value(rkr->efx_Echotron->getpar(Echotron_LFO_Stereo));
+echotron_af->value(rkr->efx_Echotron->getpar(Echotron_Filters));
+echotron_mf->value(rkr->efx_Echotron->getpar(Echotron_Mod_Filter));
+echotron_md->value(rkr->efx_Echotron->getpar(Echotron_Mod_Delay));
+echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
 echotron_length->maximum(rkr->efx_Echotron->File.fLength);
 }
 void EchotronGui::cb_echotron_preset(RKR_Choice* o, void* v) {
@@ -59,7 +59,7 @@ void EchotronGui::cb_echotron_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(348);
  return;
 }
-rkr->efx_Echotron->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_Echotron->changepar(Echotron_DryWet,Dry_Wet((int)(o->value())));
 }
 void EchotronGui::cb_echotron_WD(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_WD_i(o,v);
@@ -71,7 +71,7 @@ void EchotronGui::cb_echotron_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(349);
  return;
 }
-rkr->efx_Echotron->changepar(11,(int)(o->value()+64));
+rkr->efx_Echotron->changepar(Echotron_Pan,(int)(o->value()+64));
 }
 void EchotronGui::cb_echotron_pan(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_pan_i(o,v);
@@ -83,7 +83,7 @@ void EchotronGui::cb_echotron_tempo_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(350);
  return;
 }
-rkr->efx_Echotron->changepar(5,(int)o->value());
+rkr->efx_Echotron->changepar(Echotron_Tempo,(int)o->value());
 }
 void EchotronGui::cb_echotron_tempo(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_tempo_i(o,v);
@@ -95,7 +95,7 @@ void EchotronGui::cb_echotron_damp_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(351);
  return;
 }
-rkr->efx_Echotron->changepar(6,(int)o->value());
+rkr->efx_Echotron->changepar(Echotron_Damp,(int)o->value());
 }
 void EchotronGui::cb_echotron_damp(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_damp_i(o,v);
@@ -107,7 +107,7 @@ void EchotronGui::cb_echotron_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(352);
  return;
 }
-rkr->efx_Echotron->changepar(10,(int)o->value());
+rkr->efx_Echotron->changepar(Echotron_Feedback,(int)o->value());
 }
 void EchotronGui::cb_echotron_fb(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_fb_i(o,v);
@@ -119,7 +119,7 @@ void EchotronGui::cb_echotron_lrcross_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(353);
  return;
 }
-rkr->efx_Echotron->changepar(7,(int)(o->value()+64));
+rkr->efx_Echotron->changepar(Echotron_LR_Cross,(int)(o->value()+64));
 }
 void EchotronGui::cb_echotron_lrcross(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_lrcross_i(o,v);
@@ -131,7 +131,7 @@ void EchotronGui::cb_echotron_width_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(354);
  return;
 }
-rkr->efx_Echotron->changepar(2,(int)o->value());
+rkr->efx_Echotron->changepar(Echotron_LFO_Width,(int)o->value());
 }
 void EchotronGui::cb_echotron_width(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_width_i(o,v);
@@ -143,7 +143,7 @@ void EchotronGui::cb_echotron_deep_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(355);
  return;
 }
-rkr->efx_Echotron->changepar(1,((int)o->value()+64));
+rkr->efx_Echotron->changepar(Echotron_Depth,((int)o->value()+64));
 }
 void EchotronGui::cb_echotron_deep(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_deep_i(o,v);
@@ -155,14 +155,14 @@ void EchotronGui::cb_echotron_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(356);
  return;
 }
-rkr->efx_Echotron->changepar(9,(int)o->value());
+rkr->efx_Echotron->changepar(Echotron_LFO_Stereo,(int)o->value());
 }
 void EchotronGui::cb_echotron_stdf(RKR_Slider* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_stdf_i(o,v);
 }
 
 void EchotronGui::cb_echotron_af_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Echotron->changepar(15,(int)o->value());
+  rkr->efx_Echotron->changepar(Echotron_Filters,(int)o->value());
 }
 void EchotronGui::cb_echotron_af(RKR_Check_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_af_i(o,v);
@@ -175,28 +175,28 @@ void EchotronGui::cb_echotron_lfotype_i(RKR_Choice* o, void*) {
  return;
 }
 
-rkr->efx_Echotron->changepar(14,(int)o->value());
+rkr->efx_Echotron->changepar(Echotron_LFO_Type,(int)o->value());
 }
 void EchotronGui::cb_echotron_lfotype(RKR_Choice* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_lfotype_i(o,v);
 }
 
 void EchotronGui::cb_echotron_mf_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Echotron->changepar(13,(int)o->value());
+  rkr->efx_Echotron->changepar(Echotron_Mod_Filter,(int)o->value());
 }
 void EchotronGui::cb_echotron_mf(RKR_Check_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_mf_i(o,v);
 }
 
 void EchotronGui::cb_echotron_md_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Echotron->changepar(12,(int)o->value());
+  rkr->efx_Echotron->changepar(Echotron_Mod_Delay,(int)o->value());
 }
 void EchotronGui::cb_echotron_md(RKR_Check_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_md_i(o,v);
 }
 
 void EchotronGui::cb_echotron_user_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Echotron->changepar(4,(int)o->value());
+  rkr->efx_Echotron->changepar(Echotron_User_File,(int)o->value());
 
 if((int)o->value())B_ech->activate(); else B_ech->deactivate();
 }
@@ -216,7 +216,7 @@ if(!rkr->efx_Echotron->setfile(USERFILE))
     fl_alert("Error loading %s file!\n", filename);
 }
 
-echotron_length->value(rkr->efx_Echotron->getpar(3));
+echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
 echotron_length->maximum(rkr->efx_Echotron->File.fLength);
 }
 void EchotronGui::cb_B_ech(RKR_Button* o, void* v) {
@@ -229,15 +229,15 @@ void EchotronGui::cb_echotron_length_i(RKR_Counter* o, void*) {
  rgui->getMIDIControl(357);
  return;
 }
-rkr->efx_Echotron->changepar(3,(int)o->value());
+rkr->efx_Echotron->changepar(Echotron_Taps,(int)o->value());
 }
 void EchotronGui::cb_echotron_length(RKR_Counter* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_length_i(o,v);
 }
 
 void EchotronGui::cb_echotron_fnum_i(RKR_Choice* o, void*) {
-  rkr->efx_Echotron->changepar(8,(int)o->value());
-echotron_length->value(rkr->efx_Echotron->getpar(3));
+  rkr->efx_Echotron->changepar(Echotron_Set_File,(int)o->value());
+echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
 echotron_length->maximum(rkr->efx_Echotron->File.fLength);
 }
 void EchotronGui::cb_echotron_fnum(RKR_Choice* o, void* v) {
