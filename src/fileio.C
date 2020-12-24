@@ -768,13 +768,13 @@ void RKR::getbuf(char *buf, int j)
     case 22:
         //Exciter
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Exciter->getpar(0), efx_Exciter->getpar(1),
-                efx_Exciter->getpar(2), efx_Exciter->getpar(3),
-                efx_Exciter->getpar(4), efx_Exciter->getpar(5),
-                efx_Exciter->getpar(6), efx_Exciter->getpar(7),
-                efx_Exciter->getpar(8), efx_Exciter->getpar(9),
-                efx_Exciter->getpar(10), efx_Exciter->getpar(11),
-                efx_Exciter->getpar(12), Exciter_Bypass);
+                efx_Exciter->getpar(Exciter_Gain), efx_Exciter->getpar(Exciter_Harm_1),
+                efx_Exciter->getpar(Exciter_Harm_2), efx_Exciter->getpar(Exciter_Harm_3),
+                efx_Exciter->getpar(Exciter_Harm_4), efx_Exciter->getpar(Exciter_Harm_5),
+                efx_Exciter->getpar(Exciter_Harm_6), efx_Exciter->getpar(Exciter_Harm_7),
+                efx_Exciter->getpar(Exciter_Harm_8), efx_Exciter->getpar(Exciter_Harm_9),
+                efx_Exciter->getpar(Exciter_Harm_10), efx_Exciter->getpar(Exciter_LPF),
+                efx_Exciter->getpar(Exciter_HPF), Exciter_Bypass);
         break;
 
     case 23:

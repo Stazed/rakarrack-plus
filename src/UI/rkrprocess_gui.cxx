@@ -3836,55 +3836,55 @@ void RKRGUI::ActMIDI()
                 RING->ring_squ->redraw();
                 break;
             case 189:
-                EXCITER->ex_Gain->value(rkr->efx_Exciter->getpar(0));
+                EXCITER->ex_Gain->value(rkr->efx_Exciter->getpar(Exciter_Gain));
                 EXCITER->ex_Gain->redraw();
                 break;
             case 190:
-                EXCITER->ex_hfreq->value(rkr->efx_Exciter->getpar(11));
-                EXCITER->ex_hfreq->redraw();
-                break;
-            case 191:
-                EXCITER->ex_lfreq->value(rkr->efx_Exciter->getpar(12));
+                EXCITER->ex_lfreq->value(rkr->efx_Exciter->getpar(Exciter_LPF));
                 EXCITER->ex_lfreq->redraw();
                 break;
+            case 191:
+                EXCITER->ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));
+                EXCITER->ex_hfreq->redraw();
+                break;
             case 192:
-                EXCITER->ex_1->value(rkr->efx_Exciter->getpar(1));
+                EXCITER->ex_1->value(rkr->efx_Exciter->getpar(Exciter_Harm_1));
                 EXCITER->ex_1->redraw();
                 break;
             case 193:
-                EXCITER->ex_2->value(rkr->efx_Exciter->getpar(2));
+                EXCITER->ex_2->value(rkr->efx_Exciter->getpar(Exciter_Harm_2));
                 EXCITER->ex_2->redraw();
                 break;
             case 194:
-                EXCITER->ex_3->value(rkr->efx_Exciter->getpar(3));
+                EXCITER->ex_3->value(rkr->efx_Exciter->getpar(Exciter_Harm_3));
                 EXCITER->ex_3->redraw();
                 break;
             case 195:
-                EXCITER->ex_4->value(rkr->efx_Exciter->getpar(4));
+                EXCITER->ex_4->value(rkr->efx_Exciter->getpar(Exciter_Harm_4));
                 EXCITER->ex_4->redraw();
                 break;
             case 196:
-                EXCITER->ex_5->value(rkr->efx_Exciter->getpar(5));
+                EXCITER->ex_5->value(rkr->efx_Exciter->getpar(Exciter_Harm_5));
                 EXCITER->ex_5->redraw();
                 break;
             case 197:
-                EXCITER->ex_6->value(rkr->efx_Exciter->getpar(6));
+                EXCITER->ex_6->value(rkr->efx_Exciter->getpar(Exciter_Harm_6));
                 EXCITER->ex_6->redraw();
                 break;
             case 198:
-                EXCITER->ex_7->value(rkr->efx_Exciter->getpar(7));
+                EXCITER->ex_7->value(rkr->efx_Exciter->getpar(Exciter_Harm_7));
                 EXCITER->ex_7->redraw();
                 break;
             case 199:
-                EXCITER->ex_8->value(rkr->efx_Exciter->getpar(8));
+                EXCITER->ex_8->value(rkr->efx_Exciter->getpar(Exciter_Harm_8));
                 EXCITER->ex_8->redraw();
                 break;
             case 200:
-                EXCITER->ex_9->value(rkr->efx_Exciter->getpar(9));
+                EXCITER->ex_9->value(rkr->efx_Exciter->getpar(Exciter_Harm_9));
                 EXCITER->ex_9->redraw();
                 break;
             case 201:
-                EXCITER->ex_10->value(rkr->efx_Exciter->getpar(10));
+                EXCITER->ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
                 EXCITER->ex_10->redraw();
                 break;
             case 202:

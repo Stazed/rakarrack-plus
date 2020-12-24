@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -36,19 +36,19 @@ rgui->findpos(22,(int)o->value(),o);}
     user_data 12022
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12022))rkr->efx_Exciter->setpreset((int) o->value());
-ex_Gain->value(rkr->efx_Exciter->getpar(0));
-ex_1->value(rkr->efx_Exciter->getpar(1));
-ex_2->value(rkr->efx_Exciter->getpar(2));
-ex_3->value(rkr->efx_Exciter->getpar(3));
-ex_4->value(rkr->efx_Exciter->getpar(4));
-ex_5->value(rkr->efx_Exciter->getpar(5));
-ex_6->value(rkr->efx_Exciter->getpar(6));
-ex_7->value(rkr->efx_Exciter->getpar(7));
-ex_8->value(rkr->efx_Exciter->getpar(8));
-ex_9->value(rkr->efx_Exciter->getpar(9));
-ex_10->value(rkr->efx_Exciter->getpar(10));
-ex_lfreq->value(rkr->efx_Exciter->getpar(11));
-ex_hfreq->value(rkr->efx_Exciter->getpar(12));} selected
+ex_Gain->value(rkr->efx_Exciter->getpar(Exciter_Gain));
+ex_1->value(rkr->efx_Exciter->getpar(Exciter_Harm_1));
+ex_2->value(rkr->efx_Exciter->getpar(Exciter_Harm_2));
+ex_3->value(rkr->efx_Exciter->getpar(Exciter_Harm_3));
+ex_4->value(rkr->efx_Exciter->getpar(Exciter_Harm_4));
+ex_5->value(rkr->efx_Exciter->getpar(Exciter_Harm_5));
+ex_6->value(rkr->efx_Exciter->getpar(Exciter_Harm_6));
+ex_7->value(rkr->efx_Exciter->getpar(Exciter_Harm_7));
+ex_8->value(rkr->efx_Exciter->getpar(Exciter_Harm_8));
+ex_9->value(rkr->efx_Exciter->getpar(Exciter_Harm_9));
+ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
+ex_lfreq->value(rkr->efx_Exciter->getpar(Exciter_LPF));
+ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -80,7 +80,7 @@ ex_hfreq->value(rkr->efx_Exciter->getpar(12));} selected
  rgui->getMIDIControl(189);
  return;
 } 
-rkr->efx_Exciter->changepar(0,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Gain,(int)o->value());}
     xywh {53 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -91,7 +91,7 @@ rkr->efx_Exciter->changepar(0,(int)o->value());}
  rgui->getMIDIControl(190);
  return;
 } 
-rkr->efx_Exciter->changepar(11,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_LPF,(int)o->value());}
     xywh {53 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -102,7 +102,7 @@ rkr->efx_Exciter->changepar(11,(int)o->value());}
  rgui->getMIDIControl(191);
  return;
 } 
-rkr->efx_Exciter->changepar(12,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_HPF,(int)o->value());}
     xywh {53 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -113,7 +113,7 @@ rkr->efx_Exciter->changepar(12,(int)o->value());}
  rgui->getMIDIControl(192);
  return;
 } 
-rkr->efx_Exciter->changepar(1,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_1,(int)o->value());}
     xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -124,7 +124,7 @@ rkr->efx_Exciter->changepar(1,(int)o->value());}
  rgui->getMIDIControl(193);
  return;
 } 
-rkr->efx_Exciter->changepar(2,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_2,(int)o->value());}
     xywh {53 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -135,7 +135,7 @@ rkr->efx_Exciter->changepar(2,(int)o->value());}
  rgui->getMIDIControl(194);
  return;
 } 
-rkr->efx_Exciter->changepar(3,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_3,(int)o->value());}
     xywh {53 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -146,7 +146,7 @@ rkr->efx_Exciter->changepar(3,(int)o->value());}
  rgui->getMIDIControl(195);
  return;
 } 
-rkr->efx_Exciter->changepar(4,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_4,(int)o->value());}
     xywh {53 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -157,7 +157,7 @@ rkr->efx_Exciter->changepar(4,(int)o->value());}
  rgui->getMIDIControl(196);
  return;
 } 
-rkr->efx_Exciter->changepar(5,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_5,(int)o->value());}
     xywh {53 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -168,7 +168,7 @@ rkr->efx_Exciter->changepar(5,(int)o->value());}
  rgui->getMIDIControl(197);
  return;
 } 
-rkr->efx_Exciter->changepar(6,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_6,(int)o->value());}
     xywh {53 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -179,7 +179,7 @@ rkr->efx_Exciter->changepar(6,(int)o->value());}
  rgui->getMIDIControl(198);
  return;
 } 
-rkr->efx_Exciter->changepar(7,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_7,(int)o->value());}
     xywh {53 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -190,7 +190,7 @@ rkr->efx_Exciter->changepar(7,(int)o->value());}
  rgui->getMIDIControl(199);
  return;
 } 
-rkr->efx_Exciter->changepar(8,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_8,(int)o->value());}
     xywh {53 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -201,7 +201,7 @@ rkr->efx_Exciter->changepar(8,(int)o->value());}
  rgui->getMIDIControl(200);
  return;
 } 
-rkr->efx_Exciter->changepar(9,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_9,(int)o->value());}
     xywh {53 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -212,7 +212,7 @@ rkr->efx_Exciter->changepar(9,(int)o->value());}
  rgui->getMIDIControl(201);
  return;
 } 
-rkr->efx_Exciter->changepar(10,(int)o->value());}
+rkr->efx_Exciter->changepar(Exciter_Harm_10,(int)o->value());}
     xywh {53 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }

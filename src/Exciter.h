@@ -24,6 +24,22 @@
 
 #include "HarmonicEnhancer.h"
 
+enum Exciter_index
+{
+    Exciter_Gain = 0,
+    Exciter_Harm_1,
+    Exciter_Harm_2,
+    Exciter_Harm_3,
+    Exciter_Harm_4,
+    Exciter_Harm_5,
+    Exciter_Harm_6,
+    Exciter_Harm_7,
+    Exciter_Harm_8,
+    Exciter_Harm_9,
+    Exciter_Harm_10,
+    Exciter_LPF,
+    Exciter_HPF
+};
 
 class Exciter
 {

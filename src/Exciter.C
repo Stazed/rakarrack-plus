@@ -157,43 +157,43 @@ Exciter::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Exciter_Gain:
         setvolume(value);
         break;
-    case 1:
+    case Exciter_Harm_1:
         sethar(0, value);
         break;
-    case 2:
+    case Exciter_Harm_2:
         sethar(1, value);
         break;
-    case 3:
+    case Exciter_Harm_3:
         sethar(2, value);
         break;
-    case 4:
+    case Exciter_Harm_4:
         sethar(3, value);
         break;
-    case 5:
+    case Exciter_Harm_5:
         sethar(4, value);
         break;
-    case 6:
+    case Exciter_Harm_6:
         sethar(5, value);
         break;
-    case 7:
+    case Exciter_Harm_7:
         sethar(6, value);
         break;
-    case 8:
+    case Exciter_Harm_8:
         sethar(7, value);
         break;
-    case 9:
+    case Exciter_Harm_9:
         sethar(8, value);
         break;
-    case 10:
+    case Exciter_Harm_10:
         sethar(9, value);
         break;
-    case 11:
+    case Exciter_LPF:
         setlpf(value);
         break;
-    case 12:
+    case Exciter_HPF:
         sethpf(value);
         break;
     }
@@ -204,43 +204,43 @@ Exciter::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Exciter_Gain:
         return (Pvolume);
         break;
-    case 1:
+    case Exciter_Harm_1:
         return (Prm[0]);
         break;
-    case 2:
+    case Exciter_Harm_2:
         return (Prm[1]);
         break;
-    case 3:
+    case Exciter_Harm_3:
         return (Prm[2]);
         break;
-    case 4:
+    case Exciter_Harm_4:
         return (Prm[3]);
         break;
-    case 5:
+    case Exciter_Harm_5:
         return (Prm[4]);
         break;
-    case 6:
+    case Exciter_Harm_6:
         return (Prm[5]);
         break;
-    case 7:
+    case Exciter_Harm_7:
         return (Prm[6]);
         break;
-    case 8:
+    case Exciter_Harm_8:
         return (Prm[7]);
         break;
-    case 9:
+    case Exciter_Harm_9:
         return (Prm[8]);
         break;
-    case 10:
+    case Exciter_Harm_10:
         return (Prm[9]);
         break;
-    case 11:
+    case Exciter_LPF:
         return (lpffreq);
         break;
-    case 12:
+    case Exciter_HPF:
         return (hpffreq);
         break;
     }

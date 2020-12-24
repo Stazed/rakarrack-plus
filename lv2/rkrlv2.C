@@ -1150,9 +1150,6 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1172,13 +1169,35 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->exciter->getpar(i) != val)
+        switch(i)
         {
-            plug->exciter->changepar(i,val);
+            // Normal processing
+            case Exciter_Gain:
+            case Exciter_Harm_1:
+            case Exciter_Harm_2:
+            case Exciter_Harm_3:
+            case Exciter_Harm_4:
+            case Exciter_Harm_5:
+            case Exciter_Harm_6:
+            case Exciter_Harm_7:
+            case Exciter_Harm_8:
+            case Exciter_Harm_9:
+            case Exciter_Harm_10:
+            case Exciter_LPF:
+            case Exciter_HPF:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->exciter->getpar(i) != val)
+                {
+                    plug->exciter->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 
