@@ -135,101 +135,6 @@ Gate::sethpf(int value)
 }
 
 void
-Gate::changepar(int npar, int value)
-{
-    switch (npar)
-    {
-    case 1:
-        Pthreshold = value;
-        t_level = dB2rap((float) Pthreshold);
-        break;
-    case 2:
-        Prange = value;
-        cut = dB2rap((float) Prange);
-        break;
-    case 3:
-        Pattack = value;
-        a_rate = 1000.0f / ((float) Pattack * fs);
-        break;
-    case 4:
-        Pdecay = value;
-        d_rate = 1000.0f / ((float) Pdecay * fs);
-        break;
-    case 5:
-        setlpf(value);
-        break;
-    case 6:
-        sethpf(value);
-        break;
-    case 7:
-        Phold = value;
-        hold = (float) Phold;
-        break;
-    }
-}
-
-int
-Gate::getpar(int np)
-{
-    switch (np)
-    {
-    case 1:
-        return (Pthreshold);
-        break;
-    case 2:
-        return (Prange);
-        break;
-    case 3:
-        return (Pattack);
-        break;
-    case 4:
-        return (Pdecay);
-        break;
-    case 5:
-        return (Plpf);
-        break;
-    case 6:
-        return (Phpf);
-        break;
-    case 7:
-        return (Phold);
-        break;
-    }
-
-    return (0);
-}
-
-void
-Gate::setpreset(int npreset)
-{
-    const int PRESET_SIZE = 7;
-    const int NUM_PRESETS = 3;
-    int pdata[MAX_PDATA_SIZE];
-    int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //0
-        {0, 0, 1, 2, 6703, 76, 2},
-        //-10
-        {0, -10, 1, 2, 6703, 76, 2},
-        //-20
-        {0, -20, 1, 2, 6703, 76, 2}
-    };
-
-    if (npreset > NUM_PRESETS - 1)
-    {
-
-        Fpre->ReadPreset(16, npreset - NUM_PRESETS + 1, pdata);
-        
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n + 1, pdata[n]);
-    }
-    else
-    {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n + 1, presets[npreset][n]);
-    }
-}
-
-void
 Gate::out(float *efxoutl, float *efxoutr)
 {
     lpfl->filterout(efxoutl, PERIOD);
@@ -298,4 +203,99 @@ Gate::out(float *efxoutl, float *efxoutr)
         efxoutl[i] *= (cut * (1.0f - gate) + gate);
         efxoutr[i] *= (cut * (1.0f - gate) + gate);
     }
+}
+
+void
+Gate::setpreset(int npreset)
+{
+    const int PRESET_SIZE = 7;
+    const int NUM_PRESETS = 3;
+    int pdata[MAX_PDATA_SIZE];
+    int presets[NUM_PRESETS][PRESET_SIZE] = {
+        //0
+        {0, 0, 1, 2, 6703, 76, 2},
+        //-10
+        {0, -10, 1, 2, 6703, 76, 2},
+        //-20
+        {0, -20, 1, 2, 6703, 76, 2}
+    };
+
+    if (npreset > NUM_PRESETS - 1)
+    {
+
+        Fpre->ReadPreset(16, npreset - NUM_PRESETS + 1, pdata);
+        
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n + 1, pdata[n]);
+    }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n + 1, presets[npreset][n]);
+    }
+}
+
+void
+Gate::changepar(int npar, int value)
+{
+    switch (npar)
+    {
+    case 1:
+        Pthreshold = value;
+        t_level = dB2rap((float) Pthreshold);
+        break;
+    case 2:
+        Prange = value;
+        cut = dB2rap((float) Prange);
+        break;
+    case 3:
+        Pattack = value;
+        a_rate = 1000.0f / ((float) Pattack * fs);
+        break;
+    case 4:
+        Pdecay = value;
+        d_rate = 1000.0f / ((float) Pdecay * fs);
+        break;
+    case 5:
+        setlpf(value);
+        break;
+    case 6:
+        sethpf(value);
+        break;
+    case 7:
+        Phold = value;
+        hold = (float) Phold;
+        break;
+    }
+}
+
+int
+Gate::getpar(int npar)
+{
+    switch (npar)
+    {
+    case 1:
+        return (Pthreshold);
+        break;
+    case 2:
+        return (Prange);
+        break;
+    case 3:
+        return (Pattack);
+        break;
+    case 4:
+        return (Pdecay);
+        break;
+    case 5:
+        return (Plpf);
+        break;
+    case 6:
+        return (Phpf);
+        break;
+    case 7:
+        return (Phold);
+        break;
+    }
+
+    return (0);
 }

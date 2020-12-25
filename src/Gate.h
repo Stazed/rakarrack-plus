@@ -41,9 +41,9 @@ public:
     ~Gate ();
 
     void out (float *efxoutl, float *efxoutr);
-
-    void changepar (int npar, int value);
     void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
     void cleanup ();
 
 #ifdef LV2_SUPPORT
@@ -52,20 +52,18 @@ public:
     
     void initialize();
     void clear_initialize();
-    int getpar (int npar);
 
+private:
     // Compressor
 
-    int Pthreshold;		// attack time  (ms)
-    int Pattack;			// release time (ms)
+    int Pthreshold;	// attack time  (ms)
+    int Pattack;        // release time (ms)
     int Ohold;
     int Pdecay;
     int Prange;
     int Plpf;
     int Phpf;
     int Phold;
-
-private:
 
     void setlpf (int Plpf);
     void sethpf (int Phpf);
