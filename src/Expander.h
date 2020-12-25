@@ -35,7 +35,7 @@
 
 enum Expander_Index
 {
-    Expander_Threshold = 1,     // 1 indexed !!!
+    Expander_Threshold = 0,
     Expander_Shape,
     Expander_Attack,
     Expander_Release,

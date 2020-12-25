@@ -198,12 +198,12 @@ Expander::setpreset(int npreset)
         Fpre->ReadPreset(25, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n + 1, pdata[n]);
+            changepar(n, pdata[n]);
     }
     else
     {
         for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n + 1, presets[npreset][n]);
+            changepar(n, presets[npreset][n]);
     }
 }
 

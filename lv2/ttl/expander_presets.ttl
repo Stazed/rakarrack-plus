@@ -41,7 +41,7 @@
 	rdfs:label "Boost Gate" ;
         lv2:port [
                 lv2:symbol "THRESHOLD" ;
-		pset:value -50.0
+		pset:value -55.0
         ], [
                 lv2:symbol "SHAPE" ;
 		pset:value 30.0

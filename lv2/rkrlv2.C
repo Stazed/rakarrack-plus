@@ -2529,10 +2529,9 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
 
     //check and set changed parameters
     int val = 0;
-    int param_case_offset = 1;  // 1 indexed
     for(int i = 0; i < plug->nparams; i++)
     {
-        switch(param_case_offset)
+        switch(i)
         {
             // Normal processing
             case Expander_Threshold:
@@ -2544,15 +2543,13 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
             case Expander_Gain:
             {
                 val = (int)*plug->param_p[i];
-                if(plug->expand->getpar(param_case_offset) != val)
+                if(plug->expand->getpar(i) != val)
                 {
-                    plug->expand->changepar(param_case_offset,val);
+                    plug->expand->changepar(i,val);
                 }
             }
             break;
         }
-        
-        param_case_offset++;
     }
 
     //now run
