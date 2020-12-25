@@ -2507,9 +2507,6 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2529,14 +2526,33 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    int param_case_offset = 1;  // 1 indexed
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->expand->getpar(i+1) != val)//this effect is 1 indexed
+        switch(param_case_offset)
         {
-            plug->expand->changepar(i+1,val);
+            // Normal processing
+            case Expander_Threshold:
+            case Expander_Shape:
+            case Expander_Attack:
+            case Expander_Release:
+            case Expander_LPF:
+            case Expander_HPF:
+            case Expander_Gain:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->expand->getpar(param_case_offset) != val)
+                {
+                    plug->expand->changepar(param_case_offset,val);
+                }
+            }
+            break;
         }
+        
+        param_case_offset++;
     }
 
     //now run

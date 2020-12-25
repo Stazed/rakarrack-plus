@@ -1753,31 +1753,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 220:
-        efx_Expander->changepar(3, 1 + (int) ((float) value * C_MC_4999_RANGE));
+        efx_Expander->changepar(Expander_Attack, 1 + (int) ((float) value * C_MC_4999_RANGE));
         break;
 
     case 221:
-        efx_Expander->changepar(4, 10 + (int) ((float) value * C_MC_990_RANGE));
+        efx_Expander->changepar(Expander_Release, 10 + (int) ((float) value * C_MC_990_RANGE));
         break;
 
     case 222:
-        efx_Expander->changepar(2, 1 + (int) ((float) value * C_MC_49_RANGE));
+        efx_Expander->changepar(Expander_Shape, 1 + (int) ((float) value * C_MC_49_RANGE));
         break;
 
     case 223:
-        efx_Expander->changepar(1, (int) ((float) value * -C_MC_80_RANGE));
+        efx_Expander->changepar(Expander_Threshold, (int) ((float) value * -C_MC_80_RANGE));
         break;
 
     case 224:
-        efx_Expander->changepar(7, 1 + (int) ((float) value * C_MC_126_RANGE));
+        efx_Expander->changepar(Expander_Gain, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 225:
-        efx_Expander->changepar(5, ret_LPF(value));
+        efx_Expander->changepar(Expander_LPF, ret_LPF(value));
         break;
 
     case 226:
-        efx_Expander->changepar(6, ret_HPF(value));
+        efx_Expander->changepar(Expander_HPF, ret_HPF(value));
         break;
 
     case 227:

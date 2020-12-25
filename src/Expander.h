@@ -33,6 +33,17 @@
 
 #include "AnalogFilter.h"
 
+enum Expander_Index
+{
+    Expander_Threshold = 1,     // 1 indexed !!!
+    Expander_Shape,
+    Expander_Attack,
+    Expander_Release,
+    Expander_LPF,
+    Expander_HPF,
+    Expander_Gain
+};
+
 class Expander
 {
 
@@ -43,7 +54,7 @@ public:
 
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
-    void changepar (int np, int value);
+    void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
 

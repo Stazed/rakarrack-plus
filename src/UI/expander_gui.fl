@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -34,13 +34,13 @@ rgui->findpos(25,(int)o->value(),o);}
     user_data 12025
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12025))rkr->efx_Expander->setpreset((int) o->value());
-expander_ATime->value(rkr->efx_Expander->getpar(3));
-expander_RTime->value(rkr->efx_Expander->getpar(4));
-expander_shape->value(rkr->efx_Expander->getpar(2));
-expander_threshold->value(rkr->efx_Expander->getpar(1));
-expander_HPF->value(rkr->efx_Expander->getpar(6));
-expander_LPF->value(rkr->efx_Expander->getpar(5));
-expander_level->value(rkr->efx_Expander->getpar(7));} selected
+expander_ATime->value(rkr->efx_Expander->getpar(Expander_Attack));
+expander_RTime->value(rkr->efx_Expander->getpar(Expander_Release));
+expander_shape->value(rkr->efx_Expander->getpar(Expander_Shape));
+expander_threshold->value(rkr->efx_Expander->getpar(Expander_Threshold));
+expander_HPF->value(rkr->efx_Expander->getpar(Expander_HPF));
+expander_LPF->value(rkr->efx_Expander->getpar(Expander_LPF));
+expander_level->value(rkr->efx_Expander->getpar(Expander_Gain));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -68,7 +68,7 @@ expander_level->value(rkr->efx_Expander->getpar(7));} selected
  rgui->getMIDIControl(220);
  return;
 } 
-rkr->efx_Expander->changepar(3,(int)o->value());}
+rkr->efx_Expander->changepar(Expander_Attack,(int)o->value());}
     xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 5000 step 1 value 10 textcolor 7
     class RKR_Slider
   }
@@ -79,7 +79,7 @@ rkr->efx_Expander->changepar(3,(int)o->value());}
  rgui->getMIDIControl(221);
  return;
 } 
-rkr->efx_Expander->changepar(4,(int) o->value());}
+rkr->efx_Expander->changepar(Expander_Release,(int) o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 1000 step 1 value 500 textcolor 7
     class RKR_Slider
   }
@@ -90,7 +90,7 @@ rkr->efx_Expander->changepar(4,(int) o->value());}
  rgui->getMIDIControl(222);
  return;
 } 
-rkr->efx_Expander->changepar(2, (int) o->value());}
+rkr->efx_Expander->changepar(Expander_Shape, (int) o->value());}
     xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 50 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -101,7 +101,7 @@ rkr->efx_Expander->changepar(2, (int) o->value());}
  rgui->getMIDIControl(223);
  return;
 } 
-rkr->efx_Expander->changepar(1, (int)o->value());}
+rkr->efx_Expander->changepar(Expander_Threshold, (int)o->value());}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -80 maximum 0 step 1 textcolor 7
     class RKR_Slider
   }
@@ -112,7 +112,7 @@ rkr->efx_Expander->changepar(1, (int)o->value());}
  rgui->getMIDIControl(224);
  return;
 } 
-rkr->efx_Expander->changepar(7, (int) o->value());}
+rkr->efx_Expander->changepar(Expander_Gain, (int) o->value());} selected
     xywh {56 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -123,7 +123,7 @@ rkr->efx_Expander->changepar(7, (int) o->value());}
  rgui->getMIDIControl(225);
  return;
 } 
-rkr->efx_Expander->changepar(5, (int)o->value());}
+rkr->efx_Expander->changepar(Expander_LPF, (int)o->value());}
     xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -134,7 +134,7 @@ rkr->efx_Expander->changepar(5, (int)o->value());}
  rgui->getMIDIControl(226);
  return;
 } 
-rkr->efx_Expander->changepar(6, (int)o->value());}
+rkr->efx_Expander->changepar(Expander_HPF, (int)o->value());}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

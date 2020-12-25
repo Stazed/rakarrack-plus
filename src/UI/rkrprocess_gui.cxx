@@ -3960,31 +3960,31 @@ void RKRGUI::ActMIDI()
                 ARPIE->arpie_damp->redraw();
                 break;
             case 220:
-                EXPANDER->expander_ATime->value(rkr->efx_Expander->getpar(3));
+                EXPANDER->expander_ATime->value(rkr->efx_Expander->getpar(Expander_Attack));
                 EXPANDER->expander_ATime->redraw();
                 break;
             case 221:
-                EXPANDER->expander_RTime->value(rkr->efx_Expander->getpar(4));
+                EXPANDER->expander_RTime->value(rkr->efx_Expander->getpar(Expander_Release));
                 EXPANDER->expander_RTime->redraw();
                 break;
             case 222:
-                EXPANDER->expander_shape->value(rkr->efx_Expander->getpar(2));
+                EXPANDER->expander_shape->value(rkr->efx_Expander->getpar(Expander_Shape));
                 EXPANDER->expander_shape->redraw();
                 break;
             case 223:
-                EXPANDER->expander_threshold->value(rkr->efx_Expander->getpar(1));
+                EXPANDER->expander_threshold->value(rkr->efx_Expander->getpar(Expander_Threshold));
                 EXPANDER->expander_threshold->redraw();
                 break;
             case 224:
-                EXPANDER->expander_level->value(rkr->efx_Expander->getpar(7));
+                EXPANDER->expander_level->value(rkr->efx_Expander->getpar(Expander_Gain));
                 EXPANDER->expander_level->redraw();
                 break;
             case 225:
-                EXPANDER->expander_LPF->value(rkr->efx_Expander->getpar(5));
+                EXPANDER->expander_LPF->value(rkr->efx_Expander->getpar(Expander_LPF));
                 EXPANDER->expander_LPF->redraw();
                 break;
             case 226:
-                EXPANDER->expander_HPF->value(rkr->efx_Expander->getpar(6));
+                EXPANDER->expander_HPF->value(rkr->efx_Expander->getpar(Expander_HPF));
                 EXPANDER->expander_HPF->redraw();
                 break;
             case 227:

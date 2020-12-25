@@ -804,10 +804,10 @@ void RKR::getbuf(char *buf, int j)
     case 25:
         //Expander
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Expander->getpar(1), efx_Expander->getpar(2),
-                efx_Expander->getpar(3), efx_Expander->getpar(4),
-                efx_Expander->getpar(5), efx_Expander->getpar(6),
-                efx_Expander->getpar(7), Expander_Bypass);
+                efx_Expander->getpar(Expander_Threshold), efx_Expander->getpar(Expander_Shape),
+                efx_Expander->getpar(Expander_Attack), efx_Expander->getpar(Expander_Release),
+                efx_Expander->getpar(Expander_LPF), efx_Expander->getpar(Expander_HPF),
+                efx_Expander->getpar(Expander_Gain), Expander_Bypass);
         break;
 
     case 26:

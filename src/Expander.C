@@ -208,35 +208,35 @@ Expander::setpreset(int npreset)
 }
 
 void
-Expander::changepar(int np, int value)
+Expander::changepar(int npar, int value)
 {
-    switch (np)
+    switch (npar)
     {
-    case 1:
+    case Expander_Threshold:
         Pthreshold = value;
         tfactor = dB2rap(-((float) Pthreshold));
         tlevel = 1.0f / tfactor;
         break;
-    case 2:
+    case Expander_Shape:
         Pshape = value;
         sfactor = dB2rap((float) Pshape / 2);
         sgain = expf(-sfactor);
         break;
-    case 3:
+    case Expander_Attack:
         Pattack = value;
         a_rate = 1000.0f / ((float) Pattack * fs);
         break;
-    case 4:
+    case Expander_Release:
         Pdecay = value;
         d_rate = 1000.0f / ((float) Pdecay * fs);
         break;
-    case 5:
+    case Expander_LPF:
         setlpf(value);
         break;
-    case 6:
+    case Expander_HPF:
         sethpf(value);
         break;
-    case 7: // Out Gain
+    case Expander_Gain: // Out Gain
         Plevel = value;
         level = dB2rap((float) value / 6.0f);
         break;
@@ -244,29 +244,29 @@ Expander::changepar(int np, int value)
 }
 
 int
-Expander::getpar(int np)
+Expander::getpar(int npar)
 {
-    switch (np)
+    switch (npar)
     {
-    case 1:
+    case Expander_Threshold:
         return (Pthreshold);
         break;
-    case 2:
+    case Expander_Shape:
         return (Pshape);
         break;
-    case 3:
+    case Expander_Attack:
         return (Pattack);
         break;
-    case 4:
+    case Expander_Release:
         return (Pdecay);
         break;
-    case 5:
+    case Expander_LPF:
         return (Plpf);
         break;
-    case 6:
+    case Expander_HPF:
         return (Phpf);
         break;
-    case 7:
+    case Expander_Gain:
         return (Plevel);
         break;
     }
