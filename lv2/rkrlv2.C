@@ -4960,10 +4960,9 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
 
     //check and set changed parameters
     int val = 0;
-    int parameter_case_offset = 1;  // 1 indexed
     for(int i = 0; i < plug->nparams; i++)
     {
-        switch(parameter_case_offset)
+        switch(i)
         {
             // Normal processing
             case Gate_Threshold:
@@ -4975,15 +4974,13 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
             case Gate_Hold:
             {
                 val = (int)*plug->param_p[i];
-                if(plug->gate->getpar(parameter_case_offset) != val)
+                if(plug->gate->getpar(i) != val)
                 {
-                    plug->gate->changepar(parameter_case_offset,val);
+                    plug->gate->changepar(i,val);
                 }
             }
             break;
         }
-        
-        parameter_case_offset++;
     }
 
     //now run

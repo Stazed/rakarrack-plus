@@ -34,7 +34,7 @@
 
 enum Gate_Index
 {
-    Gate_Threshold = 1, // 1 indexed!!!
+    Gate_Threshold = 0,
     Gate_Range,
     Gate_Attack,
     Gate_Release,
