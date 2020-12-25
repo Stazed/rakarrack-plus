@@ -32,6 +32,17 @@
 
 #include "AnalogFilter.h"
 
+enum Gate_Index
+{
+    Gate_Threshold = 1, // 1 indexed!!!
+    Gate_Range,
+    Gate_Attack,
+    Gate_Release,
+    Gate_LPF,
+    Gate_HPF,
+    Gate_Hold
+};
+
 class Gate
 {
 

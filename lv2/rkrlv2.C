@@ -4938,9 +4938,6 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -4960,14 +4957,33 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    int parameter_case_offset = 1;  // 1 indexed
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->gate->getpar(i+1) != val)//this effect is 1 indexed
+        switch(parameter_case_offset)
         {
-            plug->gate->changepar(i+1,val);
+            // Normal processing
+            case Gate_Threshold:
+            case Gate_Range:
+            case Gate_Attack:
+            case Gate_Release:
+            case Gate_LPF:
+            case Gate_HPF:
+            case Gate_Hold:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->gate->getpar(parameter_case_offset) != val)
+                {
+                    plug->gate->changepar(parameter_case_offset,val);
+                }
+            }
+            break;
         }
+        
+        parameter_case_offset++;
     }
 
     //now run

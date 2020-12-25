@@ -240,29 +240,29 @@ Gate::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 1:
+    case Gate_Threshold:
         Pthreshold = value;
         t_level = dB2rap((float) Pthreshold);
         break;
-    case 2:
+    case Gate_Range:
         Prange = value;
         cut = dB2rap((float) Prange);
         break;
-    case 3:
+    case Gate_Attack:
         Pattack = value;
         a_rate = 1000.0f / ((float) Pattack * fs);
         break;
-    case 4:
+    case Gate_Release:
         Pdecay = value;
         d_rate = 1000.0f / ((float) Pdecay * fs);
         break;
-    case 5:
+    case Gate_LPF:
         setlpf(value);
         break;
-    case 6:
+    case Gate_HPF:
         sethpf(value);
         break;
-    case 7:
+    case Gate_Hold:
         Phold = value;
         hold = (float) Phold;
         break;
@@ -274,25 +274,25 @@ Gate::getpar(int npar)
 {
     switch (npar)
     {
-    case 1:
+    case Gate_Threshold:
         return (Pthreshold);
         break;
-    case 2:
+    case Gate_Range:
         return (Prange);
         break;
-    case 3:
+    case Gate_Attack:
         return (Pattack);
         break;
-    case 4:
+    case Gate_Release:
         return (Pdecay);
         break;
-    case 5:
+    case Gate_LPF:
         return (Plpf);
         break;
-    case 6:
+    case Gate_HPF:
         return (Phpf);
         break;
-    case 7:
+    case Gate_Hold:
         return (Phold);
         break;
     }

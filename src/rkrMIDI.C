@@ -2629,31 +2629,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 429:
-        efx_Gate->changepar(3, 1 + (int) ((float) value * C_MC_249_RANGE));
+        efx_Gate->changepar(Gate_Attack, 1 + (int) ((float) value * C_MC_249_RANGE));
         break;
 
     case 430:
-        efx_Gate->changepar(4, 2 + (int) ((float) value * C_MC_248_RANGE));
+        efx_Gate->changepar(Gate_Release, 2 + (int) ((float) value * C_MC_248_RANGE));
         break;
 
     case 431:
-        efx_Gate->changepar(2, -90 + (int) ((float) value * C_MC_90_RANGE));
+        efx_Gate->changepar(Gate_Range, -90 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
     case 432:
-        efx_Gate->changepar(1, -70 + (int) ((float) value * C_MC_90_RANGE));
+        efx_Gate->changepar(Gate_Threshold, -70 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
     case 433:
-        efx_Gate->changepar(7, 2 + (int) ((float) value * C_MC_498_RANGE));
+        efx_Gate->changepar(Gate_Hold, 2 + (int) ((float) value * C_MC_498_RANGE));
         break;
 
     case 434:
-        efx_Gate->changepar(5, ret_LPF(value));
+        efx_Gate->changepar(Gate_LPF, ret_LPF(value));
         break;
 
     case 435:
-        efx_Gate->changepar(6, ret_HPF(value));
+        efx_Gate->changepar(Gate_HPF, ret_HPF(value));
         break;
 
     case 436:

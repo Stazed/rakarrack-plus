@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -34,13 +34,13 @@ rgui->findpos(16,(int)o->value(),o);}
     user_data 12016
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12016))rkr->efx_Gate->setpreset((int) o->value());
-gate_ATime->value(rkr->efx_Gate->getpar(3));
-gate_RTime->value(rkr->efx_Gate->getpar(4));
-gate_range->value(rkr->efx_Gate->getpar(2));
-gate_threshold->value(rkr->efx_Gate->getpar(1));
-gate_hold->value(rkr->efx_Gate->getpar(7));
-gate_HPF->value(rkr->efx_Gate->getpar(6));
-gate_LPF->value(rkr->efx_Gate->getpar(5));} selected
+gate_ATime->value(rkr->efx_Gate->getpar(Gate_Attack));
+gate_RTime->value(rkr->efx_Gate->getpar(Gate_Release));
+gate_range->value(rkr->efx_Gate->getpar(Gate_Range));
+gate_threshold->value(rkr->efx_Gate->getpar(Gate_Threshold));
+gate_hold->value(rkr->efx_Gate->getpar(Gate_Hold));
+gate_HPF->value(rkr->efx_Gate->getpar(Gate_HPF));
+gate_LPF->value(rkr->efx_Gate->getpar(Gate_LPF));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -64,7 +64,7 @@ gate_LPF->value(rkr->efx_Gate->getpar(5));} selected
  rgui->getMIDIControl(429);
  return;
 }
-rkr->efx_Gate->changepar(3,(int)o->value());}
+rkr->efx_Gate->changepar(Gate_Attack,(int)o->value());}
     tooltip {Attack Time} xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 250 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -75,7 +75,7 @@ rkr->efx_Gate->changepar(3,(int)o->value());}
  rgui->getMIDIControl(430);
  return;
 }
-rkr->efx_Gate->changepar(4, (int) o->value());}
+rkr->efx_Gate->changepar(Gate_Release, (int) o->value());}
     tooltip {Release Time} xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 250 step 1 value 120 textcolor 7
     class RKR_Slider
   }
@@ -86,7 +86,7 @@ rkr->efx_Gate->changepar(4, (int) o->value());}
  rgui->getMIDIControl(431);
  return;
 }
-rkr->efx_Gate->changepar(2, (int) o->value());}
+rkr->efx_Gate->changepar(Gate_Range, (int) o->value());}
     xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -90 maximum 0 step 1 textcolor 7
     class RKR_Slider
   }
@@ -97,7 +97,7 @@ rkr->efx_Gate->changepar(2, (int) o->value());}
  rgui->getMIDIControl(432);
  return;
 }
-rkr->efx_Gate->changepar(1, (int)o->value());}
+rkr->efx_Gate->changepar(Gate_Threshold, (int)o->value());}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
     class RKR_Slider
   }
@@ -108,7 +108,7 @@ rkr->efx_Gate->changepar(1, (int)o->value());}
  rgui->getMIDIControl(433);
  return;
 }
-rkr->efx_Gate->changepar(7,(int)o->value());}
+rkr->efx_Gate->changepar(Gate_Hold,(int)o->value());} selected
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 500 step 1 textcolor 7
     class RKR_Slider
   }
@@ -119,7 +119,7 @@ rkr->efx_Gate->changepar(7,(int)o->value());}
  rgui->getMIDIControl(434);
  return;
 }
-rkr->efx_Gate->changepar(5, (int)o->value());}
+rkr->efx_Gate->changepar(Gate_LPF, (int)o->value());}
     xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -130,7 +130,7 @@ rkr->efx_Gate->changepar(5, (int)o->value());}
  rgui->getMIDIControl(435);
  return;
 }
-rkr->efx_Gate->changepar(6, (int)o->value());}
+rkr->efx_Gate->changepar(Gate_HPF, (int)o->value());}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

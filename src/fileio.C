@@ -698,10 +698,10 @@ void RKR::getbuf(char *buf, int j)
     case 16:
         //NoiseGate
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Gate->getpar(1), efx_Gate->getpar(2),
-                efx_Gate->getpar(3), efx_Gate->getpar(4),
-                efx_Gate->getpar(5), efx_Gate->getpar(6),
-                efx_Gate->getpar(7), Gate_Bypass);
+                efx_Gate->getpar(Gate_Threshold), efx_Gate->getpar(Gate_Range),
+                efx_Gate->getpar(Gate_Attack), efx_Gate->getpar(Gate_Release),
+                efx_Gate->getpar(Gate_LPF), efx_Gate->getpar(Gate_HPF),
+                efx_Gate->getpar(Gate_Hold), Gate_Bypass);
         break;
 
     case 17:
