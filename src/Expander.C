@@ -132,6 +132,82 @@ Expander::sethpf(int value)
 }
 
 void
+Expander::out(float *efxoutl, float *efxoutr)
+{
+    lpfl->filterout(efxoutl, PERIOD);
+    hpfl->filterout(efxoutl, PERIOD);
+    lpfr->filterout(efxoutr, PERIOD);
+    hpfr->filterout(efxoutr, PERIOD);
+
+    for (unsigned i = 0; i < PERIOD; i++)
+    {
+        float delta = 0.5f * (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) - env; //envelope follower from Compressor.C
+        
+        if (delta > 0.0)
+        {
+            env += a_rate * delta;
+        }
+        else
+        {
+            env += d_rate * delta;
+        }
+
+        //End envelope power detection
+
+        if (env > tlevel)
+            env = tlevel;
+        
+        float expenv = sgain * (expf(env * sfactor * tfactor) - 1.0f); //Envelope waveshaping
+
+        gain = (1.0f - d_rate) * oldgain + d_rate * expenv;
+        oldgain = gain; //smooth it out a little bit
+
+        if (efollower)
+        {
+            efxoutl[i] = gain;
+            efxoutr[i] += gain;
+        }
+        else
+        {
+            efxoutl[i] *= gain*level;
+            efxoutr[i] *= gain*level;
+        }
+    }
+}
+
+void
+Expander::setpreset(int npreset)
+{
+    const int PRESET_SIZE = 7;
+    const int NUM_PRESETS = 4;
+    int pdata[MAX_PDATA_SIZE];
+    int presets[NUM_PRESETS][PRESET_SIZE] = {
+
+        //Noise Gate
+        {-50, 20, 50, 50, 3134, 76, 1},
+        //Boost Gate
+        {-55, 30, 50, 50, 1441, 157, 50},
+        //Treble swell
+        {-30, 9, 950, 25, 6703, 526, 90},
+        //Another
+        {-30, 2, 20, 120, 3134, 76, 10}
+    };
+
+    if (npreset > NUM_PRESETS - 1)
+    {
+        Fpre->ReadPreset(25, npreset - NUM_PRESETS + 1, pdata);
+        
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n + 1, pdata[n]);
+    }
+    else
+    {
+        for (int n = 0; n < PRESET_SIZE; n++)
+            changepar(n + 1, presets[npreset][n]);
+    }
+}
+
+void
 Expander::changepar(int np, int value)
 {
     switch (np)
@@ -196,80 +272,4 @@ Expander::getpar(int np)
     }
 
     return (0);
-}
-
-void
-Expander::setpreset(int npreset)
-{
-    const int PRESET_SIZE = 7;
-    const int NUM_PRESETS = 4;
-    int pdata[MAX_PDATA_SIZE];
-    int presets[NUM_PRESETS][PRESET_SIZE] = {
-
-        //Noise Gate
-        {-50, 20, 50, 50, 3134, 76, 1},
-        //Boost Gate
-        {-55, 30, 50, 50, 1441, 157, 50},
-        //Treble swell
-        {-30, 9, 950, 25, 6703, 526, 90},
-        //Another
-        {-30, 2, 20, 120, 3134, 76, 10}
-    };
-
-    if (npreset > NUM_PRESETS - 1)
-    {
-        Fpre->ReadPreset(25, npreset - NUM_PRESETS + 1, pdata);
-        
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n + 1, pdata[n]);
-    }
-    else
-    {
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n + 1, presets[npreset][n]);
-    }
-}
-
-void
-Expander::out(float *efxoutl, float *efxoutr)
-{
-    lpfl->filterout(efxoutl, PERIOD);
-    hpfl->filterout(efxoutl, PERIOD);
-    lpfr->filterout(efxoutr, PERIOD);
-    hpfr->filterout(efxoutr, PERIOD);
-
-    for (unsigned i = 0; i < PERIOD; i++)
-    {
-        float delta = 0.5f * (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) - env; //envelope follower from Compressor.C
-        
-        if (delta > 0.0)
-        {
-            env += a_rate * delta;
-        }
-        else
-        {
-            env += d_rate * delta;
-        }
-
-        //End envelope power detection
-
-        if (env > tlevel)
-            env = tlevel;
-        
-        float expenv = sgain * (expf(env * sfactor * tfactor) - 1.0f); //Envelope waveshaping
-
-        gain = (1.0f - d_rate) * oldgain + d_rate * expenv;
-        oldgain = gain; //smooth it out a little bit
-
-        if (efollower)
-        {
-            efxoutl[i] = gain;
-            efxoutr[i] += gain;
-        }
-        else
-        {
-            efxoutl[i] *= gain*level;
-            efxoutr[i] *= gain*level;
-        }
-    }
 }

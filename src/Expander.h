@@ -42,9 +42,9 @@ public:
     ~Expander ();
 
     void out (float * efxoutl, float * efxoutr);
-
-    void changepar (int np, int value);
     void setpreset (int npreset);
+    void changepar (int np, int value);
+    int getpar (int npar);
     void cleanup ();
 
 #ifdef LV2_SUPPORT
@@ -53,8 +53,8 @@ public:
     
     void initialize();
     void clear_initialize();
-    int getpar (int npar);
 
+private:
     // Compressor
 
     int Pthreshold;		// Threshold, -80 to 0dB
@@ -69,8 +69,6 @@ public:
     // for filter modulation, etc. Then efxoutr is signal + envelope for things such as dynamic distortion.
     // Variable efollower is set to 0 by default in constructor.  Do not set this mode unless using this object
     // to control a parameter with signal dynamics.
-
-private:
 
     void setlpf (int Plpf);
     void sethpf (int Phpf);
