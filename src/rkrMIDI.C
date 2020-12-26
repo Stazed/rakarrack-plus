@@ -1002,14 +1002,14 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 26:
-        efx_Har->changepar(4, ret_LPF(value));
+        efx_Har->changepar(Harm_Filter_Freq, ret_LPF(value));
         break;
 
     case 27:
         if (Harmonizer_Bypass)
         {
             Harmonizer_Bypass = 0;
-            efx_Har->changepar(3, (int) ((float) value * C_MC_24_RANGE));
+            efx_Har->changepar(Harm_Interval, (int) ((float) value * C_MC_24_RANGE));
             Harmonizer_Bypass = 1;
         }
         break;
@@ -1027,7 +1027,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 31:
-        efx_Har->changepar(0, Dry_Wet(value));
+        efx_Har->changepar(Harm_DryWet, Dry_Wet(value));
         break;
 
     case 52:
@@ -1075,7 +1075,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 49:
-        efx_Har->changepar(1, value);
+        efx_Har->changepar(Harm_Pan, value);
         break;
 
     case 50:
@@ -2561,15 +2561,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
         
     case 412:
-        efx_Har->changepar(2, value);
+        efx_Har->changepar(Harm_Gain, value);
         break;
 
     case 413:
-        efx_Har->changepar(8, value);
+        efx_Har->changepar(Harm_Filter_Gain, value);
         break;
 
     case 414:
-        efx_Har->changepar(9, value);
+        efx_Har->changepar(Harm_Filter_Q, value);
         break;
 
     case 415:
@@ -2689,11 +2689,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 444:
-        efx_Har->changepar(6, (int) ((float) value * C_MC_23_RANGE));
+        efx_Har->changepar(Harm_Note, (int) ((float) value * C_MC_23_RANGE));
         break;
 
     case 445:
-        efx_Har->changepar(7, (int) ((float) value * C_MC_33_RANGE));
+        efx_Har->changepar(Harm_Chord, (int) ((float) value * C_MC_33_RANGE));
         break;
 
     case 446:
@@ -2701,7 +2701,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 447:
-        efx_Har->changepar(5, value);
+        efx_Har->changepar(Harm_Select, value);
         break;
 
     case 448:

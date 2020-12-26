@@ -3186,9 +3186,9 @@ void SettingsWindowGui::update_harmonizer_quality() {
   m_rkr->Harmonizer_Bypass = hold_bypass;
   
   /* Reset user select */
-  if(m_rkr->efx_Har->getpar(5))
+  if(m_rkr->efx_Har->getpar(Harm_Select))
   {
-      m_rkr->efx_Har->changepar(5, m_rkr->efx_Har->getpar(5));
+      m_rkr->efx_Har->changepar(Harm_Select, m_rkr->efx_Har->getpar(Harm_Select));
       m_rkr->RC_Harm->cleanup();
       m_rgui->Chord(0);
   }

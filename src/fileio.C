@@ -675,12 +675,12 @@ void RKR::getbuf(char *buf, int j)
     case 14:
         //Harmonizer
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Har->getpar(0), efx_Har->getpar(1),
-                efx_Har->getpar(2), efx_Har->getpar(3),
-                efx_Har->getpar(4), efx_Har->getpar(5),
-                efx_Har->getpar(6), efx_Har->getpar(7),
-                efx_Har->getpar(8), efx_Har->getpar(9),
-                efx_Har->getpar(10), Harmonizer_Bypass);
+                efx_Har->getpar(Harm_DryWet), efx_Har->getpar(Harm_Pan),
+                efx_Har->getpar(Harm_Gain), efx_Har->getpar(Harm_Interval),
+                efx_Har->getpar(Harm_Filter_Freq), efx_Har->getpar(Harm_Select),
+                efx_Har->getpar(Harm_Note), efx_Har->getpar(Harm_Chord),
+                efx_Har->getpar(Harm_Filter_Gain), efx_Har->getpar(Harm_Filter_Q),
+                efx_Har->getpar(Harm_MIDI), Harmonizer_Bypass);
         break;
 
     case 15:

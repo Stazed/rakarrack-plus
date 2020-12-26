@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {374 295 530 580} type Double
+  xywh {1266 445 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
+      user_data 1 selected
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -1576,8 +1576,7 @@ m_rgui->Scan_Bank_Dir();}
             p->redraw();
             break;
         }
-    }} {selected
-    }
+    }} {}
   }
   Function {mtfillvalue(int num,int value)} {} {
     code {// fill settings scroll midi table
@@ -1627,7 +1626,7 @@ usleep(C_MILLISECONDS_50);
 m_rkr->efx_Convol->reset_parameters(save_state);
 
 /* Check for user file and re-load if present */
-if(m_rkr->efx_Convol->getpar(4))
+if(m_rkr->efx_Convol->getpar(Convo_User_File))
 {
     strcpy(m_rkr->efx_Convol->Filename,filename.c_str());
     if(!m_rkr->efx_Convol->setfile(USERFILE))
@@ -1676,7 +1675,7 @@ if(m_rkr->efx_Reverbtron->getpar(4))
 /* Turn processing back on */
 m_rkr->quality_update = false;} {}
   }
-  Function {update_harmonizer_quality()} {return_type void
+  Function {update_harmonizer_quality()} {open return_type void
   } {
     code {/* shut off all processing */
 m_rkr->quality_update = true;
@@ -1707,9 +1706,9 @@ m_rkr->quality_update = false;
 m_rkr->Harmonizer_Bypass = hold_bypass;
 
 /* Reset user select */
-if(m_rkr->efx_Har->getpar(5))
+if(m_rkr->efx_Har->getpar(Harm_Select))
 {
-    m_rkr->efx_Har->changepar(5, m_rkr->efx_Har->getpar(5));
+    m_rkr->efx_Har->changepar(Harm_Select, m_rkr->efx_Har->getpar(Harm_Select));
     m_rkr->RC_Harm->cleanup();
     m_rgui->Chord(0);
 }} {}

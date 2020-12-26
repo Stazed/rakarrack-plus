@@ -32,6 +32,20 @@
 #include "Resample.h"
 
 #define HARM_PRESET_SIZE 11
+enum Harm_Index
+{
+    Harm_DryWet = 0,
+    Harm_Pan,
+    Harm_Gain,
+    Harm_Interval,
+    Harm_Filter_Freq,
+    Harm_Select,
+    Harm_Note,
+    Harm_Chord,
+    Harm_Filter_Gain,
+    Harm_Filter_Q,
+    Harm_MIDI
+};
 
 class Harmonizer
 {

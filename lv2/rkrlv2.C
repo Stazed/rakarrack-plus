@@ -943,7 +943,7 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 10;
+    plug->nparams = (HARM_PRESET_SIZE - 1); // -1 for Harm_MIDI - since this is no MIDI
     plug->effectindex = IHARM_NM;
     plug->prev_bypass = 1;
 
@@ -982,9 +982,6 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1001,8 +998,10 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->prev_bypass)
     {
         plug->harm->cleanup();
-        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
-        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
+        // update parameters after cleanup - interval
+        plug->harm->changepar(Harm_Interval,plug->harm->getpar(Harm_Interval));
+        //mark chord has changed to update parameters after cleanup
+        plug->chordID->cc = 1;
     }
  
     /* adjust for possible variable nframes */
@@ -1015,69 +1014,94 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->harm->getpar(i) != val)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->harm->changepar(i,val);
-    }
-    for(i++; i<3; i++) //1-2
-    {
-        val = (int)*plug->param_p[i] + 64;
-        if(plug->harm->getpar(i) != val)
+        switch(i)
         {
-            plug->harm->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] + 12;// 3 interval
-    if(plug->harm->getpar(i) != val)
-    {
-        plug->harm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//4 filter freq
-    if(plug->harm->getpar(i) != val)
-    {
-        plug->harm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//5 select mode
-    if(plug->harm->getpar(i) != val)
-    {
-        plug->harm->changepar(i,val);
-        plug->chordID->cleanup();
-        if(!val) plug->harm->changepar(3,plug->harm->getpar(3)); // Reset interval
+            // Normal processing
+            case Harm_Filter_Freq:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                }
+            }
+            break;
+            
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Harm_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->harm->getpar(Harm_DryWet) != val)
+                {
+                    plug->harm->changepar(Harm_DryWet,val);
+                }
+            }
+            break;
 
-        plug->chordID->cc = 1;//mark chord has changed to update parameters after cleanup
-    }
-    for(i++; i<8; i++) //6-7
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->harm->getpar(i) != val)
-        {
-            plug->harm->changepar(i,val);
-        //    plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
-        //    plug->chordID->fundi = plug->harm->getpar(6);//set root note
-            plug->chordID->cc = 1;//mark chord has changed
-        }
-    }
-    for(; i<10; i++) // 8-9
-    {
-        val = (int)*plug->param_p[i] + 64;
-        if(plug->harm->getpar(i) != val)
-        {
-            plug->harm->changepar(i,val);
-        }
-    }
 
-// midi mode, not implementing midi here
-//    val = (int)*plug->param_p[i];// 10 midi mode
-//    if(plug->aphase->getpar(i) != val)
-//    {
-//        plug->aphase->changepar(i,val);
-//        if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
-//    }
+            // Offset 64
+            case Harm_Pan:
+            case Harm_Gain:
+            case Harm_Filter_Gain:
+            case Harm_Filter_Q:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                }
+            }
+            break;
+
+            // Offset 12
+            case Harm_Interval:
+            {
+                val = (int)*plug->param_p[i] + 12;  // offset
+                if(plug->harm->getpar(Harm_Interval) != val)
+                {
+                    plug->harm->changepar(Harm_Interval,val);
+                }
+            }
+            break;
+            
+            // Select Mode
+            case Harm_Select:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                    plug->chordID->cleanup();
+                    if(!val) plug->harm->changepar(Harm_Interval,plug->harm->getpar(Harm_Interval)); // Reset 
+
+                    plug->chordID->cc = 1;  // mark chord changed to update after cleanup
+                }
+            }
+            break;
+
+            // Note and Chord
+            case Harm_Note:
+            case Harm_Chord:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                //    plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
+                //    plug->chordID->fundi = plug->harm->getpar(6);//set root note
+                    plug->chordID->cc = 1;  // mark chord has changed
+                }
+            }
+            break;
+        }
+    }
 
 /*
 see Chord() in rkr.fl
@@ -1097,7 +1121,7 @@ see process.C ln 1507
                     if(plug->noteID->afreq > 0.0)
                     {
                         plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
-                        plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+                        plug->harm->r_ratio = plug->chordID->r__ratio[0];   // pass the found ratio
                         plug->noteID->last = plug->noteID->reconota;
                     }
                 }
@@ -1110,10 +1134,10 @@ see process.C ln 1507
         if (plug->chordID->cc) 
         {
             plug->chordID->cc = 0;
-            plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
-            plug->chordID->fundi = plug->harm->getpar(6);//set root note
+            plug->chordID->ctipo = plug->harm->getpar(Harm_Chord);  // set chord type
+            plug->chordID->fundi = plug->harm->getpar(Harm_Note);   // set root note
             plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
-            plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+            plug->harm->r_ratio = plug->chordID->r__ratio[0];       // pass the found ratio
         }
         plug->comp->out(plug->output_l_p,plug->output_r_p);
     }
@@ -5623,7 +5647,7 @@ LV2_Handle init_harmonizerlv2(const LV2_Descriptor* /* descriptor */,double samp
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = HARM_PRESET_SIZE;
     plug->effectindex = IHARM;
     plug->prev_bypass = 1;
 
@@ -5662,9 +5686,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
+
     int bypass = 0;
 
     RKRLV2* plug = (RKRLV2*)handle;
@@ -5682,8 +5704,10 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->prev_bypass)
     {
         plug->harm->cleanup();
-        plug->harm->changepar(3,plug->harm->getpar(3)); // update parameters after cleanup - interval
-        plug->chordID->cc = 1; //mark chord has changed to update parameters after cleanup
+        // update parameters after cleanup - interval
+        plug->harm->changepar(Harm_Interval,plug->harm->getpar(Harm_Interval));
+        //mark chord has changed to update parameters after cleanup
+        plug->chordID->cc = 1;
         bypass = 1;
     }
  
@@ -5697,7 +5721,7 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // Process incoming MIDI messages 
-    if(plug->harm->getpar(10))
+    if(plug->harm->getpar(Harm_MIDI))
     {
         // Get the capacity
         const uint32_t out_capacity = plug->atom_out_p->atom.size;
@@ -5759,69 +5783,106 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     }
 
     // we are good to run now
+
     //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->harm->getpar(i) != val)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->harm->changepar(i,val);
-    }
-    for(i++; i<3; i++) //1-2
-    {
-        val = (int)*plug->param_p[i] + 64;
-        if(plug->harm->getpar(i) != val)
+        switch(i)
         {
-            plug->harm->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] + 12;// 3 interval
-    if(plug->harm->getpar(i) != val)
-    {
-        plug->harm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//4 filter freq
-    if(plug->harm->getpar(i) != val)
-    {
-        plug->harm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//5 select mode
-    if(plug->harm->getpar(i) != val)
-    {
-        plug->harm->changepar(i,val);
-        plug->chordID->cleanup();
-        if(!val) plug->harm->changepar(3,plug->harm->getpar(3)); // Reset interval
+            // Normal processing
+            case Harm_Filter_Freq:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                }
+            }
+            break;
+            
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Harm_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->harm->getpar(Harm_DryWet) != val)
+                {
+                    plug->harm->changepar(Harm_DryWet,val);
+                }
+            }
+            break;
 
-        plug->chordID->cc = 1;//mark chord has changed to update parameters after cleanup
-    }
-    for(i++; i<8; i++) //6-7
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->harm->getpar(i) != val)
-        {
-            plug->harm->changepar(i,val);
-        //    plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
-        //    plug->chordID->fundi = plug->harm->getpar(6);//set root note
-            plug->chordID->cc = 1;//mark chord has changed
-        }
-    }
-    for(; i<10; i++) // 8-9
-    {
-        val = (int)*plug->param_p[i] + 64;
-        if(plug->harm->getpar(i) != val)
-        {
-            plug->harm->changepar(i,val);
-        }
-    }
 
-    // midi mode
-    val = (int)*plug->param_p[i];// 10 midi mode
-    if(plug->harm->getpar(i) != val)
-    {
-        plug->harm->changepar(i,val);
-        plug->chordID->cleanup();
-        plug->chordID->cc = 1;  //mark chord has changed to update parameters after cleanup
+            // Offset 64
+            case Harm_Pan:
+            case Harm_Gain:
+            case Harm_Filter_Gain:
+            case Harm_Filter_Q:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                }
+            }
+            break;
+
+            // Offset 12
+            case Harm_Interval:
+            {
+                val = (int)*plug->param_p[i] + 12;  // offset
+                if(plug->harm->getpar(Harm_Interval) != val)
+                {
+                    plug->harm->changepar(Harm_Interval,val);
+                }
+            }
+            break;
+            
+            // Select Mode
+            case Harm_Select:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                    plug->chordID->cleanup();
+                    if(!val) plug->harm->changepar(Harm_Interval,plug->harm->getpar(Harm_Interval)); // Reset 
+
+                    plug->chordID->cc = 1;  // mark chord changed to update after cleanup
+                }
+            }
+            break;
+
+            // Note and Chord
+            case Harm_Note:
+            case Harm_Chord:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                //    plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
+                //    plug->chordID->fundi = plug->harm->getpar(6);//set root note
+                    plug->chordID->cc = 1;  // mark chord has changed
+                }
+            }
+            break;
+
+            // MIDI mode
+            case Harm_MIDI:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->harm->getpar(i) != val)
+                {
+                    plug->harm->changepar(i,val);
+                    plug->chordID->cleanup();
+                    plug->chordID->cc = 1;  // mark chord changed to update after cleanup
+                }
+            }
+            break;
+        }
     }
 
 /*
@@ -5842,7 +5903,7 @@ see process.C ln 1507
                     if(plug->noteID->afreq > 0.0)
                     {
                         plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
-                        plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+                        plug->harm->r_ratio = plug->chordID->r__ratio[0];   // pass the found ratio
                         plug->noteID->last = plug->noteID->reconota;
                     }
                 }
@@ -5859,11 +5920,11 @@ see process.C ln 1507
             if(plug->harm->PSELECT || bypass)
             {
                 bypass = 0;
-                plug->chordID->ctipo = plug->harm->getpar(7);//set chord type
-                plug->chordID->fundi = plug->harm->getpar(6);//set root note
+                plug->chordID->ctipo = plug->harm->getpar(Harm_Chord);  // set chord type
+                plug->chordID->fundi = plug->harm->getpar(Harm_Note);   // set root note
             }
             plug->chordID->Vamos(0,plug->harm->Pinterval - 12,plug->noteID->reconota);
-            plug->harm->r_ratio = plug->chordID->r__ratio[0];//pass the found ratio
+            plug->harm->r_ratio = plug->chordID->r__ratio[0];           // pass the found ratio
         }
         plug->comp->out(plug->output_l_p,plug->output_r_p);
     }

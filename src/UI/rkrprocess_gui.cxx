@@ -3138,8 +3138,8 @@ void RKRGUI::Chord(int eff)
     switch (eff)
     {
         case 0:
-            tipo = rkr->efx_Har->getpar(7);
-            undi = rkr->efx_Har->getpar(6);
+            tipo = rkr->efx_Har->getpar(Harm_Chord);
+            undi = rkr->efx_Har->getpar(Harm_Note);
             break;
         case 1:
             tipo = rkr->efx_StereoHarm->getpar(9);
@@ -3225,11 +3225,11 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_gain2->redraw();
                 break;
             case 26:
-                HAR->har_freq1->value(rkr->efx_Har->getpar(4));
+                HAR->har_freq1->value(rkr->efx_Har->getpar(Harm_Filter_Freq));
                 HAR->har_freq1->redraw();
                 break;
             case 27:
-                HAR->har_int->value(rkr->efx_Har->getpar(3) - 12);
+                HAR->har_int->value(rkr->efx_Har->getpar(Harm_Interval) - 12);
                 HAR->har_int->redraw();
                 break;
             case 28:
@@ -3245,7 +3245,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_WD->redraw();
                 break;
             case 31:
-                HAR->har_WD->value(Dry_Wet(rkr->efx_Har->getpar(0)));
+                HAR->har_WD->value(Dry_Wet(rkr->efx_Har->getpar(Harm_DryWet)));
                 HAR->har_WD->redraw();
                 break;
             case 52:
@@ -3293,7 +3293,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_pan->redraw();
                 break;
             case 49:
-                HAR->har_pan->value(rkr->efx_Har->getpar(1) - 64);
+                HAR->har_pan->value(rkr->efx_Har->getpar(Harm_Pan) - 64);
                 HAR->har_pan->redraw();
                 break;
             case 50:
@@ -4740,15 +4740,15 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_delay->redraw();
                 break;
             case 412:
-                HAR->har_gan->value(rkr->efx_Har->getpar(2) - 64);
+                HAR->har_gan->value(rkr->efx_Har->getpar(Harm_Gain) - 64);
                 HAR->har_gan->redraw();
                 break;
             case 413:
-                HAR->har_gan1->value(rkr->efx_Har->getpar(8) - 64);
+                HAR->har_gan1->value(rkr->efx_Har->getpar(Harm_Filter_Gain) - 64);
                 HAR->har_gan1->redraw();
                 break;
             case 414:
-                HAR->har_q1->value(rkr->efx_Har->getpar(9) - 64);
+                HAR->har_q1->value(rkr->efx_Har->getpar(Harm_Filter_Q) - 64);
                 HAR->har_q1->redraw();
                 break;
             case 415:
@@ -4868,12 +4868,12 @@ void RKRGUI::ActMIDI()
                 REVERBTRON->revtron_LPF->redraw();
                 break;
             case 444:
-                HAR->har_note->value(rkr->efx_Har->getpar(6));
+                HAR->har_note->value(rkr->efx_Har->getpar(Harm_Note));
                 HAR->har_note->redraw();
                 Chord(0);   // update gui
                 break;
             case 445:
-                HAR->har_type->value(rkr->efx_Har->getpar(7));
+                HAR->har_type->value(rkr->efx_Har->getpar(Harm_Chord));
                 HAR->har_type->redraw();
                 Chord(0);   // update gui
                 break;
@@ -4882,7 +4882,7 @@ void RKRGUI::ActMIDI()
                 SYNTHFILTER->synthfilter_rand->redraw();
                 break;
             case 447:
-                HAR->har_SELECT->value(rkr->efx_Har->getpar(5));
+                HAR->har_SELECT->value(rkr->efx_Har->getpar(Harm_Select));
                 HAR->har_SELECT->redraw();
                 break;
             case 448:

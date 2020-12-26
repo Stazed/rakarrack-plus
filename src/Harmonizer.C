@@ -417,39 +417,39 @@ Harmonizer::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Harm_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Harm_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Harm_Gain:
         setgain(value);
         break;
-    case 3:
+    case Harm_Interval:
         setinterval(value);
         break;
-    case 4:
+    case Harm_Filter_Freq:
         fsetfreq(value);
         break;
-    case 5:
+    case Harm_Select:
         PSELECT = value;
         if (!value)
             setinterval(Pinterval);
         break;
-    case 6:
+    case Harm_Note:
         Pnote = value;
         break;
-    case 7:
+    case Harm_Chord:
         Ptype = value;
         break;
-    case 8:
+    case Harm_Filter_Gain:
         fsetgain(value);
         break;
-    case 9:
+    case Harm_Filter_Q:
         fsetq(value);
         break;
-    case 10:
+    case Harm_MIDI:
         setMIDI(value);
         if (!value)
             setinterval(Pinterval);
@@ -462,37 +462,37 @@ Harmonizer::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Harm_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Harm_Pan:
         return (Ppan);
         break;
-    case 2:
+    case Harm_Gain:
         return (Pgain);
         break;
-    case 3:
+    case Harm_Interval:
         return (Pinterval);
         break;
-    case 4:
+    case Harm_Filter_Freq:
         return (fPfreq);
         break;
-    case 5:
+    case Harm_Select:
         return (PSELECT);
         break;
-    case 6:
+    case Harm_Note:
         return (Pnote);
         break;
-    case 7:
+    case Harm_Chord:
         return (Ptype);
         break;
-    case 8:
+    case Harm_Filter_Gain:
         return (fPgain);
         break;
-    case 9:
+    case Harm_Filter_Q:
         return (fPq);
         break;
-    case 10:
+    case Harm_MIDI:
         return (PMIDI);
         break;
     default:
