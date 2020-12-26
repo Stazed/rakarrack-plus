@@ -2493,35 +2493,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 395:
-        efx_Infinity->changepar(0, Dry_Wet(value));
+        efx_Infinity->changepar(Infinity_DryWet, Dry_Wet(value));
         break;
 
     case 396:
-        efx_Infinity->changepar(9, -1000 + (int) ((float) value * C_MC_2000_RANGE));
+        efx_Infinity->changepar(Infinity_Resonance, -1000 + (int) ((float) value * C_MC_2000_RANGE));
         break;
 
     case 397:
-        efx_Infinity->changepar(15, value);
+        efx_Infinity->changepar(Infinity_AutoPan, value);
         break;
 
     case 398:
-        efx_Infinity->changepar(13, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_LR_Delay, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 399:
-        efx_Infinity->changepar(10, value);
+        efx_Infinity->changepar(Infinity_Start, value);
         break;
 
     case 400:
-        efx_Infinity->changepar(11, value);
+        efx_Infinity->changepar(Infinity_End, value);
         break;
 
     case 401:
-        efx_Infinity->changepar(12, ret_Tempo(value));
+        efx_Infinity->changepar(Infinity_Tempo, ret_Tempo(value));
         break;
 
     case 402:
-        efx_Infinity->changepar(14, -16 + (int) ((float) value * C_MC_32_RANGE));
+        efx_Infinity->changepar(Infinity_Subdivision, -16 + (int) ((float) value * C_MC_32_RANGE));
         break;
 
     case 403:
@@ -2573,35 +2573,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 415:
-        efx_Infinity->changepar(1, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_1, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 416:
-        efx_Infinity->changepar(2, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_2, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 417:
-        efx_Infinity->changepar(3, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_3, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 418:
-        efx_Infinity->changepar(4, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_4, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 419:
-        efx_Infinity->changepar(5, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_5, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 420:
-        efx_Infinity->changepar(6, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_6, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 421:
-        efx_Infinity->changepar(7, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_7, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 422:
-        efx_Infinity->changepar(8, (int) ((float) value * C_MC_128_RANGE));
+        efx_Infinity->changepar(Infinity_Band_8, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 423:

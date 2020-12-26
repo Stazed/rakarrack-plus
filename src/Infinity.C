@@ -493,62 +493,62 @@ Infinity::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Infinity_DryWet:
         setvolume(value);
         break;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
+    case Infinity_Band_1:
+    case Infinity_Band_2:
+    case Infinity_Band_3:
+    case Infinity_Band_4:
+    case Infinity_Band_5:
+    case Infinity_Band_6:
+    case Infinity_Band_7:
+    case Infinity_Band_8:
         Pb[npar - 1] = value;
         rbandstate[npar - 1].level = (float) value / 64.0f;
         lbandstate[npar - 1].level = (float) value / 64.0f;
         break;
-    case 9:
+    case Infinity_Resonance:
         Pq = value;
         setq();
         break;
-    case 10:
+    case Infinity_Start:
         Pstartfreq = value;
         adjustfreqs();
         reinitfilter();
         break;
-    case 11:
+    case Infinity_End:
         Pendfreq = value;
         adjustfreqs();
         reinitfilter();
         break;
-    case 12:
+    case Infinity_Tempo:
         Prate = value;
         adjustfreqs();
         break;
-    case 13:
+    case Infinity_LR_Delay:
         Pstdf = value;
         stdiff = ((float) value) / 127.0f;
         reinitfilter();
         break;
-    case 14:
+    case Infinity_Subdivision:
         Psubdiv = value;
         if (value != 0) ratescale = 10.0f / ((float) abs(value));
         else ratescale = 10.0f;
         adjustfreqs();
         break;
-    case 15:
+    case Infinity_AutoPan:
         Pautopan = value;
         autopan = ((float) Pautopan) / 127.0f;
         if (autopan > 1.0f) autopan = 1.0f;
         if (autopan < 0.0f) autopan = 0.0f;
         break;
-    case 16:
+    case Infinity_Reverse:
         Preverse = value;
         adjustfreqs();
         reinitfilter();
         break;
-    case 17:
+    case Infinity_Stages:
         Pstages = value - 1;
         //        for (int i=0; i<NUM_INF_BANDS; i++)  {
         //        filterl[i]->setstages(value - 1);
@@ -564,44 +564,44 @@ Infinity::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Infinity_DryWet:
         return (Pvolume);
         break;
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
+    case Infinity_Band_1:
+    case Infinity_Band_2:
+    case Infinity_Band_3:
+    case Infinity_Band_4:
+    case Infinity_Band_5:
+    case Infinity_Band_6:
+    case Infinity_Band_7:
+    case Infinity_Band_8:
         return (Pb[npar - 1]);
         break;
-    case 9:
+    case Infinity_Resonance:
         return (Pq);
         break;
-    case 10:
+    case Infinity_Start:
         return (Pstartfreq);
         break;
-    case 11:
+    case Infinity_End:
         return (Pendfreq);
         break;
-    case 12:
+    case Infinity_Tempo:
         return (Prate);
         break;
-    case 13:
+    case Infinity_LR_Delay:
         return (Pstdf);
         break;
-    case 14:
+    case Infinity_Subdivision:
         return (Psubdiv);
         break;
-    case 15:
+    case Infinity_AutoPan:
         return (Pautopan);
         break;
-    case 16:
+    case Infinity_Reverse:
         return (Preverse);
         break;
-    case 17:
+    case Infinity_Stages:
         return (Pstages + 1);
         break;
     default:

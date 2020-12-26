@@ -1039,15 +1039,15 @@ void RKR::getbuf(char *buf, int j)
     case 46:
         //Infinity
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Infinity->getpar(0), efx_Infinity->getpar(1),
-                efx_Infinity->getpar(2), efx_Infinity->getpar(3),
-                efx_Infinity->getpar(4), efx_Infinity->getpar(5),
-                efx_Infinity->getpar(6), efx_Infinity->getpar(7),
-                efx_Infinity->getpar(8), efx_Infinity->getpar(9),
-                efx_Infinity->getpar(10), efx_Infinity->getpar(11),
-                efx_Infinity->getpar(12), efx_Infinity->getpar(13),
-                efx_Infinity->getpar(14), efx_Infinity->getpar(15),
-                efx_Infinity->getpar(16), efx_Infinity->getpar(17),
+                efx_Infinity->getpar(Infinity_DryWet), efx_Infinity->getpar(Infinity_Band_1),
+                efx_Infinity->getpar(Infinity_Band_2), efx_Infinity->getpar(Infinity_Band_3),
+                efx_Infinity->getpar(Infinity_Band_4), efx_Infinity->getpar(Infinity_Band_5),
+                efx_Infinity->getpar(Infinity_Band_6), efx_Infinity->getpar(Infinity_Band_7),
+                efx_Infinity->getpar(Infinity_Band_8), efx_Infinity->getpar(Infinity_Resonance),
+                efx_Infinity->getpar(Infinity_Start), efx_Infinity->getpar(Infinity_End),
+                efx_Infinity->getpar(Infinity_Tempo), efx_Infinity->getpar(Infinity_LR_Delay),
+                efx_Infinity->getpar(Infinity_Subdivision), efx_Infinity->getpar(Infinity_AutoPan),
+                efx_Infinity->getpar(Infinity_Reverse), efx_Infinity->getpar(Infinity_Stages),
                 Infinity_Bypass);
         break;
     }

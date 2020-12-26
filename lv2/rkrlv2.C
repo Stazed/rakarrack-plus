@@ -4772,9 +4772,6 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -4795,20 +4792,51 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->inf->getpar(i) != val)
-    {
-        plug->inf->changepar(i,val);
-    }
 
-    for(i++; i<plug->nparams; i++)//1-17
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->inf->getpar(i) != val)
+        switch(i)
         {
-            plug->inf->changepar(i,val);
+            // Normal processing
+            case Infinity_Band_1:
+            case Infinity_Band_2:
+            case Infinity_Band_3:
+            case Infinity_Band_4:
+            case Infinity_Band_5:
+            case Infinity_Band_6:
+            case Infinity_Band_7:
+            case Infinity_Band_8:
+            case Infinity_Resonance:
+            case Infinity_Start:
+            case Infinity_End:
+            case Infinity_Tempo:
+            case Infinity_LR_Delay:
+            case Infinity_Subdivision:
+            case Infinity_AutoPan:
+            case Infinity_Reverse:
+            case Infinity_Stages:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->inf->getpar(i) != val)
+                {
+                    plug->inf->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Infinity_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->inf->getpar(Infinity_DryWet) != val)
+                {
+                    plug->inf->changepar(Infinity_DryWet,val);
+                }
+            }
+            break;
         }
     }
 

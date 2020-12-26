@@ -26,6 +26,28 @@
 
 #define NUM_INF_BANDS 8
 
+enum Infinity_Index
+{
+    Infinity_DryWet = 0,
+    Infinity_Band_1,
+    Infinity_Band_2,
+    Infinity_Band_3,
+    Infinity_Band_4,
+    Infinity_Band_5,
+    Infinity_Band_6,
+    Infinity_Band_7,
+    Infinity_Band_8,
+    Infinity_Resonance,
+    Infinity_Start,
+    Infinity_End,
+    Infinity_Tempo,
+    Infinity_LR_Delay,
+    Infinity_Subdivision,
+    Infinity_AutoPan,
+    Infinity_Reverse,
+    Infinity_Stages
+};
+
 class Infinity
 {
 public:
