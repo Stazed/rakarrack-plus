@@ -4684,7 +4684,7 @@ void RKRGUI::ActMIDI()
                 INFINIT->infinity_pan->redraw();
                 break;
             case 398:
-                INFINIT->infinity_stdf->value(rkr->efx_Infinity->getpar(Infinity_LR_Delay) - 64);
+                INFINIT->infinity_stdf->value(rkr->efx_Infinity->getpar(Infinity_LR_Delay));
                 INFINIT->infinity_stdf->redraw();
                 break;
             case 399:
@@ -4752,35 +4752,35 @@ void RKRGUI::ActMIDI()
                 HAR->har_q1->redraw();
                 break;
             case 415:
-                INFINIT->infinity_1->value(rkr->efx_Infinity->getpar(Infinity_Band_1) - 64);
+                INFINIT->infinity_1->value(rkr->efx_Infinity->getpar(Infinity_Band_1));
                 INFINIT->infinity_1->redraw();
                 break;
             case 416:
-                INFINIT->infinity_2->value(rkr->efx_Infinity->getpar(Infinity_Band_2) - 64);
+                INFINIT->infinity_2->value(rkr->efx_Infinity->getpar(Infinity_Band_2));
                 INFINIT->infinity_2->redraw();
                 break;
             case 417:
-                INFINIT->infinity_3->value(rkr->efx_Infinity->getpar(Infinity_Band_3) - 64);
+                INFINIT->infinity_3->value(rkr->efx_Infinity->getpar(Infinity_Band_3));
                 INFINIT->infinity_3->redraw();
                 break;
             case 418:
-                INFINIT->infinity_4->value(rkr->efx_Infinity->getpar(Infinity_Band_4) - 64);
+                INFINIT->infinity_4->value(rkr->efx_Infinity->getpar(Infinity_Band_4));
                 INFINIT->infinity_4->redraw();
                 break;
             case 419:
-                INFINIT->infinity_5->value(rkr->efx_Infinity->getpar(Infinity_Band_5) - 64);
+                INFINIT->infinity_5->value(rkr->efx_Infinity->getpar(Infinity_Band_5));
                 INFINIT->infinity_5->redraw();
                 break;
             case 420:
-                INFINIT->infinity_6->value(rkr->efx_Infinity->getpar(Infinity_Band_6) - 64);
+                INFINIT->infinity_6->value(rkr->efx_Infinity->getpar(Infinity_Band_6));
                 INFINIT->infinity_6->redraw();
                 break;
             case 421:
-                INFINIT->infinity_7->value(rkr->efx_Infinity->getpar(Infinity_Band_7) - 64);
+                INFINIT->infinity_7->value(rkr->efx_Infinity->getpar(Infinity_Band_7));
                 INFINIT->infinity_7->redraw();
                 break;
             case 422:
-                INFINIT->infinity_8->value(rkr->efx_Infinity->getpar(Infinity_Band_8) - 64);
+                INFINIT->infinity_8->value(rkr->efx_Infinity->getpar(Infinity_Band_8));
                 INFINIT->infinity_8->redraw();
                 break;
             case 423:
