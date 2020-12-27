@@ -1729,7 +1729,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 214:
-        efx_Arpie->changepar(Arpie_Pan, value - 64);
+        efx_Arpie->changepar(Arpie_Pan, value);
         break;
 
     case 215:
@@ -2311,11 +2311,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 352:
-        efx_Echotron->changepar(Echotron_Feedback, value);
+        efx_Echotron->changepar(Echotron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 353:
-        efx_Echotron->changepar(Echotron_LR_Cross, value);
+        efx_Echotron->changepar(Echotron_LR_Cross, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 354:
@@ -2323,7 +2323,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 355:
-        efx_Echotron->changepar(Echotron_Depth, value);
+        efx_Echotron->changepar(Echotron_Depth, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 356:

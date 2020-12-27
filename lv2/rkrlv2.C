@@ -673,9 +673,9 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
             case Echo_Pan:
             {
                 val = (int)*plug->param_p[i] + 64;  // offset
-                if(plug->echo->getpar(i) != val)
+                if(plug->echo->getpar(Echo_Pan) != val)
                 {
-                    plug->echo->changepar(i,val);
+                    plug->echo->changepar(Echo_Pan,val);
                 }
             }
         }

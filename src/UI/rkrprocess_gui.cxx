@@ -3936,7 +3936,7 @@ void RKRGUI::ActMIDI()
                 ARPIE->arpie_arpe->redraw();
                 break;
             case 214:
-                ARPIE->arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan));
+                ARPIE->arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan) - 64);
                 ARPIE->arpie_pan->redraw();
                 break;
             case 215:
@@ -4498,7 +4498,7 @@ void RKRGUI::ActMIDI()
                 ECHOTRON->echotron_damp->redraw();
                 break;
             case 352:
-                ECHOTRON->echotron_fb->value(rkr->efx_Echotron->getpar(Echotron_Feedback) - 64);
+                ECHOTRON->echotron_fb->value(rkr->efx_Echotron->getpar(Echotron_Feedback));
                 ECHOTRON->echotron_fb->redraw();
                 break;
             case 353:
@@ -6016,7 +6016,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->Alienwah_Bypass)
     {
-        ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(2));
+        ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
         ALIENWAH->Alienwah_freq->redraw();
     }
 
