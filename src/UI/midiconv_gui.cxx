@@ -27,24 +27,24 @@ void MidiGui::cb_MIDIOctave_i(RKR_Choice* o, void*) {
   switch((int)o->value())
 {
   case 0:
-  m_rkr->efx_MIDIConverter->changepar(4,-2);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,-2);
   break;
   
   case 1:
-  m_rkr->efx_MIDIConverter->changepar(4,-1);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,-1);
   break;
 
   case 2:
-  m_rkr->efx_MIDIConverter->changepar(4,0);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,0);
   break;
 
   case 3:
-  m_rkr->efx_MIDIConverter->changepar(4,1);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,1);
 
   break;
 
   case 4:
-  m_rkr->efx_MIDIConverter->changepar(4,2);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,2);
   break;
 
 };
@@ -63,28 +63,28 @@ Fl_Menu_Item MidiGui::menu_MIDIOctave[] = {
 };
 
 void MidiGui::cb_Midi_out_Counter_i(RKR_Counter* o, void*) {
-  m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Midi, (int)o->value());
 }
 void MidiGui::cb_Midi_out_Counter(RKR_Counter* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Midi_out_Counter_i(o,v);
 }
 
 void MidiGui::cb_Use_FFT_i(RKR_Check_Button* o, void*) {
-  m_rkr->efx_MIDIConverter->changepar(5, (int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_FFT, (int)o->value());
 }
 void MidiGui::cb_Use_FFT(RKR_Check_Button* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Use_FFT_i(o,v);
 }
 
 void MidiGui::cb_Trig_Adj_i(RKR_Slider* o, void*) {
-  m_rkr->efx_MIDIConverter->changepar(1,(int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Trigger,(int)o->value());
 }
 void MidiGui::cb_Trig_Adj(RKR_Slider* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Trig_Adj_i(o,v);
 }
 
 void MidiGui::cb_Vel_Adj_i(RKR_Slider* o, void*) {
-  m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Velocity,(int)o->value());
 }
 void MidiGui::cb_Vel_Adj(RKR_Slider* o, void* v) {
   ((MidiGui*)(o->parent()))->cb_Vel_Adj_i(o,v);

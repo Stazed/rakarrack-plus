@@ -37,6 +37,17 @@ struct _RKRLV2;     // Forward declaration
 
 #endif // LV2_SUPPORT
 
+enum MIDIConv_Index
+{
+    MIDIConv_Gain = 0,  // LV2 only
+    MIDIConv_Trigger,
+    MIDIConv_Velocity,
+    MIDIConv_Midi,
+    MIDIConv_Octave,
+    MIDIConv_FFT,
+    MIDIConv_Panic
+};
+
 class MIDIConverter
 {
 public:

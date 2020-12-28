@@ -622,32 +622,32 @@ MIDIConverter::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case MIDIConv_Gain:
 #ifdef LV2_SUPPORT
         Pgain = value; // lv2 only
         setGain(value);
 #endif
         break;
-    case 1:
+    case MIDIConv_Trigger:
         Ptrigger = value;
         setTriggerAdjust(value);
         break;
-    case 2:
+    case MIDIConv_Velocity:
         Pvelocity = value;
         setVelAdjust(value);
         break;
-    case 3:
+    case MIDIConv_Midi:
         Pmidi = value;
         setmidichannel(value - 1); // offset
         break;
-    case 4:
+    case MIDIConv_Octave:
         Poctave = value;
         setOctAdjust(value);
         break;
-    case 5:
+    case MIDIConv_FFT:
         Pfft = value;
         break;
-    case 6:
+    case MIDIConv_Panic:
         Ppanic = value;
         panic();
         break;
@@ -659,29 +659,29 @@ MIDIConverter::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case MIDIConv_Gain:
 #ifdef LV2_SUPPORT
         return (Pgain); // lv2 only
 #else // LV2_SUPPORT
         return 0;
 #endif
         break;
-    case 1:
+    case MIDIConv_Trigger:
         return (Ptrigger);
         break;
-    case 2:
+    case MIDIConv_Velocity:
         return (Pvelocity);
         break;
-    case 3:
+    case MIDIConv_Midi:
         return (Pmidi);
         break;
-    case 4:
+    case MIDIConv_Octave:
         return (Poctave);
         break;
-    case 5:
+    case MIDIConv_FFT:
         return (Pfft);
         break;
-    case 6:
+    case MIDIConv_Panic:
         return (Ppanic);
         break;
     default:

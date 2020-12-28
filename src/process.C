@@ -1972,7 +1972,7 @@ RKR::Alg(float *origl, float *origr, void *)
 
         if (MIDIConverter_Bypass)
         {
-            if (efx_MIDIConverter->getpar(5))
+            if (efx_MIDIConverter->getpar(MIDIConv_FFT))
             {
                 efx_MIDIConverter->fftFloat(efxoutl, efxoutr, val_sum, HarmRecNote->freqs, HarmRecNote->lfreqs);
             }

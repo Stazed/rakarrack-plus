@@ -16,7 +16,7 @@ decl {\#include "RKR_Counter.h"} {public global
 
 widget_class {this->m_rgui = NULL; this->m_rkr = NULL;} MidiGui {
   user_data 1 open
-  xywh {1389 231 275 50} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1159 78 275 50} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -54,24 +54,24 @@ m_rgui= _rgui;} {}
     callback {switch((int)o->value())
 {
   case 0:
-  m_rkr->efx_MIDIConverter->changepar(4,-2);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,-2);
   break;
   
   case 1:
-  m_rkr->efx_MIDIConverter->changepar(4,-1);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,-1);
   break;
 
   case 2:
-  m_rkr->efx_MIDIConverter->changepar(4,0);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,0);
   break;
 
   case 3:
-  m_rkr->efx_MIDIConverter->changepar(4,1);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,1);
 
   break;
 
   case 4:
-  m_rkr->efx_MIDIConverter->changepar(4,2);
+  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,2);
   break;
 
 }}
@@ -103,7 +103,7 @@ m_rgui= _rgui;} {}
   }
   Fl_Counter Midi_out_Counter {
     label Channel
-    callback {m_rkr->efx_MIDIConverter->changepar(3, (int)o->value());}
+    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_Midi, (int)o->value());}
     tooltip {Channel to send MIDI out.} xywh {94 4 50 15} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
     code0 {o->set_label_offset(-1);}
     code1 {o->set_text_offset(1);}
@@ -112,14 +112,14 @@ m_rgui= _rgui;} {}
   Fl_Check_Button Use_FFT {
     label FFT
     user_data 2
-    callback {m_rkr->efx_MIDIConverter->changepar(5, (int)o->value());}
+    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_FFT, (int)o->value());} selected
     tooltip {FFT based algorithm which is much more
 CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
     class RKR_Check_Button
   }
   Fl_Value_Slider Trig_Adj {
     label Trigger
-    callback {m_rkr->efx_MIDIConverter->changepar(1,(int)o->value());}
+    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_Trigger,(int)o->value());}
     xywh {147 15 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 2 maximum 60 step 1 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->shut_off_pixel_adjustment();}
@@ -127,7 +127,7 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
   }
   Fl_Value_Slider Vel_Adj {
     label Velocity
-    callback {m_rkr->efx_MIDIConverter->changepar(2,(int)o->value());} selected
+    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_Velocity,(int)o->value());}
     xywh {147 34 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 1 maximum 100 step 1 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->shut_off_pixel_adjustment();}

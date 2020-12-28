@@ -5078,9 +5078,6 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
 {    
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
 
@@ -5110,12 +5107,27 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
 
 
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->midic->getpar(i) != val)
+        switch(i)
         {
-            plug->midic->changepar(i,val);
+            // Normal processing
+            case MIDIConv_Gain:
+            case MIDIConv_Trigger:
+            case MIDIConv_Velocity:
+            case MIDIConv_Midi:
+            case MIDIConv_Octave:
+            case MIDIConv_FFT:
+            case MIDIConv_Panic:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->midic->getpar(i) != val)
+                {
+                    plug->midic->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 
