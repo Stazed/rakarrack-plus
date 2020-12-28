@@ -3217,11 +3217,11 @@ void RKRGUI::ActMIDI()
                 CHORUS->chorus_dpth->redraw();
                 break;
             case 24:
-                MUSDELAY->musdelay_gain1->value(rkr->efx_MusDelay->getpar(11));
+                MUSDELAY->musdelay_gain1->value(rkr->efx_MusDelay->getpar(Music_Gain_1));
                 MUSDELAY->musdelay_gain1->redraw();
                 break;
             case 25:
-                MUSDELAY->musdelay_gain2->value(rkr->efx_MusDelay->getpar(12));
+                MUSDELAY->musdelay_gain2->value(rkr->efx_MusDelay->getpar(Music_Gain_2));
                 MUSDELAY->musdelay_gain2->redraw();
                 break;
             case 26:
@@ -3265,7 +3265,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_WD->redraw();
                 break;
             case 56:
-                MUSDELAY->musdelay_WD->value(Dry_Wet(rkr->efx_MusDelay->getpar(0)));
+                MUSDELAY->musdelay_WD->value(Dry_Wet(rkr->efx_MusDelay->getpar(Music_DryWet)));
                 MUSDELAY->musdelay_WD->redraw();
                 break;
             case 57:
@@ -3313,7 +3313,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_pan->redraw();
                 break;
             case 62:
-                MUSDELAY->musdelay_pan1->value(rkr->efx_MusDelay->getpar(1) - 64);
+                MUSDELAY->musdelay_pan1->value(rkr->efx_MusDelay->getpar(Music_Pan_1) - 64);
                 MUSDELAY->musdelay_pan1->redraw();
                 break;
             case 63:
@@ -3321,7 +3321,7 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_pan->redraw();
                 break;
             case 65:
-                MUSDELAY->musdelay_pan2->value(rkr->efx_MusDelay->getpar(7) - 64);
+                MUSDELAY->musdelay_pan2->value(rkr->efx_MusDelay->getpar(Music_Pan_2) - 64);
                 MUSDELAY->musdelay_pan2->redraw();
                 break;
             case 66:
@@ -3393,11 +3393,11 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_fb->redraw();
                 break;
             case 83:
-                MUSDELAY->musdelay_fb1->value(rkr->efx_MusDelay->getpar(5));
+                MUSDELAY->musdelay_fb1->value(rkr->efx_MusDelay->getpar(Music_Feedback_1));
                 MUSDELAY->musdelay_fb1->redraw();
                 break;
             case 84:
-                MUSDELAY->musdelay_fb2->value(rkr->efx_MusDelay->getpar(9));
+                MUSDELAY->musdelay_fb2->value(rkr->efx_MusDelay->getpar(Music_Feedback_2));
                 MUSDELAY->musdelay_fb2->redraw();
                 break;
             case 85:
@@ -3453,7 +3453,7 @@ void RKRGUI::ActMIDI()
                 ECHO->echo_LRc->redraw();
                 break;
             case 98:
-                MUSDELAY->musdelay_LRc->value(rkr->efx_MusDelay->getpar(4));
+                MUSDELAY->musdelay_LRc->value(rkr->efx_MusDelay->getpar(Music_LR_Cross));
                 MUSDELAY->musdelay_LRc->redraw();
                 break;
             case 99:
@@ -4788,11 +4788,11 @@ void RKRGUI::ActMIDI()
                 LOOPER->looper_Tempo->redraw();
                 break;
             case 424:
-                MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
+                MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(Music_Tempo));
                 MUSDELAY->musdelay_tempo->redraw();
                 break;
             case 425:
-                MUSDELAY->musdelay_damp->value(rkr->efx_MusDelay->getpar(6));
+                MUSDELAY->musdelay_damp->value(rkr->efx_MusDelay->getpar(Music_Damp));
                 MUSDELAY->musdelay_damp->redraw();
                 break;
             case 426:
@@ -6022,7 +6022,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->MusDelay_Bypass)
     {
-        MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(10));
+        MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(Music_Tempo));
         MUSDELAY->musdelay_tempo->redraw();
     }
 

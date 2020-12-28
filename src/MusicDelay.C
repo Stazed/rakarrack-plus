@@ -386,43 +386,43 @@ MusicDelay::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Music_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Music_Pan_1:
         setpanning(1, value);
         break;
-    case 2:
+    case Music_Delay_1:
         setdelay(1, value);
         break;
-    case 3:
+    case Music_Del_Offset:
         setdelay(3, value);
         break;
-    case 4:
+    case Music_LR_Cross:
         setlrcross(value);
         break;
-    case 5:
+    case Music_Feedback_1:
         setfb(1, value);
         break;
-    case 6:
+    case Music_Damp:
         sethidamp(value);
         break;
-    case 7:
+    case Music_Pan_2:
         setpanning(2, value);
         break;
-    case 8:
+    case Music_Delay_2:
         setdelay(2, value);
         break;
-    case 9:
+    case Music_Feedback_2:
         setfb(2, value);
         break;
-    case 10:
+    case Music_Tempo:
         settempo(value);
         break;
-    case 11:
+    case Music_Gain_1:
         setgain(1, value);
         break;
-    case 12:
+    case Music_Gain_2:
         setgain(2, value);
         break;
     }
@@ -433,43 +433,43 @@ MusicDelay::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Music_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Music_Pan_1:
         return (Ppanning1);
         break;
-    case 2:
+    case Music_Delay_1:
         return (Pdelay1);
         break;
-    case 3:
+    case Music_Del_Offset:
         return (Plrdelay);
         break;
-    case 4:
+    case Music_LR_Cross:
         return (Plrcross);
         break;
-    case 5:
+    case Music_Feedback_1:
         return (Pfb1);
         break;
-    case 6:
+    case Music_Damp:
         return (Phidamp);
         break;
-    case 7:
+    case Music_Pan_2:
         return (Ppanning2);
         break;
-    case 8:
+    case Music_Delay_2:
         return (Pdelay2);
         break;
-    case 9:
+    case Music_Feedback_2:
         return (Pfb2);
         break;
-    case 10:
+    case Music_Tempo:
         return (Ptempo);
         break;
-    case 11:
+    case Music_Gain_1:
         return (Pgain1);
         break;
-    case 12:
+    case Music_Gain_2:
         return (Pgain2);
         break;
     }

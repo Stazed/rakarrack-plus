@@ -686,13 +686,13 @@ void RKR::getbuf(char *buf, int j)
     case 15:
         //MusicalDelay
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_MusDelay->getpar(0), efx_MusDelay->getpar(1),
-                efx_MusDelay->getpar(2), efx_MusDelay->getpar(3),
-                efx_MusDelay->getpar(4), efx_MusDelay->getpar(5),
-                efx_MusDelay->getpar(6), efx_MusDelay->getpar(7),
-                efx_MusDelay->getpar(8), efx_MusDelay->getpar(9),
-                efx_MusDelay->getpar(10), efx_MusDelay->getpar(11),
-                efx_MusDelay->getpar(12), MusDelay_Bypass);
+                efx_MusDelay->getpar(Music_DryWet), efx_MusDelay->getpar(Music_Pan_1),
+                efx_MusDelay->getpar(Music_Delay_1), efx_MusDelay->getpar(Music_Del_Offset),
+                efx_MusDelay->getpar(Music_LR_Cross), efx_MusDelay->getpar(Music_Feedback_1),
+                efx_MusDelay->getpar(Music_Damp), efx_MusDelay->getpar(Music_Pan_2),
+                efx_MusDelay->getpar(Music_Delay_2), efx_MusDelay->getpar(Music_Feedback_2),
+                efx_MusDelay->getpar(Music_Tempo), efx_MusDelay->getpar(Music_Gain_1),
+                efx_MusDelay->getpar(Music_Gain_2), MusDelay_Bypass);
         break;
 
     case 16:

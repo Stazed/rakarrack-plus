@@ -27,6 +27,23 @@
 
 #include "FPreset.h"
 
+enum Music_Index
+{
+    Music_DryWet = 0,
+    Music_Pan_1,
+    Music_Delay_1,
+    Music_Del_Offset,
+    Music_LR_Cross,
+    Music_Feedback_1,
+    Music_Damp,
+    Music_Pan_2,
+    Music_Delay_2,
+    Music_Feedback_2,
+    Music_Tempo,
+    Music_Gain_1,
+    Music_Gain_2
+};
+
 class MusicDelay
 {
 public:

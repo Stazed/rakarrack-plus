@@ -1712,9 +1712,6 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1735,40 +1732,56 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->mdel->getpar(i) != val)
-    {
-        plug->mdel->changepar(i,val);
-    }
-    
-    i++;
-    val = (int)*plug->param_p[i]+64;//pan1
-    if(plug->mdel->getpar(i) != val)
-    {
-        plug->mdel->changepar(i,val);
-    }
 
-    for(i++; i<7; i++) //2-6
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->mdel->getpar(i) != val)
+        switch(i)
         {
-            plug->mdel->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i]+64;//pan2
-    if(plug->mdel->getpar(i) != val)
-    {
-        plug->mdel->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //8-12
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->mdel->getpar(i) != val)
-        {
-            plug->mdel->changepar(i,val);
+            // Normal processing
+            case Music_Delay_1:
+            case Music_Del_Offset:
+            case Music_LR_Cross:
+            case Music_Feedback_1:
+            case Music_Damp:
+            case Music_Delay_2:
+            case Music_Feedback_2:
+            case Music_Tempo:
+            case Music_Gain_1:
+            case Music_Gain_2:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->mdel->getpar(i) != val)
+                {
+                    plug->mdel->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Music_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->mdel->getpar(Music_DryWet) != val)
+                {
+                    plug->mdel->changepar(Music_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Music_Pan_1:
+            case Music_Pan_2:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->mdel->getpar(i) != val)
+                {
+                    plug->mdel->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 

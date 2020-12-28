@@ -994,11 +994,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 24:
-        efx_MusDelay->changepar(11, value);
+        efx_MusDelay->changepar(Music_Gain_1, value);
         break;
 
     case 25:
-        efx_MusDelay->changepar(12, value);
+        efx_MusDelay->changepar(Music_Gain_2, value);
         break;
 
     case 26:
@@ -1047,7 +1047,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 56:
-        efx_MusDelay->changepar(0, Dry_Wet(value));
+        efx_MusDelay->changepar(Music_DryWet, Dry_Wet(value));
         break;
 
     case 57:
@@ -1095,7 +1095,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 62:
-        efx_MusDelay->changepar(1, value);
+        efx_MusDelay->changepar(Music_Pan_1, value);
         break;
 
     case 63:
@@ -1103,7 +1103,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 65:
-        efx_MusDelay->changepar(7, value);
+        efx_MusDelay->changepar(Music_Pan_2, value);
         break;
 
     case 66:
@@ -1175,11 +1175,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 83:
-        efx_MusDelay->changepar(5, value);
+        efx_MusDelay->changepar(Music_Feedback_1, value);
         break;
 
     case 84:
-        efx_MusDelay->changepar(9, value);
+        efx_MusDelay->changepar(Music_Feedback_2, value);
         break;
 
     case 85:
@@ -1235,7 +1235,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 98:
-        efx_MusDelay->changepar(4, value);
+        efx_MusDelay->changepar(Music_LR_Cross, value);
         break;
 
     case 99:
@@ -2609,11 +2609,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 424:
-        efx_MusDelay->changepar(10, 10 + (int) ((float) value * C_MC_470_RANGE));
+        efx_MusDelay->changepar(Music_Tempo, 10 + (int) ((float) value * C_MC_470_RANGE));
         break;
 
     case 425:
-        efx_MusDelay->changepar(6, value);
+        efx_MusDelay->changepar(Music_Damp, value);
         break;
 
     case 426:
