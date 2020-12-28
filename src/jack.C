@@ -161,14 +161,14 @@ jackprocess(jack_nframes_t nframes, void *arg)
             if ((astate != JackOUT->jt_state) && (astate == 0))
             {
                 JackOUT->jt_state = astate;
-                JackOUT->efx_Looper->changepar(2, 1);
+                JackOUT->efx_Looper->changepar(Looper_Stop, 1);
                 stecla = 5;
             }
 
             if ((astate != JackOUT->jt_state) && (astate == 3))
             {
                 JackOUT->jt_state = astate;
-                JackOUT->efx_Looper->changepar(1, 1);
+                JackOUT->efx_Looper->changepar(Looper_Play, 1);
                 stecla = 5;
             }
         }
@@ -315,7 +315,7 @@ timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
             
             if ((JackOUT->Looper_Bypass) && (state == 3))
             {
-                JackOUT->efx_Looper->changepar(1, 1);
+                JackOUT->efx_Looper->changepar(Looper_Play, 1);
                 stecla = 5;
             }
         }

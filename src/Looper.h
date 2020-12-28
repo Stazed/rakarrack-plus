@@ -28,6 +28,28 @@
 
 #include "metronome.h"
 
+enum Looper_Index
+{
+    Looper_DryWet = 0,
+    Looper_Play,
+    Looper_Stop,
+    Looper_Record,
+    Looper_Clear,
+    Looper_Reverse,
+    Looper_Level_1,
+    Looper_Track_1,
+    Looper_Track_2,
+    Looper_AutoPlay,
+    Looper_Level_2,
+    Looper_Rec_1,
+    Looper_Rec_2,
+    Looper_Link,
+    Looper_Tempo,
+    Looper_Bar,
+    Looper_Metro,
+    Looper_M_S
+};
+
 class Looper
 {
 public:

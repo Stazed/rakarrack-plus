@@ -860,13 +860,13 @@ void RKR::getbuf(char *buf, int j)
     case 30:
         //Looper
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Looper->getpar(0), efx_Looper->getpar(1),
-                efx_Looper->getpar(2), efx_Looper->getpar(3),
-                efx_Looper->getpar(4), efx_Looper->getpar(5),
-                efx_Looper->getpar(6), efx_Looper->getpar(7),
-                efx_Looper->getpar(8), efx_Looper->getpar(9),
-                efx_Looper->getpar(10), efx_Looper->getpar(11),
-                efx_Looper->getpar(12), efx_Looper->getpar(13), Looper_Bypass);
+                efx_Looper->getpar(Looper_DryWet), efx_Looper->getpar(Looper_Play),
+                efx_Looper->getpar(Looper_Stop), efx_Looper->getpar(Looper_Record),
+                efx_Looper->getpar(Looper_Clear), efx_Looper->getpar(Looper_Reverse),
+                efx_Looper->getpar(Looper_Level_1), efx_Looper->getpar(Looper_Track_1),
+                efx_Looper->getpar(Looper_Track_2), efx_Looper->getpar(Looper_AutoPlay),
+                efx_Looper->getpar(Looper_Level_2), efx_Looper->getpar(Looper_Rec_1),
+                efx_Looper->getpar(Looper_Rec_2), efx_Looper->getpar(Looper_Link), Looper_Bypass);
         break;
 
     case 31:

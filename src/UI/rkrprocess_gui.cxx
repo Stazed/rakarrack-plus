@@ -4148,51 +4148,51 @@ void RKRGUI::ActMIDI()
                 MUTROMOJO->mutromojo_smooth->redraw();
                 break;
             case 267:
-                LOOPER->looper_WD->value(Dry_Wet(rkr->efx_Looper->getpar(0)));
+                LOOPER->looper_WD->value(Dry_Wet(rkr->efx_Looper->getpar(Looper_DryWet)));
                 LOOPER->looper_WD->redraw();
                 break;
             case 268:
-                LOOPER->looper_level1->value(rkr->efx_Looper->getpar(6));
+                LOOPER->looper_level1->value(rkr->efx_Looper->getpar(Looper_Level_1));
                 LOOPER->looper_level1->redraw();
                 break;
             case 269:
-                LOOPER->looper_level2->value(rkr->efx_Looper->getpar(10));
+                LOOPER->looper_level2->value(rkr->efx_Looper->getpar(Looper_Level_2));
                 LOOPER->looper_level2->redraw();
                 break;
             case 270:
-                LOOPER->looper_rv->value(rkr->efx_Looper->getpar(5));
+                LOOPER->looper_rv->value(rkr->efx_Looper->getpar(Looper_Reverse));
                 LOOPER->looper_rv->redraw();
                 break;
             case 271:
-                LOOPER->looper_ap->value(rkr->efx_Looper->getpar(9));
+                LOOPER->looper_ap->value(rkr->efx_Looper->getpar(Looper_AutoPlay));
                 LOOPER->looper_ap->redraw();
                 break;
             case 272:
-                LOOPER->looper_play->value(rkr->efx_Looper->getpar(1));
+                LOOPER->looper_play->value(rkr->efx_Looper->getpar(Looper_Play));
                 update_looper();
                 break;
             case 273:
-                LOOPER->looper_stop->value(rkr->efx_Looper->getpar(2));
+                LOOPER->looper_stop->value(rkr->efx_Looper->getpar(Looper_Stop));
                 update_looper();
                 break;
             case 274:
-                LOOPER->looper_record->value(rkr->efx_Looper->getpar(3));
+                LOOPER->looper_record->value(rkr->efx_Looper->getpar(Looper_Record));
                 update_looper();
                 break;
             case 275:
-                LOOPER->looper_r1->value(rkr->efx_Looper->getpar(11));
+                LOOPER->looper_r1->value(rkr->efx_Looper->getpar(Looper_Rec_1));
                 LOOPER->looper_r1->redraw();
                 break;
             case 276:
-                LOOPER->looper_r2->value(rkr->efx_Looper->getpar(12));
+                LOOPER->looper_r2->value(rkr->efx_Looper->getpar(Looper_Rec_2));
                 LOOPER->looper_r2->redraw();
                 break;
             case 277:
-                LOOPER->looper_t1->value(rkr->efx_Looper->getpar(7));
+                LOOPER->looper_t1->value(rkr->efx_Looper->getpar(Looper_Track_1));
                 update_looper();
                 break;
             case 278:
-                LOOPER->looper_t2->value(rkr->efx_Looper->getpar(8));
+                LOOPER->looper_t2->value(rkr->efx_Looper->getpar(Looper_Track_2));
                 update_looper();
                 break;
             case 279:
@@ -4206,7 +4206,7 @@ void RKRGUI::ActMIDI()
                    with MIDI control, but it would probably have to be a timer issue and additional
                    complications for very little value. MIDI control does work, but we should not show
                    it on the gui button here with this method */
-            //    LOOPER->looper_clear->value(rkr->efx_Looper->getpar(4));
+            //    LOOPER->looper_clear->value(rkr->efx_Looper->getpar(Looper_Clear));
                 update_looper();
                 break;
             case 280:
@@ -4784,7 +4784,7 @@ void RKRGUI::ActMIDI()
                 INFINIT->infinity_8->redraw();
                 break;
             case 423:
-                LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(14));
+                LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(Looper_Tempo));
                 LOOPER->looper_Tempo->redraw();
                 break;
             case 424:
@@ -5980,7 +5980,7 @@ void RKRGUI::UpdateTGUI()
     // updates the efx based on global tempo settings
     if (rkr->Looper_Bypass)
     {
-        LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(14));
+        LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(Looper_Tempo));
         LOOPER->looper_Tempo->redraw();
     }
 

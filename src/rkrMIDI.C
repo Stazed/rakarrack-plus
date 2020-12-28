@@ -147,13 +147,13 @@ RKR::midievents()
     {
         if (midievent->type == SND_SEQ_EVENT_START)
         {
-            efx_Looper->changepar(1, 1);
+            efx_Looper->changepar(Looper_Play, 1);
             stecla = 5;
         }
 
         if (midievent->type == SND_SEQ_EVENT_STOP)
         {
-            efx_Looper->changepar(2, 1);
+            efx_Looper->changepar(Looper_Stop, 1);
             stecla = 5;
         }
     }
@@ -1941,85 +1941,85 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 267:
-        efx_Looper->changepar(0, Dry_Wet(value));
+        efx_Looper->changepar(Looper_DryWet, Dry_Wet(value));
         break;
 
     case 268:
-        efx_Looper->changepar(6, value);
+        efx_Looper->changepar(Looper_Level_1, value);
         break;
 
     case 269:
-        efx_Looper->changepar(10, value);
+        efx_Looper->changepar(Looper_Level_2, value);
         break;
 
     case 270:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(5, i);
+        efx_Looper->changepar(Looper_Reverse, i);
         break;
     }
     case 271:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(9, i);
+        efx_Looper->changepar(Looper_AutoPlay, i);
         break;
     }
     case 272:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(1, i);
+        efx_Looper->changepar(Looper_Play, i);
         break;
     }
     case 273:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(2, i);
+        efx_Looper->changepar(Looper_Stop, i);
         break;
     }
     case 274:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(3, i);
+        efx_Looper->changepar(Looper_Record, i);
         break;
     }
     case 275:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(11, i);
+        efx_Looper->changepar(Looper_Rec_1, i);
         break;
     }
     case 276:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(12, i);
+        efx_Looper->changepar(Looper_Rec_2, i);
         break;
     }
     case 277:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(7, i);
+        efx_Looper->changepar(Looper_Track_1, i);
         break;
     }
     case 278:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(8, i);
+        efx_Looper->changepar(Looper_Track_2, i);
         break;
     }
     case 279:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(4, i);
+        efx_Looper->changepar(Looper_Clear, i);
         break;
     }
     case 280:
@@ -2605,7 +2605,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 423:
-        efx_Looper->changepar(14, 20 + (int) ((float) value * C_MC_360_RANGE));
+        efx_Looper->changepar(Looper_Tempo, 20 + (int) ((float) value * C_MC_360_RANGE));
         break;
 
     case 424:

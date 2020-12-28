@@ -443,11 +443,11 @@ Looper::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Looper_DryWet:
         setvolume(value);
         break;
 
-    case 1: //Play at current pointer position
+    case Looper_Play: // Play at current pointer position
 
         if (Pplay)
         {
@@ -474,7 +474,7 @@ Looper::changepar(int npar, int value)
 
         break;
 
-    case 2: //stop and reset pointer to 0
+    case Looper_Stop: // stop and reset pointer to 0
         if (Pstop) Pstop = 0;
         else Pstop = 1;
         if (Precord)
@@ -509,7 +509,7 @@ Looper::changepar(int npar, int value)
             Pplay = 0;
         }
         break;
-    case 3: //Record at current position.  If first time (clear = true), then set end of loop, "dl"
+    case Looper_Record: // Record at current position.  If first time (clear = true), then set end of loop, "dl"
         if (Precord)
         {
             if ((first_time1 && Prec1) && PT1)
@@ -553,8 +553,8 @@ Looper::changepar(int npar, int value)
         Pstop = 0;
         Pclear = 0;
         break;
-    case 4:
-        Pclear = 1; //Clear everything and erase the loop
+    case Looper_Clear:
+        Pclear = 1; // Clear everything and erase the loop
         if (PT1) first_time1 = 1;
         if (PT2) first_time2 = 1;
         if ((PT1) && (PT2)) Pplay = 0;
@@ -564,14 +564,14 @@ Looper::changepar(int npar, int value)
         ticker.cleanup();
         initdelays();
         break;
-    case 5:
-        Preverse = value; //Playback in reverse
+    case Looper_Reverse:
+        Preverse = value; // Playback in reverse
         break;
-    case 6:                 // Level 1
+    case Looper_Level_1:
         Pfade1 = value;
         setfade();
         break;
-    case 7:                 // Track 1
+    case Looper_Track_1:
         if (PT1)
         {
             PT1 = 0;
@@ -593,7 +593,7 @@ Looper::changepar(int npar, int value)
         track1gain = (float) PT1;
         setfade();
         break;
-    case 8:                 // Track 2
+    case Looper_Track_2:
         if (PT2)
         {
             PT2 = 0;
@@ -614,37 +614,37 @@ Looper::changepar(int npar, int value)
         track2gain = (float) PT2;
         setfade();
         break;
-    case 9:
+    case Looper_AutoPlay:
         Pautoplay = value;
         break;
-    case 10:                // Level 2
+    case Looper_Level_2:
         Pfade2 = value;
         setfade();
         break;
-    case 11:                // Record 1
+    case Looper_Rec_1:  // Record 1
         Prec1 = value;
         break;
-    case 12:                // Record 2
+    case Looper_Rec_2:  // Record 2
         Prec2 = value;
         break;
-    case 13:                // Link track 1 and track 2
+    case Looper_Link:   // Link track 1 and track 2
         Plink = value;
         if (Plink)
         {
             if (Prec1) dl2 = dl;
-            if (Prec2) dl = dl2; //if both are true, then it is only a redundant assignment
+            if (Prec2) dl = dl2; // if both are true, then it is only a redundant assignment
         }
         break;
-    case 14:
+    case Looper_Tempo:
         settempo(value);
         break;
-    case 15:                // Time Signature
+    case Looper_Bar:     // Time Signature
         setbar(value);
         break;
-    case 16:                // Play Metronome
+    case Looper_Metro:   // Play Metronome
         Pmetro = value;
         break;
-    case 17:                // Set metronome sound
+    case Looper_M_S:     // Set metronome sound
         Pms = value;
         if (Pms == 0) setbar(Pbar);
         if (Pms == 1) ticker.set_meter(1);
@@ -659,58 +659,58 @@ Looper::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Looper_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Looper_Play:
         return (Pplay);
         break;
-    case 2:
+    case Looper_Stop:
         return (Pstop);
         break;
-    case 3:
+    case Looper_Record:
         return (Precord);
         break;
-    case 4:
+    case Looper_Clear:
         return (Pclear);
         break;
-    case 5:
+    case Looper_Reverse:
         return (Preverse);
         break;
-    case 6:
+    case Looper_Level_1:
         return (Pfade1);
         break;
-    case 7:
+    case Looper_Track_1:
         return (PT1);
         break;
-    case 8:
+    case Looper_Track_2:
         return (PT2);
         break;
-    case 9:
+    case Looper_AutoPlay:
         return (Pautoplay);
         break;
-    case 10:
+    case Looper_Level_2:
         return (Pfade2);
         break;
-    case 11:
+    case Looper_Rec_1:
         return (Prec1);
         break;
-    case 12:
+    case Looper_Rec_2:
         return (Prec2);
         break;
-    case 13:
+    case Looper_Link:
         return (Plink);
         break;
-    case 14:
+    case Looper_Tempo:
         return (Ptempo);
         break;
-    case 15:
+    case Looper_Bar:
         return (Pbar);
         break;
-    case 16:
+    case Looper_Metro:
         return (Pmetro);
         break;
-    case 17:
+    case Looper_M_S:
         return (Pms);
         break;
     }
@@ -732,55 +732,55 @@ Looper::loadpreset(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Looper_DryWet:
         Pvolume = value;
         outvolume = (float) Pvolume / 127.0f;
 
         break;
-    case 1: //Play at current pointer position
+    case Looper_Play:
         Pplay = value;
         break;
-    case 2: //stop and reset pointer to 0
+    case Looper_Stop:
         Pstop = value;
         break;
-    case 3: //Record at current position.  If first time (clear = true), then set end of loop, "dl"
+    case Looper_Record:
         Precord = value;
         break;
-    case 4:
-        Pclear = 1; //Clear everything and erase the loop
+    case Looper_Clear:
+        Pclear = 1;
         initdelays();
         break;
-    case 5:
-        Preverse = value; //Playback in reverse
+    case Looper_Reverse:
+        Preverse = value;
         break;
-    case 6:
+    case Looper_Level_1:
         Pfade1 = value;
         setfade();
         break;
-    case 7:
+    case Looper_Track_1:
         PT1 = value;
         track1gain = (float) PT1;
         setfade();
         break;
-    case 8:
+    case Looper_Track_2:
         PT2 = value;
         track2gain = (float) PT2;
         setfade();
         break;
-    case 9:
+    case Looper_AutoPlay:
         Pautoplay = value;
         break;
-    case 10:
+    case Looper_Level_2:
         Pfade2 = value;
         setfade();
         break;
-    case 11:
+    case Looper_Rec_1:
         Prec1 = value;
         break;
-    case 12:
+    case Looper_Rec_2:
         Prec2 = value;
         break;
-    case 13:
+    case Looper_Link:
         Plink = value;
         break;
     }
