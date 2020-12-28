@@ -338,65 +338,65 @@ MuTroMojo::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case MuTro_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case MuTro_Resonance:
         Pq = value;
         q = (float) Pq;
         break;
-    case 2:
+    case MuTro_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3: // LV2 - LFO Randomness (legacy, no slider in rakarrack - set by presets) 0 - 127
+    case MuTro_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case MuTro_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5: // LV2 - LFO L/R Delay (legacy, no slider in rakarrack - set by presets) -64 - 63 (0-27 actual + 64 offset)
+    case MuTro_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6: // Depth
+    case MuTro_Depth:
         setwidth(value);
         break;
-    case 7:
+    case MuTro_Env_Sens:
         setampsns(value);
         break;
-    case 8:
+    case MuTro_Wah:
         Pampsnsinv = value;
         setampsns(Pampsns);
         break;
-    case 9:
+    case MuTro_Env_Smooth:
         Pampsmooth = value;
         setampsns(Pampsns);
         break;
-    case 10:
+    case MuTro_LowPass:
         Plp = value;
         lpmix = ((float) Plp) / 32.0f;
         reinitfilter();
         break;
-    case 11:
+    case MuTro_BandPass:
         Pbp = value;
         bpmix = ((float) Pbp) / 32.0f;
         reinitfilter();
         break;
-    case 12:
+    case MuTro_HighPass:
         Php = value;
         hpmix = ((float) Php) / 32.0f;
         reinitfilter();
         break;
-    case 13:
+    case MuTro_Stages:
         Pstages = (value - 1);
         filterl->setstages(Pstages);
         filterr->setstages(Pstages);
         cleanup();
         break;
-    case 14:
+    case MuTro_Range:
         {
             Prange = value;
             if (Pamode)
@@ -409,7 +409,7 @@ MuTroMojo::changepar(int npar, int value)
             }
         }
         break;
-    case 15: // LV2 - Starting Frequency (legacy, no slider in rakarrack - set by presets) 30 - 300
+    case MuTro_St_Freq:
         {
             Pminfreq = value;
             if (Pamode)
@@ -422,7 +422,7 @@ MuTroMojo::changepar(int npar, int value)
             }
         }
         break;
-    case 16: // LV2 - Modulate Resonance (legacy no checkbox in rakarrack, but set by presets)
+    case MuTro_Mod_Res: // Modulate Resonance
         {
             variq = value;
             if (!variq) // when variq is unset, we need to reset q back to default (case 1)
@@ -431,7 +431,7 @@ MuTroMojo::changepar(int npar, int value)
             }
         }
         break;
-    case 17:
+    case Mutro_Mode_Legacy:
         //legacy method of changing Pqm and Pamode, presets use this
         {
             Pmode = value;
@@ -469,15 +469,15 @@ MuTroMojo::changepar(int npar, int value)
             }
         }
         break;
-    case 18: // used by rakarrack to update gui display upon new button 
+    case Mutro_Preset: // used by rakarrack to update gui display upon new button 
         Ppreset = value;
         break;
-    case 19: // LV2 - Analog Gain Mode (M box in rakarrack) 
+    case MuTro_AG_Mode: // LV2 - Analog Gain Mode (M box in rakarrack) 
         Pqm = value;
         filterl->setmode(Pqm);
         filterr->setmode(Pqm);
         break;
-    case 20: // LV2 - Exponential Wah (N box in rakarrack)
+    case MuTro_Exp_Wah: // LV2 - Exponential Wah (N box in rakarrack)
         {
             Pamode = value;
             if (Pamode)
@@ -500,67 +500,67 @@ MuTroMojo::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case MuTro_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case MuTro_Resonance:
         return (Pq);
         break;
-    case 2:
+    case MuTro_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case 3:
+    case MuTro_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case MuTro_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case MuTro_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 6:
+    case MuTro_Depth:
         return (Pwidth);
         break;
-    case 7:
+    case MuTro_Env_Sens:
         return (Pampsns);
         break;
-    case 8:
+    case MuTro_Wah:
         return (Pampsnsinv);
         break;
-    case 9:
+    case MuTro_Env_Smooth:
         return (Pampsmooth);
         break;
-    case 10:
+    case MuTro_LowPass:
         return (Plp);
         break;
-    case 11:
+    case MuTro_BandPass:
         return (Pbp);
         break;
-    case 12:
+    case MuTro_HighPass:
         return (Php);
         break;
-    case 13:
+    case MuTro_Stages:
         return (Pstages + 1);
         break;
-    case 14:
+    case MuTro_Range:
         return (Prange);
         break;
-    case 15:
+    case MuTro_St_Freq:
         return (Pminfreq);
         break;
-    case 16:
+    case MuTro_Mod_Res:
         return (variq);
         break;
-    case 17:
+    case Mutro_Mode_Legacy:
         return (Pmode);
         break;
-    case 18:
+    case Mutro_Preset:
         return (Ppreset);
         break;
-    case 19:
+    case MuTro_AG_Mode:
         return (Pqm);
         break;
-    case 20:
+    case MuTro_Exp_Wah:
         return (Pamode);
         break;
     default:

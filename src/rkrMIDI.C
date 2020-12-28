@@ -1897,47 +1897,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 256:
-        efx_MuTroMojo->changepar(0, Dry_Wet(value));
+        efx_MuTroMojo->changepar(MuTro_DryWet, Dry_Wet(value));
         break;
 
     case 257:
-        efx_MuTroMojo->changepar(10, value - 64);
+        efx_MuTroMojo->changepar(MuTro_LowPass, value - 64);
         break;
 
     case 258:
-        efx_MuTroMojo->changepar(11, value - 64);
+        efx_MuTroMojo->changepar(MuTro_BandPass, value - 64);
         break;
 
     case 259:
-        efx_MuTroMojo->changepar(12, value - 64);
+        efx_MuTroMojo->changepar(MuTro_HighPass, value - 64);
         break;
 
     case 260:
-        efx_MuTroMojo->changepar(6, value);
+        efx_MuTroMojo->changepar(MuTro_Depth, value);
         break;
 
     case 261:
-        efx_MuTroMojo->changepar(2, ret_Tempo(value));
+        efx_MuTroMojo->changepar(MuTro_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 262:
-        efx_MuTroMojo->changepar(1, value);
+        efx_MuTroMojo->changepar(MuTro_Resonance, value);
         break;
 
     case 263:
-        efx_MuTroMojo->changepar(14, 10 + (int) ((float) value * C_MC_5990_RANGE));
+        efx_MuTroMojo->changepar(MuTro_Range, 10 + (int) ((float) value * C_MC_5990_RANGE));
         break;
 
     case 264:
-        efx_MuTroMojo->changepar(8, value);
+        efx_MuTroMojo->changepar(MuTro_Wah, value);
         break;
 
     case 265:
-        efx_MuTroMojo->changepar(7, value - 64);
+        efx_MuTroMojo->changepar(MuTro_Env_Sens, value - 64);
         break;
 
     case 266:
-        efx_MuTroMojo->changepar(9, value);
+        efx_MuTroMojo->changepar(MuTro_Env_Smooth, value);
         break;
 
     case 267:
@@ -2617,15 +2617,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 426:
-        efx_MuTroMojo->changepar(3, value);
+        efx_MuTroMojo->changepar(MuTro_LFO_Random, value);
         break;
 
     case 427:
-        efx_MuTroMojo->changepar(5, value);
+        efx_MuTroMojo->changepar(MuTro_LFO_Stereo, value);
         break;
 
     case 428:
-        efx_MuTroMojo->changepar(15, 30 + (int) ((float) value * C_MC_770_RANGE));
+        efx_MuTroMojo->changepar(MuTro_St_Freq, 30 + (int) ((float) value * C_MC_770_RANGE));
         break;
 
     case 429:
@@ -2761,7 +2761,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 462:
-        efx_MuTroMojo->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_MuTroMojo->changepar(MuTro_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 463:

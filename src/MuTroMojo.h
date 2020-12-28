@@ -30,6 +30,31 @@
 #include "RBFilter.h"
 #include "AnalogFilter.h"
 
+enum MuTro_Index
+{
+    MuTro_DryWet = 0,
+    MuTro_Resonance,
+    MuTro_LFO_Tempo,
+    MuTro_LFO_Random,
+    MuTro_LFO_Type,
+    MuTro_LFO_Stereo,
+    MuTro_Depth,
+    MuTro_Env_Sens,
+    MuTro_Wah,
+    MuTro_Env_Smooth,
+    MuTro_LowPass,
+    MuTro_BandPass,
+    MuTro_HighPass,
+    MuTro_Stages,
+    MuTro_Range,
+    MuTro_St_Freq,
+    MuTro_Mod_Res,
+    Mutro_Mode_Legacy,  // Rakarrack only
+    Mutro_Preset,       // Rakarrack only
+    MuTro_AG_Mode,      // LV2 only
+    MuTro_Exp_Wah       // LV2 only
+};
+
 class MuTroMojo
 {
 public:

@@ -4104,47 +4104,47 @@ void RKRGUI::ActMIDI()
                 VARYBAND->varyband_cross3->redraw();
                 break;
             case 256:
-                MUTROMOJO->mutromojo_WD->value(Dry_Wet(rkr->efx_MuTroMojo->getpar(0)));
+                MUTROMOJO->mutromojo_WD->value(Dry_Wet(rkr->efx_MuTroMojo->getpar(MuTro_DryWet)));
                 MUTROMOJO->mutromojo_WD->redraw();
                 break;
             case 257:
-                MUTROMOJO->mutromojo_lp->value(rkr->efx_MuTroMojo->getpar(10));
+                MUTROMOJO->mutromojo_lp->value(rkr->efx_MuTroMojo->getpar(MuTro_LowPass));
                 MUTROMOJO->mutromojo_lp->redraw();
                 break;
             case 258:
-                MUTROMOJO->mutromojo_bp->value(rkr->efx_MuTroMojo->getpar(11));
+                MUTROMOJO->mutromojo_bp->value(rkr->efx_MuTroMojo->getpar(MuTro_BandPass));
                 MUTROMOJO->mutromojo_bp->redraw();
                 break;
             case 259:
-                MUTROMOJO->mutromojo_hp->value(rkr->efx_MuTroMojo->getpar(12));
+                MUTROMOJO->mutromojo_hp->value(rkr->efx_MuTroMojo->getpar(MuTro_HighPass));
                 MUTROMOJO->mutromojo_hp->redraw();
                 break;
             case 260:
-                MUTROMOJO->mutromojo_dpth->value(rkr->efx_MuTroMojo->getpar(6));
+                MUTROMOJO->mutromojo_dpth->value(rkr->efx_MuTroMojo->getpar(MuTro_Depth));
                 MUTROMOJO->mutromojo_dpth->redraw();
                 break;
             case 261:
-                MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(2));
+                MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Tempo));
                 MUTROMOJO->mutromojo_freq->redraw();
                 break;
             case 262:
-                MUTROMOJO->mutromojo_q->value(rkr->efx_MuTroMojo->getpar(1));
+                MUTROMOJO->mutromojo_q->value(rkr->efx_MuTroMojo->getpar(MuTro_Resonance));
                 MUTROMOJO->mutromojo_q->redraw();
                 break;
             case 263:
-                MUTROMOJO->mutromojo_rng->value(rkr->efx_MuTroMojo->getpar(14));
+                MUTROMOJO->mutromojo_rng->value(rkr->efx_MuTroMojo->getpar(MuTro_Range));
                 MUTROMOJO->mutromojo_rng->redraw();
                 break;
             case 264:
-                MUTROMOJO->mutromojo_ampsnsinv->value(rkr->efx_MuTroMojo->getpar(8));
+                MUTROMOJO->mutromojo_ampsnsinv->value(rkr->efx_MuTroMojo->getpar(MuTro_Wah));
                 MUTROMOJO->mutromojo_ampsnsinv->redraw();
                 break;
             case 265:
-                MUTROMOJO->mutromojo_ampsns->value(rkr->efx_MuTroMojo->getpar(7));
+                MUTROMOJO->mutromojo_ampsns->value(rkr->efx_MuTroMojo->getpar(MuTro_Env_Sens));
                 MUTROMOJO->mutromojo_ampsns->redraw();
                 break;
             case 266:
-                MUTROMOJO->mutromojo_smooth->value(rkr->efx_MuTroMojo->getpar(9));
+                MUTROMOJO->mutromojo_smooth->value(rkr->efx_MuTroMojo->getpar(MuTro_Env_Smooth));
                 MUTROMOJO->mutromojo_smooth->redraw();
                 break;
             case 267:
@@ -4796,15 +4796,15 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_damp->redraw();
                 break;
             case 426:
-                MUTROMOJO->mutromojo_Rnd->value(rkr->efx_MuTroMojo->getpar(3));
+                MUTROMOJO->mutromojo_Rnd->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Random));
                 MUTROMOJO->mutromojo_Rnd->redraw();
                 break;
             case 427:
-                MUTROMOJO->mutromojo_St->value(rkr->efx_MuTroMojo->getpar(5) - 64);
+                MUTROMOJO->mutromojo_St->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Stereo) - 64);
                 MUTROMOJO->mutromojo_St->redraw();
                 break;
             case 428:
-                MUTROMOJO->mutromojo_minfreq->value(rkr->efx_MuTroMojo->getpar(15));
+                MUTROMOJO->mutromojo_minfreq->value(rkr->efx_MuTroMojo->getpar(MuTro_St_Freq));
                 MUTROMOJO->mutromojo_minfreq->redraw();
                 break;
             case 429:
@@ -4942,7 +4942,7 @@ void RKRGUI::ActMIDI()
                 ECHOTRON->echotron_lfotype->redraw();
                 break;
             case 462:
-                MUTROMOJO->mutromojo_lfotype->value(rkr->efx_MuTroMojo->getpar(4));
+                MUTROMOJO->mutromojo_lfotype->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Type));
                 MUTROMOJO->mutromojo_lfotype->redraw();
                 break;
             case 463:
@@ -6046,7 +6046,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->MuTroMojo_Bypass)
     {
-        MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(2));
+        MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Tempo));
         MUTROMOJO->mutromojo_freq->redraw();
     }
 

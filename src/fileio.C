@@ -872,16 +872,16 @@ void RKR::getbuf(char *buf, int j)
     case 31:
         //MuTroMojo
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_MuTroMojo->getpar(0), efx_MuTroMojo->getpar(1),
-                efx_MuTroMojo->getpar(2), efx_MuTroMojo->getpar(3),
-                efx_MuTroMojo->getpar(4), efx_MuTroMojo->getpar(5),
-                efx_MuTroMojo->getpar(6), efx_MuTroMojo->getpar(7),
-                efx_MuTroMojo->getpar(8), efx_MuTroMojo->getpar(9),
-                efx_MuTroMojo->getpar(10), efx_MuTroMojo->getpar(11),
-                efx_MuTroMojo->getpar(12), efx_MuTroMojo->getpar(13),
-                efx_MuTroMojo->getpar(14), efx_MuTroMojo->getpar(15),
-                efx_MuTroMojo->getpar(16), efx_MuTroMojo->getpar(17),
-                efx_MuTroMojo->getpar(18), MuTroMojo_Bypass);
+                efx_MuTroMojo->getpar(MuTro_DryWet), efx_MuTroMojo->getpar(MuTro_Resonance),
+                efx_MuTroMojo->getpar(MuTro_LFO_Tempo), efx_MuTroMojo->getpar(MuTro_LFO_Random),
+                efx_MuTroMojo->getpar(MuTro_LFO_Type), efx_MuTroMojo->getpar(MuTro_LFO_Stereo),
+                efx_MuTroMojo->getpar(MuTro_Depth), efx_MuTroMojo->getpar(MuTro_Env_Sens),
+                efx_MuTroMojo->getpar(MuTro_Wah), efx_MuTroMojo->getpar(MuTro_Env_Smooth),
+                efx_MuTroMojo->getpar(MuTro_LowPass), efx_MuTroMojo->getpar(MuTro_BandPass),
+                efx_MuTroMojo->getpar(MuTro_HighPass), efx_MuTroMojo->getpar(MuTro_Stages),
+                efx_MuTroMojo->getpar(MuTro_Range), efx_MuTroMojo->getpar(MuTro_St_Freq),
+                efx_MuTroMojo->getpar(MuTro_Mod_Res), efx_MuTroMojo->getpar(Mutro_Mode_Legacy),
+                efx_MuTroMojo->getpar(Mutro_Preset), MuTroMojo_Bypass);
 
         break;
     case 32:

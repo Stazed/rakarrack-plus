@@ -2863,9 +2863,6 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2886,42 +2883,77 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->mutro->getpar(i) != val)
+    int val = 0;
+    int param_case_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->mutro->changepar(i,val);
-    }
-    
-    for(i++; i<5; i++)  // 2 - 4
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->mutro->getpar(i) != val)
+        switch(param_case_offset)
         {
-            plug->mutro->changepar(i,val);
+            // Normal processing
+            case MuTro_Resonance:
+            case MuTro_LFO_Tempo:
+            case MuTro_LFO_Random:
+            case MuTro_LFO_Type:
+            case MuTro_Depth:
+            case MuTro_Env_Sens:
+            case MuTro_Wah:
+            case MuTro_Env_Smooth:
+            case MuTro_LowPass:
+            case MuTro_BandPass:
+            case MuTro_HighPass:
+            case MuTro_Stages:
+            case MuTro_Range:
+            case MuTro_St_Freq:
+            case MuTro_AG_Mode:
+            case MuTro_Exp_Wah:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->mutro->getpar(param_case_offset) != val)
+                {
+                    plug->mutro->changepar(param_case_offset,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case MuTro_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->mutro->getpar(MuTro_DryWet) != val)
+                {
+                    plug->mutro->changepar(MuTro_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case MuTro_LFO_Stereo:
+            {
+                val = (int)*plug->param_p[i] + 64; // offset
+                if(plug->mutro->getpar(MuTro_LFO_Stereo) != val)
+                {
+                    plug->mutro->changepar(MuTro_LFO_Stereo,val);
+                }
+            }
+            break;
+
+            // Skip after
+            case MuTro_Mod_Res:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->mutro->getpar(MuTro_Mod_Res) != val)
+                {
+                    plug->mutro->changepar(MuTro_Mod_Res,val);
+                }
+                param_case_offset += 2; // Skip: Mutro_Mode_Legacy, Mutro_Preset
+            }
+            break;
         }
-    }
-    val = (int)*plug->param_p[i] +64;//5 LR delay
-    if(plug->mutro->getpar(i) != val)
-    {
-        plug->mutro->changepar(i,val);
-    }
-    for(i++; i<17; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->mutro->getpar(i) != val)
-        {
-            plug->mutro->changepar(i,val);
-        }
-    }
-    for(; i<plug->nparams; i++) //skip legacy mode and preset setting
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->mutro->getpar(i+2) != val)
-        {
-            plug->mutro->changepar(i+2,val);
-        }
+        
+        param_case_offset++;
     }
 
     //now run
