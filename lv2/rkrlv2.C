@@ -4623,7 +4623,7 @@ LV2_Handle init_otremlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 6;
+    plug->nparams = 7;
     plug->effectindex = IOPTTREM;
     plug->prev_bypass = 1;
     
@@ -4638,9 +4638,6 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -4660,25 +4657,40 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i< 5; i++)//0-4
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->otrem->getpar(i) != val)
+        switch(i)
         {
-            plug->otrem->changepar(i,val);
+            // Normal processing
+            case Optical_Depth:
+            case Optical_LFO_Tempo:
+            case Optical_LFO_Random:
+            case Optical_LFO_Type:
+            case Optical_LFO_Stereo:
+            case Optical_Invert:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->otrem->getpar(i) != val)
+                {
+                    plug->otrem->changepar(i,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Optical_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->otrem->getpar(Optical_Pan) != val)
+                {
+                    plug->otrem->changepar(Optical_Pan,val);
+                }
+            }
+            break;
         }
-    }
-    val = (int)*plug->param_p[i]+64;    //5 pan offset
-    if(plug->otrem->getpar(i) != val)
-    {
-        plug->otrem->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//6 invert
-    if(plug->otrem->getpar(i) != val)
-    {
-        plug->otrem->changepar(i,val);
     }
 
     //now run

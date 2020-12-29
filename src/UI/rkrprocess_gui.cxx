@@ -4616,23 +4616,23 @@ void RKRGUI::ActMIDI()
                 COMPBAND->cband_cross3->redraw();
                 break;
             case 381:
-                OTREM->otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
+                OTREM->otrem_dpth->value(rkr->efx_Opticaltrem->getpar(Optical_Depth));
                 OTREM->otrem_dpth->redraw();
                 break;
             case 382:
-                OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+                OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Tempo));
                 OTREM->otrem_freq->redraw();
                 break;
             case 383:
-                OTREM->otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
+                OTREM->otrem_rnd->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Random));
                 OTREM->otrem_rnd->redraw();
                 break;
             case 384:
-                OTREM->otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
+                OTREM->otrem_stdf->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Stereo));
                 OTREM->otrem_stdf->redraw();
                 break;
             case 385:
-                OTREM->otrem_pan->value(rkr->efx_Opticaltrem->getpar(5) - 64);
+                OTREM->otrem_pan->value(rkr->efx_Opticaltrem->getpar(Optical_Pan) - 64);
                 OTREM->otrem_pan->redraw();
                 break;
             case 386:
@@ -4946,7 +4946,7 @@ void RKRGUI::ActMIDI()
                 MUTROMOJO->mutromojo_lfotype->redraw();
                 break;
             case 463:
-                OTREM->otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
+                OTREM->otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Type));
                 OTREM->otrem_lfotype->redraw();
                 break;
             case 464:
@@ -6090,7 +6090,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->Opticaltrem_Bypass)
     {
-        OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
+        OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Tempo));
         OTREM->otrem_freq->redraw();
     }
     if (rkr->Vibe_Bypass)

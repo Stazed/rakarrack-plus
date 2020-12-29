@@ -374,7 +374,7 @@ RKR::Update_tempo()
     if (Echoverse_Bypass) efx_Echoverse->changepar(Echoverse_Tempo, Tap_TempoSetD);
     if (Sequence_Bypass) efx_Sequence->changepar(9, Tap_TempoSetD);
     if (Echotron_Bypass) efx_Echotron->changepar(Echotron_Tempo, Tap_TempoSetD);
-    if (Opticaltrem_Bypass) efx_Opticaltrem->changepar(1, Tap_TempoSetL);
+    if (Opticaltrem_Bypass) efx_Opticaltrem->changepar(Optical_LFO_Tempo, Tap_TempoSetL);
     if (Vibe_Bypass) efx_Vibe->changepar(1, Tap_TempoSetL);
     if (Infinity_Bypass) efx_Infinity->changepar(Infinity_Tempo, Tap_TempoSetL);
 

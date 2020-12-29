@@ -250,31 +250,31 @@ Opticaltrem::changepar(int npar, int value)
     switch (npar)
     {
 
-    case 0:
+    case Optical_Depth:
         Pdepth = value;
         fdepth = 0.5f + ((float) Pdepth) / 254.0f;
         break;
-    case 1:
+    case Optical_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 2:
+    case Optical_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case Optical_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case Optical_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5: // pan
+    case Optical_Pan:
         Ppanning = value;
         setpanning(value);
         break;
-    case 6: //Invert
+    case Optical_Invert:
         Pinvert = value;
         if (Pinvert)
         {
@@ -300,26 +300,26 @@ Opticaltrem::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Optical_Depth:
         return (Pdepth);
         break;
-    case 1:
+    case Optical_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case 2:
+    case Optical_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 3:
+    case Optical_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 4:
+    case Optical_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 5:
-        return (Ppanning); //pan
+    case Optical_Pan:
+        return (Ppanning);
         break;
-    case 6:
-        return (Pinvert); //pan
+    case Optical_Invert:
+        return (Pinvert);
         break;
     }
     return (0);

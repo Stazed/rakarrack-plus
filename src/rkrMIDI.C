@@ -2437,23 +2437,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 381:
-        efx_Opticaltrem->changepar(0, value);
+        efx_Opticaltrem->changepar(Optical_Depth, value);
         break;
 
     case 382:
-        efx_Opticaltrem->changepar(1, ret_Tempo(value));
+        efx_Opticaltrem->changepar(Optical_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 383:
-        efx_Opticaltrem->changepar(2, value);
+        efx_Opticaltrem->changepar(Optical_LFO_Random, value);
         break;
 
     case 384:
-        efx_Opticaltrem->changepar(4, value);
+        efx_Opticaltrem->changepar(Optical_LFO_Stereo, value);
         break;
 
     case 385:
-        efx_Opticaltrem->changepar(5, value);
+        efx_Opticaltrem->changepar(Optical_Pan, value);
         break;
 
     case 386:
@@ -2765,7 +2765,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 463:
-        efx_Opticaltrem->changepar(3, (int) ((float) value * C_MC_11_RANGE));
+        efx_Opticaltrem->changepar(Optical_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 464:

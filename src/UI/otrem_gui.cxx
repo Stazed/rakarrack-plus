@@ -21,13 +21,13 @@ void OtremGui::cb_otrem_activar(RKR_Light_Button* o, void* v) {
 void OtremGui::cb_otrem_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12044))rkr->efx_Opticaltrem->setpreset((int)o->value());
-otrem_dpth->value(rkr->efx_Opticaltrem->getpar(0));
-otrem_freq->value(rkr->efx_Opticaltrem->getpar(1));
-otrem_rnd->value(rkr->efx_Opticaltrem->getpar(2));
-otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(3));
-otrem_stdf->value(rkr->efx_Opticaltrem->getpar(4));
-otrem_pan->value(rkr->efx_Opticaltrem->getpar(5)-64);
-otrem_invert->value(rkr->efx_Opticaltrem->getpar(6));
+otrem_dpth->value(rkr->efx_Opticaltrem->getpar(Optical_Depth));
+otrem_freq->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Tempo));
+otrem_rnd->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Random));
+otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Type));
+otrem_stdf->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Stereo));
+otrem_pan->value(rkr->efx_Opticaltrem->getpar(Optical_Pan)-64);
+otrem_invert->value(rkr->efx_Opticaltrem->getpar(Optical_Invert));
 }
 void OtremGui::cb_otrem_preset(RKR_Choice* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_preset_i(o,v);
@@ -50,7 +50,7 @@ void OtremGui::cb_otrem_dpth_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(381);
  return;
 }
-rkr->efx_Opticaltrem->changepar(0,(int)o->value());
+rkr->efx_Opticaltrem->changepar(Optical_Depth,(int)o->value());
 }
 void OtremGui::cb_otrem_dpth(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_dpth_i(o,v);
@@ -62,7 +62,7 @@ void OtremGui::cb_otrem_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(382);
  return;
 }
-rkr->efx_Opticaltrem->changepar(1,(int)o->value());
+rkr->efx_Opticaltrem->changepar(Optical_LFO_Tempo,(int)o->value());
 }
 void OtremGui::cb_otrem_freq(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_freq_i(o,v);
@@ -74,7 +74,7 @@ void OtremGui::cb_otrem_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(383);
  return;
 }
-rkr->efx_Opticaltrem->changepar(2,(int)o->value());
+rkr->efx_Opticaltrem->changepar(Optical_LFO_Random,(int)o->value());
 }
 void OtremGui::cb_otrem_rnd(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_rnd_i(o,v);
@@ -87,7 +87,7 @@ void OtremGui::cb_otrem_lfotype_i(RKR_Choice* o, void*) {
  return;
 }
 
-rkr->efx_Opticaltrem->changepar(3,(int)o->value());
+rkr->efx_Opticaltrem->changepar(Optical_LFO_Type,(int)o->value());
 }
 void OtremGui::cb_otrem_lfotype(RKR_Choice* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_lfotype_i(o,v);
@@ -99,7 +99,7 @@ void OtremGui::cb_otrem_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(384);
  return;
 }
-rkr->efx_Opticaltrem->changepar(4,(int)o->value());
+rkr->efx_Opticaltrem->changepar(Optical_LFO_Stereo,(int)o->value());
 }
 void OtremGui::cb_otrem_stdf(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_stdf_i(o,v);
@@ -111,14 +111,14 @@ void OtremGui::cb_otrem_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(385);
  return;
 }
-rkr->efx_Opticaltrem->changepar(5,(int)(o->value()+64));
+rkr->efx_Opticaltrem->changepar(Optical_Pan,(int)(o->value()+64));
 }
 void OtremGui::cb_otrem_pan(RKR_Slider* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_pan_i(o,v);
 }
 
 void OtremGui::cb_otrem_invert_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Opticaltrem->changepar(6,(int)o->value());
+  rkr->efx_Opticaltrem->changepar(Optical_Invert,(int)o->value());
 }
 void OtremGui::cb_otrem_invert(RKR_Check_Button* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_invert_i(o,v);

@@ -1018,10 +1018,10 @@ void RKR::getbuf(char *buf, int j)
     case 44:
         //Opticaltrem
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Opticaltrem->getpar(0), efx_Opticaltrem->getpar(1),
-                efx_Opticaltrem->getpar(2), efx_Opticaltrem->getpar(3),
-                efx_Opticaltrem->getpar(4), efx_Opticaltrem->getpar(5),
-                efx_Opticaltrem->getpar(6), Opticaltrem_Bypass);
+                efx_Opticaltrem->getpar(Optical_Depth), efx_Opticaltrem->getpar(Optical_LFO_Tempo),
+                efx_Opticaltrem->getpar(Optical_LFO_Random), efx_Opticaltrem->getpar(Optical_LFO_Type),
+                efx_Opticaltrem->getpar(Optical_LFO_Stereo), efx_Opticaltrem->getpar(Optical_Pan),
+                efx_Opticaltrem->getpar(Optical_Invert), Opticaltrem_Bypass);
         break;
 
 

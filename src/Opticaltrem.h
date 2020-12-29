@@ -28,6 +28,17 @@
 
 #include "EffectLFO.h"
 
+enum Optical_Index
+{
+    Optical_Depth,
+    Optical_LFO_Tempo,
+    Optical_LFO_Random,
+    Optical_LFO_Type,
+    Optical_LFO_Stereo,
+    Optical_Pan,
+    Optical_Invert
+};
+
 class Opticaltrem
 {
 
