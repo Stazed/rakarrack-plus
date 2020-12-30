@@ -3205,7 +3205,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_dpth->redraw();
                 break;
             case 21:
-                PHASER->phaser_dpth->value(rkr->efx_Phaser->getpar(6));
+                PHASER->phaser_dpth->value(rkr->efx_Phaser->getpar(Phaser_Depth));
                 PHASER->phaser_dpth->redraw();
                 break;
             case 22:
@@ -3257,7 +3257,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_WD->redraw();
                 break;
             case 54:
-                PHASER->phaser_WD->value(Dry_Wet(rkr->efx_Phaser->getpar(0)));
+                PHASER->phaser_WD->value(Dry_Wet(rkr->efx_Phaser->getpar(Phaser_DryWet)));
                 PHASER->phaser_WD->redraw();
                 break;
             case 55:
@@ -3305,7 +3305,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_pan->redraw();
                 break;
             case 60:
-                PHASER->phaser_pan->value(rkr->efx_Phaser->getpar(1) - 64);
+                PHASER->phaser_pan->value(rkr->efx_Phaser->getpar(Phaser_Pan) - 64);
                 PHASER->phaser_pan->redraw();
                 break;
             case 61:
@@ -3357,7 +3357,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_freq->redraw();
                 break;
             case 74:
-                PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(2));
+                PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(Phaser_LFO_Tempo));
                 PHASER->phaser_freq->redraw();
                 break;
             case 75:
@@ -3385,7 +3385,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_fb->redraw();
                 break;
             case 81:
-                PHASER->phaser_fb->value(rkr->efx_Phaser->getpar(7));
+                PHASER->phaser_fb->value(rkr->efx_Phaser->getpar(Phaser_Feedback));
                 PHASER->phaser_fb->redraw();
                 break;
             case 82:
@@ -3433,7 +3433,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_LR->redraw();
                 break;
             case 93:
-                PHASER->phaser_LR->value(rkr->efx_Phaser->getpar(9) - 64);
+                PHASER->phaser_LR->value(rkr->efx_Phaser->getpar(Phaser_LR_Cross) - 64);
                 PHASER->phaser_LR->redraw();
                 break;
             case 94:
@@ -3465,7 +3465,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_stdf->redraw();
                 break;
             case 101:
-                PHASER->phaser_stdf->value(rkr->efx_Phaser->getpar(5));
+                PHASER->phaser_stdf->value(rkr->efx_Phaser->getpar(Phaser_LFO_Stereo));
                 PHASER->phaser_stdf->redraw();
                 break;
             case 102:
@@ -3489,7 +3489,7 @@ void RKRGUI::ActMIDI()
                 FLANGER->flanger_rnd->redraw();
                 break;
             case 107:
-                PHASER->phaser_rnd->value(rkr->efx_Phaser->getpar(3));
+                PHASER->phaser_rnd->value(rkr->efx_Phaser->getpar(Phaser_LFO_Random));
                 PHASER->phaser_rnd->redraw();
                 break;
             case 108:
@@ -3517,7 +3517,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_smooth->redraw();
                 break;
             case 114:
-                PHASER->phaser_phase->value(rkr->efx_Phaser->getpar(11));
+                PHASER->phaser_phase->value(rkr->efx_Phaser->getpar(Phaser_Phase));
                 PHASER->phaser_phase->redraw();
                 break;
             case 115:
@@ -4954,7 +4954,7 @@ void RKRGUI::ActMIDI()
                 PAN->pan_lfotype->redraw();
                 break;
             case 465:
-                PHASER->phaser_lfotype->value(rkr->efx_Phaser->getpar(4));
+                PHASER->phaser_lfotype->value(rkr->efx_Phaser->getpar(Phaser_LFO_Type));
                 PHASER->phaser_lfotype->redraw();
                 break;
             case 466:
@@ -5998,7 +5998,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->Phaser_Bypass)
     {
-        PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(2));
+        PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(Phaser_LFO_Tempo));
         PHASER->phaser_freq->redraw();
     }
 

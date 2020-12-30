@@ -982,7 +982,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 21:
-        efx_Phaser->changepar(6, value);
+        efx_Phaser->changepar(Phaser_Depth, value);
         break;
 
     case 22:
@@ -1039,7 +1039,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 54:
-        efx_Phaser->changepar(0, Dry_Wet(value));
+        efx_Phaser->changepar(Phaser_DryWet, Dry_Wet(value));
         break;
 
     case 55:
@@ -1087,7 +1087,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 60:
-        efx_Phaser->changepar(1, value);
+        efx_Phaser->changepar(Phaser_Pan, value);
         break;
 
     case 61:
@@ -1139,7 +1139,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 74:
-        efx_Phaser->changepar(2, ret_Tempo(value));
+        efx_Phaser->changepar(Phaser_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 75:
@@ -1167,7 +1167,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 81:
-        efx_Phaser->changepar(7, value);
+        efx_Phaser->changepar(Phaser_Feedback, value);
         break;
 
     case 82:
@@ -1215,7 +1215,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 93:
-        efx_Phaser->changepar(9, value);
+        efx_Phaser->changepar(Phaser_LR_Cross, value);
         break;
 
     case 94:
@@ -1247,7 +1247,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 101:
-        efx_Phaser->changepar(5, value);
+        efx_Phaser->changepar(Phaser_LFO_Stereo, value);
         break;
 
     case 102:
@@ -1271,7 +1271,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 107:
-        efx_Phaser->changepar(3, value);
+        efx_Phaser->changepar(Phaser_LFO_Random, value);
         break;
 
     case 108:
@@ -1299,7 +1299,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 114:
-        efx_Phaser->changepar(11, value);
+        efx_Phaser->changepar(Phaser_Phase, value);
         break;
 
     case 115:
@@ -2773,7 +2773,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 465:
-        efx_Phaser->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_Phaser->changepar(Phaser_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 466:

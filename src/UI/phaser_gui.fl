@@ -43,19 +43,18 @@ rgui->findpos(6,(int)o->value(),o);}
     user_data 12006
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12006))rkr->efx_Phaser->setpreset((int) o->value());
-phaser_WD->value(Dry_Wet(rkr->efx_Phaser->getpar(0)));
-phaser_pan->value(rkr->efx_Phaser->getpar(1)-64);
-phaser_freq->value(rkr->efx_Phaser->getpar(2));
-phaser_rnd->value(rkr->efx_Phaser->getpar(3));
-phaser_lfotype->value(rkr->efx_Phaser->getpar(4));
-phaser_stdf->value(rkr->efx_Phaser->getpar(5));
-phaser_dpth->value(rkr->efx_Phaser->getpar(6));
-phaser_stages->value(rkr->efx_Phaser->getpar(8));
-phaser_fb->value(rkr->efx_Phaser->getpar(7));
-phaser_stages->value(rkr->efx_Phaser->getpar(8));
-phaser_LR->value(rkr->efx_Phaser->getpar(9)-64);
-phaser_subs->value(rkr->efx_Phaser->getpar(10));
-phaser_phase->value(rkr->efx_Phaser->getpar(11));}
+phaser_WD->value(Dry_Wet(rkr->efx_Phaser->getpar(Phaser_DryWet)));
+phaser_pan->value(rkr->efx_Phaser->getpar(Phaser_Pan)-64);
+phaser_freq->value(rkr->efx_Phaser->getpar(Phaser_LFO_Tempo));
+phaser_rnd->value(rkr->efx_Phaser->getpar(Phaser_LFO_Random));
+phaser_lfotype->value(rkr->efx_Phaser->getpar(Phaser_LFO_Type));
+phaser_stdf->value(rkr->efx_Phaser->getpar(Phaser_LFO_Stereo));
+phaser_dpth->value(rkr->efx_Phaser->getpar(Phaser_Depth));
+phaser_fb->value(rkr->efx_Phaser->getpar(Phaser_Feedback));
+phaser_stages->value(rkr->efx_Phaser->getpar(Phaser_Stages));
+phaser_LR->value(rkr->efx_Phaser->getpar(Phaser_LR_Cross)-64);
+phaser_subs->value(rkr->efx_Phaser->getpar(Phaser_Subtract));
+phaser_phase->value(rkr->efx_Phaser->getpar(Phaser_Phase));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -91,7 +90,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(11));}
  rgui->getMIDIControl(54);
  return;
 } 
-rkr->efx_Phaser->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Phaser->changepar(Phaser_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -102,7 +101,7 @@ rkr->efx_Phaser->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(60);
  return;
 } 
-rkr->efx_Phaser->changepar(1,(int)(o->value()+64));}
+rkr->efx_Phaser->changepar(Phaser_Pan,(int)(o->value()+64));}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -113,7 +112,7 @@ rkr->efx_Phaser->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(74);
  return;
 } 
-rkr->efx_Phaser->changepar(2,(int)o->value());}
+rkr->efx_Phaser->changepar(Phaser_LFO_Tempo,(int)o->value());}
     xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -124,7 +123,7 @@ rkr->efx_Phaser->changepar(2,(int)o->value());}
  rgui->getMIDIControl(107);
  return;
 } 
-rkr->efx_Phaser->changepar(3,(int)o->value());}
+rkr->efx_Phaser->changepar(Phaser_LFO_Random,(int)o->value());}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -136,7 +135,7 @@ rkr->efx_Phaser->changepar(3,(int)o->value());}
  return;
 } 
 
-rkr->efx_Phaser->changepar(4,(int)o->value());} open
+rkr->efx_Phaser->changepar(Phaser_LFO_Type,(int)o->value());} open
     xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -144,7 +143,7 @@ rkr->efx_Phaser->changepar(4,(int)o->value());} open
   Fl_Check_Button phaser_subs {
     label Subtract
     user_data 2
-    callback {rkr->efx_Phaser->changepar(10,(int)o->value())}
+    callback {rkr->efx_Phaser->changepar(Phaser_Subtract,(int)o->value())}
     xywh {40 94 65 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -155,7 +154,7 @@ rkr->efx_Phaser->changepar(4,(int)o->value());} open
  rgui->getMIDIControl(114);
  return;
 } 
-rkr->efx_Phaser->changepar(11,(int)o->value());}
+rkr->efx_Phaser->changepar(Phaser_Phase,(int)o->value());}
     xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -166,7 +165,7 @@ rkr->efx_Phaser->changepar(11,(int)o->value());}
  rgui->getMIDIControl(101);
  return;
 } 
-rkr->efx_Phaser->changepar(5,(int)o->value());}
+rkr->efx_Phaser->changepar(Phaser_LFO_Stereo,(int)o->value());}
     tooltip {LFO L/R Delay} xywh {56 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -177,7 +176,7 @@ rkr->efx_Phaser->changepar(5,(int)o->value());}
  rgui->getMIDIControl(21);
  return;
 } 
-rkr->efx_Phaser->changepar(6,(int)o->value());}
+rkr->efx_Phaser->changepar(Phaser_Depth,(int)o->value());}
     tooltip {Phase Depth} xywh {56 132 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -188,13 +187,13 @@ rkr->efx_Phaser->changepar(6,(int)o->value());}
  rgui->getMIDIControl(81);
  return;
 } 
-rkr->efx_Phaser->changepar(7,(int)o->value());}
+rkr->efx_Phaser->changepar(Phaser_Feedback,(int)o->value());}
     xywh {56 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Counter phaser_stages {
     label Stages
-    callback {rkr->efx_Phaser->changepar(8,(int)o->value());} selected
+    callback {rkr->efx_Phaser->changepar(Phaser_Stages,(int)o->value());}
     xywh {72 156 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
@@ -206,7 +205,7 @@ rkr->efx_Phaser->changepar(7,(int)o->value());}
  rgui->getMIDIControl(93);
  return;
 } 
-rkr->efx_Phaser->changepar(9,(int)(o->value()+64));}
+rkr->efx_Phaser->changepar(Phaser_LR_Cross,(int)(o->value()+64));}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }

@@ -4968,9 +4968,6 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
  */
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -4991,46 +4988,55 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->phase->getpar(i) != val)
-    {
-        plug->phase->changepar(i,val);
-    }
 
-    for(i++; i<1; i++) //1-4
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->phase->getpar(i) != val)
+        switch(i)
         {
-            plug->phase->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64;// 1 Pan offset
-    if(plug->phase->getpar(i) != val)
-    {
-        plug->phase->changepar(i,val);
-    }
-    for(i++; i<9; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->phase->getpar(i) != val)
-        {
-            plug->phase->changepar(i,val);
-        }
-    }
-    val = (int)*plug->param_p[i] +64 ;// 9 l/r cross offset
-    if(plug->phase->getpar(i) != val)
-    {
-        plug->phase->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->phase->getpar(i) != val)
-        {
-            plug->phase->changepar(i,val);
+            // Normal processing
+            case Phaser_LFO_Tempo:
+            case Phaser_LFO_Random:
+            case Phaser_LFO_Type:
+            case Phaser_LFO_Stereo:
+            case Phaser_Depth:
+            case Phaser_Feedback:
+            case Phaser_Stages:
+            case Phaser_Subtract:
+            case Phaser_Phase:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->phase->getpar(i) != val)
+                {
+                    plug->phase->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Phaser_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->phase->getpar(Phaser_DryWet) != val)
+                {
+                    plug->phase->changepar(Phaser_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Phaser_Pan:
+            case Phaser_LR_Cross:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->phase->getpar(i) != val)
+                {
+                    plug->phase->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 

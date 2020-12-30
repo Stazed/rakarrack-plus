@@ -26,6 +26,22 @@
 #define PHASER_H
 #include "EffectLFO.h"
 
+enum Phaser_Index
+{
+    Phaser_DryWet,
+    Phaser_Pan,
+    Phaser_LFO_Tempo,
+    Phaser_LFO_Random,
+    Phaser_LFO_Type,
+    Phaser_LFO_Stereo,
+    Phaser_Depth,
+    Phaser_Feedback,
+    Phaser_Stages,
+    Phaser_LR_Cross,
+    Phaser_Subtract,
+    Phaser_Phase
+};
+
 class Phaser
 {
 public:

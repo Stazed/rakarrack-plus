@@ -281,46 +281,46 @@ Phaser::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Phaser_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Phaser_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Phaser_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case Phaser_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case Phaser_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5:
+    case Phaser_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case Phaser_Depth:
         setdepth(value);
         break;
-    case 7:
+    case Phaser_Feedback:
         setfb(value);
         break;
-    case 8:
+    case Phaser_Stages:
         setstages(value);
         break;
-    case 9:
+    case Phaser_LR_Cross:
         setlrcross(value);
         break;
-    case 10:
+    case Phaser_Subtract:
         if (value > 1)
             value = 1;
         Poutsub = value;
         break;
-    case 11:
+    case Phaser_Phase:
         setphase(value);
         break;
     }
@@ -331,40 +331,40 @@ Phaser::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Phaser_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Phaser_Pan:
         return (Ppanning);
         break;
-    case 2:
-        return (lfo->Pfreq); // tempo
+    case Phaser_LFO_Tempo:
+        return (lfo->Pfreq);
         break;
-    case 3:
+    case Phaser_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case Phaser_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case Phaser_LFO_Stereo:
         return (lfo->Pstereo); // STDL
         break;
-    case 6:
+    case Phaser_Depth:
         return (Pdepth);
         break;
-    case 7:
-        return (Pfb); // pfb feedback
+    case Phaser_Feedback:
+        return (Pfb);
         break;
-    case 8:
+    case Phaser_Stages:
         return (Pstages);
         break;
-    case 9:
+    case Phaser_LR_Cross:
         return (Plrcross);
         break;
-    case 10:
+    case Phaser_Subtract:
         return (Poutsub);
         break;
-    case 11:
+    case Phaser_Phase:
         return (Pphase);
         break;
     default:

@@ -568,12 +568,12 @@ void RKR::getbuf(char *buf, int j)
     case 6:
         //Phaser
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Phaser->getpar(0), efx_Phaser->getpar(1),
-                efx_Phaser->getpar(2), efx_Phaser->getpar(3),
-                efx_Phaser->getpar(4), efx_Phaser->getpar(5),
-                efx_Phaser->getpar(6), efx_Phaser->getpar(7),
-                efx_Phaser->getpar(8), efx_Phaser->getpar(9),
-                efx_Phaser->getpar(10), efx_Phaser->getpar(11),
+                efx_Phaser->getpar(Phaser_DryWet), efx_Phaser->getpar(Phaser_Pan),
+                efx_Phaser->getpar(Phaser_LFO_Tempo), efx_Phaser->getpar(Phaser_LFO_Random),
+                efx_Phaser->getpar(Phaser_LFO_Type), efx_Phaser->getpar(Phaser_LFO_Stereo),
+                efx_Phaser->getpar(Phaser_Depth), efx_Phaser->getpar(Phaser_Feedback),
+                efx_Phaser->getpar(Phaser_Stages), efx_Phaser->getpar(Phaser_LR_Cross),
+                efx_Phaser->getpar(Phaser_Subtract), efx_Phaser->getpar(Phaser_Phase),
                 Phaser_Bypass);
         break;
 
