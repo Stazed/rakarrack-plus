@@ -360,7 +360,7 @@ RKR::Update_tempo()
     if (Chorus_Bypass) efx_Chorus->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
     if (Flanger_Bypass) efx_Flanger->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
     if (Phaser_Bypass) efx_Phaser->changepar(2, Tap_TempoSetL);
-    if (Pan_Bypass) efx_Pan->changepar(2, Tap_TempoSetL);
+    if (Pan_Bypass) efx_Pan->changepar(Pan_LFO_Tempo, Tap_TempoSetL);
     if (WhaWha_Bypass) efx_WhaWha->changepar(2, Tap_TempoSetL);
     if (Alienwah_Bypass) efx_Alienwah->changepar(Alien_LFO_Tempo, Tap_TempoSetL);
     if (MusDelay_Bypass) efx_MusDelay->changepar(Music_Tempo, Tap_TempoSetD);

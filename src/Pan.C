@@ -176,35 +176,35 @@ Pan::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Pan_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Pan_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Pan_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case Pan_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case Pan_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5:
+    case Pan_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case Pan_Ex_St_Amt:
         setextra(value);
         break;
-    case 7:
+    case Pan_AutoPan:
         PAutoPan = value;
         break;
-    case 8:
+    case Pan_Enable_Extra:
         PextraON = value;
         break;
     }
@@ -215,31 +215,31 @@ Pan::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Pan_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Pan_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Pan_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case 3:
+    case Pan_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case Pan_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case Pan_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 6:
+    case Pan_Ex_St_Amt:
         return (Pextra);
         break;
-    case 7:
+    case Pan_AutoPan:
         return (PAutoPan);
         break;
-    case 8:
+    case Pan_Enable_Extra:
         return (PextraON);
         break;
     default:

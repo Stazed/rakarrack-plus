@@ -21,15 +21,15 @@ void PanGui::cb_pan_activar(RKR_Light_Button* o, void* v) {
 void PanGui::cb_pan_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12013))rkr->efx_Pan->setpreset((int) o->value());
-pan_WD->value(Dry_Wet(rkr->efx_Pan->getpar(0)));
-pan_pan->value(rkr->efx_Pan->getpar(1)-64);
-pan_freq->value(rkr->efx_Pan->getpar(2));
-pan_rnd->value(rkr->efx_Pan->getpar(3));
-pan_lfotype->value(rkr->efx_Pan->getpar(4));
-pan_stdf->value(rkr->efx_Pan->getpar(5));
-pan_extra->value(rkr->efx_Pan->getpar(6));
-pan_autopan->value(rkr->efx_Pan->getpar(7));
-pan_extraon->value(rkr->efx_Pan->getpar(8));
+pan_WD->value(Dry_Wet(rkr->efx_Pan->getpar(Pan_DryWet)));
+pan_pan->value(rkr->efx_Pan->getpar(Pan_Pan)-64);
+pan_freq->value(rkr->efx_Pan->getpar(Pan_LFO_Tempo));
+pan_rnd->value(rkr->efx_Pan->getpar(Pan_LFO_Random));
+pan_lfotype->value(rkr->efx_Pan->getpar(Pan_LFO_Type));
+pan_stdf->value(rkr->efx_Pan->getpar(Pan_LFO_Stereo));
+pan_extra->value(rkr->efx_Pan->getpar(Pan_Ex_St_Amt));
+pan_autopan->value(rkr->efx_Pan->getpar(Pan_AutoPan));
+pan_extraon->value(rkr->efx_Pan->getpar(Pan_Enable_Extra));
 }
 void PanGui::cb_pan_preset(RKR_Choice* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_preset_i(o,v);
@@ -47,7 +47,7 @@ void PanGui::cb_pan_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(58);
  return;
 } 
-rkr->efx_Pan->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_Pan->changepar(Pan_DryWet,Dry_Wet((int)(o->value())));
 }
 void PanGui::cb_pan_WD(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_WD_i(o,v);
@@ -59,14 +59,14 @@ void PanGui::cb_pan_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(67);
  return;
 } 
-rkr->efx_Pan->changepar(1,(int)(o->value()+64));
+rkr->efx_Pan->changepar(Pan_Pan,(int)(o->value()+64));
 }
 void PanGui::cb_pan_pan(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_pan_i(o,v);
 }
 
 void PanGui::cb_pan_autopan_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(7,(int)o->value());
+  rkr->efx_Pan->changepar(Pan_AutoPan,(int)o->value());
 }
 void PanGui::cb_pan_autopan(RKR_Check_Button* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_autopan_i(o,v);
@@ -78,7 +78,7 @@ void PanGui::cb_pan_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(77);
  return;
 } 
-rkr->efx_Pan->changepar(2,(int)o->value());
+rkr->efx_Pan->changepar(Pan_LFO_Tempo,(int)o->value());
 }
 void PanGui::cb_pan_freq(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_freq_i(o,v);
@@ -90,7 +90,7 @@ void PanGui::cb_pan_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(110);
  return;
 } 
-rkr->efx_Pan->changepar(3,(int)o->value());
+rkr->efx_Pan->changepar(Pan_LFO_Random,(int)o->value());
 }
 void PanGui::cb_pan_rnd(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_rnd_i(o,v);
@@ -103,7 +103,7 @@ void PanGui::cb_pan_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_Pan->changepar(4,(int)o->value());
+rkr->efx_Pan->changepar(Pan_LFO_Type,(int)o->value());
 }
 void PanGui::cb_pan_lfotype(RKR_Choice* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_lfotype_i(o,v);
@@ -115,14 +115,14 @@ void PanGui::cb_pan_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(104);
  return;
 } 
-rkr->efx_Pan->changepar(5,(int)o->value());
+rkr->efx_Pan->changepar(Pan_LFO_Stereo,(int)o->value());
 }
 void PanGui::cb_pan_stdf(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_stdf_i(o,v);
 }
 
 void PanGui::cb_pan_extraon_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Pan->changepar(8,(int)o->value());
+  rkr->efx_Pan->changepar(Pan_Enable_Extra,(int)o->value());
 }
 void PanGui::cb_pan_extraon(RKR_Check_Button* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_extraon_i(o,v);
@@ -134,7 +134,7 @@ void PanGui::cb_pan_extra_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(436);
  return;
 }
-rkr->efx_Pan->changepar(6,(int)o->value());
+rkr->efx_Pan->changepar(Pan_Ex_St_Amt,(int)o->value());
 }
 void PanGui::cb_pan_extra(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_extra_i(o,v);

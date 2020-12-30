@@ -665,11 +665,11 @@ void RKR::getbuf(char *buf, int j)
     case 13:
         //Pan
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Pan->getpar(0), efx_Pan->getpar(1),
-                efx_Pan->getpar(2), efx_Pan->getpar(3),
-                efx_Pan->getpar(4), efx_Pan->getpar(5),
-                efx_Pan->getpar(6), efx_Pan->getpar(7),
-                efx_Pan->getpar(8), Pan_Bypass);
+                efx_Pan->getpar(Pan_DryWet), efx_Pan->getpar(Pan_Pan),
+                efx_Pan->getpar(Pan_LFO_Tempo), efx_Pan->getpar(Pan_LFO_Random),
+                efx_Pan->getpar(Pan_LFO_Type), efx_Pan->getpar(Pan_LFO_Stereo),
+                efx_Pan->getpar(Pan_Ex_St_Amt), efx_Pan->getpar(Pan_AutoPan),
+                efx_Pan->getpar(Pan_Enable_Extra), Pan_Bypass);
         break;
 
     case 14:

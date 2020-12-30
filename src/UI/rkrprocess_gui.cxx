@@ -3273,7 +3273,7 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_WD->redraw();
                 break;
             case 58:
-                PAN->pan_WD->value(Dry_Wet(rkr->efx_Pan->getpar(0)));
+                PAN->pan_WD->value(Dry_Wet(rkr->efx_Pan->getpar(Pan_DryWet)));
                 PAN->pan_WD->redraw();
                 break;
             case 59:
@@ -3329,7 +3329,7 @@ void RKRGUI::ActMIDI()
                 WHAWHA->WhaWha_pan->redraw();
                 break;
             case 67:
-                PAN->pan_pan->value(rkr->efx_Pan->getpar(1) - 64);
+                PAN->pan_pan->value(rkr->efx_Pan->getpar(Pan_Pan) - 64);
                 PAN->pan_pan->redraw();
                 break;
             case 68:
@@ -3369,7 +3369,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_freq->redraw();
                 break;
             case 77:
-                PAN->pan_freq->value(rkr->efx_Pan->getpar(2));
+                PAN->pan_freq->value(rkr->efx_Pan->getpar(Pan_LFO_Tempo));
                 PAN->pan_freq->redraw();
                 break;
             case 78:
@@ -3477,7 +3477,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_stdf->redraw();
                 break;
             case 104:
-                PAN->pan_stdf->value(rkr->efx_Pan->getpar(5));
+                PAN->pan_stdf->value(rkr->efx_Pan->getpar(Pan_LFO_Stereo));
                 PAN->pan_stdf->redraw();
                 break;
             case 105:
@@ -3501,7 +3501,7 @@ void RKRGUI::ActMIDI()
                 ALIENWAH->Alienwah_rnd->redraw();
                 break;
             case 110:
-                PAN->pan_rnd->value(rkr->efx_Pan->getpar(3));
+                PAN->pan_rnd->value(rkr->efx_Pan->getpar(Pan_LFO_Random));
                 PAN->pan_rnd->redraw();
                 break;
             case 111:
@@ -4836,7 +4836,7 @@ void RKRGUI::ActMIDI()
                 GATE->gate_HPF->redraw();
                 break;
             case 436:
-                PAN->pan_extra->value(rkr->efx_Pan->getpar(6));
+                PAN->pan_extra->value(rkr->efx_Pan->getpar(Pan_Ex_St_Amt));
                 PAN->pan_extra->redraw();
                 break;
             case 437:
@@ -4950,7 +4950,7 @@ void RKRGUI::ActMIDI()
                 OTREM->otrem_lfotype->redraw();
                 break;
             case 464:
-                PAN->pan_lfotype->value(rkr->efx_Pan->getpar(4));
+                PAN->pan_lfotype->value(rkr->efx_Pan->getpar(Pan_LFO_Type));
                 PAN->pan_lfotype->redraw();
                 break;
             case 465:
@@ -6004,7 +6004,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->Pan_Bypass)
     {
-        PAN->pan_freq->value(rkr->efx_Pan->getpar(2));
+        PAN->pan_freq->value(rkr->efx_Pan->getpar(Pan_LFO_Tempo));
         PAN->pan_freq->redraw();
     }
 

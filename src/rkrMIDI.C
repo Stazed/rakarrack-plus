@@ -1055,7 +1055,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 58:
-        efx_Pan->changepar(0, Dry_Wet(value));
+        efx_Pan->changepar(Pan_DryWet, Dry_Wet(value));
         break;
 
     case 59:
@@ -1111,7 +1111,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 67:
-        efx_Pan->changepar(1, value);
+        efx_Pan->changepar(Pan_Pan, value);
         break;
 
     case 68:
@@ -1151,7 +1151,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 77:
-        efx_Pan->changepar(2, ret_Tempo(value));
+        efx_Pan->changepar(Pan_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 78:
@@ -1259,7 +1259,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 104:
-        efx_Pan->changepar(5, value);
+        efx_Pan->changepar(Pan_LFO_Stereo, value);
         break;
 
     case 105:
@@ -1283,7 +1283,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 110:
-        efx_Pan->changepar(3, value);
+        efx_Pan->changepar(Pan_LFO_Random, value);
         break;
 
     case 111:
@@ -2657,7 +2657,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 436:
-        efx_Pan->changepar(6, value);
+        efx_Pan->changepar(Pan_Ex_St_Amt, value);
         break;
 
     case 437:
@@ -2769,7 +2769,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 464:
-        efx_Pan->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_Pan->changepar(Pan_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 465:

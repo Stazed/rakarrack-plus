@@ -26,6 +26,19 @@
 
 #include "EffectLFO.h"
 
+enum Pan_Index
+{
+    Pan_DryWet = 0,
+    Pan_Pan,
+    Pan_LFO_Tempo,
+    Pan_LFO_Random,
+    Pan_LFO_Type,
+    Pan_LFO_Stereo,
+    Pan_Ex_St_Amt,
+    Pan_AutoPan,
+    Pan_Enable_Extra
+};
+
 class Pan
 {
 

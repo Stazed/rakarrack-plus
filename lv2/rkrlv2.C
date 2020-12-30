@@ -1262,9 +1262,6 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1285,26 +1282,52 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->pan->getpar(i) != val)
-    {
-        plug->pan->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 64;// 1 pan
-    if(plug->pan->getpar(i) != val)
-    {
-        plug->pan->changepar(i,val);
-    }
 
-    for(i++; i<plug->nparams; i++) //2-8
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->pan->getpar(i) != val)
+        switch(i)
         {
-            plug->pan->changepar(i,val);
+            // Normal processing
+            case Pan_LFO_Tempo:
+            case Pan_LFO_Random:
+            case Pan_LFO_Type:
+            case Pan_LFO_Stereo:
+            case Pan_Ex_St_Amt:
+            case Pan_AutoPan:
+            case Pan_Enable_Extra:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->pan->getpar(i) != val)
+                {
+                    plug->pan->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Pan_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->pan->getpar(Pan_DryWet) != val)
+                {
+                    plug->pan->changepar(Pan_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Pan_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->pan->getpar(Pan_Pan) != val)
+                {
+                    plug->pan->changepar(Pan_Pan,val);
+                }
+            }
+            break;
         }
     }
 
