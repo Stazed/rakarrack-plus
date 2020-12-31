@@ -859,68 +859,68 @@ Reverbtron::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Revtron_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Revtron_Fade:
         Pfade = value;
         ffade = ((float) value) / 127.0f;
         convert_time();
         break;
-    case 2:
+    case Revtron_Safe:
         Psafe = value;
         break;
-    case 3:
+    case Revtron_Length:
         Llength = Plength = value;
         if ((Psafe) && (Llength > 400)) Llength = 400;
         convert_time();
         break;
-    case 4:
+    case Revtron_User_File:
         Puser = value;
         break;
-    case 5:
+    case Revtron_I_Delay:
         Pidelay = value;
         idelay = ((float) value) / 1000.0f;
         convert_time();
         break;
-    case 6:
+    case Revtron_Damp:
         sethidamp(value);
         break;
-    case 7:
+    case Revtron_Level:
         Plevel = value;
         level = 2.0f * dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
         levpanl = level*lpanning;
         levpanr = level*rpanning;
         break;
-    case 8:
+    case Revtron_Set_File:
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
 #else
         if (!setfile(value))error_num = 2;
 #endif 
         break;
-    case 9:
+    case Revtron_Stretch:
         Pstretch = value;
         fstretch = ((float) value) / 64.0f;
         convert_time();
         break;
-    case 10:
+    case Revtron_Feedback:
         Pfb = value;
         setfb(value);
         break;
-    case 11:
+    case Revtron_Pan:
         setpanning(value);
         break;
-    case 12:
+    case Revtron_Ex_Stereo:
         Pes = value;
         break;
-    case 13:
+    case Revtron_Shuffle:
         Prv = value;
         break;
-    case 14:
+    case Revtron_LPF:
         setlpf(value);
         break;
-    case 15:
+    case Revtron_Diffusion:
         Pdiff = value;
         diffusion = ((float) value) / 127.0f;
         convert_time();
@@ -933,52 +933,52 @@ Reverbtron::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Revtron_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Revtron_Fade:
         return (Pfade);
         break;
-    case 2:
+    case Revtron_Safe:
         return (Psafe);
         break;
-    case 3:
+    case Revtron_Length:
         return (Plength);
         break;
-    case 8:
-        return (Filenum);
-        break;
-    case 5:
-        return (Pidelay);
-        break;
-    case 6:
-        return (Phidamp);
-        break;
-    case 7:
-        return (Plevel);
-        break;
-    case 4:
+    case Revtron_User_File:
         return (Puser);
         break;
-    case 9:
+    case Revtron_I_Delay:
+        return (Pidelay);
+        break;
+    case Revtron_Damp:
+        return (Phidamp);
+        break;
+    case Revtron_Level:
+        return (Plevel);
+        break;
+    case Revtron_Set_File:
+        return (Filenum);
+        break;
+    case Revtron_Stretch:
         return (Pstretch);
         break;
-    case 10:
+    case Revtron_Feedback:
         return (Pfb);
         break;
-    case 11:
+    case Revtron_Pan:
         return (Ppanning);
         break;
-    case 12:
+    case Revtron_Ex_Stereo:
         return (Pes);
         break;
-    case 13:
+    case Revtron_Shuffle:
         return (Prv);
         break;
-    case 14:
+    case Revtron_LPF:
         return (Plpf);
         break;
-    case 15:
+    case Revtron_Diffusion:
         return (Pdiff);
         break;
     }

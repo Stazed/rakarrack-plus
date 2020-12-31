@@ -3725,7 +3725,7 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 14;
+    plug->nparams = (REVTRON_PRESET_SIZE - 2);  // -2 Revtron_User_File, Revtron_Set_File
     plug->effectindex = IREVTRON;
     plug->prev_bypass = 1;
 
@@ -3739,7 +3739,7 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor* /* descriptor */,double sample_
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
     plug->revtron = new Reverbtron( /*downsample*/5, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
-    plug->revtron->changepar(4,1);//set to user selected files
+    plug->revtron->changepar(Revtron_User_File,1);  // set to user selected files
     
 #ifdef OLDRKRLV2
     plug->rvbfile = new RvbFile;
@@ -3756,9 +3756,6 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3779,50 +3776,73 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->revtron->getpar(i) != val)
-    {
-        plug->revtron->changepar(i,val);
-    }
 
-    for(i++; i<4; i++)//skip user
+    //check and set changed parameters
+    int val = 0;
+    int param_case_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->revtron->getpar(i) != val)
+        switch(param_case_offset)
         {
-            plug->revtron->changepar(i,val);
+            // Normal processing
+            case Revtron_Fade:
+            case Revtron_Safe:
+            case Revtron_I_Delay:
+            case Revtron_Damp:
+            case Revtron_Stretch:
+            case Revtron_Feedback:
+            case Revtron_Ex_Stereo:
+            case Revtron_Shuffle:
+            case Revtron_LPF:
+            case Revtron_Diffusion:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->revtron->getpar(param_case_offset) != val)
+                {
+                    plug->revtron->changepar(param_case_offset,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Revtron_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->revtron->getpar(Revtron_DryWet) != val)
+                {
+                    plug->revtron->changepar(Revtron_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Revtron_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->revtron->getpar(Revtron_Pan) != val)
+                {
+                    plug->revtron->changepar(Revtron_Pan,val);
+                }
+            }
+            break;
+
+            // Skip parameter
+            case Revtron_Length:
+            case Revtron_Level:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->revtron->getpar(param_case_offset) != val)
+                {
+                    plug->revtron->changepar(param_case_offset,val);
+                }
+
+                param_case_offset++;    // skips Revtron_User_File, Revtron_Set_File
+            }
+            break;
         }
-    }
-    for(; i+1<8; i++)//skip file num
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->revtron->getpar(i+1) != val)
-        {
-            plug->revtron->changepar(i+1,val);
-        }
-    }
-    for(; i+2<11; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->revtron->getpar(i+2) != val)
-        {
-            plug->revtron->changepar(i+2,val);
-        }
-    }
-    val = (int)*plug->param_p[i]+64;//11 panning
-    if(plug->revtron->getpar(i+2) != val)
-    {
-        plug->revtron->changepar(i+2,val);
-    }
-    for(i++; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->revtron->getpar(i+2) != val)
-        {
-            plug->revtron->changepar(i+2,val);
-        }
+
+        param_case_offset++;
     }
 
     // Set up forge to write directly to notify output port.

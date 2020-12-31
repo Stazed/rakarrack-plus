@@ -2259,39 +2259,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 339:
-        efx_Reverbtron->changepar(0, Dry_Wet(value));
+        efx_Reverbtron->changepar(Revtron_DryWet, Dry_Wet(value));
         break;
 
     case 340:
-        efx_Reverbtron->changepar(11, value);
+        efx_Reverbtron->changepar(Revtron_Pan, value);
         break;
 
     case 341:
-        efx_Reverbtron->changepar(7, value);
+        efx_Reverbtron->changepar(Revtron_Level, value);
         break;
 
     case 342:
-        efx_Reverbtron->changepar(6, value);
+        efx_Reverbtron->changepar(Revtron_Damp, value);
         break;
 
     case 343:
-        efx_Reverbtron->changepar(10, (int) ((float) value * C_MC_128_RANGE));
+        efx_Reverbtron->changepar(Revtron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 344:
-        efx_Reverbtron->changepar(3, 20 + (int) ((float) value * C_MC_1480_RANGE));
+        efx_Reverbtron->changepar(Revtron_Length, 20 + (int) ((float) value * C_MC_1480_RANGE));
         break;
 
     case 345:
-        efx_Reverbtron->changepar(9, (int) ((float) value * C_MC_128_RANGE));
+        efx_Reverbtron->changepar(Revtron_Stretch, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 346:
-        efx_Reverbtron->changepar(5, (int) ((float) value * C_MC_500_RANGE));
+        efx_Reverbtron->changepar(Revtron_I_Delay, (int) ((float) value * C_MC_500_RANGE));
         break;
 
     case 347:
-        efx_Reverbtron->changepar(1, value);
+        efx_Reverbtron->changepar(Revtron_Fade, value);
         break;
 
     case 348:
@@ -2681,11 +2681,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 442:
-        efx_Reverbtron->changepar(15, value);
+        efx_Reverbtron->changepar(Revtron_Diffusion, value);
         break;
 
     case 443:
-        efx_Reverbtron->changepar(14, ret_LPF(value));
+        efx_Reverbtron->changepar(Revtron_LPF, ret_LPF(value));
         break;
 
     case 444:

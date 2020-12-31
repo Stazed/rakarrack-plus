@@ -967,14 +967,14 @@ void RKR::getbuf(char *buf, int j)
     case 40:
         //Reverbtron
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                efx_Reverbtron->getpar(0), efx_Reverbtron->getpar(1),
-                efx_Reverbtron->getpar(2), efx_Reverbtron->getpar(3),
-                efx_Reverbtron->getpar(4), efx_Reverbtron->getpar(5),
-                efx_Reverbtron->getpar(6), efx_Reverbtron->getpar(7),
-                efx_Reverbtron->getpar(8), efx_Reverbtron->getpar(9),
-                efx_Reverbtron->getpar(10), efx_Reverbtron->getpar(11),
-                efx_Reverbtron->getpar(12), efx_Reverbtron->getpar(13),
-                efx_Reverbtron->getpar(14), efx_Reverbtron->getpar(15),
+                efx_Reverbtron->getpar(Revtron_DryWet), efx_Reverbtron->getpar(Revtron_Fade),
+                efx_Reverbtron->getpar(Revtron_Safe), efx_Reverbtron->getpar(Revtron_Length),
+                efx_Reverbtron->getpar(Revtron_User_File), efx_Reverbtron->getpar(Revtron_I_Delay),
+                efx_Reverbtron->getpar(Revtron_Damp), efx_Reverbtron->getpar(Revtron_Level),
+                efx_Reverbtron->getpar(Revtron_Set_File), efx_Reverbtron->getpar(Revtron_Stretch),
+                efx_Reverbtron->getpar(Revtron_Feedback), efx_Reverbtron->getpar(Revtron_Pan),
+                efx_Reverbtron->getpar(Revtron_Ex_Stereo), efx_Reverbtron->getpar(Revtron_Shuffle),
+                efx_Reverbtron->getpar(Revtron_LPF), efx_Reverbtron->getpar(Revtron_Diffusion),
                 Reverbtron_Bypass, efx_Reverbtron->Filename);
         break;
 

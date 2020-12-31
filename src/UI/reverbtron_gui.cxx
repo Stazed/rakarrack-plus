@@ -20,24 +20,24 @@ void RevtronGui::cb_revtron_activar(RKR_Light_Button* o, void* v) {
 void RevtronGui::cb_revtron_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12040))rkr->efx_Reverbtron->setpreset((int) o->value());
-revtron_pan->value(rkr->efx_Reverbtron->getpar(11)-64);
-revtron_level->value(rkr->efx_Reverbtron->getpar(7));
-revtron_WD->value(Dry_Wet(rkr->efx_Reverbtron->getpar(0)));
-revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
-revtron_fnum->value(rkr->efx_Reverbtron->getpar(8));
-revtron_length->value(rkr->efx_Reverbtron->getpar(3));
-revtron_strech->value(rkr->efx_Reverbtron->getpar(9));
-revtron_safe->value(rkr->efx_Reverbtron->getpar(2));
-revtron_user->value(rkr->efx_Reverbtron->getpar(4));
+revtron_pan->value(rkr->efx_Reverbtron->getpar(Revtron_Pan)-64);
+revtron_level->value(rkr->efx_Reverbtron->getpar(Revtron_Level));
+revtron_WD->value(Dry_Wet(rkr->efx_Reverbtron->getpar(Revtron_DryWet)));
+revtron_damp->value(rkr->efx_Reverbtron->getpar(Revtron_Damp));
+revtron_fnum->value(rkr->efx_Reverbtron->getpar(Revtron_Set_File));
+revtron_length->value(rkr->efx_Reverbtron->getpar(Revtron_Length));
+revtron_strech->value(rkr->efx_Reverbtron->getpar(Revtron_Stretch));
+revtron_safe->value(rkr->efx_Reverbtron->getpar(Revtron_Safe));
+revtron_user->value(rkr->efx_Reverbtron->getpar(Revtron_User_File));
 revtron_user->do_callback();
-revtron_fb->value(rkr->efx_Reverbtron->getpar(10));
-revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
-revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
-revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
-revtron_diff->value(rkr->efx_Reverbtron->getpar(15));
+revtron_fb->value(rkr->efx_Reverbtron->getpar(Revtron_Feedback));
+revtron_fade->value(rkr->efx_Reverbtron->getpar(Revtron_Fade));
+revtron_idelay->value(rkr->efx_Reverbtron->getpar(Revtron_I_Delay));
+revtron_LPF->value(rkr->efx_Reverbtron->getpar(Revtron_LPF));
+revtron_diff->value(rkr->efx_Reverbtron->getpar(Revtron_Diffusion));
 
-revtron_es->value(rkr->efx_Reverbtron->getpar(12));
-revtron_rv->value(rkr->efx_Reverbtron->getpar(13));
+revtron_es->value(rkr->efx_Reverbtron->getpar(Revtron_Ex_Stereo));
+revtron_rv->value(rkr->efx_Reverbtron->getpar(Revtron_Shuffle));
 }
 void RevtronGui::cb_revtron_preset(RKR_Choice* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_preset_i(o,v);
@@ -62,7 +62,7 @@ void RevtronGui::cb_revtron_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(339);
  return;
 }
-rkr->efx_Reverbtron->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_Reverbtron->changepar(Revtron_DryWet,Dry_Wet((int)(o->value())));
 }
 void RevtronGui::cb_revtron_WD(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_WD_i(o,v);
@@ -74,7 +74,7 @@ void RevtronGui::cb_revtron_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(340);
  return;
 }
-rkr->efx_Reverbtron->changepar(11,(int)(o->value()+64));
+rkr->efx_Reverbtron->changepar(Revtron_Pan,(int)(o->value()+64));
 }
 void RevtronGui::cb_revtron_pan(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_pan_i(o,v);
@@ -86,7 +86,7 @@ void RevtronGui::cb_revtron_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(341);
  return;
 }
-rkr->efx_Reverbtron->changepar(7,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_Level,(int)o->value());
 }
 void RevtronGui::cb_revtron_level(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_level_i(o,v);
@@ -98,7 +98,7 @@ void RevtronGui::cb_revtron_damp_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(342);
  return;
 }
-rkr->efx_Reverbtron->changepar(6,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_Damp,(int)o->value());
 }
 void RevtronGui::cb_revtron_damp(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_damp_i(o,v);
@@ -110,7 +110,7 @@ void RevtronGui::cb_revtron_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(343);
  return;
 }
-rkr->efx_Reverbtron->changepar(10,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_Feedback,(int)o->value());
 }
 void RevtronGui::cb_revtron_fb(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_fb_i(o,v);
@@ -122,7 +122,7 @@ void RevtronGui::cb_revtron_length_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(344);
  return;
 }
-rkr->efx_Reverbtron->changepar(3,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_Length,(int)o->value());
 }
 void RevtronGui::cb_revtron_length(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_length_i(o,v);
@@ -134,7 +134,7 @@ void RevtronGui::cb_revtron_strech_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(345);
  return;
 }
-rkr->efx_Reverbtron->changepar(9,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_Stretch,(int)o->value());
 }
 void RevtronGui::cb_revtron_strech(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_strech_i(o,v);
@@ -146,7 +146,7 @@ void RevtronGui::cb_revtron_idelay_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(346);
  return;
 }
-rkr->efx_Reverbtron->changepar(5,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_I_Delay,(int)o->value());
 }
 void RevtronGui::cb_revtron_idelay(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_idelay_i(o,v);
@@ -158,7 +158,7 @@ void RevtronGui::cb_revtron_fade_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(347);
  return;
 }
-rkr->efx_Reverbtron->changepar(1,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_Fade,(int)o->value());
 }
 void RevtronGui::cb_revtron_fade(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_fade_i(o,v);
@@ -170,7 +170,7 @@ void RevtronGui::cb_revtron_diff_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(442);
  return;
 }
-rkr->efx_Reverbtron->changepar(15,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_Diffusion,(int)o->value());
 }
 void RevtronGui::cb_revtron_diff(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_diff_i(o,v);
@@ -182,35 +182,35 @@ void RevtronGui::cb_revtron_LPF_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(443);
  return;
 }
-rkr->efx_Reverbtron->changepar(14,(int)o->value());
+rkr->efx_Reverbtron->changepar(Revtron_LPF,(int)o->value());
 }
 void RevtronGui::cb_revtron_LPF(RKR_Slider* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_LPF_i(o,v);
 }
 
 void RevtronGui::cb_revtron_rv_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Reverbtron->changepar(13,(int)o->value());
+  rkr->efx_Reverbtron->changepar(Revtron_Shuffle,(int)o->value());
 }
 void RevtronGui::cb_revtron_rv(RKR_Check_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_rv_i(o,v);
 }
 
 void RevtronGui::cb_revtron_es_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Reverbtron->changepar(12,(int)o->value());
+  rkr->efx_Reverbtron->changepar(Revtron_Ex_Stereo,(int)o->value());
 }
 void RevtronGui::cb_revtron_es(RKR_Check_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_es_i(o,v);
 }
 
 void RevtronGui::cb_revtron_safe_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Reverbtron->changepar(2,(int)o->value());
+  rkr->efx_Reverbtron->changepar(Revtron_Safe,(int)o->value());
 }
 void RevtronGui::cb_revtron_safe(RKR_Check_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_safe_i(o,v);
 }
 
 void RevtronGui::cb_revtron_user_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Reverbtron->changepar(4,(int)o->value());
+  rkr->efx_Reverbtron->changepar(Revtron_User_File,(int)o->value());
 
 if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();
 }
@@ -235,7 +235,7 @@ void RevtronGui::cb_B_rvb(RKR_Button* o, void* v) {
 }
 
 void RevtronGui::cb_revtron_fnum_i(RKR_Choice* o, void*) {
-  rkr->efx_Reverbtron->changepar(8,(int)o->value());
+  rkr->efx_Reverbtron->changepar(Revtron_Set_File,(int)o->value());
 }
 void RevtronGui::cb_revtron_fnum(RKR_Choice* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_fnum_i(o,v);

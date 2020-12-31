@@ -30,6 +30,26 @@
 
 #define REVTRON_PRESET_SIZE 16
 
+enum Revtron_Index
+{
+    Revtron_DryWet,
+    Revtron_Fade,
+    Revtron_Safe,
+    Revtron_Length,
+    Revtron_User_File,
+    Revtron_I_Delay,
+    Revtron_Damp,
+    Revtron_Level,
+    Revtron_Set_File,
+    Revtron_Stretch,
+    Revtron_Feedback,
+    Revtron_Pan,
+    Revtron_Ex_Stereo,
+    Revtron_Shuffle,
+    Revtron_LPF,
+    Revtron_Diffusion
+};
+
 class RvbFile
 {
 public:

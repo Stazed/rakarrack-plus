@@ -4446,39 +4446,39 @@ void RKRGUI::ActMIDI()
                 STOMPBOX->stomp_high->redraw();
                 break;
             case 339:
-                REVERBTRON->revtron_WD->value(Dry_Wet(rkr->efx_Reverbtron->getpar(0)));
+                REVERBTRON->revtron_WD->value(Dry_Wet(rkr->efx_Reverbtron->getpar(Revtron_DryWet)));
                 REVERBTRON->revtron_WD->redraw();
                 break;
             case 340:
-                REVERBTRON->revtron_pan->value(rkr->efx_Reverbtron->getpar(11) - 64);
+                REVERBTRON->revtron_pan->value(rkr->efx_Reverbtron->getpar(Revtron_Pan) - 64);
                 REVERBTRON->revtron_pan->redraw();
                 break;
             case 341:
-                REVERBTRON->revtron_level->value(rkr->efx_Reverbtron->getpar(7));
+                REVERBTRON->revtron_level->value(rkr->efx_Reverbtron->getpar(Revtron_Level));
                 REVERBTRON->revtron_level->redraw();
                 break;
             case 342:
-                REVERBTRON->revtron_damp->value(rkr->efx_Reverbtron->getpar(6));
+                REVERBTRON->revtron_damp->value(rkr->efx_Reverbtron->getpar(Revtron_Damp));
                 REVERBTRON->revtron_damp->redraw();
                 break;
             case 343:
-                REVERBTRON->revtron_fb->value(rkr->efx_Reverbtron->getpar(10) - 64);
+                REVERBTRON->revtron_fb->value(rkr->efx_Reverbtron->getpar(Revtron_Feedback));
                 REVERBTRON->revtron_fb->redraw();
                 break;
             case 344:
-                REVERBTRON->revtron_length->value(rkr->efx_Reverbtron->getpar(3));
+                REVERBTRON->revtron_length->value(rkr->efx_Reverbtron->getpar(Revtron_Length));
                 REVERBTRON->revtron_length->redraw();
                 break;
             case 345:
-                REVERBTRON->revtron_strech->value(rkr->efx_Reverbtron->getpar(9) - 64);
+                REVERBTRON->revtron_strech->value(rkr->efx_Reverbtron->getpar(Revtron_Stretch));
                 REVERBTRON->revtron_strech->redraw();
                 break;
             case 346:
-                REVERBTRON->revtron_idelay->value(rkr->efx_Reverbtron->getpar(5));
+                REVERBTRON->revtron_idelay->value(rkr->efx_Reverbtron->getpar(Revtron_I_Delay));
                 REVERBTRON->revtron_idelay->redraw();
                 break;
             case 347:
-                REVERBTRON->revtron_fade->value(rkr->efx_Reverbtron->getpar(1));
+                REVERBTRON->revtron_fade->value(rkr->efx_Reverbtron->getpar(Revtron_Fade));
                 REVERBTRON->revtron_fade->redraw();
                 break;
             case 348:
@@ -4860,11 +4860,11 @@ void RKRGUI::ActMIDI()
                 REVERB->reverb_damp->redraw();
                 break;
             case 442:
-                REVERBTRON->revtron_diff->value(rkr->efx_Reverbtron->getpar(15));
+                REVERBTRON->revtron_diff->value(rkr->efx_Reverbtron->getpar(Revtron_Diffusion));
                 REVERBTRON->revtron_diff->redraw();
                 break;
             case 443:
-                REVERBTRON->revtron_LPF->value(rkr->efx_Reverbtron->getpar(14));
+                REVERBTRON->revtron_LPF->value(rkr->efx_Reverbtron->getpar(Revtron_LPF));
                 REVERBTRON->revtron_LPF->redraw();
                 break;
             case 444:

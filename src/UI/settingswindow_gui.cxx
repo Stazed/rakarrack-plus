@@ -3143,7 +3143,7 @@ void SettingsWindowGui::update_revtron_quality() {
   m_rkr->efx_Reverbtron->reset_parameters(save_state);
   
   /* Check for user file and re-load if present */
-  if(m_rkr->efx_Reverbtron->getpar(4))
+  if(m_rkr->efx_Reverbtron->getpar(Revtron_User_File))
   {
       strcpy(m_rkr->efx_Reverbtron->Filename,filename.c_str());
       if(!m_rkr->efx_Reverbtron->setfile(USERFILE))

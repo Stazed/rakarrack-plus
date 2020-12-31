@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -1663,7 +1663,7 @@ usleep(C_MILLISECONDS_50);
 m_rkr->efx_Reverbtron->reset_parameters(save_state);
 
 /* Check for user file and re-load if present */
-if(m_rkr->efx_Reverbtron->getpar(4))
+if(m_rkr->efx_Reverbtron->getpar(Revtron_User_File))
 {
     strcpy(m_rkr->efx_Reverbtron->Filename,filename.c_str());
     if(!m_rkr->efx_Reverbtron->setfile(USERFILE))
@@ -1673,9 +1673,10 @@ if(m_rkr->efx_Reverbtron->getpar(4))
 }
 
 /* Turn processing back on */
-m_rkr->quality_update = false;} {}
+m_rkr->quality_update = false;} {selected
+    }
   }
-  Function {update_harmonizer_quality()} {open return_type void
+  Function {update_harmonizer_quality()} {return_type void
   } {
     code {/* shut off all processing */
 m_rkr->quality_update = true;
