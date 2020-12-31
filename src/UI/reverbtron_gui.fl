@@ -221,21 +221,21 @@ rkr->efx_Reverbtron->changepar(Revtron_LPF,(int)o->value());}
     label Sh
     user_data 2
     callback {rkr->efx_Reverbtron->changepar(Revtron_Shuffle,(int)o->value());}
-    xywh {2 151 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip Shuffle xywh {2 151 30 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button revtron_es {
     label ES
     user_data 2
     callback {rkr->efx_Reverbtron->changepar(Revtron_Ex_Stereo,(int)o->value());}
-    xywh {2 164 29 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip {Extra stereo} xywh {2 164 29 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button revtron_safe {
     label Safe
     user_data 2
     callback {rkr->efx_Reverbtron->changepar(Revtron_Safe,(int)o->value());}
-    xywh {30 154 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip {Safe mode} xywh {30 154 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button revtron_user {
@@ -244,7 +244,7 @@ rkr->efx_Reverbtron->changepar(Revtron_LPF,(int)o->value());}
     callback {rkr->efx_Reverbtron->changepar(Revtron_User_File,(int)o->value());
 
 if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
-    xywh {67 154 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip {User file} xywh {67 154 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Button B_rvb {
@@ -267,7 +267,7 @@ if(!rkr->efx_Reverbtron->setfile(USERFILE))
     label File
     user_data 12
     callback {rkr->efx_Reverbtron->changepar(Revtron_Set_File,(int)o->value());}
-    xywh {51 168 101 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    tooltip {Select one of the program provided IR files} xywh {51 168 101 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
     MenuItem {} {

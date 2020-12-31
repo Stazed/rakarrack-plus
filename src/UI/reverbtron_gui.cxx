@@ -477,6 +477,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_LPF->when(FL_WHEN_RELEASE);
 } // RKR_Slider* revtron_LPF
 { revtron_rv = new RKR_Check_Button(2, 151, 30, 15, "Sh");
+  revtron_rv->tooltip("Shuffle");
   revtron_rv->box(FL_NO_BOX);
   revtron_rv->down_box(FL_BORDER_BOX);
   revtron_rv->color(FL_BACKGROUND_COLOR);
@@ -490,6 +491,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_rv->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* revtron_rv
 { revtron_es = new RKR_Check_Button(2, 164, 29, 15, "ES");
+  revtron_es->tooltip("Extra stereo");
   revtron_es->box(FL_NO_BOX);
   revtron_es->down_box(FL_BORDER_BOX);
   revtron_es->color(FL_BACKGROUND_COLOR);
@@ -503,6 +505,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_es->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* revtron_es
 { revtron_safe = new RKR_Check_Button(30, 154, 41, 15, "Safe");
+  revtron_safe->tooltip("Safe mode");
   revtron_safe->box(FL_NO_BOX);
   revtron_safe->down_box(FL_BORDER_BOX);
   revtron_safe->color(FL_BACKGROUND_COLOR);
@@ -516,6 +519,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   revtron_safe->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* revtron_safe
 { revtron_user = new RKR_Check_Button(67, 154, 39, 15, "User");
+  revtron_user->tooltip("User file");
   revtron_user->box(FL_NO_BOX);
   revtron_user->down_box(FL_BORDER_BOX);
   revtron_user->color(FL_BACKGROUND_COLOR);
@@ -542,6 +546,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   B_rvb->deactivate();
 } // RKR_Button* B_rvb
 { revtron_fnum = new RKR_Choice(51, 168, 101, 14, "File");
+  revtron_fnum->tooltip("Select one of the program provided IR files");
   revtron_fnum->box(FL_FLAT_BOX);
   revtron_fnum->down_box(FL_BORDER_BOX);
   revtron_fnum->color(FL_BACKGROUND_COLOR);
