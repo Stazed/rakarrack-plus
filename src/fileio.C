@@ -523,12 +523,12 @@ void RKR::getbuf(char *buf, int j)
     case 8:
         //Reverb
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Rev->getpar(0), efx_Rev->getpar(1),
-                efx_Rev->getpar(2), efx_Rev->getpar(3),
-                efx_Rev->getpar(4), efx_Rev->getpar(5),
-                efx_Rev->getpar(6), efx_Rev->getpar(7),
-                efx_Rev->getpar(8), efx_Rev->getpar(9),
-                efx_Rev->getpar(10), efx_Rev->getpar(11), Reverb_Bypass);
+                efx_Rev->getpar(Reverb_DryWet), efx_Rev->getpar(Reverb_Pan),
+                efx_Rev->getpar(Reverb_Time), efx_Rev->getpar(Reverb_I_Delay),
+                efx_Rev->getpar(Reverb_Delay_FB), efx_Rev->getpar(Reverb_SKIP_5),
+                efx_Rev->getpar(Reverb_SKIP_6), efx_Rev->getpar(Reverb_LPF),
+                efx_Rev->getpar(Reverb_HPF), efx_Rev->getpar(Reverb_Damp),
+                efx_Rev->getpar(Reverb_Type), efx_Rev->getpar(Reverb_Room), Reverb_Bypass);
         break;
 
     case 4:

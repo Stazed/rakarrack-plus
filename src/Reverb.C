@@ -568,38 +568,38 @@ Reverb::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Reverb_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Reverb_Pan:
         setpan(value);
         break;
-    case 2:
+    case Reverb_Time:
         settime(value);
         break;
-    case 3:
+    case Reverb_I_Delay:
         setidelay(value);
         break;
-    case 4:
+    case Reverb_Delay_FB:
         setidelayfb(value);
         break;
-        //      case 5: setrdelay(value);
+        //      case Reverb_SKIP_5: setrdelay(value);
         //              break;
-        //      case 6: seterbalance(value);
+        //      case Reverb_SKIP_6: seterbalance(value);
         //              break;
-    case 7:
+    case Reverb_LPF:
         setlpf(value);
         break;
-    case 8:
+    case Reverb_HPF:
         sethpf(value);
         break;
-    case 9:
+    case Reverb_Damp:
         setlohidamp(value);
         break;
-    case 10:
+    case Reverb_Type:
         settype(value);
         break;
-    case 11:
+    case Reverb_Room:
         setroomsize(value);
         break;
     }
@@ -610,38 +610,38 @@ Reverb::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Reverb_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Reverb_Pan:
         return (Ppan);
         break;
-    case 2:
+    case Reverb_Time:
         return (Ptime);
         break;
-    case 3:
+    case Reverb_I_Delay:
         return (Pidelay);
         break;
-    case 4:
+    case Reverb_Delay_FB:
         return (Pidelayfb);
         break;
-        //      case 5: return(Prdelay);
+        //      case Reverb_SKIP_5: return(Prdelay);
         //              break;
-        //      case 6: return(Perbalance);
+        //      case Reverb_SKIP_6: return(Perbalance);
         //              break;
-    case 7:
+    case Reverb_LPF:
         return (Plpf);
         break;
-    case 8:
+    case Reverb_HPF:
         return (Phpf);
         break;
-    case 9:
+    case Reverb_Damp:
         return (Plohidamp);
         break;
-    case 10:
+    case Reverb_Type:
         return (Ptype);
         break;
-    case 11:
+    case Reverb_Room:
         return (Proomsize);
         break;
     }

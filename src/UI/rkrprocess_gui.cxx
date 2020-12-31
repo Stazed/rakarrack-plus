@@ -3269,7 +3269,7 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_WD->redraw();
                 break;
             case 57:
-                REVERB->reverb_WD->value(Dry_Wet(rkr->efx_Rev->getpar(0)));
+                REVERB->reverb_WD->value(Dry_Wet(rkr->efx_Rev->getpar(Reverb_DryWet)));
                 REVERB->reverb_WD->redraw();
                 break;
             case 58:
@@ -3317,7 +3317,7 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_pan1->redraw();
                 break;
             case 63:
-                REVERB->reverb_pan->value(rkr->efx_Rev->getpar(1) - 64);
+                REVERB->reverb_pan->value(rkr->efx_Rev->getpar(Reverb_Pan) - 64);
                 REVERB->reverb_pan->redraw();
                 break;
             case 65:
@@ -3409,7 +3409,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_lpf->redraw();
                 break;
             case 87:
-                REVERB->reverb_LPF->value(rkr->efx_Rev->getpar(7));
+                REVERB->reverb_LPF->value(rkr->efx_Rev->getpar(Reverb_LPF));
                 REVERB->reverb_LPF->redraw();
                 break;
             case 88:
@@ -3421,7 +3421,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_hpf->redraw();
                 break;
             case 90:
-                REVERB->reverb_HPF->value(rkr->efx_Rev->getpar(8));
+                REVERB->reverb_HPF->value(rkr->efx_Rev->getpar(Reverb_HPF));
                 REVERB->reverb_HPF->redraw();
                 break;
             case 91:
@@ -4840,23 +4840,23 @@ void RKRGUI::ActMIDI()
                 PAN->pan_extra->redraw();
                 break;
             case 437:
-                REVERB->reverb_time->value(rkr->efx_Rev->getpar(2));
+                REVERB->reverb_time->value(rkr->efx_Rev->getpar(Reverb_Time));
                 REVERB->reverb_time->redraw();
                 break;
             case 438:
-                REVERB->reverb_ldel->value(rkr->efx_Rev->getpar(3));
+                REVERB->reverb_ldel->value(rkr->efx_Rev->getpar(Reverb_I_Delay));
                 REVERB->reverb_ldel->redraw();
                 break;
             case 439:
-                REVERB->reverb_ldelft->value(rkr->efx_Rev->getpar(4));
+                REVERB->reverb_ldelft->value(rkr->efx_Rev->getpar(Reverb_Delay_FB));
                 REVERB->reverb_ldelft->redraw();
                 break;
             case 440:
-                REVERB->reverb_RS->value(rkr->efx_Rev->getpar(11));
+                REVERB->reverb_RS->value(rkr->efx_Rev->getpar(Reverb_Room));
                 REVERB->reverb_RS->redraw();
                 break;
             case 441:
-                REVERB->reverb_damp->value(rkr->efx_Rev->getpar(9));
+                REVERB->reverb_damp->value(rkr->efx_Rev->getpar(Reverb_Damp));
                 REVERB->reverb_damp->redraw();
                 break;
             case 442:

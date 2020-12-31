@@ -1483,9 +1483,6 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1506,34 +1503,67 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->reve->getpar(i) != val)
+    int val = 0;
+    int param_case_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->reve->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] +64;// 1 pan is offset
-    if(plug->reve->getpar(i) != val)
-    {
-        plug->reve->changepar(i,val);
-    }
-    for(i++; i<5; i++) //2-4
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->reve->getpar(i) != val)
+        switch(param_case_offset)
         {
-            plug->reve->changepar(i,val);
+            // Normal processing
+            case Reverb_Time:
+            case Reverb_I_Delay:
+            case Reverb_LPF:
+            case Reverb_HPF:
+            case Reverb_Damp:
+            case Reverb_Type:
+            case Reverb_Room:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->reve->getpar(param_case_offset) != val)
+                {
+                    plug->reve->changepar(param_case_offset,val);
+                }
+            }
+            break;
+
+            // wet/dry -> dry/wet reversal
+            case Reverb_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->reve->getpar(Reverb_DryWet) != val)
+                {
+                    plug->reve->changepar(Reverb_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Reverb_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->reve->getpar(Reverb_Pan) != val)
+                {
+                    plug->reve->changepar(Reverb_Pan,val);
+                }
+            }
+            break;
+
+            // Skip after
+            case Reverb_Delay_FB:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->reve->getpar(param_case_offset) != val)
+                {
+                    plug->reve->changepar(param_case_offset,val);
+                }
+                param_case_offset += 2; // Skip 5 & 6
+            }
+            break;
         }
-    }
-    for(; i<plug->nparams; i++) //7-11 (5 and 6 are skipped
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->reve->getpar(i+2) != val)
-        {
-            plug->reve->changepar(i+2,val);
-        }
+        
+        param_case_offset++;
     }
 
     //now run

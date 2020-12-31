@@ -27,6 +27,22 @@
 
 #include "AnalogFilter.h"
 
+enum Reverb_Index
+{
+    Reverb_DryWet,
+    Reverb_Pan,
+    Reverb_Time,
+    Reverb_I_Delay,
+    Reverb_Delay_FB,
+    Reverb_SKIP_5,
+    Reverb_SKIP_6,
+    Reverb_LPF,
+    Reverb_HPF,
+    Reverb_Damp,
+    Reverb_Type,
+    Reverb_Room
+};
+
 class Reverb
 {
 public:

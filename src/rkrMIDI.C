@@ -1051,7 +1051,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 57:
-        efx_Rev->changepar(0, Dry_Wet(value));
+        efx_Rev->changepar(Reverb_DryWet, Dry_Wet(value));
         break;
 
     case 58:
@@ -1099,7 +1099,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 63:
-        efx_Rev->changepar(1, value);
+        efx_Rev->changepar(Reverb_Pan, value);
         break;
 
     case 65:
@@ -1191,7 +1191,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 87:
-        efx_Rev->changepar(7, ret_LPF(value));
+        efx_Rev->changepar(Reverb_LPF, ret_LPF(value));
         break;
 
     case 88:
@@ -1203,7 +1203,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 90:
-        efx_Rev->changepar(8, ret_HPF(value));
+        efx_Rev->changepar(Reverb_HPF, ret_HPF(value));
         break;
 
     case 91:
@@ -2661,23 +2661,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 437:
-        efx_Rev->changepar(2, value);
+        efx_Rev->changepar(Reverb_Time, value);
         break;
 
     case 438:
-        efx_Rev->changepar(3, value);
+        efx_Rev->changepar(Reverb_I_Delay, value);
         break;
 
     case 439:
-        efx_Rev->changepar(4, value);
+        efx_Rev->changepar(Reverb_Delay_FB, value);
         break;
 
     case 440:
-        efx_Rev->changepar(11, 1 + (int) ((float) value * C_MC_126_RANGE));
+        efx_Rev->changepar(Reverb_Room, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 441:
-        efx_Rev->changepar(9, 64 + (int) ((float) value * C_MC_63_RANGE));
+        efx_Rev->changepar(Reverb_Damp, 64 + (int) ((float) value * C_MC_63_RANGE));
         break;
 
     case 442:
