@@ -4346,51 +4346,51 @@ void RKRGUI::ActMIDI()
                 SUSTAINER->sus_sus->redraw();
                 break;
             case 314:
-                SEQUENCE->seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(8)));
+                SEQUENCE->seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(Sequence_DryWet)));
                 SEQUENCE->seq_WD->redraw();
                 break;
             case 315:
-                SEQUENCE->seq_1->value(rkr->efx_Sequence->getpar(0));
+                SEQUENCE->seq_1->value(rkr->efx_Sequence->getpar(Sequence_Step_1));
                 SEQUENCE->seq_1->redraw();
                 break;
             case 316:
-                SEQUENCE->seq_2->value(rkr->efx_Sequence->getpar(1));
+                SEQUENCE->seq_2->value(rkr->efx_Sequence->getpar(Sequence_Step_2));
                 SEQUENCE->seq_2->redraw();
                 break;
             case 317:
-                SEQUENCE->seq_3->value(rkr->efx_Sequence->getpar(2));
+                SEQUENCE->seq_3->value(rkr->efx_Sequence->getpar(Sequence_Step_3));
                 SEQUENCE->seq_3->redraw();
                 break;
             case 318:
-                SEQUENCE->seq_4->value(rkr->efx_Sequence->getpar(3));
+                SEQUENCE->seq_4->value(rkr->efx_Sequence->getpar(Sequence_Step_4));
                 SEQUENCE->seq_4->redraw();
                 break;
             case 319:
-                SEQUENCE->seq_5->value(rkr->efx_Sequence->getpar(4));
+                SEQUENCE->seq_5->value(rkr->efx_Sequence->getpar(Sequence_Step_5));
                 SEQUENCE->seq_5->redraw();
                 break;
             case 320:
-                SEQUENCE->seq_6->value(rkr->efx_Sequence->getpar(5));
+                SEQUENCE->seq_6->value(rkr->efx_Sequence->getpar(Sequence_Step_6));
                 SEQUENCE->seq_6->redraw();
                 break;
             case 321:
-                SEQUENCE->seq_7->value(rkr->efx_Sequence->getpar(6));
+                SEQUENCE->seq_7->value(rkr->efx_Sequence->getpar(Sequence_Step_7));
                 SEQUENCE->seq_7->redraw();
                 break;
             case 322:
-                SEQUENCE->seq_8->value(rkr->efx_Sequence->getpar(7));
+                SEQUENCE->seq_8->value(rkr->efx_Sequence->getpar(Sequence_Step_8));
                 SEQUENCE->seq_8->redraw();
                 break;
             case 323:
-                SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(9));
+                SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(Sequence_Tempo));
                 SEQUENCE->seq_tempo->redraw();
                 break;
             case 324:
-                SEQUENCE->seq_q->value(rkr->efx_Sequence->getpar(10) - 64);
+                SEQUENCE->seq_q->value(rkr->efx_Sequence->getpar(Sequence_Resonance) - 64);
                 SEQUENCE->seq_q->redraw();
                 break;
             case 325:
-                SEQUENCE->seq_stdf->value(rkr->efx_Sequence->getpar(12));
+                SEQUENCE->seq_stdf->value(rkr->efx_Sequence->getpar(Sequence_Stdf));
                 SEQUENCE->seq_stdf->redraw();
                 break;
             case 326:
@@ -6075,7 +6075,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->Sequence_Bypass)
     {
-        SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(9));
+        SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(Sequence_Tempo));
         SEQUENCE->seq_tempo->redraw();
     }
     if (rkr->Echo_Bypass)

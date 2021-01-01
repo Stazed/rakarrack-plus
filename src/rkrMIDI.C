@@ -2159,51 +2159,51 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 314:
-        efx_Sequence->changepar(8, Dry_Wet(value));
+        efx_Sequence->changepar(Sequence_DryWet, Dry_Wet(value));
         break;
 
     case 315:
-        efx_Sequence->changepar(0, value);
+        efx_Sequence->changepar(Sequence_Step_1, value);
         break;
 
     case 316:
-        efx_Sequence->changepar(1, value);
+        efx_Sequence->changepar(Sequence_Step_2, value);
         break;
 
     case 317:
-        efx_Sequence->changepar(2, value);
+        efx_Sequence->changepar(Sequence_Step_3, value);
         break;
 
     case 318:
-        efx_Sequence->changepar(3, value);
+        efx_Sequence->changepar(Sequence_Step_4, value);
         break;
 
     case 319:
-        efx_Sequence->changepar(4, value);
+        efx_Sequence->changepar(Sequence_Step_5, value);
         break;
 
     case 320:
-        efx_Sequence->changepar(5, value);
+        efx_Sequence->changepar(Sequence_Step_6, value);
         break;
 
     case 321:
-        efx_Sequence->changepar(6, value);
+        efx_Sequence->changepar(Sequence_Step_7, value);
         break;
 
     case 322:
-        efx_Sequence->changepar(7, value);
+        efx_Sequence->changepar(Sequence_Step_8, value);
         break;
 
     case 323:
-        efx_Sequence->changepar(9, ret_Tempo(value));
+        efx_Sequence->changepar(Sequence_Tempo, ret_Tempo(value));
         break;
 
     case 324:
-        efx_Sequence->changepar(10, (int) ((float) value * C_MC_128_RANGE));
+        efx_Sequence->changepar(Sequence_Resonance, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 325:
-        efx_Sequence->changepar(12, (int) ((float) value * C_MC_7_RANGE));
+        efx_Sequence->changepar(Sequence_Stdf, (int) ((float) value * C_MC_7_RANGE));
         break;
 
     case 326:

@@ -1164,14 +1164,14 @@ Sequence::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case Sequence_Step_1:
+    case Sequence_Step_2:
+    case Sequence_Step_3:
+    case Sequence_Step_4:
+    case Sequence_Step_5:
+    case Sequence_Step_6:
+    case Sequence_Step_7:
+    case Sequence_Step_8:
     {
         Psequence[npar] = value;
         fsequence[npar] = (float) value / 127.0f;
@@ -1199,32 +1199,32 @@ Sequence::changepar(int npar, int value)
         }
         break;
     }
-    case 8:
+    case Sequence_DryWet:
         setvolume(value);
         break;
-    case 9:
+    case Sequence_Tempo:
         Ptempo = value;
         settempo(value);
         break;
-    case 10:
+    case Sequence_Resonance:
         Pq = value;
         panning = (((float) value) + 64.0f) / 128.0f;
         fq = powf(60.0f, ((float) value - 64.0f) / 64.0f);
         fb = ((float) value) / 128.0f;
         break;
-    case 11:
+    case Sequence_Amp:
         Pamplitude = value;
         break;
-    case 12:
+    case Sequence_Stdf:
         Pstdiff = value;
         break;
-    case 13:
+    case Sequence_Mode:
         Pmode = value;
         settempo(Ptempo);
         lmod = 0.5f;
         rmod = 0.5f;
         break;
-    case 14:
+    case Sequence_Range:
         Prange = value;
         setranges(Prange);
         break;
@@ -1236,35 +1236,35 @@ Sequence::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case Sequence_Step_1:
+    case Sequence_Step_2:
+    case Sequence_Step_3:
+    case Sequence_Step_4:
+    case Sequence_Step_5:
+    case Sequence_Step_6:
+    case Sequence_Step_7:
+    case Sequence_Step_8:
         return (Psequence[npar]);
         break;
-    case 8:
+    case Sequence_DryWet:
         return (Pvolume);
         break;
-    case 9:
+    case Sequence_Tempo:
         return (Ptempo);
         break;
-    case 10:
+    case Sequence_Resonance:
         return (Pq);
         break;
-    case 11:
+    case Sequence_Amp:
         return (Pamplitude);
         break;
-    case 12:
+    case Sequence_Stdf:
         return (Pstdiff);
         break;
-    case 13:
+    case Sequence_Mode:
         return (Pmode);
         break;
-    case 14:
+    case Sequence_Range:
         return (Prange);
         break;
     }

@@ -21,21 +21,21 @@ void SequenceGui::cb_seq_activar(RKR_Light_Button* o, void* v) {
 void SequenceGui::cb_seq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12037))rkr->efx_Sequence->setpreset((int) o->value());
-seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(8)));
-seq_q->value(rkr->efx_Sequence->getpar(10)-64);
-seq_amp->value(rkr->efx_Sequence->getpar(11));
-seq_tempo->value(rkr->efx_Sequence->getpar(9));
-seq_stdf->value(rkr->efx_Sequence->getpar(12));
-seq_1->value(rkr->efx_Sequence->getpar(0));
-seq_2->value(rkr->efx_Sequence->getpar(1));
-seq_3->value(rkr->efx_Sequence->getpar(2));
-seq_4->value(rkr->efx_Sequence->getpar(3));
-seq_5->value(rkr->efx_Sequence->getpar(4));
-seq_6->value(rkr->efx_Sequence->getpar(5));
-seq_7->value(rkr->efx_Sequence->getpar(6));
-seq_8->value(rkr->efx_Sequence->getpar(7));
-seq_mode->value(rkr->efx_Sequence->getpar(13));
-seq_range->value(rkr->efx_Sequence->getpar(14));
+seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(Sequence_DryWet)));
+seq_q->value(rkr->efx_Sequence->getpar(Sequence_Resonance)-64);
+seq_amp->value(rkr->efx_Sequence->getpar(Sequence_Amp));
+seq_tempo->value(rkr->efx_Sequence->getpar(Sequence_Tempo));
+seq_stdf->value(rkr->efx_Sequence->getpar(Sequence_Stdf));
+seq_1->value(rkr->efx_Sequence->getpar(Sequence_Step_1));
+seq_2->value(rkr->efx_Sequence->getpar(Sequence_Step_2));
+seq_3->value(rkr->efx_Sequence->getpar(Sequence_Step_3));
+seq_4->value(rkr->efx_Sequence->getpar(Sequence_Step_4));
+seq_5->value(rkr->efx_Sequence->getpar(Sequence_Step_5));
+seq_6->value(rkr->efx_Sequence->getpar(Sequence_Step_6));
+seq_7->value(rkr->efx_Sequence->getpar(Sequence_Step_7));
+seq_8->value(rkr->efx_Sequence->getpar(Sequence_Step_8));
+seq_mode->value(rkr->efx_Sequence->getpar(Sequence_Mode));
+seq_range->value(rkr->efx_Sequence->getpar(Sequence_Range));
 }
 void SequenceGui::cb_seq_preset(RKR_Choice* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_preset_i(o,v);
@@ -62,7 +62,7 @@ void SequenceGui::cb_seq_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(314);
  return;
 }
-rkr->efx_Sequence->changepar(8,Dry_Wet((int)(o->value())));
+rkr->efx_Sequence->changepar(Sequence_DryWet,Dry_Wet((int)(o->value())));
 }
 void SequenceGui::cb_seq_WD(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_WD_i(o,v);
@@ -74,7 +74,7 @@ void SequenceGui::cb_seq_1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(315);
  return;
 }
-rkr->efx_Sequence->changepar(0,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_1,(int)o->value());
 }
 void SequenceGui::cb_seq_1(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_1_i(o,v);
@@ -86,7 +86,7 @@ void SequenceGui::cb_seq_2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(316);
  return;
 }
-rkr->efx_Sequence->changepar(1,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_2,(int)o->value());
 }
 void SequenceGui::cb_seq_2(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_2_i(o,v);
@@ -98,7 +98,7 @@ void SequenceGui::cb_seq_3_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(317);
  return;
 }
-rkr->efx_Sequence->changepar(2,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_3,(int)o->value());
 }
 void SequenceGui::cb_seq_3(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_3_i(o,v);
@@ -110,7 +110,7 @@ void SequenceGui::cb_seq_4_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(318);
  return;
 }
-rkr->efx_Sequence->changepar(3,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_4,(int)o->value());
 }
 void SequenceGui::cb_seq_4(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_4_i(o,v);
@@ -122,7 +122,7 @@ void SequenceGui::cb_seq_5_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(319);
  return;
 }
-rkr->efx_Sequence->changepar(4,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_5,(int)o->value());
 }
 void SequenceGui::cb_seq_5(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_5_i(o,v);
@@ -134,7 +134,7 @@ void SequenceGui::cb_seq_6_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(320);
  return;
 }
-rkr->efx_Sequence->changepar(5,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_6,(int)o->value());
 }
 void SequenceGui::cb_seq_6(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_6_i(o,v);
@@ -146,7 +146,7 @@ void SequenceGui::cb_seq_7_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(321);
  return;
 }
-rkr->efx_Sequence->changepar(6,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_7,(int)o->value());
 }
 void SequenceGui::cb_seq_7(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_7_i(o,v);
@@ -158,7 +158,7 @@ void SequenceGui::cb_seq_8_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(322);
  return;
 }
-rkr->efx_Sequence->changepar(7,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Step_8,(int)o->value());
 }
 void SequenceGui::cb_seq_8(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_8_i(o,v);
@@ -170,7 +170,7 @@ void SequenceGui::cb_seq_tempo_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(323);
  return;
 }
-rkr->efx_Sequence->changepar(9,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Tempo,(int)o->value());
 }
 void SequenceGui::cb_seq_tempo(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_tempo_i(o,v);
@@ -182,7 +182,7 @@ void SequenceGui::cb_seq_q_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(324);
  return;
 }
-rkr->efx_Sequence->changepar(10,(int)o->value()+64);
+rkr->efx_Sequence->changepar(Sequence_Resonance,(int)o->value()+64);
 }
 void SequenceGui::cb_seq_q(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_q_i(o,v);
@@ -194,21 +194,21 @@ void SequenceGui::cb_seq_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(325);
  return;
 }
-rkr->efx_Sequence->changepar(12,(int)o->value());
+rkr->efx_Sequence->changepar(Sequence_Stdf,(int)o->value());
 }
 void SequenceGui::cb_seq_stdf(RKR_Slider* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_stdf_i(o,v);
 }
 
 void SequenceGui::cb_seq_amp_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Sequence->changepar(11,(int)o->value());
+  rkr->efx_Sequence->changepar(Sequence_Amp,(int)o->value());
 }
 void SequenceGui::cb_seq_amp(RKR_Check_Button* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_amp_i(o,v);
 }
 
 void SequenceGui::cb_seq_mode_i(RKR_Choice* o, void*) {
-  rkr->efx_Sequence->changepar(13,(int)o->value());
+  rkr->efx_Sequence->changepar(Sequence_Mode,(int)o->value());
 }
 void SequenceGui::cb_seq_mode(RKR_Choice* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_mode_i(o,v);
@@ -228,7 +228,7 @@ Fl_Menu_Item SequenceGui::menu_seq_mode[] = {
 };
 
 void SequenceGui::cb_seq_range_i(RKR_Choice* o, void*) {
-  rkr->efx_Sequence->changepar(14,(int)o->value());
+  rkr->efx_Sequence->changepar(Sequence_Range,(int)o->value()+1);
 }
 void SequenceGui::cb_seq_range(RKR_Choice* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_range_i(o,v);

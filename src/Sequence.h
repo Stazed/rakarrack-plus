@@ -32,6 +32,25 @@
 
 #define SEQUENCE_PRESET_SIZE 15
 
+enum Sequence_Index
+{
+    Sequence_Step_1,
+    Sequence_Step_2,
+    Sequence_Step_3,
+    Sequence_Step_4,
+    Sequence_Step_5,
+    Sequence_Step_6,
+    Sequence_Step_7,
+    Sequence_Step_8,
+    Sequence_DryWet,
+    Sequence_Tempo,
+    Sequence_Resonance,
+    Sequence_Amp,
+    Sequence_Stdf,
+    Sequence_Mode,
+    Sequence_Range
+};
+
 class Sequence
 {
 public:

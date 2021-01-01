@@ -934,14 +934,14 @@ void RKR::getbuf(char *buf, int j)
     case 37:
         //Sequence
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Sequence->getpar(0), efx_Sequence->getpar(1),
-                efx_Sequence->getpar(2), efx_Sequence->getpar(3),
-                efx_Sequence->getpar(4), efx_Sequence->getpar(5),
-                efx_Sequence->getpar(6), efx_Sequence->getpar(7),
-                efx_Sequence->getpar(8), efx_Sequence->getpar(9),
-                efx_Sequence->getpar(10), efx_Sequence->getpar(11),
-                efx_Sequence->getpar(12), efx_Sequence->getpar(13),
-                efx_Sequence->getpar(14), Sequence_Bypass);
+                efx_Sequence->getpar(Sequence_Step_1), efx_Sequence->getpar(Sequence_Step_2),
+                efx_Sequence->getpar(Sequence_Step_3), efx_Sequence->getpar(Sequence_Step_4),
+                efx_Sequence->getpar(Sequence_Step_5), efx_Sequence->getpar(Sequence_Step_6),
+                efx_Sequence->getpar(Sequence_Step_7), efx_Sequence->getpar(Sequence_Step_8),
+                efx_Sequence->getpar(Sequence_DryWet), efx_Sequence->getpar(Sequence_Tempo),
+                efx_Sequence->getpar(Sequence_Resonance), efx_Sequence->getpar(Sequence_Amp),
+                efx_Sequence->getpar(Sequence_Stdf), efx_Sequence->getpar(Sequence_Mode),
+                efx_Sequence->getpar(Sequence_Range), Sequence_Bypass);
         break;
 
     case 38:

@@ -3508,9 +3508,6 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3531,41 +3528,58 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i<8; i++)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->seq->getpar(i) != val)
+        switch(i)
         {
-            plug->seq->changepar(i,val);
-        }
-    }
-    
-    val = Dry_Wet((int)*plug->param_p[i]);// 8 Dry/Wet
-    if(plug->seq->getpar(i) != val)
-    {
-        plug->seq->changepar(i,val);
-    }
-    i++;
-    
-    val = (int)*plug->param_p[i];   // 9 tempo
-    if(plug->seq->getpar(i) != val)
-    {
-        plug->seq->changepar(i,val);
-    }
-    i++;
-    
-    val = (int)*plug->param_p[i]+64;//Q or panning
-    if(plug->seq->getpar(i) != val)
-    {
-        plug->seq->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->seq->getpar(i) != val)
-        {
-            plug->seq->changepar(i,val);
+            // Normal processing
+            case Sequence_Step_1:
+            case Sequence_Step_2:
+            case Sequence_Step_3:
+            case Sequence_Step_4:
+            case Sequence_Step_5:
+            case Sequence_Step_6:
+            case Sequence_Step_7:
+            case Sequence_Step_8:
+            case Sequence_Tempo:
+            case Sequence_Amp:
+            case Sequence_Stdf:
+            case Sequence_Mode:
+            case Sequence_Range:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->seq->getpar(i) != val)
+                {
+                    plug->seq->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Sequence_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->seq->getpar(Sequence_DryWet) != val)
+                {
+                    plug->seq->changepar(Sequence_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Sequence_Resonance:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->seq->getpar(Sequence_Resonance) != val)
+                {
+                    plug->seq->changepar(Sequence_Resonance,val);
+                }
+            }
+            break;
         }
     }
 
