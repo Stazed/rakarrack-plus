@@ -2207,35 +2207,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 326:
-        efx_Shifter->changepar(0, Dry_Wet(value));
+        efx_Shifter->changepar(Shifter_DryWet, Dry_Wet(value));
         break;
 
     case 327:
-        efx_Shifter->changepar(6, (int) ((float) value * C_MC_12_RANGE));
+        efx_Shifter->changepar(Shifter_Interval, (int) ((float) value * C_MC_12_RANGE));
         break;
 
     case 328:
-        efx_Shifter->changepar(2, value);
+        efx_Shifter->changepar(Shifter_Gain, value);
         break;
 
     case 329:
-        efx_Shifter->changepar(1, value);
+        efx_Shifter->changepar(Shifter_Pan, value);
         break;
 
     case 330:
-        efx_Shifter->changepar(3, 1 + (int) ((float) value * C_MC_1999_RANGE));
+        efx_Shifter->changepar(Shifter_Attack, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
     case 331:
-        efx_Shifter->changepar(4, 1 + (int) ((float) value * C_MC_1999_RANGE));
+        efx_Shifter->changepar(Shifter_Decay, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
     case 332:
-        efx_Shifter->changepar(5, -70 + (int) ((float) value * C_MC_90_RANGE));
+        efx_Shifter->changepar(Shifter_Threshold, -70 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
     case 333:
-        efx_Shifter->changepar(9, value);
+        efx_Shifter->changepar(Shifter_Whammy, value);
         break;
 
     case 334:

@@ -947,11 +947,11 @@ void RKR::getbuf(char *buf, int j)
     case 38:
         //Shifter
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Shifter->getpar(0), efx_Shifter->getpar(1),
-                efx_Shifter->getpar(2), efx_Shifter->getpar(3),
-                efx_Shifter->getpar(4), efx_Shifter->getpar(5),
-                efx_Shifter->getpar(6), efx_Shifter->getpar(7),
-                efx_Shifter->getpar(8), efx_Shifter->getpar(9), Shifter_Bypass);
+                efx_Shifter->getpar(Shifter_DryWet), efx_Shifter->getpar(Shifter_Pan),
+                efx_Shifter->getpar(Shifter_Gain), efx_Shifter->getpar(Shifter_Attack),
+                efx_Shifter->getpar(Shifter_Decay), efx_Shifter->getpar(Shifter_Threshold),
+                efx_Shifter->getpar(Shifter_Interval), efx_Shifter->getpar(Shifter_Shift),
+                efx_Shifter->getpar(Shifter_Mode), efx_Shifter->getpar(Shifter_Whammy), Shifter_Bypass);
         break;
 
 

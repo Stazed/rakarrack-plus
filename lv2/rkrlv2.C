@@ -3615,7 +3615,7 @@ LV2_Handle init_shiftlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 10;
+    plug->nparams = SHIFTER_PRESET_SIZE;
     plug->effectindex = ISHIFT;
     plug->prev_bypass = 1;
 
@@ -3635,9 +3635,6 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3658,27 +3655,53 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->shift->getpar(i) != val)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->shift->changepar(i,val);
-    }
-    for(i++; i<3; i++) //pan, gain
-    {
-        val = (int)*plug->param_p[i]+64;
-        if(plug->shift->getpar(i) != val)
+        switch(i)
         {
-            plug->shift->changepar(i,val);
-        }
-    }
-    for(; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->shift->getpar(i) != val)
-        {
-            plug->shift->changepar(i,val);
+            // Normal processing
+            case Shifter_Attack:
+            case Shifter_Decay:
+            case Shifter_Threshold:
+            case Shifter_Interval:
+            case Shifter_Shift:
+            case Shifter_Mode:
+            case Shifter_Whammy:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->shift->getpar(i) != val)
+                {
+                    plug->shift->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Shifter_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->shift->getpar(Shifter_DryWet) != val)
+                {
+                    plug->shift->changepar(Shifter_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Shifter_Pan:
+            case Shifter_Gain:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->shift->getpar(i) != val)
+                {
+                    plug->shift->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 

@@ -4394,35 +4394,35 @@ void RKRGUI::ActMIDI()
                 SEQUENCE->seq_stdf->redraw();
                 break;
             case 326:
-                SHIFTER->shifter_WD->value(Dry_Wet(rkr->efx_Shifter->getpar(0)));
+                SHIFTER->shifter_WD->value(Dry_Wet(rkr->efx_Shifter->getpar(Shifter_DryWet)));
                 SHIFTER->shifter_WD->redraw();
                 break;
             case 327:
-                SHIFTER->shifter_int->value(rkr->efx_Shifter->getpar(6));
+                SHIFTER->shifter_int->value(rkr->efx_Shifter->getpar(Shifter_Interval));
                 SHIFTER->shifter_int->redraw();
                 break;
             case 328:
-                SHIFTER->shifter_gain->value(rkr->efx_Shifter->getpar(2) - 64);
+                SHIFTER->shifter_gain->value(rkr->efx_Shifter->getpar(Shifter_Gain) - 64);
                 SHIFTER->shifter_gain->redraw();
                 break;
             case 329:
-                SHIFTER->shifter_pan->value(rkr->efx_Shifter->getpar(1) - 64);
+                SHIFTER->shifter_pan->value(rkr->efx_Shifter->getpar(Shifter_Pan) - 64);
                 SHIFTER->shifter_pan->redraw();
                 break;
             case 330:
-                SHIFTER->shifter_attack->value(rkr->efx_Shifter->getpar(3));
+                SHIFTER->shifter_attack->value(rkr->efx_Shifter->getpar(Shifter_Attack));
                 SHIFTER->shifter_attack->redraw();
                 break;
             case 331:
-                SHIFTER->shifter_decay->value(rkr->efx_Shifter->getpar(4));
+                SHIFTER->shifter_decay->value(rkr->efx_Shifter->getpar(Shifter_Decay));
                 SHIFTER->shifter_decay->redraw();
                 break;
             case 332:
-                SHIFTER->shifter_thre->value(rkr->efx_Shifter->getpar(5));
+                SHIFTER->shifter_thre->value(rkr->efx_Shifter->getpar(Shifter_Threshold));
                 SHIFTER->shifter_thre->redraw();
                 break;
             case 333:
-                SHIFTER->shifter_whammy->value(rkr->efx_Shifter->getpar(9));
+                SHIFTER->shifter_whammy->value(rkr->efx_Shifter->getpar(Shifter_Whammy));
                 SHIFTER->shifter_whammy->redraw();
                 break;
             case 334:

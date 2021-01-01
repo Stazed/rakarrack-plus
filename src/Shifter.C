@@ -457,41 +457,41 @@ Shifter::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Shifter_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Shifter_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Shifter_Gain:
         setgain(value);
         break;
-    case 3:
+    case Shifter_Attack:
         Pattack = value;
         a_rate = 1000.0f / ((float) Pattack * nfSAMPLE_RATE);
         break;
-    case 4:
+    case Shifter_Decay:
         Pdecay = value;
         d_rate = 1000.0f / ((float) Pdecay * nfSAMPLE_RATE);
         break;
-    case 5:
+    case Shifter_Threshold:
         Pthreshold = value;
         t_level = dB2rap((float) Pthreshold);
         td_level = t_level * .75f;
         tz_level = t_level * .5f;
         break;
-    case 6:
+    case Shifter_Interval:
         Pinterval = value;
         setinterval(Pinterval);
         break;
-    case 7:
+    case Shifter_Shift:
         Pupdown = value;
         setinterval(Pinterval);
         break;
-    case 8:
+    case Shifter_Mode:
         Pmode = value;
         break;
-    case 9:
+    case Shifter_Whammy:
         Pwhammy = value;
         whammy = (float) value / 127.0f;
         break;
@@ -503,34 +503,34 @@ Shifter::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Shifter_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Shifter_Pan:
         return (Ppan);
         break;
-    case 2:
+    case Shifter_Gain:
         return (Pgain);
         break;
-    case 3:
+    case Shifter_Attack:
         return (Pattack);
         break;
-    case 4:
+    case Shifter_Decay:
         return (Pdecay);
         break;
-    case 5:
+    case Shifter_Threshold:
         return (Pthreshold);
         break;
-    case 6:
+    case Shifter_Interval:
         return (Pinterval);
         break;
-    case 7:
+    case Shifter_Shift:
         return (Pupdown);
         break;
-    case 8:
+    case Shifter_Mode:
         return (Pmode);
         break;
-    case 9:
+    case Shifter_Whammy:
         return (Pwhammy);
     }
     return (0);

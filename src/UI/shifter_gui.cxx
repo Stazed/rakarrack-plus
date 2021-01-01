@@ -21,17 +21,17 @@ void ShifterGui::cb_shifter_activar(RKR_Light_Button* o, void* v) {
 void ShifterGui::cb_shifter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12038))rkr->efx_Shifter->setpreset((int)o->value());
-shifter_WD->value(Dry_Wet(rkr->efx_Shifter->getpar(0)));
-shifter_pan->value(rkr->efx_Shifter->getpar(1)-64);
-shifter_gain->value(rkr->efx_Shifter->getpar(2)-64);
-shifter_int->value(rkr->efx_Shifter->getpar(6));
-shifter_attack->value(rkr->efx_Shifter->getpar(3));
-shifter_decay->value(rkr->efx_Shifter->getpar(4));
-shifter_thre->value(rkr->efx_Shifter->getpar(5));
-shifter_ud->value(rkr->efx_Shifter->getpar(7));
-shifter_whammy->value(rkr->efx_Shifter->getpar(9));
+shifter_WD->value(Dry_Wet(rkr->efx_Shifter->getpar(Shifter_DryWet)));
+shifter_pan->value(rkr->efx_Shifter->getpar(Shifter_Pan)-64);
+shifter_gain->value(rkr->efx_Shifter->getpar(Shifter_Gain)-64);
+shifter_int->value(rkr->efx_Shifter->getpar(Shifter_Interval));
+shifter_attack->value(rkr->efx_Shifter->getpar(Shifter_Attack));
+shifter_decay->value(rkr->efx_Shifter->getpar(Shifter_Decay));
+shifter_thre->value(rkr->efx_Shifter->getpar(Shifter_Threshold));
+shifter_ud->value(rkr->efx_Shifter->getpar(Shifter_Shift));
+shifter_whammy->value(rkr->efx_Shifter->getpar(Shifter_Whammy));
 
-shifter_mode->value(rkr->efx_Shifter->getpar(8));
+shifter_mode->value(rkr->efx_Shifter->getpar(Shifter_Mode));
 }
 void ShifterGui::cb_shifter_preset(RKR_Choice* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_preset_i(o,v);
@@ -53,7 +53,7 @@ void ShifterGui::cb_shifter_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(326);
  return;
 }
-rkr->efx_Shifter->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_Shifter->changepar(Shifter_DryWet,Dry_Wet((int)(o->value())));
 }
 void ShifterGui::cb_shifter_WD(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_WD_i(o,v);
@@ -66,7 +66,7 @@ void ShifterGui::cb_shifter_int_i(RKR_Slider* o, void*) {
  return;
 }
 rkr->Shifter_Bypass=0;
-rkr->efx_Shifter->changepar(6,(int)o->value());
+rkr->efx_Shifter->changepar(Shifter_Interval,(int)o->value());
 if((int)shifter_activar->value())rkr->Shifter_Bypass=1;
 }
 void ShifterGui::cb_shifter_int(RKR_Slider* o, void* v) {
@@ -79,7 +79,7 @@ void ShifterGui::cb_shifter_gain_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(328);
  return;
 }
-rkr->efx_Shifter->changepar(2,(int)(o->value()+64));
+rkr->efx_Shifter->changepar(Shifter_Gain,(int)(o->value()+64));
 }
 void ShifterGui::cb_shifter_gain(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_gain_i(o,v);
@@ -91,7 +91,7 @@ void ShifterGui::cb_shifter_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(329);
  return;
 }
-rkr->efx_Shifter->changepar(1,(int)(o->value()+64));
+rkr->efx_Shifter->changepar(Shifter_Pan,(int)(o->value()+64));
 }
 void ShifterGui::cb_shifter_pan(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_pan_i(o,v);
@@ -103,7 +103,7 @@ void ShifterGui::cb_shifter_attack_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(330);
  return;
 }
-rkr->efx_Shifter->changepar(3,(int)o->value());
+rkr->efx_Shifter->changepar(Shifter_Attack,(int)o->value());
 }
 void ShifterGui::cb_shifter_attack(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_attack_i(o,v);
@@ -115,7 +115,7 @@ void ShifterGui::cb_shifter_decay_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(331);
  return;
 }
-rkr->efx_Shifter->changepar(4,(int)o->value());
+rkr->efx_Shifter->changepar(Shifter_Decay,(int)o->value());
 }
 void ShifterGui::cb_shifter_decay(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_decay_i(o,v);
@@ -127,14 +127,14 @@ void ShifterGui::cb_shifter_thre_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(332);
  return;
 }
-rkr->efx_Shifter->changepar(5,(int)o->value());
+rkr->efx_Shifter->changepar(Shifter_Threshold,(int)o->value());
 }
 void ShifterGui::cb_shifter_thre(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_thre_i(o,v);
 }
 
 void ShifterGui::cb_shifter_ud_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Shifter->changepar(7,(int)o->value());
+  rkr->efx_Shifter->changepar(Shifter_Shift,(int)o->value());
 }
 void ShifterGui::cb_shifter_ud(RKR_Check_Button* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_ud_i(o,v);
@@ -146,14 +146,14 @@ void ShifterGui::cb_shifter_whammy_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(333);
  return;
 }
-rkr->efx_Shifter->changepar(9,(int)o->value());
+rkr->efx_Shifter->changepar(Shifter_Whammy,(int)o->value());
 }
 void ShifterGui::cb_shifter_whammy(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_whammy_i(o,v);
 }
 
 void ShifterGui::cb_shifter_mode_i(RKR_Choice* o, void*) {
-  rkr->efx_Shifter->changepar(8,(int)o->value());
+  rkr->efx_Shifter->changepar(Shifter_Mode,(int)o->value());
 }
 void ShifterGui::cb_shifter_mode(RKR_Choice* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_mode_i(o,v);

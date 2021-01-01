@@ -36,6 +36,20 @@
 
 #define SHIFTER_PRESET_SIZE 10
 
+enum Shifter_Index
+{
+    Shifter_DryWet = 0,
+    Shifter_Pan,
+    Shifter_Gain,
+    Shifter_Attack,
+    Shifter_Decay,
+    Shifter_Threshold,
+    Shifter_Interval,
+    Shifter_Shift,
+    Shifter_Mode,
+    Shifter_Whammy
+};
+
 class Shifter
 {
 
