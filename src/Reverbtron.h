@@ -32,7 +32,7 @@
 
 enum Revtron_Index
 {
-    Revtron_DryWet,
+    Revtron_DryWet = 0,
     Revtron_Fade,
     Revtron_Safe,
     Revtron_Length,

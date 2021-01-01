@@ -26,6 +26,23 @@
 
 #include "FPreset.h"
 
+enum Ring_Index
+{
+    Ring_DryWet = 0,
+    Ring_Pan,
+    Ring_LR_Cross,
+    Ring_Level,
+    Ring_Depth,
+    Ring_Freq,
+    Ring_Stereo,
+    Ring_Sine,
+    Ring_Triangle,
+    Ring_Saw,
+    Ring_Square,
+    Ring_Input,
+    Ring_Auto_Freq
+};
+
 class Ring
 {
 public:

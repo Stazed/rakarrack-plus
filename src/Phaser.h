@@ -28,7 +28,7 @@
 
 enum Phaser_Index
 {
-    Phaser_DryWet,
+    Phaser_DryWet = 0,
     Phaser_Pan,
     Phaser_LFO_Tempo,
     Phaser_LFO_Random,

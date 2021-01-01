@@ -3792,47 +3792,47 @@ void RKRGUI::ActMIDI()
                 VALVE->valve_hpf->redraw();
                 break;
             case 178:
-                RING->ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(0)));
+                RING->ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(Ring_DryWet)));
                 RING->ring_WD->redraw();
                 break;
             case 179:
-                RING->ring_LRc->value(rkr->efx_Ring->getpar(2));
+                RING->ring_LRc->value(rkr->efx_Ring->getpar(Ring_LR_Cross));
                 RING->ring_LRc->redraw();
                 break;
             case 180:
-                RING->ring_input->value(rkr->efx_Ring->getpar(11));
+                RING->ring_input->value(rkr->efx_Ring->getpar(Ring_Input));
                 RING->ring_input->redraw();
                 break;
             case 181:
-                RING->ring_level->value(rkr->efx_Ring->getpar(3));
+                RING->ring_level->value(rkr->efx_Ring->getpar(Ring_Level));
                 RING->ring_level->redraw();
                 break;
             case 182:
-                RING->ring_pan->value(rkr->efx_Ring->getpar(1));
+                RING->ring_pan->value(rkr->efx_Ring->getpar(Ring_Pan));
                 RING->ring_pan->redraw();
                 break;
             case 183:
-                RING->ring_depth->value(rkr->efx_Ring->getpar(4));
+                RING->ring_depth->value(rkr->efx_Ring->getpar(Ring_Depth));
                 RING->ring_depth->redraw();
                 break;
             case 184:
-                RING->ring_freq->value(rkr->efx_Ring->getpar(5));
+                RING->ring_freq->value(rkr->efx_Ring->getpar(Ring_Freq));
                 RING->ring_freq->redraw();
                 break;
             case 185:
-                RING->ring_sin->value(rkr->efx_Ring->getpar(7));
+                RING->ring_sin->value(rkr->efx_Ring->getpar(Ring_Sine));
                 RING->ring_sin->redraw();
                 break;
             case 186:
-                RING->ring_tri->value(rkr->efx_Ring->getpar(8));
+                RING->ring_tri->value(rkr->efx_Ring->getpar(Ring_Triangle));
                 RING->ring_tri->redraw();
                 break;
             case 187:
-                RING->ring_saw->value(rkr->efx_Ring->getpar(9));
+                RING->ring_saw->value(rkr->efx_Ring->getpar(Ring_Saw));
                 RING->ring_saw->redraw();
                 break;
             case 188:
-                RING->ring_squ->value(rkr->efx_Ring->getpar(10));
+                RING->ring_squ->value(rkr->efx_Ring->getpar(Ring_Square));
                 RING->ring_squ->redraw();
                 break;
             case 189:

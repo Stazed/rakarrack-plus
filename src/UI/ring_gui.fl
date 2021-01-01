@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -39,19 +39,19 @@ rgui->findpos(21,(int)o->value(),o);}
     user_data 12021
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12021))rkr->efx_Ring->setpreset((int) o->value());
-ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(0)));
-ring_LRc->value(rkr->efx_Ring->getpar(2));
-ring_input->value(rkr->efx_Ring->getpar(11));
-ring_level->value(rkr->efx_Ring->getpar(3));
-ring_st->value(rkr->efx_Ring->getpar(6));
-ring_depth->value(rkr->efx_Ring->getpar(4));
-ring_freq->value(rkr->efx_Ring->getpar(5));
-ring_sin->value(rkr->efx_Ring->getpar(7));
-ring_tri->value(rkr->efx_Ring->getpar(8));
-ring_saw->value(rkr->efx_Ring->getpar(9));
-ring_squ->value(rkr->efx_Ring->getpar(10));
-ring_pan->value(rkr->efx_Ring->getpar(1));
-ring_afreq->value(rkr->efx_Ring->getpar(12));} selected
+ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(Ring_DryWet)));
+ring_LRc->value(rkr->efx_Ring->getpar(Ring_LR_Cross));
+ring_input->value(rkr->efx_Ring->getpar(Ring_Input));
+ring_level->value(rkr->efx_Ring->getpar(Ring_Level));
+ring_st->value(rkr->efx_Ring->getpar(Ring_Stereo));
+ring_depth->value(rkr->efx_Ring->getpar(Ring_Depth));
+ring_freq->value(rkr->efx_Ring->getpar(Ring_Freq));
+ring_sin->value(rkr->efx_Ring->getpar(Ring_Sine));
+ring_tri->value(rkr->efx_Ring->getpar(Ring_Triangle));
+ring_saw->value(rkr->efx_Ring->getpar(Ring_Saw));
+ring_squ->value(rkr->efx_Ring->getpar(Ring_Square));
+ring_pan->value(rkr->efx_Ring->getpar(Ring_Pan));
+ring_afreq->value(rkr->efx_Ring->getpar(Ring_Auto_Freq));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -87,7 +87,7 @@ ring_afreq->value(rkr->efx_Ring->getpar(12));} selected
  rgui->getMIDIControl(178);
  return;
 } 
-rkr->efx_Ring->changepar(0,Dry_Wet((int)o->value()));}
+rkr->efx_Ring->changepar(Ring_DryWet,Dry_Wet((int)o->value()));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -98,7 +98,7 @@ rkr->efx_Ring->changepar(0,Dry_Wet((int)o->value()));}
  rgui->getMIDIControl(179);
  return;
 } 
-rkr->efx_Ring->changepar(2,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_LR_Cross,(int)o->value());}
     xywh {56 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -109,7 +109,7 @@ rkr->efx_Ring->changepar(2,(int)o->value());}
  rgui->getMIDIControl(180);
  return;
 } 
-rkr->efx_Ring->changepar(11,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Input,(int)o->value());}
     xywh {56 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -120,7 +120,7 @@ rkr->efx_Ring->changepar(11,(int)o->value());}
  rgui->getMIDIControl(181);
  return;
 } 
-rkr->efx_Ring->changepar(3,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Level,(int)o->value());}
     xywh {56 68 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -131,21 +131,21 @@ rkr->efx_Ring->changepar(3,(int)o->value());}
  rgui->getMIDIControl(182);
  return;
 } 
-rkr->efx_Ring->changepar(1,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Pan,(int)o->value());}
     xywh {56 81 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button ring_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_Ring->changepar(6,(int)o->value());}
+    callback {rkr->efx_Ring->changepar(Ring_Stereo,(int)o->value());}
     xywh {28 92 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button ring_afreq {
     label {Auto Freq}
     user_data 2
-    callback {rkr->efx_Ring->changepar(12,(int)o->value());}
+    callback {rkr->efx_Ring->changepar(Ring_Auto_Freq,(int)o->value());} selected
     xywh {80 92 69 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -156,7 +156,7 @@ rkr->efx_Ring->changepar(1,(int)o->value());}
  rgui->getMIDIControl(183);
  return;
 } 
-rkr->efx_Ring->changepar(4,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Depth,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -167,7 +167,7 @@ rkr->efx_Ring->changepar(4,(int)o->value());}
  rgui->getMIDIControl(184);
  return;
 } 
-rkr->efx_Ring->changepar(5,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Freq,(int)o->value());}
     tooltip Frequency xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 20000 step 10 textcolor 7
     class RKR_Slider
   }
@@ -178,7 +178,7 @@ rkr->efx_Ring->changepar(5,(int)o->value());}
  rgui->getMIDIControl(185);
  return;
 } 
-rkr->efx_Ring->changepar(7,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Sine,(int)o->value());}
     xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -189,7 +189,7 @@ rkr->efx_Ring->changepar(7,(int)o->value());}
  rgui->getMIDIControl(186);
  return;
 } 
-rkr->efx_Ring->changepar(8,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Triangle,(int)o->value());}
     xywh {56 142 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -200,7 +200,7 @@ rkr->efx_Ring->changepar(8,(int)o->value());}
  rgui->getMIDIControl(187);
  return;
 } 
-rkr->efx_Ring->changepar(9,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Saw,(int)o->value());}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -211,7 +211,7 @@ rkr->efx_Ring->changepar(9,(int)o->value());}
  rgui->getMIDIControl(188);
  return;
 } 
-rkr->efx_Ring->changepar(10,(int)o->value());}
+rkr->efx_Ring->changepar(Ring_Square,(int)o->value());}
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }

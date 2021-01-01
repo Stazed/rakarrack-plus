@@ -29,7 +29,7 @@
 
 enum Reverb_Index
 {
-    Reverb_DryWet,
+    Reverb_DryWet = 0,
     Reverb_Pan,
     Reverb_Time,
     Reverb_I_Delay,

@@ -278,24 +278,24 @@ Ring::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Ring_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Ring_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Ring_LR_Cross:
         setlrcross(value);
         break;
-    case 3:
+    case Ring_Level:
         Plevel = value;
         break;
-    case 4:
+    case Ring_Depth:
         Pdepthp = value;
         depth = (float) Pdepthp / 100.0;
         idepth = 1.0f - depth;
         break;
-    case 5:
+    case Ring_Freq:
         if (value > 20000)
         { //Make sure bad inputs can't cause buffer overflow
             Pfreq = 20000;
@@ -309,35 +309,35 @@ Ring::changepar(int npar, int value)
             Pfreq = value;
         }
         break;
-    case 6:
+    case Ring_Stereo:
         if (value > 1)
             value = 1;
         Pstereo = value;
         break;
-    case 7:
+    case Ring_Sine:
         Psin = value;
         sin = (float) Psin / 100.0;
         setscale();
         break;
-    case 8:
+    case Ring_Triangle:
         Ptri = value;
         tri = (float) Ptri / 100.0;
         setscale();
         break;
-    case 9:
+    case Ring_Saw:
         Psaw = value;
         saw = (float) Psaw / 100.0;
         setscale();
         break;
-    case 10:
+    case Ring_Square:
         Psqu = value;
         squ = (float) Psqu / 100.0;
         setscale();
         break;
-    case 11:
+    case Ring_Input:
         Pinput = value;
         break;
-    case 12:
+    case Ring_Auto_Freq:
         Pafreq = value;
         break;
     }
@@ -348,43 +348,43 @@ Ring::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Ring_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Ring_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Ring_LR_Cross:
         return (Plrcross);
         break;
-    case 3:
+    case Ring_Level:
         return (Plevel);
         break;
-    case 4:
+    case Ring_Depth:
         return (Pdepthp);
         break;
-    case 5:
+    case Ring_Freq:
         return (Pfreq);
         break;
-    case 6:
+    case Ring_Stereo:
         return (Pstereo);
         break;
-    case 7:
+    case Ring_Sine:
         return (Psin);
         break;
-    case 8:
+    case Ring_Triangle:
         return (Ptri);
         break;
-    case 9:
+    case Ring_Saw:
         return (Psaw);
         break;
-    case 10:
+    case Ring_Square:
         return (Psqu);
         break;
-    case 11:
+    case Ring_Input:
         return (Pinput);
         break;
-    case 12:
+    case Ring_Auto_Freq:
         return (Pafreq);
     }
     return (0); //in case of bogus parameter number

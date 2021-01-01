@@ -756,13 +756,13 @@ void RKR::getbuf(char *buf, int j)
     case 21:
         //Ring
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Ring->getpar(0), efx_Ring->getpar(1),
-                efx_Ring->getpar(2), efx_Ring->getpar(3),
-                efx_Ring->getpar(4), efx_Ring->getpar(5),
-                efx_Ring->getpar(6), efx_Ring->getpar(7),
-                efx_Ring->getpar(8), efx_Ring->getpar(9),
-                efx_Ring->getpar(10), efx_Ring->getpar(11),
-                efx_Ring->getpar(12), Ring_Bypass);
+                efx_Ring->getpar(Ring_DryWet), efx_Ring->getpar(Ring_Pan),
+                efx_Ring->getpar(Ring_LR_Cross), efx_Ring->getpar(Ring_Level),
+                efx_Ring->getpar(Ring_Depth), efx_Ring->getpar(Ring_Freq),
+                efx_Ring->getpar(Ring_Stereo), efx_Ring->getpar(Ring_Sine),
+                efx_Ring->getpar(Ring_Triangle), efx_Ring->getpar(Ring_Saw),
+                efx_Ring->getpar(Ring_Square), efx_Ring->getpar(Ring_Input),
+                efx_Ring->getpar(Ring_Auto_Freq), Ring_Bypass);
         break;
 
     case 22:

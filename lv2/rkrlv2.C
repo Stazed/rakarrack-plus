@@ -2265,9 +2265,6 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2292,26 +2289,47 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->ring->getpar(i) != val)
-    {
-        plug->ring->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];// 1 pan
-    if(plug->ring->getpar(i) != val)
-    {
-        plug->ring->changepar(i,val);
-    }
 
-    for(i++; i<plug->nparams; i++) //2-12
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->ring->getpar(i) != val)
+        switch(i)
         {
-            plug->ring->changepar(i,val);
+            // Normal processing
+            case Ring_Pan:
+            case Ring_LR_Cross:
+            case Ring_Level:
+            case Ring_Depth:
+            case Ring_Freq:
+            case Ring_Stereo:
+            case Ring_Sine:
+            case Ring_Triangle:
+            case Ring_Saw:
+            case Ring_Square:
+            case Ring_Input:
+            case Ring_Auto_Freq:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->ring->getpar(i) != val)
+                {
+                    plug->ring->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+
+            // wet/dry -> dry/wet reversal
+            case Ring_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->ring->getpar(Ring_DryWet) != val)
+                {
+                    plug->ring->changepar(Ring_DryWet,val);
+                }
+            }
+            break;
         }
     }
 //see process.C ln 1539

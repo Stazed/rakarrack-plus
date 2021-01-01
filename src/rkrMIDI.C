@@ -1585,47 +1585,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 178:
-        efx_Ring->changepar(0, Dry_Wet(value));
+        efx_Ring->changepar(Ring_DryWet, Dry_Wet(value));
         break;
 
     case 179:
-        efx_Ring->changepar(2, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Ring->changepar(Ring_LR_Cross, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 180:
-        efx_Ring->changepar(11, 1 + (int) ((float) value * C_MC_126_RANGE));
+        efx_Ring->changepar(Ring_Input, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 181:
-        efx_Ring->changepar(3, value);
+        efx_Ring->changepar(Ring_Level, value);
         break;
 
     case 182:
-        efx_Ring->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Ring->changepar(Ring_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 183:
-        efx_Ring->changepar(4, (int) ((float) value * C_MC_100_RANGE));
+        efx_Ring->changepar(Ring_Depth, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 184:
-        efx_Ring->changepar(5, 1 + (int) ((float) value * C_MC_19999_RANGE));
+        efx_Ring->changepar(Ring_Freq, 1 + (int) ((float) value * C_MC_19999_RANGE));
         break;
 
     case 185:
-        efx_Ring->changepar(7, (int) ((float) value * C_MC_100_RANGE));
+        efx_Ring->changepar(Ring_Sine, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 186:
-        efx_Ring->changepar(8, (int) ((float) value * C_MC_100_RANGE));
+        efx_Ring->changepar(Ring_Triangle, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 187:
-        efx_Ring->changepar(9, (int) ((float) value * C_MC_100_RANGE));
+        efx_Ring->changepar(Ring_Saw, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 188:
-        efx_Ring->changepar(10, (int) ((float) value * C_MC_100_RANGE));
+        efx_Ring->changepar(Ring_Square, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 189:
