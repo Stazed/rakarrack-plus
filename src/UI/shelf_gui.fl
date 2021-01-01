@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0305
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -39,11 +39,11 @@ rgui->findpos(34,(int)o->value(),o);}
     user_data 12034
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12034))rkr->efx_ShelfBoost->setpreset((int) o->value());
-shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
-shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
-shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
-shelf_mode->value(rkr->efx_ShelfBoost->getpar(3));
-shelf_level->value(rkr->efx_ShelfBoost->getpar(4));} selected
+shelf_gain->value(rkr->efx_ShelfBoost->getpar(Shelf_Gain));
+shelf_q1->value(rkr->efx_ShelfBoost->getpar(Shelf_Presence));
+shelf_freq1->value(rkr->efx_ShelfBoost->getpar(Shelf_Tone));
+shelf_mode->value(rkr->efx_ShelfBoost->getpar(Shelf_Stereo));
+shelf_level->value(rkr->efx_ShelfBoost->getpar(Shelf_Level));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -71,8 +71,8 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(4));} selected
  rgui->getMIDIControl(292);
  return;
 }
-rkr->efx_ShelfBoost->changepar(0,(int)o->value());}
-    xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+rkr->efx_ShelfBoost->changepar(Shelf_Gain,(int)o->value());}
+    xywh {56 66 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider shelf_level {
@@ -82,7 +82,7 @@ rkr->efx_ShelfBoost->changepar(0,(int)o->value());}
  rgui->getMIDIControl(293);
  return;
 }
-rkr->efx_ShelfBoost->changepar(4,(int)o->value());}
+rkr->efx_ShelfBoost->changepar(Shelf_Level,(int)o->value());}
     xywh {56 86 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
     class RKR_Slider
   }
@@ -93,7 +93,7 @@ rkr->efx_ShelfBoost->changepar(4,(int)o->value());}
  rgui->getMIDIControl(294);
  return;
 }
-rkr->efx_ShelfBoost->changepar(2,(int)o->value());}
+rkr->efx_ShelfBoost->changepar(Shelf_Tone,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 220 maximum 16000 step 1 value 1000 textcolor 7
     class RKR_Slider
   }
@@ -104,15 +104,15 @@ rkr->efx_ShelfBoost->changepar(2,(int)o->value());}
  rgui->getMIDIControl(295);
  return;
 }
-rkr->efx_ShelfBoost->changepar(1,(int)o->value());}
+rkr->efx_ShelfBoost->changepar(Shelf_Presence,(int)o->value());}
     xywh {56 126 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button shelf_mode {
     label Stereo
     user_data 2
-    callback {rkr->efx_ShelfBoost->changepar(3,(int)o->value());}
-    xywh {13 161 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    callback {rkr->efx_ShelfBoost->changepar(Shelf_Stereo,(int)o->value());} selected
+    xywh {13 153 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
 }

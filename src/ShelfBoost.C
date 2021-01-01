@@ -74,7 +74,7 @@ ShelfBoost::lv2_update_params(uint32_t period)
         initialize();
         set_q(Pq1);
         set_freq(Pfreq1);
-        set_gain(Plevel);
+        set_level(Plevel);
     }
     else
     {
@@ -192,7 +192,7 @@ ShelfBoost::set_freq(int value)
 }
 
 void
-ShelfBoost::set_gain(int value)
+ShelfBoost::set_level(int value)
 {
     Plevel = value;
     gain = .375f * (float) value;
@@ -206,20 +206,20 @@ ShelfBoost::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Shelf_Gain:
         setvolume(value);
         break;
-    case 1:
+    case Shelf_Presence:
         set_q(value);
         break;
-    case 2:
+    case Shelf_Tone:
         set_freq(value);
         break;
-    case 3:
+    case Shelf_Stereo:
         Pstereo = value;
         break;
-    case 4:
-        set_gain(value);
+    case Shelf_Level:
+        set_level(value);
         break;
     }
 }
@@ -229,19 +229,19 @@ ShelfBoost::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Shelf_Gain:
         return (Pvolume);
         break;
-    case 1:
+    case Shelf_Presence:
         return (Pq1);
         break;
-    case 2:
+    case Shelf_Tone:
         return (Pfreq1);
         break;
-    case 3:
+    case Shelf_Stereo:
         return (Pstereo);
         break;
-    case 4:
+    case Shelf_Level:
         return (Plevel);
         break;
     }

@@ -3281,9 +3281,6 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3303,13 +3300,27 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->shelf->getpar(i) != val)
+        switch(i)
         {
-            plug->shelf->changepar(i,val);
+            // Normal processing
+            case Shelf_Gain:
+            case Shelf_Presence:
+            case Shelf_Tone:
+            case Shelf_Stereo:
+            case Shelf_Level:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->shelf->getpar(i) != val)
+                {
+                    plug->shelf->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 
@@ -3488,7 +3499,7 @@ LV2_Handle init_seqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 15;
+    plug->nparams = SEQUENCE_PRESET_SIZE;
     plug->effectindex = ISEQ;
     plug->prev_bypass = 1;
 

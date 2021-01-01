@@ -23,6 +23,15 @@
 
 #include "AnalogFilter.h"
 
+enum Shelf_Index
+{
+    Shelf_Gain = 0,
+    Shelf_Presence,
+    Shelf_Tone,
+    Shelf_Stereo,
+    Shelf_Level
+};
+
 class ShelfBoost
 {
 public:
@@ -42,7 +51,7 @@ public:
     void clear_initialize();
     void set_q(int value);
     void set_freq(int value);
-    void set_gain(int value);
+    void set_level(int value);
 
     int Ppreset;
 

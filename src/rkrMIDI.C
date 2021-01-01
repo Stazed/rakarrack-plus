@@ -2071,19 +2071,19 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 292:
-        efx_ShelfBoost->changepar(0, value);
+        efx_ShelfBoost->changepar(Shelf_Gain, value);
         break;
 
     case 293:
-        efx_ShelfBoost->changepar(4, 1 + (int) ((float) value * C_MC_126_RANGE));
+        efx_ShelfBoost->changepar(Shelf_Level, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 294:
-        efx_ShelfBoost->changepar(2, 220 + (int) ((float) value * C_MC_15780_RANGE));
+        efx_ShelfBoost->changepar(Shelf_Tone, 220 + (int) ((float) value * C_MC_15780_RANGE));
         break;
 
     case 295:
-        efx_ShelfBoost->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_ShelfBoost->changepar(Shelf_Presence, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 296:

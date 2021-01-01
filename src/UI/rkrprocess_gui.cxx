@@ -4258,19 +4258,19 @@ void RKRGUI::ActMIDI()
                 COILCRAFTER->coil_q2->redraw();
                 break;
             case 292:
-                SHELFBOOST->shelf_gain->value(rkr->efx_ShelfBoost->getpar(0));
+                SHELFBOOST->shelf_gain->value(rkr->efx_ShelfBoost->getpar(Shelf_Gain));
                 SHELFBOOST->shelf_gain->redraw();
                 break;
             case 293:
-                SHELFBOOST->shelf_level->value(rkr->efx_ShelfBoost->getpar(4));
+                SHELFBOOST->shelf_level->value(rkr->efx_ShelfBoost->getpar(Shelf_Level));
                 SHELFBOOST->shelf_level->redraw();
                 break;
             case 294:
-                SHELFBOOST->shelf_freq1->value(rkr->efx_ShelfBoost->getpar(2));
+                SHELFBOOST->shelf_freq1->value(rkr->efx_ShelfBoost->getpar(Shelf_Tone));
                 SHELFBOOST->shelf_freq1->redraw();
                 break;
             case 295:
-                SHELFBOOST->shelf_q1->value(rkr->efx_ShelfBoost->getpar(1));
+                SHELFBOOST->shelf_q1->value(rkr->efx_ShelfBoost->getpar(Shelf_Presence));
                 SHELFBOOST->shelf_q1->redraw();
                 break;
             case 296:

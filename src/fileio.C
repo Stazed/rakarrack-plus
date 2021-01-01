@@ -910,9 +910,9 @@ void RKR::getbuf(char *buf, int j)
     case 34:
         //ShelfBoost
         sprintf(buf, "%d,%d,%d,%d,%d,%d\n",
-                efx_ShelfBoost->getpar(0), efx_ShelfBoost->getpar(1),
-                efx_ShelfBoost->getpar(2), efx_ShelfBoost->getpar(3),
-                efx_ShelfBoost->getpar(4), ShelfBoost_Bypass);
+                efx_ShelfBoost->getpar(Shelf_Gain), efx_ShelfBoost->getpar(Shelf_Presence),
+                efx_ShelfBoost->getpar(Shelf_Tone), efx_ShelfBoost->getpar(Shelf_Stereo),
+                efx_ShelfBoost->getpar(Shelf_Level), ShelfBoost_Bypass);
         break;
 
     case 35:
