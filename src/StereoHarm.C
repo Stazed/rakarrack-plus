@@ -499,34 +499,34 @@ StereoHarm::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Sharm_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Sharm_L_Gain:
         setgain(0, value);
         break;
-    case 2:
+    case Sharm_L_Interval:
         setinterval(0, value);
         break;
-    case 3:
+    case Sharm_L_Chroma:
         setchrome(0, value);
         break;
-    case 4:
+    case Sharm_R_Gain:
         setgain(1, value);
         break;
-    case 5:
+    case Sharm_R_Interval:
         setinterval(1, value);
         break;
-    case 6:
+    case Sharm_R_Chroma:
         setchrome(1, value);
         break;
-    case 7:
+    case Sharm_Select:
         PSELECT = value;
         break;
-    case 8:
+    case Sharm_Note:
         Pnote = value;
         break;
-    case 9:
+    case Sharm_Chord:
         Ptype = value;
         if (Ptype == 0)
         {
@@ -534,10 +534,10 @@ StereoHarm::changepar(int npar, int value)
             setchrome(1, Pchromer);
         }
         break;
-    case 10:
+    case Sharm_MIDI:
         setMIDI(value);
         break;
-    case 11:
+    case Sharm_LR_Cross:
         setlrcross(value);
         break;
     }
@@ -548,40 +548,40 @@ StereoHarm::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Sharm_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Sharm_L_Gain:
         return (Pgainl);
         break;
-    case 2:
+    case Sharm_L_Interval:
         return (Pintervall);
         break;
-    case 3:
+    case Sharm_L_Chroma:
         return (Pchromel);
         break;
-    case 4:
+    case Sharm_R_Gain:
         return (Pgainr);
         break;
-    case 5:
+    case Sharm_R_Interval:
         return (Pintervalr);
         break;
-    case 6:
+    case Sharm_R_Chroma:
         return (Pchromer);
         break;
-    case 7:
+    case Sharm_Select:
         return (PSELECT);
         break;
-    case 8:
+    case Sharm_Note:
         return (Pnote);
         break;
-    case 9:
+    case Sharm_Chord:
         return (Ptype);
         break;
-    case 10:
+    case Sharm_MIDI:
         return (PMIDI);
         break;
-    case 11:
+    case Sharm_LR_Cross:
         return (Plrcross);
         break;
     default:

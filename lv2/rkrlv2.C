@@ -4469,7 +4469,7 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor* /* descriptor */,double samp
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = (SHARM_PRESET_SIZE - 1);    // -1 for Sharm_MIDI
     plug->effectindex = ISHARM_NM;
     plug->prev_bypass = 1;
 
@@ -4506,9 +4506,6 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -4525,8 +4522,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->prev_bypass)
     {
         plug->sharm->cleanup();
-        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
-        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
+        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval - FIXME sb 3 per gui
+        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval - FIXME sb 6 per gui
         plug->chordID->cc = 1;//mark chord has changed
     }
  
@@ -4540,91 +4537,101 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 64;// 1 gain l
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 12;// 2 interval l
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];// 3 chroma l
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 64;// 4 gain r
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 12;// 5 interval r
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//6 set chrome 2
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//7 select mode
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-        plug->chordID->cleanup();
-        if(!val){
-            plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
-            plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
-        }
-        
-        plug->chordID->cc = 1;//mark chord has changed
-    }
-    for(i++; i<10; i++) //8-9
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->sharm->getpar(i) != val)
-        {
-            plug->sharm->changepar(i,val);
-//            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
-//            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
-            plug->chordID->cc = 1;//mark chord has changed
-        }
-    }
-// skip midi mode, not implementing midi here
-//    val = (int)*plug->param_p[i];// 10 midi mode
-//    if(plug->aphase->getpar(i) != val)
-//    {
-//        plug->aphase->changepar(i,val);
-//        if(!val) plug->harm->changepar(3,plug->harm->getpar(3));
-//    }
-    val = (int)*plug->param_p[i];// 11 lr cr.
-    if(plug->sharm->getpar(i+1) != val)
-    {
-        plug->sharm->changepar(i+1,val);
-    }
 
-    /*
-    see Chord() in rkr.fl
-    harmonizer, need recChord and recNote.
-    see process.C ln 1507
-    */
+    //check and set changed parameters
+    int val;
+    int param_case_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Sharm_L_Chroma:
+            case Sharm_R_Chroma:
+            case Sharm_LR_Cross:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sharm->getpar(param_case_offset) != val)
+                {
+                    plug->sharm->changepar(param_case_offset,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Sharm_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->sharm->getpar(Sharm_DryWet) != val)
+                {
+                    plug->sharm->changepar(Sharm_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset 64
+            case Sharm_L_Gain:
+            case Sharm_R_Gain:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset 64
+                if(plug->sharm->getpar(param_case_offset) != val)
+                {
+                    plug->sharm->changepar(param_case_offset,val);
+                }
+            }
+            break;
+
+            // Offset 12
+            case Sharm_L_Interval:
+            case Sharm_R_Interval:
+            {
+                val = (int)*plug->param_p[i] + 12;  // offset 12
+                if(plug->sharm->getpar(i) != val)
+                {
+                    plug->sharm->changepar(i,val);
+                }
+            }
+            break;
+
+            // SELECT
+            case Sharm_Select:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sharm->getpar(Sharm_Select) != val)
+                {
+                    plug->sharm->changepar(Sharm_Select,val);
+                    plug->chordID->cleanup();
+                    if(!val){
+                        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval FIXME sb 3
+                        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval FIXME sb 6
+                    }
+
+                    plug->chordID->cc = 1;  // mark chord has changed
+                }
+            }
+            break;
+
+            // Note/Chord & skip
+            case Sharm_Note:
+            case Sharm_Chord:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sharm->getpar(param_case_offset) != val)
+                {
+                    plug->sharm->changepar(param_case_offset,val);
+                    plug->chordID->cc = 1;  // mark chord has changed
+                }
+
+                // Skip one after Sharm_chord
+                if(param_case_offset == Sharm_Chord)
+                    param_case_offset++;    // skip Sharm_MIDI
+            }
+            break;
+        }
+
+        param_case_offset++;
+    }
 
     if(have_signal(plug->output_l_p, plug->output_r_p, nframes))
     {
@@ -4639,8 +4646,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
                     {
                         plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
                         plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
-                        plug->sharm->r_ratiol = plug->chordID->r__ratio[1];//pass the found ratio
-                        plug->sharm->r_ratior = plug->chordID->r__ratio[2];//pass the found ratio
+                        plug->sharm->r_ratiol = plug->chordID->r__ratio[1]; // pass the found ratio
+                        plug->sharm->r_ratior = plug->chordID->r__ratio[2]; // pass the found ratio
                         plug->noteID->last = plug->noteID->reconota;
                     }
                 }
@@ -4653,8 +4660,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         if (plug->chordID->cc) 
         {   
             plug->chordID->cc = 0;
-            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
-            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+            plug->chordID->ctipo = plug->sharm->getpar(Sharm_Chord);    // set chord type
+            plug->chordID->fundi = plug->sharm->getpar(Sharm_Note);     // set root note
             plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
             plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
             plug->sharm->r_ratiol = plug->chordID->r__ratio[1];
@@ -6208,7 +6215,7 @@ LV2_Handle init_stereoharmlv2(const LV2_Descriptor* /* descriptor */,double samp
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
+    plug->nparams = SHARM_PRESET_SIZE;
     plug->effectindex = ISTEREOHARM;
     plug->prev_bypass = 1;
 
@@ -6246,8 +6253,6 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     if( nframes == 0)
         return;
     
-    int i;
-    int val;
     int bypass = 0;
 
     RKRLV2* plug = (RKRLV2*)handle;
@@ -6265,8 +6270,8 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->prev_bypass)
     {
         plug->sharm->cleanup();
-        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
-        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
+        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval FIXME check
+        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval FIXME check
         plug->chordID->cc = 1;//mark chord has changed
         bypass = 1; // For MIDI mode upon return, need to reset default chord type and note
     }
@@ -6281,7 +6286,7 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     }
 
     // Process incoming MIDI messages 
-    if(plug->sharm->getpar(10))
+    if(plug->sharm->getpar(Sharm_MIDI))
     {
         // Get the capacity
         const uint32_t out_capacity = plug->atom_out_p->atom.size;
@@ -6310,7 +6315,7 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
                                 plug->chordID->rnote[i] = cmdnote;
                                 plug->chordID->gate[i] = 1;
                                 plug->chordID->MiraChord();
-                                plug->chordID->cc = 1; // mark chord has changed
+                                plug->chordID->cc = 1; // mark chord changed
                                 break;
                             }
                         }
@@ -6327,7 +6332,7 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
                             {
                                 plug->chordID->note_active[i] = 0;
                                 plug->chordID->gate[i] = 0;
-                                plug->chordID->cc = 1;  // mark chord has changed
+                                plug->chordID->cc = 1;  // mark chord changed
                                 break;
                             }
                         }
@@ -6343,94 +6348,107 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     }
 
     // we are good to run now
-    //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 64;// 1 gain l
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 12;// 2 interval l
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];// 3 chroma l
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 64;// 4 gain r
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] + 12;// 5 interval r
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//6 set chrome 2
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i];//7 select mode
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-        plug->chordID->cleanup();
-        if(!val)
-        {
-            plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval
-            plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval
-        }
-        
-        plug->chordID->cc = 1;//mark chord has changed
-    }
-    for(i++; i<10; i++) //8-9
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->sharm->getpar(i) != val)
-        {
-            plug->sharm->changepar(i,val);
-//            plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
-//            plug->chordID->fundi = plug->sharm->getpar(8);//set root note
-            plug->chordID->cc = 1;//mark chord has changed
-        }
-    }
-    //  midi mode
-    val = (int)*plug->param_p[i];// 10 midi mode
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-        plug->chordID->cleanup();
-        plug->chordID->cc = 1;  //mark chord has changed to update parameters after cleanup
-    }
-    i++;
-    val = (int)*plug->param_p[i];// 11 lr cr.
-    if(plug->sharm->getpar(i) != val)
-    {
-        plug->sharm->changepar(i,val);
-    }
 
-    /*
-    see Chord() in rkr.fl
-    harmonizer, need recChord and recNote.
-    see process.C ln 1507
-    */
+    //check and set changed parameters
+    int val;
+    for(int i = 0; i < plug->nparams; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Sharm_L_Chroma:
+            case Sharm_R_Chroma:
+            case Sharm_LR_Cross:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sharm->getpar(i) != val)
+                {
+                    plug->sharm->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Sharm_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->sharm->getpar(Sharm_DryWet) != val)
+                {
+                    plug->sharm->changepar(Sharm_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset 64
+            case Sharm_L_Gain:
+            case Sharm_R_Gain:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset 64
+                if(plug->sharm->getpar(i) != val)
+                {
+                    plug->sharm->changepar(i,val);
+                }
+            }
+            break;
+
+            // Offset 12
+            case Sharm_L_Interval:
+            case Sharm_R_Interval:
+            {
+                val = (int)*plug->param_p[i] + 12;  // offset 12
+                if(plug->sharm->getpar(i) != val)
+                {
+                    plug->sharm->changepar(i,val);
+                }
+            }
+            break;
+
+            // SELECT
+            case Sharm_Select:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sharm->getpar(Sharm_Select) != val)
+                {
+                    plug->sharm->changepar(Sharm_Select,val);
+                    plug->chordID->cleanup();
+                    if(!val){
+                        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval FIXME sb 3
+                        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval FIXME sb 6
+                    }
+
+                    plug->chordID->cc = 1;  // mark chord changed
+                }
+            }
+            break;
+
+            // Note/Chord
+            case Sharm_Note:
+            case Sharm_Chord:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sharm->getpar(i) != val)
+                {
+                    plug->sharm->changepar(i,val);
+                    plug->chordID->cc = 1;  // mark chord changed
+                }
+            }
+            break;
+
+            // MIDI
+            case Sharm_MIDI:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sharm->getpar(i) != val)
+                {
+                    plug->sharm->changepar(i,val);
+                    plug->chordID->cleanup();
+                    plug->chordID->cc = 1;  // mark chord changed to update after cleanup
+                }
+            }
+            break;
+        }
+    }
 
     if(have_signal(plug->output_l_p, plug->output_r_p, nframes))
     {
@@ -6445,8 +6463,8 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
                     {
                         plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
                         plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);
-                        plug->sharm->r_ratiol = plug->chordID->r__ratio[1];//pass the found ratio
-                        plug->sharm->r_ratior = plug->chordID->r__ratio[2];//pass the found ratio
+                        plug->sharm->r_ratiol = plug->chordID->r__ratio[1]; // pass the found ratio
+                        plug->sharm->r_ratior = plug->chordID->r__ratio[2]; // pass the found ratio
                         plug->noteID->last = plug->noteID->reconota;
                     }
                 }
@@ -6463,8 +6481,8 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
             if(plug->sharm->PSELECT || bypass)
             {
                 bypass = 0;
-                plug->chordID->ctipo = plug->sharm->getpar(9);//set chord type
-                plug->chordID->fundi = plug->sharm->getpar(8);//set root note
+                plug->chordID->ctipo = plug->sharm->getpar(Sharm_Chord);    // set chord type
+                plug->chordID->fundi = plug->sharm->getpar(Sharm_Note);     // set root note
             }
             plug->chordID->Vamos(1,plug->sharm->Pintervall - 12,plug->noteID->reconota);
             plug->chordID->Vamos(2,plug->sharm->Pintervalr - 12,plug->noteID->reconota);

@@ -3142,8 +3142,8 @@ void RKRGUI::Chord(int eff)
             undi = rkr->efx_Har->getpar(Harm_Note);
             break;
         case 1:
-            tipo = rkr->efx_StereoHarm->getpar(9);
-            undi = rkr->efx_StereoHarm->getpar(8);
+            tipo = rkr->efx_StereoHarm->getpar(Sharm_Chord);
+            undi = rkr->efx_StereoHarm->getpar(Sharm_Note);
             break;
     }
 
@@ -4522,44 +4522,44 @@ void RKRGUI::ActMIDI()
                 ECHOTRON->echotron_length->redraw();
                 break;
             case 358:
-                SHAR->shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(0)));
+                SHAR->shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(Sharm_DryWet)));
                 SHAR->shar_WD->redraw();
                 break;
             case 359:
-                SHAR->shar_intl->value(rkr->efx_StereoHarm->getpar(2));
+                SHAR->shar_intl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Interval) - 12);
                 SHAR->shar_intl->redraw();
                 break;
             case 360:
-                SHAR->shar_chl->value(rkr->efx_StereoHarm->getpar(3));
+                SHAR->shar_chl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
                 SHAR->shar_chl->redraw();
                 break;
             case 361:
-                SHAR->shar_ganl->value(rkr->efx_StereoHarm->getpar(1) - 64);
+                SHAR->shar_ganl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Gain) - 64);
                 SHAR->shar_ganl->redraw();
                 break;
             case 362:
-                SHAR->shar_intr->value(rkr->efx_StereoHarm->getpar(5));
+                SHAR->shar_intr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Interval) - 12);
                 SHAR->shar_intr->redraw();
                 break;
             case 363:
-                SHAR->shar_chr->value(rkr->efx_StereoHarm->getpar(6));
+                SHAR->shar_chr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
                 SHAR->shar_chr->redraw();
                 break;
             case 364:
-                SHAR->shar_ganr->value(rkr->efx_StereoHarm->getpar(4) - 64);
+                SHAR->shar_ganr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Gain) - 64);
                 SHAR->shar_ganr->redraw();
                 break;
             case 365:
-                SHAR->shar_lrc->value(rkr->efx_StereoHarm->getpar(11));
+                SHAR->shar_lrc->value(rkr->efx_StereoHarm->getpar(Sharm_LR_Cross));
                 SHAR->shar_lrc->redraw();
                 break;
             case 366:
-                SHAR->shar_note->value(rkr->efx_StereoHarm->getpar(8));
+                SHAR->shar_note->value(rkr->efx_StereoHarm->getpar(Sharm_Note));
                 SHAR->shar_note->redraw();
                 Chord(1);   // update gui
                 break;
             case 367:
-                SHAR->shar_type->value(rkr->efx_StereoHarm->getpar(9));
+                SHAR->shar_type->value(rkr->efx_StereoHarm->getpar(Sharm_Chord));
                 SHAR->shar_type->redraw();
                 Chord(1);   // update gui
                 break;
@@ -4886,7 +4886,7 @@ void RKRGUI::ActMIDI()
                 HAR->har_SELECT->redraw();
                 break;
             case 448:
-                SHAR->shar_SELECT->value(rkr->efx_StereoHarm->getpar(7));
+                SHAR->shar_SELECT->value(rkr->efx_StereoHarm->getpar(Sharm_Select));
                 SHAR->shar_SELECT->redraw();
                 break;
             case 449:

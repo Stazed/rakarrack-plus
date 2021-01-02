@@ -3224,9 +3224,9 @@ void SettingsWindowGui::update_stereoharm_quality() {
   m_rkr->StereoHarm_Bypass = hold_bypass;
   
   /* Reset user select */
-  if(m_rkr->efx_StereoHarm->getpar(7))
+  if(m_rkr->efx_StereoHarm->getpar(Sharm_Select))
   {
-      m_rkr->efx_StereoHarm->changepar(7, m_rkr->efx_StereoHarm->getpar(7));
+      m_rkr->efx_StereoHarm->changepar(Sharm_Select, m_rkr->efx_StereoHarm->getpar(Sharm_Select));
       m_rkr->RC_Stereo_Harm->cleanup();
       m_rgui->Chord(1);
   }

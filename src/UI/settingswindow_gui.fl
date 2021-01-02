@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {1266 445 530 580} type Double
+  xywh {309 156 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -1673,8 +1673,7 @@ if(m_rkr->efx_Reverbtron->getpar(Revtron_User_File))
 }
 
 /* Turn processing back on */
-m_rkr->quality_update = false;} {selected
-    }
+m_rkr->quality_update = false;} {}
   }
   Function {update_harmonizer_quality()} {return_type void
   } {
@@ -1745,12 +1744,13 @@ m_rkr->quality_update = false;
 m_rkr->StereoHarm_Bypass = hold_bypass;
 
 /* Reset user select */
-if(m_rkr->efx_StereoHarm->getpar(7))
+if(m_rkr->efx_StereoHarm->getpar(Sharm_Select))
 {
-    m_rkr->efx_StereoHarm->changepar(7, m_rkr->efx_StereoHarm->getpar(7));
+    m_rkr->efx_StereoHarm->changepar(Sharm_Select, m_rkr->efx_StereoHarm->getpar(Sharm_Select));
     m_rkr->RC_Stereo_Harm->cleanup();
     m_rgui->Chord(1);
-}} {}
+}} {selected
+    }
   }
   Function {update_sequence_quality()} {return_type void
   } {

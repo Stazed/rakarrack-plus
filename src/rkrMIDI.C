@@ -2345,43 +2345,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
     }
     case 358:
-        efx_StereoHarm->changepar(0, Dry_Wet(value));
+        efx_StereoHarm->changepar(Sharm_DryWet, Dry_Wet(value));
         break;
 
     case 359:
-        efx_StereoHarm->changepar(2, -12 + (int) ((float) value * C_MC_24_RANGE));
+        efx_StereoHarm->changepar(Sharm_L_Interval, (int) ((float) value * C_MC_24_RANGE));
         break;
 
     case 360:
-        efx_StereoHarm->changepar(3, -2000 + (int) ((float) value * C_MC_4000_RANGE));
+        efx_StereoHarm->changepar(Sharm_L_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
         break;
 
     case 361:
-        efx_StereoHarm->changepar(1, (int) ((float) value * C_MC_128_RANGE));
+        efx_StereoHarm->changepar(Sharm_L_Gain, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 362:
-        efx_StereoHarm->changepar(5, -12 + (int) ((float) value * C_MC_24_RANGE));
+        efx_StereoHarm->changepar(Sharm_R_Interval, (int) ((float) value * C_MC_24_RANGE));
         break;
 
     case 363:
-        efx_StereoHarm->changepar(6, -2000 + (int) ((float) value * C_MC_4000_RANGE));
+        efx_StereoHarm->changepar(Sharm_R_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
         break;
 
     case 364:
-        efx_StereoHarm->changepar(4, (int) ((float) value * C_MC_128_RANGE));
+        efx_StereoHarm->changepar(Sharm_R_Gain, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 365:
-        efx_StereoHarm->changepar(11, value);
+        efx_StereoHarm->changepar(Sharm_LR_Cross, value);
         break;
 
     case 366:
-        efx_StereoHarm->changepar(8, (int) ((float) value * C_MC_23_RANGE));
+        efx_StereoHarm->changepar(Sharm_Note, (int) ((float) value * C_MC_23_RANGE));
         break;
 
     case 367:
-        efx_StereoHarm->changepar(9, (int) ((float) value * C_MC_33_RANGE));
+        efx_StereoHarm->changepar(Sharm_Chord, (int) ((float) value * C_MC_33_RANGE));
         break;
 
     case 368:
@@ -2705,7 +2705,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 448:
-        efx_StereoHarm->changepar(7, value);
+        efx_StereoHarm->changepar(Sharm_Select, value);
         break;
 
     case 449:

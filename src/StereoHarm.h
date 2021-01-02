@@ -32,6 +32,22 @@
 
 #define SHARM_PRESET_SIZE 12
 
+enum Sharm_Index
+{
+    Sharm_DryWet = 0,
+    Sharm_L_Gain,
+    Sharm_L_Interval,
+    Sharm_L_Chroma,
+    Sharm_R_Gain,
+    Sharm_R_Interval,
+    Sharm_R_Chroma,
+    Sharm_Select,
+    Sharm_Note,
+    Sharm_Chord,
+    Sharm_MIDI,
+    Sharm_LR_Cross
+};
+
 class StereoHarm
 {
 

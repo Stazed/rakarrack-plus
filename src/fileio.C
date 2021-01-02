@@ -994,12 +994,12 @@ void RKR::getbuf(char *buf, int j)
     case 42:
         //StereoHarm
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_StereoHarm->getpar(0), efx_StereoHarm->getpar(1),
-                efx_StereoHarm->getpar(2), efx_StereoHarm->getpar(3),
-                efx_StereoHarm->getpar(4), efx_StereoHarm->getpar(5),
-                efx_StereoHarm->getpar(6), efx_StereoHarm->getpar(7),
-                efx_StereoHarm->getpar(8), efx_StereoHarm->getpar(9),
-                efx_StereoHarm->getpar(10), efx_StereoHarm->getpar(11),
+                efx_StereoHarm->getpar(Sharm_DryWet), efx_StereoHarm->getpar(Sharm_L_Gain),
+                efx_StereoHarm->getpar(Sharm_L_Interval), efx_StereoHarm->getpar(Sharm_L_Chroma),
+                efx_StereoHarm->getpar(Sharm_R_Gain), efx_StereoHarm->getpar(Sharm_R_Interval),
+                efx_StereoHarm->getpar(Sharm_R_Chroma), efx_StereoHarm->getpar(Sharm_Select),
+                efx_StereoHarm->getpar(Sharm_Note), efx_StereoHarm->getpar(Sharm_Chord),
+                efx_StereoHarm->getpar(Sharm_MIDI), efx_StereoHarm->getpar(Sharm_LR_Cross),
                 StereoHarm_Bypass);
         break;
 
