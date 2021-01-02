@@ -97,10 +97,10 @@ Shuffle::lv2_update_params(uint32_t period)
         setCross2(Cross2);
         setCross3(Cross3);
         setCross4(Cross4);
-        setGainL(getpar(1));
-        setGainML(getpar(2));
-        setGainMH(getpar(3));
-        setGainH(getpar(4));
+        setGainL(getpar(Shuffle_Gain_L));
+        setGainML(getpar(Shuffle_Gain_ML));
+        setGainMH(getpar(Shuffle_Gain_MH));
+        setGainH(getpar(Shuffle_Gain_H));
         set_q(PQ);
     }
     else
@@ -293,37 +293,37 @@ Shuffle::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Shuffle_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Shuffle_Gain_L:
         setGainL(value);
         break;
-    case 2:
+    case Shuffle_Gain_ML:
         setGainML(value);
         break;
-    case 3:
+    case Shuffle_Gain_MH:
         setGainMH(value);
         break;
-    case 4:
+    case Shuffle_Gain_H:
         setGainH(value);
         break;
-    case 5:
+    case Shuffle_Freq_L:
         setCross1(value);
         break;
-    case 6:
+    case Shuffle_Freq_ML:
         setCross2(value);
         break;
-    case 7:
+    case Shuffle_Freq_MH:
         setCross3(value);
         break;
-    case 8:
+    case Shuffle_Freq_H:
         setCross4(value);
         break;
-    case 9:
+    case Shuffle_Width:
         set_q(value);
         break;
-    case 10:
+    case Shuffle_F_Band:
         E = value;
         break;
     }
@@ -334,37 +334,37 @@ Shuffle::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Shuffle_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Shuffle_Gain_L:
         return (PvolL - 64);
         break;
-    case 2:
+    case Shuffle_Gain_ML:
         return (PvolML - 64);
         break;
-    case 3:
+    case Shuffle_Gain_MH:
         return (PvolMH - 64);
         break;
-    case 4:
+    case Shuffle_Gain_H:
         return (PvolH - 64);
         break;
-    case 5:
+    case Shuffle_Freq_L:
         return (Cross1);
         break;
-    case 6:
+    case Shuffle_Freq_ML:
         return (Cross2);
         break;
-    case 7:
+    case Shuffle_Freq_MH:
         return (Cross3);
         break;
-    case 8:
+    case Shuffle_Freq_H:
         return (Cross4);
         break;
-    case 9:
+    case Shuffle_Width:
         return (PQ);
         break;
-    case 10:
+    case Shuffle_F_Band:
         return (E);
     }
     return (0); //in case of bogus parameter number

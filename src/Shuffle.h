@@ -28,6 +28,21 @@
 
 #include "AnalogFilter.h"
 
+enum Shuffle_Index
+{
+    Shuffle_DryWet = 0,
+    Shuffle_Gain_L,
+    Shuffle_Gain_ML,
+    Shuffle_Gain_MH,
+    Shuffle_Gain_H,
+    Shuffle_Freq_L,
+    Shuffle_Freq_ML,
+    Shuffle_Freq_MH,
+    Shuffle_Freq_H,
+    Shuffle_Width,
+    Shuffle_F_Band
+};
+
 
 class Shuffle
 {

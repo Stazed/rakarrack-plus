@@ -813,12 +813,12 @@ void RKR::getbuf(char *buf, int j)
     case 26:
         //Shuffle
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Shuffle->getpar(0), efx_Shuffle->getpar(1),
-                efx_Shuffle->getpar(2), efx_Shuffle->getpar(3),
-                efx_Shuffle->getpar(4), efx_Shuffle->getpar(5),
-                efx_Shuffle->getpar(6), efx_Shuffle->getpar(7),
-                efx_Shuffle->getpar(8), efx_Shuffle->getpar(9),
-                efx_Shuffle->getpar(10), Shuffle_Bypass);
+                efx_Shuffle->getpar(Shuffle_DryWet), efx_Shuffle->getpar(Shuffle_Gain_L),
+                efx_Shuffle->getpar(Shuffle_Gain_ML), efx_Shuffle->getpar(Shuffle_Gain_MH),
+                efx_Shuffle->getpar(Shuffle_Gain_H), efx_Shuffle->getpar(Shuffle_Freq_L),
+                efx_Shuffle->getpar(Shuffle_Freq_ML), efx_Shuffle->getpar(Shuffle_Freq_MH),
+                efx_Shuffle->getpar(Shuffle_Freq_H), efx_Shuffle->getpar(Shuffle_Width),
+                efx_Shuffle->getpar(Shuffle_F_Band), Shuffle_Bypass);
         break;
 
     case 27:

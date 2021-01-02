@@ -2697,9 +2697,6 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2720,20 +2717,44 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->shuf->getpar(i) != val)
-    {
-        plug->shuf->changepar(i,val);
-    }
 
-    for(i++; i<plug->nparams; i++) //rest are not offset
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->shuf->getpar(i) != val)
+        switch(i)
         {
-            plug->shuf->changepar(i,val);
+            // Normal processing
+            case Shuffle_Gain_L:
+            case Shuffle_Gain_ML:
+            case Shuffle_Gain_MH:
+            case Shuffle_Gain_H:
+            case Shuffle_Freq_L:
+            case Shuffle_Freq_ML:
+            case Shuffle_Freq_MH:
+            case Shuffle_Freq_H:
+            case Shuffle_Width:
+            case Shuffle_F_Band:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->shuf->getpar(i) != val)
+                {
+                    plug->shuf->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Shuffle_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->shuf->getpar(Shuffle_DryWet) != val)
+                {
+                    plug->shuf->changepar(Shuffle_DryWet,val);
+                }
+            }
+            break;
         }
     }
 

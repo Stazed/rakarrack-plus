@@ -1781,43 +1781,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 227:
-        efx_Shuffle->changepar(0, Dry_Wet(value));
+        efx_Shuffle->changepar(Shuffle_DryWet, Dry_Wet(value));
         break;
 
     case 228:
-        efx_Shuffle->changepar(5, 20 + (int) ((float) value * C_MC_980_RANGE));
+        efx_Shuffle->changepar(Shuffle_Freq_L, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 229:
-        efx_Shuffle->changepar(1, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Shuffle->changepar(Shuffle_Gain_L, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 230:
-        efx_Shuffle->changepar(6, 400 + (int) ((float) value * C_MC_3600_RANGE));
+        efx_Shuffle->changepar(Shuffle_Freq_ML, 400 + (int) ((float) value * C_MC_3600_RANGE));
         break;
 
     case 231:
-        efx_Shuffle->changepar(2, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Shuffle->changepar(Shuffle_Gain_ML, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 232:
-        efx_Shuffle->changepar(7, 1200 + (int) ((float) value * C_MC_6800_RANGE));
+        efx_Shuffle->changepar(Shuffle_Freq_MH, 1200 + (int) ((float) value * C_MC_6800_RANGE));
         break;
 
     case 233:
-        efx_Shuffle->changepar(3, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Shuffle->changepar(Shuffle_Gain_MH, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 234:
-        efx_Shuffle->changepar(8, 6000 + (int) ((float) value * C_MC_20000_RANGE));
+        efx_Shuffle->changepar(Shuffle_Freq_H, 6000 + (int) ((float) value * C_MC_20000_RANGE));
         break;
 
     case 235:
-        efx_Shuffle->changepar(4, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Shuffle->changepar(Shuffle_Gain_H, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 236:
-        efx_Shuffle->changepar(9, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Shuffle->changepar(Shuffle_Width, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 237:

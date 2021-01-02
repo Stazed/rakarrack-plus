@@ -3988,43 +3988,43 @@ void RKRGUI::ActMIDI()
                 EXPANDER->expander_HPF->redraw();
                 break;
             case 227:
-                SHUFFLE->shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(0)));
+                SHUFFLE->shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(Shuffle_DryWet)));
                 SHUFFLE->shuffle_WD->redraw();
                 break;
             case 228:
-                SHUFFLE->shuffle_cross1->value(rkr->efx_Shuffle->getpar(5));
+                SHUFFLE->shuffle_cross1->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_L));
                 SHUFFLE->shuffle_cross1->redraw();
                 break;
             case 229:
-                SHUFFLE->shuffle_volL->value(rkr->efx_Shuffle->getpar(1));
+                SHUFFLE->shuffle_volL->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_L));
                 SHUFFLE->shuffle_volL->redraw();
                 break;
             case 230:
-                SHUFFLE->shuffle_cross2->value(rkr->efx_Shuffle->getpar(6));
+                SHUFFLE->shuffle_cross2->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_ML));
                 SHUFFLE->shuffle_cross2->redraw();
                 break;
             case 231:
-                SHUFFLE->shuffle_volML->value(rkr->efx_Shuffle->getpar(2));
+                SHUFFLE->shuffle_volML->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_ML));
                 SHUFFLE->shuffle_volML->redraw();
                 break;
             case 232:
-                SHUFFLE->shuffle_cross3->value(rkr->efx_Shuffle->getpar(7));
+                SHUFFLE->shuffle_cross3->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_MH));
                 SHUFFLE->shuffle_cross3->redraw();
                 break;
             case 233:
-                SHUFFLE->shuffle_volMH->value(rkr->efx_Shuffle->getpar(3));
+                SHUFFLE->shuffle_volMH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_MH));
                 SHUFFLE->shuffle_volMH->redraw();
                 break;
             case 234:
-                SHUFFLE->shuffle_cross4->value(rkr->efx_Shuffle->getpar(8));
+                SHUFFLE->shuffle_cross4->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_H));
                 SHUFFLE->shuffle_cross4->redraw();
                 break;
             case 235:
-                SHUFFLE->shuffle_volH->value(rkr->efx_Shuffle->getpar(4));
+                SHUFFLE->shuffle_volH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_H));
                 SHUFFLE->shuffle_volH->redraw();
                 break;
             case 236:
-                SHUFFLE->shuffle_Q->value(rkr->efx_Shuffle->getpar(9));
+                SHUFFLE->shuffle_Q->value(rkr->efx_Shuffle->getpar(Shuffle_Width));
                 SHUFFLE->shuffle_Q->redraw();
                 break;
             case 237:
