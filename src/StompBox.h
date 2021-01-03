@@ -30,7 +30,7 @@
 
 enum Stomp_Index
 {
-    Stomp_Level,
+    Stomp_Level = 0,
     Stomp_Tone,
     Stomp_Mid,
     Stomp_Bias,

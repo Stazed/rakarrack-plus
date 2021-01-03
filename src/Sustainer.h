@@ -25,6 +25,12 @@
 
 #include "FPreset.h"
 
+enum Sustain_Index
+{
+    Sustain_Gain = 0,
+    Sustain_Sustain
+};
+
 class Sustainer
 {
 public:

@@ -2151,11 +2151,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 312:
-        efx_Sustainer->changepar(0, value);
+        efx_Sustainer->changepar(Sustain_Gain, value);
         break;
 
     case 313:
-        efx_Sustainer->changepar(1, value);
+        efx_Sustainer->changepar(Sustain_Sustain, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 314:

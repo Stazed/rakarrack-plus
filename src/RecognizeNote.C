@@ -64,8 +64,8 @@ Recognize::Recognize(float trig, float tune, double sample_rate, uint32_t interm
     notes = englishNotes;
 
     Sus = new Sustainer(sample_rate, PERIOD);
-    Sus->changepar(0, 101); // This approximates the original wrong settings in rakarrack ;)
-    Sus->changepar(1, 64); // This approximates the original wrong settings in rakarrack ;)
+    Sus->changepar(Sustain_Gain, 101); // This approximates the original wrong settings in rakarrack ;)
+    Sus->changepar(Sustain_Sustain, 64); // This approximates the original wrong settings in rakarrack ;)
     //Sus->changepar(1,64);   // This is wrong - parameters are 0 & 1, not 1 & 2
     //Sus->changepar(2,127);  // This is wrong - parameters are 0 & 1, not 1 & 2
 

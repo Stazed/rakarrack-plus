@@ -4338,11 +4338,11 @@ void RKRGUI::ActMIDI()
                 ECHOVERSE->echoverse_angle->redraw();
                 break;
             case 312:
-                SUSTAINER->sus_gain->value(rkr->efx_Sustainer->getpar(0));
+                SUSTAINER->sus_gain->value(rkr->efx_Sustainer->getpar(Sustain_Gain));
                 SUSTAINER->sus_gain->redraw();
                 break;
             case 313:
-                SUSTAINER->sus_sus->value(rkr->efx_Sustainer->getpar(1));
+                SUSTAINER->sus_sus->value(rkr->efx_Sustainer->getpar(Sustain_Sustain));
                 SUSTAINER->sus_sus->redraw();
                 break;
             case 314:

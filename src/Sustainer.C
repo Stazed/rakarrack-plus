@@ -174,11 +174,11 @@ Sustainer::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Sustain_Gain:
         Pvolume = value;
         level = dB2rap(-30.0f * (1.0f - ((float) Pvolume / 127.0f)));
         break;
-    case 1:
+    case Sustain_Sustain:
         Psustain = value;
         fsustain = (float) Psustain / 127.0f;
         cratio = 1.25f - fsustain;
@@ -193,10 +193,10 @@ Sustainer::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Sustain_Gain:
         return (Pvolume);
         break;
-    case 1:
+    case Sustain_Sustain:
         return (Psustain);
         break;
     }

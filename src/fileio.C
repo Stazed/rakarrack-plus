@@ -927,7 +927,7 @@ void RKR::getbuf(char *buf, int j)
     case 36:
         //Sustainer
         sprintf(buf, "%d,%d,%d\n",
-                efx_Sustainer->getpar(0), efx_Sustainer->getpar(1),
+                efx_Sustainer->getpar(Sustain_Gain), efx_Sustainer->getpar(Sustain_Sustain),
                 Sustainer_Bypass);
         break;
 

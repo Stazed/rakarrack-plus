@@ -3470,9 +3470,6 @@ void run_suslv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3492,13 +3489,24 @@ void run_suslv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->sus->getpar(i) != val)
+        switch(i)
         {
-            plug->sus->changepar(i,val);
+            // Normal processing
+            case Sustain_Gain:
+            case Sustain_Sustain:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->sus->getpar(i) != val)
+                {
+                    plug->sus->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 
