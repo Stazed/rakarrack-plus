@@ -4522,8 +4522,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->prev_bypass)
     {
         plug->sharm->cleanup();
-        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval - FIXME sb 3 per gui
-        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval - FIXME sb 6 per gui
+        plug->sharm->changepar(Sharm_L_Chroma,plug->sharm->getpar(Sharm_L_Chroma));
+        plug->sharm->changepar(Sharm_R_Chroma,plug->sharm->getpar(Sharm_R_Chroma));
         plug->chordID->cc = 1;//mark chord has changed
     }
  
@@ -4603,8 +4603,8 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
                     plug->sharm->changepar(Sharm_Select,val);
                     plug->chordID->cleanup();
                     if(!val){
-                        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval FIXME sb 3
-                        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval FIXME sb 6
+                        plug->sharm->changepar(Sharm_L_Chroma,plug->sharm->getpar(Sharm_L_Chroma));
+                        plug->sharm->changepar(Sharm_R_Chroma,plug->sharm->getpar(Sharm_R_Chroma));
                     }
 
                     plug->chordID->cc = 1;  // mark chord has changed
@@ -6270,8 +6270,8 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->prev_bypass)
     {
         plug->sharm->cleanup();
-        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval FIXME check
-        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval FIXME check
+        plug->sharm->changepar(Sharm_L_Chroma,plug->sharm->getpar(Sharm_L_Chroma));
+        plug->sharm->changepar(Sharm_R_Chroma,plug->sharm->getpar(Sharm_R_Chroma));
         plug->chordID->cc = 1;//mark chord has changed
         bypass = 1; // For MIDI mode upon return, need to reset default chord type and note
     }
@@ -6412,9 +6412,10 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
                 {
                     plug->sharm->changepar(Sharm_Select,val);
                     plug->chordID->cleanup();
-                    if(!val){
-                        plug->sharm->changepar(2,plug->sharm->getpar(2)); // reset interval FIXME sb 3
-                        plug->sharm->changepar(5,plug->sharm->getpar(5)); // reset interval FIXME sb 6
+                    if(!val)
+                    {
+                        plug->sharm->changepar(Sharm_L_Chroma,plug->sharm->getpar(Sharm_L_Chroma));
+                        plug->sharm->changepar(Sharm_R_Chroma,plug->sharm->getpar(Sharm_R_Chroma));
                     }
 
                     plug->chordID->cc = 1;  // mark chord changed
@@ -6443,6 +6444,11 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
                 {
                     plug->sharm->changepar(i,val);
                     plug->chordID->cleanup();
+                    if(!val)
+                    {
+                        plug->sharm->changepar(Sharm_L_Chroma,plug->sharm->getpar(Sharm_L_Chroma));
+                        plug->sharm->changepar(Sharm_R_Chroma,plug->sharm->getpar(Sharm_R_Chroma));
+                    }
                     plug->chordID->cc = 1;  // mark chord changed to update after cleanup
                 }
             }
