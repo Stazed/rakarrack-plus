@@ -958,9 +958,9 @@ void RKR::getbuf(char *buf, int j)
     case 39:
         //StompBox
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
-                efx_StompBox->getpar(0), efx_StompBox->getpar(1),
-                efx_StompBox->getpar(2), efx_StompBox->getpar(3),
-                efx_StompBox->getpar(4), efx_StompBox->getpar(5),
+                efx_StompBox->getpar(Stomp_Level), efx_StompBox->getpar(Stomp_Tone),
+                efx_StompBox->getpar(Stomp_Mid), efx_StompBox->getpar(Stomp_Bias),
+                efx_StompBox->getpar(Stomp_Gain), efx_StompBox->getpar(Stomp_Mode),
                 StompBox_Bypass);
         break;
 

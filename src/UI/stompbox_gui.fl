@@ -36,13 +36,13 @@ rgui->findpos(39,(int)o->value(),o);}
     user_data 12039
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12039))rkr->efx_StompBox->setpreset((int)o->value());
-stomp_WD->value(rkr->efx_StompBox->getpar(0));
-stomp_gain->value(rkr->efx_StompBox->getpar(4));
-stomp_low->value(rkr->efx_StompBox->getpar(3));
-stomp_mid->value(rkr->efx_StompBox->getpar(2));
-stomp_high->value(rkr->efx_StompBox->getpar(1));
+stomp_WD->value(rkr->efx_StompBox->getpar(Stomp_Level));
+stomp_gain->value(rkr->efx_StompBox->getpar(Stomp_Gain));
+stomp_low->value(rkr->efx_StompBox->getpar(Stomp_Bias));
+stomp_mid->value(rkr->efx_StompBox->getpar(Stomp_Mid));
+stomp_high->value(rkr->efx_StompBox->getpar(Stomp_Tone));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
+stomp_mode->value(rkr->efx_StompBox->getpar(Stomp_Mode));} open selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -98,7 +98,7 @@ stomp_mode->value(rkr->efx_StompBox->getpar(5));} open
  rgui->getMIDIControl(334);
  return;
 }
-rkr->efx_StompBox->changepar(0,(int)o->value());}
+rkr->efx_StompBox->changepar(Stomp_Level,(int)o->value());}
     xywh {56 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -109,7 +109,7 @@ rkr->efx_StompBox->changepar(0,(int)o->value());}
  rgui->getMIDIControl(335);
  return;
 }
-rkr->efx_StompBox->changepar(4,(int)o->value());}
+rkr->efx_StompBox->changepar(Stomp_Gain,(int)o->value());}
     xywh {56 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -120,7 +120,7 @@ rkr->efx_StompBox->changepar(4,(int)o->value());}
  rgui->getMIDIControl(336);
  return;
 }
-rkr->efx_StompBox->changepar(3,(int)o->value());}
+rkr->efx_StompBox->changepar(Stomp_Bias,(int)o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -131,7 +131,7 @@ rkr->efx_StompBox->changepar(3,(int)o->value());}
  rgui->getMIDIControl(337);
  return;
 }
-rkr->efx_StompBox->changepar(2,(int)o->value());}
+rkr->efx_StompBox->changepar(Stomp_Mid,(int)o->value());}
     xywh {56 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 36 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -142,7 +142,7 @@ rkr->efx_StompBox->changepar(2,(int)o->value());}
  rgui->getMIDIControl(338);
  return;
 }
-rkr->efx_StompBox->changepar(1,(int)o->value());} selected
+rkr->efx_StompBox->changepar(Stomp_Tone,(int)o->value());}
     xywh {56 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -155,7 +155,7 @@ rkr->efx_StompBox->changepar(1,(int)o->value());} selected
  return;
 }
 
-rkr->efx_StompBox->changepar(5,(int)o->value())}
+rkr->efx_StompBox->changepar(Stomp_Mode,(int)o->value())}
     xywh {60 139 78 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {

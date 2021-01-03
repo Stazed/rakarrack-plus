@@ -3747,7 +3747,7 @@ LV2_Handle init_stomplv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 6;
+    plug->nparams = STOMP_PRESET_SIZE;
     plug->effectindex = ISTOMP;
     plug->prev_bypass = 1;
 
@@ -3762,9 +3762,6 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3784,13 +3781,28 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    for(i=0; i<plug->nparams; i++)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->stomp->getpar(i) != val)
+        switch(i)
         {
-            plug->stomp->changepar(i,val);
+            // Normal processing
+            case Stomp_Level:
+            case Stomp_Tone:
+            case Stomp_Mid:
+            case Stomp_Bias:
+            case Stomp_Gain:
+            case Stomp_Mode:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->stomp->getpar(i) != val)
+                {
+                    plug->stomp->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 

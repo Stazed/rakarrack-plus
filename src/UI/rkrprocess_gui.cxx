@@ -4426,23 +4426,23 @@ void RKRGUI::ActMIDI()
                 SHIFTER->shifter_whammy->redraw();
                 break;
             case 334:
-                STOMPBOX->stomp_WD->value(rkr->efx_StompBox->getpar(0));
+                STOMPBOX->stomp_WD->value(rkr->efx_StompBox->getpar(Stomp_Level));
                 STOMPBOX->stomp_WD->redraw();
                 break;
             case 335:
-                STOMPBOX->stomp_gain->value(rkr->efx_StompBox->getpar(4));
+                STOMPBOX->stomp_gain->value(rkr->efx_StompBox->getpar(Stomp_Gain));
                 STOMPBOX->stomp_gain->redraw();
                 break;
             case 336:
-                STOMPBOX->stomp_low->value(rkr->efx_StompBox->getpar(3) - 64);
+                STOMPBOX->stomp_low->value(rkr->efx_StompBox->getpar(Stomp_Bias));
                 STOMPBOX->stomp_low->redraw();
                 break;
             case 337:
-                STOMPBOX->stomp_mid->value(rkr->efx_StompBox->getpar(2) - 64);
+                STOMPBOX->stomp_mid->value(rkr->efx_StompBox->getpar(Stomp_Mid));
                 STOMPBOX->stomp_mid->redraw();
                 break;
             case 338:
-                STOMPBOX->stomp_high->value(rkr->efx_StompBox->getpar(1) - 64);
+                STOMPBOX->stomp_high->value(rkr->efx_StompBox->getpar(Stomp_Tone));
                 STOMPBOX->stomp_high->redraw();
                 break;
             case 339:
@@ -4914,7 +4914,7 @@ void RKRGUI::ActMIDI()
                 DISTBAND->distband_tipoH->redraw();
                 break;
             case 455:
-                STOMPBOX->stomp_mode->value(rkr->efx_StompBox->getpar(5));
+                STOMPBOX->stomp_mode->value(rkr->efx_StompBox->getpar(Stomp_Mode));
                 STOMPBOX->stomp_mode->redraw();
                 break;
             case 456:

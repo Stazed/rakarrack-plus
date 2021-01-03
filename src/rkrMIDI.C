@@ -2239,23 +2239,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 334:
-        efx_StompBox->changepar(0, value);
+        efx_StompBox->changepar(Stomp_Level, value);
         break;
 
     case 335:
-        efx_StompBox->changepar(4, value);
+        efx_StompBox->changepar(Stomp_Gain, value);
         break;
 
     case 336:
-        efx_StompBox->changepar(3, (int) ((float) value * C_MC_128_RANGE));
+        efx_StompBox->changepar(Stomp_Bias, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 337:
-        efx_StompBox->changepar(2, (int) ((float) value * C_MC_128_RANGE));
+        efx_StompBox->changepar(Stomp_Mid, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 338:
-        efx_StompBox->changepar(1, (int) ((float) value * C_MC_128_RANGE));
+        efx_StompBox->changepar(Stomp_Tone, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case 339:
@@ -2733,7 +2733,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 455:
-        efx_StompBox->changepar(5, (int) ((float) value * C_MC_8_RANGE));
+        efx_StompBox->changepar(Stomp_Mode, (int) ((float) value * C_MC_8_RANGE));
         break;
 
     case 456:

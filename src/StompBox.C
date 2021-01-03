@@ -982,29 +982,29 @@ StompBox::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Stomp_Level:
         setvolume(value);
         break;
-    case 1:
+    case Stomp_Tone:
         Phigh = value;
         if (value < 0) highb = ((float) value) / 64.0f;
         if (value > 0) highb = ((float) value) / 32.0f;
         break;
-    case 2:
+    case Stomp_Mid:
         Pmid = value;
         if (value < 0) midb = ((float) value) / 64.0f;
         if (value > 0) midb = ((float) value) / 32.0f;
         break;
-    case 3:
+    case Stomp_Bias:
         Plow = value;
         if (value < 0) lowb = ((float) value) / 64.0f;
         if (value > 0) lowb = ((float) value) / 32.0f;
         break;
-    case 4:
+    case Stomp_Gain:
         Pgain = value;
         gain = dB2rap(50.0f * ((float) value) / 127.0f - 50.0f);
         break;
-    case 5:
+    case Stomp_Mode:
         Pmode = value;
         init_mode(Pmode);
         break;
@@ -1017,22 +1017,22 @@ StompBox::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Stomp_Level:
         return (Pvolume);
         break;
-    case 1:
+    case Stomp_Tone:
         return (Phigh);
         break;
-    case 2:
+    case Stomp_Mid:
         return (Pmid);
         break;
-    case 3:
+    case Stomp_Bias:
         return (Plow);
         break;
-    case 4:
+    case Stomp_Gain:
         return (Pgain);
         break;
-    case 5:
+    case Stomp_Mode:
         return (Pmode);
         break;
     }

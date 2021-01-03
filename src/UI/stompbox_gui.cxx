@@ -21,13 +21,13 @@ void StompboxGui::cb_stomp_activar(RKR_Light_Button* o, void* v) {
 void StompboxGui::cb_stomp_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12039))rkr->efx_StompBox->setpreset((int)o->value());
-stomp_WD->value(rkr->efx_StompBox->getpar(0));
-stomp_gain->value(rkr->efx_StompBox->getpar(4));
-stomp_low->value(rkr->efx_StompBox->getpar(3));
-stomp_mid->value(rkr->efx_StompBox->getpar(2));
-stomp_high->value(rkr->efx_StompBox->getpar(1));
+stomp_WD->value(rkr->efx_StompBox->getpar(Stomp_Level));
+stomp_gain->value(rkr->efx_StompBox->getpar(Stomp_Gain));
+stomp_low->value(rkr->efx_StompBox->getpar(Stomp_Bias));
+stomp_mid->value(rkr->efx_StompBox->getpar(Stomp_Mid));
+stomp_high->value(rkr->efx_StompBox->getpar(Stomp_Tone));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(5));
+stomp_mode->value(rkr->efx_StompBox->getpar(Stomp_Mode));
 }
 void StompboxGui::cb_stomp_preset(RKR_Choice* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_preset_i(o,v);
@@ -54,7 +54,7 @@ void StompboxGui::cb_stomp_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(334);
  return;
 }
-rkr->efx_StompBox->changepar(0,(int)o->value());
+rkr->efx_StompBox->changepar(Stomp_Level,(int)o->value());
 }
 void StompboxGui::cb_stomp_WD(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_WD_i(o,v);
@@ -66,7 +66,7 @@ void StompboxGui::cb_stomp_gain_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(335);
  return;
 }
-rkr->efx_StompBox->changepar(4,(int)o->value());
+rkr->efx_StompBox->changepar(Stomp_Gain,(int)o->value());
 }
 void StompboxGui::cb_stomp_gain(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_gain_i(o,v);
@@ -78,7 +78,7 @@ void StompboxGui::cb_stomp_low_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(336);
  return;
 }
-rkr->efx_StompBox->changepar(3,(int)o->value());
+rkr->efx_StompBox->changepar(Stomp_Bias,(int)o->value());
 }
 void StompboxGui::cb_stomp_low(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_low_i(o,v);
@@ -90,7 +90,7 @@ void StompboxGui::cb_stomp_mid_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(337);
  return;
 }
-rkr->efx_StompBox->changepar(2,(int)o->value());
+rkr->efx_StompBox->changepar(Stomp_Mid,(int)o->value());
 }
 void StompboxGui::cb_stomp_mid(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_mid_i(o,v);
@@ -102,7 +102,7 @@ void StompboxGui::cb_stomp_high_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(338);
  return;
 }
-rkr->efx_StompBox->changepar(1,(int)o->value());
+rkr->efx_StompBox->changepar(Stomp_Tone,(int)o->value());
 }
 void StompboxGui::cb_stomp_high(RKR_Slider* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_high_i(o,v);
@@ -115,7 +115,7 @@ void StompboxGui::cb_stomp_mode_i(RKR_Choice* o, void*) {
  return;
 }
 
-rkr->efx_StompBox->changepar(5,(int)o->value());
+rkr->efx_StompBox->changepar(Stomp_Mode,(int)o->value());
 }
 void StompboxGui::cb_stomp_mode(RKR_Choice* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_mode_i(o,v);

@@ -28,6 +28,16 @@
 
 #define STOMP_PRESET_SIZE 6
 
+enum Stomp_Index
+{
+    Stomp_Level,
+    Stomp_Tone,
+    Stomp_Mid,
+    Stomp_Bias,
+    Stomp_Gain,
+    Stomp_Mode
+};
+
 class StompBox
 {
 public:
