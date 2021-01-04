@@ -1549,39 +1549,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 169:
-        efx_Valve->changepar(0, Dry_Wet(value));
+        efx_Valve->changepar(Valve_DryWet, Dry_Wet(value));
         break;
 
     case 170:
-        efx_Valve->changepar(2, value);
+        efx_Valve->changepar(Valve_LR_Cross, value);
         break;
 
     case 171:
-        efx_Valve->changepar(1, value);
+        efx_Valve->changepar(Valve_Pan, value);
         break;
 
     case 172:
-        efx_Valve->changepar(4, value);
+        efx_Valve->changepar(Valve_Level, value);
         break;
 
     case 173:
-        efx_Valve->changepar(3, value);
+        efx_Valve->changepar(Valve_Drive, value);
         break;
 
     case 174:
-        efx_Valve->changepar(10, value);
+        efx_Valve->changepar(Valve_Distortion, value);
         break;
 
     case 175:
-        efx_Valve->changepar(12, (int) ((float) value * C_MC_100_RANGE));
+        efx_Valve->changepar(Valve_Presence, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case 176:
-        efx_Valve->changepar(6, ret_LPF(value));
+        efx_Valve->changepar(Valve_LPF, ret_LPF(value));
         break;
 
     case 177:
-        efx_Valve->changepar(7, ret_HPF(value));
+        efx_Valve->changepar(Valve_HPF, ret_HPF(value));
         break;
 
     case 178:

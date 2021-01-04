@@ -3756,39 +3756,39 @@ void RKRGUI::ActMIDI()
                 DFLANGE->dflange_rnd->redraw();
                 break;
             case 169:
-                VALVE->valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(0)));
+                VALVE->valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(Valve_DryWet)));
                 VALVE->valve_WD->redraw();
                 break;
             case 170:
-                VALVE->valve_LRc->value(rkr->efx_Valve->getpar(2));
+                VALVE->valve_LRc->value(rkr->efx_Valve->getpar(Valve_LR_Cross));
                 VALVE->valve_LRc->redraw();
                 break;
             case 171:
-                VALVE->valve_pan->value(rkr->efx_Valve->getpar(1) - 64);
+                VALVE->valve_pan->value(rkr->efx_Valve->getpar(Valve_Pan) - 64);
                 VALVE->valve_pan->redraw();
                 break;
             case 172:
-                VALVE->valve_level->value(rkr->efx_Valve->getpar(4));
+                VALVE->valve_level->value(rkr->efx_Valve->getpar(Valve_Level));
                 VALVE->valve_level->redraw();
                 break;
             case 173:
-                VALVE->valve_drive->value(rkr->efx_Valve->getpar(3));
+                VALVE->valve_drive->value(rkr->efx_Valve->getpar(Valve_Drive));
                 VALVE->valve_drive->redraw();
                 break;
             case 174:
-                VALVE->valve_Q->value(rkr->efx_Valve->getpar(10));
+                VALVE->valve_Q->value(rkr->efx_Valve->getpar(Valve_Distortion));
                 VALVE->valve_Q->redraw();
                 break;
             case 175:
-                VALVE->valve_Pre->value(rkr->efx_Valve->getpar(12));
+                VALVE->valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));
                 VALVE->valve_Pre->redraw();
                 break;
             case 176:
-                VALVE->valve_lpf->value(rkr->efx_Valve->getpar(6));
+                VALVE->valve_lpf->value(rkr->efx_Valve->getpar(Valve_LPF));
                 VALVE->valve_lpf->redraw();
                 break;
             case 177:
-                VALVE->valve_hpf->value(rkr->efx_Valve->getpar(7));
+                VALVE->valve_hpf->value(rkr->efx_Valve->getpar(Valve_HPF));
                 VALVE->valve_hpf->redraw();
                 break;
             case 178:

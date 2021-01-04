@@ -731,13 +731,13 @@ void RKR::getbuf(char *buf, int j)
     case 19:
         //Valve
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Valve->getpar(0), efx_Valve->getpar(1),
-                efx_Valve->getpar(2), efx_Valve->getpar(3),
-                efx_Valve->getpar(4), efx_Valve->getpar(5),
-                efx_Valve->getpar(6), efx_Valve->getpar(7),
-                efx_Valve->getpar(8), efx_Valve->getpar(9),
-                efx_Valve->getpar(10), efx_Valve->getpar(11),
-                efx_Valve->getpar(12), Valve_Bypass);
+                efx_Valve->getpar(Valve_DryWet), efx_Valve->getpar(Valve_Pan),
+                efx_Valve->getpar(Valve_LR_Cross), efx_Valve->getpar(Valve_Drive),
+                efx_Valve->getpar(Valve_Level), efx_Valve->getpar(Valve_Negate),
+                efx_Valve->getpar(Valve_LPF), efx_Valve->getpar(Valve_HPF),
+                efx_Valve->getpar(Valve_Stereo), efx_Valve->getpar(Valve_Prefilter),
+                efx_Valve->getpar(Valve_Distortion), efx_Valve->getpar(Valve_Ex_Dist),
+                efx_Valve->getpar(Valve_Presence), Valve_Bypass);
         break;
 
     case 20:

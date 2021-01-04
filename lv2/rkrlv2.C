@@ -2076,9 +2076,6 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2099,25 +2096,56 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->valve->getpar(i) != val)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->valve->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//1 pan
-    if(plug->valve->getpar(i) != val)
-    {
-        plug->valve->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++) //2-12
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->valve->getpar(i) != val)
+        switch(i)
         {
-            plug->valve->changepar(i,val);
+            // Normal processing
+            case Valve_LR_Cross:
+            case Valve_Drive:
+            case Valve_Level:
+            case Valve_Negate:
+            case Valve_LPF:
+            case Valve_HPF:
+            case Valve_Stereo:
+            case Valve_Prefilter:
+            case Valve_Distortion:
+            case Valve_Ex_Dist:
+            case Valve_Presence:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->valve->getpar(i) != val)
+                {
+                    plug->valve->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Valve_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->valve->getpar(Valve_DryWet) != val)
+                {
+                    plug->valve->changepar(Valve_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Valve_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->valve->getpar(Valve_Pan) != val)
+                {
+                    plug->valve->changepar(Valve_Pan,val);
+                }
+            }
+            break;
         }
     }
 

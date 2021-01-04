@@ -473,50 +473,50 @@ Valve::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Valve_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Valve_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Valve_LR_Cross:
         setlrcross(value);
         break;
-    case 3:
+    case Valve_Drive:
         Pdrive = value;
         dist = (float) Pdrive / 127.0f * 40.0f + .5f;
         break;
-    case 4:
+    case Valve_Level:
         Plevel = value;
         break;
-    case 5:
+    case Valve_Negate:
         if (value > 1)
             value = 1;
         Pnegate = value;
         break;
-    case 6:
+    case Valve_LPF:
         setlpf(value);
         break;
-    case 7:
+    case Valve_HPF:
         sethpf(value);
         break;
-    case 8:
+    case Valve_Stereo:
         if (value > 1)
             value = 1;
         Pstereo = value;
         break;
-    case 9:
+    case Valve_Prefilter:
         Pprefiltering = value;
         break;
-    case 10:
+    case Valve_Distortion:
         Q_q = value;
         q = (float) Q_q / 127.0f - 1.0f;
         factor = 1.0f - ((float) Q_q / 128.0f);
         break;
-    case 11:
+    case Valve_Ex_Dist:
         Ped = value;
         break;
-    case 12:
+    case Valve_Presence:
         Presence = value;
         setpresence(value);
         break;
@@ -529,42 +529,42 @@ Valve::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Valve_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Valve_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Valve_LR_Cross:
         return (Plrcross);
         break;
-    case 3:
+    case Valve_Drive:
         return (Pdrive);
         break;
-    case 4:
+    case Valve_Level:
         return (Plevel);
         break;
-    case 5:
+    case Valve_Negate:
         return (Pnegate);
         break;
-    case 6:
+    case Valve_LPF:
         return (Plpf);
         break;
-    case 7:
+    case Valve_HPF:
         return (Phpf);
         break;
-    case 8:
+    case Valve_Stereo:
         return (Pstereo);
         break;
-    case 9:
+    case Valve_Prefilter:
         return (Pprefiltering);
         break;
-    case 10:
+    case Valve_Distortion:
         return (Q_q);
         break;
-    case 11:
+    case Valve_Ex_Dist:
         return (Ped);
-    case 12:
+    case Valve_Presence:
         return (Presence);
         break;
     }

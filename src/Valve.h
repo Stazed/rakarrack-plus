@@ -27,6 +27,23 @@
 #include "AnalogFilter.h"
 #include "HarmonicEnhancer.h"
 
+enum Valve_Index
+{
+    Valve_DryWet = 0,
+    Valve_Pan,
+    Valve_LR_Cross,
+    Valve_Drive,
+    Valve_Level,
+    Valve_Negate,
+    Valve_LPF,
+    Valve_HPF,
+    Valve_Stereo,
+    Valve_Prefilter,
+    Valve_Distortion,
+    Valve_Ex_Dist,
+    Valve_Presence
+};
+
 class Valve
 {
 public:

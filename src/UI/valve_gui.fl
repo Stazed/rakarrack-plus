@@ -39,19 +39,19 @@ rgui->findpos(19,(int)o->value(),o);}
     user_data 12019
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
-valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(0)));
-valve_LRc->value(rkr->efx_Valve->getpar(2));
-valve_drive->value(rkr->efx_Valve->getpar(3));
-valve_level->value(rkr->efx_Valve->getpar(4));
-valve_neg->value(rkr->efx_Valve->getpar(5));
-valve_st->value(rkr->efx_Valve->getpar(8));
-valve_pan->value(rkr->efx_Valve->getpar(1)-64);
-valve_pf->value(rkr->efx_Valve->getpar(9));
-valve_lpf->value(rkr->efx_Valve->getpar(6));
-valve_hpf->value(rkr->efx_Valve->getpar(7));
-valve_Q->value(rkr->efx_Valve->getpar(10));
-valve_ed->value(rkr->efx_Valve->getpar(11));
-valve_Pre->value(rkr->efx_Valve->getpar(12));} selected
+valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(Valve_DryWet)));
+valve_LRc->value(rkr->efx_Valve->getpar(Valve_LR_Cross));
+valve_drive->value(rkr->efx_Valve->getpar(Valve_Drive));
+valve_level->value(rkr->efx_Valve->getpar(Valve_Level));
+valve_neg->value(rkr->efx_Valve->getpar(Valve_Negate));
+valve_st->value(rkr->efx_Valve->getpar(Valve_Stereo));
+valve_pan->value(rkr->efx_Valve->getpar(Valve_Pan)-64);
+valve_pf->value(rkr->efx_Valve->getpar(Valve_Prefilter));
+valve_lpf->value(rkr->efx_Valve->getpar(Valve_LPF));
+valve_hpf->value(rkr->efx_Valve->getpar(Valve_HPF));
+valve_Q->value(rkr->efx_Valve->getpar(Valve_Distortion));
+valve_ed->value(rkr->efx_Valve->getpar(Valve_Ex_Dist));
+valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -79,7 +79,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(12));} selected
  rgui->getMIDIControl(169);
  return;
 } 
-rkr->efx_Valve->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Valve->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 31 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -90,7 +90,7 @@ rkr->efx_Valve->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(170);
  return;
 } 
-rkr->efx_Valve->changepar(2,(int)(o->value()));}
+rkr->efx_Valve->changepar(Valve_LR_Cross,(int)(o->value()));}
     xywh {56 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -101,7 +101,7 @@ rkr->efx_Valve->changepar(2,(int)(o->value()));}
  rgui->getMIDIControl(171);
  return;
 } 
-rkr->efx_Valve->changepar(1,(int)(o->value()+64));}
+rkr->efx_Valve->changepar(Valve_Pan,(int)(o->value()+64));}
     xywh {56 57 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -112,7 +112,7 @@ rkr->efx_Valve->changepar(1,(int)(o->value()+64));}
  rgui->getMIDIControl(172);
  return;
 } 
-rkr->efx_Valve->changepar(4,(int)o->value());}
+rkr->efx_Valve->changepar(Valve_Level,(int)o->value());}
     xywh {56 71 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -123,14 +123,14 @@ rkr->efx_Valve->changepar(4,(int)o->value());}
  rgui->getMIDIControl(173);
  return;
 } 
-rkr->efx_Valve->changepar(3,(int)o->value());}
+rkr->efx_Valve->changepar(Valve_Drive,(int)o->value());}
     xywh {56 84 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button valve_ed {
     label {Extra Dist.}
     user_data 2
-    callback {rkr->efx_Valve->changepar(11,(int)o->value());}
+    callback {rkr->efx_Valve->changepar(Valve_Ex_Dist,(int)o->value());}
     xywh {15 96 72 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -141,7 +141,7 @@ rkr->efx_Valve->changepar(3,(int)o->value());}
  rgui->getMIDIControl(174);
  return;
 } 
-rkr->efx_Valve->changepar(10,(int)o->value());}
+rkr->efx_Valve->changepar(Valve_Distortion,(int)o->value());}
     tooltip Distortion xywh {56 112 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -152,28 +152,28 @@ rkr->efx_Valve->changepar(10,(int)o->value());}
  rgui->getMIDIControl(175);
  return;
 } 
-rkr->efx_Valve->changepar(12,(int)o->value());}
+rkr->efx_Valve->changepar(Valve_Presence,(int)o->value());} selected
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button valve_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_Valve->changepar(9,(int)o->value());}
+    callback {rkr->efx_Valve->changepar(Valve_Prefilter,(int)o->value());}
     xywh {5 139 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button valve_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_Valve->changepar(8,(int)o->value());}
+    callback {rkr->efx_Valve->changepar(Valve_Stereo,(int)o->value());}
     xywh {65 139 50 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button valve_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Valve->changepar(5,(int)o->value());}
+    callback {rkr->efx_Valve->changepar(Valve_Negate,(int)o->value());}
     xywh {114 139 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -184,7 +184,7 @@ rkr->efx_Valve->changepar(12,(int)o->value());}
  rgui->getMIDIControl(176);
  return;
 } 
-rkr->efx_Valve->changepar(6,(int)o->value());}
+rkr->efx_Valve->changepar(Valve_LPF,(int)o->value());}
     xywh {56 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -195,7 +195,7 @@ rkr->efx_Valve->changepar(6,(int)o->value());}
  rgui->getMIDIControl(177);
  return;
 } 
-rkr->efx_Valve->changepar(7,(int)o->value());}
+rkr->efx_Valve->changepar(Valve_HPF,(int)o->value());}
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
