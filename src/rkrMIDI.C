@@ -1821,47 +1821,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 237:
-        efx_Synthfilter->changepar(0, Dry_Wet(value));
+        efx_Synthfilter->changepar(Synthfilter_DryWet, Dry_Wet(value));
         break;
 
     case 238:
-        efx_Synthfilter->changepar(1, value);
+        efx_Synthfilter->changepar(Synthfilter_Distort, value);
         break;
 
     case 239:
-        efx_Synthfilter->changepar(2, ret_Tempo(value));
+        efx_Synthfilter->changepar(Synthfilter_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 240:
-        efx_Synthfilter->changepar(5, value);
+        efx_Synthfilter->changepar(Synthfilter_LFO_Stereo, value);
         break;
 
     case 241:
-        efx_Synthfilter->changepar(6, value);
+        efx_Synthfilter->changepar(Synthfilter_Width, value);
         break;
 
     case 242:
-        efx_Synthfilter->changepar(7, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Synthfilter->changepar(Synthfilter_Feedback, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 243:
-        efx_Synthfilter->changepar(11, value);
+        efx_Synthfilter->changepar(Synthfilter_Depth, value);
         break;
 
     case 244:
-        efx_Synthfilter->changepar(12, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        efx_Synthfilter->changepar(Synthfilter_Env_Sens, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case 245:
-        efx_Synthfilter->changepar(13, 5 + (int) ((float) value * C_MC_995_RANGE));
+        efx_Synthfilter->changepar(Synthfilter_Attack, 5 + (int) ((float) value * C_MC_995_RANGE));
         break;
 
     case 246:
-        efx_Synthfilter->changepar(14, 5 + (int) ((float) value * C_MC_495_RANGE));
+        efx_Synthfilter->changepar(Synthfilter_Release, 5 + (int) ((float) value * C_MC_495_RANGE));
         break;
 
     case 247:
-        efx_Synthfilter->changepar(15, value);
+        efx_Synthfilter->changepar(Synthfilter_Offset, value);
         break;
 
     case 248:
@@ -2697,7 +2697,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 446:
-        efx_Synthfilter->changepar(3, value);
+        efx_Synthfilter->changepar(Synthfilter_LFO_Random, value);
         break;
 
     case 447:
@@ -2777,7 +2777,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 466:
-        efx_Synthfilter->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_Synthfilter->changepar(Synthfilter_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 467:

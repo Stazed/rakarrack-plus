@@ -4028,47 +4028,47 @@ void RKRGUI::ActMIDI()
                 SHUFFLE->shuffle_Q->redraw();
                 break;
             case 237:
-                SYNTHFILTER->synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(0)));
+                SYNTHFILTER->synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(Synthfilter_DryWet)));
                 SYNTHFILTER->synthfilter_WD->redraw();
                 break;
             case 238:
-                SYNTHFILTER->synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
+                SYNTHFILTER->synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(Synthfilter_Distort));
                 SYNTHFILTER->synthfilter_Distort->redraw();
                 break;
             case 239:
-                SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+                SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
                 SYNTHFILTER->synthfilter_freq->redraw();
                 break;
             case 240:
-                SYNTHFILTER->synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
+                SYNTHFILTER->synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Stereo));
                 SYNTHFILTER->synthfilter_stdf->redraw();
                 break;
             case 241:
-                SYNTHFILTER->synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
+                SYNTHFILTER->synthfilter_width->value(rkr->efx_Synthfilter->getpar(Synthfilter_Width));
                 SYNTHFILTER->synthfilter_width->redraw();
                 break;
             case 242:
-                SYNTHFILTER->synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
+                SYNTHFILTER->synthfilter_fb->value(rkr->efx_Synthfilter->getpar(Synthfilter_Feedback));
                 SYNTHFILTER->synthfilter_fb->redraw();
                 break;
             case 243:
-                SYNTHFILTER->synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
+                SYNTHFILTER->synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(Synthfilter_Depth));
                 SYNTHFILTER->synthfilter_dpth->redraw();
                 break;
             case 244:
-                SYNTHFILTER->synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
+                SYNTHFILTER->synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(Synthfilter_Env_Sens));
                 SYNTHFILTER->synthfilter_EnvSens->redraw();
                 break;
             case 245:
-                SYNTHFILTER->synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
+                SYNTHFILTER->synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Attack));
                 SYNTHFILTER->synthfilter_ATime->redraw();
                 break;
             case 246:
-                SYNTHFILTER->synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));
+                SYNTHFILTER->synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));
                 SYNTHFILTER->synthfilter_RTime->redraw();
                 break;
             case 247:
-                SYNTHFILTER->synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
+                SYNTHFILTER->synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(Synthfilter_Offset));
                 SYNTHFILTER->synthfilter_Offset->redraw();
                 break;
             case 248:
@@ -4878,7 +4878,7 @@ void RKRGUI::ActMIDI()
                 Chord(0);   // update gui
                 break;
             case 446:
-                SYNTHFILTER->synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
+                SYNTHFILTER->synthfilter_rand->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Random));
                 SYNTHFILTER->synthfilter_rand->redraw();
                 break;
             case 447:
@@ -4958,7 +4958,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_lfotype->redraw();
                 break;
             case 466:
-                SYNTHFILTER->synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
+                SYNTHFILTER->synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Type));
                 SYNTHFILTER->synthfilter_lfotype->redraw();
                 break;
             case 467:
@@ -6040,7 +6040,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->Synthfilter_Bypass)
     {
-        SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
+        SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
         SYNTHFILTER->synthfilter_freq->redraw();
     }
 

@@ -384,70 +384,70 @@ Synthfilter::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Synthfilter_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Synthfilter_Distort:
         setdistortion(value);
         break;
-    case 2:
+    case Synthfilter_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case Synthfilter_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case Synthfilter_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5:
+    case Synthfilter_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case Synthfilter_Width:
         setwidth(value);
         break;
-    case 7:
+    case Synthfilter_Feedback:
         setfb(value);
         break;
-    case 8:
+    case Synthfilter_LPF_Stages:
         Plpstages = value;
         if (Plpstages >= MAX_SFILTER_STAGES)
             Plpstages = MAX_SFILTER_STAGES;
         if (Plpstages <= 2) fb = (float) Pfb * 0.25 / 65.0f; // keep filter stable when phase shift is small
         cleanup();
         break;
-    case 9:
+    case Synthfilter_HPF_Stages:
         Phpstages = value;
         if (Phpstages >= MAX_SFILTER_STAGES)
             Phpstages = MAX_SFILTER_STAGES;
         cleanup();
         break;
-    case 10:
+    case Synthfilter_Subtract:
         if (value > 1)
             value = 1;
         Poutsub = value;
         break;
-    case 11:
+    case Synthfilter_Depth:
         setdepth(value);
         break;
-    case 12:
+    case Synthfilter_Env_Sens:
         Penvelope = value;
         sns = (float) Penvelope / 8.0f;
         break;
-    case 13:
+    case Synthfilter_Attack:
         Pattack = value;
         if (Pattack < 5) Pattack = 5;
         att = delta * 1000.0f / ((float) Pattack);
         break;
-    case 14:
+    case Synthfilter_Release:
         Prelease = value;
         if (Prelease < 5) Prelease = 5;
         rls = delta * 1000.0f / ((float) Prelease);
         break;
-    case 15:
+    case Synthfilter_Offset:
         Pbandwidth = value;
         Chp = C * (1.0f + ((float) value) / 64.0f); // C*3
         Clp = C * (1.0f - ((float) value) / 190.0f); // C/3
@@ -469,52 +469,52 @@ Synthfilter::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Synthfilter_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Synthfilter_Distort:
         return (Pdistortion);
         break;
-    case 2:
+    case Synthfilter_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case 3:
+    case Synthfilter_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case Synthfilter_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case Synthfilter_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 6:
+    case Synthfilter_Width:
         return (Pwidth);
         break;
-    case 7:
+    case Synthfilter_Feedback:
         return (Pfb);
         break;
-    case 8:
+    case Synthfilter_LPF_Stages:
         return (Plpstages);
         break;
-    case 9:
+    case Synthfilter_HPF_Stages:
         return (Phpstages);
         break;
-    case 10:
+    case Synthfilter_Subtract:
         return (Poutsub);
         break;
-    case 11:
+    case Synthfilter_Depth:
         return (Pdepth);
         break;
-    case 12:
+    case Synthfilter_Env_Sens:
         return (Penvelope);
         break;
-    case 13:
+    case Synthfilter_Attack:
         return (Pattack);
         break;
-    case 14:
+    case Synthfilter_Release:
         return (Prelease);
         break;
-    case 15:
+    case Synthfilter_Offset:
         return (Pbandwidth);
         break;
 

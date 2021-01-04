@@ -2799,9 +2799,6 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2822,20 +2819,49 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i = 0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->synth->getpar(i) != val)
-    {
-        plug->synth->changepar(i,val);
-    }
 
-    for(i++; i<plug->nparams; i++) //1-10
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->synth->getpar(i) != val)
+        switch(i)
         {
-            plug->synth->changepar(i,val);
+            // Normal processing
+            case Synthfilter_Distort:
+            case Synthfilter_LFO_Tempo:
+            case Synthfilter_LFO_Random:
+            case Synthfilter_LFO_Type:
+            case Synthfilter_LFO_Stereo:
+            case Synthfilter_Width:
+            case Synthfilter_Feedback:
+            case Synthfilter_LPF_Stages:
+            case Synthfilter_HPF_Stages:
+            case Synthfilter_Subtract:
+            case Synthfilter_Depth:
+            case Synthfilter_Env_Sens:
+            case Synthfilter_Attack:
+            case Synthfilter_Release:
+            case Synthfilter_Offset:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->synth->getpar(i) != val)
+                {
+                    plug->synth->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Synthfilter_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->synth->getpar(Synthfilter_DryWet) != val)
+                {
+                    plug->synth->changepar(Synthfilter_DryWet,val);
+                }
+            }
+            break;
         }
     }
 

@@ -31,6 +31,25 @@
 #define SYNTHFILTER_H
 #include "EffectLFO.h"
 
+enum Synthfilter_Index
+{
+    Synthfilter_DryWet = 0,
+    Synthfilter_Distort,
+    Synthfilter_LFO_Tempo,
+    Synthfilter_LFO_Random,
+    Synthfilter_LFO_Type,
+    Synthfilter_LFO_Stereo,
+    Synthfilter_Width,
+    Synthfilter_Feedback,
+    Synthfilter_LPF_Stages,
+    Synthfilter_HPF_Stages,
+    Synthfilter_Subtract,
+    Synthfilter_Depth,
+    Synthfilter_Env_Sens,
+    Synthfilter_Attack,
+    Synthfilter_Release,
+    Synthfilter_Offset
+};
 
 class Synthfilter
 {

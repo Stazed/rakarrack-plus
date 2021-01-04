@@ -19,7 +19,7 @@ decl {\#include "RKR_Choice.h"} {public global
 
 widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
   user_data 1 open
-  xywh {1176 110 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1557 72 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -46,22 +46,22 @@ rgui->findpos(27,(int)o->value(),o);}
     user_data 12027
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
-synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(0)));
-synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(1));
-synthfilter_freq->value(rkr->efx_Synthfilter->getpar(2));
-synthfilter_rand->value(rkr->efx_Synthfilter->getpar(3));
-synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(4));
-synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(5));
-synthfilter_width->value(rkr->efx_Synthfilter->getpar(6));
-synthfilter_Lstages->value(rkr->efx_Synthfilter->getpar(8));
-synthfilter_Hstages->value(rkr->efx_Synthfilter->getpar(9));
-synthfilter_fb->value(rkr->efx_Synthfilter->getpar(7));
-synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(15));
-synthfilter_subs->value(rkr->efx_Synthfilter->getpar(10));
-synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(11));
-synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(12));
-synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(13));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
+synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(Synthfilter_DryWet)));
+synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(Synthfilter_Distort));
+synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
+synthfilter_rand->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Random));
+synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Type));
+synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Stereo));
+synthfilter_width->value(rkr->efx_Synthfilter->getpar(Synthfilter_Width));
+synthfilter_Lstages->value(rkr->efx_Synthfilter->getpar(Synthfilter_LPF_Stages));
+synthfilter_Hstages->value(rkr->efx_Synthfilter->getpar(Synthfilter_HPF_Stages));
+synthfilter_fb->value(rkr->efx_Synthfilter->getpar(Synthfilter_Feedback));
+synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(Synthfilter_Offset));
+synthfilter_subs->value(rkr->efx_Synthfilter->getpar(Synthfilter_Subtract));
+synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(Synthfilter_Depth));
+synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(Synthfilter_Env_Sens));
+synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Attack));
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -105,7 +105,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(14));}
  rgui->getMIDIControl(237);
  return;
 }
-rkr->efx_Synthfilter->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_Synthfilter->changepar(Synthfilter_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -116,7 +116,7 @@ rkr->efx_Synthfilter->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(238);
  return;
 }
-rkr->efx_Synthfilter->changepar(1,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_Distort,(int)o->value());}
     xywh {56 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -127,7 +127,7 @@ rkr->efx_Synthfilter->changepar(1,(int)o->value());}
  rgui->getMIDIControl(239);
  return;
 }
-rkr->efx_Synthfilter->changepar(2,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Tempo,(int)o->value());}
     xywh {56 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -138,7 +138,7 @@ rkr->efx_Synthfilter->changepar(2,(int)o->value());}
  rgui->getMIDIControl(446);
  return;
 }
-rkr->efx_Synthfilter->changepar(3,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Random,(int)o->value());}
     tooltip {LFO Randomness} xywh {16 62 23 15} labelsize 10 labelcolor 7 maximum 127 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }
@@ -150,7 +150,7 @@ rkr->efx_Synthfilter->changepar(3,(int)o->value());}
  return;
 }
 
-rkr->efx_Synthfilter->changepar(4,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Type,(int)o->value());}
     xywh {65 63 52 13} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     code1 {o->set_text_offset(-1);}
@@ -159,7 +159,7 @@ rkr->efx_Synthfilter->changepar(4,(int)o->value());}
   Fl_Check_Button synthfilter_subs {
     label Sub
     user_data 2
-    callback {rkr->efx_Synthfilter->changepar(10,(int)o->value())}
+    callback {rkr->efx_Synthfilter->changepar(Synthfilter_Subtract,(int)o->value())}
     tooltip {Subtract - Make output of filter negative} xywh {143 63 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button
   }
@@ -170,7 +170,7 @@ rkr->efx_Synthfilter->changepar(4,(int)o->value());}
  rgui->getMIDIControl(240);
  return;
 }
-rkr->efx_Synthfilter->changepar(5,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Stereo,(int)o->value());}
     tooltip {LFO L/R Delay} xywh {56 80 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -181,7 +181,7 @@ rkr->efx_Synthfilter->changepar(5,(int)o->value());}
  rgui->getMIDIControl(241);
  return;
 }
-rkr->efx_Synthfilter->changepar(6,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_Width,(int)o->value());}
     xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -192,20 +192,20 @@ rkr->efx_Synthfilter->changepar(6,(int)o->value());}
  rgui->getMIDIControl(242);
  return;
 }
-rkr->efx_Synthfilter->changepar(7,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_Feedback,(int)o->value());}
     xywh {56 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Counter synthfilter_Lstages {
     label {LPF Stg.}
-    callback {rkr->efx_Synthfilter->changepar(8,(int)o->value());}
+    callback {rkr->efx_Synthfilter->changepar(Synthfilter_LPF_Stages,(int)o->value());}
     xywh {48 114 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Counter synthfilter_Hstages {
     label {HPF Stg.}
-    callback {rkr->efx_Synthfilter->changepar(9,(int)o->value());} selected
+    callback {rkr->efx_Synthfilter->changepar(Synthfilter_HPF_Stages,(int)o->value());}
     xywh {125 114 28 11} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 0 maximum 12 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
@@ -217,7 +217,7 @@ rkr->efx_Synthfilter->changepar(7,(int)o->value());}
  rgui->getMIDIControl(243);
  return;
 }
-rkr->efx_Synthfilter->changepar(11,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_Depth,(int)o->value());}
     xywh {56 126 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -228,7 +228,7 @@ rkr->efx_Synthfilter->changepar(11,(int)o->value());}
  rgui->getMIDIControl(244);
  return;
 }
-rkr->efx_Synthfilter->changepar(12,(int)(o->value()));}
+rkr->efx_Synthfilter->changepar(Synthfilter_Env_Sens,(int)(o->value()));}
     tooltip {Envelope Sensitivity} xywh {56 137 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -239,7 +239,7 @@ rkr->efx_Synthfilter->changepar(12,(int)(o->value()));}
  rgui->getMIDIControl(245);
  return;
 }
-rkr->efx_Synthfilter->changepar(13,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_Attack,(int)o->value());}
     tooltip {Attack Time} xywh {56 148 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 5 maximum 1000 step 1 value 5 textcolor 7
     class RKR_Slider
   }
@@ -250,7 +250,7 @@ rkr->efx_Synthfilter->changepar(13,(int)o->value());}
  rgui->getMIDIControl(246);
  return;
 }
-rkr->efx_Synthfilter->changepar(14,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_Release,(int)o->value());}
     tooltip {Release Time} xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 5 maximum 500 step 1 value 5 textcolor 7
     class RKR_Slider
   }
@@ -261,7 +261,7 @@ rkr->efx_Synthfilter->changepar(14,(int)o->value());}
  rgui->getMIDIControl(247);
  return;
 }
-rkr->efx_Synthfilter->changepar(15,(int)o->value());}
+rkr->efx_Synthfilter->changepar(Synthfilter_Offset,(int)o->value());}
     tooltip {HPF/LPF Offset} xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

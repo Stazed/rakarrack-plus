@@ -824,14 +824,14 @@ void RKR::getbuf(char *buf, int j)
     case 27:
         //Synthfilter
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Synthfilter->getpar(0), efx_Synthfilter->getpar(1),
-                efx_Synthfilter->getpar(2), efx_Synthfilter->getpar(3),
-                efx_Synthfilter->getpar(4), efx_Synthfilter->getpar(5),
-                efx_Synthfilter->getpar(6), efx_Synthfilter->getpar(7),
-                efx_Synthfilter->getpar(8), efx_Synthfilter->getpar(9),
-                efx_Synthfilter->getpar(10), efx_Synthfilter->getpar(11),
-                efx_Synthfilter->getpar(12), efx_Synthfilter->getpar(13),
-                efx_Synthfilter->getpar(14), efx_Synthfilter->getpar(15),
+                efx_Synthfilter->getpar(Synthfilter_DryWet), efx_Synthfilter->getpar(Synthfilter_Distort),
+                efx_Synthfilter->getpar(Synthfilter_LFO_Tempo), efx_Synthfilter->getpar(Synthfilter_LFO_Random),
+                efx_Synthfilter->getpar(Synthfilter_LFO_Type), efx_Synthfilter->getpar(Synthfilter_LFO_Stereo),
+                efx_Synthfilter->getpar(Synthfilter_Width), efx_Synthfilter->getpar(Synthfilter_Feedback),
+                efx_Synthfilter->getpar(Synthfilter_LPF_Stages), efx_Synthfilter->getpar(Synthfilter_HPF_Stages),
+                efx_Synthfilter->getpar(Synthfilter_Subtract), efx_Synthfilter->getpar(Synthfilter_Depth),
+                efx_Synthfilter->getpar(Synthfilter_Env_Sens), efx_Synthfilter->getpar(Synthfilter_Attack),
+                efx_Synthfilter->getpar(Synthfilter_Release), efx_Synthfilter->getpar(Synthfilter_Offset),
                 Synthfilter_Bypass);
         break;
 
