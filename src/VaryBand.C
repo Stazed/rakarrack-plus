@@ -580,59 +580,59 @@ VaryBand::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case VaryBand_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case VaryBand_LFO_Tempo_1:
         lfo1->Pfreq = value;
         lfo1->updateparams(PERIOD);
         break;
-    case 2:
+    case VaryBand_LFO_Type_1:
         lfo1->PLFOtype = value;
         lfo1->updateparams(PERIOD);
         break;
-    case 3:
+    case VaryBand_LFO_Stereo_1:
         lfo1->Pstereo = value;
         lfo1->updateparams(PERIOD);
         break;
-    case 4:
+    case VaryBand_LFO_Tempo_2:
         lfo2->Pfreq = value;
         lfo2->updateparams(PERIOD);
         break;
-    case 5:
+    case VaryBand_LFO_Type_2:
         lfo2->PLFOtype = value;
         lfo2->updateparams(PERIOD);
         break;
-    case 6:
+    case VaryBand_LFO_Stereo_2:
         lfo2->Pstereo = value;
         lfo2->updateparams(PERIOD);
         break;
-    case 7:
+    case VaryBand_Cross_1:
         setCross1(value);
         break;
-    case 8:
+    case VaryBand_Cross_2:
         setCross2(value);
         break;
-    case 9:
+    case VaryBand_Cross_3:
         setCross3(value);
         break;
-    case 10:
+    case VaryBand_Combination:  // legacy
         Pcombi = value;
         setCombi(value);
         break;
-    case 11:
+    case VaryBand_Low_Band:
         PsL = value;
         setSource(&sourceL, &sourceLr, value);
         break;
-    case 12:
+    case VaryBand_Mid_Band_1:
         PsML = value;
         setSource(&sourceML, &sourceMLr, value);
         break;
-    case 13:
+    case VaryBand_Mid_Band_2:
         PsMH = value;
         setSource(&sourceMH, &sourceMHr, value);
         break;
-    case 14:
+    case VaryBand_High_Band:
         PsH = value;
         setSource(&sourceH, &sourceHr, value);
         break;
@@ -644,49 +644,49 @@ VaryBand::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case VaryBand_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case VaryBand_LFO_Tempo_1:
         return (lfo1->Pfreq);
         break;
-    case 2:
+    case VaryBand_LFO_Type_1:
         return (lfo1->PLFOtype);
         break;
-    case 3:
+    case VaryBand_LFO_Stereo_1:
         return (lfo1->Pstereo);
         break;
-    case 4:
+    case VaryBand_LFO_Tempo_2:
         return (lfo2->Pfreq);
         break;
-    case 5:
+    case VaryBand_LFO_Type_2:
         return (lfo2->PLFOtype);
         break;
-    case 6:
+    case VaryBand_LFO_Stereo_2:
         return (lfo2->Pstereo);
         break;
-    case 7:
+    case VaryBand_Cross_1:
         return (Cross1);
         break;
-    case 8:
+    case VaryBand_Cross_2:
         return (Cross2);
         break;
-    case 9:
+    case VaryBand_Cross_3:
         return (Cross3);
         break;
-    case 10:
+    case VaryBand_Combination:
         return (Pcombi);
         break;
-    case 11:
+    case VaryBand_Low_Band:
         return (PsL);
         break;
-    case 12:
+    case VaryBand_Mid_Band_1:
         return (PsML);
         break;
-    case 13:
+    case VaryBand_Mid_Band_2:
         return (PsMH);
         break;
-    case 14:
+    case VaryBand_High_Band:
         return (PsH);
         break;
     }

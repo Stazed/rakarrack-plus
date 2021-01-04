@@ -838,12 +838,12 @@ void RKR::getbuf(char *buf, int j)
     case 28:
         //VaryBand
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_VaryBand->getpar(0), efx_VaryBand->getpar(1),
-                efx_VaryBand->getpar(2), efx_VaryBand->getpar(3),
-                efx_VaryBand->getpar(4), efx_VaryBand->getpar(5),
-                efx_VaryBand->getpar(6), efx_VaryBand->getpar(7),
-                efx_VaryBand->getpar(8), efx_VaryBand->getpar(9),
-                efx_VaryBand->getpar(10), VaryBand_Bypass);
+                efx_VaryBand->getpar(VaryBand_DryWet), efx_VaryBand->getpar(VaryBand_LFO_Tempo_1),
+                efx_VaryBand->getpar(VaryBand_LFO_Type_1), efx_VaryBand->getpar(VaryBand_LFO_Stereo_1),
+                efx_VaryBand->getpar(VaryBand_LFO_Tempo_2), efx_VaryBand->getpar(VaryBand_LFO_Type_2),
+                efx_VaryBand->getpar(VaryBand_LFO_Stereo_2), efx_VaryBand->getpar(VaryBand_Cross_1),
+                efx_VaryBand->getpar(VaryBand_Cross_2), efx_VaryBand->getpar(VaryBand_Cross_3),
+                efx_VaryBand->getpar(VaryBand_Combination), VaryBand_Bypass);
         break;
 
     case 29:

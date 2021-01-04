@@ -21,21 +21,21 @@ void VarybandGui::cb_varyband_activar(RKR_Light_Button* o, void* v) {
 void VarybandGui::cb_varyband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12028))rkr->efx_VaryBand->setpreset((int)o->value());
-varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(0)));
-varyband_freq1->value(rkr->efx_VaryBand->getpar(1));
-varyband_lfotype1->value(rkr->efx_VaryBand->getpar(2));
-varyband_stdf1->value(rkr->efx_VaryBand->getpar(3));
-varyband_freq2->value(rkr->efx_VaryBand->getpar(4));
-varyband_lfotype2->value(rkr->efx_VaryBand->getpar(5));
-varyband_stdf2->value(rkr->efx_VaryBand->getpar(6));
-varyband_cross1->value(rkr->efx_VaryBand->getpar(7));
-varyband_cross2->value(rkr->efx_VaryBand->getpar(8));
-varyband_cross3->value(rkr->efx_VaryBand->getpar(9));
-//varyband_combi->value(rkr->efx_VaryBand->getpar(10));
-varyband_LB->value(rkr->efx_VaryBand->getpar(11));
-varyband_MB1->value(rkr->efx_VaryBand->getpar(12));
-varyband_MB2->value(rkr->efx_VaryBand->getpar(13));
-varyband_HB->value(rkr->efx_VaryBand->getpar(14));
+varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(VaryBand_DryWet)));
+varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
+varyband_lfotype1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_1));
+varyband_stdf1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_1));
+varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
+varyband_lfotype2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_2));
+varyband_stdf2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_2));
+varyband_cross1->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_1));
+varyband_cross2->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_2));
+varyband_cross3->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_3));
+//varyband_combi->value(rkr->efx_VaryBand->getpar(VaryBand_Combination));
+varyband_LB->value(rkr->efx_VaryBand->getpar(VaryBand_Low_Band));
+varyband_MB1->value(rkr->efx_VaryBand->getpar(VaryBand_Mid_Band_1));
+varyband_MB2->value(rkr->efx_VaryBand->getpar(VaryBand_Mid_Band_2));
+varyband_HB->value(rkr->efx_VaryBand->getpar(VaryBand_High_Band));
 }
 void VarybandGui::cb_varyband_preset(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_preset_i(o,v);
@@ -55,7 +55,7 @@ void VarybandGui::cb_varyband_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(248);
  return;
 }
-rkr->efx_VaryBand->changepar(0,Dry_Wet((int)(o->value())));
+rkr->efx_VaryBand->changepar(VaryBand_DryWet,Dry_Wet((int)(o->value())));
 }
 void VarybandGui::cb_varyband_WD(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_WD_i(o,v);
@@ -67,7 +67,7 @@ void VarybandGui::cb_varyband_freq1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(249);
  return;
 }
-rkr->efx_VaryBand->changepar(1,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_1,(int)o->value());
 }
 void VarybandGui::cb_varyband_freq1(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_freq1_i(o,v);
@@ -80,7 +80,7 @@ void VarybandGui::cb_varyband_lfotype1_i(RKR_Choice* o, void*) {
  return;
 }
 
-rkr->efx_VaryBand->changepar(2,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Type_1,(int)o->value());
 }
 void VarybandGui::cb_varyband_lfotype1(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_lfotype1_i(o,v);
@@ -92,7 +92,7 @@ void VarybandGui::cb_varyband_stdf1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(250);
  return;
 }
-rkr->efx_VaryBand->changepar(3,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Stereo_1,(int)o->value());
 }
 void VarybandGui::cb_varyband_stdf1(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_stdf1_i(o,v);
@@ -104,7 +104,7 @@ void VarybandGui::cb_varyband_freq2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(251);
  return;
 }
-rkr->efx_VaryBand->changepar(4,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_2,(int)o->value());
 }
 void VarybandGui::cb_varyband_freq2(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_freq2_i(o,v);
@@ -117,7 +117,7 @@ void VarybandGui::cb_varyband_lfotype2_i(RKR_Choice* o, void*) {
  return;
 }
 
-rkr->efx_VaryBand->changepar(5,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Type_2,(int)o->value());
 }
 void VarybandGui::cb_varyband_lfotype2(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_lfotype2_i(o,v);
@@ -129,7 +129,7 @@ void VarybandGui::cb_varyband_stdf2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(252);
  return;
 }
-rkr->efx_VaryBand->changepar(6,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Stereo_2,(int)o->value());
 }
 void VarybandGui::cb_varyband_stdf2(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_stdf2_i(o,v);
@@ -141,7 +141,7 @@ void VarybandGui::cb_varyband_cross1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(253);
  return;
 }
-rkr->efx_VaryBand->changepar(7,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_Cross_1,(int)o->value());
 }
 void VarybandGui::cb_varyband_cross1(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_cross1_i(o,v);
@@ -153,7 +153,7 @@ void VarybandGui::cb_varyband_cross2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(254);
  return;
 }
-rkr->efx_VaryBand->changepar(8,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_Cross_2,(int)o->value());
 }
 void VarybandGui::cb_varyband_cross2(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_cross2_i(o,v);
@@ -165,14 +165,14 @@ void VarybandGui::cb_varyband_cross3_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(255);
  return;
 }
-rkr->efx_VaryBand->changepar(9,(int)o->value());
+rkr->efx_VaryBand->changepar(VaryBand_Cross_3,(int)o->value());
 }
 void VarybandGui::cb_varyband_cross3(RKR_Slider* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_cross3_i(o,v);
 }
 
 void VarybandGui::cb_varyband_LB_i(RKR_Choice* o, void*) {
-  rkr->efx_VaryBand->changepar(11,(int)o->value());
+  rkr->efx_VaryBand->changepar(VaryBand_Low_Band,(int)o->value());
 }
 void VarybandGui::cb_varyband_LB(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_LB_i(o,v);
@@ -187,7 +187,7 @@ Fl_Menu_Item VarybandGui::menu_varyband_LB[] = {
 };
 
 void VarybandGui::cb_varyband_MB1_i(RKR_Choice* o, void*) {
-  rkr->efx_VaryBand->changepar(12,(int)o->value());
+  rkr->efx_VaryBand->changepar(VaryBand_Mid_Band_1,(int)o->value());
 }
 void VarybandGui::cb_varyband_MB1(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_MB1_i(o,v);
@@ -202,7 +202,7 @@ Fl_Menu_Item VarybandGui::menu_varyband_MB1[] = {
 };
 
 void VarybandGui::cb_varyband_MB2_i(RKR_Choice* o, void*) {
-  rkr->efx_VaryBand->changepar(13,(int)o->value());
+  rkr->efx_VaryBand->changepar(VaryBand_Mid_Band_2,(int)o->value());
 }
 void VarybandGui::cb_varyband_MB2(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_MB2_i(o,v);
@@ -217,7 +217,7 @@ Fl_Menu_Item VarybandGui::menu_varyband_MB2[] = {
 };
 
 void VarybandGui::cb_varyband_HB_i(RKR_Choice* o, void*) {
-  rkr->efx_VaryBand->changepar(14,(int)o->value());
+  rkr->efx_VaryBand->changepar(VaryBand_High_Band,(int)o->value());
 }
 void VarybandGui::cb_varyband_HB(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_HB_i(o,v);

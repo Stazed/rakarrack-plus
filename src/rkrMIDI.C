@@ -1865,35 +1865,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 248:
-        efx_VaryBand->changepar(0, Dry_Wet(value));
+        efx_VaryBand->changepar(VaryBand_DryWet, Dry_Wet(value));
         break;
 
     case 249:
-        efx_VaryBand->changepar(1, ret_Tempo(value));
+        efx_VaryBand->changepar(VaryBand_LFO_Tempo_1, ret_Tempo(value));
         break;
 
     case 250:
-        efx_VaryBand->changepar(3, value);
+        efx_VaryBand->changepar(VaryBand_LFO_Stereo_1, value);
         break;
 
     case 251:
-        efx_VaryBand->changepar(4, ret_Tempo(value));
+        efx_VaryBand->changepar(VaryBand_LFO_Tempo_2, ret_Tempo(value));
         break;
 
     case 252:
-        efx_VaryBand->changepar(6, value);
+        efx_VaryBand->changepar(VaryBand_LFO_Stereo_2, value);
         break;
 
     case 253:
-        efx_VaryBand->changepar(7, 20 + (int) ((float) value * C_MC_980_RANGE));
+        efx_VaryBand->changepar(VaryBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 254:
-        efx_VaryBand->changepar(8, 1000 + (int) ((float) value * C_MC_7000_RANGE));
+        efx_VaryBand->changepar(VaryBand_Cross_2, 1000 + (int) ((float) value * C_MC_7000_RANGE));
         break;
 
     case 255:
-        efx_VaryBand->changepar(9, 2000 + (int) ((float) value * C_MC_24000_RANGE));
+        efx_VaryBand->changepar(VaryBand_Cross_3, 2000 + (int) ((float) value * C_MC_24000_RANGE));
         break;
 
     case 256:
@@ -2781,11 +2781,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 467:
-        efx_VaryBand->changepar(2, (int) ((float) value * C_MC_11_RANGE));
+        efx_VaryBand->changepar(VaryBand_LFO_Type_1, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 468:
-        efx_VaryBand->changepar(5, (int) ((float) value * C_MC_11_RANGE));
+        efx_VaryBand->changepar(VaryBand_LFO_Type_2, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 469:

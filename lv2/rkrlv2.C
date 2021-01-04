@@ -2933,9 +2933,6 @@ void run_varybandlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -2956,30 +2953,62 @@ void run_varybandlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->varyband->getpar(i) != val)
+    int val = 0;
+    int param_case_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->varyband->changepar(i,val);
-    }
-
-    for(i++; i<10; i++)  // 1-9
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->varyband->getpar(i) != val)
+        switch(param_case_offset)
         {
-            plug->varyband->changepar(i,val);
-        }
-    }
+            // Normal processing
+            case VaryBand_LFO_Tempo_1:
+            case VaryBand_LFO_Type_1:
+            case VaryBand_LFO_Stereo_1:
+            case VaryBand_LFO_Tempo_2:
+            case VaryBand_LFO_Type_2:
+            case VaryBand_LFO_Stereo_2:
+            case VaryBand_Cross_1:
+            case VaryBand_Cross_2:
+            case VaryBand_Low_Band:
+            case VaryBand_Mid_Band_1:
+            case VaryBand_Mid_Band_2:
+            case VaryBand_High_Band:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->varyband->getpar(param_case_offset) != val)
+                {
+                    plug->varyband->changepar(param_case_offset,val);
+                }
+            }
+            break;
 
-    for(i=10; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->varyband->getpar(i+1) != val) // +1 = skip legacy combi setting
-        {
-            plug->varyband->changepar(i+1,val);
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case VaryBand_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->varyband->getpar(VaryBand_DryWet) != val)
+                {
+                    plug->varyband->changepar(VaryBand_DryWet,val);
+                }
+            }
+            break;
+
+            // Skip after
+            case VaryBand_Cross_3:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->varyband->getpar(VaryBand_Cross_3) != val)
+                {
+                    plug->varyband->changepar(VaryBand_Cross_3,val);
+                }
+                param_case_offset++;    // skip VaryBand_Combination (legacy)
+            }
+            break;
         }
+
+        param_case_offset++;
     }
 
     //now run

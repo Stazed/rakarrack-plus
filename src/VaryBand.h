@@ -31,6 +31,24 @@
 #include "EffectLFO.h"
 #include "AnalogFilter.h"
 
+enum VaryBand_Index
+{
+    VaryBand_DryWet = 0,
+    VaryBand_LFO_Tempo_1,
+    VaryBand_LFO_Type_1,
+    VaryBand_LFO_Stereo_1,
+    VaryBand_LFO_Tempo_2,
+    VaryBand_LFO_Type_2,
+    VaryBand_LFO_Stereo_2,
+    VaryBand_Cross_1,
+    VaryBand_Cross_2,
+    VaryBand_Cross_3,
+    VaryBand_Combination,      // Pcombi legacy
+    VaryBand_Low_Band,
+    VaryBand_Mid_Band_1,
+    VaryBand_Mid_Band_2,
+    VaryBand_High_Band
+};
 
 class VaryBand
 {

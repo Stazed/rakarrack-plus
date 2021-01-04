@@ -37,21 +37,21 @@ rgui->findpos(28,(int)o->value(),o);}
     user_data 12028
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12028))rkr->efx_VaryBand->setpreset((int)o->value());
-varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(0)));
-varyband_freq1->value(rkr->efx_VaryBand->getpar(1));
-varyband_lfotype1->value(rkr->efx_VaryBand->getpar(2));
-varyband_stdf1->value(rkr->efx_VaryBand->getpar(3));
-varyband_freq2->value(rkr->efx_VaryBand->getpar(4));
-varyband_lfotype2->value(rkr->efx_VaryBand->getpar(5));
-varyband_stdf2->value(rkr->efx_VaryBand->getpar(6));
-varyband_cross1->value(rkr->efx_VaryBand->getpar(7));
-varyband_cross2->value(rkr->efx_VaryBand->getpar(8));
-varyband_cross3->value(rkr->efx_VaryBand->getpar(9));
-//varyband_combi->value(rkr->efx_VaryBand->getpar(10));
-varyband_LB->value(rkr->efx_VaryBand->getpar(11));
-varyband_MB1->value(rkr->efx_VaryBand->getpar(12));
-varyband_MB2->value(rkr->efx_VaryBand->getpar(13));
-varyband_HB->value(rkr->efx_VaryBand->getpar(14));}
+varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(VaryBand_DryWet)));
+varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
+varyband_lfotype1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_1));
+varyband_stdf1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_1));
+varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
+varyband_lfotype2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_2));
+varyband_stdf2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_2));
+varyband_cross1->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_1));
+varyband_cross2->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_2));
+varyband_cross3->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_3));
+//varyband_combi->value(rkr->efx_VaryBand->getpar(VaryBand_Combination));
+varyband_LB->value(rkr->efx_VaryBand->getpar(VaryBand_Low_Band));
+varyband_MB1->value(rkr->efx_VaryBand->getpar(VaryBand_Mid_Band_1));
+varyband_MB2->value(rkr->efx_VaryBand->getpar(VaryBand_Mid_Band_2));
+varyband_HB->value(rkr->efx_VaryBand->getpar(VaryBand_High_Band));} selected
     xywh {79 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -79,7 +79,7 @@ varyband_HB->value(rkr->efx_VaryBand->getpar(14));}
  rgui->getMIDIControl(248);
  return;
 }
-rkr->efx_VaryBand->changepar(0,Dry_Wet((int)(o->value())));}
+rkr->efx_VaryBand->changepar(VaryBand_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -90,7 +90,7 @@ rkr->efx_VaryBand->changepar(0,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(249);
  return;
 }
-rkr->efx_VaryBand->changepar(1,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_1,(int)o->value());}
     xywh {56 40 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -102,7 +102,7 @@ rkr->efx_VaryBand->changepar(1,(int)o->value());}
  return;
 }
 
-rkr->efx_VaryBand->changepar(2,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Type_1,(int)o->value());}
     xywh {65 53 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -114,7 +114,7 @@ rkr->efx_VaryBand->changepar(2,(int)o->value());}
  rgui->getMIDIControl(250);
  return;
 }
-rkr->efx_VaryBand->changepar(3,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Stereo_1,(int)o->value());}
     xywh {56 72 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -125,7 +125,7 @@ rkr->efx_VaryBand->changepar(3,(int)o->value());}
  rgui->getMIDIControl(251);
  return;
 }
-rkr->efx_VaryBand->changepar(4,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_2,(int)o->value());}
     xywh {56 84 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -137,7 +137,7 @@ rkr->efx_VaryBand->changepar(4,(int)o->value());}
  return;
 }
 
-rkr->efx_VaryBand->changepar(5,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Type_2,(int)o->value());}
     xywh {65 97 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -149,7 +149,7 @@ rkr->efx_VaryBand->changepar(5,(int)o->value());}
  rgui->getMIDIControl(252);
  return;
 }
-rkr->efx_VaryBand->changepar(6,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_LFO_Stereo_2,(int)o->value());}
     xywh {56 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -160,7 +160,7 @@ rkr->efx_VaryBand->changepar(6,(int)o->value());}
  rgui->getMIDIControl(253);
  return;
 }
-rkr->efx_VaryBand->changepar(7,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_Cross_1,(int)o->value());}
     xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -171,7 +171,7 @@ rkr->efx_VaryBand->changepar(7,(int)o->value());}
  rgui->getMIDIControl(254);
  return;
 }
-rkr->efx_VaryBand->changepar(8,(int)o->value());}
+rkr->efx_VaryBand->changepar(VaryBand_Cross_2,(int)o->value());}
     xywh {56 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -182,14 +182,14 @@ rkr->efx_VaryBand->changepar(8,(int)o->value());}
  rgui->getMIDIControl(255);
  return;
 }
-rkr->efx_VaryBand->changepar(9,(int)o->value());} selected
+rkr->efx_VaryBand->changepar(VaryBand_Cross_3,(int)o->value());}
     xywh {56 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice varyband_LB {
     label L
     user_data 12
-    callback {rkr->efx_VaryBand->changepar(11,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(VaryBand_Low_Band,(int)o->value());}
     tooltip {Low Band Volume} xywh {11 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->set_text_offset(-1);}
@@ -215,7 +215,7 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());} selected
   Fl_Choice varyband_MB1 {
     label M
     user_data 12
-    callback {rkr->efx_VaryBand->changepar(12,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(VaryBand_Mid_Band_1,(int)o->value());}
     tooltip {Mid Band 1 Volume} xywh {50 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->set_text_offset(-1);}
@@ -241,7 +241,7 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());} selected
   Fl_Choice varyband_MB2 {
     label M
     user_data 12
-    callback {rkr->efx_VaryBand->changepar(13,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(VaryBand_Mid_Band_2,(int)o->value());}
     tooltip {Mid Band 2 Volume} xywh {90 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->set_text_offset(-1);}
@@ -267,7 +267,7 @@ rkr->efx_VaryBand->changepar(9,(int)o->value());} selected
   Fl_Choice varyband_HB {
     label H
     user_data 12
-    callback {rkr->efx_VaryBand->changepar(14,(int)o->value());}
+    callback {rkr->efx_VaryBand->changepar(VaryBand_High_Band,(int)o->value());}
     tooltip {High Band Volume} xywh {128 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->set_text_offset(-1);}

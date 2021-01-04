@@ -4072,35 +4072,35 @@ void RKRGUI::ActMIDI()
                 SYNTHFILTER->synthfilter_Offset->redraw();
                 break;
             case 248:
-                VARYBAND->varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(0)));
+                VARYBAND->varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(VaryBand_DryWet)));
                 VARYBAND->varyband_WD->redraw();
                 break;
             case 249:
-                VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(1));
+                VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
                 VARYBAND->varyband_freq1->redraw();
                 break;
             case 250:
-                VARYBAND->varyband_stdf1->value(rkr->efx_VaryBand->getpar(3));
+                VARYBAND->varyband_stdf1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_1));
                 VARYBAND->varyband_stdf1->redraw();
                 break;
             case 251:
-                VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(4));
+                VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
                 VARYBAND->varyband_freq2->redraw();
                 break;
             case 252:
-                VARYBAND->varyband_stdf2->value(rkr->efx_VaryBand->getpar(6));
+                VARYBAND->varyband_stdf2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_2));
                 VARYBAND->varyband_stdf2->redraw();
                 break;
             case 253:
-                VARYBAND->varyband_cross1->value(rkr->efx_VaryBand->getpar(7));
+                VARYBAND->varyband_cross1->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_1));
                 VARYBAND->varyband_cross1->redraw();
                 break;
             case 254:
-                VARYBAND->varyband_cross2->value(rkr->efx_VaryBand->getpar(8));
+                VARYBAND->varyband_cross2->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_2));
                 VARYBAND->varyband_cross2->redraw();
                 break;
             case 255:
-                VARYBAND->varyband_cross3->value(rkr->efx_VaryBand->getpar(9));
+                VARYBAND->varyband_cross3->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_3));
                 VARYBAND->varyband_cross3->redraw();
                 break;
             case 256:
@@ -4962,11 +4962,11 @@ void RKRGUI::ActMIDI()
                 SYNTHFILTER->synthfilter_lfotype->redraw();
                 break;
             case 467:
-                VARYBAND->varyband_lfotype1->value(rkr->efx_VaryBand->getpar(2));
+                VARYBAND->varyband_lfotype1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_1));
                 VARYBAND->varyband_lfotype1->redraw();
                 break;
             case 468:
-                VARYBAND->varyband_lfotype2->value(rkr->efx_VaryBand->getpar(5));
+                VARYBAND->varyband_lfotype2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_2));
                 VARYBAND->varyband_lfotype2->redraw();
                 break;
             case 469:
@@ -6052,13 +6052,13 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->VaryBand_Bypass)
     {
-        VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(1));
+        VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
         VARYBAND->varyband_freq1->redraw();
     }
 
     if (rkr->VaryBand_Bypass)
     {
-        VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(4));
+        VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
         VARYBAND->varyband_freq2->redraw();
     }
 
