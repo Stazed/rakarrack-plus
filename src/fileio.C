@@ -1028,12 +1028,12 @@ void RKR::getbuf(char *buf, int j)
     case 45:
         //Vibe
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Vibe->getpar(0), efx_Vibe->getpar(1),
-                efx_Vibe->getpar(2), efx_Vibe->getpar(3),
-                efx_Vibe->getpar(4), efx_Vibe->getpar(5),
-                efx_Vibe->getpar(6), efx_Vibe->getpar(7),
-                efx_Vibe->getpar(8), efx_Vibe->getpar(9), efx_Vibe->getpar(10),
-                Vibe_Bypass);
+                efx_Vibe->getpar(Vibe_Width), efx_Vibe->getpar(Vibe_LFO_Tempo),
+                efx_Vibe->getpar(Vibe_LFO_Random), efx_Vibe->getpar(Vibe_LFO_Type),
+                efx_Vibe->getpar(Vibe_LFO_Stereo), efx_Vibe->getpar(Vibe_Pan),
+                efx_Vibe->getpar(Vibe_DryWet), efx_Vibe->getpar(Vibe_Feedback),
+                efx_Vibe->getpar(Vibe_Depth), efx_Vibe->getpar(Vibe_LR_Cross),
+                efx_Vibe->getpar(Vibe_Stereo), Vibe_Bypass);
         break;
 
     case 46:

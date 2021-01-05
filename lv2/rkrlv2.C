@@ -5000,9 +5000,6 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -5023,39 +5020,54 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    for(i=0; i<5; i++)//0-5
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->vibe->getpar(i) != val)
-        {
-            plug->vibe->changepar(i,val);
-        }
-    }
 
-    val = (int)*plug->param_p[i]+64; // 5 pan
-    if(plug->vibe->getpar(i) != val)
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->vibe->changepar(i,val);
-    }
-    i++;
-    val = Dry_Wet((int)*plug->param_p[i]);//6 
-    if(plug->vibe->getpar(i) != val)
-    {
-        plug->vibe->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//7 FB
-    if(plug->vibe->getpar(i) != val)
-    {
-        plug->vibe->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++)//8-11 the rest
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->vibe->getpar(i) != val)
+        switch(i)
         {
-            plug->vibe->changepar(i,val);
+            // Normal processing
+            case Vibe_Width:
+            case Vibe_LFO_Tempo:
+            case Vibe_LFO_Random:
+            case Vibe_LFO_Type:
+            case Vibe_LFO_Stereo:
+            case Vibe_Depth:
+            case Vibe_LR_Cross:
+            case Vibe_Stereo:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->vibe->getpar(i) != val)
+                {
+                    plug->vibe->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Vibe_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->vibe->getpar(Vibe_DryWet) != val)
+                {
+                    plug->vibe->changepar(Vibe_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Vibe_Pan:
+            case Vibe_Feedback:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->vibe->getpar(i) != val)
+                {
+                    plug->vibe->changepar(i,val);
+                }
+            }
+            break;
         }
     }
 

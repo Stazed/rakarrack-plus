@@ -614,46 +614,46 @@ Vibe::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Vibe_Width:
         Pwidth = value;
         fwidth = ((float) Pwidth) / 90.0f;
         break;
-    case 1:
+    case Vibe_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 2:
+    case Vibe_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case Vibe_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case Vibe_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5: // pan
+    case Vibe_Pan: // pan
         setpanning(value);
         break;
-    case 6:
+    case Vibe_DryWet:
         setvolume(value);
         break;
-    case 7: //fb
+    case Vibe_Feedback: //fb
         Pfb = value;
         fb = ((float) (Pfb - 64)) / 65.0f;
         break;
-    case 8: //depth
+    case Vibe_Depth: //depth
         Pdepth = value;
         fdepth = ((float) Pdepth) / 127.0f;
         break;
-    case 9: //lrcross
+    case Vibe_LR_Cross: //lrcross
         Plrcross = value;
         flrcross = ((float) (Plrcross - 64)) / 64.0f;
         fcross = 1.0f - fabs(flrcross);
         break;
-    case 10: //Stereo
+    case Vibe_Stereo: //Stereo
         Pstereo = value;
         break;
     }
@@ -664,37 +664,37 @@ Vibe::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Vibe_Width:
         return (Pwidth);
         break;
-    case 1:
+    case Vibe_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case 2:
+    case Vibe_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 3:
+    case Vibe_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 4:
+    case Vibe_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 5:
+    case Vibe_Pan:
         return (Ppanning); //pan
         break;
-    case 6:
+    case Vibe_DryWet:
         return (Pvolume);
         break;
-    case 7:
+    case Vibe_Feedback:
         return (Pfb);
         break;
-    case 8:
+    case Vibe_Depth:
         return (Pdepth);
         break;
-    case 9:
+    case Vibe_LR_Cross:
         return (Plrcross);
         break;
-    case 10: //Stereo
+    case Vibe_Stereo: //Stereo
         return (Pstereo);
         break;
     }

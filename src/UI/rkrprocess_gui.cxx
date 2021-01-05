@@ -4636,39 +4636,39 @@ void RKRGUI::ActMIDI()
                 OTREM->otrem_pan->redraw();
                 break;
             case 386:
-                VIBE->vibe_WD->value(Dry_Wet(rkr->efx_Vibe->getpar(6)));
+                VIBE->vibe_WD->value(Dry_Wet(rkr->efx_Vibe->getpar(Vibe_DryWet)));
                 VIBE->vibe_WD->redraw();
                 break;
             case 387:
-                VIBE->vibe_width->value(rkr->efx_Vibe->getpar(0));
+                VIBE->vibe_width->value(rkr->efx_Vibe->getpar(Vibe_Width));
                 VIBE->vibe_width->redraw();
                 break;
             case 388:
-                VIBE->vibe_dpth->value(rkr->efx_Vibe->getpar(8));
+                VIBE->vibe_dpth->value(rkr->efx_Vibe->getpar(Vibe_Depth));
                 VIBE->vibe_dpth->redraw();
                 break;
             case 389:
-                VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(1));
+                VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(Vibe_LFO_Tempo));
                 VIBE->vibe_freq->redraw();
                 break;
             case 390:
-                VIBE->vibe_rnd->value(rkr->efx_Vibe->getpar(2));
+                VIBE->vibe_rnd->value(rkr->efx_Vibe->getpar(Vibe_LFO_Random));
                 VIBE->vibe_rnd->redraw();
                 break;
             case 391:
-                VIBE->vibe_stdf->value(rkr->efx_Vibe->getpar(4));
+                VIBE->vibe_stdf->value(rkr->efx_Vibe->getpar(Vibe_LFO_Stereo));
                 VIBE->vibe_stdf->redraw();
                 break;
             case 392:
-                VIBE->vibe_fb->value(rkr->efx_Vibe->getpar(7) - 64);
+                VIBE->vibe_fb->value(rkr->efx_Vibe->getpar(Vibe_Feedback) - 64);
                 VIBE->vibe_fb->redraw();
                 break;
             case 393:
-                VIBE->vibe_LR->value(rkr->efx_Vibe->getpar(9));
+                VIBE->vibe_LR->value(rkr->efx_Vibe->getpar(Vibe_LR_Cross));
                 VIBE->vibe_LR->redraw();
                 break;
             case 394:
-                VIBE->vibe_pan->value(rkr->efx_Vibe->getpar(5) - 64);
+                VIBE->vibe_pan->value(rkr->efx_Vibe->getpar(Vibe_Pan) - 64);
                 VIBE->vibe_pan->redraw();
                 break;
             case 395:
@@ -4970,7 +4970,7 @@ void RKRGUI::ActMIDI()
                 VARYBAND->varyband_lfotype2->redraw();
                 break;
             case 469:
-                VIBE->vibe_lfotype->value(rkr->efx_Vibe->getpar(3));
+                VIBE->vibe_lfotype->value(rkr->efx_Vibe->getpar(Vibe_LFO_Type));
                 VIBE->vibe_lfotype->redraw();
                 break;
             case 470:
@@ -6095,7 +6095,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->Vibe_Bypass)
     {
-        VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(1));
+        VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(Vibe_LFO_Tempo));
         VIBE->vibe_freq->redraw();
     }
     if (rkr->Infinity_Bypass)

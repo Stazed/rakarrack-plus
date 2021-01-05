@@ -30,6 +30,21 @@
 
 //#define VIBE_INLINE 1     // uncomment for inline
 
+enum Vibe_Index
+{
+    Vibe_Width = 0,
+    Vibe_LFO_Tempo,
+    Vibe_LFO_Random,
+    Vibe_LFO_Type,
+    Vibe_LFO_Stereo,
+    Vibe_Pan,
+    Vibe_DryWet,
+    Vibe_Feedback,
+    Vibe_Depth,
+    Vibe_LR_Cross,
+    Vibe_Stereo
+};
+
 class Vibe
 {
 

@@ -2457,39 +2457,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 386:
-        efx_Vibe->changepar(6, Dry_Wet(value));
+        efx_Vibe->changepar(Vibe_DryWet, Dry_Wet(value));
         break;
 
     case 387:
-        efx_Vibe->changepar(0, value);
+        efx_Vibe->changepar(Vibe_Width, value);
         break;
 
     case 388:
-        efx_Vibe->changepar(8, value);
+        efx_Vibe->changepar(Vibe_Depth, value);
         break;
 
     case 389:
-        efx_Vibe->changepar(1, ret_Tempo(value));
+        efx_Vibe->changepar(Vibe_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 390:
-        efx_Vibe->changepar(2, value);
+        efx_Vibe->changepar(Vibe_LFO_Random, value);
         break;
 
     case 391:
-        efx_Vibe->changepar(4, value);
+        efx_Vibe->changepar(Vibe_LFO_Stereo, value);
         break;
 
     case 392:
-        efx_Vibe->changepar(7, (int) ((float) value * C_MC_128_RANGE));
+        efx_Vibe->changepar(Vibe_Feedback, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 393:
-        efx_Vibe->changepar(9, (int) ((float) value * C_MC_128_RANGE));
+        efx_Vibe->changepar(Vibe_LR_Cross, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 394:
-        efx_Vibe->changepar(5, (int) ((float) value * C_MC_128_RANGE));
+        efx_Vibe->changepar(Vibe_Pan, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 395:
@@ -2789,7 +2789,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 469:
-        efx_Vibe->changepar(3, (int) ((float) value * C_MC_11_RANGE));
+        efx_Vibe->changepar(Vibe_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 470:
