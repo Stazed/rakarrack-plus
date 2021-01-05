@@ -30,6 +30,21 @@
 #include "EffectLFO.h"
 #include "Filter.h"
 
+enum WahWah_Index
+{
+    WahWah_DryWet = 0,
+    WahWah_Pan,
+    WahWah_LFO_Tempo,
+    WahWah_LFO_Random,
+    WahWah_LFO_Type,
+    WahWah_LFO_Stereo,
+    WahWah_Depth,
+    WahWah_Sense,
+    WahWah_ASI,
+    WahWah_Smooth,
+    WahWah_Mode
+};
+
 class WahWah
 {
 public:

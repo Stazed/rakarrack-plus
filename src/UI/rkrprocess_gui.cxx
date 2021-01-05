@@ -3197,7 +3197,7 @@ void RKRGUI::ActMIDI()
                 Nivel_Salida->redraw();
                 break;
             case 1:
-                WHAWHA->WhaWha_dpth->value(rkr->efx_WhaWha->getpar(6));
+                WHAWHA->WhaWha_dpth->value(rkr->efx_WhaWha->getpar(WahWah_Depth));
                 WHAWHA->WhaWha_dpth->redraw();
                 break;
             case 20:
@@ -3233,7 +3233,7 @@ void RKRGUI::ActMIDI()
                 HAR->har_int->redraw();
                 break;
             case 28:
-                WHAWHA->WhaWha_WD->value(Dry_Wet(rkr->efx_WhaWha->getpar(0)));
+                WHAWHA->WhaWha_WD->value(Dry_Wet(rkr->efx_WhaWha->getpar(WahWah_DryWet)));
                 WHAWHA->WhaWha_WD->redraw();
                 break;
             case 29:
@@ -3325,7 +3325,7 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_pan2->redraw();
                 break;
             case 66:
-                WHAWHA->WhaWha_pan->value(rkr->efx_WhaWha->getpar(1) - 64);
+                WHAWHA->WhaWha_pan->value(rkr->efx_WhaWha->getpar(WahWah_Pan) - 64);
                 WHAWHA->WhaWha_pan->redraw();
                 break;
             case 67:
@@ -3361,7 +3361,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_freq->redraw();
                 break;
             case 75:
-                WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
+                WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Tempo));
                 WHAWHA->WhaWha_freq->redraw();
                 break;
             case 76:
@@ -3469,7 +3469,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_stdf->redraw();
                 break;
             case 102:
-                WHAWHA->WhaWha_stdf->value(rkr->efx_WhaWha->getpar(5));
+                WHAWHA->WhaWha_stdf->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Stereo));
                 WHAWHA->WhaWha_stdf->redraw();
                 break;
             case 103:
@@ -3493,7 +3493,7 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_rnd->redraw();
                 break;
             case 108:
-                WHAWHA->WhaWha_rnd->value(rkr->efx_WhaWha->getpar(3));
+                WHAWHA->WhaWha_rnd->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Random));
                 WHAWHA->WhaWha_rnd->redraw();
                 break;
             case 109:
@@ -3505,15 +3505,15 @@ void RKRGUI::ActMIDI()
                 PAN->pan_rnd->redraw();
                 break;
             case 111:
-                WHAWHA->WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(7));
+                WHAWHA->WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(WahWah_Sense));
                 WHAWHA->WhaWha_ampsns->redraw();
                 break;
             case 112:
-                WHAWHA->WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(8));
+                WHAWHA->WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(WahWah_ASI));
                 WHAWHA->WhaWha_ampsnsinv->redraw();
                 break;
             case 113:
-                WHAWHA->WhaWha_smooth->value(rkr->efx_WhaWha->getpar(9));
+                WHAWHA->WhaWha_smooth->value(rkr->efx_WhaWha->getpar(WahWah_Smooth));
                 WHAWHA->WhaWha_smooth->redraw();
                 break;
             case 114:
@@ -4974,7 +4974,7 @@ void RKRGUI::ActMIDI()
                 VIBE->vibe_lfotype->redraw();
                 break;
             case 470:
-                WHAWHA->WhaWha_lfotype->value(rkr->efx_WhaWha->getpar(4));
+                WHAWHA->WhaWha_lfotype->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Type));
                 WHAWHA->WhaWha_lfotype->redraw();
                 break;
         }
@@ -6010,7 +6010,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->WhaWha_Bypass)
     {
-        WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(2));
+        WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Tempo));
         WHAWHA->WhaWha_freq->redraw();
     }
 

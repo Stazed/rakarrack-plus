@@ -637,11 +637,12 @@ void RKR::getbuf(char *buf, int j)
     case 10:
         //WhaWha
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_WhaWha->getpar(0), efx_WhaWha->getpar(1),
-                efx_WhaWha->getpar(2), efx_WhaWha->getpar(3),
-                efx_WhaWha->getpar(4), efx_WhaWha->getpar(5),
-                efx_WhaWha->getpar(6), efx_WhaWha->getpar(7),
-                efx_WhaWha->getpar(8), efx_WhaWha->getpar(9),
+                efx_WhaWha->getpar(WahWah_DryWet), efx_WhaWha->getpar(WahWah_Pan),
+                efx_WhaWha->getpar(WahWah_LFO_Tempo), efx_WhaWha->getpar(WahWah_LFO_Random),
+                efx_WhaWha->getpar(WahWah_LFO_Type), efx_WhaWha->getpar(WahWah_LFO_Stereo),
+                efx_WhaWha->getpar(WahWah_Depth), efx_WhaWha->getpar(WahWah_Sense),
+                efx_WhaWha->getpar(WahWah_ASI), efx_WhaWha->getpar(WahWah_Smooth),
+                // efx_WhaWha->getpar(WahWah_Mode)  // not saved !!!???
                 efx_WhaWha->Ppreset, WhaWha_Bypass);
         break;
 

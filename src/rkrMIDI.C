@@ -974,7 +974,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 1:
-        efx_WhaWha->changepar(6, value);
+        efx_WhaWha->changepar(WahWah_Depth, value);
         break;
 
     case 20:
@@ -1015,7 +1015,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 28:
-        efx_WhaWha->changepar(0, Dry_Wet(value));
+        efx_WhaWha->changepar(WahWah_DryWet, Dry_Wet(value));
         break;
 
     case 29:
@@ -1107,7 +1107,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 66:
-        efx_WhaWha->changepar(1, value);
+        efx_WhaWha->changepar(WahWah_Pan, value);
         break;
 
     case 67:
@@ -1143,7 +1143,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 75:
-        efx_WhaWha->changepar(2, ret_Tempo(value));
+        efx_WhaWha->changepar(WahWah_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 76:
@@ -1251,7 +1251,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 102:
-        efx_WhaWha->changepar(5, value);
+        efx_WhaWha->changepar(WahWah_LFO_Stereo, value);
         break;
 
     case 103:
@@ -1275,7 +1275,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 108:
-        efx_WhaWha->changepar(3, value);
+        efx_WhaWha->changepar(WahWah_LFO_Random, value);
         break;
 
     case 109:
@@ -1287,15 +1287,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 111:
-        efx_WhaWha->changepar(7, value);
+        efx_WhaWha->changepar(WahWah_Sense, value);
         break;
 
     case 112:
-        efx_WhaWha->changepar(8, value);
+        efx_WhaWha->changepar(WahWah_ASI, value);
         break;
 
     case 113:
-        efx_WhaWha->changepar(9, value);
+        efx_WhaWha->changepar(WahWah_Smooth, value);
         break;
 
     case 114:
@@ -2793,7 +2793,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 470:
-        efx_WhaWha->changepar(4, (int) ((float) value * C_MC_11_RANGE));
+        efx_WhaWha->changepar(WahWah_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
     }
 }

@@ -247,44 +247,44 @@ WahWah::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case WahWah_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case WahWah_Pan:
         setpanning(value);
         break;
-    case 2:
+    case WahWah_LFO_Tempo:
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case 3:
+    case WahWah_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
-    case 4:
+    case WahWah_LFO_Type:
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case 5:
+    case WahWah_LFO_Stereo:
         lfo->Pstereo = value;
         lfo->updateparams(PERIOD);
         break;
-    case 6:
+    case WahWah_Depth:
         setdepth(value);
         break;
-    case 7:
+    case WahWah_Sense:
         setampsns(value);
         break;
-    case 8:
+    case WahWah_ASI:
         Pampsnsinv = value;
         setampsns(Pampsns);
         break;
-    case 9:
+    case WahWah_Smooth:
         Pampsmooth = value;
         setampsns(Pampsns);
         break;
 
-    case 10:
+    case WahWah_Mode:
     {
         Pmode = value;
         filterpars->defaults();
@@ -386,37 +386,37 @@ WahWah::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case WahWah_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case WahWah_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case WahWah_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case 3:
+    case WahWah_LFO_Random:
         return (lfo->Prandomness);
         break;
-    case 4:
+    case WahWah_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case 5:
+    case WahWah_LFO_Stereo:
         return (lfo->Pstereo);
         break;
-    case 6:
+    case WahWah_Depth:
         return (Pdepth);
         break;
-    case 7:
+    case WahWah_Sense:
         return (Pampsns);
         break;
-    case 8:
+    case WahWah_ASI:
         return (Pampsnsinv);
         break;
-    case 9:
+    case WahWah_Smooth:
         return (Pampsmooth);
         break;
-    case 10:
+    case WahWah_Mode:
         return (Pmode);
         break;
     default:

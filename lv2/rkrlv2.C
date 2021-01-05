@@ -1878,9 +1878,6 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1901,26 +1898,54 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
-    //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->wah->getpar(i) != val)
-    {
-        plug->wah->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i] +64;// 1 pan offset
-    if(plug->wah->getpar(i) != val)
-    {
-        plug->wah->changepar(i,val);
-    }
 
-    for(i++; i<plug->nparams; i++) // 2-10
+    //check and set changed parameters
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        val = (int)*plug->param_p[i];
-        if(plug->wah->getpar(i) != val)
+        switch(i)
         {
-            plug->wah->changepar(i,val);
+            // Normal processing
+            case WahWah_LFO_Tempo:
+            case WahWah_LFO_Random:
+            case WahWah_LFO_Type:
+            case WahWah_LFO_Stereo:
+            case WahWah_Depth:
+            case WahWah_Sense:
+            case WahWah_ASI:
+            case WahWah_Smooth:
+            case WahWah_Mode:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->wah->getpar(i) != val)
+                {
+                    plug->wah->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case WahWah_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->wah->getpar(WahWah_DryWet) != val)
+                {
+                    plug->wah->changepar(WahWah_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case WahWah_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->wah->getpar(WahWah_Pan) != val)
+                {
+                    plug->wah->changepar(WahWah_Pan,val);
+                }
+            }
+            break;
         }
     }
 
