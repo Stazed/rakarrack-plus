@@ -37,13 +37,13 @@ rgui->findpos(35,(int)o->value(),o);}
     user_data 12035
     callback {long long ud= (long long) v;
         if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
-        vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(0)));
-        vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
-        vo_mu->value(rkr->efx_Vocoder->getpar(2));
-        vo_q->value(rkr->efx_Vocoder->getpar(3));
-        vo_input->value(rkr->efx_Vocoder->getpar(4));
-        vo_ring->value(rkr->efx_Vocoder->getpar(6));
-        vo_level->value(rkr->efx_Vocoder->getpar(5));} selected
+        vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(Vocoder_DryWet)));
+        vo_pan->value(rkr->efx_Vocoder->getpar(Vocoder_Pan)-64);
+        vo_mu->value(rkr->efx_Vocoder->getpar(Vocoder_Smear));
+        vo_q->value(rkr->efx_Vocoder->getpar(Vocoder_Q));
+        vo_input->value(rkr->efx_Vocoder->getpar(Vocoder_Input));
+        vo_ring->value(rkr->efx_Vocoder->getpar(Vocoder_Ring));
+        vo_level->value(rkr->efx_Vocoder->getpar(Vocoder_Level));}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -75,7 +75,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(296);
          return;
         }
-        rkr->efx_Vocoder->changepar(0,Dry_Wet((int)(o->value())));}
+        rkr->efx_Vocoder->changepar(Vocoder_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -86,7 +86,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(297);
          return;
         }
-        rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));}
+        rkr->efx_Vocoder->changepar(Vocoder_Pan,(int)(o->value()+64));}
     xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -97,7 +97,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(298);
          return;
         }
-        rkr->efx_Vocoder->changepar(4,(int)o->value());}
+        rkr->efx_Vocoder->changepar(Vocoder_Input,(int)o->value());}
     xywh {56 70 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -108,7 +108,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(299);
          return;
         }
-        rkr->efx_Vocoder->changepar(2,(int)o->value());}
+        rkr->efx_Vocoder->changepar(Vocoder_Smear,(int)o->value());}
     tooltip {Muffle, Blur} xywh {56 90 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -119,7 +119,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(300);
          return;
         }
-        rkr->efx_Vocoder->changepar(3,(int)o->value());}
+        rkr->efx_Vocoder->changepar(Vocoder_Q,(int)o->value());}
     tooltip Resonance xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 40 maximum 170 step 1 value 120 textcolor 7
     class RKR_Slider
   }
@@ -130,7 +130,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(301);
          return;
         }
-        rkr->efx_Vocoder->changepar(6,(int)o->value());}
+        rkr->efx_Vocoder->changepar(Vocoder_Ring,(int)o->value());} selected
     xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -141,7 +141,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(302);
          return;
         }
-        rkr->efx_Vocoder->changepar(5,(int)o->value());}
+        rkr->efx_Vocoder->changepar(Vocoder_Level,(int)o->value());}
     xywh {56 150 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

@@ -2087,31 +2087,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 296:
-        efx_Vocoder->changepar(0, Dry_Wet(value));
+        efx_Vocoder->changepar(Vocoder_DryWet, Dry_Wet(value));
         break;
 
     case 297:
-        efx_Vocoder->changepar(1, (int) ((float) value * C_MC_128_RANGE));
+        efx_Vocoder->changepar(Vocoder_Pan, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case 298:
-        efx_Vocoder->changepar(4, value);
+        efx_Vocoder->changepar(Vocoder_Input, value);
         break;
 
     case 299:
-        efx_Vocoder->changepar(2, 1 + (int) ((float) value * C_MC_126_RANGE));
+        efx_Vocoder->changepar(Vocoder_Smear, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case 300:
-        efx_Vocoder->changepar(3, 40 + (int) ((float) value * C_MC_130_RANGE));
+        efx_Vocoder->changepar(Vocoder_Q, 40 + (int) ((float) value * C_MC_130_RANGE));
         break;
 
     case 301:
-        efx_Vocoder->changepar(6, value);
+        efx_Vocoder->changepar(Vocoder_Ring, value);
         break;
 
     case 302:
-        efx_Vocoder->changepar(5, value);
+        efx_Vocoder->changepar(Vocoder_Level, value);
         break;
 
     case 303:

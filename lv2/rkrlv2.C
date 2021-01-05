@@ -3446,7 +3446,7 @@ LV2_Handle init_voclv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 7;
+    plug->nparams = VOCODER_PRESET_SIZE;
     plug->effectindex = IVOC;
     plug->prev_bypass = 1;
 
@@ -3466,9 +3466,6 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -3489,25 +3486,50 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i=0;
-    val = Dry_Wet((int)*plug->param_p[i]);
-    if(plug->voc->getpar(i) != val)
+    int val = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->voc->changepar(i,val);
-    }
-    i++;
-    val = (int)*plug->param_p[i]+64;//pan
-    if(plug->voc->getpar(i) != val)
-    {
-        plug->voc->changepar(i,val);
-    }
-    for(i++; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i];
-        if(plug->voc->getpar(i) != val)
+        switch(i)
         {
-            plug->voc->changepar(i,val);
+            // Normal processing
+            case Vocoder_Smear:
+            case Vocoder_Q:
+            case Vocoder_Input:
+            case Vocoder_Level:
+            case Vocoder_Ring:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->voc->getpar(i) != val)
+                {
+                    plug->voc->changepar(i,val);
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Vocoder_DryWet:
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->voc->getpar(Vocoder_DryWet) != val)
+                {
+                    plug->voc->changepar(Vocoder_DryWet,val);
+                }
+            }
+            break;
+
+            // Offset
+            case Vocoder_Pan:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->voc->getpar(Vocoder_Pan) != val)
+                {
+                    plug->voc->changepar(Vocoder_Pan,val);
+                }
+            }
+            break;
         }
     }
 

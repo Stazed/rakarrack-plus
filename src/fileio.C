@@ -918,10 +918,10 @@ void RKR::getbuf(char *buf, int j)
     case 35:
         //Vocoder
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Vocoder->getpar(0), efx_Vocoder->getpar(1),
-                efx_Vocoder->getpar(2), efx_Vocoder->getpar(3),
-                efx_Vocoder->getpar(4), efx_Vocoder->getpar(5),
-                efx_Vocoder->getpar(6), Vocoder_Bypass);
+                efx_Vocoder->getpar(Vocoder_DryWet), efx_Vocoder->getpar(Vocoder_Pan),
+                efx_Vocoder->getpar(Vocoder_Smear), efx_Vocoder->getpar(Vocoder_Q),
+                efx_Vocoder->getpar(Vocoder_Input), efx_Vocoder->getpar(Vocoder_Level),
+                efx_Vocoder->getpar(Vocoder_Ring), Vocoder_Bypass);
         break;
 
     case 36:

@@ -30,6 +30,17 @@
 
 #define VOCODER_PRESET_SIZE 7
 
+enum Vocoder_Index
+{
+    Vocoder_DryWet = 0,
+    Vocoder_Pan,
+    Vocoder_Smear,
+    Vocoder_Q,
+    Vocoder_Input,
+    Vocoder_Level,
+    Vocoder_Ring
+};
+
 class Vocoder
 {
 public:

@@ -4274,31 +4274,31 @@ void RKRGUI::ActMIDI()
                 SHELFBOOST->shelf_q1->redraw();
                 break;
             case 296:
-                VOCODER->vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(0)));
+                VOCODER->vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(Vocoder_DryWet)));
                 VOCODER->vo_WD->redraw();
                 break;
             case 297:
-                VOCODER->vo_pan->value(rkr->efx_Vocoder->getpar(1) - 64);
+                VOCODER->vo_pan->value(rkr->efx_Vocoder->getpar(Vocoder_Pan) - 64);
                 VOCODER->vo_pan->redraw();
                 break;
             case 298:
-                VOCODER->vo_input->value(rkr->efx_Vocoder->getpar(4));
+                VOCODER->vo_input->value(rkr->efx_Vocoder->getpar(Vocoder_Input));
                 VOCODER->vo_input->redraw();
                 break;
             case 299:
-                VOCODER->vo_mu->value(rkr->efx_Vocoder->getpar(2));
+                VOCODER->vo_mu->value(rkr->efx_Vocoder->getpar(Vocoder_Smear));
                 VOCODER->vo_mu->redraw();
                 break;
             case 300:
-                VOCODER->vo_q->value(rkr->efx_Vocoder->getpar(3));
+                VOCODER->vo_q->value(rkr->efx_Vocoder->getpar(Vocoder_Q));
                 VOCODER->vo_q->redraw();
                 break;
             case 301:
-                VOCODER->vo_ring->value(rkr->efx_Vocoder->getpar(6));
+                VOCODER->vo_ring->value(rkr->efx_Vocoder->getpar(Vocoder_Ring));
                 VOCODER->vo_ring->redraw();
                 break;
             case 302:
-                VOCODER->vo_level->value(rkr->efx_Vocoder->getpar(5));
+                VOCODER->vo_level->value(rkr->efx_Vocoder->getpar(Vocoder_Level));
                 VOCODER->vo_level->redraw();
                 break;
             case 303:

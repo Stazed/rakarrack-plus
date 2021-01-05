@@ -21,13 +21,13 @@ void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
 void VocoderGui::cb_vo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
         if((ud==0)||(ud==12035))rkr->efx_Vocoder->setpreset((int) o->value());
-        vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(0)));
-        vo_pan->value(rkr->efx_Vocoder->getpar(1)-64);
-        vo_mu->value(rkr->efx_Vocoder->getpar(2));
-        vo_q->value(rkr->efx_Vocoder->getpar(3));
-        vo_input->value(rkr->efx_Vocoder->getpar(4));
-        vo_ring->value(rkr->efx_Vocoder->getpar(6));
-        vo_level->value(rkr->efx_Vocoder->getpar(5));
+        vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(Vocoder_DryWet)));
+        vo_pan->value(rkr->efx_Vocoder->getpar(Vocoder_Pan)-64);
+        vo_mu->value(rkr->efx_Vocoder->getpar(Vocoder_Smear));
+        vo_q->value(rkr->efx_Vocoder->getpar(Vocoder_Q));
+        vo_input->value(rkr->efx_Vocoder->getpar(Vocoder_Input));
+        vo_ring->value(rkr->efx_Vocoder->getpar(Vocoder_Ring));
+        vo_level->value(rkr->efx_Vocoder->getpar(Vocoder_Level));
 }
 void VocoderGui::cb_vo_preset(RKR_Choice* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_preset_i(o,v);
@@ -48,7 +48,7 @@ void VocoderGui::cb_vo_WD_i(RKR_Slider* o, void*) {
          rgui->getMIDIControl(296);
          return;
         }
-        rkr->efx_Vocoder->changepar(0,Dry_Wet((int)(o->value())));
+        rkr->efx_Vocoder->changepar(Vocoder_DryWet,Dry_Wet((int)(o->value())));
 }
 void VocoderGui::cb_vo_WD(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_WD_i(o,v);
@@ -60,7 +60,7 @@ void VocoderGui::cb_vo_pan_i(RKR_Slider* o, void*) {
          rgui->getMIDIControl(297);
          return;
         }
-        rkr->efx_Vocoder->changepar(1,(int)(o->value()+64));
+        rkr->efx_Vocoder->changepar(Vocoder_Pan,(int)(o->value()+64));
 }
 void VocoderGui::cb_vo_pan(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_pan_i(o,v);
@@ -72,7 +72,7 @@ void VocoderGui::cb_vo_input_i(RKR_Slider* o, void*) {
          rgui->getMIDIControl(298);
          return;
         }
-        rkr->efx_Vocoder->changepar(4,(int)o->value());
+        rkr->efx_Vocoder->changepar(Vocoder_Input,(int)o->value());
 }
 void VocoderGui::cb_vo_input(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_input_i(o,v);
@@ -84,7 +84,7 @@ void VocoderGui::cb_vo_mu_i(RKR_Slider* o, void*) {
          rgui->getMIDIControl(299);
          return;
         }
-        rkr->efx_Vocoder->changepar(2,(int)o->value());
+        rkr->efx_Vocoder->changepar(Vocoder_Smear,(int)o->value());
 }
 void VocoderGui::cb_vo_mu(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_mu_i(o,v);
@@ -96,7 +96,7 @@ void VocoderGui::cb_vo_q_i(RKR_Slider* o, void*) {
          rgui->getMIDIControl(300);
          return;
         }
-        rkr->efx_Vocoder->changepar(3,(int)o->value());
+        rkr->efx_Vocoder->changepar(Vocoder_Q,(int)o->value());
 }
 void VocoderGui::cb_vo_q(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_q_i(o,v);
@@ -108,7 +108,7 @@ void VocoderGui::cb_vo_ring_i(RKR_Slider* o, void*) {
          rgui->getMIDIControl(301);
          return;
         }
-        rkr->efx_Vocoder->changepar(6,(int)o->value());
+        rkr->efx_Vocoder->changepar(Vocoder_Ring,(int)o->value());
 }
 void VocoderGui::cb_vo_ring(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_ring_i(o,v);
@@ -120,7 +120,7 @@ void VocoderGui::cb_vo_level_i(RKR_Slider* o, void*) {
          rgui->getMIDIControl(302);
          return;
         }
-        rkr->efx_Vocoder->changepar(5,(int)o->value());
+        rkr->efx_Vocoder->changepar(Vocoder_Level,(int)o->value());
 }
 void VocoderGui::cb_vo_level(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_level_i(o,v);

@@ -565,13 +565,13 @@ Vocoder::changepar(int npar, int value)
 {
     switch (npar)
     {
-    case 0:
+    case Vocoder_DryWet:
         setvolume(value);
         break;
-    case 1:
+    case Vocoder_Pan:
         setpanning(value);
         break;
-    case 2:
+    case Vocoder_Smear:
     {
         Pmuffle = value;
         float tmp = (float) Pmuffle;
@@ -580,22 +580,22 @@ Vocoder::changepar(int npar, int value)
         beta = 1.0f - alpha;
         break;
     }
-    case 3:
+    case Vocoder_Q:
         adjustq(value);
         /*        Pqq = value;
                 tmp = (float) value;
                 adjustq(tmp);*/
         break;
-    case 4:
+    case Vocoder_Input:
         Pinput = value;
         input = dB2rap(75.0f * (float) Pinput / 127.0f - 40.0f);
         break;
-    case 5:
+    case Vocoder_Level:
         Plevel = value;
         level = dB2rap(60.0f * (float) Plevel / 127.0f - 40.0f);
         break;
 
-    case 6:
+    case Vocoder_Ring:
         Pring = value;
         ringworm = (float) Pring / 127.0f;
         break;
@@ -607,25 +607,25 @@ Vocoder::getpar(int npar)
 {
     switch (npar)
     {
-    case 0:
+    case Vocoder_DryWet:
         return (Pvolume);
         break;
-    case 1:
+    case Vocoder_Pan:
         return (Ppanning);
         break;
-    case 2:
+    case Vocoder_Smear:
         return (Pmuffle);
         break;
-    case 3:
+    case Vocoder_Q:
         return (Pqq);
         break;
-    case 4:
+    case Vocoder_Input:
         return (Pinput);
         break;
-    case 5:
+    case Vocoder_Level:
         return (Plevel);
         break;
-    case 6:
+    case Vocoder_Ring:
         return (Pring);
         break;
     }
