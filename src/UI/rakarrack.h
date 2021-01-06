@@ -99,7 +99,7 @@ class TrigWindowGui; // forward declaration
 #include "flanger_gui.h"
 #include "reverb_gui.h"
 #include "peq_gui.h"
-#include "whawha_gui.h"
+#include "wahwah_gui.h"
 #include "alienwah_gui.h"
 #include "cabinet_gui.h"
 #include "pan_gui.h"

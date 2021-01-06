@@ -315,7 +315,7 @@ class RKRGUI {open
 save_stat(0);
 
 Pexitprogram=1;} open
-      xywh {55 97 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {620 93 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -740,7 +740,7 @@ Fl::focus(Open_Order);}
       Fl_Group WAHWAH {
         user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
-        code0 {\#include "whawha_gui.h"}
+        code0 {\#include "wahwah_gui.h"}
         class WahwahGui
       } {}
       Fl_Group ALIENWAH {
@@ -1250,7 +1250,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
+        user_data 1 open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {

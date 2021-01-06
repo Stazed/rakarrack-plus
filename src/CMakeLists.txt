@@ -41,7 +41,7 @@ set (ProgSources
     UI/flanger_gui.cxx
     UI/reverb_gui.cxx
     UI/peq_gui.cxx
-    UI/whawha_gui.cxx
+    UI/wahwah_gui.cxx
     UI/alienwah_gui.cxx
     UI/cabinet_gui.cxx
     UI/pan_gui.cxx
