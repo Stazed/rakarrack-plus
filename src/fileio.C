@@ -220,11 +220,11 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case 10:
-        //WhaWha
+        //WahWah
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[11][0], &lv[11][1], &lv[11][2], &lv[11][3], &lv[11][4],
                &lv[11][5], &lv[11][6], &lv[11][7], &lv[11][8], &lv[11][9],
-               &lv[11][10], &WhaWha_B);
+               &lv[11][10], &WahWah_B);
         break;
 
     case 11:
@@ -653,14 +653,14 @@ void RKR::getbuf(char *buf, int j)
 
 
     case 10:
-        //WhaWha
+        //WahWah
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_WhaWha->getpar(WahWah_DryWet), efx_WhaWha->getpar(WahWah_Pan),
-                efx_WhaWha->getpar(WahWah_LFO_Tempo), efx_WhaWha->getpar(WahWah_LFO_Random),
-                efx_WhaWha->getpar(WahWah_LFO_Type), efx_WhaWha->getpar(WahWah_LFO_Stereo),
-                efx_WhaWha->getpar(WahWah_Depth), efx_WhaWha->getpar(WahWah_Sense),
-                efx_WhaWha->getpar(WahWah_ASI), efx_WhaWha->getpar(WahWah_Smooth),
-                efx_WhaWha->getpar(WahWah_Mode), WhaWha_Bypass);
+                efx_WahWah->getpar(WahWah_DryWet), efx_WahWah->getpar(WahWah_Pan),
+                efx_WahWah->getpar(WahWah_LFO_Tempo), efx_WahWah->getpar(WahWah_LFO_Random),
+                efx_WahWah->getpar(WahWah_LFO_Type), efx_WahWah->getpar(WahWah_LFO_Stereo),
+                efx_WahWah->getpar(WahWah_Depth), efx_WahWah->getpar(WahWah_Sense),
+                efx_WahWah->getpar(WahWah_ASI), efx_WahWah->getpar(WahWah_Smooth),
+                efx_WahWah->getpar(WahWah_Mode), WahWah_Bypass);
         break;
 
     case 11:
@@ -1472,13 +1472,13 @@ RKR::Actualizar_Audio()
             EQ2_Bypass = EQ2_B;
             break;
 
-        case 10://WhaWha
+        case 10://WahWah
 
-            WhaWha_Bypass = 0;
-            efx_WhaWha->cleanup();
+            WahWah_Bypass = 0;
+            efx_WahWah->cleanup();
             for (i = 0; i <= 10; i++)
-                efx_WhaWha->changepar(i, lv[11][i]);
-            WhaWha_Bypass = WhaWha_B;
+                efx_WahWah->changepar(i, lv[11][i]);
+            WahWah_Bypass = WahWah_B;
             break;
 
         case 11://Alienwah
@@ -2033,7 +2033,7 @@ RKR::New()
     EQ1_B = 0;
     EQ2_B = 0;
     Compressor_B = 0;
-    WhaWha_B = 0;
+    WahWah_B = 0;
     Alienwah_B = 0;
     Cabinet_B = 0;
     Pan_B = 0;
@@ -2146,7 +2146,7 @@ RKR::Bank_to_Preset(int i)
     EQ1_B = Bank[i].lv[7][19];
     EQ2_B = Bank[i].lv[8][19];
     Compressor_B = Bank[i].lv[9][19];
-    WhaWha_B = Bank[i].lv[11][19];
+    WahWah_B = Bank[i].lv[11][19];
     Alienwah_B = Bank[i].lv[12][19];
     Cabinet_B = Bank[i].lv[13][19];
     Pan_B = Bank[i].lv[14][19];
@@ -2241,7 +2241,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j <= 8; j++)
         lv[9][j] = efx_Compressor->getpar(j);
     for (j = 0; j <= 10; j++)
-        lv[11][j] = efx_WhaWha->getpar(j);
+        lv[11][j] = efx_WahWah->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[12][j] = efx_Alienwah->getpar(j);
     for (j = 0; j <= 8; j++)
@@ -2354,7 +2354,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].lv[7][19] = EQ1_Bypass;
     Bank[i].lv[8][19] = EQ2_Bypass;
     Bank[i].lv[9][19] = Compressor_Bypass;
-    Bank[i].lv[11][19] = WhaWha_Bypass;
+    Bank[i].lv[11][19] = WahWah_Bypass;
     Bank[i].lv[12][19] = Alienwah_Bypass;
     Bank[i].lv[13][19] = Cabinet_Bypass;
     Bank[i].lv[14][19] = Pan_Bypass;

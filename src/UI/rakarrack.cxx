@@ -1363,20 +1363,20 @@ void RKRGUI::make_window() {
       PEQ->hide();
       PEQ->end();
     } // PeqGui* PEQ
-    { WHAWHA = new WhawhaGui(2, 212, 158, 184);
-      WHAWHA->box(FL_UP_BOX);
-      WHAWHA->color(FL_FOREGROUND_COLOR);
-      WHAWHA->selection_color(FL_FOREGROUND_COLOR);
-      WHAWHA->labeltype(FL_NORMAL_LABEL);
-      WHAWHA->labelfont(1);
-      WHAWHA->labelsize(14);
-      WHAWHA->labelcolor(FL_FOREGROUND_COLOR);
-      WHAWHA->user_data((void*)(1));
-      WHAWHA->align(Fl_Align(96|FL_ALIGN_INSIDE));
-      WHAWHA->when(FL_WHEN_RELEASE);
-      WHAWHA->hide();
-      WHAWHA->end();
-    } // WhawhaGui* WHAWHA
+    { WAHWAH = new WahwahGui(2, 212, 158, 184);
+      WAHWAH->box(FL_UP_BOX);
+      WAHWAH->color(FL_FOREGROUND_COLOR);
+      WAHWAH->selection_color(FL_FOREGROUND_COLOR);
+      WAHWAH->labeltype(FL_NORMAL_LABEL);
+      WAHWAH->labelfont(1);
+      WAHWAH->labelsize(14);
+      WAHWAH->labelcolor(FL_FOREGROUND_COLOR);
+      WAHWAH->user_data((void*)(1));
+      WAHWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
+      WAHWAH->when(FL_WHEN_RELEASE);
+      WAHWAH->hide();
+      WAHWAH->end();
+    } // WahwahGui* WAHWAH
     { ALIENWAH = new AlienwahGui(161, 212, 158, 184);
       ALIENWAH->box(FL_UP_BOX);
       ALIENWAH->color(FL_FOREGROUND_COLOR);

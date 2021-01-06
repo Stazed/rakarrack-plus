@@ -2,44 +2,44 @@
 
 #include "whawha_gui.h"
 
-void WhawhaGui::cb_WhaWha_activar_i(RKR_Light_Button* o, void*) {
+void WahwahGui::cb_WahWah_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(116);
- o->value(rkr->WhaWha_Bypass);
+ o->value(rkr->WahWah_Bypass);
  return;
 }
-rkr->WhaWha_Bypass=(int)o->value();
+rkr->WahWah_Bypass=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_WhaWha->cleanup();
+rkr->efx_WahWah->cleanup();
 rgui->findpos(10,(int)o->value(),o);
 }
-void WhawhaGui::cb_WhaWha_activar(RKR_Light_Button* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_activar_i(o,v);
+void WahwahGui::cb_WahWah_activar(RKR_Light_Button* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_activar_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_preset_i(RKR_Choice* o, void* v) {
-  rkr->WhaWha_Bypass=0;
+void WahwahGui::cb_WahWah_preset_i(RKR_Choice* o, void* v) {
+  rkr->WahWah_Bypass=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12010))rkr->efx_WhaWha->setpreset((int) o->value()); 
-WhaWha_WD->value(Dry_Wet(rkr->efx_WhaWha->getpar(WahWah_DryWet)));
-WhaWha_pan->value(rkr->efx_WhaWha->getpar(WahWah_Pan)-64);
-WhaWha_freq->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Tempo));
-WhaWha_rnd->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Random));
-WhaWha_lfotype->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Type));
-WhaWha_stdf->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Stereo));
-WhaWha_dpth->value(rkr->efx_WhaWha->getpar(WahWah_Depth));
-WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(WahWah_Sense));
-WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(WahWah_ASI));
-WhaWha_smooth->value(rkr->efx_WhaWha->getpar(WahWah_Smooth));
-WhaWha_ftype->value(rkr->efx_WhaWha->getpar(WahWah_Mode));
-if((int)WhaWha_activar->value()) rkr->WhaWha_Bypass=1;
+if((ud==0)||(ud==12010))rkr->efx_WahWah->setpreset((int) o->value()); 
+WahWah_WD->value(Dry_Wet(rkr->efx_WahWah->getpar(WahWah_DryWet)));
+WahWah_pan->value(rkr->efx_WahWah->getpar(WahWah_Pan)-64);
+WahWah_freq->value(rkr->efx_WahWah->getpar(WahWah_LFO_Tempo));
+WahWah_rnd->value(rkr->efx_WahWah->getpar(WahWah_LFO_Random));
+WahWah_lfotype->value(rkr->efx_WahWah->getpar(WahWah_LFO_Type));
+WahWah_stdf->value(rkr->efx_WahWah->getpar(WahWah_LFO_Stereo));
+WahWah_dpth->value(rkr->efx_WahWah->getpar(WahWah_Depth));
+WahWah_ampsns->value(rkr->efx_WahWah->getpar(WahWah_Sense));
+WahWah_ampsnsinv->value(rkr->efx_WahWah->getpar(WahWah_ASI));
+WahWah_smooth->value(rkr->efx_WahWah->getpar(WahWah_Smooth));
+WahWah_ftype->value(rkr->efx_WahWah->getpar(WahWah_Mode));
+if((int)WahWah_activar->value()) rkr->WahWah_Bypass=1;
 }
-void WhawhaGui::cb_WhaWha_preset(RKR_Choice* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_preset_i(o,v);
+void WahwahGui::cb_WahWah_preset(RKR_Choice* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_preset_i(o,v);
 }
 
-Fl_Menu_Item WhawhaGui::menu_WhaWha_preset[] = {
+Fl_Menu_Item WahwahGui::menu_WahWah_preset[] = {
  {"WahWah", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"AutoWah", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Sweep", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
@@ -48,123 +48,123 @@ Fl_Menu_Item WhawhaGui::menu_WhaWha_preset[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void WhawhaGui::cb_WhaWha_WD_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(28);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_DryWet,Dry_Wet((int)(o->value())));
+rkr->efx_WahWah->changepar(WahWah_DryWet,Dry_Wet((int)(o->value())));
 }
-void WhawhaGui::cb_WhaWha_WD(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_WD_i(o,v);
+void WahwahGui::cb_WahWah_WD(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_WD_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_pan_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(66);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_Pan,(int)(o->value()+64));
+rkr->efx_WahWah->changepar(WahWah_Pan,(int)(o->value()+64));
 }
-void WhawhaGui::cb_WhaWha_pan(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_pan_i(o,v);
+void WahwahGui::cb_WahWah_pan(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_pan_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_freq_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(75);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_LFO_Tempo,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_LFO_Tempo,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_freq(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_freq_i(o,v);
+void WahwahGui::cb_WahWah_freq(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_freq_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_rnd_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(108);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_LFO_Random,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_LFO_Random,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_rnd(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_rnd_i(o,v);
+void WahwahGui::cb_WahWah_rnd(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_rnd_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_lfotype_i(RKR_Choice* o, void*) {
+void WahwahGui::cb_WahWah_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(470);
  return;
 } 
 
-rkr->efx_WhaWha->changepar(WahWah_LFO_Type,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_LFO_Type,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_lfotype(RKR_Choice* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_lfotype_i(o,v);
+void WahwahGui::cb_WahWah_lfotype(RKR_Choice* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_lfotype_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_stdf_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(102);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_LFO_Stereo,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_LFO_Stereo,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_stdf(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_stdf_i(o,v);
+void WahwahGui::cb_WahWah_stdf(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_stdf_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_dpth_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(1);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_Depth,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_Depth,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_dpth(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_dpth_i(o,v);
+void WahwahGui::cb_WahWah_dpth(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_dpth_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_ampsns_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_ampsns_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(111);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_Sense,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_Sense,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_ampsns(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_ampsns_i(o,v);
+void WahwahGui::cb_WahWah_ampsns(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_ampsns_i(o,v);
 }
 
-void WhawhaGui::cb_WhaWha_ampsnsinv_i(RKR_Check_Button* o, void*) {
+void WahwahGui::cb_WahWah_ampsnsinv_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(112);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_ASI,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_ASI,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_ampsnsinv(RKR_Check_Button* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_ampsnsinv_i(o,v);
-}
-
-void WhawhaGui::cb_WhaWha_ftype_i(RKR_Choice* o, void*) {
-  rkr->efx_WhaWha->changepar(WahWah_Mode,(int)o->value());
-}
-void WhawhaGui::cb_WhaWha_ftype(RKR_Choice* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_ftype_i(o,v);
+void WahwahGui::cb_WahWah_ampsnsinv(RKR_Check_Button* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_ampsnsinv_i(o,v);
 }
 
-Fl_Menu_Item WhawhaGui::menu_WhaWha_ftype[] = {
+void WahwahGui::cb_WahWah_ftype_i(RKR_Choice* o, void*) {
+  rkr->efx_WahWah->changepar(WahWah_Mode,(int)o->value());
+}
+void WahwahGui::cb_WahWah_ftype(RKR_Choice* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_ftype_i(o,v);
+}
+
+Fl_Menu_Item WahwahGui::menu_WahWah_ftype[] = {
  {"Low-Pass Analog", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"State Variable LPF", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
  {"Band-Pass Analog", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 10, 0},
@@ -173,232 +173,232 @@ Fl_Menu_Item WhawhaGui::menu_WhaWha_ftype[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 
-void WhawhaGui::cb_WhaWha_smooth_i(RKR_Slider* o, void*) {
+void WahwahGui::cb_WahWah_smooth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(113);
  return;
 } 
-rkr->efx_WhaWha->changepar(WahWah_Smooth,(int)o->value());
+rkr->efx_WahWah->changepar(WahWah_Smooth,(int)o->value());
 }
-void WhawhaGui::cb_WhaWha_smooth(RKR_Slider* o, void* v) {
-  ((WhawhaGui*)(o->parent()))->cb_WhaWha_smooth_i(o,v);
+void WahwahGui::cb_WahWah_smooth(RKR_Slider* o, void* v) {
+  ((WahwahGui*)(o->parent()))->cb_WahWah_smooth_i(o,v);
 }
-WhawhaGui::WhawhaGui(int X, int Y, int W, int H, const char *L)
+WahwahGui::WahwahGui(int X, int Y, int W, int H, const char *L)
   : Fl_Group(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ WhaWha_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
-  WhaWha_activar->box(FL_UP_BOX);
-  WhaWha_activar->shortcut(0x36);
-  WhaWha_activar->color((Fl_Color)62);
-  WhaWha_activar->selection_color((Fl_Color)1);
-  WhaWha_activar->labeltype(FL_NORMAL_LABEL);
-  WhaWha_activar->labelfont(0);
-  WhaWha_activar->labelsize(10);
-  WhaWha_activar->labelcolor(FL_FOREGROUND_COLOR);
-  WhaWha_activar->callback((Fl_Callback*)cb_WhaWha_activar, (void*)(2));
-  WhaWha_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
-  WhaWha_activar->when(FL_WHEN_CHANGED);
-} // RKR_Light_Button* WhaWha_activar
-{ WhaWha_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
-  WhaWha_preset->box(FL_FLAT_BOX);
-  WhaWha_preset->down_box(FL_BORDER_BOX);
-  WhaWha_preset->color(FL_BACKGROUND_COLOR);
-  WhaWha_preset->selection_color(FL_FOREGROUND_COLOR);
-  WhaWha_preset->labeltype(FL_NORMAL_LABEL);
-  WhaWha_preset->labelfont(0);
-  WhaWha_preset->labelsize(10);
-  WhaWha_preset->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_preset->textsize(10);
-  WhaWha_preset->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_preset->callback((Fl_Callback*)cb_WhaWha_preset, (void*)(12010));
-  WhaWha_preset->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_preset->when(FL_WHEN_RELEASE_ALWAYS);
-  WhaWha_preset->menu(menu_WhaWha_preset);
-} // RKR_Choice* WhaWha_preset
-{ WhaWha_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
-  WhaWha_WD->type(5);
-  WhaWha_WD->box(FL_FLAT_BOX);
-  WhaWha_WD->color((Fl_Color)178);
-  WhaWha_WD->selection_color((Fl_Color)62);
-  WhaWha_WD->labeltype(FL_NORMAL_LABEL);
-  WhaWha_WD->labelfont(0);
-  WhaWha_WD->labelsize(10);
-  WhaWha_WD->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_WD->maximum(127);
-  WhaWha_WD->step(1);
-  WhaWha_WD->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_WD->callback((Fl_Callback*)cb_WhaWha_WD);
-  WhaWha_WD->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_WD->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_WD
-{ WhaWha_pan = new RKR_Slider(56, 41, 100, 10, "Pan");
-  WhaWha_pan->type(5);
-  WhaWha_pan->box(FL_FLAT_BOX);
-  WhaWha_pan->color((Fl_Color)178);
-  WhaWha_pan->selection_color((Fl_Color)62);
-  WhaWha_pan->labeltype(FL_NORMAL_LABEL);
-  WhaWha_pan->labelfont(0);
-  WhaWha_pan->labelsize(10);
-  WhaWha_pan->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_pan->minimum(-64);
-  WhaWha_pan->maximum(63);
-  WhaWha_pan->step(1);
-  WhaWha_pan->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_pan->callback((Fl_Callback*)cb_WhaWha_pan);
-  WhaWha_pan->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_pan->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_pan
-{ WhaWha_freq = new RKR_Slider(56, 53, 100, 10, "Tempo");
-  WhaWha_freq->type(5);
-  WhaWha_freq->box(FL_FLAT_BOX);
-  WhaWha_freq->color((Fl_Color)178);
-  WhaWha_freq->selection_color((Fl_Color)62);
-  WhaWha_freq->labeltype(FL_NORMAL_LABEL);
-  WhaWha_freq->labelfont(0);
-  WhaWha_freq->labelsize(10);
-  WhaWha_freq->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_freq->minimum(1);
-  WhaWha_freq->maximum(600);
-  WhaWha_freq->step(1);
-  WhaWha_freq->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_freq->callback((Fl_Callback*)cb_WhaWha_freq);
-  WhaWha_freq->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_freq->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_freq
-{ WhaWha_rnd = new RKR_Slider(56, 65, 100, 10, "Random");
-  WhaWha_rnd->type(5);
-  WhaWha_rnd->box(FL_FLAT_BOX);
-  WhaWha_rnd->color((Fl_Color)178);
-  WhaWha_rnd->selection_color((Fl_Color)62);
-  WhaWha_rnd->labeltype(FL_NORMAL_LABEL);
-  WhaWha_rnd->labelfont(0);
-  WhaWha_rnd->labelsize(10);
-  WhaWha_rnd->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_rnd->maximum(127);
-  WhaWha_rnd->step(1);
-  WhaWha_rnd->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_rnd->callback((Fl_Callback*)cb_WhaWha_rnd);
-  WhaWha_rnd->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_rnd->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_rnd
-{ RKR_Choice* o = WhaWha_lfotype = new RKR_Choice(78, 79, 72, 16, "LFO Type");
-  WhaWha_lfotype->box(FL_FLAT_BOX);
-  WhaWha_lfotype->down_box(FL_BORDER_BOX);
-  WhaWha_lfotype->color(FL_BACKGROUND_COLOR);
-  WhaWha_lfotype->selection_color(FL_FOREGROUND_COLOR);
-  WhaWha_lfotype->labeltype(FL_NORMAL_LABEL);
-  WhaWha_lfotype->labelfont(0);
-  WhaWha_lfotype->labelsize(10);
-  WhaWha_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_lfotype->textsize(10);
-  WhaWha_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_lfotype->callback((Fl_Callback*)cb_WhaWha_lfotype);
-  WhaWha_lfotype->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_lfotype->when(FL_WHEN_RELEASE);
+{ WahWah_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+  WahWah_activar->box(FL_UP_BOX);
+  WahWah_activar->shortcut(0x36);
+  WahWah_activar->color((Fl_Color)62);
+  WahWah_activar->selection_color((Fl_Color)1);
+  WahWah_activar->labeltype(FL_NORMAL_LABEL);
+  WahWah_activar->labelfont(0);
+  WahWah_activar->labelsize(10);
+  WahWah_activar->labelcolor(FL_FOREGROUND_COLOR);
+  WahWah_activar->callback((Fl_Callback*)cb_WahWah_activar, (void*)(2));
+  WahWah_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
+  WahWah_activar->when(FL_WHEN_CHANGED);
+} // RKR_Light_Button* WahWah_activar
+{ WahWah_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+  WahWah_preset->box(FL_FLAT_BOX);
+  WahWah_preset->down_box(FL_BORDER_BOX);
+  WahWah_preset->color(FL_BACKGROUND_COLOR);
+  WahWah_preset->selection_color(FL_FOREGROUND_COLOR);
+  WahWah_preset->labeltype(FL_NORMAL_LABEL);
+  WahWah_preset->labelfont(0);
+  WahWah_preset->labelsize(10);
+  WahWah_preset->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_preset->textsize(10);
+  WahWah_preset->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_preset->callback((Fl_Callback*)cb_WahWah_preset, (void*)(12010));
+  WahWah_preset->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_preset->when(FL_WHEN_RELEASE_ALWAYS);
+  WahWah_preset->menu(menu_WahWah_preset);
+} // RKR_Choice* WahWah_preset
+{ WahWah_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
+  WahWah_WD->type(5);
+  WahWah_WD->box(FL_FLAT_BOX);
+  WahWah_WD->color((Fl_Color)178);
+  WahWah_WD->selection_color((Fl_Color)62);
+  WahWah_WD->labeltype(FL_NORMAL_LABEL);
+  WahWah_WD->labelfont(0);
+  WahWah_WD->labelsize(10);
+  WahWah_WD->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_WD->maximum(127);
+  WahWah_WD->step(1);
+  WahWah_WD->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_WD->callback((Fl_Callback*)cb_WahWah_WD);
+  WahWah_WD->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_WD->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_WD
+{ WahWah_pan = new RKR_Slider(56, 41, 100, 10, "Pan");
+  WahWah_pan->type(5);
+  WahWah_pan->box(FL_FLAT_BOX);
+  WahWah_pan->color((Fl_Color)178);
+  WahWah_pan->selection_color((Fl_Color)62);
+  WahWah_pan->labeltype(FL_NORMAL_LABEL);
+  WahWah_pan->labelfont(0);
+  WahWah_pan->labelsize(10);
+  WahWah_pan->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_pan->minimum(-64);
+  WahWah_pan->maximum(63);
+  WahWah_pan->step(1);
+  WahWah_pan->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_pan->callback((Fl_Callback*)cb_WahWah_pan);
+  WahWah_pan->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_pan->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_pan
+{ WahWah_freq = new RKR_Slider(56, 53, 100, 10, "Tempo");
+  WahWah_freq->type(5);
+  WahWah_freq->box(FL_FLAT_BOX);
+  WahWah_freq->color((Fl_Color)178);
+  WahWah_freq->selection_color((Fl_Color)62);
+  WahWah_freq->labeltype(FL_NORMAL_LABEL);
+  WahWah_freq->labelfont(0);
+  WahWah_freq->labelsize(10);
+  WahWah_freq->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_freq->minimum(1);
+  WahWah_freq->maximum(600);
+  WahWah_freq->step(1);
+  WahWah_freq->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_freq->callback((Fl_Callback*)cb_WahWah_freq);
+  WahWah_freq->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_freq->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_freq
+{ WahWah_rnd = new RKR_Slider(56, 65, 100, 10, "Random");
+  WahWah_rnd->type(5);
+  WahWah_rnd->box(FL_FLAT_BOX);
+  WahWah_rnd->color((Fl_Color)178);
+  WahWah_rnd->selection_color((Fl_Color)62);
+  WahWah_rnd->labeltype(FL_NORMAL_LABEL);
+  WahWah_rnd->labelfont(0);
+  WahWah_rnd->labelsize(10);
+  WahWah_rnd->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_rnd->maximum(127);
+  WahWah_rnd->step(1);
+  WahWah_rnd->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_rnd->callback((Fl_Callback*)cb_WahWah_rnd);
+  WahWah_rnd->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_rnd->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_rnd
+{ RKR_Choice* o = WahWah_lfotype = new RKR_Choice(78, 79, 72, 16, "LFO Type");
+  WahWah_lfotype->box(FL_FLAT_BOX);
+  WahWah_lfotype->down_box(FL_BORDER_BOX);
+  WahWah_lfotype->color(FL_BACKGROUND_COLOR);
+  WahWah_lfotype->selection_color(FL_FOREGROUND_COLOR);
+  WahWah_lfotype->labeltype(FL_NORMAL_LABEL);
+  WahWah_lfotype->labelfont(0);
+  WahWah_lfotype->labelsize(10);
+  WahWah_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_lfotype->textsize(10);
+  WahWah_lfotype->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_lfotype->callback((Fl_Callback*)cb_WahWah_lfotype);
+  WahWah_lfotype->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());
-} // RKR_Choice* WhaWha_lfotype
-{ WhaWha_stdf = new RKR_Slider(56, 105, 100, 10, "Stereo Df");
-  WhaWha_stdf->tooltip("LFO L/R Delay");
-  WhaWha_stdf->type(5);
-  WhaWha_stdf->box(FL_FLAT_BOX);
-  WhaWha_stdf->color((Fl_Color)178);
-  WhaWha_stdf->selection_color((Fl_Color)62);
-  WhaWha_stdf->labeltype(FL_NORMAL_LABEL);
-  WhaWha_stdf->labelfont(0);
-  WhaWha_stdf->labelsize(10);
-  WhaWha_stdf->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_stdf->maximum(127);
-  WhaWha_stdf->step(1);
-  WhaWha_stdf->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_stdf->callback((Fl_Callback*)cb_WhaWha_stdf);
-  WhaWha_stdf->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_stdf->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_stdf
-{ WhaWha_dpth = new RKR_Slider(56, 117, 100, 10, "Depth");
-  WhaWha_dpth->type(5);
-  WhaWha_dpth->box(FL_FLAT_BOX);
-  WhaWha_dpth->color((Fl_Color)178);
-  WhaWha_dpth->selection_color((Fl_Color)62);
-  WhaWha_dpth->labeltype(FL_NORMAL_LABEL);
-  WhaWha_dpth->labelfont(0);
-  WhaWha_dpth->labelsize(10);
-  WhaWha_dpth->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_dpth->maximum(127);
-  WhaWha_dpth->step(1);
-  WhaWha_dpth->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_dpth->callback((Fl_Callback*)cb_WhaWha_dpth);
-  WhaWha_dpth->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_dpth->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_dpth
-{ WhaWha_ampsns = new RKR_Slider(56, 129, 100, 10, "Amp.S.");
-  WhaWha_ampsns->tooltip("Amplitude Sensitivity");
-  WhaWha_ampsns->type(5);
-  WhaWha_ampsns->box(FL_FLAT_BOX);
-  WhaWha_ampsns->color((Fl_Color)178);
-  WhaWha_ampsns->selection_color((Fl_Color)62);
-  WhaWha_ampsns->labeltype(FL_NORMAL_LABEL);
-  WhaWha_ampsns->labelfont(0);
-  WhaWha_ampsns->labelsize(10);
-  WhaWha_ampsns->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_ampsns->maximum(127);
-  WhaWha_ampsns->step(1);
-  WhaWha_ampsns->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_ampsns->callback((Fl_Callback*)cb_WhaWha_ampsns);
-  WhaWha_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_ampsns->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_ampsns
-{ WhaWha_ampsnsinv = new RKR_Check_Button(8, 145, 70, 15, "A.S.I.");
-  WhaWha_ampsnsinv->tooltip("Amplitude Sensitivity Inverse");
-  WhaWha_ampsnsinv->box(FL_NO_BOX);
-  WhaWha_ampsnsinv->down_box(FL_BORDER_BOX);
-  WhaWha_ampsnsinv->color(FL_BACKGROUND_COLOR);
-  WhaWha_ampsnsinv->selection_color(FL_FOREGROUND_COLOR);
-  WhaWha_ampsnsinv->labeltype(FL_NORMAL_LABEL);
-  WhaWha_ampsnsinv->labelfont(0);
-  WhaWha_ampsnsinv->labelsize(10);
-  WhaWha_ampsnsinv->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_ampsnsinv->callback((Fl_Callback*)cb_WhaWha_ampsnsinv, (void*)(2));
-  WhaWha_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
-  WhaWha_ampsnsinv->when(FL_WHEN_RELEASE);
-} // RKR_Check_Button* WhaWha_ampsnsinv
-{ WhaWha_ftype = new RKR_Choice(95, 145, 59, 16, "F. Type");
-  WhaWha_ftype->tooltip("Filter Type");
-  WhaWha_ftype->box(FL_FLAT_BOX);
-  WhaWha_ftype->down_box(FL_BORDER_BOX);
-  WhaWha_ftype->color(FL_BACKGROUND_COLOR);
-  WhaWha_ftype->selection_color(FL_FOREGROUND_COLOR);
-  WhaWha_ftype->labeltype(FL_NORMAL_LABEL);
-  WhaWha_ftype->labelfont(0);
-  WhaWha_ftype->labelsize(10);
-  WhaWha_ftype->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_ftype->textsize(10);
-  WhaWha_ftype->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_ftype->callback((Fl_Callback*)cb_WhaWha_ftype);
-  WhaWha_ftype->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_ftype->when(FL_WHEN_RELEASE);
-  WhaWha_ftype->menu(menu_WhaWha_ftype);
-} // RKR_Choice* WhaWha_ftype
-{ WhaWha_smooth = new RKR_Slider(56, 165, 100, 10, "Smooth");
-  WhaWha_smooth->type(5);
-  WhaWha_smooth->box(FL_FLAT_BOX);
-  WhaWha_smooth->color((Fl_Color)178);
-  WhaWha_smooth->selection_color((Fl_Color)62);
-  WhaWha_smooth->labeltype(FL_NORMAL_LABEL);
-  WhaWha_smooth->labelfont(0);
-  WhaWha_smooth->labelsize(10);
-  WhaWha_smooth->labelcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_smooth->maximum(127);
-  WhaWha_smooth->step(1);
-  WhaWha_smooth->textcolor(FL_BACKGROUND2_COLOR);
-  WhaWha_smooth->callback((Fl_Callback*)cb_WhaWha_smooth);
-  WhaWha_smooth->align(Fl_Align(FL_ALIGN_LEFT));
-  WhaWha_smooth->when(FL_WHEN_CHANGED);
-} // RKR_Slider* WhaWha_smooth
+} // RKR_Choice* WahWah_lfotype
+{ WahWah_stdf = new RKR_Slider(56, 105, 100, 10, "Stereo Df");
+  WahWah_stdf->tooltip("LFO L/R Delay");
+  WahWah_stdf->type(5);
+  WahWah_stdf->box(FL_FLAT_BOX);
+  WahWah_stdf->color((Fl_Color)178);
+  WahWah_stdf->selection_color((Fl_Color)62);
+  WahWah_stdf->labeltype(FL_NORMAL_LABEL);
+  WahWah_stdf->labelfont(0);
+  WahWah_stdf->labelsize(10);
+  WahWah_stdf->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_stdf->maximum(127);
+  WahWah_stdf->step(1);
+  WahWah_stdf->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_stdf->callback((Fl_Callback*)cb_WahWah_stdf);
+  WahWah_stdf->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_stdf->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_stdf
+{ WahWah_dpth = new RKR_Slider(56, 117, 100, 10, "Depth");
+  WahWah_dpth->type(5);
+  WahWah_dpth->box(FL_FLAT_BOX);
+  WahWah_dpth->color((Fl_Color)178);
+  WahWah_dpth->selection_color((Fl_Color)62);
+  WahWah_dpth->labeltype(FL_NORMAL_LABEL);
+  WahWah_dpth->labelfont(0);
+  WahWah_dpth->labelsize(10);
+  WahWah_dpth->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_dpth->maximum(127);
+  WahWah_dpth->step(1);
+  WahWah_dpth->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_dpth->callback((Fl_Callback*)cb_WahWah_dpth);
+  WahWah_dpth->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_dpth->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_dpth
+{ WahWah_ampsns = new RKR_Slider(56, 129, 100, 10, "Amp.S.");
+  WahWah_ampsns->tooltip("Amplitude Sensitivity");
+  WahWah_ampsns->type(5);
+  WahWah_ampsns->box(FL_FLAT_BOX);
+  WahWah_ampsns->color((Fl_Color)178);
+  WahWah_ampsns->selection_color((Fl_Color)62);
+  WahWah_ampsns->labeltype(FL_NORMAL_LABEL);
+  WahWah_ampsns->labelfont(0);
+  WahWah_ampsns->labelsize(10);
+  WahWah_ampsns->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_ampsns->maximum(127);
+  WahWah_ampsns->step(1);
+  WahWah_ampsns->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_ampsns->callback((Fl_Callback*)cb_WahWah_ampsns);
+  WahWah_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_ampsns->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_ampsns
+{ WahWah_ampsnsinv = new RKR_Check_Button(8, 145, 70, 15, "A.S.I.");
+  WahWah_ampsnsinv->tooltip("Amplitude Sensitivity Inverse");
+  WahWah_ampsnsinv->box(FL_NO_BOX);
+  WahWah_ampsnsinv->down_box(FL_BORDER_BOX);
+  WahWah_ampsnsinv->color(FL_BACKGROUND_COLOR);
+  WahWah_ampsnsinv->selection_color(FL_FOREGROUND_COLOR);
+  WahWah_ampsnsinv->labeltype(FL_NORMAL_LABEL);
+  WahWah_ampsnsinv->labelfont(0);
+  WahWah_ampsnsinv->labelsize(10);
+  WahWah_ampsnsinv->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_ampsnsinv->callback((Fl_Callback*)cb_WahWah_ampsnsinv, (void*)(2));
+  WahWah_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  WahWah_ampsnsinv->when(FL_WHEN_RELEASE);
+} // RKR_Check_Button* WahWah_ampsnsinv
+{ WahWah_ftype = new RKR_Choice(95, 145, 59, 16, "F. Type");
+  WahWah_ftype->tooltip("Filter Type");
+  WahWah_ftype->box(FL_FLAT_BOX);
+  WahWah_ftype->down_box(FL_BORDER_BOX);
+  WahWah_ftype->color(FL_BACKGROUND_COLOR);
+  WahWah_ftype->selection_color(FL_FOREGROUND_COLOR);
+  WahWah_ftype->labeltype(FL_NORMAL_LABEL);
+  WahWah_ftype->labelfont(0);
+  WahWah_ftype->labelsize(10);
+  WahWah_ftype->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_ftype->textsize(10);
+  WahWah_ftype->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_ftype->callback((Fl_Callback*)cb_WahWah_ftype);
+  WahWah_ftype->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_ftype->when(FL_WHEN_RELEASE);
+  WahWah_ftype->menu(menu_WahWah_ftype);
+} // RKR_Choice* WahWah_ftype
+{ WahWah_smooth = new RKR_Slider(56, 165, 100, 10, "Smooth");
+  WahWah_smooth->type(5);
+  WahWah_smooth->box(FL_FLAT_BOX);
+  WahWah_smooth->color((Fl_Color)178);
+  WahWah_smooth->selection_color((Fl_Color)62);
+  WahWah_smooth->labeltype(FL_NORMAL_LABEL);
+  WahWah_smooth->labelfont(0);
+  WahWah_smooth->labelsize(10);
+  WahWah_smooth->labelcolor(FL_BACKGROUND2_COLOR);
+  WahWah_smooth->maximum(127);
+  WahWah_smooth->step(1);
+  WahWah_smooth->textcolor(FL_BACKGROUND2_COLOR);
+  WahWah_smooth->callback((Fl_Callback*)cb_WahWah_smooth);
+  WahWah_smooth->align(Fl_Align(FL_ALIGN_LEFT));
+  WahWah_smooth->when(FL_WHEN_CHANGED);
+} // RKR_Slider* WahWah_smooth
 position(X, Y);
 end();
 }

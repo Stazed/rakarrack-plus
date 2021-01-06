@@ -1393,8 +1393,8 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case 10://WahWah
-                WHAWHA->WhaWha_activar->value(rkr->WhaWha_Bypass);
-                WHAWHA->WhaWha_preset->do_callback(WHAWHA->WhaWha_preset, 1);
+                WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
+                WAHWAH->WahWah_preset->do_callback(WAHWAH->WahWah_preset, 1);
                 break;
 
             case 11://AlienWah
@@ -1714,7 +1714,7 @@ void RKRGUI::reordena()
     FLANGER->hide();
     REVERB->hide();
     PEQ->hide();
-    WHAWHA->hide();
+    WAHWAH->hide();
     ALIENWAH->hide();
     CABINET->hide();
     PAN->hide();
@@ -1922,15 +1922,15 @@ void RKRGUI::reordena()
 
             case 10:
 
-                WHAWHA->position(x[i], y[i]);
-                WHAWHA->WhaWha_activar->shortcut(s[i]);
+                WAHWAH->position(x[i], y[i]);
+                WAHWAH->WahWah_activar->shortcut(s[i]);
                 if (!rkr->deachide)
-                    WHAWHA->show();
-                if (rkr->WhaWha_Bypass)
+                    WAHWAH->show();
+                if (rkr->WahWah_Bypass)
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
-                        WHAWHA->show();
+                        WAHWAH->show();
                 }
                 else
                     rkr->active[i] = 0;
@@ -3192,8 +3192,8 @@ void RKRGUI::ActMIDI()
             case 0: // Unused
                 break;
             case 1:
-                WHAWHA->WhaWha_dpth->value(rkr->efx_WhaWha->getpar(WahWah_Depth));
-                WHAWHA->WhaWha_dpth->redraw();
+                WAHWAH->WahWah_dpth->value(rkr->efx_WahWah->getpar(WahWah_Depth));
+                WAHWAH->WahWah_dpth->redraw();
                 break;
             case 2:
                 DERELICT->derelict_drive->value(rkr->efx_Derelict->getpar(Dere_Drive));
@@ -3279,8 +3279,8 @@ void RKRGUI::ActMIDI()
                 HAR->har_int->redraw();
                 break;
             case 28:
-                WHAWHA->WhaWha_WD->value(Dry_Wet(rkr->efx_WhaWha->getpar(WahWah_DryWet)));
-                WHAWHA->WhaWha_WD->redraw();
+                WAHWAH->WahWah_WD->value(Dry_Wet(rkr->efx_WahWah->getpar(WahWah_DryWet)));
+                WAHWAH->WahWah_WD->redraw();
                 break;
             case 29:
                 OVRD->ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Dist_DryWet)));
@@ -3388,8 +3388,8 @@ void RKRGUI::ActMIDI()
                 MUSDELAY->musdelay_pan2->redraw();
                 break;
             case 66:
-                WHAWHA->WhaWha_pan->value(rkr->efx_WhaWha->getpar(WahWah_Pan) - 64);
-                WHAWHA->WhaWha_pan->redraw();
+                WAHWAH->WahWah_pan->value(rkr->efx_WahWah->getpar(WahWah_Pan) - 64);
+                WAHWAH->WahWah_pan->redraw();
                 break;
             case 67:
                 PAN->pan_pan->value(rkr->efx_Pan->getpar(Pan_Pan) - 64);
@@ -3424,8 +3424,8 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_freq->redraw();
                 break;
             case 75:
-                WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Tempo));
-                WHAWHA->WhaWha_freq->redraw();
+                WAHWAH->WahWah_freq->value(rkr->efx_WahWah->getpar(WahWah_LFO_Tempo));
+                WAHWAH->WahWah_freq->redraw();
                 break;
             case 76:
                 ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
@@ -3532,8 +3532,8 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_stdf->redraw();
                 break;
             case 102:
-                WHAWHA->WhaWha_stdf->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Stereo));
-                WHAWHA->WhaWha_stdf->redraw();
+                WAHWAH->WahWah_stdf->value(rkr->efx_WahWah->getpar(WahWah_LFO_Stereo));
+                WAHWAH->WahWah_stdf->redraw();
                 break;
             case 103:
                 ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
@@ -3556,8 +3556,8 @@ void RKRGUI::ActMIDI()
                 PHASER->phaser_rnd->redraw();
                 break;
             case 108:
-                WHAWHA->WhaWha_rnd->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Random));
-                WHAWHA->WhaWha_rnd->redraw();
+                WAHWAH->WahWah_rnd->value(rkr->efx_WahWah->getpar(WahWah_LFO_Random));
+                WAHWAH->WahWah_rnd->redraw();
                 break;
             case 109:
                 ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Rand));
@@ -3568,16 +3568,16 @@ void RKRGUI::ActMIDI()
                 PAN->pan_rnd->redraw();
                 break;
             case 111:
-                WHAWHA->WhaWha_ampsns->value(rkr->efx_WhaWha->getpar(WahWah_Sense));
-                WHAWHA->WhaWha_ampsns->redraw();
+                WAHWAH->WahWah_ampsns->value(rkr->efx_WahWah->getpar(WahWah_Sense));
+                WAHWAH->WahWah_ampsns->redraw();
                 break;
             case 112:
-                WHAWHA->WhaWha_ampsnsinv->value(rkr->efx_WhaWha->getpar(WahWah_ASI));
-                WHAWHA->WhaWha_ampsnsinv->redraw();
+                WAHWAH->WahWah_ampsnsinv->value(rkr->efx_WahWah->getpar(WahWah_ASI));
+                WAHWAH->WahWah_ampsnsinv->redraw();
                 break;
             case 113:
-                WHAWHA->WhaWha_smooth->value(rkr->efx_WhaWha->getpar(WahWah_Smooth));
-                WHAWHA->WhaWha_smooth->redraw();
+                WAHWAH->WahWah_smooth->value(rkr->efx_WahWah->getpar(WahWah_Smooth));
+                WAHWAH->WahWah_smooth->redraw();
                 break;
             case 114:
                 PHASER->phaser_phase->value(rkr->efx_Phaser->getpar(Phaser_Phase));
@@ -5012,8 +5012,8 @@ void RKRGUI::ActMIDI()
                 VIBE->vibe_lfotype->redraw();
                 break;
             case 470:
-                WHAWHA->WhaWha_lfotype->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Type));
-                WHAWHA->WhaWha_lfotype->redraw();
+                WAHWAH->WahWah_lfotype->value(rkr->efx_WahWah->getpar(WahWah_LFO_Type));
+                WAHWAH->WahWah_lfotype->redraw();
                 break;
         }
     }
@@ -5085,8 +5085,8 @@ void RKRGUI::ActOnOff()
                 PEQ->eqp_activar->do_callback();
                 break;
             case 10:
-                WHAWHA->WhaWha_activar->value(rkr->WhaWha_Bypass);
-                WHAWHA->WhaWha_activar->do_callback();
+                WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
+                WAHWAH->WahWah_activar->do_callback();
                 break;
             case 11:
                 ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
@@ -5274,7 +5274,7 @@ void RKRGUI::PutBackground()
     ECHO->image(InOut->image());
     CHORUS->image(InOut->image());
     FLANGER->image(InOut->image());
-    WHAWHA->image(InOut->image());
+    WAHWAH->image(InOut->image());
     ALIENWAH->image(InOut->image());
     PHASER->image(InOut->image());
     REVERB->image(InOut->image());
@@ -6046,10 +6046,10 @@ void RKRGUI::UpdateTGUI()
         PAN->pan_freq->redraw();
     }
 
-    if (rkr->WhaWha_Bypass)
+    if (rkr->WahWah_Bypass)
     {
-        WHAWHA->WhaWha_freq->value(rkr->efx_WhaWha->getpar(WahWah_LFO_Tempo));
-        WHAWHA->WhaWha_freq->redraw();
+        WAHWAH->WahWah_freq->value(rkr->efx_WahWah->getpar(WahWah_LFO_Tempo));
+        WAHWAH->WahWah_freq->redraw();
     }
 
     if (rkr->Alienwah_Bypass)
@@ -6912,10 +6912,10 @@ void RKRGUI::RandomPreset()
 
             case 10://WahWah
                 if (i < numEff)
-                    rkr->WhaWha_Bypass = 1;
+                    rkr->WahWah_Bypass = 1;
                 else
-                    rkr->WhaWha_Bypass = 0;
-                WHAWHA->WhaWha_activar->value(rkr->WhaWha_Bypass);
+                    rkr->WahWah_Bypass = 0;
+                WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
                 break;
 
             case 11://AlienWah

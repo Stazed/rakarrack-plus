@@ -64,7 +64,7 @@ RKR::RKR() :
     efx_Distorsion(NULL),
     efx_Overdrive(NULL),
     efx_Compressor(NULL),
-    efx_WhaWha(NULL),
+    efx_WahWah(NULL),
     efx_Alienwah(NULL),
     efx_Cabinet(NULL),
     efx_Pan(NULL),
@@ -139,7 +139,7 @@ RKR::RKR() :
     EQ1_Bypass(),
     EQ2_Bypass(),
     Compressor_Bypass(),
-    WhaWha_Bypass(),
+    WahWah_Bypass(),
     Alienwah_Bypass(),
     Cabinet_Bypass(),
     Pan_Bypass(),
@@ -189,7 +189,7 @@ RKR::RKR() :
     EQ1_B(),
     EQ2_B(),
     Compressor_B(),
-    WhaWha_B(),
+    WahWah_B(),
     Alienwah_B(),
     Cabinet_B(),
     Pan_B(),
@@ -639,7 +639,7 @@ RKR::RKR() :
     efx_EQ2 = new EQ(EQ2_PARAMETRIC, fSample_rate, period);
     efx_EQ1 = new EQ(EQ1_REGULAR, fSample_rate, period);
     efx_Compressor = new Compressor(fSample_rate, period);
-    efx_WhaWha = new WahWah(fSample_rate, period);
+    efx_WahWah = new WahWah(fSample_rate, period);
     efx_Alienwah = new Alienwah(fSample_rate, period);
     efx_Cabinet = new Cabinet(fSample_rate, period);
     efx_Pan = new Pan(fSample_rate, period);
@@ -1314,7 +1314,7 @@ RKR::~RKR()
     delete efx_EQ2;
     delete efx_EQ1;
     delete efx_Compressor;
-    delete efx_WhaWha;
+    delete efx_WahWah;
     delete efx_Alienwah;
     delete efx_Cabinet;
     delete efx_Pan;
@@ -1887,7 +1887,7 @@ RKR::cleanup_efx()
     efx_Flanger->cleanup();
     efx_Phaser->cleanup();
     efx_EQ2->cleanup();
-    efx_WhaWha->cleanup();
+    efx_WahWah->cleanup();
     efx_Alienwah->cleanup();
     efx_Cabinet->cleanup();
     efx_Pan->cleanup();
@@ -2123,10 +2123,10 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case 10:
-                if (WhaWha_Bypass)
+                if (WahWah_Bypass)
                 {
-                    efx_WhaWha->out(efxoutl, efxoutr);
-                    Vol_Efx(10, efx_WhaWha->outvolume);
+                    efx_WahWah->out(efxoutl, efxoutr);
+                    Vol_Efx(10, efx_WahWah->outvolume);
                 }
                 break;
 

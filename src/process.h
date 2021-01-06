@@ -159,7 +159,7 @@ public:
     class Distorsion *efx_Distorsion;
     class Distorsion *efx_Overdrive;
     class Compressor *efx_Compressor;
-    class WahWah *efx_WhaWha;
+    class WahWah *efx_WahWah;
     class Alienwah *efx_Alienwah;
     class Cabinet *efx_Cabinet;
     class Pan *efx_Pan;
@@ -237,7 +237,7 @@ public:
     int EQ1_Bypass;
     int EQ2_Bypass;
     int Compressor_Bypass;
-    int WhaWha_Bypass;
+    int WahWah_Bypass;
     int Alienwah_Bypass;
     int Cabinet_Bypass;
     int Pan_Bypass;
@@ -287,7 +287,7 @@ public:
     int EQ1_B;
     int EQ2_B;
     int Compressor_B;
-    int WhaWha_B;
+    int WahWah_B;
     int Alienwah_B;
     int Cabinet_B;
     int Pan_B;

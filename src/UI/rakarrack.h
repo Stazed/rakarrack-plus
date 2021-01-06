@@ -41,7 +41,7 @@ class PhaserGui; // forward declaration
 class FlangerGui; // forward declaration
 class ReverbGui; // forward declaration
 class PeqGui; // forward declaration
-class WhawhaGui; // forward declaration
+class WahwahGui; // forward declaration
 class AlienwahGui; // forward declaration
 class CabinetGui; // forward declaration
 class PanGui; // forward declaration
@@ -296,7 +296,7 @@ public:
   FlangerGui *FLANGER;
   ReverbGui *REVERB;
   PeqGui *PEQ;
-  WhawhaGui *WHAWHA;
+  WahwahGui *WAHWAH;
   AlienwahGui *ALIENWAH;
   CabinetGui *CABINET;
   PanGui *PAN;

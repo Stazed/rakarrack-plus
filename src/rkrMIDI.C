@@ -374,8 +374,8 @@ RKR::ActiveUn(int value)
         else EQ2_Bypass = 0;
         break;
     case 10:
-        if (inoff) WhaWha_Bypass = 1;
-        else WhaWha_Bypass = 0;
+        if (inoff) WahWah_Bypass = 1;
+        else WahWah_Bypass = 0;
         break;
     case 11:
         if (inoff) Alienwah_Bypass = 1;
@@ -578,7 +578,7 @@ RKR::checkonoff(int miraque)
         if (EQ2_Bypass) return (0);
         break;
     case 10:
-        if (WhaWha_Bypass) return (0);
+        if (WahWah_Bypass) return (0);
         break;
     case 11:
         if (Alienwah_Bypass) return (0);
@@ -971,7 +971,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 1:
-        efx_WhaWha->changepar(WahWah_Depth, value);
+        efx_WahWah->changepar(WahWah_Depth, value);
         break;
     case 2:
         efx_Derelict->changepar(Dere_Drive, value);
@@ -1068,7 +1068,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 28:
-        efx_WhaWha->changepar(WahWah_DryWet, Dry_Wet(value));
+        efx_WahWah->changepar(WahWah_DryWet, Dry_Wet(value));
         break;
 
     case 29:
@@ -1178,7 +1178,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 66:
-        efx_WhaWha->changepar(WahWah_Pan, value);
+        efx_WahWah->changepar(WahWah_Pan, value);
         break;
 
     case 67:
@@ -1214,7 +1214,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 75:
-        efx_WhaWha->changepar(WahWah_LFO_Tempo, ret_Tempo(value));
+        efx_WahWah->changepar(WahWah_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 76:
@@ -1322,7 +1322,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 102:
-        efx_WhaWha->changepar(WahWah_LFO_Stereo, value);
+        efx_WahWah->changepar(WahWah_LFO_Stereo, value);
         break;
 
     case 103:
@@ -1346,7 +1346,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 108:
-        efx_WhaWha->changepar(WahWah_LFO_Random, value);
+        efx_WahWah->changepar(WahWah_LFO_Random, value);
         break;
 
     case 109:
@@ -1358,15 +1358,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 111:
-        efx_WhaWha->changepar(WahWah_Sense, value);
+        efx_WahWah->changepar(WahWah_Sense, value);
         break;
 
     case 112:
-        efx_WhaWha->changepar(WahWah_ASI, value);
+        efx_WahWah->changepar(WahWah_ASI, value);
         break;
 
     case 113:
-        efx_WhaWha->changepar(WahWah_Smooth, value);
+        efx_WahWah->changepar(WahWah_Smooth, value);
         break;
 
     case 114:
@@ -2831,7 +2831,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 470:
-        efx_WhaWha->changepar(WahWah_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        efx_WahWah->changepar(WahWah_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
     }
 }
