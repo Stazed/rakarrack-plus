@@ -319,7 +319,7 @@ RKR::RKR() :
     Stomp_down_q(),
     sw_stat(),
     MIDIway(),
-    NumParams(423),
+    NumParams(445),
     NumEffects(47),
     fontsize(C_DEFAULT_FONT_SIZE),
     swidth(),

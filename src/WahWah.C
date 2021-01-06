@@ -231,15 +231,12 @@ WahWah::setpreset(int npreset)
     }
     else
     {
-
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, presets[npreset][n]);
     }
     //          for (int i=0;i<5;i++){
     //              printf("freq=%d  amp=%d  q=%d\n",filterpars->Pvowels[0].formants[i].freq,filterpars->Pvowels[0].formants[i].amp,filterpars->Pvowels[0].formants[i].q);
     //          };
-
-    Ppreset = npreset;
 }
 
 void

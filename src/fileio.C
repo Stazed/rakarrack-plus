@@ -124,6 +124,15 @@ const int presets_default[48][MAX_PRESET_SIZE] = {
     {64, 64, -64, 64, -64, 64, -64, 64, -64, 0, 0, 0, 14, 0, 0, 0, 0, 4, 0}
 };
 
+/**
+ *  Bank file loading.
+ * 
+ * @param buf
+ *  Buffer to load effect parameters.
+ * 
+ * @param j
+ *  The effect number to load.
+ */
 void RKR::putbuf(char *buf, int j)
 {
     char *cfilename;
@@ -405,7 +414,7 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case 34:
-        //CoilCrafter
+        //ShelfBoost
         sscanf(buf, "%d,%d,%d,%d,%d,%d\n",
                &lv[35][0], &lv[35][1], &lv[35][2], &lv[35][3], &lv[35][4],
                &ShelfBoost_B);
@@ -516,6 +525,15 @@ void RKR::putbuf(char *buf, int j)
     free(cfilename);
 }
 
+/**
+ *  Bank file saving.
+ * 
+ * @param buf
+ *  Buffer to hold efx parameters
+ * 
+ * @param j
+ *  The effect number to load
+ */
 void RKR::getbuf(char *buf, int j)
 {
     switch (j)
@@ -642,8 +660,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_WhaWha->getpar(WahWah_LFO_Type), efx_WhaWha->getpar(WahWah_LFO_Stereo),
                 efx_WhaWha->getpar(WahWah_Depth), efx_WhaWha->getpar(WahWah_Sense),
                 efx_WhaWha->getpar(WahWah_ASI), efx_WhaWha->getpar(WahWah_Smooth),
-                // efx_WhaWha->getpar(WahWah_Mode)  // not saved !!!???
-                efx_WhaWha->Ppreset, WhaWha_Bypass);
+                efx_WhaWha->getpar(WahWah_Mode), WhaWha_Bypass);
         break;
 
     case 11:
@@ -1459,8 +1476,7 @@ RKR::Actualizar_Audio()
 
             WhaWha_Bypass = 0;
             efx_WhaWha->cleanup();
-            efx_WhaWha->setpreset(lv[11][10]);
-            for (i = 0; i <= 9; i++)
+            for (i = 0; i <= 10; i++)
                 efx_WhaWha->changepar(i, lv[11][i]);
             WhaWha_Bypass = WhaWha_B;
             break;
@@ -2224,7 +2240,7 @@ RKR::Preset_to_Bank(int i)
         lv[6][j] = efx_Distorsion->getpar(j);
     for (j = 0; j <= 8; j++)
         lv[9][j] = efx_Compressor->getpar(j);
-    for (j = 0; j <= 9; j++)
+    for (j = 0; j <= 10; j++)
         lv[11][j] = efx_WhaWha->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[12][j] = efx_Alienwah->getpar(j);
@@ -2327,9 +2343,6 @@ RKR::Preset_to_Bank(int i)
             Bank[i].lv[j][k] = lv[j][k];
         }
     }
-
-    Bank[i].lv[11][10] = efx_WhaWha->Ppreset;
-
 
     Bank[i].lv[0][19] = Reverb_Bypass;
     Bank[i].lv[1][19] = Echo_Bypass;
