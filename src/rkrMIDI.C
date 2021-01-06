@@ -958,25 +958,78 @@ RKR::process_midi_controller_events(int parameter, int value)
     if(quality_update)
         return;
     
-    // for real parameter changes, flag need for a GUI update
+    // Flags used for Gui update from MIDI control
     if (parameter > 0)
     {
-        Mcontrol[parameter] = 1;
-        Mvalue = 1;
+        Mcontrol[parameter] = 1;    // The parameter number that needs updating
+        Mvalue = 1;                 // Flag to indicate at least one parameter needs update
     }
 
     switch (parameter)
     {
+    case 0: // Unused
+        break;
+
+    case 1:
+        efx_WhaWha->changepar(WahWah_Depth, value);
+        break;
+    case 2:
+        efx_Derelict->changepar(Dere_Drive, value);
+        break;
+
+    case 3:
+        efx_Derelict->changepar(Dere_Level, value);
+        break;
+
+    case 4:
+        efx_Derelict->changepar(Dere_LPF, ret_LPF(value));
+        break;
+
+    case 5:
+        efx_Derelict->changepar(Dere_HPF, ret_HPF(value));
+        break;
+
+    case 6:
+        efx_Derelict->changepar(Dere_Color, value);
+        break;
+
     case 7:
         Master_Volume =
                 (float) value / 128.0f;
         calculavol(2);
         break;
 
-    case 1:
-        efx_WhaWha->changepar(WahWah_Depth, value);
+    case 8:
+        efx_Derelict->changepar(Dere_Suboctave, value);
         break;
 
+    case 9:
+        efx_Distorsion->changepar(Dist_Suboctave, value);
+        break;
+
+    case 10:    // Unused
+    case 11:    // Unused
+        break;
+
+    case 12:
+        Fraction_Bypass = (float) value / 127.0f;
+        break;
+
+    case 13:    // Unused
+        break;
+
+    case 14:
+        Input_Gain = (float) value / 128.0f;
+        calculavol(1);
+        break;
+
+    case 15:    // Unused
+    case 16:    // Unused
+    case 17:    // Unused
+    case 18:    // Unused
+    case 19:    // Unused
+        break;
+                        
     case 20:
         efx_Alienwah->changepar(Alien_Depth, value);
         break;
@@ -1030,6 +1083,45 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_Har->changepar(Harm_DryWet, Dry_Wet(value));
         break;
 
+    case 32:    // Unused
+    case 33:    // Unused
+    case 34:    // Unused
+    case 35:    // Unused
+    case 36:    // Unused
+    case 37:    // Unused
+    case 38:    // Unused
+    case 39:    // Unused
+    case 40:    // Unused
+    case 41:    // Unused
+    case 42:    // Unused
+    case 43:    // Unused
+    case 44:    // Unused
+    case 45:    // Unused
+        break;
+
+    case 46:
+        efx_Echo->changepar(Echo_Pan, value);
+        break;
+
+    case 47:
+        efx_Overdrive->changepar(Dist_Pan, value);
+        break;
+
+    case 48:
+        efx_Distorsion->changepar(Dist_Pan, value);
+        break;
+
+    case 49:
+        efx_Har->changepar(Harm_Pan, value);
+        break;
+
+    case 50:
+        efx_Chorus->changepar(Chorus_Pan, value);
+        break;
+
+    case 51:
+        efx_Flanger->changepar(Chorus_Pan, value);
+        break;
     case 52:
         efx_Chorus->changepar(Chorus_DryWet, Dry_Wet(value));
         break;
@@ -1062,30 +1154,6 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_Echo->changepar(Echo_DryWet, Dry_Wet(value));
         break;
 
-    case 46:
-        efx_Echo->changepar(Echo_Pan, value);
-        break;
-
-    case 47:
-        efx_Overdrive->changepar(Dist_Pan, value);
-        break;
-
-    case 48:
-        efx_Distorsion->changepar(Dist_Pan, value);
-        break;
-
-    case 49:
-        efx_Har->changepar(Harm_Pan, value);
-        break;
-
-    case 50:
-        efx_Chorus->changepar(Chorus_Pan, value);
-        break;
-
-    case 51:
-        efx_Flanger->changepar(Chorus_Pan, value);
-        break;
-
     case 60:
         efx_Phaser->changepar(Phaser_Pan, value);
         break;
@@ -1100,6 +1168,9 @@ RKR::process_midi_controller_events(int parameter, int value)
 
     case 63:
         efx_Rev->changepar(Reverb_Pan, value);
+        break;
+
+    case 64:    // Unused
         break;
 
     case 65:
@@ -1354,41 +1425,8 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_Derelict->changepar(Dere_LR_Cross, value);
         break;
 
-    case 2:
-        efx_Derelict->changepar(Dere_Drive, value);
-        break;
-
-    case 3:
-        efx_Derelict->changepar(Dere_Level, value);
-        break;
-
-    case 4:
-        efx_Derelict->changepar(Dere_LPF, ret_LPF(value));
-        break;
-
-    case 5:
-        efx_Derelict->changepar(Dere_HPF, ret_HPF(value));
-        break;
-
-    case 6:
-        efx_Derelict->changepar(Dere_Color, value);
-        break;
-
-    case 8:
-        efx_Derelict->changepar(Dere_Suboctave, value);
-        break;
-
-    case 9:
-        efx_Distorsion->changepar(Dist_Suboctave, value);
-        break;
-
-    case 12:
-        Fraction_Bypass = (float) value / 127.0f;
-        break;
-
-    case 14:
-        Input_Gain = (float) value / 128.0f;
-        calculavol(1);
+    case 128:   // Unused
+    case 129:   // Unused
         break;
 
     case 130:

@@ -3166,39 +3166,85 @@ void RKRGUI::Chord(int eff)
     }
 }
 
+/**
+ *  Adjust Gui parameters from MIDI control action.
+ */
 void RKRGUI::ActMIDI()
 {
-    // adjust gui parameters from midi incoming action
-
+    // Mvalue is flag to indicate at least one parameter needs update
     if (rkr->Mvalue == 0)
         return;
 
-    for (int i = 1; i < (rkr->NumParams + 26); i++)
+    // Index starts at 1, since case 0 is unused
+    for (int i = 1; i < (C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS); i++)
     {
+        // Mcontrol is flag for each individual parameter
+        // 1 = the parameter needs update, 0 = no update needed
         if (rkr->Mcontrol[i] == 0)
         {
-            continue;
+            continue;   // No gui update needed
         }
 
-        rkr->Mcontrol[i] = 0;
+        rkr->Mcontrol[i] = 0;   // clear the parameter flag
 
         switch (i)
         {
-            case 12:
-                Balance->value(rkr->Fraction_Bypass * 100.0);
-                Balance->redraw();
+            case 0: // Unused
                 break;
-            case 14:
-                Nivel_Entrada->value((int) (rkr->Input_Gain * 100.0) - 50);
-                Nivel_Entrada->redraw();
+            case 1:
+                WHAWHA->WhaWha_dpth->value(rkr->efx_WhaWha->getpar(WahWah_Depth));
+                WHAWHA->WhaWha_dpth->redraw();
+                break;
+            case 2:
+                DERELICT->derelict_drive->value(rkr->efx_Derelict->getpar(Dere_Drive));
+                DERELICT->derelict_drive->redraw();
+                break;
+            case 3:
+                DERELICT->derelict_level->value(rkr->efx_Derelict->getpar(Dere_Level));
+                DERELICT->derelict_level->redraw();
+                break;
+            case 4:
+                DERELICT->derelict_lpf->value(rkr->efx_Derelict->getpar(Dere_LPF));
+                DERELICT->derelict_lpf->redraw();
+                break;
+            case 5:
+                DERELICT->derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));
+                DERELICT->derelict_hpf->redraw();
+                break;
+            case 6:
+                DERELICT->derelict_st->value(rkr->efx_Derelict->getpar(Dere_Color));
+                DERELICT->derelict_st->redraw();
                 break;
             case 7:
                 Nivel_Salida->value((int) (rkr->Master_Volume * 100.0) - 50);
                 Nivel_Salida->redraw();
                 break;
-            case 1:
-                WHAWHA->WhaWha_dpth->value(rkr->efx_WhaWha->getpar(WahWah_Depth));
-                WHAWHA->WhaWha_dpth->redraw();
+            case 8:
+                DERELICT->derelict_oct->value(rkr->efx_Derelict->getpar(Dere_Suboctave));
+                DERELICT->derelict_oct->redraw();
+                break;
+            case 9:
+                DIST->dist_oct->value(rkr->efx_Distorsion->getpar(Dist_Suboctave));
+                DIST->dist_oct->redraw();
+                break;
+            case 10:    // Unused
+            case 11:    // Unused
+                break;
+            case 12:
+                Balance->value(rkr->Fraction_Bypass * 100.0);
+                Balance->redraw();
+                break;
+            case 13:    // Unused
+                break;
+            case 14:
+                Nivel_Entrada->value((int) (rkr->Input_Gain * 100.0) - 50);
+                Nivel_Entrada->redraw();
+                break;
+            case 15:    // Unused
+            case 16:    // Unused
+            case 17:    // Unused
+            case 18:    // Unused
+            case 19:    // Unused
                 break;
             case 20:
                 ALIENWAH->Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
@@ -3248,6 +3294,45 @@ void RKRGUI::ActMIDI()
                 HAR->har_WD->value(Dry_Wet(rkr->efx_Har->getpar(Harm_DryWet)));
                 HAR->har_WD->redraw();
                 break;
+            case 32:    // Unused
+            case 33:    // Unused
+            case 34:    // Unused
+            case 35:    // Unused
+            case 36:    // Unused
+            case 37:    // Unused
+            case 38:    // Unused
+            case 39:    // Unused
+            case 40:    // Unused
+            case 41:    // Unused
+            case 42:    // Unused
+            case 43:    // Unused
+            case 44:    // Unused
+            case 45:    // Unused
+                break;
+            case 46:
+                ECHO->echo_pan->value(rkr->efx_Echo->getpar(Echo_Pan) - 64);
+                ECHO->echo_pan->redraw();
+                break;
+            case 47:
+                OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(Dist_Pan) - 64);
+                OVRD->ovrd_pan->redraw();
+                break;
+            case 48:
+                DIST->dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan) - 64);
+                DIST->dist_pan->redraw();
+                break;
+            case 49:
+                HAR->har_pan->value(rkr->efx_Har->getpar(Harm_Pan) - 64);
+                HAR->har_pan->redraw();
+                break;
+            case 50:
+                CHORUS->chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan) - 64);
+                CHORUS->chorus_pan->redraw();
+                break;
+            case 51:
+                FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(Chorus_Pan) - 64);
+                FLANGER->flanger_pan->redraw();
+                break;
             case 52:
                 CHORUS->chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(Chorus_DryWet)));
                 CHORUS->chorus_WD->redraw();
@@ -3280,30 +3365,6 @@ void RKRGUI::ActMIDI()
                 ECHO->echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(Echo_DryWet)));
                 ECHO->echo_WD->redraw();
                 break;
-            case 46:
-                ECHO->echo_pan->value(rkr->efx_Echo->getpar(Echo_Pan) - 64);
-                ECHO->echo_pan->redraw();
-                break;
-            case 47:
-                OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(Dist_Pan) - 64);
-                OVRD->ovrd_pan->redraw();
-                break;
-            case 48:
-                DIST->dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan) - 64);
-                DIST->dist_pan->redraw();
-                break;
-            case 49:
-                HAR->har_pan->value(rkr->efx_Har->getpar(Harm_Pan) - 64);
-                HAR->har_pan->redraw();
-                break;
-            case 50:
-                CHORUS->chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan) - 64);
-                CHORUS->chorus_pan->redraw();
-                break;
-            case 51:
-                FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(Chorus_Pan) - 64);
-                FLANGER->flanger_pan->redraw();
-                break;
             case 60:
                 PHASER->phaser_pan->value(rkr->efx_Phaser->getpar(Phaser_Pan) - 64);
                 PHASER->phaser_pan->redraw();
@@ -3319,6 +3380,8 @@ void RKRGUI::ActMIDI()
             case 63:
                 REVERB->reverb_pan->value(rkr->efx_Rev->getpar(Reverb_Pan) - 64);
                 REVERB->reverb_pan->redraw();
+                break;
+            case 64:    // Unused
                 break;
             case 65:
                 MUSDELAY->musdelay_pan2->value(rkr->efx_MusDelay->getpar(Music_Pan_2) - 64);
@@ -3571,33 +3634,8 @@ void RKRGUI::ActMIDI()
                 DERELICT->derelict_LRc->value(rkr->efx_Derelict->getpar(Dere_LR_Cross));
                 DERELICT->derelict_LRc->redraw();
                 break;
-            case 2:
-                DERELICT->derelict_drive->value(rkr->efx_Derelict->getpar(Dere_Drive));
-                DERELICT->derelict_drive->redraw();
-                break;
-            case 3:
-                DERELICT->derelict_level->value(rkr->efx_Derelict->getpar(Dere_Level));
-                DERELICT->derelict_level->redraw();
-                break;
-            case 4:
-                DERELICT->derelict_lpf->value(rkr->efx_Derelict->getpar(Dere_LPF));
-                DERELICT->derelict_lpf->redraw();
-                break;
-            case 5:
-                DERELICT->derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));
-                DERELICT->derelict_hpf->redraw();
-                break;
-            case 6:
-                DERELICT->derelict_st->value(rkr->efx_Derelict->getpar(Dere_Color));
-                DERELICT->derelict_st->redraw();
-                break;
-            case 8:
-                DERELICT->derelict_oct->value(rkr->efx_Derelict->getpar(Dere_Suboctave));
-                DERELICT->derelict_oct->redraw();
-                break;
-            case 9:
-                DIST->dist_oct->value(rkr->efx_Distorsion->getpar(Dist_Suboctave));
-                DIST->dist_oct->redraw();
+            case 128:   // Unused
+            case 129:   // Unused
                 break;
             case 130:
                 EQ->eq_Gain->value(rkr->efx_EQ1->getpar(0) - 64);
@@ -5624,12 +5662,12 @@ void RKRGUI::FillML(/*int type*/)
     switch (rkr->ML_filter)
     {
         case 0:
-            for (int i = 0; i < rkr->NumParams; i++)
+            for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
                 MIDILearn->Epar->add(rkr->efx_params[i].Nom);
             break;
 
         case 1:
-            for (int i = 0; i < rkr->NumParams; i++)
+            for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
             {
                 if (rkr->efx_params[i].Effect == 50)
                 {
@@ -5641,7 +5679,7 @@ void RKRGUI::FillML(/*int type*/)
 
             for (int j = 0; j < 10; j++)
             {
-                for (int i = 0; i < rkr->NumParams; i++)
+                for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
                 {
                     if (rkr->efx_params[i].Effect == rkr->efx_order[j])
                     {

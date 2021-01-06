@@ -319,7 +319,6 @@ RKR::RKR() :
     Stomp_down_q(),
     sw_stat(),
     MIDIway(),
-    NumParams(445),
     NumEffects(47),
     fontsize(C_DEFAULT_FONT_SIZE),
     swidth(),
@@ -778,8 +777,6 @@ RKR::RKR() :
     }
 
 
-    NumParams = 445;
-
     {
         static const char *los_params[] = {
 
@@ -1120,7 +1117,6 @@ RKR::RKR() :
 
             "Reverb Dry/Wet", "57", "8",
             "Reverb Pan", "63", "8",
-            
             "Reverb Time", "437", "8",
             "Reverb Initial Delay", "438", "8",
             "Reverb Del. E/R", "439", "8",
@@ -1280,7 +1276,10 @@ RKR::RKR() :
             "WahWah Amp S.I.", "112", "10",
             "WahWah Smooth", "113", "10",
         };
-        for (int i = 0; i < NumParams; i++)
+        
+        // If any additional parameters are added, then the constant
+        // C_MC_PARAMETER_SIZE must be adjusted.
+        for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
         {
             strcpy(efx_params[i].Nom, los_params[i * 3]);
             sscanf(los_params[i * 3 + 1], "%d", &efx_params[i].Ato);

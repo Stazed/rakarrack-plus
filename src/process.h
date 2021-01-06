@@ -58,10 +58,22 @@
 #include "beattracker.h"
 #include <jack/jack.h>
 
+/**
+ * The total Number of MIDI controllable parameters.
+ * This the total of listed items in the MIDI learn window.
+ * If any new parameters are added, this must be adjusted.
+ */
+const int C_MC_PARAMETER_SIZE = 445;
+
+/**
+ * Magic number 26 is the Unused cases from the default MIDI control
+ * (0, 10, 11, 13, (15 > 19), (32 > 45), 64) = 24 -- Unused
+ * plus 128, 129 also Unused  = 24 + 2 = 26
+ */
+const int C_MC_UNUSED_PARAMETERS = 26;
+
 class RKR
 {
-
-
 
 public:
 
@@ -422,7 +434,6 @@ public:
 
     int sw_stat;
     int MIDIway;
-    int NumParams;
     int NumEffects;
     int fontsize;
     int swidth;
