@@ -1370,7 +1370,7 @@ RKR::Actualizar_Audio()
 
     int i = 0;
 
-    for (int j = 0; j < NumEffects; j++)
+    for (int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
         switch (j)
         {
@@ -2008,7 +2008,7 @@ RKR::New()
     Bypass = 0;
     memset(lv, 0, sizeof (lv));
 
-    for (int j = 0; j <= NumEffects; j++)
+    for (int j = 0; j <= C_NUMBER_EFFECTS; j++)
     { //  <= NumEffects because presets_default has one extra #10 for order
         for (int k = 0; k < MAX_PRESET_SIZE; k++)
         {
@@ -2096,7 +2096,7 @@ RKR::New_Bank()
         Bank[i].Bypass = 0;
         memset(Bank[i].lv, 0, sizeof (Bank[i].lv));
 
-        for (int j = 0; j <= NumEffects; j++)
+        for (int j = 0; j <= C_NUMBER_EFFECTS; j++)
         { // <= NumEffects because presets_default has one extra #10 for order
             for (int k = 0; k < MAX_PRESET_SIZE; k++)
             {
@@ -2123,7 +2123,7 @@ RKR::Bank_to_Preset(int i)
     memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
     strcpy(efx_Echotron->Filename, Bank[i].EchoFiname);
 
-    for (int j = 0; j <= NumEffects; j++)
+    for (int j = 0; j <= C_NUMBER_EFFECTS; j++)
     { // <= NumEffects because presets_default has one extra #10 for order
         for (int k = 0; k < 20; k++)
         {
@@ -2336,7 +2336,7 @@ RKR::Preset_to_Bank(int i)
     lv[13][1] = efx_Cabinet->getpar(0);
 
 
-    for (j = 0; j <= NumEffects; j++)
+    for (j = 0; j <= C_NUMBER_EFFECTS; j++)
     {
         for (int k = 0; k < 19; k++)
         {

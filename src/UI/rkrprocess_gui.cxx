@@ -1337,7 +1337,7 @@ void RKRGUI::Put_Loaded()
         switch(rkr->efx_order[i]){
      */
 
-    for (int i = 0; i < rkr->NumEffects; i++)
+    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
     {
         switch (i)
         {
@@ -6209,7 +6209,7 @@ int RKRGUI::Busca_Eff(int num)
     // Busca_Eff
     int i = 0;
 
-    for (i = 0; i < rkr->NumEffects; i++)
+    for (i = 0; i < C_NUMBER_EFFECTS; i++)
     {
         if (rkr->efx_names[i].Pos == num)
         {
@@ -6228,7 +6228,7 @@ void RKRGUI::Fill_Avail(int filter)
 
     int t = 1;
 
-    for (int i = 0; i < rkr->NumEffects; i++)
+    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
     {
         int k = 0;
         for (int j = 0; j < 10; j++)
@@ -6797,14 +6797,14 @@ void RKRGUI::RandomPreset()
  
     S_new->do_callback();
 
-    SelEff[0] = (int) (RND * rkr->NumEffects);
+    SelEff[0] = (int) (RND * C_NUMBER_EFFECTS);
 
     for (int i = 1; i < 10; i++)
     {
         int l = 0;
         while (l == 0)
         {
-            SelEff[i] = (int) (RND * rkr->NumEffects);
+            SelEff[i] = (int) (RND * C_NUMBER_EFFECTS);
             for (int j = 0; j < i; j++)
             {
                 if (SelEff[j] == SelEff[i])

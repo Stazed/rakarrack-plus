@@ -319,7 +319,6 @@ RKR::RKR() :
     Stomp_down_q(),
     sw_stat(),
     MIDIway(),
-    NumEffects(47),
     fontsize(C_DEFAULT_FONT_SIZE),
     swidth(),
     sheight(),
@@ -977,7 +976,7 @@ RKR::put_order_in_rack()
         "WahWah", "10", "16"
     };
 
-    for (int i = 0; i < NumEffects * 3; i += 3)
+    for (int i = 0; i < C_NUMBER_EFFECTS * 3; i += 3)
     {
         strcpy(efx_names[i / 3].Nom, los_names[i]);
         sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);

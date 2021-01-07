@@ -72,6 +72,11 @@ const int C_MC_PARAMETER_SIZE = 445;
  */
 const int C_MC_UNUSED_PARAMETERS = 26;
 
+/**
+ * The number of rack effects.
+ */
+const int C_NUMBER_EFFECTS = 47;
+
 class RKR
 {
 
@@ -440,7 +445,6 @@ public:
 
     int sw_stat;
     int MIDIway;
-    int NumEffects;
     int fontsize;
     int swidth;
     int sheight;
