@@ -60,7 +60,7 @@
 
 /**
  * The total Number of MIDI controllable parameters.
- * This the total of listed items in the MIDI learn window.
+ * This is the total of listed items in the MIDI learn window.
  * If any new parameters are added, this must be adjusted.
  */
 const int C_MC_PARAMETER_SIZE = 445;
@@ -124,6 +124,7 @@ public:
     void ConnectMIDI ();
     void ActiveUn(int value);
     void ActOnOff();
+    int jack_open_client();
     void jack_process_midievents (jack_midi_event_t *midievent);
     void process_midi_controller_events(int parameter, int value);
     int ret_Tempo(int value);

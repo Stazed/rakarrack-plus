@@ -436,32 +436,12 @@ RKR::RKR() :
     jack_poi()
 
 {
-    char temp[256];
-    error_num = 0;
-    nojack = 0;
-    memset(Mcontrol, 0, sizeof (Mcontrol));
-    sprintf(temp, "%s", jack_client_name);
-
-#ifdef JACK_SESSION
-    jackclient = jack_client_open(temp, JackSessionID, NULL, s_uuid);
-#else
-    jackclient = jack_client_open(temp, options, &status, NULL);
-#endif
-
-
-    if (jackclient == NULL)
+    if(!jack_open_client())
     {
-        fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
-        nojack = 1;
-        exitwithhelp = 1;
         return;
     }
 
-    strcpy(jackcliname, jack_get_client_name(jackclient));
-
-    J_SAMPLE_RATE = jack_get_sample_rate(jackclient);
-    J_PERIOD = jack_get_buffer_size(jackclient);
-
+    // User preferences
     rakarrack.get(PrefNom("Disable Warnings"), mess_dis, 0);
     rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
     rakarrack.get(PrefNom("UpSampling"), upsample, 0);
@@ -544,6 +524,7 @@ RKR::RKR() :
     rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);
     rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
 
+    char temp[256];
     memset(temp, 0, sizeof (temp));
     char j_names[128];
 
@@ -586,7 +567,9 @@ RKR::RKR() :
         
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
     }
+    // end user preferences
 
+    // initialize 
     bogomips = 0.0f;
     Get_Bogomips();
     //int i = Get_Bogomips();     // compiler warning i not used
@@ -623,6 +606,7 @@ RKR::RKR() :
     memset(m_ticks, 0, sizeof (float)*period);
     memset(interpbuf, 0, sizeof (float)*period);
 
+    // EQ1, EQ2
     Fpre = new FPreset();
 
     DC_Offsetl = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
@@ -699,7 +683,7 @@ RKR::RKR() :
     UserRealName = (char *) malloc(sizeof (char) * 128);
     memset(UserRealName, 0, sizeof (char) * 128);
 
-    // Names
+    // Names - Put Order in Rack
 
     /*
     //Filter
@@ -775,9 +759,10 @@ RKR::RKR() :
             sscanf(los_names[i + 2], "%d", &efx_names[i / 3].Type);
         }
     }
+    // End Put Order in Rack
 
 
-    {
+    {// MIDI Learn Parameter list
         static const char *los_params[] = {
 
             "Alienwah Dry/Wet", "55", "11",
@@ -1285,7 +1270,7 @@ RKR::RKR() :
             sscanf(los_params[i * 3 + 1], "%d", &efx_params[i].Ato);
             sscanf(los_params[i * 3 + 2], "%d", &efx_params[i].Effect);
         }
-    }
+    }   // MIDI Learn Parameter list
 
     // Init Preset
     New();
@@ -1459,6 +1444,41 @@ RKR::init_rkr()
     HarmRecNote->reconota = -1;
     StHarmRecNote->reconota = -1;
     RingRecNote->reconota = -1;
+}
+
+/**
+ *  Opens a jack client for this session.
+ * 
+ * @return 
+ *      0 if client cannot be opened.
+ *      1 if valid client is opened.
+ */
+int
+RKR::jack_open_client()
+{
+    char temp[256];
+    sprintf(temp, "%s", jack_client_name);
+
+#ifdef JACK_SESSION
+    jackclient = jack_client_open(temp, JackSessionID, NULL, s_uuid);
+#else
+    jackclient = jack_client_open(temp, options, &status, NULL);
+#endif
+
+    if (jackclient == NULL)
+    {
+        fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
+        nojack = 1;
+        exitwithhelp = 1;
+        return 0;
+    }
+
+    strcpy(jackcliname, jack_get_client_name(jackclient));
+
+    J_SAMPLE_RATE = jack_get_sample_rate(jackclient);
+    J_PERIOD = jack_get_buffer_size(jackclient);
+    
+    return 1;
 }
 
 void
