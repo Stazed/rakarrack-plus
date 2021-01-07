@@ -117,6 +117,10 @@ public:
     void add_metro();
     void init_rkr ();
     void load_user_preferences();
+    void instantiate_effects();
+    void initialize_arrays();
+    void put_order_in_rack();
+    void MIDI_control();
     int Message (int prio, const char *labelwin, const char *message_text);
     char *PrefNom (const char *dato);
     void EQ1_setpreset (int npreset);

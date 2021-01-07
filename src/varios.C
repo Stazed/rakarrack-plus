@@ -113,6 +113,14 @@ RKR::PrefNom(const char *dato)
     return (tmpprefname);
 }
 
+/**
+ *  Checks CPU usage
+ * 
+ * @return 
+ *  1 if /proc/cpuinfo can be opened.
+ *  0 if cannot be opened.
+ *  Currently not used.
+ */
 int
 RKR::Get_Bogomips()
 {

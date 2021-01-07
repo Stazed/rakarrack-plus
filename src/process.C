@@ -412,7 +412,7 @@ RKR::RKR() :
     val_ir_sum(),
     old_a_sum(),
     val_a_sum(),
-    bogomips(),
+    bogomips(0.0f),
     looper_size(),
     nfreq_old(),
     afreq_old(),
@@ -438,720 +438,31 @@ RKR::RKR() :
 {
     if(!jack_open_client())
     {
-        return;
+        return; // If we don't have a jack client then quit with message
     }
     
     load_user_preferences();
 
-    // initialize 
-    bogomips = 0.0f;
     Get_Bogomips();
-    //int i = Get_Bogomips();     // compiler warning i not used
-
-    efxoutl = (float *) malloc(sizeof (float) * period);
-    efxoutr = (float *) malloc(sizeof (float) * period);
-
-    smpl = (float *) malloc(sizeof (float) * period);
-    smpr = (float *) malloc(sizeof (float) * period);
-
-    anall = (float *) malloc(sizeof (float) * period);
-    analr = (float *) malloc(sizeof (float) * period);
-
-    auxdata = (float *) malloc(sizeof (float) * period);
-    auxresampled = (float *) malloc(sizeof (float) * period);
-
-    m_ticks = (float *) malloc(sizeof (float) * period);
-
-    interpbuf = (float*) malloc(sizeof (float)* period);
-
-    memset(efxoutl, 0, sizeof (float)*period);
-    memset(efxoutr, 0, sizeof (float)*period);
-
-    memset(smpl, 0, sizeof (float)*period);
-    memset(smpr, 0, sizeof (float)*period);
-
-    memset(anall, 0, sizeof (float)*period);
-    memset(analr, 0, sizeof (float)*period);
-
-    memset(auxdata, 0, sizeof (float)*period);
-    memset(auxresampled, 0, sizeof (float)*period);
-
-    memset(m_ticks, 0, sizeof (float)*period);
-    memset(interpbuf, 0, sizeof (float)*period);
-
-    // EQ1, EQ2
+    
+    instantiate_effects();
+    
+    initialize_arrays();
+    
+    put_order_in_rack();
+    
+    MIDI_control();
+    
+    // EQ1, EQ2 - FIXME move to EQ
     Fpre = new FPreset();
-
-    DC_Offsetl = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
-    DC_Offsetr = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
-    M_Metronome = new metronome(fSample_rate, period);
-    efx_Chorus = new Chorus(fSample_rate, period);
-    efx_Flanger = new Chorus(fSample_rate, period);
-    efx_Rev = new Reverb(fSample_rate, period);
-    efx_Echo = new Echo(fSample_rate, period);
-    efx_Phaser = new Phaser(fSample_rate, period);
-    efx_APhaser = new Analog_Phaser(fSample_rate, period);
-    efx_Distorsion = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
-    efx_Overdrive = new Distorsion(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
-    efx_EQ2 = new EQ(EQ2_PARAMETRIC, fSample_rate, period);
-    efx_EQ1 = new EQ(EQ1_REGULAR, fSample_rate, period);
-    efx_Compressor = new Compressor(fSample_rate, period);
-    efx_WahWah = new WahWah(fSample_rate, period);
-    efx_Alienwah = new Alienwah(fSample_rate, period);
-    efx_Cabinet = new Cabinet(fSample_rate, period);
-    efx_Pan = new Pan(fSample_rate, period);
-    efx_Har = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
-    efx_MusDelay = new MusicDelay(fSample_rate, period);
-    efx_Gate = new Gate(fSample_rate, period);
-    efx_Derelict = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
-    efx_FLimiter = new Compressor(fSample_rate, period);
-    efx_Valve = new Valve(fSample_rate, period);
-    efx_DFlange = new Dflange(fSample_rate, period);
-    efx_Ring = new Ring(fSample_rate, period);
-    efx_Exciter = new Exciter(fSample_rate, period);
-    efx_DistBand = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
-    efx_Arpie = new Arpie(fSample_rate, period);
-    efx_Expander = new Expander(fSample_rate, period);
-    efx_Shuffle = new Shuffle(fSample_rate, period);
-    efx_Synthfilter = new Synthfilter(fSample_rate, period);
-    efx_VaryBand = new VaryBand(fSample_rate, period);
-    efx_Convol = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
-    efx_Looper = new Looper(looper_size, fSample_rate, period);
-    efx_MuTroMojo = new MuTroMojo(fSample_rate, period);
-    efx_Echoverse = new Echoverse(fSample_rate, period);
-    efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
-    efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
-    efx_Vocoder = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
-    efx_Sustainer = new Sustainer(fSample_rate, period);
-    efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
-    efx_Shifter = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
-    efx_StompBox = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
-    efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
-    efx_Echotron = new Echotron(fSample_rate, period);
-    efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
-    efx_CompBand = new CompBand(fSample_rate, period);
-    efx_Opticaltrem = new Opticaltrem(fSample_rate, period);
-    efx_Vibe = new Vibe(fSample_rate, period);
-    efx_Infinity = new Infinity(fSample_rate, period);
-
-    U_Resample = new Resample(UpQual);
-    D_Resample = new Resample(DownQual);
-    A_Resample = new Resample(3);
-
-    beat = new beattracker(fSample_rate, period);
-    efx_Tuner = new Tuner(fSample_rate);
-    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate, period);
-    HarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
-    StHarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
-    RingRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
-    RC_Harm = new RecChord();
-    RC_Stereo_Harm = new RecChord();
-
-    Preset_Name = (char *) malloc(sizeof (char) * 64);
-    memset(Preset_Name, 0, sizeof (char) * 64);
-    Author = (char *) malloc(sizeof (char) * 64);
-    memset(Author, 0, sizeof (char) * 64);
-    Bank_Saved = (char *) malloc(sizeof (char) * 128);
-    memset(Bank_Saved, 0, sizeof (char) * 128);
-    UserRealName = (char *) malloc(sizeof (char) * 128);
-    memset(UserRealName, 0, sizeof (char) * 128);
-
-    // Names - Put Order in Rack
-
-    /*
-    //Filter
-
-    1   - Distortion
-    2   - Modulation
-    4   - Time
-    8   - Emulation
-    16  - Filters
-    32  - Dynamics
-    64  - Processing & EQ
-    128 - Synthesis
-     */
-
-    NumEffects = 47;
-
-    {
-        static const char *los_names[] = {
-            "AlienWah", "11", "16",
-            "Analog Phaser", "18", "2",
-            "Arpie", "24", "4",
-            "Cabinet", "12", "8",
-            "Chorus", "5", "2",
-            "Coil Crafter", "33", "8",
-            "CompBand", "43", "8",
-            "Compressor", "1", "32",
-            "Convolotron", "29", "8",
-            "Derelict", "17", "1",
-            "DistBand", "23", "1",
-            "Distortion", "2", "1",
-            "Dual Flange", "20", "2",
-            "Echo", "4", "4",
-            "Echotron", "41", "4",
-            "Echoverse", "32", "4",
-            "EQ", "0", "64",
-            "Exciter", "22", "64",
-            "Expander", "25", "32",
-            "Flanger", "7", "2",
-            "Harmonizer", "14", "128",
-            "Infinity", "46", "16",
-            "Looper", "30", "128",
-            "MusicalDelay", "15", "4",
-            "MuTroMojo", "31", "16",
-            "NoiseGate", "16", "32",
-            "Opticaltrem", "44", "2",
-            "Overdrive", "3", "1",
-            "Pan", "13", "64",
-            "Parametric EQ", "9", "64",
-            "Phaser", "6", "2",
-            "Reverb", "8", "4",
-            "Reverbtron", "40", "4",
-            "Ring", "21", "128",
-            "Sequence", "37", "128",
-            "ShelfBoost", "34", "64",
-            "Shifter", "38", "128",
-            "Shuffle", "26", "64",
-            "StereoHarm", "42", "128",
-            "StompBox", "39", "9",
-            "Sustainer", "36", "32",
-            "Synthfilter", "27", "16",
-            "Valve", "19", "9",
-            "VaryBand", "28", "2",
-            "Vibe", "45", "2",
-            "Vocoder", "35", "128",
-            "WahWah", "10", "16"
-
-        };
-
-        for (int i = 0; i < NumEffects * 3; i += 3)
-        {
-            strcpy(efx_names[i / 3].Nom, los_names[i]);
-            sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);
-            sscanf(los_names[i + 2], "%d", &efx_names[i / 3].Type);
-        }
-    }
-    // End Put Order in Rack
-
-
-    {// MIDI Learn Parameter list
-        static const char *los_params[] = {
-
-            "Alienwah Dry/Wet", "55", "11",
-            "Alienwah Pan", "61", "11",
-            "Alienwah Tempo", "76", "11",
-            "Alienwah Random", "109", "11",
-            "Alienwah LFO Type", "456", "11",
-            "Alienwah Phase", "115", "11",
-            "Alienwah Stereo Df.", "103", "11",
-            "Alienwah Depth", "20", "11",
-            "Alienwah Delay", "403", "11",
-            "Alienwah Feedback", "82", "11",
-            "Alienwah L/R Cross", "96", "11",
-            
-            "Analog Phaser Dry/Wet", "117", "18",
-            "Analog Phaser LFO Type", "457", "18",
-            "Analog Phaser Tempo", "119", "18",
-            "Analog Phaser P. Depth", "120", "18",
-            "Analog Phaser Width", "121", "18",
-            "Analog Phaser Feedback", "122", "18",
-            "Analog Phaser Mismatch", "123", "18",
-            "Analog Phaser Distortion", "118", "18",
-            "Analog Phaser Random", "404", "18",
-            "Analog Phaser Stereo Df.", "124", "18",
-
-            "Arpie Dry/Wet", "212", "24",
-            "Arpie Arpe's", "213", "24",
-            "Arpie Pan", "214", "24",
-            "Arpie Tempo", "215", "24",
-            "Arpie L/R Delay", "216", "24",
-            "Arpie L/R Cross", "217", "24",
-            "Arpie Feedback", "218", "24",
-            "Arpie Damp", "219", "24",
-
-            "Balance", "12", "50",
-            
-            "Cabinet Gain","405 ","12",
-
-            "Chorus Dry/Wet", "52", "5",
-            "Chorus Pan", "50", "5",
-            "Chorus Tempo", "72", "5",
-            "Chorus Random", "105", "5",
-            "Chorus LFO Type", "458", "5",
-            "Chorus Stereo Df", "99", "5",
-            "Chorus Depth", "23", "5",
-            "Chorus Delay", "406", "5",
-            "Chorus Feedback", "79", "5",
-            "Chorus L/R Cross", "91", "5",
-
-            "CoilCrafter Gain", "286", "33",
-            "CoilCrafter Tone", "287", "33",
-            "CoilCrafter Freq 1", "288", "33",
-            "CoilCrafter Q 1", "289", "33",
-            "CoilCrafter Freq 2", "290", "33",
-            "CoilCrafter Q 2", "291", "33",
-
-            "CompBand Dry/Wet", "368", "43",
-            "CompBand Gain", "369", "43",
-            "CompBand L Ratio", "370", "43",
-            "CompBand ML Ratio", "371", "43",
-            "CompBand MH Ratio", "372", "43",
-            "CompBand H Ratio", "373", "43",
-            "CompBand L Thres", "374", "43",
-            "CompBand ML Thres", "375", "43",
-            "CompBand MH Thres", "376", "43",
-            "CompBand H Thres", "377", "43",
-            "CompBand Cross 1", "378", "43",
-            "CompBand Cross 2", "379", "43",
-            "CompBand Cross 3", "380", "43",
-
-            "Compressor A.Time", "142", "1",
-            "Compressor Knee", "145", "1",
-            "Compressor Output", "147", "1",
-            "Compressor Ratio", "144", "1",
-            "Compressor R.Time", "143", "1",
-            "Compressor Threshold", "146", "1",
-
-            "Convolotron Dry/Wet", "280", "29",
-            "Convolotron Pan", "281", "29",
-            "Convolotron Level", "282", "29",
-            "Convolotron Damp", "283", "29",
-            "Convolotron Feedback", "284", "29",
-            "Convolotron Length", "285", "29",
-
-            "Derelict Dry/Wet", "125", "17",
-            "Derelict L/R Cross", "127", "17",
-            "Derelict Drive", "2", "17",
-            "Derelict Level", "3", "17",
-            "Derelict Level", "451", "17",
-            "Derelict Color", "6", "17",
-            "Derelict Sub Octave", "8", "17",
-            "Derelict Pan", "126", "17",
-            "Derelict LPF", "4", "17",
-            "Derelict HPF", "5", "17",
-
-            "DistBand Dry/Wet", "202", "23",
-            "DistBand L/R Cross", "203", "23",
-            "DistBand Drive", "204", "23",
-            "DistBand Level", "205", "23",
-            "DistBand L. Gain", "206", "23",
-            "DistBand M. Gain", "207", "23",
-            "DistBand H. Gain", "208", "23",
-            "DistBand Cross 1", "209", "23",
-            "DistBand Cross 2", "210", "23",
-            "DistBand Type Low", "452", "23",
-            "DistBand Type Med", "453", "23",
-            "DistBand Type High", "454", "23",
-            "DistBand Pan", "211", "23",
-            
-            "Distortion Dry/Wet", "30", "2",
-            "Distortion L/R Cross", "95", "2",
-            "Distortion Drive", "69", "2",
-            "Distortion Level", "71", "2",
-            "Distortion Type", "449", "2",
-            "Distortion Pan", "48", "2",
-            "Distortion Sub Octave", "9", "2",
-            "Distortion LPF", "86", "2",
-            "Distortion HPF", "89", "2",
-
-            "Dual Flange Dry/Wet", "158", "20",
-            "Dual Flange Pan", "159", "20",
-            "Dual Flange L/R Cross", "160", "20",
-            "Dual Flange Depth", "161", "20",
-            "Dual Flange Width", "162", "20",
-            "Dual Flange Offset", "163", "20",
-            "Dual Flange Feedback", "164", "20",
-            "Dual Flange LPF", "165", "20",
-            "Dual Flange Tempo", "166", "20",
-            "Dual Flange Stereo Df", "167", "20",
-            "Dual Flange LFO Type", "460", "20",
-            "Dual Flange Random", "168", "20",
-
-            "Echo Dry/Wet", "59", "4",
-            "Echo Reverse", "407", "4",
-            "Echo Pan", "46", "4",
-            "Echo Delay", "408", "4",
-            "Echo L/R Delay", "409", "4",
-            "Echo L/R Cross", "97", "4",
-            "Echo Feedback", "78", "4",
-            "Echo Damp", "410", "4",
-
-            "Echotron Dry/Wet", "348", "41",
-            "Echotron Pan", "349", "41",
-            "Echotron Tempo", "350", "41",
-            "Echotron Damp", "351", "41",
-            "Echotron Feedback", "352", "41",
-            "Echotron L/R Cross", "353", "41",
-            "Echotron Width", "354", "41",
-            "Echotron Depth", "355", "41",
-            "Echotron Stereo Df", "356", "41",
-            "Echotron LFO Type", "461", "41",
-            "Echotron #", "357", "41",
-
-            "Echoverse Dry/Wet", "303", "32",
-            "Echoverse Reverse", "304", "32",
-            "Echoverse Pan", "305", "32",
-            "Echoverse Tempo", "306", "32",
-            "Echoverse L/R Delay", "307", "32",
-            "Echoverse Feedback", "308", "32",
-            "Echoverse Damp", "309", "32",
-            "Echoverse Ex Stereo", "310", "32",
-            "Echoverse Angle", "311", "32",
-
-            "EQ Gain", "130", "0",
-            "EQ Q", "131", "0",
-            "EQ 31 Hz", "132", "0",
-            "EQ 63 Hz", "133", "0",
-            "EQ 125 Hz", "134", "0",
-            "EQ 250 Hz", "135", "0",
-            "EQ 500 Hz", "136", "0",
-            "EQ 1 Khz", "137", "0",
-            "EQ 2 Khz", "138", "0",
-            "EQ 4 Khz", "139", "0",
-            "EQ 8 Khz", "140", "0",
-            "EQ 16 Khz", "141", "0",
-
-            "Exciter Gain", "189", "22",
-            "Exciter LPF", "190", "22",
-            "Exciter HPF", "191", "22",
-            "Exciter Har 1", "192", "22",
-            "Exciter Har 2", "193", "22",
-            "Exciter Har 3", "194", "22",
-            "Exciter Har 4", "195", "22",
-            "Exciter Har 5", "196", "22",
-            "Exciter Har 6", "197", "22",
-            "Exciter Har 7", "198", "22",
-            "Exciter Har 8", "199", "22",
-            "Exciter Har 9", "200", "22",
-            "Exciter Har 10", "201", "22",
-
-            "Expander A.Time", "220", "25",
-            "Expander R.Time", "221", "25",
-            "Expander Shape", "222", "25",
-            "Expander Threshold", "223", "25",
-            "Expander Out Gain", "224", "25",
-            "Expander LPF", "225", "25",
-            "Expander HPF", "226", "25",
-
-            "Flanger Dry/Wet", "53", "7",
-            "Flanger Pan", "51", "7",
-            "Flanger Tempo", "73", "7",
-            "Flanger Random", "106", "7",
-            "Flanger LFO Type", "459", "7",
-            "Flanger Stereo Df", "100", "7",
-            "Flanger Depth", "22", "7",
-            "Flanger Delay", "411", "7",
-            "Flanger Feedback", "80", "7",
-            "Flanger L/R Cross", "92", "7",
-
-            "Harmonizer Dry/Wet", "31", "14",
-            "Harmonizer Interval", "27", "14",
-            "Harmonizer Gain", "412", "14",
-            "Harmonizer Pan", "49", "14",
-            "Harmonizer Freq", "26", "14",
-            "Harmonizer Filter Gain", "413", "14",
-            "Harmonizer Filter Q", "414", "14",
-            "Harmonizer SELECT", "447", "14",
-            "Harmonizer Note", "444", "14",
-            "Harmonizer Chord", "445", "14",
-
-            "Infinity Dry/Wet", "395", "46",
-            "Infinity Res", "396", "46",
-            "Infinity Filter Band 1", "415", "46",
-            "Infinity Filter Band 2", "416", "46",
-            "Infinity Filter Band 3", "417", "46",
-            "Infinity Filter Band 4", "418", "46",
-            "Infinity Filter Band 5", "419", "46",
-            "Infinity Filter Band 6", "420", "46",
-            "Infinity Filter Band 7", "421", "46",
-            "Infinity Filter Band 8", "422", "46",
-            "Infinity AutoPan", "397", "46",
-            "Infinity Stereo Df", "398", "46",
-            "Infinity Start", "399", "46",
-            "Infinity End", "400", "46",
-            "Infinity Tempo", "401", "46",
-            "Infinity Subdiv", "402", "46",
-
-            "Input", "14", "50",
-
-            "Looper Dry/Wet", "267", "30",
-            "Looper Level 1", "268", "30",
-            "Looper Level 2", "269", "30",
-            "Looper Tempo", "423", "30",
-            "Looper Reverse", "270", "30",
-            "Looper Auto Play", " 271", "30",
-            "Looper Play", "272", "30",
-            "Looper Pause", "273", "30",
-            "Looper Record", "274", "30",
-            "Looper R1", "275", "30",
-            "Looper R2", "276", "30",
-            "Looper Track 1", "277", "30",
-            "Looper Track 2", "278", "30",
-            "Looper Clear", "279", "30",
-
-            "Multi On/Off", "116", "50",
-
-            "Musical Delay Dry/Wet", "56", "15",
-            "Musical Delay L/R Cross", "98", "15",
-            "Musical Delay Pan 1", "62", "15",
-            "Musical Delay Pan 2", "65", "15",
-            "Musical Delay Tempo", "424", "15",
-            "Musical Delay Gain 1", "24", "15",
-            "Musical Delay Gain 2", "25", "15",
-            "Musical Delay FB 1", "83", "15",
-            "Musical Delay FB 2", "84", "15",
-            "Musical Delay Damp", "425", "15",
-
-            "MuTroMojo Dry/Wet", "256", "31",
-            "MuTroMojo LP", "257", "31",
-            "MuTroMojo BP", "258", "31",
-            "MuTroMojo HP", "259", "31",
-            "MuTroMojo LFO Type", "462", "31",
-            "MuTroMojo Depth", "260", "31",
-            "MuTroMojo Tempo", "261", "31",
-            "MuTroMojo Res", "262", "31",
-            "MuTroMojo Range", "263", "31",
-            "MuTroMojo Wah", "264", "31",
-            "MuTroMojo E. Sens", "265", "31",
-            "MuTroMojo Smooth", "266", "31",
-            "MuTroMojo Random", "426", "31",
-            "MuTroMojo Stereo Df", "427", "31",
-            "MuTroMojo St. Freq", "428", "31",
-            
-            "NoiseGate A. Time", "429", "16",
-            "NoiseGate R. Time", "430", "16",
-            "NoiseGate Range", "431", "16",
-            "NoiseGate Threshold", "432", "16",
-            "NoiseGate Hold", "433", "16",
-            "NoiseGate LPF", "434", "16",
-            "NoiseGate HPF", "435", "16",
-
-            "Opticaltrem Depth", "381", "44",
-            "Opticaltrem Tempo", "382", "44",
-            "Opticaltrem Random", "383", "44",
-            "Opticaltrem LFO Type", "463", "44",
-            "Opticaltrem Stereo Df", "384", "44",
-            "Opticaltrem Pan", "385", "44",
-
-            "Overdrive Dry/Wet", "29", "3",
-            "Overdrive L/R Cross", "94", "3",
-            "Overdrive Drive", "68", "3",
-            "Overdrive Level", "70", "3",
-            "Overdrive Type", "450", "3",
-            "Overdrive Pan", "47", "3",
-            "Overdrive LPF", "85", "3",
-            "Overdrive HPF", "88", "3",
-
-            "Pan Dry/Wet", "58", "13",
-            "Pan Pan", "67", "13",
-            "Pan Tempo", "77", "13",
-            "Pan Random", "110", "13",
-            "Pan LFO Type", "464", "13",
-            "Pan Stereo Df", "104", "13",
-            "Pan E. Stereo", "436", "13",
-            
-            "Parametric EQ Gain", "148", "9",
-            "Parametric EQ Low Freq", "149", "9",
-            "Parametric EQ Low Gain", "150", "9",
-            "Parametric EQ Low Q", "151", "9",
-            "Parametric EQ Mid Freq", "152", "9",
-            "Parametric EQ Mid Gain", "153", "9",
-            "Parametric EQ Mid Q", "154", "9",
-            "Parametric EQ High Freq", "155", "9",
-            "Parametric EQ High Gain", "156", "9",
-            "Parametric EQ High Q", "157", "9",
-
-            "Phaser Dry/Wet", "54", "6",
-            "Phaser Pan", "60", "6",
-            "Phaser Tempo", "74", "6",
-            "Phaser Random", "107", "6",
-            "Phaser LFO Type", "465", "6",
-            "Phaser Phase", "114", "6",
-            "Phaser Stereo Df", "101", "6",
-            "Phaser Depth", "21", "6",
-            "Phaser Feedback", "81", "6",
-            "Phaser L/R Cross", "93", "6",
-
-            "Reverb Dry/Wet", "57", "8",
-            "Reverb Pan", "63", "8",
-            "Reverb Time", "437", "8",
-            "Reverb Initial Delay", "438", "8",
-            "Reverb Del. E/R", "439", "8",
-            "Reverb Room Size", "440", "8",
-            "Reverb LPF", "87", "8",
-            "Reverb HPF", "90", "8",
-            "Reverb Damping", "441", "8",
-
-            "Reverbtron Dry/Wet", "339", "40",
-            "Reverbtron Pan", "340", "40",
-            "Reverbtron Level", "341", "40",
-            "Reverbtron Damp", "342", "40",
-            "Reverbtron Feedback", "343", "40",
-            "Reverbtron Length", "344", "40",
-            "Reverbtron Stretch", "345", "40",
-            "Reverbtron Initial Delay", "346", "40",
-            "Reverbtron Fade", "347", "40",
-            "Reverbtron Diffusion", "442", "40",
-            "Reverbtron LPF", "443", "40",
-
-            "Ring Dry/Wet", "178", "21",
-            "Ring L/R Cross", "179", "21",
-            "Ring Input", "180", "21",
-            "Ring Level", "181", "21",
-            "Ring Pan", "182", "21",
-            "Ring Depth", "183", "21",
-            "Ring Freq", "184", "21",
-            "Ring Sine", "185", "21",
-            "Ring Triangle", "186", "21",
-            "Ring Sawtooth", "187", "21",
-            "Ring Square", "188", "21",
-
-            "Sequence Dry/Wet", "314", "37",
-            "Sequence 1", "315", "37",
-            "Sequence 2", "316", "37",
-            "Sequence 3", "317", "37",
-            "Sequence 4", "318", "37",
-            "Sequence 5", "319", "37",
-            "Sequence 6", "320", "37",
-            "Sequence 7", "321", "37",
-            "Sequence 8", "322", "37",
-            "Sequence Tempo", "323", "37",
-            "Sequence Q", "324", "37",
-            "Sequence Stereo Df", "325", "37",
-
-            "ShelfBoost Gain", "292", "34",
-            "ShelfBoost Level", "293", "34",
-            "ShelfBoost Tone", "294", "34",
-            "ShelfBoost Presence", "295", "34",
-
-            "Shifter Dry/Wet", "326", "38",
-            "Shifter Interval", "327", "38",
-            "Shifter Gain", "328", "38",
-            "Shifter Pan", "329", "38",
-            "Shifter Attack", "330", "38",
-            "Shifter Decay", "331", "38",
-            "Shifter Threshold", "332", "38",
-            "Shifter Whammy", "333", "38",
-
-            "Shuffle Dry/Wet", "227", "26",
-            "Shuffle Low Freq", "228", "26",
-            "Shuffle Low Gain", "229", "26",
-            "Shuffle M.L. Freq", "230", "26",
-            "Shuffle M.L. Gain", "231", "26",
-            "Shuffle M.H. Freq", "232", "26",
-            "Shuffle M.H. Gain", "233", "26",
-            "Shuffle High Freq", "234", "26",
-            "Shuffle High Gain", "235", "26",
-            "Shuffle Q", "236", "26",
-
-            "StereoHarm Dry/Wet", "358", "42",
-            "StereoHarm Int L", "359", "42",
-            "StereoHarm Chrm L", "360", "42",
-            "StereoHarm Gain L", "361", "42",
-            "StereoHarm Int R", "362", "42",
-            "StereoHarm Chrm R", "363", "42",
-            "StereoHarm Gain R", "364", "42",
-            "StereoHarm L/R Cross", "365", "42",
-            "StereoHarm SELECT", "448", "42",
-            "StereoHarm Note", "366", "42",
-            "StereoHarm Chord", "367", "42",
-
-            "StompBox Level", "334", "39",
-            "StompBox Gain", "335", "39",
-            "StompBox Bias", "336", "39",
-            "StompBox Mid", "337", "39",
-            "StompBox Tone", "338", "39",
-            "StompBox Mode", "455", "39",
-
-            "Sustainer Gain", "312", "36",
-            "Sustainer Sustain", "313", "36",
-
-            "Synthfilter Dry/Wet", "237", "27",
-            "Synthfilter Distort", "238", "27",
-            "Synthfilter Tempo", "239", "27",
-            "Synthfilter Random", "446", "27",
-            "Synthfilter LFO Type", "466", "27",
-            "Synthfilter Stereo Df", "240", "27",
-            "Synthfilter Width", "241", "27",
-            "Synthfilter Feedback", "242", "27",
-            "Synthfilter Depth", "243", "27",
-            "Synthfilter E.Sens", "244", "27",
-            "Synthfilter A.Time", "245", "27",
-            "Synthfilter R.Time", "246", "27",
-            "Synthfilter Offset", "247", "27",
-
-            "Valve Dry/Wet", "169", "19",
-            "Valve L/R Cross", "170", "19",
-            "Valve Pan", "171", "19",
-            "Valve Level", "172", "19",
-            "Valve Drive", "173", "19",
-            "Valve Dist", "174", "19",
-            "Valve Presence", "175", "19",
-            "Valve LPF", "176", "19",
-            "Valve HPF", "177", "19",
-
-            "VaryBand Dry/Wet", "248", "28",
-            "VaryBand Tempo 1", "249", "28",
-            "VaryBand LFO 1 Type", "467", "28",
-            "VaryBand St.df 1", "250", "28",
-            "VaryBand Tempo 2", "251", "28",
-            "VaryBand LFO 2 Type", "468", "28",
-            "VaryBand St.df 2", "252", "28",
-            "VaryBand Cross 1", "253", "28",
-            "VaryBand Cross 2", "254", "28",
-            "VaryBand Cross 3", "255", "28",
-
-            "Vibe Dry/Wet", "386", "45",
-            "Vibe Width", "387", "45",
-            "Vibe Depth", "388", "45",
-            "Vibe Tempo", "389", "45",
-            "Vibe Random", "390", "45",
-            "Vibe LFO Type", "469", "45",
-            "Vibe Stereo Df", "391", "45",
-            "Vibe Feedback", "392", "45",
-            "Vibe L/R Cross", "393", "45",
-            "Vibe Pan", "394", "45",
-
-            "Vocoder Dry/Wet", "296", "35",
-            "Vocoder Pan", "297", "35",
-            "Vocoder Input", "298", "35",
-            "Vocoder Smear", "299", "35",
-            "Vocoder Q", "300", "35",
-            "Vocoder Ring", "301", "35",
-            "Vocoder Level", "302", "35",
-
-            "Volume", "7", "50",
-
-            "WahWah Dry/Wet", "28", "10",
-            "WahWah Pan", "66", "10",
-            "WahWah Tempo", "75", "10",
-            "WahWah Random", "108", "10",
-            "WahWah LFO Type", "470", "10",
-            "WahWah Stereo Df", "102", "10",
-            "WahWah Depth", "1", "10",
-            "WahWah Amp S.", "111", "10",
-            "WahWah Amp S.I.", "112", "10",
-            "WahWah Smooth", "113", "10",
-        };
-        
-        // If any additional parameters are added, then the constant
-        // C_MC_PARAMETER_SIZE must be adjusted.
-        for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
-        {
-            strcpy(efx_params[i].Nom, los_params[i * 3]);
-            sscanf(los_params[i * 3 + 1], "%d", &efx_params[i].Ato);
-            sscanf(los_params[i * 3 + 2], "%d", &efx_params[i].Effect);
-        }
-    }   // MIDI Learn Parameter list
-
-    // Init Preset
+    
+    // Initialize Preset
     New();
 
-    // Init Bank
+    // Initialize Bank
     New_Bank();
+    
     init_rkr();
-
 }
 
 RKR::~RKR()
@@ -1483,6 +794,721 @@ RKR::jack_open_client()
     J_PERIOD = jack_get_buffer_size(jackclient);
     
     return 1;
+}
+
+void
+RKR::instantiate_effects()
+{
+    DC_Offsetl = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
+    DC_Offsetr = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
+    M_Metronome = new metronome(fSample_rate, period);
+    efx_Chorus = new Chorus(fSample_rate, period);
+    efx_Flanger = new Chorus(fSample_rate, period);
+    efx_Rev = new Reverb(fSample_rate, period);
+    efx_Echo = new Echo(fSample_rate, period);
+    efx_Phaser = new Phaser(fSample_rate, period);
+    efx_APhaser = new Analog_Phaser(fSample_rate, period);
+    efx_Distorsion = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
+    efx_Overdrive = new Distorsion(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
+    efx_EQ2 = new EQ(EQ2_PARAMETRIC, fSample_rate, period);
+    efx_EQ1 = new EQ(EQ1_REGULAR, fSample_rate, period);
+    efx_Compressor = new Compressor(fSample_rate, period);
+    efx_WahWah = new WahWah(fSample_rate, period);
+    efx_Alienwah = new Alienwah(fSample_rate, period);
+    efx_Cabinet = new Cabinet(fSample_rate, period);
+    efx_Pan = new Pan(fSample_rate, period);
+    efx_Har = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
+    efx_MusDelay = new MusicDelay(fSample_rate, period);
+    efx_Gate = new Gate(fSample_rate, period);
+    efx_Derelict = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
+    efx_FLimiter = new Compressor(fSample_rate, period);
+    efx_Valve = new Valve(fSample_rate, period);
+    efx_DFlange = new Dflange(fSample_rate, period);
+    efx_Ring = new Ring(fSample_rate, period);
+    efx_Exciter = new Exciter(fSample_rate, period);
+    efx_DistBand = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
+    efx_Arpie = new Arpie(fSample_rate, period);
+    efx_Expander = new Expander(fSample_rate, period);
+    efx_Shuffle = new Shuffle(fSample_rate, period);
+    efx_Synthfilter = new Synthfilter(fSample_rate, period);
+    efx_VaryBand = new VaryBand(fSample_rate, period);
+    efx_Convol = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
+    efx_Looper = new Looper(looper_size, fSample_rate, period);
+    efx_MuTroMojo = new MuTroMojo(fSample_rate, period);
+    efx_Echoverse = new Echoverse(fSample_rate, period);
+    efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
+    efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
+    efx_Vocoder = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
+    efx_Sustainer = new Sustainer(fSample_rate, period);
+    efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
+    efx_Shifter = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
+    efx_StompBox = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
+    efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
+    efx_Echotron = new Echotron(fSample_rate, period);
+    efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
+    efx_CompBand = new CompBand(fSample_rate, period);
+    efx_Opticaltrem = new Opticaltrem(fSample_rate, period);
+    efx_Vibe = new Vibe(fSample_rate, period);
+    efx_Infinity = new Infinity(fSample_rate, period);
+
+    U_Resample = new Resample(UpQual);
+    D_Resample = new Resample(DownQual);
+    A_Resample = new Resample(3);
+
+    beat = new beattracker(fSample_rate, period);
+    efx_Tuner = new Tuner(fSample_rate);
+    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate, period);
+    HarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
+    StHarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
+    RingRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
+    RC_Harm = new RecChord();
+    RC_Stereo_Harm = new RecChord();
+}
+
+void
+RKR::initialize_arrays()
+{
+    efxoutl = (float *) malloc(sizeof (float) * period);
+    efxoutr = (float *) malloc(sizeof (float) * period);
+
+    smpl = (float *) malloc(sizeof (float) * period);
+    smpr = (float *) malloc(sizeof (float) * period);
+
+    anall = (float *) malloc(sizeof (float) * period);
+    analr = (float *) malloc(sizeof (float) * period);
+
+    auxdata = (float *) malloc(sizeof (float) * period);
+    auxresampled = (float *) malloc(sizeof (float) * period);
+
+    m_ticks = (float *) malloc(sizeof (float) * period);
+
+    interpbuf = (float*) malloc(sizeof (float)* period);
+
+    memset(efxoutl, 0, sizeof (float)*period);
+    memset(efxoutr, 0, sizeof (float)*period);
+
+    memset(smpl, 0, sizeof (float)*period);
+    memset(smpr, 0, sizeof (float)*period);
+
+    memset(anall, 0, sizeof (float)*period);
+    memset(analr, 0, sizeof (float)*period);
+
+    memset(auxdata, 0, sizeof (float)*period);
+    memset(auxresampled, 0, sizeof (float)*period);
+
+    memset(m_ticks, 0, sizeof (float)*period);
+    memset(interpbuf, 0, sizeof (float)*period);
+
+    Preset_Name = (char *) malloc(sizeof (char) * 64);
+    memset(Preset_Name, 0, sizeof (char) * 64);
+    Author = (char *) malloc(sizeof (char) * 64);
+    memset(Author, 0, sizeof (char) * 64);
+    Bank_Saved = (char *) malloc(sizeof (char) * 128);
+    memset(Bank_Saved, 0, sizeof (char) * 128);
+    UserRealName = (char *) malloc(sizeof (char) * 128);
+    memset(UserRealName, 0, sizeof (char) * 128);
+}
+
+/**
+ *  The effect names, position, and type used by the 
+ *  "Put Order in your Rack" window.
+ * 
+ *  The types are:
+ *      1   - Distortion
+ *      2   - Modulation
+ *      4   - Time
+ *      8   - Emulation
+ *      16  - Filters
+ *      32  - Dynamics
+ *      64  - Processing & EQ
+ *      128 - Synthesis
+ */
+void
+RKR::put_order_in_rack()
+{
+    static const char *los_names[] =
+    {
+        "AlienWah", "11", "16",
+        "Analog Phaser", "18", "2",
+        "Arpie", "24", "4",
+        "Cabinet", "12", "8",
+        "Chorus", "5", "2",
+        "Coil Crafter", "33", "8",
+        "CompBand", "43", "8",
+        "Compressor", "1", "32",
+        "Convolotron", "29", "8",
+        "Derelict", "17", "1",
+        "DistBand", "23", "1",
+        "Distortion", "2", "1",
+        "Dual Flange", "20", "2",
+        "Echo", "4", "4",
+        "Echotron", "41", "4",
+        "Echoverse", "32", "4",
+        "EQ", "0", "64",
+        "Exciter", "22", "64",
+        "Expander", "25", "32",
+        "Flanger", "7", "2",
+        "Harmonizer", "14", "128",
+        "Infinity", "46", "16",
+        "Looper", "30", "128",
+        "MusicalDelay", "15", "4",
+        "MuTroMojo", "31", "16",
+        "NoiseGate", "16", "32",
+        "Opticaltrem", "44", "2",
+        "Overdrive", "3", "1",
+        "Pan", "13", "64",
+        "Parametric EQ", "9", "64",
+        "Phaser", "6", "2",
+        "Reverb", "8", "4",
+        "Reverbtron", "40", "4",
+        "Ring", "21", "128",
+        "Sequence", "37", "128",
+        "ShelfBoost", "34", "64",
+        "Shifter", "38", "128",
+        "Shuffle", "26", "64",
+        "StereoHarm", "42", "128",
+        "StompBox", "39", "9",
+        "Sustainer", "36", "32",
+        "Synthfilter", "27", "16",
+        "Valve", "19", "9",
+        "VaryBand", "28", "2",
+        "Vibe", "45", "2",
+        "Vocoder", "35", "128",
+        "WahWah", "10", "16"
+    };
+
+    for (int i = 0; i < NumEffects * 3; i += 3)
+    {
+        strcpy(efx_names[i / 3].Nom, los_names[i]);
+        sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);
+        sscanf(los_names[i + 2], "%d", &efx_names[i / 3].Type);
+    }
+}
+
+/**
+ *  The MIDI control parameters. This includes the default MIDI control
+ *  parameters (1 - 127) as well as MIDI learn.
+ *
+ *  The los_params[] array is the order used by the MIDI learn window.
+ * 
+ *  The items are copied to Effects_Params struct:
+ *      char Nom[32] = Parameter Name
+ *      int Ato      = Parameter MIDI control number
+ *      int Effect   = Effect number
+ * 
+ * If any additional parameters are added, then the constant
+ * C_MC_PARAMETER_SIZE must be adjusted.
+ */
+void
+RKR::MIDI_control()
+{
+    static const char *los_params[] =
+    {
+        "Alienwah Dry/Wet", "55", "11",
+        "Alienwah Pan", "61", "11",
+        "Alienwah Tempo", "76", "11",
+        "Alienwah Random", "109", "11",
+        "Alienwah LFO Type", "456", "11",
+        "Alienwah Phase", "115", "11",
+        "Alienwah Stereo Df.", "103", "11",
+        "Alienwah Depth", "20", "11",
+        "Alienwah Delay", "403", "11",
+        "Alienwah Feedback", "82", "11",
+        "Alienwah L/R Cross", "96", "11",
+
+        "Analog Phaser Dry/Wet", "117", "18",
+        "Analog Phaser LFO Type", "457", "18",
+        "Analog Phaser Tempo", "119", "18",
+        "Analog Phaser P. Depth", "120", "18",
+        "Analog Phaser Width", "121", "18",
+        "Analog Phaser Feedback", "122", "18",
+        "Analog Phaser Mismatch", "123", "18",
+        "Analog Phaser Distortion", "118", "18",
+        "Analog Phaser Random", "404", "18",
+        "Analog Phaser Stereo Df.", "124", "18",
+
+        "Arpie Dry/Wet", "212", "24",
+        "Arpie Arpe's", "213", "24",
+        "Arpie Pan", "214", "24",
+        "Arpie Tempo", "215", "24",
+        "Arpie L/R Delay", "216", "24",
+        "Arpie L/R Cross", "217", "24",
+        "Arpie Feedback", "218", "24",
+        "Arpie Damp", "219", "24",
+
+        "Balance", "12", "50",
+
+        "Cabinet Gain","405 ","12",
+
+        "Chorus Dry/Wet", "52", "5",
+        "Chorus Pan", "50", "5",
+        "Chorus Tempo", "72", "5",
+        "Chorus Random", "105", "5",
+        "Chorus LFO Type", "458", "5",
+        "Chorus Stereo Df", "99", "5",
+        "Chorus Depth", "23", "5",
+        "Chorus Delay", "406", "5",
+        "Chorus Feedback", "79", "5",
+        "Chorus L/R Cross", "91", "5",
+
+        "CoilCrafter Gain", "286", "33",
+        "CoilCrafter Tone", "287", "33",
+        "CoilCrafter Freq 1", "288", "33",
+        "CoilCrafter Q 1", "289", "33",
+        "CoilCrafter Freq 2", "290", "33",
+        "CoilCrafter Q 2", "291", "33",
+
+        "CompBand Dry/Wet", "368", "43",
+        "CompBand Gain", "369", "43",
+        "CompBand L Ratio", "370", "43",
+        "CompBand ML Ratio", "371", "43",
+        "CompBand MH Ratio", "372", "43",
+        "CompBand H Ratio", "373", "43",
+        "CompBand L Thres", "374", "43",
+        "CompBand ML Thres", "375", "43",
+        "CompBand MH Thres", "376", "43",
+        "CompBand H Thres", "377", "43",
+        "CompBand Cross 1", "378", "43",
+        "CompBand Cross 2", "379", "43",
+        "CompBand Cross 3", "380", "43",
+
+        "Compressor A.Time", "142", "1",
+        "Compressor Knee", "145", "1",
+        "Compressor Output", "147", "1",
+        "Compressor Ratio", "144", "1",
+        "Compressor R.Time", "143", "1",
+        "Compressor Threshold", "146", "1",
+
+        "Convolotron Dry/Wet", "280", "29",
+        "Convolotron Pan", "281", "29",
+        "Convolotron Level", "282", "29",
+        "Convolotron Damp", "283", "29",
+        "Convolotron Feedback", "284", "29",
+        "Convolotron Length", "285", "29",
+
+        "Derelict Dry/Wet", "125", "17",
+        "Derelict L/R Cross", "127", "17",
+        "Derelict Drive", "2", "17",
+        "Derelict Level", "3", "17",
+        "Derelict Level", "451", "17",
+        "Derelict Color", "6", "17",
+        "Derelict Sub Octave", "8", "17",
+        "Derelict Pan", "126", "17",
+        "Derelict LPF", "4", "17",
+        "Derelict HPF", "5", "17",
+
+        "DistBand Dry/Wet", "202", "23",
+        "DistBand L/R Cross", "203", "23",
+        "DistBand Drive", "204", "23",
+        "DistBand Level", "205", "23",
+        "DistBand L. Gain", "206", "23",
+        "DistBand M. Gain", "207", "23",
+        "DistBand H. Gain", "208", "23",
+        "DistBand Cross 1", "209", "23",
+        "DistBand Cross 2", "210", "23",
+        "DistBand Type Low", "452", "23",
+        "DistBand Type Med", "453", "23",
+        "DistBand Type High", "454", "23",
+        "DistBand Pan", "211", "23",
+
+        "Distortion Dry/Wet", "30", "2",
+        "Distortion L/R Cross", "95", "2",
+        "Distortion Drive", "69", "2",
+        "Distortion Level", "71", "2",
+        "Distortion Type", "449", "2",
+        "Distortion Pan", "48", "2",
+        "Distortion Sub Octave", "9", "2",
+        "Distortion LPF", "86", "2",
+        "Distortion HPF", "89", "2",
+
+        "Dual Flange Dry/Wet", "158", "20",
+        "Dual Flange Pan", "159", "20",
+        "Dual Flange L/R Cross", "160", "20",
+        "Dual Flange Depth", "161", "20",
+        "Dual Flange Width", "162", "20",
+        "Dual Flange Offset", "163", "20",
+        "Dual Flange Feedback", "164", "20",
+        "Dual Flange LPF", "165", "20",
+        "Dual Flange Tempo", "166", "20",
+        "Dual Flange Stereo Df", "167", "20",
+        "Dual Flange LFO Type", "460", "20",
+        "Dual Flange Random", "168", "20",
+
+        "Echo Dry/Wet", "59", "4",
+        "Echo Reverse", "407", "4",
+        "Echo Pan", "46", "4",
+        "Echo Delay", "408", "4",
+        "Echo L/R Delay", "409", "4",
+        "Echo L/R Cross", "97", "4",
+        "Echo Feedback", "78", "4",
+        "Echo Damp", "410", "4",
+
+        "Echotron Dry/Wet", "348", "41",
+        "Echotron Pan", "349", "41",
+        "Echotron Tempo", "350", "41",
+        "Echotron Damp", "351", "41",
+        "Echotron Feedback", "352", "41",
+        "Echotron L/R Cross", "353", "41",
+        "Echotron Width", "354", "41",
+        "Echotron Depth", "355", "41",
+        "Echotron Stereo Df", "356", "41",
+        "Echotron LFO Type", "461", "41",
+        "Echotron #", "357", "41",
+
+        "Echoverse Dry/Wet", "303", "32",
+        "Echoverse Reverse", "304", "32",
+        "Echoverse Pan", "305", "32",
+        "Echoverse Tempo", "306", "32",
+        "Echoverse L/R Delay", "307", "32",
+        "Echoverse Feedback", "308", "32",
+        "Echoverse Damp", "309", "32",
+        "Echoverse Ex Stereo", "310", "32",
+        "Echoverse Angle", "311", "32",
+
+        "EQ Gain", "130", "0",
+        "EQ Q", "131", "0",
+        "EQ 31 Hz", "132", "0",
+        "EQ 63 Hz", "133", "0",
+        "EQ 125 Hz", "134", "0",
+        "EQ 250 Hz", "135", "0",
+        "EQ 500 Hz", "136", "0",
+        "EQ 1 Khz", "137", "0",
+        "EQ 2 Khz", "138", "0",
+        "EQ 4 Khz", "139", "0",
+        "EQ 8 Khz", "140", "0",
+        "EQ 16 Khz", "141", "0",
+
+        "Exciter Gain", "189", "22",
+        "Exciter LPF", "190", "22",
+        "Exciter HPF", "191", "22",
+        "Exciter Har 1", "192", "22",
+        "Exciter Har 2", "193", "22",
+        "Exciter Har 3", "194", "22",
+        "Exciter Har 4", "195", "22",
+        "Exciter Har 5", "196", "22",
+        "Exciter Har 6", "197", "22",
+        "Exciter Har 7", "198", "22",
+        "Exciter Har 8", "199", "22",
+        "Exciter Har 9", "200", "22",
+        "Exciter Har 10", "201", "22",
+
+        "Expander A.Time", "220", "25",
+        "Expander R.Time", "221", "25",
+        "Expander Shape", "222", "25",
+        "Expander Threshold", "223", "25",
+        "Expander Out Gain", "224", "25",
+        "Expander LPF", "225", "25",
+        "Expander HPF", "226", "25",
+
+        "Flanger Dry/Wet", "53", "7",
+        "Flanger Pan", "51", "7",
+        "Flanger Tempo", "73", "7",
+        "Flanger Random", "106", "7",
+        "Flanger LFO Type", "459", "7",
+        "Flanger Stereo Df", "100", "7",
+        "Flanger Depth", "22", "7",
+        "Flanger Delay", "411", "7",
+        "Flanger Feedback", "80", "7",
+        "Flanger L/R Cross", "92", "7",
+
+        "Harmonizer Dry/Wet", "31", "14",
+        "Harmonizer Interval", "27", "14",
+        "Harmonizer Gain", "412", "14",
+        "Harmonizer Pan", "49", "14",
+        "Harmonizer Freq", "26", "14",
+        "Harmonizer Filter Gain", "413", "14",
+        "Harmonizer Filter Q", "414", "14",
+        "Harmonizer SELECT", "447", "14",
+        "Harmonizer Note", "444", "14",
+        "Harmonizer Chord", "445", "14",
+
+        "Infinity Dry/Wet", "395", "46",
+        "Infinity Res", "396", "46",
+        "Infinity Filter Band 1", "415", "46",
+        "Infinity Filter Band 2", "416", "46",
+        "Infinity Filter Band 3", "417", "46",
+        "Infinity Filter Band 4", "418", "46",
+        "Infinity Filter Band 5", "419", "46",
+        "Infinity Filter Band 6", "420", "46",
+        "Infinity Filter Band 7", "421", "46",
+        "Infinity Filter Band 8", "422", "46",
+        "Infinity AutoPan", "397", "46",
+        "Infinity Stereo Df", "398", "46",
+        "Infinity Start", "399", "46",
+        "Infinity End", "400", "46",
+        "Infinity Tempo", "401", "46",
+        "Infinity Subdiv", "402", "46",
+
+        "Input", "14", "50",
+
+        "Looper Dry/Wet", "267", "30",
+        "Looper Level 1", "268", "30",
+        "Looper Level 2", "269", "30",
+        "Looper Tempo", "423", "30",
+        "Looper Reverse", "270", "30",
+        "Looper Auto Play", " 271", "30",
+        "Looper Play", "272", "30",
+        "Looper Pause", "273", "30",
+        "Looper Record", "274", "30",
+        "Looper R1", "275", "30",
+        "Looper R2", "276", "30",
+        "Looper Track 1", "277", "30",
+        "Looper Track 2", "278", "30",
+        "Looper Clear", "279", "30",
+
+        "Multi On/Off", "116", "50",
+
+        "Musical Delay Dry/Wet", "56", "15",
+        "Musical Delay L/R Cross", "98", "15",
+        "Musical Delay Pan 1", "62", "15",
+        "Musical Delay Pan 2", "65", "15",
+        "Musical Delay Tempo", "424", "15",
+        "Musical Delay Gain 1", "24", "15",
+        "Musical Delay Gain 2", "25", "15",
+        "Musical Delay FB 1", "83", "15",
+        "Musical Delay FB 2", "84", "15",
+        "Musical Delay Damp", "425", "15",
+
+        "MuTroMojo Dry/Wet", "256", "31",
+        "MuTroMojo LP", "257", "31",
+        "MuTroMojo BP", "258", "31",
+        "MuTroMojo HP", "259", "31",
+        "MuTroMojo LFO Type", "462", "31",
+        "MuTroMojo Depth", "260", "31",
+        "MuTroMojo Tempo", "261", "31",
+        "MuTroMojo Res", "262", "31",
+        "MuTroMojo Range", "263", "31",
+        "MuTroMojo Wah", "264", "31",
+        "MuTroMojo E. Sens", "265", "31",
+        "MuTroMojo Smooth", "266", "31",
+        "MuTroMojo Random", "426", "31",
+        "MuTroMojo Stereo Df", "427", "31",
+        "MuTroMojo St. Freq", "428", "31",
+
+        "NoiseGate A. Time", "429", "16",
+        "NoiseGate R. Time", "430", "16",
+        "NoiseGate Range", "431", "16",
+        "NoiseGate Threshold", "432", "16",
+        "NoiseGate Hold", "433", "16",
+        "NoiseGate LPF", "434", "16",
+        "NoiseGate HPF", "435", "16",
+
+        "Opticaltrem Depth", "381", "44",
+        "Opticaltrem Tempo", "382", "44",
+        "Opticaltrem Random", "383", "44",
+        "Opticaltrem LFO Type", "463", "44",
+        "Opticaltrem Stereo Df", "384", "44",
+        "Opticaltrem Pan", "385", "44",
+
+        "Overdrive Dry/Wet", "29", "3",
+        "Overdrive L/R Cross", "94", "3",
+        "Overdrive Drive", "68", "3",
+        "Overdrive Level", "70", "3",
+        "Overdrive Type", "450", "3",
+        "Overdrive Pan", "47", "3",
+        "Overdrive LPF", "85", "3",
+        "Overdrive HPF", "88", "3",
+
+        "Pan Dry/Wet", "58", "13",
+        "Pan Pan", "67", "13",
+        "Pan Tempo", "77", "13",
+        "Pan Random", "110", "13",
+        "Pan LFO Type", "464", "13",
+        "Pan Stereo Df", "104", "13",
+        "Pan E. Stereo", "436", "13",
+
+        "Parametric EQ Gain", "148", "9",
+        "Parametric EQ Low Freq", "149", "9",
+        "Parametric EQ Low Gain", "150", "9",
+        "Parametric EQ Low Q", "151", "9",
+        "Parametric EQ Mid Freq", "152", "9",
+        "Parametric EQ Mid Gain", "153", "9",
+        "Parametric EQ Mid Q", "154", "9",
+        "Parametric EQ High Freq", "155", "9",
+        "Parametric EQ High Gain", "156", "9",
+        "Parametric EQ High Q", "157", "9",
+
+        "Phaser Dry/Wet", "54", "6",
+        "Phaser Pan", "60", "6",
+        "Phaser Tempo", "74", "6",
+        "Phaser Random", "107", "6",
+        "Phaser LFO Type", "465", "6",
+        "Phaser Phase", "114", "6",
+        "Phaser Stereo Df", "101", "6",
+        "Phaser Depth", "21", "6",
+        "Phaser Feedback", "81", "6",
+        "Phaser L/R Cross", "93", "6",
+
+        "Reverb Dry/Wet", "57", "8",
+        "Reverb Pan", "63", "8",
+        "Reverb Time", "437", "8",
+        "Reverb Initial Delay", "438", "8",
+        "Reverb Del. E/R", "439", "8",
+        "Reverb Room Size", "440", "8",
+        "Reverb LPF", "87", "8",
+        "Reverb HPF", "90", "8",
+        "Reverb Damping", "441", "8",
+
+        "Reverbtron Dry/Wet", "339", "40",
+        "Reverbtron Pan", "340", "40",
+        "Reverbtron Level", "341", "40",
+        "Reverbtron Damp", "342", "40",
+        "Reverbtron Feedback", "343", "40",
+        "Reverbtron Length", "344", "40",
+        "Reverbtron Stretch", "345", "40",
+        "Reverbtron Initial Delay", "346", "40",
+        "Reverbtron Fade", "347", "40",
+        "Reverbtron Diffusion", "442", "40",
+        "Reverbtron LPF", "443", "40",
+
+        "Ring Dry/Wet", "178", "21",
+        "Ring L/R Cross", "179", "21",
+        "Ring Input", "180", "21",
+        "Ring Level", "181", "21",
+        "Ring Pan", "182", "21",
+        "Ring Depth", "183", "21",
+        "Ring Freq", "184", "21",
+        "Ring Sine", "185", "21",
+        "Ring Triangle", "186", "21",
+        "Ring Sawtooth", "187", "21",
+        "Ring Square", "188", "21",
+
+        "Sequence Dry/Wet", "314", "37",
+        "Sequence 1", "315", "37",
+        "Sequence 2", "316", "37",
+        "Sequence 3", "317", "37",
+        "Sequence 4", "318", "37",
+        "Sequence 5", "319", "37",
+        "Sequence 6", "320", "37",
+        "Sequence 7", "321", "37",
+        "Sequence 8", "322", "37",
+        "Sequence Tempo", "323", "37",
+        "Sequence Q", "324", "37",
+        "Sequence Stereo Df", "325", "37",
+
+        "ShelfBoost Gain", "292", "34",
+        "ShelfBoost Level", "293", "34",
+        "ShelfBoost Tone", "294", "34",
+        "ShelfBoost Presence", "295", "34",
+
+        "Shifter Dry/Wet", "326", "38",
+        "Shifter Interval", "327", "38",
+        "Shifter Gain", "328", "38",
+        "Shifter Pan", "329", "38",
+        "Shifter Attack", "330", "38",
+        "Shifter Decay", "331", "38",
+        "Shifter Threshold", "332", "38",
+        "Shifter Whammy", "333", "38",
+
+        "Shuffle Dry/Wet", "227", "26",
+        "Shuffle Low Freq", "228", "26",
+        "Shuffle Low Gain", "229", "26",
+        "Shuffle M.L. Freq", "230", "26",
+        "Shuffle M.L. Gain", "231", "26",
+        "Shuffle M.H. Freq", "232", "26",
+        "Shuffle M.H. Gain", "233", "26",
+        "Shuffle High Freq", "234", "26",
+        "Shuffle High Gain", "235", "26",
+        "Shuffle Q", "236", "26",
+
+        "StereoHarm Dry/Wet", "358", "42",
+        "StereoHarm Int L", "359", "42",
+        "StereoHarm Chrm L", "360", "42",
+        "StereoHarm Gain L", "361", "42",
+        "StereoHarm Int R", "362", "42",
+        "StereoHarm Chrm R", "363", "42",
+        "StereoHarm Gain R", "364", "42",
+        "StereoHarm L/R Cross", "365", "42",
+        "StereoHarm SELECT", "448", "42",
+        "StereoHarm Note", "366", "42",
+        "StereoHarm Chord", "367", "42",
+
+        "StompBox Level", "334", "39",
+        "StompBox Gain", "335", "39",
+        "StompBox Bias", "336", "39",
+        "StompBox Mid", "337", "39",
+        "StompBox Tone", "338", "39",
+        "StompBox Mode", "455", "39",
+
+        "Sustainer Gain", "312", "36",
+        "Sustainer Sustain", "313", "36",
+
+        "Synthfilter Dry/Wet", "237", "27",
+        "Synthfilter Distort", "238", "27",
+        "Synthfilter Tempo", "239", "27",
+        "Synthfilter Random", "446", "27",
+        "Synthfilter LFO Type", "466", "27",
+        "Synthfilter Stereo Df", "240", "27",
+        "Synthfilter Width", "241", "27",
+        "Synthfilter Feedback", "242", "27",
+        "Synthfilter Depth", "243", "27",
+        "Synthfilter E.Sens", "244", "27",
+        "Synthfilter A.Time", "245", "27",
+        "Synthfilter R.Time", "246", "27",
+        "Synthfilter Offset", "247", "27",
+
+        "Valve Dry/Wet", "169", "19",
+        "Valve L/R Cross", "170", "19",
+        "Valve Pan", "171", "19",
+        "Valve Level", "172", "19",
+        "Valve Drive", "173", "19",
+        "Valve Dist", "174", "19",
+        "Valve Presence", "175", "19",
+        "Valve LPF", "176", "19",
+        "Valve HPF", "177", "19",
+
+        "VaryBand Dry/Wet", "248", "28",
+        "VaryBand Tempo 1", "249", "28",
+        "VaryBand LFO 1 Type", "467", "28",
+        "VaryBand St.df 1", "250", "28",
+        "VaryBand Tempo 2", "251", "28",
+        "VaryBand LFO 2 Type", "468", "28",
+        "VaryBand St.df 2", "252", "28",
+        "VaryBand Cross 1", "253", "28",
+        "VaryBand Cross 2", "254", "28",
+        "VaryBand Cross 3", "255", "28",
+
+        "Vibe Dry/Wet", "386", "45",
+        "Vibe Width", "387", "45",
+        "Vibe Depth", "388", "45",
+        "Vibe Tempo", "389", "45",
+        "Vibe Random", "390", "45",
+        "Vibe LFO Type", "469", "45",
+        "Vibe Stereo Df", "391", "45",
+        "Vibe Feedback", "392", "45",
+        "Vibe L/R Cross", "393", "45",
+        "Vibe Pan", "394", "45",
+
+        "Vocoder Dry/Wet", "296", "35",
+        "Vocoder Pan", "297", "35",
+        "Vocoder Input", "298", "35",
+        "Vocoder Smear", "299", "35",
+        "Vocoder Q", "300", "35",
+        "Vocoder Ring", "301", "35",
+        "Vocoder Level", "302", "35",
+
+        "Volume", "7", "50",
+
+        "WahWah Dry/Wet", "28", "10",
+        "WahWah Pan", "66", "10",
+        "WahWah Tempo", "75", "10",
+        "WahWah Random", "108", "10",
+        "WahWah LFO Type", "470", "10",
+        "WahWah Stereo Df", "102", "10",
+        "WahWah Depth", "1", "10",
+        "WahWah Amp S.", "111", "10",
+        "WahWah Amp S.I.", "112", "10",
+        "WahWah Smooth", "113", "10",
+    };
+
+    // If any additional parameters are added, then the constant
+    // C_MC_PARAMETER_SIZE must be adjusted.
+    for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
+    {
+        strcpy(efx_params[i].Nom, los_params[i * 3]);
+        sscanf(los_params[i * 3 + 1], "%d", &efx_params[i].Ato);
+        sscanf(los_params[i * 3 + 2], "%d", &efx_params[i].Effect);
+    }
 }
 
 void
