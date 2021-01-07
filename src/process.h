@@ -116,6 +116,7 @@ public:
     void Adjust_Upsample();
     void add_metro();
     void init_rkr ();
+    void load_user_preferences();
     int Message (int prio, const char *labelwin, const char *message_text);
     char *PrefNom (const char *dato);
     void EQ1_setpreset (int npreset);

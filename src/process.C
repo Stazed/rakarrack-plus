@@ -440,134 +440,8 @@ RKR::RKR() :
     {
         return;
     }
-
-    // User preferences
-    rakarrack.get(PrefNom("Disable Warnings"), mess_dis, 0);
-    rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
-    rakarrack.get(PrefNom("UpSampling"), upsample, 0);
-    rakarrack.get(PrefNom("UpQuality"), UpQual, 4);
-    rakarrack.get(PrefNom("DownQuality"), DownQual, 4);
-    rakarrack.get(PrefNom("UpAmount"), UpAmo, 0);
-
-    Adjust_Upsample();
-
-    rakarrack.get(PrefNom("Looper Size"), looper_size, 1);
-    rakarrack.get(PrefNom("Calibration"), aFreq, 440.0f);
-    //    RecNote->update_freqs(aFreq); // cannot call here until RecNote is declared, which must be placed after efxoutl, efxoutr initialization
-
-    rakarrack.get(PrefNom("Vocoder Bands"), VocBands, 32);
-    rakarrack.get(PrefNom("Recognize Trigger"), rtrig, .6f);
-
-    Fraction_Bypass = 1.0f;
-    Master_Volume = 0.50f;
-    Input_Gain = 0.50f;
-
-    rakarrack.get(PrefNom("Harmonizer Downsample"), Har_Down, 5);
-    rakarrack.get(PrefNom("Harmonizer Up Quality"), Har_U_Q, 4);
-    rakarrack.get(PrefNom("Harmonizer Down Quality"), Har_D_Q, 2);
-
-    rakarrack.get(PrefNom("StereoHarm Downsample"), Ste_Down, 5);
-    rakarrack.get(PrefNom("StereoHarm Up Quality"), Ste_U_Q, 4);
-    rakarrack.get(PrefNom("StereoHarm Down Quality"), Ste_D_Q, 2);
-
-    rakarrack.get(PrefNom("Reverbtron Downsample"), Rev_Down, 5);
-    rakarrack.get(PrefNom("Reverbtron Up Quality"), Rev_U_Q, 4);
-    rakarrack.get(PrefNom("Reverbtron Down Quality"), Rev_D_Q, 2);
-
-    rakarrack.get(PrefNom("Convolotron Downsample"), Con_Down, 6);
-    rakarrack.get(PrefNom("Convolotron Up Quality"), Con_U_Q, 4);
-    rakarrack.get(PrefNom("Convolotron Down Quality"), Con_D_Q, 2);
-
-    rakarrack.get(PrefNom("Sequence Downsample"), Seq_Down, 5);
-    rakarrack.get(PrefNom("Sequence Up Quality"), Seq_U_Q, 4);
-    rakarrack.get(PrefNom("Sequence Down Quality"), Seq_D_Q, 2);
-
-    rakarrack.get(PrefNom("Shifter Downsample"), Shi_Down, 5);
-    rakarrack.get(PrefNom("Shifter Up Quality"), Shi_U_Q, 4);
-    rakarrack.get(PrefNom("Shifter Down Quality"), Shi_D_Q, 2);
-
-    rakarrack.get(PrefNom("Vocoder Downsample"), Voc_Down, 5);
-    rakarrack.get(PrefNom("Vocoder Up Quality"), Voc_U_Q, 4);
-    rakarrack.get(PrefNom("Vocoder Down Quality"), Voc_D_Q, 2);
-
-    rakarrack.get(PrefNom("Distortion Resampling"), Dist_res_amount, 2);
-    rakarrack.get(PrefNom("Distortion Up Quality"), Dist_up_q, 4);
-    rakarrack.get(PrefNom("Distortion Down Quality"), Dist_down_q, 2);
-
-    rakarrack.get(PrefNom("Overdrive Resampling"), Ovrd_res_amount, 2);
-    rakarrack.get(PrefNom("Overdrive Up Quality"), Ovrd_up_q, 4);
-    rakarrack.get(PrefNom("Overdrive Down Quality"), Ovrd_down_q, 2);
-
-    rakarrack.get(PrefNom("Derelict Resampling"), Dere_res_amount, 2);
-    rakarrack.get(PrefNom("Derelict Up Quality"), Dere_up_q, 4);
-    rakarrack.get(PrefNom("Derelict Down Quality"), Dere_down_q, 2);
-
-    rakarrack.get(PrefNom("DistBand Resampling"), DBand_res_amount, 2);
-    rakarrack.get(PrefNom("DistBand Up Quality"), DBand_up_q, 4);
-    rakarrack.get(PrefNom("DistBand Down Quality"), DBand_down_q, 2);
-
-    rakarrack.get(PrefNom("StompBox Resampling"), Stomp_res_amount, 2);
-    rakarrack.get(PrefNom("StompBox Up Quality"), Stomp_up_q, 4);
-    rakarrack.get(PrefNom("StompBox Down Quality"), Stomp_down_q, 2);
-
-    rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
-    rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);
     
-    rakarrack.get(PrefNom("Sequence Quality"), SeqQual, 4);
-    rakarrack.get(PrefNom("Shifter Quality"), ShiQual, 4);
-
-    rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);
-    
-    /* For default on new installs - don't connect input - can cause feedback loop = 0 */
-    rakarrack.get(PrefNom("Auto Connect Jack In"), aconnect_JIA, 0);
-
-    rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);
-    rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
-
-    char temp[256];
-    memset(temp, 0, sizeof (temp));
-    char j_names[128];
-
-    static const char *jack_names[] ={"system:playback_1", "system:playback_2"};
-
-    for (int i = 0; i < cuan_jack; i++)
-    {
-        memset(temp, 0, sizeof (temp));
-        sprintf(temp, "Jack Port %d", i + 1);
-        
-        if (i < 2)
-        {
-            strcpy(j_names, jack_names[i]);
-        }
-        else
-        {
-            strcpy(j_names, "");
-        }
-        
-        rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
-    }
-
-    memset(j_names, 0, sizeof (j_names));
-
-    static const char *jack_inames[] ={"system:capture_1", "system:capture_2"};
-
-    for (int i = 0; i < cuan_ijack; i++)
-    {
-        memset(temp, 0, sizeof (temp));
-        sprintf(temp, "Jack Port In %d", i + 1);
-        
-        if (i < 1)
-        {
-            strcpy(j_names, jack_inames[i]);
-        }
-        else
-        {
-            strcpy(j_names, "");
-        }
-        
-        rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
-    }
-    // end user preferences
+    load_user_preferences();
 
     // initialize 
     bogomips = 0.0f;
@@ -588,7 +462,6 @@ RKR::RKR() :
 
     m_ticks = (float *) malloc(sizeof (float) * period);
 
-    //ssj
     interpbuf = (float*) malloc(sizeof (float)* period);
 
     memset(efxoutl, 0, sizeof (float)*period);
@@ -1444,6 +1317,137 @@ RKR::init_rkr()
     HarmRecNote->reconota = -1;
     StHarmRecNote->reconota = -1;
     RingRecNote->reconota = -1;
+}
+
+/**
+ *  Loads the user preferences set in the Settings/Preferences tabs:
+ *  Look, Audio, Quality, MIDI, Jack, Misc, Bank.
+ *  These settings are saved in:
+ *  /home/username/.fltk/github.com.Stazed.rakarrrack.plus/rakarrack-plus.prefs
+ */
+void
+RKR::load_user_preferences()
+{
+    rakarrack.get(PrefNom("Disable Warnings"), mess_dis, 0);
+    rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
+    rakarrack.get(PrefNom("UpSampling"), upsample, 0);
+    rakarrack.get(PrefNom("UpQuality"), UpQual, 4);
+    rakarrack.get(PrefNom("DownQuality"), DownQual, 4);
+    rakarrack.get(PrefNom("UpAmount"), UpAmo, 0);
+
+    Adjust_Upsample();
+
+    rakarrack.get(PrefNom("Looper Size"), looper_size, 1);
+    rakarrack.get(PrefNom("Calibration"), aFreq, 440.0f);
+
+    rakarrack.get(PrefNom("Vocoder Bands"), VocBands, 32);
+    rakarrack.get(PrefNom("Recognize Trigger"), rtrig, .6f);
+
+    rakarrack.get(PrefNom("Harmonizer Downsample"), Har_Down, 5);
+    rakarrack.get(PrefNom("Harmonizer Up Quality"), Har_U_Q, 4);
+    rakarrack.get(PrefNom("Harmonizer Down Quality"), Har_D_Q, 2);
+
+    rakarrack.get(PrefNom("StereoHarm Downsample"), Ste_Down, 5);
+    rakarrack.get(PrefNom("StereoHarm Up Quality"), Ste_U_Q, 4);
+    rakarrack.get(PrefNom("StereoHarm Down Quality"), Ste_D_Q, 2);
+
+    rakarrack.get(PrefNom("Reverbtron Downsample"), Rev_Down, 5);
+    rakarrack.get(PrefNom("Reverbtron Up Quality"), Rev_U_Q, 4);
+    rakarrack.get(PrefNom("Reverbtron Down Quality"), Rev_D_Q, 2);
+
+    rakarrack.get(PrefNom("Convolotron Downsample"), Con_Down, 6);
+    rakarrack.get(PrefNom("Convolotron Up Quality"), Con_U_Q, 4);
+    rakarrack.get(PrefNom("Convolotron Down Quality"), Con_D_Q, 2);
+
+    rakarrack.get(PrefNom("Sequence Downsample"), Seq_Down, 5);
+    rakarrack.get(PrefNom("Sequence Up Quality"), Seq_U_Q, 4);
+    rakarrack.get(PrefNom("Sequence Down Quality"), Seq_D_Q, 2);
+
+    rakarrack.get(PrefNom("Shifter Downsample"), Shi_Down, 5);
+    rakarrack.get(PrefNom("Shifter Up Quality"), Shi_U_Q, 4);
+    rakarrack.get(PrefNom("Shifter Down Quality"), Shi_D_Q, 2);
+
+    rakarrack.get(PrefNom("Vocoder Downsample"), Voc_Down, 5);
+    rakarrack.get(PrefNom("Vocoder Up Quality"), Voc_U_Q, 4);
+    rakarrack.get(PrefNom("Vocoder Down Quality"), Voc_D_Q, 2);
+
+    rakarrack.get(PrefNom("Distortion Resampling"), Dist_res_amount, 2);
+    rakarrack.get(PrefNom("Distortion Up Quality"), Dist_up_q, 4);
+    rakarrack.get(PrefNom("Distortion Down Quality"), Dist_down_q, 2);
+
+    rakarrack.get(PrefNom("Overdrive Resampling"), Ovrd_res_amount, 2);
+    rakarrack.get(PrefNom("Overdrive Up Quality"), Ovrd_up_q, 4);
+    rakarrack.get(PrefNom("Overdrive Down Quality"), Ovrd_down_q, 2);
+
+    rakarrack.get(PrefNom("Derelict Resampling"), Dere_res_amount, 2);
+    rakarrack.get(PrefNom("Derelict Up Quality"), Dere_up_q, 4);
+    rakarrack.get(PrefNom("Derelict Down Quality"), Dere_down_q, 2);
+
+    rakarrack.get(PrefNom("DistBand Resampling"), DBand_res_amount, 2);
+    rakarrack.get(PrefNom("DistBand Up Quality"), DBand_up_q, 4);
+    rakarrack.get(PrefNom("DistBand Down Quality"), DBand_down_q, 2);
+
+    rakarrack.get(PrefNom("StompBox Resampling"), Stomp_res_amount, 2);
+    rakarrack.get(PrefNom("StompBox Up Quality"), Stomp_up_q, 4);
+    rakarrack.get(PrefNom("StompBox Down Quality"), Stomp_down_q, 2);
+
+    rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
+    rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);
+    
+    rakarrack.get(PrefNom("Sequence Quality"), SeqQual, 4);
+    rakarrack.get(PrefNom("Shifter Quality"), ShiQual, 4);
+
+    rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);
+    
+    // Default on new installs - don't connect input - can cause feedback loop = 0
+    rakarrack.get(PrefNom("Auto Connect Jack In"), aconnect_JIA, 0);
+
+    rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);
+    rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
+
+    char temp[256];
+    memset(temp, 0, sizeof (temp));
+    char j_names[128];
+
+    static const char *jack_names[] ={"system:playback_1", "system:playback_2"};
+
+    for (int i = 0; i < cuan_jack; i++)
+    {
+        memset(temp, 0, sizeof (temp));
+        sprintf(temp, "Jack Port %d", i + 1);
+        
+        if (i < 2)
+        {
+            strcpy(j_names, jack_names[i]);
+        }
+        else
+        {
+            strcpy(j_names, "");
+        }
+        
+        rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
+    }
+
+    memset(j_names, 0, sizeof (j_names));
+
+    static const char *jack_inames[] ={"system:capture_1", "system:capture_2"};
+
+    for (int i = 0; i < cuan_ijack; i++)
+    {
+        memset(temp, 0, sizeof (temp));
+        sprintf(temp, "Jack Port In %d", i + 1);
+        
+        if (i < 1)
+        {
+            strcpy(j_names, jack_inames[i]);
+        }
+        else
+        {
+            strcpy(j_names, "");
+        }
+        
+        rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
+    }
 }
 
 /**
