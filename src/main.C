@@ -40,7 +40,9 @@ show_help()
     fprintf(stderr, "  -l File, --load=File \t\t\t loads preset\n");
     fprintf(stderr, "  -b File, --bank=File \t\t\t loads bank\n");
     fprintf(stderr, "  -p #,    --preset=# \t\t\t set preset\n");
+#ifdef JACK_SESSION
     fprintf(stderr, "  -u uuid, --session=# \t\t\t set jack session uuid\n");
+#endif
     fprintf(stderr, "  -j Name, --jack-client-name=Name \t set alternate jack/alsa name: default=rakarrack-plus\n");
     fprintf(stderr, "  -x, --dump-preset-names \t\t prints bank of preset names and IDs\n\n");
     fprintf(stderr, "FLTK options are:\n\n");
@@ -152,6 +154,7 @@ main(int argc, char *argv[])
             break;
 
         case 'u':
+#ifdef JACK_SESSION
             if (optarguments != NULL)
             {
                 commandline = 1;
@@ -159,6 +162,7 @@ main(int argc, char *argv[])
                 s_uuid = strdup(optarguments);
                 statefile = strdup(argv[optind]);
             }
+#endif // JACK_SESSION
             break;
 
         case 'j':
