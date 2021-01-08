@@ -124,11 +124,11 @@ RKR::RKR() :
     jshut(),
     DC_Offset(),
     Bypass(),
-    MIDIConverter_Bypass(),
-    Metro_Bypass(),
-    Tuner_Bypass(),
-    Tap_Bypass(),
-    ACI_Bypass(),
+    MIDIConverter_Bypass(0),
+    Metro_Bypass(0),
+    Tuner_Bypass(0),
+    Tap_Bypass(0),
+    ACI_Bypass(0),
     Reverb_Bypass(),
     Chorus_Bypass(),
     Flanger_Bypass(),
@@ -224,20 +224,20 @@ RKR::RKR() :
     Opticaltrem_B(),
     Vibe_B(),
     Infinity_B(),
-    Selected_Preset(),
+    Selected_Preset(1),
     lv(),
     saved_order(),
     efx_order(),
     new_order(),
     availables(),
     active(),
-    MidiCh(),
+    MidiCh(0),
     HarCh(),
     StereoHarCh(),
     init_state(),
     actuvol(),
-    help_displayed(),
-    modified(),
+    help_displayed(0),
+    modified(0),
     autoassign(),
     comemouse(),
     aconnect_MI(),
@@ -251,8 +251,8 @@ RKR::RKR() :
     Ccin(),
     Pcin(),
     Mcontrol(),
-    RControl(),
-    ControlGet(),
+    RControl(0),
+    ControlGet(0),
     CountWait(),
     XUserMIDI(),
     quality_update(false),
@@ -334,16 +334,16 @@ RKR::RKR() :
     SteQual(),
     SeqQual(),
     ShiQual(),
-    tempocnt(),
-    Tap_Display(),
-    Tap_Selection(),
-    Tap_TempoSet(),
+    tempocnt(0),
+    Tap_Display(0),
+    Tap_Selection(0),
+    Tap_TempoSet(90),
     Tap_SetValue(),
-    t_timeout(),
+    t_timeout(0),
     jt_state(),
-    Tap_Updated(),
-    note_old(),
-    cents_old(),
+    Tap_Updated(0),
+    note_old(0),
+    cents_old(0),
     cpufp(),
     mess_dis(),
     numpi(),
@@ -361,7 +361,7 @@ RKR::RKR() :
     Aux_Minimum(),
     Aux_Maximum(),
     Aux_Source(),
-    last_auxvalue(),
+    last_auxvalue(0),
     ena_tool(),
     VocBands(),
     RCOpti_Harm(),
@@ -374,7 +374,7 @@ RKR::RKR() :
     ML_filter(),
     ML_clist(),
     Tap_time_Init(),
-    Tap_timeB(),
+    Tap_timeB(0),
     Tap_timeC(),
     jt_tempo(),
     tempobuf(),
@@ -400,21 +400,21 @@ RKR::RKR() :
     Log_I_Gain(),
     Log_M_Volume(),
     M_Metro_Vol(),
-    val_sum(),
-    old_il_sum(),
-    old_ir_sum(),
-    old_vl_sum(),
-    old_vr_sum(),
-    val_vl_sum(),
-    val_vr_sum(),
-    val_il_sum(),
-    val_ir_sum(),
-    old_a_sum(),
-    val_a_sum(),
+    val_sum(0.0f),
+    old_il_sum(-0.0f),
+    old_ir_sum(-0.0f),
+    old_vl_sum(-0.0f),
+    old_vr_sum(-0.0f),
+    val_vl_sum(-0.0f),
+    val_vr_sum(-0.0f),
+    val_il_sum(-0.0f),
+    val_ir_sum(-0.0f),
+    old_a_sum(-0.0f),
+    val_a_sum(-0.0f),
     bogomips(0.0f),
     looper_size(),
-    nfreq_old(),
-    afreq_old(),
+    nfreq_old(0),
+    afreq_old(0),
     tmpprefname(),
     Preset_Name(NULL),
     Author(NULL),
@@ -557,57 +557,7 @@ RKR::~RKR()
 void
 RKR::init_rkr()
 {
-    Tuner_Bypass = 0;
-    MIDIConverter_Bypass = 0;
-    Metro_Bypass = 0;
-    Tap_Bypass = 0;
-    Tap_Updated = 0;
-    t_timeout = 0;
-    ACI_Bypass = 0;
-    Selected_Preset = 1;
-
     efx_FLimiter->setpreset(0, 4);
-
-    val_sum = 0.0f;
-    old_il_sum = -0.0f;
-    old_ir_sum = -0.0f;
-
-    old_vl_sum = -0.0f;
-    old_vr_sum = -0.0f;
-
-    old_a_sum = -0.0f;
-    val_a_sum = -0.0f;
-
-    val_il_sum = -0.0f;
-    val_ir_sum = -0.0f;
-
-    val_vl_sum = -0.0f;
-    val_vr_sum = -0.0f;
-
-    last_auxvalue = 0;
-    note_old = 0;
-    nfreq_old = 0;
-    afreq_old = 0;
-    cents_old = 0;
-
-    MidiCh = 0;
-    RControl = 0;
-    ControlGet = 0;
-
-    help_displayed = 0;
-    modified = 0;
-
-    tempocnt = 0;
-    
-    for (int i = 0; i < 6; i++)
-    {
-        tempobuf[i] = 0;
-    }
-    
-    Tap_timeB = 0;
-    Tap_Display = 0;
-    Tap_Selection = 0;
-    Tap_TempoSet = 90;
 
     // Load Preset Bank File
     char temp[128];
