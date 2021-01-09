@@ -29,7 +29,7 @@
 #include "mayer_fft.h"
 #include <vector>
 
-#define CONVO_PRESET_SIZE 11
+const int C_CONVO_PARAMETERS = 11;
 
 enum Convo_Index
 {

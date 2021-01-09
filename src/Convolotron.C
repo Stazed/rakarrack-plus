@@ -138,7 +138,7 @@ std::vector<int>
 Convolotron::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < CONVO_PRESET_SIZE; i++)
+    for(int i = 0; i < C_CONVO_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -149,7 +149,7 @@ Convolotron::save_parameters()
 void
 Convolotron::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < CONVO_PRESET_SIZE; i++)
+    for(int i = 0; i < C_CONVO_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -512,7 +512,7 @@ Convolotron::UpdateLength()
 void
 Convolotron::setpreset(int npreset)
 {
-    const int PRESET_SIZE = CONVO_PRESET_SIZE;
+    const int PRESET_SIZE = C_CONVO_PARAMETERS;
     const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

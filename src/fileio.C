@@ -1647,7 +1647,7 @@ RKR::Actualizar_Audio()
 
             Convol_Bypass = 0;
             efx_Convol->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_CONVO_PARAMETERS; i++)
                 efx_Convol->changepar(i, lv[30][i]);
             Convol_Bypass = Convol_B;
             break;
@@ -2276,7 +2276,7 @@ RKR::Preset_to_Bank(int i)
         lv[28][j] = efx_Synthfilter->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[29][j] = efx_VaryBand->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_CONVO_PARAMETERS; j++)
         lv[30][j] = efx_Convol->getpar(j);
     for (j = 0; j <= 13; j++)
         lv[31][j] = efx_Looper->getpar(j);

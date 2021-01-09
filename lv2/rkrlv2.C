@@ -5545,7 +5545,9 @@ LV2_Handle init_convollv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 7;
+    // -4 for: Convo_User_File, Convo_SKIP_5, Convo_Set_File, Convo_SKIP_9
+    plug->nparams = (C_CONVO_PARAMETERS - 4);
+
     plug->effectindex = ICONVO;
     plug->prev_bypass = 1;
 
