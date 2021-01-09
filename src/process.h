@@ -120,7 +120,6 @@ public:
     void New_Bank ();
     void Adjust_Upsample();
     void add_metro();
-    void init_rkr ();
     void load_user_preferences();
     void instantiate_effects();
     void initialize_arrays();

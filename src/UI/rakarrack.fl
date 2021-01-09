@@ -312,7 +312,7 @@ class RKRGUI {open
   } {
     Fl_Window Principal {
       callback {is_modified();
-save_stat(0);
+save_current_state(0);
 
 Pexitprogram=1;} open
       xywh {620 93 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
@@ -1708,7 +1708,7 @@ UpdateTGUI();
       }
     }
     Fl_Window BankWindow {
-      callback {save_stat(1);
+      callback {save_current_state(1);
 o->hide();} open
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
@@ -1717,7 +1717,7 @@ o->hide();} open
       class BankWindowGui size_range {320 240 3200 2400}
     } {}
     Fl_Window Order {
-      callback {save_stat(2);
+      callback {save_current_state(2);
 o->hide();} open
       xywh {133 400 500 400} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "orderwindow_gui.h"}
@@ -1726,7 +1726,7 @@ o->hide();} open
       class OrderWindowGui size_range {250 200 3200 2400}
     } {}
     Fl_Window Settings {
-      callback {save_stat(3);
+      callback {save_current_state(3);
 o->hide();} open
       xywh {390 434 530 580} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "settingswindow_gui.h"}
@@ -1736,7 +1736,7 @@ o->hide();} open
     } {}
     Fl_Window MIDILearn {
       callback {MIDILearn->CancelRec->do_callback();
-save_stat(5);
+save_current_state(5);
 o->hide();} open
       xywh {165 106 640 480} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "midilearnwindow_gui.h"}
@@ -1755,7 +1755,7 @@ o->hide();} open
     } {}
     Fl_Window Trigger {
       callback {rkr->ACI_Bypass=0;
-save_stat(6);
+save_current_state(6);
 o->hide();} open
       xywh {711 533 205 165} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "trigwindow_gui.h"}
@@ -1789,9 +1789,9 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {put_icon(Fl_Window* window)} {open
   } {}
-  Function {load_stat()} {open
+  Function {load_previous_state()} {open
   } {}
-  Function {save_stat(int whati)} {open
+  Function {save_current_state(int whati)} {open
   } {}
   Function {Put_Loaded()} {open
   } {}

@@ -563,8 +563,8 @@ public:
   void Buttons_Color_Change(Fl_Color bcolor);
   void Leds_Color_Change(Fl_Color bcolor);
   void put_icon(Fl_Window* window);
-  void load_stat();
-  void save_stat(int whati);
+  void load_previous_state();
+  void save_current_state(int whati);
   void Put_Loaded();
   static void preset_click(Fl_Button* o, void* v);
   inline void preset_click_i(Fl_Button* o, void*);

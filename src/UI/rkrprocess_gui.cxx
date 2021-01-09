@@ -99,7 +99,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     sprintf(tmp, "%s   v%s - ACI", rkr->jackcliname, VERSION);
     Trigger->copy_label(tmp);
     
-    load_stat();
+    load_previous_state();
     Settings->make_table_window();
     Put_Loaded();
     Principal->show(argc, argv);
@@ -713,9 +713,12 @@ void RKRGUI::put_icon(Fl_Window* window)
     XSetWMHints(fl_display, fl_xid(window), hints);
 }
 
-void RKRGUI::load_stat()
+/**
+ *  Loads the previous state when shutdown, window sizes, images, etc.
+ *  From ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
+ */
+void RKRGUI::load_previous_state()
 {
-    // load user preferences and last fltk state from ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
     int x, y, w, h, k, b, f, l, a;
     x = y = w = h = k = b = f = l = a = 0;
 
@@ -1027,10 +1030,22 @@ void RKRGUI::load_stat()
     }
 }
 
-void RKRGUI::save_stat(int whati)
+/**
+ *  Save the current user state, windows, images, bank selected, preset, etc.
+ *  In ~/user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
+ * 
+ * @param whati
+ *      The window settings that should be saved:
+ *      0 = Main window & User settings
+ *      1 = Bank window
+ *      2 = Order window
+ *      3 = Settings window & User settings
+ *      4 = Not used
+ *      5 = MIDI Learn
+ *      6 = Trigger window (ACI)
+ */
+void RKRGUI::save_current_state(int whati)
 {
-    // save user preferences and last fltk state in ~/user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
-
     char temp1[128];
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
@@ -5640,7 +5655,7 @@ void RKRGUI::Put_Skin()
     Buttons_Color_Change(fore_color);
 
 
-    save_stat(3);
+    save_current_state(3);
     Fl::redraw();
 }
 

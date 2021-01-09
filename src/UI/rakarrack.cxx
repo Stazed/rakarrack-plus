@@ -34,7 +34,7 @@ int global_font_size = C_DEFAULT_FONT_SIZE; // extern global
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();
-save_stat(0);
+save_current_state(0);
 
 Pexitprogram=1;
 }
@@ -840,7 +840,7 @@ void RKRGUI::cb_T_DIS(RKR_Value_Input* o, void* v) {
 }
 
 void RKRGUI::cb_BankWindow2_i(BankWindowGui* o, void*) {
-  save_stat(1);
+  save_current_state(1);
 o->hide();
 }
 void RKRGUI::cb_BankWindow2(BankWindowGui* o, void* v) {
@@ -848,7 +848,7 @@ void RKRGUI::cb_BankWindow2(BankWindowGui* o, void* v) {
 }
 
 void RKRGUI::cb_Order_i(OrderWindowGui* o, void*) {
-  save_stat(2);
+  save_current_state(2);
 o->hide();
 }
 void RKRGUI::cb_Order(OrderWindowGui* o, void* v) {
@@ -856,7 +856,7 @@ void RKRGUI::cb_Order(OrderWindowGui* o, void* v) {
 }
 
 void RKRGUI::cb_Settings_i(SettingsWindowGui* o, void*) {
-  save_stat(3);
+  save_current_state(3);
 o->hide();
 }
 void RKRGUI::cb_Settings(SettingsWindowGui* o, void* v) {
@@ -865,7 +865,7 @@ void RKRGUI::cb_Settings(SettingsWindowGui* o, void* v) {
 
 void RKRGUI::cb_MIDILearn_i(MidiLearnWindowGui* o, void*) {
   MIDILearn->CancelRec->do_callback();
-save_stat(5);
+save_current_state(5);
 o->hide();
 }
 void RKRGUI::cb_MIDILearn(MidiLearnWindowGui* o, void* v) {
@@ -881,7 +881,7 @@ void RKRGUI::cb_AboutWin(AboutWindowGui* o, void* v) {
 
 void RKRGUI::cb_Trigger_i(TrigWindowGui* o, void*) {
   rkr->ACI_Bypass=0;
-save_stat(6);
+save_current_state(6);
 o->hide();
 }
 void RKRGUI::cb_Trigger(TrigWindowGui* o, void* v) {

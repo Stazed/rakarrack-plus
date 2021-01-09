@@ -265,7 +265,7 @@ main(int argc, char *argv[])
 
     if (needtoloadstate)
     {
-        rgui->save_stat(0);
+        rgui->save_current_state(0);
     }
 
     JACKfinish(&rkr);

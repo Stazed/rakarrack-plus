@@ -461,7 +461,16 @@ RKR::RKR() :
     // Initialize Bank
     New_Bank();
     
-    init_rkr();
+    // Loads the banks preset names and information for the bank manager window.
+    loadnames();
+
+    // If no bank is listed from the command line, then load the default user bank
+    // in Settings/Preferences/Bank/ Bank Filename
+    if (commandline == 0)
+    {
+        loadbank(BankFilename);
+        a_bank = 3;
+    }
 }
 
 RKR::~RKR()
@@ -553,31 +562,6 @@ RKR::~RKR()
     // alsa
     snd_seq_close(midi_in);
 };
-
-void
-RKR::init_rkr()
-{
-    efx_FLimiter->setpreset(0, 4);
-
-    // Load Preset Bank File
-    char temp[128];
-    memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s/Default.rkrb", DATADIR);
-    rakarrack.get(PrefNom("Bank Filename"), BankFilename, temp, 127);
-    loadnames();
-
-    if (commandline == 0)
-    {
-        loadbank(BankFilename);
-        a_bank = 3;
-    }
-    
-    RC_Harm->cleanup();
-    RC_Stereo_Harm->cleanup();
-    HarmRecNote->reconota = -1;
-    StHarmRecNote->reconota = -1;
-    RingRecNote->reconota = -1;
-}
 
 /**
  *  Loads the user preferences set in the Settings/Preferences tabs:
@@ -708,6 +692,11 @@ RKR::load_user_preferences()
         
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
     }
+    
+    // Get user default bank file from Settings/Bank/ --Bank Filename
+    memset(temp, 0, sizeof (temp));
+    sprintf(temp, "%s/Default.rkrb", DATADIR);
+    rakarrack.get(PrefNom("Bank Filename"), BankFilename, temp, 127);
 }
 
 /**
@@ -812,6 +801,14 @@ RKR::instantiate_effects()
     RingRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
     RC_Harm = new RecChord();
     RC_Stereo_Harm = new RecChord();
+    
+    // Defaults and cleanup
+    efx_FLimiter->setpreset(0, 4);
+    RC_Harm->cleanup();
+    RC_Stereo_Harm->cleanup();
+    HarmRecNote->reconota = -1;
+    StHarmRecNote->reconota = -1;
+    RingRecNote->reconota = -1;
 }
 
 void
