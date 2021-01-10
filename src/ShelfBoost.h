@@ -23,6 +23,8 @@
 
 #include "AnalogFilter.h"
 
+const int C_SHELF_PARAMETERS = 5;
+
 enum Shelf_Index
 {
     Shelf_Gain = 0,

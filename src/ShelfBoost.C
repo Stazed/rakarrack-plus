@@ -141,7 +141,7 @@ ShelfBoost::setvolume(int value)
 void
 ShelfBoost::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 5;
+    const int PRESET_SIZE = C_SHELF_PARAMETERS;
     const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

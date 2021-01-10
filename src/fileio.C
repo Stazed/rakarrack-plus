@@ -1698,7 +1698,7 @@ RKR::Actualizar_Audio()
 
             ShelfBoost_Bypass = 0;
             efx_ShelfBoost->cleanup();
-            for (i = 0; i <= 4; i++)
+            for (i = 0; i < C_SHELF_PARAMETERS; i++)
                 efx_ShelfBoost->changepar(i, lv[35][i]);
             ShelfBoost_Bypass = ShelfBoost_B;
             break;
@@ -2292,7 +2292,7 @@ RKR::Preset_to_Bank(int i)
         lv[33][j] = efx_Echoverse->getpar(j);
     for (j = 0; j < C_COIL_PARAMETERS; j++)
         lv[34][j] = efx_CoilCrafter->getpar(j);
-    for (j = 0; j <= 4; j++)
+    for (j = 0; j < C_SHELF_PARAMETERS; j++)
         lv[35][j] = efx_ShelfBoost->getpar(j);
     for (j = 0; j < C_VOCODER_PARAMETERS; j++)
         lv[36][j] = efx_Vocoder->getpar(j);

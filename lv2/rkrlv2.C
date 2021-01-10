@@ -3395,7 +3395,7 @@ LV2_Handle init_shelflv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 5;
+    plug->nparams = C_SHELF_PARAMETERS;
     plug->effectindex = ISHELF;
     plug->prev_bypass = 1;
 
