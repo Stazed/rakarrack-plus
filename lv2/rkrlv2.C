@@ -1859,7 +1859,7 @@ LV2_Handle init_wahlv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = C_WAHWAH_PARAMETERS;
     plug->effectindex = IWAH;
     plug->prev_bypass = 1;
 

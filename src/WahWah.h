@@ -30,6 +30,8 @@
 #include "EffectLFO.h"
 #include "Filter.h"
 
+const int C_WAHWAH_PARAMETERS = 11;
+
 enum WahWah_Index
 {
     WahWah_DryWet = 0,

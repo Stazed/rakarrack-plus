@@ -1482,7 +1482,7 @@ RKR::Actualizar_Audio()
 
             WahWah_Bypass = 0;
             efx_WahWah->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_WAHWAH_PARAMETERS; i++)
                 efx_WahWah->changepar(i, lv[11][i]);
             WahWah_Bypass = WahWah_B;
             break;
@@ -2246,7 +2246,7 @@ RKR::Preset_to_Bank(int i)
         lv[6][j] = efx_Distorsion->getpar(j);
     for (j = 0; j < C_COMPRESS_PARAMETERS; j++)
         lv[9][j] = efx_Compressor->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_WAHWAH_PARAMETERS; j++)
         lv[11][j] = efx_WahWah->getpar(j);
     for (j = 0; j < C_ALIENWAH_PARAMETERS; j++)
         lv[12][j] = efx_Alienwah->getpar(j);

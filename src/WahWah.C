@@ -205,7 +205,7 @@ WahWah::reinitfilter()
 void
 WahWah::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 11;
+    const int PRESET_SIZE = C_WAHWAH_PARAMETERS;
     const int NUM_PRESETS = 5;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
