@@ -3962,7 +3962,7 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = (REVTRON_PRESET_SIZE - 2);  // -2 Revtron_User_File, Revtron_Set_File
+    plug->nparams = (C_REVTRON_PARAMETERS - 2);  // -2 Revtron_User_File, Revtron_Set_File
     plug->effectindex = IREVTRON;
     plug->prev_bypass = 1;
 

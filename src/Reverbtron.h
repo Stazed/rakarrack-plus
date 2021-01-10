@@ -28,7 +28,7 @@
 #include "AnalogFilter.h"
 #include "Resample.h"
 
-#define REVTRON_PRESET_SIZE 16
+const int C_REVTRON_PARAMETERS = 16;
 
 enum Revtron_Index
 {

@@ -166,7 +166,7 @@ std::vector<int>
 Reverbtron::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < REVTRON_PRESET_SIZE; i++)
+    for(int i = 0; i < C_REVTRON_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -177,7 +177,7 @@ Reverbtron::save_parameters()
 void
 Reverbtron::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < REVTRON_PRESET_SIZE; i++)
+    for(int i = 0; i < C_REVTRON_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -814,7 +814,7 @@ Reverbtron::adjust(int DS, double fSAMPLE_RATE)
 void
 Reverbtron::setpreset(int npreset)
 {
-    const int PRESET_SIZE = REVTRON_PRESET_SIZE;
+    const int PRESET_SIZE = C_REVTRON_PARAMETERS;
     const int NUM_PRESETS = 9;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
