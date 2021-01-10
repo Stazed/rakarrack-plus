@@ -1608,7 +1608,7 @@ RKR::Actualizar_Audio()
 
             Arpie_Bypass = 0;
             efx_Arpie->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_ARPIE_PARAMETERS; i++)
                 efx_Arpie->changepar(i, lv[25][i]);
             Arpie_Bypass = Arpie_B;
             break;
@@ -2272,7 +2272,7 @@ RKR::Preset_to_Bank(int i)
         lv[23][j] = efx_Exciter->getpar(j);
     for (j = 0; j < C_DBAND_PARAMETERS; j++)
         lv[24][j] = efx_DistBand->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_ARPIE_PARAMETERS; j++)
         lv[25][j] = efx_Arpie->getpar(j);
     for (j = 0; j <= 6; j++)
         lv[26][j] = efx_Expander->getpar(j);

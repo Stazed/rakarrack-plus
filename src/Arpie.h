@@ -27,6 +27,8 @@
 
 #include "global.h"
 
+const int C_ARPIE_PARAMETERS = 11;
+
 enum Arpie_Index
 {
     Arpie_DryWet = 0,

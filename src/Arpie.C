@@ -384,7 +384,7 @@ Arpie::setpattern(int Ppattern)
 void
 Arpie::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 11;
+    const int PRESET_SIZE = C_ARPIE_PARAMETERS;
     const int NUM_PRESETS = 10;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

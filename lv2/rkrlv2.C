@@ -2542,7 +2542,7 @@ LV2_Handle init_arplv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = C_ARPIE_PARAMETERS;
     plug->effectindex = IARPIE;
     plug->prev_bypass = 1;
     
