@@ -1689,7 +1689,7 @@ RKR::Actualizar_Audio()
 
             CoilCrafter_Bypass = 0;
             efx_CoilCrafter->cleanup();
-            for (i = 0; i <= 8; i++)
+            for (i = 0; i < C_COIL_PARAMETERS; i++)
                 efx_CoilCrafter->changepar(i, lv[34][i]);
             CoilCrafter_Bypass = CoilCrafter_B;
             break;
@@ -2290,7 +2290,7 @@ RKR::Preset_to_Bank(int i)
         lv[32][j] = efx_MuTroMojo->getpar(j);
     for (j = 0; j <= 9; j++)
         lv[33][j] = efx_Echoverse->getpar(j);
-    for (j = 0; j <= 8; j++)
+    for (j = 0; j < C_COIL_PARAMETERS; j++)
         lv[34][j] = efx_CoilCrafter->getpar(j);
     for (j = 0; j <= 4; j++)
         lv[35][j] = efx_ShelfBoost->getpar(j);

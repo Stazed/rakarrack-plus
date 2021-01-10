@@ -3300,7 +3300,7 @@ LV2_Handle init_coillv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 7;
+    plug->nparams = (C_COIL_PARAMETERS - 2);  // -2  Coil_Origin, Coil_Destiny skipped
     plug->effectindex = ICOIL;
     plug->prev_bypass = 1;
 

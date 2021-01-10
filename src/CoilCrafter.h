@@ -26,9 +26,11 @@
 #include "HarmonicEnhancer.h"
 #include "AnalogFilter.h"
 
+const int C_COIL_PARAMETERS = 9;
+
 enum Coil_Index
 {
-    Coil_Gain,
+    Coil_Gain = 0,
     Coil_Origin,
     Coil_Destiny,
     Coil_Freq_1,
