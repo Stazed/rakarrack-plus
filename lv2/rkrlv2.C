@@ -3471,7 +3471,7 @@ LV2_Handle init_voclv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = VOCODER_PRESET_SIZE;
+    plug->nparams = C_VOCODER_PARAMETERS;
     plug->effectindex = IVOC;
     plug->prev_bypass = 1;
 

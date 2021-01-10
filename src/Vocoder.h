@@ -28,7 +28,7 @@
 #include "AnalogFilter.h"
 #include "Resample.h"
 
-#define VOCODER_PRESET_SIZE 7
+const int C_VOCODER_PARAMETERS = 7;
 
 enum Vocoder_Index
 {
