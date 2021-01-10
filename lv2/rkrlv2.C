@@ -464,7 +464,7 @@ LV2_Handle init_distlv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = (DIST_PRESET_SIZE - 1); // -1 for skipped parameter 11
+    plug->nparams = (C_DIST_PARAMETERS - 1); // -1 for skipped parameter 11
     plug->effectindex = IDIST;
     plug->prev_bypass = 1;
 
@@ -5968,7 +5968,7 @@ LV2_Handle init_overdrivelv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = (DIST_PRESET_SIZE - 2); // -2 for Skipped param 11 and Suboctave
+    plug->nparams = (C_DIST_PARAMETERS - 2); // -2 for Skipped param 11 and Suboctave
     plug->effectindex = IOVERDRIVE;
     plug->prev_bypass = 1;
 

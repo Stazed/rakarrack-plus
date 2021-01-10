@@ -33,7 +33,6 @@
 #include "Waveshaper.h"
 
 const int C_DBAND_PARAMETERS = 15;
-#define DBAND_PRESET_SIZE 15
 
 enum DistBand_Index
 {

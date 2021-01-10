@@ -1405,7 +1405,7 @@ RKR::Actualizar_Audio()
 
             Distorsion_Bypass = 0;
             efx_Distorsion->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_DIST_PARAMETERS; i++)
                 efx_Distorsion->changepar(i, lv[6][i]);
             Distorsion_Bypass = Distorsion_B;
             break;
@@ -1414,7 +1414,7 @@ RKR::Actualizar_Audio()
 
             Overdrive_Bypass = 0;
             efx_Overdrive->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_DIST_PARAMETERS; i++)
                 efx_Overdrive->changepar(i, lv[5][i]);
             Overdrive_Bypass = Overdrive_B;
             break;
@@ -2240,9 +2240,9 @@ RKR::Preset_to_Bank(int i)
         lv[3][j] = efx_Flanger->getpar(j);
     for (j = 0; j <= 11; j++)
         lv[4][j] = efx_Phaser->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_DIST_PARAMETERS; j++)
         lv[5][j] = efx_Overdrive->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_DIST_PARAMETERS; j++)
         lv[6][j] = efx_Distorsion->getpar(j);
     for (j = 0; j <= 8; j++)
         lv[9][j] = efx_Compressor->getpar(j);

@@ -29,7 +29,7 @@
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 
-#define DIST_PRESET_SIZE 13
+const int C_DIST_PARAMETERS = 13;
 
 enum Dist_Index
 {

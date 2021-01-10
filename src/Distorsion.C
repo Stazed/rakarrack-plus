@@ -103,7 +103,7 @@ std::vector<int>
 Distorsion::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < DIST_PRESET_SIZE; i++)
+    for(int i = 0; i < C_DIST_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -114,7 +114,7 @@ Distorsion::save_parameters()
 void
 Distorsion::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < DIST_PRESET_SIZE; i++)
+    for(int i = 0; i < C_DIST_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -359,7 +359,7 @@ Distorsion::setoctave(int Poctave)
 void
 Distorsion::setpreset(int dgui, int npreset)
 {
-    const int PRESET_SIZE = DIST_PRESET_SIZE;
+    const int PRESET_SIZE = C_DIST_PARAMETERS;
     const int NUM_PRESETS = 6;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
