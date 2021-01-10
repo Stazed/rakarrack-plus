@@ -5248,7 +5248,7 @@ LV2_Handle init_phaselv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
+    plug->nparams = C_PHASER_PARAMETERS;
     plug->effectindex = IPHASE;
     plug->prev_bypass = 1;
     

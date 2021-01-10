@@ -26,6 +26,8 @@
 #define PHASER_H
 #include "EffectLFO.h"
 
+const int C_PHASER_PARAMETERS = 12;
+
 enum Phaser_Index
 {
     Phaser_DryWet = 0,

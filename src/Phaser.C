@@ -242,7 +242,7 @@ Phaser::setphase(int Pphase)
 void
 Phaser::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 12;
+    const int PRESET_SIZE = C_PHASER_PARAMETERS;
     const int NUM_PRESETS = 6;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

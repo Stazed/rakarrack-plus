@@ -1441,7 +1441,7 @@ RKR::Actualizar_Audio()
 
             Phaser_Bypass = 0;
             efx_Phaser->cleanup();
-            for (i = 0; i <= 11; i++)
+            for (i = 0; i < C_PHASER_PARAMETERS; i++)
                 efx_Phaser->changepar(i, lv[4][i]);
             Phaser_Bypass = Phaser_B;
             break;
@@ -2238,7 +2238,7 @@ RKR::Preset_to_Bank(int i)
         lv[2][j] = efx_Chorus->getpar(j);
     for (j = 0; j < C_CHORUS_PARAMETERS; j++)
         lv[3][j] = efx_Flanger->getpar(j);
-    for (j = 0; j <= 11; j++)
+    for (j = 0; j < C_PHASER_PARAMETERS; j++)
         lv[4][j] = efx_Phaser->getpar(j);
     for (j = 0; j < C_DIST_PARAMETERS; j++)
         lv[5][j] = efx_Overdrive->getpar(j);
