@@ -3585,7 +3585,7 @@ LV2_Handle init_suslv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
     
-    plug->nparams = 2;
+    plug->nparams = C_SUSTAIN_PARAMETERS;
     plug->effectindex = ISUS;
     plug->prev_bypass = 1;
 

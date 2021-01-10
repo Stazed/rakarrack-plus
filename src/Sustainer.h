@@ -25,6 +25,8 @@
 
 #include "FPreset.h"
 
+const int C_SUSTAIN_PARAMETERS = 2;
+
 enum Sustain_Index
 {
     Sustain_Gain = 0,

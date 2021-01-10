@@ -1716,7 +1716,7 @@ RKR::Actualizar_Audio()
 
             Sustainer_Bypass = 0;
             efx_Sustainer->cleanup();
-            for (i = 0; i <= 1; i++)
+            for (i = 0; i < C_SUSTAIN_PARAMETERS; i++)
                 efx_Sustainer->changepar(i, lv[37][i]);
             Sustainer_Bypass = Sustainer_B;
             break;
@@ -2296,7 +2296,7 @@ RKR::Preset_to_Bank(int i)
         lv[35][j] = efx_ShelfBoost->getpar(j);
     for (j = 0; j < C_VOCODER_PARAMETERS; j++)
         lv[36][j] = efx_Vocoder->getpar(j);
-    for (j = 0; j <= 1; j++)
+    for (j = 0; j < C_SUSTAIN_PARAMETERS; j++)
         lv[37][j] = efx_Sustainer->getpar(j);
     for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)
         lv[38][j] = efx_Sequence->getpar(j);
