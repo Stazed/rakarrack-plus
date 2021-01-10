@@ -24,6 +24,8 @@
 
 #include "HarmonicEnhancer.h"
 
+const int C_EXCITER_PARAMETERS = 13;
+
 enum Exciter_index
 {
     Exciter_Gain = 0,

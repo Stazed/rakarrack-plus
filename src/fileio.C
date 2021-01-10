@@ -1590,7 +1590,7 @@ RKR::Actualizar_Audio()
 
             Exciter_Bypass = 0;
             efx_Exciter->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_EXCITER_PARAMETERS; i++)
                 efx_Exciter->changepar(i, lv[23][i]);
             Exciter_Bypass = Exciter_B;
             break;
@@ -2268,7 +2268,7 @@ RKR::Preset_to_Bank(int i)
         lv[21][j] = efx_DFlange->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[22][j] = efx_Ring->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_EXCITER_PARAMETERS; j++)
         lv[23][j] = efx_Exciter->getpar(j);
     for (j = 0; j < C_DBAND_PARAMETERS; j++)
         lv[24][j] = efx_DistBand->getpar(j);

@@ -1159,7 +1159,7 @@ LV2_Handle init_exciterlv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 13;
+    plug->nparams = C_EXCITER_PARAMETERS;
     plug->effectindex = IEXCITER;
     plug->prev_bypass = 1;
 
