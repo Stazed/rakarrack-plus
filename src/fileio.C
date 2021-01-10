@@ -1789,7 +1789,7 @@ RKR::Actualizar_Audio()
 
             Opticaltrem_Bypass = 0;
             efx_Opticaltrem->cleanup();
-            for (i = 0; i <= 6; i++)
+            for (i = 0; i < C_OPTICAL_PARAMETERS; i++)
                 efx_Opticaltrem->changepar(i, lv[45][i]);
             Opticaltrem_Bypass = Opticaltrem_B;
             break;
@@ -2312,7 +2312,7 @@ RKR::Preset_to_Bank(int i)
         lv[43][j] = efx_StereoHarm->getpar(j);
     for (j = 0; j < C_COMPBAND_PARAMETERS; j++)
         lv[44][j] = efx_CompBand->getpar(j);
-    for (j = 0; j <= 6; j++)
+    for (j = 0; j < C_OPTICAL_PARAMETERS; j++)
         lv[45][j] = efx_Opticaltrem->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[46][j] = efx_Vibe->getpar(j);

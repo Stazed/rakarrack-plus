@@ -4940,7 +4940,7 @@ LV2_Handle init_otremlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 7;
+    plug->nparams = C_OPTICAL_PARAMETERS;
     plug->effectindex = IOPTTREM;
     plug->prev_bypass = 1;
     

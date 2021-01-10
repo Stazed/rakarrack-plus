@@ -28,9 +28,11 @@
 
 #include "EffectLFO.h"
 
+const int C_OPTICAL_PARAMETERS = 7;
+
 enum Optical_Index
 {
-    Optical_Depth,
+    Optical_Depth = 0,
     Optical_LFO_Tempo,
     Optical_LFO_Random,
     Optical_LFO_Type,
