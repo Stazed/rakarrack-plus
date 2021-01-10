@@ -1761,7 +1761,7 @@ RKR::Actualizar_Audio()
 
             Echotron_Bypass = 0;
             efx_Echotron->cleanup();
-            for (i = 0; i <= 15; i++)
+            for (i = 0; i < C_ECHOTRON_PARAMETERS; i++)
                 efx_Echotron->changepar(i, lv[42][i]);
             Echotron_Bypass = Echotron_B;
             break;
@@ -2306,7 +2306,7 @@ RKR::Preset_to_Bank(int i)
         lv[40][j] = efx_StompBox->getpar(j);
     for (j = 0; j < C_REVTRON_PARAMETERS; j++)
         lv[41][j] = efx_Reverbtron->getpar(j);
-    for (j = 0; j <= 15; j++)
+    for (j = 0; j < C_ECHOTRON_PARAMETERS; j++)
         lv[42][j] = efx_Echotron->getpar(j);
     for (j = 0; j < C_SHARM_PARAMETERS; j++)
         lv[43][j] = efx_StereoHarm->getpar(j);

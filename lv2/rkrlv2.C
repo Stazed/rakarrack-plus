@@ -4282,7 +4282,7 @@ LV2_Handle init_echotronlv2(const LV2_Descriptor* /* descriptor */,double sample
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 14;
+    plug->nparams = (C_ECHOTRON_PARAMETERS - 2); // -2 for skip user file and set file
     plug->effectindex = IECHOTRON;
     plug->prev_bypass = 1;
 

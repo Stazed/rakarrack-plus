@@ -32,6 +32,8 @@
 #define  ECHOTRON_F_SIZE   128       //Allow up to 150 points in the file
 #define  ECHOTRON_MAXFILTERS  32      //filters available
 
+const int C_ECHOTRON_PARAMETERS = 16;
+
 enum Echotron_Index
 {
     Echotron_DryWet = 0,
