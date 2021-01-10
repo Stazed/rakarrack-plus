@@ -26,6 +26,8 @@
 
 #define NUM_INF_BANDS 8
 
+const int C_INFINITY_PARAMETERS = 18;
+
 enum Infinity_Index
 {
     Infinity_DryWet = 0,

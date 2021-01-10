@@ -1807,7 +1807,7 @@ RKR::Actualizar_Audio()
 
             Infinity_Bypass = 0;
             efx_Infinity->cleanup();
-            for (i = 0; i <= 17; i++)
+            for (i = 0; i < C_INFINITY_PARAMETERS; i++)
                 efx_Infinity->changepar(i, lv[47][i]);
             Infinity_Bypass = Infinity_B;
             break;
@@ -2316,7 +2316,7 @@ RKR::Preset_to_Bank(int i)
         lv[45][j] = efx_Opticaltrem->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[46][j] = efx_Vibe->getpar(j);
-    for (j = 0; j <= 17; j++)
+    for (j = 0; j < C_INFINITY_PARAMETERS; j++)
         lv[47][j] = efx_Infinity->getpar(j);
 
 

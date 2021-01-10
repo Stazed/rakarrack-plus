@@ -5139,7 +5139,7 @@ LV2_Handle init_inflv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 18;
+    plug->nparams = C_INFINITY_PARAMETERS;
     plug->effectindex = IINF;
     plug->prev_bypass = 1;
 
