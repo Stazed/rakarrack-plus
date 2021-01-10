@@ -413,7 +413,7 @@ void Looper::setfade()
 void
 Looper::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 14;
+    const int PRESET_SIZE = C_LOOPER_PARAMETERS;
     const int NUM_PRESETS = 2;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

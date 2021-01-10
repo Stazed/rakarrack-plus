@@ -1662,8 +1662,8 @@ RKR::Actualizar_Audio()
 
             Looper_Bypass = 0;
             // efx_Looper->cleanup();
-            for (i = 0; i <= 13; i++)
-                efx_Looper->loadpreset(i, lv[31][i]);
+            for (i = 0; i < C_LOOPER_PARAMETERS; i++)
+                efx_Looper->changepar(i, lv[31][i]);
             Looper_Bypass = Looper_B;
             break;
 
@@ -2284,7 +2284,7 @@ RKR::Preset_to_Bank(int i)
         lv[29][j] = efx_VaryBand->getpar(j);
     for (j = 0; j < C_CONVO_PARAMETERS; j++)
         lv[30][j] = efx_Convol->getpar(j);
-    for (j = 0; j <= 13; j++)
+    for (j = 0; j < C_LOOPER_PARAMETERS; j++)
         lv[31][j] = efx_Looper->getpar(j);
     for (j = 0; j <= 18; j++)
         lv[32][j] = efx_MuTroMojo->getpar(j);

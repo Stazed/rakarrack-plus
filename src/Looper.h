@@ -28,6 +28,9 @@
 
 #include "metronome.h"
 
+// There are actually 18 parameters, but last 4 are not saved...
+const int C_LOOPER_PARAMETERS = 14;
+
 enum Looper_Index
 {
     Looper_DryWet = 0,
@@ -44,10 +47,10 @@ enum Looper_Index
     Looper_Rec_1,
     Looper_Rec_2,
     Looper_Link,
-    Looper_Tempo,
-    Looper_Bar,
-    Looper_Metro,
-    Looper_M_S
+    Looper_Tempo,   // not saved
+    Looper_Bar,     // not saved
+    Looper_Metro,   // not saved
+    Looper_M_S      // not saved
 };
 
 class Looper
