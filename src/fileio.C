@@ -1563,7 +1563,7 @@ RKR::Actualizar_Audio()
 
             Valve_Bypass = 0;
             efx_Valve->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_VALVE_PARAMETERS; i++)
                 efx_Valve->changepar(i, lv[20][i]);
             Valve_Bypass = Valve_B;
             break;
@@ -2262,7 +2262,7 @@ RKR::Preset_to_Bank(int i)
         lv[18][j] = efx_Derelict->getpar(j);
     for (j = 0; j < C_APHASER_PARAMETERS; j++)
         lv[19][j] = efx_APhaser->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_VALVE_PARAMETERS; j++)
         lv[20][j] = efx_Valve->getpar(j);
     for (j = 0; j < C_DFLANGE_PARAMETERS; j++)
         lv[21][j] = efx_DFlange->getpar(j);

@@ -2082,7 +2082,7 @@ LV2_Handle init_valvelv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 13;
+    plug->nparams = C_VALVE_PARAMETERS;
     plug->effectindex = IVALVE;
     plug->prev_bypass = 1;
 

@@ -27,6 +27,8 @@
 #include "AnalogFilter.h"
 #include "HarmonicEnhancer.h"
 
+const int C_VALVE_PARAMETERS = 13;
+
 enum Valve_Index
 {
     Valve_DryWet = 0,
