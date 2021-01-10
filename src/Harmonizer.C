@@ -102,7 +102,7 @@ std::vector<int>
 Harmonizer::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < HARM_PRESET_SIZE; i++)
+    for(int i = 0; i < C_HARM_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -113,7 +113,7 @@ Harmonizer::save_parameters()
 void
 Harmonizer::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < HARM_PRESET_SIZE; i++)
+    for(int i = 0; i < C_HARM_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -384,7 +384,7 @@ Harmonizer::adjust(int DS, uint32_t period)
 void
 Harmonizer::setpreset(int npreset)
 {
-    const int PRESET_SIZE = HARM_PRESET_SIZE;
+    const int PRESET_SIZE = C_HARM_PARAMETERS;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

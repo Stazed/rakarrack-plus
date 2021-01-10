@@ -31,7 +31,8 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
-#define HARM_PRESET_SIZE 11
+const int C_HARM_PARAMETERS = 11;
+
 enum Harm_Index
 {
     Harm_DryWet = 0,

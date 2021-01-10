@@ -943,7 +943,7 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = (HARM_PRESET_SIZE - 1); // -1 for Harm_MIDI - since this is no MIDI
+    plug->nparams = (C_HARM_PARAMETERS - 1); // -1 for Harm_MIDI - since this is no MIDI
     plug->effectindex = IHARM_NM;
     plug->prev_bypass = 1;
 
@@ -6081,7 +6081,7 @@ LV2_Handle init_harmonizerlv2(const LV2_Descriptor* /* descriptor */,double samp
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = HARM_PRESET_SIZE;
+    plug->nparams = C_HARM_PARAMETERS;
     plug->effectindex = IHARM;
     plug->prev_bypass = 1;
 

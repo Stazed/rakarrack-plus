@@ -1518,7 +1518,7 @@ RKR::Actualizar_Audio()
 
             Harmonizer_Bypass = 0;
             efx_Har->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_HARM_PARAMETERS; i++)
                 efx_Har->changepar(i, lv[15][i]);
             Harmonizer_Bypass = Harmonizer_B;
             break;
@@ -2252,7 +2252,7 @@ RKR::Preset_to_Bank(int i)
         lv[12][j] = efx_Alienwah->getpar(j);
     for (j = 0; j <= 8; j++)
         lv[14][j] = efx_Pan->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_HARM_PARAMETERS; j++)
         lv[15][j] = efx_Har->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[16][j] = efx_MusDelay->getpar(j);
