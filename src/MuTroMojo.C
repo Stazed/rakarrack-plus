@@ -294,7 +294,7 @@ MuTroMojo::reinitfilter()
 void
 MuTroMojo::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 19;
+    const int PRESET_SIZE = C_MUTRO_PARAMETERS;
     const int NUM_PRESETS = 7;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

@@ -3057,7 +3057,7 @@ LV2_Handle init_mutrolv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 19;
+    plug->nparams = C_MUTRO_PARAMETERS;
     plug->effectindex = IMUTRO;
     plug->prev_bypass = 1;
 

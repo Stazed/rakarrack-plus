@@ -1671,7 +1671,7 @@ RKR::Actualizar_Audio()
 
             MuTroMojo_Bypass = 0;
             efx_MuTroMojo->cleanup();
-            for (i = 0; i <= 18; i++)
+            for (i = 0; i < C_MUTRO_PARAMETERS; i++)
                 efx_MuTroMojo->changepar(i, lv[32][i]);
             MuTroMojo_Bypass = MuTroMojo_B;
             break;
@@ -2286,7 +2286,7 @@ RKR::Preset_to_Bank(int i)
         lv[30][j] = efx_Convol->getpar(j);
     for (j = 0; j < C_LOOPER_PARAMETERS; j++)
         lv[31][j] = efx_Looper->getpar(j);
-    for (j = 0; j <= 18; j++)
+    for (j = 0; j < C_MUTRO_PARAMETERS; j++)
         lv[32][j] = efx_MuTroMojo->getpar(j);
     for (j = 0; j < C_ECHOVERSE_PARAMETERS; j++)
         lv[33][j] = efx_Echoverse->getpar(j);

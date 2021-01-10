@@ -30,6 +30,9 @@
 #include "RBFilter.h"
 #include "AnalogFilter.h"
 
+// The listed are 21 - less the 2 for LV2 vs Rakarrack only
+const int C_MUTRO_PARAMETERS = 19;
+
 enum MuTro_Index
 {
     MuTro_DryWet = 0,
