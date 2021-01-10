@@ -2653,7 +2653,7 @@ LV2_Handle init_expandlv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 7;
+    plug->nparams = C_EXPANDER_PARAMETERS;
     plug->effectindex = IEXPAND;
     plug->prev_bypass = 1;
 

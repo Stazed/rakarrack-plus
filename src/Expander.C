@@ -178,7 +178,7 @@ Expander::out(float *efxoutl, float *efxoutr)
 void
 Expander::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 7;
+    const int PRESET_SIZE = C_EXPANDER_PARAMETERS;
     const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

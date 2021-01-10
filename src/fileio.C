@@ -1617,7 +1617,7 @@ RKR::Actualizar_Audio()
 
             Expander_Bypass = 0;
             efx_Expander->cleanup();
-            for (i = 0; i <= 6; i++)
+            for (i = 0; i < C_EXPANDER_PARAMETERS; i++)
                 efx_Expander->changepar(i, lv[26][i]);
             Expander_Bypass = Expander_B;
             break;
@@ -2274,7 +2274,7 @@ RKR::Preset_to_Bank(int i)
         lv[24][j] = efx_DistBand->getpar(j);
     for (j = 0; j < C_ARPIE_PARAMETERS; j++)
         lv[25][j] = efx_Arpie->getpar(j);
-    for (j = 0; j <= 6; j++)
+    for (j = 0; j < C_EXPANDER_PARAMETERS; j++)
         lv[26][j] = efx_Expander->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[27][j] = efx_Shuffle->getpar(j);

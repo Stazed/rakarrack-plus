@@ -33,6 +33,8 @@
 
 #include "AnalogFilter.h"
 
+const int C_EXPANDER_PARAMETERS = 7;
+
 enum Expander_Index
 {
     Expander_Threshold = 0,
