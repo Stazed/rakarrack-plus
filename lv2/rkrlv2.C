@@ -2290,7 +2290,7 @@ LV2_Handle init_ringlv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 13;
+    plug->nparams = C_RING_PARAMETERS;
     plug->effectindex = IRING;
     plug->prev_bypass = 1;
 

@@ -26,6 +26,8 @@
 
 #include "FPreset.h"
 
+const int C_RING_PARAMETERS = 13;
+
 enum Ring_Index
 {
     Ring_DryWet = 0,

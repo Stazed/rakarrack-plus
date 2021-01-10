@@ -1581,7 +1581,7 @@ RKR::Actualizar_Audio()
 
             Ring_Bypass = 0;
             efx_Ring->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_RING_PARAMETERS; i++)
                 efx_Ring->changepar(i, lv[22][i]);
             Ring_Bypass = Ring_B;
             break;
@@ -2266,7 +2266,7 @@ RKR::Preset_to_Bank(int i)
         lv[20][j] = efx_Valve->getpar(j);
     for (j = 0; j < C_DFLANGE_PARAMETERS; j++)
         lv[21][j] = efx_DFlange->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_RING_PARAMETERS; j++)
         lv[22][j] = efx_Ring->getpar(j);
     for (j = 0; j < C_EXCITER_PARAMETERS; j++)
         lv[23][j] = efx_Exciter->getpar(j);
