@@ -5030,7 +5030,7 @@ LV2_Handle init_vibelv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = C_VIBE_PARAMETERS;
     plug->effectindex = IVIBE;
     plug->prev_bypass = 1;
     

@@ -1798,7 +1798,7 @@ RKR::Actualizar_Audio()
 
             Vibe_Bypass = 0;
             efx_Vibe->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_VIBE_PARAMETERS; i++)
                 efx_Vibe->changepar(i, lv[46][i]);
             Vibe_Bypass = Vibe_B;
             break;
@@ -2314,7 +2314,7 @@ RKR::Preset_to_Bank(int i)
         lv[44][j] = efx_CompBand->getpar(j);
     for (j = 0; j < C_OPTICAL_PARAMETERS; j++)
         lv[45][j] = efx_Opticaltrem->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_VIBE_PARAMETERS; j++)
         lv[46][j] = efx_Vibe->getpar(j);
     for (j = 0; j < C_INFINITY_PARAMETERS; j++)
         lv[47][j] = efx_Infinity->getpar(j);

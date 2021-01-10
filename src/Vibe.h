@@ -30,6 +30,8 @@
 
 //#define VIBE_INLINE 1     // uncomment for inline
 
+const int C_VIBE_PARAMETERS = 11;
+
 enum Vibe_Index
 {
     Vibe_Width = 0,
