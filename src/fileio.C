@@ -125,7 +125,7 @@ const int presets_default[48][MAX_PRESET_SIZE] = {
 };
 
 /**
- *  Bank file loading.
+ *  Individual preset file loading.
  * 
  * @param buf
  *  Buffer to load effect parameters.
@@ -526,7 +526,7 @@ void RKR::putbuf(char *buf, int j)
 }
 
 /**
- *  Bank file saving.
+ *  Individual preset file saving and user defined Inserted presets.
  * 
  * @param buf
  *  Buffer to hold efx parameters
@@ -724,14 +724,14 @@ void RKR::getbuf(char *buf, int j)
 
     case 17:
         //Derelict
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Derelict->getpar(Dere_DryWet), efx_Derelict->getpar(Dere_Pan),
                 efx_Derelict->getpar(Dere_LR_Cross), efx_Derelict->getpar(Dere_Drive),
                 efx_Derelict->getpar(Dere_Level), efx_Derelict->getpar(Dere_Type),
                 efx_Derelict->getpar(Dere_Negate), efx_Derelict->getpar(Dere_LPF),
                 efx_Derelict->getpar(Dere_HPF), efx_Derelict->getpar(Dere_Color),
                 efx_Derelict->getpar(Dere_Prefilter), efx_Derelict->getpar(Dere_Suboctave),
-                efx_Derelict->getpar(12), Derelict_Bypass); // 12 is invalid...
+                Derelict_Bypass);
         break;
 
     case 18:
@@ -1539,7 +1539,7 @@ RKR::Actualizar_Audio()
 
             Derelict_Bypass = 0;
             efx_Derelict->cleanup();
-            for (i = 0; i <= 11; i++)
+            for (i = 0; i < C_DERE_PARAMETERS; i++)
                 efx_Derelict->changepar(i, lv[18][i]);
             Derelict_Bypass = Derelict_B;
             break;
@@ -2252,7 +2252,7 @@ RKR::Preset_to_Bank(int i)
         lv[16][j] = efx_MusDelay->getpar(j);
     for (j = 0; j <= 6; j++)
         lv[17][j] = efx_Gate->getpar(j);
-    for (j = 0; j <= 11; j++)
+    for (j = 0; j < C_DERE_PARAMETERS; j++)
         lv[18][j] = efx_Derelict->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[19][j] = efx_APhaser->getpar(j);

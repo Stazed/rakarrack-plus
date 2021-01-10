@@ -114,7 +114,7 @@ std::vector<int>
 Derelict::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < DERE_PRESET_SIZE; i++)
+    for(int i = 0; i < C_DERE_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -125,7 +125,7 @@ Derelict::save_parameters()
 void
 Derelict::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < DERE_PRESET_SIZE; i++)
+    for(int i = 0; i < C_DERE_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }

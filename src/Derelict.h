@@ -33,8 +33,7 @@
 #include "FilterParams.h"
 #include "Filter.h"
 
-
-#define DERE_PRESET_SIZE 12
+const int C_DERE_PARAMETERS = 12;
 
 enum Dere_Index
 {
@@ -49,7 +48,7 @@ enum Dere_Index
     Dere_HPF,
     Dere_Color,
     Dere_Prefilter,
-    Dere_Suboctave,
+    Dere_Suboctave
 };
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
 // void waveshapesmps (int n, float * smps, int type,

@@ -1970,7 +1970,7 @@ LV2_Handle init_derelv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
+    plug->nparams = C_DERE_PARAMETERS;
     plug->effectindex = IDERE;
     plug->prev_bypass = 1;
 
