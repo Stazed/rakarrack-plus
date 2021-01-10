@@ -2939,7 +2939,9 @@ LV2_Handle init_varybandlv2(const LV2_Descriptor* /* descriptor */,double sample
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 14; // 15 minus legacy skipped
+    // +3 for the 4 LV2 parameters added - 1 for legacy pcombi
+    plug->nparams = (C_VARYBAND_PARAMETERS + 3);
+    
     plug->effectindex = IVBAND;
     plug->prev_bypass = 1;
 

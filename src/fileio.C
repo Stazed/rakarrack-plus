@@ -1644,7 +1644,7 @@ RKR::Actualizar_Audio()
 
             VaryBand_Bypass = 0;
             efx_VaryBand->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_VARYBAND_PARAMETERS; i++)
                 efx_VaryBand->changepar(i, lv[29][i]);
             VaryBand_Bypass = VaryBand_B;
             break;
@@ -2280,7 +2280,7 @@ RKR::Preset_to_Bank(int i)
         lv[27][j] = efx_Shuffle->getpar(j);
     for (j = 0; j < C_SYNTHFILTER_PARAMETERS; j++)
         lv[28][j] = efx_Synthfilter->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_VARYBAND_PARAMETERS; j++)
         lv[29][j] = efx_VaryBand->getpar(j);
     for (j = 0; j < C_CONVO_PARAMETERS; j++)
         lv[30][j] = efx_Convol->getpar(j);

@@ -31,6 +31,9 @@
 #include "EffectLFO.h"
 #include "AnalogFilter.h"
 
+// This is the legacy parameters which does not use last four listed
+const int C_VARYBAND_PARAMETERS = 11;
+
 enum VaryBand_Index
 {
     VaryBand_DryWet = 0,
