@@ -320,7 +320,7 @@ Compressor::out(float *efxoutl, float *efxoutr)
 void
 Compressor::setpreset(int dgui, int npreset)
 {
-    const int PRESET_SIZE = 9;
+    const int PRESET_SIZE = C_COMPRESS_PARAMETERS;
     const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

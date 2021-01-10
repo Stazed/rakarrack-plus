@@ -30,6 +30,8 @@
 
 #include "FPreset.h"
 
+const int C_COMPRESS_PARAMETERS = 9;
+
 enum Compress_Index
 {
     Compress_Threshold = 0,
