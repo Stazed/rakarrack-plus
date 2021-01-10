@@ -702,7 +702,7 @@ LV2_Handle init_choruslv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
+    plug->nparams = (C_CHORUS_PARAMETERS - 1);  // -1 skip Chorus_SKIP_Flange_10
     plug->effectindex = ICHORUS;
     plug->prev_bypass = 1;
     
@@ -5841,7 +5841,7 @@ LV2_Handle init_flangerlv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
+    plug->nparams = (C_CHORUS_PARAMETERS - 1); // -1 skip Chorus_SKIP_Flange_10
     plug->effectindex = IFLANGE;
     plug->prev_bypass = 1;
     

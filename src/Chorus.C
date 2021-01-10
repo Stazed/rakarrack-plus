@@ -309,7 +309,7 @@ Chorus::setlrcross(int Plrcross)
 void
 Chorus::setpreset(int dgui, int npreset)
 {
-    const int PRESET_SIZE = 13;
+    const int PRESET_SIZE = C_CHORUS_PARAMETERS;
     const int NUM_PRESETS = 10;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

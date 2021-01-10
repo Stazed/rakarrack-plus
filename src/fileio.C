@@ -1432,7 +1432,7 @@ RKR::Actualizar_Audio()
 
             Chorus_Bypass = 0;
             efx_Chorus->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_CHORUS_PARAMETERS; i++)
                 efx_Chorus->changepar(i, lv[2][i]);
             Chorus_Bypass = Chorus_B;
             break;
@@ -1450,7 +1450,7 @@ RKR::Actualizar_Audio()
 
             Flanger_Bypass = 0;
             efx_Flanger->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_CHORUS_PARAMETERS; i++)
                 efx_Flanger->changepar(i, lv[3][i]);
             Flanger_Bypass = Flanger_B;
             break;
@@ -2234,9 +2234,9 @@ RKR::Preset_to_Bank(int i)
         lv[0][j] = efx_Rev->getpar(j);
     for (j = 0; j <= 8; j++)
         lv[1][j] = efx_Echo->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_CHORUS_PARAMETERS; j++)
         lv[2][j] = efx_Chorus->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_CHORUS_PARAMETERS; j++)
         lv[3][j] = efx_Flanger->getpar(j);
     for (j = 0; j <= 11; j++)
         lv[4][j] = efx_Phaser->getpar(j);

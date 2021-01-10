@@ -27,6 +27,8 @@
 #include "EffectLFO.h"
 #include "delayline.h"
 
+const int C_CHORUS_PARAMETERS = 13;
+
 enum Chorus_Index
 {
     Chorus_DryWet = 0,
