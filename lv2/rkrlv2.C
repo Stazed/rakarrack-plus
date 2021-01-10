@@ -3885,7 +3885,7 @@ LV2_Handle init_stomplv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = STOMP_PRESET_SIZE;
+    plug->nparams = C_STOMP_PARAMETERS;
     plug->effectindex = ISTOMP;
     plug->prev_bypass = 1;
 

@@ -26,7 +26,7 @@
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 
-#define STOMP_PRESET_SIZE 6
+const int C_STOMP_PARAMETERS = 6;
 
 enum Stomp_Index
 {

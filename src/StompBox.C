@@ -119,7 +119,7 @@ std::vector<int>
 StompBox::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < STOMP_PRESET_SIZE; i++)
+    for(int i = 0; i < C_STOMP_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -130,7 +130,7 @@ StompBox::save_parameters()
 void
 StompBox::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < STOMP_PRESET_SIZE; i++)
+    for(int i = 0; i < C_STOMP_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -932,7 +932,7 @@ StompBox::setvolume(int value)
 void
 StompBox::setpreset(int npreset)
 {
-    const int PRESET_SIZE = STOMP_PRESET_SIZE;
+    const int PRESET_SIZE = C_STOMP_PARAMETERS;
     const int NUM_PRESETS = 11;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

@@ -1743,7 +1743,7 @@ RKR::Actualizar_Audio()
 
             StompBox_Bypass = 0;
             efx_StompBox->cleanup();
-            for (i = 0; i <= 5; i++)
+            for (i = 0; i < C_STOMP_PARAMETERS; i++)
                 efx_StompBox->changepar(i, lv[40][i]);
             StompBox_Bypass = StompBox_B;
             break;
@@ -2302,7 +2302,7 @@ RKR::Preset_to_Bank(int i)
         lv[38][j] = efx_Sequence->getpar(j);
     for (j = 0; j < C_SHIFTER_PARAMETERS; j++)
         lv[39][j] = efx_Shifter->getpar(j);
-    for (j = 0; j <= 5; j++)
+    for (j = 0; j < C_STOMP_PARAMETERS; j++)
         lv[40][j] = efx_StompBox->getpar(j);
     for (j = 0; j < C_REVTRON_PARAMETERS; j++)
         lv[41][j] = efx_Reverbtron->getpar(j);
