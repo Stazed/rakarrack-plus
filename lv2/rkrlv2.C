@@ -1464,7 +1464,7 @@ LV2_Handle init_revelv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 10;
+    plug->nparams = (C_REVERB_PARAMETERS - 2); // -2 skips 5 & 6 unused
     plug->effectindex = IREV;
     plug->prev_bypass = 1;
 

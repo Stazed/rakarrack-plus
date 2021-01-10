@@ -27,6 +27,8 @@
 
 #include "AnalogFilter.h"
 
+const int C_REVERB_PARAMETERS = 12;
+
 enum Reverb_Index
 {
     Reverb_DryWet = 0,
@@ -49,6 +51,9 @@ public:
     Reverb (double samplerate, uint16_t intermediate_bufsize);
     ~Reverb ();
     void out (float * efxoutl, float * efxoutr);
+    void setpreset (int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
     void cleanup ();
 
 #ifdef LV2_SUPPORT
@@ -57,10 +62,6 @@ public:
     
     void initialize();
     void clear_initialize();
-
-    void setpreset (int npreset);
-    void changepar (int npar, int value);
-    int getpar (int npar);
 
     int Ppreset;
     float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su

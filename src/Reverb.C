@@ -514,7 +514,7 @@ Reverb::setroomsize(int Proomsize)
 void
 Reverb::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 12;
+    const int PRESET_SIZE = C_REVERB_PARAMETERS;
     const int NUM_PRESETS = 13;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

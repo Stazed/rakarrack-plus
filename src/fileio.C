@@ -1459,7 +1459,7 @@ RKR::Actualizar_Audio()
 
             Reverb_Bypass = 0;
             efx_Rev->cleanup();
-            for (i = 0; i <= 11; i++)
+            for (i = 0; i < C_REVERB_PARAMETERS; i++)
                 efx_Rev->changepar(i, lv[0][i]);
             Reverb_Bypass = Reverb_B;
             break;
@@ -2230,7 +2230,7 @@ RKR::Preset_to_Bank(int i)
 
     int j = 0;
 
-    for (j = 0; j <= 11; j++)
+    for (j = 0; j < C_REVERB_PARAMETERS; j++)
         lv[0][j] = efx_Rev->getpar(j);
     for (j = 0; j < C_ECHO_PARAMETERS; j++)
         lv[1][j] = efx_Echo->getpar(j);
