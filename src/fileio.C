@@ -1554,7 +1554,7 @@ RKR::Actualizar_Audio()
 
             APhaser_Bypass = 0;
             efx_APhaser->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_APHASER_PARAMETERS; i++)
                 efx_APhaser->changepar(i, lv[19][i]);
             APhaser_Bypass = APhaser_B;
             break;
@@ -2260,7 +2260,7 @@ RKR::Preset_to_Bank(int i)
         lv[17][j] = efx_Gate->getpar(j);
     for (j = 0; j < C_DERE_PARAMETERS; j++)
         lv[18][j] = efx_Derelict->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_APHASER_PARAMETERS; j++)
         lv[19][j] = efx_APhaser->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[20][j] = efx_Valve->getpar(j);

@@ -829,7 +829,7 @@ LV2_Handle init_aphaselv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 13;
+    plug->nparams = C_APHASER_PARAMETERS;
     plug->effectindex = IAPHASE;
     plug->prev_bypass = 1;
     

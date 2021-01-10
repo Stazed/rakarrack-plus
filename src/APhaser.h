@@ -28,6 +28,8 @@
 #define APHASER_H
 #include "EffectLFO.h"
 
+const int C_APHASER_PARAMETERS = 13;
+
 enum APhaser_Index
 {
     APhase_DryWet = 0,
