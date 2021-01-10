@@ -29,6 +29,8 @@
 
 #include "delayline.h"
 
+const int C_ECHO_PARAMETERS = 9;
+
 enum Echo_Index
 {
     Echo_DryWet = 0,

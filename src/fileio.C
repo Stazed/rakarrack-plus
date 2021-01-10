@@ -1423,7 +1423,7 @@ RKR::Actualizar_Audio()
 
             Echo_Bypass = 0;
             efx_Echo->cleanup();
-            for (i = 0; i <= 8; i++)
+            for (i = 0; i < C_ECHO_PARAMETERS; i++)
                 efx_Echo->changepar(i, lv[1][i]);
             Echo_Bypass = Echo_B;
             break;
@@ -2232,7 +2232,7 @@ RKR::Preset_to_Bank(int i)
 
     for (j = 0; j <= 11; j++)
         lv[0][j] = efx_Rev->getpar(j);
-    for (j = 0; j <= 8; j++)
+    for (j = 0; j < C_ECHO_PARAMETERS; j++)
         lv[1][j] = efx_Echo->getpar(j);
     for (j = 0; j < C_CHORUS_PARAMETERS; j++)
         lv[2][j] = efx_Chorus->getpar(j);

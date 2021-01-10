@@ -594,7 +594,7 @@ LV2_Handle init_echolv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 9;
+    plug->nparams = C_ECHO_PARAMETERS;
     plug->effectindex = IECHO;
     plug->prev_bypass = 1;
     
