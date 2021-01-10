@@ -4619,7 +4619,7 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor* /* descriptor */,double samp
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = (SHARM_PRESET_SIZE - 1);    // -1 for Sharm_MIDI
+    plug->nparams = (C_SHARM_PARAMETERS - 1);    // -1 for Sharm_MIDI
     plug->effectindex = ISHARM_NM;
     plug->prev_bypass = 1;
 
@@ -6379,7 +6379,7 @@ LV2_Handle init_stereoharmlv2(const LV2_Descriptor* /* descriptor */,double samp
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = SHARM_PRESET_SIZE;
+    plug->nparams = C_SHARM_PARAMETERS;
     plug->effectindex = ISTEREOHARM;
     plug->prev_bypass = 1;
 

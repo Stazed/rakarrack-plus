@@ -119,7 +119,7 @@ std::vector<int>
 StereoHarm::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < SHARM_PRESET_SIZE; i++)
+    for(int i = 0; i < C_SHARM_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -130,7 +130,7 @@ StereoHarm::save_parameters()
 void
 StereoHarm::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < SHARM_PRESET_SIZE; i++)
+    for(int i = 0; i < C_SHARM_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -463,7 +463,7 @@ StereoHarm::setlrcross(int value)
 void
 StereoHarm::setpreset(int npreset)
 {
-    const int PRESET_SIZE = SHARM_PRESET_SIZE;
+    const int PRESET_SIZE = C_SHARM_PARAMETERS;
     const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

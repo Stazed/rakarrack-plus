@@ -30,7 +30,7 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
-#define SHARM_PRESET_SIZE 12
+const int C_SHARM_PARAMETERS = 12;
 
 enum Sharm_Index
 {

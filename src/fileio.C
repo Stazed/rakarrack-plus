@@ -1770,7 +1770,7 @@ RKR::Actualizar_Audio()
 
             StereoHarm_Bypass = 0;
             efx_StereoHarm->cleanup();
-            for (i = 0; i <= 11; i++)
+            for (i = 0; i < C_SHARM_PARAMETERS; i++)
                 efx_StereoHarm->changepar(i, lv[43][i]);
             if (lv[43][10]) RC_Stereo_Harm->cleanup();
             StereoHarm_Bypass = StereoHarm_B;
@@ -2308,7 +2308,7 @@ RKR::Preset_to_Bank(int i)
         lv[41][j] = efx_Reverbtron->getpar(j);
     for (j = 0; j <= 15; j++)
         lv[42][j] = efx_Echotron->getpar(j);
-    for (j = 0; j <= 11; j++)
+    for (j = 0; j < C_SHARM_PARAMETERS; j++)
         lv[43][j] = efx_StereoHarm->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[44][j] = efx_CompBand->getpar(j);
