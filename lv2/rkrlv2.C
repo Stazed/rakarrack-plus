@@ -2833,7 +2833,7 @@ LV2_Handle init_synthlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 16;
+    plug->nparams = C_SYNTHFILTER_PARAMETERS;
     plug->effectindex = ISYNTH;
     plug->prev_bypass = 1;
     

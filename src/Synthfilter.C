@@ -341,7 +341,7 @@ Synthfilter::setdepth(int Pdepth)
 void
 Synthfilter::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 16;
+    const int PRESET_SIZE = C_SYNTHFILTER_PARAMETERS;
     const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

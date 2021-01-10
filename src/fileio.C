@@ -1635,7 +1635,7 @@ RKR::Actualizar_Audio()
 
             Synthfilter_Bypass = 0;
             efx_Synthfilter->cleanup();
-            for (i = 0; i <= 15; i++)
+            for (i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
                 efx_Synthfilter->changepar(i, lv[28][i]);
             Synthfilter_Bypass = Synthfilter_B;
             break;
@@ -2278,7 +2278,7 @@ RKR::Preset_to_Bank(int i)
         lv[26][j] = efx_Expander->getpar(j);
     for (j = 0; j < C_SHUFFLE_PARAMETERS; j++)
         lv[27][j] = efx_Shuffle->getpar(j);
-    for (j = 0; j <= 15; j++)
+    for (j = 0; j < C_SYNTHFILTER_PARAMETERS; j++)
         lv[28][j] = efx_Synthfilter->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[29][j] = efx_VaryBand->getpar(j);

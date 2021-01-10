@@ -31,6 +31,8 @@
 #define SYNTHFILTER_H
 #include "EffectLFO.h"
 
+const int C_SYNTHFILTER_PARAMETERS = 16;
+
 enum Synthfilter_Index
 {
     Synthfilter_DryWet = 0,
