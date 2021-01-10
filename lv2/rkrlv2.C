@@ -2427,7 +2427,7 @@ LV2_Handle init_distbandlv2(const LV2_Descriptor* /* descriptor */,double sample
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 15;
+    plug->nparams = C_DBAND_PARAMETERS;
     plug->effectindex = IDISTBAND;
     plug->prev_bypass = 1;
 

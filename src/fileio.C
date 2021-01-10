@@ -1071,6 +1071,12 @@ void RKR::getbuf(char *buf, int j)
     }
 }
 
+/**
+ *  Save individual presets from menu, File/Save Preset.
+ * 
+ * @param filename
+ *      The user defined file name for the preset to be saved.
+ */
 void
 RKR::savefile(char *filename)
 {
@@ -1593,7 +1599,7 @@ RKR::Actualizar_Audio()
 
             DistBand_Bypass = 0;
             efx_DistBand->cleanup();
-            for (i = 0; i <= 14; i++)
+            for (i = 0; i < C_DBAND_PARAMETERS; i++)
                 efx_DistBand->changepar(i, lv[24][i]);
             DistBand_Bypass = DistBand_B;
             break;
@@ -2264,7 +2270,7 @@ RKR::Preset_to_Bank(int i)
         lv[22][j] = efx_Ring->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[23][j] = efx_Exciter->getpar(j);
-    for (j = 0; j <= 14; j++)
+    for (j = 0; j < C_DBAND_PARAMETERS; j++)
         lv[24][j] = efx_DistBand->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[25][j] = efx_Arpie->getpar(j);

@@ -124,7 +124,7 @@ std::vector<int>
 DistBand::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < DBAND_PRESET_SIZE; i++)
+    for(int i = 0; i < C_DBAND_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -135,7 +135,7 @@ DistBand::save_parameters()
 void
 DistBand::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < DBAND_PRESET_SIZE; i++)
+    for(int i = 0; i < C_DBAND_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -372,7 +372,7 @@ DistBand::setCross2(int value)
 void
 DistBand::setpreset(int npreset)
 {
-    const int PRESET_SIZE = DBAND_PRESET_SIZE;
+    const int PRESET_SIZE = C_DBAND_PARAMETERS;
     const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
