@@ -33,6 +33,8 @@
 #include "EffectLFO.h"
 #include "delayline.h"
 
+const int C_DFLANGE_PARAMETERS = 15;
+
 enum DFlange_Index
 {
     DFlange_DryWet = 0,

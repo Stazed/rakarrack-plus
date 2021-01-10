@@ -1572,7 +1572,7 @@ RKR::Actualizar_Audio()
 
             DFlange_Bypass = 0;
             efx_DFlange->cleanup();
-            for (i = 0; i <= 14; i++)
+            for (i = 0; i < C_DFLANGE_PARAMETERS; i++)
                 efx_DFlange->changepar(i, lv[21][i]);
             DFlange_Bypass = DFlange_B;
             break;
@@ -2264,7 +2264,7 @@ RKR::Preset_to_Bank(int i)
         lv[19][j] = efx_APhaser->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[20][j] = efx_Valve->getpar(j);
-    for (j = 0; j <= 14; j++)
+    for (j = 0; j < C_DFLANGE_PARAMETERS; j++)
         lv[21][j] = efx_DFlange->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[22][j] = efx_Ring->getpar(j);

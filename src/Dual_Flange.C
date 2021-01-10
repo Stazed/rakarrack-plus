@@ -473,7 +473,7 @@ Dflange::setvolume(int value)
 void
 Dflange::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 15;
+    const int PRESET_SIZE = C_DFLANGE_PARAMETERS;
     const int NUM_PRESETS = 8;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

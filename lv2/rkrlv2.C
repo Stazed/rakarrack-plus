@@ -2195,7 +2195,7 @@ LV2_Handle init_dflangelv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 15;
+    plug->nparams = C_DFLANGE_PARAMETERS;
     plug->effectindex = IDFLANGE;
     plug->prev_bypass = 1;
     
