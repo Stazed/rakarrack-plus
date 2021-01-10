@@ -26,6 +26,8 @@
 
 #include "EffectLFO.h"
 
+const int C_PAN_PARAMETERS = 9;
+
 enum Pan_Index
 {
     Pan_DryWet = 0,

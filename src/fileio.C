@@ -1509,7 +1509,7 @@ RKR::Actualizar_Audio()
 
             Pan_Bypass = 0;
             efx_Pan->cleanup();
-            for (i = 0; i <= 8; i++)
+            for (i = 0; i < C_PAN_PARAMETERS; i++)
                 efx_Pan->changepar(i, lv[14][i]);
             Pan_Bypass = Pan_B;
             break;
@@ -2250,7 +2250,7 @@ RKR::Preset_to_Bank(int i)
         lv[11][j] = efx_WahWah->getpar(j);
     for (j = 0; j < C_ALIENWAH_PARAMETERS; j++)
         lv[12][j] = efx_Alienwah->getpar(j);
-    for (j = 0; j <= 8; j++)
+    for (j = 0; j < C_PAN_PARAMETERS; j++)
         lv[14][j] = efx_Pan->getpar(j);
     for (j = 0; j < C_HARM_PARAMETERS; j++)
         lv[15][j] = efx_Har->getpar(j);

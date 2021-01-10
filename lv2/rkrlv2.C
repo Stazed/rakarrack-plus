@@ -1243,7 +1243,7 @@ LV2_Handle init_panlv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 9;
+    plug->nparams = C_PAN_PARAMETERS;
     plug->effectindex = IPAN;
     plug->prev_bypass = 1;
     
