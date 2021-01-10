@@ -27,6 +27,8 @@
 
 #include "FPreset.h"
 
+const int C_MUSIC_PARAMETERS = 13;
+
 enum Music_Index
 {
     Music_DryWet = 0,

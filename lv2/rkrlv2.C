@@ -1746,7 +1746,7 @@ LV2_Handle init_mdellv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 13;
+    plug->nparams = C_MUSIC_PARAMETERS;
     plug->effectindex = IMDEL;
     plug->prev_bypass = 1;
     

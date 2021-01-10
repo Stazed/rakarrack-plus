@@ -355,7 +355,7 @@ MusicDelay::settempo(int Ptempo)
 void
 MusicDelay::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 13;
+    const int PRESET_SIZE = C_MUSIC_PARAMETERS;
     const int NUM_PRESETS = 2;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

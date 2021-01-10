@@ -1527,7 +1527,7 @@ RKR::Actualizar_Audio()
 
             MusDelay_Bypass = 0;
             efx_MusDelay->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_MUSIC_PARAMETERS; i++)
                 efx_MusDelay->changepar(i, lv[16][i]);
             MusDelay_Bypass = MusDelay_B;
             break;
@@ -2254,7 +2254,7 @@ RKR::Preset_to_Bank(int i)
         lv[14][j] = efx_Pan->getpar(j);
     for (j = 0; j < C_HARM_PARAMETERS; j++)
         lv[15][j] = efx_Har->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_MUSIC_PARAMETERS; j++)
         lv[16][j] = efx_MusDelay->getpar(j);
     for (j = 0; j < C_GATE_PARAMETERS; j++)
         lv[17][j] = efx_Gate->getpar(j);
