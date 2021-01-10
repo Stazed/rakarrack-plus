@@ -30,7 +30,7 @@
 #include "delayline.h"
 #include "Resample.h"
 
-#define SEQUENCE_PRESET_SIZE 15
+const int C_SEQUENCE_PARAMETERS = 15;
 
 enum Sequence_Index
 {

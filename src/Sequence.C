@@ -157,7 +157,7 @@ std::vector<int>
 Sequence::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < SEQUENCE_PRESET_SIZE; i++)
+    for(int i = 0; i < C_SEQUENCE_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -168,7 +168,7 @@ Sequence::save_parameters()
 void
 Sequence::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < SEQUENCE_PRESET_SIZE; i++)
+    for(int i = 0; i < C_SEQUENCE_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -1114,7 +1114,7 @@ Sequence::settempo(int value)
 void
 Sequence::setpreset(int npreset)
 {
-    const int PRESET_SIZE = SEQUENCE_PRESET_SIZE;
+    const int PRESET_SIZE = C_SEQUENCE_PARAMETERS;
     const int NUM_PRESETS = 11;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

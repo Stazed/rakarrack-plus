@@ -1725,7 +1725,7 @@ RKR::Actualizar_Audio()
 
             Sequence_Bypass = 0;
             efx_Sequence->cleanup();
-            for (i = 0; i <= 14; i++)
+            for (i = 0; i < C_SEQUENCE_PARAMETERS; i++)
                 efx_Sequence->changepar(i, lv[38][i]);
             Sequence_Bypass = Sequence_B;
             break;
@@ -2298,7 +2298,7 @@ RKR::Preset_to_Bank(int i)
         lv[36][j] = efx_Vocoder->getpar(j);
     for (j = 0; j <= 1; j++)
         lv[37][j] = efx_Sustainer->getpar(j);
-    for (j = 0; j <= 14; j++)
+    for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)
         lv[38][j] = efx_Sequence->getpar(j);
     for (j = 0; j <= 9; j++)
         lv[39][j] = efx_Shifter->getpar(j);

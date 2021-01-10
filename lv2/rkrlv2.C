@@ -3658,7 +3658,7 @@ LV2_Handle init_seqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = SEQUENCE_PRESET_SIZE;
+    plug->nparams = C_SEQUENCE_PARAMETERS;
     plug->effectindex = ISEQ;
     plug->prev_bypass = 1;
 
