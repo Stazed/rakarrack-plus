@@ -32,6 +32,8 @@
 
 #include "AnalogFilter.h"
 
+const int C_GATE_PARAMETERS = 7;
+
 enum Gate_Index
 {
     Gate_Threshold = 0,

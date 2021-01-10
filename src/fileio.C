@@ -1536,7 +1536,7 @@ RKR::Actualizar_Audio()
 
             Gate_Bypass = 0;
             efx_Gate->cleanup();
-            for (i = 0; i <= 6; i++)
+            for (i = 0; i < C_GATE_PARAMETERS; i++)
                 efx_Gate->changepar(i, lv[17][i]);
             Gate_Bypass = Gate_B;
             break;
@@ -2256,7 +2256,7 @@ RKR::Preset_to_Bank(int i)
         lv[15][j] = efx_Har->getpar(j);
     for (j = 0; j <= 12; j++)
         lv[16][j] = efx_MusDelay->getpar(j);
-    for (j = 0; j <= 6; j++)
+    for (j = 0; j < C_GATE_PARAMETERS; j++)
         lv[17][j] = efx_Gate->getpar(j);
     for (j = 0; j < C_DERE_PARAMETERS; j++)
         lv[18][j] = efx_Derelict->getpar(j);
