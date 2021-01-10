@@ -345,7 +345,7 @@ CompBand::setCross3(int value)
 void
 CompBand::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 13;
+    const int PRESET_SIZE = C_COMPBAND_PARAMETERS;
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {

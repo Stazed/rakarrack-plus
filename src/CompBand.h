@@ -33,6 +33,8 @@
 #include "Compressor.h"
 #include "AnalogFilter.h"
 
+const int C_COMPBAND_PARAMETERS = 13;
+
 enum CompBand_Index
 {
     CompBand_DryWet = 0,

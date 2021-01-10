@@ -1780,7 +1780,7 @@ RKR::Actualizar_Audio()
 
             CompBand_Bypass = 0;
             efx_CompBand->cleanup();
-            for (i = 0; i <= 12; i++)
+            for (i = 0; i < C_COMPBAND_PARAMETERS; i++)
                 efx_CompBand->changepar(i, lv[44][i]);
             CompBand_Bypass = CompBand_B;
             break;
@@ -2310,7 +2310,7 @@ RKR::Preset_to_Bank(int i)
         lv[42][j] = efx_Echotron->getpar(j);
     for (j = 0; j < C_SHARM_PARAMETERS; j++)
         lv[43][j] = efx_StereoHarm->getpar(j);
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_COMPBAND_PARAMETERS; j++)
         lv[44][j] = efx_CompBand->getpar(j);
     for (j = 0; j <= 6; j++)
         lv[45][j] = efx_Opticaltrem->getpar(j);
