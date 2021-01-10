@@ -34,7 +34,7 @@
 #define WAIT 2
 #define DOWN 3
 
-#define SHIFTER_PRESET_SIZE 10
+const int C_SHIFTER_PARAMETERS = 10;
 
 enum Shifter_Index
 {

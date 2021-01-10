@@ -3774,7 +3774,7 @@ LV2_Handle init_shiftlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = SHIFTER_PRESET_SIZE;
+    plug->nparams = C_SHIFTER_PARAMETERS;
     plug->effectindex = ISHIFT;
     plug->prev_bypass = 1;
 

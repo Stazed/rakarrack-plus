@@ -1734,7 +1734,7 @@ RKR::Actualizar_Audio()
 
             Shifter_Bypass = 0;
             efx_Shifter->cleanup();
-            for (i = 0; i <= 9; i++)
+            for (i = 0; i < C_SHIFTER_PARAMETERS; i++)
                 efx_Shifter->changepar(i, lv[39][i]);
             Shifter_Bypass = Shifter_B;
             break;
@@ -2300,7 +2300,7 @@ RKR::Preset_to_Bank(int i)
         lv[37][j] = efx_Sustainer->getpar(j);
     for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)
         lv[38][j] = efx_Sequence->getpar(j);
-    for (j = 0; j <= 9; j++)
+    for (j = 0; j < C_SHIFTER_PARAMETERS; j++)
         lv[39][j] = efx_Shifter->getpar(j);
     for (j = 0; j <= 5; j++)
         lv[40][j] = efx_StompBox->getpar(j);

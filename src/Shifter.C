@@ -109,7 +109,7 @@ std::vector<int>
 Shifter::save_parameters()
 {
     std::vector<int> parameters;
-    for(int i = 0; i < SHIFTER_PRESET_SIZE; i++)
+    for(int i = 0; i < C_SHIFTER_PARAMETERS; i++)
     {
         parameters.push_back(getpar(i));
     }
@@ -120,7 +120,7 @@ Shifter::save_parameters()
 void
 Shifter::reset_parameters(std::vector<int> parameters)
 {
-    for(int i = 0; i < SHIFTER_PRESET_SIZE; i++)
+    for(int i = 0; i < C_SHIFTER_PARAMETERS; i++)
     {
         changepar(i, parameters[i]);
     }
@@ -418,7 +418,7 @@ Shifter::setinterval(int value)
 void
 Shifter::setpreset(int npreset)
 {
-    const int PRESET_SIZE = SHIFTER_PRESET_SIZE;
+    const int PRESET_SIZE = C_SHIFTER_PARAMETERS;
     const int NUM_PRESETS = 6;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
