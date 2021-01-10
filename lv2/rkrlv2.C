@@ -5446,7 +5446,7 @@ LV2_Handle init_midiclv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 7;
+    plug->nparams = C_MIDICONV_PARAMETERS;
     plug->effectindex = IMIDIC;
     plug->prev_bypass = 1;
 

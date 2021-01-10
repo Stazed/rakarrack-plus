@@ -37,6 +37,8 @@ struct _RKRLV2;     // Forward declaration
 
 #endif // LV2_SUPPORT
 
+const int C_MIDICONV_PARAMETERS = 7;
+
 enum MIDIConv_Index
 {
     MIDIConv_Gain = 0,  // LV2 only
