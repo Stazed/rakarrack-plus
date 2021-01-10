@@ -1626,7 +1626,7 @@ RKR::Actualizar_Audio()
 
             Shuffle_Bypass = 0;
             efx_Shuffle->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_SHUFFLE_PARAMETERS; i++)
                 efx_Shuffle->changepar(i, lv[27][i]);
             Shuffle_Bypass = Shuffle_B;
             break;
@@ -2276,7 +2276,7 @@ RKR::Preset_to_Bank(int i)
         lv[25][j] = efx_Arpie->getpar(j);
     for (j = 0; j < C_EXPANDER_PARAMETERS; j++)
         lv[26][j] = efx_Expander->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_SHUFFLE_PARAMETERS; j++)
         lv[27][j] = efx_Shuffle->getpar(j);
     for (j = 0; j <= 15; j++)
         lv[28][j] = efx_Synthfilter->getpar(j);

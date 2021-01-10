@@ -28,6 +28,8 @@
 
 #include "AnalogFilter.h"
 
+const int C_SHUFFLE_PARAMETERS = 11;
+
 enum Shuffle_Index
 {
     Shuffle_DryWet = 0,

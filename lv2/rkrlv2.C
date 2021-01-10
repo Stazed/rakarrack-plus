@@ -2731,7 +2731,7 @@ LV2_Handle init_shuflv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = C_SHUFFLE_PARAMETERS;
     plug->effectindex = ISHUFF;
     plug->prev_bypass = 1;
 
