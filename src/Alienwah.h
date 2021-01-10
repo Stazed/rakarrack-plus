@@ -27,6 +27,8 @@
 #define ALIENWAH_H
 #include "EffectLFO.h"
 
+const int C_ALIENWAH_PARAMETERS = 11;
+
 enum AlienWah_Index
 {
     Alien_DryWet = 0,
@@ -38,7 +40,7 @@ enum AlienWah_Index
     Alien_Depth,
     Alien_Feedback,
     Alien_Delay,
-    Alien_LRCross,
+    Alien_LR_Cross,
     Alien_Phase
 };
 

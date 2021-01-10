@@ -3523,7 +3523,7 @@ void RKRGUI::ActMIDI()
                 DIST->dist_LRc->redraw();
                 break;
             case 96:
-                ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LRCross));
+                ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LR_Cross));
                 ALIENWAH->Alienwah_LR->redraw();
                 break;
             case 97:

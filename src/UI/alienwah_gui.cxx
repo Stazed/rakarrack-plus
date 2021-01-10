@@ -30,7 +30,7 @@ Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
 Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
 Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
 Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
-Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LRCross));
+Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LR_Cross));
 Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));
 }
 void AlienwahGui::cb_Alienwah_preset(RKR_Choice* o, void* v) {
@@ -174,7 +174,7 @@ void AlienwahGui::cb_Alienwah_LR_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(96);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LRCross,(int)(o->value()));
+rkr->efx_Alienwah->changepar(Alien_LR_Cross,(int)(o->value()));
 }
 void AlienwahGui::cb_Alienwah_LR(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_LR_i(o,v);

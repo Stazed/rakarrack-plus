@@ -46,7 +46,7 @@ Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
 Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
 Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
 Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
-Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LRCross));
+Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LR_Cross));
 Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));} selected
     xywh {76 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
@@ -189,7 +189,7 @@ rkr->efx_Alienwah->changepar(Alien_Feedback,(int)o->value());}
  rgui->getMIDIControl(96);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LRCross,(int)(o->value()));}
+rkr->efx_Alienwah->changepar(Alien_LR_Cross,(int)(o->value()));}
     xywh {56 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

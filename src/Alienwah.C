@@ -226,7 +226,7 @@ Alienwah::setdelay(int Pdelay)
 void
 Alienwah::setpreset(int npreset)
 {
-    const int PRESET_SIZE = 11;
+    const int PRESET_SIZE = C_ALIENWAH_PARAMETERS;
     const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
@@ -291,7 +291,7 @@ Alienwah::changepar(int npar, int value)
     case Alien_Delay:
         setdelay(value);
         break;
-    case Alien_LRCross:
+    case Alien_LR_Cross:
         setlrcross(value);
         break;
     case Alien_Phase:
@@ -332,7 +332,7 @@ Alienwah::getpar(int npar)
     case Alien_Delay:
         return (Pdelay);
         break;
-    case Alien_LRCross:
+    case Alien_LR_Cross:
         return (Plrcross);
         break;
     case Alien_Phase:

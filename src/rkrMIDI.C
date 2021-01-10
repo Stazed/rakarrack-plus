@@ -1298,7 +1298,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 96:
-        efx_Alienwah->changepar(Alien_LRCross, value);
+        efx_Alienwah->changepar(Alien_LR_Cross, value);
         break;
 
     case 97:

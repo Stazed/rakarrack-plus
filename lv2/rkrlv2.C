@@ -1352,7 +1352,7 @@ LV2_Handle init_alienlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 11;
+    plug->nparams = C_ALIENWAH_PARAMETERS;
     plug->effectindex = IAWAH;
     plug->prev_bypass = 1;
     
@@ -1407,7 +1407,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
             case Alien_Depth:
             case Alien_Feedback:
             case Alien_Delay:
-            case Alien_LRCross:
+            case Alien_LR_Cross:
             case Alien_Phase:
             {
                 val = (int)*plug->param_p[i];

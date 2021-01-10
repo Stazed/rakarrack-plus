@@ -670,7 +670,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Alienwah->getpar(Alien_LFO_Tempo), efx_Alienwah->getpar(Alien_LFO_Rand),
                 efx_Alienwah->getpar(Alien_LFO_Type), efx_Alienwah->getpar(Alien_LFO_Stereo),
                 efx_Alienwah->getpar(Alien_Depth), efx_Alienwah->getpar(Alien_Feedback),
-                efx_Alienwah->getpar(Alien_Delay), efx_Alienwah->getpar(Alien_LRCross),
+                efx_Alienwah->getpar(Alien_Delay), efx_Alienwah->getpar(Alien_LR_Cross),
                 efx_Alienwah->getpar(Alien_Phase), Alienwah_Bypass);
         break;
 
@@ -1491,7 +1491,7 @@ RKR::Actualizar_Audio()
 
             Alienwah_Bypass = 0;
             efx_Alienwah->cleanup();
-            for (i = 0; i <= 10; i++)
+            for (i = 0; i < C_ALIENWAH_PARAMETERS; i++)
                 efx_Alienwah->changepar(i, lv[12][i]);
             Alienwah_Bypass = Alienwah_B;
             break;
@@ -2248,7 +2248,7 @@ RKR::Preset_to_Bank(int i)
         lv[9][j] = efx_Compressor->getpar(j);
     for (j = 0; j <= 10; j++)
         lv[11][j] = efx_WahWah->getpar(j);
-    for (j = 0; j <= 10; j++)
+    for (j = 0; j < C_ALIENWAH_PARAMETERS; j++)
         lv[12][j] = efx_Alienwah->getpar(j);
     for (j = 0; j <= 8; j++)
         lv[14][j] = efx_Pan->getpar(j);
