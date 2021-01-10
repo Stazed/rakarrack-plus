@@ -3190,7 +3190,7 @@ LV2_Handle init_echoverselv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 10;
+    plug->nparams = C_ECHOVERSE_PARAMETERS;
     plug->effectindex = IECHOVERSE;
     plug->prev_bypass = 1;
     

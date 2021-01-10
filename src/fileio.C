@@ -1680,7 +1680,7 @@ RKR::Actualizar_Audio()
 
             Echoverse_Bypass = 0;
             efx_Echoverse->cleanup();
-            for (i = 0; i <= 9; i++)
+            for (i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
                 efx_Echoverse->changepar(i, lv[33][i]);
             Echoverse_Bypass = Echoverse_B;
             break;
@@ -2288,7 +2288,7 @@ RKR::Preset_to_Bank(int i)
         lv[31][j] = efx_Looper->getpar(j);
     for (j = 0; j <= 18; j++)
         lv[32][j] = efx_MuTroMojo->getpar(j);
-    for (j = 0; j <= 9; j++)
+    for (j = 0; j < C_ECHOVERSE_PARAMETERS; j++)
         lv[33][j] = efx_Echoverse->getpar(j);
     for (j = 0; j < C_COIL_PARAMETERS; j++)
         lv[34][j] = efx_CoilCrafter->getpar(j);

@@ -31,6 +31,8 @@
 
 #include "delayline.h"
 
+const int C_ECHOVERSE_PARAMETERS = 10;
+
 enum Echoverse_Index
 {
     Echoverse_DryWet = 0,
