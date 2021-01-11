@@ -166,6 +166,15 @@ Cabinet::setpreset(int npreset)
     Cabinet_Preset = npreset;
 }
 
+/**
+ *  For gain control only.
+ * 
+ * @param i
+ *      This case is always called with 0.
+ * 
+ * @param val
+ *      The parameter adjustment - Gain (volume).
+ */
 void
 Cabinet::changepar(int i, int val)
 {
@@ -175,6 +184,15 @@ Cabinet::changepar(int i, int val)
     }
 }
 
+/**
+ *  For gain control only.
+ * 
+ * @param i
+ *      This case is always = 0.
+ * 
+ * @return 
+ *      The current Gain (volume).
+ */
 int
 Cabinet::getpar(int i)
 {

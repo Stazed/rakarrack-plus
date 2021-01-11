@@ -78,7 +78,7 @@ EQ::lv2_update_params(eq_type type, uint32_t period)
 #endif // LV2
 
 void
-EQ::initialize(eq_type type)
+EQ::init_filters()
 {
     interpbuf = new float[PERIOD];
 
@@ -92,6 +92,12 @@ EQ::initialize(eq_type type)
         filter[i].l = new AnalogFilter(6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
         filter[i].r = new AnalogFilter(6, 1000.0f, 1.0f, 0, fSAMPLE_RATE, interpbuf);
     }
+}
+
+void
+EQ::initialize(eq_type type)
+{
+    init_filters();
 
     if (type == EQ1_REGULAR)
     {
@@ -168,6 +174,13 @@ EQ::setvolume(int Pvolume)
     outvolume = powf(0.005f, (1.0f - (float) Pvolume / 127.0f)) * 10.0f;
 }
 
+/**
+ *  All this does is set the volume upon instantiation to 67.
+ *  Called only by constructor. Set to default preset 0.
+ * 
+ * @param npreset
+ *      In this use, always 0;
+ */
 void
 EQ::setpreset(int npreset)
 {

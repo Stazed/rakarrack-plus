@@ -1676,7 +1676,7 @@ LV2_Handle init_cablv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 10;
+    plug->nparams = 2;  // This is not used
     plug->effectindex = ICAB;
     plug->prev_bypass = 1;
 

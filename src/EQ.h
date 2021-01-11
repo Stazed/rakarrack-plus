@@ -49,6 +49,7 @@ public:
     void lv2_update_params(eq_type type, uint32_t period);
 #endif // LV2
     
+    void init_filters();
     void initialize(eq_type type);
     void clear_initialize();
     float getfreqresponse (float freq);
