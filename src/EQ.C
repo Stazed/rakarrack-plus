@@ -31,14 +31,12 @@ EQ::EQ(eq_type type, double samplerate, uint32_t intermediate_bufsize) :
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(samplerate),
     Ppreset(0),
-    Pvolume(50),
+    Pvolume(64),
     outvolume(0.7f),
     interpbuf(NULL),
     filter()
 {
     initialize(type);
-
-    setpreset(Ppreset);
     cleanup();
 };
 
@@ -173,7 +171,58 @@ EQ::setvolume(int Pvolume)
     this->Pvolume = Pvolume;
     outvolume = powf(0.005f, (1.0f - (float) Pvolume / 127.0f)) * 10.0f;
 }
+/**
+ *  This is the default preset for regular equalizer - NOT Parametric or Cabinet.
+ *  Parametric and Cabinet will override this function.
+ * 
+ * @param npreset
+ *      The preset number to set.
+ */
+void
+EQ::setpreset(int npreset)
+{
+    const int PRESET_SIZE = 12;
+    const int NUM_PRESETS = 3;
+    int pdata[MAX_PDATA_SIZE];
+    int presets[NUM_PRESETS][PRESET_SIZE] = {
+        //Plain
+        {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64},
+        //Pop
+        {78, 71, 64, 64, 64, 64, 64, 64, 71, 80, 64, 42},
+        //Jazz
+        {71, 68, 64, 64, 64, 64, 64, 64, 66, 69, 64, 40}
+    };
 
+    if (npreset >= NUM_PRESETS)
+    {
+        Fpre->ReadPreset(0, npreset - NUM_PRESETS + 1, pdata);
+        for (int n = 0; n < 10; n++)
+        {
+            changepar(n * 5 + 12, pdata[n]);
+        }
+
+        changepar(0, pdata[10]);    // Gain control
+
+        for (int n = 0; n < 10; n++)
+            changepar(n * 5 + 13, pdata[11]);
+    }
+    else
+    {
+        for (int n = 0; n < 10; n++)
+        {
+            changepar(n * 5 + 12, presets[npreset][n]);
+        }
+        
+        changepar(0, presets[npreset][10]); // Gain control
+        
+        for (int n = 0; n < 10; n++)
+        {
+            changepar(n * 5 + 13, presets[npreset][11]);
+        }
+    }
+}
+
+#if 0
 /**
  *  All this does is set the volume upon instantiation to 67.
  *  Called only by constructor. Set to default preset 0.
@@ -198,6 +247,7 @@ EQ::setpreset(int npreset)
     
     Ppreset = npreset;
 }
+#endif // 0
 
 void
 EQ::changepar(int npar, int value)

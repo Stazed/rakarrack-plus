@@ -93,7 +93,6 @@ public:
     void put_order_in_rack();
     void Adjust_Upsample();
     
-    void EQ1_setpreset (int npreset);
     void EQ2_setpreset (int npreset);
     
     void add_metro();

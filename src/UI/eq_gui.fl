@@ -35,7 +35,7 @@ rgui->findpos(0,(int)o->value(),o);}
     label Preset
     user_data 12000
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12000))rkr->EQ1_setpreset((int)o->value());
+if((ud==0)||(ud==12000))rkr->efx_EQ1->setpreset((int)o->value());
 eq_1->value(rkr->efx_EQ1->getpar(12)-64);
 eq_2->value(rkr->efx_EQ1->getpar(17)-64);
 eq_3->value(rkr->efx_EQ1->getpar(22)-64);
@@ -47,7 +47,7 @@ eq_8->value(rkr->efx_EQ1->getpar(47)-64);
 eq_9->value(rkr->efx_EQ1->getpar(52)-64);
 eq_10->value(rkr->efx_EQ1->getpar(57)-64);
 eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
-eq_Q->value(rkr->efx_EQ1->getpar(13)-64);}
+eq_Q->value(rkr->efx_EQ1->getpar(13)-64);} selected
     xywh {77 2 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -193,7 +193,7 @@ rkr->efx_EQ1->changepar(40+12,(int)(o->value()+64));}
  rgui->getMIDIControl(141);
  return;
 } 
-rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));} selected
+rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));}
     xywh {56 165 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }

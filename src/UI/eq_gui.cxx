@@ -20,7 +20,7 @@ void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
 
 void EqGui::cb_eq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12000))rkr->EQ1_setpreset((int)o->value());
+if((ud==0)||(ud==12000))rkr->efx_EQ1->setpreset((int)o->value());
 eq_1->value(rkr->efx_EQ1->getpar(12)-64);
 eq_2->value(rkr->efx_EQ1->getpar(17)-64);
 eq_3->value(rkr->efx_EQ1->getpar(22)-64);

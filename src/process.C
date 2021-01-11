@@ -955,42 +955,6 @@ RKR::Adjust_Upsample()
 }
 
 void
-RKR::EQ1_setpreset(int npreset)
-{
-    const int PRESET_SIZE = 12;
-    const int NUM_PRESETS = 3;
-    int pdata[MAX_PDATA_SIZE];
-    int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //Plain
-        {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64},
-        //Pop
-        {78, 71, 64, 64, 64, 64, 64, 64, 71, 80, 64, 42},
-        //Jazz
-        {71, 68, 64, 64, 64, 64, 64, 64, 66, 69, 64, 40}
-    };
-
-    if (npreset >= NUM_PRESETS)
-    {
-        Fpre->ReadPreset(0, npreset - NUM_PRESETS + 1, pdata);
-        for (int n = 0; n < 10; n++)
-            efx_EQ1->changepar(n * 5 + 12, pdata[n]);
-        efx_EQ1->changepar(0, pdata[10]);
-        for (int n = 0; n < 10; n++)
-            efx_EQ1->changepar(n * 5 + 13, pdata[11]);
-    }
-    else
-    {
-        for (int n = 0; n < 10; n++)
-            efx_EQ1->changepar(n * 5 + 12, presets[npreset][n]);
-        
-        efx_EQ1->changepar(0, presets[npreset][10]);
-        
-        for (int n = 0; n < 10; n++)
-            efx_EQ1->changepar(n * 5 + 13, presets[npreset][11]);
-    }
-}
-
-void
 RKR::EQ2_setpreset(int npreset)
 {
     const int PRESET_SIZE = 10;

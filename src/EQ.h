@@ -81,7 +81,8 @@ public:
             r() {}
         
     } filter[MAX_EQ_BANDS];
-
+    
+    class FPreset *Fpre;
 };
 
 
