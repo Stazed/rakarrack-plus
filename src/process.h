@@ -91,9 +91,7 @@ public:
     void instantiate_effects();
     void initialize_arrays();
     void put_order_in_rack();
-    void MIDI_control();
     void Adjust_Upsample();
-    void ConnectMIDI ();
     
     void EQ1_setpreset (int npreset);
     void EQ2_setpreset (int npreset);
@@ -110,6 +108,8 @@ public:
     void Alg (float *origl, float *origr ,void *);
 
     // rkrMIDI.C
+    void MIDI_control();
+    void ConnectMIDI ();
     void InitMIDI ();
     void miramidi ();
     void midievents();
