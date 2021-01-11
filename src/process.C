@@ -564,6 +564,41 @@ RKR::~RKR()
 };
 
 /**
+ *  Opens a jack client for this session.
+ * 
+ * @return 
+ *      0 if client cannot be opened.
+ *      1 if valid client is opened.
+ */
+int
+RKR::jack_open_client()
+{
+    char temp[256];
+    sprintf(temp, "%s", jack_client_name);
+
+#ifdef JACK_SESSION
+    jackclient = jack_client_open(temp, JackSessionID, NULL, s_uuid);
+#else
+    jackclient = jack_client_open(temp, options, &status, NULL);
+#endif
+
+    if (jackclient == NULL)
+    {
+        fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
+        nojack = 1;
+        exitwithhelp = 1;
+        return 0;
+    }
+
+    strcpy(jackcliname, jack_get_client_name(jackclient));
+
+    J_SAMPLE_RATE = jack_get_sample_rate(jackclient);
+    J_PERIOD = jack_get_buffer_size(jackclient);
+    
+    return 1;
+}
+
+/**
  *  Loads the user preferences set in the Settings/Preferences tabs:
  *  Look, Audio, Quality, MIDI, Jack, Misc, Bank.
  *  These settings are saved in:
@@ -697,41 +732,6 @@ RKR::load_user_preferences()
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/Default.rkrb", DATADIR);
     rakarrack.get(PrefNom("Bank Filename"), BankFilename, temp, 127);
-}
-
-/**
- *  Opens a jack client for this session.
- * 
- * @return 
- *      0 if client cannot be opened.
- *      1 if valid client is opened.
- */
-int
-RKR::jack_open_client()
-{
-    char temp[256];
-    sprintf(temp, "%s", jack_client_name);
-
-#ifdef JACK_SESSION
-    jackclient = jack_client_open(temp, JackSessionID, NULL, s_uuid);
-#else
-    jackclient = jack_client_open(temp, options, &status, NULL);
-#endif
-
-    if (jackclient == NULL)
-    {
-        fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
-        nojack = 1;
-        exitwithhelp = 1;
-        return 0;
-    }
-
-    strcpy(jackcliname, jack_get_client_name(jackclient));
-
-    J_SAMPLE_RATE = jack_get_sample_rate(jackclient);
-    J_PERIOD = jack_get_buffer_size(jackclient);
-    
-    return 1;
 }
 
 void
@@ -1582,27 +1582,6 @@ RKR::add_metro()
 }
 
 void
-RKR::Vol2_Efx()
-{
-    memcpy(smpl, efxoutl, period * sizeof (float));
-    memcpy(smpr, efxoutr, period * sizeof (float));
-}
-
-void
-RKR::Vol3_Efx()
-{
-    float att = 2.0f;
-
-    for (int i = 0; i < period; i++)
-    {
-        efxoutl[i] *= att;
-        efxoutr[i] *= att;
-    }
-
-    Vol2_Efx();
-}
-
-void
 RKR::Vol_Efx(int NumEffect, float volume)
 {
     float v1, v2; v1 = v2 = 1.0f;
@@ -1627,6 +1606,27 @@ RKR::Vol_Efx(int NumEffect, float volume)
     {
         efxoutl[i] = smpl[i] * v2 + efxoutl[i] * v1;
         efxoutr[i] = smpr[i] * v2 + efxoutr[i] * v1;
+    }
+
+    Vol2_Efx();
+}
+
+void
+RKR::Vol2_Efx()
+{
+    memcpy(smpl, efxoutl, period * sizeof (float));
+    memcpy(smpr, efxoutr, period * sizeof (float));
+}
+
+void
+RKR::Vol3_Efx()
+{
+    float att = 2.0f;
+
+    for (int i = 0; i < period; i++)
+    {
+        efxoutl[i] *= att;
+        efxoutr[i] *= att;
     }
 
     Vol2_Efx();

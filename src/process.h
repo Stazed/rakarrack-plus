@@ -85,78 +85,87 @@ public:
     RKR ();
     ~RKR ();
 
-    void Alg (float *origl, float *origr ,void *);
-    void Control_Gain (float *origl, float *origr);
-    void Control_Volume (float *origl, float *origr);
-
-    void Vol_Efx (int NumEffect, float volume);
-    void Vol2_Efx ();
-    void Vol3_Efx ();
-    void cleanup_efx ();
-    void midievents();
-    void miramidi ();
-    void calculavol (int i);
-    void Bank_to_Preset (int Num);
-    void Preset_to_Bank (int i);
-    void Actualizar_Audio ();
-    void loadfile (char *filename);
-    void getbuf (char *buf, int j);
-    void putbuf (char *buf, int j);
-    void savefile (char *filename);
-    void SaveIntPreset(int num, char *name);
-    void DelIntPreset(int num, char *name);
-    bool MergeIntPreset(char *filename);
-    void loadmiditable (char *filename);
-    void savemiditable (char *filename);
-    bool loadskin (char *filename);
-    void saveskin (char *filename);
-    int loadbank (char *filename);
-    void loadnames();
-    int savebank (char *filename);
-    void ConvertOldFile(char *filename);
-    void ConvertReverbFile(char * filename);
-    void dump_preset_names ();
-    void New ();
-    void New_Bank ();
-    void Adjust_Upsample();
-    void add_metro();
+    // process.C
+    int jack_open_client();
     void load_user_preferences();
     void instantiate_effects();
     void initialize_arrays();
     void put_order_in_rack();
     void MIDI_control();
-    int Message (int prio, const char *labelwin, const char *message_text);
-    char *PrefNom (const char *dato);
+    void Adjust_Upsample();
+    void ConnectMIDI ();
+    
     void EQ1_setpreset (int npreset);
     void EQ2_setpreset (int npreset);
+    
+    void add_metro();
+    void Vol_Efx (int NumEffect, float volume);
+    void Vol2_Efx ();
+    void Vol3_Efx ();
+    void calculavol (int i);
+    int checkforaux();
+    void Control_Gain (float *origl, float *origr);
+    void Control_Volume (float *origl, float *origr);
+    void cleanup_efx ();
+    void Alg (float *origl, float *origr ,void *);
+
+    // rkrMIDI.C
     void InitMIDI ();
-    void ConnectMIDI ();
-    void ActiveUn(int value);
+    void miramidi ();
+    void midievents();
     void ActOnOff();
-    int jack_open_client();
+    void ActiveUn(int value);
+    int checkonoff(int value);
+    void Conecta ();
+    void conectaaconnect ();
+    void disconectaaconnect ();
     void jack_process_midievents (jack_midi_event_t *midievent);
     void process_midi_controller_events(int parameter, int value);
     int ret_Tempo(int value);
     int ret_LPF(int value);
     int ret_HPF(int value);
-    void Conecta ();
-    void disconectaaconnect ();
-    void conectaaconnect ();
+
+    // fileio.C
+    void putbuf (char *buf, int j);
+    void getbuf (char *buf, int j);
+    void savefile (char *filename);
+    void loadfile (char *filename);
+    void file_error(FILE *fn);
+    void Actualizar_Audio ();
+    void loadnames();
+    int loadbank (char *filename);
+    int savebank (char *filename);
+    void New ();
+    void New_Bank ();
+    void Bank_to_Preset (int Num);
+    void Preset_to_Bank (int i);
     int BigEndian();
-    void fix_endianess();
     void copy_IO();
     void convert_IO();
+    void fix_endianess();
+    void saveskin (char *filename);
+    bool loadskin (char *filename);
+    void load_skin_error(FILE *fn);
+    void dump_preset_names ();
     int CheckOldBank(char *filename);
+    void ConvertOldFile(char *filename);
+    void ConvertReverbFile(char * filename);
+    void SaveIntPreset(int num, char *name);
+    void DelIntPreset(int num, char *name);
+    bool MergeIntPreset(char *filename);
+    void savemiditable (char *filename);
+    void loadmiditable (char *filename);
+
+    // varios.C
+    int Message (int prio, const char *labelwin, const char *message_text);
+    void Error_Handle(int num);
+    char *PrefNom (const char *dato);
     int Get_Bogomips();
-    int checkonoff(int value);
     int TapTempo();
     void TapTempo_Timeout(int state);
     void Update_tempo();
-    int checkforaux();
-    void Error_Handle(int num);
-    void file_error(FILE *fn);
-    void load_skin_error(FILE *fn);
 
+    // class pointers
     class FPreset *Fpre;
     class Reverb *efx_Rev;
     class Chorus *efx_Chorus;
@@ -465,7 +474,6 @@ public:
     
 
     // Tap Tempo
-
     int tempocnt;
     int Tap_Display;
     int Tap_Selection;
@@ -557,8 +565,7 @@ public:
     float bogomips;
     float looper_size;
 
-// Tunner
-
+    // Tuner
     float nfreq_old;
     float afreq_old;
 
@@ -575,8 +582,6 @@ public:
     char BankFilename[128];
     char UDirFilename[128];
     char BackgroundImage[256];
-
-
 
 
     struct Effects_Names
@@ -670,7 +675,6 @@ public:
 
 
     // Alsa MIDI
-
     snd_seq_t *midi_in, *midi_out;
 
 
