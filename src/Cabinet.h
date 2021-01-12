@@ -25,24 +25,17 @@
 
 #include "EQ.h"
 
-class Cabinet
+class Cabinet :public EQ
 {
 public:
-    Cabinet (double sample_frequency, uint32_t intermediate_bufsize);
-    ~Cabinet ();
-    void cleanup();
-    void out (float * efxoutl, float * efxoutr);
+    Cabinet (eq_type type, double sample_frequency, uint32_t intermediate_bufsize);
     void setpreset(int npreset);
     int Cabinet_Preset;
-    void changepar(int i, int val);
-    int getpar(int i);
-    
+
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-private:
-    EQ* eq;
+
 };
 
 #endif

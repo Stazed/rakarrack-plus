@@ -753,7 +753,7 @@ RKR::instantiate_effects()
     efx_Compressor = new Compressor(fSample_rate, period);
     efx_WahWah = new WahWah(fSample_rate, period);
     efx_Alienwah = new Alienwah(fSample_rate, period);
-    efx_Cabinet = new Cabinet(fSample_rate, period);
+    efx_Cabinet = new Cabinet(EQ3_CAB, fSample_rate, period);
     efx_Pan = new Pan(fSample_rate, period);
     efx_Har = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     efx_MusDelay = new MusicDelay(fSample_rate, period);

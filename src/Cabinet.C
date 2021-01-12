@@ -20,33 +20,16 @@
 
  */
 
-//this really just wraps eq and has different presets
-
+/**
+ *  Child class of EQ, with different presets.
+ */
 #include "Cabinet.h"
 
-Cabinet::Cabinet(double sample_frequency, uint32_t intermediate_bufsize) :
-    Cabinet_Preset(0),
-    eq(NULL)
+Cabinet::Cabinet(eq_type type, double sample_frequency, uint32_t intermediate_bufsize) :
+    EQ(type, sample_frequency, intermediate_bufsize),
+    Cabinet_Preset(0)
 {
-    eq = new EQ(EQ3_CAB, sample_frequency, intermediate_bufsize);
     setpreset(Cabinet_Preset);
-}
-
-Cabinet::~Cabinet()
-{
-    delete eq;
-}
-
-void
-Cabinet::cleanup()
-{
-    eq->cleanup();
-}
-
-void
-Cabinet::out(float * efxoutl, float * efxoutr)
-{
-    eq->out(efxoutl, efxoutr);
 }
 
 void
@@ -156,58 +139,21 @@ Cabinet::setpreset(int npreset)
     
     for (int n = 0; n < 16; n++)
     {
-        eq->changepar(n * 5 + 10, presets[npreset][n * 5]);
-        eq->changepar(n * 5 + 11, presets[npreset][n * 5 + 1]);
-        eq->changepar(n * 5 + 12, presets[npreset][n * 5 + 2]);
-        eq->changepar(n * 5 + 13, presets[npreset][n * 5 + 3]);
-        eq->changepar(n * 5 + 14, presets[npreset][n * 5 + 4]);
+        changepar(n * 5 + 10, presets[npreset][n * 5]);
+        changepar(n * 5 + 11, presets[npreset][n * 5 + 1]);
+        changepar(n * 5 + 12, presets[npreset][n * 5 + 2]);
+        changepar(n * 5 + 13, presets[npreset][n * 5 + 3]);
+        changepar(n * 5 + 14, presets[npreset][n * 5 + 4]);
     }
 
     Cabinet_Preset = npreset;
-}
-
-/**
- *  For gain control only.
- * 
- * @param i
- *      This case is always called with 0.
- * 
- * @param val
- *      The parameter adjustment - Gain (volume).
- */
-void
-Cabinet::changepar(int i, int val)
-{
-    if (i == 0)
-    {
-        eq->changepar(0, val);
-    }
-}
-
-/**
- *  For gain control only.
- * 
- * @param i
- *      This case is always = 0.
- * 
- * @return 
- *      The current Gain (volume).
- */
-int
-Cabinet::getpar(int i)
-{
-    if (i == 0)
-    {
-        return eq->getpar(0);
-    }
-    return 0;
 }
 
 #ifdef LV2_SUPPORT
 void
 Cabinet::lv2_update_params(uint32_t period)
 {
-    eq->lv2_update_params(EQ3_CAB, period);
+    EQ::lv2_update_params(EQ3_CAB, period);
     setpreset(Cabinet_Preset);
 }
 #endif // LV2

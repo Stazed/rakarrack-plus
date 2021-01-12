@@ -1682,7 +1682,7 @@ LV2_Handle init_cablv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 
     getFeatures(plug,host_features);
 
-    plug->cab = new Cabinet(sample_freq, plug->period_max);
+    plug->cab = new Cabinet(EQ3_CAB, sample_freq, plug->period_max);
 
     return plug;
 }
