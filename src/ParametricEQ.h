@@ -28,10 +28,10 @@
 class ParametricEQ :public EQ
 {
 public:
-    ParametricEQ (eq_type type, double sample_frequency, uint32_t intermediate_bufsize);
+    ParametricEQ (double sample_frequency, uint32_t intermediate_bufsize);
     void setpreset(int npreset);
     
-    void initialize(eq_type type);
+    void initialize();
 
 private:
 

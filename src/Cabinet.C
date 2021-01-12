@@ -25,15 +25,15 @@
  */
 #include "Cabinet.h"
 
-Cabinet::Cabinet(eq_type type, double sample_frequency, uint32_t intermediate_bufsize) :
-    EQ(type, sample_frequency, intermediate_bufsize),
+Cabinet::Cabinet(double sample_frequency, uint32_t intermediate_bufsize) :
+    EQ(sample_frequency, intermediate_bufsize),
     Cabinet_Preset(0)
 {
     setpreset(Cabinet_Preset);
 }
 
 void
-Cabinet::initialize(eq_type type)
+Cabinet::initialize()
 {
     init_filters();
 }
@@ -159,7 +159,7 @@ Cabinet::setpreset(int npreset)
 void
 Cabinet::lv2_update_params(uint32_t period)
 {
-    EQ::lv2_update_params(EQ3_CAB, period);
+    EQ::lv2_update_params(period);
     setpreset(Cabinet_Preset);
 }
 #endif // LV2

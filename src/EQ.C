@@ -27,7 +27,7 @@
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ(eq_type type, double samplerate, uint32_t intermediate_bufsize) :
+EQ::EQ(double samplerate, uint32_t intermediate_bufsize) :
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(samplerate),
     Pvolume(64),
@@ -35,7 +35,7 @@ EQ::EQ(eq_type type, double samplerate, uint32_t intermediate_bufsize) :
     interpbuf(NULL),
     filter()
 {
-    initialize(type);
+    initialize();
     cleanup();
 };
 
@@ -59,13 +59,13 @@ EQ::cleanup()
 
 #ifdef LV2_SUPPORT
 void
-EQ::lv2_update_params(eq_type type, uint32_t period)
+EQ::lv2_update_params(uint32_t period)
 {
     if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
     {
         PERIOD = period;
         clear_initialize();
-        initialize(type);
+        initialize();
     }
     else
     {
@@ -92,7 +92,7 @@ EQ::init_filters()
 }
 
 void
-EQ::initialize(eq_type type)
+EQ::initialize()
 {
     init_filters();
 

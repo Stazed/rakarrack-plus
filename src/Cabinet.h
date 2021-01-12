@@ -28,10 +28,10 @@
 class Cabinet :public EQ
 {
 public:
-    Cabinet (eq_type type, double sample_frequency, uint32_t intermediate_bufsize);
+    Cabinet (double sample_frequency, uint32_t intermediate_bufsize);
     void setpreset(int npreset);
     
-    void initialize(eq_type type);
+    void initialize();
     int Cabinet_Preset;
 
 #ifdef LV2_SUPPORT

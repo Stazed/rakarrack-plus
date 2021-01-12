@@ -27,17 +27,10 @@
 
 #include "AnalogFilter.h"
 
-enum eq_type
-{
-    EQ1_REGULAR = 0, 
-    EQ2_PARAMETRIC = 1,
-    EQ3_CAB = 2
-};
-
 class EQ
 {
 public:
-    EQ (eq_type type, double samplerate, uint32_t intermediate_bufsize);
+    EQ (double samplerate, uint32_t intermediate_bufsize);
     ~EQ ();
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
@@ -46,11 +39,11 @@ public:
     void cleanup ();
     
 #ifdef LV2_SUPPORT
-    void lv2_update_params(eq_type type, uint32_t period);
+    void lv2_update_params(uint32_t period);
 #endif // LV2
     
     void init_filters();
-    void initialize(eq_type type);
+    void initialize();
     void clear_initialize();
     float getfreqresponse (float freq); // not used
     void setvolume (int Pvolume);

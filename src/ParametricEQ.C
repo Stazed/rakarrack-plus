@@ -22,13 +22,13 @@
 
 #include "ParametricEQ.h"
 
-ParametricEQ::ParametricEQ(eq_type type, double sample_frequency, uint32_t intermediate_bufsize):
-    EQ(type, sample_frequency, intermediate_bufsize)
+ParametricEQ::ParametricEQ(double sample_frequency, uint32_t intermediate_bufsize):
+    EQ(sample_frequency, intermediate_bufsize)
 {
 }
 
 void
-ParametricEQ::initialize(eq_type type)
+ParametricEQ::initialize()
 {
     init_filters();
 

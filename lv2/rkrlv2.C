@@ -311,7 +311,7 @@ LV2_Handle init_eqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq,
 
     getFeatures(plug,host_features);
 
-    plug->eq = new EQ(EQ1_REGULAR, sample_freq, plug->period_max);
+    plug->eq = new EQ(sample_freq, plug->period_max);
 
     return plug;
 }
@@ -338,7 +338,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-        plug->eq->lv2_update_params(EQ1_REGULAR, nframes);
+        plug->eq->lv2_update_params(nframes);
     }
     
     // we are good to run now
@@ -1593,7 +1593,7 @@ LV2_Handle init_eqplv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 
     getFeatures(plug,host_features);
 
-    plug->peq = new ParametricEQ(EQ2_PARAMETRIC, sample_freq, plug->period_max);
+    plug->peq = new ParametricEQ(sample_freq, plug->period_max);
 
     return plug;
 }
@@ -1620,7 +1620,7 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-        plug->peq->lv2_update_params(EQ2_PARAMETRIC, nframes);
+        plug->peq->lv2_update_params(nframes);
     }
     
     // we are good to run now
@@ -1682,7 +1682,7 @@ LV2_Handle init_cablv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 
     getFeatures(plug,host_features);
 
-    plug->cab = new Cabinet(EQ3_CAB, sample_freq, plug->period_max);
+    plug->cab = new Cabinet(sample_freq, plug->period_max);
 
     return plug;
 }
