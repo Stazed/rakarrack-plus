@@ -30,7 +30,6 @@
 EQ::EQ(eq_type type, double samplerate, uint32_t intermediate_bufsize) :
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(samplerate),
-    Ppreset(0),
     Pvolume(64),
     outvolume(0.7f),
     interpbuf(NULL),
@@ -209,33 +208,6 @@ EQ::setpreset(int npreset)
     }
 }
 
-#if 0
-/**
- *  All this does is set the volume upon instantiation to 67.
- *  Called only by constructor. Set to default preset 0.
- * 
- * @param npreset
- *      In this use, always 0;
- */
-void
-EQ::setpreset(int npreset)
-{
-    const int PRESET_SIZE = 1;
-    const int NUM_PRESETS = 2;
-    int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //EQ 1
-        {67},
-        //EQ 2
-        {67}
-    };
-
-    for (int n = 0; n < PRESET_SIZE; n++)
-        changepar(n, presets[npreset][n]);
-    
-    Ppreset = npreset;
-}
-#endif // 0
-
 void
 EQ::changepar(int npar, int value)
 {
@@ -338,6 +310,13 @@ EQ::getpar(int npar)
     return (0); //in case of bogus parameter number
 }
 
+/**
+ *  This is never called. Probably leftover from zynaddsubfx.
+ * 
+ * @param freq
+ * 
+ * @return 
+ */
 float EQ::getfreqresponse(float freq)
 {
     float resp = 1.0f;

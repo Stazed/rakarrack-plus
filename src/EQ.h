@@ -52,17 +52,16 @@ public:
     void init_filters();
     void initialize(eq_type type);
     void clear_initialize();
-    float getfreqresponse (float freq);
+    float getfreqresponse (float freq); // not used
     void setvolume (int Pvolume);
 
     uint32_t PERIOD;
     double fSAMPLE_RATE;
-    int Ppreset;
-    int Pvolume;	//Volumul
+    int Pvolume;
 
-    float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of
+    float outvolume;
 
-    float * interpbuf;//buffer for filter
+    float * interpbuf;  //buffer for filter
 
     struct filter
     {
