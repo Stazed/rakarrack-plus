@@ -50,7 +50,6 @@ char *banktoload;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
-    Fpre(NULL),
     efx_Rev(NULL),
     efx_Chorus(NULL),
     efx_Flanger(NULL),
@@ -450,9 +449,6 @@ RKR::RKR() :
     
     MIDI_control();
     
-    // EQ1, EQ2 - FIXME move to EQ
-    Fpre = new FPreset();
-    
     // Initialize Preset
     New();
 
@@ -539,8 +535,6 @@ RKR::~RKR()
     delete RingRecNote;
     delete RC_Harm;
     delete RC_Stereo_Harm;
-
-    delete Fpre;
 
     free(efxoutl);
     free(efxoutr);

@@ -163,7 +163,6 @@ public:
     void Update_tempo();
 
     // class pointers
-    class FPreset *Fpre;
     class Reverb *efx_Rev;
     class Chorus *efx_Chorus;
     class Chorus *efx_Flanger;
