@@ -55,6 +55,7 @@
 #include "Opticaltrem.h"
 #include "Vibe.h"
 #include "Infinity.h"
+#include "ParametricEQ.h"
 #include "beattracker.h"
 #include <jack/jack.h>
 
@@ -92,9 +93,6 @@ public:
     void initialize_arrays();
     void put_order_in_rack();
     void Adjust_Upsample();
-    
-    void EQ2_setpreset (int npreset);
-    
     void add_metro();
     void Vol_Efx (int NumEffect, float volume);
     void Vol2_Efx ();
@@ -172,7 +170,7 @@ public:
     class Phaser *efx_Phaser;
     class Analog_Phaser *efx_APhaser;
     class EQ *efx_EQ1;
-    class EQ *efx_EQ2;
+    class ParametricEQ *efx_EQ2;
     class Echo *efx_Echo;
     class Distorsion *efx_Distorsion;
     class Distorsion *efx_Overdrive;

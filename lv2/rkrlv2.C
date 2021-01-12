@@ -1593,7 +1593,7 @@ LV2_Handle init_eqplv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 
     getFeatures(plug,host_features);
 
-    plug->eq = new EQ(EQ2_PARAMETRIC, sample_freq, plug->period_max);
+    plug->peq = new ParametricEQ(EQ2_PARAMETRIC, sample_freq, plug->period_max);
 
     return plug;
 }
@@ -1620,52 +1620,52 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-        plug->eq->lv2_update_params(EQ2_PARAMETRIC, nframes);
+        plug->peq->lv2_update_params(EQ2_PARAMETRIC, nframes);
     }
     
     // we are good to run now
     //check and set changed parameters
     i = 0;
 
-    val = (int)*plug->param_p[0]+64;//gain
-    if(plug->eq->getpar(0) != val)
+    val = (int)*plug->param_p[0] + 64;  // gain
+    if(plug->peq->getpar(0) != val)
     {
-        plug->eq->changepar(0,val);
+        plug->peq->changepar(0,val);
     }
 
     for(i=1; i<4; i++) //1-3 low band
     {
         val = (int)*plug->param_p[i]+64;
-        if(plug->eq->getpar(i + 10) != val)
+        if(plug->peq->getpar(i + 10) != val)
         {
-            plug->eq->changepar(i+10,val);
+            plug->peq->changepar(i+10,val);
         }
     }
     for(; i<7; i++) //4-6 mid band
     {
         val = (int)*plug->param_p[i]+64;
-        if(plug->eq->getpar(i + 12) != val)
+        if(plug->peq->getpar(i + 12) != val)
         {
-            plug->eq->changepar(i+12,val);
+            plug->peq->changepar(i+12,val);
         }
     }
     for(; i<plug->nparams; i++) //7-9 high band
     {
         val = (int)*plug->param_p[i]+64;
-        if(plug->eq->getpar(i + 14) != val)
+        if(plug->peq->getpar(i + 14) != val)
         {
-            plug->eq->changepar(i+14,val);
+            plug->peq->changepar(i+14,val);
         }
     }
 
     //now run
-    plug->eq->out(plug->output_l_p, plug->output_r_p);
+    plug->peq->out(plug->output_l_p, plug->output_r_p);
 
     xfade_check(plug,nframes);
 
     if(plug->prev_bypass)
     {
-        plug->eq->cleanup();
+        plug->peq->cleanup();
     }
 
     return;
@@ -6687,8 +6687,10 @@ void cleanup_rkrlv2(LV2_Handle handle)
     switch(plug->effectindex)
     {
     case IEQ:
+        delete plug->eq;
+        break;
     case IEQP:
-        delete plug->eq;//eql, eqp, cabinet
+        delete plug->peq;
         break;
     case ICOMP:
         delete plug->comp;

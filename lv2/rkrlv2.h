@@ -81,6 +81,7 @@
 #include"Gate.h"
 #include"MIDIConverter.h"
 #include"Convolotron.h"
+#include"ParametricEQ.h"
 
 #undef OLDRKRLV2    // comment this for original method
 //#define OLDRKRLV2  // use this for original
@@ -279,7 +280,7 @@ typedef struct _RKRLV2
     } URIDs;
 
     //effect modules
-    EQ* eq;             //0, 11
+    EQ* eq;             //0
     Compressor* comp;   //1
     Distorsion* dist;   //2
     Echo* echo;         //3
@@ -292,6 +293,7 @@ typedef struct _RKRLV2
     Pan* pan;			//8
     Alienwah* alien;    //9
     Reverb* reve;       //10
+    ParametricEQ* peq;  //11
     Cabinet* cab;       //12
     MusicDelay* mdel; 	//13
     WahWah* wah; //14

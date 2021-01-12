@@ -33,6 +33,12 @@ Cabinet::Cabinet(eq_type type, double sample_frequency, uint32_t intermediate_bu
 }
 
 void
+Cabinet::initialize(eq_type type)
+{
+    init_filters();
+}
+
+void
 Cabinet::setpreset(int npreset)
 {
     const int PRESET_SIZE = 81;

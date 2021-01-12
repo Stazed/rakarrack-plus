@@ -153,6 +153,7 @@ set (ProgSources
     Vibe.C
     Infinity.C
     Cabinet.C
+    ParametricEQ.C
 )
 
 

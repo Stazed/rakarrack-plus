@@ -97,35 +97,22 @@ EQ::initialize(eq_type type)
 {
     init_filters();
 
-    if (type == EQ1_REGULAR)
+    for (int i = 0; i <= 45; i += 5)
     {
-        for (int i = 0; i <= 45; i += 5)
-        {
-            changepar(i + 10, 7);
-            changepar(i + 14, 0);
-        }
+        changepar(i + 10, 7);
+        changepar(i + 14, 0);
+    }
 
-        changepar(11, 31);
-        changepar(16, 63);
-        changepar(21, 125);
-        changepar(26, 250);
-        changepar(31, 500);
-        changepar(36, 1000);
-        changepar(41, 2000);
-        changepar(46, 4000);
-        changepar(51, 8000);
-        changepar(56, 16000);
-    }
-    
-    if (type == EQ2_PARAMETRIC)
-    {
-        for (int i = 0; i <= 10; i += 5)
-        {
-            changepar(i + 10, 7);
-            changepar(i + 13, 64);
-            changepar(i + 14, 0);
-        }
-    }
+    changepar(11, 31);
+    changepar(16, 63);
+    changepar(21, 125);
+    changepar(26, 250);
+    changepar(31, 500);
+    changepar(36, 1000);
+    changepar(41, 2000);
+    changepar(46, 4000);
+    changepar(51, 8000);
+    changepar(56, 16000);
 }
 
 void

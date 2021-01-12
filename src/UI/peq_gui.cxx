@@ -20,7 +20,7 @@ void PeqGui::cb_eqp_activar(RKR_Light_Button* o, void* v) {
 
 void PeqGui::cb_eqp_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12009)) rkr->EQ2_setpreset((int)o->value());
+if((ud==0)||(ud==12009)) rkr->efx_EQ2->setpreset((int)o->value());
 eqp_LF->value(rkr->efx_EQ2->getpar(11));
 eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
 eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);

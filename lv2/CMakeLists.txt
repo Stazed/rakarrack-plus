@@ -66,6 +66,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/Gate.C
   ../src/mayer_fft.C
   ../src/Convolotron.C
+  ../src/ParametricEQ.C
 )
 
 set_source_files_properties(../src/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)

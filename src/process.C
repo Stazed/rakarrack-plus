@@ -748,7 +748,7 @@ RKR::instantiate_effects()
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     efx_Distorsion = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
     efx_Overdrive = new Distorsion(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
-    efx_EQ2 = new EQ(EQ2_PARAMETRIC, fSample_rate, period);
+    efx_EQ2 = new ParametricEQ(EQ2_PARAMETRIC, fSample_rate, period);
     efx_EQ1 = new EQ(EQ1_REGULAR, fSample_rate, period);
     efx_Compressor = new Compressor(fSample_rate, period);
     efx_WahWah = new WahWah(fSample_rate, period);
@@ -952,48 +952,6 @@ RKR::Adjust_Upsample()
     fPeriod = float(period);
     t_periods = J_SAMPLE_RATE / 12 / J_PERIOD;
 
-}
-
-void
-RKR::EQ2_setpreset(int npreset)
-{
-    const int PRESET_SIZE = 10;
-    const int NUM_PRESETS = 3;
-    int pdata[MAX_PDATA_SIZE];
-    int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //Plain
-        {200, 64, 64, 800, 64, 64, 12000, 64, 64, 64},
-        //Pop
-        {72, 73, 45, 1077, 64, 64, 8111, 69, 38, 64},
-        //Jazz
-        {72, 71, 38, 1077, 64, 64, 10580, 69, 38, 64}
-    };
-
-
-    if (npreset >= NUM_PRESETS)
-    {
-        Fpre->ReadPreset(9, npreset - NUM_PRESETS + 1, pdata);
-        
-        for (int n = 0; n < 3; n++)
-        {
-            efx_EQ2->changepar(n * 5 + 11, pdata[n * 3]);
-            efx_EQ2->changepar(n * 5 + 12, pdata[n * 3 + 1]);
-            efx_EQ2->changepar(n * 5 + 13, pdata[n * 3 + 2]);
-        }
-        
-        efx_EQ2->changepar(0, pdata[9]);
-    }
-    else
-    {
-        for (int n = 0; n < 3; n++)
-        {
-            efx_EQ2->changepar(n * 5 + 11, presets[npreset][n * 3]);
-            efx_EQ2->changepar(n * 5 + 12, presets[npreset][n * 3 + 1]);
-            efx_EQ2->changepar(n * 5 + 13, presets[npreset][n * 3 + 2]);
-        }
-        
-        efx_EQ2->changepar(0, presets[npreset][9]);
-    }
 }
 
 void
