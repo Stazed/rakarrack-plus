@@ -69,14 +69,26 @@ const int C_MC_PARAMETER_SIZE = 445;
 /**
  * Magic number 26 is the Unused cases from the default MIDI control
  * (0, 10, 11, 13, (15 > 19), (32 > 45), 64) = 24 -- Unused
- * plus 128, 129 also Unused  = 24 + 2 = 26
+ * plus 128, 129 also Unused  = 24 + 2 = 26.
+ * If any of these unused parameters are used and added to
+ * C_MC_PARAMETER_SIZE, this value must be adjusted.
  */
 const int C_MC_UNUSED_PARAMETERS = 26;
+
+/**
+ * The total MIDI control range used in switch() case function.
+ */
+const int C_MC_RANGE = C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS;
 
 /**
  * The number of rack effects.
  */
 const int C_NUMBER_EFFECTS = 47;
+
+/**
+ * The number of rack effects plus one (index 10) for main window displayed effects.
+ */
+const int C_NUM_EFFECTS_PLUS_ORDER = C_NUMBER_EFFECTS + 1;
 
 class RKR
 {

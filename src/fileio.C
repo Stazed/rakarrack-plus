@@ -25,7 +25,7 @@
 #include <FL/fl_ask.H> // for error pop up
 
 
-const int presets_default[48][MAX_PRESET_SIZE] = {
+const int presets_default[C_NUM_EFFECTS_PLUS_ORDER][MAX_PRESET_SIZE] = {
     //Reverb
     {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64, 0, 0, 0, 0, 0, 0, 0},
     //Echo
@@ -2014,8 +2014,8 @@ RKR::New()
     Bypass = 0;
     memset(lv, 0, sizeof (lv));
 
-    for (int j = 0; j <= C_NUMBER_EFFECTS; j++)
-    { //  <= NumEffects because presets_default has one extra #10 for order
+    for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
+    {
         for (int k = 0; k < MAX_PRESET_SIZE; k++)
         {
             lv[j][k] = presets_default[j][k];
@@ -2102,8 +2102,8 @@ RKR::New_Bank()
         Bank[i].Bypass = 0;
         memset(Bank[i].lv, 0, sizeof (Bank[i].lv));
 
-        for (int j = 0; j <= C_NUMBER_EFFECTS; j++)
-        { // <= NumEffects because presets_default has one extra #10 for order
+        for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
+        {
             for (int k = 0; k < MAX_PRESET_SIZE; k++)
             {
                 Bank[i].lv[j][k] = presets_default[j][k];
@@ -2129,8 +2129,8 @@ RKR::Bank_to_Preset(int i)
     memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
     strcpy(efx_Echotron->Filename, Bank[i].EchoFiname);
 
-    for (int j = 0; j <= C_NUMBER_EFFECTS; j++)
-    { // <= NumEffects because presets_default has one extra #10 for order
+    for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
+    {
         for (int k = 0; k < 20; k++)
         {
             lv[j][k] = Bank[i].lv[j][k];
@@ -2342,7 +2342,7 @@ RKR::Preset_to_Bank(int i)
     lv[13][1] = efx_Cabinet->getpar(0);
 
 
-    for (j = 0; j <= C_NUMBER_EFFECTS; j++)
+    for (j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
     {
         for (int k = 0; k < 19; k++)
         {
