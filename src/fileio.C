@@ -25,7 +25,7 @@
 #include <FL/fl_ask.H> // for error pop up
 
 
-const int presets_default[C_NUM_EFFECTS_PLUS_ORDER][MAX_PRESET_SIZE] = {
+const int presets_default[C_NUM_EFFECTS_PLUS_ORDER][C_MAX_PARAMETER_SIZE] = {
     //Reverb
     {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64, 0, 0, 0, 0, 0, 0, 0},
     //Echo
@@ -2016,7 +2016,7 @@ RKR::New()
 
     for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
     {
-        for (int k = 0; k < MAX_PRESET_SIZE; k++)
+        for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)
         {
             lv[j][k] = presets_default[j][k];
         }
@@ -2104,7 +2104,7 @@ RKR::New_Bank()
 
         for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
         {
-            for (int k = 0; k < MAX_PRESET_SIZE; k++)
+            for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)
             {
                 Bank[i].lv[j][k] = presets_default[j][k];
             }

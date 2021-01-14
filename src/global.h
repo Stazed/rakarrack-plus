@@ -87,7 +87,6 @@
 #define TEMPBUFSIZE 1024
 #define MAX_PDATA_SIZE 50
 #define USERFILE 100    // used by Convolotron, Echotron, Reverbtron to indicate user file in setfile()
-#define MAX_PRESET_SIZE 19  // fileio.C presets_default[][]
 #define JACK_RINGBUFFER_SIZE 16384 // Default size for ringbuffer
 #define SPACE_BAR 32    // for space bar pressed
 

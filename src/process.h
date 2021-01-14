@@ -90,6 +90,12 @@ const int C_NUMBER_EFFECTS = 47;
  */
 const int C_NUM_EFFECTS_PLUS_ORDER = C_NUMBER_EFFECTS + 1;
 
+/**
+ * The maximum effect parameter size. See fileio.C presets_default[][].
+ */
+const int C_MAX_PARAMETER_SIZE = 19;
+
+
 class RKR
 {
 
