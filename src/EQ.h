@@ -31,19 +31,19 @@ class EQ
 {
 public:
     EQ (double samplerate, uint32_t intermediate_bufsize);
-    ~EQ ();
+    virtual ~EQ ();
     void out (float * efxoutl, float * efxoutr);
-    void setpreset (int npreset);
+    virtual void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
     
 #ifdef LV2_SUPPORT
-    void lv2_update_params(uint32_t period);
+    virtual void lv2_update_params(uint32_t period);
 #endif // LV2
     
     void init_filters();
-    void initialize();
+    virtual void initialize();
     void clear_initialize();
     float getfreqresponse (float freq); // not used
     void setvolume (int Pvolume);
