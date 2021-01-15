@@ -105,6 +105,11 @@ RKR::MIDI_control()
 {
     static const char *los_params[] =
     {
+        "Balance FX%", "12", "50",
+        "Input Volume", "14", "50",
+        "Output Volume", "7", "50",
+        "Multi On/Off", "116", "50",
+
         "Alienwah Dry/Wet", "55", "11",
         "Alienwah Pan", "61", "11",
         "Alienwah Tempo", "76", "11",
@@ -136,8 +141,6 @@ RKR::MIDI_control()
         "Arpie L/R Cross", "217", "24",
         "Arpie Feedback", "218", "24",
         "Arpie Damp", "219", "24",
-
-        "Balance", "12", "50",
 
         "Cabinet Gain","405 ","12",
 
@@ -340,8 +343,6 @@ RKR::MIDI_control()
         "Infinity Tempo", "401", "46",
         "Infinity Subdiv", "402", "46",
 
-        "Input", "14", "50",
-
         "Looper Dry/Wet", "267", "30",
         "Looper Level 1", "268", "30",
         "Looper Level 2", "269", "30",
@@ -356,8 +357,6 @@ RKR::MIDI_control()
         "Looper Track 1", "277", "30",
         "Looper Track 2", "278", "30",
         "Looper Clear", "279", "30",
-
-        "Multi On/Off", "116", "50",
 
         "Musical Delay Dry/Wet", "56", "15",
         "Musical Delay L/R Cross", "98", "15",
@@ -587,8 +586,6 @@ RKR::MIDI_control()
         "Vocoder Q", "300", "35",
         "Vocoder Ring", "301", "35",
         "Vocoder Level", "302", "35",
-
-        "Volume", "7", "50",
 
         "WahWah Dry/Wet", "28", "10",
         "WahWah Pan", "66", "10",
@@ -1537,8 +1534,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 7:
-        Master_Volume =
-                (float) value / 128.0f;
+        Master_Volume = (float) value / 127.0f;
         calculavol(2);
         break;
 
@@ -1562,7 +1558,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 14:
-        Input_Gain = (float) value / 128.0f;
+        Input_Gain = (float) value / 127.0f;
         calculavol(1);
         break;
 

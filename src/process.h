@@ -87,6 +87,7 @@ const int C_NUMBER_EFFECTS = 47;
 
 /**
  * The number of rack effects plus one (index 10) for main window displayed effects.
+ * See fileio.C presets_default[][].
  */
 const int C_NUM_EFFECTS_PLUS_ORDER = C_NUMBER_EFFECTS + 1;
 
