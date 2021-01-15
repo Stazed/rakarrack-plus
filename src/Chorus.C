@@ -335,8 +335,8 @@ Chorus::setpreset(int dgui, int npreset)
         {64, 64, 34, 105, 0, 24, 39, 19, 17, 0, 0, 1, 1}
     };
 
-
-    if ((dgui == 0) && (npreset > 4))
+    // (npreset > 4) means user defined (Insert) presets for Chorus
+    if ((dgui == 0) && (npreset > 4))       // efx_Chorus = dgui = 0
     {
         Fpre->ReadPreset(5, npreset - 4, pdata);
         
@@ -344,14 +344,15 @@ Chorus::setpreset(int dgui, int npreset)
             changepar(n, pdata[n]);
 
     }
-    else if ((dgui == 1) && (npreset > 9))
+    // (npreset > 9 means user defined (Insert) presets for Flanger
+    else if ((dgui == 1) && (npreset > 9))  // efx_Flanger = dgui = 1
     {
         Fpre->ReadPreset(7, npreset - 9, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
     }
-    else
+    else    // No user defined presets so just set it
     {
         for (int n = 0; n < PRESET_SIZE; n++)
             

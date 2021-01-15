@@ -342,14 +342,16 @@ Compressor::setpreset(int dgui, int npreset)
         {-60, 2, 0, 10, 500, 1, 0, 1, 1},
     };
 
-    if ((dgui)&&(npreset > 3))
+    // (npreset > 3) means user defined (Insert) presets for Compressor
+    if ((dgui) && (npreset > 3))  // efx_Compressor = dgui = 1
     {
         Fpre->ReadPreset(1, npreset - 3, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
     }
-    else
+    // No user defined (Insert) presets for Compressor or this is one of those below
+    else    // CompBand, HarmonicEnhancer, efx_Limiter = dgui = 0
     {
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, presets[npreset][n]);
