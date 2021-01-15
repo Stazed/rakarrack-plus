@@ -59,6 +59,153 @@
 #include "beattracker.h"
 #include <jack/jack.h>
 
+enum MIDI_Implementation_Index
+{
+    MC_Unused_0 = 0,
+
+    MC_WahWah_Depth,
+    MC_Dere_Drive,
+    MC_Dere_Level,
+    MC_Dere_LPF,
+    MC_Dere_HPF,
+    MC_Dere_Color,
+
+    MC_Output_Volume,           // 7
+
+    MC_Dere_Suboctave,
+    MC_Dist_Suboctave,
+
+    MC_Unused_10,
+    MC_Unused_11,
+
+    MC_Balance_FX,              // 12
+
+    MC_Unused_13,
+
+    MC_Input_Volume,            // 14
+
+    MC_Unused_15,
+    MC_Unused_16,
+    MC_Unused_17,
+    MC_Unused_18,
+    MC_Unused_19,
+
+    MC_Alien_Depth,
+    MC_Phaser_Depth,
+    MC_Flanger_Depth,      // This is sent to Chorus = 22
+    MC_Chorus_Depth,
+    MC_Music_Gain_1,
+    MC_Music_Gain_2,
+    MC_Harm_Filter_Freq,
+    MC_Harm_Interval,
+    MC_WahWah_DryWet,
+    MC_Overdrive_DryWet,   // Sent to Distorsion = 29
+    MC_Dist_DryWet,
+    MC_Harm_DryWet,
+
+    MC_Unused_32,
+    MC_Unused_33,
+    MC_Unused_34,
+    MC_Unused_35,
+    MC_Unused_36,
+    MC_Unused_37,
+    MC_Unused_38,
+    MC_Unused_39,
+    MC_Unused_40,
+    MC_Unused_41,
+    MC_Unused_42,
+    MC_Unused_43,
+    MC_Unused_44,
+    MC_Unused_45,
+
+    MC_Echo_Pan,
+    MC_Overdrive_Pan,      // Sent to Distorsion = 47
+    MC_Dist_Pan,
+    MC_Harm_Pan,
+    MC_Chorus_Pan,
+    MC_Flanger_Pan,        // Sent to Chorus = 51
+    MC_Chorus_DryWet,
+    MC_Flanger_DryWet,      // Sent to Chorus = 53
+    MC_Phaser_DryWet,
+    MC_Alien_DryWet,
+    MC_Music_DryWet,
+    MC_Reverb_DryWet,
+    MC_Pan_DryWet,
+    MC_Echo_DryWet,
+    MC_Phaser_Pan,
+    MC_Alien_Pan,
+    MC_Music_Pan_1,
+    MC_Reverb_Pan,
+
+    MC_Unused_64,
+
+    MC_Music_Pan_2,
+    MC_WahWah_Pan,
+    MC_Pan_Pan,
+    MC_Overdrive_Drive,    // Sent to distorsion = 68
+    MC_Dist_Drive,
+    MC_Overdrive_Level,    // Sent to distorsion = 70
+    MC_Dist_Level,
+    MC_Chorus_LFO_Tempo,
+    MC_Flanger_LFO_Tempo,  // Sent to chorus = 73
+    MC_Phaser_LFO_Tempo,
+    MC_WahWah_LFO_Tempo,
+    MC_Alien_LFO_Tempo,
+    MC_Pan_LFO_Tempo,
+    MC_Echo_Feedback,
+    MC_Chorus_Feedback,
+    MC_Flanger_Feedback,   // Sent to chorus = 80
+    MC_Phaser_Feedback,
+    MC_Alien_Feedback,
+    MC_Music_Feedback_1,
+    MC_Music_Feedback_2,
+    MC_Overdrive_LPF,      // distorsion = 85
+    MC_Dist_LPF,
+    MC_Reverb_LPF,
+    MC_Overdrive_HPF,      // distorsion = 88
+    MC_Dist_HPF,
+    MC_Reverb_HPF,
+    MC_Chorus_LR_Cross,
+    MC_Flanger_LR_Cross,   // Chorus = 92
+    MC_Phaser_LR_Cross,
+    MC_Overdrive_LR_Cross, // distorsion = 94
+    MC_Dist_LR_Cross,
+    MC_Alien_LR_Cross,
+    MC_Echo_LR_Cross,
+    MC_Music_LR_Cross,
+    MC_Chorus_LFO_Stereo,
+    MC_Flanger_LFO_Stereo, // Chorus = 100
+    MC_Phaser_LFO_Stereo,
+    MC_WahWah_LFO_Stereo,
+    MC_Alien_LFO_Stereo,
+    MC_Pan_LFO_Stereo,
+    MC_Chorus_LFO_Random,
+    MC_Flanger_LFO_Random, // Chorus = 106
+    MC_Phaser_LFO_Random,
+    MC_WahWah_LFO_Random,
+    MC_Alien_LFO_Rand,
+    MC_Pan_LFO_Random,
+    MC_WahWah_Sense,
+    MC_WahWah_ASI,
+    MC_WahWah_Smooth,
+    MC_Phaser_Phase,
+    MC_Alien_Phase,
+
+    MC_Multi_On_Off,            // 116
+
+    MC_APhase_DryWet,
+    MC_APhase_Distortion,
+    MC_APhase_LFO_Tempo,
+    MC_APhase_Depth,
+    MC_APhase_Width,
+    MC_APhase_Feedback,
+    MC_APhase_Mismatch,
+    MC_APhase_LFO_Stereo,
+    MC_Dere_DryWet,
+    MC_Dere_Pan,
+    MC_Dere_LR_Cross            // 127
+};
+
 /**
  * The total Number of MIDI controllable parameters.
  * This is the total of listed items in the MIDI learn window.
