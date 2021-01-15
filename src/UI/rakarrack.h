@@ -577,7 +577,7 @@ public:
   void is_modified();
   void Put_Loaded_Bank();
   void Chord(int eff);
-  void ActMIDI();
+  void MIDI_control_gui_refresh();
   void ActOnOff();
   void PutBackground();
   void chfsize(int font_size);

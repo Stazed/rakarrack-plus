@@ -279,7 +279,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    ActMIDI();
+    MIDI_control_gui_refresh();
     if (rkr->ACI_Bypass)
         ActACI();
 
@@ -3184,7 +3184,7 @@ void RKRGUI::Chord(int eff)
 /**
  *  Adjust Gui parameters from MIDI control action.
  */
-void RKRGUI::ActMIDI()
+void RKRGUI::MIDI_control_gui_refresh()
 {
     // Mvalue is flag to indicate at least one parameter needs update
     if (rkr->Mvalue == 0)
@@ -3206,6 +3206,9 @@ void RKRGUI::ActMIDI()
         {
             case 0: // Unused
                 break;
+
+// Start MIDI Implementation Chart range
+
             case 1:
                 WAHWAH->WahWah_dpth->value(rkr->efx_WahWah->getpar(WahWah_Depth));
                 WAHWAH->WahWah_dpth->redraw();
@@ -3649,6 +3652,10 @@ void RKRGUI::ActMIDI()
                 DERELICT->derelict_LRc->value(rkr->efx_Derelict->getpar(Dere_LR_Cross));
                 DERELICT->derelict_LRc->redraw();
                 break;
+
+// End MIDI Implementation Chart range
+// Start of MIDI learn extras
+
             case 128:   // Unused
             case 129:   // Unused
                 break;

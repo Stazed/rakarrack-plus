@@ -1498,7 +1498,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     if(quality_update)
         return;
     
-    // Flags used for Gui update from MIDI control
+    // Flags used for Gui update from MIDI control - used by RKRGUI::MIDI_control_gui_refresh()
     if (parameter > 0)
     {
         Mcontrol[parameter] = 1;    // The parameter number that needs updating
@@ -1509,6 +1509,8 @@ RKR::process_midi_controller_events(int parameter, int value)
     {
     case 0: // Unused
         break;
+        
+// Start MIDI Implementation Chart range
 
     case 1:
         efx_WahWah->changepar(WahWah_Depth, value);
@@ -1963,6 +1965,9 @@ RKR::process_midi_controller_events(int parameter, int value)
     case 127:
         efx_Derelict->changepar(Dere_LR_Cross, value);
         break;
+
+// End MIDI Implementation Chart range
+// Start of MIDI learn extras
 
     case 128:   // Unused
     case 129:   // Unused

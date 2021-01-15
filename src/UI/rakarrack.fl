@@ -535,7 +535,7 @@ Fl::focus(Open_Order);}
         class RKR_Box
       }
       Fl_Box UPS_LED {
-        label Resample selected
+        label Resample
         xywh {450 6 12 12} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
         code0 {o->set_label_offset(0);}
         class RKR_Box
@@ -1462,7 +1462,7 @@ Order->hide();}
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-//}}
+//}} selected
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
           code0 {o->set_label_offset(15);}
           class RKR_Button
@@ -1817,7 +1817,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {Chord(int eff)} {open
   } {}
-  Function {ActMIDI()} {open
+  Function {MIDI_control_gui_refresh()} {open
   } {}
   Function {ActOnOff()} {open
   } {}
