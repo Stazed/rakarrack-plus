@@ -921,7 +921,7 @@ void RKRGUI::make_window() {
       TITTLE_L->callback((Fl_Callback*)cb_TITTLE_L);
       TITTLE_L->align(Fl_Align(FL_ALIGN_TOP|FL_ALIGN_INSIDE));
     } // Fl_Button* TITTLE_L
-    { RKR_Box* o = LMT_LED = new RKR_Box(504, 8, 8, 8, "Lmt");
+    { RKR_Box* o = LMT_LED = new RKR_Box(291, 6, 12, 12, "Limiter");
       LMT_LED->box(FL_DOWN_BOX);
       LMT_LED->color((Fl_Color)2);
       LMT_LED->selection_color(FL_BACKGROUND_COLOR);
@@ -933,9 +933,9 @@ void RKRGUI::make_window() {
       LMT_LED->when(FL_WHEN_RELEASE);
       o->set_label_offset(0);
     } // RKR_Box* LMT_LED
-    { RKR_Box* o = CLIP_LED = new RKR_Box(541, 8, 8, 8, "Clip");
+    { RKR_Box* o = CLIP_LED = new RKR_Box(363, 6, 12, 12, "Clipping");
       CLIP_LED->box(FL_DOWN_BOX);
-      CLIP_LED->color((Fl_Color)1);
+      CLIP_LED->color(FL_DARK_BLUE);
       CLIP_LED->selection_color(FL_BACKGROUND_COLOR);
       CLIP_LED->labeltype(FL_NORMAL_LABEL);
       CLIP_LED->labelfont(0);
@@ -945,7 +945,7 @@ void RKRGUI::make_window() {
       CLIP_LED->when(FL_WHEN_RELEASE);
       o->set_label_offset(0);
     } // RKR_Box* CLIP_LED
-    { RKR_Box* o = UPS_LED = new RKR_Box(608, 8, 8, 8, "Resample");
+    { RKR_Box* o = UPS_LED = new RKR_Box(450, 6, 12, 12, "Resample");
       UPS_LED->box(FL_DOWN_BOX);
       UPS_LED->color((Fl_Color)2);
       UPS_LED->selection_color(FL_BACKGROUND_COLOR);

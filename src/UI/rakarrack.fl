@@ -315,7 +315,7 @@ class RKRGUI {open
 save_current_state(0);
 
 Pexitprogram=1;} open
-      xywh {620 93 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {320 116 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -523,20 +523,20 @@ Fl::focus(Open_Order);}
         tooltip {Click here to activate scope} xywh {521 2 276 21} type Toggle box NO_BOX labeltype EMBOSSED_LABEL labelfont 1 labelsize 40 align 17
       }
       Fl_Box LMT_LED {
-        label Lmt
-        xywh {504 8 8 8} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
+        label Limiter
+        xywh {291 6 12 12} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
         code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box CLIP_LED {
-        label Clip
-        xywh {541 8 8 8} box DOWN_BOX color 1 labelsize 10 labelcolor 7 align 4
+        label Clipping
+        xywh {363 6 12 12} box DOWN_BOX color 136 labelsize 10 labelcolor 7 align 4
         code0 {o->set_label_offset(0);}
         class RKR_Box
       }
       Fl_Box UPS_LED {
-        label Resample
-        xywh {608 8 8 8} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
+        label Resample selected
+        xywh {450 6 12 12} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
         code0 {o->set_label_offset(0);}
         class RKR_Box
       }
@@ -1462,7 +1462,7 @@ Order->hide();}
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-//}} selected
+//}}
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
           code0 {o->set_label_offset(15);}
           class RKR_Button

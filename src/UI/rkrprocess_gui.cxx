@@ -374,7 +374,7 @@ void RKRGUI::GuiTimeout(void)
         }
         else
         {
-            CLIP_LED->color(fl_darker(FL_RED));
+            CLIP_LED->color(fl_darker(FL_BLUE));
             CLIP_LED->redraw();
         }
 
