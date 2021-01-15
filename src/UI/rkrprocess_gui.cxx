@@ -3191,7 +3191,7 @@ void RKRGUI::ActMIDI()
         return;
 
     // Index starts at 1, since case 0 is unused
-    for (int i = 1; i < (C_MC_RANGE); i++)
+    for (int i = 1; i < C_MC_RANGE; i++)
     {
         // Mcontrol is flag for each individual parameter
         // 1 = the parameter needs update, 0 = no update needed
