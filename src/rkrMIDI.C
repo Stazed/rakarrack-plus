@@ -1613,7 +1613,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 29:
-        efx_Overdrive->changepar(Dist_DryWet, Dry_Wet(value));
+        efx_Overdrive->changepar(Overdrive_DryWet, Dry_Wet(value));
         break;
 
     case 30:
@@ -1645,7 +1645,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 47:
-        efx_Overdrive->changepar(Dist_Pan, value);
+        efx_Overdrive->changepar(Overdrive_Pan, value);
         break;
 
     case 48:
@@ -1727,7 +1727,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 68:
-        efx_Overdrive->changepar(Dist_Drive, value);
+        efx_Overdrive->changepar(Overdrive_Drive, value);
         break;
 
     case 69:
@@ -1735,7 +1735,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 70:
-        efx_Overdrive->changepar(Dist_Level, value);
+        efx_Overdrive->changepar(Overdrive_Level, value);
         break;
 
     case 71:
@@ -1795,7 +1795,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 85:
-        efx_Overdrive->changepar(Dist_LPF, ret_LPF(value));
+        efx_Overdrive->changepar(Overdrive_LPF, ret_LPF(value));
         break;
 
     case 86:
@@ -1807,7 +1807,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 88:
-        efx_Overdrive->changepar(Dist_HPF, ret_HPF(value));
+        efx_Overdrive->changepar(Overdrive_HPF, ret_HPF(value));
         break;
 
     case 89:
@@ -1831,7 +1831,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 94:
-        efx_Overdrive->changepar(Dist_LR_Cross, value);
+        efx_Overdrive->changepar(Overdrive_LR_Cross, value);
         break;
 
     case 95:
@@ -3295,7 +3295,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 450:
-        efx_Overdrive->changepar(Dist_Type, (int) ((float) value * C_MC_30_RANGE));
+        efx_Overdrive->changepar(Overdrive_Type, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case 451:

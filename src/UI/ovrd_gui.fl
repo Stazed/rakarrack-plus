@@ -40,17 +40,17 @@ rgui->findpos(3,(int)o->value(),o);}
     user_data 12003
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
-ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Dist_DryWet)));
-ovrd_pan->value(rkr->efx_Overdrive->getpar(Dist_Pan)-64);
-ovrd_LRc->value(rkr->efx_Overdrive->getpar(Dist_LR_Cross));
-ovrd_drive->value(rkr->efx_Overdrive->getpar(Dist_Drive));
-ovrd_level->value(rkr->efx_Overdrive->getpar(Dist_Level));
-ovrd_tipo->value(rkr->efx_Overdrive->getpar(Dist_Type));
-ovrd_neg->value(rkr->efx_Overdrive->getpar(Dist_Negate));
-ovrd_lpf->value(rkr->efx_Overdrive->getpar(Dist_LPF));
-ovrd_hpf->value(rkr->efx_Overdrive->getpar(Dist_HPF));
-ovrd_st->value(rkr->efx_Overdrive->getpar(Dist_Stereo));
-ovrd_pf->value(rkr->efx_Overdrive->getpar(Dist_Prefilter));}
+ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Overdrive_DryWet)));
+ovrd_pan->value(rkr->efx_Overdrive->getpar(Overdrive_Pan)-64);
+ovrd_LRc->value(rkr->efx_Overdrive->getpar(Overdrive_LR_Cross));
+ovrd_drive->value(rkr->efx_Overdrive->getpar(Overdrive_Drive));
+ovrd_level->value(rkr->efx_Overdrive->getpar(Overdrive_Level));
+ovrd_tipo->value(rkr->efx_Overdrive->getpar(Overdrive_Type));
+ovrd_neg->value(rkr->efx_Overdrive->getpar(Overdrive_Negate));
+ovrd_lpf->value(rkr->efx_Overdrive->getpar(Overdrive_LPF));
+ovrd_hpf->value(rkr->efx_Overdrive->getpar(Overdrive_HPF));
+ovrd_st->value(rkr->efx_Overdrive->getpar(Overdrive_Stereo));
+ovrd_pf->value(rkr->efx_Overdrive->getpar(Overdrive_Prefilter));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -70,7 +70,7 @@ ovrd_pf->value(rkr->efx_Overdrive->getpar(Dist_Prefilter));}
  rgui->getMIDIControl(29);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_DryWet,Dry_Wet((int)(o->value())));}
+rkr->efx_Overdrive->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -81,7 +81,7 @@ rkr->efx_Overdrive->changepar(Dist_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(94);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_LR_Cross,(int)(o->value()));}
+rkr->efx_Overdrive->changepar(Overdrive_LR_Cross,(int)(o->value()));}
     xywh {56 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -92,7 +92,7 @@ rkr->efx_Overdrive->changepar(Dist_LR_Cross,(int)(o->value()));}
  rgui->getMIDIControl(68);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_Drive,(int)o->value());}
+rkr->efx_Overdrive->changepar(Overdrive_Drive,(int)o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -103,7 +103,7 @@ rkr->efx_Overdrive->changepar(Dist_Drive,(int)o->value());}
  rgui->getMIDIControl(70);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_Level,(int)o->value());}
+rkr->efx_Overdrive->changepar(Overdrive_Level,(int)o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -115,7 +115,7 @@ rkr->efx_Overdrive->changepar(Dist_Level,(int)o->value());}
  return;
 } 
 
-rkr->efx_Overdrive->changepar(Dist_Type,(int)o->value());} open
+rkr->efx_Overdrive->changepar(Overdrive_Type,(int)o->value());} open
     xywh {33 91 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -123,14 +123,14 @@ rkr->efx_Overdrive->changepar(Dist_Type,(int)o->value());} open
   Fl_Check_Button ovrd_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Overdrive->changepar(Dist_Negate,(int)o->value());}
+    callback {rkr->efx_Overdrive->changepar(Overdrive_Negate,(int)o->value());}
     xywh {109 92 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button ovrd_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_Overdrive->changepar(Dist_Stereo,(int)o->value());}
+    callback {rkr->efx_Overdrive->changepar(Overdrive_Stereo,(int)o->value());}
     xywh {41 110 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -141,14 +141,14 @@ rkr->efx_Overdrive->changepar(Dist_Type,(int)o->value());} open
  rgui->getMIDIControl(47);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_Pan,(int)(o->value()+64));}
+rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));}
     xywh {56 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button ovrd_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_Overdrive->changepar(Dist_Prefilter,(int)o->value());} selected
+    callback {rkr->efx_Overdrive->changepar(Overdrive_Prefilter,(int)o->value());} selected
     xywh {41 138 68 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -159,7 +159,7 @@ rkr->efx_Overdrive->changepar(Dist_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(85);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_LPF,(int)o->value());}
+rkr->efx_Overdrive->changepar(Overdrive_LPF,(int)o->value());}
     xywh {56 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -170,7 +170,7 @@ rkr->efx_Overdrive->changepar(Dist_LPF,(int)o->value());}
  rgui->getMIDIControl(88);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_HPF,(int)o->value());}
+rkr->efx_Overdrive->changepar(Overdrive_HPF,(int)o->value());}
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

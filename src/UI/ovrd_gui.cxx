@@ -21,17 +21,17 @@ void OvrdGui::cb_ovrd_activar(RKR_Light_Button* o, void* v) {
 void OvrdGui::cb_ovrd_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
-ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Dist_DryWet)));
-ovrd_pan->value(rkr->efx_Overdrive->getpar(Dist_Pan)-64);
-ovrd_LRc->value(rkr->efx_Overdrive->getpar(Dist_LR_Cross));
-ovrd_drive->value(rkr->efx_Overdrive->getpar(Dist_Drive));
-ovrd_level->value(rkr->efx_Overdrive->getpar(Dist_Level));
-ovrd_tipo->value(rkr->efx_Overdrive->getpar(Dist_Type));
-ovrd_neg->value(rkr->efx_Overdrive->getpar(Dist_Negate));
-ovrd_lpf->value(rkr->efx_Overdrive->getpar(Dist_LPF));
-ovrd_hpf->value(rkr->efx_Overdrive->getpar(Dist_HPF));
-ovrd_st->value(rkr->efx_Overdrive->getpar(Dist_Stereo));
-ovrd_pf->value(rkr->efx_Overdrive->getpar(Dist_Prefilter));
+ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Overdrive_DryWet)));
+ovrd_pan->value(rkr->efx_Overdrive->getpar(Overdrive_Pan)-64);
+ovrd_LRc->value(rkr->efx_Overdrive->getpar(Overdrive_LR_Cross));
+ovrd_drive->value(rkr->efx_Overdrive->getpar(Overdrive_Drive));
+ovrd_level->value(rkr->efx_Overdrive->getpar(Overdrive_Level));
+ovrd_tipo->value(rkr->efx_Overdrive->getpar(Overdrive_Type));
+ovrd_neg->value(rkr->efx_Overdrive->getpar(Overdrive_Negate));
+ovrd_lpf->value(rkr->efx_Overdrive->getpar(Overdrive_LPF));
+ovrd_hpf->value(rkr->efx_Overdrive->getpar(Overdrive_HPF));
+ovrd_st->value(rkr->efx_Overdrive->getpar(Overdrive_Stereo));
+ovrd_pf->value(rkr->efx_Overdrive->getpar(Overdrive_Prefilter));
 }
 void OvrdGui::cb_ovrd_preset(RKR_Choice* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_preset_i(o,v);
@@ -49,7 +49,7 @@ void OvrdGui::cb_ovrd_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(29);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_DryWet,Dry_Wet((int)(o->value())));
+rkr->efx_Overdrive->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));
 }
 void OvrdGui::cb_ovrd_WD(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_WD_i(o,v);
@@ -61,7 +61,7 @@ void OvrdGui::cb_ovrd_LRc_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(94);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_LR_Cross,(int)(o->value()));
+rkr->efx_Overdrive->changepar(Overdrive_LR_Cross,(int)(o->value()));
 }
 void OvrdGui::cb_ovrd_LRc(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_LRc_i(o,v);
@@ -73,7 +73,7 @@ void OvrdGui::cb_ovrd_drive_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(68);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_Drive,(int)o->value());
+rkr->efx_Overdrive->changepar(Overdrive_Drive,(int)o->value());
 }
 void OvrdGui::cb_ovrd_drive(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_drive_i(o,v);
@@ -85,7 +85,7 @@ void OvrdGui::cb_ovrd_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(70);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_Level,(int)o->value());
+rkr->efx_Overdrive->changepar(Overdrive_Level,(int)o->value());
 }
 void OvrdGui::cb_ovrd_level(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_level_i(o,v);
@@ -98,21 +98,21 @@ void OvrdGui::cb_ovrd_tipo_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_Overdrive->changepar(Dist_Type,(int)o->value());
+rkr->efx_Overdrive->changepar(Overdrive_Type,(int)o->value());
 }
 void OvrdGui::cb_ovrd_tipo(RKR_Choice* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_tipo_i(o,v);
 }
 
 void OvrdGui::cb_ovrd_neg_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(Dist_Negate,(int)o->value());
+  rkr->efx_Overdrive->changepar(Overdrive_Negate,(int)o->value());
 }
 void OvrdGui::cb_ovrd_neg(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_neg_i(o,v);
 }
 
 void OvrdGui::cb_ovrd_st_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(Dist_Stereo,(int)o->value());
+  rkr->efx_Overdrive->changepar(Overdrive_Stereo,(int)o->value());
 }
 void OvrdGui::cb_ovrd_st(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_st_i(o,v);
@@ -124,14 +124,14 @@ void OvrdGui::cb_ovrd_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(47);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_Pan,(int)(o->value()+64));
+rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));
 }
 void OvrdGui::cb_ovrd_pan(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_pan_i(o,v);
 }
 
 void OvrdGui::cb_ovrd_pf_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Overdrive->changepar(Dist_Prefilter,(int)o->value());
+  rkr->efx_Overdrive->changepar(Overdrive_Prefilter,(int)o->value());
 }
 void OvrdGui::cb_ovrd_pf(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_pf_i(o,v);
@@ -143,7 +143,7 @@ void OvrdGui::cb_ovrd_lpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(85);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_LPF,(int)o->value());
+rkr->efx_Overdrive->changepar(Overdrive_LPF,(int)o->value());
 }
 void OvrdGui::cb_ovrd_lpf(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_lpf_i(o,v);
@@ -155,7 +155,7 @@ void OvrdGui::cb_ovrd_hpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(88);
  return;
 } 
-rkr->efx_Overdrive->changepar(Dist_HPF,(int)o->value());
+rkr->efx_Overdrive->changepar(Overdrive_HPF,(int)o->value());
 }
 void OvrdGui::cb_ovrd_hpf(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_hpf_i(o,v);

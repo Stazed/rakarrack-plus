@@ -5970,7 +5970,7 @@ LV2_Handle init_overdrivelv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = (C_DIST_PARAMETERS - 2); // -2 for Skipped param 11 and Suboctave
+    plug->nparams = (C_OVERDRIVE_PARAMETERS - 2); // -2 for Skipped param 11 and Suboctave
     plug->effectindex = IOVERDRIVE;
     plug->prev_bypass = 1;
 
@@ -6018,15 +6018,15 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
         switch(i)
         {
             // Normal processing
-            case Dist_LR_Cross:
-            case Dist_Drive:
-            case Dist_Level:
-            case Dist_Type:
-            case Dist_Negate:
-            case Dist_LPF:
-            case Dist_HPF:
-            case Dist_Stereo:
-            case Dist_Prefilter:
+            case Overdrive_LR_Cross:
+            case Overdrive_Drive:
+            case Overdrive_Level:
+            case Overdrive_Type:
+            case Overdrive_Negate:
+            case Overdrive_LPF:
+            case Overdrive_HPF:
+            case Overdrive_Stereo:
+            case Overdrive_Prefilter:
             {
                 val = (int)*plug->param_p[i];
                 if(plug->overdrive->getpar(i) != val)
@@ -6038,23 +6038,23 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
             
             //Special cases
             // wet/dry -> dry/wet reversal
-            case Dist_DryWet:
+            case Overdrive_DryWet:
             {
                 val = Dry_Wet((int)*plug->param_p[i]);
-                if(plug->overdrive->getpar(Dist_DryWet) != val)
+                if(plug->overdrive->getpar(Overdrive_DryWet) != val)
                 {
-                    plug->overdrive->changepar(Dist_DryWet,val);
+                    plug->overdrive->changepar(Overdrive_DryWet,val);
                 }
             }
             break;
 
             // Offset
-            case Dist_Pan:
+            case Overdrive_Pan:
             {
                 val = (int)*plug->param_p[i] + 64;  // offset
-                if(plug->overdrive->getpar(Dist_Pan) != val)
+                if(plug->overdrive->getpar(Overdrive_Pan) != val)
                 {
-                    plug->overdrive->changepar(Dist_Pan,val);
+                    plug->overdrive->changepar(Overdrive_Pan,val);
                 }
             }
             break;

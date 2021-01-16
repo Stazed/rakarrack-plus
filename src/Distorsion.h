@@ -30,6 +30,7 @@
 #include "Waveshaper.h"
 
 const int C_DIST_PARAMETERS = 13;
+const int C_OVERDRIVE_PARAMETERS = 13;
 
 enum Dist_Index
 {
@@ -46,6 +47,23 @@ enum Dist_Index
     Dist_Prefilter,
     Dist_SKIP_11,
     Dist_Suboctave
+};
+
+enum Overdrive_Index
+{
+    Overdrive_DryWet = 0,
+    Overdrive_Pan,
+    Overdrive_LR_Cross,
+    Overdrive_Drive,
+    Overdrive_Level,
+    Overdrive_Type,
+    Overdrive_Negate,
+    Overdrive_LPF,
+    Overdrive_HPF,
+    Overdrive_Stereo,
+    Overdrive_Prefilter,
+    Overdrive_SKIP_11,
+    Overdrive_Suboctave
 };
 
 class Distorsion

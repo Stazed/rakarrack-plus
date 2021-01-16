@@ -598,13 +598,13 @@ void RKR::getbuf(char *buf, int j)
     case 3:
         //Overdrive
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Overdrive->getpar(Dist_DryWet), efx_Overdrive->getpar(Dist_Pan),
-                efx_Overdrive->getpar(Dist_LR_Cross), efx_Overdrive->getpar(Dist_Drive),
-                efx_Overdrive->getpar(Dist_Level), efx_Overdrive->getpar(Dist_Type),
-                efx_Overdrive->getpar(Dist_Negate), efx_Overdrive->getpar(Dist_LPF),
-                efx_Overdrive->getpar(Dist_HPF), efx_Overdrive->getpar(Dist_Stereo),
-                efx_Overdrive->getpar(Dist_Prefilter), efx_Overdrive->getpar(Dist_SKIP_11),
-                efx_Overdrive->getpar(Dist_Suboctave), Overdrive_Bypass);
+                efx_Overdrive->getpar(Overdrive_DryWet), efx_Overdrive->getpar(Overdrive_Pan),
+                efx_Overdrive->getpar(Overdrive_LR_Cross), efx_Overdrive->getpar(Overdrive_Drive),
+                efx_Overdrive->getpar(Overdrive_Level), efx_Overdrive->getpar(Overdrive_Type),
+                efx_Overdrive->getpar(Overdrive_Negate), efx_Overdrive->getpar(Overdrive_LPF),
+                efx_Overdrive->getpar(Overdrive_HPF), efx_Overdrive->getpar(Overdrive_Stereo),
+                efx_Overdrive->getpar(Overdrive_Prefilter), efx_Overdrive->getpar(Overdrive_SKIP_11),
+                efx_Overdrive->getpar(Overdrive_Suboctave), Overdrive_Bypass);
         break;
 
     case 2:
@@ -1414,7 +1414,7 @@ RKR::Actualizar_Audio()
 
             Overdrive_Bypass = 0;
             efx_Overdrive->cleanup();
-            for (i = 0; i < C_DIST_PARAMETERS; i++)
+            for (i = 0; i < C_OVERDRIVE_PARAMETERS; i++)
                 efx_Overdrive->changepar(i, lv[5][i]);
             Overdrive_Bypass = Overdrive_B;
             break;
@@ -2240,7 +2240,7 @@ RKR::Preset_to_Bank(int i)
         lv[3][j] = efx_Flanger->getpar(j);
     for (j = 0; j < C_PHASER_PARAMETERS; j++)
         lv[4][j] = efx_Phaser->getpar(j);
-    for (j = 0; j < C_DIST_PARAMETERS; j++)
+    for (j = 0; j < C_OVERDRIVE_PARAMETERS; j++)
         lv[5][j] = efx_Overdrive->getpar(j);
     for (j = 0; j < C_DIST_PARAMETERS; j++)
         lv[6][j] = efx_Distorsion->getpar(j);
