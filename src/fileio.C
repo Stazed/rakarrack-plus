@@ -574,13 +574,13 @@ void RKR::getbuf(char *buf, int j)
     case 7:
         //Flanger
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Flanger->getpar(Chorus_DryWet), efx_Flanger->getpar(Chorus_Pan),
-                efx_Flanger->getpar(Chorus_LFO_Tempo), efx_Flanger->getpar(Chorus_LFO_Random),
-                efx_Flanger->getpar(Chorus_LFO_Type), efx_Flanger->getpar(Chorus_LFO_Stereo),
-                efx_Flanger->getpar(Chorus_Depth), efx_Flanger->getpar(Chorus_Delay),
-                efx_Flanger->getpar(Chorus_Feedback), efx_Flanger->getpar(Chorus_LR_Cross),
-                efx_Flanger->getpar(Chorus_SKIP_Flange_10), efx_Flanger->getpar(Chorus_Subtract),
-                efx_Flanger->getpar(Chorus_Intense), Flanger_Bypass);
+                efx_Flanger->getpar(Flanger_DryWet), efx_Flanger->getpar(Flanger_Pan),
+                efx_Flanger->getpar(Flanger_LFO_Tempo), efx_Flanger->getpar(Flanger_LFO_Random),
+                efx_Flanger->getpar(Flanger_LFO_Type), efx_Flanger->getpar(Flanger_LFO_Stereo),
+                efx_Flanger->getpar(Flanger_Depth), efx_Flanger->getpar(Flanger_Delay),
+                efx_Flanger->getpar(Flanger_Feedback), efx_Flanger->getpar(Flanger_LR_Cross),
+                efx_Flanger->getpar(Flanger_SKIP_Flange_10), efx_Flanger->getpar(Flanger_Subtract),
+                efx_Flanger->getpar(Flanger_Intense), Flanger_Bypass);
         break;
 
     case 6:
@@ -1450,7 +1450,7 @@ RKR::Actualizar_Audio()
 
             Flanger_Bypass = 0;
             efx_Flanger->cleanup();
-            for (i = 0; i < C_CHORUS_PARAMETERS; i++)
+            for (i = 0; i < C_FLANGER_PARAMETERS; i++)
                 efx_Flanger->changepar(i, lv[3][i]);
             Flanger_Bypass = Flanger_B;
             break;
@@ -2236,7 +2236,7 @@ RKR::Preset_to_Bank(int i)
         lv[1][j] = efx_Echo->getpar(j);
     for (j = 0; j < C_CHORUS_PARAMETERS; j++)
         lv[2][j] = efx_Chorus->getpar(j);
-    for (j = 0; j < C_CHORUS_PARAMETERS; j++)
+    for (j = 0; j < C_FLANGER_PARAMETERS; j++)
         lv[3][j] = efx_Flanger->getpar(j);
     for (j = 0; j < C_PHASER_PARAMETERS; j++)
         lv[4][j] = efx_Phaser->getpar(j);

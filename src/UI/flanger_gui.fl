@@ -40,18 +40,18 @@ rgui->findpos(7,(int)o->value(),o);}
     user_data 12007
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
-flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Chorus_DryWet)));
-flanger_pan->value(rkr->efx_Flanger->getpar(Chorus_Pan)-64);
-flanger_freq->value(rkr->efx_Flanger->getpar(Chorus_LFO_Tempo));
-flanger_rnd->value(rkr->efx_Flanger->getpar(Chorus_LFO_Random));
-flanger_lfotype->value(rkr->efx_Flanger->getpar(Chorus_LFO_Type));
-flanger_stdf->value(rkr->efx_Flanger->getpar(Chorus_LFO_Stereo));
-flanger_dpth->value(rkr->efx_Flanger->getpar(Chorus_Depth));
-flanger_delay->value(rkr->efx_Flanger->getpar(Chorus_Delay));
-flanger_fb->value(rkr->efx_Flanger->getpar(Chorus_Feedback));
-flanger_LR->value(rkr->efx_Flanger->getpar(Chorus_LR_Cross));
-flanger_subs->value(rkr->efx_Flanger->getpar(Chorus_Subtract));
-flanger_awesome->value(rkr->efx_Flanger->getpar(Chorus_Intense));} selected
+flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Flanger_DryWet)));
+flanger_pan->value(rkr->efx_Flanger->getpar(Flanger_Pan)-64);
+flanger_freq->value(rkr->efx_Flanger->getpar(Flanger_LFO_Tempo));
+flanger_rnd->value(rkr->efx_Flanger->getpar(Flanger_LFO_Random));
+flanger_lfotype->value(rkr->efx_Flanger->getpar(Flanger_LFO_Type));
+flanger_stdf->value(rkr->efx_Flanger->getpar(Flanger_LFO_Stereo));
+flanger_dpth->value(rkr->efx_Flanger->getpar(Flanger_Depth));
+flanger_delay->value(rkr->efx_Flanger->getpar(Flanger_Delay));
+flanger_fb->value(rkr->efx_Flanger->getpar(Flanger_Feedback));
+flanger_LR->value(rkr->efx_Flanger->getpar(Flanger_LR_Cross));
+flanger_subs->value(rkr->efx_Flanger->getpar(Flanger_Subtract));
+flanger_awesome->value(rkr->efx_Flanger->getpar(Flanger_Intense));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -83,7 +83,7 @@ flanger_awesome->value(rkr->efx_Flanger->getpar(Chorus_Intense));} selected
  rgui->getMIDIControl(53);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
+rkr->efx_Flanger->changepar(Flanger_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -94,7 +94,7 @@ rkr->efx_Flanger->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(51);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_Pan,(int)(o->value()+64));}
+rkr->efx_Flanger->changepar(Flanger_Pan,(int)(o->value()+64));}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -105,7 +105,7 @@ rkr->efx_Flanger->changepar(Chorus_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(73);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_LFO_Tempo,(int)o->value());}
+rkr->efx_Flanger->changepar(Flanger_LFO_Tempo,(int)o->value());}
     xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -116,7 +116,7 @@ rkr->efx_Flanger->changepar(Chorus_LFO_Tempo,(int)o->value());}
  rgui->getMIDIControl(106);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_LFO_Random,(int)o->value());}
+rkr->efx_Flanger->changepar(Flanger_LFO_Random,(int)o->value());}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -128,7 +128,7 @@ rkr->efx_Flanger->changepar(Chorus_LFO_Random,(int)o->value());}
  return;
 } 
 
-rkr->efx_Flanger->changepar(Chorus_LFO_Type,(int)o->value());}
+rkr->efx_Flanger->changepar(Flanger_LFO_Type,(int)o->value());}
     xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -136,14 +136,14 @@ rkr->efx_Flanger->changepar(Chorus_LFO_Type,(int)o->value());}
   Fl_Check_Button flanger_subs {
     label Subtract
     user_data 2
-    callback {rkr->efx_Flanger->changepar(Chorus_Subtract,(int)o->value());}
+    callback {rkr->efx_Flanger->changepar(Flanger_Subtract,(int)o->value());}
     xywh {32 94 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button flanger_awesome {
     label Intense
     user_data 2
-    callback {rkr->efx_Flanger->changepar(Chorus_Intense,(int)o->value());}
+    callback {rkr->efx_Flanger->changepar(Flanger_Intense,(int)o->value());}
     xywh {94 94 58 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -154,7 +154,7 @@ rkr->efx_Flanger->changepar(Chorus_LFO_Type,(int)o->value());}
  rgui->getMIDIControl(100);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_LFO_Stereo,(int)o->value());}
+rkr->efx_Flanger->changepar(Flanger_LFO_Stereo,(int)o->value());}
     xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -165,7 +165,7 @@ rkr->efx_Flanger->changepar(Chorus_LFO_Stereo,(int)o->value());}
  rgui->getMIDIControl(22);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_Depth,(int)o->value());}
+rkr->efx_Flanger->changepar(Flanger_Depth,(int)o->value());}
     xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -176,7 +176,7 @@ rkr->efx_Flanger->changepar(Chorus_Depth,(int)o->value());}
  rgui->getMIDIControl(411);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_Delay,(int)o->value());}
+rkr->efx_Flanger->changepar(Flanger_Delay,(int)o->value());}
     xywh {56 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -187,7 +187,7 @@ rkr->efx_Flanger->changepar(Chorus_Delay,(int)o->value());}
  rgui->getMIDIControl(80);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_Feedback,(int)o->value());}
+rkr->efx_Flanger->changepar(Flanger_Feedback,(int)o->value());}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -198,7 +198,7 @@ rkr->efx_Flanger->changepar(Chorus_Feedback,(int)o->value());}
  rgui->getMIDIControl(92);
  return;
 } 
-rkr->efx_Flanger->changepar(Chorus_LR_Cross,(int)(o->value()));}
+rkr->efx_Flanger->changepar(Flanger_LR_Cross,(int)(o->value()));}
     xywh {56 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

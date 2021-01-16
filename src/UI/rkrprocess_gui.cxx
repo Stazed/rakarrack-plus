@@ -3273,7 +3273,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_dpth->redraw();
                 break;
             case 22:
-                FLANGER->flanger_dpth->value(rkr->efx_Flanger->getpar(Chorus_Depth));
+                FLANGER->flanger_dpth->value(rkr->efx_Flanger->getpar(Flanger_Depth));
                 FLANGER->flanger_dpth->redraw();
                 break;
             case 23:
@@ -3348,7 +3348,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_pan->redraw();
                 break;
             case 51:
-                FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(Chorus_Pan) - 64);
+                FLANGER->flanger_pan->value(rkr->efx_Flanger->getpar(Flanger_Pan) - 64);
                 FLANGER->flanger_pan->redraw();
                 break;
             case 52:
@@ -3356,7 +3356,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_WD->redraw();
                 break;
             case 53:
-                FLANGER->flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Chorus_DryWet)));
+                FLANGER->flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Flanger_DryWet)));
                 FLANGER->flanger_WD->redraw();
                 break;
             case 54:
@@ -3434,7 +3434,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_freq->redraw();
                 break;
             case 73:
-                FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(Chorus_LFO_Tempo));
+                FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(Flanger_LFO_Tempo));
                 FLANGER->flanger_freq->redraw();
                 break;
             case 74:
@@ -3462,7 +3462,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_fb->redraw();
                 break;
             case 80:
-                FLANGER->flanger_fb->value(rkr->efx_Flanger->getpar(Chorus_Feedback));
+                FLANGER->flanger_fb->value(rkr->efx_Flanger->getpar(Flanger_Feedback));
                 FLANGER->flanger_fb->redraw();
                 break;
             case 81:
@@ -3510,7 +3510,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_LR->redraw();
                 break;
             case 92:
-                FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(Chorus_LR_Cross));
+                FLANGER->flanger_LR->value(rkr->efx_Flanger->getpar(Flanger_LR_Cross));
                 FLANGER->flanger_LR->redraw();
                 break;
             case 93:
@@ -3542,7 +3542,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_stdf->redraw();
                 break;
             case 100:
-                FLANGER->flanger_stdf->value(rkr->efx_Flanger->getpar(Chorus_LFO_Stereo));
+                FLANGER->flanger_stdf->value(rkr->efx_Flanger->getpar(Flanger_LFO_Stereo));
                 FLANGER->flanger_stdf->redraw();
                 break;
             case 101:
@@ -3566,7 +3566,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_rnd->redraw();
                 break;
             case 106:
-                FLANGER->flanger_rnd->value(rkr->efx_Flanger->getpar(Chorus_LFO_Random));
+                FLANGER->flanger_rnd->value(rkr->efx_Flanger->getpar(Flanger_LFO_Random));
                 FLANGER->flanger_rnd->redraw();
                 break;
             case 107:
@@ -4796,7 +4796,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHO->echo_damp->redraw();
                 break;
             case 411:
-                FLANGER->flanger_delay->value(rkr->efx_Flanger->getpar(Chorus_Delay));
+                FLANGER->flanger_delay->value(rkr->efx_Flanger->getpar(Flanger_Delay));
                 FLANGER->flanger_delay->redraw();
                 break;
             case 412:
@@ -4990,7 +4990,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_lfotype->redraw();
                 break;
             case 459:
-                FLANGER->flanger_lfotype->value(rkr->efx_Flanger->getpar(Chorus_LFO_Type));
+                FLANGER->flanger_lfotype->value(rkr->efx_Flanger->getpar(Flanger_LFO_Type));
                 FLANGER->flanger_lfotype->redraw();
                 break;
             case 460:
@@ -6052,7 +6052,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->Flanger_Bypass)
     {
-        FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(Chorus_LFO_Tempo));
+        FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(Flanger_LFO_Tempo));
         FLANGER->flanger_freq->redraw();
     }
 

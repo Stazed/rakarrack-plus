@@ -5843,7 +5843,7 @@ LV2_Handle init_flangerlv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = (C_CHORUS_PARAMETERS - 1); // -1 skip Chorus_SKIP_Flange_10
+    plug->nparams = (C_FLANGER_PARAMETERS - 1); // -1 skip Flanger_SKIP_Flange_10
     plug->effectindex = IFLANGE;
     plug->prev_bypass = 1;
     
@@ -5892,15 +5892,15 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
         switch(param_case_offset)
         {
             // Normal processing
-            case Chorus_LFO_Tempo:
-            case Chorus_LFO_Random:
-            case Chorus_LFO_Type:
-            case Chorus_LFO_Stereo:
-            case Chorus_Depth:
-            case Chorus_Delay:
-            case Chorus_Feedback:
-            case Chorus_Subtract:
-            case Chorus_Intense:
+            case Flanger_LFO_Tempo:
+            case Flanger_LFO_Random:
+            case Flanger_LFO_Type:
+            case Flanger_LFO_Stereo:
+            case Flanger_Depth:
+            case Flanger_Delay:
+            case Flanger_Feedback:
+            case Flanger_Subtract:
+            case Flanger_Intense:
             {
                 val = (int)*plug->param_p[i];
                 if(plug->flanger->getpar(param_case_offset) != val)
@@ -5912,34 +5912,34 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
             
             // Special cases
             // wet/dry -> dry/wet reversal
-            case Chorus_DryWet:
+            case Flanger_DryWet:
             {
                 val = Dry_Wet((int)*plug->param_p[i]);
-                if(plug->flanger->getpar(Chorus_DryWet) != val)
+                if(plug->flanger->getpar(Flanger_DryWet) != val)
                 {
-                    plug->flanger->changepar(Chorus_DryWet,val);
+                    plug->flanger->changepar(Flanger_DryWet,val);
                 }
             }
             break;
             
             // Offset
-            case Chorus_Pan:
+            case Flanger_Pan:
             {
                 val = (int)*plug->param_p[i] + 64; // offset
-                if(plug->flanger->getpar(Chorus_Pan) != val)
+                if(plug->flanger->getpar(Flanger_Pan) != val)
                 {
-                    plug->flanger->changepar(Chorus_Pan,val);
+                    plug->flanger->changepar(Flanger_Pan,val);
                 }
             }
             break;
             
             // Skip after this one
-            case Chorus_LR_Cross:
+            case Flanger_LR_Cross:
             {
                 val = (int)*plug->param_p[i];
-                if(plug->flanger->getpar(Chorus_LR_Cross) != val)
+                if(plug->flanger->getpar(Flanger_LR_Cross) != val)
                 {
-                    plug->flanger->changepar(Chorus_LR_Cross,val);
+                    plug->flanger->changepar(Flanger_LR_Cross,val);
                 }
                 // increment for skipped parameter
                 param_case_offset++;

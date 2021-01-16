@@ -28,6 +28,7 @@
 #include "delayline.h"
 
 const int C_CHORUS_PARAMETERS = 13;
+const int C_FLANGER_PARAMETERS = 13;
 
 enum Chorus_Index
 {
@@ -44,6 +45,23 @@ enum Chorus_Index
     Chorus_SKIP_Flange_10,
     Chorus_Subtract,
     Chorus_Intense
+};
+
+enum Flanger_Index
+{
+    Flanger_DryWet = 0,
+    Flanger_Pan,
+    Flanger_LFO_Tempo,
+    Flanger_LFO_Random,
+    Flanger_LFO_Type,
+    Flanger_LFO_Stereo,
+    Flanger_Depth,
+    Flanger_Delay,
+    Flanger_Feedback,
+    Flanger_LR_Cross,
+    Flanger_SKIP_Flange_10,
+    Flanger_Subtract,
+    Flanger_Intense
 };
 
 class Chorus

@@ -1580,7 +1580,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 22:
-        efx_Flanger->changepar(Chorus_Depth, value);
+        efx_Flanger->changepar(Flanger_Depth, value);
         break;
 
     case 23:
@@ -1661,14 +1661,14 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 51:
-        efx_Flanger->changepar(Chorus_Pan, value);
+        efx_Flanger->changepar(Flanger_Pan, value);
         break;
     case 52:
         efx_Chorus->changepar(Chorus_DryWet, Dry_Wet(value));
         break;
 
     case 53:
-        efx_Flanger->changepar(Chorus_DryWet, Dry_Wet(value));
+        efx_Flanger->changepar(Flanger_DryWet, Dry_Wet(value));
         break;
 
     case 54:
@@ -1747,7 +1747,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 73:
-        efx_Flanger->changepar(Chorus_LFO_Tempo, ret_Tempo(value));
+        efx_Flanger->changepar(Flanger_LFO_Tempo, ret_Tempo(value));
         break;
 
     case 74:
@@ -1775,7 +1775,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 80:
-        efx_Flanger->changepar(Chorus_Feedback, value);
+        efx_Flanger->changepar(Flanger_Feedback, value);
         break;
 
     case 81:
@@ -1823,7 +1823,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 92:
-        efx_Flanger->changepar(Chorus_LR_Cross, value);
+        efx_Flanger->changepar(Flanger_LR_Cross, value);
         break;
 
     case 93:
@@ -1855,7 +1855,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 100:
-        efx_Flanger->changepar(Chorus_LFO_Stereo, value);
+        efx_Flanger->changepar(Flanger_LFO_Stereo, value);
         break;
 
     case 101:
@@ -1879,7 +1879,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 106:
-        efx_Flanger->changepar(Chorus_LFO_Random, value);
+        efx_Flanger->changepar(Flanger_LFO_Random, value);
         break;
 
     case 107:
@@ -3139,7 +3139,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 411:
-        efx_Flanger->changepar(Chorus_Delay, value);
+        efx_Flanger->changepar(Flanger_Delay, value);
         break;
         
     case 412:
@@ -3331,7 +3331,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 459:
-        efx_Flanger->changepar(Chorus_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        efx_Flanger->changepar(Flanger_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case 460:
