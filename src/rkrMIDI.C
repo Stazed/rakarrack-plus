@@ -86,6 +86,20 @@ const float C_MC_20000_RANGE    = 157.480315f;      /* (26000 - 6000) / 127 = 15
 const float C_MC_24000_RANGE    = 188.97638f;       /* (26000 - 2000) / 127 = 188.976377952756 */
 const float C_MC_25980_RANGE    = 204.566929f;      /* (26000 - 20) / 127 = 204.5669291338583 */
 
+template <typename T>
+std::string NumberToString ( T Number )
+{
+    std::stringstream ss;
+    ss << Number;
+    return ss.str();
+}
+
+/** 
+ * Cast Integer To String (ITS). 
+ */
+#define ITS( x )   dynamic_cast< std::ostringstream & >( \
+                    ( std::ostringstream() << std::dec << x ) ).str()
+
 /**
  *  The MIDI control parameters. This includes the default MIDI control
  *  parameters (1 - 127) as well as MIDI learn.
@@ -105,33 +119,33 @@ RKR::MIDI_control()
 {
     static const char *los_params[] =
     {
-        "Balance FX%", "12", "50",
-        "Input Volume", "14", "50",
-        "Output Volume", "7", "50",
-        "Multi On/Off", "116", "50",
+        "Balance FX%", ITS(MC_Balance_FX).c_str(), "50",
+        "Input Volume", ITS(MC_Input_Volume).c_str(), "50",
+        "Output Volume", ITS(MC_Output_Volume).c_str(), "50",
+        "Multi On/Off", ITS(MC_Multi_On_Off).c_str(), "50",
 
-        "Alienwah Dry/Wet", "55", "11",
-        "Alienwah Pan", "61", "11",
-        "Alienwah Tempo", "76", "11",
-        "Alienwah Random", "109", "11",
+        "Alienwah Dry/Wet", ITS(MC_Alien_DryWet).c_str(), "11",
+        "Alienwah Pan", ITS(MC_Alien_Pan).c_str(), "11",
+        "Alienwah Tempo", ITS(MC_Alien_LFO_Tempo).c_str(), "11",
+        "Alienwah Random", ITS(MC_Alien_LFO_Random).c_str(), "11",
         "Alienwah LFO Type", "456", "11",
-        "Alienwah Phase", "115", "11",
-        "Alienwah Stereo Df.", "103", "11",
-        "Alienwah Depth", "20", "11",
+        "Alienwah Phase", ITS(MC_Alien_Phase).c_str(), "11",
+        "Alienwah Stereo Df.", ITS(MC_Alien_LFO_Stereo).c_str(), "11",
+        "Alienwah Depth", ITS(MC_Alien_Depth).c_str(), "11",
         "Alienwah Delay", "403", "11",
-        "Alienwah Feedback", "82", "11",
-        "Alienwah L/R Cross", "96", "11",
+        "Alienwah Feedback", ITS(MC_Alien_Feedback).c_str(), "11",
+        "Alienwah L/R Cross", ITS(MC_Alien_LR_Cross).c_str(), "11",
 
-        "Analog Phaser Dry/Wet", "117", "18",
+        "Analog Phaser Dry/Wet", ITS(MC_APhase_DryWet).c_str(), "18",
         "Analog Phaser LFO Type", "457", "18",
-        "Analog Phaser Tempo", "119", "18",
-        "Analog Phaser P. Depth", "120", "18",
-        "Analog Phaser Width", "121", "18",
-        "Analog Phaser Feedback", "122", "18",
-        "Analog Phaser Mismatch", "123", "18",
-        "Analog Phaser Distortion", "118", "18",
+        "Analog Phaser Tempo", ITS(MC_APhase_LFO_Tempo).c_str(), "18",
+        "Analog Phaser P. Depth", ITS(MC_APhase_Depth).c_str(), "18",
+        "Analog Phaser Width", ITS(MC_APhase_Width).c_str(), "18",
+        "Analog Phaser Feedback", ITS(MC_APhase_Feedback).c_str(), "18",
+        "Analog Phaser Mismatch", ITS(MC_APhase_Mismatch).c_str(), "18",
+        "Analog Phaser Distortion", ITS(MC_APhase_Distortion).c_str(), "18",
         "Analog Phaser Random", "404", "18",
-        "Analog Phaser Stereo Df.", "124", "18",
+        "Analog Phaser Stereo Df.", ITS(MC_APhase_LFO_Stereo).c_str(), "18",
 
         "Arpie Dry/Wet", "212", "24",
         "Arpie Arpe's", "213", "24",
@@ -144,16 +158,16 @@ RKR::MIDI_control()
 
         "Cabinet Gain","405 ","12",
 
-        "Chorus Dry/Wet", "52", "5",
-        "Chorus Pan", "50", "5",
-        "Chorus Tempo", "72", "5",
-        "Chorus Random", "105", "5",
+        "Chorus Dry/Wet", ITS(MC_Chorus_DryWet).c_str(), "5",
+        "Chorus Pan", ITS(MC_Chorus_Pan).c_str(), "5",
+        "Chorus Tempo", ITS(MC_Chorus_LFO_Tempo).c_str(), "5",
+        "Chorus Random", ITS(MC_Chorus_LFO_Random).c_str(), "5",
         "Chorus LFO Type", "458", "5",
-        "Chorus Stereo Df", "99", "5",
-        "Chorus Depth", "23", "5",
+        "Chorus Stereo Df", ITS(MC_Chorus_LFO_Stereo).c_str(), "5",
+        "Chorus Depth", ITS(MC_Chorus_Depth).c_str(), "5",
         "Chorus Delay", "406", "5",
-        "Chorus Feedback", "79", "5",
-        "Chorus L/R Cross", "91", "5",
+        "Chorus Feedback", ITS(MC_Chorus_Feedback).c_str(), "5",
+        "Chorus L/R Cross", ITS(MC_Chorus_LR_Cross).c_str(), "5",
 
         "CoilCrafter Gain", "286", "33",
         "CoilCrafter Tone", "287", "33",
@@ -190,16 +204,16 @@ RKR::MIDI_control()
         "Convolotron Feedback", "284", "29",
         "Convolotron Length", "285", "29",
 
-        "Derelict Dry/Wet", "125", "17",
-        "Derelict L/R Cross", "127", "17",
-        "Derelict Drive", "2", "17",
-        "Derelict Level", "3", "17",
+        "Derelict Dry/Wet", ITS(MC_Dere_DryWet).c_str(), "17",
+        "Derelict L/R Cross", ITS(MC_Dere_LR_Cross).c_str(), "17",
+        "Derelict Drive", ITS(MC_Dere_Drive).c_str(), "17",
+        "Derelict Level", ITS(MC_Dere_Level).c_str(), "17",
         "Derelict Level", "451", "17",
-        "Derelict Color", "6", "17",
-        "Derelict Sub Octave", "8", "17",
-        "Derelict Pan", "126", "17",
-        "Derelict LPF", "4", "17",
-        "Derelict HPF", "5", "17",
+        "Derelict Color", ITS(MC_Dere_Color).c_str(), "17",
+        "Derelict Sub Octave", ITS(MC_Dere_Suboctave).c_str(), "17",
+        "Derelict Pan", ITS(MC_Dere_Pan).c_str(), "17",
+        "Derelict LPF", ITS(MC_Dere_LPF).c_str(), "17",
+        "Derelict HPF", ITS(MC_Dere_HPF).c_str(), "17",
 
         "DistBand Dry/Wet", "202", "23",
         "DistBand L/R Cross", "203", "23",
@@ -215,15 +229,15 @@ RKR::MIDI_control()
         "DistBand Type High", "454", "23",
         "DistBand Pan", "211", "23",
 
-        "Distortion Dry/Wet", "30", "2",
-        "Distortion L/R Cross", "95", "2",
-        "Distortion Drive", "69", "2",
-        "Distortion Level", "71", "2",
+        "Distortion Dry/Wet", ITS(MC_Dist_DryWet).c_str(), "2",
+        "Distortion L/R Cross", ITS(MC_Dist_LR_Cross).c_str(), "2",
+        "Distortion Drive", ITS(MC_Dist_Drive).c_str(), "2",
+        "Distortion Level", ITS(MC_Dist_Level).c_str(), "2",
         "Distortion Type", "449", "2",
-        "Distortion Pan", "48", "2",
-        "Distortion Sub Octave", "9", "2",
-        "Distortion LPF", "86", "2",
-        "Distortion HPF", "89", "2",
+        "Distortion Pan", ITS(MC_Dist_Pan).c_str(), "2",
+        "Distortion Sub Octave", ITS(MC_Dist_Suboctave).c_str(), "2",
+        "Distortion LPF", ITS(MC_Dist_LPF).c_str(), "2",
+        "Distortion HPF", ITS(MC_Dist_HPF).c_str(), "2",
 
         "Dual Flange Dry/Wet", "158", "20",
         "Dual Flange Pan", "159", "20",
@@ -238,13 +252,13 @@ RKR::MIDI_control()
         "Dual Flange LFO Type", "460", "20",
         "Dual Flange Random", "168", "20",
 
-        "Echo Dry/Wet", "59", "4",
+        "Echo Dry/Wet", ITS(MC_Echo_DryWet).c_str(), "4",
         "Echo Reverse", "407", "4",
-        "Echo Pan", "46", "4",
+        "Echo Pan", ITS(MC_Echo_Pan).c_str(), "4",
         "Echo Delay", "408", "4",
         "Echo L/R Delay", "409", "4",
-        "Echo L/R Cross", "97", "4",
-        "Echo Feedback", "78", "4",
+        "Echo L/R Cross", ITS(MC_Echo_LR_Cross).c_str(), "4",
+        "Echo Feedback", ITS(MC_Echo_Feedback).c_str(), "4",
         "Echo Damp", "410", "4",
 
         "Echotron Dry/Wet", "348", "41",
@@ -304,22 +318,22 @@ RKR::MIDI_control()
         "Expander LPF", "225", "25",
         "Expander HPF", "226", "25",
 
-        "Flanger Dry/Wet", "53", "7",
-        "Flanger Pan", "51", "7",
-        "Flanger Tempo", "73", "7",
-        "Flanger Random", "106", "7",
+        "Flanger Dry/Wet", ITS(MC_Flanger_DryWet).c_str(), "7",
+        "Flanger Pan", ITS(MC_Flanger_Pan).c_str(), "7",
+        "Flanger Tempo", ITS(MC_Flanger_LFO_Tempo).c_str(), "7",
+        "Flanger Random", ITS(MC_Flanger_LFO_Random).c_str(), "7",
         "Flanger LFO Type", "459", "7",
-        "Flanger Stereo Df", "100", "7",
-        "Flanger Depth", "22", "7",
+        "Flanger Stereo Df", ITS(MC_Flanger_LFO_Stereo).c_str(), "7",
+        "Flanger Depth", ITS(MC_Flanger_Depth).c_str(), "7",
         "Flanger Delay", "411", "7",
-        "Flanger Feedback", "80", "7",
-        "Flanger L/R Cross", "92", "7",
+        "Flanger Feedback", ITS(MC_Flanger_Feedback).c_str(), "7",
+        "Flanger L/R Cross", ITS(MC_Flanger_LR_Cross).c_str(), "7",
 
-        "Harmonizer Dry/Wet", "31", "14",
-        "Harmonizer Interval", "27", "14",
+        "Harmonizer Dry/Wet", ITS(MC_Harm_DryWet).c_str(), "14",
+        "Harmonizer Interval", ITS(MC_Harm_Interval).c_str(), "14",
         "Harmonizer Gain", "412", "14",
-        "Harmonizer Pan", "49", "14",
-        "Harmonizer Freq", "26", "14",
+        "Harmonizer Pan", ITS(MC_Harm_Pan).c_str(), "14",
+        "Harmonizer Freq", ITS(MC_Harm_Filter_Freq).c_str(), "14",
         "Harmonizer Filter Gain", "413", "14",
         "Harmonizer Filter Q", "414", "14",
         "Harmonizer SELECT", "447", "14",
@@ -358,15 +372,15 @@ RKR::MIDI_control()
         "Looper Track 2", "278", "30",
         "Looper Clear", "279", "30",
 
-        "Musical Delay Dry/Wet", "56", "15",
-        "Musical Delay L/R Cross", "98", "15",
-        "Musical Delay Pan 1", "62", "15",
-        "Musical Delay Pan 2", "65", "15",
+        "Musical Delay Dry/Wet", ITS(MC_Music_DryWet).c_str(), "15",
+        "Musical Delay L/R Cross", ITS(MC_Music_LR_Cross).c_str(), "15",
+        "Musical Delay Pan 1", ITS(MC_Music_Pan_1).c_str(), "15",
+        "Musical Delay Pan 2", ITS(MC_Music_Pan_2).c_str(), "15",
         "Musical Delay Tempo", "424", "15",
-        "Musical Delay Gain 1", "24", "15",
-        "Musical Delay Gain 2", "25", "15",
-        "Musical Delay FB 1", "83", "15",
-        "Musical Delay FB 2", "84", "15",
+        "Musical Delay Gain 1", ITS(MC_Music_Gain_1).c_str(), "15",
+        "Musical Delay Gain 2", ITS(MC_Music_Gain_2).c_str(), "15",
+        "Musical Delay FB 1", ITS(MC_Music_Feedback_1).c_str(), "15",
+        "Musical Delay FB 2", ITS(MC_Music_Feedback_2).c_str(), "15",
         "Musical Delay Damp", "425", "15",
 
         "MuTroMojo Dry/Wet", "256", "31",
@@ -400,21 +414,21 @@ RKR::MIDI_control()
         "Opticaltrem Stereo Df", "384", "44",
         "Opticaltrem Pan", "385", "44",
 
-        "Overdrive Dry/Wet", "29", "3",
-        "Overdrive L/R Cross", "94", "3",
-        "Overdrive Drive", "68", "3",
-        "Overdrive Level", "70", "3",
+        "Overdrive Dry/Wet", ITS(MC_Overdrive_DryWet).c_str(), "3",
+        "Overdrive L/R Cross", ITS(MC_Overdrive_LR_Cross).c_str(), "3",
+        "Overdrive Drive", ITS(MC_Overdrive_Drive).c_str(), "3",
+        "Overdrive Level", ITS(MC_Overdrive_Level).c_str(), "3",
         "Overdrive Type", "450", "3",
-        "Overdrive Pan", "47", "3",
-        "Overdrive LPF", "85", "3",
-        "Overdrive HPF", "88", "3",
+        "Overdrive Pan", ITS(MC_Overdrive_Pan).c_str(), "3",
+        "Overdrive LPF", ITS(MC_Overdrive_LPF).c_str(), "3",
+        "Overdrive HPF", ITS(MC_Overdrive_HPF).c_str(), "3",
 
-        "Pan Dry/Wet", "58", "13",
-        "Pan Pan", "67", "13",
-        "Pan Tempo", "77", "13",
-        "Pan Random", "110", "13",
+        "Pan Dry/Wet", ITS(MC_Pan_DryWet).c_str(), "13",
+        "Pan Pan", ITS(MC_Pan_Pan).c_str(), "13",
+        "Pan Tempo", ITS(MC_Pan_LFO_Tempo).c_str(), "13",
+        "Pan Random", ITS(MC_Pan_LFO_Random).c_str(), "13",
         "Pan LFO Type", "464", "13",
-        "Pan Stereo Df", "104", "13",
+        "Pan Stereo Df", ITS(MC_Pan_LFO_Stereo).c_str(), "13",
         "Pan E. Stereo", "436", "13",
 
         "Parametric EQ Gain", "148", "9",
@@ -428,25 +442,25 @@ RKR::MIDI_control()
         "Parametric EQ High Gain", "156", "9",
         "Parametric EQ High Q", "157", "9",
 
-        "Phaser Dry/Wet", "54", "6",
-        "Phaser Pan", "60", "6",
-        "Phaser Tempo", "74", "6",
-        "Phaser Random", "107", "6",
+        "Phaser Dry/Wet", ITS(MC_Phaser_DryWet).c_str(), "6",
+        "Phaser Pan", ITS(MC_Phaser_Pan).c_str(), "6",
+        "Phaser Tempo", ITS(MC_Phaser_LFO_Tempo).c_str(), "6",
+        "Phaser Random", ITS(MC_Phaser_LFO_Random).c_str(), "6",
         "Phaser LFO Type", "465", "6",
-        "Phaser Phase", "114", "6",
-        "Phaser Stereo Df", "101", "6",
-        "Phaser Depth", "21", "6",
-        "Phaser Feedback", "81", "6",
-        "Phaser L/R Cross", "93", "6",
+        "Phaser Phase", ITS(MC_Phaser_Phase).c_str(), "6",
+        "Phaser Stereo Df", ITS(MC_Phaser_LFO_Stereo).c_str(), "6",
+        "Phaser Depth", ITS(MC_Phaser_Depth).c_str(), "6",
+        "Phaser Feedback", ITS(MC_Phaser_Feedback).c_str(), "6",
+        "Phaser L/R Cross", ITS(MC_Phaser_LR_Cross).c_str(), "6",
 
-        "Reverb Dry/Wet", "57", "8",
-        "Reverb Pan", "63", "8",
+        "Reverb Dry/Wet", ITS(MC_Reverb_DryWet).c_str(), "8",
+        "Reverb Pan", ITS(MC_Reverb_Pan).c_str(), "8",
         "Reverb Time", "437", "8",
         "Reverb Initial Delay", "438", "8",
         "Reverb Del. E/R", "439", "8",
         "Reverb Room Size", "440", "8",
-        "Reverb LPF", "87", "8",
-        "Reverb HPF", "90", "8",
+        "Reverb LPF", ITS(MC_Reverb_LPF).c_str(), "8",
+        "Reverb HPF", ITS(MC_Reverb_HPF).c_str(), "8",
         "Reverb Damping", "441", "8",
 
         "Reverbtron Dry/Wet", "339", "40",
@@ -587,16 +601,16 @@ RKR::MIDI_control()
         "Vocoder Ring", "301", "35",
         "Vocoder Level", "302", "35",
 
-        "WahWah Dry/Wet", "28", "10",
-        "WahWah Pan", "66", "10",
-        "WahWah Tempo", "75", "10",
-        "WahWah Random", "108", "10",
+        "WahWah Dry/Wet", ITS(MC_WahWah_DryWet).c_str(), "10",
+        "WahWah Pan", ITS(MC_WahWah_Pan).c_str(), "10",
+        "WahWah Tempo", ITS(MC_WahWah_LFO_Tempo).c_str(), "10",
+        "WahWah Random", ITS(MC_WahWah_LFO_Random).c_str(), "10",
         "WahWah LFO Type", "470", "10",
-        "WahWah Stereo Df", "102", "10",
-        "WahWah Depth", "1", "10",
-        "WahWah Amp S.", "111", "10",
-        "WahWah Amp S.I.", "112", "10",
-        "WahWah Smooth", "113", "10",
+        "WahWah Stereo Df", ITS(MC_WahWah_LFO_Stereo).c_str(), "10",
+        "WahWah Depth", ITS(MC_WahWah_Depth).c_str(), "10",
+        "WahWah Amp S.", ITS(MC_WahWah_Sense).c_str(), "10",
+        "WahWah Amp S.I.", ITS(MC_WahWah_ASI).c_str(), "10",
+        "WahWah Smooth", ITS(MC_WahWah_Smooth).c_str(), "10",
     };
 
     // If any additional parameters are added, then the constant
@@ -1493,6 +1507,18 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 void
 RKR::process_midi_controller_events(int parameter, int value)
 {
+#if 0
+    for(int i = 0; i < C_MC_PARAMETER_SIZE; i++)
+    {
+        if(parameter == efx_params[i].Ato)
+        {
+            printf("Effect Name = %s: parameter = %d: Effect = %d\n",
+                    efx_params[i].Nom, efx_params[i].Ato, efx_params[i].Effect);
+            break;
+        }
+    }
+#endif // 0
+    
     /* Don't process MIDI control when updating quality since
        the efx may be deleted */
     if(quality_update)
@@ -1891,7 +1917,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 109:
-        efx_Alienwah->changepar(Alien_LFO_Rand, value);
+        efx_Alienwah->changepar(Alien_LFO_Random, value);
         break;
 
     case 110:
@@ -3111,7 +3137,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 404:
-        efx_APhaser->changepar(APhase_LFO_Rand, value);
+        efx_APhaser->changepar(APhase_LFO_Random, value);
         break;
 
     case 405:

@@ -63,7 +63,7 @@
  * This is the "MIDI Implementation Chart" listed in Rakarrck-plus help.
  * For default MIDI processing (Not MIDI learn) this index directly corresponds
  * to the MIDI Control Change values (0 - 127). When MIDI learn is used, the
- * direct correspondence is no longer valid since each index items is mapped to
+ * direct correspondence is no longer valid since each index item is mapped to
  * the user selected Learn. This index plus the MIDI_Learn_Index combined is
  * the total of MIDI controllable parameters.
  * 
@@ -195,7 +195,7 @@ enum MIDI_Control_Default_Index
     MC_Flanger_LFO_Random,
     MC_Phaser_LFO_Random,
     MC_WahWah_LFO_Random,
-    MC_Alien_LFO_Rand,
+    MC_Alien_LFO_Random,
     MC_Pan_LFO_Random,          // 110
     MC_WahWah_Sense,
     MC_WahWah_ASI,

@@ -24,7 +24,7 @@ if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(Dry_Wet(rkr->efx_APhaser->getpar(APhase_DryWet)));
 aphaser_distort->value(rkr->efx_APhaser->getpar(APhase_Distortion));
 aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFO_Tempo));
-aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Rand));
+aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Random));
 aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFO_Type));
 aphaser_stdf->value(rkr->efx_APhaser->getpar(APhase_LFO_Stereo));
 aphaser_width->value(rkr->efx_APhaser->getpar(APhase_Width));
@@ -91,7 +91,7 @@ void AphaserGui::cb_aphaser_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(404);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFO_Rand,(int)o->value());
+rkr->efx_APhaser->changepar(APhase_LFO_Random,(int)o->value());
 }
 void AphaserGui::cb_aphaser_rnd(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_rnd_i(o,v);

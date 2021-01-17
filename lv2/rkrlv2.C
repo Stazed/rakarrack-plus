@@ -879,7 +879,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
             // Normal processing
             case APhase_Distortion:
             case APhase_LFO_Tempo:
-            case APhase_LFO_Rand:
+            case APhase_LFO_Random:
             case APhase_LFO_Type:
             case APhase_LFO_Stereo:
             case APhase_Width:
@@ -1401,7 +1401,7 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
         {
             // Normal processing
             case Alien_LFO_Tempo:
-            case Alien_LFO_Rand:
+            case Alien_LFO_Random:
             case Alien_LFO_Type:
             case Alien_LFO_Stereo:
             case Alien_Depth:

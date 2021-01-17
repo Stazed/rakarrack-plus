@@ -34,7 +34,7 @@ enum AlienWah_Index
     Alien_DryWet = 0,
     Alien_Pan,
     Alien_LFO_Tempo,
-    Alien_LFO_Rand,
+    Alien_LFO_Random,
     Alien_LFO_Type,
     Alien_LFO_Stereo,
     Alien_Depth,

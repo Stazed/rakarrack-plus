@@ -46,7 +46,7 @@ if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
 aphaser_WD->value(Dry_Wet(rkr->efx_APhaser->getpar(APhase_DryWet)));
 aphaser_distort->value(rkr->efx_APhaser->getpar(APhase_Distortion));
 aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFO_Tempo));
-aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Rand));
+aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Random));
 aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFO_Type));
 aphaser_stdf->value(rkr->efx_APhaser->getpar(APhase_LFO_Stereo));
 aphaser_width->value(rkr->efx_APhaser->getpar(APhase_Width));
@@ -124,7 +124,7 @@ rkr->efx_APhaser->changepar(APhase_LFO_Tempo,(int)o->value());}
  rgui->getMIDIControl(404);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFO_Rand,(int)o->value());}
+rkr->efx_APhaser->changepar(APhase_LFO_Random,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

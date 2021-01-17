@@ -3578,7 +3578,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_rnd->redraw();
                 break;
             case 109:
-                ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Rand));
+                ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Random));
                 ALIENWAH->Alienwah_rnd->redraw();
                 break;
             case 110:
@@ -4768,7 +4768,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_delay->redraw();
                 break;
             case 404:
-                APHASER->aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Rand));
+                APHASER->aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Random));
                 APHASER->aphaser_rnd->redraw();
                 break;
             case 405:

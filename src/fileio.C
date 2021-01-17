@@ -667,7 +667,7 @@ void RKR::getbuf(char *buf, int j)
         //Alienwah
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Alienwah->getpar(Alien_DryWet), efx_Alienwah->getpar(Alien_Pan),
-                efx_Alienwah->getpar(Alien_LFO_Tempo), efx_Alienwah->getpar(Alien_LFO_Rand),
+                efx_Alienwah->getpar(Alien_LFO_Tempo), efx_Alienwah->getpar(Alien_LFO_Random),
                 efx_Alienwah->getpar(Alien_LFO_Type), efx_Alienwah->getpar(Alien_LFO_Stereo),
                 efx_Alienwah->getpar(Alien_Depth), efx_Alienwah->getpar(Alien_Feedback),
                 efx_Alienwah->getpar(Alien_Delay), efx_Alienwah->getpar(Alien_LR_Cross),
@@ -738,7 +738,7 @@ void RKR::getbuf(char *buf, int j)
         //Analog Phaser
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_APhaser->getpar(APhase_DryWet), efx_APhaser->getpar(APhase_Distortion),
-                efx_APhaser->getpar(APhase_LFO_Tempo), efx_APhaser->getpar(APhase_LFO_Rand),
+                efx_APhaser->getpar(APhase_LFO_Tempo), efx_APhaser->getpar(APhase_LFO_Random),
                 efx_APhaser->getpar(APhase_LFO_Type), efx_APhaser->getpar(APhase_LFO_Stereo),
                 efx_APhaser->getpar(APhase_Width), efx_APhaser->getpar(APhase_Feedback),
                 efx_APhaser->getpar(APhase_Stages), efx_APhaser->getpar(APhase_Mismatch),

@@ -24,7 +24,7 @@ if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
 Alienwah_WD->value(Dry_Wet(rkr->efx_Alienwah->getpar(Alien_DryWet)));
 Alienwah_pan->value(rkr->efx_Alienwah->getpar(Alien_Pan)-64);
 Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
-Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Rand));
+Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Random));
 Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFO_Type));
 Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
 Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
@@ -87,7 +87,7 @@ void AlienwahGui::cb_Alienwah_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(109);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFO_Rand,(int)o->value());
+rkr->efx_Alienwah->changepar(Alien_LFO_Random,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_rnd(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_rnd_i(o,v);

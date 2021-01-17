@@ -270,7 +270,7 @@ Alienwah::changepar(int npar, int value)
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case Alien_LFO_Rand:
+    case Alien_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
@@ -314,7 +314,7 @@ Alienwah::getpar(int npar)
     case Alien_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case Alien_LFO_Rand:
+    case Alien_LFO_Random:
         return (lfo->Prandomness);
         break;
     case Alien_LFO_Type:

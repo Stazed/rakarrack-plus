@@ -394,7 +394,7 @@ Analog_Phaser::changepar(int npar, int value)
         lfo->Pfreq = value;
         lfo->updateparams(PERIOD);
         break;
-    case APhase_LFO_Rand:
+    case APhase_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
@@ -450,7 +450,7 @@ Analog_Phaser::getpar(int npar)
     case APhase_LFO_Tempo:
         return (lfo->Pfreq);
         break;
-    case APhase_LFO_Rand:
+    case APhase_LFO_Random:
         return (lfo->Prandomness);
         break;
     case APhase_LFO_Type:

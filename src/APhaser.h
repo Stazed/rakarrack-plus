@@ -35,7 +35,7 @@ enum APhaser_Index
     APhase_DryWet = 0,
     APhase_Distortion,
     APhase_LFO_Tempo,
-    APhase_LFO_Rand,
+    APhase_LFO_Random,
     APhase_LFO_Type,
     APhase_LFO_Stereo,
     APhase_Width,
