@@ -3660,51 +3660,51 @@ void RKRGUI::MIDI_control_gui_refresh()
             case 129:   // Unused
                 break;
             case 130:
-                EQ->eq_Gain->value(rkr->efx_EQ1->getpar(0) - 64);
+                EQ->eq_Gain->value(rkr->efx_EQ1->getpar(EQ_Gain) - 64);
                 EQ->eq_Gain->redraw();
                 break;
             case 131:
-                EQ->eq_Q->value(rkr->efx_EQ1->getpar(13) - 64);
+                EQ->eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q) - 64);
                 EQ->eq_Q->redraw();
                 break;
             case 132:
-                EQ->eq_1->value(rkr->efx_EQ1->getpar(12) - 64);
+                EQ->eq_1->value(rkr->efx_EQ1->getpar(EQ_31_HZ) - 64);
                 EQ->eq_1->redraw();
                 break;
             case 133:
-                EQ->eq_2->value(rkr->efx_EQ1->getpar(17) - 64);
+                EQ->eq_2->value(rkr->efx_EQ1->getpar(EQ_63_HZ) - 64);
                 EQ->eq_2->redraw();
                 break;
             case 134:
-                EQ->eq_3->value(rkr->efx_EQ1->getpar(22) - 64);
+                EQ->eq_3->value(rkr->efx_EQ1->getpar(EQ_125_HZ) - 64);
                 EQ->eq_3->redraw();
                 break;
             case 135:
-                EQ->eq_4->value(rkr->efx_EQ1->getpar(27) - 64);
+                EQ->eq_4->value(rkr->efx_EQ1->getpar(EQ_250_HZ) - 64);
                 EQ->eq_4->redraw();
                 break;
             case 136:
-                EQ->eq_5->value(rkr->efx_EQ1->getpar(32) - 64);
+                EQ->eq_5->value(rkr->efx_EQ1->getpar(EQ_500_HZ) - 64);
                 EQ->eq_5->redraw();
                 break;
             case 137:
-                EQ->eq_6->value(rkr->efx_EQ1->getpar(37) - 64);
+                EQ->eq_6->value(rkr->efx_EQ1->getpar(EQ_1_KHZ) - 64);
                 EQ->eq_6->redraw();
                 break;
             case 138:
-                EQ->eq_7->value(rkr->efx_EQ1->getpar(42) - 64);
+                EQ->eq_7->value(rkr->efx_EQ1->getpar(EQ_2_KHZ) - 64);
                 EQ->eq_7->redraw();
                 break;
             case 139:
-                EQ->eq_8->value(rkr->efx_EQ1->getpar(47) - 64);
+                EQ->eq_8->value(rkr->efx_EQ1->getpar(EQ_4_KHZ) - 64);
                 EQ->eq_8->redraw();
                 break;
             case 140:
-                EQ->eq_9->value(rkr->efx_EQ1->getpar(52) - 64);
+                EQ->eq_9->value(rkr->efx_EQ1->getpar(EQ_8_KHZ) - 64);
                 EQ->eq_9->redraw();
                 break;
             case 141:
-                EQ->eq_10->value(rkr->efx_EQ1->getpar(57) - 64);
+                EQ->eq_10->value(rkr->efx_EQ1->getpar(EQ_16_KHZ) - 64);
                 EQ->eq_10->redraw();
                 break;
             case 142:
@@ -3732,43 +3732,43 @@ void RKRGUI::MIDI_control_gui_refresh()
                 COMPRESS->compress_output->redraw();
                 break;
             case 148:
-                PEQ->eqp_Gain->value(rkr->efx_EQ2->getpar(0) - 64);
+                PEQ->eqp_Gain->value(rkr->efx_EQ2->getpar(Parametric_Gain) - 64);
                 PEQ->eqp_Gain->redraw();
                 break;
             case 149:
-                PEQ->eqp_LF->value(rkr->efx_EQ2->getpar(11));
+                PEQ->eqp_LF->value(rkr->efx_EQ2->getpar(Parametric_Low_Freq));
                 PEQ->eqp_LF->redraw();
                 break;
             case 150:
-                PEQ->eqp_LFg->value(rkr->efx_EQ2->getpar(12) - 64);
+                PEQ->eqp_LFg->value(rkr->efx_EQ2->getpar(Parametric_Low_Gain) - 64);
                 PEQ->eqp_LFg->redraw();
                 break;
             case 151:
-                PEQ->eqp_LQ->value(rkr->efx_EQ2->getpar(13) - 64);
+                PEQ->eqp_LQ->value(rkr->efx_EQ2->getpar(Parametric_Low_Q) - 64);
                 PEQ->eqp_LQ->redraw();
                 break;
             case 152:
-                PEQ->eqp_MF->value(rkr->efx_EQ2->getpar(16));
+                PEQ->eqp_MF->value(rkr->efx_EQ2->getpar(Parametric_Mid_Freq));
                 PEQ->eqp_MF->redraw();
                 break;
             case 153:
-                PEQ->eqp_MFg->value(rkr->efx_EQ2->getpar(17) - 64);
+                PEQ->eqp_MFg->value(rkr->efx_EQ2->getpar(Parametric_Mid_Gain) - 64);
                 PEQ->eqp_MFg->redraw();
                 break;
             case 154:
-                PEQ->eqp_MQ->value(rkr->efx_EQ2->getpar(18) - 64);
+                PEQ->eqp_MQ->value(rkr->efx_EQ2->getpar(Parametric_Mid_Q) - 64);
                 PEQ->eqp_MQ->redraw();
                 break;
             case 155:
-                PEQ->eqp_HF->value(rkr->efx_EQ2->getpar(21));
+                PEQ->eqp_HF->value(rkr->efx_EQ2->getpar(Parametric_High_Freq));
                 PEQ->eqp_HF->redraw();
                 break;
             case 156:
-                PEQ->eqp_HFg->value(rkr->efx_EQ2->getpar(22) - 64);
+                PEQ->eqp_HFg->value(rkr->efx_EQ2->getpar(Parametric_High_Gain) - 64);
                 PEQ->eqp_HFg->redraw();
                 break;
             case 157:
-                PEQ->eqp_HQ->value(rkr->efx_EQ2->getpar(23) - 64);
+                PEQ->eqp_HQ->value(rkr->efx_EQ2->getpar(Parametric_High_Q) - 64);
                 PEQ->eqp_HQ->redraw();
                 break;
             case 158:
@@ -4772,7 +4772,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 APHASER->aphaser_rnd->redraw();
                 break;
             case 405:
-                CABINET->Cabinet_output->value(rkr->efx_Cabinet->getpar(0)-64);
+                CABINET->Cabinet_output->value(rkr->efx_Cabinet->getpar(Cabinet_Gain)-64);
                 CABINET->Cabinet_output->redraw();
                 break;
             case 406:

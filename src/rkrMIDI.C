@@ -2000,51 +2000,51 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 130:
-        efx_EQ1->changepar(0, value);
+        efx_EQ1->changepar(EQ_Gain, value);
         break;
 
-    case 131:
+    case 131:   // EQ_Q = 13
         for (int i = 0; i < 10; i++) efx_EQ1->changepar(i * 5 + 13, value);
         break;
 
     case 132:
-        efx_EQ1->changepar(12, value);
+        efx_EQ1->changepar(EQ_31_HZ, value);
         break;
 
     case 133:
-        efx_EQ1->changepar(5 + 12, value);
+        efx_EQ1->changepar(EQ_63_HZ, value);
         break;
 
     case 134:
-        efx_EQ1->changepar(10 + 12, value);
+        efx_EQ1->changepar(EQ_125_HZ, value);
         break;
 
     case 135:
-        efx_EQ1->changepar(15 + 12, value);
+        efx_EQ1->changepar(EQ_250_HZ, value);
         break;
 
     case 136:
-        efx_EQ1->changepar(20 + 12, value);
+        efx_EQ1->changepar(EQ_500_HZ, value);
         break;
 
     case 137:
-        efx_EQ1->changepar(25 + 12, value);
+        efx_EQ1->changepar(EQ_1_KHZ, value);
         break;
 
     case 138:
-        efx_EQ1->changepar(30 + 12, value);
+        efx_EQ1->changepar(EQ_2_KHZ, value);
         break;
 
     case 139:
-        efx_EQ1->changepar(35 + 12, value);
+        efx_EQ1->changepar(EQ_4_KHZ, value);
         break;
 
     case 140:
-        efx_EQ1->changepar(40 + 12, value);
+        efx_EQ1->changepar(EQ_8_KHZ, value);
         break;
 
     case 141:
-        efx_EQ1->changepar(45 + 12, value);
+        efx_EQ1->changepar(EQ_16_KHZ, value);
         break;
 
     case 142:
@@ -2072,43 +2072,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 148:
-        efx_EQ2->changepar(0, value);
+        efx_EQ2->changepar(Parametric_Gain, value);
         break;
 
     case 149:
-        efx_EQ2->changepar(11, 20 + (int) ((float) value * C_MC_980_RANGE));
+        efx_EQ2->changepar(Parametric_Low_Freq, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case 150:
-        efx_EQ2->changepar(12, value);
+        efx_EQ2->changepar(Parametric_Low_Gain, value);
         break;
 
     case 151:
-        efx_EQ2->changepar(13, value);
+        efx_EQ2->changepar(Parametric_Low_Q, value);
         break;
 
     case 152:
-        efx_EQ2->changepar(16, 800 + (int) ((float) value * C_MC_7200_RANGE));
+        efx_EQ2->changepar(Parametric_Mid_Freq, 800 + (int) ((float) value * C_MC_7200_RANGE));
         break;
 
     case 153:
-        efx_EQ2->changepar(17, value);
+        efx_EQ2->changepar(Parametric_Mid_Gain, value);
         break;
 
     case 154:
-        efx_EQ2->changepar(18, value);
+        efx_EQ2->changepar(Parametric_Mid_Q, value);
         break;
 
     case 155:
-        efx_EQ2->changepar(21, 6000 + (int) ((float) value * C_MC_20000_RANGE));
+        efx_EQ2->changepar(Parametric_High_Freq, 6000 + (int) ((float) value * C_MC_20000_RANGE));
         break;
 
     case 156:
-        efx_EQ2->changepar(22, value);
+        efx_EQ2->changepar(Parametric_High_Gain, value);
         break;
 
     case 157:
-        efx_EQ2->changepar(23, value);
+        efx_EQ2->changepar(Parametric_High_Q, value);
         break;
 
     case 158:
@@ -3141,7 +3141,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 405:
-        efx_Cabinet->changepar(0, value);
+        efx_Cabinet->changepar(Cabinet_Gain, value);
         break;
 
     case 406:

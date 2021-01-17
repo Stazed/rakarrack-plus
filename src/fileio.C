@@ -622,22 +622,22 @@ void RKR::getbuf(char *buf, int j)
     case 0:
         //EQ1
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_EQ1->getpar(12), efx_EQ1->getpar(5 + 12),
-                efx_EQ1->getpar(10 + 12), efx_EQ1->getpar(15 + 12),
-                efx_EQ1->getpar(20 + 12), efx_EQ1->getpar(25 + 12),
-                efx_EQ1->getpar(30 + 12), efx_EQ1->getpar(35 + 12),
-                efx_EQ1->getpar(40 + 12), efx_EQ1->getpar(45 + 12),
-                efx_EQ1->getpar(0), efx_EQ1->getpar(13), EQ1_Bypass);
+                efx_EQ1->getpar(EQ_31_HZ), efx_EQ1->getpar(EQ_63_HZ),
+                efx_EQ1->getpar(EQ_125_HZ), efx_EQ1->getpar(EQ_250_HZ),
+                efx_EQ1->getpar(EQ_500_HZ), efx_EQ1->getpar(EQ_1_KHZ),
+                efx_EQ1->getpar(EQ_2_KHZ), efx_EQ1->getpar(EQ_4_KHZ),
+                efx_EQ1->getpar(EQ_8_KHZ), efx_EQ1->getpar(EQ_16_KHZ),
+                efx_EQ1->getpar(EQ_Gain), efx_EQ1->getpar(EQ_Q), EQ1_Bypass);
         break;
 
     case 9:
         //EQ2
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_EQ2->getpar(11), efx_EQ2->getpar(12),
-                efx_EQ2->getpar(13), efx_EQ2->getpar(5 + 11),
-                efx_EQ2->getpar(5 + 12), efx_EQ2->getpar(5 + 13),
-                efx_EQ2->getpar(10 + 11), efx_EQ2->getpar(10 + 12),
-                efx_EQ2->getpar(10 + 13), efx_EQ2->getpar(0),
+                efx_EQ2->getpar(Parametric_Low_Freq), efx_EQ2->getpar(Parametric_Low_Gain),
+                efx_EQ2->getpar(Parametric_Low_Q), efx_EQ2->getpar(Parametric_Mid_Freq),
+                efx_EQ2->getpar(Parametric_Mid_Gain), efx_EQ2->getpar(Parametric_Mid_Q),
+                efx_EQ2->getpar(Parametric_High_Freq), efx_EQ2->getpar(Parametric_High_Gain),
+                efx_EQ2->getpar(Parametric_High_Q), efx_EQ2->getpar(Parametric_Gain),
                 EQ2_Bypass);
         break;
 
@@ -677,7 +677,7 @@ void RKR::getbuf(char *buf, int j)
     case 12:
         //Cabinet
         sprintf(buf, "%d,%d,%d\n",
-                efx_Cabinet->Cabinet_Preset, efx_Cabinet->getpar(0), Cabinet_Bypass);
+                efx_Cabinet->Cabinet_Preset, efx_Cabinet->getpar(Cabinet_Gain), Cabinet_Bypass);
         break;
 
     case 13:
@@ -1389,7 +1389,7 @@ RKR::Actualizar_Audio()
                 efx_EQ1->changepar(i * 5 + 12, lv[7][i]);
                 efx_EQ1->changepar(i * 5 + 13, lv[7][11]);
             }
-            efx_EQ1->changepar(0, lv[7][10]);
+            efx_EQ1->changepar(EQ_Gain, lv[7][10]);
             EQ1_Bypass = EQ1_B;
             break;
 
@@ -1474,7 +1474,7 @@ RKR::Actualizar_Audio()
                 efx_EQ2->changepar(i * 5 + 12, lv[8][1 + i * 3]);
                 efx_EQ2->changepar(i * 5 + 13, lv[8][2 + i * 3]);
             }
-            efx_EQ2->changepar(0, lv[8][9]);
+            efx_EQ2->changepar(Parametric_Gain, lv[8][9]);
             EQ2_Bypass = EQ2_B;
             break;
 
@@ -1501,7 +1501,7 @@ RKR::Actualizar_Audio()
             Cabinet_Bypass = 0;
             efx_Cabinet->cleanup();
             efx_Cabinet->setpreset(lv[13][0]);
-            efx_Cabinet->changepar(0, lv[13][1]);
+            efx_Cabinet->changepar(Cabinet_Gain, lv[13][1]);
             Cabinet_Bypass = Cabinet_B;
             break;
 
@@ -2326,8 +2326,8 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < 10; j++)
         lv[7][j] = efx_EQ1->getpar(j * 5 + 12);
 
-    lv[7][10] = efx_EQ1->getpar(0);
-    lv[7][11] = efx_EQ1->getpar(13);
+    lv[7][10] = efx_EQ1->getpar(EQ_Gain);
+    lv[7][11] = efx_EQ1->getpar(EQ_Q);
 
     for (j = 0; j < 3; j++)
     {
@@ -2336,10 +2336,10 @@ RKR::Preset_to_Bank(int i)
         lv[8][2 + j * 3] = efx_EQ2->getpar(j * 5 + 13);
     }
 
-    lv[8][9] = efx_EQ2->getpar(0);
+    lv[8][9] = efx_EQ2->getpar(Parametric_Gain);
 
     lv[13][0] = efx_Cabinet->Cabinet_Preset;
-    lv[13][1] = efx_Cabinet->getpar(0);
+    lv[13][1] = efx_Cabinet->getpar(Cabinet_Gain);
 
 
     for (j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)

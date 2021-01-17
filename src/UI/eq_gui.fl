@@ -10,7 +10,7 @@ decl {\#include "RKR_Choice.h"} {public global
 
 widget_class EqGui {
   user_data 1 open
-  xywh {220 359 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {824 241 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -36,18 +36,18 @@ rgui->findpos(0,(int)o->value(),o);}
     user_data 12000
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12000))rkr->efx_EQ1->setpreset((int)o->value());
-eq_1->value(rkr->efx_EQ1->getpar(12)-64);
-eq_2->value(rkr->efx_EQ1->getpar(17)-64);
-eq_3->value(rkr->efx_EQ1->getpar(22)-64);
-eq_4->value(rkr->efx_EQ1->getpar(27)-64);
-eq_5->value(rkr->efx_EQ1->getpar(32)-64);
-eq_6->value(rkr->efx_EQ1->getpar(37)-64);
-eq_7->value(rkr->efx_EQ1->getpar(42)-64);
-eq_8->value(rkr->efx_EQ1->getpar(47)-64);
-eq_9->value(rkr->efx_EQ1->getpar(52)-64);
-eq_10->value(rkr->efx_EQ1->getpar(57)-64);
-eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
-eq_Q->value(rkr->efx_EQ1->getpar(13)-64);} selected
+eq_1->value(rkr->efx_EQ1->getpar(EQ_31_HZ)-64);
+eq_2->value(rkr->efx_EQ1->getpar(EQ_63_HZ)-64);
+eq_3->value(rkr->efx_EQ1->getpar(EQ_125_HZ)-64);
+eq_4->value(rkr->efx_EQ1->getpar(EQ_250_HZ)-64);
+eq_5->value(rkr->efx_EQ1->getpar(EQ_500_HZ)-64);
+eq_6->value(rkr->efx_EQ1->getpar(EQ_1_KHZ)-64);
+eq_7->value(rkr->efx_EQ1->getpar(EQ_2_KHZ)-64);
+eq_8->value(rkr->efx_EQ1->getpar(EQ_4_KHZ)-64);
+eq_9->value(rkr->efx_EQ1->getpar(EQ_8_KHZ)-64);
+eq_10->value(rkr->efx_EQ1->getpar(EQ_16_KHZ)-64);
+eq_Gain->value(rkr->efx_EQ1->getpar(EQ_Gain)-64);
+eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q)-64);} selected
     xywh {77 2 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -71,7 +71,7 @@ eq_Q->value(rkr->efx_EQ1->getpar(13)-64);} selected
  rgui->getMIDIControl(130);
  return;
 } 
-rkr->efx_EQ1->changepar(0,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_Gain,(int)(o->value()+64));}
     xywh {56 24 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -94,7 +94,7 @@ for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(int)(o->value()+64));}
  rgui->getMIDIControl(132);
  return;
 } 
-rkr->efx_EQ1->changepar(12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_31_HZ,(int)(o->value()+64));}
     xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -105,7 +105,7 @@ rkr->efx_EQ1->changepar(12,(int)(o->value()+64));}
  rgui->getMIDIControl(133);
  return;
 } 
-rkr->efx_EQ1->changepar(5+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_63_HZ,(int)(o->value()+64));}
     xywh {56 68 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -116,7 +116,7 @@ rkr->efx_EQ1->changepar(5+12,(int)(o->value()+64));}
  rgui->getMIDIControl(134);
  return;
 } 
-rkr->efx_EQ1->changepar(10+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_125_HZ,(int)(o->value()+64));}
     xywh {56 80 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -127,7 +127,7 @@ rkr->efx_EQ1->changepar(10+12,(int)(o->value()+64));}
  rgui->getMIDIControl(135);
  return;
 } 
-rkr->efx_EQ1->changepar(15+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_250_HZ,(int)(o->value()+64));}
     xywh {56 93 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -138,7 +138,7 @@ rkr->efx_EQ1->changepar(15+12,(int)(o->value()+64));}
  rgui->getMIDIControl(136);
  return;
 } 
-rkr->efx_EQ1->changepar(20+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_500_HZ,(int)(o->value()+64));}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -149,7 +149,7 @@ rkr->efx_EQ1->changepar(20+12,(int)(o->value()+64));}
  rgui->getMIDIControl(137);
  return;
 } 
-rkr->efx_EQ1->changepar(25+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_1_KHZ,(int)(o->value()+64));}
     xywh {56 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -160,7 +160,7 @@ rkr->efx_EQ1->changepar(25+12,(int)(o->value()+64));}
  rgui->getMIDIControl(138);
  return;
 } 
-rkr->efx_EQ1->changepar(30+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_2_KHZ,(int)(o->value()+64));}
     xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -171,7 +171,7 @@ rkr->efx_EQ1->changepar(30+12,(int)(o->value()+64));}
  rgui->getMIDIControl(139);
  return;
 } 
-rkr->efx_EQ1->changepar(35+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_4_KHZ,(int)(o->value()+64));}
     xywh {56 142 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -182,7 +182,7 @@ rkr->efx_EQ1->changepar(35+12,(int)(o->value()+64));}
  rgui->getMIDIControl(140);
  return;
 } 
-rkr->efx_EQ1->changepar(40+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_8_KHZ,(int)(o->value()+64));}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -193,7 +193,7 @@ rkr->efx_EQ1->changepar(40+12,(int)(o->value()+64));}
  rgui->getMIDIControl(141);
  return;
 } 
-rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));}
+rkr->efx_EQ1->changepar(EQ_16_KHZ,(int)(o->value()+64));}
     xywh {56 165 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }

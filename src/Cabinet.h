@@ -25,6 +25,16 @@
 
 #include "EQ.h"
 
+/**
+ * This singular index is here for clarity as it is the only parameter for the 
+ * Cabinet class. The effect uses setpreset() to change the individual filters.
+ * The Cabinet_Gain is the only parameter used by changepar() and getpar().
+ */
+enum Cabinet_Index
+{
+    Cabinet_Gain = 0
+};
+
 class Cabinet :public EQ
 {
 public:

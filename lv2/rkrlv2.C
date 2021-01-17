@@ -344,13 +344,13 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     //check and set changed parameters
     i = 0;
-    val = (int)*plug->param_p[0]+64;//gain
-    if(plug->eq->getpar(0) != val)
+    val = (int)*plug->param_p[0] + 64;
+    if(plug->eq->getpar(EQ_Gain) != val)
     {
-        plug->eq->changepar(0,val);
+        plug->eq->changepar(EQ_Gain,val);
     }
     val = (int)*plug->param_p[1]+64;//q
-    if(plug->eq->getpar(13) != val)
+    if(plug->eq->getpar(EQ_Q) != val)
     {
         int j;
         for(j=0; j<10; j++)
@@ -1627,10 +1627,10 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     //check and set changed parameters
     i = 0;
 
-    val = (int)*plug->param_p[0] + 64;  // gain
-    if(plug->peq->getpar(0) != val)
+    val = (int)*plug->param_p[0] + 64;
+    if(plug->peq->getpar(Parametric_Gain) != val)
     {
-        plug->peq->changepar(0,val);
+        plug->peq->changepar(Parametric_Gain,val);
     }
 
     for(i=1; i<4; i++) //1-3 low band
@@ -1713,10 +1713,10 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //check and set changed parameters
-    val = (int)*plug->param_p[0]+64;//gain
-    if(plug->cab->getpar(0) != val)
+    val = (int)*plug->param_p[0] + 64;
+    if(plug->cab->getpar(Cabinet_Gain) != val)
     {
-        plug->cab->changepar(0,val);
+        plug->cab->changepar(Cabinet_Gain,val);
     }
 
     val = (int)*plug->param_p[1];

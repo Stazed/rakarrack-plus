@@ -45,7 +45,7 @@ void CabinetGui::cb_Cabinet_output_i(RKR_Slider* o, void*) {
  return;
 } 
 
-rkr->efx_Cabinet->changepar(0,(int)(o->value()+64));
+rkr->efx_Cabinet->changepar(Cabinet_Gain,(int)(o->value()+64));
 }
 void CabinetGui::cb_Cabinet_output(RKR_Slider* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_output_i(o,v);

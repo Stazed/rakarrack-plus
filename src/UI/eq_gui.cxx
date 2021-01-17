@@ -21,18 +21,18 @@ void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
 void EqGui::cb_eq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12000))rkr->efx_EQ1->setpreset((int)o->value());
-eq_1->value(rkr->efx_EQ1->getpar(12)-64);
-eq_2->value(rkr->efx_EQ1->getpar(17)-64);
-eq_3->value(rkr->efx_EQ1->getpar(22)-64);
-eq_4->value(rkr->efx_EQ1->getpar(27)-64);
-eq_5->value(rkr->efx_EQ1->getpar(32)-64);
-eq_6->value(rkr->efx_EQ1->getpar(37)-64);
-eq_7->value(rkr->efx_EQ1->getpar(42)-64);
-eq_8->value(rkr->efx_EQ1->getpar(47)-64);
-eq_9->value(rkr->efx_EQ1->getpar(52)-64);
-eq_10->value(rkr->efx_EQ1->getpar(57)-64);
-eq_Gain->value(rkr->efx_EQ1->getpar(0)-64);
-eq_Q->value(rkr->efx_EQ1->getpar(13)-64);
+eq_1->value(rkr->efx_EQ1->getpar(EQ_31_HZ)-64);
+eq_2->value(rkr->efx_EQ1->getpar(EQ_63_HZ)-64);
+eq_3->value(rkr->efx_EQ1->getpar(EQ_125_HZ)-64);
+eq_4->value(rkr->efx_EQ1->getpar(EQ_250_HZ)-64);
+eq_5->value(rkr->efx_EQ1->getpar(EQ_500_HZ)-64);
+eq_6->value(rkr->efx_EQ1->getpar(EQ_1_KHZ)-64);
+eq_7->value(rkr->efx_EQ1->getpar(EQ_2_KHZ)-64);
+eq_8->value(rkr->efx_EQ1->getpar(EQ_4_KHZ)-64);
+eq_9->value(rkr->efx_EQ1->getpar(EQ_8_KHZ)-64);
+eq_10->value(rkr->efx_EQ1->getpar(EQ_16_KHZ)-64);
+eq_Gain->value(rkr->efx_EQ1->getpar(EQ_Gain)-64);
+eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q)-64);
 }
 void EqGui::cb_eq_preset(RKR_Choice* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_preset_i(o,v);
@@ -51,7 +51,7 @@ void EqGui::cb_eq_Gain_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(130);
  return;
 } 
-rkr->efx_EQ1->changepar(0,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_Gain,(int)(o->value()+64));
 }
 void EqGui::cb_eq_Gain(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_Gain_i(o,v);
@@ -76,7 +76,7 @@ void EqGui::cb_eq_1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(132);
  return;
 } 
-rkr->efx_EQ1->changepar(12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_31_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_1(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_1_i(o,v);
@@ -88,7 +88,7 @@ void EqGui::cb_eq_2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(133);
  return;
 } 
-rkr->efx_EQ1->changepar(5+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_63_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_2(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_2_i(o,v);
@@ -100,7 +100,7 @@ void EqGui::cb_eq_3_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(134);
  return;
 } 
-rkr->efx_EQ1->changepar(10+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_125_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_3(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_3_i(o,v);
@@ -112,7 +112,7 @@ void EqGui::cb_eq_4_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(135);
  return;
 } 
-rkr->efx_EQ1->changepar(15+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_250_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_4(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_4_i(o,v);
@@ -124,7 +124,7 @@ void EqGui::cb_eq_5_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(136);
  return;
 } 
-rkr->efx_EQ1->changepar(20+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_500_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_5(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_5_i(o,v);
@@ -136,7 +136,7 @@ void EqGui::cb_eq_6_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(137);
  return;
 } 
-rkr->efx_EQ1->changepar(25+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_1_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_6(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_6_i(o,v);
@@ -148,7 +148,7 @@ void EqGui::cb_eq_7_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(138);
  return;
 } 
-rkr->efx_EQ1->changepar(30+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_2_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_7(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_7_i(o,v);
@@ -160,7 +160,7 @@ void EqGui::cb_eq_8_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(139);
  return;
 } 
-rkr->efx_EQ1->changepar(35+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_4_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_8(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_8_i(o,v);
@@ -172,7 +172,7 @@ void EqGui::cb_eq_9_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(140);
  return;
 } 
-rkr->efx_EQ1->changepar(40+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_8_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_9(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_9_i(o,v);
@@ -184,7 +184,7 @@ void EqGui::cb_eq_10_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(141);
  return;
 } 
-rkr->efx_EQ1->changepar(45+12,(int)(o->value()+64));
+rkr->efx_EQ1->changepar(EQ_16_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_10(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_10_i(o,v);

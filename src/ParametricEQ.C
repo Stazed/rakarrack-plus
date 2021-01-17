@@ -67,7 +67,7 @@ ParametricEQ::setpreset(int npreset)
             changepar(n * 5 + 13, pdata[n * 3 + 2]);
         }
         
-        changepar(0, pdata[9]);
+        changepar(Parametric_Gain, pdata[9]);
     }
     else
     {
@@ -78,7 +78,7 @@ ParametricEQ::setpreset(int npreset)
             changepar(n * 5 + 13, presets[npreset][n * 3 + 2]);
         }
         
-        changepar(0, presets[npreset][9]);
+        changepar(Parametric_Gain, presets[npreset][9]);
     }
 }
 

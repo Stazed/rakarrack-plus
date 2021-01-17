@@ -36,16 +36,16 @@ rgui->findpos(9,(int)o->value(),o);}
     user_data 12009
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12009)) rkr->efx_EQ2->setpreset((int)o->value());
-eqp_LF->value(rkr->efx_EQ2->getpar(11));
-eqp_LFg->value(rkr->efx_EQ2->getpar(12)-64);
-eqp_LQ->value(rkr->efx_EQ2->getpar(13)-64);
-eqp_MF->value(rkr->efx_EQ2->getpar(16));
-eqp_MFg->value(rkr->efx_EQ2->getpar(17)-64);
-eqp_MQ->value(rkr->efx_EQ2->getpar(18)-64);
-eqp_HF->value(rkr->efx_EQ2->getpar(21));
-eqp_HFg->value(rkr->efx_EQ2->getpar(22)-64);
-eqp_HQ->value(rkr->efx_EQ2->getpar(23)-64);
-eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);} selected
+eqp_LF->value(rkr->efx_EQ2->getpar(Parametric_Low_Freq));
+eqp_LFg->value(rkr->efx_EQ2->getpar(Parametric_Low_Gain)-64);
+eqp_LQ->value(rkr->efx_EQ2->getpar(Parametric_Low_Q)-64);
+eqp_MF->value(rkr->efx_EQ2->getpar(Parametric_Mid_Freq));
+eqp_MFg->value(rkr->efx_EQ2->getpar(Parametric_Mid_Gain)-64);
+eqp_MQ->value(rkr->efx_EQ2->getpar(Parametric_Mid_Q)-64);
+eqp_HF->value(rkr->efx_EQ2->getpar(Parametric_High_Freq));
+eqp_HFg->value(rkr->efx_EQ2->getpar(Parametric_High_Gain)-64);
+eqp_HQ->value(rkr->efx_EQ2->getpar(Parametric_High_Q)-64);
+eqp_Gain->value(rkr->efx_EQ2->getpar(Parametric_Gain)-64);} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -69,7 +69,7 @@ eqp_Gain->value(rkr->efx_EQ2->getpar(0)-64);} selected
  rgui->getMIDIControl(148);
  return;
 } 
-rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
+rkr->efx_EQ2->changepar(Parametric_Gain,(int)(o->value()+64));}
     xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -80,7 +80,7 @@ rkr->efx_EQ2->changepar(0,(int)(o->value()+64));}
  rgui->getMIDIControl(149);
  return;
 } 
-rkr->efx_EQ2->changepar(11,(int)o->value());}
+rkr->efx_EQ2->changepar(Parametric_Low_Freq,(int)o->value());}
     tooltip {Low Frequency} xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 value 200 textcolor 7
     class RKR_Slider
   }
@@ -91,7 +91,7 @@ rkr->efx_EQ2->changepar(11,(int)o->value());}
  rgui->getMIDIControl(150);
  return;
 } 
-rkr->efx_EQ2->changepar(12,(int)(o->value()+64));}
+rkr->efx_EQ2->changepar(Parametric_Low_Gain,(int)(o->value()+64));}
     tooltip {Low Gain} xywh {56 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -102,7 +102,7 @@ rkr->efx_EQ2->changepar(12,(int)(o->value()+64));}
  rgui->getMIDIControl(151);
  return;
 } 
-rkr->efx_EQ2->changepar(13,(int)(o->value()+64));}
+rkr->efx_EQ2->changepar(Parametric_Low_Q,(int)(o->value()+64));}
     tooltip {Low Width} xywh {56 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -113,7 +113,7 @@ rkr->efx_EQ2->changepar(13,(int)(o->value()+64));}
  rgui->getMIDIControl(152);
  return;
 } 
-rkr->efx_EQ2->changepar(5+11,(int)o->value());}
+rkr->efx_EQ2->changepar(Parametric_Mid_Freq,(int)o->value());}
     tooltip {Mid Frequency} xywh {56 98 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 8000 step 1 value 800 textcolor 7
     class RKR_Slider
   }
@@ -124,7 +124,7 @@ rkr->efx_EQ2->changepar(5+11,(int)o->value());}
  rgui->getMIDIControl(153);
  return;
 } 
-rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));}
+rkr->efx_EQ2->changepar(Parametric_Mid_Gain,(int)(o->value()+64));}
     tooltip {Mid Gain} xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -135,7 +135,7 @@ rkr->efx_EQ2->changepar(5+12,(int)(o->value()+64));}
  rgui->getMIDIControl(154);
  return;
 } 
-rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));}
+rkr->efx_EQ2->changepar(Parametric_Mid_Q,(int)(o->value()+64));}
     tooltip {Mid Width} xywh {56 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -146,7 +146,7 @@ rkr->efx_EQ2->changepar(5+13,(int)(o->value()+64));}
  rgui->getMIDIControl(155);
  return;
 } 
-rkr->efx_EQ2->changepar(10+11,(int)o->value());}
+rkr->efx_EQ2->changepar(Parametric_High_Freq,(int)o->value());}
     tooltip {High Frequency} xywh {56 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 value 12000 textcolor 7
     class RKR_Slider
   }
@@ -157,7 +157,7 @@ rkr->efx_EQ2->changepar(10+11,(int)o->value());}
  rgui->getMIDIControl(156);
  return;
 } 
-rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));}
+rkr->efx_EQ2->changepar(Parametric_High_Gain,(int)(o->value()+64));}
     tooltip {High Gain} xywh {56 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -168,7 +168,7 @@ rkr->efx_EQ2->changepar(10+12,(int)(o->value()+64));}
  rgui->getMIDIControl(157);
  return;
 } 
-rkr->efx_EQ2->changepar(10+13,(int)(o->value()+64));}
+rkr->efx_EQ2->changepar(Parametric_High_Q,(int)(o->value()+64));}
     tooltip {High Width} xywh {56 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
