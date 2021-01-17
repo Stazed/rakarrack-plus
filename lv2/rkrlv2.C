@@ -2248,7 +2248,7 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
             case DFlange_LFO_Tempo:
             case DFlange_LFO_Stereo:
             case DFlange_LFO_Type:
-            case DFlange_LFO_Rand:
+            case DFlange_LFO_Random:
             case DFlange_Intense:
             {
                 val = (int)*plug->param_p[i];

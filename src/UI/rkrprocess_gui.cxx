@@ -3812,7 +3812,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DFLANGE->dflange_stdf->redraw();
                 break;
             case 168:
-                DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Rand));
+                DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Random));
                 DFLANGE->dflange_rnd->redraw();
                 break;
             case 169:

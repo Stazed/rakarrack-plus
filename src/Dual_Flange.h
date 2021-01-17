@@ -50,7 +50,7 @@ enum DFlange_Index
     DFlange_LFO_Tempo,
     DFlange_LFO_Stereo,
     DFlange_LFO_Type,
-    DFlange_LFO_Rand,
+    DFlange_LFO_Random,
     DFlange_Intense
 };
 

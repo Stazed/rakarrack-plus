@@ -2153,7 +2153,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case 168:
-        efx_DFlange->changepar(DFlange_LFO_Rand, value);
+        efx_DFlange->changepar(DFlange_LFO_Random, value);
         break;
 
     case 169:

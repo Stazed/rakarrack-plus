@@ -24,7 +24,7 @@ if((ud==0)||(ud==12020))rkr->efx_DFlange->setpreset((int)o->value());
 dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(DFlange_DryWet)));
 dflange_pan->value(rkr->efx_DFlange->getpar(DFlange_Pan));
 dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
-dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Rand));
+dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Random));
 dflange_lfotype->value(rkr->efx_DFlange->getpar(DFlange_LFO_Type));
 dflange_stdf->value(rkr->efx_DFlange->getpar(DFlange_LFO_Stereo));
 dflange_width->value(rkr->efx_DFlange->getpar(DFlange_Width));
@@ -213,7 +213,7 @@ void DflangeGui::cb_dflange_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(168);
  return;
 } 
-rkr->efx_DFlange->changepar(DFlange_LFO_Rand,(int)o->value());
+rkr->efx_DFlange->changepar(DFlange_LFO_Random,(int)o->value());
 }
 void DflangeGui::cb_dflange_rnd(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_rnd_i(o,v);

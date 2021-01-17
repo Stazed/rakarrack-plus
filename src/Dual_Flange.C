@@ -588,7 +588,7 @@ Dflange::changepar(int npar, int value)
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         break;
-    case DFlange_LFO_Rand:
+    case DFlange_LFO_Random:
         lfo->Prandomness = value;
         lfo->updateparams(PERIOD);
         break;
@@ -642,7 +642,7 @@ Dflange::getpar(int npar)
     case DFlange_LFO_Type:
         return (lfo->PLFOtype);
         break;
-    case DFlange_LFO_Rand:
+    case DFlange_LFO_Random:
         return (lfo->Prandomness);
         break;
     case DFlange_Intense:

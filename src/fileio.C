@@ -767,7 +767,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_DFlange->getpar(DFlange_Feedback), efx_DFlange->getpar(DFlange_LPF),
                 efx_DFlange->getpar(DFlange_Subtract), efx_DFlange->getpar(DFlange_Zero),
                 efx_DFlange->getpar(DFlange_LFO_Tempo), efx_DFlange->getpar(DFlange_LFO_Stereo),
-                efx_DFlange->getpar(DFlange_LFO_Type), efx_DFlange->getpar(DFlange_LFO_Rand),
+                efx_DFlange->getpar(DFlange_LFO_Type), efx_DFlange->getpar(DFlange_LFO_Random),
                 efx_DFlange->getpar(DFlange_Intense), DFlange_Bypass);
         break;
 

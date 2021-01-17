@@ -27,6 +27,25 @@
 
 #include "AnalogFilter.h"
 
+/*
+ * This does not correspond to the parameter values.
+ */
+enum EQ_Index
+{
+    EQ_Gain = 0,
+    EQ_Q,
+    EQ_31_HZ,
+    EQ_63_HZ,
+    EQ_125_HZ,
+    EQ_250_HZ,
+    EQ_500_HZ,
+    EQ_1_KHZ,
+    EQ_2_KHZ,
+    EQ_4_KHZ,
+    EQ_8_KHZ,
+    EQ_16_KHZ
+};
+
 class EQ
 {
 public:

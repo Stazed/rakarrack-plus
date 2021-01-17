@@ -25,6 +25,20 @@
 
 #include "EQ.h"
 
+enum ParametricEQ_Index
+{
+    Parametric_Gain = 0,
+    Parametric_Low_Freq,
+    Parametric_Low_Gain,
+    Parametric_Low_Q,
+    Parametric_Mid_Freq,
+    Parametric_Mid_Gain,
+    Parametric_Mid_Q,
+    Parametric_High_Freq,
+    Parametric_High_Gain,
+    Parametric_High_Q
+};
+
 class ParametricEQ :public EQ
 {
 public:
