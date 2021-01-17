@@ -1602,9 +1602,6 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1624,37 +1621,79 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i = 0;
+    int val = 0;
+    int param_case_offset = 0;
+    int param_adjust_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
+    {
+        param_case_offset = (i + param_adjust_offset);
+        
+        switch(param_case_offset)
+        {
+            case Parametric_Gain:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->peq->getpar(Parametric_Gain) != val)
+                {
+                    plug->peq->changepar(Parametric_Gain,val);
+                }
+                
+                param_adjust_offset = 10;   // set for Low band
+            }
+            break;
 
-    val = (int)*plug->param_p[0] + 64;
-    if(plug->peq->getpar(Parametric_Gain) != val)
-    {
-        plug->peq->changepar(Parametric_Gain,val);
-    }
+            case Parametric_Low_Freq:
+            case Parametric_Mid_Freq:
+            case Parametric_High_Freq:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->peq->getpar(param_case_offset) != val)
+                {
+                    plug->peq->changepar(param_case_offset,val);
+                }
+            }
+            break;
+                
+            case Parametric_Low_Gain:
+            case Parametric_Low_Q:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->peq->getpar(param_case_offset) != val)
+                {
+                    plug->peq->changepar(param_case_offset,val);
+                }
+                
+                if(param_case_offset == Parametric_Low_Q)
+                    param_adjust_offset = 12;   // set for Mid band
+            }
+            break;
 
-    for(i=1; i<4; i++) //1-3 low band
-    {
-        val = (int)*plug->param_p[i]+64;
-        if(plug->peq->getpar(i + 10) != val)
-        {
-            plug->peq->changepar(i+10,val);
-        }
-    }
-    for(; i<7; i++) //4-6 mid band
-    {
-        val = (int)*plug->param_p[i]+64;
-        if(plug->peq->getpar(i + 12) != val)
-        {
-            plug->peq->changepar(i+12,val);
-        }
-    }
-    for(; i<plug->nparams; i++) //7-9 high band
-    {
-        val = (int)*plug->param_p[i]+64;
-        if(plug->peq->getpar(i + 14) != val)
-        {
-            plug->peq->changepar(i+14,val);
+            case Parametric_Mid_Gain:
+            case Parametric_Mid_Q:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->peq->getpar(param_case_offset) != val)
+                {
+                    plug->peq->changepar(param_case_offset,val);
+                }
+                
+                if(param_case_offset == Parametric_Mid_Q)
+                    param_adjust_offset = 14;   // set for High band
+            }
+            break;
+
+            case Parametric_High_Gain:
+            case Parametric_High_Q:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->peq->getpar(param_case_offset) != val)
+                {
+                    plug->peq->changepar(param_case_offset,val);
+                }
+            }
+            break;
         }
     }
 
