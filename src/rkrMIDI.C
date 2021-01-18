@@ -2003,8 +2003,8 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_EQ1->changepar(EQ_Gain, value);
         break;
 
-    case 131:   // EQ_Q = 13
-        for (int i = 0; i < 10; i++) efx_EQ1->changepar(i * 5 + 13, value);
+    case 131:
+        efx_EQ1->changepar_Q(EQ_Q, value);
         break;
 
     case 132:

@@ -10,7 +10,7 @@ decl {\#include "RKR_Choice.h"} {public global
 
 widget_class EqGui {
   user_data 1 open
-  xywh {824 241 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1377 281 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"} visible position_relative
@@ -47,7 +47,7 @@ eq_8->value(rkr->efx_EQ1->getpar(EQ_4_KHZ)-64);
 eq_9->value(rkr->efx_EQ1->getpar(EQ_8_KHZ)-64);
 eq_10->value(rkr->efx_EQ1->getpar(EQ_16_KHZ)-64);
 eq_Gain->value(rkr->efx_EQ1->getpar(EQ_Gain)-64);
-eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q)-64);} selected
+eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q)-64);}
     xywh {77 2 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -81,9 +81,8 @@ rkr->efx_EQ1->changepar(EQ_Gain,(int)(o->value()+64));}
 {
  rgui->getMIDIControl(131);
  return;
-} 
-int i;
-for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(int)(o->value()+64));}
+}
+rkr->efx_EQ1->changepar_Q(EQ_Q,(int)(o->value()+64));} selected
     tooltip Resonance xywh {56 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }

@@ -60,6 +60,7 @@ public:
     virtual void lv2_update_params(uint32_t period);
 #endif // LV2
     
+    void changepar_Q(int npar, int value);
     void init_filters();
     virtual void initialize();
     void clear_initialize();

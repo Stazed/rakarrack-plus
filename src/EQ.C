@@ -157,6 +157,25 @@ EQ::setvolume(int Pvolume)
     this->Pvolume = Pvolume;
     outvolume = powf(0.005f, (1.0f - (float) Pvolume / 127.0f)) * 10.0f;
 }
+
+/**
+ * This changes the Q for all ten EQ1 bands. Not used by Cabinet or Parametric.
+ * 
+ * @param npar
+ *      The EQ_Q index >> 13 in this case.
+ * 
+ * @param value
+ *      The slider value, or MIDI control value Q adjustment for each band. 
+ */
+void
+EQ::changepar_Q(int npar, int value)
+{
+    for (int i = 0; i < 10; i++)
+    {
+        changepar(((i * 5) + npar), value);
+    }
+}
+
 /**
  *  This is the default preset for regular equalizer - NOT Parametric or Cabinet.
  *  Parametric and Cabinet will override this function.

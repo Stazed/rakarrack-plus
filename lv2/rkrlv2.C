@@ -364,10 +364,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
                 val = (int)*plug->param_p[i] + 64;
                 if(plug->eq->getpar(EQ_Q) != val)
                 {
-                    for(int j = 0; j < 10; j++)
-                    {
-                        plug->eq->changepar(j * 5 + EQ_Q, val);
-                    }
+                    plug->eq->changepar_Q(EQ_Q, val);
                 }
 
                 param_case_offset = EQ_31_HZ;   // set for EQ_31_HZ

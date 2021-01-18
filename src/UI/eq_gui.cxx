@@ -62,9 +62,8 @@ void EqGui::cb_eq_Q_i(RKR_Slider* o, void*) {
 {
  rgui->getMIDIControl(131);
  return;
-} 
-int i;
-for(i=0;i<10;i++) rkr->efx_EQ1->changepar(i*5+13,(int)(o->value()+64));
+}
+rkr->efx_EQ1->changepar_Q(EQ_Q,(int)(o->value()+64));
 }
 void EqGui::cb_eq_Q(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_Q_i(o,v);
