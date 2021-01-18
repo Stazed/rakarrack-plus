@@ -36,7 +36,7 @@ const int C_CABINET_PARAMETERS = 2;
 enum Cabinet_Index
 {
     Cabinet_Gain = 0,
-    Cabinet_Preset      // LV2 only
+    Cabinet_Preset_Idx   // LV2 only
 };
 
 class Cabinet :public EQ

@@ -1760,8 +1760,6 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -1781,14 +1779,15 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    val = (int)*plug->param_p[0] + 64;
+    int val = (int)*plug->param_p[Cabinet_Gain] + 64;
     if(plug->cab->getpar(Cabinet_Gain) != val)
     {
         plug->cab->changepar(Cabinet_Gain,val);
     }
 
-    val = (int)*plug->param_p[1];
+    val = (int)*plug->param_p[Cabinet_Preset_Idx];
     if(plug->cab->Cabinet_Preset != val)
     {
         plug->cab->setpreset(val);
