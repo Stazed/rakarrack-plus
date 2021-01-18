@@ -27,6 +27,8 @@
 
 #include "AnalogFilter.h"
 
+const int C_EQ_PARAMETERS = 12;
+
 enum EQ_Index
 {
     EQ_Gain     = 0,

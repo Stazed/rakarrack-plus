@@ -25,6 +25,8 @@
 
 #include "EQ.h"
 
+const int C_PARAMETRIC_EQ_PARAMETERS = 10;
+
 enum ParametricEQ_Index
 {
     Parametric_Gain = 0,

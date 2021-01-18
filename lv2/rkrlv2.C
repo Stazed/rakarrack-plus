@@ -305,7 +305,7 @@ LV2_Handle init_eqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq,
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 12;
+    plug->nparams = C_EQ_PARAMETERS;
     plug->effectindex = IEQ;
     plug->prev_bypass = 1;
 
@@ -1587,7 +1587,7 @@ LV2_Handle init_eqplv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 10;
+    plug->nparams = C_PARAMETRIC_EQ_PARAMETERS;
     plug->effectindex = IEQP;
     plug->prev_bypass = 1;
 
@@ -1715,7 +1715,7 @@ LV2_Handle init_cablv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = 2;  // This is not used
+    plug->nparams = C_CABINET_PARAMETERS;  // This is not used
     plug->effectindex = ICAB;
     plug->prev_bypass = 1;
 

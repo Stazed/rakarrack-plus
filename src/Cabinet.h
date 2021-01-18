@@ -25,6 +25,9 @@
 
 #include "EQ.h"
 
+/* Used by LV2 for Gain and Preset setting */
+const int C_CABINET_PARAMETERS = 2;
+
 /**
  * This singular index is here for clarity as it is the only parameter for the 
  * Cabinet class. The effect uses setpreset() to change the individual filters.
@@ -32,7 +35,8 @@
  */
 enum Cabinet_Index
 {
-    Cabinet_Gain = 0
+    Cabinet_Gain = 0,
+    Cabinet_Preset      // LV2 only
 };
 
 class Cabinet :public EQ
