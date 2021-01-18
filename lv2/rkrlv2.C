@@ -320,9 +320,6 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
         return;
-    
-    int i;
-    int val;
 
     RKRLV2* plug = (RKRLV2*)handle;
     
@@ -342,28 +339,61 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     }
     
     // we are good to run now
+
     //check and set changed parameters
-    i = 0;
-    val = (int)*plug->param_p[0] + 64;
-    if(plug->eq->getpar(EQ_Gain) != val)
+    int val = 0;
+    int param_case_offset = 0;
+    for(int i = 0; i < plug->nparams; i++)
     {
-        plug->eq->changepar(EQ_Gain,val);
-    }
-    val = (int)*plug->param_p[1]+64;//q
-    if(plug->eq->getpar(EQ_Q) != val)
-    {
-        int j;
-        for(j=0; j<10; j++)
+        switch(param_case_offset)
         {
-            plug->eq->changepar(j*5+13,val);
-        }
-    }
-    for(i=2; i<plug->nparams; i++)
-    {
-        val = (int)*plug->param_p[i]+64;//various freq. bands
-        if(plug->eq->getpar(5*i + 2) != val)
-        {
-            plug->eq->changepar(5*i+2,val);
+            case EQ_Gain:
+            {
+                val = (int)*plug->param_p[i] + 64;
+                if(plug->eq->getpar(EQ_Gain) != val)
+                {
+                    plug->eq->changepar(EQ_Gain,val);
+                }
+
+                param_case_offset = EQ_Q; // set for EQ_Q
+            }
+            break;
+
+            case EQ_Q:
+            {
+                val = (int)*plug->param_p[i] + 64;
+                if(plug->eq->getpar(EQ_Q) != val)
+                {
+                    for(int j = 0; j < 10; j++)
+                    {
+                        plug->eq->changepar(j * 5 + EQ_Q, val);
+                    }
+                }
+
+                param_case_offset = EQ_31_HZ;   // set for EQ_31_HZ
+            }
+            break;
+
+            case EQ_31_HZ:
+            case EQ_63_HZ:
+            case EQ_125_HZ:
+            case EQ_250_HZ:
+            case EQ_500_HZ:
+            case EQ_1_KHZ:
+            case EQ_2_KHZ:
+            case EQ_4_KHZ:
+            case EQ_8_KHZ:
+            case EQ_16_KHZ:
+            {
+                val = (int)*plug->param_p[i] + 64;
+                if(plug->eq->getpar(param_case_offset) != val)
+                {
+                    plug->eq->changepar(param_case_offset, val);
+                }
+
+                param_case_offset += 5;     // next parameter
+            }
+            break;
         }
     }
 
