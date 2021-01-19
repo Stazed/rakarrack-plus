@@ -45,7 +45,7 @@ Fl_Menu_Item CompressGui::menu_compress_preset[] = {
 void CompressGui::cb_compress_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(142);
+ rgui->getMIDIControl(MC_Compress_Attack);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Attack,(int)o->value());
@@ -57,7 +57,7 @@ void CompressGui::cb_compress_ATime(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(143);
+ rgui->getMIDIControl(MC_Compress_Release);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Release, (int) o->value());
@@ -69,7 +69,7 @@ void CompressGui::cb_compress_RTime(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_Ratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(144);
+ rgui->getMIDIControl(MC_Compress_Ratio);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Ratio, (int) o->value());
@@ -81,7 +81,7 @@ void CompressGui::cb_compress_Ratio(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_Knee_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(145);
+ rgui->getMIDIControl(MC_Compress_Knee);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Knee, (int) o->value());
@@ -93,7 +93,7 @@ void CompressGui::cb_compress_Knee(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(146);
+ rgui->getMIDIControl(MC_Compress_Threshold);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Threshold, (int)o->value());
@@ -105,7 +105,7 @@ void CompressGui::cb_compress_threshold(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_output_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(147);
+ rgui->getMIDIControl(MC_Compress_Output);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Output,(int)o->value());

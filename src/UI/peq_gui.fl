@@ -66,7 +66,7 @@ eqp_Gain->value(rkr->efx_EQ2->getpar(Parametric_Gain)-64);} selected
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(148);
+ rgui->getMIDIControl(MC_Parametric_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Gain,(int)(o->value()+64));}
@@ -77,7 +77,7 @@ rkr->efx_EQ2->changepar(Parametric_Gain,(int)(o->value()+64));}
     label {Low F.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(149);
+ rgui->getMIDIControl(MC_Parametric_Low_Freq);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Low_Freq,(int)o->value());}
@@ -88,7 +88,7 @@ rkr->efx_EQ2->changepar(Parametric_Low_Freq,(int)o->value());}
     label {Low G.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(150);
+ rgui->getMIDIControl(MC_Parametric_Low_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Low_Gain,(int)(o->value()+64));}
@@ -99,7 +99,7 @@ rkr->efx_EQ2->changepar(Parametric_Low_Gain,(int)(o->value()+64));}
     label {Low Q.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(151);
+ rgui->getMIDIControl(MC_Parametric_Low_Q);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Low_Q,(int)(o->value()+64));}
@@ -110,7 +110,7 @@ rkr->efx_EQ2->changepar(Parametric_Low_Q,(int)(o->value()+64));}
     label {Mid F.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(152);
+ rgui->getMIDIControl(MC_Parametric_Mid_Freq);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Mid_Freq,(int)o->value());}
@@ -121,7 +121,7 @@ rkr->efx_EQ2->changepar(Parametric_Mid_Freq,(int)o->value());}
     label {Mid G.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(153);
+ rgui->getMIDIControl(MC_Parametric_Mid_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Mid_Gain,(int)(o->value()+64));}
@@ -132,7 +132,7 @@ rkr->efx_EQ2->changepar(Parametric_Mid_Gain,(int)(o->value()+64));}
     label {Mid Q.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(154);
+ rgui->getMIDIControl(MC_Parametric_Mid_Q);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Mid_Q,(int)(o->value()+64));}
@@ -143,7 +143,7 @@ rkr->efx_EQ2->changepar(Parametric_Mid_Q,(int)(o->value()+64));}
     label {High F.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(155);
+ rgui->getMIDIControl(MC_Parametric_High_Freq);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_High_Freq,(int)o->value());}
@@ -154,7 +154,7 @@ rkr->efx_EQ2->changepar(Parametric_High_Freq,(int)o->value());}
     label {High G.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(156);
+ rgui->getMIDIControl(MC_Parametric_High_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_High_Gain,(int)(o->value()+64));}
@@ -165,7 +165,7 @@ rkr->efx_EQ2->changepar(Parametric_High_Gain,(int)(o->value()+64));}
     label {High Q.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(157);
+ rgui->getMIDIControl(MC_Parametric_High_Q);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_High_Q,(int)(o->value()+64));}

@@ -3659,115 +3659,115 @@ void RKRGUI::MIDI_control_gui_refresh()
             case 128:   // Unused
             case 129:   // Unused
                 break;
-            case 130:
+            case MC_EQ_Gain:
                 EQ->eq_Gain->value(rkr->efx_EQ1->getpar(EQ_Gain) - 64);
                 EQ->eq_Gain->redraw();
                 break;
-            case 131:
+            case MC_EQ_Q:
                 EQ->eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q) - 64);
                 EQ->eq_Q->redraw();
                 break;
-            case 132:
+            case MC_EQ_31_HZ:
                 EQ->eq_1->value(rkr->efx_EQ1->getpar(EQ_31_HZ) - 64);
                 EQ->eq_1->redraw();
                 break;
-            case 133:
+            case MC_EQ_63_HZ:
                 EQ->eq_2->value(rkr->efx_EQ1->getpar(EQ_63_HZ) - 64);
                 EQ->eq_2->redraw();
                 break;
-            case 134:
+            case MC_EQ_125_HZ:
                 EQ->eq_3->value(rkr->efx_EQ1->getpar(EQ_125_HZ) - 64);
                 EQ->eq_3->redraw();
                 break;
-            case 135:
+            case MC_EQ_250_HZ:
                 EQ->eq_4->value(rkr->efx_EQ1->getpar(EQ_250_HZ) - 64);
                 EQ->eq_4->redraw();
                 break;
-            case 136:
+            case MC_EQ_500_HZ:
                 EQ->eq_5->value(rkr->efx_EQ1->getpar(EQ_500_HZ) - 64);
                 EQ->eq_5->redraw();
                 break;
-            case 137:
+            case MC_EQ_1_KHZ:
                 EQ->eq_6->value(rkr->efx_EQ1->getpar(EQ_1_KHZ) - 64);
                 EQ->eq_6->redraw();
                 break;
-            case 138:
+            case MC_EQ_2_KHZ:
                 EQ->eq_7->value(rkr->efx_EQ1->getpar(EQ_2_KHZ) - 64);
                 EQ->eq_7->redraw();
                 break;
-            case 139:
+            case MC_EQ_4_KHZ:
                 EQ->eq_8->value(rkr->efx_EQ1->getpar(EQ_4_KHZ) - 64);
                 EQ->eq_8->redraw();
                 break;
-            case 140:
+            case MC_EQ_8_KHZ:
                 EQ->eq_9->value(rkr->efx_EQ1->getpar(EQ_8_KHZ) - 64);
                 EQ->eq_9->redraw();
                 break;
-            case 141:
+            case MC_EQ_16_KHZ:
                 EQ->eq_10->value(rkr->efx_EQ1->getpar(EQ_16_KHZ) - 64);
                 EQ->eq_10->redraw();
                 break;
-            case 142:
+            case MC_Compress_Attack:
                 COMPRESS->compress_ATime->value(rkr->efx_Compressor->getpar(Compress_Attack));
                 COMPRESS->compress_ATime->redraw();
                 break;
-            case 143:
+            case MC_Compress_Release:
                 COMPRESS->compress_RTime->value(rkr->efx_Compressor->getpar(Compress_Release));
                 COMPRESS->compress_RTime->redraw();
                 break;
-            case 144:
+            case MC_Compress_Ratio:
                 COMPRESS->compress_Ratio->value(rkr->efx_Compressor->getpar(Compress_Ratio));
                 COMPRESS->compress_Ratio->redraw();
                 break;
-            case 145:
+            case MC_Compress_Knee:
                 COMPRESS->compress_Knee->value(rkr->efx_Compressor->getpar(Compress_Knee));
                 COMPRESS->compress_Knee->redraw();
                 break;
-            case 146:
+            case MC_Compress_Threshold:
                 COMPRESS->compress_threshold->value(rkr->efx_Compressor->getpar(Compress_Threshold));
                 COMPRESS->compress_threshold->redraw();
                 break;
-            case 147:
+            case MC_Compress_Output:
                 COMPRESS->compress_output->value(rkr->efx_Compressor->getpar(Compress_Output));
                 COMPRESS->compress_output->redraw();
                 break;
-            case 148:
+            case MC_Parametric_Gain:
                 PEQ->eqp_Gain->value(rkr->efx_EQ2->getpar(Parametric_Gain) - 64);
                 PEQ->eqp_Gain->redraw();
                 break;
-            case 149:
+            case MC_Parametric_Low_Freq:
                 PEQ->eqp_LF->value(rkr->efx_EQ2->getpar(Parametric_Low_Freq));
                 PEQ->eqp_LF->redraw();
                 break;
-            case 150:
+            case MC_Parametric_Low_Gain:
                 PEQ->eqp_LFg->value(rkr->efx_EQ2->getpar(Parametric_Low_Gain) - 64);
                 PEQ->eqp_LFg->redraw();
                 break;
-            case 151:
+            case MC_Parametric_Low_Q:
                 PEQ->eqp_LQ->value(rkr->efx_EQ2->getpar(Parametric_Low_Q) - 64);
                 PEQ->eqp_LQ->redraw();
                 break;
-            case 152:
+            case MC_Parametric_Mid_Freq:
                 PEQ->eqp_MF->value(rkr->efx_EQ2->getpar(Parametric_Mid_Freq));
                 PEQ->eqp_MF->redraw();
                 break;
-            case 153:
+            case MC_Parametric_Mid_Gain:
                 PEQ->eqp_MFg->value(rkr->efx_EQ2->getpar(Parametric_Mid_Gain) - 64);
                 PEQ->eqp_MFg->redraw();
                 break;
-            case 154:
+            case MC_Parametric_Mid_Q:
                 PEQ->eqp_MQ->value(rkr->efx_EQ2->getpar(Parametric_Mid_Q) - 64);
                 PEQ->eqp_MQ->redraw();
                 break;
-            case 155:
+            case MC_Parametric_High_Freq:
                 PEQ->eqp_HF->value(rkr->efx_EQ2->getpar(Parametric_High_Freq));
                 PEQ->eqp_HF->redraw();
                 break;
-            case 156:
+            case MC_Parametric_High_Gain:
                 PEQ->eqp_HFg->value(rkr->efx_EQ2->getpar(Parametric_High_Gain) - 64);
                 PEQ->eqp_HFg->redraw();
                 break;
-            case 157:
+            case MC_Parametric_High_Q:
                 PEQ->eqp_HQ->value(rkr->efx_EQ2->getpar(Parametric_High_Q) - 64);
                 PEQ->eqp_HQ->redraw();
                 break;

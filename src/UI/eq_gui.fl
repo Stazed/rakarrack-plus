@@ -68,7 +68,7 @@ eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q)-64);}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(130);
+ rgui->getMIDIControl(MC_EQ_Gain);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_Gain,(int)(o->value()+64));}
@@ -79,7 +79,7 @@ rkr->efx_EQ1->changepar(EQ_Gain,(int)(o->value()+64));}
     label Q
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(131);
+ rgui->getMIDIControl(MC_EQ_Q);
  return;
 }
 rkr->efx_EQ1->changepar_Q(EQ_Q,(int)(o->value()+64));} selected
@@ -90,7 +90,7 @@ rkr->efx_EQ1->changepar_Q(EQ_Q,(int)(o->value()+64));} selected
     label {31 Hz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(132);
+ rgui->getMIDIControl(MC_EQ_31_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_31_HZ,(int)(o->value()+64));}
@@ -101,7 +101,7 @@ rkr->efx_EQ1->changepar(EQ_31_HZ,(int)(o->value()+64));}
     label {63 Hz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(133);
+ rgui->getMIDIControl(MC_EQ_63_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_63_HZ,(int)(o->value()+64));}
@@ -112,7 +112,7 @@ rkr->efx_EQ1->changepar(EQ_63_HZ,(int)(o->value()+64));}
     label {125 Hz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(134);
+ rgui->getMIDIControl(MC_EQ_125_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_125_HZ,(int)(o->value()+64));}
@@ -123,7 +123,7 @@ rkr->efx_EQ1->changepar(EQ_125_HZ,(int)(o->value()+64));}
     label {250 Hz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(135);
+ rgui->getMIDIControl(MC_EQ_250_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_250_HZ,(int)(o->value()+64));}
@@ -134,7 +134,7 @@ rkr->efx_EQ1->changepar(EQ_250_HZ,(int)(o->value()+64));}
     label {500 Hz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(136);
+ rgui->getMIDIControl(MC_EQ_500_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_500_HZ,(int)(o->value()+64));}
@@ -145,7 +145,7 @@ rkr->efx_EQ1->changepar(EQ_500_HZ,(int)(o->value()+64));}
     label {1 Khz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(137);
+ rgui->getMIDIControl(MC_EQ_1_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_1_KHZ,(int)(o->value()+64));}
@@ -156,7 +156,7 @@ rkr->efx_EQ1->changepar(EQ_1_KHZ,(int)(o->value()+64));}
     label {2 Khz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(138);
+ rgui->getMIDIControl(MC_EQ_2_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_2_KHZ,(int)(o->value()+64));}
@@ -167,7 +167,7 @@ rkr->efx_EQ1->changepar(EQ_2_KHZ,(int)(o->value()+64));}
     label {4 Khz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(139);
+ rgui->getMIDIControl(MC_EQ_4_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_4_KHZ,(int)(o->value()+64));}
@@ -178,7 +178,7 @@ rkr->efx_EQ1->changepar(EQ_4_KHZ,(int)(o->value()+64));}
     label {8 Khz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(140);
+ rgui->getMIDIControl(MC_EQ_8_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_8_KHZ,(int)(o->value()+64));}
@@ -189,7 +189,7 @@ rkr->efx_EQ1->changepar(EQ_8_KHZ,(int)(o->value()+64));}
     label {16 Khz}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(141);
+ rgui->getMIDIControl(MC_EQ_16_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_16_KHZ,(int)(o->value()+64));}

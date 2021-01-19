@@ -46,7 +46,7 @@ Fl_Menu_Item PeqGui::menu_eqp_preset[] = {
 void PeqGui::cb_eqp_Gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(148);
+ rgui->getMIDIControl(MC_Parametric_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Gain,(int)(o->value()+64));
@@ -58,7 +58,7 @@ void PeqGui::cb_eqp_Gain(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_LF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(149);
+ rgui->getMIDIControl(MC_Parametric_Low_Freq);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Low_Freq,(int)o->value());
@@ -70,7 +70,7 @@ void PeqGui::cb_eqp_LF(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_LFg_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(150);
+ rgui->getMIDIControl(MC_Parametric_Low_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Low_Gain,(int)(o->value()+64));
@@ -82,7 +82,7 @@ void PeqGui::cb_eqp_LFg(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_LQ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(151);
+ rgui->getMIDIControl(MC_Parametric_Low_Q);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Low_Q,(int)(o->value()+64));
@@ -94,7 +94,7 @@ void PeqGui::cb_eqp_LQ(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_MF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(152);
+ rgui->getMIDIControl(MC_Parametric_Mid_Freq);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Mid_Freq,(int)o->value());
@@ -106,7 +106,7 @@ void PeqGui::cb_eqp_MF(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_MFg_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(153);
+ rgui->getMIDIControl(MC_Parametric_Mid_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Mid_Gain,(int)(o->value()+64));
@@ -118,7 +118,7 @@ void PeqGui::cb_eqp_MFg(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_MQ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(154);
+ rgui->getMIDIControl(MC_Parametric_Mid_Q);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_Mid_Q,(int)(o->value()+64));
@@ -130,7 +130,7 @@ void PeqGui::cb_eqp_MQ(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_HF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(155);
+ rgui->getMIDIControl(MC_Parametric_High_Freq);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_High_Freq,(int)o->value());
@@ -142,7 +142,7 @@ void PeqGui::cb_eqp_HF(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_HFg_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(156);
+ rgui->getMIDIControl(MC_Parametric_High_Gain);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_High_Gain,(int)(o->value()+64));
@@ -154,7 +154,7 @@ void PeqGui::cb_eqp_HFg(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_HQ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(157);
+ rgui->getMIDIControl(MC_Parametric_High_Q);
  return;
 } 
 rkr->efx_EQ2->changepar(Parametric_High_Q,(int)(o->value()+64));

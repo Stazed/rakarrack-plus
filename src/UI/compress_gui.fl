@@ -71,7 +71,7 @@ Peak->value(rkr->efx_Compressor->getpar(Compress_Peak));}
     label {A. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(142);
+ rgui->getMIDIControl(MC_Compress_Attack);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Attack,(int)o->value());}
@@ -82,7 +82,7 @@ rkr->efx_Compressor->changepar(Compress_Attack,(int)o->value());}
     label {R. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(143);
+ rgui->getMIDIControl(MC_Compress_Release);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Release, (int) o->value());}
@@ -93,7 +93,7 @@ rkr->efx_Compressor->changepar(Compress_Release, (int) o->value());}
     label Ratio
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(144);
+ rgui->getMIDIControl(MC_Compress_Ratio);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Ratio, (int) o->value());}
@@ -104,7 +104,7 @@ rkr->efx_Compressor->changepar(Compress_Ratio, (int) o->value());}
     label Knee
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(145);
+ rgui->getMIDIControl(MC_Compress_Knee);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Knee, (int) o->value());}
@@ -115,7 +115,7 @@ rkr->efx_Compressor->changepar(Compress_Knee, (int) o->value());}
     label Threshold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(146);
+ rgui->getMIDIControl(MC_Compress_Threshold);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Threshold, (int)o->value());}
@@ -126,7 +126,7 @@ rkr->efx_Compressor->changepar(Compress_Threshold, (int)o->value());}
     label Output
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(147);
+ rgui->getMIDIControl(MC_Compress_Output);
  return;
 } 
 rkr->efx_Compressor->changepar(Compress_Output,(int)o->value());}

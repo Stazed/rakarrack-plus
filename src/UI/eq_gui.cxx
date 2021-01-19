@@ -48,7 +48,7 @@ Fl_Menu_Item EqGui::menu_eq_preset[] = {
 void EqGui::cb_eq_Gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(130);
+ rgui->getMIDIControl(MC_EQ_Gain);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_Gain,(int)(o->value()+64));
@@ -60,7 +60,7 @@ void EqGui::cb_eq_Gain(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_Q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(131);
+ rgui->getMIDIControl(MC_EQ_Q);
  return;
 }
 rkr->efx_EQ1->changepar_Q(EQ_Q,(int)(o->value()+64));
@@ -72,7 +72,7 @@ void EqGui::cb_eq_Q(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(132);
+ rgui->getMIDIControl(MC_EQ_31_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_31_HZ,(int)(o->value()+64));
@@ -84,7 +84,7 @@ void EqGui::cb_eq_1(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(133);
+ rgui->getMIDIControl(MC_EQ_63_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_63_HZ,(int)(o->value()+64));
@@ -96,7 +96,7 @@ void EqGui::cb_eq_2(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(134);
+ rgui->getMIDIControl(MC_EQ_125_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_125_HZ,(int)(o->value()+64));
@@ -108,7 +108,7 @@ void EqGui::cb_eq_3(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_4_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(135);
+ rgui->getMIDIControl(MC_EQ_250_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_250_HZ,(int)(o->value()+64));
@@ -120,7 +120,7 @@ void EqGui::cb_eq_4(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_5_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(136);
+ rgui->getMIDIControl(MC_EQ_500_HZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_500_HZ,(int)(o->value()+64));
@@ -132,7 +132,7 @@ void EqGui::cb_eq_5(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_6_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(137);
+ rgui->getMIDIControl(MC_EQ_1_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_1_KHZ,(int)(o->value()+64));
@@ -144,7 +144,7 @@ void EqGui::cb_eq_6(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_7_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(138);
+ rgui->getMIDIControl(MC_EQ_2_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_2_KHZ,(int)(o->value()+64));
@@ -156,7 +156,7 @@ void EqGui::cb_eq_7(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_8_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(139);
+ rgui->getMIDIControl(MC_EQ_4_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_4_KHZ,(int)(o->value()+64));
@@ -168,7 +168,7 @@ void EqGui::cb_eq_8(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_9_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(140);
+ rgui->getMIDIControl(MC_EQ_8_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_8_KHZ,(int)(o->value()+64));
@@ -180,7 +180,7 @@ void EqGui::cb_eq_9(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_10_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(141);
+ rgui->getMIDIControl(MC_EQ_16_KHZ);
  return;
 } 
 rkr->efx_EQ1->changepar(EQ_16_KHZ,(int)(o->value()+64));

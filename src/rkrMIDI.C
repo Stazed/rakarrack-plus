@@ -1997,119 +1997,119 @@ RKR::process_midi_controller_events(int parameter, int value)
 // End MIDI Implementation Chart range
 // Start of MIDI learn extras
 
-    case 128:   // Unused
-    case 129:   // Unused
+    case MC_Unused_128:
+    case MC_Unused_129:
         break;
 
-    case 130:
+    case MC_EQ_Gain:
         efx_EQ1->changepar(EQ_Gain, value);
         break;
 
-    case 131:
+    case MC_EQ_Q:
         efx_EQ1->changepar_Q(EQ_Q, value);
         break;
 
-    case 132:
+    case MC_EQ_31_HZ:
         efx_EQ1->changepar(EQ_31_HZ, value);
         break;
 
-    case 133:
+    case MC_EQ_63_HZ:
         efx_EQ1->changepar(EQ_63_HZ, value);
         break;
 
-    case 134:
+    case MC_EQ_125_HZ:
         efx_EQ1->changepar(EQ_125_HZ, value);
         break;
 
-    case 135:
+    case MC_EQ_250_HZ:
         efx_EQ1->changepar(EQ_250_HZ, value);
         break;
 
-    case 136:
+    case MC_EQ_500_HZ:
         efx_EQ1->changepar(EQ_500_HZ, value);
         break;
 
-    case 137:
+    case MC_EQ_1_KHZ:
         efx_EQ1->changepar(EQ_1_KHZ, value);
         break;
 
-    case 138:
+    case MC_EQ_2_KHZ:
         efx_EQ1->changepar(EQ_2_KHZ, value);
         break;
 
-    case 139:
+    case MC_EQ_4_KHZ:
         efx_EQ1->changepar(EQ_4_KHZ, value);
         break;
 
-    case 140:
+    case MC_EQ_8_KHZ:
         efx_EQ1->changepar(EQ_8_KHZ, value);
         break;
 
-    case 141:
+    case MC_EQ_16_KHZ:
         efx_EQ1->changepar(EQ_16_KHZ, value);
         break;
 
-    case 142:
+    case MC_Compress_Attack:
         efx_Compressor->changepar(Compress_Attack, 10 + (int) ((float) value * C_MC_240_RANGE));
         break;
 
-    case 143:
+    case MC_Compress_Release:
         efx_Compressor->changepar(Compress_Release, 10 + (int) ((float) value * C_MC_490_RANGE));
         break;
 
-    case 144:
+    case MC_Compress_Ratio:
         efx_Compressor->changepar(Compress_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
-    case 145:
+    case MC_Compress_Knee:
         efx_Compressor->changepar(Compress_Knee, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 146:
+    case MC_Compress_Threshold:
         efx_Compressor->changepar(Compress_Threshold, -60 + (int) ((float) value * C_MC_57_RANGE));
         break;
 
-    case 147:
+    case MC_Compress_Output:
         efx_Compressor->changepar(Compress_Output, -40 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
-    case 148:
+    case MC_Parametric_Gain:
         efx_EQ2->changepar(Parametric_Gain, value);
         break;
 
-    case 149:
+    case MC_Parametric_Low_Freq:
         efx_EQ2->changepar(Parametric_Low_Freq, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
-    case 150:
+    case MC_Parametric_Low_Gain:
         efx_EQ2->changepar(Parametric_Low_Gain, value);
         break;
 
-    case 151:
+    case MC_Parametric_Low_Q:
         efx_EQ2->changepar(Parametric_Low_Q, value);
         break;
 
-    case 152:
+    case MC_Parametric_Mid_Freq:
         efx_EQ2->changepar(Parametric_Mid_Freq, 800 + (int) ((float) value * C_MC_7200_RANGE));
         break;
 
-    case 153:
+    case MC_Parametric_Mid_Gain:
         efx_EQ2->changepar(Parametric_Mid_Gain, value);
         break;
 
-    case 154:
+    case MC_Parametric_Mid_Q:
         efx_EQ2->changepar(Parametric_Mid_Q, value);
         break;
 
-    case 155:
+    case MC_Parametric_High_Freq:
         efx_EQ2->changepar(Parametric_High_Freq, 6000 + (int) ((float) value * C_MC_20000_RANGE));
         break;
 
-    case 156:
+    case MC_Parametric_High_Gain:
         efx_EQ2->changepar(Parametric_High_Gain, value);
         break;
 
-    case 157:
+    case MC_Parametric_High_Q:
         efx_EQ2->changepar(Parametric_High_Q, value);
         break;
 
