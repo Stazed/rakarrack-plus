@@ -72,7 +72,7 @@ rgui->findpos(35,(int)o->value(),o);}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(296);
+         rgui->getMIDIControl(MC_Vocoder_DryWet);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_DryWet,Dry_Wet((int)(o->value())));}
@@ -83,7 +83,7 @@ rgui->findpos(35,(int)o->value(),o);}
     label Pan
     callback {if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(297);
+         rgui->getMIDIControl(MC_Vocoder_Pan);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Pan,(int)(o->value()+64));}
@@ -94,7 +94,7 @@ rgui->findpos(35,(int)o->value(),o);}
     label Input
     callback {if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(298);
+         rgui->getMIDIControl(MC_Vocoder_Input);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Input,(int)o->value());}
@@ -105,7 +105,7 @@ rgui->findpos(35,(int)o->value(),o);}
     label Smear
     callback {if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(299);
+         rgui->getMIDIControl(MC_Vocoder_Smear);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Smear,(int)o->value());}
@@ -116,7 +116,7 @@ rgui->findpos(35,(int)o->value(),o);}
     label Q
     callback {if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(300);
+         rgui->getMIDIControl(MC_Vocoder_Q);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Q,(int)o->value());}
@@ -127,7 +127,7 @@ rgui->findpos(35,(int)o->value(),o);}
     label Ring
     callback {if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(301);
+         rgui->getMIDIControl(MC_Vocoder_Ring);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Ring,(int)o->value());} selected
@@ -138,7 +138,7 @@ rgui->findpos(35,(int)o->value(),o);}
     label Level
     callback {if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(302);
+         rgui->getMIDIControl(MC_Vocoder_Level);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Level,(int)o->value());}

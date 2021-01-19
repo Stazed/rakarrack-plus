@@ -44,7 +44,7 @@ Fl_Menu_Item CoilGui::menu_coil_preset[] = {
 void CoilGui::cb_coil_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(286);
+ rgui->getMIDIControl(MC_Coil_Gain);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Gain,(int)o->value());
@@ -56,7 +56,7 @@ void CoilGui::cb_coil_WD(RKR_Slider* o, void* v) {
 void CoilGui::cb_coil_tone_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(287);
+ rgui->getMIDIControl(MC_Coil_Tone);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Tone,(int)o->value());
@@ -90,7 +90,7 @@ Fl_Menu_Item CoilGui::menu_coil_origin[] = {
 void CoilGui::cb_coil_freq1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(288);
+ rgui->getMIDIControl(MC_Coil_Freq_1);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Freq_1,(int)o->value());
@@ -102,7 +102,7 @@ void CoilGui::cb_coil_freq1(RKR_Slider* o, void* v) {
 void CoilGui::cb_coil_q1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(289);
+ rgui->getMIDIControl(MC_Coil_Q_1);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Q_1,(int)o->value());
@@ -123,7 +123,7 @@ void CoilGui::cb_coil_destiny(RKR_Choice* o, void* v) {
 void CoilGui::cb_coil_freq2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(290);
+ rgui->getMIDIControl(MC_Coil_Freq_2);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());
@@ -135,7 +135,7 @@ void CoilGui::cb_coil_freq2(RKR_Slider* o, void* v) {
 void CoilGui::cb_coil_q2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(291);
+ rgui->getMIDIControl(MC_Coil_Q_2);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Q_2,(int)o->value());

@@ -47,7 +47,7 @@ Fl_Menu_Item ConvoGui::menu_convo_preset[] = {
 void ConvoGui::cb_convo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(280);
+ rgui->getMIDIControl(MC_Convo_DryWet);
  return;
 }
 rkr->efx_Convol->changepar(Convo_DryWet,Dry_Wet((int)(o->value())));
@@ -59,7 +59,7 @@ void ConvoGui::cb_convo_WD(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(281);
+ rgui->getMIDIControl(MC_Convo_Pan);
  return;
 }
 rkr->efx_Convol->changepar(Convo_Pan,(int)(o->value()+64));
@@ -71,7 +71,7 @@ void ConvoGui::cb_convo_pan(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(282);
+ rgui->getMIDIControl(MC_Convo_Level);
  return;
 }
 rkr->efx_Convol->changepar(Convo_Level,(int)o->value());
@@ -83,7 +83,7 @@ void ConvoGui::cb_convo_level(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(283);
+ rgui->getMIDIControl(MC_Convo_Damp);
  return;
 }
 rkr->efx_Convol->changepar(Convo_Damp,(int)o->value());
@@ -95,7 +95,7 @@ void ConvoGui::cb_convo_damp(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(284);
+ rgui->getMIDIControl(MC_Convo_Feedback);
  return;
 }
 rkr->efx_Convol->changepar(Convo_Feedback,(int)o->value());
@@ -107,7 +107,7 @@ void ConvoGui::cb_convo_fb(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_length_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(285);
+ rgui->getMIDIControl(MC_Convo_Length);
  return;
 }
 rkr->efx_Convol->changepar(Convo_Length,(int)o->value());

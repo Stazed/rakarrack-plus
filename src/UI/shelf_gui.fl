@@ -68,7 +68,7 @@ shelf_level->value(rkr->efx_ShelfBoost->getpar(Shelf_Level));}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(292);
+ rgui->getMIDIControl(MC_Shelf_Gain);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Gain,(int)o->value());}
@@ -79,7 +79,7 @@ rkr->efx_ShelfBoost->changepar(Shelf_Gain,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(293);
+ rgui->getMIDIControl(MC_Shelf_Level);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Level,(int)o->value());}
@@ -90,7 +90,7 @@ rkr->efx_ShelfBoost->changepar(Shelf_Level,(int)o->value());}
     label Tone
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(294);
+ rgui->getMIDIControl(MC_Shelf_Tone);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Tone,(int)o->value());}
@@ -101,7 +101,7 @@ rkr->efx_ShelfBoost->changepar(Shelf_Tone,(int)o->value());}
     label Presence
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(295);
+ rgui->getMIDIControl(MC_Shelf_Presence);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Presence,(int)o->value());}

@@ -2550,221 +2550,221 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_MuTroMojo->changepar(MuTro_Env_Smooth, value);
         break;
 
-    case 267:
+    case MC_Looper_DryWet:
         efx_Looper->changepar(Looper_DryWet, Dry_Wet(value));
         break;
 
-    case 268:
+    case MC_Looper_Level_1:
         efx_Looper->changepar(Looper_Level_1, value);
         break;
 
-    case 269:
+    case MC_Looper_Level_2:
         efx_Looper->changepar(Looper_Level_2, value);
         break;
 
-    case 270:
+    case MC_Looper_Reverse:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Reverse, i);
         break;
     }
-    case 271:
+    case MC_Looper_AutoPlay:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_AutoPlay, i);
         break;
     }
-    case 272:
+    case MC_Looper_Play:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Play, i);
         break;
     }
-    case 273:
+    case MC_Looper_Stop:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Stop, i);
         break;
     }
-    case 274:
+    case MC_Looper_Record:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Record, i);
         break;
     }
-    case 275:
+    case MC_Looper_Rec_1:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Rec_1, i);
         break;
     }
-    case 276:
+    case MC_Looper_Rec_2:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Rec_2, i);
         break;
     }
-    case 277:
+    case MC_Looper_Track_1:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Track_1, i);
         break;
     }
-    case 278:
+    case MC_Looper_Track_2:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Track_2, i);
         break;
     }
-    case 279:
+    case MC_Looper_Clear:
     {
         int i = 0;
         if (value) i = 1;
         efx_Looper->changepar(Looper_Clear, i);
         break;
     }
-    case 280:
+    case MC_Convo_DryWet:
         efx_Convol->changepar(Convo_DryWet, Dry_Wet(value));
         break;
 
-    case 281:
+    case MC_Convo_Pan:
         efx_Convol->changepar(Convo_Pan, value);
         break;
 
-    case 282:
+    case MC_Convo_Level:
         efx_Convol->changepar(Convo_Level, value);
         break;
 
-    case 283:
+    case MC_Convo_Damp:
         efx_Convol->changepar(Convo_Damp, value);
         break;
 
-    case 284:
+    case MC_Convo_Feedback:
         efx_Convol->changepar(Convo_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 285:
+    case MC_Convo_Length:
         efx_Convol->changepar(Convo_Length, 5 + (int) ((float) value * C_MC_245_RANGE));
         break;
 
-    case 286:
+    case MC_Coil_Gain:
         efx_CoilCrafter->changepar(Coil_Gain, value);
         break;
 
-    case 287:
+    case MC_Coil_Tone:
         efx_CoilCrafter->changepar(Coil_Tone, 20 + (int) ((float) value * C_MC_4380_RANGE));
         break;
 
-    case 288:
+    case MC_Coil_Freq_1:
         efx_CoilCrafter->changepar(Coil_Freq_1, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
-    case 289:
+    case MC_Coil_Q_1:
         efx_CoilCrafter->changepar(Coil_Q_1, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
-    case 290:
+    case MC_Coil_Freq_2:
         efx_CoilCrafter->changepar(Coil_Freq_2, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
-    case 291:
+    case MC_Coil_Q_2:
         efx_CoilCrafter->changepar(Coil_Q_2, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
-    case 292:
+    case MC_Shelf_Gain:
         efx_ShelfBoost->changepar(Shelf_Gain, value);
         break;
 
-    case 293:
+    case MC_Shelf_Level:
         efx_ShelfBoost->changepar(Shelf_Level, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
-    case 294:
+    case MC_Shelf_Tone:
         efx_ShelfBoost->changepar(Shelf_Tone, 220 + (int) ((float) value * C_MC_15780_RANGE));
         break;
 
-    case 295:
+    case MC_Shelf_Presence:
         efx_ShelfBoost->changepar(Shelf_Presence, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 296:
+    case MC_Vocoder_DryWet:
         efx_Vocoder->changepar(Vocoder_DryWet, Dry_Wet(value));
         break;
 
-    case 297:
+    case MC_Vocoder_Pan:
         efx_Vocoder->changepar(Vocoder_Pan, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 298:
+    case MC_Vocoder_Input:
         efx_Vocoder->changepar(Vocoder_Input, value);
         break;
 
-    case 299:
+    case MC_Vocoder_Smear:
         efx_Vocoder->changepar(Vocoder_Smear, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
-    case 300:
+    case MC_Vocoder_Q:
         efx_Vocoder->changepar(Vocoder_Q, 40 + (int) ((float) value * C_MC_130_RANGE));
         break;
 
-    case 301:
+    case MC_Vocoder_Ring:
         efx_Vocoder->changepar(Vocoder_Ring, value);
         break;
 
-    case 302:
+    case MC_Vocoder_Level:
         efx_Vocoder->changepar(Vocoder_Level, value);
         break;
 
-    case 303:
+    case MC_Echoverse_DryWet:
         efx_Echoverse->changepar(Echoverse_DryWet, Dry_Wet(value));
         break;
 
-    case 304:
+    case MC_Echoverse_Reverse:
         efx_Echoverse->changepar(Echoverse_Reverse, value);
         break;
 
-    case 305:
+    case MC_Echoverse_Pan:
         efx_Echoverse->changepar(Echoverse_Pan, value);
         break;
 
-    case 306:
+    case MC_Echoverse_Tempo:
         efx_Echoverse->changepar(Echoverse_Tempo, ret_Tempo(value));
         break;
 
-    case 307:
+    case MC_Echoverse_LR_Delay:
         efx_Echoverse->changepar(Echoverse_LR_Delay, value);
         break;
 
-    case 308:
+    case MC_Echoverse_Feedback:
         efx_Echoverse->changepar(Echoverse_Feedback, value);
         break;
 
-    case 309:
+    case MC_Echoverse_Damp:
         efx_Echoverse->changepar(Echoverse_Damp, value);
         break;
 
-    case 310:
+    case MC_Echoverse_Ext_Stereo:
         efx_Echoverse->changepar(Echoverse_Ext_Stereo, value);
         break;
 
-    case 311:
+    case MC_Echoverse_Angle:
         efx_Echoverse->changepar(Echoverse_Angle, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 312:
+    case MC_Sustain_Gain:
         efx_Sustainer->changepar(Sustain_Gain, value);
         break;
 
-    case 313:
+    case MC_Sustain_Sustain:
         efx_Sustainer->changepar(Sustain_Sustain, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 

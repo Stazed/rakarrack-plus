@@ -58,7 +58,7 @@ sus_sus->value(rkr->efx_Sustainer->getpar(Sustain_Sustain));} selected
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(312);
+ rgui->getMIDIControl(MC_Sustain_Gain);
  return;
 }
 rkr->efx_Sustainer->changepar(Sustain_Gain,(int)o->value());}
@@ -69,7 +69,7 @@ rkr->efx_Sustainer->changepar(Sustain_Gain,(int)o->value());}
     label Sustain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(313);
+ rgui->getMIDIControl(MC_Sustain_Sustain);
  return;
 }
 rkr->efx_Sustainer->changepar(Sustain_Sustain,(int)o->value());}

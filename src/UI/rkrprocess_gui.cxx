@@ -4207,55 +4207,55 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUTROMOJO->mutromojo_smooth->value(rkr->efx_MuTroMojo->getpar(MuTro_Env_Smooth));
                 MUTROMOJO->mutromojo_smooth->redraw();
                 break;
-            case 267:
+            case MC_Looper_DryWet:
                 LOOPER->looper_WD->value(Dry_Wet(rkr->efx_Looper->getpar(Looper_DryWet)));
                 LOOPER->looper_WD->redraw();
                 break;
-            case 268:
+            case MC_Looper_Level_1:
                 LOOPER->looper_level1->value(rkr->efx_Looper->getpar(Looper_Level_1));
                 LOOPER->looper_level1->redraw();
                 break;
-            case 269:
+            case MC_Looper_Level_2:
                 LOOPER->looper_level2->value(rkr->efx_Looper->getpar(Looper_Level_2));
                 LOOPER->looper_level2->redraw();
                 break;
-            case 270:
+            case MC_Looper_Reverse:
                 LOOPER->looper_rv->value(rkr->efx_Looper->getpar(Looper_Reverse));
                 LOOPER->looper_rv->redraw();
                 break;
-            case 271:
+            case MC_Looper_AutoPlay:
                 LOOPER->looper_ap->value(rkr->efx_Looper->getpar(Looper_AutoPlay));
                 LOOPER->looper_ap->redraw();
                 break;
-            case 272:
+            case MC_Looper_Play:
                 LOOPER->looper_play->value(rkr->efx_Looper->getpar(Looper_Play));
                 update_looper();
                 break;
-            case 273:
+            case MC_Looper_Stop:
                 LOOPER->looper_stop->value(rkr->efx_Looper->getpar(Looper_Stop));
                 update_looper();
                 break;
-            case 274:
+            case MC_Looper_Record:
                 LOOPER->looper_record->value(rkr->efx_Looper->getpar(Looper_Record));
                 update_looper();
                 break;
-            case 275:
+            case MC_Looper_Rec_1:
                 LOOPER->looper_r1->value(rkr->efx_Looper->getpar(Looper_Rec_1));
                 LOOPER->looper_r1->redraw();
                 break;
-            case 276:
+            case MC_Looper_Rec_2:
                 LOOPER->looper_r2->value(rkr->efx_Looper->getpar(Looper_Rec_2));
                 LOOPER->looper_r2->redraw();
                 break;
-            case 277:
+            case MC_Looper_Track_1:
                 LOOPER->looper_t1->value(rkr->efx_Looper->getpar(Looper_Track_1));
                 update_looper();
                 break;
-            case 278:
+            case MC_Looper_Track_2:
                 LOOPER->looper_t2->value(rkr->efx_Looper->getpar(Looper_Track_2));
                 update_looper();
                 break;
-            case 279:
+            case MC_Looper_Clear:
                 /* Setting the looper_clear button after MIDI control really does not work. 
                    The button for the gui is just press and release, i.e. not a toggle button.
                    Since the clear flag Pclear is set and remains set until another button such
@@ -4269,139 +4269,139 @@ void RKRGUI::MIDI_control_gui_refresh()
             //    LOOPER->looper_clear->value(rkr->efx_Looper->getpar(Looper_Clear));
                 update_looper();
                 break;
-            case 280:
+            case MC_Convo_DryWet:
                 CONVOLOTRON->convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(Convo_DryWet)));
                 CONVOLOTRON->convo_WD->redraw();
                 break;
-            case 281:
+            case MC_Convo_Pan:
                 CONVOLOTRON->convo_pan->value(rkr->efx_Convol->getpar(Convo_Pan) - 64);
                 CONVOLOTRON->convo_pan->redraw();
                 break;
-            case 282:
+            case MC_Convo_Level:
                 CONVOLOTRON->convo_level->value(rkr->efx_Convol->getpar(Convo_Level));
                 CONVOLOTRON->convo_level->redraw();
                 break;
-            case 283:
+            case MC_Convo_Damp:
                 CONVOLOTRON->convo_damp->value(rkr->efx_Convol->getpar(Convo_Damp));
                 CONVOLOTRON->convo_damp->redraw();
                 break;
-            case 284:
+            case MC_Convo_Feedback:
                 CONVOLOTRON->convo_fb->value(rkr->efx_Convol->getpar(Convo_Feedback));
                 CONVOLOTRON->convo_fb->redraw();
                 break;
-            case 285:
+            case MC_Convo_Length:
                 CONVOLOTRON->convo_length->value(rkr->efx_Convol->getpar(Convo_Length));
                 CONVOLOTRON->convo_length->redraw();
                 break;
-            case 286:
+            case MC_Coil_Gain:
                 COILCRAFTER->coil_WD->value(rkr->efx_CoilCrafter->getpar(Coil_Gain));
                 COILCRAFTER->coil_WD->redraw();
                 break;
-            case 287:
+            case MC_Coil_Tone:
                 COILCRAFTER->coil_tone->value(rkr->efx_CoilCrafter->getpar(Coil_Tone));
                 COILCRAFTER->coil_tone->redraw();
                 break;
-            case 288:
+            case MC_Coil_Freq_1:
                 COILCRAFTER->coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
                 COILCRAFTER->coil_freq1->redraw();
                 break;
-            case 289:
+            case MC_Coil_Q_1:
                 COILCRAFTER->coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));
                 COILCRAFTER->coil_q1->redraw();
                 break;
-            case 290:
+            case MC_Coil_Freq_2:
                 COILCRAFTER->coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
                 COILCRAFTER->coil_freq2->redraw();
                 break;
-            case 291:
+            case MC_Coil_Q_2:
                 COILCRAFTER->coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));
                 COILCRAFTER->coil_q2->redraw();
                 break;
-            case 292:
+            case MC_Shelf_Gain:
                 SHELFBOOST->shelf_gain->value(rkr->efx_ShelfBoost->getpar(Shelf_Gain));
                 SHELFBOOST->shelf_gain->redraw();
                 break;
-            case 293:
+            case MC_Shelf_Level:
                 SHELFBOOST->shelf_level->value(rkr->efx_ShelfBoost->getpar(Shelf_Level));
                 SHELFBOOST->shelf_level->redraw();
                 break;
-            case 294:
+            case MC_Shelf_Tone:
                 SHELFBOOST->shelf_freq1->value(rkr->efx_ShelfBoost->getpar(Shelf_Tone));
                 SHELFBOOST->shelf_freq1->redraw();
                 break;
-            case 295:
+            case MC_Shelf_Presence:
                 SHELFBOOST->shelf_q1->value(rkr->efx_ShelfBoost->getpar(Shelf_Presence));
                 SHELFBOOST->shelf_q1->redraw();
                 break;
-            case 296:
+            case MC_Vocoder_DryWet:
                 VOCODER->vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(Vocoder_DryWet)));
                 VOCODER->vo_WD->redraw();
                 break;
-            case 297:
+            case MC_Vocoder_Pan:
                 VOCODER->vo_pan->value(rkr->efx_Vocoder->getpar(Vocoder_Pan) - 64);
                 VOCODER->vo_pan->redraw();
                 break;
-            case 298:
+            case MC_Vocoder_Input:
                 VOCODER->vo_input->value(rkr->efx_Vocoder->getpar(Vocoder_Input));
                 VOCODER->vo_input->redraw();
                 break;
-            case 299:
+            case MC_Vocoder_Smear:
                 VOCODER->vo_mu->value(rkr->efx_Vocoder->getpar(Vocoder_Smear));
                 VOCODER->vo_mu->redraw();
                 break;
-            case 300:
+            case MC_Vocoder_Q:
                 VOCODER->vo_q->value(rkr->efx_Vocoder->getpar(Vocoder_Q));
                 VOCODER->vo_q->redraw();
                 break;
-            case 301:
+            case MC_Vocoder_Ring:
                 VOCODER->vo_ring->value(rkr->efx_Vocoder->getpar(Vocoder_Ring));
                 VOCODER->vo_ring->redraw();
                 break;
-            case 302:
+            case MC_Vocoder_Level:
                 VOCODER->vo_level->value(rkr->efx_Vocoder->getpar(Vocoder_Level));
                 VOCODER->vo_level->redraw();
                 break;
-            case 303:
+            case MC_Echoverse_DryWet:
                 ECHOVERSE->echoverse_WD->value(Dry_Wet(rkr->efx_Echoverse->getpar(Echoverse_DryWet)));
                 ECHOVERSE->echoverse_WD->redraw();
                 break;
-            case 304:
+            case MC_Echoverse_Reverse:
                 ECHOVERSE->echoverse_RV->value(rkr->efx_Echoverse->getpar(Echoverse_Reverse));
                 ECHOVERSE->echoverse_RV->redraw();
                 break;
-            case 305:
+            case MC_Echoverse_Pan:
                 ECHOVERSE->echoverse_pan->value(rkr->efx_Echoverse->getpar(Echoverse_Pan) - 64);
                 ECHOVERSE->echoverse_pan->redraw();
                 break;
-            case 306:
+            case MC_Echoverse_Tempo:
                 ECHOVERSE->echoverse_delay->value(rkr->efx_Echoverse->getpar(Echoverse_Tempo));
                 ECHOVERSE->echoverse_delay->redraw();
                 break;
-            case 307:
+            case MC_Echoverse_LR_Delay:
                 ECHOVERSE->echoverse_LRdl->value(rkr->efx_Echoverse->getpar(Echoverse_LR_Delay));
                 ECHOVERSE->echoverse_LRdl->redraw();
                 break;
-            case 308:
+            case MC_Echoverse_Feedback:
                 ECHOVERSE->echoverse_fb->value(rkr->efx_Echoverse->getpar(Echoverse_Feedback));
                 ECHOVERSE->echoverse_fb->redraw();
                 break;
-            case 309:
+            case MC_Echoverse_Damp:
                 ECHOVERSE->echoverse_damp->value(rkr->efx_Echoverse->getpar(Echoverse_Damp));
                 ECHOVERSE->echoverse_damp->redraw();
                 break;
-            case 310:
+            case MC_Echoverse_Ext_Stereo:
                 ECHOVERSE->echoverse_es->value(rkr->efx_Echoverse->getpar(Echoverse_Ext_Stereo));
                 ECHOVERSE->echoverse_es->redraw();
                 break;
-            case 311:
+            case MC_Echoverse_Angle:
                 ECHOVERSE->echoverse_angle->value(rkr->efx_Echoverse->getpar(Echoverse_Angle) - 64);
                 ECHOVERSE->echoverse_angle->redraw();
                 break;
-            case 312:
+            case MC_Sustain_Gain:
                 SUSTAINER->sus_gain->value(rkr->efx_Sustainer->getpar(Sustain_Gain));
                 SUSTAINER->sus_gain->redraw();
                 break;
-            case 313:
+            case MC_Sustain_Sustain:
                 SUSTAINER->sus_sus->value(rkr->efx_Sustainer->getpar(Sustain_Sustain));
                 SUSTAINER->sus_sus->redraw();
                 break;

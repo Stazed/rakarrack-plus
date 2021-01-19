@@ -42,7 +42,7 @@ Fl_Menu_Item ShelfGui::menu_shelf_preset[] = {
 void ShelfGui::cb_shelf_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(292);
+ rgui->getMIDIControl(MC_Shelf_Gain);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Gain,(int)o->value());
@@ -54,7 +54,7 @@ void ShelfGui::cb_shelf_gain(RKR_Slider* o, void* v) {
 void ShelfGui::cb_shelf_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(293);
+ rgui->getMIDIControl(MC_Shelf_Level);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Level,(int)o->value());
@@ -66,7 +66,7 @@ void ShelfGui::cb_shelf_level(RKR_Slider* o, void* v) {
 void ShelfGui::cb_shelf_freq1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(294);
+ rgui->getMIDIControl(MC_Shelf_Tone);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Tone,(int)o->value());
@@ -78,7 +78,7 @@ void ShelfGui::cb_shelf_freq1(RKR_Slider* o, void* v) {
 void ShelfGui::cb_shelf_q1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(295);
+ rgui->getMIDIControl(MC_Shelf_Presence);
  return;
 }
 rkr->efx_ShelfBoost->changepar(Shelf_Presence,(int)o->value());

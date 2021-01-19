@@ -51,7 +51,7 @@ Fl_Menu_Item LooperGui::menu_looper_preset[] = {
 void LooperGui::cb_looper_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(267);
+ rgui->getMIDIControl(MC_Looper_DryWet);
  return;
 }
 rkr->efx_Looper->changepar(Looper_DryWet,Dry_Wet((int)(o->value())));
@@ -63,7 +63,7 @@ void LooperGui::cb_looper_WD(RKR_Slider* o, void* v) {
 void LooperGui::cb_looper_level1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(268);
+ rgui->getMIDIControl(MC_Looper_Level_1);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Level_1,(int)o->value());
@@ -75,7 +75,7 @@ void LooperGui::cb_looper_level1(RKR_Slider* o, void* v) {
 void LooperGui::cb_looper_level2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(269);
+ rgui->getMIDIControl(MC_Looper_Level_2);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Level_2,(int)o->value());
@@ -113,7 +113,7 @@ void LooperGui::cb_looper_ms(RKR_Choice* o, void* v) {
 void LooperGui::cb_looper_rv_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(270);
+ rgui->getMIDIControl(MC_Looper_Reverse);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Reverse,(int)o->value());
@@ -125,7 +125,7 @@ void LooperGui::cb_looper_rv(RKR_Check_Button* o, void* v) {
 void LooperGui::cb_looper_ap_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(271);
+ rgui->getMIDIControl(MC_Looper_AutoPlay);
  return;
 }
 rkr->efx_Looper->changepar(Looper_AutoPlay,(int)o->value());
@@ -137,7 +137,7 @@ void LooperGui::cb_looper_ap(RKR_Check_Button* o, void* v) {
 void LooperGui::cb_looper_play_i(RKR_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(272);
+ rgui->getMIDIControl(MC_Looper_Play);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Play,(int)o->value());
@@ -150,7 +150,7 @@ void LooperGui::cb_looper_play(RKR_Button* o, void* v) {
 void LooperGui::cb_looper_stop_i(RKR_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(273);
+ rgui->getMIDIControl(MC_Looper_Stop);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Stop,(int)o->value());
@@ -163,7 +163,7 @@ void LooperGui::cb_looper_stop(RKR_Button* o, void* v) {
 void LooperGui::cb_looper_record_i(RKR_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(274);
+ rgui->getMIDIControl(MC_Looper_Record);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Record,(int)o->value());
@@ -176,7 +176,7 @@ void LooperGui::cb_looper_record(RKR_Button* o, void* v) {
 void LooperGui::cb_looper_r1_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(275);
+ rgui->getMIDIControl(MC_Looper_Rec_1);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Rec_1,(int)o->value());
@@ -188,7 +188,7 @@ void LooperGui::cb_looper_r1(RKR_Check_Button* o, void* v) {
 void LooperGui::cb_looper_r2_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(276);
+ rgui->getMIDIControl(MC_Looper_Rec_2);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Rec_2,(int)o->value());
@@ -200,7 +200,7 @@ void LooperGui::cb_looper_r2(RKR_Check_Button* o, void* v) {
 void LooperGui::cb_looper_t1_i(RKR_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(277);
+ rgui->getMIDIControl(MC_Looper_Track_1);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Track_1,(int)o->value());
@@ -213,7 +213,7 @@ void LooperGui::cb_looper_t1(RKR_Button* o, void* v) {
 void LooperGui::cb_looper_t2_i(RKR_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(278);
+ rgui->getMIDIControl(MC_Looper_Track_2);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Track_2,(int)o->value());
@@ -233,7 +233,7 @@ void LooperGui::cb_looper_lnk(RKR_Check_Button* o, void* v) {
 void LooperGui::cb_looper_clear_i(RKR_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(279);
+ rgui->getMIDIControl(MC_Looper_Clear);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Clear,(int)o->value());

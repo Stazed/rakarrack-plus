@@ -74,7 +74,7 @@ looper_ms->value(rkr->efx_Looper->getpar(Looper_M_S));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(267);
+ rgui->getMIDIControl(MC_Looper_DryWet);
  return;
 }
 rkr->efx_Looper->changepar(Looper_DryWet,Dry_Wet((int)(o->value())));}
@@ -85,7 +85,7 @@ rkr->efx_Looper->changepar(Looper_DryWet,Dry_Wet((int)(o->value())));}
     label {Level 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(268);
+ rgui->getMIDIControl(MC_Looper_Level_1);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Level_1,(int)o->value());}
@@ -96,7 +96,7 @@ rkr->efx_Looper->changepar(Looper_Level_1,(int)o->value());}
     label {Level 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(269);
+ rgui->getMIDIControl(MC_Looper_Level_2);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Level_2,(int)o->value());}
@@ -133,7 +133,7 @@ rkr->efx_Looper->changepar(Looper_Tempo,(int)o->value());}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(270);
+ rgui->getMIDIControl(MC_Looper_Reverse);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Reverse,(int)o->value())}
@@ -145,7 +145,7 @@ rkr->efx_Looper->changepar(Looper_Reverse,(int)o->value())}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(271);
+ rgui->getMIDIControl(MC_Looper_AutoPlay);
  return;
 }
 rkr->efx_Looper->changepar(Looper_AutoPlay,(int)o->value())}
@@ -175,7 +175,7 @@ rkr->efx_Looper->changepar(Looper_AutoPlay,(int)o->value())}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(272);
+ rgui->getMIDIControl(MC_Looper_Play);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Play,(int)o->value());
@@ -189,7 +189,7 @@ rgui->update_looper();}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(273);
+ rgui->getMIDIControl(MC_Looper_Stop);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Stop,(int)o->value());
@@ -203,7 +203,7 @@ rgui->update_looper();}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(274);
+ rgui->getMIDIControl(MC_Looper_Record);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Record,(int)o->value());
@@ -223,7 +223,7 @@ rgui->update_looper();}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(275);
+ rgui->getMIDIControl(MC_Looper_Rec_1);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Rec_1,(int)o->value())}
@@ -235,7 +235,7 @@ rkr->efx_Looper->changepar(Looper_Rec_1,(int)o->value())}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(276);
+ rgui->getMIDIControl(MC_Looper_Rec_2);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Rec_2,(int)o->value())}
@@ -247,7 +247,7 @@ rkr->efx_Looper->changepar(Looper_Rec_2,(int)o->value())}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(277);
+ rgui->getMIDIControl(MC_Looper_Track_1);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Track_1,(int)o->value());
@@ -260,7 +260,7 @@ rgui->update_looper();}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(278);
+ rgui->getMIDIControl(MC_Looper_Track_2);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Track_2,(int)o->value());
@@ -280,7 +280,7 @@ rgui->update_looper();}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(279);
+ rgui->getMIDIControl(MC_Looper_Clear);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Clear,(int)o->value());

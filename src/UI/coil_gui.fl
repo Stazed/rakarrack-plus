@@ -64,7 +64,7 @@ coil_mode->value(rkr->efx_CoilCrafter->getpar(Coil_NeckMode));}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(286);
+ rgui->getMIDIControl(MC_Coil_Gain);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Gain,(int)o->value());}
@@ -75,7 +75,7 @@ rkr->efx_CoilCrafter->changepar(Coil_Gain,(int)o->value());}
     label Tone
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(287);
+ rgui->getMIDIControl(MC_Coil_Tone);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Tone,(int)o->value());}
@@ -132,7 +132,7 @@ coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));}
     label {Freq 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(288);
+ rgui->getMIDIControl(MC_Coil_Freq_1);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Freq_1,(int)o->value());}
@@ -143,7 +143,7 @@ rkr->efx_CoilCrafter->changepar(Coil_Freq_1,(int)o->value());}
     label {Q 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(289);
+ rgui->getMIDIControl(MC_Coil_Q_1);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Q_1,(int)o->value());}
@@ -163,7 +163,7 @@ coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));} open
     label {Freq 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(290);
+ rgui->getMIDIControl(MC_Coil_Freq_2);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());}
@@ -174,7 +174,7 @@ rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());}
     label {Q 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(291);
+ rgui->getMIDIControl(MC_Coil_Q_2);
  return;
 }
 rkr->efx_CoilCrafter->changepar(Coil_Q_2,(int)o->value());} selected

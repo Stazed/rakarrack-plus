@@ -45,7 +45,7 @@ Fl_Menu_Item VocoderGui::menu_vo_preset[] = {
 void VocoderGui::cb_vo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(296);
+         rgui->getMIDIControl(MC_Vocoder_DryWet);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_DryWet,Dry_Wet((int)(o->value())));
@@ -57,7 +57,7 @@ void VocoderGui::cb_vo_WD(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(297);
+         rgui->getMIDIControl(MC_Vocoder_Pan);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Pan,(int)(o->value()+64));
@@ -69,7 +69,7 @@ void VocoderGui::cb_vo_pan(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_input_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(298);
+         rgui->getMIDIControl(MC_Vocoder_Input);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Input,(int)o->value());
@@ -81,7 +81,7 @@ void VocoderGui::cb_vo_input(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_mu_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(299);
+         rgui->getMIDIControl(MC_Vocoder_Smear);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Smear,(int)o->value());
@@ -93,7 +93,7 @@ void VocoderGui::cb_vo_mu(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(300);
+         rgui->getMIDIControl(MC_Vocoder_Q);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Q,(int)o->value());
@@ -105,7 +105,7 @@ void VocoderGui::cb_vo_q(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_ring_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(301);
+         rgui->getMIDIControl(MC_Vocoder_Ring);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Ring,(int)o->value());
@@ -117,7 +117,7 @@ void VocoderGui::cb_vo_ring(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(302);
+         rgui->getMIDIControl(MC_Vocoder_Level);
          return;
         }
         rkr->efx_Vocoder->changepar(Vocoder_Level,(int)o->value());

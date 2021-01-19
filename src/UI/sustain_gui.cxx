@@ -38,7 +38,7 @@ Fl_Menu_Item SustainGui::menu_sus_preset[] = {
 void SustainGui::cb_sus_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(312);
+ rgui->getMIDIControl(MC_Sustain_Gain);
  return;
 }
 rkr->efx_Sustainer->changepar(Sustain_Gain,(int)o->value());
@@ -50,7 +50,7 @@ void SustainGui::cb_sus_gain(RKR_Slider* o, void* v) {
 void SustainGui::cb_sus_sus_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(313);
+ rgui->getMIDIControl(MC_Sustain_Sustain);
  return;
 }
 rkr->efx_Sustainer->changepar(Sustain_Sustain,(int)o->value());
