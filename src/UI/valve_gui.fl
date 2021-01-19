@@ -76,7 +76,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(169);
+ rgui->getMIDIControl(MC_Valve_DryWet);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));}
@@ -87,7 +87,7 @@ rkr->efx_Valve->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(170);
+ rgui->getMIDIControl(MC_Valve_LR_Cross);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_LR_Cross,(int)(o->value()));}
@@ -98,7 +98,7 @@ rkr->efx_Valve->changepar(Valve_LR_Cross,(int)(o->value()));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(171);
+ rgui->getMIDIControl(MC_Valve_Pan);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Pan,(int)(o->value()+64));}
@@ -109,7 +109,7 @@ rkr->efx_Valve->changepar(Valve_Pan,(int)(o->value()+64));}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(172);
+ rgui->getMIDIControl(MC_Valve_Level);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Level,(int)o->value());}
@@ -120,7 +120,7 @@ rkr->efx_Valve->changepar(Valve_Level,(int)o->value());}
     label Drive
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(173);
+ rgui->getMIDIControl(MC_Valve_Drive);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Drive,(int)o->value());}
@@ -138,7 +138,7 @@ rkr->efx_Valve->changepar(Valve_Drive,(int)o->value());}
     label {Dist.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(174);
+ rgui->getMIDIControl(MC_Valve_Distortion);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Distortion,(int)o->value());}
@@ -149,7 +149,7 @@ rkr->efx_Valve->changepar(Valve_Distortion,(int)o->value());}
     label Presence
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(175);
+ rgui->getMIDIControl(MC_Valve_Presence);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Presence,(int)o->value());} selected
@@ -181,7 +181,7 @@ rkr->efx_Valve->changepar(Valve_Presence,(int)o->value());} selected
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(176);
+ rgui->getMIDIControl(MC_Valve_LPF);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_LPF,(int)o->value());}
@@ -192,7 +192,7 @@ rkr->efx_Valve->changepar(Valve_LPF,(int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(177);
+ rgui->getMIDIControl(MC_Valve_HPF);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_HPF,(int)o->value());}

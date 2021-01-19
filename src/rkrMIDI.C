@@ -2113,180 +2113,180 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_EQ2->changepar(Parametric_High_Q, value);
         break;
 
-    case 158:
+    case MC_DFlange_DryWet:
         efx_DFlange->changepar(DFlange_DryWet, Dry_Wet(value));
         break;
 
-    case 159:
+    case MC_DFlange_Pan:
         efx_DFlange->changepar(DFlange_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 160:
+    case MC_DFlange_LR_Cross:
         efx_DFlange->changepar(DFlange_LR_Cross, value);
         break;
 
-    case 161:
+    case MC_DFlange_Depth:
         efx_DFlange->changepar(DFlange_Depth, 20 + (int) ((float) value * C_MC_2480_RANGE));
         break;
 
-    case 162:
+    case MC_DFlange_Width:
         efx_DFlange->changepar(DFlange_Width, (int) ((float) value * C_MC_6000_RANGE));
         break;
 
-    case 163:
+    case MC_DFlange_Offset:
         efx_DFlange->changepar(DFlange_Offset, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 164:
+    case MC_DFlange_Feedback:
         efx_DFlange->changepar(DFlange_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 165:
+    case MC_DFlange_LPF:
         /* This is labeled LPF but uses same range as HPF - FIXME check DSP */
         efx_DFlange->changepar(DFlange_LPF, 20 + (int) ((float) value * C_MC_19980_RANGE));
         break;
 
-    case 166:
+    case MC_DFlange_LFO_Tempo:
         efx_DFlange->changepar(DFlange_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 167:
+    case MC_DFlange_LFO_Stereo:
         efx_DFlange->changepar(DFlange_LFO_Stereo, value);
         break;
 
-    case 168:
+    case MC_DFlange_LFO_Random:
         efx_DFlange->changepar(DFlange_LFO_Random, value);
         break;
 
-    case 169:
+    case MC_Valve_DryWet:
         efx_Valve->changepar(Valve_DryWet, Dry_Wet(value));
         break;
 
-    case 170:
+    case MC_Valve_LR_Cross:
         efx_Valve->changepar(Valve_LR_Cross, value);
         break;
 
-    case 171:
+    case MC_Valve_Pan:
         efx_Valve->changepar(Valve_Pan, value);
         break;
 
-    case 172:
+    case MC_Valve_Level:
         efx_Valve->changepar(Valve_Level, value);
         break;
 
-    case 173:
+    case MC_Valve_Drive:
         efx_Valve->changepar(Valve_Drive, value);
         break;
 
-    case 174:
+    case MC_Valve_Distortion:
         efx_Valve->changepar(Valve_Distortion, value);
         break;
 
-    case 175:
+    case MC_Valve_Presence:
         efx_Valve->changepar(Valve_Presence, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 176:
+    case MC_Valve_LPF:
         efx_Valve->changepar(Valve_LPF, ret_LPF(value));
         break;
 
-    case 177:
+    case MC_Valve_HPF:
         efx_Valve->changepar(Valve_HPF, ret_HPF(value));
         break;
 
-    case 178:
+    case MC_Ring_DryWet:
         efx_Ring->changepar(Ring_DryWet, Dry_Wet(value));
         break;
 
-    case 179:
+    case MC_Ring_LR_Cross:
         efx_Ring->changepar(Ring_LR_Cross, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 180:
+    case MC_Ring_Input:
         efx_Ring->changepar(Ring_Input, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
-    case 181:
+    case MC_Ring_Level:
         efx_Ring->changepar(Ring_Level, value);
         break;
 
-    case 182:
+    case MC_Ring_Pan:
         efx_Ring->changepar(Ring_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 183:
+    case MC_Ring_Depth:
         efx_Ring->changepar(Ring_Depth, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 184:
+    case MC_Ring_Freq:
         efx_Ring->changepar(Ring_Freq, 1 + (int) ((float) value * C_MC_19999_RANGE));
         break;
 
-    case 185:
+    case MC_Ring_Sine:
         efx_Ring->changepar(Ring_Sine, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 186:
+    case MC_Ring_Triangle:
         efx_Ring->changepar(Ring_Triangle, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 187:
+    case MC_Ring_Saw:
         efx_Ring->changepar(Ring_Saw, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 188:
+    case MC_Ring_Square:
         efx_Ring->changepar(Ring_Square, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 189:
+    case MC_Exciter_Gain:
         efx_Exciter->changepar(Exciter_Gain, value);
         break;
 
-    case 190:
+    case MC_Exciter_LPF:
         efx_Exciter->changepar(Exciter_LPF, ret_LPF(value));
         break;
 
-    case 191:
+    case MC_Exciter_HPF:
         efx_Exciter->changepar(Exciter_HPF, ret_HPF(value));
         break;
 
-    case 192:
+    case MC_Exciter_Harm_1:
         efx_Exciter->changepar(Exciter_Harm_1, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 193:
+    case MC_Exciter_Harm_2:
         efx_Exciter->changepar(Exciter_Harm_2, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 194:
+    case MC_Exciter_Harm_3:
         efx_Exciter->changepar(Exciter_Harm_3, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 195:
+    case MC_Exciter_Harm_4:
         efx_Exciter->changepar(Exciter_Harm_4, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 196:
+    case MC_Exciter_Harm_5:
         efx_Exciter->changepar(Exciter_Harm_5, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 197:
+    case MC_Exciter_Harm_6:
         efx_Exciter->changepar(Exciter_Harm_6, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 198:
+    case MC_Exciter_Harm_7:
         efx_Exciter->changepar(Exciter_Harm_7, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 199:
+    case MC_Exciter_Harm_8:
         efx_Exciter->changepar(Exciter_Harm_8, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 200:
+    case MC_Exciter_Harm_9:
         efx_Exciter->changepar(Exciter_Harm_9, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 201:
+    case MC_Exciter_Harm_10:
         efx_Exciter->changepar(Exciter_Harm_10, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 

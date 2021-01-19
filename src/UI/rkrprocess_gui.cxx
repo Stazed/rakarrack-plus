@@ -3771,179 +3771,179 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PEQ->eqp_HQ->value(rkr->efx_EQ2->getpar(Parametric_High_Q) - 64);
                 PEQ->eqp_HQ->redraw();
                 break;
-            case 158:
+            case MC_DFlange_DryWet:
                 DFLANGE->dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(DFlange_DryWet)));
                 DFLANGE->dflange_WD->redraw();
                 break;
-            case 159:
+            case MC_DFlange_Pan:
                 DFLANGE->dflange_pan->value(rkr->efx_DFlange->getpar(DFlange_Pan));
                 DFLANGE->dflange_pan->redraw();
                 break;
-            case 160:
+            case MC_DFlange_LR_Cross:
                 DFLANGE->dflange_LR->value(rkr->efx_DFlange->getpar(DFlange_LR_Cross));
                 DFLANGE->dflange_LR->redraw();
                 break;
-            case 161:
+            case MC_DFlange_Depth:
                 DFLANGE->dflange_depth->value(rkr->efx_DFlange->getpar(DFlange_Depth));
                 DFLANGE->dflange_depth->redraw();
                 break;
-            case 162:
+            case MC_DFlange_Width:
                 DFLANGE->dflange_width->value(rkr->efx_DFlange->getpar(DFlange_Width));
                 DFLANGE->dflange_width->redraw();
                 break;
-            case 163:
+            case MC_DFlange_Offset:
                 DFLANGE->dflange_offset->value(rkr->efx_DFlange->getpar(DFlange_Offset));
                 DFLANGE->dflange_offset->redraw();
                 break;
-            case 164:
+            case MC_DFlange_Feedback:
                 DFLANGE->dflange_fb->value(rkr->efx_DFlange->getpar(DFlange_Feedback));
                 DFLANGE->dflange_fb->redraw();
                 break;
-            case 165:
+            case MC_DFlange_LPF:
                 DFLANGE->dflange_lpf->value(rkr->efx_DFlange->getpar(DFlange_LPF));
                 DFLANGE->dflange_lpf->redraw();
                 break;
-            case 166:
+            case MC_DFlange_LFO_Tempo:
                 DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
                 DFLANGE->dflange_freq->redraw();
                 break;
-            case 167:
+            case MC_DFlange_LFO_Stereo:
                 DFLANGE->dflange_stdf->value(rkr->efx_DFlange->getpar(DFlange_LFO_Stereo));
                 DFLANGE->dflange_stdf->redraw();
                 break;
-            case 168:
+            case MC_DFlange_LFO_Random:
                 DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Random));
                 DFLANGE->dflange_rnd->redraw();
                 break;
-            case 169:
+            case MC_Valve_DryWet:
                 VALVE->valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(Valve_DryWet)));
                 VALVE->valve_WD->redraw();
                 break;
-            case 170:
+            case MC_Valve_LR_Cross:
                 VALVE->valve_LRc->value(rkr->efx_Valve->getpar(Valve_LR_Cross));
                 VALVE->valve_LRc->redraw();
                 break;
-            case 171:
+            case MC_Valve_Pan:
                 VALVE->valve_pan->value(rkr->efx_Valve->getpar(Valve_Pan) - 64);
                 VALVE->valve_pan->redraw();
                 break;
-            case 172:
+            case MC_Valve_Level:
                 VALVE->valve_level->value(rkr->efx_Valve->getpar(Valve_Level));
                 VALVE->valve_level->redraw();
                 break;
-            case 173:
+            case MC_Valve_Drive:
                 VALVE->valve_drive->value(rkr->efx_Valve->getpar(Valve_Drive));
                 VALVE->valve_drive->redraw();
                 break;
-            case 174:
+            case MC_Valve_Distortion:
                 VALVE->valve_Q->value(rkr->efx_Valve->getpar(Valve_Distortion));
                 VALVE->valve_Q->redraw();
                 break;
-            case 175:
+            case MC_Valve_Presence:
                 VALVE->valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));
                 VALVE->valve_Pre->redraw();
                 break;
-            case 176:
+            case MC_Valve_LPF:
                 VALVE->valve_lpf->value(rkr->efx_Valve->getpar(Valve_LPF));
                 VALVE->valve_lpf->redraw();
                 break;
-            case 177:
+            case MC_Valve_HPF:
                 VALVE->valve_hpf->value(rkr->efx_Valve->getpar(Valve_HPF));
                 VALVE->valve_hpf->redraw();
                 break;
-            case 178:
+            case MC_Ring_DryWet:
                 RING->ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(Ring_DryWet)));
                 RING->ring_WD->redraw();
                 break;
-            case 179:
+            case MC_Ring_LR_Cross:
                 RING->ring_LRc->value(rkr->efx_Ring->getpar(Ring_LR_Cross));
                 RING->ring_LRc->redraw();
                 break;
-            case 180:
+            case MC_Ring_Input:
                 RING->ring_input->value(rkr->efx_Ring->getpar(Ring_Input));
                 RING->ring_input->redraw();
                 break;
-            case 181:
+            case MC_Ring_Level:
                 RING->ring_level->value(rkr->efx_Ring->getpar(Ring_Level));
                 RING->ring_level->redraw();
                 break;
-            case 182:
+            case MC_Ring_Pan:
                 RING->ring_pan->value(rkr->efx_Ring->getpar(Ring_Pan));
                 RING->ring_pan->redraw();
                 break;
-            case 183:
+            case MC_Ring_Depth:
                 RING->ring_depth->value(rkr->efx_Ring->getpar(Ring_Depth));
                 RING->ring_depth->redraw();
                 break;
-            case 184:
+            case MC_Ring_Freq:
                 RING->ring_freq->value(rkr->efx_Ring->getpar(Ring_Freq));
                 RING->ring_freq->redraw();
                 break;
-            case 185:
+            case MC_Ring_Sine:
                 RING->ring_sin->value(rkr->efx_Ring->getpar(Ring_Sine));
                 RING->ring_sin->redraw();
                 break;
-            case 186:
+            case MC_Ring_Triangle:
                 RING->ring_tri->value(rkr->efx_Ring->getpar(Ring_Triangle));
                 RING->ring_tri->redraw();
                 break;
-            case 187:
+            case MC_Ring_Saw:
                 RING->ring_saw->value(rkr->efx_Ring->getpar(Ring_Saw));
                 RING->ring_saw->redraw();
                 break;
-            case 188:
+            case MC_Ring_Square:
                 RING->ring_squ->value(rkr->efx_Ring->getpar(Ring_Square));
                 RING->ring_squ->redraw();
                 break;
-            case 189:
+            case MC_Exciter_Gain:
                 EXCITER->ex_Gain->value(rkr->efx_Exciter->getpar(Exciter_Gain));
                 EXCITER->ex_Gain->redraw();
                 break;
-            case 190:
+            case MC_Exciter_LPF:
                 EXCITER->ex_lfreq->value(rkr->efx_Exciter->getpar(Exciter_LPF));
                 EXCITER->ex_lfreq->redraw();
                 break;
-            case 191:
+            case MC_Exciter_HPF:
                 EXCITER->ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));
                 EXCITER->ex_hfreq->redraw();
                 break;
-            case 192:
+            case MC_Exciter_Harm_1:
                 EXCITER->ex_1->value(rkr->efx_Exciter->getpar(Exciter_Harm_1));
                 EXCITER->ex_1->redraw();
                 break;
-            case 193:
+            case MC_Exciter_Harm_2:
                 EXCITER->ex_2->value(rkr->efx_Exciter->getpar(Exciter_Harm_2));
                 EXCITER->ex_2->redraw();
                 break;
-            case 194:
+            case MC_Exciter_Harm_3:
                 EXCITER->ex_3->value(rkr->efx_Exciter->getpar(Exciter_Harm_3));
                 EXCITER->ex_3->redraw();
                 break;
-            case 195:
+            case MC_Exciter_Harm_4:
                 EXCITER->ex_4->value(rkr->efx_Exciter->getpar(Exciter_Harm_4));
                 EXCITER->ex_4->redraw();
                 break;
-            case 196:
+            case MC_Exciter_Harm_5:
                 EXCITER->ex_5->value(rkr->efx_Exciter->getpar(Exciter_Harm_5));
                 EXCITER->ex_5->redraw();
                 break;
-            case 197:
+            case MC_Exciter_Harm_6:
                 EXCITER->ex_6->value(rkr->efx_Exciter->getpar(Exciter_Harm_6));
                 EXCITER->ex_6->redraw();
                 break;
-            case 198:
+            case MC_Exciter_Harm_7:
                 EXCITER->ex_7->value(rkr->efx_Exciter->getpar(Exciter_Harm_7));
                 EXCITER->ex_7->redraw();
                 break;
-            case 199:
+            case MC_Exciter_Harm_8:
                 EXCITER->ex_8->value(rkr->efx_Exciter->getpar(Exciter_Harm_8));
                 EXCITER->ex_8->redraw();
                 break;
-            case 200:
+            case MC_Exciter_Harm_9:
                 EXCITER->ex_9->value(rkr->efx_Exciter->getpar(Exciter_Harm_9));
                 EXCITER->ex_9->redraw();
                 break;
-            case 201:
+            case MC_Exciter_Harm_10:
                 EXCITER->ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
                 EXCITER->ex_10->redraw();
                 break;

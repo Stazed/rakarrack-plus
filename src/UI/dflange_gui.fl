@@ -95,7 +95,7 @@ dflange_intense->value(rkr->efx_DFlange->getpar(DFlange_Intense));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(158);
+ rgui->getMIDIControl(MC_DFlange_DryWet);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_DryWet,Dry_Wet((int)(o->value())));}
@@ -106,7 +106,7 @@ rkr->efx_DFlange->changepar(DFlange_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(159);
+ rgui->getMIDIControl(MC_DFlange_Pan);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Pan,(int)o->value());}
@@ -117,7 +117,7 @@ rkr->efx_DFlange->changepar(DFlange_Pan,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(160);
+ rgui->getMIDIControl(MC_DFlange_LR_Cross);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LR_Cross,(int)o->value());}
@@ -128,7 +128,7 @@ rkr->efx_DFlange->changepar(DFlange_LR_Cross,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(161);
+ rgui->getMIDIControl(MC_DFlange_Depth);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Depth,(int)o->value());}
@@ -139,7 +139,7 @@ rkr->efx_DFlange->changepar(DFlange_Depth,(int)o->value());}
     label Width
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(162);
+ rgui->getMIDIControl(MC_DFlange_Width);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Width,(int)o->value());} selected
@@ -150,7 +150,7 @@ rkr->efx_DFlange->changepar(DFlange_Width,(int)o->value());} selected
     label Offset
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(163);
+ rgui->getMIDIControl(MC_DFlange_Offset);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Offset,(int)o->value());}
@@ -161,7 +161,7 @@ rkr->efx_DFlange->changepar(DFlange_Offset,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(164);
+ rgui->getMIDIControl(MC_DFlange_Feedback);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Feedback,(int)o->value());}
@@ -172,7 +172,7 @@ rkr->efx_DFlange->changepar(DFlange_Feedback,(int)o->value());}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(165);
+ rgui->getMIDIControl(MC_DFlange_LPF);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LPF,(int)o->value());}
@@ -204,7 +204,7 @@ rkr->efx_DFlange->changepar(DFlange_LPF,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(166);
+ rgui->getMIDIControl(MC_DFlange_LFO_Tempo);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LFO_Tempo,(int)o->value());}
@@ -215,7 +215,7 @@ rkr->efx_DFlange->changepar(DFlange_LFO_Tempo,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(167);
+ rgui->getMIDIControl(MC_DFlange_LFO_Stereo);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LFO_Stereo,(int)o->value());}
@@ -239,7 +239,7 @@ rkr->efx_DFlange->changepar(DFlange_LFO_Type,(int)o->value());} open
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(168);
+ rgui->getMIDIControl(MC_DFlange_LFO_Random);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LFO_Random,(int)o->value());}

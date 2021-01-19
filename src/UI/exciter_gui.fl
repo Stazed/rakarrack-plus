@@ -77,7 +77,7 @@ ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));} selected
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(189);
+ rgui->getMIDIControl(MC_Exciter_Gain);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Gain,(int)o->value());}
@@ -88,7 +88,7 @@ rkr->efx_Exciter->changepar(Exciter_Gain,(int)o->value());}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(190);
+ rgui->getMIDIControl(MC_Exciter_LPF);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_LPF,(int)o->value());}
@@ -99,7 +99,7 @@ rkr->efx_Exciter->changepar(Exciter_LPF,(int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(191);
+ rgui->getMIDIControl(MC_Exciter_HPF);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_HPF,(int)o->value());}
@@ -110,7 +110,7 @@ rkr->efx_Exciter->changepar(Exciter_HPF,(int)o->value());}
     label {Har 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(192);
+ rgui->getMIDIControl(MC_Exciter_Harm_1);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_1,(int)o->value());}
@@ -121,7 +121,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_1,(int)o->value());}
     label {Har 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(193);
+ rgui->getMIDIControl(MC_Exciter_Harm_2);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_2,(int)o->value());}
@@ -132,7 +132,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_2,(int)o->value());}
     label {Har 3}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(194);
+ rgui->getMIDIControl(MC_Exciter_Harm_3);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_3,(int)o->value());}
@@ -143,7 +143,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_3,(int)o->value());}
     label {Har 4}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(195);
+ rgui->getMIDIControl(MC_Exciter_Harm_4);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_4,(int)o->value());}
@@ -154,7 +154,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_4,(int)o->value());}
     label {Har 5}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(196);
+ rgui->getMIDIControl(MC_Exciter_Harm_5);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_5,(int)o->value());}
@@ -165,7 +165,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_5,(int)o->value());}
     label {Har 6}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(197);
+ rgui->getMIDIControl(MC_Exciter_Harm_6);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_6,(int)o->value());}
@@ -176,7 +176,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_6,(int)o->value());}
     label {Har 7}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(198);
+ rgui->getMIDIControl(MC_Exciter_Harm_7);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_7,(int)o->value());}
@@ -187,7 +187,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_7,(int)o->value());}
     label {Har 8}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(199);
+ rgui->getMIDIControl(MC_Exciter_Harm_8);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_8,(int)o->value());}
@@ -198,7 +198,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_8,(int)o->value());}
     label {Har 9}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(200);
+ rgui->getMIDIControl(MC_Exciter_Harm_9);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_9,(int)o->value());}
@@ -209,7 +209,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_9,(int)o->value());}
     label {Har 10}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(201);
+ rgui->getMIDIControl(MC_Exciter_Harm_10);
  return;
 } 
 rkr->efx_Exciter->changepar(Exciter_Harm_10,(int)o->value());}

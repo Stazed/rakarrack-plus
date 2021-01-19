@@ -50,7 +50,7 @@ Fl_Menu_Item ValveGui::menu_valve_preset[] = {
 void ValveGui::cb_valve_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(169);
+ rgui->getMIDIControl(MC_Valve_DryWet);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));
@@ -62,7 +62,7 @@ void ValveGui::cb_valve_WD(RKR_Slider* o, void* v) {
 void ValveGui::cb_valve_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(170);
+ rgui->getMIDIControl(MC_Valve_LR_Cross);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_LR_Cross,(int)(o->value()));
@@ -74,7 +74,7 @@ void ValveGui::cb_valve_LRc(RKR_Slider* o, void* v) {
 void ValveGui::cb_valve_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(171);
+ rgui->getMIDIControl(MC_Valve_Pan);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Pan,(int)(o->value()+64));
@@ -86,7 +86,7 @@ void ValveGui::cb_valve_pan(RKR_Slider* o, void* v) {
 void ValveGui::cb_valve_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(172);
+ rgui->getMIDIControl(MC_Valve_Level);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Level,(int)o->value());
@@ -98,7 +98,7 @@ void ValveGui::cb_valve_level(RKR_Slider* o, void* v) {
 void ValveGui::cb_valve_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(173);
+ rgui->getMIDIControl(MC_Valve_Drive);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Drive,(int)o->value());
@@ -117,7 +117,7 @@ void ValveGui::cb_valve_ed(RKR_Check_Button* o, void* v) {
 void ValveGui::cb_valve_Q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(174);
+ rgui->getMIDIControl(MC_Valve_Distortion);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Distortion,(int)o->value());
@@ -129,7 +129,7 @@ void ValveGui::cb_valve_Q(RKR_Slider* o, void* v) {
 void ValveGui::cb_valve_Pre_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(175);
+ rgui->getMIDIControl(MC_Valve_Presence);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_Presence,(int)o->value());
@@ -162,7 +162,7 @@ void ValveGui::cb_valve_neg(RKR_Check_Button* o, void* v) {
 void ValveGui::cb_valve_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(176);
+ rgui->getMIDIControl(MC_Valve_LPF);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_LPF,(int)o->value());
@@ -174,7 +174,7 @@ void ValveGui::cb_valve_lpf(RKR_Slider* o, void* v) {
 void ValveGui::cb_valve_hpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(177);
+ rgui->getMIDIControl(MC_Valve_HPF);
  return;
 } 
 rkr->efx_Valve->changepar(Valve_HPF,(int)o->value());

@@ -84,7 +84,7 @@ ring_afreq->value(rkr->efx_Ring->getpar(Ring_Auto_Freq));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(178);
+ rgui->getMIDIControl(MC_Ring_DryWet);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_DryWet,Dry_Wet((int)o->value()));}
@@ -95,7 +95,7 @@ rkr->efx_Ring->changepar(Ring_DryWet,Dry_Wet((int)o->value()));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(179);
+ rgui->getMIDIControl(MC_Ring_LR_Cross);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_LR_Cross,(int)o->value());}
@@ -106,7 +106,7 @@ rkr->efx_Ring->changepar(Ring_LR_Cross,(int)o->value());}
     label Input
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(180);
+ rgui->getMIDIControl(MC_Ring_Input);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Input,(int)o->value());}
@@ -117,7 +117,7 @@ rkr->efx_Ring->changepar(Ring_Input,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(181);
+ rgui->getMIDIControl(MC_Ring_Level);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Level,(int)o->value());}
@@ -128,7 +128,7 @@ rkr->efx_Ring->changepar(Ring_Level,(int)o->value());}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(182);
+ rgui->getMIDIControl(MC_Ring_Pan);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Pan,(int)o->value());}
@@ -153,7 +153,7 @@ rkr->efx_Ring->changepar(Ring_Pan,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(183);
+ rgui->getMIDIControl(MC_Ring_Depth);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Depth,(int)o->value());}
@@ -164,7 +164,7 @@ rkr->efx_Ring->changepar(Ring_Depth,(int)o->value());}
     label Freq
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(184);
+ rgui->getMIDIControl(MC_Ring_Freq);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Freq,(int)o->value());}
@@ -175,7 +175,7 @@ rkr->efx_Ring->changepar(Ring_Freq,(int)o->value());}
     label Sine
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(185);
+ rgui->getMIDIControl(MC_Ring_Sine);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Sine,(int)o->value());}
@@ -186,7 +186,7 @@ rkr->efx_Ring->changepar(Ring_Sine,(int)o->value());}
     label Triangle
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(186);
+ rgui->getMIDIControl(MC_Ring_Triangle);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Triangle,(int)o->value());}
@@ -197,7 +197,7 @@ rkr->efx_Ring->changepar(Ring_Triangle,(int)o->value());}
     label Sawtooth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(187);
+ rgui->getMIDIControl(MC_Ring_Saw);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Saw,(int)o->value());}
@@ -208,7 +208,7 @@ rkr->efx_Ring->changepar(Ring_Saw,(int)o->value());}
     label Square
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(188);
+ rgui->getMIDIControl(MC_Ring_Square);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Square,(int)o->value());}

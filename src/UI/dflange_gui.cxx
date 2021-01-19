@@ -56,7 +56,7 @@ Fl_Menu_Item DflangeGui::menu_dflange_preset[] = {
 void DflangeGui::cb_dflange_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(158);
+ rgui->getMIDIControl(MC_DFlange_DryWet);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_DryWet,Dry_Wet((int)(o->value())));
@@ -68,7 +68,7 @@ void DflangeGui::cb_dflange_WD(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(159);
+ rgui->getMIDIControl(MC_DFlange_Pan);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Pan,(int)o->value());
@@ -80,7 +80,7 @@ void DflangeGui::cb_dflange_pan(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(160);
+ rgui->getMIDIControl(MC_DFlange_LR_Cross);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LR_Cross,(int)o->value());
@@ -92,7 +92,7 @@ void DflangeGui::cb_dflange_LR(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_depth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(161);
+ rgui->getMIDIControl(MC_DFlange_Depth);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Depth,(int)o->value());
@@ -104,7 +104,7 @@ void DflangeGui::cb_dflange_depth(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_width_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(162);
+ rgui->getMIDIControl(MC_DFlange_Width);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Width,(int)o->value());
@@ -116,7 +116,7 @@ void DflangeGui::cb_dflange_width(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_offset_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(163);
+ rgui->getMIDIControl(MC_DFlange_Offset);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Offset,(int)o->value());
@@ -128,7 +128,7 @@ void DflangeGui::cb_dflange_offset(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(164);
+ rgui->getMIDIControl(MC_DFlange_Feedback);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_Feedback,(int)o->value());
@@ -140,7 +140,7 @@ void DflangeGui::cb_dflange_fb(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(165);
+ rgui->getMIDIControl(MC_DFlange_LPF);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LPF,(int)o->value());
@@ -173,7 +173,7 @@ void DflangeGui::cb_dflange_intense(RKR_Check_Button* o, void* v) {
 void DflangeGui::cb_dflange_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(166);
+ rgui->getMIDIControl(MC_DFlange_LFO_Tempo);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LFO_Tempo,(int)o->value());
@@ -185,7 +185,7 @@ void DflangeGui::cb_dflange_freq(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(167);
+ rgui->getMIDIControl(MC_DFlange_LFO_Stereo);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LFO_Stereo,(int)o->value());
@@ -210,7 +210,7 @@ void DflangeGui::cb_dflange_lfotype(RKR_Choice* o, void* v) {
 void DflangeGui::cb_dflange_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(168);
+ rgui->getMIDIControl(MC_DFlange_LFO_Random);
  return;
 } 
 rkr->efx_DFlange->changepar(DFlange_LFO_Random,(int)o->value());

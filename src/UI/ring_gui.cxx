@@ -52,7 +52,7 @@ Fl_Menu_Item RingGui::menu_ring_preset[] = {
 void RingGui::cb_ring_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(178);
+ rgui->getMIDIControl(MC_Ring_DryWet);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_DryWet,Dry_Wet((int)o->value()));
@@ -64,7 +64,7 @@ void RingGui::cb_ring_WD(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(179);
+ rgui->getMIDIControl(MC_Ring_LR_Cross);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_LR_Cross,(int)o->value());
@@ -76,7 +76,7 @@ void RingGui::cb_ring_LRc(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_input_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(180);
+ rgui->getMIDIControl(MC_Ring_Input);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Input,(int)o->value());
@@ -88,7 +88,7 @@ void RingGui::cb_ring_input(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(181);
+ rgui->getMIDIControl(MC_Ring_Level);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Level,(int)o->value());
@@ -100,7 +100,7 @@ void RingGui::cb_ring_level(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(182);
+ rgui->getMIDIControl(MC_Ring_Pan);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Pan,(int)o->value());
@@ -126,7 +126,7 @@ void RingGui::cb_ring_afreq(RKR_Check_Button* o, void* v) {
 void RingGui::cb_ring_depth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(183);
+ rgui->getMIDIControl(MC_Ring_Depth);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Depth,(int)o->value());
@@ -138,7 +138,7 @@ void RingGui::cb_ring_depth(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(184);
+ rgui->getMIDIControl(MC_Ring_Freq);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Freq,(int)o->value());
@@ -150,7 +150,7 @@ void RingGui::cb_ring_freq(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_sin_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(185);
+ rgui->getMIDIControl(MC_Ring_Sine);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Sine,(int)o->value());
@@ -162,7 +162,7 @@ void RingGui::cb_ring_sin(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_tri_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(186);
+ rgui->getMIDIControl(MC_Ring_Triangle);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Triangle,(int)o->value());
@@ -174,7 +174,7 @@ void RingGui::cb_ring_tri(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_saw_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(187);
+ rgui->getMIDIControl(MC_Ring_Saw);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Saw,(int)o->value());
@@ -186,7 +186,7 @@ void RingGui::cb_ring_saw(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_squ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(188);
+ rgui->getMIDIControl(MC_Ring_Square);
  return;
 } 
 rkr->efx_Ring->changepar(Ring_Square,(int)o->value());
