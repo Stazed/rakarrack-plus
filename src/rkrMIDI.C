@@ -1538,94 +1538,95 @@ RKR::process_midi_controller_events(int parameter, int value)
         
 // Start MIDI Implementation Chart range
 
-    case 1:
+    case MC_WahWah_Depth:
         efx_WahWah->changepar(WahWah_Depth, value);
         break;
-    case 2:
+
+    case MC_Dere_Drive:
         efx_Derelict->changepar(Dere_Drive, value);
         break;
 
-    case 3:
+    case MC_Dere_Level:
         efx_Derelict->changepar(Dere_Level, value);
         break;
 
-    case 4:
+    case MC_Dere_LPF:
         efx_Derelict->changepar(Dere_LPF, ret_LPF(value));
         break;
 
-    case 5:
+    case MC_Dere_HPF:
         efx_Derelict->changepar(Dere_HPF, ret_HPF(value));
         break;
 
-    case 6:
+    case MC_Dere_Color:
         efx_Derelict->changepar(Dere_Color, value);
         break;
 
-    case 7:
+    case MC_Output_Volume:
         Master_Volume = (float) value / 127.0f;
         calculavol(2);
         break;
 
-    case 8:
+    case MC_Dere_Suboctave:
         efx_Derelict->changepar(Dere_Suboctave, value);
         break;
 
-    case 9:
+    case MC_Dist_Suboctave:
         efx_Distorsion->changepar(Dist_Suboctave, value);
         break;
 
-    case 10:    // Unused
-    case 11:    // Unused
+    case MC_Unused_10:
+    case MC_Unused_11:
         break;
 
-    case 12:
+    case MC_Balance_FX:
         Fraction_Bypass = (float) value / 127.0f;
         break;
 
-    case 13:    // Unused
+    case MC_Unused_13:
         break;
 
-    case 14:
+    case MC_Input_Volume:
         Input_Gain = (float) value / 127.0f;
         calculavol(1);
         break;
 
-    case 15:    // Unused
-    case 16:    // Unused
-    case 17:    // Unused
-    case 18:    // Unused
-    case 19:    // Unused
+    case MC_Unused_15:
+    case MC_Unused_16:
+    case MC_Unused_17:
+    case MC_Unused_18:
+    case MC_Unused_19:
         break;
                         
-    case 20:
+    case MC_Alien_Depth:
         efx_Alienwah->changepar(Alien_Depth, value);
         break;
 
-    case 21:
+    case MC_Phaser_Depth:
         efx_Phaser->changepar(Phaser_Depth, value);
         break;
 
-    case 22:
+    case MC_Flanger_Depth:
         efx_Flanger->changepar(Flanger_Depth, value);
         break;
 
-    case 23:
+    case MC_Chorus_Depth:
         efx_Chorus->changepar(Chorus_Depth, value);
         break;
 
-    case 24:
+    case MC_Music_Gain_1:
         efx_MusDelay->changepar(Music_Gain_1, value);
         break;
 
-    case 25:
+    case MC_Music_Gain_2:
         efx_MusDelay->changepar(Music_Gain_2, value);
         break;
 
-    case 26:
+    case MC_Harm_Filter_Freq:
         efx_Har->changepar(Harm_Filter_Freq, ret_LPF(value));
         break;
 
-    case 27:
+    case MC_Harm_Interval:
         if (Harmonizer_Bypass)
         {
             Harmonizer_Bypass = 0;
@@ -1634,361 +1635,362 @@ RKR::process_midi_controller_events(int parameter, int value)
         }
         break;
 
-    case 28:
+    case MC_WahWah_DryWet:
         efx_WahWah->changepar(WahWah_DryWet, Dry_Wet(value));
         break;
 
-    case 29:
+    case MC_Overdrive_DryWet:
         efx_Overdrive->changepar(Overdrive_DryWet, Dry_Wet(value));
         break;
 
-    case 30:
+    case MC_Dist_DryWet:
         efx_Distorsion->changepar(Dist_DryWet, Dry_Wet(value));
         break;
 
-    case 31:
+    case MC_Harm_DryWet:
         efx_Har->changepar(Harm_DryWet, Dry_Wet(value));
         break;
 
-    case 32:    // Unused
-    case 33:    // Unused
-    case 34:    // Unused
-    case 35:    // Unused
-    case 36:    // Unused
-    case 37:    // Unused
-    case 38:    // Unused
-    case 39:    // Unused
-    case 40:    // Unused
-    case 41:    // Unused
-    case 42:    // Unused
-    case 43:    // Unused
-    case 44:    // Unused
-    case 45:    // Unused
+    case MC_Unused_32:
+    case MC_Unused_33:
+    case MC_Unused_34:
+    case MC_Unused_35:
+    case MC_Unused_36:
+    case MC_Unused_37:
+    case MC_Unused_38:
+    case MC_Unused_39:
+    case MC_Unused_40:
+    case MC_Unused_41:
+    case MC_Unused_42:
+    case MC_Unused_43:
+    case MC_Unused_44:
+    case MC_Unused_45:
         break;
 
-    case 46:
+    case MC_Echo_Pan:
         efx_Echo->changepar(Echo_Pan, value);
         break;
 
-    case 47:
+    case MC_Overdrive_Pan:
         efx_Overdrive->changepar(Overdrive_Pan, value);
         break;
 
-    case 48:
+    case MC_Dist_Pan:
         efx_Distorsion->changepar(Dist_Pan, value);
         break;
 
-    case 49:
+    case MC_Harm_Pan:
         efx_Har->changepar(Harm_Pan, value);
         break;
 
-    case 50:
+    case MC_Chorus_Pan:
         efx_Chorus->changepar(Chorus_Pan, value);
         break;
 
-    case 51:
+    case MC_Flanger_Pan:
         efx_Flanger->changepar(Flanger_Pan, value);
         break;
-    case 52:
+
+    case MC_Chorus_DryWet:
         efx_Chorus->changepar(Chorus_DryWet, Dry_Wet(value));
         break;
 
-    case 53:
+    case MC_Flanger_DryWet:
         efx_Flanger->changepar(Flanger_DryWet, Dry_Wet(value));
         break;
 
-    case 54:
+    case MC_Phaser_DryWet:
         efx_Phaser->changepar(Phaser_DryWet, Dry_Wet(value));
         break;
 
-    case 55:
+    case MC_Alien_DryWet:
         efx_Alienwah->changepar(Alien_DryWet, Dry_Wet(value));
         break;
 
-    case 56:
+    case MC_Music_DryWet:
         efx_MusDelay->changepar(Music_DryWet, Dry_Wet(value));
         break;
 
-    case 57:
+    case MC_Reverb_DryWet:
         efx_Rev->changepar(Reverb_DryWet, Dry_Wet(value));
         break;
 
-    case 58:
+    case MC_Pan_DryWet:
         efx_Pan->changepar(Pan_DryWet, Dry_Wet(value));
         break;
 
-    case 59:
+    case MC_Echo_DryWet:
         efx_Echo->changepar(Echo_DryWet, Dry_Wet(value));
         break;
 
-    case 60:
+    case MC_Phaser_Pan:
         efx_Phaser->changepar(Phaser_Pan, value);
         break;
 
-    case 61:
+    case MC_Alien_Pan:
         efx_Alienwah->changepar(Alien_Pan, value);
         break;
 
-    case 62:
+    case MC_Music_Pan_1:
         efx_MusDelay->changepar(Music_Pan_1, value);
         break;
 
-    case 63:
+    case MC_Reverb_Pan:
         efx_Rev->changepar(Reverb_Pan, value);
         break;
 
-    case 64:    // Unused
+    case MC_Unused_64:
         break;
 
-    case 65:
+    case MC_Music_Pan_2:
         efx_MusDelay->changepar(Music_Pan_2, value);
         break;
 
-    case 66:
+    case MC_WahWah_Pan:
         efx_WahWah->changepar(WahWah_Pan, value);
         break;
 
-    case 67:
+    case MC_Pan_Pan:
         efx_Pan->changepar(Pan_Pan, value);
         break;
 
-    case 68:
+    case MC_Overdrive_Drive:
         efx_Overdrive->changepar(Overdrive_Drive, value);
         break;
 
-    case 69:
+    case MC_Dist_Drive:
         efx_Distorsion->changepar(Dist_Drive, value);
         break;
 
-    case 70:
+    case MC_Overdrive_Level:
         efx_Overdrive->changepar(Overdrive_Level, value);
         break;
 
-    case 71:
+    case MC_Dist_Level:
         efx_Distorsion->changepar(Dist_Level, value);
         break;
 
-    case 72:
+    case MC_Chorus_LFO_Tempo:
         efx_Chorus->changepar(Chorus_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 73:
+    case MC_Flanger_LFO_Tempo:
         efx_Flanger->changepar(Flanger_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 74:
+    case MC_Phaser_LFO_Tempo:
         efx_Phaser->changepar(Phaser_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 75:
+    case MC_WahWah_LFO_Tempo:
         efx_WahWah->changepar(WahWah_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 76:
+    case MC_Alien_LFO_Tempo:
         efx_Alienwah->changepar(Alien_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 77:
+    case MC_Pan_LFO_Tempo:
         efx_Pan->changepar(Pan_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 78:
+    case MC_Echo_Feedback:
         efx_Echo->changepar(Echo_Feedback, value);
         break;
 
-    case 79:
+    case MC_Chorus_Feedback:
         efx_Chorus->changepar(Chorus_Feedback, value);
         break;
 
-    case 80:
+    case MC_Flanger_Feedback:
         efx_Flanger->changepar(Flanger_Feedback, value);
         break;
 
-    case 81:
+    case MC_Phaser_Feedback:
         efx_Phaser->changepar(Phaser_Feedback, value);
         break;
 
-    case 82:
+    case MC_Alien_Feedback:
         efx_Alienwah->changepar(Alien_Feedback, value);
         break;
 
-    case 83:
+    case MC_Music_Feedback_1:
         efx_MusDelay->changepar(Music_Feedback_1, value);
         break;
 
-    case 84:
+    case MC_Music_Feedback_2:
         efx_MusDelay->changepar(Music_Feedback_2, value);
         break;
 
-    case 85:
+    case MC_Overdrive_LPF:
         efx_Overdrive->changepar(Overdrive_LPF, ret_LPF(value));
         break;
 
-    case 86:
+    case MC_Dist_LPF:
         efx_Distorsion->changepar(Dist_LPF, ret_LPF(value));
         break;
 
-    case 87:
+    case MC_Reverb_LPF:
         efx_Rev->changepar(Reverb_LPF, ret_LPF(value));
         break;
 
-    case 88:
+    case MC_Overdrive_HPF:
         efx_Overdrive->changepar(Overdrive_HPF, ret_HPF(value));
         break;
 
-    case 89:
+    case MC_Dist_HPF:
         efx_Distorsion->changepar(Dist_HPF, ret_HPF(value));
         break;
 
-    case 90:
+    case MC_Reverb_HPF:
         efx_Rev->changepar(Reverb_HPF, ret_HPF(value));
         break;
 
-    case 91:
+    case MC_Chorus_LR_Cross:
         efx_Chorus->changepar(Chorus_LR_Cross, value);
         break;
 
-    case 92:
+    case MC_Flanger_LR_Cross:
         efx_Flanger->changepar(Flanger_LR_Cross, value);
         break;
 
-    case 93:
+    case MC_Phaser_LR_Cross:
         efx_Phaser->changepar(Phaser_LR_Cross, value);
         break;
 
-    case 94:
+    case MC_Overdrive_LR_Cross:
         efx_Overdrive->changepar(Overdrive_LR_Cross, value);
         break;
 
-    case 95:
+    case MC_Dist_LR_Cross:
         efx_Distorsion->changepar(Dist_LR_Cross, value);
         break;
 
-    case 96:
+    case MC_Alien_LR_Cross:
         efx_Alienwah->changepar(Alien_LR_Cross, value);
         break;
 
-    case 97:
+    case MC_Echo_LR_Cross:
         efx_Echo->changepar(Echo_LR_Cross, value);
         break;
 
-    case 98:
+    case MC_Music_LR_Cross:
         efx_MusDelay->changepar(Music_LR_Cross, value);
         break;
 
-    case 99:
+    case MC_Chorus_LFO_Stereo:
         efx_Chorus->changepar(Chorus_LFO_Stereo, value);
         break;
 
-    case 100:
+    case MC_Flanger_LFO_Stereo:
         efx_Flanger->changepar(Flanger_LFO_Stereo, value);
         break;
 
-    case 101:
+    case MC_Phaser_LFO_Stereo:
         efx_Phaser->changepar(Phaser_LFO_Stereo, value);
         break;
 
-    case 102:
+    case MC_WahWah_LFO_Stereo:
         efx_WahWah->changepar(WahWah_LFO_Stereo, value);
         break;
 
-    case 103:
+    case MC_Alien_LFO_Stereo:
         efx_Alienwah->changepar(Alien_LFO_Stereo, value);
         break;
 
-    case 104:
+    case MC_Pan_LFO_Stereo:
         efx_Pan->changepar(Pan_LFO_Stereo, value);
         break;
 
-    case 105:
+    case MC_Chorus_LFO_Random:
         efx_Chorus->changepar(Chorus_LFO_Random, value);
         break;
 
-    case 106:
+    case MC_Flanger_LFO_Random:
         efx_Flanger->changepar(Flanger_LFO_Random, value);
         break;
 
-    case 107:
+    case MC_Phaser_LFO_Random:
         efx_Phaser->changepar(Phaser_LFO_Random, value);
         break;
 
-    case 108:
+    case MC_WahWah_LFO_Random:
         efx_WahWah->changepar(WahWah_LFO_Random, value);
         break;
 
-    case 109:
+    case MC_Alien_LFO_Random:
         efx_Alienwah->changepar(Alien_LFO_Random, value);
         break;
 
-    case 110:
+    case MC_Pan_LFO_Random:
         efx_Pan->changepar(Pan_LFO_Random, value);
         break;
 
-    case 111:
+    case MC_WahWah_Sense:
         efx_WahWah->changepar(WahWah_Sense, value);
         break;
 
-    case 112:
+    case MC_WahWah_ASI:
         efx_WahWah->changepar(WahWah_ASI, value);
         break;
 
-    case 113:
+    case MC_WahWah_Smooth:
         efx_WahWah->changepar(WahWah_Smooth, value);
         break;
 
-    case 114:
+    case MC_Phaser_Phase:
         efx_Phaser->changepar(Phaser_Phase, value);
         break;
 
-    case 115:
+    case MC_Alien_Phase:
         efx_Alienwah->changepar(Alien_Phase, value);
         break;
 
-    case 116:
+    case MC_Multi_On_Off:
         ActiveUn(value);
         break;
 
-    case 117:
+    case MC_APhase_DryWet:
         efx_APhaser->changepar(APhase_DryWet, Dry_Wet(value));
         break;
 
-    case 118:
+    case MC_APhase_Distortion:
         efx_APhaser->changepar(APhase_Distortion, value);
         break;
 
-    case 119:
+    case MC_APhase_LFO_Tempo:
         efx_APhaser->changepar(APhase_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 120:
+    case MC_APhase_Depth:
         efx_APhaser->changepar(APhase_Depth, value);
         break;
 
-    case 121:
+    case MC_APhase_Width:
         efx_APhaser->changepar(APhase_Width, value);
         break;
 
-    case 122:
+    case MC_APhase_Feedback:
         efx_APhaser->changepar(APhase_Feedback, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 123:
+    case MC_APhase_Mismatch:
         efx_APhaser->changepar(APhase_Mismatch, value);
         break;
 
-    case 124:
+    case MC_APhase_LFO_Stereo:
         efx_APhaser->changepar(APhase_LFO_Stereo, value);
         break;
 
-    case 125:
+    case MC_Dere_DryWet:
         efx_Derelict->changepar(Dere_DryWet, Dry_Wet(value));
         break;
 
-    case 126:
+    case MC_Dere_Pan:
         efx_Derelict->changepar(Dere_Pan, value);
         break;
 
-    case 127:
+    case MC_Dere_LR_Cross:
         efx_Derelict->changepar(Dere_LR_Cross, value);
         break;
 
