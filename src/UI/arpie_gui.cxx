@@ -54,7 +54,7 @@ Fl_Menu_Item ArpieGui::menu_arpie_preset[] = {
 void ArpieGui::cb_arpie_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(212);
+ rgui->getMIDIControl(MC_Arpie_DryWet);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_DryWet,Dry_Wet((int)(o->value())));
@@ -66,7 +66,7 @@ void ArpieGui::cb_arpie_WD(RKR_Slider* o, void* v) {
 void ArpieGui::cb_arpie_arpe_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(213);
+ rgui->getMIDIControl(MC_Arpie_ArpeWD);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_ArpeWD,(int)o->value());
@@ -78,7 +78,7 @@ void ArpieGui::cb_arpie_arpe(RKR_Slider* o, void* v) {
 void ArpieGui::cb_arpie_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(214);
+ rgui->getMIDIControl(MC_Arpie_Pan);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_Pan,(int)(o->value()+64));
@@ -90,7 +90,7 @@ void ArpieGui::cb_arpie_pan(RKR_Slider* o, void* v) {
 void ArpieGui::cb_arpie_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(215);
+ rgui->getMIDIControl(MC_Arpie_Tempo);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_Tempo,(int)o->value());
@@ -109,7 +109,7 @@ void ArpieGui::cb_arpie_subdiv(RKR_Choice* o, void* v) {
 void ArpieGui::cb_arpie_LRdl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(216);
+ rgui->getMIDIControl(MC_Arpie_LR_Delay);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_LR_Delay,(int)o->value());
@@ -121,7 +121,7 @@ void ArpieGui::cb_arpie_LRdl(RKR_Slider* o, void* v) {
 void ArpieGui::cb_arpie_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(217);
+ rgui->getMIDIControl(MC_Arpie_LR_Cross);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_LR_Cross,(int)(o->value()));
@@ -133,7 +133,7 @@ void ArpieGui::cb_arpie_LRc(RKR_Slider* o, void* v) {
 void ArpieGui::cb_arpie_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(218);
+ rgui->getMIDIControl(MC_Arpie_Feedback);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_Feedback,(int)o->value());
@@ -145,7 +145,7 @@ void ArpieGui::cb_arpie_fb(RKR_Slider* o, void* v) {
 void ArpieGui::cb_arpie_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(219);
+ rgui->getMIDIControl(MC_Arpie_Damp);
  return;
 } 
 rkr->efx_Arpie->changepar(Arpie_Damp,(int)o->value());

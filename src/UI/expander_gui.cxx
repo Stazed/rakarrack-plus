@@ -42,7 +42,7 @@ Fl_Menu_Item ExpanderGui::menu_expander_preset[] = {
 void ExpanderGui::cb_expander_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(220);
+ rgui->getMIDIControl(MC_Expander_Attack);
  return;
 } 
 rkr->efx_Expander->changepar(Expander_Attack,(int)o->value());
@@ -54,7 +54,7 @@ void ExpanderGui::cb_expander_ATime(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(221);
+ rgui->getMIDIControl(MC_Expander_Release);
  return;
 } 
 rkr->efx_Expander->changepar(Expander_Release,(int) o->value());
@@ -66,7 +66,7 @@ void ExpanderGui::cb_expander_RTime(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_shape_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(222);
+ rgui->getMIDIControl(MC_Expander_Shape);
  return;
 } 
 rkr->efx_Expander->changepar(Expander_Shape, (int) o->value());
@@ -78,7 +78,7 @@ void ExpanderGui::cb_expander_shape(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(223);
+ rgui->getMIDIControl(MC_Expander_Threshold);
  return;
 } 
 rkr->efx_Expander->changepar(Expander_Threshold, (int)o->value());
@@ -90,7 +90,7 @@ void ExpanderGui::cb_expander_threshold(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(224);
+ rgui->getMIDIControl(MC_Expander_Gain);
  return;
 } 
 rkr->efx_Expander->changepar(Expander_Gain, (int) o->value());
@@ -102,7 +102,7 @@ void ExpanderGui::cb_expander_level(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(225);
+ rgui->getMIDIControl(MC_Expander_LPF);
  return;
 } 
 rkr->efx_Expander->changepar(Expander_LPF, (int)o->value());
@@ -114,7 +114,7 @@ void ExpanderGui::cb_expander_LPF(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(226);
+ rgui->getMIDIControl(MC_Expander_HPF);
  return;
 } 
 rkr->efx_Expander->changepar(Expander_HPF, (int)o->value());

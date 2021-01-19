@@ -56,7 +56,7 @@ Fl_Menu_Item DistBandGui::menu_distband_preset[] = {
 void DistBandGui::cb_distband_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(202);
+ rgui->getMIDIControl(MC_DistBand_DryWet);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_DryWet,Dry_Wet((int)(o->value())));
@@ -68,7 +68,7 @@ void DistBandGui::cb_distband_WD(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(203);
+ rgui->getMIDIControl(MC_DistBand_LR_Cross);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_LR_Cross,(int)(o->value()));
@@ -80,7 +80,7 @@ void DistBandGui::cb_distband_LRc(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(204);
+ rgui->getMIDIControl(MC_DistBand_Drive);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Drive,(int)o->value());
@@ -92,7 +92,7 @@ void DistBandGui::cb_distband_drive(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(205);
+ rgui->getMIDIControl(MC_DistBand_Level);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Level,(int)o->value());
@@ -104,7 +104,7 @@ void DistBandGui::cb_distband_level(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_volL_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(206);
+ rgui->getMIDIControl(MC_DistBand_Gain_Low);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Gain_Low,(int)o->value());
@@ -116,7 +116,7 @@ void DistBandGui::cb_distband_volL(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_volM_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(207);
+ rgui->getMIDIControl(MC_DistBand_Gain_Mid);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Gain_Mid,(int)o->value());
@@ -128,7 +128,7 @@ void DistBandGui::cb_distband_volM(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_volH_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(208);
+ rgui->getMIDIControl(MC_DistBand_Gain_Hi);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Gain_Hi,(int)o->value());
@@ -140,7 +140,7 @@ void DistBandGui::cb_distband_volH(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_cross1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(209);
+ rgui->getMIDIControl(MC_DistBand_Cross_1);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Cross_1,(int)o->value());
@@ -152,7 +152,7 @@ void DistBandGui::cb_distband_cross1(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_cross2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(210);
+ rgui->getMIDIControl(MC_DistBand_Cross_2);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Cross_2,(int)o->value());
@@ -203,7 +203,7 @@ void DistBandGui::cb_distband_tipoH(RKR_Choice* o, void* v) {
 void DistBandGui::cb_distband_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(211);
+ rgui->getMIDIControl(MC_DistBand_Pan);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Pan,(int)(o->value()+64));

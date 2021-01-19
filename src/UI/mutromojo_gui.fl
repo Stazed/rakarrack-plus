@@ -108,7 +108,7 @@ o->redraw();}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(256);
+ rgui->getMIDIControl(MC_MuTro_DryWet);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_DryWet,Dry_Wet((int)(o->value())));}
@@ -130,7 +130,7 @@ rkr->efx_MuTroMojo->changepar(Mutro_Mode_Legacy,rkr->efx_MuTroMojo->Pmode);}
     label LP
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(257);
+ rgui->getMIDIControl(MC_MuTro_LowPass);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LowPass,(int)o->value());}
@@ -152,7 +152,7 @@ rkr->efx_MuTroMojo->changepar(Mutro_Mode_Legacy,rkr->efx_MuTroMojo->Pmode);}
     label BP
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(258);
+ rgui->getMIDIControl(MC_MuTro_BandPass);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_BandPass,(int)o->value());}
@@ -170,7 +170,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_BandPass,(int)o->value());}
     label HP
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(259);
+ rgui->getMIDIControl(MC_MuTro_HighPass);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_HighPass,(int)o->value());}
@@ -201,7 +201,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_LFO_Type,(int)o->value())}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(260);
+ rgui->getMIDIControl(MC_MuTro_Depth);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Depth,(int)o->value());}
@@ -212,7 +212,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_Depth,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(261);
+ rgui->getMIDIControl(MC_MuTro_LFO_Tempo);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LFO_Tempo,(int)o->value());} selected
@@ -223,7 +223,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_LFO_Tempo,(int)o->value());} selected
     label {Res.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(262);
+ rgui->getMIDIControl(MC_MuTro_Resonance);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Resonance,(int)(o->value()));}
@@ -234,7 +234,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_Resonance,(int)(o->value()));}
     label Range
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(263);
+ rgui->getMIDIControl(MC_MuTro_Range);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Range,(int)o->value());}
@@ -245,7 +245,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_Range,(int)o->value());}
     label Wah
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(264);
+ rgui->getMIDIControl(MC_MuTro_Wah);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Wah,(int)o->value());}
@@ -256,7 +256,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_Wah,(int)o->value());}
     label {E. Sens}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(265);
+ rgui->getMIDIControl(MC_MuTro_Env_Sens);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Env_Sens,(int)o->value());}
@@ -267,7 +267,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_Env_Sens,(int)o->value());}
     label S
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(266);
+ rgui->getMIDIControl(MC_MuTro_Env_Smooth);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Env_Smooth,(int)o->value());}

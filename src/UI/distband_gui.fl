@@ -95,7 +95,7 @@ distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(202);
+ rgui->getMIDIControl(MC_DistBand_DryWet);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_DryWet,Dry_Wet((int)(o->value())));}
@@ -106,7 +106,7 @@ rkr->efx_DistBand->changepar(DistBand_DryWet,Dry_Wet((int)(o->value())));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(203);
+ rgui->getMIDIControl(MC_DistBand_LR_Cross);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_LR_Cross,(int)(o->value()));}
@@ -117,7 +117,7 @@ rkr->efx_DistBand->changepar(DistBand_LR_Cross,(int)(o->value()));}
     label Drive
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(204);
+ rgui->getMIDIControl(MC_DistBand_Drive);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Drive,(int)o->value());}
@@ -128,7 +128,7 @@ rkr->efx_DistBand->changepar(DistBand_Drive,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(205);
+ rgui->getMIDIControl(MC_DistBand_Level);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Level,(int)o->value());}
@@ -139,7 +139,7 @@ rkr->efx_DistBand->changepar(DistBand_Level,(int)o->value());}
     label {L. Gain}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(206);
+ rgui->getMIDIControl(MC_DistBand_Gain_Low);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Gain_Low,(int)o->value());}
@@ -150,7 +150,7 @@ rkr->efx_DistBand->changepar(DistBand_Gain_Low,(int)o->value());}
     label {M. Gain}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(207);
+ rgui->getMIDIControl(MC_DistBand_Gain_Mid);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Gain_Mid,(int)o->value());}
@@ -161,7 +161,7 @@ rkr->efx_DistBand->changepar(DistBand_Gain_Mid,(int)o->value());}
     label {H. Gain}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(208);
+ rgui->getMIDIControl(MC_DistBand_Gain_Hi);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Gain_Hi,(int)o->value());}
@@ -172,7 +172,7 @@ rkr->efx_DistBand->changepar(DistBand_Gain_Hi,(int)o->value());}
     label {Cross 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(209);
+ rgui->getMIDIControl(MC_DistBand_Cross_1);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Cross_1,(int)o->value());}
@@ -183,7 +183,7 @@ rkr->efx_DistBand->changepar(DistBand_Cross_1,(int)o->value());}
     label {Cross 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(210);
+ rgui->getMIDIControl(MC_DistBand_Cross_2);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Cross_2,(int)o->value());}
@@ -230,7 +230,7 @@ rkr->efx_DistBand->changepar(DistBand_Type_Hi,(int)o->value());} open
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(211);
+ rgui->getMIDIControl(MC_DistBand_Pan);
  return;
 } 
 rkr->efx_DistBand->changepar(DistBand_Pan,(int)(o->value()+64));}

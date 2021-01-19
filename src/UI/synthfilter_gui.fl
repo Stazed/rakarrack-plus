@@ -102,7 +102,7 @@ synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));} se
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(237);
+ rgui->getMIDIControl(MC_Synthfilter_DryWet);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_DryWet,Dry_Wet((int)(o->value())));}
@@ -113,7 +113,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_DryWet,Dry_Wet((int)(o->value())));}
     label Distort
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(238);
+ rgui->getMIDIControl(MC_Synthfilter_Distort);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Distort,(int)o->value());}
@@ -124,7 +124,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_Distort,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(239);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Tempo);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Tempo,(int)o->value());}
@@ -167,7 +167,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Type,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(240);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Stereo);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Stereo,(int)o->value());}
@@ -178,7 +178,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Stereo,(int)o->value());}
     label Width
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(241);
+ rgui->getMIDIControl(MC_Synthfilter_Width);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Width,(int)o->value());}
@@ -189,7 +189,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_Width,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(242);
+ rgui->getMIDIControl(MC_Synthfilter_Feedback);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Feedback,(int)o->value());}
@@ -214,7 +214,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_Feedback,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(243);
+ rgui->getMIDIControl(MC_Synthfilter_Depth);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Depth,(int)o->value());}
@@ -225,7 +225,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_Depth,(int)o->value());}
     label {E.Sens}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(244);
+ rgui->getMIDIControl(MC_Synthfilter_Env_Sens);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Env_Sens,(int)(o->value()));}
@@ -236,7 +236,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_Env_Sens,(int)(o->value()));}
     label {A.Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(245);
+ rgui->getMIDIControl(MC_Synthfilter_Attack);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Attack,(int)o->value());}
@@ -247,7 +247,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_Attack,(int)o->value());}
     label {R.Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(246);
+ rgui->getMIDIControl(MC_Synthfilter_Release);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Release,(int)o->value());}
@@ -258,7 +258,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_Release,(int)o->value());}
     label Offset
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(247);
+ rgui->getMIDIControl(MC_Synthfilter_Offset);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Offset,(int)o->value());}

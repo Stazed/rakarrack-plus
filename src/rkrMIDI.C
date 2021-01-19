@@ -2290,263 +2290,263 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_Exciter->changepar(Exciter_Harm_10, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 202:
+    case MC_DistBand_DryWet:
         efx_DistBand->changepar(DistBand_DryWet, Dry_Wet(value));
         break;
 
-    case 203:
+    case MC_DistBand_LR_Cross:
         efx_DistBand->changepar(DistBand_LR_Cross, value);
         break;
 
-    case 204:
+    case MC_DistBand_Drive:
         efx_DistBand->changepar(DistBand_Drive, value);
         break;
 
-    case 205:
+    case MC_DistBand_Level:
         efx_DistBand->changepar(DistBand_Level, value);
         break;
 
-    case 206:
+    case MC_DistBand_Gain_Low:
         efx_DistBand->changepar(DistBand_Gain_Low, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 207:
+    case MC_DistBand_Gain_Mid:
         efx_DistBand->changepar(DistBand_Gain_Mid, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 208:
+    case MC_DistBand_Gain_Hi:
         efx_DistBand->changepar(DistBand_Gain_Hi, (int) ((float) value * C_MC_100_RANGE));
         break;
 
-    case 209:
+    case MC_DistBand_Cross_1:
         efx_DistBand->changepar(DistBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
-    case 210:
+    case MC_DistBand_Cross_2:
         efx_DistBand->changepar(DistBand_Cross_2, 800 + (int) ((float) value * C_MC_11200_RANGE));
         break;
 
-    case 211:
+    case MC_DistBand_Pan:
         efx_DistBand->changepar(DistBand_Pan, value);
         break;
 
-    case 212:
+    case MC_Arpie_DryWet:
         efx_Arpie->changepar(Arpie_DryWet, Dry_Wet(value));
         break;
 
-    case 213:
+    case MC_Arpie_ArpeWD:
         efx_Arpie->changepar(Arpie_ArpeWD, value);
         break;
 
-    case 214:
+    case MC_Arpie_Pan:
         efx_Arpie->changepar(Arpie_Pan, value);
         break;
 
-    case 215:
+    case MC_Arpie_Tempo:
         efx_Arpie->changepar(Arpie_Tempo, ret_Tempo(value));
         break;
 
-    case 216:
+    case MC_Arpie_LR_Delay:
         efx_Arpie->changepar(Arpie_LR_Delay, value);
         break;
 
-    case 217:
+    case MC_Arpie_LR_Cross:
         efx_Arpie->changepar(Arpie_LR_Cross, value);
         break;
 
-    case 218:
+    case MC_Arpie_Feedback:
         efx_Arpie->changepar(Arpie_Feedback, value);
         break;
 
-    case 219:
+    case MC_Arpie_Damp:
         efx_Arpie->changepar(Arpie_Damp, value);
         break;
 
-    case 220:
+    case MC_Expander_Attack:
         efx_Expander->changepar(Expander_Attack, 1 + (int) ((float) value * C_MC_4999_RANGE));
         break;
 
-    case 221:
+    case MC_Expander_Release:
         efx_Expander->changepar(Expander_Release, 10 + (int) ((float) value * C_MC_990_RANGE));
         break;
 
-    case 222:
+    case MC_Expander_Shape:
         efx_Expander->changepar(Expander_Shape, 1 + (int) ((float) value * C_MC_49_RANGE));
         break;
 
-    case 223:
+    case MC_Expander_Threshold:
         efx_Expander->changepar(Expander_Threshold, (int) ((float) value * -C_MC_80_RANGE));
         break;
 
-    case 224:
+    case MC_Expander_Gain:
         efx_Expander->changepar(Expander_Gain, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
-    case 225:
+    case MC_Expander_LPF:
         efx_Expander->changepar(Expander_LPF, ret_LPF(value));
         break;
 
-    case 226:
+    case MC_Expander_HPF:
         efx_Expander->changepar(Expander_HPF, ret_HPF(value));
         break;
 
-    case 227:
+    case MC_Shuffle_DryWet:
         efx_Shuffle->changepar(Shuffle_DryWet, Dry_Wet(value));
         break;
 
-    case 228:
+    case MC_Shuffle_Freq_L:
         efx_Shuffle->changepar(Shuffle_Freq_L, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
-    case 229:
+    case MC_Shuffle_Gain_L:
         efx_Shuffle->changepar(Shuffle_Gain_L, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 230:
+    case MC_Shuffle_Freq_ML:
         efx_Shuffle->changepar(Shuffle_Freq_ML, 400 + (int) ((float) value * C_MC_3600_RANGE));
         break;
 
-    case 231:
+    case MC_Shuffle_Gain_ML:
         efx_Shuffle->changepar(Shuffle_Gain_ML, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 232:
+    case MC_Shuffle_Freq_MH:
         efx_Shuffle->changepar(Shuffle_Freq_MH, 1200 + (int) ((float) value * C_MC_6800_RANGE));
         break;
 
-    case 233:
+    case MC_Shuffle_Gain_MH:
         efx_Shuffle->changepar(Shuffle_Gain_MH, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 234:
+    case MC_Shuffle_Freq_H:
         efx_Shuffle->changepar(Shuffle_Freq_H, 6000 + (int) ((float) value * C_MC_20000_RANGE));
         break;
 
-    case 235:
+    case MC_Shuffle_Gain_H:
         efx_Shuffle->changepar(Shuffle_Gain_H, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 236:
+    case MC_Shuffle_Width:
         efx_Shuffle->changepar(Shuffle_Width, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 237:
+    case MC_Synthfilter_DryWet:
         efx_Synthfilter->changepar(Synthfilter_DryWet, Dry_Wet(value));
         break;
 
-    case 238:
+    case MC_Synthfilter_Distort:
         efx_Synthfilter->changepar(Synthfilter_Distort, value);
         break;
 
-    case 239:
+    case MC_Synthfilter_LFO_Tempo:
         efx_Synthfilter->changepar(Synthfilter_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 240:
+    case MC_Synthfilter_LFO_Stereo:
         efx_Synthfilter->changepar(Synthfilter_LFO_Stereo, value);
         break;
 
-    case 241:
+    case MC_Synthfilter_Width:
         efx_Synthfilter->changepar(Synthfilter_Width, value);
         break;
 
-    case 242:
+    case MC_Synthfilter_Feedback:
         efx_Synthfilter->changepar(Synthfilter_Feedback, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 243:
+    case MC_Synthfilter_Depth:
         efx_Synthfilter->changepar(Synthfilter_Depth, value);
         break;
 
-    case 244:
+    case MC_Synthfilter_Env_Sens:
         efx_Synthfilter->changepar(Synthfilter_Env_Sens, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
-    case 245:
+    case MC_Synthfilter_Attack:
         efx_Synthfilter->changepar(Synthfilter_Attack, 5 + (int) ((float) value * C_MC_995_RANGE));
         break;
 
-    case 246:
+    case MC_Synthfilter_Release:
         efx_Synthfilter->changepar(Synthfilter_Release, 5 + (int) ((float) value * C_MC_495_RANGE));
         break;
 
-    case 247:
+    case MC_Synthfilter_Offset:
         efx_Synthfilter->changepar(Synthfilter_Offset, value);
         break;
 
-    case 248:
+    case MC_VaryBand_DryWet:
         efx_VaryBand->changepar(VaryBand_DryWet, Dry_Wet(value));
         break;
 
-    case 249:
+    case MC_VaryBand_LFO_Tempo_1:
         efx_VaryBand->changepar(VaryBand_LFO_Tempo_1, ret_Tempo(value));
         break;
 
-    case 250:
+    case MC_VaryBand_LFO_Stereo_1:
         efx_VaryBand->changepar(VaryBand_LFO_Stereo_1, value);
         break;
 
-    case 251:
+    case MC_VaryBand_LFO_Tempo_2:
         efx_VaryBand->changepar(VaryBand_LFO_Tempo_2, ret_Tempo(value));
         break;
 
-    case 252:
+    case MC_VaryBand_LFO_Stereo_2:
         efx_VaryBand->changepar(VaryBand_LFO_Stereo_2, value);
         break;
 
-    case 253:
+    case MC_VaryBand_Cross_1:
         efx_VaryBand->changepar(VaryBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
-    case 254:
+    case MC_VaryBand_Cross_2:
         efx_VaryBand->changepar(VaryBand_Cross_2, 1000 + (int) ((float) value * C_MC_7000_RANGE));
         break;
 
-    case 255:
+    case MC_VaryBand_Cross_3:
         efx_VaryBand->changepar(VaryBand_Cross_3, 2000 + (int) ((float) value * C_MC_24000_RANGE));
         break;
 
-    case 256:
+    case MC_MuTro_DryWet:
         efx_MuTroMojo->changepar(MuTro_DryWet, Dry_Wet(value));
         break;
 
-    case 257:
+    case MC_MuTro_LowPass:
         efx_MuTroMojo->changepar(MuTro_LowPass, value - 64);
         break;
 
-    case 258:
+    case MC_MuTro_BandPass:
         efx_MuTroMojo->changepar(MuTro_BandPass, value - 64);
         break;
 
-    case 259:
+    case MC_MuTro_HighPass:
         efx_MuTroMojo->changepar(MuTro_HighPass, value - 64);
         break;
 
-    case 260:
+    case MC_MuTro_Depth:
         efx_MuTroMojo->changepar(MuTro_Depth, value);
         break;
 
-    case 261:
+    case MC_MuTro_LFO_Tempo:
         efx_MuTroMojo->changepar(MuTro_LFO_Tempo, ret_Tempo(value));
         break;
 
-    case 262:
+    case MC_MuTro_Resonance:
         efx_MuTroMojo->changepar(MuTro_Resonance, value);
         break;
 
-    case 263:
+    case MC_MuTro_Range:
         efx_MuTroMojo->changepar(MuTro_Range, 10 + (int) ((float) value * C_MC_5990_RANGE));
         break;
 
-    case 264:
+    case MC_MuTro_Wah:
         efx_MuTroMojo->changepar(MuTro_Wah, value);
         break;
 
-    case 265:
+    case MC_MuTro_Env_Sens:
         efx_MuTroMojo->changepar(MuTro_Env_Sens, value - 64);
         break;
 
-    case 266:
+    case MC_MuTro_Env_Smooth:
         efx_MuTroMojo->changepar(MuTro_Env_Smooth, value);
         break;
 

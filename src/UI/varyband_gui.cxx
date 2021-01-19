@@ -52,7 +52,7 @@ Fl_Menu_Item VarybandGui::menu_varyband_preset[] = {
 void VarybandGui::cb_varyband_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(248);
+ rgui->getMIDIControl(MC_VaryBand_DryWet);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_DryWet,Dry_Wet((int)(o->value())));
@@ -64,7 +64,7 @@ void VarybandGui::cb_varyband_WD(RKR_Slider* o, void* v) {
 void VarybandGui::cb_varyband_freq1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(249);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Tempo_1);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_1,(int)o->value());
@@ -89,7 +89,7 @@ void VarybandGui::cb_varyband_lfotype1(RKR_Choice* o, void* v) {
 void VarybandGui::cb_varyband_stdf1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(250);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Stereo_1);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_LFO_Stereo_1,(int)o->value());
@@ -101,7 +101,7 @@ void VarybandGui::cb_varyband_stdf1(RKR_Slider* o, void* v) {
 void VarybandGui::cb_varyband_freq2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(251);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Tempo_2);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_2,(int)o->value());
@@ -126,7 +126,7 @@ void VarybandGui::cb_varyband_lfotype2(RKR_Choice* o, void* v) {
 void VarybandGui::cb_varyband_stdf2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(252);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Stereo_2);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_LFO_Stereo_2,(int)o->value());
@@ -138,7 +138,7 @@ void VarybandGui::cb_varyband_stdf2(RKR_Slider* o, void* v) {
 void VarybandGui::cb_varyband_cross1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(253);
+ rgui->getMIDIControl(MC_VaryBand_Cross_1);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_Cross_1,(int)o->value());
@@ -150,7 +150,7 @@ void VarybandGui::cb_varyband_cross1(RKR_Slider* o, void* v) {
 void VarybandGui::cb_varyband_cross2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(254);
+ rgui->getMIDIControl(MC_VaryBand_Cross_2);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_Cross_2,(int)o->value());
@@ -162,7 +162,7 @@ void VarybandGui::cb_varyband_cross2(RKR_Slider* o, void* v) {
 void VarybandGui::cb_varyband_cross3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(255);
+ rgui->getMIDIControl(MC_VaryBand_Cross_3);
  return;
 }
 rkr->efx_VaryBand->changepar(VaryBand_Cross_3,(int)o->value());

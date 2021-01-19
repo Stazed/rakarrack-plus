@@ -57,7 +57,7 @@ Fl_Menu_Item SynthfilterGui::menu_synthfilter_preset[] = {
 void SynthfilterGui::cb_synthfilter_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(237);
+ rgui->getMIDIControl(MC_Synthfilter_DryWet);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_DryWet,Dry_Wet((int)(o->value())));
@@ -69,7 +69,7 @@ void SynthfilterGui::cb_synthfilter_WD(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_Distort_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(238);
+ rgui->getMIDIControl(MC_Synthfilter_Distort);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Distort,(int)o->value());
@@ -81,7 +81,7 @@ void SynthfilterGui::cb_synthfilter_Distort(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(239);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Tempo);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Tempo,(int)o->value());
@@ -125,7 +125,7 @@ void SynthfilterGui::cb_synthfilter_subs(RKR_Check_Button* o, void* v) {
 void SynthfilterGui::cb_synthfilter_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(240);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Stereo);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Stereo,(int)o->value());
@@ -137,7 +137,7 @@ void SynthfilterGui::cb_synthfilter_stdf(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_width_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(241);
+ rgui->getMIDIControl(MC_Synthfilter_Width);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Width,(int)o->value());
@@ -149,7 +149,7 @@ void SynthfilterGui::cb_synthfilter_width(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(242);
+ rgui->getMIDIControl(MC_Synthfilter_Feedback);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Feedback,(int)o->value());
@@ -175,7 +175,7 @@ void SynthfilterGui::cb_synthfilter_Hstages(RKR_Counter* o, void* v) {
 void SynthfilterGui::cb_synthfilter_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(243);
+ rgui->getMIDIControl(MC_Synthfilter_Depth);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Depth,(int)o->value());
@@ -187,7 +187,7 @@ void SynthfilterGui::cb_synthfilter_dpth(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_EnvSens_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(244);
+ rgui->getMIDIControl(MC_Synthfilter_Env_Sens);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Env_Sens,(int)(o->value()));
@@ -199,7 +199,7 @@ void SynthfilterGui::cb_synthfilter_EnvSens(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(245);
+ rgui->getMIDIControl(MC_Synthfilter_Attack);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Attack,(int)o->value());
@@ -211,7 +211,7 @@ void SynthfilterGui::cb_synthfilter_ATime(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(246);
+ rgui->getMIDIControl(MC_Synthfilter_Release);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Release,(int)o->value());
@@ -223,7 +223,7 @@ void SynthfilterGui::cb_synthfilter_RTime(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_Offset_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(247);
+ rgui->getMIDIControl(MC_Synthfilter_Offset);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_Offset,(int)o->value());

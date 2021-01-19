@@ -66,7 +66,7 @@ Fl_Menu_Item MutromojoGui::menu_mutromojo_preset[] = {
 void MutromojoGui::cb_mutromojo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(256);
+ rgui->getMIDIControl(MC_MuTro_DryWet);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_DryWet,Dry_Wet((int)(o->value())));
@@ -89,7 +89,7 @@ void MutromojoGui::cb_mutromojo_qm(RKR_Check_Button* o, void* v) {
 void MutromojoGui::cb_mutromojo_lp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(257);
+ rgui->getMIDIControl(MC_MuTro_LowPass);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LowPass,(int)o->value());
@@ -112,7 +112,7 @@ void MutromojoGui::cb_mutromojo_nat(RKR_Check_Button* o, void* v) {
 void MutromojoGui::cb_mutromojo_bp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(258);
+ rgui->getMIDIControl(MC_MuTro_BandPass);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_BandPass,(int)o->value());
@@ -131,7 +131,7 @@ void MutromojoGui::cb_mutromojo_res(RKR_Check_Button* o, void* v) {
 void MutromojoGui::cb_mutromojo_hp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(259);
+ rgui->getMIDIControl(MC_MuTro_HighPass);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_HighPass,(int)o->value());
@@ -163,7 +163,7 @@ void MutromojoGui::cb_mutromojo_lfotype(RKR_Choice* o, void* v) {
 void MutromojoGui::cb_mutromojo_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(260);
+ rgui->getMIDIControl(MC_MuTro_Depth);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Depth,(int)o->value());
@@ -175,7 +175,7 @@ void MutromojoGui::cb_mutromojo_dpth(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(261);
+ rgui->getMIDIControl(MC_MuTro_LFO_Tempo);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LFO_Tempo,(int)o->value());
@@ -187,7 +187,7 @@ void MutromojoGui::cb_mutromojo_freq(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(262);
+ rgui->getMIDIControl(MC_MuTro_Resonance);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Resonance,(int)(o->value()));
@@ -199,7 +199,7 @@ void MutromojoGui::cb_mutromojo_q(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_rng_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(263);
+ rgui->getMIDIControl(MC_MuTro_Range);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Range,(int)o->value());
@@ -211,7 +211,7 @@ void MutromojoGui::cb_mutromojo_rng(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_ampsnsinv_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(264);
+ rgui->getMIDIControl(MC_MuTro_Wah);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Wah,(int)o->value());
@@ -223,7 +223,7 @@ void MutromojoGui::cb_mutromojo_ampsnsinv(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_ampsns_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(265);
+ rgui->getMIDIControl(MC_MuTro_Env_Sens);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Env_Sens,(int)o->value());
@@ -235,7 +235,7 @@ void MutromojoGui::cb_mutromojo_ampsns(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_smooth_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(266);
+ rgui->getMIDIControl(MC_MuTro_Env_Smooth);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_Env_Smooth,(int)o->value());

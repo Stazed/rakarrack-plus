@@ -3947,263 +3947,263 @@ void RKRGUI::MIDI_control_gui_refresh()
                 EXCITER->ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
                 EXCITER->ex_10->redraw();
                 break;
-            case 202:
+            case MC_DistBand_DryWet:
                 DISTBAND->distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(DistBand_DryWet)));
                 DISTBAND->distband_WD->redraw();
                 break;
-            case 203:
+            case MC_DistBand_LR_Cross:
                 DISTBAND->distband_LRc->value(rkr->efx_DistBand->getpar(DistBand_LR_Cross));
                 DISTBAND->distband_LRc->redraw();
                 break;
-            case 204:
+            case MC_DistBand_Drive:
                 DISTBAND->distband_drive->value(rkr->efx_DistBand->getpar(DistBand_Drive));
                 DISTBAND->distband_drive->redraw();
                 break;
-            case 205:
+            case MC_DistBand_Level:
                 DISTBAND->distband_level->value(rkr->efx_DistBand->getpar(DistBand_Level));
                 DISTBAND->distband_level->redraw();
                 break;
-            case 206:
+            case MC_DistBand_Gain_Low:
                 DISTBAND->distband_volL->value(rkr->efx_DistBand->getpar(DistBand_Gain_Low));
                 DISTBAND->distband_volL->redraw();
                 break;
-            case 207:
+            case MC_DistBand_Gain_Mid:
                 DISTBAND->distband_volM->value(rkr->efx_DistBand->getpar(DistBand_Gain_Mid));
                 DISTBAND->distband_volM->redraw();
                 break;
-            case 208:
+            case MC_DistBand_Gain_Hi:
                 DISTBAND->distband_volH->value(rkr->efx_DistBand->getpar(DistBand_Gain_Hi));
                 DISTBAND->distband_volH->redraw();
                 break;
-            case 209:
+            case MC_DistBand_Cross_1:
                 DISTBAND->distband_cross1->value(rkr->efx_DistBand->getpar(DistBand_Cross_1));
                 DISTBAND->distband_cross1->redraw();
                 break;
-            case 210:
+            case MC_DistBand_Cross_2:
                 DISTBAND->distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));
                 DISTBAND->distband_cross2->redraw();
                 break;
-            case 211:
+            case MC_DistBand_Pan:
                 DISTBAND->distband_pan->value(rkr->efx_DistBand->getpar(DistBand_Pan) - 64);
                 DISTBAND->distband_pan->redraw();
                 break;
-            case 212:
+            case MC_Arpie_DryWet:
                 ARPIE->arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(Arpie_DryWet)));
                 ARPIE->arpie_WD->redraw();
                 break;
-            case 213:
+            case MC_Arpie_ArpeWD:
                 ARPIE->arpie_arpe->value(rkr->efx_Arpie->getpar(Arpie_ArpeWD));
                 ARPIE->arpie_arpe->redraw();
                 break;
-            case 214:
+            case MC_Arpie_Pan:
                 ARPIE->arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan) - 64);
                 ARPIE->arpie_pan->redraw();
                 break;
-            case 215:
+            case MC_Arpie_Tempo:
                 ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
                 ARPIE->arpie_delay->redraw();
                 break;
-            case 216:
+            case MC_Arpie_LR_Delay:
                 ARPIE->arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LR_Delay));
                 ARPIE->arpie_LRdl->redraw();
                 break;
-            case 217:
+            case MC_Arpie_LR_Cross:
                 ARPIE->arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LR_Cross));
                 ARPIE->arpie_LRc->redraw();
                 break;
-            case 218:
+            case MC_Arpie_Feedback:
                 ARPIE->arpie_fb->value(rkr->efx_Arpie->getpar(Arpie_Feedback));
                 ARPIE->arpie_fb->redraw();
                 break;
-            case 219:
+            case MC_Arpie_Damp:
                 ARPIE->arpie_damp->value(rkr->efx_Arpie->getpar(Arpie_Damp));
                 ARPIE->arpie_damp->redraw();
                 break;
-            case 220:
+            case MC_Expander_Attack:
                 EXPANDER->expander_ATime->value(rkr->efx_Expander->getpar(Expander_Attack));
                 EXPANDER->expander_ATime->redraw();
                 break;
-            case 221:
+            case MC_Expander_Release:
                 EXPANDER->expander_RTime->value(rkr->efx_Expander->getpar(Expander_Release));
                 EXPANDER->expander_RTime->redraw();
                 break;
-            case 222:
+            case MC_Expander_Shape:
                 EXPANDER->expander_shape->value(rkr->efx_Expander->getpar(Expander_Shape));
                 EXPANDER->expander_shape->redraw();
                 break;
-            case 223:
+            case MC_Expander_Threshold:
                 EXPANDER->expander_threshold->value(rkr->efx_Expander->getpar(Expander_Threshold));
                 EXPANDER->expander_threshold->redraw();
                 break;
-            case 224:
+            case MC_Expander_Gain:
                 EXPANDER->expander_level->value(rkr->efx_Expander->getpar(Expander_Gain));
                 EXPANDER->expander_level->redraw();
                 break;
-            case 225:
+            case MC_Expander_LPF:
                 EXPANDER->expander_LPF->value(rkr->efx_Expander->getpar(Expander_LPF));
                 EXPANDER->expander_LPF->redraw();
                 break;
-            case 226:
+            case MC_Expander_HPF:
                 EXPANDER->expander_HPF->value(rkr->efx_Expander->getpar(Expander_HPF));
                 EXPANDER->expander_HPF->redraw();
                 break;
-            case 227:
+            case MC_Shuffle_DryWet:
                 SHUFFLE->shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(Shuffle_DryWet)));
                 SHUFFLE->shuffle_WD->redraw();
                 break;
-            case 228:
+            case MC_Shuffle_Freq_L:
                 SHUFFLE->shuffle_cross1->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_L));
                 SHUFFLE->shuffle_cross1->redraw();
                 break;
-            case 229:
+            case MC_Shuffle_Gain_L:
                 SHUFFLE->shuffle_volL->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_L));
                 SHUFFLE->shuffle_volL->redraw();
                 break;
-            case 230:
+            case MC_Shuffle_Freq_ML:
                 SHUFFLE->shuffle_cross2->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_ML));
                 SHUFFLE->shuffle_cross2->redraw();
                 break;
-            case 231:
+            case MC_Shuffle_Gain_ML:
                 SHUFFLE->shuffle_volML->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_ML));
                 SHUFFLE->shuffle_volML->redraw();
                 break;
-            case 232:
+            case MC_Shuffle_Freq_MH:
                 SHUFFLE->shuffle_cross3->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_MH));
                 SHUFFLE->shuffle_cross3->redraw();
                 break;
-            case 233:
+            case MC_Shuffle_Gain_MH:
                 SHUFFLE->shuffle_volMH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_MH));
                 SHUFFLE->shuffle_volMH->redraw();
                 break;
-            case 234:
+            case MC_Shuffle_Freq_H:
                 SHUFFLE->shuffle_cross4->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_H));
                 SHUFFLE->shuffle_cross4->redraw();
                 break;
-            case 235:
+            case MC_Shuffle_Gain_H:
                 SHUFFLE->shuffle_volH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_H));
                 SHUFFLE->shuffle_volH->redraw();
                 break;
-            case 236:
+            case MC_Shuffle_Width:
                 SHUFFLE->shuffle_Q->value(rkr->efx_Shuffle->getpar(Shuffle_Width));
                 SHUFFLE->shuffle_Q->redraw();
                 break;
-            case 237:
+            case MC_Synthfilter_DryWet:
                 SYNTHFILTER->synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(Synthfilter_DryWet)));
                 SYNTHFILTER->synthfilter_WD->redraw();
                 break;
-            case 238:
+            case MC_Synthfilter_Distort:
                 SYNTHFILTER->synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(Synthfilter_Distort));
                 SYNTHFILTER->synthfilter_Distort->redraw();
                 break;
-            case 239:
+            case MC_Synthfilter_LFO_Tempo:
                 SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
                 SYNTHFILTER->synthfilter_freq->redraw();
                 break;
-            case 240:
+            case MC_Synthfilter_LFO_Stereo:
                 SYNTHFILTER->synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Stereo));
                 SYNTHFILTER->synthfilter_stdf->redraw();
                 break;
-            case 241:
+            case MC_Synthfilter_Width:
                 SYNTHFILTER->synthfilter_width->value(rkr->efx_Synthfilter->getpar(Synthfilter_Width));
                 SYNTHFILTER->synthfilter_width->redraw();
                 break;
-            case 242:
+            case MC_Synthfilter_Feedback:
                 SYNTHFILTER->synthfilter_fb->value(rkr->efx_Synthfilter->getpar(Synthfilter_Feedback));
                 SYNTHFILTER->synthfilter_fb->redraw();
                 break;
-            case 243:
+            case MC_Synthfilter_Depth:
                 SYNTHFILTER->synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(Synthfilter_Depth));
                 SYNTHFILTER->synthfilter_dpth->redraw();
                 break;
-            case 244:
+            case MC_Synthfilter_Env_Sens:
                 SYNTHFILTER->synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(Synthfilter_Env_Sens));
                 SYNTHFILTER->synthfilter_EnvSens->redraw();
                 break;
-            case 245:
+            case MC_Synthfilter_Attack:
                 SYNTHFILTER->synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Attack));
                 SYNTHFILTER->synthfilter_ATime->redraw();
                 break;
-            case 246:
+            case MC_Synthfilter_Release:
                 SYNTHFILTER->synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));
                 SYNTHFILTER->synthfilter_RTime->redraw();
                 break;
-            case 247:
+            case MC_Synthfilter_Offset:
                 SYNTHFILTER->synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(Synthfilter_Offset));
                 SYNTHFILTER->synthfilter_Offset->redraw();
                 break;
-            case 248:
+            case MC_VaryBand_DryWet:
                 VARYBAND->varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(VaryBand_DryWet)));
                 VARYBAND->varyband_WD->redraw();
                 break;
-            case 249:
+            case MC_VaryBand_LFO_Tempo_1:
                 VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
                 VARYBAND->varyband_freq1->redraw();
                 break;
-            case 250:
+            case MC_VaryBand_LFO_Stereo_1:
                 VARYBAND->varyband_stdf1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_1));
                 VARYBAND->varyband_stdf1->redraw();
                 break;
-            case 251:
+            case MC_VaryBand_LFO_Tempo_2:
                 VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
                 VARYBAND->varyband_freq2->redraw();
                 break;
-            case 252:
+            case MC_VaryBand_LFO_Stereo_2:
                 VARYBAND->varyband_stdf2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_2));
                 VARYBAND->varyband_stdf2->redraw();
                 break;
-            case 253:
+            case MC_VaryBand_Cross_1:
                 VARYBAND->varyband_cross1->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_1));
                 VARYBAND->varyband_cross1->redraw();
                 break;
-            case 254:
+            case MC_VaryBand_Cross_2:
                 VARYBAND->varyband_cross2->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_2));
                 VARYBAND->varyband_cross2->redraw();
                 break;
-            case 255:
+            case MC_VaryBand_Cross_3:
                 VARYBAND->varyband_cross3->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_3));
                 VARYBAND->varyband_cross3->redraw();
                 break;
-            case 256:
+            case MC_MuTro_DryWet:
                 MUTROMOJO->mutromojo_WD->value(Dry_Wet(rkr->efx_MuTroMojo->getpar(MuTro_DryWet)));
                 MUTROMOJO->mutromojo_WD->redraw();
                 break;
-            case 257:
+            case MC_MuTro_LowPass:
                 MUTROMOJO->mutromojo_lp->value(rkr->efx_MuTroMojo->getpar(MuTro_LowPass));
                 MUTROMOJO->mutromojo_lp->redraw();
                 break;
-            case 258:
+            case MC_MuTro_BandPass:
                 MUTROMOJO->mutromojo_bp->value(rkr->efx_MuTroMojo->getpar(MuTro_BandPass));
                 MUTROMOJO->mutromojo_bp->redraw();
                 break;
-            case 259:
+            case MC_MuTro_HighPass:
                 MUTROMOJO->mutromojo_hp->value(rkr->efx_MuTroMojo->getpar(MuTro_HighPass));
                 MUTROMOJO->mutromojo_hp->redraw();
                 break;
-            case 260:
+            case MC_MuTro_Depth:
                 MUTROMOJO->mutromojo_dpth->value(rkr->efx_MuTroMojo->getpar(MuTro_Depth));
                 MUTROMOJO->mutromojo_dpth->redraw();
                 break;
-            case 261:
+            case MC_MuTro_LFO_Tempo:
                 MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Tempo));
                 MUTROMOJO->mutromojo_freq->redraw();
                 break;
-            case 262:
+            case MC_MuTro_Resonance:
                 MUTROMOJO->mutromojo_q->value(rkr->efx_MuTroMojo->getpar(MuTro_Resonance));
                 MUTROMOJO->mutromojo_q->redraw();
                 break;
-            case 263:
+            case MC_MuTro_Range:
                 MUTROMOJO->mutromojo_rng->value(rkr->efx_MuTroMojo->getpar(MuTro_Range));
                 MUTROMOJO->mutromojo_rng->redraw();
                 break;
-            case 264:
+            case MC_MuTro_Wah:
                 MUTROMOJO->mutromojo_ampsnsinv->value(rkr->efx_MuTroMojo->getpar(MuTro_Wah));
                 MUTROMOJO->mutromojo_ampsnsinv->redraw();
                 break;
-            case 265:
+            case MC_MuTro_Env_Sens:
                 MUTROMOJO->mutromojo_ampsns->value(rkr->efx_MuTroMojo->getpar(MuTro_Env_Sens));
                 MUTROMOJO->mutromojo_ampsns->redraw();
                 break;
-            case 266:
+            case MC_MuTro_Env_Smooth:
                 MUTROMOJO->mutromojo_smooth->value(rkr->efx_MuTroMojo->getpar(MuTro_Env_Smooth));
                 MUTROMOJO->mutromojo_smooth->redraw();
                 break;
