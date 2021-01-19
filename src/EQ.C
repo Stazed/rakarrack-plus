@@ -207,9 +207,8 @@ EQ::setpreset(int npreset)
         }
 
         changepar(EQ_Gain, pdata[10]);
+        changepar_Q(EQ_Q, pdata[11]);
 
-        for (int n = 0; n < 10; n++)
-            changepar(n * 5 + 13, pdata[11]);
     }
     else
     {
@@ -219,11 +218,7 @@ EQ::setpreset(int npreset)
         }
         
         changepar(EQ_Gain, presets[npreset][10]);
-        
-        for (int n = 0; n < 10; n++)
-        {
-            changepar(n * 5 + 13, presets[npreset][11]);
-        }
+        changepar_Q(EQ_Q, presets[npreset][11]);
     }
 }
 
