@@ -1533,7 +1533,7 @@ RKR::process_midi_controller_events(int parameter, int value)
 
     switch (parameter)
     {
-    case 0: // Unused
+    case MC_Unused_0:
         break;
         
 // Start MIDI Implementation Chart range
