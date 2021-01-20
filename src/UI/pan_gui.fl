@@ -65,7 +65,7 @@ pan_extraon->value(rkr->efx_Pan->getpar(Pan_Enable_Extra));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(58);
+ rgui->getMIDIControl(MC_Pan_DryWet);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_DryWet,Dry_Wet((int)(o->value())));}
@@ -76,7 +76,7 @@ rkr->efx_Pan->changepar(Pan_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(67);
+ rgui->getMIDIControl(MC_Pan_Pan);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_Pan,(int)(o->value()+64));}
@@ -94,7 +94,7 @@ rkr->efx_Pan->changepar(Pan_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(77);
+ rgui->getMIDIControl(MC_Pan_LFO_Tempo);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_LFO_Tempo,(int)o->value());}
@@ -105,7 +105,7 @@ rkr->efx_Pan->changepar(Pan_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(110);
+ rgui->getMIDIControl(MC_Pan_LFO_Random);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_LFO_Random,(int)o->value());}
@@ -129,7 +129,7 @@ rkr->efx_Pan->changepar(Pan_LFO_Type,(int)o->value());} open
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(104);
+ rgui->getMIDIControl(MC_Pan_LFO_Stereo);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_LFO_Stereo,(int)o->value());}
@@ -139,7 +139,7 @@ rkr->efx_Pan->changepar(Pan_LFO_Stereo,(int)o->value());}
   Fl_Check_Button pan_extraon {
     label {Extra Stereo}
     user_data 2
-    callback {rkr->efx_Pan->changepar(Pan_Enable_Extra,(int)o->value())} selected
+    callback {rkr->efx_Pan->changepar(Pan_Enable_Extra,(int)o->value())}
     tooltip {Enable Extra Stereo} xywh {35 140 82 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -150,7 +150,7 @@ rkr->efx_Pan->changepar(Pan_LFO_Stereo,(int)o->value());}
  rgui->getMIDIControl(MC_Pan_Ex_St_Amt);
  return;
 }
-rkr->efx_Pan->changepar(Pan_Ex_St_Amt,(int)o->value());}
+rkr->efx_Pan->changepar(Pan_Ex_St_Amt,(int)o->value());} selected
     tooltip {Extra Stereo Amount} xywh {56 161 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

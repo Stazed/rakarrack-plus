@@ -44,7 +44,7 @@ Fl_Menu_Item PanGui::menu_pan_preset[] = {
 void PanGui::cb_pan_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(58);
+ rgui->getMIDIControl(MC_Pan_DryWet);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_DryWet,Dry_Wet((int)(o->value())));
@@ -56,7 +56,7 @@ void PanGui::cb_pan_WD(RKR_Slider* o, void* v) {
 void PanGui::cb_pan_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(67);
+ rgui->getMIDIControl(MC_Pan_Pan);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_Pan,(int)(o->value()+64));
@@ -75,7 +75,7 @@ void PanGui::cb_pan_autopan(RKR_Check_Button* o, void* v) {
 void PanGui::cb_pan_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(77);
+ rgui->getMIDIControl(MC_Pan_LFO_Tempo);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_LFO_Tempo,(int)o->value());
@@ -87,7 +87,7 @@ void PanGui::cb_pan_freq(RKR_Slider* o, void* v) {
 void PanGui::cb_pan_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(110);
+ rgui->getMIDIControl(MC_Pan_LFO_Random);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_LFO_Random,(int)o->value());
@@ -112,7 +112,7 @@ void PanGui::cb_pan_lfotype(RKR_Choice* o, void* v) {
 void PanGui::cb_pan_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(104);
+ rgui->getMIDIControl(MC_Pan_LFO_Stereo);
  return;
 } 
 rkr->efx_Pan->changepar(Pan_LFO_Stereo,(int)o->value());

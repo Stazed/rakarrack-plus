@@ -47,7 +47,7 @@ reverb_HPF->value(rkr->efx_Rev->getpar(Reverb_HPF));
 reverb_damp->value(rkr->efx_Rev->getpar(Reverb_Damp));
 reverb_RS->value(rkr->efx_Rev->getpar(Reverb_Room));
 reverb_type->value(rkr->efx_Rev->getpar(Reverb_Type));
-if((int)reverb_activar->value())rkr->Reverb_Bypass=1;} selected
+if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -108,7 +108,7 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(57);
+ rgui->getMIDIControl(MC_Reverb_DryWet);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));}
@@ -119,7 +119,7 @@ rkr->efx_Rev->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(63);
+ rgui->getMIDIControl(MC_Reverb_Pan);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_Pan,(int)(o->value()+64));}
@@ -193,7 +193,7 @@ if((int)reverb_activar->value())rkr->Reverb_Bypass=1;}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(87);
+ rgui->getMIDIControl(MC_Reverb_LPF);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_LPF,(int)o->value());}
@@ -204,7 +204,7 @@ rkr->efx_Rev->changepar(Reverb_LPF,(int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(90);
+ rgui->getMIDIControl(MC_Reverb_HPF);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_HPF,(int)o->value());}
@@ -218,7 +218,7 @@ rkr->efx_Rev->changepar(Reverb_HPF,(int)o->value());}
  rgui->getMIDIControl(MC_Reverb_Damp);
  return;
 }
-rkr->efx_Rev->changepar(Reverb_Damp,(int)o->value());}
+rkr->efx_Rev->changepar(Reverb_Damp,(int)o->value());} selected
     xywh {56 163 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
     class RKR_Slider
   }

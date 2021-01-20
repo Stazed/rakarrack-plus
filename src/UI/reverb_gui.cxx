@@ -58,7 +58,7 @@ Fl_Menu_Item ReverbGui::menu_reverb_preset[] = {
 void ReverbGui::cb_reverb_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(57);
+ rgui->getMIDIControl(MC_Reverb_DryWet);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));
@@ -70,7 +70,7 @@ void ReverbGui::cb_reverb_WD(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(63);
+ rgui->getMIDIControl(MC_Reverb_Pan);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_Pan,(int)(o->value()+64));
@@ -152,7 +152,7 @@ void ReverbGui::cb_reverb_RS(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(87);
+ rgui->getMIDIControl(MC_Reverb_LPF);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_LPF,(int)o->value());
@@ -164,7 +164,7 @@ void ReverbGui::cb_reverb_LPF(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(90);
+ rgui->getMIDIControl(MC_Reverb_HPF);
  return;
 } 
 rkr->efx_Rev->changepar(Reverb_HPF,(int)o->value());

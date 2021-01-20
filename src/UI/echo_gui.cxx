@@ -51,7 +51,7 @@ Fl_Menu_Item EchoGui::menu_echo_preset[] = {
 void EchoGui::cb_echo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(59);
+ rgui->getMIDIControl(MC_Echo_DryWet);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));
@@ -75,7 +75,7 @@ void EchoGui::cb_echo_RV(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(46);
+ rgui->getMIDIControl(MC_Echo_Pan);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_Pan,(int)(o->value()+64));
@@ -111,7 +111,7 @@ void EchoGui::cb_echo_LRdl(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(97);
+ rgui->getMIDIControl(MC_Echo_LR_Cross);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_LR_Cross,(int)(o->value()));
@@ -123,7 +123,7 @@ void EchoGui::cb_echo_LRc(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(78);
+ rgui->getMIDIControl(MC_Echo_Feedback);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_Feedback,(int)o->value());

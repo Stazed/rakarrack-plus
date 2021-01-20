@@ -15,7 +15,7 @@ decl {\#include "RKR_Counter.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} AphaserGui {
-  user_data 1 open selected
+  user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -88,7 +88,7 @@ aphaser_hyper->value(rkr->efx_APhaser->getpar(APhase_Hyper));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(117);
+ rgui->getMIDIControl(MC_APhase_DryWet);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_DryWet,Dry_Wet((int)(o->value())));}
@@ -99,7 +99,7 @@ rkr->efx_APhaser->changepar(APhase_DryWet,Dry_Wet((int)(o->value())));}
     label Distort
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(118);
+ rgui->getMIDIControl(MC_APhase_Distortion);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_Distortion,(int)o->value());}
@@ -110,7 +110,7 @@ rkr->efx_APhaser->changepar(APhase_Distortion,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(119);
+ rgui->getMIDIControl(MC_APhase_LFO_Tempo);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_LFO_Tempo,(int)o->value());}
@@ -145,7 +145,7 @@ rkr->efx_APhaser->changepar(APhase_LFO_Type,(int)o->value());} open
     label Width
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(121);
+ rgui->getMIDIControl(MC_APhase_Width);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_Width,(int)o->value());}
@@ -156,7 +156,7 @@ rkr->efx_APhaser->changepar(APhase_Width,(int)o->value());}
     label {P. Depth}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(120);
+ rgui->getMIDIControl(MC_APhase_Depth);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_Depth,(int)o->value());}
@@ -167,7 +167,7 @@ rkr->efx_APhaser->changepar(APhase_Depth,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(122);
+ rgui->getMIDIControl(MC_APhase_Feedback);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_Feedback,(int)(o->value()+64));}
@@ -178,7 +178,7 @@ rkr->efx_APhaser->changepar(APhase_Feedback,(int)(o->value()+64));}
     label Mismatch
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(123);
+ rgui->getMIDIControl(MC_APhase_Mismatch);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_Mismatch,(int)o->value());}
@@ -189,7 +189,7 @@ rkr->efx_APhaser->changepar(APhase_Mismatch,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(124);
+ rgui->getMIDIControl(MC_APhase_LFO_Stereo);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_LFO_Stereo,(int)o->value());}
@@ -213,7 +213,7 @@ rkr->efx_APhaser->changepar(APhase_LFO_Stereo,(int)o->value());}
   Fl_Check_Button aphaser_hyper {
     label Hyper
     user_data 2
-    callback {rkr->efx_APhaser->changepar(APhase_Hyper,(int)o->value())}
+    callback {rkr->efx_APhaser->changepar(APhase_Hyper,(int)o->value())} selected
     xywh {90 165 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

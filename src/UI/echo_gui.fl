@@ -47,7 +47,7 @@ echo_LRc->value(rkr->efx_Echo->getpar(Echo_LR_Cross));
 echo_fb->value(rkr->efx_Echo->getpar(Echo_Feedback));
 echo_damp->value(rkr->efx_Echo->getpar(Echo_Damp));
 echo_RV->value(rkr->efx_Echo->getpar(Echo_Reverse));
-echo_direct->value(rkr->efx_Echo->getpar(Echo_Direct));} selected
+echo_direct->value(rkr->efx_Echo->getpar(Echo_Direct));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -92,7 +92,7 @@ echo_direct->value(rkr->efx_Echo->getpar(Echo_Direct));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(59);
+ rgui->getMIDIControl(MC_Echo_DryWet);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));}
@@ -114,7 +114,7 @@ rkr->efx_Echo->changepar(Echo_Reverse,(int)o->value());}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(46);
+ rgui->getMIDIControl(MC_Echo_Pan);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_Pan,(int)(o->value()+64));}
@@ -147,7 +147,7 @@ rkr->efx_Echo->changepar(Echo_LR_Delay,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(97);
+ rgui->getMIDIControl(MC_Echo_LR_Cross);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_LR_Cross,(int)(o->value()));}
@@ -158,7 +158,7 @@ rkr->efx_Echo->changepar(Echo_LR_Cross,(int)(o->value()));}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(78);
+ rgui->getMIDIControl(MC_Echo_Feedback);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_Feedback,(int)o->value());}
@@ -179,7 +179,7 @@ rkr->efx_Echo->changepar(Echo_Feedback,(int)o->value());}
  rgui->getMIDIControl(MC_Echo_Damp);
  return;
 } 
-rkr->efx_Echo->changepar(Echo_Damp,(int)o->value());}
+rkr->efx_Echo->changepar(Echo_Damp,(int)o->value());} selected
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

@@ -1072,7 +1072,7 @@ else rkr->booster=1.0f;}
           label {FX%}
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(12);
+ getMIDIControl(MC_Balance_FX);
  return;
 } 
 rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
@@ -1083,7 +1083,7 @@ rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
           label Input
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(14);
+ getMIDIControl(MC_Input_Volume);
  return;
 } 
 rkr->Input_Gain=(float)((o->value()+50)/100.0);
@@ -1095,7 +1095,7 @@ rkr->calculavol(1);}
           label Output
           callback {if(Fl::event_button()==3)
 {
- getMIDIControl(7);
+ getMIDIControl(MC_Output_Volume);
  return;
 } 
 
