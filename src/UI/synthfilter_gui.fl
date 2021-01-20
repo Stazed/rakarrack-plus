@@ -135,7 +135,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Tempo,(int)o->value());}
     label R
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(446);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Random);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Random,(int)o->value());}
@@ -146,7 +146,7 @@ rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Random,(int)o->value());}
     label LFO
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(466);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Type);
  return;
 }
 

@@ -186,7 +186,7 @@ rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(448);
+ rgui->getMIDIControl(MC_Sharm_Select);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_Select,(int)o->value());

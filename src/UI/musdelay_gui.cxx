@@ -146,7 +146,7 @@ void MusdelayGui::cb_musdelay_delay2(RKR_Choice* o, void* v) {
 void MusdelayGui::cb_musdelay_tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(424);
+ rgui->getMIDIControl(MC_Music_Tempo);
  return;
 }
 rkr->MusDelay_Bypass=0;
@@ -208,7 +208,7 @@ void MusdelayGui::cb_musdelay_fb2(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(425);
+ rgui->getMIDIControl(MC_Music_Damp);
  return;
 }
 rkr->efx_MusDelay->changepar(Music_Damp,(int)o->value());

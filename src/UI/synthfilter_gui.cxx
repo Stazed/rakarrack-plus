@@ -93,7 +93,7 @@ void SynthfilterGui::cb_synthfilter_freq(RKR_Slider* o, void* v) {
 void SynthfilterGui::cb_synthfilter_rand_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(446);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Random);
  return;
 }
 rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Random,(int)o->value());
@@ -105,7 +105,7 @@ void SynthfilterGui::cb_synthfilter_rand(RKR_Value_Input* o, void* v) {
 void SynthfilterGui::cb_synthfilter_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(466);
+ rgui->getMIDIControl(MC_Synthfilter_LFO_Type);
  return;
 }
 

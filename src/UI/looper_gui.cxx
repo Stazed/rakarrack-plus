@@ -87,7 +87,7 @@ void LooperGui::cb_looper_level2(RKR_Slider* o, void* v) {
 void LooperGui::cb_looper_Tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(423);
+ rgui->getMIDIControl(MC_Looper_Tempo);
  return;
 }
 rkr->efx_Looper->changepar(Looper_Tempo,(int)o->value());

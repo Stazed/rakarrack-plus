@@ -49,7 +49,7 @@ Fl_Menu_Item CbandGui::menu_cband_preset[] = {
 void CbandGui::cb_cband_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(368);
+ rgui->getMIDIControl(MC_CompBand_DryWet);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_DryWet,Dry_Wet((int)(o->value())));
@@ -61,7 +61,7 @@ void CbandGui::cb_cband_WD(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(369);
+ rgui->getMIDIControl(MC_CompBand_Gain);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Gain,(int)o->value());
@@ -73,7 +73,7 @@ void CbandGui::cb_cband_gain(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_Lratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(370);
+ rgui->getMIDIControl(MC_CompBand_Low_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Low_Ratio, (int) o->value());
@@ -85,7 +85,7 @@ void CbandGui::cb_cband_Lratio(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_MLratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(371);
+ rgui->getMIDIControl(MC_CompBand_Mid_1_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_1_Ratio, (int) o->value());
@@ -97,7 +97,7 @@ void CbandGui::cb_cband_MLratio(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_MHratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(372);
+ rgui->getMIDIControl(MC_CompBand_Mid_2_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_2_Ratio, (int) o->value());
@@ -109,7 +109,7 @@ void CbandGui::cb_cband_MHratio(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_Hratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(373);
+ rgui->getMIDIControl(MC_CompBand_High_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_High_Ratio, (int) o->value());
@@ -121,7 +121,7 @@ void CbandGui::cb_cband_Hratio(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_Lthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(374);
+ rgui->getMIDIControl(MC_CompBand_Low_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Low_Thresh, (int)o->value());
@@ -133,7 +133,7 @@ void CbandGui::cb_cband_Lthres(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_MLthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(375);
+ rgui->getMIDIControl(MC_CompBand_Mid_1_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_1_Thresh, (int)o->value());
@@ -145,7 +145,7 @@ void CbandGui::cb_cband_MLthres(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_MHthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(376);
+ rgui->getMIDIControl(MC_CompBand_Mid_2_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_2_Thresh, (int)o->value());
@@ -157,7 +157,7 @@ void CbandGui::cb_cband_MHthres(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_Hthres_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(377);
+ rgui->getMIDIControl(MC_CompBand_High_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_High_Thresh, (int)o->value());
@@ -169,7 +169,7 @@ void CbandGui::cb_cband_Hthres(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_cross1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(378);
+ rgui->getMIDIControl(MC_CompBand_Cross_1);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Cross_1,(int)o->value());
@@ -181,7 +181,7 @@ void CbandGui::cb_cband_cross1(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_cross2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(379);
+ rgui->getMIDIControl(MC_CompBand_Cross_2);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Cross_2,(int)o->value());
@@ -193,7 +193,7 @@ void CbandGui::cb_cband_cross2(RKR_Slider* o, void* v) {
 void CbandGui::cb_cband_cross3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(380);
+ rgui->getMIDIControl(MC_CompBand_Cross_3);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Cross_3,(int)o->value());

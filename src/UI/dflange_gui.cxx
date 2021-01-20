@@ -197,7 +197,7 @@ void DflangeGui::cb_dflange_stdf(RKR_Slider* o, void* v) {
 void DflangeGui::cb_dflange_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(460);
+ rgui->getMIDIControl(MC_DFlange_LFO_Type);
  return;
 } 
 

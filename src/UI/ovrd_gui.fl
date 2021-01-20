@@ -111,7 +111,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Level,(int)o->value());}
     label Type
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(450);
+ rgui->getMIDIControl(MC_Overdrive_Type);
  return;
 } 
 

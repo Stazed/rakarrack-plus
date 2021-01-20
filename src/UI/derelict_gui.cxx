@@ -96,7 +96,7 @@ void DerelictGui::cb_derelict_level(RKR_Slider* o, void* v) {
 void DerelictGui::cb_derelict_tipo_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(451);
+ rgui->getMIDIControl(MC_Dere_Type);
  return;
 } 
 

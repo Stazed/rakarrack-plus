@@ -193,7 +193,7 @@ rkr->efx_DistBand->changepar(DistBand_Cross_2,(int)o->value());}
   Fl_Choice distband_tipoL {
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(452);
+ rgui->getMIDIControl(MC_DistBand_Type_Low);
  return;
 } 
 
@@ -205,7 +205,7 @@ rkr->efx_DistBand->changepar(DistBand_Type_Low,(int)o->value());} open
   Fl_Choice distband_tipoM {
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(453);
+ rgui->getMIDIControl(MC_DistBand_Type_Mid);
  return;
 } 
 
@@ -217,7 +217,7 @@ rkr->efx_DistBand->changepar(DistBand_Type_Mid,(int)o->value());} open
   Fl_Choice distband_tipoH {
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(454);
+ rgui->getMIDIControl(MC_DistBand_Type_Hi);
  return;
 } 
 

@@ -98,7 +98,7 @@ void ChorusGui::cb_chorus_rnd(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(458);
+ rgui->getMIDIControl(MC_Chorus_LFO_Type);
  return;
 } 
 
@@ -149,7 +149,7 @@ void ChorusGui::cb_chorus_dpth(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(406);
+ rgui->getMIDIControl(MC_Chorus_Delay);
  return;
 } 
 

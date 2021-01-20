@@ -94,7 +94,7 @@ void OvrdGui::cb_ovrd_level(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_tipo_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(450);
+ rgui->getMIDIControl(MC_Overdrive_Type);
  return;
 } 
 

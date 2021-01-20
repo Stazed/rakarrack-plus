@@ -116,7 +116,7 @@ rkr->efx_Pan->changepar(Pan_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(464);
+ rgui->getMIDIControl(MC_Pan_LFO_Type);
  return;
 } 
 
@@ -147,7 +147,7 @@ rkr->efx_Pan->changepar(Pan_LFO_Stereo,(int)o->value());}
     label {E.Stereo}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(436);
+ rgui->getMIDIControl(MC_Pan_Ex_St_Amt);
  return;
 }
 rkr->efx_Pan->changepar(Pan_Ex_St_Amt,(int)o->value());}

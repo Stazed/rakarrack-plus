@@ -125,7 +125,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Random,(int)o->value());}
     user_data 12
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(458);
+ rgui->getMIDIControl(MC_Chorus_LFO_Type);
  return;
 } 
 
@@ -174,7 +174,7 @@ rkr->efx_Chorus->changepar(Chorus_Depth,(int)o->value());}
     label Delay
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(406);
+ rgui->getMIDIControl(MC_Chorus_Delay);
  return;
 } 
 

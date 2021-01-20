@@ -151,7 +151,7 @@ rkr->efx_StompBox->changepar(Stomp_Tone,(int)o->value());}
     user_data 12
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(455);
+ rgui->getMIDIControl(MC_Stomp_Mode);
  return;
 }
 

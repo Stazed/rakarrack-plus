@@ -99,7 +99,7 @@ void PanGui::cb_pan_rnd(RKR_Slider* o, void* v) {
 void PanGui::cb_pan_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(464);
+ rgui->getMIDIControl(MC_Pan_LFO_Type);
  return;
 } 
 
@@ -131,7 +131,7 @@ void PanGui::cb_pan_extraon(RKR_Check_Button* o, void* v) {
 void PanGui::cb_pan_extra_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(436);
+ rgui->getMIDIControl(MC_Pan_Ex_St_Amt);
  return;
 }
 rkr->efx_Pan->changepar(Pan_Ex_St_Amt,(int)o->value());

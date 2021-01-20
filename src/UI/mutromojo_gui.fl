@@ -188,7 +188,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_HighPass,(int)o->value());}
     label LFO
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(462);
+ rgui->getMIDIControl(MC_MuTro_LFO_Type);
  return;
 }
 
@@ -278,7 +278,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_Env_Smooth,(int)o->value());}
     label R
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(426);
+ rgui->getMIDIControl(MC_MuTro_LFO_Random);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LFO_Random,(int)o->value());}
@@ -289,7 +289,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_LFO_Random,(int)o->value());}
     label D
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(427);
+ rgui->getMIDIControl(MC_MuTro_LFO_Stereo);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LFO_Stereo,(int)o->value()+64);}
@@ -300,7 +300,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_LFO_Stereo,(int)o->value()+64);}
     label F
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(428);
+ rgui->getMIDIControl(MC_MuTro_St_Freq);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_St_Freq,(int)o->value());}

@@ -99,7 +99,7 @@ void PhaserGui::cb_phaser_rnd(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(465);
+ rgui->getMIDIControl(MC_Phaser_LFO_Type);
  return;
 } 
 

@@ -99,7 +99,7 @@ void WahwahGui::cb_WahWah_rnd(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(470);
+ rgui->getMIDIControl(MC_WahWah_LFO_Type);
  return;
 } 
 

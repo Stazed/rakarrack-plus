@@ -116,7 +116,7 @@ rkr->efx_Derelict->changepar(Dere_Level,(int)o->value());}
     label Type
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(451);
+ rgui->getMIDIControl(MC_Dere_Type);
  return;
 } 
 

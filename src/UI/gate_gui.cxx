@@ -41,7 +41,7 @@ Fl_Menu_Item GateGui::menu_gate_preset[] = {
 void GateGui::cb_gate_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(429);
+ rgui->getMIDIControl(MC_Gate_Attack);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Attack,(int)o->value());
@@ -53,7 +53,7 @@ void GateGui::cb_gate_ATime(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(430);
+ rgui->getMIDIControl(MC_Gate_Release);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Release, (int) o->value());
@@ -65,7 +65,7 @@ void GateGui::cb_gate_RTime(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_range_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(431);
+ rgui->getMIDIControl(MC_Gate_Range);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Range, (int) o->value());
@@ -77,7 +77,7 @@ void GateGui::cb_gate_range(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(432);
+ rgui->getMIDIControl(MC_Gate_Threshold);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Threshold, (int)o->value());
@@ -89,7 +89,7 @@ void GateGui::cb_gate_threshold(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_hold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(433);
+ rgui->getMIDIControl(MC_Gate_Hold);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Hold,(int)o->value());
@@ -101,7 +101,7 @@ void GateGui::cb_gate_hold(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(434);
+ rgui->getMIDIControl(MC_Gate_LPF);
  return;
 }
 rkr->efx_Gate->changepar(Gate_LPF, (int)o->value());
@@ -113,7 +113,7 @@ void GateGui::cb_gate_LPF(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(435);
+ rgui->getMIDIControl(MC_Gate_HPF);
  return;
 }
 rkr->efx_Gate->changepar(Gate_HPF, (int)o->value());

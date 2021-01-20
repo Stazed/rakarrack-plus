@@ -164,7 +164,7 @@ void DistBandGui::cb_distband_cross2(RKR_Slider* o, void* v) {
 void DistBandGui::cb_distband_tipoL_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(452);
+ rgui->getMIDIControl(MC_DistBand_Type_Low);
  return;
 } 
 
@@ -177,7 +177,7 @@ void DistBandGui::cb_distband_tipoL(RKR_Choice* o, void* v) {
 void DistBandGui::cb_distband_tipoM_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(453);
+ rgui->getMIDIControl(MC_DistBand_Type_Mid);
  return;
 } 
 
@@ -190,7 +190,7 @@ void DistBandGui::cb_distband_tipoM(RKR_Choice* o, void* v) {
 void DistBandGui::cb_distband_tipoH_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(454);
+ rgui->getMIDIControl(MC_DistBand_Type_Hi);
  return;
 } 
 

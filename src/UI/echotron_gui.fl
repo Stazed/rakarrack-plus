@@ -198,7 +198,7 @@ rkr->efx_Echotron->changepar(Echotron_LFO_Stereo,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(461);
+ rgui->getMIDIControl(MC_Echotron_LFO_Type);
  return;
 }
 

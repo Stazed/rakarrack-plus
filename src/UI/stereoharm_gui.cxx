@@ -167,7 +167,7 @@ void SharGui::cb_shar_MIDI(RKR_Check_Button* o, void* v) {
 void SharGui::cb_shar_SELECT_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(448);
+ rgui->getMIDIControl(MC_Sharm_Select);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_Select,(int)o->value());

@@ -62,7 +62,7 @@ Fl_Menu_Item InfinityGui::menu_infinity_preset[] = {
 void InfinityGui::cb_infinity_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(395);
+ rgui->getMIDIControl(MC_Infinity_DryWet);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_DryWet,Dry_Wet((int)(o->value())));
@@ -74,7 +74,7 @@ void InfinityGui::cb_infinity_WD(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_Q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(396);
+ rgui->getMIDIControl(MC_Infinity_Resonance);
  return;
 }
 rkr->efx_Infinity->changepar(Infinity_Resonance,(int)o->value());
@@ -86,7 +86,7 @@ void InfinityGui::cb_infinity_Q(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_1_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(415);
+ rgui->getMIDIControl(MC_Infinity_Band_1);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_1,(int)o->value());
@@ -98,7 +98,7 @@ void InfinityGui::cb_infinity_1(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_2_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(416);
+ rgui->getMIDIControl(MC_Infinity_Band_2);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_2,(int)o->value());
@@ -110,7 +110,7 @@ void InfinityGui::cb_infinity_2(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_3_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(417);
+ rgui->getMIDIControl(MC_Infinity_Band_3);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_3,(int)o->value());
@@ -122,7 +122,7 @@ void InfinityGui::cb_infinity_3(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_4_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(418);
+ rgui->getMIDIControl(MC_Infinity_Band_4);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_4,(int)o->value());
@@ -134,7 +134,7 @@ void InfinityGui::cb_infinity_4(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_5_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(419);
+ rgui->getMIDIControl(MC_Infinity_Band_5);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_5,(int)o->value());
@@ -146,7 +146,7 @@ void InfinityGui::cb_infinity_5(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_6_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(420);
+ rgui->getMIDIControl(MC_Infinity_Band_6);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_6,(int)o->value());
@@ -158,7 +158,7 @@ void InfinityGui::cb_infinity_6(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_7_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(421);
+ rgui->getMIDIControl(MC_Infinity_Band_7);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_7,(int)o->value());
@@ -170,7 +170,7 @@ void InfinityGui::cb_infinity_7(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_8_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(422);
+ rgui->getMIDIControl(MC_Infinity_Band_8);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Band_8,(int)o->value());
@@ -196,7 +196,7 @@ void InfinityGui::cb_infinity_stages(RKR_Counter* o, void* v) {
 void InfinityGui::cb_infinity_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(397);
+ rgui->getMIDIControl(MC_Infinity_AutoPan);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_AutoPan,(int)o->value());
@@ -208,7 +208,7 @@ void InfinityGui::cb_infinity_pan(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(398);
+ rgui->getMIDIControl(MC_Infinity_LR_Delay);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_LR_Delay,(int)o->value());
@@ -220,7 +220,7 @@ void InfinityGui::cb_infinity_stdf(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_start_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(399);
+ rgui->getMIDIControl(MC_Infinity_Start);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Start,(int)o->value());
@@ -232,7 +232,7 @@ void InfinityGui::cb_infinity_start(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_end_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(400);
+ rgui->getMIDIControl(MC_Infinity_End);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_End,(int)o->value());
@@ -244,7 +244,7 @@ void InfinityGui::cb_infinity_end(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_rate_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(401);
+ rgui->getMIDIControl(MC_Infinity_Tempo);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Tempo,(int)o->value());
@@ -256,7 +256,7 @@ void InfinityGui::cb_infinity_rate(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_subdiv_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(402);
+ rgui->getMIDIControl(MC_Infinity_Subdivision);
  return;
 } 
 rkr->efx_Infinity->changepar(Infinity_Subdivision,(int)o->value());

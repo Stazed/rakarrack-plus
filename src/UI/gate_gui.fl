@@ -61,7 +61,7 @@ gate_LPF->value(rkr->efx_Gate->getpar(Gate_LPF));}
     label {A. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(429);
+ rgui->getMIDIControl(MC_Gate_Attack);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Attack,(int)o->value());}
@@ -72,7 +72,7 @@ rkr->efx_Gate->changepar(Gate_Attack,(int)o->value());}
     label {R. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(430);
+ rgui->getMIDIControl(MC_Gate_Release);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Release, (int) o->value());}
@@ -83,7 +83,7 @@ rkr->efx_Gate->changepar(Gate_Release, (int) o->value());}
     label Range
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(431);
+ rgui->getMIDIControl(MC_Gate_Range);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Range, (int) o->value());}
@@ -94,7 +94,7 @@ rkr->efx_Gate->changepar(Gate_Range, (int) o->value());}
     label Threshold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(432);
+ rgui->getMIDIControl(MC_Gate_Threshold);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Threshold, (int)o->value());}
@@ -105,7 +105,7 @@ rkr->efx_Gate->changepar(Gate_Threshold, (int)o->value());}
     label Hold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(433);
+ rgui->getMIDIControl(MC_Gate_Hold);
  return;
 }
 rkr->efx_Gate->changepar(Gate_Hold,(int)o->value());} selected
@@ -116,7 +116,7 @@ rkr->efx_Gate->changepar(Gate_Hold,(int)o->value());} selected
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(434);
+ rgui->getMIDIControl(MC_Gate_LPF);
  return;
 }
 rkr->efx_Gate->changepar(Gate_LPF, (int)o->value());}
@@ -127,7 +127,7 @@ rkr->efx_Gate->changepar(Gate_LPF, (int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(435);
+ rgui->getMIDIControl(MC_Gate_HPF);
  return;
 }
 rkr->efx_Gate->changepar(Gate_HPF, (int)o->value());}

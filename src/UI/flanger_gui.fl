@@ -124,7 +124,7 @@ rkr->efx_Flanger->changepar(Flanger_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(459);
+ rgui->getMIDIControl(MC_Flanger_LFO_Type);
  return;
 } 
 
@@ -173,7 +173,7 @@ rkr->efx_Flanger->changepar(Flanger_Depth,(int)o->value());}
     label Delay
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(411);
+ rgui->getMIDIControl(MC_Flanger_Delay);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_Delay,(int)o->value());}

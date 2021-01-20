@@ -76,7 +76,7 @@ void HarGui::cb_har_int(RKR_Slider* o, void* v) {
 void HarGui::cb_har_gan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(412);
+ rgui->getMIDIControl(MC_Harm_Gain);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Gain,(int)(o->value()+64));
@@ -112,7 +112,7 @@ void HarGui::cb_har_freq1(RKR_Slider* o, void* v) {
 void HarGui::cb_har_gan1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(413);
+ rgui->getMIDIControl(MC_Harm_Filter_Gain);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Filter_Gain,(int)(o->value()+64));
@@ -124,7 +124,7 @@ void HarGui::cb_har_gan1(RKR_Slider* o, void* v) {
 void HarGui::cb_har_q1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(414);
+ rgui->getMIDIControl(MC_Harm_Filter_Q);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Filter_Q,(int)(o->value()+64));
@@ -145,7 +145,7 @@ void HarGui::cb_har_MIDI(RKR_Check_Button* o, void* v) {
 void HarGui::cb_har_SELECT_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(447);
+ rgui->getMIDIControl(MC_Harm_Select);
  return;
 }
 rkr->efx_Har->changepar(Harm_Select,(int)o->value());
@@ -160,7 +160,7 @@ void HarGui::cb_har_SELECT(RKR_Check_Button* o, void* v) {
 void HarGui::cb_har_note_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(444);
+ rgui->getMIDIControl(MC_Harm_Note);
  return;
 }
 rkr->efx_Har->changepar(Harm_Note,(unsigned char)o->value());
@@ -173,7 +173,7 @@ void HarGui::cb_har_note(RKR_Slider* o, void* v) {
 void HarGui::cb_har_type_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(445);
+ rgui->getMIDIControl(MC_Harm_Chord);
  return;
 }
 rkr->efx_Har->changepar(Harm_Chord,(unsigned char)o->value());

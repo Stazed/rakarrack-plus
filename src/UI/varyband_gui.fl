@@ -98,7 +98,7 @@ rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_1,(int)o->value());}
     label {LFO 1 Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(467);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Type_1);
  return;
 }
 
@@ -133,7 +133,7 @@ rkr->efx_VaryBand->changepar(VaryBand_LFO_Tempo_2,(int)o->value());}
     label {LFO 2 Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(468);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Type_2);
  return;
 }
 

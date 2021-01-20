@@ -199,7 +199,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Fade,(int)o->value());}
     label Diffusion
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(442);
+ rgui->getMIDIControl(MC_Revtron_Diffusion);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Diffusion,(int)o->value());}
@@ -210,7 +210,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Diffusion,(int)o->value());}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(443);
+ rgui->getMIDIControl(MC_Revtron_LPF);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_LPF,(int)o->value());}

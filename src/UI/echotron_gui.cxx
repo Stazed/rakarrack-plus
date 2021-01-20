@@ -171,7 +171,7 @@ void EchotronGui::cb_echotron_af(RKR_Check_Button* o, void* v) {
 void EchotronGui::cb_echotron_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(461);
+ rgui->getMIDIControl(MC_Echotron_LFO_Type);
  return;
 }
 

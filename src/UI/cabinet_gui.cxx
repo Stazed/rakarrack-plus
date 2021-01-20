@@ -41,7 +41,7 @@ Fl_Menu_Item CabinetGui::menu_Cabinet_preset[] = {
 void CabinetGui::cb_Cabinet_output_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(405);
+ rgui->getMIDIControl(MC_Cabinet_Gain);
  return;
 } 
 

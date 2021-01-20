@@ -98,7 +98,7 @@ void FlangerGui::cb_flanger_rnd(RKR_Slider* o, void* v) {
 void FlangerGui::cb_flanger_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(459);
+ rgui->getMIDIControl(MC_Flanger_LFO_Type);
  return;
 } 
 
@@ -149,7 +149,7 @@ void FlangerGui::cb_flanger_dpth(RKR_Slider* o, void* v) {
 void FlangerGui::cb_flanger_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(411);
+ rgui->getMIDIControl(MC_Flanger_Delay);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_Delay,(int)o->value());

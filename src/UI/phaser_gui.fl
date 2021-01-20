@@ -131,7 +131,7 @@ rkr->efx_Phaser->changepar(Phaser_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(465);
+ rgui->getMIDIControl(MC_Phaser_LFO_Type);
  return;
 } 
 

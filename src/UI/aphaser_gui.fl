@@ -121,7 +121,7 @@ rkr->efx_APhaser->changepar(APhase_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(404);
+ rgui->getMIDIControl(MC_APhase_LFO_Random);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_LFO_Random,(int)o->value());}
@@ -132,7 +132,7 @@ rkr->efx_APhaser->changepar(APhase_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(457);
+ rgui->getMIDIControl(MC_APhase_LFO_Type);
  return;
 } 
 

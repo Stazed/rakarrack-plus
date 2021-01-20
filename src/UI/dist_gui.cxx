@@ -97,7 +97,7 @@ void DistGui::cb_dist_level(RKR_Slider* o, void* v) {
 void DistGui::cb_dist_tipo_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(449);
+ rgui->getMIDIControl(MC_Dist_Type);
  return;
 } 
 

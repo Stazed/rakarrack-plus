@@ -226,7 +226,7 @@ rkr->efx_DFlange->changepar(DFlange_LFO_Stereo,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(460);
+ rgui->getMIDIControl(MC_DFlange_LFO_Type);
  return;
 } 
 

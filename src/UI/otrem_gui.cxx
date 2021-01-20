@@ -47,7 +47,7 @@ Fl_Menu_Item OtremGui::menu_otrem_preset[] = {
 void OtremGui::cb_otrem_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(381);
+ rgui->getMIDIControl(MC_Optical_Depth);
  return;
 }
 rkr->efx_Opticaltrem->changepar(Optical_Depth,(int)o->value());
@@ -59,7 +59,7 @@ void OtremGui::cb_otrem_dpth(RKR_Slider* o, void* v) {
 void OtremGui::cb_otrem_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(382);
+ rgui->getMIDIControl(MC_Optical_LFO_Tempo);
  return;
 }
 rkr->efx_Opticaltrem->changepar(Optical_LFO_Tempo,(int)o->value());
@@ -71,7 +71,7 @@ void OtremGui::cb_otrem_freq(RKR_Slider* o, void* v) {
 void OtremGui::cb_otrem_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(383);
+ rgui->getMIDIControl(MC_Optical_LFO_Random);
  return;
 }
 rkr->efx_Opticaltrem->changepar(Optical_LFO_Random,(int)o->value());
@@ -83,7 +83,7 @@ void OtremGui::cb_otrem_rnd(RKR_Slider* o, void* v) {
 void OtremGui::cb_otrem_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(463);
+ rgui->getMIDIControl(MC_Optical_LFO_Type);
  return;
 }
 
@@ -96,7 +96,7 @@ void OtremGui::cb_otrem_lfotype(RKR_Choice* o, void* v) {
 void OtremGui::cb_otrem_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(384);
+ rgui->getMIDIControl(MC_Optical_LFO_Stereo);
  return;
 }
 rkr->efx_Opticaltrem->changepar(Optical_LFO_Stereo,(int)o->value());
@@ -108,7 +108,7 @@ void OtremGui::cb_otrem_stdf(RKR_Slider* o, void* v) {
 void OtremGui::cb_otrem_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(385);
+ rgui->getMIDIControl(MC_Optical_Pan);
  return;
 }
 rkr->efx_Opticaltrem->changepar(Optical_Pan,(int)(o->value()+64));

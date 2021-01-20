@@ -167,7 +167,7 @@ void RevtronGui::cb_revtron_fade(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_diff_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(442);
+ rgui->getMIDIControl(MC_Revtron_Diffusion);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Diffusion,(int)o->value());
@@ -179,7 +179,7 @@ void RevtronGui::cb_revtron_diff(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(443);
+ rgui->getMIDIControl(MC_Revtron_LPF);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_LPF,(int)o->value());

@@ -63,7 +63,7 @@ void EchoGui::cb_echo_WD(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_RV_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(407);
+ rgui->getMIDIControl(MC_Echo_Reverse);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_Reverse,(int)o->value());
@@ -87,7 +87,7 @@ void EchoGui::cb_echo_pan(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(408);
+ rgui->getMIDIControl(MC_Echo_Delay);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_Delay,(int)o->value());
@@ -99,7 +99,7 @@ void EchoGui::cb_echo_delay(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_LRdl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(409);
+ rgui->getMIDIControl(MC_Echo_LR_Delay);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_LR_Delay,(int)o->value());
@@ -142,7 +142,7 @@ void EchoGui::cb_echo_direct(RKR_Check_Button* o, void* v) {
 void EchoGui::cb_echo_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(410);
+ rgui->getMIDIControl(MC_Echo_Damp);
  return;
 } 
 rkr->efx_Echo->changepar(Echo_Damp,(int)o->value());

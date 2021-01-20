@@ -96,7 +96,7 @@ void AlienwahGui::cb_Alienwah_rnd(RKR_Slider* o, void* v) {
 void AlienwahGui::cb_Alienwah_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(456);
+ rgui->getMIDIControl(MC_Alien_LFO_Type);
  return;
 } 
 
@@ -145,7 +145,7 @@ void AlienwahGui::cb_Alienwah_dpth(RKR_Slider* o, void* v) {
 void AlienwahGui::cb_Alienwah_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(403);
+ rgui->getMIDIControl(MC_Alien_Delay);
  return;
 } 
 rkr->Alienwah_Bypass=0;

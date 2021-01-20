@@ -95,7 +95,7 @@ vibe_stereo->value(rkr->efx_Vibe->getpar(Vibe_Stereo));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(386);
+ rgui->getMIDIControl(MC_Vibe_DryWet);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_DryWet,Dry_Wet((int)(o->value())));}
@@ -106,7 +106,7 @@ rkr->efx_Vibe->changepar(Vibe_DryWet,Dry_Wet((int)(o->value())));}
     label Width
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(387);
+ rgui->getMIDIControl(MC_Vibe_Width);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_Width,(int)o->value());}
@@ -117,7 +117,7 @@ rkr->efx_Vibe->changepar(Vibe_Width,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(388);
+ rgui->getMIDIControl(MC_Vibe_Depth);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_Depth,(int)o->value());}
@@ -128,7 +128,7 @@ rkr->efx_Vibe->changepar(Vibe_Depth,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(389);
+ rgui->getMIDIControl(MC_Vibe_LFO_Tempo);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_LFO_Tempo,(int)o->value());}
@@ -139,7 +139,7 @@ rkr->efx_Vibe->changepar(Vibe_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(390);
+ rgui->getMIDIControl(MC_Vibe_LFO_Random);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_LFO_Random,(int)o->value());}
@@ -150,7 +150,7 @@ rkr->efx_Vibe->changepar(Vibe_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(469);
+ rgui->getMIDIControl(MC_Vibe_LFO_Type);
  return;
 }
 
@@ -163,7 +163,7 @@ rkr->efx_Vibe->changepar(Vibe_LFO_Type,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(391);
+ rgui->getMIDIControl(MC_Vibe_LFO_Stereo);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_LFO_Stereo,(int)o->value());}
@@ -174,7 +174,7 @@ rkr->efx_Vibe->changepar(Vibe_LFO_Stereo,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(392);
+ rgui->getMIDIControl(MC_Vibe_Feedback);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_Feedback,(int)(o->value()+64));}
@@ -185,7 +185,7 @@ rkr->efx_Vibe->changepar(Vibe_Feedback,(int)(o->value()+64));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(393);
+ rgui->getMIDIControl(MC_Vibe_LR_Cross);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_LR_Cross,(int)(o->value()));}
@@ -196,7 +196,7 @@ rkr->efx_Vibe->changepar(Vibe_LR_Cross,(int)(o->value()));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(394);
+ rgui->getMIDIControl(MC_Vibe_Pan);
  return;
 }
 rkr->efx_Vibe->changepar(Vibe_Pan,(int)(o->value()+64));}

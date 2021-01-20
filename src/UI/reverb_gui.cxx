@@ -82,7 +82,7 @@ void ReverbGui::cb_reverb_pan(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_time_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(437);
+ rgui->getMIDIControl(MC_Reverb_Time);
  return;
 }
 rkr->efx_Rev->changepar(Reverb_Time,(int)o->value());
@@ -94,7 +94,7 @@ void ReverbGui::cb_reverb_time(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_ldel_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(438);
+ rgui->getMIDIControl(MC_Reverb_I_Delay);
  return;
 }
 rkr->efx_Rev->changepar(Reverb_I_Delay,(int)o->value());
@@ -106,7 +106,7 @@ void ReverbGui::cb_reverb_ldel(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_ldelft_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(439);
+ rgui->getMIDIControl(MC_Reverb_Delay_FB);
  return;
 }
 rkr->efx_Rev->changepar(Reverb_Delay_FB,(int)o->value());
@@ -138,7 +138,7 @@ Fl_Menu_Item ReverbGui::menu_reverb_type[] = {
 void ReverbGui::cb_reverb_RS_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(440);
+ rgui->getMIDIControl(MC_Reverb_Room);
  return;
 }
 rkr->Reverb_Bypass=0;
@@ -176,7 +176,7 @@ void ReverbGui::cb_reverb_HPF(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(441);
+ rgui->getMIDIControl(MC_Reverb_Damp);
  return;
 }
 rkr->efx_Rev->changepar(Reverb_Damp,(int)o->value());

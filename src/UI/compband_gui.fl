@@ -69,7 +69,7 @@ cband_gain->value(rkr->efx_CompBand->getpar(CompBand_Gain));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(368);
+ rgui->getMIDIControl(MC_CompBand_DryWet);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_DryWet,Dry_Wet((int)(o->value())));}
@@ -80,7 +80,7 @@ rkr->efx_CompBand->changepar(CompBand_DryWet,Dry_Wet((int)(o->value())));}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(369);
+ rgui->getMIDIControl(MC_CompBand_Gain);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Gain,(int)o->value());} selected
@@ -91,7 +91,7 @@ rkr->efx_CompBand->changepar(CompBand_Gain,(int)o->value());} selected
     label {L Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(370);
+ rgui->getMIDIControl(MC_CompBand_Low_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Low_Ratio, (int) o->value());}
@@ -102,7 +102,7 @@ rkr->efx_CompBand->changepar(CompBand_Low_Ratio, (int) o->value());}
     label {ML Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(371);
+ rgui->getMIDIControl(MC_CompBand_Mid_1_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_1_Ratio, (int) o->value());}
@@ -113,7 +113,7 @@ rkr->efx_CompBand->changepar(CompBand_Mid_1_Ratio, (int) o->value());}
     label {MH Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(372);
+ rgui->getMIDIControl(MC_CompBand_Mid_2_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_2_Ratio, (int) o->value());}
@@ -124,7 +124,7 @@ rkr->efx_CompBand->changepar(CompBand_Mid_2_Ratio, (int) o->value());}
     label {H Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(373);
+ rgui->getMIDIControl(MC_CompBand_High_Ratio);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_High_Ratio, (int) o->value());}
@@ -135,7 +135,7 @@ rkr->efx_CompBand->changepar(CompBand_High_Ratio, (int) o->value());}
     label {L Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(374);
+ rgui->getMIDIControl(MC_CompBand_Low_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Low_Thresh, (int)o->value());}
@@ -146,7 +146,7 @@ rkr->efx_CompBand->changepar(CompBand_Low_Thresh, (int)o->value());}
     label {ML Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(375);
+ rgui->getMIDIControl(MC_CompBand_Mid_1_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_1_Thresh, (int)o->value());}
@@ -157,7 +157,7 @@ rkr->efx_CompBand->changepar(CompBand_Mid_1_Thresh, (int)o->value());}
     label {MH Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(376);
+ rgui->getMIDIControl(MC_CompBand_Mid_2_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Mid_2_Thresh, (int)o->value());}
@@ -168,7 +168,7 @@ rkr->efx_CompBand->changepar(CompBand_Mid_2_Thresh, (int)o->value());}
     label {H Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(377);
+ rgui->getMIDIControl(MC_CompBand_High_Thresh);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_High_Thresh, (int)o->value());}
@@ -179,7 +179,7 @@ rkr->efx_CompBand->changepar(CompBand_High_Thresh, (int)o->value());}
     label {Cross 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(378);
+ rgui->getMIDIControl(MC_CompBand_Cross_1);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Cross_1,(int)o->value());}
@@ -190,7 +190,7 @@ rkr->efx_CompBand->changepar(CompBand_Cross_1,(int)o->value());}
     label {Cross 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(379);
+ rgui->getMIDIControl(MC_CompBand_Cross_2);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Cross_2,(int)o->value());}
@@ -201,7 +201,7 @@ rkr->efx_CompBand->changepar(CompBand_Cross_2,(int)o->value());}
     label {Cross 3}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(380);
+ rgui->getMIDIControl(MC_CompBand_Cross_3);
  return;
 }
 rkr->efx_CompBand->changepar(CompBand_Cross_3,(int)o->value());}

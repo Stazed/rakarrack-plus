@@ -76,7 +76,7 @@ void VarybandGui::cb_varyband_freq1(RKR_Slider* o, void* v) {
 void VarybandGui::cb_varyband_lfotype1_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(467);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Type_1);
  return;
 }
 
@@ -113,7 +113,7 @@ void VarybandGui::cb_varyband_freq2(RKR_Slider* o, void* v) {
 void VarybandGui::cb_varyband_lfotype2_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(468);
+ rgui->getMIDIControl(MC_VaryBand_LFO_Type_2);
  return;
 }
 

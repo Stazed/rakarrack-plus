@@ -85,7 +85,7 @@ rgui->findpos(12,(int)o->value(),o);}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(405);
+ rgui->getMIDIControl(MC_Cabinet_Gain);
  return;
 } 
 

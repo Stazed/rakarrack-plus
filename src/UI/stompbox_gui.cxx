@@ -111,7 +111,7 @@ void StompboxGui::cb_stomp_high(RKR_Slider* o, void* v) {
 void StompboxGui::cb_stomp_mode_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(455);
+ rgui->getMIDIControl(MC_Stomp_Mode);
  return;
 }
 

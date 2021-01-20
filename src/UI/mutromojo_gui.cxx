@@ -150,7 +150,7 @@ void MutromojoGui::cb_svfilter_stages(RKR_Counter* o, void* v) {
 void MutromojoGui::cb_mutromojo_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(462);
+ rgui->getMIDIControl(MC_MuTro_LFO_Type);
  return;
 }
 
@@ -247,7 +247,7 @@ void MutromojoGui::cb_mutromojo_smooth(RKR_Value_Input* o, void* v) {
 void MutromojoGui::cb_mutromojo_Rnd_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(426);
+ rgui->getMIDIControl(MC_MuTro_LFO_Random);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LFO_Random,(int)o->value());
@@ -259,7 +259,7 @@ void MutromojoGui::cb_mutromojo_Rnd(RKR_Value_Input* o, void* v) {
 void MutromojoGui::cb_mutromojo_St_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(427);
+ rgui->getMIDIControl(MC_MuTro_LFO_Stereo);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_LFO_Stereo,(int)o->value()+64);
@@ -271,7 +271,7 @@ void MutromojoGui::cb_mutromojo_St(RKR_Value_Input* o, void* v) {
 void MutromojoGui::cb_mutromojo_minfreq_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(428);
+ rgui->getMIDIControl(MC_MuTro_St_Freq);
  return;
 }
 rkr->efx_MuTroMojo->changepar(MuTro_St_Freq,(int)o->value());

@@ -125,7 +125,7 @@ rkr->efx_WahWah->changepar(WahWah_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(470);
+ rgui->getMIDIControl(MC_WahWah_LFO_Type);
  return;
 } 
 

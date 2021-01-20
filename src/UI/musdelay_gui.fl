@@ -189,7 +189,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(424);
+ rgui->getMIDIControl(MC_Music_Tempo);
  return;
 }
 rkr->MusDelay_Bypass=0;
@@ -246,7 +246,7 @@ rkr->efx_MusDelay->changepar(Music_Feedback_2,(int)o->value());}
     label Damp
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(425);
+ rgui->getMIDIControl(MC_Music_Damp);
  return;
 }
 rkr->efx_MusDelay->changepar(Music_Damp,(int)o->value());}

@@ -116,7 +116,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(456);
+ rgui->getMIDIControl(MC_Alien_LFO_Type);
  return;
 } 
 
@@ -162,7 +162,7 @@ rkr->efx_Alienwah->changepar(Alien_Depth,(int)o->value());}
     label Delay
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(403);
+ rgui->getMIDIControl(MC_Alien_Delay);
  return;
 } 
 rkr->Alienwah_Bypass=0;

@@ -88,7 +88,7 @@ void AphaserGui::cb_aphaser_freq(RKR_Slider* o, void* v) {
 void AphaserGui::cb_aphaser_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(404);
+ rgui->getMIDIControl(MC_APhase_LFO_Random);
  return;
 } 
 rkr->efx_APhaser->changepar(APhase_LFO_Random,(int)o->value());
@@ -100,7 +100,7 @@ void AphaserGui::cb_aphaser_rnd(RKR_Slider* o, void* v) {
 void AphaserGui::cb_aphaser_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(457);
+ rgui->getMIDIControl(MC_APhase_LFO_Type);
  return;
 } 
 

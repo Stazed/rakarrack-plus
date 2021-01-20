@@ -97,7 +97,7 @@ if((int)har_activar->value())rkr->Harmonizer_Bypass=1;}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(412);
+ rgui->getMIDIControl(MC_Harm_Gain);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Gain,(int)(o->value()+64));}
@@ -130,7 +130,7 @@ rkr->efx_Har->changepar(Harm_Filter_Freq,(int)o->value());}
     label {F. Gain}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(413);
+ rgui->getMIDIControl(MC_Harm_Filter_Gain);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Filter_Gain,(int)(o->value()+64));}
@@ -141,7 +141,7 @@ rkr->efx_Har->changepar(Harm_Filter_Gain,(int)(o->value()+64));}
     label {Filter Q}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(414);
+ rgui->getMIDIControl(MC_Harm_Filter_Q);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Filter_Q,(int)(o->value()+64));}
@@ -162,7 +162,7 @@ if(!(int)o->value())rkr->efx_Har->changepar(Harm_Interval,rkr->efx_Har->getpar(H
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(447);
+ rgui->getMIDIControl(MC_Harm_Select);
  return;
 }
 rkr->efx_Har->changepar(Harm_Select,(int)o->value());
@@ -181,7 +181,7 @@ rgui->Chord(0);}
     label Note
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(444);
+ rgui->getMIDIControl(MC_Harm_Note);
  return;
 }
 rkr->efx_Har->changepar(Harm_Note,(unsigned char)o->value());
@@ -193,7 +193,7 @@ rgui->Chord(0);}
     label Chord
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(445);
+ rgui->getMIDIControl(MC_Harm_Chord);
  return;
 }
 rkr->efx_Har->changepar(Harm_Chord,(unsigned char)o->value());

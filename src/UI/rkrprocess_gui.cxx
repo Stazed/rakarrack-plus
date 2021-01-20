@@ -4623,417 +4623,417 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SHAR->shar_type->redraw();
                 Chord(1);   // update gui
                 break;
-            case 368:
+            case MC_CompBand_DryWet:
                 COMPBAND->cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(CompBand_DryWet)));
                 COMPBAND->cband_WD->redraw();
                 break;
-            case 369:
+            case MC_CompBand_Gain:
                 COMPBAND->cband_gain->value(rkr->efx_CompBand->getpar(CompBand_Gain));
                 COMPBAND->cband_gain->redraw();
                 break;
-            case 370:
+            case MC_CompBand_Low_Ratio:
                 COMPBAND->cband_Lratio->value(rkr->efx_CompBand->getpar(CompBand_Low_Ratio));
                 COMPBAND->cband_Lratio->redraw();
                 break;
-            case 371:
+            case MC_CompBand_Mid_1_Ratio:
                 COMPBAND->cband_MLratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Ratio));
                 COMPBAND->cband_MLratio->redraw();
                 break;
-            case 372:
+            case MC_CompBand_Mid_2_Ratio:
                 COMPBAND->cband_MHratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Ratio));
                 COMPBAND->cband_MHratio->redraw();
                 break;
-            case 373:
+            case MC_CompBand_High_Ratio:
                 COMPBAND->cband_Hratio->value(rkr->efx_CompBand->getpar(CompBand_High_Ratio));
                 COMPBAND->cband_Hratio->redraw();
                 break;
-            case 374:
+            case MC_CompBand_Low_Thresh:
                 COMPBAND->cband_Lthres->value(rkr->efx_CompBand->getpar(CompBand_Low_Thresh));
                 COMPBAND->cband_Lthres->redraw();
                 break;
-            case 375:
+            case MC_CompBand_Mid_1_Thresh:
                 COMPBAND->cband_MLthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Thresh));
                 COMPBAND->cband_MLthres->redraw();
                 break;
-            case 376:
+            case MC_CompBand_Mid_2_Thresh:
                 COMPBAND->cband_MHthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Thresh));
                 COMPBAND->cband_MHthres->redraw();
                 break;
-            case 377:
+            case MC_CompBand_High_Thresh:
                 COMPBAND->cband_Hthres->value(rkr->efx_CompBand->getpar(CompBand_High_Thresh));
                 COMPBAND->cband_Hthres->redraw();
                 break;
-            case 378:
+            case MC_CompBand_Cross_1:
                 COMPBAND->cband_cross1->value(rkr->efx_CompBand->getpar(CompBand_Cross_1));
                 COMPBAND->cband_cross1->redraw();
                 break;
-            case 379:
+            case MC_CompBand_Cross_2:
                 COMPBAND->cband_cross2->value(rkr->efx_CompBand->getpar(CompBand_Cross_2));
                 COMPBAND->cband_cross2->redraw();
                 break;
-            case 380:
+            case MC_CompBand_Cross_3:
                 COMPBAND->cband_cross3->value(rkr->efx_CompBand->getpar(CompBand_Cross_3));
                 COMPBAND->cband_cross3->redraw();
                 break;
-            case 381:
+            case MC_Optical_Depth:
                 OTREM->otrem_dpth->value(rkr->efx_Opticaltrem->getpar(Optical_Depth));
                 OTREM->otrem_dpth->redraw();
                 break;
-            case 382:
+            case MC_Optical_LFO_Tempo:
                 OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Tempo));
                 OTREM->otrem_freq->redraw();
                 break;
-            case 383:
+            case MC_Optical_LFO_Random:
                 OTREM->otrem_rnd->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Random));
                 OTREM->otrem_rnd->redraw();
                 break;
-            case 384:
+            case MC_Optical_LFO_Stereo:
                 OTREM->otrem_stdf->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Stereo));
                 OTREM->otrem_stdf->redraw();
                 break;
-            case 385:
+            case MC_Optical_Pan:
                 OTREM->otrem_pan->value(rkr->efx_Opticaltrem->getpar(Optical_Pan) - 64);
                 OTREM->otrem_pan->redraw();
                 break;
-            case 386:
+            case MC_Vibe_DryWet:
                 VIBE->vibe_WD->value(Dry_Wet(rkr->efx_Vibe->getpar(Vibe_DryWet)));
                 VIBE->vibe_WD->redraw();
                 break;
-            case 387:
+            case MC_Vibe_Width:
                 VIBE->vibe_width->value(rkr->efx_Vibe->getpar(Vibe_Width));
                 VIBE->vibe_width->redraw();
                 break;
-            case 388:
+            case MC_Vibe_Depth:
                 VIBE->vibe_dpth->value(rkr->efx_Vibe->getpar(Vibe_Depth));
                 VIBE->vibe_dpth->redraw();
                 break;
-            case 389:
+            case MC_Vibe_LFO_Tempo:
                 VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(Vibe_LFO_Tempo));
                 VIBE->vibe_freq->redraw();
                 break;
-            case 390:
+            case MC_Vibe_LFO_Random:
                 VIBE->vibe_rnd->value(rkr->efx_Vibe->getpar(Vibe_LFO_Random));
                 VIBE->vibe_rnd->redraw();
                 break;
-            case 391:
+            case MC_Vibe_LFO_Stereo:
                 VIBE->vibe_stdf->value(rkr->efx_Vibe->getpar(Vibe_LFO_Stereo));
                 VIBE->vibe_stdf->redraw();
                 break;
-            case 392:
+            case MC_Vibe_Feedback:
                 VIBE->vibe_fb->value(rkr->efx_Vibe->getpar(Vibe_Feedback) - 64);
                 VIBE->vibe_fb->redraw();
                 break;
-            case 393:
+            case MC_Vibe_LR_Cross:
                 VIBE->vibe_LR->value(rkr->efx_Vibe->getpar(Vibe_LR_Cross));
                 VIBE->vibe_LR->redraw();
                 break;
-            case 394:
+            case MC_Vibe_Pan:
                 VIBE->vibe_pan->value(rkr->efx_Vibe->getpar(Vibe_Pan) - 64);
                 VIBE->vibe_pan->redraw();
                 break;
-            case 395:
+            case MC_Infinity_DryWet:
                 INFINIT->infinity_WD->value(Dry_Wet(rkr->efx_Infinity->getpar(Infinity_DryWet)));
                 INFINIT->infinity_WD->redraw();
                 break;
-            case 396:
+            case MC_Infinity_Resonance:
                 INFINIT->infinity_Q->value(rkr->efx_Infinity->getpar(Infinity_Resonance));
                 INFINIT->infinity_Q->redraw();
                 break;
-            case 397:
+            case MC_Infinity_AutoPan:
                 INFINIT->infinity_pan->value(rkr->efx_Infinity->getpar(Infinity_AutoPan));
                 INFINIT->infinity_pan->redraw();
                 break;
-            case 398:
+            case MC_Infinity_LR_Delay:
                 INFINIT->infinity_stdf->value(rkr->efx_Infinity->getpar(Infinity_LR_Delay));
                 INFINIT->infinity_stdf->redraw();
                 break;
-            case 399:
+            case MC_Infinity_Start:
                 INFINIT->infinity_start->value(rkr->efx_Infinity->getpar(Infinity_Start));
                 INFINIT->infinity_start->redraw();
                 break;
-            case 400:
+            case MC_Infinity_End:
                 INFINIT->infinity_end->value(rkr->efx_Infinity->getpar(Infinity_End));
                 INFINIT->infinity_end->redraw();
                 break;
-            case 401:
+            case MC_Infinity_Tempo:
                 INFINIT->infinity_rate->value(rkr->efx_Infinity->getpar(Infinity_Tempo));
                 INFINIT->infinity_rate->redraw();
                 break;
-            case 402:
+            case MC_Infinity_Subdivision:
                 INFINIT->infinity_subdiv->value(rkr->efx_Infinity->getpar(Infinity_Subdivision));
                 INFINIT->infinity_subdiv->redraw();
                 break;
-            case 403:
+            case MC_Alien_Delay:
                 ALIENWAH->Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
                 ALIENWAH->Alienwah_delay->redraw();
                 break;
-            case 404:
+            case MC_APhase_LFO_Random:
                 APHASER->aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Random));
                 APHASER->aphaser_rnd->redraw();
                 break;
-            case 405:
+            case MC_Cabinet_Gain:
                 CABINET->Cabinet_output->value(rkr->efx_Cabinet->getpar(Cabinet_Gain)-64);
                 CABINET->Cabinet_output->redraw();
                 break;
-            case 406:
+            case MC_Chorus_Delay:
                 CHORUS->chorus_delay->value(rkr->efx_Chorus->getpar(Chorus_Delay));
                 CHORUS->chorus_delay->redraw();
                 break;
-            case 407:
+            case MC_Echo_Reverse:
                 ECHO->echo_RV->value(rkr->efx_Echo->getpar(Echo_Reverse));
                 ECHO->echo_RV->redraw();
                 break;
-            case 408:
+            case MC_Echo_Delay:
                 ECHO->echo_delay->value(rkr->efx_Echo->getpar(Echo_Delay));
                 ECHO->echo_delay->redraw();
                 break;
-            case 409:
+            case MC_Echo_LR_Delay:
                 ECHO->echo_LRdl->value(rkr->efx_Echo->getpar(Echo_LR_Delay));
                 ECHO->echo_LRdl->redraw();
                 break;
-            case 410:
+            case MC_Echo_Damp:
                 ECHO->echo_damp->value(rkr->efx_Echo->getpar(Echo_Damp));
                 ECHO->echo_damp->redraw();
                 break;
-            case 411:
+            case MC_Flanger_Delay:
                 FLANGER->flanger_delay->value(rkr->efx_Flanger->getpar(Flanger_Delay));
                 FLANGER->flanger_delay->redraw();
                 break;
-            case 412:
+            case MC_Harm_Gain:
                 HAR->har_gan->value(rkr->efx_Har->getpar(Harm_Gain) - 64);
                 HAR->har_gan->redraw();
                 break;
-            case 413:
+            case MC_Harm_Filter_Gain:
                 HAR->har_gan1->value(rkr->efx_Har->getpar(Harm_Filter_Gain) - 64);
                 HAR->har_gan1->redraw();
                 break;
-            case 414:
+            case MC_Harm_Filter_Q:
                 HAR->har_q1->value(rkr->efx_Har->getpar(Harm_Filter_Q) - 64);
                 HAR->har_q1->redraw();
                 break;
-            case 415:
+            case MC_Infinity_Band_1:
                 INFINIT->infinity_1->value(rkr->efx_Infinity->getpar(Infinity_Band_1));
                 INFINIT->infinity_1->redraw();
                 break;
-            case 416:
+            case MC_Infinity_Band_2:
                 INFINIT->infinity_2->value(rkr->efx_Infinity->getpar(Infinity_Band_2));
                 INFINIT->infinity_2->redraw();
                 break;
-            case 417:
+            case MC_Infinity_Band_3:
                 INFINIT->infinity_3->value(rkr->efx_Infinity->getpar(Infinity_Band_3));
                 INFINIT->infinity_3->redraw();
                 break;
-            case 418:
+            case MC_Infinity_Band_4:
                 INFINIT->infinity_4->value(rkr->efx_Infinity->getpar(Infinity_Band_4));
                 INFINIT->infinity_4->redraw();
                 break;
-            case 419:
+            case MC_Infinity_Band_5:
                 INFINIT->infinity_5->value(rkr->efx_Infinity->getpar(Infinity_Band_5));
                 INFINIT->infinity_5->redraw();
                 break;
-            case 420:
+            case MC_Infinity_Band_6:
                 INFINIT->infinity_6->value(rkr->efx_Infinity->getpar(Infinity_Band_6));
                 INFINIT->infinity_6->redraw();
                 break;
-            case 421:
+            case MC_Infinity_Band_7:
                 INFINIT->infinity_7->value(rkr->efx_Infinity->getpar(Infinity_Band_7));
                 INFINIT->infinity_7->redraw();
                 break;
-            case 422:
+            case MC_Infinity_Band_8:
                 INFINIT->infinity_8->value(rkr->efx_Infinity->getpar(Infinity_Band_8));
                 INFINIT->infinity_8->redraw();
                 break;
-            case 423:
+            case MC_Looper_Tempo:
                 LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(Looper_Tempo));
                 LOOPER->looper_Tempo->redraw();
                 break;
-            case 424:
+            case MC_Music_Tempo:
                 MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(Music_Tempo));
                 MUSDELAY->musdelay_tempo->redraw();
                 break;
-            case 425:
+            case MC_Music_Damp:
                 MUSDELAY->musdelay_damp->value(rkr->efx_MusDelay->getpar(Music_Damp));
                 MUSDELAY->musdelay_damp->redraw();
                 break;
-            case 426:
+            case MC_MuTro_LFO_Random:
                 MUTROMOJO->mutromojo_Rnd->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Random));
                 MUTROMOJO->mutromojo_Rnd->redraw();
                 break;
-            case 427:
+            case MC_MuTro_LFO_Stereo:
                 MUTROMOJO->mutromojo_St->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Stereo) - 64);
                 MUTROMOJO->mutromojo_St->redraw();
                 break;
-            case 428:
+            case MC_MuTro_St_Freq:
                 MUTROMOJO->mutromojo_minfreq->value(rkr->efx_MuTroMojo->getpar(MuTro_St_Freq));
                 MUTROMOJO->mutromojo_minfreq->redraw();
                 break;
-            case 429:
+            case MC_Gate_Attack:
                 GATE->gate_ATime->value(rkr->efx_Gate->getpar(Gate_Attack));
                 GATE->gate_ATime->redraw();
                 break;
-            case 430:
+            case MC_Gate_Release:
                 GATE->gate_RTime->value(rkr->efx_Gate->getpar(Gate_Release));
                 GATE->gate_RTime->redraw();
                 break;
-            case 431:
+            case MC_Gate_Range:
                 GATE->gate_range->value(rkr->efx_Gate->getpar(Gate_Range));
                 GATE->gate_range->redraw();
                 break;
-            case 432:
+            case MC_Gate_Threshold:
                 GATE->gate_threshold->value(rkr->efx_Gate->getpar(Gate_Threshold));
                 GATE->gate_threshold->redraw();
                 break;
-            case 433:
+            case MC_Gate_Hold:
                 GATE->gate_hold->value(rkr->efx_Gate->getpar(Gate_Hold));
                 GATE->gate_hold->redraw();
                 break;
-            case 434:
+            case MC_Gate_LPF:
                 GATE->gate_LPF->value(rkr->efx_Gate->getpar(Gate_LPF));
                 GATE->gate_LPF->redraw();
                 break;
-            case 435:
+            case MC_Gate_HPF:
                 GATE->gate_HPF->value(rkr->efx_Gate->getpar(Gate_HPF));
                 GATE->gate_HPF->redraw();
                 break;
-            case 436:
+            case MC_Pan_Ex_St_Amt:
                 PAN->pan_extra->value(rkr->efx_Pan->getpar(Pan_Ex_St_Amt));
                 PAN->pan_extra->redraw();
                 break;
-            case 437:
+            case MC_Reverb_Time:
                 REVERB->reverb_time->value(rkr->efx_Rev->getpar(Reverb_Time));
                 REVERB->reverb_time->redraw();
                 break;
-            case 438:
+            case MC_Reverb_I_Delay:
                 REVERB->reverb_ldel->value(rkr->efx_Rev->getpar(Reverb_I_Delay));
                 REVERB->reverb_ldel->redraw();
                 break;
-            case 439:
+            case MC_Reverb_Delay_FB:
                 REVERB->reverb_ldelft->value(rkr->efx_Rev->getpar(Reverb_Delay_FB));
                 REVERB->reverb_ldelft->redraw();
                 break;
-            case 440:
+            case MC_Reverb_Room:
                 REVERB->reverb_RS->value(rkr->efx_Rev->getpar(Reverb_Room));
                 REVERB->reverb_RS->redraw();
                 break;
-            case 441:
+            case MC_Reverb_Damp:
                 REVERB->reverb_damp->value(rkr->efx_Rev->getpar(Reverb_Damp));
                 REVERB->reverb_damp->redraw();
                 break;
-            case 442:
+            case MC_Revtron_Diffusion:
                 REVERBTRON->revtron_diff->value(rkr->efx_Reverbtron->getpar(Revtron_Diffusion));
                 REVERBTRON->revtron_diff->redraw();
                 break;
-            case 443:
+            case MC_Revtron_LPF:
                 REVERBTRON->revtron_LPF->value(rkr->efx_Reverbtron->getpar(Revtron_LPF));
                 REVERBTRON->revtron_LPF->redraw();
                 break;
-            case 444:
+            case MC_Harm_Note:
                 HAR->har_note->value(rkr->efx_Har->getpar(Harm_Note));
                 HAR->har_note->redraw();
                 Chord(0);   // update gui
                 break;
-            case 445:
+            case MC_Harm_Chord:
                 HAR->har_type->value(rkr->efx_Har->getpar(Harm_Chord));
                 HAR->har_type->redraw();
                 Chord(0);   // update gui
                 break;
-            case 446:
+            case MC_Synthfilter_LFO_Random:
                 SYNTHFILTER->synthfilter_rand->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Random));
                 SYNTHFILTER->synthfilter_rand->redraw();
                 break;
-            case 447:
+            case MC_Harm_Select:
                 HAR->har_SELECT->value(rkr->efx_Har->getpar(Harm_Select));
                 HAR->har_SELECT->redraw();
                 break;
-            case 448:
+            case MC_Sharm_Select:
                 SHAR->shar_SELECT->value(rkr->efx_StereoHarm->getpar(Sharm_Select));
                 SHAR->shar_SELECT->redraw();
                 break;
-            case 449:
+            case MC_Dist_Type:
                 DIST->dist_tipo->value(rkr->efx_Distorsion->getpar(Dist_Type));
                 DIST->dist_tipo->redraw();
                 break;
-            case 450:
+            case MC_Overdrive_Type:
                 OVRD->ovrd_tipo->value(rkr->efx_Overdrive->getpar(Overdrive_Type));
                 OVRD->ovrd_tipo->redraw();
                 break;
-            case 451:
+            case MC_Dere_Type:
                 DERELICT->derelict_tipo->value(rkr->efx_Derelict->getpar(Dere_Type));
                 DERELICT->derelict_tipo->redraw();
                 break;
-            case 452:
+            case MC_DistBand_Type_Low:
                 DISTBAND->distband_tipoL->value(rkr->efx_DistBand->getpar(DistBand_Type_Low));
                 DISTBAND->distband_tipoL->redraw();
                 break;
-            case 453:
+            case MC_DistBand_Type_Mid:
                 DISTBAND->distband_tipoM->value(rkr->efx_DistBand->getpar(DistBand_Type_Mid));
                 DISTBAND->distband_tipoM->redraw();
                 break;
-            case 454:
+            case MC_DistBand_Type_Hi:
                 DISTBAND->distband_tipoH->value(rkr->efx_DistBand->getpar(DistBand_Type_Hi));
                 DISTBAND->distband_tipoH->redraw();
                 break;
-            case 455:
+            case MC_Stomp_Mode:
                 STOMPBOX->stomp_mode->value(rkr->efx_StompBox->getpar(Stomp_Mode));
                 STOMPBOX->stomp_mode->redraw();
                 break;
-            case 456:
+            case MC_Alien_LFO_Type:
                 ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFO_Type));
                 ALIENWAH->Alienwah_lfotype->redraw();
                 break;
-            case 457:
+            case MC_APhase_LFO_Type:
                 APHASER->aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFO_Type));
                 APHASER->aphaser_lfotype->redraw();
                 break;
-            case 458:
+            case MC_Chorus_LFO_Type:
                 CHORUS->chorus_lfotype->value(rkr->efx_Chorus->getpar(Chorus_LFO_Type));
                 CHORUS->chorus_lfotype->redraw();
                 break;
-            case 459:
+            case MC_Flanger_LFO_Type:
                 FLANGER->flanger_lfotype->value(rkr->efx_Flanger->getpar(Flanger_LFO_Type));
                 FLANGER->flanger_lfotype->redraw();
                 break;
-            case 460:
+            case MC_DFlange_LFO_Type:
                 DFLANGE->dflange_lfotype->value(rkr->efx_DFlange->getpar(DFlange_LFO_Type));
                 DFLANGE->dflange_lfotype->redraw();
                 break;
-            case 461:
+            case MC_Echotron_LFO_Type:
                 ECHOTRON->echotron_lfotype->value(rkr->efx_Echotron->getpar(Echotron_LFO_Type));
                 ECHOTRON->echotron_lfotype->redraw();
                 break;
-            case 462:
+            case MC_MuTro_LFO_Type:
                 MUTROMOJO->mutromojo_lfotype->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Type));
                 MUTROMOJO->mutromojo_lfotype->redraw();
                 break;
-            case 463:
+            case MC_Optical_LFO_Type:
                 OTREM->otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Type));
                 OTREM->otrem_lfotype->redraw();
                 break;
-            case 464:
+            case MC_Pan_LFO_Type:
                 PAN->pan_lfotype->value(rkr->efx_Pan->getpar(Pan_LFO_Type));
                 PAN->pan_lfotype->redraw();
                 break;
-            case 465:
+            case MC_Phaser_LFO_Type:
                 PHASER->phaser_lfotype->value(rkr->efx_Phaser->getpar(Phaser_LFO_Type));
                 PHASER->phaser_lfotype->redraw();
                 break;
-            case 466:
+            case MC_Synthfilter_LFO_Type:
                 SYNTHFILTER->synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Type));
                 SYNTHFILTER->synthfilter_lfotype->redraw();
                 break;
-            case 467:
+            case MC_VaryBand_LFO_Type_1:
                 VARYBAND->varyband_lfotype1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_1));
                 VARYBAND->varyband_lfotype1->redraw();
                 break;
-            case 468:
+            case MC_VaryBand_LFO_Type_2:
                 VARYBAND->varyband_lfotype2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_2));
                 VARYBAND->varyband_lfotype2->redraw();
                 break;
-            case 469:
+            case MC_Vibe_LFO_Type:
                 VIBE->vibe_lfotype->value(rkr->efx_Vibe->getpar(Vibe_LFO_Type));
                 VIBE->vibe_lfotype->redraw();
                 break;
-            case 470:
+            case MC_WahWah_LFO_Type:
                 WAHWAH->WahWah_lfotype->value(rkr->efx_WahWah->getpar(WahWah_LFO_Type));
                 WAHWAH->WahWah_lfotype->redraw();
                 break;
