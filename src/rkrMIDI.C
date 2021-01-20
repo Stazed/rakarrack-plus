@@ -1507,20 +1507,8 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 void
 RKR::process_midi_controller_events(int parameter, int value)
 {
-#if 0
-    for(int i = 0; i < C_MC_PARAMETER_SIZE; i++)
-    {
-        if(parameter == efx_params[i].Ato)
-        {
-            printf("Effect Name = %s: parameter = %d: Effect = %d\n",
-                    efx_params[i].Nom, efx_params[i].Ato, efx_params[i].Effect);
-            break;
-        }
-    }
-#endif // 0
-    
-    /* Don't process MIDI control when updating quality since
-       the efx may be deleted */
+    // Don't process MIDI control when updating quality since
+    // the efx may be deleted
     if(quality_update)
         return;
     

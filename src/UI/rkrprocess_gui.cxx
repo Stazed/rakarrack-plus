@@ -6592,15 +6592,19 @@ void RKRGUI::check_signals(void *usrPtr)
  *  midi learn. It is triggered by right mouse click on any efx parameter (slider, etc)
  *  that has midi learn capability.
  * 
+ *  Don't pop up the midi learn window unless the user checked the box
+ *  in Settings/Preferences/MIDI/Midi Learn - Really confusing when
+ *  it pops up but nothing happens when set. The menu item for Midi Learn
+ *  is set inactive unless the box is checked as well. For consistency here,
+ *  if (!rkr->MIDIway)
+ *      return;
+ * 
  * @param num
  *  The efx parameter number that is to be used by midi learn.
  */
 void RKRGUI::getMIDIControl(int num)
 {
-    /* Don't pop up the midi learn window unless the user checked the box
-     * in Settings/Preferences/MIDI/Midi Learn - Really confusing when
-     * it pops up but nothing happens when set. The menu item for Midi Learn
-     * is set inactive unless the box is checked as well. For consistency here */
+    // Don't pop up the midi learn window unless the user checked the box.
     if (!rkr->MIDIway)
         return;
 
