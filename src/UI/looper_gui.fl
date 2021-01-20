@@ -26,7 +26,7 @@ widget_class LooperGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(116);
+ rgui->getMIDIControl(MC_Multi_On_Off);
  o->value(rkr->Looper_Bypass);
  return;
 }

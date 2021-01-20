@@ -5,7 +5,7 @@
 void LooperGui::cb_looper_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(116);
+ rgui->getMIDIControl(MC_Multi_On_Off);
  o->value(rkr->Looper_Bypass);
  return;
 }

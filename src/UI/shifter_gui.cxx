@@ -5,7 +5,7 @@
 void ShifterGui::cb_shifter_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(116);
+ rgui->getMIDIControl(MC_Multi_On_Off);
  o->value(rkr->Shifter_Bypass);
  return;
 }
