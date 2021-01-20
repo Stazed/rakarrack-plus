@@ -53,7 +53,7 @@ Fl_Menu_Item SharGui::menu_shar_preset[] = {
 void SharGui::cb_shar_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(358);
+ rgui->getMIDIControl(MC_Sharm_DryWet);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_DryWet,Dry_Wet((int)(o->value())));
@@ -65,7 +65,7 @@ void SharGui::cb_shar_WD(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_intl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(359);
+ rgui->getMIDIControl(MC_Sharm_L_Interval);
  return;
 }
 rkr->StereoHarm_Bypass=0;
@@ -79,7 +79,7 @@ void SharGui::cb_shar_intl(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_chl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(360);
+ rgui->getMIDIControl(MC_Sharm_L_Chroma);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,(int)o->value());
@@ -91,7 +91,7 @@ void SharGui::cb_shar_chl(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_ganl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(361);
+ rgui->getMIDIControl(MC_Sharm_L_Gain);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_L_Gain,(int)(o->value()+64));
@@ -103,7 +103,7 @@ void SharGui::cb_shar_ganl(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_intr_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(362);
+ rgui->getMIDIControl(MC_Sharm_R_Interval);
  return;
 }
 rkr->StereoHarm_Bypass=0;
@@ -117,7 +117,7 @@ void SharGui::cb_shar_intr(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_chr_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(363);
+ rgui->getMIDIControl(MC_Sharm_R_Chroma);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,(int)o->value());
@@ -129,7 +129,7 @@ void SharGui::cb_shar_chr(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_ganr_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(364);
+ rgui->getMIDIControl(MC_Sharm_R_Gain);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_R_Gain,(int)(o->value()+64));
@@ -141,7 +141,7 @@ void SharGui::cb_shar_ganr(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_lrc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(365);
+ rgui->getMIDIControl(MC_Sharm_LR_Cross);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_LR_Cross,(int)(o->value()));
@@ -187,7 +187,7 @@ void SharGui::cb_shar_SELECT(RKR_Check_Button* o, void* v) {
 void SharGui::cb_shar_note_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(366);
+ rgui->getMIDIControl(MC_Sharm_Note);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_Note,(int)o->value());
@@ -200,7 +200,7 @@ void SharGui::cb_shar_note(RKR_Slider* o, void* v) {
 void SharGui::cb_shar_type_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(367);
+ rgui->getMIDIControl(MC_Sharm_Chord);
  return;
 }
 rkr->efx_StereoHarm->changepar(Sharm_Chord,(int)o->value());

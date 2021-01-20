@@ -56,7 +56,7 @@ Fl_Menu_Item EchotronGui::menu_echotron_preset[] = {
 void EchotronGui::cb_echotron_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(348);
+ rgui->getMIDIControl(MC_Echotron_DryWet);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_DryWet,Dry_Wet((int)(o->value())));
@@ -68,7 +68,7 @@ void EchotronGui::cb_echotron_WD(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(349);
+ rgui->getMIDIControl(MC_Echotron_Pan);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Pan,(int)(o->value()+64));
@@ -80,7 +80,7 @@ void EchotronGui::cb_echotron_pan(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(350);
+ rgui->getMIDIControl(MC_Echotron_Tempo);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Tempo,(int)o->value());
@@ -92,7 +92,7 @@ void EchotronGui::cb_echotron_tempo(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(351);
+ rgui->getMIDIControl(MC_Echotron_Damp);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Damp,(int)o->value());
@@ -104,7 +104,7 @@ void EchotronGui::cb_echotron_damp(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(352);
+ rgui->getMIDIControl(MC_Echotron_Feedback);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Feedback,(int)o->value());
@@ -116,7 +116,7 @@ void EchotronGui::cb_echotron_fb(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_lrcross_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(353);
+ rgui->getMIDIControl(MC_Echotron_LR_Cross);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_LR_Cross,(int)(o->value()+64));
@@ -128,7 +128,7 @@ void EchotronGui::cb_echotron_lrcross(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_width_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(354);
+ rgui->getMIDIControl(MC_Echotron_LFO_Width);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_LFO_Width,(int)o->value());
@@ -140,7 +140,7 @@ void EchotronGui::cb_echotron_width(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_deep_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(355);
+ rgui->getMIDIControl(MC_Echotron_Depth);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Depth,((int)o->value()+64));
@@ -152,7 +152,7 @@ void EchotronGui::cb_echotron_deep(RKR_Slider* o, void* v) {
 void EchotronGui::cb_echotron_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(356);
+ rgui->getMIDIControl(MC_Echotron_LFO_Stereo);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_LFO_Stereo,(int)o->value());
@@ -226,7 +226,7 @@ void EchotronGui::cb_B_ech(RKR_Button* o, void* v) {
 void EchotronGui::cb_echotron_length_i(RKR_Counter* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(357);
+ rgui->getMIDIControl(MC_Echotron_Taps);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Taps,(int)o->value());

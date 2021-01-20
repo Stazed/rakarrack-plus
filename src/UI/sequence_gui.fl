@@ -106,7 +106,7 @@ seq_range->value(rkr->efx_Sequence->getpar(Sequence_Range));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(314);
+ rgui->getMIDIControl(MC_Sequence_DryWet);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_DryWet,Dry_Wet((int)(o->value())));}
@@ -117,7 +117,7 @@ rkr->efx_Sequence->changepar(Sequence_DryWet,Dry_Wet((int)(o->value())));}
     label 1
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(315);
+ rgui->getMIDIControl(MC_Sequence_Step_1);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_1,(int)o->value());}
@@ -128,7 +128,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_1,(int)o->value());}
     label 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(316);
+ rgui->getMIDIControl(MC_Sequence_Step_2);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_2,(int)o->value());}
@@ -139,7 +139,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_2,(int)o->value());}
     label 3
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(317);
+ rgui->getMIDIControl(MC_Sequence_Step_3);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_3,(int)o->value());}
@@ -150,7 +150,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_3,(int)o->value());}
     label 4
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(318);
+ rgui->getMIDIControl(MC_Sequence_Step_4);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_4,(int)o->value());}
@@ -161,7 +161,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_4,(int)o->value());}
     label 5
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(319);
+ rgui->getMIDIControl(MC_Sequence_Step_5);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_5,(int)o->value());}
@@ -172,7 +172,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_5,(int)o->value());}
     label 6
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(320);
+ rgui->getMIDIControl(MC_Sequence_Step_6);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_6,(int)o->value());}
@@ -183,7 +183,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_6,(int)o->value());}
     label 7
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(321);
+ rgui->getMIDIControl(MC_Sequence_Step_7);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_7,(int)o->value());}
@@ -194,7 +194,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_7,(int)o->value());}
     label 8
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(322);
+ rgui->getMIDIControl(MC_Sequence_Step_8);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_8,(int)o->value());}
@@ -205,7 +205,7 @@ rkr->efx_Sequence->changepar(Sequence_Step_8,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(323);
+ rgui->getMIDIControl(MC_Sequence_Tempo);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Tempo,(int)o->value());}
@@ -216,7 +216,7 @@ rkr->efx_Sequence->changepar(Sequence_Tempo,(int)o->value());}
     label Q
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(324);
+ rgui->getMIDIControl(MC_Sequence_Resonance);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Resonance,(int)o->value()+64);}
@@ -227,7 +227,7 @@ rkr->efx_Sequence->changepar(Sequence_Resonance,(int)o->value()+64);}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(325);
+ rgui->getMIDIControl(MC_Sequence_Stdf);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Stdf,(int)o->value());}

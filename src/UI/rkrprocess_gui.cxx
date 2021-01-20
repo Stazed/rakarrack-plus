@@ -4405,220 +4405,220 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SUSTAINER->sus_sus->value(rkr->efx_Sustainer->getpar(Sustain_Sustain));
                 SUSTAINER->sus_sus->redraw();
                 break;
-            case 314:
+            case MC_Sequence_DryWet:
                 SEQUENCE->seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(Sequence_DryWet)));
                 SEQUENCE->seq_WD->redraw();
                 break;
-            case 315:
+            case MC_Sequence_Step_1:
                 SEQUENCE->seq_1->value(rkr->efx_Sequence->getpar(Sequence_Step_1));
                 SEQUENCE->seq_1->redraw();
                 break;
-            case 316:
+            case MC_Sequence_Step_2:
                 SEQUENCE->seq_2->value(rkr->efx_Sequence->getpar(Sequence_Step_2));
                 SEQUENCE->seq_2->redraw();
                 break;
-            case 317:
+            case MC_Sequence_Step_3:
                 SEQUENCE->seq_3->value(rkr->efx_Sequence->getpar(Sequence_Step_3));
                 SEQUENCE->seq_3->redraw();
                 break;
-            case 318:
+            case MC_Sequence_Step_4:
                 SEQUENCE->seq_4->value(rkr->efx_Sequence->getpar(Sequence_Step_4));
                 SEQUENCE->seq_4->redraw();
                 break;
-            case 319:
+            case MC_Sequence_Step_5:
                 SEQUENCE->seq_5->value(rkr->efx_Sequence->getpar(Sequence_Step_5));
                 SEQUENCE->seq_5->redraw();
                 break;
-            case 320:
+            case MC_Sequence_Step_6:
                 SEQUENCE->seq_6->value(rkr->efx_Sequence->getpar(Sequence_Step_6));
                 SEQUENCE->seq_6->redraw();
                 break;
-            case 321:
+            case MC_Sequence_Step_7:
                 SEQUENCE->seq_7->value(rkr->efx_Sequence->getpar(Sequence_Step_7));
                 SEQUENCE->seq_7->redraw();
                 break;
-            case 322:
+            case MC_Sequence_Step_8:
                 SEQUENCE->seq_8->value(rkr->efx_Sequence->getpar(Sequence_Step_8));
                 SEQUENCE->seq_8->redraw();
                 break;
-            case 323:
+            case MC_Sequence_Tempo:
                 SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(Sequence_Tempo));
                 SEQUENCE->seq_tempo->redraw();
                 break;
-            case 324:
+            case MC_Sequence_Resonance:
                 SEQUENCE->seq_q->value(rkr->efx_Sequence->getpar(Sequence_Resonance) - 64);
                 SEQUENCE->seq_q->redraw();
                 break;
-            case 325:
+            case MC_Sequence_Stdf:
                 SEQUENCE->seq_stdf->value(rkr->efx_Sequence->getpar(Sequence_Stdf));
                 SEQUENCE->seq_stdf->redraw();
                 break;
-            case 326:
+            case MC_Shifter_DryWet:
                 SHIFTER->shifter_WD->value(Dry_Wet(rkr->efx_Shifter->getpar(Shifter_DryWet)));
                 SHIFTER->shifter_WD->redraw();
                 break;
-            case 327:
+            case MC_Shifter_Interval:
                 SHIFTER->shifter_int->value(rkr->efx_Shifter->getpar(Shifter_Interval));
                 SHIFTER->shifter_int->redraw();
                 break;
-            case 328:
+            case MC_Shifter_Gain:
                 SHIFTER->shifter_gain->value(rkr->efx_Shifter->getpar(Shifter_Gain) - 64);
                 SHIFTER->shifter_gain->redraw();
                 break;
-            case 329:
+            case MC_Shifter_Pan:
                 SHIFTER->shifter_pan->value(rkr->efx_Shifter->getpar(Shifter_Pan) - 64);
                 SHIFTER->shifter_pan->redraw();
                 break;
-            case 330:
+            case MC_Shifter_Attack:
                 SHIFTER->shifter_attack->value(rkr->efx_Shifter->getpar(Shifter_Attack));
                 SHIFTER->shifter_attack->redraw();
                 break;
-            case 331:
+            case MC_Shifter_Decay:
                 SHIFTER->shifter_decay->value(rkr->efx_Shifter->getpar(Shifter_Decay));
                 SHIFTER->shifter_decay->redraw();
                 break;
-            case 332:
+            case MC_Shifter_Threshold:
                 SHIFTER->shifter_thre->value(rkr->efx_Shifter->getpar(Shifter_Threshold));
                 SHIFTER->shifter_thre->redraw();
                 break;
-            case 333:
+            case MC_Shifter_Whammy:
                 SHIFTER->shifter_whammy->value(rkr->efx_Shifter->getpar(Shifter_Whammy));
                 SHIFTER->shifter_whammy->redraw();
                 break;
-            case 334:
+            case MC_Stomp_Level:
                 STOMPBOX->stomp_WD->value(rkr->efx_StompBox->getpar(Stomp_Level));
                 STOMPBOX->stomp_WD->redraw();
                 break;
-            case 335:
+            case MC_Stomp_Gain:
                 STOMPBOX->stomp_gain->value(rkr->efx_StompBox->getpar(Stomp_Gain));
                 STOMPBOX->stomp_gain->redraw();
                 break;
-            case 336:
+            case MC_Stomp_Bias:
                 STOMPBOX->stomp_low->value(rkr->efx_StompBox->getpar(Stomp_Bias));
                 STOMPBOX->stomp_low->redraw();
                 break;
-            case 337:
+            case MC_Stomp_Mid:
                 STOMPBOX->stomp_mid->value(rkr->efx_StompBox->getpar(Stomp_Mid));
                 STOMPBOX->stomp_mid->redraw();
                 break;
-            case 338:
+            case MC_Stomp_Tone:
                 STOMPBOX->stomp_high->value(rkr->efx_StompBox->getpar(Stomp_Tone));
                 STOMPBOX->stomp_high->redraw();
                 break;
-            case 339:
+            case MC_Revtron_DryWet:
                 REVERBTRON->revtron_WD->value(Dry_Wet(rkr->efx_Reverbtron->getpar(Revtron_DryWet)));
                 REVERBTRON->revtron_WD->redraw();
                 break;
-            case 340:
+            case MC_Revtron_Pan:
                 REVERBTRON->revtron_pan->value(rkr->efx_Reverbtron->getpar(Revtron_Pan) - 64);
                 REVERBTRON->revtron_pan->redraw();
                 break;
-            case 341:
+            case MC_Revtron_Level:
                 REVERBTRON->revtron_level->value(rkr->efx_Reverbtron->getpar(Revtron_Level));
                 REVERBTRON->revtron_level->redraw();
                 break;
-            case 342:
+            case MC_Revtron_Damp:
                 REVERBTRON->revtron_damp->value(rkr->efx_Reverbtron->getpar(Revtron_Damp));
                 REVERBTRON->revtron_damp->redraw();
                 break;
-            case 343:
+            case MC_Revtron_Feedback:
                 REVERBTRON->revtron_fb->value(rkr->efx_Reverbtron->getpar(Revtron_Feedback));
                 REVERBTRON->revtron_fb->redraw();
                 break;
-            case 344:
+            case MC_Revtron_Length:
                 REVERBTRON->revtron_length->value(rkr->efx_Reverbtron->getpar(Revtron_Length));
                 REVERBTRON->revtron_length->redraw();
                 break;
-            case 345:
+            case MC_Revtron_Stretch:
                 REVERBTRON->revtron_strech->value(rkr->efx_Reverbtron->getpar(Revtron_Stretch));
                 REVERBTRON->revtron_strech->redraw();
                 break;
-            case 346:
+            case MC_Revtron_I_Delay:
                 REVERBTRON->revtron_idelay->value(rkr->efx_Reverbtron->getpar(Revtron_I_Delay));
                 REVERBTRON->revtron_idelay->redraw();
                 break;
-            case 347:
+            case MC_Revtron_Fade:
                 REVERBTRON->revtron_fade->value(rkr->efx_Reverbtron->getpar(Revtron_Fade));
                 REVERBTRON->revtron_fade->redraw();
                 break;
-            case 348:
+            case MC_Echotron_DryWet:
                 ECHOTRON->echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(Echotron_DryWet)));
                 ECHOTRON->echotron_WD->redraw();
                 break;
-            case 349:
+            case MC_Echotron_Pan:
                 ECHOTRON->echotron_pan->value(rkr->efx_Echotron->getpar(Echotron_Pan) - 64);
                 ECHOTRON->echotron_pan->redraw();
                 break;
-            case 350:
+            case MC_Echotron_Tempo:
                 ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
                 ECHOTRON->echotron_tempo->redraw();
                 break;
-            case 351:
+            case MC_Echotron_Damp:
                 ECHOTRON->echotron_damp->value(rkr->efx_Echotron->getpar(Echotron_Damp));
                 ECHOTRON->echotron_damp->redraw();
                 break;
-            case 352:
+            case MC_Echotron_Feedback:
                 ECHOTRON->echotron_fb->value(rkr->efx_Echotron->getpar(Echotron_Feedback));
                 ECHOTRON->echotron_fb->redraw();
                 break;
-            case 353:
+            case MC_Echotron_LR_Cross:
                 ECHOTRON->echotron_lrcross->value(rkr->efx_Echotron->getpar(Echotron_LR_Cross) - 64);
                 ECHOTRON->echotron_lrcross->redraw();
                 break;
-            case 354:
+            case MC_Echotron_LFO_Width:
                 ECHOTRON->echotron_width->value(rkr->efx_Echotron->getpar(Echotron_LFO_Width));
                 ECHOTRON->echotron_width->redraw();
                 break;
-            case 355:
+            case MC_Echotron_Depth:
                 ECHOTRON->echotron_deep->value(rkr->efx_Echotron->getpar(Echotron_Depth) - 64);
                 ECHOTRON->echotron_deep->redraw();
                 break;
-            case 356:
+            case MC_Echotron_LFO_Stereo:
                 ECHOTRON->echotron_stdf->value(rkr->efx_Echotron->getpar(Echotron_LFO_Stereo));
                 ECHOTRON->echotron_stdf->redraw();
                 break;
-            case 357:
+            case MC_Echotron_Taps:
                 ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
                 ECHOTRON->echotron_length->redraw();
                 break;
-            case 358:
+            case MC_Sharm_DryWet:
                 SHAR->shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(Sharm_DryWet)));
                 SHAR->shar_WD->redraw();
                 break;
-            case 359:
+            case MC_Sharm_L_Interval:
                 SHAR->shar_intl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Interval) - 12);
                 SHAR->shar_intl->redraw();
                 break;
-            case 360:
+            case MC_Sharm_L_Chroma:
                 SHAR->shar_chl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
                 SHAR->shar_chl->redraw();
                 break;
-            case 361:
+            case MC_Sharm_L_Gain:
                 SHAR->shar_ganl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Gain) - 64);
                 SHAR->shar_ganl->redraw();
                 break;
-            case 362:
+            case MC_Sharm_R_Interval:
                 SHAR->shar_intr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Interval) - 12);
                 SHAR->shar_intr->redraw();
                 break;
-            case 363:
+            case MC_Sharm_R_Chroma:
                 SHAR->shar_chr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
                 SHAR->shar_chr->redraw();
                 break;
-            case 364:
+            case MC_Sharm_R_Gain:
                 SHAR->shar_ganr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Gain) - 64);
                 SHAR->shar_ganr->redraw();
                 break;
-            case 365:
+            case MC_Sharm_LR_Cross:
                 SHAR->shar_lrc->value(rkr->efx_StereoHarm->getpar(Sharm_LR_Cross));
                 SHAR->shar_lrc->redraw();
                 break;
-            case 366:
+            case MC_Sharm_Note:
                 SHAR->shar_note->value(rkr->efx_StereoHarm->getpar(Sharm_Note));
                 SHAR->shar_note->redraw();
                 Chord(1);   // update gui
                 break;
-            case 367:
+            case MC_Sharm_Chord:
                 SHAR->shar_type->value(rkr->efx_StereoHarm->getpar(Sharm_Chord));
                 SHAR->shar_type->redraw();
                 Chord(1);   // update gui

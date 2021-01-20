@@ -2768,179 +2768,179 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_Sustainer->changepar(Sustain_Sustain, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
-    case 314:
+    case MC_Sequence_DryWet:
         efx_Sequence->changepar(Sequence_DryWet, Dry_Wet(value));
         break;
 
-    case 315:
+    case MC_Sequence_Step_1:
         efx_Sequence->changepar(Sequence_Step_1, value);
         break;
 
-    case 316:
+    case MC_Sequence_Step_2:
         efx_Sequence->changepar(Sequence_Step_2, value);
         break;
 
-    case 317:
+    case MC_Sequence_Step_3:
         efx_Sequence->changepar(Sequence_Step_3, value);
         break;
 
-    case 318:
+    case MC_Sequence_Step_4:
         efx_Sequence->changepar(Sequence_Step_4, value);
         break;
 
-    case 319:
+    case MC_Sequence_Step_5:
         efx_Sequence->changepar(Sequence_Step_5, value);
         break;
 
-    case 320:
+    case MC_Sequence_Step_6:
         efx_Sequence->changepar(Sequence_Step_6, value);
         break;
 
-    case 321:
+    case MC_Sequence_Step_7:
         efx_Sequence->changepar(Sequence_Step_7, value);
         break;
 
-    case 322:
+    case MC_Sequence_Step_8:
         efx_Sequence->changepar(Sequence_Step_8, value);
         break;
 
-    case 323:
+    case MC_Sequence_Tempo:
         efx_Sequence->changepar(Sequence_Tempo, ret_Tempo(value));
         break;
 
-    case 324:
+    case MC_Sequence_Resonance:
         efx_Sequence->changepar(Sequence_Resonance, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 325:
+    case MC_Sequence_Stdf:
         efx_Sequence->changepar(Sequence_Stdf, (int) ((float) value * C_MC_7_RANGE));
         break;
 
-    case 326:
+    case MC_Shifter_DryWet:
         efx_Shifter->changepar(Shifter_DryWet, Dry_Wet(value));
         break;
 
-    case 327:
+    case MC_Shifter_Interval:
         efx_Shifter->changepar(Shifter_Interval, (int) ((float) value * C_MC_12_RANGE));
         break;
 
-    case 328:
+    case MC_Shifter_Gain:
         efx_Shifter->changepar(Shifter_Gain, value);
         break;
 
-    case 329:
+    case MC_Shifter_Pan:
         efx_Shifter->changepar(Shifter_Pan, value);
         break;
 
-    case 330:
+    case MC_Shifter_Attack:
         efx_Shifter->changepar(Shifter_Attack, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
-    case 331:
+    case MC_Shifter_Decay:
         efx_Shifter->changepar(Shifter_Decay, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
-    case 332:
+    case MC_Shifter_Threshold:
         efx_Shifter->changepar(Shifter_Threshold, -70 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
-    case 333:
+    case MC_Shifter_Whammy:
         efx_Shifter->changepar(Shifter_Whammy, value);
         break;
 
-    case 334:
+    case MC_Stomp_Level:
         efx_StompBox->changepar(Stomp_Level, value);
         break;
 
-    case 335:
+    case MC_Stomp_Gain:
         efx_StompBox->changepar(Stomp_Gain, value);
         break;
 
-    case 336:
+    case MC_Stomp_Bias:
         efx_StompBox->changepar(Stomp_Bias, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 337:
+    case MC_Stomp_Mid:
         efx_StompBox->changepar(Stomp_Mid, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 338:
+    case MC_Stomp_Tone:
         efx_StompBox->changepar(Stomp_Tone, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 339:
+    case MC_Revtron_DryWet:
         efx_Reverbtron->changepar(Revtron_DryWet, Dry_Wet(value));
         break;
 
-    case 340:
+    case MC_Revtron_Pan:
         efx_Reverbtron->changepar(Revtron_Pan, value);
         break;
 
-    case 341:
+    case MC_Revtron_Level:
         efx_Reverbtron->changepar(Revtron_Level, value);
         break;
 
-    case 342:
+    case MC_Revtron_Damp:
         efx_Reverbtron->changepar(Revtron_Damp, value);
         break;
 
-    case 343:
+    case MC_Revtron_Feedback:
         efx_Reverbtron->changepar(Revtron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 344:
+    case MC_Revtron_Length:
         efx_Reverbtron->changepar(Revtron_Length, 20 + (int) ((float) value * C_MC_1480_RANGE));
         break;
 
-    case 345:
+    case MC_Revtron_Stretch:
         efx_Reverbtron->changepar(Revtron_Stretch, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 346:
+    case MC_Revtron_I_Delay:
         efx_Reverbtron->changepar(Revtron_I_Delay, (int) ((float) value * C_MC_500_RANGE));
         break;
 
-    case 347:
+    case MC_Revtron_Fade:
         efx_Reverbtron->changepar(Revtron_Fade, value);
         break;
 
-    case 348:
+    case MC_Echotron_DryWet:
         efx_Echotron->changepar(Echotron_DryWet, Dry_Wet(value));
         break;
 
-    case 349:
+    case MC_Echotron_Pan:
         efx_Echotron->changepar(Echotron_Pan, value);
         break;
 
-    case 350:
+    case MC_Echotron_Tempo:
         efx_Echotron->changepar(Echotron_Tempo, ret_Tempo(value));
         break;
 
-    case 351:
+    case MC_Echotron_Damp:
         efx_Echotron->changepar(Echotron_Damp, value);
         break;
 
-    case 352:
+    case MC_Echotron_Feedback:
         efx_Echotron->changepar(Echotron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
-    case 353:
+    case MC_Echotron_LR_Cross:
         efx_Echotron->changepar(Echotron_LR_Cross, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 354:
+    case MC_Echotron_LFO_Width:
         efx_Echotron->changepar(Echotron_LFO_Width, value);
         break;
 
-    case 355:
+    case MC_Echotron_Depth:
         efx_Echotron->changepar(Echotron_Depth, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 356:
+    case MC_Echotron_LFO_Stereo:
         efx_Echotron->changepar(Echotron_LFO_Stereo, value);
         break;
 
-    case 357:
+    case MC_Echotron_Taps:
     {
         /* There is a minor problem with this approach. If the user sets the delay
            file after setting the taps, then the taps will not get adjusted upward. 
@@ -2954,43 +2954,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         efx_Echotron->changepar(Echotron_Taps, number_taps);
         break;
     }
-    case 358:
+    case MC_Sharm_DryWet:
         efx_StereoHarm->changepar(Sharm_DryWet, Dry_Wet(value));
         break;
 
-    case 359:
+    case MC_Sharm_L_Interval:
         efx_StereoHarm->changepar(Sharm_L_Interval, (int) ((float) value * C_MC_24_RANGE));
         break;
 
-    case 360:
+    case MC_Sharm_L_Chroma:
         efx_StereoHarm->changepar(Sharm_L_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
         break;
 
-    case 361:
+    case MC_Sharm_L_Gain:
         efx_StereoHarm->changepar(Sharm_L_Gain, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 362:
+    case MC_Sharm_R_Interval:
         efx_StereoHarm->changepar(Sharm_R_Interval, (int) ((float) value * C_MC_24_RANGE));
         break;
 
-    case 363:
+    case MC_Sharm_R_Chroma:
         efx_StereoHarm->changepar(Sharm_R_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
         break;
 
-    case 364:
+    case MC_Sharm_R_Gain:
         efx_StereoHarm->changepar(Sharm_R_Gain, (int) ((float) value * C_MC_128_RANGE));
         break;
 
-    case 365:
+    case MC_Sharm_LR_Cross:
         efx_StereoHarm->changepar(Sharm_LR_Cross, value);
         break;
 
-    case 366:
+    case MC_Sharm_Note:
         efx_StereoHarm->changepar(Sharm_Note, (int) ((float) value * C_MC_23_RANGE));
         break;
 
-    case 367:
+    case MC_Sharm_Chord:
         efx_StereoHarm->changepar(Sharm_Chord, (int) ((float) value * C_MC_33_RANGE));
         break;
 

@@ -50,7 +50,7 @@ Fl_Menu_Item ShifterGui::menu_shifter_preset[] = {
 void ShifterGui::cb_shifter_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(326);
+ rgui->getMIDIControl(MC_Shifter_DryWet);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_DryWet,Dry_Wet((int)(o->value())));
@@ -62,7 +62,7 @@ void ShifterGui::cb_shifter_WD(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_int_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(327);
+ rgui->getMIDIControl(MC_Shifter_Interval);
  return;
 }
 rkr->Shifter_Bypass=0;
@@ -76,7 +76,7 @@ void ShifterGui::cb_shifter_int(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(328);
+ rgui->getMIDIControl(MC_Shifter_Gain);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Gain,(int)(o->value()+64));
@@ -88,7 +88,7 @@ void ShifterGui::cb_shifter_gain(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(329);
+ rgui->getMIDIControl(MC_Shifter_Pan);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Pan,(int)(o->value()+64));
@@ -100,7 +100,7 @@ void ShifterGui::cb_shifter_pan(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_attack_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(330);
+ rgui->getMIDIControl(MC_Shifter_Attack);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Attack,(int)o->value());
@@ -112,7 +112,7 @@ void ShifterGui::cb_shifter_attack(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_decay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(331);
+ rgui->getMIDIControl(MC_Shifter_Decay);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Decay,(int)o->value());
@@ -124,7 +124,7 @@ void ShifterGui::cb_shifter_decay(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_thre_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(332);
+ rgui->getMIDIControl(MC_Shifter_Threshold);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Threshold,(int)o->value());
@@ -143,7 +143,7 @@ void ShifterGui::cb_shifter_ud(RKR_Check_Button* o, void* v) {
 void ShifterGui::cb_shifter_whammy_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(333);
+ rgui->getMIDIControl(MC_Shifter_Whammy);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Whammy,(int)o->value());

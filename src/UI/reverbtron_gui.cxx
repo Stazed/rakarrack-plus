@@ -59,7 +59,7 @@ Fl_Menu_Item RevtronGui::menu_revtron_preset[] = {
 void RevtronGui::cb_revtron_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(339);
+ rgui->getMIDIControl(MC_Revtron_DryWet);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_DryWet,Dry_Wet((int)(o->value())));
@@ -71,7 +71,7 @@ void RevtronGui::cb_revtron_WD(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(340);
+ rgui->getMIDIControl(MC_Revtron_Pan);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Pan,(int)(o->value()+64));
@@ -83,7 +83,7 @@ void RevtronGui::cb_revtron_pan(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(341);
+ rgui->getMIDIControl(MC_Revtron_Level);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Level,(int)o->value());
@@ -95,7 +95,7 @@ void RevtronGui::cb_revtron_level(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(342);
+ rgui->getMIDIControl(MC_Revtron_Damp);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Damp,(int)o->value());
@@ -107,7 +107,7 @@ void RevtronGui::cb_revtron_damp(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(343);
+ rgui->getMIDIControl(MC_Revtron_Feedback);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Feedback,(int)o->value());
@@ -119,7 +119,7 @@ void RevtronGui::cb_revtron_fb(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_length_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(344);
+ rgui->getMIDIControl(MC_Revtron_Length);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Length,(int)o->value());
@@ -131,7 +131,7 @@ void RevtronGui::cb_revtron_length(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_strech_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(345);
+ rgui->getMIDIControl(MC_Revtron_Stretch);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Stretch,(int)o->value());
@@ -143,7 +143,7 @@ void RevtronGui::cb_revtron_strech(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_idelay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(346);
+ rgui->getMIDIControl(MC_Revtron_I_Delay);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_I_Delay,(int)o->value());
@@ -155,7 +155,7 @@ void RevtronGui::cb_revtron_idelay(RKR_Slider* o, void* v) {
 void RevtronGui::cb_revtron_fade_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(347);
+ rgui->getMIDIControl(MC_Revtron_Fade);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Fade,(int)o->value());

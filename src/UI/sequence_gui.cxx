@@ -59,7 +59,7 @@ Fl_Menu_Item SequenceGui::menu_seq_preset[] = {
 void SequenceGui::cb_seq_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(314);
+ rgui->getMIDIControl(MC_Sequence_DryWet);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_DryWet,Dry_Wet((int)(o->value())));
@@ -71,7 +71,7 @@ void SequenceGui::cb_seq_WD(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(315);
+ rgui->getMIDIControl(MC_Sequence_Step_1);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_1,(int)o->value());
@@ -83,7 +83,7 @@ void SequenceGui::cb_seq_1(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(316);
+ rgui->getMIDIControl(MC_Sequence_Step_2);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_2,(int)o->value());
@@ -95,7 +95,7 @@ void SequenceGui::cb_seq_2(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(317);
+ rgui->getMIDIControl(MC_Sequence_Step_3);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_3,(int)o->value());
@@ -107,7 +107,7 @@ void SequenceGui::cb_seq_3(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_4_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(318);
+ rgui->getMIDIControl(MC_Sequence_Step_4);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_4,(int)o->value());
@@ -119,7 +119,7 @@ void SequenceGui::cb_seq_4(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_5_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(319);
+ rgui->getMIDIControl(MC_Sequence_Step_5);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_5,(int)o->value());
@@ -131,7 +131,7 @@ void SequenceGui::cb_seq_5(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_6_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(320);
+ rgui->getMIDIControl(MC_Sequence_Step_6);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_6,(int)o->value());
@@ -143,7 +143,7 @@ void SequenceGui::cb_seq_6(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_7_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(321);
+ rgui->getMIDIControl(MC_Sequence_Step_7);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_7,(int)o->value());
@@ -155,7 +155,7 @@ void SequenceGui::cb_seq_7(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_8_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(322);
+ rgui->getMIDIControl(MC_Sequence_Step_8);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Step_8,(int)o->value());
@@ -167,7 +167,7 @@ void SequenceGui::cb_seq_8(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(323);
+ rgui->getMIDIControl(MC_Sequence_Tempo);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Tempo,(int)o->value());
@@ -179,7 +179,7 @@ void SequenceGui::cb_seq_tempo(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(324);
+ rgui->getMIDIControl(MC_Sequence_Resonance);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Resonance,(int)o->value()+64);
@@ -191,7 +191,7 @@ void SequenceGui::cb_seq_q(RKR_Slider* o, void* v) {
 void SequenceGui::cb_seq_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(325);
+ rgui->getMIDIControl(MC_Sequence_Stdf);
  return;
 }
 rkr->efx_Sequence->changepar(Sequence_Stdf,(int)o->value());

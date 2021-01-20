@@ -92,7 +92,7 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(348);
+ rgui->getMIDIControl(MC_Echotron_DryWet);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_DryWet,Dry_Wet((int)(o->value())));}
@@ -103,7 +103,7 @@ rkr->efx_Echotron->changepar(Echotron_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(349);
+ rgui->getMIDIControl(MC_Echotron_Pan);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Pan,(int)(o->value()+64));}
@@ -114,7 +114,7 @@ rkr->efx_Echotron->changepar(Echotron_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(350);
+ rgui->getMIDIControl(MC_Echotron_Tempo);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Tempo,(int)o->value());}
@@ -125,7 +125,7 @@ rkr->efx_Echotron->changepar(Echotron_Tempo,(int)o->value());}
     label Damp
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(351);
+ rgui->getMIDIControl(MC_Echotron_Damp);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Damp,(int)o->value());}
@@ -136,7 +136,7 @@ rkr->efx_Echotron->changepar(Echotron_Damp,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(352);
+ rgui->getMIDIControl(MC_Echotron_Feedback);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Feedback,(int)o->value());}
@@ -147,7 +147,7 @@ rkr->efx_Echotron->changepar(Echotron_Feedback,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(353);
+ rgui->getMIDIControl(MC_Echotron_LR_Cross);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_LR_Cross,(int)(o->value()+64));}
@@ -158,7 +158,7 @@ rkr->efx_Echotron->changepar(Echotron_LR_Cross,(int)(o->value()+64));}
     label Width
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(354);
+ rgui->getMIDIControl(MC_Echotron_LFO_Width);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_LFO_Width,(int)o->value());}
@@ -169,7 +169,7 @@ rkr->efx_Echotron->changepar(Echotron_LFO_Width,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(355);
+ rgui->getMIDIControl(MC_Echotron_Depth);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Depth,((int)o->value()+64));}
@@ -180,7 +180,7 @@ rkr->efx_Echotron->changepar(Echotron_Depth,((int)o->value()+64));}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(356);
+ rgui->getMIDIControl(MC_Echotron_LFO_Stereo);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_LFO_Stereo,(int)o->value());}
@@ -253,7 +253,7 @@ echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
     label {\#}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(357);
+ rgui->getMIDIControl(MC_Echotron_Taps);
  return;
 }
 rkr->efx_Echotron->changepar(Echotron_Taps,(int)o->value());}

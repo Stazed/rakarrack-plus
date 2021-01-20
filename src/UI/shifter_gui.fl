@@ -82,7 +82,7 @@ shifter_mode->value(rkr->efx_Shifter->getpar(Shifter_Mode));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(326);
+ rgui->getMIDIControl(MC_Shifter_DryWet);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_DryWet,Dry_Wet((int)(o->value())));}
@@ -93,7 +93,7 @@ rkr->efx_Shifter->changepar(Shifter_DryWet,Dry_Wet((int)(o->value())));}
     label Interval
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(327);
+ rgui->getMIDIControl(MC_Shifter_Interval);
  return;
 }
 rkr->Shifter_Bypass=0;
@@ -106,7 +106,7 @@ if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(328);
+ rgui->getMIDIControl(MC_Shifter_Gain);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Gain,(int)(o->value()+64));}
@@ -117,7 +117,7 @@ rkr->efx_Shifter->changepar(Shifter_Gain,(int)(o->value()+64));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(329);
+ rgui->getMIDIControl(MC_Shifter_Pan);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Pan,(int)(o->value()+64));}
@@ -128,7 +128,7 @@ rkr->efx_Shifter->changepar(Shifter_Pan,(int)(o->value()+64));}
     label Attack
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(330);
+ rgui->getMIDIControl(MC_Shifter_Attack);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Attack,(int)o->value());}
@@ -139,7 +139,7 @@ rkr->efx_Shifter->changepar(Shifter_Attack,(int)o->value());}
     label Decay
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(331);
+ rgui->getMIDIControl(MC_Shifter_Decay);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Decay,(int)o->value());}
@@ -150,7 +150,7 @@ rkr->efx_Shifter->changepar(Shifter_Decay,(int)o->value());}
     label Threshold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(332);
+ rgui->getMIDIControl(MC_Shifter_Threshold);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Threshold,(int)o->value());}
@@ -168,7 +168,7 @@ rkr->efx_Shifter->changepar(Shifter_Threshold,(int)o->value());}
     label Whammy
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(333);
+ rgui->getMIDIControl(MC_Shifter_Whammy);
  return;
 }
 rkr->efx_Shifter->changepar(Shifter_Whammy,(int)o->value());}

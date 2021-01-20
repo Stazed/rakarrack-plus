@@ -100,7 +100,7 @@ revtron_rv->value(rkr->efx_Reverbtron->getpar(Revtron_Shuffle));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(339);
+ rgui->getMIDIControl(MC_Revtron_DryWet);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_DryWet,Dry_Wet((int)(o->value())));}
@@ -111,7 +111,7 @@ rkr->efx_Reverbtron->changepar(Revtron_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(340);
+ rgui->getMIDIControl(MC_Revtron_Pan);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Pan,(int)(o->value()+64));}
@@ -122,7 +122,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Pan,(int)(o->value()+64));}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(341);
+ rgui->getMIDIControl(MC_Revtron_Level);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Level,(int)o->value());}
@@ -133,7 +133,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Level,(int)o->value());}
     label Damp
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(342);
+ rgui->getMIDIControl(MC_Revtron_Damp);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Damp,(int)o->value());}
@@ -144,7 +144,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Damp,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(343);
+ rgui->getMIDIControl(MC_Revtron_Feedback);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Feedback,(int)o->value());}
@@ -155,7 +155,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Feedback,(int)o->value());}
     label Length
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(344);
+ rgui->getMIDIControl(MC_Revtron_Length);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Length,(int)o->value());}
@@ -166,7 +166,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Length,(int)o->value());}
     label Stretch
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(345);
+ rgui->getMIDIControl(MC_Revtron_Stretch);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Stretch,(int)o->value());}
@@ -177,7 +177,7 @@ rkr->efx_Reverbtron->changepar(Revtron_Stretch,(int)o->value());}
     label {I. Del}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(346);
+ rgui->getMIDIControl(MC_Revtron_I_Delay);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_I_Delay,(int)o->value());}
@@ -188,7 +188,7 @@ rkr->efx_Reverbtron->changepar(Revtron_I_Delay,(int)o->value());}
     label Fade
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(347);
+ rgui->getMIDIControl(MC_Revtron_Fade);
  return;
 }
 rkr->efx_Reverbtron->changepar(Revtron_Fade,(int)o->value());}
