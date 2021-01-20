@@ -48,7 +48,7 @@ Fl_Menu_Item DerelictGui::menu_derelict_preset[] = {
 void DerelictGui::cb_derelict_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(125);
+ rgui->getMIDIControl(MC_Dere_DryWet);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_DryWet,Dry_Wet((int)(o->value())));
@@ -60,7 +60,7 @@ void DerelictGui::cb_derelict_WD(RKR_Slider* o, void* v) {
 void DerelictGui::cb_derelict_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(127);
+ rgui->getMIDIControl(MC_Dere_LR_Cross);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_LR_Cross,(int)(o->value()));
@@ -72,7 +72,7 @@ void DerelictGui::cb_derelict_LRc(RKR_Slider* o, void* v) {
 void DerelictGui::cb_derelict_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(2);
+ rgui->getMIDIControl(MC_Dere_Drive);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Drive,(int)o->value());
@@ -84,7 +84,7 @@ void DerelictGui::cb_derelict_drive(RKR_Slider* o, void* v) {
 void DerelictGui::cb_derelict_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(3);
+ rgui->getMIDIControl(MC_Dere_Level);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Level,(int)o->value());
@@ -116,7 +116,7 @@ void DerelictGui::cb_derelict_neg(RKR_Check_Button* o, void* v) {
 void DerelictGui::cb_derelict_st_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(6);
+ rgui->getMIDIControl(MC_Dere_Color);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Color,(int)o->value());
@@ -128,7 +128,7 @@ void DerelictGui::cb_derelict_st(RKR_Slider* o, void* v) {
 void DerelictGui::cb_derelict_oct_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(8);
+ rgui->getMIDIControl(MC_Dere_Suboctave);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Suboctave,(int)o->value());
@@ -140,7 +140,7 @@ void DerelictGui::cb_derelict_oct(RKR_Slider* o, void* v) {
 void DerelictGui::cb_derelict_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(126);
+ rgui->getMIDIControl(MC_Dere_Pan);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Pan,(int)(o->value()+64));
@@ -159,7 +159,7 @@ void DerelictGui::cb_derelict_pf(RKR_Check_Button* o, void* v) {
 void DerelictGui::cb_derelict_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(4);
+ rgui->getMIDIControl(MC_Dere_LPF);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_LPF,(int)o->value());
@@ -171,7 +171,7 @@ void DerelictGui::cb_derelict_lpf(RKR_Slider* o, void* v) {
 void DerelictGui::cb_derelict_hpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(5);
+ rgui->getMIDIControl(MC_Dere_HPF);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_HPF,(int)o->value());

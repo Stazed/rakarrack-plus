@@ -50,7 +50,7 @@ Fl_Menu_Item MusdelayGui::menu_musdelay_preset[] = {
 void MusdelayGui::cb_musdelay_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(56);
+ rgui->getMIDIControl(MC_Music_DryWet);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_DryWet,Dry_Wet((int)o->value()));
@@ -62,7 +62,7 @@ void MusdelayGui::cb_musdelay_WD(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(98);
+ rgui->getMIDIControl(MC_Music_LR_Cross);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_LR_Cross,(int)o->value());
@@ -74,7 +74,7 @@ void MusdelayGui::cb_musdelay_LRc(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_pan1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(62);
+ rgui->getMIDIControl(MC_Music_Pan_1);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Pan_1,(int)o->value()+64);
@@ -86,7 +86,7 @@ void MusdelayGui::cb_musdelay_pan1(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_pan2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(65);
+ rgui->getMIDIControl(MC_Music_Pan_2);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Pan_2,(int)o->value()+64);
@@ -160,7 +160,7 @@ void MusdelayGui::cb_musdelay_tempo(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_gain1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(24);
+ rgui->getMIDIControl(MC_Music_Gain_1);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Gain_1,(int)o->value());
@@ -172,7 +172,7 @@ void MusdelayGui::cb_musdelay_gain1(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_gain2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(25);
+ rgui->getMIDIControl(MC_Music_Gain_2);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Gain_2,(int)o->value());
@@ -184,7 +184,7 @@ void MusdelayGui::cb_musdelay_gain2(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_fb1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(83);
+ rgui->getMIDIControl(MC_Music_Feedback_1);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Feedback_1,(int)o->value());
@@ -196,7 +196,7 @@ void MusdelayGui::cb_musdelay_fb1(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_fb2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(84);
+ rgui->getMIDIControl(MC_Music_Feedback_2);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Feedback_2,(int)o->value());

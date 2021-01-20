@@ -52,7 +52,7 @@ WahWah_ampsns->value(rkr->efx_WahWah->getpar(WahWah_Sense));
 WahWah_ampsnsinv->value(rkr->efx_WahWah->getpar(WahWah_ASI));
 WahWah_smooth->value(rkr->efx_WahWah->getpar(WahWah_Smooth));
 WahWah_ftype->value(rkr->efx_WahWah->getpar(WahWah_Mode));
-if((int)WahWah_activar->value()) rkr->WahWah_Bypass=1;} selected
+if((int)WahWah_activar->value()) rkr->WahWah_Bypass=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -81,7 +81,7 @@ if((int)WahWah_activar->value()) rkr->WahWah_Bypass=1;} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(28);
+ rgui->getMIDIControl(MC_WahWah_DryWet);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_DryWet,Dry_Wet((int)(o->value())));}
@@ -92,7 +92,7 @@ rkr->efx_WahWah->changepar(WahWah_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(66);
+ rgui->getMIDIControl(MC_WahWah_Pan);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_Pan,(int)(o->value()+64));}
@@ -103,7 +103,7 @@ rkr->efx_WahWah->changepar(WahWah_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(75);
+ rgui->getMIDIControl(MC_WahWah_LFO_Tempo);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_LFO_Tempo,(int)o->value());}
@@ -114,7 +114,7 @@ rkr->efx_WahWah->changepar(WahWah_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(108);
+ rgui->getMIDIControl(MC_WahWah_LFO_Random);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_LFO_Random,(int)o->value());}
@@ -138,7 +138,7 @@ rkr->efx_WahWah->changepar(WahWah_LFO_Type,(int)o->value())}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(102);
+ rgui->getMIDIControl(MC_WahWah_LFO_Stereo);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_LFO_Stereo,(int)o->value());}
@@ -149,7 +149,7 @@ rkr->efx_WahWah->changepar(WahWah_LFO_Stereo,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(1);
+ rgui->getMIDIControl(MC_WahWah_Depth);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_Depth,(int)o->value());}
@@ -160,7 +160,7 @@ rkr->efx_WahWah->changepar(WahWah_Depth,(int)o->value());}
     label {Amp.S.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(111);
+ rgui->getMIDIControl(MC_WahWah_Sense);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_Sense,(int)o->value());}
@@ -172,7 +172,7 @@ rkr->efx_WahWah->changepar(WahWah_Sense,(int)o->value());}
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(112);
+ rgui->getMIDIControl(MC_WahWah_ASI);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_ASI,(int)o->value());}
@@ -210,10 +210,10 @@ rkr->efx_WahWah->changepar(WahWah_ASI,(int)o->value());}
     label Smooth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(113);
+ rgui->getMIDIControl(MC_WahWah_Smooth);
  return;
 } 
-rkr->efx_WahWah->changepar(WahWah_Smooth,(int)o->value());}
+rkr->efx_WahWah->changepar(WahWah_Smooth,(int)o->value());} selected
     xywh {56 165 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

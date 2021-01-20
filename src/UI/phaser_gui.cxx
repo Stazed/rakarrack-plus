@@ -51,7 +51,7 @@ Fl_Menu_Item PhaserGui::menu_phaser_preset[] = {
 void PhaserGui::cb_phaser_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(54);
+ rgui->getMIDIControl(MC_Phaser_DryWet);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_DryWet,Dry_Wet((int)(o->value())));
@@ -63,7 +63,7 @@ void PhaserGui::cb_phaser_WD(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(60);
+ rgui->getMIDIControl(MC_Phaser_Pan);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Pan,(int)(o->value()+64));
@@ -75,7 +75,7 @@ void PhaserGui::cb_phaser_pan(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(74);
+ rgui->getMIDIControl(MC_Phaser_LFO_Tempo);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_LFO_Tempo,(int)o->value());
@@ -87,7 +87,7 @@ void PhaserGui::cb_phaser_freq(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(107);
+ rgui->getMIDIControl(MC_Phaser_LFO_Random);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_LFO_Random,(int)o->value());
@@ -119,7 +119,7 @@ void PhaserGui::cb_phaser_subs(RKR_Check_Button* o, void* v) {
 void PhaserGui::cb_phaser_phase_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(114);
+ rgui->getMIDIControl(MC_Phaser_Phase);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Phase,(int)o->value());
@@ -131,7 +131,7 @@ void PhaserGui::cb_phaser_phase(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(101);
+ rgui->getMIDIControl(MC_Phaser_LFO_Stereo);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_LFO_Stereo,(int)o->value());
@@ -143,7 +143,7 @@ void PhaserGui::cb_phaser_stdf(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(21);
+ rgui->getMIDIControl(MC_Phaser_Depth);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Depth,(int)o->value());
@@ -155,7 +155,7 @@ void PhaserGui::cb_phaser_dpth(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(81);
+ rgui->getMIDIControl(MC_Phaser_Feedback);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Feedback,(int)o->value());
@@ -174,7 +174,7 @@ void PhaserGui::cb_phaser_stages(RKR_Counter* o, void* v) {
 void PhaserGui::cb_phaser_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(93);
+ rgui->getMIDIControl(MC_Phaser_LR_Cross);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_LR_Cross,(int)(o->value()+64));

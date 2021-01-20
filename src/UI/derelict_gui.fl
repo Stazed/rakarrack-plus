@@ -51,7 +51,7 @@ derelict_oct->value(rkr->efx_Derelict->getpar(Dere_Suboctave));
 derelict_pan->value(rkr->efx_Derelict->getpar(Dere_Pan)-64);
 derelict_pf->value(rkr->efx_Derelict->getpar(Dere_Prefilter));
 derelict_lpf->value(rkr->efx_Derelict->getpar(Dere_LPF));
-derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));} selected
+derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -72,7 +72,7 @@ derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(125);
+ rgui->getMIDIControl(MC_Dere_DryWet);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_DryWet,Dry_Wet((int)(o->value())));}
@@ -83,7 +83,7 @@ rkr->efx_Derelict->changepar(Dere_DryWet,Dry_Wet((int)(o->value())));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(127);
+ rgui->getMIDIControl(MC_Dere_LR_Cross);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_LR_Cross,(int)(o->value()));}
@@ -94,7 +94,7 @@ rkr->efx_Derelict->changepar(Dere_LR_Cross,(int)(o->value()));}
     label Drive
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(2);
+ rgui->getMIDIControl(MC_Dere_Drive);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Drive,(int)o->value());}
@@ -105,7 +105,7 @@ rkr->efx_Derelict->changepar(Dere_Drive,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(3);
+ rgui->getMIDIControl(MC_Dere_Level);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Level,(int)o->value());}
@@ -136,7 +136,7 @@ rkr->efx_Derelict->changepar(Dere_Type,(int)o->value());}
     label Color
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(6);
+ rgui->getMIDIControl(MC_Dere_Color);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Color,(int)o->value());}
@@ -147,7 +147,7 @@ rkr->efx_Derelict->changepar(Dere_Color,(int)o->value());}
     label {Sub Octv}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(8);
+ rgui->getMIDIControl(MC_Dere_Suboctave);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Suboctave,(int)o->value());}
@@ -158,7 +158,7 @@ rkr->efx_Derelict->changepar(Dere_Suboctave,(int)o->value());}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(126);
+ rgui->getMIDIControl(MC_Dere_Pan);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_Pan,(int)(o->value()+64));}
@@ -176,7 +176,7 @@ rkr->efx_Derelict->changepar(Dere_Pan,(int)(o->value()+64));}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(4);
+ rgui->getMIDIControl(MC_Dere_LPF);
  return;
 } 
 rkr->efx_Derelict->changepar(Dere_LPF,(int)o->value());}
@@ -187,10 +187,10 @@ rkr->efx_Derelict->changepar(Dere_LPF,(int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(5);
+ rgui->getMIDIControl(MC_Dere_HPF);
  return;
 } 
-rkr->efx_Derelict->changepar(Dere_HPF,(int)o->value());}
+rkr->efx_Derelict->changepar(Dere_HPF,(int)o->value());} selected
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

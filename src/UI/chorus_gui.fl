@@ -51,7 +51,7 @@ chorus_delay->value(rkr->efx_Chorus->getpar(Chorus_Delay));
 chorus_fb->value(rkr->efx_Chorus->getpar(Chorus_Feedback));
 chorus_LR->value(rkr->efx_Chorus->getpar(Chorus_LR_Cross));
 chorus_subs->value(rkr->efx_Chorus->getpar(Chorus_Subtract));
-chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));} selected
+chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -80,7 +80,7 @@ chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(52);
+ rgui->getMIDIControl(MC_Chorus_DryWet);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
@@ -91,7 +91,7 @@ rkr->efx_Chorus->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(50);
+ rgui->getMIDIControl(MC_Chorus_Pan);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_Pan,(int)(o->value()+64));}
@@ -102,7 +102,7 @@ rkr->efx_Chorus->changepar(Chorus_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(72);
+ rgui->getMIDIControl(MC_Chorus_LFO_Tempo);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_LFO_Tempo,(int)o->value());}
@@ -113,7 +113,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(105);
+ rgui->getMIDIControl(MC_Chorus_LFO_Random);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_LFO_Random,(int)o->value());}
@@ -152,7 +152,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Type,(int)o->value())} open
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(99);
+ rgui->getMIDIControl(MC_Chorus_LFO_Stereo);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_LFO_Stereo,(int)o->value());}
@@ -163,7 +163,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Stereo,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(23);
+ rgui->getMIDIControl(MC_Chorus_Depth);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_Depth,(int)o->value());}
@@ -186,7 +186,7 @@ rkr->efx_Chorus->changepar(Chorus_Delay,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(79);
+ rgui->getMIDIControl(MC_Chorus_Feedback);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_Feedback,(int)o->value());}
@@ -197,10 +197,10 @@ rkr->efx_Chorus->changepar(Chorus_Feedback,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(91);
+ rgui->getMIDIControl(MC_Chorus_LR_Cross);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_LR_Cross,(int)(o->value()));}
+rkr->efx_Chorus->changepar(Chorus_LR_Cross,(int)(o->value()));} selected
     xywh {55 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

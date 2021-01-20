@@ -67,7 +67,7 @@ ovrd_pf->value(rkr->efx_Overdrive->getpar(Overdrive_Prefilter));}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(29);
+ rgui->getMIDIControl(MC_Overdrive_DryWet);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));}
@@ -78,7 +78,7 @@ rkr->efx_Overdrive->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(94);
+ rgui->getMIDIControl(MC_Overdrive_LR_Cross);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_LR_Cross,(int)(o->value()));}
@@ -89,7 +89,7 @@ rkr->efx_Overdrive->changepar(Overdrive_LR_Cross,(int)(o->value()));}
     label Drive
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(68);
+ rgui->getMIDIControl(MC_Overdrive_Drive);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_Drive,(int)o->value());}
@@ -100,7 +100,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Drive,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(70);
+ rgui->getMIDIControl(MC_Overdrive_Level);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_Level,(int)o->value());}
@@ -138,7 +138,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Type,(int)o->value());} open
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(47);
+ rgui->getMIDIControl(MC_Overdrive_Pan);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));}
@@ -148,7 +148,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));}
   Fl_Check_Button ovrd_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_Overdrive->changepar(Overdrive_Prefilter,(int)o->value());} selected
+    callback {rkr->efx_Overdrive->changepar(Overdrive_Prefilter,(int)o->value());}
     xywh {41 138 68 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -156,7 +156,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(85);
+ rgui->getMIDIControl(MC_Overdrive_LPF);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_LPF,(int)o->value());}
@@ -167,10 +167,10 @@ rkr->efx_Overdrive->changepar(Overdrive_LPF,(int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(88);
+ rgui->getMIDIControl(MC_Overdrive_HPF);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_HPF,(int)o->value());}
+rkr->efx_Overdrive->changepar(Overdrive_HPF,(int)o->value());} selected
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

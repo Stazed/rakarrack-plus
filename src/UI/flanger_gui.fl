@@ -51,7 +51,7 @@ flanger_delay->value(rkr->efx_Flanger->getpar(Flanger_Delay));
 flanger_fb->value(rkr->efx_Flanger->getpar(Flanger_Feedback));
 flanger_LR->value(rkr->efx_Flanger->getpar(Flanger_LR_Cross));
 flanger_subs->value(rkr->efx_Flanger->getpar(Flanger_Subtract));
-flanger_awesome->value(rkr->efx_Flanger->getpar(Flanger_Intense));} selected
+flanger_awesome->value(rkr->efx_Flanger->getpar(Flanger_Intense));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -80,7 +80,7 @@ flanger_awesome->value(rkr->efx_Flanger->getpar(Flanger_Intense));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(53);
+ rgui->getMIDIControl(MC_Flanger_DryWet);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_DryWet,Dry_Wet((int)(o->value())));}
@@ -91,7 +91,7 @@ rkr->efx_Flanger->changepar(Flanger_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(51);
+ rgui->getMIDIControl(MC_Flanger_Pan);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_Pan,(int)(o->value()+64));}
@@ -102,7 +102,7 @@ rkr->efx_Flanger->changepar(Flanger_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(73);
+ rgui->getMIDIControl(MC_Flanger_LFO_Tempo);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_LFO_Tempo,(int)o->value());}
@@ -113,7 +113,7 @@ rkr->efx_Flanger->changepar(Flanger_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(106);
+ rgui->getMIDIControl(MC_Flanger_LFO_Random);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_LFO_Random,(int)o->value());}
@@ -151,7 +151,7 @@ rkr->efx_Flanger->changepar(Flanger_LFO_Type,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(100);
+ rgui->getMIDIControl(MC_Flanger_LFO_Stereo);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_LFO_Stereo,(int)o->value());}
@@ -162,7 +162,7 @@ rkr->efx_Flanger->changepar(Flanger_LFO_Stereo,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(22);
+ rgui->getMIDIControl(MC_Flanger_Depth);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_Depth,(int)o->value());}
@@ -184,7 +184,7 @@ rkr->efx_Flanger->changepar(Flanger_Delay,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(80);
+ rgui->getMIDIControl(MC_Flanger_Feedback);
  return;
 } 
 rkr->efx_Flanger->changepar(Flanger_Feedback,(int)o->value());}
@@ -195,10 +195,10 @@ rkr->efx_Flanger->changepar(Flanger_Feedback,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(92);
+ rgui->getMIDIControl(MC_Flanger_LR_Cross);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_LR_Cross,(int)(o->value()));}
+rkr->efx_Flanger->changepar(Flanger_LR_Cross,(int)(o->value()));} selected
     xywh {56 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

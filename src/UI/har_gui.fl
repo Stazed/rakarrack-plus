@@ -32,7 +32,7 @@ if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(Harm_Interval,rkr->efx_Har->getpar(Harm_Interval));
 rgui->Chord(0);
-rgui->findpos(14,(int)o->value(),o);} selected
+rgui->findpos(14,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -73,7 +73,7 @@ if ((rkr->efx_Har->PMIDI) || (rkr->efx_Har->PSELECT)) rgui->Chord(0);}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(31);
+ rgui->getMIDIControl(MC_Harm_DryWet);
  return;
 } 
 rkr->efx_Har->changepar(Harm_DryWet,Dry_Wet((int)(o->value())));}
@@ -84,7 +84,7 @@ rkr->efx_Har->changepar(Harm_DryWet,Dry_Wet((int)(o->value())));}
     label Interval
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(27);
+ rgui->getMIDIControl(MC_Harm_Interval);
  return;
 } 
 rkr->Harmonizer_Bypass=0;
@@ -108,7 +108,7 @@ rkr->efx_Har->changepar(Harm_Gain,(int)(o->value()+64));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(49);
+ rgui->getMIDIControl(MC_Harm_Pan);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Pan,(int)(o->value()+64));}
@@ -119,7 +119,7 @@ rkr->efx_Har->changepar(Harm_Pan,(int)(o->value()+64));}
     label Freq
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(26);
+ rgui->getMIDIControl(MC_Harm_Filter_Freq);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Filter_Freq,(int)o->value());}
@@ -197,7 +197,7 @@ rgui->Chord(0);}
  return;
 }
 rkr->efx_Har->changepar(Harm_Chord,(unsigned char)o->value());
-rgui->Chord(0);}
+rgui->Chord(0);} selected
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
     class RKR_Slider
   }

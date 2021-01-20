@@ -51,7 +51,7 @@ Fl_Menu_Item WahwahGui::menu_WahWah_preset[] = {
 void WahwahGui::cb_WahWah_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(28);
+ rgui->getMIDIControl(MC_WahWah_DryWet);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_DryWet,Dry_Wet((int)(o->value())));
@@ -63,7 +63,7 @@ void WahwahGui::cb_WahWah_WD(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(66);
+ rgui->getMIDIControl(MC_WahWah_Pan);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_Pan,(int)(o->value()+64));
@@ -75,7 +75,7 @@ void WahwahGui::cb_WahWah_pan(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(75);
+ rgui->getMIDIControl(MC_WahWah_LFO_Tempo);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_LFO_Tempo,(int)o->value());
@@ -87,7 +87,7 @@ void WahwahGui::cb_WahWah_freq(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(108);
+ rgui->getMIDIControl(MC_WahWah_LFO_Random);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_LFO_Random,(int)o->value());
@@ -112,7 +112,7 @@ void WahwahGui::cb_WahWah_lfotype(RKR_Choice* o, void* v) {
 void WahwahGui::cb_WahWah_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(102);
+ rgui->getMIDIControl(MC_WahWah_LFO_Stereo);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_LFO_Stereo,(int)o->value());
@@ -124,7 +124,7 @@ void WahwahGui::cb_WahWah_stdf(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(1);
+ rgui->getMIDIControl(MC_WahWah_Depth);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_Depth,(int)o->value());
@@ -136,7 +136,7 @@ void WahwahGui::cb_WahWah_dpth(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_ampsns_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(111);
+ rgui->getMIDIControl(MC_WahWah_Sense);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_Sense,(int)o->value());
@@ -148,7 +148,7 @@ void WahwahGui::cb_WahWah_ampsns(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_ampsnsinv_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(112);
+ rgui->getMIDIControl(MC_WahWah_ASI);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_ASI,(int)o->value());
@@ -176,7 +176,7 @@ Fl_Menu_Item WahwahGui::menu_WahWah_ftype[] = {
 void WahwahGui::cb_WahWah_smooth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(113);
+ rgui->getMIDIControl(MC_WahWah_Smooth);
  return;
 } 
 rkr->efx_WahWah->changepar(WahWah_Smooth,(int)o->value());

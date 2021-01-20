@@ -47,7 +47,7 @@ Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
 Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
 Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
 Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LR_Cross));
-Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));} selected
+Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));}
     xywh {76 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -72,7 +72,7 @@ Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(55);
+ rgui->getMIDIControl(MC_Alien_DryWet);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));}
@@ -83,7 +83,7 @@ rkr->efx_Alienwah->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(61);
+ rgui->getMIDIControl(MC_Alien_Pan);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_Pan,(int)(o->value()+64));}
@@ -94,7 +94,7 @@ rkr->efx_Alienwah->changepar(Alien_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(76);
+ rgui->getMIDIControl(MC_Alien_LFO_Tempo);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_LFO_Tempo,(int)o->value());}
@@ -105,7 +105,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(109);
+ rgui->getMIDIControl(MC_Alien_LFO_Random);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_LFO_Random,(int)o->value());}
@@ -129,7 +129,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Type,(int)o->value())} open
     label Phase
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(115);
+ rgui->getMIDIControl(MC_Alien_Phase);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_Phase,(int)o->value());}
@@ -140,7 +140,7 @@ rkr->efx_Alienwah->changepar(Alien_Phase,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(103);
+ rgui->getMIDIControl(MC_Alien_LFO_Stereo);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_LFO_Stereo,(int)o->value());}
@@ -151,7 +151,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Stereo,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(20);
+ rgui->getMIDIControl(MC_Alien_Depth);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_Depth,(int)o->value());}
@@ -175,7 +175,7 @@ if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(82);
+ rgui->getMIDIControl(MC_Alien_Feedback);
  return;
 } 
 rkr->efx_Alienwah->changepar(Alien_Feedback,(int)o->value());}
@@ -186,10 +186,10 @@ rkr->efx_Alienwah->changepar(Alien_Feedback,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(96);
+ rgui->getMIDIControl(MC_Alien_LR_Cross);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LR_Cross,(int)(o->value()));}
+rkr->efx_Alienwah->changepar(Alien_LR_Cross,(int)(o->value()));} selected
     xywh {56 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

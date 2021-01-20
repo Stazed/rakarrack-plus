@@ -50,7 +50,7 @@ Fl_Menu_Item HarGui::menu_har_preset[] = {
 void HarGui::cb_har_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(31);
+ rgui->getMIDIControl(MC_Harm_DryWet);
  return;
 } 
 rkr->efx_Har->changepar(Harm_DryWet,Dry_Wet((int)(o->value())));
@@ -62,7 +62,7 @@ void HarGui::cb_har_WD(RKR_Slider* o, void* v) {
 void HarGui::cb_har_int_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(27);
+ rgui->getMIDIControl(MC_Harm_Interval);
  return;
 } 
 rkr->Harmonizer_Bypass=0;
@@ -88,7 +88,7 @@ void HarGui::cb_har_gan(RKR_Slider* o, void* v) {
 void HarGui::cb_har_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(49);
+ rgui->getMIDIControl(MC_Harm_Pan);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Pan,(int)(o->value()+64));
@@ -100,7 +100,7 @@ void HarGui::cb_har_pan(RKR_Slider* o, void* v) {
 void HarGui::cb_har_freq1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(26);
+ rgui->getMIDIControl(MC_Harm_Filter_Freq);
  return;
 } 
 rkr->efx_Har->changepar(Harm_Filter_Freq,(int)o->value());

@@ -54,7 +54,7 @@ phaser_fb->value(rkr->efx_Phaser->getpar(Phaser_Feedback));
 phaser_stages->value(rkr->efx_Phaser->getpar(Phaser_Stages));
 phaser_LR->value(rkr->efx_Phaser->getpar(Phaser_LR_Cross)-64);
 phaser_subs->value(rkr->efx_Phaser->getpar(Phaser_Subtract));
-phaser_phase->value(rkr->efx_Phaser->getpar(Phaser_Phase));} selected
+phaser_phase->value(rkr->efx_Phaser->getpar(Phaser_Phase));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -87,7 +87,7 @@ phaser_phase->value(rkr->efx_Phaser->getpar(Phaser_Phase));} selected
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(54);
+ rgui->getMIDIControl(MC_Phaser_DryWet);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_DryWet,Dry_Wet((int)(o->value())));}
@@ -98,7 +98,7 @@ rkr->efx_Phaser->changepar(Phaser_DryWet,Dry_Wet((int)(o->value())));}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(60);
+ rgui->getMIDIControl(MC_Phaser_Pan);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Pan,(int)(o->value()+64));}
@@ -109,7 +109,7 @@ rkr->efx_Phaser->changepar(Phaser_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(74);
+ rgui->getMIDIControl(MC_Phaser_LFO_Tempo);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_LFO_Tempo,(int)o->value());}
@@ -120,7 +120,7 @@ rkr->efx_Phaser->changepar(Phaser_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(107);
+ rgui->getMIDIControl(MC_Phaser_LFO_Random);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_LFO_Random,(int)o->value());}
@@ -151,7 +151,7 @@ rkr->efx_Phaser->changepar(Phaser_LFO_Type,(int)o->value());} open
     label Phase
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(114);
+ rgui->getMIDIControl(MC_Phaser_Phase);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Phase,(int)o->value());}
@@ -162,7 +162,7 @@ rkr->efx_Phaser->changepar(Phaser_Phase,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(101);
+ rgui->getMIDIControl(MC_Phaser_LFO_Stereo);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_LFO_Stereo,(int)o->value());}
@@ -173,7 +173,7 @@ rkr->efx_Phaser->changepar(Phaser_LFO_Stereo,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(21);
+ rgui->getMIDIControl(MC_Phaser_Depth);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Depth,(int)o->value());}
@@ -184,7 +184,7 @@ rkr->efx_Phaser->changepar(Phaser_Depth,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(81);
+ rgui->getMIDIControl(MC_Phaser_Feedback);
  return;
 } 
 rkr->efx_Phaser->changepar(Phaser_Feedback,(int)o->value());}
@@ -202,10 +202,10 @@ rkr->efx_Phaser->changepar(Phaser_Feedback,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(93);
+ rgui->getMIDIControl(MC_Phaser_LR_Cross);
  return;
 } 
-rkr->efx_Phaser->changepar(Phaser_LR_Cross,(int)(o->value()+64));}
+rkr->efx_Phaser->changepar(Phaser_LR_Cross,(int)(o->value()+64));} selected
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }

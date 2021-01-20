@@ -49,7 +49,7 @@ Fl_Menu_Item DistGui::menu_dist_preset[] = {
 void DistGui::cb_dist_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(30);
+ rgui->getMIDIControl(MC_Dist_DryWet);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_DryWet,Dry_Wet((int)(o->value())));
@@ -61,7 +61,7 @@ void DistGui::cb_dist_WD(RKR_Slider* o, void* v) {
 void DistGui::cb_dist_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(95);
+ rgui->getMIDIControl(MC_Dist_LR_Cross);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_LR_Cross,(int)(o->value()));
@@ -73,7 +73,7 @@ void DistGui::cb_dist_LRc(RKR_Slider* o, void* v) {
 void DistGui::cb_dist_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(69);
+ rgui->getMIDIControl(MC_Dist_Drive);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_Drive,(int)o->value());
@@ -85,7 +85,7 @@ void DistGui::cb_dist_drive(RKR_Slider* o, void* v) {
 void DistGui::cb_dist_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(71);
+ rgui->getMIDIControl(MC_Dist_Level);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_Level,(int)o->value());
@@ -131,7 +131,7 @@ void DistGui::cb_dist_st(RKR_Check_Button* o, void* v) {
 void DistGui::cb_dist_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(48);
+ rgui->getMIDIControl(MC_Dist_Pan);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_Pan,(int)(o->value()+64));
@@ -143,7 +143,7 @@ void DistGui::cb_dist_pan(RKR_Slider* o, void* v) {
 void DistGui::cb_dist_oct_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(9);
+ rgui->getMIDIControl(MC_Dist_Suboctave);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_Suboctave,(int)o->value());
@@ -155,7 +155,7 @@ void DistGui::cb_dist_oct(RKR_Slider* o, void* v) {
 void DistGui::cb_dist_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(86);
+ rgui->getMIDIControl(MC_Dist_LPF);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_LPF,(int)o->value());
@@ -167,7 +167,7 @@ void DistGui::cb_dist_lpf(RKR_Slider* o, void* v) {
 void DistGui::cb_dist_hpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(89);
+ rgui->getMIDIControl(MC_Dist_HPF);
  return;
 } 
 rkr->efx_Distorsion->changepar(Dist_HPF,(int)o->value());

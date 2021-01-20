@@ -50,7 +50,7 @@ Fl_Menu_Item ChorusGui::menu_chorus_preset[] = {
 void ChorusGui::cb_chorus_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(52);
+ rgui->getMIDIControl(MC_Chorus_DryWet);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));
@@ -62,7 +62,7 @@ void ChorusGui::cb_chorus_WD(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(50);
+ rgui->getMIDIControl(MC_Chorus_Pan);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_Pan,(int)(o->value()+64));
@@ -74,7 +74,7 @@ void ChorusGui::cb_chorus_pan(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(72);
+ rgui->getMIDIControl(MC_Chorus_LFO_Tempo);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_LFO_Tempo,(int)o->value());
@@ -86,7 +86,7 @@ void ChorusGui::cb_chorus_freq(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(105);
+ rgui->getMIDIControl(MC_Chorus_LFO_Random);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_LFO_Random,(int)o->value());
@@ -125,7 +125,7 @@ void ChorusGui::cb_chorus_awesome(RKR_Check_Button* o, void* v) {
 void ChorusGui::cb_chorus_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(99);
+ rgui->getMIDIControl(MC_Chorus_LFO_Stereo);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_LFO_Stereo,(int)o->value());
@@ -137,7 +137,7 @@ void ChorusGui::cb_chorus_stdf(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(23);
+ rgui->getMIDIControl(MC_Chorus_Depth);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_Depth,(int)o->value());
@@ -162,7 +162,7 @@ void ChorusGui::cb_chorus_delay(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(79);
+ rgui->getMIDIControl(MC_Chorus_Feedback);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_Feedback,(int)o->value());
@@ -174,7 +174,7 @@ void ChorusGui::cb_chorus_fb(RKR_Slider* o, void* v) {
 void ChorusGui::cb_chorus_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(91);
+ rgui->getMIDIControl(MC_Chorus_LR_Cross);
  return;
 } 
 rkr->efx_Chorus->changepar(Chorus_LR_Cross,(int)(o->value()));

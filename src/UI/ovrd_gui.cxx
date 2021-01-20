@@ -46,7 +46,7 @@ Fl_Menu_Item OvrdGui::menu_ovrd_preset[] = {
 void OvrdGui::cb_ovrd_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(29);
+ rgui->getMIDIControl(MC_Overdrive_DryWet);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));
@@ -58,7 +58,7 @@ void OvrdGui::cb_ovrd_WD(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(94);
+ rgui->getMIDIControl(MC_Overdrive_LR_Cross);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_LR_Cross,(int)(o->value()));
@@ -70,7 +70,7 @@ void OvrdGui::cb_ovrd_LRc(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(68);
+ rgui->getMIDIControl(MC_Overdrive_Drive);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_Drive,(int)o->value());
@@ -82,7 +82,7 @@ void OvrdGui::cb_ovrd_drive(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(70);
+ rgui->getMIDIControl(MC_Overdrive_Level);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_Level,(int)o->value());
@@ -121,7 +121,7 @@ void OvrdGui::cb_ovrd_st(RKR_Check_Button* o, void* v) {
 void OvrdGui::cb_ovrd_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(47);
+ rgui->getMIDIControl(MC_Overdrive_Pan);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));
@@ -140,7 +140,7 @@ void OvrdGui::cb_ovrd_pf(RKR_Check_Button* o, void* v) {
 void OvrdGui::cb_ovrd_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(85);
+ rgui->getMIDIControl(MC_Overdrive_LPF);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_LPF,(int)o->value());
@@ -152,7 +152,7 @@ void OvrdGui::cb_ovrd_lpf(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_hpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(88);
+ rgui->getMIDIControl(MC_Overdrive_HPF);
  return;
 } 
 rkr->efx_Overdrive->changepar(Overdrive_HPF,(int)o->value());

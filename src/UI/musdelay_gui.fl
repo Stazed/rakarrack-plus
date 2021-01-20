@@ -67,7 +67,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(56);
+ rgui->getMIDIControl(MC_Music_DryWet);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_DryWet,Dry_Wet((int)o->value()));}
@@ -78,7 +78,7 @@ rkr->efx_MusDelay->changepar(Music_DryWet,Dry_Wet((int)o->value()));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(98);
+ rgui->getMIDIControl(MC_Music_LR_Cross);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_LR_Cross,(int)o->value());}
@@ -89,7 +89,7 @@ rkr->efx_MusDelay->changepar(Music_LR_Cross,(int)o->value());}
     label {Pan 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(62);
+ rgui->getMIDIControl(MC_Music_Pan_1);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Pan_1,(int)o->value()+64);}
@@ -100,7 +100,7 @@ rkr->efx_MusDelay->changepar(Music_Pan_1,(int)o->value()+64);}
     label {Pan 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(65);
+ rgui->getMIDIControl(MC_Music_Pan_2);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Pan_2,(int)o->value()+64);}
@@ -202,7 +202,7 @@ if((int)musdelay_activar->value())rkr->MusDelay_Bypass=1;}
     label {Gain 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(24);
+ rgui->getMIDIControl(MC_Music_Gain_1);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Gain_1,(int)o->value());}
@@ -213,10 +213,10 @@ rkr->efx_MusDelay->changepar(Music_Gain_1,(int)o->value());}
     label {Gain 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(25);
+ rgui->getMIDIControl(MC_Music_Gain_2);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_Gain_2,(int)o->value());} selected
+rkr->efx_MusDelay->changepar(Music_Gain_2,(int)o->value());}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -224,7 +224,7 @@ rkr->efx_MusDelay->changepar(Music_Gain_2,(int)o->value());} selected
     label {FB 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(83);
+ rgui->getMIDIControl(MC_Music_Feedback_1);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Feedback_1,(int)o->value());}
@@ -235,7 +235,7 @@ rkr->efx_MusDelay->changepar(Music_Feedback_1,(int)o->value());}
     label {FB 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(84);
+ rgui->getMIDIControl(MC_Music_Feedback_2);
  return;
 } 
 rkr->efx_MusDelay->changepar(Music_Feedback_2,(int)o->value());}
@@ -249,7 +249,7 @@ rkr->efx_MusDelay->changepar(Music_Feedback_2,(int)o->value());}
  rgui->getMIDIControl(MC_Music_Damp);
  return;
 }
-rkr->efx_MusDelay->changepar(Music_Damp,(int)o->value());}
+rkr->efx_MusDelay->changepar(Music_Damp,(int)o->value());} selected
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
