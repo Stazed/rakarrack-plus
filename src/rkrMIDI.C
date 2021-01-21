@@ -118,493 +118,493 @@ RKR::MIDI_control()
         "Output Volume", ITS(MC_Output_Volume).c_str(), "50",
         "Multi On/Off", ITS(MC_Multi_On_Off).c_str(), "50",
 
-        "Alienwah Dry/Wet", ITS(MC_Alien_DryWet).c_str(), "11",
-        "Alienwah Pan", ITS(MC_Alien_Pan).c_str(), "11",
-        "Alienwah Tempo", ITS(MC_Alien_LFO_Tempo).c_str(), "11",
-        "Alienwah Random", ITS(MC_Alien_LFO_Random).c_str(), "11",
-        "Alienwah LFO Type", ITS(MC_Alien_LFO_Type).c_str(), "11",
-        "Alienwah Phase", ITS(MC_Alien_Phase).c_str(), "11",
-        "Alienwah Stereo Df.", ITS(MC_Alien_LFO_Stereo).c_str(), "11",
-        "Alienwah Depth", ITS(MC_Alien_Depth).c_str(), "11",
-        "Alienwah Delay", ITS(MC_Alien_Delay).c_str(), "11",
-        "Alienwah Feedback", ITS(MC_Alien_Feedback).c_str(), "11",
-        "Alienwah L/R Cross", ITS(MC_Alien_LR_Cross).c_str(), "11",
+        "Alienwah Dry/Wet", ITS(MC_Alien_DryWet).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Pan", ITS(MC_Alien_Pan).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Tempo", ITS(MC_Alien_LFO_Tempo).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Random", ITS(MC_Alien_LFO_Random).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah LFO Type", ITS(MC_Alien_LFO_Type).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Phase", ITS(MC_Alien_Phase).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Stereo Df.", ITS(MC_Alien_LFO_Stereo).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Depth", ITS(MC_Alien_Depth).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Delay", ITS(MC_Alien_Delay).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah Feedback", ITS(MC_Alien_Feedback).c_str(), ITS(EFX_ALIENWAH).c_str(),
+        "Alienwah L/R Cross", ITS(MC_Alien_LR_Cross).c_str(), ITS(EFX_ALIENWAH).c_str(),
 
-        "Analog Phaser Dry/Wet", ITS(MC_APhase_DryWet).c_str(), "18",
-        "Analog Phaser LFO Type", ITS(MC_APhase_LFO_Type).c_str(), "18",
-        "Analog Phaser Tempo", ITS(MC_APhase_LFO_Tempo).c_str(), "18",
-        "Analog Phaser P. Depth", ITS(MC_APhase_Depth).c_str(), "18",
-        "Analog Phaser Width", ITS(MC_APhase_Width).c_str(), "18",
-        "Analog Phaser Feedback", ITS(MC_APhase_Feedback).c_str(), "18",
-        "Analog Phaser Mismatch", ITS(MC_APhase_Mismatch).c_str(), "18",
-        "Analog Phaser Distortion", ITS(MC_APhase_Distortion).c_str(), "18",
-        "Analog Phaser Random", ITS(MC_APhase_LFO_Random).c_str(), "18",
-        "Analog Phaser Stereo Df.", ITS(MC_APhase_LFO_Stereo).c_str(), "18",
+        "Analog Phaser Dry/Wet", ITS(MC_APhase_DryWet).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser LFO Type", ITS(MC_APhase_LFO_Type).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser Tempo", ITS(MC_APhase_LFO_Tempo).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser P. Depth", ITS(MC_APhase_Depth).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser Width", ITS(MC_APhase_Width).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser Feedback", ITS(MC_APhase_Feedback).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser Mismatch", ITS(MC_APhase_Mismatch).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser Distortion", ITS(MC_APhase_Distortion).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser Random", ITS(MC_APhase_LFO_Random).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
+        "Analog Phaser Stereo Df.", ITS(MC_APhase_LFO_Stereo).c_str(), ITS(EFX_ANALOG_PHASER).c_str(),
 
-        "Arpie Dry/Wet", ITS(MC_Arpie_DryWet).c_str(), "24",
-        "Arpie Arpe's", ITS(MC_Arpie_ArpeWD).c_str(), "24",
-        "Arpie Pan", ITS(MC_Arpie_Pan).c_str(), "24",
-        "Arpie Tempo", ITS(MC_Arpie_Tempo).c_str(), "24",
-        "Arpie L/R Delay", ITS(MC_Arpie_LR_Delay).c_str(), "24",
-        "Arpie L/R Cross", ITS(MC_Arpie_LR_Cross).c_str(), "24",
-        "Arpie Feedback", ITS(MC_Arpie_Feedback).c_str(), "24",
-        "Arpie Damp", ITS(MC_Arpie_Damp).c_str(), "24",
+        "Arpie Dry/Wet", ITS(MC_Arpie_DryWet).c_str(), ITS(EFX_ARPIE).c_str(),
+        "Arpie Arpe's", ITS(MC_Arpie_ArpeWD).c_str(), ITS(EFX_ARPIE).c_str(),
+        "Arpie Pan", ITS(MC_Arpie_Pan).c_str(), ITS(EFX_ARPIE).c_str(),
+        "Arpie Tempo", ITS(MC_Arpie_Tempo).c_str(), ITS(EFX_ARPIE).c_str(),
+        "Arpie L/R Delay", ITS(MC_Arpie_LR_Delay).c_str(), ITS(EFX_ARPIE).c_str(),
+        "Arpie L/R Cross", ITS(MC_Arpie_LR_Cross).c_str(), ITS(EFX_ARPIE).c_str(),
+        "Arpie Feedback", ITS(MC_Arpie_Feedback).c_str(), ITS(EFX_ARPIE).c_str(),
+        "Arpie Damp", ITS(MC_Arpie_Damp).c_str(), ITS(EFX_ARPIE).c_str(),
 
-        "Cabinet Gain",ITS(MC_Cabinet_Gain).c_str(),"12",
+        "Cabinet Gain",ITS(MC_Cabinet_Gain).c_str(), ITS(EFX_CABINET).c_str(),
 
-        "Chorus Dry/Wet", ITS(MC_Chorus_DryWet).c_str(), "5",
-        "Chorus Pan", ITS(MC_Chorus_Pan).c_str(), "5",
-        "Chorus Tempo", ITS(MC_Chorus_LFO_Tempo).c_str(), "5",
-        "Chorus Random", ITS(MC_Chorus_LFO_Random).c_str(), "5",
-        "Chorus LFO Type", ITS(MC_Chorus_LFO_Type).c_str(), "5",
-        "Chorus Stereo Df", ITS(MC_Chorus_LFO_Stereo).c_str(), "5",
-        "Chorus Depth", ITS(MC_Chorus_Depth).c_str(), "5",
-        "Chorus Delay", ITS(MC_Chorus_Delay).c_str(), "5",
-        "Chorus Feedback", ITS(MC_Chorus_Feedback).c_str(), "5",
-        "Chorus L/R Cross", ITS(MC_Chorus_LR_Cross).c_str(), "5",
+        "Chorus Dry/Wet", ITS(MC_Chorus_DryWet).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus Pan", ITS(MC_Chorus_Pan).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus Tempo", ITS(MC_Chorus_LFO_Tempo).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus Random", ITS(MC_Chorus_LFO_Random).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus LFO Type", ITS(MC_Chorus_LFO_Type).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus Stereo Df", ITS(MC_Chorus_LFO_Stereo).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus Depth", ITS(MC_Chorus_Depth).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus Delay", ITS(MC_Chorus_Delay).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus Feedback", ITS(MC_Chorus_Feedback).c_str(), ITS(EFX_CHORUS).c_str(),
+        "Chorus L/R Cross", ITS(MC_Chorus_LR_Cross).c_str(), ITS(EFX_CHORUS).c_str(),
 
-        "CoilCrafter Gain", ITS(MC_Coil_Gain).c_str(), "33",
-        "CoilCrafter Tone", ITS(MC_Coil_Tone).c_str(), "33",
-        "CoilCrafter Freq 1", ITS(MC_Coil_Freq_1).c_str(), "33",
-        "CoilCrafter Q 1", ITS(MC_Coil_Q_1).c_str(), "33",
-        "CoilCrafter Freq 2", ITS(MC_Coil_Freq_2).c_str(), "33",
-        "CoilCrafter Q 2", ITS(MC_Coil_Q_2).c_str(), "33",
+        "CoilCrafter Gain", ITS(MC_Coil_Gain).c_str(), ITS(EFX_COILCRAFTER).c_str(),
+        "CoilCrafter Tone", ITS(MC_Coil_Tone).c_str(), ITS(EFX_COILCRAFTER).c_str(),
+        "CoilCrafter Freq 1", ITS(MC_Coil_Freq_1).c_str(), ITS(EFX_COILCRAFTER).c_str(),
+        "CoilCrafter Q 1", ITS(MC_Coil_Q_1).c_str(), ITS(EFX_COILCRAFTER).c_str(),
+        "CoilCrafter Freq 2", ITS(MC_Coil_Freq_2).c_str(), ITS(EFX_COILCRAFTER).c_str(),
+        "CoilCrafter Q 2", ITS(MC_Coil_Q_2).c_str(), ITS(EFX_COILCRAFTER).c_str(),
 
-        "CompBand Dry/Wet", ITS(MC_CompBand_DryWet).c_str(), "43",
-        "CompBand Gain", ITS(MC_CompBand_Gain).c_str(), "43",
-        "CompBand L Ratio", ITS(MC_CompBand_Low_Ratio).c_str(), "43",
-        "CompBand ML Ratio", ITS(MC_CompBand_Mid_1_Ratio).c_str(), "43",
-        "CompBand MH Ratio", ITS(MC_CompBand_Mid_2_Ratio).c_str(), "43",
-        "CompBand H Ratio", ITS(MC_CompBand_High_Ratio).c_str(), "43",
-        "CompBand L Thres", ITS(MC_CompBand_Low_Thresh).c_str(), "43",
-        "CompBand ML Thres", ITS(MC_CompBand_Mid_1_Thresh).c_str(), "43",
-        "CompBand MH Thres", ITS(MC_CompBand_Mid_2_Thresh).c_str(), "43",
-        "CompBand H Thres", ITS(MC_CompBand_High_Thresh).c_str(), "43",
-        "CompBand Cross 1", ITS(MC_CompBand_Cross_1).c_str(), "43",
-        "CompBand Cross 2", ITS(MC_CompBand_Cross_2).c_str(), "43",
-        "CompBand Cross 3", ITS(MC_CompBand_Cross_3).c_str(), "43",
+        "CompBand Dry/Wet", ITS(MC_CompBand_DryWet).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand Gain", ITS(MC_CompBand_Gain).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand L Ratio", ITS(MC_CompBand_Low_Ratio).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand ML Ratio", ITS(MC_CompBand_Mid_1_Ratio).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand MH Ratio", ITS(MC_CompBand_Mid_2_Ratio).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand H Ratio", ITS(MC_CompBand_High_Ratio).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand L Thres", ITS(MC_CompBand_Low_Thresh).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand ML Thres", ITS(MC_CompBand_Mid_1_Thresh).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand MH Thres", ITS(MC_CompBand_Mid_2_Thresh).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand H Thres", ITS(MC_CompBand_High_Thresh).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand Cross 1", ITS(MC_CompBand_Cross_1).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand Cross 2", ITS(MC_CompBand_Cross_2).c_str(), ITS(EFX_COMPBAND).c_str(),
+        "CompBand Cross 3", ITS(MC_CompBand_Cross_3).c_str(), ITS(EFX_COMPBAND).c_str(),
 
-        "Compressor A.Time", ITS(MC_Compress_Attack).c_str(), "1",
-        "Compressor Knee", ITS(MC_Compress_Knee).c_str(), "1",
-        "Compressor Output", ITS(MC_Compress_Output).c_str(), "1",
-        "Compressor Ratio", ITS(MC_Compress_Ratio).c_str(), "1",
-        "Compressor R.Time", ITS(MC_Compress_Release).c_str(), "1",
-        "Compressor Threshold", ITS(MC_Compress_Threshold).c_str(), "1",
+        "Compressor A.Time", ITS(MC_Compress_Attack).c_str(), ITS(EFX_COMPRESSOR).c_str(),
+        "Compressor Knee", ITS(MC_Compress_Knee).c_str(), ITS(EFX_COMPRESSOR).c_str(),
+        "Compressor Output", ITS(MC_Compress_Output).c_str(), ITS(EFX_COMPRESSOR).c_str(),
+        "Compressor Ratio", ITS(MC_Compress_Ratio).c_str(), ITS(EFX_COMPRESSOR).c_str(),
+        "Compressor R.Time", ITS(MC_Compress_Release).c_str(), ITS(EFX_COMPRESSOR).c_str(),
+        "Compressor Threshold", ITS(MC_Compress_Threshold).c_str(), ITS(EFX_COMPRESSOR).c_str(),
 
-        "Convolotron Dry/Wet", ITS(MC_Convo_DryWet).c_str(), "29",
-        "Convolotron Pan", ITS(MC_Convo_Pan).c_str(), "29",
-        "Convolotron Level", ITS(MC_Convo_Level).c_str(), "29",
-        "Convolotron Damp", ITS(MC_Convo_Damp).c_str(), "29",
-        "Convolotron Feedback", ITS(MC_Convo_Feedback).c_str(), "29",
-        "Convolotron Length", ITS(MC_Convo_Length).c_str(), "29",
+        "Convolotron Dry/Wet", ITS(MC_Convo_DryWet).c_str(), ITS(EFX_CONVOLOTRON).c_str(),
+        "Convolotron Pan", ITS(MC_Convo_Pan).c_str(), ITS(EFX_CONVOLOTRON).c_str(),
+        "Convolotron Level", ITS(MC_Convo_Level).c_str(), ITS(EFX_CONVOLOTRON).c_str(),
+        "Convolotron Damp", ITS(MC_Convo_Damp).c_str(), ITS(EFX_CONVOLOTRON).c_str(),
+        "Convolotron Feedback", ITS(MC_Convo_Feedback).c_str(), ITS(EFX_CONVOLOTRON).c_str(),
+        "Convolotron Length", ITS(MC_Convo_Length).c_str(), ITS(EFX_CONVOLOTRON).c_str(),
 
-        "Derelict Dry/Wet", ITS(MC_Dere_DryWet).c_str(), "17",
-        "Derelict L/R Cross", ITS(MC_Dere_LR_Cross).c_str(), "17",
-        "Derelict Drive", ITS(MC_Dere_Drive).c_str(), "17",
-        "Derelict Level", ITS(MC_Dere_Level).c_str(), "17",
-        "Derelict Type", ITS(MC_Dere_Type).c_str(), "17",
-        "Derelict Color", ITS(MC_Dere_Color).c_str(), "17",
-        "Derelict Sub Octave", ITS(MC_Dere_Suboctave).c_str(), "17",
-        "Derelict Pan", ITS(MC_Dere_Pan).c_str(), "17",
-        "Derelict LPF", ITS(MC_Dere_LPF).c_str(), "17",
-        "Derelict HPF", ITS(MC_Dere_HPF).c_str(), "17",
+        "Derelict Dry/Wet", ITS(MC_Dere_DryWet).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict L/R Cross", ITS(MC_Dere_LR_Cross).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict Drive", ITS(MC_Dere_Drive).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict Level", ITS(MC_Dere_Level).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict Type", ITS(MC_Dere_Type).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict Color", ITS(MC_Dere_Color).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict Sub Octave", ITS(MC_Dere_Suboctave).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict Pan", ITS(MC_Dere_Pan).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict LPF", ITS(MC_Dere_LPF).c_str(), ITS(EFX_DERELICT).c_str(),
+        "Derelict HPF", ITS(MC_Dere_HPF).c_str(), ITS(EFX_DERELICT).c_str(),
 
-        "DistBand Dry/Wet", ITS(MC_DistBand_DryWet).c_str(), "23",
-        "DistBand L/R Cross", ITS(MC_DistBand_LR_Cross).c_str(), "23",
-        "DistBand Drive", ITS(MC_DistBand_Drive).c_str(), "23",
-        "DistBand Level", ITS(MC_DistBand_Level).c_str(), "23",
-        "DistBand L. Gain", ITS(MC_DistBand_Gain_Low).c_str(), "23",
-        "DistBand M. Gain", ITS(MC_DistBand_Gain_Mid).c_str(), "23",
-        "DistBand H. Gain", ITS(MC_DistBand_Gain_Hi).c_str(), "23",
-        "DistBand Cross 1", ITS(MC_DistBand_Cross_1).c_str(), "23",
-        "DistBand Cross 2", ITS(MC_DistBand_Cross_2).c_str(), "23",
-        "DistBand Type Low", ITS(MC_DistBand_Type_Low).c_str(), "23",
-        "DistBand Type Mid", ITS(MC_DistBand_Type_Mid).c_str(), "23",
-        "DistBand Type High", ITS(MC_DistBand_Type_Hi).c_str(), "23",
-        "DistBand Pan", ITS(MC_DistBand_Pan).c_str(), "23",
+        "DistBand Dry/Wet", ITS(MC_DistBand_DryWet).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand L/R Cross", ITS(MC_DistBand_LR_Cross).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Drive", ITS(MC_DistBand_Drive).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Level", ITS(MC_DistBand_Level).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand L. Gain", ITS(MC_DistBand_Gain_Low).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand M. Gain", ITS(MC_DistBand_Gain_Mid).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand H. Gain", ITS(MC_DistBand_Gain_Hi).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Cross 1", ITS(MC_DistBand_Cross_1).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Cross 2", ITS(MC_DistBand_Cross_2).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Type Low", ITS(MC_DistBand_Type_Low).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Type Mid", ITS(MC_DistBand_Type_Mid).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Type High", ITS(MC_DistBand_Type_Hi).c_str(), ITS(EFX_DISTBAND).c_str(),
+        "DistBand Pan", ITS(MC_DistBand_Pan).c_str(), ITS(EFX_DISTBAND).c_str(),
 
-        "Distortion Dry/Wet", ITS(MC_Dist_DryWet).c_str(), "2",
-        "Distortion L/R Cross", ITS(MC_Dist_LR_Cross).c_str(), "2",
-        "Distortion Drive", ITS(MC_Dist_Drive).c_str(), "2",
-        "Distortion Level", ITS(MC_Dist_Level).c_str(), "2",
-        "Distortion Type", ITS(MC_Dist_Type).c_str(), "2",
-        "Distortion Pan", ITS(MC_Dist_Pan).c_str(), "2",
-        "Distortion Sub Octave", ITS(MC_Dist_Suboctave).c_str(), "2",
-        "Distortion LPF", ITS(MC_Dist_LPF).c_str(), "2",
-        "Distortion HPF", ITS(MC_Dist_HPF).c_str(), "2",
+        "Distortion Dry/Wet", ITS(MC_Dist_DryWet).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion L/R Cross", ITS(MC_Dist_LR_Cross).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion Drive", ITS(MC_Dist_Drive).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion Level", ITS(MC_Dist_Level).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion Type", ITS(MC_Dist_Type).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion Pan", ITS(MC_Dist_Pan).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion Sub Octave", ITS(MC_Dist_Suboctave).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion LPF", ITS(MC_Dist_LPF).c_str(), ITS(EFX_DISTORTION).c_str(),
+        "Distortion HPF", ITS(MC_Dist_HPF).c_str(), ITS(EFX_DISTORTION).c_str(),
 
-        "Dual Flange Dry/Wet", ITS(MC_DFlange_DryWet).c_str(), "20",
-        "Dual Flange Pan", ITS(MC_DFlange_Pan).c_str(), "20",
-        "Dual Flange L/R Cross", ITS(MC_DFlange_LR_Cross).c_str(), "20",
-        "Dual Flange Depth", ITS(MC_DFlange_Depth).c_str(), "20",
-        "Dual Flange Width", ITS(MC_DFlange_Width).c_str(), "20",
-        "Dual Flange Offset", ITS(MC_DFlange_Offset).c_str(), "20",
-        "Dual Flange Feedback", ITS(MC_DFlange_Feedback).c_str(), "20",
-        "Dual Flange LPF", ITS(MC_DFlange_LPF).c_str(), "20",
-        "Dual Flange Tempo", ITS(MC_DFlange_LFO_Tempo).c_str(), "20",
-        "Dual Flange Stereo Df", ITS(MC_DFlange_LFO_Stereo).c_str(), "20",
-        "Dual Flange LFO Type", ITS(MC_DFlange_LFO_Type).c_str(), "20",
-        "Dual Flange Random", ITS(MC_DFlange_LFO_Random).c_str(), "20",
+        "Dual Flange Dry/Wet", ITS(MC_DFlange_DryWet).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Pan", ITS(MC_DFlange_Pan).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange L/R Cross", ITS(MC_DFlange_LR_Cross).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Depth", ITS(MC_DFlange_Depth).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Width", ITS(MC_DFlange_Width).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Offset", ITS(MC_DFlange_Offset).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Feedback", ITS(MC_DFlange_Feedback).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange LPF", ITS(MC_DFlange_LPF).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Tempo", ITS(MC_DFlange_LFO_Tempo).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Stereo Df", ITS(MC_DFlange_LFO_Stereo).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange LFO Type", ITS(MC_DFlange_LFO_Type).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
+        "Dual Flange Random", ITS(MC_DFlange_LFO_Random).c_str(), ITS(EFX_DUAL_FLANGE).c_str(),
 
-        "Echo Dry/Wet", ITS(MC_Echo_DryWet).c_str(), "4",
-        "Echo Reverse", ITS(MC_Echo_Reverse).c_str(), "4",
-        "Echo Pan", ITS(MC_Echo_Pan).c_str(), "4",
-        "Echo Delay", ITS(MC_Echo_Delay).c_str(), "4",
-        "Echo L/R Delay", ITS(MC_Echo_LR_Delay).c_str(), "4",
-        "Echo L/R Cross", ITS(MC_Echo_LR_Cross).c_str(), "4",
-        "Echo Feedback", ITS(MC_Echo_Feedback).c_str(), "4",
-        "Echo Damp", ITS(MC_Echo_Damp).c_str(), "4",
+        "Echo Dry/Wet", ITS(MC_Echo_DryWet).c_str(), ITS(EFX_ECHO).c_str(),
+        "Echo Reverse", ITS(MC_Echo_Reverse).c_str(), ITS(EFX_ECHO).c_str(),
+        "Echo Pan", ITS(MC_Echo_Pan).c_str(), ITS(EFX_ECHO).c_str(),
+        "Echo Delay", ITS(MC_Echo_Delay).c_str(), ITS(EFX_ECHO).c_str(),
+        "Echo L/R Delay", ITS(MC_Echo_LR_Delay).c_str(), ITS(EFX_ECHO).c_str(),
+        "Echo L/R Cross", ITS(MC_Echo_LR_Cross).c_str(), ITS(EFX_ECHO).c_str(),
+        "Echo Feedback", ITS(MC_Echo_Feedback).c_str(), ITS(EFX_ECHO).c_str(),
+        "Echo Damp", ITS(MC_Echo_Damp).c_str(), ITS(EFX_ECHO).c_str(),
 
-        "Echotron Dry/Wet", ITS(MC_Echotron_DryWet).c_str(), "41",
-        "Echotron Pan", ITS(MC_Echotron_Pan).c_str(), "41",
-        "Echotron Tempo", ITS(MC_Echotron_Tempo).c_str(), "41",
-        "Echotron Damp", ITS(MC_Echotron_Damp).c_str(), "41",
-        "Echotron Feedback", ITS(MC_Echotron_Feedback).c_str(), "41",
-        "Echotron L/R Cross", ITS(MC_Echotron_LR_Cross).c_str(), "41",
-        "Echotron Width", ITS(MC_Echotron_LFO_Width).c_str(), "41",
-        "Echotron Depth", ITS(MC_Echotron_Depth).c_str(), "41",
-        "Echotron Stereo Df", ITS(MC_Echotron_LFO_Stereo).c_str(), "41",
-        "Echotron LFO Type", ITS(MC_Echotron_LFO_Type).c_str(), "41",
-        "Echotron #", ITS(MC_Echotron_Taps).c_str(), "41",
+        "Echotron Dry/Wet", ITS(MC_Echotron_DryWet).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron Pan", ITS(MC_Echotron_Pan).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron Tempo", ITS(MC_Echotron_Tempo).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron Damp", ITS(MC_Echotron_Damp).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron Feedback", ITS(MC_Echotron_Feedback).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron L/R Cross", ITS(MC_Echotron_LR_Cross).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron Width", ITS(MC_Echotron_LFO_Width).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron Depth", ITS(MC_Echotron_Depth).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron Stereo Df", ITS(MC_Echotron_LFO_Stereo).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron LFO Type", ITS(MC_Echotron_LFO_Type).c_str(), ITS(EFX_ECHOTRON).c_str(),
+        "Echotron #", ITS(MC_Echotron_Taps).c_str(), ITS(EFX_ECHOTRON).c_str(),
 
-        "Echoverse Dry/Wet", ITS(MC_Echoverse_DryWet).c_str(), "32",
-        "Echoverse Reverse", ITS(MC_Echoverse_Reverse).c_str(), "32",
-        "Echoverse Pan", ITS(MC_Echoverse_Pan).c_str(), "32",
-        "Echoverse Tempo", ITS(MC_Echoverse_Tempo).c_str(), "32",
-        "Echoverse L/R Delay", ITS(MC_Echoverse_LR_Delay).c_str(), "32",
-        "Echoverse Feedback", ITS(MC_Echoverse_Feedback).c_str(), "32",
-        "Echoverse Damp", ITS(MC_Echoverse_Damp).c_str(), "32",
-        "Echoverse Ex Stereo", ITS(MC_Echoverse_Ext_Stereo).c_str(), "32",
-        "Echoverse Angle", ITS(MC_Echoverse_Angle).c_str(), "32",
+        "Echoverse Dry/Wet", ITS(MC_Echoverse_DryWet).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse Reverse", ITS(MC_Echoverse_Reverse).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse Pan", ITS(MC_Echoverse_Pan).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse Tempo", ITS(MC_Echoverse_Tempo).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse L/R Delay", ITS(MC_Echoverse_LR_Delay).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse Feedback", ITS(MC_Echoverse_Feedback).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse Damp", ITS(MC_Echoverse_Damp).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse Ex Stereo", ITS(MC_Echoverse_Ext_Stereo).c_str(), ITS(EFX_ECHOVERSE).c_str(),
+        "Echoverse Angle", ITS(MC_Echoverse_Angle).c_str(), ITS(EFX_ECHOVERSE).c_str(),
 
-        "EQ Gain", ITS(MC_EQ_Gain).c_str(), "0",
-        "EQ Q", ITS(MC_EQ_Q).c_str(), "0",
-        "EQ 31 Hz", ITS(MC_EQ_31_HZ).c_str(), "0",
-        "EQ 63 Hz", ITS(MC_EQ_63_HZ).c_str(), "0",
-        "EQ 125 Hz", ITS(MC_EQ_125_HZ).c_str(), "0",
-        "EQ 250 Hz", ITS(MC_EQ_250_HZ).c_str(), "0",
-        "EQ 500 Hz", ITS(MC_EQ_500_HZ).c_str(), "0",
-        "EQ 1 Khz", ITS(MC_EQ_1_KHZ).c_str(), "0",
-        "EQ 2 Khz", ITS(MC_EQ_2_KHZ).c_str(), "0",
-        "EQ 4 Khz", ITS(MC_EQ_4_KHZ).c_str(), "0",
-        "EQ 8 Khz", ITS(MC_EQ_8_KHZ).c_str(), "0",
-        "EQ 16 Khz", ITS(MC_EQ_16_KHZ).c_str(), "0",
+        "EQ Gain", ITS(MC_EQ_Gain).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ Q", ITS(MC_EQ_Q).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 31 Hz", ITS(MC_EQ_31_HZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 63 Hz", ITS(MC_EQ_63_HZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 125 Hz", ITS(MC_EQ_125_HZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 250 Hz", ITS(MC_EQ_250_HZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 500 Hz", ITS(MC_EQ_500_HZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 1 Khz", ITS(MC_EQ_1_KHZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 2 Khz", ITS(MC_EQ_2_KHZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 4 Khz", ITS(MC_EQ_4_KHZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 8 Khz", ITS(MC_EQ_8_KHZ).c_str(), ITS(EFX_EQ).c_str(),
+        "EQ 16 Khz", ITS(MC_EQ_16_KHZ).c_str(), ITS(EFX_EQ).c_str(),
 
-        "Exciter Gain", ITS(MC_Exciter_Gain).c_str(), "22",
-        "Exciter LPF", ITS(MC_Exciter_LPF).c_str(), "22",
-        "Exciter HPF", ITS(MC_Exciter_HPF).c_str(), "22",
-        "Exciter Har 1", ITS(MC_Exciter_Harm_1).c_str(), "22",
-        "Exciter Har 2", ITS(MC_Exciter_Harm_2).c_str(), "22",
-        "Exciter Har 3", ITS(MC_Exciter_Harm_3).c_str(), "22",
-        "Exciter Har 4", ITS(MC_Exciter_Harm_4).c_str(), "22",
-        "Exciter Har 5", ITS(MC_Exciter_Harm_5).c_str(), "22",
-        "Exciter Har 6", ITS(MC_Exciter_Harm_6).c_str(), "22",
-        "Exciter Har 7", ITS(MC_Exciter_Harm_7).c_str(), "22",
-        "Exciter Har 8", ITS(MC_Exciter_Harm_8).c_str(), "22",
-        "Exciter Har 9", ITS(MC_Exciter_Harm_9).c_str(), "22",
-        "Exciter Har 10", ITS(MC_Exciter_Harm_10).c_str(), "22",
+        "Exciter Gain", ITS(MC_Exciter_Gain).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter LPF", ITS(MC_Exciter_LPF).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter HPF", ITS(MC_Exciter_HPF).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 1", ITS(MC_Exciter_Harm_1).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 2", ITS(MC_Exciter_Harm_2).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 3", ITS(MC_Exciter_Harm_3).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 4", ITS(MC_Exciter_Harm_4).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 5", ITS(MC_Exciter_Harm_5).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 6", ITS(MC_Exciter_Harm_6).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 7", ITS(MC_Exciter_Harm_7).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 8", ITS(MC_Exciter_Harm_8).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 9", ITS(MC_Exciter_Harm_9).c_str(), ITS(EFX_EXCITER).c_str(),
+        "Exciter Har 10", ITS(MC_Exciter_Harm_10).c_str(), ITS(EFX_EXCITER).c_str(),
 
-        "Expander A.Time", ITS(MC_Expander_Attack).c_str(), "25",
-        "Expander R.Time", ITS(MC_Expander_Release).c_str(), "25",
-        "Expander Shape", ITS(MC_Expander_Shape).c_str(), "25",
-        "Expander Threshold", ITS(MC_Expander_Threshold).c_str(), "25",
-        "Expander Out Gain", ITS(MC_Expander_Gain).c_str(), "25",
-        "Expander LPF", ITS(MC_Expander_LPF).c_str(), "25",
-        "Expander HPF", ITS(MC_Expander_HPF).c_str(), "25",
+        "Expander A.Time", ITS(MC_Expander_Attack).c_str(), ITS(EFX_EXPANDER).c_str(),
+        "Expander R.Time", ITS(MC_Expander_Release).c_str(), ITS(EFX_EXPANDER).c_str(),
+        "Expander Shape", ITS(MC_Expander_Shape).c_str(), ITS(EFX_EXPANDER).c_str(),
+        "Expander Threshold", ITS(MC_Expander_Threshold).c_str(), ITS(EFX_EXPANDER).c_str(),
+        "Expander Out Gain", ITS(MC_Expander_Gain).c_str(), ITS(EFX_EXPANDER).c_str(),
+        "Expander LPF", ITS(MC_Expander_LPF).c_str(), ITS(EFX_EXPANDER).c_str(),
+        "Expander HPF", ITS(MC_Expander_HPF).c_str(), ITS(EFX_EXPANDER).c_str(),
 
-        "Flanger Dry/Wet", ITS(MC_Flanger_DryWet).c_str(), "7",
-        "Flanger Pan", ITS(MC_Flanger_Pan).c_str(), "7",
-        "Flanger Tempo", ITS(MC_Flanger_LFO_Tempo).c_str(), "7",
-        "Flanger Random", ITS(MC_Flanger_LFO_Random).c_str(), "7",
-        "Flanger LFO Type", ITS(MC_Flanger_LFO_Type).c_str(), "7",
-        "Flanger Stereo Df", ITS(MC_Flanger_LFO_Stereo).c_str(), "7",
-        "Flanger Depth", ITS(MC_Flanger_Depth).c_str(), "7",
-        "Flanger Delay", ITS(MC_Flanger_Delay).c_str(), "7",
-        "Flanger Feedback", ITS(MC_Flanger_Feedback).c_str(), "7",
-        "Flanger L/R Cross", ITS(MC_Flanger_LR_Cross).c_str(), "7",
+        "Flanger Dry/Wet", ITS(MC_Flanger_DryWet).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger Pan", ITS(MC_Flanger_Pan).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger Tempo", ITS(MC_Flanger_LFO_Tempo).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger Random", ITS(MC_Flanger_LFO_Random).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger LFO Type", ITS(MC_Flanger_LFO_Type).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger Stereo Df", ITS(MC_Flanger_LFO_Stereo).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger Depth", ITS(MC_Flanger_Depth).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger Delay", ITS(MC_Flanger_Delay).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger Feedback", ITS(MC_Flanger_Feedback).c_str(), ITS(EFX_FLANGER).c_str(),
+        "Flanger L/R Cross", ITS(MC_Flanger_LR_Cross).c_str(), ITS(EFX_FLANGER).c_str(),
 
-        "Harmonizer Dry/Wet", ITS(MC_Harm_DryWet).c_str(), "14",
-        "Harmonizer Interval", ITS(MC_Harm_Interval).c_str(), "14",
-        "Harmonizer Gain", ITS(MC_Harm_Gain).c_str(), "14",
-        "Harmonizer Pan", ITS(MC_Harm_Pan).c_str(), "14",
-        "Harmonizer Freq", ITS(MC_Harm_Filter_Freq).c_str(), "14",
-        "Harmonizer Filter Gain", ITS(MC_Harm_Filter_Gain).c_str(), "14",
-        "Harmonizer Filter Q", ITS(MC_Harm_Filter_Q).c_str(), "14",
-        "Harmonizer SELECT", ITS(MC_Harm_Select).c_str(), "14",
-        "Harmonizer Note", ITS(MC_Harm_Note).c_str(), "14",
-        "Harmonizer Chord", ITS(MC_Harm_Chord).c_str(), "14",
+        "Harmonizer Dry/Wet", ITS(MC_Harm_DryWet).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Interval", ITS(MC_Harm_Interval).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Gain", ITS(MC_Harm_Gain).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Pan", ITS(MC_Harm_Pan).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Freq", ITS(MC_Harm_Filter_Freq).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Filter Gain", ITS(MC_Harm_Filter_Gain).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Filter Q", ITS(MC_Harm_Filter_Q).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer SELECT", ITS(MC_Harm_Select).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Note", ITS(MC_Harm_Note).c_str(), ITS(EFX_HARMONIZER).c_str(),
+        "Harmonizer Chord", ITS(MC_Harm_Chord).c_str(), ITS(EFX_HARMONIZER).c_str(),
 
-        "Infinity Dry/Wet", ITS(MC_Infinity_DryWet).c_str(), "46",
-        "Infinity Res", ITS(MC_Infinity_Resonance).c_str(), "46",
-        "Infinity Filter Band 1", ITS(MC_Infinity_Band_1).c_str(), "46",
-        "Infinity Filter Band 2", ITS(MC_Infinity_Band_2).c_str(), "46",
-        "Infinity Filter Band 3", ITS(MC_Infinity_Band_3).c_str(), "46",
-        "Infinity Filter Band 4", ITS(MC_Infinity_Band_4).c_str(), "46",
-        "Infinity Filter Band 5", ITS(MC_Infinity_Band_5).c_str(), "46",
-        "Infinity Filter Band 6", ITS(MC_Infinity_Band_6).c_str(), "46",
-        "Infinity Filter Band 7", ITS(MC_Infinity_Band_7).c_str(), "46",
-        "Infinity Filter Band 8", ITS(MC_Infinity_Band_8).c_str(), "46",
-        "Infinity AutoPan", ITS(MC_Infinity_AutoPan).c_str(), "46",
-        "Infinity Stereo Df", ITS(MC_Infinity_LR_Delay).c_str(), "46",
-        "Infinity Start", ITS(MC_Infinity_Start).c_str(), "46",
-        "Infinity End", ITS(MC_Infinity_End).c_str(), "46",
-        "Infinity Tempo", ITS(MC_Infinity_Tempo).c_str(), "46",
-        "Infinity Subdiv", ITS(MC_Infinity_Subdivision).c_str(), "46",
+        "Infinity Dry/Wet", ITS(MC_Infinity_DryWet).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Res", ITS(MC_Infinity_Resonance).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 1", ITS(MC_Infinity_Band_1).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 2", ITS(MC_Infinity_Band_2).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 3", ITS(MC_Infinity_Band_3).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 4", ITS(MC_Infinity_Band_4).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 5", ITS(MC_Infinity_Band_5).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 6", ITS(MC_Infinity_Band_6).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 7", ITS(MC_Infinity_Band_7).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Filter Band 8", ITS(MC_Infinity_Band_8).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity AutoPan", ITS(MC_Infinity_AutoPan).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Stereo Df", ITS(MC_Infinity_LR_Delay).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Start", ITS(MC_Infinity_Start).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity End", ITS(MC_Infinity_End).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Tempo", ITS(MC_Infinity_Tempo).c_str(), ITS(EFX_INFINITY).c_str(),
+        "Infinity Subdiv", ITS(MC_Infinity_Subdivision).c_str(), ITS(EFX_INFINITY).c_str(),
 
-        "Looper Dry/Wet", ITS(MC_Looper_DryWet).c_str(), "30",
-        "Looper Level 1", ITS(MC_Looper_Level_1).c_str(), "30",
-        "Looper Level 2", ITS(MC_Looper_Level_2).c_str(), "30",
-        "Looper Tempo", ITS(MC_Looper_Tempo).c_str(), "30",
-        "Looper Reverse", ITS(MC_Looper_Reverse).c_str(), "30",
-        "Looper Auto Play", ITS(MC_Looper_AutoPlay).c_str(), "30",
-        "Looper Play", ITS(MC_Looper_Play).c_str(), "30",
-        "Looper Pause", ITS(MC_Looper_Stop).c_str(), "30",
-        "Looper Record", ITS(MC_Looper_Record).c_str(), "30",
-        "Looper R1", ITS(MC_Looper_Rec_1).c_str(), "30",
-        "Looper R2", ITS(MC_Looper_Rec_2).c_str(), "30",
-        "Looper Track 1", ITS(MC_Looper_Track_1).c_str(), "30",
-        "Looper Track 2", ITS(MC_Looper_Track_2).c_str(), "30",
-        "Looper Clear", ITS(MC_Looper_Clear).c_str(), "30",
+        "Looper Dry/Wet", ITS(MC_Looper_DryWet).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Level 1", ITS(MC_Looper_Level_1).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Level 2", ITS(MC_Looper_Level_2).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Tempo", ITS(MC_Looper_Tempo).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Reverse", ITS(MC_Looper_Reverse).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Auto Play", ITS(MC_Looper_AutoPlay).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Play", ITS(MC_Looper_Play).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Pause", ITS(MC_Looper_Stop).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Record", ITS(MC_Looper_Record).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper R1", ITS(MC_Looper_Rec_1).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper R2", ITS(MC_Looper_Rec_2).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Track 1", ITS(MC_Looper_Track_1).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Track 2", ITS(MC_Looper_Track_2).c_str(), ITS(EFX_LOOPER).c_str(),
+        "Looper Clear", ITS(MC_Looper_Clear).c_str(), ITS(EFX_LOOPER).c_str(),
 
-        "Musical Delay Dry/Wet", ITS(MC_Music_DryWet).c_str(), "15",
-        "Musical Delay L/R Cross", ITS(MC_Music_LR_Cross).c_str(), "15",
-        "Musical Delay Pan 1", ITS(MC_Music_Pan_1).c_str(), "15",
-        "Musical Delay Pan 2", ITS(MC_Music_Pan_2).c_str(), "15",
-        "Musical Delay Tempo", ITS(MC_Music_Tempo).c_str(), "15",
-        "Musical Delay Gain 1", ITS(MC_Music_Gain_1).c_str(), "15",
-        "Musical Delay Gain 2", ITS(MC_Music_Gain_2).c_str(), "15",
-        "Musical Delay FB 1", ITS(MC_Music_Feedback_1).c_str(), "15",
-        "Musical Delay FB 2", ITS(MC_Music_Feedback_2).c_str(), "15",
-        "Musical Delay Damp", ITS(MC_Music_Damp).c_str(), "15",
+        "Musical Delay Dry/Wet", ITS(MC_Music_DryWet).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay L/R Cross", ITS(MC_Music_LR_Cross).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay Pan 1", ITS(MC_Music_Pan_1).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay Pan 2", ITS(MC_Music_Pan_2).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay Tempo", ITS(MC_Music_Tempo).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay Gain 1", ITS(MC_Music_Gain_1).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay Gain 2", ITS(MC_Music_Gain_2).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay FB 1", ITS(MC_Music_Feedback_1).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay FB 2", ITS(MC_Music_Feedback_2).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
+        "Musical Delay Damp", ITS(MC_Music_Damp).c_str(), ITS(EFX_MUSICAL_DELAY).c_str(),
 
-        "MuTroMojo Dry/Wet", ITS(MC_MuTro_DryWet).c_str(), "31",
-        "MuTroMojo LP", ITS(MC_MuTro_LowPass).c_str(), "31",
-        "MuTroMojo BP", ITS(MC_MuTro_BandPass).c_str(), "31",
-        "MuTroMojo HP", ITS(MC_MuTro_HighPass).c_str(), "31",
-        "MuTroMojo LFO Type", ITS(MC_MuTro_LFO_Type).c_str(), "31",
-        "MuTroMojo Depth", ITS(MC_MuTro_Depth).c_str(), "31",
-        "MuTroMojo Tempo", ITS(MC_MuTro_LFO_Tempo).c_str(), "31",
-        "MuTroMojo Res", ITS(MC_MuTro_Resonance).c_str(), "31",
-        "MuTroMojo Range", ITS(MC_MuTro_Range).c_str(), "31",
-        "MuTroMojo Wah", ITS(MC_MuTro_Wah).c_str(), "31",
-        "MuTroMojo E. Sens", ITS(MC_MuTro_Env_Sens).c_str(), "31",
-        "MuTroMojo Smooth", ITS(MC_MuTro_Env_Smooth).c_str(), "31",
-        "MuTroMojo Random", ITS(MC_MuTro_LFO_Random).c_str(), "31",
-        "MuTroMojo Stereo Df", ITS(MC_MuTro_LFO_Stereo).c_str(), "31",
-        "MuTroMojo St. Freq", ITS(MC_MuTro_St_Freq).c_str(), "31",
+        "MuTroMojo Dry/Wet", ITS(MC_MuTro_DryWet).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo LP", ITS(MC_MuTro_LowPass).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo BP", ITS(MC_MuTro_BandPass).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo HP", ITS(MC_MuTro_HighPass).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo LFO Type", ITS(MC_MuTro_LFO_Type).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Depth", ITS(MC_MuTro_Depth).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Tempo", ITS(MC_MuTro_LFO_Tempo).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Res", ITS(MC_MuTro_Resonance).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Range", ITS(MC_MuTro_Range).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Wah", ITS(MC_MuTro_Wah).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo E. Sens", ITS(MC_MuTro_Env_Sens).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Smooth", ITS(MC_MuTro_Env_Smooth).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Random", ITS(MC_MuTro_LFO_Random).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo Stereo Df", ITS(MC_MuTro_LFO_Stereo).c_str(), ITS(EFX_MUTROMOJO).c_str(),
+        "MuTroMojo St. Freq", ITS(MC_MuTro_St_Freq).c_str(), ITS(EFX_MUTROMOJO).c_str(),
 
-        "NoiseGate A. Time", ITS(MC_Gate_Attack).c_str(), "16",
-        "NoiseGate R. Time", ITS(MC_Gate_Release).c_str(), "16",
-        "NoiseGate Range", ITS(MC_Gate_Range).c_str(), "16",
-        "NoiseGate Threshold", ITS(MC_Gate_Threshold).c_str(), "16",
-        "NoiseGate Hold", ITS(MC_Gate_Hold).c_str(), "16",
-        "NoiseGate LPF", ITS(MC_Gate_LPF).c_str(), "16",
-        "NoiseGate HPF", ITS(MC_Gate_HPF).c_str(), "16",
+        "NoiseGate A. Time", ITS(MC_Gate_Attack).c_str(), ITS(EFX_NOISEGATE).c_str(),
+        "NoiseGate R. Time", ITS(MC_Gate_Release).c_str(), ITS(EFX_NOISEGATE).c_str(),
+        "NoiseGate Range", ITS(MC_Gate_Range).c_str(), ITS(EFX_NOISEGATE).c_str(),
+        "NoiseGate Threshold", ITS(MC_Gate_Threshold).c_str(), ITS(EFX_NOISEGATE).c_str(),
+        "NoiseGate Hold", ITS(MC_Gate_Hold).c_str(), ITS(EFX_NOISEGATE).c_str(),
+        "NoiseGate LPF", ITS(MC_Gate_LPF).c_str(), ITS(EFX_NOISEGATE).c_str(),
+        "NoiseGate HPF", ITS(MC_Gate_HPF).c_str(), ITS(EFX_NOISEGATE).c_str(),
 
-        "Opticaltrem Depth", ITS(MC_Optical_Depth).c_str(), "44",
-        "Opticaltrem Tempo", ITS(MC_Optical_LFO_Tempo).c_str(), "44",
-        "Opticaltrem Random", ITS(MC_Optical_LFO_Random).c_str(), "44",
-        "Opticaltrem LFO Type", ITS(MC_Optical_LFO_Type).c_str(), "44",
-        "Opticaltrem Stereo Df", ITS(MC_Optical_LFO_Stereo).c_str(), "44",
-        "Opticaltrem Pan", ITS(MC_Optical_Pan).c_str(), "44",
+        "Opticaltrem Depth", ITS(MC_Optical_Depth).c_str(), ITS(EFX_OPTICALTREM).c_str(),
+        "Opticaltrem Tempo", ITS(MC_Optical_LFO_Tempo).c_str(), ITS(EFX_OPTICALTREM).c_str(),
+        "Opticaltrem Random", ITS(MC_Optical_LFO_Random).c_str(), ITS(EFX_OPTICALTREM).c_str(),
+        "Opticaltrem LFO Type", ITS(MC_Optical_LFO_Type).c_str(), ITS(EFX_OPTICALTREM).c_str(),
+        "Opticaltrem Stereo Df", ITS(MC_Optical_LFO_Stereo).c_str(), ITS(EFX_OPTICALTREM).c_str(),
+        "Opticaltrem Pan", ITS(MC_Optical_Pan).c_str(), ITS(EFX_OPTICALTREM).c_str(),
 
-        "Overdrive Dry/Wet", ITS(MC_Overdrive_DryWet).c_str(), "3",
-        "Overdrive L/R Cross", ITS(MC_Overdrive_LR_Cross).c_str(), "3",
-        "Overdrive Drive", ITS(MC_Overdrive_Drive).c_str(), "3",
-        "Overdrive Level", ITS(MC_Overdrive_Level).c_str(), "3",
-        "Overdrive Type", ITS(MC_Overdrive_Type).c_str(), "3",
-        "Overdrive Pan", ITS(MC_Overdrive_Pan).c_str(), "3",
-        "Overdrive LPF", ITS(MC_Overdrive_LPF).c_str(), "3",
-        "Overdrive HPF", ITS(MC_Overdrive_HPF).c_str(), "3",
+        "Overdrive Dry/Wet", ITS(MC_Overdrive_DryWet).c_str(), ITS(EFX_OVERDRIVE).c_str(),
+        "Overdrive L/R Cross", ITS(MC_Overdrive_LR_Cross).c_str(), ITS(EFX_OVERDRIVE).c_str(),
+        "Overdrive Drive", ITS(MC_Overdrive_Drive).c_str(), ITS(EFX_OVERDRIVE).c_str(),
+        "Overdrive Level", ITS(MC_Overdrive_Level).c_str(), ITS(EFX_OVERDRIVE).c_str(),
+        "Overdrive Type", ITS(MC_Overdrive_Type).c_str(), ITS(EFX_OVERDRIVE).c_str(),
+        "Overdrive Pan", ITS(MC_Overdrive_Pan).c_str(), ITS(EFX_OVERDRIVE).c_str(),
+        "Overdrive LPF", ITS(MC_Overdrive_LPF).c_str(), ITS(EFX_OVERDRIVE).c_str(),
+        "Overdrive HPF", ITS(MC_Overdrive_HPF).c_str(), ITS(EFX_OVERDRIVE).c_str(),
 
-        "Pan Dry/Wet", ITS(MC_Pan_DryWet).c_str(), "13",
-        "Pan Pan", ITS(MC_Pan_Pan).c_str(), "13",
-        "Pan Tempo", ITS(MC_Pan_LFO_Tempo).c_str(), "13",
-        "Pan Random", ITS(MC_Pan_LFO_Random).c_str(), "13",
-        "Pan LFO Type", ITS(MC_Pan_LFO_Type).c_str(), "13",
-        "Pan Stereo Df", ITS(MC_Pan_LFO_Stereo).c_str(), "13",
-        "Pan E. Stereo", ITS(MC_Pan_Ex_St_Amt).c_str(), "13",
+        "Pan Dry/Wet", ITS(MC_Pan_DryWet).c_str(), ITS(EFX_PAN).c_str(),
+        "Pan Pan", ITS(MC_Pan_Pan).c_str(), ITS(EFX_PAN).c_str(),
+        "Pan Tempo", ITS(MC_Pan_LFO_Tempo).c_str(), ITS(EFX_PAN).c_str(),
+        "Pan Random", ITS(MC_Pan_LFO_Random).c_str(), ITS(EFX_PAN).c_str(),
+        "Pan LFO Type", ITS(MC_Pan_LFO_Type).c_str(), ITS(EFX_PAN).c_str(),
+        "Pan Stereo Df", ITS(MC_Pan_LFO_Stereo).c_str(), ITS(EFX_PAN).c_str(),
+        "Pan E. Stereo", ITS(MC_Pan_Ex_St_Amt).c_str(), ITS(EFX_PAN).c_str(),
 
-        "Parametric EQ Gain", ITS(MC_Parametric_Gain).c_str(), "9",
-        "Parametric EQ Low Freq", ITS(MC_Parametric_Low_Freq).c_str(), "9",
-        "Parametric EQ Low Gain", ITS(MC_Parametric_Low_Gain).c_str(), "9",
-        "Parametric EQ Low Q", ITS(MC_Parametric_Low_Q).c_str(), "9",
-        "Parametric EQ Mid Freq", ITS(MC_Parametric_Mid_Freq).c_str(), "9",
-        "Parametric EQ Mid Gain", ITS(MC_Parametric_Mid_Gain).c_str(), "9",
-        "Parametric EQ Mid Q", ITS(MC_Parametric_Mid_Q).c_str(), "9",
-        "Parametric EQ High Freq", ITS(MC_Parametric_High_Freq).c_str(), "9",
-        "Parametric EQ High Gain", ITS(MC_Parametric_High_Gain).c_str(), "9",
-        "Parametric EQ High Q", ITS(MC_Parametric_High_Q).c_str(), "9",
+        "Parametric EQ Gain", ITS(MC_Parametric_Gain).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ Low Freq", ITS(MC_Parametric_Low_Freq).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ Low Gain", ITS(MC_Parametric_Low_Gain).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ Low Q", ITS(MC_Parametric_Low_Q).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ Mid Freq", ITS(MC_Parametric_Mid_Freq).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ Mid Gain", ITS(MC_Parametric_Mid_Gain).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ Mid Q", ITS(MC_Parametric_Mid_Q).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ High Freq", ITS(MC_Parametric_High_Freq).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ High Gain", ITS(MC_Parametric_High_Gain).c_str(), ITS(EFX_PARAMETRIC).c_str(),
+        "Parametric EQ High Q", ITS(MC_Parametric_High_Q).c_str(), ITS(EFX_PARAMETRIC).c_str(),
 
-        "Phaser Dry/Wet", ITS(MC_Phaser_DryWet).c_str(), "6",
-        "Phaser Pan", ITS(MC_Phaser_Pan).c_str(), "6",
-        "Phaser Tempo", ITS(MC_Phaser_LFO_Tempo).c_str(), "6",
-        "Phaser Random", ITS(MC_Phaser_LFO_Random).c_str(), "6",
-        "Phaser LFO Type", ITS(MC_Phaser_LFO_Type).c_str(), "6",
-        "Phaser Phase", ITS(MC_Phaser_Phase).c_str(), "6",
-        "Phaser Stereo Df", ITS(MC_Phaser_LFO_Stereo).c_str(), "6",
-        "Phaser Depth", ITS(MC_Phaser_Depth).c_str(), "6",
-        "Phaser Feedback", ITS(MC_Phaser_Feedback).c_str(), "6",
-        "Phaser L/R Cross", ITS(MC_Phaser_LR_Cross).c_str(), "6",
+        "Phaser Dry/Wet", ITS(MC_Phaser_DryWet).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser Pan", ITS(MC_Phaser_Pan).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser Tempo", ITS(MC_Phaser_LFO_Tempo).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser Random", ITS(MC_Phaser_LFO_Random).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser LFO Type", ITS(MC_Phaser_LFO_Type).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser Phase", ITS(MC_Phaser_Phase).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser Stereo Df", ITS(MC_Phaser_LFO_Stereo).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser Depth", ITS(MC_Phaser_Depth).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser Feedback", ITS(MC_Phaser_Feedback).c_str(), ITS(EFX_PHASER).c_str(),
+        "Phaser L/R Cross", ITS(MC_Phaser_LR_Cross).c_str(), ITS(EFX_PHASER).c_str(),
 
-        "Reverb Dry/Wet", ITS(MC_Reverb_DryWet).c_str(), "8",
-        "Reverb Pan", ITS(MC_Reverb_Pan).c_str(), "8",
-        "Reverb Time", ITS(MC_Reverb_Time).c_str(), "8",
-        "Reverb Initial Delay", ITS(MC_Reverb_I_Delay).c_str(), "8",
-        "Reverb Del. E/R", ITS(MC_Reverb_Delay_FB).c_str(), "8",
-        "Reverb Room Size", ITS(MC_Reverb_Room).c_str(), "8",
-        "Reverb LPF", ITS(MC_Reverb_LPF).c_str(), "8",
-        "Reverb HPF", ITS(MC_Reverb_HPF).c_str(), "8",
-        "Reverb Damping", ITS(MC_Reverb_Damp).c_str(), "8",
+        "Reverb Dry/Wet", ITS(MC_Reverb_DryWet).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb Pan", ITS(MC_Reverb_Pan).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb Time", ITS(MC_Reverb_Time).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb Initial Delay", ITS(MC_Reverb_I_Delay).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb Del. E/R", ITS(MC_Reverb_Delay_FB).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb Room Size", ITS(MC_Reverb_Room).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb LPF", ITS(MC_Reverb_LPF).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb HPF", ITS(MC_Reverb_HPF).c_str(), ITS(EFX_REVERB).c_str(),
+        "Reverb Damping", ITS(MC_Reverb_Damp).c_str(), ITS(EFX_REVERB).c_str(),
 
-        "Reverbtron Dry/Wet", ITS(MC_Revtron_DryWet).c_str(), "40",
-        "Reverbtron Pan", ITS(MC_Revtron_Pan).c_str(), "40",
-        "Reverbtron Level", ITS(MC_Revtron_Level).c_str(), "40",
-        "Reverbtron Damp", ITS(MC_Revtron_Damp).c_str(), "40",
-        "Reverbtron Feedback", ITS(MC_Revtron_Feedback).c_str(), "40",
-        "Reverbtron Length", ITS(MC_Revtron_Length).c_str(), "40",
-        "Reverbtron Stretch", ITS(MC_Revtron_Stretch).c_str(), "40",
-        "Reverbtron Initial Delay", ITS(MC_Revtron_I_Delay).c_str(), "40",
-        "Reverbtron Fade", ITS(MC_Revtron_Fade).c_str(), "40",
-        "Reverbtron Diffusion", ITS(MC_Revtron_Diffusion).c_str(), "40",
-        "Reverbtron LPF", ITS(MC_Revtron_LPF).c_str(), "40",
+        "Reverbtron Dry/Wet", ITS(MC_Revtron_DryWet).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Pan", ITS(MC_Revtron_Pan).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Level", ITS(MC_Revtron_Level).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Damp", ITS(MC_Revtron_Damp).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Feedback", ITS(MC_Revtron_Feedback).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Length", ITS(MC_Revtron_Length).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Stretch", ITS(MC_Revtron_Stretch).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Initial Delay", ITS(MC_Revtron_I_Delay).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Fade", ITS(MC_Revtron_Fade).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron Diffusion", ITS(MC_Revtron_Diffusion).c_str(), ITS(EFX_REVERBTRON).c_str(),
+        "Reverbtron LPF", ITS(MC_Revtron_LPF).c_str(), ITS(EFX_REVERBTRON).c_str(),
 
-        "Ring Dry/Wet", ITS(MC_Ring_DryWet).c_str(), "21",
-        "Ring L/R Cross", ITS(MC_Ring_LR_Cross).c_str(), "21",
-        "Ring Input", ITS(MC_Ring_Input).c_str(), "21",
-        "Ring Level", ITS(MC_Ring_Level).c_str(), "21",
-        "Ring Pan", ITS(MC_Ring_Pan).c_str(), "21",
-        "Ring Depth", ITS(MC_Ring_Depth).c_str(), "21",
-        "Ring Freq", ITS(MC_Ring_Freq).c_str(), "21",
-        "Ring Sine", ITS(MC_Ring_Sine).c_str(), "21",
-        "Ring Triangle", ITS(MC_Ring_Triangle).c_str(), "21",
-        "Ring Sawtooth", ITS(MC_Ring_Saw).c_str(), "21",
-        "Ring Square", ITS(MC_Ring_Square).c_str(), "21",
+        "Ring Dry/Wet", ITS(MC_Ring_DryWet).c_str(), ITS(EFX_RING).c_str(),
+        "Ring L/R Cross", ITS(MC_Ring_LR_Cross).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Input", ITS(MC_Ring_Input).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Level", ITS(MC_Ring_Level).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Pan", ITS(MC_Ring_Pan).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Depth", ITS(MC_Ring_Depth).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Freq", ITS(MC_Ring_Freq).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Sine", ITS(MC_Ring_Sine).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Triangle", ITS(MC_Ring_Triangle).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Sawtooth", ITS(MC_Ring_Saw).c_str(), ITS(EFX_RING).c_str(),
+        "Ring Square", ITS(MC_Ring_Square).c_str(), ITS(EFX_RING).c_str(),
 
-        "Sequence Dry/Wet", ITS(MC_Sequence_DryWet).c_str(), "37",
-        "Sequence 1", ITS(MC_Sequence_Step_1).c_str(), "37",
-        "Sequence 2", ITS(MC_Sequence_Step_2).c_str(), "37",
-        "Sequence 3", ITS(MC_Sequence_Step_3).c_str(), "37",
-        "Sequence 4", ITS(MC_Sequence_Step_4).c_str(), "37",
-        "Sequence 5", ITS(MC_Sequence_Step_5).c_str(), "37",
-        "Sequence 6", ITS(MC_Sequence_Step_6).c_str(), "37",
-        "Sequence 7", ITS(MC_Sequence_Step_7).c_str(), "37",
-        "Sequence 8", ITS(MC_Sequence_Step_8).c_str(), "37",
-        "Sequence Tempo", ITS(MC_Sequence_Tempo).c_str(), "37",
-        "Sequence Q", ITS(MC_Sequence_Resonance).c_str(), "37",
-        "Sequence Stereo Df", ITS(MC_Sequence_Stdf).c_str(), "37",
+        "Sequence Dry/Wet", ITS(MC_Sequence_DryWet).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 1", ITS(MC_Sequence_Step_1).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 2", ITS(MC_Sequence_Step_2).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 3", ITS(MC_Sequence_Step_3).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 4", ITS(MC_Sequence_Step_4).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 5", ITS(MC_Sequence_Step_5).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 6", ITS(MC_Sequence_Step_6).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 7", ITS(MC_Sequence_Step_7).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence 8", ITS(MC_Sequence_Step_8).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence Tempo", ITS(MC_Sequence_Tempo).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence Q", ITS(MC_Sequence_Resonance).c_str(), ITS(EFX_SEQUENCE).c_str(),
+        "Sequence Stereo Df", ITS(MC_Sequence_Stdf).c_str(), ITS(EFX_SEQUENCE).c_str(),
 
-        "ShelfBoost Gain", ITS(MC_Shelf_Gain).c_str(), "34",
-        "ShelfBoost Level", ITS(MC_Shelf_Level).c_str(), "34",
-        "ShelfBoost Tone", ITS(MC_Shelf_Tone).c_str(), "34",
-        "ShelfBoost Presence", ITS(MC_Shelf_Presence).c_str(), "34",
+        "ShelfBoost Gain", ITS(MC_Shelf_Gain).c_str(), ITS(EFX_SHELFBOOST).c_str(),
+        "ShelfBoost Level", ITS(MC_Shelf_Level).c_str(), ITS(EFX_SHELFBOOST).c_str(),
+        "ShelfBoost Tone", ITS(MC_Shelf_Tone).c_str(), ITS(EFX_SHELFBOOST).c_str(),
+        "ShelfBoost Presence", ITS(MC_Shelf_Presence).c_str(), ITS(EFX_SHELFBOOST).c_str(),
 
-        "Shifter Dry/Wet", ITS(MC_Shifter_DryWet).c_str(), "38",
-        "Shifter Interval", ITS(MC_Shifter_Interval).c_str(), "38",
-        "Shifter Gain", ITS(MC_Shifter_Gain).c_str(), "38",
-        "Shifter Pan", ITS(MC_Shifter_Pan).c_str(), "38",
-        "Shifter Attack", ITS(MC_Shifter_Attack).c_str(), "38",
-        "Shifter Decay", ITS(MC_Shifter_Decay).c_str(), "38",
-        "Shifter Threshold", ITS(MC_Shifter_Threshold).c_str(), "38",
-        "Shifter Whammy", ITS(MC_Shifter_Whammy).c_str(), "38",
+        "Shifter Dry/Wet", ITS(MC_Shifter_DryWet).c_str(), ITS(EFX_SHIFTER).c_str(),
+        "Shifter Interval", ITS(MC_Shifter_Interval).c_str(), ITS(EFX_SHIFTER).c_str(),
+        "Shifter Gain", ITS(MC_Shifter_Gain).c_str(), ITS(EFX_SHIFTER).c_str(),
+        "Shifter Pan", ITS(MC_Shifter_Pan).c_str(), ITS(EFX_SHIFTER).c_str(),
+        "Shifter Attack", ITS(MC_Shifter_Attack).c_str(), ITS(EFX_SHIFTER).c_str(),
+        "Shifter Decay", ITS(MC_Shifter_Decay).c_str(), ITS(EFX_SHIFTER).c_str(),
+        "Shifter Threshold", ITS(MC_Shifter_Threshold).c_str(), ITS(EFX_SHIFTER).c_str(),
+        "Shifter Whammy", ITS(MC_Shifter_Whammy).c_str(), ITS(EFX_SHIFTER).c_str(),
 
-        "Shuffle Dry/Wet", ITS(MC_Shuffle_DryWet).c_str(), "26",
-        "Shuffle Low Freq", ITS(MC_Shuffle_Freq_L).c_str(), "26",
-        "Shuffle Low Gain", ITS(MC_Shuffle_Gain_L).c_str(), "26",
-        "Shuffle M.L. Freq", ITS(MC_Shuffle_Freq_ML).c_str(), "26",
-        "Shuffle M.L. Gain", ITS(MC_Shuffle_Gain_ML).c_str(), "26",
-        "Shuffle M.H. Freq", ITS(MC_Shuffle_Freq_MH).c_str(), "26",
-        "Shuffle M.H. Gain", ITS(MC_Shuffle_Gain_MH).c_str(), "26",
-        "Shuffle High Freq", ITS(MC_Shuffle_Freq_H).c_str(), "26",
-        "Shuffle High Gain", ITS(MC_Shuffle_Gain_H).c_str(), "26",
-        "Shuffle Q", ITS(MC_Shuffle_Width).c_str(), "26",
+        "Shuffle Dry/Wet", ITS(MC_Shuffle_DryWet).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle Low Freq", ITS(MC_Shuffle_Freq_L).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle Low Gain", ITS(MC_Shuffle_Gain_L).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle M.L. Freq", ITS(MC_Shuffle_Freq_ML).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle M.L. Gain", ITS(MC_Shuffle_Gain_ML).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle M.H. Freq", ITS(MC_Shuffle_Freq_MH).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle M.H. Gain", ITS(MC_Shuffle_Gain_MH).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle High Freq", ITS(MC_Shuffle_Freq_H).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle High Gain", ITS(MC_Shuffle_Gain_H).c_str(), ITS(EFX_SHUFFLE).c_str(),
+        "Shuffle Q", ITS(MC_Shuffle_Width).c_str(), ITS(EFX_SHUFFLE).c_str(),
 
-        "StereoHarm Dry/Wet", ITS(MC_Sharm_DryWet).c_str(), "42",
-        "StereoHarm Int L", ITS(MC_Sharm_L_Interval).c_str(), "42",
-        "StereoHarm Chrm L", ITS(MC_Sharm_L_Chroma).c_str(), "42",
-        "StereoHarm Gain L", ITS(MC_Sharm_L_Gain).c_str(), "42",
-        "StereoHarm Int R", ITS(MC_Sharm_R_Interval).c_str(), "42",
-        "StereoHarm Chrm R", ITS(MC_Sharm_R_Chroma).c_str(), "42",
-        "StereoHarm Gain R", ITS(MC_Sharm_R_Gain).c_str(), "42",
-        "StereoHarm L/R Cross", ITS(MC_Sharm_LR_Cross).c_str(), "42",
-        "StereoHarm SELECT", ITS(MC_Sharm_Select).c_str(), "42",
-        "StereoHarm Note", ITS(MC_Sharm_Note).c_str(), "42",
-        "StereoHarm Chord", ITS(MC_Sharm_Chord).c_str(), "42",
+        "StereoHarm Dry/Wet", ITS(MC_Sharm_DryWet).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Int L", ITS(MC_Sharm_L_Interval).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Chrm L", ITS(MC_Sharm_L_Chroma).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Gain L", ITS(MC_Sharm_L_Gain).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Int R", ITS(MC_Sharm_R_Interval).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Chrm R", ITS(MC_Sharm_R_Chroma).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Gain R", ITS(MC_Sharm_R_Gain).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm L/R Cross", ITS(MC_Sharm_LR_Cross).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm SELECT", ITS(MC_Sharm_Select).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Note", ITS(MC_Sharm_Note).c_str(), ITS(EFX_STEREOHARM).c_str(),
+        "StereoHarm Chord", ITS(MC_Sharm_Chord).c_str(), ITS(EFX_STEREOHARM).c_str(),
 
-        "StompBox Level", ITS(MC_Stomp_Level).c_str(), "39",
-        "StompBox Gain", ITS(MC_Stomp_Gain).c_str(), "39",
-        "StompBox Bias", ITS(MC_Stomp_Bias).c_str(), "39",
-        "StompBox Mid", ITS(MC_Stomp_Mid).c_str(), "39",
-        "StompBox Tone", ITS(MC_Stomp_Tone).c_str(), "39",
-        "StompBox Mode", ITS(MC_Stomp_Mode).c_str(), "39",
+        "StompBox Level", ITS(MC_Stomp_Level).c_str(), ITS(EFX_STOMPBOX).c_str(),
+        "StompBox Gain", ITS(MC_Stomp_Gain).c_str(), ITS(EFX_STOMPBOX).c_str(),
+        "StompBox Bias", ITS(MC_Stomp_Bias).c_str(), ITS(EFX_STOMPBOX).c_str(),
+        "StompBox Mid", ITS(MC_Stomp_Mid).c_str(), ITS(EFX_STOMPBOX).c_str(),
+        "StompBox Tone", ITS(MC_Stomp_Tone).c_str(), ITS(EFX_STOMPBOX).c_str(),
+        "StompBox Mode", ITS(MC_Stomp_Mode).c_str(), ITS(EFX_STOMPBOX).c_str(),
 
-        "Sustainer Gain", ITS(MC_Sustain_Gain).c_str(), "36",
-        "Sustainer Sustain", ITS(MC_Sustain_Sustain).c_str(), "36",
+        "Sustainer Gain", ITS(MC_Sustain_Gain).c_str(), ITS(EFX_SUSTAINER).c_str(),
+        "Sustainer Sustain", ITS(MC_Sustain_Sustain).c_str(), ITS(EFX_SUSTAINER).c_str(),
 
-        "Synthfilter Dry/Wet", ITS(MC_Synthfilter_DryWet).c_str(), "27",
-        "Synthfilter Distort", ITS(MC_Synthfilter_Distort).c_str(), "27",
-        "Synthfilter Tempo", ITS(MC_Synthfilter_LFO_Tempo).c_str(), "27",
-        "Synthfilter Random", ITS(MC_Synthfilter_LFO_Random).c_str(), "27",
-        "Synthfilter LFO Type", ITS(MC_Synthfilter_LFO_Type).c_str(), "27",
-        "Synthfilter Stereo Df", ITS(MC_Synthfilter_LFO_Stereo).c_str(), "27",
-        "Synthfilter Width", ITS(MC_Synthfilter_Width).c_str(), "27",
-        "Synthfilter Feedback", ITS(MC_Synthfilter_Feedback).c_str(), "27",
-        "Synthfilter Depth", ITS(MC_Synthfilter_Depth).c_str(), "27",
-        "Synthfilter E.Sens", ITS(MC_Synthfilter_Env_Sens).c_str(), "27",
-        "Synthfilter A.Time", ITS(MC_Synthfilter_Attack).c_str(), "27",
-        "Synthfilter R.Time", ITS(MC_Synthfilter_Release).c_str(), "27",
-        "Synthfilter Offset", ITS(MC_Synthfilter_Offset).c_str(), "27",
+        "Synthfilter Dry/Wet", ITS(MC_Synthfilter_DryWet).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Distort", ITS(MC_Synthfilter_Distort).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Tempo", ITS(MC_Synthfilter_LFO_Tempo).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Random", ITS(MC_Synthfilter_LFO_Random).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter LFO Type", ITS(MC_Synthfilter_LFO_Type).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Stereo Df", ITS(MC_Synthfilter_LFO_Stereo).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Width", ITS(MC_Synthfilter_Width).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Feedback", ITS(MC_Synthfilter_Feedback).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Depth", ITS(MC_Synthfilter_Depth).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter E.Sens", ITS(MC_Synthfilter_Env_Sens).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter A.Time", ITS(MC_Synthfilter_Attack).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter R.Time", ITS(MC_Synthfilter_Release).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
+        "Synthfilter Offset", ITS(MC_Synthfilter_Offset).c_str(), ITS(EFX_SYNTHFILTER).c_str(),
 
-        "Valve Dry/Wet", ITS(MC_Valve_DryWet).c_str(), "19",
-        "Valve L/R Cross", ITS(MC_Valve_LR_Cross).c_str(), "19",
-        "Valve Pan", ITS(MC_Valve_Pan).c_str(), "19",
-        "Valve Level", ITS(MC_Valve_Level).c_str(), "19",
-        "Valve Drive", ITS(MC_Valve_Drive).c_str(), "19",
-        "Valve Dist", ITS(MC_Valve_Distortion).c_str(), "19",
-        "Valve Presence", ITS(MC_Valve_Presence).c_str(), "19",
-        "Valve LPF", ITS(MC_Valve_LPF).c_str(), "19",
-        "Valve HPF", ITS(MC_Valve_HPF).c_str(), "19",
+        "Valve Dry/Wet", ITS(MC_Valve_DryWet).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve L/R Cross", ITS(MC_Valve_LR_Cross).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve Pan", ITS(MC_Valve_Pan).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve Level", ITS(MC_Valve_Level).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve Drive", ITS(MC_Valve_Drive).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve Dist", ITS(MC_Valve_Distortion).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve Presence", ITS(MC_Valve_Presence).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve LPF", ITS(MC_Valve_LPF).c_str(), ITS(EFX_VALVE).c_str(),
+        "Valve HPF", ITS(MC_Valve_HPF).c_str(), ITS(EFX_VALVE).c_str(),
 
-        "VaryBand Dry/Wet", ITS(MC_VaryBand_DryWet).c_str(), "28",
-        "VaryBand Tempo 1", ITS(MC_VaryBand_LFO_Tempo_1).c_str(), "28",
-        "VaryBand LFO 1 Type", ITS(MC_VaryBand_LFO_Type_1).c_str(), "28",
-        "VaryBand St.df 1", ITS(MC_VaryBand_LFO_Stereo_1).c_str(), "28",
-        "VaryBand Tempo 2", ITS(MC_VaryBand_LFO_Tempo_2).c_str(), "28",
-        "VaryBand LFO 2 Type", ITS(MC_VaryBand_LFO_Type_2).c_str(), "28",
-        "VaryBand St.df 2", ITS(MC_VaryBand_LFO_Stereo_2).c_str(), "28",
-        "VaryBand Cross 1", ITS(MC_VaryBand_Cross_1).c_str(), "28",
-        "VaryBand Cross 2", ITS(MC_VaryBand_Cross_2).c_str(), "28",
-        "VaryBand Cross 3", ITS(MC_VaryBand_Cross_3).c_str(), "28",
+        "VaryBand Dry/Wet", ITS(MC_VaryBand_DryWet).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand Tempo 1", ITS(MC_VaryBand_LFO_Tempo_1).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand LFO 1 Type", ITS(MC_VaryBand_LFO_Type_1).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand St.df 1", ITS(MC_VaryBand_LFO_Stereo_1).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand Tempo 2", ITS(MC_VaryBand_LFO_Tempo_2).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand LFO 2 Type", ITS(MC_VaryBand_LFO_Type_2).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand St.df 2", ITS(MC_VaryBand_LFO_Stereo_2).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand Cross 1", ITS(MC_VaryBand_Cross_1).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand Cross 2", ITS(MC_VaryBand_Cross_2).c_str(), ITS(EFX_VARYBAND).c_str(),
+        "VaryBand Cross 3", ITS(MC_VaryBand_Cross_3).c_str(), ITS(EFX_VARYBAND).c_str(),
 
-        "Vibe Dry/Wet", ITS(MC_Vibe_DryWet).c_str(), "45",
-        "Vibe Width", ITS(MC_Vibe_Width).c_str(), "45",
-        "Vibe Depth", ITS(MC_Vibe_Depth).c_str(), "45",
-        "Vibe Tempo", ITS(MC_Vibe_LFO_Tempo).c_str(), "45",
-        "Vibe Random", ITS(MC_Vibe_LFO_Random).c_str(), "45",
-        "Vibe LFO Type", ITS(MC_Vibe_LFO_Type).c_str(), "45",
-        "Vibe Stereo Df", ITS(MC_Vibe_LFO_Stereo).c_str(), "45",
-        "Vibe Feedback", ITS(MC_Vibe_Feedback).c_str(), "45",
-        "Vibe L/R Cross", ITS(MC_Vibe_LR_Cross).c_str(), "45",
-        "Vibe Pan", ITS(MC_Vibe_Pan).c_str(), "45",
+        "Vibe Dry/Wet", ITS(MC_Vibe_DryWet).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe Width", ITS(MC_Vibe_Width).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe Depth", ITS(MC_Vibe_Depth).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe Tempo", ITS(MC_Vibe_LFO_Tempo).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe Random", ITS(MC_Vibe_LFO_Random).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe LFO Type", ITS(MC_Vibe_LFO_Type).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe Stereo Df", ITS(MC_Vibe_LFO_Stereo).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe Feedback", ITS(MC_Vibe_Feedback).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe L/R Cross", ITS(MC_Vibe_LR_Cross).c_str(), ITS(EFX_VIBE).c_str(),
+        "Vibe Pan", ITS(MC_Vibe_Pan).c_str(), ITS(EFX_VIBE).c_str(),
 
-        "Vocoder Dry/Wet", ITS(MC_Vocoder_DryWet).c_str(), "35",
-        "Vocoder Pan", ITS(MC_Vocoder_Pan).c_str(), "35",
-        "Vocoder Input", ITS(MC_Vocoder_Input).c_str(), "35",
-        "Vocoder Smear", ITS(MC_Vocoder_Smear).c_str(), "35",
-        "Vocoder Q", ITS(MC_Vocoder_Q).c_str(), "35",
-        "Vocoder Ring", ITS(MC_Vocoder_Ring).c_str(), "35",
-        "Vocoder Level", ITS(MC_Vocoder_Level).c_str(), "35",
+        "Vocoder Dry/Wet", ITS(MC_Vocoder_DryWet).c_str(), ITS(EFX_VOCODER).c_str(),
+        "Vocoder Pan", ITS(MC_Vocoder_Pan).c_str(), ITS(EFX_VOCODER).c_str(),
+        "Vocoder Input", ITS(MC_Vocoder_Input).c_str(), ITS(EFX_VOCODER).c_str(),
+        "Vocoder Smear", ITS(MC_Vocoder_Smear).c_str(), ITS(EFX_VOCODER).c_str(),
+        "Vocoder Q", ITS(MC_Vocoder_Q).c_str(), ITS(EFX_VOCODER).c_str(),
+        "Vocoder Ring", ITS(MC_Vocoder_Ring).c_str(), ITS(EFX_VOCODER).c_str(),
+        "Vocoder Level", ITS(MC_Vocoder_Level).c_str(), ITS(EFX_VOCODER).c_str(),
 
-        "WahWah Dry/Wet", ITS(MC_WahWah_DryWet).c_str(), "10",
-        "WahWah Pan", ITS(MC_WahWah_Pan).c_str(), "10",
-        "WahWah Tempo", ITS(MC_WahWah_LFO_Tempo).c_str(), "10",
-        "WahWah Random", ITS(MC_WahWah_LFO_Random).c_str(), "10",
-        "WahWah LFO Type", ITS(MC_WahWah_LFO_Type).c_str(), "10",
-        "WahWah Stereo Df", ITS(MC_WahWah_LFO_Stereo).c_str(), "10",
-        "WahWah Depth", ITS(MC_WahWah_Depth).c_str(), "10",
-        "WahWah Amp S.", ITS(MC_WahWah_Sense).c_str(), "10",
-        "WahWah Amp S.I.", ITS(MC_WahWah_ASI).c_str(), "10",
-        "WahWah Smooth", ITS(MC_WahWah_Smooth).c_str(), "10",
+        "WahWah Dry/Wet", ITS(MC_WahWah_DryWet).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Pan", ITS(MC_WahWah_Pan).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Tempo", ITS(MC_WahWah_LFO_Tempo).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Random", ITS(MC_WahWah_LFO_Random).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah LFO Type", ITS(MC_WahWah_LFO_Type).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Stereo Df", ITS(MC_WahWah_LFO_Stereo).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Depth", ITS(MC_WahWah_Depth).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Amp S.", ITS(MC_WahWah_Sense).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Amp S.I.", ITS(MC_WahWah_ASI).c_str(), ITS(EFX_WAHWAH).c_str(),
+        "WahWah Smooth", ITS(MC_WahWah_Smooth).c_str(), ITS(EFX_WAHWAH).c_str(),
     };
 
     // If any additional parameters are added, then the constant
@@ -881,191 +881,191 @@ RKR::ActiveUn(int value)
 
     switch (miraque)
     {
-    case 0:
+    case EFX_EQ:
         if (inoff) EQ1_Bypass = 1;
         else EQ1_Bypass = 0;
         break;
-    case 1:
+    case EFX_COMPRESSOR:
         if (inoff) Compressor_Bypass = 1;
         else Compressor_Bypass = 0;
         break;
-    case 2:
+    case EFX_DISTORTION:
         if (inoff) Distorsion_Bypass = 1;
         else Distorsion_Bypass = 0;
         break;
-    case 3:
+    case EFX_OVERDRIVE:
         if (inoff) Overdrive_Bypass = 1;
         else Overdrive_Bypass = 0;
         break;
-    case 4:
+    case EFX_ECHO:
         if (inoff) Echo_Bypass = 1;
         else Echo_Bypass = 0;
         break;
-    case 5:
+    case EFX_CHORUS:
         if (inoff) Chorus_Bypass = 1;
         else Chorus_Bypass = 0;
         break;
-    case 6:
+    case EFX_PHASER:
         if (inoff) Phaser_Bypass = 1;
         else Phaser_Bypass = 0;
         break;
-    case 7:
+    case EFX_FLANGER:
         if (inoff) Flanger_Bypass = 1;
         else Flanger_Bypass = 0;
         break;
-    case 8:
+    case EFX_REVERB:
         if (inoff) Reverb_Bypass = 1;
         else Reverb_Bypass = 0;
         break;
-    case 9:
+    case EFX_PARAMETRIC:
         if (inoff) EQ2_Bypass = 1;
         else EQ2_Bypass = 0;
         break;
-    case 10:
+    case EFX_WAHWAH:
         if (inoff) WahWah_Bypass = 1;
         else WahWah_Bypass = 0;
         break;
-    case 11:
+    case EFX_ALIENWAH:
         if (inoff) Alienwah_Bypass = 1;
         else Alienwah_Bypass = 0;
         break;
-    case 12:
+    case EFX_CABINET:
         if (inoff) Cabinet_Bypass = 1;
         else Cabinet_Bypass = 0;
         break;
-    case 13:
+    case EFX_PAN:
         if (inoff) Pan_Bypass = 1;
         else Pan_Bypass = 0;
         break;
-    case 14:
+    case EFX_HARMONIZER:
         if (inoff) Harmonizer_Bypass = 1;
         else Harmonizer_Bypass = 0;
         break;
-    case 15:
+    case EFX_MUSICAL_DELAY:
         if (inoff) MusDelay_Bypass = 1;
         else MusDelay_Bypass = 0;
         break;
-    case 16:
+    case EFX_NOISEGATE:
         if (inoff) Gate_Bypass = 1;
         else Gate_Bypass = 0;
         break;
-    case 17:
+    case EFX_DERELICT:
         if (inoff) Derelict_Bypass = 1;
         else Derelict_Bypass = 0;
         break;
-    case 18:
+    case EFX_ANALOG_PHASER:
         if (inoff) APhaser_Bypass = 1;
         else APhaser_Bypass = 0;
         break;
-    case 19:
+    case EFX_VALVE:
         if (inoff) Valve_Bypass = 1;
         else Valve_Bypass = 0;
         break;
-    case 20:
+    case EFX_DUAL_FLANGE:
         if (inoff) DFlange_Bypass = 1;
         else DFlange_Bypass = 0;
         break;
-    case 21:
+    case EFX_RING:
         if (inoff) Ring_Bypass = 1;
         else Ring_Bypass = 0;
         break;
-    case 22:
+    case EFX_EXCITER:
         if (inoff) Exciter_Bypass = 1;
         else Exciter_Bypass = 0;
         break;
-    case 23:
+    case EFX_DISTBAND:
         if (inoff) DistBand_Bypass = 1;
         else DistBand_Bypass = 0;
         break;
-    case 24:
+    case EFX_ARPIE:
         if (inoff) Arpie_Bypass = 1;
         else Arpie_Bypass = 0;
         break;
-    case 25:
+    case EFX_EXPANDER:
         if (inoff) Expander_Bypass = 1;
         else Expander_Bypass = 0;
         break;
-    case 26:
+    case EFX_SHUFFLE:
         if (inoff) Shuffle_Bypass = 1;
         else Shuffle_Bypass = 0;
         break;
-    case 27:
+    case EFX_SYNTHFILTER:
         if (inoff) Synthfilter_Bypass = 1;
         else Synthfilter_Bypass = 0;
         break;
-    case 28:
+    case EFX_VARYBAND:
         if (inoff) VaryBand_Bypass = 1;
         else VaryBand_Bypass = 0;
         break;
-    case 29:
+    case EFX_CONVOLOTRON:
         if (inoff) Convol_Bypass = 1;
         else Convol_Bypass = 0;
         break;
-    case 30:
+    case EFX_LOOPER:
         if (inoff) Looper_Bypass = 1;
         else Looper_Bypass = 0;
         break;
-    case 31:
+    case EFX_MUTROMOJO:
         if (inoff) MuTroMojo_Bypass = 1;
         else MuTroMojo_Bypass = 0;
         break;
-    case 32:
+    case EFX_ECHOVERSE:
         if (inoff) Echoverse_Bypass = 1;
         else Echoverse_Bypass = 0;
         break;
-    case 33:
+    case EFX_COILCRAFTER:
         if (inoff) CoilCrafter_Bypass = 1;
         else CoilCrafter_Bypass = 0;
         break;
-    case 34:
+    case EFX_SHELFBOOST:
         if (inoff) ShelfBoost_Bypass = 1;
         else ShelfBoost_Bypass = 0;
         break;
-    case 35:
+    case EFX_VOCODER:
         if (inoff) Vocoder_Bypass = 1;
         else Vocoder_Bypass = 0;
         break;
-    case 36:
+    case EFX_SUSTAINER:
         if (inoff) Sustainer_Bypass = 1;
         else Sustainer_Bypass = 0;
         break;
-    case 37:
+    case EFX_SEQUENCE:
         if (inoff) Sequence_Bypass = 1;
         else Sequence_Bypass = 0;
         break;
-    case 38:
+    case EFX_SHIFTER:
         if (inoff) Shifter_Bypass = 1;
         else Shifter_Bypass = 0;
         break;
-    case 39:
+    case EFX_STOMPBOX:
         if (inoff) StompBox_Bypass = 1;
         else StompBox_Bypass = 0;
         break;
-    case 40:
+    case EFX_REVERBTRON:
         if (inoff) Reverbtron_Bypass = 1;
         else Reverbtron_Bypass = 0;
         break;
-    case 41:
+    case EFX_ECHOTRON:
         if (inoff) Echotron_Bypass = 1;
         else Echotron_Bypass = 0;
         break;
-    case 42:
+    case EFX_STEREOHARM:
         if (inoff) StereoHarm_Bypass = 1;
         else StereoHarm_Bypass = 0;
         break;
-    case 43:
+    case EFX_COMPBAND:
         if (inoff) CompBand_Bypass = 1;
         else CompBand_Bypass = 0;
         break;
-    case 44:
+    case EFX_OPTICALTREM:
         if (inoff) Opticaltrem_Bypass = 1;
         else Opticaltrem_Bypass = 0;
         break;
-    case 45:
+    case EFX_VIBE:
         if (inoff) Vibe_Bypass = 1;
         else Vibe_Bypass = 0;
         break;
-    case 46:
+    case EFX_INFINITY:
         if (inoff) Infinity_Bypass = 1;
         else Infinity_Bypass = 0;
         break;
@@ -1095,145 +1095,145 @@ RKR::checkonoff(int miraque)
 {
     switch (miraque)
     {
-    case 0:
+    case EFX_EQ:
         if (EQ1_Bypass) return (0);
         break;
-    case 1:
+    case EFX_COMPRESSOR:
         if (Compressor_Bypass) return (0);
         break;
-    case 2:
+    case EFX_DISTORTION:
         if (Distorsion_Bypass) return (0);
         break;
-    case 3:
+    case EFX_OVERDRIVE:
         if (Overdrive_Bypass)return (0);
         break;
-    case 4:
+    case EFX_ECHO:
         if (Echo_Bypass)return (0);
         break;
-    case 5:
+    case EFX_CHORUS:
         if (Chorus_Bypass) return (0);
         break;
-    case 6:
+    case EFX_PHASER:
         if (Phaser_Bypass) return (0);
         break;
-    case 7:
+    case EFX_FLANGER:
         if (Flanger_Bypass) return (0);
         break;
-    case 8:
+    case EFX_REVERB:
         if (Reverb_Bypass) return (0);
         break;
-    case 9:
+    case EFX_PARAMETRIC:
         if (EQ2_Bypass) return (0);
         break;
-    case 10:
+    case EFX_WAHWAH:
         if (WahWah_Bypass) return (0);
         break;
-    case 11:
+    case EFX_ALIENWAH:
         if (Alienwah_Bypass) return (0);
         break;
-    case 12:
+    case EFX_CABINET:
         if (Cabinet_Bypass) return (0);
         break;
-    case 13:
+    case EFX_PAN:
         if (Pan_Bypass) return (0);
         break;
-    case 14:
+    case EFX_HARMONIZER:
         if (Harmonizer_Bypass) return (0);
         break;
-    case 15:
+    case EFX_MUSICAL_DELAY:
         if (MusDelay_Bypass) return (0);
         break;
-    case 16:
+    case EFX_NOISEGATE:
         if (Gate_Bypass) return (0);
         break;
-    case 17:
+    case EFX_DERELICT:
         if (Derelict_Bypass) return (0);
         break;
-    case 18:
+    case EFX_ANALOG_PHASER:
         if (APhaser_Bypass) return (0);
         break;
-    case 19:
+    case EFX_VALVE:
         if (Valve_Bypass) return (0);
         break;
-    case 20:
+    case EFX_DUAL_FLANGE:
         if (DFlange_Bypass) return (0);
         break;
-    case 21:
+    case EFX_RING:
         if (Ring_Bypass) return (0);
         break;
-    case 22:
+    case EFX_EXCITER:
         if (Exciter_Bypass) return (0);
         break;
-    case 23:
+    case EFX_DISTBAND:
         if (DistBand_Bypass) return (0);
         break;
-    case 24:
+    case EFX_ARPIE:
         if (Arpie_Bypass) return (0);
         break;
-    case 25:
+    case EFX_EXPANDER:
         if (Expander_Bypass) return (0);
         break;
-    case 26:
+    case EFX_SHUFFLE:
         if (Shuffle_Bypass) return (0);
         break;
-    case 27:
+    case EFX_SYNTHFILTER:
         if (Synthfilter_Bypass) return (0);
         break;
-    case 28:
+    case EFX_VARYBAND:
         if (VaryBand_Bypass) return (0);
         break;
-    case 29:
+    case EFX_CONVOLOTRON:
         if (Convol_Bypass) return (0);
         break;
-    case 30:
+    case EFX_LOOPER:
         if (Looper_Bypass) return (0);
         break;
-    case 31:
+    case EFX_MUTROMOJO:
         if (MuTroMojo_Bypass) return (0);
         break;
-    case 32:
+    case EFX_ECHOVERSE:
         if (Echoverse_Bypass) return (0);
         break;
-    case 33:
+    case EFX_COILCRAFTER:
         if (CoilCrafter_Bypass) return (0);
         break;
-    case 34:
+    case EFX_SHELFBOOST:
         if (ShelfBoost_Bypass) return (0);
         break;
-    case 35:
+    case EFX_VOCODER:
         if (Vocoder_Bypass) return (0);
         break;
-    case 36:
+    case EFX_SUSTAINER:
         if (Sustainer_Bypass) return (0);
         break;
-    case 37:
+    case EFX_SEQUENCE:
         if (Sequence_Bypass) return (0);
         break;
-    case 38:
+    case EFX_SHIFTER:
         if (Shifter_Bypass) return (0);
         break;
-    case 39:
+    case EFX_STOMPBOX:
         if (StompBox_Bypass) return (0);
         break;
-    case 40:
+    case EFX_REVERBTRON:
         if (Reverbtron_Bypass) return (0);
         break;
-    case 41:
+    case EFX_ECHOTRON:
         if (Echotron_Bypass) return (0);
         break;
-    case 42:
+    case EFX_STEREOHARM:
         if (StereoHarm_Bypass) return (0);
         break;
-    case 43:
+    case EFX_COMPBAND:
         if (CompBand_Bypass) return (0);
         break;
-    case 44:
+    case EFX_OPTICALTREM:
         if (Opticaltrem_Bypass) return (0);
         break;
-    case 45:
+    case EFX_VIBE:
         if (Vibe_Bypass) return (0);
         break;
-    case 46:
+    case EFX_INFINITY:
         if (Infinity_Bypass) return (0);
         break;
 
