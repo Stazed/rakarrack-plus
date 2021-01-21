@@ -94,12 +94,6 @@ std::string NumberToString ( T Number )
     return ss.str();
 }
 
-/** 
- * Cast Integer To String (ITS). 
- */
-#define ITS( x )   dynamic_cast< std::ostringstream & >( \
-                    ( std::ostringstream() << std::dec << x ) ).str()
-
 /**
  *  The MIDI control parameters. This includes the default MIDI control
  *  parameters (1 - 127) as well as MIDI learn.
