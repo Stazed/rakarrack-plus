@@ -1131,7 +1131,7 @@ RKR::savefile(char *filename)
     fputs(buf, fn);
 
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         int j = efx_order[i];
         memset(buf, 0, sizeof (buf));
@@ -1355,7 +1355,7 @@ RKR::Actualizar_Audio()
 {
     Bypass = 0;
 
-    for (int i = 0; i < 12; i++)
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         efx_order[i] = lv[10][i];
     }
@@ -1997,7 +1997,8 @@ RKR::savebank(char *filename)
 void
 RKR::New()
 {
-    for (int j = 0; j < 10; j++)
+    // Set all main rack off
+    for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
     {
         active[j] = 0;
     }
@@ -2024,7 +2025,7 @@ RKR::New()
         lv[j][19] = 0;
     }
 
-    for (int k = 0; k < 12; k++)
+    for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
         efx_order[k] = presets_default[10][k]; // magic number 10 is order
     }
@@ -2137,7 +2138,7 @@ RKR::Bank_to_Preset(int i)
         }
     }
 
-    for (int k = 0; k < 12; k++)
+    for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
         efx_order[k] = Bank[i].lv[10][k];
     }
@@ -2320,7 +2321,7 @@ RKR::Preset_to_Bank(int i)
         lv[47][j] = efx_Infinity->getpar(j);
 
 
-    for (j = 0; j <= 12; j++)
+    for (j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
         lv[10][j] = efx_order[j];
 
     for (j = 0; j < 10; j++)

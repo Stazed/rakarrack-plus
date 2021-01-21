@@ -1770,7 +1770,7 @@ void RKRGUI::reordena()
 
     // Show
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         switch (rkr->efx_order[i])
         {
@@ -5069,7 +5069,7 @@ void RKRGUI::ActOnOff()
         {
             miralo = rkr->Mnumeff[rkr->OnOffC] - 1000;
         }
-        else
+        else    // efx_order[] is limited by C_NUMBER_ORDERED_EFFECTS
         {
             miralo = rkr->efx_order[rkr->Mnumeff[rkr->OnOffC]];
         }
@@ -5559,7 +5559,7 @@ void RKRGUI::findpos(int num, int value, Fl_Widget*)
     Fl_Color on = fl_lighter(fl_lighter(label_color));
     Fl_Color off = fl_darker(label_color);
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         if (rkr->efx_order[i] == num)
         {
@@ -5709,7 +5709,7 @@ void RKRGUI::FillML(/*int type*/)
                 }
             }
 
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
             {
                 for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
                 {
@@ -5993,7 +5993,7 @@ void RKRGUI::Prepare_Order()
     // prepare order
     Order->Order_Bro->clear();
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         rkr->new_order[i] = rkr->efx_order[i];
         rkr->saved_order[i] = rkr->efx_order[i];
@@ -6263,7 +6263,7 @@ void RKRGUI::Fill_Avail(int filter)
     for (int i = 0; i < C_NUMBER_EFFECTS; i++)
     {
         int k = 0;
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
         {
             if (rkr->new_order[j] == rkr->efx_names[i].Pos)
             {
@@ -6855,13 +6855,13 @@ void RKRGUI::RandomPreset()
     }
 
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         rkr->efx_order[i] = SelEff[i];
     }
 
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         switch (rkr->efx_order[i])
         {
@@ -7275,6 +7275,9 @@ void RKRGUI::drag_effect()
                 return;
             }
 
+            // w->user_data() is Label in range 770 to 779
+            // which is checked above, so this is valid range (10) for
+            // rkr->efx_order[C_NUMBER_ORDERED_EFFECTS] used by Prep_Reorden(source, dest)
             if (drag != (int) k - 770)
             {
                 Prep_Reorden(drag, (int) k - 770);

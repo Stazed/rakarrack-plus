@@ -186,7 +186,7 @@ m_rgui->Fill_Avail(m_rkr->eff_filter);}
   Fl_Button ok_order {
     label Ok
     callback {int i;
-for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->new_order[i];
+for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_rkr->efx_order[i]=m_rkr->new_order[i];
 m_rgui->reordena();
 do_callback();} selected
     xywh {333 349 72 26}
@@ -196,7 +196,7 @@ do_callback();} selected
   Fl_Button Cancel_order {
     label Cancel
     callback {int i;
-for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->saved_order[i];
+for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_rkr->efx_order[i]=m_rkr->saved_order[i];
 do_callback();}
     xywh {415 349 72 26}
     code0 {o->set_label_offset(4);}

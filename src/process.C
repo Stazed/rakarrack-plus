@@ -858,6 +858,7 @@ RKR::initialize_arrays()
  *      2   - Modulation
  *      4   - Time
  *      8   - Emulation
+ *      9   - Both Emulation & Distortion (1 + 8) : StompBox, Valve
  *      16  - Filters
  *      32  - Dynamics
  *      64  - Processing & EQ
@@ -1026,7 +1027,7 @@ RKR::calculavol(int i)
 int
 RKR::checkforaux()
 {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         if (efx_order[i] == 35)
         {
@@ -1412,7 +1413,7 @@ RKR::Alg(float *origl, float *origr, void *)
         }
 
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
         {
             switch (efx_order[i])
             {

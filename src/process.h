@@ -719,6 +719,12 @@ const int C_NUM_EFFECTS_PLUS_ORDER = C_NUMBER_EFFECTS + 1;
  */
 const int C_MAX_PARAMETER_SIZE = 19;
 
+/**
+ * The number of rack effects - Main window, Orderwindow.
+ * saved_order[] : efx_order[] : new_order[];
+ */
+const int C_NUMBER_ORDERED_EFFECTS = 10;
+
 
 class RKR
 {
@@ -982,9 +988,9 @@ public:
 
     int Selected_Preset;
     int lv[70][20];
-    int saved_order[16];
-    int efx_order[16];
-    int new_order[16];
+    int saved_order[C_NUMBER_ORDERED_EFFECTS];
+    int efx_order[C_NUMBER_ORDERED_EFFECTS];
+    int new_order[C_NUMBER_ORDERED_EFFECTS];
     int availables[60];
     int active[12];
     int MidiCh;

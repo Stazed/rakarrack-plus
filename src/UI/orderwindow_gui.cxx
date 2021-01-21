@@ -146,7 +146,7 @@ void OrderWindowGui::cb_Order_DeacHide(RKR_Check_Button* o, void* v) {
 
 void OrderWindowGui::cb_ok_order_i(RKR_Button*, void*) {
   int i;
-for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->new_order[i];
+for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_rkr->efx_order[i]=m_rkr->new_order[i];
 m_rgui->reordena();
 do_callback();
 }
@@ -156,7 +156,7 @@ void OrderWindowGui::cb_ok_order(RKR_Button* o, void* v) {
 
 void OrderWindowGui::cb_Cancel_order_i(RKR_Button*, void*) {
   int i;
-for (i=0;i<10;i++) m_rkr->efx_order[i]=m_rkr->saved_order[i];
+for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_rkr->efx_order[i]=m_rkr->saved_order[i];
 do_callback();
 }
 void OrderWindowGui::cb_Cancel_order(RKR_Button* o, void* v) {
