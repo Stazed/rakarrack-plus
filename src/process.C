@@ -975,7 +975,7 @@ RKR::Vol_Efx(int NumEffect, float volume)
         v2 = 1.0f;
     }
 
-    if ((NumEffect == 8) || (NumEffect == 15))
+    if ((NumEffect == EFX_REVERB) || (NumEffect == EFX_MUSICAL_DELAY))
     {
         v2 *= v2;
     }
@@ -1029,7 +1029,7 @@ RKR::checkforaux()
 {
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        if (efx_order[i] == 35)
+        if (efx_order[i] == EFX_VOCODER)
         {
             if (Vocoder_Bypass) return (1);
         }
@@ -1301,7 +1301,6 @@ RKR::cleanup_efx()
     RC_Stereo_Harm->cleanup();
     efx_FLimiter->cleanup();
     efx_Infinity->cleanup();
-
 }
 
 void
@@ -1417,7 +1416,7 @@ RKR::Alg(float *origl, float *origr, void *)
         {
             switch (efx_order[i])
             {
-            case 0:
+            case EFX_EQ:
                 if (EQ1_Bypass)
                 {
                     efx_EQ1->out(efxoutl, efxoutr);
@@ -1425,7 +1424,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 1:
+            case EFX_COMPRESSOR:
                 if (Compressor_Bypass)
                 {
                     efx_Compressor->out(efxoutl, efxoutr);
@@ -1433,62 +1432,63 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 5:
-                if (Chorus_Bypass)
-                {
-                    efx_Chorus->out(efxoutl, efxoutr);
-                    Vol_Efx(5, efx_Chorus->outvolume);
-                }
-                break;
-
-            case 7:
-                if (Flanger_Bypass)
-                {
-                    efx_Flanger->out(efxoutl, efxoutr);
-                    Vol_Efx(7, efx_Flanger->outvolume);
-                }
-                break;
-
-            case 6:
-                if (Phaser_Bypass)
-                {
-                    efx_Phaser->out(efxoutl, efxoutr);
-                    Vol_Efx(6, efx_Phaser->outvolume);
-                }
-                break;
-
-            case 2:
+            case EFX_DISTORTION:
                 if (Distorsion_Bypass)
                 {
                     efx_Distorsion->out(efxoutl, efxoutr);
-                    Vol_Efx(2, efx_Distorsion->outvolume);
+                    Vol_Efx(EFX_DISTORTION, efx_Distorsion->outvolume);
                 }
                 break;
 
-            case 3:
+            case EFX_OVERDRIVE:
                 if (Overdrive_Bypass)
                 {
                     efx_Overdrive->out(efxoutl, efxoutr);
-                    Vol_Efx(3, efx_Overdrive->outvolume);
+                    Vol_Efx(EFX_OVERDRIVE, efx_Overdrive->outvolume);
                 }
                 break;
 
-            case 4:
+            case EFX_ECHO:
                 if (Echo_Bypass)
                 {
                     efx_Echo->out(efxoutl, efxoutr);
-                    Vol_Efx(4, efx_Echo->outvolume);
-                }
-                break;
-            case 8:
-                if (Reverb_Bypass)
-                {
-                    efx_Rev->out(efxoutl, efxoutr);
-                    Vol_Efx(8, efx_Rev->outvolume);
+                    Vol_Efx(EFX_ECHO, efx_Echo->outvolume);
                 }
                 break;
 
-            case 9:
+            case EFX_CHORUS:
+                if (Chorus_Bypass)
+                {
+                    efx_Chorus->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_CHORUS, efx_Chorus->outvolume);
+                }
+                break;
+
+            case EFX_PHASER:
+                if (Phaser_Bypass)
+                {
+                    efx_Phaser->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_PHASER, efx_Phaser->outvolume);
+                }
+                break;
+
+            case EFX_FLANGER:
+                if (Flanger_Bypass)
+                {
+                    efx_Flanger->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_FLANGER, efx_Flanger->outvolume);
+                }
+                break;
+
+            case EFX_REVERB:
+                if (Reverb_Bypass)
+                {
+                    efx_Rev->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_REVERB, efx_Rev->outvolume);
+                }
+                break;
+
+            case EFX_PARAMETRIC:
                 if (EQ2_Bypass)
                 {
                     efx_EQ2->out(efxoutl, efxoutr);
@@ -1496,23 +1496,23 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 10:
+            case EFX_WAHWAH:
                 if (WahWah_Bypass)
                 {
                     efx_WahWah->out(efxoutl, efxoutr);
-                    Vol_Efx(10, efx_WahWah->outvolume);
+                    Vol_Efx(EFX_WAHWAH, efx_WahWah->outvolume);
                 }
                 break;
 
-            case 11:
+            case EFX_ALIENWAH:
                 if (Alienwah_Bypass)
                 {
                     efx_Alienwah->out(efxoutl, efxoutr);
-                    Vol_Efx(11, efx_Alienwah->outvolume);
+                    Vol_Efx(EFX_ALIENWAH, efx_Alienwah->outvolume);
                 }
                 break;
 
-            case 12:
+            case EFX_CABINET:
                 if (Cabinet_Bypass)
                 {
                     efx_Cabinet->out(efxoutl, efxoutr);
@@ -1521,31 +1521,31 @@ RKR::Alg(float *origl, float *origr, void *)
 
                 break;
 
-            case 13:
+            case EFX_PAN:
                 if (Pan_Bypass)
                 {
                     efx_Pan->out(efxoutl, efxoutr);
-                    Vol_Efx(13, efx_Pan->outvolume);
+                    Vol_Efx(EFX_PAN, efx_Pan->outvolume);
                 }
                 break;
 
-            case 14:
+            case EFX_HARMONIZER:
                 if (Harmonizer_Bypass)
                 {
                     efx_Har->out(efxoutl, efxoutr);
-                    Vol_Efx(14, efx_Har->outvolume);
+                    Vol_Efx(EFX_HARMONIZER, efx_Har->outvolume);
                 }
                 break;
 
-            case 15:
+            case EFX_MUSICAL_DELAY:
                 if (MusDelay_Bypass)
                 {
                     efx_MusDelay->out(efxoutl, efxoutr);
-                    Vol_Efx(15, efx_MusDelay->outvolume);
+                    Vol_Efx(EFX_MUSICAL_DELAY, efx_MusDelay->outvolume);
                 }
                 break;
 
-            case 16:
+            case EFX_NOISEGATE:
                 if (Gate_Bypass)
                 {
                     efx_Gate->out(efxoutl, efxoutr);
@@ -1553,31 +1553,31 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 17:
+            case EFX_DERELICT:
                 if (Derelict_Bypass)
                 {
                     efx_Derelict->out(efxoutl, efxoutr);
-                    Vol_Efx(17, efx_Derelict->outvolume);
+                    Vol_Efx(EFX_DERELICT, efx_Derelict->outvolume);
                 }
                 break;
 
-            case 18:
+            case EFX_ANALOG_PHASER:
                 if (APhaser_Bypass)
                 {
                     efx_APhaser->out(efxoutl, efxoutr);
-                    Vol_Efx(18, efx_APhaser->outvolume);
+                    Vol_Efx(EFX_ANALOG_PHASER, efx_APhaser->outvolume);
                 }
                 break;
 
-            case 19:
+            case EFX_VALVE:
                 if (Valve_Bypass)
                 {
                     efx_Valve->out(efxoutl, efxoutr);
-                    Vol_Efx(19, efx_Valve->outvolume);
+                    Vol_Efx(EFX_VALVE, efx_Valve->outvolume);
                 }
                 break;
 
-            case 20:
+            case EFX_DUAL_FLANGE:
                 if (DFlange_Bypass)
                 {
                     efx_DFlange->out(efxoutl, efxoutr);
@@ -1585,15 +1585,15 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 21:
+            case EFX_RING:
                 if (Ring_Bypass)
                 {
                     efx_Ring->out(efxoutl, efxoutr);
-                    Vol_Efx(21, efx_Ring->outvolume);
+                    Vol_Efx(EFX_RING, efx_Ring->outvolume);
                 }
                 break;
 
-            case 22:
+            case EFX_EXCITER:
                 if (Exciter_Bypass)
                 {
                     efx_Exciter->out(efxoutl, efxoutr);
@@ -1601,23 +1601,23 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 23:
+            case EFX_DISTBAND:
                 if (DistBand_Bypass)
                 {
                     efx_DistBand->out(efxoutl, efxoutr);
-                    Vol_Efx(23, efx_DistBand->outvolume);
+                    Vol_Efx(EFX_DISTBAND, efx_DistBand->outvolume);
                 }
                 break;
 
-            case 24:
+            case EFX_ARPIE:
                 if (Arpie_Bypass)
                 {
                     efx_Arpie->out(efxoutl, efxoutr);
-                    Vol_Efx(24, efx_Arpie->outvolume);
+                    Vol_Efx(EFX_ARPIE, efx_Arpie->outvolume);
                 }
                 break;
 
-            case 25:
+            case EFX_EXPANDER:
                 if (Expander_Bypass)
                 {
                     efx_Expander->out(efxoutl, efxoutr);
@@ -1625,63 +1625,63 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 26:
+            case EFX_SHUFFLE:
                 if (Shuffle_Bypass)
                 {
                     efx_Shuffle->out(efxoutl, efxoutr);
-                    Vol_Efx(26, efx_Shuffle->outvolume);
+                    Vol_Efx(EFX_SHUFFLE, efx_Shuffle->outvolume);
                 }
                 break;
 
-            case 27:
+            case EFX_SYNTHFILTER:
                 if (Synthfilter_Bypass)
                 {
                     efx_Synthfilter->out(efxoutl, efxoutr);
-                    Vol_Efx(27, efx_Synthfilter->outvolume);
+                    Vol_Efx(EFX_SYNTHFILTER, efx_Synthfilter->outvolume);
                 }
                 break;
 
-            case 28:
+            case EFX_VARYBAND:
                 if (VaryBand_Bypass)
                 {
                     efx_VaryBand->out(efxoutl, efxoutr);
-                    Vol_Efx(28, efx_VaryBand->outvolume);
+                    Vol_Efx(EFX_VARYBAND, efx_VaryBand->outvolume);
                 }
                 break;
 
-            case 29:
+            case EFX_CONVOLOTRON:
                 if (Convol_Bypass)
                 {
                     efx_Convol->out(efxoutl, efxoutr);
-                    Vol_Efx(29, efx_Convol->outvolume);
+                    Vol_Efx(EFX_CONVOLOTRON, efx_Convol->outvolume);
                 }
                 break;
 
-            case 30:
+            case EFX_LOOPER:
                 if (Looper_Bypass)
                 {
                     efx_Looper->out(efxoutl, efxoutr);
-                    Vol_Efx(30, efx_Looper->outvolume);
+                    Vol_Efx(EFX_LOOPER, efx_Looper->outvolume);
                 }
                 break;
 
-            case 31:
+            case EFX_MUTROMOJO:
                 if (MuTroMojo_Bypass)
                 {
                     efx_MuTroMojo->out(efxoutl, efxoutr);
-                    Vol_Efx(31, efx_MuTroMojo->outvolume);
+                    Vol_Efx(EFX_MUTROMOJO, efx_MuTroMojo->outvolume);
                 }
                 break;
 
-            case 32:
+            case EFX_ECHOVERSE:
                 if (Echoverse_Bypass)
                 {
                     efx_Echoverse->out(efxoutl, efxoutr);
-                    Vol_Efx(32, efx_Echoverse->outvolume);
+                    Vol_Efx(EFX_ECHOVERSE, efx_Echoverse->outvolume);
                 }
                 break;
 
-            case 33:
+            case EFX_COILCRAFTER:
                 if (CoilCrafter_Bypass)
                 {
                     efx_CoilCrafter->out(efxoutl, efxoutr);
@@ -1689,7 +1689,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 34:
+            case EFX_SHELFBOOST:
                 if (ShelfBoost_Bypass)
                 {
                     efx_ShelfBoost->out(efxoutl, efxoutr);
@@ -1697,15 +1697,15 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 35:
+            case EFX_VOCODER:
                 if (Vocoder_Bypass)
                 {
                     efx_Vocoder->out(efxoutl, efxoutr);
-                    Vol_Efx(35, efx_Vocoder->outvolume);
+                    Vol_Efx(EFX_VOCODER, efx_Vocoder->outvolume);
                 }
                 break;
 
-            case 36:
+            case EFX_SUSTAINER:
                 if (Sustainer_Bypass)
                 {
                     efx_Sustainer->out(efxoutl, efxoutr);
@@ -1713,23 +1713,23 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 37:
+            case EFX_SEQUENCE:
                 if (Sequence_Bypass)
                 {
                     efx_Sequence->out(efxoutl, efxoutr);
-                    Vol_Efx(37, efx_Sequence->outvolume);
+                    Vol_Efx(EFX_SEQUENCE, efx_Sequence->outvolume);
                 }
                 break;
 
-            case 38:
+            case EFX_SHIFTER:
                 if (Shifter_Bypass)
                 {
                     efx_Shifter->out(efxoutl, efxoutr);
-                    Vol_Efx(38, efx_Shifter->outvolume);
+                    Vol_Efx(EFX_SHIFTER, efx_Shifter->outvolume);
                 }
                 break;
 
-            case 39:
+            case EFX_STOMPBOX:
                 if (StompBox_Bypass)
                 {
                     efx_StompBox->out(efxoutl, efxoutr);
@@ -1737,39 +1737,39 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 40:
+            case EFX_REVERBTRON:
                 if (Reverbtron_Bypass)
                 {
                     efx_Reverbtron->out(efxoutl, efxoutr);
-                    Vol_Efx(40, efx_Reverbtron->outvolume);
+                    Vol_Efx(EFX_REVERBTRON, efx_Reverbtron->outvolume);
                 }
                 break;
 
-            case 41:
+            case EFX_ECHOTRON:
                 if (Echotron_Bypass)
                 {
                     efx_Echotron->out(efxoutl, efxoutr);
-                    Vol_Efx(41, efx_Echotron->outvolume);
+                    Vol_Efx(EFX_ECHOTRON, efx_Echotron->outvolume);
                 }
                 break;
 
-            case 42:
+            case EFX_STEREOHARM:
                 if (StereoHarm_Bypass)
                 {
                     efx_StereoHarm->out(efxoutl, efxoutr);
-                    Vol_Efx(42, efx_StereoHarm->outvolume);
+                    Vol_Efx(EFX_STEREOHARM, efx_StereoHarm->outvolume);
                 }
                 break;
 
-            case 43:
+            case EFX_COMPBAND:
                 if (CompBand_Bypass)
                 {
                     efx_CompBand->out(efxoutl, efxoutr);
-                    Vol_Efx(43, efx_CompBand->outvolume);
+                    Vol_Efx(EFX_COMPBAND, efx_CompBand->outvolume);
                 }
                 break;
 
-            case 44:
+            case EFX_OPTICALTREM:
                 if (Opticaltrem_Bypass)
                 {
                     efx_Opticaltrem->out(efxoutl, efxoutr);
@@ -1777,19 +1777,19 @@ RKR::Alg(float *origl, float *origr, void *)
                 }
                 break;
 
-            case 45:
+            case EFX_VIBE:
                 if (Vibe_Bypass)
                 {
                     efx_Vibe->out(efxoutl, efxoutr);
-                    Vol_Efx(45, efx_Vibe->outvolume);
+                    Vol_Efx(EFX_VIBE, efx_Vibe->outvolume);
                 }
                 break;
 
-            case 46:
+            case EFX_INFINITY:
                 if (Infinity_Bypass)
                 {
                     efx_Infinity->out(efxoutl, efxoutr);
-                    Vol_Efx(46, efx_Infinity->outvolume);
+                    Vol_Efx(EFX_INFINITY, efx_Infinity->outvolume);
                 }
             }
         }
