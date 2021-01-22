@@ -141,162 +141,141 @@ void RKR::putbuf(char *buf, int j)
     switch (j)
     {
 
-    case 8:
-        //Reverb
+    case EFX_REVERB:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[0][0], &lv[0][1], &lv[0][2], &lv[0][3], &lv[0][4],
                &lv[0][5], &lv[0][6], &lv[0][7], &lv[0][8], &lv[0][9],
                &lv[0][10], &lv[0][11], &Reverb_B);
         break;
 
-    case 4:
-        //Echo
+    case EFX_ECHO:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[1][0], &lv[1][1], &lv[1][2], &lv[1][3], &lv[1][4],
                &lv[1][5], &lv[1][6], &lv[1][7], &lv[1][8], &Echo_B);
         break;
 
-    case 5:
-        //Chorus
+    case EFX_CHORUS:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[2][0], &lv[2][1], &lv[2][2], &lv[2][3], &lv[2][4],
                &lv[2][5], &lv[2][6], &lv[2][7], &lv[2][8], &lv[2][9],
                &lv[2][10], &lv[2][11], &lv[2][12], &Chorus_B);
         break;
 
-    case 7:
-        //Flanger
+    case EFX_FLANGER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[3][0], &lv[3][1], &lv[3][2], &lv[3][3], &lv[3][4],
                &lv[3][5], &lv[3][6], &lv[3][7], &lv[3][8], &lv[3][9],
                &lv[3][10], &lv[3][11], &lv[3][12], &Flanger_B);
         break;
 
-    case 6:
-        //Phaser
+    case EFX_PHASER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[4][0], &lv[4][1], &lv[4][2], &lv[4][3], &lv[4][4],
                &lv[4][5], &lv[4][6], &lv[4][7], &lv[4][8], &lv[4][9],
                &lv[4][10], &lv[4][11], &Phaser_B);
         break;
 
-    case 3:
-        //Overdrive
+    case EFX_OVERDRIVE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[5][0], &lv[5][1], &lv[5][2], &lv[5][3], &lv[5][4],
                &lv[5][5], &lv[5][6], &lv[5][7], &lv[5][8], &lv[5][9],
                &lv[5][10], &lv[5][11], &lv[5][12], &Overdrive_B);
         break;
 
-    case 2:
-        //Distorsion
+    case EFX_DISTORTION:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[6][0], &lv[6][1], &lv[6][2], &lv[6][3], &lv[6][4],
                &lv[6][5], &lv[6][6], &lv[6][7], &lv[6][8], &lv[6][9],
                &lv[6][10], &lv[6][11], &lv[6][12], &Distorsion_B);
         break;
 
-    case 0:
-        //EQ1
+    case EFX_EQ:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[7][0], &lv[7][1], &lv[7][2], &lv[7][3], &lv[7][4],
                &lv[7][5], &lv[7][6], &lv[7][7], &lv[7][8], &lv[7][9],
                &lv[7][10], &lv[7][11], &EQ1_B);
         break;
 
-    case 9:
-        //EQ2
+    case EFX_PARAMETRIC:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[8][0], &lv[8][1], &lv[8][2], &lv[8][3], &lv[8][4],
                &lv[8][5], &lv[8][6], &lv[8][7], &lv[8][8], &lv[8][9],
                &EQ2_B);
         break;
 
-    case 1:
-        //Compressor
+    case EFX_COMPRESSOR:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[9][0], &lv[9][1], &lv[9][2], &lv[9][3], &lv[9][4],
                &lv[9][5], &lv[9][6], &lv[9][7], &lv[9][8], &Compressor_B);
         break;
 
-    case 10:
-        //WahWah
+    case EFX_WAHWAH:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[11][0], &lv[11][1], &lv[11][2], &lv[11][3], &lv[11][4],
                &lv[11][5], &lv[11][6], &lv[11][7], &lv[11][8], &lv[11][9],
                &lv[11][10], &WahWah_B);
         break;
 
-    case 11:
-        //Alienwah
+    case EFX_ALIENWAH:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[12][0], &lv[12][1], &lv[12][2], &lv[12][3], &lv[12][4],
                &lv[12][5], &lv[12][6], &lv[12][7], &lv[12][8], &lv[12][9],
                &lv[12][10], &Alienwah_B);
         break;
 
-    case 12:
-        //Cabinet
+    case EFX_CABINET:
         sscanf(buf, "%d,%d,%d\n", &lv[13][0], &lv[13][1], &Cabinet_B);
         break;
 
-    case 13:
-        //Pan
+    case EFX_PAN:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[14][0], &lv[14][1], &lv[14][2], &lv[14][3], &lv[14][4],
                &lv[14][5], &lv[14][6], &lv[14][7], &lv[14][8], &Pan_B);
         break;
 
-    case 14:
-        //Harmonizer
+    case EFX_HARMONIZER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[15][0], &lv[15][1], &lv[15][2], &lv[15][3], &lv[15][4],
                &lv[15][5], &lv[15][6], &lv[15][7], &lv[15][8], &lv[15][9],
                &lv[15][10], &Harmonizer_B);
         break;
 
-    case 15:
-        //Musical Delay
+    case EFX_MUSICAL_DELAY:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[16][0], &lv[16][1], &lv[16][2], &lv[16][3], &lv[16][4],
                &lv[16][5], &lv[16][6], &lv[16][7], &lv[16][8], &lv[16][9],
                &lv[16][10], &lv[16][11], &lv[16][12], &MusDelay_B);
         break;
 
-    case 16:
-        //NoiseGate
+    case EFX_NOISEGATE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[17][0], &lv[17][1], &lv[17][2], &lv[17][3], &lv[17][4],
                &lv[17][5], &lv[17][6], &Gate_B);
 
         break;
 
-    case 17:
-        //Derelict
+    case EFX_DERELICT:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[18][0], &lv[18][1], &lv[18][2], &lv[18][3], &lv[18][4],
                &lv[18][5], &lv[18][6], &lv[18][7], &lv[18][8], &lv[18][9],
                &lv[18][10], &lv[18][11], &Derelict_B);
         break;
 
-    case 18:
-        //Analog Phaser
+    case EFX_ANALOG_PHASER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[19][0], &lv[19][1], &lv[19][2], &lv[19][3], &lv[19][4],
                &lv[19][5], &lv[19][6], &lv[19][7], &lv[19][8], &lv[19][9],
                &lv[19][10], &lv[19][11], &APhaser_B);
         break;
 
-    case 19:
-        //Valve
+    case EFX_VALVE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[20][0], &lv[20][1], &lv[20][2], &lv[20][3], &lv[20][4],
                &lv[20][5], &lv[20][6], &lv[20][7], &lv[20][8], &lv[20][9],
                &lv[20][10], &lv[20][11], &lv[20][12], &Valve_B);
         break;
 
-    case 20:
-        //Dual Flnage
+    case EFX_DUAL_FLANGE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[21][0], &lv[21][1], &lv[21][2], &lv[21][3], &lv[21][4],
                &lv[21][5], &lv[21][6], &lv[21][7], &lv[21][8], &lv[21][9],
@@ -304,24 +283,21 @@ void RKR::putbuf(char *buf, int j)
                &DFlange_B);
         break;
 
-    case 21:
-        //Ring
+    case EFX_RING:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[22][0], &lv[22][1], &lv[22][2], &lv[22][3], &lv[22][4],
                &lv[22][5], &lv[22][6], &lv[22][7], &lv[22][8], &lv[22][9],
                &lv[22][10], &lv[22][11], &lv[22][12], &Ring_B);
         break;
 
-    case 22:
-        //Exciter
+    case EFX_EXCITER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[23][0], &lv[23][1], &lv[23][2], &lv[23][3], &lv[23][4],
                &lv[23][5], &lv[23][6], &lv[23][7], &lv[23][8], &lv[23][9],
                &lv[23][10], &lv[23][11], &lv[23][12], &Exciter_B);
         break;
 
-    case 23:
-        //DistBand
+    case EFX_DISTBAND:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[24][0], &lv[24][1], &lv[24][2], &lv[24][3], &lv[24][4],
                &lv[24][5], &lv[24][6], &lv[24][7], &lv[24][8], &lv[24][9],
@@ -329,32 +305,28 @@ void RKR::putbuf(char *buf, int j)
                &DistBand_B);
         break;
 
-    case 24:
-        //Arpie
+    case EFX_ARPIE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[25][0], &lv[25][1], &lv[25][2], &lv[25][3], &lv[25][4],
                &lv[25][5], &lv[25][6], &lv[25][7], &lv[25][8], &lv[25][9],
                &lv[25][10], &Arpie_B);
         break;
 
-    case 25:
-        //Expander
+    case EFX_EXPANDER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[26][0], &lv[26][1], &lv[26][2], &lv[26][3], &lv[26][4],
                &lv[26][5], &lv[26][6], &Expander_B);
 
         break;
 
-    case 26:
-        //Shuffle
+    case EFX_SHUFFLE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[27][0], &lv[27][1], &lv[27][2], &lv[27][3], &lv[27][4],
                &lv[27][5], &lv[27][6], &lv[27][7], &lv[27][8], &lv[27][9],
                &lv[27][10], &Shuffle_B);
         break;
 
-    case 27:
-        //Synthfilter
+    case EFX_SYNTHFILTER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[28][0], &lv[28][1], &lv[28][2], &lv[28][3], &lv[28][4],
                &lv[28][5], &lv[28][6], &lv[28][7], &lv[28][8], &lv[28][9],
@@ -362,16 +334,14 @@ void RKR::putbuf(char *buf, int j)
                &lv[28][15], &Synthfilter_B);
         break;
 
-    case 28:
-        //VaryBand
+    case EFX_VARYBAND:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[29][0], &lv[29][1], &lv[29][2], &lv[29][3], &lv[29][4],
                &lv[29][5], &lv[29][6], &lv[29][7], &lv[29][8], &lv[29][9],
                &lv[29][10], &VaryBand_B);
         break;
 
-    case 29:
-        //Convolotron
+    case EFX_CONVOLOTRON:
         memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
         memset(cfilename, 0, sizeof (char) * 128);
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
@@ -381,16 +351,14 @@ void RKR::putbuf(char *buf, int j)
         strcpy(efx_Convol->Filename, cfilename);
         break;
 
-    case 30:
-        //Looper
+    case EFX_LOOPER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[31][0], &lv[31][1], &lv[31][2], &lv[31][3], &lv[31][4],
                &lv[31][5], &lv[31][6], &lv[31][7], &lv[31][8], &lv[31][9],
                &lv[31][10], &lv[31][11], &lv[31][12], &lv[31][13], &Looper_B);
         break;
 
-    case 31:
-        //MuTroMojo
+    case EFX_MUTROMOJO:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[32][0], &lv[32][1], &lv[32][2], &lv[32][3], &lv[32][4],
                &lv[32][5], &lv[32][6], &lv[32][7], &lv[32][8], &lv[32][9],
@@ -398,65 +366,55 @@ void RKR::putbuf(char *buf, int j)
                &lv[32][15], &lv[32][16], &lv[32][17], &MuTroMojo_B);
         break;
 
-    case 32:
-        //Echoverse
+    case EFX_ECHOVERSE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[33][0], &lv[33][1], &lv[33][2], &lv[33][3], &lv[33][4],
                &lv[33][5], &lv[33][6], &lv[33][7], &lv[33][8], &lv[33][9], &Echoverse_B);
         break;
 
-
-    case 33:
-        //CoilCrafter
+    case EFX_COILCRAFTER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[34][0], &lv[34][1], &lv[34][2], &lv[34][3], &lv[34][4],
                &lv[34][5], &lv[34][6], &lv[34][7], &lv[34][8], &CoilCrafter_B);
         break;
 
-    case 34:
-        //ShelfBoost
+    case EFX_SHELFBOOST:
         sscanf(buf, "%d,%d,%d,%d,%d,%d\n",
                &lv[35][0], &lv[35][1], &lv[35][2], &lv[35][3], &lv[35][4],
                &ShelfBoost_B);
         break;
 
-    case 35:
-        //Vocoder
+    case EFX_VOCODER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[36][0], &lv[36][1], &lv[36][2], &lv[36][3], &lv[36][4],
                &lv[36][5], &lv[36][6], &Vocoder_B);
         break;
 
-    case 36:
-        //Sustainer
+    case EFX_SUSTAINER:
         sscanf(buf, "%d,%d,%d\n",
                &lv[37][0], &lv[37][1], &Sustainer_B);
         break;
 
-    case 37:
-        //Sequence
+    case EFX_SEQUENCE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[38][0], &lv[38][1], &lv[38][2], &lv[38][3], &lv[38][4],
                &lv[38][5], &lv[38][6], &lv[38][7], &lv[38][8], &lv[38][9],
                &lv[38][10], &lv[38][11], &lv[38][12], &lv[38][13], &lv[38][14], &Sequence_B);
         break;
 
-    case 38:
-        //Shifter
+    case EFX_SHIFTER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[39][0], &lv[39][1], &lv[39][2], &lv[39][3], &lv[39][4],
                &lv[39][5], &lv[39][6], &lv[39][7], &lv[39][8], &lv[39][9], &Shifter_B);
         break;
 
-    case 39:
-        //StompBox
+    case EFX_STOMPBOX:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
                &lv[40][0], &lv[40][1], &lv[40][2], &lv[40][3], &lv[40][4],
                &lv[40][5], &StompBox_B);
         break;
 
-    case 40:
-        //Reverbtron
+    case EFX_REVERBTRON:
         memset(efx_Reverbtron->Filename, 0, sizeof (efx_Reverbtron->Filename));
         memset(cfilename, 0, sizeof (char) * 128);
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
@@ -468,8 +426,7 @@ void RKR::putbuf(char *buf, int j)
         strcpy(efx_Reverbtron->Filename, cfilename);
         break;
 
-    case 41:
-        //Echotron
+    case EFX_ECHOTRON:
         memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
         memset(cfilename, 0, sizeof (char) * 128);
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
@@ -481,39 +438,34 @@ void RKR::putbuf(char *buf, int j)
         strcpy(efx_Echotron->Filename, cfilename);
         break;
 
-    case 42:
-        //StereoHarm
+    case EFX_STEREOHARM:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[43][0], &lv[43][1], &lv[43][2], &lv[43][3], &lv[43][4],
                &lv[43][5], &lv[43][6], &lv[43][7], &lv[43][8], &lv[43][9],
                &lv[43][10], &lv[43][11], &StereoHarm_B);
         break;
 
-    case 43:
-        //CompBand
+    case EFX_COMPBAND:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[44][0], &lv[44][1], &lv[44][2], &lv[44][3], &lv[44][4],
                &lv[44][5], &lv[44][6], &lv[44][7], &lv[44][8], &lv[44][9],
                &lv[44][10], &lv[44][11], &lv[44][12], &CompBand_B);
         break;
 
-    case 44:
-        //Opticaltrem
+    case EFX_OPTICALTREM:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
                &lv[45][0], &lv[45][1], &lv[45][2], &lv[45][3], &lv[45][4],
                &lv[45][5], &Opticaltrem_B);
         break;
 
-    case 45:
-        //Vibe
+    case EFX_VIBE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[46][0], &lv[46][1], &lv[46][2], &lv[46][3], &lv[46][4],
                &lv[46][5], &lv[46][6], &lv[46][7], &lv[46][8], &lv[46][9], &lv[46][10],
                &Vibe_B);
         break;
 
-    case 46:
-        //Infinity
+    case EFX_INFINITY:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[47][0], &lv[47][1], &lv[47][2], &lv[47][3], &lv[47][4],
                &lv[47][5], &lv[47][6], &lv[47][7], &lv[47][8], &lv[47][9],
@@ -538,8 +490,7 @@ void RKR::getbuf(char *buf, int j)
 {
     switch (j)
     {
-    case 8:
-        //Reverb
+    case EFX_REVERB:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Rev->getpar(Reverb_DryWet), efx_Rev->getpar(Reverb_Pan),
                 efx_Rev->getpar(Reverb_Time), efx_Rev->getpar(Reverb_I_Delay),
@@ -549,8 +500,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Rev->getpar(Reverb_Type), efx_Rev->getpar(Reverb_Room), Reverb_Bypass);
         break;
 
-    case 4:
-        //Echo
+    case EFX_ECHO:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Echo->getpar(Echo_DryWet), efx_Echo->getpar(Echo_Pan),
                 efx_Echo->getpar(Echo_Delay), efx_Echo->getpar(Echo_LR_Delay),
@@ -559,8 +509,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Echo->getpar(Echo_Direct), Echo_Bypass);
         break;
 
-    case 5:
-        //Chorus
+    case EFX_CHORUS:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Chorus->getpar(Chorus_DryWet), efx_Chorus->getpar(Chorus_Pan),
                 efx_Chorus->getpar(Chorus_LFO_Tempo), efx_Chorus->getpar(Chorus_LFO_Random),
@@ -571,8 +520,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Chorus->getpar(Chorus_Intense), Chorus_Bypass);
         break;
 
-    case 7:
-        //Flanger
+    case EFX_FLANGER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Flanger->getpar(Flanger_DryWet), efx_Flanger->getpar(Flanger_Pan),
                 efx_Flanger->getpar(Flanger_LFO_Tempo), efx_Flanger->getpar(Flanger_LFO_Random),
@@ -583,8 +531,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Flanger->getpar(Flanger_Intense), Flanger_Bypass);
         break;
 
-    case 6:
-        //Phaser
+    case EFX_PHASER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Phaser->getpar(Phaser_DryWet), efx_Phaser->getpar(Phaser_Pan),
                 efx_Phaser->getpar(Phaser_LFO_Tempo), efx_Phaser->getpar(Phaser_LFO_Random),
@@ -595,8 +542,7 @@ void RKR::getbuf(char *buf, int j)
                 Phaser_Bypass);
         break;
 
-    case 3:
-        //Overdrive
+    case EFX_OVERDRIVE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Overdrive->getpar(Overdrive_DryWet), efx_Overdrive->getpar(Overdrive_Pan),
                 efx_Overdrive->getpar(Overdrive_LR_Cross), efx_Overdrive->getpar(Overdrive_Drive),
@@ -607,8 +553,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Overdrive->getpar(Overdrive_Suboctave), Overdrive_Bypass);
         break;
 
-    case 2:
-        //Distorsion
+    case EFX_DISTORTION:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Distorsion->getpar(Dist_DryWet), efx_Distorsion->getpar(Dist_Pan),
                 efx_Distorsion->getpar(Dist_LR_Cross), efx_Distorsion->getpar(Dist_Drive),
@@ -619,8 +564,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Distorsion->getpar(Dist_Suboctave), Distorsion_Bypass);
         break;
 
-    case 0:
-        //EQ1
+    case EFX_EQ:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_EQ1->getpar(EQ_31_HZ), efx_EQ1->getpar(EQ_63_HZ),
                 efx_EQ1->getpar(EQ_125_HZ), efx_EQ1->getpar(EQ_250_HZ),
@@ -630,8 +574,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_EQ1->getpar(EQ_Gain), efx_EQ1->getpar(EQ_Q), EQ1_Bypass);
         break;
 
-    case 9:
-        //EQ2
+    case EFX_PARAMETRIC:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_EQ2->getpar(Parametric_Low_Freq), efx_EQ2->getpar(Parametric_Low_Gain),
                 efx_EQ2->getpar(Parametric_Low_Q), efx_EQ2->getpar(Parametric_Mid_Freq),
@@ -641,8 +584,7 @@ void RKR::getbuf(char *buf, int j)
                 EQ2_Bypass);
         break;
 
-    case 1:
-        // Compressor
+    case EFX_COMPRESSOR:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Compressor->getpar(Compress_Threshold), efx_Compressor->getpar(Compress_Ratio),
                 efx_Compressor->getpar(Compress_Output), efx_Compressor->getpar(Compress_Attack),
@@ -652,8 +594,7 @@ void RKR::getbuf(char *buf, int j)
         break;
 
 
-    case 10:
-        //WahWah
+    case EFX_WAHWAH:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_WahWah->getpar(WahWah_DryWet), efx_WahWah->getpar(WahWah_Pan),
                 efx_WahWah->getpar(WahWah_LFO_Tempo), efx_WahWah->getpar(WahWah_LFO_Random),
@@ -663,8 +604,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_WahWah->getpar(WahWah_Mode), WahWah_Bypass);
         break;
 
-    case 11:
-        //Alienwah
+    case EFX_ALIENWAH:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Alienwah->getpar(Alien_DryWet), efx_Alienwah->getpar(Alien_Pan),
                 efx_Alienwah->getpar(Alien_LFO_Tempo), efx_Alienwah->getpar(Alien_LFO_Random),
@@ -674,14 +614,12 @@ void RKR::getbuf(char *buf, int j)
                 efx_Alienwah->getpar(Alien_Phase), Alienwah_Bypass);
         break;
 
-    case 12:
-        //Cabinet
+    case EFX_CABINET:
         sprintf(buf, "%d,%d,%d\n",
                 efx_Cabinet->Cabinet_Preset, efx_Cabinet->getpar(Cabinet_Gain), Cabinet_Bypass);
         break;
 
-    case 13:
-        //Pan
+    case EFX_PAN:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Pan->getpar(Pan_DryWet), efx_Pan->getpar(Pan_Pan),
                 efx_Pan->getpar(Pan_LFO_Tempo), efx_Pan->getpar(Pan_LFO_Random),
@@ -690,8 +628,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Pan->getpar(Pan_Enable_Extra), Pan_Bypass);
         break;
 
-    case 14:
-        //Harmonizer
+    case EFX_HARMONIZER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Har->getpar(Harm_DryWet), efx_Har->getpar(Harm_Pan),
                 efx_Har->getpar(Harm_Gain), efx_Har->getpar(Harm_Interval),
@@ -701,8 +638,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Har->getpar(Harm_MIDI), Harmonizer_Bypass);
         break;
 
-    case 15:
-        //MusicalDelay
+    case EFX_MUSICAL_DELAY:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_MusDelay->getpar(Music_DryWet), efx_MusDelay->getpar(Music_Pan_1),
                 efx_MusDelay->getpar(Music_Delay_1), efx_MusDelay->getpar(Music_Del_Offset),
@@ -713,8 +649,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_MusDelay->getpar(Music_Gain_2), MusDelay_Bypass);
         break;
 
-    case 16:
-        //NoiseGate
+    case EFX_NOISEGATE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Gate->getpar(Gate_Threshold), efx_Gate->getpar(Gate_Range),
                 efx_Gate->getpar(Gate_Attack), efx_Gate->getpar(Gate_Release),
@@ -722,8 +657,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Gate->getpar(Gate_Hold), Gate_Bypass);
         break;
 
-    case 17:
-        //Derelict
+    case EFX_DERELICT:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Derelict->getpar(Dere_DryWet), efx_Derelict->getpar(Dere_Pan),
                 efx_Derelict->getpar(Dere_LR_Cross), efx_Derelict->getpar(Dere_Drive),
@@ -734,8 +668,7 @@ void RKR::getbuf(char *buf, int j)
                 Derelict_Bypass);
         break;
 
-    case 18:
-        //Analog Phaser
+    case EFX_ANALOG_PHASER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_APhaser->getpar(APhase_DryWet), efx_APhaser->getpar(APhase_Distortion),
                 efx_APhaser->getpar(APhase_LFO_Tempo), efx_APhaser->getpar(APhase_LFO_Random),
@@ -746,8 +679,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_APhaser->getpar(APhase_Hyper), APhaser_Bypass);
         break;
 
-    case 19:
-        //Valve
+    case EFX_VALVE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Valve->getpar(Valve_DryWet), efx_Valve->getpar(Valve_Pan),
                 efx_Valve->getpar(Valve_LR_Cross), efx_Valve->getpar(Valve_Drive),
@@ -758,8 +690,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Valve->getpar(Valve_Presence), Valve_Bypass);
         break;
 
-    case 20:
-        //Dual_Flange
+    case EFX_DUAL_FLANGE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_DFlange->getpar(DFlange_DryWet), efx_DFlange->getpar(DFlange_Pan),
                 efx_DFlange->getpar(DFlange_LR_Cross), efx_DFlange->getpar(DFlange_Depth),
@@ -771,8 +702,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_DFlange->getpar(DFlange_Intense), DFlange_Bypass);
         break;
 
-    case 21:
-        //Ring
+    case EFX_RING:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Ring->getpar(Ring_DryWet), efx_Ring->getpar(Ring_Pan),
                 efx_Ring->getpar(Ring_LR_Cross), efx_Ring->getpar(Ring_Level),
@@ -783,8 +713,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Ring->getpar(Ring_Auto_Freq), Ring_Bypass);
         break;
 
-    case 22:
-        //Exciter
+    case EFX_EXCITER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Exciter->getpar(Exciter_Gain), efx_Exciter->getpar(Exciter_Harm_1),
                 efx_Exciter->getpar(Exciter_Harm_2), efx_Exciter->getpar(Exciter_Harm_3),
@@ -795,8 +724,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Exciter->getpar(Exciter_HPF), Exciter_Bypass);
         break;
 
-    case 23:
-        //DistBand
+    case EFX_DISTBAND:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_DistBand->getpar(DistBand_DryWet), efx_DistBand->getpar(DistBand_Pan),
                 efx_DistBand->getpar(DistBand_LR_Cross), efx_DistBand->getpar(DistBand_Drive),
@@ -808,8 +736,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_DistBand->getpar(DistBand_Stereo), DistBand_Bypass);
         break;
 
-    case 24:
-        //Arpie
+    case EFX_ARPIE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Arpie->getpar(Arpie_DryWet), efx_Arpie->getpar(Arpie_Pan),
                 efx_Arpie->getpar(Arpie_Tempo), efx_Arpie->getpar(Arpie_LR_Delay),
@@ -819,8 +746,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Arpie->getpar(Arpie_Subdivision), Arpie_Bypass);
         break;
 
-    case 25:
-        //Expander
+    case EFX_EXPANDER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Expander->getpar(Expander_Threshold), efx_Expander->getpar(Expander_Shape),
                 efx_Expander->getpar(Expander_Attack), efx_Expander->getpar(Expander_Release),
@@ -828,8 +754,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Expander->getpar(Expander_Gain), Expander_Bypass);
         break;
 
-    case 26:
-        //Shuffle
+    case EFX_SHUFFLE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Shuffle->getpar(Shuffle_DryWet), efx_Shuffle->getpar(Shuffle_Gain_L),
                 efx_Shuffle->getpar(Shuffle_Gain_ML), efx_Shuffle->getpar(Shuffle_Gain_MH),
@@ -839,8 +764,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Shuffle->getpar(Shuffle_F_Band), Shuffle_Bypass);
         break;
 
-    case 27:
-        //Synthfilter
+    case EFX_SYNTHFILTER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Synthfilter->getpar(Synthfilter_DryWet), efx_Synthfilter->getpar(Synthfilter_Distort),
                 efx_Synthfilter->getpar(Synthfilter_LFO_Tempo), efx_Synthfilter->getpar(Synthfilter_LFO_Random),
@@ -853,8 +777,7 @@ void RKR::getbuf(char *buf, int j)
                 Synthfilter_Bypass);
         break;
 
-    case 28:
-        //VaryBand
+    case EFX_VARYBAND:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_VaryBand->getpar(VaryBand_DryWet), efx_VaryBand->getpar(VaryBand_LFO_Tempo_1),
                 efx_VaryBand->getpar(VaryBand_LFO_Type_1), efx_VaryBand->getpar(VaryBand_LFO_Stereo_1),
@@ -864,8 +787,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_VaryBand->getpar(VaryBand_Combination), VaryBand_Bypass);
         break;
 
-    case 29:
-        //Convolotron
+    case EFX_CONVOLOTRON:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
                 efx_Convol->getpar(Convo_DryWet), efx_Convol->getpar(Convo_Pan),
                 efx_Convol->getpar(Convo_Safe), efx_Convol->getpar(Convo_Length),
@@ -875,8 +797,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Convol->getpar(Convo_Feedback), Convol_Bypass, efx_Convol->Filename);
         break;
 
-    case 30:
-        //Looper
+    case EFX_LOOPER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Looper->getpar(Looper_DryWet), efx_Looper->getpar(Looper_Play),
                 efx_Looper->getpar(Looper_Stop), efx_Looper->getpar(Looper_Record),
@@ -887,8 +808,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Looper->getpar(Looper_Rec_2), efx_Looper->getpar(Looper_Link), Looper_Bypass);
         break;
 
-    case 31:
-        //MuTroMojo
+    case EFX_MUTROMOJO:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_MuTroMojo->getpar(MuTro_DryWet), efx_MuTroMojo->getpar(MuTro_Resonance),
                 efx_MuTroMojo->getpar(MuTro_LFO_Tempo), efx_MuTroMojo->getpar(MuTro_LFO_Random),
@@ -902,8 +822,8 @@ void RKR::getbuf(char *buf, int j)
                 efx_MuTroMojo->getpar(Mutro_Preset), MuTroMojo_Bypass);
 
         break;
-    case 32:
-        //Echoverse
+
+    case EFX_ECHOVERSE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Echoverse->getpar(Echoverse_DryWet), efx_Echoverse->getpar(Echoverse_Pan),
                 efx_Echoverse->getpar(Echoverse_Tempo), efx_Echoverse->getpar(Echoverse_LR_Delay),
@@ -913,10 +833,7 @@ void RKR::getbuf(char *buf, int j)
                 Echoverse_Bypass);
         break;
 
-
-
-    case 33:
-        //CoilCrafter
+    case EFX_COILCRAFTER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_CoilCrafter->getpar(Coil_Gain), efx_CoilCrafter->getpar(Coil_Origin),
                 efx_CoilCrafter->getpar(Coil_Destiny), efx_CoilCrafter->getpar(Coil_Freq_1),
@@ -925,16 +842,14 @@ void RKR::getbuf(char *buf, int j)
                 efx_CoilCrafter->getpar(Coil_NeckMode), CoilCrafter_Bypass);
         break;
 
-    case 34:
-        //ShelfBoost
+    case EFX_SHELFBOOST:
         sprintf(buf, "%d,%d,%d,%d,%d,%d\n",
                 efx_ShelfBoost->getpar(Shelf_Gain), efx_ShelfBoost->getpar(Shelf_Presence),
                 efx_ShelfBoost->getpar(Shelf_Tone), efx_ShelfBoost->getpar(Shelf_Stereo),
                 efx_ShelfBoost->getpar(Shelf_Level), ShelfBoost_Bypass);
         break;
 
-    case 35:
-        //Vocoder
+    case EFX_VOCODER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Vocoder->getpar(Vocoder_DryWet), efx_Vocoder->getpar(Vocoder_Pan),
                 efx_Vocoder->getpar(Vocoder_Smear), efx_Vocoder->getpar(Vocoder_Q),
@@ -942,15 +857,13 @@ void RKR::getbuf(char *buf, int j)
                 efx_Vocoder->getpar(Vocoder_Ring), Vocoder_Bypass);
         break;
 
-    case 36:
-        //Sustainer
+    case EFX_SUSTAINER:
         sprintf(buf, "%d,%d,%d\n",
                 efx_Sustainer->getpar(Sustain_Gain), efx_Sustainer->getpar(Sustain_Sustain),
                 Sustainer_Bypass);
         break;
 
-    case 37:
-        //Sequence
+    case EFX_SEQUENCE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Sequence->getpar(Sequence_Step_1), efx_Sequence->getpar(Sequence_Step_2),
                 efx_Sequence->getpar(Sequence_Step_3), efx_Sequence->getpar(Sequence_Step_4),
@@ -962,8 +875,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Sequence->getpar(Sequence_Range), Sequence_Bypass);
         break;
 
-    case 38:
-        //Shifter
+    case EFX_SHIFTER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Shifter->getpar(Shifter_DryWet), efx_Shifter->getpar(Shifter_Pan),
                 efx_Shifter->getpar(Shifter_Gain), efx_Shifter->getpar(Shifter_Attack),
@@ -973,8 +885,7 @@ void RKR::getbuf(char *buf, int j)
         break;
 
 
-    case 39:
-        //StompBox
+    case EFX_STOMPBOX:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
                 efx_StompBox->getpar(Stomp_Level), efx_StompBox->getpar(Stomp_Tone),
                 efx_StompBox->getpar(Stomp_Mid), efx_StompBox->getpar(Stomp_Bias),
@@ -982,8 +893,7 @@ void RKR::getbuf(char *buf, int j)
                 StompBox_Bypass);
         break;
 
-    case 40:
-        //Reverbtron
+    case EFX_REVERBTRON:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
                 efx_Reverbtron->getpar(Revtron_DryWet), efx_Reverbtron->getpar(Revtron_Fade),
                 efx_Reverbtron->getpar(Revtron_Safe), efx_Reverbtron->getpar(Revtron_Length),
@@ -996,8 +906,7 @@ void RKR::getbuf(char *buf, int j)
                 Reverbtron_Bypass, efx_Reverbtron->Filename);
         break;
 
-    case 41:
-        //Echotron
+    case EFX_ECHOTRON:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
                 efx_Echotron->getpar(Echotron_DryWet), efx_Echotron->getpar(Echotron_Depth),
                 efx_Echotron->getpar(Echotron_LFO_Width), efx_Echotron->getpar(Echotron_Taps),
@@ -1009,8 +918,8 @@ void RKR::getbuf(char *buf, int j)
                 efx_Echotron->getpar(Echotron_LFO_Type), efx_Echotron->getpar(Echotron_Filters),
                 Echotron_Bypass, efx_Echotron->Filename);
         break;
-    case 42:
-        //StereoHarm
+
+    case EFX_STEREOHARM:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_StereoHarm->getpar(Sharm_DryWet), efx_StereoHarm->getpar(Sharm_L_Gain),
                 efx_StereoHarm->getpar(Sharm_L_Interval), efx_StereoHarm->getpar(Sharm_L_Chroma),
@@ -1021,8 +930,7 @@ void RKR::getbuf(char *buf, int j)
                 StereoHarm_Bypass);
         break;
 
-    case 43:
-        //CompBand
+    case EFX_COMPBAND:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_CompBand->getpar(CompBand_DryWet), efx_CompBand->getpar(CompBand_Low_Ratio),
                 efx_CompBand->getpar(CompBand_Mid_1_Ratio), efx_CompBand->getpar(CompBand_Mid_2_Ratio),
@@ -1033,8 +941,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_CompBand->getpar(CompBand_Gain), CompBand_Bypass);
         break;
 
-    case 44:
-        //Opticaltrem
+    case EFX_OPTICALTREM:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Opticaltrem->getpar(Optical_Depth), efx_Opticaltrem->getpar(Optical_LFO_Tempo),
                 efx_Opticaltrem->getpar(Optical_LFO_Random), efx_Opticaltrem->getpar(Optical_LFO_Type),
@@ -1043,8 +950,7 @@ void RKR::getbuf(char *buf, int j)
         break;
 
 
-    case 45:
-        //Vibe
+    case EFX_VIBE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Vibe->getpar(Vibe_Width), efx_Vibe->getpar(Vibe_LFO_Tempo),
                 efx_Vibe->getpar(Vibe_LFO_Random), efx_Vibe->getpar(Vibe_LFO_Type),
@@ -1054,8 +960,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Vibe->getpar(Vibe_Stereo), Vibe_Bypass);
         break;
 
-    case 46:
-        //Infinity
+    case EFX_INFINITY:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 efx_Infinity->getpar(Infinity_DryWet), efx_Infinity->getpar(Infinity_Band_1),
                 efx_Infinity->getpar(Infinity_Band_2), efx_Infinity->getpar(Infinity_Band_3),
@@ -1381,7 +1286,7 @@ RKR::Actualizar_Audio()
         switch (j)
         {
 
-        case 0: //EQ1
+        case EFX_EQ:
             EQ1_Bypass = 0;
             efx_EQ1->cleanup();
             for (i = 0; i < 10; i++)
@@ -1393,7 +1298,7 @@ RKR::Actualizar_Audio()
             EQ1_Bypass = EQ1_B;
             break;
 
-        case 1:// Compressor
+        case EFX_COMPRESSOR:
             Compressor_Bypass = 0;
             efx_Compressor->cleanup();
             for (i = 0; i < C_COMPRESS_PARAMETERS; i++)
@@ -1401,8 +1306,7 @@ RKR::Actualizar_Audio()
             Compressor_Bypass = Compressor_B;
             break;
 
-        case 2://Distortion
-
+        case EFX_DISTORTION:
             Distorsion_Bypass = 0;
             efx_Distorsion->cleanup();
             for (i = 0; i < C_DIST_PARAMETERS; i++)
@@ -1410,8 +1314,7 @@ RKR::Actualizar_Audio()
             Distorsion_Bypass = Distorsion_B;
             break;
 
-        case 3://Overdrive
-
+        case EFX_OVERDRIVE:
             Overdrive_Bypass = 0;
             efx_Overdrive->cleanup();
             for (i = 0; i < C_OVERDRIVE_PARAMETERS; i++)
@@ -1419,8 +1322,7 @@ RKR::Actualizar_Audio()
             Overdrive_Bypass = Overdrive_B;
             break;
 
-        case 4://Echo
-
+        case EFX_ECHO:
             Echo_Bypass = 0;
             efx_Echo->cleanup();
             for (i = 0; i < C_ECHO_PARAMETERS; i++)
@@ -1428,8 +1330,7 @@ RKR::Actualizar_Audio()
             Echo_Bypass = Echo_B;
             break;
 
-        case 5://Chorus
-
+        case EFX_CHORUS:
             Chorus_Bypass = 0;
             efx_Chorus->cleanup();
             for (i = 0; i < C_CHORUS_PARAMETERS; i++)
@@ -1437,8 +1338,7 @@ RKR::Actualizar_Audio()
             Chorus_Bypass = Chorus_B;
             break;
 
-        case 6://Phaser
-
+        case EFX_PHASER:
             Phaser_Bypass = 0;
             efx_Phaser->cleanup();
             for (i = 0; i < C_PHASER_PARAMETERS; i++)
@@ -1446,8 +1346,7 @@ RKR::Actualizar_Audio()
             Phaser_Bypass = Phaser_B;
             break;
 
-        case 7://Flanger
-
+        case EFX_FLANGER:
             Flanger_Bypass = 0;
             efx_Flanger->cleanup();
             for (i = 0; i < C_FLANGER_PARAMETERS; i++)
@@ -1455,8 +1354,7 @@ RKR::Actualizar_Audio()
             Flanger_Bypass = Flanger_B;
             break;
 
-        case 8://Reverb
-
+        case EFX_REVERB:
             Reverb_Bypass = 0;
             efx_Rev->cleanup();
             for (i = 0; i < C_REVERB_PARAMETERS; i++)
@@ -1464,8 +1362,7 @@ RKR::Actualizar_Audio()
             Reverb_Bypass = Reverb_B;
             break;
 
-        case 9://EQ2
-
+        case EFX_PARAMETRIC:
             EQ2_Bypass = 0;
             efx_EQ2->cleanup();
             for (i = 0; i < 3; i++)
@@ -1478,8 +1375,7 @@ RKR::Actualizar_Audio()
             EQ2_Bypass = EQ2_B;
             break;
 
-        case 10://WahWah
-
+        case EFX_WAHWAH:
             WahWah_Bypass = 0;
             efx_WahWah->cleanup();
             for (i = 0; i < C_WAHWAH_PARAMETERS; i++)
@@ -1487,8 +1383,7 @@ RKR::Actualizar_Audio()
             WahWah_Bypass = WahWah_B;
             break;
 
-        case 11://Alienwah
-
+        case EFX_ALIENWAH:
             Alienwah_Bypass = 0;
             efx_Alienwah->cleanup();
             for (i = 0; i < C_ALIENWAH_PARAMETERS; i++)
@@ -1496,8 +1391,7 @@ RKR::Actualizar_Audio()
             Alienwah_Bypass = Alienwah_B;
             break;
 
-        case 12://Cabinet
-
+        case EFX_CABINET:
             Cabinet_Bypass = 0;
             efx_Cabinet->cleanup();
             efx_Cabinet->setpreset(lv[13][0]);
@@ -1505,8 +1399,7 @@ RKR::Actualizar_Audio()
             Cabinet_Bypass = Cabinet_B;
             break;
 
-        case 13://Pan
-
+        case EFX_PAN:
             Pan_Bypass = 0;
             efx_Pan->cleanup();
             for (i = 0; i < C_PAN_PARAMETERS; i++)
@@ -1514,8 +1407,7 @@ RKR::Actualizar_Audio()
             Pan_Bypass = Pan_B;
             break;
 
-        case 14://Harmonizer
-
+        case EFX_HARMONIZER:
             Harmonizer_Bypass = 0;
             efx_Har->cleanup();
             for (i = 0; i < C_HARM_PARAMETERS; i++)
@@ -1523,8 +1415,7 @@ RKR::Actualizar_Audio()
             Harmonizer_Bypass = Harmonizer_B;
             break;
 
-        case 15://MusDelay
-
+        case EFX_MUSICAL_DELAY:
             MusDelay_Bypass = 0;
             efx_MusDelay->cleanup();
             for (i = 0; i < C_MUSIC_PARAMETERS; i++)
@@ -1532,8 +1423,7 @@ RKR::Actualizar_Audio()
             MusDelay_Bypass = MusDelay_B;
             break;
 
-        case 16://Gate
-
+        case EFX_NOISEGATE:
             Gate_Bypass = 0;
             efx_Gate->cleanup();
             for (i = 0; i < C_GATE_PARAMETERS; i++)
@@ -1541,8 +1431,7 @@ RKR::Actualizar_Audio()
             Gate_Bypass = Gate_B;
             break;
 
-        case 17://Derelict
-
+        case EFX_DERELICT:
             Derelict_Bypass = 0;
             efx_Derelict->cleanup();
             for (i = 0; i < C_DERE_PARAMETERS; i++)
@@ -1550,8 +1439,7 @@ RKR::Actualizar_Audio()
             Derelict_Bypass = Derelict_B;
             break;
 
-        case 18://APhaser
-
+        case EFX_ANALOG_PHASER:
             APhaser_Bypass = 0;
             efx_APhaser->cleanup();
             for (i = 0; i < C_APHASER_PARAMETERS; i++)
@@ -1559,8 +1447,7 @@ RKR::Actualizar_Audio()
             APhaser_Bypass = APhaser_B;
             break;
 
-        case 19://Valve
-
+        case EFX_VALVE:
             Valve_Bypass = 0;
             efx_Valve->cleanup();
             for (i = 0; i < C_VALVE_PARAMETERS; i++)
@@ -1568,8 +1455,7 @@ RKR::Actualizar_Audio()
             Valve_Bypass = Valve_B;
             break;
 
-        case 20://DFlange
-
+        case EFX_DUAL_FLANGE:
             DFlange_Bypass = 0;
             efx_DFlange->cleanup();
             for (i = 0; i < C_DFLANGE_PARAMETERS; i++)
@@ -1577,8 +1463,7 @@ RKR::Actualizar_Audio()
             DFlange_Bypass = DFlange_B;
             break;
 
-        case 21://Ring
-
+        case EFX_RING:
             Ring_Bypass = 0;
             efx_Ring->cleanup();
             for (i = 0; i < C_RING_PARAMETERS; i++)
@@ -1586,8 +1471,7 @@ RKR::Actualizar_Audio()
             Ring_Bypass = Ring_B;
             break;
 
-        case 22://Exciter
-
+        case EFX_EXCITER:
             Exciter_Bypass = 0;
             efx_Exciter->cleanup();
             for (i = 0; i < C_EXCITER_PARAMETERS; i++)
@@ -1595,8 +1479,7 @@ RKR::Actualizar_Audio()
             Exciter_Bypass = Exciter_B;
             break;
 
-        case 23://DistBand
-
+        case EFX_DISTBAND:
             DistBand_Bypass = 0;
             efx_DistBand->cleanup();
             for (i = 0; i < C_DBAND_PARAMETERS; i++)
@@ -1604,8 +1487,7 @@ RKR::Actualizar_Audio()
             DistBand_Bypass = DistBand_B;
             break;
 
-        case 24://Arpie
-
+        case EFX_ARPIE:
             Arpie_Bypass = 0;
             efx_Arpie->cleanup();
             for (i = 0; i < C_ARPIE_PARAMETERS; i++)
@@ -1613,8 +1495,7 @@ RKR::Actualizar_Audio()
             Arpie_Bypass = Arpie_B;
             break;
 
-        case 25://Expander
-
+        case EFX_EXPANDER:
             Expander_Bypass = 0;
             efx_Expander->cleanup();
             for (i = 0; i < C_EXPANDER_PARAMETERS; i++)
@@ -1622,8 +1503,7 @@ RKR::Actualizar_Audio()
             Expander_Bypass = Expander_B;
             break;
 
-        case 26://Shuffle
-
+        case EFX_SHUFFLE:
             Shuffle_Bypass = 0;
             efx_Shuffle->cleanup();
             for (i = 0; i < C_SHUFFLE_PARAMETERS; i++)
@@ -1631,8 +1511,7 @@ RKR::Actualizar_Audio()
             Shuffle_Bypass = Shuffle_B;
             break;
 
-        case 27://Synthfilter
-
+        case EFX_SYNTHFILTER:
             Synthfilter_Bypass = 0;
             efx_Synthfilter->cleanup();
             for (i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
@@ -1640,8 +1519,7 @@ RKR::Actualizar_Audio()
             Synthfilter_Bypass = Synthfilter_B;
             break;
 
-        case 28://VaryBand
-
+        case EFX_VARYBAND:
             VaryBand_Bypass = 0;
             efx_VaryBand->cleanup();
             for (i = 0; i < C_VARYBAND_PARAMETERS; i++)
@@ -1649,8 +1527,7 @@ RKR::Actualizar_Audio()
             VaryBand_Bypass = VaryBand_B;
             break;
 
-        case 29://Convolotron
-
+        case EFX_CONVOLOTRON:
             Convol_Bypass = 0;
             efx_Convol->cleanup();
             for (i = 0; i < C_CONVO_PARAMETERS; i++)
@@ -1658,8 +1535,7 @@ RKR::Actualizar_Audio()
             Convol_Bypass = Convol_B;
             break;
 
-        case 30://Looper
-
+        case EFX_LOOPER:
             Looper_Bypass = 0;
             // efx_Looper->cleanup();
             for (i = 0; i < C_LOOPER_PARAMETERS; i++)
@@ -1667,8 +1543,7 @@ RKR::Actualizar_Audio()
             Looper_Bypass = Looper_B;
             break;
 
-        case 31://MuTroMojo
-
+        case EFX_MUTROMOJO:
             MuTroMojo_Bypass = 0;
             efx_MuTroMojo->cleanup();
             for (i = 0; i < C_MUTRO_PARAMETERS; i++)
@@ -1676,8 +1551,7 @@ RKR::Actualizar_Audio()
             MuTroMojo_Bypass = MuTroMojo_B;
             break;
 
-        case 32://Echoverse
-
+        case EFX_ECHOVERSE:
             Echoverse_Bypass = 0;
             efx_Echoverse->cleanup();
             for (i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
@@ -1685,8 +1559,7 @@ RKR::Actualizar_Audio()
             Echoverse_Bypass = Echoverse_B;
             break;
 
-        case 33://CoilCrafter
-
+        case EFX_COILCRAFTER:
             CoilCrafter_Bypass = 0;
             efx_CoilCrafter->cleanup();
             for (i = 0; i < C_COIL_PARAMETERS; i++)
@@ -1694,8 +1567,7 @@ RKR::Actualizar_Audio()
             CoilCrafter_Bypass = CoilCrafter_B;
             break;
 
-        case 34://ShelfBoost
-
+        case EFX_SHELFBOOST:
             ShelfBoost_Bypass = 0;
             efx_ShelfBoost->cleanup();
             for (i = 0; i < C_SHELF_PARAMETERS; i++)
@@ -1703,8 +1575,7 @@ RKR::Actualizar_Audio()
             ShelfBoost_Bypass = ShelfBoost_B;
             break;
 
-        case 35://Vocoder
-
+        case EFX_VOCODER:
             Vocoder_Bypass = 0;
             efx_Vocoder->cleanup();
             for (i = 0; i < C_VOCODER_PARAMETERS; i++)
@@ -1712,8 +1583,7 @@ RKR::Actualizar_Audio()
             Vocoder_Bypass = Vocoder_B;
             break;
 
-        case 36://Sustainer
-
+        case EFX_SUSTAINER:
             Sustainer_Bypass = 0;
             efx_Sustainer->cleanup();
             for (i = 0; i < C_SUSTAIN_PARAMETERS; i++)
@@ -1721,8 +1591,7 @@ RKR::Actualizar_Audio()
             Sustainer_Bypass = Sustainer_B;
             break;
 
-        case 37://Sequence
-
+        case EFX_SEQUENCE:
             Sequence_Bypass = 0;
             efx_Sequence->cleanup();
             for (i = 0; i < C_SEQUENCE_PARAMETERS; i++)
@@ -1730,8 +1599,7 @@ RKR::Actualizar_Audio()
             Sequence_Bypass = Sequence_B;
             break;
 
-        case 38://Shifter
-
+        case EFX_SHIFTER:
             Shifter_Bypass = 0;
             efx_Shifter->cleanup();
             for (i = 0; i < C_SHIFTER_PARAMETERS; i++)
@@ -1739,8 +1607,7 @@ RKR::Actualizar_Audio()
             Shifter_Bypass = Shifter_B;
             break;
 
-        case 39://StompBox
-
+        case EFX_STOMPBOX:
             StompBox_Bypass = 0;
             efx_StompBox->cleanup();
             for (i = 0; i < C_STOMP_PARAMETERS; i++)
@@ -1748,8 +1615,7 @@ RKR::Actualizar_Audio()
             StompBox_Bypass = StompBox_B;
             break;
 
-        case 40://Reverbtron
-
+        case EFX_REVERBTRON:
             Reverbtron_Bypass = 0;
             efx_Reverbtron->cleanup();
             for (i = 0; i < C_REVTRON_PARAMETERS; i++)
@@ -1757,8 +1623,7 @@ RKR::Actualizar_Audio()
             Reverbtron_Bypass = Reverbtron_B;
             break;
 
-        case 41://Echotron
-
+        case EFX_ECHOTRON:
             Echotron_Bypass = 0;
             efx_Echotron->cleanup();
             for (i = 0; i < C_ECHOTRON_PARAMETERS; i++)
@@ -1766,8 +1631,7 @@ RKR::Actualizar_Audio()
             Echotron_Bypass = Echotron_B;
             break;
 
-        case 42://StereoHarm
-
+        case EFX_STEREOHARM:
             StereoHarm_Bypass = 0;
             efx_StereoHarm->cleanup();
             for (i = 0; i < C_SHARM_PARAMETERS; i++)
@@ -1776,8 +1640,7 @@ RKR::Actualizar_Audio()
             StereoHarm_Bypass = StereoHarm_B;
             break;
 
-        case 43://CompBand
-
+        case EFX_COMPBAND:
             CompBand_Bypass = 0;
             efx_CompBand->cleanup();
             for (i = 0; i < C_COMPBAND_PARAMETERS; i++)
@@ -1785,8 +1648,7 @@ RKR::Actualizar_Audio()
             CompBand_Bypass = CompBand_B;
             break;
 
-        case 44://OpticalTrem
-
+        case EFX_OPTICALTREM:
             Opticaltrem_Bypass = 0;
             efx_Opticaltrem->cleanup();
             for (i = 0; i < C_OPTICAL_PARAMETERS; i++)
@@ -1794,8 +1656,7 @@ RKR::Actualizar_Audio()
             Opticaltrem_Bypass = Opticaltrem_B;
             break;
 
-        case 45://Vibe
-
+        case EFX_VIBE:
             Vibe_Bypass = 0;
             efx_Vibe->cleanup();
             for (i = 0; i < C_VIBE_PARAMETERS; i++)
@@ -1803,8 +1664,7 @@ RKR::Actualizar_Audio()
             Vibe_Bypass = Vibe_B;
             break;
 
-        case 46://Infinity
-
+        case EFX_INFINITY:
             Infinity_Bypass = 0;
             efx_Infinity->cleanup();
             for (i = 0; i < C_INFINITY_PARAMETERS; i++)

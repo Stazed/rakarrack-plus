@@ -1357,239 +1357,239 @@ void RKRGUI::Put_Loaded()
         switch (i)
         {
 
-            case 0: //EQ1
+            case EFX_EQ:
                 EQ->eq_activar->value(rkr->EQ1_Bypass);
                 EQ->eq_preset->do_callback(EQ->eq_preset, 1);
                 break;
 
-            case 1://Compressor
+            case EFX_COMPRESSOR:
                 COMPRESS->compress_activar->value(rkr->Compressor_Bypass);
                 COMPRESS->compress_preset->do_callback(COMPRESS->compress_preset, 1);
                 break;
 
-            case 2://Distorsion
+            case EFX_DISTORTION:
                 DIST->dist_activar->value(rkr->Distorsion_Bypass);
                 DIST->dist_preset->do_callback(DIST->dist_preset, 1);
                 break;
 
-            case 3://Overdrive
+            case EFX_OVERDRIVE:
                 OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
                 OVRD->ovrd_preset->do_callback(OVRD->ovrd_preset, 1);
                 break;
 
-            case 4://Echo
+            case EFX_ECHO:
                 ECHO->echo_activar->value(rkr->Echo_Bypass);
                 ECHO->echo_preset->do_callback(ECHO->echo_preset, 1);
                 break;
 
-            case 5://Chorus
+            case EFX_CHORUS:
                 CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
                 CHORUS->chorus_preset->do_callback(CHORUS->chorus_preset, 1);
                 break;
 
-            case 6://Phaser
+            case EFX_PHASER:
                 PHASER->phaser_activar->value(rkr->Phaser_Bypass);
                 PHASER->phaser_preset->do_callback(PHASER->phaser_preset, 1);
                 break;
 
-            case 7://Flanger
+            case EFX_FLANGER:
                 FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
                 FLANGER->flanger_preset->do_callback(FLANGER->flanger_preset, 1);
                 break;
 
-            case 8://Reverb
+            case EFX_REVERB:
                 REVERB->reverb_activar->value(rkr->Reverb_Bypass);
                 REVERB->reverb_preset->do_callback(REVERB->reverb_preset, 1);
                 break;
 
-            case 9://EQ2
+            case EFX_PARAMETRIC:
                 PEQ->eqp_activar->value(rkr->EQ2_Bypass);
                 PEQ->eqp_preset->do_callback(PEQ->eqp_preset, 1);
                 break;
 
-            case 10://WahWah
+            case EFX_WAHWAH:
                 WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
                 WAHWAH->WahWah_preset->do_callback(WAHWAH->WahWah_preset, 1);
                 break;
 
-            case 11://AlienWah
+            case EFX_ALIENWAH:
                 ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
                 ALIENWAH->Alienwah_preset->do_callback(ALIENWAH->Alienwah_preset, 1);
                 break;
 
-            case 12://Cabinet
+            case EFX_CABINET:
                 CABINET->Cabinet_output->value(rkr->lv[13][1] - 64);
                 CABINET->Cabinet_preset->value(rkr->lv[13][0]);
                 CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
                 break;
 
-            case 13://Pan
+            case EFX_PAN:
                 PAN->pan_activar->value(rkr->Pan_Bypass);
                 PAN->pan_preset->do_callback(PAN->pan_preset, 1);
                 break;
 
-            case 14://Har
+            case EFX_HARMONIZER:
                 HAR->har_activar->value(rkr->Harmonizer_Bypass);
                 HAR->har_preset->do_callback(HAR->har_preset, 1);
                 break;
 
-            case 15://MsicalDelay
+            case EFX_MUSICAL_DELAY:
                 MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
                 MUSDELAY->musdelay_preset->do_callback(MUSDELAY->musdelay_preset, 1);
                 break;
 
-            case 16://NoiseGate
+            case EFX_NOISEGATE:
                 GATE->gate_activar->value(rkr->Gate_Bypass);
                 GATE->gate_preset->do_callback(GATE->gate_preset, 1);
                 break;
 
-            case 17://Derelict
+            case EFX_DERELICT:
                 DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
                 DERELICT->derelict_preset->do_callback(DERELICT->derelict_preset, 1);
                 break;
 
-            case 18://APhaser
+            case EFX_ANALOG_PHASER:
                 APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
                 APHASER->aphaser_preset->do_callback(APHASER->aphaser_preset, 1);
                 break;
 
-            case 19://Valve
+            case EFX_VALVE:
                 VALVE->valve_activar->value(rkr->Valve_Bypass);
                 VALVE->valve_preset->do_callback(VALVE->valve_preset, 1);
                 break;
 
-            case 20://Dual_Flange
+            case EFX_DUAL_FLANGE:
                 DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
                 DFLANGE->dflange_preset->do_callback(DFLANGE->dflange_preset, 1);
                 break;
 
-            case 21:// Ring
+            case EFX_RING:
                 RING->ring_activar->value(rkr->Ring_Bypass);
                 RING->ring_preset->do_callback(RING->ring_preset, 1);
                 break;
 
-            case 22:// Exciter
+            case EFX_EXCITER:
                 EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
                 EXCITER->exciter_preset->do_callback(EXCITER->exciter_preset, 1);
                 break;
 
-            case 23://DistBand
+            case EFX_DISTBAND:
                 DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
                 DISTBAND->distband_preset->do_callback(DISTBAND->distband_preset, 1);
                 break;
 
-            case 24://Arpie
+            case EFX_ARPIE:
                 ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
                 ARPIE->arpie_preset->do_callback(ARPIE->arpie_preset, 1);
                 break;
 
-            case 25://Expander
+            case EFX_EXPANDER:
                 EXPANDER->expander_activar->value(rkr->Expander_Bypass);
                 EXPANDER->expander_preset->do_callback(EXPANDER->expander_preset, 1);
                 break;
 
-            case 26://Shuffle
+            case EFX_SHUFFLE:
                 SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
                 SHUFFLE->shuffle_preset->do_callback(SHUFFLE->shuffle_preset, 1);
                 break;
 
-            case 27://Synthfilter
+            case EFX_SYNTHFILTER:
                 SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
                 SYNTHFILTER->synthfilter_preset->do_callback(SYNTHFILTER->synthfilter_preset, 1);
                 break;
 
-            case 28://VaryBand
+            case EFX_VARYBAND:
                 VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
                 VARYBAND->varyband_preset->do_callback(VARYBAND->varyband_preset, 1);
                 break;
 
-            case 29://Convolotron
+            case EFX_CONVOLOTRON:
                 CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
                 CONVOLOTRON->convo_preset->do_callback(CONVOLOTRON->convo_preset, 1);
                 break;
 
-            case 30://Looper
+            case EFX_LOOPER:
                 LOOPER->looper_activar->value(rkr->Looper_Bypass);
                 LOOPER->looper_preset->do_callback(LOOPER->looper_preset, 1);
                 update_looper();
                 break;
 
-            case 31://MuTroMojo
+            case EFX_MUTROMOJO:
                 MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
                 MUTROMOJO->mutromojo_preset->do_callback(MUTROMOJO->mutromojo_preset, 1);
                 break;
 
-            case 32:// Echoverse
+            case EFX_ECHOVERSE:
                 ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
                 ECHOVERSE->echoverse_preset->do_callback(ECHOVERSE->echoverse_preset, 1);
                 break;
 
-            case 33:// CoilCrafter
+            case EFX_COILCRAFTER:
                 COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
                 COILCRAFTER->coil_preset->do_callback(COILCRAFTER->coil_preset, 1);
                 break;
 
-            case 34://ShelfBoost
+            case EFX_SHELFBOOST:
                 SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
                 SHELFBOOST->shelf_preset->do_callback(SHELFBOOST->shelf_preset, 1);
                 break;
 
-            case 35://Vocoder
+            case EFX_VOCODER:
                 VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
                 VOCODER->vo_preset->do_callback(VOCODER->vo_preset, 1);
                 break;
 
-            case 36://Sustainer
+            case EFX_SUSTAINER:
                 SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
                 SUSTAINER->sus_preset->do_callback(SUSTAINER->sus_preset, 1);
                 break;
 
-            case 37://Sequence
+            case EFX_SEQUENCE:
                 SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
                 SEQUENCE->seq_preset->do_callback(SEQUENCE->seq_preset, 1);
                 break;
 
-            case 38://Shifter
+            case EFX_SHIFTER:
                 SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
                 SHIFTER->shifter_preset->do_callback(SHIFTER->shifter_preset, 1);
                 break;
 
-            case 39://StompBox
+            case EFX_STOMPBOX:
                 STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
                 STOMPBOX->stomp_preset->do_callback(STOMPBOX->stomp_preset, 1);
                 break;
 
-            case 40://Reverbtron
+            case EFX_REVERBTRON:
                 REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
                 REVERBTRON->revtron_preset->do_callback(REVERBTRON->revtron_preset, 1);
                 break;
 
-            case 41://Echotron
+            case EFX_ECHOTRON:
                 ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
                 ECHOTRON->echotron_preset->do_callback(ECHOTRON->echotron_preset, 1);
                 break;
 
-            case 42://StereoHarm
+            case EFX_STEREOHARM:
                 SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
                 SHAR->shar_preset->do_callback(SHAR->shar_preset, 1);
                 break;
 
-            case 43://CompBand
+            case EFX_COMPBAND:
                 COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
                 COMPBAND->cband_preset->do_callback(COMPBAND->cband_preset, 1);
                 break;
 
-            case 44://Opticaltrem
+            case EFX_OPTICALTREM:
                 OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
                 OTREM->otrem_preset->do_callback(OTREM->otrem_preset, 1);
                 break;
 
-            case 45://Vibe
+            case EFX_VIBE:
                 VIBE->vibe_activar->value(rkr->Vibe_Bypass);
                 VIBE->vibe_preset->do_callback(VIBE->vibe_preset, 1);
                 break;
 
-            case 46://Infinity
+            case EFX_INFINITY:
                 INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
                 INFINIT->infinity_preset->do_callback(INFINIT->infinity_preset, 1);
                 break;
@@ -1775,8 +1775,7 @@ void RKRGUI::reordena()
         switch (rkr->efx_order[i])
         {
 
-            case 0:
-
+            case EFX_EQ:
                 EQ->position(x[i], y[i]);
                 EQ->eq_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1791,8 +1790,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 1:
-
+            case EFX_COMPRESSOR:
                 COMPRESS->position(x[i], y[i]);
                 COMPRESS->compress_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1807,8 +1805,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 2:
-
+            case EFX_DISTORTION:
                 DIST->position(x[i], y[i]);
                 DIST->dist_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1823,8 +1820,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 3:
-
+            case EFX_OVERDRIVE:
                 OVRD->position(x[i], y[i]);
                 OVRD->ovrd_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1839,8 +1835,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 4:
-
+            case EFX_ECHO:
                 ECHO->position(x[i], y[i]);
                 ECHO->echo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1855,8 +1850,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 5:
-
+            case EFX_CHORUS:
                 CHORUS->position(x[i], y[i]);
                 CHORUS->chorus_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1871,8 +1865,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 6:
-
+            case EFX_PHASER:
                 PHASER->position(x[i], y[i]);
                 PHASER->phaser_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1887,8 +1880,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 7:
-
+            case EFX_FLANGER:
                 FLANGER->position(x[i], y[i]);
                 FLANGER->flanger_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1903,8 +1895,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 8:
-
+            case EFX_REVERB:
                 REVERB->position(x[i], y[i]);
                 REVERB->reverb_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1919,8 +1910,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 9:
-
+            case EFX_PARAMETRIC:
                 PEQ->position(x[i], y[i]);
                 PEQ->eqp_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1935,8 +1925,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 10:
-
+            case EFX_WAHWAH:
                 WAHWAH->position(x[i], y[i]);
                 WAHWAH->WahWah_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1951,8 +1940,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 11:
-
+            case EFX_ALIENWAH:
                 ALIENWAH->position(x[i], y[i]);
                 ALIENWAH->Alienwah_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1967,8 +1955,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 12:
-
+            case EFX_CABINET:
                 CABINET->position(x[i], y[i]);
                 CABINET->Cabinet_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1983,8 +1970,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 13:
-
+            case EFX_PAN:
                 PAN->position(x[i], y[i]);
                 PAN->pan_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -1999,7 +1985,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 14:
+            case EFX_HARMONIZER:
                 HAR->position(x[i], y[i]);
                 HAR->har_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2014,7 +2000,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 15:
+            case EFX_MUSICAL_DELAY:
                 MUSDELAY->position(x[i], y[i]);
                 MUSDELAY->musdelay_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2029,7 +2015,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 16:
+            case EFX_NOISEGATE:
                 GATE->position(x[i], y[i]);
                 GATE->gate_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2044,7 +2030,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 17:
+            case EFX_DERELICT:
                 DERELICT->position(x[i], y[i]);
                 DERELICT->derelict_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2059,7 +2045,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 18:
+            case EFX_ANALOG_PHASER:
                 APHASER->position(x[i], y[i]);
                 APHASER->aphaser_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2074,7 +2060,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 19:
+            case EFX_VALVE:
                 VALVE->position(x[i], y[i]);
                 VALVE->valve_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2089,7 +2075,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 20:
+            case EFX_DUAL_FLANGE:
                 DFLANGE->position(x[i], y[i]);
                 DFLANGE->dflange_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2104,7 +2090,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 21:
+            case EFX_RING:
                 RING->position(x[i], y[i]);
                 RING->ring_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2119,7 +2105,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 22:
+            case EFX_EXCITER:
                 EXCITER->position(x[i], y[i]);
                 EXCITER->exciter_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2134,7 +2120,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 23:
+            case EFX_DISTBAND:
                 DISTBAND->position(x[i], y[i]);
                 DISTBAND->distband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2149,7 +2135,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 24:
+            case EFX_ARPIE:
                 ARPIE->position(x[i], y[i]);
                 ARPIE->arpie_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2164,7 +2150,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 25:
+            case EFX_EXPANDER:
                 EXPANDER->position(x[i], y[i]);
                 EXPANDER->expander_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2179,7 +2165,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 26:
+            case EFX_SHUFFLE:
                 SHUFFLE->position(x[i], y[i]);
                 SHUFFLE->shuffle_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2194,7 +2180,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 27:
+            case EFX_SYNTHFILTER:
                 SYNTHFILTER->position(x[i], y[i]);
                 SYNTHFILTER->synthfilter_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2210,7 +2196,7 @@ void RKRGUI::reordena()
 
                 break;
 
-            case 28:
+            case EFX_VARYBAND:
                 VARYBAND->position(x[i], y[i]);
                 VARYBAND->varyband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2225,7 +2211,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 29:
+            case EFX_CONVOLOTRON:
                 CONVOLOTRON->position(x[i], y[i]);
                 CONVOLOTRON->convo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2240,7 +2226,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 30:
+            case EFX_LOOPER:
                 LOOPER->position(x[i], y[i]);
                 LOOPER->looper_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2255,7 +2241,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 31:
+            case EFX_MUTROMOJO:
                 MUTROMOJO->position(x[i], y[i]);
                 MUTROMOJO->mutromojo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2270,7 +2256,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 32:
+            case EFX_ECHOVERSE:
                 ECHOVERSE->position(x[i], y[i]);
                 ECHOVERSE->echoverse_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2285,7 +2271,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 33:
+            case EFX_COILCRAFTER:
                 COILCRAFTER->position(x[i], y[i]);
                 COILCRAFTER->coil_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2300,7 +2286,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 34:
+            case EFX_SHELFBOOST:
                 SHELFBOOST->position(x[i], y[i]);
                 SHELFBOOST->shelf_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2315,7 +2301,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 35:
+            case EFX_VOCODER:
                 VOCODER->position(x[i], y[i]);
                 VOCODER->vo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2330,7 +2316,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 36:
+            case EFX_SUSTAINER:
                 SUSTAINER->position(x[i], y[i]);
                 SUSTAINER->sus_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2345,7 +2331,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 37:
+            case EFX_SEQUENCE:
                 SEQUENCE->position(x[i], y[i]);
                 SEQUENCE->seq_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2360,7 +2346,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 38:
+            case EFX_SHIFTER:
                 SHIFTER->position(x[i], y[i]);
                 SHIFTER->shifter_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2375,7 +2361,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 39:
+            case EFX_STOMPBOX:
                 STOMPBOX->position(x[i], y[i]);
                 STOMPBOX->stomp_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2390,7 +2376,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 40:
+            case EFX_REVERBTRON:
                 REVERBTRON->position(x[i], y[i]);
                 REVERBTRON->revtron_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2405,7 +2391,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 41:
+            case EFX_ECHOTRON:
                 ECHOTRON->position(x[i], y[i]);
                 ECHOTRON->echotron_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2420,7 +2406,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 42:
+            case EFX_STEREOHARM:
                 SHAR->position(x[i], y[i]);
                 SHAR->shar_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2435,7 +2421,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 43:
+            case EFX_COMPBAND:
                 COMPBAND->position(x[i], y[i]);
                 COMPBAND->cband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2450,7 +2436,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 44:
+            case EFX_OPTICALTREM:
                 OTREM->position(x[i], y[i]);
                 OTREM->otrem_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2465,7 +2451,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 45:
+            case EFX_VIBE:
                 VIBE->position(x[i], y[i]);
                 VIBE->vibe_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -2480,7 +2466,7 @@ void RKRGUI::reordena()
                     rkr->active[i] = 0;
                 break;
 
-            case 46:
+            case EFX_INFINITY:
                 INFINIT->position(x[i], y[i]);
                 INFINIT->infinity_activar->shortcut(s[i]);
                 if (!rkr->deachide)
@@ -5076,191 +5062,191 @@ void RKRGUI::ActOnOff()
 
         switch (miralo)
         {
-            case 0:
+            case EFX_EQ:
                 EQ->eq_activar->value(rkr->EQ1_Bypass);
                 EQ->eq_activar->do_callback();
                 break;
-            case 1:
+            case EFX_COMPRESSOR:
                 COMPRESS->compress_activar->value(rkr->Compressor_Bypass);
                 COMPRESS->compress_activar->do_callback();
                 break;
-            case 2:
+            case EFX_DISTORTION:
                 DIST->dist_activar->value(rkr->Distorsion_Bypass);
                 DIST->dist_activar->do_callback();
                 break;
-            case 3:
+            case EFX_OVERDRIVE:
                 OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
                 OVRD->ovrd_activar->do_callback();
                 break;
-            case 4:
+            case EFX_ECHO:
                 ECHO->echo_activar->value(rkr->Echo_Bypass);
                 ECHO->echo_activar->do_callback();
                 break;
-            case 5:
+            case EFX_CHORUS:
                 CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
                 CHORUS->chorus_activar->do_callback();
                 break;
-            case 6:
+            case EFX_PHASER:
                 PHASER->phaser_activar->value(rkr->Phaser_Bypass);
                 PHASER->phaser_activar->do_callback();
                 break;
-            case 7:
+            case EFX_FLANGER:
                 FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
                 FLANGER->flanger_activar->do_callback();
                 break;
-            case 8:
+            case EFX_REVERB:
                 REVERB->reverb_activar->value(rkr->Reverb_Bypass);
                 REVERB->reverb_activar->do_callback();
                 break;
-            case 9:
+            case EFX_PARAMETRIC:
                 PEQ->eqp_activar->value(rkr->EQ2_Bypass);
                 PEQ->eqp_activar->do_callback();
                 break;
-            case 10:
+            case EFX_WAHWAH:
                 WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
                 WAHWAH->WahWah_activar->do_callback();
                 break;
-            case 11:
+            case EFX_ALIENWAH:
                 ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
                 ALIENWAH->Alienwah_activar->do_callback();
                 break;
-            case 12:
+            case EFX_CABINET:
                 CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
                 CABINET->Cabinet_activar->do_callback();
                 break;
-            case 13:
+            case EFX_PAN:
                 PAN->pan_activar->value(rkr->Pan_Bypass);
                 PAN->pan_activar->do_callback();
                 break;
-            case 14:
+            case EFX_HARMONIZER:
                 HAR->har_activar->value(rkr->Harmonizer_Bypass);
                 HAR->har_activar->do_callback();
                 break;
-            case 15:
+            case EFX_MUSICAL_DELAY:
                 MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
                 MUSDELAY->musdelay_activar->do_callback();
                 break;
-            case 16:
+            case EFX_NOISEGATE:
                 GATE->gate_activar->value(rkr->Gate_Bypass);
                 GATE->gate_activar->do_callback();
                 break;
-            case 17:
+            case EFX_DERELICT:
                 DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
                 DERELICT->derelict_activar->do_callback();
                 break;
-            case 18:
+            case EFX_ANALOG_PHASER:
                 APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
                 APHASER->aphaser_activar->do_callback();
                 break;
-            case 19:
+            case EFX_VALVE:
                 VALVE->valve_activar->value(rkr->Valve_Bypass);
                 VALVE->valve_activar->do_callback();
                 break;
-            case 20:
+            case EFX_DUAL_FLANGE:
                 DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
                 DFLANGE->dflange_activar->do_callback();
                 break;
-            case 21:
+            case EFX_RING:
                 RING->ring_activar->value(rkr->Ring_Bypass);
                 RING->ring_activar->do_callback();
                 break;
-            case 22:
+            case EFX_EXCITER:
                 EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
                 EXCITER->exciter_activar->do_callback();
                 break;
-            case 23:
+            case EFX_DISTBAND:
                 DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
                 DISTBAND->distband_activar->do_callback();
                 break;
-            case 24:
+            case EFX_ARPIE:
                 ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
                 ARPIE->arpie_activar->do_callback();
                 break;
-            case 25:
+            case EFX_EXPANDER:
                 EXPANDER->expander_activar->value(rkr->Expander_Bypass);
                 EXPANDER->expander_activar->do_callback();
                 break;
-            case 26:
+            case EFX_SHUFFLE:
                 SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
                 SHUFFLE->shuffle_activar->do_callback();
                 break;
-            case 27:
+            case EFX_SYNTHFILTER:
                 SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
                 SYNTHFILTER->synthfilter_activar->do_callback();
                 break;
-            case 28:
+            case EFX_VARYBAND:
                 VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
                 VARYBAND->varyband_activar->do_callback();
                 break;
-            case 29:
+            case EFX_CONVOLOTRON:
                 CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
                 CONVOLOTRON->convo_activar->do_callback();
                 break;
-            case 30:
+            case EFX_LOOPER:
                 LOOPER->looper_activar->value(rkr->Looper_Bypass);
                 LOOPER->looper_activar->do_callback();
                 break;
-            case 31:
+            case EFX_MUTROMOJO:
                 MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
                 MUTROMOJO->mutromojo_activar->do_callback();
                 break;
-            case 32:
+            case EFX_ECHOVERSE:
                 ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
                 ECHOVERSE->echoverse_activar->do_callback();
                 break;
-            case 33:
+            case EFX_COILCRAFTER:
                 COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
                 COILCRAFTER->coil_activar->do_callback();
                 break;
-            case 34:
+            case EFX_SHELFBOOST:
                 SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
                 SHELFBOOST->shelf_activar->do_callback();
                 break;
-            case 35:
+            case EFX_VOCODER:
                 VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
                 VOCODER->vo_activar->do_callback();
                 break;
-            case 36:
+            case EFX_SUSTAINER:
                 SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
                 SUSTAINER->sus_activar->do_callback();
                 break;
-            case 37:
+            case EFX_SEQUENCE:
                 SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
                 SEQUENCE->seq_activar->do_callback();
                 break;
-            case 38:
+            case EFX_SHIFTER:
                 SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
                 SHIFTER->shifter_activar->do_callback();
                 break;
-            case 39:
+            case EFX_STOMPBOX:
                 STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
                 STOMPBOX->stomp_activar->do_callback();
                 break;
-            case 40:
+            case EFX_REVERBTRON:
                 REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
                 REVERBTRON->revtron_activar->do_callback();
                 break;
-            case 41:
+            case EFX_ECHOTRON:
                 ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
                 ECHOTRON->echotron_activar->do_callback();
                 break;
-            case 42:
+            case EFX_STEREOHARM:
                 SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
                 SHAR->shar_activar->do_callback();
                 break;
-            case 43:
+            case EFX_COMPBAND:
                 COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
                 COMPBAND->cband_activar->do_callback();
                 break;
-            case 44:
+            case EFX_OPTICALTREM:
                 OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
                 OTREM->otrem_activar->do_callback();
                 break;
-            case 45:
+            case EFX_VIBE:
                 VIBE->vibe_activar->value(rkr->Vibe_Bypass);
                 VIBE->vibe_activar->do_callback();
                 break;
-            case 46:
+            case EFX_INFINITY:
                 INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
                 INFINIT->infinity_activar->do_callback();
                 break;
@@ -6866,7 +6852,7 @@ void RKRGUI::RandomPreset()
         switch (rkr->efx_order[i])
         {
 
-            case 0: //EQ1
+            case EFX_EQ:
                 if (i < numEff)
                     rkr->EQ1_Bypass = 1;
                 else
@@ -6874,7 +6860,7 @@ void RKRGUI::RandomPreset()
                 EQ->eq_activar->value(rkr->EQ1_Bypass);
                 break;
 
-            case 1://Compressor
+            case EFX_COMPRESSOR:
                 if (i < numEff)
                     rkr->Compressor_Bypass = 1;
                 else
@@ -6882,7 +6868,7 @@ void RKRGUI::RandomPreset()
                 COMPRESS->compress_activar->value(rkr->Compressor_Bypass);
                 break;
 
-            case 2://Distorsion
+            case EFX_DISTORTION:
                 if (i < numEff)
                     rkr->Distorsion_Bypass = 1;
                 else
@@ -6890,7 +6876,7 @@ void RKRGUI::RandomPreset()
                 DIST->dist_activar->value(rkr->Distorsion_Bypass);
                 break;
 
-            case 3://Overdrive
+            case EFX_OVERDRIVE:
                 if (i < numEff)
                     rkr->Overdrive_Bypass = 1;
                 else
@@ -6898,7 +6884,7 @@ void RKRGUI::RandomPreset()
                 OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
                 break;
 
-            case 4://Echo
+            case EFX_ECHO:
                 if (i < numEff)
                     rkr->Echo_Bypass = 1;
                 else
@@ -6906,7 +6892,7 @@ void RKRGUI::RandomPreset()
                 ECHO->echo_activar->value(rkr->Echo_Bypass);
                 break;
 
-            case 5://Chorus
+            case EFX_CHORUS:
                 if (i < numEff)
                     rkr->Chorus_Bypass = 1;
                 else
@@ -6914,7 +6900,7 @@ void RKRGUI::RandomPreset()
                 CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
                 break;
 
-            case 6://Phaser
+            case EFX_PHASER:
                 if (i < numEff)
                     rkr->Phaser_Bypass = 1;
                 else
@@ -6922,7 +6908,7 @@ void RKRGUI::RandomPreset()
                 PHASER->phaser_activar->value(rkr->Phaser_Bypass);
                 break;
 
-            case 7://Flanger
+            case EFX_FLANGER:
                 if (i < numEff)
                     rkr->Flanger_Bypass = 1;
                 else
@@ -6930,7 +6916,7 @@ void RKRGUI::RandomPreset()
                 FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
                 break;
 
-            case 8://Reverb
+            case EFX_REVERB:
                 if (i < numEff)
                     rkr->Reverb_Bypass = 1;
                 else
@@ -6938,7 +6924,7 @@ void RKRGUI::RandomPreset()
                 REVERB->reverb_activar->value(rkr->Reverb_Bypass);
                 break;
 
-            case 9://EQ2
+            case EFX_PARAMETRIC:
                 if (i < numEff)
                     rkr->EQ2_Bypass = 1;
                 else
@@ -6946,7 +6932,7 @@ void RKRGUI::RandomPreset()
                 PEQ->eqp_activar->value(rkr->EQ2_Bypass);
                 break;
 
-            case 10://WahWah
+            case EFX_WAHWAH:
                 if (i < numEff)
                     rkr->WahWah_Bypass = 1;
                 else
@@ -6954,7 +6940,7 @@ void RKRGUI::RandomPreset()
                 WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
                 break;
 
-            case 11://AlienWah
+            case EFX_ALIENWAH:
                 if (i < numEff)
                     rkr->Alienwah_Bypass = 1;
                 else
@@ -6962,7 +6948,7 @@ void RKRGUI::RandomPreset()
                 ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
                 break;
 
-            case 12://Cabinet
+            case EFX_CABINET:
                 if (i < numEff)
                     rkr->Cabinet_Bypass = 1;
                 else
@@ -6970,7 +6956,7 @@ void RKRGUI::RandomPreset()
                 CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
                 break;
 
-            case 13://Pan
+            case EFX_PAN:
                 if (i < numEff)
                     rkr->Pan_Bypass = 1;
                 else
@@ -6978,7 +6964,7 @@ void RKRGUI::RandomPreset()
                 PAN->pan_activar->value(rkr->Pan_Bypass);
                 break;
 
-            case 14://Har
+            case EFX_HARMONIZER:
                 if (i < numEff)
                     rkr->Harmonizer_Bypass = 1;
                 else
@@ -6986,7 +6972,7 @@ void RKRGUI::RandomPreset()
                 HAR->har_activar->value(rkr->Harmonizer_Bypass);
                 break;
 
-            case 15://MsicalDelay
+            case EFX_MUSICAL_DELAY:
                 if (i < numEff)
                     rkr->MusDelay_Bypass = 1;
                 else
@@ -6994,7 +6980,7 @@ void RKRGUI::RandomPreset()
                 MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
                 break;
 
-            case 16://NoiseGate
+            case EFX_NOISEGATE:
                 if (i < numEff)
                     rkr->Gate_Bypass = 1;
                 else
@@ -7002,7 +6988,7 @@ void RKRGUI::RandomPreset()
                 GATE->gate_activar->value(rkr->Gate_Bypass);
                 break;
 
-            case 17://Derelict
+            case EFX_DERELICT:
                 if (i < numEff)
                     rkr->Derelict_Bypass = 1;
                 else
@@ -7010,7 +6996,7 @@ void RKRGUI::RandomPreset()
                 DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
                 break;
 
-            case 18://APhaser
+            case EFX_ANALOG_PHASER:
                 if (i < numEff)
                     rkr->APhaser_Bypass = 1;
                 else
@@ -7018,7 +7004,7 @@ void RKRGUI::RandomPreset()
                 APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
                 break;
 
-            case 19://Valve
+            case EFX_VALVE:
                 if (i < numEff)
                     rkr->Valve_Bypass = 1;
                 else
@@ -7026,7 +7012,7 @@ void RKRGUI::RandomPreset()
                 VALVE->valve_activar->value(rkr->Valve_Bypass);
                 break;
 
-            case 20://Dual_Flange
+            case EFX_DUAL_FLANGE:
                 if (i < numEff)
                     rkr->DFlange_Bypass = 1;
                 else
@@ -7034,7 +7020,7 @@ void RKRGUI::RandomPreset()
                 DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
                 break;
 
-            case 21:// Ring
+            case EFX_RING:
                 if (i < numEff)
                     rkr->Ring_Bypass = 1;
                 else
@@ -7042,7 +7028,7 @@ void RKRGUI::RandomPreset()
                 RING->ring_activar->value(rkr->Ring_Bypass);
                 break;
 
-            case 22:// Exciter
+            case EFX_EXCITER:
                 if (i < numEff)
                     rkr->Exciter_Bypass = 1;
                 else
@@ -7050,7 +7036,7 @@ void RKRGUI::RandomPreset()
                 EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
                 break;
 
-            case 23://DistBand
+            case EFX_DISTBAND:
                 if (i < numEff)
                     rkr->DistBand_Bypass = 1;
                 else
@@ -7058,7 +7044,7 @@ void RKRGUI::RandomPreset()
                 DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
                 break;
 
-            case 24://Arpie
+            case EFX_ARPIE:
                 if (i < numEff)
                     rkr->Arpie_Bypass = 1;
                 else
@@ -7066,7 +7052,7 @@ void RKRGUI::RandomPreset()
                 ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
                 break;
 
-            case 25://Expander
+            case EFX_EXPANDER:
                 if (i < numEff)
                     rkr->Expander_Bypass = 1;
                 else
@@ -7074,7 +7060,7 @@ void RKRGUI::RandomPreset()
                 EXPANDER->expander_activar->value(rkr->Expander_Bypass);
                 break;
 
-            case 26://Shuffle
+            case EFX_SHUFFLE:
                 if (i < numEff)
                     rkr->Shuffle_Bypass = 1;
                 else
@@ -7082,7 +7068,7 @@ void RKRGUI::RandomPreset()
                 SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
                 break;
 
-            case 27://Synthfilter
+            case EFX_SYNTHFILTER:
                 if (i < numEff)
                     rkr->Synthfilter_Bypass = 1;
                 else
@@ -7090,7 +7076,7 @@ void RKRGUI::RandomPreset()
                 SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
                 break;
 
-            case 28://VaryBand
+            case EFX_VARYBAND:
                 if (i < numEff)
                     rkr->VaryBand_Bypass = 1;
                 else
@@ -7098,7 +7084,7 @@ void RKRGUI::RandomPreset()
                 VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
                 break;
 
-            case 29://Convolotron
+            case EFX_CONVOLOTRON:
                 if (i < numEff)
                     rkr->Convol_Bypass = 1;
                 else
@@ -7106,7 +7092,7 @@ void RKRGUI::RandomPreset()
                 CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
                 break;
 
-            case 30://Looper
+            case EFX_LOOPER:
                 if (i < numEff)
                     rkr->Looper_Bypass = 1;
                 else
@@ -7115,7 +7101,7 @@ void RKRGUI::RandomPreset()
                 update_looper();
                 break;
 
-            case 31://MuTroMojo
+            case EFX_MUTROMOJO:
                 if (i < numEff)
                     rkr->MuTroMojo_Bypass = 1;
                 else
@@ -7123,7 +7109,7 @@ void RKRGUI::RandomPreset()
                 MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
                 break;
 
-            case 32:// Echoverse
+            case EFX_ECHOVERSE:
                 if (i < numEff)
                     rkr->Echoverse_Bypass = 1;
                 else
@@ -7131,7 +7117,7 @@ void RKRGUI::RandomPreset()
                 ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
                 break;
 
-            case 33:// CoilCrafter
+            case EFX_COILCRAFTER:
                 if (i < numEff)
                     rkr->CoilCrafter_Bypass = 1;
                 else
@@ -7139,7 +7125,7 @@ void RKRGUI::RandomPreset()
                 COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
                 break;
 
-            case 34://ShelfBoost
+            case EFX_SHELFBOOST:
                 if (i < numEff)
                     rkr->ShelfBoost_Bypass = 1;
                 else
@@ -7147,7 +7133,7 @@ void RKRGUI::RandomPreset()
                 SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
                 break;
 
-            case 35://Vocoder
+            case EFX_VOCODER:
                 if (i < numEff)
                     rkr->Vocoder_Bypass = 1;
                 else
@@ -7155,7 +7141,7 @@ void RKRGUI::RandomPreset()
                 VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
                 break;
 
-            case 36://Sustainer
+            case EFX_SUSTAINER:
                 if (i < numEff)
                     rkr->Sustainer_Bypass = 1;
                 else
@@ -7163,7 +7149,7 @@ void RKRGUI::RandomPreset()
                 SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
                 break;
 
-            case 37://Sequence
+            case EFX_SEQUENCE:
                 if (i < numEff)
                     rkr->Sequence_Bypass = 1;
                 else
@@ -7171,7 +7157,7 @@ void RKRGUI::RandomPreset()
                 SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
                 break;
 
-            case 38://Shifter
+            case EFX_SHIFTER:
                 if (i < numEff)
                     rkr->Shifter_Bypass = 1;
                 else
@@ -7179,7 +7165,7 @@ void RKRGUI::RandomPreset()
                 SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
                 break;
 
-            case 39://StompBox
+            case EFX_STOMPBOX:
                 if (i < numEff)
                     rkr->StompBox_Bypass = 1;
                 else
@@ -7187,7 +7173,7 @@ void RKRGUI::RandomPreset()
                 STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
                 break;
 
-            case 40://Reverbtron
+            case EFX_REVERBTRON:
                 if (i < numEff)
                     rkr->Reverbtron_Bypass = 1;
                 else
@@ -7195,7 +7181,7 @@ void RKRGUI::RandomPreset()
                 REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
                 break;
 
-            case 41://Echotron
+            case EFX_ECHOTRON:
                 if (i < numEff)
                     rkr->Echotron_Bypass = 1;
                 else
@@ -7203,7 +7189,7 @@ void RKRGUI::RandomPreset()
                 ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
                 break;
 
-            case 42://StereoHarm
+            case EFX_STEREOHARM:
                 if (i < numEff)
                     rkr->StereoHarm_Bypass = 1;
                 else
@@ -7211,7 +7197,7 @@ void RKRGUI::RandomPreset()
                 SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
                 break;
 
-            case 43://CompBand
+            case EFX_COMPBAND:
                 if (i < numEff)
                     rkr->CompBand_Bypass = 1;
                 else
@@ -7219,7 +7205,7 @@ void RKRGUI::RandomPreset()
                 COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
                 break;
 
-            case 44://Opticaltrem
+            case EFX_OPTICALTREM:
                 if (i < numEff)
                     rkr->Opticaltrem_Bypass = 1;
                 else
@@ -7227,7 +7213,7 @@ void RKRGUI::RandomPreset()
                 OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
                 break;
 
-            case 45://Vibe
+            case EFX_VIBE:
                 if (i < numEff)
                     rkr->Vibe_Bypass = 1;
                 else
@@ -7235,7 +7221,7 @@ void RKRGUI::RandomPreset()
                 VIBE->vibe_activar->value(rkr->Vibe_Bypass);
                 break;
 
-            case 46://Infinity
+            case EFX_INFINITY:
                 if (i < numEff)
                     rkr->Infinity_Bypass = 1;
                 else
