@@ -365,7 +365,7 @@ Synthfilter::setpreset(int npreset)
 
     if (npreset > NUM_PRESETS - 1)
     {
-        Fpre->ReadPreset(27, npreset - NUM_PRESETS + 1, pdata);
+        Fpre->ReadPreset(EFX_SYNTHFILTER, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);

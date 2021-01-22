@@ -735,7 +735,7 @@ Echotron::setpreset(int npreset)
 
     if (npreset > NUM_PRESETS - 1)
     {
-        Fpre->ReadPreset(41, npreset - NUM_PRESETS + 1, pdata, Filename);
+        Fpre->ReadPreset(EFX_ECHOTRON, npreset - NUM_PRESETS + 1, pdata, Filename);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);

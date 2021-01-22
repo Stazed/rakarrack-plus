@@ -424,7 +424,7 @@ Looper::setpreset(int npreset)
 
     if (npreset > NUM_PRESETS - 1)
     {
-        Fpre->ReadPreset(30, npreset - NUM_PRESETS + 1, pdata);
+        Fpre->ReadPreset(EFX_LOOPER, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             loadpreset(n, pdata[n]);

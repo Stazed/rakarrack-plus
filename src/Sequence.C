@@ -1145,7 +1145,7 @@ Sequence::setpreset(int npreset)
 
     if (npreset > NUM_PRESETS - 1)
     {
-        Fpre->ReadPreset(37, npreset - NUM_PRESETS + 1, pdata);
+        Fpre->ReadPreset(EFX_SEQUENCE, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);

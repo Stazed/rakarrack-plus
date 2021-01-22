@@ -43,7 +43,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     
     if ((fn = fopen(tempfile, "r")) != NULL)
     {
-        if (eff != 29 && eff != 40 && eff != 41) // 29 (Convolotron) - 40 (Reverbtron) - 41 (Echotron)
+        if (eff != EFX_CONVOLOTRON && eff != EFX_REVERBTRON && eff != EFX_ECHOTRON)
         {
             while (fgets(buf, sizeof buf, fn) != NULL)
             {
@@ -64,7 +64,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
                 }
             }
         }
-        else if (eff == 29) // Convolotron
+        else if (eff == EFX_CONVOLOTRON)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
@@ -96,7 +96,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
             
             free(cfilename);
         }
-        else if (eff == 40) // reverbtron
+        else if (eff == EFX_REVERBTRON)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
@@ -127,7 +127,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
             
             free(cfilename);
         }
-        else if (eff == 41) // echotron
+        else if (eff == EFX_ECHOTRON)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);

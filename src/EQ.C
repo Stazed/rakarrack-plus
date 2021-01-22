@@ -200,7 +200,7 @@ EQ::setpreset(int npreset)
 
     if (npreset >= NUM_PRESETS)
     {
-        Fpre->ReadPreset(0, npreset - NUM_PRESETS + 1, pdata);
+        Fpre->ReadPreset(EFX_EQ, npreset - NUM_PRESETS + 1, pdata);
         for (int n = 0; n < 10; n++)
         {
             changepar(n * 5 + 12, pdata[n]);

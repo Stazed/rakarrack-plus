@@ -345,7 +345,7 @@ Compressor::setpreset(int dgui, int npreset)
     // (npreset > 3) means user defined (Insert) presets for Compressor
     if ((dgui) && (npreset > 3))  // efx_Compressor = dgui = 1
     {
-        Fpre->ReadPreset(1, npreset - 3, pdata);
+        Fpre->ReadPreset(EFX_COMPRESSOR, npreset - 3, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);

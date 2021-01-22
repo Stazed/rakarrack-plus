@@ -58,7 +58,7 @@ ParametricEQ::setpreset(int npreset)
 
     if (npreset >= NUM_PRESETS)
     {
-        Fpre->ReadPreset(9, npreset - NUM_PRESETS + 1, pdata);
+        Fpre->ReadPreset(EFX_PARAMETRIC, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < 3; n++)
         {

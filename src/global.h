@@ -248,6 +248,71 @@ const int C_DONT_CHANGE_FONT_SIZE = 0;
 const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
 const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
 
+/**
+ * The effect index used by switch(): case: and order number.
+ */
+enum EFX_Index
+{
+    EFX_EQ = 0,
+    EFX_COMPRESSOR,
+    EFX_DISTORTION,
+    EFX_OVERDRIVE,
+    EFX_ECHO,
+    EFX_CHORUS,
+    EFX_PHASER,
+    EFX_FLANGER,
+    EFX_REVERB,
+    EFX_PARAMETRIC,
+    EFX_WAHWAH,         // 10
+    EFX_ALIENWAH,
+    EFX_CABINET,
+    EFX_PAN,
+    EFX_HARMONIZER,
+    EFX_MUSICAL_DELAY,
+    EFX_NOISEGATE,
+    EFX_DERELICT,
+    EFX_ANALOG_PHASER,
+    EFX_VALVE,
+    EFX_DUAL_FLANGE,    // 20
+    EFX_RING,
+    EFX_EXCITER,
+    EFX_DISTBAND,
+    EFX_ARPIE,
+    EFX_EXPANDER,
+    EFX_SHUFFLE,
+    EFX_SYNTHFILTER,
+    EFX_VARYBAND,
+    EFX_CONVOLOTRON,
+    EFX_LOOPER,         // 30
+    EFX_MUTROMOJO,
+    EFX_ECHOVERSE,
+    EFX_COILCRAFTER,
+    EFX_SHELFBOOST,
+    EFX_VOCODER,
+    EFX_SUSTAINER,
+    EFX_SEQUENCE,
+    EFX_SHIFTER,
+    EFX_STOMPBOX,
+    EFX_REVERBTRON,     // 40
+    EFX_ECHOTRON,
+    EFX_STEREOHARM,
+    EFX_COMPBAND,
+    EFX_OPTICALTREM,
+    EFX_VIBE,
+    EFX_INFINITY,       // 46
+    
+    // The following are not rack effects but are used in MIDI
+    // control within the same switch() statements and thus should
+    // always be different from the EFX_Index for the rack effects.
+    EFX_MASTER = 50,
+    
+    // These are part of the MIDI Implementation Chart CC 116 values.
+    EFX_TAP_TEMPO_ON_OFF = 121,
+    EFX_MIDI_CONVERTER_ON_OFF = 122,
+    EFX_TUNER_ON_OFF = 123,
+    EFX_MASTER_ON_OFF = 124
+};
+
 #endif
 
 

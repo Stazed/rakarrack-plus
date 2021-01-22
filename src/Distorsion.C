@@ -380,7 +380,7 @@ Distorsion::setpreset(int dgui, int npreset)
     // (npreset > 5) means user defined (Insert) presets for Distorsion
     if ((dgui == 0) && (npreset > 5))       // efx_Distorsion = dgui = 0
     {
-        Fpre->ReadPreset(2, npreset - 5, pdata);
+        Fpre->ReadPreset(EFX_DISTORTION, npreset - 5, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
@@ -388,7 +388,7 @@ Distorsion::setpreset(int dgui, int npreset)
     // (npreset > 1) means user defined (Insert) presets for Overdrive
     else if ((dgui == 1) && (npreset > 1))  // efx_Overdrive = dgui = 1
     {
-        Fpre->ReadPreset(3, npreset - 1, pdata);
+        Fpre->ReadPreset(EFX_OVERDRIVE, npreset - 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
