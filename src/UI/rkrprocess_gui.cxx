@@ -5251,19 +5251,19 @@ void RKRGUI::ActOnOff()
                 INFINIT->infinity_activar->do_callback();
                 break;
 
-            case 121:
+            case EFX_TAP_TEMPO_ON_OFF:
                 Tap_activar->value(rkr->Tap_Bypass);
                 Tap_activar->do_callback();
                 break;
-            case 122:
+            case EFX_MIDI_CONVERTER_ON_OFF:
                 MIDI->midi_activar->value(rkr->MIDIConverter_Bypass);
                 MIDI->midi_activar->do_callback();
                 break;
-            case 123:
+            case EFX_TUNER_ON_OFF:
                 tuner_activar->value(rkr->Tuner_Bypass);
                 tuner_activar->do_callback();
                 break;
-            case 124:
+            case EFX_MASTER_ON_OFF:
                 ActivarGeneral->value(rkr->Bypass);
                 ActivarGeneral->do_callback();
                 break;
@@ -5687,7 +5687,7 @@ void RKRGUI::FillML(/*int type*/)
         case 1:
             for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
             {
-                if (rkr->efx_params[i].Effect == 50)
+                if (rkr->efx_params[i].Effect == EFX_MASTER)
                 {
                     MIDILearn->Epar->add(rkr->efx_params[i].Nom);
                     rkr->ML_clist[k] = rkr->efx_params[i].Ato;

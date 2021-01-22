@@ -110,7 +110,18 @@ enum EFX_Index
     EFX_COMPBAND,
     EFX_OPTICALTREM,
     EFX_VIBE,
-    EFX_INFINITY        // 46
+    EFX_INFINITY,       // 46
+    
+    // The following are not rack effects but are used in MIDI
+    // control within the same switch() statements and thus should
+    // always be different from the EFX_Index for the rack effects.
+    EFX_MASTER = 50,
+    
+    // These are part of the MIDI Implementation Chart CC 116 values.
+    EFX_TAP_TEMPO_ON_OFF = 121,
+    EFX_MIDI_CONVERTER_ON_OFF = 122,
+    EFX_TUNER_ON_OFF = 123,
+    EFX_MASTER_ON_OFF = 124
 };
 
 /*

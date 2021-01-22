@@ -113,10 +113,10 @@ RKR::MIDI_control()
 {
     static const char *los_params[] =
     {
-        "Balance FX%", ITS(MC_Balance_FX).c_str(), "50",
-        "Input Volume", ITS(MC_Input_Volume).c_str(), "50",
-        "Output Volume", ITS(MC_Output_Volume).c_str(), "50",
-        "Multi On/Off", ITS(MC_Multi_On_Off).c_str(), "50",
+        "Balance FX%", ITS(MC_Balance_FX).c_str(), ITS(EFX_MASTER).c_str(),
+        "Input Volume", ITS(MC_Input_Volume).c_str(), ITS(EFX_MASTER).c_str(),
+        "Output Volume", ITS(MC_Output_Volume).c_str(), ITS(EFX_MASTER).c_str(),
+        "Multi On/Off", ITS(MC_Multi_On_Off).c_str(), ITS(EFX_MASTER).c_str(),
 
         "Alienwah Dry/Wet", ITS(MC_Alien_DryWet).c_str(), ITS(EFX_ALIENWAH).c_str(),
         "Alienwah Pan", ITS(MC_Alien_Pan).c_str(), ITS(EFX_ALIENWAH).c_str(),
@@ -1071,19 +1071,19 @@ RKR::ActiveUn(int value)
         break;
 
 
-    case 121:
+    case EFX_TAP_TEMPO_ON_OFF:
         if (inoff) Tap_Bypass = 1;
         else Tap_Bypass = 0;
         break;
-    case 122:
+    case EFX_MIDI_CONVERTER_ON_OFF:
         if (inoff) MIDIConverter_Bypass = 1;
         else MIDIConverter_Bypass = 0;
         break;
-    case 123:
+    case EFX_TUNER_ON_OFF:
         if (inoff) Tuner_Bypass = 1;
         else Tuner_Bypass = 0;
         break;
-    case 124:
+    case EFX_MASTER_ON_OFF:
         if (inoff) Bypass = 1;
         else Bypass = 0;
         break;
@@ -1237,16 +1237,16 @@ RKR::checkonoff(int miraque)
         if (Infinity_Bypass) return (0);
         break;
 
-    case 121:
+    case EFX_TAP_TEMPO_ON_OFF:
         if (Tap_Bypass) return 0;
         break;
-    case 122:
+    case EFX_MIDI_CONVERTER_ON_OFF:
         if (MIDIConverter_Bypass) return 0;
         break;
-    case 123:
+    case EFX_TUNER_ON_OFF:
         if (Tuner_Bypass) return 0;
         break;
-    case 124:
+    case EFX_MASTER_ON_OFF:
         if (Bypass) return 0;
         break;
     }
