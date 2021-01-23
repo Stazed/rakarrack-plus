@@ -672,6 +672,16 @@ const int C_MAX_PARAMETER_SIZE = 19;
  */
 const int C_NUMBER_ORDERED_EFFECTS = 10;
 
+/**
+ * The array sizes for lv[70][20] and Bank.lv[70][20]: Preset_Bank_Struct.
+ * These sizes are saved to file for bank files. The max effects include 
+ * one index for effect order. The max parameters includes the one index for
+ * effect bypass [19].
+ */
+const int C_LV_MAX_EFFECTS = 70;
+const int C_LV_MAX_PARAMETERS = 20;
+const int C_LV_BYPASS = 19;
+
 
 class RKR
 {
@@ -934,7 +944,7 @@ public:
     int Infinity_B;
 
     int Selected_Preset;
-    int lv[70][20];
+    int lv[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];
     int efx_order[C_NUMBER_ORDERED_EFFECTS];
     int new_order[C_NUMBER_ORDERED_EFFECTS];
@@ -1216,7 +1226,7 @@ public:
         int Bypass;
         char RevFiname[128];
         char EchoFiname[128];
-        int lv[70][20];
+        int lv[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS];
         int XUserMIDI[128][20];
         int XMIDIrangeMin[128];
         int XMIDIrangeMax[128];
