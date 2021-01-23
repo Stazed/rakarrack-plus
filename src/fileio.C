@@ -1882,7 +1882,7 @@ RKR::New()
             lv[j][k] = presets_default[j][k];
         }
 
-        lv[j][19] = 0;
+        lv[j][C_LV_BYPASS] = 0;
     }
 
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
@@ -1969,7 +1969,7 @@ RKR::New_Bank()
             {
                 Bank[i].lv[j][k] = presets_default[j][k];
             }
-            Bank[i].lv[j][19] = 0;
+            Bank[i].lv[j][C_LV_BYPASS] = 0;
         }
 
         memset(Bank[i].XUserMIDI, 0, sizeof (Bank[i].XUserMIDI));
@@ -2003,53 +2003,53 @@ RKR::Bank_to_Preset(int i)
         efx_order[k] = Bank[i].lv[LV_ORDER][k];
     }
 
-    Reverb_B = Bank[i].lv[LV_REVERB][19];
-    Echo_B = Bank[i].lv[LV_ECHO][19];
-    Chorus_B = Bank[i].lv[LV_CHORUS][19];
-    Flanger_B = Bank[i].lv[LV_FLANGER][19];
-    Phaser_B = Bank[i].lv[LV_PHASER][19];
-    Overdrive_B = Bank[i].lv[LV_OVERDRIVE][19];
-    Distorsion_B = Bank[i].lv[LV_DISTORTION][19];
-    EQ1_B = Bank[i].lv[LV_EQ][19];
-    EQ2_B = Bank[i].lv[LV_PARAMETRIC][19];
-    Compressor_B = Bank[i].lv[LV_COMPRESSOR][19];
-    WahWah_B = Bank[i].lv[LV_WAHWAH][19];
-    Alienwah_B = Bank[i].lv[LV_ALIENWAH][19];
-    Cabinet_B = Bank[i].lv[LV_CABINET][19];
-    Pan_B = Bank[i].lv[LV_PAN][19];
-    Harmonizer_B = Bank[i].lv[LV_HARMONIZER][19];
-    MusDelay_B = Bank[i].lv[LV_MUSICAL_DELAY][19];
-    Gate_B = Bank[i].lv[LV_NOISEGATE][19];
-    Derelict_B = Bank[i].lv[LV_DERELICT][19];
-    APhaser_B = Bank[i].lv[LV_ANALOG_PHASER][19];
-    Valve_B = Bank[i].lv[LV_VALVE][19];
-    DFlange_B = Bank[i].lv[LV_DUAL_FLANGE][19];
-    Ring_B = Bank[i].lv[LV_RING][19];
-    Exciter_B = Bank[i].lv[LV_EXCITER][19];
-    DistBand_B = Bank[i].lv[LV_DISTBAND][19];
-    Arpie_B = Bank[i].lv[LV_ARPIE][19];
-    Expander_B = Bank[i].lv[LV_EXPANDER][19];
-    Shuffle_B = Bank[i].lv[LV_SHUFFLE][19];
-    Synthfilter_B = Bank[i].lv[LV_SYNTHFILTER][19];
-    VaryBand_B = Bank[i].lv[LV_VARYBAND][19];
-    Convol_B = Bank[i].lv[LV_CONVOLOTRON][19];
-    Looper_B = Bank[i].lv[LV_LOOPER][19];
-    MuTroMojo_B = Bank[i].lv[LV_MUTROMOJO][19];
-    Echoverse_B = Bank[i].lv[LV_ECHOVERSE][19];
-    CoilCrafter_B = Bank[i].lv[LV_COILCRAFTER][19];
-    ShelfBoost_B = Bank[i].lv[LV_SHELFBOOST][19];
-    Vocoder_B = Bank[i].lv[LV_VOCODER][19];
-    Sustainer_B = Bank[i].lv[LV_SUSTAINER][19];
-    Sequence_B = Bank[i].lv[LV_SEQUENCE][19];
-    Shifter_B = Bank[i].lv[LV_SHIFTER][19];
-    StompBox_B = Bank[i].lv[LV_STOMPBOX][19];
-    Reverbtron_B = Bank[i].lv[LV_REVERBTRON][19];
-    Echotron_B = Bank[i].lv[LV_ECHOTRON][19];
-    StereoHarm_B = Bank[i].lv[LV_STEREOHARM][19];
-    CompBand_B = Bank[i].lv[LV_COMPBAND][19];
-    Opticaltrem_B = Bank[i].lv[LV_OPTICALTREM][19];
-    Vibe_B = Bank[i].lv[LV_VIBE][19];
-    Infinity_B = Bank[i].lv[LV_INFINITY][19];
+    Reverb_B = Bank[i].lv[LV_REVERB][C_LV_BYPASS];
+    Echo_B = Bank[i].lv[LV_ECHO][C_LV_BYPASS];
+    Chorus_B = Bank[i].lv[LV_CHORUS][C_LV_BYPASS];
+    Flanger_B = Bank[i].lv[LV_FLANGER][C_LV_BYPASS];
+    Phaser_B = Bank[i].lv[LV_PHASER][C_LV_BYPASS];
+    Overdrive_B = Bank[i].lv[LV_OVERDRIVE][C_LV_BYPASS];
+    Distorsion_B = Bank[i].lv[LV_DISTORTION][C_LV_BYPASS];
+    EQ1_B = Bank[i].lv[LV_EQ][C_LV_BYPASS];
+    EQ2_B = Bank[i].lv[LV_PARAMETRIC][C_LV_BYPASS];
+    Compressor_B = Bank[i].lv[LV_COMPRESSOR][C_LV_BYPASS];
+    WahWah_B = Bank[i].lv[LV_WAHWAH][C_LV_BYPASS];
+    Alienwah_B = Bank[i].lv[LV_ALIENWAH][C_LV_BYPASS];
+    Cabinet_B = Bank[i].lv[LV_CABINET][C_LV_BYPASS];
+    Pan_B = Bank[i].lv[LV_PAN][C_LV_BYPASS];
+    Harmonizer_B = Bank[i].lv[LV_HARMONIZER][C_LV_BYPASS];
+    MusDelay_B = Bank[i].lv[LV_MUSICAL_DELAY][C_LV_BYPASS];
+    Gate_B = Bank[i].lv[LV_NOISEGATE][C_LV_BYPASS];
+    Derelict_B = Bank[i].lv[LV_DERELICT][C_LV_BYPASS];
+    APhaser_B = Bank[i].lv[LV_ANALOG_PHASER][C_LV_BYPASS];
+    Valve_B = Bank[i].lv[LV_VALVE][C_LV_BYPASS];
+    DFlange_B = Bank[i].lv[LV_DUAL_FLANGE][C_LV_BYPASS];
+    Ring_B = Bank[i].lv[LV_RING][C_LV_BYPASS];
+    Exciter_B = Bank[i].lv[LV_EXCITER][C_LV_BYPASS];
+    DistBand_B = Bank[i].lv[LV_DISTBAND][C_LV_BYPASS];
+    Arpie_B = Bank[i].lv[LV_ARPIE][C_LV_BYPASS];
+    Expander_B = Bank[i].lv[LV_EXPANDER][C_LV_BYPASS];
+    Shuffle_B = Bank[i].lv[LV_SHUFFLE][C_LV_BYPASS];
+    Synthfilter_B = Bank[i].lv[LV_SYNTHFILTER][C_LV_BYPASS];
+    VaryBand_B = Bank[i].lv[LV_VARYBAND][C_LV_BYPASS];
+    Convol_B = Bank[i].lv[LV_CONVOLOTRON][C_LV_BYPASS];
+    Looper_B = Bank[i].lv[LV_LOOPER][C_LV_BYPASS];
+    MuTroMojo_B = Bank[i].lv[LV_MUTROMOJO][C_LV_BYPASS];
+    Echoverse_B = Bank[i].lv[LV_ECHOVERSE][C_LV_BYPASS];
+    CoilCrafter_B = Bank[i].lv[LV_COILCRAFTER][C_LV_BYPASS];
+    ShelfBoost_B = Bank[i].lv[LV_SHELFBOOST][C_LV_BYPASS];
+    Vocoder_B = Bank[i].lv[LV_VOCODER][C_LV_BYPASS];
+    Sustainer_B = Bank[i].lv[LV_SUSTAINER][C_LV_BYPASS];
+    Sequence_B = Bank[i].lv[LV_SEQUENCE][C_LV_BYPASS];
+    Shifter_B = Bank[i].lv[LV_SHIFTER][C_LV_BYPASS];
+    StompBox_B = Bank[i].lv[LV_STOMPBOX][C_LV_BYPASS];
+    Reverbtron_B = Bank[i].lv[LV_REVERBTRON][C_LV_BYPASS];
+    Echotron_B = Bank[i].lv[LV_ECHOTRON][C_LV_BYPASS];
+    StereoHarm_B = Bank[i].lv[LV_STEREOHARM][C_LV_BYPASS];
+    CompBand_B = Bank[i].lv[LV_COMPBAND][C_LV_BYPASS];
+    Opticaltrem_B = Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS];
+    Vibe_B = Bank[i].lv[LV_VIBE][C_LV_BYPASS];
+    Infinity_B = Bank[i].lv[LV_INFINITY][C_LV_BYPASS];
 
     Bypass_B = Bypass;
 
@@ -2211,53 +2211,53 @@ RKR::Preset_to_Bank(int i)
         }
     }
 
-    Bank[i].lv[LV_REVERB][19] = Reverb_Bypass;
-    Bank[i].lv[LV_ECHO][19] = Echo_Bypass;
-    Bank[i].lv[LV_CHORUS][19] = Chorus_Bypass;
-    Bank[i].lv[LV_FLANGER][19] = Flanger_Bypass;
-    Bank[i].lv[LV_PHASER][19] = Phaser_Bypass;
-    Bank[i].lv[LV_OVERDRIVE][19] = Overdrive_Bypass;
-    Bank[i].lv[LV_DISTORTION][19] = Distorsion_Bypass;
-    Bank[i].lv[LV_EQ][19] = EQ1_Bypass;
-    Bank[i].lv[LV_PARAMETRIC][19] = EQ2_Bypass;
-    Bank[i].lv[LV_COMPRESSOR][19] = Compressor_Bypass;
-    Bank[i].lv[LV_WAHWAH][19] = WahWah_Bypass;
-    Bank[i].lv[LV_ALIENWAH][19] = Alienwah_Bypass;
-    Bank[i].lv[LV_CABINET][19] = Cabinet_Bypass;
-    Bank[i].lv[LV_PAN][19] = Pan_Bypass;
-    Bank[i].lv[LV_HARMONIZER][19] = Harmonizer_Bypass;
-    Bank[i].lv[LV_MUSICAL_DELAY][19] = MusDelay_Bypass;
-    Bank[i].lv[LV_NOISEGATE][19] = Gate_Bypass;
-    Bank[i].lv[LV_DERELICT][19] = Derelict_Bypass;
-    Bank[i].lv[LV_ANALOG_PHASER][19] = APhaser_Bypass;
-    Bank[i].lv[LV_VALVE][19] = Valve_Bypass;
-    Bank[i].lv[LV_DUAL_FLANGE][19] = DFlange_Bypass;
-    Bank[i].lv[LV_RING][19] = Ring_Bypass;
-    Bank[i].lv[LV_EXCITER][19] = Exciter_Bypass;
-    Bank[i].lv[LV_DISTBAND][19] = DistBand_Bypass;
-    Bank[i].lv[LV_ARPIE][19] = Arpie_Bypass;
-    Bank[i].lv[LV_EXPANDER][19] = Expander_Bypass;
-    Bank[i].lv[LV_SHUFFLE][19] = Shuffle_Bypass;
-    Bank[i].lv[LV_SYNTHFILTER][19] = Synthfilter_Bypass;
-    Bank[i].lv[LV_VARYBAND][19] = VaryBand_Bypass;
-    Bank[i].lv[LV_CONVOLOTRON][19] = Convol_Bypass;
-    Bank[i].lv[LV_LOOPER][19] = Looper_Bypass;
-    Bank[i].lv[LV_MUTROMOJO][19] = MuTroMojo_Bypass;
-    Bank[i].lv[LV_ECHOVERSE][19] = Echoverse_Bypass;
-    Bank[i].lv[LV_COILCRAFTER][19] = CoilCrafter_Bypass;
-    Bank[i].lv[LV_SHELFBOOST][19] = ShelfBoost_Bypass;
-    Bank[i].lv[LV_VOCODER][19] = Vocoder_Bypass;
-    Bank[i].lv[LV_SUSTAINER][19] = Sustainer_Bypass;
-    Bank[i].lv[LV_SEQUENCE][19] = Sequence_Bypass;
-    Bank[i].lv[LV_SHIFTER][19] = Shifter_Bypass;
-    Bank[i].lv[LV_STOMPBOX][19] = StompBox_Bypass;
-    Bank[i].lv[LV_REVERBTRON][19] = Reverbtron_Bypass;
-    Bank[i].lv[LV_ECHOTRON][19] = Echotron_Bypass;
-    Bank[i].lv[LV_STEREOHARM][19] = StereoHarm_Bypass;
-    Bank[i].lv[LV_COMPBAND][19] = CompBand_Bypass;
-    Bank[i].lv[LV_OPTICALTREM][19] = Opticaltrem_Bypass;
-    Bank[i].lv[LV_VIBE][19] = Vibe_Bypass;
-    Bank[i].lv[LV_INFINITY][19] = Infinity_Bypass;
+    Bank[i].lv[LV_REVERB][C_LV_BYPASS] = Reverb_Bypass;
+    Bank[i].lv[LV_ECHO][C_LV_BYPASS] = Echo_Bypass;
+    Bank[i].lv[LV_CHORUS][C_LV_BYPASS] = Chorus_Bypass;
+    Bank[i].lv[LV_FLANGER][C_LV_BYPASS] = Flanger_Bypass;
+    Bank[i].lv[LV_PHASER][C_LV_BYPASS] = Phaser_Bypass;
+    Bank[i].lv[LV_OVERDRIVE][C_LV_BYPASS] = Overdrive_Bypass;
+    Bank[i].lv[LV_DISTORTION][C_LV_BYPASS] = Distorsion_Bypass;
+    Bank[i].lv[LV_EQ][C_LV_BYPASS] = EQ1_Bypass;
+    Bank[i].lv[LV_PARAMETRIC][C_LV_BYPASS] = EQ2_Bypass;
+    Bank[i].lv[LV_COMPRESSOR][C_LV_BYPASS] = Compressor_Bypass;
+    Bank[i].lv[LV_WAHWAH][C_LV_BYPASS] = WahWah_Bypass;
+    Bank[i].lv[LV_ALIENWAH][C_LV_BYPASS] = Alienwah_Bypass;
+    Bank[i].lv[LV_CABINET][C_LV_BYPASS] = Cabinet_Bypass;
+    Bank[i].lv[LV_PAN][C_LV_BYPASS] = Pan_Bypass;
+    Bank[i].lv[LV_HARMONIZER][C_LV_BYPASS] = Harmonizer_Bypass;
+    Bank[i].lv[LV_MUSICAL_DELAY][C_LV_BYPASS] = MusDelay_Bypass;
+    Bank[i].lv[LV_NOISEGATE][C_LV_BYPASS] = Gate_Bypass;
+    Bank[i].lv[LV_DERELICT][C_LV_BYPASS] = Derelict_Bypass;
+    Bank[i].lv[LV_ANALOG_PHASER][C_LV_BYPASS] = APhaser_Bypass;
+    Bank[i].lv[LV_VALVE][C_LV_BYPASS] = Valve_Bypass;
+    Bank[i].lv[LV_DUAL_FLANGE][C_LV_BYPASS] = DFlange_Bypass;
+    Bank[i].lv[LV_RING][C_LV_BYPASS] = Ring_Bypass;
+    Bank[i].lv[LV_EXCITER][C_LV_BYPASS] = Exciter_Bypass;
+    Bank[i].lv[LV_DISTBAND][C_LV_BYPASS] = DistBand_Bypass;
+    Bank[i].lv[LV_ARPIE][C_LV_BYPASS] = Arpie_Bypass;
+    Bank[i].lv[LV_EXPANDER][C_LV_BYPASS] = Expander_Bypass;
+    Bank[i].lv[LV_SHUFFLE][C_LV_BYPASS] = Shuffle_Bypass;
+    Bank[i].lv[LV_SYNTHFILTER][C_LV_BYPASS] = Synthfilter_Bypass;
+    Bank[i].lv[LV_VARYBAND][C_LV_BYPASS] = VaryBand_Bypass;
+    Bank[i].lv[LV_CONVOLOTRON][C_LV_BYPASS] = Convol_Bypass;
+    Bank[i].lv[LV_LOOPER][C_LV_BYPASS] = Looper_Bypass;
+    Bank[i].lv[LV_MUTROMOJO][C_LV_BYPASS] = MuTroMojo_Bypass;
+    Bank[i].lv[LV_ECHOVERSE][C_LV_BYPASS] = Echoverse_Bypass;
+    Bank[i].lv[LV_COILCRAFTER][C_LV_BYPASS] = CoilCrafter_Bypass;
+    Bank[i].lv[LV_SHELFBOOST][C_LV_BYPASS] = ShelfBoost_Bypass;
+    Bank[i].lv[LV_VOCODER][C_LV_BYPASS] = Vocoder_Bypass;
+    Bank[i].lv[LV_SUSTAINER][C_LV_BYPASS] = Sustainer_Bypass;
+    Bank[i].lv[LV_SEQUENCE][C_LV_BYPASS] = Sequence_Bypass;
+    Bank[i].lv[LV_SHIFTER][C_LV_BYPASS] = Shifter_Bypass;
+    Bank[i].lv[LV_STOMPBOX][C_LV_BYPASS] = StompBox_Bypass;
+    Bank[i].lv[LV_REVERBTRON][C_LV_BYPASS] = Reverbtron_Bypass;
+    Bank[i].lv[LV_ECHOTRON][C_LV_BYPASS] = Echotron_Bypass;
+    Bank[i].lv[LV_STEREOHARM][C_LV_BYPASS] = StereoHarm_Bypass;
+    Bank[i].lv[LV_COMPBAND][C_LV_BYPASS] = CompBand_Bypass;
+    Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS] = Opticaltrem_Bypass;
+    Bank[i].lv[LV_VIBE][C_LV_BYPASS] = Vibe_Bypass;
+    Bank[i].lv[LV_INFINITY][C_LV_BYPASS] = Infinity_Bypass;
 
 
     memcpy(Bank[i].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
