@@ -31,7 +31,7 @@ widget_class {\#include "common_gui_menu.h"} DistBandGui {
 rkr->DistBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DistBand->cleanup();
-rgui->findpos(23,(int)o->value(),o);}
+rgui->findpos(EFX_DISTBAND,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -54,7 +54,7 @@ distband_neg->value(rkr->efx_DistBand->getpar(DistBand_Negate));
 distband_st->value(rkr->efx_DistBand->getpar(DistBand_Stereo));
 distband_pan->value(rkr->efx_DistBand->getpar(DistBand_Pan)-64);
 distband_cross1->value(rkr->efx_DistBand->getpar(DistBand_Cross_1));
-distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));} selected
+distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

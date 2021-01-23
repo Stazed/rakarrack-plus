@@ -30,7 +30,7 @@ widget_class CoilGui {
 rkr->CoilCrafter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
-rgui->findpos(33,(int)o->value(),o);}
+rgui->findpos(EFX_COILCRAFTER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -177,7 +177,7 @@ rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());}
  rgui->getMIDIControl(MC_Coil_Q_2);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Q_2,(int)o->value());} selected
+rkr->efx_CoilCrafter->changepar(Coil_Q_2,(int)o->value());}
     tooltip {Destination Pickup Resonance} xywh {56 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 value 20 textcolor 7
     class RKR_Slider
   }

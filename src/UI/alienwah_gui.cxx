@@ -12,7 +12,7 @@ void AlienwahGui::cb_Alienwah_activar_i(RKR_Light_Button* o, void*) {
 rkr->Alienwah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
-rgui->findpos(11,(int)o->value(),o);
+rgui->findpos(EFX_ALIENWAH,(int)o->value(),o);
 }
 void AlienwahGui::cb_Alienwah_activar(RKR_Light_Button* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_activar_i(o,v);

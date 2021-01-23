@@ -12,7 +12,7 @@ void SustainGui::cb_sus_activar_i(RKR_Light_Button* o, void*) {
         rkr->Sustainer_Bypass=(int)o->value();
         if((int) o->value()==0)
         rkr->efx_Sustainer->cleanup();
-        rgui->findpos(36,(int)o->value(),o);
+        rgui->findpos(EFX_SUSTAINER,(int)o->value(),o);
 }
 void SustainGui::cb_sus_activar(RKR_Light_Button* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_activar_i(o,v);

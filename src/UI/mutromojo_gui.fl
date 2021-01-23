@@ -37,7 +37,7 @@ widget_class {\#include "common_gui_menu.h"} MutromojoGui {
 rkr->MuTroMojo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MuTroMojo->cleanup();
-rgui->findpos(31,(int)o->value(),o);}
+rgui->findpos(EFX_MUTROMOJO,(int)o->value(),o);} selected
     xywh {6 5 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -215,7 +215,7 @@ rkr->efx_MuTroMojo->changepar(MuTro_Depth,(int)o->value());}
  rgui->getMIDIControl(MC_MuTro_LFO_Tempo);
  return;
 }
-rkr->efx_MuTroMojo->changepar(MuTro_LFO_Tempo,(int)o->value());} selected
+rkr->efx_MuTroMojo->changepar(MuTro_LFO_Tempo,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }

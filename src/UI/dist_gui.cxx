@@ -12,7 +12,7 @@ void DistGui::cb_dist_activar_i(RKR_Light_Button* o, void*) {
 rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
-rgui->findpos(2,(int)o->value(),o);
+rgui->findpos(EFX_DISTORTION,(int)o->value(),o);
 }
 void DistGui::cb_dist_activar(RKR_Light_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_activar_i(o,v);

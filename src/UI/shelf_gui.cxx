@@ -12,7 +12,7 @@ void ShelfGui::cb_shelf_activar_i(RKR_Light_Button* o, void*) {
 rkr->ShelfBoost_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_ShelfBoost->cleanup();
-rgui->findpos(34,(int)o->value(),o);
+rgui->findpos(EFX_SHELFBOOST,(int)o->value(),o);
 }
 void ShelfGui::cb_shelf_activar(RKR_Light_Button* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_activar_i(o,v);

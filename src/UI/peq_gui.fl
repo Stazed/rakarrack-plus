@@ -27,7 +27,7 @@ widget_class PeqGui {
 rkr->EQ2_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ2->cleanup();
-rgui->findpos(9,(int)o->value(),o);}
+rgui->findpos(EFX_PARAMETRIC,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -45,7 +45,7 @@ eqp_MQ->value(rkr->efx_EQ2->getpar(Parametric_Mid_Q)-64);
 eqp_HF->value(rkr->efx_EQ2->getpar(Parametric_High_Freq));
 eqp_HFg->value(rkr->efx_EQ2->getpar(Parametric_High_Gain)-64);
 eqp_HQ->value(rkr->efx_EQ2->getpar(Parametric_High_Q)-64);
-eqp_Gain->value(rkr->efx_EQ2->getpar(Parametric_Gain)-64);} selected
+eqp_Gain->value(rkr->efx_EQ2->getpar(Parametric_Gain)-64);}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

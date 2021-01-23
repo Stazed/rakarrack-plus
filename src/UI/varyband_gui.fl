@@ -28,7 +28,7 @@ widget_class {\#include "common_gui_menu.h"} VarybandGui {
 rkr->VaryBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_VaryBand->cleanup();
-rgui->findpos(28,(int)o->value(),o);}
+rgui->findpos(EFX_VARYBAND,(int)o->value(),o);} selected
     xywh {7 5 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -51,7 +51,7 @@ varyband_cross3->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_3));
 varyband_LB->value(rkr->efx_VaryBand->getpar(VaryBand_Low_Band));
 varyband_MB1->value(rkr->efx_VaryBand->getpar(VaryBand_Mid_Band_1));
 varyband_MB2->value(rkr->efx_VaryBand->getpar(VaryBand_Mid_Band_2));
-varyband_HB->value(rkr->efx_VaryBand->getpar(VaryBand_High_Band));} selected
+varyband_HB->value(rkr->efx_VaryBand->getpar(VaryBand_High_Band));}
     xywh {79 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

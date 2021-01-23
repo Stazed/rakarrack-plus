@@ -11,7 +11,7 @@ void CompressGui::cb_compress_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
-rgui->findpos(1,(int)o->value(),o);
+rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);
 }
 void CompressGui::cb_compress_activar(RKR_Light_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_activar_i(o,v);

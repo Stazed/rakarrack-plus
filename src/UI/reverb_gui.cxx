@@ -12,7 +12,7 @@ void ReverbGui::cb_reverb_activar_i(RKR_Light_Button* o, void*) {
 rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
-rgui->findpos(8,(int)o->value(),o);
+rgui->findpos(EFX_REVERB,(int)o->value(),o);
 }
 void ReverbGui::cb_reverb_activar(RKR_Light_Button* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_activar_i(o,v);

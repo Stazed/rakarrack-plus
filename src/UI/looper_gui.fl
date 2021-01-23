@@ -33,7 +33,7 @@ widget_class LooperGui {
 rkr->Looper_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
-rgui->findpos(30,(int)o->value(),o);}
+rgui->findpos(EFX_LOOPER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -123,7 +123,7 @@ rkr->efx_Looper->changepar(Looper_Tempo,(int)o->value());}
   } {}
   Fl_Choice looper_ms {
     label MS
-    callback {rkr->efx_Looper->changepar(Looper_M_S,(int)o->value());} open selected
+    callback {rkr->efx_Looper->changepar(Looper_M_S,(int)o->value());} open
     xywh {121 73 29 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_looper_ms->get_metronome_sound());}
     class RKR_Choice

@@ -12,7 +12,7 @@ void ConvoGui::cb_convo_activar_i(RKR_Light_Button* o, void*) {
 rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
-rgui->findpos(29,(int)o->value(),o);
+rgui->findpos(EFX_CONVOLOTRON,(int)o->value(),o);
 }
 void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_activar_i(o,v);

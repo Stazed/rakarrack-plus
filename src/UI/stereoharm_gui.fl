@@ -33,7 +33,7 @@ rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
 rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
 rgui->Chord(1);
-rgui->findpos(42,(int)o->value(),o);} selected
+rgui->findpos(EFX_STEREOHARM,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }

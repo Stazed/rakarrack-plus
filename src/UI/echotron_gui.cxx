@@ -11,7 +11,7 @@ void EchotronGui::cb_echotron_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
-rgui->findpos(41,(int)o->value(),o);
+rgui->findpos(EFX_ECHOTRON,(int)o->value(),o);
 }
 void EchotronGui::cb_echotron_activar(RKR_Light_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_activar_i(o,v);

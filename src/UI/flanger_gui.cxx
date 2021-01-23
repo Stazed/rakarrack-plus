@@ -12,7 +12,7 @@ void FlangerGui::cb_flanger_activar_i(RKR_Light_Button* o, void*) {
 rkr->Flanger_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
-rgui->findpos(7,(int)o->value(),o);
+rgui->findpos(EFX_FLANGER,(int)o->value(),o);
 }
 void FlangerGui::cb_flanger_activar(RKR_Light_Button* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_activar_i(o,v);

@@ -30,7 +30,7 @@ widget_class SequenceGui {
 rkr->Sequence_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
-rgui->findpos(37,(int)o->value(),o);}
+rgui->findpos(EFX_SEQUENCE,(int)o->value(),o);} selected
     xywh {5 4 34 16} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -290,7 +290,7 @@ rkr->efx_Sequence->changepar(Sequence_Stdf,(int)o->value());}
   Fl_Choice seq_range {
     label R
     user_data 12
-    callback {rkr->efx_Sequence->changepar(Sequence_Range,(int)o->value()+1)} selected
+    callback {rkr->efx_Sequence->changepar(Sequence_Range,(int)o->value()+1)}
     tooltip {Step Adjustment Range} xywh {16 169 57 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-1);}
     code1 {o->set_text_offset(-1);}

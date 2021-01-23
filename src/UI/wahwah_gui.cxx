@@ -12,7 +12,7 @@ void WahwahGui::cb_WahWah_activar_i(RKR_Light_Button* o, void*) {
 rkr->WahWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WahWah->cleanup();
-rgui->findpos(10,(int)o->value(),o);
+rgui->findpos(EFX_WAHWAH,(int)o->value(),o);
 }
 void WahwahGui::cb_WahWah_activar(RKR_Light_Button* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_activar_i(o,v);

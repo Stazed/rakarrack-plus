@@ -12,7 +12,7 @@ void VibeGui::cb_vibe_activar_i(RKR_Light_Button* o, void*) {
 rkr->Vibe_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Vibe->cleanup();
-rgui->findpos(45,(int)o->value(),o);
+rgui->findpos(EFX_VIBE,(int)o->value(),o);
 }
 void VibeGui::cb_vibe_activar(RKR_Light_Button* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_activar_i(o,v);

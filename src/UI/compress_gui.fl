@@ -29,7 +29,7 @@ widget_class CompressGui {
 }
 rkr->Compressor_Bypass=(int)o->value();
 rkr->efx_Compressor->cleanup();
-rgui->findpos(1,(int)o->value(),o);}
+rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -150,7 +150,7 @@ rkr->efx_Compressor->changepar(Compress_Output,(int)o->value());}
   Fl_Check_Button Peak {
     label Peak
     user_data 2
-    callback {rkr->efx_Compressor->changepar(Compress_Peak,(int)o->value());} selected
+    callback {rkr->efx_Compressor->changepar(Compress_Peak,(int)o->value());}
     tooltip {Peak Mode Compression} xywh {19 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

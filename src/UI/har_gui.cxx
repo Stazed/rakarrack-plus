@@ -14,7 +14,7 @@ if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(Harm_Interval,rkr->efx_Har->getpar(Harm_Interval));
 rgui->Chord(0);
-rgui->findpos(14,(int)o->value(),o);
+rgui->findpos(EFX_HARMONIZER,(int)o->value(),o);
 }
 void HarGui::cb_har_activar(RKR_Light_Button* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_activar_i(o,v);

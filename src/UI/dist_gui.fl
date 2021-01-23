@@ -31,7 +31,7 @@ widget_class {\#include "common_gui_menu.h"} DistGui {
 rkr->Distorsion_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
-rgui->findpos(2,(int)o->value(),o);}
+rgui->findpos(EFX_DISTORTION,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -191,7 +191,7 @@ rkr->efx_Distorsion->changepar(Dist_LPF,(int)o->value());}
  rgui->getMIDIControl(MC_Dist_HPF);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_HPF,(int)o->value());} selected
+rkr->efx_Distorsion->changepar(Dist_HPF,(int)o->value());}
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

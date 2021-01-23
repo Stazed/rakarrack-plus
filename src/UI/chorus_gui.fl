@@ -31,7 +31,7 @@ widget_class {\#include "common_gui_menu.h"} ChorusGui {
 rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
-rgui->findpos(5,(int)o->value(),o);}
+rgui->findpos(EFX_CHORUS,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -200,7 +200,7 @@ rkr->efx_Chorus->changepar(Chorus_Feedback,(int)o->value());}
  rgui->getMIDIControl(MC_Chorus_LR_Cross);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_LR_Cross,(int)(o->value()));} selected
+rkr->efx_Chorus->changepar(Chorus_LR_Cross,(int)(o->value()));}
     xywh {55 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

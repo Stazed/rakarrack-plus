@@ -30,7 +30,7 @@ widget_class ShifterGui {
 rkr->Shifter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
-rgui->findpos(38,(int)o->value(),o);}
+rgui->findpos(EFX_SHIFTER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -49,7 +49,7 @@ shifter_thre->value(rkr->efx_Shifter->getpar(Shifter_Threshold));
 shifter_ud->value(rkr->efx_Shifter->getpar(Shifter_Shift));
 shifter_whammy->value(rkr->efx_Shifter->getpar(Shifter_Whammy));
 
-shifter_mode->value(rkr->efx_Shifter->getpar(Shifter_Mode));} selected
+shifter_mode->value(rkr->efx_Shifter->getpar(Shifter_Mode));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

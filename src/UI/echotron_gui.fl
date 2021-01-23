@@ -33,7 +33,7 @@ widget_class {\#include "common_gui_menu.h"} EchotronGui {
 }
 rkr->Echotron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
-rgui->findpos(41,(int)o->value(),o);}
+rgui->findpos(EFX_ECHOTRON,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -245,7 +245,7 @@ if(!rkr->efx_Echotron->setfile(USERFILE))
 }
 
 echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
-echotron_length->maximum(rkr->efx_Echotron->File.fLength);} selected
+echotron_length->maximum(rkr->efx_Echotron->File.fLength);}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }

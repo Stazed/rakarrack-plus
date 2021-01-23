@@ -12,7 +12,7 @@ void PhaserGui::cb_phaser_activar_i(RKR_Light_Button* o, void*) {
 rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
-rgui->findpos(6,(int)o->value(),o);
+rgui->findpos(EFX_PHASER,(int)o->value(),o);
 }
 void PhaserGui::cb_phaser_activar(RKR_Light_Button* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_activar_i(o,v);

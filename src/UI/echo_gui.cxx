@@ -12,7 +12,7 @@ void EchoGui::cb_echo_activar_i(RKR_Light_Button* o, void*) {
 rkr->Echo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
-rgui->findpos(4,(int)o->value(),o);
+rgui->findpos(EFX_ECHO,(int)o->value(),o);
 }
 void EchoGui::cb_echo_activar(RKR_Light_Button* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_activar_i(o,v);

@@ -37,7 +37,7 @@ widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
 rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
-rgui->findpos(27,(int)o->value(),o);}
+rgui->findpos(EFX_SYNTHFILTER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -61,7 +61,7 @@ synthfilter_subs->value(rkr->efx_Synthfilter->getpar(Synthfilter_Subtract));
 synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(Synthfilter_Depth));
 synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(Synthfilter_Env_Sens));
 synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Attack));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));} selected
+synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

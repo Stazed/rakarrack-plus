@@ -12,7 +12,7 @@ void ChorusGui::cb_chorus_activar_i(RKR_Light_Button* o, void*) {
 rkr->Chorus_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
-rgui->findpos(5,(int)o->value(),o);
+rgui->findpos(EFX_CHORUS,(int)o->value(),o);
 }
 void ChorusGui::cb_chorus_activar(RKR_Light_Button* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_activar_i(o,v);

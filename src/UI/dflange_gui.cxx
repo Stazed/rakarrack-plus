@@ -12,7 +12,7 @@ void DflangeGui::cb_dflange_activar_i(RKR_Light_Button* o, void*) {
 rkr->DFlange_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
-rgui->findpos(20,(int)o->value(),o);
+rgui->findpos(EFX_DUAL_FLANGE,(int)o->value(),o);
 }
 void DflangeGui::cb_dflange_activar(RKR_Light_Button* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_activar_i(o,v);

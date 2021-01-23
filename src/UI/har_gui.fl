@@ -32,7 +32,7 @@ if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(Harm_Interval,rkr->efx_Har->getpar(Harm_Interval));
 rgui->Chord(0);
-rgui->findpos(14,(int)o->value(),o);}
+rgui->findpos(EFX_HARMONIZER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -197,7 +197,7 @@ rgui->Chord(0);}
  return;
 }
 rkr->efx_Har->changepar(Harm_Chord,(unsigned char)o->value());
-rgui->Chord(0);} selected
+rgui->Chord(0);}
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
     class RKR_Slider
   }

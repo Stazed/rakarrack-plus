@@ -12,7 +12,7 @@ void OtremGui::cb_otrem_activar_i(RKR_Light_Button* o, void*) {
 rkr->Opticaltrem_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
-rgui->findpos(44,(int)o->value(),o);
+rgui->findpos(EFX_OPTICALTREM,(int)o->value(),o);
 }
 void OtremGui::cb_otrem_activar(RKR_Light_Button* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_activar_i(o,v);

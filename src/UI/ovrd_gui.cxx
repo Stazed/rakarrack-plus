@@ -12,7 +12,7 @@ void OvrdGui::cb_ovrd_activar_i(RKR_Light_Button* o, void*) {
 rkr->Overdrive_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
-rgui->findpos(3,(int)o->value(),o);
+rgui->findpos(EFX_OVERDRIVE,(int)o->value(),o);
 }
 void OvrdGui::cb_ovrd_activar(RKR_Light_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_activar_i(o,v);

@@ -12,7 +12,7 @@ void ValveGui::cb_valve_activar_i(RKR_Light_Button* o, void*) {
 rkr->Valve_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Valve->cleanup();
-rgui->findpos(19,(int)o->value(),o);
+rgui->findpos(EFX_VALVE,(int)o->value(),o);
 }
 void ValveGui::cb_valve_activar(RKR_Light_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_activar_i(o,v);

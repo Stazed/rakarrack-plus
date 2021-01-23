@@ -12,7 +12,7 @@ void CbandGui::cb_cband_activar_i(RKR_Light_Button* o, void*) {
 rkr->CompBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
-rgui->findpos(43,(int)o->value(),o);
+rgui->findpos(EFX_COMPBAND,(int)o->value(),o);
 }
 void CbandGui::cb_cband_activar(RKR_Light_Button* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_activar_i(o,v);

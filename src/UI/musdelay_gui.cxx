@@ -12,7 +12,7 @@ void MusdelayGui::cb_musdelay_activar_i(RKR_Light_Button* o, void*) {
 rkr->MusDelay_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MusDelay->cleanup();
-rgui->findpos(15,(int)o->value(),o);
+rgui->findpos(EFX_MUSICAL_DELAY,(int)o->value(),o);
 }
 void MusdelayGui::cb_musdelay_activar(RKR_Light_Button* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_activar_i(o,v);

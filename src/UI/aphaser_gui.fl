@@ -34,7 +34,7 @@ widget_class {\#include "common_gui_menu.h"} AphaserGui {
 rkr->APhaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
-rgui->findpos(18,(int)o->value(),o);}
+rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -213,7 +213,7 @@ rkr->efx_APhaser->changepar(APhase_LFO_Stereo,(int)o->value());}
   Fl_Check_Button aphaser_hyper {
     label Hyper
     user_data 2
-    callback {rkr->efx_APhaser->changepar(APhase_Hyper,(int)o->value())} selected
+    callback {rkr->efx_APhaser->changepar(APhase_Hyper,(int)o->value())}
     xywh {90 165 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

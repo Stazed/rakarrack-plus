@@ -30,7 +30,7 @@ widget_class RingGui {
 rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
-rgui->findpos(21,(int)o->value(),o);}
+rgui->findpos(EFX_RING,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -145,7 +145,7 @@ rkr->efx_Ring->changepar(Ring_Pan,(int)o->value());}
   Fl_Check_Button ring_afreq {
     label {Auto Freq}
     user_data 2
-    callback {rkr->efx_Ring->changepar(Ring_Auto_Freq,(int)o->value());} selected
+    callback {rkr->efx_Ring->changepar(Ring_Auto_Freq,(int)o->value());}
     xywh {80 92 69 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

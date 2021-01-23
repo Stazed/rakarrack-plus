@@ -12,7 +12,7 @@ void DistBandGui::cb_distband_activar_i(RKR_Light_Button* o, void*) {
 rkr->DistBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DistBand->cleanup();
-rgui->findpos(23,(int)o->value(),o);
+rgui->findpos(EFX_DISTBAND,(int)o->value(),o);
 }
 void DistBandGui::cb_distband_activar(RKR_Light_Button* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_activar_i(o,v);

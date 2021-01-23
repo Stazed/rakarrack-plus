@@ -12,7 +12,7 @@ void SynthfilterGui::cb_synthfilter_activar_i(RKR_Light_Button* o, void*) {
 rkr->Synthfilter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Synthfilter->cleanup();
-rgui->findpos(27,(int)o->value(),o);
+rgui->findpos(EFX_SYNTHFILTER,(int)o->value(),o);
 }
 void SynthfilterGui::cb_synthfilter_activar(RKR_Light_Button* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_activar_i(o,v);

@@ -10,7 +10,7 @@ void ExpanderGui::cb_expander_activar_i(RKR_Light_Button* o, void*) {
  return;
 }
 rkr->Expander_Bypass=(int)o->value();
-rgui->findpos(25,(int)o->value(),o);
+rgui->findpos(EFX_EXPANDER,(int)o->value(),o);
 }
 void ExpanderGui::cb_expander_activar(RKR_Light_Button* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_activar_i(o,v);

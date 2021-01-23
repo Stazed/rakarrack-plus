@@ -29,7 +29,7 @@ widget_class RevtronGui {
 }
 rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-rgui->findpos(40,(int)o->value(),o);}
+rgui->findpos(EFX_REVERBTRON,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -55,7 +55,7 @@ revtron_LPF->value(rkr->efx_Reverbtron->getpar(Revtron_LPF));
 revtron_diff->value(rkr->efx_Reverbtron->getpar(Revtron_Diffusion));
 
 revtron_es->value(rkr->efx_Reverbtron->getpar(Revtron_Ex_Stereo));
-revtron_rv->value(rkr->efx_Reverbtron->getpar(Revtron_Shuffle));} selected
+revtron_rv->value(rkr->efx_Reverbtron->getpar(Revtron_Shuffle));}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

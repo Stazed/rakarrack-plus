@@ -27,7 +27,7 @@ widget_class StompboxGui {
 rkr->StompBox_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
-rgui->findpos(39,(int)o->value(),o);}
+rgui->findpos(EFX_STOMPBOX,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -42,7 +42,7 @@ stomp_low->value(rkr->efx_StompBox->getpar(Stomp_Bias));
 stomp_mid->value(rkr->efx_StompBox->getpar(Stomp_Mid));
 stomp_high->value(rkr->efx_StompBox->getpar(Stomp_Tone));
 
-stomp_mode->value(rkr->efx_StompBox->getpar(Stomp_Mode));} open selected
+stomp_mode->value(rkr->efx_StompBox->getpar(Stomp_Mode));} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

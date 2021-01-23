@@ -12,7 +12,7 @@ void LooperGui::cb_looper_activar_i(RKR_Light_Button* o, void*) {
 rkr->Looper_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
-rgui->findpos(30,(int)o->value(),o);
+rgui->findpos(EFX_LOOPER,(int)o->value(),o);
 }
 void LooperGui::cb_looper_activar(RKR_Light_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_activar_i(o,v);

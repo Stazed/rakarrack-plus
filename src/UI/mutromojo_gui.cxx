@@ -12,7 +12,7 @@ void MutromojoGui::cb_mutromojo_activar_i(RKR_Light_Button* o, void*) {
 rkr->MuTroMojo_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MuTroMojo->cleanup();
-rgui->findpos(31,(int)o->value(),o);
+rgui->findpos(EFX_MUTROMOJO,(int)o->value(),o);
 }
 void MutromojoGui::cb_mutromojo_activar(RKR_Light_Button* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_activar_i(o,v);

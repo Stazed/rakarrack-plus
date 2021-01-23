@@ -12,7 +12,7 @@ void DerelictGui::cb_derelict_activar_i(RKR_Light_Button* o, void*) {
 rkr->Derelict_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Derelict->cleanup();
-rgui->findpos(17,(int)o->value(),o);
+rgui->findpos(EFX_DERELICT,(int)o->value(),o);
 }
 void DerelictGui::cb_derelict_activar(RKR_Light_Button* o, void* v) {
   ((DerelictGui*)(o->parent()))->cb_derelict_activar_i(o,v);

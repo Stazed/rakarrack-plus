@@ -12,7 +12,7 @@ void ExciterGui::cb_exciter_activar_i(RKR_Light_Button* o, void*) {
 rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
-rgui->findpos(22,(int)o->value(),o);
+rgui->findpos(EFX_EXCITER,(int)o->value(),o);
 }
 void ExciterGui::cb_exciter_activar(RKR_Light_Button* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_exciter_activar_i(o,v);

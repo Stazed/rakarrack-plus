@@ -12,7 +12,7 @@ void EchoverseGui::cb_echoverse_activar_i(RKR_Light_Button* o, void*) {
 rkr->Echoverse_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echoverse->cleanup();
-rgui->findpos(32,(int)o->value(),o);
+rgui->findpos(EFX_ECHOVERSE,(int)o->value(),o);
 }
 void EchoverseGui::cb_echoverse_activar(RKR_Light_Button* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_activar_i(o,v);

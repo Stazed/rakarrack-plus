@@ -12,7 +12,7 @@ void SequenceGui::cb_seq_activar_i(RKR_Light_Button* o, void*) {
 rkr->Sequence_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
-rgui->findpos(37,(int)o->value(),o);
+rgui->findpos(EFX_SEQUENCE,(int)o->value(),o);
 }
 void SequenceGui::cb_seq_activar(RKR_Light_Button* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_activar_i(o,v);

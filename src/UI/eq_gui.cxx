@@ -12,7 +12,7 @@ void EqGui::cb_eq_activar_i(RKR_Light_Button* o, void*) {
 rkr->EQ1_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
-rgui->findpos(0,(int)o->value(),o);
+rgui->findpos(EFX_EQ,(int)o->value(),o);
 }
 void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_activar_i(o,v);

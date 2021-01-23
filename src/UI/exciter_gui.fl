@@ -27,7 +27,7 @@ widget_class ExciterGui {
 rkr->Exciter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
-rgui->findpos(22,(int)o->value(),o);}
+rgui->findpos(EFX_EXCITER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -48,7 +48,7 @@ ex_8->value(rkr->efx_Exciter->getpar(Exciter_Harm_8));
 ex_9->value(rkr->efx_Exciter->getpar(Exciter_Harm_9));
 ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
 ex_lfreq->value(rkr->efx_Exciter->getpar(Exciter_LPF));
-ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));} selected
+ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

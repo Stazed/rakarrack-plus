@@ -12,7 +12,7 @@ void ShifterGui::cb_shifter_activar_i(RKR_Light_Button* o, void*) {
 rkr->Shifter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
-rgui->findpos(38,(int)o->value(),o);
+rgui->findpos(EFX_SHIFTER,(int)o->value(),o);
 }
 void ShifterGui::cb_shifter_activar(RKR_Light_Button* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_activar_i(o,v);

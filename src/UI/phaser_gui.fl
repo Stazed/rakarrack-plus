@@ -34,7 +34,7 @@ widget_class {\#include "common_gui_menu.h"} PhaserGui {
 rkr->Phaser_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Phaser->cleanup();
-rgui->findpos(6,(int)o->value(),o);}
+rgui->findpos(EFX_PHASER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -205,7 +205,7 @@ rkr->efx_Phaser->changepar(Phaser_Feedback,(int)o->value());}
  rgui->getMIDIControl(MC_Phaser_LR_Cross);
  return;
 } 
-rkr->efx_Phaser->changepar(Phaser_LR_Cross,(int)(o->value()+64));} selected
+rkr->efx_Phaser->changepar(Phaser_LR_Cross,(int)(o->value()+64));}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }

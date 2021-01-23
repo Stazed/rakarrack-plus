@@ -34,7 +34,7 @@ widget_class {\#include "RKR_Value_Input.h"} InfinityGui {
 rkr->Infinity_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Infinity->cleanup();
-rgui->findpos(46,(int)o->value(),o);}
+rgui->findpos(EFX_INFINITY,(int)o->value(),o);} selected
     xywh {8 5 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -215,7 +215,7 @@ rkr->efx_Infinity->changepar(Infinity_Band_7,(int)o->value());}
  rgui->getMIDIControl(MC_Infinity_Band_8);
  return;
 } 
-rkr->efx_Infinity->changepar(Infinity_Band_8,(int)o->value());} selected
+rkr->efx_Infinity->changepar(Infinity_Band_8,(int)o->value());}
     xywh {130 74 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 64 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }

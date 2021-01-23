@@ -12,7 +12,7 @@ void InfinityGui::cb_infinity_activar_i(RKR_Light_Button* o, void*) {
 rkr->Infinity_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Infinity->cleanup();
-rgui->findpos(46,(int)o->value(),o);
+rgui->findpos(EFX_INFINITY,(int)o->value(),o);
 }
 void InfinityGui::cb_infinity_activar(RKR_Light_Button* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_activar_i(o,v);

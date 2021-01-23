@@ -12,7 +12,7 @@ void VocoderGui::cb_vo_activar_i(RKR_Light_Button* o, void*) {
 rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-rgui->findpos(35,(int)o->value(),o);
+rgui->findpos(EFX_VOCODER,(int)o->value(),o);
 }
 void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_activar_i(o,v);

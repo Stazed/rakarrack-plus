@@ -28,7 +28,7 @@ widget_class {\#include "newvum.h"} VocoderGui {
 rkr->Vocoder_Bypass=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-rgui->findpos(35,(int)o->value(),o);}
+rgui->findpos(EFX_VOCODER,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -130,7 +130,7 @@ rgui->findpos(35,(int)o->value(),o);}
          rgui->getMIDIControl(MC_Vocoder_Ring);
          return;
         }
-        rkr->efx_Vocoder->changepar(Vocoder_Ring,(int)o->value());} selected
+        rkr->efx_Vocoder->changepar(Vocoder_Ring,(int)o->value());}
     xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

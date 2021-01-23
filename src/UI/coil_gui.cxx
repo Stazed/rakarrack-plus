@@ -12,7 +12,7 @@ void CoilGui::cb_coil_activar_i(RKR_Light_Button* o, void*) {
 rkr->CoilCrafter_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
-rgui->findpos(33,(int)o->value(),o);
+rgui->findpos(EFX_COILCRAFTER,(int)o->value(),o);
 }
 void CoilGui::cb_coil_activar(RKR_Light_Button* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_activar_i(o,v);

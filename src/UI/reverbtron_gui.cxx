@@ -11,7 +11,7 @@ void RevtronGui::cb_revtron_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->Reverbtron_Bypass=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
-rgui->findpos(40,(int)o->value(),o);
+rgui->findpos(EFX_REVERBTRON,(int)o->value(),o);
 }
 void RevtronGui::cb_revtron_activar(RKR_Light_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_activar_i(o,v);

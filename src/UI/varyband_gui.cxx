@@ -12,7 +12,7 @@ void VarybandGui::cb_varyband_activar_i(RKR_Light_Button* o, void*) {
 rkr->VaryBand_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_VaryBand->cleanup();
-rgui->findpos(28,(int)o->value(),o);
+rgui->findpos(EFX_VARYBAND,(int)o->value(),o);
 }
 void VarybandGui::cb_varyband_activar(RKR_Light_Button* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_activar_i(o,v);

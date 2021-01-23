@@ -12,7 +12,7 @@ void RingGui::cb_ring_activar_i(RKR_Light_Button* o, void*) {
 rkr->Ring_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Ring->cleanup();
-rgui->findpos(21,(int)o->value(),o);
+rgui->findpos(EFX_RING,(int)o->value(),o);
 }
 void RingGui::cb_ring_activar(RKR_Light_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_activar_i(o,v);

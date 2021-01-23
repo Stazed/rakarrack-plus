@@ -30,7 +30,7 @@ widget_class ConvoGui {
 rkr->Convol_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
-rgui->findpos(29,(int)o->value(),o);}
+rgui->findpos(EFX_CONVOLOTRON,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -48,7 +48,7 @@ convo_length->value(rkr->efx_Convol->getpar(Convo_Length));
 convo_user->value(rkr->efx_Convol->getpar(Convo_User_File));
 convo_user->do_callback();
 convo_safe->value(rkr->efx_Convol->getpar(Convo_Safe));
-convo_fb->value(rkr->efx_Convol->getpar(Convo_Feedback));} selected
+convo_fb->value(rkr->efx_Convol->getpar(Convo_Feedback));}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

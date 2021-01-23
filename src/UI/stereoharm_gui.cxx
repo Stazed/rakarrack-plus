@@ -15,7 +15,7 @@ rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
 rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
 rgui->Chord(1);
-rgui->findpos(42,(int)o->value(),o);
+rgui->findpos(EFX_STEREOHARM,(int)o->value(),o);
 }
 void SharGui::cb_shar_activar(RKR_Light_Button* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_activar_i(o,v);

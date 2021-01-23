@@ -12,7 +12,7 @@ void PanGui::cb_pan_activar_i(RKR_Light_Button* o, void*) {
 rkr->Pan_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
-rgui->findpos(13,(int)o->value(),o);
+rgui->findpos(EFX_PAN,(int)o->value(),o);
 }
 void PanGui::cb_pan_activar(RKR_Light_Button* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_activar_i(o,v);

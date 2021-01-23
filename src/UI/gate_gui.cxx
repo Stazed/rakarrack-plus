@@ -10,7 +10,7 @@ void GateGui::cb_gate_activar_i(RKR_Light_Button* o, void*) {
  return;
 }
 rkr->Gate_Bypass=(int)o->value();
-rgui->findpos(16,(int)o->value(),o);
+rgui->findpos(EFX_NOISEGATE,(int)o->value(),o);
 }
 void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_activar_i(o,v);

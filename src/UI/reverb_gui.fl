@@ -27,7 +27,7 @@ widget_class ReverbGui {
 rkr->Reverb_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
-rgui->findpos(8,(int)o->value(),o);}
+rgui->findpos(EFX_REVERB,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x39 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -218,7 +218,7 @@ rkr->efx_Rev->changepar(Reverb_HPF,(int)o->value());}
  rgui->getMIDIControl(MC_Reverb_Damp);
  return;
 }
-rkr->efx_Rev->changepar(Reverb_Damp,(int)o->value());} selected
+rkr->efx_Rev->changepar(Reverb_Damp,(int)o->value());}
     xywh {56 163 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
     class RKR_Slider
   }

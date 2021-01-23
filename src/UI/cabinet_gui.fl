@@ -25,7 +25,7 @@ widget_class CabinetGui {
  return;
 }
 rkr->Cabinet_Bypass=(int)o->value();
-rgui->findpos(12,(int)o->value(),o);}
+rgui->findpos(EFX_CABINET,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -89,7 +89,7 @@ rgui->findpos(12,(int)o->value(),o);}
  return;
 } 
 
-rkr->efx_Cabinet->changepar(Cabinet_Gain,(int)(o->value()+64));} selected
+rkr->efx_Cabinet->changepar(Cabinet_Gain,(int)(o->value()+64));}
     xywh {56 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }

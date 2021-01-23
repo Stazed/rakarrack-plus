@@ -12,7 +12,7 @@ void ArpieGui::cb_arpie_activar_i(RKR_Light_Button* o, void*) {
 rkr->Arpie_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Arpie->cleanup();
-rgui->findpos(24,(int)o->value(),o);
+rgui->findpos(EFX_ARPIE,(int)o->value(),o);
 }
 void ArpieGui::cb_arpie_activar(RKR_Light_Button* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_activar_i(o,v);

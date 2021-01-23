@@ -12,7 +12,7 @@ void ShuffleGui::cb_shuffle_activar_i(RKR_Light_Button* o, void*) {
 rkr->Shuffle_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shuffle->cleanup();
-rgui->findpos(26,(int)o->value(),o);
+rgui->findpos(EFX_SHUFFLE,(int)o->value(),o);
 }
 void ShuffleGui::cb_shuffle_activar(RKR_Light_Button* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_activar_i(o,v);

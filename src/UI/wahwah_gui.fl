@@ -31,7 +31,7 @@ widget_class {\#include "common_gui_menu.h"} WahwahGui {
 rkr->WahWah_Bypass=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WahWah->cleanup();
-rgui->findpos(10,(int)o->value(),o);}
+rgui->findpos(EFX_WAHWAH,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -213,7 +213,7 @@ rkr->efx_WahWah->changepar(WahWah_ASI,(int)o->value());}
  rgui->getMIDIControl(MC_WahWah_Smooth);
  return;
 } 
-rkr->efx_WahWah->changepar(WahWah_Smooth,(int)o->value());} selected
+rkr->efx_WahWah->changepar(WahWah_Smooth,(int)o->value());}
     xywh {56 165 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

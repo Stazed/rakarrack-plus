@@ -10,7 +10,7 @@ void CabinetGui::cb_Cabinet_activar_i(RKR_Light_Button* o, void*) {
  return;
 }
 rkr->Cabinet_Bypass=(int)o->value();
-rgui->findpos(12,(int)o->value(),o);
+rgui->findpos(EFX_CABINET,(int)o->value(),o);
 }
 void CabinetGui::cb_Cabinet_activar(RKR_Light_Button* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_activar_i(o,v);
