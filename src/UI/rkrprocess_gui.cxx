@@ -1418,8 +1418,8 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case EFX_CABINET:
-                CABINET->Cabinet_output->value(rkr->lv[13][1] - 64);
-                CABINET->Cabinet_preset->value(rkr->lv[13][0]);
+                CABINET->Cabinet_output->value(rkr->lv[LV_CABINET][1] - 64);
+                CABINET->Cabinet_preset->value(rkr->lv[LV_CABINET][0]);
                 CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
                 break;
 
