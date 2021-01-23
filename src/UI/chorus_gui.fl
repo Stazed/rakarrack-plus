@@ -25,10 +25,10 @@ widget_class {\#include "common_gui_menu.h"} ChorusGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Chorus_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_CHORUS]);
  return;
 }
-rkr->Chorus_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_CHORUS]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
 rgui->findpos(EFX_CHORUS,(int)o->value(),o);} selected

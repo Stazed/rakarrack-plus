@@ -126,8 +126,9 @@ RKR::RKR() :
     Tuner_Bypass(0),
     Tap_Bypass(0),
     ACI_Bypass(0),
-    Reverb_Bypass(),
-    Chorus_Bypass(),
+    EFX_Bypass(),
+    EFX_Bank_Bypass(),
+
     Flanger_Bypass(),
     Phaser_Bypass(),
     Overdrive_Bypass(),
@@ -436,7 +437,7 @@ RKR::RKR() :
     {
         return; // If we don't have a jack client then quit with message
     }
-    
+
     load_user_preferences();
 
     Get_Bogomips();
@@ -1457,7 +1458,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_CHORUS:
-                if (Chorus_Bypass)
+                if (EFX_Bypass[EFX_CHORUS])
                 {
                     efx_Chorus->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_CHORUS, efx_Chorus->outvolume);
@@ -1481,7 +1482,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_REVERB:
-                if (Reverb_Bypass)
+                if (EFX_Bypass[EFX_REVERB])
                 {
                     efx_Rev->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_REVERB, efx_Rev->outvolume);

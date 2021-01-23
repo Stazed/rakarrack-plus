@@ -1383,7 +1383,7 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case EFX_CHORUS:
-                CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
+                CHORUS->chorus_activar->value(rkr->EFX_Bypass[EFX_CHORUS]);
                 CHORUS->chorus_preset->do_callback(CHORUS->chorus_preset, 1);
                 break;
 
@@ -1398,7 +1398,7 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case EFX_REVERB:
-                REVERB->reverb_activar->value(rkr->Reverb_Bypass);
+                REVERB->reverb_activar->value(rkr->EFX_Bypass[EFX_REVERB]);
                 REVERB->reverb_preset->do_callback(REVERB->reverb_preset, 1);
                 break;
 
@@ -1855,7 +1855,7 @@ void RKRGUI::reordena()
                 CHORUS->chorus_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     CHORUS->show();
-                if (rkr->Chorus_Bypass)
+                if (rkr->EFX_Bypass[EFX_CHORUS])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1900,7 +1900,7 @@ void RKRGUI::reordena()
                 REVERB->reverb_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     REVERB->show();
-                if (rkr->Reverb_Bypass)
+                if (rkr->EFX_Bypass[EFX_REVERB])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -5083,7 +5083,7 @@ void RKRGUI::ActOnOff()
                 ECHO->echo_activar->do_callback();
                 break;
             case EFX_CHORUS:
-                CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
+                CHORUS->chorus_activar->value(rkr->EFX_Bypass[EFX_CHORUS]);
                 CHORUS->chorus_activar->do_callback();
                 break;
             case EFX_PHASER:
@@ -5095,7 +5095,7 @@ void RKRGUI::ActOnOff()
                 FLANGER->flanger_activar->do_callback();
                 break;
             case EFX_REVERB:
-                REVERB->reverb_activar->value(rkr->Reverb_Bypass);
+                REVERB->reverb_activar->value(rkr->EFX_Bypass[EFX_REVERB]);
                 REVERB->reverb_activar->do_callback();
                 break;
             case EFX_PARAMETRIC:
@@ -6040,7 +6040,7 @@ void RKRGUI::UpdateTGUI()
         LOOPER->looper_Tempo->redraw();
     }
 
-    if (rkr->Chorus_Bypass)
+    if (rkr->EFX_Bypass[EFX_CHORUS])
     {
         CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
         CHORUS->chorus_freq->redraw();
@@ -6894,10 +6894,10 @@ void RKRGUI::RandomPreset()
 
             case EFX_CHORUS:
                 if (i < numEff)
-                    rkr->Chorus_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_CHORUS] = 1;
                 else
-                    rkr->Chorus_Bypass = 0;
-                CHORUS->chorus_activar->value(rkr->Chorus_Bypass);
+                    rkr->EFX_Bypass[EFX_CHORUS] = 0;
+                CHORUS->chorus_activar->value(rkr->EFX_Bypass[EFX_CHORUS]);
                 break;
 
             case EFX_PHASER:
@@ -6918,10 +6918,10 @@ void RKRGUI::RandomPreset()
 
             case EFX_REVERB:
                 if (i < numEff)
-                    rkr->Reverb_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_REVERB] = 1;
                 else
-                    rkr->Reverb_Bypass = 0;
-                REVERB->reverb_activar->value(rkr->Reverb_Bypass);
+                    rkr->EFX_Bypass[EFX_REVERB] = 0;
+                REVERB->reverb_activar->value(rkr->EFX_Bypass[EFX_REVERB]);
                 break;
 
             case EFX_PARAMETRIC:

@@ -497,7 +497,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Rev->getpar(Reverb_Delay_FB), efx_Rev->getpar(Reverb_SKIP_5),
                 efx_Rev->getpar(Reverb_SKIP_6), efx_Rev->getpar(Reverb_LPF),
                 efx_Rev->getpar(Reverb_HPF), efx_Rev->getpar(Reverb_Damp),
-                efx_Rev->getpar(Reverb_Type), efx_Rev->getpar(Reverb_Room), Reverb_Bypass);
+                efx_Rev->getpar(Reverb_Type), efx_Rev->getpar(Reverb_Room), EFX_Bypass[EFX_REVERB]);
         break;
 
     case EFX_ECHO:
@@ -517,7 +517,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Chorus->getpar(Chorus_Depth), efx_Chorus->getpar(Chorus_Delay),
                 efx_Chorus->getpar(Chorus_Feedback), efx_Chorus->getpar(Chorus_LR_Cross),
                 efx_Chorus->getpar(Chorus_SKIP_Flange_10), efx_Chorus->getpar(Chorus_Subtract),
-                efx_Chorus->getpar(Chorus_Intense), Chorus_Bypass);
+                efx_Chorus->getpar(Chorus_Intense), EFX_Bypass[EFX_CHORUS]);
         break;
 
     case EFX_FLANGER:
@@ -1331,11 +1331,11 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_CHORUS:
-            Chorus_Bypass = 0;
+            EFX_Bypass[EFX_CHORUS] = 0;
             efx_Chorus->cleanup();
             for (i = 0; i < C_CHORUS_PARAMETERS; i++)
                 efx_Chorus->changepar(i, lv[LV_CHORUS][i]);
-            Chorus_Bypass = Chorus_B;
+            EFX_Bypass[EFX_CHORUS] = Chorus_B;
             break;
 
         case EFX_PHASER:
@@ -1355,11 +1355,11 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_REVERB:
-            Reverb_Bypass = 0;
+            EFX_Bypass[EFX_REVERB] = 0;
             efx_Rev->cleanup();
             for (i = 0; i < C_REVERB_PARAMETERS; i++)
                 efx_Rev->changepar(i, lv[LV_REVERB][i]);
-            Reverb_Bypass = Reverb_B;
+            EFX_Bypass[EFX_REVERB] = Reverb_B;
             break;
 
         case EFX_PARAMETRIC:
@@ -2211,9 +2211,9 @@ RKR::Preset_to_Bank(int i)
         }
     }
 
-    Bank[i].lv[LV_REVERB][C_LV_BYPASS] = Reverb_Bypass;
+    Bank[i].lv[LV_REVERB][C_LV_BYPASS] = EFX_Bypass[EFX_REVERB];
     Bank[i].lv[LV_ECHO][C_LV_BYPASS] = Echo_Bypass;
-    Bank[i].lv[LV_CHORUS][C_LV_BYPASS] = Chorus_Bypass;
+    Bank[i].lv[LV_CHORUS][C_LV_BYPASS] = EFX_Bypass[EFX_CHORUS];
     Bank[i].lv[LV_FLANGER][C_LV_BYPASS] = Flanger_Bypass;
     Bank[i].lv[LV_PHASER][C_LV_BYPASS] = Phaser_Bypass;
     Bank[i].lv[LV_OVERDRIVE][C_LV_BYPASS] = Overdrive_Bypass;

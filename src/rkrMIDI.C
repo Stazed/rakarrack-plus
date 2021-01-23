@@ -902,8 +902,8 @@ RKR::ActiveUn(int value)
         else Echo_Bypass = 0;
         break;
     case EFX_CHORUS:
-        if (inoff) Chorus_Bypass = 1;
-        else Chorus_Bypass = 0;
+        if (inoff) EFX_Bypass[EFX_CHORUS] = 1;
+        else EFX_Bypass[EFX_CHORUS] = 0;
         break;
     case EFX_PHASER:
         if (inoff) Phaser_Bypass = 1;
@@ -914,8 +914,8 @@ RKR::ActiveUn(int value)
         else Flanger_Bypass = 0;
         break;
     case EFX_REVERB:
-        if (inoff) Reverb_Bypass = 1;
-        else Reverb_Bypass = 0;
+        if (inoff) EFX_Bypass[EFX_REVERB] = 1;
+        else EFX_Bypass[EFX_REVERB] = 0;
         break;
     case EFX_PARAMETRIC:
         if (inoff) EQ2_Bypass = 1;
@@ -1111,7 +1111,7 @@ RKR::checkonoff(int miraque)
         if (Echo_Bypass)return (0);
         break;
     case EFX_CHORUS:
-        if (Chorus_Bypass) return (0);
+        if (EFX_Bypass[EFX_CHORUS]) return (0);
         break;
     case EFX_PHASER:
         if (Phaser_Bypass) return (0);
@@ -1120,7 +1120,7 @@ RKR::checkonoff(int miraque)
         if (Flanger_Bypass) return (0);
         break;
     case EFX_REVERB:
-        if (Reverb_Bypass) return (0);
+        if (EFX_Bypass[EFX_REVERB]) return (0);
         break;
     case EFX_PARAMETRIC:
         if (EQ2_Bypass) return (0);

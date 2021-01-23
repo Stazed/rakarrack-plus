@@ -847,8 +847,10 @@ public:
     int Tuner_Bypass;
     int Tap_Bypass;
     int ACI_Bypass;
-    int Reverb_Bypass;
-    int Chorus_Bypass;
+    
+    int EFX_Bypass[C_NUMBER_EFFECTS];
+    int EFX_Bank_Bypass[C_NUMBER_EFFECTS];
+
     int Flanger_Bypass;
     int Phaser_Bypass;
     int Overdrive_Bypass;
@@ -894,7 +896,9 @@ public:
     int Opticaltrem_Bypass;
     int Vibe_Bypass;
     int Infinity_Bypass;
+
     int Bypass_B;
+
     int Reverb_B;
     int Chorus_B;
     int Flanger_B;

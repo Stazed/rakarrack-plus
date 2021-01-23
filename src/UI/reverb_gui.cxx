@@ -6,10 +6,10 @@ void ReverbGui::cb_reverb_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Reverb_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_REVERB]);
  return;
 }
-rkr->Reverb_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_REVERB]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Rev->cleanup();
 rgui->findpos(EFX_REVERB,(int)o->value(),o);
@@ -19,7 +19,7 @@ void ReverbGui::cb_reverb_activar(RKR_Light_Button* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_preset_i(RKR_Choice* o, void* v) {
-  rkr->Reverb_Bypass=0;
+  rkr->EFX_Bypass[EFX_REVERB]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12008))rkr->efx_Rev->setpreset((int) o->value());
 reverb_WD->value(Dry_Wet(rkr->efx_Rev->getpar(Reverb_DryWet)));
@@ -32,7 +32,7 @@ reverb_HPF->value(rkr->efx_Rev->getpar(Reverb_HPF));
 reverb_damp->value(rkr->efx_Rev->getpar(Reverb_Damp));
 reverb_RS->value(rkr->efx_Rev->getpar(Reverb_Room));
 reverb_type->value(rkr->efx_Rev->getpar(Reverb_Type));
-if((int)reverb_activar->value())rkr->Reverb_Bypass=1;
+if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;
 }
 void ReverbGui::cb_reverb_preset(RKR_Choice* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_preset_i(o,v);
@@ -141,9 +141,9 @@ void ReverbGui::cb_reverb_RS_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Reverb_Room);
  return;
 }
-rkr->Reverb_Bypass=0;
+rkr->EFX_Bypass[EFX_REVERB]=0;
 rkr->efx_Rev->changepar(Reverb_Room,(int)o->value());
-if((int)reverb_activar->value())rkr->Reverb_Bypass=1;
+if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;
 }
 void ReverbGui::cb_reverb_RS(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_RS_i(o,v);
