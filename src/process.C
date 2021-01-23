@@ -128,53 +128,8 @@ RKR::RKR() :
     ACI_Bypass(0),
     EFX_Bypass(),
     EFX_Bank_Bypass(),
-
-    Flanger_Bypass(),
-    Phaser_Bypass(),
-    Overdrive_Bypass(),
-    Distorsion_Bypass(),
-    Echo_Bypass(),
-    EQ1_Bypass(),
-    EQ2_Bypass(),
-    Compressor_Bypass(),
-    WahWah_Bypass(),
-    Alienwah_Bypass(),
-    Cabinet_Bypass(),
-    Pan_Bypass(),
-    Harmonizer_Bypass(),
-    MusDelay_Bypass(),
-    Gate_Bypass(),
-    Derelict_Bypass(),
-    APhaser_Bypass(),
-    Valve_Bypass(),
-    DFlange_Bypass(),
-    Ring_Bypass(),
-    Exciter_Bypass(),
-    DistBand_Bypass(),
-    Arpie_Bypass(),
-    Expander_Bypass(),
-    Shuffle_Bypass(),
-    Synthfilter_Bypass(),
-    VaryBand_Bypass(),
-    Convol_Bypass(),
-    Looper_Bypass(),
-    MuTroMojo_Bypass(),
-    Echoverse_Bypass(),
-    CoilCrafter_Bypass(),
-    ShelfBoost_Bypass(),
-    Vocoder_Bypass(),
-    Sustainer_Bypass(),
-    Sequence_Bypass(),
-    Shifter_Bypass(),
-    StompBox_Bypass(),
-    Reverbtron_Bypass(),
-    Echotron_Bypass(),
-    StereoHarm_Bypass(),
-    CompBand_Bypass(),
-    Opticaltrem_Bypass(),
-    Vibe_Bypass(),
-    Infinity_Bypass(),
     Bypass_B(),
+
     Reverb_B(),
     Chorus_B(),
     Flanger_B(),
@@ -1032,7 +987,7 @@ RKR::checkforaux()
     {
         if (efx_order[i] == EFX_VOCODER)
         {
-            if (Vocoder_Bypass) return (1);
+            if (EFX_Bypass[EFX_VOCODER]) return (1);
         }
     }
 
@@ -1355,7 +1310,7 @@ RKR::Alg(float *origl, float *origr, void *)
             }
         }
 
-        if ((Harmonizer_Bypass) && (have_signal))
+        if ((EFX_Bypass[EFX_HARMONIZER]) && (have_signal))
         {
             if (efx_Har->mira)
             {
@@ -1376,7 +1331,7 @@ RKR::Alg(float *origl, float *origr, void *)
         }
 
 
-        if ((StereoHarm_Bypass) && (have_signal))
+        if ((EFX_Bypass[EFX_STEREOHARM]) && (have_signal))
         {
             if (efx_StereoHarm->mira)
             {
@@ -1399,7 +1354,7 @@ RKR::Alg(float *origl, float *origr, void *)
         }
 
 
-        if ((Ring_Bypass) && (efx_Ring->Pafreq))
+        if ((EFX_Bypass[EFX_RING]) && (efx_Ring->Pafreq))
         {
             RingRecNote->schmittFloat(efxoutl, efxoutr);
             if ((RingRecNote->reconota != -1) && (RingRecNote->reconota != RingRecNote->last))
@@ -1418,7 +1373,7 @@ RKR::Alg(float *origl, float *origr, void *)
             switch (efx_order[i])
             {
             case EFX_EQ:
-                if (EQ1_Bypass)
+                if (EFX_Bypass[EFX_EQ])
                 {
                     efx_EQ1->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1426,7 +1381,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_COMPRESSOR:
-                if (Compressor_Bypass)
+                if (EFX_Bypass[EFX_COMPRESSOR])
                 {
                     efx_Compressor->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1434,7 +1389,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_DISTORTION:
-                if (Distorsion_Bypass)
+                if (EFX_Bypass[EFX_DISTORTION])
                 {
                     efx_Distorsion->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DISTORTION, efx_Distorsion->outvolume);
@@ -1442,7 +1397,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_OVERDRIVE:
-                if (Overdrive_Bypass)
+                if (EFX_Bypass[EFX_OVERDRIVE])
                 {
                     efx_Overdrive->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_OVERDRIVE, efx_Overdrive->outvolume);
@@ -1450,7 +1405,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_ECHO:
-                if (Echo_Bypass)
+                if (EFX_Bypass[EFX_ECHO])
                 {
                     efx_Echo->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHO, efx_Echo->outvolume);
@@ -1466,7 +1421,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_PHASER:
-                if (Phaser_Bypass)
+                if (EFX_Bypass[EFX_PHASER])
                 {
                     efx_Phaser->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_PHASER, efx_Phaser->outvolume);
@@ -1474,7 +1429,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_FLANGER:
-                if (Flanger_Bypass)
+                if (EFX_Bypass[EFX_FLANGER])
                 {
                     efx_Flanger->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_FLANGER, efx_Flanger->outvolume);
@@ -1490,7 +1445,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_PARAMETRIC:
-                if (EQ2_Bypass)
+                if (EFX_Bypass[EFX_PARAMETRIC])
                 {
                     efx_EQ2->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1498,7 +1453,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_WAHWAH:
-                if (WahWah_Bypass)
+                if (EFX_Bypass[EFX_WAHWAH])
                 {
                     efx_WahWah->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_WAHWAH, efx_WahWah->outvolume);
@@ -1506,7 +1461,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_ALIENWAH:
-                if (Alienwah_Bypass)
+                if (EFX_Bypass[EFX_ALIENWAH])
                 {
                     efx_Alienwah->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ALIENWAH, efx_Alienwah->outvolume);
@@ -1514,7 +1469,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_CABINET:
-                if (Cabinet_Bypass)
+                if (EFX_Bypass[EFX_CABINET])
                 {
                     efx_Cabinet->out(efxoutl, efxoutr);
                     Vol3_Efx();
@@ -1523,7 +1478,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_PAN:
-                if (Pan_Bypass)
+                if (EFX_Bypass[EFX_PAN])
                 {
                     efx_Pan->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_PAN, efx_Pan->outvolume);
@@ -1531,7 +1486,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_HARMONIZER:
-                if (Harmonizer_Bypass)
+                if (EFX_Bypass[EFX_HARMONIZER])
                 {
                     efx_Har->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_HARMONIZER, efx_Har->outvolume);
@@ -1539,7 +1494,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_MUSICAL_DELAY:
-                if (MusDelay_Bypass)
+                if (EFX_Bypass[EFX_MUSICAL_DELAY])
                 {
                     efx_MusDelay->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_MUSICAL_DELAY, efx_MusDelay->outvolume);
@@ -1547,7 +1502,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_NOISEGATE:
-                if (Gate_Bypass)
+                if (EFX_Bypass[EFX_NOISEGATE])
                 {
                     efx_Gate->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1555,7 +1510,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_DERELICT:
-                if (Derelict_Bypass)
+                if (EFX_Bypass[EFX_DERELICT])
                 {
                     efx_Derelict->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DERELICT, efx_Derelict->outvolume);
@@ -1563,7 +1518,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_ANALOG_PHASER:
-                if (APhaser_Bypass)
+                if (EFX_Bypass[EFX_ANALOG_PHASER])
                 {
                     efx_APhaser->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ANALOG_PHASER, efx_APhaser->outvolume);
@@ -1571,7 +1526,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_VALVE:
-                if (Valve_Bypass)
+                if (EFX_Bypass[EFX_VALVE])
                 {
                     efx_Valve->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VALVE, efx_Valve->outvolume);
@@ -1579,7 +1534,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_DUAL_FLANGE:
-                if (DFlange_Bypass)
+                if (EFX_Bypass[EFX_DUAL_FLANGE])
                 {
                     efx_DFlange->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1587,7 +1542,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_RING:
-                if (Ring_Bypass)
+                if (EFX_Bypass[EFX_RING])
                 {
                     efx_Ring->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_RING, efx_Ring->outvolume);
@@ -1595,7 +1550,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_EXCITER:
-                if (Exciter_Bypass)
+                if (EFX_Bypass[EFX_EXCITER])
                 {
                     efx_Exciter->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1603,7 +1558,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_DISTBAND:
-                if (DistBand_Bypass)
+                if (EFX_Bypass[EFX_DISTBAND])
                 {
                     efx_DistBand->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DISTBAND, efx_DistBand->outvolume);
@@ -1611,7 +1566,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_ARPIE:
-                if (Arpie_Bypass)
+                if (EFX_Bypass[EFX_ARPIE])
                 {
                     efx_Arpie->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ARPIE, efx_Arpie->outvolume);
@@ -1619,7 +1574,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_EXPANDER:
-                if (Expander_Bypass)
+                if (EFX_Bypass[EFX_EXPANDER])
                 {
                     efx_Expander->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1627,7 +1582,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_SHUFFLE:
-                if (Shuffle_Bypass)
+                if (EFX_Bypass[EFX_SHUFFLE])
                 {
                     efx_Shuffle->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SHUFFLE, efx_Shuffle->outvolume);
@@ -1635,7 +1590,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_SYNTHFILTER:
-                if (Synthfilter_Bypass)
+                if (EFX_Bypass[EFX_SYNTHFILTER])
                 {
                     efx_Synthfilter->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SYNTHFILTER, efx_Synthfilter->outvolume);
@@ -1643,7 +1598,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_VARYBAND:
-                if (VaryBand_Bypass)
+                if (EFX_Bypass[EFX_VARYBAND])
                 {
                     efx_VaryBand->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VARYBAND, efx_VaryBand->outvolume);
@@ -1651,7 +1606,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_CONVOLOTRON:
-                if (Convol_Bypass)
+                if (EFX_Bypass[EFX_CONVOLOTRON])
                 {
                     efx_Convol->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_CONVOLOTRON, efx_Convol->outvolume);
@@ -1659,7 +1614,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_LOOPER:
-                if (Looper_Bypass)
+                if (EFX_Bypass[EFX_LOOPER])
                 {
                     efx_Looper->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_LOOPER, efx_Looper->outvolume);
@@ -1667,7 +1622,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_MUTROMOJO:
-                if (MuTroMojo_Bypass)
+                if (EFX_Bypass[EFX_MUTROMOJO])
                 {
                     efx_MuTroMojo->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_MUTROMOJO, efx_MuTroMojo->outvolume);
@@ -1675,7 +1630,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_ECHOVERSE:
-                if (Echoverse_Bypass)
+                if (EFX_Bypass[EFX_ECHOVERSE])
                 {
                     efx_Echoverse->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHOVERSE, efx_Echoverse->outvolume);
@@ -1683,7 +1638,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_COILCRAFTER:
-                if (CoilCrafter_Bypass)
+                if (EFX_Bypass[EFX_COILCRAFTER])
                 {
                     efx_CoilCrafter->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1691,7 +1646,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_SHELFBOOST:
-                if (ShelfBoost_Bypass)
+                if (EFX_Bypass[EFX_SHELFBOOST])
                 {
                     efx_ShelfBoost->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1699,7 +1654,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_VOCODER:
-                if (Vocoder_Bypass)
+                if (EFX_Bypass[EFX_VOCODER])
                 {
                     efx_Vocoder->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VOCODER, efx_Vocoder->outvolume);
@@ -1707,7 +1662,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_SUSTAINER:
-                if (Sustainer_Bypass)
+                if (EFX_Bypass[EFX_SUSTAINER])
                 {
                     efx_Sustainer->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1715,7 +1670,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_SEQUENCE:
-                if (Sequence_Bypass)
+                if (EFX_Bypass[EFX_SEQUENCE])
                 {
                     efx_Sequence->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SEQUENCE, efx_Sequence->outvolume);
@@ -1723,7 +1678,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_SHIFTER:
-                if (Shifter_Bypass)
+                if (EFX_Bypass[EFX_SHIFTER])
                 {
                     efx_Shifter->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SHIFTER, efx_Shifter->outvolume);
@@ -1731,7 +1686,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_STOMPBOX:
-                if (StompBox_Bypass)
+                if (EFX_Bypass[EFX_STOMPBOX])
                 {
                     efx_StompBox->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1739,7 +1694,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_REVERBTRON:
-                if (Reverbtron_Bypass)
+                if (EFX_Bypass[EFX_REVERBTRON])
                 {
                     efx_Reverbtron->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_REVERBTRON, efx_Reverbtron->outvolume);
@@ -1747,7 +1702,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_ECHOTRON:
-                if (Echotron_Bypass)
+                if (EFX_Bypass[EFX_ECHOTRON])
                 {
                     efx_Echotron->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHOTRON, efx_Echotron->outvolume);
@@ -1755,7 +1710,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_STEREOHARM:
-                if (StereoHarm_Bypass)
+                if (EFX_Bypass[EFX_STEREOHARM])
                 {
                     efx_StereoHarm->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_STEREOHARM, efx_StereoHarm->outvolume);
@@ -1763,7 +1718,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_COMPBAND:
-                if (CompBand_Bypass)
+                if (EFX_Bypass[EFX_COMPBAND])
                 {
                     efx_CompBand->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_COMPBAND, efx_CompBand->outvolume);
@@ -1771,7 +1726,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_OPTICALTREM:
-                if (Opticaltrem_Bypass)
+                if (EFX_Bypass[EFX_OPTICALTREM])
                 {
                     efx_Opticaltrem->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1779,7 +1734,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_VIBE:
-                if (Vibe_Bypass)
+                if (EFX_Bypass[EFX_VIBE])
                 {
                     efx_Vibe->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VIBE, efx_Vibe->outvolume);
@@ -1787,7 +1742,7 @@ RKR::Alg(float *origl, float *origr, void *)
                 break;
 
             case EFX_INFINITY:
-                if (Infinity_Bypass)
+                if (EFX_Bypass[EFX_INFINITY])
                 {
                     efx_Infinity->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_INFINITY, efx_Infinity->outvolume);

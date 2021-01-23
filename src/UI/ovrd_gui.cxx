@@ -6,10 +6,10 @@ void OvrdGui::cb_ovrd_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Overdrive_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_OVERDRIVE]);
  return;
 }
-rkr->Overdrive_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_OVERDRIVE]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Overdrive->cleanup();
 rgui->findpos(EFX_OVERDRIVE,(int)o->value(),o);

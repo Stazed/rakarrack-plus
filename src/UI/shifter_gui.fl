@@ -24,10 +24,10 @@ widget_class ShifterGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Shifter_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_SHIFTER]);
  return;
 }
-rkr->Shifter_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_SHIFTER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
 rgui->findpos(EFX_SHIFTER,(int)o->value(),o);} selected
@@ -96,9 +96,9 @@ rkr->efx_Shifter->changepar(Shifter_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(MC_Shifter_Interval);
  return;
 }
-rkr->Shifter_Bypass=0;
+rkr->EFX_Bypass[EFX_SHIFTER]=0;
 rkr->efx_Shifter->changepar(Shifter_Interval,(int)o->value());
-if((int)shifter_activar->value())rkr->Shifter_Bypass=1;}
+if((int)shifter_activar->value())rkr->EFX_Bypass[EFX_SHIFTER]=1;}
     xywh {56 43 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 12 step 1 textcolor 7
     class RKR_Slider
   }

@@ -506,7 +506,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Echo->getpar(Echo_Delay), efx_Echo->getpar(Echo_LR_Delay),
                 efx_Echo->getpar(Echo_LR_Cross), efx_Echo->getpar(Echo_Feedback),
                 efx_Echo->getpar(Echo_Damp), efx_Echo->getpar(Echo_Reverse),
-                efx_Echo->getpar(Echo_Direct), Echo_Bypass);
+                efx_Echo->getpar(Echo_Direct), EFX_Bypass[EFX_ECHO]);
         break;
 
     case EFX_CHORUS:
@@ -528,7 +528,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Flanger->getpar(Flanger_Depth), efx_Flanger->getpar(Flanger_Delay),
                 efx_Flanger->getpar(Flanger_Feedback), efx_Flanger->getpar(Flanger_LR_Cross),
                 efx_Flanger->getpar(Flanger_SKIP_Flange_10), efx_Flanger->getpar(Flanger_Subtract),
-                efx_Flanger->getpar(Flanger_Intense), Flanger_Bypass);
+                efx_Flanger->getpar(Flanger_Intense), EFX_Bypass[EFX_FLANGER]);
         break;
 
     case EFX_PHASER:
@@ -539,7 +539,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Phaser->getpar(Phaser_Depth), efx_Phaser->getpar(Phaser_Feedback),
                 efx_Phaser->getpar(Phaser_Stages), efx_Phaser->getpar(Phaser_LR_Cross),
                 efx_Phaser->getpar(Phaser_Subtract), efx_Phaser->getpar(Phaser_Phase),
-                Phaser_Bypass);
+                EFX_Bypass[EFX_PHASER]);
         break;
 
     case EFX_OVERDRIVE:
@@ -550,7 +550,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Overdrive->getpar(Overdrive_Negate), efx_Overdrive->getpar(Overdrive_LPF),
                 efx_Overdrive->getpar(Overdrive_HPF), efx_Overdrive->getpar(Overdrive_Stereo),
                 efx_Overdrive->getpar(Overdrive_Prefilter), efx_Overdrive->getpar(Overdrive_SKIP_11),
-                efx_Overdrive->getpar(Overdrive_Suboctave), Overdrive_Bypass);
+                efx_Overdrive->getpar(Overdrive_Suboctave), EFX_Bypass[EFX_OVERDRIVE]);
         break;
 
     case EFX_DISTORTION:
@@ -561,7 +561,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Distorsion->getpar(Dist_Negate), efx_Distorsion->getpar(Dist_LPF),
                 efx_Distorsion->getpar(Dist_HPF), efx_Distorsion->getpar(Dist_Stereo),
                 efx_Distorsion->getpar(Dist_Prefilter), efx_Distorsion->getpar(Dist_SKIP_11),
-                efx_Distorsion->getpar(Dist_Suboctave), Distorsion_Bypass);
+                efx_Distorsion->getpar(Dist_Suboctave), EFX_Bypass[EFX_DISTORTION]);
         break;
 
     case EFX_EQ:
@@ -571,7 +571,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_EQ1->getpar(EQ_500_HZ), efx_EQ1->getpar(EQ_1_KHZ),
                 efx_EQ1->getpar(EQ_2_KHZ), efx_EQ1->getpar(EQ_4_KHZ),
                 efx_EQ1->getpar(EQ_8_KHZ), efx_EQ1->getpar(EQ_16_KHZ),
-                efx_EQ1->getpar(EQ_Gain), efx_EQ1->getpar(EQ_Q), EQ1_Bypass);
+                efx_EQ1->getpar(EQ_Gain), efx_EQ1->getpar(EQ_Q), EFX_Bypass[EFX_EQ]);
         break;
 
     case EFX_PARAMETRIC:
@@ -581,7 +581,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_EQ2->getpar(Parametric_Mid_Gain), efx_EQ2->getpar(Parametric_Mid_Q),
                 efx_EQ2->getpar(Parametric_High_Freq), efx_EQ2->getpar(Parametric_High_Gain),
                 efx_EQ2->getpar(Parametric_High_Q), efx_EQ2->getpar(Parametric_Gain),
-                EQ2_Bypass);
+                EFX_Bypass[EFX_PARAMETRIC]);
         break;
 
     case EFX_COMPRESSOR:
@@ -590,7 +590,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Compressor->getpar(Compress_Output), efx_Compressor->getpar(Compress_Attack),
                 efx_Compressor->getpar(Compress_Release), efx_Compressor->getpar(Compress_Auto_Out),
                 efx_Compressor->getpar(Compress_Knee), efx_Compressor->getpar(Compress_Stereo),
-                efx_Compressor->getpar(Compress_Peak), Compressor_Bypass);
+                efx_Compressor->getpar(Compress_Peak), EFX_Bypass[EFX_COMPRESSOR]);
         break;
 
 
@@ -601,7 +601,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_WahWah->getpar(WahWah_LFO_Type), efx_WahWah->getpar(WahWah_LFO_Stereo),
                 efx_WahWah->getpar(WahWah_Depth), efx_WahWah->getpar(WahWah_Sense),
                 efx_WahWah->getpar(WahWah_ASI), efx_WahWah->getpar(WahWah_Smooth),
-                efx_WahWah->getpar(WahWah_Mode), WahWah_Bypass);
+                efx_WahWah->getpar(WahWah_Mode), EFX_Bypass[EFX_WAHWAH]);
         break;
 
     case EFX_ALIENWAH:
@@ -611,12 +611,12 @@ void RKR::getbuf(char *buf, int j)
                 efx_Alienwah->getpar(Alien_LFO_Type), efx_Alienwah->getpar(Alien_LFO_Stereo),
                 efx_Alienwah->getpar(Alien_Depth), efx_Alienwah->getpar(Alien_Feedback),
                 efx_Alienwah->getpar(Alien_Delay), efx_Alienwah->getpar(Alien_LR_Cross),
-                efx_Alienwah->getpar(Alien_Phase), Alienwah_Bypass);
+                efx_Alienwah->getpar(Alien_Phase), EFX_Bypass[EFX_ALIENWAH]);
         break;
 
     case EFX_CABINET:
         sprintf(buf, "%d,%d,%d\n",
-                efx_Cabinet->Cabinet_Preset, efx_Cabinet->getpar(Cabinet_Gain), Cabinet_Bypass);
+                efx_Cabinet->Cabinet_Preset, efx_Cabinet->getpar(Cabinet_Gain), EFX_Bypass[EFX_CABINET]);
         break;
 
     case EFX_PAN:
@@ -625,7 +625,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Pan->getpar(Pan_LFO_Tempo), efx_Pan->getpar(Pan_LFO_Random),
                 efx_Pan->getpar(Pan_LFO_Type), efx_Pan->getpar(Pan_LFO_Stereo),
                 efx_Pan->getpar(Pan_Ex_St_Amt), efx_Pan->getpar(Pan_AutoPan),
-                efx_Pan->getpar(Pan_Enable_Extra), Pan_Bypass);
+                efx_Pan->getpar(Pan_Enable_Extra), EFX_Bypass[EFX_PAN]);
         break;
 
     case EFX_HARMONIZER:
@@ -635,7 +635,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Har->getpar(Harm_Filter_Freq), efx_Har->getpar(Harm_Select),
                 efx_Har->getpar(Harm_Note), efx_Har->getpar(Harm_Chord),
                 efx_Har->getpar(Harm_Filter_Gain), efx_Har->getpar(Harm_Filter_Q),
-                efx_Har->getpar(Harm_MIDI), Harmonizer_Bypass);
+                efx_Har->getpar(Harm_MIDI), EFX_Bypass[EFX_HARMONIZER]);
         break;
 
     case EFX_MUSICAL_DELAY:
@@ -646,7 +646,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_MusDelay->getpar(Music_Damp), efx_MusDelay->getpar(Music_Pan_2),
                 efx_MusDelay->getpar(Music_Delay_2), efx_MusDelay->getpar(Music_Feedback_2),
                 efx_MusDelay->getpar(Music_Tempo), efx_MusDelay->getpar(Music_Gain_1),
-                efx_MusDelay->getpar(Music_Gain_2), MusDelay_Bypass);
+                efx_MusDelay->getpar(Music_Gain_2), EFX_Bypass[EFX_MUSICAL_DELAY]);
         break;
 
     case EFX_NOISEGATE:
@@ -654,7 +654,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Gate->getpar(Gate_Threshold), efx_Gate->getpar(Gate_Range),
                 efx_Gate->getpar(Gate_Attack), efx_Gate->getpar(Gate_Release),
                 efx_Gate->getpar(Gate_LPF), efx_Gate->getpar(Gate_HPF),
-                efx_Gate->getpar(Gate_Hold), Gate_Bypass);
+                efx_Gate->getpar(Gate_Hold), EFX_Bypass[EFX_NOISEGATE]);
         break;
 
     case EFX_DERELICT:
@@ -665,7 +665,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Derelict->getpar(Dere_Negate), efx_Derelict->getpar(Dere_LPF),
                 efx_Derelict->getpar(Dere_HPF), efx_Derelict->getpar(Dere_Color),
                 efx_Derelict->getpar(Dere_Prefilter), efx_Derelict->getpar(Dere_Suboctave),
-                Derelict_Bypass);
+                EFX_Bypass[EFX_DERELICT]);
         break;
 
     case EFX_ANALOG_PHASER:
@@ -676,7 +676,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_APhaser->getpar(APhase_Width), efx_APhaser->getpar(APhase_Feedback),
                 efx_APhaser->getpar(APhase_Stages), efx_APhaser->getpar(APhase_Mismatch),
                 efx_APhaser->getpar(APhase_Subtract), efx_APhaser->getpar(APhase_Depth),
-                efx_APhaser->getpar(APhase_Hyper), APhaser_Bypass);
+                efx_APhaser->getpar(APhase_Hyper), EFX_Bypass[EFX_ANALOG_PHASER]);
         break;
 
     case EFX_VALVE:
@@ -687,7 +687,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Valve->getpar(Valve_LPF), efx_Valve->getpar(Valve_HPF),
                 efx_Valve->getpar(Valve_Stereo), efx_Valve->getpar(Valve_Prefilter),
                 efx_Valve->getpar(Valve_Distortion), efx_Valve->getpar(Valve_Ex_Dist),
-                efx_Valve->getpar(Valve_Presence), Valve_Bypass);
+                efx_Valve->getpar(Valve_Presence), EFX_Bypass[EFX_VALVE]);
         break;
 
     case EFX_DUAL_FLANGE:
@@ -699,7 +699,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_DFlange->getpar(DFlange_Subtract), efx_DFlange->getpar(DFlange_Zero),
                 efx_DFlange->getpar(DFlange_LFO_Tempo), efx_DFlange->getpar(DFlange_LFO_Stereo),
                 efx_DFlange->getpar(DFlange_LFO_Type), efx_DFlange->getpar(DFlange_LFO_Random),
-                efx_DFlange->getpar(DFlange_Intense), DFlange_Bypass);
+                efx_DFlange->getpar(DFlange_Intense), EFX_Bypass[EFX_DUAL_FLANGE]);
         break;
 
     case EFX_RING:
@@ -710,7 +710,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Ring->getpar(Ring_Stereo), efx_Ring->getpar(Ring_Sine),
                 efx_Ring->getpar(Ring_Triangle), efx_Ring->getpar(Ring_Saw),
                 efx_Ring->getpar(Ring_Square), efx_Ring->getpar(Ring_Input),
-                efx_Ring->getpar(Ring_Auto_Freq), Ring_Bypass);
+                efx_Ring->getpar(Ring_Auto_Freq), EFX_Bypass[EFX_RING]);
         break;
 
     case EFX_EXCITER:
@@ -721,7 +721,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Exciter->getpar(Exciter_Harm_6), efx_Exciter->getpar(Exciter_Harm_7),
                 efx_Exciter->getpar(Exciter_Harm_8), efx_Exciter->getpar(Exciter_Harm_9),
                 efx_Exciter->getpar(Exciter_Harm_10), efx_Exciter->getpar(Exciter_LPF),
-                efx_Exciter->getpar(Exciter_HPF), Exciter_Bypass);
+                efx_Exciter->getpar(Exciter_HPF), EFX_Bypass[EFX_EXCITER]);
         break;
 
     case EFX_DISTBAND:
@@ -733,7 +733,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_DistBand->getpar(DistBand_Gain_Low), efx_DistBand->getpar(DistBand_Gain_Mid),
                 efx_DistBand->getpar(DistBand_Gain_Hi), efx_DistBand->getpar(DistBand_Negate),
                 efx_DistBand->getpar(DistBand_Cross_1), efx_DistBand->getpar(DistBand_Cross_2),
-                efx_DistBand->getpar(DistBand_Stereo), DistBand_Bypass);
+                efx_DistBand->getpar(DistBand_Stereo), EFX_Bypass[EFX_DISTBAND]);
         break;
 
     case EFX_ARPIE:
@@ -743,7 +743,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Arpie->getpar(Arpie_LR_Cross), efx_Arpie->getpar(Arpie_Feedback),
                 efx_Arpie->getpar(Arpie_Damp), efx_Arpie->getpar(Arpie_ArpeWD),
                 efx_Arpie->getpar(Arpie_Harm), efx_Arpie->getpar(Arpie_Pattern),
-                efx_Arpie->getpar(Arpie_Subdivision), Arpie_Bypass);
+                efx_Arpie->getpar(Arpie_Subdivision), EFX_Bypass[EFX_ARPIE]);
         break;
 
     case EFX_EXPANDER:
@@ -751,7 +751,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Expander->getpar(Expander_Threshold), efx_Expander->getpar(Expander_Shape),
                 efx_Expander->getpar(Expander_Attack), efx_Expander->getpar(Expander_Release),
                 efx_Expander->getpar(Expander_LPF), efx_Expander->getpar(Expander_HPF),
-                efx_Expander->getpar(Expander_Gain), Expander_Bypass);
+                efx_Expander->getpar(Expander_Gain), EFX_Bypass[EFX_EXPANDER]);
         break;
 
     case EFX_SHUFFLE:
@@ -761,7 +761,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Shuffle->getpar(Shuffle_Gain_H), efx_Shuffle->getpar(Shuffle_Freq_L),
                 efx_Shuffle->getpar(Shuffle_Freq_ML), efx_Shuffle->getpar(Shuffle_Freq_MH),
                 efx_Shuffle->getpar(Shuffle_Freq_H), efx_Shuffle->getpar(Shuffle_Width),
-                efx_Shuffle->getpar(Shuffle_F_Band), Shuffle_Bypass);
+                efx_Shuffle->getpar(Shuffle_F_Band), EFX_Bypass[EFX_SHUFFLE]);
         break;
 
     case EFX_SYNTHFILTER:
@@ -774,7 +774,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Synthfilter->getpar(Synthfilter_Subtract), efx_Synthfilter->getpar(Synthfilter_Depth),
                 efx_Synthfilter->getpar(Synthfilter_Env_Sens), efx_Synthfilter->getpar(Synthfilter_Attack),
                 efx_Synthfilter->getpar(Synthfilter_Release), efx_Synthfilter->getpar(Synthfilter_Offset),
-                Synthfilter_Bypass);
+                EFX_Bypass[EFX_SYNTHFILTER]);
         break;
 
     case EFX_VARYBAND:
@@ -784,7 +784,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_VaryBand->getpar(VaryBand_LFO_Tempo_2), efx_VaryBand->getpar(VaryBand_LFO_Type_2),
                 efx_VaryBand->getpar(VaryBand_LFO_Stereo_2), efx_VaryBand->getpar(VaryBand_Cross_1),
                 efx_VaryBand->getpar(VaryBand_Cross_2), efx_VaryBand->getpar(VaryBand_Cross_3),
-                efx_VaryBand->getpar(VaryBand_Combination), VaryBand_Bypass);
+                efx_VaryBand->getpar(VaryBand_Combination), EFX_Bypass[EFX_VARYBAND]);
         break;
 
     case EFX_CONVOLOTRON:
@@ -794,7 +794,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Convol->getpar(Convo_User_File), efx_Convol->getpar(Convo_SKIP_5),
                 efx_Convol->getpar(Convo_Damp), efx_Convol->getpar(Convo_Level),
                 efx_Convol->getpar(Convo_Set_File), efx_Convol->getpar(Convo_SKIP_9),
-                efx_Convol->getpar(Convo_Feedback), Convol_Bypass, efx_Convol->Filename);
+                efx_Convol->getpar(Convo_Feedback), EFX_Bypass[EFX_CONVOLOTRON], efx_Convol->Filename);
         break;
 
     case EFX_LOOPER:
@@ -805,7 +805,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Looper->getpar(Looper_Level_1), efx_Looper->getpar(Looper_Track_1),
                 efx_Looper->getpar(Looper_Track_2), efx_Looper->getpar(Looper_AutoPlay),
                 efx_Looper->getpar(Looper_Level_2), efx_Looper->getpar(Looper_Rec_1),
-                efx_Looper->getpar(Looper_Rec_2), efx_Looper->getpar(Looper_Link), Looper_Bypass);
+                efx_Looper->getpar(Looper_Rec_2), efx_Looper->getpar(Looper_Link), EFX_Bypass[EFX_LOOPER]);
         break;
 
     case EFX_MUTROMOJO:
@@ -819,7 +819,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_MuTroMojo->getpar(MuTro_HighPass), efx_MuTroMojo->getpar(MuTro_Stages),
                 efx_MuTroMojo->getpar(MuTro_Range), efx_MuTroMojo->getpar(MuTro_St_Freq),
                 efx_MuTroMojo->getpar(MuTro_Mod_Res), efx_MuTroMojo->getpar(Mutro_Mode_Legacy),
-                efx_MuTroMojo->getpar(Mutro_Preset), MuTroMojo_Bypass);
+                efx_MuTroMojo->getpar(Mutro_Preset), EFX_Bypass[EFX_MUTROMOJO]);
 
         break;
 
@@ -830,7 +830,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Echoverse->getpar(Echoverse_Angle), efx_Echoverse->getpar(Echoverse_Feedback),
                 efx_Echoverse->getpar(Echoverse_Damp), efx_Echoverse->getpar(Echoverse_Reverse),
                 efx_Echoverse->getpar(Echoverse_Subdivision), efx_Echoverse->getpar(Echoverse_Ext_Stereo),
-                Echoverse_Bypass);
+                EFX_Bypass[EFX_ECHOVERSE]);
         break;
 
     case EFX_COILCRAFTER:
@@ -839,14 +839,14 @@ void RKR::getbuf(char *buf, int j)
                 efx_CoilCrafter->getpar(Coil_Destiny), efx_CoilCrafter->getpar(Coil_Freq_1),
                 efx_CoilCrafter->getpar(Coil_Q_1), efx_CoilCrafter->getpar(Coil_Freq_2),
                 efx_CoilCrafter->getpar(Coil_Q_2), efx_CoilCrafter->getpar(Coil_Tone),
-                efx_CoilCrafter->getpar(Coil_NeckMode), CoilCrafter_Bypass);
+                efx_CoilCrafter->getpar(Coil_NeckMode), EFX_Bypass[EFX_COILCRAFTER]);
         break;
 
     case EFX_SHELFBOOST:
         sprintf(buf, "%d,%d,%d,%d,%d,%d\n",
                 efx_ShelfBoost->getpar(Shelf_Gain), efx_ShelfBoost->getpar(Shelf_Presence),
                 efx_ShelfBoost->getpar(Shelf_Tone), efx_ShelfBoost->getpar(Shelf_Stereo),
-                efx_ShelfBoost->getpar(Shelf_Level), ShelfBoost_Bypass);
+                efx_ShelfBoost->getpar(Shelf_Level), EFX_Bypass[EFX_SHELFBOOST]);
         break;
 
     case EFX_VOCODER:
@@ -854,13 +854,13 @@ void RKR::getbuf(char *buf, int j)
                 efx_Vocoder->getpar(Vocoder_DryWet), efx_Vocoder->getpar(Vocoder_Pan),
                 efx_Vocoder->getpar(Vocoder_Smear), efx_Vocoder->getpar(Vocoder_Q),
                 efx_Vocoder->getpar(Vocoder_Input), efx_Vocoder->getpar(Vocoder_Level),
-                efx_Vocoder->getpar(Vocoder_Ring), Vocoder_Bypass);
+                efx_Vocoder->getpar(Vocoder_Ring), EFX_Bypass[EFX_VOCODER]);
         break;
 
     case EFX_SUSTAINER:
         sprintf(buf, "%d,%d,%d\n",
                 efx_Sustainer->getpar(Sustain_Gain), efx_Sustainer->getpar(Sustain_Sustain),
-                Sustainer_Bypass);
+                EFX_Bypass[EFX_SUSTAINER]);
         break;
 
     case EFX_SEQUENCE:
@@ -872,7 +872,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Sequence->getpar(Sequence_DryWet), efx_Sequence->getpar(Sequence_Tempo),
                 efx_Sequence->getpar(Sequence_Resonance), efx_Sequence->getpar(Sequence_Amp),
                 efx_Sequence->getpar(Sequence_Stdf), efx_Sequence->getpar(Sequence_Mode),
-                efx_Sequence->getpar(Sequence_Range), Sequence_Bypass);
+                efx_Sequence->getpar(Sequence_Range), EFX_Bypass[EFX_SEQUENCE]);
         break;
 
     case EFX_SHIFTER:
@@ -881,7 +881,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Shifter->getpar(Shifter_Gain), efx_Shifter->getpar(Shifter_Attack),
                 efx_Shifter->getpar(Shifter_Decay), efx_Shifter->getpar(Shifter_Threshold),
                 efx_Shifter->getpar(Shifter_Interval), efx_Shifter->getpar(Shifter_Shift),
-                efx_Shifter->getpar(Shifter_Mode), efx_Shifter->getpar(Shifter_Whammy), Shifter_Bypass);
+                efx_Shifter->getpar(Shifter_Mode), efx_Shifter->getpar(Shifter_Whammy), EFX_Bypass[EFX_SHIFTER]);
         break;
 
 
@@ -890,7 +890,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_StompBox->getpar(Stomp_Level), efx_StompBox->getpar(Stomp_Tone),
                 efx_StompBox->getpar(Stomp_Mid), efx_StompBox->getpar(Stomp_Bias),
                 efx_StompBox->getpar(Stomp_Gain), efx_StompBox->getpar(Stomp_Mode),
-                StompBox_Bypass);
+                EFX_Bypass[EFX_STOMPBOX]);
         break;
 
     case EFX_REVERBTRON:
@@ -903,7 +903,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Reverbtron->getpar(Revtron_Feedback), efx_Reverbtron->getpar(Revtron_Pan),
                 efx_Reverbtron->getpar(Revtron_Ex_Stereo), efx_Reverbtron->getpar(Revtron_Shuffle),
                 efx_Reverbtron->getpar(Revtron_LPF), efx_Reverbtron->getpar(Revtron_Diffusion),
-                Reverbtron_Bypass, efx_Reverbtron->Filename);
+                EFX_Bypass[EFX_REVERBTRON], efx_Reverbtron->Filename);
         break;
 
     case EFX_ECHOTRON:
@@ -916,7 +916,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Echotron->getpar(Echotron_Feedback), efx_Echotron->getpar(Echotron_Pan),
                 efx_Echotron->getpar(Echotron_Mod_Delay), efx_Echotron->getpar(Echotron_Mod_Filter),
                 efx_Echotron->getpar(Echotron_LFO_Type), efx_Echotron->getpar(Echotron_Filters),
-                Echotron_Bypass, efx_Echotron->Filename);
+                EFX_Bypass[EFX_ECHOTRON], efx_Echotron->Filename);
         break;
 
     case EFX_STEREOHARM:
@@ -927,7 +927,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_StereoHarm->getpar(Sharm_R_Chroma), efx_StereoHarm->getpar(Sharm_Select),
                 efx_StereoHarm->getpar(Sharm_Note), efx_StereoHarm->getpar(Sharm_Chord),
                 efx_StereoHarm->getpar(Sharm_MIDI), efx_StereoHarm->getpar(Sharm_LR_Cross),
-                StereoHarm_Bypass);
+                EFX_Bypass[EFX_STEREOHARM]);
         break;
 
     case EFX_COMPBAND:
@@ -938,7 +938,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_CompBand->getpar(CompBand_Mid_1_Thresh), efx_CompBand->getpar(CompBand_Mid_2_Thresh),
                 efx_CompBand->getpar(CompBand_High_Thresh), efx_CompBand->getpar(CompBand_Cross_1),
                 efx_CompBand->getpar(CompBand_Cross_2), efx_CompBand->getpar(CompBand_Cross_3),
-                efx_CompBand->getpar(CompBand_Gain), CompBand_Bypass);
+                efx_CompBand->getpar(CompBand_Gain), EFX_Bypass[EFX_COMPBAND]);
         break;
 
     case EFX_OPTICALTREM:
@@ -946,7 +946,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Opticaltrem->getpar(Optical_Depth), efx_Opticaltrem->getpar(Optical_LFO_Tempo),
                 efx_Opticaltrem->getpar(Optical_LFO_Random), efx_Opticaltrem->getpar(Optical_LFO_Type),
                 efx_Opticaltrem->getpar(Optical_LFO_Stereo), efx_Opticaltrem->getpar(Optical_Pan),
-                efx_Opticaltrem->getpar(Optical_Invert), Opticaltrem_Bypass);
+                efx_Opticaltrem->getpar(Optical_Invert), EFX_Bypass[EFX_OPTICALTREM]);
         break;
 
 
@@ -957,7 +957,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Vibe->getpar(Vibe_LFO_Stereo), efx_Vibe->getpar(Vibe_Pan),
                 efx_Vibe->getpar(Vibe_DryWet), efx_Vibe->getpar(Vibe_Feedback),
                 efx_Vibe->getpar(Vibe_Depth), efx_Vibe->getpar(Vibe_LR_Cross),
-                efx_Vibe->getpar(Vibe_Stereo), Vibe_Bypass);
+                efx_Vibe->getpar(Vibe_Stereo), EFX_Bypass[EFX_VIBE]);
         break;
 
     case EFX_INFINITY:
@@ -971,7 +971,7 @@ void RKR::getbuf(char *buf, int j)
                 efx_Infinity->getpar(Infinity_Tempo), efx_Infinity->getpar(Infinity_LR_Delay),
                 efx_Infinity->getpar(Infinity_Subdivision), efx_Infinity->getpar(Infinity_AutoPan),
                 efx_Infinity->getpar(Infinity_Reverse), efx_Infinity->getpar(Infinity_Stages),
-                Infinity_Bypass);
+                EFX_Bypass[EFX_INFINITY]);
         break;
     }
 }
@@ -1265,9 +1265,9 @@ RKR::Actualizar_Audio()
         efx_order[i] = lv[LV_ORDER][i];
     }
 
-    Harmonizer_Bypass = 0;
-    Ring_Bypass = 0;
-    StereoHarm_Bypass = 0;
+    EFX_Bypass[EFX_HARMONIZER] = 0;
+    EFX_Bypass[EFX_RING] = 0;
+    EFX_Bypass[EFX_STEREOHARM] = 0;
 
     /*  Original set and cleared for only the ten current from efx_order[] which did not
         clear other efx from leftover settings. The new behavior will reset all efx to default
@@ -1287,7 +1287,7 @@ RKR::Actualizar_Audio()
         {
 
         case EFX_EQ:
-            EQ1_Bypass = 0;
+            EFX_Bypass[EFX_EQ] = 0;
             efx_EQ1->cleanup();
             for (i = 0; i < 10; i++)
             {
@@ -1295,39 +1295,39 @@ RKR::Actualizar_Audio()
                 efx_EQ1->changepar(i * 5 + 13, lv[LV_EQ][11]);
             }
             efx_EQ1->changepar(EQ_Gain, lv[LV_EQ][10]);
-            EQ1_Bypass = EQ1_B;
+            EFX_Bypass[EFX_EQ] = EQ1_B;
             break;
 
         case EFX_COMPRESSOR:
-            Compressor_Bypass = 0;
+            EFX_Bypass[EFX_COMPRESSOR] = 0;
             efx_Compressor->cleanup();
             for (i = 0; i < C_COMPRESS_PARAMETERS; i++)
                 efx_Compressor->changepar(i, lv[LV_COMPRESSOR][i]);
-            Compressor_Bypass = Compressor_B;
+            EFX_Bypass[EFX_COMPRESSOR] = Compressor_B;
             break;
 
         case EFX_DISTORTION:
-            Distorsion_Bypass = 0;
+            EFX_Bypass[EFX_DISTORTION] = 0;
             efx_Distorsion->cleanup();
             for (i = 0; i < C_DIST_PARAMETERS; i++)
                 efx_Distorsion->changepar(i, lv[LV_DISTORTION][i]);
-            Distorsion_Bypass = Distorsion_B;
+            EFX_Bypass[EFX_DISTORTION] = Distorsion_B;
             break;
 
         case EFX_OVERDRIVE:
-            Overdrive_Bypass = 0;
+            EFX_Bypass[EFX_OVERDRIVE] = 0;
             efx_Overdrive->cleanup();
             for (i = 0; i < C_OVERDRIVE_PARAMETERS; i++)
                 efx_Overdrive->changepar(i, lv[LV_OVERDRIVE][i]);
-            Overdrive_Bypass = Overdrive_B;
+            EFX_Bypass[EFX_OVERDRIVE] = Overdrive_B;
             break;
 
         case EFX_ECHO:
-            Echo_Bypass = 0;
+            EFX_Bypass[EFX_ECHO] = 0;
             efx_Echo->cleanup();
             for (i = 0; i < C_ECHO_PARAMETERS; i++)
                 efx_Echo->changepar(i, lv[LV_ECHO][i]);
-            Echo_Bypass = Echo_B;
+            EFX_Bypass[EFX_ECHO] = Echo_B;
             break;
 
         case EFX_CHORUS:
@@ -1339,19 +1339,19 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_PHASER:
-            Phaser_Bypass = 0;
+            EFX_Bypass[EFX_PHASER] = 0;
             efx_Phaser->cleanup();
             for (i = 0; i < C_PHASER_PARAMETERS; i++)
                 efx_Phaser->changepar(i, lv[LV_PHASER][i]);
-            Phaser_Bypass = Phaser_B;
+            EFX_Bypass[EFX_PHASER] = Phaser_B;
             break;
 
         case EFX_FLANGER:
-            Flanger_Bypass = 0;
+            EFX_Bypass[EFX_FLANGER] = 0;
             efx_Flanger->cleanup();
             for (i = 0; i < C_FLANGER_PARAMETERS; i++)
                 efx_Flanger->changepar(i, lv[LV_FLANGER][i]);
-            Flanger_Bypass = Flanger_B;
+            EFX_Bypass[EFX_FLANGER] = Flanger_B;
             break;
 
         case EFX_REVERB:
@@ -1363,7 +1363,7 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_PARAMETRIC:
-            EQ2_Bypass = 0;
+            EFX_Bypass[EFX_PARAMETRIC] = 0;
             efx_EQ2->cleanup();
             for (i = 0; i < 3; i++)
             {
@@ -1372,304 +1372,304 @@ RKR::Actualizar_Audio()
                 efx_EQ2->changepar(i * 5 + 13, lv[LV_PARAMETRIC][2 + i * 3]);
             }
             efx_EQ2->changepar(Parametric_Gain, lv[LV_PARAMETRIC][9]);
-            EQ2_Bypass = EQ2_B;
+            EFX_Bypass[EFX_PARAMETRIC] = EQ2_B;
             break;
 
         case EFX_WAHWAH:
-            WahWah_Bypass = 0;
+            EFX_Bypass[EFX_WAHWAH] = 0;
             efx_WahWah->cleanup();
             for (i = 0; i < C_WAHWAH_PARAMETERS; i++)
                 efx_WahWah->changepar(i, lv[LV_WAHWAH][i]);
-            WahWah_Bypass = WahWah_B;
+            EFX_Bypass[EFX_WAHWAH] = WahWah_B;
             break;
 
         case EFX_ALIENWAH:
-            Alienwah_Bypass = 0;
+            EFX_Bypass[EFX_ALIENWAH] = 0;
             efx_Alienwah->cleanup();
             for (i = 0; i < C_ALIENWAH_PARAMETERS; i++)
                 efx_Alienwah->changepar(i, lv[LV_ALIENWAH][i]);
-            Alienwah_Bypass = Alienwah_B;
+            EFX_Bypass[EFX_ALIENWAH] = Alienwah_B;
             break;
 
         case EFX_CABINET:
-            Cabinet_Bypass = 0;
+            EFX_Bypass[EFX_CABINET] = 0;
             efx_Cabinet->cleanup();
             efx_Cabinet->setpreset(lv[LV_CABINET][0]);
             efx_Cabinet->changepar(Cabinet_Gain, lv[LV_CABINET][1]);
-            Cabinet_Bypass = Cabinet_B;
+            EFX_Bypass[EFX_CABINET] = Cabinet_B;
             break;
 
         case EFX_PAN:
-            Pan_Bypass = 0;
+            EFX_Bypass[EFX_PAN] = 0;
             efx_Pan->cleanup();
             for (i = 0; i < C_PAN_PARAMETERS; i++)
                 efx_Pan->changepar(i, lv[LV_PAN][i]);
-            Pan_Bypass = Pan_B;
+            EFX_Bypass[EFX_PAN] = Pan_B;
             break;
 
         case EFX_HARMONIZER:
-            Harmonizer_Bypass = 0;
+            EFX_Bypass[EFX_HARMONIZER] = 0;
             efx_Har->cleanup();
             for (i = 0; i < C_HARM_PARAMETERS; i++)
                 efx_Har->changepar(i, lv[LV_HARMONIZER][i]);
-            Harmonizer_Bypass = Harmonizer_B;
+            EFX_Bypass[EFX_HARMONIZER] = Harmonizer_B;
             break;
 
         case EFX_MUSICAL_DELAY:
-            MusDelay_Bypass = 0;
+            EFX_Bypass[EFX_MUSICAL_DELAY] = 0;
             efx_MusDelay->cleanup();
             for (i = 0; i < C_MUSIC_PARAMETERS; i++)
                 efx_MusDelay->changepar(i, lv[LV_MUSICAL_DELAY][i]);
-            MusDelay_Bypass = MusDelay_B;
+            EFX_Bypass[EFX_MUSICAL_DELAY] = MusDelay_B;
             break;
 
         case EFX_NOISEGATE:
-            Gate_Bypass = 0;
+            EFX_Bypass[EFX_NOISEGATE] = 0;
             efx_Gate->cleanup();
             for (i = 0; i < C_GATE_PARAMETERS; i++)
                 efx_Gate->changepar(i, lv[LV_NOISEGATE][i]);
-            Gate_Bypass = Gate_B;
+            EFX_Bypass[EFX_NOISEGATE] = Gate_B;
             break;
 
         case EFX_DERELICT:
-            Derelict_Bypass = 0;
+            EFX_Bypass[EFX_DERELICT] = 0;
             efx_Derelict->cleanup();
             for (i = 0; i < C_DERE_PARAMETERS; i++)
                 efx_Derelict->changepar(i, lv[LV_DERELICT][i]);
-            Derelict_Bypass = Derelict_B;
+            EFX_Bypass[EFX_DERELICT] = Derelict_B;
             break;
 
         case EFX_ANALOG_PHASER:
-            APhaser_Bypass = 0;
+            EFX_Bypass[EFX_ANALOG_PHASER] = 0;
             efx_APhaser->cleanup();
             for (i = 0; i < C_APHASER_PARAMETERS; i++)
                 efx_APhaser->changepar(i, lv[LV_ANALOG_PHASER][i]);
-            APhaser_Bypass = APhaser_B;
+            EFX_Bypass[EFX_ANALOG_PHASER] = APhaser_B;
             break;
 
         case EFX_VALVE:
-            Valve_Bypass = 0;
+            EFX_Bypass[EFX_VALVE] = 0;
             efx_Valve->cleanup();
             for (i = 0; i < C_VALVE_PARAMETERS; i++)
                 efx_Valve->changepar(i, lv[LV_VALVE][i]);
-            Valve_Bypass = Valve_B;
+            EFX_Bypass[EFX_VALVE] = Valve_B;
             break;
 
         case EFX_DUAL_FLANGE:
-            DFlange_Bypass = 0;
+            EFX_Bypass[EFX_DUAL_FLANGE] = 0;
             efx_DFlange->cleanup();
             for (i = 0; i < C_DFLANGE_PARAMETERS; i++)
                 efx_DFlange->changepar(i, lv[LV_DUAL_FLANGE][i]);
-            DFlange_Bypass = DFlange_B;
+            EFX_Bypass[EFX_DUAL_FLANGE] = DFlange_B;
             break;
 
         case EFX_RING:
-            Ring_Bypass = 0;
+            EFX_Bypass[EFX_RING] = 0;
             efx_Ring->cleanup();
             for (i = 0; i < C_RING_PARAMETERS; i++)
                 efx_Ring->changepar(i, lv[LV_RING][i]);
-            Ring_Bypass = Ring_B;
+            EFX_Bypass[EFX_RING] = Ring_B;
             break;
 
         case EFX_EXCITER:
-            Exciter_Bypass = 0;
+            EFX_Bypass[EFX_EXCITER] = 0;
             efx_Exciter->cleanup();
             for (i = 0; i < C_EXCITER_PARAMETERS; i++)
                 efx_Exciter->changepar(i, lv[LV_EXCITER][i]);
-            Exciter_Bypass = Exciter_B;
+            EFX_Bypass[EFX_EXCITER] = Exciter_B;
             break;
 
         case EFX_DISTBAND:
-            DistBand_Bypass = 0;
+            EFX_Bypass[EFX_DISTBAND] = 0;
             efx_DistBand->cleanup();
             for (i = 0; i < C_DBAND_PARAMETERS; i++)
                 efx_DistBand->changepar(i, lv[LV_DISTBAND][i]);
-            DistBand_Bypass = DistBand_B;
+            EFX_Bypass[EFX_DISTBAND] = DistBand_B;
             break;
 
         case EFX_ARPIE:
-            Arpie_Bypass = 0;
+            EFX_Bypass[EFX_ARPIE] = 0;
             efx_Arpie->cleanup();
             for (i = 0; i < C_ARPIE_PARAMETERS; i++)
                 efx_Arpie->changepar(i, lv[LV_ARPIE][i]);
-            Arpie_Bypass = Arpie_B;
+            EFX_Bypass[EFX_ARPIE] = Arpie_B;
             break;
 
         case EFX_EXPANDER:
-            Expander_Bypass = 0;
+            EFX_Bypass[EFX_EXPANDER] = 0;
             efx_Expander->cleanup();
             for (i = 0; i < C_EXPANDER_PARAMETERS; i++)
                 efx_Expander->changepar(i, lv[LV_EXPANDER][i]);
-            Expander_Bypass = Expander_B;
+            EFX_Bypass[EFX_EXPANDER] = Expander_B;
             break;
 
         case EFX_SHUFFLE:
-            Shuffle_Bypass = 0;
+            EFX_Bypass[EFX_SHUFFLE] = 0;
             efx_Shuffle->cleanup();
             for (i = 0; i < C_SHUFFLE_PARAMETERS; i++)
                 efx_Shuffle->changepar(i, lv[LV_SHUFFLE][i]);
-            Shuffle_Bypass = Shuffle_B;
+            EFX_Bypass[EFX_SHUFFLE] = Shuffle_B;
             break;
 
         case EFX_SYNTHFILTER:
-            Synthfilter_Bypass = 0;
+            EFX_Bypass[EFX_SYNTHFILTER] = 0;
             efx_Synthfilter->cleanup();
             for (i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
                 efx_Synthfilter->changepar(i, lv[LV_SYNTHFILTER][i]);
-            Synthfilter_Bypass = Synthfilter_B;
+            EFX_Bypass[EFX_SYNTHFILTER] = Synthfilter_B;
             break;
 
         case EFX_VARYBAND:
-            VaryBand_Bypass = 0;
+            EFX_Bypass[EFX_VARYBAND] = 0;
             efx_VaryBand->cleanup();
             for (i = 0; i < C_VARYBAND_PARAMETERS; i++)
                 efx_VaryBand->changepar(i, lv[LV_VARYBAND][i]);
-            VaryBand_Bypass = VaryBand_B;
+            EFX_Bypass[EFX_VARYBAND] = VaryBand_B;
             break;
 
         case EFX_CONVOLOTRON:
-            Convol_Bypass = 0;
+            EFX_Bypass[EFX_CONVOLOTRON] = 0;
             efx_Convol->cleanup();
             for (i = 0; i < C_CONVO_PARAMETERS; i++)
                 efx_Convol->changepar(i, lv[LV_CONVOLOTRON][i]);
-            Convol_Bypass = Convol_B;
+            EFX_Bypass[EFX_CONVOLOTRON] = Convol_B;
             break;
 
         case EFX_LOOPER:
-            Looper_Bypass = 0;
+            EFX_Bypass[EFX_LOOPER] = 0;
             // efx_Looper->cleanup();
             for (i = 0; i < C_LOOPER_PARAMETERS; i++)
                 efx_Looper->changepar(i, lv[LV_LOOPER][i]);
-            Looper_Bypass = Looper_B;
+            EFX_Bypass[EFX_LOOPER] = Looper_B;
             break;
 
         case EFX_MUTROMOJO:
-            MuTroMojo_Bypass = 0;
+            EFX_Bypass[EFX_MUTROMOJO] = 0;
             efx_MuTroMojo->cleanup();
             for (i = 0; i < C_MUTRO_PARAMETERS; i++)
                 efx_MuTroMojo->changepar(i, lv[LV_MUTROMOJO][i]);
-            MuTroMojo_Bypass = MuTroMojo_B;
+            EFX_Bypass[EFX_MUTROMOJO] = MuTroMojo_B;
             break;
 
         case EFX_ECHOVERSE:
-            Echoverse_Bypass = 0;
+            EFX_Bypass[EFX_ECHOVERSE] = 0;
             efx_Echoverse->cleanup();
             for (i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
                 efx_Echoverse->changepar(i, lv[LV_ECHOVERSE][i]);
-            Echoverse_Bypass = Echoverse_B;
+            EFX_Bypass[EFX_ECHOVERSE] = Echoverse_B;
             break;
 
         case EFX_COILCRAFTER:
-            CoilCrafter_Bypass = 0;
+            EFX_Bypass[EFX_COILCRAFTER] = 0;
             efx_CoilCrafter->cleanup();
             for (i = 0; i < C_COIL_PARAMETERS; i++)
                 efx_CoilCrafter->changepar(i, lv[LV_COILCRAFTER][i]);
-            CoilCrafter_Bypass = CoilCrafter_B;
+            EFX_Bypass[EFX_COILCRAFTER] = CoilCrafter_B;
             break;
 
         case EFX_SHELFBOOST:
-            ShelfBoost_Bypass = 0;
+            EFX_Bypass[EFX_SHELFBOOST] = 0;
             efx_ShelfBoost->cleanup();
             for (i = 0; i < C_SHELF_PARAMETERS; i++)
                 efx_ShelfBoost->changepar(i, lv[LV_SHELFBOOST][i]);
-            ShelfBoost_Bypass = ShelfBoost_B;
+            EFX_Bypass[EFX_SHELFBOOST] = ShelfBoost_B;
             break;
 
         case EFX_VOCODER:
-            Vocoder_Bypass = 0;
+            EFX_Bypass[EFX_VOCODER] = 0;
             efx_Vocoder->cleanup();
             for (i = 0; i < C_VOCODER_PARAMETERS; i++)
                 efx_Vocoder->changepar(i, lv[LV_VOCODER][i]);
-            Vocoder_Bypass = Vocoder_B;
+            EFX_Bypass[EFX_VOCODER] = Vocoder_B;
             break;
 
         case EFX_SUSTAINER:
-            Sustainer_Bypass = 0;
+            EFX_Bypass[EFX_SUSTAINER] = 0;
             efx_Sustainer->cleanup();
             for (i = 0; i < C_SUSTAIN_PARAMETERS; i++)
                 efx_Sustainer->changepar(i, lv[LV_SUSTAINER][i]);
-            Sustainer_Bypass = Sustainer_B;
+            EFX_Bypass[EFX_SUSTAINER] = Sustainer_B;
             break;
 
         case EFX_SEQUENCE:
-            Sequence_Bypass = 0;
+            EFX_Bypass[EFX_SEQUENCE] = 0;
             efx_Sequence->cleanup();
             for (i = 0; i < C_SEQUENCE_PARAMETERS; i++)
                 efx_Sequence->changepar(i, lv[LV_SEQUENCE][i]);
-            Sequence_Bypass = Sequence_B;
+            EFX_Bypass[EFX_SEQUENCE] = Sequence_B;
             break;
 
         case EFX_SHIFTER:
-            Shifter_Bypass = 0;
+            EFX_Bypass[EFX_SHIFTER] = 0;
             efx_Shifter->cleanup();
             for (i = 0; i < C_SHIFTER_PARAMETERS; i++)
                 efx_Shifter->changepar(i, lv[LV_SHIFTER][i]);
-            Shifter_Bypass = Shifter_B;
+            EFX_Bypass[EFX_SHIFTER] = Shifter_B;
             break;
 
         case EFX_STOMPBOX:
-            StompBox_Bypass = 0;
+            EFX_Bypass[EFX_STOMPBOX] = 0;
             efx_StompBox->cleanup();
             for (i = 0; i < C_STOMP_PARAMETERS; i++)
                 efx_StompBox->changepar(i, lv[LV_STOMPBOX][i]);
-            StompBox_Bypass = StompBox_B;
+            EFX_Bypass[EFX_STOMPBOX] = StompBox_B;
             break;
 
         case EFX_REVERBTRON:
-            Reverbtron_Bypass = 0;
+            EFX_Bypass[EFX_REVERBTRON] = 0;
             efx_Reverbtron->cleanup();
             for (i = 0; i < C_REVTRON_PARAMETERS; i++)
                 efx_Reverbtron->changepar(i, lv[LV_REVERBTRON][i]);
-            Reverbtron_Bypass = Reverbtron_B;
+            EFX_Bypass[EFX_REVERBTRON] = Reverbtron_B;
             break;
 
         case EFX_ECHOTRON:
-            Echotron_Bypass = 0;
+            EFX_Bypass[EFX_ECHOTRON] = 0;
             efx_Echotron->cleanup();
             for (i = 0; i < C_ECHOTRON_PARAMETERS; i++)
                 efx_Echotron->changepar(i, lv[LV_ECHOTRON][i]);
-            Echotron_Bypass = Echotron_B;
+            EFX_Bypass[EFX_ECHOTRON] = Echotron_B;
             break;
 
         case EFX_STEREOHARM:
-            StereoHarm_Bypass = 0;
+            EFX_Bypass[EFX_STEREOHARM] = 0;
             efx_StereoHarm->cleanup();
             for (i = 0; i < C_SHARM_PARAMETERS; i++)
                 efx_StereoHarm->changepar(i, lv[LV_STEREOHARM][i]);
             if (lv[LV_STEREOHARM][10]) RC_Stereo_Harm->cleanup();
-            StereoHarm_Bypass = StereoHarm_B;
+            EFX_Bypass[EFX_STEREOHARM] = StereoHarm_B;
             break;
 
         case EFX_COMPBAND:
-            CompBand_Bypass = 0;
+            EFX_Bypass[EFX_COMPBAND] = 0;
             efx_CompBand->cleanup();
             for (i = 0; i < C_COMPBAND_PARAMETERS; i++)
                 efx_CompBand->changepar(i, lv[LV_COMPBAND][i]);
-            CompBand_Bypass = CompBand_B;
+            EFX_Bypass[EFX_COMPBAND] = CompBand_B;
             break;
 
         case EFX_OPTICALTREM:
-            Opticaltrem_Bypass = 0;
+            EFX_Bypass[EFX_OPTICALTREM] = 0;
             efx_Opticaltrem->cleanup();
             for (i = 0; i < C_OPTICAL_PARAMETERS; i++)
                 efx_Opticaltrem->changepar(i, lv[LV_OPTICALTREM][i]);
-            Opticaltrem_Bypass = Opticaltrem_B;
+            EFX_Bypass[EFX_OPTICALTREM] = Opticaltrem_B;
             break;
 
         case EFX_VIBE:
-            Vibe_Bypass = 0;
+            EFX_Bypass[EFX_VIBE] = 0;
             efx_Vibe->cleanup();
             for (i = 0; i < C_VIBE_PARAMETERS; i++)
                 efx_Vibe->changepar(i, lv[LV_VIBE][i]);
-            Vibe_Bypass = Vibe_B;
+            EFX_Bypass[EFX_VIBE] = Vibe_B;
             break;
 
         case EFX_INFINITY:
-            Infinity_Bypass = 0;
+            EFX_Bypass[EFX_INFINITY] = 0;
             efx_Infinity->cleanup();
             for (i = 0; i < C_INFINITY_PARAMETERS; i++)
                 efx_Infinity->changepar(i, lv[LV_INFINITY][i]);
-            Infinity_Bypass = Infinity_B;
+            EFX_Bypass[EFX_INFINITY] = Infinity_B;
             break;
 
         }
@@ -2212,52 +2212,52 @@ RKR::Preset_to_Bank(int i)
     }
 
     Bank[i].lv[LV_REVERB][C_LV_BYPASS] = EFX_Bypass[EFX_REVERB];
-    Bank[i].lv[LV_ECHO][C_LV_BYPASS] = Echo_Bypass;
+    Bank[i].lv[LV_ECHO][C_LV_BYPASS] = EFX_Bypass[EFX_ECHO];
     Bank[i].lv[LV_CHORUS][C_LV_BYPASS] = EFX_Bypass[EFX_CHORUS];
-    Bank[i].lv[LV_FLANGER][C_LV_BYPASS] = Flanger_Bypass;
-    Bank[i].lv[LV_PHASER][C_LV_BYPASS] = Phaser_Bypass;
-    Bank[i].lv[LV_OVERDRIVE][C_LV_BYPASS] = Overdrive_Bypass;
-    Bank[i].lv[LV_DISTORTION][C_LV_BYPASS] = Distorsion_Bypass;
-    Bank[i].lv[LV_EQ][C_LV_BYPASS] = EQ1_Bypass;
-    Bank[i].lv[LV_PARAMETRIC][C_LV_BYPASS] = EQ2_Bypass;
-    Bank[i].lv[LV_COMPRESSOR][C_LV_BYPASS] = Compressor_Bypass;
-    Bank[i].lv[LV_WAHWAH][C_LV_BYPASS] = WahWah_Bypass;
-    Bank[i].lv[LV_ALIENWAH][C_LV_BYPASS] = Alienwah_Bypass;
-    Bank[i].lv[LV_CABINET][C_LV_BYPASS] = Cabinet_Bypass;
-    Bank[i].lv[LV_PAN][C_LV_BYPASS] = Pan_Bypass;
-    Bank[i].lv[LV_HARMONIZER][C_LV_BYPASS] = Harmonizer_Bypass;
-    Bank[i].lv[LV_MUSICAL_DELAY][C_LV_BYPASS] = MusDelay_Bypass;
-    Bank[i].lv[LV_NOISEGATE][C_LV_BYPASS] = Gate_Bypass;
-    Bank[i].lv[LV_DERELICT][C_LV_BYPASS] = Derelict_Bypass;
-    Bank[i].lv[LV_ANALOG_PHASER][C_LV_BYPASS] = APhaser_Bypass;
-    Bank[i].lv[LV_VALVE][C_LV_BYPASS] = Valve_Bypass;
-    Bank[i].lv[LV_DUAL_FLANGE][C_LV_BYPASS] = DFlange_Bypass;
-    Bank[i].lv[LV_RING][C_LV_BYPASS] = Ring_Bypass;
-    Bank[i].lv[LV_EXCITER][C_LV_BYPASS] = Exciter_Bypass;
-    Bank[i].lv[LV_DISTBAND][C_LV_BYPASS] = DistBand_Bypass;
-    Bank[i].lv[LV_ARPIE][C_LV_BYPASS] = Arpie_Bypass;
-    Bank[i].lv[LV_EXPANDER][C_LV_BYPASS] = Expander_Bypass;
-    Bank[i].lv[LV_SHUFFLE][C_LV_BYPASS] = Shuffle_Bypass;
-    Bank[i].lv[LV_SYNTHFILTER][C_LV_BYPASS] = Synthfilter_Bypass;
-    Bank[i].lv[LV_VARYBAND][C_LV_BYPASS] = VaryBand_Bypass;
-    Bank[i].lv[LV_CONVOLOTRON][C_LV_BYPASS] = Convol_Bypass;
-    Bank[i].lv[LV_LOOPER][C_LV_BYPASS] = Looper_Bypass;
-    Bank[i].lv[LV_MUTROMOJO][C_LV_BYPASS] = MuTroMojo_Bypass;
-    Bank[i].lv[LV_ECHOVERSE][C_LV_BYPASS] = Echoverse_Bypass;
-    Bank[i].lv[LV_COILCRAFTER][C_LV_BYPASS] = CoilCrafter_Bypass;
-    Bank[i].lv[LV_SHELFBOOST][C_LV_BYPASS] = ShelfBoost_Bypass;
-    Bank[i].lv[LV_VOCODER][C_LV_BYPASS] = Vocoder_Bypass;
-    Bank[i].lv[LV_SUSTAINER][C_LV_BYPASS] = Sustainer_Bypass;
-    Bank[i].lv[LV_SEQUENCE][C_LV_BYPASS] = Sequence_Bypass;
-    Bank[i].lv[LV_SHIFTER][C_LV_BYPASS] = Shifter_Bypass;
-    Bank[i].lv[LV_STOMPBOX][C_LV_BYPASS] = StompBox_Bypass;
-    Bank[i].lv[LV_REVERBTRON][C_LV_BYPASS] = Reverbtron_Bypass;
-    Bank[i].lv[LV_ECHOTRON][C_LV_BYPASS] = Echotron_Bypass;
-    Bank[i].lv[LV_STEREOHARM][C_LV_BYPASS] = StereoHarm_Bypass;
-    Bank[i].lv[LV_COMPBAND][C_LV_BYPASS] = CompBand_Bypass;
-    Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS] = Opticaltrem_Bypass;
-    Bank[i].lv[LV_VIBE][C_LV_BYPASS] = Vibe_Bypass;
-    Bank[i].lv[LV_INFINITY][C_LV_BYPASS] = Infinity_Bypass;
+    Bank[i].lv[LV_FLANGER][C_LV_BYPASS] = EFX_Bypass[EFX_FLANGER];
+    Bank[i].lv[LV_PHASER][C_LV_BYPASS] = EFX_Bypass[EFX_PHASER];
+    Bank[i].lv[LV_OVERDRIVE][C_LV_BYPASS] = EFX_Bypass[EFX_OVERDRIVE];
+    Bank[i].lv[LV_DISTORTION][C_LV_BYPASS] = EFX_Bypass[EFX_DISTORTION];
+    Bank[i].lv[LV_EQ][C_LV_BYPASS] = EFX_Bypass[EFX_EQ];
+    Bank[i].lv[LV_PARAMETRIC][C_LV_BYPASS] = EFX_Bypass[EFX_PARAMETRIC];
+    Bank[i].lv[LV_COMPRESSOR][C_LV_BYPASS] = EFX_Bypass[EFX_COMPRESSOR];
+    Bank[i].lv[LV_WAHWAH][C_LV_BYPASS] = EFX_Bypass[EFX_WAHWAH];
+    Bank[i].lv[LV_ALIENWAH][C_LV_BYPASS] = EFX_Bypass[EFX_ALIENWAH];
+    Bank[i].lv[LV_CABINET][C_LV_BYPASS] = EFX_Bypass[EFX_CABINET];
+    Bank[i].lv[LV_PAN][C_LV_BYPASS] = EFX_Bypass[EFX_PAN];
+    Bank[i].lv[LV_HARMONIZER][C_LV_BYPASS] = EFX_Bypass[EFX_HARMONIZER];
+    Bank[i].lv[LV_MUSICAL_DELAY][C_LV_BYPASS] = EFX_Bypass[EFX_MUSICAL_DELAY];
+    Bank[i].lv[LV_NOISEGATE][C_LV_BYPASS] = EFX_Bypass[EFX_NOISEGATE];
+    Bank[i].lv[LV_DERELICT][C_LV_BYPASS] = EFX_Bypass[EFX_DERELICT];
+    Bank[i].lv[LV_ANALOG_PHASER][C_LV_BYPASS] = EFX_Bypass[EFX_ANALOG_PHASER];
+    Bank[i].lv[LV_VALVE][C_LV_BYPASS] = EFX_Bypass[EFX_VALVE];
+    Bank[i].lv[LV_DUAL_FLANGE][C_LV_BYPASS] = EFX_Bypass[EFX_DUAL_FLANGE];
+    Bank[i].lv[LV_RING][C_LV_BYPASS] = EFX_Bypass[EFX_RING];
+    Bank[i].lv[LV_EXCITER][C_LV_BYPASS] = EFX_Bypass[EFX_EXCITER];
+    Bank[i].lv[LV_DISTBAND][C_LV_BYPASS] = EFX_Bypass[EFX_DISTBAND];
+    Bank[i].lv[LV_ARPIE][C_LV_BYPASS] = EFX_Bypass[EFX_ARPIE];
+    Bank[i].lv[LV_EXPANDER][C_LV_BYPASS] = EFX_Bypass[EFX_EXPANDER];
+    Bank[i].lv[LV_SHUFFLE][C_LV_BYPASS] = EFX_Bypass[EFX_SHUFFLE];
+    Bank[i].lv[LV_SYNTHFILTER][C_LV_BYPASS] = EFX_Bypass[EFX_SYNTHFILTER];
+    Bank[i].lv[LV_VARYBAND][C_LV_BYPASS] = EFX_Bypass[EFX_VARYBAND];
+    Bank[i].lv[LV_CONVOLOTRON][C_LV_BYPASS] = EFX_Bypass[EFX_CONVOLOTRON];
+    Bank[i].lv[LV_LOOPER][C_LV_BYPASS] = EFX_Bypass[EFX_LOOPER];
+    Bank[i].lv[LV_MUTROMOJO][C_LV_BYPASS] = EFX_Bypass[EFX_MUTROMOJO];
+    Bank[i].lv[LV_ECHOVERSE][C_LV_BYPASS] = EFX_Bypass[EFX_ECHOVERSE];
+    Bank[i].lv[LV_COILCRAFTER][C_LV_BYPASS] = EFX_Bypass[EFX_COILCRAFTER];
+    Bank[i].lv[LV_SHELFBOOST][C_LV_BYPASS] = EFX_Bypass[EFX_SHELFBOOST];
+    Bank[i].lv[LV_VOCODER][C_LV_BYPASS] = EFX_Bypass[EFX_VOCODER];
+    Bank[i].lv[LV_SUSTAINER][C_LV_BYPASS] = EFX_Bypass[EFX_SUSTAINER];
+    Bank[i].lv[LV_SEQUENCE][C_LV_BYPASS] = EFX_Bypass[EFX_SEQUENCE];
+    Bank[i].lv[LV_SHIFTER][C_LV_BYPASS] = EFX_Bypass[EFX_SHIFTER];
+    Bank[i].lv[LV_STOMPBOX][C_LV_BYPASS] = EFX_Bypass[EFX_STOMPBOX];
+    Bank[i].lv[LV_REVERBTRON][C_LV_BYPASS] = EFX_Bypass[EFX_REVERBTRON];
+    Bank[i].lv[LV_ECHOTRON][C_LV_BYPASS] = EFX_Bypass[EFX_ECHOTRON];
+    Bank[i].lv[LV_STEREOHARM][C_LV_BYPASS] = EFX_Bypass[EFX_STEREOHARM];
+    Bank[i].lv[LV_COMPBAND][C_LV_BYPASS] = EFX_Bypass[EFX_COMPBAND];
+    Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS] = EFX_Bypass[EFX_OPTICALTREM];
+    Bank[i].lv[LV_VIBE][C_LV_BYPASS] = EFX_Bypass[EFX_VIBE];
+    Bank[i].lv[LV_INFINITY][C_LV_BYPASS] = EFX_Bypass[EFX_INFINITY];
 
 
     memcpy(Bank[i].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));

@@ -21,10 +21,10 @@ widget_class CabinetGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Cabinet_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_CABINET]);
  return;
 }
-rkr->Cabinet_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_CABINET]=(int)o->value();
 rgui->findpos(EFX_CABINET,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button

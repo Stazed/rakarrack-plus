@@ -6,10 +6,10 @@ void ExciterGui::cb_exciter_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Exciter_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_EXCITER]);
  return;
 }
-rkr->Exciter_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_EXCITER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Exciter->cleanup();
 rgui->findpos(EFX_EXCITER,(int)o->value(),o);

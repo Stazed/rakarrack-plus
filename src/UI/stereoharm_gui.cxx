@@ -6,10 +6,10 @@ void SharGui::cb_shar_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->StereoHarm_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_STEREOHARM]);
  return;
 }
-rkr->StereoHarm_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_STEREOHARM]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StereoHarm->cleanup();
 rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
@@ -68,9 +68,9 @@ void SharGui::cb_shar_intl_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Sharm_L_Interval);
  return;
 }
-rkr->StereoHarm_Bypass=0;
+rkr->EFX_Bypass[EFX_STEREOHARM]=0;
 rkr->efx_StereoHarm->changepar(Sharm_L_Interval,(int)(o->value()+12));
-if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;
+if((int)shar_activar->value())rkr->EFX_Bypass[EFX_STEREOHARM]=1;
 }
 void SharGui::cb_shar_intl(RKR_Slider* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_intl_i(o,v);
@@ -106,9 +106,9 @@ void SharGui::cb_shar_intr_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Sharm_R_Interval);
  return;
 }
-rkr->StereoHarm_Bypass=0;
+rkr->EFX_Bypass[EFX_STEREOHARM]=0;
 rkr->efx_StereoHarm->changepar(Sharm_R_Interval,(int)(o->value()+12));
-if((int)shar_activar->value())rkr->StereoHarm_Bypass=1;
+if((int)shar_activar->value())rkr->EFX_Bypass[EFX_STEREOHARM]=1;
 }
 void SharGui::cb_shar_intr(RKR_Slider* o, void* v) {
   ((SharGui*)(o->parent()))->cb_shar_intr_i(o,v);

@@ -6,10 +6,10 @@ void SustainGui::cb_sus_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
         {
          rgui->getMIDIControl(MC_Multi_On_Off);
-         o->value(rkr->Sustainer_Bypass);
+         o->value(rkr->EFX_Bypass[EFX_SUSTAINER]);
          return;
         }
-        rkr->Sustainer_Bypass=(int)o->value();
+        rkr->EFX_Bypass[EFX_SUSTAINER]=(int)o->value();
         if((int) o->value()==0)
         rkr->efx_Sustainer->cleanup();
         rgui->findpos(EFX_SUSTAINER,(int)o->value(),o);

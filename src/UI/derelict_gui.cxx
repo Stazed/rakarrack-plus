@@ -6,10 +6,10 @@ void DerelictGui::cb_derelict_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Derelict_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_DERELICT]);
  return;
 }
-rkr->Derelict_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_DERELICT]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Derelict->cleanup();
 rgui->findpos(EFX_DERELICT,(int)o->value(),o);

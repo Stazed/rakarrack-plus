@@ -21,10 +21,10 @@ widget_class CbandGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->CompBand_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_COMPBAND]);
  return;
 }
-rkr->CompBand_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_COMPBAND]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CompBand->cleanup();
 rgui->findpos(EFX_COMPBAND,(int)o->value(),o);} selected

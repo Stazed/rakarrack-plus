@@ -6,10 +6,10 @@ void ConvoGui::cb_convo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Convol_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_CONVOLOTRON]);
  return;
 }
-rkr->Convol_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_CONVOLOTRON]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Convol->cleanup();
 rgui->findpos(EFX_CONVOLOTRON,(int)o->value(),o);

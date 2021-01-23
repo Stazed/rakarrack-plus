@@ -6,10 +6,10 @@ void MutromojoGui::cb_mutromojo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->MuTroMojo_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_MUTROMOJO]);
  return;
 }
-rkr->MuTroMojo_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_MUTROMOJO]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_MuTroMojo->cleanup();
 rgui->findpos(EFX_MUTROMOJO,(int)o->value(),o);

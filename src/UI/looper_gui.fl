@@ -27,10 +27,10 @@ widget_class LooperGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Looper_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_LOOPER]);
  return;
 }
-rkr->Looper_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_LOOPER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Looper->cleanup();
 rgui->findpos(EFX_LOOPER,(int)o->value(),o);} selected

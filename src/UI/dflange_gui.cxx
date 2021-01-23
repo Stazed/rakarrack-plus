@@ -6,10 +6,10 @@ void DflangeGui::cb_dflange_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->DFlange_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_DUAL_FLANGE]);
  return;
 }
-rkr->DFlange_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_DUAL_FLANGE]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_DFlange->cleanup();
 rgui->findpos(EFX_DUAL_FLANGE,(int)o->value(),o);

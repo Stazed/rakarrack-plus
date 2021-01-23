@@ -25,10 +25,10 @@ widget_class {\#include "common_gui_menu.h"} WahwahGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->WahWah_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_WAHWAH]);
  return;
 }
-rkr->WahWah_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_WAHWAH]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WahWah->cleanup();
 rgui->findpos(EFX_WAHWAH,(int)o->value(),o);} selected
@@ -38,7 +38,7 @@ rgui->findpos(EFX_WAHWAH,(int)o->value(),o);} selected
   Fl_Choice WahWah_preset {
     label Preset
     user_data 12010
-    callback {rkr->WahWah_Bypass=0;
+    callback {rkr->EFX_Bypass[EFX_WAHWAH]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12010))rkr->efx_WahWah->setpreset((int) o->value()); 
 WahWah_WD->value(Dry_Wet(rkr->efx_WahWah->getpar(WahWah_DryWet)));
@@ -52,7 +52,7 @@ WahWah_ampsns->value(rkr->efx_WahWah->getpar(WahWah_Sense));
 WahWah_ampsnsinv->value(rkr->efx_WahWah->getpar(WahWah_ASI));
 WahWah_smooth->value(rkr->efx_WahWah->getpar(WahWah_Smooth));
 WahWah_ftype->value(rkr->efx_WahWah->getpar(WahWah_Mode));
-if((int)WahWah_activar->value()) rkr->WahWah_Bypass=1;}
+if((int)WahWah_activar->value()) rkr->EFX_Bypass[EFX_WAHWAH]=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

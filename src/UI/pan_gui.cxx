@@ -6,10 +6,10 @@ void PanGui::cb_pan_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Pan_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_PAN]);
  return;
 }
-rkr->Pan_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_PAN]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Pan->cleanup();
 rgui->findpos(EFX_PAN,(int)o->value(),o);

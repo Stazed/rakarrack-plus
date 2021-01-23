@@ -6,10 +6,10 @@ void SequenceGui::cb_seq_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Sequence_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_SEQUENCE]);
  return;
 }
-rkr->Sequence_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_SEQUENCE]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Sequence->cleanup();
 rgui->findpos(EFX_SEQUENCE,(int)o->value(),o);

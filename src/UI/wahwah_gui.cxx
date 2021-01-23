@@ -6,10 +6,10 @@ void WahwahGui::cb_WahWah_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->WahWah_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_WAHWAH]);
  return;
 }
-rkr->WahWah_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_WAHWAH]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_WahWah->cleanup();
 rgui->findpos(EFX_WAHWAH,(int)o->value(),o);
@@ -19,7 +19,7 @@ void WahwahGui::cb_WahWah_activar(RKR_Light_Button* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_preset_i(RKR_Choice* o, void* v) {
-  rkr->WahWah_Bypass=0;
+  rkr->EFX_Bypass[EFX_WAHWAH]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12010))rkr->efx_WahWah->setpreset((int) o->value()); 
 WahWah_WD->value(Dry_Wet(rkr->efx_WahWah->getpar(WahWah_DryWet)));
@@ -33,7 +33,7 @@ WahWah_ampsns->value(rkr->efx_WahWah->getpar(WahWah_Sense));
 WahWah_ampsnsinv->value(rkr->efx_WahWah->getpar(WahWah_ASI));
 WahWah_smooth->value(rkr->efx_WahWah->getpar(WahWah_Smooth));
 WahWah_ftype->value(rkr->efx_WahWah->getpar(WahWah_Mode));
-if((int)WahWah_activar->value()) rkr->WahWah_Bypass=1;
+if((int)WahWah_activar->value()) rkr->EFX_Bypass[EFX_WAHWAH]=1;
 }
 void WahwahGui::cb_WahWah_preset(RKR_Choice* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_preset_i(o,v);

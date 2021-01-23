@@ -6,10 +6,10 @@ void AphaserGui::cb_aphaser_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->APhaser_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_ANALOG_PHASER]);
  return;
 }
-rkr->APhaser_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_ANALOG_PHASER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_APhaser->cleanup();
 rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);

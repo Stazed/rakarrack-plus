@@ -6,10 +6,10 @@ void GateGui::cb_gate_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Gate_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_NOISEGATE]);
  return;
 }
-rkr->Gate_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_NOISEGATE]=(int)o->value();
 rgui->findpos(EFX_NOISEGATE,(int)o->value(),o);
 }
 void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {

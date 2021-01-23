@@ -6,10 +6,10 @@ void EqGui::cb_eq_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EQ1_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_EQ]);
  return;
 } 
-rkr->EQ1_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_EQ]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_EQ1->cleanup();
 rgui->findpos(EFX_EQ,(int)o->value(),o);

@@ -6,10 +6,10 @@ void OtremGui::cb_otrem_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Opticaltrem_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_OPTICALTREM]);
  return;
 }
-rkr->Opticaltrem_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_OPTICALTREM]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Opticaltrem->cleanup();
 rgui->findpos(EFX_OPTICALTREM,(int)o->value(),o);

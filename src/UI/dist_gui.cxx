@@ -6,10 +6,10 @@ void DistGui::cb_dist_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Distorsion_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_DISTORTION]);
  return;
 }
-rkr->Distorsion_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_DISTORTION]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Distorsion->cleanup();
 rgui->findpos(EFX_DISTORTION,(int)o->value(),o);

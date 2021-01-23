@@ -6,10 +6,10 @@ void RevtronGui::cb_revtron_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Reverbtron_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_REVERBTRON]);
  return;
 }
-rkr->Reverbtron_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_REVERBTRON]=(int)o->value();
 if((int) o->value()==0) rkr->efx_Reverbtron->cleanup();
 rgui->findpos(EFX_REVERBTRON,(int)o->value(),o);
 }

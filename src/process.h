@@ -847,55 +847,9 @@ public:
     int Tuner_Bypass;
     int Tap_Bypass;
     int ACI_Bypass;
-    
+
     int EFX_Bypass[C_NUMBER_EFFECTS];
     int EFX_Bank_Bypass[C_NUMBER_EFFECTS];
-
-    int Flanger_Bypass;
-    int Phaser_Bypass;
-    int Overdrive_Bypass;
-    int Distorsion_Bypass;
-    int Echo_Bypass;
-    int EQ1_Bypass;
-    int EQ2_Bypass;
-    int Compressor_Bypass;
-    int WahWah_Bypass;
-    int Alienwah_Bypass;
-    int Cabinet_Bypass;
-    int Pan_Bypass;
-    int Harmonizer_Bypass;
-    int MusDelay_Bypass;
-    int Gate_Bypass;
-    int Derelict_Bypass;
-    int APhaser_Bypass;
-    int Valve_Bypass;
-    int DFlange_Bypass;
-    int Ring_Bypass;
-    int Exciter_Bypass;
-    int DistBand_Bypass;
-    int Arpie_Bypass;
-    int Expander_Bypass;
-    int Shuffle_Bypass;
-    int Synthfilter_Bypass;
-    int VaryBand_Bypass;
-    int Convol_Bypass;
-    int Looper_Bypass;
-    int MuTroMojo_Bypass;
-    int Echoverse_Bypass;
-    int CoilCrafter_Bypass;
-    int ShelfBoost_Bypass;
-    int Vocoder_Bypass;
-    int Sustainer_Bypass;
-    int Sequence_Bypass;
-    int Shifter_Bypass;
-    int StompBox_Bypass;
-    int Reverbtron_Bypass;
-    int Echotron_Bypass;
-    int StereoHarm_Bypass;
-    int CompBand_Bypass;
-    int Opticaltrem_Bypass;
-    int Vibe_Bypass;
-    int Infinity_Bypass;
 
     int Bypass_B;
 

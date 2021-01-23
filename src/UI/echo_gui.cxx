@@ -6,10 +6,10 @@ void EchoGui::cb_echo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Echo_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_ECHO]);
  return;
 }
-rkr->Echo_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_ECHO]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Echo->cleanup();
 rgui->findpos(EFX_ECHO,(int)o->value(),o);

@@ -6,10 +6,10 @@ void ExpanderGui::cb_expander_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Expander_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_EXPANDER]);
  return;
 }
-rkr->Expander_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_EXPANDER]=(int)o->value();
 rgui->findpos(EFX_EXPANDER,(int)o->value(),o);
 }
 void ExpanderGui::cb_expander_activar(RKR_Light_Button* o, void* v) {

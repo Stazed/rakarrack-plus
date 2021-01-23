@@ -418,7 +418,7 @@ void RKRGUI::GuiTimeout(void)
             at = 0;
         }
 
-        if (rkr->Looper_Bypass)
+        if (rkr->EFX_Bypass[EFX_LOOPER])
         {
             if ((rkr->efx_Looper->Pplay) && (!rkr->efx_Looper->Pstop))
             {
@@ -467,7 +467,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (rkr->Harmonizer_Bypass)
+    if (rkr->EFX_Bypass[EFX_HARMONIZER])
     {
         if ((rkr->efx_Har->PSELECT) || (rkr->efx_Har->PMIDI))
         {
@@ -483,7 +483,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (rkr->StereoHarm_Bypass)
+    if (rkr->EFX_Bypass[EFX_STEREOHARM])
     {
         if ((rkr->efx_StereoHarm->PSELECT) || (rkr->efx_StereoHarm->PMIDI))
         {
@@ -1358,27 +1358,27 @@ void RKRGUI::Put_Loaded()
         {
 
             case EFX_EQ:
-                EQ->eq_activar->value(rkr->EQ1_Bypass);
+                EQ->eq_activar->value(rkr->EFX_Bypass[EFX_EQ]);
                 EQ->eq_preset->do_callback(EQ->eq_preset, 1);
                 break;
 
             case EFX_COMPRESSOR:
-                COMPRESS->compress_activar->value(rkr->Compressor_Bypass);
+                COMPRESS->compress_activar->value(rkr->EFX_Bypass[EFX_COMPRESSOR]);
                 COMPRESS->compress_preset->do_callback(COMPRESS->compress_preset, 1);
                 break;
 
             case EFX_DISTORTION:
-                DIST->dist_activar->value(rkr->Distorsion_Bypass);
+                DIST->dist_activar->value(rkr->EFX_Bypass[EFX_DISTORTION]);
                 DIST->dist_preset->do_callback(DIST->dist_preset, 1);
                 break;
 
             case EFX_OVERDRIVE:
-                OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
+                OVRD->ovrd_activar->value(rkr->EFX_Bypass[EFX_OVERDRIVE]);
                 OVRD->ovrd_preset->do_callback(OVRD->ovrd_preset, 1);
                 break;
 
             case EFX_ECHO:
-                ECHO->echo_activar->value(rkr->Echo_Bypass);
+                ECHO->echo_activar->value(rkr->EFX_Bypass[EFX_ECHO]);
                 ECHO->echo_preset->do_callback(ECHO->echo_preset, 1);
                 break;
 
@@ -1388,12 +1388,12 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case EFX_PHASER:
-                PHASER->phaser_activar->value(rkr->Phaser_Bypass);
+                PHASER->phaser_activar->value(rkr->EFX_Bypass[EFX_PHASER]);
                 PHASER->phaser_preset->do_callback(PHASER->phaser_preset, 1);
                 break;
 
             case EFX_FLANGER:
-                FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
+                FLANGER->flanger_activar->value(rkr->EFX_Bypass[EFX_FLANGER]);
                 FLANGER->flanger_preset->do_callback(FLANGER->flanger_preset, 1);
                 break;
 
@@ -1403,194 +1403,194 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case EFX_PARAMETRIC:
-                PEQ->eqp_activar->value(rkr->EQ2_Bypass);
+                PEQ->eqp_activar->value(rkr->EFX_Bypass[EFX_PARAMETRIC]);
                 PEQ->eqp_preset->do_callback(PEQ->eqp_preset, 1);
                 break;
 
             case EFX_WAHWAH:
-                WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
+                WAHWAH->WahWah_activar->value(rkr->EFX_Bypass[EFX_WAHWAH]);
                 WAHWAH->WahWah_preset->do_callback(WAHWAH->WahWah_preset, 1);
                 break;
 
             case EFX_ALIENWAH:
-                ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
+                ALIENWAH->Alienwah_activar->value(rkr->EFX_Bypass[EFX_ALIENWAH]);
                 ALIENWAH->Alienwah_preset->do_callback(ALIENWAH->Alienwah_preset, 1);
                 break;
 
             case EFX_CABINET:
                 CABINET->Cabinet_output->value(rkr->lv[LV_CABINET][1] - 64);
                 CABINET->Cabinet_preset->value(rkr->lv[LV_CABINET][0]);
-                CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
+                CABINET->Cabinet_activar->value(rkr->EFX_Bypass[EFX_CABINET]);
                 break;
 
             case EFX_PAN:
-                PAN->pan_activar->value(rkr->Pan_Bypass);
+                PAN->pan_activar->value(rkr->EFX_Bypass[EFX_PAN]);
                 PAN->pan_preset->do_callback(PAN->pan_preset, 1);
                 break;
 
             case EFX_HARMONIZER:
-                HAR->har_activar->value(rkr->Harmonizer_Bypass);
+                HAR->har_activar->value(rkr->EFX_Bypass[EFX_HARMONIZER]);
                 HAR->har_preset->do_callback(HAR->har_preset, 1);
                 break;
 
             case EFX_MUSICAL_DELAY:
-                MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
+                MUSDELAY->musdelay_activar->value(rkr->EFX_Bypass[EFX_MUSICAL_DELAY]);
                 MUSDELAY->musdelay_preset->do_callback(MUSDELAY->musdelay_preset, 1);
                 break;
 
             case EFX_NOISEGATE:
-                GATE->gate_activar->value(rkr->Gate_Bypass);
+                GATE->gate_activar->value(rkr->EFX_Bypass[EFX_NOISEGATE]);
                 GATE->gate_preset->do_callback(GATE->gate_preset, 1);
                 break;
 
             case EFX_DERELICT:
-                DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
+                DERELICT->derelict_activar->value(rkr->EFX_Bypass[EFX_DERELICT]);
                 DERELICT->derelict_preset->do_callback(DERELICT->derelict_preset, 1);
                 break;
 
             case EFX_ANALOG_PHASER:
-                APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
+                APHASER->aphaser_activar->value(rkr->EFX_Bypass[EFX_ANALOG_PHASER]);
                 APHASER->aphaser_preset->do_callback(APHASER->aphaser_preset, 1);
                 break;
 
             case EFX_VALVE:
-                VALVE->valve_activar->value(rkr->Valve_Bypass);
+                VALVE->valve_activar->value(rkr->EFX_Bypass[EFX_VALVE]);
                 VALVE->valve_preset->do_callback(VALVE->valve_preset, 1);
                 break;
 
             case EFX_DUAL_FLANGE:
-                DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
+                DFLANGE->dflange_activar->value(rkr->EFX_Bypass[EFX_DUAL_FLANGE]);
                 DFLANGE->dflange_preset->do_callback(DFLANGE->dflange_preset, 1);
                 break;
 
             case EFX_RING:
-                RING->ring_activar->value(rkr->Ring_Bypass);
+                RING->ring_activar->value(rkr->EFX_Bypass[EFX_RING]);
                 RING->ring_preset->do_callback(RING->ring_preset, 1);
                 break;
 
             case EFX_EXCITER:
-                EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
+                EXCITER->exciter_activar->value(rkr->EFX_Bypass[EFX_EXCITER]);
                 EXCITER->exciter_preset->do_callback(EXCITER->exciter_preset, 1);
                 break;
 
             case EFX_DISTBAND:
-                DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
+                DISTBAND->distband_activar->value(rkr->EFX_Bypass[EFX_DISTBAND]);
                 DISTBAND->distband_preset->do_callback(DISTBAND->distband_preset, 1);
                 break;
 
             case EFX_ARPIE:
-                ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
+                ARPIE->arpie_activar->value(rkr->EFX_Bypass[EFX_ARPIE]);
                 ARPIE->arpie_preset->do_callback(ARPIE->arpie_preset, 1);
                 break;
 
             case EFX_EXPANDER:
-                EXPANDER->expander_activar->value(rkr->Expander_Bypass);
+                EXPANDER->expander_activar->value(rkr->EFX_Bypass[EFX_EXPANDER]);
                 EXPANDER->expander_preset->do_callback(EXPANDER->expander_preset, 1);
                 break;
 
             case EFX_SHUFFLE:
-                SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
+                SHUFFLE->shuffle_activar->value(rkr->EFX_Bypass[EFX_SHUFFLE]);
                 SHUFFLE->shuffle_preset->do_callback(SHUFFLE->shuffle_preset, 1);
                 break;
 
             case EFX_SYNTHFILTER:
-                SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
+                SYNTHFILTER->synthfilter_activar->value(rkr->EFX_Bypass[EFX_SYNTHFILTER]);
                 SYNTHFILTER->synthfilter_preset->do_callback(SYNTHFILTER->synthfilter_preset, 1);
                 break;
 
             case EFX_VARYBAND:
-                VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
+                VARYBAND->varyband_activar->value(rkr->EFX_Bypass[EFX_VARYBAND]);
                 VARYBAND->varyband_preset->do_callback(VARYBAND->varyband_preset, 1);
                 break;
 
             case EFX_CONVOLOTRON:
-                CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
+                CONVOLOTRON->convo_activar->value(rkr->EFX_Bypass[EFX_CONVOLOTRON]);
                 CONVOLOTRON->convo_preset->do_callback(CONVOLOTRON->convo_preset, 1);
                 break;
 
             case EFX_LOOPER:
-                LOOPER->looper_activar->value(rkr->Looper_Bypass);
+                LOOPER->looper_activar->value(rkr->EFX_Bypass[EFX_LOOPER]);
                 LOOPER->looper_preset->do_callback(LOOPER->looper_preset, 1);
                 update_looper();
                 break;
 
             case EFX_MUTROMOJO:
-                MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
+                MUTROMOJO->mutromojo_activar->value(rkr->EFX_Bypass[EFX_MUTROMOJO]);
                 MUTROMOJO->mutromojo_preset->do_callback(MUTROMOJO->mutromojo_preset, 1);
                 break;
 
             case EFX_ECHOVERSE:
-                ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
+                ECHOVERSE->echoverse_activar->value(rkr->EFX_Bypass[EFX_ECHOVERSE]);
                 ECHOVERSE->echoverse_preset->do_callback(ECHOVERSE->echoverse_preset, 1);
                 break;
 
             case EFX_COILCRAFTER:
-                COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
+                COILCRAFTER->coil_activar->value(rkr->EFX_Bypass[EFX_COILCRAFTER]);
                 COILCRAFTER->coil_preset->do_callback(COILCRAFTER->coil_preset, 1);
                 break;
 
             case EFX_SHELFBOOST:
-                SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
+                SHELFBOOST->shelf_activar->value(rkr->EFX_Bypass[EFX_SHELFBOOST]);
                 SHELFBOOST->shelf_preset->do_callback(SHELFBOOST->shelf_preset, 1);
                 break;
 
             case EFX_VOCODER:
-                VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
+                VOCODER->vo_activar->value(rkr->EFX_Bypass[EFX_VOCODER]);
                 VOCODER->vo_preset->do_callback(VOCODER->vo_preset, 1);
                 break;
 
             case EFX_SUSTAINER:
-                SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
+                SUSTAINER->sus_activar->value(rkr->EFX_Bypass[EFX_SUSTAINER]);
                 SUSTAINER->sus_preset->do_callback(SUSTAINER->sus_preset, 1);
                 break;
 
             case EFX_SEQUENCE:
-                SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
+                SEQUENCE->seq_activar->value(rkr->EFX_Bypass[EFX_SEQUENCE]);
                 SEQUENCE->seq_preset->do_callback(SEQUENCE->seq_preset, 1);
                 break;
 
             case EFX_SHIFTER:
-                SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
+                SHIFTER->shifter_activar->value(rkr->EFX_Bypass[EFX_SHIFTER]);
                 SHIFTER->shifter_preset->do_callback(SHIFTER->shifter_preset, 1);
                 break;
 
             case EFX_STOMPBOX:
-                STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
+                STOMPBOX->stomp_activar->value(rkr->EFX_Bypass[EFX_STOMPBOX]);
                 STOMPBOX->stomp_preset->do_callback(STOMPBOX->stomp_preset, 1);
                 break;
 
             case EFX_REVERBTRON:
-                REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
+                REVERBTRON->revtron_activar->value(rkr->EFX_Bypass[EFX_REVERBTRON]);
                 REVERBTRON->revtron_preset->do_callback(REVERBTRON->revtron_preset, 1);
                 break;
 
             case EFX_ECHOTRON:
-                ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
+                ECHOTRON->echotron_activar->value(rkr->EFX_Bypass[EFX_ECHOTRON]);
                 ECHOTRON->echotron_preset->do_callback(ECHOTRON->echotron_preset, 1);
                 break;
 
             case EFX_STEREOHARM:
-                SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
+                SHAR->shar_activar->value(rkr->EFX_Bypass[EFX_STEREOHARM]);
                 SHAR->shar_preset->do_callback(SHAR->shar_preset, 1);
                 break;
 
             case EFX_COMPBAND:
-                COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
+                COMPBAND->cband_activar->value(rkr->EFX_Bypass[EFX_COMPBAND]);
                 COMPBAND->cband_preset->do_callback(COMPBAND->cband_preset, 1);
                 break;
 
             case EFX_OPTICALTREM:
-                OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
+                OTREM->otrem_activar->value(rkr->EFX_Bypass[EFX_OPTICALTREM]);
                 OTREM->otrem_preset->do_callback(OTREM->otrem_preset, 1);
                 break;
 
             case EFX_VIBE:
-                VIBE->vibe_activar->value(rkr->Vibe_Bypass);
+                VIBE->vibe_activar->value(rkr->EFX_Bypass[EFX_VIBE]);
                 VIBE->vibe_preset->do_callback(VIBE->vibe_preset, 1);
                 break;
 
             case EFX_INFINITY:
-                INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
+                INFINIT->infinity_activar->value(rkr->EFX_Bypass[EFX_INFINITY]);
                 INFINIT->infinity_preset->do_callback(INFINIT->infinity_preset, 1);
                 break;
 
@@ -1780,7 +1780,7 @@ void RKRGUI::reordena()
                 EQ->eq_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     EQ->show();
-                if (rkr->EQ1_Bypass)
+                if (rkr->EFX_Bypass[EFX_EQ])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1795,7 +1795,7 @@ void RKRGUI::reordena()
                 COMPRESS->compress_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     COMPRESS->show();
-                if (rkr->Compressor_Bypass)
+                if (rkr->EFX_Bypass[EFX_COMPRESSOR])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1810,7 +1810,7 @@ void RKRGUI::reordena()
                 DIST->dist_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     DIST->show();
-                if (rkr->Distorsion_Bypass)
+                if (rkr->EFX_Bypass[EFX_DISTORTION])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1825,7 +1825,7 @@ void RKRGUI::reordena()
                 OVRD->ovrd_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     OVRD->show();
-                if (rkr->Overdrive_Bypass)
+                if (rkr->EFX_Bypass[EFX_OVERDRIVE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1840,7 +1840,7 @@ void RKRGUI::reordena()
                 ECHO->echo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     ECHO->show();
-                if (rkr->Echo_Bypass)
+                if (rkr->EFX_Bypass[EFX_ECHO])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1870,7 +1870,7 @@ void RKRGUI::reordena()
                 PHASER->phaser_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     PHASER->show();
-                if (rkr->Phaser_Bypass)
+                if (rkr->EFX_Bypass[EFX_PHASER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1885,7 +1885,7 @@ void RKRGUI::reordena()
                 FLANGER->flanger_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     FLANGER->show();
-                if (rkr->Flanger_Bypass)
+                if (rkr->EFX_Bypass[EFX_FLANGER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1915,7 +1915,7 @@ void RKRGUI::reordena()
                 PEQ->eqp_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     PEQ->show();
-                if (rkr->EQ2_Bypass)
+                if (rkr->EFX_Bypass[EFX_PARAMETRIC])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1930,7 +1930,7 @@ void RKRGUI::reordena()
                 WAHWAH->WahWah_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     WAHWAH->show();
-                if (rkr->WahWah_Bypass)
+                if (rkr->EFX_Bypass[EFX_WAHWAH])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1945,7 +1945,7 @@ void RKRGUI::reordena()
                 ALIENWAH->Alienwah_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     ALIENWAH->show();
-                if (rkr->Alienwah_Bypass)
+                if (rkr->EFX_Bypass[EFX_ALIENWAH])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1960,7 +1960,7 @@ void RKRGUI::reordena()
                 CABINET->Cabinet_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     CABINET->show();
-                if (rkr->Cabinet_Bypass)
+                if (rkr->EFX_Bypass[EFX_CABINET])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1975,7 +1975,7 @@ void RKRGUI::reordena()
                 PAN->pan_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     PAN->show();
-                if (rkr->Pan_Bypass)
+                if (rkr->EFX_Bypass[EFX_PAN])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -1990,7 +1990,7 @@ void RKRGUI::reordena()
                 HAR->har_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     HAR->show();
-                if (rkr->Harmonizer_Bypass)
+                if (rkr->EFX_Bypass[EFX_HARMONIZER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2005,7 +2005,7 @@ void RKRGUI::reordena()
                 MUSDELAY->musdelay_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     MUSDELAY->show();
-                if (rkr->MusDelay_Bypass)
+                if (rkr->EFX_Bypass[EFX_MUSICAL_DELAY])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2020,7 +2020,7 @@ void RKRGUI::reordena()
                 GATE->gate_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     GATE->show();
-                if (rkr->Gate_Bypass)
+                if (rkr->EFX_Bypass[EFX_NOISEGATE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2035,7 +2035,7 @@ void RKRGUI::reordena()
                 DERELICT->derelict_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     DERELICT->show();
-                if (rkr->Derelict_Bypass)
+                if (rkr->EFX_Bypass[EFX_DERELICT])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2050,7 +2050,7 @@ void RKRGUI::reordena()
                 APHASER->aphaser_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     APHASER->show();
-                if (rkr->APhaser_Bypass)
+                if (rkr->EFX_Bypass[EFX_ANALOG_PHASER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2065,7 +2065,7 @@ void RKRGUI::reordena()
                 VALVE->valve_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     VALVE->show();
-                if (rkr->Valve_Bypass)
+                if (rkr->EFX_Bypass[EFX_VALVE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2080,7 +2080,7 @@ void RKRGUI::reordena()
                 DFLANGE->dflange_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     DFLANGE->show();
-                if (rkr->DFlange_Bypass)
+                if (rkr->EFX_Bypass[EFX_DUAL_FLANGE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2095,7 +2095,7 @@ void RKRGUI::reordena()
                 RING->ring_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     RING->show();
-                if (rkr->Ring_Bypass)
+                if (rkr->EFX_Bypass[EFX_RING])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2110,7 +2110,7 @@ void RKRGUI::reordena()
                 EXCITER->exciter_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     EXCITER->show();
-                if (rkr->Exciter_Bypass)
+                if (rkr->EFX_Bypass[EFX_EXCITER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2125,7 +2125,7 @@ void RKRGUI::reordena()
                 DISTBAND->distband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     DISTBAND->show();
-                if (rkr->DistBand_Bypass)
+                if (rkr->EFX_Bypass[EFX_DISTBAND])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2140,7 +2140,7 @@ void RKRGUI::reordena()
                 ARPIE->arpie_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     ARPIE->show();
-                if (rkr->Arpie_Bypass)
+                if (rkr->EFX_Bypass[EFX_ARPIE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2155,7 +2155,7 @@ void RKRGUI::reordena()
                 EXPANDER->expander_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     EXPANDER->show();
-                if (rkr->Expander_Bypass)
+                if (rkr->EFX_Bypass[EFX_EXPANDER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2170,7 +2170,7 @@ void RKRGUI::reordena()
                 SHUFFLE->shuffle_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     SHUFFLE->show();
-                if (rkr->Shuffle_Bypass)
+                if (rkr->EFX_Bypass[EFX_SHUFFLE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2185,7 +2185,7 @@ void RKRGUI::reordena()
                 SYNTHFILTER->synthfilter_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     SYNTHFILTER->show();
-                if (rkr->Synthfilter_Bypass)
+                if (rkr->EFX_Bypass[EFX_SYNTHFILTER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2201,7 +2201,7 @@ void RKRGUI::reordena()
                 VARYBAND->varyband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     VARYBAND->show();
-                if (rkr->VaryBand_Bypass)
+                if (rkr->EFX_Bypass[EFX_VARYBAND])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2216,7 +2216,7 @@ void RKRGUI::reordena()
                 CONVOLOTRON->convo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     CONVOLOTRON->show();
-                if (rkr->Convol_Bypass)
+                if (rkr->EFX_Bypass[EFX_CONVOLOTRON])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2231,7 +2231,7 @@ void RKRGUI::reordena()
                 LOOPER->looper_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     LOOPER->show();
-                if (rkr->Looper_Bypass)
+                if (rkr->EFX_Bypass[EFX_LOOPER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2246,7 +2246,7 @@ void RKRGUI::reordena()
                 MUTROMOJO->mutromojo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     MUTROMOJO->show();
-                if (rkr->MuTroMojo_Bypass)
+                if (rkr->EFX_Bypass[EFX_MUTROMOJO])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2261,7 +2261,7 @@ void RKRGUI::reordena()
                 ECHOVERSE->echoverse_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     ECHOVERSE->show();
-                if (rkr->Echoverse_Bypass)
+                if (rkr->EFX_Bypass[EFX_ECHOVERSE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2276,7 +2276,7 @@ void RKRGUI::reordena()
                 COILCRAFTER->coil_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     COILCRAFTER->show();
-                if (rkr->CoilCrafter_Bypass)
+                if (rkr->EFX_Bypass[EFX_COILCRAFTER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2291,7 +2291,7 @@ void RKRGUI::reordena()
                 SHELFBOOST->shelf_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     SHELFBOOST->show();
-                if (rkr->ShelfBoost_Bypass)
+                if (rkr->EFX_Bypass[EFX_SHELFBOOST])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2306,7 +2306,7 @@ void RKRGUI::reordena()
                 VOCODER->vo_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     VOCODER->show();
-                if (rkr->Vocoder_Bypass)
+                if (rkr->EFX_Bypass[EFX_VOCODER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2321,7 +2321,7 @@ void RKRGUI::reordena()
                 SUSTAINER->sus_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     SUSTAINER->show();
-                if (rkr->Sustainer_Bypass)
+                if (rkr->EFX_Bypass[EFX_SUSTAINER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2336,7 +2336,7 @@ void RKRGUI::reordena()
                 SEQUENCE->seq_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     SEQUENCE->show();
-                if (rkr->Sequence_Bypass)
+                if (rkr->EFX_Bypass[EFX_SEQUENCE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2351,7 +2351,7 @@ void RKRGUI::reordena()
                 SHIFTER->shifter_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     SHIFTER->show();
-                if (rkr->Shifter_Bypass)
+                if (rkr->EFX_Bypass[EFX_SHIFTER])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2366,7 +2366,7 @@ void RKRGUI::reordena()
                 STOMPBOX->stomp_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     STOMPBOX->show();
-                if (rkr->StompBox_Bypass)
+                if (rkr->EFX_Bypass[EFX_STOMPBOX])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2381,7 +2381,7 @@ void RKRGUI::reordena()
                 REVERBTRON->revtron_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     REVERBTRON->show();
-                if (rkr->Reverbtron_Bypass)
+                if (rkr->EFX_Bypass[EFX_REVERBTRON])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2396,7 +2396,7 @@ void RKRGUI::reordena()
                 ECHOTRON->echotron_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     ECHOTRON->show();
-                if (rkr->Echotron_Bypass)
+                if (rkr->EFX_Bypass[EFX_ECHOTRON])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2411,7 +2411,7 @@ void RKRGUI::reordena()
                 SHAR->shar_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     SHAR->show();
-                if (rkr->StereoHarm_Bypass)
+                if (rkr->EFX_Bypass[EFX_STEREOHARM])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2426,7 +2426,7 @@ void RKRGUI::reordena()
                 COMPBAND->cband_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     COMPBAND->show();
-                if (rkr->CompBand_Bypass)
+                if (rkr->EFX_Bypass[EFX_COMPBAND])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2441,7 +2441,7 @@ void RKRGUI::reordena()
                 OTREM->otrem_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     OTREM->show();
-                if (rkr->Opticaltrem_Bypass)
+                if (rkr->EFX_Bypass[EFX_OPTICALTREM])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2456,7 +2456,7 @@ void RKRGUI::reordena()
                 VIBE->vibe_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     VIBE->show();
-                if (rkr->Vibe_Bypass)
+                if (rkr->EFX_Bypass[EFX_VIBE])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -2471,7 +2471,7 @@ void RKRGUI::reordena()
                 INFINIT->infinity_activar->shortcut(s[i]);
                 if (!rkr->deachide)
                     INFINIT->show();
-                if (rkr->Infinity_Bypass)
+                if (rkr->EFX_Bypass[EFX_INFINITY])
                 {
                     rkr->active[i] = 1;
                     if (rkr->deachide)
@@ -5063,23 +5063,23 @@ void RKRGUI::ActOnOff()
         switch (miralo)
         {
             case EFX_EQ:
-                EQ->eq_activar->value(rkr->EQ1_Bypass);
+                EQ->eq_activar->value(rkr->EFX_Bypass[EFX_EQ]);
                 EQ->eq_activar->do_callback();
                 break;
             case EFX_COMPRESSOR:
-                COMPRESS->compress_activar->value(rkr->Compressor_Bypass);
+                COMPRESS->compress_activar->value(rkr->EFX_Bypass[EFX_COMPRESSOR]);
                 COMPRESS->compress_activar->do_callback();
                 break;
             case EFX_DISTORTION:
-                DIST->dist_activar->value(rkr->Distorsion_Bypass);
+                DIST->dist_activar->value(rkr->EFX_Bypass[EFX_DISTORTION]);
                 DIST->dist_activar->do_callback();
                 break;
             case EFX_OVERDRIVE:
-                OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
+                OVRD->ovrd_activar->value(rkr->EFX_Bypass[EFX_OVERDRIVE]);
                 OVRD->ovrd_activar->do_callback();
                 break;
             case EFX_ECHO:
-                ECHO->echo_activar->value(rkr->Echo_Bypass);
+                ECHO->echo_activar->value(rkr->EFX_Bypass[EFX_ECHO]);
                 ECHO->echo_activar->do_callback();
                 break;
             case EFX_CHORUS:
@@ -5087,11 +5087,11 @@ void RKRGUI::ActOnOff()
                 CHORUS->chorus_activar->do_callback();
                 break;
             case EFX_PHASER:
-                PHASER->phaser_activar->value(rkr->Phaser_Bypass);
+                PHASER->phaser_activar->value(rkr->EFX_Bypass[EFX_PHASER]);
                 PHASER->phaser_activar->do_callback();
                 break;
             case EFX_FLANGER:
-                FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
+                FLANGER->flanger_activar->value(rkr->EFX_Bypass[EFX_FLANGER]);
                 FLANGER->flanger_activar->do_callback();
                 break;
             case EFX_REVERB:
@@ -5099,155 +5099,155 @@ void RKRGUI::ActOnOff()
                 REVERB->reverb_activar->do_callback();
                 break;
             case EFX_PARAMETRIC:
-                PEQ->eqp_activar->value(rkr->EQ2_Bypass);
+                PEQ->eqp_activar->value(rkr->EFX_Bypass[EFX_PARAMETRIC]);
                 PEQ->eqp_activar->do_callback();
                 break;
             case EFX_WAHWAH:
-                WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
+                WAHWAH->WahWah_activar->value(rkr->EFX_Bypass[EFX_WAHWAH]);
                 WAHWAH->WahWah_activar->do_callback();
                 break;
             case EFX_ALIENWAH:
-                ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
+                ALIENWAH->Alienwah_activar->value(rkr->EFX_Bypass[EFX_ALIENWAH]);
                 ALIENWAH->Alienwah_activar->do_callback();
                 break;
             case EFX_CABINET:
-                CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
+                CABINET->Cabinet_activar->value(rkr->EFX_Bypass[EFX_CABINET]);
                 CABINET->Cabinet_activar->do_callback();
                 break;
             case EFX_PAN:
-                PAN->pan_activar->value(rkr->Pan_Bypass);
+                PAN->pan_activar->value(rkr->EFX_Bypass[EFX_PAN]);
                 PAN->pan_activar->do_callback();
                 break;
             case EFX_HARMONIZER:
-                HAR->har_activar->value(rkr->Harmonizer_Bypass);
+                HAR->har_activar->value(rkr->EFX_Bypass[EFX_HARMONIZER]);
                 HAR->har_activar->do_callback();
                 break;
             case EFX_MUSICAL_DELAY:
-                MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
+                MUSDELAY->musdelay_activar->value(rkr->EFX_Bypass[EFX_MUSICAL_DELAY]);
                 MUSDELAY->musdelay_activar->do_callback();
                 break;
             case EFX_NOISEGATE:
-                GATE->gate_activar->value(rkr->Gate_Bypass);
+                GATE->gate_activar->value(rkr->EFX_Bypass[EFX_NOISEGATE]);
                 GATE->gate_activar->do_callback();
                 break;
             case EFX_DERELICT:
-                DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
+                DERELICT->derelict_activar->value(rkr->EFX_Bypass[EFX_DERELICT]);
                 DERELICT->derelict_activar->do_callback();
                 break;
             case EFX_ANALOG_PHASER:
-                APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
+                APHASER->aphaser_activar->value(rkr->EFX_Bypass[EFX_ANALOG_PHASER]);
                 APHASER->aphaser_activar->do_callback();
                 break;
             case EFX_VALVE:
-                VALVE->valve_activar->value(rkr->Valve_Bypass);
+                VALVE->valve_activar->value(rkr->EFX_Bypass[EFX_VALVE]);
                 VALVE->valve_activar->do_callback();
                 break;
             case EFX_DUAL_FLANGE:
-                DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
+                DFLANGE->dflange_activar->value(rkr->EFX_Bypass[EFX_DUAL_FLANGE]);
                 DFLANGE->dflange_activar->do_callback();
                 break;
             case EFX_RING:
-                RING->ring_activar->value(rkr->Ring_Bypass);
+                RING->ring_activar->value(rkr->EFX_Bypass[EFX_RING]);
                 RING->ring_activar->do_callback();
                 break;
             case EFX_EXCITER:
-                EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
+                EXCITER->exciter_activar->value(rkr->EFX_Bypass[EFX_EXCITER]);
                 EXCITER->exciter_activar->do_callback();
                 break;
             case EFX_DISTBAND:
-                DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
+                DISTBAND->distband_activar->value(rkr->EFX_Bypass[EFX_DISTBAND]);
                 DISTBAND->distband_activar->do_callback();
                 break;
             case EFX_ARPIE:
-                ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
+                ARPIE->arpie_activar->value(rkr->EFX_Bypass[EFX_ARPIE]);
                 ARPIE->arpie_activar->do_callback();
                 break;
             case EFX_EXPANDER:
-                EXPANDER->expander_activar->value(rkr->Expander_Bypass);
+                EXPANDER->expander_activar->value(rkr->EFX_Bypass[EFX_EXPANDER]);
                 EXPANDER->expander_activar->do_callback();
                 break;
             case EFX_SHUFFLE:
-                SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
+                SHUFFLE->shuffle_activar->value(rkr->EFX_Bypass[EFX_SHUFFLE]);
                 SHUFFLE->shuffle_activar->do_callback();
                 break;
             case EFX_SYNTHFILTER:
-                SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
+                SYNTHFILTER->synthfilter_activar->value(rkr->EFX_Bypass[EFX_SYNTHFILTER]);
                 SYNTHFILTER->synthfilter_activar->do_callback();
                 break;
             case EFX_VARYBAND:
-                VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
+                VARYBAND->varyband_activar->value(rkr->EFX_Bypass[EFX_VARYBAND]);
                 VARYBAND->varyband_activar->do_callback();
                 break;
             case EFX_CONVOLOTRON:
-                CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
+                CONVOLOTRON->convo_activar->value(rkr->EFX_Bypass[EFX_CONVOLOTRON]);
                 CONVOLOTRON->convo_activar->do_callback();
                 break;
             case EFX_LOOPER:
-                LOOPER->looper_activar->value(rkr->Looper_Bypass);
+                LOOPER->looper_activar->value(rkr->EFX_Bypass[EFX_LOOPER]);
                 LOOPER->looper_activar->do_callback();
                 break;
             case EFX_MUTROMOJO:
-                MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
+                MUTROMOJO->mutromojo_activar->value(rkr->EFX_Bypass[EFX_MUTROMOJO]);
                 MUTROMOJO->mutromojo_activar->do_callback();
                 break;
             case EFX_ECHOVERSE:
-                ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
+                ECHOVERSE->echoverse_activar->value(rkr->EFX_Bypass[EFX_ECHOVERSE]);
                 ECHOVERSE->echoverse_activar->do_callback();
                 break;
             case EFX_COILCRAFTER:
-                COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
+                COILCRAFTER->coil_activar->value(rkr->EFX_Bypass[EFX_COILCRAFTER]);
                 COILCRAFTER->coil_activar->do_callback();
                 break;
             case EFX_SHELFBOOST:
-                SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
+                SHELFBOOST->shelf_activar->value(rkr->EFX_Bypass[EFX_SHELFBOOST]);
                 SHELFBOOST->shelf_activar->do_callback();
                 break;
             case EFX_VOCODER:
-                VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
+                VOCODER->vo_activar->value(rkr->EFX_Bypass[EFX_VOCODER]);
                 VOCODER->vo_activar->do_callback();
                 break;
             case EFX_SUSTAINER:
-                SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
+                SUSTAINER->sus_activar->value(rkr->EFX_Bypass[EFX_SUSTAINER]);
                 SUSTAINER->sus_activar->do_callback();
                 break;
             case EFX_SEQUENCE:
-                SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
+                SEQUENCE->seq_activar->value(rkr->EFX_Bypass[EFX_SEQUENCE]);
                 SEQUENCE->seq_activar->do_callback();
                 break;
             case EFX_SHIFTER:
-                SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
+                SHIFTER->shifter_activar->value(rkr->EFX_Bypass[EFX_SHIFTER]);
                 SHIFTER->shifter_activar->do_callback();
                 break;
             case EFX_STOMPBOX:
-                STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
+                STOMPBOX->stomp_activar->value(rkr->EFX_Bypass[EFX_STOMPBOX]);
                 STOMPBOX->stomp_activar->do_callback();
                 break;
             case EFX_REVERBTRON:
-                REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
+                REVERBTRON->revtron_activar->value(rkr->EFX_Bypass[EFX_REVERBTRON]);
                 REVERBTRON->revtron_activar->do_callback();
                 break;
             case EFX_ECHOTRON:
-                ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
+                ECHOTRON->echotron_activar->value(rkr->EFX_Bypass[EFX_ECHOTRON]);
                 ECHOTRON->echotron_activar->do_callback();
                 break;
             case EFX_STEREOHARM:
-                SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
+                SHAR->shar_activar->value(rkr->EFX_Bypass[EFX_STEREOHARM]);
                 SHAR->shar_activar->do_callback();
                 break;
             case EFX_COMPBAND:
-                COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
+                COMPBAND->cband_activar->value(rkr->EFX_Bypass[EFX_COMPBAND]);
                 COMPBAND->cband_activar->do_callback();
                 break;
             case EFX_OPTICALTREM:
-                OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
+                OTREM->otrem_activar->value(rkr->EFX_Bypass[EFX_OPTICALTREM]);
                 OTREM->otrem_activar->do_callback();
                 break;
             case EFX_VIBE:
-                VIBE->vibe_activar->value(rkr->Vibe_Bypass);
+                VIBE->vibe_activar->value(rkr->EFX_Bypass[EFX_VIBE]);
                 VIBE->vibe_activar->do_callback();
                 break;
             case EFX_INFINITY:
-                INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
+                INFINIT->infinity_activar->value(rkr->EFX_Bypass[EFX_INFINITY]);
                 INFINIT->infinity_activar->do_callback();
                 break;
 
@@ -6034,7 +6034,7 @@ void RKRGUI::update_looper()
 void RKRGUI::UpdateTGUI()
 {
     // updates the efx based on global tempo settings
-    if (rkr->Looper_Bypass)
+    if (rkr->EFX_Bypass[EFX_LOOPER])
     {
         LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(Looper_Tempo));
         LOOPER->looper_Tempo->redraw();
@@ -6046,115 +6046,115 @@ void RKRGUI::UpdateTGUI()
         CHORUS->chorus_freq->redraw();
     }
 
-    if (rkr->Flanger_Bypass)
+    if (rkr->EFX_Bypass[EFX_FLANGER])
     {
         FLANGER->flanger_freq->value(rkr->efx_Flanger->getpar(Flanger_LFO_Tempo));
         FLANGER->flanger_freq->redraw();
     }
 
-    if (rkr->Phaser_Bypass)
+    if (rkr->EFX_Bypass[EFX_PHASER])
     {
         PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(Phaser_LFO_Tempo));
         PHASER->phaser_freq->redraw();
     }
 
-    if (rkr->Pan_Bypass)
+    if (rkr->EFX_Bypass[EFX_PAN])
     {
         PAN->pan_freq->value(rkr->efx_Pan->getpar(Pan_LFO_Tempo));
         PAN->pan_freq->redraw();
     }
 
-    if (rkr->WahWah_Bypass)
+    if (rkr->EFX_Bypass[EFX_WAHWAH])
     {
         WAHWAH->WahWah_freq->value(rkr->efx_WahWah->getpar(WahWah_LFO_Tempo));
         WAHWAH->WahWah_freq->redraw();
     }
 
-    if (rkr->Alienwah_Bypass)
+    if (rkr->EFX_Bypass[EFX_ALIENWAH])
     {
         ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
         ALIENWAH->Alienwah_freq->redraw();
     }
 
-    if (rkr->MusDelay_Bypass)
+    if (rkr->EFX_Bypass[EFX_MUSICAL_DELAY])
     {
         MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(Music_Tempo));
         MUSDELAY->musdelay_tempo->redraw();
     }
 
-    if (rkr->APhaser_Bypass)
+    if (rkr->EFX_Bypass[EFX_ANALOG_PHASER])
     {
         APHASER->aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFO_Tempo));
         APHASER->aphaser_freq->redraw();
     }
 
-    if (rkr->DFlange_Bypass)
+    if (rkr->EFX_Bypass[EFX_DUAL_FLANGE])
     {
         DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
         DFLANGE->dflange_freq->redraw();
     }
 
-    if (rkr->Synthfilter_Bypass)
+    if (rkr->EFX_Bypass[EFX_SYNTHFILTER])
     {
         SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
         SYNTHFILTER->synthfilter_freq->redraw();
     }
 
-    if (rkr->MuTroMojo_Bypass)
+    if (rkr->EFX_Bypass[EFX_MUTROMOJO])
     {
         MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Tempo));
         MUTROMOJO->mutromojo_freq->redraw();
     }
 
-    if (rkr->VaryBand_Bypass)
+    if (rkr->EFX_Bypass[EFX_VARYBAND])
     {
         VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
         VARYBAND->varyband_freq1->redraw();
     }
 
-    if (rkr->VaryBand_Bypass)
+    if (rkr->EFX_Bypass[EFX_VARYBAND])
     {
         VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
         VARYBAND->varyband_freq2->redraw();
     }
 
-    if (rkr->Arpie_Bypass)
+    if (rkr->EFX_Bypass[EFX_ARPIE])
     {
         ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
         ARPIE->arpie_delay->redraw();
     }
 
-    if (rkr->Echoverse_Bypass)
+    if (rkr->EFX_Bypass[EFX_ECHOVERSE])
     {
         ECHOVERSE->echoverse_delay->value(rkr->efx_Echoverse->getpar(Echoverse_Tempo));
         ECHOVERSE->echoverse_delay->redraw();
     }
-    if (rkr->Sequence_Bypass)
+    if (rkr->EFX_Bypass[EFX_SEQUENCE])
     {
         SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(Sequence_Tempo));
         SEQUENCE->seq_tempo->redraw();
     }
-    if (rkr->Echo_Bypass)
+    if (rkr->EFX_Bypass[EFX_ECHO])
     {
         ECHO->echo_delay->value(rkr->efx_Echo->getpar(Echo_Delay));
         ECHO->echo_delay->redraw();
     }
-    if (rkr->Echotron_Bypass)
+    if (rkr->EFX_Bypass[EFX_ECHOTRON])
     {
         ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
         ECHOTRON->echotron_tempo->redraw();
     }
-    if (rkr->Opticaltrem_Bypass)
+    if (rkr->EFX_Bypass[EFX_OPTICALTREM])
     {
         OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Tempo));
         OTREM->otrem_freq->redraw();
     }
-    if (rkr->Vibe_Bypass)
+    if (rkr->EFX_Bypass[EFX_VIBE])
     {
         VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(Vibe_LFO_Tempo));
         VIBE->vibe_freq->redraw();
     }
-    if (rkr->Infinity_Bypass)
+    if (rkr->EFX_Bypass[EFX_INFINITY])
     {
         INFINIT->infinity_rate->value(rkr->efx_Infinity->getpar(Infinity_Tempo));
         INFINIT->infinity_rate->redraw();
@@ -6854,42 +6854,42 @@ void RKRGUI::RandomPreset()
 
             case EFX_EQ:
                 if (i < numEff)
-                    rkr->EQ1_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_EQ] = 1;
                 else
-                    rkr->EQ1_Bypass = 0;
-                EQ->eq_activar->value(rkr->EQ1_Bypass);
+                    rkr->EFX_Bypass[EFX_EQ] = 0;
+                EQ->eq_activar->value(rkr->EFX_Bypass[EFX_EQ]);
                 break;
 
             case EFX_COMPRESSOR:
                 if (i < numEff)
-                    rkr->Compressor_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_COMPRESSOR] = 1;
                 else
-                    rkr->Compressor_Bypass = 0;
-                COMPRESS->compress_activar->value(rkr->Compressor_Bypass);
+                    rkr->EFX_Bypass[EFX_COMPRESSOR] = 0;
+                COMPRESS->compress_activar->value(rkr->EFX_Bypass[EFX_COMPRESSOR]);
                 break;
 
             case EFX_DISTORTION:
                 if (i < numEff)
-                    rkr->Distorsion_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_DISTORTION] = 1;
                 else
-                    rkr->Distorsion_Bypass = 0;
-                DIST->dist_activar->value(rkr->Distorsion_Bypass);
+                    rkr->EFX_Bypass[EFX_DISTORTION] = 0;
+                DIST->dist_activar->value(rkr->EFX_Bypass[EFX_DISTORTION]);
                 break;
 
             case EFX_OVERDRIVE:
                 if (i < numEff)
-                    rkr->Overdrive_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_OVERDRIVE] = 1;
                 else
-                    rkr->Overdrive_Bypass = 0;
-                OVRD->ovrd_activar->value(rkr->Overdrive_Bypass);
+                    rkr->EFX_Bypass[EFX_OVERDRIVE] = 0;
+                OVRD->ovrd_activar->value(rkr->EFX_Bypass[EFX_OVERDRIVE]);
                 break;
 
             case EFX_ECHO:
                 if (i < numEff)
-                    rkr->Echo_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_ECHO] = 1;
                 else
-                    rkr->Echo_Bypass = 0;
-                ECHO->echo_activar->value(rkr->Echo_Bypass);
+                    rkr->EFX_Bypass[EFX_ECHO] = 0;
+                ECHO->echo_activar->value(rkr->EFX_Bypass[EFX_ECHO]);
                 break;
 
             case EFX_CHORUS:
@@ -6902,18 +6902,18 @@ void RKRGUI::RandomPreset()
 
             case EFX_PHASER:
                 if (i < numEff)
-                    rkr->Phaser_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_PHASER] = 1;
                 else
-                    rkr->Phaser_Bypass = 0;
-                PHASER->phaser_activar->value(rkr->Phaser_Bypass);
+                    rkr->EFX_Bypass[EFX_PHASER] = 0;
+                PHASER->phaser_activar->value(rkr->EFX_Bypass[EFX_PHASER]);
                 break;
 
             case EFX_FLANGER:
                 if (i < numEff)
-                    rkr->Flanger_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_FLANGER] = 1;
                 else
-                    rkr->Flanger_Bypass = 0;
-                FLANGER->flanger_activar->value(rkr->Flanger_Bypass);
+                    rkr->EFX_Bypass[EFX_FLANGER] = 0;
+                FLANGER->flanger_activar->value(rkr->EFX_Bypass[EFX_FLANGER]);
                 break;
 
             case EFX_REVERB:
@@ -6926,307 +6926,307 @@ void RKRGUI::RandomPreset()
 
             case EFX_PARAMETRIC:
                 if (i < numEff)
-                    rkr->EQ2_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_PARAMETRIC] = 1;
                 else
-                    rkr->EQ2_Bypass = 0;
-                PEQ->eqp_activar->value(rkr->EQ2_Bypass);
+                    rkr->EFX_Bypass[EFX_PARAMETRIC] = 0;
+                PEQ->eqp_activar->value(rkr->EFX_Bypass[EFX_PARAMETRIC]);
                 break;
 
             case EFX_WAHWAH:
                 if (i < numEff)
-                    rkr->WahWah_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_WAHWAH] = 1;
                 else
-                    rkr->WahWah_Bypass = 0;
-                WAHWAH->WahWah_activar->value(rkr->WahWah_Bypass);
+                    rkr->EFX_Bypass[EFX_WAHWAH] = 0;
+                WAHWAH->WahWah_activar->value(rkr->EFX_Bypass[EFX_WAHWAH]);
                 break;
 
             case EFX_ALIENWAH:
                 if (i < numEff)
-                    rkr->Alienwah_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_ALIENWAH] = 1;
                 else
-                    rkr->Alienwah_Bypass = 0;
-                ALIENWAH->Alienwah_activar->value(rkr->Alienwah_Bypass);
+                    rkr->EFX_Bypass[EFX_ALIENWAH] = 0;
+                ALIENWAH->Alienwah_activar->value(rkr->EFX_Bypass[EFX_ALIENWAH]);
                 break;
 
             case EFX_CABINET:
                 if (i < numEff)
-                    rkr->Cabinet_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_CABINET] = 1;
                 else
-                    rkr->Cabinet_Bypass = 0;
-                CABINET->Cabinet_activar->value(rkr->Cabinet_Bypass);
+                    rkr->EFX_Bypass[EFX_CABINET] = 0;
+                CABINET->Cabinet_activar->value(rkr->EFX_Bypass[EFX_CABINET]);
                 break;
 
             case EFX_PAN:
                 if (i < numEff)
-                    rkr->Pan_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_PAN] = 1;
                 else
-                    rkr->Pan_Bypass = 0;
-                PAN->pan_activar->value(rkr->Pan_Bypass);
+                    rkr->EFX_Bypass[EFX_PAN] = 0;
+                PAN->pan_activar->value(rkr->EFX_Bypass[EFX_PAN]);
                 break;
 
             case EFX_HARMONIZER:
                 if (i < numEff)
-                    rkr->Harmonizer_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_HARMONIZER] = 1;
                 else
-                    rkr->Harmonizer_Bypass = 0;
-                HAR->har_activar->value(rkr->Harmonizer_Bypass);
+                    rkr->EFX_Bypass[EFX_HARMONIZER] = 0;
+                HAR->har_activar->value(rkr->EFX_Bypass[EFX_HARMONIZER]);
                 break;
 
             case EFX_MUSICAL_DELAY:
                 if (i < numEff)
-                    rkr->MusDelay_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_MUSICAL_DELAY] = 1;
                 else
-                    rkr->MusDelay_Bypass = 0;
-                MUSDELAY->musdelay_activar->value(rkr->MusDelay_Bypass);
+                    rkr->EFX_Bypass[EFX_MUSICAL_DELAY] = 0;
+                MUSDELAY->musdelay_activar->value(rkr->EFX_Bypass[EFX_MUSICAL_DELAY]);
                 break;
 
             case EFX_NOISEGATE:
                 if (i < numEff)
-                    rkr->Gate_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_NOISEGATE] = 1;
                 else
-                    rkr->Gate_Bypass = 0;
-                GATE->gate_activar->value(rkr->Gate_Bypass);
+                    rkr->EFX_Bypass[EFX_NOISEGATE] = 0;
+                GATE->gate_activar->value(rkr->EFX_Bypass[EFX_NOISEGATE]);
                 break;
 
             case EFX_DERELICT:
                 if (i < numEff)
-                    rkr->Derelict_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_DERELICT] = 1;
                 else
-                    rkr->Derelict_Bypass = 0;
-                DERELICT->derelict_activar->value(rkr->Derelict_Bypass);
+                    rkr->EFX_Bypass[EFX_DERELICT] = 0;
+                DERELICT->derelict_activar->value(rkr->EFX_Bypass[EFX_DERELICT]);
                 break;
 
             case EFX_ANALOG_PHASER:
                 if (i < numEff)
-                    rkr->APhaser_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_ANALOG_PHASER] = 1;
                 else
-                    rkr->APhaser_Bypass = 0;
-                APHASER->aphaser_activar->value(rkr->APhaser_Bypass);
+                    rkr->EFX_Bypass[EFX_ANALOG_PHASER] = 0;
+                APHASER->aphaser_activar->value(rkr->EFX_Bypass[EFX_ANALOG_PHASER]);
                 break;
 
             case EFX_VALVE:
                 if (i < numEff)
-                    rkr->Valve_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_VALVE] = 1;
                 else
-                    rkr->Valve_Bypass = 0;
-                VALVE->valve_activar->value(rkr->Valve_Bypass);
+                    rkr->EFX_Bypass[EFX_VALVE] = 0;
+                VALVE->valve_activar->value(rkr->EFX_Bypass[EFX_VALVE]);
                 break;
 
             case EFX_DUAL_FLANGE:
                 if (i < numEff)
-                    rkr->DFlange_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_DUAL_FLANGE] = 1;
                 else
-                    rkr->DFlange_Bypass = 0;
-                DFLANGE->dflange_activar->value(rkr->DFlange_Bypass);
+                    rkr->EFX_Bypass[EFX_DUAL_FLANGE] = 0;
+                DFLANGE->dflange_activar->value(rkr->EFX_Bypass[EFX_DUAL_FLANGE]);
                 break;
 
             case EFX_RING:
                 if (i < numEff)
-                    rkr->Ring_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_RING] = 1;
                 else
-                    rkr->Ring_Bypass = 0;
-                RING->ring_activar->value(rkr->Ring_Bypass);
+                    rkr->EFX_Bypass[EFX_RING] = 0;
+                RING->ring_activar->value(rkr->EFX_Bypass[EFX_RING]);
                 break;
 
             case EFX_EXCITER:
                 if (i < numEff)
-                    rkr->Exciter_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_EXCITER] = 1;
                 else
-                    rkr->Exciter_Bypass = 0;
-                EXCITER->exciter_activar->value(rkr->Exciter_Bypass);
+                    rkr->EFX_Bypass[EFX_EXCITER] = 0;
+                EXCITER->exciter_activar->value(rkr->EFX_Bypass[EFX_EXCITER]);
                 break;
 
             case EFX_DISTBAND:
                 if (i < numEff)
-                    rkr->DistBand_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_DISTBAND] = 1;
                 else
-                    rkr->DistBand_Bypass = 0;
-                DISTBAND->distband_activar->value(rkr->DistBand_Bypass);
+                    rkr->EFX_Bypass[EFX_DISTBAND] = 0;
+                DISTBAND->distband_activar->value(rkr->EFX_Bypass[EFX_DISTBAND]);
                 break;
 
             case EFX_ARPIE:
                 if (i < numEff)
-                    rkr->Arpie_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_ARPIE] = 1;
                 else
-                    rkr->Arpie_Bypass = 0;
-                ARPIE->arpie_activar->value(rkr->Arpie_Bypass);
+                    rkr->EFX_Bypass[EFX_ARPIE] = 0;
+                ARPIE->arpie_activar->value(rkr->EFX_Bypass[EFX_ARPIE]);
                 break;
 
             case EFX_EXPANDER:
                 if (i < numEff)
-                    rkr->Expander_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_EXPANDER] = 1;
                 else
-                    rkr->Expander_Bypass = 0;
-                EXPANDER->expander_activar->value(rkr->Expander_Bypass);
+                    rkr->EFX_Bypass[EFX_EXPANDER] = 0;
+                EXPANDER->expander_activar->value(rkr->EFX_Bypass[EFX_EXPANDER]);
                 break;
 
             case EFX_SHUFFLE:
                 if (i < numEff)
-                    rkr->Shuffle_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_SHUFFLE] = 1;
                 else
-                    rkr->Shuffle_Bypass = 0;
-                SHUFFLE->shuffle_activar->value(rkr->Shuffle_Bypass);
+                    rkr->EFX_Bypass[EFX_SHUFFLE] = 0;
+                SHUFFLE->shuffle_activar->value(rkr->EFX_Bypass[EFX_SHUFFLE]);
                 break;
 
             case EFX_SYNTHFILTER:
                 if (i < numEff)
-                    rkr->Synthfilter_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_SYNTHFILTER] = 1;
                 else
-                    rkr->Synthfilter_Bypass = 0;
-                SYNTHFILTER->synthfilter_activar->value(rkr->Synthfilter_Bypass);
+                    rkr->EFX_Bypass[EFX_SYNTHFILTER] = 0;
+                SYNTHFILTER->synthfilter_activar->value(rkr->EFX_Bypass[EFX_SYNTHFILTER]);
                 break;
 
             case EFX_VARYBAND:
                 if (i < numEff)
-                    rkr->VaryBand_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_VARYBAND] = 1;
                 else
-                    rkr->VaryBand_Bypass = 0;
-                VARYBAND->varyband_activar->value(rkr->VaryBand_Bypass);
+                    rkr->EFX_Bypass[EFX_VARYBAND] = 0;
+                VARYBAND->varyband_activar->value(rkr->EFX_Bypass[EFX_VARYBAND]);
                 break;
 
             case EFX_CONVOLOTRON:
                 if (i < numEff)
-                    rkr->Convol_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_CONVOLOTRON] = 1;
                 else
-                    rkr->Convol_Bypass = 0;
-                CONVOLOTRON->convo_activar->value(rkr->Convol_Bypass);
+                    rkr->EFX_Bypass[EFX_CONVOLOTRON] = 0;
+                CONVOLOTRON->convo_activar->value(rkr->EFX_Bypass[EFX_CONVOLOTRON]);
                 break;
 
             case EFX_LOOPER:
                 if (i < numEff)
-                    rkr->Looper_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_LOOPER] = 1;
                 else
-                    rkr->Looper_Bypass = 0;
-                LOOPER->looper_activar->value(rkr->Looper_Bypass);
+                    rkr->EFX_Bypass[EFX_LOOPER] = 0;
+                LOOPER->looper_activar->value(rkr->EFX_Bypass[EFX_LOOPER]);
                 update_looper();
                 break;
 
             case EFX_MUTROMOJO:
                 if (i < numEff)
-                    rkr->MuTroMojo_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_MUTROMOJO] = 1;
                 else
-                    rkr->MuTroMojo_Bypass = 0;
-                MUTROMOJO->mutromojo_activar->value(rkr->MuTroMojo_Bypass);
+                    rkr->EFX_Bypass[EFX_MUTROMOJO] = 0;
+                MUTROMOJO->mutromojo_activar->value(rkr->EFX_Bypass[EFX_MUTROMOJO]);
                 break;
 
             case EFX_ECHOVERSE:
                 if (i < numEff)
-                    rkr->Echoverse_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_ECHOVERSE] = 1;
                 else
-                    rkr->Echoverse_Bypass = 0;
-                ECHOVERSE->echoverse_activar->value(rkr->Echoverse_Bypass);
+                    rkr->EFX_Bypass[EFX_ECHOVERSE] = 0;
+                ECHOVERSE->echoverse_activar->value(rkr->EFX_Bypass[EFX_ECHOVERSE]);
                 break;
 
             case EFX_COILCRAFTER:
                 if (i < numEff)
-                    rkr->CoilCrafter_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_COILCRAFTER] = 1;
                 else
-                    rkr->CoilCrafter_Bypass = 0;
-                COILCRAFTER->coil_activar->value(rkr->CoilCrafter_Bypass);
+                    rkr->EFX_Bypass[EFX_COILCRAFTER] = 0;
+                COILCRAFTER->coil_activar->value(rkr->EFX_Bypass[EFX_COILCRAFTER]);
                 break;
 
             case EFX_SHELFBOOST:
                 if (i < numEff)
-                    rkr->ShelfBoost_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_SHELFBOOST] = 1;
                 else
-                    rkr->ShelfBoost_Bypass = 0;
-                SHELFBOOST->shelf_activar->value(rkr->ShelfBoost_Bypass);
+                    rkr->EFX_Bypass[EFX_SHELFBOOST] = 0;
+                SHELFBOOST->shelf_activar->value(rkr->EFX_Bypass[EFX_SHELFBOOST]);
                 break;
 
             case EFX_VOCODER:
                 if (i < numEff)
-                    rkr->Vocoder_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_VOCODER] = 1;
                 else
-                    rkr->Vocoder_Bypass = 0;
-                VOCODER->vo_activar->value(rkr->Vocoder_Bypass);
+                    rkr->EFX_Bypass[EFX_VOCODER] = 0;
+                VOCODER->vo_activar->value(rkr->EFX_Bypass[EFX_VOCODER]);
                 break;
 
             case EFX_SUSTAINER:
                 if (i < numEff)
-                    rkr->Sustainer_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_SUSTAINER] = 1;
                 else
-                    rkr->Sustainer_Bypass = 0;
-                SUSTAINER->sus_activar->value(rkr->Sustainer_Bypass);
+                    rkr->EFX_Bypass[EFX_SUSTAINER] = 0;
+                SUSTAINER->sus_activar->value(rkr->EFX_Bypass[EFX_SUSTAINER]);
                 break;
 
             case EFX_SEQUENCE:
                 if (i < numEff)
-                    rkr->Sequence_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_SEQUENCE] = 1;
                 else
-                    rkr->Sequence_Bypass = 0;
-                SEQUENCE->seq_activar->value(rkr->Sequence_Bypass);
+                    rkr->EFX_Bypass[EFX_SEQUENCE] = 0;
+                SEQUENCE->seq_activar->value(rkr->EFX_Bypass[EFX_SEQUENCE]);
                 break;
 
             case EFX_SHIFTER:
                 if (i < numEff)
-                    rkr->Shifter_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_SHIFTER] = 1;
                 else
-                    rkr->Shifter_Bypass = 0;
-                SHIFTER->shifter_activar->value(rkr->Shifter_Bypass);
+                    rkr->EFX_Bypass[EFX_SHIFTER] = 0;
+                SHIFTER->shifter_activar->value(rkr->EFX_Bypass[EFX_SHIFTER]);
                 break;
 
             case EFX_STOMPBOX:
                 if (i < numEff)
-                    rkr->StompBox_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_STOMPBOX] = 1;
                 else
-                    rkr->StompBox_Bypass = 0;
-                STOMPBOX->stomp_activar->value(rkr->StompBox_Bypass);
+                    rkr->EFX_Bypass[EFX_STOMPBOX] = 0;
+                STOMPBOX->stomp_activar->value(rkr->EFX_Bypass[EFX_STOMPBOX]);
                 break;
 
             case EFX_REVERBTRON:
                 if (i < numEff)
-                    rkr->Reverbtron_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_REVERBTRON] = 1;
                 else
-                    rkr->Reverbtron_Bypass = 0;
-                REVERBTRON->revtron_activar->value(rkr->Reverbtron_Bypass);
+                    rkr->EFX_Bypass[EFX_REVERBTRON] = 0;
+                REVERBTRON->revtron_activar->value(rkr->EFX_Bypass[EFX_REVERBTRON]);
                 break;
 
             case EFX_ECHOTRON:
                 if (i < numEff)
-                    rkr->Echotron_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_ECHOTRON] = 1;
                 else
-                    rkr->Echotron_Bypass = 0;
-                ECHOTRON->echotron_activar->value(rkr->Echotron_Bypass);
+                    rkr->EFX_Bypass[EFX_ECHOTRON] = 0;
+                ECHOTRON->echotron_activar->value(rkr->EFX_Bypass[EFX_ECHOTRON]);
                 break;
 
             case EFX_STEREOHARM:
                 if (i < numEff)
-                    rkr->StereoHarm_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_STEREOHARM] = 1;
                 else
-                    rkr->StereoHarm_Bypass = 0;
-                SHAR->shar_activar->value(rkr->StereoHarm_Bypass);
+                    rkr->EFX_Bypass[EFX_STEREOHARM] = 0;
+                SHAR->shar_activar->value(rkr->EFX_Bypass[EFX_STEREOHARM]);
                 break;
 
             case EFX_COMPBAND:
                 if (i < numEff)
-                    rkr->CompBand_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_COMPBAND] = 1;
                 else
-                    rkr->CompBand_Bypass = 0;
-                COMPBAND->cband_activar->value(rkr->CompBand_Bypass);
+                    rkr->EFX_Bypass[EFX_COMPBAND] = 0;
+                COMPBAND->cband_activar->value(rkr->EFX_Bypass[EFX_COMPBAND]);
                 break;
 
             case EFX_OPTICALTREM:
                 if (i < numEff)
-                    rkr->Opticaltrem_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_OPTICALTREM] = 1;
                 else
-                    rkr->Opticaltrem_Bypass = 0;
-                OTREM->otrem_activar->value(rkr->Opticaltrem_Bypass);
+                    rkr->EFX_Bypass[EFX_OPTICALTREM] = 0;
+                OTREM->otrem_activar->value(rkr->EFX_Bypass[EFX_OPTICALTREM]);
                 break;
 
             case EFX_VIBE:
                 if (i < numEff)
-                    rkr->Vibe_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_VIBE] = 1;
                 else
-                    rkr->Vibe_Bypass = 0;
-                VIBE->vibe_activar->value(rkr->Vibe_Bypass);
+                    rkr->EFX_Bypass[EFX_VIBE] = 0;
+                VIBE->vibe_activar->value(rkr->EFX_Bypass[EFX_VIBE]);
                 break;
 
             case EFX_INFINITY:
                 if (i < numEff)
-                    rkr->Infinity_Bypass = 1;
+                    rkr->EFX_Bypass[EFX_INFINITY] = 1;
                 else
-                    rkr->Infinity_Bypass = 0;
-                INFINIT->infinity_activar->value(rkr->Infinity_Bypass);
+                    rkr->EFX_Bypass[EFX_INFINITY] = 0;
+                INFINIT->infinity_activar->value(rkr->EFX_Bypass[EFX_INFINITY]);
                 break;
         }
 

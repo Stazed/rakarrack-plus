@@ -24,10 +24,10 @@ widget_class CompressGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Compressor_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_COMPRESSOR]);
  return;
 }
-rkr->Compressor_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_COMPRESSOR]=(int)o->value();
 rkr->efx_Compressor->cleanup();
 rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1

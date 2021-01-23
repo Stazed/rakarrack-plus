@@ -28,10 +28,10 @@ widget_class {\#include "common_gui_menu.h"} EchotronGui {
     callback {if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Echotron_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_ECHOTRON]);
  return;
 }
-rkr->Echotron_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_ECHOTRON]=(int)o->value();
 if((int) o->value()==0) rkr->efx_Echotron->cleanup();
 rgui->findpos(EFX_ECHOTRON,(int)o->value(),o);} selected
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1

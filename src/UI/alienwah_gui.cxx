@@ -6,10 +6,10 @@ void AlienwahGui::cb_Alienwah_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Alienwah_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_ALIENWAH]);
  return;
 }
-rkr->Alienwah_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_ALIENWAH]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Alienwah->cleanup();
 rgui->findpos(EFX_ALIENWAH,(int)o->value(),o);
@@ -148,9 +148,9 @@ void AlienwahGui::cb_Alienwah_delay_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_Delay);
  return;
 } 
-rkr->Alienwah_Bypass=0;
+rkr->EFX_Bypass[EFX_ALIENWAH]=0;
 rkr->efx_Alienwah->changepar(Alien_Delay,(int)o->value());
-if (Alienwah_activar->value()) rkr->Alienwah_Bypass=1;
+if (Alienwah_activar->value()) rkr->EFX_Bypass[EFX_ALIENWAH]=1;
 }
 void AlienwahGui::cb_Alienwah_delay(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_delay_i(o,v);

@@ -6,10 +6,10 @@ void HarGui::cb_har_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Harmonizer_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_HARMONIZER]);
  return;
 }
-rkr->Harmonizer_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_HARMONIZER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Har->cleanup();
 rkr->efx_Har->changepar(Harm_Interval,rkr->efx_Har->getpar(Harm_Interval));
@@ -65,9 +65,9 @@ void HarGui::cb_har_int_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Harm_Interval);
  return;
 } 
-rkr->Harmonizer_Bypass=0;
+rkr->EFX_Bypass[EFX_HARMONIZER]=0;
 rkr->efx_Har->changepar(Harm_Interval,(int)(o->value()+12));
-if((int)har_activar->value())rkr->Harmonizer_Bypass=1;
+if((int)har_activar->value())rkr->EFX_Bypass[EFX_HARMONIZER]=1;
 }
 void HarGui::cb_har_int(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_int_i(o,v);

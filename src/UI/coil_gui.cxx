@@ -6,10 +6,10 @@ void CoilGui::cb_coil_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->CoilCrafter_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_COILCRAFTER]);
  return;
 }
-rkr->CoilCrafter_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_COILCRAFTER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_CoilCrafter->cleanup();
 rgui->findpos(EFX_COILCRAFTER,(int)o->value(),o);

@@ -156,7 +156,7 @@ jackprocess(jack_nframes_t nframes, void *arg)
                 actualiza_tap(pos.beats_per_minute, JackOUT);
         }
 
-        if (JackOUT->Looper_Bypass)
+        if (JackOUT->EFX_Bypass[EFX_LOOPER])
         {
             if ((astate != JackOUT->jt_state) && (astate == 0))
             {
@@ -313,7 +313,7 @@ timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
             JackOUT->Update_tempo();
             JackOUT->Tap_Display = 1;
             
-            if ((JackOUT->Looper_Bypass) && (state == 3))
+            if ((JackOUT->EFX_Bypass[EFX_LOOPER]) && (state == 3))
             {
                 JackOUT->efx_Looper->changepar(Looper_Play, 1);
                 stecla = 5;

@@ -6,10 +6,10 @@ void ShifterGui::cb_shifter_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->Shifter_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_SHIFTER]);
  return;
 }
-rkr->Shifter_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_SHIFTER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Shifter->cleanup();
 rgui->findpos(EFX_SHIFTER,(int)o->value(),o);
@@ -65,9 +65,9 @@ void ShifterGui::cb_shifter_int_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shifter_Interval);
  return;
 }
-rkr->Shifter_Bypass=0;
+rkr->EFX_Bypass[EFX_SHIFTER]=0;
 rkr->efx_Shifter->changepar(Shifter_Interval,(int)o->value());
-if((int)shifter_activar->value())rkr->Shifter_Bypass=1;
+if((int)shifter_activar->value())rkr->EFX_Bypass[EFX_SHIFTER]=1;
 }
 void ShifterGui::cb_shifter_int(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_int_i(o,v);

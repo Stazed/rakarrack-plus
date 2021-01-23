@@ -6,10 +6,10 @@ void StompboxGui::cb_stomp_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->StompBox_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_STOMPBOX]);
  return;
 }
-rkr->StompBox_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_STOMPBOX]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_StompBox->cleanup();
 rgui->findpos(EFX_STOMPBOX,(int)o->value(),o);

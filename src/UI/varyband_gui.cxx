@@ -6,10 +6,10 @@ void VarybandGui::cb_varyband_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
  rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->VaryBand_Bypass);
+ o->value(rkr->EFX_Bypass[EFX_VARYBAND]);
  return;
 }
-rkr->VaryBand_Bypass=(int)o->value();
+rkr->EFX_Bypass[EFX_VARYBAND]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_VaryBand->cleanup();
 rgui->findpos(EFX_VARYBAND,(int)o->value(),o);

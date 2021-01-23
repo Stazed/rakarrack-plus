@@ -363,30 +363,30 @@ RKR::Update_tempo()
         Tap_TempoSetD = Tap_TempoSet;
     }
 
-    if (Looper_Bypass) efx_Looper->settempo(Tap_TempoSet);
+    if (EFX_Bypass[EFX_LOOPER]) efx_Looper->settempo(Tap_TempoSet);
 
     if (EFX_Bypass[EFX_CHORUS]) efx_Chorus->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
-    if (Flanger_Bypass) efx_Flanger->changepar(Flanger_LFO_Tempo, Tap_TempoSetL);
-    if (Phaser_Bypass) efx_Phaser->changepar(Phaser_LFO_Tempo, Tap_TempoSetL);
-    if (Pan_Bypass) efx_Pan->changepar(Pan_LFO_Tempo, Tap_TempoSetL);
-    if (WahWah_Bypass) efx_WahWah->changepar(WahWah_LFO_Tempo, Tap_TempoSetL);
-    if (Alienwah_Bypass) efx_Alienwah->changepar(Alien_LFO_Tempo, Tap_TempoSetL);
-    if (MusDelay_Bypass) efx_MusDelay->changepar(Music_Tempo, Tap_TempoSetD);
-    if (APhaser_Bypass) efx_APhaser->changepar(APhase_LFO_Tempo, Tap_TempoSetL);
-    if (DFlange_Bypass) efx_DFlange->changepar(DFlange_LFO_Tempo, Tap_TempoSetL);
-    if (Synthfilter_Bypass) efx_Synthfilter->changepar(Synthfilter_LFO_Tempo, Tap_TempoSetL);
-    if (MuTroMojo_Bypass) efx_MuTroMojo->changepar(MuTro_LFO_Tempo, Tap_TempoSetL);
-    if (VaryBand_Bypass) efx_VaryBand->changepar(VaryBand_LFO_Tempo_1, Tap_TempoSetL);
-    if (VaryBand_Bypass) efx_VaryBand->changepar(VaryBand_LFO_Tempo_2, Tap_TempoSetL);
-    if (Arpie_Bypass) efx_Arpie->changepar(Arpie_Tempo, Tap_TempoSetD);
-    if (Echoverse_Bypass) efx_Echoverse->changepar(Echoverse_Tempo, Tap_TempoSetD);
-    if (Sequence_Bypass) efx_Sequence->changepar(Sequence_Tempo, Tap_TempoSetD);
-    if (Echotron_Bypass) efx_Echotron->changepar(Echotron_Tempo, Tap_TempoSetD);
-    if (Opticaltrem_Bypass) efx_Opticaltrem->changepar(Optical_LFO_Tempo, Tap_TempoSetL);
-    if (Vibe_Bypass) efx_Vibe->changepar(Vibe_LFO_Tempo, Tap_TempoSetL);
-    if (Infinity_Bypass) efx_Infinity->changepar(Infinity_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_FLANGER]) efx_Flanger->changepar(Flanger_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_PHASER]) efx_Phaser->changepar(Phaser_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_PAN]) efx_Pan->changepar(Pan_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_WAHWAH]) efx_WahWah->changepar(WahWah_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_ALIENWAH]) efx_Alienwah->changepar(Alien_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_MUSICAL_DELAY]) efx_MusDelay->changepar(Music_Tempo, Tap_TempoSetD);
+    if (EFX_Bypass[EFX_ANALOG_PHASER]) efx_APhaser->changepar(APhase_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_DUAL_FLANGE]) efx_DFlange->changepar(DFlange_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_SYNTHFILTER]) efx_Synthfilter->changepar(Synthfilter_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_MUTROMOJO]) efx_MuTroMojo->changepar(MuTro_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_VARYBAND]) efx_VaryBand->changepar(VaryBand_LFO_Tempo_1, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_VARYBAND]) efx_VaryBand->changepar(VaryBand_LFO_Tempo_2, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_ARPIE]) efx_Arpie->changepar(Arpie_Tempo, Tap_TempoSetD);
+    if (EFX_Bypass[EFX_ECHOVERSE]) efx_Echoverse->changepar(Echoverse_Tempo, Tap_TempoSetD);
+    if (EFX_Bypass[EFX_SEQUENCE]) efx_Sequence->changepar(Sequence_Tempo, Tap_TempoSetD);
+    if (EFX_Bypass[EFX_ECHOTRON]) efx_Echotron->changepar(Echotron_Tempo, Tap_TempoSetD);
+    if (EFX_Bypass[EFX_OPTICALTREM]) efx_Opticaltrem->changepar(Optical_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_VIBE]) efx_Vibe->changepar(Vibe_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Bypass[EFX_INFINITY]) efx_Infinity->changepar(Infinity_Tempo, Tap_TempoSetL);
 
-    if (Echo_Bypass)
+    if (EFX_Bypass[EFX_ECHO])
     {
         efx_Echo->Tempo2Delay(Tap_TempoSetD);
     }
