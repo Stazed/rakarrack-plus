@@ -735,8 +735,8 @@ public:
     void file_error(FILE *fn);
     void Actualizar_Audio ();
     void loadnames();
-    void revert_file_to_bank(int lv_revert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS]);
-    void convert_bank_to_file(int lv_convert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS]);
+    void revert_file_to_bank(int lv_revert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS], int size);
+    void convert_bank_to_file(int lv_convert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS], int size);
     int loadbank (char *filename);
     int savebank (char *filename);
     void New ();

@@ -124,6 +124,120 @@ const int presets_default[C_NUM_EFFECTS_PLUS_ORDER][C_MAX_PARAMETER_SIZE] = {
     {64, 64, -64, 64, -64, 64, -64, 64, -64, 0, 0, 0, 14, 0, 0, 0, 0, 4, 0}
 };
 
+// Table to revert bank file effect indexing to program effect indexing.
+const int reversion[C_LV_MAX_EFFECTS] =
+{
+    EFX_REVERB,
+    EFX_ECHO,
+    EFX_CHORUS,
+    EFX_FLANGER,
+    EFX_PHASER,
+    EFX_OVERDRIVE,
+    EFX_DISTORTION,
+    EFX_EQ,
+    EFX_PARAMETRIC,
+    EFX_COMPRESSOR,
+    EFX_ORDER,           // 10
+    EFX_WAHWAH,
+    EFX_ALIENWAH,
+    EFX_CABINET,
+    EFX_PAN,
+    EFX_HARMONIZER,
+    EFX_MUSICAL_DELAY,
+    EFX_NOISEGATE,
+    EFX_DERELICT,
+    EFX_ANALOG_PHASER,
+    EFX_VALVE,           // 20
+    EFX_DUAL_FLANGE,
+    EFX_RING,
+    EFX_EXCITER,
+    EFX_DISTBAND,
+    EFX_ARPIE,
+    EFX_EXPANDER,
+    EFX_SHUFFLE,
+    EFX_SYNTHFILTER,
+    EFX_VARYBAND,
+    EFX_CONVOLOTRON,     // 30
+    EFX_LOOPER,
+    EFX_MUTROMOJO,
+    EFX_ECHOVERSE,
+    EFX_COILCRAFTER,
+    EFX_SHELFBOOST,
+    EFX_VOCODER,
+    EFX_SUSTAINER,
+    EFX_SEQUENCE,
+    EFX_SHIFTER,
+    EFX_STOMPBOX,        // 40
+    EFX_REVERBTRON,
+    EFX_ECHOTRON,
+    EFX_STEREOHARM,
+    EFX_COMPBAND,
+    EFX_OPTICALTREM,
+    EFX_VIBE,
+    EFX_INFINITY,       // 47
+
+    // offset by 1 for order moved to 69
+    47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+    60, 61, 62, 63, 64, 65, 66, 67, 68
+};
+
+// Table to convert program lv[] indexing to file indexing.
+const int conversion[C_LV_MAX_EFFECTS] = 
+{
+    LV_EQ,             // 0
+    LV_COMPRESSOR,
+    LV_DISTORTION,
+    LV_OVERDRIVE,
+    LV_ECHO,
+    LV_CHORUS,
+    LV_PHASER,
+    LV_FLANGER,
+    LV_REVERB,
+    LV_PARAMETRIC,
+    LV_WAHWAH,         // 10
+    LV_ALIENWAH,
+    LV_CABINET,
+    LV_PAN,
+    LV_HARMONIZER,
+    LV_MUSICAL_DELAY,
+    LV_NOISEGATE,
+    LV_DERELICT,
+    LV_ANALOG_PHASER,
+    LV_VALVE,
+    LV_DUAL_FLANGE,    // 20
+    LV_RING,
+    LV_EXCITER,
+    LV_DISTBAND,
+    LV_ARPIE,
+    LV_EXPANDER,
+    LV_SHUFFLE,
+    LV_SYNTHFILTER,
+    LV_VARYBAND,
+    LV_CONVOLOTRON,
+    LV_LOOPER,         // 30
+    LV_MUTROMOJO,
+    LV_ECHOVERSE,
+    LV_COILCRAFTER,
+    LV_SHELFBOOST,
+    LV_VOCODER,
+    LV_SUSTAINER,
+    LV_SEQUENCE,
+    LV_SHIFTER,
+    LV_STOMPBOX,
+    LV_REVERBTRON,     // 40
+    LV_ECHOTRON,
+    LV_STEREOHARM,
+    LV_COMPBAND,
+    LV_OPTICALTREM,
+    LV_VIBE,
+    LV_INFINITY,       // 46
+
+    47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+    59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+
+    LV_ORDER           // 69
+};
+
 /**
  *  Individual preset file loading.
  * 
@@ -1749,123 +1863,65 @@ RKR::loadnames()
 }
 
 void
-RKR::revert_file_to_bank(int lv_revert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS])
+RKR::revert_file_to_bank(int lv_revert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS], int size)
 {
-    const int reversion[C_LV_MAX_EFFECTS] =
+    int temp[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS];
+    memset(temp, 0, sizeof (temp));
+    
+    for(int i = 0; i < C_LV_MAX_EFFECTS; i++)
     {
-        EFX_REVERB,
-        EFX_ECHO,
-        EFX_CHORUS,
-        EFX_FLANGER,
-        EFX_PHASER,
-        EFX_OVERDRIVE,
-        EFX_DISTORTION,
-        EFX_EQ,
-        EFX_PARAMETRIC,
-        EFX_COMPRESSOR,
-        EFX_ORDER,           // 10
-        EFX_WAHWAH,
-        EFX_ALIENWAH,
-        EFX_CABINET,
-        EFX_PAN,
-        EFX_HARMONIZER,
-        EFX_MUSICAL_DELAY,
-        EFX_NOISEGATE,
-        EFX_DERELICT,
-        EFX_ANALOG_PHASER,
-        EFX_VALVE,           // 20
-        EFX_DUAL_FLANGE,
-        EFX_RING,
-        EFX_EXCITER,
-        EFX_DISTBAND,
-        EFX_ARPIE,
-        EFX_EXPANDER,
-        EFX_SHUFFLE,
-        EFX_SYNTHFILTER,
-        EFX_VARYBAND,
-        EFX_CONVOLOTRON,     // 30
-        EFX_LOOPER,
-        EFX_MUTROMOJO,
-        EFX_ECHOVERSE,
-        EFX_COILCRAFTER,
-        EFX_SHELFBOOST,
-        EFX_VOCODER,
-        EFX_SUSTAINER,
-        EFX_SEQUENCE,
-        EFX_SHIFTER,
-        EFX_STOMPBOX,        // 40
-        EFX_REVERBTRON,
-        EFX_ECHOTRON,
-        EFX_STEREOHARM,
-        EFX_COMPBAND,
-        EFX_OPTICALTREM,
-        EFX_VIBE,
-        EFX_INFINITY,       // 47
+        // Find the reversion row of the bank
+        int row = reversion[i];
         
-        48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
-        60, 61, 62, 63, 64, 65, 66, 67, 68, 69
-    };
+        // Put the bank row into the temp by reversion row.
+        for(int j = 0; j < C_LV_MAX_PARAMETERS; j ++)
+        {
+            temp[row][j] = lv_revert[i][j];
+        }
+    }
+    
+    // Clear the bank array.
+    memset(lv_revert, 0, sizeof (size));
+    
+    // Put the reverted temp array into the bank array.
+    for(int i = 0; i < C_LV_MAX_EFFECTS; i++)
+    {
+        for(int j = 0; j < C_LV_MAX_PARAMETERS; j ++)
+        {
+            lv_revert[i][j] = temp[i][j];
+        }
+    }
 }
 
 void
-RKR::convert_bank_to_file(int lv_convert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS])
+RKR::convert_bank_to_file(int lv_convert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS], int size)
 {
-    // conversion table program lv[] to file
-    const int conversion[C_LV_MAX_EFFECTS] = 
+    int temp[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS];
+    memset(temp, 0, sizeof (temp));
+    
+    for(int i = 0; i < C_LV_MAX_EFFECTS; i++)
     {
-        LV_EQ,             // 0
-        LV_COMPRESSOR,
-        LV_DISTORTION,
-        LV_OVERDRIVE,
-        LV_ECHO,
-        LV_CHORUS,
-        LV_PHASER,
-        LV_FLANGER,
-        LV_REVERB,
-        LV_PARAMETRIC,
-        LV_WAHWAH,         // 10
-        LV_ALIENWAH,
-        LV_CABINET,
-        LV_PAN,
-        LV_HARMONIZER,
-        LV_MUSICAL_DELAY,
-        LV_NOISEGATE,
-        LV_DERELICT,
-        LV_ANALOG_PHASER,
-        LV_VALVE,
-        LV_DUAL_FLANGE,    // 20
-        LV_RING,
-        LV_EXCITER,
-        LV_DISTBAND,
-        LV_ARPIE,
-        LV_EXPANDER,
-        LV_SHUFFLE,
-        LV_SYNTHFILTER,
-        LV_VARYBAND,
-        LV_CONVOLOTRON,
-        LV_LOOPER,         // 30
-        LV_MUTROMOJO,
-        LV_ECHOVERSE,
-        LV_COILCRAFTER,
-        LV_SHELFBOOST,
-        LV_VOCODER,
-        LV_SUSTAINER,
-        LV_SEQUENCE,
-        LV_SHIFTER,
-        LV_STOMPBOX,
-        LV_REVERBTRON,     // 40
-        LV_ECHOTRON,
-        LV_STEREOHARM,
-        LV_COMPBAND,
-        LV_OPTICALTREM,
-        LV_VIBE,
-        LV_INFINITY,       // 46
+        // Find the conversion row of the bank
+        int row = conversion[i];
         
-        47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
-        59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
-
-        LV_ORDER           // 69
-    };
+        // Put the bank row into the temp by conversion row.
+        for(int j = 0; j < C_LV_MAX_PARAMETERS; j ++)
+        {
+            temp[row][j] = lv_convert[i][j];
+        }
+    }
+    
+    // Clear the bank array.
+    memset(lv_convert, 0, sizeof (size));
+    
+    // Put the converted temp array into the bank array.
+    for(int i = 0; i < C_LV_MAX_EFFECTS; i++)
+    {
+        for(int j = 0; j < C_LV_MAX_PARAMETERS; j ++)
+        {
+            lv_convert[i][j] = temp[i][j];
+        }
+    }
 }
 
 /**
@@ -1933,6 +1989,14 @@ RKR::loadbank(char *filename)
         }
 
         convert_IO();
+
+#if 0
+        for(int i = 0; i < 62; i++)
+        {
+            revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
+        }
+#endif // 0
+
         modified = 0;
         new_bank_loaded = 1;
         return (1);
@@ -1948,7 +2012,13 @@ RKR::savebank(char *filename)
     if ((fn = fopen(filename, "wb")) != NULL)
     {
         copy_IO();
-        
+#if 0
+        for(int i = 0; i < 62; i++)
+        {
+            convert_bank_to_file(Bank[i].lv, sizeof(Bank[i].lv));
+        }
+#endif // 0
+
         if (BigEndian())
         {
             fix_endianess();
@@ -1960,8 +2030,16 @@ RKR::savebank(char *filename)
         {
             fix_endianess();
         }
-        
+
         fclose(fn);
+        
+#if 0
+        for(int i = 0; i < 62; i++)
+        {
+            revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
+        }
+#endif // 0
+
         modified = 0;
         return (1);
     }
