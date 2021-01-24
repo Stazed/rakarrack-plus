@@ -301,10 +301,16 @@ enum EFX_Index
     EFX_VIBE,
     EFX_INFINITY,       // 46
     
+    // Indexes 47 - 68 are unused and can be used for expansion of rack effects.
+    
+    // This is the main window effect order. Must be hard coded to 69,
+    // the last item of lv[70][20] bank.
+    EFX_ORDER = 69,
+    
     // The following are not rack effects but are used in MIDI
     // control within the same switch() statements and thus should
     // always be different from the EFX_Index for the rack effects.
-    EFX_MASTER = 50,
+    EFX_MASTER = 100,
     
     // These are part of the MIDI Implementation Chart CC 116 values.
     EFX_TAP_TEMPO_ON_OFF = 121,

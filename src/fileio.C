@@ -1748,6 +1748,126 @@ RKR::loadnames()
     }
 }
 
+void
+RKR::revert_file_to_bank(int lv_revert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS])
+{
+    const int reversion[C_LV_MAX_EFFECTS] =
+    {
+        EFX_REVERB,
+        EFX_ECHO,
+        EFX_CHORUS,
+        EFX_FLANGER,
+        EFX_PHASER,
+        EFX_OVERDRIVE,
+        EFX_DISTORTION,
+        EFX_EQ,
+        EFX_PARAMETRIC,
+        EFX_COMPRESSOR,
+        EFX_ORDER,           // 10
+        EFX_WAHWAH,
+        EFX_ALIENWAH,
+        EFX_CABINET,
+        EFX_PAN,
+        EFX_HARMONIZER,
+        EFX_MUSICAL_DELAY,
+        EFX_NOISEGATE,
+        EFX_DERELICT,
+        EFX_ANALOG_PHASER,
+        EFX_VALVE,           // 20
+        EFX_DUAL_FLANGE,
+        EFX_RING,
+        EFX_EXCITER,
+        EFX_DISTBAND,
+        EFX_ARPIE,
+        EFX_EXPANDER,
+        EFX_SHUFFLE,
+        EFX_SYNTHFILTER,
+        EFX_VARYBAND,
+        EFX_CONVOLOTRON,     // 30
+        EFX_LOOPER,
+        EFX_MUTROMOJO,
+        EFX_ECHOVERSE,
+        EFX_COILCRAFTER,
+        EFX_SHELFBOOST,
+        EFX_VOCODER,
+        EFX_SUSTAINER,
+        EFX_SEQUENCE,
+        EFX_SHIFTER,
+        EFX_STOMPBOX,        // 40
+        EFX_REVERBTRON,
+        EFX_ECHOTRON,
+        EFX_STEREOHARM,
+        EFX_COMPBAND,
+        EFX_OPTICALTREM,
+        EFX_VIBE,
+        EFX_INFINITY,       // 47
+        
+        48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+        60, 61, 62, 63, 64, 65, 66, 67, 68, 69
+    };
+}
+
+void
+RKR::convert_bank_to_file(int lv_convert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS])
+{
+    // conversion table program lv[] to file
+    const int conversion[C_LV_MAX_EFFECTS] = 
+    {
+        LV_EQ,             // 0
+        LV_COMPRESSOR,
+        LV_DISTORTION,
+        LV_OVERDRIVE,
+        LV_ECHO,
+        LV_CHORUS,
+        LV_PHASER,
+        LV_FLANGER,
+        LV_REVERB,
+        LV_PARAMETRIC,
+        LV_WAHWAH,         // 10
+        LV_ALIENWAH,
+        LV_CABINET,
+        LV_PAN,
+        LV_HARMONIZER,
+        LV_MUSICAL_DELAY,
+        LV_NOISEGATE,
+        LV_DERELICT,
+        LV_ANALOG_PHASER,
+        LV_VALVE,
+        LV_DUAL_FLANGE,    // 20
+        LV_RING,
+        LV_EXCITER,
+        LV_DISTBAND,
+        LV_ARPIE,
+        LV_EXPANDER,
+        LV_SHUFFLE,
+        LV_SYNTHFILTER,
+        LV_VARYBAND,
+        LV_CONVOLOTRON,
+        LV_LOOPER,         // 30
+        LV_MUTROMOJO,
+        LV_ECHOVERSE,
+        LV_COILCRAFTER,
+        LV_SHELFBOOST,
+        LV_VOCODER,
+        LV_SUSTAINER,
+        LV_SEQUENCE,
+        LV_SHIFTER,
+        LV_STOMPBOX,
+        LV_REVERBTRON,     // 40
+        LV_ECHOTRON,
+        LV_STEREOHARM,
+        LV_COMPBAND,
+        LV_OPTICALTREM,
+        LV_VIBE,
+        LV_INFINITY,       // 46
+        
+        47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+        59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+
+        LV_ORDER           // 69
+    };
+}
+
 /**
  *  This parses the rakarrack bank files *.rkrb types.
  * @param filename
