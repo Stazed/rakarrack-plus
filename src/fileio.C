@@ -1887,56 +1887,14 @@ RKR::New()
 
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
-        efx_order[k] = presets_default[10][k]; // magic number 10 is order
+        efx_order[k] = presets_default[LV_ORDER][k];
     }
 
-    EFX_Bank_Bypass[EFX_REVERB] = 0;
-    EFX_Bank_Bypass[EFX_ECHO] = 0;
-    EFX_Bank_Bypass[EFX_CHORUS] = 0;
-    EFX_Bank_Bypass[EFX_FLANGER] = 0;
-    EFX_Bank_Bypass[EFX_PHASER] = 0;
-    EFX_Bank_Bypass[EFX_OVERDRIVE] = 0;
-    EFX_Bank_Bypass[EFX_DISTORTION] = 0;
-    EFX_Bank_Bypass[EFX_EQ] = 0;
-    EFX_Bank_Bypass[EFX_PARAMETRIC] = 0;
-    EFX_Bank_Bypass[EFX_COMPRESSOR] = 0;
-    EFX_Bank_Bypass[EFX_WAHWAH] = 0;
-    EFX_Bank_Bypass[EFX_ALIENWAH] = 0;
-    EFX_Bank_Bypass[EFX_CABINET] = 0;
-    EFX_Bank_Bypass[EFX_PAN] = 0;
-    EFX_Bank_Bypass[EFX_HARMONIZER] = 0;
-    EFX_Bank_Bypass[EFX_MUSICAL_DELAY] = 0;
-    EFX_Bank_Bypass[EFX_NOISEGATE] = 0;
-    EFX_Bank_Bypass[EFX_DERELICT] = 0;
-    EFX_Bank_Bypass[EFX_ANALOG_PHASER] = 0;
-    EFX_Bank_Bypass[EFX_VALVE] = 0;
-    EFX_Bank_Bypass[EFX_DUAL_FLANGE] = 0;
-    EFX_Bank_Bypass[EFX_RING] = 0;
-    EFX_Bank_Bypass[EFX_EXCITER] = 0;
-    EFX_Bank_Bypass[EFX_DISTBAND] = 0;
-    EFX_Bank_Bypass[EFX_ARPIE] = 0;
-    EFX_Bank_Bypass[EFX_EXPANDER] = 0;
-    EFX_Bank_Bypass[EFX_SHUFFLE] = 0;
-    EFX_Bank_Bypass[EFX_SYNTHFILTER] = 0;
-    EFX_Bank_Bypass[EFX_VARYBAND] = 0;
-    EFX_Bank_Bypass[EFX_CONVOLOTRON] = 0;
-    EFX_Bank_Bypass[EFX_LOOPER] = 0;
-    EFX_Bank_Bypass[EFX_MUTROMOJO] = 0;
-    EFX_Bank_Bypass[EFX_ECHOVERSE] = 0;
-    EFX_Bank_Bypass[EFX_COILCRAFTER] = 0;
-    EFX_Bank_Bypass[EFX_SHELFBOOST] = 0;
-    EFX_Bank_Bypass[EFX_VOCODER] = 0;
-    EFX_Bank_Bypass[EFX_SUSTAINER] = 0;
-    EFX_Bank_Bypass[EFX_SEQUENCE] = 0;
-    EFX_Bank_Bypass[EFX_SHIFTER] = 0;
-    EFX_Bank_Bypass[EFX_STOMPBOX] = 0;
-    EFX_Bank_Bypass[EFX_REVERBTRON] = 0;
-    EFX_Bank_Bypass[EFX_ECHOTRON] = 0;
-    EFX_Bank_Bypass[EFX_STEREOHARM] = 0;
-    EFX_Bank_Bypass[EFX_COMPBAND] = 0;
-    EFX_Bank_Bypass[EFX_OPTICALTREM] = 0;
-    EFX_Bank_Bypass[EFX_VIBE] = 0;
-    EFX_Bank_Bypass[EFX_INFINITY] = 0;
+    // Set all effects bypass to off
+    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+    {
+        EFX_Bank_Bypass[i] = 0;
+    }
 
     Bypass_B = 0;
 
