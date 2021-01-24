@@ -145,112 +145,112 @@ void RKR::putbuf(char *buf, int j)
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_REVERB][0], &lv[LV_REVERB][1], &lv[LV_REVERB][2], &lv[LV_REVERB][3], &lv[LV_REVERB][4],
                &lv[LV_REVERB][5], &lv[LV_REVERB][6], &lv[LV_REVERB][7], &lv[LV_REVERB][8], &lv[LV_REVERB][9],
-               &lv[LV_REVERB][10], &lv[LV_REVERB][11], &Reverb_B);
+               &lv[LV_REVERB][10], &lv[LV_REVERB][11], &EFX_Bank_Bypass[EFX_REVERB]);
         break;
 
     case EFX_ECHO:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_ECHO][0], &lv[LV_ECHO][1], &lv[LV_ECHO][2], &lv[LV_ECHO][3], &lv[LV_ECHO][4],
-               &lv[LV_ECHO][5], &lv[LV_ECHO][6], &lv[LV_ECHO][7], &lv[LV_ECHO][8], &Echo_B);
+               &lv[LV_ECHO][5], &lv[LV_ECHO][6], &lv[LV_ECHO][7], &lv[LV_ECHO][8], &EFX_Bank_Bypass[EFX_ECHO]);
         break;
 
     case EFX_CHORUS:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_CHORUS][0], &lv[LV_CHORUS][1], &lv[LV_CHORUS][2], &lv[LV_CHORUS][3], &lv[LV_CHORUS][4],
                &lv[LV_CHORUS][5], &lv[LV_CHORUS][6], &lv[LV_CHORUS][7], &lv[LV_CHORUS][8], &lv[LV_CHORUS][9],
-               &lv[LV_CHORUS][10], &lv[LV_CHORUS][11], &lv[LV_CHORUS][12], &Chorus_B);
+               &lv[LV_CHORUS][10], &lv[LV_CHORUS][11], &lv[LV_CHORUS][12], &EFX_Bank_Bypass[EFX_CHORUS]);
         break;
 
     case EFX_FLANGER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_FLANGER][0], &lv[LV_FLANGER][1], &lv[LV_FLANGER][2], &lv[LV_FLANGER][3], &lv[LV_FLANGER][4],
                &lv[LV_FLANGER][5], &lv[LV_FLANGER][6], &lv[LV_FLANGER][7], &lv[LV_FLANGER][8], &lv[LV_FLANGER][9],
-               &lv[LV_FLANGER][10], &lv[LV_FLANGER][11], &lv[LV_FLANGER][12], &Flanger_B);
+               &lv[LV_FLANGER][10], &lv[LV_FLANGER][11], &lv[LV_FLANGER][12], &EFX_Bank_Bypass[EFX_FLANGER]);
         break;
 
     case EFX_PHASER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_PHASER][0], &lv[LV_PHASER][1], &lv[LV_PHASER][2], &lv[LV_PHASER][3], &lv[LV_PHASER][4],
                &lv[LV_PHASER][5], &lv[LV_PHASER][6], &lv[LV_PHASER][7], &lv[LV_PHASER][8], &lv[LV_PHASER][9],
-               &lv[LV_PHASER][10], &lv[LV_PHASER][11], &Phaser_B);
+               &lv[LV_PHASER][10], &lv[LV_PHASER][11], &EFX_Bank_Bypass[EFX_PHASER]);
         break;
 
     case EFX_OVERDRIVE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_OVERDRIVE][0], &lv[LV_OVERDRIVE][1], &lv[LV_OVERDRIVE][2], &lv[LV_OVERDRIVE][3], &lv[LV_OVERDRIVE][4],
                &lv[LV_OVERDRIVE][5], &lv[LV_OVERDRIVE][6], &lv[LV_OVERDRIVE][7], &lv[LV_OVERDRIVE][8], &lv[LV_OVERDRIVE][9],
-               &lv[LV_OVERDRIVE][10], &lv[LV_OVERDRIVE][11], &lv[LV_OVERDRIVE][12], &Overdrive_B);
+               &lv[LV_OVERDRIVE][10], &lv[LV_OVERDRIVE][11], &lv[LV_OVERDRIVE][12], &EFX_Bank_Bypass[EFX_OVERDRIVE]);
         break;
 
     case EFX_DISTORTION:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_DISTORTION][0], &lv[LV_DISTORTION][1], &lv[LV_DISTORTION][2], &lv[LV_DISTORTION][3], &lv[LV_DISTORTION][4],
                &lv[LV_DISTORTION][5], &lv[LV_DISTORTION][6], &lv[LV_DISTORTION][7], &lv[LV_DISTORTION][8], &lv[LV_DISTORTION][9],
-               &lv[LV_DISTORTION][10], &lv[LV_DISTORTION][11], &lv[LV_DISTORTION][12], &Distorsion_B);
+               &lv[LV_DISTORTION][10], &lv[LV_DISTORTION][11], &lv[LV_DISTORTION][12], &EFX_Bank_Bypass[EFX_DISTORTION]);
         break;
 
     case EFX_EQ:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_EQ][0], &lv[LV_EQ][1], &lv[LV_EQ][2], &lv[LV_EQ][3], &lv[LV_EQ][4],
                &lv[LV_EQ][5], &lv[LV_EQ][6], &lv[LV_EQ][7], &lv[LV_EQ][8], &lv[LV_EQ][9],
-               &lv[LV_EQ][10], &lv[LV_EQ][11], &EQ1_B);
+               &lv[LV_EQ][10], &lv[LV_EQ][11], &EFX_Bank_Bypass[EFX_EQ]);
         break;
 
     case EFX_PARAMETRIC:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_PARAMETRIC][0], &lv[LV_PARAMETRIC][1], &lv[LV_PARAMETRIC][2], &lv[LV_PARAMETRIC][3], &lv[LV_PARAMETRIC][4],
                &lv[LV_PARAMETRIC][5], &lv[LV_PARAMETRIC][6], &lv[LV_PARAMETRIC][7], &lv[LV_PARAMETRIC][8], &lv[LV_PARAMETRIC][9],
-               &EQ2_B);
+               &EFX_Bank_Bypass[EFX_PARAMETRIC]);
         break;
 
     case EFX_COMPRESSOR:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_COMPRESSOR][0], &lv[LV_COMPRESSOR][1], &lv[LV_COMPRESSOR][2], &lv[LV_COMPRESSOR][3], &lv[LV_COMPRESSOR][4],
-               &lv[LV_COMPRESSOR][5], &lv[LV_COMPRESSOR][6], &lv[LV_COMPRESSOR][7], &lv[LV_COMPRESSOR][8], &Compressor_B);
+               &lv[LV_COMPRESSOR][5], &lv[LV_COMPRESSOR][6], &lv[LV_COMPRESSOR][7], &lv[LV_COMPRESSOR][8], &EFX_Bank_Bypass[EFX_COMPRESSOR]);
         break;
 
     case EFX_WAHWAH:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_WAHWAH][0], &lv[LV_WAHWAH][1], &lv[LV_WAHWAH][2], &lv[LV_WAHWAH][3], &lv[LV_WAHWAH][4],
                &lv[LV_WAHWAH][5], &lv[LV_WAHWAH][6], &lv[LV_WAHWAH][7], &lv[LV_WAHWAH][8], &lv[LV_WAHWAH][9],
-               &lv[LV_WAHWAH][10], &WahWah_B);
+               &lv[LV_WAHWAH][10], &EFX_Bank_Bypass[EFX_WAHWAH]);
         break;
 
     case EFX_ALIENWAH:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_ALIENWAH][0], &lv[LV_ALIENWAH][1], &lv[LV_ALIENWAH][2], &lv[LV_ALIENWAH][3], &lv[LV_ALIENWAH][4],
                &lv[LV_ALIENWAH][5], &lv[LV_ALIENWAH][6], &lv[LV_ALIENWAH][7], &lv[LV_ALIENWAH][8], &lv[LV_ALIENWAH][9],
-               &lv[LV_ALIENWAH][10], &Alienwah_B);
+               &lv[LV_ALIENWAH][10], &EFX_Bank_Bypass[EFX_ALIENWAH]);
         break;
 
     case EFX_CABINET:
-        sscanf(buf, "%d,%d,%d\n", &lv[LV_CABINET][0], &lv[LV_CABINET][1], &Cabinet_B);
+        sscanf(buf, "%d,%d,%d\n", &lv[LV_CABINET][0], &lv[LV_CABINET][1], &EFX_Bank_Bypass[EFX_CABINET]);
         break;
 
     case EFX_PAN:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_PAN][0], &lv[LV_PAN][1], &lv[LV_PAN][2], &lv[LV_PAN][3], &lv[LV_PAN][4],
-               &lv[LV_PAN][5], &lv[LV_PAN][6], &lv[LV_PAN][7], &lv[LV_PAN][8], &Pan_B);
+               &lv[LV_PAN][5], &lv[LV_PAN][6], &lv[LV_PAN][7], &lv[LV_PAN][8], &EFX_Bank_Bypass[EFX_PAN]);
         break;
 
     case EFX_HARMONIZER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_HARMONIZER][0], &lv[LV_HARMONIZER][1], &lv[LV_HARMONIZER][2], &lv[LV_HARMONIZER][3], &lv[LV_HARMONIZER][4],
                &lv[LV_HARMONIZER][5], &lv[LV_HARMONIZER][6], &lv[LV_HARMONIZER][7], &lv[LV_HARMONIZER][8], &lv[LV_HARMONIZER][9],
-               &lv[LV_HARMONIZER][10], &Harmonizer_B);
+               &lv[LV_HARMONIZER][10], &EFX_Bank_Bypass[EFX_HARMONIZER]);
         break;
 
     case EFX_MUSICAL_DELAY:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_MUSICAL_DELAY][0], &lv[LV_MUSICAL_DELAY][1], &lv[LV_MUSICAL_DELAY][2], &lv[LV_MUSICAL_DELAY][3], &lv[LV_MUSICAL_DELAY][4],
                &lv[LV_MUSICAL_DELAY][5], &lv[LV_MUSICAL_DELAY][6], &lv[LV_MUSICAL_DELAY][7], &lv[LV_MUSICAL_DELAY][8], &lv[LV_MUSICAL_DELAY][9],
-               &lv[LV_MUSICAL_DELAY][10], &lv[LV_MUSICAL_DELAY][11], &lv[LV_MUSICAL_DELAY][12], &MusDelay_B);
+               &lv[LV_MUSICAL_DELAY][10], &lv[LV_MUSICAL_DELAY][11], &lv[LV_MUSICAL_DELAY][12], &EFX_Bank_Bypass[EFX_MUSICAL_DELAY]);
         break;
 
     case EFX_NOISEGATE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_NOISEGATE][0], &lv[LV_NOISEGATE][1], &lv[LV_NOISEGATE][2], &lv[LV_NOISEGATE][3], &lv[LV_NOISEGATE][4],
-               &lv[LV_NOISEGATE][5], &lv[LV_NOISEGATE][6], &Gate_B);
+               &lv[LV_NOISEGATE][5], &lv[LV_NOISEGATE][6], &EFX_Bank_Bypass[EFX_NOISEGATE]);
 
         break;
 
@@ -258,21 +258,21 @@ void RKR::putbuf(char *buf, int j)
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_DERELICT][0], &lv[LV_DERELICT][1], &lv[LV_DERELICT][2], &lv[LV_DERELICT][3], &lv[LV_DERELICT][4],
                &lv[LV_DERELICT][5], &lv[LV_DERELICT][6], &lv[LV_DERELICT][7], &lv[LV_DERELICT][8], &lv[LV_DERELICT][9],
-               &lv[LV_DERELICT][10], &lv[LV_DERELICT][11], &Derelict_B);
+               &lv[LV_DERELICT][10], &lv[LV_DERELICT][11], &EFX_Bank_Bypass[EFX_DERELICT]);
         break;
 
     case EFX_ANALOG_PHASER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_ANALOG_PHASER][0], &lv[LV_ANALOG_PHASER][1], &lv[LV_ANALOG_PHASER][2], &lv[LV_ANALOG_PHASER][3], &lv[LV_ANALOG_PHASER][4],
                &lv[LV_ANALOG_PHASER][5], &lv[LV_ANALOG_PHASER][6], &lv[LV_ANALOG_PHASER][7], &lv[LV_ANALOG_PHASER][8], &lv[LV_ANALOG_PHASER][9],
-               &lv[LV_ANALOG_PHASER][10], &lv[LV_ANALOG_PHASER][11], &APhaser_B);
+               &lv[LV_ANALOG_PHASER][10], &lv[LV_ANALOG_PHASER][11], &EFX_Bank_Bypass[EFX_ANALOG_PHASER]);
         break;
 
     case EFX_VALVE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_VALVE][0], &lv[LV_VALVE][1], &lv[LV_VALVE][2], &lv[LV_VALVE][3], &lv[LV_VALVE][4],
                &lv[LV_VALVE][5], &lv[LV_VALVE][6], &lv[LV_VALVE][7], &lv[LV_VALVE][8], &lv[LV_VALVE][9],
-               &lv[LV_VALVE][10], &lv[LV_VALVE][11], &lv[LV_VALVE][12], &Valve_B);
+               &lv[LV_VALVE][10], &lv[LV_VALVE][11], &lv[LV_VALVE][12], &EFX_Bank_Bypass[EFX_VALVE]);
         break;
 
     case EFX_DUAL_FLANGE:
@@ -280,21 +280,21 @@ void RKR::putbuf(char *buf, int j)
                &lv[LV_DUAL_FLANGE][0], &lv[LV_DUAL_FLANGE][1], &lv[LV_DUAL_FLANGE][2], &lv[LV_DUAL_FLANGE][3], &lv[LV_DUAL_FLANGE][4],
                &lv[LV_DUAL_FLANGE][5], &lv[LV_DUAL_FLANGE][6], &lv[LV_DUAL_FLANGE][7], &lv[LV_DUAL_FLANGE][8], &lv[LV_DUAL_FLANGE][9],
                &lv[LV_DUAL_FLANGE][10], &lv[LV_DUAL_FLANGE][11], &lv[LV_DUAL_FLANGE][12], &lv[LV_DUAL_FLANGE][13], &lv[LV_DUAL_FLANGE][14],
-               &DFlange_B);
+               &EFX_Bank_Bypass[EFX_DUAL_FLANGE]);
         break;
 
     case EFX_RING:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_RING][0], &lv[LV_RING][1], &lv[LV_RING][2], &lv[LV_RING][3], &lv[LV_RING][4],
                &lv[LV_RING][5], &lv[LV_RING][6], &lv[LV_RING][7], &lv[LV_RING][8], &lv[LV_RING][9],
-               &lv[LV_RING][10], &lv[LV_RING][11], &lv[LV_RING][12], &Ring_B);
+               &lv[LV_RING][10], &lv[LV_RING][11], &lv[LV_RING][12], &EFX_Bank_Bypass[EFX_RING]);
         break;
 
     case EFX_EXCITER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_EXCITER][0], &lv[LV_EXCITER][1], &lv[LV_EXCITER][2], &lv[LV_EXCITER][3], &lv[LV_EXCITER][4],
                &lv[LV_EXCITER][5], &lv[LV_EXCITER][6], &lv[LV_EXCITER][7], &lv[LV_EXCITER][8], &lv[LV_EXCITER][9],
-               &lv[LV_EXCITER][10], &lv[LV_EXCITER][11], &lv[LV_EXCITER][12], &Exciter_B);
+               &lv[LV_EXCITER][10], &lv[LV_EXCITER][11], &lv[LV_EXCITER][12], &EFX_Bank_Bypass[EFX_EXCITER]);
         break;
 
     case EFX_DISTBAND:
@@ -302,20 +302,20 @@ void RKR::putbuf(char *buf, int j)
                &lv[LV_DISTBAND][0], &lv[LV_DISTBAND][1], &lv[LV_DISTBAND][2], &lv[LV_DISTBAND][3], &lv[LV_DISTBAND][4],
                &lv[LV_DISTBAND][5], &lv[LV_DISTBAND][6], &lv[LV_DISTBAND][7], &lv[LV_DISTBAND][8], &lv[LV_DISTBAND][9],
                &lv[LV_DISTBAND][10], &lv[LV_DISTBAND][11], &lv[LV_DISTBAND][12], &lv[LV_DISTBAND][13], &lv[LV_DISTBAND][14],
-               &DistBand_B);
+               &EFX_Bank_Bypass[EFX_DISTBAND]);
         break;
 
     case EFX_ARPIE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_ARPIE][0], &lv[LV_ARPIE][1], &lv[LV_ARPIE][2], &lv[LV_ARPIE][3], &lv[LV_ARPIE][4],
                &lv[LV_ARPIE][5], &lv[LV_ARPIE][6], &lv[LV_ARPIE][7], &lv[LV_ARPIE][8], &lv[LV_ARPIE][9],
-               &lv[LV_ARPIE][10], &Arpie_B);
+               &lv[LV_ARPIE][10], &EFX_Bank_Bypass[EFX_ARPIE]);
         break;
 
     case EFX_EXPANDER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_EXPANDER][0], &lv[LV_EXPANDER][1], &lv[LV_EXPANDER][2], &lv[LV_EXPANDER][3], &lv[LV_EXPANDER][4],
-               &lv[LV_EXPANDER][5], &lv[LV_EXPANDER][6], &Expander_B);
+               &lv[LV_EXPANDER][5], &lv[LV_EXPANDER][6], &EFX_Bank_Bypass[EFX_EXPANDER]);
 
         break;
 
@@ -323,7 +323,7 @@ void RKR::putbuf(char *buf, int j)
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_SHUFFLE][0], &lv[LV_SHUFFLE][1], &lv[LV_SHUFFLE][2], &lv[LV_SHUFFLE][3], &lv[LV_SHUFFLE][4],
                &lv[LV_SHUFFLE][5], &lv[LV_SHUFFLE][6], &lv[LV_SHUFFLE][7], &lv[LV_SHUFFLE][8], &lv[LV_SHUFFLE][9],
-               &lv[LV_SHUFFLE][10], &Shuffle_B);
+               &lv[LV_SHUFFLE][10], &EFX_Bank_Bypass[EFX_SHUFFLE]);
         break;
 
     case EFX_SYNTHFILTER:
@@ -331,14 +331,14 @@ void RKR::putbuf(char *buf, int j)
                &lv[LV_SYNTHFILTER][0], &lv[LV_SYNTHFILTER][1], &lv[LV_SYNTHFILTER][2], &lv[LV_SYNTHFILTER][3], &lv[LV_SYNTHFILTER][4],
                &lv[LV_SYNTHFILTER][5], &lv[LV_SYNTHFILTER][6], &lv[LV_SYNTHFILTER][7], &lv[LV_SYNTHFILTER][8], &lv[LV_SYNTHFILTER][9],
                &lv[LV_SYNTHFILTER][10], &lv[LV_SYNTHFILTER][11], &lv[LV_SYNTHFILTER][12], &lv[LV_SYNTHFILTER][13], &lv[LV_SYNTHFILTER][14],
-               &lv[LV_SYNTHFILTER][15], &Synthfilter_B);
+               &lv[LV_SYNTHFILTER][15], &EFX_Bank_Bypass[EFX_SYNTHFILTER]);
         break;
 
     case EFX_VARYBAND:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_VARYBAND][0], &lv[LV_VARYBAND][1], &lv[LV_VARYBAND][2], &lv[LV_VARYBAND][3], &lv[LV_VARYBAND][4],
                &lv[LV_VARYBAND][5], &lv[LV_VARYBAND][6], &lv[LV_VARYBAND][7], &lv[LV_VARYBAND][8], &lv[LV_VARYBAND][9],
-               &lv[LV_VARYBAND][10], &VaryBand_B);
+               &lv[LV_VARYBAND][10], &EFX_Bank_Bypass[EFX_VARYBAND]);
         break;
 
     case EFX_CONVOLOTRON:
@@ -347,7 +347,7 @@ void RKR::putbuf(char *buf, int j)
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
                &lv[LV_CONVOLOTRON][0], &lv[LV_CONVOLOTRON][1], &lv[LV_CONVOLOTRON][2], &lv[LV_CONVOLOTRON][3], &lv[LV_CONVOLOTRON][4],
                &lv[LV_CONVOLOTRON][5], &lv[LV_CONVOLOTRON][6], &lv[LV_CONVOLOTRON][7], &lv[LV_CONVOLOTRON][8], &lv[LV_CONVOLOTRON][9],
-               &lv[LV_CONVOLOTRON][10], &Convol_B, cfilename);
+               &lv[LV_CONVOLOTRON][10], &EFX_Bank_Bypass[EFX_CONVOLOTRON], cfilename);
         strcpy(efx_Convol->Filename, cfilename);
         break;
 
@@ -355,7 +355,7 @@ void RKR::putbuf(char *buf, int j)
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_LOOPER][0], &lv[LV_LOOPER][1], &lv[LV_LOOPER][2], &lv[LV_LOOPER][3], &lv[LV_LOOPER][4],
                &lv[LV_LOOPER][5], &lv[LV_LOOPER][6], &lv[LV_LOOPER][7], &lv[LV_LOOPER][8], &lv[LV_LOOPER][9],
-               &lv[LV_LOOPER][10], &lv[LV_LOOPER][11], &lv[LV_LOOPER][12], &lv[LV_LOOPER][13], &Looper_B);
+               &lv[LV_LOOPER][10], &lv[LV_LOOPER][11], &lv[LV_LOOPER][12], &lv[LV_LOOPER][13], &EFX_Bank_Bypass[EFX_LOOPER]);
         break;
 
     case EFX_MUTROMOJO:
@@ -363,55 +363,55 @@ void RKR::putbuf(char *buf, int j)
                &lv[LV_MUTROMOJO][0], &lv[LV_MUTROMOJO][1], &lv[LV_MUTROMOJO][2], &lv[LV_MUTROMOJO][3], &lv[LV_MUTROMOJO][4],
                &lv[LV_MUTROMOJO][5], &lv[LV_MUTROMOJO][6], &lv[LV_MUTROMOJO][7], &lv[LV_MUTROMOJO][8], &lv[LV_MUTROMOJO][9],
                &lv[LV_MUTROMOJO][10], &lv[LV_MUTROMOJO][11], &lv[LV_MUTROMOJO][12], &lv[LV_MUTROMOJO][13], &lv[LV_MUTROMOJO][14],
-               &lv[LV_MUTROMOJO][15], &lv[LV_MUTROMOJO][16], &lv[LV_MUTROMOJO][17], &MuTroMojo_B);
+               &lv[LV_MUTROMOJO][15], &lv[LV_MUTROMOJO][16], &lv[LV_MUTROMOJO][17], &EFX_Bank_Bypass[EFX_MUTROMOJO]);
         break;
 
     case EFX_ECHOVERSE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_ECHOVERSE][0], &lv[LV_ECHOVERSE][1], &lv[LV_ECHOVERSE][2], &lv[LV_ECHOVERSE][3], &lv[LV_ECHOVERSE][4],
-               &lv[LV_ECHOVERSE][5], &lv[LV_ECHOVERSE][6], &lv[LV_ECHOVERSE][7], &lv[LV_ECHOVERSE][8], &lv[LV_ECHOVERSE][9], &Echoverse_B);
+               &lv[LV_ECHOVERSE][5], &lv[LV_ECHOVERSE][6], &lv[LV_ECHOVERSE][7], &lv[LV_ECHOVERSE][8], &lv[LV_ECHOVERSE][9], &EFX_Bank_Bypass[EFX_ECHOVERSE]);
         break;
 
     case EFX_COILCRAFTER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_COILCRAFTER][0], &lv[LV_COILCRAFTER][1], &lv[LV_COILCRAFTER][2], &lv[LV_COILCRAFTER][3], &lv[LV_COILCRAFTER][4],
-               &lv[LV_COILCRAFTER][5], &lv[LV_COILCRAFTER][6], &lv[LV_COILCRAFTER][7], &lv[LV_COILCRAFTER][8], &CoilCrafter_B);
+               &lv[LV_COILCRAFTER][5], &lv[LV_COILCRAFTER][6], &lv[LV_COILCRAFTER][7], &lv[LV_COILCRAFTER][8], &EFX_Bank_Bypass[EFX_COILCRAFTER]);
         break;
 
     case EFX_SHELFBOOST:
         sscanf(buf, "%d,%d,%d,%d,%d,%d\n",
                &lv[LV_SHELFBOOST][0], &lv[LV_SHELFBOOST][1], &lv[LV_SHELFBOOST][2], &lv[LV_SHELFBOOST][3], &lv[LV_SHELFBOOST][4],
-               &ShelfBoost_B);
+               &EFX_Bank_Bypass[EFX_SHELFBOOST]);
         break;
 
     case EFX_VOCODER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_VOCODER][0], &lv[LV_VOCODER][1], &lv[LV_VOCODER][2], &lv[LV_VOCODER][3], &lv[LV_VOCODER][4],
-               &lv[LV_VOCODER][5], &lv[LV_VOCODER][6], &Vocoder_B);
+               &lv[LV_VOCODER][5], &lv[LV_VOCODER][6], &EFX_Bank_Bypass[EFX_VOCODER]);
         break;
 
     case EFX_SUSTAINER:
         sscanf(buf, "%d,%d,%d\n",
-               &lv[LV_SUSTAINER][0], &lv[LV_SUSTAINER][1], &Sustainer_B);
+               &lv[LV_SUSTAINER][0], &lv[LV_SUSTAINER][1], &EFX_Bank_Bypass[EFX_SUSTAINER]);
         break;
 
     case EFX_SEQUENCE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_SEQUENCE][0], &lv[LV_SEQUENCE][1], &lv[LV_SEQUENCE][2], &lv[LV_SEQUENCE][3], &lv[LV_SEQUENCE][4],
                &lv[LV_SEQUENCE][5], &lv[LV_SEQUENCE][6], &lv[LV_SEQUENCE][7], &lv[LV_SEQUENCE][8], &lv[LV_SEQUENCE][9],
-               &lv[LV_SEQUENCE][10], &lv[LV_SEQUENCE][11], &lv[LV_SEQUENCE][12], &lv[LV_SEQUENCE][13], &lv[LV_SEQUENCE][14], &Sequence_B);
+               &lv[LV_SEQUENCE][10], &lv[LV_SEQUENCE][11], &lv[LV_SEQUENCE][12], &lv[LV_SEQUENCE][13], &lv[LV_SEQUENCE][14], &EFX_Bank_Bypass[EFX_SEQUENCE]);
         break;
 
     case EFX_SHIFTER:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_SHIFTER][0], &lv[LV_SHIFTER][1], &lv[LV_SHIFTER][2], &lv[LV_SHIFTER][3], &lv[LV_SHIFTER][4],
-               &lv[LV_SHIFTER][5], &lv[LV_SHIFTER][6], &lv[LV_SHIFTER][7], &lv[LV_SHIFTER][8], &lv[LV_SHIFTER][9], &Shifter_B);
+               &lv[LV_SHIFTER][5], &lv[LV_SHIFTER][6], &lv[LV_SHIFTER][7], &lv[LV_SHIFTER][8], &lv[LV_SHIFTER][9], &EFX_Bank_Bypass[EFX_SHIFTER]);
         break;
 
     case EFX_STOMPBOX:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_STOMPBOX][0], &lv[LV_STOMPBOX][1], &lv[LV_STOMPBOX][2], &lv[LV_STOMPBOX][3], &lv[LV_STOMPBOX][4],
-               &lv[LV_STOMPBOX][5], &StompBox_B);
+               &lv[LV_STOMPBOX][5], &EFX_Bank_Bypass[EFX_STOMPBOX]);
         break;
 
     case EFX_REVERBTRON:
@@ -421,7 +421,7 @@ void RKR::putbuf(char *buf, int j)
                &lv[LV_REVERBTRON][0], &lv[LV_REVERBTRON][1], &lv[LV_REVERBTRON][2], &lv[LV_REVERBTRON][3], &lv[LV_REVERBTRON][4],
                &lv[LV_REVERBTRON][5], &lv[LV_REVERBTRON][6], &lv[LV_REVERBTRON][7], &lv[LV_REVERBTRON][8], &lv[LV_REVERBTRON][9],
                &lv[LV_REVERBTRON][10], &lv[LV_REVERBTRON][11], &lv[LV_REVERBTRON][12], &lv[LV_REVERBTRON][13], &lv[LV_REVERBTRON][14], &lv[LV_REVERBTRON][15],
-               &Reverbtron_B,
+               &EFX_Bank_Bypass[EFX_REVERBTRON],
                cfilename);
         strcpy(efx_Reverbtron->Filename, cfilename);
         break;
@@ -433,7 +433,7 @@ void RKR::putbuf(char *buf, int j)
                &lv[LV_ECHOTRON][0], &lv[LV_ECHOTRON][1], &lv[LV_ECHOTRON][2], &lv[LV_ECHOTRON][3], &lv[LV_ECHOTRON][4],
                &lv[LV_ECHOTRON][5], &lv[LV_ECHOTRON][6], &lv[LV_ECHOTRON][7], &lv[LV_ECHOTRON][8], &lv[LV_ECHOTRON][9],
                &lv[LV_ECHOTRON][10], &lv[LV_ECHOTRON][11], &lv[LV_ECHOTRON][12], &lv[LV_ECHOTRON][13], &lv[LV_ECHOTRON][14], &lv[LV_ECHOTRON][15],
-               &Echotron_B,
+               &EFX_Bank_Bypass[EFX_ECHOTRON],
                cfilename);
         strcpy(efx_Echotron->Filename, cfilename);
         break;
@@ -442,27 +442,27 @@ void RKR::putbuf(char *buf, int j)
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_STEREOHARM][0], &lv[LV_STEREOHARM][1], &lv[LV_STEREOHARM][2], &lv[LV_STEREOHARM][3], &lv[LV_STEREOHARM][4],
                &lv[LV_STEREOHARM][5], &lv[LV_STEREOHARM][6], &lv[LV_STEREOHARM][7], &lv[LV_STEREOHARM][8], &lv[LV_STEREOHARM][9],
-               &lv[LV_STEREOHARM][10], &lv[LV_STEREOHARM][11], &StereoHarm_B);
+               &lv[LV_STEREOHARM][10], &lv[LV_STEREOHARM][11], &EFX_Bank_Bypass[EFX_STEREOHARM]);
         break;
 
     case EFX_COMPBAND:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_COMPBAND][0], &lv[LV_COMPBAND][1], &lv[LV_COMPBAND][2], &lv[LV_COMPBAND][3], &lv[LV_COMPBAND][4],
                &lv[LV_COMPBAND][5], &lv[LV_COMPBAND][6], &lv[LV_COMPBAND][7], &lv[LV_COMPBAND][8], &lv[LV_COMPBAND][9],
-               &lv[LV_COMPBAND][10], &lv[LV_COMPBAND][11], &lv[LV_COMPBAND][12], &CompBand_B);
+               &lv[LV_COMPBAND][10], &lv[LV_COMPBAND][11], &lv[LV_COMPBAND][12], &EFX_Bank_Bypass[EFX_COMPBAND]);
         break;
 
     case EFX_OPTICALTREM:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_OPTICALTREM][0], &lv[LV_OPTICALTREM][1], &lv[LV_OPTICALTREM][2], &lv[LV_OPTICALTREM][3], &lv[LV_OPTICALTREM][4],
-               &lv[LV_OPTICALTREM][5], &Opticaltrem_B);
+               &lv[LV_OPTICALTREM][5], &EFX_Bank_Bypass[EFX_OPTICALTREM]);
         break;
 
     case EFX_VIBE:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[LV_VIBE][0], &lv[LV_VIBE][1], &lv[LV_VIBE][2], &lv[LV_VIBE][3], &lv[LV_VIBE][4],
                &lv[LV_VIBE][5], &lv[LV_VIBE][6], &lv[LV_VIBE][7], &lv[LV_VIBE][8], &lv[LV_VIBE][9], &lv[LV_VIBE][10],
-               &Vibe_B);
+               &EFX_Bank_Bypass[EFX_VIBE]);
         break;
 
     case EFX_INFINITY:
@@ -470,7 +470,7 @@ void RKR::putbuf(char *buf, int j)
                &lv[LV_INFINITY][0], &lv[LV_INFINITY][1], &lv[LV_INFINITY][2], &lv[LV_INFINITY][3], &lv[LV_INFINITY][4],
                &lv[LV_INFINITY][5], &lv[LV_INFINITY][6], &lv[LV_INFINITY][7], &lv[LV_INFINITY][8], &lv[LV_INFINITY][9],
                &lv[LV_INFINITY][10], &lv[LV_INFINITY][11], &lv[LV_INFINITY][12], &lv[LV_INFINITY][13], &lv[LV_INFINITY][14],
-               &lv[LV_INFINITY][15], &lv[LV_INFINITY][16], &lv[LV_INFINITY][17], &Infinity_B);
+               &lv[LV_INFINITY][15], &lv[LV_INFINITY][16], &lv[LV_INFINITY][17], &EFX_Bank_Bypass[EFX_INFINITY]);
         break;
     }
 
@@ -1295,7 +1295,7 @@ RKR::Actualizar_Audio()
                 efx_EQ1->changepar(i * 5 + 13, lv[LV_EQ][11]);
             }
             efx_EQ1->changepar(EQ_Gain, lv[LV_EQ][10]);
-            EFX_Bypass[EFX_EQ] = EQ1_B;
+            EFX_Bypass[EFX_EQ] = EFX_Bank_Bypass[EFX_EQ];
             break;
 
         case EFX_COMPRESSOR:
@@ -1303,7 +1303,7 @@ RKR::Actualizar_Audio()
             efx_Compressor->cleanup();
             for (i = 0; i < C_COMPRESS_PARAMETERS; i++)
                 efx_Compressor->changepar(i, lv[LV_COMPRESSOR][i]);
-            EFX_Bypass[EFX_COMPRESSOR] = Compressor_B;
+            EFX_Bypass[EFX_COMPRESSOR] = EFX_Bank_Bypass[EFX_COMPRESSOR];
             break;
 
         case EFX_DISTORTION:
@@ -1311,7 +1311,7 @@ RKR::Actualizar_Audio()
             efx_Distorsion->cleanup();
             for (i = 0; i < C_DIST_PARAMETERS; i++)
                 efx_Distorsion->changepar(i, lv[LV_DISTORTION][i]);
-            EFX_Bypass[EFX_DISTORTION] = Distorsion_B;
+            EFX_Bypass[EFX_DISTORTION] = EFX_Bank_Bypass[EFX_DISTORTION];
             break;
 
         case EFX_OVERDRIVE:
@@ -1319,7 +1319,7 @@ RKR::Actualizar_Audio()
             efx_Overdrive->cleanup();
             for (i = 0; i < C_OVERDRIVE_PARAMETERS; i++)
                 efx_Overdrive->changepar(i, lv[LV_OVERDRIVE][i]);
-            EFX_Bypass[EFX_OVERDRIVE] = Overdrive_B;
+            EFX_Bypass[EFX_OVERDRIVE] = EFX_Bank_Bypass[EFX_OVERDRIVE];
             break;
 
         case EFX_ECHO:
@@ -1327,7 +1327,7 @@ RKR::Actualizar_Audio()
             efx_Echo->cleanup();
             for (i = 0; i < C_ECHO_PARAMETERS; i++)
                 efx_Echo->changepar(i, lv[LV_ECHO][i]);
-            EFX_Bypass[EFX_ECHO] = Echo_B;
+            EFX_Bypass[EFX_ECHO] = EFX_Bank_Bypass[EFX_ECHO];
             break;
 
         case EFX_CHORUS:
@@ -1335,7 +1335,7 @@ RKR::Actualizar_Audio()
             efx_Chorus->cleanup();
             for (i = 0; i < C_CHORUS_PARAMETERS; i++)
                 efx_Chorus->changepar(i, lv[LV_CHORUS][i]);
-            EFX_Bypass[EFX_CHORUS] = Chorus_B;
+            EFX_Bypass[EFX_CHORUS] = EFX_Bank_Bypass[EFX_CHORUS];
             break;
 
         case EFX_PHASER:
@@ -1343,7 +1343,7 @@ RKR::Actualizar_Audio()
             efx_Phaser->cleanup();
             for (i = 0; i < C_PHASER_PARAMETERS; i++)
                 efx_Phaser->changepar(i, lv[LV_PHASER][i]);
-            EFX_Bypass[EFX_PHASER] = Phaser_B;
+            EFX_Bypass[EFX_PHASER] = EFX_Bank_Bypass[EFX_PHASER];
             break;
 
         case EFX_FLANGER:
@@ -1351,7 +1351,7 @@ RKR::Actualizar_Audio()
             efx_Flanger->cleanup();
             for (i = 0; i < C_FLANGER_PARAMETERS; i++)
                 efx_Flanger->changepar(i, lv[LV_FLANGER][i]);
-            EFX_Bypass[EFX_FLANGER] = Flanger_B;
+            EFX_Bypass[EFX_FLANGER] = EFX_Bank_Bypass[EFX_FLANGER];
             break;
 
         case EFX_REVERB:
@@ -1359,7 +1359,7 @@ RKR::Actualizar_Audio()
             efx_Rev->cleanup();
             for (i = 0; i < C_REVERB_PARAMETERS; i++)
                 efx_Rev->changepar(i, lv[LV_REVERB][i]);
-            EFX_Bypass[EFX_REVERB] = Reverb_B;
+            EFX_Bypass[EFX_REVERB] = EFX_Bank_Bypass[EFX_REVERB];
             break;
 
         case EFX_PARAMETRIC:
@@ -1372,7 +1372,7 @@ RKR::Actualizar_Audio()
                 efx_EQ2->changepar(i * 5 + 13, lv[LV_PARAMETRIC][2 + i * 3]);
             }
             efx_EQ2->changepar(Parametric_Gain, lv[LV_PARAMETRIC][9]);
-            EFX_Bypass[EFX_PARAMETRIC] = EQ2_B;
+            EFX_Bypass[EFX_PARAMETRIC] = EFX_Bank_Bypass[EFX_PARAMETRIC];
             break;
 
         case EFX_WAHWAH:
@@ -1380,7 +1380,7 @@ RKR::Actualizar_Audio()
             efx_WahWah->cleanup();
             for (i = 0; i < C_WAHWAH_PARAMETERS; i++)
                 efx_WahWah->changepar(i, lv[LV_WAHWAH][i]);
-            EFX_Bypass[EFX_WAHWAH] = WahWah_B;
+            EFX_Bypass[EFX_WAHWAH] = EFX_Bank_Bypass[EFX_WAHWAH];
             break;
 
         case EFX_ALIENWAH:
@@ -1388,7 +1388,7 @@ RKR::Actualizar_Audio()
             efx_Alienwah->cleanup();
             for (i = 0; i < C_ALIENWAH_PARAMETERS; i++)
                 efx_Alienwah->changepar(i, lv[LV_ALIENWAH][i]);
-            EFX_Bypass[EFX_ALIENWAH] = Alienwah_B;
+            EFX_Bypass[EFX_ALIENWAH] = EFX_Bank_Bypass[EFX_ALIENWAH];
             break;
 
         case EFX_CABINET:
@@ -1396,7 +1396,7 @@ RKR::Actualizar_Audio()
             efx_Cabinet->cleanup();
             efx_Cabinet->setpreset(lv[LV_CABINET][0]);
             efx_Cabinet->changepar(Cabinet_Gain, lv[LV_CABINET][1]);
-            EFX_Bypass[EFX_CABINET] = Cabinet_B;
+            EFX_Bypass[EFX_CABINET] = EFX_Bank_Bypass[EFX_CABINET];
             break;
 
         case EFX_PAN:
@@ -1404,7 +1404,7 @@ RKR::Actualizar_Audio()
             efx_Pan->cleanup();
             for (i = 0; i < C_PAN_PARAMETERS; i++)
                 efx_Pan->changepar(i, lv[LV_PAN][i]);
-            EFX_Bypass[EFX_PAN] = Pan_B;
+            EFX_Bypass[EFX_PAN] = EFX_Bank_Bypass[EFX_PAN];
             break;
 
         case EFX_HARMONIZER:
@@ -1412,7 +1412,7 @@ RKR::Actualizar_Audio()
             efx_Har->cleanup();
             for (i = 0; i < C_HARM_PARAMETERS; i++)
                 efx_Har->changepar(i, lv[LV_HARMONIZER][i]);
-            EFX_Bypass[EFX_HARMONIZER] = Harmonizer_B;
+            EFX_Bypass[EFX_HARMONIZER] = EFX_Bank_Bypass[EFX_HARMONIZER];
             break;
 
         case EFX_MUSICAL_DELAY:
@@ -1420,7 +1420,7 @@ RKR::Actualizar_Audio()
             efx_MusDelay->cleanup();
             for (i = 0; i < C_MUSIC_PARAMETERS; i++)
                 efx_MusDelay->changepar(i, lv[LV_MUSICAL_DELAY][i]);
-            EFX_Bypass[EFX_MUSICAL_DELAY] = MusDelay_B;
+            EFX_Bypass[EFX_MUSICAL_DELAY] = EFX_Bank_Bypass[EFX_MUSICAL_DELAY];
             break;
 
         case EFX_NOISEGATE:
@@ -1428,7 +1428,7 @@ RKR::Actualizar_Audio()
             efx_Gate->cleanup();
             for (i = 0; i < C_GATE_PARAMETERS; i++)
                 efx_Gate->changepar(i, lv[LV_NOISEGATE][i]);
-            EFX_Bypass[EFX_NOISEGATE] = Gate_B;
+            EFX_Bypass[EFX_NOISEGATE] = EFX_Bank_Bypass[EFX_NOISEGATE];
             break;
 
         case EFX_DERELICT:
@@ -1436,7 +1436,7 @@ RKR::Actualizar_Audio()
             efx_Derelict->cleanup();
             for (i = 0; i < C_DERE_PARAMETERS; i++)
                 efx_Derelict->changepar(i, lv[LV_DERELICT][i]);
-            EFX_Bypass[EFX_DERELICT] = Derelict_B;
+            EFX_Bypass[EFX_DERELICT] = EFX_Bank_Bypass[EFX_DERELICT];
             break;
 
         case EFX_ANALOG_PHASER:
@@ -1444,7 +1444,7 @@ RKR::Actualizar_Audio()
             efx_APhaser->cleanup();
             for (i = 0; i < C_APHASER_PARAMETERS; i++)
                 efx_APhaser->changepar(i, lv[LV_ANALOG_PHASER][i]);
-            EFX_Bypass[EFX_ANALOG_PHASER] = APhaser_B;
+            EFX_Bypass[EFX_ANALOG_PHASER] = EFX_Bank_Bypass[EFX_ANALOG_PHASER];
             break;
 
         case EFX_VALVE:
@@ -1452,7 +1452,7 @@ RKR::Actualizar_Audio()
             efx_Valve->cleanup();
             for (i = 0; i < C_VALVE_PARAMETERS; i++)
                 efx_Valve->changepar(i, lv[LV_VALVE][i]);
-            EFX_Bypass[EFX_VALVE] = Valve_B;
+            EFX_Bypass[EFX_VALVE] = EFX_Bank_Bypass[EFX_VALVE];
             break;
 
         case EFX_DUAL_FLANGE:
@@ -1460,7 +1460,7 @@ RKR::Actualizar_Audio()
             efx_DFlange->cleanup();
             for (i = 0; i < C_DFLANGE_PARAMETERS; i++)
                 efx_DFlange->changepar(i, lv[LV_DUAL_FLANGE][i]);
-            EFX_Bypass[EFX_DUAL_FLANGE] = DFlange_B;
+            EFX_Bypass[EFX_DUAL_FLANGE] = EFX_Bank_Bypass[EFX_DUAL_FLANGE];
             break;
 
         case EFX_RING:
@@ -1468,7 +1468,7 @@ RKR::Actualizar_Audio()
             efx_Ring->cleanup();
             for (i = 0; i < C_RING_PARAMETERS; i++)
                 efx_Ring->changepar(i, lv[LV_RING][i]);
-            EFX_Bypass[EFX_RING] = Ring_B;
+            EFX_Bypass[EFX_RING] = EFX_Bank_Bypass[EFX_RING];
             break;
 
         case EFX_EXCITER:
@@ -1476,7 +1476,7 @@ RKR::Actualizar_Audio()
             efx_Exciter->cleanup();
             for (i = 0; i < C_EXCITER_PARAMETERS; i++)
                 efx_Exciter->changepar(i, lv[LV_EXCITER][i]);
-            EFX_Bypass[EFX_EXCITER] = Exciter_B;
+            EFX_Bypass[EFX_EXCITER] = EFX_Bank_Bypass[EFX_EXCITER];
             break;
 
         case EFX_DISTBAND:
@@ -1484,7 +1484,7 @@ RKR::Actualizar_Audio()
             efx_DistBand->cleanup();
             for (i = 0; i < C_DBAND_PARAMETERS; i++)
                 efx_DistBand->changepar(i, lv[LV_DISTBAND][i]);
-            EFX_Bypass[EFX_DISTBAND] = DistBand_B;
+            EFX_Bypass[EFX_DISTBAND] = EFX_Bank_Bypass[EFX_DISTBAND];
             break;
 
         case EFX_ARPIE:
@@ -1492,7 +1492,7 @@ RKR::Actualizar_Audio()
             efx_Arpie->cleanup();
             for (i = 0; i < C_ARPIE_PARAMETERS; i++)
                 efx_Arpie->changepar(i, lv[LV_ARPIE][i]);
-            EFX_Bypass[EFX_ARPIE] = Arpie_B;
+            EFX_Bypass[EFX_ARPIE] = EFX_Bank_Bypass[EFX_ARPIE];
             break;
 
         case EFX_EXPANDER:
@@ -1500,7 +1500,7 @@ RKR::Actualizar_Audio()
             efx_Expander->cleanup();
             for (i = 0; i < C_EXPANDER_PARAMETERS; i++)
                 efx_Expander->changepar(i, lv[LV_EXPANDER][i]);
-            EFX_Bypass[EFX_EXPANDER] = Expander_B;
+            EFX_Bypass[EFX_EXPANDER] = EFX_Bank_Bypass[EFX_EXPANDER];
             break;
 
         case EFX_SHUFFLE:
@@ -1508,7 +1508,7 @@ RKR::Actualizar_Audio()
             efx_Shuffle->cleanup();
             for (i = 0; i < C_SHUFFLE_PARAMETERS; i++)
                 efx_Shuffle->changepar(i, lv[LV_SHUFFLE][i]);
-            EFX_Bypass[EFX_SHUFFLE] = Shuffle_B;
+            EFX_Bypass[EFX_SHUFFLE] = EFX_Bank_Bypass[EFX_SHUFFLE];
             break;
 
         case EFX_SYNTHFILTER:
@@ -1516,7 +1516,7 @@ RKR::Actualizar_Audio()
             efx_Synthfilter->cleanup();
             for (i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
                 efx_Synthfilter->changepar(i, lv[LV_SYNTHFILTER][i]);
-            EFX_Bypass[EFX_SYNTHFILTER] = Synthfilter_B;
+            EFX_Bypass[EFX_SYNTHFILTER] = EFX_Bank_Bypass[EFX_SYNTHFILTER];
             break;
 
         case EFX_VARYBAND:
@@ -1524,7 +1524,7 @@ RKR::Actualizar_Audio()
             efx_VaryBand->cleanup();
             for (i = 0; i < C_VARYBAND_PARAMETERS; i++)
                 efx_VaryBand->changepar(i, lv[LV_VARYBAND][i]);
-            EFX_Bypass[EFX_VARYBAND] = VaryBand_B;
+            EFX_Bypass[EFX_VARYBAND] = EFX_Bank_Bypass[EFX_VARYBAND];
             break;
 
         case EFX_CONVOLOTRON:
@@ -1532,7 +1532,7 @@ RKR::Actualizar_Audio()
             efx_Convol->cleanup();
             for (i = 0; i < C_CONVO_PARAMETERS; i++)
                 efx_Convol->changepar(i, lv[LV_CONVOLOTRON][i]);
-            EFX_Bypass[EFX_CONVOLOTRON] = Convol_B;
+            EFX_Bypass[EFX_CONVOLOTRON] = EFX_Bank_Bypass[EFX_CONVOLOTRON];
             break;
 
         case EFX_LOOPER:
@@ -1540,7 +1540,7 @@ RKR::Actualizar_Audio()
             // efx_Looper->cleanup();
             for (i = 0; i < C_LOOPER_PARAMETERS; i++)
                 efx_Looper->changepar(i, lv[LV_LOOPER][i]);
-            EFX_Bypass[EFX_LOOPER] = Looper_B;
+            EFX_Bypass[EFX_LOOPER] = EFX_Bank_Bypass[EFX_LOOPER];
             break;
 
         case EFX_MUTROMOJO:
@@ -1548,7 +1548,7 @@ RKR::Actualizar_Audio()
             efx_MuTroMojo->cleanup();
             for (i = 0; i < C_MUTRO_PARAMETERS; i++)
                 efx_MuTroMojo->changepar(i, lv[LV_MUTROMOJO][i]);
-            EFX_Bypass[EFX_MUTROMOJO] = MuTroMojo_B;
+            EFX_Bypass[EFX_MUTROMOJO] = EFX_Bank_Bypass[EFX_MUTROMOJO];
             break;
 
         case EFX_ECHOVERSE:
@@ -1556,7 +1556,7 @@ RKR::Actualizar_Audio()
             efx_Echoverse->cleanup();
             for (i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
                 efx_Echoverse->changepar(i, lv[LV_ECHOVERSE][i]);
-            EFX_Bypass[EFX_ECHOVERSE] = Echoverse_B;
+            EFX_Bypass[EFX_ECHOVERSE] = EFX_Bank_Bypass[EFX_ECHOVERSE];
             break;
 
         case EFX_COILCRAFTER:
@@ -1564,7 +1564,7 @@ RKR::Actualizar_Audio()
             efx_CoilCrafter->cleanup();
             for (i = 0; i < C_COIL_PARAMETERS; i++)
                 efx_CoilCrafter->changepar(i, lv[LV_COILCRAFTER][i]);
-            EFX_Bypass[EFX_COILCRAFTER] = CoilCrafter_B;
+            EFX_Bypass[EFX_COILCRAFTER] = EFX_Bank_Bypass[EFX_COILCRAFTER];
             break;
 
         case EFX_SHELFBOOST:
@@ -1572,7 +1572,7 @@ RKR::Actualizar_Audio()
             efx_ShelfBoost->cleanup();
             for (i = 0; i < C_SHELF_PARAMETERS; i++)
                 efx_ShelfBoost->changepar(i, lv[LV_SHELFBOOST][i]);
-            EFX_Bypass[EFX_SHELFBOOST] = ShelfBoost_B;
+            EFX_Bypass[EFX_SHELFBOOST] = EFX_Bank_Bypass[EFX_SHELFBOOST];
             break;
 
         case EFX_VOCODER:
@@ -1580,7 +1580,7 @@ RKR::Actualizar_Audio()
             efx_Vocoder->cleanup();
             for (i = 0; i < C_VOCODER_PARAMETERS; i++)
                 efx_Vocoder->changepar(i, lv[LV_VOCODER][i]);
-            EFX_Bypass[EFX_VOCODER] = Vocoder_B;
+            EFX_Bypass[EFX_VOCODER] = EFX_Bank_Bypass[EFX_VOCODER];
             break;
 
         case EFX_SUSTAINER:
@@ -1588,7 +1588,7 @@ RKR::Actualizar_Audio()
             efx_Sustainer->cleanup();
             for (i = 0; i < C_SUSTAIN_PARAMETERS; i++)
                 efx_Sustainer->changepar(i, lv[LV_SUSTAINER][i]);
-            EFX_Bypass[EFX_SUSTAINER] = Sustainer_B;
+            EFX_Bypass[EFX_SUSTAINER] = EFX_Bank_Bypass[EFX_SUSTAINER];
             break;
 
         case EFX_SEQUENCE:
@@ -1596,7 +1596,7 @@ RKR::Actualizar_Audio()
             efx_Sequence->cleanup();
             for (i = 0; i < C_SEQUENCE_PARAMETERS; i++)
                 efx_Sequence->changepar(i, lv[LV_SEQUENCE][i]);
-            EFX_Bypass[EFX_SEQUENCE] = Sequence_B;
+            EFX_Bypass[EFX_SEQUENCE] = EFX_Bank_Bypass[EFX_SEQUENCE];
             break;
 
         case EFX_SHIFTER:
@@ -1604,7 +1604,7 @@ RKR::Actualizar_Audio()
             efx_Shifter->cleanup();
             for (i = 0; i < C_SHIFTER_PARAMETERS; i++)
                 efx_Shifter->changepar(i, lv[LV_SHIFTER][i]);
-            EFX_Bypass[EFX_SHIFTER] = Shifter_B;
+            EFX_Bypass[EFX_SHIFTER] = EFX_Bank_Bypass[EFX_SHIFTER];
             break;
 
         case EFX_STOMPBOX:
@@ -1612,7 +1612,7 @@ RKR::Actualizar_Audio()
             efx_StompBox->cleanup();
             for (i = 0; i < C_STOMP_PARAMETERS; i++)
                 efx_StompBox->changepar(i, lv[LV_STOMPBOX][i]);
-            EFX_Bypass[EFX_STOMPBOX] = StompBox_B;
+            EFX_Bypass[EFX_STOMPBOX] = EFX_Bank_Bypass[EFX_STOMPBOX];
             break;
 
         case EFX_REVERBTRON:
@@ -1620,7 +1620,7 @@ RKR::Actualizar_Audio()
             efx_Reverbtron->cleanup();
             for (i = 0; i < C_REVTRON_PARAMETERS; i++)
                 efx_Reverbtron->changepar(i, lv[LV_REVERBTRON][i]);
-            EFX_Bypass[EFX_REVERBTRON] = Reverbtron_B;
+            EFX_Bypass[EFX_REVERBTRON] = EFX_Bank_Bypass[EFX_REVERBTRON];
             break;
 
         case EFX_ECHOTRON:
@@ -1628,7 +1628,7 @@ RKR::Actualizar_Audio()
             efx_Echotron->cleanup();
             for (i = 0; i < C_ECHOTRON_PARAMETERS; i++)
                 efx_Echotron->changepar(i, lv[LV_ECHOTRON][i]);
-            EFX_Bypass[EFX_ECHOTRON] = Echotron_B;
+            EFX_Bypass[EFX_ECHOTRON] = EFX_Bank_Bypass[EFX_ECHOTRON];
             break;
 
         case EFX_STEREOHARM:
@@ -1637,7 +1637,7 @@ RKR::Actualizar_Audio()
             for (i = 0; i < C_SHARM_PARAMETERS; i++)
                 efx_StereoHarm->changepar(i, lv[LV_STEREOHARM][i]);
             if (lv[LV_STEREOHARM][10]) RC_Stereo_Harm->cleanup();
-            EFX_Bypass[EFX_STEREOHARM] = StereoHarm_B;
+            EFX_Bypass[EFX_STEREOHARM] = EFX_Bank_Bypass[EFX_STEREOHARM];
             break;
 
         case EFX_COMPBAND:
@@ -1645,7 +1645,7 @@ RKR::Actualizar_Audio()
             efx_CompBand->cleanup();
             for (i = 0; i < C_COMPBAND_PARAMETERS; i++)
                 efx_CompBand->changepar(i, lv[LV_COMPBAND][i]);
-            EFX_Bypass[EFX_COMPBAND] = CompBand_B;
+            EFX_Bypass[EFX_COMPBAND] = EFX_Bank_Bypass[EFX_COMPBAND];
             break;
 
         case EFX_OPTICALTREM:
@@ -1653,7 +1653,7 @@ RKR::Actualizar_Audio()
             efx_Opticaltrem->cleanup();
             for (i = 0; i < C_OPTICAL_PARAMETERS; i++)
                 efx_Opticaltrem->changepar(i, lv[LV_OPTICALTREM][i]);
-            EFX_Bypass[EFX_OPTICALTREM] = Opticaltrem_B;
+            EFX_Bypass[EFX_OPTICALTREM] = EFX_Bank_Bypass[EFX_OPTICALTREM];
             break;
 
         case EFX_VIBE:
@@ -1661,7 +1661,7 @@ RKR::Actualizar_Audio()
             efx_Vibe->cleanup();
             for (i = 0; i < C_VIBE_PARAMETERS; i++)
                 efx_Vibe->changepar(i, lv[LV_VIBE][i]);
-            EFX_Bypass[EFX_VIBE] = Vibe_B;
+            EFX_Bypass[EFX_VIBE] = EFX_Bank_Bypass[EFX_VIBE];
             break;
 
         case EFX_INFINITY:
@@ -1669,7 +1669,7 @@ RKR::Actualizar_Audio()
             efx_Infinity->cleanup();
             for (i = 0; i < C_INFINITY_PARAMETERS; i++)
                 efx_Infinity->changepar(i, lv[LV_INFINITY][i]);
-            EFX_Bypass[EFX_INFINITY] = Infinity_B;
+            EFX_Bypass[EFX_INFINITY] = EFX_Bank_Bypass[EFX_INFINITY];
             break;
 
         }
@@ -1890,53 +1890,53 @@ RKR::New()
         efx_order[k] = presets_default[10][k]; // magic number 10 is order
     }
 
-    Reverb_B = 0;
-    Echo_B = 0;
-    Chorus_B = 0;
-    Flanger_B = 0;
-    Phaser_B = 0;
-    Overdrive_B = 0;
-    Distorsion_B = 0;
-    EQ1_B = 0;
-    EQ2_B = 0;
-    Compressor_B = 0;
-    WahWah_B = 0;
-    Alienwah_B = 0;
-    Cabinet_B = 0;
-    Pan_B = 0;
-    Harmonizer_B = 0;
-    MusDelay_B = 0;
-    Gate_B = 0;
-    Derelict_B = 0;
-    APhaser_B = 0;
-    Valve_B = 0;
-    DFlange_B = 0;
-    Ring_B = 0;
-    Exciter_B = 0;
-    DistBand_B = 0;
-    Arpie_B = 0;
-    Expander_B = 0;
-    Shuffle_B = 0;
-    Synthfilter_B = 0;
-    VaryBand_B = 0;
-    Convol_B = 0;
-    Looper_B = 0;
-    MuTroMojo_B = 0;
-    Echoverse_B = 0;
-    CoilCrafter_B = 0;
-    ShelfBoost_B = 0;
-    Vocoder_B = 0;
-    Sustainer_B = 0;
-    Sequence_B = 0;
-    Shifter_B = 0;
-    StompBox_B = 0;
-    Reverbtron_B = 0;
-    Echotron_B = 0;
-    StereoHarm_B = 0;
-    CompBand_B = 0;
-    Opticaltrem_B = 0;
-    Vibe_B = 0;
-    Infinity_B = 0;
+    EFX_Bank_Bypass[EFX_REVERB] = 0;
+    EFX_Bank_Bypass[EFX_ECHO] = 0;
+    EFX_Bank_Bypass[EFX_CHORUS] = 0;
+    EFX_Bank_Bypass[EFX_FLANGER] = 0;
+    EFX_Bank_Bypass[EFX_PHASER] = 0;
+    EFX_Bank_Bypass[EFX_OVERDRIVE] = 0;
+    EFX_Bank_Bypass[EFX_DISTORTION] = 0;
+    EFX_Bank_Bypass[EFX_EQ] = 0;
+    EFX_Bank_Bypass[EFX_PARAMETRIC] = 0;
+    EFX_Bank_Bypass[EFX_COMPRESSOR] = 0;
+    EFX_Bank_Bypass[EFX_WAHWAH] = 0;
+    EFX_Bank_Bypass[EFX_ALIENWAH] = 0;
+    EFX_Bank_Bypass[EFX_CABINET] = 0;
+    EFX_Bank_Bypass[EFX_PAN] = 0;
+    EFX_Bank_Bypass[EFX_HARMONIZER] = 0;
+    EFX_Bank_Bypass[EFX_MUSICAL_DELAY] = 0;
+    EFX_Bank_Bypass[EFX_NOISEGATE] = 0;
+    EFX_Bank_Bypass[EFX_DERELICT] = 0;
+    EFX_Bank_Bypass[EFX_ANALOG_PHASER] = 0;
+    EFX_Bank_Bypass[EFX_VALVE] = 0;
+    EFX_Bank_Bypass[EFX_DUAL_FLANGE] = 0;
+    EFX_Bank_Bypass[EFX_RING] = 0;
+    EFX_Bank_Bypass[EFX_EXCITER] = 0;
+    EFX_Bank_Bypass[EFX_DISTBAND] = 0;
+    EFX_Bank_Bypass[EFX_ARPIE] = 0;
+    EFX_Bank_Bypass[EFX_EXPANDER] = 0;
+    EFX_Bank_Bypass[EFX_SHUFFLE] = 0;
+    EFX_Bank_Bypass[EFX_SYNTHFILTER] = 0;
+    EFX_Bank_Bypass[EFX_VARYBAND] = 0;
+    EFX_Bank_Bypass[EFX_CONVOLOTRON] = 0;
+    EFX_Bank_Bypass[EFX_LOOPER] = 0;
+    EFX_Bank_Bypass[EFX_MUTROMOJO] = 0;
+    EFX_Bank_Bypass[EFX_ECHOVERSE] = 0;
+    EFX_Bank_Bypass[EFX_COILCRAFTER] = 0;
+    EFX_Bank_Bypass[EFX_SHELFBOOST] = 0;
+    EFX_Bank_Bypass[EFX_VOCODER] = 0;
+    EFX_Bank_Bypass[EFX_SUSTAINER] = 0;
+    EFX_Bank_Bypass[EFX_SEQUENCE] = 0;
+    EFX_Bank_Bypass[EFX_SHIFTER] = 0;
+    EFX_Bank_Bypass[EFX_STOMPBOX] = 0;
+    EFX_Bank_Bypass[EFX_REVERBTRON] = 0;
+    EFX_Bank_Bypass[EFX_ECHOTRON] = 0;
+    EFX_Bank_Bypass[EFX_STEREOHARM] = 0;
+    EFX_Bank_Bypass[EFX_COMPBAND] = 0;
+    EFX_Bank_Bypass[EFX_OPTICALTREM] = 0;
+    EFX_Bank_Bypass[EFX_VIBE] = 0;
+    EFX_Bank_Bypass[EFX_INFINITY] = 0;
 
     Bypass_B = 0;
 
@@ -2003,53 +2003,53 @@ RKR::Bank_to_Preset(int i)
         efx_order[k] = Bank[i].lv[LV_ORDER][k];
     }
 
-    Reverb_B = Bank[i].lv[LV_REVERB][C_LV_BYPASS];
-    Echo_B = Bank[i].lv[LV_ECHO][C_LV_BYPASS];
-    Chorus_B = Bank[i].lv[LV_CHORUS][C_LV_BYPASS];
-    Flanger_B = Bank[i].lv[LV_FLANGER][C_LV_BYPASS];
-    Phaser_B = Bank[i].lv[LV_PHASER][C_LV_BYPASS];
-    Overdrive_B = Bank[i].lv[LV_OVERDRIVE][C_LV_BYPASS];
-    Distorsion_B = Bank[i].lv[LV_DISTORTION][C_LV_BYPASS];
-    EQ1_B = Bank[i].lv[LV_EQ][C_LV_BYPASS];
-    EQ2_B = Bank[i].lv[LV_PARAMETRIC][C_LV_BYPASS];
-    Compressor_B = Bank[i].lv[LV_COMPRESSOR][C_LV_BYPASS];
-    WahWah_B = Bank[i].lv[LV_WAHWAH][C_LV_BYPASS];
-    Alienwah_B = Bank[i].lv[LV_ALIENWAH][C_LV_BYPASS];
-    Cabinet_B = Bank[i].lv[LV_CABINET][C_LV_BYPASS];
-    Pan_B = Bank[i].lv[LV_PAN][C_LV_BYPASS];
-    Harmonizer_B = Bank[i].lv[LV_HARMONIZER][C_LV_BYPASS];
-    MusDelay_B = Bank[i].lv[LV_MUSICAL_DELAY][C_LV_BYPASS];
-    Gate_B = Bank[i].lv[LV_NOISEGATE][C_LV_BYPASS];
-    Derelict_B = Bank[i].lv[LV_DERELICT][C_LV_BYPASS];
-    APhaser_B = Bank[i].lv[LV_ANALOG_PHASER][C_LV_BYPASS];
-    Valve_B = Bank[i].lv[LV_VALVE][C_LV_BYPASS];
-    DFlange_B = Bank[i].lv[LV_DUAL_FLANGE][C_LV_BYPASS];
-    Ring_B = Bank[i].lv[LV_RING][C_LV_BYPASS];
-    Exciter_B = Bank[i].lv[LV_EXCITER][C_LV_BYPASS];
-    DistBand_B = Bank[i].lv[LV_DISTBAND][C_LV_BYPASS];
-    Arpie_B = Bank[i].lv[LV_ARPIE][C_LV_BYPASS];
-    Expander_B = Bank[i].lv[LV_EXPANDER][C_LV_BYPASS];
-    Shuffle_B = Bank[i].lv[LV_SHUFFLE][C_LV_BYPASS];
-    Synthfilter_B = Bank[i].lv[LV_SYNTHFILTER][C_LV_BYPASS];
-    VaryBand_B = Bank[i].lv[LV_VARYBAND][C_LV_BYPASS];
-    Convol_B = Bank[i].lv[LV_CONVOLOTRON][C_LV_BYPASS];
-    Looper_B = Bank[i].lv[LV_LOOPER][C_LV_BYPASS];
-    MuTroMojo_B = Bank[i].lv[LV_MUTROMOJO][C_LV_BYPASS];
-    Echoverse_B = Bank[i].lv[LV_ECHOVERSE][C_LV_BYPASS];
-    CoilCrafter_B = Bank[i].lv[LV_COILCRAFTER][C_LV_BYPASS];
-    ShelfBoost_B = Bank[i].lv[LV_SHELFBOOST][C_LV_BYPASS];
-    Vocoder_B = Bank[i].lv[LV_VOCODER][C_LV_BYPASS];
-    Sustainer_B = Bank[i].lv[LV_SUSTAINER][C_LV_BYPASS];
-    Sequence_B = Bank[i].lv[LV_SEQUENCE][C_LV_BYPASS];
-    Shifter_B = Bank[i].lv[LV_SHIFTER][C_LV_BYPASS];
-    StompBox_B = Bank[i].lv[LV_STOMPBOX][C_LV_BYPASS];
-    Reverbtron_B = Bank[i].lv[LV_REVERBTRON][C_LV_BYPASS];
-    Echotron_B = Bank[i].lv[LV_ECHOTRON][C_LV_BYPASS];
-    StereoHarm_B = Bank[i].lv[LV_STEREOHARM][C_LV_BYPASS];
-    CompBand_B = Bank[i].lv[LV_COMPBAND][C_LV_BYPASS];
-    Opticaltrem_B = Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS];
-    Vibe_B = Bank[i].lv[LV_VIBE][C_LV_BYPASS];
-    Infinity_B = Bank[i].lv[LV_INFINITY][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_REVERB] = Bank[i].lv[LV_REVERB][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_ECHO] = Bank[i].lv[LV_ECHO][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_CHORUS] = Bank[i].lv[LV_CHORUS][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_FLANGER] = Bank[i].lv[LV_FLANGER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_PHASER] = Bank[i].lv[LV_PHASER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_OVERDRIVE] = Bank[i].lv[LV_OVERDRIVE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_DISTORTION] = Bank[i].lv[LV_DISTORTION][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_EQ] = Bank[i].lv[LV_EQ][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_PARAMETRIC] = Bank[i].lv[LV_PARAMETRIC][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_COMPRESSOR] = Bank[i].lv[LV_COMPRESSOR][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_WAHWAH] = Bank[i].lv[LV_WAHWAH][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_ALIENWAH] = Bank[i].lv[LV_ALIENWAH][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_CABINET] = Bank[i].lv[LV_CABINET][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_PAN] = Bank[i].lv[LV_PAN][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_HARMONIZER] = Bank[i].lv[LV_HARMONIZER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_MUSICAL_DELAY] = Bank[i].lv[LV_MUSICAL_DELAY][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_NOISEGATE] = Bank[i].lv[LV_NOISEGATE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_DERELICT] = Bank[i].lv[LV_DERELICT][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_ANALOG_PHASER] = Bank[i].lv[LV_ANALOG_PHASER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_VALVE] = Bank[i].lv[LV_VALVE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_DUAL_FLANGE] = Bank[i].lv[LV_DUAL_FLANGE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_RING] = Bank[i].lv[LV_RING][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_EXCITER] = Bank[i].lv[LV_EXCITER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_DISTBAND] = Bank[i].lv[LV_DISTBAND][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_ARPIE] = Bank[i].lv[LV_ARPIE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_EXPANDER] = Bank[i].lv[LV_EXPANDER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_SHUFFLE] = Bank[i].lv[LV_SHUFFLE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_SYNTHFILTER] = Bank[i].lv[LV_SYNTHFILTER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_VARYBAND] = Bank[i].lv[LV_VARYBAND][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_CONVOLOTRON] = Bank[i].lv[LV_CONVOLOTRON][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_LOOPER] = Bank[i].lv[LV_LOOPER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_MUTROMOJO] = Bank[i].lv[LV_MUTROMOJO][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_ECHOVERSE] = Bank[i].lv[LV_ECHOVERSE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_COILCRAFTER] = Bank[i].lv[LV_COILCRAFTER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_SHELFBOOST] = Bank[i].lv[LV_SHELFBOOST][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_VOCODER] = Bank[i].lv[LV_VOCODER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_SUSTAINER] = Bank[i].lv[LV_SUSTAINER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_SEQUENCE] = Bank[i].lv[LV_SEQUENCE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_SHIFTER] = Bank[i].lv[LV_SHIFTER][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_STOMPBOX] = Bank[i].lv[LV_STOMPBOX][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_REVERBTRON] = Bank[i].lv[LV_REVERBTRON][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_ECHOTRON] = Bank[i].lv[LV_ECHOTRON][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_STEREOHARM] = Bank[i].lv[LV_STEREOHARM][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_COMPBAND] = Bank[i].lv[LV_COMPBAND][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_OPTICALTREM] = Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_VIBE] = Bank[i].lv[LV_VIBE][C_LV_BYPASS];
+    EFX_Bank_Bypass[EFX_INFINITY] = Bank[i].lv[LV_INFINITY][C_LV_BYPASS];
 
     Bypass_B = Bypass;
 
