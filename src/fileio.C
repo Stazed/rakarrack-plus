@@ -2091,7 +2091,7 @@ RKR::loadbank(char *filename)
 
         convert_IO();
 
-#if 0
+#ifdef FILE_ORDER
         for(int i = 0; i < 62; i++)
         {
             revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
@@ -2113,7 +2113,7 @@ RKR::savebank(char *filename)
     if ((fn = fopen(filename, "wb")) != NULL)
     {
         copy_IO();
-#if 0
+#ifdef FILE_ORDER
         for(int i = 0; i < 62; i++)
         {
             convert_bank_to_file(Bank[i].lv, sizeof(Bank[i].lv));
@@ -2134,7 +2134,7 @@ RKR::savebank(char *filename)
 
         fclose(fn);
 
-#if 0
+#ifdef FILE_ORDER
         for(int i = 0; i < 62; i++)
         {
             revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
@@ -2312,9 +2312,9 @@ RKR::Bank_to_Preset(int i)
     }
     
 #ifdef FILE_ORDER
-    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for(int k = 0; k < C_NUMBER_EFFECTS; k++)
     {
-        EFX_Bank_Bypass[i] = Bank[i].lv[i][C_BYPASS];
+        EFX_Bank_Bypass[k] = Bank[i].lv[k][C_BYPASS];
     }
 #else
     
