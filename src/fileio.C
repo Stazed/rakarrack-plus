@@ -232,8 +232,9 @@ const int conversion[C_LV_MAX_EFFECTS] =
     LV_VIBE,
     LV_INFINITY,       // 46
 
-    47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
-    59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+    // Offset by 1 for order inserted at 10
+    48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+    59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
 
     LV_ORDER           // 69
 };
@@ -2032,7 +2033,7 @@ RKR::savebank(char *filename)
         }
 
         fclose(fn);
-        
+
 #if 0
         for(int i = 0; i < 62; i++)
         {
