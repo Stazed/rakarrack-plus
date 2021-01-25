@@ -662,9 +662,9 @@ const int C_NUMBER_EFFECTS = 47;
 const int C_NUM_EFFECTS_PLUS_ORDER = C_NUMBER_EFFECTS + 1;
 
 /**
- * The maximum effect parameter size. See fileio.C presets_default[][].
+ * The maximum number of effect parameters. See fileio.C presets_default[][].
  */
-const int C_MAX_PARAMETER_SIZE = 19;
+const int C_NUMBER_PARAMETERS = 19;
 
 /**
  * The number of rack effects - Main window, Orderwindow.
@@ -678,9 +678,9 @@ const int C_NUMBER_ORDERED_EFFECTS = 10;
  * one index for effect order. The max parameters includes the one index for
  * effect bypass [19].
  */
-const int C_LV_MAX_EFFECTS = 70;
-const int C_LV_MAX_PARAMETERS = 20;
-const int C_LV_BYPASS = 19;
+const int C_MAX_EFFECTS = 70;
+const int C_MAX_PARAMETERS = C_NUMBER_PARAMETERS + 1;  // 20
+const int C_BYPASS = 19;
 
 
 class RKR
@@ -735,8 +735,8 @@ public:
     void file_error(FILE *fn);
     void Actualizar_Audio ();
     void loadnames();
-    void revert_file_to_bank(int lv_revert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS], int size);
-    void convert_bank_to_file(int lv_convert[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS], int size);
+    void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
+    void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     int loadbank (char *filename);
     int savebank (char *filename);
     void New ();
@@ -856,7 +856,7 @@ public:
     int Bypass_B;
 
     int Selected_Preset;
-    int lv[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS];
+    int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];
     int efx_order[C_NUMBER_ORDERED_EFFECTS];
     int new_order[C_NUMBER_ORDERED_EFFECTS];
@@ -1138,7 +1138,7 @@ public:
         int Bypass;
         char RevFiname[128];
         char EchoFiname[128];
-        int lv[C_LV_MAX_EFFECTS][C_LV_MAX_PARAMETERS];
+        int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
         int XUserMIDI[128][20];
         int XMIDIrangeMin[128];
         int XMIDIrangeMax[128];
