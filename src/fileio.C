@@ -24,7 +24,106 @@
 #include "process.h"
 #include <FL/fl_ask.H> // for error pop up
 
+// #define FILE_ORDER
 
+#ifdef FILE_ORDER
+const int presets_default[C_NUMBER_EFFECTS][C_MAX_PARAMETER_SIZE] = {
+    //EQ1
+    {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0},
+    //Compressor
+    {-30, 2, -6, 20, 120, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Distortion
+    {0, 64, 0, 87, 14, 6, 0, 3134, 157, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Overdrive
+    {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Echo
+    {67, 64, 565, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Chorus
+    {64, 64, 33, 0, 0, 90, 40, 85, 64, 119, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Phaser
+    {64, 64, 11, 0, 0, 64, 110, 64, 1, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0},
+    //Flanger
+    {64, 64, 39, 0, 0, 60, 23, 3, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Reverb
+    {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64, 0, 0, 0, 0, 0, 0, 0},
+    //EQ2 Parametric
+    {200, 64, 64, 800, 64, 64, 12000, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //WahWah
+    {64, 64, 80, 0, 0, 64, 70, 90, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //AlienWah
+    {64, 64, 80, 0, 0, 62, 60, 105, 25, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Cabinet
+    {0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Pan
+    {64, 64, 26, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Harmonizer
+    {64, 64, 64, 12, 6000, 0, 0, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //MusicDelay
+    {64, 0, 2, 7, 0, 59, 0, 127, 4, 59, 106, 75, 75, 0, 0, 0, 0, 0, 0},
+    //NoiseGate
+    {0, 0, 1, 2, 6703, 76, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Derelict
+    {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //APhaser
+    {64, 20, 14, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0, 0, 0, 0},
+    //Valve
+    {0, 64, 64, 127, 64, 0, 5841, 61, 1, 0, 69, 1, 84, 0, 0, 0, 0, 0, 0},
+    //Dual Flange
+    {32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0, 0, 0, 0, 0},
+    //Ring
+    {0, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0, 0, 0, 0, 0},
+    //Exciter
+    {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0, 0, 0, 0},
+    //DistBand
+    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0, 0, 0, 0},
+    //Arpie
+    {0, 64, 126, 64, 30, 59, 0, 127, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Expander
+    {-50, 20, 50, 50, 3134, 76, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Shuffle
+    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000, -14, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Synthfilter
+    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0, 0, 0, 0},
+    //VaryBand
+    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Convolotron
+    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Looper
+    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0},
+    //MuTroMojo
+    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1, 0},
+    //Echoverse
+    {64, 64, 90, 64, 64, 64, 64, 0, 1, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //CoilCrafter
+    {32, 6, 1, 3300, 16, 4400, 42, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //ShelfBoost
+    {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Vocoder
+    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Systainer
+    {40, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Sequence
+    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0, 0, 0, 0},
+    //Shifter
+    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //StompBox
+    {48, 32, 0, 32, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Reverbtron
+    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 0, 0, 0, 0},
+    //Echotron
+    {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1, 0, 0, 0},
+    //StereoHarm
+    {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0},
+    //CompBand
+    {0, 4, 4, 4, 4, 0, 0, 0, 0, 200, 2000, 15000, 88, 0, 0, 0, 0, 0, 0},
+    //Opticaltrem
+    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Vibe
+    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    //Infinity
+    {64, 64, -64, 64, -64, 64, -64, 64, -64, 0, 0, 0, 14, 0, 0, 0, 0, 4, 0}
+};
+#else
 const int presets_default[C_NUM_EFFECTS_PLUS_ORDER][C_MAX_PARAMETER_SIZE] = {
     //Reverb
     {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64, 0, 0, 0, 0, 0, 0, 0},
@@ -123,6 +222,7 @@ const int presets_default[C_NUM_EFFECTS_PLUS_ORDER][C_MAX_PARAMETER_SIZE] = {
     //Infinity
     {64, 64, -64, 64, -64, 64, -64, 64, -64, 0, 0, 0, 14, 0, 0, 0, 0, 4, 0}
 };
+#endif
 
 // Table to revert bank file effect indexing to program effect indexing.
 const int reversion[C_LV_MAX_EFFECTS] =
@@ -2074,6 +2174,26 @@ RKR::New()
     Bypass = 0;
     memset(lv, 0, sizeof (lv));
 
+#ifdef FILE_ORDER
+    // Set the default presets
+    for (int j = 0; j < C_NUMBER_EFFECTS; j++)
+    {
+        for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)
+        {
+            lv[j][k] = presets_default[j][k];
+        }
+
+        lv[j][C_LV_BYPASS] = 0;
+    }
+    // Set the default order
+    for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
+    {
+        // Order from 0 to 10
+        lv[EFX_ORDER][k] = efx_order[k] = k;
+    }
+    
+
+#else
     for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
     {
         for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)
@@ -2088,7 +2208,8 @@ RKR::New()
     {
         efx_order[k] = presets_default[LV_ORDER][k];
     }
-
+#endif
+    
     // Set all effects bypass to off
     for(int i = 0; i < C_NUMBER_EFFECTS; i++)
     {
@@ -2120,6 +2241,24 @@ RKR::New_Bank()
         Bank[i].Bypass = 0;
         memset(Bank[i].lv, 0, sizeof (Bank[i].lv));
 
+#ifdef FILE_ORDER
+        // Set the default presets
+        for (int j = 0; j < C_NUMBER_EFFECTS; j++)
+        {
+            for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)
+            {
+                Bank[i].lv[j][k] = presets_default[j][k];
+            }
+            Bank[i].lv[j][C_LV_BYPASS] = 0;
+        }
+        
+        // Set the default order
+        for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
+        {
+            Bank[i].lv[EFX_ORDER][k] = k;   // Order from 0 to 10
+        }
+        
+#else
         for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
         {
             for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)
@@ -2128,7 +2267,8 @@ RKR::New_Bank()
             }
             Bank[i].lv[j][C_LV_BYPASS] = 0;
         }
-
+#endif
+        
         memset(Bank[i].XUserMIDI, 0, sizeof (Bank[i].XUserMIDI));
     }
 };
@@ -2147,19 +2287,37 @@ RKR::Bank_to_Preset(int i)
     memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
     strcpy(efx_Echotron->Filename, Bank[i].EchoFiname);
 
-    for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
+#ifdef FILE_ORDER
+    for (int j = 0; j < C_LV_MAX_EFFECTS; j++)
     {
-        for (int k = 0; k < 20; k++)
+        for (int k = 0; k < C_LV_MAX_PARAMETERS; k++)
         {
             lv[j][k] = Bank[i].lv[j][k];
         }
     }
+    
+#else
+    for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
+    {
+        for (int k = 0; k < C_LV_MAX_PARAMETERS; k++)
+        {
+            lv[j][k] = Bank[i].lv[j][k];
+        }
+    }
+#endif
 
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
         efx_order[k] = Bank[i].lv[LV_ORDER][k];
     }
-
+    
+#ifdef FILE_ORDER
+    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+    {
+        EFX_Bank_Bypass[i] = Bank[i].lv[i][C_LV_BYPASS];
+    }
+#else
+    
     EFX_Bank_Bypass[EFX_REVERB] = Bank[i].lv[LV_REVERB][C_LV_BYPASS];
     EFX_Bank_Bypass[EFX_ECHO] = Bank[i].lv[LV_ECHO][C_LV_BYPASS];
     EFX_Bank_Bypass[EFX_CHORUS] = Bank[i].lv[LV_CHORUS][C_LV_BYPASS];
@@ -2207,7 +2365,7 @@ RKR::Bank_to_Preset(int i)
     EFX_Bank_Bypass[EFX_OPTICALTREM] = Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS];
     EFX_Bank_Bypass[EFX_VIBE] = Bank[i].lv[LV_VIBE][C_LV_BYPASS];
     EFX_Bank_Bypass[EFX_INFINITY] = Bank[i].lv[LV_INFINITY][C_LV_BYPASS];
-
+#endif
     Bypass_B = Bypass;
 
     memcpy(XUserMIDI, Bank[i].XUserMIDI, sizeof (XUserMIDI));
@@ -2360,14 +2518,31 @@ RKR::Preset_to_Bank(int i)
     lv[LV_CABINET][1] = efx_Cabinet->getpar(Cabinet_Gain);
 
 
-    for (j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
+#ifdef FILE_ORDER
+    for (j = 0; j < C_LV_MAX_EFFECTS; j++)
     {
-        for (int k = 0; k < 19; k++)
+        for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)    // bypass is not copied here
         {
             Bank[i].lv[j][k] = lv[j][k];
         }
     }
+    
 
+    for(j = 0; j < C_NUMBER_EFFECTS; j++)
+    {
+        Bank[i].lv[j][C_LV_BYPASS] = EFX_Bypass[j];
+    }
+    
+#else
+    
+    for (j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
+    {
+        for (int k = 0; k < C_MAX_PARAMETER_SIZE; k++)    // bypass is not copied here
+        {
+            Bank[i].lv[j][k] = lv[j][k];
+        }
+    }
+    
     Bank[i].lv[LV_REVERB][C_LV_BYPASS] = EFX_Bypass[EFX_REVERB];
     Bank[i].lv[LV_ECHO][C_LV_BYPASS] = EFX_Bypass[EFX_ECHO];
     Bank[i].lv[LV_CHORUS][C_LV_BYPASS] = EFX_Bypass[EFX_CHORUS];
@@ -2415,7 +2590,7 @@ RKR::Preset_to_Bank(int i)
     Bank[i].lv[LV_OPTICALTREM][C_LV_BYPASS] = EFX_Bypass[EFX_OPTICALTREM];
     Bank[i].lv[LV_VIBE][C_LV_BYPASS] = EFX_Bypass[EFX_VIBE];
     Bank[i].lv[LV_INFINITY][C_LV_BYPASS] = EFX_Bypass[EFX_INFINITY];
-
+#endif
 
     memcpy(Bank[i].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
 
