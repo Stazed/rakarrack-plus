@@ -26,7 +26,6 @@
 
 #define FILE_ORDER
 
-#ifdef FILE_ORDER
 const int presets_default[C_NUMBER_EFFECTS][C_NUMBER_PARAMETERS] = {
     //EQ1
     {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0},
@@ -123,106 +122,6 @@ const int presets_default[C_NUMBER_EFFECTS][C_NUMBER_PARAMETERS] = {
     //Infinity
     {64, 64, -64, 64, -64, 64, -64, 64, -64, 0, 0, 0, 14, 0, 0, 0, 0, 4, 0}
 };
-#else
-const int presets_default[C_NUM_EFFECTS_PLUS_ORDER][C_NUMBER_PARAMETERS] = {
-    //Reverb
-    {80, 64, 63, 24, 0, 0, 0, 4002, 27, 83, 1, 64, 0, 0, 0, 0, 0, 0, 0},
-    //Echo
-    {67, 64, 565, 64, 30, 59, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Chorus
-    {64, 64, 33, 0, 0, 90, 40, 85, 64, 119, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Flanger
-    {64, 64, 39, 0, 0, 60, 23, 3, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Phaser
-    {64, 64, 11, 0, 0, 64, 110, 64, 1, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0},
-    //Overdrive
-    {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Distorsion
-    {0, 64, 0, 87, 14, 6, 0, 3134, 157, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    //EQ1
-    {64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0},
-    //EQ2 Parametric
-    {200, 64, 64, 800, 64, 64, 12000, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Compressor
-    {-30, 2, -6, 20, 120, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Order
-    {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18}, // EFX_Index!!!
-    //WahWah
-    {64, 64, 80, 0, 0, 64, 70, 90, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //AlienWah1
-    {64, 64, 80, 0, 0, 62, 60, 105, 25, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Cabinet
-    {0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Pan
-    {64, 64, 26, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Harmonizer
-    {64, 64, 64, 12, 6000, 0, 0, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //MusicDelay
-    {64, 0, 2, 7, 0, 59, 0, 127, 4, 59, 106, 75, 75, 0, 0, 0, 0, 0, 0},
-    //NoiseGate
-    {0, 0, 1, 2, 6703, 76, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Derelict
-    {0, 64, 64, 83, 65, 15, 0, 2437, 169, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //APhaser
-    {64, 20, 14, 0, 1, 64, 110, 40, 4, 10, 0, 64, 1, 0, 0, 0, 0, 0, 0},
-    //Valve
-    {0, 64, 64, 127, 64, 0, 5841, 61, 1, 0, 69, 1, 84, 0, 0, 0, 0, 0, 0},
-    //Dual Flange
-    {32, 0, 0, 110, 800, 10, -27, 16000, 1, 0, 24, 64, 1, 10, 0, 0, 0, 0, 0},
-    //Ring
-    {0, 0, -64, 64, 35, 1, 0, 20, 0, 40, 0, 64, 1, 0, 0, 0, 0, 0, 0},
-    //Exciter
-    {127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20000, 20, 0, 0, 0, 0, 0, 0},
-    //DistBand
-    {0, 64, 64, 56, 40, 0, 0, 0, 29, 35, 100, 0, 450, 1500, 1, 0, 0, 0, 0},
-    //Arpie
-    {0, 64, 126, 64, 30, 59, 0, 127, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Expander
-    {-50, 20, 50, 50, 3134, 76, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Shuffle 1
-    {64, 10, 0, 0, 0, 600, 1200, 2000, 6000, -14, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Synthfilter
-    {0, 20, 14, 0, 1, 64, 110, -40, 6, 0, 0, 32, -32, 500, 100, 0, 0, 0, 0},
-    //VaryBand
-    {0, 40, 0, 64, 80, 0, 0, 500, 2500, 5000, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Convolotron 1
-    {67, 64, 1, 100, 0, 64, 30, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Looper
-    {64, 0, 1, 0, 1, 0, 64, 1, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0},
-    //MuTroMojo
-    {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1, 0},
-    //Echoverse
-    {64, 64, 90, 64, 64, 64, 64, 0, 1, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //CoilCrafter
-    {32, 6, 1, 3300, 16, 4400, 42, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //ShelfBoost
-    {127, 64, 16000, 1, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Vocoder
-    {0, 64, 10, 70, 70, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Systainer
-    {40, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Sequence
-    {20, 100, 10, 50, 25, 120, 60, 127, 0, 90, 40, 0, 0, 0, 3, 0, 0, 0, 0},
-    //Shifter
-    {0, 64, 64, 200, 200, -20, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //StompBox
-    {48, 32, 0, 32, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Reverbtron
-    {64, 0, 1, 500, 0, 0, 99, 70, 0, 0, 0, 64, 0, 0, 20000, 0, 0, 0, 0},
-    //Echotron
-    {64, 45, 34, 4, 0, 76, 3, 41, 0, 96, -13, 64, 1, 1, 1, 1, 0, 0, 0},
-    //StereoHarm
-    {64, 64, 12, 0, 64, 12, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0},
-    //CompBand
-    {0, 4, 4, 4, 4, 0, 0, 0, 0, 200, 2000, 15000, 88, 0, 0, 0, 0, 0, 0},
-    //Opticaltrem
-    {127, 260, 10, 0, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Vibe
-    {35, 120, 10, 0, 64, 64, 64, 64, 3, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //Infinity
-    {64, 64, -64, 64, -64, 64, -64, 64, -64, 0, 0, 0, 14, 0, 0, 0, 0, 4, 0}
-};
-#endif
 
 /**
  *  Individual preset file loading.
@@ -2122,12 +2021,10 @@ RKR::loadbank(char *filename)
 
         convert_IO();
 
-#ifdef FILE_ORDER
         for(int i = 0; i < 62; i++)
         {
             revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
         }
-#endif // 0
 
         modified = 0;
         new_bank_loaded = 1;
@@ -2144,12 +2041,11 @@ RKR::savebank(char *filename)
     if ((fn = fopen(filename, "wb")) != NULL)
     {
         copy_IO();
-#ifdef FILE_ORDER
+
         for(int i = 0; i < 62; i++)
         {
             convert_bank_to_file(Bank[i].lv, sizeof(Bank[i].lv));
         }
-#endif // 0
 
         if (BigEndian())
         {
@@ -2165,12 +2061,10 @@ RKR::savebank(char *filename)
 
         fclose(fn);
 
-#ifdef FILE_ORDER
         for(int i = 0; i < 62; i++)
         {
             revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
         }
-#endif // 0
 
         modified = 0;
         return (1);
@@ -2205,7 +2099,6 @@ RKR::New()
     Bypass = 0;
     memset(lv, 0, sizeof (lv));
 
-#ifdef FILE_ORDER
     // Set the default presets
     for (int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
@@ -2222,24 +2115,6 @@ RKR::New()
         // Order from 0 to 10
         lv[EFX_ORDER][k] = efx_order[k] = k;
     }
-    
-
-#else
-    for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
-    {
-        for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
-        {
-            lv[j][k] = presets_default[j][k];
-        }
-
-        lv[j][C_BYPASS] = 0;
-    }
-
-    for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
-    {
-        efx_order[k] = presets_default[EFX_ORDER][k];
-    }
-#endif
     
     // Set all effects bypass to off
     for(int i = 0; i < C_NUMBER_EFFECTS; i++)
@@ -2272,7 +2147,6 @@ RKR::New_Bank()
         Bank[i].Bypass = 0;
         memset(Bank[i].lv, 0, sizeof (Bank[i].lv));
 
-#ifdef FILE_ORDER
         // Set the default presets
         for (int j = 0; j < C_NUMBER_EFFECTS; j++)
         {
@@ -2288,18 +2162,7 @@ RKR::New_Bank()
         {
             Bank[i].lv[EFX_ORDER][k] = k;   // Order from 0 to 10
         }
-        
-#else
-        for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
-        {
-            for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
-            {
-                Bank[i].lv[j][k] = presets_default[j][k];
-            }
-            Bank[i].lv[j][C_BYPASS] = 0;
-        }
-#endif
-        
+
         memset(Bank[i].XUserMIDI, 0, sizeof (Bank[i].XUserMIDI));
     }
 };
@@ -2318,7 +2181,6 @@ RKR::Bank_to_Preset(int i)
     memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
     strcpy(efx_Echotron->Filename, Bank[i].EchoFiname);
 
-#ifdef FILE_ORDER
     for (int j = 0; j < C_MAX_EFFECTS; j++)
     {
         for (int k = 0; k < C_MAX_PARAMETERS; k++)
@@ -2326,77 +2188,19 @@ RKR::Bank_to_Preset(int i)
             lv[j][k] = Bank[i].lv[j][k];
         }
     }
-    
-#else
-    for (int j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
-    {
-        for (int k = 0; k < C_MAX_PARAMETERS; k++)
-        {
-            lv[j][k] = Bank[i].lv[j][k];
-        }
-    }
-#endif
 
+    // Set the main rack effect order
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
         efx_order[k] = Bank[i].lv[EFX_ORDER][k];
     }
     
-#ifdef FILE_ORDER
+    // Set the bypass state for each effect
     for(int k = 0; k < C_NUMBER_EFFECTS; k++)
     {
         EFX_Bank_Bypass[k] = Bank[i].lv[k][C_BYPASS];
     }
-#else
-    
-    EFX_Bank_Bypass[EFX_REVERB] = Bank[i].lv[EFX_REVERB][C_BYPASS];
-    EFX_Bank_Bypass[EFX_ECHO] = Bank[i].lv[EFX_ECHO][C_BYPASS];
-    EFX_Bank_Bypass[EFX_CHORUS] = Bank[i].lv[EFX_CHORUS][C_BYPASS];
-    EFX_Bank_Bypass[EFX_FLANGER] = Bank[i].lv[EFX_FLANGER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_PHASER] = Bank[i].lv[EFX_PHASER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_OVERDRIVE] = Bank[i].lv[EFX_OVERDRIVE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_DISTORTION] = Bank[i].lv[EFX_DISTORTION][C_BYPASS];
-    EFX_Bank_Bypass[EFX_EQ] = Bank[i].lv[EFX_EQ][C_BYPASS];
-    EFX_Bank_Bypass[EFX_PARAMETRIC] = Bank[i].lv[EFX_PARAMETRIC][C_BYPASS];
-    EFX_Bank_Bypass[EFX_COMPRESSOR] = Bank[i].lv[EFX_COMPRESSOR][C_BYPASS];
-    EFX_Bank_Bypass[EFX_WAHWAH] = Bank[i].lv[EFX_WAHWAH][C_BYPASS];
-    EFX_Bank_Bypass[EFX_ALIENWAH] = Bank[i].lv[EFX_ALIENWAH][C_BYPASS];
-    EFX_Bank_Bypass[EFX_CABINET] = Bank[i].lv[EFX_CABINET][C_BYPASS];
-    EFX_Bank_Bypass[EFX_PAN] = Bank[i].lv[EFX_PAN][C_BYPASS];
-    EFX_Bank_Bypass[EFX_HARMONIZER] = Bank[i].lv[EFX_HARMONIZER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_MUSICAL_DELAY] = Bank[i].lv[EFX_MUSICAL_DELAY][C_BYPASS];
-    EFX_Bank_Bypass[EFX_NOISEGATE] = Bank[i].lv[EFX_NOISEGATE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_DERELICT] = Bank[i].lv[EFX_DERELICT][C_BYPASS];
-    EFX_Bank_Bypass[EFX_ANALOG_PHASER] = Bank[i].lv[EFX_ANALOG_PHASER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_VALVE] = Bank[i].lv[EFX_VALVE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_DUAL_FLANGE] = Bank[i].lv[EFX_DUAL_FLANGE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_RING] = Bank[i].lv[EFX_RING][C_BYPASS];
-    EFX_Bank_Bypass[EFX_EXCITER] = Bank[i].lv[EFX_EXCITER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_DISTBAND] = Bank[i].lv[EFX_DISTBAND][C_BYPASS];
-    EFX_Bank_Bypass[EFX_ARPIE] = Bank[i].lv[EFX_ARPIE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_EXPANDER] = Bank[i].lv[EFX_EXPANDER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_SHUFFLE] = Bank[i].lv[EFX_SHUFFLE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_SYNTHFILTER] = Bank[i].lv[EFX_SYNTHFILTER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_VARYBAND] = Bank[i].lv[EFX_VARYBAND][C_BYPASS];
-    EFX_Bank_Bypass[EFX_CONVOLOTRON] = Bank[i].lv[EFX_CONVOLOTRON][C_BYPASS];
-    EFX_Bank_Bypass[EFX_LOOPER] = Bank[i].lv[EFX_LOOPER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_MUTROMOJO] = Bank[i].lv[EFX_MUTROMOJO][C_BYPASS];
-    EFX_Bank_Bypass[EFX_ECHOVERSE] = Bank[i].lv[EFX_ECHOVERSE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_COILCRAFTER] = Bank[i].lv[EFX_COILCRAFTER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_SHELFBOOST] = Bank[i].lv[EFX_SHELFBOOST][C_BYPASS];
-    EFX_Bank_Bypass[EFX_VOCODER] = Bank[i].lv[EFX_VOCODER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_SUSTAINER] = Bank[i].lv[EFX_SUSTAINER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_SEQUENCE] = Bank[i].lv[EFX_SEQUENCE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_SHIFTER] = Bank[i].lv[EFX_SHIFTER][C_BYPASS];
-    EFX_Bank_Bypass[EFX_STOMPBOX] = Bank[i].lv[EFX_STOMPBOX][C_BYPASS];
-    EFX_Bank_Bypass[EFX_REVERBTRON] = Bank[i].lv[EFX_REVERBTRON][C_BYPASS];
-    EFX_Bank_Bypass[EFX_ECHOTRON] = Bank[i].lv[EFX_ECHOTRON][C_BYPASS];
-    EFX_Bank_Bypass[EFX_STEREOHARM] = Bank[i].lv[EFX_STEREOHARM][C_BYPASS];
-    EFX_Bank_Bypass[EFX_COMPBAND] = Bank[i].lv[EFX_COMPBAND][C_BYPASS];
-    EFX_Bank_Bypass[EFX_OPTICALTREM] = Bank[i].lv[EFX_OPTICALTREM][C_BYPASS];
-    EFX_Bank_Bypass[EFX_VIBE] = Bank[i].lv[EFX_VIBE][C_BYPASS];
-    EFX_Bank_Bypass[EFX_INFINITY] = Bank[i].lv[EFX_INFINITY][C_BYPASS];
-#endif
+
     Bypass_B = Bypass;
 
     memcpy(XUserMIDI, Bank[i].XUserMIDI, sizeof (XUserMIDI));
@@ -2419,10 +2223,13 @@ RKR::Bank_to_Preset(int i)
 void
 RKR::Preset_to_Bank(int i)
 {
+    // Main window information
     memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
     strcpy(Bank[i].Preset_Name, Preset_Name);
     memset(Bank[i].Author, 0, sizeof (Bank[i].Author));
     strcpy(Bank[i].Author, Author);
+    
+    // Special cases filenames for Convolotron, Echotron, Reverbtron
     memset(Bank[i].ConvoFiname, 0, sizeof (Bank[i].ConvoFiname));
     strcpy(Bank[i].ConvoFiname, efx_Convol->Filename);
     memset(Bank[i].RevFiname, 0, sizeof (Bank[i].RevFiname));
@@ -2430,11 +2237,12 @@ RKR::Preset_to_Bank(int i)
     memset(Bank[i].EchoFiname, 0, sizeof (Bank[i].EchoFiname));
     strcpy(Bank[i].EchoFiname, efx_Echotron->Filename);
 
-
+    // Master effect
     Bank[i].Input_Gain = Input_Gain;
     Bank[i].Master_Volume = Master_Volume;
     Bank[i].Balance = Fraction_Bypass;
 
+    // Load all effect parameters into the lv[][] array for current preset (main window)
     int j = 0;
 
     for (j = 0; j < C_REVERB_PARAMETERS; j++)
@@ -2548,8 +2356,7 @@ RKR::Preset_to_Bank(int i)
     lv[EFX_CABINET][0] = efx_Cabinet->Cabinet_Preset;
     lv[EFX_CABINET][1] = efx_Cabinet->getpar(Cabinet_Gain);
 
-
-#ifdef FILE_ORDER
+    // Copy the lv[][] parameters to the Bank[].lv[][] structure
     for (j = 0; j < C_MAX_EFFECTS; j++)
     {
         for (int k = 0; k < C_NUMBER_PARAMETERS; k++)    // bypass is not copied here
@@ -2557,74 +2364,15 @@ RKR::Preset_to_Bank(int i)
             Bank[i].lv[j][k] = lv[j][k];
         }
     }
-    
 
+    // Copy the current bypass state to the Bank
     for(j = 0; j < C_NUMBER_EFFECTS; j++)
     {
         Bank[i].lv[j][C_BYPASS] = EFX_Bypass[j];
     }
-    
-#else
-    
-    for (j = 0; j < C_NUM_EFFECTS_PLUS_ORDER; j++)
-    {
-        for (int k = 0; k < C_NUMBER_PARAMETERS; k++)    // bypass is not copied here
-        {
-            Bank[i].lv[j][k] = lv[j][k];
-        }
-    }
-    
-    Bank[i].lv[EFX_REVERB][C_BYPASS] = EFX_Bypass[EFX_REVERB];
-    Bank[i].lv[EFX_ECHO][C_BYPASS] = EFX_Bypass[EFX_ECHO];
-    Bank[i].lv[EFX_CHORUS][C_BYPASS] = EFX_Bypass[EFX_CHORUS];
-    Bank[i].lv[EFX_FLANGER][C_BYPASS] = EFX_Bypass[EFX_FLANGER];
-    Bank[i].lv[EFX_PHASER][C_BYPASS] = EFX_Bypass[EFX_PHASER];
-    Bank[i].lv[EFX_OVERDRIVE][C_BYPASS] = EFX_Bypass[EFX_OVERDRIVE];
-    Bank[i].lv[EFX_DISTORTION][C_BYPASS] = EFX_Bypass[EFX_DISTORTION];
-    Bank[i].lv[EFX_EQ][C_BYPASS] = EFX_Bypass[EFX_EQ];
-    Bank[i].lv[EFX_PARAMETRIC][C_BYPASS] = EFX_Bypass[EFX_PARAMETRIC];
-    Bank[i].lv[EFX_COMPRESSOR][C_BYPASS] = EFX_Bypass[EFX_COMPRESSOR];
-    Bank[i].lv[EFX_WAHWAH][C_BYPASS] = EFX_Bypass[EFX_WAHWAH];
-    Bank[i].lv[EFX_ALIENWAH][C_BYPASS] = EFX_Bypass[EFX_ALIENWAH];
-    Bank[i].lv[EFX_CABINET][C_BYPASS] = EFX_Bypass[EFX_CABINET];
-    Bank[i].lv[EFX_PAN][C_BYPASS] = EFX_Bypass[EFX_PAN];
-    Bank[i].lv[EFX_HARMONIZER][C_BYPASS] = EFX_Bypass[EFX_HARMONIZER];
-    Bank[i].lv[EFX_MUSICAL_DELAY][C_BYPASS] = EFX_Bypass[EFX_MUSICAL_DELAY];
-    Bank[i].lv[EFX_NOISEGATE][C_BYPASS] = EFX_Bypass[EFX_NOISEGATE];
-    Bank[i].lv[EFX_DERELICT][C_BYPASS] = EFX_Bypass[EFX_DERELICT];
-    Bank[i].lv[EFX_ANALOG_PHASER][C_BYPASS] = EFX_Bypass[EFX_ANALOG_PHASER];
-    Bank[i].lv[EFX_VALVE][C_BYPASS] = EFX_Bypass[EFX_VALVE];
-    Bank[i].lv[EFX_DUAL_FLANGE][C_BYPASS] = EFX_Bypass[EFX_DUAL_FLANGE];
-    Bank[i].lv[EFX_RING][C_BYPASS] = EFX_Bypass[EFX_RING];
-    Bank[i].lv[EFX_EXCITER][C_BYPASS] = EFX_Bypass[EFX_EXCITER];
-    Bank[i].lv[EFX_DISTBAND][C_BYPASS] = EFX_Bypass[EFX_DISTBAND];
-    Bank[i].lv[EFX_ARPIE][C_BYPASS] = EFX_Bypass[EFX_ARPIE];
-    Bank[i].lv[EFX_EXPANDER][C_BYPASS] = EFX_Bypass[EFX_EXPANDER];
-    Bank[i].lv[EFX_SHUFFLE][C_BYPASS] = EFX_Bypass[EFX_SHUFFLE];
-    Bank[i].lv[EFX_SYNTHFILTER][C_BYPASS] = EFX_Bypass[EFX_SYNTHFILTER];
-    Bank[i].lv[EFX_VARYBAND][C_BYPASS] = EFX_Bypass[EFX_VARYBAND];
-    Bank[i].lv[EFX_CONVOLOTRON][C_BYPASS] = EFX_Bypass[EFX_CONVOLOTRON];
-    Bank[i].lv[EFX_LOOPER][C_BYPASS] = EFX_Bypass[EFX_LOOPER];
-    Bank[i].lv[EFX_MUTROMOJO][C_BYPASS] = EFX_Bypass[EFX_MUTROMOJO];
-    Bank[i].lv[EFX_ECHOVERSE][C_BYPASS] = EFX_Bypass[EFX_ECHOVERSE];
-    Bank[i].lv[EFX_COILCRAFTER][C_BYPASS] = EFX_Bypass[EFX_COILCRAFTER];
-    Bank[i].lv[EFX_SHELFBOOST][C_BYPASS] = EFX_Bypass[EFX_SHELFBOOST];
-    Bank[i].lv[EFX_VOCODER][C_BYPASS] = EFX_Bypass[EFX_VOCODER];
-    Bank[i].lv[EFX_SUSTAINER][C_BYPASS] = EFX_Bypass[EFX_SUSTAINER];
-    Bank[i].lv[EFX_SEQUENCE][C_BYPASS] = EFX_Bypass[EFX_SEQUENCE];
-    Bank[i].lv[EFX_SHIFTER][C_BYPASS] = EFX_Bypass[EFX_SHIFTER];
-    Bank[i].lv[EFX_STOMPBOX][C_BYPASS] = EFX_Bypass[EFX_STOMPBOX];
-    Bank[i].lv[EFX_REVERBTRON][C_BYPASS] = EFX_Bypass[EFX_REVERBTRON];
-    Bank[i].lv[EFX_ECHOTRON][C_BYPASS] = EFX_Bypass[EFX_ECHOTRON];
-    Bank[i].lv[EFX_STEREOHARM][C_BYPASS] = EFX_Bypass[EFX_STEREOHARM];
-    Bank[i].lv[EFX_COMPBAND][C_BYPASS] = EFX_Bypass[EFX_COMPBAND];
-    Bank[i].lv[EFX_OPTICALTREM][C_BYPASS] = EFX_Bypass[EFX_OPTICALTREM];
-    Bank[i].lv[EFX_VIBE][C_BYPASS] = EFX_Bypass[EFX_VIBE];
-    Bank[i].lv[EFX_INFINITY][C_BYPASS] = EFX_Bypass[EFX_INFINITY];
-#endif
 
+    // Copy MIDI learn to the Bank
     memcpy(Bank[i].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
-
 }
 
 int
