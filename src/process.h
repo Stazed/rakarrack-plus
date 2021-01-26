@@ -8,6 +8,7 @@
 
 #include "Reverb.h"
 #include "Chorus.h"
+#include "Flanger.h"
 #include "Echo.h"
 #include "Phaser.h"
 #include "Distorsion.h"

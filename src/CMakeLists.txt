@@ -92,6 +92,7 @@ set (ProgSources
     FPreset.C
     Reverb.C
     Chorus.C
+    Flanger.C
     EffectLFO.C
     Echo.C
     Phaser.C

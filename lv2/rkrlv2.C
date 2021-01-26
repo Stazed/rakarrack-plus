@@ -5914,7 +5914,7 @@ LV2_Handle init_flangerlv2(const LV2_Descriptor* /* descriptor */,double sample_
     
     getFeatures(plug,host_features);    // for period_max
     
-    plug->flanger = new Chorus(sample_freq, plug->period_max);
+    plug->flanger = new Flanger(sample_freq, plug->period_max);
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);

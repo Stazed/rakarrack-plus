@@ -643,7 +643,7 @@ RKR::instantiate_effects()
     DC_Offsetr = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
     M_Metronome = new metronome(fSample_rate, period);
     efx_Chorus = new Chorus(fSample_rate, period);
-    efx_Flanger = new Chorus(fSample_rate, period);
+    efx_Flanger = new Flanger(fSample_rate, period);
     efx_Rev = new Reverb(fSample_rate, period);
     efx_Echo = new Echo(fSample_rate, period);
     efx_Phaser = new Phaser(fSample_rate, period);

@@ -31,7 +31,7 @@ widget_class {\#include "common_gui_menu.h"} ChorusGui {
 rkr->EFX_Bypass[EFX_CHORUS]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Chorus->cleanup();
-rgui->findpos(EFX_CHORUS,(int)o->value(),o);} selected
+rgui->findpos(EFX_CHORUS,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -39,7 +39,7 @@ rgui->findpos(EFX_CHORUS,(int)o->value(),o);} selected
     label Preset
     user_data 12005
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
+if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(Chorus_DryWet)));
 chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
@@ -51,7 +51,7 @@ chorus_delay->value(rkr->efx_Chorus->getpar(Chorus_Delay));
 chorus_fb->value(rkr->efx_Chorus->getpar(Chorus_Feedback));
 chorus_LR->value(rkr->efx_Chorus->getpar(Chorus_LR_Cross));
 chorus_subs->value(rkr->efx_Chorus->getpar(Chorus_Subtract));
-chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));}
+chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

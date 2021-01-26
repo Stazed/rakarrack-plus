@@ -20,7 +20,7 @@ void ChorusGui::cb_chorus_activar(RKR_Light_Button* o, void* v) {
 
 void ChorusGui::cb_chorus_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset(0,(int) o->value());
+if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset((int) o->value());
 chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(Chorus_DryWet)));
 chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan)-64);
 chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));

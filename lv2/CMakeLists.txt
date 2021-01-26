@@ -16,6 +16,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/Echo.C
   ../src/delayline.C
   ../src/Chorus.C
+  ../src/Flanger.C
   ../src/EffectLFO.C
   ../src/APhaser.C
   ../src/Harmonizer.C

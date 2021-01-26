@@ -82,7 +82,7 @@ Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize) :
     lfo->effectlfoout(&lfol, &lfor);
     dl2 = getdelay(lfol);
     dr2 = getdelay(lfor);
-    setpreset(0, Ppreset); // must be set after call to getdelay
+    setpreset(Ppreset); // must be set after call to getdelay
     cleanup();
 }
 
@@ -307,10 +307,10 @@ Chorus::setlrcross(int Plrcross)
 }
 
 void
-Chorus::setpreset(int dgui, int npreset)
+Chorus::setpreset(int npreset)
 {
     const int PRESET_SIZE = C_CHORUS_PARAMETERS;
-    const int NUM_PRESETS = 10;
+    const int NUM_PRESETS = 5;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Chorus1
@@ -322,32 +322,13 @@ Chorus::setpreset(int dgui, int npreset)
         //Celeste1
         {64, 64, 1, 0, 0, 42, 115, 18, 90, 127, 0, 0, 0},
         //Celeste2
-        {64, 64, 7, 117, 0, 50, 115, 9, 31, 127, 0, 1, 0},
-        //Flange1
-        {64, 64, 39, 0, 0, 60, 23, 3, 62, 0, 0, 0, 0},
-        //Flange2
-        {64, 64, 9, 34, 1, 40, 35, 3, 109, 0, 0, 0, 0},
-        //Flange3
-        {64, 64, 31, 34, 1, 94, 35, 3, 54, 0, 0, 1, 0},
-        //Flange4
-        {64, 64, 14, 0, 1, 62, 12, 19, 97, 0, 0, 0, 1},
-        //Flange5
-        {64, 64, 34, 105, 0, 24, 39, 19, 17, 0, 0, 1, 1}
+        {64, 64, 7, 117, 0, 50, 115, 9, 31, 127, 0, 1, 0}
     };
 
     // (npreset > 4) means user defined (Insert) presets for Chorus
-    if ((dgui == 0) && (npreset > 4))       // efx_Chorus = dgui = 0
+    if (npreset > NUM_PRESETS - 1)
     {
-        Fpre->ReadPreset(EFX_CHORUS, npreset - 4, pdata);
-        
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n, pdata[n]);
-
-    }
-    // (npreset > 9 means user defined (Insert) presets for Flanger
-    else if ((dgui == 1) && (npreset > 9))  // efx_Flanger = dgui = 1
-    {
-        Fpre->ReadPreset(EFX_FLANGER, npreset - 9, pdata);
+        Fpre->ReadPreset(EFX_CHORUS, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
@@ -355,9 +336,9 @@ Chorus::setpreset(int dgui, int npreset)
     else    // No user defined presets so just set it
     {
         for (int n = 0; n < PRESET_SIZE; n++)
-            
             changepar(n, presets[npreset][n]);
     }
+    
     Ppreset = npreset;
 }
 

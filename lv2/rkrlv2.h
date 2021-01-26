@@ -41,6 +41,7 @@
 #include"Distorsion.h"
 #include"Echo.h"
 #include"Chorus.h"
+#include"Flanger.h"
 #include"APhaser.h"
 #include"Harmonizer.h"
 #include"RecChord.h"
@@ -327,7 +328,7 @@ typedef struct _RKRLV2
     Gate* gate;         //43
     MIDIConverter* midic; //44
     Convolotron* convol;  //45
-    Chorus* flanger;     //46
+    Flanger* flanger;     //46
     Distorsion* overdrive;   //47
 
     

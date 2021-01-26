@@ -28,7 +28,6 @@
 #include "delayline.h"
 
 const int C_CHORUS_PARAMETERS = 13;
-const int C_FLANGER_PARAMETERS = 13;
 
 enum Chorus_Index
 {
@@ -47,31 +46,14 @@ enum Chorus_Index
     Chorus_Intense
 };
 
-enum Flanger_Index
-{
-    Flanger_DryWet = 0,
-    Flanger_Pan,
-    Flanger_LFO_Tempo,
-    Flanger_LFO_Random,
-    Flanger_LFO_Type,
-    Flanger_LFO_Stereo,
-    Flanger_Depth,
-    Flanger_Delay,
-    Flanger_Feedback,
-    Flanger_LR_Cross,
-    Flanger_SKIP_Flange_10,
-    Flanger_Subtract,
-    Flanger_Intense
-};
-
 class Chorus
 {
 
 public:
     Chorus (double sample_rate, uint32_t intermediate_bufsize);
-    ~Chorus ();
+    virtual ~Chorus ();
     void out (float * efxoutl, float * efxoutr);
-    void setpreset (int dgui, int npreset);
+    virtual void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
@@ -83,8 +65,6 @@ public:
     int Ppreset;
     float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
 
-private:
-    
     float fSAMPLE_RATE;
     uint32_t PERIOD;
     float fPERIOD;

@@ -20,7 +20,7 @@ void FlangerGui::cb_flanger_activar(RKR_Light_Button* o, void* v) {
 
 void FlangerGui::cb_flanger_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
+if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset((int)(o->value()));
 flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Flanger_DryWet)));
 flanger_pan->value(rkr->efx_Flanger->getpar(Flanger_Pan)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(Flanger_LFO_Tempo));

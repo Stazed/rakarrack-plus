@@ -31,7 +31,7 @@ widget_class {\#include "common_gui_menu.h"} FlangerGui {
 rkr->EFX_Bypass[EFX_FLANGER]=(int)o->value();
 if((int) o->value()==0)
 rkr->efx_Flanger->cleanup();
-rgui->findpos(EFX_FLANGER,(int)o->value(),o);} selected
+rgui->findpos(EFX_FLANGER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -39,7 +39,7 @@ rgui->findpos(EFX_FLANGER,(int)o->value(),o);} selected
     label Preset
     user_data 12007
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset(1,(int)(o->value()+5));
+if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset((int)(o->value()));
 flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Flanger_DryWet)));
 flanger_pan->value(rkr->efx_Flanger->getpar(Flanger_Pan)-64);
 flanger_freq->value(rkr->efx_Flanger->getpar(Flanger_LFO_Tempo));
@@ -51,7 +51,7 @@ flanger_delay->value(rkr->efx_Flanger->getpar(Flanger_Delay));
 flanger_fb->value(rkr->efx_Flanger->getpar(Flanger_Feedback));
 flanger_LR->value(rkr->efx_Flanger->getpar(Flanger_LR_Cross));
 flanger_subs->value(rkr->efx_Flanger->getpar(Flanger_Subtract));
-flanger_awesome->value(rkr->efx_Flanger->getpar(Flanger_Intense));}
+flanger_awesome->value(rkr->efx_Flanger->getpar(Flanger_Intense));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
