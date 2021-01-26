@@ -62,69 +62,6 @@
 #include <jack/jack.h>
 
 
-/*
- * The effect order used by int lv[70][20] and Preset_Bank_Struct.lv[70][20].
- * This the same array order as the presets_default[47][19] array.
- * This index should be used when accessing the two lv[][] arrays.
- * The Preset_Bank_Struct is used for file saving, and thus this index order is
- * saved to file. I do not know what lv is supposed to refer, gonna assume something
- * like: List Vector...
- * 
- * WARNING!!!
- * Index 10, LV_ORDER contains the order based on the EFX_Index, not this index.
- */
-enum LV_Index
-{
-    LV_REVERB = 0,
-    LV_ECHO,
-    LV_CHORUS,
-    LV_FLANGER,
-    LV_PHASER,
-    LV_OVERDRIVE,
-    LV_DISTORTION,
-    LV_EQ,
-    LV_PARAMETRIC,
-    LV_COMPRESSOR,
-    LV_ORDER,           // 10
-    LV_WAHWAH,
-    LV_ALIENWAH,
-    LV_CABINET,
-    LV_PAN,
-    LV_HARMONIZER,
-    LV_MUSICAL_DELAY,
-    LV_NOISEGATE,
-    LV_DERELICT,
-    LV_ANALOG_PHASER,
-    LV_VALVE,           // 20
-    LV_DUAL_FLANGE,
-    LV_RING,
-    LV_EXCITER,
-    LV_DISTBAND,
-    LV_ARPIE,
-    LV_EXPANDER,
-    LV_SHUFFLE,
-    LV_SYNTHFILTER,
-    LV_VARYBAND,
-    LV_CONVOLOTRON,     // 30
-    LV_LOOPER,
-    LV_MUTROMOJO,
-    LV_ECHOVERSE,
-    LV_COILCRAFTER,
-    LV_SHELFBOOST,
-    LV_VOCODER,
-    LV_SUSTAINER,
-    LV_SEQUENCE,
-    LV_SHIFTER,
-    LV_STOMPBOX,        // 40
-    LV_REVERBTRON,
-    LV_ECHOTRON,
-    LV_STEREOHARM,
-    LV_COMPBAND,
-    LV_OPTICALTREM,
-    LV_VIBE,
-    LV_INFINITY        // 47
-};
-
 /**
  * This is the "MIDI Implementation Chart" listed in Rakarrack-plus help.
  * For default MIDI processing (Not MIDI learn) this index directly corresponds

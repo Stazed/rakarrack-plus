@@ -24,7 +24,6 @@
 #include "process.h"
 #include <FL/fl_ask.H> // for error pop up
 
-#define FILE_ORDER
 
 const int presets_default[C_NUMBER_EFFECTS][C_NUMBER_PARAMETERS] = {
     //EQ1
@@ -1750,7 +1749,7 @@ RKR::loadnames()
 /**
  * Reverts the file ordering to program Bank[].lv[][] array ordering.
  * The Bank files (.rkrb types) effects indexing is saved in the order
- * of LV_Index. The program uses EFX_Index.
+ * of LV_File_Index. The program uses EFX_Index.
  * 
  * @param lv_revert
  *      A single Bank[].lv[][] array to be converted. This will alter the array.
@@ -1761,7 +1760,7 @@ RKR::loadnames()
 void
 RKR::revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size)
 {
-    // Table to revert bank file effect indexing to program effect indexing.
+    // Table to revert LV_File_Index to EFX_Index.
     const int reversion[C_MAX_EFFECTS] =
     {
         EFX_REVERB,
@@ -1850,7 +1849,7 @@ RKR::revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int siz
 /**
  * Converts the program Bank[].lv[][] array ordering to file ordering.
  * The Bank files (.rkrb types) effects indexing is saved in the order
- * of LV_Index. This was originally part of legacy rakarrack which kept 
+ * of LV_File_Index. This was originally part of legacy rakarrack which kept 
  * the lv[][] indexing the same for the program. The program otherwise
  * used the indexing of EFX_Index. This resulted in extra code having 
  * to individually map each effect when copying bank to preset. A
@@ -1868,7 +1867,60 @@ RKR::revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int siz
 void
 RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size)
 {
-    // Table to convert program lv[] indexing to file indexing.
+    // The effect order used for file saving lv[70][20] and Preset_Bank_Struct.lv[70][20].
+    enum LV_File_Index
+    {
+        LV_REVERB = 0,
+        LV_ECHO,
+        LV_CHORUS,
+        LV_FLANGER,
+        LV_PHASER,
+        LV_OVERDRIVE,
+        LV_DISTORTION,
+        LV_EQ,
+        LV_PARAMETRIC,
+        LV_COMPRESSOR,
+        LV_ORDER,           // 10 - the order saved is EFX_Index order
+        LV_WAHWAH,
+        LV_ALIENWAH,
+        LV_CABINET,
+        LV_PAN,
+        LV_HARMONIZER,
+        LV_MUSICAL_DELAY,
+        LV_NOISEGATE,
+        LV_DERELICT,
+        LV_ANALOG_PHASER,
+        LV_VALVE,           // 20
+        LV_DUAL_FLANGE,
+        LV_RING,
+        LV_EXCITER,
+        LV_DISTBAND,
+        LV_ARPIE,
+        LV_EXPANDER,
+        LV_SHUFFLE,
+        LV_SYNTHFILTER,
+        LV_VARYBAND,
+        LV_CONVOLOTRON,     // 30
+        LV_LOOPER,
+        LV_MUTROMOJO,
+        LV_ECHOVERSE,
+        LV_COILCRAFTER,
+        LV_SHELFBOOST,
+        LV_VOCODER,
+        LV_SUSTAINER,
+        LV_SEQUENCE,
+        LV_SHIFTER,
+        LV_STOMPBOX,        // 40
+        LV_REVERBTRON,
+        LV_ECHOTRON,
+        LV_STEREOHARM,
+        LV_COMPBAND,
+        LV_OPTICALTREM,
+        LV_VIBE,
+        LV_INFINITY        // 47
+    };
+
+    // Table to convert program EFX_Index to LV_File_Index.
     const int conversion[C_MAX_EFFECTS] = 
     {
         LV_EQ,             // 0
