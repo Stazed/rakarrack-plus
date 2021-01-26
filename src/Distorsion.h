@@ -30,7 +30,6 @@
 #include "Waveshaper.h"
 
 const int C_DIST_PARAMETERS = 13;
-const int C_OVERDRIVE_PARAMETERS = 13;
 
 enum Dist_Index
 {
@@ -49,30 +48,13 @@ enum Dist_Index
     Dist_Suboctave
 };
 
-enum Overdrive_Index
-{
-    Overdrive_DryWet = 0,
-    Overdrive_Pan,
-    Overdrive_LR_Cross,
-    Overdrive_Drive,
-    Overdrive_Level,
-    Overdrive_Type,
-    Overdrive_Negate,
-    Overdrive_LPF,
-    Overdrive_HPF,
-    Overdrive_Stereo,
-    Overdrive_Prefilter,
-    Overdrive_SKIP_11,
-    Overdrive_Suboctave
-};
-
 class Distorsion
 {
 public:
     Distorsion (int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize);
-    ~Distorsion ();
+    virtual ~Distorsion ();
     void out (float * efxoutl, float * efxoutr);
-    void setpreset (int dgui, int npreset);
+    virtual void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
@@ -93,6 +75,8 @@ public:
     float *octoutl;
     float *octoutr;
     float outvolume;
+    
+    class FPreset *Fpre;
 
 private:
     
@@ -127,7 +111,6 @@ private:
     float panning, lrcross, octave_memoryl, togglel, octave_memoryr,toggler,octmix;
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr, *blockDCl, *blockDCr, *DCl, *DCr;
     class Waveshaper *dwshapel, *dwshaper;
-    class FPreset *Fpre;
 
     float * interpbuf;//buffer for filters
 

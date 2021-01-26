@@ -1,11 +1,11 @@
 /*
   ZynAddSubFX - a software synthesizer
 
-  Chorus.C - Chorus and Flange effects
+  Distorsion.h - Distorsion Effect
   Copyright (C) 2002-2005 Nasca Octavian Paul
   Author: Nasca Octavian Paul
 
-  Modified for rakarrack by Josep Andreu
+  Modified for rakarrack by Josep Andreu & Hernan Ordiales & Ryan Billing
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -20,45 +20,40 @@
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
- */
+*/
 
 /* 
- * File:   Flanger.C
+ * File:   Overdrive.C
  * Author: sspresto
  * 
- * Created on January 25, 2021, 7:16 PM
+ * Created on January 26, 2021, 8:16 AM
  */
 
-#include "Flanger.h"
+#include "Overdrive.h"
 
-Flanger::Flanger(double sample_rate, uint32_t intermediate_bufsize):
-    Chorus(sample_rate, intermediate_bufsize)
+Overdrive::Overdrive(int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize):
+    Distorsion(wave_res, wave_upq, wave_dnq, samplerate, intermediate_bufsize)
 {
 }
 
 void
-Flanger::setpreset(int npreset)
+Overdrive::setpreset (int npreset)
 {
-    const int PRESET_SIZE = C_FLANGER_PARAMETERS;
-    const int NUM_PRESETS = 5;
+    const int PRESET_SIZE = C_OVERDRIVE_PARAMETERS;
+    const int NUM_PRESETS = 2;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //Flange1
-        {64, 64, 39, 0, 0, 60, 23, 3, 62, 0, 0, 0, 0},
-        //Flange2
-        {64, 64, 9, 34, 1, 40, 35, 3, 109, 0, 0, 0, 0},
-        //Flange3
-        {64, 64, 31, 34, 1, 94, 35, 3, 54, 0, 0, 1, 0},
-        //Flange4
-        {64, 64, 14, 0, 1, 62, 12, 19, 97, 0, 0, 0, 1},
-        //Flange5
-        {64, 64, 34, 105, 0, 24, 39, 19, 17, 0, 0, 1, 1}
+        //Overdrive 1
+        {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0, 0, 0},
+        //Overdrive 2
+        {85, 64, 35, 29, 45, 1, 0, 25040, 21, 0, 0, 0, 0}
+        
     };
 
-    // (npreset > NUM_PRESETS - 1 means user defined (Insert) presets for Flanger
+    // (npreset > NUM_PRESETS - 1) means user defined (Insert) presets for Overdrive
     if (npreset > NUM_PRESETS - 1)
     {
-        Fpre->ReadPreset(EFX_FLANGER, npreset - NUM_PRESETS + 1, pdata);
+        Fpre->ReadPreset(EFX_OVERDRIVE, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
@@ -68,10 +63,7 @@ Flanger::setpreset(int npreset)
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, presets[npreset][n]);
     }
-
+    
     Ppreset = npreset;
+    cleanup();
 }
-
-
-
-

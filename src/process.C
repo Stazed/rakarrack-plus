@@ -649,7 +649,7 @@ RKR::instantiate_effects()
     efx_Phaser = new Phaser(fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     efx_Distorsion = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
-    efx_Overdrive = new Distorsion(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
+    efx_Overdrive = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
     efx_EQ2 = new ParametricEQ(fSample_rate, period);
     efx_EQ1 = new EQ( fSample_rate, period);
     efx_Compressor = new Compressor(fSample_rate, period);

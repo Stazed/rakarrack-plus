@@ -35,6 +35,7 @@ Distorsion::Distorsion(int wave_res, int wave_upq,
     octoutl(NULL),
     octoutr(NULL),
     outvolume(0.5f),
+    Fpre(NULL),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(samplerate),
     WAVE_RES(wave_res),
@@ -69,12 +70,11 @@ Distorsion::Distorsion(int wave_res, int wave_upq,
     DCr(NULL),
     dwshapel(NULL),
     dwshaper(NULL),
-    Fpre(NULL),
     interpbuf(NULL)
 {
     initialize();
 
-    setpreset(0, Ppreset);
+    setpreset(Ppreset);
     cleanup();
 }
 
@@ -357,16 +357,12 @@ Distorsion::setoctave(int Poctave)
 }
 
 void
-Distorsion::setpreset(int dgui, int npreset)
+Distorsion::setpreset(int npreset)
 {
     const int PRESET_SIZE = C_DIST_PARAMETERS;
-    const int NUM_PRESETS = 6;
+    const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
-        //Overdrive 1
-        {84, 64, 35, 56, 40, 0, 0, 6703, 21, 0, 0, 0, 0},
-        //Overdrive 2
-        {85, 64, 35, 29, 45, 1, 0, 25040, 21, 0, 0, 0, 0},
         //Distorsion 1
         {0, 64, 0, 87, 14, 6, 0, 3134, 157, 0, 1, 0, 0},
         //Distorsion 2
@@ -377,18 +373,10 @@ Distorsion::setpreset(int dgui, int npreset)
         {84, 64, 35, 63, 50, 2, 0, 824, 21, 0, 0, 0, 0}
     };
 
-    // (npreset > 5) means user defined (Insert) presets for Distorsion
-    if ((dgui == 0) && (npreset > 5))       // efx_Distorsion = dgui = 0
+    // (npreset > NUM_PRESETS - 1) means user defined (Insert) presets for Distorsion
+    if (npreset > NUM_PRESETS - 1)
     {
-        Fpre->ReadPreset(EFX_DISTORTION, npreset - 5, pdata);
-        
-        for (int n = 0; n < PRESET_SIZE; n++)
-            changepar(n, pdata[n]);
-    }
-    // (npreset > 1) means user defined (Insert) presets for Overdrive
-    else if ((dgui == 1) && (npreset > 1))  // efx_Overdrive = dgui = 1
-    {
-        Fpre->ReadPreset(EFX_OVERDRIVE, npreset - 1, pdata);
+        Fpre->ReadPreset(EFX_DISTORTION, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);

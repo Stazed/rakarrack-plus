@@ -97,6 +97,7 @@ set (ProgSources
     Echo.C
     Phaser.C
     Distorsion.C
+    Overdrive.C
     EQ.C
     Compressor.C
     AnalogFilter.C

@@ -6041,7 +6041,7 @@ LV2_Handle init_overdrivelv2(const LV2_Descriptor* /* descriptor */,double sampl
 
     getFeatures(plug,host_features);
 
-    plug->overdrive = new Distorsion(/*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
+    plug->overdrive = new Overdrive(/*oversampling*/2, /*up interpolation method*/4, /*down interpolation method*/2, sample_freq, plug->period_max);
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);

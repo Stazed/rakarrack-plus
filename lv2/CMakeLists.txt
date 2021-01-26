@@ -10,6 +10,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/AnalogFilter.C
   ../src/Compressor.C
   ../src/Distorsion.C
+  ../src/Overdrive.C
   ../src/Waveshaper.C
   ../src/Resample.C
   ../src/FPreset.C

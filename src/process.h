@@ -12,6 +12,7 @@
 #include "Echo.h"
 #include "Phaser.h"
 #include "Distorsion.h"
+#include "Overdrive.h"
 #include "EQ.h"
 #include "Compressor.h"
 #include "Alienwah.h"

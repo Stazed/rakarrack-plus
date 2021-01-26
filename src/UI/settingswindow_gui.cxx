@@ -3354,7 +3354,7 @@ void SettingsWindowGui::update_overdrive_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_rkr->efx_Overdrive;
-  m_rkr->efx_Overdrive = new Distorsion(m_rkr->Ovrd_res_amount, m_rkr->Ovrd_up_q, m_rkr->Ovrd_down_q, m_rkr->fSample_rate, m_rkr->period);
+  m_rkr->efx_Overdrive = new Overdrive(m_rkr->Ovrd_res_amount, m_rkr->Ovrd_up_q, m_rkr->Ovrd_down_q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);

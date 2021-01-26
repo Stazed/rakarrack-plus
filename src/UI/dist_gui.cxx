@@ -20,7 +20,7 @@ void DistGui::cb_dist_activar(RKR_Light_Button* o, void* v) {
 
 void DistGui::cb_dist_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset(0,(int)(o->value()+2));
+if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset((int)(o->value()));
 dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(Dist_DryWet)));
 dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(Dist_LR_Cross));

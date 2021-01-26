@@ -20,7 +20,7 @@ void OvrdGui::cb_ovrd_activar(RKR_Light_Button* o, void* v) {
 
 void OvrdGui::cb_ovrd_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset(1,(int) o->value());
+if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset((int) o->value());
 ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Overdrive_DryWet)));
 ovrd_pan->value(rkr->efx_Overdrive->getpar(Overdrive_Pan)-64);
 ovrd_LRc->value(rkr->efx_Overdrive->getpar(Overdrive_LR_Cross));

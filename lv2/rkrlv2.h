@@ -39,6 +39,7 @@
 #include"EQ.h"
 #include"Compressor.h"
 #include"Distorsion.h"
+#include"Overdrive.h"
 #include"Echo.h"
 #include"Chorus.h"
 #include"Flanger.h"
@@ -329,7 +330,7 @@ typedef struct _RKRLV2
     MIDIConverter* midic; //44
     Convolotron* convol;  //45
     Flanger* flanger;     //46
-    Distorsion* overdrive;   //47
+    Overdrive* overdrive;   //47
 
     
 } RKRLV2;

@@ -39,7 +39,7 @@ rgui->findpos(EFX_DISTORTION,(int)o->value(),o);} selected
     label Preset
     user_data 12002
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset(0,(int)(o->value()+2));
+if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset((int)(o->value()));
 dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(Dist_DryWet)));
 dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan)-64);
 dist_LRc->value(rkr->efx_Distorsion->getpar(Dist_LR_Cross));

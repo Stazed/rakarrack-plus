@@ -325,7 +325,7 @@ Chorus::setpreset(int npreset)
         {64, 64, 7, 117, 0, 50, 115, 9, 31, 127, 0, 1, 0}
     };
 
-    // (npreset > 4) means user defined (Insert) presets for Chorus
+    // (npreset > NUM_PRESETS - 1) means user defined (Insert) presets for Chorus
     if (npreset > NUM_PRESETS - 1)
     {
         Fpre->ReadPreset(EFX_CHORUS, npreset - NUM_PRESETS + 1, pdata);

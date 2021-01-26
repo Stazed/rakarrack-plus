@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1
+      user_data 1 selected
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -1749,8 +1749,7 @@ if(m_rkr->efx_StereoHarm->getpar(Sharm_Select))
     m_rkr->efx_StereoHarm->changepar(Sharm_Select, m_rkr->efx_StereoHarm->getpar(Sharm_Select));
     m_rkr->RC_Stereo_Harm->cleanup();
     m_rgui->Chord(1);
-}} {selected
-    }
+}} {}
   }
   Function {update_sequence_quality()} {return_type void
   } {
@@ -1875,7 +1874,7 @@ std::vector<int> save_state = m_rkr->efx_Overdrive->save_parameters();
 
 /* Delete and re-create the efx with new resample settings */
 delete m_rkr->efx_Overdrive;
-m_rkr->efx_Overdrive = new Distorsion(m_rkr->Ovrd_res_amount, m_rkr->Ovrd_up_q, m_rkr->Ovrd_down_q, m_rkr->fSample_rate, m_rkr->period);
+m_rkr->efx_Overdrive = new Overdrive(m_rkr->Ovrd_res_amount, m_rkr->Ovrd_up_q, m_rkr->Ovrd_down_q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
