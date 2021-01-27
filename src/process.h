@@ -6,6 +6,7 @@
 //main class for processing engine
 #include "global.h"
 
+#include "Effect.h"
 #include "Reverb.h"
 #include "Chorus.h"
 #include "Flanger.h"
@@ -711,14 +712,13 @@ public:
     // class pointers
     class Reverb *efx_Rev;
     class Chorus *efx_Chorus;
-    class Chorus *efx_Flanger;
+    class Flanger *efx_Flanger;
     class Phaser *efx_Phaser;
     class Analog_Phaser *efx_APhaser;
     class EQ *efx_EQ1;
     class ParametricEQ *efx_EQ2;
     class Echo *efx_Echo;
-    class Distorsion *efx_Distorsion;
-    class Distorsion *efx_Overdrive;
+    class Overdrive *efx_Overdrive;
     class Compressor *efx_Compressor;
     class WahWah *efx_WahWah;
     class Alienwah *efx_Alienwah;
@@ -738,6 +738,12 @@ public:
     class Recognize *RingRecNote;
     class RecChord *RC_Harm;
     class RecChord *RC_Stereo_Harm;
+
+    /**
+     * Pointer array to all rack effects, indexed by EFX_Index.
+     */
+    Effect *Rack_Effects[C_NUMBER_EFFECTS];
+    
     class Compressor *efx_FLimiter;
     class Valve *efx_Valve;
     class Dflange *efx_DFlange;

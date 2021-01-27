@@ -11,7 +11,7 @@ void DistGui::cb_dist_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_DISTORTION]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Distorsion->cleanup();
+rkr->Rack_Effects[EFX_DISTORTION]->cleanup();
 rgui->findpos(EFX_DISTORTION,(int)o->value(),o);
 }
 void DistGui::cb_dist_activar(RKR_Light_Button* o, void* v) {
@@ -20,19 +20,19 @@ void DistGui::cb_dist_activar(RKR_Light_Button* o, void* v) {
 
 void DistGui::cb_dist_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12002)) rkr->efx_Distorsion->setpreset((int)(o->value()));
-dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(Dist_DryWet)));
-dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan)-64);
-dist_LRc->value(rkr->efx_Distorsion->getpar(Dist_LR_Cross));
-dist_drive->value(rkr->efx_Distorsion->getpar(Dist_Drive));
-dist_level->value(rkr->efx_Distorsion->getpar(Dist_Level));
-dist_tipo->value(rkr->efx_Distorsion->getpar(Dist_Type));
-dist_neg->value(rkr->efx_Distorsion->getpar(Dist_Negate));
-dist_lpf->value(rkr->efx_Distorsion->getpar(Dist_LPF));
-dist_hpf->value(rkr->efx_Distorsion->getpar(Dist_HPF));
-dist_st->value(rkr->efx_Distorsion->getpar(Dist_Stereo));
-dist_pf->value(rkr->efx_Distorsion->getpar(Dist_Prefilter));
-dist_oct->value(rkr->efx_Distorsion->getpar(Dist_Suboctave));
+if((ud==0)||(ud==12002)) rkr->Rack_Effects[EFX_DISTORTION]->setpreset((int)(o->value()));
+dist_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_DryWet)));
+dist_pan->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Pan)-64);
+dist_LRc->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LR_Cross));
+dist_drive->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Drive));
+dist_level->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Level));
+dist_tipo->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Type));
+dist_neg->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Negate));
+dist_lpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LPF));
+dist_hpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_HPF));
+dist_st->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Stereo));
+dist_pf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Prefilter));
+dist_oct->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Suboctave));
 }
 void DistGui::cb_dist_preset(RKR_Choice* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_preset_i(o,v);
@@ -52,7 +52,7 @@ void DistGui::cb_dist_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_DryWet);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_DryWet,Dry_Wet((int)(o->value())));
 }
 void DistGui::cb_dist_WD(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_WD_i(o,v);
@@ -64,7 +64,7 @@ void DistGui::cb_dist_LRc_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_LR_Cross);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_LR_Cross,(int)(o->value()));
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_LR_Cross,(int)(o->value()));
 }
 void DistGui::cb_dist_LRc(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_LRc_i(o,v);
@@ -76,7 +76,7 @@ void DistGui::cb_dist_drive_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_Drive);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_Drive,(int)o->value());
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Drive,(int)o->value());
 }
 void DistGui::cb_dist_drive(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_drive_i(o,v);
@@ -88,7 +88,7 @@ void DistGui::cb_dist_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_Level);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_Level,(int)o->value());
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Level,(int)o->value());
 }
 void DistGui::cb_dist_level(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_level_i(o,v);
@@ -101,28 +101,28 @@ void DistGui::cb_dist_tipo_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_Distorsion->changepar(Dist_Type,(int)o->value());
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Type,(int)o->value());
 }
 void DistGui::cb_dist_tipo(RKR_Choice* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_tipo_i(o,v);
 }
 
 void DistGui::cb_dist_neg_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(Dist_Negate,(int)o->value());
+  rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Negate,(int)o->value());
 }
 void DistGui::cb_dist_neg(RKR_Check_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_neg_i(o,v);
 }
 
 void DistGui::cb_dist_pf_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(Dist_Prefilter,(int)o->value());
+  rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Prefilter,(int)o->value());
 }
 void DistGui::cb_dist_pf(RKR_Check_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_pf_i(o,v);
 }
 
 void DistGui::cb_dist_st_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Distorsion->changepar(Dist_Stereo,(int)o->value());
+  rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Stereo,(int)o->value());
 }
 void DistGui::cb_dist_st(RKR_Check_Button* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_st_i(o,v);
@@ -134,7 +134,7 @@ void DistGui::cb_dist_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_Pan);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_Pan,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Pan,(int)(o->value()+64));
 }
 void DistGui::cb_dist_pan(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_pan_i(o,v);
@@ -146,7 +146,7 @@ void DistGui::cb_dist_oct_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_Suboctave);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_Suboctave,(int)o->value());
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Suboctave,(int)o->value());
 }
 void DistGui::cb_dist_oct(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_oct_i(o,v);
@@ -158,7 +158,7 @@ void DistGui::cb_dist_lpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_LPF);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_LPF,(int)o->value());
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_LPF,(int)o->value());
 }
 void DistGui::cb_dist_lpf(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_lpf_i(o,v);
@@ -170,7 +170,7 @@ void DistGui::cb_dist_hpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Dist_HPF);
  return;
 } 
-rkr->efx_Distorsion->changepar(Dist_HPF,(int)o->value());
+rkr->Rack_Effects[EFX_DISTORTION]->changepar(Dist_HPF,(int)o->value());
 }
 void DistGui::cb_dist_hpf(RKR_Slider* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_hpf_i(o,v);

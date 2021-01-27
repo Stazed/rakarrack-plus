@@ -553,13 +553,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_DISTORTION:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Distorsion->getpar(Dist_DryWet), efx_Distorsion->getpar(Dist_Pan),
-                efx_Distorsion->getpar(Dist_LR_Cross), efx_Distorsion->getpar(Dist_Drive),
-                efx_Distorsion->getpar(Dist_Level), efx_Distorsion->getpar(Dist_Type),
-                efx_Distorsion->getpar(Dist_Negate), efx_Distorsion->getpar(Dist_LPF),
-                efx_Distorsion->getpar(Dist_HPF), efx_Distorsion->getpar(Dist_Stereo),
-                efx_Distorsion->getpar(Dist_Prefilter), efx_Distorsion->getpar(Dist_SKIP_11),
-                efx_Distorsion->getpar(Dist_Suboctave), EFX_Bypass[EFX_DISTORTION]);
+                Rack_Effects[EFX_DISTORTION]->getpar(Dist_DryWet), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Pan),
+                Rack_Effects[EFX_DISTORTION]->getpar(Dist_LR_Cross), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Drive),
+                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Level), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Type),
+                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Negate), Rack_Effects[EFX_DISTORTION]->getpar(Dist_LPF),
+                Rack_Effects[EFX_DISTORTION]->getpar(Dist_HPF), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Stereo),
+                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Prefilter), Rack_Effects[EFX_DISTORTION]->getpar(Dist_SKIP_11),
+                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Suboctave), EFX_Bypass[EFX_DISTORTION]);
         break;
 
     case EFX_EQ:
@@ -1306,9 +1306,9 @@ RKR::Actualizar_Audio()
 
         case EFX_DISTORTION:
             EFX_Bypass[EFX_DISTORTION] = 0;
-            efx_Distorsion->cleanup();
+            Rack_Effects[EFX_DISTORTION]->cleanup();
             for (i = 0; i < C_DIST_PARAMETERS; i++)
-                efx_Distorsion->changepar(i, lv[EFX_DISTORTION][i]);
+                Rack_Effects[EFX_DISTORTION]->changepar(i, lv[EFX_DISTORTION][i]);
             EFX_Bypass[EFX_DISTORTION] = EFX_Bank_Bypass[EFX_DISTORTION];
             break;
 
@@ -2310,7 +2310,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_OVERDRIVE_PARAMETERS; j++)
         lv[EFX_OVERDRIVE][j] = efx_Overdrive->getpar(j);
     for (j = 0; j < C_DIST_PARAMETERS; j++)
-        lv[EFX_DISTORTION][j] = efx_Distorsion->getpar(j);
+        lv[EFX_DISTORTION][j] = Rack_Effects[EFX_DISTORTION]->getpar(j);
     for (j = 0; j < C_COMPRESS_PARAMETERS; j++)
         lv[EFX_COMPRESSOR][j] = efx_Compressor->getpar(j);
     for (j = 0; j < C_WAHWAH_PARAMETERS; j++)

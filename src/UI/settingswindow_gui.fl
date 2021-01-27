@@ -35,7 +35,7 @@ decl {\#include "RKR_Scroll.h"} {public global
 decl {\#include "RKR_Tabs.h"} {public global
 }
 
-widget_class SettingsWindowGui {open
+widget_class SettingsWindowGui {open selected
   xywh {309 156 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -1837,29 +1837,29 @@ m_rkr->quality_update = false;
 /* Reset bypass */
 m_rkr->EFX_Bypass[EFX_VOCODER] = hold_bypass;} {}
   }
-  Function {update_distortion_quality()} {return_type void
+  Function {update_distortion_quality()} {open return_type void
   } {
     code {/* shut off all processing */
-m_rkr->quality_update = true;
-
-/* Wait a bit */
-usleep(C_MILLISECONDS_25);
-
-/* Save current parameters */
-std::vector<int> save_state = m_rkr->efx_Distorsion->save_parameters();
-
-/* Delete and re-create the efx with new resample settings */
-delete m_rkr->efx_Distorsion;
-m_rkr->efx_Distorsion = new Distorsion(m_rkr->Dist_res_amount, m_rkr->Dist_up_q, m_rkr->Dist_down_q, m_rkr->fSample_rate, m_rkr->period);
-
-/* Wait for things to complete */
-usleep(C_MILLISECONDS_50);
-
-/* Reset parameters */
-m_rkr->efx_Distorsion->reset_parameters(save_state);
-
-/* Turn processing back on */
-m_rkr->quality_update = false;} {}
+  m_rkr->quality_update = true;
+  
+  /* Wait a bit */
+  usleep(C_MILLISECONDS_25);
+  
+  /* Save current parameters */
+  std::vector<int> save_state = m_rkr->Rack_Effects[EFX_DISTORTION]->save_parameters();
+  
+  /* Delete and re-create the efx with new resample settings */
+  delete m_rkr->Rack_Effects[EFX_DISTORTION];
+  m_rkr->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_rkr->Dist_res_amount, m_rkr->Dist_up_q, m_rkr->Dist_down_q, m_rkr->fSample_rate, m_rkr->period);
+  
+  /* Wait for things to complete */
+  usleep(C_MILLISECONDS_50);
+  
+  /* Reset parameters */
+  m_rkr->Rack_Effects[EFX_DISTORTION]->reset_parameters(save_state);
+  
+  /* Turn processing back on */
+  m_rkr->quality_update = false;} {}
   }
   Function {update_overdrive_quality()} {return_type void
   } {

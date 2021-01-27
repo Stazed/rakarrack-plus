@@ -3228,7 +3228,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DERELICT->derelict_oct->redraw();
                 break;
             case MC_Dist_Suboctave:
-                DIST->dist_oct->value(rkr->efx_Distorsion->getpar(Dist_Suboctave));
+                DIST->dist_oct->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Suboctave));
                 DIST->dist_oct->redraw();
                 break;
 
@@ -3297,7 +3297,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_WD->redraw();
                 break;
             case MC_Dist_DryWet:
-                DIST->dist_WD->value(Dry_Wet(rkr->efx_Distorsion->getpar(Dist_DryWet)));
+                DIST->dist_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_DryWet)));
                 DIST->dist_WD->redraw();
                 break;
             case MC_Harm_DryWet:
@@ -3330,7 +3330,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_pan->redraw();
                 break;
             case MC_Dist_Pan:
-                DIST->dist_pan->value(rkr->efx_Distorsion->getpar(Dist_Pan) - 64);
+                DIST->dist_pan->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Pan) - 64);
                 DIST->dist_pan->redraw();
                 break;
             case MC_Harm_Pan:
@@ -3414,7 +3414,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_drive->redraw();
                 break;
             case MC_Dist_Drive:
-                DIST->dist_drive->value(rkr->efx_Distorsion->getpar(Dist_Drive));
+                DIST->dist_drive->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Drive));
                 DIST->dist_drive->redraw();
                 break;
             case MC_Overdrive_Level:
@@ -3422,7 +3422,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_level->redraw();
                 break;
             case MC_Dist_Level:
-                DIST->dist_level->value(rkr->efx_Distorsion->getpar(Dist_Level));
+                DIST->dist_level->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Level));
                 DIST->dist_level->redraw();
                 break;
             case MC_Chorus_LFO_Tempo:
@@ -3482,7 +3482,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_lpf->redraw();
                 break;
             case MC_Dist_LPF:
-                DIST->dist_lpf->value(rkr->efx_Distorsion->getpar(Dist_LPF));
+                DIST->dist_lpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LPF));
                 DIST->dist_lpf->redraw();
                 break;
             case MC_Reverb_LPF:
@@ -3494,7 +3494,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_hpf->redraw();
                 break;
             case MC_Dist_HPF:
-                DIST->dist_hpf->value(rkr->efx_Distorsion->getpar(Dist_HPF));
+                DIST->dist_hpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_HPF));
                 DIST->dist_hpf->redraw();
                 break;
             case MC_Reverb_HPF:
@@ -3518,7 +3518,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_LRc->redraw();
                 break;
             case MC_Dist_LR_Cross:
-                DIST->dist_LRc->value(rkr->efx_Distorsion->getpar(Dist_LR_Cross));
+                DIST->dist_LRc->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LR_Cross));
                 DIST->dist_LRc->redraw();
                 break;
             case MC_Alien_LR_Cross:
@@ -4946,7 +4946,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SHAR->shar_SELECT->redraw();
                 break;
             case MC_Dist_Type:
-                DIST->dist_tipo->value(rkr->efx_Distorsion->getpar(Dist_Type));
+                DIST->dist_tipo->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Type));
                 DIST->dist_tipo->redraw();
                 break;
             case MC_Overdrive_Type:

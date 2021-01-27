@@ -1554,7 +1554,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_Suboctave:
-        efx_Distorsion->changepar(Dist_Suboctave, value);
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_Suboctave, value);
         break;
 
     case MC_Unused_10:
@@ -1626,7 +1626,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_DryWet:
-        efx_Distorsion->changepar(Dist_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_DryWet, Dry_Wet(value));
         break;
 
     case MC_Harm_DryWet:
@@ -1658,7 +1658,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_Pan:
-        efx_Distorsion->changepar(Dist_Pan, value);
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_Pan, value);
         break;
 
     case MC_Harm_Pan:
@@ -1741,7 +1741,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_Drive:
-        efx_Distorsion->changepar(Dist_Drive, value);
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_Drive, value);
         break;
 
     case MC_Overdrive_Level:
@@ -1749,7 +1749,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_Level:
-        efx_Distorsion->changepar(Dist_Level, value);
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_Level, value);
         break;
 
     case MC_Chorus_LFO_Tempo:
@@ -1809,7 +1809,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_LPF:
-        efx_Distorsion->changepar(Dist_LPF, ret_LPF(value));
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_LPF, ret_LPF(value));
         break;
 
     case MC_Reverb_LPF:
@@ -1821,7 +1821,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_HPF:
-        efx_Distorsion->changepar(Dist_HPF, ret_HPF(value));
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_HPF, ret_HPF(value));
         break;
 
     case MC_Reverb_HPF:
@@ -1845,7 +1845,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_LR_Cross:
-        efx_Distorsion->changepar(Dist_LR_Cross, value);
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_LR_Cross, value);
         break;
 
     case MC_Alien_LR_Cross:
@@ -3301,7 +3301,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dist_Type:
-        efx_Distorsion->changepar(Dist_Type, (int) ((float) value * C_MC_30_RANGE));
+        Rack_Effects[EFX_DISTORTION]->changepar(Dist_Type, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case MC_Overdrive_Type:
