@@ -628,12 +628,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_HARMONIZER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Har->getpar(Harm_DryWet), efx_Har->getpar(Harm_Pan),
-                efx_Har->getpar(Harm_Gain), efx_Har->getpar(Harm_Interval),
-                efx_Har->getpar(Harm_Filter_Freq), efx_Har->getpar(Harm_Select),
-                efx_Har->getpar(Harm_Note), efx_Har->getpar(Harm_Chord),
-                efx_Har->getpar(Harm_Filter_Gain), efx_Har->getpar(Harm_Filter_Q),
-                efx_Har->getpar(Harm_MIDI), EFX_Bypass[EFX_HARMONIZER]);
+                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_DryWet), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Pan),
+                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Gain), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval),
+                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select),
+                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord),
+                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q),
+                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI), EFX_Bypass[EFX_HARMONIZER]);
         break;
 
     case EFX_MUSICAL_DELAY:
@@ -1407,9 +1407,9 @@ RKR::Actualizar_Audio()
 
         case EFX_HARMONIZER:
             EFX_Bypass[EFX_HARMONIZER] = 0;
-            efx_Har->cleanup();
+            Rack_Effects[EFX_HARMONIZER]->cleanup();
             for (i = 0; i < C_HARM_PARAMETERS; i++)
-                efx_Har->changepar(i, lv[EFX_HARMONIZER][i]);
+                Rack_Effects[EFX_HARMONIZER]->changepar(i, lv[EFX_HARMONIZER][i]);
             EFX_Bypass[EFX_HARMONIZER] = EFX_Bank_Bypass[EFX_HARMONIZER];
             break;
 
@@ -2320,7 +2320,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_PAN_PARAMETERS; j++)
         lv[EFX_PAN][j] = efx_Pan->getpar(j);
     for (j = 0; j < C_HARM_PARAMETERS; j++)
-        lv[EFX_HARMONIZER][j] = efx_Har->getpar(j);
+        lv[EFX_HARMONIZER][j] = Rack_Effects[EFX_HARMONIZER]->getpar(j);
     for (j = 0; j < C_MUSIC_PARAMETERS; j++)
         lv[EFX_MUSICAL_DELAY][j] = efx_MusDelay->getpar(j);
     for (j = 0; j < C_GATE_PARAMETERS; j++)

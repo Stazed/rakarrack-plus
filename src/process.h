@@ -724,7 +724,6 @@ public:
     class Alienwah *efx_Alienwah;
     class Cabinet *efx_Cabinet;
     class Pan *efx_Pan;
-    class Harmonizer *efx_Har;
     class MusicDelay *efx_MusDelay;
     class Gate *efx_Gate;
     class Derelict *efx_Derelict;

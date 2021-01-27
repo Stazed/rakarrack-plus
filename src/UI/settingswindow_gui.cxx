@@ -3168,16 +3168,16 @@ void SettingsWindowGui::update_harmonizer_quality() {
   usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
-  std::vector<int> save_state = m_rkr->efx_Har->save_parameters();
+  std::vector<int> save_state = m_rkr->Rack_Effects[EFX_HARMONIZER]->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->efx_Har;
-  m_rkr->efx_Har = new Harmonizer((long) rkr->HarQual, rkr->Har_Down, rkr->Har_U_Q, rkr->Har_D_Q, rkr->fSample_rate, rkr->period);
+  delete m_rkr->Rack_Effects[EFX_HARMONIZER];
+  m_rkr->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) rkr->HarQual, rkr->Har_Down, rkr->Har_U_Q, rkr->Har_D_Q, rkr->fSample_rate, rkr->period);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
   /* Reset parameters and filename */
-  m_rkr->efx_Har->reset_parameters(save_state);
+  m_rkr->Rack_Effects[EFX_HARMONIZER]->reset_parameters(save_state);
   
   /* Turn processing back on */
   m_rkr->quality_update = false;
@@ -3186,9 +3186,9 @@ void SettingsWindowGui::update_harmonizer_quality() {
   m_rkr->EFX_Bypass[EFX_HARMONIZER] = hold_bypass;
   
   /* Reset user select */
-  if(m_rkr->efx_Har->getpar(Harm_Select))
+  if(m_rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select))
   {
-      m_rkr->efx_Har->changepar(Harm_Select, m_rkr->efx_Har->getpar(Harm_Select));
+      m_rkr->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Select, m_rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select));
       m_rkr->RC_Harm->cleanup();
       m_rgui->Chord(0);
   }

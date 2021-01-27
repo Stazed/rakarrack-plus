@@ -469,15 +469,15 @@ void RKRGUI::GuiTimeout(void)
 
     if (rkr->EFX_Bypass[EFX_HARMONIZER])
     {
-        if ((rkr->efx_Har->PSELECT) || (rkr->efx_Har->PMIDI))
+        if ((rkr->Rack_Effects[EFX_HARMONIZER]->PSELECT) || (rkr->Rack_Effects[EFX_HARMONIZER]->PMIDI))
         {
             if (rkr->RC_Harm->cc)
             {
                 HAR->har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
                 rkr->RC_Harm->cc = 0;
                 HAR->har_chordname->redraw();
-                rkr->RC_Harm->Vamos(0, rkr->efx_Har->Pinterval - 12, rkr->HarmRecNote->reconota);
-                rkr->efx_Har->r_ratio = rkr->RC_Harm->r__ratio[0]; //pass the found ratio
+                rkr->RC_Harm->Vamos(0, rkr->Rack_Effects[EFX_HARMONIZER]->Pinterval - 12, rkr->HarmRecNote->reconota);
+                rkr->Rack_Effects[EFX_HARMONIZER]->r_ratio = rkr->RC_Harm->r__ratio[0]; //pass the found ratio
             }
         }
     }
@@ -3139,8 +3139,8 @@ void RKRGUI::Chord(int eff)
     switch (eff)
     {
         case 0:
-            tipo = rkr->efx_Har->getpar(Harm_Chord);
-            undi = rkr->efx_Har->getpar(Harm_Note);
+            tipo = rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord);
+            undi = rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note);
             break;
         case 1:
             tipo = rkr->efx_StereoHarm->getpar(Sharm_Chord);
@@ -3281,11 +3281,11 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUSDELAY->musdelay_gain2->redraw();
                 break;
             case MC_Harm_Filter_Freq:
-                HAR->har_freq1->value(rkr->efx_Har->getpar(Harm_Filter_Freq));
+                HAR->har_freq1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq));
                 HAR->har_freq1->redraw();
                 break;
             case MC_Harm_Interval:
-                HAR->har_int->value(rkr->efx_Har->getpar(Harm_Interval) - 12);
+                HAR->har_int->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval) - 12);
                 HAR->har_int->redraw();
                 break;
             case MC_WahWah_DryWet:
@@ -3301,7 +3301,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_WD->redraw();
                 break;
             case MC_Harm_DryWet:
-                HAR->har_WD->value(Dry_Wet(rkr->efx_Har->getpar(Harm_DryWet)));
+                HAR->har_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_DryWet)));
                 HAR->har_WD->redraw();
                 break;
 
@@ -3334,7 +3334,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_pan->redraw();
                 break;
             case MC_Harm_Pan:
-                HAR->har_pan->value(rkr->efx_Har->getpar(Harm_Pan) - 64);
+                HAR->har_pan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Pan) - 64);
                 HAR->har_pan->redraw();
                 break;
             case MC_Chorus_Pan:
@@ -4796,15 +4796,15 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_delay->redraw();
                 break;
             case MC_Harm_Gain:
-                HAR->har_gan->value(rkr->efx_Har->getpar(Harm_Gain) - 64);
+                HAR->har_gan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Gain) - 64);
                 HAR->har_gan->redraw();
                 break;
             case MC_Harm_Filter_Gain:
-                HAR->har_gan1->value(rkr->efx_Har->getpar(Harm_Filter_Gain) - 64);
+                HAR->har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain) - 64);
                 HAR->har_gan1->redraw();
                 break;
             case MC_Harm_Filter_Q:
-                HAR->har_q1->value(rkr->efx_Har->getpar(Harm_Filter_Q) - 64);
+                HAR->har_q1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q) - 64);
                 HAR->har_q1->redraw();
                 break;
             case MC_Infinity_Band_1:
@@ -4924,12 +4924,12 @@ void RKRGUI::MIDI_control_gui_refresh()
                 REVERBTRON->revtron_LPF->redraw();
                 break;
             case MC_Harm_Note:
-                HAR->har_note->value(rkr->efx_Har->getpar(Harm_Note));
+                HAR->har_note->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note));
                 HAR->har_note->redraw();
                 Chord(0);   // update gui
                 break;
             case MC_Harm_Chord:
-                HAR->har_type->value(rkr->efx_Har->getpar(Harm_Chord));
+                HAR->har_type->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord));
                 HAR->har_type->redraw();
                 Chord(0);   // update gui
                 break;
@@ -4938,7 +4938,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SYNTHFILTER->synthfilter_rand->redraw();
                 break;
             case MC_Harm_Select:
-                HAR->har_SELECT->value(rkr->efx_Har->getpar(Harm_Select));
+                HAR->har_SELECT->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select));
                 HAR->har_SELECT->redraw();
                 break;
             case MC_Sharm_Select:

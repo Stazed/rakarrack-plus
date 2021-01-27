@@ -27,6 +27,7 @@
 #define HARMONIZER_H
 
 #include <vector>
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "smbPitchShift.h"
 #include "Resample.h"
@@ -48,7 +49,7 @@ enum Harm_Index
     Harm_MIDI
 };
 
-class Harmonizer
+class Harmonizer :public Effect
 {
 
 public:
@@ -73,11 +74,6 @@ public:
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
 
-    int Ppreset;
-    int Pinterval;
-    int PMIDI;
-    int PSELECT;
-    int mira;
     int DS_state;
     int nPERIOD;
     int nSAMPLE_RATE;
@@ -92,10 +88,6 @@ public:
     float *outi;
     float *outo;
     float *templ, *tempr;
-
-    float outvolume;
-
-    float r_ratio;
 
 private:
 
@@ -130,7 +122,6 @@ private:
     class Resample *D_Resample;
 
     PitchShifter *PS;
-    class FPreset *Fpre;
 
     unsigned int SAMPLE_RATE;
     double fSAMPLE_RATE;

@@ -1605,14 +1605,14 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Harm_Filter_Freq:
-        efx_Har->changepar(Harm_Filter_Freq, ret_LPF(value));
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Filter_Freq, ret_LPF(value));
         break;
 
     case MC_Harm_Interval:
         if (EFX_Bypass[EFX_HARMONIZER])
         {
             EFX_Bypass[EFX_HARMONIZER] = 0;
-            efx_Har->changepar(Harm_Interval, (int) ((float) value * C_MC_24_RANGE));
+            Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval, (int) ((float) value * C_MC_24_RANGE));
             EFX_Bypass[EFX_HARMONIZER] = 1;
         }
         break;
@@ -1630,7 +1630,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Harm_DryWet:
-        efx_Har->changepar(Harm_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_DryWet, Dry_Wet(value));
         break;
 
     case MC_Unused_32:
@@ -1662,7 +1662,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Harm_Pan:
-        efx_Har->changepar(Harm_Pan, value);
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Pan, value);
         break;
 
     case MC_Chorus_Pan:
@@ -3153,15 +3153,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
         
     case MC_Harm_Gain:
-        efx_Har->changepar(Harm_Gain, value);
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Gain, value);
         break;
 
     case MC_Harm_Filter_Gain:
-        efx_Har->changepar(Harm_Filter_Gain, value);
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Filter_Gain, value);
         break;
 
     case MC_Harm_Filter_Q:
-        efx_Har->changepar(Harm_Filter_Q, value);
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Filter_Q, value);
         break;
 
     case MC_Infinity_Band_1:
@@ -3281,11 +3281,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Harm_Note:
-        efx_Har->changepar(Harm_Note, (int) ((float) value * C_MC_23_RANGE));
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Note, (int) ((float) value * C_MC_23_RANGE));
         break;
 
     case MC_Harm_Chord:
-        efx_Har->changepar(Harm_Chord, (int) ((float) value * C_MC_33_RANGE));
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Chord, (int) ((float) value * C_MC_33_RANGE));
         break;
 
     case MC_Synthfilter_LFO_Random:
@@ -3293,7 +3293,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Harm_Select:
-        efx_Har->changepar(Harm_Select, value);
+        Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Select, value);
         break;
 
     case MC_Sharm_Select:

@@ -32,25 +32,25 @@ class Effect
 public:
 
     Effect (double sample_rate, uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL), PMIDI(), PSELECT(), Pinterval(), r_ratio(), mira() {};
 
     // Distortion, Overdrive, Derelict, DistBand, StompBox, Convolotron, Reverbtron
     Effect (int, int, int, double, uint32_t) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL), PMIDI(), PSELECT(), Pinterval(), r_ratio(), mira() {};
 
     // Harmonizer, Sequence, Shifter, StereoHarm
     Effect (long int Quality, int DS, int uq, int dq, double sample_rate,
         uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL), PMIDI(), PSELECT(), Pinterval(), r_ratio(), mira() {};
 
     // Looper
     Effect (float size, double samplerate, uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL), PMIDI(), PSELECT(), Pinterval(), r_ratio(), mira() {};
 
     // Vocoder
     Effect (float *auxresampled_, int bands, int DS, int uq, int dq,
         double sample_rate, uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL), PMIDI(), PSELECT(), Pinterval(), r_ratio(), mira() {};
 
     virtual ~ Effect () {};
     
@@ -71,6 +71,13 @@ public:
     float outvolume;
     int Ppreset;
     class FPreset *Fpre;
+    
+    // Harmonizer
+    int Pinterval;
+    int PMIDI;
+    int PSELECT;
+    float r_ratio;
+    int mira;
 
 };
 

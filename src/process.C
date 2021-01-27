@@ -64,7 +64,6 @@ RKR::RKR() :
     efx_Alienwah(NULL),
     efx_Cabinet(NULL),
     efx_Pan(NULL),
-    efx_Har(NULL),
     efx_MusDelay(NULL),
     efx_Gate(NULL),
     efx_Derelict(NULL),
@@ -396,7 +395,7 @@ RKR::~RKR()
     delete efx_Alienwah;
     delete efx_Cabinet;
     delete efx_Pan;
-    delete efx_Har;
+    delete Rack_Effects[EFX_HARMONIZER];
     delete efx_MusDelay;
     delete efx_Gate;
     delete efx_Derelict;
@@ -656,7 +655,7 @@ RKR::instantiate_effects()
     efx_Alienwah = new Alienwah(fSample_rate, period);
     efx_Cabinet = new Cabinet(fSample_rate, period);
     efx_Pan = new Pan(fSample_rate, period);
-    efx_Har = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
+    Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     efx_MusDelay = new MusicDelay(fSample_rate, period);
     efx_Gate = new Gate(fSample_rate, period);
     efx_Derelict = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
@@ -1172,7 +1171,7 @@ RKR::cleanup_efx()
     efx_Alienwah->cleanup();
     efx_Cabinet->cleanup();
     efx_Pan->cleanup();
-    efx_Har->cleanup();
+    Rack_Effects[EFX_HARMONIZER]->cleanup();
     efx_MusDelay->cleanup();
     efx_Gate->cleanup();
     efx_Derelict->cleanup();
@@ -1263,17 +1262,17 @@ RKR::Alg(float *origl, float *origr, void *)
 
         if ((EFX_Bypass[EFX_HARMONIZER]) && (have_signal))
         {
-            if (efx_Har->mira)
+            if (Rack_Effects[EFX_HARMONIZER]->mira)
             {
-                if ((efx_Har->PMIDI) || (efx_Har->PSELECT))
+                if ((Rack_Effects[EFX_HARMONIZER]->PMIDI) || (Rack_Effects[EFX_HARMONIZER]->PSELECT))
                 {
                     HarmRecNote->schmittFloat(efxoutl, efxoutr);
                     if ((HarmRecNote->reconota != -1) && (HarmRecNote->reconota != HarmRecNote->last))
                     {
                         if (HarmRecNote->afreq > 0.0)
                         {
-                            RC_Harm->Vamos(0, efx_Har->Pinterval - 12, HarmRecNote->reconota);
-                            efx_Har->r_ratio = RC_Harm->r__ratio[0]; //pass the found ratio
+                            RC_Harm->Vamos(0, Rack_Effects[EFX_HARMONIZER]->Pinterval - 12, HarmRecNote->reconota);
+                            Rack_Effects[EFX_HARMONIZER]->r_ratio = RC_Harm->r__ratio[0]; //pass the found ratio
                             HarmRecNote->last = HarmRecNote->reconota;
                         }
                     }
@@ -1439,8 +1438,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_HARMONIZER:
                 if (EFX_Bypass[EFX_HARMONIZER])
                 {
-                    efx_Har->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_HARMONIZER, efx_Har->outvolume);
+                    Rack_Effects[EFX_HARMONIZER]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_HARMONIZER, Rack_Effects[EFX_HARMONIZER]->outvolume);
                 }
                 break;
 
