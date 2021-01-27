@@ -36,6 +36,7 @@
 #include<string.h>
 #include<unistd.h>
 
+#include"Effect.h"
 #include"EQ.h"
 #include"Compressor.h"
 #include"Distorsion.h"

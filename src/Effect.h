@@ -32,25 +32,25 @@ class Effect
 public:
 
     Effect (double sample_rate, uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Distortion, Overdrive, Derelict, DistBand, StompBox, Convolotron, Reverbtron
     Effect (int, int, int, double, uint32_t) :
-        outvolume(0.5f), Ppreset(), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Harmonizer, Sequence, Shifter, StereoHarm
     Effect (long int Quality, int DS, int uq, int dq, double sample_rate,
         uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Looper
     Effect (float size, double samplerate, uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Vocoder
     Effect (float *auxresampled_, int bands, int DS, int uq, int dq,
         double sample_rate, uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     virtual ~ Effect () {};
     

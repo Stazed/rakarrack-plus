@@ -31,11 +31,9 @@
 Distorsion::Distorsion(int wave_res, int wave_upq,
                        int wave_dnq, double samplerate,
                        uint32_t intermediate_bufsize) :
-    Ppreset(),
+    Effect(wave_res, wave_upq, wave_dnq, samplerate, intermediate_bufsize),
     octoutl(NULL),
     octoutr(NULL),
-    outvolume(0.5f),
-    Fpre(NULL),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(samplerate),
     WAVE_RES(wave_res),

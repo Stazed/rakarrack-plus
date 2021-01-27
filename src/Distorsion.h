@@ -26,6 +26,7 @@
 #define DISTORSION_H
 
 #include <vector>
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 
@@ -48,7 +49,7 @@ enum Dist_Index
     Dist_Suboctave
 };
 
-class Distorsion
+class Distorsion :public Effect
 {
 public:
     Distorsion (int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize);
@@ -71,12 +72,8 @@ public:
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
 
-    int Ppreset;
     float *octoutl;
     float *octoutr;
-    float outvolume;
-    
-    class FPreset *Fpre;
 
 private:
     
