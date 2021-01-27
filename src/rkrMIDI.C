@@ -1593,7 +1593,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_Depth:
-        efx_Chorus->changepar(Chorus_Depth, value);
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_Depth, value);
         break;
 
     case MC_Music_Gain_1:
@@ -1666,7 +1666,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_Pan:
-        efx_Chorus->changepar(Chorus_Pan, value);
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_Pan, value);
         break;
 
     case MC_Flanger_Pan:
@@ -1674,7 +1674,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_DryWet:
-        efx_Chorus->changepar(Chorus_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_DryWet, Dry_Wet(value));
         break;
 
     case MC_Flanger_DryWet:
@@ -1753,7 +1753,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_LFO_Tempo:
-        efx_Chorus->changepar(Chorus_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Flanger_LFO_Tempo:
@@ -1781,7 +1781,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_Feedback:
-        efx_Chorus->changepar(Chorus_Feedback, value);
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_Feedback, value);
         break;
 
     case MC_Flanger_Feedback:
@@ -1829,7 +1829,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_LR_Cross:
-        efx_Chorus->changepar(Chorus_LR_Cross, value);
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_LR_Cross, value);
         break;
 
     case MC_Flanger_LR_Cross:
@@ -1861,7 +1861,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_LFO_Stereo:
-        efx_Chorus->changepar(Chorus_LFO_Stereo, value);
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Stereo, value);
         break;
 
     case MC_Flanger_LFO_Stereo:
@@ -1885,7 +1885,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_LFO_Random:
-        efx_Chorus->changepar(Chorus_LFO_Random, value);
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Random, value);
         break;
 
     case MC_Flanger_LFO_Random:
@@ -3129,7 +3129,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_Delay:
-        efx_Chorus->changepar(Chorus_Delay, value);
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_Delay, value);
         break;
     
     case MC_Echo_Reverse:
@@ -3337,7 +3337,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Chorus_LFO_Type:
-        efx_Chorus->changepar(Chorus_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Flanger_LFO_Type:

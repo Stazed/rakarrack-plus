@@ -26,6 +26,7 @@
 #define CHORUS_H
 #include "EffectLFO.h"
 #include "delayline.h"
+#include "Effect.h"
 
 const int C_CHORUS_PARAMETERS = 13;
 
@@ -46,7 +47,7 @@ enum Chorus_Index
     Chorus_Intense
 };
 
-class Chorus
+class Chorus :public Effect
 {
 
 public:
@@ -61,9 +62,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of s
 
     float fSAMPLE_RATE;
     uint32_t PERIOD;
@@ -100,7 +98,6 @@ public:
     float getdelay (float xlfo);
     float dllo, mdel;
 
-    class FPreset *Fpre;
     class delayline *ldelay, *rdelay;
 
 };

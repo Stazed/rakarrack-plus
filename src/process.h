@@ -711,7 +711,6 @@ public:
 
     // class pointers
     class Reverb *efx_Rev;
-    class Chorus *efx_Chorus;
     class Flanger *efx_Flanger;
     class Phaser *efx_Phaser;
     class Analog_Phaser *efx_APhaser;

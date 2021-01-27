@@ -30,7 +30,7 @@ widget_class {\#include "common_gui_menu.h"} ChorusGui {
 }
 rkr->EFX_Bypass[EFX_CHORUS]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Chorus->cleanup();
+rkr->Rack_Effects[EFX_CHORUS]->cleanup();
 rgui->findpos(EFX_CHORUS,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -39,19 +39,19 @@ rgui->findpos(EFX_CHORUS,(int)o->value(),o);}
     label Preset
     user_data 12005
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12005))rkr->efx_Chorus->setpreset((int) o->value());
-chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(Chorus_DryWet)));
-chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan)-64);
-chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
-chorus_rnd->value(rkr->efx_Chorus->getpar(Chorus_LFO_Random));
-chorus_lfotype->value(rkr->efx_Chorus->getpar(Chorus_LFO_Type));
-chorus_stdf->value(rkr->efx_Chorus->getpar(Chorus_LFO_Stereo));
-chorus_dpth->value(rkr->efx_Chorus->getpar(Chorus_Depth));
-chorus_delay->value(rkr->efx_Chorus->getpar(Chorus_Delay));
-chorus_fb->value(rkr->efx_Chorus->getpar(Chorus_Feedback));
-chorus_LR->value(rkr->efx_Chorus->getpar(Chorus_LR_Cross));
-chorus_subs->value(rkr->efx_Chorus->getpar(Chorus_Subtract));
-chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));} selected
+if((ud==0)||(ud==12005))rkr->Rack_Effects[EFX_CHORUS]->setpreset((int) o->value());
+chorus_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_DryWet)));
+chorus_pan->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Pan)-64);
+chorus_freq->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));
+chorus_rnd->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Random));
+chorus_lfotype->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Type));
+chorus_stdf->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Stereo));
+chorus_dpth->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Depth));
+chorus_delay->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Delay));
+chorus_fb->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Feedback));
+chorus_LR->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LR_Cross));
+chorus_subs->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Subtract));
+chorus_awesome->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Intense));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -83,7 +83,7 @@ chorus_awesome->value(rkr->efx_Chorus->getpar(Chorus_Intense));} selected
  rgui->getMIDIControl(MC_Chorus_DryWet);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -94,7 +94,7 @@ rkr->efx_Chorus->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(MC_Chorus_Pan);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_Pan,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Pan,(int)(o->value()+64));}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -105,7 +105,7 @@ rkr->efx_Chorus->changepar(Chorus_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(MC_Chorus_LFO_Tempo);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_LFO_Tempo,(int)o->value());}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo,(int)o->value());}
     xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -116,7 +116,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Tempo,(int)o->value());}
  rgui->getMIDIControl(MC_Chorus_LFO_Random);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_LFO_Random,(int)o->value());}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Random,(int)o->value());}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -129,7 +129,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Random,(int)o->value());}
  return;
 } 
 
-rkr->efx_Chorus->changepar(Chorus_LFO_Type,(int)o->value())} open
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type,(int)o->value())} open
     xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -137,14 +137,14 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Type,(int)o->value())} open
   Fl_Check_Button chorus_subs {
     label Subtract
     user_data 2
-    callback {rkr->efx_Chorus->changepar(Chorus_Subtract,(int)o->value())}
+    callback {rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Subtract,(int)o->value())}
     xywh {25 94 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button chorus_awesome {
     label Intense
     user_data 2
-    callback {rkr->efx_Chorus->changepar(Chorus_Intense,(int)o->value())}
+    callback {rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Intense,(int)o->value())}
     xywh {88 95 56 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -155,7 +155,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Type,(int)o->value())} open
  rgui->getMIDIControl(MC_Chorus_LFO_Stereo);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_LFO_Stereo,(int)o->value());}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Stereo,(int)o->value());}
     xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -166,7 +166,7 @@ rkr->efx_Chorus->changepar(Chorus_LFO_Stereo,(int)o->value());}
  rgui->getMIDIControl(MC_Chorus_Depth);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_Depth,(int)o->value());}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Depth,(int)o->value());}
     xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -178,7 +178,7 @@ rkr->efx_Chorus->changepar(Chorus_Depth,(int)o->value());}
  return;
 } 
 
-rkr->efx_Chorus->changepar(Chorus_Delay,(int)o->value());}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Delay,(int)o->value());}
     xywh {56 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -189,7 +189,7 @@ rkr->efx_Chorus->changepar(Chorus_Delay,(int)o->value());}
  rgui->getMIDIControl(MC_Chorus_Feedback);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_Feedback,(int)o->value());}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Feedback,(int)o->value());}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -200,7 +200,7 @@ rkr->efx_Chorus->changepar(Chorus_Feedback,(int)o->value());}
  rgui->getMIDIControl(MC_Chorus_LR_Cross);
  return;
 } 
-rkr->efx_Chorus->changepar(Chorus_LR_Cross,(int)(o->value()));}
+rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LR_Cross,(int)(o->value()));}
     xywh {55 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

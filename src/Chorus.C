@@ -28,8 +28,7 @@
 #include "FPreset.h"
 
 Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(0),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     PERIOD(intermediate_bufsize),
     fPERIOD(intermediate_bufsize),
@@ -64,8 +63,7 @@ Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize) :
     delayl(NULL),
     delayr(NULL),
     dllo(),
-    mdel(),
-    Fpre(NULL)
+    mdel()
 {
     delayl = new float[maxdelay];
     delayr = new float[maxdelay];

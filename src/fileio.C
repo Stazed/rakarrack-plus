@@ -509,13 +509,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_CHORUS:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Chorus->getpar(Chorus_DryWet), efx_Chorus->getpar(Chorus_Pan),
-                efx_Chorus->getpar(Chorus_LFO_Tempo), efx_Chorus->getpar(Chorus_LFO_Random),
-                efx_Chorus->getpar(Chorus_LFO_Type), efx_Chorus->getpar(Chorus_LFO_Stereo),
-                efx_Chorus->getpar(Chorus_Depth), efx_Chorus->getpar(Chorus_Delay),
-                efx_Chorus->getpar(Chorus_Feedback), efx_Chorus->getpar(Chorus_LR_Cross),
-                efx_Chorus->getpar(Chorus_SKIP_Flange_10), efx_Chorus->getpar(Chorus_Subtract),
-                efx_Chorus->getpar(Chorus_Intense), EFX_Bypass[EFX_CHORUS]);
+                Rack_Effects[EFX_CHORUS]->getpar(Chorus_DryWet), Rack_Effects[EFX_CHORUS]->getpar(Chorus_Pan),
+                Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo), Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Random),
+                Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Type), Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Stereo),
+                Rack_Effects[EFX_CHORUS]->getpar(Chorus_Depth), Rack_Effects[EFX_CHORUS]->getpar(Chorus_Delay),
+                Rack_Effects[EFX_CHORUS]->getpar(Chorus_Feedback), Rack_Effects[EFX_CHORUS]->getpar(Chorus_LR_Cross),
+                Rack_Effects[EFX_CHORUS]->getpar(Chorus_SKIP_Flange_10), Rack_Effects[EFX_CHORUS]->getpar(Chorus_Subtract),
+                Rack_Effects[EFX_CHORUS]->getpar(Chorus_Intense), EFX_Bypass[EFX_CHORUS]);
         break;
 
     case EFX_FLANGER:
@@ -1330,9 +1330,9 @@ RKR::Actualizar_Audio()
 
         case EFX_CHORUS:
             EFX_Bypass[EFX_CHORUS] = 0;
-            efx_Chorus->cleanup();
+            Rack_Effects[EFX_CHORUS]->cleanup();
             for (i = 0; i < C_CHORUS_PARAMETERS; i++)
-                efx_Chorus->changepar(i, lv[EFX_CHORUS][i]);
+                Rack_Effects[EFX_CHORUS]->changepar(i, lv[EFX_CHORUS][i]);
             EFX_Bypass[EFX_CHORUS] = EFX_Bank_Bypass[EFX_CHORUS];
             break;
 
@@ -2302,7 +2302,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_ECHO_PARAMETERS; j++)
         lv[EFX_ECHO][j] = efx_Echo->getpar(j);
     for (j = 0; j < C_CHORUS_PARAMETERS; j++)
-        lv[EFX_CHORUS][j] = efx_Chorus->getpar(j);
+        lv[EFX_CHORUS][j] = Rack_Effects[EFX_CHORUS]->getpar(j);
     for (j = 0; j < C_FLANGER_PARAMETERS; j++)
         lv[EFX_FLANGER][j] = efx_Flanger->getpar(j);
     for (j = 0; j < C_PHASER_PARAMETERS; j++)

@@ -3269,7 +3269,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_dpth->redraw();
                 break;
             case MC_Chorus_Depth:
-                CHORUS->chorus_dpth->value(rkr->efx_Chorus->getpar(Chorus_Depth));
+                CHORUS->chorus_dpth->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Depth));
                 CHORUS->chorus_dpth->redraw();
                 break;
             case MC_Music_Gain_1:
@@ -3338,7 +3338,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 HAR->har_pan->redraw();
                 break;
             case MC_Chorus_Pan:
-                CHORUS->chorus_pan->value(rkr->efx_Chorus->getpar(Chorus_Pan) - 64);
+                CHORUS->chorus_pan->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Pan) - 64);
                 CHORUS->chorus_pan->redraw();
                 break;
             case MC_Flanger_Pan:
@@ -3346,7 +3346,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_pan->redraw();
                 break;
             case MC_Chorus_DryWet:
-                CHORUS->chorus_WD->value(Dry_Wet(rkr->efx_Chorus->getpar(Chorus_DryWet)));
+                CHORUS->chorus_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_DryWet)));
                 CHORUS->chorus_WD->redraw();
                 break;
             case MC_Flanger_DryWet:
@@ -3426,7 +3426,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_level->redraw();
                 break;
             case MC_Chorus_LFO_Tempo:
-                CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
+                CHORUS->chorus_freq->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));
                 CHORUS->chorus_freq->redraw();
                 break;
             case MC_Flanger_LFO_Tempo:
@@ -3454,7 +3454,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHO->echo_fb->redraw();
                 break;
             case MC_Chorus_Feedback:
-                CHORUS->chorus_fb->value(rkr->efx_Chorus->getpar(Chorus_Feedback));
+                CHORUS->chorus_fb->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Feedback));
                 CHORUS->chorus_fb->redraw();
                 break;
             case MC_Flanger_Feedback:
@@ -3502,7 +3502,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 REVERB->reverb_HPF->redraw();
                 break;
             case MC_Chorus_LR_Cross:
-                CHORUS->chorus_LR->value(rkr->efx_Chorus->getpar(Chorus_LR_Cross));
+                CHORUS->chorus_LR->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LR_Cross));
                 CHORUS->chorus_LR->redraw();
                 break;
             case MC_Flanger_LR_Cross:
@@ -3534,7 +3534,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUSDELAY->musdelay_LRc->redraw();
                 break;
             case MC_Chorus_LFO_Stereo:
-                CHORUS->chorus_stdf->value(rkr->efx_Chorus->getpar(Chorus_LFO_Stereo));
+                CHORUS->chorus_stdf->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Stereo));
                 CHORUS->chorus_stdf->redraw();
                 break;
             case MC_Flanger_LFO_Stereo:
@@ -3558,7 +3558,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PAN->pan_stdf->redraw();
                 break;
             case MC_Chorus_LFO_Random:
-                CHORUS->chorus_rnd->value(rkr->efx_Chorus->getpar(Chorus_LFO_Random));
+                CHORUS->chorus_rnd->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Random));
                 CHORUS->chorus_rnd->redraw();
                 break;
             case MC_Flanger_LFO_Random:
@@ -4772,7 +4772,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CABINET->Cabinet_output->redraw();
                 break;
             case MC_Chorus_Delay:
-                CHORUS->chorus_delay->value(rkr->efx_Chorus->getpar(Chorus_Delay));
+                CHORUS->chorus_delay->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Delay));
                 CHORUS->chorus_delay->redraw();
                 break;
             case MC_Echo_Reverse:
@@ -4982,7 +4982,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 APHASER->aphaser_lfotype->redraw();
                 break;
             case MC_Chorus_LFO_Type:
-                CHORUS->chorus_lfotype->value(rkr->efx_Chorus->getpar(Chorus_LFO_Type));
+                CHORUS->chorus_lfotype->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Type));
                 CHORUS->chorus_lfotype->redraw();
                 break;
             case MC_Flanger_LFO_Type:
@@ -6042,7 +6042,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_CHORUS])
     {
-        CHORUS->chorus_freq->value(rkr->efx_Chorus->getpar(Chorus_LFO_Tempo));
+        CHORUS->chorus_freq->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));
         CHORUS->chorus_freq->redraw();
     }
 
