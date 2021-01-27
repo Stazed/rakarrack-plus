@@ -1589,7 +1589,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_Depth:
-        efx_Flanger->changepar(Flanger_Depth, value);
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_Depth, value);
         break;
 
     case MC_Chorus_Depth:
@@ -1670,7 +1670,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_Pan:
-        efx_Flanger->changepar(Flanger_Pan, value);
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_Pan, value);
         break;
 
     case MC_Chorus_DryWet:
@@ -1678,7 +1678,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_DryWet:
-        efx_Flanger->changepar(Flanger_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_DryWet, Dry_Wet(value));
         break;
 
     case MC_Phaser_DryWet:
@@ -1757,7 +1757,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_LFO_Tempo:
-        efx_Flanger->changepar(Flanger_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Phaser_LFO_Tempo:
@@ -1785,7 +1785,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_Feedback:
-        efx_Flanger->changepar(Flanger_Feedback, value);
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_Feedback, value);
         break;
 
     case MC_Phaser_Feedback:
@@ -1833,7 +1833,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_LR_Cross:
-        efx_Flanger->changepar(Flanger_LR_Cross, value);
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_LR_Cross, value);
         break;
 
     case MC_Phaser_LR_Cross:
@@ -1865,7 +1865,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_LFO_Stereo:
-        efx_Flanger->changepar(Flanger_LFO_Stereo, value);
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Stereo, value);
         break;
 
     case MC_Phaser_LFO_Stereo:
@@ -1889,7 +1889,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_LFO_Random:
-        efx_Flanger->changepar(Flanger_LFO_Random, value);
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Random, value);
         break;
 
     case MC_Phaser_LFO_Random:
@@ -3149,7 +3149,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_Delay:
-        efx_Flanger->changepar(Flanger_Delay, value);
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_Delay, value);
         break;
         
     case MC_Harm_Gain:
@@ -3341,7 +3341,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Flanger_LFO_Type:
-        efx_Flanger->changepar(Flanger_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_DFlange_LFO_Type:

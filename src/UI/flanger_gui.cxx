@@ -11,7 +11,7 @@ void FlangerGui::cb_flanger_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_FLANGER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Flanger->cleanup();
+rkr->Rack_Effects[EFX_FLANGER]->cleanup();
 rgui->findpos(EFX_FLANGER,(int)o->value(),o);
 }
 void FlangerGui::cb_flanger_activar(RKR_Light_Button* o, void* v) {
@@ -20,19 +20,19 @@ void FlangerGui::cb_flanger_activar(RKR_Light_Button* o, void* v) {
 
 void FlangerGui::cb_flanger_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12007))rkr->efx_Flanger->setpreset((int)(o->value()));
-flanger_WD->value(Dry_Wet(rkr->efx_Flanger->getpar(Flanger_DryWet)));
-flanger_pan->value(rkr->efx_Flanger->getpar(Flanger_Pan)-64);
-flanger_freq->value(rkr->efx_Flanger->getpar(Flanger_LFO_Tempo));
-flanger_rnd->value(rkr->efx_Flanger->getpar(Flanger_LFO_Random));
-flanger_lfotype->value(rkr->efx_Flanger->getpar(Flanger_LFO_Type));
-flanger_stdf->value(rkr->efx_Flanger->getpar(Flanger_LFO_Stereo));
-flanger_dpth->value(rkr->efx_Flanger->getpar(Flanger_Depth));
-flanger_delay->value(rkr->efx_Flanger->getpar(Flanger_Delay));
-flanger_fb->value(rkr->efx_Flanger->getpar(Flanger_Feedback));
-flanger_LR->value(rkr->efx_Flanger->getpar(Flanger_LR_Cross));
-flanger_subs->value(rkr->efx_Flanger->getpar(Flanger_Subtract));
-flanger_awesome->value(rkr->efx_Flanger->getpar(Flanger_Intense));
+if((ud==0)||(ud==12007))rkr->Rack_Effects[EFX_FLANGER]->setpreset((int)(o->value()));
+flanger_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_DryWet)));
+flanger_pan->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Pan)-64);
+flanger_freq->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Tempo));
+flanger_rnd->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Random));
+flanger_lfotype->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Type));
+flanger_stdf->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Stereo));
+flanger_dpth->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Depth));
+flanger_delay->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Delay));
+flanger_fb->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Feedback));
+flanger_LR->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LR_Cross));
+flanger_subs->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Subtract));
+flanger_awesome->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Intense));
 }
 void FlangerGui::cb_flanger_preset(RKR_Choice* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_preset_i(o,v);
@@ -53,7 +53,7 @@ void FlangerGui::cb_flanger_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_DryWet);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_DryWet,Dry_Wet((int)(o->value())));
 }
 void FlangerGui::cb_flanger_WD(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_WD_i(o,v);
@@ -65,7 +65,7 @@ void FlangerGui::cb_flanger_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_Pan);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_Pan,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Pan,(int)(o->value()+64));
 }
 void FlangerGui::cb_flanger_pan(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_pan_i(o,v);
@@ -77,7 +77,7 @@ void FlangerGui::cb_flanger_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_LFO_Tempo);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_LFO_Tempo,(int)o->value());
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Tempo,(int)o->value());
 }
 void FlangerGui::cb_flanger_freq(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_freq_i(o,v);
@@ -89,7 +89,7 @@ void FlangerGui::cb_flanger_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_LFO_Random);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_LFO_Random,(int)o->value());
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Random,(int)o->value());
 }
 void FlangerGui::cb_flanger_rnd(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_rnd_i(o,v);
@@ -102,21 +102,21 @@ void FlangerGui::cb_flanger_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_Flanger->changepar(Flanger_LFO_Type,(int)o->value());
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Type,(int)o->value());
 }
 void FlangerGui::cb_flanger_lfotype(RKR_Choice* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_lfotype_i(o,v);
 }
 
 void FlangerGui::cb_flanger_subs_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Flanger->changepar(Flanger_Subtract,(int)o->value());
+  rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Subtract,(int)o->value());
 }
 void FlangerGui::cb_flanger_subs(RKR_Check_Button* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_subs_i(o,v);
 }
 
 void FlangerGui::cb_flanger_awesome_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Flanger->changepar(Flanger_Intense,(int)o->value());
+  rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Intense,(int)o->value());
 }
 void FlangerGui::cb_flanger_awesome(RKR_Check_Button* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_awesome_i(o,v);
@@ -128,7 +128,7 @@ void FlangerGui::cb_flanger_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_LFO_Stereo);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_LFO_Stereo,(int)o->value());
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Stereo,(int)o->value());
 }
 void FlangerGui::cb_flanger_stdf(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_stdf_i(o,v);
@@ -140,7 +140,7 @@ void FlangerGui::cb_flanger_dpth_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_Depth);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_Depth,(int)o->value());
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Depth,(int)o->value());
 }
 void FlangerGui::cb_flanger_dpth(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_dpth_i(o,v);
@@ -152,7 +152,7 @@ void FlangerGui::cb_flanger_delay_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_Delay);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_Delay,(int)o->value());
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Delay,(int)o->value());
 }
 void FlangerGui::cb_flanger_delay(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_delay_i(o,v);
@@ -164,7 +164,7 @@ void FlangerGui::cb_flanger_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_Feedback);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_Feedback,(int)o->value());
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Feedback,(int)o->value());
 }
 void FlangerGui::cb_flanger_fb(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_fb_i(o,v);
@@ -176,7 +176,7 @@ void FlangerGui::cb_flanger_LR_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Flanger_LR_Cross);
  return;
 } 
-rkr->efx_Flanger->changepar(Flanger_LR_Cross,(int)(o->value()));
+rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_LR_Cross,(int)(o->value()));
 }
 void FlangerGui::cb_flanger_LR(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_LR_i(o,v);
