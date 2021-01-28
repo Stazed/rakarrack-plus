@@ -28,9 +28,7 @@
 
 Reverbtron::Reverbtron(int DS, int uq, int dq,
                        double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
-    Filename(),
+    Effect(DS, uq, dq, sample_rate, intermediate_bufsize),
     File(),
     PERIOD(intermediate_bufsize),
     nPERIOD(),
@@ -97,8 +95,7 @@ Reverbtron::Reverbtron(int DS, int uq, int dq,
     D_Resample(NULL),
     interpbuf(NULL),
     lpfl(NULL),
-    lpfr(NULL),
-    Fpre(NULL)
+    lpfr(NULL)
 {
     //  default values
     adjust(DS, sample_rate);

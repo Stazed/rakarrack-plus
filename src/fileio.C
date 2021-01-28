@@ -413,7 +413,7 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case EFX_REVERBTRON:
-        memset(efx_Reverbtron->Filename, 0, sizeof (efx_Reverbtron->Filename));
+        memset(Rack_Effects[EFX_REVERBTRON]->Filename, 0, sizeof (Rack_Effects[EFX_REVERBTRON]->Filename));
         memset(cfilename, 0, sizeof (char) * 128);
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
                &lv[EFX_REVERBTRON][0], &lv[EFX_REVERBTRON][1], &lv[EFX_REVERBTRON][2], &lv[EFX_REVERBTRON][3], &lv[EFX_REVERBTRON][4],
@@ -421,7 +421,7 @@ void RKR::putbuf(char *buf, int j)
                &lv[EFX_REVERBTRON][10], &lv[EFX_REVERBTRON][11], &lv[EFX_REVERBTRON][12], &lv[EFX_REVERBTRON][13], &lv[EFX_REVERBTRON][14], &lv[EFX_REVERBTRON][15],
                &EFX_Bank_Bypass[EFX_REVERBTRON],
                cfilename);
-        strcpy(efx_Reverbtron->Filename, cfilename);
+        strcpy(Rack_Effects[EFX_REVERBTRON]->Filename, cfilename);
         break;
 
     case EFX_ECHOTRON:
@@ -893,15 +893,15 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_REVERBTRON:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                efx_Reverbtron->getpar(Revtron_DryWet), efx_Reverbtron->getpar(Revtron_Fade),
-                efx_Reverbtron->getpar(Revtron_Safe), efx_Reverbtron->getpar(Revtron_Length),
-                efx_Reverbtron->getpar(Revtron_User_File), efx_Reverbtron->getpar(Revtron_I_Delay),
-                efx_Reverbtron->getpar(Revtron_Damp), efx_Reverbtron->getpar(Revtron_Level),
-                efx_Reverbtron->getpar(Revtron_Set_File), efx_Reverbtron->getpar(Revtron_Stretch),
-                efx_Reverbtron->getpar(Revtron_Feedback), efx_Reverbtron->getpar(Revtron_Pan),
-                efx_Reverbtron->getpar(Revtron_Ex_Stereo), efx_Reverbtron->getpar(Revtron_Shuffle),
-                efx_Reverbtron->getpar(Revtron_LPF), efx_Reverbtron->getpar(Revtron_Diffusion),
-                EFX_Bypass[EFX_REVERBTRON], efx_Reverbtron->Filename);
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_DryWet), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Fade),
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Safe), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Length),
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_I_Delay),
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Damp), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Level),
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Set_File), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Stretch),
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Feedback), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Pan),
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Ex_Stereo), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Shuffle),
+                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_LPF), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Diffusion),
+                EFX_Bypass[EFX_REVERBTRON], Rack_Effects[EFX_REVERBTRON]->Filename);
         break;
 
     case EFX_ECHOTRON:
@@ -1615,9 +1615,9 @@ RKR::Actualizar_Audio()
 
         case EFX_REVERBTRON:
             EFX_Bypass[EFX_REVERBTRON] = 0;
-            efx_Reverbtron->cleanup();
+            Rack_Effects[EFX_REVERBTRON]->cleanup();
             for (i = 0; i < C_REVTRON_PARAMETERS; i++)
-                efx_Reverbtron->changepar(i, lv[EFX_REVERBTRON][i]);
+                Rack_Effects[EFX_REVERBTRON]->changepar(i, lv[EFX_REVERBTRON][i]);
             EFX_Bypass[EFX_REVERBTRON] = EFX_Bank_Bypass[EFX_REVERBTRON];
             break;
 
@@ -2141,7 +2141,7 @@ RKR::New()
 
     memset(Preset_Name, 0, sizeof (char) * 64);
     memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
-    memset(efx_Reverbtron->Filename, 0, sizeof (efx_Reverbtron->Filename));
+    memset(Rack_Effects[EFX_REVERBTRON]->Filename, 0, sizeof (Rack_Effects[EFX_REVERBTRON]->Filename));
     memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
     memset(Author, 0, sizeof (char) * 64);
     strcpy(Author, UserRealName);
@@ -2228,8 +2228,8 @@ RKR::Bank_to_Preset(int i)
     strcpy(Author, Bank[i].Author);
     memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
     strcpy(efx_Convol->Filename, Bank[i].ConvoFiname);
-    memset(efx_Reverbtron->Filename, 0, sizeof (efx_Reverbtron->Filename));
-    strcpy(efx_Reverbtron->Filename, Bank[i].RevFiname);
+    memset(Rack_Effects[EFX_REVERBTRON]->Filename, 0, sizeof (Rack_Effects[EFX_REVERBTRON]->Filename));
+    strcpy(Rack_Effects[EFX_REVERBTRON]->Filename, Bank[i].RevFiname);
     memset(efx_Echotron->Filename, 0, sizeof (efx_Echotron->Filename));
     strcpy(efx_Echotron->Filename, Bank[i].EchoFiname);
 
@@ -2285,7 +2285,7 @@ RKR::Preset_to_Bank(int i)
     memset(Bank[i].ConvoFiname, 0, sizeof (Bank[i].ConvoFiname));
     strcpy(Bank[i].ConvoFiname, efx_Convol->Filename);
     memset(Bank[i].RevFiname, 0, sizeof (Bank[i].RevFiname));
-    strcpy(Bank[i].RevFiname, efx_Reverbtron->Filename);
+    strcpy(Bank[i].RevFiname, Rack_Effects[EFX_REVERBTRON]->Filename);
     memset(Bank[i].EchoFiname, 0, sizeof (Bank[i].EchoFiname));
     strcpy(Bank[i].EchoFiname, efx_Echotron->Filename);
 
@@ -2372,7 +2372,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_STOMP_PARAMETERS; j++)
         lv[EFX_STOMPBOX][j] = efx_StompBox->getpar(j);
     for (j = 0; j < C_REVTRON_PARAMETERS; j++)
-        lv[EFX_REVERBTRON][j] = efx_Reverbtron->getpar(j);
+        lv[EFX_REVERBTRON][j] = Rack_Effects[EFX_REVERBTRON]->getpar(j);
     for (j = 0; j < C_ECHOTRON_PARAMETERS; j++)
         lv[EFX_ECHOTRON][j] = efx_Echotron->getpar(j);
     for (j = 0; j < C_SHARM_PARAMETERS; j++)

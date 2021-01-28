@@ -36,7 +36,7 @@ public:
 
     // Distortion, Overdrive, Derelict, DistBand, StompBox, Convolotron, Reverbtron
     Effect (int, int, int, double, uint32_t) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL), Filename() {};
 
     // Harmonizer, Sequence, Shifter, StereoHarm
     Effect (long int Quality, int DS, int uq, int dq, double sample_rate,
@@ -89,7 +89,10 @@ public:
     virtual void settempo(int value) {};
     virtual void setmvol(int value) {};
     virtual void getstate() {};
-
+    
+    // Convolotron, Reverbtron, Echotron
+    char Filename[128];
+    virtual int setfile (int value) {};
 };
 
 #endif

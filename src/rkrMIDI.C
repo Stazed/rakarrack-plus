@@ -2851,39 +2851,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Revtron_DryWet:
-        efx_Reverbtron->changepar(Revtron_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_DryWet, Dry_Wet(value));
         break;
 
     case MC_Revtron_Pan:
-        efx_Reverbtron->changepar(Revtron_Pan, value);
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Pan, value);
         break;
 
     case MC_Revtron_Level:
-        efx_Reverbtron->changepar(Revtron_Level, value);
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Level, value);
         break;
 
     case MC_Revtron_Damp:
-        efx_Reverbtron->changepar(Revtron_Damp, value);
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Damp, value);
         break;
 
     case MC_Revtron_Feedback:
-        efx_Reverbtron->changepar(Revtron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Revtron_Length:
-        efx_Reverbtron->changepar(Revtron_Length, 20 + (int) ((float) value * C_MC_1480_RANGE));
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Length, 20 + (int) ((float) value * C_MC_1480_RANGE));
         break;
 
     case MC_Revtron_Stretch:
-        efx_Reverbtron->changepar(Revtron_Stretch, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Stretch, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Revtron_I_Delay:
-        efx_Reverbtron->changepar(Revtron_I_Delay, (int) ((float) value * C_MC_500_RANGE));
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_I_Delay, (int) ((float) value * C_MC_500_RANGE));
         break;
 
     case MC_Revtron_Fade:
-        efx_Reverbtron->changepar(Revtron_Fade, value);
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Fade, value);
         break;
 
     case MC_Echotron_DryWet:
@@ -3273,11 +3273,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Revtron_Diffusion:
-        efx_Reverbtron->changepar(Revtron_Diffusion, value);
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Diffusion, value);
         break;
 
     case MC_Revtron_LPF:
-        efx_Reverbtron->changepar(Revtron_LPF, ret_LPF(value));
+        Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_LPF, ret_LPF(value));
         break;
 
     case MC_Harm_Note:

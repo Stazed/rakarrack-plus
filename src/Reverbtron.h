@@ -25,6 +25,7 @@
 #define REVERBTRON_H
 
 #include <vector>
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "Resample.h"
 
@@ -69,7 +70,7 @@ public:
 	    maxdata() {}
 };
 
-class Reverbtron
+class Reverbtron : public Effect
 {
 public:
     Reverbtron (int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
@@ -95,10 +96,6 @@ public:
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
     
-    int Ppreset;
-    float outvolume;
-
-    char Filename[128];
     RvbFile File;
 
 private:
@@ -170,8 +167,6 @@ private:
 
     float* interpbuf; //buffer for filters
     class AnalogFilter *lpfl, *lpfr;	//filters
-
-    class FPreset *Fpre;
 
 };
 

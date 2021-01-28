@@ -99,7 +99,6 @@ RKR::RKR() :
     efx_Sequence(NULL),
     efx_Shifter(NULL),
     efx_StompBox(NULL),
-    efx_Reverbtron(NULL),
     efx_Echotron(NULL),
     efx_StereoHarm(NULL),
     efx_CompBand(NULL),
@@ -417,7 +416,7 @@ RKR::~RKR()
     delete efx_Sequence;
     delete efx_Shifter;
     delete efx_StompBox;
-    delete efx_Reverbtron;
+    delete Rack_Effects[EFX_REVERBTRON];
     delete efx_Echotron;
     delete efx_StereoHarm;
     delete efx_CompBand;
@@ -677,7 +676,7 @@ RKR::instantiate_effects()
     efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
     efx_StompBox = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
-    efx_Reverbtron = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
+    Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     efx_Echotron = new Echotron(fSample_rate, period);
     efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
     efx_CompBand = new CompBand(fSample_rate, period);
@@ -1193,7 +1192,7 @@ RKR::cleanup_efx()
     efx_Sequence->cleanup();
     efx_Shifter->cleanup();
     efx_StompBox->cleanup();
-    efx_Reverbtron->cleanup();
+    Rack_Effects[EFX_REVERBTRON]->cleanup();
     efx_Echotron->cleanup();
     efx_StereoHarm->cleanup();
     efx_CompBand->cleanup();
@@ -1642,8 +1641,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_REVERBTRON:
                 if (EFX_Bypass[EFX_REVERBTRON])
                 {
-                    efx_Reverbtron->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_REVERBTRON, efx_Reverbtron->outvolume);
+                    Rack_Effects[EFX_REVERBTRON]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_REVERBTRON, Rack_Effects[EFX_REVERBTRON]->outvolume);
                 }
                 break;
 

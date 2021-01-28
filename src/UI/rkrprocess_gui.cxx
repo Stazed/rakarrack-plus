@@ -4502,39 +4502,39 @@ void RKRGUI::MIDI_control_gui_refresh()
                 STOMPBOX->stomp_high->redraw();
                 break;
             case MC_Revtron_DryWet:
-                REVERBTRON->revtron_WD->value(Dry_Wet(rkr->efx_Reverbtron->getpar(Revtron_DryWet)));
+                REVERBTRON->revtron_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_DryWet)));
                 REVERBTRON->revtron_WD->redraw();
                 break;
             case MC_Revtron_Pan:
-                REVERBTRON->revtron_pan->value(rkr->efx_Reverbtron->getpar(Revtron_Pan) - 64);
+                REVERBTRON->revtron_pan->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Pan) - 64);
                 REVERBTRON->revtron_pan->redraw();
                 break;
             case MC_Revtron_Level:
-                REVERBTRON->revtron_level->value(rkr->efx_Reverbtron->getpar(Revtron_Level));
+                REVERBTRON->revtron_level->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Level));
                 REVERBTRON->revtron_level->redraw();
                 break;
             case MC_Revtron_Damp:
-                REVERBTRON->revtron_damp->value(rkr->efx_Reverbtron->getpar(Revtron_Damp));
+                REVERBTRON->revtron_damp->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Damp));
                 REVERBTRON->revtron_damp->redraw();
                 break;
             case MC_Revtron_Feedback:
-                REVERBTRON->revtron_fb->value(rkr->efx_Reverbtron->getpar(Revtron_Feedback));
+                REVERBTRON->revtron_fb->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Feedback));
                 REVERBTRON->revtron_fb->redraw();
                 break;
             case MC_Revtron_Length:
-                REVERBTRON->revtron_length->value(rkr->efx_Reverbtron->getpar(Revtron_Length));
+                REVERBTRON->revtron_length->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Length));
                 REVERBTRON->revtron_length->redraw();
                 break;
             case MC_Revtron_Stretch:
-                REVERBTRON->revtron_strech->value(rkr->efx_Reverbtron->getpar(Revtron_Stretch));
+                REVERBTRON->revtron_strech->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Stretch));
                 REVERBTRON->revtron_strech->redraw();
                 break;
             case MC_Revtron_I_Delay:
-                REVERBTRON->revtron_idelay->value(rkr->efx_Reverbtron->getpar(Revtron_I_Delay));
+                REVERBTRON->revtron_idelay->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_I_Delay));
                 REVERBTRON->revtron_idelay->redraw();
                 break;
             case MC_Revtron_Fade:
-                REVERBTRON->revtron_fade->value(rkr->efx_Reverbtron->getpar(Revtron_Fade));
+                REVERBTRON->revtron_fade->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Fade));
                 REVERBTRON->revtron_fade->redraw();
                 break;
             case MC_Echotron_DryWet:
@@ -4916,11 +4916,11 @@ void RKRGUI::MIDI_control_gui_refresh()
                 REVERB->reverb_damp->redraw();
                 break;
             case MC_Revtron_Diffusion:
-                REVERBTRON->revtron_diff->value(rkr->efx_Reverbtron->getpar(Revtron_Diffusion));
+                REVERBTRON->revtron_diff->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Diffusion));
                 REVERBTRON->revtron_diff->redraw();
                 break;
             case MC_Revtron_LPF:
-                REVERBTRON->revtron_LPF->value(rkr->efx_Reverbtron->getpar(Revtron_LPF));
+                REVERBTRON->revtron_LPF->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_LPF));
                 REVERBTRON->revtron_LPF->redraw();
                 break;
             case MC_Harm_Note:

@@ -3127,26 +3127,26 @@ void SettingsWindowGui::update_revtron_quality() {
   usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
-  std::vector<int> save_state = m_rkr->efx_Reverbtron->save_parameters();
+  std::vector<int> save_state = m_rkr->Rack_Effects[EFX_REVERBTRON]->save_parameters();
   
   /* Save current file name and path */
-  std::string filename(m_rkr->efx_Reverbtron->Filename);
+  std::string filename(m_rkr->Rack_Effects[EFX_REVERBTRON]->Filename);
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->efx_Reverbtron;
-  m_rkr->efx_Reverbtron = new Reverbtron(m_rkr->Rev_Down, m_rkr->Rev_U_Q, m_rkr->Rev_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_rkr->Rack_Effects[EFX_REVERBTRON];
+  m_rkr->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_rkr->Rev_Down, m_rkr->Rev_U_Q, m_rkr->Rev_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
   /* Reset parameters and filename */
-  m_rkr->efx_Reverbtron->reset_parameters(save_state);
+  m_rkr->Rack_Effects[EFX_REVERBTRON]->reset_parameters(save_state);
   
   /* Check for user file and re-load if present */
-  if(m_rkr->efx_Reverbtron->getpar(Revtron_User_File))
+  if(m_rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File))
   {
-      strcpy(m_rkr->efx_Reverbtron->Filename,filename.c_str());
-      if(!m_rkr->efx_Reverbtron->setfile(USERFILE))
+      strcpy(m_rkr->Rack_Effects[EFX_REVERBTRON]->Filename,filename.c_str());
+      if(!m_rkr->Rack_Effects[EFX_REVERBTRON]->setfile(USERFILE))
       {
           fl_alert("Error loading %s file!\n", filename.c_str());
       };
