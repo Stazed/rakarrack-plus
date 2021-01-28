@@ -2615,27 +2615,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
     }
     case MC_Convo_DryWet:
-        efx_Convol->changepar(Convo_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_DryWet, Dry_Wet(value));
         break;
 
     case MC_Convo_Pan:
-        efx_Convol->changepar(Convo_Pan, value);
+        Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Pan, value);
         break;
 
     case MC_Convo_Level:
-        efx_Convol->changepar(Convo_Level, value);
+        Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Level, value);
         break;
 
     case MC_Convo_Damp:
-        efx_Convol->changepar(Convo_Damp, value);
+        Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Damp, value);
         break;
 
     case MC_Convo_Feedback:
-        efx_Convol->changepar(Convo_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Convo_Length:
-        efx_Convol->changepar(Convo_Length, 5 + (int) ((float) value * C_MC_245_RANGE));
+        Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length, 5 + (int) ((float) value * C_MC_245_RANGE));
         break;
 
     case MC_Coil_Gain:

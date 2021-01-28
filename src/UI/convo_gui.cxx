@@ -11,7 +11,7 @@ void ConvoGui::cb_convo_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_CONVOLOTRON]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Convol->cleanup();
+rkr->Rack_Effects[EFX_CONVOLOTRON]->cleanup();
 rgui->findpos(EFX_CONVOLOTRON,(int)o->value(),o);
 }
 void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
@@ -20,17 +20,17 @@ void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
 
 void ConvoGui::cb_convo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12029))rkr->efx_Convol->setpreset((int) o->value());
-convo_pan->value(rkr->efx_Convol->getpar(Convo_Pan)-64);
-convo_level->value(rkr->efx_Convol->getpar(Convo_Level));
-convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(Convo_DryWet)));
-convo_damp->value(rkr->efx_Convol->getpar(Convo_Damp));
-convo_fnum->value(rkr->efx_Convol->getpar(Convo_Set_File));
-convo_length->value(rkr->efx_Convol->getpar(Convo_Length));
-convo_user->value(rkr->efx_Convol->getpar(Convo_User_File));
+if((ud==0)||(ud==12029))rkr->Rack_Effects[EFX_CONVOLOTRON]->setpreset((int) o->value());
+convo_pan->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan)-64);
+convo_level->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level));
+convo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet)));
+convo_damp->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp));
+convo_fnum->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Set_File));
+convo_length->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length));
+convo_user->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File));
 convo_user->do_callback();
-convo_safe->value(rkr->efx_Convol->getpar(Convo_Safe));
-convo_fb->value(rkr->efx_Convol->getpar(Convo_Feedback));
+convo_safe->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Safe));
+convo_fb->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback));
 }
 void ConvoGui::cb_convo_preset(RKR_Choice* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_preset_i(o,v);
@@ -50,7 +50,7 @@ void ConvoGui::cb_convo_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Convo_DryWet);
  return;
 }
-rkr->efx_Convol->changepar(Convo_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_DryWet,Dry_Wet((int)(o->value())));
 }
 void ConvoGui::cb_convo_WD(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_WD_i(o,v);
@@ -62,7 +62,7 @@ void ConvoGui::cb_convo_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Convo_Pan);
  return;
 }
-rkr->efx_Convol->changepar(Convo_Pan,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Pan,(int)(o->value()+64));
 }
 void ConvoGui::cb_convo_pan(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_pan_i(o,v);
@@ -74,7 +74,7 @@ void ConvoGui::cb_convo_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Convo_Level);
  return;
 }
-rkr->efx_Convol->changepar(Convo_Level,(int)o->value());
+rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Level,(int)o->value());
 }
 void ConvoGui::cb_convo_level(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_level_i(o,v);
@@ -86,7 +86,7 @@ void ConvoGui::cb_convo_damp_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Convo_Damp);
  return;
 }
-rkr->efx_Convol->changepar(Convo_Damp,(int)o->value());
+rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Damp,(int)o->value());
 }
 void ConvoGui::cb_convo_damp(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_damp_i(o,v);
@@ -98,7 +98,7 @@ void ConvoGui::cb_convo_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Convo_Feedback);
  return;
 }
-rkr->efx_Convol->changepar(Convo_Feedback,(int)o->value());
+rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Feedback,(int)o->value());
 }
 void ConvoGui::cb_convo_fb(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_fb_i(o,v);
@@ -110,14 +110,14 @@ void ConvoGui::cb_convo_length_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Convo_Length);
  return;
 }
-rkr->efx_Convol->changepar(Convo_Length,(int)o->value());
+rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value());
 }
 void ConvoGui::cb_convo_length(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_length_i(o,v);
 }
 
 void ConvoGui::cb_convo_user_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Convol->changepar(Convo_User_File,(int)o->value());
+  rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File,(int)o->value());
 
 if((int)o->value())B_wav->activate(); else B_wav->deactivate();
 }
@@ -126,7 +126,7 @@ void ConvoGui::cb_convo_user(RKR_Check_Button* o, void* v) {
 }
 
 void ConvoGui::cb_convo_safe_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Convol->changepar(Convo_Safe,(int)o->value());
+  rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Safe,(int)o->value());
 }
 void ConvoGui::cb_convo_safe(RKR_Check_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_safe_i(o,v);
@@ -137,8 +137,8 @@ void ConvoGui::cb_B_wav_i(RKR_Button*, void*) {
 filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
-strcpy(rkr->efx_Convol->Filename,filename);
-if(!rkr->efx_Convol->setfile(USERFILE))
+strcpy(rkr->Rack_Effects[EFX_CONVOLOTRON]->Filename,filename);
+if(!rkr->Rack_Effects[EFX_CONVOLOTRON]->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\n", filename);
 };
@@ -148,7 +148,7 @@ void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {
 }
 
 void ConvoGui::cb_convo_fnum_i(RKR_Choice* o, void*) {
-  rkr->efx_Convol->changepar(Convo_Set_File,(int)o->value());
+  rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Set_File,(int)o->value());
 }
 void ConvoGui::cb_convo_fnum(RKR_Choice* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_fnum_i(o,v);

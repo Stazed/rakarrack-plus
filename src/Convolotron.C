@@ -28,9 +28,8 @@
 #include "Convolotron.h"
 
 Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize) :
-    Ppreset(0),
-    outvolume(0.5f),
-    Filename(),
+    Effect(DS, uq, dq, sample_rate, intermediate_bufsize),
+//    Filename(),
     SAMPLE_RATE((unsigned int) sample_rate),
     fSAMPLE_RATE((float) sample_rate),
     nSAMPLE_RATE(),
@@ -77,7 +76,6 @@ Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t in
     M_Resample(NULL),
     U_Resample(NULL),
     D_Resample(NULL),
-    Fpre(NULL),
     impulse()
 {
     //default values

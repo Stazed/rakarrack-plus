@@ -4266,27 +4266,27 @@ void RKRGUI::MIDI_control_gui_refresh()
                 update_looper();
                 break;
             case MC_Convo_DryWet:
-                CONVOLOTRON->convo_WD->value(Dry_Wet(rkr->efx_Convol->getpar(Convo_DryWet)));
+                CONVOLOTRON->convo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet)));
                 CONVOLOTRON->convo_WD->redraw();
                 break;
             case MC_Convo_Pan:
-                CONVOLOTRON->convo_pan->value(rkr->efx_Convol->getpar(Convo_Pan) - 64);
+                CONVOLOTRON->convo_pan->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan) - 64);
                 CONVOLOTRON->convo_pan->redraw();
                 break;
             case MC_Convo_Level:
-                CONVOLOTRON->convo_level->value(rkr->efx_Convol->getpar(Convo_Level));
+                CONVOLOTRON->convo_level->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level));
                 CONVOLOTRON->convo_level->redraw();
                 break;
             case MC_Convo_Damp:
-                CONVOLOTRON->convo_damp->value(rkr->efx_Convol->getpar(Convo_Damp));
+                CONVOLOTRON->convo_damp->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp));
                 CONVOLOTRON->convo_damp->redraw();
                 break;
             case MC_Convo_Feedback:
-                CONVOLOTRON->convo_fb->value(rkr->efx_Convol->getpar(Convo_Feedback));
+                CONVOLOTRON->convo_fb->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback));
                 CONVOLOTRON->convo_fb->redraw();
                 break;
             case MC_Convo_Length:
-                CONVOLOTRON->convo_length->value(rkr->efx_Convol->getpar(Convo_Length));
+                CONVOLOTRON->convo_length->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length));
                 CONVOLOTRON->convo_length->redraw();
                 break;
             case MC_Coil_Gain:

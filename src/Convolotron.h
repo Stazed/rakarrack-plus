@@ -25,9 +25,11 @@
 #define CONVOLOTRON_H
 
 #include <sndfile.h>
+#include <vector>
+#include "Effect.h"
 #include "Resample.h"
 #include "mayer_fft.h"
-#include <vector>
+
 
 const int C_CONVO_PARAMETERS = 11;
 
@@ -46,7 +48,7 @@ enum Convo_Index
     Convo_Feedback
 };
 
-class Convolotron
+class Convolotron :public Effect
 {
 public:
     Convolotron (int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize);
@@ -71,11 +73,7 @@ public:
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
 
-    int Ppreset;
-    float outvolume;
-
-    char Filename[128];
-
+//    char Filename[128];
 
 private:
     
@@ -125,8 +123,6 @@ private:
     class Resample *M_Resample;
     class Resample *U_Resample;
     class Resample *D_Resample;
-
-    class FPreset *Fpre;
 
     fft_filter impulse;
 

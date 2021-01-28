@@ -751,7 +751,6 @@ public:
     class Synthfilter *efx_Synthfilter;
     class Shuffle *efx_Shuffle;
     class VaryBand *efx_VaryBand;
-    class Convolotron *efx_Convol;
     class Resample *U_Resample;
     class Resample *D_Resample;
     class Resample *A_Resample;

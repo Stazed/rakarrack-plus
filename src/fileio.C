@@ -340,13 +340,13 @@ void RKR::putbuf(char *buf, int j)
         break;
 
     case EFX_CONVOLOTRON:
-        memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
+        memset(Rack_Effects[EFX_CONVOLOTRON]->Filename, 0, sizeof (Rack_Effects[EFX_CONVOLOTRON]->Filename));
         memset(cfilename, 0, sizeof (char) * 128);
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
                &lv[EFX_CONVOLOTRON][0], &lv[EFX_CONVOLOTRON][1], &lv[EFX_CONVOLOTRON][2], &lv[EFX_CONVOLOTRON][3], &lv[EFX_CONVOLOTRON][4],
                &lv[EFX_CONVOLOTRON][5], &lv[EFX_CONVOLOTRON][6], &lv[EFX_CONVOLOTRON][7], &lv[EFX_CONVOLOTRON][8], &lv[EFX_CONVOLOTRON][9],
                &lv[EFX_CONVOLOTRON][10], &EFX_Bank_Bypass[EFX_CONVOLOTRON], cfilename);
-        strcpy(efx_Convol->Filename, cfilename);
+        strcpy(Rack_Effects[EFX_CONVOLOTRON]->Filename, cfilename);
         break;
 
     case EFX_LOOPER:
@@ -787,12 +787,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_CONVOLOTRON:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                efx_Convol->getpar(Convo_DryWet), efx_Convol->getpar(Convo_Pan),
-                efx_Convol->getpar(Convo_Safe), efx_Convol->getpar(Convo_Length),
-                efx_Convol->getpar(Convo_User_File), efx_Convol->getpar(Convo_SKIP_5),
-                efx_Convol->getpar(Convo_Damp), efx_Convol->getpar(Convo_Level),
-                efx_Convol->getpar(Convo_Set_File), efx_Convol->getpar(Convo_SKIP_9),
-                efx_Convol->getpar(Convo_Feedback), EFX_Bypass[EFX_CONVOLOTRON], efx_Convol->Filename);
+                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan),
+                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Safe), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length),
+                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_SKIP_5),
+                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level),
+                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Set_File), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_SKIP_9),
+                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback), EFX_Bypass[EFX_CONVOLOTRON], Rack_Effects[EFX_CONVOLOTRON]->Filename);
         break;
 
     case EFX_LOOPER:
@@ -1527,9 +1527,9 @@ RKR::Actualizar_Audio()
 
         case EFX_CONVOLOTRON:
             EFX_Bypass[EFX_CONVOLOTRON] = 0;
-            efx_Convol->cleanup();
+            Rack_Effects[EFX_CONVOLOTRON]->cleanup();
             for (i = 0; i < C_CONVO_PARAMETERS; i++)
-                efx_Convol->changepar(i, lv[EFX_CONVOLOTRON][i]);
+                Rack_Effects[EFX_CONVOLOTRON]->changepar(i, lv[EFX_CONVOLOTRON][i]);
             EFX_Bypass[EFX_CONVOLOTRON] = EFX_Bank_Bypass[EFX_CONVOLOTRON];
             break;
 
@@ -2140,7 +2140,7 @@ RKR::New()
     }
 
     memset(Preset_Name, 0, sizeof (char) * 64);
-    memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
+    memset(Rack_Effects[EFX_CONVOLOTRON]->Filename, 0, sizeof (Rack_Effects[EFX_CONVOLOTRON]->Filename));
     memset(Rack_Effects[EFX_REVERBTRON]->Filename, 0, sizeof (Rack_Effects[EFX_REVERBTRON]->Filename));
     memset(Rack_Effects[EFX_ECHOTRON]->Filename, 0, sizeof (Rack_Effects[EFX_ECHOTRON]->Filename));
     memset(Author, 0, sizeof (char) * 64);
@@ -2226,8 +2226,8 @@ RKR::Bank_to_Preset(int i)
     strcpy(Preset_Name, Bank[i].Preset_Name);
     memset(Author, 0, sizeof (char) * 64);
     strcpy(Author, Bank[i].Author);
-    memset(efx_Convol->Filename, 0, sizeof (efx_Convol->Filename));
-    strcpy(efx_Convol->Filename, Bank[i].ConvoFiname);
+    memset(Rack_Effects[EFX_CONVOLOTRON]->Filename, 0, sizeof (Rack_Effects[EFX_CONVOLOTRON]->Filename));
+    strcpy(Rack_Effects[EFX_CONVOLOTRON]->Filename, Bank[i].ConvoFiname);
     memset(Rack_Effects[EFX_REVERBTRON]->Filename, 0, sizeof (Rack_Effects[EFX_REVERBTRON]->Filename));
     strcpy(Rack_Effects[EFX_REVERBTRON]->Filename, Bank[i].RevFiname);
     memset(Rack_Effects[EFX_ECHOTRON]->Filename, 0, sizeof (Rack_Effects[EFX_ECHOTRON]->Filename));
@@ -2283,7 +2283,7 @@ RKR::Preset_to_Bank(int i)
     
     // Special cases filenames for Convolotron, Echotron, Reverbtron
     memset(Bank[i].ConvoFiname, 0, sizeof (Bank[i].ConvoFiname));
-    strcpy(Bank[i].ConvoFiname, efx_Convol->Filename);
+    strcpy(Bank[i].ConvoFiname, Rack_Effects[EFX_CONVOLOTRON]->Filename);
     memset(Bank[i].RevFiname, 0, sizeof (Bank[i].RevFiname));
     strcpy(Bank[i].RevFiname, Rack_Effects[EFX_REVERBTRON]->Filename);
     memset(Bank[i].EchoFiname, 0, sizeof (Bank[i].EchoFiname));
@@ -2350,7 +2350,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_VARYBAND_PARAMETERS; j++)
         lv[EFX_VARYBAND][j] = efx_VaryBand->getpar(j);
     for (j = 0; j < C_CONVO_PARAMETERS; j++)
-        lv[EFX_CONVOLOTRON][j] = efx_Convol->getpar(j);
+        lv[EFX_CONVOLOTRON][j] = Rack_Effects[EFX_CONVOLOTRON]->getpar(j);
     for (j = 0; j < C_LOOPER_PARAMETERS; j++)
         lv[EFX_LOOPER][j] = Rack_Effects[EFX_LOOPER]->getpar(j);
     for (j = 0; j < C_MUTRO_PARAMETERS; j++)

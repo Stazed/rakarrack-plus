@@ -3090,26 +3090,26 @@ void SettingsWindowGui::update_convo_quality() {
   usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
-  std::vector<int> save_state = m_rkr->efx_Convol->save_parameters();
+  std::vector<int> save_state = m_rkr->Rack_Effects[EFX_CONVOLOTRON]->save_parameters();
   
   /* Save current file name and path */
-  std::string filename(m_rkr->efx_Convol->Filename);
+  std::string filename(m_rkr->Rack_Effects[EFX_CONVOLOTRON]->Filename);
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->efx_Convol;
-  m_rkr->efx_Convol = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_rkr->Rack_Effects[EFX_CONVOLOTRON];
+  m_rkr->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
   /* Reset parameters and filename */
-  m_rkr->efx_Convol->reset_parameters(save_state);
+  m_rkr->Rack_Effects[EFX_CONVOLOTRON]->reset_parameters(save_state);
   
   /* Check for user file and re-load if present */
-  if(m_rkr->efx_Convol->getpar(Convo_User_File))
+  if(m_rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File))
   {
-      strcpy(m_rkr->efx_Convol->Filename,filename.c_str());
-      if(!m_rkr->efx_Convol->setfile(USERFILE))
+      strcpy(m_rkr->Rack_Effects[EFX_CONVOLOTRON]->Filename,filename.c_str());
+      if(!m_rkr->Rack_Effects[EFX_CONVOLOTRON]->setfile(USERFILE))
       {
           fl_alert("Error loading %s file!\n", filename.c_str());
       };
