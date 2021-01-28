@@ -34,7 +34,9 @@ har_freq1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq));
 har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain)-64);
 har_q1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q)-64);
 har_MIDI->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI));
-if ((rkr->Rack_Effects[EFX_HARMONIZER]->PMIDI) || (rkr->Rack_Effects[EFX_HARMONIZER]->PSELECT)) rgui->Chord(0);
+
+Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (rkr->Rack_Effects[EFX_HARMONIZER]);
+if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT)) rgui->Chord(0);
 }
 void HarGui::cb_har_preset(RKR_Choice* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_preset_i(o,v);

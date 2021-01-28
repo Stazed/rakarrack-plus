@@ -32,7 +32,7 @@ if((int) o->value()==0)
 rkr->Rack_Effects[EFX_HARMONIZER]->cleanup();
 rkr->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval,rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval));
 rgui->Chord(0);
-rgui->findpos(EFX_HARMONIZER,(int)o->value(),o);} selected
+rgui->findpos(EFX_HARMONIZER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -52,7 +52,9 @@ har_freq1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq));
 har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain)-64);
 har_q1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q)-64);
 har_MIDI->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI));
-if ((rkr->Rack_Effects[EFX_HARMONIZER]->PMIDI) || (rkr->Rack_Effects[EFX_HARMONIZER]->PSELECT)) rgui->Chord(0);}
+
+Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (rkr->Rack_Effects[EFX_HARMONIZER]);
+if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT)) rgui->Chord(0);} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

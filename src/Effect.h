@@ -40,8 +40,7 @@ public:
 
     // Harmonizer, Sequence, Shifter, StereoHarm
     Effect (long int, int, int, int, double, uint32_t) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL), Pinterval(),
-        PMIDI(), PSELECT(), r_ratio(), mira() {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Looper
     Effect (float, double, uint32_t) :
@@ -71,14 +70,7 @@ public:
     float outvolume;
     int Ppreset;
     class FPreset *Fpre;
-    
-    // Harmonizer
-    int Pinterval;
-    int PMIDI;
-    int PSELECT;
-    float r_ratio;
-    int mira;
-    
+
     // Looper
     int Pplay;
     int Pstop;

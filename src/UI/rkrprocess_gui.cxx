@@ -473,15 +473,16 @@ void RKRGUI::GuiTimeout(void)
 
     if (rkr->EFX_Bypass[EFX_HARMONIZER])
     {
-        if ((rkr->Rack_Effects[EFX_HARMONIZER]->PSELECT) || (rkr->Rack_Effects[EFX_HARMONIZER]->PMIDI))
+        Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (rkr->Rack_Effects[EFX_HARMONIZER]);
+        if ((Efx_Harmonizer->PSELECT) || (Efx_Harmonizer->PMIDI))
         {
             if (rkr->RC_Harm->cc)
             {
                 HAR->har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
                 rkr->RC_Harm->cc = 0;
                 HAR->har_chordname->redraw();
-                rkr->RC_Harm->Vamos(0, rkr->Rack_Effects[EFX_HARMONIZER]->Pinterval - 12, rkr->HarmRecNote->reconota);
-                rkr->Rack_Effects[EFX_HARMONIZER]->r_ratio = rkr->RC_Harm->r__ratio[0]; //pass the found ratio
+                rkr->RC_Harm->Vamos(0, Efx_Harmonizer->Pinterval - 12, rkr->HarmRecNote->reconota);
+                Efx_Harmonizer->r_ratio = rkr->RC_Harm->r__ratio[0]; //pass the found ratio
             }
         }
     }

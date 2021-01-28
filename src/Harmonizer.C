@@ -29,6 +29,11 @@
 Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
                        double sample_rate, uint32_t intermediate_bufsize) :
     Effect(Quality, DS, uq, dq, sample_rate, intermediate_bufsize),
+    Pinterval(),
+    PMIDI(),
+    PSELECT(),
+    r_ratio(),
+    mira(),
     DS_state(),
     nPERIOD(),
     nSAMPLE_RATE(),

@@ -1254,17 +1254,18 @@ RKR::Alg(float *origl, float *origr, void *)
 
         if ((EFX_Bypass[EFX_HARMONIZER]) && (have_signal))
         {
-            if (Rack_Effects[EFX_HARMONIZER]->mira)
+            Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (Rack_Effects[EFX_HARMONIZER]);
+            if (Efx_Harmonizer->mira)
             {
-                if ((Rack_Effects[EFX_HARMONIZER]->PMIDI) || (Rack_Effects[EFX_HARMONIZER]->PSELECT))
+                if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT))
                 {
                     HarmRecNote->schmittFloat(efxoutl, efxoutr);
                     if ((HarmRecNote->reconota != -1) && (HarmRecNote->reconota != HarmRecNote->last))
                     {
                         if (HarmRecNote->afreq > 0.0)
                         {
-                            RC_Harm->Vamos(0, Rack_Effects[EFX_HARMONIZER]->Pinterval - 12, HarmRecNote->reconota);
-                            Rack_Effects[EFX_HARMONIZER]->r_ratio = RC_Harm->r__ratio[0]; //pass the found ratio
+                            RC_Harm->Vamos(0, Efx_Harmonizer->Pinterval - 12, HarmRecNote->reconota);
+                            Efx_Harmonizer->r_ratio = RC_Harm->r__ratio[0]; //pass the found ratio
                             HarmRecNote->last = HarmRecNote->reconota;
                         }
                     }

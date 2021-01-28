@@ -73,6 +73,12 @@ public:
     /* Change quality */
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
+    
+    int Pinterval;
+    int PMIDI;
+    int PSELECT;
+    float r_ratio;
+    int mira;
 
     int DS_state;
     int nPERIOD;
