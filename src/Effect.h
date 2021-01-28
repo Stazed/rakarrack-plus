@@ -31,7 +31,7 @@ class Effect
 {
 public:
 
-    Effect (double sample_rate, uint32_t intermediate_bufsize) :
+    Effect (double, uint32_t) :
         outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Distortion, Overdrive, Derelict, DistBand, StompBox, Convolotron, Reverbtron
@@ -39,33 +39,32 @@ public:
         outvolume(0.5f), Ppreset(0), Fpre(NULL), Filename() {};
 
     // Harmonizer, Sequence, Shifter, StereoHarm
-    Effect (long int Quality, int DS, int uq, int dq, double sample_rate,
-        uint32_t intermediate_bufsize) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL), PMIDI(), PSELECT(), Pinterval(), r_ratio(), mira() {};
+    Effect (long int, int, int, int, double, uint32_t) :
+        outvolume(0.5f), Ppreset(0), Fpre(NULL), Pinterval(),
+        PMIDI(), PSELECT(), r_ratio(), mira() {};
 
     // Looper
-    Effect (float size, double samplerate, uint32_t intermediate_bufsize) :
+    Effect (float, double, uint32_t) :
         outvolume(0.5f), Ppreset(0), Fpre(NULL), Pplay(), Pstop(1),
         looper_bar(), looper_qua(), progstate() {};
 
     // Vocoder
-    Effect (float *auxresampled_, int bands, int DS, int uq, int dq,
-        double sample_rate, uint32_t intermediate_bufsize) :
+    Effect (float *, int, int, int, int, double, uint32_t) :
         outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     virtual ~ Effect () {};
     
-    virtual void setpreset (int npreset) {};
-    virtual void changepar (int npar, int value) {};
-    virtual int getpar (int npar) {return (0);};
-    virtual void out (float * smpsl, float * smpsr) {};
+    virtual void setpreset (int) {};
+    virtual void changepar (int, int) {};
+    virtual int getpar (int) {return (0);};
+    virtual void out (float *, float *) {};
     virtual void cleanup () {};
     
-    virtual std::vector<int> save_parameters() {};
-    virtual void reset_parameters(std::vector<int> parameters) {};
+    virtual std::vector<int> save_parameters() {return std::vector<int>();};
+    virtual void reset_parameters(std::vector<int>) {};
 
 #ifdef LV2_SUPPORT
-    virtual void lv2_update_params(uint32_t period) {};
+    virtual void lv2_update_params(uint32_t) {};
 #endif // LV2
 
     // The volume of the effect and is public.
@@ -86,15 +85,15 @@ public:
     int looper_bar;
     int looper_qua;
     int progstate[6];
-    virtual void settempo(int value) {};
-    virtual void setmvol(int value) {};
+    virtual void settempo(int) {};
+    virtual void setmvol(int) {};
     virtual void getstate() {};
     
     // Convolotron, Reverbtron, Echotron
     char Filename[128];
-    virtual int setfile (int value) {};
-    virtual int get_file_length() {};
-    virtual char *get_file_name() {};
+    virtual int setfile (int) {return 0;};
+    virtual int get_file_length() {return 0;};
+    virtual char *get_file_name() {return 0;};
 };
 
 #endif
