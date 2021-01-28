@@ -338,10 +338,10 @@ RKR::RKR() :
     load_user_preferences();
 
     Get_Bogomips();
-    
-    instantiate_effects();
-    
+
     initialize_arrays();
+
+    instantiate_effects();
 
     put_order_in_rack();
     
