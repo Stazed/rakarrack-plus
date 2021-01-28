@@ -542,13 +542,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_OVERDRIVE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Overdrive->getpar(Overdrive_DryWet), efx_Overdrive->getpar(Overdrive_Pan),
-                efx_Overdrive->getpar(Overdrive_LR_Cross), efx_Overdrive->getpar(Overdrive_Drive),
-                efx_Overdrive->getpar(Overdrive_Level), efx_Overdrive->getpar(Overdrive_Type),
-                efx_Overdrive->getpar(Overdrive_Negate), efx_Overdrive->getpar(Overdrive_LPF),
-                efx_Overdrive->getpar(Overdrive_HPF), efx_Overdrive->getpar(Overdrive_Stereo),
-                efx_Overdrive->getpar(Overdrive_Prefilter), efx_Overdrive->getpar(Overdrive_SKIP_11),
-                efx_Overdrive->getpar(Overdrive_Suboctave), EFX_Bypass[EFX_OVERDRIVE]);
+                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan),
+                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive),
+                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type),
+                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Negate), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF),
+                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Stereo),
+                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Prefilter), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_SKIP_11),
+                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Suboctave), EFX_Bypass[EFX_OVERDRIVE]);
         break;
 
     case EFX_DISTORTION:
@@ -1314,9 +1314,9 @@ RKR::Actualizar_Audio()
 
         case EFX_OVERDRIVE:
             EFX_Bypass[EFX_OVERDRIVE] = 0;
-            efx_Overdrive->cleanup();
+            Rack_Effects[EFX_OVERDRIVE]->cleanup();
             for (i = 0; i < C_OVERDRIVE_PARAMETERS; i++)
-                efx_Overdrive->changepar(i, lv[EFX_OVERDRIVE][i]);
+                Rack_Effects[EFX_OVERDRIVE]->changepar(i, lv[EFX_OVERDRIVE][i]);
             EFX_Bypass[EFX_OVERDRIVE] = EFX_Bank_Bypass[EFX_OVERDRIVE];
             break;
 
@@ -2308,7 +2308,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_PHASER_PARAMETERS; j++)
         lv[EFX_PHASER][j] = efx_Phaser->getpar(j);
     for (j = 0; j < C_OVERDRIVE_PARAMETERS; j++)
-        lv[EFX_OVERDRIVE][j] = efx_Overdrive->getpar(j);
+        lv[EFX_OVERDRIVE][j] = Rack_Effects[EFX_OVERDRIVE]->getpar(j);
     for (j = 0; j < C_DIST_PARAMETERS; j++)
         lv[EFX_DISTORTION][j] = Rack_Effects[EFX_DISTORTION]->getpar(j);
     for (j = 0; j < C_COMPRESS_PARAMETERS; j++)

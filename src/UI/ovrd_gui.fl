@@ -30,7 +30,7 @@ widget_class {\#include "common_gui_menu.h"} OvrdGui {
 }
 rkr->EFX_Bypass[EFX_OVERDRIVE]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Overdrive->cleanup();
+rkr->Rack_Effects[EFX_OVERDRIVE]->cleanup();
 rgui->findpos(EFX_OVERDRIVE,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -39,18 +39,18 @@ rgui->findpos(EFX_OVERDRIVE,(int)o->value(),o);} selected
     label Preset
     user_data 12003
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12003))rkr->efx_Overdrive->setpreset((int) o->value());
-ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Overdrive_DryWet)));
-ovrd_pan->value(rkr->efx_Overdrive->getpar(Overdrive_Pan)-64);
-ovrd_LRc->value(rkr->efx_Overdrive->getpar(Overdrive_LR_Cross));
-ovrd_drive->value(rkr->efx_Overdrive->getpar(Overdrive_Drive));
-ovrd_level->value(rkr->efx_Overdrive->getpar(Overdrive_Level));
-ovrd_tipo->value(rkr->efx_Overdrive->getpar(Overdrive_Type));
-ovrd_neg->value(rkr->efx_Overdrive->getpar(Overdrive_Negate));
-ovrd_lpf->value(rkr->efx_Overdrive->getpar(Overdrive_LPF));
-ovrd_hpf->value(rkr->efx_Overdrive->getpar(Overdrive_HPF));
-ovrd_st->value(rkr->efx_Overdrive->getpar(Overdrive_Stereo));
-ovrd_pf->value(rkr->efx_Overdrive->getpar(Overdrive_Prefilter));}
+if((ud==0)||(ud==12003))rkr->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
+ovrd_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet)));
+ovrd_pan->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan)-64);
+ovrd_LRc->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross));
+ovrd_drive->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive));
+ovrd_level->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level));
+ovrd_tipo->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type));
+ovrd_neg->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Negate));
+ovrd_lpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF));
+ovrd_hpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF));
+ovrd_st->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Stereo));
+ovrd_pf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Prefilter));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -70,7 +70,7 @@ ovrd_pf->value(rkr->efx_Overdrive->getpar(Overdrive_Prefilter));}
  rgui->getMIDIControl(MC_Overdrive_DryWet);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));}
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -81,7 +81,7 @@ rkr->efx_Overdrive->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(MC_Overdrive_LR_Cross);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_LR_Cross,(int)(o->value()));}
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LR_Cross,(int)(o->value()));}
     xywh {56 48 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -92,7 +92,7 @@ rkr->efx_Overdrive->changepar(Overdrive_LR_Cross,(int)(o->value()));}
  rgui->getMIDIControl(MC_Overdrive_Drive);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_Drive,(int)o->value());}
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Drive,(int)o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -103,7 +103,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Drive,(int)o->value());}
  rgui->getMIDIControl(MC_Overdrive_Level);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_Level,(int)o->value());}
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Level,(int)o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -115,7 +115,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Level,(int)o->value());}
  return;
 } 
 
-rkr->efx_Overdrive->changepar(Overdrive_Type,(int)o->value());} open
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Type,(int)o->value());} open
     xywh {33 91 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -123,14 +123,14 @@ rkr->efx_Overdrive->changepar(Overdrive_Type,(int)o->value());} open
   Fl_Check_Button ovrd_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Overdrive->changepar(Overdrive_Negate,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Negate,(int)o->value());}
     xywh {109 92 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button ovrd_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_Overdrive->changepar(Overdrive_Stereo,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Stereo,(int)o->value());}
     xywh {41 110 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -141,14 +141,14 @@ rkr->efx_Overdrive->changepar(Overdrive_Type,(int)o->value());} open
  rgui->getMIDIControl(MC_Overdrive_Pan);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Pan,(int)(o->value()+64));}
     xywh {56 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button ovrd_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_Overdrive->changepar(Overdrive_Prefilter,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Prefilter,(int)o->value());}
     xywh {41 138 68 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -159,7 +159,7 @@ rkr->efx_Overdrive->changepar(Overdrive_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(MC_Overdrive_LPF);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_LPF,(int)o->value());}
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LPF,(int)o->value());}
     xywh {56 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -170,7 +170,7 @@ rkr->efx_Overdrive->changepar(Overdrive_LPF,(int)o->value());}
  rgui->getMIDIControl(MC_Overdrive_HPF);
  return;
 } 
-rkr->efx_Overdrive->changepar(Overdrive_HPF,(int)o->value());}
+rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_HPF,(int)o->value());}
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

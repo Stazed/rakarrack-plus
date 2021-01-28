@@ -3293,7 +3293,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_WD->redraw();
                 break;
             case MC_Overdrive_DryWet:
-                OVRD->ovrd_WD->value(Dry_Wet(rkr->efx_Overdrive->getpar(Overdrive_DryWet)));
+                OVRD->ovrd_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet)));
                 OVRD->ovrd_WD->redraw();
                 break;
             case MC_Dist_DryWet:
@@ -3326,7 +3326,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHO->echo_pan->redraw();
                 break;
             case MC_Overdrive_Pan:
-                OVRD->ovrd_pan->value(rkr->efx_Overdrive->getpar(Overdrive_Pan) - 64);
+                OVRD->ovrd_pan->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan) - 64);
                 OVRD->ovrd_pan->redraw();
                 break;
             case MC_Dist_Pan:
@@ -3410,7 +3410,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PAN->pan_pan->redraw();
                 break;
             case MC_Overdrive_Drive:
-                OVRD->ovrd_drive->value(rkr->efx_Overdrive->getpar(Overdrive_Drive));
+                OVRD->ovrd_drive->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive));
                 OVRD->ovrd_drive->redraw();
                 break;
             case MC_Dist_Drive:
@@ -3418,7 +3418,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_drive->redraw();
                 break;
             case MC_Overdrive_Level:
-                OVRD->ovrd_level->value(rkr->efx_Overdrive->getpar(Overdrive_Level));
+                OVRD->ovrd_level->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level));
                 OVRD->ovrd_level->redraw();
                 break;
             case MC_Dist_Level:
@@ -3478,7 +3478,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUSDELAY->musdelay_fb2->redraw();
                 break;
             case MC_Overdrive_LPF:
-                OVRD->ovrd_lpf->value(rkr->efx_Overdrive->getpar(Overdrive_LPF));
+                OVRD->ovrd_lpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF));
                 OVRD->ovrd_lpf->redraw();
                 break;
             case MC_Dist_LPF:
@@ -3490,7 +3490,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 REVERB->reverb_LPF->redraw();
                 break;
             case MC_Overdrive_HPF:
-                OVRD->ovrd_hpf->value(rkr->efx_Overdrive->getpar(Overdrive_HPF));
+                OVRD->ovrd_hpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF));
                 OVRD->ovrd_hpf->redraw();
                 break;
             case MC_Dist_HPF:
@@ -3514,7 +3514,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_LR->redraw();
                 break;
             case MC_Overdrive_LR_Cross:
-                OVRD->ovrd_LRc->value(rkr->efx_Overdrive->getpar(Overdrive_LR_Cross));
+                OVRD->ovrd_LRc->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross));
                 OVRD->ovrd_LRc->redraw();
                 break;
             case MC_Dist_LR_Cross:
@@ -4950,7 +4950,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_tipo->redraw();
                 break;
             case MC_Overdrive_Type:
-                OVRD->ovrd_tipo->value(rkr->efx_Overdrive->getpar(Overdrive_Type));
+                OVRD->ovrd_tipo->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type));
                 OVRD->ovrd_tipo->redraw();
                 break;
             case MC_Dere_Type:

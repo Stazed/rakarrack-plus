@@ -716,7 +716,6 @@ public:
     class EQ *efx_EQ1;
     class ParametricEQ *efx_EQ2;
     class Echo *efx_Echo;
-    class Overdrive *efx_Overdrive;
     class Compressor *efx_Compressor;
     class WahWah *efx_WahWah;
     class Alienwah *efx_Alienwah;

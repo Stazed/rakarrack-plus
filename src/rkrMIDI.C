@@ -1622,7 +1622,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_DryWet:
-        efx_Overdrive->changepar(Overdrive_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_DryWet, Dry_Wet(value));
         break;
 
     case MC_Dist_DryWet:
@@ -1654,7 +1654,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_Pan:
-        efx_Overdrive->changepar(Overdrive_Pan, value);
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Pan, value);
         break;
 
     case MC_Dist_Pan:
@@ -1737,7 +1737,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_Drive:
-        efx_Overdrive->changepar(Overdrive_Drive, value);
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Drive, value);
         break;
 
     case MC_Dist_Drive:
@@ -1745,7 +1745,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_Level:
-        efx_Overdrive->changepar(Overdrive_Level, value);
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Level, value);
         break;
 
     case MC_Dist_Level:
@@ -1805,7 +1805,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_LPF:
-        efx_Overdrive->changepar(Overdrive_LPF, ret_LPF(value));
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LPF, ret_LPF(value));
         break;
 
     case MC_Dist_LPF:
@@ -1817,7 +1817,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_HPF:
-        efx_Overdrive->changepar(Overdrive_HPF, ret_HPF(value));
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_HPF, ret_HPF(value));
         break;
 
     case MC_Dist_HPF:
@@ -1841,7 +1841,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_LR_Cross:
-        efx_Overdrive->changepar(Overdrive_LR_Cross, value);
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LR_Cross, value);
         break;
 
     case MC_Dist_LR_Cross:
@@ -3305,7 +3305,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Overdrive_Type:
-        efx_Overdrive->changepar(Overdrive_Type, (int) ((float) value * C_MC_30_RANGE));
+        Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Type, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case MC_Dere_Type:

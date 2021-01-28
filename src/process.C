@@ -56,7 +56,6 @@ RKR::RKR() :
     efx_EQ1(NULL),
     efx_EQ2(NULL),
     efx_Echo(NULL),
-    efx_Overdrive(NULL),
     efx_Compressor(NULL),
     efx_WahWah(NULL),
     efx_Alienwah(NULL),
@@ -385,7 +384,7 @@ RKR::~RKR()
     delete efx_Phaser;
     delete efx_APhaser;
     delete Rack_Effects[EFX_DISTORTION];
-    delete efx_Overdrive;
+    delete Rack_Effects[EFX_OVERDRIVE];
     delete efx_EQ2;
     delete efx_EQ1;
     delete efx_Compressor;
@@ -645,7 +644,7 @@ RKR::instantiate_effects()
     efx_Phaser = new Phaser(fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     Rack_Effects[EFX_DISTORTION] = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
-    efx_Overdrive = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
+    Rack_Effects[EFX_OVERDRIVE] = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
     efx_EQ2 = new ParametricEQ(fSample_rate, period);
     efx_EQ1 = new EQ( fSample_rate, period);
     efx_Compressor = new Compressor(fSample_rate, period);
@@ -1158,7 +1157,7 @@ RKR::cleanup_efx()
     efx_EQ1->cleanup();
     efx_Rev->cleanup();
     Rack_Effects[EFX_DISTORTION]->cleanup();
-    efx_Overdrive->cleanup();
+    Rack_Effects[EFX_OVERDRIVE]->cleanup();
     efx_Compressor->cleanup();
     efx_Echo->cleanup();
     Rack_Effects[EFX_CHORUS]->cleanup();
@@ -1347,8 +1346,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_OVERDRIVE:
                 if (EFX_Bypass[EFX_OVERDRIVE])
                 {
-                    efx_Overdrive->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_OVERDRIVE, efx_Overdrive->outvolume);
+                    Rack_Effects[EFX_OVERDRIVE]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_OVERDRIVE, Rack_Effects[EFX_OVERDRIVE]->outvolume);
                 }
                 break;
 
