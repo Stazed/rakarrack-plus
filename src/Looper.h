@@ -71,14 +71,18 @@ public:
     void setmvol(int value);
     void getstate ();
     
+    int Pplay;
+    int Pstop;
+    int looper_bar;
+    int looper_qua;
+    int progstate[6];
+    
 private:
     class metronome ticker;
     
     float fSAMPLE_RATE;
     unsigned int SAMPLE_RATE;
     uint32_t PERIOD;
-    
-private:
 
     void initdelays ();
     void setfade ();
@@ -87,7 +91,6 @@ private:
     int set_len(int value);
     int cal_len(int value);
     void setvolume (int volume);
-
 
     //Parameters
     int Pvolume;	//Mix

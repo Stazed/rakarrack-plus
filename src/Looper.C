@@ -30,6 +30,11 @@
 
 Looper::Looper(float size, double samplerate, uint32_t intermediate_bufsize) :
     Effect(size, samplerate, intermediate_bufsize),
+    Pplay(),
+    Pstop(1),
+    looper_bar(),
+    looper_qua(),
+    progstate(),
     ticker(samplerate, intermediate_bufsize),
     fSAMPLE_RATE(float(samplerate)),
     SAMPLE_RATE(samplerate),

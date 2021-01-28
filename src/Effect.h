@@ -44,8 +44,7 @@ public:
 
     // Looper
     Effect (float, double, uint32_t) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL), Pplay(), Pstop(1),
-        looper_bar(), looper_qua(), progstate() {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Vocoder
     Effect (float *, int, int, int, int, double, uint32_t) :
@@ -70,16 +69,6 @@ public:
     float outvolume;
     int Ppreset;
     class FPreset *Fpre;
-
-    // Looper
-    int Pplay;
-    int Pstop;
-    int looper_bar;
-    int looper_qua;
-    int progstate[6];
-    virtual void settempo(int) {};
-    virtual void setmvol(int) {};
-    virtual void getstate() {};
     
     // Convolotron, Reverbtron, Echotron
     char Filename[128];

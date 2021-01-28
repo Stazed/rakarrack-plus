@@ -424,14 +424,15 @@ void RKRGUI::GuiTimeout(void)
 
         if (rkr->EFX_Bypass[EFX_LOOPER])
         {
-            if ((rkr->Rack_Effects[EFX_LOOPER]->Pplay) && (!rkr->Rack_Effects[EFX_LOOPER]->Pstop))
+            Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+            if ((Efx_Looper->Pplay) && (!Efx_Looper->Pstop))
             {
-                if (looper_lqua != rkr->Rack_Effects[EFX_LOOPER]->looper_qua)
+                if (looper_lqua != Efx_Looper->looper_qua)
                 {
-                    looper_lqua = rkr->Rack_Effects[EFX_LOOPER]->looper_qua;
+                    looper_lqua = Efx_Looper->looper_qua;
                     char tmp[16];
                     memset(tmp, 0, sizeof (tmp));
-                    sprintf(tmp, "%d/%d", rkr->Rack_Effects[EFX_LOOPER]->looper_bar, rkr->Rack_Effects[EFX_LOOPER]->looper_qua);
+                    sprintf(tmp, "%d/%d", Efx_Looper->looper_bar, Efx_Looper->looper_qua);
                     LOOPER->L_TimePos->copy_label(tmp);
                 }
             }
@@ -844,7 +845,9 @@ void RKRGUI::load_previous_state()
     rakarrack.get(rkr->PrefNom("User Directory"), rkr->UDirFilename, DATADIR, 127);
     rakarrack.get(rkr->PrefNom("Preserve Gain/Master"), rkr->actuvol, 0);
     rakarrack.get(rkr->PrefNom("Metronome Volume"), rkr->Metro_Vol, 50);
-    rkr->Rack_Effects[EFX_LOOPER]->setmvol(rkr->Metro_Vol);
+    
+    Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+    Efx_Looper->setmvol(rkr->Metro_Vol);
 
     rakarrack.get(rkr->PrefNom("Update Tap"), rkr->Tap_Updated, 0);
     rakarrack.get(rkr->PrefNom("MIDI IN Channel"), rkr->MidiCh, 1);
@@ -6010,16 +6013,17 @@ void RKRGUI::Show_Next_Time()
 void RKRGUI::update_looper()
 {
     // update looper
-    rkr->Rack_Effects[EFX_LOOPER]->getstate();
+    Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+    Efx_Looper->getstate();
 
-    LOOPER->looper_play->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[0]);
+    LOOPER->looper_play->value(Efx_Looper->progstate[0]);
     LOOPER->looper_play->redraw();
-    LOOPER->looper_record->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[2]);
+    LOOPER->looper_record->value(Efx_Looper->progstate[2]);
     LOOPER->looper_record->redraw();
-    LOOPER->looper_stop->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[1]);
+    LOOPER->looper_stop->value(Efx_Looper->progstate[1]);
     LOOPER->looper_stop->redraw();
 
-    if (rkr->Rack_Effects[EFX_LOOPER]->progstate[2])
+    if (Efx_Looper->progstate[2])
     {
         LOOPER->Box_P->copy_label("Stop");
         LOOPER->looper_stop->copy_label("@square");
@@ -6030,9 +6034,9 @@ void RKRGUI::update_looper()
         LOOPER->looper_stop->copy_label("@||");
     }
 
-    LOOPER->looper_t1->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[4]);
+    LOOPER->looper_t1->value(Efx_Looper->progstate[4]);
     LOOPER->looper_t1->redraw();
-    LOOPER->looper_t2->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[5]);
+    LOOPER->looper_t2->value(Efx_Looper->progstate[5]);
     LOOPER->looper_t2->redraw();
 }
 

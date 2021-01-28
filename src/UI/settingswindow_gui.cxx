@@ -206,7 +206,8 @@ void SettingsWindowGui::cb_L_SIZE(RKR_Counter* o, void* v) {
 
 void SettingsWindowGui::cb_LM_Volume_i(RKR_Counter* o, void*) {
   m_rkr->Metro_Vol=(int)o->value();
-m_rkr->Rack_Effects[EFX_LOOPER]->setmvol(m_rkr->Metro_Vol);
+Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+Efx_Looper->setmvol(m_rkr->Metro_Vol);
 }
 void SettingsWindowGui::cb_LM_Volume(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_LM_Volume_i(o,v);
