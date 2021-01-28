@@ -24,6 +24,7 @@
 #ifndef ECHOTRON_H
 #define ECHOTRON_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "EffectLFO.h"
 #include "delayline.h"
@@ -102,7 +103,7 @@ public:
 
 };
 
-class Echotron
+class Echotron :public Effect
 {
 public:
     Echotron (double sample_rate, uint32_t intermediate_bufsize);
@@ -122,10 +123,9 @@ public:
     int setfile (int value);
     DlyFile loadfile(char* path);
     void applyfile(DlyFile);
-    
-    int Ppreset;
-    float outvolume;
-    char Filename[128];
+    int get_file_length() {return File.fLength;};
+    char *get_file_name() {return File.Filename;};
+
     DlyFile File;
     int error;
 
@@ -229,7 +229,6 @@ private:
 
     } filterbank[ECHOTRON_MAXFILTERS];
 
-    class FPreset *Fpre;
 
 #ifdef LV2_SUPPORT
     char* FILENAME;     // for lv2 if need to re-initialize and reset .dly file

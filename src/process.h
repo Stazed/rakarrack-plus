@@ -766,7 +766,6 @@ public:
     class Sequence *efx_Sequence;
     class Shifter *efx_Shifter;
     class StompBox *efx_StompBox;
-    class Echotron *efx_Echotron;
     class StereoHarm *efx_StereoHarm;
     class CompBand *efx_CompBand;
     class Opticaltrem *efx_Opticaltrem;

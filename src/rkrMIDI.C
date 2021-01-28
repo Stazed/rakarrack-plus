@@ -2887,39 +2887,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Echotron_DryWet:
-        efx_Echotron->changepar(Echotron_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_DryWet, Dry_Wet(value));
         break;
 
     case MC_Echotron_Pan:
-        efx_Echotron->changepar(Echotron_Pan, value);
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Pan, value);
         break;
 
     case MC_Echotron_Tempo:
-        efx_Echotron->changepar(Echotron_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Tempo, ret_Tempo(value));
         break;
 
     case MC_Echotron_Damp:
-        efx_Echotron->changepar(Echotron_Damp, value);
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Damp, value);
         break;
 
     case MC_Echotron_Feedback:
-        efx_Echotron->changepar(Echotron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Feedback, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Echotron_LR_Cross:
-        efx_Echotron->changepar(Echotron_LR_Cross, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LR_Cross, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Echotron_LFO_Width:
-        efx_Echotron->changepar(Echotron_LFO_Width, value);
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Width, value);
         break;
 
     case MC_Echotron_Depth:
-        efx_Echotron->changepar(Echotron_Depth, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Depth, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Echotron_LFO_Stereo:
-        efx_Echotron->changepar(Echotron_LFO_Stereo, value);
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Stereo, value);
         break;
 
     case MC_Echotron_Taps:
@@ -2929,11 +2929,11 @@ RKR::process_midi_controller_events(int parameter, int value)
            The user will have to move the MIDI control slider to set taps upward.
            The downward limit is checked and limited always on file loading. */
         int number_taps = 1 + (int) ((float) value * C_MC_126_RANGE);
-        if(number_taps > efx_Echotron->File.fLength)
+        if(number_taps > Rack_Effects[EFX_ECHOTRON]->get_file_length())
         {
-            number_taps = efx_Echotron->File.fLength;
+            number_taps = Rack_Effects[EFX_ECHOTRON]->get_file_length();
         }
-        efx_Echotron->changepar(Echotron_Taps, number_taps);
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, number_taps);
         break;
     }
     case MC_Sharm_DryWet:
@@ -3349,7 +3349,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Echotron_LFO_Type:
-        efx_Echotron->changepar(Echotron_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_MuTro_LFO_Type:

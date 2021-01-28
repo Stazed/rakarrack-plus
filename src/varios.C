@@ -381,7 +381,7 @@ RKR::Update_tempo()
     if (EFX_Bypass[EFX_ARPIE]) efx_Arpie->changepar(Arpie_Tempo, Tap_TempoSetD);
     if (EFX_Bypass[EFX_ECHOVERSE]) efx_Echoverse->changepar(Echoverse_Tempo, Tap_TempoSetD);
     if (EFX_Bypass[EFX_SEQUENCE]) efx_Sequence->changepar(Sequence_Tempo, Tap_TempoSetD);
-    if (EFX_Bypass[EFX_ECHOTRON]) efx_Echotron->changepar(Echotron_Tempo, Tap_TempoSetD);
+    if (EFX_Bypass[EFX_ECHOTRON]) Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Tempo, Tap_TempoSetD);
     if (EFX_Bypass[EFX_OPTICALTREM]) efx_Opticaltrem->changepar(Optical_LFO_Tempo, Tap_TempoSetL);
     if (EFX_Bypass[EFX_VIBE]) efx_Vibe->changepar(Vibe_LFO_Tempo, Tap_TempoSetL);
     if (EFX_Bypass[EFX_INFINITY]) efx_Infinity->changepar(Infinity_Tempo, Tap_TempoSetL);

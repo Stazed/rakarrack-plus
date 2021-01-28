@@ -4458,7 +4458,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
                 This works even though the file length is set after the taps with presets.
                 Because on the next cycle, the file length will be adjusted after being set,
                 and then the taps get adjusted based on the correct file length. */
-                val = (int)*plug->param_p[i] > plug->echotron->File.fLength ? plug->echotron->File.fLength: (int)*plug->param_p[i];
+                val = (int)*plug->param_p[i] > plug->echotron->get_file_length() ? plug->echotron->get_file_length(): (int)*plug->param_p[i];
                 if(plug->echotron->getpar(Echotron_Taps) != val)
                 {
                     plug->echotron->changepar(Echotron_Taps,val);
@@ -4503,7 +4503,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
         lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_property);
         lv2_atom_forge_urid(&plug->forge, plug->URIDs.filetype_dly);
         lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_value);
-        lv2_atom_forge_path(&plug->forge, plug->echotron->File.Filename, strlen(plug->echotron->File.Filename)+1);
+        lv2_atom_forge_path(&plug->forge, plug->echotron->get_file_name(), strlen(plug->echotron->get_file_name())+1);
 
         lv2_atom_forge_pop(&plug->forge, &frame);
     }
@@ -4540,7 +4540,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
             	lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_property);
             	lv2_atom_forge_urid(&plug->forge, plug->URIDs.filetype_dly);
             	lv2_atom_forge_key(&plug->forge, plug->URIDs.patch_value);
-            	lv2_atom_forge_path(&plug->forge, plug->echotron->File.Filename, strlen(plug->echotron->File.Filename)+1);
+            	lv2_atom_forge_path(&plug->forge, plug->echotron->get_file_name(), strlen(plug->echotron->get_file_name())+1);
 
             	lv2_atom_forge_pop(&plug->forge, &frame);
             }
@@ -4626,9 +4626,9 @@ static LV2_State_Status echosave(LV2_Handle handle, LV2_State_Store_Function  st
         }
     }
 
-    char* abstractpath = map_path->abstract_path(map_path->handle, plug->echotron->File.Filename);
+    char* abstractpath = map_path->abstract_path(map_path->handle, plug->echotron->get_file_name());
 
-    store(state_handle, plug->URIDs.filetype_dly, abstractpath, strlen(plug->echotron->File.Filename) + 1,
+    store(state_handle, plug->URIDs.filetype_dly, abstractpath, strlen(plug->echotron->get_file_name()) + 1,
     		plug->URIDs.atom_Path, LV2_STATE_IS_POD | LV2_STATE_IS_PORTABLE);
     
     free(abstractpath);

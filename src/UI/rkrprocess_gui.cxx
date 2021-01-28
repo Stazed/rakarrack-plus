@@ -4538,43 +4538,43 @@ void RKRGUI::MIDI_control_gui_refresh()
                 REVERBTRON->revtron_fade->redraw();
                 break;
             case MC_Echotron_DryWet:
-                ECHOTRON->echotron_WD->value(Dry_Wet(rkr->efx_Echotron->getpar(Echotron_DryWet)));
+                ECHOTRON->echotron_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_DryWet)));
                 ECHOTRON->echotron_WD->redraw();
                 break;
             case MC_Echotron_Pan:
-                ECHOTRON->echotron_pan->value(rkr->efx_Echotron->getpar(Echotron_Pan) - 64);
+                ECHOTRON->echotron_pan->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Pan) - 64);
                 ECHOTRON->echotron_pan->redraw();
                 break;
             case MC_Echotron_Tempo:
-                ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
+                ECHOTRON->echotron_tempo->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));
                 ECHOTRON->echotron_tempo->redraw();
                 break;
             case MC_Echotron_Damp:
-                ECHOTRON->echotron_damp->value(rkr->efx_Echotron->getpar(Echotron_Damp));
+                ECHOTRON->echotron_damp->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Damp));
                 ECHOTRON->echotron_damp->redraw();
                 break;
             case MC_Echotron_Feedback:
-                ECHOTRON->echotron_fb->value(rkr->efx_Echotron->getpar(Echotron_Feedback));
+                ECHOTRON->echotron_fb->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Feedback));
                 ECHOTRON->echotron_fb->redraw();
                 break;
             case MC_Echotron_LR_Cross:
-                ECHOTRON->echotron_lrcross->value(rkr->efx_Echotron->getpar(Echotron_LR_Cross) - 64);
+                ECHOTRON->echotron_lrcross->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LR_Cross) - 64);
                 ECHOTRON->echotron_lrcross->redraw();
                 break;
             case MC_Echotron_LFO_Width:
-                ECHOTRON->echotron_width->value(rkr->efx_Echotron->getpar(Echotron_LFO_Width));
+                ECHOTRON->echotron_width->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Width));
                 ECHOTRON->echotron_width->redraw();
                 break;
             case MC_Echotron_Depth:
-                ECHOTRON->echotron_deep->value(rkr->efx_Echotron->getpar(Echotron_Depth) - 64);
+                ECHOTRON->echotron_deep->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Depth) - 64);
                 ECHOTRON->echotron_deep->redraw();
                 break;
             case MC_Echotron_LFO_Stereo:
-                ECHOTRON->echotron_stdf->value(rkr->efx_Echotron->getpar(Echotron_LFO_Stereo));
+                ECHOTRON->echotron_stdf->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Stereo));
                 ECHOTRON->echotron_stdf->redraw();
                 break;
             case MC_Echotron_Taps:
-                ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(Echotron_Taps));
+                ECHOTRON->echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
                 ECHOTRON->echotron_length->redraw();
                 break;
             case MC_Sharm_DryWet:
@@ -4994,7 +4994,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DFLANGE->dflange_lfotype->redraw();
                 break;
             case MC_Echotron_LFO_Type:
-                ECHOTRON->echotron_lfotype->value(rkr->efx_Echotron->getpar(Echotron_LFO_Type));
+                ECHOTRON->echotron_lfotype->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Type));
                 ECHOTRON->echotron_lfotype->redraw();
                 break;
             case MC_MuTro_LFO_Type:
@@ -6141,7 +6141,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->EFX_Bypass[EFX_ECHOTRON])
     {
-        ECHOTRON->echotron_tempo->value(rkr->efx_Echotron->getpar(Echotron_Tempo));
+        ECHOTRON->echotron_tempo->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));
         ECHOTRON->echotron_tempo->redraw();
     }
     if (rkr->EFX_Bypass[EFX_OPTICALTREM])

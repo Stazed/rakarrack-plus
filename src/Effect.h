@@ -93,6 +93,8 @@ public:
     // Convolotron, Reverbtron, Echotron
     char Filename[128];
     virtual int setfile (int value) {};
+    virtual int get_file_length() {};
+    virtual char *get_file_name() {};
 };
 
 #endif

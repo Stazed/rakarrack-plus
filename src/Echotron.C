@@ -27,9 +27,7 @@
 #include "Echotron.h"
 
 Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
-    Filename(),
+Effect(sample_rate, intermediate_bufsize),
     File(),
     error(),
     fSAMPLE_RATE(sample_rate),
@@ -79,8 +77,7 @@ Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize) :
     lpfl(NULL),
     lpfr(NULL),
     interpbuf(NULL),
-    filterbank(),
-    Fpre(NULL)
+    filterbank()
 #ifdef LV2_SUPPORT
     ,FILENAME(NULL)
 #endif // LV2
