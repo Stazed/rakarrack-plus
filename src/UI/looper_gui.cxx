@@ -11,7 +11,7 @@ void LooperGui::cb_looper_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_LOOPER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Looper->cleanup();
+rkr->Rack_Effects[EFX_LOOPER]->cleanup();
 rgui->findpos(EFX_LOOPER,(int)o->value(),o);
 }
 void LooperGui::cb_looper_activar(RKR_Light_Button* o, void* v) {
@@ -20,23 +20,23 @@ void LooperGui::cb_looper_activar(RKR_Light_Button* o, void* v) {
 
 void LooperGui::cb_looper_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12030))rkr->efx_Looper->setpreset((int) o->value());
-looper_WD->value(Dry_Wet(rkr->efx_Looper->getpar(Looper_DryWet)));
-looper_play->value(rkr->efx_Looper->getpar(Looper_Play));
-looper_record->value(rkr->efx_Looper->getpar(Looper_Record));
-looper_rv->value(rkr->efx_Looper->getpar(Looper_Reverse));
-looper_ap->value(rkr->efx_Looper->getpar(Looper_AutoPlay));
-looper_level1->value(rkr->efx_Looper->getpar(Looper_Level_1));
-looper_level2->value(rkr->efx_Looper->getpar(Looper_Level_2));
+if((ud==0)||(ud==12030))rkr->Rack_Effects[EFX_LOOPER]->setpreset((int) o->value());
+looper_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_DryWet)));
+looper_play->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Play));
+looper_record->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Record));
+looper_rv->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Reverse));
+looper_ap->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_AutoPlay));
+looper_level1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_1));
+looper_level2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_2));
 
-looper_t1->value(rkr->efx_Looper->getpar(Looper_Track_1));
-looper_t2->value(rkr->efx_Looper->getpar(Looper_Track_2));
-looper_r1->value(rkr->efx_Looper->getpar(Looper_Rec_1));
-looper_r2->value(rkr->efx_Looper->getpar(Looper_Rec_2));
-looper_lnk->value(rkr->efx_Looper->getpar(Looper_Link));
-looper_Tempo->value(rkr->efx_Looper->getpar(Looper_Tempo));
-looper_bar->value(rkr->efx_Looper->getpar(Looper_Bar));
-looper_ms->value(rkr->efx_Looper->getpar(Looper_M_S));
+looper_t1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_1));
+looper_t2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_2));
+looper_r1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_1));
+looper_r2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_2));
+looper_lnk->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Link));
+looper_Tempo->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Tempo));
+looper_bar->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Bar));
+looper_ms->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_M_S));
 }
 void LooperGui::cb_looper_preset(RKR_Choice* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_preset_i(o,v);
@@ -54,7 +54,7 @@ void LooperGui::cb_looper_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Looper_DryWet);
  return;
 }
-rkr->efx_Looper->changepar(Looper_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_DryWet,Dry_Wet((int)(o->value())));
 }
 void LooperGui::cb_looper_WD(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_WD_i(o,v);
@@ -66,7 +66,7 @@ void LooperGui::cb_looper_level1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Looper_Level_1);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Level_1,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Level_1,(int)o->value());
 }
 void LooperGui::cb_looper_level1(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_level1_i(o,v);
@@ -78,7 +78,7 @@ void LooperGui::cb_looper_level2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Looper_Level_2);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Level_2,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Level_2,(int)o->value());
 }
 void LooperGui::cb_looper_level2(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_level2_i(o,v);
@@ -90,21 +90,21 @@ void LooperGui::cb_looper_Tempo_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Looper_Tempo);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Tempo,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Tempo,(int)o->value());
 }
 void LooperGui::cb_looper_Tempo(RKR_Slider* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_Tempo_i(o,v);
 }
 
 void LooperGui::cb_looper_bar_i(RKR_Choice* o, void*) {
-  rkr->efx_Looper->changepar(Looper_Bar,(int)o->value());
+  rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Bar,(int)o->value());
 }
 void LooperGui::cb_looper_bar(RKR_Choice* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_bar_i(o,v);
 }
 
 void LooperGui::cb_looper_ms_i(RKR_Choice* o, void*) {
-  rkr->efx_Looper->changepar(Looper_M_S,(int)o->value());
+  rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_M_S,(int)o->value());
 }
 void LooperGui::cb_looper_ms(RKR_Choice* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_ms_i(o,v);
@@ -116,7 +116,7 @@ void LooperGui::cb_looper_rv_i(RKR_Check_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Reverse);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Reverse,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Reverse,(int)o->value());
 }
 void LooperGui::cb_looper_rv(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_rv_i(o,v);
@@ -128,7 +128,7 @@ void LooperGui::cb_looper_ap_i(RKR_Check_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_AutoPlay);
  return;
 }
-rkr->efx_Looper->changepar(Looper_AutoPlay,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_AutoPlay,(int)o->value());
 }
 void LooperGui::cb_looper_ap(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_ap_i(o,v);
@@ -140,7 +140,7 @@ void LooperGui::cb_looper_play_i(RKR_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Play);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Play,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Play,(int)o->value());
 rgui->update_looper();
 }
 void LooperGui::cb_looper_play(RKR_Button* o, void* v) {
@@ -153,7 +153,7 @@ void LooperGui::cb_looper_stop_i(RKR_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Stop);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Stop,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Stop,(int)o->value());
 rgui->update_looper();
 }
 void LooperGui::cb_looper_stop(RKR_Button* o, void* v) {
@@ -166,7 +166,7 @@ void LooperGui::cb_looper_record_i(RKR_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Record);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Record,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Record,(int)o->value());
 rgui->update_looper();
 }
 void LooperGui::cb_looper_record(RKR_Button* o, void* v) {
@@ -179,7 +179,7 @@ void LooperGui::cb_looper_r1_i(RKR_Check_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Rec_1);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Rec_1,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Rec_1,(int)o->value());
 }
 void LooperGui::cb_looper_r1(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_r1_i(o,v);
@@ -191,7 +191,7 @@ void LooperGui::cb_looper_r2_i(RKR_Check_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Rec_2);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Rec_2,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Rec_2,(int)o->value());
 }
 void LooperGui::cb_looper_r2(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_r2_i(o,v);
@@ -203,7 +203,7 @@ void LooperGui::cb_looper_t1_i(RKR_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Track_1);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Track_1,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Track_1,(int)o->value());
 rgui->update_looper();
 }
 void LooperGui::cb_looper_t1(RKR_Button* o, void* v) {
@@ -216,7 +216,7 @@ void LooperGui::cb_looper_t2_i(RKR_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Track_2);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Track_2,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Track_2,(int)o->value());
 rgui->update_looper();
 }
 void LooperGui::cb_looper_t2(RKR_Button* o, void* v) {
@@ -224,7 +224,7 @@ void LooperGui::cb_looper_t2(RKR_Button* o, void* v) {
 }
 
 void LooperGui::cb_looper_lnk_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Looper->changepar(Looper_Link,(int)o->value());
+  rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Link,(int)o->value());
 }
 void LooperGui::cb_looper_lnk(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_lnk_i(o,v);
@@ -236,7 +236,7 @@ void LooperGui::cb_looper_clear_i(RKR_Button* o, void*) {
  rgui->getMIDIControl(MC_Looper_Clear);
  return;
 }
-rkr->efx_Looper->changepar(Looper_Clear,(int)o->value());
+rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Clear,(int)o->value());
 rgui->update_looper();
 }
 void LooperGui::cb_looper_clear(RKR_Button* o, void* v) {
@@ -244,7 +244,7 @@ void LooperGui::cb_looper_clear(RKR_Button* o, void* v) {
 }
 
 void LooperGui::cb_looper_mt_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Looper->changepar(Looper_Metro,(int)o->value());
+  rkr->Rack_Effects[EFX_LOOPER]->changepar(Looper_Metro,(int)o->value());
 }
 void LooperGui::cb_looper_mt(RKR_Check_Button* o, void* v) {
   ((LooperGui*)(o->parent()))->cb_looper_mt_i(o,v);

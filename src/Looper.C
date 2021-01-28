@@ -29,17 +29,11 @@
 #include "Looper.h"
 
 Looper::Looper(float size, double samplerate, uint32_t intermediate_bufsize) :
+    Effect(size, samplerate, intermediate_bufsize),
     ticker(samplerate, intermediate_bufsize),
     fSAMPLE_RATE(float(samplerate)),
     SAMPLE_RATE(samplerate),
     PERIOD(intermediate_bufsize),
-    looper_bar(),
-    looper_qua(),
-    Ppreset(),
-    progstate(),
-    outvolume(0.5f),
-    Pplay(),
-    Pstop(1),
     Pvolume(),
     Precord(),
     Pclear(1),
@@ -82,8 +76,7 @@ Looper::Looper(float size, double samplerate, uint32_t intermediate_bufsize) :
     fade2(),
     pregain1(),
     pregain2(),
-    mvol(),
-    Fpre(NULL)
+    mvol()
 {
     //default values
     settempo(120);

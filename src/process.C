@@ -90,7 +90,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_Looper(NULL),
     efx_MuTroMojo(NULL),
     efx_Echoverse(NULL),
     efx_CoilCrafter(NULL),
@@ -408,7 +407,7 @@ RKR::~RKR()
     delete efx_Synthfilter;
     delete efx_VaryBand;
     delete efx_Convol;
-    delete efx_Looper;
+    delete Rack_Effects[EFX_LOOPER];
     delete efx_MuTroMojo;
     delete efx_Echoverse;
     delete efx_CoilCrafter;
@@ -668,7 +667,7 @@ RKR::instantiate_effects()
     efx_Synthfilter = new Synthfilter(fSample_rate, period);
     efx_VaryBand = new VaryBand(fSample_rate, period);
     efx_Convol = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
-    efx_Looper = new Looper(looper_size, fSample_rate, period);
+    Rack_Effects[EFX_LOOPER] = new Looper(looper_size, fSample_rate, period);
     efx_MuTroMojo = new MuTroMojo(fSample_rate, period);
     efx_Echoverse = new Echoverse(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
@@ -1184,7 +1183,7 @@ RKR::cleanup_efx()
     efx_Synthfilter->cleanup();
     efx_VaryBand->cleanup();
     efx_Convol->cleanup();
-    efx_Looper->cleanup();
+    Rack_Effects[EFX_LOOPER]->cleanup();
     efx_MuTroMojo->cleanup();
     efx_Echoverse->cleanup();
     efx_CoilCrafter->cleanup();
@@ -1563,8 +1562,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_LOOPER:
                 if (EFX_Bypass[EFX_LOOPER])
                 {
-                    efx_Looper->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_LOOPER, efx_Looper->outvolume);
+                    Rack_Effects[EFX_LOOPER]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_LOOPER, Rack_Effects[EFX_LOOPER]->outvolume);
                 }
                 break;
 

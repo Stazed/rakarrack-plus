@@ -695,13 +695,13 @@ RKR::midievents()
     {
         if (midievent->type == SND_SEQ_EVENT_START)
         {
-            efx_Looper->changepar(Looper_Play, 1);
+            Rack_Effects[EFX_LOOPER]->changepar(Looper_Play, 1);
             stecla = 5;
         }
 
         if (midievent->type == SND_SEQ_EVENT_STOP)
         {
-            efx_Looper->changepar(Looper_Stop, 1);
+            Rack_Effects[EFX_LOOPER]->changepar(Looper_Stop, 1);
             stecla = 5;
         }
     }
@@ -2533,85 +2533,85 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Looper_DryWet:
-        efx_Looper->changepar(Looper_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_DryWet, Dry_Wet(value));
         break;
 
     case MC_Looper_Level_1:
-        efx_Looper->changepar(Looper_Level_1, value);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Level_1, value);
         break;
 
     case MC_Looper_Level_2:
-        efx_Looper->changepar(Looper_Level_2, value);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Level_2, value);
         break;
 
     case MC_Looper_Reverse:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Reverse, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Reverse, i);
         break;
     }
     case MC_Looper_AutoPlay:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_AutoPlay, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_AutoPlay, i);
         break;
     }
     case MC_Looper_Play:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Play, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Play, i);
         break;
     }
     case MC_Looper_Stop:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Stop, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Stop, i);
         break;
     }
     case MC_Looper_Record:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Record, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Record, i);
         break;
     }
     case MC_Looper_Rec_1:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Rec_1, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Rec_1, i);
         break;
     }
     case MC_Looper_Rec_2:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Rec_2, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Rec_2, i);
         break;
     }
     case MC_Looper_Track_1:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Track_1, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Track_1, i);
         break;
     }
     case MC_Looper_Track_2:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Track_2, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Track_2, i);
         break;
     }
     case MC_Looper_Clear:
     {
         int i = 0;
         if (value) i = 1;
-        efx_Looper->changepar(Looper_Clear, i);
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Clear, i);
         break;
     }
     case MC_Convo_DryWet:
@@ -3197,7 +3197,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Looper_Tempo:
-        efx_Looper->changepar(Looper_Tempo, 20 + (int) ((float) value * C_MC_360_RANGE));
+        Rack_Effects[EFX_LOOPER]->changepar(Looper_Tempo, 20 + (int) ((float) value * C_MC_360_RANGE));
         break;
 
     case MC_Music_Tempo:

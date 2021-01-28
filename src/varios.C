@@ -363,7 +363,7 @@ RKR::Update_tempo()
         Tap_TempoSetD = Tap_TempoSet;
     }
 
-    if (EFX_Bypass[EFX_LOOPER]) efx_Looper->settempo(Tap_TempoSet);
+    if (EFX_Bypass[EFX_LOOPER]) Rack_Effects[EFX_LOOPER]->settempo(Tap_TempoSet);
 
     if (EFX_Bypass[EFX_CHORUS]) Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
     if (EFX_Bypass[EFX_FLANGER]) Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Tempo, Tap_TempoSetL);

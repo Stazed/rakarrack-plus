@@ -327,7 +327,7 @@ m_rkr->m_displayed=1;
       }
       Fl_Counter LM_Volume {
         callback {m_rkr->Metro_Vol=(int)o->value();
-m_rkr->efx_Looper->setmvol(m_rkr->Metro_Vol);}
+m_rkr->Rack_Effects[EFX_LOOPER]->setmvol(m_rkr->Metro_Vol);}
         tooltip {Looper Metronome Volume} xywh {165 237 47 18} type Simple labelsize 12 labelcolor 7 align 8 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
         code0 {o->set_label_offset(2);}
         class RKR_Counter

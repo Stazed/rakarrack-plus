@@ -757,7 +757,6 @@ public:
     class Resample *A_Resample;
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
-    class Looper *efx_Looper;
     class MuTroMojo *efx_MuTroMojo;
     class Echoverse *efx_Echoverse;
     class CoilCrafter *efx_CoilCrafter;

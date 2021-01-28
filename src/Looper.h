@@ -26,6 +26,7 @@
 #ifndef LOOPER_H
 #define LOOPER_H
 
+#include "Effect.h"
 #include "metronome.h"
 
 // There are actually 18 parameters, but last 4 are not saved...
@@ -53,7 +54,7 @@ enum Looper_Index
     Looper_M_S      // not saved
 };
 
-class Looper
+class Looper :public Effect
 {
 public:
     Looper (float size, double samplerate, uint32_t intermediate_bufsize);
@@ -77,17 +78,6 @@ private:
     unsigned int SAMPLE_RATE;
     uint32_t PERIOD;
     
-public:
-    int looper_bar;
-    int looper_qua;
-    int Ppreset;
-    int progstate[6];
-    float outvolume;
-
-    int Pplay;          //set to 1
-    int Pstop;          //set to 1
-    
-
 private:
 
     void initdelays ();
@@ -127,8 +117,6 @@ private:
 
     float  Srate_Attack_Coeff, track1gain, track2gain, fade1, fade2, pregain1, pregain2;
     float mvol;
-
-    class FPreset *Fpre;
 
 };
 

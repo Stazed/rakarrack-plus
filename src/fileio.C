@@ -797,13 +797,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_LOOPER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Looper->getpar(Looper_DryWet), efx_Looper->getpar(Looper_Play),
-                efx_Looper->getpar(Looper_Stop), efx_Looper->getpar(Looper_Record),
-                efx_Looper->getpar(Looper_Clear), efx_Looper->getpar(Looper_Reverse),
-                efx_Looper->getpar(Looper_Level_1), efx_Looper->getpar(Looper_Track_1),
-                efx_Looper->getpar(Looper_Track_2), efx_Looper->getpar(Looper_AutoPlay),
-                efx_Looper->getpar(Looper_Level_2), efx_Looper->getpar(Looper_Rec_1),
-                efx_Looper->getpar(Looper_Rec_2), efx_Looper->getpar(Looper_Link), EFX_Bypass[EFX_LOOPER]);
+                Rack_Effects[EFX_LOOPER]->getpar(Looper_DryWet), Rack_Effects[EFX_LOOPER]->getpar(Looper_Play),
+                Rack_Effects[EFX_LOOPER]->getpar(Looper_Stop), Rack_Effects[EFX_LOOPER]->getpar(Looper_Record),
+                Rack_Effects[EFX_LOOPER]->getpar(Looper_Clear), Rack_Effects[EFX_LOOPER]->getpar(Looper_Reverse),
+                Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_1), Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_1),
+                Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_2), Rack_Effects[EFX_LOOPER]->getpar(Looper_AutoPlay),
+                Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_2), Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_1),
+                Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_2), Rack_Effects[EFX_LOOPER]->getpar(Looper_Link), EFX_Bypass[EFX_LOOPER]);
         break;
 
     case EFX_MUTROMOJO:
@@ -1535,9 +1535,9 @@ RKR::Actualizar_Audio()
 
         case EFX_LOOPER:
             EFX_Bypass[EFX_LOOPER] = 0;
-            // efx_Looper->cleanup();
+            // Rack_Effects[EFX_LOOPER]->cleanup();
             for (i = 0; i < C_LOOPER_PARAMETERS; i++)
-                efx_Looper->changepar(i, lv[EFX_LOOPER][i]);
+                Rack_Effects[EFX_LOOPER]->changepar(i, lv[EFX_LOOPER][i]);
             EFX_Bypass[EFX_LOOPER] = EFX_Bank_Bypass[EFX_LOOPER];
             break;
 
@@ -2352,7 +2352,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_CONVO_PARAMETERS; j++)
         lv[EFX_CONVOLOTRON][j] = efx_Convol->getpar(j);
     for (j = 0; j < C_LOOPER_PARAMETERS; j++)
-        lv[EFX_LOOPER][j] = efx_Looper->getpar(j);
+        lv[EFX_LOOPER][j] = Rack_Effects[EFX_LOOPER]->getpar(j);
     for (j = 0; j < C_MUTRO_PARAMETERS; j++)
         lv[EFX_MUTROMOJO][j] = efx_MuTroMojo->getpar(j);
     for (j = 0; j < C_ECHOVERSE_PARAMETERS; j++)

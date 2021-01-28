@@ -420,14 +420,14 @@ void RKRGUI::GuiTimeout(void)
 
         if (rkr->EFX_Bypass[EFX_LOOPER])
         {
-            if ((rkr->efx_Looper->Pplay) && (!rkr->efx_Looper->Pstop))
+            if ((rkr->Rack_Effects[EFX_LOOPER]->Pplay) && (!rkr->Rack_Effects[EFX_LOOPER]->Pstop))
             {
-                if (looper_lqua != rkr->efx_Looper->looper_qua)
+                if (looper_lqua != rkr->Rack_Effects[EFX_LOOPER]->looper_qua)
                 {
-                    looper_lqua = rkr->efx_Looper->looper_qua;
+                    looper_lqua = rkr->Rack_Effects[EFX_LOOPER]->looper_qua;
                     char tmp[16];
                     memset(tmp, 0, sizeof (tmp));
-                    sprintf(tmp, "%d/%d", rkr->efx_Looper->looper_bar, rkr->efx_Looper->looper_qua);
+                    sprintf(tmp, "%d/%d", rkr->Rack_Effects[EFX_LOOPER]->looper_bar, rkr->Rack_Effects[EFX_LOOPER]->looper_qua);
                     LOOPER->L_TimePos->copy_label(tmp);
                 }
             }
@@ -839,7 +839,7 @@ void RKRGUI::load_previous_state()
     rakarrack.get(rkr->PrefNom("User Directory"), rkr->UDirFilename, DATADIR, 127);
     rakarrack.get(rkr->PrefNom("Preserve Gain/Master"), rkr->actuvol, 0);
     rakarrack.get(rkr->PrefNom("Metronome Volume"), rkr->Metro_Vol, 50);
-    rkr->efx_Looper->setmvol(rkr->Metro_Vol);
+    rkr->Rack_Effects[EFX_LOOPER]->setmvol(rkr->Metro_Vol);
 
     rakarrack.get(rkr->PrefNom("Update Tap"), rkr->Tap_Updated, 0);
     rakarrack.get(rkr->PrefNom("MIDI IN Channel"), rkr->MidiCh, 1);
@@ -4204,51 +4204,51 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUTROMOJO->mutromojo_smooth->redraw();
                 break;
             case MC_Looper_DryWet:
-                LOOPER->looper_WD->value(Dry_Wet(rkr->efx_Looper->getpar(Looper_DryWet)));
+                LOOPER->looper_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_DryWet)));
                 LOOPER->looper_WD->redraw();
                 break;
             case MC_Looper_Level_1:
-                LOOPER->looper_level1->value(rkr->efx_Looper->getpar(Looper_Level_1));
+                LOOPER->looper_level1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_1));
                 LOOPER->looper_level1->redraw();
                 break;
             case MC_Looper_Level_2:
-                LOOPER->looper_level2->value(rkr->efx_Looper->getpar(Looper_Level_2));
+                LOOPER->looper_level2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_2));
                 LOOPER->looper_level2->redraw();
                 break;
             case MC_Looper_Reverse:
-                LOOPER->looper_rv->value(rkr->efx_Looper->getpar(Looper_Reverse));
+                LOOPER->looper_rv->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Reverse));
                 LOOPER->looper_rv->redraw();
                 break;
             case MC_Looper_AutoPlay:
-                LOOPER->looper_ap->value(rkr->efx_Looper->getpar(Looper_AutoPlay));
+                LOOPER->looper_ap->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_AutoPlay));
                 LOOPER->looper_ap->redraw();
                 break;
             case MC_Looper_Play:
-                LOOPER->looper_play->value(rkr->efx_Looper->getpar(Looper_Play));
+                LOOPER->looper_play->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Play));
                 update_looper();
                 break;
             case MC_Looper_Stop:
-                LOOPER->looper_stop->value(rkr->efx_Looper->getpar(Looper_Stop));
+                LOOPER->looper_stop->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Stop));
                 update_looper();
                 break;
             case MC_Looper_Record:
-                LOOPER->looper_record->value(rkr->efx_Looper->getpar(Looper_Record));
+                LOOPER->looper_record->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Record));
                 update_looper();
                 break;
             case MC_Looper_Rec_1:
-                LOOPER->looper_r1->value(rkr->efx_Looper->getpar(Looper_Rec_1));
+                LOOPER->looper_r1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_1));
                 LOOPER->looper_r1->redraw();
                 break;
             case MC_Looper_Rec_2:
-                LOOPER->looper_r2->value(rkr->efx_Looper->getpar(Looper_Rec_2));
+                LOOPER->looper_r2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_2));
                 LOOPER->looper_r2->redraw();
                 break;
             case MC_Looper_Track_1:
-                LOOPER->looper_t1->value(rkr->efx_Looper->getpar(Looper_Track_1));
+                LOOPER->looper_t1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_1));
                 update_looper();
                 break;
             case MC_Looper_Track_2:
-                LOOPER->looper_t2->value(rkr->efx_Looper->getpar(Looper_Track_2));
+                LOOPER->looper_t2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_2));
                 update_looper();
                 break;
             case MC_Looper_Clear:
@@ -4262,7 +4262,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                    with MIDI control, but it would probably have to be a timer issue and additional
                    complications for very little value. MIDI control does work, but we should not show
                    it on the gui button here with this method */
-            //    LOOPER->looper_clear->value(rkr->efx_Looper->getpar(Looper_Clear));
+            //    LOOPER->looper_clear->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Clear));
                 update_looper();
                 break;
             case MC_Convo_DryWet:
@@ -4840,7 +4840,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 INFINIT->infinity_8->redraw();
                 break;
             case MC_Looper_Tempo:
-                LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(Looper_Tempo));
+                LOOPER->looper_Tempo->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Tempo));
                 LOOPER->looper_Tempo->redraw();
                 break;
             case MC_Music_Tempo:
@@ -6005,16 +6005,16 @@ void RKRGUI::Show_Next_Time()
 void RKRGUI::update_looper()
 {
     // update looper
-    rkr->efx_Looper->getstate();
+    rkr->Rack_Effects[EFX_LOOPER]->getstate();
 
-    LOOPER->looper_play->value(rkr->efx_Looper->progstate[0]);
+    LOOPER->looper_play->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[0]);
     LOOPER->looper_play->redraw();
-    LOOPER->looper_record->value(rkr->efx_Looper->progstate[2]);
+    LOOPER->looper_record->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[2]);
     LOOPER->looper_record->redraw();
-    LOOPER->looper_stop->value(rkr->efx_Looper->progstate[1]);
+    LOOPER->looper_stop->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[1]);
     LOOPER->looper_stop->redraw();
 
-    if (rkr->efx_Looper->progstate[2])
+    if (rkr->Rack_Effects[EFX_LOOPER]->progstate[2])
     {
         LOOPER->Box_P->copy_label("Stop");
         LOOPER->looper_stop->copy_label("@square");
@@ -6025,9 +6025,9 @@ void RKRGUI::update_looper()
         LOOPER->looper_stop->copy_label("@||");
     }
 
-    LOOPER->looper_t1->value(rkr->efx_Looper->progstate[4]);
+    LOOPER->looper_t1->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[4]);
     LOOPER->looper_t1->redraw();
-    LOOPER->looper_t2->value(rkr->efx_Looper->progstate[5]);
+    LOOPER->looper_t2->value(rkr->Rack_Effects[EFX_LOOPER]->progstate[5]);
     LOOPER->looper_t2->redraw();
 }
 
@@ -6036,7 +6036,7 @@ void RKRGUI::UpdateTGUI()
     // updates the efx based on global tempo settings
     if (rkr->EFX_Bypass[EFX_LOOPER])
     {
-        LOOPER->looper_Tempo->value(rkr->efx_Looper->getpar(Looper_Tempo));
+        LOOPER->looper_Tempo->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Tempo));
         LOOPER->looper_Tempo->redraw();
     }
 
