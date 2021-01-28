@@ -2679,31 +2679,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Vocoder_DryWet:
-        efx_Vocoder->changepar(Vocoder_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_VOCODER]->changepar(Vocoder_DryWet, Dry_Wet(value));
         break;
 
     case MC_Vocoder_Pan:
-        efx_Vocoder->changepar(Vocoder_Pan, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Pan, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Vocoder_Input:
-        efx_Vocoder->changepar(Vocoder_Input, value);
+        Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Input, value);
         break;
 
     case MC_Vocoder_Smear:
-        efx_Vocoder->changepar(Vocoder_Smear, 1 + (int) ((float) value * C_MC_126_RANGE));
+        Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Smear, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case MC_Vocoder_Q:
-        efx_Vocoder->changepar(Vocoder_Q, 40 + (int) ((float) value * C_MC_130_RANGE));
+        Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Q, 40 + (int) ((float) value * C_MC_130_RANGE));
         break;
 
     case MC_Vocoder_Ring:
-        efx_Vocoder->changepar(Vocoder_Ring, value);
+        Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Ring, value);
         break;
 
     case MC_Vocoder_Level:
-        efx_Vocoder->changepar(Vocoder_Level, value);
+        Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Level, value);
         break;
 
     case MC_Echoverse_DryWet:

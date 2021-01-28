@@ -25,6 +25,7 @@
 #define VOCODER_H
 
 #include <vector>
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "Resample.h"
 
@@ -41,7 +42,7 @@ enum Vocoder_Index
     Vocoder_Ring
 };
 
-class Vocoder
+class Vocoder : public Effect
 {
 public:
     Vocoder (float *auxresampled_,int bands, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsize);
@@ -64,8 +65,6 @@ public:
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
 
-    int Ppreset;
-    float outvolume;
     float vulevel;
 
     float *auxresampled;
@@ -134,9 +133,6 @@ private:
     Resample *U_Resample;
     Resample *D_Resample;
     Resample *A_Resample;
-
-    class FPreset *Fpre;
-
 };
 
 

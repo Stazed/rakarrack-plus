@@ -93,7 +93,6 @@ RKR::RKR() :
     efx_Echoverse(NULL),
     efx_CoilCrafter(NULL),
     efx_ShelfBoost(NULL),
-    efx_Vocoder(NULL),
     efx_Sustainer(NULL),
     efx_Sequence(NULL),
     efx_Shifter(NULL),
@@ -343,7 +342,7 @@ RKR::RKR() :
     instantiate_effects();
     
     initialize_arrays();
-    
+
     put_order_in_rack();
     
     MIDI_control();
@@ -409,7 +408,7 @@ RKR::~RKR()
     delete efx_Echoverse;
     delete efx_CoilCrafter;
     delete efx_ShelfBoost;
-    delete efx_Vocoder;
+    delete Rack_Effects[EFX_VOCODER];
     delete efx_Sustainer;
     delete efx_Sequence;
     delete efx_Shifter;
@@ -669,7 +668,7 @@ RKR::instantiate_effects()
     efx_Echoverse = new Echoverse(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
-    efx_Vocoder = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
+    Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
     efx_Sustainer = new Sustainer(fSample_rate, period);
     efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
@@ -1185,7 +1184,7 @@ RKR::cleanup_efx()
     efx_Echoverse->cleanup();
     efx_CoilCrafter->cleanup();
     efx_ShelfBoost->cleanup();
-    efx_Vocoder->cleanup();
+    Rack_Effects[EFX_VOCODER]->cleanup();
     efx_Sustainer->cleanup();
     efx_Sequence->cleanup();
     efx_Shifter->cleanup();
@@ -1599,8 +1598,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_VOCODER:
                 if (EFX_Bypass[EFX_VOCODER])
                 {
-                    efx_Vocoder->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_VOCODER, efx_Vocoder->outvolume);
+                    Rack_Effects[EFX_VOCODER]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_VOCODER, Rack_Effects[EFX_VOCODER]->outvolume);
                 }
                 break;
 

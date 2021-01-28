@@ -395,8 +395,12 @@ void RKRGUI::GuiTimeout(void)
 
         if (rkr->checkforaux())
         {
-            if (VOCODER->vu_vu->value() != rkr->efx_Vocoder->vulevel)
-                VOCODER->vu_vu->value(rkr->efx_Vocoder->vulevel);
+            Vocoder *Efx_Vocoder = static_cast <Vocoder*>(rkr->Rack_Effects[EFX_VOCODER]);
+            
+            if (VOCODER->vu_vu->value() != Efx_Vocoder->vulevel)
+            {
+                VOCODER->vu_vu->value(Efx_Vocoder->vulevel);
+            }
         }
 
         if (Sco->get_scope_ON())
@@ -4330,31 +4334,31 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SHELFBOOST->shelf_q1->redraw();
                 break;
             case MC_Vocoder_DryWet:
-                VOCODER->vo_WD->value(Dry_Wet(rkr->efx_Vocoder->getpar(Vocoder_DryWet)));
+                VOCODER->vo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_DryWet)));
                 VOCODER->vo_WD->redraw();
                 break;
             case MC_Vocoder_Pan:
-                VOCODER->vo_pan->value(rkr->efx_Vocoder->getpar(Vocoder_Pan) - 64);
+                VOCODER->vo_pan->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Pan) - 64);
                 VOCODER->vo_pan->redraw();
                 break;
             case MC_Vocoder_Input:
-                VOCODER->vo_input->value(rkr->efx_Vocoder->getpar(Vocoder_Input));
+                VOCODER->vo_input->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Input));
                 VOCODER->vo_input->redraw();
                 break;
             case MC_Vocoder_Smear:
-                VOCODER->vo_mu->value(rkr->efx_Vocoder->getpar(Vocoder_Smear));
+                VOCODER->vo_mu->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Smear));
                 VOCODER->vo_mu->redraw();
                 break;
             case MC_Vocoder_Q:
-                VOCODER->vo_q->value(rkr->efx_Vocoder->getpar(Vocoder_Q));
+                VOCODER->vo_q->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Q));
                 VOCODER->vo_q->redraw();
                 break;
             case MC_Vocoder_Ring:
-                VOCODER->vo_ring->value(rkr->efx_Vocoder->getpar(Vocoder_Ring));
+                VOCODER->vo_ring->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Ring));
                 VOCODER->vo_ring->redraw();
                 break;
             case MC_Vocoder_Level:
-                VOCODER->vo_level->value(rkr->efx_Vocoder->getpar(Vocoder_Level));
+                VOCODER->vo_level->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Level));
                 VOCODER->vo_level->redraw();
                 break;
             case MC_Echoverse_DryWet:

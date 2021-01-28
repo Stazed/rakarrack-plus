@@ -849,10 +849,10 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_VOCODER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Vocoder->getpar(Vocoder_DryWet), efx_Vocoder->getpar(Vocoder_Pan),
-                efx_Vocoder->getpar(Vocoder_Smear), efx_Vocoder->getpar(Vocoder_Q),
-                efx_Vocoder->getpar(Vocoder_Input), efx_Vocoder->getpar(Vocoder_Level),
-                efx_Vocoder->getpar(Vocoder_Ring), EFX_Bypass[EFX_VOCODER]);
+                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_DryWet), Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Pan),
+                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Smear), Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Q),
+                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Input), Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Level),
+                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Ring), EFX_Bypass[EFX_VOCODER]);
         break;
 
     case EFX_SUSTAINER:
@@ -1575,9 +1575,9 @@ RKR::Actualizar_Audio()
 
         case EFX_VOCODER:
             EFX_Bypass[EFX_VOCODER] = 0;
-            efx_Vocoder->cleanup();
+            Rack_Effects[EFX_VOCODER]->cleanup();
             for (i = 0; i < C_VOCODER_PARAMETERS; i++)
-                efx_Vocoder->changepar(i, lv[EFX_VOCODER][i]);
+                Rack_Effects[EFX_VOCODER]->changepar(i, lv[EFX_VOCODER][i]);
             EFX_Bypass[EFX_VOCODER] = EFX_Bank_Bypass[EFX_VOCODER];
             break;
 
@@ -2362,7 +2362,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_SHELF_PARAMETERS; j++)
         lv[EFX_SHELFBOOST][j] = efx_ShelfBoost->getpar(j);
     for (j = 0; j < C_VOCODER_PARAMETERS; j++)
-        lv[EFX_VOCODER][j] = efx_Vocoder->getpar(j);
+        lv[EFX_VOCODER][j] = Rack_Effects[EFX_VOCODER]->getpar(j);
     for (j = 0; j < C_SUSTAIN_PARAMETERS; j++)
         lv[EFX_SUSTAINER][j] = efx_Sustainer->getpar(j);
     for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)

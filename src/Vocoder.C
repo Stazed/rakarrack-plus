@@ -28,9 +28,8 @@
 
 Vocoder::Vocoder(float *auxresampled_, int bands, int DS, int uq, int dq,
                  double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
-    vulevel(),
+    Effect(auxresampled_, bands, DS, uq, dq, sample_rate, intermediate_bufsize),
+    vulevel(0.0f),
     auxresampled(auxresampled_),
     VOC_BANDS(bands),
     PERIOD(intermediate_bufsize),
@@ -81,8 +80,7 @@ Vocoder::Vocoder(float *auxresampled_, int bands, int DS, int uq, int dq,
     interpbuf(NULL),
     U_Resample(NULL),
     D_Resample(NULL),
-    A_Resample(NULL),
-    Fpre(NULL)
+    A_Resample(NULL)
 {
     adjust(DS, sample_rate);
 

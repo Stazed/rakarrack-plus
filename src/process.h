@@ -760,7 +760,6 @@ public:
     class Echoverse *efx_Echoverse;
     class CoilCrafter *efx_CoilCrafter;
     class ShelfBoost *efx_ShelfBoost;
-    class Vocoder *efx_Vocoder;
     class Sustainer *efx_Sustainer;
     class Sequence *efx_Sequence;
     class Shifter *efx_Shifter;
