@@ -25,6 +25,7 @@
 #ifndef REVERB_H
 #define REVERB_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 
 const int C_REVERB_PARAMETERS = 12;
@@ -45,7 +46,7 @@ enum Reverb_Index
     Reverb_Room
 };
 
-class Reverb
+class Reverb : public Effect
 {
 public:
     Reverb (double samplerate, uint16_t intermediate_bufsize);
@@ -62,9 +63,6 @@ public:
     
     void initialize();
     void clear_initialize();
-
-    int Ppreset;
-    float outvolume;		//this is the volume of effect and is public because need it in system effect. The out volume of su
 
 private:
 
@@ -150,7 +148,6 @@ private:
 
     float* interpbuf; //buffer for filters
     class AnalogFilter *lpf, *hpf;	//filters
-    class FPreset *Fpre;
 };
 
 

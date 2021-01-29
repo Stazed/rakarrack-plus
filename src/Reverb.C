@@ -31,8 +31,7 @@
 /*TODO: EarlyReflections,Prdelay,Perbalance */
 
 Reverb::Reverb(double samplerate, uint16_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(samplerate, intermediate_bufsize),
     fSAMPLE_RATE(samplerate),
     PERIOD(intermediate_bufsize),
     Pvolume(48),
@@ -70,8 +69,7 @@ Reverb::Reverb(double samplerate, uint16_t intermediate_bufsize) :
     idelay(NULL),
     interpbuf(NULL),
     lpf(NULL),
-    hpf(NULL),
-    Fpre(NULL)
+    hpf(NULL)
 {
     initialize();
 

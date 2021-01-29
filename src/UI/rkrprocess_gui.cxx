@@ -3374,7 +3374,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUSDELAY->musdelay_WD->redraw();
                 break;
             case MC_Reverb_DryWet:
-                REVERB->reverb_WD->value(Dry_Wet(rkr->efx_Rev->getpar(Reverb_DryWet)));
+                REVERB->reverb_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet)));
                 REVERB->reverb_WD->redraw();
                 break;
             case MC_Pan_DryWet:
@@ -3398,7 +3398,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUSDELAY->musdelay_pan1->redraw();
                 break;
             case MC_Reverb_Pan:
-                REVERB->reverb_pan->value(rkr->efx_Rev->getpar(Reverb_Pan) - 64);
+                REVERB->reverb_pan->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan) - 64);
                 REVERB->reverb_pan->redraw();
                 break;
 
@@ -3494,7 +3494,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_lpf->redraw();
                 break;
             case MC_Reverb_LPF:
-                REVERB->reverb_LPF->value(rkr->efx_Rev->getpar(Reverb_LPF));
+                REVERB->reverb_LPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF));
                 REVERB->reverb_LPF->redraw();
                 break;
             case MC_Overdrive_HPF:
@@ -3506,7 +3506,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_hpf->redraw();
                 break;
             case MC_Reverb_HPF:
-                REVERB->reverb_HPF->value(rkr->efx_Rev->getpar(Reverb_HPF));
+                REVERB->reverb_HPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF));
                 REVERB->reverb_HPF->redraw();
                 break;
             case MC_Chorus_LR_Cross:
@@ -4904,23 +4904,23 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PAN->pan_extra->redraw();
                 break;
             case MC_Reverb_Time:
-                REVERB->reverb_time->value(rkr->efx_Rev->getpar(Reverb_Time));
+                REVERB->reverb_time->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Time));
                 REVERB->reverb_time->redraw();
                 break;
             case MC_Reverb_I_Delay:
-                REVERB->reverb_ldel->value(rkr->efx_Rev->getpar(Reverb_I_Delay));
+                REVERB->reverb_ldel->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay));
                 REVERB->reverb_ldel->redraw();
                 break;
             case MC_Reverb_Delay_FB:
-                REVERB->reverb_ldelft->value(rkr->efx_Rev->getpar(Reverb_Delay_FB));
+                REVERB->reverb_ldelft->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB));
                 REVERB->reverb_ldelft->redraw();
                 break;
             case MC_Reverb_Room:
-                REVERB->reverb_RS->value(rkr->efx_Rev->getpar(Reverb_Room));
+                REVERB->reverb_RS->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Room));
                 REVERB->reverb_RS->redraw();
                 break;
             case MC_Reverb_Damp:
-                REVERB->reverb_damp->value(rkr->efx_Rev->getpar(Reverb_Damp));
+                REVERB->reverb_damp->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp));
                 REVERB->reverb_damp->redraw();
                 break;
             case MC_Revtron_Diffusion:

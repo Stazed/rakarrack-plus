@@ -50,7 +50,6 @@ char *banktoload;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
-    efx_Rev(NULL),
     efx_Phaser(NULL),
     efx_APhaser(NULL),
     efx_EQ1(NULL),
@@ -374,7 +373,7 @@ RKR::~RKR()
     delete M_Metronome;
     delete Rack_Effects[EFX_CHORUS];
     delete Rack_Effects[EFX_FLANGER];
-    delete efx_Rev;
+    delete Rack_Effects[EFX_REVERB];
     delete efx_Echo;
     delete efx_Phaser;
     delete efx_APhaser;
@@ -634,7 +633,7 @@ RKR::instantiate_effects()
     M_Metronome = new metronome(fSample_rate, period);
     Rack_Effects[EFX_CHORUS] = new Chorus(fSample_rate, period);
     Rack_Effects[EFX_FLANGER] = new Flanger(fSample_rate, period);
-    efx_Rev = new Reverb(fSample_rate, period);
+    Rack_Effects[EFX_REVERB] = new Reverb(fSample_rate, period);
     efx_Echo = new Echo(fSample_rate, period);
     efx_Phaser = new Phaser(fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
@@ -1150,7 +1149,7 @@ void
 RKR::cleanup_efx()
 {
     efx_EQ1->cleanup();
-    efx_Rev->cleanup();
+    Rack_Effects[EFX_REVERB]->cleanup();
     Rack_Effects[EFX_DISTORTION]->cleanup();
     Rack_Effects[EFX_OVERDRIVE]->cleanup();
     efx_Compressor->cleanup();
@@ -1382,8 +1381,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_REVERB:
                 if (EFX_Bypass[EFX_REVERB])
                 {
-                    efx_Rev->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_REVERB, efx_Rev->outvolume);
+                    Rack_Effects[EFX_REVERB]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_REVERB, Rack_Effects[EFX_REVERB]->outvolume);
                 }
                 break;
 

@@ -1694,7 +1694,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Reverb_DryWet:
-        efx_Rev->changepar(Reverb_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_DryWet, Dry_Wet(value));
         break;
 
     case MC_Pan_DryWet:
@@ -1718,7 +1718,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Reverb_Pan:
-        efx_Rev->changepar(Reverb_Pan, value);
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_Pan, value);
         break;
 
     case MC_Unused_64:
@@ -1813,7 +1813,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Reverb_LPF:
-        efx_Rev->changepar(Reverb_LPF, ret_LPF(value));
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_LPF, ret_LPF(value));
         break;
 
     case MC_Overdrive_HPF:
@@ -1825,7 +1825,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Reverb_HPF:
-        efx_Rev->changepar(Reverb_HPF, ret_HPF(value));
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_HPF, ret_HPF(value));
         break;
 
     case MC_Chorus_LR_Cross:
@@ -3255,23 +3255,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Reverb_Time:
-        efx_Rev->changepar(Reverb_Time, value);
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_Time, value);
         break;
 
     case MC_Reverb_I_Delay:
-        efx_Rev->changepar(Reverb_I_Delay, value);
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_I_Delay, value);
         break;
 
     case MC_Reverb_Delay_FB:
-        efx_Rev->changepar(Reverb_Delay_FB, value);
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_Delay_FB, value);
         break;
 
     case MC_Reverb_Room:
-        efx_Rev->changepar(Reverb_Room, 1 + (int) ((float) value * C_MC_126_RANGE));
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_Room, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case MC_Reverb_Damp:
-        efx_Rev->changepar(Reverb_Damp, 64 + (int) ((float) value * C_MC_63_RANGE));
+        Rack_Effects[EFX_REVERB]->changepar(Reverb_Damp, 64 + (int) ((float) value * C_MC_63_RANGE));
         break;
 
     case MC_Revtron_Diffusion:

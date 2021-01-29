@@ -26,7 +26,7 @@ widget_class ReverbGui {
 }
 rkr->EFX_Bypass[EFX_REVERB]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Rev->cleanup();
+rkr->Rack_Effects[EFX_REVERB]->cleanup();
 rgui->findpos(EFX_REVERB,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x39 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -36,17 +36,17 @@ rgui->findpos(EFX_REVERB,(int)o->value(),o);} selected
     user_data 12008
     callback {rkr->EFX_Bypass[EFX_REVERB]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12008))rkr->efx_Rev->setpreset((int) o->value());
-reverb_WD->value(Dry_Wet(rkr->efx_Rev->getpar(Reverb_DryWet)));
-reverb_pan->value(rkr->efx_Rev->getpar(Reverb_Pan)-64);
-reverb_time->value(rkr->efx_Rev->getpar(Reverb_Time));
-reverb_ldel->value(rkr->efx_Rev->getpar(Reverb_I_Delay));
-reverb_ldelft->value(rkr->efx_Rev->getpar(Reverb_Delay_FB));
-reverb_LPF->value(rkr->efx_Rev->getpar(Reverb_LPF));
-reverb_HPF->value(rkr->efx_Rev->getpar(Reverb_HPF));
-reverb_damp->value(rkr->efx_Rev->getpar(Reverb_Damp));
-reverb_RS->value(rkr->efx_Rev->getpar(Reverb_Room));
-reverb_type->value(rkr->efx_Rev->getpar(Reverb_Type));
+if((ud==0)||(ud==12008))rkr->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
+reverb_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet)));
+reverb_pan->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan)-64);
+reverb_time->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Time));
+reverb_ldel->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay));
+reverb_ldelft->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB));
+reverb_LPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF));
+reverb_HPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF));
+reverb_damp->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp));
+reverb_RS->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Room));
+reverb_type->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Type));
 if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
@@ -111,7 +111,7 @@ if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;}
  rgui->getMIDIControl(MC_Reverb_DryWet);
  return;
 } 
-rkr->efx_Rev->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -122,7 +122,7 @@ rkr->efx_Rev->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(MC_Reverb_Pan);
  return;
 } 
-rkr->efx_Rev->changepar(Reverb_Pan,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Pan,(int)(o->value()+64));}
     xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -133,7 +133,7 @@ rkr->efx_Rev->changepar(Reverb_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(MC_Reverb_Time);
  return;
 }
-rkr->efx_Rev->changepar(Reverb_Time,(int)o->value());}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Time,(int)o->value());}
     xywh {56 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -144,7 +144,7 @@ rkr->efx_Rev->changepar(Reverb_Time,(int)o->value());}
  rgui->getMIDIControl(MC_Reverb_I_Delay);
  return;
 }
-rkr->efx_Rev->changepar(Reverb_I_Delay,(int)o->value());}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_I_Delay,(int)o->value());}
     tooltip {Initial Delay} xywh {56 64 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -155,14 +155,14 @@ rkr->efx_Rev->changepar(Reverb_I_Delay,(int)o->value());}
  rgui->getMIDIControl(MC_Reverb_Delay_FB);
  return;
 }
-rkr->efx_Rev->changepar(Reverb_Delay_FB,(int)o->value());}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Delay_FB,(int)o->value());}
     tooltip {Initial Delay Feedback} xywh {56 77 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice reverb_type {
     label Type
     user_data 12
-    callback {rkr->efx_Rev->changepar(Reverb_Type,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Type,(int)o->value());}
     xywh {62 92 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -172,7 +172,7 @@ rkr->efx_Rev->changepar(Reverb_Delay_FB,(int)o->value());}
     }
     MenuItem {} {
       label Random
-      callback {rkr->efx_Rev->changepar(Reverb_Type,1)}
+      callback {rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Type,1)}
       xywh {34 34 36 21} labelsize 10
     }
   }
@@ -184,7 +184,7 @@ rkr->efx_Rev->changepar(Reverb_Delay_FB,(int)o->value());}
  return;
 }
 rkr->EFX_Bypass[EFX_REVERB]=0;
-rkr->efx_Rev->changepar(Reverb_Room,(int)o->value());
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Room,(int)o->value());
 if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;}
     tooltip {Room Size} xywh {56 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
@@ -196,7 +196,7 @@ if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;}
  rgui->getMIDIControl(MC_Reverb_LPF);
  return;
 } 
-rkr->efx_Rev->changepar(Reverb_LPF,(int)o->value());}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_LPF,(int)o->value());}
     tooltip {Lowpass Filter} xywh {56 131 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -207,7 +207,7 @@ rkr->efx_Rev->changepar(Reverb_LPF,(int)o->value());}
  rgui->getMIDIControl(MC_Reverb_HPF);
  return;
 } 
-rkr->efx_Rev->changepar(Reverb_HPF,(int)o->value());}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_HPF,(int)o->value());}
     tooltip {Highpass Filter} xywh {56 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -218,7 +218,7 @@ rkr->efx_Rev->changepar(Reverb_HPF,(int)o->value());}
  rgui->getMIDIControl(MC_Reverb_Damp);
  return;
 }
-rkr->efx_Rev->changepar(Reverb_Damp,(int)o->value());}
+rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Damp,(int)o->value());}
     xywh {56 163 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 64 maximum 127 step 1 value 64 textcolor 7
     class RKR_Slider
   }

@@ -496,12 +496,12 @@ void RKR::getbuf(char *buf, int j)
     {
     case EFX_REVERB:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Rev->getpar(Reverb_DryWet), efx_Rev->getpar(Reverb_Pan),
-                efx_Rev->getpar(Reverb_Time), efx_Rev->getpar(Reverb_I_Delay),
-                efx_Rev->getpar(Reverb_Delay_FB), efx_Rev->getpar(Reverb_SKIP_5),
-                efx_Rev->getpar(Reverb_SKIP_6), efx_Rev->getpar(Reverb_LPF),
-                efx_Rev->getpar(Reverb_HPF), efx_Rev->getpar(Reverb_Damp),
-                efx_Rev->getpar(Reverb_Type), efx_Rev->getpar(Reverb_Room), EFX_Bypass[EFX_REVERB]);
+                Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet), Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan),
+                Rack_Effects[EFX_REVERB]->getpar(Reverb_Time), Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay),
+                Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB), Rack_Effects[EFX_REVERB]->getpar(Reverb_SKIP_5),
+                Rack_Effects[EFX_REVERB]->getpar(Reverb_SKIP_6), Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF),
+                Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF), Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp),
+                Rack_Effects[EFX_REVERB]->getpar(Reverb_Type), Rack_Effects[EFX_REVERB]->getpar(Reverb_Room), EFX_Bypass[EFX_REVERB]);
         break;
 
     case EFX_ECHO:
@@ -1366,9 +1366,9 @@ RKR::Actualizar_Audio()
 
         case EFX_REVERB:
             EFX_Bypass[EFX_REVERB] = 0;
-            efx_Rev->cleanup();
+            Rack_Effects[EFX_REVERB]->cleanup();
             for (i = 0; i < C_REVERB_PARAMETERS; i++)
-                efx_Rev->changepar(i, lv[EFX_REVERB][i]);
+                Rack_Effects[EFX_REVERB]->changepar(i, lv[EFX_REVERB][i]);
             EFX_Bypass[EFX_REVERB] = EFX_Bank_Bypass[EFX_REVERB];
             break;
 
@@ -2328,7 +2328,7 @@ RKR::Preset_to_Bank(int i)
     int j = 0;
 
     for (j = 0; j < C_REVERB_PARAMETERS; j++)
-        lv[EFX_REVERB][j] = efx_Rev->getpar(j);
+        lv[EFX_REVERB][j] = Rack_Effects[EFX_REVERB]->getpar(j);
     for (j = 0; j < C_ECHO_PARAMETERS; j++)
         lv[EFX_ECHO][j] = efx_Echo->getpar(j);
     for (j = 0; j < C_CHORUS_PARAMETERS; j++)
