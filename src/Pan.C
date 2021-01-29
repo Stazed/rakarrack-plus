@@ -25,10 +25,9 @@
 #include "Pan.h"
 
 Pan::Pan(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fPERIOD(intermediate_bufsize),
-    Ppreset(),
-    outvolume(0.5f),
     Pvolume(),
     Ppanning(),
     Pextra(),
@@ -43,7 +42,6 @@ Pan::Pan(double sample_rate, uint32_t intermediate_bufsize) :
     lfor(),
     ll(),
     lr(),
-    Fpre(NULL),
     lfo(NULL)
 {
     lfo = new EffectLFO(sample_rate);

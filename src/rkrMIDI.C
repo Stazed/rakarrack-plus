@@ -1698,7 +1698,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Pan_DryWet:
-        efx_Pan->changepar(Pan_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_PAN]->changepar(Pan_DryWet, Dry_Wet(value));
         break;
 
     case MC_Echo_DryWet:
@@ -1733,7 +1733,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Pan_Pan:
-        efx_Pan->changepar(Pan_Pan, value);
+        Rack_Effects[EFX_PAN]->changepar(Pan_Pan, value);
         break;
 
     case MC_Overdrive_Drive:
@@ -1773,7 +1773,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Pan_LFO_Tempo:
-        efx_Pan->changepar(Pan_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Echo_Feedback:
@@ -1881,7 +1881,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Pan_LFO_Stereo:
-        efx_Pan->changepar(Pan_LFO_Stereo, value);
+        Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Stereo, value);
         break;
 
     case MC_Chorus_LFO_Random:
@@ -1905,7 +1905,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Pan_LFO_Random:
-        efx_Pan->changepar(Pan_LFO_Random, value);
+        Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Random, value);
         break;
 
     case MC_WahWah_Sense:
@@ -3253,7 +3253,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Pan_Ex_St_Amt:
-        efx_Pan->changepar(Pan_Ex_St_Amt, value);
+        Rack_Effects[EFX_PAN]->changepar(Pan_Ex_St_Amt, value);
         break;
 
     case MC_Reverb_Time:
@@ -3365,7 +3365,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Pan_LFO_Type:
-        efx_Pan->changepar(Pan_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Phaser_LFO_Type:

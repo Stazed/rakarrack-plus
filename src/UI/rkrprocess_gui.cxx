@@ -3378,7 +3378,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 REVERB->reverb_WD->redraw();
                 break;
             case MC_Pan_DryWet:
-                PAN->pan_WD->value(Dry_Wet(rkr->efx_Pan->getpar(Pan_DryWet)));
+                PAN->pan_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_DryWet)));
                 PAN->pan_WD->redraw();
                 break;
             case MC_Echo_DryWet:
@@ -3414,7 +3414,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_pan->redraw();
                 break;
             case MC_Pan_Pan:
-                PAN->pan_pan->value(rkr->efx_Pan->getpar(Pan_Pan) - 64);
+                PAN->pan_pan->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Pan) - 64);
                 PAN->pan_pan->redraw();
                 break;
             case MC_Overdrive_Drive:
@@ -3454,7 +3454,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_freq->redraw();
                 break;
             case MC_Pan_LFO_Tempo:
-                PAN->pan_freq->value(rkr->efx_Pan->getpar(Pan_LFO_Tempo));
+                PAN->pan_freq->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Tempo));
                 PAN->pan_freq->redraw();
                 break;
             case MC_Echo_Feedback:
@@ -3562,7 +3562,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_stdf->redraw();
                 break;
             case MC_Pan_LFO_Stereo:
-                PAN->pan_stdf->value(rkr->efx_Pan->getpar(Pan_LFO_Stereo));
+                PAN->pan_stdf->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Stereo));
                 PAN->pan_stdf->redraw();
                 break;
             case MC_Chorus_LFO_Random:
@@ -3586,7 +3586,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_rnd->redraw();
                 break;
             case MC_Pan_LFO_Random:
-                PAN->pan_rnd->value(rkr->efx_Pan->getpar(Pan_LFO_Random));
+                PAN->pan_rnd->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Random));
                 PAN->pan_rnd->redraw();
                 break;
             case MC_WahWah_Sense:
@@ -4900,7 +4900,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 GATE->gate_HPF->redraw();
                 break;
             case MC_Pan_Ex_St_Amt:
-                PAN->pan_extra->value(rkr->efx_Pan->getpar(Pan_Ex_St_Amt));
+                PAN->pan_extra->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Ex_St_Amt));
                 PAN->pan_extra->redraw();
                 break;
             case MC_Reverb_Time:
@@ -5014,7 +5014,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OTREM->otrem_lfotype->redraw();
                 break;
             case MC_Pan_LFO_Type:
-                PAN->pan_lfotype->value(rkr->efx_Pan->getpar(Pan_LFO_Type));
+                PAN->pan_lfotype->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Type));
                 PAN->pan_lfotype->redraw();
                 break;
             case MC_Phaser_LFO_Type:
@@ -6069,7 +6069,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_PAN])
     {
-        PAN->pan_freq->value(rkr->efx_Pan->getpar(Pan_LFO_Tempo));
+        PAN->pan_freq->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Tempo));
         PAN->pan_freq->redraw();
     }
 

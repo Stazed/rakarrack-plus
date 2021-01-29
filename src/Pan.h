@@ -24,6 +24,7 @@
 #ifndef AUTOPAN_H
 #define AUTOPAN_H
 
+#include "Effect.h"
 #include "EffectLFO.h"
 
 const int C_PAN_PARAMETERS = 9;
@@ -41,7 +42,7 @@ enum Pan_Index
     Pan_Enable_Extra
 };
 
-class Pan
+class Pan : public Effect
 {
 
 public:
@@ -60,11 +61,6 @@ public:
 private:
     uint32_t PERIOD;
     float fPERIOD;
-public:
-    int Ppreset;
-    float outvolume;
-
-private:
 
     void setvolume (int Pvolume);
     void setpanning (int Ppanning);
@@ -82,7 +78,6 @@ private:
     float lfol, lfor;
     float ll, lr;
 
-    class FPreset *Fpre;
     EffectLFO* lfo;
 
 };

@@ -625,11 +625,11 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_PAN:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Pan->getpar(Pan_DryWet), efx_Pan->getpar(Pan_Pan),
-                efx_Pan->getpar(Pan_LFO_Tempo), efx_Pan->getpar(Pan_LFO_Random),
-                efx_Pan->getpar(Pan_LFO_Type), efx_Pan->getpar(Pan_LFO_Stereo),
-                efx_Pan->getpar(Pan_Ex_St_Amt), efx_Pan->getpar(Pan_AutoPan),
-                efx_Pan->getpar(Pan_Enable_Extra), EFX_Bypass[EFX_PAN]);
+                Rack_Effects[EFX_PAN]->getpar(Pan_DryWet), Rack_Effects[EFX_PAN]->getpar(Pan_Pan),
+                Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Tempo), Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Random),
+                Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Type), Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Stereo),
+                Rack_Effects[EFX_PAN]->getpar(Pan_Ex_St_Amt), Rack_Effects[EFX_PAN]->getpar(Pan_AutoPan),
+                Rack_Effects[EFX_PAN]->getpar(Pan_Enable_Extra), EFX_Bypass[EFX_PAN]);
         break;
 
     case EFX_HARMONIZER:
@@ -1411,9 +1411,9 @@ RKR::Actualizar_Audio()
 
         case EFX_PAN:
             EFX_Bypass[EFX_PAN] = 0;
-            efx_Pan->cleanup();
+            Rack_Effects[EFX_PAN]->cleanup();
             for (i = 0; i < C_PAN_PARAMETERS; i++)
-                efx_Pan->changepar(i, lv[EFX_PAN][i]);
+                Rack_Effects[EFX_PAN]->changepar(i, lv[EFX_PAN][i]);
             EFX_Bypass[EFX_PAN] = EFX_Bank_Bypass[EFX_PAN];
             break;
 
@@ -2348,7 +2348,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_ALIENWAH_PARAMETERS; j++)
         lv[EFX_ALIENWAH][j] = Rack_Effects[EFX_ALIENWAH]->getpar(j);
     for (j = 0; j < C_PAN_PARAMETERS; j++)
-        lv[EFX_PAN][j] = efx_Pan->getpar(j);
+        lv[EFX_PAN][j] = Rack_Effects[EFX_PAN]->getpar(j);
     for (j = 0; j < C_HARM_PARAMETERS; j++)
         lv[EFX_HARMONIZER][j] = Rack_Effects[EFX_HARMONIZER]->getpar(j);
     for (j = 0; j < C_MUSIC_PARAMETERS; j++)
