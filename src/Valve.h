@@ -24,6 +24,7 @@
 #ifndef VALVE_H
 #define VALVE_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "HarmonicEnhancer.h"
 
@@ -46,7 +47,7 @@ enum Valve_Index
     Valve_Presence
 };
 
-class Valve
+class Valve : public Effect
 {
 public:
     Valve (double sample_rate, uint32_t intermediate_bufsize);
@@ -65,9 +66,6 @@ public:
     void initialize();
     void clear_initialize();
     void applyfilters (float * efxoutl, float * efxoutr);
-
-    int Ppreset;
-    float outvolume;
 
 private:
     void setvolume (int Pvolume);
@@ -108,7 +106,7 @@ private:
     float* interpbuf; //buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
     class HarmEnhancer *harm;
-    class FPreset *Fpre;
+
 };
 
 

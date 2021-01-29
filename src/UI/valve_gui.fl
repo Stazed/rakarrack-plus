@@ -29,7 +29,7 @@ widget_class ValveGui {
 }
 rkr->EFX_Bypass[EFX_VALVE]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Valve->cleanup();
+rkr->Rack_Effects[EFX_VALVE]->cleanup();
 rgui->findpos(EFX_VALVE,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -38,20 +38,20 @@ rgui->findpos(EFX_VALVE,(int)o->value(),o);} selected
     label Preset
     user_data 12019
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
-valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(Valve_DryWet)));
-valve_LRc->value(rkr->efx_Valve->getpar(Valve_LR_Cross));
-valve_drive->value(rkr->efx_Valve->getpar(Valve_Drive));
-valve_level->value(rkr->efx_Valve->getpar(Valve_Level));
-valve_neg->value(rkr->efx_Valve->getpar(Valve_Negate));
-valve_st->value(rkr->efx_Valve->getpar(Valve_Stereo));
-valve_pan->value(rkr->efx_Valve->getpar(Valve_Pan)-64);
-valve_pf->value(rkr->efx_Valve->getpar(Valve_Prefilter));
-valve_lpf->value(rkr->efx_Valve->getpar(Valve_LPF));
-valve_hpf->value(rkr->efx_Valve->getpar(Valve_HPF));
-valve_Q->value(rkr->efx_Valve->getpar(Valve_Distortion));
-valve_ed->value(rkr->efx_Valve->getpar(Valve_Ex_Dist));
-valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));}
+if((ud==0)||(ud==12019))rkr->Rack_Effects[EFX_VALVE]->setpreset((int)o->value());
+valve_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_DryWet)));
+valve_LRc->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LR_Cross));
+valve_drive->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Drive));
+valve_level->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Level));
+valve_neg->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Negate));
+valve_st->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Stereo));
+valve_pan->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Pan)-64);
+valve_pf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Prefilter));
+valve_lpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LPF));
+valve_hpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_HPF));
+valve_Q->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Distortion));
+valve_ed->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Ex_Dist));
+valve_Pre->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Presence));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -79,7 +79,7 @@ valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));}
  rgui->getMIDIControl(MC_Valve_DryWet);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 31 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -90,7 +90,7 @@ rkr->efx_Valve->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(MC_Valve_LR_Cross);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_LR_Cross,(int)(o->value()));}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_LR_Cross,(int)(o->value()));}
     xywh {56 44 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -101,7 +101,7 @@ rkr->efx_Valve->changepar(Valve_LR_Cross,(int)(o->value()));}
  rgui->getMIDIControl(MC_Valve_Pan);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Pan,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Pan,(int)(o->value()+64));}
     xywh {56 57 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -112,7 +112,7 @@ rkr->efx_Valve->changepar(Valve_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(MC_Valve_Level);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Level,(int)o->value());}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Level,(int)o->value());}
     xywh {56 71 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -123,14 +123,14 @@ rkr->efx_Valve->changepar(Valve_Level,(int)o->value());}
  rgui->getMIDIControl(MC_Valve_Drive);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Drive,(int)o->value());}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Drive,(int)o->value());}
     xywh {56 84 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button valve_ed {
     label {Extra Dist.}
     user_data 2
-    callback {rkr->efx_Valve->changepar(Valve_Ex_Dist,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Ex_Dist,(int)o->value());}
     xywh {15 96 72 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -141,7 +141,7 @@ rkr->efx_Valve->changepar(Valve_Drive,(int)o->value());}
  rgui->getMIDIControl(MC_Valve_Distortion);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Distortion,(int)o->value());}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Distortion,(int)o->value());}
     tooltip Distortion xywh {56 112 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -152,28 +152,28 @@ rkr->efx_Valve->changepar(Valve_Distortion,(int)o->value());}
  rgui->getMIDIControl(MC_Valve_Presence);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Presence,(int)o->value());}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Presence,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button valve_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->efx_Valve->changepar(Valve_Prefilter,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Prefilter,(int)o->value());}
     xywh {5 139 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button valve_st {
     label Stereo
     user_data 2
-    callback {rkr->efx_Valve->changepar(Valve_Stereo,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Stereo,(int)o->value());}
     xywh {65 139 50 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button valve_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->efx_Valve->changepar(Valve_Negate,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Negate,(int)o->value());}
     xywh {114 139 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -184,7 +184,7 @@ rkr->efx_Valve->changepar(Valve_Presence,(int)o->value());}
  rgui->getMIDIControl(MC_Valve_LPF);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_LPF,(int)o->value());}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_LPF,(int)o->value());}
     xywh {56 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -195,7 +195,7 @@ rkr->efx_Valve->changepar(Valve_LPF,(int)o->value());}
  rgui->getMIDIControl(MC_Valve_HPF);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_HPF,(int)o->value());}
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_HPF,(int)o->value());}
     xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }

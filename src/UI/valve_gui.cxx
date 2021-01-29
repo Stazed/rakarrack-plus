@@ -11,7 +11,7 @@ void ValveGui::cb_valve_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_VALVE]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Valve->cleanup();
+rkr->Rack_Effects[EFX_VALVE]->cleanup();
 rgui->findpos(EFX_VALVE,(int)o->value(),o);
 }
 void ValveGui::cb_valve_activar(RKR_Light_Button* o, void* v) {
@@ -20,20 +20,20 @@ void ValveGui::cb_valve_activar(RKR_Light_Button* o, void* v) {
 
 void ValveGui::cb_valve_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12019))rkr->efx_Valve->setpreset((int)o->value());
-valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(Valve_DryWet)));
-valve_LRc->value(rkr->efx_Valve->getpar(Valve_LR_Cross));
-valve_drive->value(rkr->efx_Valve->getpar(Valve_Drive));
-valve_level->value(rkr->efx_Valve->getpar(Valve_Level));
-valve_neg->value(rkr->efx_Valve->getpar(Valve_Negate));
-valve_st->value(rkr->efx_Valve->getpar(Valve_Stereo));
-valve_pan->value(rkr->efx_Valve->getpar(Valve_Pan)-64);
-valve_pf->value(rkr->efx_Valve->getpar(Valve_Prefilter));
-valve_lpf->value(rkr->efx_Valve->getpar(Valve_LPF));
-valve_hpf->value(rkr->efx_Valve->getpar(Valve_HPF));
-valve_Q->value(rkr->efx_Valve->getpar(Valve_Distortion));
-valve_ed->value(rkr->efx_Valve->getpar(Valve_Ex_Dist));
-valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));
+if((ud==0)||(ud==12019))rkr->Rack_Effects[EFX_VALVE]->setpreset((int)o->value());
+valve_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_DryWet)));
+valve_LRc->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LR_Cross));
+valve_drive->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Drive));
+valve_level->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Level));
+valve_neg->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Negate));
+valve_st->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Stereo));
+valve_pan->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Pan)-64);
+valve_pf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Prefilter));
+valve_lpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LPF));
+valve_hpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_HPF));
+valve_Q->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Distortion));
+valve_ed->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Ex_Dist));
+valve_Pre->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Presence));
 }
 void ValveGui::cb_valve_preset(RKR_Choice* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_preset_i(o,v);
@@ -53,7 +53,7 @@ void ValveGui::cb_valve_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_DryWet);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_DryWet,Dry_Wet((int)(o->value())));
 }
 void ValveGui::cb_valve_WD(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_WD_i(o,v);
@@ -65,7 +65,7 @@ void ValveGui::cb_valve_LRc_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_LR_Cross);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_LR_Cross,(int)(o->value()));
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_LR_Cross,(int)(o->value()));
 }
 void ValveGui::cb_valve_LRc(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_LRc_i(o,v);
@@ -77,7 +77,7 @@ void ValveGui::cb_valve_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_Pan);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Pan,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Pan,(int)(o->value()+64));
 }
 void ValveGui::cb_valve_pan(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_pan_i(o,v);
@@ -89,7 +89,7 @@ void ValveGui::cb_valve_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_Level);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Level,(int)o->value());
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Level,(int)o->value());
 }
 void ValveGui::cb_valve_level(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_level_i(o,v);
@@ -101,14 +101,14 @@ void ValveGui::cb_valve_drive_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_Drive);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Drive,(int)o->value());
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Drive,(int)o->value());
 }
 void ValveGui::cb_valve_drive(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_drive_i(o,v);
 }
 
 void ValveGui::cb_valve_ed_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(Valve_Ex_Dist,(int)o->value());
+  rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Ex_Dist,(int)o->value());
 }
 void ValveGui::cb_valve_ed(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_ed_i(o,v);
@@ -120,7 +120,7 @@ void ValveGui::cb_valve_Q_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_Distortion);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Distortion,(int)o->value());
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Distortion,(int)o->value());
 }
 void ValveGui::cb_valve_Q(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_Q_i(o,v);
@@ -132,28 +132,28 @@ void ValveGui::cb_valve_Pre_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_Presence);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_Presence,(int)o->value());
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Presence,(int)o->value());
 }
 void ValveGui::cb_valve_Pre(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_Pre_i(o,v);
 }
 
 void ValveGui::cb_valve_pf_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(Valve_Prefilter,(int)o->value());
+  rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Prefilter,(int)o->value());
 }
 void ValveGui::cb_valve_pf(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_pf_i(o,v);
 }
 
 void ValveGui::cb_valve_st_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(Valve_Stereo,(int)o->value());
+  rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Stereo,(int)o->value());
 }
 void ValveGui::cb_valve_st(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_st_i(o,v);
 }
 
 void ValveGui::cb_valve_neg_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Valve->changepar(Valve_Negate,(int)o->value());
+  rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_Negate,(int)o->value());
 }
 void ValveGui::cb_valve_neg(RKR_Check_Button* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_neg_i(o,v);
@@ -165,7 +165,7 @@ void ValveGui::cb_valve_lpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_LPF);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_LPF,(int)o->value());
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_LPF,(int)o->value());
 }
 void ValveGui::cb_valve_lpf(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_lpf_i(o,v);
@@ -177,7 +177,7 @@ void ValveGui::cb_valve_hpf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Valve_HPF);
  return;
 } 
-rkr->efx_Valve->changepar(Valve_HPF,(int)o->value());
+rkr->Rack_Effects[EFX_VALVE]->changepar(Valve_HPF,(int)o->value());
 }
 void ValveGui::cb_valve_hpf(RKR_Slider* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_hpf_i(o,v);

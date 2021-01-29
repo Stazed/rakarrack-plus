@@ -3820,39 +3820,39 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DFLANGE->dflange_rnd->redraw();
                 break;
             case MC_Valve_DryWet:
-                VALVE->valve_WD->value(Dry_Wet(rkr->efx_Valve->getpar(Valve_DryWet)));
+                VALVE->valve_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_DryWet)));
                 VALVE->valve_WD->redraw();
                 break;
             case MC_Valve_LR_Cross:
-                VALVE->valve_LRc->value(rkr->efx_Valve->getpar(Valve_LR_Cross));
+                VALVE->valve_LRc->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LR_Cross));
                 VALVE->valve_LRc->redraw();
                 break;
             case MC_Valve_Pan:
-                VALVE->valve_pan->value(rkr->efx_Valve->getpar(Valve_Pan) - 64);
+                VALVE->valve_pan->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Pan) - 64);
                 VALVE->valve_pan->redraw();
                 break;
             case MC_Valve_Level:
-                VALVE->valve_level->value(rkr->efx_Valve->getpar(Valve_Level));
+                VALVE->valve_level->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Level));
                 VALVE->valve_level->redraw();
                 break;
             case MC_Valve_Drive:
-                VALVE->valve_drive->value(rkr->efx_Valve->getpar(Valve_Drive));
+                VALVE->valve_drive->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Drive));
                 VALVE->valve_drive->redraw();
                 break;
             case MC_Valve_Distortion:
-                VALVE->valve_Q->value(rkr->efx_Valve->getpar(Valve_Distortion));
+                VALVE->valve_Q->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Distortion));
                 VALVE->valve_Q->redraw();
                 break;
             case MC_Valve_Presence:
-                VALVE->valve_Pre->value(rkr->efx_Valve->getpar(Valve_Presence));
+                VALVE->valve_Pre->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Presence));
                 VALVE->valve_Pre->redraw();
                 break;
             case MC_Valve_LPF:
-                VALVE->valve_lpf->value(rkr->efx_Valve->getpar(Valve_LPF));
+                VALVE->valve_lpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LPF));
                 VALVE->valve_lpf->redraw();
                 break;
             case MC_Valve_HPF:
-                VALVE->valve_hpf->value(rkr->efx_Valve->getpar(Valve_HPF));
+                VALVE->valve_hpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_HPF));
                 VALVE->valve_hpf->redraw();
                 break;
             case MC_Ring_DryWet:

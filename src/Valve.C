@@ -27,8 +27,7 @@
 #include "Valve.h"
 
 Valve::Valve(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     Pvolume(50),
@@ -64,8 +63,7 @@ Valve::Valve(double sample_rate, uint32_t intermediate_bufsize) :
     lpfr(NULL),
     hpfl(NULL),
     hpfr(NULL),
-    harm(NULL),
-    Fpre(NULL)
+    harm(NULL)
 {
     initialize();
 

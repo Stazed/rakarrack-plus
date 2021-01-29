@@ -2143,39 +2143,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Valve_DryWet:
-        efx_Valve->changepar(Valve_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_VALVE]->changepar(Valve_DryWet, Dry_Wet(value));
         break;
 
     case MC_Valve_LR_Cross:
-        efx_Valve->changepar(Valve_LR_Cross, value);
+        Rack_Effects[EFX_VALVE]->changepar(Valve_LR_Cross, value);
         break;
 
     case MC_Valve_Pan:
-        efx_Valve->changepar(Valve_Pan, value);
+        Rack_Effects[EFX_VALVE]->changepar(Valve_Pan, value);
         break;
 
     case MC_Valve_Level:
-        efx_Valve->changepar(Valve_Level, value);
+        Rack_Effects[EFX_VALVE]->changepar(Valve_Level, value);
         break;
 
     case MC_Valve_Drive:
-        efx_Valve->changepar(Valve_Drive, value);
+        Rack_Effects[EFX_VALVE]->changepar(Valve_Drive, value);
         break;
 
     case MC_Valve_Distortion:
-        efx_Valve->changepar(Valve_Distortion, value);
+        Rack_Effects[EFX_VALVE]->changepar(Valve_Distortion, value);
         break;
 
     case MC_Valve_Presence:
-        efx_Valve->changepar(Valve_Presence, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_VALVE]->changepar(Valve_Presence, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_Valve_LPF:
-        efx_Valve->changepar(Valve_LPF, ret_LPF(value));
+        Rack_Effects[EFX_VALVE]->changepar(Valve_LPF, ret_LPF(value));
         break;
 
     case MC_Valve_HPF:
-        efx_Valve->changepar(Valve_HPF, ret_HPF(value));
+        Rack_Effects[EFX_VALVE]->changepar(Valve_HPF, ret_HPF(value));
         break;
 
     case MC_Ring_DryWet:

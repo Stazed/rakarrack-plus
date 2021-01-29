@@ -685,13 +685,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_VALVE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Valve->getpar(Valve_DryWet), efx_Valve->getpar(Valve_Pan),
-                efx_Valve->getpar(Valve_LR_Cross), efx_Valve->getpar(Valve_Drive),
-                efx_Valve->getpar(Valve_Level), efx_Valve->getpar(Valve_Negate),
-                efx_Valve->getpar(Valve_LPF), efx_Valve->getpar(Valve_HPF),
-                efx_Valve->getpar(Valve_Stereo), efx_Valve->getpar(Valve_Prefilter),
-                efx_Valve->getpar(Valve_Distortion), efx_Valve->getpar(Valve_Ex_Dist),
-                efx_Valve->getpar(Valve_Presence), EFX_Bypass[EFX_VALVE]);
+                Rack_Effects[EFX_VALVE]->getpar(Valve_DryWet), Rack_Effects[EFX_VALVE]->getpar(Valve_Pan),
+                Rack_Effects[EFX_VALVE]->getpar(Valve_LR_Cross), Rack_Effects[EFX_VALVE]->getpar(Valve_Drive),
+                Rack_Effects[EFX_VALVE]->getpar(Valve_Level), Rack_Effects[EFX_VALVE]->getpar(Valve_Negate),
+                Rack_Effects[EFX_VALVE]->getpar(Valve_LPF), Rack_Effects[EFX_VALVE]->getpar(Valve_HPF),
+                Rack_Effects[EFX_VALVE]->getpar(Valve_Stereo), Rack_Effects[EFX_VALVE]->getpar(Valve_Prefilter),
+                Rack_Effects[EFX_VALVE]->getpar(Valve_Distortion), Rack_Effects[EFX_VALVE]->getpar(Valve_Ex_Dist),
+                Rack_Effects[EFX_VALVE]->getpar(Valve_Presence), EFX_Bypass[EFX_VALVE]);
         break;
 
     case EFX_DUAL_FLANGE:
@@ -1459,9 +1459,9 @@ RKR::Actualizar_Audio()
 
         case EFX_VALVE:
             EFX_Bypass[EFX_VALVE] = 0;
-            efx_Valve->cleanup();
+            Rack_Effects[EFX_VALVE]->cleanup();
             for (i = 0; i < C_VALVE_PARAMETERS; i++)
-                efx_Valve->changepar(i, lv[EFX_VALVE][i]);
+                Rack_Effects[EFX_VALVE]->changepar(i, lv[EFX_VALVE][i]);
             EFX_Bypass[EFX_VALVE] = EFX_Bank_Bypass[EFX_VALVE];
             break;
 
@@ -2360,7 +2360,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_APHASER_PARAMETERS; j++)
         lv[EFX_ANALOG_PHASER][j] = Rack_Effects[EFX_ANALOG_PHASER]->getpar(j);
     for (j = 0; j < C_VALVE_PARAMETERS; j++)
-        lv[EFX_VALVE][j] = efx_Valve->getpar(j);
+        lv[EFX_VALVE][j] = Rack_Effects[EFX_VALVE]->getpar(j);
     for (j = 0; j < C_DFLANGE_PARAMETERS; j++)
         lv[EFX_DUAL_FLANGE][j] = efx_DFlange->getpar(j);
     for (j = 0; j < C_RING_PARAMETERS; j++)

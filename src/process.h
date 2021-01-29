@@ -736,7 +736,6 @@ public:
 
     class Compressor *efx_FLimiter;
 
-    class Valve *efx_Valve;
     class Dflange *efx_DFlange;
     class Ring *efx_Ring;
     class Exciter *efx_Exciter;
