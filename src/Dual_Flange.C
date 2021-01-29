@@ -33,7 +33,7 @@
 #include "Dual_Flange.h"
 
 Dflange::Dflange(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
+    Effect(sample_rate, intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     PERIOD(intermediate_bufsize),
     Pwetdry(),
@@ -97,7 +97,6 @@ Dflange::Dflange(double sample_rate, uint32_t intermediate_bufsize) :
     rdelayline0(NULL),
     ldelayline1(NULL),
     rdelayline1(NULL),
-    Fpre(NULL),
     lfo(NULL)
 {
     ldelay = new float[maxx_delay];

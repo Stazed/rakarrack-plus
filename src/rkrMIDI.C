@@ -2098,48 +2098,48 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_DFlange_DryWet:
-        efx_DFlange->changepar(DFlange_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_DryWet, Dry_Wet(value));
         break;
 
     case MC_DFlange_Pan:
-        efx_DFlange->changepar(DFlange_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_DFlange_LR_Cross:
-        efx_DFlange->changepar(DFlange_LR_Cross, value);
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LR_Cross, value);
         break;
 
     case MC_DFlange_Depth:
-        efx_DFlange->changepar(DFlange_Depth, 20 + (int) ((float) value * C_MC_2480_RANGE));
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Depth, 20 + (int) ((float) value * C_MC_2480_RANGE));
         break;
 
     case MC_DFlange_Width:
-        efx_DFlange->changepar(DFlange_Width, (int) ((float) value * C_MC_6000_RANGE));
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Width, (int) ((float) value * C_MC_6000_RANGE));
         break;
 
     case MC_DFlange_Offset:
-        efx_DFlange->changepar(DFlange_Offset, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Offset, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_DFlange_Feedback:
-        efx_DFlange->changepar(DFlange_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Feedback, ((int) (float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_DFlange_LPF:
         /* This is labeled LPF but uses same range as HPF - FIXME check DSP */
-        efx_DFlange->changepar(DFlange_LPF, 20 + (int) ((float) value * C_MC_19980_RANGE));
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LPF, 20 + (int) ((float) value * C_MC_19980_RANGE));
         break;
 
     case MC_DFlange_LFO_Tempo:
-        efx_DFlange->changepar(DFlange_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_DFlange_LFO_Stereo:
-        efx_DFlange->changepar(DFlange_LFO_Stereo, value);
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Stereo, value);
         break;
 
     case MC_DFlange_LFO_Random:
-        efx_DFlange->changepar(DFlange_LFO_Random, value);
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Random, value);
         break;
 
     case MC_Valve_DryWet:
@@ -3349,7 +3349,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_DFlange_LFO_Type:
-        efx_DFlange->changepar(DFlange_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Echotron_LFO_Type:

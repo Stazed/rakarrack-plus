@@ -30,6 +30,7 @@
 #ifndef DUAL_FLANGE_H
 #define DUAL_FLANGE_H
 
+#include "Effect.h"
 #include "EffectLFO.h"
 #include "delayline.h"
 
@@ -54,7 +55,7 @@ enum DFlange_Index
     DFlange_Intense
 };
 
-class Dflange
+class Dflange : public Effect
 {
 public:
     Dflange (double sample_rate, uint32_t intermediate_bufsize);
@@ -68,8 +69,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
 
 private:
     
@@ -118,7 +117,6 @@ private:
     float rsA, rsB, lsA, lsB;	//Audio sample at given delay
 
     delayline *ldelayline0, *rdelayline0, *ldelayline1, *rdelayline1;
-    class FPreset *Fpre;
 
     EffectLFO *lfo;		//lfo Flanger
 

@@ -696,14 +696,14 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_DUAL_FLANGE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_DFlange->getpar(DFlange_DryWet), efx_DFlange->getpar(DFlange_Pan),
-                efx_DFlange->getpar(DFlange_LR_Cross), efx_DFlange->getpar(DFlange_Depth),
-                efx_DFlange->getpar(DFlange_Width), efx_DFlange->getpar(DFlange_Offset),
-                efx_DFlange->getpar(DFlange_Feedback), efx_DFlange->getpar(DFlange_LPF),
-                efx_DFlange->getpar(DFlange_Subtract), efx_DFlange->getpar(DFlange_Zero),
-                efx_DFlange->getpar(DFlange_LFO_Tempo), efx_DFlange->getpar(DFlange_LFO_Stereo),
-                efx_DFlange->getpar(DFlange_LFO_Type), efx_DFlange->getpar(DFlange_LFO_Random),
-                efx_DFlange->getpar(DFlange_Intense), EFX_Bypass[EFX_DUAL_FLANGE]);
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_DryWet), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Pan),
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LR_Cross), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Depth),
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Width), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Offset),
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Feedback), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LPF),
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Subtract), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Zero),
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Stereo),
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Type), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Random),
+                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Intense), EFX_Bypass[EFX_DUAL_FLANGE]);
         break;
 
     case EFX_RING:
@@ -1467,9 +1467,9 @@ RKR::Actualizar_Audio()
 
         case EFX_DUAL_FLANGE:
             EFX_Bypass[EFX_DUAL_FLANGE] = 0;
-            efx_DFlange->cleanup();
+            Rack_Effects[EFX_DUAL_FLANGE]->cleanup();
             for (i = 0; i < C_DFLANGE_PARAMETERS; i++)
-                efx_DFlange->changepar(i, lv[EFX_DUAL_FLANGE][i]);
+                Rack_Effects[EFX_DUAL_FLANGE]->changepar(i, lv[EFX_DUAL_FLANGE][i]);
             EFX_Bypass[EFX_DUAL_FLANGE] = EFX_Bank_Bypass[EFX_DUAL_FLANGE];
             break;
 
@@ -2362,7 +2362,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_VALVE_PARAMETERS; j++)
         lv[EFX_VALVE][j] = Rack_Effects[EFX_VALVE]->getpar(j);
     for (j = 0; j < C_DFLANGE_PARAMETERS; j++)
-        lv[EFX_DUAL_FLANGE][j] = efx_DFlange->getpar(j);
+        lv[EFX_DUAL_FLANGE][j] = Rack_Effects[EFX_DUAL_FLANGE]->getpar(j);
     for (j = 0; j < C_RING_PARAMETERS; j++)
         lv[EFX_RING][j] = efx_Ring->getpar(j);
     for (j = 0; j < C_EXCITER_PARAMETERS; j++)

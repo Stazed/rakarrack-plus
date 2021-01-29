@@ -736,7 +736,6 @@ public:
 
     class Compressor *efx_FLimiter;
 
-    class Dflange *efx_DFlange;
     class Ring *efx_Ring;
     class Exciter *efx_Exciter;
     class DistBand *efx_DistBand;

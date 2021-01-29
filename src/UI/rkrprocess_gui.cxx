@@ -3776,47 +3776,47 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PEQ->eqp_HQ->redraw();
                 break;
             case MC_DFlange_DryWet:
-                DFLANGE->dflange_WD->value(Dry_Wet(rkr->efx_DFlange->getpar(DFlange_DryWet)));
+                DFLANGE->dflange_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_DryWet)));
                 DFLANGE->dflange_WD->redraw();
                 break;
             case MC_DFlange_Pan:
-                DFLANGE->dflange_pan->value(rkr->efx_DFlange->getpar(DFlange_Pan));
+                DFLANGE->dflange_pan->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Pan));
                 DFLANGE->dflange_pan->redraw();
                 break;
             case MC_DFlange_LR_Cross:
-                DFLANGE->dflange_LR->value(rkr->efx_DFlange->getpar(DFlange_LR_Cross));
+                DFLANGE->dflange_LR->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LR_Cross));
                 DFLANGE->dflange_LR->redraw();
                 break;
             case MC_DFlange_Depth:
-                DFLANGE->dflange_depth->value(rkr->efx_DFlange->getpar(DFlange_Depth));
+                DFLANGE->dflange_depth->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Depth));
                 DFLANGE->dflange_depth->redraw();
                 break;
             case MC_DFlange_Width:
-                DFLANGE->dflange_width->value(rkr->efx_DFlange->getpar(DFlange_Width));
+                DFLANGE->dflange_width->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Width));
                 DFLANGE->dflange_width->redraw();
                 break;
             case MC_DFlange_Offset:
-                DFLANGE->dflange_offset->value(rkr->efx_DFlange->getpar(DFlange_Offset));
+                DFLANGE->dflange_offset->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Offset));
                 DFLANGE->dflange_offset->redraw();
                 break;
             case MC_DFlange_Feedback:
-                DFLANGE->dflange_fb->value(rkr->efx_DFlange->getpar(DFlange_Feedback));
+                DFLANGE->dflange_fb->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Feedback));
                 DFLANGE->dflange_fb->redraw();
                 break;
             case MC_DFlange_LPF:
-                DFLANGE->dflange_lpf->value(rkr->efx_DFlange->getpar(DFlange_LPF));
+                DFLANGE->dflange_lpf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LPF));
                 DFLANGE->dflange_lpf->redraw();
                 break;
             case MC_DFlange_LFO_Tempo:
-                DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
+                DFLANGE->dflange_freq->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));
                 DFLANGE->dflange_freq->redraw();
                 break;
             case MC_DFlange_LFO_Stereo:
-                DFLANGE->dflange_stdf->value(rkr->efx_DFlange->getpar(DFlange_LFO_Stereo));
+                DFLANGE->dflange_stdf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Stereo));
                 DFLANGE->dflange_stdf->redraw();
                 break;
             case MC_DFlange_LFO_Random:
-                DFLANGE->dflange_rnd->value(rkr->efx_DFlange->getpar(DFlange_LFO_Random));
+                DFLANGE->dflange_rnd->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Random));
                 DFLANGE->dflange_rnd->redraw();
                 break;
             case MC_Valve_DryWet:
@@ -4998,7 +4998,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_lfotype->redraw();
                 break;
             case MC_DFlange_LFO_Type:
-                DFLANGE->dflange_lfotype->value(rkr->efx_DFlange->getpar(DFlange_LFO_Type));
+                DFLANGE->dflange_lfotype->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Type));
                 DFLANGE->dflange_lfotype->redraw();
                 break;
             case MC_Echotron_LFO_Type:
@@ -6099,7 +6099,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_DUAL_FLANGE])
     {
-        DFLANGE->dflange_freq->value(rkr->efx_DFlange->getpar(DFlange_LFO_Tempo));
+        DFLANGE->dflange_freq->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));
         DFLANGE->dflange_freq->redraw();
     }
 
