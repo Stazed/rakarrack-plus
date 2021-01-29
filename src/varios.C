@@ -392,7 +392,8 @@ RKR::Update_tempo()
 
     if (EFX_Bypass[EFX_ECHO])
     {
-        efx_Echo->Tempo2Delay(Tap_TempoSetD);
+        Echo *Efx_Echo = static_cast<Echo*>(Rack_Effects[EFX_ECHO]);
+        Efx_Echo->Tempo2Delay(Tap_TempoSetD);
     }
 
 }

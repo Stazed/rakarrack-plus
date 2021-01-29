@@ -1650,7 +1650,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Echo_Pan:
-        efx_Echo->changepar(Echo_Pan, value);
+        Rack_Effects[EFX_ECHO]->changepar(Echo_Pan, value);
         break;
 
     case MC_Overdrive_Pan:
@@ -1702,7 +1702,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Echo_DryWet:
-        efx_Echo->changepar(Echo_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_ECHO]->changepar(Echo_DryWet, Dry_Wet(value));
         break;
 
     case MC_Phaser_Pan:
@@ -1777,7 +1777,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Echo_Feedback:
-        efx_Echo->changepar(Echo_Feedback, value);
+        Rack_Effects[EFX_ECHO]->changepar(Echo_Feedback, value);
         break;
 
     case MC_Chorus_Feedback:
@@ -1853,7 +1853,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Echo_LR_Cross:
-        efx_Echo->changepar(Echo_LR_Cross, value);
+        Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Cross, value);
         break;
 
     case MC_Music_LR_Cross:
@@ -3137,19 +3137,19 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
     
     case MC_Echo_Reverse:
-        efx_Echo->changepar(Echo_Reverse, value);
+        Rack_Effects[EFX_ECHO]->changepar(Echo_Reverse, value);
         break;
 
     case MC_Echo_Delay:
-        efx_Echo->changepar(Echo_Delay, 20 + (int) ((float) value * C_MC_1980_RANGE));
+        Rack_Effects[EFX_ECHO]->changepar(Echo_Delay, 20 + (int) ((float) value * C_MC_1980_RANGE));
         break;
 
     case MC_Echo_LR_Delay:
-        efx_Echo->changepar(Echo_LR_Delay, value);
+        Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Delay, value);
         break;
 
     case MC_Echo_Damp:
-        efx_Echo->changepar(Echo_Damp, value);
+        Rack_Effects[EFX_ECHO]->changepar(Echo_Damp, value);
         break;
 
     case MC_Flanger_Delay:

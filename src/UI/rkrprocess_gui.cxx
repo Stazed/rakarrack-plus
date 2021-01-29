@@ -3330,7 +3330,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 break;
 
             case MC_Echo_Pan:
-                ECHO->echo_pan->value(rkr->efx_Echo->getpar(Echo_Pan) - 64);
+                ECHO->echo_pan->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Pan) - 64);
                 ECHO->echo_pan->redraw();
                 break;
             case MC_Overdrive_Pan:
@@ -3382,7 +3382,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PAN->pan_WD->redraw();
                 break;
             case MC_Echo_DryWet:
-                ECHO->echo_WD->value(Dry_Wet(rkr->efx_Echo->getpar(Echo_DryWet)));
+                ECHO->echo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet)));
                 ECHO->echo_WD->redraw();
                 break;
             case MC_Phaser_Pan:
@@ -3458,7 +3458,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PAN->pan_freq->redraw();
                 break;
             case MC_Echo_Feedback:
-                ECHO->echo_fb->value(rkr->efx_Echo->getpar(Echo_Feedback));
+                ECHO->echo_fb->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback));
                 ECHO->echo_fb->redraw();
                 break;
             case MC_Chorus_Feedback:
@@ -3534,7 +3534,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_LR->redraw();
                 break;
             case MC_Echo_LR_Cross:
-                ECHO->echo_LRc->value(rkr->efx_Echo->getpar(Echo_LR_Cross));
+                ECHO->echo_LRc->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross));
                 ECHO->echo_LRc->redraw();
                 break;
             case MC_Music_LR_Cross:
@@ -4784,19 +4784,19 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_delay->redraw();
                 break;
             case MC_Echo_Reverse:
-                ECHO->echo_RV->value(rkr->efx_Echo->getpar(Echo_Reverse));
+                ECHO->echo_RV->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse));
                 ECHO->echo_RV->redraw();
                 break;
             case MC_Echo_Delay:
-                ECHO->echo_delay->value(rkr->efx_Echo->getpar(Echo_Delay));
+                ECHO->echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
                 ECHO->echo_delay->redraw();
                 break;
             case MC_Echo_LR_Delay:
-                ECHO->echo_LRdl->value(rkr->efx_Echo->getpar(Echo_LR_Delay));
+                ECHO->echo_LRdl->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay));
                 ECHO->echo_LRdl->redraw();
                 break;
             case MC_Echo_Damp:
-                ECHO->echo_damp->value(rkr->efx_Echo->getpar(Echo_Damp));
+                ECHO->echo_damp->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Damp));
                 ECHO->echo_damp->redraw();
                 break;
             case MC_Flanger_Delay:
@@ -6145,7 +6145,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->EFX_Bypass[EFX_ECHO])
     {
-        ECHO->echo_delay->value(rkr->efx_Echo->getpar(Echo_Delay));
+        ECHO->echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
         ECHO->echo_delay->redraw();
     }
     if (rkr->EFX_Bypass[EFX_ECHOTRON])

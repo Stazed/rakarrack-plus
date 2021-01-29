@@ -710,7 +710,6 @@ public:
     void Update_tempo();
 
     // class pointers
-    class Echo *efx_Echo;
     class Compressor *efx_Compressor;
     class WahWah *efx_WahWah;
     class Alienwah *efx_Alienwah;

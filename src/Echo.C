@@ -30,9 +30,8 @@
 #include <math.h>
 #include "Echo.h"
 
-Echo::Echo(double samplerate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+Echo::Echo(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     Pvolume(50),
     Ppanning(64),
@@ -53,8 +52,8 @@ Echo::Echo(double samplerate, uint32_t intermediate_bufsize) :
     rvkr(),
     rvfl(),
     rvfr(),
-    maxx_delay(samplerate * MAX_DELAY),
-    fade(samplerate / 5),               //  1/5 SR fade time available
+    maxx_delay(sample_rate * MAX_DELAY),
+    fade(sample_rate / 5),               //  1/5 SR fade time available
     ldelay(NULL),
     rdelay(NULL),
     ltime(),
@@ -67,11 +66,10 @@ Echo::Echo(double samplerate, uint32_t intermediate_bufsize) :
     hidamp(),
     reverse(),
     ireverse(),
-    Srate_Attack_Coeff(1.0f / (samplerate * ATTACK)),
-    Fpre(NULL)
+    Srate_Attack_Coeff(1.0f / (sample_rate * ATTACK))
 {
-    ldelay = new delayline(2.0f, 1, samplerate);
-    rdelay = new delayline(2.0f, 1, samplerate);
+    ldelay = new delayline(2.0f, 1, sample_rate);
+    rdelay = new delayline(2.0f, 1, sample_rate);
 
     setpreset(Ppreset);
     cleanup();

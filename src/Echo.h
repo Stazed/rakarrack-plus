@@ -27,6 +27,7 @@
 #ifndef ECHO_H
 #define ECHO_H
 
+#include "Effect.h"
 #include "delayline.h"
 
 const int C_ECHO_PARAMETERS = 9;
@@ -44,10 +45,10 @@ enum Echo_Index
     Echo_Direct
 };
 
-class Echo
+class Echo : public Effect
 {
 public:
-    Echo (double samplerate, uint32_t intermediate_bufsize);
+    Echo (double sample_rate, uint32_t intermediate_bufsize);
     ~Echo ();
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
@@ -58,9 +59,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume;
 
     void Tempo2Delay(int delay);
 
@@ -100,8 +98,7 @@ private:
     float oldl, oldr;		//pt. lpf
     float panning, lrcross, fb, hidamp, reverse, ireverse;
     float  Srate_Attack_Coeff;
-    
-    class FPreset *Fpre;
+
 };
 
 

@@ -506,11 +506,11 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_ECHO:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Echo->getpar(Echo_DryWet), efx_Echo->getpar(Echo_Pan),
-                efx_Echo->getpar(Echo_Delay), efx_Echo->getpar(Echo_LR_Delay),
-                efx_Echo->getpar(Echo_LR_Cross), efx_Echo->getpar(Echo_Feedback),
-                efx_Echo->getpar(Echo_Damp), efx_Echo->getpar(Echo_Reverse),
-                efx_Echo->getpar(Echo_Direct), EFX_Bypass[EFX_ECHO]);
+                Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet), Rack_Effects[EFX_ECHO]->getpar(Echo_Pan),
+                Rack_Effects[EFX_ECHO]->getpar(Echo_Delay), Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay),
+                Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross), Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback),
+                Rack_Effects[EFX_ECHO]->getpar(Echo_Damp), Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse),
+                Rack_Effects[EFX_ECHO]->getpar(Echo_Direct), EFX_Bypass[EFX_ECHO]);
         break;
 
     case EFX_CHORUS:
@@ -1334,9 +1334,9 @@ RKR::Actualizar_Audio()
 
         case EFX_ECHO:
             EFX_Bypass[EFX_ECHO] = 0;
-            efx_Echo->cleanup();
+            Rack_Effects[EFX_ECHO]->cleanup();
             for (i = 0; i < C_ECHO_PARAMETERS; i++)
-                efx_Echo->changepar(i, lv[EFX_ECHO][i]);
+                Rack_Effects[EFX_ECHO]->changepar(i, lv[EFX_ECHO][i]);
             EFX_Bypass[EFX_ECHO] = EFX_Bank_Bypass[EFX_ECHO];
             break;
 
@@ -2330,7 +2330,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_REVERB_PARAMETERS; j++)
         lv[EFX_REVERB][j] = Rack_Effects[EFX_REVERB]->getpar(j);
     for (j = 0; j < C_ECHO_PARAMETERS; j++)
-        lv[EFX_ECHO][j] = efx_Echo->getpar(j);
+        lv[EFX_ECHO][j] = Rack_Effects[EFX_ECHO]->getpar(j);
     for (j = 0; j < C_CHORUS_PARAMETERS; j++)
         lv[EFX_CHORUS][j] = Rack_Effects[EFX_CHORUS]->getpar(j);
     for (j = 0; j < C_FLANGER_PARAMETERS; j++)
