@@ -27,10 +27,9 @@
 #include <stdio.h>
 
 Alienwah::Alienwah(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(0),
-    outvolume(0.5f),
-    fPERIOD(intermediate_bufsize),      // correct for rakarrack, may be adjusted for lv2
-    PERIOD(intermediate_bufsize),       // correct for rakarrack, may be adjusted for lv2
+    Effect(sample_rate, intermediate_bufsize),
+    fPERIOD(intermediate_bufsize),
+    PERIOD(intermediate_bufsize),
     Pvolume(),
     Ppanning(),
     Pdepth(),
@@ -49,8 +48,7 @@ Alienwah::Alienwah(double sample_rate, uint32_t intermediate_bufsize) :
     oldl(),
     oldr(),
     oldclfol(),
-    oldclfor(),
-    Fpre(NULL)
+    oldclfor()
 {
     lfo = new EffectLFO(sample_rate);
 

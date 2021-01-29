@@ -3265,7 +3265,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 break;
 
             case MC_Alien_Depth:
-                ALIENWAH->Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
+                ALIENWAH->Alienwah_dpth->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Depth));
                 ALIENWAH->Alienwah_dpth->redraw();
                 break;
             case MC_Phaser_Depth:
@@ -3366,7 +3366,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_WD->redraw();
                 break;
             case MC_Alien_DryWet:
-                ALIENWAH->Alienwah_WD->value(Dry_Wet(rkr->efx_Alienwah->getpar(Alien_DryWet)));
+                ALIENWAH->Alienwah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_DryWet)));
                 ALIENWAH->Alienwah_WD->redraw();
                 break;
             case MC_Music_DryWet:
@@ -3390,7 +3390,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_pan->redraw();
                 break;
             case MC_Alien_Pan:
-                ALIENWAH->Alienwah_pan->value(rkr->efx_Alienwah->getpar(Alien_Pan) - 64);
+                ALIENWAH->Alienwah_pan->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Pan) - 64);
                 ALIENWAH->Alienwah_pan->redraw();
                 break;
             case MC_Music_Pan_1:
@@ -3450,7 +3450,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_freq->redraw();
                 break;
             case MC_Alien_LFO_Tempo:
-                ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
+                ALIENWAH->Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));
                 ALIENWAH->Alienwah_freq->redraw();
                 break;
             case MC_Pan_LFO_Tempo:
@@ -3474,7 +3474,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_fb->redraw();
                 break;
             case MC_Alien_Feedback:
-                ALIENWAH->Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
+                ALIENWAH->Alienwah_fb->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Feedback));
                 ALIENWAH->Alienwah_fb->redraw();
                 break;
             case MC_Music_Feedback_1:
@@ -3530,7 +3530,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DIST->dist_LRc->redraw();
                 break;
             case MC_Alien_LR_Cross:
-                ALIENWAH->Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LR_Cross));
+                ALIENWAH->Alienwah_LR->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LR_Cross));
                 ALIENWAH->Alienwah_LR->redraw();
                 break;
             case MC_Echo_LR_Cross:
@@ -3558,7 +3558,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_stdf->redraw();
                 break;
             case MC_Alien_LFO_Stereo:
-                ALIENWAH->Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
+                ALIENWAH->Alienwah_stdf->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Stereo));
                 ALIENWAH->Alienwah_stdf->redraw();
                 break;
             case MC_Pan_LFO_Stereo:
@@ -3582,7 +3582,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_rnd->redraw();
                 break;
             case MC_Alien_LFO_Random:
-                ALIENWAH->Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Random));
+                ALIENWAH->Alienwah_rnd->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Random));
                 ALIENWAH->Alienwah_rnd->redraw();
                 break;
             case MC_Pan_LFO_Random:
@@ -3606,7 +3606,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_phase->redraw();
                 break;
             case MC_Alien_Phase:
-                ALIENWAH->Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));
+                ALIENWAH->Alienwah_phase->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase));
                 ALIENWAH->Alienwah_phase->redraw();
                 break;
             case MC_Multi_On_Off:
@@ -4768,7 +4768,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 INFINIT->infinity_subdiv->redraw();
                 break;
             case MC_Alien_Delay:
-                ALIENWAH->Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
+                ALIENWAH->Alienwah_delay->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Delay));
                 ALIENWAH->Alienwah_delay->redraw();
                 break;
             case MC_APhase_LFO_Random:
@@ -4982,7 +4982,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 STOMPBOX->stomp_mode->redraw();
                 break;
             case MC_Alien_LFO_Type:
-                ALIENWAH->Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFO_Type));
+                ALIENWAH->Alienwah_lfotype->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Type));
                 ALIENWAH->Alienwah_lfotype->redraw();
                 break;
             case MC_APhase_LFO_Type:
@@ -6081,7 +6081,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_ALIENWAH])
     {
-        ALIENWAH->Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
+        ALIENWAH->Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));
         ALIENWAH->Alienwah_freq->redraw();
     }
 

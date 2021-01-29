@@ -1581,7 +1581,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
                         
     case MC_Alien_Depth:
-        efx_Alienwah->changepar(Alien_Depth, value);
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Depth, value);
         break;
 
     case MC_Phaser_Depth:
@@ -1686,7 +1686,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_DryWet:
-        efx_Alienwah->changepar(Alien_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_DryWet, Dry_Wet(value));
         break;
 
     case MC_Music_DryWet:
@@ -1710,7 +1710,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_Pan:
-        efx_Alienwah->changepar(Alien_Pan, value);
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Pan, value);
         break;
 
     case MC_Music_Pan_1:
@@ -1769,7 +1769,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_LFO_Tempo:
-        efx_Alienwah->changepar(Alien_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Pan_LFO_Tempo:
@@ -1793,7 +1793,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_Feedback:
-        efx_Alienwah->changepar(Alien_Feedback, value);
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Feedback, value);
         break;
 
     case MC_Music_Feedback_1:
@@ -1849,7 +1849,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_LR_Cross:
-        efx_Alienwah->changepar(Alien_LR_Cross, value);
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross, value);
         break;
 
     case MC_Echo_LR_Cross:
@@ -1877,7 +1877,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_LFO_Stereo:
-        efx_Alienwah->changepar(Alien_LFO_Stereo, value);
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Stereo, value);
         break;
 
     case MC_Pan_LFO_Stereo:
@@ -1901,7 +1901,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_LFO_Random:
-        efx_Alienwah->changepar(Alien_LFO_Random, value);
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Random, value);
         break;
 
     case MC_Pan_LFO_Random:
@@ -1925,7 +1925,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_Phase:
-        efx_Alienwah->changepar(Alien_Phase, value);
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Phase, value);
         break;
 
     case MC_Multi_On_Off:
@@ -3121,7 +3121,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_Delay:
-        efx_Alienwah->changepar(Alien_Delay, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Delay, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_APhase_LFO_Random:
@@ -3333,7 +3333,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Alien_LFO_Type:
-        efx_Alienwah->changepar(Alien_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_APhase_LFO_Type:

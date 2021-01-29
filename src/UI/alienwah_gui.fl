@@ -27,7 +27,7 @@ widget_class {\#include "common_gui_menu.h"} AlienwahGui {
 }
 rkr->EFX_Bypass[EFX_ALIENWAH]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Alienwah->cleanup();
+rkr->Rack_Effects[EFX_ALIENWAH]->cleanup();
 rgui->findpos(EFX_ALIENWAH,(int)o->value(),o);} selected
     xywh {4 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -36,18 +36,18 @@ rgui->findpos(EFX_ALIENWAH,(int)o->value(),o);} selected
     label Preset
     user_data 12011
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
-Alienwah_WD->value(Dry_Wet(rkr->efx_Alienwah->getpar(Alien_DryWet)));
-Alienwah_pan->value(rkr->efx_Alienwah->getpar(Alien_Pan)-64);
-Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
-Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Random));
-Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFO_Type));
-Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
-Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
-Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
-Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
-Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LR_Cross));
-Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));}
+if((ud==0)||(ud==12011))rkr->Rack_Effects[EFX_ALIENWAH]->setpreset((int) o->value());
+Alienwah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_DryWet)));
+Alienwah_pan->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Pan)-64);
+Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));
+Alienwah_rnd->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Random));
+Alienwah_lfotype->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Type));
+Alienwah_stdf->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Stereo));
+Alienwah_dpth->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Depth));
+Alienwah_fb->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Feedback));
+Alienwah_delay->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Delay));
+Alienwah_LR->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LR_Cross));
+Alienwah_phase->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase));}
     xywh {76 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -75,7 +75,7 @@ Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));}
  rgui->getMIDIControl(MC_Alien_DryWet);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -86,7 +86,7 @@ rkr->efx_Alienwah->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));}
  rgui->getMIDIControl(MC_Alien_Pan);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Pan,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Pan,(int)(o->value()+64));}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -97,7 +97,7 @@ rkr->efx_Alienwah->changepar(Alien_Pan,(int)(o->value()+64));}
  rgui->getMIDIControl(MC_Alien_LFO_Tempo);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFO_Tempo,(int)o->value());}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo,(int)o->value());}
     xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -108,7 +108,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Tempo,(int)o->value());}
  rgui->getMIDIControl(MC_Alien_LFO_Random);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFO_Random,(int)o->value());}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Random,(int)o->value());}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -120,7 +120,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Random,(int)o->value());}
  return;
 } 
 
-rkr->efx_Alienwah->changepar(Alien_LFO_Type,(int)o->value())} open
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Type,(int)o->value())} open
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -132,7 +132,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Type,(int)o->value())} open
  rgui->getMIDIControl(MC_Alien_Phase);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Phase,(int)o->value());}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Phase,(int)o->value());}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -143,7 +143,7 @@ rkr->efx_Alienwah->changepar(Alien_Phase,(int)o->value());}
  rgui->getMIDIControl(MC_Alien_LFO_Stereo);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFO_Stereo,(int)o->value());}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Stereo,(int)o->value());}
     xywh {56 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -154,7 +154,7 @@ rkr->efx_Alienwah->changepar(Alien_LFO_Stereo,(int)o->value());}
  rgui->getMIDIControl(MC_Alien_Depth);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Depth,(int)o->value());}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Depth,(int)o->value());}
     xywh {56 129 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -166,7 +166,7 @@ rkr->efx_Alienwah->changepar(Alien_Depth,(int)o->value());}
  return;
 } 
 rkr->EFX_Bypass[EFX_ALIENWAH]=0;
-rkr->efx_Alienwah->changepar(Alien_Delay,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Delay,(int)o->value());
 if (Alienwah_activar->value()) rkr->EFX_Bypass[EFX_ALIENWAH]=1;}
     xywh {56 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
@@ -178,7 +178,7 @@ if (Alienwah_activar->value()) rkr->EFX_Bypass[EFX_ALIENWAH]=1;}
  rgui->getMIDIControl(MC_Alien_Feedback);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Feedback,(int)o->value());}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Feedback,(int)o->value());}
     xywh {56 153 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -189,7 +189,7 @@ rkr->efx_Alienwah->changepar(Alien_Feedback,(int)o->value());}
  rgui->getMIDIControl(MC_Alien_LR_Cross);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LR_Cross,(int)(o->value()));}
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross,(int)(o->value()));}
     xywh {56 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

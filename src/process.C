@@ -51,7 +51,6 @@ char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
     efx_Compressor(NULL),
-    efx_Alienwah(NULL),
     efx_Cabinet(NULL),
     efx_Pan(NULL),
     efx_MusDelay(NULL),
@@ -377,7 +376,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_EQ];
     delete efx_Compressor;
     delete Rack_Effects[EFX_WAHWAH];
-    delete efx_Alienwah;
+    delete Rack_Effects[EFX_ALIENWAH];
     delete efx_Cabinet;
     delete efx_Pan;
     delete Rack_Effects[EFX_HARMONIZER];
@@ -637,7 +636,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_EQ] = new EQ( fSample_rate, period);
     efx_Compressor = new Compressor(fSample_rate, period);
     Rack_Effects[EFX_WAHWAH] = new WahWah(fSample_rate, period);
-    efx_Alienwah = new Alienwah(fSample_rate, period);
+    Rack_Effects[EFX_ALIENWAH] = new Alienwah(fSample_rate, period);
     efx_Cabinet = new Cabinet(fSample_rate, period);
     efx_Pan = new Pan(fSample_rate, period);
     Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
@@ -1153,7 +1152,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_PHASER]->cleanup();
     Rack_Effects[EFX_PARAMETRIC]->cleanup();
     Rack_Effects[EFX_WAHWAH]->cleanup();
-    efx_Alienwah->cleanup();
+    Rack_Effects[EFX_ALIENWAH]->cleanup();
     efx_Cabinet->cleanup();
     efx_Pan->cleanup();
     Rack_Effects[EFX_HARMONIZER]->cleanup();
@@ -1399,8 +1398,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_ALIENWAH:
                 if (EFX_Bypass[EFX_ALIENWAH])
                 {
-                    efx_Alienwah->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_ALIENWAH, efx_Alienwah->outvolume);
+                    Rack_Effects[EFX_ALIENWAH]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_ALIENWAH, Rack_Effects[EFX_ALIENWAH]->outvolume);
                 }
                 break;
 

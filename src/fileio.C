@@ -610,12 +610,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_ALIENWAH:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Alienwah->getpar(Alien_DryWet), efx_Alienwah->getpar(Alien_Pan),
-                efx_Alienwah->getpar(Alien_LFO_Tempo), efx_Alienwah->getpar(Alien_LFO_Random),
-                efx_Alienwah->getpar(Alien_LFO_Type), efx_Alienwah->getpar(Alien_LFO_Stereo),
-                efx_Alienwah->getpar(Alien_Depth), efx_Alienwah->getpar(Alien_Feedback),
-                efx_Alienwah->getpar(Alien_Delay), efx_Alienwah->getpar(Alien_LR_Cross),
-                efx_Alienwah->getpar(Alien_Phase), EFX_Bypass[EFX_ALIENWAH]);
+                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_DryWet), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Pan),
+                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Random),
+                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Type), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Stereo),
+                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Depth), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Feedback),
+                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Delay), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LR_Cross),
+                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase), EFX_Bypass[EFX_ALIENWAH]);
         break;
 
     case EFX_CABINET:
@@ -1395,9 +1395,9 @@ RKR::Actualizar_Audio()
 
         case EFX_ALIENWAH:
             EFX_Bypass[EFX_ALIENWAH] = 0;
-            efx_Alienwah->cleanup();
+            Rack_Effects[EFX_ALIENWAH]->cleanup();
             for (i = 0; i < C_ALIENWAH_PARAMETERS; i++)
-                efx_Alienwah->changepar(i, lv[EFX_ALIENWAH][i]);
+                Rack_Effects[EFX_ALIENWAH]->changepar(i, lv[EFX_ALIENWAH][i]);
             EFX_Bypass[EFX_ALIENWAH] = EFX_Bank_Bypass[EFX_ALIENWAH];
             break;
 
@@ -2346,7 +2346,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_WAHWAH_PARAMETERS; j++)
         lv[EFX_WAHWAH][j] = Rack_Effects[EFX_WAHWAH]->getpar(j);
     for (j = 0; j < C_ALIENWAH_PARAMETERS; j++)
-        lv[EFX_ALIENWAH][j] = efx_Alienwah->getpar(j);
+        lv[EFX_ALIENWAH][j] = Rack_Effects[EFX_ALIENWAH]->getpar(j);
     for (j = 0; j < C_PAN_PARAMETERS; j++)
         lv[EFX_PAN][j] = efx_Pan->getpar(j);
     for (j = 0; j < C_HARM_PARAMETERS; j++)

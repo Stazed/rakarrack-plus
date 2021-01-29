@@ -25,6 +25,8 @@
 
 #ifndef ALIENWAH_H
 #define ALIENWAH_H
+
+#include "Effect.h"
 #include "EffectLFO.h"
 
 const int C_ALIENWAH_PARAMETERS = 11;
@@ -53,7 +55,7 @@ struct COMPLEXTYPE
         b() {}
 };
 
-class Alienwah
+class Alienwah : public Effect
 {
 public:
     Alienwah (double sample_rate, uint32_t intermediate_bufsize);
@@ -68,9 +70,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume;
 
 private:
     
@@ -104,7 +103,6 @@ private:
     float panning, fb, depth, lrcross, phase;
     struct COMPLEXTYPE oldl[MAX_ALIENWAH_DELAY], oldr[MAX_ALIENWAH_DELAY];
     COMPLEXTYPE oldclfol, oldclfor;
-    class FPreset *Fpre;
 
 };
 

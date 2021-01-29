@@ -11,7 +11,7 @@ void AlienwahGui::cb_Alienwah_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_ALIENWAH]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Alienwah->cleanup();
+rkr->Rack_Effects[EFX_ALIENWAH]->cleanup();
 rgui->findpos(EFX_ALIENWAH,(int)o->value(),o);
 }
 void AlienwahGui::cb_Alienwah_activar(RKR_Light_Button* o, void* v) {
@@ -20,18 +20,18 @@ void AlienwahGui::cb_Alienwah_activar(RKR_Light_Button* o, void* v) {
 
 void AlienwahGui::cb_Alienwah_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12011))rkr->efx_Alienwah->setpreset((int) o->value());
-Alienwah_WD->value(Dry_Wet(rkr->efx_Alienwah->getpar(Alien_DryWet)));
-Alienwah_pan->value(rkr->efx_Alienwah->getpar(Alien_Pan)-64);
-Alienwah_freq->value(rkr->efx_Alienwah->getpar(Alien_LFO_Tempo));
-Alienwah_rnd->value(rkr->efx_Alienwah->getpar(Alien_LFO_Random));
-Alienwah_lfotype->value(rkr->efx_Alienwah->getpar(Alien_LFO_Type));
-Alienwah_stdf->value(rkr->efx_Alienwah->getpar(Alien_LFO_Stereo));
-Alienwah_dpth->value(rkr->efx_Alienwah->getpar(Alien_Depth));
-Alienwah_fb->value(rkr->efx_Alienwah->getpar(Alien_Feedback));
-Alienwah_delay->value(rkr->efx_Alienwah->getpar(Alien_Delay));
-Alienwah_LR->value(rkr->efx_Alienwah->getpar(Alien_LR_Cross));
-Alienwah_phase->value(rkr->efx_Alienwah->getpar(Alien_Phase));
+if((ud==0)||(ud==12011))rkr->Rack_Effects[EFX_ALIENWAH]->setpreset((int) o->value());
+Alienwah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_DryWet)));
+Alienwah_pan->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Pan)-64);
+Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));
+Alienwah_rnd->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Random));
+Alienwah_lfotype->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Type));
+Alienwah_stdf->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Stereo));
+Alienwah_dpth->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Depth));
+Alienwah_fb->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Feedback));
+Alienwah_delay->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Delay));
+Alienwah_LR->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LR_Cross));
+Alienwah_phase->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase));
 }
 void AlienwahGui::cb_Alienwah_preset(RKR_Choice* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_preset_i(o,v);
@@ -51,7 +51,7 @@ void AlienwahGui::cb_Alienwah_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_DryWet);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));
 }
 void AlienwahGui::cb_Alienwah_WD(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_WD_i(o,v);
@@ -63,7 +63,7 @@ void AlienwahGui::cb_Alienwah_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_Pan);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Pan,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Pan,(int)(o->value()+64));
 }
 void AlienwahGui::cb_Alienwah_pan(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_pan_i(o,v);
@@ -75,7 +75,7 @@ void AlienwahGui::cb_Alienwah_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_LFO_Tempo);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFO_Tempo,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_freq(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_freq_i(o,v);
@@ -87,7 +87,7 @@ void AlienwahGui::cb_Alienwah_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_LFO_Random);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFO_Random,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Random,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_rnd(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_rnd_i(o,v);
@@ -100,7 +100,7 @@ void AlienwahGui::cb_Alienwah_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_Alienwah->changepar(Alien_LFO_Type,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Type,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_lfotype(RKR_Choice* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_lfotype_i(o,v);
@@ -112,7 +112,7 @@ void AlienwahGui::cb_Alienwah_phase_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_Phase);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Phase,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Phase,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_phase(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_phase_i(o,v);
@@ -124,7 +124,7 @@ void AlienwahGui::cb_Alienwah_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_LFO_Stereo);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LFO_Stereo,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Stereo,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_stdf(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_stdf_i(o,v);
@@ -136,7 +136,7 @@ void AlienwahGui::cb_Alienwah_dpth_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_Depth);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Depth,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Depth,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_dpth(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_dpth_i(o,v);
@@ -149,7 +149,7 @@ void AlienwahGui::cb_Alienwah_delay_i(RKR_Slider* o, void*) {
  return;
 } 
 rkr->EFX_Bypass[EFX_ALIENWAH]=0;
-rkr->efx_Alienwah->changepar(Alien_Delay,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Delay,(int)o->value());
 if (Alienwah_activar->value()) rkr->EFX_Bypass[EFX_ALIENWAH]=1;
 }
 void AlienwahGui::cb_Alienwah_delay(RKR_Slider* o, void* v) {
@@ -162,7 +162,7 @@ void AlienwahGui::cb_Alienwah_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_Feedback);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_Feedback,(int)o->value());
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Feedback,(int)o->value());
 }
 void AlienwahGui::cb_Alienwah_fb(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_fb_i(o,v);
@@ -174,7 +174,7 @@ void AlienwahGui::cb_Alienwah_LR_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Alien_LR_Cross);
  return;
 } 
-rkr->efx_Alienwah->changepar(Alien_LR_Cross,(int)(o->value()));
+rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross,(int)(o->value()));
 }
 void AlienwahGui::cb_Alienwah_LR(RKR_Slider* o, void* v) {
   ((AlienwahGui*)(o->parent()))->cb_Alienwah_LR_i(o,v);
