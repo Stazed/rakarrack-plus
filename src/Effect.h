@@ -36,7 +36,7 @@ public:
 
     // Distortion, Overdrive, Derelict, DistBand, StompBox, Convolotron, Reverbtron
     Effect (int, int, int, double, uint32_t) :
-        outvolume(0.5f), Ppreset(0), Fpre(NULL), Filename() {};
+        outvolume(0.5f), Ppreset(0), Fpre(NULL) {};
 
     // Harmonizer, Sequence, Shifter, StereoHarm
     Effect (long int, int, int, int, double, uint32_t) :
@@ -69,12 +69,7 @@ public:
     float outvolume;
     int Ppreset;
     class FPreset *Fpre;
-    
-    // Convolotron, Reverbtron, Echotron
-    char Filename[128];
-    virtual int setfile (int) {return 0;};
-    virtual int get_file_length() {return 0;};
-    virtual char *get_file_name() {return 0;};
+
 };
 
 #endif

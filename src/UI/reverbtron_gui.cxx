@@ -223,9 +223,11 @@ void RevtronGui::cb_B_rvb_i(RKR_Button*, void*) {
 filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rvb");
-strcpy(rkr->Rack_Effects[EFX_REVERBTRON]->Filename,filename);
 
-if(!rkr->Rack_Effects[EFX_REVERBTRON]->setfile(USERFILE))
+Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(rkr->Rack_Effects[EFX_REVERBTRON]);
+strcpy(Efx_Reverbtron->Filename,filename);
+
+if(!Efx_Reverbtron->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\n", filename);
 };

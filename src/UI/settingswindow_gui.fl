@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {494 405 530 580} type Double
+  xywh {585 132 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -1610,27 +1610,31 @@ m_rkr->quality_update = true;
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
 
+/* Cast to derived class */
+Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_rkr->Rack_Effects[EFX_CONVOLOTRON]);
+
 /* Save current parameters */
-std::vector<int> save_state = m_rkr->Rack_Effects[EFX_CONVOLOTRON]->save_parameters();
+std::vector<int> save_state = Efx_Convolotron->save_parameters();
 
 /* Save current file name and path */
-std::string filename(m_rkr->Rack_Effects[EFX_CONVOLOTRON]->Filename);
+std::string filename(Efx_Convolotron->Filename);
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->Rack_Effects[EFX_CONVOLOTRON];
 m_rkr->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
+Efx_Convolotron = static_cast<Convolotron*>(m_rkr->Rack_Effects[EFX_CONVOLOTRON]);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
 /* Reset parameters and filename */
-m_rkr->Rack_Effects[EFX_CONVOLOTRON]->reset_parameters(save_state);
+Efx_Convolotron->reset_parameters(save_state);
 
 /* Check for user file and re-load if present */
-if(m_rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File))
+if(Efx_Convolotron->getpar(Convo_User_File))
 {
-    strcpy(m_rkr->Rack_Effects[EFX_CONVOLOTRON]->Filename,filename.c_str());
-    if(!m_rkr->Rack_Effects[EFX_CONVOLOTRON]->setfile(USERFILE))
+    strcpy(Efx_Convolotron->Filename,filename.c_str());
+    if(!Efx_Convolotron->setfile(USERFILE))
     {
         fl_alert("Error loading %s file!\\n", filename.c_str());
     };
@@ -1647,27 +1651,31 @@ m_rkr->quality_update = true;
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
 
+/* Cast to derived class */
+Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_rkr->Rack_Effects[EFX_REVERBTRON]);
+
 /* Save current parameters */
-std::vector<int> save_state = m_rkr->Rack_Effects[EFX_REVERBTRON]->save_parameters();
+std::vector<int> save_state = Efx_Reverbtron->save_parameters();
 
 /* Save current file name and path */
-std::string filename(m_rkr->Rack_Effects[EFX_REVERBTRON]->Filename);
+std::string filename(Efx_Reverbtron->Filename);
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->Rack_Effects[EFX_REVERBTRON];
 m_rkr->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_rkr->Rev_Down, m_rkr->Rev_U_Q, m_rkr->Rev_D_Q, m_rkr->fSample_rate, m_rkr->period);
+Efx_Reverbtron = static_cast<Reverbtron*>(m_rkr->Rack_Effects[EFX_REVERBTRON]);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
 /* Reset parameters and filename */
-m_rkr->Rack_Effects[EFX_REVERBTRON]->reset_parameters(save_state);
+Efx_Reverbtron->reset_parameters(save_state);
 
 /* Check for user file and re-load if present */
-if(m_rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File))
+if(Efx_Reverbtron->getpar(Revtron_User_File))
 {
-    strcpy(m_rkr->Rack_Effects[EFX_REVERBTRON]->Filename,filename.c_str());
-    if(!m_rkr->Rack_Effects[EFX_REVERBTRON]->setfile(USERFILE))
+    strcpy(Efx_Reverbtron->Filename,filename.c_str());
+    if(!Efx_Reverbtron->setfile(USERFILE))
     {
         fl_alert("Error loading %s file!\\n", filename.c_str());
     };

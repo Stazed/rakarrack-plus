@@ -73,7 +73,7 @@ public:
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
 
-//    char Filename[128];
+    char Filename[128];
 
 private:
     

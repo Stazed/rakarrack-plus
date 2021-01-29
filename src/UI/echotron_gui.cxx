@@ -37,7 +37,9 @@ echotron_af->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Filters));
 echotron_mf->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Filter));
 echotron_md->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Delay));
 echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
-echotron_length->maximum(rkr->Rack_Effects[EFX_ECHOTRON]->get_file_length());
+
+Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
+echotron_length->maximum(Efx_Echotron->get_file_length());
 }
 void EchotronGui::cb_echotron_preset(RKR_Choice* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_preset_i(o,v);
@@ -209,15 +211,18 @@ void EchotronGui::cb_B_ech_i(RKR_Button*, void*) {
 filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".dly");
-strcpy(rkr->Rack_Effects[EFX_ECHOTRON]->Filename,filename);
 
-if(!rkr->Rack_Effects[EFX_ECHOTRON]->setfile(USERFILE))
+Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
+strcpy(Efx_Echotron->Filename,filename);
+
+if(!Efx_Echotron->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\n", filename);
 }
 
-echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
-echotron_length->maximum(rkr->Rack_Effects[EFX_ECHOTRON]->get_file_length());
+echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
+
+echotron_length->maximum(Efx_Echotron->get_file_length());
 }
 void EchotronGui::cb_B_ech(RKR_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_B_ech_i(o,v);
@@ -238,7 +243,9 @@ void EchotronGui::cb_echotron_length(RKR_Counter* o, void* v) {
 void EchotronGui::cb_echotron_fnum_i(RKR_Choice* o, void*) {
   rkr->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Set_File,(int)o->value());
 echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
-echotron_length->maximum(rkr->Rack_Effects[EFX_ECHOTRON]->get_file_length());
+
+Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
+echotron_length->maximum(Efx_Echotron->get_file_length());
 }
 void EchotronGui::cb_echotron_fnum(RKR_Choice* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_fnum_i(o,v);

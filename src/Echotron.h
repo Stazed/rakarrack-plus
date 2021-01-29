@@ -126,6 +126,7 @@ public:
     int get_file_length() {return File.fLength;};
     char *get_file_name() {return File.Filename;};
 
+    char Filename[128];
     DlyFile File;
     int error;
 

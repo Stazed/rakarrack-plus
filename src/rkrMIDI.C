@@ -2929,9 +2929,11 @@ RKR::process_midi_controller_events(int parameter, int value)
            The user will have to move the MIDI control slider to set taps upward.
            The downward limit is checked and limited always on file loading. */
         int number_taps = 1 + (int) ((float) value * C_MC_126_RANGE);
-        if(number_taps > Rack_Effects[EFX_ECHOTRON]->get_file_length())
+        
+        Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
+        if(number_taps > Efx_Echotron->get_file_length())
         {
-            number_taps = Rack_Effects[EFX_ECHOTRON]->get_file_length();
+            number_taps = Efx_Echotron->get_file_length();
         }
         Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, number_taps);
         break;

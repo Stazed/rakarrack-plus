@@ -29,7 +29,7 @@
 
 Convolotron::Convolotron(int DS, int uq, int dq, double sample_rate, uint16_t intermediate_bufsize) :
     Effect(DS, uq, dq, sample_rate, intermediate_bufsize),
-//    Filename(),
+    Filename(),
     SAMPLE_RATE((unsigned int) sample_rate),
     fSAMPLE_RATE((float) sample_rate),
     nSAMPLE_RATE(),

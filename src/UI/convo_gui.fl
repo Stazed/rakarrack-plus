@@ -30,7 +30,7 @@ widget_class ConvoGui {
 rkr->EFX_Bypass[EFX_CONVOLOTRON]=(int)o->value();
 if((int) o->value()==0)
 rkr->Rack_Effects[EFX_CONVOLOTRON]->cleanup();
-rgui->findpos(EFX_CONVOLOTRON,(int)o->value(),o);} selected
+rgui->findpos(EFX_CONVOLOTRON,(int)o->value(),o);}
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -158,11 +158,13 @@ if((int)o->value())B_wav->activate(); else B_wav->deactivate();}
 filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
-strcpy(rkr->Rack_Effects[EFX_CONVOLOTRON]->Filename,filename);
-if(!rkr->Rack_Effects[EFX_CONVOLOTRON]->setfile(USERFILE))
+
+Convolotron *Efx_Convolotron = static_cast<Convolotron*>(rkr->Rack_Effects[EFX_CONVOLOTRON]);
+strcpy(Efx_Convolotron->Filename,filename);
+if(!Efx_Convolotron->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\\n", filename);
-}}
+}} selected
     xywh {106 143 46 12} labelsize 10 deactivate
     class RKR_Button
   }

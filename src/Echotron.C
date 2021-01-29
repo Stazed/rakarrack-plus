@@ -27,7 +27,8 @@
 #include "Echotron.h"
 
 Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize) :
-Effect(sample_rate, intermediate_bufsize),
+    Effect(sample_rate, intermediate_bufsize),
+    Filename(),
     File(),
     error(),
     fSAMPLE_RATE(sample_rate),

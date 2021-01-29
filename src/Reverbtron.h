@@ -95,7 +95,8 @@ public:
     /* Change quality */
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
-    
+
+    char Filename[128];
     RvbFile File;
 
 private:

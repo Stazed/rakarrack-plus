@@ -29,7 +29,7 @@ widget_class RevtronGui {
 }
 rkr->EFX_Bypass[EFX_REVERBTRON]=(int)o->value();
 if((int) o->value()==0) rkr->Rack_Effects[EFX_REVERBTRON]->cleanup();
-rgui->findpos(EFX_REVERBTRON,(int)o->value(),o);} selected
+rgui->findpos(EFX_REVERBTRON,(int)o->value(),o);}
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -254,12 +254,14 @@ if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
 filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rvb");
-strcpy(rkr->Rack_Effects[EFX_REVERBTRON]->Filename,filename);
 
-if(!rkr->Rack_Effects[EFX_REVERBTRON]->setfile(USERFILE))
+Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(rkr->Rack_Effects[EFX_REVERBTRON]);
+strcpy(Efx_Reverbtron->Filename,filename);
+
+if(!Efx_Reverbtron->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\\n", filename);
-}}
+}} selected
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }

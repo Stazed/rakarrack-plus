@@ -137,8 +137,10 @@ void ConvoGui::cb_B_wav_i(RKR_Button*, void*) {
 filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
-strcpy(rkr->Rack_Effects[EFX_CONVOLOTRON]->Filename,filename);
-if(!rkr->Rack_Effects[EFX_CONVOLOTRON]->setfile(USERFILE))
+
+Convolotron *Efx_Convolotron = static_cast<Convolotron*>(rkr->Rack_Effects[EFX_CONVOLOTRON]);
+strcpy(Efx_Convolotron->Filename,filename);
+if(!Efx_Convolotron->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\n", filename);
 };

@@ -33,7 +33,7 @@ widget_class {\#include "common_gui_menu.h"} EchotronGui {
 }
 rkr->EFX_Bypass[EFX_ECHOTRON]=(int)o->value();
 if((int) o->value()==0) rkr->Rack_Effects[EFX_ECHOTRON]->cleanup();
-rgui->findpos(EFX_ECHOTRON,(int)o->value(),o);} selected
+rgui->findpos(EFX_ECHOTRON,(int)o->value(),o);}
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -59,7 +59,9 @@ echotron_af->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Filters));
 echotron_mf->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Filter));
 echotron_md->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Delay));
 echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
-echotron_length->maximum(rkr->Rack_Effects[EFX_ECHOTRON]->get_file_length());}
+
+Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
+echotron_length->maximum(Efx_Echotron->get_file_length());}
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -237,15 +239,18 @@ if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
 filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".dly");
-strcpy(rkr->Rack_Effects[EFX_ECHOTRON]->Filename,filename);
 
-if(!rkr->Rack_Effects[EFX_ECHOTRON]->setfile(USERFILE))
+Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
+strcpy(Efx_Echotron->Filename,filename);
+
+if(!Efx_Echotron->setfile(USERFILE))
 {
     fl_alert("Error loading %s file!\\n", filename);
 }
 
-echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
-echotron_length->maximum(rkr->Rack_Effects[EFX_ECHOTRON]->get_file_length());}
+echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
+
+echotron_length->maximum(Efx_Echotron->get_file_length());} selected
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }
@@ -266,7 +271,9 @@ rkr->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps,(int)o->value());}
     user_data 12
     callback {rkr->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Set_File,(int)o->value());
 echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
-echotron_length->maximum(rkr->Rack_Effects[EFX_ECHOTRON]->get_file_length());}
+
+Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
+echotron_length->maximum(Efx_Echotron->get_file_length());}
     xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
