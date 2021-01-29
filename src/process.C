@@ -64,7 +64,6 @@ RKR::RKR() :
     EFX_Bypass(),
     EFX_Bank_Bypass(),
     efx_FLimiter(NULL),
-    efx_Exciter(NULL),
     efx_DistBand(NULL),
     efx_Arpie(NULL),
     efx_Expander(NULL),
@@ -380,7 +379,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_VALVE];
     delete Rack_Effects[EFX_DUAL_FLANGE];
     delete Rack_Effects[EFX_RING];
-    delete efx_Exciter;
+    delete Rack_Effects[EFX_EXCITER];
     delete efx_DistBand;
     delete efx_Arpie;
     delete efx_Expander;
@@ -640,7 +639,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_VALVE] = new Valve(fSample_rate, period);
     Rack_Effects[EFX_DUAL_FLANGE] = new Dflange(fSample_rate, period);
     Rack_Effects[EFX_RING] = new Ring(fSample_rate, period);
-    efx_Exciter = new Exciter(fSample_rate, period);
+    Rack_Effects[EFX_EXCITER] = new Exciter(fSample_rate, period);
     efx_DistBand = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
     efx_Arpie = new Arpie(fSample_rate, period);
     efx_Expander = new Expander(fSample_rate, period);
@@ -1156,7 +1155,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_VALVE]->cleanup();
     Rack_Effects[EFX_DUAL_FLANGE]->cleanup();
     Rack_Effects[EFX_RING]->cleanup();
-    efx_Exciter->cleanup();
+    Rack_Effects[EFX_EXCITER]->cleanup();
     efx_DistBand->cleanup();
     efx_Arpie->cleanup();
     efx_Expander->cleanup();
@@ -1481,7 +1480,7 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_EXCITER:
                 if (EFX_Bypass[EFX_EXCITER])
                 {
-                    efx_Exciter->out(efxoutl, efxoutr);
+                    Rack_Effects[EFX_EXCITER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

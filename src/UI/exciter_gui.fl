@@ -26,7 +26,7 @@ widget_class ExciterGui {
 }
 rkr->EFX_Bypass[EFX_EXCITER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Exciter->cleanup();
+rkr->Rack_Effects[EFX_EXCITER]->cleanup();
 rgui->findpos(EFX_EXCITER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -35,20 +35,20 @@ rgui->findpos(EFX_EXCITER,(int)o->value(),o);} selected
     label Preset
     user_data 12022
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12022))rkr->efx_Exciter->setpreset((int) o->value());
-ex_Gain->value(rkr->efx_Exciter->getpar(Exciter_Gain));
-ex_1->value(rkr->efx_Exciter->getpar(Exciter_Harm_1));
-ex_2->value(rkr->efx_Exciter->getpar(Exciter_Harm_2));
-ex_3->value(rkr->efx_Exciter->getpar(Exciter_Harm_3));
-ex_4->value(rkr->efx_Exciter->getpar(Exciter_Harm_4));
-ex_5->value(rkr->efx_Exciter->getpar(Exciter_Harm_5));
-ex_6->value(rkr->efx_Exciter->getpar(Exciter_Harm_6));
-ex_7->value(rkr->efx_Exciter->getpar(Exciter_Harm_7));
-ex_8->value(rkr->efx_Exciter->getpar(Exciter_Harm_8));
-ex_9->value(rkr->efx_Exciter->getpar(Exciter_Harm_9));
-ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
-ex_lfreq->value(rkr->efx_Exciter->getpar(Exciter_LPF));
-ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));}
+if((ud==0)||(ud==12022))rkr->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
+ex_Gain->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Gain));
+ex_1->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_1));
+ex_2->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_2));
+ex_3->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_3));
+ex_4->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_4));
+ex_5->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_5));
+ex_6->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_6));
+ex_7->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_7));
+ex_8->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_8));
+ex_9->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_9));
+ex_10->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_10));
+ex_lfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_LPF));
+ex_hfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_HPF));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -80,7 +80,7 @@ ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));}
  rgui->getMIDIControl(MC_Exciter_Gain);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Gain,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Gain,(int)o->value());}
     xywh {53 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -91,7 +91,7 @@ rkr->efx_Exciter->changepar(Exciter_Gain,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_LPF);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_LPF,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_LPF,(int)o->value());}
     xywh {53 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -102,7 +102,7 @@ rkr->efx_Exciter->changepar(Exciter_LPF,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_HPF);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_HPF,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_HPF,(int)o->value());}
     xywh {53 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -113,7 +113,7 @@ rkr->efx_Exciter->changepar(Exciter_HPF,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_1);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_1,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_1,(int)o->value());}
     xywh {53 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -124,7 +124,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_1,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_2);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_2,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_2,(int)o->value());}
     xywh {53 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -135,7 +135,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_2,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_3);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_3,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_3,(int)o->value());}
     xywh {53 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -146,7 +146,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_3,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_4);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_4,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_4,(int)o->value());}
     xywh {53 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -157,7 +157,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_4,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_5);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_5,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_5,(int)o->value());}
     xywh {53 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -168,7 +168,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_5,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_6);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_6,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_6,(int)o->value());}
     xywh {53 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -179,7 +179,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_6,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_7);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_7,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_7,(int)o->value());}
     xywh {53 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -190,7 +190,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_7,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_8);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_8,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_8,(int)o->value());}
     xywh {53 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -201,7 +201,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_8,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_9);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_9,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_9,(int)o->value());}
     xywh {53 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -212,7 +212,7 @@ rkr->efx_Exciter->changepar(Exciter_Harm_9,(int)o->value());}
  rgui->getMIDIControl(MC_Exciter_Harm_10);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_10,(int)o->value());}
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_10,(int)o->value());}
     xywh {53 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }

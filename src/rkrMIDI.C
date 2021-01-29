@@ -2223,55 +2223,55 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Exciter_Gain:
-        efx_Exciter->changepar(Exciter_Gain, value);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Gain, value);
         break;
 
     case MC_Exciter_LPF:
-        efx_Exciter->changepar(Exciter_LPF, ret_LPF(value));
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_LPF, ret_LPF(value));
         break;
 
     case MC_Exciter_HPF:
-        efx_Exciter->changepar(Exciter_HPF, ret_HPF(value));
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_HPF, ret_HPF(value));
         break;
 
     case MC_Exciter_Harm_1:
-        efx_Exciter->changepar(Exciter_Harm_1, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_1, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_2:
-        efx_Exciter->changepar(Exciter_Harm_2, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_2, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_3:
-        efx_Exciter->changepar(Exciter_Harm_3, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_3, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_4:
-        efx_Exciter->changepar(Exciter_Harm_4, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_4, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_5:
-        efx_Exciter->changepar(Exciter_Harm_5, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_5, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_6:
-        efx_Exciter->changepar(Exciter_Harm_6, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_6, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_7:
-        efx_Exciter->changepar(Exciter_Harm_7, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_7, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_8:
-        efx_Exciter->changepar(Exciter_Harm_8, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_8, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_9:
-        efx_Exciter->changepar(Exciter_Harm_9, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_9, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Exciter_Harm_10:
-        efx_Exciter->changepar(Exciter_Harm_10, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_10, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_DistBand_DryWet:

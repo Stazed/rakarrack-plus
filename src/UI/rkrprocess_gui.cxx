@@ -3900,55 +3900,55 @@ void RKRGUI::MIDI_control_gui_refresh()
                 RING->ring_squ->redraw();
                 break;
             case MC_Exciter_Gain:
-                EXCITER->ex_Gain->value(rkr->efx_Exciter->getpar(Exciter_Gain));
+                EXCITER->ex_Gain->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Gain));
                 EXCITER->ex_Gain->redraw();
                 break;
             case MC_Exciter_LPF:
-                EXCITER->ex_lfreq->value(rkr->efx_Exciter->getpar(Exciter_LPF));
+                EXCITER->ex_lfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_LPF));
                 EXCITER->ex_lfreq->redraw();
                 break;
             case MC_Exciter_HPF:
-                EXCITER->ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));
+                EXCITER->ex_hfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_HPF));
                 EXCITER->ex_hfreq->redraw();
                 break;
             case MC_Exciter_Harm_1:
-                EXCITER->ex_1->value(rkr->efx_Exciter->getpar(Exciter_Harm_1));
+                EXCITER->ex_1->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_1));
                 EXCITER->ex_1->redraw();
                 break;
             case MC_Exciter_Harm_2:
-                EXCITER->ex_2->value(rkr->efx_Exciter->getpar(Exciter_Harm_2));
+                EXCITER->ex_2->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_2));
                 EXCITER->ex_2->redraw();
                 break;
             case MC_Exciter_Harm_3:
-                EXCITER->ex_3->value(rkr->efx_Exciter->getpar(Exciter_Harm_3));
+                EXCITER->ex_3->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_3));
                 EXCITER->ex_3->redraw();
                 break;
             case MC_Exciter_Harm_4:
-                EXCITER->ex_4->value(rkr->efx_Exciter->getpar(Exciter_Harm_4));
+                EXCITER->ex_4->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_4));
                 EXCITER->ex_4->redraw();
                 break;
             case MC_Exciter_Harm_5:
-                EXCITER->ex_5->value(rkr->efx_Exciter->getpar(Exciter_Harm_5));
+                EXCITER->ex_5->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_5));
                 EXCITER->ex_5->redraw();
                 break;
             case MC_Exciter_Harm_6:
-                EXCITER->ex_6->value(rkr->efx_Exciter->getpar(Exciter_Harm_6));
+                EXCITER->ex_6->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_6));
                 EXCITER->ex_6->redraw();
                 break;
             case MC_Exciter_Harm_7:
-                EXCITER->ex_7->value(rkr->efx_Exciter->getpar(Exciter_Harm_7));
+                EXCITER->ex_7->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_7));
                 EXCITER->ex_7->redraw();
                 break;
             case MC_Exciter_Harm_8:
-                EXCITER->ex_8->value(rkr->efx_Exciter->getpar(Exciter_Harm_8));
+                EXCITER->ex_8->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_8));
                 EXCITER->ex_8->redraw();
                 break;
             case MC_Exciter_Harm_9:
-                EXCITER->ex_9->value(rkr->efx_Exciter->getpar(Exciter_Harm_9));
+                EXCITER->ex_9->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_9));
                 EXCITER->ex_9->redraw();
                 break;
             case MC_Exciter_Harm_10:
-                EXCITER->ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
+                EXCITER->ex_10->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_10));
                 EXCITER->ex_10->redraw();
                 break;
             case MC_DistBand_DryWet:

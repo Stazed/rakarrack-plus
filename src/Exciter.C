@@ -25,16 +25,14 @@
 #include "Exciter.h"
 
 Exciter::Exciter(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     Prm(),
     Pvolume(50),
     lpffreq(8000),
     hpffreq(2500),
     rm(),
-    harm(NULL),
-    Fpre(NULL)
+    harm(NULL)
 {
     harm = new HarmEnhancer(rm, 2500.0f, 8000.0, 1.0f, sample_rate, PERIOD);
 

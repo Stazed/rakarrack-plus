@@ -22,6 +22,7 @@
 #ifndef EXCITER_H
 #define EXCITER_H
 
+#include "Effect.h"
 #include "HarmonicEnhancer.h"
 
 const int C_EXCITER_PARAMETERS = 13;
@@ -43,7 +44,7 @@ enum Exciter_index
     Exciter_HPF
 };
 
-class Exciter
+class Exciter : public Effect
 {
 public:
     Exciter (double sample_rate, uint32_t intermediate_bufsize);
@@ -57,9 +58,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume;
 
 private:
 
@@ -77,7 +75,6 @@ private:
     float rm[10];
 
     class HarmEnhancer *harm;
-    class FPreset *Fpre;
 
 };
 

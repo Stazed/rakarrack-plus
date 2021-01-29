@@ -719,13 +719,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_EXCITER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Exciter->getpar(Exciter_Gain), efx_Exciter->getpar(Exciter_Harm_1),
-                efx_Exciter->getpar(Exciter_Harm_2), efx_Exciter->getpar(Exciter_Harm_3),
-                efx_Exciter->getpar(Exciter_Harm_4), efx_Exciter->getpar(Exciter_Harm_5),
-                efx_Exciter->getpar(Exciter_Harm_6), efx_Exciter->getpar(Exciter_Harm_7),
-                efx_Exciter->getpar(Exciter_Harm_8), efx_Exciter->getpar(Exciter_Harm_9),
-                efx_Exciter->getpar(Exciter_Harm_10), efx_Exciter->getpar(Exciter_LPF),
-                efx_Exciter->getpar(Exciter_HPF), EFX_Bypass[EFX_EXCITER]);
+                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Gain), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_1),
+                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_2), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_3),
+                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_4), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_5),
+                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_6), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_7),
+                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_8), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_9),
+                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_10), Rack_Effects[EFX_EXCITER]->getpar(Exciter_LPF),
+                Rack_Effects[EFX_EXCITER]->getpar(Exciter_HPF), EFX_Bypass[EFX_EXCITER]);
         break;
 
     case EFX_DISTBAND:
@@ -1483,9 +1483,9 @@ RKR::Actualizar_Audio()
 
         case EFX_EXCITER:
             EFX_Bypass[EFX_EXCITER] = 0;
-            efx_Exciter->cleanup();
+            Rack_Effects[EFX_EXCITER]->cleanup();
             for (i = 0; i < C_EXCITER_PARAMETERS; i++)
-                efx_Exciter->changepar(i, lv[EFX_EXCITER][i]);
+                Rack_Effects[EFX_EXCITER]->changepar(i, lv[EFX_EXCITER][i]);
             EFX_Bypass[EFX_EXCITER] = EFX_Bank_Bypass[EFX_EXCITER];
             break;
 
@@ -2366,7 +2366,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_RING_PARAMETERS; j++)
         lv[EFX_RING][j] = Rack_Effects[EFX_RING]->getpar(j);
     for (j = 0; j < C_EXCITER_PARAMETERS; j++)
-        lv[EFX_EXCITER][j] = efx_Exciter->getpar(j);
+        lv[EFX_EXCITER][j] = Rack_Effects[EFX_EXCITER]->getpar(j);
     for (j = 0; j < C_DBAND_PARAMETERS; j++)
         lv[EFX_DISTBAND][j] = efx_DistBand->getpar(j);
     for (j = 0; j < C_ARPIE_PARAMETERS; j++)

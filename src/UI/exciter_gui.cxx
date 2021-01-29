@@ -11,7 +11,7 @@ void ExciterGui::cb_exciter_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_EXCITER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Exciter->cleanup();
+rkr->Rack_Effects[EFX_EXCITER]->cleanup();
 rgui->findpos(EFX_EXCITER,(int)o->value(),o);
 }
 void ExciterGui::cb_exciter_activar(RKR_Light_Button* o, void* v) {
@@ -20,20 +20,20 @@ void ExciterGui::cb_exciter_activar(RKR_Light_Button* o, void* v) {
 
 void ExciterGui::cb_exciter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12022))rkr->efx_Exciter->setpreset((int) o->value());
-ex_Gain->value(rkr->efx_Exciter->getpar(Exciter_Gain));
-ex_1->value(rkr->efx_Exciter->getpar(Exciter_Harm_1));
-ex_2->value(rkr->efx_Exciter->getpar(Exciter_Harm_2));
-ex_3->value(rkr->efx_Exciter->getpar(Exciter_Harm_3));
-ex_4->value(rkr->efx_Exciter->getpar(Exciter_Harm_4));
-ex_5->value(rkr->efx_Exciter->getpar(Exciter_Harm_5));
-ex_6->value(rkr->efx_Exciter->getpar(Exciter_Harm_6));
-ex_7->value(rkr->efx_Exciter->getpar(Exciter_Harm_7));
-ex_8->value(rkr->efx_Exciter->getpar(Exciter_Harm_8));
-ex_9->value(rkr->efx_Exciter->getpar(Exciter_Harm_9));
-ex_10->value(rkr->efx_Exciter->getpar(Exciter_Harm_10));
-ex_lfreq->value(rkr->efx_Exciter->getpar(Exciter_LPF));
-ex_hfreq->value(rkr->efx_Exciter->getpar(Exciter_HPF));
+if((ud==0)||(ud==12022))rkr->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
+ex_Gain->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Gain));
+ex_1->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_1));
+ex_2->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_2));
+ex_3->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_3));
+ex_4->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_4));
+ex_5->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_5));
+ex_6->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_6));
+ex_7->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_7));
+ex_8->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_8));
+ex_9->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_9));
+ex_10->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_10));
+ex_lfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_LPF));
+ex_hfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_HPF));
 }
 void ExciterGui::cb_exciter_preset(RKR_Choice* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_exciter_preset_i(o,v);
@@ -54,7 +54,7 @@ void ExciterGui::cb_ex_Gain_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Gain);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Gain,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Gain,(int)o->value());
 }
 void ExciterGui::cb_ex_Gain(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_Gain_i(o,v);
@@ -66,7 +66,7 @@ void ExciterGui::cb_ex_lfreq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_LPF);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_LPF,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_LPF,(int)o->value());
 }
 void ExciterGui::cb_ex_lfreq(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_lfreq_i(o,v);
@@ -78,7 +78,7 @@ void ExciterGui::cb_ex_hfreq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_HPF);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_HPF,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_HPF,(int)o->value());
 }
 void ExciterGui::cb_ex_hfreq(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_hfreq_i(o,v);
@@ -90,7 +90,7 @@ void ExciterGui::cb_ex_1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_1);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_1,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_1,(int)o->value());
 }
 void ExciterGui::cb_ex_1(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_1_i(o,v);
@@ -102,7 +102,7 @@ void ExciterGui::cb_ex_2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_2);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_2,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_2,(int)o->value());
 }
 void ExciterGui::cb_ex_2(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_2_i(o,v);
@@ -114,7 +114,7 @@ void ExciterGui::cb_ex_3_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_3);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_3,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_3,(int)o->value());
 }
 void ExciterGui::cb_ex_3(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_3_i(o,v);
@@ -126,7 +126,7 @@ void ExciterGui::cb_ex_4_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_4);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_4,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_4,(int)o->value());
 }
 void ExciterGui::cb_ex_4(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_4_i(o,v);
@@ -138,7 +138,7 @@ void ExciterGui::cb_ex_5_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_5);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_5,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_5,(int)o->value());
 }
 void ExciterGui::cb_ex_5(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_5_i(o,v);
@@ -150,7 +150,7 @@ void ExciterGui::cb_ex_6_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_6);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_6,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_6,(int)o->value());
 }
 void ExciterGui::cb_ex_6(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_6_i(o,v);
@@ -162,7 +162,7 @@ void ExciterGui::cb_ex_7_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_7);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_7,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_7,(int)o->value());
 }
 void ExciterGui::cb_ex_7(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_7_i(o,v);
@@ -174,7 +174,7 @@ void ExciterGui::cb_ex_8_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_8);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_8,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_8,(int)o->value());
 }
 void ExciterGui::cb_ex_8(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_8_i(o,v);
@@ -186,7 +186,7 @@ void ExciterGui::cb_ex_9_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_9);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_9,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_9,(int)o->value());
 }
 void ExciterGui::cb_ex_9(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_9_i(o,v);
@@ -198,7 +198,7 @@ void ExciterGui::cb_ex_10_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Exciter_Harm_10);
  return;
 } 
-rkr->efx_Exciter->changepar(Exciter_Harm_10,(int)o->value());
+rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_10,(int)o->value());
 }
 void ExciterGui::cb_ex_10(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_10_i(o,v);
