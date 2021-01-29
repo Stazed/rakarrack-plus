@@ -760,12 +760,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_SHUFFLE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Shuffle->getpar(Shuffle_DryWet), efx_Shuffle->getpar(Shuffle_Gain_L),
-                efx_Shuffle->getpar(Shuffle_Gain_ML), efx_Shuffle->getpar(Shuffle_Gain_MH),
-                efx_Shuffle->getpar(Shuffle_Gain_H), efx_Shuffle->getpar(Shuffle_Freq_L),
-                efx_Shuffle->getpar(Shuffle_Freq_ML), efx_Shuffle->getpar(Shuffle_Freq_MH),
-                efx_Shuffle->getpar(Shuffle_Freq_H), efx_Shuffle->getpar(Shuffle_Width),
-                efx_Shuffle->getpar(Shuffle_F_Band), EFX_Bypass[EFX_SHUFFLE]);
+                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_DryWet), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_L),
+                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_ML), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_MH),
+                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_H), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_L),
+                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_ML), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_MH),
+                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_H), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Width),
+                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_F_Band), EFX_Bypass[EFX_SHUFFLE]);
         break;
 
     case EFX_SYNTHFILTER:
@@ -1515,9 +1515,9 @@ RKR::Actualizar_Audio()
 
         case EFX_SHUFFLE:
             EFX_Bypass[EFX_SHUFFLE] = 0;
-            efx_Shuffle->cleanup();
+            Rack_Effects[EFX_SHUFFLE]->cleanup();
             for (i = 0; i < C_SHUFFLE_PARAMETERS; i++)
-                efx_Shuffle->changepar(i, lv[EFX_SHUFFLE][i]);
+                Rack_Effects[EFX_SHUFFLE]->changepar(i, lv[EFX_SHUFFLE][i]);
             EFX_Bypass[EFX_SHUFFLE] = EFX_Bank_Bypass[EFX_SHUFFLE];
             break;
 
@@ -2374,7 +2374,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_EXPANDER_PARAMETERS; j++)
         lv[EFX_EXPANDER][j] = Rack_Effects[EFX_EXPANDER]->getpar(j);
     for (j = 0; j < C_SHUFFLE_PARAMETERS; j++)
-        lv[EFX_SHUFFLE][j] = efx_Shuffle->getpar(j);
+        lv[EFX_SHUFFLE][j] = Rack_Effects[EFX_SHUFFLE]->getpar(j);
     for (j = 0; j < C_SYNTHFILTER_PARAMETERS; j++)
         lv[EFX_SYNTHFILTER][j] = Rack_Effects[EFX_SYNTHFILTER]->getpar(j);
     for (j = 0; j < C_VARYBAND_PARAMETERS; j++)

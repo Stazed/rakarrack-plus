@@ -11,7 +11,7 @@ void ShuffleGui::cb_shuffle_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_SHUFFLE]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Shuffle->cleanup();
+rkr->Rack_Effects[EFX_SHUFFLE]->cleanup();
 rgui->findpos(EFX_SHUFFLE,(int)o->value(),o);
 }
 void ShuffleGui::cb_shuffle_activar(RKR_Light_Button* o, void* v) {
@@ -20,18 +20,18 @@ void ShuffleGui::cb_shuffle_activar(RKR_Light_Button* o, void* v) {
 
 void ShuffleGui::cb_shuffle_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12026))rkr->efx_Shuffle->setpreset((int)o->value());
-shuffle_volL->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_L));
-shuffle_volML->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_ML));
-shuffle_volMH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_MH));
-shuffle_volH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_H));
-shuffle_cross1->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_L));
-shuffle_cross2->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_ML));
-shuffle_cross3->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_MH));
-shuffle_cross4->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_H));
-shuffle_Q->value(rkr->efx_Shuffle->getpar(Shuffle_Width));
-shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(Shuffle_DryWet)));
-shuffle_E->value(rkr->efx_Shuffle->getpar(Shuffle_F_Band));
+if((ud==0)||(ud==12026))rkr->Rack_Effects[EFX_SHUFFLE]->setpreset((int)o->value());
+shuffle_volL->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_L));
+shuffle_volML->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_ML));
+shuffle_volMH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_MH));
+shuffle_volH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_H));
+shuffle_cross1->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_L));
+shuffle_cross2->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_ML));
+shuffle_cross3->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_MH));
+shuffle_cross4->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_H));
+shuffle_Q->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Width));
+shuffle_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_DryWet)));
+shuffle_E->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_F_Band));
 }
 void ShuffleGui::cb_shuffle_preset(RKR_Choice* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_preset_i(o,v);
@@ -52,7 +52,7 @@ void ShuffleGui::cb_shuffle_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_DryWet);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_DryWet,Dry_Wet((int)o->value()));
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_DryWet,Dry_Wet((int)o->value()));
 }
 void ShuffleGui::cb_shuffle_WD(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_WD_i(o,v);
@@ -64,7 +64,7 @@ void ShuffleGui::cb_shuffle_cross1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Freq_L);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_Freq_L,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_L,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_cross1(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross1_i(o,v);
@@ -76,7 +76,7 @@ void ShuffleGui::cb_shuffle_volL_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Gain_L);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_Gain_L,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_L,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_volL(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volL_i(o,v);
@@ -88,7 +88,7 @@ void ShuffleGui::cb_shuffle_cross2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Freq_ML);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_Freq_ML,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_ML,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_cross2(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross2_i(o,v);
@@ -100,7 +100,7 @@ void ShuffleGui::cb_shuffle_volML_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Gain_ML);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Gain_ML,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_ML,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_volML(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volML_i(o,v);
@@ -112,7 +112,7 @@ void ShuffleGui::cb_shuffle_cross3_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Freq_MH);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Freq_MH,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_MH,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_cross3(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross3_i(o,v);
@@ -124,7 +124,7 @@ void ShuffleGui::cb_shuffle_volMH_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Gain_MH);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Gain_MH,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_MH,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_volMH(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volMH_i(o,v);
@@ -136,7 +136,7 @@ void ShuffleGui::cb_shuffle_cross4_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Freq_H);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Freq_H,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_H,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_cross4(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_cross4_i(o,v);
@@ -148,7 +148,7 @@ void ShuffleGui::cb_shuffle_volH_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Gain_H);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Gain_H,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_H,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_volH(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_volH_i(o,v);
@@ -160,14 +160,14 @@ void ShuffleGui::cb_shuffle_Q_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shuffle_Width);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Width,(int)o->value());
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Width,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_Q(RKR_Slider* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_Q_i(o,v);
 }
 
 void ShuffleGui::cb_shuffle_E_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Shuffle->changepar(Shuffle_F_Band,(int)o->value());
+  rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_F_Band,(int)o->value());
 }
 void ShuffleGui::cb_shuffle_E(RKR_Check_Button* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_E_i(o,v);

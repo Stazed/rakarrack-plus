@@ -26,6 +26,7 @@
 #ifndef SHUFFLE_H
 #define SHUFFLE_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 
 const int C_SHUFFLE_PARAMETERS = 11;
@@ -46,7 +47,7 @@ enum Shuffle_Index
 };
 
 
-class Shuffle
+class Shuffle : public Effect
 {
 public:
     Shuffle (double sample_rate, uint32_t intermediate_bufsize);
@@ -63,14 +64,11 @@ public:
     
     void initialize();
     void clear_initialize();
-    
-    int Ppreset;
-    float outvolume;
+
+private:
 
     float *inputl;
     float *inputr;
-
-private:
 
     void setvolume (int Pvolume);
     void setCross1 (int value);
@@ -106,8 +104,6 @@ private:
     AnalogFilter  *lr, *hr;
     AnalogFilter  *mlr,*mhr;
     float* interpbuf; //buffer for filters
-
-    class FPreset *Fpre;
 
 };
 

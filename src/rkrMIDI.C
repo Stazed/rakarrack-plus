@@ -2375,43 +2375,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Shuffle_DryWet:
-        efx_Shuffle->changepar(Shuffle_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_DryWet, Dry_Wet(value));
         break;
 
     case MC_Shuffle_Freq_L:
-        efx_Shuffle->changepar(Shuffle_Freq_L, 20 + (int) ((float) value * C_MC_980_RANGE));
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_L, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case MC_Shuffle_Gain_L:
-        efx_Shuffle->changepar(Shuffle_Gain_L, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_L, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Shuffle_Freq_ML:
-        efx_Shuffle->changepar(Shuffle_Freq_ML, 400 + (int) ((float) value * C_MC_3600_RANGE));
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_ML, 400 + (int) ((float) value * C_MC_3600_RANGE));
         break;
 
     case MC_Shuffle_Gain_ML:
-        efx_Shuffle->changepar(Shuffle_Gain_ML, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_ML, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Shuffle_Freq_MH:
-        efx_Shuffle->changepar(Shuffle_Freq_MH, 1200 + (int) ((float) value * C_MC_6800_RANGE));
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_MH, 1200 + (int) ((float) value * C_MC_6800_RANGE));
         break;
 
     case MC_Shuffle_Gain_MH:
-        efx_Shuffle->changepar(Shuffle_Gain_MH, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_MH, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Shuffle_Freq_H:
-        efx_Shuffle->changepar(Shuffle_Freq_H, 6000 + (int) ((float) value * C_MC_20000_RANGE));
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_H, 6000 + (int) ((float) value * C_MC_20000_RANGE));
         break;
 
     case MC_Shuffle_Gain_H:
-        efx_Shuffle->changepar(Shuffle_Gain_H, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_H, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Shuffle_Width:
-        efx_Shuffle->changepar(Shuffle_Width, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Width, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Synthfilter_DryWet:

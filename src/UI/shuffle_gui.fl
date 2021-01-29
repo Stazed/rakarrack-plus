@@ -29,7 +29,7 @@ widget_class ShuffleGui {
 }
 rkr->EFX_Bypass[EFX_SHUFFLE]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Shuffle->cleanup();
+rkr->Rack_Effects[EFX_SHUFFLE]->cleanup();
 rgui->findpos(EFX_SHUFFLE,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -38,18 +38,18 @@ rgui->findpos(EFX_SHUFFLE,(int)o->value(),o);} selected
     label Preset
     user_data 12026
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12026))rkr->efx_Shuffle->setpreset((int)o->value());
-shuffle_volL->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_L));
-shuffle_volML->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_ML));
-shuffle_volMH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_MH));
-shuffle_volH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_H));
-shuffle_cross1->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_L));
-shuffle_cross2->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_ML));
-shuffle_cross3->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_MH));
-shuffle_cross4->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_H));
-shuffle_Q->value(rkr->efx_Shuffle->getpar(Shuffle_Width));
-shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(Shuffle_DryWet)));
-shuffle_E->value(rkr->efx_Shuffle->getpar(Shuffle_F_Band));}
+if((ud==0)||(ud==12026))rkr->Rack_Effects[EFX_SHUFFLE]->setpreset((int)o->value());
+shuffle_volL->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_L));
+shuffle_volML->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_ML));
+shuffle_volMH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_MH));
+shuffle_volH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_H));
+shuffle_cross1->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_L));
+shuffle_cross2->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_ML));
+shuffle_cross3->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_MH));
+shuffle_cross4->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_H));
+shuffle_Q->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Width));
+shuffle_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_DryWet)));
+shuffle_E->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_F_Band));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -81,7 +81,7 @@ shuffle_E->value(rkr->efx_Shuffle->getpar(Shuffle_F_Band));}
  rgui->getMIDIControl(MC_Shuffle_DryWet);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_DryWet,Dry_Wet((int)o->value()));}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_DryWet,Dry_Wet((int)o->value()));}
     xywh {56 31 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -92,7 +92,7 @@ rkr->efx_Shuffle->changepar(Shuffle_DryWet,Dry_Wet((int)o->value()));}
  rgui->getMIDIControl(MC_Shuffle_Freq_L);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_Freq_L,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_L,(int)o->value());}
     xywh {56 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -103,7 +103,7 @@ rkr->efx_Shuffle->changepar(Shuffle_Freq_L,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Gain_L);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_Gain_L,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_L,(int)o->value());}
     xywh {56 64 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -114,7 +114,7 @@ rkr->efx_Shuffle->changepar(Shuffle_Gain_L,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Freq_ML);
  return;
 } 
-rkr->efx_Shuffle->changepar(Shuffle_Freq_ML,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_ML,(int)o->value());}
     tooltip {Mid Low Frequency} xywh {56 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 400 maximum 4000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -125,7 +125,7 @@ rkr->efx_Shuffle->changepar(Shuffle_Freq_ML,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Gain_ML);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Gain_ML,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_ML,(int)o->value());}
     tooltip {Mid Low Gain} xywh {56 94 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -136,7 +136,7 @@ rkr->efx_Shuffle->changepar(Shuffle_Gain_ML,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Freq_MH);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Freq_MH,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_MH,(int)o->value());}
     tooltip {Mid High Frequency} xywh {56 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1200 maximum 8000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -147,7 +147,7 @@ rkr->efx_Shuffle->changepar(Shuffle_Freq_MH,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Gain_MH);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Gain_MH,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_MH,(int)o->value());}
     tooltip {Mid High Gain} xywh {56 124 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -158,7 +158,7 @@ rkr->efx_Shuffle->changepar(Shuffle_Gain_MH,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Freq_H);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Freq_H,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_H,(int)o->value());}
     tooltip {High Frequency} xywh {56 139 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -169,7 +169,7 @@ rkr->efx_Shuffle->changepar(Shuffle_Freq_H,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Gain_H);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Gain_H,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_H,(int)o->value());}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -180,14 +180,14 @@ rkr->efx_Shuffle->changepar(Shuffle_Gain_H,(int)o->value());}
  rgui->getMIDIControl(MC_Shuffle_Width);
  return;
 }
-rkr->efx_Shuffle->changepar(Shuffle_Width,(int)o->value());}
+rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Width,(int)o->value());}
     tooltip Width xywh {56 169 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button shuffle_E {
     label Rev
     user_data 2
-    callback {rkr->efx_Shuffle->changepar(Shuffle_F_Band,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_F_Band,(int)o->value());}
     tooltip {Filtered Band - (Uncheck = Mid: Check = Side)} xywh {2 167 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

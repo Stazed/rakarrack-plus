@@ -32,8 +32,7 @@
  */
 
 Shuffle::Shuffle(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     inputl(NULL),
     inputr(NULL),
     PERIOD(intermediate_bufsize),
@@ -58,8 +57,7 @@ Shuffle::Shuffle(double sample_rate, uint32_t intermediate_bufsize) :
     hr(NULL),
     mlr(NULL),
     mhr(NULL),
-    interpbuf(NULL),
-    Fpre(NULL)
+    interpbuf(NULL)
 {
     initialize();
 

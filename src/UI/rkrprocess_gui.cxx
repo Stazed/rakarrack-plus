@@ -4052,43 +4052,43 @@ void RKRGUI::MIDI_control_gui_refresh()
                 EXPANDER->expander_HPF->redraw();
                 break;
             case MC_Shuffle_DryWet:
-                SHUFFLE->shuffle_WD->value(Dry_Wet(rkr->efx_Shuffle->getpar(Shuffle_DryWet)));
+                SHUFFLE->shuffle_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_DryWet)));
                 SHUFFLE->shuffle_WD->redraw();
                 break;
             case MC_Shuffle_Freq_L:
-                SHUFFLE->shuffle_cross1->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_L));
+                SHUFFLE->shuffle_cross1->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_L));
                 SHUFFLE->shuffle_cross1->redraw();
                 break;
             case MC_Shuffle_Gain_L:
-                SHUFFLE->shuffle_volL->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_L));
+                SHUFFLE->shuffle_volL->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_L));
                 SHUFFLE->shuffle_volL->redraw();
                 break;
             case MC_Shuffle_Freq_ML:
-                SHUFFLE->shuffle_cross2->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_ML));
+                SHUFFLE->shuffle_cross2->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_ML));
                 SHUFFLE->shuffle_cross2->redraw();
                 break;
             case MC_Shuffle_Gain_ML:
-                SHUFFLE->shuffle_volML->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_ML));
+                SHUFFLE->shuffle_volML->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_ML));
                 SHUFFLE->shuffle_volML->redraw();
                 break;
             case MC_Shuffle_Freq_MH:
-                SHUFFLE->shuffle_cross3->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_MH));
+                SHUFFLE->shuffle_cross3->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_MH));
                 SHUFFLE->shuffle_cross3->redraw();
                 break;
             case MC_Shuffle_Gain_MH:
-                SHUFFLE->shuffle_volMH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_MH));
+                SHUFFLE->shuffle_volMH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_MH));
                 SHUFFLE->shuffle_volMH->redraw();
                 break;
             case MC_Shuffle_Freq_H:
-                SHUFFLE->shuffle_cross4->value(rkr->efx_Shuffle->getpar(Shuffle_Freq_H));
+                SHUFFLE->shuffle_cross4->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_H));
                 SHUFFLE->shuffle_cross4->redraw();
                 break;
             case MC_Shuffle_Gain_H:
-                SHUFFLE->shuffle_volH->value(rkr->efx_Shuffle->getpar(Shuffle_Gain_H));
+                SHUFFLE->shuffle_volH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_H));
                 SHUFFLE->shuffle_volH->redraw();
                 break;
             case MC_Shuffle_Width:
-                SHUFFLE->shuffle_Q->value(rkr->efx_Shuffle->getpar(Shuffle_Width));
+                SHUFFLE->shuffle_Q->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Width));
                 SHUFFLE->shuffle_Q->redraw();
                 break;
             case MC_Synthfilter_DryWet:

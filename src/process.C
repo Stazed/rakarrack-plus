@@ -64,7 +64,6 @@ RKR::RKR() :
     EFX_Bypass(),
     EFX_Bank_Bypass(),
     efx_FLimiter(NULL),
-    efx_Shuffle(NULL),
     efx_VaryBand(NULL),
     U_Resample(NULL),
     D_Resample(NULL),
@@ -379,7 +378,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_DISTBAND];
     delete Rack_Effects[EFX_ARPIE];
     delete Rack_Effects[EFX_EXPANDER];
-    delete efx_Shuffle;
+    delete Rack_Effects[EFX_SHUFFLE];
     delete Rack_Effects[EFX_SYNTHFILTER];
     delete efx_VaryBand;
     delete Rack_Effects[EFX_CONVOLOTRON];
@@ -639,7 +638,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_DISTBAND] = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
     Rack_Effects[EFX_ARPIE] = new Arpie(fSample_rate, period);
     Rack_Effects[EFX_EXPANDER] = new Expander(fSample_rate, period);
-    efx_Shuffle = new Shuffle(fSample_rate, period);
+    Rack_Effects[EFX_SHUFFLE] = new Shuffle(fSample_rate, period);
     Rack_Effects[EFX_SYNTHFILTER] = new Synthfilter(fSample_rate, period);
     efx_VaryBand = new VaryBand(fSample_rate, period);
     Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
@@ -1155,7 +1154,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_DISTBAND]->cleanup();
     Rack_Effects[EFX_ARPIE]->cleanup();
     Rack_Effects[EFX_EXPANDER]->cleanup();
-    efx_Shuffle->cleanup();
+    Rack_Effects[EFX_SHUFFLE]->cleanup();
     Rack_Effects[EFX_SYNTHFILTER]->cleanup();
     efx_VaryBand->cleanup();
     Rack_Effects[EFX_CONVOLOTRON]->cleanup();
@@ -1508,8 +1507,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_SHUFFLE:
                 if (EFX_Bypass[EFX_SHUFFLE])
                 {
-                    efx_Shuffle->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_SHUFFLE, efx_Shuffle->outvolume);
+                    Rack_Effects[EFX_SHUFFLE]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_SHUFFLE, Rack_Effects[EFX_SHUFFLE]->outvolume);
                 }
                 break;
 
