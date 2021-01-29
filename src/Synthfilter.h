@@ -29,6 +29,8 @@
 
 #ifndef SYNTHFILTER_H
 #define SYNTHFILTER_H
+
+#include "Effect.h"
 #include "EffectLFO.h"
 
 const int C_SYNTHFILTER_PARAMETERS = 16;
@@ -53,7 +55,7 @@ enum Synthfilter_Index
     Synthfilter_Offset
 };
 
-class Synthfilter
+class Synthfilter : public Effect
 {
 public:
     Synthfilter (double sample_rate, uint32_t intermediate_bufsize);
@@ -67,9 +69,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-
-    int Ppreset;
-    float outvolume;
 
 private:
 
@@ -110,8 +109,6 @@ private:
     float Rmax;	// Resistor parallel to FET
     float C, Clp, Chp;	        // Capacitor
 
-    class FPreset *Fpre;
-    
     EffectLFO* lfo;	         //Filter modulator
 };
 

@@ -736,7 +736,6 @@ public:
 
     class Compressor *efx_FLimiter;
 
-    class Synthfilter *efx_Synthfilter;
     class Shuffle *efx_Shuffle;
     class VaryBand *efx_VaryBand;
 

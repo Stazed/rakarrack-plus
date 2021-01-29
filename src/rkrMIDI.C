@@ -2415,47 +2415,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Synthfilter_DryWet:
-        efx_Synthfilter->changepar(Synthfilter_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_DryWet, Dry_Wet(value));
         break;
 
     case MC_Synthfilter_Distort:
-        efx_Synthfilter->changepar(Synthfilter_Distort, value);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Distort, value);
         break;
 
     case MC_Synthfilter_LFO_Tempo:
-        efx_Synthfilter->changepar(Synthfilter_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Synthfilter_LFO_Stereo:
-        efx_Synthfilter->changepar(Synthfilter_LFO_Stereo, value);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Stereo, value);
         break;
 
     case MC_Synthfilter_Width:
-        efx_Synthfilter->changepar(Synthfilter_Width, value);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Width, value);
         break;
 
     case MC_Synthfilter_Feedback:
-        efx_Synthfilter->changepar(Synthfilter_Feedback, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Feedback, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Synthfilter_Depth:
-        efx_Synthfilter->changepar(Synthfilter_Depth, value);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Depth, value);
         break;
 
     case MC_Synthfilter_Env_Sens:
-        efx_Synthfilter->changepar(Synthfilter_Env_Sens, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Env_Sens, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Synthfilter_Attack:
-        efx_Synthfilter->changepar(Synthfilter_Attack, 5 + (int) ((float) value * C_MC_995_RANGE));
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Attack, 5 + (int) ((float) value * C_MC_995_RANGE));
         break;
 
     case MC_Synthfilter_Release:
-        efx_Synthfilter->changepar(Synthfilter_Release, 5 + (int) ((float) value * C_MC_495_RANGE));
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Release, 5 + (int) ((float) value * C_MC_495_RANGE));
         break;
 
     case MC_Synthfilter_Offset:
-        efx_Synthfilter->changepar(Synthfilter_Offset, value);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Offset, value);
         break;
 
     case MC_VaryBand_DryWet:
@@ -3293,7 +3293,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Synthfilter_LFO_Random:
-        efx_Synthfilter->changepar(Synthfilter_LFO_Random, value);
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Random, value);
         break;
 
     case MC_Harm_Select:
@@ -3373,7 +3373,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Synthfilter_LFO_Type:
-        efx_Synthfilter->changepar(Synthfilter_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_VaryBand_LFO_Type_1:

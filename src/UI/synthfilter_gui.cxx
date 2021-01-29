@@ -11,7 +11,7 @@ void SynthfilterGui::cb_synthfilter_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_SYNTHFILTER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_Synthfilter->cleanup();
+rkr->Rack_Effects[EFX_SYNTHFILTER]->cleanup();
 rgui->findpos(EFX_SYNTHFILTER,(int)o->value(),o);
 }
 void SynthfilterGui::cb_synthfilter_activar(RKR_Light_Button* o, void* v) {
@@ -20,23 +20,23 @@ void SynthfilterGui::cb_synthfilter_activar(RKR_Light_Button* o, void* v) {
 
 void SynthfilterGui::cb_synthfilter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12027))rkr->efx_Synthfilter->setpreset((int) o->value());
-synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(Synthfilter_DryWet)));
-synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(Synthfilter_Distort));
-synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
-synthfilter_rand->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Random));
-synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Type));
-synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Stereo));
-synthfilter_width->value(rkr->efx_Synthfilter->getpar(Synthfilter_Width));
-synthfilter_Lstages->value(rkr->efx_Synthfilter->getpar(Synthfilter_LPF_Stages));
-synthfilter_Hstages->value(rkr->efx_Synthfilter->getpar(Synthfilter_HPF_Stages));
-synthfilter_fb->value(rkr->efx_Synthfilter->getpar(Synthfilter_Feedback));
-synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(Synthfilter_Offset));
-synthfilter_subs->value(rkr->efx_Synthfilter->getpar(Synthfilter_Subtract));
-synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(Synthfilter_Depth));
-synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(Synthfilter_Env_Sens));
-synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Attack));
-synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));
+if((ud==0)||(ud==12027))rkr->Rack_Effects[EFX_SYNTHFILTER]->setpreset((int) o->value());
+synthfilter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet)));
+synthfilter_Distort->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort));
+synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
+synthfilter_rand->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random));
+synthfilter_lfotype->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type));
+synthfilter_stdf->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo));
+synthfilter_width->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width));
+synthfilter_Lstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LPF_Stages));
+synthfilter_Hstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_HPF_Stages));
+synthfilter_fb->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback));
+synthfilter_Offset->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset));
+synthfilter_subs->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Subtract));
+synthfilter_dpth->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth));
+synthfilter_EnvSens->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens));
+synthfilter_ATime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack));
+synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));
 }
 void SynthfilterGui::cb_synthfilter_preset(RKR_Choice* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_preset_i(o,v);
@@ -60,7 +60,7 @@ void SynthfilterGui::cb_synthfilter_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_DryWet);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_DryWet,Dry_Wet((int)(o->value())));
 }
 void SynthfilterGui::cb_synthfilter_WD(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_WD_i(o,v);
@@ -72,7 +72,7 @@ void SynthfilterGui::cb_synthfilter_Distort_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Distort);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Distort,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Distort,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_Distort(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Distort_i(o,v);
@@ -84,7 +84,7 @@ void SynthfilterGui::cb_synthfilter_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_LFO_Tempo);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Tempo,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Tempo,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_freq(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_freq_i(o,v);
@@ -96,7 +96,7 @@ void SynthfilterGui::cb_synthfilter_rand_i(RKR_Value_Input* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_LFO_Random);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Random,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Random,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_rand(RKR_Value_Input* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_rand_i(o,v);
@@ -109,14 +109,14 @@ void SynthfilterGui::cb_synthfilter_lfotype_i(RKR_Choice* o, void*) {
  return;
 }
 
-rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Type,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Type,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_lfotype(RKR_Choice* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_lfotype_i(o,v);
 }
 
 void SynthfilterGui::cb_synthfilter_subs_i(RKR_Check_Button* o, void*) {
-  rkr->efx_Synthfilter->changepar(Synthfilter_Subtract,(int)o->value());
+  rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Subtract,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_subs(RKR_Check_Button* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_subs_i(o,v);
@@ -128,7 +128,7 @@ void SynthfilterGui::cb_synthfilter_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_LFO_Stereo);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_LFO_Stereo,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Stereo,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_stdf(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_stdf_i(o,v);
@@ -140,7 +140,7 @@ void SynthfilterGui::cb_synthfilter_width_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Width);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Width,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Width,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_width(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_width_i(o,v);
@@ -152,21 +152,21 @@ void SynthfilterGui::cb_synthfilter_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Feedback);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Feedback,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Feedback,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_fb(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_fb_i(o,v);
 }
 
 void SynthfilterGui::cb_synthfilter_Lstages_i(RKR_Counter* o, void*) {
-  rkr->efx_Synthfilter->changepar(Synthfilter_LPF_Stages,(int)o->value());
+  rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LPF_Stages,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_Lstages(RKR_Counter* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Lstages_i(o,v);
 }
 
 void SynthfilterGui::cb_synthfilter_Hstages_i(RKR_Counter* o, void*) {
-  rkr->efx_Synthfilter->changepar(Synthfilter_HPF_Stages,(int)o->value());
+  rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_HPF_Stages,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_Hstages(RKR_Counter* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Hstages_i(o,v);
@@ -178,7 +178,7 @@ void SynthfilterGui::cb_synthfilter_dpth_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Depth);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Depth,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Depth,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_dpth(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_dpth_i(o,v);
@@ -190,7 +190,7 @@ void SynthfilterGui::cb_synthfilter_EnvSens_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Env_Sens);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Env_Sens,(int)(o->value()));
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Env_Sens,(int)(o->value()));
 }
 void SynthfilterGui::cb_synthfilter_EnvSens(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_EnvSens_i(o,v);
@@ -202,7 +202,7 @@ void SynthfilterGui::cb_synthfilter_ATime_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Attack);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Attack,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Attack,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_ATime(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_ATime_i(o,v);
@@ -214,7 +214,7 @@ void SynthfilterGui::cb_synthfilter_RTime_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Release);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Release,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Release,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_RTime(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_RTime_i(o,v);
@@ -226,7 +226,7 @@ void SynthfilterGui::cb_synthfilter_Offset_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Synthfilter_Offset);
  return;
 }
-rkr->efx_Synthfilter->changepar(Synthfilter_Offset,(int)o->value());
+rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Offset,(int)o->value());
 }
 void SynthfilterGui::cb_synthfilter_Offset(RKR_Slider* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_Offset_i(o,v);

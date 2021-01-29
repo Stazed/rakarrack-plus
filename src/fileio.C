@@ -770,14 +770,14 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_SYNTHFILTER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Synthfilter->getpar(Synthfilter_DryWet), efx_Synthfilter->getpar(Synthfilter_Distort),
-                efx_Synthfilter->getpar(Synthfilter_LFO_Tempo), efx_Synthfilter->getpar(Synthfilter_LFO_Random),
-                efx_Synthfilter->getpar(Synthfilter_LFO_Type), efx_Synthfilter->getpar(Synthfilter_LFO_Stereo),
-                efx_Synthfilter->getpar(Synthfilter_Width), efx_Synthfilter->getpar(Synthfilter_Feedback),
-                efx_Synthfilter->getpar(Synthfilter_LPF_Stages), efx_Synthfilter->getpar(Synthfilter_HPF_Stages),
-                efx_Synthfilter->getpar(Synthfilter_Subtract), efx_Synthfilter->getpar(Synthfilter_Depth),
-                efx_Synthfilter->getpar(Synthfilter_Env_Sens), efx_Synthfilter->getpar(Synthfilter_Attack),
-                efx_Synthfilter->getpar(Synthfilter_Release), efx_Synthfilter->getpar(Synthfilter_Offset),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LPF_Stages), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_HPF_Stages),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Subtract), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack),
+                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset),
                 EFX_Bypass[EFX_SYNTHFILTER]);
         break;
 
@@ -1523,9 +1523,9 @@ RKR::Actualizar_Audio()
 
         case EFX_SYNTHFILTER:
             EFX_Bypass[EFX_SYNTHFILTER] = 0;
-            efx_Synthfilter->cleanup();
+            Rack_Effects[EFX_SYNTHFILTER]->cleanup();
             for (i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
-                efx_Synthfilter->changepar(i, lv[EFX_SYNTHFILTER][i]);
+                Rack_Effects[EFX_SYNTHFILTER]->changepar(i, lv[EFX_SYNTHFILTER][i]);
             EFX_Bypass[EFX_SYNTHFILTER] = EFX_Bank_Bypass[EFX_SYNTHFILTER];
             break;
 
@@ -2376,7 +2376,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_SHUFFLE_PARAMETERS; j++)
         lv[EFX_SHUFFLE][j] = efx_Shuffle->getpar(j);
     for (j = 0; j < C_SYNTHFILTER_PARAMETERS; j++)
-        lv[EFX_SYNTHFILTER][j] = efx_Synthfilter->getpar(j);
+        lv[EFX_SYNTHFILTER][j] = Rack_Effects[EFX_SYNTHFILTER]->getpar(j);
     for (j = 0; j < C_VARYBAND_PARAMETERS; j++)
         lv[EFX_VARYBAND][j] = efx_VaryBand->getpar(j);
     for (j = 0; j < C_CONVO_PARAMETERS; j++)

@@ -41,8 +41,7 @@
 #define ZERO_ 0.00001f        // Same idea as above.
 
 Synthfilter::Synthfilter(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     Pvolume(),
     Pdistortion(),
@@ -83,7 +82,6 @@ Synthfilter::Synthfilter(double sample_rate, uint32_t intermediate_bufsize) :
     C(0.00000005f),             // 50 nF
     Clp(0.00000005f),
     Chp(0.00000005f),
-    Fpre(NULL),
     lfo(NULL)
 {
     lyn1 = new float[MAX_SFILTER_STAGES];

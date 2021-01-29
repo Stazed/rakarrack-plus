@@ -4092,47 +4092,47 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SHUFFLE->shuffle_Q->redraw();
                 break;
             case MC_Synthfilter_DryWet:
-                SYNTHFILTER->synthfilter_WD->value(Dry_Wet(rkr->efx_Synthfilter->getpar(Synthfilter_DryWet)));
+                SYNTHFILTER->synthfilter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet)));
                 SYNTHFILTER->synthfilter_WD->redraw();
                 break;
             case MC_Synthfilter_Distort:
-                SYNTHFILTER->synthfilter_Distort->value(rkr->efx_Synthfilter->getpar(Synthfilter_Distort));
+                SYNTHFILTER->synthfilter_Distort->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort));
                 SYNTHFILTER->synthfilter_Distort->redraw();
                 break;
             case MC_Synthfilter_LFO_Tempo:
-                SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
+                SYNTHFILTER->synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
                 SYNTHFILTER->synthfilter_freq->redraw();
                 break;
             case MC_Synthfilter_LFO_Stereo:
-                SYNTHFILTER->synthfilter_stdf->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Stereo));
+                SYNTHFILTER->synthfilter_stdf->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo));
                 SYNTHFILTER->synthfilter_stdf->redraw();
                 break;
             case MC_Synthfilter_Width:
-                SYNTHFILTER->synthfilter_width->value(rkr->efx_Synthfilter->getpar(Synthfilter_Width));
+                SYNTHFILTER->synthfilter_width->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width));
                 SYNTHFILTER->synthfilter_width->redraw();
                 break;
             case MC_Synthfilter_Feedback:
-                SYNTHFILTER->synthfilter_fb->value(rkr->efx_Synthfilter->getpar(Synthfilter_Feedback));
+                SYNTHFILTER->synthfilter_fb->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback));
                 SYNTHFILTER->synthfilter_fb->redraw();
                 break;
             case MC_Synthfilter_Depth:
-                SYNTHFILTER->synthfilter_dpth->value(rkr->efx_Synthfilter->getpar(Synthfilter_Depth));
+                SYNTHFILTER->synthfilter_dpth->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth));
                 SYNTHFILTER->synthfilter_dpth->redraw();
                 break;
             case MC_Synthfilter_Env_Sens:
-                SYNTHFILTER->synthfilter_EnvSens->value(rkr->efx_Synthfilter->getpar(Synthfilter_Env_Sens));
+                SYNTHFILTER->synthfilter_EnvSens->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens));
                 SYNTHFILTER->synthfilter_EnvSens->redraw();
                 break;
             case MC_Synthfilter_Attack:
-                SYNTHFILTER->synthfilter_ATime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Attack));
+                SYNTHFILTER->synthfilter_ATime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack));
                 SYNTHFILTER->synthfilter_ATime->redraw();
                 break;
             case MC_Synthfilter_Release:
-                SYNTHFILTER->synthfilter_RTime->value(rkr->efx_Synthfilter->getpar(Synthfilter_Release));
+                SYNTHFILTER->synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));
                 SYNTHFILTER->synthfilter_RTime->redraw();
                 break;
             case MC_Synthfilter_Offset:
-                SYNTHFILTER->synthfilter_Offset->value(rkr->efx_Synthfilter->getpar(Synthfilter_Offset));
+                SYNTHFILTER->synthfilter_Offset->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset));
                 SYNTHFILTER->synthfilter_Offset->redraw();
                 break;
             case MC_VaryBand_DryWet:
@@ -4942,7 +4942,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 Chord(0);   // update gui
                 break;
             case MC_Synthfilter_LFO_Random:
-                SYNTHFILTER->synthfilter_rand->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Random));
+                SYNTHFILTER->synthfilter_rand->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random));
                 SYNTHFILTER->synthfilter_rand->redraw();
                 break;
             case MC_Harm_Select:
@@ -5022,7 +5022,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_lfotype->redraw();
                 break;
             case MC_Synthfilter_LFO_Type:
-                SYNTHFILTER->synthfilter_lfotype->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Type));
+                SYNTHFILTER->synthfilter_lfotype->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type));
                 SYNTHFILTER->synthfilter_lfotype->redraw();
                 break;
             case MC_VaryBand_LFO_Type_1:
@@ -6105,7 +6105,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_SYNTHFILTER])
     {
-        SYNTHFILTER->synthfilter_freq->value(rkr->efx_Synthfilter->getpar(Synthfilter_LFO_Tempo));
+        SYNTHFILTER->synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
         SYNTHFILTER->synthfilter_freq->redraw();
     }
 
