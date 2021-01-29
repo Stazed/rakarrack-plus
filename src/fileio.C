@@ -752,10 +752,10 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_EXPANDER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Expander->getpar(Expander_Threshold), efx_Expander->getpar(Expander_Shape),
-                efx_Expander->getpar(Expander_Attack), efx_Expander->getpar(Expander_Release),
-                efx_Expander->getpar(Expander_LPF), efx_Expander->getpar(Expander_HPF),
-                efx_Expander->getpar(Expander_Gain), EFX_Bypass[EFX_EXPANDER]);
+                Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold), Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape),
+                Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack), Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release),
+                Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF), Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF),
+                Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain), EFX_Bypass[EFX_EXPANDER]);
         break;
 
     case EFX_SHUFFLE:
@@ -1507,9 +1507,9 @@ RKR::Actualizar_Audio()
 
         case EFX_EXPANDER:
             EFX_Bypass[EFX_EXPANDER] = 0;
-            efx_Expander->cleanup();
+            Rack_Effects[EFX_EXPANDER]->cleanup();
             for (i = 0; i < C_EXPANDER_PARAMETERS; i++)
-                efx_Expander->changepar(i, lv[EFX_EXPANDER][i]);
+                Rack_Effects[EFX_EXPANDER]->changepar(i, lv[EFX_EXPANDER][i]);
             EFX_Bypass[EFX_EXPANDER] = EFX_Bank_Bypass[EFX_EXPANDER];
             break;
 
@@ -2372,7 +2372,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_ARPIE_PARAMETERS; j++)
         lv[EFX_ARPIE][j] = Rack_Effects[EFX_ARPIE]->getpar(j);
     for (j = 0; j < C_EXPANDER_PARAMETERS; j++)
-        lv[EFX_EXPANDER][j] = efx_Expander->getpar(j);
+        lv[EFX_EXPANDER][j] = Rack_Effects[EFX_EXPANDER]->getpar(j);
     for (j = 0; j < C_SHUFFLE_PARAMETERS; j++)
         lv[EFX_SHUFFLE][j] = efx_Shuffle->getpar(j);
     for (j = 0; j < C_SYNTHFILTER_PARAMETERS; j++)

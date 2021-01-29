@@ -2347,31 +2347,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Expander_Attack:
-        efx_Expander->changepar(Expander_Attack, 1 + (int) ((float) value * C_MC_4999_RANGE));
+        Rack_Effects[EFX_EXPANDER]->changepar(Expander_Attack, 1 + (int) ((float) value * C_MC_4999_RANGE));
         break;
 
     case MC_Expander_Release:
-        efx_Expander->changepar(Expander_Release, 10 + (int) ((float) value * C_MC_990_RANGE));
+        Rack_Effects[EFX_EXPANDER]->changepar(Expander_Release, 10 + (int) ((float) value * C_MC_990_RANGE));
         break;
 
     case MC_Expander_Shape:
-        efx_Expander->changepar(Expander_Shape, 1 + (int) ((float) value * C_MC_49_RANGE));
+        Rack_Effects[EFX_EXPANDER]->changepar(Expander_Shape, 1 + (int) ((float) value * C_MC_49_RANGE));
         break;
 
     case MC_Expander_Threshold:
-        efx_Expander->changepar(Expander_Threshold, (int) ((float) value * -C_MC_80_RANGE));
+        Rack_Effects[EFX_EXPANDER]->changepar(Expander_Threshold, (int) ((float) value * -C_MC_80_RANGE));
         break;
 
     case MC_Expander_Gain:
-        efx_Expander->changepar(Expander_Gain, 1 + (int) ((float) value * C_MC_126_RANGE));
+        Rack_Effects[EFX_EXPANDER]->changepar(Expander_Gain, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case MC_Expander_LPF:
-        efx_Expander->changepar(Expander_LPF, ret_LPF(value));
+        Rack_Effects[EFX_EXPANDER]->changepar(Expander_LPF, ret_LPF(value));
         break;
 
     case MC_Expander_HPF:
-        efx_Expander->changepar(Expander_HPF, ret_HPF(value));
+        Rack_Effects[EFX_EXPANDER]->changepar(Expander_HPF, ret_HPF(value));
         break;
 
     case MC_Shuffle_DryWet:

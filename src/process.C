@@ -64,7 +64,6 @@ RKR::RKR() :
     EFX_Bypass(),
     EFX_Bank_Bypass(),
     efx_FLimiter(NULL),
-    efx_Expander(NULL),
     efx_Synthfilter(NULL),
     efx_Shuffle(NULL),
     efx_VaryBand(NULL),
@@ -380,7 +379,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_EXCITER];
     delete Rack_Effects[EFX_DISTBAND];
     delete Rack_Effects[EFX_ARPIE];
-    delete efx_Expander;
+    delete Rack_Effects[EFX_EXPANDER];
     delete efx_Shuffle;
     delete efx_Synthfilter;
     delete efx_VaryBand;
@@ -640,7 +639,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_EXCITER] = new Exciter(fSample_rate, period);
     Rack_Effects[EFX_DISTBAND] = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
     Rack_Effects[EFX_ARPIE] = new Arpie(fSample_rate, period);
-    efx_Expander = new Expander(fSample_rate, period);
+    Rack_Effects[EFX_EXPANDER] = new Expander(fSample_rate, period);
     efx_Shuffle = new Shuffle(fSample_rate, period);
     efx_Synthfilter = new Synthfilter(fSample_rate, period);
     efx_VaryBand = new VaryBand(fSample_rate, period);
@@ -1156,7 +1155,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_EXCITER]->cleanup();
     Rack_Effects[EFX_DISTBAND]->cleanup();
     Rack_Effects[EFX_ARPIE]->cleanup();
-    efx_Expander->cleanup();
+    Rack_Effects[EFX_EXPANDER]->cleanup();
     efx_Shuffle->cleanup();
     efx_Synthfilter->cleanup();
     efx_VaryBand->cleanup();
@@ -1502,7 +1501,7 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_EXPANDER:
                 if (EFX_Bypass[EFX_EXPANDER])
                 {
-                    efx_Expander->out(efxoutl, efxoutr);
+                    Rack_Effects[EFX_EXPANDER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

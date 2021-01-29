@@ -31,6 +31,7 @@
 #ifndef EXPANDER_H
 #define EXPANDER_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 
 const int C_EXPANDER_PARAMETERS = 7;
@@ -46,7 +47,7 @@ enum Expander_Index
     Expander_Gain
 };
 
-class Expander
+class Expander : public Effect
 {
 
 public:
@@ -105,8 +106,6 @@ private:
     float* interpbuf; //buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
 
-    class FPreset *Fpre;
-    
 };
 
 #endif

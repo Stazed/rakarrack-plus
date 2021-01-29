@@ -4024,31 +4024,31 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ARPIE->arpie_damp->redraw();
                 break;
             case MC_Expander_Attack:
-                EXPANDER->expander_ATime->value(rkr->efx_Expander->getpar(Expander_Attack));
+                EXPANDER->expander_ATime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack));
                 EXPANDER->expander_ATime->redraw();
                 break;
             case MC_Expander_Release:
-                EXPANDER->expander_RTime->value(rkr->efx_Expander->getpar(Expander_Release));
+                EXPANDER->expander_RTime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release));
                 EXPANDER->expander_RTime->redraw();
                 break;
             case MC_Expander_Shape:
-                EXPANDER->expander_shape->value(rkr->efx_Expander->getpar(Expander_Shape));
+                EXPANDER->expander_shape->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape));
                 EXPANDER->expander_shape->redraw();
                 break;
             case MC_Expander_Threshold:
-                EXPANDER->expander_threshold->value(rkr->efx_Expander->getpar(Expander_Threshold));
+                EXPANDER->expander_threshold->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold));
                 EXPANDER->expander_threshold->redraw();
                 break;
             case MC_Expander_Gain:
-                EXPANDER->expander_level->value(rkr->efx_Expander->getpar(Expander_Gain));
+                EXPANDER->expander_level->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain));
                 EXPANDER->expander_level->redraw();
                 break;
             case MC_Expander_LPF:
-                EXPANDER->expander_LPF->value(rkr->efx_Expander->getpar(Expander_LPF));
+                EXPANDER->expander_LPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF));
                 EXPANDER->expander_LPF->redraw();
                 break;
             case MC_Expander_HPF:
-                EXPANDER->expander_HPF->value(rkr->efx_Expander->getpar(Expander_HPF));
+                EXPANDER->expander_HPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF));
                 EXPANDER->expander_HPF->redraw();
                 break;
             case MC_Shuffle_DryWet:

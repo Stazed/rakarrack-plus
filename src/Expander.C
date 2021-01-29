@@ -28,6 +28,7 @@
 #include "Expander.h"
 
 Expander::Expander(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize),
     Pthreshold(),
     Pattack(),
     Pdecay(),
@@ -53,8 +54,7 @@ Expander::Expander(double sample_rate, uint32_t intermediate_bufsize) :
     lpfl(NULL),
     lpfr(NULL),
     hpfl(NULL),
-    hpfr(NULL),
-    Fpre(NULL)
+    hpfr(NULL)
 {
     initialize();
     setpreset(0);
