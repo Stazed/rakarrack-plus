@@ -34,7 +34,8 @@
 
 
 
-VaryBand::VaryBand(double sample_rate, uint32_t intermediate_bufsize)
+VaryBand::VaryBand(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize)
 {
     PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
     fSAMPLE_RATE = sample_rate;

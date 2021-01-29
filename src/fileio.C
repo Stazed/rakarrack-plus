@@ -783,12 +783,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_VARYBAND:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_VaryBand->getpar(VaryBand_DryWet), efx_VaryBand->getpar(VaryBand_LFO_Tempo_1),
-                efx_VaryBand->getpar(VaryBand_LFO_Type_1), efx_VaryBand->getpar(VaryBand_LFO_Stereo_1),
-                efx_VaryBand->getpar(VaryBand_LFO_Tempo_2), efx_VaryBand->getpar(VaryBand_LFO_Type_2),
-                efx_VaryBand->getpar(VaryBand_LFO_Stereo_2), efx_VaryBand->getpar(VaryBand_Cross_1),
-                efx_VaryBand->getpar(VaryBand_Cross_2), efx_VaryBand->getpar(VaryBand_Cross_3),
-                efx_VaryBand->getpar(VaryBand_Combination), EFX_Bypass[EFX_VARYBAND]);
+                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_DryWet), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1),
+                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_1), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_1),
+                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_2),
+                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_2), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_1),
+                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_2), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_3),
+                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Combination), EFX_Bypass[EFX_VARYBAND]);
         break;
 
     case EFX_CONVOLOTRON:
@@ -1531,9 +1531,9 @@ RKR::Actualizar_Audio()
 
         case EFX_VARYBAND:
             EFX_Bypass[EFX_VARYBAND] = 0;
-            efx_VaryBand->cleanup();
+            Rack_Effects[EFX_VARYBAND]->cleanup();
             for (i = 0; i < C_VARYBAND_PARAMETERS; i++)
-                efx_VaryBand->changepar(i, lv[EFX_VARYBAND][i]);
+                Rack_Effects[EFX_VARYBAND]->changepar(i, lv[EFX_VARYBAND][i]);
             EFX_Bypass[EFX_VARYBAND] = EFX_Bank_Bypass[EFX_VARYBAND];
             break;
 
@@ -2378,7 +2378,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_SYNTHFILTER_PARAMETERS; j++)
         lv[EFX_SYNTHFILTER][j] = Rack_Effects[EFX_SYNTHFILTER]->getpar(j);
     for (j = 0; j < C_VARYBAND_PARAMETERS; j++)
-        lv[EFX_VARYBAND][j] = efx_VaryBand->getpar(j);
+        lv[EFX_VARYBAND][j] = Rack_Effects[EFX_VARYBAND]->getpar(j);
     for (j = 0; j < C_CONVO_PARAMETERS; j++)
         lv[EFX_CONVOLOTRON][j] = Rack_Effects[EFX_CONVOLOTRON]->getpar(j);
     for (j = 0; j < C_LOOPER_PARAMETERS; j++)

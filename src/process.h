@@ -736,8 +736,6 @@ public:
 
     class Compressor *efx_FLimiter;
 
-    class VaryBand *efx_VaryBand;
-
     class Resample *U_Resample;
     class Resample *D_Resample;
     class Resample *A_Resample;

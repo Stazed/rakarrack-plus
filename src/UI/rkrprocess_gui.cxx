@@ -4136,35 +4136,35 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SYNTHFILTER->synthfilter_Offset->redraw();
                 break;
             case MC_VaryBand_DryWet:
-                VARYBAND->varyband_WD->value(Dry_Wet(rkr->efx_VaryBand->getpar(VaryBand_DryWet)));
+                VARYBAND->varyband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_DryWet)));
                 VARYBAND->varyband_WD->redraw();
                 break;
             case MC_VaryBand_LFO_Tempo_1:
-                VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
+                VARYBAND->varyband_freq1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1));
                 VARYBAND->varyband_freq1->redraw();
                 break;
             case MC_VaryBand_LFO_Stereo_1:
-                VARYBAND->varyband_stdf1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_1));
+                VARYBAND->varyband_stdf1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_1));
                 VARYBAND->varyband_stdf1->redraw();
                 break;
             case MC_VaryBand_LFO_Tempo_2:
-                VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
+                VARYBAND->varyband_freq2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2));
                 VARYBAND->varyband_freq2->redraw();
                 break;
             case MC_VaryBand_LFO_Stereo_2:
-                VARYBAND->varyband_stdf2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Stereo_2));
+                VARYBAND->varyband_stdf2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_2));
                 VARYBAND->varyband_stdf2->redraw();
                 break;
             case MC_VaryBand_Cross_1:
-                VARYBAND->varyband_cross1->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_1));
+                VARYBAND->varyband_cross1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_1));
                 VARYBAND->varyband_cross1->redraw();
                 break;
             case MC_VaryBand_Cross_2:
-                VARYBAND->varyband_cross2->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_2));
+                VARYBAND->varyband_cross2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_2));
                 VARYBAND->varyband_cross2->redraw();
                 break;
             case MC_VaryBand_Cross_3:
-                VARYBAND->varyband_cross3->value(rkr->efx_VaryBand->getpar(VaryBand_Cross_3));
+                VARYBAND->varyband_cross3->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_3));
                 VARYBAND->varyband_cross3->redraw();
                 break;
             case MC_MuTro_DryWet:
@@ -5026,11 +5026,11 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SYNTHFILTER->synthfilter_lfotype->redraw();
                 break;
             case MC_VaryBand_LFO_Type_1:
-                VARYBAND->varyband_lfotype1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_1));
+                VARYBAND->varyband_lfotype1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_1));
                 VARYBAND->varyband_lfotype1->redraw();
                 break;
             case MC_VaryBand_LFO_Type_2:
-                VARYBAND->varyband_lfotype2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Type_2));
+                VARYBAND->varyband_lfotype2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_2));
                 VARYBAND->varyband_lfotype2->redraw();
                 break;
             case MC_Vibe_LFO_Type:
@@ -6117,13 +6117,13 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_VARYBAND])
     {
-        VARYBAND->varyband_freq1->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_1));
+        VARYBAND->varyband_freq1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1));
         VARYBAND->varyband_freq1->redraw();
     }
 
     if (rkr->EFX_Bypass[EFX_VARYBAND])
     {
-        VARYBAND->varyband_freq2->value(rkr->efx_VaryBand->getpar(VaryBand_LFO_Tempo_2));
+        VARYBAND->varyband_freq2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2));
         VARYBAND->varyband_freq2->redraw();
     }
 

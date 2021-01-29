@@ -28,6 +28,7 @@
 #ifndef VARYBAND_H
 #define VARYBAND_H
 
+#include "Effect.h"
 #include "EffectLFO.h"
 #include "AnalogFilter.h"
 
@@ -53,7 +54,7 @@ enum VaryBand_Index
     VaryBand_High_Band
 };
 
-class VaryBand
+class VaryBand : public Effect
 {
 public:
     VaryBand (double sample_rate, uint32_t intermediate_bufsize);
@@ -72,12 +73,9 @@ public:
     void clear_initialize();
     
 private:
+
     uint32_t PERIOD;
     double fSAMPLE_RATE;
-public:
-    
-    int Ppreset;
-    float outvolume;
 
     float *lowl;
     float *lowr;
@@ -87,8 +85,6 @@ public:
     float *midhr;
     float *highl;
     float *highr;
-
-private:
 
     void setvolume (int Pvolume);
     void setpanning (int Ppanning);
@@ -124,7 +120,6 @@ private:
     AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
     float* interpbuf;   //buffer for filters
 
-    class FPreset *Fpre;
     EffectLFO* lfo1,*lfo2;
 
 };

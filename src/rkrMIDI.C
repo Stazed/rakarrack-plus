@@ -2459,35 +2459,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_VaryBand_DryWet:
-        efx_VaryBand->changepar(VaryBand_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_DryWet, Dry_Wet(value));
         break;
 
     case MC_VaryBand_LFO_Tempo_1:
-        efx_VaryBand->changepar(VaryBand_LFO_Tempo_1, ret_Tempo(value));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_1, ret_Tempo(value));
         break;
 
     case MC_VaryBand_LFO_Stereo_1:
-        efx_VaryBand->changepar(VaryBand_LFO_Stereo_1, value);
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Stereo_1, value);
         break;
 
     case MC_VaryBand_LFO_Tempo_2:
-        efx_VaryBand->changepar(VaryBand_LFO_Tempo_2, ret_Tempo(value));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_2, ret_Tempo(value));
         break;
 
     case MC_VaryBand_LFO_Stereo_2:
-        efx_VaryBand->changepar(VaryBand_LFO_Stereo_2, value);
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Stereo_2, value);
         break;
 
     case MC_VaryBand_Cross_1:
-        efx_VaryBand->changepar(VaryBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case MC_VaryBand_Cross_2:
-        efx_VaryBand->changepar(VaryBand_Cross_2, 1000 + (int) ((float) value * C_MC_7000_RANGE));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_2, 1000 + (int) ((float) value * C_MC_7000_RANGE));
         break;
 
     case MC_VaryBand_Cross_3:
-        efx_VaryBand->changepar(VaryBand_Cross_3, 2000 + (int) ((float) value * C_MC_24000_RANGE));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_3, 2000 + (int) ((float) value * C_MC_24000_RANGE));
         break;
 
     case MC_MuTro_DryWet:
@@ -3377,11 +3377,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_VaryBand_LFO_Type_1:
-        efx_VaryBand->changepar(VaryBand_LFO_Type_1, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Type_1, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_VaryBand_LFO_Type_2:
-        efx_VaryBand->changepar(VaryBand_LFO_Type_2, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Type_2, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Vibe_LFO_Type:
