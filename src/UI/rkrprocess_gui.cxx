@@ -3856,47 +3856,47 @@ void RKRGUI::MIDI_control_gui_refresh()
                 VALVE->valve_hpf->redraw();
                 break;
             case MC_Ring_DryWet:
-                RING->ring_WD->value(Dry_Wet(rkr->efx_Ring->getpar(Ring_DryWet)));
+                RING->ring_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_RING]->getpar(Ring_DryWet)));
                 RING->ring_WD->redraw();
                 break;
             case MC_Ring_LR_Cross:
-                RING->ring_LRc->value(rkr->efx_Ring->getpar(Ring_LR_Cross));
+                RING->ring_LRc->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross));
                 RING->ring_LRc->redraw();
                 break;
             case MC_Ring_Input:
-                RING->ring_input->value(rkr->efx_Ring->getpar(Ring_Input));
+                RING->ring_input->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Input));
                 RING->ring_input->redraw();
                 break;
             case MC_Ring_Level:
-                RING->ring_level->value(rkr->efx_Ring->getpar(Ring_Level));
+                RING->ring_level->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Level));
                 RING->ring_level->redraw();
                 break;
             case MC_Ring_Pan:
-                RING->ring_pan->value(rkr->efx_Ring->getpar(Ring_Pan));
+                RING->ring_pan->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Pan));
                 RING->ring_pan->redraw();
                 break;
             case MC_Ring_Depth:
-                RING->ring_depth->value(rkr->efx_Ring->getpar(Ring_Depth));
+                RING->ring_depth->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Depth));
                 RING->ring_depth->redraw();
                 break;
             case MC_Ring_Freq:
-                RING->ring_freq->value(rkr->efx_Ring->getpar(Ring_Freq));
+                RING->ring_freq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Freq));
                 RING->ring_freq->redraw();
                 break;
             case MC_Ring_Sine:
-                RING->ring_sin->value(rkr->efx_Ring->getpar(Ring_Sine));
+                RING->ring_sin->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Sine));
                 RING->ring_sin->redraw();
                 break;
             case MC_Ring_Triangle:
-                RING->ring_tri->value(rkr->efx_Ring->getpar(Ring_Triangle));
+                RING->ring_tri->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Triangle));
                 RING->ring_tri->redraw();
                 break;
             case MC_Ring_Saw:
-                RING->ring_saw->value(rkr->efx_Ring->getpar(Ring_Saw));
+                RING->ring_saw->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Saw));
                 RING->ring_saw->redraw();
                 break;
             case MC_Ring_Square:
-                RING->ring_squ->value(rkr->efx_Ring->getpar(Ring_Square));
+                RING->ring_squ->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Square));
                 RING->ring_squ->redraw();
                 break;
             case MC_Exciter_Gain:

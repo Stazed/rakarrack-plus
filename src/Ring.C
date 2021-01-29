@@ -27,10 +27,9 @@
 #include "Ring.h"
 
 Ring::Ring(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
+    Effect(sample_rate, intermediate_bufsize),
     Pafreq(),
     Pfreq(),
-    outvolume(0.5f),
     SAMPLE_RATE(lrintf(sample_rate)),
     PERIOD(intermediate_bufsize),
     Pvolume(50),
@@ -57,8 +56,7 @@ Ring::Ring(double sample_rate, uint32_t intermediate_bufsize) :
     squ(),
     scale(1.0f),
     depth(),
-    idepth(),
-    Fpre(NULL)
+    idepth()
 {
     sin_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);
     tri_tbl = (float *) malloc(sizeof (float) * SAMPLE_RATE);

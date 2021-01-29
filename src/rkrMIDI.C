@@ -2179,47 +2179,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Ring_DryWet:
-        efx_Ring->changepar(Ring_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_RING]->changepar(Ring_DryWet, Dry_Wet(value));
         break;
 
     case MC_Ring_LR_Cross:
-        efx_Ring->changepar(Ring_LR_Cross, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_RING]->changepar(Ring_LR_Cross, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Ring_Input:
-        efx_Ring->changepar(Ring_Input, 1 + (int) ((float) value * C_MC_126_RANGE));
+        Rack_Effects[EFX_RING]->changepar(Ring_Input, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case MC_Ring_Level:
-        efx_Ring->changepar(Ring_Level, value);
+        Rack_Effects[EFX_RING]->changepar(Ring_Level, value);
         break;
 
     case MC_Ring_Pan:
-        efx_Ring->changepar(Ring_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_RING]->changepar(Ring_Pan, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Ring_Depth:
-        efx_Ring->changepar(Ring_Depth, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_RING]->changepar(Ring_Depth, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_Ring_Freq:
-        efx_Ring->changepar(Ring_Freq, 1 + (int) ((float) value * C_MC_19999_RANGE));
+        Rack_Effects[EFX_RING]->changepar(Ring_Freq, 1 + (int) ((float) value * C_MC_19999_RANGE));
         break;
 
     case MC_Ring_Sine:
-        efx_Ring->changepar(Ring_Sine, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_RING]->changepar(Ring_Sine, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_Ring_Triangle:
-        efx_Ring->changepar(Ring_Triangle, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_RING]->changepar(Ring_Triangle, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_Ring_Saw:
-        efx_Ring->changepar(Ring_Saw, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_RING]->changepar(Ring_Saw, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_Ring_Square:
-        efx_Ring->changepar(Ring_Square, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_RING]->changepar(Ring_Square, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_Exciter_Gain:

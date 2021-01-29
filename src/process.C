@@ -64,7 +64,6 @@ RKR::RKR() :
     EFX_Bypass(),
     EFX_Bank_Bypass(),
     efx_FLimiter(NULL),
-    efx_Ring(NULL),
     efx_Exciter(NULL),
     efx_DistBand(NULL),
     efx_Arpie(NULL),
@@ -380,7 +379,7 @@ RKR::~RKR()
     delete efx_FLimiter;
     delete Rack_Effects[EFX_VALVE];
     delete Rack_Effects[EFX_DUAL_FLANGE];
-    delete efx_Ring;
+    delete Rack_Effects[EFX_RING];
     delete efx_Exciter;
     delete efx_DistBand;
     delete efx_Arpie;
@@ -640,7 +639,7 @@ RKR::instantiate_effects()
     efx_FLimiter = new Compressor(fSample_rate, period);
     Rack_Effects[EFX_VALVE] = new Valve(fSample_rate, period);
     Rack_Effects[EFX_DUAL_FLANGE] = new Dflange(fSample_rate, period);
-    efx_Ring = new Ring(fSample_rate, period);
+    Rack_Effects[EFX_RING] = new Ring(fSample_rate, period);
     efx_Exciter = new Exciter(fSample_rate, period);
     efx_DistBand = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
     efx_Arpie = new Arpie(fSample_rate, period);
@@ -1156,7 +1155,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
     Rack_Effects[EFX_VALVE]->cleanup();
     Rack_Effects[EFX_DUAL_FLANGE]->cleanup();
-    efx_Ring->cleanup();
+    Rack_Effects[EFX_RING]->cleanup();
     efx_Exciter->cleanup();
     efx_DistBand->cleanup();
     efx_Arpie->cleanup();
@@ -1282,20 +1281,21 @@ RKR::Alg(float *origl, float *origr, void *)
             }
         }
 
-
-        if ((EFX_Bypass[EFX_RING]) && (efx_Ring->Pafreq))
         {
-            RingRecNote->schmittFloat(efxoutl, efxoutr);
-            if ((RingRecNote->reconota != -1) && (RingRecNote->reconota != RingRecNote->last))
+            Ring *Efx_Ring = static_cast<Ring*>(Rack_Effects[EFX_RING]);
+            if ((EFX_Bypass[EFX_RING]) && (Efx_Ring->Pafreq))
             {
-                if (RingRecNote->afreq > 0.0)
+                RingRecNote->schmittFloat(efxoutl, efxoutr);
+                if ((RingRecNote->reconota != -1) && (RingRecNote->reconota != RingRecNote->last))
                 {
-                    efx_Ring->Pfreq = lrintf(RingRecNote->lafreq);
-                    StHarmRecNote->last = StHarmRecNote->reconota;
+                    if (RingRecNote->afreq > 0.0)
+                    {
+                        Efx_Ring->Pfreq = lrintf(RingRecNote->lafreq);
+                        StHarmRecNote->last = StHarmRecNote->reconota;
+                    }
                 }
             }
         }
-
 
         for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
         {
@@ -1473,8 +1473,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_RING:
                 if (EFX_Bypass[EFX_RING])
                 {
-                    efx_Ring->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_RING, efx_Ring->outvolume);
+                    Rack_Effects[EFX_RING]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_RING, Rack_Effects[EFX_RING]->outvolume);
                 }
                 break;
 

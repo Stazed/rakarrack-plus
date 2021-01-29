@@ -708,13 +708,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_RING:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Ring->getpar(Ring_DryWet), efx_Ring->getpar(Ring_Pan),
-                efx_Ring->getpar(Ring_LR_Cross), efx_Ring->getpar(Ring_Level),
-                efx_Ring->getpar(Ring_Depth), efx_Ring->getpar(Ring_Freq),
-                efx_Ring->getpar(Ring_Stereo), efx_Ring->getpar(Ring_Sine),
-                efx_Ring->getpar(Ring_Triangle), efx_Ring->getpar(Ring_Saw),
-                efx_Ring->getpar(Ring_Square), efx_Ring->getpar(Ring_Input),
-                efx_Ring->getpar(Ring_Auto_Freq), EFX_Bypass[EFX_RING]);
+                Rack_Effects[EFX_RING]->getpar(Ring_DryWet), Rack_Effects[EFX_RING]->getpar(Ring_Pan),
+                Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross), Rack_Effects[EFX_RING]->getpar(Ring_Level),
+                Rack_Effects[EFX_RING]->getpar(Ring_Depth), Rack_Effects[EFX_RING]->getpar(Ring_Freq),
+                Rack_Effects[EFX_RING]->getpar(Ring_Stereo), Rack_Effects[EFX_RING]->getpar(Ring_Sine),
+                Rack_Effects[EFX_RING]->getpar(Ring_Triangle), Rack_Effects[EFX_RING]->getpar(Ring_Saw),
+                Rack_Effects[EFX_RING]->getpar(Ring_Square), Rack_Effects[EFX_RING]->getpar(Ring_Input),
+                Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq), EFX_Bypass[EFX_RING]);
         break;
 
     case EFX_EXCITER:
@@ -1475,9 +1475,9 @@ RKR::Actualizar_Audio()
 
         case EFX_RING:
             EFX_Bypass[EFX_RING] = 0;
-            efx_Ring->cleanup();
+            Rack_Effects[EFX_RING]->cleanup();
             for (i = 0; i < C_RING_PARAMETERS; i++)
-                efx_Ring->changepar(i, lv[EFX_RING][i]);
+                Rack_Effects[EFX_RING]->changepar(i, lv[EFX_RING][i]);
             EFX_Bypass[EFX_RING] = EFX_Bank_Bypass[EFX_RING];
             break;
 
@@ -2364,7 +2364,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_DFLANGE_PARAMETERS; j++)
         lv[EFX_DUAL_FLANGE][j] = Rack_Effects[EFX_DUAL_FLANGE]->getpar(j);
     for (j = 0; j < C_RING_PARAMETERS; j++)
-        lv[EFX_RING][j] = efx_Ring->getpar(j);
+        lv[EFX_RING][j] = Rack_Effects[EFX_RING]->getpar(j);
     for (j = 0; j < C_EXCITER_PARAMETERS; j++)
         lv[EFX_EXCITER][j] = efx_Exciter->getpar(j);
     for (j = 0; j < C_DBAND_PARAMETERS; j++)

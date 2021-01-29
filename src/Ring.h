@@ -24,7 +24,7 @@
 #ifndef RING_H
 #define RING_H
 
-#include "FPreset.h"
+#include "Effect.h"
 
 const int C_RING_PARAMETERS = 13;
 
@@ -45,7 +45,7 @@ enum Ring_Index
     Ring_Auto_Freq
 };
 
-class Ring
+class Ring : public Effect
 {
 public:
     Ring (double sample_rate, uint32_t intermediate_bufsize);
@@ -63,11 +63,8 @@ public:
     
     void Create_Tables(float sample_rate);
 
-    int Ppreset;
     int Pafreq;
     int Pfreq;
-
-    float outvolume;
 
 private:
 
@@ -98,7 +95,6 @@ private:
     float *sin_tbl, *tri_tbl, *saw_tbl, *squ_tbl;
     float sin,tri,saw,squ,scale,depth, idepth;
 
-    class FPreset *Fpre;
 };
 
 
