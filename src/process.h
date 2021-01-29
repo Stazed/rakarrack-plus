@@ -710,7 +710,6 @@ public:
     void Update_tempo();
 
     // class pointers
-    class Phaser *efx_Phaser;
     class Analog_Phaser *efx_APhaser;
     class EQ *efx_EQ1;
     class ParametricEQ *efx_EQ2;

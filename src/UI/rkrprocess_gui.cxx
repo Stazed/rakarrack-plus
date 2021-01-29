@@ -3269,7 +3269,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_dpth->redraw();
                 break;
             case MC_Phaser_Depth:
-                PHASER->phaser_dpth->value(rkr->efx_Phaser->getpar(Phaser_Depth));
+                PHASER->phaser_dpth->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Depth));
                 PHASER->phaser_dpth->redraw();
                 break;
             case MC_Flanger_Depth:
@@ -3362,7 +3362,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_WD->redraw();
                 break;
             case MC_Phaser_DryWet:
-                PHASER->phaser_WD->value(Dry_Wet(rkr->efx_Phaser->getpar(Phaser_DryWet)));
+                PHASER->phaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_DryWet)));
                 PHASER->phaser_WD->redraw();
                 break;
             case MC_Alien_DryWet:
@@ -3386,7 +3386,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHO->echo_WD->redraw();
                 break;
             case MC_Phaser_Pan:
-                PHASER->phaser_pan->value(rkr->efx_Phaser->getpar(Phaser_Pan) - 64);
+                PHASER->phaser_pan->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Pan) - 64);
                 PHASER->phaser_pan->redraw();
                 break;
             case MC_Alien_Pan:
@@ -3442,7 +3442,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_freq->redraw();
                 break;
             case MC_Phaser_LFO_Tempo:
-                PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(Phaser_LFO_Tempo));
+                PHASER->phaser_freq->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
                 PHASER->phaser_freq->redraw();
                 break;
             case MC_WahWah_LFO_Tempo:
@@ -3470,7 +3470,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_fb->redraw();
                 break;
             case MC_Phaser_Feedback:
-                PHASER->phaser_fb->value(rkr->efx_Phaser->getpar(Phaser_Feedback));
+                PHASER->phaser_fb->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Feedback));
                 PHASER->phaser_fb->redraw();
                 break;
             case MC_Alien_Feedback:
@@ -3518,7 +3518,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_LR->redraw();
                 break;
             case MC_Phaser_LR_Cross:
-                PHASER->phaser_LR->value(rkr->efx_Phaser->getpar(Phaser_LR_Cross) - 64);
+                PHASER->phaser_LR->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LR_Cross) - 64);
                 PHASER->phaser_LR->redraw();
                 break;
             case MC_Overdrive_LR_Cross:
@@ -3550,7 +3550,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_stdf->redraw();
                 break;
             case MC_Phaser_LFO_Stereo:
-                PHASER->phaser_stdf->value(rkr->efx_Phaser->getpar(Phaser_LFO_Stereo));
+                PHASER->phaser_stdf->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Stereo));
                 PHASER->phaser_stdf->redraw();
                 break;
             case MC_WahWah_LFO_Stereo:
@@ -3574,7 +3574,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 FLANGER->flanger_rnd->redraw();
                 break;
             case MC_Phaser_LFO_Random:
-                PHASER->phaser_rnd->value(rkr->efx_Phaser->getpar(Phaser_LFO_Random));
+                PHASER->phaser_rnd->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Random));
                 PHASER->phaser_rnd->redraw();
                 break;
             case MC_WahWah_LFO_Random:
@@ -3602,7 +3602,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_smooth->redraw();
                 break;
             case MC_Phaser_Phase:
-                PHASER->phaser_phase->value(rkr->efx_Phaser->getpar(Phaser_Phase));
+                PHASER->phaser_phase->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Phase));
                 PHASER->phaser_phase->redraw();
                 break;
             case MC_Alien_Phase:
@@ -5018,7 +5018,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PAN->pan_lfotype->redraw();
                 break;
             case MC_Phaser_LFO_Type:
-                PHASER->phaser_lfotype->value(rkr->efx_Phaser->getpar(Phaser_LFO_Type));
+                PHASER->phaser_lfotype->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Type));
                 PHASER->phaser_lfotype->redraw();
                 break;
             case MC_Synthfilter_LFO_Type:
@@ -6063,7 +6063,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_PHASER])
     {
-        PHASER->phaser_freq->value(rkr->efx_Phaser->getpar(Phaser_LFO_Tempo));
+        PHASER->phaser_freq->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
         PHASER->phaser_freq->redraw();
     }
 

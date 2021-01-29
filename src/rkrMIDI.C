@@ -1585,7 +1585,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_Depth:
-        efx_Phaser->changepar(Phaser_Depth, value);
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_Depth, value);
         break;
 
     case MC_Flanger_Depth:
@@ -1682,7 +1682,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_DryWet:
-        efx_Phaser->changepar(Phaser_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_DryWet, Dry_Wet(value));
         break;
 
     case MC_Alien_DryWet:
@@ -1706,7 +1706,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_Pan:
-        efx_Phaser->changepar(Phaser_Pan, value);
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_Pan, value);
         break;
 
     case MC_Alien_Pan:
@@ -1761,7 +1761,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_LFO_Tempo:
-        efx_Phaser->changepar(Phaser_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_WahWah_LFO_Tempo:
@@ -1789,7 +1789,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_Feedback:
-        efx_Phaser->changepar(Phaser_Feedback, value);
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_Feedback, value);
         break;
 
     case MC_Alien_Feedback:
@@ -1837,7 +1837,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_LR_Cross:
-        efx_Phaser->changepar(Phaser_LR_Cross, value);
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_LR_Cross, value);
         break;
 
     case MC_Overdrive_LR_Cross:
@@ -1869,7 +1869,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_LFO_Stereo:
-        efx_Phaser->changepar(Phaser_LFO_Stereo, value);
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Stereo, value);
         break;
 
     case MC_WahWah_LFO_Stereo:
@@ -1893,7 +1893,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_LFO_Random:
-        efx_Phaser->changepar(Phaser_LFO_Random, value);
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Random, value);
         break;
 
     case MC_WahWah_LFO_Random:
@@ -1921,7 +1921,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_Phase:
-        efx_Phaser->changepar(Phaser_Phase, value);
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_Phase, value);
         break;
 
     case MC_Alien_Phase:
@@ -3367,7 +3367,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Phaser_LFO_Type:
-        efx_Phaser->changepar(Phaser_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Synthfilter_LFO_Type:

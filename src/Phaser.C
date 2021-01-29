@@ -29,8 +29,7 @@
 #define PHASER_LFO_SHAPE 2
 
 Phaser::Phaser(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fPERIOD(intermediate_bufsize),
     Pvolume(),
@@ -52,8 +51,7 @@ Phaser::Phaser(double sample_rate, uint32_t intermediate_bufsize) :
     oldr(NULL),
     oldlgain(),
     oldrgain(),
-    lfo(NULL),
-    Fpre(NULL)
+    lfo(NULL)
 {
     oldl = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES * 2);
     oldr = (float *) malloc(sizeof (float)* MAX_PHASER_STAGES * 2);

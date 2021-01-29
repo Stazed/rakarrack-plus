@@ -24,6 +24,8 @@
 
 #ifndef PHASER_H
 #define PHASER_H
+
+#include "Effect.h"
 #include "EffectLFO.h"
 
 const int C_PHASER_PARAMETERS = 12;
@@ -44,7 +46,7 @@ enum Phaser_Index
     Phaser_Phase
 };
 
-class Phaser
+class Phaser : public Effect
 {
 public:
     Phaser (double sample_rate, uint32_t intermediate_bufsize);
@@ -58,9 +60,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-
-    int Ppreset;
-    float outvolume;
 
 private:
     void setvolume (int Pvolume);
@@ -93,7 +92,6 @@ private:
     
     EffectLFO *lfo;     //Phaser modulator
 
-    class FPreset *Fpre;
 };
 
 #endif

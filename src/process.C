@@ -50,7 +50,6 @@ char *banktoload;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
-    efx_Phaser(NULL),
     efx_APhaser(NULL),
     efx_EQ1(NULL),
     efx_EQ2(NULL),
@@ -375,7 +374,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_FLANGER];
     delete Rack_Effects[EFX_REVERB];
     delete efx_Echo;
-    delete efx_Phaser;
+    delete Rack_Effects[EFX_PHASER];
     delete efx_APhaser;
     delete Rack_Effects[EFX_DISTORTION];
     delete Rack_Effects[EFX_OVERDRIVE];
@@ -635,7 +634,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_FLANGER] = new Flanger(fSample_rate, period);
     Rack_Effects[EFX_REVERB] = new Reverb(fSample_rate, period);
     efx_Echo = new Echo(fSample_rate, period);
-    efx_Phaser = new Phaser(fSample_rate, period);
+    Rack_Effects[EFX_PHASER] = new Phaser(fSample_rate, period);
     efx_APhaser = new Analog_Phaser(fSample_rate, period);
     Rack_Effects[EFX_DISTORTION] = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
     Rack_Effects[EFX_OVERDRIVE] = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
@@ -1156,7 +1155,7 @@ RKR::cleanup_efx()
     efx_Echo->cleanup();
     Rack_Effects[EFX_CHORUS]->cleanup();
     Rack_Effects[EFX_FLANGER]->cleanup();
-    efx_Phaser->cleanup();
+    Rack_Effects[EFX_PHASER]->cleanup();
     efx_EQ2->cleanup();
     efx_WahWah->cleanup();
     efx_Alienwah->cleanup();
@@ -1365,8 +1364,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_PHASER:
                 if (EFX_Bypass[EFX_PHASER])
                 {
-                    efx_Phaser->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_PHASER, efx_Phaser->outvolume);
+                    Rack_Effects[EFX_PHASER]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_PHASER, Rack_Effects[EFX_PHASER]->outvolume);
                 }
                 break;
 

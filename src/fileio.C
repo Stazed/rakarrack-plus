@@ -537,12 +537,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_PHASER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Phaser->getpar(Phaser_DryWet), efx_Phaser->getpar(Phaser_Pan),
-                efx_Phaser->getpar(Phaser_LFO_Tempo), efx_Phaser->getpar(Phaser_LFO_Random),
-                efx_Phaser->getpar(Phaser_LFO_Type), efx_Phaser->getpar(Phaser_LFO_Stereo),
-                efx_Phaser->getpar(Phaser_Depth), efx_Phaser->getpar(Phaser_Feedback),
-                efx_Phaser->getpar(Phaser_Stages), efx_Phaser->getpar(Phaser_LR_Cross),
-                efx_Phaser->getpar(Phaser_Subtract), efx_Phaser->getpar(Phaser_Phase),
+                Rack_Effects[EFX_PHASER]->getpar(Phaser_DryWet), Rack_Effects[EFX_PHASER]->getpar(Phaser_Pan),
+                Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo), Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Random),
+                Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Type), Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Stereo),
+                Rack_Effects[EFX_PHASER]->getpar(Phaser_Depth), Rack_Effects[EFX_PHASER]->getpar(Phaser_Feedback),
+                Rack_Effects[EFX_PHASER]->getpar(Phaser_Stages), Rack_Effects[EFX_PHASER]->getpar(Phaser_LR_Cross),
+                Rack_Effects[EFX_PHASER]->getpar(Phaser_Subtract), Rack_Effects[EFX_PHASER]->getpar(Phaser_Phase),
                 EFX_Bypass[EFX_PHASER]);
         break;
 
@@ -1350,9 +1350,9 @@ RKR::Actualizar_Audio()
 
         case EFX_PHASER:
             EFX_Bypass[EFX_PHASER] = 0;
-            efx_Phaser->cleanup();
+            Rack_Effects[EFX_PHASER]->cleanup();
             for (i = 0; i < C_PHASER_PARAMETERS; i++)
-                efx_Phaser->changepar(i, lv[EFX_PHASER][i]);
+                Rack_Effects[EFX_PHASER]->changepar(i, lv[EFX_PHASER][i]);
             EFX_Bypass[EFX_PHASER] = EFX_Bank_Bypass[EFX_PHASER];
             break;
 
@@ -2336,7 +2336,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_FLANGER_PARAMETERS; j++)
         lv[EFX_FLANGER][j] = Rack_Effects[EFX_FLANGER]->getpar(j);
     for (j = 0; j < C_PHASER_PARAMETERS; j++)
-        lv[EFX_PHASER][j] = efx_Phaser->getpar(j);
+        lv[EFX_PHASER][j] = Rack_Effects[EFX_PHASER]->getpar(j);
     for (j = 0; j < C_OVERDRIVE_PARAMETERS; j++)
         lv[EFX_OVERDRIVE][j] = Rack_Effects[EFX_OVERDRIVE]->getpar(j);
     for (j = 0; j < C_DIST_PARAMETERS; j++)
