@@ -3736,43 +3736,43 @@ void RKRGUI::MIDI_control_gui_refresh()
                 COMPRESS->compress_output->redraw();
                 break;
             case MC_Parametric_Gain:
-                PEQ->eqp_Gain->value(rkr->efx_EQ2->getpar(Parametric_Gain) - 64);
+                PEQ->eqp_Gain->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain) - 64);
                 PEQ->eqp_Gain->redraw();
                 break;
             case MC_Parametric_Low_Freq:
-                PEQ->eqp_LF->value(rkr->efx_EQ2->getpar(Parametric_Low_Freq));
+                PEQ->eqp_LF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq));
                 PEQ->eqp_LF->redraw();
                 break;
             case MC_Parametric_Low_Gain:
-                PEQ->eqp_LFg->value(rkr->efx_EQ2->getpar(Parametric_Low_Gain) - 64);
+                PEQ->eqp_LFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain) - 64);
                 PEQ->eqp_LFg->redraw();
                 break;
             case MC_Parametric_Low_Q:
-                PEQ->eqp_LQ->value(rkr->efx_EQ2->getpar(Parametric_Low_Q) - 64);
+                PEQ->eqp_LQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q) - 64);
                 PEQ->eqp_LQ->redraw();
                 break;
             case MC_Parametric_Mid_Freq:
-                PEQ->eqp_MF->value(rkr->efx_EQ2->getpar(Parametric_Mid_Freq));
+                PEQ->eqp_MF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq));
                 PEQ->eqp_MF->redraw();
                 break;
             case MC_Parametric_Mid_Gain:
-                PEQ->eqp_MFg->value(rkr->efx_EQ2->getpar(Parametric_Mid_Gain) - 64);
+                PEQ->eqp_MFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain) - 64);
                 PEQ->eqp_MFg->redraw();
                 break;
             case MC_Parametric_Mid_Q:
-                PEQ->eqp_MQ->value(rkr->efx_EQ2->getpar(Parametric_Mid_Q) - 64);
+                PEQ->eqp_MQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q) - 64);
                 PEQ->eqp_MQ->redraw();
                 break;
             case MC_Parametric_High_Freq:
-                PEQ->eqp_HF->value(rkr->efx_EQ2->getpar(Parametric_High_Freq));
+                PEQ->eqp_HF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq));
                 PEQ->eqp_HF->redraw();
                 break;
             case MC_Parametric_High_Gain:
-                PEQ->eqp_HFg->value(rkr->efx_EQ2->getpar(Parametric_High_Gain) - 64);
+                PEQ->eqp_HFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain) - 64);
                 PEQ->eqp_HFg->redraw();
                 break;
             case MC_Parametric_High_Q:
-                PEQ->eqp_HQ->value(rkr->efx_EQ2->getpar(Parametric_High_Q) - 64);
+                PEQ->eqp_HQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q) - 64);
                 PEQ->eqp_HQ->redraw();
                 break;
             case MC_DFlange_DryWet:

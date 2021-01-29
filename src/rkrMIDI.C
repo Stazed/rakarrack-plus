@@ -2058,43 +2058,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Parametric_Gain:
-        efx_EQ2->changepar(Parametric_Gain, value);
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain, value);
         break;
 
     case MC_Parametric_Low_Freq:
-        efx_EQ2->changepar(Parametric_Low_Freq, 20 + (int) ((float) value * C_MC_980_RANGE));
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Freq, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case MC_Parametric_Low_Gain:
-        efx_EQ2->changepar(Parametric_Low_Gain, value);
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Gain, value);
         break;
 
     case MC_Parametric_Low_Q:
-        efx_EQ2->changepar(Parametric_Low_Q, value);
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Q, value);
         break;
 
     case MC_Parametric_Mid_Freq:
-        efx_EQ2->changepar(Parametric_Mid_Freq, 800 + (int) ((float) value * C_MC_7200_RANGE));
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Freq, 800 + (int) ((float) value * C_MC_7200_RANGE));
         break;
 
     case MC_Parametric_Mid_Gain:
-        efx_EQ2->changepar(Parametric_Mid_Gain, value);
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Gain, value);
         break;
 
     case MC_Parametric_Mid_Q:
-        efx_EQ2->changepar(Parametric_Mid_Q, value);
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Q, value);
         break;
 
     case MC_Parametric_High_Freq:
-        efx_EQ2->changepar(Parametric_High_Freq, 6000 + (int) ((float) value * C_MC_20000_RANGE));
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Freq, 6000 + (int) ((float) value * C_MC_20000_RANGE));
         break;
 
     case MC_Parametric_High_Gain:
-        efx_EQ2->changepar(Parametric_High_Gain, value);
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Gain, value);
         break;
 
     case MC_Parametric_High_Q:
-        efx_EQ2->changepar(Parametric_High_Q, value);
+        Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Q, value);
         break;
 
     case MC_DFlange_DryWet:
