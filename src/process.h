@@ -710,7 +710,6 @@ public:
     void Update_tempo();
 
     // class pointers
-    class EQ *efx_EQ1;
     class ParametricEQ *efx_EQ2;
     class Echo *efx_Echo;
     class Compressor *efx_Compressor;

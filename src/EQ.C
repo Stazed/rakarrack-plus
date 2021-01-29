@@ -27,14 +27,15 @@
 #include <math.h>
 #include "EQ.h"
 
-EQ::EQ(double samplerate, uint32_t intermediate_bufsize) :
+EQ::EQ(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
-    fSAMPLE_RATE(samplerate),
+    fSAMPLE_RATE(sample_rate),
     Pvolume(64),
-    outvolume(0.7f),
     interpbuf(NULL),
     filter()
 {
+    outvolume = 0.7f;
     initialize();
     cleanup();
 };

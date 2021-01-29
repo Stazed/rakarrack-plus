@@ -3664,51 +3664,51 @@ void RKRGUI::MIDI_control_gui_refresh()
             case MC_Unused_129:
                 break;
             case MC_EQ_Gain:
-                EQ->eq_Gain->value(rkr->efx_EQ1->getpar(EQ_Gain) - 64);
+                EQ->eq_Gain->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Gain) - 64);
                 EQ->eq_Gain->redraw();
                 break;
             case MC_EQ_Q:
-                EQ->eq_Q->value(rkr->efx_EQ1->getpar(EQ_Q) - 64);
+                EQ->eq_Q->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Q) - 64);
                 EQ->eq_Q->redraw();
                 break;
             case MC_EQ_31_HZ:
-                EQ->eq_1->value(rkr->efx_EQ1->getpar(EQ_31_HZ) - 64);
+                EQ->eq_1->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_31_HZ) - 64);
                 EQ->eq_1->redraw();
                 break;
             case MC_EQ_63_HZ:
-                EQ->eq_2->value(rkr->efx_EQ1->getpar(EQ_63_HZ) - 64);
+                EQ->eq_2->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_63_HZ) - 64);
                 EQ->eq_2->redraw();
                 break;
             case MC_EQ_125_HZ:
-                EQ->eq_3->value(rkr->efx_EQ1->getpar(EQ_125_HZ) - 64);
+                EQ->eq_3->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_125_HZ) - 64);
                 EQ->eq_3->redraw();
                 break;
             case MC_EQ_250_HZ:
-                EQ->eq_4->value(rkr->efx_EQ1->getpar(EQ_250_HZ) - 64);
+                EQ->eq_4->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_250_HZ) - 64);
                 EQ->eq_4->redraw();
                 break;
             case MC_EQ_500_HZ:
-                EQ->eq_5->value(rkr->efx_EQ1->getpar(EQ_500_HZ) - 64);
+                EQ->eq_5->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_500_HZ) - 64);
                 EQ->eq_5->redraw();
                 break;
             case MC_EQ_1_KHZ:
-                EQ->eq_6->value(rkr->efx_EQ1->getpar(EQ_1_KHZ) - 64);
+                EQ->eq_6->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_1_KHZ) - 64);
                 EQ->eq_6->redraw();
                 break;
             case MC_EQ_2_KHZ:
-                EQ->eq_7->value(rkr->efx_EQ1->getpar(EQ_2_KHZ) - 64);
+                EQ->eq_7->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_2_KHZ) - 64);
                 EQ->eq_7->redraw();
                 break;
             case MC_EQ_4_KHZ:
-                EQ->eq_8->value(rkr->efx_EQ1->getpar(EQ_4_KHZ) - 64);
+                EQ->eq_8->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_4_KHZ) - 64);
                 EQ->eq_8->redraw();
                 break;
             case MC_EQ_8_KHZ:
-                EQ->eq_9->value(rkr->efx_EQ1->getpar(EQ_8_KHZ) - 64);
+                EQ->eq_9->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_8_KHZ) - 64);
                 EQ->eq_9->redraw();
                 break;
             case MC_EQ_16_KHZ:
-                EQ->eq_10->value(rkr->efx_EQ1->getpar(EQ_16_KHZ) - 64);
+                EQ->eq_10->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_16_KHZ) - 64);
                 EQ->eq_10->redraw();
                 break;
             case MC_Compress_Attack:

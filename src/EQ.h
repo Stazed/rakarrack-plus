@@ -25,6 +25,7 @@
 #ifndef EQ_H
 #define EQ_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 
 const int C_EQ_PARAMETERS = 12;
@@ -45,10 +46,10 @@ enum EQ_Index
     EQ_16_KHZ   = 57
 };
 
-class EQ
+class EQ : public Effect
 {
 public:
-    EQ (double samplerate, uint32_t intermediate_bufsize);
+    EQ (double sample_rate, uint32_t intermediate_bufsize);
     virtual ~EQ ();
     void out (float * efxoutl, float * efxoutr);
     virtual void setpreset (int npreset);
@@ -71,8 +72,6 @@ public:
     double fSAMPLE_RATE;
     int Pvolume;
 
-    float outvolume;
-
     float * interpbuf;  //buffer for filter
 
     struct filter
@@ -92,8 +91,7 @@ public:
             r() {}
         
     } filter[MAX_EQ_BANDS];
-    
-    class FPreset *Fpre;
+
 };
 
 

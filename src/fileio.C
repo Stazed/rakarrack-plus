@@ -570,12 +570,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_EQ:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_EQ1->getpar(EQ_31_HZ), efx_EQ1->getpar(EQ_63_HZ),
-                efx_EQ1->getpar(EQ_125_HZ), efx_EQ1->getpar(EQ_250_HZ),
-                efx_EQ1->getpar(EQ_500_HZ), efx_EQ1->getpar(EQ_1_KHZ),
-                efx_EQ1->getpar(EQ_2_KHZ), efx_EQ1->getpar(EQ_4_KHZ),
-                efx_EQ1->getpar(EQ_8_KHZ), efx_EQ1->getpar(EQ_16_KHZ),
-                efx_EQ1->getpar(EQ_Gain), efx_EQ1->getpar(EQ_Q), EFX_Bypass[EFX_EQ]);
+                Rack_Effects[EFX_EQ]->getpar(EQ_31_HZ), Rack_Effects[EFX_EQ]->getpar(EQ_63_HZ),
+                Rack_Effects[EFX_EQ]->getpar(EQ_125_HZ), Rack_Effects[EFX_EQ]->getpar(EQ_250_HZ),
+                Rack_Effects[EFX_EQ]->getpar(EQ_500_HZ), Rack_Effects[EFX_EQ]->getpar(EQ_1_KHZ),
+                Rack_Effects[EFX_EQ]->getpar(EQ_2_KHZ), Rack_Effects[EFX_EQ]->getpar(EQ_4_KHZ),
+                Rack_Effects[EFX_EQ]->getpar(EQ_8_KHZ), Rack_Effects[EFX_EQ]->getpar(EQ_16_KHZ),
+                Rack_Effects[EFX_EQ]->getpar(EQ_Gain), Rack_Effects[EFX_EQ]->getpar(EQ_Q), EFX_Bypass[EFX_EQ]);
         break;
 
     case EFX_PARAMETRIC:
@@ -1298,13 +1298,13 @@ RKR::Actualizar_Audio()
 
         case EFX_EQ:
             EFX_Bypass[EFX_EQ] = 0;
-            efx_EQ1->cleanup();
+            Rack_Effects[EFX_EQ]->cleanup();
             for (i = 0; i < 10; i++)
             {
-                efx_EQ1->changepar(i * 5 + 12, lv[EFX_EQ][i]);
-                efx_EQ1->changepar(i * 5 + 13, lv[EFX_EQ][11]);
+                Rack_Effects[EFX_EQ]->changepar(i * 5 + 12, lv[EFX_EQ][i]);
+                Rack_Effects[EFX_EQ]->changepar(i * 5 + 13, lv[EFX_EQ][11]);
             }
-            efx_EQ1->changepar(EQ_Gain, lv[EFX_EQ][10]);
+            Rack_Effects[EFX_EQ]->changepar(EQ_Gain, lv[EFX_EQ][10]);
             EFX_Bypass[EFX_EQ] = EFX_Bank_Bypass[EFX_EQ];
             break;
 
@@ -2421,10 +2421,10 @@ RKR::Preset_to_Bank(int i)
         lv[EFX_ORDER][j] = efx_order[j];
 
     for (j = 0; j < 10; j++)
-        lv[EFX_EQ][j] = efx_EQ1->getpar(j * 5 + 12);
+        lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j * 5 + 12);
 
-    lv[EFX_EQ][10] = efx_EQ1->getpar(EQ_Gain);
-    lv[EFX_EQ][11] = efx_EQ1->getpar(EQ_Q);
+    lv[EFX_EQ][10] = Rack_Effects[EFX_EQ]->getpar(EQ_Gain);
+    lv[EFX_EQ][11] = Rack_Effects[EFX_EQ]->getpar(EQ_Q);
 
     for (j = 0; j < 3; j++)
     {

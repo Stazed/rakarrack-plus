@@ -1984,51 +1984,53 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_EQ_Gain:
-        efx_EQ1->changepar(EQ_Gain, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_Gain, value);
         break;
 
     case MC_EQ_Q:
-        efx_EQ1->changepar_Q(EQ_Q, value);
+    {
+        EQ *Efx_Equalizer = static_cast<EQ*>(Rack_Effects[EFX_EQ]);
+        Efx_Equalizer->changepar_Q(EQ_Q, value);
         break;
-
+    }
     case MC_EQ_31_HZ:
-        efx_EQ1->changepar(EQ_31_HZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_31_HZ, value);
         break;
 
     case MC_EQ_63_HZ:
-        efx_EQ1->changepar(EQ_63_HZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_63_HZ, value);
         break;
 
     case MC_EQ_125_HZ:
-        efx_EQ1->changepar(EQ_125_HZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_125_HZ, value);
         break;
 
     case MC_EQ_250_HZ:
-        efx_EQ1->changepar(EQ_250_HZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_250_HZ, value);
         break;
 
     case MC_EQ_500_HZ:
-        efx_EQ1->changepar(EQ_500_HZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_500_HZ, value);
         break;
 
     case MC_EQ_1_KHZ:
-        efx_EQ1->changepar(EQ_1_KHZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_1_KHZ, value);
         break;
 
     case MC_EQ_2_KHZ:
-        efx_EQ1->changepar(EQ_2_KHZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_2_KHZ, value);
         break;
 
     case MC_EQ_4_KHZ:
-        efx_EQ1->changepar(EQ_4_KHZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_4_KHZ, value);
         break;
 
     case MC_EQ_8_KHZ:
-        efx_EQ1->changepar(EQ_8_KHZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_8_KHZ, value);
         break;
 
     case MC_EQ_16_KHZ:
-        efx_EQ1->changepar(EQ_16_KHZ, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_16_KHZ, value);
         break;
 
     case MC_Compress_Attack:
