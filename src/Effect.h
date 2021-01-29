@@ -24,7 +24,6 @@
 #define EFFECT_H
 
 #include "global.h"
-#include <vector>
 
 
 class Effect
@@ -57,9 +56,6 @@ public:
     virtual int getpar (int) {return (0);};
     virtual void out (float *, float *) {};
     virtual void cleanup () {};
-    
-    virtual std::vector<int> save_parameters() {return std::vector<int>();};
-    virtual void reset_parameters(std::vector<int>) {};
 
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t) {};
