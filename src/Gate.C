@@ -29,7 +29,8 @@
 #include <math.h>
 #include "Gate.h"
 
-Gate::Gate(double samplerate, uint32_t intermediate_bufsize) :
+Gate::Gate(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize),
     Pthreshold(),
     Pattack(),
     Ohold(),
@@ -39,7 +40,7 @@ Gate::Gate(double samplerate, uint32_t intermediate_bufsize) :
     Phpf(),
     Phold(),
     PERIOD(intermediate_bufsize),
-    fSAMPLE_RATE(samplerate),
+    fSAMPLE_RATE(sample_rate),
     hold_count(),
     state(CLOSED),
     range(),
@@ -49,14 +50,13 @@ Gate::Gate(double samplerate, uint32_t intermediate_bufsize) :
     d_rate(),
     env(),
     gate(),
-    fs(samplerate),
+    fs(sample_rate),
     hold(),
     interpbuf(NULL),
     lpfl(NULL),
     lpfr(NULL),
     hpfl(NULL),
-    hpfr(NULL),
-    Fpre(NULL)
+    hpfr(NULL)
 {
     initialize();
     setpreset(0);

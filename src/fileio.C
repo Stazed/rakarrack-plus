@@ -655,10 +655,10 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_NOISEGATE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Gate->getpar(Gate_Threshold), efx_Gate->getpar(Gate_Range),
-                efx_Gate->getpar(Gate_Attack), efx_Gate->getpar(Gate_Release),
-                efx_Gate->getpar(Gate_LPF), efx_Gate->getpar(Gate_HPF),
-                efx_Gate->getpar(Gate_Hold), EFX_Bypass[EFX_NOISEGATE]);
+                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold), Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range),
+                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack), Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release),
+                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF), Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF),
+                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold), EFX_Bypass[EFX_NOISEGATE]);
         break;
 
     case EFX_DERELICT:
@@ -1435,9 +1435,9 @@ RKR::Actualizar_Audio()
 
         case EFX_NOISEGATE:
             EFX_Bypass[EFX_NOISEGATE] = 0;
-            efx_Gate->cleanup();
+            Rack_Effects[EFX_NOISEGATE]->cleanup();
             for (i = 0; i < C_GATE_PARAMETERS; i++)
-                efx_Gate->changepar(i, lv[EFX_NOISEGATE][i]);
+                Rack_Effects[EFX_NOISEGATE]->changepar(i, lv[EFX_NOISEGATE][i]);
             EFX_Bypass[EFX_NOISEGATE] = EFX_Bank_Bypass[EFX_NOISEGATE];
             break;
 
@@ -2354,7 +2354,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_MUSIC_PARAMETERS; j++)
         lv[EFX_MUSICAL_DELAY][j] = Rack_Effects[EFX_MUSICAL_DELAY]->getpar(j);
     for (j = 0; j < C_GATE_PARAMETERS; j++)
-        lv[EFX_NOISEGATE][j] = efx_Gate->getpar(j);
+        lv[EFX_NOISEGATE][j] = Rack_Effects[EFX_NOISEGATE]->getpar(j);
     for (j = 0; j < C_DERE_PARAMETERS; j++)
         lv[EFX_DERELICT][j] = efx_Derelict->getpar(j);
     for (j = 0; j < C_APHASER_PARAMETERS; j++)

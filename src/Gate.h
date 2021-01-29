@@ -30,6 +30,7 @@
 #ifndef NOISEGATE_H
 #define NOISEGATE_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 
 const int C_GATE_PARAMETERS = 7;
@@ -45,12 +46,12 @@ enum Gate_Index
     Gate_Hold
 };
 
-class Gate
+class Gate : public Effect
 {
 
 public:
 
-    Gate (double samplerate, uint32_t intermediate_bufsize);
+    Gate (double sample_rate, uint32_t intermediate_bufsize);
     ~Gate ();
 
     void out (float *efxoutl, float *efxoutr);
@@ -98,7 +99,6 @@ private:
     
     float* interpbuf; //buffer for filters
     AnalogFilter *lpfl, *lpfr, *hpfl, *hpfr;
-    class FPreset *Fpre;
 
 };
 

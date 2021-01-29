@@ -4872,31 +4872,31 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUTROMOJO->mutromojo_minfreq->redraw();
                 break;
             case MC_Gate_Attack:
-                GATE->gate_ATime->value(rkr->efx_Gate->getpar(Gate_Attack));
+                GATE->gate_ATime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack));
                 GATE->gate_ATime->redraw();
                 break;
             case MC_Gate_Release:
-                GATE->gate_RTime->value(rkr->efx_Gate->getpar(Gate_Release));
+                GATE->gate_RTime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release));
                 GATE->gate_RTime->redraw();
                 break;
             case MC_Gate_Range:
-                GATE->gate_range->value(rkr->efx_Gate->getpar(Gate_Range));
+                GATE->gate_range->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range));
                 GATE->gate_range->redraw();
                 break;
             case MC_Gate_Threshold:
-                GATE->gate_threshold->value(rkr->efx_Gate->getpar(Gate_Threshold));
+                GATE->gate_threshold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold));
                 GATE->gate_threshold->redraw();
                 break;
             case MC_Gate_Hold:
-                GATE->gate_hold->value(rkr->efx_Gate->getpar(Gate_Hold));
+                GATE->gate_hold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold));
                 GATE->gate_hold->redraw();
                 break;
             case MC_Gate_LPF:
-                GATE->gate_LPF->value(rkr->efx_Gate->getpar(Gate_LPF));
+                GATE->gate_LPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF));
                 GATE->gate_LPF->redraw();
                 break;
             case MC_Gate_HPF:
-                GATE->gate_HPF->value(rkr->efx_Gate->getpar(Gate_HPF));
+                GATE->gate_HPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF));
                 GATE->gate_HPF->redraw();
                 break;
             case MC_Pan_Ex_St_Amt:

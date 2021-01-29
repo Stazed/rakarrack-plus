@@ -3225,31 +3225,31 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Gate_Attack:
-        efx_Gate->changepar(Gate_Attack, 1 + (int) ((float) value * C_MC_249_RANGE));
+        Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Attack, 1 + (int) ((float) value * C_MC_249_RANGE));
         break;
 
     case MC_Gate_Release:
-        efx_Gate->changepar(Gate_Release, 2 + (int) ((float) value * C_MC_248_RANGE));
+        Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Release, 2 + (int) ((float) value * C_MC_248_RANGE));
         break;
 
     case MC_Gate_Range:
-        efx_Gate->changepar(Gate_Range, -90 + (int) ((float) value * C_MC_90_RANGE));
+        Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Range, -90 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
     case MC_Gate_Threshold:
-        efx_Gate->changepar(Gate_Threshold, -70 + (int) ((float) value * C_MC_90_RANGE));
+        Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Threshold, -70 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
     case MC_Gate_Hold:
-        efx_Gate->changepar(Gate_Hold, 2 + (int) ((float) value * C_MC_498_RANGE));
+        Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Hold, 2 + (int) ((float) value * C_MC_498_RANGE));
         break;
 
     case MC_Gate_LPF:
-        efx_Gate->changepar(Gate_LPF, ret_LPF(value));
+        Rack_Effects[EFX_NOISEGATE]->changepar(Gate_LPF, ret_LPF(value));
         break;
 
     case MC_Gate_HPF:
-        efx_Gate->changepar(Gate_HPF, ret_HPF(value));
+        Rack_Effects[EFX_NOISEGATE]->changepar(Gate_HPF, ret_HPF(value));
         break;
 
     case MC_Pan_Ex_St_Amt:

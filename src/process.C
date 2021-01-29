@@ -52,7 +52,6 @@ char *jack_client_name = (char*) "rakarrack-plus";
 RKR::RKR() :
     efx_Compressor(NULL),
 
-    efx_Gate(NULL),
     efx_Derelict(NULL),
     efx_Tuner(NULL),
     efx_MIDIConverter(NULL),
@@ -379,7 +378,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_PAN];
     delete Rack_Effects[EFX_HARMONIZER];
     delete Rack_Effects[EFX_MUSICAL_DELAY];
-    delete efx_Gate;
+    delete Rack_Effects[EFX_NOISEGATE];
     delete efx_Derelict;
     delete efx_FLimiter;
     delete efx_Valve;
@@ -639,7 +638,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_PAN] = new Pan(fSample_rate, period);
     Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
     Rack_Effects[EFX_MUSICAL_DELAY] = new MusicDelay(fSample_rate, period);
-    efx_Gate = new Gate(fSample_rate, period);
+    Rack_Effects[EFX_NOISEGATE] = new Gate(fSample_rate, period);
     efx_Derelict = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
     efx_FLimiter = new Compressor(fSample_rate, period);
     efx_Valve = new Valve(fSample_rate, period);
@@ -1155,7 +1154,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_PAN]->cleanup();
     Rack_Effects[EFX_HARMONIZER]->cleanup();
     Rack_Effects[EFX_MUSICAL_DELAY]->cleanup();
-    efx_Gate->cleanup();
+    Rack_Effects[EFX_NOISEGATE]->cleanup();
     efx_Derelict->cleanup();
     Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
     efx_Valve->cleanup();
@@ -1437,7 +1436,7 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_NOISEGATE:
                 if (EFX_Bypass[EFX_NOISEGATE])
                 {
-                    efx_Gate->out(efxoutl, efxoutr);
+                    Rack_Effects[EFX_NOISEGATE]->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;
