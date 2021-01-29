@@ -30,9 +30,8 @@
 #include <stdio.h>
 
 MuTroMojo::MuTroMojo(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
+    Effect(sample_rate, intermediate_bufsize),
     Pmode(),
-    outvolume(0.5f),
     fSAMPLE_RATE(sample_rate),
     PERIOD(intermediate_bufsize),
     Pvolume(),
@@ -77,7 +76,6 @@ MuTroMojo::MuTroMojo(double sample_rate, uint32_t intermediate_bufsize) :
     filterr(NULL),
     sidechain_filter(NULL),
     interpbuf(NULL),
-    Fpre(NULL),
     lfo(NULL)
 {
     lfo = new EffectLFO(sample_rate);

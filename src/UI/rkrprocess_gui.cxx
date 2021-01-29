@@ -4168,47 +4168,47 @@ void RKRGUI::MIDI_control_gui_refresh()
                 VARYBAND->varyband_cross3->redraw();
                 break;
             case MC_MuTro_DryWet:
-                MUTROMOJO->mutromojo_WD->value(Dry_Wet(rkr->efx_MuTroMojo->getpar(MuTro_DryWet)));
+                MUTROMOJO->mutromojo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_DryWet)));
                 MUTROMOJO->mutromojo_WD->redraw();
                 break;
             case MC_MuTro_LowPass:
-                MUTROMOJO->mutromojo_lp->value(rkr->efx_MuTroMojo->getpar(MuTro_LowPass));
+                MUTROMOJO->mutromojo_lp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LowPass));
                 MUTROMOJO->mutromojo_lp->redraw();
                 break;
             case MC_MuTro_BandPass:
-                MUTROMOJO->mutromojo_bp->value(rkr->efx_MuTroMojo->getpar(MuTro_BandPass));
+                MUTROMOJO->mutromojo_bp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_BandPass));
                 MUTROMOJO->mutromojo_bp->redraw();
                 break;
             case MC_MuTro_HighPass:
-                MUTROMOJO->mutromojo_hp->value(rkr->efx_MuTroMojo->getpar(MuTro_HighPass));
+                MUTROMOJO->mutromojo_hp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_HighPass));
                 MUTROMOJO->mutromojo_hp->redraw();
                 break;
             case MC_MuTro_Depth:
-                MUTROMOJO->mutromojo_dpth->value(rkr->efx_MuTroMojo->getpar(MuTro_Depth));
+                MUTROMOJO->mutromojo_dpth->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Depth));
                 MUTROMOJO->mutromojo_dpth->redraw();
                 break;
             case MC_MuTro_LFO_Tempo:
-                MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Tempo));
+                MUTROMOJO->mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
                 MUTROMOJO->mutromojo_freq->redraw();
                 break;
             case MC_MuTro_Resonance:
-                MUTROMOJO->mutromojo_q->value(rkr->efx_MuTroMojo->getpar(MuTro_Resonance));
+                MUTROMOJO->mutromojo_q->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Resonance));
                 MUTROMOJO->mutromojo_q->redraw();
                 break;
             case MC_MuTro_Range:
-                MUTROMOJO->mutromojo_rng->value(rkr->efx_MuTroMojo->getpar(MuTro_Range));
+                MUTROMOJO->mutromojo_rng->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range));
                 MUTROMOJO->mutromojo_rng->redraw();
                 break;
             case MC_MuTro_Wah:
-                MUTROMOJO->mutromojo_ampsnsinv->value(rkr->efx_MuTroMojo->getpar(MuTro_Wah));
+                MUTROMOJO->mutromojo_ampsnsinv->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Wah));
                 MUTROMOJO->mutromojo_ampsnsinv->redraw();
                 break;
             case MC_MuTro_Env_Sens:
-                MUTROMOJO->mutromojo_ampsns->value(rkr->efx_MuTroMojo->getpar(MuTro_Env_Sens));
+                MUTROMOJO->mutromojo_ampsns->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Sens));
                 MUTROMOJO->mutromojo_ampsns->redraw();
                 break;
             case MC_MuTro_Env_Smooth:
-                MUTROMOJO->mutromojo_smooth->value(rkr->efx_MuTroMojo->getpar(MuTro_Env_Smooth));
+                MUTROMOJO->mutromojo_smooth->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Smooth));
                 MUTROMOJO->mutromojo_smooth->redraw();
                 break;
             case MC_Looper_DryWet:
@@ -4860,15 +4860,15 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUSDELAY->musdelay_damp->redraw();
                 break;
             case MC_MuTro_LFO_Random:
-                MUTROMOJO->mutromojo_Rnd->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Random));
+                MUTROMOJO->mutromojo_Rnd->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Random));
                 MUTROMOJO->mutromojo_Rnd->redraw();
                 break;
             case MC_MuTro_LFO_Stereo:
-                MUTROMOJO->mutromojo_St->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Stereo) - 64);
+                MUTROMOJO->mutromojo_St->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Stereo) - 64);
                 MUTROMOJO->mutromojo_St->redraw();
                 break;
             case MC_MuTro_St_Freq:
-                MUTROMOJO->mutromojo_minfreq->value(rkr->efx_MuTroMojo->getpar(MuTro_St_Freq));
+                MUTROMOJO->mutromojo_minfreq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq));
                 MUTROMOJO->mutromojo_minfreq->redraw();
                 break;
             case MC_Gate_Attack:
@@ -5006,7 +5006,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHOTRON->echotron_lfotype->redraw();
                 break;
             case MC_MuTro_LFO_Type:
-                MUTROMOJO->mutromojo_lfotype->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Type));
+                MUTROMOJO->mutromojo_lfotype->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Type));
                 MUTROMOJO->mutromojo_lfotype->redraw();
                 break;
             case MC_Optical_LFO_Type:
@@ -6111,7 +6111,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_MUTROMOJO])
     {
-        MUTROMOJO->mutromojo_freq->value(rkr->efx_MuTroMojo->getpar(MuTro_LFO_Tempo));
+        MUTROMOJO->mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
         MUTROMOJO->mutromojo_freq->redraw();
     }
 

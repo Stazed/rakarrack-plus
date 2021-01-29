@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_MuTroMojo(NULL),
     efx_Echoverse(NULL),
     efx_CoilCrafter(NULL),
     efx_ShelfBoost(NULL),
@@ -382,7 +381,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_VARYBAND];
     delete Rack_Effects[EFX_CONVOLOTRON];
     delete Rack_Effects[EFX_LOOPER];
-    delete efx_MuTroMojo;
+    delete Rack_Effects[EFX_MUTROMOJO];
     delete efx_Echoverse;
     delete efx_CoilCrafter;
     delete efx_ShelfBoost;
@@ -642,7 +641,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_VARYBAND] = new VaryBand(fSample_rate, period);
     Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
     Rack_Effects[EFX_LOOPER] = new Looper(looper_size, fSample_rate, period);
-    efx_MuTroMojo = new MuTroMojo(fSample_rate, period);
+    Rack_Effects[EFX_MUTROMOJO] = new MuTroMojo(fSample_rate, period);
     efx_Echoverse = new Echoverse(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
@@ -1158,7 +1157,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_VARYBAND]->cleanup();
     Rack_Effects[EFX_CONVOLOTRON]->cleanup();
     Rack_Effects[EFX_LOOPER]->cleanup();
-    efx_MuTroMojo->cleanup();
+    Rack_Effects[EFX_MUTROMOJO]->cleanup();
     efx_Echoverse->cleanup();
     efx_CoilCrafter->cleanup();
     efx_ShelfBoost->cleanup();
@@ -1546,8 +1545,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_MUTROMOJO:
                 if (EFX_Bypass[EFX_MUTROMOJO])
                 {
-                    efx_MuTroMojo->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_MUTROMOJO, efx_MuTroMojo->outvolume);
+                    Rack_Effects[EFX_MUTROMOJO]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_MUTROMOJO, Rack_Effects[EFX_MUTROMOJO]->outvolume);
                 }
                 break;
 

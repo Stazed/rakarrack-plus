@@ -26,6 +26,8 @@
 
 #ifndef MUTROMOJO_H
 #define MUTROMOJO_H
+
+#include "Effect.h"
 #include "EffectLFO.h"
 #include "RBFilter.h"
 #include "AnalogFilter.h"
@@ -58,7 +60,7 @@ enum MuTro_Index
     MuTro_Exp_Wah       // LV2 only
 };
 
-class MuTroMojo
+class MuTroMojo : public Effect
 {
 public:
     MuTroMojo (double sample_rate, uint32_t intermediate_bufsize);
@@ -77,10 +79,8 @@ public:
     void initialize();
     void clear_initialize();
 
-    int Ppreset;
     int Pmode;
-    float outvolume;
-    
+
 private:
 
     void setvolume (int Pvolume);
@@ -122,9 +122,8 @@ private:
     class AnalogFilter *sidechain_filter;
     float* interpbuf; //buffer for filters
 
-    class FPreset *Fpre;
     EffectLFO *lfo;		//lfo-ul MuTroMojo
-    
+
 };
 
 #endif

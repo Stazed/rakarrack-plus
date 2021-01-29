@@ -2491,47 +2491,47 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_MuTro_DryWet:
-        efx_MuTroMojo->changepar(MuTro_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_DryWet, Dry_Wet(value));
         break;
 
     case MC_MuTro_LowPass:
-        efx_MuTroMojo->changepar(MuTro_LowPass, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass, value - 64);
         break;
 
     case MC_MuTro_BandPass:
-        efx_MuTroMojo->changepar(MuTro_BandPass, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass, value - 64);
         break;
 
     case MC_MuTro_HighPass:
-        efx_MuTroMojo->changepar(MuTro_HighPass, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass, value - 64);
         break;
 
     case MC_MuTro_Depth:
-        efx_MuTroMojo->changepar(MuTro_Depth, value);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Depth, value);
         break;
 
     case MC_MuTro_LFO_Tempo:
-        efx_MuTroMojo->changepar(MuTro_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_MuTro_Resonance:
-        efx_MuTroMojo->changepar(MuTro_Resonance, value);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Resonance, value);
         break;
 
     case MC_MuTro_Range:
-        efx_MuTroMojo->changepar(MuTro_Range, 10 + (int) ((float) value * C_MC_5990_RANGE));
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Range, 10 + (int) ((float) value * C_MC_5990_RANGE));
         break;
 
     case MC_MuTro_Wah:
-        efx_MuTroMojo->changepar(MuTro_Wah, value);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Wah, value);
         break;
 
     case MC_MuTro_Env_Sens:
-        efx_MuTroMojo->changepar(MuTro_Env_Sens, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens, value - 64);
         break;
 
     case MC_MuTro_Env_Smooth:
-        efx_MuTroMojo->changepar(MuTro_Env_Smooth, value);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Smooth, value);
         break;
 
     case MC_Looper_DryWet:
@@ -3213,15 +3213,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_MuTro_LFO_Random:
-        efx_MuTroMojo->changepar(MuTro_LFO_Random, value);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Random, value);
         break;
 
     case MC_MuTro_LFO_Stereo:
-        efx_MuTroMojo->changepar(MuTro_LFO_Stereo, value);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Stereo, value);
         break;
 
     case MC_MuTro_St_Freq:
-        efx_MuTroMojo->changepar(MuTro_St_Freq, 30 + (int) ((float) value * C_MC_770_RANGE));
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq, 30 + (int) ((float) value * C_MC_770_RANGE));
         break;
 
     case MC_Gate_Attack:
@@ -3357,7 +3357,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_MuTro_LFO_Type:
-        efx_MuTroMojo->changepar(MuTro_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Optical_LFO_Type:
