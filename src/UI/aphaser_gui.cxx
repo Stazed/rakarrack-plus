@@ -11,7 +11,7 @@ void AphaserGui::cb_aphaser_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_ANALOG_PHASER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_APhaser->cleanup();
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
 rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);
 }
 void AphaserGui::cb_aphaser_activar(RKR_Light_Button* o, void* v) {
@@ -20,20 +20,20 @@ void AphaserGui::cb_aphaser_activar(RKR_Light_Button* o, void* v) {
 
 void AphaserGui::cb_aphaser_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12018))rkr->efx_APhaser->setpreset((int) o->value());
-aphaser_WD->value(Dry_Wet(rkr->efx_APhaser->getpar(APhase_DryWet)));
-aphaser_distort->value(rkr->efx_APhaser->getpar(APhase_Distortion));
-aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFO_Tempo));
-aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Random));
-aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFO_Type));
-aphaser_stdf->value(rkr->efx_APhaser->getpar(APhase_LFO_Stereo));
-aphaser_width->value(rkr->efx_APhaser->getpar(APhase_Width));
-aphaser_stages->value(rkr->efx_APhaser->getpar(APhase_Stages));
-aphaser_fb->value(rkr->efx_APhaser->getpar(APhase_Feedback)-64);
-aphaser_mismatch->value(rkr->efx_APhaser->getpar(APhase_Mismatch));
-aphaser_subs->value(rkr->efx_APhaser->getpar(APhase_Subtract));
-aphaser_depth->value(rkr->efx_APhaser->getpar(APhase_Depth));
-aphaser_hyper->value(rkr->efx_APhaser->getpar(APhase_Hyper));
+if((ud==0)||(ud==12018))rkr->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
+aphaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
+aphaser_distort->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
+aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
+aphaser_rnd->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
+aphaser_lfotype->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
+aphaser_stdf->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
+aphaser_width->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
+aphaser_stages->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages));
+aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-64);
+aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
+aphaser_subs->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
+aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
+aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));
 }
 void AphaserGui::cb_aphaser_preset(RKR_Choice* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_preset_i(o,v);
@@ -55,7 +55,7 @@ void AphaserGui::cb_aphaser_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_DryWet);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_DryWet,Dry_Wet((int)(o->value())));
 }
 void AphaserGui::cb_aphaser_WD(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_WD_i(o,v);
@@ -67,7 +67,7 @@ void AphaserGui::cb_aphaser_distort_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_Distortion);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_Distortion,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Distortion,(int)o->value());
 }
 void AphaserGui::cb_aphaser_distort(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_distort_i(o,v);
@@ -79,7 +79,7 @@ void AphaserGui::cb_aphaser_freq_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_LFO_Tempo);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFO_Tempo,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo,(int)o->value());
 }
 void AphaserGui::cb_aphaser_freq(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_freq_i(o,v);
@@ -91,7 +91,7 @@ void AphaserGui::cb_aphaser_rnd_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_LFO_Random);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFO_Random,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Random,(int)o->value());
 }
 void AphaserGui::cb_aphaser_rnd(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_rnd_i(o,v);
@@ -104,7 +104,7 @@ void AphaserGui::cb_aphaser_lfotype_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_APhaser->changepar(APhase_LFO_Type,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Type,(int)o->value());
 }
 void AphaserGui::cb_aphaser_lfotype(RKR_Choice* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_lfotype_i(o,v);
@@ -116,7 +116,7 @@ void AphaserGui::cb_aphaser_width_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_Width);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_Width,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Width,(int)o->value());
 }
 void AphaserGui::cb_aphaser_width(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_width_i(o,v);
@@ -128,7 +128,7 @@ void AphaserGui::cb_aphaser_depth_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_Depth);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_Depth,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Depth,(int)o->value());
 }
 void AphaserGui::cb_aphaser_depth(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_depth_i(o,v);
@@ -140,7 +140,7 @@ void AphaserGui::cb_aphaser_fb_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_Feedback);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_Feedback,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Feedback,(int)(o->value()+64));
 }
 void AphaserGui::cb_aphaser_fb(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_fb_i(o,v);
@@ -152,7 +152,7 @@ void AphaserGui::cb_aphaser_mismatch_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_Mismatch);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_Mismatch,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Mismatch,(int)o->value());
 }
 void AphaserGui::cb_aphaser_mismatch(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_mismatch_i(o,v);
@@ -164,28 +164,28 @@ void AphaserGui::cb_aphaser_stdf_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_APhase_LFO_Stereo);
  return;
 } 
-rkr->efx_APhaser->changepar(APhase_LFO_Stereo,(int)o->value());
+rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value());
 }
 void AphaserGui::cb_aphaser_stdf(RKR_Slider* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stdf_i(o,v);
 }
 
 void AphaserGui::cb_aphaser_stages_i(RKR_Counter* o, void*) {
-  rkr->efx_APhaser->changepar(APhase_Stages,(int)o->value());
+  rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Stages,(int)o->value());
 }
 void AphaserGui::cb_aphaser_stages(RKR_Counter* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_stages_i(o,v);
 }
 
 void AphaserGui::cb_aphaser_subs_i(RKR_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(APhase_Subtract,(int)o->value());
+  rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Subtract,(int)o->value());
 }
 void AphaserGui::cb_aphaser_subs(RKR_Check_Button* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_subs_i(o,v);
 }
 
 void AphaserGui::cb_aphaser_hyper_i(RKR_Check_Button* o, void*) {
-  rkr->efx_APhaser->changepar(APhase_Hyper,(int)o->value());
+  rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Hyper,(int)o->value());
 }
 void AphaserGui::cb_aphaser_hyper(RKR_Check_Button* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_hyper_i(o,v);

@@ -674,13 +674,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_ANALOG_PHASER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_APhaser->getpar(APhase_DryWet), efx_APhaser->getpar(APhase_Distortion),
-                efx_APhaser->getpar(APhase_LFO_Tempo), efx_APhaser->getpar(APhase_LFO_Random),
-                efx_APhaser->getpar(APhase_LFO_Type), efx_APhaser->getpar(APhase_LFO_Stereo),
-                efx_APhaser->getpar(APhase_Width), efx_APhaser->getpar(APhase_Feedback),
-                efx_APhaser->getpar(APhase_Stages), efx_APhaser->getpar(APhase_Mismatch),
-                efx_APhaser->getpar(APhase_Subtract), efx_APhaser->getpar(APhase_Depth),
-                efx_APhaser->getpar(APhase_Hyper), EFX_Bypass[EFX_ANALOG_PHASER]);
+                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion),
+                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random),
+                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo),
+                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback),
+                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch),
+                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth),
+                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper), EFX_Bypass[EFX_ANALOG_PHASER]);
         break;
 
     case EFX_VALVE:
@@ -1451,9 +1451,9 @@ RKR::Actualizar_Audio()
 
         case EFX_ANALOG_PHASER:
             EFX_Bypass[EFX_ANALOG_PHASER] = 0;
-            efx_APhaser->cleanup();
+            Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
             for (i = 0; i < C_APHASER_PARAMETERS; i++)
-                efx_APhaser->changepar(i, lv[EFX_ANALOG_PHASER][i]);
+                Rack_Effects[EFX_ANALOG_PHASER]->changepar(i, lv[EFX_ANALOG_PHASER][i]);
             EFX_Bypass[EFX_ANALOG_PHASER] = EFX_Bank_Bypass[EFX_ANALOG_PHASER];
             break;
 
@@ -2358,7 +2358,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_DERE_PARAMETERS; j++)
         lv[EFX_DERELICT][j] = efx_Derelict->getpar(j);
     for (j = 0; j < C_APHASER_PARAMETERS; j++)
-        lv[EFX_ANALOG_PHASER][j] = efx_APhaser->getpar(j);
+        lv[EFX_ANALOG_PHASER][j] = Rack_Effects[EFX_ANALOG_PHASER]->getpar(j);
     for (j = 0; j < C_VALVE_PARAMETERS; j++)
         lv[EFX_VALVE][j] = efx_Valve->getpar(j);
     for (j = 0; j < C_DFLANGE_PARAMETERS; j++)

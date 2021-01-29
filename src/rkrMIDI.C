@@ -1933,35 +1933,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_APhase_DryWet:
-        efx_APhaser->changepar(APhase_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_DryWet, Dry_Wet(value));
         break;
 
     case MC_APhase_Distortion:
-        efx_APhaser->changepar(APhase_Distortion, value);
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Distortion, value);
         break;
 
     case MC_APhase_LFO_Tempo:
-        efx_APhaser->changepar(APhase_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_APhase_Depth:
-        efx_APhaser->changepar(APhase_Depth, value);
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Depth, value);
         break;
 
     case MC_APhase_Width:
-        efx_APhaser->changepar(APhase_Width, value);
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Width, value);
         break;
 
     case MC_APhase_Feedback:
-        efx_APhaser->changepar(APhase_Feedback, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Feedback, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_APhase_Mismatch:
-        efx_APhaser->changepar(APhase_Mismatch, value);
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Mismatch, value);
         break;
 
     case MC_APhase_LFO_Stereo:
-        efx_APhaser->changepar(APhase_LFO_Stereo, value);
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo, value);
         break;
 
     case MC_Dere_DryWet:
@@ -3123,7 +3123,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_APhase_LFO_Random:
-        efx_APhaser->changepar(APhase_LFO_Random, value);
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Random, value);
         break;
 
     case MC_Cabinet_Gain:
@@ -3335,7 +3335,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_APhase_LFO_Type:
-        efx_APhaser->changepar(APhase_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Chorus_LFO_Type:

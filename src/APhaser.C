@@ -42,8 +42,7 @@
 #define ZERO_ 0.00001f        // Same idea as above.
 
 Analog_Phaser::Analog_Phaser(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(0),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     fPERIOD(intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     Pvolume(),
@@ -81,8 +80,7 @@ Analog_Phaser::Analog_Phaser(double sample_rate, uint32_t intermediate_bufsize) 
     Rconst(1.0f + Rmx), // Handle parallel resistor relationship
     C(0.00000005f),     // 50 nF
     CFs(),
-    lfo(NULL),
-    Fpre(NULL)
+    lfo(NULL)
 {
     float fSAMPLE_RATE = sample_rate;
 

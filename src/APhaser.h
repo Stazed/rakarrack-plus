@@ -26,6 +26,8 @@
 
 #ifndef APHASER_H
 #define APHASER_H
+
+#include "Effect.h"
 #include "EffectLFO.h"
 
 const int C_APHASER_PARAMETERS = 13;
@@ -47,7 +49,7 @@ enum APhaser_Index
     APhase_Hyper
 };
 
-class Analog_Phaser
+class Analog_Phaser : public Effect
 {
 public:
     Analog_Phaser (double sample_rate, uint32_t intermediate_bufsize);
@@ -61,9 +63,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume;
 
 private:
     float fPERIOD;
@@ -105,8 +104,6 @@ private:
     float CFs;		// A constant derived from capacitor and resistor relationships
 
     EffectLFO *lfo;		//Phaser modulator
-    
-    class FPreset *Fpre;
 
 };
 

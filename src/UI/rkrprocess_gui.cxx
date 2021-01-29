@@ -3613,35 +3613,35 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ActOnOff();
                 break;
             case MC_APhase_DryWet:
-                APHASER->aphaser_WD->value(Dry_Wet(rkr->efx_APhaser->getpar(APhase_DryWet)));
+                APHASER->aphaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
                 APHASER->aphaser_WD->redraw();
                 break;
             case MC_APhase_Distortion:
-                APHASER->aphaser_distort->value(rkr->efx_APhaser->getpar(APhase_Distortion));
+                APHASER->aphaser_distort->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
                 APHASER->aphaser_distort->redraw();
                 break;
             case MC_APhase_LFO_Tempo:
-                APHASER->aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFO_Tempo));
+                APHASER->aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
                 APHASER->aphaser_freq->redraw();
                 break;
             case MC_APhase_Depth:
-                APHASER->aphaser_depth->value(rkr->efx_APhaser->getpar(APhase_Depth));
+                APHASER->aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
                 APHASER->aphaser_depth->redraw();
                 break;
             case MC_APhase_Width:
-                APHASER->aphaser_width->value(rkr->efx_APhaser->getpar(APhase_Width));
+                APHASER->aphaser_width->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
                 APHASER->aphaser_width->redraw();
                 break;
             case MC_APhase_Feedback:
-                APHASER->aphaser_fb->value(rkr->efx_APhaser->getpar(APhase_Feedback) - 64);
+                APHASER->aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback) - 64);
                 APHASER->aphaser_fb->redraw();
                 break;
             case MC_APhase_Mismatch:
-                APHASER->aphaser_mismatch->value(rkr->efx_APhaser->getpar(APhase_Mismatch));
+                APHASER->aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
                 APHASER->aphaser_mismatch->redraw();
                 break;
             case MC_APhase_LFO_Stereo:
-                APHASER->aphaser_stdf->value(rkr->efx_APhaser->getpar(APhase_LFO_Stereo));
+                APHASER->aphaser_stdf->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
                 APHASER->aphaser_stdf->redraw();
                 break;
             case MC_Dere_DryWet:
@@ -4772,7 +4772,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_delay->redraw();
                 break;
             case MC_APhase_LFO_Random:
-                APHASER->aphaser_rnd->value(rkr->efx_APhaser->getpar(APhase_LFO_Random));
+                APHASER->aphaser_rnd->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
                 APHASER->aphaser_rnd->redraw();
                 break;
             case MC_Cabinet_Gain:
@@ -4986,7 +4986,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_lfotype->redraw();
                 break;
             case MC_APhase_LFO_Type:
-                APHASER->aphaser_lfotype->value(rkr->efx_APhaser->getpar(APhase_LFO_Type));
+                APHASER->aphaser_lfotype->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
                 APHASER->aphaser_lfotype->redraw();
                 break;
             case MC_Chorus_LFO_Type:
@@ -6093,7 +6093,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_ANALOG_PHASER])
     {
-        APHASER->aphaser_freq->value(rkr->efx_APhaser->getpar(APhase_LFO_Tempo));
+        APHASER->aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
         APHASER->aphaser_freq->redraw();
     }
 
