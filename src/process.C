@@ -51,7 +51,6 @@ char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
     efx_Compressor(NULL),
-    efx_WahWah(NULL),
     efx_Alienwah(NULL),
     efx_Cabinet(NULL),
     efx_Pan(NULL),
@@ -377,7 +376,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_PARAMETRIC];
     delete Rack_Effects[EFX_EQ];
     delete efx_Compressor;
-    delete efx_WahWah;
+    delete Rack_Effects[EFX_WAHWAH];
     delete efx_Alienwah;
     delete efx_Cabinet;
     delete efx_Pan;
@@ -637,7 +636,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_PARAMETRIC] = new ParametricEQ(fSample_rate, period);
     Rack_Effects[EFX_EQ] = new EQ( fSample_rate, period);
     efx_Compressor = new Compressor(fSample_rate, period);
-    efx_WahWah = new WahWah(fSample_rate, period);
+    Rack_Effects[EFX_WAHWAH] = new WahWah(fSample_rate, period);
     efx_Alienwah = new Alienwah(fSample_rate, period);
     efx_Cabinet = new Cabinet(fSample_rate, period);
     efx_Pan = new Pan(fSample_rate, period);
@@ -1153,7 +1152,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_FLANGER]->cleanup();
     Rack_Effects[EFX_PHASER]->cleanup();
     Rack_Effects[EFX_PARAMETRIC]->cleanup();
-    efx_WahWah->cleanup();
+    Rack_Effects[EFX_WAHWAH]->cleanup();
     efx_Alienwah->cleanup();
     efx_Cabinet->cleanup();
     efx_Pan->cleanup();
@@ -1392,8 +1391,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_WAHWAH:
                 if (EFX_Bypass[EFX_WAHWAH])
                 {
-                    efx_WahWah->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_WAHWAH, efx_WahWah->outvolume);
+                    Rack_Effects[EFX_WAHWAH]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_WAHWAH, Rack_Effects[EFX_WAHWAH]->outvolume);
                 }
                 break;
 

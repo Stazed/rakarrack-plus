@@ -1521,7 +1521,7 @@ RKR::process_midi_controller_events(int parameter, int value)
 // Start MIDI Implementation Chart range
 
     case MC_WahWah_Depth:
-        efx_WahWah->changepar(WahWah_Depth, value);
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Depth, value);
         break;
 
     case MC_Dere_Drive:
@@ -1618,7 +1618,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_WahWah_DryWet:
-        efx_WahWah->changepar(WahWah_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_DryWet, Dry_Wet(value));
         break;
 
     case MC_Overdrive_DryWet:
@@ -1729,7 +1729,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_WahWah_Pan:
-        efx_WahWah->changepar(WahWah_Pan, value);
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Pan, value);
         break;
 
     case MC_Pan_Pan:
@@ -1765,7 +1765,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_WahWah_LFO_Tempo:
-        efx_WahWah->changepar(WahWah_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Alien_LFO_Tempo:
@@ -1873,7 +1873,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_WahWah_LFO_Stereo:
-        efx_WahWah->changepar(WahWah_LFO_Stereo, value);
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Stereo, value);
         break;
 
     case MC_Alien_LFO_Stereo:
@@ -1897,7 +1897,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_WahWah_LFO_Random:
-        efx_WahWah->changepar(WahWah_LFO_Random, value);
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Random, value);
         break;
 
     case MC_Alien_LFO_Random:
@@ -1909,15 +1909,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_WahWah_Sense:
-        efx_WahWah->changepar(WahWah_Sense, value);
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Sense, value);
         break;
 
     case MC_WahWah_ASI:
-        efx_WahWah->changepar(WahWah_ASI, value);
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_ASI, value);
         break;
 
     case MC_WahWah_Smooth:
-        efx_WahWah->changepar(WahWah_Smooth, value);
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Smooth, value);
         break;
 
     case MC_Phaser_Phase:
@@ -3389,7 +3389,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_WahWah_LFO_Type:
-        efx_WahWah->changepar(WahWah_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
     }
 }

@@ -29,8 +29,7 @@
 #include <stdio.h>
 
 WahWah::WahWah(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     Pvolume(),
@@ -51,8 +50,7 @@ WahWah::WahWah(double sample_rate, uint32_t intermediate_bufsize) :
     lfo(NULL),
     filterl(NULL),
     filterr(NULL),
-    filterpars(NULL),
-    Fpre(NULL)
+    filterpars(NULL)
 {
     lfo = new EffectLFO(sample_rate);
     filterpars = new FilterParams(0, 64, 64, sample_rate, PERIOD);

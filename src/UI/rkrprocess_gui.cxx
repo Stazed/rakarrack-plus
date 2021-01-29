@@ -3204,7 +3204,7 @@ void RKRGUI::MIDI_control_gui_refresh()
 // Start MIDI Implementation Chart range
 
             case MC_WahWah_Depth:
-                WAHWAH->WahWah_dpth->value(rkr->efx_WahWah->getpar(WahWah_Depth));
+                WAHWAH->WahWah_dpth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Depth));
                 WAHWAH->WahWah_dpth->redraw();
                 break;
             case MC_Dere_Drive:
@@ -3297,7 +3297,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 HAR->har_int->redraw();
                 break;
             case MC_WahWah_DryWet:
-                WAHWAH->WahWah_WD->value(Dry_Wet(rkr->efx_WahWah->getpar(WahWah_DryWet)));
+                WAHWAH->WahWah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_DryWet)));
                 WAHWAH->WahWah_WD->redraw();
                 break;
             case MC_Overdrive_DryWet:
@@ -3410,7 +3410,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUSDELAY->musdelay_pan2->redraw();
                 break;
             case MC_WahWah_Pan:
-                WAHWAH->WahWah_pan->value(rkr->efx_WahWah->getpar(WahWah_Pan) - 64);
+                WAHWAH->WahWah_pan->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Pan) - 64);
                 WAHWAH->WahWah_pan->redraw();
                 break;
             case MC_Pan_Pan:
@@ -3446,7 +3446,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_freq->redraw();
                 break;
             case MC_WahWah_LFO_Tempo:
-                WAHWAH->WahWah_freq->value(rkr->efx_WahWah->getpar(WahWah_LFO_Tempo));
+                WAHWAH->WahWah_freq->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
                 WAHWAH->WahWah_freq->redraw();
                 break;
             case MC_Alien_LFO_Tempo:
@@ -3554,7 +3554,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_stdf->redraw();
                 break;
             case MC_WahWah_LFO_Stereo:
-                WAHWAH->WahWah_stdf->value(rkr->efx_WahWah->getpar(WahWah_LFO_Stereo));
+                WAHWAH->WahWah_stdf->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Stereo));
                 WAHWAH->WahWah_stdf->redraw();
                 break;
             case MC_Alien_LFO_Stereo:
@@ -3578,7 +3578,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PHASER->phaser_rnd->redraw();
                 break;
             case MC_WahWah_LFO_Random:
-                WAHWAH->WahWah_rnd->value(rkr->efx_WahWah->getpar(WahWah_LFO_Random));
+                WAHWAH->WahWah_rnd->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Random));
                 WAHWAH->WahWah_rnd->redraw();
                 break;
             case MC_Alien_LFO_Random:
@@ -3590,15 +3590,15 @@ void RKRGUI::MIDI_control_gui_refresh()
                 PAN->pan_rnd->redraw();
                 break;
             case MC_WahWah_Sense:
-                WAHWAH->WahWah_ampsns->value(rkr->efx_WahWah->getpar(WahWah_Sense));
+                WAHWAH->WahWah_ampsns->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Sense));
                 WAHWAH->WahWah_ampsns->redraw();
                 break;
             case MC_WahWah_ASI:
-                WAHWAH->WahWah_ampsnsinv->value(rkr->efx_WahWah->getpar(WahWah_ASI));
+                WAHWAH->WahWah_ampsnsinv->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_ASI));
                 WAHWAH->WahWah_ampsnsinv->redraw();
                 break;
             case MC_WahWah_Smooth:
-                WAHWAH->WahWah_smooth->value(rkr->efx_WahWah->getpar(WahWah_Smooth));
+                WAHWAH->WahWah_smooth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Smooth));
                 WAHWAH->WahWah_smooth->redraw();
                 break;
             case MC_Phaser_Phase:
@@ -5038,7 +5038,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 VIBE->vibe_lfotype->redraw();
                 break;
             case MC_WahWah_LFO_Type:
-                WAHWAH->WahWah_lfotype->value(rkr->efx_WahWah->getpar(WahWah_LFO_Type));
+                WAHWAH->WahWah_lfotype->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Type));
                 WAHWAH->WahWah_lfotype->redraw();
                 break;
         }
@@ -6075,7 +6075,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_WAHWAH])
     {
-        WAHWAH->WahWah_freq->value(rkr->efx_WahWah->getpar(WahWah_LFO_Tempo));
+        WAHWAH->WahWah_freq->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
         WAHWAH->WahWah_freq->redraw();
     }
 

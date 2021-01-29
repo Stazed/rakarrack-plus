@@ -27,6 +27,7 @@
 #ifndef WAHWAH_H
 #define WAHWAH_H
 
+#include "Effect.h"
 #include "EffectLFO.h"
 #include "Filter.h"
 
@@ -47,7 +48,7 @@ enum WahWah_Index
     WahWah_Mode
 };
 
-class WahWah
+class WahWah : public Effect
 {
 public:
     WahWah (double sample_rate, uint32_t intermediate_bufsize);
@@ -62,9 +63,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume; 
 
 private:
     
@@ -96,7 +94,6 @@ private:
 
     class Filter *filterl, *filterr;
     class FilterParams *filterpars;
-    class FPreset *Fpre;
 
 };
 

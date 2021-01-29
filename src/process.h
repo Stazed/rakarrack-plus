@@ -711,7 +711,7 @@ public:
 
     // class pointers
     class Compressor *efx_Compressor;
-    class WahWah *efx_WahWah;
+
     class Alienwah *efx_Alienwah;
     class Cabinet *efx_Cabinet;
     class Pan *efx_Pan;
