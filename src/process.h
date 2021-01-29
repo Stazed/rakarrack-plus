@@ -724,6 +724,7 @@ public:
     class MusicDelay *efx_MusDelay;
     class Gate *efx_Gate;
     class Derelict *efx_Derelict;
+
     class Tuner *efx_Tuner;
     class MIDIConverter *efx_MIDIConverter;
     class metronome *M_Metronome;
@@ -739,8 +740,15 @@ public:
      * Pointer array to all rack effects, indexed by EFX_Index.
      */
     Effect *Rack_Effects[C_NUMBER_EFFECTS];
-    
+
+    /**
+     * Arrays to hold bypass flags for each effect, indexed by EFX_Index.
+     */
+    int EFX_Bypass[C_NUMBER_EFFECTS];
+    int EFX_Bank_Bypass[C_NUMBER_EFFECTS];
+
     class Compressor *efx_FLimiter;
+
     class Valve *efx_Valve;
     class Dflange *efx_DFlange;
     class Ring *efx_Ring;
@@ -751,11 +759,13 @@ public:
     class Synthfilter *efx_Synthfilter;
     class Shuffle *efx_Shuffle;
     class VaryBand *efx_VaryBand;
+
     class Resample *U_Resample;
     class Resample *D_Resample;
     class Resample *A_Resample;
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
+
     class MuTroMojo *efx_MuTroMojo;
     class Echoverse *efx_Echoverse;
     class CoilCrafter *efx_CoilCrafter;
@@ -785,9 +795,6 @@ public:
     int Tuner_Bypass;
     int Tap_Bypass;
     int ACI_Bypass;
-
-    int EFX_Bypass[C_NUMBER_EFFECTS];
-    int EFX_Bank_Bypass[C_NUMBER_EFFECTS];
 
     int Bypass_B;
 
