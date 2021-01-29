@@ -2315,35 +2315,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Arpie_DryWet:
-        efx_Arpie->changepar(Arpie_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_DryWet, Dry_Wet(value));
         break;
 
     case MC_Arpie_ArpeWD:
-        efx_Arpie->changepar(Arpie_ArpeWD, value);
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_ArpeWD, value);
         break;
 
     case MC_Arpie_Pan:
-        efx_Arpie->changepar(Arpie_Pan, value);
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_Pan, value);
         break;
 
     case MC_Arpie_Tempo:
-        efx_Arpie->changepar(Arpie_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_Tempo, ret_Tempo(value));
         break;
 
     case MC_Arpie_LR_Delay:
-        efx_Arpie->changepar(Arpie_LR_Delay, value);
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_LR_Delay, value);
         break;
 
     case MC_Arpie_LR_Cross:
-        efx_Arpie->changepar(Arpie_LR_Cross, value);
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_LR_Cross, value);
         break;
 
     case MC_Arpie_Feedback:
-        efx_Arpie->changepar(Arpie_Feedback, value);
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_Feedback, value);
         break;
 
     case MC_Arpie_Damp:
-        efx_Arpie->changepar(Arpie_Damp, value);
+        Rack_Effects[EFX_ARPIE]->changepar(Arpie_Damp, value);
         break;
 
     case MC_Expander_Attack:

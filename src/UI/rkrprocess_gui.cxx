@@ -3992,35 +3992,35 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DISTBAND->distband_pan->redraw();
                 break;
             case MC_Arpie_DryWet:
-                ARPIE->arpie_WD->value(Dry_Wet(rkr->efx_Arpie->getpar(Arpie_DryWet)));
+                ARPIE->arpie_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_DryWet)));
                 ARPIE->arpie_WD->redraw();
                 break;
             case MC_Arpie_ArpeWD:
-                ARPIE->arpie_arpe->value(rkr->efx_Arpie->getpar(Arpie_ArpeWD));
+                ARPIE->arpie_arpe->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_ArpeWD));
                 ARPIE->arpie_arpe->redraw();
                 break;
             case MC_Arpie_Pan:
-                ARPIE->arpie_pan->value(rkr->efx_Arpie->getpar(Arpie_Pan) - 64);
+                ARPIE->arpie_pan->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pan) - 64);
                 ARPIE->arpie_pan->redraw();
                 break;
             case MC_Arpie_Tempo:
-                ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
+                ARPIE->arpie_delay->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Tempo));
                 ARPIE->arpie_delay->redraw();
                 break;
             case MC_Arpie_LR_Delay:
-                ARPIE->arpie_LRdl->value(rkr->efx_Arpie->getpar(Arpie_LR_Delay));
+                ARPIE->arpie_LRdl->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Delay));
                 ARPIE->arpie_LRdl->redraw();
                 break;
             case MC_Arpie_LR_Cross:
-                ARPIE->arpie_LRc->value(rkr->efx_Arpie->getpar(Arpie_LR_Cross));
+                ARPIE->arpie_LRc->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Cross));
                 ARPIE->arpie_LRc->redraw();
                 break;
             case MC_Arpie_Feedback:
-                ARPIE->arpie_fb->value(rkr->efx_Arpie->getpar(Arpie_Feedback));
+                ARPIE->arpie_fb->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Feedback));
                 ARPIE->arpie_fb->redraw();
                 break;
             case MC_Arpie_Damp:
-                ARPIE->arpie_damp->value(rkr->efx_Arpie->getpar(Arpie_Damp));
+                ARPIE->arpie_damp->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Damp));
                 ARPIE->arpie_damp->redraw();
                 break;
             case MC_Expander_Attack:
@@ -6129,7 +6129,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_ARPIE])
     {
-        ARPIE->arpie_delay->value(rkr->efx_Arpie->getpar(Arpie_Tempo));
+        ARPIE->arpie_delay->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Tempo));
         ARPIE->arpie_delay->redraw();
     }
 

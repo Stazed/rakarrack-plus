@@ -25,6 +25,7 @@
 #ifndef ARPIE_H
 #define ARPIE_H
 
+#include "Effect.h"
 #include "global.h"
 
 const int C_ARPIE_PARAMETERS = 11;
@@ -44,7 +45,7 @@ enum Arpie_Index
     Arpie_Subdivision
 };
 
-class Arpie
+class Arpie : public Effect
 {
 public:
     Arpie (double sample_rate, uint32_t intermediate_bufsize);
@@ -58,9 +59,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume;
 
 private:
     
@@ -105,7 +103,6 @@ private:
     float oldl, oldr;		//pt. lpf
     float  Srate_Attack_Coeff, envattack, envswell;
 
-    class FPreset *Fpre;
 };
 
 

@@ -27,8 +27,7 @@
 #include "Arpie.h"
 
 Arpie::Arpie(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(0),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     PERIOD(intermediate_bufsize),
     Pvolume(50),
@@ -70,8 +69,7 @@ Arpie::Arpie(double sample_rate, uint32_t intermediate_bufsize) :
     oldr(),
     Srate_Attack_Coeff(1.0f / (fSAMPLE_RATE * ATTACK)),
     envattack(),
-    envswell(),
-    Fpre(NULL)
+    envswell()
 {
     uint32_t SAMPLE_RATE = sample_rate;
 

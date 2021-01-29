@@ -742,12 +742,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_ARPIE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Arpie->getpar(Arpie_DryWet), efx_Arpie->getpar(Arpie_Pan),
-                efx_Arpie->getpar(Arpie_Tempo), efx_Arpie->getpar(Arpie_LR_Delay),
-                efx_Arpie->getpar(Arpie_LR_Cross), efx_Arpie->getpar(Arpie_Feedback),
-                efx_Arpie->getpar(Arpie_Damp), efx_Arpie->getpar(Arpie_ArpeWD),
-                efx_Arpie->getpar(Arpie_Harm), efx_Arpie->getpar(Arpie_Pattern),
-                efx_Arpie->getpar(Arpie_Subdivision), EFX_Bypass[EFX_ARPIE]);
+                Rack_Effects[EFX_ARPIE]->getpar(Arpie_DryWet), Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pan),
+                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Tempo), Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Delay),
+                Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Cross), Rack_Effects[EFX_ARPIE]->getpar(Arpie_Feedback),
+                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Damp), Rack_Effects[EFX_ARPIE]->getpar(Arpie_ArpeWD),
+                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Harm), Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pattern),
+                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Subdivision), EFX_Bypass[EFX_ARPIE]);
         break;
 
     case EFX_EXPANDER:
@@ -1499,9 +1499,9 @@ RKR::Actualizar_Audio()
 
         case EFX_ARPIE:
             EFX_Bypass[EFX_ARPIE] = 0;
-            efx_Arpie->cleanup();
+            Rack_Effects[EFX_ARPIE]->cleanup();
             for (i = 0; i < C_ARPIE_PARAMETERS; i++)
-                efx_Arpie->changepar(i, lv[EFX_ARPIE][i]);
+                Rack_Effects[EFX_ARPIE]->changepar(i, lv[EFX_ARPIE][i]);
             EFX_Bypass[EFX_ARPIE] = EFX_Bank_Bypass[EFX_ARPIE];
             break;
 
@@ -2370,7 +2370,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_DBAND_PARAMETERS; j++)
         lv[EFX_DISTBAND][j] = Rack_Effects[EFX_DISTBAND]->getpar(j);
     for (j = 0; j < C_ARPIE_PARAMETERS; j++)
-        lv[EFX_ARPIE][j] = efx_Arpie->getpar(j);
+        lv[EFX_ARPIE][j] = Rack_Effects[EFX_ARPIE]->getpar(j);
     for (j = 0; j < C_EXPANDER_PARAMETERS; j++)
         lv[EFX_EXPANDER][j] = efx_Expander->getpar(j);
     for (j = 0; j < C_SHUFFLE_PARAMETERS; j++)
