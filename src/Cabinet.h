@@ -46,7 +46,6 @@ public:
     void setpreset(int npreset);
     
     void initialize();
-    int Cabinet_Preset;
 
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

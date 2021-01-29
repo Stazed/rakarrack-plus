@@ -1785,7 +1785,7 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     }
 
     val = (int)*plug->param_p[Cabinet_Preset_Idx];
-    if(plug->cab->Cabinet_Preset != val)
+    if(plug->cab->Ppreset != val)
     {
         plug->cab->setpreset(val);
     }

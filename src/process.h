@@ -712,7 +712,6 @@ public:
     // class pointers
     class Compressor *efx_Compressor;
 
-    class Cabinet *efx_Cabinet;
     class Pan *efx_Pan;
     class MusicDelay *efx_MusDelay;
     class Gate *efx_Gate;

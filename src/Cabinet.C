@@ -26,10 +26,9 @@
 #include "Cabinet.h"
 
 Cabinet::Cabinet(double sample_frequency, uint32_t intermediate_bufsize) :
-    EQ(sample_frequency, intermediate_bufsize),
-    Cabinet_Preset(0)
+    EQ(sample_frequency, intermediate_bufsize)
 {
-    setpreset(Cabinet_Preset);
+    setpreset(Ppreset);
 }
 
 void
@@ -152,7 +151,7 @@ Cabinet::setpreset(int npreset)
         changepar(n * 5 + 14, presets[npreset][n * 5 + 4]);
     }
 
-    Cabinet_Preset = npreset;
+    Ppreset = npreset;
 }
 
 #ifdef LV2_SUPPORT
@@ -160,6 +159,6 @@ void
 Cabinet::lv2_update_params(uint32_t period)
 {
     EQ::lv2_update_params(period);
-    setpreset(Cabinet_Preset);
+    setpreset(Ppreset);
 }
 #endif // LV2

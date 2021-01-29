@@ -4776,7 +4776,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 APHASER->aphaser_rnd->redraw();
                 break;
             case MC_Cabinet_Gain:
-                CABINET->Cabinet_output->value(rkr->efx_Cabinet->getpar(Cabinet_Gain)-64);
+                CABINET->Cabinet_output->value(rkr->Rack_Effects[EFX_CABINET]->getpar(Cabinet_Gain)-64);
                 CABINET->Cabinet_output->redraw();
                 break;
             case MC_Chorus_Delay:

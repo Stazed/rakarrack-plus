@@ -3129,7 +3129,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Cabinet_Gain:
-        efx_Cabinet->changepar(Cabinet_Gain, value);
+        Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain, value);
         break;
 
     case MC_Chorus_Delay:

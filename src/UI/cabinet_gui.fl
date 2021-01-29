@@ -32,7 +32,7 @@ rgui->findpos(EFX_CABINET,(int)o->value(),o);} selected
   Fl_Choice Cabinet_preset {
     label Preset
     user_data 12012
-    callback {rkr->efx_Cabinet->setpreset((int) o->value());} open
+    callback {rkr->Rack_Effects[EFX_CABINET]->setpreset((int) o->value());} open
     xywh {45 45 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -89,7 +89,7 @@ rgui->findpos(EFX_CABINET,(int)o->value(),o);} selected
  return;
 } 
 
-rkr->efx_Cabinet->changepar(Cabinet_Gain,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64));}
     xywh {56 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
