@@ -712,7 +712,6 @@ public:
     // class pointers
     class Compressor *efx_Compressor;
 
-    class MusicDelay *efx_MusDelay;
     class Gate *efx_Gate;
     class Derelict *efx_Derelict;
 

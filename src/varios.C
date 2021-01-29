@@ -375,7 +375,7 @@ RKR::Update_tempo()
     if (EFX_Bypass[EFX_PAN]) Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Tempo, Tap_TempoSetL);
     if (EFX_Bypass[EFX_WAHWAH]) Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Tempo, Tap_TempoSetL);
     if (EFX_Bypass[EFX_ALIENWAH]) Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_MUSICAL_DELAY]) efx_MusDelay->changepar(Music_Tempo, Tap_TempoSetD);
+    if (EFX_Bypass[EFX_MUSICAL_DELAY]) Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo, Tap_TempoSetD);
     if (EFX_Bypass[EFX_ANALOG_PHASER]) Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo, Tap_TempoSetL);
     if (EFX_Bypass[EFX_DUAL_FLANGE]) efx_DFlange->changepar(DFlange_LFO_Tempo, Tap_TempoSetL);
     if (EFX_Bypass[EFX_SYNTHFILTER]) efx_Synthfilter->changepar(Synthfilter_LFO_Tempo, Tap_TempoSetL);

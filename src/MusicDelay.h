@@ -25,7 +25,7 @@
 #ifndef MUSDELAY_H
 #define MUSDELAY_H
 
-#include "FPreset.h"
+#include "Effect.h"
 
 const int C_MUSIC_PARAMETERS = 13;
 
@@ -46,7 +46,7 @@ enum Music_Index
     Music_Gain_2
 };
 
-class MusicDelay
+class MusicDelay : public Effect
 {
 public:
     MusicDelay (double sample_rate, uint32_t intermediate_bufsize);
@@ -60,9 +60,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-
-    int Ppreset;
-    float outvolume;
 
 private:
 
@@ -102,8 +99,6 @@ private:
     float gain1, gain2;
     float *ldelay1, *rdelay1, *ldelay2, *rdelay2;
     float oldl1, oldr1, oldl2, oldr2;	//pt. lpf
-
-    class FPreset *Fpre;
 
 };
 

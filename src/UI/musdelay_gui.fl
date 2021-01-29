@@ -26,7 +26,7 @@ widget_class MusdelayGui {
 }
 rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_MusDelay->cleanup();
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->cleanup();
 rgui->findpos(EFX_MUSICAL_DELAY,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -36,20 +36,20 @@ rgui->findpos(EFX_MUSICAL_DELAY,(int)o->value(),o);} selected
     user_data 12015
     callback {rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12015))rkr->efx_MusDelay->setpreset(o->value());
-musdelay_WD->value(Dry_Wet(rkr->efx_MusDelay->getpar(Music_DryWet)));
-musdelay_tempo->value(rkr->efx_MusDelay->getpar(Music_Tempo));
-musdelay_pan1->value(rkr->efx_MusDelay->getpar(Music_Pan_1)-64);
-musdelay_pan2->value(rkr->efx_MusDelay->getpar(Music_Pan_2)-64);
-musdelay_delay1->value(rkr->efx_MusDelay->getpar(Music_Delay_1)-1);
-musdelay_delay2->value(rkr->efx_MusDelay->getpar(Music_Delay_2)-1);
-musdelay_delay3->value(rkr->efx_MusDelay->getpar(Music_Del_Offset)-1);
-musdelay_fb1->value(rkr->efx_MusDelay->getpar(Music_Feedback_1));
-musdelay_fb2->value(rkr->efx_MusDelay->getpar(Music_Feedback_2));
-musdelay_LRc->value(rkr->efx_MusDelay->getpar(Music_LR_Cross));
-musdelay_gain1->value(rkr->efx_MusDelay->getpar(Music_Gain_1));
-musdelay_gain2->value(rkr->efx_MusDelay->getpar(Music_Gain_2));
-musdelay_damp->value(rkr->efx_MusDelay->getpar(Music_Damp));
+if((ud==0)||(ud==12015))rkr->Rack_Effects[EFX_MUSICAL_DELAY]->setpreset(o->value());
+musdelay_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_DryWet)));
+musdelay_tempo->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
+musdelay_pan1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_1)-64);
+musdelay_pan2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_2)-64);
+musdelay_delay1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_1)-1);
+musdelay_delay2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_2)-1);
+musdelay_delay3->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Del_Offset)-1);
+musdelay_fb1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_1));
+musdelay_fb2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_2));
+musdelay_LRc->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_LR_Cross));
+musdelay_gain1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_1));
+musdelay_gain2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_2));
+musdelay_damp->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Damp));
 if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
@@ -70,7 +70,7 @@ if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
  rgui->getMIDIControl(MC_Music_DryWet);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_DryWet,Dry_Wet((int)o->value()));}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_DryWet,Dry_Wet((int)o->value()));}
     xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -81,7 +81,7 @@ rkr->efx_MusDelay->changepar(Music_DryWet,Dry_Wet((int)o->value()));}
  rgui->getMIDIControl(MC_Music_LR_Cross);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_LR_Cross,(int)o->value());}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_LR_Cross,(int)o->value());}
     xywh {56 38 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -92,7 +92,7 @@ rkr->efx_MusDelay->changepar(Music_LR_Cross,(int)o->value());}
  rgui->getMIDIControl(MC_Music_Pan_1);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_Pan_1,(int)o->value()+64);}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_1,(int)o->value()+64);}
     xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -103,14 +103,14 @@ rkr->efx_MusDelay->changepar(Music_Pan_1,(int)o->value()+64);}
  rgui->getMIDIControl(MC_Music_Pan_2);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_Pan_2,(int)o->value()+64);}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_2,(int)o->value()+64);}
     xywh {56 62 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice musdelay_delay1 {
     user_data 12
     callback {rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->efx_MusDelay->changepar(Music_Delay_1,o->value()+1);
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_1,o->value()+1);
 if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     tooltip {Delay 1} xywh {10 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
@@ -143,7 +143,7 @@ if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
   Fl_Choice musdelay_delay3 {
     user_data 12
     callback {rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->efx_MusDelay->changepar(Music_Del_Offset,o->value()+1);
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Del_Offset,o->value()+1);
 if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     tooltip {Delay Offset} xywh {62 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
@@ -179,7 +179,7 @@ if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
   }
   Fl_Choice musdelay_delay2 {
     callback {rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->efx_MusDelay->changepar(Music_Delay_2,o->value()+1);
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_2,o->value()+1);
 if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     tooltip {Delay 2} xywh {114 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(menu_musdelay_delay1);}
@@ -193,7 +193,7 @@ if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
  return;
 }
 rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->efx_MusDelay->changepar(Music_Tempo,(int)o->value());
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo,(int)o->value());
 if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 10 maximum 480 step 1 textcolor 7
     class RKR_Slider
@@ -205,7 +205,7 @@ if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
  rgui->getMIDIControl(MC_Music_Gain_1);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_Gain_1,(int)o->value());}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_1,(int)o->value());}
     xywh {56 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -216,7 +216,7 @@ rkr->efx_MusDelay->changepar(Music_Gain_1,(int)o->value());}
  rgui->getMIDIControl(MC_Music_Gain_2);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_Gain_2,(int)o->value());}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_2,(int)o->value());}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -227,7 +227,7 @@ rkr->efx_MusDelay->changepar(Music_Gain_2,(int)o->value());}
  rgui->getMIDIControl(MC_Music_Feedback_1);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_Feedback_1,(int)o->value());}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_1,(int)o->value());}
     tooltip {Feedback 1} xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -238,7 +238,7 @@ rkr->efx_MusDelay->changepar(Music_Feedback_1,(int)o->value());}
  rgui->getMIDIControl(MC_Music_Feedback_2);
  return;
 } 
-rkr->efx_MusDelay->changepar(Music_Feedback_2,(int)o->value());}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_2,(int)o->value());}
     tooltip {Feedback 2} xywh {56 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -249,7 +249,7 @@ rkr->efx_MusDelay->changepar(Music_Feedback_2,(int)o->value());}
  rgui->getMIDIControl(MC_Music_Damp);
  return;
 }
-rkr->efx_MusDelay->changepar(Music_Damp,(int)o->value());}
+rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Damp,(int)o->value());}
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }

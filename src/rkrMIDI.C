@@ -1597,11 +1597,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Music_Gain_1:
-        efx_MusDelay->changepar(Music_Gain_1, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_1, value);
         break;
 
     case MC_Music_Gain_2:
-        efx_MusDelay->changepar(Music_Gain_2, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_2, value);
         break;
 
     case MC_Harm_Filter_Freq:
@@ -1690,7 +1690,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Music_DryWet:
-        efx_MusDelay->changepar(Music_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_DryWet, Dry_Wet(value));
         break;
 
     case MC_Reverb_DryWet:
@@ -1714,7 +1714,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Music_Pan_1:
-        efx_MusDelay->changepar(Music_Pan_1, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_1, value);
         break;
 
     case MC_Reverb_Pan:
@@ -1725,7 +1725,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Music_Pan_2:
-        efx_MusDelay->changepar(Music_Pan_2, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_2, value);
         break;
 
     case MC_WahWah_Pan:
@@ -1797,11 +1797,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Music_Feedback_1:
-        efx_MusDelay->changepar(Music_Feedback_1, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_1, value);
         break;
 
     case MC_Music_Feedback_2:
-        efx_MusDelay->changepar(Music_Feedback_2, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_2, value);
         break;
 
     case MC_Overdrive_LPF:
@@ -1857,7 +1857,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Music_LR_Cross:
-        efx_MusDelay->changepar(Music_LR_Cross, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_LR_Cross, value);
         break;
 
     case MC_Chorus_LFO_Stereo:
@@ -3205,11 +3205,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Music_Tempo:
-        efx_MusDelay->changepar(Music_Tempo, 10 + (int) ((float) value * C_MC_470_RANGE));
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo, 10 + (int) ((float) value * C_MC_470_RANGE));
         break;
 
     case MC_Music_Damp:
-        efx_MusDelay->changepar(Music_Damp, value);
+        Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Damp, value);
         break;
 
     case MC_MuTro_LFO_Random:

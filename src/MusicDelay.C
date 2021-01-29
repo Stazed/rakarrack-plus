@@ -28,8 +28,7 @@
 #include "MusicDelay.h"
 
 MusicDelay::MusicDelay(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     Pvolume(50),
@@ -72,8 +71,7 @@ MusicDelay::MusicDelay(double sample_rate, uint32_t intermediate_bufsize) :
     oldl1(),
     oldr1(),
     oldl2(),
-    oldr2(),
-    Fpre(NULL)
+    oldr2()
 {
     ldelay1 = new float[maxx_delay];
     rdelay1 = new float[maxx_delay];

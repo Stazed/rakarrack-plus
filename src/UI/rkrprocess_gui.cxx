@@ -3281,11 +3281,11 @@ void RKRGUI::MIDI_control_gui_refresh()
                 CHORUS->chorus_dpth->redraw();
                 break;
             case MC_Music_Gain_1:
-                MUSDELAY->musdelay_gain1->value(rkr->efx_MusDelay->getpar(Music_Gain_1));
+                MUSDELAY->musdelay_gain1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_1));
                 MUSDELAY->musdelay_gain1->redraw();
                 break;
             case MC_Music_Gain_2:
-                MUSDELAY->musdelay_gain2->value(rkr->efx_MusDelay->getpar(Music_Gain_2));
+                MUSDELAY->musdelay_gain2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_2));
                 MUSDELAY->musdelay_gain2->redraw();
                 break;
             case MC_Harm_Filter_Freq:
@@ -3370,7 +3370,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_WD->redraw();
                 break;
             case MC_Music_DryWet:
-                MUSDELAY->musdelay_WD->value(Dry_Wet(rkr->efx_MusDelay->getpar(Music_DryWet)));
+                MUSDELAY->musdelay_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_DryWet)));
                 MUSDELAY->musdelay_WD->redraw();
                 break;
             case MC_Reverb_DryWet:
@@ -3394,7 +3394,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_pan->redraw();
                 break;
             case MC_Music_Pan_1:
-                MUSDELAY->musdelay_pan1->value(rkr->efx_MusDelay->getpar(Music_Pan_1) - 64);
+                MUSDELAY->musdelay_pan1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_1) - 64);
                 MUSDELAY->musdelay_pan1->redraw();
                 break;
             case MC_Reverb_Pan:
@@ -3406,7 +3406,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 break;
 
             case MC_Music_Pan_2:
-                MUSDELAY->musdelay_pan2->value(rkr->efx_MusDelay->getpar(Music_Pan_2) - 64);
+                MUSDELAY->musdelay_pan2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_2) - 64);
                 MUSDELAY->musdelay_pan2->redraw();
                 break;
             case MC_WahWah_Pan:
@@ -3478,11 +3478,11 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ALIENWAH->Alienwah_fb->redraw();
                 break;
             case MC_Music_Feedback_1:
-                MUSDELAY->musdelay_fb1->value(rkr->efx_MusDelay->getpar(Music_Feedback_1));
+                MUSDELAY->musdelay_fb1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_1));
                 MUSDELAY->musdelay_fb1->redraw();
                 break;
             case MC_Music_Feedback_2:
-                MUSDELAY->musdelay_fb2->value(rkr->efx_MusDelay->getpar(Music_Feedback_2));
+                MUSDELAY->musdelay_fb2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_2));
                 MUSDELAY->musdelay_fb2->redraw();
                 break;
             case MC_Overdrive_LPF:
@@ -3538,7 +3538,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHO->echo_LRc->redraw();
                 break;
             case MC_Music_LR_Cross:
-                MUSDELAY->musdelay_LRc->value(rkr->efx_MusDelay->getpar(Music_LR_Cross));
+                MUSDELAY->musdelay_LRc->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_LR_Cross));
                 MUSDELAY->musdelay_LRc->redraw();
                 break;
             case MC_Chorus_LFO_Stereo:
@@ -4852,11 +4852,11 @@ void RKRGUI::MIDI_control_gui_refresh()
                 LOOPER->looper_Tempo->redraw();
                 break;
             case MC_Music_Tempo:
-                MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(Music_Tempo));
+                MUSDELAY->musdelay_tempo->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
                 MUSDELAY->musdelay_tempo->redraw();
                 break;
             case MC_Music_Damp:
-                MUSDELAY->musdelay_damp->value(rkr->efx_MusDelay->getpar(Music_Damp));
+                MUSDELAY->musdelay_damp->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Damp));
                 MUSDELAY->musdelay_damp->redraw();
                 break;
             case MC_MuTro_LFO_Random:
@@ -6087,7 +6087,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_MUSICAL_DELAY])
     {
-        MUSDELAY->musdelay_tempo->value(rkr->efx_MusDelay->getpar(Music_Tempo));
+        MUSDELAY->musdelay_tempo->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
         MUSDELAY->musdelay_tempo->redraw();
     }
 

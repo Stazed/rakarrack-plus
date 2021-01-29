@@ -644,13 +644,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_MUSICAL_DELAY:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_MusDelay->getpar(Music_DryWet), efx_MusDelay->getpar(Music_Pan_1),
-                efx_MusDelay->getpar(Music_Delay_1), efx_MusDelay->getpar(Music_Del_Offset),
-                efx_MusDelay->getpar(Music_LR_Cross), efx_MusDelay->getpar(Music_Feedback_1),
-                efx_MusDelay->getpar(Music_Damp), efx_MusDelay->getpar(Music_Pan_2),
-                efx_MusDelay->getpar(Music_Delay_2), efx_MusDelay->getpar(Music_Feedback_2),
-                efx_MusDelay->getpar(Music_Tempo), efx_MusDelay->getpar(Music_Gain_1),
-                efx_MusDelay->getpar(Music_Gain_2), EFX_Bypass[EFX_MUSICAL_DELAY]);
+                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_DryWet), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_1),
+                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_1), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Del_Offset),
+                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_LR_Cross), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_1),
+                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Damp), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_2),
+                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_2), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_2),
+                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_1),
+                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_2), EFX_Bypass[EFX_MUSICAL_DELAY]);
         break;
 
     case EFX_NOISEGATE:
@@ -1427,9 +1427,9 @@ RKR::Actualizar_Audio()
 
         case EFX_MUSICAL_DELAY:
             EFX_Bypass[EFX_MUSICAL_DELAY] = 0;
-            efx_MusDelay->cleanup();
+            Rack_Effects[EFX_MUSICAL_DELAY]->cleanup();
             for (i = 0; i < C_MUSIC_PARAMETERS; i++)
-                efx_MusDelay->changepar(i, lv[EFX_MUSICAL_DELAY][i]);
+                Rack_Effects[EFX_MUSICAL_DELAY]->changepar(i, lv[EFX_MUSICAL_DELAY][i]);
             EFX_Bypass[EFX_MUSICAL_DELAY] = EFX_Bank_Bypass[EFX_MUSICAL_DELAY];
             break;
 
@@ -2352,7 +2352,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_HARM_PARAMETERS; j++)
         lv[EFX_HARMONIZER][j] = Rack_Effects[EFX_HARMONIZER]->getpar(j);
     for (j = 0; j < C_MUSIC_PARAMETERS; j++)
-        lv[EFX_MUSICAL_DELAY][j] = efx_MusDelay->getpar(j);
+        lv[EFX_MUSICAL_DELAY][j] = Rack_Effects[EFX_MUSICAL_DELAY]->getpar(j);
     for (j = 0; j < C_GATE_PARAMETERS; j++)
         lv[EFX_NOISEGATE][j] = efx_Gate->getpar(j);
     for (j = 0; j < C_DERE_PARAMETERS; j++)
