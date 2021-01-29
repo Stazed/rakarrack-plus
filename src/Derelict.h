@@ -28,6 +28,8 @@
 #define DERELICT_H
 
 #include <vector>
+
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 #include "FilterParams.h"
@@ -54,7 +56,7 @@ enum Dere_Index
 // void waveshapesmps (int n, float * smps, int type,
 // 		    int drive);
 
-class Derelict
+class Derelict : public Effect
 {
 public:
     Derelict (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
@@ -82,8 +84,6 @@ private:
     double fSAMPLE_RATE;
     int WAVE_RES, WAVE_UPQ, WAVE_DNQ;
 public:
-    int Ppreset;
-    float outvolume;
 
     float inpll[4096];
     float inplr[4096];
@@ -123,7 +123,6 @@ private:
     class Filter *filterl, *filterr;
     class FilterParams *filterpars;
 
-    class FPreset *Fpre;
 };
 
 

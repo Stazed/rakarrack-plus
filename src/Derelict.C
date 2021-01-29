@@ -36,13 +36,12 @@
 
 Derelict::Derelict(int wave_res, int wave_upq, int wave_dnq,
                  double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(wave_res, wave_upq, wave_dnq, sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     WAVE_RES(wave_res),
     WAVE_UPQ(wave_upq),
     WAVE_DNQ(wave_dnq),
-    Ppreset(),
-    outvolume(0.5f),
     inpll(),
     inplr(),
     Pvolume(50),
@@ -80,8 +79,7 @@ Derelict::Derelict(int wave_res, int wave_upq, int wave_dnq,
     wshaper(NULL),
     filterl(NULL),
     filterr(NULL),
-    filterpars(NULL),
-    Fpre(NULL)
+    filterpars(NULL)
 {
     initialize();
 

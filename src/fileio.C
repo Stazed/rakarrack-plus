@@ -663,12 +663,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_DERELICT:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Derelict->getpar(Dere_DryWet), efx_Derelict->getpar(Dere_Pan),
-                efx_Derelict->getpar(Dere_LR_Cross), efx_Derelict->getpar(Dere_Drive),
-                efx_Derelict->getpar(Dere_Level), efx_Derelict->getpar(Dere_Type),
-                efx_Derelict->getpar(Dere_Negate), efx_Derelict->getpar(Dere_LPF),
-                efx_Derelict->getpar(Dere_HPF), efx_Derelict->getpar(Dere_Color),
-                efx_Derelict->getpar(Dere_Prefilter), efx_Derelict->getpar(Dere_Suboctave),
+                Rack_Effects[EFX_DERELICT]->getpar(Dere_DryWet), Rack_Effects[EFX_DERELICT]->getpar(Dere_Pan),
+                Rack_Effects[EFX_DERELICT]->getpar(Dere_LR_Cross), Rack_Effects[EFX_DERELICT]->getpar(Dere_Drive),
+                Rack_Effects[EFX_DERELICT]->getpar(Dere_Level), Rack_Effects[EFX_DERELICT]->getpar(Dere_Type),
+                Rack_Effects[EFX_DERELICT]->getpar(Dere_Negate), Rack_Effects[EFX_DERELICT]->getpar(Dere_LPF),
+                Rack_Effects[EFX_DERELICT]->getpar(Dere_HPF), Rack_Effects[EFX_DERELICT]->getpar(Dere_Color),
+                Rack_Effects[EFX_DERELICT]->getpar(Dere_Prefilter), Rack_Effects[EFX_DERELICT]->getpar(Dere_Suboctave),
                 EFX_Bypass[EFX_DERELICT]);
         break;
 
@@ -1443,9 +1443,9 @@ RKR::Actualizar_Audio()
 
         case EFX_DERELICT:
             EFX_Bypass[EFX_DERELICT] = 0;
-            efx_Derelict->cleanup();
+            Rack_Effects[EFX_DERELICT]->cleanup();
             for (i = 0; i < C_DERE_PARAMETERS; i++)
-                efx_Derelict->changepar(i, lv[EFX_DERELICT][i]);
+                Rack_Effects[EFX_DERELICT]->changepar(i, lv[EFX_DERELICT][i]);
             EFX_Bypass[EFX_DERELICT] = EFX_Bank_Bypass[EFX_DERELICT];
             break;
 
@@ -2356,7 +2356,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_GATE_PARAMETERS; j++)
         lv[EFX_NOISEGATE][j] = Rack_Effects[EFX_NOISEGATE]->getpar(j);
     for (j = 0; j < C_DERE_PARAMETERS; j++)
-        lv[EFX_DERELICT][j] = efx_Derelict->getpar(j);
+        lv[EFX_DERELICT][j] = Rack_Effects[EFX_DERELICT]->getpar(j);
     for (j = 0; j < C_APHASER_PARAMETERS; j++)
         lv[EFX_ANALOG_PHASER][j] = Rack_Effects[EFX_ANALOG_PHASER]->getpar(j);
     for (j = 0; j < C_VALVE_PARAMETERS; j++)

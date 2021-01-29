@@ -3208,23 +3208,23 @@ void RKRGUI::MIDI_control_gui_refresh()
                 WAHWAH->WahWah_dpth->redraw();
                 break;
             case MC_Dere_Drive:
-                DERELICT->derelict_drive->value(rkr->efx_Derelict->getpar(Dere_Drive));
+                DERELICT->derelict_drive->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Drive));
                 DERELICT->derelict_drive->redraw();
                 break;
             case MC_Dere_Level:
-                DERELICT->derelict_level->value(rkr->efx_Derelict->getpar(Dere_Level));
+                DERELICT->derelict_level->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Level));
                 DERELICT->derelict_level->redraw();
                 break;
             case MC_Dere_LPF:
-                DERELICT->derelict_lpf->value(rkr->efx_Derelict->getpar(Dere_LPF));
+                DERELICT->derelict_lpf->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_LPF));
                 DERELICT->derelict_lpf->redraw();
                 break;
             case MC_Dere_HPF:
-                DERELICT->derelict_hpf->value(rkr->efx_Derelict->getpar(Dere_HPF));
+                DERELICT->derelict_hpf->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_HPF));
                 DERELICT->derelict_hpf->redraw();
                 break;
             case MC_Dere_Color:
-                DERELICT->derelict_st->value(rkr->efx_Derelict->getpar(Dere_Color));
+                DERELICT->derelict_st->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Color));
                 DERELICT->derelict_st->redraw();
                 break;
             case MC_Output_Volume:
@@ -3232,7 +3232,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 Nivel_Salida->redraw();
                 break;
             case MC_Dere_Suboctave:
-                DERELICT->derelict_oct->value(rkr->efx_Derelict->getpar(Dere_Suboctave));
+                DERELICT->derelict_oct->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Suboctave));
                 DERELICT->derelict_oct->redraw();
                 break;
             case MC_Dist_Suboctave:
@@ -3645,15 +3645,15 @@ void RKRGUI::MIDI_control_gui_refresh()
                 APHASER->aphaser_stdf->redraw();
                 break;
             case MC_Dere_DryWet:
-                DERELICT->derelict_WD->value(Dry_Wet(rkr->efx_Derelict->getpar(Dere_DryWet)));
+                DERELICT->derelict_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_DryWet)));
                 DERELICT->derelict_WD->redraw();
                 break;
             case MC_Dere_Pan:
-                DERELICT->derelict_pan->value(rkr->efx_Derelict->getpar(Dere_Pan) - 64);
+                DERELICT->derelict_pan->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Pan) - 64);
                 DERELICT->derelict_pan->redraw();
                 break;
             case MC_Dere_LR_Cross:
-                DERELICT->derelict_LRc->value(rkr->efx_Derelict->getpar(Dere_LR_Cross));
+                DERELICT->derelict_LRc->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_LR_Cross));
                 DERELICT->derelict_LRc->redraw();
                 break;
 
@@ -4962,7 +4962,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OVRD->ovrd_tipo->redraw();
                 break;
             case MC_Dere_Type:
-                DERELICT->derelict_tipo->value(rkr->efx_Derelict->getpar(Dere_Type));
+                DERELICT->derelict_tipo->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Type));
                 DERELICT->derelict_tipo->redraw();
                 break;
             case MC_DistBand_Type_Low:

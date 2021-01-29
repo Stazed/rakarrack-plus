@@ -1525,23 +1525,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dere_Drive:
-        efx_Derelict->changepar(Dere_Drive, value);
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_Drive, value);
         break;
 
     case MC_Dere_Level:
-        efx_Derelict->changepar(Dere_Level, value);
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_Level, value);
         break;
 
     case MC_Dere_LPF:
-        efx_Derelict->changepar(Dere_LPF, ret_LPF(value));
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_LPF, ret_LPF(value));
         break;
 
     case MC_Dere_HPF:
-        efx_Derelict->changepar(Dere_HPF, ret_HPF(value));
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_HPF, ret_HPF(value));
         break;
 
     case MC_Dere_Color:
-        efx_Derelict->changepar(Dere_Color, value);
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_Color, value);
         break;
 
     case MC_Output_Volume:
@@ -1550,7 +1550,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dere_Suboctave:
-        efx_Derelict->changepar(Dere_Suboctave, value);
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_Suboctave, value);
         break;
 
     case MC_Dist_Suboctave:
@@ -1965,15 +1965,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dere_DryWet:
-        efx_Derelict->changepar(Dere_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_DryWet, Dry_Wet(value));
         break;
 
     case MC_Dere_Pan:
-        efx_Derelict->changepar(Dere_Pan, value);
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_Pan, value);
         break;
 
     case MC_Dere_LR_Cross:
-        efx_Derelict->changepar(Dere_LR_Cross, value);
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_LR_Cross, value);
         break;
 
 // End MIDI Implementation Chart range
@@ -3313,7 +3313,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Dere_Type:
-        efx_Derelict->changepar(Dere_Type, (int) ((float) value * C_MC_30_RANGE));
+        Rack_Effects[EFX_DERELICT]->changepar(Dere_Type, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case MC_DistBand_Type_Low:
