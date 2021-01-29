@@ -3952,43 +3952,43 @@ void RKRGUI::MIDI_control_gui_refresh()
                 EXCITER->ex_10->redraw();
                 break;
             case MC_DistBand_DryWet:
-                DISTBAND->distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(DistBand_DryWet)));
+                DISTBAND->distband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_DryWet)));
                 DISTBAND->distband_WD->redraw();
                 break;
             case MC_DistBand_LR_Cross:
-                DISTBAND->distband_LRc->value(rkr->efx_DistBand->getpar(DistBand_LR_Cross));
+                DISTBAND->distband_LRc->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_LR_Cross));
                 DISTBAND->distband_LRc->redraw();
                 break;
             case MC_DistBand_Drive:
-                DISTBAND->distband_drive->value(rkr->efx_DistBand->getpar(DistBand_Drive));
+                DISTBAND->distband_drive->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Drive));
                 DISTBAND->distband_drive->redraw();
                 break;
             case MC_DistBand_Level:
-                DISTBAND->distband_level->value(rkr->efx_DistBand->getpar(DistBand_Level));
+                DISTBAND->distband_level->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Level));
                 DISTBAND->distband_level->redraw();
                 break;
             case MC_DistBand_Gain_Low:
-                DISTBAND->distband_volL->value(rkr->efx_DistBand->getpar(DistBand_Gain_Low));
+                DISTBAND->distband_volL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Low));
                 DISTBAND->distband_volL->redraw();
                 break;
             case MC_DistBand_Gain_Mid:
-                DISTBAND->distband_volM->value(rkr->efx_DistBand->getpar(DistBand_Gain_Mid));
+                DISTBAND->distband_volM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Mid));
                 DISTBAND->distband_volM->redraw();
                 break;
             case MC_DistBand_Gain_Hi:
-                DISTBAND->distband_volH->value(rkr->efx_DistBand->getpar(DistBand_Gain_Hi));
+                DISTBAND->distband_volH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Hi));
                 DISTBAND->distband_volH->redraw();
                 break;
             case MC_DistBand_Cross_1:
-                DISTBAND->distband_cross1->value(rkr->efx_DistBand->getpar(DistBand_Cross_1));
+                DISTBAND->distband_cross1->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_1));
                 DISTBAND->distband_cross1->redraw();
                 break;
             case MC_DistBand_Cross_2:
-                DISTBAND->distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));
+                DISTBAND->distband_cross2->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_2));
                 DISTBAND->distband_cross2->redraw();
                 break;
             case MC_DistBand_Pan:
-                DISTBAND->distband_pan->value(rkr->efx_DistBand->getpar(DistBand_Pan) - 64);
+                DISTBAND->distband_pan->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Pan) - 64);
                 DISTBAND->distband_pan->redraw();
                 break;
             case MC_Arpie_DryWet:
@@ -4966,15 +4966,15 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DERELICT->derelict_tipo->redraw();
                 break;
             case MC_DistBand_Type_Low:
-                DISTBAND->distband_tipoL->value(rkr->efx_DistBand->getpar(DistBand_Type_Low));
+                DISTBAND->distband_tipoL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Low));
                 DISTBAND->distband_tipoL->redraw();
                 break;
             case MC_DistBand_Type_Mid:
-                DISTBAND->distband_tipoM->value(rkr->efx_DistBand->getpar(DistBand_Type_Mid));
+                DISTBAND->distband_tipoM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Mid));
                 DISTBAND->distband_tipoM->redraw();
                 break;
             case MC_DistBand_Type_Hi:
-                DISTBAND->distband_tipoH->value(rkr->efx_DistBand->getpar(DistBand_Type_Hi));
+                DISTBAND->distband_tipoH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Hi));
                 DISTBAND->distband_tipoH->redraw();
                 break;
             case MC_Stomp_Mode:

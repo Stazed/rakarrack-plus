@@ -736,7 +736,6 @@ public:
 
     class Compressor *efx_FLimiter;
 
-    class DistBand *efx_DistBand;
     class Arpie *efx_Arpie;
     class Expander *efx_Expander;
     class Synthfilter *efx_Synthfilter;

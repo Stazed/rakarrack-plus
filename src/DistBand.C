@@ -36,13 +36,12 @@
 
 DistBand::DistBand(int wave_res, int wave_upq, int wave_dnq,
         double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(wave_res, wave_upq, wave_dnq, sample_rate, intermediate_bufsize),
     WAVE_RES(wave_res),
     WAVE_UPQ(wave_upq),
     WAVE_DNQ(wave_dnq),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
-    Ppreset(),
-    outvolume(0.5f),
     lowl(NULL),
     lowr(NULL),
     midl(NULL),
@@ -88,8 +87,7 @@ DistBand::DistBand(int wave_res, int wave_upq, int wave_dnq,
     mbwshape3l(NULL),
     mbwshape1r(NULL),
     mbwshape2r(NULL),
-    mbwshape3r(NULL),
-    Fpre(NULL)
+    mbwshape3r(NULL)
 {
     initialize();
 

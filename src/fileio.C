@@ -730,14 +730,14 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_DISTBAND:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_DistBand->getpar(DistBand_DryWet), efx_DistBand->getpar(DistBand_Pan),
-                efx_DistBand->getpar(DistBand_LR_Cross), efx_DistBand->getpar(DistBand_Drive),
-                efx_DistBand->getpar(DistBand_Level), efx_DistBand->getpar(DistBand_Type_Low),
-                efx_DistBand->getpar(DistBand_Type_Mid), efx_DistBand->getpar(DistBand_Type_Hi),
-                efx_DistBand->getpar(DistBand_Gain_Low), efx_DistBand->getpar(DistBand_Gain_Mid),
-                efx_DistBand->getpar(DistBand_Gain_Hi), efx_DistBand->getpar(DistBand_Negate),
-                efx_DistBand->getpar(DistBand_Cross_1), efx_DistBand->getpar(DistBand_Cross_2),
-                efx_DistBand->getpar(DistBand_Stereo), EFX_Bypass[EFX_DISTBAND]);
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_DryWet), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Pan),
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_LR_Cross), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Drive),
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Level), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Low),
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Mid), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Hi),
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Low), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Mid),
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Hi), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Negate),
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_1), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_2),
+                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Stereo), EFX_Bypass[EFX_DISTBAND]);
         break;
 
     case EFX_ARPIE:
@@ -1491,9 +1491,9 @@ RKR::Actualizar_Audio()
 
         case EFX_DISTBAND:
             EFX_Bypass[EFX_DISTBAND] = 0;
-            efx_DistBand->cleanup();
+            Rack_Effects[EFX_DISTBAND]->cleanup();
             for (i = 0; i < C_DBAND_PARAMETERS; i++)
-                efx_DistBand->changepar(i, lv[EFX_DISTBAND][i]);
+                Rack_Effects[EFX_DISTBAND]->changepar(i, lv[EFX_DISTBAND][i]);
             EFX_Bypass[EFX_DISTBAND] = EFX_Bank_Bypass[EFX_DISTBAND];
             break;
 
@@ -2368,7 +2368,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_EXCITER_PARAMETERS; j++)
         lv[EFX_EXCITER][j] = Rack_Effects[EFX_EXCITER]->getpar(j);
     for (j = 0; j < C_DBAND_PARAMETERS; j++)
-        lv[EFX_DISTBAND][j] = efx_DistBand->getpar(j);
+        lv[EFX_DISTBAND][j] = Rack_Effects[EFX_DISTBAND]->getpar(j);
     for (j = 0; j < C_ARPIE_PARAMETERS; j++)
         lv[EFX_ARPIE][j] = efx_Arpie->getpar(j);
     for (j = 0; j < C_EXPANDER_PARAMETERS; j++)

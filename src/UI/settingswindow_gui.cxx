@@ -3422,21 +3422,26 @@ void SettingsWindowGui::update_distband_quality() {
   /* shut off all processing */
   m_rkr->quality_update = true;
   
+  /* Cast to derived class */
+  DistBand *Efx_DistBand = static_cast<DistBand*>(m_rkr->Rack_Effects[EFX_DISTBAND]);
+  
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
-  std::vector<int> save_state = m_rkr->efx_DistBand->save_parameters();
+  std::vector<int> save_state = Efx_DistBand->save_parameters();
   
   /* Delete and re-create the efx with new resample settings */
-  delete m_rkr->efx_DistBand;
-  m_rkr->efx_DistBand = new DistBand(m_rkr->DBand_res_amount, m_rkr->DBand_up_q, m_rkr->DBand_down_q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_rkr->Rack_Effects[EFX_DISTBAND];
+  m_rkr->Rack_Effects[EFX_DISTBAND] = new DistBand(m_rkr->DBand_res_amount, m_rkr->DBand_up_q, m_rkr->DBand_down_q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
+  Efx_DistBand = static_cast<DistBand*>(m_rkr->Rack_Effects[EFX_DISTBAND]);
+  
   /* Reset parameters */
-  m_rkr->efx_DistBand->reset_parameters(save_state);
+  Efx_DistBand->reset_parameters(save_state);
   
   /* Turn processing back on */
   m_rkr->quality_update = false;

@@ -29,6 +29,8 @@
 #define DISTBAND_H
 
 #include <vector>
+
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 
@@ -53,7 +55,7 @@ enum DistBand_Index
     DistBand_Stereo
 };
 
-class DistBand
+class DistBand : public Effect
 {
 public:
     DistBand (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
@@ -81,9 +83,6 @@ private:
     int WAVE_DNQ;
     uint32_t PERIOD;
     double fSAMPLE_RATE;
-public:
-    int Ppreset;
-    float outvolume;
 
     float *lowl;
     float *lowr;
@@ -91,7 +90,6 @@ public:
     float *midr;
     float *highl;
     float *highr;
-private:
 
     void setvolume (int Pvolume);
     void setpanning (int Ppanning);
@@ -131,8 +129,6 @@ private:
     class Waveshaper *mbwshape1l, *mbwshape2l, *mbwshape3l;
     class Waveshaper *mbwshape1r, *mbwshape2r, *mbwshape3r;
 
-    class FPreset *Fpre;
-    
 };
 
 

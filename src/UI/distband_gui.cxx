@@ -11,7 +11,7 @@ void DistBandGui::cb_distband_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_DISTBAND]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_DistBand->cleanup();
+rkr->Rack_Effects[EFX_DISTBAND]->cleanup();
 rgui->findpos(EFX_DISTBAND,(int)o->value(),o);
 }
 void DistBandGui::cb_distband_activar(RKR_Light_Button* o, void* v) {
@@ -20,22 +20,22 @@ void DistBandGui::cb_distband_activar(RKR_Light_Button* o, void* v) {
 
 void DistBandGui::cb_distband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12023))rkr->efx_DistBand->setpreset((int)o->value());
-distband_WD->value(Dry_Wet(rkr->efx_DistBand->getpar(DistBand_DryWet)));
-distband_LRc->value(rkr->efx_DistBand->getpar(DistBand_LR_Cross));
-distband_drive->value(rkr->efx_DistBand->getpar(DistBand_Drive));
-distband_level->value(rkr->efx_DistBand->getpar(DistBand_Level));
-distband_tipoL->value(rkr->efx_DistBand->getpar(DistBand_Type_Low));
-distband_tipoM->value(rkr->efx_DistBand->getpar(DistBand_Type_Mid));
-distband_tipoH->value(rkr->efx_DistBand->getpar(DistBand_Type_Hi));
-distband_volL->value(rkr->efx_DistBand->getpar(DistBand_Gain_Low));
-distband_volM->value(rkr->efx_DistBand->getpar(DistBand_Gain_Mid));
-distband_volH->value(rkr->efx_DistBand->getpar(DistBand_Gain_Hi));
-distband_neg->value(rkr->efx_DistBand->getpar(DistBand_Negate));
-distband_st->value(rkr->efx_DistBand->getpar(DistBand_Stereo));
-distband_pan->value(rkr->efx_DistBand->getpar(DistBand_Pan)-64);
-distband_cross1->value(rkr->efx_DistBand->getpar(DistBand_Cross_1));
-distband_cross2->value(rkr->efx_DistBand->getpar(DistBand_Cross_2));
+if((ud==0)||(ud==12023))rkr->Rack_Effects[EFX_DISTBAND]->setpreset((int)o->value());
+distband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_DryWet)));
+distband_LRc->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_LR_Cross));
+distband_drive->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Drive));
+distband_level->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Level));
+distband_tipoL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Low));
+distband_tipoM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Mid));
+distband_tipoH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Hi));
+distband_volL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Low));
+distband_volM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Mid));
+distband_volH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Hi));
+distband_neg->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Negate));
+distband_st->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Stereo));
+distband_pan->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Pan)-64);
+distband_cross1->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_1));
+distband_cross2->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_2));
 }
 void DistBandGui::cb_distband_preset(RKR_Choice* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_preset_i(o,v);
@@ -59,7 +59,7 @@ void DistBandGui::cb_distband_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_DryWet);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_DryWet,Dry_Wet((int)(o->value())));
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_DryWet,Dry_Wet((int)(o->value())));
 }
 void DistBandGui::cb_distband_WD(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_WD_i(o,v);
@@ -71,7 +71,7 @@ void DistBandGui::cb_distband_LRc_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_LR_Cross);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_LR_Cross,(int)(o->value()));
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_LR_Cross,(int)(o->value()));
 }
 void DistBandGui::cb_distband_LRc(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_LRc_i(o,v);
@@ -83,7 +83,7 @@ void DistBandGui::cb_distband_drive_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Drive);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Drive,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Drive,(int)o->value());
 }
 void DistBandGui::cb_distband_drive(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_drive_i(o,v);
@@ -95,7 +95,7 @@ void DistBandGui::cb_distband_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Level);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Level,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Level,(int)o->value());
 }
 void DistBandGui::cb_distband_level(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_level_i(o,v);
@@ -107,7 +107,7 @@ void DistBandGui::cb_distband_volL_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Gain_Low);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Gain_Low,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Low,(int)o->value());
 }
 void DistBandGui::cb_distband_volL(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_volL_i(o,v);
@@ -119,7 +119,7 @@ void DistBandGui::cb_distband_volM_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Gain_Mid);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Gain_Mid,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Mid,(int)o->value());
 }
 void DistBandGui::cb_distband_volM(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_volM_i(o,v);
@@ -131,7 +131,7 @@ void DistBandGui::cb_distband_volH_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Gain_Hi);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Gain_Hi,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Hi,(int)o->value());
 }
 void DistBandGui::cb_distband_volH(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_volH_i(o,v);
@@ -143,7 +143,7 @@ void DistBandGui::cb_distband_cross1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Cross_1);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Cross_1,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Cross_1,(int)o->value());
 }
 void DistBandGui::cb_distband_cross1(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_cross1_i(o,v);
@@ -155,7 +155,7 @@ void DistBandGui::cb_distband_cross2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Cross_2);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Cross_2,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Cross_2,(int)o->value());
 }
 void DistBandGui::cb_distband_cross2(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_cross2_i(o,v);
@@ -168,7 +168,7 @@ void DistBandGui::cb_distband_tipoL_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_DistBand->changepar(DistBand_Type_Low,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Low,(int)o->value());
 }
 void DistBandGui::cb_distband_tipoL(RKR_Choice* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_tipoL_i(o,v);
@@ -181,7 +181,7 @@ void DistBandGui::cb_distband_tipoM_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_DistBand->changepar(DistBand_Type_Mid,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Mid,(int)o->value());
 }
 void DistBandGui::cb_distband_tipoM(RKR_Choice* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_tipoM_i(o,v);
@@ -194,7 +194,7 @@ void DistBandGui::cb_distband_tipoH_i(RKR_Choice* o, void*) {
  return;
 } 
 
-rkr->efx_DistBand->changepar(DistBand_Type_Hi,(int)o->value());
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Hi,(int)o->value());
 }
 void DistBandGui::cb_distband_tipoH(RKR_Choice* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_tipoH_i(o,v);
@@ -206,21 +206,21 @@ void DistBandGui::cb_distband_pan_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_DistBand_Pan);
  return;
 } 
-rkr->efx_DistBand->changepar(DistBand_Pan,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Pan,(int)(o->value()+64));
 }
 void DistBandGui::cb_distband_pan(RKR_Slider* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_pan_i(o,v);
 }
 
 void DistBandGui::cb_distband_st_i(RKR_Check_Button* o, void*) {
-  rkr->efx_DistBand->changepar(DistBand_Stereo,(int)o->value());
+  rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Stereo,(int)o->value());
 }
 void DistBandGui::cb_distband_st(RKR_Check_Button* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_st_i(o,v);
 }
 
 void DistBandGui::cb_distband_neg_i(RKR_Check_Button* o, void*) {
-  rkr->efx_DistBand->changepar(DistBand_Negate,(int)o->value());
+  rkr->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Negate,(int)o->value());
 }
 void DistBandGui::cb_distband_neg(RKR_Check_Button* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_neg_i(o,v);

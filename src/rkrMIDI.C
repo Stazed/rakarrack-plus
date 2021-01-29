@@ -2275,43 +2275,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_DistBand_DryWet:
-        efx_DistBand->changepar(DistBand_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_DryWet, Dry_Wet(value));
         break;
 
     case MC_DistBand_LR_Cross:
-        efx_DistBand->changepar(DistBand_LR_Cross, value);
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_LR_Cross, value);
         break;
 
     case MC_DistBand_Drive:
-        efx_DistBand->changepar(DistBand_Drive, value);
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Drive, value);
         break;
 
     case MC_DistBand_Level:
-        efx_DistBand->changepar(DistBand_Level, value);
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Level, value);
         break;
 
     case MC_DistBand_Gain_Low:
-        efx_DistBand->changepar(DistBand_Gain_Low, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Low, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_DistBand_Gain_Mid:
-        efx_DistBand->changepar(DistBand_Gain_Mid, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Mid, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_DistBand_Gain_Hi:
-        efx_DistBand->changepar(DistBand_Gain_Hi, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Hi, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_DistBand_Cross_1:
-        efx_DistBand->changepar(DistBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case MC_DistBand_Cross_2:
-        efx_DistBand->changepar(DistBand_Cross_2, 800 + (int) ((float) value * C_MC_11200_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Cross_2, 800 + (int) ((float) value * C_MC_11200_RANGE));
         break;
 
     case MC_DistBand_Pan:
-        efx_DistBand->changepar(DistBand_Pan, value);
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Pan, value);
         break;
 
     case MC_Arpie_DryWet:
@@ -3317,15 +3317,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_DistBand_Type_Low:
-        efx_DistBand->changepar(DistBand_Type_Low, (int) ((float) value * C_MC_30_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Low, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case MC_DistBand_Type_Mid:
-        efx_DistBand->changepar(DistBand_Type_Mid, (int) ((float) value * C_MC_30_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Mid, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case MC_DistBand_Type_Hi:
-        efx_DistBand->changepar(DistBand_Type_Hi, (int) ((float) value * C_MC_30_RANGE));
+        Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Hi, (int) ((float) value * C_MC_30_RANGE));
         break;
 
     case MC_Stomp_Mode:
