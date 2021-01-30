@@ -39,6 +39,7 @@
 #include"Effect.h"
 #include"EQ.h"
 #include"Compressor.h"
+#include"Limiter.h"
 #include"Distorsion.h"
 #include"Overdrive.h"
 #include"Echo.h"

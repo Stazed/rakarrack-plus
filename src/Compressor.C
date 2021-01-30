@@ -37,7 +37,7 @@
 #include "Compressor.h"
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
-Compressor::Compressor(double samplerate, uint32_t intermediate_bufsize) :
+Compressor::Compressor(double sample_rate, uint32_t intermediate_bufsize) :
     tatt(20),
     trel(50),
     tratio(4),
@@ -49,7 +49,7 @@ Compressor::Compressor(double samplerate, uint32_t intermediate_bufsize) :
     peak(),
     clipping(),
     limit(),
-    cSAMPLE_RATE(1.0 / samplerate),
+    cSAMPLE_RATE(1.0 / sample_rate),
     PERIOD(intermediate_bufsize),       // correct for rakarrack, may be adjusted by lv2
     rvolume(),
     lvolume(),
@@ -75,7 +75,7 @@ Compressor::Compressor(double samplerate, uint32_t intermediate_bufsize) :
     attconst(),
     ltimer(),
     rtimer(),
-    hold((int) (samplerate * 0.0125)),  //  12.5ms
+    hold((int) (sample_rate * 0.0125)),  //  12.5ms
     rgain(1.0f),
     rgain_old(1.0f),
     lgain(1.0f),
@@ -90,7 +90,7 @@ Compressor::Compressor(double samplerate, uint32_t intermediate_bufsize) :
     rpeak(),
     Fpre(NULL)
 {
-    setpreset(0, 0);
+    setpreset(0);
 }
 
 Compressor::~Compressor()
@@ -318,10 +318,10 @@ Compressor::out(float *efxoutl, float *efxoutr)
 }
 
 void
-Compressor::setpreset(int dgui, int npreset)
+Compressor::setpreset(int npreset)
 {
     const int PRESET_SIZE = C_COMPRESS_PARAMETERS;
-    const int NUM_PRESETS = 8;
+    const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //2:1
@@ -332,26 +332,16 @@ Compressor::setpreset(int dgui, int npreset)
         {-24, 8, -12, 20, 35, 1, 30, 0, 0},
         //limiter - from rkrlv2
         {-3, 15, 0, 10, 250, 0, 0, 1, 1},
-        //Final Limiter
-        {-1, 15, 0, 5, 250, 0, 0, 1, 1},
-        //HarmonicEnhancer
-        {-20, 15, -3, 5, 50, 0, 0, 1, 1},
-        //Band CompBand
-        {-3, 2, 0, 5, 50, 1, 0, 1, 0},
-        //End CompBand
-        {-60, 2, 0, 10, 500, 1, 0, 1, 1},
     };
 
-    // (npreset > 3) means user defined (Insert) presets for Compressor
-    if ((dgui) && (npreset > 3))  // efx_Compressor = dgui = 1
+    if (npreset > NUM_PRESETS - 1) 
     {
-        Fpre->ReadPreset(EFX_COMPRESSOR, npreset - 3, pdata);
+        Fpre->ReadPreset(EFX_COMPRESSOR, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
     }
-    // No user defined (Insert) presets for Compressor or this is one of those below
-    else    // CompBand, HarmonicEnhancer, efx_Limiter = dgui = 0
+    else    // No user defined (Insert) presets for Compressor
     {
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, presets[npreset][n]);

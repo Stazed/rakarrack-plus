@@ -616,7 +616,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_MUSICAL_DELAY] = new MusicDelay(fSample_rate, period);
     Rack_Effects[EFX_NOISEGATE] = new Gate(fSample_rate, period);
     Rack_Effects[EFX_DERELICT] = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
-    efx_FLimiter = new Compressor(fSample_rate, period);
+    efx_FLimiter = new Limiter(fSample_rate, period);
     Rack_Effects[EFX_VALVE] = new Valve(fSample_rate, period);
     Rack_Effects[EFX_DUAL_FLANGE] = new Dflange(fSample_rate, period);
     Rack_Effects[EFX_RING] = new Ring(fSample_rate, period);
@@ -660,7 +660,7 @@ RKR::instantiate_effects()
     RC_Stereo_Harm = new RecChord();
     
     // Defaults and cleanup
-    efx_FLimiter->setpreset(0, 4);
+    efx_FLimiter->setpreset(0);
     RC_Harm->cleanup();
     RC_Stereo_Harm->cleanup();
     HarmRecNote->reconota = -1;

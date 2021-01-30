@@ -27,7 +27,7 @@
 #define HARM_ENHANCER_H
 
 #include "AnalogFilter.h"
-#include "Compressor.h"
+#include "Limiter.h"
 
 
 

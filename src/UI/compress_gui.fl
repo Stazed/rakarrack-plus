@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -29,7 +29,7 @@ widget_class CompressGui {
 }
 rkr->EFX_Bypass[EFX_COMPRESSOR]=(int)o->value();
 rkr->efx_Compressor->cleanup();
-rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);} selected
+rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
@@ -37,7 +37,7 @@ rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);} selected
     label Preset
     user_data 12001
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12001))rkr->efx_Compressor->setpreset(1,(int) o->value());
+if((ud==0)||(ud==12001))rkr->efx_Compressor->setpreset((int) o->value());
 compress_threshold->value(rkr->efx_Compressor->getpar(Compress_Threshold));
 compress_Ratio->value(rkr->efx_Compressor->getpar(Compress_Ratio));
 compress_output->value(rkr->efx_Compressor->getpar(Compress_Output));
@@ -46,7 +46,7 @@ compress_RTime->value(rkr->efx_Compressor->getpar(Compress_Release));
 Auto_Output->value(rkr->efx_Compressor->getpar(Compress_Auto_Out));
 compress_Knee->value(rkr->efx_Compressor->getpar(Compress_Knee));
 Stereo->value(rkr->efx_Compressor->getpar(Compress_Stereo));
-Peak->value(rkr->efx_Compressor->getpar(Compress_Peak));}
+Peak->value(rkr->efx_Compressor->getpar(Compress_Peak));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

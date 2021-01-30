@@ -16,6 +16,7 @@
 #include "Overdrive.h"
 #include "EQ.h"
 #include "Compressor.h"
+#include "Limiter.h"
 #include "Alienwah.h"
 #include "Cabinet.h"
 #include "WahWah.h"
@@ -734,7 +735,7 @@ public:
     int EFX_Bypass[C_NUMBER_EFFECTS];
     int EFX_Bank_Bypass[C_NUMBER_EFFECTS];
 
-    class Compressor *efx_FLimiter;
+    class Limiter *efx_FLimiter;
 
     class Resample *U_Resample;
     class Resample *D_Resample;

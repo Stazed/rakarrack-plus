@@ -31,7 +31,7 @@
 #define COMPBANDL_H
 
 #include "Effect.h"
-#include "Compressor.h"
+#include "Limiter.h"
 #include "AnalogFilter.h"
 
 const int C_COMPBAND_PARAMETERS = 13;

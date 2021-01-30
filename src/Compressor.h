@@ -50,11 +50,11 @@ class Compressor
 
 public:
 
-    Compressor (double samplerate, uint32_t intermediate_bufsize);
-    ~Compressor ();
+    Compressor (double sample_rate, uint32_t intermediate_bufsize);
+    virtual ~Compressor ();
 
     void out (float *efxoutl, float *efxoutr);
-    void setpreset (int dgui,int npreset);
+    virtual void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();

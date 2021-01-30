@@ -100,6 +100,7 @@ set (ProgSources
     Overdrive.C
     EQ.C
     Compressor.C
+    Limiter.C
     AnalogFilter.C
     Alienwah.C
     beattracker.C

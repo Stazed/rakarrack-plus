@@ -986,8 +986,8 @@ LV2_Handle init_harmnomidlv2(const LV2_Descriptor* /* descriptor */,double sampl
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq, plug->period_max);
-    plug->comp->setpreset(0,4); //Final Limiter
+    plug->comp = new Limiter(sample_freq, plug->period_max);
+    plug->comp->setpreset(0); //Final Limiter
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -2369,8 +2369,8 @@ LV2_Handle init_ringlv2(const LV2_Descriptor* /* descriptor */,double sample_fre
     plug->noteID->setlpf(5500);
     plug->noteID->sethpf(80);
 
-    plug->comp = new Compressor(sample_freq, plug->period_max);
-    plug->comp->setpreset(0,4); //Final Limiter
+    plug->comp = new Limiter(sample_freq, plug->period_max);
+    plug->comp->setpreset(1); //Final Limiter
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -4701,8 +4701,8 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor* /* descriptor */,double samp
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq, plug->period_max);
-    plug->comp->setpreset(0,4); //Final Limiter
+    plug->comp = new Limiter(sample_freq, plug->period_max);
+    plug->comp->setpreset(0); //Final Limiter
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -6164,8 +6164,8 @@ LV2_Handle init_harmonizerlv2(const LV2_Descriptor* /* descriptor */,double samp
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq, plug->period_max);
-    plug->comp->setpreset(0,4); //Final Limiter
+    plug->comp = new Limiter(sample_freq, plug->period_max);
+    plug->comp->setpreset(0); //Final Limiter
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -6461,8 +6461,8 @@ LV2_Handle init_stereoharmlv2(const LV2_Descriptor* /* descriptor */,double samp
     plug->noteID->setlpf(5500); // default user option in rakarrack
     plug->noteID->sethpf(80); // default user option in rakarrack
 
-    plug->comp = new Compressor(sample_freq, plug->period_max);
-    plug->comp->setpreset(0,4); //Final Limiter
+    plug->comp = new Limiter(sample_freq, plug->period_max);
+    plug->comp->setpreset(0); //Final Limiter
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);

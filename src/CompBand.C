@@ -84,15 +84,15 @@ CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize) :
 {
     initialize();
 
-    CL = new Compressor(sample_rate, PERIOD);
-    CML = new Compressor(sample_rate, PERIOD);
-    CMH = new Compressor(sample_rate, PERIOD);
-    CH = new Compressor(sample_rate, PERIOD);
+    CL = new Limiter(sample_rate, PERIOD);
+    CML = new Limiter(sample_rate, PERIOD);
+    CMH = new Limiter(sample_rate, PERIOD);
+    CH = new Limiter(sample_rate, PERIOD);
 
-    CL->setpreset(0, 6);
-    CML->setpreset(0, 6);
-    CMH->setpreset(0, 6);
-    CH->setpreset(0, 6);
+    CL->setpreset(2);
+    CML->setpreset(2);
+    CMH->setpreset(2);
+    CH->setpreset(2);
 
     setpreset(Ppreset);
     cleanup();
