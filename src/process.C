@@ -335,54 +335,13 @@ RKR::~RKR()
     delete DC_Offsetl;
     delete DC_Offsetr;
     delete M_Metronome;
-    delete Rack_Effects[EFX_CHORUS];
-    delete Rack_Effects[EFX_FLANGER];
-    delete Rack_Effects[EFX_REVERB];
-    delete Rack_Effects[EFX_ECHO];
-    delete Rack_Effects[EFX_PHASER];
-    delete Rack_Effects[EFX_ANALOG_PHASER];
-    delete Rack_Effects[EFX_DISTORTION];
-    delete Rack_Effects[EFX_OVERDRIVE];
-    delete Rack_Effects[EFX_PARAMETRIC];
-    delete Rack_Effects[EFX_EQ];
-    delete Rack_Effects[EFX_COMPRESSOR];
-    delete Rack_Effects[EFX_WAHWAH];
-    delete Rack_Effects[EFX_ALIENWAH];
-    delete Rack_Effects[EFX_CABINET];
-    delete Rack_Effects[EFX_PAN];
-    delete Rack_Effects[EFX_HARMONIZER];
-    delete Rack_Effects[EFX_MUSICAL_DELAY];
-    delete Rack_Effects[EFX_NOISEGATE];
-    delete Rack_Effects[EFX_DERELICT];
     delete efx_FLimiter;
-    delete Rack_Effects[EFX_VALVE];
-    delete Rack_Effects[EFX_DUAL_FLANGE];
-    delete Rack_Effects[EFX_RING];
-    delete Rack_Effects[EFX_EXCITER];
-    delete Rack_Effects[EFX_DISTBAND];
-    delete Rack_Effects[EFX_ARPIE];
-    delete Rack_Effects[EFX_EXPANDER];
-    delete Rack_Effects[EFX_SHUFFLE];
-    delete Rack_Effects[EFX_SYNTHFILTER];
-    delete Rack_Effects[EFX_VARYBAND];
-    delete Rack_Effects[EFX_CONVOLOTRON];
-    delete Rack_Effects[EFX_LOOPER];
-    delete Rack_Effects[EFX_MUTROMOJO];
-    delete Rack_Effects[EFX_ECHOVERSE];
-    delete Rack_Effects[EFX_COILCRAFTER];
-    delete Rack_Effects[EFX_SHELFBOOST];
-    delete Rack_Effects[EFX_VOCODER];
-    delete Rack_Effects[EFX_SUSTAINER];
-    delete Rack_Effects[EFX_SEQUENCE];
-    delete Rack_Effects[EFX_SHIFTER];
-    delete Rack_Effects[EFX_STOMPBOX];
-    delete Rack_Effects[EFX_REVERBTRON];
-    delete Rack_Effects[EFX_ECHOTRON];
-    delete Rack_Effects[EFX_STEREOHARM];
-    delete Rack_Effects[EFX_COMPBAND];
-    delete Rack_Effects[EFX_OPTICALTREM];
-    delete Rack_Effects[EFX_VIBE];
-    delete Rack_Effects[EFX_INFINITY];
+    
+    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+    {
+        if(Rack_Effects[i])
+            delete Rack_Effects[i];
+    }
 
     delete U_Resample;
     delete D_Resample;
@@ -595,6 +554,8 @@ RKR::instantiate_effects()
     DC_Offsetl = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
     DC_Offsetr = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
     M_Metronome = new metronome(fSample_rate, period);
+    efx_FLimiter = new Limiter(fSample_rate, period);
+
     Rack_Effects[EFX_CHORUS] = new Chorus(fSample_rate, period);
     Rack_Effects[EFX_FLANGER] = new Flanger(fSample_rate, period);
     Rack_Effects[EFX_REVERB] = new Reverb(fSample_rate, period);
@@ -614,7 +575,6 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_MUSICAL_DELAY] = new MusicDelay(fSample_rate, period);
     Rack_Effects[EFX_NOISEGATE] = new Gate(fSample_rate, period);
     Rack_Effects[EFX_DERELICT] = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
-    efx_FLimiter = new Limiter(fSample_rate, period);
     Rack_Effects[EFX_VALVE] = new Valve(fSample_rate, period);
     Rack_Effects[EFX_DUAL_FLANGE] = new Dflange(fSample_rate, period);
     Rack_Effects[EFX_RING] = new Ring(fSample_rate, period);
@@ -1112,56 +1072,15 @@ RKR::Control_Volume(float *origl, float *origr)
 void
 RKR::cleanup_efx()
 {
-    Rack_Effects[EFX_EQ]->cleanup();
-    Rack_Effects[EFX_REVERB]->cleanup();
-    Rack_Effects[EFX_DISTORTION]->cleanup();
-    Rack_Effects[EFX_OVERDRIVE]->cleanup();
-    Rack_Effects[EFX_COMPRESSOR]->cleanup();
-    Rack_Effects[EFX_ECHO]->cleanup();
-    Rack_Effects[EFX_CHORUS]->cleanup();
-    Rack_Effects[EFX_FLANGER]->cleanup();
-    Rack_Effects[EFX_PHASER]->cleanup();
-    Rack_Effects[EFX_PARAMETRIC]->cleanup();
-    Rack_Effects[EFX_WAHWAH]->cleanup();
-    Rack_Effects[EFX_ALIENWAH]->cleanup();
-    Rack_Effects[EFX_CABINET]->cleanup();
-    Rack_Effects[EFX_PAN]->cleanup();
-    Rack_Effects[EFX_HARMONIZER]->cleanup();
-    Rack_Effects[EFX_MUSICAL_DELAY]->cleanup();
-    Rack_Effects[EFX_NOISEGATE]->cleanup();
-    Rack_Effects[EFX_DERELICT]->cleanup();
-    Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
-    Rack_Effects[EFX_VALVE]->cleanup();
-    Rack_Effects[EFX_DUAL_FLANGE]->cleanup();
-    Rack_Effects[EFX_RING]->cleanup();
-    Rack_Effects[EFX_EXCITER]->cleanup();
-    Rack_Effects[EFX_DISTBAND]->cleanup();
-    Rack_Effects[EFX_ARPIE]->cleanup();
-    Rack_Effects[EFX_EXPANDER]->cleanup();
-    Rack_Effects[EFX_SHUFFLE]->cleanup();
-    Rack_Effects[EFX_SYNTHFILTER]->cleanup();
-    Rack_Effects[EFX_VARYBAND]->cleanup();
-    Rack_Effects[EFX_CONVOLOTRON]->cleanup();
-    Rack_Effects[EFX_LOOPER]->cleanup();
-    Rack_Effects[EFX_MUTROMOJO]->cleanup();
-    Rack_Effects[EFX_ECHOVERSE]->cleanup();
-    Rack_Effects[EFX_COILCRAFTER]->cleanup();
-    Rack_Effects[EFX_SHELFBOOST]->cleanup();
-    Rack_Effects[EFX_VOCODER]->cleanup();
-    Rack_Effects[EFX_SUSTAINER]->cleanup();
-    Rack_Effects[EFX_SEQUENCE]->cleanup();
-    Rack_Effects[EFX_SHIFTER]->cleanup();
-    Rack_Effects[EFX_STOMPBOX]->cleanup();
-    Rack_Effects[EFX_REVERBTRON]->cleanup();
-    Rack_Effects[EFX_ECHOTRON]->cleanup();
-    Rack_Effects[EFX_STEREOHARM]->cleanup();
-    Rack_Effects[EFX_COMPBAND]->cleanup();
-    Rack_Effects[EFX_OPTICALTREM]->cleanup();
-    Rack_Effects[EFX_VIBE]->cleanup();
+    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+    {
+        if(Rack_Effects[i])
+            Rack_Effects[i]->cleanup();
+    }
+
     RC_Harm->cleanup();
     RC_Stereo_Harm->cleanup();
     efx_FLimiter->cleanup();
-    Rack_Effects[EFX_INFINITY]->cleanup();
 }
 
 void
