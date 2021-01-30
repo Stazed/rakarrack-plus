@@ -26,6 +26,7 @@
 #ifndef Opticaltrem_H
 #define Opticaltrem_H
 
+#include "Effect.h"
 #include "EffectLFO.h"
 
 const int C_OPTICAL_PARAMETERS = 7;
@@ -41,7 +42,7 @@ enum Optical_Index
     Optical_Invert
 };
 
-class Opticaltrem
+class Opticaltrem : public Effect
 {
 
 public:
@@ -75,7 +76,7 @@ private:
     float rpanning, lpanning;
 
     EffectLFO* lfo;
-    class FPreset *Fpre;
+
 };
 
 #endif

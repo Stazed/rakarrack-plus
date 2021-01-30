@@ -742,7 +742,6 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
 
-    class Opticaltrem *efx_Opticaltrem;
     class Vibe *efx_Vibe;
     class Infinity *efx_Infinity;
 

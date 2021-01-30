@@ -27,6 +27,7 @@
 #include "Opticaltrem.h"
 
 Opticaltrem::Opticaltrem(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize),
     cSAMPLE_RATE(1.0f / sample_rate),
     PERIOD(intermediate_bufsize),
     Pdepth(127),
@@ -57,8 +58,7 @@ Opticaltrem::Opticaltrem(double sample_rate, uint32_t intermediate_bufsize) :
     oldgr(),
     rpanning(1.0f),
     lpanning(1.0f),
-    lfo(NULL),
-    Fpre(NULL)
+    lfo(NULL)
 {
     /*  From original constructor
     Ra = 1000000.0f;    //  Cds cell dark resistance.

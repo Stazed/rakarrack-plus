@@ -4682,23 +4682,23 @@ void RKRGUI::MIDI_control_gui_refresh()
                 COMPBAND->cband_cross3->redraw();
                 break;
             case MC_Optical_Depth:
-                OTREM->otrem_dpth->value(rkr->efx_Opticaltrem->getpar(Optical_Depth));
+                OTREM->otrem_dpth->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Depth));
                 OTREM->otrem_dpth->redraw();
                 break;
             case MC_Optical_LFO_Tempo:
-                OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Tempo));
+                OTREM->otrem_freq->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo));
                 OTREM->otrem_freq->redraw();
                 break;
             case MC_Optical_LFO_Random:
-                OTREM->otrem_rnd->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Random));
+                OTREM->otrem_rnd->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Random));
                 OTREM->otrem_rnd->redraw();
                 break;
             case MC_Optical_LFO_Stereo:
-                OTREM->otrem_stdf->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Stereo));
+                OTREM->otrem_stdf->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Stereo));
                 OTREM->otrem_stdf->redraw();
                 break;
             case MC_Optical_Pan:
-                OTREM->otrem_pan->value(rkr->efx_Opticaltrem->getpar(Optical_Pan) - 64);
+                OTREM->otrem_pan->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Pan) - 64);
                 OTREM->otrem_pan->redraw();
                 break;
             case MC_Vibe_DryWet:
@@ -5012,7 +5012,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 MUTROMOJO->mutromojo_lfotype->redraw();
                 break;
             case MC_Optical_LFO_Type:
-                OTREM->otrem_lfotype->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Type));
+                OTREM->otrem_lfotype->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Type));
                 OTREM->otrem_lfotype->redraw();
                 break;
             case MC_Pan_LFO_Type:
@@ -6157,7 +6157,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->EFX_Bypass[EFX_OPTICALTREM])
     {
-        OTREM->otrem_freq->value(rkr->efx_Opticaltrem->getpar(Optical_LFO_Tempo));
+        OTREM->otrem_freq->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo));
         OTREM->otrem_freq->redraw();
     }
     if (rkr->EFX_Bypass[EFX_VIBE])

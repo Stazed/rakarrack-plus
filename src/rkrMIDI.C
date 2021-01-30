@@ -3033,23 +3033,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Optical_Depth:
-        efx_Opticaltrem->changepar(Optical_Depth, value);
+        Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_Depth, value);
         break;
 
     case MC_Optical_LFO_Tempo:
-        efx_Opticaltrem->changepar(Optical_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Optical_LFO_Random:
-        efx_Opticaltrem->changepar(Optical_LFO_Random, value);
+        Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Random, value);
         break;
 
     case MC_Optical_LFO_Stereo:
-        efx_Opticaltrem->changepar(Optical_LFO_Stereo, value);
+        Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Stereo, value);
         break;
 
     case MC_Optical_Pan:
-        efx_Opticaltrem->changepar(Optical_Pan, value);
+        Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_Pan, value);
         break;
 
     case MC_Vibe_DryWet:
@@ -3361,7 +3361,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Optical_LFO_Type:
-        efx_Opticaltrem->changepar(Optical_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_Pan_LFO_Type:

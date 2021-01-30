@@ -953,10 +953,10 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_OPTICALTREM:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Opticaltrem->getpar(Optical_Depth), efx_Opticaltrem->getpar(Optical_LFO_Tempo),
-                efx_Opticaltrem->getpar(Optical_LFO_Random), efx_Opticaltrem->getpar(Optical_LFO_Type),
-                efx_Opticaltrem->getpar(Optical_LFO_Stereo), efx_Opticaltrem->getpar(Optical_Pan),
-                efx_Opticaltrem->getpar(Optical_Invert), EFX_Bypass[EFX_OPTICALTREM]);
+                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Depth), Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo),
+                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Random), Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Type),
+                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Stereo), Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Pan),
+                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Invert), EFX_Bypass[EFX_OPTICALTREM]);
         break;
 
 
@@ -1660,9 +1660,9 @@ RKR::Actualizar_Audio()
 
         case EFX_OPTICALTREM:
             EFX_Bypass[EFX_OPTICALTREM] = 0;
-            efx_Opticaltrem->cleanup();
+            Rack_Effects[EFX_OPTICALTREM]->cleanup();
             for (i = 0; i < C_OPTICAL_PARAMETERS; i++)
-                efx_Opticaltrem->changepar(i, lv[EFX_OPTICALTREM][i]);
+                Rack_Effects[EFX_OPTICALTREM]->changepar(i, lv[EFX_OPTICALTREM][i]);
             EFX_Bypass[EFX_OPTICALTREM] = EFX_Bank_Bypass[EFX_OPTICALTREM];
             break;
 
@@ -2410,7 +2410,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_COMPBAND_PARAMETERS; j++)
         lv[EFX_COMPBAND][j] = Rack_Effects[EFX_COMPBAND]->getpar(j);
     for (j = 0; j < C_OPTICAL_PARAMETERS; j++)
-        lv[EFX_OPTICALTREM][j] = efx_Opticaltrem->getpar(j);
+        lv[EFX_OPTICALTREM][j] = Rack_Effects[EFX_OPTICALTREM]->getpar(j);
     for (j = 0; j < C_VIBE_PARAMETERS; j++)
         lv[EFX_VIBE][j] = efx_Vibe->getpar(j);
     for (j = 0; j < C_INFINITY_PARAMETERS; j++)
