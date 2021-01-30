@@ -2833,23 +2833,23 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Stomp_Level:
-        efx_StompBox->changepar(Stomp_Level, value);
+        Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Level, value);
         break;
 
     case MC_Stomp_Gain:
-        efx_StompBox->changepar(Stomp_Gain, value);
+        Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Gain, value);
         break;
 
     case MC_Stomp_Bias:
-        efx_StompBox->changepar(Stomp_Bias, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Bias, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Stomp_Mid:
-        efx_StompBox->changepar(Stomp_Mid, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mid, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Stomp_Tone:
-        efx_StompBox->changepar(Stomp_Tone, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Tone, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Revtron_DryWet:
@@ -3329,7 +3329,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Stomp_Mode:
-        efx_StompBox->changepar(Stomp_Mode, (int) ((float) value * C_MC_8_RANGE));
+        Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mode, (int) ((float) value * C_MC_8_RANGE));
         break;
 
     case MC_Alien_LFO_Type:

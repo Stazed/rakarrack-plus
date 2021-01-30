@@ -23,6 +23,7 @@
 #define STOMPBOX_H
 
 #include <vector>
+#include "Effect.h"
 #include "AnalogFilter.h"
 #include "Waveshaper.h"
 
@@ -38,7 +39,7 @@ enum Stomp_Index
     Stomp_Mode
 };
 
-class StompBox
+class StompBox : public Effect
 {
 public:
     StompBox (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
@@ -59,8 +60,6 @@ public:
     /* Change quality */
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
-
-    int Ppreset;
 
 private:
 
@@ -90,7 +89,6 @@ private:
     AnalogFilter *ranti, *lanti;
     class Waveshaper *lwshape, *rwshape, *lwshape2, *rwshape2;
 
-    class FPreset *Fpre;
 };
 
 

@@ -25,7 +25,7 @@
 
 StompBox::StompBox(int wave_res, int wave_upq, int wave_dnq,
                    double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
+    Effect(wave_res, wave_upq, wave_dnq, sample_rate, intermediate_bufsize),
     WAVE_RES(wave_res),
     WAVE_UPQ(wave_upq),
     WAVE_DNQ(wave_dnq),
@@ -70,8 +70,7 @@ StompBox::StompBox(int wave_res, int wave_upq, int wave_dnq,
     lwshape(NULL),
     rwshape(NULL),
     lwshape2(NULL),
-    rwshape2(NULL),
-    Fpre(NULL)
+    rwshape2(NULL)
 {
     initialize();
 

@@ -893,9 +893,9 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_STOMPBOX:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
-                efx_StompBox->getpar(Stomp_Level), efx_StompBox->getpar(Stomp_Tone),
-                efx_StompBox->getpar(Stomp_Mid), efx_StompBox->getpar(Stomp_Bias),
-                efx_StompBox->getpar(Stomp_Gain), efx_StompBox->getpar(Stomp_Mode),
+                Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level), Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone),
+                Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid), Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias),
+                Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain), Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode),
                 EFX_Bypass[EFX_STOMPBOX]);
         break;
 
@@ -1619,9 +1619,9 @@ RKR::Actualizar_Audio()
 
         case EFX_STOMPBOX:
             EFX_Bypass[EFX_STOMPBOX] = 0;
-            efx_StompBox->cleanup();
+            Rack_Effects[EFX_STOMPBOX]->cleanup();
             for (i = 0; i < C_STOMP_PARAMETERS; i++)
-                efx_StompBox->changepar(i, lv[EFX_STOMPBOX][i]);
+                Rack_Effects[EFX_STOMPBOX]->changepar(i, lv[EFX_STOMPBOX][i]);
             EFX_Bypass[EFX_STOMPBOX] = EFX_Bank_Bypass[EFX_STOMPBOX];
             break;
 
@@ -2400,7 +2400,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_SHIFTER_PARAMETERS; j++)
         lv[EFX_SHIFTER][j] = Rack_Effects[EFX_SHIFTER]->getpar(j);
     for (j = 0; j < C_STOMP_PARAMETERS; j++)
-        lv[EFX_STOMPBOX][j] = efx_StompBox->getpar(j);
+        lv[EFX_STOMPBOX][j] = Rack_Effects[EFX_STOMPBOX]->getpar(j);
     for (j = 0; j < C_REVTRON_PARAMETERS; j++)
         lv[EFX_REVERBTRON][j] = Rack_Effects[EFX_REVERBTRON]->getpar(j);
     for (j = 0; j < C_ECHOTRON_PARAMETERS; j++)

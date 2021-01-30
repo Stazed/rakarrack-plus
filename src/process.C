@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_StompBox(NULL),
     efx_StereoHarm(NULL),
     efx_CompBand(NULL),
     efx_Opticaltrem(NULL),
@@ -383,7 +382,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_SUSTAINER];
     delete Rack_Effects[EFX_SEQUENCE];
     delete Rack_Effects[EFX_SHIFTER];
-    delete efx_StompBox;
+    delete Rack_Effects[EFX_STOMPBOX];
     delete Rack_Effects[EFX_REVERBTRON];
     delete Rack_Effects[EFX_ECHOTRON];
     delete efx_StereoHarm;
@@ -643,7 +642,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_SUSTAINER] = new Sustainer(fSample_rate, period);
     Rack_Effects[EFX_SEQUENCE] = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     Rack_Effects[EFX_SHIFTER] = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
-    efx_StompBox = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
+    Rack_Effects[EFX_STOMPBOX] = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
     Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     Rack_Effects[EFX_ECHOTRON] = new Echotron(fSample_rate, period);
     efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
@@ -1159,7 +1158,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_SUSTAINER]->cleanup();
     Rack_Effects[EFX_SEQUENCE]->cleanup();
     Rack_Effects[EFX_SHIFTER]->cleanup();
-    efx_StompBox->cleanup();
+    Rack_Effects[EFX_STOMPBOX]->cleanup();
     Rack_Effects[EFX_REVERBTRON]->cleanup();
     Rack_Effects[EFX_ECHOTRON]->cleanup();
     efx_StereoHarm->cleanup();
@@ -1603,7 +1602,7 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_STOMPBOX:
                 if (EFX_Bypass[EFX_STOMPBOX])
                 {
-                    efx_StompBox->out(efxoutl, efxoutr);
+                    Rack_Effects[EFX_STOMPBOX]->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

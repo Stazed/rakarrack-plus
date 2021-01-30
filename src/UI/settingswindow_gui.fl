@@ -1981,21 +1981,26 @@ m_rkr->quality_update = false;} {}
     code {/* shut off all processing */
 m_rkr->quality_update = true;
 
+/* Cast to derived class */
+StompBox *Efx_StompBox = static_cast<StompBox*>(m_rkr->Rack_Effects[EFX_STOMPBOX]);
+
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
 
 /* Save current parameters */
-std::vector<int> save_state = m_rkr->efx_StompBox->save_parameters();
+std::vector<int> save_state = Efx_StompBox->save_parameters();
 
 /* Delete and re-create the efx with new resample settings */
-delete m_rkr->efx_StompBox;
-m_rkr->efx_StompBox = new StompBox(m_rkr->Stomp_res_amount, m_rkr->Stomp_up_q, m_rkr->Stomp_down_q, m_rkr->fSample_rate, m_rkr->period);
+delete m_rkr->Rack_Effects[EFX_STOMPBOX];
+m_rkr->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_rkr->Stomp_res_amount, m_rkr->Stomp_up_q, m_rkr->Stomp_down_q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
+Efx_StompBox = static_cast<StompBox*>(m_rkr->Rack_Effects[EFX_STOMPBOX]);
+
 /* Reset parameters */
-m_rkr->efx_StompBox->reset_parameters(save_state);
+Efx_StompBox->reset_parameters(save_state);
 
 /* Turn processing back on */
 m_rkr->quality_update = false;} {}

@@ -4490,23 +4490,23 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SHIFTER->shifter_whammy->redraw();
                 break;
             case MC_Stomp_Level:
-                STOMPBOX->stomp_WD->value(rkr->efx_StompBox->getpar(Stomp_Level));
+                STOMPBOX->stomp_WD->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level));
                 STOMPBOX->stomp_WD->redraw();
                 break;
             case MC_Stomp_Gain:
-                STOMPBOX->stomp_gain->value(rkr->efx_StompBox->getpar(Stomp_Gain));
+                STOMPBOX->stomp_gain->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain));
                 STOMPBOX->stomp_gain->redraw();
                 break;
             case MC_Stomp_Bias:
-                STOMPBOX->stomp_low->value(rkr->efx_StompBox->getpar(Stomp_Bias));
+                STOMPBOX->stomp_low->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
                 STOMPBOX->stomp_low->redraw();
                 break;
             case MC_Stomp_Mid:
-                STOMPBOX->stomp_mid->value(rkr->efx_StompBox->getpar(Stomp_Mid));
+                STOMPBOX->stomp_mid->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
                 STOMPBOX->stomp_mid->redraw();
                 break;
             case MC_Stomp_Tone:
-                STOMPBOX->stomp_high->value(rkr->efx_StompBox->getpar(Stomp_Tone));
+                STOMPBOX->stomp_high->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
                 STOMPBOX->stomp_high->redraw();
                 break;
             case MC_Revtron_DryWet:
@@ -4978,7 +4978,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 DISTBAND->distband_tipoH->redraw();
                 break;
             case MC_Stomp_Mode:
-                STOMPBOX->stomp_mode->value(rkr->efx_StompBox->getpar(Stomp_Mode));
+                STOMPBOX->stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));
                 STOMPBOX->stomp_mode->redraw();
                 break;
             case MC_Alien_LFO_Type:
