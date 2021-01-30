@@ -2370,7 +2370,7 @@ LV2_Handle init_ringlv2(const LV2_Descriptor* /* descriptor */,double sample_fre
     plug->noteID->sethpf(80);
 
     plug->comp = new Limiter(sample_freq, plug->period_max);
-    plug->comp->setpreset(1); //Final Limiter
+    plug->comp->setpreset(0); //Final Limiter
     
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
