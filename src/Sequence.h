@@ -24,6 +24,7 @@
 #define SEQUENCE_H
 
 #include <vector>
+#include "Effect.h"
 #include "RBFilter.h"
 #include "smbPitchShift.h"
 #include "beattracker.h"
@@ -51,7 +52,7 @@ enum Sequence_Index
     Sequence_Range
 };
 
-class Sequence
+class Sequence : public Effect
 {
 public:
     Sequence (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsze);
@@ -75,10 +76,6 @@ public:
     /* Change quality */
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
-
-    int Ppreset;
-
-    float outvolume;
 
 private:
     
@@ -138,7 +135,6 @@ private:
 
     PitchShifter *PS;
 
-    class FPreset *Fpre;
     class beattracker *beats;
     class delayline *ldelay, *rdelay;
 

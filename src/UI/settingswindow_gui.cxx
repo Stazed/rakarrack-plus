@@ -3254,21 +3254,26 @@ void SettingsWindowGui::update_sequence_quality() {
   /* shut off all processing */
   m_rkr->quality_update = true;
   
+  /* Cast to derived class */
+  Sequence *Efx_Sequence = static_cast<Sequence*>(m_rkr->Rack_Effects[EFX_SEQUENCE]);
+  
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
-  std::vector<int> save_state = m_rkr->efx_Sequence->save_parameters();
+  std::vector<int> save_state = Efx_Sequence->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->efx_Sequence;
-  m_rkr->efx_Sequence = new Sequence((long) m_rkr->SeqQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_rkr->Rack_Effects[EFX_SEQUENCE];
+  m_rkr->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_rkr->SeqQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
+  Efx_Sequence = static_cast<Sequence*>(m_rkr->Rack_Effects[EFX_SEQUENCE]);
+  
   /* Reset parameters */
-  m_rkr->efx_Sequence->reset_parameters(save_state);
+  Efx_Sequence->reset_parameters(save_state);
   
   /* Turn processing back on */
   m_rkr->quality_update = false;

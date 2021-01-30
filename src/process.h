@@ -742,7 +742,6 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
 
-    class Sequence *efx_Sequence;
     class Shifter *efx_Shifter;
     class StompBox *efx_StompBox;
     class StereoHarm *efx_StereoHarm;

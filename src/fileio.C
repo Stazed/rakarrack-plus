@@ -871,14 +871,14 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_SEQUENCE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Sequence->getpar(Sequence_Step_1), efx_Sequence->getpar(Sequence_Step_2),
-                efx_Sequence->getpar(Sequence_Step_3), efx_Sequence->getpar(Sequence_Step_4),
-                efx_Sequence->getpar(Sequence_Step_5), efx_Sequence->getpar(Sequence_Step_6),
-                efx_Sequence->getpar(Sequence_Step_7), efx_Sequence->getpar(Sequence_Step_8),
-                efx_Sequence->getpar(Sequence_DryWet), efx_Sequence->getpar(Sequence_Tempo),
-                efx_Sequence->getpar(Sequence_Resonance), efx_Sequence->getpar(Sequence_Amp),
-                efx_Sequence->getpar(Sequence_Stdf), efx_Sequence->getpar(Sequence_Mode),
-                efx_Sequence->getpar(Sequence_Range), EFX_Bypass[EFX_SEQUENCE]);
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_1), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_2),
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_3), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_4),
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_5), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_6),
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_7), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_8),
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_DryWet), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo),
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Resonance), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Amp),
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Stdf), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Mode),
+                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range), EFX_Bypass[EFX_SEQUENCE]);
         break;
 
     case EFX_SHIFTER:
@@ -1603,9 +1603,9 @@ RKR::Actualizar_Audio()
 
         case EFX_SEQUENCE:
             EFX_Bypass[EFX_SEQUENCE] = 0;
-            efx_Sequence->cleanup();
+            Rack_Effects[EFX_SEQUENCE]->cleanup();
             for (i = 0; i < C_SEQUENCE_PARAMETERS; i++)
-                efx_Sequence->changepar(i, lv[EFX_SEQUENCE][i]);
+                Rack_Effects[EFX_SEQUENCE]->changepar(i, lv[EFX_SEQUENCE][i]);
             EFX_Bypass[EFX_SEQUENCE] = EFX_Bank_Bypass[EFX_SEQUENCE];
             break;
 
@@ -2396,7 +2396,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_SUSTAIN_PARAMETERS; j++)
         lv[EFX_SUSTAINER][j] = Rack_Effects[EFX_SUSTAINER]->getpar(j);
     for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)
-        lv[EFX_SEQUENCE][j] = efx_Sequence->getpar(j);
+        lv[EFX_SEQUENCE][j] = Rack_Effects[EFX_SEQUENCE]->getpar(j);
     for (j = 0; j < C_SHIFTER_PARAMETERS; j++)
         lv[EFX_SHIFTER][j] = efx_Shifter->getpar(j);
     for (j = 0; j < C_STOMP_PARAMETERS; j++)

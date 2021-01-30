@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_Sequence(NULL),
     efx_Shifter(NULL),
     efx_StompBox(NULL),
     efx_StereoHarm(NULL),
@@ -383,7 +382,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_SHELFBOOST];
     delete Rack_Effects[EFX_VOCODER];
     delete Rack_Effects[EFX_SUSTAINER];
-    delete efx_Sequence;
+    delete Rack_Effects[EFX_SEQUENCE];
     delete efx_Shifter;
     delete efx_StompBox;
     delete Rack_Effects[EFX_REVERBTRON];
@@ -643,7 +642,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_SHELFBOOST] = new ShelfBoost(fSample_rate, period);
     Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
     Rack_Effects[EFX_SUSTAINER] = new Sustainer(fSample_rate, period);
-    efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
+    Rack_Effects[EFX_SEQUENCE] = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
     efx_Shifter = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
     efx_StompBox = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
     Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
@@ -1159,7 +1158,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_SHELFBOOST]->cleanup();
     Rack_Effects[EFX_VOCODER]->cleanup();
     Rack_Effects[EFX_SUSTAINER]->cleanup();
-    efx_Sequence->cleanup();
+    Rack_Effects[EFX_SEQUENCE]->cleanup();
     efx_Shifter->cleanup();
     efx_StompBox->cleanup();
     Rack_Effects[EFX_REVERBTRON]->cleanup();
@@ -1589,8 +1588,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_SEQUENCE:
                 if (EFX_Bypass[EFX_SEQUENCE])
                 {
-                    efx_Sequence->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_SEQUENCE, efx_Sequence->outvolume);
+                    Rack_Effects[EFX_SEQUENCE]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_SEQUENCE, Rack_Effects[EFX_SEQUENCE]->outvolume);
                 }
                 break;
 

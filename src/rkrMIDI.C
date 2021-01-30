@@ -2753,51 +2753,51 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Sequence_DryWet:
-        efx_Sequence->changepar(Sequence_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_DryWet, Dry_Wet(value));
         break;
 
     case MC_Sequence_Step_1:
-        efx_Sequence->changepar(Sequence_Step_1, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_1, value);
         break;
 
     case MC_Sequence_Step_2:
-        efx_Sequence->changepar(Sequence_Step_2, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_2, value);
         break;
 
     case MC_Sequence_Step_3:
-        efx_Sequence->changepar(Sequence_Step_3, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_3, value);
         break;
 
     case MC_Sequence_Step_4:
-        efx_Sequence->changepar(Sequence_Step_4, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_4, value);
         break;
 
     case MC_Sequence_Step_5:
-        efx_Sequence->changepar(Sequence_Step_5, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_5, value);
         break;
 
     case MC_Sequence_Step_6:
-        efx_Sequence->changepar(Sequence_Step_6, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_6, value);
         break;
 
     case MC_Sequence_Step_7:
-        efx_Sequence->changepar(Sequence_Step_7, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_7, value);
         break;
 
     case MC_Sequence_Step_8:
-        efx_Sequence->changepar(Sequence_Step_8, value);
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_8, value);
         break;
 
     case MC_Sequence_Tempo:
-        efx_Sequence->changepar(Sequence_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Tempo, ret_Tempo(value));
         break;
 
     case MC_Sequence_Resonance:
-        efx_Sequence->changepar(Sequence_Resonance, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Resonance, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Sequence_Stdf:
-        efx_Sequence->changepar(Sequence_Stdf, (int) ((float) value * C_MC_7_RANGE));
+        Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf, (int) ((float) value * C_MC_7_RANGE));
         break;
 
     case MC_Shifter_DryWet:

@@ -4410,51 +4410,51 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SUSTAINER->sus_sus->redraw();
                 break;
             case MC_Sequence_DryWet:
-                SEQUENCE->seq_WD->value(Dry_Wet(rkr->efx_Sequence->getpar(Sequence_DryWet)));
+                SEQUENCE->seq_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_DryWet)));
                 SEQUENCE->seq_WD->redraw();
                 break;
             case MC_Sequence_Step_1:
-                SEQUENCE->seq_1->value(rkr->efx_Sequence->getpar(Sequence_Step_1));
+                SEQUENCE->seq_1->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_1));
                 SEQUENCE->seq_1->redraw();
                 break;
             case MC_Sequence_Step_2:
-                SEQUENCE->seq_2->value(rkr->efx_Sequence->getpar(Sequence_Step_2));
+                SEQUENCE->seq_2->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_2));
                 SEQUENCE->seq_2->redraw();
                 break;
             case MC_Sequence_Step_3:
-                SEQUENCE->seq_3->value(rkr->efx_Sequence->getpar(Sequence_Step_3));
+                SEQUENCE->seq_3->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_3));
                 SEQUENCE->seq_3->redraw();
                 break;
             case MC_Sequence_Step_4:
-                SEQUENCE->seq_4->value(rkr->efx_Sequence->getpar(Sequence_Step_4));
+                SEQUENCE->seq_4->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_4));
                 SEQUENCE->seq_4->redraw();
                 break;
             case MC_Sequence_Step_5:
-                SEQUENCE->seq_5->value(rkr->efx_Sequence->getpar(Sequence_Step_5));
+                SEQUENCE->seq_5->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_5));
                 SEQUENCE->seq_5->redraw();
                 break;
             case MC_Sequence_Step_6:
-                SEQUENCE->seq_6->value(rkr->efx_Sequence->getpar(Sequence_Step_6));
+                SEQUENCE->seq_6->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_6));
                 SEQUENCE->seq_6->redraw();
                 break;
             case MC_Sequence_Step_7:
-                SEQUENCE->seq_7->value(rkr->efx_Sequence->getpar(Sequence_Step_7));
+                SEQUENCE->seq_7->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_7));
                 SEQUENCE->seq_7->redraw();
                 break;
             case MC_Sequence_Step_8:
-                SEQUENCE->seq_8->value(rkr->efx_Sequence->getpar(Sequence_Step_8));
+                SEQUENCE->seq_8->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_8));
                 SEQUENCE->seq_8->redraw();
                 break;
             case MC_Sequence_Tempo:
-                SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(Sequence_Tempo));
+                SEQUENCE->seq_tempo->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));
                 SEQUENCE->seq_tempo->redraw();
                 break;
             case MC_Sequence_Resonance:
-                SEQUENCE->seq_q->value(rkr->efx_Sequence->getpar(Sequence_Resonance) - 64);
+                SEQUENCE->seq_q->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Resonance) - 64);
                 SEQUENCE->seq_q->redraw();
                 break;
             case MC_Sequence_Stdf:
-                SEQUENCE->seq_stdf->value(rkr->efx_Sequence->getpar(Sequence_Stdf));
+                SEQUENCE->seq_stdf->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Stdf));
                 SEQUENCE->seq_stdf->redraw();
                 break;
             case MC_Shifter_DryWet:
@@ -6140,7 +6140,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->EFX_Bypass[EFX_SEQUENCE])
     {
-        SEQUENCE->seq_tempo->value(rkr->efx_Sequence->getpar(Sequence_Tempo));
+        SEQUENCE->seq_tempo->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));
         SEQUENCE->seq_tempo->redraw();
     }
     if (rkr->EFX_Bypass[EFX_ECHO])

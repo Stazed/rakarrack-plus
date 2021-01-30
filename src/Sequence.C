@@ -29,8 +29,7 @@
 
 Sequence::Sequence(long int Quality, int DS, int uq, int dq,
                    double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(Quality, DS, uq, dq, sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     DS_state(DS),
@@ -99,7 +98,6 @@ Sequence::Sequence(long int Quality, int DS, int uq, int dq,
     U_Resample(NULL),
     D_Resample(NULL),
     PS(NULL),
-    Fpre(NULL),
     beats(NULL),
     ldelay(NULL),
     rdelay(NULL)
