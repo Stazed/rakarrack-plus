@@ -972,15 +972,15 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_INFINITY:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Infinity->getpar(Infinity_DryWet), efx_Infinity->getpar(Infinity_Band_1),
-                efx_Infinity->getpar(Infinity_Band_2), efx_Infinity->getpar(Infinity_Band_3),
-                efx_Infinity->getpar(Infinity_Band_4), efx_Infinity->getpar(Infinity_Band_5),
-                efx_Infinity->getpar(Infinity_Band_6), efx_Infinity->getpar(Infinity_Band_7),
-                efx_Infinity->getpar(Infinity_Band_8), efx_Infinity->getpar(Infinity_Resonance),
-                efx_Infinity->getpar(Infinity_Start), efx_Infinity->getpar(Infinity_End),
-                efx_Infinity->getpar(Infinity_Tempo), efx_Infinity->getpar(Infinity_LR_Delay),
-                efx_Infinity->getpar(Infinity_Subdivision), efx_Infinity->getpar(Infinity_AutoPan),
-                efx_Infinity->getpar(Infinity_Reverse), efx_Infinity->getpar(Infinity_Stages),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_DryWet), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_1),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_2), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_3),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_4), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_5),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_6), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_7),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_8), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Resonance),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Start), Rack_Effects[EFX_INFINITY]->getpar(Infinity_End),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo), Rack_Effects[EFX_INFINITY]->getpar(Infinity_LR_Delay),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Subdivision), Rack_Effects[EFX_INFINITY]->getpar(Infinity_AutoPan),
+                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Reverse), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Stages),
                 EFX_Bypass[EFX_INFINITY]);
         break;
     }
@@ -1676,9 +1676,9 @@ RKR::Actualizar_Audio()
 
         case EFX_INFINITY:
             EFX_Bypass[EFX_INFINITY] = 0;
-            efx_Infinity->cleanup();
+            Rack_Effects[EFX_INFINITY]->cleanup();
             for (i = 0; i < C_INFINITY_PARAMETERS; i++)
-                efx_Infinity->changepar(i, lv[EFX_INFINITY][i]);
+                Rack_Effects[EFX_INFINITY]->changepar(i, lv[EFX_INFINITY][i]);
             EFX_Bypass[EFX_INFINITY] = EFX_Bank_Bypass[EFX_INFINITY];
             break;
 
@@ -2414,7 +2414,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_VIBE_PARAMETERS; j++)
         lv[EFX_VIBE][j] = Rack_Effects[EFX_VIBE]->getpar(j);
     for (j = 0; j < C_INFINITY_PARAMETERS; j++)
-        lv[EFX_INFINITY][j] = efx_Infinity->getpar(j);
+        lv[EFX_INFINITY][j] = Rack_Effects[EFX_INFINITY]->getpar(j);
 
 
     for (j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)

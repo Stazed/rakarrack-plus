@@ -742,8 +742,6 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
 
-    class Infinity *efx_Infinity;
-
     jack_client_t *jackclient;
     jack_options_t options;
     jack_status_t status;

@@ -22,6 +22,8 @@
 
 #ifndef INFINITY_H
 #define INFINITY_H
+
+#include "Effect.h"
 #include "RBFilter.h"
 
 #define NUM_INF_BANDS 8
@@ -50,7 +52,7 @@ enum Infinity_Index
     Infinity_Stages
 };
 
-class Infinity
+class Infinity : public Effect
 {
 public:
     Infinity (double sample_rate, uint32_t intermediate_bufsize);
@@ -68,9 +70,6 @@ public:
     
     void initialize();
     void clear_initialize();
-    
-    int Ppreset;
-    float outvolume;
 
 private:
 
@@ -146,9 +145,6 @@ private:
 
     float* interpbuf; //buffer for filters
     class RBFilter *filterl[NUM_INF_BANDS], *filterr[NUM_INF_BANDS];
-
-    class FPreset *Fpre;
-
 
 };
 

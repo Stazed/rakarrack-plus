@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_Infinity(NULL),
     jackclient(NULL),
     options(),
     status(),
@@ -385,7 +384,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_COMPBAND];
     delete Rack_Effects[EFX_OPTICALTREM];
     delete Rack_Effects[EFX_VIBE];
-    delete efx_Infinity;
+    delete Rack_Effects[EFX_INFINITY];
 
     delete U_Resample;
     delete D_Resample;
@@ -645,7 +644,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_COMPBAND] = new CompBand(fSample_rate, period);
     Rack_Effects[EFX_OPTICALTREM] = new Opticaltrem(fSample_rate, period);
     Rack_Effects[EFX_VIBE] = new Vibe(fSample_rate, period);
-    efx_Infinity = new Infinity(fSample_rate, period);
+    Rack_Effects[EFX_INFINITY] = new Infinity(fSample_rate, period);
 
     U_Resample = new Resample(UpQual);
     D_Resample = new Resample(DownQual);
@@ -1164,7 +1163,7 @@ RKR::cleanup_efx()
     RC_Harm->cleanup();
     RC_Stereo_Harm->cleanup();
     efx_FLimiter->cleanup();
-    efx_Infinity->cleanup();
+    Rack_Effects[EFX_INFINITY]->cleanup();
 }
 
 void
@@ -1656,8 +1655,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_INFINITY:
                 if (EFX_Bypass[EFX_INFINITY])
                 {
-                    efx_Infinity->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_INFINITY, efx_Infinity->outvolume);
+                    Rack_Effects[EFX_INFINITY]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_INFINITY, Rack_Effects[EFX_INFINITY]->outvolume);
                 }
             }
         }

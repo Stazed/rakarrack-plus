@@ -3089,35 +3089,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Infinity_DryWet:
-        efx_Infinity->changepar(Infinity_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_DryWet, Dry_Wet(value));
         break;
 
     case MC_Infinity_Resonance:
-        efx_Infinity->changepar(Infinity_Resonance, -1000 + (int) ((float) value * C_MC_2000_RANGE));
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Resonance, -1000 + (int) ((float) value * C_MC_2000_RANGE));
         break;
 
     case MC_Infinity_AutoPan:
-        efx_Infinity->changepar(Infinity_AutoPan, value);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_AutoPan, value);
         break;
 
     case MC_Infinity_LR_Delay:
-        efx_Infinity->changepar(Infinity_LR_Delay, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_LR_Delay, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Start:
-        efx_Infinity->changepar(Infinity_Start, value);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Start, value);
         break;
 
     case MC_Infinity_End:
-        efx_Infinity->changepar(Infinity_End, value);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_End, value);
         break;
 
     case MC_Infinity_Tempo:
-        efx_Infinity->changepar(Infinity_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Tempo, ret_Tempo(value));
         break;
 
     case MC_Infinity_Subdivision:
-        efx_Infinity->changepar(Infinity_Subdivision, -16 + (int) ((float) value * C_MC_32_RANGE));
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Subdivision, -16 + (int) ((float) value * C_MC_32_RANGE));
         break;
 
     case MC_Alien_Delay:
@@ -3169,35 +3169,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Infinity_Band_1:
-        efx_Infinity->changepar(Infinity_Band_1, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_1, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Band_2:
-        efx_Infinity->changepar(Infinity_Band_2, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_2, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Band_3:
-        efx_Infinity->changepar(Infinity_Band_3, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_3, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Band_4:
-        efx_Infinity->changepar(Infinity_Band_4, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_4, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Band_5:
-        efx_Infinity->changepar(Infinity_Band_5, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_5, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Band_6:
-        efx_Infinity->changepar(Infinity_Band_6, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_6, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Band_7:
-        efx_Infinity->changepar(Infinity_Band_7, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_7, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Infinity_Band_8:
-        efx_Infinity->changepar(Infinity_Band_8, (int) ((float) value * C_MC_128_RANGE) - 64);
+        Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_8, (int) ((float) value * C_MC_128_RANGE) - 64);
         break;
 
     case MC_Looper_Tempo:

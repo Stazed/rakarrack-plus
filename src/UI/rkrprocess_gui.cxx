@@ -4738,35 +4738,35 @@ void RKRGUI::MIDI_control_gui_refresh()
                 VIBE->vibe_pan->redraw();
                 break;
             case MC_Infinity_DryWet:
-                INFINIT->infinity_WD->value(Dry_Wet(rkr->efx_Infinity->getpar(Infinity_DryWet)));
+                INFINIT->infinity_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_DryWet)));
                 INFINIT->infinity_WD->redraw();
                 break;
             case MC_Infinity_Resonance:
-                INFINIT->infinity_Q->value(rkr->efx_Infinity->getpar(Infinity_Resonance));
+                INFINIT->infinity_Q->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Resonance));
                 INFINIT->infinity_Q->redraw();
                 break;
             case MC_Infinity_AutoPan:
-                INFINIT->infinity_pan->value(rkr->efx_Infinity->getpar(Infinity_AutoPan));
+                INFINIT->infinity_pan->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_AutoPan));
                 INFINIT->infinity_pan->redraw();
                 break;
             case MC_Infinity_LR_Delay:
-                INFINIT->infinity_stdf->value(rkr->efx_Infinity->getpar(Infinity_LR_Delay));
+                INFINIT->infinity_stdf->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_LR_Delay));
                 INFINIT->infinity_stdf->redraw();
                 break;
             case MC_Infinity_Start:
-                INFINIT->infinity_start->value(rkr->efx_Infinity->getpar(Infinity_Start));
+                INFINIT->infinity_start->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Start));
                 INFINIT->infinity_start->redraw();
                 break;
             case MC_Infinity_End:
-                INFINIT->infinity_end->value(rkr->efx_Infinity->getpar(Infinity_End));
+                INFINIT->infinity_end->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_End));
                 INFINIT->infinity_end->redraw();
                 break;
             case MC_Infinity_Tempo:
-                INFINIT->infinity_rate->value(rkr->efx_Infinity->getpar(Infinity_Tempo));
+                INFINIT->infinity_rate->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
                 INFINIT->infinity_rate->redraw();
                 break;
             case MC_Infinity_Subdivision:
-                INFINIT->infinity_subdiv->value(rkr->efx_Infinity->getpar(Infinity_Subdivision));
+                INFINIT->infinity_subdiv->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Subdivision));
                 INFINIT->infinity_subdiv->redraw();
                 break;
             case MC_Alien_Delay:
@@ -4818,35 +4818,35 @@ void RKRGUI::MIDI_control_gui_refresh()
                 HAR->har_q1->redraw();
                 break;
             case MC_Infinity_Band_1:
-                INFINIT->infinity_1->value(rkr->efx_Infinity->getpar(Infinity_Band_1));
+                INFINIT->infinity_1->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_1));
                 INFINIT->infinity_1->redraw();
                 break;
             case MC_Infinity_Band_2:
-                INFINIT->infinity_2->value(rkr->efx_Infinity->getpar(Infinity_Band_2));
+                INFINIT->infinity_2->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_2));
                 INFINIT->infinity_2->redraw();
                 break;
             case MC_Infinity_Band_3:
-                INFINIT->infinity_3->value(rkr->efx_Infinity->getpar(Infinity_Band_3));
+                INFINIT->infinity_3->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_3));
                 INFINIT->infinity_3->redraw();
                 break;
             case MC_Infinity_Band_4:
-                INFINIT->infinity_4->value(rkr->efx_Infinity->getpar(Infinity_Band_4));
+                INFINIT->infinity_4->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_4));
                 INFINIT->infinity_4->redraw();
                 break;
             case MC_Infinity_Band_5:
-                INFINIT->infinity_5->value(rkr->efx_Infinity->getpar(Infinity_Band_5));
+                INFINIT->infinity_5->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_5));
                 INFINIT->infinity_5->redraw();
                 break;
             case MC_Infinity_Band_6:
-                INFINIT->infinity_6->value(rkr->efx_Infinity->getpar(Infinity_Band_6));
+                INFINIT->infinity_6->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_6));
                 INFINIT->infinity_6->redraw();
                 break;
             case MC_Infinity_Band_7:
-                INFINIT->infinity_7->value(rkr->efx_Infinity->getpar(Infinity_Band_7));
+                INFINIT->infinity_7->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_7));
                 INFINIT->infinity_7->redraw();
                 break;
             case MC_Infinity_Band_8:
-                INFINIT->infinity_8->value(rkr->efx_Infinity->getpar(Infinity_Band_8));
+                INFINIT->infinity_8->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_8));
                 INFINIT->infinity_8->redraw();
                 break;
             case MC_Looper_Tempo:
@@ -6167,7 +6167,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->EFX_Bypass[EFX_INFINITY])
     {
-        INFINIT->infinity_rate->value(rkr->efx_Infinity->getpar(Infinity_Tempo));
+        INFINIT->infinity_rate->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
         INFINIT->infinity_rate->redraw();
     }
 }

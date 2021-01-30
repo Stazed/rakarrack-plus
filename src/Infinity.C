@@ -27,8 +27,7 @@
 #include <stdio.h>
 
 Infinity::Infinity(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(2),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     PERIOD(intermediate_bufsize),
     Pvolume(64),
@@ -75,9 +74,10 @@ Infinity::Infinity(double sample_rate, uint32_t intermediate_bufsize) :
     tflag(),
     interpbuf(NULL),
     filterl(),
-    filterr(),
-    Fpre(NULL)
+    filterr()
 {
+    Ppreset = 2;
+
     initialize();
 
     float dt = 1.0f / fSAMPLE_RATE;
