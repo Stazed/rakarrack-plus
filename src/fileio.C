@@ -962,12 +962,12 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_VIBE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Vibe->getpar(Vibe_Width), efx_Vibe->getpar(Vibe_LFO_Tempo),
-                efx_Vibe->getpar(Vibe_LFO_Random), efx_Vibe->getpar(Vibe_LFO_Type),
-                efx_Vibe->getpar(Vibe_LFO_Stereo), efx_Vibe->getpar(Vibe_Pan),
-                efx_Vibe->getpar(Vibe_DryWet), efx_Vibe->getpar(Vibe_Feedback),
-                efx_Vibe->getpar(Vibe_Depth), efx_Vibe->getpar(Vibe_LR_Cross),
-                efx_Vibe->getpar(Vibe_Stereo), EFX_Bypass[EFX_VIBE]);
+                Rack_Effects[EFX_VIBE]->getpar(Vibe_Width), Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo),
+                Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Random), Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Type),
+                Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Stereo), Rack_Effects[EFX_VIBE]->getpar(Vibe_Pan),
+                Rack_Effects[EFX_VIBE]->getpar(Vibe_DryWet), Rack_Effects[EFX_VIBE]->getpar(Vibe_Feedback),
+                Rack_Effects[EFX_VIBE]->getpar(Vibe_Depth), Rack_Effects[EFX_VIBE]->getpar(Vibe_LR_Cross),
+                Rack_Effects[EFX_VIBE]->getpar(Vibe_Stereo), EFX_Bypass[EFX_VIBE]);
         break;
 
     case EFX_INFINITY:
@@ -1668,9 +1668,9 @@ RKR::Actualizar_Audio()
 
         case EFX_VIBE:
             EFX_Bypass[EFX_VIBE] = 0;
-            efx_Vibe->cleanup();
+            Rack_Effects[EFX_VIBE]->cleanup();
             for (i = 0; i < C_VIBE_PARAMETERS; i++)
-                efx_Vibe->changepar(i, lv[EFX_VIBE][i]);
+                Rack_Effects[EFX_VIBE]->changepar(i, lv[EFX_VIBE][i]);
             EFX_Bypass[EFX_VIBE] = EFX_Bank_Bypass[EFX_VIBE];
             break;
 
@@ -2412,7 +2412,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_OPTICAL_PARAMETERS; j++)
         lv[EFX_OPTICALTREM][j] = Rack_Effects[EFX_OPTICALTREM]->getpar(j);
     for (j = 0; j < C_VIBE_PARAMETERS; j++)
-        lv[EFX_VIBE][j] = efx_Vibe->getpar(j);
+        lv[EFX_VIBE][j] = Rack_Effects[EFX_VIBE]->getpar(j);
     for (j = 0; j < C_INFINITY_PARAMETERS; j++)
         lv[EFX_INFINITY][j] = efx_Infinity->getpar(j);
 

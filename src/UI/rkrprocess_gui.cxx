@@ -4702,39 +4702,39 @@ void RKRGUI::MIDI_control_gui_refresh()
                 OTREM->otrem_pan->redraw();
                 break;
             case MC_Vibe_DryWet:
-                VIBE->vibe_WD->value(Dry_Wet(rkr->efx_Vibe->getpar(Vibe_DryWet)));
+                VIBE->vibe_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_DryWet)));
                 VIBE->vibe_WD->redraw();
                 break;
             case MC_Vibe_Width:
-                VIBE->vibe_width->value(rkr->efx_Vibe->getpar(Vibe_Width));
+                VIBE->vibe_width->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Width));
                 VIBE->vibe_width->redraw();
                 break;
             case MC_Vibe_Depth:
-                VIBE->vibe_dpth->value(rkr->efx_Vibe->getpar(Vibe_Depth));
+                VIBE->vibe_dpth->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Depth));
                 VIBE->vibe_dpth->redraw();
                 break;
             case MC_Vibe_LFO_Tempo:
-                VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(Vibe_LFO_Tempo));
+                VIBE->vibe_freq->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
                 VIBE->vibe_freq->redraw();
                 break;
             case MC_Vibe_LFO_Random:
-                VIBE->vibe_rnd->value(rkr->efx_Vibe->getpar(Vibe_LFO_Random));
+                VIBE->vibe_rnd->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Random));
                 VIBE->vibe_rnd->redraw();
                 break;
             case MC_Vibe_LFO_Stereo:
-                VIBE->vibe_stdf->value(rkr->efx_Vibe->getpar(Vibe_LFO_Stereo));
+                VIBE->vibe_stdf->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Stereo));
                 VIBE->vibe_stdf->redraw();
                 break;
             case MC_Vibe_Feedback:
-                VIBE->vibe_fb->value(rkr->efx_Vibe->getpar(Vibe_Feedback) - 64);
+                VIBE->vibe_fb->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Feedback) - 64);
                 VIBE->vibe_fb->redraw();
                 break;
             case MC_Vibe_LR_Cross:
-                VIBE->vibe_LR->value(rkr->efx_Vibe->getpar(Vibe_LR_Cross));
+                VIBE->vibe_LR->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LR_Cross));
                 VIBE->vibe_LR->redraw();
                 break;
             case MC_Vibe_Pan:
-                VIBE->vibe_pan->value(rkr->efx_Vibe->getpar(Vibe_Pan) - 64);
+                VIBE->vibe_pan->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Pan) - 64);
                 VIBE->vibe_pan->redraw();
                 break;
             case MC_Infinity_DryWet:
@@ -5036,7 +5036,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 VARYBAND->varyband_lfotype2->redraw();
                 break;
             case MC_Vibe_LFO_Type:
-                VIBE->vibe_lfotype->value(rkr->efx_Vibe->getpar(Vibe_LFO_Type));
+                VIBE->vibe_lfotype->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Type));
                 VIBE->vibe_lfotype->redraw();
                 break;
             case MC_WahWah_LFO_Type:
@@ -6162,7 +6162,7 @@ void RKRGUI::UpdateTGUI()
     }
     if (rkr->EFX_Bypass[EFX_VIBE])
     {
-        VIBE->vibe_freq->value(rkr->efx_Vibe->getpar(Vibe_LFO_Tempo));
+        VIBE->vibe_freq->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
         VIBE->vibe_freq->redraw();
     }
     if (rkr->EFX_Bypass[EFX_INFINITY])

@@ -27,7 +27,7 @@
 #include "Vibe.h"
 
 Vibe::Vibe(double sample_rate, uint32_t intermediate_bufsize) :
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     cSAMPLE_RATE(1.f / sample_rate),
     fSAMPLE_RATE(sample_rate),
@@ -99,7 +99,6 @@ Vibe::Vibe(double sample_rate, uint32_t intermediate_bufsize) :
     on0(),
     od1(),
     od0(),
-    Fpre(NULL),
     lfo(NULL)
 {
     /* From original constructor

@@ -26,6 +26,7 @@
 #ifndef Vibe_H
 #define Vibe_H
 
+#include "Effect.h"
 #include "EffectLFO.h"
 
 //#define VIBE_INLINE 1     // uncomment for inline
@@ -47,7 +48,7 @@ enum Vibe_Index
     Vibe_Stereo
 };
 
-class Vibe
+class Vibe : public Effect
 {
 
 public:
@@ -66,8 +67,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    float outvolume;
 
 private:
     
@@ -139,7 +138,6 @@ private:
     float ecn1[8], ecn0[8], ecd1[8], ecd0[8];
     float on1[8], on0[8], od1[8], od0[8];
 
-    class FPreset *Fpre;
     EffectLFO* lfo;
 
 };

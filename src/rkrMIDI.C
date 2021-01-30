@@ -3053,39 +3053,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Vibe_DryWet:
-        efx_Vibe->changepar(Vibe_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_DryWet, Dry_Wet(value));
         break;
 
     case MC_Vibe_Width:
-        efx_Vibe->changepar(Vibe_Width, value);
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_Width, value);
         break;
 
     case MC_Vibe_Depth:
-        efx_Vibe->changepar(Vibe_Depth, value);
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_Depth, value);
         break;
 
     case MC_Vibe_LFO_Tempo:
-        efx_Vibe->changepar(Vibe_LFO_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Tempo, ret_Tempo(value));
         break;
 
     case MC_Vibe_LFO_Random:
-        efx_Vibe->changepar(Vibe_LFO_Random, value);
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Random, value);
         break;
 
     case MC_Vibe_LFO_Stereo:
-        efx_Vibe->changepar(Vibe_LFO_Stereo, value);
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Stereo, value);
         break;
 
     case MC_Vibe_Feedback:
-        efx_Vibe->changepar(Vibe_Feedback, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_Feedback, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Vibe_LR_Cross:
-        efx_Vibe->changepar(Vibe_LR_Cross, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_LR_Cross, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Vibe_Pan:
-        efx_Vibe->changepar(Vibe_Pan, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_Pan, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Infinity_DryWet:
@@ -3385,7 +3385,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Vibe_LFO_Type:
-        efx_Vibe->changepar(Vibe_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
+        Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Type, (int) ((float) value * C_MC_11_RANGE));
         break;
 
     case MC_WahWah_LFO_Type:

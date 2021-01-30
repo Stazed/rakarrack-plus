@@ -742,7 +742,6 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
 
-    class Vibe *efx_Vibe;
     class Infinity *efx_Infinity;
 
     jack_client_t *jackclient;
