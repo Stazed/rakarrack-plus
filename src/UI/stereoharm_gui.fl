@@ -29,11 +29,11 @@ widget_class SharGui {
 }
 rkr->EFX_Bypass[EFX_STEREOHARM]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_StereoHarm->cleanup();
-rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
-rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
+rkr->Rack_Effects[EFX_STEREOHARM]->cleanup();
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Chroma,rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma));
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma));
 rgui->Chord(1);
-rgui->findpos(EFX_STEREOHARM,(int)o->value(),o);} selected
+rgui->findpos(EFX_STEREOHARM,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     class RKR_Light_Button
   }
@@ -41,20 +41,22 @@ rgui->findpos(EFX_STEREOHARM,(int)o->value(),o);} selected
     label Preset
     user_data 12042
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12042))rkr->efx_StereoHarm->setpreset((int)o->value());
-shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(Sharm_DryWet)));
-shar_ganl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Gain)-64);
-shar_intl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Interval)-12);
-shar_chl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
-shar_ganr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Gain)-64);
-shar_intr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Interval)-12);
-shar_chr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
-shar_lrc->value(rkr->efx_StereoHarm->getpar(Sharm_LR_Cross));
-shar_SELECT->value(rkr->efx_StereoHarm->getpar(Sharm_Select));
-shar_note->value(rkr->efx_StereoHarm->getpar(Sharm_Note));
-shar_type->value(rkr->efx_StereoHarm->getpar(Sharm_Chord));
-shar_MIDI->value(rkr->efx_StereoHarm->getpar(Sharm_MIDI));
-if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(1);}
+if((ud==0)||(ud==12042))rkr->Rack_Effects[EFX_STEREOHARM]->setpreset((int)o->value());
+shar_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_DryWet)));
+shar_ganl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Gain)-64);
+shar_intl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Interval)-12);
+shar_chl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma));
+shar_ganr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Gain)-64);
+shar_intr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Interval)-12);
+shar_chr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma));
+shar_lrc->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_LR_Cross));
+shar_SELECT->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Select));
+shar_note->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note));
+shar_type->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord));
+shar_MIDI->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_MIDI));
+
+StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(rkr->Rack_Effects[EFX_STEREOHARM]);
+if ((Efx_StereoHarm->PMIDI) || (Efx_StereoHarm->PSELECT)) rgui->Chord(1);} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -82,7 +84,7 @@ if ((rkr->efx_StereoHarm->PMIDI) || (rkr->efx_StereoHarm->PSELECT)) rgui->Chord(
  rgui->getMIDIControl(MC_Sharm_DryWet);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_DryWet,Dry_Wet((int)(o->value())));}
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -94,7 +96,7 @@ rkr->efx_StereoHarm->changepar(Sharm_DryWet,Dry_Wet((int)(o->value())));}
  return;
 }
 rkr->EFX_Bypass[EFX_STEREOHARM]=0;
-rkr->efx_StereoHarm->changepar(Sharm_L_Interval,(int)(o->value()+12));
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Interval,(int)(o->value()+12));
 if((int)shar_activar->value())rkr->EFX_Bypass[EFX_STEREOHARM]=1;}
     tooltip {Left Interval} xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
     class RKR_Slider
@@ -106,7 +108,7 @@ if((int)shar_activar->value())rkr->EFX_Bypass[EFX_STEREOHARM]=1;}
  rgui->getMIDIControl(MC_Sharm_L_Chroma);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,(int)o->value());}
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Chroma,(int)o->value());}
     tooltip {Left Chroma} xywh {56 52 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -117,7 +119,7 @@ rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,(int)o->value());}
  rgui->getMIDIControl(MC_Sharm_L_Gain);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_L_Gain,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Gain,(int)(o->value()+64));}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -129,7 +131,7 @@ rkr->efx_StereoHarm->changepar(Sharm_L_Gain,(int)(o->value()+64));}
  return;
 }
 rkr->EFX_Bypass[EFX_STEREOHARM]=0;
-rkr->efx_StereoHarm->changepar(Sharm_R_Interval,(int)(o->value()+12));
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Interval,(int)(o->value()+12));
 if((int)shar_activar->value())rkr->EFX_Bypass[EFX_STEREOHARM]=1;}
     tooltip {Right Interval} xywh {56 78 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
     class RKR_Slider
@@ -141,7 +143,7 @@ if((int)shar_activar->value())rkr->EFX_Bypass[EFX_STEREOHARM]=1;}
  rgui->getMIDIControl(MC_Sharm_R_Chroma);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,(int)o->value());}
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,(int)o->value());}
     tooltip {Right Chroma} xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -2000 maximum 2000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -152,7 +154,7 @@ rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,(int)o->value());}
  rgui->getMIDIControl(MC_Sharm_R_Gain);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_R_Gain,(int)(o->value()+64));}
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Gain,(int)(o->value()+64));}
     xywh {56 104 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -163,20 +165,20 @@ rkr->efx_StereoHarm->changepar(Sharm_R_Gain,(int)(o->value()+64));}
  rgui->getMIDIControl(MC_Sharm_LR_Cross);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_LR_Cross,(int)(o->value()));}
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_LR_Cross,(int)(o->value()));}
     xywh {56 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button shar_MIDI {
     label MIDI
     user_data 2
-    callback {rkr->efx_StereoHarm->changepar(Sharm_MIDI,(int)o->value());
+    callback {rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_MIDI,(int)o->value());
 rkr->RC_Stereo_Harm->cleanup();
 
 if(!(int)o->value())
 {
-rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
-rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Chroma,rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma));
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma));
 }}
     xywh {9 129 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
     class RKR_Check_Button
@@ -189,14 +191,14 @@ rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_
  rgui->getMIDIControl(MC_Sharm_Select);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_Select,(int)o->value());
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_Select,(int)o->value());
 rkr->RC_Stereo_Harm->cleanup();
 rgui->Chord(1);
 
 if(!(int)o->value())
 {
-rkr->efx_StereoHarm->changepar(Sharm_L_Chroma,rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
-rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Chroma,rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma));
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma));
 }}
     xywh {9 142 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 8
     class RKR_Check_Button
@@ -213,7 +215,7 @@ rkr->efx_StereoHarm->changepar(Sharm_R_Chroma,rkr->efx_StereoHarm->getpar(Sharm_
  rgui->getMIDIControl(MC_Sharm_Note);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_Note,(int)o->value());
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_Note,(int)o->value());
 rgui->Chord(1);}
     xywh {56 158 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 23 step 1 textcolor 7
     class RKR_Slider
@@ -225,7 +227,7 @@ rgui->Chord(1);}
  rgui->getMIDIControl(MC_Sharm_Chord);
  return;
 }
-rkr->efx_StereoHarm->changepar(Sharm_Chord,(int)o->value());
+rkr->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_Chord,(int)o->value());
 rgui->Chord(1);}
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
     class RKR_Slider

@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_StereoHarm(NULL),
     efx_CompBand(NULL),
     efx_Opticaltrem(NULL),
     efx_Vibe(NULL),
@@ -385,7 +384,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_STOMPBOX];
     delete Rack_Effects[EFX_REVERBTRON];
     delete Rack_Effects[EFX_ECHOTRON];
-    delete efx_StereoHarm;
+    delete Rack_Effects[EFX_STEREOHARM];
     delete efx_CompBand;
     delete efx_Opticaltrem;
     delete efx_Vibe;
@@ -645,7 +644,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_STOMPBOX] = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
     Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     Rack_Effects[EFX_ECHOTRON] = new Echotron(fSample_rate, period);
-    efx_StereoHarm = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
+    Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
     efx_CompBand = new CompBand(fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(fSample_rate, period);
     efx_Vibe = new Vibe(fSample_rate, period);
@@ -1161,7 +1160,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_STOMPBOX]->cleanup();
     Rack_Effects[EFX_REVERBTRON]->cleanup();
     Rack_Effects[EFX_ECHOTRON]->cleanup();
-    efx_StereoHarm->cleanup();
+    Rack_Effects[EFX_STEREOHARM]->cleanup();
     efx_CompBand->cleanup();
     efx_Opticaltrem->cleanup();
     efx_Vibe->cleanup();
@@ -1246,19 +1245,21 @@ RKR::Alg(float *origl, float *origr, void *)
 
         if ((EFX_Bypass[EFX_STEREOHARM]) && (have_signal))
         {
-            if (efx_StereoHarm->mira)
+            StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(Rack_Effects[EFX_STEREOHARM]);
+
+            if (Efx_StereoHarm->mira)
             {
-                if ((efx_StereoHarm->PMIDI) || (efx_StereoHarm->PSELECT))
+                if ((Efx_StereoHarm->PMIDI) || (Efx_StereoHarm->PSELECT))
                 {
                     StHarmRecNote->schmittFloat(efxoutl, efxoutr);
                     if ((StHarmRecNote->reconota != -1) && (StHarmRecNote->reconota != StHarmRecNote->last))
                     {
                         if (StHarmRecNote->afreq > 0.0)
                         {
-                            RC_Stereo_Harm->Vamos(1, efx_StereoHarm->Pintervall - 12, StHarmRecNote->reconota);
-                            RC_Stereo_Harm->Vamos(2, efx_StereoHarm->Pintervalr - 12, StHarmRecNote->reconota);
-                            efx_StereoHarm->r_ratiol = RC_Stereo_Harm->r__ratio[1];
-                            efx_StereoHarm->r_ratior = RC_Stereo_Harm->r__ratio[2];
+                            RC_Stereo_Harm->Vamos(1, Efx_StereoHarm->Pintervall - 12, StHarmRecNote->reconota);
+                            RC_Stereo_Harm->Vamos(2, Efx_StereoHarm->Pintervalr - 12, StHarmRecNote->reconota);
+                            Efx_StereoHarm->r_ratiol = RC_Stereo_Harm->r__ratio[1];
+                            Efx_StereoHarm->r_ratior = RC_Stereo_Harm->r__ratio[2];
                             StHarmRecNote->last = StHarmRecNote->reconota;
                         }
                     }
@@ -1626,8 +1627,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_STEREOHARM:
                 if (EFX_Bypass[EFX_STEREOHARM])
                 {
-                    efx_StereoHarm->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_STEREOHARM, efx_StereoHarm->outvolume);
+                    Rack_Effects[EFX_STEREOHARM]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_STEREOHARM, Rack_Effects[EFX_STEREOHARM]->outvolume);
                 }
                 break;
 

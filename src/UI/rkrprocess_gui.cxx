@@ -491,17 +491,19 @@ void RKRGUI::GuiTimeout(void)
 
     if (rkr->EFX_Bypass[EFX_STEREOHARM])
     {
-        if ((rkr->efx_StereoHarm->PSELECT) || (rkr->efx_StereoHarm->PMIDI))
+        StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(rkr->Rack_Effects[EFX_STEREOHARM]);
+
+        if ((Efx_StereoHarm->PSELECT) || (Efx_StereoHarm->PMIDI))
         {
             if (rkr->RC_Stereo_Harm->cc)
             {
                 SHAR->shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
                 rkr->RC_Stereo_Harm->cc = 0;
                 SHAR->shar_chordname->redraw();
-                rkr->RC_Stereo_Harm->Vamos(1, rkr->efx_StereoHarm->Pintervall - 12, rkr->StHarmRecNote->reconota);
-                rkr->RC_Stereo_Harm->Vamos(2, rkr->efx_StereoHarm->Pintervalr - 12, rkr->StHarmRecNote->reconota);
-                rkr->efx_StereoHarm->r_ratiol = rkr->RC_Stereo_Harm->r__ratio[1];
-                rkr->efx_StereoHarm->r_ratior = rkr->RC_Stereo_Harm->r__ratio[2];
+                rkr->RC_Stereo_Harm->Vamos(1, Efx_StereoHarm->Pintervall - 12, rkr->StHarmRecNote->reconota);
+                rkr->RC_Stereo_Harm->Vamos(2, Efx_StereoHarm->Pintervalr - 12, rkr->StHarmRecNote->reconota);
+                Efx_StereoHarm->r_ratiol = rkr->RC_Stereo_Harm->r__ratio[1];
+                Efx_StereoHarm->r_ratior = rkr->RC_Stereo_Harm->r__ratio[2];
             }
         }
     }
@@ -3151,8 +3153,8 @@ void RKRGUI::Chord(int eff)
             undi = rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note);
             break;
         case 1:
-            tipo = rkr->efx_StereoHarm->getpar(Sharm_Chord);
-            undi = rkr->efx_StereoHarm->getpar(Sharm_Note);
+            tipo = rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord);
+            undi = rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note);
             break;
     }
 
@@ -4586,44 +4588,44 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHOTRON->echotron_length->redraw();
                 break;
             case MC_Sharm_DryWet:
-                SHAR->shar_WD->value(Dry_Wet(rkr->efx_StereoHarm->getpar(Sharm_DryWet)));
+                SHAR->shar_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_DryWet)));
                 SHAR->shar_WD->redraw();
                 break;
             case MC_Sharm_L_Interval:
-                SHAR->shar_intl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Interval) - 12);
+                SHAR->shar_intl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Interval) - 12);
                 SHAR->shar_intl->redraw();
                 break;
             case MC_Sharm_L_Chroma:
-                SHAR->shar_chl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Chroma));
+                SHAR->shar_chl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma));
                 SHAR->shar_chl->redraw();
                 break;
             case MC_Sharm_L_Gain:
-                SHAR->shar_ganl->value(rkr->efx_StereoHarm->getpar(Sharm_L_Gain) - 64);
+                SHAR->shar_ganl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Gain) - 64);
                 SHAR->shar_ganl->redraw();
                 break;
             case MC_Sharm_R_Interval:
-                SHAR->shar_intr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Interval) - 12);
+                SHAR->shar_intr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Interval) - 12);
                 SHAR->shar_intr->redraw();
                 break;
             case MC_Sharm_R_Chroma:
-                SHAR->shar_chr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Chroma));
+                SHAR->shar_chr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma));
                 SHAR->shar_chr->redraw();
                 break;
             case MC_Sharm_R_Gain:
-                SHAR->shar_ganr->value(rkr->efx_StereoHarm->getpar(Sharm_R_Gain) - 64);
+                SHAR->shar_ganr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Gain) - 64);
                 SHAR->shar_ganr->redraw();
                 break;
             case MC_Sharm_LR_Cross:
-                SHAR->shar_lrc->value(rkr->efx_StereoHarm->getpar(Sharm_LR_Cross));
+                SHAR->shar_lrc->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_LR_Cross));
                 SHAR->shar_lrc->redraw();
                 break;
             case MC_Sharm_Note:
-                SHAR->shar_note->value(rkr->efx_StereoHarm->getpar(Sharm_Note));
+                SHAR->shar_note->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note));
                 SHAR->shar_note->redraw();
                 Chord(1);   // update gui
                 break;
             case MC_Sharm_Chord:
-                SHAR->shar_type->value(rkr->efx_StereoHarm->getpar(Sharm_Chord));
+                SHAR->shar_type->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord));
                 SHAR->shar_type->redraw();
                 Chord(1);   // update gui
                 break;
@@ -4950,7 +4952,7 @@ void RKRGUI::MIDI_control_gui_refresh()
                 HAR->har_SELECT->redraw();
                 break;
             case MC_Sharm_Select:
-                SHAR->shar_SELECT->value(rkr->efx_StereoHarm->getpar(Sharm_Select));
+                SHAR->shar_SELECT->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Select));
                 SHAR->shar_SELECT->redraw();
                 break;
             case MC_Dist_Type:

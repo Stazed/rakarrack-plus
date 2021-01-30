@@ -2941,43 +2941,43 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
     }
     case MC_Sharm_DryWet:
-        efx_StereoHarm->changepar(Sharm_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_DryWet, Dry_Wet(value));
         break;
 
     case MC_Sharm_L_Interval:
-        efx_StereoHarm->changepar(Sharm_L_Interval, (int) ((float) value * C_MC_24_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Interval, (int) ((float) value * C_MC_24_RANGE));
         break;
 
     case MC_Sharm_L_Chroma:
-        efx_StereoHarm->changepar(Sharm_L_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
         break;
 
     case MC_Sharm_L_Gain:
-        efx_StereoHarm->changepar(Sharm_L_Gain, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Gain, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Sharm_R_Interval:
-        efx_StereoHarm->changepar(Sharm_R_Interval, (int) ((float) value * C_MC_24_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Interval, (int) ((float) value * C_MC_24_RANGE));
         break;
 
     case MC_Sharm_R_Chroma:
-        efx_StereoHarm->changepar(Sharm_R_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma, -2000 + (int) ((float) value * C_MC_4000_RANGE));
         break;
 
     case MC_Sharm_R_Gain:
-        efx_StereoHarm->changepar(Sharm_R_Gain, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Gain, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Sharm_LR_Cross:
-        efx_StereoHarm->changepar(Sharm_LR_Cross, value);
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_LR_Cross, value);
         break;
 
     case MC_Sharm_Note:
-        efx_StereoHarm->changepar(Sharm_Note, (int) ((float) value * C_MC_23_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_Note, (int) ((float) value * C_MC_23_RANGE));
         break;
 
     case MC_Sharm_Chord:
-        efx_StereoHarm->changepar(Sharm_Chord, (int) ((float) value * C_MC_33_RANGE));
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_Chord, (int) ((float) value * C_MC_33_RANGE));
         break;
 
     case MC_CompBand_DryWet:
@@ -3301,7 +3301,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Sharm_Select:
-        efx_StereoHarm->changepar(Sharm_Select, value);
+        Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_Select, value);
         break;
 
     case MC_Dist_Type:

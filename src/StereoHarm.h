@@ -27,6 +27,7 @@
 #define STEREOHARM_H
 
 #include <vector>
+#include "Effect.h"
 #include "smbPitchShift.h"
 #include "Resample.h"
 
@@ -48,7 +49,7 @@ enum Sharm_Index
     Sharm_LR_Cross
 };
 
-class StereoHarm
+class StereoHarm : public Effect
 {
 
 public:
@@ -78,7 +79,6 @@ private:
     unsigned int SAMPLE_RATE;
 public:
 
-    int Ppreset;
     int Pintervall;
     int Pintervalr;
 
@@ -97,8 +97,6 @@ public:
     float *outil,*outir;
     float *outol,*outor;
     float *templ, *tempr;
-
-    float outvolume;
 
     float r_ratiol;
     float r_ratior;
@@ -138,7 +136,6 @@ private:
 
     PitchShifter *PSl, *PSr;
 
-    class FPreset *Fpre;
 };
 
 #endif

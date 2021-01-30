@@ -3212,6 +3212,9 @@ void SettingsWindowGui::update_stereoharm_quality() {
   /* shut off all processing */
   m_rkr->quality_update = true;
   
+  /* Cast to derived class */
+  StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(m_rkr->Rack_Effects[EFX_STEREOHARM]);
+  
   /* This is for the gui bypass */
   int hold_bypass = m_rkr->EFX_Bypass[EFX_STEREOHARM];
   m_rkr->EFX_Bypass[EFX_STEREOHARM] = 0;
@@ -3220,16 +3223,18 @@ void SettingsWindowGui::update_stereoharm_quality() {
   usleep(C_MILLISECONDS_25);
   
   /* Save current parameters */
-  std::vector<int> save_state = m_rkr->efx_StereoHarm->save_parameters();
+  std::vector<int> save_state = Efx_StereoHarm->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->efx_StereoHarm;
-  m_rkr->efx_StereoHarm = new StereoHarm((long) m_rkr->SteQual, m_rkr->Ste_Down, m_rkr->Ste_U_Q, m_rkr->Ste_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_rkr->Rack_Effects[EFX_STEREOHARM];
+  m_rkr->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_rkr->SteQual, m_rkr->Ste_Down, m_rkr->Ste_U_Q, m_rkr->Ste_D_Q, m_rkr->fSample_rate, m_rkr->period);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
+  Efx_StereoHarm = static_cast<StereoHarm*>(m_rkr->Rack_Effects[EFX_STEREOHARM]);
+  
   /* Reset parameters and filename */
-  m_rkr->efx_StereoHarm->reset_parameters(save_state);
+  Efx_StereoHarm->reset_parameters(save_state);
   
   /* Turn processing back on */
   m_rkr->quality_update = false;
@@ -3238,9 +3243,9 @@ void SettingsWindowGui::update_stereoharm_quality() {
   m_rkr->EFX_Bypass[EFX_STEREOHARM] = hold_bypass;
   
   /* Reset user select */
-  if(m_rkr->efx_StereoHarm->getpar(Sharm_Select))
+  if(Efx_StereoHarm->getpar(Sharm_Select))
   {
-      m_rkr->efx_StereoHarm->changepar(Sharm_Select, m_rkr->efx_StereoHarm->getpar(Sharm_Select));
+      Efx_StereoHarm->changepar(Sharm_Select, Efx_StereoHarm->getpar(Sharm_Select));
       m_rkr->RC_Stereo_Harm->cleanup();
       m_rgui->Chord(1);
   }

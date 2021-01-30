@@ -742,7 +742,6 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
 
-    class StereoHarm *efx_StereoHarm;
     class CompBand *efx_CompBand;
     class Opticaltrem *efx_Opticaltrem;
     class Vibe *efx_Vibe;

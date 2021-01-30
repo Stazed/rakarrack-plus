@@ -931,12 +931,12 @@ void RKR::getbuf(char *buf, int j)
     }
     case EFX_STEREOHARM:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_StereoHarm->getpar(Sharm_DryWet), efx_StereoHarm->getpar(Sharm_L_Gain),
-                efx_StereoHarm->getpar(Sharm_L_Interval), efx_StereoHarm->getpar(Sharm_L_Chroma),
-                efx_StereoHarm->getpar(Sharm_R_Gain), efx_StereoHarm->getpar(Sharm_R_Interval),
-                efx_StereoHarm->getpar(Sharm_R_Chroma), efx_StereoHarm->getpar(Sharm_Select),
-                efx_StereoHarm->getpar(Sharm_Note), efx_StereoHarm->getpar(Sharm_Chord),
-                efx_StereoHarm->getpar(Sharm_MIDI), efx_StereoHarm->getpar(Sharm_LR_Cross),
+                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_DryWet), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Gain),
+                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Interval), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma),
+                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Gain), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Interval),
+                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Select),
+                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord),
+                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_MIDI), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_LR_Cross),
                 EFX_Bypass[EFX_STEREOHARM]);
         break;
 
@@ -1643,9 +1643,9 @@ RKR::Actualizar_Audio()
 
         case EFX_STEREOHARM:
             EFX_Bypass[EFX_STEREOHARM] = 0;
-            efx_StereoHarm->cleanup();
+            Rack_Effects[EFX_STEREOHARM]->cleanup();
             for (i = 0; i < C_SHARM_PARAMETERS; i++)
-                efx_StereoHarm->changepar(i, lv[EFX_STEREOHARM][i]);
+                Rack_Effects[EFX_STEREOHARM]->changepar(i, lv[EFX_STEREOHARM][i]);
             if (lv[EFX_STEREOHARM][10]) RC_Stereo_Harm->cleanup();
             EFX_Bypass[EFX_STEREOHARM] = EFX_Bank_Bypass[EFX_STEREOHARM];
             break;
@@ -2406,7 +2406,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_ECHOTRON_PARAMETERS; j++)
         lv[EFX_ECHOTRON][j] = Rack_Effects[EFX_ECHOTRON]->getpar(j);
     for (j = 0; j < C_SHARM_PARAMETERS; j++)
-        lv[EFX_STEREOHARM][j] = efx_StereoHarm->getpar(j);
+        lv[EFX_STEREOHARM][j] = Rack_Effects[EFX_STEREOHARM]->getpar(j);
     for (j = 0; j < C_COMPBAND_PARAMETERS; j++)
         lv[EFX_COMPBAND][j] = efx_CompBand->getpar(j);
     for (j = 0; j < C_OPTICAL_PARAMETERS; j++)

@@ -28,10 +28,10 @@
 
 StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq,
                        double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(Quality, DS, uq, dq, sample_rate, intermediate_bufsize),
     STE_DOWN(DS),
     PERIOD(intermediate_bufsize),
     SAMPLE_RATE((unsigned int) sample_rate),
-    Ppreset(),
     Pintervall(),
     Pintervalr(),
     PMIDI(),
@@ -48,7 +48,6 @@ StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq,
     outor(NULL),
     templ(NULL),
     tempr(NULL),
-    outvolume(0.5f),
     r_ratiol(),
     r_ratior(),
     nPERIOD(),
@@ -73,8 +72,7 @@ StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq,
     U_Resample(NULL),
     D_Resample(NULL),
     PSl(NULL),
-    PSr(NULL),
-    Fpre(NULL)
+    PSr(NULL)
 {
     adjust(STE_DOWN, PERIOD);
     initialize();
