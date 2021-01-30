@@ -878,380 +878,81 @@ RKR::ActiveUn(int value)
         ActOnOff();
         Mnumeff[OnOffC] = 2000 + numef;
     }
-
-    switch (miraque)
+    
+    if(miraque < C_NUMBER_EFFECTS)
     {
-    case EFX_EQ:
-        if (inoff) EFX_Bypass[EFX_EQ] = 1;
-        else EFX_Bypass[EFX_EQ] = 0;
-        break;
-    case EFX_COMPRESSOR:
-        if (inoff) EFX_Bypass[EFX_COMPRESSOR] = 1;
-        else EFX_Bypass[EFX_COMPRESSOR] = 0;
-        break;
-    case EFX_DISTORTION:
-        if (inoff) EFX_Bypass[EFX_DISTORTION] = 1;
-        else EFX_Bypass[EFX_DISTORTION] = 0;
-        break;
-    case EFX_OVERDRIVE:
-        if (inoff) EFX_Bypass[EFX_OVERDRIVE] = 1;
-        else EFX_Bypass[EFX_OVERDRIVE] = 0;
-        break;
-    case EFX_ECHO:
-        if (inoff) EFX_Bypass[EFX_ECHO] = 1;
-        else EFX_Bypass[EFX_ECHO] = 0;
-        break;
-    case EFX_CHORUS:
-        if (inoff) EFX_Bypass[EFX_CHORUS] = 1;
-        else EFX_Bypass[EFX_CHORUS] = 0;
-        break;
-    case EFX_PHASER:
-        if (inoff) EFX_Bypass[EFX_PHASER] = 1;
-        else EFX_Bypass[EFX_PHASER] = 0;
-        break;
-    case EFX_FLANGER:
-        if (inoff) EFX_Bypass[EFX_FLANGER] = 1;
-        else EFX_Bypass[EFX_FLANGER] = 0;
-        break;
-    case EFX_REVERB:
-        if (inoff) EFX_Bypass[EFX_REVERB] = 1;
-        else EFX_Bypass[EFX_REVERB] = 0;
-        break;
-    case EFX_PARAMETRIC:
-        if (inoff) EFX_Bypass[EFX_PARAMETRIC] = 1;
-        else EFX_Bypass[EFX_PARAMETRIC] = 0;
-        break;
-    case EFX_WAHWAH:
-        if (inoff) EFX_Bypass[EFX_WAHWAH] = 1;
-        else EFX_Bypass[EFX_WAHWAH] = 0;
-        break;
-    case EFX_ALIENWAH:
-        if (inoff) EFX_Bypass[EFX_ALIENWAH] = 1;
-        else EFX_Bypass[EFX_ALIENWAH] = 0;
-        break;
-    case EFX_CABINET:
-        if (inoff) EFX_Bypass[EFX_CABINET] = 1;
-        else EFX_Bypass[EFX_CABINET] = 0;
-        break;
-    case EFX_PAN:
-        if (inoff) EFX_Bypass[EFX_PAN] = 1;
-        else EFX_Bypass[EFX_PAN] = 0;
-        break;
-    case EFX_HARMONIZER:
-        if (inoff) EFX_Bypass[EFX_HARMONIZER] = 1;
-        else EFX_Bypass[EFX_HARMONIZER] = 0;
-        break;
-    case EFX_MUSICAL_DELAY:
-        if (inoff) EFX_Bypass[EFX_MUSICAL_DELAY] = 1;
-        else EFX_Bypass[EFX_MUSICAL_DELAY] = 0;
-        break;
-    case EFX_NOISEGATE:
-        if (inoff) EFX_Bypass[EFX_NOISEGATE] = 1;
-        else EFX_Bypass[EFX_NOISEGATE] = 0;
-        break;
-    case EFX_DERELICT:
-        if (inoff) EFX_Bypass[EFX_DERELICT] = 1;
-        else EFX_Bypass[EFX_DERELICT] = 0;
-        break;
-    case EFX_ANALOG_PHASER:
-        if (inoff) EFX_Bypass[EFX_ANALOG_PHASER] = 1;
-        else EFX_Bypass[EFX_ANALOG_PHASER] = 0;
-        break;
-    case EFX_VALVE:
-        if (inoff) EFX_Bypass[EFX_VALVE] = 1;
-        else EFX_Bypass[EFX_VALVE] = 0;
-        break;
-    case EFX_DUAL_FLANGE:
-        if (inoff) EFX_Bypass[EFX_DUAL_FLANGE] = 1;
-        else EFX_Bypass[EFX_DUAL_FLANGE] = 0;
-        break;
-    case EFX_RING:
-        if (inoff) EFX_Bypass[EFX_RING] = 1;
-        else EFX_Bypass[EFX_RING] = 0;
-        break;
-    case EFX_EXCITER:
-        if (inoff) EFX_Bypass[EFX_EXCITER] = 1;
-        else EFX_Bypass[EFX_EXCITER] = 0;
-        break;
-    case EFX_DISTBAND:
-        if (inoff) EFX_Bypass[EFX_DISTBAND] = 1;
-        else EFX_Bypass[EFX_DISTBAND] = 0;
-        break;
-    case EFX_ARPIE:
-        if (inoff) EFX_Bypass[EFX_ARPIE] = 1;
-        else EFX_Bypass[EFX_ARPIE] = 0;
-        break;
-    case EFX_EXPANDER:
-        if (inoff) EFX_Bypass[EFX_EXPANDER] = 1;
-        else EFX_Bypass[EFX_EXPANDER] = 0;
-        break;
-    case EFX_SHUFFLE:
-        if (inoff) EFX_Bypass[EFX_SHUFFLE] = 1;
-        else EFX_Bypass[EFX_SHUFFLE] = 0;
-        break;
-    case EFX_SYNTHFILTER:
-        if (inoff) EFX_Bypass[EFX_SYNTHFILTER] = 1;
-        else EFX_Bypass[EFX_SYNTHFILTER] = 0;
-        break;
-    case EFX_VARYBAND:
-        if (inoff) EFX_Bypass[EFX_VARYBAND] = 1;
-        else EFX_Bypass[EFX_VARYBAND] = 0;
-        break;
-    case EFX_CONVOLOTRON:
-        if (inoff) EFX_Bypass[EFX_CONVOLOTRON] = 1;
-        else EFX_Bypass[EFX_CONVOLOTRON] = 0;
-        break;
-    case EFX_LOOPER:
-        if (inoff) EFX_Bypass[EFX_LOOPER] = 1;
-        else EFX_Bypass[EFX_LOOPER] = 0;
-        break;
-    case EFX_MUTROMOJO:
-        if (inoff) EFX_Bypass[EFX_MUTROMOJO] = 1;
-        else EFX_Bypass[EFX_MUTROMOJO] = 0;
-        break;
-    case EFX_ECHOVERSE:
-        if (inoff) EFX_Bypass[EFX_ECHOVERSE] = 1;
-        else EFX_Bypass[EFX_ECHOVERSE] = 0;
-        break;
-    case EFX_COILCRAFTER:
-        if (inoff) EFX_Bypass[EFX_COILCRAFTER] = 1;
-        else EFX_Bypass[EFX_COILCRAFTER] = 0;
-        break;
-    case EFX_SHELFBOOST:
-        if (inoff) EFX_Bypass[EFX_SHELFBOOST] = 1;
-        else EFX_Bypass[EFX_SHELFBOOST] = 0;
-        break;
-    case EFX_VOCODER:
-        if (inoff) EFX_Bypass[EFX_VOCODER] = 1;
-        else EFX_Bypass[EFX_VOCODER] = 0;
-        break;
-    case EFX_SUSTAINER:
-        if (inoff) EFX_Bypass[EFX_SUSTAINER] = 1;
-        else EFX_Bypass[EFX_SUSTAINER] = 0;
-        break;
-    case EFX_SEQUENCE:
-        if (inoff) EFX_Bypass[EFX_SEQUENCE] = 1;
-        else EFX_Bypass[EFX_SEQUENCE] = 0;
-        break;
-    case EFX_SHIFTER:
-        if (inoff) EFX_Bypass[EFX_SHIFTER] = 1;
-        else EFX_Bypass[EFX_SHIFTER] = 0;
-        break;
-    case EFX_STOMPBOX:
-        if (inoff) EFX_Bypass[EFX_STOMPBOX] = 1;
-        else EFX_Bypass[EFX_STOMPBOX] = 0;
-        break;
-    case EFX_REVERBTRON:
-        if (inoff) EFX_Bypass[EFX_REVERBTRON] = 1;
-        else EFX_Bypass[EFX_REVERBTRON] = 0;
-        break;
-    case EFX_ECHOTRON:
-        if (inoff) EFX_Bypass[EFX_ECHOTRON] = 1;
-        else EFX_Bypass[EFX_ECHOTRON] = 0;
-        break;
-    case EFX_STEREOHARM:
-        if (inoff) EFX_Bypass[EFX_STEREOHARM] = 1;
-        else EFX_Bypass[EFX_STEREOHARM] = 0;
-        break;
-    case EFX_COMPBAND:
-        if (inoff) EFX_Bypass[EFX_COMPBAND] = 1;
-        else EFX_Bypass[EFX_COMPBAND] = 0;
-        break;
-    case EFX_OPTICALTREM:
-        if (inoff) EFX_Bypass[EFX_OPTICALTREM] = 1;
-        else EFX_Bypass[EFX_OPTICALTREM] = 0;
-        break;
-    case EFX_VIBE:
-        if (inoff) EFX_Bypass[EFX_VIBE] = 1;
-        else EFX_Bypass[EFX_VIBE] = 0;
-        break;
-    case EFX_INFINITY:
-        if (inoff) EFX_Bypass[EFX_INFINITY] = 1;
-        else EFX_Bypass[EFX_INFINITY] = 0;
-        break;
-
-
-    case EFX_TAP_TEMPO_ON_OFF:
-        if (inoff) Tap_Bypass = 1;
-        else Tap_Bypass = 0;
-        break;
-    case EFX_MIDI_CONVERTER_ON_OFF:
-        if (inoff) MIDIConverter_Bypass = 1;
-        else MIDIConverter_Bypass = 0;
-        break;
-    case EFX_TUNER_ON_OFF:
-        if (inoff) Tuner_Bypass = 1;
-        else Tuner_Bypass = 0;
-        break;
-    case EFX_MASTER_ON_OFF:
-        if (inoff) Bypass = 1;
-        else Bypass = 0;
-        break;
+        for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+        {
+            if(miraque == i)
+            {
+                if (inoff) EFX_Bypass[i] = 1;
+                else EFX_Bypass[i] = 0;
+                return;
+            }
+        }
+    }
+    else
+    {
+        switch (miraque)
+        {
+            case EFX_TAP_TEMPO_ON_OFF:
+                if (inoff) Tap_Bypass = 1;
+                else Tap_Bypass = 0;
+                break;
+            case EFX_MIDI_CONVERTER_ON_OFF:
+                if (inoff) MIDIConverter_Bypass = 1;
+                else MIDIConverter_Bypass = 0;
+                break;
+            case EFX_TUNER_ON_OFF:
+                if (inoff) Tuner_Bypass = 1;
+                else Tuner_Bypass = 0;
+                break;
+            case EFX_MASTER_ON_OFF:
+                if (inoff) Bypass = 1;
+                else Bypass = 0;
+            break;
+        }
     }
 }
 
 int
 RKR::checkonoff(int miraque)
 {
-    switch (miraque)
+    if(miraque < C_NUMBER_EFFECTS)
     {
-    case EFX_EQ:
-        if (EFX_Bypass[EFX_EQ]) return (0);
-        break;
-    case EFX_COMPRESSOR:
-        if (EFX_Bypass[EFX_COMPRESSOR]) return (0);
-        break;
-    case EFX_DISTORTION:
-        if (EFX_Bypass[EFX_DISTORTION]) return (0);
-        break;
-    case EFX_OVERDRIVE:
-        if (EFX_Bypass[EFX_OVERDRIVE])return (0);
-        break;
-    case EFX_ECHO:
-        if (EFX_Bypass[EFX_ECHO])return (0);
-        break;
-    case EFX_CHORUS:
-        if (EFX_Bypass[EFX_CHORUS]) return (0);
-        break;
-    case EFX_PHASER:
-        if (EFX_Bypass[EFX_PHASER]) return (0);
-        break;
-    case EFX_FLANGER:
-        if (EFX_Bypass[EFX_FLANGER]) return (0);
-        break;
-    case EFX_REVERB:
-        if (EFX_Bypass[EFX_REVERB]) return (0);
-        break;
-    case EFX_PARAMETRIC:
-        if (EFX_Bypass[EFX_PARAMETRIC]) return (0);
-        break;
-    case EFX_WAHWAH:
-        if (EFX_Bypass[EFX_WAHWAH]) return (0);
-        break;
-    case EFX_ALIENWAH:
-        if (EFX_Bypass[EFX_ALIENWAH]) return (0);
-        break;
-    case EFX_CABINET:
-        if (EFX_Bypass[EFX_CABINET]) return (0);
-        break;
-    case EFX_PAN:
-        if (EFX_Bypass[EFX_PAN]) return (0);
-        break;
-    case EFX_HARMONIZER:
-        if (EFX_Bypass[EFX_HARMONIZER]) return (0);
-        break;
-    case EFX_MUSICAL_DELAY:
-        if (EFX_Bypass[EFX_MUSICAL_DELAY]) return (0);
-        break;
-    case EFX_NOISEGATE:
-        if (EFX_Bypass[EFX_NOISEGATE]) return (0);
-        break;
-    case EFX_DERELICT:
-        if (EFX_Bypass[EFX_DERELICT]) return (0);
-        break;
-    case EFX_ANALOG_PHASER:
-        if (EFX_Bypass[EFX_ANALOG_PHASER]) return (0);
-        break;
-    case EFX_VALVE:
-        if (EFX_Bypass[EFX_VALVE]) return (0);
-        break;
-    case EFX_DUAL_FLANGE:
-        if (EFX_Bypass[EFX_DUAL_FLANGE]) return (0);
-        break;
-    case EFX_RING:
-        if (EFX_Bypass[EFX_RING]) return (0);
-        break;
-    case EFX_EXCITER:
-        if (EFX_Bypass[EFX_EXCITER]) return (0);
-        break;
-    case EFX_DISTBAND:
-        if (EFX_Bypass[EFX_DISTBAND]) return (0);
-        break;
-    case EFX_ARPIE:
-        if (EFX_Bypass[EFX_ARPIE]) return (0);
-        break;
-    case EFX_EXPANDER:
-        if (EFX_Bypass[EFX_EXPANDER]) return (0);
-        break;
-    case EFX_SHUFFLE:
-        if (EFX_Bypass[EFX_SHUFFLE]) return (0);
-        break;
-    case EFX_SYNTHFILTER:
-        if (EFX_Bypass[EFX_SYNTHFILTER]) return (0);
-        break;
-    case EFX_VARYBAND:
-        if (EFX_Bypass[EFX_VARYBAND]) return (0);
-        break;
-    case EFX_CONVOLOTRON:
-        if (EFX_Bypass[EFX_CONVOLOTRON]) return (0);
-        break;
-    case EFX_LOOPER:
-        if (EFX_Bypass[EFX_LOOPER]) return (0);
-        break;
-    case EFX_MUTROMOJO:
-        if (EFX_Bypass[EFX_MUTROMOJO]) return (0);
-        break;
-    case EFX_ECHOVERSE:
-        if (EFX_Bypass[EFX_ECHOVERSE]) return (0);
-        break;
-    case EFX_COILCRAFTER:
-        if (EFX_Bypass[EFX_COILCRAFTER]) return (0);
-        break;
-    case EFX_SHELFBOOST:
-        if (EFX_Bypass[EFX_SHELFBOOST]) return (0);
-        break;
-    case EFX_VOCODER:
-        if (EFX_Bypass[EFX_VOCODER]) return (0);
-        break;
-    case EFX_SUSTAINER:
-        if (EFX_Bypass[EFX_SUSTAINER]) return (0);
-        break;
-    case EFX_SEQUENCE:
-        if (EFX_Bypass[EFX_SEQUENCE]) return (0);
-        break;
-    case EFX_SHIFTER:
-        if (EFX_Bypass[EFX_SHIFTER]) return (0);
-        break;
-    case EFX_STOMPBOX:
-        if (EFX_Bypass[EFX_STOMPBOX]) return (0);
-        break;
-    case EFX_REVERBTRON:
-        if (EFX_Bypass[EFX_REVERBTRON]) return (0);
-        break;
-    case EFX_ECHOTRON:
-        if (EFX_Bypass[EFX_ECHOTRON]) return (0);
-        break;
-    case EFX_STEREOHARM:
-        if (EFX_Bypass[EFX_STEREOHARM]) return (0);
-        break;
-    case EFX_COMPBAND:
-        if (EFX_Bypass[EFX_COMPBAND]) return (0);
-        break;
-    case EFX_OPTICALTREM:
-        if (EFX_Bypass[EFX_OPTICALTREM]) return (0);
-        break;
-    case EFX_VIBE:
-        if (EFX_Bypass[EFX_VIBE]) return (0);
-        break;
-    case EFX_INFINITY:
-        if (EFX_Bypass[EFX_INFINITY]) return (0);
-        break;
-
-    case EFX_TAP_TEMPO_ON_OFF:
-        if (Tap_Bypass) return 0;
-        break;
-    case EFX_MIDI_CONVERTER_ON_OFF:
-        if (MIDIConverter_Bypass) return 0;
-        break;
-    case EFX_TUNER_ON_OFF:
-        if (Tuner_Bypass) return 0;
-        break;
-    case EFX_MASTER_ON_OFF:
-        if (Bypass) return 0;
-        break;
+        for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+        {
+            if(miraque == i)
+            {
+                if (EFX_Bypass[i])
+                {
+                    return (0);
+                }
+                else
+                    return (1);
+            }
+        }
     }
-    return (1);
+    else
+    {
+        switch (miraque)
+        {
+            case EFX_TAP_TEMPO_ON_OFF:
+                if (Tap_Bypass) return 0;
+                break;
+            case EFX_MIDI_CONVERTER_ON_OFF:
+                if (MIDIConverter_Bypass) return 0;
+                break;
+            case EFX_TUNER_ON_OFF:
+                if (Tuner_Bypass) return 0;
+                break;
+            case EFX_MASTER_ON_OFF:
+                if (Bypass) return 0;
+            break;
+        }
+    }
 
+    return (1);
 }
 
 void

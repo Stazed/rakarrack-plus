@@ -1297,6 +1297,7 @@ RKR::Actualizar_Audio()
         {
 
         case EFX_EQ:
+// Special case
             EFX_Bypass[EFX_EQ] = 0;
             Rack_Effects[EFX_EQ]->cleanup();
             for (i = 0; i < 10; i++)
@@ -1373,6 +1374,7 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_PARAMETRIC:
+// Special case
             EFX_Bypass[EFX_PARAMETRIC] = 0;
             Rack_Effects[EFX_PARAMETRIC]->cleanup();
             for (i = 0; i < 3; i++)
@@ -1402,6 +1404,7 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_CABINET:
+// Special case
             EFX_Bypass[EFX_CABINET] = 0;
             Rack_Effects[EFX_CABINET]->cleanup();
             Rack_Effects[EFX_CABINET]->setpreset(lv[EFX_CABINET][0]);
@@ -1420,6 +1423,7 @@ RKR::Actualizar_Audio()
         case EFX_HARMONIZER:
             EFX_Bypass[EFX_HARMONIZER] = 0;
             Rack_Effects[EFX_HARMONIZER]->cleanup();
+// Maybe special - see stereo harm
             for (i = 0; i < C_HARM_PARAMETERS; i++)
                 Rack_Effects[EFX_HARMONIZER]->changepar(i, lv[EFX_HARMONIZER][i]);
             EFX_Bypass[EFX_HARMONIZER] = EFX_Bank_Bypass[EFX_HARMONIZER];
@@ -1547,6 +1551,7 @@ RKR::Actualizar_Audio()
 
         case EFX_LOOPER:
             EFX_Bypass[EFX_LOOPER] = 0;
+// Special Case
             // Rack_Effects[EFX_LOOPER]->cleanup();
             for (i = 0; i < C_LOOPER_PARAMETERS; i++)
                 Rack_Effects[EFX_LOOPER]->changepar(i, lv[EFX_LOOPER][i]);
@@ -1646,7 +1651,9 @@ RKR::Actualizar_Audio()
             Rack_Effects[EFX_STEREOHARM]->cleanup();
             for (i = 0; i < C_SHARM_PARAMETERS; i++)
                 Rack_Effects[EFX_STEREOHARM]->changepar(i, lv[EFX_STEREOHARM][i]);
+// Special Case
             if (lv[EFX_STEREOHARM][10]) RC_Stereo_Harm->cleanup();
+            
             EFX_Bypass[EFX_STEREOHARM] = EFX_Bank_Bypass[EFX_STEREOHARM];
             break;
 
