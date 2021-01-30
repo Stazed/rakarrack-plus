@@ -2801,35 +2801,35 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Shifter_DryWet:
-        efx_Shifter->changepar(Shifter_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_DryWet, Dry_Wet(value));
         break;
 
     case MC_Shifter_Interval:
-        efx_Shifter->changepar(Shifter_Interval, (int) ((float) value * C_MC_12_RANGE));
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Interval, (int) ((float) value * C_MC_12_RANGE));
         break;
 
     case MC_Shifter_Gain:
-        efx_Shifter->changepar(Shifter_Gain, value);
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Gain, value);
         break;
 
     case MC_Shifter_Pan:
-        efx_Shifter->changepar(Shifter_Pan, value);
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Pan, value);
         break;
 
     case MC_Shifter_Attack:
-        efx_Shifter->changepar(Shifter_Attack, 1 + (int) ((float) value * C_MC_1999_RANGE));
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Attack, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
     case MC_Shifter_Decay:
-        efx_Shifter->changepar(Shifter_Decay, 1 + (int) ((float) value * C_MC_1999_RANGE));
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Decay, 1 + (int) ((float) value * C_MC_1999_RANGE));
         break;
 
     case MC_Shifter_Threshold:
-        efx_Shifter->changepar(Shifter_Threshold, -70 + (int) ((float) value * C_MC_90_RANGE));
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Threshold, -70 + (int) ((float) value * C_MC_90_RANGE));
         break;
 
     case MC_Shifter_Whammy:
-        efx_Shifter->changepar(Shifter_Whammy, value);
+        Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Whammy, value);
         break;
 
     case MC_Stomp_Level:

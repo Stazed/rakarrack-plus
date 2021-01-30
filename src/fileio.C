@@ -883,11 +883,11 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_SHIFTER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Shifter->getpar(Shifter_DryWet), efx_Shifter->getpar(Shifter_Pan),
-                efx_Shifter->getpar(Shifter_Gain), efx_Shifter->getpar(Shifter_Attack),
-                efx_Shifter->getpar(Shifter_Decay), efx_Shifter->getpar(Shifter_Threshold),
-                efx_Shifter->getpar(Shifter_Interval), efx_Shifter->getpar(Shifter_Shift),
-                efx_Shifter->getpar(Shifter_Mode), efx_Shifter->getpar(Shifter_Whammy), EFX_Bypass[EFX_SHIFTER]);
+                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_DryWet), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Pan),
+                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Gain), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Attack),
+                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Decay), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Threshold),
+                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Interval), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Shift),
+                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Mode), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Whammy), EFX_Bypass[EFX_SHIFTER]);
         break;
 
 
@@ -1611,9 +1611,9 @@ RKR::Actualizar_Audio()
 
         case EFX_SHIFTER:
             EFX_Bypass[EFX_SHIFTER] = 0;
-            efx_Shifter->cleanup();
+            Rack_Effects[EFX_SHIFTER]->cleanup();
             for (i = 0; i < C_SHIFTER_PARAMETERS; i++)
-                efx_Shifter->changepar(i, lv[EFX_SHIFTER][i]);
+                Rack_Effects[EFX_SHIFTER]->changepar(i, lv[EFX_SHIFTER][i]);
             EFX_Bypass[EFX_SHIFTER] = EFX_Bank_Bypass[EFX_SHIFTER];
             break;
 
@@ -2398,7 +2398,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)
         lv[EFX_SEQUENCE][j] = Rack_Effects[EFX_SEQUENCE]->getpar(j);
     for (j = 0; j < C_SHIFTER_PARAMETERS; j++)
-        lv[EFX_SHIFTER][j] = efx_Shifter->getpar(j);
+        lv[EFX_SHIFTER][j] = Rack_Effects[EFX_SHIFTER]->getpar(j);
     for (j = 0; j < C_STOMP_PARAMETERS; j++)
         lv[EFX_STOMPBOX][j] = efx_StompBox->getpar(j);
     for (j = 0; j < C_REVTRON_PARAMETERS; j++)

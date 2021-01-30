@@ -28,9 +28,8 @@
 
 Shifter::Shifter(long int Quality, int DS, int uq, int dq,
                  double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
+    Effect(Quality, DS, uq, dq, sample_rate, intermediate_bufsize),
     hq(Quality),
-    outvolume(0.5f),
     outi(NULL),
     outo(NULL),
     DS_state(DS),
@@ -70,8 +69,7 @@ Shifter::Shifter(long int Quality, int DS, int uq, int dq,
     tempr(NULL),
     U_Resample(NULL),
     D_Resample(NULL),
-    PS(NULL),
-    Fpre(NULL)
+    PS(NULL)
 {
     adjust(DS, sample_rate);
     initialize();

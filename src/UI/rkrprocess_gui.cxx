@@ -4458,35 +4458,35 @@ void RKRGUI::MIDI_control_gui_refresh()
                 SEQUENCE->seq_stdf->redraw();
                 break;
             case MC_Shifter_DryWet:
-                SHIFTER->shifter_WD->value(Dry_Wet(rkr->efx_Shifter->getpar(Shifter_DryWet)));
+                SHIFTER->shifter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_DryWet)));
                 SHIFTER->shifter_WD->redraw();
                 break;
             case MC_Shifter_Interval:
-                SHIFTER->shifter_int->value(rkr->efx_Shifter->getpar(Shifter_Interval));
+                SHIFTER->shifter_int->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Interval));
                 SHIFTER->shifter_int->redraw();
                 break;
             case MC_Shifter_Gain:
-                SHIFTER->shifter_gain->value(rkr->efx_Shifter->getpar(Shifter_Gain) - 64);
+                SHIFTER->shifter_gain->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Gain) - 64);
                 SHIFTER->shifter_gain->redraw();
                 break;
             case MC_Shifter_Pan:
-                SHIFTER->shifter_pan->value(rkr->efx_Shifter->getpar(Shifter_Pan) - 64);
+                SHIFTER->shifter_pan->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Pan) - 64);
                 SHIFTER->shifter_pan->redraw();
                 break;
             case MC_Shifter_Attack:
-                SHIFTER->shifter_attack->value(rkr->efx_Shifter->getpar(Shifter_Attack));
+                SHIFTER->shifter_attack->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Attack));
                 SHIFTER->shifter_attack->redraw();
                 break;
             case MC_Shifter_Decay:
-                SHIFTER->shifter_decay->value(rkr->efx_Shifter->getpar(Shifter_Decay));
+                SHIFTER->shifter_decay->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Decay));
                 SHIFTER->shifter_decay->redraw();
                 break;
             case MC_Shifter_Threshold:
-                SHIFTER->shifter_thre->value(rkr->efx_Shifter->getpar(Shifter_Threshold));
+                SHIFTER->shifter_thre->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Threshold));
                 SHIFTER->shifter_thre->redraw();
                 break;
             case MC_Shifter_Whammy:
-                SHIFTER->shifter_whammy->value(rkr->efx_Shifter->getpar(Shifter_Whammy));
+                SHIFTER->shifter_whammy->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Whammy));
                 SHIFTER->shifter_whammy->redraw();
                 break;
             case MC_Stomp_Level:

@@ -25,6 +25,7 @@
 #define SHIFTER_H
 
 #include <vector>
+#include "Effect.h"
 #include "smbPitchShift.h"
 #include "Resample.h"
 
@@ -50,7 +51,7 @@ enum Shifter_Index
     Shifter_Whammy
 };
 
-class Shifter
+class Shifter : public Effect
 {
 
 public:
@@ -75,13 +76,9 @@ public:
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
 
-    int Ppreset;
     long int hq;
-    float outvolume;
-
     float *outi;
     float *outo;
-
 
 private:
 
@@ -125,7 +122,6 @@ private:
 
     PitchShifter *PS;
 
-    class FPreset *Fpre;
 };
 
 #endif

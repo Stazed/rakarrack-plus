@@ -1806,21 +1806,26 @@ m_rkr->EFX_Bypass[EFX_SEQUENCE] = hold_bypass;} {}
     code {/* shut off all processing */
 m_rkr->quality_update = true;
 
+/* Cast to derived class */
+Shifter *Efx_Shifter = static_cast<Shifter*>(m_rkr->Rack_Effects[EFX_SHIFTER]);
+
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
 
 /* Save current parameters */
-std::vector<int> save_state = m_rkr->efx_Shifter->save_parameters();
+std::vector<int> save_state = Efx_Shifter->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
-delete m_rkr->efx_Shifter;
-m_rkr->efx_Shifter = new Shifter((long) m_rkr->ShiQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
+delete m_rkr->Rack_Effects[EFX_SHIFTER];
+m_rkr->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_rkr->ShiQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
+Efx_Shifter = static_cast<Shifter*>(m_rkr->Rack_Effects[EFX_SHIFTER]);
+
 /* Reset parameters */
-m_rkr->efx_Shifter->reset_parameters(save_state);
+Efx_Shifter->reset_parameters(save_state);
 
 /* Turn processing back on */
 m_rkr->quality_update = false;} {}
