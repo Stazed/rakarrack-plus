@@ -590,11 +590,11 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_COMPRESSOR:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Compressor->getpar(Compress_Threshold), efx_Compressor->getpar(Compress_Ratio),
-                efx_Compressor->getpar(Compress_Output), efx_Compressor->getpar(Compress_Attack),
-                efx_Compressor->getpar(Compress_Release), efx_Compressor->getpar(Compress_Auto_Out),
-                efx_Compressor->getpar(Compress_Knee), efx_Compressor->getpar(Compress_Stereo),
-                efx_Compressor->getpar(Compress_Peak), EFX_Bypass[EFX_COMPRESSOR]);
+                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio),
+                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack),
+                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out),
+                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo),
+                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak), EFX_Bypass[EFX_COMPRESSOR]);
         break;
 
 
@@ -1310,9 +1310,9 @@ RKR::Actualizar_Audio()
 
         case EFX_COMPRESSOR:
             EFX_Bypass[EFX_COMPRESSOR] = 0;
-            efx_Compressor->cleanup();
+            Rack_Effects[EFX_COMPRESSOR]->cleanup();
             for (i = 0; i < C_COMPRESS_PARAMETERS; i++)
-                efx_Compressor->changepar(i, lv[EFX_COMPRESSOR][i]);
+                Rack_Effects[EFX_COMPRESSOR]->changepar(i, lv[EFX_COMPRESSOR][i]);
             EFX_Bypass[EFX_COMPRESSOR] = EFX_Bank_Bypass[EFX_COMPRESSOR];
             break;
 
@@ -2342,7 +2342,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_DIST_PARAMETERS; j++)
         lv[EFX_DISTORTION][j] = Rack_Effects[EFX_DISTORTION]->getpar(j);
     for (j = 0; j < C_COMPRESS_PARAMETERS; j++)
-        lv[EFX_COMPRESSOR][j] = efx_Compressor->getpar(j);
+        lv[EFX_COMPRESSOR][j] = Rack_Effects[EFX_COMPRESSOR]->getpar(j);
     for (j = 0; j < C_WAHWAH_PARAMETERS; j++)
         lv[EFX_WAHWAH][j] = Rack_Effects[EFX_WAHWAH]->getpar(j);
     for (j = 0; j < C_ALIENWAH_PARAMETERS; j++)

@@ -38,6 +38,7 @@
 #define  MIN_GAIN  0.00001f        // -100dB  This will help prevent evaluation of denormal numbers
 
 Compressor::Compressor(double sample_rate, uint32_t intermediate_bufsize) :
+    Effect(sample_rate, intermediate_bufsize),
     tatt(20),
     trel(50),
     tratio(4),
@@ -87,8 +88,7 @@ Compressor::Compressor(double sample_rate, uint32_t intermediate_bufsize) :
     coeff_knee(),
     coeff_kk(),
     lpeak(),
-    rpeak(),
-    Fpre(NULL)
+    rpeak()
 {
     setpreset(0);
 }

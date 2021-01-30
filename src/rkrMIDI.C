@@ -2034,27 +2034,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Compress_Attack:
-        efx_Compressor->changepar(Compress_Attack, 10 + (int) ((float) value * C_MC_240_RANGE));
+        Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Attack, 10 + (int) ((float) value * C_MC_240_RANGE));
         break;
 
     case MC_Compress_Release:
-        efx_Compressor->changepar(Compress_Release, 10 + (int) ((float) value * C_MC_490_RANGE));
+        Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Release, 10 + (int) ((float) value * C_MC_490_RANGE));
         break;
 
     case MC_Compress_Ratio:
-        efx_Compressor->changepar(Compress_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
+        Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case MC_Compress_Knee:
-        efx_Compressor->changepar(Compress_Knee, (int) ((float) value * C_MC_100_RANGE));
+        Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Knee, (int) ((float) value * C_MC_100_RANGE));
         break;
 
     case MC_Compress_Threshold:
-        efx_Compressor->changepar(Compress_Threshold, -60 + (int) ((float) value * C_MC_57_RANGE));
+        Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Threshold, -60 + (int) ((float) value * C_MC_57_RANGE));
         break;
 
     case MC_Compress_Output:
-        efx_Compressor->changepar(Compress_Output, -40 + (int) ((float) value * C_MC_40_RANGE));
+        Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output, -40 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case MC_Parametric_Gain:

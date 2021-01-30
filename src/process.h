@@ -711,8 +711,6 @@ public:
     void Update_tempo();
 
     // class pointers
-    class Compressor *efx_Compressor;
-
     class Tuner *efx_Tuner;
     class MIDIConverter *efx_MIDIConverter;
     class metronome *M_Metronome;

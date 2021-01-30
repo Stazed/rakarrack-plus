@@ -50,8 +50,6 @@ char *banktoload;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
-    efx_Compressor(NULL),
-
     efx_Tuner(NULL),
     efx_MIDIConverter(NULL),
     M_Metronome(NULL),
@@ -347,7 +345,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_OVERDRIVE];
     delete Rack_Effects[EFX_PARAMETRIC];
     delete Rack_Effects[EFX_EQ];
-    delete efx_Compressor;
+    delete Rack_Effects[EFX_COMPRESSOR];
     delete Rack_Effects[EFX_WAHWAH];
     delete Rack_Effects[EFX_ALIENWAH];
     delete Rack_Effects[EFX_CABINET];
@@ -607,7 +605,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_OVERDRIVE] = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
     Rack_Effects[EFX_PARAMETRIC] = new ParametricEQ(fSample_rate, period);
     Rack_Effects[EFX_EQ] = new EQ( fSample_rate, period);
-    efx_Compressor = new Compressor(fSample_rate, period);
+    Rack_Effects[EFX_COMPRESSOR] = new Compressor(fSample_rate, period);
     Rack_Effects[EFX_WAHWAH] = new WahWah(fSample_rate, period);
     Rack_Effects[EFX_ALIENWAH] = new Alienwah(fSample_rate, period);
     Rack_Effects[EFX_CABINET] = new Cabinet(fSample_rate, period);
@@ -1118,7 +1116,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_REVERB]->cleanup();
     Rack_Effects[EFX_DISTORTION]->cleanup();
     Rack_Effects[EFX_OVERDRIVE]->cleanup();
-    efx_Compressor->cleanup();
+    Rack_Effects[EFX_COMPRESSOR]->cleanup();
     Rack_Effects[EFX_ECHO]->cleanup();
     Rack_Effects[EFX_CHORUS]->cleanup();
     Rack_Effects[EFX_FLANGER]->cleanup();
@@ -1294,7 +1292,7 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_COMPRESSOR:
                 if (EFX_Bypass[EFX_COMPRESSOR])
                 {
-                    efx_Compressor->out(efxoutl, efxoutr);
+                    Rack_Effects[EFX_COMPRESSOR]->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

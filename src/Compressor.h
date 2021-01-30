@@ -28,7 +28,7 @@
 #ifndef COMPRESSOR_H
 #define COMPRESSOR_H
 
-#include "FPreset.h"
+#include "Effect.h"
 
 const int C_COMPRESS_PARAMETERS = 9;
 
@@ -45,7 +45,7 @@ enum Compress_Index
     Compress_Peak
 };
 
-class Compressor
+class Compressor : public Effect
 {
 
 public:
@@ -117,8 +117,6 @@ private:
     float coeff_kk;
     float lpeak;
     float rpeak;
-
-    class FPreset *Fpre;
 
 };
 
