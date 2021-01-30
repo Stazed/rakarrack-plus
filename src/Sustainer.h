@@ -23,7 +23,7 @@
 #ifndef SUSTAINER_H
 #define SUSTAINER_H
 
-#include "FPreset.h"
+#include "Effect.h"
 
 const int C_SUSTAIN_PARAMETERS = 2;
 
@@ -33,7 +33,7 @@ enum Sustain_Index
     Sustain_Sustain
 };
 
-class Sustainer
+class Sustainer : public Effect
 {
 public:
     Sustainer (double sample_rate, uint32_t intermediate_bufsize);
@@ -48,8 +48,6 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void setpreset (int npreset);
-    
-    int Ppreset;
 
 private:
 
@@ -63,7 +61,6 @@ private:
     float level, fsustain, input,tmpgain;
     float prls, compeak, compg, compenv, oldcompenv, calpha, cbeta, cthresh, cratio, cpthresh;
 
-    class FPreset *Fpre;
 };
 
 

@@ -26,7 +26,7 @@
 #include "Sustainer.h"
 
 Sustainer::Sustainer(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     Pvolume(64),
     Psustain(64),
@@ -45,8 +45,7 @@ Sustainer::Sustainer(double sample_rate, uint32_t intermediate_bufsize) :
     cbeta(),
     cthresh(0.25f),
     cratio(0.25f),
-    cpthresh(),
-    Fpre(NULL)
+    cpthresh()
 {
     float cSAMPLE_RATE = 1 / sample_rate;
 

@@ -2745,11 +2745,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Sustain_Gain:
-        efx_Sustainer->changepar(Sustain_Gain, value);
+        Rack_Effects[EFX_SUSTAINER]->changepar(Sustain_Gain, value);
         break;
 
     case MC_Sustain_Sustain:
-        efx_Sustainer->changepar(Sustain_Sustain, 1 + (int) ((float) value * C_MC_126_RANGE));
+        Rack_Effects[EFX_SUSTAINER]->changepar(Sustain_Sustain, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case MC_Sequence_DryWet:

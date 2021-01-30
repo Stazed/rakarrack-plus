@@ -4402,11 +4402,11 @@ void RKRGUI::MIDI_control_gui_refresh()
                 ECHOVERSE->echoverse_angle->redraw();
                 break;
             case MC_Sustain_Gain:
-                SUSTAINER->sus_gain->value(rkr->efx_Sustainer->getpar(Sustain_Gain));
+                SUSTAINER->sus_gain->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Gain));
                 SUSTAINER->sus_gain->redraw();
                 break;
             case MC_Sustain_Sustain:
-                SUSTAINER->sus_sus->value(rkr->efx_Sustainer->getpar(Sustain_Sustain));
+                SUSTAINER->sus_sus->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Sustain));
                 SUSTAINER->sus_sus->redraw();
                 break;
             case MC_Sequence_DryWet:

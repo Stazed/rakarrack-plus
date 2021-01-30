@@ -865,7 +865,7 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_SUSTAINER:
         sprintf(buf, "%d,%d,%d\n",
-                efx_Sustainer->getpar(Sustain_Gain), efx_Sustainer->getpar(Sustain_Sustain),
+                Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Gain), Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Sustain),
                 EFX_Bypass[EFX_SUSTAINER]);
         break;
 
@@ -1595,9 +1595,9 @@ RKR::Actualizar_Audio()
 
         case EFX_SUSTAINER:
             EFX_Bypass[EFX_SUSTAINER] = 0;
-            efx_Sustainer->cleanup();
+            Rack_Effects[EFX_SUSTAINER]->cleanup();
             for (i = 0; i < C_SUSTAIN_PARAMETERS; i++)
-                efx_Sustainer->changepar(i, lv[EFX_SUSTAINER][i]);
+                Rack_Effects[EFX_SUSTAINER]->changepar(i, lv[EFX_SUSTAINER][i]);
             EFX_Bypass[EFX_SUSTAINER] = EFX_Bank_Bypass[EFX_SUSTAINER];
             break;
 
@@ -2394,7 +2394,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_VOCODER_PARAMETERS; j++)
         lv[EFX_VOCODER][j] = Rack_Effects[EFX_VOCODER]->getpar(j);
     for (j = 0; j < C_SUSTAIN_PARAMETERS; j++)
-        lv[EFX_SUSTAINER][j] = efx_Sustainer->getpar(j);
+        lv[EFX_SUSTAINER][j] = Rack_Effects[EFX_SUSTAINER]->getpar(j);
     for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)
         lv[EFX_SEQUENCE][j] = efx_Sequence->getpar(j);
     for (j = 0; j < C_SHIFTER_PARAMETERS; j++)
