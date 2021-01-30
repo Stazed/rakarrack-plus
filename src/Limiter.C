@@ -45,6 +45,10 @@ Limiter::setpreset(int npreset)
 
     const int PRESET_SIZE = C_COMPRESS_PARAMETERS;
     const int NUM_PRESETS = 4;
+    
+    // Sanity check
+    if (npreset > (NUM_PRESETS - 1))
+        return;
 
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Final Limiter

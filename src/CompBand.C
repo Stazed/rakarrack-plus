@@ -84,6 +84,7 @@ CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize) :
 {
     initialize();
 
+    // The Limiter here is derived from Compressor with special presets
     CL = new Limiter(sample_rate, PERIOD);
     CML = new Limiter(sample_rate, PERIOD);
     CMH = new Limiter(sample_rate, PERIOD);
