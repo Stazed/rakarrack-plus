@@ -99,20 +99,20 @@ EQ::initialize()
 
     for (int i = 0; i <= 45; i += 5)
     {
-        changepar(i + 10, 7);
-        changepar(i + 14, 0);
+        change_parameters(i + 10, 7);
+        change_parameters(i + 14, 0);
     }
 
-    changepar(11, 31);
-    changepar(16, 63);
-    changepar(21, 125);
-    changepar(26, 250);
-    changepar(31, 500);
-    changepar(36, 1000);
-    changepar(41, 2000);
-    changepar(46, 4000);
-    changepar(51, 8000);
-    changepar(56, 16000);
+    change_parameters(11, 31);
+    change_parameters(16, 63);
+    change_parameters(21, 125);
+    change_parameters(26, 250);
+    change_parameters(31, 500);
+    change_parameters(36, 1000);
+    change_parameters(41, 2000);
+    change_parameters(46, 4000);
+    change_parameters(51, 8000);
+    change_parameters(56, 16000);
 }
 
 void
@@ -163,7 +163,7 @@ EQ::setvolume(int Pvolume)
  * This changes the Q for all ten EQ1 bands. Not used by Cabinet or Parametric.
  * 
  * @param npar
- *      The EQ_Q index >> 13 in this case.
+ *      The EQ_Q + 2 index >> 13 in this case.
  * 
  * @param value
  *      The slider value, or MIDI control value Q adjustment for each band. 
@@ -173,7 +173,7 @@ EQ::changepar_Q(int npar, int value)
 {
     for (int i = 0; i < 10; i++)
     {
-        changepar(((i * 5) + npar), value);
+        change_parameters(((i * 5) + npar), value);
     }
 }
 
@@ -204,28 +204,29 @@ EQ::setpreset(int npreset)
         Fpre->ReadPreset(EFX_EQ, npreset - NUM_PRESETS + 1, pdata);
         for (int n = 0; n < 10; n++)
         {
-            changepar(n * 5 + 12, pdata[n]);
+            change_parameters(n * 5 + 12, pdata[n]);
         }
 
-        changepar(EQ_Gain, pdata[10]);
-        changepar_Q(EQ_Q, pdata[11]);
+        change_parameters(0, pdata[EQ_Gain]);
+        changepar_Q(EQ_Q + 2, pdata[EQ_Q]);
 
     }
     else
     {
         for (int n = 0; n < 10; n++)
         {
-            changepar(n * 5 + 12, presets[npreset][n]);
+            change_parameters(n * 5 + 12, presets[npreset][n]);
         }
         
-        changepar(EQ_Gain, presets[npreset][10]);
-        changepar_Q(EQ_Q, presets[npreset][11]);
+        change_parameters(0, presets[npreset][EQ_Gain]); 
+        changepar_Q(EQ_Q + 2, presets[npreset][EQ_Q]);
     }
 }
 
 void
-EQ::changepar(int npar, int value)
+EQ::change_parameters (int npar, int value)
 {
+    printf("EQ change_parameters npar = %d: value = %d\n", npar, value);
     switch (npar)
     {
     case 0:
@@ -285,8 +286,8 @@ EQ::changepar(int npar, int value)
 }
 
 int
-EQ::getpar(int npar)
-{
+EQ::get_parameters (int npar)
+{printf("EQ get_parameters npar = %d\n", npar);
     switch (npar)
     {
     case 0:
@@ -323,6 +324,76 @@ EQ::getpar(int npar)
     }
 
     return (0); //in case of bogus parameter number
+}
+
+void
+EQ::changepar(int npar, int value)
+{
+    switch(npar)
+    {
+        case EQ_Gain:
+        {
+            change_parameters(0, value);
+        }
+        break;
+        
+        case EQ_Q:
+        {
+            changepar_Q(EQ_Q + 2, value);
+        }
+        break;
+
+        case EQ_31_HZ:
+        case EQ_63_HZ:
+        case EQ_125_HZ:
+        case EQ_250_HZ:
+        case EQ_500_HZ:
+        case EQ_1_KHZ:
+        case EQ_2_KHZ:
+        case EQ_4_KHZ:
+        case EQ_8_KHZ:
+        case EQ_16_KHZ:
+        {
+            change_parameters(npar * 5 + 12, value);
+        }
+        break;
+    }
+}
+
+int
+EQ::getpar(int npar)
+{
+    switch(npar)
+    {
+        case EQ_Gain:
+        {
+            return get_parameters(0);
+        }
+        break;
+
+        case EQ_Q:
+        {
+            return get_parameters(EQ_Q + 2);
+        }
+        break;
+
+        case EQ_31_HZ:
+        case EQ_63_HZ:
+        case EQ_125_HZ:
+        case EQ_250_HZ:
+        case EQ_500_HZ:
+        case EQ_1_KHZ:
+        case EQ_2_KHZ:
+        case EQ_4_KHZ:
+        case EQ_8_KHZ:
+        case EQ_16_KHZ:
+        {
+            return get_parameters(npar * 5 + 12);
+        }
+        break;
+    }
+    
+    return 0;
 }
 
 /**

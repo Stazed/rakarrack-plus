@@ -1690,8 +1690,7 @@ RKR::process_midi_controller_events(int parameter, int value)
 
     case MC_EQ_Q:
     {
-        EQ *Efx_Equalizer = static_cast<EQ*>(Rack_Effects[EFX_EQ]);
-        Efx_Equalizer->changepar_Q(EQ_Q, value);
+        Rack_Effects[EFX_EQ]->changepar(EQ_Q, value);
         break;
     }
     case MC_EQ_31_HZ:

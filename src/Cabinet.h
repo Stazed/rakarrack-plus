@@ -44,6 +44,8 @@ class Cabinet :public EQ
 public:
     Cabinet (double sample_frequency, uint32_t intermediate_bufsize);
     void setpreset(int npreset);
+    void changepar (int npar, int value);
+    int getpar (int npar);
     
     void initialize();
 

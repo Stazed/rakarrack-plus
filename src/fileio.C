@@ -1300,12 +1300,17 @@ RKR::Actualizar_Audio()
 // Special case
             EFX_Bypass[EFX_EQ] = 0;
             Rack_Effects[EFX_EQ]->cleanup();
+            for (i = 0; i < C_EQ_PARAMETERS; i++)
+                Rack_Effects[EFX_EQ]->changepar(i, lv[EFX_EQ][i]);
+#if 0
             for (i = 0; i < 10; i++)
             {
                 Rack_Effects[EFX_EQ]->changepar(i * 5 + 12, lv[EFX_EQ][i]);
                 Rack_Effects[EFX_EQ]->changepar(i * 5 + 13, lv[EFX_EQ][11]);
             }
             Rack_Effects[EFX_EQ]->changepar(EQ_Gain, lv[EFX_EQ][10]);
+#endif // 0
+            
             EFX_Bypass[EFX_EQ] = EFX_Bank_Bypass[EFX_EQ];
             break;
 
@@ -2427,11 +2432,15 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
         lv[EFX_ORDER][j] = efx_order[j];
 
+    for (j = 0; j < C_EQ_PARAMETERS; j++)
+        lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j);
+#if 0
     for (j = 0; j < 10; j++)
         lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j * 5 + 12);
 
     lv[EFX_EQ][10] = Rack_Effects[EFX_EQ]->getpar(EQ_Gain);
     lv[EFX_EQ][11] = Rack_Effects[EFX_EQ]->getpar(EQ_Q);
+#endif // 0
 
     for (j = 0; j < 3; j++)
     {

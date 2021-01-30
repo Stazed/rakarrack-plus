@@ -34,9 +34,9 @@ ParametricEQ::initialize()
 
     for (int i = 0; i <= 10; i += 5)
     {
-        changepar(i + 10, 7);
-        changepar(i + 13, 64);
-        changepar(i + 14, 0);
+        change_parameters(i + 10, 7);
+        change_parameters(i + 13, 64);
+        change_parameters(i + 14, 0);
     }
 }
 
@@ -62,23 +62,35 @@ ParametricEQ::setpreset(int npreset)
         
         for (int n = 0; n < 3; n++)
         {
-            changepar(n * 5 + 11, pdata[n * 3]);
-            changepar(n * 5 + 12, pdata[n * 3 + 1]);
-            changepar(n * 5 + 13, pdata[n * 3 + 2]);
+            change_parameters(n * 5 + 11, pdata[n * 3]);
+            change_parameters(n * 5 + 12, pdata[n * 3 + 1]);
+            change_parameters(n * 5 + 13, pdata[n * 3 + 2]);
         }
         
-        changepar(Parametric_Gain, pdata[9]);
+        change_parameters(Parametric_Gain, pdata[9]);
     }
     else
     {
         for (int n = 0; n < 3; n++)
         {
-            changepar(n * 5 + 11, presets[npreset][n * 3]);
-            changepar(n * 5 + 12, presets[npreset][n * 3 + 1]);
-            changepar(n * 5 + 13, presets[npreset][n * 3 + 2]);
+            change_parameters(n * 5 + 11, presets[npreset][n * 3]);
+            change_parameters(n * 5 + 12, presets[npreset][n * 3 + 1]);
+            change_parameters(n * 5 + 13, presets[npreset][n * 3 + 2]);
         }
         
-        changepar(Parametric_Gain, presets[npreset][9]);
+        change_parameters(Parametric_Gain, presets[npreset][9]);
     }
 }
 
+void
+ParametricEQ::changepar(int npar, int value)
+{
+   // printf("Parametric changepar npar = %d: value = %d\n", npar, value);
+}
+
+int
+ParametricEQ::getpar(int npar)
+{
+   // printf("Parametric getpar npar = %d\n", npar);
+    return 0;
+}

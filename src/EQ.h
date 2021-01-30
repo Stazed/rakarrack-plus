@@ -30,6 +30,23 @@
 
 const int C_EQ_PARAMETERS = 12;
 
+// This is the order in the presets
+enum EQ_Index
+{
+    EQ_31_HZ = 0,
+    EQ_63_HZ,
+    EQ_125_HZ,
+    EQ_250_HZ,
+    EQ_500_HZ,
+    EQ_1_KHZ,
+    EQ_2_KHZ,
+    EQ_4_KHZ,
+    EQ_8_KHZ,
+    EQ_16_KHZ,
+    EQ_Gain,    // 10
+    EQ_Q        // 11
+};
+#if 0
 enum EQ_Index
 {
     EQ_Gain     = 0,
@@ -45,6 +62,7 @@ enum EQ_Index
     EQ_8_KHZ    = 52,
     EQ_16_KHZ   = 57
 };
+#endif //0
 
 class EQ : public Effect
 {
@@ -56,17 +74,21 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    void change_parameters (int npar, int value);
+    int get_parameters (int npar);
     
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t period);
 #endif // LV2
     
-    void changepar_Q(int npar, int value);
     void init_filters();
     virtual void initialize();
     void clear_initialize();
     float getfreqresponse (float freq); // not used
     void setvolume (int Pvolume);
+    
+private:
+    void changepar_Q(int npar, int value);
 
     uint32_t PERIOD;
     double fSAMPLE_RATE;

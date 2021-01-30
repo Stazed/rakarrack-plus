@@ -144,14 +144,27 @@ Cabinet::setpreset(int npreset)
     
     for (int n = 0; n < 16; n++)
     {
-        changepar(n * 5 + 10, presets[npreset][n * 5]);
-        changepar(n * 5 + 11, presets[npreset][n * 5 + 1]);
-        changepar(n * 5 + 12, presets[npreset][n * 5 + 2]);
-        changepar(n * 5 + 13, presets[npreset][n * 5 + 3]);
-        changepar(n * 5 + 14, presets[npreset][n * 5 + 4]);
+        change_parameters(n * 5 + 10, presets[npreset][n * 5]);
+        change_parameters(n * 5 + 11, presets[npreset][n * 5 + 1]);
+        change_parameters(n * 5 + 12, presets[npreset][n * 5 + 2]);
+        change_parameters(n * 5 + 13, presets[npreset][n * 5 + 3]);
+        change_parameters(n * 5 + 14, presets[npreset][n * 5 + 4]);
     }
 
     Ppreset = npreset;
+}
+
+void
+Cabinet::changepar(int npar, int value)
+{
+    //printf("Cabinet changepar npar = %d: value = %d\n", npar, value);
+}
+
+int
+Cabinet::getpar(int npar)
+{
+    //printf("Cabinet getpar npar = %d\n", npar);
+    return 0;
 }
 
 #ifdef LV2_SUPPORT

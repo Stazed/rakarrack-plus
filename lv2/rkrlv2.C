@@ -342,12 +342,12 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
 
     //check and set changed parameters
     int val = 0;
-    int param_case_offset = 0;
+    int param_case_offset = 10;
     for(int i = 0; i < plug->nparams; i++)
     {
         switch(param_case_offset)
         {
-            case EQ_Gain:
+            case EQ_Gain:   // 0
             {
                 val = (int)*plug->param_p[i] + 64;
                 if(plug->eq->getpar(EQ_Gain) != val)
@@ -359,19 +359,19 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
             }
             break;
 
-            case EQ_Q:
+            case EQ_Q:      // 1
             {
                 val = (int)*plug->param_p[i] + 64;
                 if(plug->eq->getpar(EQ_Q) != val)
                 {
-                    plug->eq->changepar_Q(EQ_Q, val);
+                    plug->eq->changepar(EQ_Q, val);
                 }
 
                 param_case_offset = EQ_31_HZ;   // set for EQ_31_HZ
             }
             break;
-
-            case EQ_31_HZ:
+            
+            case EQ_31_HZ:  // = 2
             case EQ_63_HZ:
             case EQ_125_HZ:
             case EQ_250_HZ:
@@ -380,7 +380,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
             case EQ_2_KHZ:
             case EQ_4_KHZ:
             case EQ_8_KHZ:
-            case EQ_16_KHZ:
+            case EQ_16_KHZ: // 9
             {
                 val = (int)*plug->param_p[i] + 64;
                 if(plug->eq->getpar(param_case_offset) != val)
@@ -388,7 +388,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
                     plug->eq->changepar(param_case_offset, val);
                 }
 
-                param_case_offset += 5;     // next parameter
+                param_case_offset++;     // next parameter
             }
             break;
         }

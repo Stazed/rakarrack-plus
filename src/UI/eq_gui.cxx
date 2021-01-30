@@ -64,8 +64,7 @@ void EqGui::cb_eq_Q_i(RKR_Slider* o, void*) {
  return;
 }
 
-EQ *Efx_Equalizer = static_cast<EQ*>(rkr->Rack_Effects[EFX_EQ]);
-Efx_Equalizer->changepar_Q(EQ_Q,(int)(o->value()+64));
+rkr->Rack_Effects[EFX_EQ]->changepar(EQ_Q,(int)(o->value()+64));
 }
 void EqGui::cb_eq_Q(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_Q_i(o,v);
