@@ -841,11 +841,11 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_COILCRAFTER:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_CoilCrafter->getpar(Coil_Gain), efx_CoilCrafter->getpar(Coil_Origin),
-                efx_CoilCrafter->getpar(Coil_Destiny), efx_CoilCrafter->getpar(Coil_Freq_1),
-                efx_CoilCrafter->getpar(Coil_Q_1), efx_CoilCrafter->getpar(Coil_Freq_2),
-                efx_CoilCrafter->getpar(Coil_Q_2), efx_CoilCrafter->getpar(Coil_Tone),
-                efx_CoilCrafter->getpar(Coil_NeckMode), EFX_Bypass[EFX_COILCRAFTER]);
+                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Gain), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Origin),
+                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Destiny), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1),
+                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2),
+                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Tone),
+                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_NeckMode), EFX_Bypass[EFX_COILCRAFTER]);
         break;
 
     case EFX_SHELFBOOST:
@@ -1571,9 +1571,9 @@ RKR::Actualizar_Audio()
 
         case EFX_COILCRAFTER:
             EFX_Bypass[EFX_COILCRAFTER] = 0;
-            efx_CoilCrafter->cleanup();
+            Rack_Effects[EFX_COILCRAFTER]->cleanup();
             for (i = 0; i < C_COIL_PARAMETERS; i++)
-                efx_CoilCrafter->changepar(i, lv[EFX_COILCRAFTER][i]);
+                Rack_Effects[EFX_COILCRAFTER]->changepar(i, lv[EFX_COILCRAFTER][i]);
             EFX_Bypass[EFX_COILCRAFTER] = EFX_Bank_Bypass[EFX_COILCRAFTER];
             break;
 
@@ -2388,7 +2388,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_ECHOVERSE_PARAMETERS; j++)
         lv[EFX_ECHOVERSE][j] = Rack_Effects[EFX_ECHOVERSE]->getpar(j);
     for (j = 0; j < C_COIL_PARAMETERS; j++)
-        lv[EFX_COILCRAFTER][j] = efx_CoilCrafter->getpar(j);
+        lv[EFX_COILCRAFTER][j] = Rack_Effects[EFX_COILCRAFTER]->getpar(j);
     for (j = 0; j < C_SHELF_PARAMETERS; j++)
         lv[EFX_SHELFBOOST][j] = efx_ShelfBoost->getpar(j);
     for (j = 0; j < C_VOCODER_PARAMETERS; j++)

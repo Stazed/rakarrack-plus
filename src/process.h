@@ -742,7 +742,6 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
 
-    class CoilCrafter *efx_CoilCrafter;
     class ShelfBoost *efx_ShelfBoost;
     class Sustainer *efx_Sustainer;
     class Sequence *efx_Sequence;

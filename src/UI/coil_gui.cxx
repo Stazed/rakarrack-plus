@@ -11,7 +11,7 @@ void CoilGui::cb_coil_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_COILCRAFTER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_CoilCrafter->cleanup();
+rkr->Rack_Effects[EFX_COILCRAFTER]->cleanup();
 rgui->findpos(EFX_COILCRAFTER,(int)o->value(),o);
 }
 void CoilGui::cb_coil_activar(RKR_Light_Button* o, void* v) {
@@ -20,16 +20,16 @@ void CoilGui::cb_coil_activar(RKR_Light_Button* o, void* v) {
 
 void CoilGui::cb_coil_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12033))rkr->efx_CoilCrafter->setpreset((int) o->value());
-coil_WD->value(rkr->efx_CoilCrafter->getpar(Coil_Gain));
-coil_tone->value(rkr->efx_CoilCrafter->getpar(Coil_Tone));
-coil_origin->value(rkr->efx_CoilCrafter->getpar(Coil_Origin));
-coil_destiny->value(rkr->efx_CoilCrafter->getpar(Coil_Destiny));
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));
-coil_mode->value(rkr->efx_CoilCrafter->getpar(Coil_NeckMode));
+if((ud==0)||(ud==12033))rkr->Rack_Effects[EFX_COILCRAFTER]->setpreset((int) o->value());
+coil_WD->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Gain));
+coil_tone->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Tone));
+coil_origin->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Origin));
+coil_destiny->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Destiny));
+coil_freq1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1));
+coil_q1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));
+coil_freq2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2));
+coil_q2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2));
+coil_mode->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_NeckMode));
 }
 void CoilGui::cb_coil_preset(RKR_Choice* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_preset_i(o,v);
@@ -47,7 +47,7 @@ void CoilGui::cb_coil_WD_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Coil_Gain);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Gain,(int)o->value());
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Gain,(int)o->value());
 }
 void CoilGui::cb_coil_WD(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_WD_i(o,v);
@@ -59,16 +59,16 @@ void CoilGui::cb_coil_tone_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Coil_Tone);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Tone,(int)o->value());
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Tone,(int)o->value());
 }
 void CoilGui::cb_coil_tone(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_tone_i(o,v);
 }
 
 void CoilGui::cb_coil_origin_i(RKR_Choice* o, void*) {
-  rkr->efx_CoilCrafter->changepar(Coil_Origin,(int)o->value());
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));
+  rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Origin,(int)o->value());
+coil_freq1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1));
+coil_q1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));
 }
 void CoilGui::cb_coil_origin(RKR_Choice* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_origin_i(o,v);
@@ -93,7 +93,7 @@ void CoilGui::cb_coil_freq1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Coil_Freq_1);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Freq_1,(int)o->value());
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_1,(int)o->value());
 }
 void CoilGui::cb_coil_freq1(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_freq1_i(o,v);
@@ -105,16 +105,16 @@ void CoilGui::cb_coil_q1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Coil_Q_1);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Q_1,(int)o->value());
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Q_1,(int)o->value());
 }
 void CoilGui::cb_coil_q1(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_q1_i(o,v);
 }
 
 void CoilGui::cb_coil_destiny_i(RKR_Choice* o, void*) {
-  rkr->efx_CoilCrafter->changepar(Coil_Destiny,(int)o->value());
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));
+  rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Destiny,(int)o->value());
+coil_freq2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2));
+coil_q2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2));
 }
 void CoilGui::cb_coil_destiny(RKR_Choice* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_destiny_i(o,v);
@@ -126,7 +126,7 @@ void CoilGui::cb_coil_freq2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Coil_Freq_2);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_2,(int)o->value());
 }
 void CoilGui::cb_coil_freq2(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_freq2_i(o,v);
@@ -138,14 +138,14 @@ void CoilGui::cb_coil_q2_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Coil_Q_2);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Q_2,(int)o->value());
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Q_2,(int)o->value());
 }
 void CoilGui::cb_coil_q2(RKR_Slider* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_q2_i(o,v);
 }
 
 void CoilGui::cb_coil_mode_i(RKR_Check_Button* o, void*) {
-  rkr->efx_CoilCrafter->changepar(Coil_NeckMode,(int)o->value());
+  rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_NeckMode,(int)o->value());
 }
 void CoilGui::cb_coil_mode(RKR_Check_Button* o, void* v) {
   ((CoilGui*)(o->parent()))->cb_coil_mode_i(o,v);

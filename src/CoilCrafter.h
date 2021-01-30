@@ -23,6 +23,7 @@
 #ifndef COILCRAFTER_H
 #define COILCRAFTER_H
 
+#include "Effect.h"
 #include "HarmonicEnhancer.h"
 #include "AnalogFilter.h"
 
@@ -41,7 +42,7 @@ enum Coil_Index
     Coil_NeckMode
 };
 
-class CoilCrafter
+class CoilCrafter : public Effect
 {
 public:
     CoilCrafter (double sample_rate, uint32_t intermediate_bufsize);
@@ -55,9 +56,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    int Ppreset;
-
-    float outvolume;
 
 private:
 
@@ -91,7 +89,6 @@ private:
     class AnalogFilter *RB2l,*RB2r;
     float* interpbuf;
 
-    class FPreset *Fpre;
 };
 
 

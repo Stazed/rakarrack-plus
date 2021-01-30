@@ -29,7 +29,7 @@ widget_class CoilGui {
 }
 rkr->EFX_Bypass[EFX_COILCRAFTER]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_CoilCrafter->cleanup();
+rkr->Rack_Effects[EFX_COILCRAFTER]->cleanup();
 rgui->findpos(EFX_COILCRAFTER,(int)o->value(),o);} selected
     xywh {5 4 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
@@ -38,16 +38,16 @@ rgui->findpos(EFX_COILCRAFTER,(int)o->value(),o);} selected
     label Preset
     user_data 12033
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12033))rkr->efx_CoilCrafter->setpreset((int) o->value());
-coil_WD->value(rkr->efx_CoilCrafter->getpar(Coil_Gain));
-coil_tone->value(rkr->efx_CoilCrafter->getpar(Coil_Tone));
-coil_origin->value(rkr->efx_CoilCrafter->getpar(Coil_Origin));
-coil_destiny->value(rkr->efx_CoilCrafter->getpar(Coil_Destiny));
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));
-coil_mode->value(rkr->efx_CoilCrafter->getpar(Coil_NeckMode));}
+if((ud==0)||(ud==12033))rkr->Rack_Effects[EFX_COILCRAFTER]->setpreset((int) o->value());
+coil_WD->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Gain));
+coil_tone->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Tone));
+coil_origin->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Origin));
+coil_destiny->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Destiny));
+coil_freq1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1));
+coil_q1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));
+coil_freq2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2));
+coil_q2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2));
+coil_mode->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_NeckMode));}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -67,7 +67,7 @@ coil_mode->value(rkr->efx_CoilCrafter->getpar(Coil_NeckMode));}
  rgui->getMIDIControl(MC_Coil_Gain);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Gain,(int)o->value());}
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Gain,(int)o->value());}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
     class RKR_Slider
   }
@@ -78,16 +78,16 @@ rkr->efx_CoilCrafter->changepar(Coil_Gain,(int)o->value());}
  rgui->getMIDIControl(MC_Coil_Tone);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Tone,(int)o->value());}
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Tone,(int)o->value());}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 4400 step 1 value 20 textcolor 7
     class RKR_Slider
   }
   Fl_Choice coil_origin {
     label Origin
     user_data 12
-    callback {rkr->efx_CoilCrafter->changepar(Coil_Origin,(int)o->value());
-coil_freq1->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_1));
-coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));}
+    callback {rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Origin,(int)o->value());
+coil_freq1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1));
+coil_q1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));}
     xywh {61 55 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -135,7 +135,7 @@ coil_q1->value(rkr->efx_CoilCrafter->getpar(Coil_Q_1));}
  rgui->getMIDIControl(MC_Coil_Freq_1);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Freq_1,(int)o->value());}
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_1,(int)o->value());}
     tooltip {Origin Pickup Frequency} xywh {56 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2600 maximum 4500 step 1 value 3200 textcolor 7
     class RKR_Slider
   }
@@ -146,15 +146,15 @@ rkr->efx_CoilCrafter->changepar(Coil_Freq_1,(int)o->value());}
  rgui->getMIDIControl(MC_Coil_Q_1);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Q_1,(int)o->value());}
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Q_1,(int)o->value());}
     tooltip {Origin Pickup Resonance} xywh {56 94 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Choice coil_destiny {
     label Destiny
-    callback {rkr->efx_CoilCrafter->changepar(Coil_Destiny,(int)o->value());
-coil_freq2->value(rkr->efx_CoilCrafter->getpar(Coil_Freq_2));
-coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));} open
+    callback {rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Destiny,(int)o->value());
+coil_freq2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2));
+coil_q2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2));} open
     xywh {61 107 90 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(menu_coil_origin);}
     class RKR_Choice
@@ -166,7 +166,7 @@ coil_q2->value(rkr->efx_CoilCrafter->getpar(Coil_Q_2));} open
  rgui->getMIDIControl(MC_Coil_Freq_2);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());}
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_2,(int)o->value());}
     tooltip {Destination Pickup Frequency} xywh {56 132 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2600 maximum 4500 step 1 value 3200 textcolor 7
     class RKR_Slider
   }
@@ -177,14 +177,14 @@ rkr->efx_CoilCrafter->changepar(Coil_Freq_2,(int)o->value());}
  rgui->getMIDIControl(MC_Coil_Q_2);
  return;
 }
-rkr->efx_CoilCrafter->changepar(Coil_Q_2,(int)o->value());}
+rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Q_2,(int)o->value());}
     tooltip {Destination Pickup Resonance} xywh {56 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 65 step 1 value 20 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button coil_mode {
     label {Neck Pickup}
     user_data 2
-    callback {rkr->efx_CoilCrafter->changepar(Coil_NeckMode,(int)o->value());}
+    callback {rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_NeckMode,(int)o->value());}
     xywh {13 161 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }

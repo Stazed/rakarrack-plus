@@ -2641,27 +2641,27 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Coil_Gain:
-        efx_CoilCrafter->changepar(Coil_Gain, value);
+        Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Gain, value);
         break;
 
     case MC_Coil_Tone:
-        efx_CoilCrafter->changepar(Coil_Tone, 20 + (int) ((float) value * C_MC_4380_RANGE));
+        Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Tone, 20 + (int) ((float) value * C_MC_4380_RANGE));
         break;
 
     case MC_Coil_Freq_1:
-        efx_CoilCrafter->changepar(Coil_Freq_1, 2600 + (int) ((float) value * C_MC_1900_RANGE));
+        Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_1, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
     case MC_Coil_Q_1:
-        efx_CoilCrafter->changepar(Coil_Q_1, 10 + (int) ((float) value * C_MC_55_RANGE));
+        Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Q_1, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
     case MC_Coil_Freq_2:
-        efx_CoilCrafter->changepar(Coil_Freq_2, 2600 + (int) ((float) value * C_MC_1900_RANGE));
+        Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_2, 2600 + (int) ((float) value * C_MC_1900_RANGE));
         break;
 
     case MC_Coil_Q_2:
-        efx_CoilCrafter->changepar(Coil_Q_2, 10 + (int) ((float) value * C_MC_55_RANGE));
+        Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Q_2, 10 + (int) ((float) value * C_MC_55_RANGE));
         break;
 
     case MC_Shelf_Gain:

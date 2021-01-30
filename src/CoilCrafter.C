@@ -26,8 +26,7 @@
 #include "CoilCrafter.h"
 
 CoilCrafter::CoilCrafter(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(0),
-    outvolume(1.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),   // correct for rakarrack, may be adjusted for lv2
     Pvolume(50),
     Ppo(),
@@ -51,10 +50,10 @@ CoilCrafter::CoilCrafter(double sample_rate, uint32_t intermediate_bufsize) :
     RB1r(NULL),
     RB2l(NULL),
     RB2r(NULL),
-    interpbuf(NULL),
-    Fpre(NULL)
+    interpbuf(NULL)
 {
     //default values
+    outvolume = 1.5f;
 
     tfreqs[0] = 4000.0f;
     tfreqs[1] = 4400.0f;
