@@ -2709,39 +2709,39 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Echoverse_DryWet:
-        efx_Echoverse->changepar(Echoverse_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_DryWet, Dry_Wet(value));
         break;
 
     case MC_Echoverse_Reverse:
-        efx_Echoverse->changepar(Echoverse_Reverse, value);
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Reverse, value);
         break;
 
     case MC_Echoverse_Pan:
-        efx_Echoverse->changepar(Echoverse_Pan, value);
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Pan, value);
         break;
 
     case MC_Echoverse_Tempo:
-        efx_Echoverse->changepar(Echoverse_Tempo, ret_Tempo(value));
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Tempo, ret_Tempo(value));
         break;
 
     case MC_Echoverse_LR_Delay:
-        efx_Echoverse->changepar(Echoverse_LR_Delay, value);
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_LR_Delay, value);
         break;
 
     case MC_Echoverse_Feedback:
-        efx_Echoverse->changepar(Echoverse_Feedback, value);
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Feedback, value);
         break;
 
     case MC_Echoverse_Damp:
-        efx_Echoverse->changepar(Echoverse_Damp, value);
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Damp, value);
         break;
 
     case MC_Echoverse_Ext_Stereo:
-        efx_Echoverse->changepar(Echoverse_Ext_Stereo, value);
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Ext_Stereo, value);
         break;
 
     case MC_Echoverse_Angle:
-        efx_Echoverse->changepar(Echoverse_Angle, (int) ((float) value * C_MC_128_RANGE));
+        Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Angle, (int) ((float) value * C_MC_128_RANGE));
         break;
 
     case MC_Sustain_Gain:

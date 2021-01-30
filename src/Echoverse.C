@@ -31,8 +31,7 @@
 #include "Echoverse.h"     // Echoverse
 
 Echoverse::Echoverse(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     PERIOD(intermediate_bufsize),
     Pvolume(50),
@@ -70,8 +69,7 @@ Echoverse::Echoverse(double sample_rate, uint32_t intermediate_bufsize) :
     oldr(),
     Srate_Attack_Coeff(1.0f / (sample_rate * ATTACK)),
     ldelay(NULL),
-    rdelay(NULL),
-    Fpre(NULL)
+    rdelay(NULL)
 {
     ldelay = new delayline(2.0f, 3, sample_rate);
     rdelay = new delayline(2.0f, 3, sample_rate);

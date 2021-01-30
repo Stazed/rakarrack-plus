@@ -831,11 +831,11 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_ECHOVERSE:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_Echoverse->getpar(Echoverse_DryWet), efx_Echoverse->getpar(Echoverse_Pan),
-                efx_Echoverse->getpar(Echoverse_Tempo), efx_Echoverse->getpar(Echoverse_LR_Delay),
-                efx_Echoverse->getpar(Echoverse_Angle), efx_Echoverse->getpar(Echoverse_Feedback),
-                efx_Echoverse->getpar(Echoverse_Damp), efx_Echoverse->getpar(Echoverse_Reverse),
-                efx_Echoverse->getpar(Echoverse_Subdivision), efx_Echoverse->getpar(Echoverse_Ext_Stereo),
+                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_DryWet), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Pan),
+                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_LR_Delay),
+                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Angle), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Feedback),
+                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Damp), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Reverse),
+                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Subdivision), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Ext_Stereo),
                 EFX_Bypass[EFX_ECHOVERSE]);
         break;
 
@@ -1563,9 +1563,9 @@ RKR::Actualizar_Audio()
 
         case EFX_ECHOVERSE:
             EFX_Bypass[EFX_ECHOVERSE] = 0;
-            efx_Echoverse->cleanup();
+            Rack_Effects[EFX_ECHOVERSE]->cleanup();
             for (i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
-                efx_Echoverse->changepar(i, lv[EFX_ECHOVERSE][i]);
+                Rack_Effects[EFX_ECHOVERSE]->changepar(i, lv[EFX_ECHOVERSE][i]);
             EFX_Bypass[EFX_ECHOVERSE] = EFX_Bank_Bypass[EFX_ECHOVERSE];
             break;
 
@@ -2386,7 +2386,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_MUTRO_PARAMETERS; j++)
         lv[EFX_MUTROMOJO][j] = Rack_Effects[EFX_MUTROMOJO]->getpar(j);
     for (j = 0; j < C_ECHOVERSE_PARAMETERS; j++)
-        lv[EFX_ECHOVERSE][j] = efx_Echoverse->getpar(j);
+        lv[EFX_ECHOVERSE][j] = Rack_Effects[EFX_ECHOVERSE]->getpar(j);
     for (j = 0; j < C_COIL_PARAMETERS; j++)
         lv[EFX_COILCRAFTER][j] = efx_CoilCrafter->getpar(j);
     for (j = 0; j < C_SHELF_PARAMETERS; j++)

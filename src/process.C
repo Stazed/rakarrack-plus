@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_Echoverse(NULL),
     efx_CoilCrafter(NULL),
     efx_ShelfBoost(NULL),
     efx_Sustainer(NULL),
@@ -382,7 +381,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_CONVOLOTRON];
     delete Rack_Effects[EFX_LOOPER];
     delete Rack_Effects[EFX_MUTROMOJO];
-    delete efx_Echoverse;
+    delete Rack_Effects[EFX_ECHOVERSE];
     delete efx_CoilCrafter;
     delete efx_ShelfBoost;
     delete Rack_Effects[EFX_VOCODER];
@@ -642,7 +641,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
     Rack_Effects[EFX_LOOPER] = new Looper(looper_size, fSample_rate, period);
     Rack_Effects[EFX_MUTROMOJO] = new MuTroMojo(fSample_rate, period);
-    efx_Echoverse = new Echoverse(fSample_rate, period);
+    Rack_Effects[EFX_ECHOVERSE] = new Echoverse(fSample_rate, period);
     efx_CoilCrafter = new CoilCrafter(fSample_rate, period);
     efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
     Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
@@ -1158,7 +1157,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_CONVOLOTRON]->cleanup();
     Rack_Effects[EFX_LOOPER]->cleanup();
     Rack_Effects[EFX_MUTROMOJO]->cleanup();
-    efx_Echoverse->cleanup();
+    Rack_Effects[EFX_ECHOVERSE]->cleanup();
     efx_CoilCrafter->cleanup();
     efx_ShelfBoost->cleanup();
     Rack_Effects[EFX_VOCODER]->cleanup();
@@ -1553,8 +1552,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_ECHOVERSE:
                 if (EFX_Bypass[EFX_ECHOVERSE])
                 {
-                    efx_Echoverse->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_ECHOVERSE, efx_Echoverse->outvolume);
+                    Rack_Effects[EFX_ECHOVERSE]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_ECHOVERSE, Rack_Effects[EFX_ECHOVERSE]->outvolume);
                 }
                 break;
 

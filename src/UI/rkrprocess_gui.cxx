@@ -4366,39 +4366,39 @@ void RKRGUI::MIDI_control_gui_refresh()
                 VOCODER->vo_level->redraw();
                 break;
             case MC_Echoverse_DryWet:
-                ECHOVERSE->echoverse_WD->value(Dry_Wet(rkr->efx_Echoverse->getpar(Echoverse_DryWet)));
+                ECHOVERSE->echoverse_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_DryWet)));
                 ECHOVERSE->echoverse_WD->redraw();
                 break;
             case MC_Echoverse_Reverse:
-                ECHOVERSE->echoverse_RV->value(rkr->efx_Echoverse->getpar(Echoverse_Reverse));
+                ECHOVERSE->echoverse_RV->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Reverse));
                 ECHOVERSE->echoverse_RV->redraw();
                 break;
             case MC_Echoverse_Pan:
-                ECHOVERSE->echoverse_pan->value(rkr->efx_Echoverse->getpar(Echoverse_Pan) - 64);
+                ECHOVERSE->echoverse_pan->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Pan) - 64);
                 ECHOVERSE->echoverse_pan->redraw();
                 break;
             case MC_Echoverse_Tempo:
-                ECHOVERSE->echoverse_delay->value(rkr->efx_Echoverse->getpar(Echoverse_Tempo));
+                ECHOVERSE->echoverse_delay->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
                 ECHOVERSE->echoverse_delay->redraw();
                 break;
             case MC_Echoverse_LR_Delay:
-                ECHOVERSE->echoverse_LRdl->value(rkr->efx_Echoverse->getpar(Echoverse_LR_Delay));
+                ECHOVERSE->echoverse_LRdl->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_LR_Delay));
                 ECHOVERSE->echoverse_LRdl->redraw();
                 break;
             case MC_Echoverse_Feedback:
-                ECHOVERSE->echoverse_fb->value(rkr->efx_Echoverse->getpar(Echoverse_Feedback));
+                ECHOVERSE->echoverse_fb->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Feedback));
                 ECHOVERSE->echoverse_fb->redraw();
                 break;
             case MC_Echoverse_Damp:
-                ECHOVERSE->echoverse_damp->value(rkr->efx_Echoverse->getpar(Echoverse_Damp));
+                ECHOVERSE->echoverse_damp->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Damp));
                 ECHOVERSE->echoverse_damp->redraw();
                 break;
             case MC_Echoverse_Ext_Stereo:
-                ECHOVERSE->echoverse_es->value(rkr->efx_Echoverse->getpar(Echoverse_Ext_Stereo));
+                ECHOVERSE->echoverse_es->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Ext_Stereo));
                 ECHOVERSE->echoverse_es->redraw();
                 break;
             case MC_Echoverse_Angle:
-                ECHOVERSE->echoverse_angle->value(rkr->efx_Echoverse->getpar(Echoverse_Angle) - 64);
+                ECHOVERSE->echoverse_angle->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Angle) - 64);
                 ECHOVERSE->echoverse_angle->redraw();
                 break;
             case MC_Sustain_Gain:
@@ -6135,7 +6135,7 @@ void RKRGUI::UpdateTGUI()
 
     if (rkr->EFX_Bypass[EFX_ECHOVERSE])
     {
-        ECHOVERSE->echoverse_delay->value(rkr->efx_Echoverse->getpar(Echoverse_Tempo));
+        ECHOVERSE->echoverse_delay->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
         ECHOVERSE->echoverse_delay->redraw();
     }
     if (rkr->EFX_Bypass[EFX_SEQUENCE])

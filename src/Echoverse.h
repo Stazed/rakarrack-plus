@@ -29,6 +29,7 @@
 #ifndef ECHOVERSE_H
 #define ECHOVERSE_H
 
+#include "Effect.h"
 #include "delayline.h"
 
 const int C_ECHOVERSE_PARAMETERS = 10;
@@ -47,7 +48,7 @@ enum Echoverse_Index
     Echoverse_Ext_Stereo
 };
 
-class Echoverse
+class Echoverse : public Effect
 {
 public:
     Echoverse (double sample_rate, uint32_t intermediate_bufsize);
@@ -61,9 +62,6 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    
-    int Ppreset;
-    float outvolume;
 
 private:
 
@@ -102,7 +100,6 @@ private:
     float  Srate_Attack_Coeff;
 
     class delayline *ldelay, *rdelay;
-    class FPreset *Fpre;
 };
 
 
