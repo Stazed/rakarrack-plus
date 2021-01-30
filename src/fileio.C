@@ -942,13 +942,13 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_COMPBAND:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                efx_CompBand->getpar(CompBand_DryWet), efx_CompBand->getpar(CompBand_Low_Ratio),
-                efx_CompBand->getpar(CompBand_Mid_1_Ratio), efx_CompBand->getpar(CompBand_Mid_2_Ratio),
-                efx_CompBand->getpar(CompBand_High_Ratio), efx_CompBand->getpar(CompBand_Low_Thresh),
-                efx_CompBand->getpar(CompBand_Mid_1_Thresh), efx_CompBand->getpar(CompBand_Mid_2_Thresh),
-                efx_CompBand->getpar(CompBand_High_Thresh), efx_CompBand->getpar(CompBand_Cross_1),
-                efx_CompBand->getpar(CompBand_Cross_2), efx_CompBand->getpar(CompBand_Cross_3),
-                efx_CompBand->getpar(CompBand_Gain), EFX_Bypass[EFX_COMPBAND]);
+                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio),
+                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio),
+                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh),
+                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh),
+                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1),
+                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3),
+                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain), EFX_Bypass[EFX_COMPBAND]);
         break;
 
     case EFX_OPTICALTREM:
@@ -1652,9 +1652,9 @@ RKR::Actualizar_Audio()
 
         case EFX_COMPBAND:
             EFX_Bypass[EFX_COMPBAND] = 0;
-            efx_CompBand->cleanup();
+            Rack_Effects[EFX_COMPBAND]->cleanup();
             for (i = 0; i < C_COMPBAND_PARAMETERS; i++)
-                efx_CompBand->changepar(i, lv[EFX_COMPBAND][i]);
+                Rack_Effects[EFX_COMPBAND]->changepar(i, lv[EFX_COMPBAND][i]);
             EFX_Bypass[EFX_COMPBAND] = EFX_Bank_Bypass[EFX_COMPBAND];
             break;
 
@@ -2408,7 +2408,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_SHARM_PARAMETERS; j++)
         lv[EFX_STEREOHARM][j] = Rack_Effects[EFX_STEREOHARM]->getpar(j);
     for (j = 0; j < C_COMPBAND_PARAMETERS; j++)
-        lv[EFX_COMPBAND][j] = efx_CompBand->getpar(j);
+        lv[EFX_COMPBAND][j] = Rack_Effects[EFX_COMPBAND]->getpar(j);
     for (j = 0; j < C_OPTICAL_PARAMETERS; j++)
         lv[EFX_OPTICALTREM][j] = efx_Opticaltrem->getpar(j);
     for (j = 0; j < C_VIBE_PARAMETERS; j++)

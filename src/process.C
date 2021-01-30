@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_CompBand(NULL),
     efx_Opticaltrem(NULL),
     efx_Vibe(NULL),
     efx_Infinity(NULL),
@@ -385,7 +384,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_REVERBTRON];
     delete Rack_Effects[EFX_ECHOTRON];
     delete Rack_Effects[EFX_STEREOHARM];
-    delete efx_CompBand;
+    delete Rack_Effects[EFX_COMPBAND];
     delete efx_Opticaltrem;
     delete efx_Vibe;
     delete efx_Infinity;
@@ -645,7 +644,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
     Rack_Effects[EFX_ECHOTRON] = new Echotron(fSample_rate, period);
     Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
-    efx_CompBand = new CompBand(fSample_rate, period);
+    Rack_Effects[EFX_COMPBAND] = new CompBand(fSample_rate, period);
     efx_Opticaltrem = new Opticaltrem(fSample_rate, period);
     efx_Vibe = new Vibe(fSample_rate, period);
     efx_Infinity = new Infinity(fSample_rate, period);
@@ -1161,7 +1160,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_REVERBTRON]->cleanup();
     Rack_Effects[EFX_ECHOTRON]->cleanup();
     Rack_Effects[EFX_STEREOHARM]->cleanup();
-    efx_CompBand->cleanup();
+    Rack_Effects[EFX_COMPBAND]->cleanup();
     efx_Opticaltrem->cleanup();
     efx_Vibe->cleanup();
     RC_Harm->cleanup();
@@ -1635,8 +1634,8 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_COMPBAND:
                 if (EFX_Bypass[EFX_COMPBAND])
                 {
-                    efx_CompBand->out(efxoutl, efxoutr);
-                    Vol_Efx(EFX_COMPBAND, efx_CompBand->outvolume);
+                    Rack_Effects[EFX_COMPBAND]->out(efxoutl, efxoutr);
+                    Vol_Efx(EFX_COMPBAND, Rack_Effects[EFX_COMPBAND]->outvolume);
                 }
                 break;
 

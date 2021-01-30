@@ -4630,55 +4630,55 @@ void RKRGUI::MIDI_control_gui_refresh()
                 Chord(1);   // update gui
                 break;
             case MC_CompBand_DryWet:
-                COMPBAND->cband_WD->value(Dry_Wet(rkr->efx_CompBand->getpar(CompBand_DryWet)));
+                COMPBAND->cband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet)));
                 COMPBAND->cband_WD->redraw();
                 break;
             case MC_CompBand_Gain:
-                COMPBAND->cband_gain->value(rkr->efx_CompBand->getpar(CompBand_Gain));
+                COMPBAND->cband_gain->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain));
                 COMPBAND->cband_gain->redraw();
                 break;
             case MC_CompBand_Low_Ratio:
-                COMPBAND->cband_Lratio->value(rkr->efx_CompBand->getpar(CompBand_Low_Ratio));
+                COMPBAND->cband_Lratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio));
                 COMPBAND->cband_Lratio->redraw();
                 break;
             case MC_CompBand_Mid_1_Ratio:
-                COMPBAND->cband_MLratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Ratio));
+                COMPBAND->cband_MLratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio));
                 COMPBAND->cband_MLratio->redraw();
                 break;
             case MC_CompBand_Mid_2_Ratio:
-                COMPBAND->cband_MHratio->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Ratio));
+                COMPBAND->cband_MHratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio));
                 COMPBAND->cband_MHratio->redraw();
                 break;
             case MC_CompBand_High_Ratio:
-                COMPBAND->cband_Hratio->value(rkr->efx_CompBand->getpar(CompBand_High_Ratio));
+                COMPBAND->cband_Hratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio));
                 COMPBAND->cband_Hratio->redraw();
                 break;
             case MC_CompBand_Low_Thresh:
-                COMPBAND->cband_Lthres->value(rkr->efx_CompBand->getpar(CompBand_Low_Thresh));
+                COMPBAND->cband_Lthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh));
                 COMPBAND->cband_Lthres->redraw();
                 break;
             case MC_CompBand_Mid_1_Thresh:
-                COMPBAND->cband_MLthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_1_Thresh));
+                COMPBAND->cband_MLthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh));
                 COMPBAND->cband_MLthres->redraw();
                 break;
             case MC_CompBand_Mid_2_Thresh:
-                COMPBAND->cband_MHthres->value(rkr->efx_CompBand->getpar(CompBand_Mid_2_Thresh));
+                COMPBAND->cband_MHthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh));
                 COMPBAND->cband_MHthres->redraw();
                 break;
             case MC_CompBand_High_Thresh:
-                COMPBAND->cband_Hthres->value(rkr->efx_CompBand->getpar(CompBand_High_Thresh));
+                COMPBAND->cband_Hthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh));
                 COMPBAND->cband_Hthres->redraw();
                 break;
             case MC_CompBand_Cross_1:
-                COMPBAND->cband_cross1->value(rkr->efx_CompBand->getpar(CompBand_Cross_1));
+                COMPBAND->cband_cross1->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1));
                 COMPBAND->cband_cross1->redraw();
                 break;
             case MC_CompBand_Cross_2:
-                COMPBAND->cband_cross2->value(rkr->efx_CompBand->getpar(CompBand_Cross_2));
+                COMPBAND->cband_cross2->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2));
                 COMPBAND->cband_cross2->redraw();
                 break;
             case MC_CompBand_Cross_3:
-                COMPBAND->cband_cross3->value(rkr->efx_CompBand->getpar(CompBand_Cross_3));
+                COMPBAND->cband_cross3->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3));
                 COMPBAND->cband_cross3->redraw();
                 break;
             case MC_Optical_Depth:

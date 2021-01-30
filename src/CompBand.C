@@ -39,8 +39,7 @@
 
 
 CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(0),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     level(),
     lowl(NULL),
     lowr(NULL),
@@ -81,8 +80,7 @@ CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize) :
     CL(NULL),
     CML(NULL),
     CMH(NULL),
-    CH(NULL),
-    Fpre(NULL)
+    CH(NULL)
 {
     initialize();
 

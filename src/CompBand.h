@@ -30,6 +30,7 @@
 #ifndef COMPBANDL_H
 #define COMPBANDL_H
 
+#include "Effect.h"
 #include "Compressor.h"
 #include "AnalogFilter.h"
 
@@ -52,7 +53,7 @@ enum CompBand_Index
     CompBand_Gain
 };
 
-class CompBand
+class CompBand : public Effect
 {
 public:
     CompBand (double sample_rate, uint32_t intermediate_bufsize);
@@ -70,8 +71,6 @@ public:
     void initialize();
     void clear_initialize();
 
-    int Ppreset;
-    float outvolume;
     float level;
 
     float *lowl;
@@ -122,8 +121,6 @@ private:
     float * interpbuf;//buffer for filters
 
     Compressor *CL,*CML,*CMH,*CH;
-    
-    class FPreset *Fpre;
 
 };
 

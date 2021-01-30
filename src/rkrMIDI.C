@@ -2981,55 +2981,55 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_CompBand_DryWet:
-        efx_CompBand->changepar(CompBand_DryWet, Dry_Wet(value));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_DryWet, Dry_Wet(value));
         break;
 
     case MC_CompBand_Gain:
-        efx_CompBand->changepar(CompBand_Gain, value);
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Gain, value);
         break;
 
     case MC_CompBand_Low_Ratio:
-        efx_CompBand->changepar(CompBand_Low_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case MC_CompBand_Mid_1_Ratio:
-        efx_CompBand->changepar(CompBand_Mid_1_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case MC_CompBand_Mid_2_Ratio:
-        efx_CompBand->changepar(CompBand_Mid_2_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case MC_CompBand_High_Ratio:
-        efx_CompBand->changepar(CompBand_High_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Ratio, 2 + (int) ((float) value * C_MC_40_RANGE));
         break;
 
     case MC_CompBand_Low_Thresh:
-        efx_CompBand->changepar(CompBand_Low_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case MC_CompBand_Mid_1_Thresh:
-        efx_CompBand->changepar(CompBand_Mid_1_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case MC_CompBand_Mid_2_Thresh:
-        efx_CompBand->changepar(CompBand_Mid_2_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case MC_CompBand_High_Thresh:
-        efx_CompBand->changepar(CompBand_High_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Thresh, -70 + (int) ((float) value * C_MC_94_RANGE));
         break;
 
     case MC_CompBand_Cross_1:
-        efx_CompBand->changepar(CompBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_1, 20 + (int) ((float) value * C_MC_980_RANGE));
         break;
 
     case MC_CompBand_Cross_2:
-        efx_CompBand->changepar(CompBand_Cross_2, 1000 + (int) ((float) value * C_MC_7000_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_2, 1000 + (int) ((float) value * C_MC_7000_RANGE));
         break;
 
     case MC_CompBand_Cross_3:
-        efx_CompBand->changepar(CompBand_Cross_3, 2000 + (int) ((float) value * C_MC_24000_RANGE));
+        Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_3, 2000 + (int) ((float) value * C_MC_24000_RANGE));
         break;
 
     case MC_Optical_Depth:
