@@ -69,7 +69,6 @@ RKR::RKR() :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
-    efx_ShelfBoost(NULL),
     efx_Sustainer(NULL),
     efx_Sequence(NULL),
     efx_Shifter(NULL),
@@ -382,7 +381,7 @@ RKR::~RKR()
     delete Rack_Effects[EFX_MUTROMOJO];
     delete Rack_Effects[EFX_ECHOVERSE];
     delete Rack_Effects[EFX_COILCRAFTER];
-    delete efx_ShelfBoost;
+    delete Rack_Effects[EFX_SHELFBOOST];
     delete Rack_Effects[EFX_VOCODER];
     delete efx_Sustainer;
     delete efx_Sequence;
@@ -642,7 +641,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_MUTROMOJO] = new MuTroMojo(fSample_rate, period);
     Rack_Effects[EFX_ECHOVERSE] = new Echoverse(fSample_rate, period);
     Rack_Effects[EFX_COILCRAFTER] = new CoilCrafter(fSample_rate, period);
-    efx_ShelfBoost = new ShelfBoost(fSample_rate, period);
+    Rack_Effects[EFX_SHELFBOOST] = new ShelfBoost(fSample_rate, period);
     Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
     efx_Sustainer = new Sustainer(fSample_rate, period);
     efx_Sequence = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
@@ -1158,7 +1157,7 @@ RKR::cleanup_efx()
     Rack_Effects[EFX_MUTROMOJO]->cleanup();
     Rack_Effects[EFX_ECHOVERSE]->cleanup();
     Rack_Effects[EFX_COILCRAFTER]->cleanup();
-    efx_ShelfBoost->cleanup();
+    Rack_Effects[EFX_SHELFBOOST]->cleanup();
     Rack_Effects[EFX_VOCODER]->cleanup();
     efx_Sustainer->cleanup();
     efx_Sequence->cleanup();
@@ -1567,7 +1566,7 @@ RKR::Alg(float *origl, float *origr, void *)
             case EFX_SHELFBOOST:
                 if (EFX_Bypass[EFX_SHELFBOOST])
                 {
-                    efx_ShelfBoost->out(efxoutl, efxoutr);
+                    Rack_Effects[EFX_SHELFBOOST]->out(efxoutl, efxoutr);
                     Vol2_Efx();
                 }
                 break;

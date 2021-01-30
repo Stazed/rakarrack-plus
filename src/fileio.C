@@ -850,9 +850,9 @@ void RKR::getbuf(char *buf, int j)
 
     case EFX_SHELFBOOST:
         sprintf(buf, "%d,%d,%d,%d,%d,%d\n",
-                efx_ShelfBoost->getpar(Shelf_Gain), efx_ShelfBoost->getpar(Shelf_Presence),
-                efx_ShelfBoost->getpar(Shelf_Tone), efx_ShelfBoost->getpar(Shelf_Stereo),
-                efx_ShelfBoost->getpar(Shelf_Level), EFX_Bypass[EFX_SHELFBOOST]);
+                Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain), Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence),
+                Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone), Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo),
+                Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level), EFX_Bypass[EFX_SHELFBOOST]);
         break;
 
     case EFX_VOCODER:
@@ -1579,9 +1579,9 @@ RKR::Actualizar_Audio()
 
         case EFX_SHELFBOOST:
             EFX_Bypass[EFX_SHELFBOOST] = 0;
-            efx_ShelfBoost->cleanup();
+            Rack_Effects[EFX_SHELFBOOST]->cleanup();
             for (i = 0; i < C_SHELF_PARAMETERS; i++)
-                efx_ShelfBoost->changepar(i, lv[EFX_SHELFBOOST][i]);
+                Rack_Effects[EFX_SHELFBOOST]->changepar(i, lv[EFX_SHELFBOOST][i]);
             EFX_Bypass[EFX_SHELFBOOST] = EFX_Bank_Bypass[EFX_SHELFBOOST];
             break;
 
@@ -2390,7 +2390,7 @@ RKR::Preset_to_Bank(int i)
     for (j = 0; j < C_COIL_PARAMETERS; j++)
         lv[EFX_COILCRAFTER][j] = Rack_Effects[EFX_COILCRAFTER]->getpar(j);
     for (j = 0; j < C_SHELF_PARAMETERS; j++)
-        lv[EFX_SHELFBOOST][j] = efx_ShelfBoost->getpar(j);
+        lv[EFX_SHELFBOOST][j] = Rack_Effects[EFX_SHELFBOOST]->getpar(j);
     for (j = 0; j < C_VOCODER_PARAMETERS; j++)
         lv[EFX_VOCODER][j] = Rack_Effects[EFX_VOCODER]->getpar(j);
     for (j = 0; j < C_SUSTAIN_PARAMETERS; j++)

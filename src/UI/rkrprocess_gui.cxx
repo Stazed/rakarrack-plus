@@ -4322,19 +4322,19 @@ void RKRGUI::MIDI_control_gui_refresh()
                 COILCRAFTER->coil_q2->redraw();
                 break;
             case MC_Shelf_Gain:
-                SHELFBOOST->shelf_gain->value(rkr->efx_ShelfBoost->getpar(Shelf_Gain));
+                SHELFBOOST->shelf_gain->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
                 SHELFBOOST->shelf_gain->redraw();
                 break;
             case MC_Shelf_Level:
-                SHELFBOOST->shelf_level->value(rkr->efx_ShelfBoost->getpar(Shelf_Level));
+                SHELFBOOST->shelf_level->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));
                 SHELFBOOST->shelf_level->redraw();
                 break;
             case MC_Shelf_Tone:
-                SHELFBOOST->shelf_freq1->value(rkr->efx_ShelfBoost->getpar(Shelf_Tone));
+                SHELFBOOST->shelf_freq1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
                 SHELFBOOST->shelf_freq1->redraw();
                 break;
             case MC_Shelf_Presence:
-                SHELFBOOST->shelf_q1->value(rkr->efx_ShelfBoost->getpar(Shelf_Presence));
+                SHELFBOOST->shelf_q1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
                 SHELFBOOST->shelf_q1->redraw();
                 break;
             case MC_Vocoder_DryWet:

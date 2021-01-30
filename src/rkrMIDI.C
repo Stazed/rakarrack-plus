@@ -2665,19 +2665,19 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_Shelf_Gain:
-        efx_ShelfBoost->changepar(Shelf_Gain, value);
+        Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Gain, value);
         break;
 
     case MC_Shelf_Level:
-        efx_ShelfBoost->changepar(Shelf_Level, 1 + (int) ((float) value * C_MC_126_RANGE));
+        Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Level, 1 + (int) ((float) value * C_MC_126_RANGE));
         break;
 
     case MC_Shelf_Tone:
-        efx_ShelfBoost->changepar(Shelf_Tone, 220 + (int) ((float) value * C_MC_15780_RANGE));
+        Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Tone, 220 + (int) ((float) value * C_MC_15780_RANGE));
         break;
 
     case MC_Shelf_Presence:
-        efx_ShelfBoost->changepar(Shelf_Presence, ((int) (float) value * C_MC_128_RANGE)  - 64);
+        Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Presence, ((int) (float) value * C_MC_128_RANGE)  - 64);
         break;
 
     case MC_Vocoder_DryWet:

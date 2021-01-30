@@ -21,6 +21,7 @@
 #ifndef SHELFBOOST_H
 #define SHELFBOOST_H
 
+#include "Effect.h"
 #include "AnalogFilter.h"
 
 const int C_SHELF_PARAMETERS = 5;
@@ -34,7 +35,7 @@ enum Shelf_Index
     Shelf_Level
 };
 
-class ShelfBoost
+class ShelfBoost : public Effect
 {
 public:
     ShelfBoost (double sample_rate, uint32_t intermediate_bufsize);
@@ -55,10 +56,6 @@ public:
     void set_freq(int value);
     void set_level(int value);
 
-    int Ppreset;
-
-    float outvolume;
-
 private:
 
     void setvolume (int value);
@@ -76,7 +73,6 @@ private:
     class AnalogFilter *RB1l, *RB1r;
     float* interpbuf; //buffer for filters
 
-    class FPreset *Fpre;
 };
 
 

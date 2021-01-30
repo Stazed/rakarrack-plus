@@ -11,7 +11,7 @@ void ShelfGui::cb_shelf_activar_i(RKR_Light_Button* o, void*) {
 }
 rkr->EFX_Bypass[EFX_SHELFBOOST]=(int)o->value();
 if((int) o->value()==0)
-rkr->efx_ShelfBoost->cleanup();
+rkr->Rack_Effects[EFX_SHELFBOOST]->cleanup();
 rgui->findpos(EFX_SHELFBOOST,(int)o->value(),o);
 }
 void ShelfGui::cb_shelf_activar(RKR_Light_Button* o, void* v) {
@@ -20,12 +20,12 @@ void ShelfGui::cb_shelf_activar(RKR_Light_Button* o, void* v) {
 
 void ShelfGui::cb_shelf_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12034))rkr->efx_ShelfBoost->setpreset((int) o->value());
-shelf_gain->value(rkr->efx_ShelfBoost->getpar(Shelf_Gain));
-shelf_q1->value(rkr->efx_ShelfBoost->getpar(Shelf_Presence));
-shelf_freq1->value(rkr->efx_ShelfBoost->getpar(Shelf_Tone));
-shelf_mode->value(rkr->efx_ShelfBoost->getpar(Shelf_Stereo));
-shelf_level->value(rkr->efx_ShelfBoost->getpar(Shelf_Level));
+if((ud==0)||(ud==12034))rkr->Rack_Effects[EFX_SHELFBOOST]->setpreset((int) o->value());
+shelf_gain->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
+shelf_q1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
+shelf_freq1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
+shelf_mode->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo));
+shelf_level->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));
 }
 void ShelfGui::cb_shelf_preset(RKR_Choice* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_preset_i(o,v);
@@ -45,7 +45,7 @@ void ShelfGui::cb_shelf_gain_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shelf_Gain);
  return;
 }
-rkr->efx_ShelfBoost->changepar(Shelf_Gain,(int)o->value());
+rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Gain,(int)o->value());
 }
 void ShelfGui::cb_shelf_gain(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_gain_i(o,v);
@@ -57,7 +57,7 @@ void ShelfGui::cb_shelf_level_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shelf_Level);
  return;
 }
-rkr->efx_ShelfBoost->changepar(Shelf_Level,(int)o->value());
+rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Level,(int)o->value());
 }
 void ShelfGui::cb_shelf_level(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_level_i(o,v);
@@ -69,7 +69,7 @@ void ShelfGui::cb_shelf_freq1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shelf_Tone);
  return;
 }
-rkr->efx_ShelfBoost->changepar(Shelf_Tone,(int)o->value());
+rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Tone,(int)o->value());
 }
 void ShelfGui::cb_shelf_freq1(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_freq1_i(o,v);
@@ -81,14 +81,14 @@ void ShelfGui::cb_shelf_q1_i(RKR_Slider* o, void*) {
  rgui->getMIDIControl(MC_Shelf_Presence);
  return;
 }
-rkr->efx_ShelfBoost->changepar(Shelf_Presence,(int)o->value());
+rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Presence,(int)o->value());
 }
 void ShelfGui::cb_shelf_q1(RKR_Slider* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_q1_i(o,v);
 }
 
 void ShelfGui::cb_shelf_mode_i(RKR_Check_Button* o, void*) {
-  rkr->efx_ShelfBoost->changepar(Shelf_Stereo,(int)o->value());
+  rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Stereo,(int)o->value());
 }
 void ShelfGui::cb_shelf_mode(RKR_Check_Button* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_mode_i(o,v);

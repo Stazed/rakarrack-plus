@@ -24,8 +24,7 @@
 #include "ShelfBoost.h"
 
 ShelfBoost::ShelfBoost(double sample_rate, uint32_t intermediate_bufsize) :
-    Ppreset(),
-    outvolume(0.5f),
+    Effect(sample_rate, intermediate_bufsize),
     PERIOD(intermediate_bufsize),
     fSAMPLE_RATE(sample_rate),
     Pvolume(50),
@@ -39,8 +38,7 @@ ShelfBoost::ShelfBoost(double sample_rate, uint32_t intermediate_bufsize) :
     u_gain(1.0f),
     RB1l(NULL),
     RB1r(NULL),
-    interpbuf(NULL),
-    Fpre(NULL)
+    interpbuf(NULL)
 {
     initialize();
     cleanup();
