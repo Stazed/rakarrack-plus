@@ -1297,20 +1297,10 @@ RKR::Actualizar_Audio()
         {
 
         case EFX_EQ:
-// Special case
             EFX_Bypass[EFX_EQ] = 0;
             Rack_Effects[EFX_EQ]->cleanup();
             for (i = 0; i < C_EQ_PARAMETERS; i++)
                 Rack_Effects[EFX_EQ]->changepar(i, lv[EFX_EQ][i]);
-#if 0
-            for (i = 0; i < 10; i++)
-            {
-                Rack_Effects[EFX_EQ]->changepar(i * 5 + 12, lv[EFX_EQ][i]);
-                Rack_Effects[EFX_EQ]->changepar(i * 5 + 13, lv[EFX_EQ][11]);
-            }
-            Rack_Effects[EFX_EQ]->changepar(EQ_Gain, lv[EFX_EQ][10]);
-#endif // 0
-            
             EFX_Bypass[EFX_EQ] = EFX_Bank_Bypass[EFX_EQ];
             break;
 
@@ -1379,21 +1369,10 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_PARAMETRIC:
-// Special case
             EFX_Bypass[EFX_PARAMETRIC] = 0;
             Rack_Effects[EFX_PARAMETRIC]->cleanup();
             for (i = 0; i < C_PARAMETRIC_EQ_PARAMETERS; i++)
                 Rack_Effects[EFX_PARAMETRIC]->changepar(i, lv[EFX_PARAMETRIC][i]);
-            
-#if 0
-            for (i = 0; i < 3; i++)
-            {
-                Rack_Effects[EFX_PARAMETRIC]->changepar(i * 5 + 11, lv[EFX_PARAMETRIC][0 + i * 3]);
-                Rack_Effects[EFX_PARAMETRIC]->changepar(i * 5 + 12, lv[EFX_PARAMETRIC][1 + i * 3]);
-                Rack_Effects[EFX_PARAMETRIC]->changepar(i * 5 + 13, lv[EFX_PARAMETRIC][2 + i * 3]);
-            }
-            Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain, lv[EFX_PARAMETRIC][9]);
-#endif 
             EFX_Bypass[EFX_PARAMETRIC] = EFX_Bank_Bypass[EFX_PARAMETRIC];
             break;
 
@@ -1414,15 +1393,10 @@ RKR::Actualizar_Audio()
             break;
 
         case EFX_CABINET:
-// Special case
             EFX_Bypass[EFX_CABINET] = 0;
             Rack_Effects[EFX_CABINET]->cleanup();
             for(i = 0; i < C_CABINET_PARAMETERS; i++)
                 Rack_Effects[EFX_CABINET]->changepar(i, lv[EFX_CABINET][i]);
-#if 0
-            Rack_Effects[EFX_CABINET]->setpreset(lv[EFX_CABINET][0]);
-            Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain, lv[EFX_CABINET][1]);
-#endif
             EFX_Bypass[EFX_CABINET] = EFX_Bank_Bypass[EFX_CABINET];
             break;
 
@@ -2436,40 +2410,16 @@ RKR::Preset_to_Bank(int i)
         lv[EFX_VIBE][j] = Rack_Effects[EFX_VIBE]->getpar(j);
     for (j = 0; j < C_INFINITY_PARAMETERS; j++)
         lv[EFX_INFINITY][j] = Rack_Effects[EFX_INFINITY]->getpar(j);
-
-
-    for (j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
-        lv[EFX_ORDER][j] = efx_order[j];
-
     for (j = 0; j < C_EQ_PARAMETERS; j++)
         lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j);
-    
     for (j = 0; j < C_CABINET_PARAMETERS; j++)
         lv[EFX_CABINET][j] = Rack_Effects[EFX_CABINET]->getpar(j);
-    
     for (j = 0; j < C_PARAMETRIC_EQ_PARAMETERS; j++)
         lv[EFX_PARAMETRIC][j] = Rack_Effects[EFX_PARAMETRIC]->getpar(j);
-    
-#if 0
-    for (j = 0; j < 10; j++)
-        lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j * 5 + 12);
 
-    lv[EFX_EQ][10] = Rack_Effects[EFX_EQ]->getpar(EQ_Gain);
-    lv[EFX_EQ][11] = Rack_Effects[EFX_EQ]->getpar(EQ_Q);
-
-
-    for (j = 0; j < 3; j++)
-    {
-        lv[EFX_PARAMETRIC][0 + j * 3] = Rack_Effects[EFX_PARAMETRIC]->getpar(j * 5 + 11);
-        lv[EFX_PARAMETRIC][1 + j * 3] = Rack_Effects[EFX_PARAMETRIC]->getpar(j * 5 + 12);
-        lv[EFX_PARAMETRIC][2 + j * 3] = Rack_Effects[EFX_PARAMETRIC]->getpar(j * 5 + 13);
-    }
-    lv[EFX_PARAMETRIC][9] = Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain);
-    
-
-    lv[EFX_CABINET][0] = Rack_Effects[EFX_CABINET]->Ppreset;
-    lv[EFX_CABINET][1] = Rack_Effects[EFX_CABINET]->getpar(Cabinet_Gain);
-#endif
+    // Get the main window effect order
+    for (j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
+        lv[EFX_ORDER][j] = efx_order[j];
 
     // Copy the lv[][] parameters to the Bank[].lv[][] structure
     for (j = 0; j < C_MAX_EFFECTS; j++)

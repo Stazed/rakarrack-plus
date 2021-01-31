@@ -25,7 +25,7 @@
 
 #include "EQ.h"
 
-/* Used by LV2 for Gain and Preset setting */
+/* Used for Gain and Preset setting */
 const int C_CABINET_PARAMETERS = 2;
 
 enum Cabinet_Index

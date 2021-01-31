@@ -85,8 +85,6 @@ ParametricEQ::setpreset(int npreset)
 void
 ParametricEQ::changepar(int npar, int value)
 {
-//    printf("Parametric changepar npar = %d: value = %d\n", npar, value);
-    
     switch(npar)
     {
         case Parametric_Low_Freq:
@@ -127,8 +125,6 @@ ParametricEQ::changepar(int npar, int value)
 int
 ParametricEQ::getpar(int npar)
 {
-    //printf("Parametric getpar npar = %d\n", npar);
-    
     switch(npar)
     {
         case Parametric_Low_Freq:
