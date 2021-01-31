@@ -1265,6 +1265,11 @@ RKR::file_error(FILE *fn)
     Actualizar_Audio();
 }
 
+/**
+ * Sets the individual effect parameters for each effect.
+ * Sets the main rack effect order.
+ * Sets which effects are active or inactive.
+ */
 void
 RKR::Actualizar_Audio()
 {

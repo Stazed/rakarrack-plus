@@ -1652,17 +1652,15 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
     {
         Fl_Widget *w = BankWindow->ob->child(num - 1);
 
-        if (strlen(rkr->Bank[num].Preset_Name) > 0)
+        // Check if user really wants to set the preset to the bank
+        Fl_Widget *m = fl_message_icon();
+        m->parent()->copy_label(rkr->jackcliname);
+        int ok = fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
+        if (!ok)
         {
-            Fl_Widget *m = fl_message_icon();
-            m->parent()->copy_label(rkr->jackcliname);
-            int ok = fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
-            if (!ok)
-            {
-                o->value(0);
-                o->redraw();
-                return;
-            }
+            o->value(0);
+            o->redraw();
+            return;
         }
 
         o->value(0);
