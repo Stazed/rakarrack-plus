@@ -563,7 +563,7 @@ MuTroMojo::getpar(int npar)
     case MuTro_Exp_Wah:
         return (Pamode);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

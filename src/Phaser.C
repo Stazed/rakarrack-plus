@@ -367,7 +367,7 @@ Phaser::getpar(int npar)
     case Phaser_Phase:
         return (Pphase);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

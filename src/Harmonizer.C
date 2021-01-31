@@ -495,7 +495,7 @@ Harmonizer::getpar(int npar)
     case Harm_MIDI:
         return (PMIDI);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

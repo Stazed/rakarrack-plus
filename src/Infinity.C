@@ -606,7 +606,7 @@ Infinity::getpar(int npar)
     case Infinity_Stages:
         return (Pstages + 1);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

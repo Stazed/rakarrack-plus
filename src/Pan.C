@@ -242,7 +242,7 @@ Pan::getpar(int npar)
     case Pan_Enable_Extra:
         return (PextraON);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

@@ -447,7 +447,7 @@ Chorus::getpar(int npar)
     case Chorus_Intense:
         return (awesome_mode);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

@@ -480,9 +480,7 @@ Analog_Phaser::getpar(int npar)
     case APhase_Hyper:
         return (Phyper);
         break;
-
-    default:
-        return (0);
-    };
-
-};
+    }
+    
+    return (0);
+}

@@ -532,6 +532,8 @@ Shifter::getpar(int npar)
         break;
     case Shifter_Whammy:
         return (Pwhammy);
+        break;
     }
+
     return (0);
 }

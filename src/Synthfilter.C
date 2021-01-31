@@ -517,8 +517,7 @@ Synthfilter::getpar(int npar)
     case Synthfilter_Offset:
         return (Pbandwidth);
         break;
-
-    default:
-        return (0);
     }
+
+    return (0);
 }

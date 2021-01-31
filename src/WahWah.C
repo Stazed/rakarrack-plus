@@ -417,7 +417,7 @@ WahWah::getpar(int npar)
     case WahWah_Mode:
         return (Pmode);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

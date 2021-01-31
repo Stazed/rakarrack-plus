@@ -338,7 +338,7 @@ Alienwah::getpar(int npar)
     case Alien_Phase:
         return (Pphase);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }

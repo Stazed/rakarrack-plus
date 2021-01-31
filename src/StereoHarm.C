@@ -584,7 +584,7 @@ StereoHarm::getpar(int npar)
     case Sharm_LR_Cross:
         return (Plrcross);
         break;
-    default:
-        return (0);
     }
+
+    return (0);
 }
