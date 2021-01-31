@@ -287,7 +287,7 @@ EQ::change_parameters (int npar, int value)
 
 int
 EQ::get_parameters (int npar)
-{printf("EQ get_parameters npar = %d\n", npar);
+{  //printf("EQ get_parameters npar = %d\n", npar);
     switch (npar)
     {
     case 0:

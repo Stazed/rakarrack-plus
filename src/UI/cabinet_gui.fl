@@ -25,14 +25,14 @@ widget_class CabinetGui {
  return;
 }
 rkr->EFX_Bypass[EFX_CABINET]=(int)o->value();
-rgui->findpos(EFX_CABINET,(int)o->value(),o);} selected
+rgui->findpos(EFX_CABINET,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     class RKR_Light_Button
   }
   Fl_Choice Cabinet_preset {
     label Preset
     user_data 12012
-    callback {rkr->Rack_Effects[EFX_CABINET]->setpreset((int) o->value());} open
+    callback {rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Preset_Idx, (int) o->value());} open selected
     xywh {45 45 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice
   } {

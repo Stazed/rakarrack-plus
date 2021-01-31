@@ -157,13 +157,42 @@ Cabinet::setpreset(int npreset)
 void
 Cabinet::changepar(int npar, int value)
 {
-    //printf("Cabinet changepar npar = %d: value = %d\n", npar, value);
+    switch(npar)
+    {
+        case Cabinet_Gain:          // 1
+        {
+            change_parameters(0, value);
+        }
+        break;
+        
+        case Cabinet_Preset_Idx:    // 0
+        {
+            setpreset(value);
+        }
+        break;
+        
+        default:
+        return;
+    }
 }
 
 int
 Cabinet::getpar(int npar)
 {
-    //printf("Cabinet getpar npar = %d\n", npar);
+    switch(npar)
+    {
+        case Cabinet_Gain:          // 1
+        {
+            return get_parameters(0);
+        }
+        break;
+        
+        case Cabinet_Preset_Idx:    // 0
+        {
+            return Ppreset;
+        }
+    }
+    
     return 0;
 }
 

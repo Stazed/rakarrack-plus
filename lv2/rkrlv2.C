@@ -1778,16 +1778,17 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-    int val = (int)*plug->param_p[Cabinet_Gain] + 64;
+    // The parameters for gain and preset are reversed for LV2
+    int val = (int)*plug->param_p[0] + 64;
     if(plug->cab->getpar(Cabinet_Gain) != val)
     {
         plug->cab->changepar(Cabinet_Gain,val);
     }
 
-    val = (int)*plug->param_p[Cabinet_Preset_Idx];
-    if(plug->cab->Ppreset != val)
+    val = (int)*plug->param_p[1];
+    if(plug->cab->getpar(Cabinet_Preset_Idx) != val)
     {
-        plug->cab->setpreset(val);
+        plug->cab->changepar(Cabinet_Preset_Idx, val);
     }
 
     //now run

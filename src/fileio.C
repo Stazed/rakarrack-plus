@@ -1412,8 +1412,12 @@ RKR::Actualizar_Audio()
 // Special case
             EFX_Bypass[EFX_CABINET] = 0;
             Rack_Effects[EFX_CABINET]->cleanup();
+            for(i = 0; i < C_CABINET_PARAMETERS; i++)
+                Rack_Effects[EFX_CABINET]->changepar(i, lv[EFX_CABINET][i]);
+#if 0
             Rack_Effects[EFX_CABINET]->setpreset(lv[EFX_CABINET][0]);
             Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain, lv[EFX_CABINET][1]);
+#endif
             EFX_Bypass[EFX_CABINET] = EFX_Bank_Bypass[EFX_CABINET];
             break;
 
@@ -2448,12 +2452,14 @@ RKR::Preset_to_Bank(int i)
         lv[EFX_PARAMETRIC][1 + j * 3] = Rack_Effects[EFX_PARAMETRIC]->getpar(j * 5 + 12);
         lv[EFX_PARAMETRIC][2 + j * 3] = Rack_Effects[EFX_PARAMETRIC]->getpar(j * 5 + 13);
     }
-
     lv[EFX_PARAMETRIC][9] = Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain);
-
+    
+    for (j = 0; j < C_CABINET_PARAMETERS; j++)
+        lv[EFX_CABINET][j] = Rack_Effects[EFX_CABINET]->getpar(j);
+#if 0
     lv[EFX_CABINET][0] = Rack_Effects[EFX_CABINET]->Ppreset;
     lv[EFX_CABINET][1] = Rack_Effects[EFX_CABINET]->getpar(Cabinet_Gain);
-
+#endif
     // Copy the lv[][] parameters to the Bank[].lv[][] structure
     for (j = 0; j < C_MAX_EFFECTS; j++)
     {

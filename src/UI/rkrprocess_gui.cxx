@@ -1428,8 +1428,8 @@ void RKRGUI::Put_Loaded()
                 break;
 
             case EFX_CABINET:
-                CABINET->Cabinet_output->value(rkr->lv[EFX_CABINET][1] - 64);
-                CABINET->Cabinet_preset->value(rkr->lv[EFX_CABINET][0]);
+                CABINET->Cabinet_output->value(rkr->lv[EFX_CABINET][Cabinet_Gain] - 64);
+                CABINET->Cabinet_preset->value(rkr->lv[EFX_CABINET][Cabinet_Preset_Idx]);
                 CABINET->Cabinet_activar->value(rkr->EFX_Bypass[EFX_CABINET]);
                 break;
 

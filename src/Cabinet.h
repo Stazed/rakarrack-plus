@@ -28,15 +28,10 @@
 /* Used by LV2 for Gain and Preset setting */
 const int C_CABINET_PARAMETERS = 2;
 
-/**
- * This singular index is here for clarity as it is the only parameter for the 
- * Cabinet class. The effect uses setpreset() to change the individual filters.
- * The Cabinet_Gain is the only parameter used by changepar() and getpar().
- */
 enum Cabinet_Index
 {
-    Cabinet_Gain = 0,
-    Cabinet_Preset_Idx   // LV2 only
+    Cabinet_Preset_Idx = 0,
+    Cabinet_Gain
 };
 
 class Cabinet :public EQ

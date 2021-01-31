@@ -17,7 +17,7 @@ void CabinetGui::cb_Cabinet_activar(RKR_Light_Button* o, void* v) {
 }
 
 void CabinetGui::cb_Cabinet_preset_i(RKR_Choice* o, void*) {
-  rkr->Rack_Effects[EFX_CABINET]->setpreset((int) o->value());
+  rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Preset_Idx, (int) o->value());
 }
 void CabinetGui::cb_Cabinet_preset(RKR_Choice* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_preset_i(o,v);
