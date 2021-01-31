@@ -637,6 +637,8 @@ VaryBand::changepar(int npar, int value)
         PsH = value;
         setSource(&sourceH, &sourceHr, value);
         break;
+    default:
+        return;
     }
 }
 

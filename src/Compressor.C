@@ -396,6 +396,9 @@ Compressor::changepar(int npar, int value)
     case Compress_Peak:
         peak = value;
         break;
+
+    default:
+        return;
     }
 
     kratio = logf(ratio) / LOG_2; //  Log base 2 relationship matches slope

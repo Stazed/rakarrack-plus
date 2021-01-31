@@ -266,6 +266,8 @@ Gate::changepar(int npar, int value)
         Phold = value;
         hold = (float) Phold;
         break;
+    default:
+        return;
     }
 }
 

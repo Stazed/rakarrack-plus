@@ -295,6 +295,8 @@ Alienwah::changepar(int npar, int value)
     case Alien_Phase:
         setphase(value);
         break;
+    default:
+        return;
     }
 }
 

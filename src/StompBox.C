@@ -1007,6 +1007,8 @@ StompBox::changepar(int npar, int value)
         Pmode = value;
         init_mode(Pmode);
         break;
+    default:
+        return;
     }
     init_tone();
 }

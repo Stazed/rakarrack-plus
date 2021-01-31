@@ -159,20 +159,16 @@ Cabinet::changepar(int npar, int value)
 {
     switch(npar)
     {
-        case Cabinet_Gain:          // 1
-        {
-            change_parameters(0, value);
-        }
+    case Cabinet_Gain:          // 1
+        change_parameters(0, value);
         break;
-        
-        case Cabinet_Preset_Idx:    // 0
-        {
-            setpreset(value);
-        }
+
+    case Cabinet_Preset_Idx:    // 0
+        setpreset(value);
         break;
-        
-        default:
-            return;
+
+    default:
+        return;
     }
 }
 
@@ -181,16 +177,13 @@ Cabinet::getpar(int npar)
 {
     switch(npar)
     {
-        case Cabinet_Gain:          // 1
-        {
-            return get_parameters(0);
-        }
+    case Cabinet_Gain:          // 1
+        return get_parameters(0);
         break;
-        
-        case Cabinet_Preset_Idx:    // 0
-        {
-            return Ppreset;
-        }
+
+    case Cabinet_Preset_Idx:    // 0
+        return Ppreset;
+        break;
     }
     
     return 0;

@@ -597,6 +597,9 @@ Vocoder::changepar(int npar, int value)
         Pring = value;
         ringworm = (float) Pring / 127.0f;
         break;
+
+    default:
+        return;
     }
 }
 

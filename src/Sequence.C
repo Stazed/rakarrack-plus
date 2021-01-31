@@ -1226,6 +1226,8 @@ Sequence::changepar(int npar, int value)
         Prange = value;
         setranges(Prange);
         break;
+    default:
+        return;
     }
 }
 

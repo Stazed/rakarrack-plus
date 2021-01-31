@@ -398,6 +398,8 @@ Chorus::changepar(int npar, int value)
         }
         outvolume = (float) Pvolume / 127.0f;
         break;
+    default:
+        return;
     }
 }
 

@@ -434,7 +434,6 @@ Derelict::changepar(int npar, int value)
         rfreq = expf(powf((float) value / 127.0f, 0.5f) * logf(25000.0f)) + 40.0f;
         filterl->setfreq(rfreq);
         filterr->setfreq(rfreq);
-
         break;
     case Dere_Prefilter:
         Pprefiltering = value;
@@ -442,6 +441,8 @@ Derelict::changepar(int npar, int value)
     case Dere_Suboctave:
         setoctave(value);
         break;
+    default:
+        return;
     }
 }
 

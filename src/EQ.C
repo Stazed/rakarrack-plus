@@ -330,35 +330,26 @@ EQ::changepar(int npar, int value)
 {
     switch(npar)
     {
-        case EQ_Gain:
-        {
-            change_parameters(0, value);
-        }
+    case EQ_Gain:
+        change_parameters(0, value);
         break;
-        
-        case EQ_Q:
-        {
-            changepar_Q(EQ_Q + 2, value);
-        }
+    case EQ_Q:
+        changepar_Q(EQ_Q + 2, value);
         break;
-
-        case EQ_31_HZ:
-        case EQ_63_HZ:
-        case EQ_125_HZ:
-        case EQ_250_HZ:
-        case EQ_500_HZ:
-        case EQ_1_KHZ:
-        case EQ_2_KHZ:
-        case EQ_4_KHZ:
-        case EQ_8_KHZ:
-        case EQ_16_KHZ:
-        {
-            change_parameters(npar * 5 + 12, value);
-        }
+    case EQ_31_HZ:
+    case EQ_63_HZ:
+    case EQ_125_HZ:
+    case EQ_250_HZ:
+    case EQ_500_HZ:
+    case EQ_1_KHZ:
+    case EQ_2_KHZ:
+    case EQ_4_KHZ:
+    case EQ_8_KHZ:
+    case EQ_16_KHZ:
+        change_parameters(npar * 5 + 12, value);
         break;
-        
-        default:
-            return;
+    default:
+        return;
     }
 }
 
@@ -367,31 +358,23 @@ EQ::getpar(int npar)
 {
     switch(npar)
     {
-        case EQ_Gain:
-        {
-            return get_parameters(0);
-        }
+    case EQ_Gain:
+        return get_parameters(0);
         break;
-
-        case EQ_Q:
-        {
-            return get_parameters(EQ_Q + 2);
-        }
+    case EQ_Q:
+        return get_parameters(EQ_Q + 2);
         break;
-
-        case EQ_31_HZ:
-        case EQ_63_HZ:
-        case EQ_125_HZ:
-        case EQ_250_HZ:
-        case EQ_500_HZ:
-        case EQ_1_KHZ:
-        case EQ_2_KHZ:
-        case EQ_4_KHZ:
-        case EQ_8_KHZ:
-        case EQ_16_KHZ:
-        {
-            return get_parameters(npar * 5 + 12);
-        }
+    case EQ_31_HZ:
+    case EQ_63_HZ:
+    case EQ_125_HZ:
+    case EQ_250_HZ:
+    case EQ_500_HZ:
+    case EQ_1_KHZ:
+    case EQ_2_KHZ:
+    case EQ_4_KHZ:
+    case EQ_8_KHZ:
+    case EQ_16_KHZ:
+        return get_parameters(npar * 5 + 12);
         break;
     }
     

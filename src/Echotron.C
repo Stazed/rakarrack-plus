@@ -828,6 +828,8 @@ Echotron::changepar(int npar, int value)
     case Echotron_Filters:
         Pfilters = value; //Pfilters
         break;
+    default:
+        return;
     }
 }
 

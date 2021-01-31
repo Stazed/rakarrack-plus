@@ -310,6 +310,8 @@ CoilCrafter::changepar(int npar, int value)
     case Coil_NeckMode:
         Pmode = value;
         break;
+    default:
+        return;
     }
 }
 

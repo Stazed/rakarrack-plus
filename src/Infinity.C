@@ -556,6 +556,8 @@ Infinity::changepar(int npar, int value)
         //        }
         phaserfb = 0.5f + (((float) (Pstages)) / 11.01f)*0.5f;
         break;
+    default:
+        return;
     }
 }
 

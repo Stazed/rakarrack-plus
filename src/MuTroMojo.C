@@ -490,6 +490,8 @@ MuTroMojo::changepar(int npar, int value)
             }
         }
         break;
+    default:
+        return;
     }
 }
 

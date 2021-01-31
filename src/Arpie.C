@@ -467,6 +467,8 @@ Arpie::changepar(int npar, int value)
         subdiv = Psubdiv + 1;
         setdelay(Pdelay);
         break;
+    default:
+        return;
     }
 }
 

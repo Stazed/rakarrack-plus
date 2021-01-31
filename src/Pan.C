@@ -205,6 +205,8 @@ Pan::changepar(int npar, int value)
     case Pan_Enable_Extra:
         PextraON = value;
         break;
+    default:
+        return;
     }
 }
 

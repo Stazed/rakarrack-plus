@@ -655,6 +655,8 @@ Vibe::changepar(int npar, int value)
     case Vibe_Stereo: //Stereo
         Pstereo = value;
         break;
+    default:
+        return;
     }
 }
 

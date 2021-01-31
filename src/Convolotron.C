@@ -594,6 +594,8 @@ Convolotron::changepar(int npar, int value)
             fb = (float) .1f * value / 500.0f * .15f;
         }
         break;
+    default:
+        return;
     }
 }
 

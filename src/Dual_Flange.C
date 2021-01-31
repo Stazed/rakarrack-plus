@@ -594,6 +594,8 @@ Dflange::changepar(int npar, int value)
     case DFlange_Intense:
         Pintense = value;
         break;
+    default:
+        return;
     }
 }
 

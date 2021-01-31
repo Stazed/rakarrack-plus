@@ -373,6 +373,9 @@ WahWah::changepar(int npar, int value)
         filterpars->changed = true;
         break;
     }   // case 10:
+
+    default:
+        return;
     }   // switch (npar)
 }
 

@@ -468,6 +468,8 @@ DistBand::changepar(int npar, int value)
     case DistBand_Stereo:
         Pstereo = value;
         break;
+    default:
+        return;
     }
 }
 

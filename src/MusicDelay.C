@@ -423,6 +423,8 @@ MusicDelay::changepar(int npar, int value)
     case Music_Gain_2:
         setgain(2, value);
         break;
+    default:
+        return;
     }
 }
 

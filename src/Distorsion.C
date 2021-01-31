@@ -436,6 +436,8 @@ Distorsion::changepar(int npar, int value)
     case Dist_Suboctave:
         setoctave(value);
         break;
+    default:
+        return;
     }
 }
 

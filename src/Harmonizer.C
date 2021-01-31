@@ -452,6 +452,8 @@ Harmonizer::changepar(int npar, int value)
         if (!value)
             setinterval(Pinterval);
         break;
+    default:
+        return;
     }
 }
 

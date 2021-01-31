@@ -518,6 +518,8 @@ Valve::changepar(int npar, int value)
         Presence = value;
         setpresence(value);
         break;
+    default:
+        return;
     }
     init_coefs();
 }

@@ -338,6 +338,8 @@ Ring::changepar(int npar, int value)
     case Ring_Auto_Freq:
         Pafreq = value;
         break;
+    default:
+        return;
     }
 }
 

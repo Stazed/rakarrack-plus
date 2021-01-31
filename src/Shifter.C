@@ -493,6 +493,8 @@ Shifter::changepar(int npar, int value)
         Pwhammy = value;
         whammy = (float) value / 127.0f;
         break;
+    default:
+        return;
     }
 }
 

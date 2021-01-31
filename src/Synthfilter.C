@@ -450,6 +450,8 @@ Synthfilter::changepar(int npar, int value)
         Chp = C * (1.0f + ((float) value) / 64.0f); // C*3
         Clp = C * (1.0f - ((float) value) / 190.0f); // C/3
         break;
+    default:
+        return;
     }
 
     if (Phpstages && Plpstages)

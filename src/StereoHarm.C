@@ -538,6 +538,8 @@ StereoHarm::changepar(int npar, int value)
     case Sharm_LR_Cross:
         setlrcross(value);
         break;
+    default:
+        return;
     }
 }
 

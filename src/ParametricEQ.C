@@ -87,38 +87,30 @@ ParametricEQ::changepar(int npar, int value)
 {
     switch(npar)
     {
-        case Parametric_Low_Freq:
-        case Parametric_Low_Gain:
-        case Parametric_Low_Q:
-        {
-            change_parameters(npar + 11, value);
-        }
+    case Parametric_Low_Freq:
+    case Parametric_Low_Gain:
+    case Parametric_Low_Q:
+        change_parameters(npar + 11, value);
         break;
-        
-        case Parametric_Mid_Freq:
-        case Parametric_Mid_Gain:
-        case Parametric_Mid_Q:
-        {
-            change_parameters(npar + 13, value);
-        }
+
+    case Parametric_Mid_Freq:
+    case Parametric_Mid_Gain:
+    case Parametric_Mid_Q:
+        change_parameters(npar + 13, value);
         break;
-        
-        case Parametric_High_Freq:
-        case Parametric_High_Gain:
-        case Parametric_High_Q:
-        {
-            change_parameters(npar + 15, value);
-        }
+
+    case Parametric_High_Freq:
+    case Parametric_High_Gain:
+    case Parametric_High_Q:
+        change_parameters(npar + 15, value);
         break;
-        
-        case Parametric_Gain:
-        {
-            change_parameters(0, value);
-        }
+
+    case Parametric_Gain:
+        change_parameters(0, value);
         break;
-        
-        default:
-            return;
+
+    default:
+        return;
     }
 }
 
@@ -127,34 +119,26 @@ ParametricEQ::getpar(int npar)
 {
     switch(npar)
     {
-        case Parametric_Low_Freq:
-        case Parametric_Low_Gain:
-        case Parametric_Low_Q:
-        {
-            return get_parameters(npar + 11);
-        }
+    case Parametric_Low_Freq:
+    case Parametric_Low_Gain:
+    case Parametric_Low_Q:
+        return get_parameters(npar + 11);
         break;
-        
-        case Parametric_Mid_Freq:
-        case Parametric_Mid_Gain:
-        case Parametric_Mid_Q:
-        {
-            return get_parameters(npar + 13);
-        }
+
+    case Parametric_Mid_Freq:
+    case Parametric_Mid_Gain:
+    case Parametric_Mid_Q:
+        return get_parameters(npar + 13);
         break;
-        
-        case Parametric_High_Freq:
-        case Parametric_High_Gain:
-        case Parametric_High_Q:
-        {
-           return get_parameters(npar + 15);
-        }
+
+    case Parametric_High_Freq:
+    case Parametric_High_Gain:
+    case Parametric_High_Q:
+        return get_parameters(npar + 15);
         break;
-        
-        case Parametric_Gain:
-        {
-            return get_parameters(0);
-        }
+
+    case Parametric_Gain:
+        return get_parameters(0);
         break;
     }
     

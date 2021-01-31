@@ -341,6 +341,8 @@ Echoverse::changepar(int npar, int value)
         Pes = value;
         pes = 8.0f * (float) Pes / 127.0f;
         break;
+    default:
+        return;
     }
 }
 

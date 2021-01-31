@@ -249,7 +249,6 @@ Opticaltrem::changepar(int npar, int value)
 {
     switch (npar)
     {
-
     case Optical_Depth:
         Pdepth = value;
         fdepth = 0.5f + ((float) Pdepth) / 254.0f;
@@ -292,6 +291,8 @@ Opticaltrem::changepar(int npar, int value)
         Rb = 300.0f;            //  Cds cell full illumination
         b = exp(Ra / logf(Rb)) - CNST_E;
         break;
+    default:
+        return;
     }
 }
 

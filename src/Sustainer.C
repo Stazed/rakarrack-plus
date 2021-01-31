@@ -184,6 +184,8 @@ Sustainer::changepar(int npar, int value)
         input = dB2rap(42.0f * fsustain - 6.0f);
         cthresh = 0.25 + fsustain;
         break;
+    default:
+        return;
     }
 }
 

@@ -194,6 +194,8 @@ Exciter::changepar(int npar, int value)
     case Exciter_HPF:
         sethpf(value);
         break;
+    default:
+        return;
     }
 }
 

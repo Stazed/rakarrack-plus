@@ -324,6 +324,8 @@ Shuffle::changepar(int npar, int value)
     case Shuffle_F_Band:
         E = value;
         break;
+    default:
+        return;
     }
 }
 

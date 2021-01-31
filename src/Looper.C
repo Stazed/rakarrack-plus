@@ -647,8 +647,9 @@ Looper::changepar(int npar, int value)
         if (Pms == 0) setbar(Pbar);
         if (Pms == 1) ticker.set_meter(1);
         if (Pms == 2) ticker.set_meter(0);
-
         break;
+    default:
+        return;
     }
 }
 

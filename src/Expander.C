@@ -240,6 +240,8 @@ Expander::changepar(int npar, int value)
         Plevel = value;
         level = dB2rap((float) value / 6.0f);
         break;
+    default:
+        return;
     }
 }
 

@@ -321,6 +321,8 @@ Phaser::changepar(int npar, int value)
     case Phaser_Phase:
         setphase(value);
         break;
+    default:
+        return;
     }
 }
 

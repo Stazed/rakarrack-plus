@@ -431,8 +431,10 @@ Analog_Phaser::changepar(int npar, int value)
             value = 1;
         Phyper = value;
         break;
-    };
-};
+    default:
+        return;
+    }
+}
 
 int
 Analog_Phaser::getpar(int npar)

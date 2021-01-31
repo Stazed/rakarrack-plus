@@ -339,6 +339,8 @@ Echo::changepar(int npar, int value)
     case Echo_Direct:
         setdirect(value);
         break;
+    default:
+        return;
     }
 }
 

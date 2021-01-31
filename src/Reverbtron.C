@@ -923,6 +923,8 @@ Reverbtron::changepar(int npar, int value)
         diffusion = ((float) value) / 127.0f;
         convert_time();
         break;
+    default:
+        return;
     }
 }
 

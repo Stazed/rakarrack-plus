@@ -219,6 +219,8 @@ ShelfBoost::changepar(int npar, int value)
     case Shelf_Level:
         set_level(value);
         break;
+    default:
+        return;
     }
 }
 

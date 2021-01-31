@@ -600,6 +600,8 @@ Reverb::changepar(int npar, int value)
     case Reverb_Room:
         setroomsize(value);
         break;
+    default:
+        return;
     }
 }
 

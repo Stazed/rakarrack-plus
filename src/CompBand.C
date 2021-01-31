@@ -441,6 +441,8 @@ CompBand::changepar(int npar, int value)
     case CompBand_Gain:
         setlevel(value);
         break;
+    default:
+        return;
     }
 }
 
