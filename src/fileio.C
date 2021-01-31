@@ -2319,110 +2319,19 @@ RKR::Preset_to_Bank(int i)
     Bank[i].Master_Volume = Master_Volume;
     Bank[i].Balance = Fraction_Bypass;
 
-    // Load all effect parameters into the lv[][] array for current preset (main window)
-    int j = 0;
-
-    for (j = 0; j < C_REVERB_PARAMETERS; j++)
-        lv[EFX_REVERB][j] = Rack_Effects[EFX_REVERB]->getpar(j);
-    for (j = 0; j < C_ECHO_PARAMETERS; j++)
-        lv[EFX_ECHO][j] = Rack_Effects[EFX_ECHO]->getpar(j);
-    for (j = 0; j < C_CHORUS_PARAMETERS; j++)
-        lv[EFX_CHORUS][j] = Rack_Effects[EFX_CHORUS]->getpar(j);
-    for (j = 0; j < C_FLANGER_PARAMETERS; j++)
-        lv[EFX_FLANGER][j] = Rack_Effects[EFX_FLANGER]->getpar(j);
-    for (j = 0; j < C_PHASER_PARAMETERS; j++)
-        lv[EFX_PHASER][j] = Rack_Effects[EFX_PHASER]->getpar(j);
-    for (j = 0; j < C_OVERDRIVE_PARAMETERS; j++)
-        lv[EFX_OVERDRIVE][j] = Rack_Effects[EFX_OVERDRIVE]->getpar(j);
-    for (j = 0; j < C_DIST_PARAMETERS; j++)
-        lv[EFX_DISTORTION][j] = Rack_Effects[EFX_DISTORTION]->getpar(j);
-    for (j = 0; j < C_COMPRESS_PARAMETERS; j++)
-        lv[EFX_COMPRESSOR][j] = Rack_Effects[EFX_COMPRESSOR]->getpar(j);
-    for (j = 0; j < C_WAHWAH_PARAMETERS; j++)
-        lv[EFX_WAHWAH][j] = Rack_Effects[EFX_WAHWAH]->getpar(j);
-    for (j = 0; j < C_ALIENWAH_PARAMETERS; j++)
-        lv[EFX_ALIENWAH][j] = Rack_Effects[EFX_ALIENWAH]->getpar(j);
-    for (j = 0; j < C_PAN_PARAMETERS; j++)
-        lv[EFX_PAN][j] = Rack_Effects[EFX_PAN]->getpar(j);
-    for (j = 0; j < C_HARM_PARAMETERS; j++)
-        lv[EFX_HARMONIZER][j] = Rack_Effects[EFX_HARMONIZER]->getpar(j);
-    for (j = 0; j < C_MUSIC_PARAMETERS; j++)
-        lv[EFX_MUSICAL_DELAY][j] = Rack_Effects[EFX_MUSICAL_DELAY]->getpar(j);
-    for (j = 0; j < C_GATE_PARAMETERS; j++)
-        lv[EFX_NOISEGATE][j] = Rack_Effects[EFX_NOISEGATE]->getpar(j);
-    for (j = 0; j < C_DERE_PARAMETERS; j++)
-        lv[EFX_DERELICT][j] = Rack_Effects[EFX_DERELICT]->getpar(j);
-    for (j = 0; j < C_APHASER_PARAMETERS; j++)
-        lv[EFX_ANALOG_PHASER][j] = Rack_Effects[EFX_ANALOG_PHASER]->getpar(j);
-    for (j = 0; j < C_VALVE_PARAMETERS; j++)
-        lv[EFX_VALVE][j] = Rack_Effects[EFX_VALVE]->getpar(j);
-    for (j = 0; j < C_DFLANGE_PARAMETERS; j++)
-        lv[EFX_DUAL_FLANGE][j] = Rack_Effects[EFX_DUAL_FLANGE]->getpar(j);
-    for (j = 0; j < C_RING_PARAMETERS; j++)
-        lv[EFX_RING][j] = Rack_Effects[EFX_RING]->getpar(j);
-    for (j = 0; j < C_EXCITER_PARAMETERS; j++)
-        lv[EFX_EXCITER][j] = Rack_Effects[EFX_EXCITER]->getpar(j);
-    for (j = 0; j < C_DBAND_PARAMETERS; j++)
-        lv[EFX_DISTBAND][j] = Rack_Effects[EFX_DISTBAND]->getpar(j);
-    for (j = 0; j < C_ARPIE_PARAMETERS; j++)
-        lv[EFX_ARPIE][j] = Rack_Effects[EFX_ARPIE]->getpar(j);
-    for (j = 0; j < C_EXPANDER_PARAMETERS; j++)
-        lv[EFX_EXPANDER][j] = Rack_Effects[EFX_EXPANDER]->getpar(j);
-    for (j = 0; j < C_SHUFFLE_PARAMETERS; j++)
-        lv[EFX_SHUFFLE][j] = Rack_Effects[EFX_SHUFFLE]->getpar(j);
-    for (j = 0; j < C_SYNTHFILTER_PARAMETERS; j++)
-        lv[EFX_SYNTHFILTER][j] = Rack_Effects[EFX_SYNTHFILTER]->getpar(j);
-    for (j = 0; j < C_VARYBAND_PARAMETERS; j++)
-        lv[EFX_VARYBAND][j] = Rack_Effects[EFX_VARYBAND]->getpar(j);
-    for (j = 0; j < C_CONVO_PARAMETERS; j++)
-        lv[EFX_CONVOLOTRON][j] = Rack_Effects[EFX_CONVOLOTRON]->getpar(j);
-    for (j = 0; j < C_LOOPER_PARAMETERS; j++)
-        lv[EFX_LOOPER][j] = Rack_Effects[EFX_LOOPER]->getpar(j);
-    for (j = 0; j < C_MUTRO_PARAMETERS; j++)
-        lv[EFX_MUTROMOJO][j] = Rack_Effects[EFX_MUTROMOJO]->getpar(j);
-    for (j = 0; j < C_ECHOVERSE_PARAMETERS; j++)
-        lv[EFX_ECHOVERSE][j] = Rack_Effects[EFX_ECHOVERSE]->getpar(j);
-    for (j = 0; j < C_COIL_PARAMETERS; j++)
-        lv[EFX_COILCRAFTER][j] = Rack_Effects[EFX_COILCRAFTER]->getpar(j);
-    for (j = 0; j < C_SHELF_PARAMETERS; j++)
-        lv[EFX_SHELFBOOST][j] = Rack_Effects[EFX_SHELFBOOST]->getpar(j);
-    for (j = 0; j < C_VOCODER_PARAMETERS; j++)
-        lv[EFX_VOCODER][j] = Rack_Effects[EFX_VOCODER]->getpar(j);
-    for (j = 0; j < C_SUSTAIN_PARAMETERS; j++)
-        lv[EFX_SUSTAINER][j] = Rack_Effects[EFX_SUSTAINER]->getpar(j);
-    for (j = 0; j < C_SEQUENCE_PARAMETERS; j++)
-        lv[EFX_SEQUENCE][j] = Rack_Effects[EFX_SEQUENCE]->getpar(j);
-    for (j = 0; j < C_SHIFTER_PARAMETERS; j++)
-        lv[EFX_SHIFTER][j] = Rack_Effects[EFX_SHIFTER]->getpar(j);
-    for (j = 0; j < C_STOMP_PARAMETERS; j++)
-        lv[EFX_STOMPBOX][j] = Rack_Effects[EFX_STOMPBOX]->getpar(j);
-    for (j = 0; j < C_REVTRON_PARAMETERS; j++)
-        lv[EFX_REVERBTRON][j] = Rack_Effects[EFX_REVERBTRON]->getpar(j);
-    for (j = 0; j < C_ECHOTRON_PARAMETERS; j++)
-        lv[EFX_ECHOTRON][j] = Rack_Effects[EFX_ECHOTRON]->getpar(j);
-    for (j = 0; j < C_SHARM_PARAMETERS; j++)
-        lv[EFX_STEREOHARM][j] = Rack_Effects[EFX_STEREOHARM]->getpar(j);
-    for (j = 0; j < C_COMPBAND_PARAMETERS; j++)
-        lv[EFX_COMPBAND][j] = Rack_Effects[EFX_COMPBAND]->getpar(j);
-    for (j = 0; j < C_OPTICAL_PARAMETERS; j++)
-        lv[EFX_OPTICALTREM][j] = Rack_Effects[EFX_OPTICALTREM]->getpar(j);
-    for (j = 0; j < C_VIBE_PARAMETERS; j++)
-        lv[EFX_VIBE][j] = Rack_Effects[EFX_VIBE]->getpar(j);
-    for (j = 0; j < C_INFINITY_PARAMETERS; j++)
-        lv[EFX_INFINITY][j] = Rack_Effects[EFX_INFINITY]->getpar(j);
-    for (j = 0; j < C_EQ_PARAMETERS; j++)
-        lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j);
-    for (j = 0; j < C_CABINET_PARAMETERS; j++)
-        lv[EFX_CABINET][j] = Rack_Effects[EFX_CABINET]->getpar(j);
-    for (j = 0; j < C_PARAMETRIC_EQ_PARAMETERS; j++)
-        lv[EFX_PARAMETRIC][j] = Rack_Effects[EFX_PARAMETRIC]->getpar(j);
-
+    // Load all effect parameters into the lv[][] array from current preset (main window)
+    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+    {
+        for (int j = 0; j < C_NUMBER_PARAMETERS; j++)
+            lv[k][j] = Rack_Effects[k]->getpar(j);
+    }
+    
     // Get the main window effect order
-    for (j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
+    for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
         lv[EFX_ORDER][j] = efx_order[j];
 
     // Copy the lv[][] parameters to the Bank[].lv[][] structure
-    for (j = 0; j < C_MAX_EFFECTS; j++)
+    for (int j = 0; j < C_MAX_EFFECTS; j++)
     {
         for (int k = 0; k < C_NUMBER_PARAMETERS; k++)    // bypass is not copied here
         {
@@ -2431,7 +2340,7 @@ RKR::Preset_to_Bank(int i)
     }
 
     // Copy the current bypass state to the Bank
-    for(j = 0; j < C_NUMBER_EFFECTS; j++)
+    for(int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
         Bank[i].lv[j][C_BYPASS] = EFX_Bypass[j];
     }
