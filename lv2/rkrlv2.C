@@ -1651,11 +1651,11 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
 
     //check and set changed parameters
     int val = 0;
-    int param_case_offset = 0;
-    int param_adjust_offset = 0;
+    int param_case_offset = Parametric_Gain;
+//    int param_adjust_offset = 0;
     for(int i = 0; i < plug->nparams; i++)
     {
-        param_case_offset = (i + param_adjust_offset);
+//        param_case_offset = (i + param_adjust_offset);
         
         switch(param_case_offset)
         {
@@ -1667,7 +1667,8 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
                     plug->peq->changepar(Parametric_Gain,val);
                 }
                 
-                param_adjust_offset = 10;   // set for Low band
+                param_case_offset = -1;
+//                param_adjust_offset = 10;   // set for Low band
             }
             break;
 
@@ -1685,6 +1686,10 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
                 
             case Parametric_Low_Gain:
             case Parametric_Low_Q:
+            case Parametric_Mid_Gain:
+            case Parametric_Mid_Q:
+            case Parametric_High_Gain:
+            case Parametric_High_Q:
             {
                 val = (int)*plug->param_p[i] + 64;  // offset
                 if(plug->peq->getpar(param_case_offset) != val)
@@ -1692,11 +1697,11 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
                     plug->peq->changepar(param_case_offset,val);
                 }
                 
-                if(param_case_offset == Parametric_Low_Q)
-                    param_adjust_offset = 12;   // set for Mid band
+//                if(param_case_offset == Parametric_Low_Q)
+//                    param_adjust_offset = 12;   // set for Mid band
             }
             break;
-
+#if 0
             case Parametric_Mid_Gain:
             case Parametric_Mid_Q:
             {
@@ -1721,7 +1726,10 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
                 }
             }
             break;
+#endif // 0
         }
+        
+        param_case_offset++;
     }
 
     //now run

@@ -85,12 +85,82 @@ ParametricEQ::setpreset(int npreset)
 void
 ParametricEQ::changepar(int npar, int value)
 {
-   // printf("Parametric changepar npar = %d: value = %d\n", npar, value);
+//    printf("Parametric changepar npar = %d: value = %d\n", npar, value);
+    
+    switch(npar)
+    {
+        case Parametric_Low_Freq:
+        case Parametric_Low_Gain:
+        case Parametric_Low_Q:
+        {
+            change_parameters(npar + 11, value);
+        }
+        break;
+        
+        case Parametric_Mid_Freq:
+        case Parametric_Mid_Gain:
+        case Parametric_Mid_Q:
+        {
+            change_parameters(npar + 13, value);
+        }
+        break;
+        
+        case Parametric_High_Freq:
+        case Parametric_High_Gain:
+        case Parametric_High_Q:
+        {
+            change_parameters(npar + 15, value);
+        }
+        break;
+        
+        case Parametric_Gain:
+        {
+            change_parameters(0, value);
+        }
+        break;
+        
+        default:
+            return;
+    }
 }
 
 int
 ParametricEQ::getpar(int npar)
 {
-   // printf("Parametric getpar npar = %d\n", npar);
+    //printf("Parametric getpar npar = %d\n", npar);
+    
+    switch(npar)
+    {
+        case Parametric_Low_Freq:
+        case Parametric_Low_Gain:
+        case Parametric_Low_Q:
+        {
+            return get_parameters(npar + 11);
+        }
+        break;
+        
+        case Parametric_Mid_Freq:
+        case Parametric_Mid_Gain:
+        case Parametric_Mid_Q:
+        {
+            return get_parameters(npar + 13);
+        }
+        break;
+        
+        case Parametric_High_Freq:
+        case Parametric_High_Gain:
+        case Parametric_High_Q:
+        {
+           return get_parameters(npar + 15);
+        }
+        break;
+        
+        case Parametric_Gain:
+        {
+            return get_parameters(0);
+        }
+        break;
+    }
+    
     return 0;
 }

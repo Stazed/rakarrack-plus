@@ -29,6 +29,21 @@ const int C_PARAMETRIC_EQ_PARAMETERS = 10;
 
 enum ParametricEQ_Index
 {
+    Parametric_Low_Freq = 0,
+    Parametric_Low_Gain,
+    Parametric_Low_Q,
+    Parametric_Mid_Freq,
+    Parametric_Mid_Gain,
+    Parametric_Mid_Q,
+    Parametric_High_Freq,
+    Parametric_High_Gain,
+    Parametric_High_Q,
+    Parametric_Gain         // 9
+};
+
+#if 0
+enum ParametricEQ_Index
+{
     Parametric_Gain = 0,
     Parametric_Low_Freq = 11,
     Parametric_Low_Gain,
@@ -40,6 +55,7 @@ enum ParametricEQ_Index
     Parametric_High_Gain,
     Parametric_High_Q
 };
+#endif // 0
 
 class ParametricEQ :public EQ
 {

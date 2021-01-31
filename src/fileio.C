@@ -1382,6 +1382,10 @@ RKR::Actualizar_Audio()
 // Special case
             EFX_Bypass[EFX_PARAMETRIC] = 0;
             Rack_Effects[EFX_PARAMETRIC]->cleanup();
+            for (i = 0; i < C_PARAMETRIC_EQ_PARAMETERS; i++)
+                Rack_Effects[EFX_PARAMETRIC]->changepar(i, lv[EFX_PARAMETRIC][i]);
+            
+#if 0
             for (i = 0; i < 3; i++)
             {
                 Rack_Effects[EFX_PARAMETRIC]->changepar(i * 5 + 11, lv[EFX_PARAMETRIC][0 + i * 3]);
@@ -1389,6 +1393,7 @@ RKR::Actualizar_Audio()
                 Rack_Effects[EFX_PARAMETRIC]->changepar(i * 5 + 13, lv[EFX_PARAMETRIC][2 + i * 3]);
             }
             Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain, lv[EFX_PARAMETRIC][9]);
+#endif 
             EFX_Bypass[EFX_PARAMETRIC] = EFX_Bank_Bypass[EFX_PARAMETRIC];
             break;
 
@@ -2438,13 +2443,20 @@ RKR::Preset_to_Bank(int i)
 
     for (j = 0; j < C_EQ_PARAMETERS; j++)
         lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j);
+    
+    for (j = 0; j < C_CABINET_PARAMETERS; j++)
+        lv[EFX_CABINET][j] = Rack_Effects[EFX_CABINET]->getpar(j);
+    
+    for (j = 0; j < C_PARAMETRIC_EQ_PARAMETERS; j++)
+        lv[EFX_PARAMETRIC][j] = Rack_Effects[EFX_PARAMETRIC]->getpar(j);
+    
 #if 0
     for (j = 0; j < 10; j++)
         lv[EFX_EQ][j] = Rack_Effects[EFX_EQ]->getpar(j * 5 + 12);
 
     lv[EFX_EQ][10] = Rack_Effects[EFX_EQ]->getpar(EQ_Gain);
     lv[EFX_EQ][11] = Rack_Effects[EFX_EQ]->getpar(EQ_Q);
-#endif // 0
+
 
     for (j = 0; j < 3; j++)
     {
@@ -2454,12 +2466,11 @@ RKR::Preset_to_Bank(int i)
     }
     lv[EFX_PARAMETRIC][9] = Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain);
     
-    for (j = 0; j < C_CABINET_PARAMETERS; j++)
-        lv[EFX_CABINET][j] = Rack_Effects[EFX_CABINET]->getpar(j);
-#if 0
+
     lv[EFX_CABINET][0] = Rack_Effects[EFX_CABINET]->Ppreset;
     lv[EFX_CABINET][1] = Rack_Effects[EFX_CABINET]->getpar(Cabinet_Gain);
 #endif
+
     // Copy the lv[][] parameters to the Bank[].lv[][] structure
     for (j = 0; j < C_MAX_EFFECTS; j++)
     {
