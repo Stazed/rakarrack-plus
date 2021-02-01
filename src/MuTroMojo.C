@@ -297,19 +297,19 @@ MuTroMojo::setpreset(int npreset)
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Wah Pedal
-        {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1, 0},
+        {16, 10, 60, 0, 0, 64, 0, 0, 10, 7, -16, 40, -3, 1, 2000, 450, 1, 1},
         //Mutron
-        {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 1, 1},
+        {0, 15, 138, 0, 0, 64, 0, 50, 0, 30, 32, 0, 5, 1, 2000, 60, 0, 1},
         //Phase Wah
-        {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 1, 2},
+        {0, 50, 60, 0, 0, 64, 30, 10, 10, 30, 32, 0, 10, 2, 2000, 350, 1, 1},
         //Succulent Phaser
-        {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 1, 3},
+        {64, 8, 35, 10, 0, 64, 50, -10, 53, 35, 28, -16, 32, 4, 2600, 300, 1, 1},
         //Quacky
-        {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 1, 4},
+        {16, 10, 60, 0, 0, 64, 0, 40, 10, 32, -16, 40, -3, 1, 2000, 400, 1, 1},
         //Smoothtron
-        {0, 15, 138, 0, 0, 64, 0, 15, 0, 20, 32, 0, 5, 1, 2000, 60, 0, 3, 5},
+        {0, 15, 138, 0, 0, 64, 0, 15, 0, 20, 32, 0, 5, 1, 2000, 60, 0, 3},
         //Wah Fever
-        {0, 10, 128, 0, 0, 62, 50, -30, 2, 0, 0, 10, -30, 1, 2000, 300, 1, 0, 6}
+        {0, 10, 128, 0, 0, 62, 50, -30, 2, 0, 0, 10, -30, 1, 2000, 300, 1, 0}
 
     };
 
@@ -467,9 +467,8 @@ MuTroMojo::changepar(int npar, int value)
             }
         }
         break;
-    case Mutro_Preset: // used by rakarrack to update gui display upon new button 
-        Ppreset = value;
-        break;
+
+#ifdef LV2_SUPPORT
     case MuTro_AG_Mode: // LV2 - Analog Gain Mode (M box in rakarrack) 
         Pqm = value;
         filterl->setmode(Pqm);
@@ -490,6 +489,7 @@ MuTroMojo::changepar(int npar, int value)
             }
         }
         break;
+#endif // LV2_SUPPORT
     default:
         return;
     }
@@ -554,15 +554,14 @@ MuTroMojo::getpar(int npar)
     case Mutro_Mode_Legacy:
         return (Pmode);
         break;
-    case Mutro_Preset:
-        return (Ppreset);
-        break;
+#ifdef LV2_SUPPORT
     case MuTro_AG_Mode:
         return (Pqm);
         break;
     case MuTro_Exp_Wah:
         return (Pamode);
         break;
+#endif // LV2_SUPPORT
     }
 
     return (0);

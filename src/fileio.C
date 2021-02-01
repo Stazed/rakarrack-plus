@@ -906,7 +906,7 @@ void RKR::getbuf(char *buf, int j)
         break;
 
     case EFX_MUTROMOJO:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                 Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_DryWet), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Resonance),
                 Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Random),
                 Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Type), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Stereo),
@@ -916,7 +916,7 @@ void RKR::getbuf(char *buf, int j)
                 Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_HighPass), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Stages),
                 Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq),
                 Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Mod_Res), Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Mode_Legacy),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Preset), EFX_Bypass[EFX_MUTROMOJO]);
+                EFX_Bypass[EFX_MUTROMOJO]);
 
         break;
 

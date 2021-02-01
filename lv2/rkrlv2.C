@@ -3102,7 +3102,8 @@ LV2_Handle init_mutrolv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
-    plug->nparams = C_MUTRO_PARAMETERS;
+    // -1 for Mutro_Mode_Legacy, +2 for MuTro_AG_Mode, MuTro_Exp_Wah
+    plug->nparams = (C_MUTRO_PARAMETERS + 1);
     plug->effectindex = IMUTRO;
     plug->prev_bypass = 1;
 
@@ -3206,7 +3207,7 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
                 {
                     plug->mutro->changepar(MuTro_Mod_Res,val);
                 }
-                param_case_offset += 2; // Skip: Mutro_Mode_Legacy, Mutro_Preset
+                param_case_offset += 1; // Skip: Mutro_Mode_Legacy
             }
             break;
         }

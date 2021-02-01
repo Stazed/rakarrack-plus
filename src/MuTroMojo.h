@@ -32,8 +32,11 @@
 #include "RBFilter.h"
 #include "AnalogFilter.h"
 
-// The listed are 21 - less the 2 for LV2 vs Rakarrack only
-const int C_MUTRO_PARAMETERS = 19;
+/**
+ * This is the amount for File saving and presets Rakarrack-plus.
+ * The listed are 20 - less the 2 for LV2.
+ */
+const int C_MUTRO_PARAMETERS = 18;
 
 enum MuTro_Index
 {
@@ -54,10 +57,11 @@ enum MuTro_Index
     MuTro_Range,
     MuTro_St_Freq,
     MuTro_Mod_Res,
-    Mutro_Mode_Legacy,  // Rakarrack only
-    Mutro_Preset,       // Rakarrack only
-    MuTro_AG_Mode,      // LV2 only
-    MuTro_Exp_Wah       // LV2 only
+    Mutro_Mode_Legacy   // Rakarrack-plus only
+#ifdef LV2_SUPPORT
+    ,MuTro_AG_Mode,
+    MuTro_Exp_Wah
+#endif
 };
 
 class MuTroMojo : public Effect
@@ -71,6 +75,7 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    int get_number_efx_parameters () {return C_MUTRO_PARAMETERS;};
 
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

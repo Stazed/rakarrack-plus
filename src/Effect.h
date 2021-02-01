@@ -56,6 +56,7 @@ public:
     virtual int getpar (int) {return (0);};
     virtual void out (float *, float *) {};
     virtual void cleanup () {};
+    virtual int get_number_efx_parameters () {return 0;};
 
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t) {};
