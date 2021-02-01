@@ -347,11 +347,11 @@ void RKR::putbuf(char *buf, int fx_index)
                &lv[EFX_DERELICT][10], &lv[EFX_DERELICT][11], &EFX_Bank_Bypass[EFX_DERELICT]);
         break;
 
-    case EFX_ANALOG_PHASER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+    case EFX_ANALOG_PHASER: // This was missing one parameter 12
+        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[EFX_ANALOG_PHASER][0], &lv[EFX_ANALOG_PHASER][1], &lv[EFX_ANALOG_PHASER][2], &lv[EFX_ANALOG_PHASER][3], &lv[EFX_ANALOG_PHASER][4],
                &lv[EFX_ANALOG_PHASER][5], &lv[EFX_ANALOG_PHASER][6], &lv[EFX_ANALOG_PHASER][7], &lv[EFX_ANALOG_PHASER][8], &lv[EFX_ANALOG_PHASER][9],
-               &lv[EFX_ANALOG_PHASER][10], &lv[EFX_ANALOG_PHASER][11], &EFX_Bank_Bypass[EFX_ANALOG_PHASER]);
+               &lv[EFX_ANALOG_PHASER][10], &lv[EFX_ANALOG_PHASER][11], &lv[EFX_ANALOG_PHASER][12], &EFX_Bank_Bypass[EFX_ANALOG_PHASER]);
         break;
 
     case EFX_VALVE:
@@ -545,9 +545,9 @@ void RKR::putbuf(char *buf, int fx_index)
         break;
 
     case EFX_OPTICALTREM:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
+        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",    // was missing one
                &lv[EFX_OPTICALTREM][0], &lv[EFX_OPTICALTREM][1], &lv[EFX_OPTICALTREM][2], &lv[EFX_OPTICALTREM][3], &lv[EFX_OPTICALTREM][4],
-               &lv[EFX_OPTICALTREM][5], &EFX_Bank_Bypass[EFX_OPTICALTREM]);
+               &lv[EFX_OPTICALTREM][5], &lv[EFX_OPTICALTREM][6], &EFX_Bank_Bypass[EFX_OPTICALTREM]);
         break;
 
     case EFX_VIBE:
