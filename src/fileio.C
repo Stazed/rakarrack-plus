@@ -21,6 +21,7 @@
  */
 
 #include <errno.h>
+#include <algorithm>    // std::remove
 #include "process.h"
 #include <FL/fl_ask.H> // for error pop up
 
@@ -123,22 +124,109 @@ const int presets_default[C_NUMBER_EFFECTS][C_NUMBER_PARAMETERS] = {
 };
 
 /**
- *  Individual preset file loading.
+ *  Individual preset file loading. Main menu File/Load Preset.
+ *  Put the buffer into the lv[][] array, bypass, filename.
  * 
  * @param buf
- *  Buffer to load effect parameters.
+ *      Buffer holding effect parameters to be put into effect array, etc.
+ *      This is a comma delimited buffer which comes from the formatted text file
+ *      *.rkr types.
  * 
- * @param j
- *  The effect number to load.
+ * @param fx_index
+ *      The effect index to process.
  */
-void RKR::putbuf(char *buf, int j)
+void RKR::putbuf(char *buf, int fx_index)
 {
+    
+#if 0
+    // Copy buffer to std::string
+    std::string s_buf(buf);
+
+    // printf("%s\n", s_buf.c_str());
+
+    // String vector to hold each comma delimited item
+    std::vector<std::string> result;
+
+    //create string stream from the string
+    std::stringstream s_stream(s_buf);
+
+    // Parse the s_buf string by comma delimiter into vector
+    while(s_stream.good())
+    {
+        std::string substr;
+
+        //get the string delimited by comma and push to string vector
+        getline(s_stream, substr, ',');
+        result.push_back(substr);
+    }
+
+    // Run through the effects for a match to the effect index
+    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+    {
+        if (k == fx_index)
+        {
+            for(int i = 0; i < EFX_Param_Size[k] + 1; i++)  // +1 for bypass
+            {
+                if(i < EFX_Param_Size[k])   // Set the EFX parameters
+                {
+                    lv[k][i] =  atoi( result.at(i).c_str() );
+                   // printf("lv[%d][%d] = %d\n", k, i, lv[k][i]);
+                }
+                else    // Set the bypass
+                {
+                    EFX_Bank_Bypass[k] = atoi( result.at(i).c_str() );
+                }
+            }
+
+            // Convolotron, Reverbtron, Echotron have file names to parse as well
+            if(fx_index == EFX_CONVOLOTRON)
+            {
+                Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
+                memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
+
+                std::string s_name = result.at(EFX_Param_Size[k] + 1);
+
+                // Gotta remove the '\n' from the file name or error.
+                s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
+                strcpy(Efx_Convolotron->Filename, s_name.c_str());
+            }
+            
+            else if(fx_index == EFX_REVERBTRON)
+            {
+                Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
+                memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
+
+                std::string s_name = result.at(EFX_Param_Size[k] + 1);
+
+                // Gotta remove the '\n' from the file name or error.
+                s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
+                strcpy(Efx_Reverbtron->Filename, s_name.c_str());
+            }
+
+            else if(fx_index == EFX_ECHOTRON)
+            {
+                Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
+                memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
+
+                std::string s_name = result.at(EFX_Param_Size[k] + 1);
+
+                // Gotta remove the '\n' from the file name or error.
+                s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
+                strcpy(Efx_Echotron->Filename, s_name.c_str());
+            }
+            
+            return; // we found and processed what we were looking for
+        }
+    }
+    
+#else // 0
+
     char *cfilename;
     cfilename = (char *) malloc(sizeof (char) * 128);
 
-    switch (j)
+    switch (fx_index)
     {
-
+        
     case EFX_REVERB:
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &lv[EFX_REVERB][0], &lv[EFX_REVERB][1], &lv[EFX_REVERB][2], &lv[EFX_REVERB][3], &lv[EFX_REVERB][4],
@@ -479,16 +567,19 @@ void RKR::putbuf(char *buf, int j)
     }
 
     free(cfilename);
+
+#endif // 0
 }
 
 /**
- *  Individual preset file saving and user defined Inserted presets.
+ * Individual preset file saving and user defined Inserted presets.
+ * Get individual effect parameters and put them in the passed buffer. 
  * 
  * @param buf
- *  Buffer to hold efx parameters
+ *      Buffer to hold efx parameters.
  * 
  * @param j
- *  The effect number to load
+ *      The effect number to load.
  */
 void RKR::getbuf(char *buf, int j)
 {

@@ -726,6 +726,12 @@ public:
      * Pointer array to all rack effects, indexed by EFX_Index.
      */
     Effect *Rack_Effects[C_NUMBER_EFFECTS];
+    
+    /**
+     * To hold the number of user controlled parameters for each effect.
+     * Indexed by EFX_Index.
+     */
+    int EFX_Param_Size[C_NUMBER_EFFECTS];
 
     /**
      * Arrays to hold bypass flags for each effect, indexed by EFX_Index.
