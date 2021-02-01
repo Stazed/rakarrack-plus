@@ -45,7 +45,8 @@ svfilter_stages->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Stages));
 mutromojo_rng->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range));
 mutromojo_minfreq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq));
 mutromojo_res->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Mod_Res));
-o->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Preset));
+
+o->value(rkr->Rack_Effects[EFX_MUTROMOJO]->Ppreset);
 o->redraw();
 }
 void MutromojoGui::cb_mutromojo_preset(RKR_Choice* o, void* v) {
