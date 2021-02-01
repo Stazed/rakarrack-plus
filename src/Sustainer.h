@@ -39,6 +39,7 @@ public:
     Sustainer (double sample_rate, uint32_t intermediate_bufsize);
     ~Sustainer ();
     void cleanup ();
+    int get_number_efx_parameters () {return C_SUSTAIN_PARAMETERS;};
 
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

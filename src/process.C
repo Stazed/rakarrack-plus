@@ -624,6 +624,11 @@ RKR::instantiate_effects()
     HarmRecNote->reconota = -1;
     StHarmRecNote->reconota = -1;
     RingRecNote->reconota = -1;
+    
+    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
+    {
+        EFX_Param_Size[i] = Rack_Effects[i]->get_number_efx_parameters();
+    }
 }
 
 void

@@ -32,7 +32,10 @@
 #include "EffectLFO.h"
 #include "AnalogFilter.h"
 
-// This is the legacy parameters which does not use last four listed
+/**
+ * This is the Rakarrack-plus parameters number for presets and file saving
+ * which does not use last four listed
+ */
 const int C_VARYBAND_PARAMETERS = 11;
 
 enum VaryBand_Index
@@ -64,6 +67,7 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    int get_number_efx_parameters () {return C_VARYBAND_PARAMETERS;};
 
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

@@ -29,7 +29,10 @@
 #include "Effect.h"
 #include "metronome.h"
 
-// There are actually 18 parameters, but last 4 are not saved...
+/**
+ * This is the number of parameters saved to file and presets.
+ * There are actually 18 parameters, but last 4 are not saved...
+ */
 const int C_LOOPER_PARAMETERS = 14;
 
 enum Looper_Index
@@ -64,6 +67,8 @@ public:
     void loadpreset (int npar, int value);  // to set one from a preset
     void changepar (int npar, int value);
     int getpar (int npar);
+    int get_number_efx_parameters () {return C_LOOPER_PARAMETERS;};
+    
     void cleanuppt1 ();
     void cleanuppt2 ();
     void cleanup ();

@@ -58,6 +58,7 @@ public:
     Sequence (long int Quality, int DS, int uq, int dq, double sample_rate, uint32_t intermediate_bufsze);
     ~Sequence ();
     void cleanup ();
+    int get_number_efx_parameters () {return C_SEQUENCE_PARAMETERS;};
 
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

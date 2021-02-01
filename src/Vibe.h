@@ -63,6 +63,7 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     void cleanup ();
+    int get_number_efx_parameters () {return C_VIBE_PARAMETERS;};
 
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

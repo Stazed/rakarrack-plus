@@ -58,6 +58,7 @@ class Flanger :public Chorus
 public:
     Flanger(double sample_rate, uint32_t intermediate_bufsize);
     void setpreset (int npreset);
+    int get_number_efx_parameters () {return C_FLANGER_PARAMETERS;};
 
 private:
 

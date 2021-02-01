@@ -59,6 +59,7 @@ public:
     Overdrive(int wave_res, int wave_upq, int wave_dnq, double samplerate, uint32_t intermediate_bufsize);
 
     void setpreset (int npreset);
+    int get_number_efx_parameters () {return C_OVERDRIVE_PARAMETERS;};
 
 };
 

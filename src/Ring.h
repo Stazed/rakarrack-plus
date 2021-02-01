@@ -56,6 +56,7 @@ public:
     int getpar (int npar);
     void setscale();
     void cleanup ();
+    int get_number_efx_parameters () {return C_RING_PARAMETERS;};
 
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

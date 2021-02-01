@@ -617,7 +617,7 @@ VaryBand::changepar(int npar, int value)
     case VaryBand_Cross_3:
         setCross3(value);
         break;
-    case VaryBand_Combination:  // legacy
+    case VaryBand_Combination:  // Rakarrack-plus file saving & presets
         Pcombi = value;
         setCombi(value);
         break;
@@ -677,7 +677,7 @@ VaryBand::getpar(int npar)
     case VaryBand_Cross_3:
         return (Cross3);
         break;
-    case VaryBand_Combination:
+    case VaryBand_Combination:  // Rakarrack-plus file saving & presets
         return (Pcombi);
         break;
     case VaryBand_Low_Band:

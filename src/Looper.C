@@ -633,6 +633,8 @@ Looper::changepar(int npar, int value)
             if (Prec2) dl = dl2; // if both are true, then it is only a redundant assignment
         }
         break;
+        
+// FIXME FILE SAVING
     case Looper_Tempo:
         settempo(value);
         break;
