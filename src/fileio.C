@@ -138,11 +138,9 @@ const int presets_default[C_NUMBER_EFFECTS][C_NUMBER_PARAMETERS] = {
 void RKR::putbuf(char *buf, int fx_index)
 {
     
-#if 0
+#if 1
     // Copy buffer to std::string
     std::string s_buf(buf);
-
-    // printf("%s\n", s_buf.c_str());
 
     // String vector to hold each comma delimited item
     std::vector<std::string> result;
@@ -170,7 +168,6 @@ void RKR::putbuf(char *buf, int fx_index)
                 if(i < EFX_Param_Size[k])   // Set the EFX parameters
                 {
                     lv[k][i] =  atoi( result.at(i).c_str() );
-                   // printf("lv[%d][%d] = %d\n", k, i, lv[k][i]);
                 }
                 else    // Set the bypass
                 {
@@ -1378,7 +1375,7 @@ RKR::Actualizar_Audio()
         if(j != EFX_LOOPER)
             Rack_Effects[j]->cleanup();
         
-        for (int i = 0; i < C_NUMBER_PARAMETERS; i++)
+        for (int i = 0; i < EFX_Param_Size[j]; i++)
             Rack_Effects[j]->changepar(i, lv[j][i]);
         
         if(j == EFX_STEREOHARM)
@@ -2031,7 +2028,7 @@ RKR::Preset_to_Bank(int i)
     // Load all effect parameters into the lv[][] array from current preset (main window)
     for (int k = 0; k < C_NUMBER_EFFECTS; k++)
     {
-        for (int j = 0; j < C_NUMBER_PARAMETERS; j++)
+        for (int j = 0; j < EFX_Param_Size[k]; j++)
             lv[k][j] = Rack_Effects[k]->getpar(j);
     }
     
