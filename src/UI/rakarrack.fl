@@ -1250,7 +1250,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1 open
+        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1347,7 +1347,7 @@ Put_Loaded();}
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkr");
-rkr->loadfile(filename);
+rkr->load_preset(filename);
 Put_Loaded();}
           tooltip {Open load preset window - Shortcut 'L'} xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
           code0 {o->set_label_offset(2);}
@@ -1362,7 +1362,7 @@ filename=fl_file_chooser("Save Preset:","(*" EXT")",rkr->Preset_Name,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
-rkr->savefile(filename);}
+rkr->save_preset(filename);}
           tooltip {Open save preset window - Shortcut 'S'} xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
@@ -1462,7 +1462,7 @@ Order->hide();}
 o->hide();
 Analy->show();
 Analy->set_analyzer_ON(true);
-//}} selected
+//}}
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
           code0 {o->set_label_offset(15);}
           class RKR_Button
@@ -1709,7 +1709,7 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_current_state(1);
-o->hide();} open
+o->hide();} open selected
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
       code1 {o->initialize(rkr, this);}

@@ -210,8 +210,8 @@ main(int argc, char *argv[])
     rkr.InitMIDI();
     rkr.ConnectMIDI();
 
-    if (needtoloadstate) rkr.loadfile(statefile);
-    if (needtoloadfile) rkr.loadfile(filetoload);
+    if (needtoloadstate) rkr.load_preset(statefile);
+    if (needtoloadfile) rkr.load_preset(filetoload);
     if (needtoloadbank) rkr.loadbank(banktoload);
 
 

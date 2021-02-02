@@ -671,8 +671,8 @@ public:
     // fileio.C
     void apply_effect_parameters (char *buf, int fx_index);
     void get_effect_parameters (char *buf, int fx_index);
-    void savefile (char *filename);
-    void loadfile (char *filename);
+    void save_preset (char *filename);
+    void load_preset (char *filename);
     void file_error(FILE *fn);
     void Actualizar_Audio ();
     void loadnames();

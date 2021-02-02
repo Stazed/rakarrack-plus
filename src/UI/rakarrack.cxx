@@ -594,7 +594,7 @@ void RKRGUI::cb_L_preset_i(RKR_Button*, void*) {
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkr");
-rkr->loadfile(filename);
+rkr->load_preset(filename);
 Put_Loaded();
 }
 void RKRGUI::cb_L_preset(RKR_Button* o, void* v) {
@@ -608,7 +608,7 @@ filename=fl_file_chooser("Save Preset:","(*" EXT")",rkr->Preset_Name,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 #undef EXT
-rkr->savefile(filename);
+rkr->save_preset(filename);
 }
 void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_preset_i(o,v);

@@ -287,13 +287,16 @@ void RKR::get_effect_parameters(char *buf, int fx_index)
 }
 
 /**
- *  Save individual presets from menu, File/Save Preset.
+ * Save individual presets from the menu, File/Save Preset and
+ * the Save button of the main window.
+ * 
+ * This is a formatted text file, .rkr type.
  * 
  * @param filename
  *      The user defined file name for the preset to be saved.
  */
 void
-RKR::savefile(char *filename)
+RKR::save_preset(char *filename)
 {
     FILE *fn;
     char buf[256];
@@ -306,13 +309,12 @@ RKR::savefile(char *filename)
         return;
     }
 
+    // Program release version
     memset(buf, 0, sizeof (buf));
     sprintf(buf, "%s\n", VERSION);
     fputs(buf, fn);
 
-
-    //Autor
-
+    // Author
     memset(buf, 0, sizeof (buf));
 
     if (strlen(Author) != 0)
@@ -333,28 +335,25 @@ RKR::savefile(char *filename)
 
     fputs(buf, fn);
 
-    //Preset Name
-
-    memset(buf, 0, sizeof (buf));
+    // Preset Name
     fputs(Preset_Name, fn);
     fputs("\n", fn);
 
-
-    //General
+    // Master control
     memset(buf, 0, sizeof (buf));
     sprintf(buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass);
     fputs(buf, fn);
 
-
-    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
+    // Effect parameters
+    for (int order = 0; order < C_NUMBER_ORDERED_EFFECTS; order++)
     {
-        int j = efx_order[i];
+        int effect = efx_order[order];
         memset(buf, 0, sizeof (buf));
-        get_effect_parameters(buf, j);
+        get_effect_parameters(buf, effect);
         fputs(buf, fn);
     }
 
-    // Order
+    // Effect Order
     memset(buf, 0, sizeof (buf));
     sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
             efx_order[0], efx_order[1], efx_order[2], efx_order[3],
@@ -363,7 +362,7 @@ RKR::savefile(char *filename)
 
     fputs(buf, fn);
 
-
+    // MIDI learn table
     for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
@@ -380,13 +379,14 @@ RKR::savefile(char *filename)
 }
 
 /**
- *  This parses the preset files *.rkr types, from the menu  File/Load Preset
+ * This parses the preset files *.rkr types, from the menu File/Load Preset
+ * and the Load button form the main window.
  * 
  * @param filename
  *      The user selected filename.
  */
 void
-RKR::loadfile(char *filename)
+RKR::load_preset(char *filename)
 {
     FILE *fn;
     char buf[256];
@@ -400,6 +400,8 @@ RKR::loadfile(char *filename)
 
     New();
 
+    // This cycles through the first 14 lines which should always exist.
+    // Will set fgets to the next item which is order for loading.
     for (int i = 0; i < 14; i++)
     {
         memset(buf, 0, sizeof (buf));
@@ -412,7 +414,7 @@ RKR::loadfile(char *filename)
         }
     }
 
-    //Order
+    // Order
     memset(buf, 0, sizeof (buf));
 
     if (fgets(buf, sizeof buf, fn) == NULL)
@@ -422,11 +424,16 @@ RKR::loadfile(char *filename)
         return;
     }
 
-    int l[10];
+    // Parse the effect order into the order array
+    int order[10];
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-           &l[0], &l[1], &l[2], &l[3], &l[4], &l[5], &l[6], &l[7], &l[8],
-           &l[9]);
+           &order[0], &order[1], &order[2], &order[3], &order[4],
+           &order[5], &order[6], &order[7], &order[8], &order[9]);
 
+    // Close the file to start at the top again...
+    // This is done since the effect order comes after the individual
+    // effect parameters in the file. We do not know which effects
+    // the parameters apply until we get the order first, uuuuuggghhlllyyy!!!!
     fclose(fn);
 
     if ((fn = fopen(filename, "r")) == NULL)
@@ -434,7 +441,7 @@ RKR::loadfile(char *filename)
         return;
     }
 
-    //Version
+    // Program version
     memset(buf, 0, sizeof (buf));
 
     if (fgets(buf, sizeof buf, fn) == NULL)
@@ -444,7 +451,7 @@ RKR::loadfile(char *filename)
         return;
     }
 
-    //Author
+    // Author
     memset(Author, 0, 64);
     memset(buf, 0, sizeof (buf));
 
@@ -483,7 +490,7 @@ RKR::loadfile(char *filename)
         }
     }
 
-    //General
+    // Master control
     memset(buf, 0, sizeof (buf));
 
     if (fgets(buf, sizeof buf, fn) == NULL)
@@ -505,9 +512,10 @@ RKR::loadfile(char *filename)
         Master_Volume = out_vol;
     }
 
+    // Effect parameters
     for (int i = 0; i < 10; i++)
     {
-        int j = l[i];
+        int effect = order[i];  // This is why we had to load the order first!!!
 
         memset(buf, 0, sizeof (buf));
 
@@ -517,10 +525,10 @@ RKR::loadfile(char *filename)
             file_error(fn);
             return;
         }
-        apply_effect_parameters(buf, j);
+        apply_effect_parameters(buf, effect);
     }
 
-    //Order
+    // Effect order... again!!
     memset(buf, 0, sizeof (buf));
 
     if (fgets(buf, sizeof buf, fn) == NULL)
@@ -530,10 +538,12 @@ RKR::loadfile(char *filename)
         return;
     }
 
+    // Apply the order
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &lv[EFX_ORDER][0], &lv[EFX_ORDER][1], &lv[EFX_ORDER][2], &lv[EFX_ORDER][3], &lv[EFX_ORDER][4],
            &lv[EFX_ORDER][5], &lv[EFX_ORDER][6], &lv[EFX_ORDER][7], &lv[EFX_ORDER][8], &lv[EFX_ORDER][9]);
 
+    // MIDI learn table
     for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));

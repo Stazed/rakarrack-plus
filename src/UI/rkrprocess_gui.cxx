@@ -6569,7 +6569,7 @@ void RKRGUI::check_signals(void *usrPtr)
         {
             printf("Saving file: %s\n", filetoload);
             got_sigusr1 = 0;
-            rkr->savefile(filetoload);
+            rkr->save_preset(filetoload);
         }
         return;
     }
