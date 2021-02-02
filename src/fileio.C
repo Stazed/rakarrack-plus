@@ -622,7 +622,7 @@ RKR::set_audio_paramters()
  *  Loads the default banks preset names and information for the bank manager window.
  */
 void
-RKR::loadnames()
+RKR::load_names()
 {
     FILE *fn;
     char temp[128];
@@ -667,7 +667,7 @@ RKR::loadnames()
                 
                 if (ret != 1)
                 {
-                    fl_alert("fread error in loadnames()");
+                    fl_alert("fread error in load_names()");
                     break;
                 }
 
@@ -1001,7 +1001,7 @@ RKR::load_bank(char *filename)
 
         fclose(fn);
 
-        if (BigEndian())
+        if (big_endian())
         {
             fix_endianess();
         }
@@ -1034,14 +1034,14 @@ RKR::save_bank(char *filename)
             convert_bank_to_file(Bank[i].lv, sizeof(Bank[i].lv));
         }
 
-        if (BigEndian())
+        if (big_endian())
         {
             fix_endianess();
         }
         
         fwrite(&Bank, sizeof (Bank), 1, fn);
         
-        if (BigEndian())
+        if (big_endian())
         {
             fix_endianess();
         }
@@ -1176,7 +1176,7 @@ RKR::new_bank()
 };
 
 void
-RKR::Bank_to_Preset(int i)
+RKR::bank_to_preset(int i)
 {
     memset(Preset_Name, 0, sizeof (char) * 64);
     strcpy(Preset_Name, Bank[i].Preset_Name);
@@ -1235,7 +1235,7 @@ RKR::Bank_to_Preset(int i)
 }
 
 void
-RKR::Preset_to_Bank(int i)
+RKR::preset_to_bank(int i)
 {
     // Main window information
     memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
@@ -1291,13 +1291,6 @@ RKR::Preset_to_Bank(int i)
     memcpy(Bank[i].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
 }
 
-int
-RKR::BigEndian()
-{
-    long one = 1;
-    return !(*((char *) (&one)));
-}
-
 void
 RKR::copy_IO()
 {
@@ -1326,6 +1319,13 @@ RKR::convert_IO()
         sscanf(Bank[i].cBalance, "%f", &Bank[i].Balance);
         if (Bank[i].Balance == 0.0) Bank[i].Balance = 1.0f;
     }
+}
+
+int
+RKR::big_endian()
+{
+    long one = 1;
+    return !(*((char *) (&one)));
 }
 
 void
@@ -1362,7 +1362,7 @@ RKR::fix_endianess()
 }
 
 void
-RKR::saveskin(char *filename)
+RKR::save_skin(char *filename)
 {
     FILE *fn;
     char buf[256];
@@ -1400,7 +1400,7 @@ RKR::saveskin(char *filename)
 }
 
 bool
-RKR::loadskin(char *filename)
+RKR::load_skin(char *filename)
 {
     char buf[256];
     FILE *fn;
@@ -1520,7 +1520,7 @@ RKR::ConvertOldFile(char * filename)
 }
 
 void
-RKR::ConvertReverbFile(char * filename)
+RKR::convert_reverb_file(char * filename)
 {
     char buff[255];
     memset(buff, 0, sizeof (buff));
@@ -1531,7 +1531,7 @@ RKR::ConvertReverbFile(char * filename)
 }
 
 void
-RKR::SaveIntPreset(int num, char *name)
+RKR::save_insert_preset(int num, char *name)
 {
     FILE *fn;
     char tempfile[256];
@@ -1552,7 +1552,7 @@ RKR::SaveIntPreset(int num, char *name)
 }
 
 void
-RKR::DelIntPreset(int num, char *name)
+RKR::delete_insert_preset(int num, char *name)
 {
     FILE *fn;
     FILE *fs;
@@ -1616,7 +1616,7 @@ RKR::DelIntPreset(int num, char *name)
  *      One(1) on success.
  */
 bool
-RKR::MergeIntPreset(char *filename)
+RKR::merge_insert_presets(char *filename)
 {
     FILE *fn;
     if ((fn = fopen(filename, "r")) == NULL)
@@ -1659,7 +1659,7 @@ RKR::MergeIntPreset(char *filename)
 }
 
 void
-RKR::savemiditable(char *filename)
+RKR::save_MIDI_table(char *filename)
 {
     FILE *fn;
     char buf[256];
@@ -1683,7 +1683,7 @@ RKR::savemiditable(char *filename)
 }
 
 void
-RKR::loadmiditable(char *filename)
+RKR::load_MIDI_table(char *filename)
 {
     char buf[256];
     FILE *fn;

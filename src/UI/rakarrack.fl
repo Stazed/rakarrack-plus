@@ -362,7 +362,7 @@ filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
 if (filename == NULL) return;
 filename = fl_filename_setext(filename,".rkrs");
 
-if(rkr->loadskin(filename))
+if(rkr->load_skin(filename))
 {
     Put_Skin();
 }}
@@ -386,7 +386,7 @@ rkr->sheight = (int) Principal->h();
 rkr->sschema = Settings->scheme_ch->value();
 
 
-rkr->saveskin(filename);}
+rkr->save_skin(filename);}
             xywh {0 0 36 21} divider
           }
           MenuItem Load_MTable {
@@ -409,7 +409,7 @@ sprintf(name,"%s %s",rkr->jackcliname, VERSION);
 filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
-rkr->ConvertReverbFile(filename);
+rkr->convert_reverb_file(filename);
 rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
             xywh {0 0 36 21} divider
           }
@@ -421,7 +421,7 @@ filename = fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
 
 if (filename == NULL) return;
 
-if(rkr->MergeIntPreset(filename))
+if(rkr->merge_insert_presets(filename))
 {
     Show_Next_Time();
 }}
@@ -1372,14 +1372,14 @@ rkr->save_preset(filename);}
           user_data 7
           callback {if ((int) o->value())
 {
-rkr->Preset_to_Bank(0);
-rkr->Bank_to_Preset((int)Preset_Counter->value());
+rkr->preset_to_bank(0);
+rkr->bank_to_preset((int)Preset_Counter->value());
 Put_Loaded();
 }
 
 else
 {
- rkr->Bank_to_Preset(0);
+ rkr->bank_to_preset(0);
  Put_Loaded();
 }}
           tooltip {Compare to bank preset - Shortcut 'P'} xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
@@ -1413,7 +1413,7 @@ BankWindow->hide();}
           label Preset
           callback {rkr->new_bank_loaded=0;
 BankWindow->unlight_preset(rkr->Selected_Preset);
-rkr->Bank_to_Preset((int) o->value());
+rkr->bank_to_preset((int) o->value());
 BankWindow->light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 rkr->OnCounter=0;

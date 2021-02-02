@@ -1665,7 +1665,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 
         o->value(0);
         o->redraw();
-        rkr->Preset_to_Bank(num);
+        rkr->preset_to_bank(num);
         w->copy_label(rkr->Preset_Name);
         rkr->modified = 1;
     }
@@ -6663,7 +6663,7 @@ inline void RKRGUI::addpreset(Fl_Widget *w, int num)
     memset(NewName, 0, sizeof (NewName));
     sprintf(NewName, "*%s", name);
     add_name(w, NewName);
-    rkr->SaveIntPreset(num, NewName);
+    rkr->save_insert_preset(num, NewName);
 }
 
 void RKRGUI::add_name(Fl_Widget *w, char *name)
@@ -6771,7 +6771,7 @@ inline void RKRGUI::delpreset(Fl_Widget *w, int num)
     s->remove(s->value());
     s->value(0);
     s->redraw();
-    rkr->DelIntPreset(num, Rname);
+    rkr->delete_insert_preset(num, Rname);
 }
 
 void RKRGUI::Prep_Reorden(int source, int dest)
@@ -7398,7 +7398,7 @@ void RKRGUI::Load_Midi_Program_Change_Table()
         return;
 
     filename = fl_filename_setext(filename, ".rmt");
-    rkr->loadmiditable(filename);
+    rkr->load_MIDI_table(filename);
     Settings->Put_MidiTable();
 }
 
@@ -7414,5 +7414,5 @@ void RKRGUI::Save_Midi_Program_Change_Table()
 
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
-    rkr->savemiditable(filename);
+    rkr->save_MIDI_table(filename);
 }

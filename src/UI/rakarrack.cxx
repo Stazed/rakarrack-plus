@@ -83,7 +83,7 @@ filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
 if (filename == NULL) return;
 filename = fl_filename_setext(filename,".rkrs");
 
-if(rkr->loadskin(filename))
+if(rkr->load_skin(filename))
 {
     Put_Skin();
 };
@@ -109,7 +109,7 @@ rkr->sheight = (int) Principal->h();
 rkr->sschema = Settings->scheme_ch->value();
 
 
-rkr->saveskin(filename);
+rkr->save_skin(filename);
 }
 void RKRGUI::cb_Save_Skin(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Skin_i(o,v);
@@ -138,7 +138,7 @@ sprintf(name,"%s %s",rkr->jackcliname, VERSION);
 filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
-rkr->ConvertReverbFile(filename);
+rkr->convert_reverb_file(filename);
 rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");
 }
 void RKRGUI::cb_ConvertReverb(Fl_Menu_* o, void* v) {
@@ -152,7 +152,7 @@ filename = fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
 
 if (filename == NULL) return;
 
-if(rkr->MergeIntPreset(filename))
+if(rkr->merge_insert_presets(filename))
 {
     Show_Next_Time();
 };
@@ -617,14 +617,14 @@ void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
 void RKRGUI::cb_Compare_i(RKR_Light_Button* o, void*) {
   if ((int) o->value())
 {
-rkr->Preset_to_Bank(0);
-rkr->Bank_to_Preset((int)Preset_Counter->value());
+rkr->preset_to_bank(0);
+rkr->bank_to_preset((int)Preset_Counter->value());
 Put_Loaded();
 }
 
 else
 {
- rkr->Bank_to_Preset(0);
+ rkr->bank_to_preset(0);
  Put_Loaded();
 };
 }
@@ -657,7 +657,7 @@ void RKRGUI::cb_WPreset_Name(RKR_Input* o, void* v) {
 void RKRGUI::cb_Preset_Counter_i(RKR_Counter* o, void*) {
   rkr->new_bank_loaded=0;
 BankWindow->unlight_preset(rkr->Selected_Preset);
-rkr->Bank_to_Preset((int) o->value());
+rkr->bank_to_preset((int) o->value());
 BankWindow->light_preset((int)o->value());
 rkr->Selected_Preset=(int)o->value();
 rkr->OnCounter=0;

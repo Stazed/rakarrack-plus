@@ -317,7 +317,7 @@ RKR::RKR() :
     new_bank();
     
     // Loads the banks preset names and information for the bank manager window.
-    loadnames();
+    load_names();
 
     // If no bank is listed from the command line, then load the default user bank
     // in Settings/Preferences/Bank/ Bank Filename

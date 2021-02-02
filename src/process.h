@@ -675,31 +675,33 @@ public:
     void load_preset (char *filename);
     void file_error(FILE *fn);
     void set_audio_paramters ();
-    void loadnames();
+    void load_names();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     int load_bank (char *filename);
     int save_bank (char *filename);
     void new_preset ();
     void new_bank ();
-    void Bank_to_Preset (int Num);
-    void Preset_to_Bank (int i);
-    int BigEndian();
+    void bank_to_preset (int Num);
+    void preset_to_bank (int i);
     void copy_IO();
     void convert_IO();
+    int big_endian();
     void fix_endianess();
-    void saveskin (char *filename);
-    bool loadskin (char *filename);
+    void save_skin (char *filename);
+    bool load_skin (char *filename);
     void load_skin_error(FILE *fn);
     void dump_preset_names ();
+
     int CheckOldBank(char *filename);
     void ConvertOldFile(char *filename);
-    void ConvertReverbFile(char * filename);
-    void SaveIntPreset(int num, char *name);
-    void DelIntPreset(int num, char *name);
-    bool MergeIntPreset(char *filename);
-    void savemiditable (char *filename);
-    void loadmiditable (char *filename);
+
+    void convert_reverb_file(char * filename);
+    void save_insert_preset(int num, char *name);
+    void delete_insert_preset(int num, char *name);
+    bool merge_insert_presets(char *filename);
+    void save_MIDI_table (char *filename);
+    void load_MIDI_table (char *filename);
 
     // varios.C
     int Message (int prio, const char *labelwin, const char *message_text);

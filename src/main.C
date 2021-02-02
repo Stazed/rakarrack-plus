@@ -246,7 +246,7 @@ main(int argc, char *argv[])
             {
                 if ((preset > 0) && (preset < 61))
                 {
-                    rkr.Bank_to_Preset(preset);
+                    rkr.bank_to_preset(preset);
                 }
                 preset = 1000;
             }
