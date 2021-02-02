@@ -402,9 +402,11 @@ Reverbtron::setfile(int value)
     {
         Filenum = value;
         memset(Filename, 0, sizeof (Filename));
-        sprintf(Filename, "%s/%d.rvb", DATADIR, Filenum + 1); //DATADIR comes from  config.h (autotools)
+        sprintf(Filename, "%s/%d.rvb", DATADIR, Filenum + 1); // DATADIR comes from CMakeLists.txt
     }
-    //    printf("Filename %s\n",Filename);
+
+//    printf("Reverbtron Filename %s\n",Filename);
+    
     filedata = loadfile(Filename);
     applyfile(filedata);
     

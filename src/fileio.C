@@ -125,7 +125,7 @@ const int presets_default[C_NUMBER_EFFECTS][C_NUMBER_PARAMETERS] = {
 
 /**
  *  Individual preset file loading. Main menu File/Load Preset.
- *  Put the buffer into the lv[][] array, bypass, filename.
+ *  Apply buffer holding effect parameters to the lv[][] array, bypass, filename.
  * 
  * @param buf
  *      Buffer holding effect parameters to be put into effect array, etc.
@@ -135,10 +135,8 @@ const int presets_default[C_NUMBER_EFFECTS][C_NUMBER_PARAMETERS] = {
  * @param fx_index
  *      The effect index to process.
  */
-void RKR::putbuf(char *buf, int fx_index)
+void RKR::apply_effect_parameters(char *buf, int fx_index)
 {
-    
-#if 1
     // Copy buffer to std::string
     std::string s_buf(buf);
 
@@ -159,19 +157,19 @@ void RKR::putbuf(char *buf, int fx_index)
     }
 
     // Run through the effects for a match to the effect index
-    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+    for (int effect = 0; effect < C_NUMBER_EFFECTS; effect++)
     {
-        if (k == fx_index)
+        if (effect == fx_index)
         {
-            for(int i = 0; i < EFX_Param_Size[k] + 1; i++)  // +1 for bypass
+            for(int params = 0; params < EFX_Param_Size[effect] + 1; params++)  // +1 for bypass
             {
-                if(i < EFX_Param_Size[k])   // Set the EFX parameters
+                if(params < EFX_Param_Size[effect])   // Set the EFX parameters
                 {
-                    lv[k][i] =  atoi( result.at(i).c_str() );
+                    lv[effect][params] =  atoi( result.at(params).c_str() );
                 }
                 else    // Set the bypass
                 {
-                    EFX_Bank_Bypass[k] = atoi( result.at(i).c_str() );
+                    EFX_Bank_Bypass[effect] = atoi( result.at(params).c_str() );
                 }
             }
 
@@ -181,7 +179,7 @@ void RKR::putbuf(char *buf, int fx_index)
                 Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
                 memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
 
-                std::string s_name = result.at(EFX_Param_Size[k] + 1);
+                std::string s_name = result.at(EFX_Param_Size[effect] + 1);
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
@@ -193,7 +191,7 @@ void RKR::putbuf(char *buf, int fx_index)
                 Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
                 memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
 
-                std::string s_name = result.at(EFX_Param_Size[k] + 1);
+                std::string s_name = result.at(EFX_Param_Size[effect] + 1);
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
@@ -205,7 +203,7 @@ void RKR::putbuf(char *buf, int fx_index)
                 Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
                 memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
 
-                std::string s_name = result.at(EFX_Param_Size[k] + 1);
+                std::string s_name = result.at(EFX_Param_Size[effect] + 1);
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
@@ -215,395 +213,43 @@ void RKR::putbuf(char *buf, int fx_index)
             return; // we found and processed what we were looking for
         }
     }
-    
-#else // 0
-
-    char *cfilename;
-    cfilename = (char *) malloc(sizeof (char) * 128);
-
-    switch (fx_index)
-    {
-        
-    case EFX_REVERB:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_REVERB][0], &lv[EFX_REVERB][1], &lv[EFX_REVERB][2], &lv[EFX_REVERB][3], &lv[EFX_REVERB][4],
-               &lv[EFX_REVERB][5], &lv[EFX_REVERB][6], &lv[EFX_REVERB][7], &lv[EFX_REVERB][8], &lv[EFX_REVERB][9],
-               &lv[EFX_REVERB][10], &lv[EFX_REVERB][11], &EFX_Bank_Bypass[EFX_REVERB]);
-        break;
-
-    case EFX_ECHO:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_ECHO][0], &lv[EFX_ECHO][1], &lv[EFX_ECHO][2], &lv[EFX_ECHO][3], &lv[EFX_ECHO][4],
-               &lv[EFX_ECHO][5], &lv[EFX_ECHO][6], &lv[EFX_ECHO][7], &lv[EFX_ECHO][8], &EFX_Bank_Bypass[EFX_ECHO]);
-        break;
-
-    case EFX_CHORUS:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_CHORUS][0], &lv[EFX_CHORUS][1], &lv[EFX_CHORUS][2], &lv[EFX_CHORUS][3], &lv[EFX_CHORUS][4],
-               &lv[EFX_CHORUS][5], &lv[EFX_CHORUS][6], &lv[EFX_CHORUS][7], &lv[EFX_CHORUS][8], &lv[EFX_CHORUS][9],
-               &lv[EFX_CHORUS][10], &lv[EFX_CHORUS][11], &lv[EFX_CHORUS][12], &EFX_Bank_Bypass[EFX_CHORUS]);
-        break;
-
-    case EFX_FLANGER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_FLANGER][0], &lv[EFX_FLANGER][1], &lv[EFX_FLANGER][2], &lv[EFX_FLANGER][3], &lv[EFX_FLANGER][4],
-               &lv[EFX_FLANGER][5], &lv[EFX_FLANGER][6], &lv[EFX_FLANGER][7], &lv[EFX_FLANGER][8], &lv[EFX_FLANGER][9],
-               &lv[EFX_FLANGER][10], &lv[EFX_FLANGER][11], &lv[EFX_FLANGER][12], &EFX_Bank_Bypass[EFX_FLANGER]);
-        break;
-
-    case EFX_PHASER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_PHASER][0], &lv[EFX_PHASER][1], &lv[EFX_PHASER][2], &lv[EFX_PHASER][3], &lv[EFX_PHASER][4],
-               &lv[EFX_PHASER][5], &lv[EFX_PHASER][6], &lv[EFX_PHASER][7], &lv[EFX_PHASER][8], &lv[EFX_PHASER][9],
-               &lv[EFX_PHASER][10], &lv[EFX_PHASER][11], &EFX_Bank_Bypass[EFX_PHASER]);
-        break;
-
-    case EFX_OVERDRIVE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_OVERDRIVE][0], &lv[EFX_OVERDRIVE][1], &lv[EFX_OVERDRIVE][2], &lv[EFX_OVERDRIVE][3], &lv[EFX_OVERDRIVE][4],
-               &lv[EFX_OVERDRIVE][5], &lv[EFX_OVERDRIVE][6], &lv[EFX_OVERDRIVE][7], &lv[EFX_OVERDRIVE][8], &lv[EFX_OVERDRIVE][9],
-               &lv[EFX_OVERDRIVE][10], &lv[EFX_OVERDRIVE][11], &lv[EFX_OVERDRIVE][12], &EFX_Bank_Bypass[EFX_OVERDRIVE]);
-        break;
-
-    case EFX_DISTORTION:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_DISTORTION][0], &lv[EFX_DISTORTION][1], &lv[EFX_DISTORTION][2], &lv[EFX_DISTORTION][3], &lv[EFX_DISTORTION][4],
-               &lv[EFX_DISTORTION][5], &lv[EFX_DISTORTION][6], &lv[EFX_DISTORTION][7], &lv[EFX_DISTORTION][8], &lv[EFX_DISTORTION][9],
-               &lv[EFX_DISTORTION][10], &lv[EFX_DISTORTION][11], &lv[EFX_DISTORTION][12], &EFX_Bank_Bypass[EFX_DISTORTION]);
-        break;
-
-    case EFX_EQ:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_EQ][0], &lv[EFX_EQ][1], &lv[EFX_EQ][2], &lv[EFX_EQ][3], &lv[EFX_EQ][4],
-               &lv[EFX_EQ][5], &lv[EFX_EQ][6], &lv[EFX_EQ][7], &lv[EFX_EQ][8], &lv[EFX_EQ][9],
-               &lv[EFX_EQ][10], &lv[EFX_EQ][11], &EFX_Bank_Bypass[EFX_EQ]);
-        break;
-
-    case EFX_PARAMETRIC:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_PARAMETRIC][0], &lv[EFX_PARAMETRIC][1], &lv[EFX_PARAMETRIC][2], &lv[EFX_PARAMETRIC][3], &lv[EFX_PARAMETRIC][4],
-               &lv[EFX_PARAMETRIC][5], &lv[EFX_PARAMETRIC][6], &lv[EFX_PARAMETRIC][7], &lv[EFX_PARAMETRIC][8], &lv[EFX_PARAMETRIC][9],
-               &EFX_Bank_Bypass[EFX_PARAMETRIC]);
-        break;
-
-    case EFX_COMPRESSOR:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_COMPRESSOR][0], &lv[EFX_COMPRESSOR][1], &lv[EFX_COMPRESSOR][2], &lv[EFX_COMPRESSOR][3], &lv[EFX_COMPRESSOR][4],
-               &lv[EFX_COMPRESSOR][5], &lv[EFX_COMPRESSOR][6], &lv[EFX_COMPRESSOR][7], &lv[EFX_COMPRESSOR][8], &EFX_Bank_Bypass[EFX_COMPRESSOR]);
-        break;
-
-    case EFX_WAHWAH:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_WAHWAH][0], &lv[EFX_WAHWAH][1], &lv[EFX_WAHWAH][2], &lv[EFX_WAHWAH][3], &lv[EFX_WAHWAH][4],
-               &lv[EFX_WAHWAH][5], &lv[EFX_WAHWAH][6], &lv[EFX_WAHWAH][7], &lv[EFX_WAHWAH][8], &lv[EFX_WAHWAH][9],
-               &lv[EFX_WAHWAH][10], &EFX_Bank_Bypass[EFX_WAHWAH]);
-        break;
-
-    case EFX_ALIENWAH:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_ALIENWAH][0], &lv[EFX_ALIENWAH][1], &lv[EFX_ALIENWAH][2], &lv[EFX_ALIENWAH][3], &lv[EFX_ALIENWAH][4],
-               &lv[EFX_ALIENWAH][5], &lv[EFX_ALIENWAH][6], &lv[EFX_ALIENWAH][7], &lv[EFX_ALIENWAH][8], &lv[EFX_ALIENWAH][9],
-               &lv[EFX_ALIENWAH][10], &EFX_Bank_Bypass[EFX_ALIENWAH]);
-        break;
-
-    case EFX_CABINET:
-        sscanf(buf, "%d,%d,%d\n", &lv[EFX_CABINET][0], &lv[EFX_CABINET][1], &EFX_Bank_Bypass[EFX_CABINET]);
-        break;
-
-    case EFX_PAN:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_PAN][0], &lv[EFX_PAN][1], &lv[EFX_PAN][2], &lv[EFX_PAN][3], &lv[EFX_PAN][4],
-               &lv[EFX_PAN][5], &lv[EFX_PAN][6], &lv[EFX_PAN][7], &lv[EFX_PAN][8], &EFX_Bank_Bypass[EFX_PAN]);
-        break;
-
-    case EFX_HARMONIZER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_HARMONIZER][0], &lv[EFX_HARMONIZER][1], &lv[EFX_HARMONIZER][2], &lv[EFX_HARMONIZER][3], &lv[EFX_HARMONIZER][4],
-               &lv[EFX_HARMONIZER][5], &lv[EFX_HARMONIZER][6], &lv[EFX_HARMONIZER][7], &lv[EFX_HARMONIZER][8], &lv[EFX_HARMONIZER][9],
-               &lv[EFX_HARMONIZER][10], &EFX_Bank_Bypass[EFX_HARMONIZER]);
-        break;
-
-    case EFX_MUSICAL_DELAY:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_MUSICAL_DELAY][0], &lv[EFX_MUSICAL_DELAY][1], &lv[EFX_MUSICAL_DELAY][2], &lv[EFX_MUSICAL_DELAY][3], &lv[EFX_MUSICAL_DELAY][4],
-               &lv[EFX_MUSICAL_DELAY][5], &lv[EFX_MUSICAL_DELAY][6], &lv[EFX_MUSICAL_DELAY][7], &lv[EFX_MUSICAL_DELAY][8], &lv[EFX_MUSICAL_DELAY][9],
-               &lv[EFX_MUSICAL_DELAY][10], &lv[EFX_MUSICAL_DELAY][11], &lv[EFX_MUSICAL_DELAY][12], &EFX_Bank_Bypass[EFX_MUSICAL_DELAY]);
-        break;
-
-    case EFX_NOISEGATE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_NOISEGATE][0], &lv[EFX_NOISEGATE][1], &lv[EFX_NOISEGATE][2], &lv[EFX_NOISEGATE][3], &lv[EFX_NOISEGATE][4],
-               &lv[EFX_NOISEGATE][5], &lv[EFX_NOISEGATE][6], &EFX_Bank_Bypass[EFX_NOISEGATE]);
-
-        break;
-
-    case EFX_DERELICT:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_DERELICT][0], &lv[EFX_DERELICT][1], &lv[EFX_DERELICT][2], &lv[EFX_DERELICT][3], &lv[EFX_DERELICT][4],
-               &lv[EFX_DERELICT][5], &lv[EFX_DERELICT][6], &lv[EFX_DERELICT][7], &lv[EFX_DERELICT][8], &lv[EFX_DERELICT][9],
-               &lv[EFX_DERELICT][10], &lv[EFX_DERELICT][11], &EFX_Bank_Bypass[EFX_DERELICT]);
-        break;
-
-    case EFX_ANALOG_PHASER: // This was missing one parameter 12
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_ANALOG_PHASER][0], &lv[EFX_ANALOG_PHASER][1], &lv[EFX_ANALOG_PHASER][2], &lv[EFX_ANALOG_PHASER][3], &lv[EFX_ANALOG_PHASER][4],
-               &lv[EFX_ANALOG_PHASER][5], &lv[EFX_ANALOG_PHASER][6], &lv[EFX_ANALOG_PHASER][7], &lv[EFX_ANALOG_PHASER][8], &lv[EFX_ANALOG_PHASER][9],
-               &lv[EFX_ANALOG_PHASER][10], &lv[EFX_ANALOG_PHASER][11], &lv[EFX_ANALOG_PHASER][12], &EFX_Bank_Bypass[EFX_ANALOG_PHASER]);
-        break;
-
-    case EFX_VALVE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_VALVE][0], &lv[EFX_VALVE][1], &lv[EFX_VALVE][2], &lv[EFX_VALVE][3], &lv[EFX_VALVE][4],
-               &lv[EFX_VALVE][5], &lv[EFX_VALVE][6], &lv[EFX_VALVE][7], &lv[EFX_VALVE][8], &lv[EFX_VALVE][9],
-               &lv[EFX_VALVE][10], &lv[EFX_VALVE][11], &lv[EFX_VALVE][12], &EFX_Bank_Bypass[EFX_VALVE]);
-        break;
-
-    case EFX_DUAL_FLANGE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_DUAL_FLANGE][0], &lv[EFX_DUAL_FLANGE][1], &lv[EFX_DUAL_FLANGE][2], &lv[EFX_DUAL_FLANGE][3], &lv[EFX_DUAL_FLANGE][4],
-               &lv[EFX_DUAL_FLANGE][5], &lv[EFX_DUAL_FLANGE][6], &lv[EFX_DUAL_FLANGE][7], &lv[EFX_DUAL_FLANGE][8], &lv[EFX_DUAL_FLANGE][9],
-               &lv[EFX_DUAL_FLANGE][10], &lv[EFX_DUAL_FLANGE][11], &lv[EFX_DUAL_FLANGE][12], &lv[EFX_DUAL_FLANGE][13], &lv[EFX_DUAL_FLANGE][14],
-               &EFX_Bank_Bypass[EFX_DUAL_FLANGE]);
-        break;
-
-    case EFX_RING:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_RING][0], &lv[EFX_RING][1], &lv[EFX_RING][2], &lv[EFX_RING][3], &lv[EFX_RING][4],
-               &lv[EFX_RING][5], &lv[EFX_RING][6], &lv[EFX_RING][7], &lv[EFX_RING][8], &lv[EFX_RING][9],
-               &lv[EFX_RING][10], &lv[EFX_RING][11], &lv[EFX_RING][12], &EFX_Bank_Bypass[EFX_RING]);
-        break;
-
-    case EFX_EXCITER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_EXCITER][0], &lv[EFX_EXCITER][1], &lv[EFX_EXCITER][2], &lv[EFX_EXCITER][3], &lv[EFX_EXCITER][4],
-               &lv[EFX_EXCITER][5], &lv[EFX_EXCITER][6], &lv[EFX_EXCITER][7], &lv[EFX_EXCITER][8], &lv[EFX_EXCITER][9],
-               &lv[EFX_EXCITER][10], &lv[EFX_EXCITER][11], &lv[EFX_EXCITER][12], &EFX_Bank_Bypass[EFX_EXCITER]);
-        break;
-
-    case EFX_DISTBAND:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_DISTBAND][0], &lv[EFX_DISTBAND][1], &lv[EFX_DISTBAND][2], &lv[EFX_DISTBAND][3], &lv[EFX_DISTBAND][4],
-               &lv[EFX_DISTBAND][5], &lv[EFX_DISTBAND][6], &lv[EFX_DISTBAND][7], &lv[EFX_DISTBAND][8], &lv[EFX_DISTBAND][9],
-               &lv[EFX_DISTBAND][10], &lv[EFX_DISTBAND][11], &lv[EFX_DISTBAND][12], &lv[EFX_DISTBAND][13], &lv[EFX_DISTBAND][14],
-               &EFX_Bank_Bypass[EFX_DISTBAND]);
-        break;
-
-    case EFX_ARPIE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_ARPIE][0], &lv[EFX_ARPIE][1], &lv[EFX_ARPIE][2], &lv[EFX_ARPIE][3], &lv[EFX_ARPIE][4],
-               &lv[EFX_ARPIE][5], &lv[EFX_ARPIE][6], &lv[EFX_ARPIE][7], &lv[EFX_ARPIE][8], &lv[EFX_ARPIE][9],
-               &lv[EFX_ARPIE][10], &EFX_Bank_Bypass[EFX_ARPIE]);
-        break;
-
-    case EFX_EXPANDER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_EXPANDER][0], &lv[EFX_EXPANDER][1], &lv[EFX_EXPANDER][2], &lv[EFX_EXPANDER][3], &lv[EFX_EXPANDER][4],
-               &lv[EFX_EXPANDER][5], &lv[EFX_EXPANDER][6], &EFX_Bank_Bypass[EFX_EXPANDER]);
-
-        break;
-
-    case EFX_SHUFFLE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_SHUFFLE][0], &lv[EFX_SHUFFLE][1], &lv[EFX_SHUFFLE][2], &lv[EFX_SHUFFLE][3], &lv[EFX_SHUFFLE][4],
-               &lv[EFX_SHUFFLE][5], &lv[EFX_SHUFFLE][6], &lv[EFX_SHUFFLE][7], &lv[EFX_SHUFFLE][8], &lv[EFX_SHUFFLE][9],
-               &lv[EFX_SHUFFLE][10], &EFX_Bank_Bypass[EFX_SHUFFLE]);
-        break;
-
-    case EFX_SYNTHFILTER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_SYNTHFILTER][0], &lv[EFX_SYNTHFILTER][1], &lv[EFX_SYNTHFILTER][2], &lv[EFX_SYNTHFILTER][3], &lv[EFX_SYNTHFILTER][4],
-               &lv[EFX_SYNTHFILTER][5], &lv[EFX_SYNTHFILTER][6], &lv[EFX_SYNTHFILTER][7], &lv[EFX_SYNTHFILTER][8], &lv[EFX_SYNTHFILTER][9],
-               &lv[EFX_SYNTHFILTER][10], &lv[EFX_SYNTHFILTER][11], &lv[EFX_SYNTHFILTER][12], &lv[EFX_SYNTHFILTER][13], &lv[EFX_SYNTHFILTER][14],
-               &lv[EFX_SYNTHFILTER][15], &EFX_Bank_Bypass[EFX_SYNTHFILTER]);
-        break;
-
-    case EFX_VARYBAND:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_VARYBAND][0], &lv[EFX_VARYBAND][1], &lv[EFX_VARYBAND][2], &lv[EFX_VARYBAND][3], &lv[EFX_VARYBAND][4],
-               &lv[EFX_VARYBAND][5], &lv[EFX_VARYBAND][6], &lv[EFX_VARYBAND][7], &lv[EFX_VARYBAND][8], &lv[EFX_VARYBAND][9],
-               &lv[EFX_VARYBAND][10], &EFX_Bank_Bypass[EFX_VARYBAND]);
-        break;
-
-    case EFX_CONVOLOTRON:
-    {
-        Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-        memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
-        memset(cfilename, 0, sizeof (char) * 128);
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-               &lv[EFX_CONVOLOTRON][0], &lv[EFX_CONVOLOTRON][1], &lv[EFX_CONVOLOTRON][2], &lv[EFX_CONVOLOTRON][3], &lv[EFX_CONVOLOTRON][4],
-               &lv[EFX_CONVOLOTRON][5], &lv[EFX_CONVOLOTRON][6], &lv[EFX_CONVOLOTRON][7], &lv[EFX_CONVOLOTRON][8], &lv[EFX_CONVOLOTRON][9],
-               &lv[EFX_CONVOLOTRON][10], &EFX_Bank_Bypass[EFX_CONVOLOTRON], cfilename);
-        strcpy(Efx_Convolotron->Filename, cfilename);
-        break;
-    }
-    case EFX_LOOPER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_LOOPER][0], &lv[EFX_LOOPER][1], &lv[EFX_LOOPER][2], &lv[EFX_LOOPER][3], &lv[EFX_LOOPER][4],
-               &lv[EFX_LOOPER][5], &lv[EFX_LOOPER][6], &lv[EFX_LOOPER][7], &lv[EFX_LOOPER][8], &lv[EFX_LOOPER][9],
-               &lv[EFX_LOOPER][10], &lv[EFX_LOOPER][11], &lv[EFX_LOOPER][12], &lv[EFX_LOOPER][13], &EFX_Bank_Bypass[EFX_LOOPER]);
-        break;
-
-    case EFX_MUTROMOJO:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_MUTROMOJO][0], &lv[EFX_MUTROMOJO][1], &lv[EFX_MUTROMOJO][2], &lv[EFX_MUTROMOJO][3], &lv[EFX_MUTROMOJO][4],
-               &lv[EFX_MUTROMOJO][5], &lv[EFX_MUTROMOJO][6], &lv[EFX_MUTROMOJO][7], &lv[EFX_MUTROMOJO][8], &lv[EFX_MUTROMOJO][9],
-               &lv[EFX_MUTROMOJO][10], &lv[EFX_MUTROMOJO][11], &lv[EFX_MUTROMOJO][12], &lv[EFX_MUTROMOJO][13], &lv[EFX_MUTROMOJO][14],
-               &lv[EFX_MUTROMOJO][15], &lv[EFX_MUTROMOJO][16], &lv[EFX_MUTROMOJO][17], &EFX_Bank_Bypass[EFX_MUTROMOJO]);
-        break;
-
-    case EFX_ECHOVERSE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_ECHOVERSE][0], &lv[EFX_ECHOVERSE][1], &lv[EFX_ECHOVERSE][2], &lv[EFX_ECHOVERSE][3], &lv[EFX_ECHOVERSE][4],
-               &lv[EFX_ECHOVERSE][5], &lv[EFX_ECHOVERSE][6], &lv[EFX_ECHOVERSE][7], &lv[EFX_ECHOVERSE][8], &lv[EFX_ECHOVERSE][9], &EFX_Bank_Bypass[EFX_ECHOVERSE]);
-        break;
-
-    case EFX_COILCRAFTER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_COILCRAFTER][0], &lv[EFX_COILCRAFTER][1], &lv[EFX_COILCRAFTER][2], &lv[EFX_COILCRAFTER][3], &lv[EFX_COILCRAFTER][4],
-               &lv[EFX_COILCRAFTER][5], &lv[EFX_COILCRAFTER][6], &lv[EFX_COILCRAFTER][7], &lv[EFX_COILCRAFTER][8], &EFX_Bank_Bypass[EFX_COILCRAFTER]);
-        break;
-
-    case EFX_SHELFBOOST:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_SHELFBOOST][0], &lv[EFX_SHELFBOOST][1], &lv[EFX_SHELFBOOST][2], &lv[EFX_SHELFBOOST][3], &lv[EFX_SHELFBOOST][4],
-               &EFX_Bank_Bypass[EFX_SHELFBOOST]);
-        break;
-
-    case EFX_VOCODER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_VOCODER][0], &lv[EFX_VOCODER][1], &lv[EFX_VOCODER][2], &lv[EFX_VOCODER][3], &lv[EFX_VOCODER][4],
-               &lv[EFX_VOCODER][5], &lv[EFX_VOCODER][6], &EFX_Bank_Bypass[EFX_VOCODER]);
-        break;
-
-    case EFX_SUSTAINER:
-        sscanf(buf, "%d,%d,%d\n",
-               &lv[EFX_SUSTAINER][0], &lv[EFX_SUSTAINER][1], &EFX_Bank_Bypass[EFX_SUSTAINER]);
-        break;
-
-    case EFX_SEQUENCE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_SEQUENCE][0], &lv[EFX_SEQUENCE][1], &lv[EFX_SEQUENCE][2], &lv[EFX_SEQUENCE][3], &lv[EFX_SEQUENCE][4],
-               &lv[EFX_SEQUENCE][5], &lv[EFX_SEQUENCE][6], &lv[EFX_SEQUENCE][7], &lv[EFX_SEQUENCE][8], &lv[EFX_SEQUENCE][9],
-               &lv[EFX_SEQUENCE][10], &lv[EFX_SEQUENCE][11], &lv[EFX_SEQUENCE][12], &lv[EFX_SEQUENCE][13], &lv[EFX_SEQUENCE][14], &EFX_Bank_Bypass[EFX_SEQUENCE]);
-        break;
-
-    case EFX_SHIFTER:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_SHIFTER][0], &lv[EFX_SHIFTER][1], &lv[EFX_SHIFTER][2], &lv[EFX_SHIFTER][3], &lv[EFX_SHIFTER][4],
-               &lv[EFX_SHIFTER][5], &lv[EFX_SHIFTER][6], &lv[EFX_SHIFTER][7], &lv[EFX_SHIFTER][8], &lv[EFX_SHIFTER][9], &EFX_Bank_Bypass[EFX_SHIFTER]);
-        break;
-
-    case EFX_STOMPBOX:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_STOMPBOX][0], &lv[EFX_STOMPBOX][1], &lv[EFX_STOMPBOX][2], &lv[EFX_STOMPBOX][3], &lv[EFX_STOMPBOX][4],
-               &lv[EFX_STOMPBOX][5], &EFX_Bank_Bypass[EFX_STOMPBOX]);
-        break;
-
-    case EFX_REVERBTRON:
-    {
-        Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-        memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
-        memset(cfilename, 0, sizeof (char) * 128);
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-               &lv[EFX_REVERBTRON][0], &lv[EFX_REVERBTRON][1], &lv[EFX_REVERBTRON][2], &lv[EFX_REVERBTRON][3], &lv[EFX_REVERBTRON][4],
-               &lv[EFX_REVERBTRON][5], &lv[EFX_REVERBTRON][6], &lv[EFX_REVERBTRON][7], &lv[EFX_REVERBTRON][8], &lv[EFX_REVERBTRON][9],
-               &lv[EFX_REVERBTRON][10], &lv[EFX_REVERBTRON][11], &lv[EFX_REVERBTRON][12], &lv[EFX_REVERBTRON][13], &lv[EFX_REVERBTRON][14], &lv[EFX_REVERBTRON][15],
-               &EFX_Bank_Bypass[EFX_REVERBTRON],
-               cfilename);
-        strcpy(Efx_Reverbtron->Filename, cfilename);
-        break;
-    }
-    case EFX_ECHOTRON:
-    {
-        Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-        memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
-        memset(cfilename, 0, sizeof (char) * 128);
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-               &lv[EFX_ECHOTRON][0], &lv[EFX_ECHOTRON][1], &lv[EFX_ECHOTRON][2], &lv[EFX_ECHOTRON][3], &lv[EFX_ECHOTRON][4],
-               &lv[EFX_ECHOTRON][5], &lv[EFX_ECHOTRON][6], &lv[EFX_ECHOTRON][7], &lv[EFX_ECHOTRON][8], &lv[EFX_ECHOTRON][9],
-               &lv[EFX_ECHOTRON][10], &lv[EFX_ECHOTRON][11], &lv[EFX_ECHOTRON][12], &lv[EFX_ECHOTRON][13], &lv[EFX_ECHOTRON][14], &lv[EFX_ECHOTRON][15],
-               &EFX_Bank_Bypass[EFX_ECHOTRON],
-               cfilename);
-        strcpy(Efx_Echotron->Filename, cfilename);
-        break;
-    }
-    case EFX_STEREOHARM:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_STEREOHARM][0], &lv[EFX_STEREOHARM][1], &lv[EFX_STEREOHARM][2], &lv[EFX_STEREOHARM][3], &lv[EFX_STEREOHARM][4],
-               &lv[EFX_STEREOHARM][5], &lv[EFX_STEREOHARM][6], &lv[EFX_STEREOHARM][7], &lv[EFX_STEREOHARM][8], &lv[EFX_STEREOHARM][9],
-               &lv[EFX_STEREOHARM][10], &lv[EFX_STEREOHARM][11], &EFX_Bank_Bypass[EFX_STEREOHARM]);
-        break;
-
-    case EFX_COMPBAND:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_COMPBAND][0], &lv[EFX_COMPBAND][1], &lv[EFX_COMPBAND][2], &lv[EFX_COMPBAND][3], &lv[EFX_COMPBAND][4],
-               &lv[EFX_COMPBAND][5], &lv[EFX_COMPBAND][6], &lv[EFX_COMPBAND][7], &lv[EFX_COMPBAND][8], &lv[EFX_COMPBAND][9],
-               &lv[EFX_COMPBAND][10], &lv[EFX_COMPBAND][11], &lv[EFX_COMPBAND][12], &EFX_Bank_Bypass[EFX_COMPBAND]);
-        break;
-
-    case EFX_OPTICALTREM:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",    // was missing one
-               &lv[EFX_OPTICALTREM][0], &lv[EFX_OPTICALTREM][1], &lv[EFX_OPTICALTREM][2], &lv[EFX_OPTICALTREM][3], &lv[EFX_OPTICALTREM][4],
-               &lv[EFX_OPTICALTREM][5], &lv[EFX_OPTICALTREM][6], &EFX_Bank_Bypass[EFX_OPTICALTREM]);
-        break;
-
-    case EFX_VIBE:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_VIBE][0], &lv[EFX_VIBE][1], &lv[EFX_VIBE][2], &lv[EFX_VIBE][3], &lv[EFX_VIBE][4],
-               &lv[EFX_VIBE][5], &lv[EFX_VIBE][6], &lv[EFX_VIBE][7], &lv[EFX_VIBE][8], &lv[EFX_VIBE][9], &lv[EFX_VIBE][10],
-               &EFX_Bank_Bypass[EFX_VIBE]);
-        break;
-
-    case EFX_INFINITY:
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &lv[EFX_INFINITY][0], &lv[EFX_INFINITY][1], &lv[EFX_INFINITY][2], &lv[EFX_INFINITY][3], &lv[EFX_INFINITY][4],
-               &lv[EFX_INFINITY][5], &lv[EFX_INFINITY][6], &lv[EFX_INFINITY][7], &lv[EFX_INFINITY][8], &lv[EFX_INFINITY][9],
-               &lv[EFX_INFINITY][10], &lv[EFX_INFINITY][11], &lv[EFX_INFINITY][12], &lv[EFX_INFINITY][13], &lv[EFX_INFINITY][14],
-               &lv[EFX_INFINITY][15], &lv[EFX_INFINITY][16], &lv[EFX_INFINITY][17], &EFX_Bank_Bypass[EFX_INFINITY]);
-        break;
-    }
-
-    free(cfilename);
-
-#endif // 0
 }
 
 /**
- * Individual preset file saving and user defined Inserted presets.
+ * Individual preset file saving and user defined inserted presets.
  * Get individual effect parameters and put them in the passed buffer. 
  * The buffer is comma delimited and ends with newline (\n).
  * This is used in human readable text files.
  * 
  * @param buf
- *      Buffer to hold efx parameters.
+ *      Buffer to hold effect parameters.
  * 
  * @param fx_index
- *      The effect number to load.
+ *      The effect index number to load.
  */
-void RKR::getbuf(char *buf, int fx_index)
+void RKR::get_effect_parameters(char *buf, int fx_index)
 {
-#if 1
-    
-    // String buffer to hold everthing
+    // String buffer to hold everything
     std::string s_buf = "";
     
      // Run through the effects for a match to the effect index
-    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+    for (int effect = 0; effect < C_NUMBER_EFFECTS; effect++)
     {
-        if (k == fx_index)
+        if (effect == fx_index)
         {
-            for(int i = 0; i < EFX_Param_Size[k] + 1; i++)  // +1 for bypass
+            for(int params = 0; params < EFX_Param_Size[effect] + 1; params++)  // +1 for bypass
             {
-                if(i < EFX_Param_Size[k])   // Set the EFX parameters
+                if(params < EFX_Param_Size[effect])   // the effect parameters
                 {
-                    // put integer parameters in string converted to string
-                    s_buf += ITS(Rack_Effects[k]->getpar(i));
+                    // add integer parameters converted to string
+                    s_buf += ITS(Rack_Effects[effect]->getpar(params));
+
                     // add the delimiter
                     s_buf += ",";
                 }
-                else    // Set the bypass
+                else    // add the effect bypass
                 {
-                    s_buf += ITS(EFX_Bypass[k]);
+                    s_buf += ITS(EFX_Bypass[effect]);
                 }
             }
 
@@ -638,502 +284,6 @@ void RKR::getbuf(char *buf, int fx_index)
             return; // we found and processed what we were looking for
         }
     }
-
-#else
-    switch (fx_index)
-    {
-    case EFX_REVERB:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet), Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan),
-                Rack_Effects[EFX_REVERB]->getpar(Reverb_Time), Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay),
-                Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB), Rack_Effects[EFX_REVERB]->getpar(Reverb_SKIP_5),
-                Rack_Effects[EFX_REVERB]->getpar(Reverb_SKIP_6), Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF),
-                Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF), Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp),
-                Rack_Effects[EFX_REVERB]->getpar(Reverb_Type), Rack_Effects[EFX_REVERB]->getpar(Reverb_Room), EFX_Bypass[EFX_REVERB]);
-        break;
-
-    case EFX_ECHO:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet), Rack_Effects[EFX_ECHO]->getpar(Echo_Pan),
-                Rack_Effects[EFX_ECHO]->getpar(Echo_Delay), Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay),
-                Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross), Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback),
-                Rack_Effects[EFX_ECHO]->getpar(Echo_Damp), Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse),
-                Rack_Effects[EFX_ECHO]->getpar(Echo_Direct), EFX_Bypass[EFX_ECHO]);
-        break;
-
-    case EFX_CHORUS:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_CHORUS]->getpar(Chorus_DryWet), Rack_Effects[EFX_CHORUS]->getpar(Chorus_Pan),
-                Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo), Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Random),
-                Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Type), Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Stereo),
-                Rack_Effects[EFX_CHORUS]->getpar(Chorus_Depth), Rack_Effects[EFX_CHORUS]->getpar(Chorus_Delay),
-                Rack_Effects[EFX_CHORUS]->getpar(Chorus_Feedback), Rack_Effects[EFX_CHORUS]->getpar(Chorus_LR_Cross),
-                Rack_Effects[EFX_CHORUS]->getpar(Chorus_SKIP_Flange_10), Rack_Effects[EFX_CHORUS]->getpar(Chorus_Subtract),
-                Rack_Effects[EFX_CHORUS]->getpar(Chorus_Intense), EFX_Bypass[EFX_CHORUS]);
-        break;
-
-    case EFX_FLANGER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_FLANGER]->getpar(Flanger_DryWet), Rack_Effects[EFX_FLANGER]->getpar(Flanger_Pan),
-                Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Tempo), Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Random),
-                Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Type), Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Stereo),
-                Rack_Effects[EFX_FLANGER]->getpar(Flanger_Depth), Rack_Effects[EFX_FLANGER]->getpar(Flanger_Delay),
-                Rack_Effects[EFX_FLANGER]->getpar(Flanger_Feedback), Rack_Effects[EFX_FLANGER]->getpar(Flanger_LR_Cross),
-                Rack_Effects[EFX_FLANGER]->getpar(Flanger_SKIP_Flange_10), Rack_Effects[EFX_FLANGER]->getpar(Flanger_Subtract),
-                Rack_Effects[EFX_FLANGER]->getpar(Flanger_Intense), EFX_Bypass[EFX_FLANGER]);
-        break;
-
-    case EFX_PHASER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_PHASER]->getpar(Phaser_DryWet), Rack_Effects[EFX_PHASER]->getpar(Phaser_Pan),
-                Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo), Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Random),
-                Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Type), Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Stereo),
-                Rack_Effects[EFX_PHASER]->getpar(Phaser_Depth), Rack_Effects[EFX_PHASER]->getpar(Phaser_Feedback),
-                Rack_Effects[EFX_PHASER]->getpar(Phaser_Stages), Rack_Effects[EFX_PHASER]->getpar(Phaser_LR_Cross),
-                Rack_Effects[EFX_PHASER]->getpar(Phaser_Subtract), Rack_Effects[EFX_PHASER]->getpar(Phaser_Phase),
-                EFX_Bypass[EFX_PHASER]);
-        break;
-
-    case EFX_OVERDRIVE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan),
-                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive),
-                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type),
-                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Negate), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF),
-                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Stereo),
-                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Prefilter), Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_SKIP_11),
-                Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Suboctave), EFX_Bypass[EFX_OVERDRIVE]);
-        break;
-
-    case EFX_DISTORTION:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_DISTORTION]->getpar(Dist_DryWet), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Pan),
-                Rack_Effects[EFX_DISTORTION]->getpar(Dist_LR_Cross), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Drive),
-                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Level), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Type),
-                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Negate), Rack_Effects[EFX_DISTORTION]->getpar(Dist_LPF),
-                Rack_Effects[EFX_DISTORTION]->getpar(Dist_HPF), Rack_Effects[EFX_DISTORTION]->getpar(Dist_Stereo),
-                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Prefilter), Rack_Effects[EFX_DISTORTION]->getpar(Dist_SKIP_11),
-                Rack_Effects[EFX_DISTORTION]->getpar(Dist_Suboctave), EFX_Bypass[EFX_DISTORTION]);
-        break;
-
-    case EFX_EQ:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_EQ]->getpar(EQ_31_HZ), Rack_Effects[EFX_EQ]->getpar(EQ_63_HZ),
-                Rack_Effects[EFX_EQ]->getpar(EQ_125_HZ), Rack_Effects[EFX_EQ]->getpar(EQ_250_HZ),
-                Rack_Effects[EFX_EQ]->getpar(EQ_500_HZ), Rack_Effects[EFX_EQ]->getpar(EQ_1_KHZ),
-                Rack_Effects[EFX_EQ]->getpar(EQ_2_KHZ), Rack_Effects[EFX_EQ]->getpar(EQ_4_KHZ),
-                Rack_Effects[EFX_EQ]->getpar(EQ_8_KHZ), Rack_Effects[EFX_EQ]->getpar(EQ_16_KHZ),
-                Rack_Effects[EFX_EQ]->getpar(EQ_Gain), Rack_Effects[EFX_EQ]->getpar(EQ_Q), EFX_Bypass[EFX_EQ]);
-        break;
-
-    case EFX_PARAMETRIC:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq), Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain),
-                Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q), Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq),
-                Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain), Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q),
-                Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq), Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain),
-                Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q), Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain),
-                EFX_Bypass[EFX_PARAMETRIC]);
-        break;
-
-    case EFX_COMPRESSOR:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio),
-                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack),
-                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out),
-                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee), Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo),
-                Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak), EFX_Bypass[EFX_COMPRESSOR]);
-        break;
-
-
-    case EFX_WAHWAH:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_WAHWAH]->getpar(WahWah_DryWet), Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Pan),
-                Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo), Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Random),
-                Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Type), Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Stereo),
-                Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Depth), Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Sense),
-                Rack_Effects[EFX_WAHWAH]->getpar(WahWah_ASI), Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Smooth),
-                Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Mode), EFX_Bypass[EFX_WAHWAH]);
-        break;
-
-    case EFX_ALIENWAH:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_DryWet), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Pan),
-                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Random),
-                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Type), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Stereo),
-                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Depth), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Feedback),
-                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Delay), Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LR_Cross),
-                Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase), EFX_Bypass[EFX_ALIENWAH]);
-        break;
-
-    case EFX_CABINET:
-        sprintf(buf, "%d,%d,%d\n",
-                Rack_Effects[EFX_CABINET]->Ppreset, Rack_Effects[EFX_CABINET]->getpar(Cabinet_Gain), EFX_Bypass[EFX_CABINET]);
-        break;
-
-    case EFX_PAN:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_PAN]->getpar(Pan_DryWet), Rack_Effects[EFX_PAN]->getpar(Pan_Pan),
-                Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Tempo), Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Random),
-                Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Type), Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Stereo),
-                Rack_Effects[EFX_PAN]->getpar(Pan_Ex_St_Amt), Rack_Effects[EFX_PAN]->getpar(Pan_AutoPan),
-                Rack_Effects[EFX_PAN]->getpar(Pan_Enable_Extra), EFX_Bypass[EFX_PAN]);
-        break;
-
-    case EFX_HARMONIZER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_DryWet), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Pan),
-                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Gain), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval),
-                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select),
-                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord),
-                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain), Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q),
-                Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI), EFX_Bypass[EFX_HARMONIZER]);
-        break;
-
-    case EFX_MUSICAL_DELAY:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_DryWet), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_1),
-                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_1), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Del_Offset),
-                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_LR_Cross), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_1),
-                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Damp), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_2),
-                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_2), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_2),
-                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo), Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_1),
-                Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_2), EFX_Bypass[EFX_MUSICAL_DELAY]);
-        break;
-
-    case EFX_NOISEGATE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold), Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range),
-                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack), Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release),
-                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF), Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF),
-                Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold), EFX_Bypass[EFX_NOISEGATE]);
-        break;
-
-    case EFX_DERELICT:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_DERELICT]->getpar(Dere_DryWet), Rack_Effects[EFX_DERELICT]->getpar(Dere_Pan),
-                Rack_Effects[EFX_DERELICT]->getpar(Dere_LR_Cross), Rack_Effects[EFX_DERELICT]->getpar(Dere_Drive),
-                Rack_Effects[EFX_DERELICT]->getpar(Dere_Level), Rack_Effects[EFX_DERELICT]->getpar(Dere_Type),
-                Rack_Effects[EFX_DERELICT]->getpar(Dere_Negate), Rack_Effects[EFX_DERELICT]->getpar(Dere_LPF),
-                Rack_Effects[EFX_DERELICT]->getpar(Dere_HPF), Rack_Effects[EFX_DERELICT]->getpar(Dere_Color),
-                Rack_Effects[EFX_DERELICT]->getpar(Dere_Prefilter), Rack_Effects[EFX_DERELICT]->getpar(Dere_Suboctave),
-                EFX_Bypass[EFX_DERELICT]);
-        break;
-
-    case EFX_ANALOG_PHASER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion),
-                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random),
-                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo),
-                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback),
-                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch),
-                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract), Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth),
-                Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper), EFX_Bypass[EFX_ANALOG_PHASER]);
-        break;
-
-    case EFX_VALVE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_VALVE]->getpar(Valve_DryWet), Rack_Effects[EFX_VALVE]->getpar(Valve_Pan),
-                Rack_Effects[EFX_VALVE]->getpar(Valve_LR_Cross), Rack_Effects[EFX_VALVE]->getpar(Valve_Drive),
-                Rack_Effects[EFX_VALVE]->getpar(Valve_Level), Rack_Effects[EFX_VALVE]->getpar(Valve_Negate),
-                Rack_Effects[EFX_VALVE]->getpar(Valve_LPF), Rack_Effects[EFX_VALVE]->getpar(Valve_HPF),
-                Rack_Effects[EFX_VALVE]->getpar(Valve_Stereo), Rack_Effects[EFX_VALVE]->getpar(Valve_Prefilter),
-                Rack_Effects[EFX_VALVE]->getpar(Valve_Distortion), Rack_Effects[EFX_VALVE]->getpar(Valve_Ex_Dist),
-                Rack_Effects[EFX_VALVE]->getpar(Valve_Presence), EFX_Bypass[EFX_VALVE]);
-        break;
-
-    case EFX_DUAL_FLANGE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_DryWet), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Pan),
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LR_Cross), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Depth),
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Width), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Offset),
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Feedback), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LPF),
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Subtract), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Zero),
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Stereo),
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Type), Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Random),
-                Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Intense), EFX_Bypass[EFX_DUAL_FLANGE]);
-        break;
-
-    case EFX_RING:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_RING]->getpar(Ring_DryWet), Rack_Effects[EFX_RING]->getpar(Ring_Pan),
-                Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross), Rack_Effects[EFX_RING]->getpar(Ring_Level),
-                Rack_Effects[EFX_RING]->getpar(Ring_Depth), Rack_Effects[EFX_RING]->getpar(Ring_Freq),
-                Rack_Effects[EFX_RING]->getpar(Ring_Stereo), Rack_Effects[EFX_RING]->getpar(Ring_Sine),
-                Rack_Effects[EFX_RING]->getpar(Ring_Triangle), Rack_Effects[EFX_RING]->getpar(Ring_Saw),
-                Rack_Effects[EFX_RING]->getpar(Ring_Square), Rack_Effects[EFX_RING]->getpar(Ring_Input),
-                Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq), EFX_Bypass[EFX_RING]);
-        break;
-
-    case EFX_EXCITER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Gain), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_1),
-                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_2), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_3),
-                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_4), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_5),
-                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_6), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_7),
-                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_8), Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_9),
-                Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_10), Rack_Effects[EFX_EXCITER]->getpar(Exciter_LPF),
-                Rack_Effects[EFX_EXCITER]->getpar(Exciter_HPF), EFX_Bypass[EFX_EXCITER]);
-        break;
-
-    case EFX_DISTBAND:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_DryWet), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Pan),
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_LR_Cross), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Drive),
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Level), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Low),
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Mid), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Hi),
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Low), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Mid),
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Hi), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Negate),
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_1), Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_2),
-                Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Stereo), EFX_Bypass[EFX_DISTBAND]);
-        break;
-
-    case EFX_ARPIE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_ARPIE]->getpar(Arpie_DryWet), Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pan),
-                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Tempo), Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Delay),
-                Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Cross), Rack_Effects[EFX_ARPIE]->getpar(Arpie_Feedback),
-                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Damp), Rack_Effects[EFX_ARPIE]->getpar(Arpie_ArpeWD),
-                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Harm), Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pattern),
-                Rack_Effects[EFX_ARPIE]->getpar(Arpie_Subdivision), EFX_Bypass[EFX_ARPIE]);
-        break;
-
-    case EFX_EXPANDER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold), Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape),
-                Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack), Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release),
-                Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF), Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF),
-                Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain), EFX_Bypass[EFX_EXPANDER]);
-        break;
-
-    case EFX_SHUFFLE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_DryWet), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_L),
-                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_ML), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_MH),
-                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_H), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_L),
-                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_ML), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_MH),
-                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_H), Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Width),
-                Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_F_Band), EFX_Bypass[EFX_SHUFFLE]);
-        break;
-
-    case EFX_SYNTHFILTER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort),
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random),
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo),
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback),
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LPF_Stages), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_HPF_Stages),
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Subtract), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth),
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack),
-                Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release), Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset),
-                EFX_Bypass[EFX_SYNTHFILTER]);
-        break;
-
-    case EFX_VARYBAND:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_DryWet), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1),
-                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_1), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_1),
-                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_2),
-                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_2), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_1),
-                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_2), Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_3),
-                Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Combination), EFX_Bypass[EFX_VARYBAND]);
-        break;
-
-    case EFX_CONVOLOTRON:
-    {
-        Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan),
-                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Safe), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length),
-                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_SKIP_5),
-                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level),
-                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Set_File), Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_SKIP_9),
-                Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback), EFX_Bypass[EFX_CONVOLOTRON], Efx_Convolotron->Filename);
-        break;
-    }
-    case EFX_LOOPER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_LOOPER]->getpar(Looper_DryWet), Rack_Effects[EFX_LOOPER]->getpar(Looper_Play),
-                Rack_Effects[EFX_LOOPER]->getpar(Looper_Stop), Rack_Effects[EFX_LOOPER]->getpar(Looper_Record),
-                Rack_Effects[EFX_LOOPER]->getpar(Looper_Clear), Rack_Effects[EFX_LOOPER]->getpar(Looper_Reverse),
-                Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_1), Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_1),
-                Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_2), Rack_Effects[EFX_LOOPER]->getpar(Looper_AutoPlay),
-                Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_2), Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_1),
-                Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_2), Rack_Effects[EFX_LOOPER]->getpar(Looper_Link), EFX_Bypass[EFX_LOOPER]);
-        break;
-
-    case EFX_MUTROMOJO:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_DryWet), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Resonance),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Random),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Type), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Stereo),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Depth), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Sens),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Wah), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Smooth),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LowPass), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_BandPass),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_HighPass), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Stages),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range), Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq),
-                Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Mod_Res), Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Mode_Legacy),
-                EFX_Bypass[EFX_MUTROMOJO]);
-
-        break;
-
-    case EFX_ECHOVERSE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_DryWet), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Pan),
-                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_LR_Delay),
-                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Angle), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Feedback),
-                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Damp), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Reverse),
-                Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Subdivision), Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Ext_Stereo),
-                EFX_Bypass[EFX_ECHOVERSE]);
-        break;
-
-    case EFX_COILCRAFTER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Gain), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Origin),
-                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Destiny), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1),
-                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2),
-                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2), Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Tone),
-                Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_NeckMode), EFX_Bypass[EFX_COILCRAFTER]);
-        break;
-
-    case EFX_SHELFBOOST:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain), Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence),
-                Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone), Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo),
-                Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level), EFX_Bypass[EFX_SHELFBOOST]);
-        break;
-
-    case EFX_VOCODER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_DryWet), Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Pan),
-                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Smear), Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Q),
-                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Input), Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Level),
-                Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Ring), EFX_Bypass[EFX_VOCODER]);
-        break;
-
-    case EFX_SUSTAINER:
-        sprintf(buf, "%d,%d,%d\n",
-                Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Gain), Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Sustain),
-                EFX_Bypass[EFX_SUSTAINER]);
-        break;
-
-    case EFX_SEQUENCE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_1), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_2),
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_3), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_4),
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_5), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_6),
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_7), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_8),
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_DryWet), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo),
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Resonance), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Amp),
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Stdf), Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Mode),
-                Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range), EFX_Bypass[EFX_SEQUENCE]);
-        break;
-
-    case EFX_SHIFTER:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_DryWet), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Pan),
-                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Gain), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Attack),
-                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Decay), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Threshold),
-                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Interval), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Shift),
-                Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Mode), Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Whammy), EFX_Bypass[EFX_SHIFTER]);
-        break;
-
-
-    case EFX_STOMPBOX:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level), Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone),
-                Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid), Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias),
-                Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain), Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode),
-                EFX_Bypass[EFX_STOMPBOX]);
-        break;
-
-    case EFX_REVERBTRON:
-    {
-        Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_DryWet), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Fade),
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Safe), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Length),
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_I_Delay),
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Damp), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Level),
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Set_File), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Stretch),
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Feedback), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Pan),
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Ex_Stereo), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Shuffle),
-                Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_LPF), Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Diffusion),
-                EFX_Bypass[EFX_REVERBTRON], Efx_Reverbtron->Filename);
-        break;
-    }
-    case EFX_ECHOTRON:
-    {
-        Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_DryWet), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Depth),
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Width), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps),
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_User_File), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo),
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Damp), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LR_Cross),
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Set_File), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Stereo),
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Feedback), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Pan),
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Delay), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Filter),
-                Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Type), Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Filters),
-                EFX_Bypass[EFX_ECHOTRON], Efx_Echotron->Filename);
-        break;
-    }
-    case EFX_STEREOHARM:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_DryWet), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Gain),
-                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Interval), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma),
-                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Gain), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Interval),
-                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Select),
-                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord),
-                Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_MIDI), Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_LR_Cross),
-                EFX_Bypass[EFX_STEREOHARM]);
-        break;
-
-    case EFX_COMPBAND:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio),
-                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio),
-                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh),
-                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh),
-                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1),
-                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2), Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3),
-                Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain), EFX_Bypass[EFX_COMPBAND]);
-        break;
-
-    case EFX_OPTICALTREM:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Depth), Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo),
-                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Random), Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Type),
-                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Stereo), Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Pan),
-                Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Invert), EFX_Bypass[EFX_OPTICALTREM]);
-        break;
-
-
-    case EFX_VIBE:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_VIBE]->getpar(Vibe_Width), Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo),
-                Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Random), Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Type),
-                Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Stereo), Rack_Effects[EFX_VIBE]->getpar(Vibe_Pan),
-                Rack_Effects[EFX_VIBE]->getpar(Vibe_DryWet), Rack_Effects[EFX_VIBE]->getpar(Vibe_Feedback),
-                Rack_Effects[EFX_VIBE]->getpar(Vibe_Depth), Rack_Effects[EFX_VIBE]->getpar(Vibe_LR_Cross),
-                Rack_Effects[EFX_VIBE]->getpar(Vibe_Stereo), EFX_Bypass[EFX_VIBE]);
-        break;
-
-    case EFX_INFINITY:
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_DryWet), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_1),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_2), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_3),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_4), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_5),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_6), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_7),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_8), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Resonance),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Start), Rack_Effects[EFX_INFINITY]->getpar(Infinity_End),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo), Rack_Effects[EFX_INFINITY]->getpar(Infinity_LR_Delay),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Subdivision), Rack_Effects[EFX_INFINITY]->getpar(Infinity_AutoPan),
-                Rack_Effects[EFX_INFINITY]->getpar(Infinity_Reverse), Rack_Effects[EFX_INFINITY]->getpar(Infinity_Stages),
-                EFX_Bypass[EFX_INFINITY]);
-        break;
-    }
-    
-#endif // 0
 }
 
 /**
@@ -1200,7 +350,7 @@ RKR::savefile(char *filename)
     {
         int j = efx_order[i];
         memset(buf, 0, sizeof (buf));
-        getbuf(buf, j);
+        get_effect_parameters(buf, j);
         fputs(buf, fn);
     }
 
@@ -1367,7 +517,7 @@ RKR::loadfile(char *filename)
             file_error(fn);
             return;
         }
-        putbuf(buf, j);
+        apply_effect_parameters(buf, j);
     }
 
     //Order
@@ -2369,7 +1519,7 @@ RKR::SaveIntPreset(int num, char *name)
     if ((fn = fopen(tempfile, "a")) != NULL)
     {
         memset(buf, 0, sizeof (buf));
-        getbuf(buf, num);
+        get_effect_parameters(buf, num);
         memset(sbuf, 0, sizeof (sbuf));
         sprintf(sbuf, "%d,%s,%s", num, name, buf);
         fputs(sbuf, fn);

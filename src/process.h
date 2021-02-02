@@ -669,8 +669,8 @@ public:
     int ret_HPF(int value);
 
     // fileio.C
-    void putbuf (char *buf, int j);
-    void getbuf (char *buf, int j);
+    void apply_effect_parameters (char *buf, int fx_index);
+    void get_effect_parameters (char *buf, int fx_index);
     void savefile (char *filename);
     void loadfile (char *filename);
     void file_error(FILE *fn);
