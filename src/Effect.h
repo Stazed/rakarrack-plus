@@ -51,15 +51,15 @@ public:
 
     virtual ~ Effect () {};
     
-    virtual void setpreset (int) {};
-    virtual void changepar (int, int) {};
-    virtual int getpar (int) {return (0);};
-    virtual void out (float *, float *) {};
-    virtual void cleanup () {};
-    virtual int get_number_efx_parameters () {return 0;};
+    virtual void setpreset (int) = 0;
+    virtual void changepar (int, int) = 0;
+    virtual int getpar (int) = 0;
+    virtual void out (float *, float *) = 0;
+    virtual void cleanup () = 0;
+    virtual int get_number_efx_parameters () = 0;
 
 #ifdef LV2_SUPPORT
-    virtual void lv2_update_params(uint32_t) {};
+    virtual void lv2_update_params(uint32_t)  = 0;
 #endif // LV2
 
     // The volume of the effect and is public.

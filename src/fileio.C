@@ -571,6 +571,8 @@ void RKR::putbuf(char *buf, int fx_index)
 /**
  * Individual preset file saving and user defined Inserted presets.
  * Get individual effect parameters and put them in the passed buffer. 
+ * The buffer is comma delimited and ends with newline (\n).
+ * This is used in human readable text files.
  * 
  * @param buf
  *      Buffer to hold efx parameters.
@@ -582,6 +584,7 @@ void RKR::getbuf(char *buf, int fx_index)
 {
 #if 1
     
+    // String buffer to hold everthing
     std::string s_buf = "";
     
      // Run through the effects for a match to the effect index
@@ -593,7 +596,9 @@ void RKR::getbuf(char *buf, int fx_index)
             {
                 if(i < EFX_Param_Size[k])   // Set the EFX parameters
                 {
+                    // put integer parameters in string converted to string
                     s_buf += ITS(Rack_Effects[k]->getpar(i));
+                    // add the delimiter
                     s_buf += ",";
                 }
                 else    // Set the bypass
@@ -602,7 +607,7 @@ void RKR::getbuf(char *buf, int fx_index)
                 }
             }
 
-            // Convolotron, Reverbtron, Echotron have file names to parse as well
+            // Convolotron, Reverbtron, Echotron have file names to add as well
             if(fx_index == EFX_CONVOLOTRON)
             {
                 s_buf += ",";   // Add comma after bypass
@@ -614,7 +619,6 @@ void RKR::getbuf(char *buf, int fx_index)
             {
                 s_buf += ",";   // Add comma after bypass
                 Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-                
                 s_buf += Efx_Reverbtron->Filename;
             }
 
@@ -622,13 +626,13 @@ void RKR::getbuf(char *buf, int fx_index)
             {
                 s_buf += ",";   // Add comma after bypass
                 Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-                
                 s_buf += Efx_Echotron->Filename;
             }
 
             // Add final newline
             s_buf += "\n";
 
+            // copy string to passed char array
             strcpy(buf, s_buf.c_str());
             
             return; // we found and processed what we were looking for
