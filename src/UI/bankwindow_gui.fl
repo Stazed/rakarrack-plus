@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
     } {
       MenuItem NewB {
         label {&New}
-        callback {m_rkr->New_Bank();
+        callback {m_rkr->new_bank();
 m_rgui->Put_Loaded_Bank();
 redraw();}
         xywh {0 0 45 26} divider

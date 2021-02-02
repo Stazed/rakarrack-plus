@@ -680,8 +680,8 @@ public:
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     int load_bank (char *filename);
     int save_bank (char *filename);
-    void New ();
-    void New_Bank ();
+    void new_preset ();
+    void new_bank ();
     void Bank_to_Preset (int Num);
     void Preset_to_Bank (int i);
     int BigEndian();

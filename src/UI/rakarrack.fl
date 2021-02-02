@@ -1331,7 +1331,7 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
         Fl_Button S_new {
           label New
           user_data 77
-          callback {rkr->New();
+          callback {rkr->new_preset();
 DisAssigns();
 FillML();
 Prepare_Order();

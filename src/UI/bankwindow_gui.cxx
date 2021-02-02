@@ -15,7 +15,7 @@ const std::vector<std::string> bank_submenu_paths
 };
 
 void BankWindowGui::cb_NewB_i(Fl_Menu_*, void*) {
-  m_rkr->New_Bank();
+  m_rkr->new_bank();
 m_rgui->Put_Loaded_Bank();
 redraw();
 }

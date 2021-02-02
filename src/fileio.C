@@ -398,7 +398,7 @@ RKR::load_preset(char *filename)
         return;
     }
 
-    New();
+    new_preset();
 
     // This cycles through the first 14 lines which should always exist.
     // Will set fgets to the next item which is order for loading.
@@ -657,7 +657,7 @@ RKR::loadnames()
 
         if ((fn = fopen(temp, "rb")) != NULL)
         {
-            New_Bank();
+            new_bank();
             while (1)
             {
                 size_t ret = fread(&Bank, sizeof (Bank), 1, fn);
@@ -983,7 +983,7 @@ RKR::load_bank(char *filename)
 
     if ((fn = fopen(filename, "rb")) != NULL)
     {
-        New_Bank();
+        new_bank();
 
         while (1)
         {
@@ -1065,17 +1065,23 @@ RKR::save_bank(char *filename)
     return (0);
 }
 
+/**
+ * Set all main window values to default.
+ * Can be user triggered with the New button on the main window.
+ */
 void
-RKR::New()
+RKR::new_preset()
 {
-    // Set all main rack off
+    // Set all main rack as inactive for display
     for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
     {
         active[j] = 0;
     }
 
+    // Clear the preset name
     memset(Preset_Name, 0, sizeof (char) * 64);
     
+    // Clear special effect file names
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
 
@@ -1085,15 +1091,20 @@ RKR::New()
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
     memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
 
+    // Clear the author
     memset(Author, 0, sizeof (char) * 64);
     strcpy(Author, UserRealName);
+    
+    // Set master controls
     Input_Gain = .5f;
     Master_Volume = .5f;
     Fraction_Bypass = 1.0f;
     Bypass = 0;
+    
+    // Clear the effects parameters array
     memset(lv, 0, sizeof (lv));
 
-    // Set the default presets
+    // Set the default effect parameters
     for (int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
         for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
@@ -1103,6 +1114,7 @@ RKR::New()
 
         lv[j][C_BYPASS] = 0;
     }
+
     // Set the default order
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
@@ -1121,11 +1133,12 @@ RKR::New()
     // Clear MIDI learn
     memset(XUserMIDI, 0, sizeof (XUserMIDI));
 
+    // Apply all the above settings to each effect, etc.
     set_audio_paramters();
 }
 
 void
-RKR::New_Bank()
+RKR::new_bank()
 {
     for (int i = 0; i < 62; i++)
     {

@@ -579,7 +579,7 @@ void RKRGUI::cb_L_B4(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_S_new_i(RKR_Button*, void*) {
-  rkr->New();
+  rkr->new_preset();
 DisAssigns();
 FillML();
 Prepare_Order();

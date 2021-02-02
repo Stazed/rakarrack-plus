@@ -311,10 +311,10 @@ RKR::RKR() :
     MIDI_control();
     
     // Initialize Preset
-    New();
+    new_preset();
 
     // Initialize Bank
-    New_Bank();
+    new_bank();
     
     // Loads the banks preset names and information for the bank manager window.
     loadnames();
