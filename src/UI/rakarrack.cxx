@@ -514,7 +514,7 @@ void RKRGUI::cb_L_B1_i(RKR_Button*, void*) {
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
-int ok=rkr->loadbank(temp);
+int ok=rkr->load_bank(temp);
 if(ok) 
 {
 rkr->a_bank=0;
@@ -532,7 +532,7 @@ void RKRGUI::cb_L_B2_i(RKR_Button*, void*) {
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra.rkrb", DATADIR);
- int ok=rkr->loadbank(temp);
+ int ok=rkr->load_bank(temp);
 if(ok) 
 {
 rkr->a_bank=1;
@@ -550,7 +550,7 @@ void RKRGUI::cb_L_B3_i(RKR_Button*, void*) {
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra1.rkrb", DATADIR);
- int ok=rkr->loadbank(temp);
+ int ok=rkr->load_bank(temp);
 if(ok) 
 {
 rkr->a_bank=2;
@@ -565,7 +565,7 @@ void RKRGUI::cb_L_B3(RKR_Button* o, void* v) {
 
 void RKRGUI::cb_L_B4_i(RKR_Button*, void*) {
   is_modified();
-int ok=rkr->loadbank(rkr->BankFilename);
+int ok=rkr->load_bank(rkr->BankFilename);
 if(ok) 
 {
 rkr->a_bank=3;

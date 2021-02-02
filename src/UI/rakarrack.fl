@@ -1266,7 +1266,7 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
-int ok=rkr->loadbank(temp);
+int ok=rkr->load_bank(temp);
 if(ok) 
 {
 rkr->a_bank=0;
@@ -1284,7 +1284,7 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra.rkrb", DATADIR);
- int ok=rkr->loadbank(temp);
+ int ok=rkr->load_bank(temp);
 if(ok) 
 {
 rkr->a_bank=1;
@@ -1302,7 +1302,7 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra1.rkrb", DATADIR);
- int ok=rkr->loadbank(temp);
+ int ok=rkr->load_bank(temp);
 if(ok) 
 {
 rkr->a_bank=2;
@@ -1317,7 +1317,7 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
           label U
           user_data 77
           callback {is_modified();
-int ok=rkr->loadbank(rkr->BankFilename);
+int ok=rkr->load_bank(rkr->BankFilename);
 if(ok) 
 {
 rkr->a_bank=3;

@@ -380,7 +380,7 @@ RKR::save_preset(char *filename)
 
 /**
  * This parses the preset files *.rkr types, from the menu File/Load Preset
- * and the Load button form the main window.
+ * and the Load button from the main window.
  * 
  * @param filename
  *      The user selected filename.
@@ -563,7 +563,7 @@ RKR::load_preset(char *filename)
     }
 
     fclose(fn);
-    Actualizar_Audio();
+    set_audio_paramters();
 }
 
 void
@@ -572,7 +572,7 @@ RKR::file_error(FILE *fn)
     printf("File Error!\n");
     
     fclose(fn);
-    Actualizar_Audio();
+    set_audio_paramters();
 }
 
 /**
@@ -581,7 +581,7 @@ RKR::file_error(FILE *fn)
  * Sets which effects are active or inactive.
  */
 void
-RKR::Actualizar_Audio()
+RKR::set_audio_paramters()
 {
     Bypass = 0;
 
@@ -952,7 +952,7 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
  *      One (1) if successful parsing.
  */
 int
-RKR::loadbank(char *filename)
+RKR::load_bank(char *filename)
 {
     int err_message = 1;
     char meslabel[70];
@@ -994,7 +994,7 @@ RKR::loadbank(char *filename)
 
             if (ret != 1)
             {
-                fl_alert("fread error in loadbank()");
+                fl_alert("fread error in load_bank()");
                 break;
             }
         }
@@ -1021,7 +1021,7 @@ RKR::loadbank(char *filename)
 };
 
 int
-RKR::savebank(char *filename)
+RKR::save_bank(char *filename)
 {
     FILE *fn;
 
@@ -1118,9 +1118,10 @@ RKR::New()
 
     Bypass_B = 0;
 
+    // Clear MIDI learn
     memset(XUserMIDI, 0, sizeof (XUserMIDI));
 
-    Actualizar_Audio();
+    set_audio_paramters();
 }
 
 void
@@ -1205,7 +1206,7 @@ RKR::Bank_to_Preset(int i)
 
     memcpy(XUserMIDI, Bank[i].XUserMIDI, sizeof (XUserMIDI));
 
-    Actualizar_Audio();
+    set_audio_paramters();
 
     if (actuvol == 0)
     {

@@ -674,12 +674,12 @@ public:
     void save_preset (char *filename);
     void load_preset (char *filename);
     void file_error(FILE *fn);
-    void Actualizar_Audio ();
+    void set_audio_paramters ();
     void loadnames();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
-    int loadbank (char *filename);
-    int savebank (char *filename);
+    int load_bank (char *filename);
+    int save_bank (char *filename);
     void New ();
     void New_Bank ();
     void Bank_to_Preset (int Num);

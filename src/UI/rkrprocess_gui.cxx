@@ -7343,7 +7343,7 @@ char* RKRGUI::get_bank_file()
         return 0;
 
     filename = fl_filename_setext(filename, ".rkrb");
-    int ok = rkr->loadbank(filename);
+    int ok = rkr->load_bank(filename);
 
     if (ok)
     {
@@ -7368,7 +7368,7 @@ void RKRGUI::set_save_file()
 
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
-    int ok = rkr->savebank(filename);
+    int ok = rkr->save_bank(filename);
     if (ok)
     {
         strcpy(rkr->Bank_Saved, filename);

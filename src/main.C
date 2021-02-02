@@ -212,7 +212,7 @@ main(int argc, char *argv[])
 
     if (needtoloadstate) rkr.load_preset(statefile);
     if (needtoloadfile) rkr.load_preset(filetoload);
-    if (needtoloadbank) rkr.loadbank(banktoload);
+    if (needtoloadbank) rkr.load_bank(banktoload);
 
 
     // Launch GUI

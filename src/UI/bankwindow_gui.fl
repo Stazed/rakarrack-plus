@@ -165,7 +165,7 @@ m_rgui->put_icon(m_rgui->AboutWin);}
   }
   Fl_Choice CH_UB {
     label {User Banks       }
-    callback {int ok=m_rkr->loadbank((char *)v);
+    callback {int ok=m_rkr->load_bank((char *)v);
 if(ok) 
 {
 m_rgui->BankWin_Label((char *)v);

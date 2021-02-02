@@ -150,7 +150,7 @@ void BankWindowGui::cb_B_B4(RKR_Button* o, void* v) {
 }
 
 void BankWindowGui::cb_CH_UB_i(RKR_Choice*, void* v) {
-  int ok=m_rkr->loadbank((char *)v);
+  int ok=m_rkr->load_bank((char *)v);
 if(ok) 
 {
 m_rgui->BankWin_Label((char *)v);

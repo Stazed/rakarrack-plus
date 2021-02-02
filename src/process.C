@@ -323,7 +323,7 @@ RKR::RKR() :
     // in Settings/Preferences/Bank/ Bank Filename
     if (commandline == 0)
     {
-        loadbank(BankFilename);
+        load_bank(BankFilename);
         a_bank = 3;
     }
 }
