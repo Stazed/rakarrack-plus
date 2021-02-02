@@ -575,12 +575,68 @@ void RKR::putbuf(char *buf, int fx_index)
  * @param buf
  *      Buffer to hold efx parameters.
  * 
- * @param j
+ * @param fx_index
  *      The effect number to load.
  */
-void RKR::getbuf(char *buf, int j)
+void RKR::getbuf(char *buf, int fx_index)
 {
-    switch (j)
+#if 1
+    
+    std::string s_buf = "";
+    
+     // Run through the effects for a match to the effect index
+    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+    {
+        if (k == fx_index)
+        {
+            for(int i = 0; i < EFX_Param_Size[k] + 1; i++)  // +1 for bypass
+            {
+                if(i < EFX_Param_Size[k])   // Set the EFX parameters
+                {
+                    s_buf += ITS(Rack_Effects[k]->getpar(i));
+                    s_buf += ",";
+                }
+                else    // Set the bypass
+                {
+                    s_buf += ITS(EFX_Bypass[k]);
+                }
+            }
+
+            // Convolotron, Reverbtron, Echotron have file names to parse as well
+            if(fx_index == EFX_CONVOLOTRON)
+            {
+                s_buf += ",";   // Add comma after bypass
+                Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
+                s_buf +=  Efx_Convolotron->Filename;
+            }
+            
+            else if(fx_index == EFX_REVERBTRON)
+            {
+                s_buf += ",";   // Add comma after bypass
+                Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
+                
+                s_buf += Efx_Reverbtron->Filename;
+            }
+
+            else if(fx_index == EFX_ECHOTRON)
+            {
+                s_buf += ",";   // Add comma after bypass
+                Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
+                
+                s_buf += Efx_Echotron->Filename;
+            }
+
+            // Add final newline
+            s_buf += "\n";
+
+            strcpy(buf, s_buf.c_str());
+            
+            return; // we found and processed what we were looking for
+        }
+    }
+
+#else
+    switch (fx_index)
     {
     case EFX_REVERB:
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
@@ -1072,6 +1128,8 @@ void RKR::getbuf(char *buf, int j)
                 EFX_Bypass[EFX_INFINITY]);
         break;
     }
+    
+#endif // 0
 }
 
 /**
