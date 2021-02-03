@@ -589,6 +589,9 @@ RKR::set_audio_paramters()
     {
         efx_order[i] = lv[EFX_ORDER][i];
     }
+    
+    // Looper is special
+    Looper *Efx_Looper = static_cast<Looper*>(Rack_Effects[EFX_LOOPER]);
 
     for (int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
@@ -596,9 +599,19 @@ RKR::set_audio_paramters()
 
         if(j != EFX_LOOPER)
             Rack_Effects[j]->cleanup();
+
         
         for (int i = 0; i < EFX_Param_Size[j]; i++)
-            Rack_Effects[j]->changepar(i, lv[j][i]);
+        {
+            if(j == EFX_LOOPER)
+            {
+                Efx_Looper->set_value(i, lv[EFX_LOOPER][i]);
+            }
+            else
+            {
+                Rack_Effects[j]->changepar(i, lv[j][i]);
+            }
+        }
         
         if(j == EFX_STEREOHARM)
         {

@@ -425,17 +425,29 @@ Looper::setpreset(int npreset)
         Fpre->ReadPreset(EFX_LOOPER, npreset - NUM_PRESETS + 1, pdata);
         
         for (int n = 0; n < PRESET_SIZE; n++)
-            loadpreset(n, pdata[n]);
+            set_value(n, pdata[n]);
     }
     else
     {
         for (int n = 0; n < PRESET_SIZE; n++)
-            loadpreset(n, presets[npreset][n]);
+            set_value(n, presets[npreset][n]);
     }
     
     Ppreset = npreset;
 }
 
+/**
+ * Used by Gui and MIDI control to change parameters. Some of the parameters
+ * are toggled, Play, Stop, etc. So this is not used for setting presets and 
+ * file, bank setting. The set_value() function is used for presets, etc. since
+ * it does not toggle.
+ * 
+ * @param npar
+ *      The case to set.
+ * 
+ * @param value
+ *      The value to set.
+ */
 void
 Looper::changepar(int npar, int value)
 {
@@ -453,7 +465,7 @@ Looper::changepar(int npar, int value)
         }
         else
         {
-            Pplay = (PT1 || PT2); //prevents accidental record state when niether track is active
+            Pplay = (PT1 || PT2); //prevents accidental record state when neither track is active
             if (!Pstop)
             {
                 //if stop was pushed last time, then resume where it left off
@@ -633,8 +645,7 @@ Looper::changepar(int npar, int value)
             if (Prec2) dl = dl2; // if both are true, then it is only a redundant assignment
         }
         break;
-        
-// FIXME FILE SAVING
+
     case Looper_Tempo:
         settempo(value);
         break;
@@ -728,8 +739,18 @@ void Looper::getstate()
     progstate[5] = PT2;
 }
 
+/**
+ * This is for setting the value of the parameters. The changepar() function will toggle the
+ * variables for play, stop etc. This is used for setting presets and file, bank loading.
+ * 
+ * @param npar
+ *      The case variable to set.
+ * 
+ * @param value
+ *      The value to set.
+ */
 void
-Looper::loadpreset(int npar, int value)
+Looper::set_value(int npar, int value)
 {
     switch (npar)
     {

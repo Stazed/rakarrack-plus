@@ -64,7 +64,7 @@ public:
     ~Looper ();
     void out (float * efxoutl, float * efxoutr);
     void setpreset (int npreset);
-    void loadpreset (int npar, int value);  // to set one from a preset
+    void set_value (int npar, int value);  // to set one from a preset
     void changepar (int npar, int value);
     int getpar (int npar);
     int get_number_efx_parameters () {return C_LOOPER_PARAMETERS;};
