@@ -86,13 +86,6 @@ const float C_MC_20000_RANGE    = 157.480315f;      /* (26000 - 6000) / 127 = 15
 const float C_MC_24000_RANGE    = 188.97638f;       /* (26000 - 2000) / 127 = 188.976377952756 */
 const float C_MC_25980_RANGE    = 204.566929f;      /* (26000 - 20) / 127 = 204.5669291338583 */
 
-template <typename T>
-std::string NumberToString ( T Number )
-{
-    std::stringstream ss;
-    ss << Number;
-    return ss.str();
-}
 
 /**
  *  The MIDI control parameters. This includes the default MIDI control

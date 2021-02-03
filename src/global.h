@@ -90,12 +90,6 @@
 #define JACK_RINGBUFFER_SIZE 16384 // Default size for ringbuffer
 #define SPACE_BAR 32    // for space bar pressed
 
-/** 
- * Cast Integer To String (ITS). 
- */
-#define ITS( x )   dynamic_cast< std::ostringstream & >( \
-                    ( std::ostringstream() << std::dec << x ) ).str()
-
 inline int Dry_Wet (int x) {return 127 - x;}
 
 typedef union {

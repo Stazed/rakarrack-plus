@@ -398,3 +398,19 @@ RKR::Update_tempo()
 
 }
 
+/**
+ * Integer To String (ITS)
+ * 
+ * @param x
+ *      The integer to convert.
+ * 
+ * @return 
+ *      The integer converted to string.
+ */
+std::string
+RKR::ITS(int x)
+{
+    std::stringstream ss;
+    ss << x;
+    return ss.str(); 
+}
