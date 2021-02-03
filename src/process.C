@@ -678,70 +678,59 @@ RKR::initialize_arrays()
 /**
  *  The effect names, position, and type used by the 
  *  "Put Order in your Rack" window.
- * 
- *  The types are:
- *      1   - Distortion
- *      2   - Modulation
- *      4   - Time
- *      8   - Emulation
- *      9   - Both Emulation & Distortion (1 + 8) : StompBox, Valve
- *      16  - Filters
- *      32  - Dynamics
- *      64  - Processing & EQ
- *      128 - Synthesis
  */
 void
 RKR::put_order_in_rack()
 {
     static const char *los_names[] =
     {
-        "AlienWah", ITS(EFX_ALIENWAH).c_str(), "16",
-        "Analog Phaser", ITS(EFX_ANALOG_PHASER).c_str(), "2",
-        "Arpie", ITS(EFX_ARPIE).c_str(), "4",
-        "Cabinet", ITS(EFX_CABINET).c_str(), "8",
-        "Chorus", ITS(EFX_CHORUS).c_str(), "2",
-        "Coil Crafter", ITS(EFX_COILCRAFTER).c_str(), "8",
-        "CompBand", ITS(EFX_COMPBAND).c_str(), "8",
-        "Compressor", ITS(EFX_COMPRESSOR).c_str(), "32",
-        "Convolotron", ITS(EFX_CONVOLOTRON).c_str(), "8",
-        "Derelict", ITS(EFX_DERELICT).c_str(), "1",
-        "DistBand", ITS(EFX_DISTBAND).c_str(), "1",
-        "Distortion", ITS(EFX_DISTORTION).c_str(), "1",
-        "Dual Flange", ITS(EFX_DUAL_FLANGE).c_str(), "2",
-        "Echo", ITS(EFX_ECHO).c_str(), "4",
-        "Echotron", ITS(EFX_ECHOTRON).c_str(), "4",
-        "Echoverse", ITS(EFX_ECHOVERSE).c_str(), "4",
-        "EQ", ITS(EFX_EQ).c_str(), "64",
-        "Exciter", ITS(EFX_EXCITER).c_str(), "64",
-        "Expander", ITS(EFX_EXPANDER).c_str(), "32",
-        "Flanger", ITS(EFX_FLANGER).c_str(), "2",
-        "Harmonizer", ITS(EFX_HARMONIZER).c_str(), "128",
-        "Infinity", ITS(EFX_INFINITY).c_str(), "16",
-        "Looper", ITS(EFX_LOOPER).c_str(), "128",
-        "MusicalDelay", ITS(EFX_MUSICAL_DELAY).c_str(), "4",
-        "MuTroMojo", ITS(EFX_MUTROMOJO).c_str(), "16",
-        "NoiseGate", ITS(EFX_NOISEGATE).c_str(), "32",
-        "Opticaltrem", ITS(EFX_OPTICALTREM).c_str(), "2",
-        "Overdrive", ITS(EFX_OVERDRIVE).c_str(), "1",
-        "Pan", ITS(EFX_PAN).c_str(), "64",
-        "Parametric EQ", ITS(EFX_PARAMETRIC).c_str(), "64",
-        "Phaser", ITS(EFX_PHASER).c_str(), "2",
-        "Reverb", ITS(EFX_REVERB).c_str(), "4",
-        "Reverbtron", ITS(EFX_REVERBTRON).c_str(), "4",
-        "Ring", ITS(EFX_RING).c_str(), "128",
-        "Sequence", ITS(EFX_SEQUENCE).c_str(), "128",
-        "ShelfBoost", ITS(EFX_SHELFBOOST).c_str(), "64",
-        "Shifter", ITS(EFX_SHIFTER).c_str(), "128",
-        "Shuffle", ITS(EFX_SHUFFLE).c_str(), "64",
-        "StereoHarm", ITS(EFX_STEREOHARM).c_str(), "128",
-        "StompBox", ITS(EFX_STOMPBOX).c_str(), "9",
-        "Sustainer", ITS(EFX_SUSTAINER).c_str(), "32",
-        "Synthfilter", ITS(EFX_SYNTHFILTER).c_str(), "16",
-        "Valve", ITS(EFX_VALVE).c_str(), "9",
-        "VaryBand", ITS(EFX_VARYBAND).c_str(), "2",
-        "Vibe", ITS(EFX_VIBE).c_str(), "2",
-        "Vocoder", ITS(EFX_VOCODER).c_str(), "128",
-        "WahWah", ITS(EFX_WAHWAH).c_str(), "16"
+        "AlienWah", ITS(EFX_ALIENWAH).c_str(), ITS(Type_Filters).c_str(),
+        "Analog Phaser", ITS(EFX_ANALOG_PHASER).c_str(), ITS(Type_Modulation).c_str(),
+        "Arpie", ITS(EFX_ARPIE).c_str(), ITS(Type_Time).c_str(),
+        "Cabinet", ITS(EFX_CABINET).c_str(), ITS(Type_Emulation).c_str(),
+        "Chorus", ITS(EFX_CHORUS).c_str(), ITS(Type_Modulation).c_str(),
+        "Coil Crafter", ITS(EFX_COILCRAFTER).c_str(), ITS(Type_Emulation).c_str(),
+        "CompBand", ITS(EFX_COMPBAND).c_str(), ITS(Type_Emulation).c_str(),
+        "Compressor", ITS(EFX_COMPRESSOR).c_str(), ITS(Type_Dynamics).c_str(),
+        "Convolotron", ITS(EFX_CONVOLOTRON).c_str(), ITS(Type_Emulation).c_str(),
+        "Derelict", ITS(EFX_DERELICT).c_str(), ITS(Type_Distortion).c_str(),
+        "DistBand", ITS(EFX_DISTBAND).c_str(), ITS(Type_Distortion).c_str(),
+        "Distortion", ITS(EFX_DISTORTION).c_str(), ITS(Type_Distortion).c_str(),
+        "Dual Flange", ITS(EFX_DUAL_FLANGE).c_str(), ITS(Type_Modulation).c_str(),
+        "Echo", ITS(EFX_ECHO).c_str(), ITS(Type_Time).c_str(),
+        "Echotron", ITS(EFX_ECHOTRON).c_str(), ITS(Type_Time).c_str(),
+        "Echoverse", ITS(EFX_ECHOVERSE).c_str(), ITS(Type_Time).c_str(),
+        "EQ", ITS(EFX_EQ).c_str(), ITS(Type_Processing_and_EQ).c_str(),
+        "Exciter", ITS(EFX_EXCITER).c_str(), ITS(Type_Processing_and_EQ).c_str(),
+        "Expander", ITS(EFX_EXPANDER).c_str(), ITS(Type_Dynamics).c_str(),
+        "Flanger", ITS(EFX_FLANGER).c_str(), ITS(Type_Modulation).c_str(),
+        "Harmonizer", ITS(EFX_HARMONIZER).c_str(), ITS(Type_Synthesis).c_str(),
+        "Infinity", ITS(EFX_INFINITY).c_str(), ITS(Type_Filters).c_str(),
+        "Looper", ITS(EFX_LOOPER).c_str(), ITS(Type_Synthesis).c_str(),
+        "MusicalDelay", ITS(EFX_MUSICAL_DELAY).c_str(), ITS(Type_Time).c_str(),
+        "MuTroMojo", ITS(EFX_MUTROMOJO).c_str(), ITS(Type_Filters).c_str(),
+        "NoiseGate", ITS(EFX_NOISEGATE).c_str(), ITS(Type_Dynamics).c_str(),
+        "Opticaltrem", ITS(EFX_OPTICALTREM).c_str(), ITS(Type_Modulation).c_str(),
+        "Overdrive", ITS(EFX_OVERDRIVE).c_str(), ITS(Type_Distortion).c_str(),
+        "Pan", ITS(EFX_PAN).c_str(), ITS(Type_Processing_and_EQ).c_str(),
+        "Parametric EQ", ITS(EFX_PARAMETRIC).c_str(), ITS(Type_Processing_and_EQ).c_str(),
+        "Phaser", ITS(EFX_PHASER).c_str(), ITS(Type_Modulation).c_str(),
+        "Reverb", ITS(EFX_REVERB).c_str(), ITS(Type_Time).c_str(),
+        "Reverbtron", ITS(EFX_REVERBTRON).c_str(), ITS(Type_Time).c_str(),
+        "Ring", ITS(EFX_RING).c_str(), ITS(Type_Synthesis).c_str(),
+        "Sequence", ITS(EFX_SEQUENCE).c_str(), ITS(Type_Synthesis).c_str(),
+        "ShelfBoost", ITS(EFX_SHELFBOOST).c_str(), ITS(Type_Processing_and_EQ).c_str(),
+        "Shifter", ITS(EFX_SHIFTER).c_str(), ITS(Type_Synthesis).c_str(),
+        "Shuffle", ITS(EFX_SHUFFLE).c_str(), ITS(Type_Processing_and_EQ).c_str(),
+        "StereoHarm", ITS(EFX_STEREOHARM).c_str(), ITS(Type_Synthesis).c_str(),
+        "StompBox", ITS(EFX_STOMPBOX).c_str(), ITS(Type_Distortion_and_Emulation).c_str(),
+        "Sustainer", ITS(EFX_SUSTAINER).c_str(), ITS(Type_Dynamics).c_str(),
+        "Synthfilter", ITS(EFX_SYNTHFILTER).c_str(), ITS(Type_Filters).c_str(),
+        "Valve", ITS(EFX_VALVE).c_str(), ITS(Type_Distortion_and_Emulation).c_str(),
+        "VaryBand", ITS(EFX_VARYBAND).c_str(), ITS(Type_Modulation).c_str(),
+        "Vibe", ITS(EFX_VIBE).c_str(), ITS(Type_Modulation).c_str(),
+        "Vocoder", ITS(EFX_VOCODER).c_str(), ITS(Type_Synthesis).c_str(),
+        "WahWah", ITS(EFX_WAHWAH).c_str(), ITS(Type_Filters).c_str()
     };
 
     for (int i = 0; i < C_NUMBER_EFFECTS * 3; i += 3)

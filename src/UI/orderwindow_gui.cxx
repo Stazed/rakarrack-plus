@@ -66,7 +66,7 @@ void OrderWindowGui::cb_Baja(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil0_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=0;
+  m_rkr->eff_filter=Type_All;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil0(RKR_Button* o, void* v) {
@@ -74,7 +74,7 @@ void OrderWindowGui::cb_Fil0(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil1_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=1;
+  m_rkr->eff_filter=Type_Distortion;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil1(RKR_Button* o, void* v) {
@@ -82,7 +82,7 @@ void OrderWindowGui::cb_Fil1(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil2_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=2;
+  m_rkr->eff_filter=Type_Modulation;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil2(RKR_Button* o, void* v) {
@@ -90,7 +90,7 @@ void OrderWindowGui::cb_Fil2(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil4_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=4;
+  m_rkr->eff_filter=Type_Time;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil4(RKR_Button* o, void* v) {
@@ -98,7 +98,7 @@ void OrderWindowGui::cb_Fil4(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil8_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=8;
+  m_rkr->eff_filter=Type_Emulation;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil8(RKR_Button* o, void* v) {
@@ -106,7 +106,7 @@ void OrderWindowGui::cb_Fil8(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil16_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=16;
+  m_rkr->eff_filter=Type_Filters;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil16(RKR_Button* o, void* v) {
@@ -114,7 +114,7 @@ void OrderWindowGui::cb_Fil16(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil32_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=32;
+  m_rkr->eff_filter=Type_Dynamics;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil32(RKR_Button* o, void* v) {
@@ -122,7 +122,7 @@ void OrderWindowGui::cb_Fil32(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil64_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=64;
+  m_rkr->eff_filter=Type_Processing_and_EQ;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil64(RKR_Button* o, void* v) {
@@ -130,7 +130,7 @@ void OrderWindowGui::cb_Fil64(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil128_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=128;
+  m_rkr->eff_filter=Type_Synthesis;
 m_rgui->Fill_Avail(m_rkr->eff_filter);
 }
 void OrderWindowGui::cb_Fil128(RKR_Button* o, void* v) {

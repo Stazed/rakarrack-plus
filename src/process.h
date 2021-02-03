@@ -572,6 +572,23 @@ enum MIDI_Learn_Index
 };
 
 /**
+ * The effect types used by the "Put Order in your Rack" window.
+ */ 
+enum Efx_Type
+{
+    Type_All                = 0,
+    Type_Distortion         = 1,
+    Type_Modulation         = 2,
+    Type_Time               = 4,
+    Type_Emulation          = 8,
+    Type_Distortion_and_Emulation = 9,    // StompBox, Valve
+    Type_Filters            = 16,
+    Type_Dynamics           = 32,
+    Type_Processing_and_EQ  = 64,
+    Type_Synthesis          = 128
+};
+
+/**
  * The total Number of MIDI controllable parameters.
  * This is the total of listed items in the MIDI learn window.
  * If any new parameters are added, this must be adjusted.
