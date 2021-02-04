@@ -103,7 +103,7 @@ main(int argc, char *argv[])
     needtoloadbank = 0;
     needtoloadstate = 0;
     Pexitprogram = 0;
-    preset = 1000;
+    preset = C_PRESET_OFF;
     commandline = 0;
     gui = 1;
     opterr = 0;
@@ -242,13 +242,13 @@ main(int argc, char *argv[])
         else
         {
             usleep(1500);
-            if (preset != 1000)
+            if (preset != C_PRESET_OFF)
             {
                 if ((preset > 0) && (preset < 61))
                 {
                     rkr.bank_to_preset(preset);
                 }
-                preset = 1000;
+                preset = C_PRESET_OFF;
             }
         }
 

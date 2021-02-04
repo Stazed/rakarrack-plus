@@ -213,6 +213,8 @@ const int c_bank_number = 8000;
 const unsigned c_rkrb_ext_size = 5;
 /* For file .rkr extension size usually for removing the extension from preset names */
 const unsigned c_rkr_ext_size = 4;
+/* Flag to indicate the preset should not be changed */
+const unsigned C_PRESET_OFF = 1000;
 
 //TODO: move these values into the RKR object
 extern int Pexitprogram, preset;

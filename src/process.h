@@ -615,12 +615,6 @@ const int C_MC_RANGE = C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS;
 const int C_NUMBER_EFFECTS = 47;
 
 /**
- * The number of rack effects plus one (index 10) for main window displayed effects.
- * See fileio.C presets_default[][].
- */
-const int C_NUM_EFFECTS_PLUS_ORDER = C_NUMBER_EFFECTS + 1;
-
-/**
  * The maximum number of effect parameters. See fileio.C presets_default[][].
  */
 const int C_NUMBER_PARAMETERS = 19;

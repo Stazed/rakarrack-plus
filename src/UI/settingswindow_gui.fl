@@ -267,7 +267,7 @@ m_rkr->change_scale = 1; // true}
     }
     Fl_Group AUDIO_SET {
       label Audio
-      user_data 1 open
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo7 {
@@ -1334,9 +1334,21 @@ m_rgui->ML_Menu->activate();}
       }
       Fl_Check_Button MTable {
         label {MIDI Program Change Table}
-        callback {m_rkr->midi_table=o->value();
-if(m_rkr->midi_table) scroll->activate(); else 
-scroll->deactivate();}
+        callback {// Set preset to C_PRESET_OFF means do NOT process preset change for GUI
+// timeout. In the case of MIDI control PGM change at the same time.
+// Will cause crash if we do not set preset off temporarily.    
+preset = C_PRESET_OFF;
+
+m_rkr->midi_table=o->value();
+
+if(m_rkr->midi_table)
+{
+    scroll->activate();
+}
+else
+{
+    scroll->deactivate();
+}}
         xywh {30 336 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
