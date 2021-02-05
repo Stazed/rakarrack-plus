@@ -210,8 +210,8 @@ endif (BuildRakarrackPlus)
 if (BuildLV2Plugins)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
     if (LV2_FOUND)
-        if (EXISTS $ENV{LV2_PATH})
-            set(LV2_INSTALL_DIR $ENV{LV2_PATH} CACHE PATH
+        if (DEFINED LV2_PATH)
+            set(LV2_INSTALL_DIR "${LV2_PATH}/RakarrackPlus.lv2" CACHE PATH
             "Specifies where the LV2 libraries should be installed")
         else()
             set(LV2_INSTALL_DIR lib/lv2/RakarrackPlus.lv2 CACHE PATH
