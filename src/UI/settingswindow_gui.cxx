@@ -939,10 +939,10 @@ void SettingsWindowGui::cb_AAssign(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_MTable_i(RKR_Check_Button* o, void*) {
-  // Set preset to C_PRESET_OFF means do NOT process preset change for GUI
+  // Set preset to C_CHANGE_PRESET_OFF means do NOT process preset change for GUI
 // timeout. In the case of MIDI control PGM change at the same time.
 // Will cause crash if we do not set preset off temporarily.    
-preset = C_PRESET_OFF;
+preset = C_CHANGE_PRESET_OFF;
 
 m_rkr->midi_table=o->value();
 

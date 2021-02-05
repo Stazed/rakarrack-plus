@@ -241,7 +241,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (preset != C_PRESET_OFF)
+    if (preset != C_CHANGE_PRESET_OFF)
     {
         if (!rkr->midi_table)
         {
@@ -275,7 +275,7 @@ void RKRGUI::GuiTimeout(void)
             Preset_Counter->do_callback();
         }
 
-        preset = C_PRESET_OFF;
+        preset = C_CHANGE_PRESET_OFF;
     }
 
 

@@ -740,7 +740,7 @@ public:
     /**
      * Pointer array to all rack effects, indexed by EFX_Index.
      */
-    Effect *Rack_Effects[C_NUMBER_EFFECTS];
+    class Effect *Rack_Effects[C_NUMBER_EFFECTS];
     
     /**
      * To hold the number of user controlled parameters for each effect.
@@ -780,7 +780,12 @@ public:
 
     int Bypass_B;
 
+    /**
+     * The current user selected bank preset index from button press in Bank window or
+     * changed by MIDI control program change.
+     */
     int Selected_Preset;
+
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];
     int efx_order[C_NUMBER_ORDERED_EFFECTS];

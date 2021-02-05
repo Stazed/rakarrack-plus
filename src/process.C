@@ -33,7 +33,7 @@
 #include "process.h"
 
 int Pexitprogram = 0;
-int preset = 0;
+int preset = C_CHANGE_PRESET_OFF;
 int commandline = 0;
 int exitwithhelp = 0;
 int gui = 0;
