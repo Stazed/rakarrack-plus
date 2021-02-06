@@ -99,17 +99,17 @@ main(int argc, char *argv[])
 
     int needtoloadfile = 0;
     int needtodump = 0;
+    int preset = C_CHANGE_PRESET_OFF;
+    int option_index = 0, opt;
 
+    // globals
     needtoloadbank = 0;
     needtoloadstate = 0;
     Pexitprogram = 0;
-    preset = C_CHANGE_PRESET_OFF;
     commandline = 0;
     gui = 1;
     opterr = 0;
-    int option_index = 0, opt;
     exitwithhelp = 0;
-
     option_index = 0;
 
     while (1)
@@ -213,6 +213,9 @@ main(int argc, char *argv[])
     if (needtoloadstate) rkr.load_preset(statefile);
     if (needtoloadfile) rkr.load_preset(filetoload);
     if (needtoloadbank) rkr.load_bank(banktoload);
+    
+    // Set preset from command line, if any
+    rkr.Change_Preset = preset;
 
 
     // Launch GUI
@@ -242,13 +245,13 @@ main(int argc, char *argv[])
         else
         {
             usleep(1500);
-            if (preset != C_CHANGE_PRESET_OFF)
+            if (rkr.Change_Preset != C_CHANGE_PRESET_OFF)
             {
-                if ((preset > 0) && (preset < 61))
+                if ((rkr.Change_Preset > 0) && (rkr.Change_Preset < 61))
                 {
-                    rkr.bank_to_preset(preset);
+                    rkr.bank_to_preset(rkr.Change_Preset);
                 }
-                preset = C_CHANGE_PRESET_OFF;
+                rkr.Change_Preset = C_CHANGE_PRESET_OFF;
             }
         }
 

@@ -33,7 +33,6 @@
 #include "process.h"
 
 int Pexitprogram = 0;
-int preset = C_CHANGE_PRESET_OFF;
 int commandline = 0;
 int exitwithhelp = 0;
 int gui = 0;
@@ -83,6 +82,7 @@ RKR::RKR() :
     ACI_Bypass(0),
     Bypass_B(),
     Selected_Preset(1),
+    Change_Preset(C_CHANGE_PRESET_OFF),
     lv(),
     saved_order(),
     efx_order(),

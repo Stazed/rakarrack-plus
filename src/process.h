@@ -628,8 +628,8 @@ const int C_NUMBER_ORDERED_EFFECTS = 10;
 /**
  * The array sizes for lv[70][20] and Bank.lv[70][20]: Preset_Bank_Struct.
  * These sizes are saved to file for bank files. The max effects include 
- * one index for effect order. The max parameters includes the one index for
- * effect bypass [19].
+ * one index for effect order lv[69][xx]. The max parameters includes the one index for
+ * effect bypass lv[xx][19].
  */
 const int C_MAX_EFFECTS = 70;
 const int C_MAX_PARAMETERS = C_NUMBER_PARAMETERS + 1;  // 20
@@ -785,6 +785,13 @@ public:
      * changed by MIDI control program change.
      */
     int Selected_Preset;
+
+    /**
+     * The preset index to change the Selected_Preset, or flag to indicate no change
+     * is necessary. Used by command line and MIDI control program change.
+     * This is processed in GuiTimeout.
+     */
+    int Change_Preset;
 
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];

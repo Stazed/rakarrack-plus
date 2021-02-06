@@ -241,18 +241,18 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (preset != C_CHANGE_PRESET_OFF)
+    if (rkr->Change_Preset != C_CHANGE_PRESET_OFF)
     {
         if (!rkr->midi_table)
         {
-            Preset_Counter->value(preset);
+            Preset_Counter->value(rkr->Change_Preset);
             Preset_Counter->do_callback();
         }
         else
         {
-            if (rkr->a_bank != rkr->M_table[preset].bank)
+            if (rkr->a_bank != rkr->M_table[rkr->Change_Preset].bank)
             {
-                switch (rkr->M_table[preset].bank)
+                switch (rkr->M_table[rkr->Change_Preset].bank)
                 {
                     case 0:
                         L_B1->do_callback();
@@ -271,11 +271,11 @@ void RKRGUI::GuiTimeout(void)
                         break;
                 }
             }
-            Preset_Counter->value(rkr->M_table[preset].preset + 1);
+            Preset_Counter->value(rkr->M_table[rkr->Change_Preset].preset + 1);
             Preset_Counter->do_callback();
         }
 
-        preset = C_CHANGE_PRESET_OFF;
+        rkr->Change_Preset = C_CHANGE_PRESET_OFF;
     }
 
 
