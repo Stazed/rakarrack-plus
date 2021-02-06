@@ -295,7 +295,7 @@ enum EFX_Index
     EFX_COMPBAND,
     EFX_OPTICALTREM,
     EFX_VIBE,
-    EFX_INFINITY,       // 46
+    EFX_INFINITY,       // 46 - (0 to 46 = C_NUMBER_EFFECTS)
     
     // Indexes 47 - 68 are unused and can be used for expansion of rack effects.
     

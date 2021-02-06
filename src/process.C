@@ -1077,10 +1077,25 @@ RKR::cleanup_efx()
     efx_FLimiter->cleanup();
 }
 
+/**
+ * The main audio processing for each active effect. This includes the non rack effects
+ * such as Tap Tempo, Tuner, MIDI Converter. The effects are all processed in-line
+ * using the class buffers efxoutl, efxoutr. The efxoutl, efxoutr here is directly 
+ * memcpy from Jack input buffers.
+ * 
+ * @param origl
+ *      The Jack in left channel, dry signal.
+ * 
+ * @param origr
+ *      The Jack in right channel, dry signal.
+ * 
+ * @param 
+ *      Void pointer unused.
+ */
 void
-RKR::Alg(float *origl, float *origr, void *)
+RKR::process_effects(float *origl, float *origr, void *)
 {
-    /* Don't process when updating quality since the efx may be deleted */
+    /* Don't process when updating quality since the effect is deleted */
     if(quality_update)
         return;
 

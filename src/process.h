@@ -660,7 +660,7 @@ public:
     void Control_Gain (float *origl, float *origr);
     void Control_Volume (float *origl, float *origr);
     void cleanup_efx ();
-    void Alg (float *origl, float *origr ,void *);
+    void process_effects (float *origl, float *origr ,void *);
 
     // rkrMIDI.C
     void MIDI_control();
