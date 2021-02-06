@@ -6578,7 +6578,7 @@ void RKRGUI::check_signals(void *usrPtr)
     {
         printf("Got SIGTERM, quitting...\n");
         got_sigint = 0;
-        Pexitprogram = 1;
+        rkr->Exit_Program = 1;
     }
 }
 

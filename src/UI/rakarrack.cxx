@@ -36,7 +36,7 @@ void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();
 save_current_state(0);
 
-Pexitprogram=1;
+rkr->Exit_Program=1;
 }
 void RKRGUI::cb_Principal(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Principal_i(o,v);

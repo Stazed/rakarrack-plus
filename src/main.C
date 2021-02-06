@@ -105,7 +105,6 @@ main(int argc, char *argv[])
     // globals
     needtoloadbank = 0;
     needtoloadstate = 0;
-    Pexitprogram = 0;
     commandline = 0;
     gui = 1;
     opterr = 0;
@@ -235,7 +234,7 @@ main(int argc, char *argv[])
     mlockall(MCL_CURRENT | MCL_FUTURE);
 
     //Main Loop
-    while (Pexitprogram == 0)
+    while (rkr.Exit_Program == 0)
     {
         // Refresh GUI
         if (gui)

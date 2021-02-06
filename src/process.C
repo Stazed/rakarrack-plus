@@ -32,7 +32,6 @@
 #include "global.h"
 #include "process.h"
 
-int Pexitprogram = 0;
 int commandline = 0;
 int exitwithhelp = 0;
 int gui = 0;
@@ -81,6 +80,7 @@ RKR::RKR() :
     Tap_Bypass(0),
     ACI_Bypass(0),
     Bypass_B(),
+    Exit_Program(0),
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
     lv(),

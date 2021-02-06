@@ -779,6 +779,12 @@ public:
     int ACI_Bypass;
 
     int Bypass_B;
+    
+    /**
+     * Flag to indicate the program should terminate (user request).
+     * 1 to quit, 0 to continue. Used in Main() processing loop.
+     */
+    int Exit_Program;
 
     /**
      * The current user selected bank preset index from button press in Bank window or

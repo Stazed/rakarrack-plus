@@ -217,7 +217,6 @@ const unsigned c_rkr_ext_size = 4;
 const unsigned C_CHANGE_PRESET_OFF = 1000;
 
 //TODO: move these values into the RKR object
-extern int Pexitprogram;
 extern int commandline, gui;
 extern int exitwithhelp, nojack;
 extern int error_num;

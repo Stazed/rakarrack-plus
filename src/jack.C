@@ -352,14 +352,14 @@ void session_callback(jack_session_event_t *event, void *arg)
 
     if (s_event->type == JackSessionSave)
     {
-        JackOUT->savefile(filename);
+        JackOUT->save_preset(filename);
     }
 
     if (s_event->type == JackSessionSaveAndQuit)
     {
-        JackOUT->savefile(filename);
+        JackOUT->save_preset(filename);
         needtoloadstate = 1;
-        Pexitprogram = 1;
+        JackOUT->Exit_Program = 1;
     }
 
     jack_session_event_free(s_event);
