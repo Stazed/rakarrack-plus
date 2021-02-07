@@ -799,6 +799,11 @@ public:
      */
     int Change_Preset;
 
+    /**
+     * Flag to indicate if the user used the -l command line option to load a preset file.
+     */
+    int Command_Line_File;
+
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];
     int efx_order[C_NUMBER_ORDERED_EFFECTS];

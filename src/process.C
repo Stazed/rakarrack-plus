@@ -32,7 +32,6 @@
 #include "global.h"
 #include "process.h"
 
-int commandline = 0;
 int exitwithhelp = 0;
 int gui = 0;
 int nojack = 0;
@@ -83,6 +82,7 @@ RKR::RKR() :
     Exit_Program(0),
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
+    Command_Line_File(0),
     lv(),
     saved_order(),
     efx_order(),
@@ -321,7 +321,7 @@ RKR::RKR() :
 
     // If no bank is listed from the command line, then load the default user bank
     // in Settings/Preferences/Bank/ Bank Filename
-    if (commandline == 0)
+    if (Command_Line_File == 0)
     {
         load_bank(BankFilename);
         a_bank = 3;

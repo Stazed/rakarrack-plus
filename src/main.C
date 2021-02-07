@@ -101,11 +101,11 @@ main(int argc, char *argv[])
     int needtodump = 0;
     int preset = C_CHANGE_PRESET_OFF;
     int option_index = 0, opt;
+    int commandline = 0;
 
     // globals
     needtoloadbank = 0;
     needtoloadstate = 0;
-    commandline = 0;
     gui = 1;
     opterr = 0;
     exitwithhelp = 0;
@@ -213,8 +213,11 @@ main(int argc, char *argv[])
     if (needtoloadfile) rkr.load_preset(filetoload);
     if (needtoloadbank) rkr.load_bank(banktoload);
     
-    // Set preset from command line, if any
+    // Set preset index from command line, if any
     rkr.Change_Preset = preset;
+
+    // Set flag to indicate a file from the command line, if any
+    rkr.Command_Line_File = commandline;
 
 
     // Launch GUI

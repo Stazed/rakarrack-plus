@@ -826,7 +826,7 @@ void RKRGUI::load_previous_state()
         }
     }
 
-    if (!commandline)
+    if (!rkr->Command_Line_File)
     {
         rakarrack.get(rkr->PrefNom("Preset Num"), k, 1);
         rkr->Selected_Preset = k;
