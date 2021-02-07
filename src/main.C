@@ -102,11 +102,11 @@ main(int argc, char *argv[])
     int preset = C_CHANGE_PRESET_OFF;
     int option_index = 0, opt;
     int commandline = 0;
+    int gui = 1;
 
     // globals
     needtoloadbank = 0;
     needtoloadstate = 0;
-    gui = 1;
     opterr = 0;
     exitwithhelp = 0;
     option_index = 0;
@@ -218,15 +218,18 @@ main(int argc, char *argv[])
 
     // Set flag to indicate a file from the command line, if any
     rkr.Command_Line_File = commandline;
+    
+    // Set flag to indicate if in CLI vs Gui mode
+    rkr.Gui_Shown = gui;
 
 
     // Launch GUI
-    if (gui)
+    if (rkr.Gui_Shown)
     {
         rgui = new RKRGUI(argc, argv, &rkr);
     }
 
-    if (gui == 0)
+    if (!rkr.Gui_Shown)
     {
         rkr.Bypass = 1;
         rkr.calculavol(1);
@@ -240,7 +243,7 @@ main(int argc, char *argv[])
     while (rkr.Exit_Program == 0)
     {
         // Refresh GUI
-        if (gui)
+        if (rkr.Gui_Shown)
         {
             Fl::wait();
         }

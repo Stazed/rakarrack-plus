@@ -33,7 +33,6 @@
 #include "process.h"
 
 int exitwithhelp = 0;
-int gui = 0;
 int nojack = 0;
 int error_num = 0;
 int stecla = 0;
@@ -83,6 +82,7 @@ RKR::RKR() :
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
     Command_Line_File(0),
+    Gui_Shown(1),
     lv(),
     saved_order(),
     efx_order(),

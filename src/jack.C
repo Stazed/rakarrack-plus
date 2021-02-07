@@ -287,7 +287,7 @@ void
 jackshutdown(void *arg)
 {
     RKR *JackOUT = (RKR *) arg;
-    if (gui == 0)
+    if (!JackOUT->Gui_Shown)
     {
         printf("Jack Shut Down, sorry.\n");
     }
