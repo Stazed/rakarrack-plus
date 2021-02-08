@@ -32,7 +32,6 @@
 #include "global.h"
 #include "process.h"
 
-int nojack = 0;
 int error_num = 0;
 int stecla = 0;
 int looper_lqua = 0;
@@ -82,6 +81,7 @@ RKR::RKR() :
     Change_Preset(C_CHANGE_PRESET_OFF),
     Command_Line_File(0),
     Gui_Shown(1),
+    No_Jack_Client(0),
     lv(),
     saved_order(),
     efx_order(),
@@ -396,7 +396,7 @@ RKR::jack_open_client()
     if (jackclient == NULL)
     {
         fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
-        nojack = 1;
+        No_Jack_Client = 1;
         return 0;
     }
 

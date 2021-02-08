@@ -183,7 +183,7 @@ main(int argc, char *argv[])
 
     RKR rkr;
 
-    if (nojack)
+    if (rkr.No_Jack_Client)
     {
         show_help();
         

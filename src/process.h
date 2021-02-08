@@ -809,6 +809,11 @@ public:
      * CLI = 0: Gui Shown = 1.
      */
     int Gui_Shown;
+    
+    /**
+     * Flag to indicate that a Jack client cannot be created.
+     */
+    int No_Jack_Client;
 
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];
