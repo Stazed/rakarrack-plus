@@ -39,7 +39,6 @@ int needtoloadstate = 0;
 char *s_uuid;
 char *statefile;
 char *filetoload = NULL;
-char *banktoload;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
@@ -279,6 +278,7 @@ RKR::RKR() :
     UserRealName(NULL),
     MID(),
     BankFilename(),
+    Command_Line_Bank(),
     UDirFilename(),
     BackgroundImage(),
     efx_names(),

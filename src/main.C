@@ -105,6 +105,7 @@ main(int argc, char *argv[])
     int gui = 1;
     int exitwithhelp = 0;
     int needtoloadbank = 0;
+    char *banktoload;
 
     // globals
     needtoloadstate = 0;
@@ -212,10 +213,11 @@ main(int argc, char *argv[])
     if (needtoloadstate) rkr.load_preset(statefile);
     if (needtoloadfile) rkr.load_preset(filetoload);
     
-    // Set command line bank, if any
+    // Set command line bank file, if any
     if (needtoloadbank)
     {
         rkr.Bank_Load_Command_Line = needtoloadbank;
+        strcpy(rkr.Command_Line_Bank, banktoload);
         rkr.load_bank(banktoload);
     }
     

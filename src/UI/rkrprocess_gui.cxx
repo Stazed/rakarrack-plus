@@ -825,6 +825,10 @@ void RKRGUI::load_previous_state()
                 break;
         }
     }
+    else
+    {
+        BankWin_Label(rkr->Command_Line_Bank);
+    }
 
     if (!rkr->Command_Line_File)
     {

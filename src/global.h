@@ -224,7 +224,6 @@ extern int looper_lqua;
 extern char *s_uuid;
 extern char *statefile;
 extern char *filetoload;
-extern char *banktoload;
 extern char *jack_client_name;
 
 /* The font size adjustments */
