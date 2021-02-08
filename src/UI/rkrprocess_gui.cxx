@@ -6409,7 +6409,10 @@ void RKRGUI::Set_Bank(std::string directory)
     
     dir = opendir(directory.c_str());
     if (dir == NULL)
+    {
+        // FIXME error message
         return;
+    }
 
     while ((fs = readdir(dir)))
     {

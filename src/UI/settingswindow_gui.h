@@ -512,12 +512,20 @@ public:
   Fl_Group *BANK_SET;
   Fl_Box *Fondo11;
   RKR_File_Input *BFiname;
+private:
+  inline void cb_BFiname_i(RKR_File_Input*, void*);
+  static void cb_BFiname(RKR_File_Input*, void*);
+public:
   RKR_Button *BF_Browser;
 private:
   inline void cb_BF_Browser_i(RKR_Button*, void*);
   static void cb_BF_Browser(RKR_Button*, void*);
 public:
   RKR_File_Input *Udir;
+private:
+  inline void cb_Udir_i(RKR_File_Input*, void*);
+  static void cb_Udir(RKR_File_Input*, void*);
+public:
   RKR_Button *UD_Browser;
 private:
   inline void cb_UD_Browser_i(RKR_Button*, void*);

@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open
-  xywh {606 201 530 580} type Double
+  xywh {722 226 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
   code2 {this->m_rgui = NULL;}
@@ -1459,7 +1459,8 @@ Fl_Tooltip::enable(m_rkr->ena_tool);}
       }
       Fl_File_Input BFiname {
         label {Bank Filename}
-        xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 textcolor 7
+        callback {strcpy(m_rkr->BankFilename, o->value());}
+        xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(4);}
         class RKR_File_Input
@@ -1479,7 +1480,9 @@ strcpy(m_rkr->BankFilename,filename);}
       }
       Fl_File_Input Udir {
         label {User Directory}
-        xywh {20 120 390 40} labelsize 12 labelcolor 7 align 5 textcolor 7
+        callback {strcpy(m_rkr->UDirFilename, o->value());
+m_rgui->Scan_Bank_Dir();}
+        xywh {20 120 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(4);}
         class RKR_File_Input

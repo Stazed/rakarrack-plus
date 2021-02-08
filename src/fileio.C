@@ -1030,6 +1030,10 @@ RKR::load_bank(char *filename)
         new_bank_loaded = 1;
         return (1);
     }
+    else
+    {
+        // FIXME error message
+    }
     return (0);
 };
 
