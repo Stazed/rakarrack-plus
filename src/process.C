@@ -32,7 +32,6 @@
 #include "global.h"
 #include "process.h"
 
-int exitwithhelp = 0;
 int nojack = 0;
 int error_num = 0;
 int stecla = 0;
@@ -398,7 +397,6 @@ RKR::jack_open_client()
     {
         fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
         nojack = 1;
-        exitwithhelp = 1;
         return 0;
     }
 

@@ -103,12 +103,12 @@ main(int argc, char *argv[])
     int option_index = 0, opt;
     int commandline = 0;
     int gui = 1;
+    int exitwithhelp = 0;
 
     // globals
     needtoloadbank = 0;
     needtoloadstate = 0;
     opterr = 0;
-    exitwithhelp = 0;
     option_index = 0;
 
     while (1)
@@ -174,7 +174,7 @@ main(int argc, char *argv[])
     }
 
 
-    if (exitwithhelp != 0)
+    if (exitwithhelp)
     {
         show_help();
         return (0);
