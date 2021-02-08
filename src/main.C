@@ -104,9 +104,9 @@ main(int argc, char *argv[])
     int commandline = 0;
     int gui = 1;
     int exitwithhelp = 0;
+    int needtoloadbank = 0;
 
     // globals
-    needtoloadbank = 0;
     needtoloadstate = 0;
     opterr = 0;
     option_index = 0;
@@ -211,7 +211,13 @@ main(int argc, char *argv[])
 
     if (needtoloadstate) rkr.load_preset(statefile);
     if (needtoloadfile) rkr.load_preset(filetoload);
-    if (needtoloadbank) rkr.load_bank(banktoload);
+    
+    // Set command line bank, if any
+    if (needtoloadbank)
+    {
+        rkr.Bank_Load_Command_Line = needtoloadbank;
+        rkr.load_bank(banktoload);
+    }
     
     // Set preset index from command line, if any
     rkr.Change_Preset = preset;

@@ -36,7 +36,6 @@ int error_num = 0;
 int stecla = 0;
 int looper_lqua = 0;
 int needtoloadstate = 0;
-int needtoloadbank = 0;
 char *s_uuid;
 char *statefile;
 char *filetoload = NULL;
@@ -82,6 +81,7 @@ RKR::RKR() :
     Command_Line_File(0),
     Gui_Shown(1),
     No_Jack_Client(0),
+    Bank_Load_Command_Line(0),
     lv(),
     saved_order(),
     efx_order(),

@@ -815,6 +815,11 @@ public:
      */
     int No_Jack_Client;
 
+    /**
+     * Flag to indicate if a bank is set from the command line.
+     */
+    int Bank_Load_Command_Line;
+
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];
     int efx_order[C_NUMBER_ORDERED_EFFECTS];

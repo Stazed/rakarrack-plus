@@ -808,7 +808,7 @@ void RKRGUI::load_previous_state()
 
     rakarrack.get(rkr->PrefNom("Bank Selected"), rkr->a_bank, 3);
 
-    if (!needtoloadbank)
+    if (!rkr->Bank_Load_Command_Line)
     {
         switch (rkr->a_bank)
         {
