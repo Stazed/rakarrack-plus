@@ -1046,6 +1046,7 @@ public:
 
     float bogomips;
     float looper_size;
+    int looper_lqua;
 
     // Tuner
     float nfreq_old;

@@ -427,9 +427,9 @@ void RKRGUI::GuiTimeout(void)
             Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
             if ((Efx_Looper->Pplay) && (!Efx_Looper->Pstop))
             {
-                if (looper_lqua != Efx_Looper->looper_qua)
+                if (rkr->looper_lqua != Efx_Looper->looper_qua)
                 {
-                    looper_lqua = Efx_Looper->looper_qua;
+                    rkr->looper_lqua = Efx_Looper->looper_qua;
                     char tmp[16];
                     memset(tmp, 0, sizeof (tmp));
                     sprintf(tmp, "%d/%d", Efx_Looper->looper_bar, Efx_Looper->looper_qua);

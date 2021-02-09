@@ -34,7 +34,6 @@
 
 int error_num = 0;
 int stecla = 0;
-int looper_lqua = 0;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
@@ -266,6 +265,7 @@ RKR::RKR() :
     val_a_sum(-0.0f),
     bogomips(0.0f),
     looper_size(),
+    looper_lqua(0),
     nfreq_old(0),
     afreq_old(0),
     tmpprefname(),
