@@ -101,7 +101,7 @@ main(int argc, char *argv[])
     int gui = 1;
     int exitwithhelp = 0;
     int needtoloadbank = 0;
-    char *banktoload;
+    std::string banktoload;
     std::string filetoload;
 
     // globals
@@ -206,10 +206,10 @@ main(int argc, char *argv[])
     if (needtoloadbank)
     {
         // If valid bank then copy the Bank name and set the command line flag
-        if(rkr.load_bank(banktoload))
+        if(rkr.load_bank(banktoload.c_str()))
         {
             rkr.Bank_Load_Command_Line = needtoloadbank;
-            strcpy(rkr.Command_Line_Bank, banktoload);
+            rkr.Command_Line_Bank = banktoload;
         }
     }
     

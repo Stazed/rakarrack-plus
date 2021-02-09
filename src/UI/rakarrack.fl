@@ -314,7 +314,7 @@ class RKRGUI {open
       callback {is_modified();
 save_current_state(0);
 
-rkr->Exit_Program=1;} open
+rkr->Exit_Program=1;} open selected
       xywh {320 116 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1709,7 +1709,7 @@ UpdateTGUI();
     }
     Fl_Window BankWindow {
       callback {save_current_state(1);
-o->hide();} open selected
+o->hide();} open
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
       code1 {o->initialize(rkr, this);}
@@ -1809,7 +1809,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {MiraConfig()} {open
   } {}
-  Function {BankWin_Label(char *filename)} {open
+  Function {BankWin_Label(const char *filename)} {open
   } {}
   Function {is_modified()} {open
   } {}

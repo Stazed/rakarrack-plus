@@ -690,8 +690,8 @@ public:
     void load_names();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
-    int load_bank (char *filename);
-    int save_bank (char *filename);
+    int load_bank (const char *filename);
+    int save_bank (const char *filename);
     void new_preset ();
     void new_bank ();
     void bank_to_preset (int Num);
@@ -705,7 +705,7 @@ public:
     void load_skin_error(FILE *fn);
     void dump_preset_names ();
 
-    int CheckOldBank(char *filename);
+    int CheckOldBank(const char *filename);
     void ConvertOldFile(char *filename);
 
     void convert_reverb_file(char * filename);
@@ -1072,7 +1072,7 @@ public:
     /**
      * The bank filename from the -b command line option.
      */
-    char Command_Line_Bank[128];
+    std::string Command_Line_Bank;
 
     char UDirFilename[128];
     char BackgroundImage[256];

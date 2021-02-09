@@ -969,7 +969,7 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
  *      One (1) if successful parsing.
  */
 int
-RKR::load_bank(char *filename)
+RKR::load_bank(const char *filename)
 {
     int err_message = 1;
     char meslabel[70];
@@ -1045,7 +1045,7 @@ RKR::load_bank(char *filename)
 };
 
 int
-RKR::save_bank(char *filename)
+RKR::save_bank(const char *filename)
 {
     FILE *fn;
 
@@ -1515,7 +1515,7 @@ RKR::dump_preset_names(void)
 }
 
 int
-RKR::CheckOldBank(char *filename)
+RKR::CheckOldBank(const char *filename)
 {
     long Length = 0;
     FILE *fs;

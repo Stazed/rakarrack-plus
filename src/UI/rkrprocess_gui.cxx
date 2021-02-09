@@ -827,7 +827,7 @@ void RKRGUI::load_previous_state()
     }
     else
     {
-        BankWin_Label(rkr->Command_Line_Bank);
+        BankWin_Label(rkr->Command_Line_Bank.c_str());
     }
 
     if (!rkr->Command_Line_File)
@@ -3087,7 +3087,7 @@ void RKRGUI::MiraConfig()
     Settings->Font_Bro->value(rkr->font + 1);
 }
 
-void RKRGUI::BankWin_Label(char *filename)
+void RKRGUI::BankWin_Label(const char *filename)
 {
     // add the bankwindow label
     char tmp[256];

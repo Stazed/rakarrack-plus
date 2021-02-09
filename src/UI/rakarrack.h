@@ -573,7 +573,7 @@ public:
   void show_lic();
   void MiraClientes();
   void MiraConfig();
-  void BankWin_Label(char *filename);
+  void BankWin_Label(const char *filename);
   void is_modified();
   void Put_Loaded_Bank();
   void Chord(int eff);
