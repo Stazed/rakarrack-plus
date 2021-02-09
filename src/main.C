@@ -102,6 +102,7 @@ main(int argc, char *argv[])
     int exitwithhelp = 0;
     int needtoloadbank = 0;
     char *banktoload;
+    std::string filetoload;
 
     // globals
     opterr = 0;
@@ -193,7 +194,13 @@ main(int argc, char *argv[])
     rkr.InitMIDI();
     rkr.ConnectMIDI();
 
-    if (needtoloadfile) rkr.load_preset(filetoload);
+    if (needtoloadfile)
+    {
+        rkr.File_To_Load = filetoload;
+        
+        // This will clear rkr.File_To_Load if bad file
+        rkr.load_preset(filetoload.c_str());
+    }
     
     // Set command line bank file, if any
     if (needtoloadbank)

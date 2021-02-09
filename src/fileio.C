@@ -296,7 +296,7 @@ void RKR::get_effect_parameters(char *buf, int fx_index)
  *      The user defined file name for the preset to be saved.
  */
 void
-RKR::save_preset(char *filename)
+RKR::save_preset(const char *filename)
 {
     FILE *fn;
     char buf[256];
@@ -386,14 +386,14 @@ RKR::save_preset(char *filename)
  *      The user selected filename.
  */
 void
-RKR::load_preset(char *filename)
+RKR::load_preset(const char *filename)
 {
     FILE *fn;
     char buf[256];
 
     if ((fn = fopen(filename, "r")) == NULL)
     {
-        filetoload = NULL; // bad file name
+        File_To_Load.clear();
         fl_alert("Error loading %s file!\n", filename);
         return;
     }
@@ -408,6 +408,7 @@ RKR::load_preset(char *filename)
         
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
+            File_To_Load.clear();
             fl_alert("Error loading %s file!\n", filename);
             file_error(fn);
             return;
@@ -419,6 +420,7 @@ RKR::load_preset(char *filename)
 
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
+        File_To_Load.clear();
         fl_alert("Error loading %s file Order!\n", filename);
         file_error(fn);
         return;
@@ -446,6 +448,7 @@ RKR::load_preset(char *filename)
 
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
+        File_To_Load.clear();
         fl_alert("Error loading %s file Version!\n", filename);
         file_error(fn);
         return;
@@ -457,6 +460,7 @@ RKR::load_preset(char *filename)
 
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
+        File_To_Load.clear();
         fl_alert("Error loading %s file Author!\n", filename);
         file_error(fn);
         return;
@@ -477,6 +481,7 @@ RKR::load_preset(char *filename)
 
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
+        File_To_Load.clear();
         fl_alert("Error loading %s file Preset Name!\n", filename);
         file_error(fn);
         return;
@@ -495,6 +500,7 @@ RKR::load_preset(char *filename)
 
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
+        File_To_Load.clear();
         fl_alert("Error loading %s file General!\n", filename);
         file_error(fn);
         return;
@@ -521,6 +527,7 @@ RKR::load_preset(char *filename)
 
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
+            File_To_Load.clear();
             fl_alert("Error loading %s file General!\n", filename);
             file_error(fn);
             return;
@@ -533,6 +540,7 @@ RKR::load_preset(char *filename)
 
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
+        File_To_Load.clear();
         fl_alert("Error loading %s file Order!\n", filename);
         file_error(fn);
         return;
@@ -550,6 +558,7 @@ RKR::load_preset(char *filename)
 
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
+            File_To_Load.clear();
             fl_alert("Error loading %s file MIDI!\n", filename);
             file_error(fn);
             return;

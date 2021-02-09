@@ -77,9 +77,9 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate);
 
     memset(tmp, 0, sizeof (tmp));
-    if (filetoload != NULL)
+    if (!rkr->File_To_Load.empty())
     {
-        sprintf(tmp, "Session: %s", filetoload);
+        sprintf(tmp, "Session: %s", rkr->File_To_Load.c_str ());
     }
     else
     {
@@ -6569,11 +6569,11 @@ void RKRGUI::check_signals(void *usrPtr)
 
     if (got_sigusr1 == SIGUSR1)
     {
-        if (filetoload != NULL) // individual preset
+        if (!rkr->File_To_Load.empty()) // individual preset
         {
-            printf("Saving file: %s\n", filetoload);
+            printf("Saving file: %s\n", rkr->File_To_Load.c_str());
             got_sigusr1 = 0;
-            rkr->save_preset(filetoload);
+            rkr->save_preset(rkr->File_To_Load.c_str());
         }
         return;
     }

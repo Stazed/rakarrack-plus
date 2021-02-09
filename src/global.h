@@ -220,7 +220,6 @@ const unsigned C_CHANGE_PRESET_OFF = 1000;
 extern int error_num;
 extern int stecla;
 extern int looper_lqua;
-extern char *filetoload;
 extern char *jack_client_name;
 
 /* The font size adjustments */

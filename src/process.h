@@ -683,8 +683,8 @@ public:
     // fileio.C
     void apply_effect_parameters (char *buf, int fx_index);
     void get_effect_parameters (char *buf, int fx_index);
-    void save_preset (char *filename);
-    void load_preset (char *filename);
+    void save_preset (const char *filename);
+    void load_preset (const char *filename);
     void file_error(FILE *fn);
     void set_audio_paramters ();
     void load_names();
@@ -803,6 +803,11 @@ public:
      * Flag to indicate if the user used the -l command line option to load a preset file.
      */
     int Command_Line_File;
+    
+    /**
+     * The file name from command line -l option to load a single preset
+     */
+    std::string File_To_Load;
     
     /*
      * Flag to indicate the if the program is CLI only or the gui is shown.

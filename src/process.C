@@ -35,7 +35,6 @@
 int error_num = 0;
 int stecla = 0;
 int looper_lqua = 0;
-char *filetoload = NULL;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
@@ -75,6 +74,7 @@ RKR::RKR() :
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
     Command_Line_File(0),
+    File_To_Load(),
     Gui_Shown(1),
     No_Jack_Client(0),
     Bank_Load_Command_Line(0),
