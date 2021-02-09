@@ -216,9 +216,12 @@ main(int argc, char *argv[])
     // Set command line bank file, if any
     if (needtoloadbank)
     {
-        rkr.Bank_Load_Command_Line = needtoloadbank;
-        strcpy(rkr.Command_Line_Bank, banktoload);
-        rkr.load_bank(banktoload);
+        // If valid bank then copy the Bank name and set the command line flag
+        if(rkr.load_bank(banktoload))
+        {
+            rkr.Bank_Load_Command_Line = needtoloadbank;
+            strcpy(rkr.Command_Line_Bank, banktoload);
+        }
     }
     
     // Set preset index from command line, if any

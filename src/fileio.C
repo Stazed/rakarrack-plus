@@ -973,6 +973,9 @@ RKR::load_bank(char *filename)
 
     memset(meslabel, 0, sizeof (meslabel));
     sprintf(meslabel, "%s %s", jackcliname, VERSION);
+    
+    char error_msg[256];
+    memset(error_msg, 0, sizeof (error_msg));
 
     err_message = CheckOldBank(filename);
 
@@ -985,9 +988,12 @@ RKR::load_bank(char *filename)
         return (0);
         break;
     case 2:
-        Message(1, meslabel, "Can not load this Bank file\n");
+    {
+        sprintf(error_msg, "Can not load this Bank file: %s", filename);
+        Message(1, meslabel, error_msg);
         return (0);
         break;
+    }
     case 3:
         Message(1, meslabel, "Can not load this Bank file because is from a old rakarrack git version,\n please use rakgit2new utility to convert.");
         return (0);
@@ -1030,10 +1036,7 @@ RKR::load_bank(char *filename)
         new_bank_loaded = 1;
         return (1);
     }
-    else
-    {
-        // FIXME error message
-    }
+
     return (0);
 };
 
@@ -1518,9 +1521,11 @@ RKR::CheckOldBank(char *filename)
         fseek(fs, 0L, SEEK_END);
         Length = ftell(fs);
         fclose(fs);
+        
         if (Length == 993488) return (3);
-        if (Length != 1092688) return (1);
-        else return (0);
+        
+        if (Length == 1092688) return (0);
+
     }
 
     return (2);
