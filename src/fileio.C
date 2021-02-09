@@ -505,7 +505,7 @@ RKR::load_preset(char *filename)
     
     sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &Bypass_B);
 
-    if ((actuvol == 0) || (needtoloadstate))
+    if (!actuvol)
     {
         Fraction_Bypass = balance;
         Input_Gain = in_vol;
@@ -624,11 +624,6 @@ RKR::set_audio_paramters()
 
     Bypass = Bypass_B;
 
-    if (needtoloadstate)
-    {
-        calculavol(1);
-        calculavol(2);
-    }
 }
 
 /**

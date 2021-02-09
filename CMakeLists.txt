@@ -63,25 +63,6 @@ set (BuildOptionsDebug
     CACHE STRING "Debug build flags"
 )
 
-
-# Check for jack session availability
-# JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
-check_c_source_compiles (
-    "#include <jack/session.h>
-    int main(int argc, char **argv)
-    {
-        jack_session_event_type_t x = JackSessionSave;
-        return 0;
-    }" HasJackSession
-)
-
-# JACK_SESSION is deprecated as of JACK2 v1.9.15 - setting default to OFF
-if (HasJackSession)
-    option (EnableJackSessionSupport "Include Jack Session Support" OFF)
-else (HasJackSession)
-    set (EnableJackSessionSupport OFF)
-endif (HasJackSession)
-
 find_package (PkgConfig REQUIRED)
 
 #dependencies
@@ -308,7 +289,6 @@ package_status(BuildRakarrackPlus  "Build Rakarrack-plus . . . . . . . . . . . .
 package_status(BuildLV2Plugins     "Build LV2s (RakarrackPlus.lv2) . . . . . . . . . . . . .:"  )
 package_status(BuildCarlaPresets   "Build Carla lv2 presets. . . . . . . . . . . . . . . . .:"  )
 package_status(BuildForDebug       "Build for debug. . . . . . . . . . . . . . . . . . . . .:"  )
-package_status(EnableJackSessionSupport "JACK Session support . . . . . . . . . . . . . . . . . .:"  )
 
 message (STATUS)
 message (STATUS)

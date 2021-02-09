@@ -882,9 +882,7 @@ void RKRGUI::load_previous_state()
 
     if (rkr->init_state)
     {
-        if (!needtoloadstate)
-            rkr->Bypass = 1;
-        
+        rkr->Bypass = 1;
         rkr->calculavol(1);
         rkr->calculavol(2);
     }

@@ -31,10 +31,6 @@ jack_port_t *outport_left, *outport_right;
 jack_port_t *inputport_left, *inputport_right, *inputport_aux;
 jack_port_t *jack_midi_in, *jack_midi_out;
 
-// JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
-#ifdef JACK_SESSION
-jack_session_event_t *s_event;
-#endif
 
 int
 JACKstart(RKR * rkr_)
@@ -48,11 +44,6 @@ JACKstart(RKR * rkr_)
 
     jack_set_sync_callback(jackclient, timebase, JackOUT);
     jack_set_process_callback(jackclient, jackprocess, JackOUT);
-
-// JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
-#ifdef JACK_SESSION
-    jack_set_session_callback(jackclient, session_callback, JackOUT);
-#endif
 
     jack_on_shutdown(jackclient, jackshutdown, JackOUT);
 
@@ -88,7 +79,7 @@ JACKstart(RKR * rkr_)
         return (2);
     }
 
-    if ((JackOUT->aconnect_JA) && (!needtoloadstate))
+    if (JackOUT->aconnect_JA)
     {
         for (int i = 0; i < JackOUT->cuan_jack; i += 2)
         {
@@ -99,7 +90,7 @@ JACKstart(RKR * rkr_)
         }
     }
 
-    if ((JackOUT->aconnect_JIA) && (!needtoloadstate))
+    if (JackOUT->aconnect_JIA)
     {
         if (JackOUT->cuan_ijack == 1)
         {
@@ -332,41 +323,4 @@ actualiza_tap(double val, RKR * JackOUT)
     JackOUT->Update_tempo();
     JackOUT->Tap_Display = 1;
 }
-
-// JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
-#ifdef JACK_SESSION
-
-void session_callback(jack_session_event_t *event, void *arg)
-{
-    RKR *JackOUT = (RKR *) arg;
-    
-    char filename[256];
-    char command[256];
-
-    s_event = event;
-    snprintf(filename, sizeof (filename), "%srackstate.rkr", s_event->session_dir);
-    snprintf(command, sizeof (command), "rakarrack -u %s ${SESSION_DIR}rackstate.rkr", s_event->client_uuid);
-
-    s_event->command_line = strdup(command);
-    jack_session_reply(JackOUT->jackclient, s_event);
-
-    if (s_event->type == JackSessionSave)
-    {
-        JackOUT->save_preset(filename);
-    }
-
-    if (s_event->type == JackSessionSaveAndQuit)
-    {
-        JackOUT->save_preset(filename);
-        needtoloadstate = 1;
-        JackOUT->Exit_Program = 1;
-    }
-
-    jack_session_event_free(s_event);
-}
-
-#endif
-
-
-
 

@@ -40,9 +40,6 @@ show_help()
     fprintf(stderr, "  -l File, --load=File \t\t\t loads preset\n");
     fprintf(stderr, "  -b File, --bank=File \t\t\t loads bank\n");
     fprintf(stderr, "  -p #,    --preset=# \t\t\t set preset\n");
-#ifdef JACK_SESSION
-    fprintf(stderr, "  -u uuid, --session=# \t\t\t set jack session uuid\n");
-#endif
     fprintf(stderr, "  -j Name, --jack-client-name=Name \t set alternate jack/alsa name: default=rakarrack-plus\n");
     fprintf(stderr, "  -x, --dump-preset-names \t\t prints bank of preset names and IDs\n\n");
     fprintf(stderr, "FLTK options are:\n\n");
@@ -91,7 +88,6 @@ main(int argc, char *argv[])
         {"no-gui", 0, NULL, 'n'},
         {"dump-preset-names", 0, NULL, 'x'},
         {"help", 0, NULL, 'h'},
-        {"session", 1, NULL, 'u'},
         {"jack-client-name", 1, NULL, 'j'},
         {0, 0, 0, 0}
     };
@@ -108,13 +104,12 @@ main(int argc, char *argv[])
     char *banktoload;
 
     // globals
-    needtoloadstate = 0;
     opterr = 0;
     option_index = 0;
 
     while (1)
     {
-        opt = getopt_long(argc, argv, "l:b:p:u:nxhj:", opts, &option_index);
+        opt = getopt_long(argc, argv, "l:b:p:nxhj:", opts, &option_index);
         char *optarguments = optarg;
 
         if (opt == -1)
@@ -151,18 +146,6 @@ main(int argc, char *argv[])
             break;
         case 'x':
             needtodump = 1;
-            break;
-
-        case 'u':
-#ifdef JACK_SESSION
-            if (optarguments != NULL)
-            {
-                commandline = 1;
-                needtoloadstate = 1;
-                s_uuid = strdup(optarguments);
-                statefile = strdup(argv[optind]);
-            }
-#endif // JACK_SESSION
             break;
 
         case 'j':
@@ -210,7 +193,6 @@ main(int argc, char *argv[])
     rkr.InitMIDI();
     rkr.ConnectMIDI();
 
-    if (needtoloadstate) rkr.load_preset(statefile);
     if (needtoloadfile) rkr.load_preset(filetoload);
     
     // Set command line bank file, if any
@@ -281,12 +263,6 @@ main(int argc, char *argv[])
     }
 
     // free memory etc.
-
-    if (needtoloadstate)
-    {
-        rgui->save_current_state(0);
-    }
-
     JACKfinish(&rkr);
 
     return (0);

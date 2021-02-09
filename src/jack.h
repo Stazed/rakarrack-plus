@@ -26,11 +26,6 @@
 #include "global.h"
 #include "process.h"
 
-// JACK_SESSION is deprecated as of JACK2 v1.9.15 - should remove this at some point
-#ifdef JACK_SESSION
-#include <jack/session.h>
-void session_callback(jack_session_event_t *event, void *arg);
-#endif
 
 int JACKstart (RKR * rkr_);
 int jackprocess(jack_nframes_t nframes, void *arg);

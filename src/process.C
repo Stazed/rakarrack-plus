@@ -35,9 +35,6 @@
 int error_num = 0;
 int stecla = 0;
 int looper_lqua = 0;
-int needtoloadstate = 0;
-char *s_uuid;
-char *statefile;
 char *filetoload = NULL;
 char *jack_client_name = (char*) "rakarrack-plus";
 
@@ -387,11 +384,7 @@ RKR::jack_open_client()
     char temp[256];
     sprintf(temp, "%s", jack_client_name);
 
-#ifdef JACK_SESSION
-    jackclient = jack_client_open(temp, JackSessionID, NULL, s_uuid);
-#else
     jackclient = jack_client_open(temp, options, &status, NULL);
-#endif
 
     if (jackclient == NULL)
     {
