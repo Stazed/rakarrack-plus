@@ -216,8 +216,8 @@ const unsigned c_rkr_ext_size = 4;
 /* Flag to indicate the preset should not be changed */
 const unsigned C_CHANGE_PRESET_OFF = 1000;
 
-//TODO: move these values into the RKR object
-extern int error_num;
+/* External globals */
+extern int global_error_number;
 extern char *jack_client_name;
 
 /* The font size adjustments */

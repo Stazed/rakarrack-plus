@@ -896,7 +896,7 @@ Reverbtron::changepar(int npar, int value)
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
 #else
-        if (!setfile(value))error_num = 2;
+        if (!setfile(value))global_error_number = 2;
 #endif 
         break;
     case Revtron_Stretch:

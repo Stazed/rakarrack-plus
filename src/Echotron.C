@@ -357,47 +357,47 @@ Echotron::setfile(int value)
         //printf("params:\n%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",tPan, tTime, tLevel,
         //tLP,  tBP,  tHP,  tFreq,  tQ,  tiStages);
         if((tPan<-1.0f) || (tPan>1.0f)) {
-            error_num=5;
+            global_error_number=5;
             break;
         } else fPan[count]=tPan;
 
         if((tTime <-6.0) || (tTime>6.0f)) {
-            error_num=6;
+            global_error_number=6;
             break;
         } else fTime[count]=fabs(tTime);
 
         if((tLevel <-10.0f) || (tLevel>10.0f)) {
-            error_num=7;
+            global_error_number=7;
             break;
         } else fLevel[count]=tLevel;
 
         if((tLP <-2.0f) || (tLP>2.0f)) {
-            error_num=8;
+            global_error_number=8;
             break;
         } else fLP[count]=tLP;
 
         if((tBP<-2.0f) || (tBP>2.0f)) {
-            error_num=9;
+            global_error_number=9;
             break;
         } else fBP[count]=tBP;
 
         if((tHP<-2.0f) || (tHP>2.0f)) {
-            error_num=10;
+            global_error_number=10;
             break;
         } else fHP[count]=tHP;
 
         if((tFreq <20.0f) || (tFreq>26000.0f)) {
-            error_num=11;
+            global_error_number=11;
             break;
         } else fFreq[count]=tFreq;
 
         if((tQ <0.0) || (tQ>300.0f)) {
-            error_num=12;
+            global_error_number=12;
             break;
         } else fQ[count]=tQ;
 
         if((tiStages<0) || (tiStages>MAX_FILTER_STAGES)) {
-            error_num=13;
+            global_error_number=13;
             break;
         } else iStages[count]=tiStages-1;   //check in main loop if <0, then skip filter
 
@@ -551,7 +551,7 @@ Echotron::loadfile(char* Filename)
 #ifdef LV2_SUPPORT
     // what to do here - FIXME how does lv2 handle file errors?
 #else
-    error_num = error; // error_num is used by rakarrack to pop up a warning dialog
+    global_error_number = error; // global_error_number is used by rakarrack to pop up a warning dialog
 #endif     
 
     return f;
@@ -795,7 +795,7 @@ Echotron::changepar(int npar, int value)
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called by changepar() upon initialization for lv2 and is ignored.
 #else
-        if (!setfile(value)) error_num = 4;
+        if (!setfile(value)) global_error_number = 4;
 #endif
         break;
     case Echotron_LFO_Stereo:

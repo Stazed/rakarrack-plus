@@ -319,8 +319,8 @@ void RKRGUI::GuiTimeout(void)
         rkr->numpc = 0;
     }
 
-    if (error_num > 0)
-        rkr->Error_Handle(error_num);
+    if (global_error_number > 0)
+        rkr->Error_Handle(global_error_number);
 
     if (rkr->Tap_Bypass)
     {

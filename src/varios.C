@@ -55,7 +55,7 @@ RKR::Error_Handle(int num)
     memset(meslabel, 0, sizeof (meslabel));
     sprintf(meslabel, "%s %s", jackcliname, VERSION);
 
-    error_num = 0;
+    global_error_number = 0;
     memset(error_msg, 0, sizeof (error_msg));
 
     switch (num)

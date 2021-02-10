@@ -32,7 +32,7 @@
 #include "global.h"
 #include "process.h"
 
-int error_num = 0;
+int global_error_number = 0;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
