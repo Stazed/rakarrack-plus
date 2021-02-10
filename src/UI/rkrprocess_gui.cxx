@@ -294,28 +294,29 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
+    // Jack Port connections
     if (rkr->numpc)
     {
         if (rkr->numpi)
-            P_IN_ST->show();
+            PORT_IN_STATE->show();
         else
-            P_IN_ST->hide();
+            PORT_IN_STATE->hide();
         if (rkr->numpo)
-            P_OUT_ST->show();
+            PORT_OUT_STATE->show();
         else
-            P_OUT_ST->hide();
+            PORT_OUT_STATE->hide();
         if (rkr->numpa)
-            P_AUX_ST->show();
+            PORT_AUX_STATE->show();
         else
-            P_AUX_ST->hide();
+            PORT_AUX_STATE->hide();
         if (rkr->numpmi)
-            P_MIN_ST->show();
+            PORT_MIDI_IN_STATE->show();
         else
-            P_MIN_ST->hide();
+            PORT_MIDI_IN_STATE->hide();
         if (rkr->numpmo)
-            P_MOUT_ST->show();
+            PORT_MIDI_OUT_STATE->show();
         else
-            P_MOUT_ST->hide();
+            PORT_MIDI_OUT_STATE->hide();
         rkr->numpc = 0;
     }
 

@@ -540,35 +540,35 @@ Fl::focus(Open_Order);}
         code0 {o->set_label_offset(0);}
         class RKR_Box
       }
-      Fl_Box P_MIN_ST {
+      Fl_Box PORT_MIDI_IN_STATE {
         label {Midi In}
         user_data BOX_LED_DATA
         xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
         code0 {o->set_label_offset(-2);}
         class RKR_Box
       }
-      Fl_Box P_MOUT_ST {
+      Fl_Box PORT_MIDI_OUT_STATE {
         label {Midi Out}
         user_data BOX_LED_DATA
         xywh {648 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
         code0 {o->set_label_offset(-2);}
         class RKR_Box
       }
-      Fl_Box P_AUX_ST {
+      Fl_Box PORT_AUX_STATE {
         label Aux
         user_data BOX_LED_DATA
         xywh {676 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
         class RKR_Box
       }
-      Fl_Box P_IN_ST {
+      Fl_Box PORT_IN_STATE {
         label In
         user_data BOX_LED_DATA
         xywh {698 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
         class RKR_Box
       }
-      Fl_Box P_OUT_ST {
+      Fl_Box PORT_OUT_STATE {
         label Out
         user_data BOX_LED_DATA
         xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide

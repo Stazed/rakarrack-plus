@@ -259,11 +259,11 @@ public:
   RKR_Box *LMT_LED;
   RKR_Box *CLIP_LED;
   RKR_Box *UPS_LED;
-  RKR_Box *P_MIN_ST;
-  RKR_Box *P_MOUT_ST;
-  RKR_Box *P_AUX_ST;
-  RKR_Box *P_IN_ST;
-  RKR_Box *P_OUT_ST;
+  RKR_Box *PORT_MIDI_IN_STATE;
+  RKR_Box *PORT_MIDI_OUT_STATE;
+  RKR_Box *PORT_AUX_STATE;
+  RKR_Box *PORT_IN_STATE;
+  RKR_Box *PORT_OUT_STATE;
   RKR_Box *CPULOAD;
   Scope *Sco;
   Fl_Box *E1;

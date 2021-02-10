@@ -984,8 +984,11 @@ public:
 
     int cpufp;
     int mess_dis;
+    
+    // Jack port connection flags
     int numpi, numpo, numpa, numpmi, numpmo;
     int numpc;
+    
     int midi_table;
     int a_bank;
     int new_bank_loaded;
