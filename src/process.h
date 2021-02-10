@@ -985,9 +985,38 @@ public:
     int cpufp;
     int mess_dis;
     
-    // Jack port connection flags
-    int numpi, numpo, numpa, numpmi, numpmo;
-    int numpc;
+    // Jack port connection flags.
+    /**
+     * Flag to indicate the connection state of audio in ports.
+     */
+    int Jack_IN_Port_Connnection_Status;
+
+
+    /**
+     * Flag to indicate the connection state of audio out ports.
+     */
+    int Jack_OUT_Port_Connnection_Status;
+    
+    /**
+     * Flag to indicate the connection state of audio auxiliary in port.
+     */
+    int Jack_AUX_Port_Connnection_Status;
+
+    /**
+     * Flag to indicate the connection state of MIDI in port.
+     */
+    int Jack_MIDI_IN_Port_Connnection_Status;
+
+    /**
+     * Flag to indicate the connection state of MIDI out port.
+     */
+    int Jack_MIDI_OUT_Port_Connnection_Status;
+
+    /**
+     * Flag to indicate a Jack port connection state has changed.
+     */
+    int Jack_Port_Connnection_Changed;
+    // End Jack port connections
     
     int midi_table;
     int a_bank;

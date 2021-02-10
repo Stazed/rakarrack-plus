@@ -168,42 +168,42 @@ jackprocess(jack_nframes_t nframes, void *arg)
 
     int jnumpi = jack_port_connected(inputport_left) + jack_port_connected(inputport_right);
     
-    if (jnumpi != JackOUT->numpi)
+    if (jnumpi != JackOUT->Jack_IN_Port_Connnection_Status)
     {
-        JackOUT->numpi = jnumpi;
-        JackOUT->numpc = 1;
+        JackOUT->Jack_IN_Port_Connnection_Status = jnumpi;
+        JackOUT->Jack_Port_Connnection_Changed = 1;
     }
     
     int jnumpo = jack_port_connected(outport_left) + jack_port_connected(outport_right);
     
-    if (jnumpo != JackOUT->numpo)
+    if (jnumpo != JackOUT->Jack_OUT_Port_Connnection_Status)
     {
-        JackOUT->numpo = jnumpo;
-        JackOUT->numpc = 1;
+        JackOUT->Jack_OUT_Port_Connnection_Status = jnumpo;
+        JackOUT->Jack_Port_Connnection_Changed = 1;
     }
     
     int jnumpa = jack_port_connected(inputport_aux);
     
-    if (jnumpa != JackOUT->numpa)
+    if (jnumpa != JackOUT->Jack_AUX_Port_Connnection_Status)
     {
-        JackOUT->numpa = jnumpa;
-        JackOUT->numpc = 1;
+        JackOUT->Jack_AUX_Port_Connnection_Status = jnumpa;
+        JackOUT->Jack_Port_Connnection_Changed = 1;
     }
 
     int jnumpmi = jack_port_connected(jack_midi_in);
     
-    if (jnumpmi != JackOUT->numpmi)
+    if (jnumpmi != JackOUT->Jack_MIDI_IN_Port_Connnection_Status)
     {
-        JackOUT->numpmi = jnumpmi;
-        JackOUT->numpc = 1;
+        JackOUT->Jack_MIDI_IN_Port_Connnection_Status = jnumpmi;
+        JackOUT->Jack_Port_Connnection_Changed = 1;
     }
 
     int jnumpmo = jack_port_connected(jack_midi_out);
     
-    if (jnumpmo != JackOUT->numpmo)
+    if (jnumpmo != JackOUT->Jack_MIDI_OUT_Port_Connnection_Status)
     {
-        JackOUT->numpmo = jnumpmo;
-        JackOUT->numpc = 1;
+        JackOUT->Jack_MIDI_OUT_Port_Connnection_Status = jnumpmo;
+        JackOUT->Jack_Port_Connnection_Changed = 1;
     }
 
 

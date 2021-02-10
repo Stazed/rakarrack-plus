@@ -295,29 +295,29 @@ void RKRGUI::GuiTimeout(void)
 
 
     // Jack Port connections
-    if (rkr->numpc)
+    if (rkr->Jack_Port_Connnection_Changed)
     {
-        if (rkr->numpi)
+        if (rkr->Jack_IN_Port_Connnection_Status)
             PORT_IN_STATE->show();
         else
             PORT_IN_STATE->hide();
-        if (rkr->numpo)
+        if (rkr->Jack_OUT_Port_Connnection_Status)
             PORT_OUT_STATE->show();
         else
             PORT_OUT_STATE->hide();
-        if (rkr->numpa)
+        if (rkr->Jack_AUX_Port_Connnection_Status)
             PORT_AUX_STATE->show();
         else
             PORT_AUX_STATE->hide();
-        if (rkr->numpmi)
+        if (rkr->Jack_MIDI_IN_Port_Connnection_Status)
             PORT_MIDI_IN_STATE->show();
         else
             PORT_MIDI_IN_STATE->hide();
-        if (rkr->numpmo)
+        if (rkr->Jack_MIDI_OUT_Port_Connnection_Status)
             PORT_MIDI_OUT_STATE->show();
         else
             PORT_MIDI_OUT_STATE->hide();
-        rkr->numpc = 0;
+        rkr->Jack_Port_Connnection_Changed = 0;
     }
 
     if (global_error_number > 0)
