@@ -153,14 +153,14 @@ jackprocess(jack_nframes_t nframes, void *arg)
             {
                 JackOUT->jt_state = astate;
                 JackOUT->Rack_Effects[EFX_LOOPER]->changepar(Looper_Stop, 1);
-                stecla = 5;
+                JackOUT->Gui_Refresh = GUI_Refresh_Looper;
             }
 
             if ((astate != JackOUT->jt_state) && (astate == 3))
             {
                 JackOUT->jt_state = astate;
                 JackOUT->Rack_Effects[EFX_LOOPER]->changepar(Looper_Play, 1);
-                stecla = 5;
+                JackOUT->Gui_Refresh = GUI_Refresh_Looper;
             }
         }
     }
@@ -307,7 +307,7 @@ timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
             if ((JackOUT->EFX_Bypass[EFX_LOOPER]) && (state == 3))
             {
                 JackOUT->Rack_Effects[EFX_LOOPER]->changepar(Looper_Play, 1);
-                stecla = 5;
+                JackOUT->Gui_Refresh = GUI_Refresh_Looper;
             }
         }
     }

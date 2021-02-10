@@ -574,7 +574,7 @@ enum MIDI_Learn_Index
 /**
  * The effect types used by the "Put Order in your Rack" window.
  */ 
-enum Efx_Type
+enum Efx_Type_Index
 {
     Type_All                = 0,
     Type_Distortion         = 1,
@@ -586,6 +586,16 @@ enum Efx_Type
     Type_Dynamics           = 32,
     Type_Processing_and_EQ  = 64,
     Type_Synthesis          = 128
+};
+
+enum GUI_Refresh_Index
+{
+    GUI_Refresh_Off = 0,
+    GUI_Refresh_Plus_Key,
+    GUI_Refresh_Minus_Key,
+    GUI_Refresh_F2_Key,
+    GUI_Refresh_F3_Key,
+    GUI_Refresh_Looper
 };
 
 /**
@@ -814,6 +824,11 @@ public:
      * CLI = 0: Gui Shown = 1.
      */
     int Gui_Shown;
+    
+    /**
+     * Flag to indicate that given gui index item needs refresh. Uses GUI_Refresh_Index
+     */
+    int Gui_Refresh;
     
     /**
      * Flag to indicate that a Jack client cannot be created.

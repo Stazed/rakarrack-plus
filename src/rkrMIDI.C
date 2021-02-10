@@ -689,13 +689,13 @@ RKR::midievents()
         if (midievent->type == SND_SEQ_EVENT_START)
         {
             Rack_Effects[EFX_LOOPER]->changepar(Looper_Play, 1);
-            stecla = 5;
+            Gui_Refresh = GUI_Refresh_Looper;
         }
 
         if (midievent->type == SND_SEQ_EVENT_STOP)
         {
             Rack_Effects[EFX_LOOPER]->changepar(Looper_Stop, 1);
-            stecla = 5;
+            Gui_Refresh = GUI_Refresh_Looper;
         }
     }
 

@@ -33,7 +33,6 @@
 #include "process.h"
 
 int error_num = 0;
-int stecla = 0;
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR() :
@@ -75,6 +74,7 @@ RKR::RKR() :
     Command_Line_File(0),
     File_To_Load(),
     Gui_Shown(1),
+    Gui_Refresh(0),
     No_Jack_Client(0),
     Bank_Load_Command_Line(0),
     lv(),

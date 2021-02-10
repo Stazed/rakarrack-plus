@@ -185,7 +185,7 @@ void RKRGUI::GuiTimeout(void)
         }
     }
 
-    if (stecla == 1)
+    if (rkr->Gui_Refresh == GUI_Refresh_Plus_Key)
     {
         if (rkr->Selected_Preset < 60)
         {
@@ -193,11 +193,11 @@ void RKRGUI::GuiTimeout(void)
             Preset_Counter->do_callback();
         }
 
-        stecla = 0;
+        rkr->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
-    if (stecla == 2)
+    if (rkr->Gui_Refresh == GUI_Refresh_Minus_Key)
     {
         if (rkr->Selected_Preset > 1)
         {
@@ -205,10 +205,10 @@ void RKRGUI::GuiTimeout(void)
             Preset_Counter->do_callback();
         }
 
-        stecla = 0;
+        rkr->Gui_Refresh = GUI_Refresh_Off;
     }
 
-    if (stecla == 3)
+    if (rkr->Gui_Refresh == GUI_Refresh_F2_Key)
     {
         if (Nivel_Salida->value()>-50)
         {
@@ -217,11 +217,11 @@ void RKRGUI::GuiTimeout(void)
             Nivel_Salida->redraw();
         }
 
-        stecla = 0;
+        rkr->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
-    if (stecla == 4)
+    if (rkr->Gui_Refresh == GUI_Refresh_F3_Key)
     {
         if (Nivel_Salida->value() < 50)
         {
@@ -230,14 +230,14 @@ void RKRGUI::GuiTimeout(void)
             Nivel_Salida->redraw();
         }
 
-        stecla = 0;
+        rkr->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
-    if (stecla == 5)
+    if (rkr->Gui_Refresh = GUI_Refresh_Looper)
     {
         update_looper();
-        stecla = 0;
+        rkr->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
@@ -6459,25 +6459,25 @@ int RKRGUI::prevnext(int e)
     {
         if ((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43))) // +(plus) key
         {
-            stecla = 1;
+            rkr->Gui_Refresh = GUI_Refresh_Plus_Key;
             return 1;
         }
 
         if ((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45))) // -(minus) key
         {
-            stecla = 2;
+            rkr->Gui_Refresh = GUI_Refresh_Minus_Key;
             return 1;
         }
 
         if (Fl::event_key(FL_F + 2)) // F2 key - decrease output volume
         {
-            stecla = 3;
+            rkr->Gui_Refresh = GUI_Refresh_F2_Key;
             return 1;
         }
 
         if (Fl::event_key(FL_F + 3)) // F3 key - increase output volume
         {
-            stecla = 4;
+            rkr->Gui_Refresh = GUI_Refresh_F3_Key;
             return 1;
         }
 
