@@ -32,6 +32,7 @@
 #include "global.h"
 #include "process.h"
 
+// External globals
 int global_error_number = 0;
 char *jack_client_name = (char*) "rakarrack-plus";
 

@@ -234,7 +234,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (rkr->Gui_Refresh = GUI_Refresh_Looper)
+    if (rkr->Gui_Refresh == GUI_Refresh_Looper)
     {
         update_looper();
         rkr->Gui_Refresh = GUI_Refresh_Off;
