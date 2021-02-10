@@ -24,7 +24,7 @@
 #define EFFECT_H
 
 #include "global.h"
-
+#include "FPreset.h"
 
 class Effect
 {

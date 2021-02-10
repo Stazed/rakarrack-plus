@@ -24,6 +24,58 @@
 #ifndef DXEMU_H
 #define DXEMU_H
 
+#include <math.h>
+#include <signal.h>
+#include <dirent.h>
+#include <search.h>
+#include <sys/time.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <FL/Fl_Tiled_Image.H>
+
+
+class RKRGUI;   // forward declaration
+class RKR;      // forward declaration
+
+extern RKRGUI *rgui;    // define in main
+extern RKR *rkr;        // define in rakarrack.cxx 
+extern Fl_Tiled_Image *back; 
+extern Fl_Color leds_color; 
+extern Fl_Color back_color; 
+extern Fl_Color fore_color; 
+extern Fl_Color label_color;
+
+/* These are used by settings midi scroll for identifying the scroll widgets - user data (void *) */
+const int c_bank_used = 1000;
+const int c_preset_used = 2000;
+const int c_bank_number = 8000;
+
+/* For file .rkrb extension size usually for removing the extension from bank names */
+const unsigned c_rkrb_ext_size = 5;
+/* For file .rkr extension size usually for removing the extension from preset names */
+const unsigned c_rkr_ext_size = 4;
+/* Flag to indicate the preset should not be changed */
+const unsigned C_CHANGE_PRESET_OFF = 1000;
+
+extern int global_error_number;
+extern char *jack_client_name;
+
+/* The font size adjustments */
+extern int global_font_size;
+const int C_DEFAULT_FONT_SIZE = 10;
+const int C_DONT_CHANGE_FONT_SIZE = 0;
+
+/* Milliseconds - used for quality changes by usleep().
+   The amounts are much greater than necessary for the 
+   delete and re-initialize. But the delay is useful to
+   let the user know that something has changed and it
+   is not real time safe. */
+const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
+const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
+
+inline int Dry_Wet (int x) {return 127 - x;}
 
 #define D_PI 6.283185f
 #define PI 3.141598f
@@ -59,6 +111,8 @@
 #define MAX_CHORUS_DELAY 250.0f	//ms
 #define LN2                       (1.0f)  //Uncomment for att/rel to behave more like a capacitor.
 #define MUG_CORR_FACT  0.4f
+#define f_exp(x) f_pow2(x * LN2R)
+
 //Crunch waveshaping constants
 #define Thi		0.67f			//High threshold for limiting onset
 #define Tlo		-0.65f			//Low threshold for limiting onset
@@ -68,6 +122,7 @@
 #define DIV_TLC_CONST   0.002f			// 1/300
 #define DIV_THC_CONST	0.0016666f		// 1/600 (approximately)
 //End waveshaping constants
+
 #define D_FLANGE_MAX_DELAY	0.055f			// Number of Seconds  - 50ms corresponds to fdepth = 20 (Hz). Added some extra for padding
 #define LFO_CONSTANT		9.765625e-04		// 1/(2^LOG_FMAX - 1)
 #define LOG_FMAX		10.0f			//  -- This optimizes LFO sweep for useful range.
@@ -89,8 +144,6 @@
 #define USERFILE 100    // used by Convolotron, Echotron, Reverbtron to indicate user file in setfile()
 #define JACK_RINGBUFFER_SIZE 16384 // Default size for ringbuffer
 #define SPACE_BAR 32    // for space bar pressed
-
-inline int Dry_Wet (int x) {return 127 - x;}
 
 typedef union {
     float f;
@@ -141,7 +194,6 @@ return y;
 
 //The below pow function really works & is good to 16 bits, but is it faster than math lib powf()???
 //globals
-#include <math.h>
 static const float a[5] = { 1.00000534060469, 0.693057900547259, 0.239411678986933, 0.0532229404911678, 0.00686649174914722 };
 //lookup for positive powers of 2
 static const float pw2[25] = {1.0f, 2.0f, 4.0f, 8.0f, 16.0f, 32.0f, 64.0f, 128.0f, 256.0f, 512.0f, 1024.0f, 2048.0f, 4096.0f, 8192.0f, 16384.0f, 32768.0f, 65536.0f, 131072.0f, 262144.0f, 524288.0f, 1048576.0f, 2097152.0f, 4194304.0f, 8388608.0f, 16777216.0f};
@@ -178,60 +230,6 @@ static inline float f_pow2(float x)
         return y;
     }
 }
-
-#define f_exp(x) f_pow2(x * LN2R)
-
-#include <signal.h>
-#include <dirent.h>
-#include <search.h>
-#include <sys/time.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "FPreset.h"
-
-/* Global GUI items */
-#include <FL/Fl_Tiled_Image.H>
-class RKRGUI;   // forward declaration
-class RKR;      // forward declaration
-
-extern RKRGUI *rgui;    // define in main
-extern RKR *rkr;        // define in rakarrack.cxx 
-extern Fl_Tiled_Image *back; 
-extern Fl_Color leds_color; 
-extern Fl_Color back_color; 
-extern Fl_Color fore_color; 
-extern Fl_Color label_color;
-
-/* These are used by settings midi scroll for identifying the scroll widgets - user data (void *) */
-const int c_bank_used = 1000;
-const int c_preset_used = 2000;
-const int c_bank_number = 8000;
-
-/* For file .rkrb extension size usually for removing the extension from bank names */
-const unsigned c_rkrb_ext_size = 5;
-/* For file .rkr extension size usually for removing the extension from preset names */
-const unsigned c_rkr_ext_size = 4;
-/* Flag to indicate the preset should not be changed */
-const unsigned C_CHANGE_PRESET_OFF = 1000;
-
-/* External globals */
-extern int global_error_number;
-extern char *jack_client_name;
-
-/* The font size adjustments */
-extern int global_font_size;
-const int C_DEFAULT_FONT_SIZE = 10;
-const int C_DONT_CHANGE_FONT_SIZE = 0;
-
-/* Milliseconds - used for quality changes by usleep().
-   The amounts are much greater than necessary for the 
-   delete and re-initialize. But the delay is useful to
-   let the user know that something has changed and it
-   is not real time safe. */
-const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
-const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
 
 /**
  * The effect index used by switch(): case: and order number.
