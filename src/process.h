@@ -907,30 +907,43 @@ public:
      */
     int Effect_Type_Filter;
 
-
+    /* Quality resampling */
     int Har_Down;
     int Har_U_Q;
     int Har_D_Q;
+
     int Rev_Down;
     int Rev_U_Q;
     int Rev_D_Q;
+
     int Con_Down;
     int Con_U_Q;
     int Con_D_Q;
+
     int Shi_Down;
     int Shi_U_Q;
     int Shi_D_Q;
+
     int Seq_Down;
     int Seq_U_Q;
     int Seq_D_Q;
+
     int Voc_Down;
     int Voc_U_Q;
     int Voc_D_Q;
+
     int Ste_Down;
     int Ste_U_Q;
     int Ste_D_Q;
-    float aFreq;
 
+    /* Master resampling */
+    int upsample;
+    int UpQual;
+    int DownQual;
+    int UpAmo;
+    /* End Quality resampling */
+
+    float aFreq;
     int Metro_Vol;
     int M_Metro_Sound;
     int deachide;
@@ -938,24 +951,24 @@ public:
     int change_scale;
     int font;
     int flpos;
-    int upsample;
-    int UpQual;
-    int DownQual;
-    int UpAmo;
-    int J_SAMPLE_RATE;
-    int J_PERIOD;
+
     int m_displayed;
     int Mvalue;
     int Mnumeff[32];
     int OnOffC;
 
-    //ssj
+    int JACK_SAMPLE_RATE;
+    int JACK_PERIOD;
     int period;
     float fPeriod;
     int sample_rate;
     float fSample_rate;
     float cSample_rate;
-    float *interpbuf;//buffer for analog filters to interpolate (shared)
+
+    /**
+     * Buffer for analog filters to interpolate (shared).
+     */
+    float *interpbuf;
 
     /* WaveShape Resampling */
     int Dist_res_amount;

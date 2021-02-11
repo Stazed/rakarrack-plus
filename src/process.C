@@ -131,6 +131,10 @@ RKR::RKR() :
     Ste_Down(),
     Ste_U_Q(),
     Ste_D_Q(),
+    upsample(),
+    UpQual(),
+    DownQual(),
+    UpAmo(),
     aFreq(),
     Metro_Vol(),
     M_Metro_Sound(),
@@ -139,16 +143,12 @@ RKR::RKR() :
     change_scale(1),
     font(),
     flpos(),
-    upsample(),
-    UpQual(),
-    DownQual(),
-    UpAmo(),
-    J_SAMPLE_RATE(),
-    J_PERIOD(),
     m_displayed(),
     Mvalue(),
     Mnumeff(),
     OnOffC(),
+    JACK_SAMPLE_RATE(),
+    JACK_PERIOD(),
     period(),
     fPeriod(),
     sample_rate(),
@@ -396,8 +396,8 @@ RKR::jack_open_client()
 
     strcpy(jackcliname, jack_get_client_name(jackclient));
 
-    J_SAMPLE_RATE = jack_get_sample_rate(jackclient);
-    J_PERIOD = jack_get_buffer_size(jackclient);
+    JACK_SAMPLE_RATE = jack_get_sample_rate(jackclient);
+    JACK_PERIOD = jack_get_buffer_size(jackclient);
     
     return 1;
 }
@@ -738,21 +738,21 @@ RKR::Adjust_Upsample()
 {
     if (upsample)
     {
-        sample_rate = J_SAMPLE_RATE * (UpAmo + 2);
-        period = J_PERIOD * (UpAmo + 2);
+        sample_rate = JACK_SAMPLE_RATE * (UpAmo + 2);
+        period = JACK_PERIOD * (UpAmo + 2);
         u_up = (double) UpAmo + 2.0;
         u_down = 1.0 / u_up;
     }
     else
     {
-        sample_rate = J_SAMPLE_RATE;
-        period = J_PERIOD;
+        sample_rate = JACK_SAMPLE_RATE;
+        period = JACK_PERIOD;
     }
 
     fSample_rate = (float) sample_rate;
     cSample_rate = 1.0f / (float) sample_rate;
     fPeriod = float(period);
-    t_periods = J_SAMPLE_RATE / 12 / J_PERIOD;
+    t_periods = JACK_SAMPLE_RATE / 12 / JACK_PERIOD;
 
 }
 
@@ -855,15 +855,15 @@ RKR::Control_Gain(float *origl, float *origr)
 
     if (upsample)
     {
-        U_Resample->out(origl, origr, efxoutl, efxoutr, J_PERIOD, u_up);
+        U_Resample->out(origl, origr, efxoutl, efxoutr, JACK_PERIOD, u_up);
         if ((checkforaux()) || (ACI_Bypass))
         {
-            A_Resample->mono_out(auxdata, auxresampled, J_PERIOD, u_up, period);
+            A_Resample->mono_out(auxdata, auxresampled, JACK_PERIOD, u_up, period);
         }
     }
     else if ((checkforaux()) || (ACI_Bypass))
     {
-        memcpy(auxresampled, auxdata, sizeof (float)*J_PERIOD);
+        memcpy(auxresampled, auxdata, sizeof (float)*JACK_PERIOD);
     }
 
     if (DC_Offset)
