@@ -5997,7 +5997,7 @@ void RKRGUI::Prepare_Order()
         Order->Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
     }
 
-    Fill_Avail(rkr->eff_filter);
+    Fill_Avail(rkr->Effect_Type_Filter);
 
     Order->Order_Bro->select(1);
 }
@@ -6271,7 +6271,7 @@ void RKRGUI::Fill_Avail(int filter)
 
         if (!k)
         {
-            if ((rkr->efx_names[i].Type & rkr->eff_filter) == filter)
+            if ((rkr->efx_names[i].Type & rkr->Effect_Type_Filter) == filter)
             {
                 Order->Avail_Bro->add(rkr->efx_names[i].Nom);
                 rkr->availables[t] = rkr->efx_names[i].Pos;

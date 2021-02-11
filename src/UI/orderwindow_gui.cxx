@@ -15,7 +15,7 @@ Avail_Bro->remove(j);
 Order_Bro->remove(i+1);
 Order_Bro->select(1);
 m_rkr->new_order[i-1]=m_rkr->availables[j];
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Pon(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()))->cb_Pon_i(o,v);
@@ -66,72 +66,72 @@ void OrderWindowGui::cb_Baja(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Fil0_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_All;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_All;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil0(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil0_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil1_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Distortion;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Distortion;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil1(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil1_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil2_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Modulation;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Modulation;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil2(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil2_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil4_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Time;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Time;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil4(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil4_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil8_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Emulation;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Emulation;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil8(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil8_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil16_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Filters;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Filters;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil16(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil16_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil32_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Dynamics;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Dynamics;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil32(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil32_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil64_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Processing_and_EQ;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Processing_and_EQ;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil64(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil64_i(o,v);
 }
 
 void OrderWindowGui::cb_Fil128_i(RKR_Button*, void*) {
-  m_rkr->eff_filter=Type_Synthesis;
-m_rgui->Fill_Avail(m_rkr->eff_filter);
+  m_rkr->Effect_Type_Filter=Type_Synthesis;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);
 }
 void OrderWindowGui::cb_Fil128(RKR_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()->parent()))->cb_Fil128_i(o,v);

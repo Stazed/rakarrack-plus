@@ -55,7 +55,7 @@ Avail_Bro->remove(j);
 Order_Bro->remove(i+1);
 Order_Bro->select(1);
 m_rkr->new_order[i-1]=m_rkr->availables[j];
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
     xywh {200 145 50 25} labelsize 18
     code0 {o->set_label_offset(8);}
     class RKR_Button
@@ -114,64 +114,64 @@ m_rkr->new_order[i+1]=x;
   } {
     Fl_Button Fil0 {
       label All
-      callback {m_rkr->eff_filter=Type_All;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_All;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {15 284 177 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil1 {
       label Distortion
-      callback {m_rkr->eff_filter=Type_Distortion;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_Distortion;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {105 304 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil2 {
       label Modulation
-      callback {m_rkr->eff_filter=Type_Modulation;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_Modulation;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {15 304 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil4 {
       label Time
-      callback {m_rkr->eff_filter=Type_Time;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_Time;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {105 325 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil8 {
       label Emulation
-      callback {m_rkr->eff_filter=Type_Emulation;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_Emulation;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {15 324 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil16 {
       label Filters
-      callback {m_rkr->eff_filter=Type_Filters;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_Filters;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {105 345 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil32 {
       label Dynamics
-      callback {m_rkr->eff_filter=Type_Dynamics;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_Dynamics;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {15 344 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil64 {
       label {Processing && EQ}
-      callback {m_rkr->eff_filter=Type_Processing_and_EQ;
-m_rgui->Fill_Avail(m_rkr->eff_filter);}
+      callback {m_rkr->Effect_Type_Filter=Type_Processing_and_EQ;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
       xywh {105 365 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil128 {
       label Synthesis
-      callback {m_rkr->eff_filter=Type_Synthesis;
-m_rgui->Fill_Avail(m_rkr->eff_filter);} selected
+      callback {m_rkr->Effect_Type_Filter=Type_Synthesis;
+m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);} selected
       xywh {15 365 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }

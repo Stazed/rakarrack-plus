@@ -109,7 +109,7 @@ RKR::RKR() :
     CountWait(),
     XUserMIDI(),
     quality_update(false),
-    eff_filter(),
+    Effect_Type_Filter(Type_All),
     Har_Down(),
     Har_U_Q(),
     Har_D_Q(),

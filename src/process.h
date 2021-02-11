@@ -867,16 +867,47 @@ public:
     int Ccin;
     int Pcin;
 
-    // bank of flags telling GUI which midi controlled items to update
+    // MIDI Learn
+    /**
+     * Array of flags telling GUI which midi controlled items to update.
+     * For FLTK slider, value, choice visual adjustments for user notification.
+     */
     int Mcontrol[C_MC_RANGE];
-    // flag telling GUI that Mcontrol has at least one set flag
+    
+    /**
+     * Used for MIDI learn window flashing "Get MIDI Message" light timer.
+     */
     int RControl;
-    int ControlGet;
-    int CountWait;
-    int XUserMIDI[128][20];
 
+    /**
+     * Flag to indicate when a CC has been received, for the MIDI learn window.
+     */
+    int ControlGet;
+
+    /**
+     * A counter for the flashing "Get MIDI Message" light.
+     */
+    int CountWait;
+
+    /**
+     * Array for holding the user MIDI learn settings. CC from 0 to 127, each CC can
+     * be mapped to 20 effects.
+     */
+    int XUserMIDI[128][20];
+    // End MIDI learn
+    
+    /**
+     * Flag to indicate when a quality update (Settings/Quality) is occurring. To shut off
+     * effect and MIDI control processing while the effect is deleted and added.  
+     */
     bool quality_update;
-    int eff_filter;
+
+    /**
+     * Holds the effect type, Order window value from Efx_Type_Index.
+     */
+    int Effect_Type_Filter;
+
+
     int Har_Down;
     int Har_U_Q;
     int Har_D_Q;
