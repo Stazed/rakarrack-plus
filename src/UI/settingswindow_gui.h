@@ -494,7 +494,7 @@ private:
   inline void cb_Username_i(RKR_Input*, void*);
   static void cb_Username(RKR_Input*, void*);
 public:
-  RKR_Check_Button *MES_DIS;
+  RKR_Check_Button *MESSAGE_DISABLE;
 private:
   inline void cb_MES_DIS_i(RKR_Check_Button*, void*);
   static void cb_MES_DIS(RKR_Check_Button*, void*);

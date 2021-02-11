@@ -978,7 +978,7 @@ void RKRGUI::load_previous_state()
     Tap_activar->do_callback();
 
 
-    rakarrack.get(rkr->PrefNom("Disable Warnings"), rkr->mess_dis, 0);
+    rakarrack.get(rkr->PrefNom("Disable Warnings"), rkr->Disable_Warnings, 0);
     rakarrack.get(rkr->PrefNom("Enable Tooltips"), rkr->ena_tool, 1);
     Fl_Tooltip::enable(rkr->ena_tool);
 
@@ -1278,7 +1278,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(rkr->PrefNom("Sequence Quality"), rkr->SeqQual);
         rakarrack.set(rkr->PrefNom("Shifter Quality"), rkr->ShiQual);
         rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"), rkr->t_timeout);
-        rakarrack.set(rkr->PrefNom("Disable Warnings"), rkr->mess_dis);
+        rakarrack.set(rkr->PrefNom("Disable Warnings"), rkr->Disable_Warnings);
         rakarrack.set(rkr->PrefNom("Enable Tooltips"), rkr->ena_tool);
 
         for (int i = 0; i < 128; i++)
@@ -2881,7 +2881,7 @@ void RKRGUI::MiraConfig()
     Settings->UPSAMPLE_C->value(rkr->upsample);
     Settings->Upr_Qual->value(rkr->UpQual);
     Settings->Downr_Qual->value(rkr->DownQual);
-    Settings->MES_DIS->value(rkr->mess_dis);
+    Settings->MESSAGE_DISABLE->value(rkr->Disable_Warnings);
     Settings->ENA_TOOL->value(rkr->ena_tool);
     Settings->T_TIMEOUT->value(rkr->t_timeout);
 
@@ -6005,7 +6005,7 @@ void RKRGUI::Prepare_Order()
 void RKRGUI::Show_Next_Time()
 {
     // popup for settings changes that will not take effect until restart
-    if (rkr->mess_dis)
+    if (rkr->Disable_Warnings)
         return;
 
     Fl_Widget *w = fl_message_icon();

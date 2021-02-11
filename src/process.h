@@ -983,7 +983,12 @@ public:
     int cents_old;
 
     int cpufp;
-    int mess_dis;
+
+    /**
+     * Flag to indicate if user warnings should be disabled. From check box
+     * in Settings/Misc.
+     */
+    int Disable_Warnings;
     
     // Jack port connection flags.
     /**

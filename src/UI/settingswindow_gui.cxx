@@ -999,7 +999,7 @@ void SettingsWindowGui::cb_Username(RKR_Input* o, void* v) {
 }
 
 void SettingsWindowGui::cb_MES_DIS_i(RKR_Check_Button* o, void*) {
-  m_rkr->mess_dis=(int) o->value();
+  m_rkr->Disable_Warnings=(int) o->value();
 }
 void SettingsWindowGui::cb_MES_DIS(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MES_DIS_i(o,v);
@@ -2859,20 +2859,20 @@ this->when(FL_WHEN_RELEASE);
       o->set_label_offset(4);
       o->set_text_offset(4);
     } // RKR_Input* Username
-    { RKR_Check_Button* o = MES_DIS = new RKR_Check_Button(30, 90, 16, 16, "Disable Warnings    ");
-      MES_DIS->box(FL_NO_BOX);
-      MES_DIS->down_box(FL_DOWN_BOX);
-      MES_DIS->color(FL_BACKGROUND_COLOR);
-      MES_DIS->selection_color(FL_FOREGROUND_COLOR);
-      MES_DIS->labeltype(FL_NORMAL_LABEL);
-      MES_DIS->labelfont(0);
-      MES_DIS->labelsize(12);
-      MES_DIS->labelcolor(FL_BACKGROUND2_COLOR);
-      MES_DIS->callback((Fl_Callback*)cb_MES_DIS);
-      MES_DIS->align(Fl_Align(FL_ALIGN_RIGHT));
-      MES_DIS->when(FL_WHEN_RELEASE);
+    { RKR_Check_Button* o = MESSAGE_DISABLE = new RKR_Check_Button(30, 90, 16, 16, "Disable Warnings    ");
+      MESSAGE_DISABLE->box(FL_NO_BOX);
+      MESSAGE_DISABLE->down_box(FL_DOWN_BOX);
+      MESSAGE_DISABLE->color(FL_BACKGROUND_COLOR);
+      MESSAGE_DISABLE->selection_color(FL_FOREGROUND_COLOR);
+      MESSAGE_DISABLE->labeltype(FL_NORMAL_LABEL);
+      MESSAGE_DISABLE->labelfont(0);
+      MESSAGE_DISABLE->labelsize(12);
+      MESSAGE_DISABLE->labelcolor(FL_BACKGROUND2_COLOR);
+      MESSAGE_DISABLE->callback((Fl_Callback*)cb_MES_DIS);
+      MESSAGE_DISABLE->align(Fl_Align(FL_ALIGN_RIGHT));
+      MESSAGE_DISABLE->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
-    } // RKR_Check_Button* MES_DIS
+    } // RKR_Check_Button* MESSAGE_DISABLE
     { RKR_Check_Button* o = T_TIMEOUT = new RKR_Check_Button(30, 110, 16, 16, "Tap Tempo Timeout");
       T_TIMEOUT->box(FL_NO_BOX);
       T_TIMEOUT->down_box(FL_DOWN_BOX);

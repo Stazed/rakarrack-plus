@@ -198,7 +198,7 @@ RKR::RKR() :
     note_old(0),
     cents_old(0),
     cpufp(),
-    mess_dis(),
+    Disable_Warnings(),
     Jack_IN_Port_Connnection_Status(),
     Jack_OUT_Port_Connnection_Status(),
     Jack_AUX_Port_Connnection_Status(),
@@ -413,7 +413,7 @@ RKR::load_user_preferences()
 {
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
     
-    rakarrack.get(PrefNom("Disable Warnings"), mess_dis, 0);
+    rakarrack.get(PrefNom("Disable Warnings"), Disable_Warnings, 0);
     rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
     rakarrack.get(PrefNom("UpSampling"), upsample, 0);
     rakarrack.get(PrefNom("UpQuality"), UpQual, 4);

@@ -32,7 +32,7 @@
 int
 RKR::Message(int prio, const char *labelwin, const char *message_text)
 {
-    if ((mess_dis) && (prio == 0)) return (0);
+    if ((Disable_Warnings) && (prio == 0)) return (0);
 
     Fl_Widget *w = fl_message_icon();
 

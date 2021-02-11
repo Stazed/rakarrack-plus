@@ -1426,9 +1426,9 @@ else JackIn->deactivate();}
         code1 {o->set_text_offset(4);}
         class RKR_Input
       }
-      Fl_Check_Button MES_DIS {
+      Fl_Check_Button MESSAGE_DISABLE {
         label {Disable Warnings    }
-        callback {m_rkr->mess_dis=(int) o->value();}
+        callback {m_rkr->Disable_Warnings=(int) o->value();}
         xywh {30 90 16 16} down_box DOWN_BOX labelsize 12 labelcolor 7 align 8
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
