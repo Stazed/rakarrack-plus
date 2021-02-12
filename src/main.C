@@ -238,6 +238,9 @@ main(int argc, char *argv[])
     }
 
     mlockall(MCL_CURRENT | MCL_FUTURE);
+    
+    // For keeping the message about disconnected from repeating
+    int jack_disconnected = 0;
 
     //Main Loop
     while (rkr.Exit_Program == 0)
@@ -260,9 +263,9 @@ main(int argc, char *argv[])
             }
         }
 
-        if ((!rkr.jdis) && (rkr.jshut))
+        if ((!jack_disconnected) && (rkr.Jack_Shut_Down))
         {
-            rkr.jdis = 1;
+            jack_disconnected = 1;
             rkr.Message(1, rkr.jackcliname, "Jack Shut Down, try to save your work");
         }
 

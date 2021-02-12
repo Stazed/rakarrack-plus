@@ -284,7 +284,7 @@ jackshutdown(void *arg)
     }
     else
     {
-        JackOUT->jshut = 1;
+        JackOUT->Jack_Shut_Down = 1;
     }
 }
 

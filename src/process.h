@@ -776,10 +776,9 @@ public:
     jack_options_t options;
     jack_status_t status;
     char jackcliname[64];
+    int Jack_Shut_Down;
 
     int db6booster;
-    int jdis;
-    int jshut;
     int DC_Offset;
     int Bypass;
     int MIDIConverter_Bypass;
