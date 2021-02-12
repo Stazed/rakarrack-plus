@@ -778,17 +778,32 @@ public:
     char jackcliname[64];
     int Jack_Shut_Down;
 
+    /**
+     * Flag for check box in Settings/Audio "+6dB Final Limiter.
+     */
     int db6booster;
+
+    /**
+     * Flag for check box in Settings/Audio "Filter Input DC Offset"
+     */
     int DC_Offset;
+
+    /**
+     * Main window master FX On/Off button flag.
+     */
     int Bypass;
+
+    /**
+     * Main window master FX On/Off from/to bank preset.
+     */
+    int Bypass_B;
+    
     int MIDIConverter_Bypass;
     int Metro_Bypass;
     int Tuner_Bypass;
     int Tap_Bypass;
-    int ACI_Bypass;
+    int ACI_Bypass;     // Analog control (trigger window)
 
-    int Bypass_B;
-    
     /**
      * Flag to indicate the program should terminate (user request).
      * 1 to quit, 0 to continue. Used in Main() processing loop.
