@@ -4395,53 +4395,12 @@ void RKRGUI::PutBackground()
     }
 
     InOut->image(back);
-    EQ->image(InOut->image());
-    COMPRESS->image(InOut->image());
-    DIST->image(InOut->image());
-    OVRD->image(InOut->image());
-    ECHO->image(InOut->image());
-    CHORUS->image(InOut->image());
-    FLANGER->image(InOut->image());
-    WAHWAH->image(InOut->image());
-    ALIENWAH->image(InOut->image());
-    PHASER->image(InOut->image());
-    REVERB->image(InOut->image());
-    PEQ->image(InOut->image());
-    CABINET->image(InOut->image());
-    PAN->image(InOut->image());
-    HAR->image(InOut->image());
-    MUSDELAY->image(InOut->image());
-    GATE->image(InOut->image());
-    DERELICT->image(InOut->image());
-    APHASER->image(InOut->image());
-    VALVE->image(InOut->image());
-    DFLANGE->image(InOut->image());
-    RING->image(InOut->image());
-    EXCITER->image(InOut->image());
-    DISTBAND->image(InOut->image());
-    ARPIE->image(InOut->image());
-    EXPANDER->image(InOut->image());
-    SHUFFLE->image(InOut->image());
-    SYNTHFILTER->image(InOut->image());
-    VARYBAND->image(InOut->image());
-    CONVOLOTRON->image(InOut->image());
-    LOOPER->image(InOut->image());
-    MUTROMOJO->image(InOut->image());
-    ECHOVERSE->image(InOut->image());
-    COILCRAFTER->image(InOut->image());
-    SHELFBOOST->image(InOut->image());
-    VOCODER->image(InOut->image());
-    SUSTAINER->image(InOut->image());
-    SEQUENCE->image(InOut->image());
-    SHIFTER->image(InOut->image());
-    STOMPBOX->image(InOut->image());
-    REVERBTRON->image(InOut->image());
-    ECHOTRON->image(InOut->image());
-    SHAR->image(InOut->image());
-    COMPBAND->image(InOut->image());
-    OTREM->image(InOut->image());
-    VIBE->image(InOut->image());
-    INFINIT->image(InOut->image());
+
+    // Rack effects
+    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
+    {
+        Efx_Gui_Base[i]->image (InOut->image());
+    }
 
     Tap->image(InOut->image());
     Presets->image(InOut->image());
@@ -4463,13 +4422,11 @@ void RKRGUI::PutBackground()
     Settings->Fondo11->image(InOut->image());
     Settings->Fondo12->image(InOut->image());
 
-
     Etit->image(InOut->image());
     MIDILearn->Ares->image(InOut->image());
 
     MenuP->image(InOut->image());
     BankWindow->MenuB->image(InOut->image());
-
 
     Fl::redraw();
 }
