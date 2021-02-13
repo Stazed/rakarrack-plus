@@ -296,7 +296,12 @@ decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private gl
 
 class RKRGUI {open
 } {
-  decl {RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS];} {private local
+  decl {RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS];} {
+    comment {Efx_Gui_Base:
+Array to hold pointer to the rack effect base class gui.
+This is used for common effect actions to allow use in
+for() loops to eliminate redundant code.
+Array is indexed by EFX_Index.} private local
   }
   decl {CommonGuiMenu *m_looper_bar;} {private local
   }
@@ -317,7 +322,7 @@ class RKRGUI {open
 save_current_state(0);
 
 rkr->Exit_Program=1;} open selected
-      xywh {467 398 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {2 305 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -683,282 +688,329 @@ Fl::focus(Open_Order);}
         user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "eq_gui.h"}
+        code1 {Efx_Gui_Base[EFX_EQ] = o;}
         class EqGui
       } {}
       Fl_Group COMPRESS {
         user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "compress_gui.h"}
+        code1 {Efx_Gui_Base[EFX_COMPRESSOR] = o;}
         class CompressGui
       } {}
       Fl_Group DIST {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "dist_gui.h"}
+        code1 {Efx_Gui_Base[EFX_DISTORTION] = o;}
         class DistGui
       } {}
       Fl_Group OVRD {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "ovrd_gui.h"}
+        code1 {Efx_Gui_Base[EFX_OVERDRIVE] = o;}
         class OvrdGui
       } {}
       Fl_Group ECHO {
         user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echo_gui.h"}
+        code1 {Efx_Gui_Base[EFX_ECHO] = o;}
         class EchoGui
       } {}
       Fl_Group CHORUS {
         user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "chorus_gui.h"}
+        code1 {Efx_Gui_Base[EFX_CHORUS] = o;}
         class ChorusGui
       } {}
       Fl_Group PHASER {
         user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "phaser_gui.h"}
+        code1 {Efx_Gui_Base[EFX_PHASER] = o;}
         class PhaserGui
       } {}
       Fl_Group FLANGER {
         user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "flanger_gui.h"}
+        code1 {Efx_Gui_Base[EFX_FLANGER] = o;}
         class FlangerGui
       } {}
       Fl_Group REVERB {
         user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "reverb_gui.h"}
+        code1 {Efx_Gui_Base[EFX_REVERB] = o;}
         class ReverbGui
       } {}
       Fl_Group PEQ {
         user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "peq_gui.h"}
+        code1 {Efx_Gui_Base[EFX_PARAMETRIC] = o;}
         class PeqGui
       } {}
       Fl_Group WAHWAH {
         user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "wahwah_gui.h"}
+        code1 {Efx_Gui_Base[EFX_WAHWAH] = o;}
         class WahwahGui
       } {}
       Fl_Group ALIENWAH {
         user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "alienwah_gui.h"}
+        code1 {Efx_Gui_Base[EFX_ALIENWAH] = o;}
         class AlienwahGui
       } {}
       Fl_Group CABINET {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "cabinet_gui.h"}
+        code1 {Efx_Gui_Base[EFX_CABINET] = o;}
         class CabinetGui
       } {}
       Fl_Group PAN {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "pan_gui.h"}
+        code1 {Efx_Gui_Base[EFX_PAN] = o;}
         class PanGui
       } {}
       Fl_Group HAR {
         user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "har_gui.h"}
+        code1 {Efx_Gui_Base[EFX_HARMONIZER] = o;}
         class HarGui
       } {}
       Fl_Group MUSDELAY {
         user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "musdelay_gui.h"}
+        code1 {Efx_Gui_Base[EFX_MUSICAL_DELAY] = o;}
         class MusdelayGui
       } {}
       Fl_Group GATE {
         user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "gate_gui.h"}
+        code1 {Efx_Gui_Base[EFX_NOISEGATE] = o;}
         class GateGui
       } {}
       Fl_Group DERELICT {
         user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "derelict_gui.h"}
+        code1 {Efx_Gui_Base[EFX_DERELICT] = o;}
         class DerelictGui
       } {}
       Fl_Group APHASER {
         user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "aphaser_gui.h"}
+        code1 {Efx_Gui_Base[EFX_ANALOG_PHASER] = o;}
         class AphaserGui
       } {}
       Fl_Group VALVE {
         user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "valve_gui.h"}
+        code1 {Efx_Gui_Base[EFX_VALVE] = o;}
         class ValveGui
       } {}
       Fl_Group DFLANGE {
         user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "dflange_gui.h"}
+        code1 {Efx_Gui_Base[EFX_DUAL_FLANGE] = o;}
         class DflangeGui
       } {}
       Fl_Group RING {
         user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "ring_gui.h"}
+        code1 {Efx_Gui_Base[EFX_RING] = o;}
         class RingGui
       } {}
       Fl_Group EXCITER {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "exciter_gui.h"}
+        code1 {Efx_Gui_Base[EFX_EXCITER] = o;}
         class ExciterGui
       } {}
       Fl_Group DISTBAND {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "distband_gui.h"}
+        code1 {Efx_Gui_Base[EFX_DISTBAND] = o;}
         class DistBandGui
       } {}
       Fl_Group ARPIE {
         user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "arpie_gui.h"}
+        code1 {Efx_Gui_Base[EFX_ARPIE] = o;}
         class ArpieGui
       } {}
       Fl_Group EXPANDER {
         user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "expander_gui.h"}
+        code1 {Efx_Gui_Base[EFX_EXPANDER] = o;}
         class ExpanderGui
       } {}
       Fl_Group SHUFFLE {
         user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shuffle_gui.h"}
+        code1 {Efx_Gui_Base[EFX_SHUFFLE] = o;}
         class ShuffleGui
       } {}
       Fl_Group SYNTHFILTER {
         user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "synthfilter_gui.h"}
+        code1 {Efx_Gui_Base[EFX_SYNTHFILTER] = o;}
         class SynthfilterGui
       } {}
       Fl_Group VARYBAND {
         user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "varyband_gui.h"}
+        code1 {Efx_Gui_Base[EFX_VARYBAND] = o;}
         class VarybandGui
       } {}
       Fl_Group CONVOLOTRON {
         user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "convo_gui.h"}
+        code1 {Efx_Gui_Base[EFX_CONVOLOTRON] = o;}
         class ConvoGui
       } {}
       Fl_Group LOOPER {
         user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "looper_gui.h"}
+        code1 {Efx_Gui_Base[EFX_LOOPER] = o;}
         class LooperGui
       } {}
       Fl_Group MUTROMOJO {
         user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "mutromojo_gui.h"}
+        code1 {Efx_Gui_Base[EFX_MUTROMOJO] = o;}
         class MutromojoGui
       } {}
       Fl_Group ECHOVERSE {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echoverse_gui.h"}
+        code1 {Efx_Gui_Base[EFX_ECHOVERSE] = o;}
         class EchoverseGui
       } {}
       Fl_Group COILCRAFTER {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "coil_gui.h"}
+        code1 {Efx_Gui_Base[EFX_COILCRAFTER] = o;}
         class CoilGui
       } {}
       Fl_Group SHELFBOOST {
         user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shelf_gui.h"}
+        code1 {Efx_Gui_Base[EFX_SHELFBOOST] = o;}
         class ShelfGui
       } {}
       Fl_Group VOCODER {
         user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "vocoder_gui.h"}
+        code1 {Efx_Gui_Base[EFX_VOCODER] = o;}
         class VocoderGui
       } {}
       Fl_Group SUSTAINER {
         user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "sustain_gui.h"}
+        code1 {Efx_Gui_Base[EFX_SUSTAINER] = o;}
         class SustainGui
       } {}
       Fl_Group SEQUENCE {
         user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "sequence_gui.h"}
+        code1 {Efx_Gui_Base[EFX_SEQUENCE] = o;}
         class SequenceGui
       } {}
       Fl_Group SHIFTER {
         user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shifter_gui.h"}
+        code1 {Efx_Gui_Base[EFX_SHIFTER] = o;}
         class ShifterGui
       } {}
       Fl_Group STOMPBOX {
         user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "stompbox_gui.h"}
+        code1 {Efx_Gui_Base[EFX_STOMPBOX] = o;}
         class StompboxGui
       } {}
       Fl_Group REVERBTRON {
         user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "reverbtron_gui.h"}
+        code1 {Efx_Gui_Base[EFX_REVERBTRON] = o;}
         class RevtronGui
       } {}
       Fl_Group ECHOTRON {
         user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echotron_gui.h"}
+        code1 {Efx_Gui_Base[EFX_ECHOTRON] = o;}
         class EchotronGui
       } {}
       Fl_Group SHAR {
         user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "stereoharm_gui.h"}
+        code1 {Efx_Gui_Base[EFX_STEREOHARM] = o;}
         class SharGui
       } {}
       Fl_Group COMPBAND {
         user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "compband_gui.h"}
+        code1 {Efx_Gui_Base[EFX_COMPBAND] = o;}
         class CbandGui
       } {}
       Fl_Group OTREM {
         user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "otrem_gui.h"}
+        code1 {Efx_Gui_Base[EFX_OPTICALTREM] = o;}
         class OtremGui
       } {}
       Fl_Group VIBE {
         user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "vibe_gui.h"}
+        code1 {Efx_Gui_Base[EFX_VIBE] = o;}
         class VibeGui
       } {}
       Fl_Group INFINIT {
         user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "infinity_gui.h"}
+        code1 {Efx_Gui_Base[EFX_INFINITY] = o;}
         class InfinityGui
       } {}
       Fl_Group Tuner {

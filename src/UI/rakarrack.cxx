@@ -1223,7 +1223,7 @@ void RKRGUI::make_window() {
       L10->align(Fl_Align(FL_ALIGN_CENTER));
       L10->when(FL_WHEN_RELEASE);
     } // RKR_Box* L10
-    { EQ = new EqGui(2, 212, 158, 184);
+    { EqGui* o = EQ = new EqGui(2, 212, 158, 184);
       EQ->box(FL_UP_BOX);
       EQ->color(FL_FOREGROUND_COLOR);
       EQ->selection_color(FL_FOREGROUND_COLOR);
@@ -1235,9 +1235,10 @@ void RKRGUI::make_window() {
       EQ->align(Fl_Align(96|FL_ALIGN_INSIDE));
       EQ->when(FL_WHEN_RELEASE);
       EQ->hide();
+      Efx_Gui_Base[EFX_EQ] = o;
       EQ->end();
     } // EqGui* EQ
-    { COMPRESS = new CompressGui(161, 212, 158, 184);
+    { CompressGui* o = COMPRESS = new CompressGui(161, 212, 158, 184);
       COMPRESS->box(FL_UP_BOX);
       COMPRESS->color(FL_FOREGROUND_COLOR);
       COMPRESS->selection_color(FL_FOREGROUND_COLOR);
@@ -1249,9 +1250,10 @@ void RKRGUI::make_window() {
       COMPRESS->align(Fl_Align(96|FL_ALIGN_INSIDE));
       COMPRESS->when(FL_WHEN_RELEASE);
       COMPRESS->hide();
+      Efx_Gui_Base[EFX_COMPRESSOR] = o;
       COMPRESS->end();
     } // CompressGui* COMPRESS
-    { DIST = new DistGui(320, 212, 158, 184);
+    { DistGui* o = DIST = new DistGui(320, 212, 158, 184);
       DIST->box(FL_UP_BOX);
       DIST->color(FL_FOREGROUND_COLOR);
       DIST->selection_color(FL_FOREGROUND_COLOR);
@@ -1263,9 +1265,10 @@ void RKRGUI::make_window() {
       DIST->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DIST->when(FL_WHEN_RELEASE);
       DIST->hide();
+      Efx_Gui_Base[EFX_DISTORTION] = o;
       DIST->end();
     } // DistGui* DIST
-    { OVRD = new OvrdGui(480, 212, 158, 184);
+    { OvrdGui* o = OVRD = new OvrdGui(480, 212, 158, 184);
       OVRD->box(FL_UP_BOX);
       OVRD->color(FL_FOREGROUND_COLOR);
       OVRD->selection_color(FL_FOREGROUND_COLOR);
@@ -1277,9 +1280,10 @@ void RKRGUI::make_window() {
       OVRD->align(Fl_Align(96|FL_ALIGN_INSIDE));
       OVRD->when(FL_WHEN_RELEASE);
       OVRD->hide();
+      Efx_Gui_Base[EFX_OVERDRIVE] = o;
       OVRD->end();
     } // OvrdGui* OVRD
-    { ECHO = new EchoGui(639, 212, 158, 184);
+    { EchoGui* o = ECHO = new EchoGui(639, 212, 158, 184);
       ECHO->box(FL_UP_BOX);
       ECHO->color(FL_FOREGROUND_COLOR);
       ECHO->selection_color(FL_FOREGROUND_COLOR);
@@ -1291,9 +1295,10 @@ void RKRGUI::make_window() {
       ECHO->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ECHO->when(FL_WHEN_RELEASE);
       ECHO->hide();
+      Efx_Gui_Base[EFX_ECHO] = o;
       ECHO->end();
     } // EchoGui* ECHO
-    { CHORUS = new ChorusGui(2, 413, 158, 184);
+    { ChorusGui* o = CHORUS = new ChorusGui(2, 413, 158, 184);
       CHORUS->box(FL_UP_BOX);
       CHORUS->color(FL_FOREGROUND_COLOR);
       CHORUS->selection_color(FL_FOREGROUND_COLOR);
@@ -1305,9 +1310,10 @@ void RKRGUI::make_window() {
       CHORUS->align(Fl_Align(96|FL_ALIGN_INSIDE));
       CHORUS->when(FL_WHEN_RELEASE);
       CHORUS->hide();
+      Efx_Gui_Base[EFX_CHORUS] = o;
       CHORUS->end();
     } // ChorusGui* CHORUS
-    { PHASER = new PhaserGui(161, 413, 158, 184);
+    { PhaserGui* o = PHASER = new PhaserGui(161, 413, 158, 184);
       PHASER->box(FL_UP_BOX);
       PHASER->color(FL_FOREGROUND_COLOR);
       PHASER->selection_color(FL_FOREGROUND_COLOR);
@@ -1319,9 +1325,10 @@ void RKRGUI::make_window() {
       PHASER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       PHASER->when(FL_WHEN_RELEASE);
       PHASER->hide();
+      Efx_Gui_Base[EFX_PHASER] = o;
       PHASER->end();
     } // PhaserGui* PHASER
-    { FLANGER = new FlangerGui(321, 413, 158, 184);
+    { FlangerGui* o = FLANGER = new FlangerGui(321, 413, 158, 184);
       FLANGER->box(FL_UP_BOX);
       FLANGER->color(FL_FOREGROUND_COLOR);
       FLANGER->selection_color(FL_FOREGROUND_COLOR);
@@ -1333,9 +1340,10 @@ void RKRGUI::make_window() {
       FLANGER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       FLANGER->when(FL_WHEN_RELEASE);
       FLANGER->hide();
+      Efx_Gui_Base[EFX_FLANGER] = o;
       FLANGER->end();
     } // FlangerGui* FLANGER
-    { REVERB = new ReverbGui(480, 413, 158, 184);
+    { ReverbGui* o = REVERB = new ReverbGui(480, 413, 158, 184);
       REVERB->box(FL_UP_BOX);
       REVERB->color(FL_FOREGROUND_COLOR);
       REVERB->selection_color(FL_FOREGROUND_COLOR);
@@ -1347,9 +1355,10 @@ void RKRGUI::make_window() {
       REVERB->align(Fl_Align(96|FL_ALIGN_INSIDE));
       REVERB->when(FL_WHEN_RELEASE);
       REVERB->hide();
+      Efx_Gui_Base[EFX_REVERB] = o;
       REVERB->end();
     } // ReverbGui* REVERB
-    { PEQ = new PeqGui(639, 413, 158, 184);
+    { PeqGui* o = PEQ = new PeqGui(639, 413, 158, 184);
       PEQ->box(FL_UP_BOX);
       PEQ->color(FL_FOREGROUND_COLOR);
       PEQ->selection_color(FL_FOREGROUND_COLOR);
@@ -1361,9 +1370,10 @@ void RKRGUI::make_window() {
       PEQ->align(Fl_Align(96|FL_ALIGN_INSIDE));
       PEQ->when(FL_WHEN_RELEASE);
       PEQ->hide();
+      Efx_Gui_Base[EFX_PARAMETRIC] = o;
       PEQ->end();
     } // PeqGui* PEQ
-    { WAHWAH = new WahwahGui(2, 212, 158, 184);
+    { WahwahGui* o = WAHWAH = new WahwahGui(2, 212, 158, 184);
       WAHWAH->box(FL_UP_BOX);
       WAHWAH->color(FL_FOREGROUND_COLOR);
       WAHWAH->selection_color(FL_FOREGROUND_COLOR);
@@ -1375,9 +1385,10 @@ void RKRGUI::make_window() {
       WAHWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
       WAHWAH->when(FL_WHEN_RELEASE);
       WAHWAH->hide();
+      Efx_Gui_Base[EFX_WAHWAH] = o;
       WAHWAH->end();
     } // WahwahGui* WAHWAH
-    { ALIENWAH = new AlienwahGui(161, 212, 158, 184);
+    { AlienwahGui* o = ALIENWAH = new AlienwahGui(161, 212, 158, 184);
       ALIENWAH->box(FL_UP_BOX);
       ALIENWAH->color(FL_FOREGROUND_COLOR);
       ALIENWAH->selection_color(FL_FOREGROUND_COLOR);
@@ -1389,9 +1400,10 @@ void RKRGUI::make_window() {
       ALIENWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ALIENWAH->when(FL_WHEN_RELEASE);
       ALIENWAH->hide();
+      Efx_Gui_Base[EFX_ALIENWAH] = o;
       ALIENWAH->end();
     } // AlienwahGui* ALIENWAH
-    { CABINET = new CabinetGui(320, 212, 158, 184);
+    { CabinetGui* o = CABINET = new CabinetGui(320, 212, 158, 184);
       CABINET->box(FL_UP_BOX);
       CABINET->color(FL_FOREGROUND_COLOR);
       CABINET->selection_color(FL_FOREGROUND_COLOR);
@@ -1403,9 +1415,10 @@ void RKRGUI::make_window() {
       CABINET->align(Fl_Align(96|FL_ALIGN_INSIDE));
       CABINET->when(FL_WHEN_RELEASE);
       CABINET->hide();
+      Efx_Gui_Base[EFX_CABINET] = o;
       CABINET->end();
     } // CabinetGui* CABINET
-    { PAN = new PanGui(480, 212, 158, 184);
+    { PanGui* o = PAN = new PanGui(480, 212, 158, 184);
       PAN->box(FL_UP_BOX);
       PAN->color(FL_FOREGROUND_COLOR);
       PAN->selection_color(FL_FOREGROUND_COLOR);
@@ -1417,9 +1430,10 @@ void RKRGUI::make_window() {
       PAN->align(Fl_Align(96|FL_ALIGN_INSIDE));
       PAN->when(FL_WHEN_RELEASE);
       PAN->hide();
+      Efx_Gui_Base[EFX_PAN] = o;
       PAN->end();
     } // PanGui* PAN
-    { HAR = new HarGui(639, 212, 158, 184);
+    { HarGui* o = HAR = new HarGui(639, 212, 158, 184);
       HAR->box(FL_UP_BOX);
       HAR->color(FL_FOREGROUND_COLOR);
       HAR->selection_color(FL_FOREGROUND_COLOR);
@@ -1431,9 +1445,10 @@ void RKRGUI::make_window() {
       HAR->align(Fl_Align(96|FL_ALIGN_INSIDE));
       HAR->when(FL_WHEN_RELEASE);
       HAR->hide();
+      Efx_Gui_Base[EFX_HARMONIZER] = o;
       HAR->end();
     } // HarGui* HAR
-    { MUSDELAY = new MusdelayGui(2, 413, 158, 184);
+    { MusdelayGui* o = MUSDELAY = new MusdelayGui(2, 413, 158, 184);
       MUSDELAY->box(FL_UP_BOX);
       MUSDELAY->color(FL_FOREGROUND_COLOR);
       MUSDELAY->selection_color(FL_FOREGROUND_COLOR);
@@ -1445,9 +1460,10 @@ void RKRGUI::make_window() {
       MUSDELAY->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MUSDELAY->when(FL_WHEN_RELEASE);
       MUSDELAY->hide();
+      Efx_Gui_Base[EFX_MUSICAL_DELAY] = o;
       MUSDELAY->end();
     } // MusdelayGui* MUSDELAY
-    { GATE = new GateGui(161, 413, 158, 184);
+    { GateGui* o = GATE = new GateGui(161, 413, 158, 184);
       GATE->box(FL_UP_BOX);
       GATE->color(FL_FOREGROUND_COLOR);
       GATE->selection_color(FL_FOREGROUND_COLOR);
@@ -1459,9 +1475,10 @@ void RKRGUI::make_window() {
       GATE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       GATE->when(FL_WHEN_RELEASE);
       GATE->hide();
+      Efx_Gui_Base[EFX_NOISEGATE] = o;
       GATE->end();
     } // GateGui* GATE
-    { DERELICT = new DerelictGui(321, 413, 158, 184);
+    { DerelictGui* o = DERELICT = new DerelictGui(321, 413, 158, 184);
       DERELICT->box(FL_UP_BOX);
       DERELICT->color(FL_FOREGROUND_COLOR);
       DERELICT->selection_color(FL_FOREGROUND_COLOR);
@@ -1473,9 +1490,10 @@ void RKRGUI::make_window() {
       DERELICT->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DERELICT->when(FL_WHEN_RELEASE);
       DERELICT->hide();
+      Efx_Gui_Base[EFX_DERELICT] = o;
       DERELICT->end();
     } // DerelictGui* DERELICT
-    { APHASER = new AphaserGui(480, 413, 158, 184);
+    { AphaserGui* o = APHASER = new AphaserGui(480, 413, 158, 184);
       APHASER->box(FL_UP_BOX);
       APHASER->color(FL_FOREGROUND_COLOR);
       APHASER->selection_color(FL_FOREGROUND_COLOR);
@@ -1487,9 +1505,10 @@ void RKRGUI::make_window() {
       APHASER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       APHASER->when(FL_WHEN_RELEASE);
       APHASER->hide();
+      Efx_Gui_Base[EFX_ANALOG_PHASER] = o;
       APHASER->end();
     } // AphaserGui* APHASER
-    { VALVE = new ValveGui(639, 413, 158, 184);
+    { ValveGui* o = VALVE = new ValveGui(639, 413, 158, 184);
       VALVE->box(FL_UP_BOX);
       VALVE->color(FL_FOREGROUND_COLOR);
       VALVE->selection_color(FL_FOREGROUND_COLOR);
@@ -1501,9 +1520,10 @@ void RKRGUI::make_window() {
       VALVE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VALVE->when(FL_WHEN_RELEASE);
       VALVE->hide();
+      Efx_Gui_Base[EFX_VALVE] = o;
       VALVE->end();
     } // ValveGui* VALVE
-    { DFLANGE = new DflangeGui(2, 212, 158, 184);
+    { DflangeGui* o = DFLANGE = new DflangeGui(2, 212, 158, 184);
       DFLANGE->box(FL_UP_BOX);
       DFLANGE->color(FL_FOREGROUND_COLOR);
       DFLANGE->selection_color(FL_FOREGROUND_COLOR);
@@ -1515,9 +1535,10 @@ void RKRGUI::make_window() {
       DFLANGE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DFLANGE->when(FL_WHEN_RELEASE);
       DFLANGE->hide();
+      Efx_Gui_Base[EFX_DUAL_FLANGE] = o;
       DFLANGE->end();
     } // DflangeGui* DFLANGE
-    { RING = new RingGui(161, 212, 158, 184);
+    { RingGui* o = RING = new RingGui(161, 212, 158, 184);
       RING->box(FL_UP_BOX);
       RING->color(FL_FOREGROUND_COLOR);
       RING->selection_color(FL_FOREGROUND_COLOR);
@@ -1529,9 +1550,10 @@ void RKRGUI::make_window() {
       RING->align(Fl_Align(96|FL_ALIGN_INSIDE));
       RING->when(FL_WHEN_RELEASE);
       RING->hide();
+      Efx_Gui_Base[EFX_RING] = o;
       RING->end();
     } // RingGui* RING
-    { EXCITER = new ExciterGui(320, 212, 158, 184);
+    { ExciterGui* o = EXCITER = new ExciterGui(320, 212, 158, 184);
       EXCITER->box(FL_UP_BOX);
       EXCITER->color(FL_FOREGROUND_COLOR);
       EXCITER->selection_color(FL_FOREGROUND_COLOR);
@@ -1543,9 +1565,10 @@ void RKRGUI::make_window() {
       EXCITER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       EXCITER->when(FL_WHEN_RELEASE);
       EXCITER->hide();
+      Efx_Gui_Base[EFX_EXCITER] = o;
       EXCITER->end();
     } // ExciterGui* EXCITER
-    { DISTBAND = new DistBandGui(480, 212, 158, 184);
+    { DistBandGui* o = DISTBAND = new DistBandGui(480, 212, 158, 184);
       DISTBAND->box(FL_UP_BOX);
       DISTBAND->color(FL_FOREGROUND_COLOR);
       DISTBAND->selection_color(FL_FOREGROUND_COLOR);
@@ -1557,9 +1580,10 @@ void RKRGUI::make_window() {
       DISTBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DISTBAND->when(FL_WHEN_RELEASE);
       DISTBAND->hide();
+      Efx_Gui_Base[EFX_DISTBAND] = o;
       DISTBAND->end();
     } // DistBandGui* DISTBAND
-    { ARPIE = new ArpieGui(639, 212, 158, 184);
+    { ArpieGui* o = ARPIE = new ArpieGui(639, 212, 158, 184);
       ARPIE->box(FL_UP_BOX);
       ARPIE->color(FL_FOREGROUND_COLOR);
       ARPIE->selection_color(FL_FOREGROUND_COLOR);
@@ -1571,9 +1595,10 @@ void RKRGUI::make_window() {
       ARPIE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ARPIE->when(FL_WHEN_RELEASE);
       ARPIE->hide();
+      Efx_Gui_Base[EFX_ARPIE] = o;
       ARPIE->end();
     } // ArpieGui* ARPIE
-    { EXPANDER = new ExpanderGui(2, 413, 158, 184);
+    { ExpanderGui* o = EXPANDER = new ExpanderGui(2, 413, 158, 184);
       EXPANDER->box(FL_UP_BOX);
       EXPANDER->color(FL_FOREGROUND_COLOR);
       EXPANDER->selection_color(FL_FOREGROUND_COLOR);
@@ -1585,9 +1610,10 @@ void RKRGUI::make_window() {
       EXPANDER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       EXPANDER->when(FL_WHEN_RELEASE);
       EXPANDER->hide();
+      Efx_Gui_Base[EFX_EXPANDER] = o;
       EXPANDER->end();
     } // ExpanderGui* EXPANDER
-    { SHUFFLE = new ShuffleGui(161, 413, 158, 184);
+    { ShuffleGui* o = SHUFFLE = new ShuffleGui(161, 413, 158, 184);
       SHUFFLE->box(FL_UP_BOX);
       SHUFFLE->color(FL_FOREGROUND_COLOR);
       SHUFFLE->selection_color(FL_FOREGROUND_COLOR);
@@ -1599,9 +1625,10 @@ void RKRGUI::make_window() {
       SHUFFLE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHUFFLE->when(FL_WHEN_RELEASE);
       SHUFFLE->hide();
+      Efx_Gui_Base[EFX_SHUFFLE] = o;
       SHUFFLE->end();
     } // ShuffleGui* SHUFFLE
-    { SYNTHFILTER = new SynthfilterGui(321, 413, 158, 184);
+    { SynthfilterGui* o = SYNTHFILTER = new SynthfilterGui(321, 413, 158, 184);
       SYNTHFILTER->box(FL_UP_BOX);
       SYNTHFILTER->color(FL_FOREGROUND_COLOR);
       SYNTHFILTER->selection_color(FL_FOREGROUND_COLOR);
@@ -1613,9 +1640,10 @@ void RKRGUI::make_window() {
       SYNTHFILTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SYNTHFILTER->when(FL_WHEN_RELEASE);
       SYNTHFILTER->hide();
+      Efx_Gui_Base[EFX_SYNTHFILTER] = o;
       SYNTHFILTER->end();
     } // SynthfilterGui* SYNTHFILTER
-    { VARYBAND = new VarybandGui(480, 413, 158, 184);
+    { VarybandGui* o = VARYBAND = new VarybandGui(480, 413, 158, 184);
       VARYBAND->box(FL_UP_BOX);
       VARYBAND->color(FL_FOREGROUND_COLOR);
       VARYBAND->selection_color(FL_FOREGROUND_COLOR);
@@ -1627,9 +1655,10 @@ void RKRGUI::make_window() {
       VARYBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VARYBAND->when(FL_WHEN_RELEASE);
       VARYBAND->hide();
+      Efx_Gui_Base[EFX_VARYBAND] = o;
       VARYBAND->end();
     } // VarybandGui* VARYBAND
-    { CONVOLOTRON = new ConvoGui(639, 413, 158, 184);
+    { ConvoGui* o = CONVOLOTRON = new ConvoGui(639, 413, 158, 184);
       CONVOLOTRON->box(FL_UP_BOX);
       CONVOLOTRON->color(FL_FOREGROUND_COLOR);
       CONVOLOTRON->selection_color(FL_FOREGROUND_COLOR);
@@ -1641,9 +1670,10 @@ void RKRGUI::make_window() {
       CONVOLOTRON->align(Fl_Align(96|FL_ALIGN_INSIDE));
       CONVOLOTRON->when(FL_WHEN_RELEASE);
       CONVOLOTRON->hide();
+      Efx_Gui_Base[EFX_CONVOLOTRON] = o;
       CONVOLOTRON->end();
     } // ConvoGui* CONVOLOTRON
-    { LOOPER = new LooperGui(2, 212, 158, 184);
+    { LooperGui* o = LOOPER = new LooperGui(2, 212, 158, 184);
       LOOPER->box(FL_UP_BOX);
       LOOPER->color(FL_FOREGROUND_COLOR);
       LOOPER->selection_color(FL_FOREGROUND_COLOR);
@@ -1655,9 +1685,10 @@ void RKRGUI::make_window() {
       LOOPER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       LOOPER->when(FL_WHEN_RELEASE);
       LOOPER->hide();
+      Efx_Gui_Base[EFX_LOOPER] = o;
       LOOPER->end();
     } // LooperGui* LOOPER
-    { MUTROMOJO = new MutromojoGui(161, 212, 158, 184);
+    { MutromojoGui* o = MUTROMOJO = new MutromojoGui(161, 212, 158, 184);
       MUTROMOJO->box(FL_UP_BOX);
       MUTROMOJO->color(FL_FOREGROUND_COLOR);
       MUTROMOJO->selection_color(FL_FOREGROUND_COLOR);
@@ -1669,9 +1700,10 @@ void RKRGUI::make_window() {
       MUTROMOJO->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MUTROMOJO->when(FL_WHEN_RELEASE);
       MUTROMOJO->hide();
+      Efx_Gui_Base[EFX_MUTROMOJO] = o;
       MUTROMOJO->end();
     } // MutromojoGui* MUTROMOJO
-    { ECHOVERSE = new EchoverseGui(320, 212, 158, 184);
+    { EchoverseGui* o = ECHOVERSE = new EchoverseGui(320, 212, 158, 184);
       ECHOVERSE->box(FL_UP_BOX);
       ECHOVERSE->color(FL_FOREGROUND_COLOR);
       ECHOVERSE->selection_color(FL_FOREGROUND_COLOR);
@@ -1683,9 +1715,10 @@ void RKRGUI::make_window() {
       ECHOVERSE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ECHOVERSE->when(FL_WHEN_RELEASE);
       ECHOVERSE->hide();
+      Efx_Gui_Base[EFX_ECHOVERSE] = o;
       ECHOVERSE->end();
     } // EchoverseGui* ECHOVERSE
-    { COILCRAFTER = new CoilGui(480, 212, 158, 184);
+    { CoilGui* o = COILCRAFTER = new CoilGui(480, 212, 158, 184);
       COILCRAFTER->box(FL_UP_BOX);
       COILCRAFTER->color(FL_FOREGROUND_COLOR);
       COILCRAFTER->selection_color(FL_FOREGROUND_COLOR);
@@ -1697,9 +1730,10 @@ void RKRGUI::make_window() {
       COILCRAFTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       COILCRAFTER->when(FL_WHEN_RELEASE);
       COILCRAFTER->hide();
+      Efx_Gui_Base[EFX_COILCRAFTER] = o;
       COILCRAFTER->end();
     } // CoilGui* COILCRAFTER
-    { SHELFBOOST = new ShelfGui(639, 212, 158, 184);
+    { ShelfGui* o = SHELFBOOST = new ShelfGui(639, 212, 158, 184);
       SHELFBOOST->box(FL_UP_BOX);
       SHELFBOOST->color(FL_FOREGROUND_COLOR);
       SHELFBOOST->selection_color(FL_FOREGROUND_COLOR);
@@ -1711,9 +1745,10 @@ void RKRGUI::make_window() {
       SHELFBOOST->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHELFBOOST->when(FL_WHEN_RELEASE);
       SHELFBOOST->hide();
+      Efx_Gui_Base[EFX_SHELFBOOST] = o;
       SHELFBOOST->end();
     } // ShelfGui* SHELFBOOST
-    { VOCODER = new VocoderGui(2, 413, 158, 184);
+    { VocoderGui* o = VOCODER = new VocoderGui(2, 413, 158, 184);
       VOCODER->box(FL_UP_BOX);
       VOCODER->color(FL_FOREGROUND_COLOR);
       VOCODER->selection_color(FL_FOREGROUND_COLOR);
@@ -1725,9 +1760,10 @@ void RKRGUI::make_window() {
       VOCODER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VOCODER->when(FL_WHEN_RELEASE);
       VOCODER->hide();
+      Efx_Gui_Base[EFX_VOCODER] = o;
       VOCODER->end();
     } // VocoderGui* VOCODER
-    { SUSTAINER = new SustainGui(161, 413, 158, 184);
+    { SustainGui* o = SUSTAINER = new SustainGui(161, 413, 158, 184);
       SUSTAINER->box(FL_UP_BOX);
       SUSTAINER->color(FL_FOREGROUND_COLOR);
       SUSTAINER->selection_color(FL_FOREGROUND_COLOR);
@@ -1739,9 +1775,10 @@ void RKRGUI::make_window() {
       SUSTAINER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SUSTAINER->when(FL_WHEN_RELEASE);
       SUSTAINER->hide();
+      Efx_Gui_Base[EFX_SUSTAINER] = o;
       SUSTAINER->end();
     } // SustainGui* SUSTAINER
-    { SEQUENCE = new SequenceGui(321, 413, 158, 184);
+    { SequenceGui* o = SEQUENCE = new SequenceGui(321, 413, 158, 184);
       SEQUENCE->box(FL_UP_BOX);
       SEQUENCE->color(FL_FOREGROUND_COLOR);
       SEQUENCE->selection_color(FL_FOREGROUND_COLOR);
@@ -1753,9 +1790,10 @@ void RKRGUI::make_window() {
       SEQUENCE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SEQUENCE->when(FL_WHEN_RELEASE);
       SEQUENCE->hide();
+      Efx_Gui_Base[EFX_SEQUENCE] = o;
       SEQUENCE->end();
     } // SequenceGui* SEQUENCE
-    { SHIFTER = new ShifterGui(480, 413, 158, 184);
+    { ShifterGui* o = SHIFTER = new ShifterGui(480, 413, 158, 184);
       SHIFTER->box(FL_UP_BOX);
       SHIFTER->color(FL_FOREGROUND_COLOR);
       SHIFTER->selection_color(FL_FOREGROUND_COLOR);
@@ -1767,9 +1805,10 @@ void RKRGUI::make_window() {
       SHIFTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHIFTER->when(FL_WHEN_RELEASE);
       SHIFTER->hide();
+      Efx_Gui_Base[EFX_SHIFTER] = o;
       SHIFTER->end();
     } // ShifterGui* SHIFTER
-    { STOMPBOX = new StompboxGui(639, 413, 158, 184);
+    { StompboxGui* o = STOMPBOX = new StompboxGui(639, 413, 158, 184);
       STOMPBOX->box(FL_UP_BOX);
       STOMPBOX->color(FL_FOREGROUND_COLOR);
       STOMPBOX->selection_color(FL_FOREGROUND_COLOR);
@@ -1781,9 +1820,10 @@ void RKRGUI::make_window() {
       STOMPBOX->align(Fl_Align(96|FL_ALIGN_INSIDE));
       STOMPBOX->when(FL_WHEN_RELEASE);
       STOMPBOX->hide();
+      Efx_Gui_Base[EFX_STOMPBOX] = o;
       STOMPBOX->end();
     } // StompboxGui* STOMPBOX
-    { REVERBTRON = new RevtronGui(2, 212, 158, 184);
+    { RevtronGui* o = REVERBTRON = new RevtronGui(2, 212, 158, 184);
       REVERBTRON->box(FL_UP_BOX);
       REVERBTRON->color(FL_FOREGROUND_COLOR);
       REVERBTRON->selection_color(FL_FOREGROUND_COLOR);
@@ -1795,9 +1835,10 @@ void RKRGUI::make_window() {
       REVERBTRON->align(Fl_Align(96|FL_ALIGN_INSIDE));
       REVERBTRON->when(FL_WHEN_RELEASE);
       REVERBTRON->hide();
+      Efx_Gui_Base[EFX_REVERBTRON] = o;
       REVERBTRON->end();
     } // RevtronGui* REVERBTRON
-    { ECHOTRON = new EchotronGui(161, 212, 158, 184);
+    { EchotronGui* o = ECHOTRON = new EchotronGui(161, 212, 158, 184);
       ECHOTRON->box(FL_UP_BOX);
       ECHOTRON->color(FL_FOREGROUND_COLOR);
       ECHOTRON->selection_color(FL_FOREGROUND_COLOR);
@@ -1809,9 +1850,10 @@ void RKRGUI::make_window() {
       ECHOTRON->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ECHOTRON->when(FL_WHEN_RELEASE);
       ECHOTRON->hide();
+      Efx_Gui_Base[EFX_ECHOTRON] = o;
       ECHOTRON->end();
     } // EchotronGui* ECHOTRON
-    { SHAR = new SharGui(320, 212, 158, 184);
+    { SharGui* o = SHAR = new SharGui(320, 212, 158, 184);
       SHAR->box(FL_UP_BOX);
       SHAR->color(FL_FOREGROUND_COLOR);
       SHAR->selection_color(FL_FOREGROUND_COLOR);
@@ -1823,9 +1865,10 @@ void RKRGUI::make_window() {
       SHAR->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHAR->when(FL_WHEN_RELEASE);
       SHAR->hide();
+      Efx_Gui_Base[EFX_STEREOHARM] = o;
       SHAR->end();
     } // SharGui* SHAR
-    { COMPBAND = new CbandGui(480, 212, 158, 184);
+    { CbandGui* o = COMPBAND = new CbandGui(480, 212, 158, 184);
       COMPBAND->box(FL_UP_BOX);
       COMPBAND->color(FL_FOREGROUND_COLOR);
       COMPBAND->selection_color(FL_FOREGROUND_COLOR);
@@ -1837,9 +1880,10 @@ void RKRGUI::make_window() {
       COMPBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
       COMPBAND->when(FL_WHEN_RELEASE);
       COMPBAND->hide();
+      Efx_Gui_Base[EFX_COMPBAND] = o;
       COMPBAND->end();
     } // CbandGui* COMPBAND
-    { OTREM = new OtremGui(639, 212, 158, 184);
+    { OtremGui* o = OTREM = new OtremGui(639, 212, 158, 184);
       OTREM->box(FL_UP_BOX);
       OTREM->color(FL_FOREGROUND_COLOR);
       OTREM->selection_color(FL_FOREGROUND_COLOR);
@@ -1851,9 +1895,10 @@ void RKRGUI::make_window() {
       OTREM->align(Fl_Align(96|FL_ALIGN_INSIDE));
       OTREM->when(FL_WHEN_RELEASE);
       OTREM->hide();
+      Efx_Gui_Base[EFX_OPTICALTREM] = o;
       OTREM->end();
     } // OtremGui* OTREM
-    { VIBE = new VibeGui(2, 413, 158, 184);
+    { VibeGui* o = VIBE = new VibeGui(2, 413, 158, 184);
       VIBE->box(FL_UP_BOX);
       VIBE->color(FL_FOREGROUND_COLOR);
       VIBE->selection_color(FL_FOREGROUND_COLOR);
@@ -1865,9 +1910,10 @@ void RKRGUI::make_window() {
       VIBE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VIBE->when(FL_WHEN_RELEASE);
       VIBE->hide();
+      Efx_Gui_Base[EFX_VIBE] = o;
       VIBE->end();
     } // VibeGui* VIBE
-    { INFINIT = new InfinityGui(161, 413, 158, 184);
+    { InfinityGui* o = INFINIT = new InfinityGui(161, 413, 158, 184);
       INFINIT->box(FL_UP_BOX);
       INFINIT->color(FL_FOREGROUND_COLOR);
       INFINIT->selection_color(FL_FOREGROUND_COLOR);
@@ -1879,6 +1925,7 @@ void RKRGUI::make_window() {
       INFINIT->align(Fl_Align(96|FL_ALIGN_INSIDE));
       INFINIT->when(FL_WHEN_RELEASE);
       INFINIT->hide();
+      Efx_Gui_Base[EFX_INFINITY] = o;
       INFINIT->end();
     } // InfinityGui* INFINIT
     { Tuner = new Fl_Group(520, 24, 276, 58);

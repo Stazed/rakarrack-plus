@@ -147,6 +147,13 @@ class TrigWindowGui; // forward declaration
 #include "trigwindow_gui.h"
 
 class RKRGUI {
+  /**
+   Efx_Gui_Base:
+   Array to hold pointer to the rack effect base class gui.
+   This is used for common effect actions to allow use in
+   for() loops to eliminate redundant code.
+   Array is indexed by EFX_Index.
+  */
   RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS]; 
   CommonGuiMenu *m_looper_bar; 
   CommonGuiMenu *m_looper_ms; 
