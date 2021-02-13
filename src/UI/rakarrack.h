@@ -147,6 +147,7 @@ class TrigWindowGui; // forward declaration
 #include "trigwindow_gui.h"
 
 class RKRGUI {
+  RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS]; 
   CommonGuiMenu *m_looper_bar; 
   CommonGuiMenu *m_looper_ms; 
   int made; 
