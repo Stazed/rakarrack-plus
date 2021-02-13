@@ -219,13 +219,18 @@ void DflangeGui::cb_dflange_rnd(RKR_Slider* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_rnd_i(o,v);
 }
 DflangeGui::DflangeGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ dflange_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = dflange_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   dflange_activar->box(FL_UP_BOX);
   dflange_activar->shortcut(0x38);
   dflange_activar->color((Fl_Color)62);
@@ -237,8 +242,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dflange_activar->callback((Fl_Callback*)cb_dflange_activar, (void*)(2));
   dflange_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   dflange_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* dflange_activar
-{ dflange_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = dflange_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   dflange_preset->box(FL_FLAT_BOX);
   dflange_preset->down_box(FL_BORDER_BOX);
   dflange_preset->color(FL_BACKGROUND_COLOR);
@@ -253,6 +259,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   dflange_preset->align(Fl_Align(FL_ALIGN_LEFT));
   dflange_preset->when(FL_WHEN_RELEASE_ALWAYS);
   dflange_preset->menu(menu_dflange_preset);
+  preset_choice = o;
 } // RKR_Choice* dflange_preset
 { dflange_WD = new RKR_Slider(56, 24, 100, 10, "Dry/Wet");
   dflange_WD->type(5);

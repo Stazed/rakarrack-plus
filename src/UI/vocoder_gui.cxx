@@ -126,13 +126,18 @@ void VocoderGui::cb_vo_level(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_level_i(o,v);
 }
 VocoderGui::VocoderGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ vo_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = vo_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
   vo_activar->box(FL_UP_BOX);
   vo_activar->shortcut(0x35);
   vo_activar->color((Fl_Color)62);
@@ -144,8 +149,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_activar->callback((Fl_Callback*)cb_vo_activar, (void*)(2));
   vo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   vo_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* vo_activar
-{ vo_preset = new RKR_Choice(79, 4, 76, 18, "Preset");
+{ RKR_Choice* o = vo_preset = new RKR_Choice(79, 4, 76, 18, "Preset");
   vo_preset->box(FL_FLAT_BOX);
   vo_preset->down_box(FL_BORDER_BOX);
   vo_preset->color(FL_BACKGROUND_COLOR);
@@ -160,6 +166,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   vo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vo_preset->menu(menu_vo_preset);
+  preset_choice = o;
 } // RKR_Choice* vo_preset
 { vo_WD = new RKR_Slider(56, 30, 100, 10, "Dry/Wet");
   vo_WD->type(5);

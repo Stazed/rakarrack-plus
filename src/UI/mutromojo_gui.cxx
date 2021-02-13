@@ -295,13 +295,18 @@ void MutromojoGui::cb_mutromojo_minfreq(RKR_Value_Input* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_minfreq_i(o,v);
 }
 MutromojoGui::MutromojoGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ mutromojo_activar = new RKR_Light_Button(6, 5, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = mutromojo_activar = new RKR_Light_Button(6, 5, 34, 18, "On");
   mutromojo_activar->box(FL_UP_BOX);
   mutromojo_activar->shortcut(0x36);
   mutromojo_activar->color((Fl_Color)62);
@@ -313,8 +318,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mutromojo_activar->callback((Fl_Callback*)cb_mutromojo_activar, (void*)(2));
   mutromojo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   mutromojo_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* mutromojo_activar
-{ mutromojo_preset = new RKR_Choice(78, 5, 76, 18, "Preset");
+{ RKR_Choice* o = mutromojo_preset = new RKR_Choice(78, 5, 76, 18, "Preset");
   mutromojo_preset->box(FL_FLAT_BOX);
   mutromojo_preset->down_box(FL_BORDER_BOX);
   mutromojo_preset->color(FL_BACKGROUND_COLOR);
@@ -329,6 +335,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   mutromojo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   mutromojo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   mutromojo_preset->menu(menu_mutromojo_preset);
+  preset_choice = o;
 } // RKR_Choice* mutromojo_preset
 { mutromojo_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
   mutromojo_WD->type(5);

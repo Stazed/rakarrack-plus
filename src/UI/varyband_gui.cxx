@@ -231,13 +231,18 @@ Fl_Menu_Item VarybandGui::menu_varyband_HB[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 VarybandGui::VarybandGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ varyband_activar = new RKR_Light_Button(7, 5, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = varyband_activar = new RKR_Light_Button(7, 5, 34, 18, "On");
   varyband_activar->box(FL_UP_BOX);
   varyband_activar->shortcut(0x38);
   varyband_activar->color((Fl_Color)62);
@@ -249,8 +254,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_activar->callback((Fl_Callback*)cb_varyband_activar, (void*)(2));
   varyband_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   varyband_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* varyband_activar
-{ varyband_preset = new RKR_Choice(79, 5, 76, 18, "Preset");
+{ RKR_Choice* o = varyband_preset = new RKR_Choice(79, 5, 76, 18, "Preset");
   varyband_preset->box(FL_FLAT_BOX);
   varyband_preset->down_box(FL_BORDER_BOX);
   varyband_preset->color(FL_BACKGROUND_COLOR);
@@ -265,6 +271,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   varyband_preset->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   varyband_preset->menu(menu_varyband_preset);
+  preset_choice = o;
 } // RKR_Choice* varyband_preset
 { varyband_WD = new RKR_Slider(56, 28, 100, 10, "Dry/Wet");
   varyband_WD->type(5);

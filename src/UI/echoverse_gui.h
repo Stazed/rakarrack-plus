@@ -5,13 +5,13 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
-#include <FL/Fl_Group.H>
+#include "RKR_GUI_Effect.h"
 #include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 
-class EchoverseGui : public Fl_Group {
+class EchoverseGui : public RKR_Gui_Effect {
 public:
   EchoverseGui(int X, int Y, int W, int H, const char *L = 0);
   RKR_Light_Button *echoverse_activar;

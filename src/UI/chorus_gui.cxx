@@ -183,13 +183,18 @@ void ChorusGui::cb_chorus_LR(RKR_Slider* o, void* v) {
   ((ChorusGui*)(o->parent()))->cb_chorus_LR_i(o,v);
 }
 ChorusGui::ChorusGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ chorus_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = chorus_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   chorus_activar->box(FL_UP_BOX);
   chorus_activar->shortcut(0x36);
   chorus_activar->color((Fl_Color)62);
@@ -201,8 +206,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_activar->callback((Fl_Callback*)cb_chorus_activar, (void*)(2));
   chorus_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   chorus_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* chorus_activar
-{ chorus_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = chorus_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   chorus_preset->box(FL_FLAT_BOX);
   chorus_preset->down_box(FL_BORDER_BOX);
   chorus_preset->color(FL_BACKGROUND_COLOR);
@@ -217,6 +223,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   chorus_preset->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   chorus_preset->menu(menu_chorus_preset);
+  preset_choice = o;
 } // RKR_Choice* chorus_preset
 { chorus_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   chorus_WD->type(5);

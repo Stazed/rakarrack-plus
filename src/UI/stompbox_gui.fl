@@ -8,12 +8,16 @@ decl {\#include "RKR_Light_Button.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
 widget_class StompboxGui {
   user_data 1 open
   xywh {1539 137 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
-  code2 {\#include "rakarrack.h"} visible position_relative
+  code2 {\#include "rakarrack.h"}
+  class RKR_Gui_Effect visible position_relative
 } {
   Fl_Light_Button stomp_activar {
     label On
@@ -27,8 +31,9 @@ widget_class StompboxGui {
 rkr->EFX_Bypass[EFX_STOMPBOX]=(int)o->value();
 if((int) o->value()==0)
 rkr->Rack_Effects[EFX_STOMPBOX]->cleanup();
-rgui->findpos(EFX_STOMPBOX,(int)o->value(),o);} selected
+rgui->findpos(EFX_STOMPBOX,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+    code0 {activate_effect = o;}
     class RKR_Light_Button
   }
   Fl_Choice stomp_preset {
@@ -42,8 +47,9 @@ stomp_low->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
 stomp_mid->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
 stomp_high->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
 
-stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));} open
+stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));} open selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
     class RKR_Choice
   } {
     MenuItem {} {

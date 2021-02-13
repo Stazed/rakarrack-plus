@@ -6,13 +6,13 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Check_Button.h"
 #include "RKR_Choice.h"
-#include <FL/Fl_Group.H>
+#include "RKR_GUI_Effect.h"
 #include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 
-class DflangeGui : public Fl_Group {
+class DflangeGui : public RKR_Gui_Effect {
 public:
   DflangeGui(int X, int Y, int W, int H, const char *L = 0);
   RKR_Light_Button *dflange_activar;

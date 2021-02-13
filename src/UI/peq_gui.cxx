@@ -163,13 +163,18 @@ void PeqGui::cb_eqp_HQ(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_HQ_i(o,v);
 }
 PeqGui::PeqGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ eqp_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = eqp_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   eqp_activar->box(FL_UP_BOX);
   eqp_activar->shortcut(0x30);
   eqp_activar->color((Fl_Color)62);
@@ -181,8 +186,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eqp_activar->callback((Fl_Callback*)cb_eqp_activar, (void*)(2));
   eqp_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   eqp_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* eqp_activar
-{ eqp_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = eqp_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   eqp_preset->box(FL_FLAT_BOX);
   eqp_preset->down_box(FL_BORDER_BOX);
   eqp_preset->color(FL_BACKGROUND_COLOR);
@@ -197,6 +203,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   eqp_preset->align(Fl_Align(FL_ALIGN_LEFT));
   eqp_preset->when(FL_WHEN_RELEASE_ALWAYS);
   eqp_preset->menu(menu_eqp_preset);
+  preset_choice = o;
 } // RKR_Choice* eqp_preset
 { eqp_Gain = new RKR_Slider(56, 26, 100, 10, "Gain");
   eqp_Gain->type(5);

@@ -5,12 +5,12 @@
 #include <FL/Fl.H>
 #include "RKR_Choice.h"
 #include "RKR_Light_Button.h"
-#include <FL/Fl_Group.H>
+#include "RKR_GUI_Effect.h"
 #include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
-class CabinetGui : public Fl_Group {
+class CabinetGui : public RKR_Gui_Effect {
 public:
   CabinetGui(int X, int Y, int W, int H, const char *L = 0);
   RKR_Light_Button *Cabinet_activar;

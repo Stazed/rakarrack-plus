@@ -204,13 +204,18 @@ void ExciterGui::cb_ex_10(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_10_i(o,v);
 }
 ExciterGui::ExciterGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ exciter_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = exciter_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   exciter_activar->box(FL_UP_BOX);
   exciter_activar->shortcut(0x31);
   exciter_activar->color((Fl_Color)62);
@@ -222,8 +227,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   exciter_activar->callback((Fl_Callback*)cb_exciter_activar, (void*)(2));
   exciter_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   exciter_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* exciter_activar
-{ exciter_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = exciter_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   exciter_preset->box(FL_FLAT_BOX);
   exciter_preset->down_box(FL_BORDER_BOX);
   exciter_preset->color(FL_BACKGROUND_COLOR);
@@ -238,6 +244,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   exciter_preset->align(Fl_Align(FL_ALIGN_LEFT));
   exciter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   exciter_preset->menu(menu_exciter_preset);
+  preset_choice = o;
 } // RKR_Choice* exciter_preset
 { ex_Gain = new RKR_Slider(53, 25, 100, 10, "Gain");
   ex_Gain->type(5);

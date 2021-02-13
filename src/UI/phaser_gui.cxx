@@ -183,13 +183,18 @@ void PhaserGui::cb_phaser_LR(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_LR_i(o,v);
 }
 PhaserGui::PhaserGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ phaser_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = phaser_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   phaser_activar->box(FL_UP_BOX);
   phaser_activar->shortcut(0x37);
   phaser_activar->color((Fl_Color)62);
@@ -201,8 +206,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   phaser_activar->callback((Fl_Callback*)cb_phaser_activar, (void*)(2));
   phaser_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   phaser_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* phaser_activar
-{ phaser_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = phaser_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   phaser_preset->box(FL_FLAT_BOX);
   phaser_preset->down_box(FL_BORDER_BOX);
   phaser_preset->color(FL_BACKGROUND_COLOR);
@@ -217,6 +223,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   phaser_preset->align(Fl_Align(FL_ALIGN_LEFT));
   phaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
   phaser_preset->menu(menu_phaser_preset);
+  preset_choice = o;
 } // RKR_Choice* phaser_preset
 { phaser_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   phaser_WD->type(5);

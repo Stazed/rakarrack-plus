@@ -11,12 +11,16 @@ decl {\#include "RKR_Check_Button.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
 widget_class HarGui {
   user_data 1 open
   xywh {1691 85 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
-  code2 {\#include "rakarrack.h"} visible position_relative
+  code2 {\#include "rakarrack.h"}
+  class RKR_Gui_Effect visible position_relative
 } {
   Fl_Light_Button har_activar {
     label On
@@ -34,6 +38,7 @@ rkr->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval,rkr->Rack_Effects[EFX
 rgui->Chord(0);
 rgui->findpos(EFX_HARMONIZER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
+    code0 {activate_effect = o;}
     class RKR_Light_Button
   }
   Fl_Choice har_preset {
@@ -56,6 +61,7 @@ har_MIDI->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI));
 Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (rkr->Rack_Effects[EFX_HARMONIZER]);
 if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT)) rgui->Chord(0);} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
     class RKR_Choice
   } {
     MenuItem {} {

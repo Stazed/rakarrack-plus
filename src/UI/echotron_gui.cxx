@@ -266,13 +266,18 @@ Fl_Menu_Item EchotronGui::menu_echotron_fnum[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 EchotronGui::EchotronGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ echotron_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = echotron_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
   echotron_activar->box(FL_UP_BOX);
   echotron_activar->shortcut(0x35);
   echotron_activar->color((Fl_Color)62);
@@ -284,8 +289,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_activar->callback((Fl_Callback*)cb_echotron_activar, (void*)(2));
   echotron_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   echotron_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* echotron_activar
-{ echotron_preset = new RKR_Choice(79, 4, 76, 18, "Preset");
+{ RKR_Choice* o = echotron_preset = new RKR_Choice(79, 4, 76, 18, "Preset");
   echotron_preset->box(FL_FLAT_BOX);
   echotron_preset->down_box(FL_BORDER_BOX);
   echotron_preset->color(FL_BACKGROUND_COLOR);
@@ -300,6 +306,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echotron_preset->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echotron_preset->menu(menu_echotron_preset);
+  preset_choice = o;
 } // RKR_Choice* echotron_preset
 { echotron_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
   echotron_WD->type(5);

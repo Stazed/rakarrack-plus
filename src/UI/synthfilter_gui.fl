@@ -17,13 +17,17 @@ decl {\#include "RKR_Counter.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
   user_data 1 open
   xywh {1557 72 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
-  code3 {\#include "common_gui_menu.h"} visible position_relative
+  code3 {\#include "common_gui_menu.h"}
+  class RKR_Gui_Effect visible position_relative
 } {
   Fl_Light_Button synthfilter_activar {
     label On
@@ -37,8 +41,9 @@ widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
 rkr->EFX_Bypass[EFX_SYNTHFILTER]=(int)o->value();
 if((int) o->value()==0)
 rkr->Rack_Effects[EFX_SYNTHFILTER]->cleanup();
-rgui->findpos(EFX_SYNTHFILTER,(int)o->value(),o);} selected
+rgui->findpos(EFX_SYNTHFILTER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
+    code0 {activate_effect = o;}
     class RKR_Light_Button
   }
   Fl_Choice synthfilter_preset {
@@ -61,8 +66,9 @@ synthfilter_subs->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_S
 synthfilter_dpth->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth));
 synthfilter_EnvSens->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens));
 synthfilter_ATime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack));
-synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));}
+synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
     class RKR_Choice
   } {
     MenuItem {} {

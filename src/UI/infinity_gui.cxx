@@ -265,13 +265,18 @@ void InfinityGui::cb_infinity_subdiv(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_subdiv_i(o,v);
 }
 InfinityGui::InfinityGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ infinity_activar = new RKR_Light_Button(8, 5, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = infinity_activar = new RKR_Light_Button(8, 5, 34, 18, "On");
   infinity_activar->box(FL_UP_BOX);
   infinity_activar->shortcut(0x31);
   infinity_activar->color((Fl_Color)62);
@@ -283,8 +288,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_activar->callback((Fl_Callback*)cb_infinity_activar, (void*)(2));
   infinity_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   infinity_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* infinity_activar
-{ infinity_preset = new RKR_Choice(80, 5, 76, 18, "Preset");
+{ RKR_Choice* o = infinity_preset = new RKR_Choice(80, 5, 76, 18, "Preset");
   infinity_preset->box(FL_FLAT_BOX);
   infinity_preset->down_box(FL_BORDER_BOX);
   infinity_preset->color(FL_BACKGROUND_COLOR);
@@ -299,6 +305,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   infinity_preset->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_preset->when(FL_WHEN_RELEASE_ALWAYS);
   infinity_preset->menu(menu_infinity_preset);
+  preset_choice = o;
 } // RKR_Choice* infinity_preset
 { infinity_WD = new RKR_Slider(56, 27, 100, 10, "Dry/Wet");
   infinity_WD->type(5);

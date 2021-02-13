@@ -14,12 +14,16 @@ decl {\#include "RKR_Check_Button.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
 widget_class LooperGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
-  code2 {\#include "rakarrack.h"} visible position_relative
+  code2 {\#include "rakarrack.h"}
+  class RKR_Gui_Effect visible position_relative
 } {
   Fl_Light_Button looper_activar {
     label On
@@ -33,8 +37,9 @@ widget_class LooperGui {
 rkr->EFX_Bypass[EFX_LOOPER]=(int)o->value();
 if((int) o->value()==0)
 rkr->Rack_Effects[EFX_LOOPER]->cleanup();
-rgui->findpos(EFX_LOOPER,(int)o->value(),o);} selected
+rgui->findpos(EFX_LOOPER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+    code0 {activate_effect = o;}
     class RKR_Light_Button
   }
   Fl_Choice looper_preset {
@@ -57,8 +62,9 @@ looper_r2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_2));
 looper_lnk->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Link));
 looper_Tempo->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Tempo));
 looper_bar->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Bar));
-looper_ms->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_M_S));}
+looper_ms->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_M_S));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
     class RKR_Choice
   } {
     MenuItem {} {

@@ -5,12 +5,12 @@
 #include <FL/Fl.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
-#include <FL/Fl_Group.H>
+#include "RKR_GUI_Effect.h"
 #include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 
-class MusdelayGui : public Fl_Group {
+class MusdelayGui : public RKR_Gui_Effect {
 public:
   MusdelayGui(int X, int Y, int W, int H, const char *L = 0);
   RKR_Light_Button *musdelay_activar;

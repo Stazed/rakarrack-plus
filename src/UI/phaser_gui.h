@@ -7,13 +7,13 @@
 #include "RKR_Check_Button.h"
 #include "RKR_Counter.h"
 #include "RKR_Choice.h"
-#include <FL/Fl_Group.H>
+#include "RKR_GUI_Effect.h"
 #include "RKR_Slider.h"
 #include "../process.h"
 #include "rakarrack.h"
 #include "common_gui_menu.h"
 
-class PhaserGui : public Fl_Group {
+class PhaserGui : public RKR_Gui_Effect {
 public:
   PhaserGui(int X, int Y, int W, int H, const char *L = 0);
   RKR_Light_Button *phaser_activar;

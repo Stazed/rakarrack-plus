@@ -11,13 +11,17 @@ decl {\#include "RKR_Check_Button.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} PanGui {
   user_data 1 open
   xywh {1333 108 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
-  code3 {\#include "common_gui_menu.h"} visible position_relative
+  code3 {\#include "common_gui_menu.h"}
+  class RKR_Gui_Effect visible position_relative
 } {
   Fl_Light_Button pan_activar {
     label On
@@ -31,8 +35,9 @@ widget_class {\#include "common_gui_menu.h"} PanGui {
 rkr->EFX_Bypass[EFX_PAN]=(int)o->value();
 if((int) o->value()==0)
 rkr->Rack_Effects[EFX_PAN]->cleanup();
-rgui->findpos(EFX_PAN,(int)o->value(),o);} selected
+rgui->findpos(EFX_PAN,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+    code0 {activate_effect = o;}
     class RKR_Light_Button
   }
   Fl_Choice pan_preset {
@@ -48,8 +53,9 @@ pan_lfotype->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Type));
 pan_stdf->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Stereo));
 pan_extra->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Ex_St_Amt));
 pan_autopan->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_AutoPan));
-pan_extraon->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Enable_Extra));}
+pan_extraon->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Enable_Extra));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
     class RKR_Choice
   } {
     MenuItem {} {

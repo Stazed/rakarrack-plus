@@ -151,13 +151,18 @@ void EchoGui::cb_echo_damp(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_damp_i(o,v);
 }
 EchoGui::EchoGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ echo_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = echo_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   echo_activar->box(FL_UP_BOX);
   echo_activar->shortcut(0x35);
   echo_activar->color((Fl_Color)62);
@@ -169,8 +174,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_activar->callback((Fl_Callback*)cb_echo_activar, (void*)(2));
   echo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   echo_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* echo_activar
-{ echo_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = echo_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   echo_preset->box(FL_FLAT_BOX);
   echo_preset->down_box(FL_BORDER_BOX);
   echo_preset->color(FL_BACKGROUND_COLOR);
@@ -185,6 +191,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echo_preset->menu(menu_echo_preset);
+  preset_choice = o;
 } // RKR_Choice* echo_preset
 { echo_WD = new RKR_Slider(56, 35, 100, 10, "Dry/Wet");
   echo_WD->type(5);

@@ -124,13 +124,18 @@ void OtremGui::cb_otrem_invert(RKR_Check_Button* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_invert_i(o,v);
 }
 OtremGui::OtremGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ otrem_activar = new RKR_Light_Button(5, 6, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = otrem_activar = new RKR_Light_Button(5, 6, 34, 18, "On");
   otrem_activar->box(FL_UP_BOX);
   otrem_activar->shortcut(0x38);
   otrem_activar->color((Fl_Color)62);
@@ -142,8 +147,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_activar->callback((Fl_Callback*)cb_otrem_activar, (void*)(2));
   otrem_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   otrem_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* otrem_activar
-{ otrem_preset = new RKR_Choice(77, 6, 76, 18, "Preset");
+{ RKR_Choice* o = otrem_preset = new RKR_Choice(77, 6, 76, 18, "Preset");
   otrem_preset->box(FL_FLAT_BOX);
   otrem_preset->down_box(FL_BORDER_BOX);
   otrem_preset->color(FL_BACKGROUND_COLOR);
@@ -158,6 +164,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   otrem_preset->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_preset->when(FL_WHEN_RELEASE_ALWAYS);
   otrem_preset->menu(menu_otrem_preset);
+  preset_choice = o;
 } // RKR_Choice* otrem_preset
 { otrem_dpth = new RKR_Slider(56, 35, 100, 10, "Depth");
   otrem_dpth->type(5);

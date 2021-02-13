@@ -202,13 +202,18 @@ void CbandGui::cb_cband_cross3(RKR_Slider* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_cross3_i(o,v);
 }
 CbandGui::CbandGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ cband_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = cband_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   cband_activar->box(FL_UP_BOX);
   cband_activar->shortcut(0x38);
   cband_activar->color((Fl_Color)62);
@@ -220,8 +225,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_activar->callback((Fl_Callback*)cb_cband_activar, (void*)(2));
   cband_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   cband_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* cband_activar
-{ cband_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = cband_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   cband_preset->box(FL_FLAT_BOX);
   cband_preset->down_box(FL_BORDER_BOX);
   cband_preset->color(FL_BACKGROUND_COLOR);
@@ -236,6 +242,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   cband_preset->align(Fl_Align(FL_ALIGN_LEFT));
   cband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   cband_preset->menu(menu_cband_preset);
+  preset_choice = o;
 } // RKR_Choice* cband_preset
 { cband_WD = new RKR_Slider(56, 27, 100, 10, "Dry/Wet");
   cband_WD->type(5);

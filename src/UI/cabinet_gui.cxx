@@ -51,13 +51,18 @@ void CabinetGui::cb_Cabinet_output(RKR_Slider* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_output_i(o,v);
 }
 CabinetGui::CabinetGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ Cabinet_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = Cabinet_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   Cabinet_activar->box(FL_UP_BOX);
   Cabinet_activar->shortcut(0x32);
   Cabinet_activar->color((Fl_Color)62);
@@ -69,8 +74,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Cabinet_activar->callback((Fl_Callback*)cb_Cabinet_activar, (void*)(2));
   Cabinet_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   Cabinet_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* Cabinet_activar
-{ Cabinet_preset = new RKR_Choice(45, 45, 106, 18, "Preset");
+{ RKR_Choice* o = Cabinet_preset = new RKR_Choice(45, 45, 106, 18, "Preset");
   Cabinet_preset->box(FL_FLAT_BOX);
   Cabinet_preset->down_box(FL_BORDER_BOX);
   Cabinet_preset->color(FL_BACKGROUND_COLOR);
@@ -85,6 +91,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   Cabinet_preset->align(Fl_Align(FL_ALIGN_LEFT));
   Cabinet_preset->when(FL_WHEN_RELEASE_ALWAYS);
   Cabinet_preset->menu(menu_Cabinet_preset);
+  preset_choice = o;
 } // RKR_Choice* Cabinet_preset
 { Cabinet_output = new RKR_Slider(56, 92, 100, 10, "Gain");
   Cabinet_output->type(5);

@@ -14,13 +14,17 @@ decl {\#include "RKR_Counter.h"} {public global
 decl {\#include "RKR_Choice.h"} {public global
 }
 
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} EchotronGui {
   user_data 1 open
   xywh {1576 112 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
-  code3 {\#include "common_gui_menu.h"} visible position_relative
+  code3 {\#include "common_gui_menu.h"}
+  class RKR_Gui_Effect visible position_relative
 } {
   Fl_Light_Button echotron_activar {
     label On
@@ -35,6 +39,7 @@ rkr->EFX_Bypass[EFX_ECHOTRON]=(int)o->value();
 if((int) o->value()==0) rkr->Rack_Effects[EFX_ECHOTRON]->cleanup();
 rgui->findpos(EFX_ECHOTRON,(int)o->value(),o);}
     xywh {6 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
+    code0 {activate_effect = o;}
     class RKR_Light_Button
   }
   Fl_Choice echotron_preset {
@@ -61,8 +66,9 @@ echotron_md->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Delay));
 echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
 
 Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
-echotron_length->maximum(Efx_Echotron->get_file_length());}
+echotron_length->maximum(Efx_Echotron->get_file_length());} selected
     xywh {79 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
     class RKR_Choice
   } {
     MenuItem {} {
@@ -250,7 +256,7 @@ if(!Efx_Echotron->setfile(USERFILE))
 
 echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
 
-echotron_length->maximum(Efx_Echotron->get_file_length());} selected
+echotron_length->maximum(Efx_Echotron->get_file_length());}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }

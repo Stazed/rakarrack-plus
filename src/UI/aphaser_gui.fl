@@ -14,13 +14,17 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_Counter.h"} {public global
 }
 
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
 widget_class {\#include "common_gui_menu.h"} AphaserGui {
   user_data 1 open
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
-  code3 {\#include "common_gui_menu.h"} visible position_relative
+  code3 {\#include "common_gui_menu.h"}
+  class RKR_Gui_Effect visible position_relative
 } {
   Fl_Light_Button aphaser_activar {
     label On
@@ -34,8 +38,9 @@ widget_class {\#include "common_gui_menu.h"} AphaserGui {
 rkr->EFX_Bypass[EFX_ANALOG_PHASER]=(int)o->value();
 if((int) o->value()==0)
 rkr->Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
-rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);} selected
+rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
+    code0 {activate_effect = o;}
     class RKR_Light_Button
   }
   Fl_Choice aphaser_preset {
@@ -55,8 +60,9 @@ aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-
 aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
 aphaser_subs->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
 aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
-aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));}
+aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
     class RKR_Choice
   } {
     MenuItem {} {

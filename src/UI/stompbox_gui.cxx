@@ -133,13 +133,18 @@ Fl_Menu_Item StompboxGui::menu_stomp_mode[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 StompboxGui::StompboxGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ stomp_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = stomp_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   stomp_activar->box(FL_UP_BOX);
   stomp_activar->shortcut(0x30);
   stomp_activar->color((Fl_Color)62);
@@ -151,8 +156,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_activar->callback((Fl_Callback*)cb_stomp_activar, (void*)(2));
   stomp_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   stomp_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* stomp_activar
-{ stomp_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = stomp_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   stomp_preset->box(FL_FLAT_BOX);
   stomp_preset->down_box(FL_BORDER_BOX);
   stomp_preset->color(FL_BACKGROUND_COLOR);
@@ -167,6 +173,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   stomp_preset->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_preset->when(FL_WHEN_RELEASE_ALWAYS);
   stomp_preset->menu(menu_stomp_preset);
+  preset_choice = o;
 } // RKR_Choice* stomp_preset
 { stomp_WD = new RKR_Slider(56, 30, 100, 10, "Level");
   stomp_WD->type(5);

@@ -182,13 +182,18 @@ void FlangerGui::cb_flanger_LR(RKR_Slider* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_LR_i(o,v);
 }
 FlangerGui::FlangerGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ flanger_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = flanger_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   flanger_activar->box(FL_UP_BOX);
   flanger_activar->shortcut(0x38);
   flanger_activar->color((Fl_Color)62);
@@ -200,8 +205,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   flanger_activar->callback((Fl_Callback*)cb_flanger_activar, (void*)(2));
   flanger_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   flanger_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* flanger_activar
-{ flanger_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = flanger_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   flanger_preset->box(FL_FLAT_BOX);
   flanger_preset->down_box(FL_BORDER_BOX);
   flanger_preset->color(FL_BACKGROUND_COLOR);
@@ -216,6 +222,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   flanger_preset->align(Fl_Align(FL_ALIGN_LEFT));
   flanger_preset->when(FL_WHEN_RELEASE_ALWAYS);
   flanger_preset->menu(menu_flanger_preset);
+  preset_choice = o;
 } // RKR_Choice* flanger_preset
 { flanger_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   flanger_WD->type(5);

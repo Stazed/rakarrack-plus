@@ -123,13 +123,18 @@ void ExpanderGui::cb_expander_HPF(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_HPF_i(o,v);
 }
 ExpanderGui::ExpanderGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ expander_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = expander_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   expander_activar->box(FL_UP_BOX);
   expander_activar->shortcut(0x32);
   expander_activar->color((Fl_Color)62);
@@ -141,8 +146,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_activar->callback((Fl_Callback*)cb_expander_activar, (void*)(2));
   expander_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   expander_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* expander_activar
-{ expander_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = expander_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   expander_preset->box(FL_FLAT_BOX);
   expander_preset->down_box(FL_BORDER_BOX);
   expander_preset->color(FL_BACKGROUND_COLOR);
@@ -157,6 +163,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   expander_preset->align(Fl_Align(FL_ALIGN_LEFT));
   expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
   expander_preset->menu(menu_expander_preset);
+  preset_choice = o;
 } // RKR_Choice* expander_preset
 { expander_ATime = new RKR_Slider(56, 39, 100, 10, "A. Time");
   expander_ATime->type(5);

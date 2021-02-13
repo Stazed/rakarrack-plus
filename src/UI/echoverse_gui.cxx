@@ -159,13 +159,18 @@ void EchoverseGui::cb_echoverse_angle(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_angle_i(o,v);
 }
 EchoverseGui::EchoverseGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ echoverse_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = echoverse_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   echoverse_activar->box(FL_UP_BOX);
   echoverse_activar->shortcut(0x35);
   echoverse_activar->color((Fl_Color)62);
@@ -177,8 +182,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echoverse_activar->callback((Fl_Callback*)cb_echoverse_activar, (void*)(2));
   echoverse_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   echoverse_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* echoverse_activar
-{ echoverse_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = echoverse_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   echoverse_preset->box(FL_FLAT_BOX);
   echoverse_preset->down_box(FL_BORDER_BOX);
   echoverse_preset->color(FL_BACKGROUND_COLOR);
@@ -193,6 +199,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   echoverse_preset->align(Fl_Align(FL_ALIGN_LEFT));
   echoverse_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echoverse_preset->menu(menu_echoverse_preset);
+  preset_choice = o;
 } // RKR_Choice* echoverse_preset
 { echoverse_WD = new RKR_Slider(56, 27, 100, 10, "Dry/Wet");
   echoverse_WD->type(5);

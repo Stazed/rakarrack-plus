@@ -178,13 +178,18 @@ Fl_Menu_Item ArpieGui::menu_arpie_pattern[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 ArpieGui::ArpieGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ arpie_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = arpie_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   arpie_activar->box(FL_UP_BOX);
   arpie_activar->shortcut(0x35);
   arpie_activar->color((Fl_Color)62);
@@ -196,8 +201,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_activar->callback((Fl_Callback*)cb_arpie_activar, (void*)(2));
   arpie_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   arpie_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* arpie_activar
-{ arpie_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = arpie_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   arpie_preset->box(FL_FLAT_BOX);
   arpie_preset->down_box(FL_BORDER_BOX);
   arpie_preset->color(FL_BACKGROUND_COLOR);
@@ -212,6 +218,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   arpie_preset->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
   arpie_preset->menu(menu_arpie_preset);
+  preset_choice = o;
 } // RKR_Choice* arpie_preset
 { arpie_WD = new RKR_Slider(56, 28, 100, 10, "Dry/Wet");
   arpie_WD->type(5);

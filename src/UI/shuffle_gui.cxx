@@ -173,13 +173,18 @@ void ShuffleGui::cb_shuffle_E(RKR_Check_Button* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_E_i(o,v);
 }
 ShuffleGui::ShuffleGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ shuffle_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = shuffle_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   shuffle_activar->box(FL_UP_BOX);
   shuffle_activar->shortcut(0x33);
   shuffle_activar->color((Fl_Color)62);
@@ -191,8 +196,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_activar->callback((Fl_Callback*)cb_shuffle_activar, (void*)(2));
   shuffle_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   shuffle_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* shuffle_activar
-{ shuffle_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = shuffle_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   shuffle_preset->box(FL_FLAT_BOX);
   shuffle_preset->down_box(FL_BORDER_BOX);
   shuffle_preset->color(FL_BACKGROUND_COLOR);
@@ -207,6 +213,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   shuffle_preset->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shuffle_preset->menu(menu_shuffle_preset);
+  preset_choice = o;
 } // RKR_Choice* shuffle_preset
 { shuffle_WD = new RKR_Slider(56, 31, 100, 10, "Dry/Wet");
   shuffle_WD->type(5);

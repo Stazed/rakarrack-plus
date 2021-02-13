@@ -185,13 +185,18 @@ void ReverbGui::cb_reverb_damp(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_damp_i(o,v);
 }
 ReverbGui::ReverbGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ reverb_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = reverb_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   reverb_activar->box(FL_UP_BOX);
   reverb_activar->shortcut(0x39);
   reverb_activar->color((Fl_Color)62);
@@ -203,8 +208,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_activar->callback((Fl_Callback*)cb_reverb_activar, (void*)(2));
   reverb_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   reverb_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* reverb_activar
-{ reverb_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = reverb_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   reverb_preset->box(FL_FLAT_BOX);
   reverb_preset->down_box(FL_BORDER_BOX);
   reverb_preset->color(FL_BACKGROUND_COLOR);
@@ -219,6 +225,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   reverb_preset->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_preset->when(FL_WHEN_RELEASE_ALWAYS);
   reverb_preset->menu(menu_reverb_preset);
+  preset_choice = o;
 } // RKR_Choice* reverb_preset
 { reverb_WD = new RKR_Slider(56, 27, 100, 10, "Dry/Wet");
   reverb_WD->type(5);

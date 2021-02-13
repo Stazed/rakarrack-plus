@@ -140,13 +140,18 @@ void PanGui::cb_pan_extra(RKR_Slider* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_extra_i(o,v);
 }
 PanGui::PanGui(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(0, 0, W, H, L) {
+  : RKR_Gui_Effect(0, 0, W, H, L) {
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
+this->labeltype(FL_NO_LABEL);
+this->labelfont(0);
+this->labelsize(14);
+this->labelcolor(FL_FOREGROUND_COLOR);
 this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
-{ pan_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
+this->when(FL_WHEN_RELEASE);
+{ RKR_Light_Button* o = pan_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   pan_activar->box(FL_UP_BOX);
   pan_activar->shortcut(0x36);
   pan_activar->color((Fl_Color)62);
@@ -158,8 +163,9 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_activar->callback((Fl_Callback*)cb_pan_activar, (void*)(2));
   pan_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   pan_activar->when(FL_WHEN_CHANGED);
+  activate_effect = o;
 } // RKR_Light_Button* pan_activar
-{ pan_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
+{ RKR_Choice* o = pan_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   pan_preset->box(FL_FLAT_BOX);
   pan_preset->down_box(FL_BORDER_BOX);
   pan_preset->color(FL_BACKGROUND_COLOR);
@@ -174,6 +180,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   pan_preset->align(Fl_Align(FL_ALIGN_LEFT));
   pan_preset->when(FL_WHEN_RELEASE_ALWAYS);
   pan_preset->menu(menu_pan_preset);
+  preset_choice = o;
 } // RKR_Choice* pan_preset
 { pan_WD = new RKR_Slider(56, 29, 100, 10, "Dry/Wet");
   pan_WD->type(5);
