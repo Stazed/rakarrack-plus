@@ -4326,9 +4326,11 @@ void RKRGUI::MIDI_control_gui_refresh()
     rkr->Mvalue = 0;
 }
 
+/**
+ * Turn effect on or off from MIDI control (default CC #116)
+ */
 void RKRGUI::ActOnOff()
 {
-    // turn efx on or off
     int miralo = 0;
 
     while (rkr->OnOffC > 0)
@@ -4345,214 +4347,36 @@ void RKRGUI::ActOnOff()
         {
             miralo = rkr->efx_order[rkr->Mnumeff[rkr->OnOffC]];
         }
-
-        switch (miralo)
+        
+        // Check for rack effects
+        if (miralo < C_NUMBER_EFFECTS)
         {
-            case EFX_EQ:
-                EQ->eq_activar->value(rkr->EFX_Bypass[EFX_EQ]);
-                EQ->eq_activar->do_callback();
-                break;
-            case EFX_COMPRESSOR:
-                COMPRESS->compress_activar->value(rkr->EFX_Bypass[EFX_COMPRESSOR]);
-                COMPRESS->compress_activar->do_callback();
-                break;
-            case EFX_DISTORTION:
-                DIST->dist_activar->value(rkr->EFX_Bypass[EFX_DISTORTION]);
-                DIST->dist_activar->do_callback();
-                break;
-            case EFX_OVERDRIVE:
-                OVRD->ovrd_activar->value(rkr->EFX_Bypass[EFX_OVERDRIVE]);
-                OVRD->ovrd_activar->do_callback();
-                break;
-            case EFX_ECHO:
-                ECHO->echo_activar->value(rkr->EFX_Bypass[EFX_ECHO]);
-                ECHO->echo_activar->do_callback();
-                break;
-            case EFX_CHORUS:
-                CHORUS->chorus_activar->value(rkr->EFX_Bypass[EFX_CHORUS]);
-                CHORUS->chorus_activar->do_callback();
-                break;
-            case EFX_PHASER:
-                PHASER->phaser_activar->value(rkr->EFX_Bypass[EFX_PHASER]);
-                PHASER->phaser_activar->do_callback();
-                break;
-            case EFX_FLANGER:
-                FLANGER->flanger_activar->value(rkr->EFX_Bypass[EFX_FLANGER]);
-                FLANGER->flanger_activar->do_callback();
-                break;
-            case EFX_REVERB:
-                REVERB->reverb_activar->value(rkr->EFX_Bypass[EFX_REVERB]);
-                REVERB->reverb_activar->do_callback();
-                break;
-            case EFX_PARAMETRIC:
-                PEQ->eqp_activar->value(rkr->EFX_Bypass[EFX_PARAMETRIC]);
-                PEQ->eqp_activar->do_callback();
-                break;
-            case EFX_WAHWAH:
-                WAHWAH->WahWah_activar->value(rkr->EFX_Bypass[EFX_WAHWAH]);
-                WAHWAH->WahWah_activar->do_callback();
-                break;
-            case EFX_ALIENWAH:
-                ALIENWAH->Alienwah_activar->value(rkr->EFX_Bypass[EFX_ALIENWAH]);
-                ALIENWAH->Alienwah_activar->do_callback();
-                break;
-            case EFX_CABINET:
-                CABINET->Cabinet_activar->value(rkr->EFX_Bypass[EFX_CABINET]);
-                CABINET->Cabinet_activar->do_callback();
-                break;
-            case EFX_PAN:
-                PAN->pan_activar->value(rkr->EFX_Bypass[EFX_PAN]);
-                PAN->pan_activar->do_callback();
-                break;
-            case EFX_HARMONIZER:
-                HAR->har_activar->value(rkr->EFX_Bypass[EFX_HARMONIZER]);
-                HAR->har_activar->do_callback();
-                break;
-            case EFX_MUSICAL_DELAY:
-                MUSDELAY->musdelay_activar->value(rkr->EFX_Bypass[EFX_MUSICAL_DELAY]);
-                MUSDELAY->musdelay_activar->do_callback();
-                break;
-            case EFX_NOISEGATE:
-                GATE->gate_activar->value(rkr->EFX_Bypass[EFX_NOISEGATE]);
-                GATE->gate_activar->do_callback();
-                break;
-            case EFX_DERELICT:
-                DERELICT->derelict_activar->value(rkr->EFX_Bypass[EFX_DERELICT]);
-                DERELICT->derelict_activar->do_callback();
-                break;
-            case EFX_ANALOG_PHASER:
-                APHASER->aphaser_activar->value(rkr->EFX_Bypass[EFX_ANALOG_PHASER]);
-                APHASER->aphaser_activar->do_callback();
-                break;
-            case EFX_VALVE:
-                VALVE->valve_activar->value(rkr->EFX_Bypass[EFX_VALVE]);
-                VALVE->valve_activar->do_callback();
-                break;
-            case EFX_DUAL_FLANGE:
-                DFLANGE->dflange_activar->value(rkr->EFX_Bypass[EFX_DUAL_FLANGE]);
-                DFLANGE->dflange_activar->do_callback();
-                break;
-            case EFX_RING:
-                RING->ring_activar->value(rkr->EFX_Bypass[EFX_RING]);
-                RING->ring_activar->do_callback();
-                break;
-            case EFX_EXCITER:
-                EXCITER->exciter_activar->value(rkr->EFX_Bypass[EFX_EXCITER]);
-                EXCITER->exciter_activar->do_callback();
-                break;
-            case EFX_DISTBAND:
-                DISTBAND->distband_activar->value(rkr->EFX_Bypass[EFX_DISTBAND]);
-                DISTBAND->distband_activar->do_callback();
-                break;
-            case EFX_ARPIE:
-                ARPIE->arpie_activar->value(rkr->EFX_Bypass[EFX_ARPIE]);
-                ARPIE->arpie_activar->do_callback();
-                break;
-            case EFX_EXPANDER:
-                EXPANDER->expander_activar->value(rkr->EFX_Bypass[EFX_EXPANDER]);
-                EXPANDER->expander_activar->do_callback();
-                break;
-            case EFX_SHUFFLE:
-                SHUFFLE->shuffle_activar->value(rkr->EFX_Bypass[EFX_SHUFFLE]);
-                SHUFFLE->shuffle_activar->do_callback();
-                break;
-            case EFX_SYNTHFILTER:
-                SYNTHFILTER->synthfilter_activar->value(rkr->EFX_Bypass[EFX_SYNTHFILTER]);
-                SYNTHFILTER->synthfilter_activar->do_callback();
-                break;
-            case EFX_VARYBAND:
-                VARYBAND->varyband_activar->value(rkr->EFX_Bypass[EFX_VARYBAND]);
-                VARYBAND->varyband_activar->do_callback();
-                break;
-            case EFX_CONVOLOTRON:
-                CONVOLOTRON->convo_activar->value(rkr->EFX_Bypass[EFX_CONVOLOTRON]);
-                CONVOLOTRON->convo_activar->do_callback();
-                break;
-            case EFX_LOOPER:
-                LOOPER->looper_activar->value(rkr->EFX_Bypass[EFX_LOOPER]);
-                LOOPER->looper_activar->do_callback();
-                break;
-            case EFX_MUTROMOJO:
-                MUTROMOJO->mutromojo_activar->value(rkr->EFX_Bypass[EFX_MUTROMOJO]);
-                MUTROMOJO->mutromojo_activar->do_callback();
-                break;
-            case EFX_ECHOVERSE:
-                ECHOVERSE->echoverse_activar->value(rkr->EFX_Bypass[EFX_ECHOVERSE]);
-                ECHOVERSE->echoverse_activar->do_callback();
-                break;
-            case EFX_COILCRAFTER:
-                COILCRAFTER->coil_activar->value(rkr->EFX_Bypass[EFX_COILCRAFTER]);
-                COILCRAFTER->coil_activar->do_callback();
-                break;
-            case EFX_SHELFBOOST:
-                SHELFBOOST->shelf_activar->value(rkr->EFX_Bypass[EFX_SHELFBOOST]);
-                SHELFBOOST->shelf_activar->do_callback();
-                break;
-            case EFX_VOCODER:
-                VOCODER->vo_activar->value(rkr->EFX_Bypass[EFX_VOCODER]);
-                VOCODER->vo_activar->do_callback();
-                break;
-            case EFX_SUSTAINER:
-                SUSTAINER->sus_activar->value(rkr->EFX_Bypass[EFX_SUSTAINER]);
-                SUSTAINER->sus_activar->do_callback();
-                break;
-            case EFX_SEQUENCE:
-                SEQUENCE->seq_activar->value(rkr->EFX_Bypass[EFX_SEQUENCE]);
-                SEQUENCE->seq_activar->do_callback();
-                break;
-            case EFX_SHIFTER:
-                SHIFTER->shifter_activar->value(rkr->EFX_Bypass[EFX_SHIFTER]);
-                SHIFTER->shifter_activar->do_callback();
-                break;
-            case EFX_STOMPBOX:
-                STOMPBOX->stomp_activar->value(rkr->EFX_Bypass[EFX_STOMPBOX]);
-                STOMPBOX->stomp_activar->do_callback();
-                break;
-            case EFX_REVERBTRON:
-                REVERBTRON->revtron_activar->value(rkr->EFX_Bypass[EFX_REVERBTRON]);
-                REVERBTRON->revtron_activar->do_callback();
-                break;
-            case EFX_ECHOTRON:
-                ECHOTRON->echotron_activar->value(rkr->EFX_Bypass[EFX_ECHOTRON]);
-                ECHOTRON->echotron_activar->do_callback();
-                break;
-            case EFX_STEREOHARM:
-                SHAR->shar_activar->value(rkr->EFX_Bypass[EFX_STEREOHARM]);
-                SHAR->shar_activar->do_callback();
-                break;
-            case EFX_COMPBAND:
-                COMPBAND->cband_activar->value(rkr->EFX_Bypass[EFX_COMPBAND]);
-                COMPBAND->cband_activar->do_callback();
-                break;
-            case EFX_OPTICALTREM:
-                OTREM->otrem_activar->value(rkr->EFX_Bypass[EFX_OPTICALTREM]);
-                OTREM->otrem_activar->do_callback();
-                break;
-            case EFX_VIBE:
-                VIBE->vibe_activar->value(rkr->EFX_Bypass[EFX_VIBE]);
-                VIBE->vibe_activar->do_callback();
-                break;
-            case EFX_INFINITY:
-                INFINIT->infinity_activar->value(rkr->EFX_Bypass[EFX_INFINITY]);
-                INFINIT->infinity_activar->do_callback();
-                break;
-
-            case EFX_TAP_TEMPO_ON_OFF:
-                Tap_activar->value(rkr->Tap_Bypass);
-                Tap_activar->do_callback();
-                break;
-            case EFX_MIDI_CONVERTER_ON_OFF:
-                MIDI->midi_activar->value(rkr->MIDIConverter_Bypass);
-                MIDI->midi_activar->do_callback();
-                break;
-            case EFX_TUNER_ON_OFF:
-                tuner_activar->value(rkr->Tuner_Bypass);
-                tuner_activar->do_callback();
-                break;
-            case EFX_MASTER_ON_OFF:
-                ActivarGeneral->value(rkr->Bypass);
-                ActivarGeneral->do_callback();
-                break;
+            Efx_Gui_Base[miralo]->activate_effect->value (rkr->EFX_Bypass[miralo]);
+            Efx_Gui_Base[miralo]->activate_effect->do_callback ();
+            rkr->OnOffC--;
+            continue;
+        }
+        else
+        {
+            switch (miralo)
+            {
+                case EFX_TAP_TEMPO_ON_OFF:
+                    Tap_activar->value(rkr->Tap_Bypass);
+                    Tap_activar->do_callback();
+                    break;
+                case EFX_MIDI_CONVERTER_ON_OFF:
+                    MIDI->midi_activar->value(rkr->MIDIConverter_Bypass);
+                    MIDI->midi_activar->do_callback();
+                    break;
+                case EFX_TUNER_ON_OFF:
+                    tuner_activar->value(rkr->Tuner_Bypass);
+                    tuner_activar->do_callback();
+                    break;
+                case EFX_MASTER_ON_OFF:
+                    ActivarGeneral->value(rkr->Bypass);
+                    ActivarGeneral->do_callback();
+                    break;
+            }
         }
 
         rkr->OnOffC--;
