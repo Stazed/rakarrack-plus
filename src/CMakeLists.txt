@@ -10,6 +10,7 @@ set (ProgSources
     UI/newvum.cxx
     UI/tunerbar.cxx
     UI/common_gui_menu.cxx
+    UI/RKR_GUI_Effect.cxx
     UI/RKR_Input.cxx
     UI/RKR_Box.cxx
     UI/RKR_Browser.cxx
