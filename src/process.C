@@ -279,7 +279,7 @@ RKR::RKR() :
     UDirFilename(),
     BackgroundImage(),
     efx_names(),
-    efx_params(),
+    mc_efx_params(),
     Bank(),
     M_table(),
     B_Names(),

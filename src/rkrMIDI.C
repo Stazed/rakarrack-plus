@@ -94,9 +94,14 @@ const float C_MC_25980_RANGE    = 204.566929f;      /* (26000 - 20) / 127 = 204.
  *  The los_params[] array is the order used by the MIDI learn window.
  * 
  *  The items are copied to Effects_Params struct:
- *      char Nom[32] = Parameter Name
- *      int Ato      = Parameter MIDI control number
- *      int Effect   = Effect number
+ * 
+ *      char Description[32]    = MC Parameter Description - MIDI Learn Window
+ *      int MC_params_index     = Parameter MIDI control number
+ *      int Effect_index        = Rack Effect number
+ *      int Efx_param_index     = Effect parameter number
+ *      int MC_offset           = MIDI control parameter offset
+ *      double MC_range         = MIDI control parameter range multiplier
+ *      int MC_GUI_offset       = Offset for gui update from getpar() amount
  * 
  * If any additional parameters are added, then the constant
  * C_MC_PARAMETER_SIZE must be adjusted.
@@ -604,9 +609,9 @@ RKR::MIDI_control()
     // C_MC_PARAMETER_SIZE must be adjusted.
     for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
     {
-        strcpy(efx_params[i].Nom, los_params[i * 3]);
-        sscanf(los_params[i * 3 + 1], "%d", &efx_params[i].Ato);
-        sscanf(los_params[i * 3 + 2], "%d", &efx_params[i].Effect);
+        strcpy(mc_efx_params[i].Description, los_params[i * 3]);
+        sscanf(los_params[i * 3 + 1], "%d", &mc_efx_params[i].MC_params_index);
+        sscanf(los_params[i * 3 + 2], "%d", &mc_efx_params[i].Effect_index);
     }
 }
 

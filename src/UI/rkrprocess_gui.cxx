@@ -4519,16 +4519,16 @@ void RKRGUI::FillML(/*int type*/)
     {
         case 0:
             for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
-                MIDILearn->Epar->add(rkr->efx_params[i].Nom);
+                MIDILearn->Epar->add(rkr->mc_efx_params[i].Description);
             break;
 
         case 1:
             for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
             {
-                if (rkr->efx_params[i].Effect == EFX_MASTER)
+                if (rkr->mc_efx_params[i].Effect_index == EFX_MASTER)
                 {
-                    MIDILearn->Epar->add(rkr->efx_params[i].Nom);
-                    rkr->ML_clist[k] = rkr->efx_params[i].Ato;
+                    MIDILearn->Epar->add(rkr->mc_efx_params[i].Description);
+                    rkr->ML_clist[k] = rkr->mc_efx_params[i].MC_params_index;
                     k++;
                 }
             }
@@ -4537,10 +4537,10 @@ void RKRGUI::FillML(/*int type*/)
             {
                 for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
                 {
-                    if (rkr->efx_params[i].Effect == rkr->efx_order[j])
+                    if (rkr->mc_efx_params[i].Effect_index == rkr->efx_order[j])
                     {
-                        MIDILearn->Epar->add(rkr->efx_params[i].Nom);
-                        rkr->ML_clist[k] = rkr->efx_params[i].Ato;
+                        MIDILearn->Epar->add(rkr->mc_efx_params[i].Description);
+                        rkr->ML_clist[k] = rkr->mc_efx_params[i].MC_params_index;
                         k++;
                     }
                 }
@@ -4576,7 +4576,7 @@ void RKRGUI::DisAssigns()
     {
         if (rkr->ML_filter == 0)
         {
-            the_one = rkr->efx_params[(int) MIDILearn->Epar->value() - 1].Ato;
+            the_one = rkr->mc_efx_params[(int) MIDILearn->Epar->value() - 1].MC_params_index;
         }
         else
         {
@@ -5446,7 +5446,7 @@ void RKRGUI::getMIDIControl(int num)
     PrepareML();
     while (i < MIDILearn->Epar->size())
     {
-        if ((rkr->ML_filter == 0) && (rkr->efx_params[i].Ato == num))
+        if ((rkr->ML_filter == 0) && (rkr->mc_efx_params[i].MC_params_index == num))
         {
             MIDILearn->Epar->select(i + 1);
             break;

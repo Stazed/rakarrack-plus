@@ -1200,17 +1200,24 @@ public:
             Type() {}
     } efx_names[70];
 
-    struct Effects_Params
+    struct MIDI_Control_Params
     {
-        char Nom[32];
-        int Ato;
-        int Effect;
+        char Description[32];       // MIDI Learn window 
+        int MC_params_index;
+        int Effect_index;           // EFX_Index
+        int Efx_param_index;
+        int MC_offset;
+        double MC_range;
+        int MC_GUI_offset;
         
-        Effects_Params():
-            Nom(),
-            Ato(),
-            Effect() {}
-    } efx_params[C_MC_PARAMETER_SIZE];
+        MIDI_Control_Params():
+            Description(),
+            MC_params_index(),
+            Effect_index(),
+            Efx_param_index(),
+            MC_offset(),
+            MC_GUI_offset() {}
+    } mc_efx_params[C_MC_PARAMETER_SIZE];
 
 
     struct Preset_Bank_Struct

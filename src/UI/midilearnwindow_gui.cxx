@@ -38,7 +38,7 @@ void MidiLearnWindowGui::cb_ClearA_i(RKR_Button*, void*) {
 int the_one;
 
 if (m_rkr->ML_filter==0)
- the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
+ the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
  else
  the_one = m_rkr->ML_clist[(int)Epar->value()-1];
 
@@ -78,7 +78,7 @@ int the_one = 0;
 if((int)Epar->value()-1 >= 0)
 {
     if (m_rkr->ML_filter==0)
-        the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
+        the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
     else
         the_one = m_rkr->ML_clist[(int)Epar->value()-1];
 }
@@ -109,7 +109,7 @@ int the_one = 0;
 if((int)Epar->value()-1 >= 0)
 {
     if (m_rkr->ML_filter==0)
-        the_one = m_rkr->efx_params[(int)Epar->value()-1].Ato;
+        the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
     else
         the_one = m_rkr->ML_clist[(int)Epar->value()-1];
 }
