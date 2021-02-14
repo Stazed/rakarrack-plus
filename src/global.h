@@ -33,6 +33,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sstream>  // NTS
 #include <FL/Fl_Tiled_Image.H>
 
 
@@ -76,6 +77,23 @@ const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
 const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
 
 inline int Dry_Wet (int x) {return 127 - x;}
+
+/**
+ * Number To String (NTS)
+ * 
+ * @param Number
+ *      Float, Double, Integer, etc to convert.
+ * 
+ * @return 
+ *      The converted number.
+ */
+template <typename T>
+std::string NTS ( T Number )
+{
+    std::stringstream ss;
+    ss << Number;
+    return ss.str();
+}
 
 #define D_PI 6.283185f
 #define PI 3.141598f

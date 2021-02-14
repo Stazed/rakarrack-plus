@@ -242,14 +242,14 @@ void RKR::get_effect_parameters(char *buf, int fx_index)
                 if(params < EFX_Param_Size[effect])   // the effect parameters
                 {
                     // add integer parameters converted to string
-                    s_buf += ITS(Rack_Effects[effect]->getpar(params));
+                    s_buf += NTS(Rack_Effects[effect]->getpar(params));
 
                     // add the delimiter
                     s_buf += ",";
                 }
                 else    // add the effect bypass
                 {
-                    s_buf += ITS(EFX_Bypass[effect]);
+                    s_buf += NTS(EFX_Bypass[effect]);
                 }
             }
 

@@ -733,7 +733,6 @@ public:
     int TapTempo();
     void TapTempo_Timeout(int state);
     void Update_tempo();
-    std::string ITS(int x);
 
     // class pointers
     class Tuner *efx_Tuner;
