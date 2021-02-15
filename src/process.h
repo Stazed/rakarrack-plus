@@ -1208,15 +1208,13 @@ public:
         int Efx_param_index;
         int MC_offset;
         double MC_range;
-        int MC_GUI_offset;
         
         MIDI_Control_Params():
             Description(),
             MC_params_index(),
             Effect_index(),
             Efx_param_index(),
-            MC_offset(),
-            MC_GUI_offset() {}
+            MC_offset() {}
     } mc_efx_params[C_MC_PARAMETER_SIZE];
 
 
