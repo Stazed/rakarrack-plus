@@ -375,16 +375,16 @@ RKR::MIDI_control()
         "Musical Delay Damp",       NTS(MC_Music_Damp).c_str(),             NTS(EFX_MUSICAL_DELAY).c_str(), NTS(Music_Damp).c_str(),             "0",     "1.0",
 
         "MuTroMojo Dry/Wet",        NTS(MC_MuTro_DryWet).c_str(),           NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_DryWet).c_str(),         "127",     "-1.0",
-        "MuTroMojo LP",             NTS(MC_MuTro_LowPass).c_str(),          NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_LowPass).c_str(),          "0",     "1.0",
-        "MuTroMojo BP",             NTS(MC_MuTro_BandPass).c_str(),         NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_BandPass).c_str(),         "0",     "1.0",
-        "MuTroMojo HP",             NTS(MC_MuTro_HighPass).c_str(),         NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_HighPass).c_str(),         "0",     "1.0",
+        "MuTroMojo LP",             NTS(MC_MuTro_LowPass).c_str(),          NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_LowPass).c_str(),        "-64",     "1.0",
+        "MuTroMojo BP",             NTS(MC_MuTro_BandPass).c_str(),         NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_BandPass).c_str(),       "-64",     "1.0",
+        "MuTroMojo HP",             NTS(MC_MuTro_HighPass).c_str(),         NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_HighPass).c_str(),       "-64",     "1.0",
         "MuTroMojo LFO Type",       NTS(MC_MuTro_LFO_Type).c_str(),         NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_LFO_Type).c_str(),         "0",     NTS(C_MC_11_RANGE).c_str(),
         "MuTroMojo Depth",          NTS(MC_MuTro_Depth).c_str(),            NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_Depth).c_str(),            "0",     "1.0",
         "MuTroMojo Tempo",          NTS(MC_MuTro_LFO_Tempo).c_str(),        NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_LFO_Tempo).c_str(),        "1",     NTS(C_MC_600_RANGE).c_str(),
         "MuTroMojo Res",            NTS(MC_MuTro_Resonance).c_str(),        NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_Resonance).c_str(),        "0",     "1.0",
         "MuTroMojo Range",          NTS(MC_MuTro_Range).c_str(),            NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_Range).c_str(),           "10",     NTS(C_MC_5990_RANGE).c_str(),
         "MuTroMojo Wah",            NTS(MC_MuTro_Wah).c_str(),              NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_Wah).c_str(),              "0",     "1.0",
-        "MuTroMojo E. Sens",        NTS(MC_MuTro_Env_Sens).c_str(),         NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_Env_Sens).c_str(),         "0",     "1.0",
+        "MuTroMojo E. Sens",        NTS(MC_MuTro_Env_Sens).c_str(),         NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_Env_Sens).c_str(),       "-64",     "1.0",
         "MuTroMojo Smooth",         NTS(MC_MuTro_Env_Smooth).c_str(),       NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_Env_Smooth).c_str(),       "0",     "1.0",
         "MuTroMojo Random",         NTS(MC_MuTro_LFO_Random).c_str(),       NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_LFO_Random).c_str(),       "0",     "1.0",
         "MuTroMojo Stereo Df",      NTS(MC_MuTro_LFO_Stereo).c_str(),       NTS(EFX_MUTROMOJO).c_str(),     NTS(MuTro_LFO_Stereo).c_str(),       "0",     "1.0",
@@ -1244,7 +1244,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Dere_Color:
         Rack_Effects[EFX_DERELICT]->changepar(Dere_Color, value);
         break;
-
+// Special
     case MC_Output_Volume:
         Master_Volume = (float) value / 127.0f;
         calculavol(2);
@@ -1257,7 +1257,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Dist_Suboctave:
         Rack_Effects[EFX_DISTORTION]->changepar(Dist_Suboctave, value);
         break;
-
+// Special
     case MC_Unused_10:
     case MC_Unused_11:
         break;
@@ -1280,7 +1280,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Unused_18:
     case MC_Unused_19:
         break;
-                        
+// Special           
     case MC_Alien_Depth:
         Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Depth, value);
         break;
@@ -1308,7 +1308,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Harm_Filter_Freq:
         Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Filter_Freq, ret_LPF(value));
         break;
-
+// Special
     case MC_Harm_Interval:
         if (EFX_Bypass[EFX_HARMONIZER])
         {
@@ -1333,7 +1333,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Harm_DryWet:
         Rack_Effects[EFX_HARMONIZER]->changepar(Harm_DryWet, Dry_Wet(value));
         break;
-
+// Special
     case MC_Unused_32:
     case MC_Unused_33:
     case MC_Unused_34:
@@ -1421,7 +1421,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Reverb_Pan:
         Rack_Effects[EFX_REVERB]->changepar(Reverb_Pan, value);
         break;
-
+// Special
     case MC_Unused_64:
         break;
 
@@ -1628,7 +1628,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Alien_Phase:
         Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Phase, value);
         break;
-
+// Special
     case MC_Multi_On_Off:
         ActiveUn(value);
         break;
@@ -1679,7 +1679,7 @@ RKR::process_midi_controller_events(int parameter, int value)
 
 // End MIDI Implementation Chart range
 // Start of MIDI learn extras
-
+// Special
     case MC_Unused_128:
     case MC_Unused_129:
         break;
@@ -2195,15 +2195,15 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_MuTro_LowPass:
-        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass, value - 64);  // SIXTYFOUR
         break;
 
     case MC_MuTro_BandPass:
-        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass, value - 64);  // SIXTYFOUR
         break;
 
     case MC_MuTro_HighPass:
-        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass, value - 64);  // SIXTYFOUR
         break;
 
     case MC_MuTro_Depth:
@@ -2227,7 +2227,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         break;
 
     case MC_MuTro_Env_Sens:
-        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens, value - 64);
+        Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens, value - 64);  // SIXTYFOUR
         break;
 
     case MC_MuTro_Env_Smooth:
@@ -2245,7 +2245,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Looper_Level_2:
         Rack_Effects[EFX_LOOPER]->changepar(Looper_Level_2, value);
         break;
-
+// Special
     case MC_Looper_Reverse:
     {
         int i = 0;
@@ -2316,6 +2316,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         Rack_Effects[EFX_LOOPER]->changepar(Looper_Clear, i);
         break;
     }
+// Special
     case MC_Convo_DryWet:
         Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_DryWet, Dry_Wet(value));
         break;
@@ -2623,7 +2624,7 @@ RKR::process_midi_controller_events(int parameter, int value)
     case MC_Echotron_LFO_Stereo:
         Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Stereo, value);
         break;
-
+// Special
     case MC_Echotron_Taps:
     {
         /* There is a minor problem with this approach. If the user sets the delay
