@@ -1214,7 +1214,8 @@ public:
             MC_params_index(),
             Effect_index(),
             Efx_param_index(),
-            MC_offset() {}
+            MC_offset(),
+            MC_range() {}
     } mc_efx_params[C_MC_PARAMETER_SIZE];
 
 
