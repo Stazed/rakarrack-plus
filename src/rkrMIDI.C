@@ -1262,23 +1262,6 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Multi_On_Off:
             ActiveUn(value);
             return;
-
-        case MC_Echotron_Taps:
-        {
-            /* There is a minor problem with this approach. If the user sets the delay
-               file after setting the taps, then the taps will not get adjusted upward. 
-               The user will have to move the MIDI control slider to set taps upward.
-               The downward limit is checked and limited always on file loading. */
-            int number_taps = 1 + (int) ((float) value * C_MC_126_RANGE);
-
-            Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-            if(number_taps > Efx_Echotron->get_file_length())
-            {
-                number_taps = Efx_Echotron->get_file_length();
-            }
-            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, number_taps);
-            return;
-        }
     }
 
     // Normal MIDI processing

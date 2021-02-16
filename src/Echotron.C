@@ -541,11 +541,8 @@ Echotron::loadfile(char* Filename)
 
     f.fLength = count;
     
-    /* Limit max taps to file length */
-    if (Plength > f.fLength)
-    {
-        Plength = f.fLength;
-    }
+    // Set Taps (Plength) to lessor of fLength or 127
+    Plength = f.fLength > 127 ? 127 : f.fLength;
 
 
 #ifdef LV2_SUPPORT
@@ -736,12 +733,26 @@ Echotron::setpreset(int npreset)
         Fpre->ReadPreset(EFX_ECHOTRON, npreset - NUM_PRESETS + 1, pdata, Filename);
         
         for (int n = 0; n < PRESET_SIZE; n++)
+        {
             changepar(n, pdata[n]);
+        }
+
+        // We have to reset the Taps because we limit it to get_file_length().
+        // But, it is set before the loaded file and would be limited by the 
+        // previous file. So, reset it again after the requested file is loaded.
+        changepar(Echotron_Taps, pdata[Echotron_Taps]);
     }
     else
     {
         for (int n = 0; n < PRESET_SIZE; n++)
+        {
             changepar(n, presets[npreset][n]);
+        }
+
+        // We have to reset the Taps because we limit it to get_file_length().
+        // But, it is set before the loaded file and would be limited by the 
+        // previous file. So, reset it again after the requested file is loaded.
+        changepar(Echotron_Taps, presets[npreset][Echotron_Taps]);
     }
     
     Ppreset = npreset;
@@ -765,10 +776,14 @@ Echotron::changepar(int npar, int value)
         initparams = 1;
         break;
     case Echotron_Taps:
-        Plength = value;
-        if (Plength > 127) Plength = 127;
+    {
+        // Limit Tap to file length and max of 127
+        int Taps = value > get_file_length() ? get_file_length() : value;
+        Taps = Taps > 127 ? 127 : Taps;
+        Plength = Taps;
         initparams = 1;
         break;
+    }
     case Echotron_User_File:
         Puser = value;
         break;
@@ -792,12 +807,14 @@ Echotron::changepar(int npar, int value)
         ilrcross = 1.0f - abs(lrcross);
         break;
     case Echotron_Set_File:
+    {
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called by changepar() upon initialization for lv2 and is ignored.
 #else
         if (!setfile(value)) global_error_number = 4;
 #endif
         break;
+    }
     case Echotron_LFO_Stereo:
         lfo->Pstereo = value;
         dlfo->Pstereo = value;

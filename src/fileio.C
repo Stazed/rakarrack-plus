@@ -622,6 +622,14 @@ RKR::set_audio_paramters()
             }
         }
         
+        // We have to reset the Echotron Taps because we limit it to get_file_length().
+        // But, it is set before the loaded file and would be limited by the 
+        // previous file. So, reset it again after the requested file is loaded.
+        if(j == EFX_ECHOTRON)
+        {
+            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[j][Echotron_Taps]);
+        }
+        
         if(j == EFX_STEREOHARM)
         {
             if (lv[EFX_STEREOHARM][Sharm_MIDI])
