@@ -262,7 +262,7 @@ RKR::MIDI_control()
         "Echotron Depth",           NTS(MC_Echotron_Depth).c_str(),         NTS(EFX_ECHOTRON).c_str(),      NTS(Echotron_Depth).c_str(),         "0",     NTS(C_MC_128_RANGE).c_str(),
         "Echotron Stereo Df",       NTS(MC_Echotron_LFO_Stereo).c_str(),    NTS(EFX_ECHOTRON).c_str(),      NTS(Echotron_LFO_Stereo).c_str(),    "0",     "1.0",
         "Echotron LFO Type",        NTS(MC_Echotron_LFO_Type).c_str(),      NTS(EFX_ECHOTRON).c_str(),      NTS(Echotron_LFO_Type).c_str(),      "0",     NTS(C_MC_11_RANGE).c_str(),
-        "Echotron #",               NTS(MC_Echotron_Taps).c_str(),          NTS(EFX_ECHOTRON).c_str(),      NTS(Echotron_Taps).c_str(),          "0",     "1.0",
+        "Echotron #",               NTS(MC_Echotron_Taps).c_str(),          NTS(EFX_ECHOTRON).c_str(),      NTS(Echotron_Taps).c_str(),          "1",     NTS(C_MC_126_RANGE).c_str(),
 
         "Echoverse Dry/Wet",        NTS(MC_Echoverse_DryWet).c_str(),       NTS(EFX_ECHOVERSE).c_str(),     NTS(Echoverse_DryWet).c_str(),     "127",     "-1.0",
         "Echoverse Reverse",        NTS(MC_Echoverse_Reverse).c_str(),      NTS(EFX_ECHOVERSE).c_str(),     NTS(Echoverse_Reverse).c_str(),      "0",     "1.0",
