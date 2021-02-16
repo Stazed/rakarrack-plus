@@ -1263,15 +1263,6 @@ RKR::process_midi_controller_events(int parameter, int value)
             ActiveUn(value);
             return;
 
-        case MC_Harm_Interval:
-            if (EFX_Bypass[EFX_HARMONIZER])
-            {
-                EFX_Bypass[EFX_HARMONIZER] = 0;
-                Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval, (int) ((float) value * C_MC_24_RANGE));
-                EFX_Bypass[EFX_HARMONIZER] = 1;
-            }
-            return;
-
         case MC_Echotron_Taps:
         {
             /* There is a minor problem with this approach. If the user sets the delay
