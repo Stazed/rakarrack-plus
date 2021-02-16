@@ -686,9 +686,6 @@ public:
     void disconectaaconnect ();
     void jack_process_midievents (jack_midi_event_t *midievent);
     void process_midi_controller_events(int parameter, int value);
-    int ret_Tempo(int value);
-    int ret_LPF(int value);
-    int ret_HPF(int value);
 
     // fileio.C
     void apply_effect_parameters (char *buf, int fx_index);
