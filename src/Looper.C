@@ -575,8 +575,12 @@ Looper::changepar(int npar, int value)
         initdelays();
         break;
     case Looper_Reverse:
-        Preverse = value; // Playback in reverse
+    {
+        int i = 0;
+        if (value) i = 1;
+        Preverse = i; // Playback in reverse
         break;
+    }
     case Looper_Level_1:
         Pfade1 = value;
         setfade();
@@ -625,18 +629,30 @@ Looper::changepar(int npar, int value)
         setfade();
         break;
     case Looper_AutoPlay:
-        Pautoplay = value;
+    {
+        int i = 0;
+        if (value) i = 1;
+        Pautoplay = i;
         break;
+    }
     case Looper_Level_2:
         Pfade2 = value;
         setfade();
         break;
     case Looper_Rec_1:  // Record 1
-        Prec1 = value;
+    {
+        int i = 0;
+        if (value) i = 1;
+        Prec1 = i;
         break;
+    }
     case Looper_Rec_2:  // Record 2
-        Prec2 = value;
+    {
+        int i = 0;
+        if (value) i = 1;
+        Prec2 = i;
         break;
+    }
     case Looper_Link:   // Link track 1 and track 2
         Plink = value;
         if (Plink)
