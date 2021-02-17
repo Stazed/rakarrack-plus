@@ -15,7 +15,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class CoilGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1675 72 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -44,15 +44,11 @@ rgui->findpos(EFX_COILCRAFTER,(int)o->value(),o);}
     user_data 12033
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12033))rkr->Rack_Effects[EFX_COILCRAFTER]->setpreset((int) o->value());
-coil_WD->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Gain));
-coil_tone->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Tone));
-coil_origin->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Origin));
-coil_destiny->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Destiny));
-coil_freq1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1));
-coil_q1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));
-coil_freq2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2));
-coil_q2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2));
-coil_mode->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_NeckMode));} selected
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_COILCRAFTER]; i++)
+{
+    parameter_refresh(i);
+};}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -193,5 +189,38 @@ rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Q_2,(int)o->value());}
     callback {rkr->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_NeckMode,(int)o->value());}
     xywh {13 161 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Coil_Gain:
+        coil_WD->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Gain));
+        break;
+    case Coil_Origin:
+        coil_origin->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Origin));
+        break;
+    case Coil_Destiny:
+        coil_destiny->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Destiny));
+        break;
+    case Coil_Freq_1:
+        coil_freq1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1));
+        break;
+    case Coil_Q_1:
+        coil_q1->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));
+        break;
+    case Coil_Freq_2:
+        coil_freq2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_2));
+        break;
+    case Coil_Q_2:
+        coil_q2->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2));
+        break;
+    case Coil_Tone:
+        coil_tone->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Tone));
+        break;
+    case Coil_NeckMode:
+        coil_mode->value(rkr->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_NeckMode));
+        break;
+    }} {}
   }
 }
