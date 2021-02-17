@@ -88,5 +88,7 @@ public:
 private:
   inline void cb_cband_cross3_i(RKR_Slider*, void*);
   static void cb_cband_cross3(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif

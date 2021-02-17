@@ -12,7 +12,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class CbandGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -41,19 +41,11 @@ rgui->findpos(EFX_COMPBAND,(int)o->value(),o);}
     user_data 12043
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12043))rkr->Rack_Effects[EFX_COMPBAND]->setpreset((int)o->value());
-cband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet)));
-cband_Lratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio));
-cband_MLratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio));
-cband_MHratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio));
-cband_Hratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio));
-cband_Lthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh));
-cband_MLthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh));
-cband_MHthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh));
-cband_Hthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh));
-cband_cross1->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1));
-cband_cross2->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2));
-cband_cross3->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3));
-cband_gain->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain));} selected
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPBAND]; i++)
+{
+    parameter_refresh(i);
+};}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -213,5 +205,50 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_2,(int)o->value());}
 rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_3,(int)o->value());}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
     class RKR_Slider
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case CompBand_DryWet:
+        cband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet)));
+        break;
+    case CompBand_Low_Ratio:
+        cband_Lratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio));
+        break;
+    case CompBand_Mid_1_Ratio:
+        cband_MLratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio));
+        break;
+    case CompBand_Mid_2_Ratio:
+        cband_MHratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio));
+        break;
+    case CompBand_High_Ratio:
+        cband_Hratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio));
+        break;
+    case CompBand_Low_Thresh:
+        cband_Lthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh));
+        break;
+    case CompBand_Mid_1_Thresh:
+        cband_MLthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh));
+        break;
+    case CompBand_Mid_2_Thresh:
+        cband_MHthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh));
+        break;
+    case CompBand_High_Thresh:
+        cband_Hthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh));
+        break;
+    case CompBand_Cross_1:
+        cband_cross1->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1));
+        break;
+    case CompBand_Cross_2:
+        cband_cross2->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2));
+        break;
+    case CompBand_Cross_3:
+        cband_cross3->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3));
+        break;
+    case CompBand_Gain:
+        cband_gain->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain));
+        break;
+    }} {}
   }
 }

@@ -21,19 +21,11 @@ void CbandGui::cb_cband_activar(RKR_Light_Button* o, void* v) {
 void CbandGui::cb_cband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12043))rkr->Rack_Effects[EFX_COMPBAND]->setpreset((int)o->value());
-cband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet)));
-cband_Lratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio));
-cband_MLratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio));
-cband_MHratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio));
-cband_Hratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio));
-cband_Lthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh));
-cband_MLthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh));
-cband_MHthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh));
-cband_Hthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh));
-cband_cross1->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1));
-cband_cross2->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2));
-cband_cross3->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3));
-cband_gain->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPBAND]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void CbandGui::cb_cband_preset(RKR_Choice* o, void* v) {
   ((CbandGui*)(o->parent()))->cb_cband_preset_i(o,v);
@@ -469,4 +461,49 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* cband_cross3
 position(X, Y);
 end();
+}
+
+void CbandGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case CompBand_DryWet:
+          cband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet)));
+          break;
+      case CompBand_Low_Ratio:
+          cband_Lratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio));
+          break;
+      case CompBand_Mid_1_Ratio:
+          cband_MLratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio));
+          break;
+      case CompBand_Mid_2_Ratio:
+          cband_MHratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio));
+          break;
+      case CompBand_High_Ratio:
+          cband_Hratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio));
+          break;
+      case CompBand_Low_Thresh:
+          cband_Lthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh));
+          break;
+      case CompBand_Mid_1_Thresh:
+          cband_MLthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh));
+          break;
+      case CompBand_Mid_2_Thresh:
+          cband_MHthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh));
+          break;
+      case CompBand_High_Thresh:
+          cband_Hthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh));
+          break;
+      case CompBand_Cross_1:
+          cband_cross1->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1));
+          break;
+      case CompBand_Cross_2:
+          cband_cross2->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2));
+          break;
+      case CompBand_Cross_3:
+          cband_cross3->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3));
+          break;
+      case CompBand_Gain:
+          cband_gain->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain));
+          break;
+      }
 }
