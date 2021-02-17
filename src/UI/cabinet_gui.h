@@ -28,5 +28,7 @@ public:
 private:
   inline void cb_Cabinet_output_i(RKR_Slider*, void*);
   static void cb_Cabinet_output(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif

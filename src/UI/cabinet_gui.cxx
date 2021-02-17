@@ -113,3 +113,16 @@ this->when(FL_WHEN_RELEASE);
 position(X, Y);
 end();
 }
+
+void CabinetGui::parameter_refresh(int index) {
+  switch(index)
+      {
+      case Cabinet_Gain:          // 1
+          Cabinet_output->value(rkr->lv[EFX_CABINET][Cabinet_Gain] - 64);
+          break;
+  
+      case Cabinet_Preset_Idx:    // 0
+          Cabinet_preset->value(rkr->lv[EFX_CABINET][Cabinet_Preset_Idx]);
+          break;
+      }
+}
