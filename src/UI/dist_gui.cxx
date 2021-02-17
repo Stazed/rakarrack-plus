@@ -21,18 +21,11 @@ void DistGui::cb_dist_activar(RKR_Light_Button* o, void* v) {
 void DistGui::cb_dist_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12002)) rkr->Rack_Effects[EFX_DISTORTION]->setpreset((int)(o->value()));
-dist_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_DryWet)));
-dist_pan->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Pan)-64);
-dist_LRc->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LR_Cross));
-dist_drive->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Drive));
-dist_level->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Level));
-dist_tipo->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Type));
-dist_neg->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Negate));
-dist_lpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LPF));
-dist_hpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_HPF));
-dist_st->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Stereo));
-dist_pf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Prefilter));
-dist_oct->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Suboctave));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_DISTORTION]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void DistGui::cb_dist_preset(RKR_Choice* o, void* v) {
   ((DistGui*)(o->parent()))->cb_dist_preset_i(o,v);
@@ -408,4 +401,48 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* dist_hpf
 position(X, Y);
 end();
+}
+
+void DistGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Dist_DryWet:
+          dist_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_DryWet)));
+          break;
+      case Dist_Pan:
+          dist_pan->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Pan)-64);
+          break;
+      case Dist_LR_Cross:
+          dist_LRc->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LR_Cross));
+          break;
+      case Dist_Drive:
+          dist_drive->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Drive));
+          break;
+      case Dist_Level:
+          dist_level->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Level));
+          break;
+      case Dist_Type:
+          dist_tipo->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Type));
+          break;
+      case Dist_Negate:
+          dist_neg->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Negate));
+          break;
+      case Dist_LPF:
+          dist_lpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_LPF));
+          break;
+      case Dist_HPF:
+          dist_hpf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_HPF));
+          break;
+      case Dist_Stereo:
+          dist_st->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Stereo));
+          break;
+      case Dist_Prefilter:
+          dist_pf->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Prefilter));
+          break;
+      case Dist_SKIP_11:
+          break;
+      case Dist_Suboctave:
+          dist_oct->value(rkr->Rack_Effects[EFX_DISTORTION]->getpar(Dist_Suboctave));
+          break;
+      }
 }

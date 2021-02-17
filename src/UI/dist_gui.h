@@ -86,5 +86,7 @@ private:
   inline void cb_dist_hpf_i(RKR_Slider*, void*);
   static void cb_dist_hpf(RKR_Slider*, void*);
   CommonGuiMenu *m_dist_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif
