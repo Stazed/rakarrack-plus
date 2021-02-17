@@ -21,21 +21,11 @@ void DflangeGui::cb_dflange_activar(RKR_Light_Button* o, void* v) {
 void DflangeGui::cb_dflange_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12020))rkr->Rack_Effects[EFX_DUAL_FLANGE]->setpreset((int)o->value());
-dflange_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_DryWet)));
-dflange_pan->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Pan));
-dflange_freq->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));
-dflange_rnd->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Random));
-dflange_lfotype->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Type));
-dflange_stdf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Stereo));
-dflange_width->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Width));
-dflange_depth->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Depth));
-dflange_fb->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Feedback));
-dflange_LR->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LR_Cross));
-dflange_subs->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Subtract));
-dflange_tz->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Zero));
-dflange_offset->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Offset));
-dflange_lpf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LPF));
-dflange_intense->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Intense));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_DUAL_FLANGE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void DflangeGui::cb_dflange_preset(RKR_Choice* o, void* v) {
   ((DflangeGui*)(o->parent()))->cb_dflange_preset_i(o,v);
@@ -502,4 +492,55 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* dflange_rnd
 position(X, Y);
 end();
+}
+
+void DflangeGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case DFlange_DryWet:
+          dflange_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_DryWet)));
+          break;
+      case DFlange_Pan:
+          dflange_pan->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Pan));
+          break;
+      case DFlange_LR_Cross:
+          dflange_LR->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LR_Cross));
+          break;
+      case DFlange_Depth:
+          dflange_depth->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Depth));
+          break;
+      case DFlange_Width:
+          dflange_width->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Width));
+          break;
+      case DFlange_Offset:
+          dflange_offset->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Offset));
+          break;
+      case DFlange_Feedback:
+          dflange_fb->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Feedback));
+          break;
+      case DFlange_LPF:
+          dflange_lpf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LPF));
+          break;
+      case DFlange_Subtract:
+          dflange_subs->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Subtract));
+          break;
+      case DFlange_Zero:
+          dflange_tz->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Zero));
+          break;
+      case DFlange_LFO_Tempo:
+          dflange_freq->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));
+          break;
+      case DFlange_LFO_Stereo:
+          dflange_stdf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Stereo));
+          break;
+      case DFlange_LFO_Type:
+          dflange_lfotype->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Type));
+          break;
+      case DFlange_LFO_Random:
+          dflange_rnd->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Random));
+          break;
+      case DFlange_Intense:
+          dflange_intense->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Intense));
+          break;
+      }
 }

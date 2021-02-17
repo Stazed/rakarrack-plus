@@ -101,5 +101,7 @@ private:
   inline void cb_dflange_rnd_i(RKR_Slider*, void*);
   static void cb_dflange_rnd(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif
