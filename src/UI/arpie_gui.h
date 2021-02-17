@@ -82,5 +82,7 @@ private:
   static void cb_arpie_pattern(RKR_Choice*, void*);
   static Fl_Menu_Item menu_arpie_pattern[];
   CommonGuiMenu *m_subdiv_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

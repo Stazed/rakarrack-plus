@@ -21,17 +21,11 @@ void ArpieGui::cb_arpie_activar(RKR_Light_Button* o, void* v) {
 void ArpieGui::cb_arpie_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12024))rkr->Rack_Effects[EFX_ARPIE]->setpreset((int) o->value());
-arpie_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_DryWet)));
-arpie_pan->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pan)-64);
-arpie_delay->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Tempo));
-arpie_LRdl->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Delay));
-arpie_LRc->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Cross));
-arpie_fb->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Feedback));
-arpie_damp->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Damp));
-arpie_arpe->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_ArpeWD));
-arpie_harm->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Harm));
-arpie_pattern->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pattern));
-arpie_subdiv->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Subdivision));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_ARPIE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void ArpieGui::cb_arpie_preset(RKR_Choice* o, void* v) {
   ((ArpieGui*)(o->parent()))->cb_arpie_preset_i(o,v);
@@ -405,4 +399,43 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* arpie_pattern
 position(X, Y);
 end();
+}
+
+void ArpieGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Arpie_DryWet:
+          arpie_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_DryWet)));
+          break;
+      case Arpie_Pan:
+          arpie_pan->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pan)-64);
+          break;
+      case Arpie_Tempo:
+          arpie_delay->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Tempo));
+          break;
+      case Arpie_LR_Delay:
+          arpie_LRdl->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Delay));
+          break;
+      case Arpie_LR_Cross:
+          arpie_LRc->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_LR_Cross));
+          break;
+      case Arpie_Feedback:
+          arpie_fb->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Feedback));
+          break;
+      case Arpie_Damp:
+          arpie_damp->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Damp));
+          break;
+      case Arpie_ArpeWD:
+          arpie_arpe->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_ArpeWD));
+          break;
+      case Arpie_Harm:
+          arpie_harm->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Harm));
+          break;
+      case Arpie_Pattern:
+          arpie_pattern->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Pattern));
+          break;
+      case Arpie_Subdivision:
+          arpie_subdiv->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Subdivision));
+          break;
+      }
 }
