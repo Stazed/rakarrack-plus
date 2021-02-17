@@ -101,5 +101,7 @@ private:
   inline void cb_distband_neg_i(RKR_Check_Button*, void*);
   static void cb_distband_neg(RKR_Check_Button*, void*);
   CommonGuiMenu *m_dist_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

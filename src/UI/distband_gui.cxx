@@ -21,21 +21,11 @@ void DistBandGui::cb_distband_activar(RKR_Light_Button* o, void* v) {
 void DistBandGui::cb_distband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12023))rkr->Rack_Effects[EFX_DISTBAND]->setpreset((int)o->value());
-distband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_DryWet)));
-distband_LRc->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_LR_Cross));
-distband_drive->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Drive));
-distband_level->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Level));
-distband_tipoL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Low));
-distband_tipoM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Mid));
-distband_tipoH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Hi));
-distband_volL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Low));
-distband_volM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Mid));
-distband_volH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Hi));
-distband_neg->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Negate));
-distband_st->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Stereo));
-distband_pan->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Pan)-64);
-distband_cross1->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_1));
-distband_cross2->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_2));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_DISTBAND]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void DistBandGui::cb_distband_preset(RKR_Choice* o, void* v) {
   ((DistBandGui*)(o->parent()))->cb_distband_preset_i(o,v);
@@ -513,4 +503,55 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* distband_neg
 position(X, Y);
 end();
+}
+
+void DistBandGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case DistBand_DryWet:
+          distband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_DryWet)));
+          break;
+      case DistBand_Pan:
+          distband_pan->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Pan)-64);
+          break;
+      case DistBand_LR_Cross:
+          distband_LRc->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_LR_Cross));
+          break;
+      case DistBand_Drive:
+          distband_drive->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Drive));
+          break;
+      case DistBand_Level:
+          distband_level->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Level));
+          break;
+      case DistBand_Type_Low:
+          distband_tipoL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Low));
+          break;
+      case DistBand_Type_Mid:
+          distband_tipoM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Mid));
+          break;
+      case DistBand_Type_Hi:
+          distband_tipoH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Type_Hi));
+          break;
+      case DistBand_Gain_Low:
+          distband_volL->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Low));
+          break;
+      case DistBand_Gain_Mid:
+          distband_volM->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Mid));
+          break;
+      case DistBand_Gain_Hi:
+          distband_volH->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Gain_Hi));
+          break;
+      case DistBand_Negate:
+          distband_neg->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Negate));
+          break;
+      case DistBand_Cross_1:
+          distband_cross1->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_1));
+          break;
+      case DistBand_Cross_2:
+          distband_cross2->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Cross_2));
+          break;
+      case DistBand_Stereo:
+          distband_st->value(rkr->Rack_Effects[EFX_DISTBAND]->getpar(DistBand_Stereo));
+          break;
+      }
 }
