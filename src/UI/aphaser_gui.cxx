@@ -21,19 +21,11 @@ void AphaserGui::cb_aphaser_activar(RKR_Light_Button* o, void* v) {
 void AphaserGui::cb_aphaser_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12018))rkr->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
-aphaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
-aphaser_distort->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
-aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
-aphaser_rnd->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
-aphaser_lfotype->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
-aphaser_stdf->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
-aphaser_width->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
-aphaser_stages->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages));
-aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-64);
-aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
-aphaser_subs->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
-aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
-aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void AphaserGui::cb_aphaser_preset(RKR_Choice* o, void* v) {
   ((AphaserGui*)(o->parent()))->cb_aphaser_preset_i(o,v);
@@ -444,4 +436,49 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* aphaser_hyper
 position(X, Y);
 end();
+}
+
+void AphaserGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case APhase_DryWet:
+          aphaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
+          break;
+      case APhase_Distortion:
+          aphaser_distort->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
+          break;
+      case APhase_LFO_Tempo:
+          aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
+          break;
+      case APhase_LFO_Random:
+          aphaser_rnd->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
+          break;
+      case APhase_LFO_Type:
+          aphaser_lfotype->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
+          break;
+      case APhase_LFO_Stereo:
+          aphaser_stdf->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
+          break;
+      case APhase_Width:
+          aphaser_width->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
+          break;
+      case APhase_Feedback:
+          aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-64);
+          break;
+      case APhase_Stages:
+          aphaser_stages->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages));
+          break;
+      case APhase_Mismatch:
+          aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
+          break;
+      case APhase_Subtract:
+          aphaser_subs->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
+          break;
+      case APhase_Depth:
+          aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
+          break;
+      case APhase_Hyper:
+          aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));
+          break;
+      }
 }

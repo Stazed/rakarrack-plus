@@ -48,19 +48,11 @@ rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);}
     user_data 12018
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12018))rkr->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
-aphaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
-aphaser_distort->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
-aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
-aphaser_rnd->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
-aphaser_lfotype->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
-aphaser_stdf->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
-aphaser_width->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
-aphaser_stages->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages));
-aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-64);
-aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
-aphaser_subs->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
-aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
-aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));} selected
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
+{
+    parameter_refresh(i);
+};} selected
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -224,5 +216,50 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value(
     class RKR_Check_Button
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+  Function {parameter_refresh(int index)} {open return_type void
+  } {
+    code {switch (index)
+    {
+    case APhase_DryWet:
+        aphaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
+        break;
+    case APhase_Distortion:
+        aphaser_distort->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
+        break;
+    case APhase_LFO_Tempo:
+        aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
+        break;
+    case APhase_LFO_Random:
+        aphaser_rnd->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
+        break;
+    case APhase_LFO_Type:
+        aphaser_lfotype->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
+        break;
+    case APhase_LFO_Stereo:
+        aphaser_stdf->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
+        break;
+    case APhase_Width:
+        aphaser_width->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
+        break;
+    case APhase_Feedback:
+        aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-64);
+        break;
+    case APhase_Stages:
+        aphaser_stages->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages));
+        break;
+    case APhase_Mismatch:
+        aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
+        break;
+    case APhase_Subtract:
+        aphaser_subs->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
+        break;
+    case APhase_Depth:
+        aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
+        break;
+    case APhase_Hyper:
+        aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));
+        break;
+    }} {}
   }
 }
