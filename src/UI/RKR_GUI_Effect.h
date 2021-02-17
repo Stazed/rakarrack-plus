@@ -33,6 +33,8 @@ class RKR_Gui_Effect : public Fl_Group
 {
 public:
     RKR_Gui_Effect(int X, int Y, int W, int H, const char *L);
+    
+    virtual void parameter_refresh(int) {}; // FIXME make pure when done
 
     RKR_Light_Button *activate_effect;
     RKR_Choice *preset_choice;
