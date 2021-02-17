@@ -21,16 +21,11 @@ void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
 void ConvoGui::cb_convo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12029))rkr->Rack_Effects[EFX_CONVOLOTRON]->setpreset((int) o->value());
-convo_pan->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan)-64);
-convo_level->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level));
-convo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet)));
-convo_damp->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp));
-convo_fnum->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Set_File));
-convo_length->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length));
-convo_user->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File));
-convo_user->do_callback();
-convo_safe->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Safe));
-convo_fb->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_CONVOLOTRON]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void ConvoGui::cb_convo_preset(RKR_Choice* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_preset_i(o,v);
@@ -368,4 +363,42 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* convo_fnum
 position(X, Y);
 end();
+}
+
+void ConvoGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Convo_DryWet:
+          convo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet)));
+          break;
+      case Convo_Pan:
+          convo_pan->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan)-64);
+          break;
+      case Convo_Safe:
+          convo_safe->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Safe));
+          break;
+      case Convo_Length:
+          convo_length->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length));
+          break;
+      case Convo_User_File:
+          convo_user->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File));
+          convo_user->do_callback();
+          break;
+      case Convo_SKIP_5:
+          break;
+      case Convo_Damp:
+          convo_damp->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp));
+          break;
+      case Convo_Level:
+          convo_level->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level));
+          break;
+      case Convo_Set_File:
+          convo_fnum->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Set_File));
+          break;
+      case Convo_SKIP_9:
+          break;
+      case Convo_Feedback:
+          convo_fb->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback));
+          break;
+      }
 }

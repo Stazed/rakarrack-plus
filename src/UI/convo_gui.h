@@ -75,5 +75,7 @@ private:
   inline void cb_convo_fnum_i(RKR_Choice*, void*);
   static void cb_convo_fnum(RKR_Choice*, void*);
   static Fl_Menu_Item menu_convo_fnum[];
+public:
+  void parameter_refresh(int index);
 };
 #endif
