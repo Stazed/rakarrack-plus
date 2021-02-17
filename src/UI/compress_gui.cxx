@@ -20,15 +20,11 @@ void CompressGui::cb_compress_activar(RKR_Light_Button* o, void* v) {
 void CompressGui::cb_compress_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12001))rkr->Rack_Effects[EFX_COMPRESSOR]->setpreset((int) o->value());
-compress_threshold->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold));
-compress_Ratio->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio));
-compress_output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output));
-compress_ATime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack));
-compress_RTime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release));
-Auto_Output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out));
-compress_Knee->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee));
-Stereo->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo));
-Peak->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPRESSOR]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void CompressGui::cb_compress_preset(RKR_Choice* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_preset_i(o,v);
@@ -327,4 +323,37 @@ R average.");
 } // RKR_Check_Button* Peak
 position(X, Y);
 end();
+}
+
+void CompressGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Compress_Threshold:
+          compress_threshold->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold));
+          break;
+      case Compress_Ratio:
+          compress_Ratio->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio));
+          break;
+      case Compress_Output:
+          compress_output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output));
+          break;
+      case Compress_Attack:
+          compress_ATime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack));
+          break;
+      case Compress_Release:
+          compress_RTime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release));
+          break;
+      case Compress_Auto_Out:
+          Auto_Output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out));
+          break;
+      case Compress_Knee:
+          compress_Knee->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee));
+          break;
+      case Compress_Stereo:
+          Stereo->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo));
+          break;
+      case Compress_Peak:
+          Peak->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak));
+          break;
+      }
 }

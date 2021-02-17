@@ -69,5 +69,7 @@ public:
 private:
   inline void cb_Peak_i(RKR_Check_Button*, void*);
   static void cb_Peak(RKR_Check_Button*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif
