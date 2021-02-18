@@ -21,24 +21,11 @@ void InfinityGui::cb_infinity_activar(RKR_Light_Button* o, void* v) {
 void InfinityGui::cb_infinity_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12046))rkr->Rack_Effects[EFX_INFINITY]->setpreset((int) o->value());
-infinity_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_DryWet)));
-infinity_Q->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Resonance));
-infinity_1->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_1));
-infinity_2->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_2));
-infinity_3->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_3));
-infinity_4->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_4));
-infinity_5->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_5));
-infinity_6->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_6));
-infinity_7->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_7));
-infinity_8->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_8));
-infinity_start->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Start));
-infinity_end->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_End));
-infinity_rate->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
-infinity_stdf->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_LR_Delay));
-infinity_subdiv->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Subdivision));
-infinity_pan->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_AutoPan));
-infinity_rev->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Reverse));
-infinity_stages->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Stages));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_INFINITY]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void InfinityGui::cb_infinity_preset(RKR_Choice* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_preset_i(o,v);
@@ -612,4 +599,64 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* infinity_subdiv
 position(X, Y);
 end();
+}
+
+void InfinityGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Infinity_DryWet:
+          infinity_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_DryWet)));
+          break;
+      case Infinity_Band_1:
+          infinity_1->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_1));
+          break;
+      case Infinity_Band_2:
+          infinity_2->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_2));
+          break;
+      case Infinity_Band_3:
+          infinity_3->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_3));
+          break;
+      case Infinity_Band_4:
+          infinity_4->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_4));
+          break;
+      case Infinity_Band_5:
+          infinity_5->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_5));
+          break;
+      case Infinity_Band_6:
+          infinity_6->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_6));
+          break;
+      case Infinity_Band_7:
+          infinity_7->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_7));
+          break;
+      case Infinity_Band_8:
+          infinity_8->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_8));
+          break;
+      case Infinity_Resonance:
+          infinity_Q->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Resonance));
+          break;
+      case Infinity_Start:
+          infinity_start->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Start));
+          break;
+      case Infinity_End:
+          infinity_end->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_End));
+          break;
+      case Infinity_Tempo:
+          infinity_rate->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
+          break;
+      case Infinity_LR_Delay:
+          infinity_stdf->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_LR_Delay));
+          break;
+      case Infinity_Subdivision:
+          infinity_subdiv->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Subdivision));
+          break;
+      case Infinity_AutoPan:
+          infinity_pan->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_AutoPan));
+          break;
+      case Infinity_Reverse:
+          infinity_rev->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Reverse));
+          break;
+      case Infinity_Stages:
+          infinity_stages->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Stages));
+          break;
+      }
 }

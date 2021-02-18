@@ -116,5 +116,7 @@ public:
 private:
   inline void cb_infinity_subdiv_i(RKR_Slider*, void*);
   static void cb_infinity_subdiv(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif
