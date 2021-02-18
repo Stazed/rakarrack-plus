@@ -80,5 +80,7 @@ public:
 private:
   inline void cb_har_type_i(RKR_Slider*, void*);
   static void cb_har_type(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif

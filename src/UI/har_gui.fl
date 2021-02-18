@@ -15,7 +15,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class HarGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1691 85 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -46,20 +46,14 @@ rgui->findpos(EFX_HARMONIZER,(int)o->value(),o);}
     user_data 12014
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12014))rkr->Rack_Effects[EFX_HARMONIZER]->setpreset((int)o->value());
-har_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_DryWet)));
-har_pan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Pan)-64);
-har_gan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Gain)-64);
-har_int->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval)-12);
-har_SELECT->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select));
-har_note->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note));
-har_type->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord));
-har_freq1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq));
-har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain)-64);
-har_q1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q)-64);
-har_MIDI->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_HARMONIZER]; i++)
+{
+    parameter_refresh(i);
+};
 
 Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (rkr->Rack_Effects[EFX_HARMONIZER]);
-if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT)) rgui->Chord(0);} selected
+if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT)) rgui->Chord(0);}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -208,5 +202,44 @@ rkr->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Chord,(unsigned char)o->value(
 rgui->Chord(0);}
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 33 step 1 textcolor 7
     class RKR_Slider
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Harm_DryWet:
+        har_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_DryWet)));
+        break;
+    case Harm_Pan:
+        har_pan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Pan)-64);
+        break;
+    case Harm_Gain:
+        har_gan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Gain)-64);
+        break;
+    case Harm_Interval:
+        har_int->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval)-12);
+        break;
+    case Harm_Filter_Freq:
+        har_freq1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq));
+        break;
+    case Harm_Select:
+        har_SELECT->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select));
+        break;
+    case Harm_Note:
+        har_note->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note));
+        break;
+    case Harm_Chord:
+        har_type->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord));
+        break;
+    case Harm_Filter_Gain:
+        har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain)-64);
+        break;
+    case Harm_Filter_Q:
+        har_q1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q)-64);
+        break;
+    case Harm_MIDI:
+        har_MIDI->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI));
+        break;
+    }} {}
   }
 }

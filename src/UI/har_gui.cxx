@@ -23,17 +23,11 @@ void HarGui::cb_har_activar(RKR_Light_Button* o, void* v) {
 void HarGui::cb_har_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12014))rkr->Rack_Effects[EFX_HARMONIZER]->setpreset((int)o->value());
-har_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_DryWet)));
-har_pan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Pan)-64);
-har_gan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Gain)-64);
-har_int->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval)-12);
-har_SELECT->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select));
-har_note->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note));
-har_type->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord));
-har_freq1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq));
-har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain)-64);
-har_q1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q)-64);
-har_MIDI->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_HARMONIZER]; i++)
+{
+    parameter_refresh(i);
+};
 
 Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (rkr->Rack_Effects[EFX_HARMONIZER]);
 if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT)) rgui->Chord(0);
@@ -419,4 +413,43 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* har_type
 position(X, Y);
 end();
+}
+
+void HarGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Harm_DryWet:
+          har_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_DryWet)));
+          break;
+      case Harm_Pan:
+          har_pan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Pan)-64);
+          break;
+      case Harm_Gain:
+          har_gan->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Gain)-64);
+          break;
+      case Harm_Interval:
+          har_int->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval)-12);
+          break;
+      case Harm_Filter_Freq:
+          har_freq1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Freq));
+          break;
+      case Harm_Select:
+          har_SELECT->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Select));
+          break;
+      case Harm_Note:
+          har_note->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note));
+          break;
+      case Harm_Chord:
+          har_type->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord));
+          break;
+      case Harm_Filter_Gain:
+          har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain)-64);
+          break;
+      case Harm_Filter_Q:
+          har_q1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Q)-64);
+          break;
+      case Harm_MIDI:
+          har_MIDI->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_MIDI));
+          break;
+      }
 }
