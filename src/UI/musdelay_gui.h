@@ -90,5 +90,7 @@ public:
 private:
   inline void cb_musdelay_damp_i(RKR_Slider*, void*);
   static void cb_musdelay_damp(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif
