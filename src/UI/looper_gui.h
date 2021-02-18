@@ -122,5 +122,7 @@ public:
 private:
   CommonGuiMenu *m_looper_bar; 
   CommonGuiMenu *m_looper_ms; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

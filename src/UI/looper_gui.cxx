@@ -622,3 +622,64 @@ this->when(FL_WHEN_RELEASE);
 position(X, Y);
 end();
 }
+
+void LooperGui::parameter_refresh(int index) {
+  switch(index)
+      {
+      case Looper_DryWet:
+          looper_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_DryWet)));
+          break;
+      case Looper_Level_1:
+          looper_level1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_1));
+          break;
+      case Looper_Level_2:
+          looper_level2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Level_2));
+          break;
+      case Looper_Reverse:
+          looper_rv->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Reverse));
+          break;
+      case Looper_AutoPlay:
+          looper_ap->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_AutoPlay));
+          break;
+      case Looper_Play:
+          looper_play->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Play));
+          rgui->update_looper();
+          break;
+      case Looper_Stop:
+          looper_stop->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Stop));
+          rgui->update_looper();
+          break;
+      case Looper_Record:
+          looper_record->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Record));
+          rgui->update_looper();
+          break;
+      case Looper_Rec_1:
+          looper_r1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_1));
+          break;
+      case Looper_Rec_2:
+          looper_r2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Rec_2));
+          break;
+      case Looper_Track_1:
+          looper_t1->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_1));
+          rgui->update_looper();
+          break;
+      case Looper_Track_2:
+          looper_t2->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Track_2));
+          rgui->update_looper();
+          break;
+      case Looper_Clear:
+          /* Setting the looper_clear button after MIDI control really does not work. 
+             The button for the gui is just press and release, i.e. not a toggle button.
+             Since the clear flag Pclear is set and remains set until another button such
+             as play or record gets pushed, the Pclear variable returned by getpar(4) is
+             going to show pressed (value = 1) and set the button as pressed here. And it
+             will remain in that state until restart. If pressed manually, it just does
+             unpress and release back to press.  Would be nice to show the press and release
+             with MIDI control, but it would probably have to be a timer issue and additional
+             complications for very little value. MIDI control does work, but we should not show
+             it on the gui button here with this method */
+      //    looper_clear->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Clear));
+          rgui->update_looper();
+          break;
+      }
+}
