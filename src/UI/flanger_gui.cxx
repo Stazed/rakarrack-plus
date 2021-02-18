@@ -21,18 +21,11 @@ void FlangerGui::cb_flanger_activar(RKR_Light_Button* o, void* v) {
 void FlangerGui::cb_flanger_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12007))rkr->Rack_Effects[EFX_FLANGER]->setpreset((int)(o->value()));
-flanger_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_DryWet)));
-flanger_pan->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Pan)-64);
-flanger_freq->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Tempo));
-flanger_rnd->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Random));
-flanger_lfotype->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Type));
-flanger_stdf->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Stereo));
-flanger_dpth->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Depth));
-flanger_delay->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Delay));
-flanger_fb->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Feedback));
-flanger_LR->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LR_Cross));
-flanger_subs->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Subtract));
-flanger_awesome->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Intense));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_FLANGER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void FlangerGui::cb_flanger_preset(RKR_Choice* o, void* v) {
   ((FlangerGui*)(o->parent()))->cb_flanger_preset_i(o,v);
@@ -414,4 +407,48 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* flanger_LR
 position(X, Y);
 end();
+}
+
+void FlangerGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Flanger_DryWet:
+          flanger_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_DryWet)));
+          break;
+      case Flanger_Pan:
+          flanger_pan->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Pan)-64);
+          break;
+      case Flanger_LFO_Tempo:
+          flanger_freq->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Tempo));
+          break;
+      case Flanger_LFO_Random:
+          flanger_rnd->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Random));
+          break;
+      case Flanger_LFO_Type:
+          flanger_lfotype->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Type));
+          break;
+      case Flanger_LFO_Stereo:
+          flanger_stdf->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Stereo));
+          break;
+      case Flanger_Depth:
+          flanger_dpth->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Depth));
+          break;
+      case Flanger_Delay:
+          flanger_delay->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Delay));
+          break;
+      case Flanger_Feedback:
+          flanger_fb->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Feedback));
+          break;
+      case Flanger_LR_Cross:
+          flanger_LR->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LR_Cross));
+          break;
+      case Flanger_SKIP_Flange_10:
+          break;
+      case Flanger_Subtract:
+          flanger_subs->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Subtract));
+          break;
+      case Flanger_Intense:
+          flanger_awesome->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_Intense));
+          break;
+      }
 }
