@@ -21,15 +21,11 @@ void EchoGui::cb_echo_activar(RKR_Light_Button* o, void* v) {
 void EchoGui::cb_echo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12004))rkr->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
-echo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet)));
-echo_pan->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Pan)-64);
-echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
-echo_LRdl->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay));
-echo_LRc->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross));
-echo_fb->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback));
-echo_damp->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Damp));
-echo_RV->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse));
-echo_direct->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Direct));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_ECHO]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void EchoGui::cb_echo_preset(RKR_Choice* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_preset_i(o,v);
@@ -339,4 +335,37 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* echo_damp
 position(X, Y);
 end();
+}
+
+void EchoGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Echo_DryWet:
+          echo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet)));
+          break;
+      case Echo_Pan:
+          echo_pan->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Pan)-64);
+          break;
+      case Echo_Delay:
+          echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
+          break;
+      case Echo_LR_Delay:
+          echo_LRdl->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay));
+          break;
+      case Echo_LR_Cross:
+          echo_LRc->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross));
+          break;
+      case Echo_Feedback:
+          echo_fb->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback));
+          break;
+      case Echo_Damp:
+          echo_damp->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Damp));
+          break;
+      case Echo_Reverse:
+          echo_RV->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse));
+          break;
+      case Echo_Direct:
+          echo_direct->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Direct));
+          break;
+      };
 }
