@@ -15,7 +15,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} OtremGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -45,13 +45,11 @@ rgui->findpos(EFX_OPTICALTREM,(int)o->value(),o);}
     user_data 12044
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12044))rkr->Rack_Effects[EFX_OPTICALTREM]->setpreset((int)o->value());
-otrem_dpth->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Depth));
-otrem_freq->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo));
-otrem_rnd->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Random));
-otrem_lfotype->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Type));
-otrem_stdf->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Stereo));
-otrem_pan->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Pan)-64);
-otrem_invert->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Invert));} selected
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_OPTICALTREM]; i++)
+{
+    parameter_refresh(i);
+};}
     xywh {77 6 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -161,5 +159,32 @@ rkr->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_Pan,(int)(o->value()+64));
     class RKR_Check_Button
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Optical_Depth:
+        otrem_dpth->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Depth));
+        break;
+    case Optical_LFO_Tempo:
+        otrem_freq->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo));
+        break;
+    case Optical_LFO_Random:
+        otrem_rnd->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Random));
+        break;
+    case Optical_LFO_Type:
+        otrem_lfotype->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Type));
+        break;
+    case Optical_LFO_Stereo:
+        otrem_stdf->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Stereo));
+        break;
+    case Optical_Pan:
+        otrem_pan->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Pan)-64);
+        break;
+    case Optical_Invert:
+        otrem_invert->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Invert));
+        break;
+    }} {}
   }
 }

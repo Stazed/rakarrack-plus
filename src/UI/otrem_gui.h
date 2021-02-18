@@ -61,5 +61,7 @@ private:
   inline void cb_otrem_invert_i(RKR_Check_Button*, void*);
   static void cb_otrem_invert(RKR_Check_Button*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

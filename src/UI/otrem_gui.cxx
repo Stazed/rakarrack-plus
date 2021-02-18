@@ -21,13 +21,11 @@ void OtremGui::cb_otrem_activar(RKR_Light_Button* o, void* v) {
 void OtremGui::cb_otrem_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12044))rkr->Rack_Effects[EFX_OPTICALTREM]->setpreset((int)o->value());
-otrem_dpth->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Depth));
-otrem_freq->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo));
-otrem_rnd->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Random));
-otrem_lfotype->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Type));
-otrem_stdf->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Stereo));
-otrem_pan->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Pan)-64);
-otrem_invert->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Invert));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_OPTICALTREM]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void OtremGui::cb_otrem_preset(RKR_Choice* o, void* v) {
   ((OtremGui*)(o->parent()))->cb_otrem_preset_i(o,v);
@@ -282,4 +280,31 @@ e a stompbox Opto Trem");
 } // RKR_Check_Button* otrem_invert
 position(X, Y);
 end();
+}
+
+void OtremGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Optical_Depth:
+          otrem_dpth->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Depth));
+          break;
+      case Optical_LFO_Tempo:
+          otrem_freq->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo));
+          break;
+      case Optical_LFO_Random:
+          otrem_rnd->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Random));
+          break;
+      case Optical_LFO_Type:
+          otrem_lfotype->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Type));
+          break;
+      case Optical_LFO_Stereo:
+          otrem_stdf->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Stereo));
+          break;
+      case Optical_Pan:
+          otrem_pan->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Pan)-64);
+          break;
+      case Optical_Invert:
+          otrem_invert->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_Invert));
+          break;
+      }
 }
