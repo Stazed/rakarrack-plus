@@ -20,24 +20,11 @@ void RevtronGui::cb_revtron_activar(RKR_Light_Button* o, void* v) {
 void RevtronGui::cb_revtron_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12040))rkr->Rack_Effects[EFX_REVERBTRON]->setpreset((int) o->value());
-revtron_pan->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Pan)-64);
-revtron_level->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Level));
-revtron_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_DryWet)));
-revtron_damp->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Damp));
-revtron_fnum->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Set_File));
-revtron_length->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Length));
-revtron_strech->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Stretch));
-revtron_safe->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Safe));
-revtron_user->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File));
-revtron_user->do_callback();
-revtron_fb->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Feedback));
-revtron_fade->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Fade));
-revtron_idelay->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_I_Delay));
-revtron_LPF->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_LPF));
-revtron_diff->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Diffusion));
 
-revtron_es->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Ex_Stereo));
-revtron_rv->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Shuffle));
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_REVERBTRON]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void RevtronGui::cb_revtron_preset(RKR_Choice* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_preset_i(o,v);
@@ -573,4 +560,59 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* revtron_fnum
 position(X, Y);
 end();
+}
+
+void RevtronGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Revtron_DryWet:
+          revtron_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_DryWet)));
+          break;
+      case Revtron_Fade:
+          revtron_fade->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Fade));
+          break;
+      case Revtron_Safe:
+          revtron_safe->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Safe));
+          break;
+      case Revtron_Length:
+          revtron_length->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Length));
+          break;
+      case Revtron_User_File:
+          revtron_user->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File));
+          revtron_user->do_callback();
+          break;
+      case Revtron_I_Delay:
+          revtron_idelay->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_I_Delay));
+          break;
+      case Revtron_Damp:
+          revtron_damp->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Damp));
+          break;
+      case Revtron_Level:
+          revtron_level->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Level));
+          break;
+      case Revtron_Set_File:
+          revtron_fnum->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Set_File));
+          break;
+      case Revtron_Stretch:
+          revtron_strech->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Stretch));
+          break;
+      case Revtron_Feedback:
+          revtron_fb->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Feedback));
+          break;
+      case Revtron_Pan:
+          revtron_pan->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Pan)-64);
+          break;
+      case Revtron_Ex_Stereo:
+          revtron_es->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Ex_Stereo));
+          break;
+      case Revtron_Shuffle:
+          revtron_rv->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Shuffle));
+          break;
+      case Revtron_LPF:
+          revtron_LPF->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_LPF));
+          break;
+      case Revtron_Diffusion:
+          revtron_diff->value(rkr->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Diffusion));
+          break;
+      }
 }

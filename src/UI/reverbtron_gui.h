@@ -110,5 +110,7 @@ private:
   inline void cb_revtron_fnum_i(RKR_Choice*, void*);
   static void cb_revtron_fnum(RKR_Choice*, void*);
   static Fl_Menu_Item menu_revtron_fnum[];
+public:
+  void parameter_refresh(int index);
 };
 #endif
