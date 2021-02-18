@@ -88,5 +88,7 @@ public:
 private:
   inline void cb_ex_10_i(RKR_Slider*, void*);
   static void cb_ex_10(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif
