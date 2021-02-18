@@ -21,17 +21,11 @@ void ShifterGui::cb_shifter_activar(RKR_Light_Button* o, void* v) {
 void ShifterGui::cb_shifter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12038))rkr->Rack_Effects[EFX_SHIFTER]->setpreset((int)o->value());
-shifter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_DryWet)));
-shifter_pan->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Pan)-64);
-shifter_gain->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Gain)-64);
-shifter_int->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Interval));
-shifter_attack->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Attack));
-shifter_decay->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Decay));
-shifter_thre->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Threshold));
-shifter_ud->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Shift));
-shifter_whammy->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Whammy));
 
-shifter_mode->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Mode));
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SHIFTER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void ShifterGui::cb_shifter_preset(RKR_Choice* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_preset_i(o,v);
@@ -378,4 +372,40 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* shifter_mode
 position(X, Y);
 end();
+}
+
+void ShifterGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Shifter_DryWet:
+          shifter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_DryWet)));
+          break;
+      case Shifter_Pan:
+          shifter_pan->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Pan)-64);
+          break;
+      case Shifter_Gain:
+          shifter_gain->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Gain)-64);
+          break;
+      case Shifter_Attack:
+          shifter_attack->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Attack));
+          break;
+      case Shifter_Decay:
+          shifter_decay->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Decay));
+          break;
+      case Shifter_Threshold:
+          shifter_thre->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Threshold));
+          break;
+      case Shifter_Interval:
+          shifter_int->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Interval));
+          break;
+      case Shifter_Shift:
+          shifter_ud->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Shift));
+          break;
+      case Shifter_Mode:
+          shifter_mode->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Mode));
+          break;
+      case Shifter_Whammy:
+          shifter_whammy->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Whammy));
+          break;
+      }
 }

@@ -75,5 +75,7 @@ private:
   inline void cb_shifter_mode_i(RKR_Choice*, void*);
   static void cb_shifter_mode(RKR_Choice*, void*);
   static Fl_Menu_Item menu_shifter_mode[];
+public:
+  void parameter_refresh(int index);
 };
 #endif
