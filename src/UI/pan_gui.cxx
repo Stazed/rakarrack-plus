@@ -21,15 +21,11 @@ void PanGui::cb_pan_activar(RKR_Light_Button* o, void* v) {
 void PanGui::cb_pan_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12013))rkr->Rack_Effects[EFX_PAN]->setpreset((int) o->value());
-pan_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_DryWet)));
-pan_pan->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Pan)-64);
-pan_freq->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Tempo));
-pan_rnd->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Random));
-pan_lfotype->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Type));
-pan_stdf->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Stereo));
-pan_extra->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Ex_St_Amt));
-pan_autopan->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_AutoPan));
-pan_extraon->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Enable_Extra));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_PAN]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void PanGui::cb_pan_preset(RKR_Choice* o, void* v) {
   ((PanGui*)(o->parent()))->cb_pan_preset_i(o,v);
@@ -327,4 +323,37 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* pan_extra
 position(X, Y);
 end();
+}
+
+void PanGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Pan_DryWet:
+          pan_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_DryWet)));
+          break;
+      case Pan_Pan:
+          pan_pan->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Pan)-64);
+          break;
+      case Pan_LFO_Tempo:
+          pan_freq->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Tempo));
+          break;
+      case Pan_LFO_Random:
+          pan_rnd->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Random));
+          break;
+      case Pan_LFO_Type:
+          pan_lfotype->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Type));
+          break;
+      case Pan_LFO_Stereo:
+          pan_stdf->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Stereo));
+          break;
+      case Pan_Ex_St_Amt:
+          pan_extra->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Ex_St_Amt));
+          break;
+      case Pan_AutoPan:
+          pan_autopan->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_AutoPan));
+          break;
+      case Pan_Enable_Extra:
+          pan_extraon->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_Enable_Extra));
+          break;
+      }
 }

@@ -71,5 +71,7 @@ private:
   inline void cb_pan_extra_i(RKR_Slider*, void*);
   static void cb_pan_extra(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif
