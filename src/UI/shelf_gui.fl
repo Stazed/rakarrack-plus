@@ -15,7 +15,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class ShelfGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -44,11 +44,11 @@ rgui->findpos(EFX_SHELFBOOST,(int)o->value(),o);}
     user_data 12034
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12034))rkr->Rack_Effects[EFX_SHELFBOOST]->setpreset((int) o->value());
-shelf_gain->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
-shelf_q1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
-shelf_freq1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
-shelf_mode->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo));
-shelf_level->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));} selected
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SHELFBOOST]; i++)
+{
+    parameter_refresh(i);
+};}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -120,5 +120,26 @@ rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Presence,(int)o->value());}
     callback {rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Stereo,(int)o->value());}
     xywh {13 153 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Shelf_Gain:
+        shelf_gain->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
+        break;
+    case Shelf_Presence:
+        shelf_q1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
+        break;
+    case Shelf_Tone:
+        shelf_freq1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
+        break;
+    case Shelf_Stereo:
+        shelf_mode->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo));
+        break;
+    case Shelf_Level:
+        shelf_level->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));
+        break;
+    }} {}
   }
 }

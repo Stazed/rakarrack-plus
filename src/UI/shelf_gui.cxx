@@ -21,11 +21,11 @@ void ShelfGui::cb_shelf_activar(RKR_Light_Button* o, void* v) {
 void ShelfGui::cb_shelf_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12034))rkr->Rack_Effects[EFX_SHELFBOOST]->setpreset((int) o->value());
-shelf_gain->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
-shelf_q1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
-shelf_freq1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
-shelf_mode->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo));
-shelf_level->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SHELFBOOST]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void ShelfGui::cb_shelf_preset(RKR_Choice* o, void* v) {
   ((ShelfGui*)(o->parent()))->cb_shelf_preset_i(o,v);
@@ -220,4 +220,25 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* shelf_mode
 position(X, Y);
 end();
+}
+
+void ShelfGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Shelf_Gain:
+          shelf_gain->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
+          break;
+      case Shelf_Presence:
+          shelf_q1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
+          break;
+      case Shelf_Tone:
+          shelf_freq1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
+          break;
+      case Shelf_Stereo:
+          shelf_mode->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo));
+          break;
+      case Shelf_Level:
+          shelf_level->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));
+          break;
+      }
 }
