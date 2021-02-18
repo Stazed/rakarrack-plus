@@ -19,13 +19,11 @@ void ExpanderGui::cb_expander_activar(RKR_Light_Button* o, void* v) {
 void ExpanderGui::cb_expander_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12025))rkr->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
-expander_ATime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack));
-expander_RTime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release));
-expander_shape->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape));
-expander_threshold->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold));
-expander_HPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF));
-expander_LPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF));
-expander_level->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_EXPANDER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void ExpanderGui::cb_expander_preset(RKR_Choice* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_preset_i(o,v);
@@ -292,4 +290,31 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* expander_HPF
 position(X, Y);
 end();
+}
+
+void ExpanderGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Expander_Threshold:
+          expander_threshold->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold));
+          break;
+      case Expander_Shape:
+          expander_shape->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape));
+          break;
+      case Expander_Attack:
+          expander_ATime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack));
+          break;
+      case Expander_Release:
+          expander_RTime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release));
+          break;
+      case Expander_LPF:
+          expander_LPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF));
+          break;
+      case Expander_HPF:
+          expander_HPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF));
+          break;
+      case Expander_Gain:
+          expander_level->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain));
+          break;
+      }
 }
