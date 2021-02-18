@@ -73,5 +73,7 @@ public:
 private:
   inline void cb_eqp_HQ_i(RKR_Slider*, void*);
   static void cb_eqp_HQ(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif

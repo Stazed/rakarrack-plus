@@ -21,16 +21,11 @@ void PeqGui::cb_eqp_activar(RKR_Light_Button* o, void* v) {
 void PeqGui::cb_eqp_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12009)) rkr->Rack_Effects[EFX_PARAMETRIC]->setpreset((int)o->value());
-eqp_LF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq));
-eqp_LFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain)-64);
-eqp_LQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q)-64);
-eqp_MF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq));
-eqp_MFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain)-64);
-eqp_MQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q)-64);
-eqp_HF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq));
-eqp_HFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain)-64);
-eqp_HQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q)-64);
-eqp_Gain->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain)-64);
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_PARAMETRIC]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void PeqGui::cb_eqp_preset(RKR_Choice* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_preset_i(o,v);
@@ -389,4 +384,40 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* eqp_HQ
 position(X, Y);
 end();
+}
+
+void PeqGui::parameter_refresh(int index) {
+  switch(index)
+      {
+      case Parametric_Low_Freq:
+          eqp_LF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq));
+          break;
+      case Parametric_Low_Gain:
+          eqp_LFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain)-64);
+          break;
+      case Parametric_Low_Q:
+          eqp_LQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q)-64);
+          break;
+      case Parametric_Mid_Freq:
+          eqp_MF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq));
+          break;
+      case Parametric_Mid_Gain:
+          eqp_MFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain)-64);
+          break;
+      case Parametric_Mid_Q:
+          eqp_MQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q)-64);
+          break;
+      case Parametric_High_Freq:
+          eqp_HF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq));
+          break;
+      case Parametric_High_Gain:
+          eqp_HFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain)-64);
+          break;
+      case Parametric_High_Q:
+          eqp_HQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q)-64);
+          break;
+      case Parametric_Gain:
+          eqp_Gain->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain)-64);
+          break;
+      }
 }
