@@ -22,16 +22,12 @@ void ReverbGui::cb_reverb_preset_i(RKR_Choice* o, void* v) {
   rkr->EFX_Bypass[EFX_REVERB]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==12008))rkr->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
-reverb_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet)));
-reverb_pan->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan)-64);
-reverb_time->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Time));
-reverb_ldel->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay));
-reverb_ldelft->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB));
-reverb_LPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF));
-reverb_HPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF));
-reverb_damp->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp));
-reverb_RS->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Room));
-reverb_type->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Type));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_REVERB]; i++)
+{
+    parameter_refresh(i);
+};
+
 if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;
 }
 void ReverbGui::cb_reverb_preset(RKR_Choice* o, void* v) {
@@ -403,4 +399,44 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* reverb_damp
 position(X, Y);
 end();
+}
+
+void ReverbGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Reverb_DryWet:
+          reverb_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet)));
+          break;
+      case Reverb_Pan:
+          reverb_pan->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan)-64);
+          break;
+      case Reverb_Time:
+          reverb_time->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Time));
+          break;
+      case Reverb_I_Delay:
+          reverb_ldel->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay));
+          break;
+      case Reverb_Delay_FB:
+          reverb_ldelft->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB));
+          break;
+      case Reverb_SKIP_5:
+          break;
+      case Reverb_SKIP_6:
+          break;
+      case Reverb_LPF:
+          reverb_LPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF));
+          break;
+      case Reverb_HPF:
+          reverb_HPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF));
+          break;
+      case Reverb_Damp:
+          reverb_damp->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp));
+          break;
+      case Reverb_Type:
+          reverb_type->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Type));
+          break;
+      case Reverb_Room:
+          reverb_RS->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Room));
+          break;
+      }
 }
