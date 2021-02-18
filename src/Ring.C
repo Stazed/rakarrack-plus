@@ -386,6 +386,7 @@ Ring::getpar(int npar)
         break;
     case Ring_Auto_Freq:
         return (Pafreq);
+        break;
     }
     return (0); //in case of bogus parameter number
 }

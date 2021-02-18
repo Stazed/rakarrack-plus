@@ -89,5 +89,7 @@ public:
 private:
   inline void cb_ring_squ_i(RKR_Slider*, void*);
   static void cb_ring_squ(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif

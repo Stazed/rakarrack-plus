@@ -21,19 +21,11 @@ void RingGui::cb_ring_activar(RKR_Light_Button* o, void* v) {
 void RingGui::cb_ring_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12021))rkr->Rack_Effects[EFX_RING]->setpreset((int) o->value());
-ring_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_RING]->getpar(Ring_DryWet)));
-ring_LRc->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross));
-ring_input->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Input));
-ring_level->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Level));
-ring_st->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Stereo));
-ring_depth->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Depth));
-ring_freq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Freq));
-ring_sin->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Sine));
-ring_tri->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Triangle));
-ring_saw->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Saw));
-ring_squ->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Square));
-ring_pan->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Pan));
-ring_afreq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_RING]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void RingGui::cb_ring_preset(RKR_Choice* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_preset_i(o,v);
@@ -447,4 +439,49 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* ring_squ
 position(X, Y);
 end();
+}
+
+void RingGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Ring_DryWet:
+          ring_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_RING]->getpar(Ring_DryWet)));
+          break;
+      case Ring_Pan:
+          ring_pan->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Pan));
+          break;
+      case Ring_LR_Cross:
+          ring_LRc->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross));
+          break;
+      case Ring_Level:
+          ring_level->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Level));
+          break;
+      case Ring_Depth:
+          ring_depth->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Depth));
+          break;
+      case Ring_Freq:
+          ring_freq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Freq));
+          break;
+      case Ring_Stereo:
+          ring_st->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Stereo));
+          break;
+      case Ring_Sine:
+          ring_sin->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Sine));
+          break;
+      case Ring_Triangle:
+          ring_tri->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Triangle));
+          break;
+      case Ring_Saw:
+          ring_saw->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Saw));
+          break;
+      case Ring_Square:
+          ring_squ->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Square));
+          break;
+      case Ring_Input:
+          ring_input->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Input));
+          break;
+      case Ring_Auto_Freq:
+          ring_afreq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq));
+          break;
+      }
 }
