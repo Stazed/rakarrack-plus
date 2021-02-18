@@ -20,23 +20,11 @@ void EchotronGui::cb_echotron_activar(RKR_Light_Button* o, void* v) {
 void EchotronGui::cb_echotron_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12041))rkr->Rack_Effects[EFX_ECHOTRON]->setpreset((int) o->value());
-echotron_pan->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Pan)-64);
-echotron_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_DryWet)));
-echotron_damp->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Damp));
-echotron_fnum->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Set_File));
-echotron_user->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_User_File));
-echotron_user->do_callback();
-echotron_fb->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Feedback));
-echotron_tempo->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));
-echotron_lfotype->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Type));
-echotron_width->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Width));
-echotron_deep->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Depth)-64);
-echotron_lrcross->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LR_Cross)-64);
-echotron_stdf->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Stereo));
-echotron_af->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Filters));
-echotron_mf->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Filter));
-echotron_md->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Delay));
-echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_ECHOTRON]; i++)
+{
+    parameter_refresh(i);
+};
 
 Echotron *Efx_Echotron = static_cast<Echotron*>(rkr->Rack_Effects[EFX_ECHOTRON]);
 echotron_length->maximum(Efx_Echotron->get_file_length());
@@ -576,4 +564,59 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* echotron_fnum
 position(X, Y);
 end();
+}
+
+void EchotronGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Echotron_DryWet:
+          echotron_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_DryWet)));
+          break;
+      case Echotron_Depth:
+          echotron_deep->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Depth)-64);
+          break;
+      case Echotron_LFO_Width:
+          echotron_width->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Width));
+          break;
+      case Echotron_Taps:
+          echotron_length->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
+          break;
+      case Echotron_User_File:
+          echotron_user->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_User_File));
+          echotron_user->do_callback();
+          break;
+      case Echotron_Tempo:
+          echotron_tempo->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));
+          break;
+      case Echotron_Damp:
+          echotron_damp->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Damp));
+          break;
+      case Echotron_LR_Cross:
+          echotron_lrcross->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LR_Cross)-64);
+          break;
+      case Echotron_Set_File:
+          echotron_fnum->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Set_File));
+          break;
+      case Echotron_LFO_Stereo:
+          echotron_stdf->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Stereo));
+          break;
+      case Echotron_Feedback:
+          echotron_fb->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Feedback));
+          break;
+      case Echotron_Pan:
+          echotron_pan->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Pan)-64);
+          break;
+      case Echotron_Mod_Delay:
+          echotron_md->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Delay));
+          break;
+      case Echotron_Mod_Filter:
+          echotron_mf->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Mod_Filter));
+          break;
+      case Echotron_LFO_Type:
+          echotron_lfotype->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_LFO_Type));
+          break;
+      case Echotron_Filters:
+          echotron_af->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Filters));
+          break;
+      }
 }

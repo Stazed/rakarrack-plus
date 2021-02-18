@@ -113,5 +113,7 @@ private:
   static void cb_echotron_fnum(RKR_Choice*, void*);
   static Fl_Menu_Item menu_echotron_fnum[];
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif
