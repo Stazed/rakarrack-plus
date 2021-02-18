@@ -19,13 +19,11 @@ void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {
 void GateGui::cb_gate_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12016))rkr->Rack_Effects[EFX_NOISEGATE]->setpreset((int) o->value());
-gate_ATime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack));
-gate_RTime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release));
-gate_range->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range));
-gate_threshold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold));
-gate_hold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold));
-gate_HPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF));
-gate_LPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_NOISEGATE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void GateGui::cb_gate_preset(RKR_Choice* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_preset_i(o,v);
@@ -291,4 +289,31 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* gate_HPF
 position(X, Y);
 end();
+}
+
+void GateGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Gate_Threshold:
+          gate_threshold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold));
+          break;
+      case Gate_Range:
+          gate_range->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range));
+          break;
+      case Gate_Attack:
+          gate_ATime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack));
+          break;
+      case Gate_Release:
+          gate_RTime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release));
+          break;
+      case Gate_LPF:
+          gate_LPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF));
+          break;
+      case Gate_HPF:
+          gate_HPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF));
+          break;
+      case Gate_Hold:
+          gate_hold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold));
+          break;
+      }
 }

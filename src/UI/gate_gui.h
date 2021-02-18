@@ -58,5 +58,7 @@ public:
 private:
   inline void cb_gate_HPF_i(RKR_Slider*, void*);
   static void cb_gate_HPF(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif
