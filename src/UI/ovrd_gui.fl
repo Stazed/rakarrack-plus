@@ -15,7 +15,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} OvrdGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1703 220 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -45,17 +45,11 @@ rgui->findpos(EFX_OVERDRIVE,(int)o->value(),o);}
     user_data 12003
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12003))rkr->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
-ovrd_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet)));
-ovrd_pan->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan)-64);
-ovrd_LRc->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross));
-ovrd_drive->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive));
-ovrd_level->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level));
-ovrd_tipo->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type));
-ovrd_neg->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Negate));
-ovrd_lpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF));
-ovrd_hpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF));
-ovrd_st->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Stereo));
-ovrd_pf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Prefilter));} selected
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_OVERDRIVE]; i++)
+{
+    parameter_refresh(i);
+};}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -181,5 +175,44 @@ rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_HPF,(int)o->value());}
     class RKR_Slider
   }
   decl {CommonGuiMenu *m_dist_menu;} {private local
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Overdrive_DryWet:
+        ovrd_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet)));
+        break;
+    case Overdrive_Pan:
+        ovrd_pan->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan)-64);
+        break;
+    case Overdrive_LR_Cross:
+        ovrd_LRc->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross));
+        break;
+    case Overdrive_Drive:
+        ovrd_drive->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive));
+        break;
+    case Overdrive_Level:
+        ovrd_level->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level));
+        break;
+    case Overdrive_Type:
+        ovrd_tipo->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type));
+        break;
+    case Overdrive_Negate:
+        ovrd_neg->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Negate));
+        break;
+    case Overdrive_LPF:
+        ovrd_lpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF));
+        break;
+    case Overdrive_HPF:
+        ovrd_hpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF));
+        break;
+    case Overdrive_Stereo:
+        ovrd_st->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Stereo));
+        break;
+    case Overdrive_Prefilter:
+        ovrd_pf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Prefilter));
+        break;
+    }} {}
   }
 }
