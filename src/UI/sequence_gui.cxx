@@ -21,21 +21,11 @@ void SequenceGui::cb_seq_activar(RKR_Light_Button* o, void* v) {
 void SequenceGui::cb_seq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12037))rkr->Rack_Effects[EFX_SEQUENCE]->setpreset((int) o->value());
-seq_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_DryWet)));
-seq_q->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Resonance)-64);
-seq_amp->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Amp));
-seq_tempo->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));
-seq_stdf->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Stdf));
-seq_1->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_1));
-seq_2->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_2));
-seq_3->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_3));
-seq_4->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_4));
-seq_5->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_5));
-seq_6->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_6));
-seq_7->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_7));
-seq_8->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_8));
-seq_mode->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Mode));
-seq_range->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SEQUENCE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void SequenceGui::cb_seq_preset(RKR_Choice* o, void* v) {
   ((SequenceGui*)(o->parent()))->cb_seq_preset_i(o,v);
@@ -538,4 +528,55 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* seq_range
 position(X, Y);
 end();
+}
+
+void SequenceGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Sequence_Step_1:
+          seq_1->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_1));
+          break;
+      case Sequence_Step_2:
+          seq_2->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_2));
+          break;
+      case Sequence_Step_3:
+          seq_3->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_3));
+          break;
+      case Sequence_Step_4:
+          seq_4->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_4));
+          break;
+      case Sequence_Step_5:
+          seq_5->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_5));
+          break;
+      case Sequence_Step_6:
+          seq_6->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_6));
+          break;
+      case Sequence_Step_7:
+          seq_7->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_7));
+          break;
+      case Sequence_Step_8:
+          seq_8->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_8));
+          break;
+      case Sequence_DryWet:
+          seq_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_DryWet)));
+          break;
+      case Sequence_Tempo:
+          seq_tempo->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));
+          break;
+      case Sequence_Resonance:
+          seq_q->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Resonance)-64);
+          break;
+      case Sequence_Amp:
+          seq_amp->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Amp));
+          break;
+      case Sequence_Stdf:
+          seq_stdf->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Stdf));
+          break;
+      case Sequence_Mode:
+          seq_mode->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Mode));
+          break;
+      case Sequence_Range:
+          seq_range->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range));
+          break;
+      }
 }

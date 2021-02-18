@@ -101,5 +101,7 @@ private:
   inline void cb_seq_range_i(RKR_Choice*, void*);
   static void cb_seq_range(RKR_Choice*, void*);
   static Fl_Menu_Item menu_seq_range[];
+public:
+  void parameter_refresh(int index);
 };
 #endif
