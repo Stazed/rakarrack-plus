@@ -67,7 +67,7 @@ ParametricEQ::setpreset(int npreset)
             change_parameters(n * 5 + 13, pdata[n * 3 + 2]);
         }
         
-        change_parameters(Parametric_Gain, pdata[9]);
+        changepar(Parametric_Gain, pdata[9]);   // Yes changepar() vs change_parameters() is correct
     }
     else
     {
@@ -78,7 +78,7 @@ ParametricEQ::setpreset(int npreset)
             change_parameters(n * 5 + 13, presets[npreset][n * 3 + 2]);
         }
         
-        change_parameters(Parametric_Gain, presets[npreset][9]);
+        changepar(Parametric_Gain, presets[npreset][9]);    // Yes changepar() vs change_parameters() is correct
     }
 }
 
