@@ -123,5 +123,7 @@ private:
   inline void cb_mutromojo_minfreq_i(RKR_Value_Input*, void*);
   static void cb_mutromojo_minfreq(RKR_Value_Input*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif
