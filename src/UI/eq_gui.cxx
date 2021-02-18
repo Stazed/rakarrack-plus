@@ -21,18 +21,11 @@ void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
 void EqGui::cb_eq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12000))rkr->Rack_Effects[EFX_EQ]->setpreset((int)o->value());
-eq_1->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_31_HZ)-64);
-eq_2->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_63_HZ)-64);
-eq_3->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_125_HZ)-64);
-eq_4->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_250_HZ)-64);
-eq_5->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_500_HZ)-64);
-eq_6->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_1_KHZ)-64);
-eq_7->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_2_KHZ)-64);
-eq_8->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_4_KHZ)-64);
-eq_9->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_8_KHZ)-64);
-eq_10->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_16_KHZ)-64);
-eq_Gain->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Gain)-64);
-eq_Q->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Q)-64);
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_EQ]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void EqGui::cb_eq_preset(RKR_Choice* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_preset_i(o,v);
@@ -439,4 +432,46 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* eq_10
 position(X, Y);
 end();
+}
+
+void EqGui::parameter_refresh(int index) {
+  switch(index)
+      {
+      case EQ_Gain:
+          eq_Gain->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Gain)-64);
+          break;
+      case EQ_Q:
+          eq_Q->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Q)-64);
+          break;
+      case EQ_31_HZ:
+          eq_1->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_31_HZ)-64);
+          break;
+      case EQ_63_HZ:
+          eq_2->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_63_HZ)-64);
+          break;
+      case EQ_125_HZ:
+          eq_3->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_125_HZ)-64);
+          break;
+      case EQ_250_HZ:
+          eq_4->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_250_HZ)-64);
+          break;
+      case EQ_500_HZ:
+          eq_5->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_500_HZ)-64);
+          break;
+      case EQ_1_KHZ:
+          eq_6->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_1_KHZ)-64);
+          break;
+      case EQ_2_KHZ:
+          eq_7->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_2_KHZ)-64);
+          break;
+      case EQ_4_KHZ:
+          eq_8->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_4_KHZ)-64);
+          break;
+      case EQ_8_KHZ:
+          eq_9->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_8_KHZ)-64);
+          break;
+      case EQ_16_KHZ:
+          eq_10->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_16_KHZ)-64);
+          break;
+      }
 }
