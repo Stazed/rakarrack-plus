@@ -79,5 +79,7 @@ public:
 private:
   inline void cb_shuffle_E_i(RKR_Check_Button*, void*);
   static void cb_shuffle_E(RKR_Check_Button*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif

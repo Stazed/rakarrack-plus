@@ -21,17 +21,11 @@ void ShuffleGui::cb_shuffle_activar(RKR_Light_Button* o, void* v) {
 void ShuffleGui::cb_shuffle_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12026))rkr->Rack_Effects[EFX_SHUFFLE]->setpreset((int)o->value());
-shuffle_volL->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_L));
-shuffle_volML->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_ML));
-shuffle_volMH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_MH));
-shuffle_volH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_H));
-shuffle_cross1->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_L));
-shuffle_cross2->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_ML));
-shuffle_cross3->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_MH));
-shuffle_cross4->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_H));
-shuffle_Q->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Width));
-shuffle_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_DryWet)));
-shuffle_E->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_F_Band));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SHUFFLE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void ShuffleGui::cb_shuffle_preset(RKR_Choice* o, void* v) {
   ((ShuffleGui*)(o->parent()))->cb_shuffle_preset_i(o,v);
@@ -406,4 +400,43 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* shuffle_E
 position(X, Y);
 end();
+}
+
+void ShuffleGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Shuffle_DryWet:
+          shuffle_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_DryWet)));
+          break;
+      case Shuffle_Gain_L:
+          shuffle_volL->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_L));
+          break;
+      case Shuffle_Gain_ML:
+          shuffle_volML->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_ML));
+          break;
+      case Shuffle_Gain_MH:
+          shuffle_volMH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_MH));
+          break;
+      case Shuffle_Gain_H:
+          shuffle_volH->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Gain_H));
+          break;
+      case Shuffle_Freq_L:
+          shuffle_cross1->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_L));
+          break;
+      case Shuffle_Freq_ML:
+          shuffle_cross2->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_ML));
+          break;
+      case Shuffle_Freq_MH:
+          shuffle_cross3->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_MH));
+          break;
+      case Shuffle_Freq_H:
+          shuffle_cross4->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Freq_H));
+          break;
+      case Shuffle_Width:
+          shuffle_Q->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_Width));
+          break;
+      case Shuffle_F_Band:
+          shuffle_E->value(rkr->Rack_Effects[EFX_SHUFFLE]->getpar(Shuffle_F_Band));
+          break;
+      }
 }
