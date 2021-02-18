@@ -21,16 +21,11 @@ void EchoverseGui::cb_echoverse_activar(RKR_Light_Button* o, void* v) {
 void EchoverseGui::cb_echoverse_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12032))rkr->Rack_Effects[EFX_ECHOVERSE]->setpreset((int) o->value());
-echoverse_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_DryWet)));
-echoverse_pan->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Pan)-64);
-echoverse_delay->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
-echoverse_LRdl->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_LR_Delay));
-echoverse_angle->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Angle)-64);
-echoverse_fb->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Feedback));
-echoverse_damp->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Damp));
-echoverse_RV->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Reverse));
-echoverse_subdiv->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Subdivision));
-echoverse_es->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Ext_Stereo));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_ECHOVERSE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void EchoverseGui::cb_echoverse_preset(RKR_Choice* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_preset_i(o,v);
@@ -368,4 +363,40 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* echoverse_angle
 position(X, Y);
 end();
+}
+
+void EchoverseGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Echoverse_DryWet:
+          echoverse_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_DryWet)));
+          break;
+      case Echoverse_Pan:
+          echoverse_pan->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Pan)-64);
+          break;
+      case Echoverse_Tempo:
+          echoverse_delay->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
+          break;
+      case Echoverse_LR_Delay:
+          echoverse_LRdl->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_LR_Delay));
+          break;
+      case Echoverse_Angle:
+          echoverse_angle->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Angle)-64);
+          break;
+      case Echoverse_Feedback:
+          echoverse_fb->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Feedback));
+          break;
+      case Echoverse_Damp:
+          echoverse_damp->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Damp));
+          break;
+      case Echoverse_Reverse:
+          echoverse_RV->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Reverse));
+          break;
+      case Echoverse_Subdivision:
+          echoverse_subdiv->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Subdivision));
+          break;
+      case Echoverse_Ext_Stereo:
+          echoverse_es->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Ext_Stereo));
+          break;
+      }
 }

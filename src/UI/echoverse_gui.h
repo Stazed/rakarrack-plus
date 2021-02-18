@@ -75,5 +75,7 @@ private:
   inline void cb_echoverse_angle_i(RKR_Slider*, void*);
   static void cb_echoverse_angle(RKR_Slider*, void*);
   CommonGuiMenu *m_subdiv_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif
