@@ -87,5 +87,7 @@ private:
   inline void cb_phaser_LR_i(RKR_Slider*, void*);
   static void cb_phaser_LR(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

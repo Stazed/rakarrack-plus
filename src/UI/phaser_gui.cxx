@@ -21,18 +21,11 @@ void PhaserGui::cb_phaser_activar(RKR_Light_Button* o, void* v) {
 void PhaserGui::cb_phaser_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12006))rkr->Rack_Effects[EFX_PHASER]->setpreset((int) o->value());
-phaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_DryWet)));
-phaser_pan->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Pan)-64);
-phaser_freq->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
-phaser_rnd->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Random));
-phaser_lfotype->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Type));
-phaser_stdf->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Stereo));
-phaser_dpth->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Depth));
-phaser_fb->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Feedback));
-phaser_stages->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Stages));
-phaser_LR->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LR_Cross)-64);
-phaser_subs->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Subtract));
-phaser_phase->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Phase));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_PHASER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void PhaserGui::cb_phaser_preset(RKR_Choice* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_preset_i(o,v);
@@ -424,4 +417,46 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* phaser_LR
 position(X, Y);
 end();
+}
+
+void PhaserGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Phaser_DryWet:
+          phaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_DryWet)));
+          break;
+      case Phaser_Pan:
+          phaser_pan->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Pan)-64);
+          break;
+      case Phaser_LFO_Tempo:
+          phaser_freq->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
+          break;
+      case Phaser_LFO_Random:
+          phaser_rnd->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Random));
+          break;
+      case Phaser_LFO_Type:
+          phaser_lfotype->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Type));
+          break;
+      case Phaser_LFO_Stereo:
+          phaser_stdf->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Stereo));
+          break;
+      case Phaser_Depth:
+          phaser_dpth->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Depth));
+          break;
+      case Phaser_Feedback:
+          phaser_fb->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Feedback));
+          break;
+      case Phaser_Stages:
+          phaser_stages->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Stages));
+          break;
+      case Phaser_LR_Cross:
+          phaser_LR->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LR_Cross)-64);
+          break;
+      case Phaser_Subtract:
+          phaser_subs->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Subtract));
+          break;
+      case Phaser_Phase:
+          phaser_phase->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Phase));
+          break;
+      }
 }
