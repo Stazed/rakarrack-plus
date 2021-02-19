@@ -20,9 +20,12 @@ void SustainGui::cb_sus_activar(RKR_Light_Button* o, void* v) {
 
 void SustainGui::cb_sus_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-        if((ud==0)||(ud==12036))rkr->Rack_Effects[EFX_SUSTAINER]->setpreset((int) o->value());
-sus_gain->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Gain));
-sus_sus->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Sustain));
+if((ud==0)||(ud==12036))rkr->Rack_Effects[EFX_SUSTAINER]->setpreset((int) o->value());
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SUSTAINER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void SustainGui::cb_sus_preset(RKR_Choice* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_preset_i(o,v);
@@ -137,4 +140,16 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* sus_sus
 position(X, Y);
 end();
+}
+
+void SustainGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Sustain_Gain:
+          sus_gain->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Gain));
+          break;
+      case Sustain_Sustain:
+          sus_sus->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Sustain));
+          break;
+      }
 }
