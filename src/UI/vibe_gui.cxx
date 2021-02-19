@@ -433,3 +433,7 @@ void VibeGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void VibeGui::tap_tempo_update() {
+  vibe_freq->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
+}

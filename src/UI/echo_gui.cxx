@@ -369,3 +369,7 @@ void EchoGui::parameter_refresh(int index) {
           break;
       };
 }
+
+void EchoGui::tap_tempo_update() {
+  echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
+}

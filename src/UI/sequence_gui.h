@@ -103,5 +103,6 @@ private:
   static Fl_Menu_Item menu_seq_range[];
 public:
   void parameter_refresh(int index);
+  void tap_tempo_update();
 };
 #endif

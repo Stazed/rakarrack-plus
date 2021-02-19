@@ -247,4 +247,8 @@ rkr->Rack_Effects[EFX_FLANGER]->changepar(Flanger_LR_Cross,(int)(o->value()));}
         break;
     }} {}
   }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {flanger_freq->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Tempo));} {}
+  }
 }

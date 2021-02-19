@@ -452,3 +452,7 @@ void FlangerGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void FlangerGui::tap_tempo_update() {
+  flanger_freq->value(rkr->Rack_Effects[EFX_FLANGER]->getpar(Flanger_LFO_Tempo));
+}

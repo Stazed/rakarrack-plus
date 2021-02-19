@@ -357,3 +357,7 @@ void PanGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void PanGui::tap_tempo_update() {
+  pan_freq->value(rkr->Rack_Effects[EFX_PAN]->getpar(Pan_LFO_Tempo));
+}

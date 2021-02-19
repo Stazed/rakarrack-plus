@@ -436,3 +436,7 @@ void AlienwahGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void AlienwahGui::tap_tempo_update() {
+  Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));
+}

@@ -460,3 +460,7 @@ void PhaserGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void PhaserGui::tap_tempo_update() {
+  phaser_freq->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
+}

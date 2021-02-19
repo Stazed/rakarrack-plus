@@ -18,7 +18,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} AphaserGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -52,7 +52,7 @@ if((ud==0)||(ud==12018))rkr->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o-
 for (int i = 0; i < rkr->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
 {
     parameter_refresh(i);
-};} selected
+};}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -217,7 +217,7 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value(
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
   }
-  Function {parameter_refresh(int index)} {open return_type void
+  Function {parameter_refresh(int index)} {return_type void
   } {
     code {switch (index)
     {
@@ -261,5 +261,9 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value(
         aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));
         break;
     }} {}
+  }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));} {}
   }
 }

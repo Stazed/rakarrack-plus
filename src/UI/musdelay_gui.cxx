@@ -516,3 +516,7 @@ void MusdelayGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void MusdelayGui::tap_tempo_update() {
+  musdelay_tempo->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
+}

@@ -316,4 +316,8 @@ rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Offset,(int)o->value()
         break;
     }} {}
   }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));} {}
+  }
 }

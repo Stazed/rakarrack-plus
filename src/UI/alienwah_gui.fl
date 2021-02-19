@@ -12,7 +12,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} AlienwahGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1643 766 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -46,7 +46,7 @@ if((ud==0)||(ud==12011))rkr->Rack_Effects[EFX_ALIENWAH]->setpreset((int) o->valu
 for (int i = 0; i < rkr->EFX_Param_Size[EFX_ALIENWAH]; i++)
 {
     parameter_refresh(i);
-}} selected
+}}
     xywh {76 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -195,7 +195,7 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross,(int)(o->value()));}
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
   }
-  Function {parameter_refresh(int index)} {open C return_type void
+  Function {parameter_refresh(int index)} {C return_type void
   } {
     code {switch (index)
     {
@@ -233,5 +233,9 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross,(int)(o->value()));}
         Alienwah_phase->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase));
         break;
     }} {}
+  }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));} {}
   }
 }

@@ -707,3 +707,7 @@ void MutromojoGui::parameter_refresh(int index) {
       }
       }
 }
+
+void MutromojoGui::tap_tempo_update() {
+  mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
+}

@@ -439,3 +439,7 @@ void ArpieGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void ArpieGui::tap_tempo_update() {
+  arpie_delay->value(rkr->Rack_Effects[EFX_ARPIE]->getpar(Arpie_Tempo));
+}

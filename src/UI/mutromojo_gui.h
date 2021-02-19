@@ -125,5 +125,6 @@ private:
   CommonGuiMenu *m_lfo_menu; 
 public:
   void parameter_refresh(int index);
+  void tap_tempo_update();
 };
 #endif

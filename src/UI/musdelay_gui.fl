@@ -297,4 +297,8 @@ rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Damp,(int)o->value());}
         break;
     }} {}
   }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {musdelay_tempo->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));} {}
+  }
 }

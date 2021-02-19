@@ -544,3 +544,7 @@ void DflangeGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void DflangeGui::tap_tempo_update() {
+  dflange_freq->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));
+}

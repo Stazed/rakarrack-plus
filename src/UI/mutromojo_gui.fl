@@ -375,4 +375,8 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq,(int)o->value());}
     }
     }} {}
   }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));} {}
+  }
 }

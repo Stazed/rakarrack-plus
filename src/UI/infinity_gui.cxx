@@ -660,3 +660,7 @@ void InfinityGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void InfinityGui::tap_tempo_update() {
+  infinity_rate->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
+}

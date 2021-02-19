@@ -373,4 +373,8 @@ echotron_length->maximum(Efx_Echotron->get_file_length());}
         break;
     }} {}
   }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {echotron_tempo->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));} {}
+  }
 }

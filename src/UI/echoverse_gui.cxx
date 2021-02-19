@@ -400,3 +400,7 @@ void EchoverseGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void EchoverseGui::tap_tempo_update() {
+  echoverse_delay->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
+}

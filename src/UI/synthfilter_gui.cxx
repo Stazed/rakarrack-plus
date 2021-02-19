@@ -594,3 +594,7 @@ void SynthfilterGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void SynthfilterGui::tap_tempo_update() {
+  synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
+}

@@ -443,3 +443,7 @@ void WahwahGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void WahwahGui::tap_tempo_update() {
+  WahWah_freq->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
+}

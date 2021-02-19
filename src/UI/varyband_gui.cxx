@@ -559,3 +559,8 @@ void VarybandGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void VarybandGui::tap_tempo_update() {
+  varyband_freq1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1));
+  varyband_freq2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2));
+}

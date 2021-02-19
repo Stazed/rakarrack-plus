@@ -124,5 +124,6 @@ private:
   CommonGuiMenu *m_looper_ms; 
 public:
   void parameter_refresh(int index);
+  void tap_tempo_update();
 };
 #endif

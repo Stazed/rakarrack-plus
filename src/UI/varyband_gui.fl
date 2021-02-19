@@ -289,7 +289,7 @@ rkr->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_3,(int)o->value());}
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
   }
-  Function {parameter_refresh(int index)} {open return_type void
+  Function {parameter_refresh(int index)} {return_type void
   } {
     code {switch (index)
     {
@@ -339,5 +339,10 @@ rkr->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_3,(int)o->value());}
         varyband_HB->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_High_Band));
         break;
     }} {}
+  }
+  Function {tap_tempo_update()} {return_type void
+  } {
+    code {varyband_freq1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1));
+varyband_freq2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2));} {}
   }
 }

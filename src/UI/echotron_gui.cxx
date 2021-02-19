@@ -620,3 +620,7 @@ void EchotronGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void EchotronGui::tap_tempo_update() {
+  echotron_tempo->value(rkr->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));
+}

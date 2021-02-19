@@ -453,3 +453,7 @@ void ChorusGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void ChorusGui::tap_tempo_update() {
+  chorus_freq->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));
+}

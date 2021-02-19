@@ -77,5 +77,6 @@ private:
   CommonGuiMenu *m_subdiv_menu; 
 public:
   void parameter_refresh(int index);
+  void tap_tempo_update();
 };
 #endif

@@ -683,3 +683,7 @@ void LooperGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void LooperGui::tap_tempo_update() {
+  looper_Tempo->value(rkr->Rack_Effects[EFX_LOOPER]->getpar(Looper_Tempo));
+}

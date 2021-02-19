@@ -308,3 +308,7 @@ void OtremGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void OtremGui::tap_tempo_update() {
+  otrem_freq->value(rkr->Rack_Effects[EFX_OPTICALTREM]->getpar(Optical_LFO_Tempo));
+}

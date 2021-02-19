@@ -71,5 +71,6 @@ private:
   static void cb_echo_damp(RKR_Slider*, void*);
 public:
   void parameter_refresh(int index);
+  void tap_tempo_update();
 };
 #endif

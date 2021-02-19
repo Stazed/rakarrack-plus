@@ -482,3 +482,7 @@ void AphaserGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void AphaserGui::tap_tempo_update() {
+  aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
+}

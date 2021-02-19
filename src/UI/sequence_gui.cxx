@@ -580,3 +580,7 @@ void SequenceGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void SequenceGui::tap_tempo_update() {
+  seq_tempo->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));
+}
