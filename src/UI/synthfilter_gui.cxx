@@ -21,22 +21,11 @@ void SynthfilterGui::cb_synthfilter_activar(RKR_Light_Button* o, void* v) {
 void SynthfilterGui::cb_synthfilter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12027))rkr->Rack_Effects[EFX_SYNTHFILTER]->setpreset((int) o->value());
-synthfilter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet)));
-synthfilter_Distort->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort));
-synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
-synthfilter_rand->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random));
-synthfilter_lfotype->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type));
-synthfilter_stdf->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo));
-synthfilter_width->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width));
-synthfilter_Lstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LPF_Stages));
-synthfilter_Hstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_HPF_Stages));
-synthfilter_fb->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback));
-synthfilter_Offset->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset));
-synthfilter_subs->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Subtract));
-synthfilter_dpth->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth));
-synthfilter_EnvSens->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens));
-synthfilter_ATime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack));
-synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SYNTHFILTER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void SynthfilterGui::cb_synthfilter_preset(RKR_Choice* o, void* v) {
   ((SynthfilterGui*)(o->parent()))->cb_synthfilter_preset_i(o,v);
@@ -550,4 +539,58 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* synthfilter_Offset
 position(X, Y);
 end();
+}
+
+void SynthfilterGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Synthfilter_DryWet:
+          synthfilter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet)));
+          break;
+      case Synthfilter_Distort:
+          synthfilter_Distort->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort));
+          break;
+      case Synthfilter_LFO_Tempo:
+          synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
+          break;
+      case Synthfilter_LFO_Random:
+          synthfilter_rand->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random));
+          break;
+      case Synthfilter_LFO_Type:
+          synthfilter_lfotype->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type));
+          break;
+      case Synthfilter_LFO_Stereo:
+          synthfilter_stdf->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo));
+          break;
+      case Synthfilter_Width:
+          synthfilter_width->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width));
+          break;
+      case Synthfilter_Feedback:
+          synthfilter_fb->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback));
+          break;
+      case Synthfilter_LPF_Stages:
+          synthfilter_Lstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LPF_Stages));
+          break;
+      case Synthfilter_HPF_Stages:
+          synthfilter_Hstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_HPF_Stages));
+          break;
+      case Synthfilter_Subtract:
+          synthfilter_subs->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Subtract));
+          break;
+      case Synthfilter_Depth:
+          synthfilter_dpth->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth));
+          break;
+      case Synthfilter_Env_Sens:
+          synthfilter_EnvSens->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens));
+          break;
+      case Synthfilter_Attack:
+          synthfilter_ATime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack));
+          break;
+      case Synthfilter_Release:
+          synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));
+          break;
+      case Synthfilter_Offset:
+          synthfilter_Offset->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset));
+          break;
+      }
 }

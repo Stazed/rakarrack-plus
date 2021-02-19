@@ -108,5 +108,7 @@ private:
   inline void cb_synthfilter_Offset_i(RKR_Slider*, void*);
   static void cb_synthfilter_Offset(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

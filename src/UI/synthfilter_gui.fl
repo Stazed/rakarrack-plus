@@ -21,7 +21,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1557 72 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -51,22 +51,11 @@ rgui->findpos(EFX_SYNTHFILTER,(int)o->value(),o);}
     user_data 12027
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12027))rkr->Rack_Effects[EFX_SYNTHFILTER]->setpreset((int) o->value());
-synthfilter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet)));
-synthfilter_Distort->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort));
-synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
-synthfilter_rand->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random));
-synthfilter_lfotype->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type));
-synthfilter_stdf->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo));
-synthfilter_width->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width));
-synthfilter_Lstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LPF_Stages));
-synthfilter_Hstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_HPF_Stages));
-synthfilter_fb->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback));
-synthfilter_Offset->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset));
-synthfilter_subs->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Subtract));
-synthfilter_dpth->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth));
-synthfilter_EnvSens->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens));
-synthfilter_ATime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack));
-synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));} selected
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_SYNTHFILTER]; i++)
+{
+    parameter_refresh(i);
+};}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -272,5 +261,59 @@ rkr->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Offset,(int)o->value()
     class RKR_Slider
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Synthfilter_DryWet:
+        synthfilter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_DryWet)));
+        break;
+    case Synthfilter_Distort:
+        synthfilter_Distort->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Distort));
+        break;
+    case Synthfilter_LFO_Tempo:
+        synthfilter_freq->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Tempo));
+        break;
+    case Synthfilter_LFO_Random:
+        synthfilter_rand->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Random));
+        break;
+    case Synthfilter_LFO_Type:
+        synthfilter_lfotype->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Type));
+        break;
+    case Synthfilter_LFO_Stereo:
+        synthfilter_stdf->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LFO_Stereo));
+        break;
+    case Synthfilter_Width:
+        synthfilter_width->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Width));
+        break;
+    case Synthfilter_Feedback:
+        synthfilter_fb->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Feedback));
+        break;
+    case Synthfilter_LPF_Stages:
+        synthfilter_Lstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_LPF_Stages));
+        break;
+    case Synthfilter_HPF_Stages:
+        synthfilter_Hstages->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_HPF_Stages));
+        break;
+    case Synthfilter_Subtract:
+        synthfilter_subs->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Subtract));
+        break;
+    case Synthfilter_Depth:
+        synthfilter_dpth->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Depth));
+        break;
+    case Synthfilter_Env_Sens:
+        synthfilter_EnvSens->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Env_Sens));
+        break;
+    case Synthfilter_Attack:
+        synthfilter_ATime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Attack));
+        break;
+    case Synthfilter_Release:
+        synthfilter_RTime->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Release));
+        break;
+    case Synthfilter_Offset:
+        synthfilter_Offset->value(rkr->Rack_Effects[EFX_SYNTHFILTER]->getpar(Synthfilter_Offset));
+        break;
+    }} {}
   }
 }
