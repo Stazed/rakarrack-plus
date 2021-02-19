@@ -54,5 +54,7 @@ private:
   inline void cb_stomp_mode_i(RKR_Choice*, void*);
   static void cb_stomp_mode(RKR_Choice*, void*);
   static Fl_Menu_Item menu_stomp_mode[];
+public:
+  void parameter_refresh(int index);
 };
 #endif

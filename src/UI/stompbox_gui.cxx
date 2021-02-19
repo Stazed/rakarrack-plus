@@ -21,13 +21,11 @@ void StompboxGui::cb_stomp_activar(RKR_Light_Button* o, void* v) {
 void StompboxGui::cb_stomp_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12039))rkr->Rack_Effects[EFX_STOMPBOX]->setpreset((int)o->value());
-stomp_WD->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level));
-stomp_gain->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain));
-stomp_low->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
-stomp_mid->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
-stomp_high->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
 
-stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_STOMPBOX]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void StompboxGui::cb_stomp_preset(RKR_Choice* o, void* v) {
   ((StompboxGui*)(o->parent()))->cb_stomp_preset_i(o,v);
@@ -276,4 +274,28 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* stomp_mode
 position(X, Y);
 end();
+}
+
+void StompboxGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Stomp_Level:
+          stomp_WD->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level));
+          break;
+      case Stomp_Tone:
+          stomp_high->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
+          break;
+      case Stomp_Mid:
+          stomp_mid->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
+          break;
+      case Stomp_Bias:
+          stomp_low->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
+          break;
+      case Stomp_Gain:
+          stomp_gain->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain));
+          break;
+      case Stomp_Mode:
+          stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));
+          break;
+      }
 }

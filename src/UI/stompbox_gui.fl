@@ -12,7 +12,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class StompboxGui {
-  user_data 1 open
+  user_data 1 open selected
   xywh {1539 137 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
@@ -41,13 +41,11 @@ rgui->findpos(EFX_STOMPBOX,(int)o->value(),o);}
     user_data 12039
     callback {long long ud= (long long) v;
 if((ud==0)||(ud==12039))rkr->Rack_Effects[EFX_STOMPBOX]->setpreset((int)o->value());
-stomp_WD->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level));
-stomp_gain->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain));
-stomp_low->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
-stomp_mid->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
-stomp_high->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
 
-stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));} open selected
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_STOMPBOX]; i++)
+{
+    parameter_refresh(i);
+};} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -197,5 +195,29 @@ rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mode,(int)o->value())}
       label Fuzz
       xywh {90 90 36 21} labelsize 10
     }
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Stomp_Level:
+        stomp_WD->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level));
+        break;
+    case Stomp_Tone:
+        stomp_high->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
+        break;
+    case Stomp_Mid:
+        stomp_mid->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
+        break;
+    case Stomp_Bias:
+        stomp_low->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
+        break;
+    case Stomp_Gain:
+        stomp_gain->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain));
+        break;
+    case Stomp_Mode:
+        stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));
+        break;
+    }} {}
   }
 }
