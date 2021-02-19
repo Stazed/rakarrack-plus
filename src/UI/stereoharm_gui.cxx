@@ -489,9 +489,11 @@ void SharGui::parameter_refresh(int index) {
           break;
       case Sharm_Note:
           shar_note->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note));
+          rgui->Chord(1);
           break;
       case Sharm_Chord:
           shar_type->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord));
+          rgui->Chord(1);
           break;
       case Sharm_MIDI:
           shar_MIDI->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_MIDI));

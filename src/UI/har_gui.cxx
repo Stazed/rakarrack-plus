@@ -438,9 +438,11 @@ void HarGui::parameter_refresh(int index) {
           break;
       case Harm_Note:
           har_note->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note));
+          rgui->Chord(0);
           break;
       case Harm_Chord:
           har_type->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord));
+          rgui->Chord(0);
           break;
       case Harm_Filter_Gain:
           har_gan1->value(rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Filter_Gain)-64);
