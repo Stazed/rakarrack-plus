@@ -21,17 +21,11 @@ void VibeGui::cb_vibe_activar(RKR_Light_Button* o, void* v) {
 void VibeGui::cb_vibe_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12045))rkr->Rack_Effects[EFX_VIBE]->setpreset((int)o->value());
-vibe_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_DryWet)));
-vibe_width->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Width));
-vibe_dpth->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Depth));
-vibe_freq->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
-vibe_rnd->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Random));
-vibe_lfotype->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Type));
-vibe_stdf->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Stereo));
-vibe_pan->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Pan)-64);
-vibe_fb->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Feedback)-64);
-vibe_LR->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LR_Cross));
-vibe_stereo->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Stereo));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_VIBE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void VibeGui::cb_vibe_preset(RKR_Choice* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_preset_i(o,v);
@@ -399,4 +393,43 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* vibe_stereo
 position(X, Y);
 end();
+}
+
+void VibeGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Vibe_Width:
+          vibe_width->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Width));
+          break;
+      case Vibe_LFO_Tempo:
+          vibe_freq->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
+          break;
+      case Vibe_LFO_Random:
+          vibe_rnd->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Random));
+          break;
+      case Vibe_LFO_Type:
+          vibe_lfotype->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Type));
+          break;
+      case Vibe_LFO_Stereo:
+          vibe_stdf->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Stereo));
+          break;
+      case Vibe_Pan:
+          vibe_pan->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Pan)-64);
+          break;
+      case Vibe_DryWet:
+          vibe_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_DryWet)));
+          break;
+      case Vibe_Feedback:
+          vibe_fb->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Feedback)-64);
+          break;
+      case Vibe_Depth:
+          vibe_dpth->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Depth));
+          break;
+      case Vibe_LR_Cross:
+          vibe_LR->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LR_Cross));
+          break;
+      case Vibe_Stereo:
+          vibe_stereo->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Stereo));
+          break;
+      }
 }

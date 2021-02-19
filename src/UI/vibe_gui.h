@@ -81,5 +81,7 @@ private:
   inline void cb_vibe_stereo_i(RKR_Check_Button*, void*);
   static void cb_vibe_stereo(RKR_Check_Button*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif
