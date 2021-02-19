@@ -1474,7 +1474,9 @@ rkr->OnCounter=0;
 FillML();
 Prepare_Order();
 Put_Loaded();
-if(rkr->Tap_Updated) UpdateTGUI();}
+
+if(rkr->Tap_Updated)
+   update_tap_tempo_GUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
           code0 {o->set_label_offset(1);}
           code1 {o->set_text_offset(1);}
@@ -1722,7 +1724,7 @@ TAP_LABEL->redraw_label();}
           callback {if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
 {
 rkr->Update_tempo();
-UpdateTGUI();
+update_tap_tempo_GUI();
 }}
           xywh {628 172 38 15} shortcut 0x67 labelsize 10
           class RKR_Button
@@ -1733,7 +1735,7 @@ UpdateTGUI();
           callback {if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
 T_DIS->value(rkr->TapTempo());
-UpdateTGUI();
+update_tap_tempo_GUI();
 }}
           tooltip {Tap tempo set - Shortcut 'G'} xywh {671 165 38 23} shortcut 0x67 labelsize 12
           code0 {o->set_label_offset(2);}
@@ -1752,7 +1754,7 @@ if(rkr->Tap_Bypass)
 {
 rkr->Tap_TempoSet=(int)o->value();
 rkr->Update_tempo();
-UpdateTGUI();
+update_tap_tempo_GUI();
 }}
           xywh {719 165 70 22} align 0 minimum 20 maximum 360 step 1 value 100 textcolor 7
           code0 {o->set_text_offset(4);}
@@ -1895,7 +1897,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {update_looper()} {open
   } {}
-  Function {UpdateTGUI()} {open
+  Function {update_tap_tempo_GUI()} {open
   } {}
   Function {ActACI()} {open
   } {}

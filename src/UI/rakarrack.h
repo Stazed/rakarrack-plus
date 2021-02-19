@@ -597,7 +597,7 @@ public:
   void Prepare_Order();
   void Show_Next_Time();
   void update_looper();
-  void UpdateTGUI();
+  void update_tap_tempo_GUI();
   void ActACI();
   int Busca_Eff(int num);
   void Fill_Avail(int filter);

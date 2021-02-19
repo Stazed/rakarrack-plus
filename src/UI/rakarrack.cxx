@@ -664,7 +664,9 @@ rkr->OnCounter=0;
 FillML();
 Prepare_Order();
 Put_Loaded();
-if(rkr->Tap_Updated) UpdateTGUI();
+
+if(rkr->Tap_Updated)
+   update_tap_tempo_GUI();
 }
 void RKRGUI::cb_Preset_Counter(RKR_Counter* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Preset_Counter_i(o,v);
@@ -807,7 +809,7 @@ void RKRGUI::cb_T_Apply_i(RKR_Button*, void*) {
   if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
 {
 rkr->Update_tempo();
-UpdateTGUI();
+update_tap_tempo_GUI();
 };
 }
 void RKRGUI::cb_T_Apply(RKR_Button* o, void* v) {
@@ -818,7 +820,7 @@ void RKRGUI::cb_T_BUT_i(RKR_Button*, void*) {
   if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
 {
 T_DIS->value(rkr->TapTempo());
-UpdateTGUI();
+update_tap_tempo_GUI();
 };
 }
 void RKRGUI::cb_T_BUT(RKR_Button* o, void* v) {
@@ -832,7 +834,7 @@ if(rkr->Tap_Bypass)
 {
 rkr->Tap_TempoSet=(int)o->value();
 rkr->Update_tempo();
-UpdateTGUI();
+update_tap_tempo_GUI();
 };
 }
 void RKRGUI::cb_T_DIS(RKR_Value_Input* o, void* v) {

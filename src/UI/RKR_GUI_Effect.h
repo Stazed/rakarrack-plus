@@ -42,6 +42,9 @@ public:
      */
     virtual void parameter_refresh(int) = 0;
     
+    /**
+     * All effects that apply tap tempo should override this function.
+     */
     virtual void tap_tempo_update() {};
 
     RKR_Light_Button *activate_effect;

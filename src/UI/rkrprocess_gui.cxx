@@ -328,7 +328,7 @@ void RKRGUI::GuiTimeout(void)
         if ((rkr->Tap_Display == 1) && (rkr->Tap_Selection > 0))
         {
             T_DIS->value(rkr->Tap_TempoSet);
-            UpdateTGUI();
+            update_tap_tempo_GUI();
             rkr->Tap_Display = 0;
         }
 
@@ -3075,8 +3075,11 @@ void RKRGUI::update_looper()
 
 /**
  * Updates the gui for global tempo settings from Tap Tempo.
+ * This cycles through all effects, but only those that apply
+ * tap tempo have an override of the base virtual function.
+ * The effects that do not override use the base empty function.
  */
-void RKRGUI::UpdateTGUI()
+void RKRGUI::update_tap_tempo_GUI()
 {
     for(int efx_index = 0; efx_index < C_NUMBER_EFFECTS; efx_index++)
     {
