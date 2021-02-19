@@ -2230,7 +2230,7 @@ void RKRGUI::Chord(int eff)
 void RKRGUI::MIDI_control_gui_refresh()
 {
     // Mvalue is flag to indicate at least one parameter needs update
-    if (rkr->Mvalue == 0)
+    if (!rkr->Mvalue)
         return;
 
     // Index starts at 1, since case 0 is unused
@@ -2275,13 +2275,15 @@ void RKRGUI::MIDI_control_gui_refresh()
             continue;   // We found it in above special cases
         }
         
-        // Normal MIDI effect processing
+        // Normal MIDI processing of rack effects
         for (int param_index = 0; param_index < C_MC_PARAMETER_SIZE; param_index++)
         {
             // Find the effect parameter that needs update
             if(rkr->mc_efx_params[param_index].MC_params_index == mc_index)
             {
                 rkr->Mcontrol[mc_index] = 0;   // clear the parameter flag
+                
+                // Get the effect and parameter
                 int effect_index = rkr->mc_efx_params[param_index].Effect_index;
                 int efx_param_index = rkr->mc_efx_params[param_index].Efx_param_index;
 
@@ -2292,6 +2294,7 @@ void RKRGUI::MIDI_control_gui_refresh()
         }
     }
 
+    // Clear the flag
     rkr->Mvalue = 0;
 }
 

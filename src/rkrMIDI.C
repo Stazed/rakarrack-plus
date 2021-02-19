@@ -1264,16 +1264,18 @@ RKR::process_midi_controller_events(int parameter, int value)
             return;
     }
 
-    // Normal MIDI processing
-    for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
+    // Normal MIDI processing of rack effects
+    for (int param_index = 0; param_index < C_MC_PARAMETER_SIZE; param_index++)
     {
-        if(mc_efx_params[i].MC_params_index == parameter)
+        if(mc_efx_params[param_index].MC_params_index == parameter)
         {
-            int effect_index = mc_efx_params[i].Effect_index;
-            int efx_param_index = mc_efx_params[i].Efx_param_index;
-            int mc_offset = mc_efx_params[i].MC_offset;
-            double range = mc_efx_params[i].MC_range;
+            // Get the MIDI control item to change
+            int effect_index = mc_efx_params[param_index].Effect_index;
+            int efx_param_index = mc_efx_params[param_index].Efx_param_index;
+            int mc_offset = mc_efx_params[param_index].MC_offset;
+            double range = mc_efx_params[param_index].MC_range;
             
+            // Apply the change to the effect
             Rack_Effects[effect_index]->changepar(efx_param_index, mc_offset + ( (int) ((float) value * range)));
             return;
         }
