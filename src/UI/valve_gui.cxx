@@ -21,19 +21,11 @@ void ValveGui::cb_valve_activar(RKR_Light_Button* o, void* v) {
 void ValveGui::cb_valve_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12019))rkr->Rack_Effects[EFX_VALVE]->setpreset((int)o->value());
-valve_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_DryWet)));
-valve_LRc->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LR_Cross));
-valve_drive->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Drive));
-valve_level->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Level));
-valve_neg->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Negate));
-valve_st->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Stereo));
-valve_pan->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Pan)-64);
-valve_pf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Prefilter));
-valve_lpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LPF));
-valve_hpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_HPF));
-valve_Q->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Distortion));
-valve_ed->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Ex_Dist));
-valve_Pre->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Presence));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_VALVE]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void ValveGui::cb_valve_preset(RKR_Choice* o, void* v) {
   ((ValveGui*)(o->parent()))->cb_valve_preset_i(o,v);
@@ -429,4 +421,49 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* valve_hpf
 position(X, Y);
 end();
+}
+
+void ValveGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Valve_DryWet:
+          valve_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_DryWet)));
+          break;
+      case Valve_Pan:
+          valve_pan->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Pan)-64);
+          break;
+      case Valve_LR_Cross:
+          valve_LRc->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LR_Cross));
+          break;
+      case Valve_Drive:
+          valve_drive->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Drive));
+          break;
+      case Valve_Level:
+          valve_level->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Level));
+          break;
+      case Valve_Negate:
+          valve_neg->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Negate));
+          break;
+      case Valve_LPF:
+          valve_lpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_LPF));
+          break;
+      case Valve_HPF:
+          valve_hpf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_HPF));
+          break;
+      case Valve_Stereo:
+          valve_st->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Stereo));
+          break;
+      case Valve_Prefilter:
+          valve_pf->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Prefilter));
+          break;
+      case Valve_Distortion:
+          valve_Q->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Distortion));
+          break;
+      case Valve_Ex_Dist:
+          valve_ed->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Ex_Dist));
+          break;
+      case Valve_Presence:
+          valve_Pre->value(rkr->Rack_Effects[EFX_VALVE]->getpar(Valve_Presence));
+          break;
+      }
 }

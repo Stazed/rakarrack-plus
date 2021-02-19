@@ -89,5 +89,7 @@ public:
 private:
   inline void cb_valve_hpf_i(RKR_Slider*, void*);
   static void cb_valve_hpf(RKR_Slider*, void*);
+public:
+  void parameter_refresh(int index);
 };
 #endif
