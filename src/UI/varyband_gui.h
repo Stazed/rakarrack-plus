@@ -99,5 +99,7 @@ private:
   static void cb_varyband_HB(RKR_Choice*, void*);
   static Fl_Menu_Item menu_varyband_HB[];
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

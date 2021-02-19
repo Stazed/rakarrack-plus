@@ -21,21 +21,12 @@ void VarybandGui::cb_varyband_activar(RKR_Light_Button* o, void* v) {
 void VarybandGui::cb_varyband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12028))rkr->Rack_Effects[EFX_VARYBAND]->setpreset((int)o->value());
-varyband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_DryWet)));
-varyband_freq1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1));
-varyband_lfotype1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_1));
-varyband_stdf1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_1));
-varyband_freq2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2));
-varyband_lfotype2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_2));
-varyband_stdf2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_2));
-varyband_cross1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_1));
-varyband_cross2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_2));
-varyband_cross3->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_3));
-//varyband_combi->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Combination));
-varyband_LB->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Low_Band));
-varyband_MB1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Mid_Band_1));
-varyband_MB2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Mid_Band_2));
-varyband_HB->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_High_Band));
+
+// We need to add 4 because the gui is not using legacy file saving combination any more
+for (int i = 0; i < (rkr->EFX_Param_Size[EFX_VARYBAND] + 4); i++)
+{
+    parameter_refresh(i);
+};
 }
 void VarybandGui::cb_varyband_preset(RKR_Choice* o, void* v) {
   ((VarybandGui*)(o->parent()))->cb_varyband_preset_i(o,v);
@@ -516,4 +507,55 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Choice* varyband_HB
 position(X, Y);
 end();
+}
+
+void VarybandGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case VaryBand_DryWet:
+          varyband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_DryWet)));
+          break;
+      case VaryBand_LFO_Tempo_1:
+          varyband_freq1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_1));
+          break;
+      case VaryBand_LFO_Type_1:
+          varyband_lfotype1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_1));
+          break;
+      case VaryBand_LFO_Stereo_1:
+          varyband_stdf1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_1));
+          break;
+      case VaryBand_LFO_Tempo_2:
+          varyband_freq2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Tempo_2));
+          break;
+      case VaryBand_LFO_Type_2:
+          varyband_lfotype2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Type_2));
+          break;
+      case VaryBand_LFO_Stereo_2:
+          varyband_stdf2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_LFO_Stereo_2));
+          break;
+      case VaryBand_Cross_1:
+          varyband_cross1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_1));
+          break;
+      case VaryBand_Cross_2:
+          varyband_cross2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_2));
+          break;
+      case VaryBand_Cross_3:
+          varyband_cross3->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Cross_3));
+          break;
+      case VaryBand_Combination:  // Rakarrack-plus file saving & presets
+          //varyband_combi->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Combination));
+          break;
+      case VaryBand_Low_Band:
+          varyband_LB->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Low_Band));
+          break;
+      case VaryBand_Mid_Band_1:
+          varyband_MB1->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Mid_Band_1));
+          break;
+      case VaryBand_Mid_Band_2:
+          varyband_MB2->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_Mid_Band_2));
+          break;
+      case VaryBand_High_Band:
+          varyband_HB->value(rkr->Rack_Effects[EFX_VARYBAND]->getpar(VaryBand_High_Band));
+          break;
+      }
 }
