@@ -24,18 +24,12 @@ void SharGui::cb_shar_activar(RKR_Light_Button* o, void* v) {
 void SharGui::cb_shar_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
 if((ud==0)||(ud==12042))rkr->Rack_Effects[EFX_STEREOHARM]->setpreset((int)o->value());
-shar_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_DryWet)));
-shar_ganl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Gain)-64);
-shar_intl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Interval)-12);
-shar_chl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma));
-shar_ganr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Gain)-64);
-shar_intr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Interval)-12);
-shar_chr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma));
-shar_lrc->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_LR_Cross));
-shar_SELECT->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Select));
-shar_note->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note));
-shar_type->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord));
-shar_MIDI->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_MIDI));
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_STEREOHARM]; i++)
+{
+    parameter_refresh(i);
+};
+
 
 StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(rkr->Rack_Effects[EFX_STEREOHARM]);
 if ((Efx_StereoHarm->PMIDI) || (Efx_StereoHarm->PSELECT)) rgui->Chord(1);
@@ -464,4 +458,46 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* shar_type
 position(X, Y);
 end();
+}
+
+void SharGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Sharm_DryWet:
+          shar_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_DryWet)));
+          break;
+      case Sharm_L_Gain:
+          shar_ganl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Gain)-64);
+          break;
+      case Sharm_L_Interval:
+          shar_intl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Interval)-12);
+          break;
+      case Sharm_L_Chroma:
+          shar_chl->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_L_Chroma));
+          break;
+      case Sharm_R_Gain:
+          shar_ganr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Gain)-64);
+          break;
+      case Sharm_R_Interval:
+          shar_intr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Interval)-12);
+          break;
+      case Sharm_R_Chroma:
+          shar_chr->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_R_Chroma));
+          break;
+      case Sharm_Select:
+          shar_SELECT->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Select));
+          break;
+      case Sharm_Note:
+          shar_note->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note));
+          break;
+      case Sharm_Chord:
+          shar_type->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord));
+          break;
+      case Sharm_MIDI:
+          shar_MIDI->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_MIDI));
+          break;
+      case Sharm_LR_Cross:
+          shar_lrc->value(rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_LR_Cross));
+          break;
+      }
 }
