@@ -61,5 +61,6 @@ private:
   static void cb_vo_level(RKR_Slider*, void*);
 public:
   NewVum *vu_vu;
+  void parameter_refresh(int index);
 };
 #endif

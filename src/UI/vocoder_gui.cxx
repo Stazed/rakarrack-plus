@@ -20,14 +20,12 @@ void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
 
 void VocoderGui::cb_vo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-        if((ud==0)||(ud==12035))rkr->Rack_Effects[EFX_VOCODER]->setpreset((int) o->value());
-        vo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_DryWet)));
-        vo_pan->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Pan)-64);
-        vo_mu->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Smear));
-        vo_q->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Q));
-        vo_input->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Input));
-        vo_ring->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Ring));
-        vo_level->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Level));
+if((ud==0)||(ud==12035))rkr->Rack_Effects[EFX_VOCODER]->setpreset((int) o->value());
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_VOCODER]; i++)
+{
+    parameter_refresh(i);
+};
 }
 void VocoderGui::cb_vo_preset(RKR_Choice* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_preset_i(o,v);
@@ -305,4 +303,31 @@ this->when(FL_WHEN_RELEASE);
 } // NewVum* vu_vu
 position(X, Y);
 end();
+}
+
+void VocoderGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case Vocoder_DryWet:
+          vo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_DryWet)));
+          break;
+      case Vocoder_Pan:
+          vo_pan->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Pan)-64);
+          break;
+      case Vocoder_Smear:
+          vo_mu->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Smear));
+          break;
+      case Vocoder_Q:
+          vo_q->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Q));
+          break;
+      case Vocoder_Input:
+          vo_input->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Input));
+          break;
+      case Vocoder_Level:
+          vo_level->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Level));
+          break;
+      case Vocoder_Ring:
+          vo_ring->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Ring));
+          break;
+      }
 }
