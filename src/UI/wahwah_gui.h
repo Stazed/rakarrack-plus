@@ -82,5 +82,7 @@ private:
   inline void cb_WahWah_smooth_i(RKR_Slider*, void*);
   static void cb_WahWah_smooth(RKR_Slider*, void*);
   CommonGuiMenu *m_lfo_menu; 
+public:
+  void parameter_refresh(int index);
 };
 #endif

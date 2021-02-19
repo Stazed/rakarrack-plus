@@ -21,18 +21,13 @@ void WahwahGui::cb_WahWah_activar(RKR_Light_Button* o, void* v) {
 void WahwahGui::cb_WahWah_preset_i(RKR_Choice* o, void* v) {
   rkr->EFX_Bypass[EFX_WAHWAH]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12010))rkr->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value()); 
-WahWah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_DryWet)));
-WahWah_pan->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Pan)-64);
-WahWah_freq->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
-WahWah_rnd->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Random));
-WahWah_lfotype->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Type));
-WahWah_stdf->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Stereo));
-WahWah_dpth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Depth));
-WahWah_ampsns->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Sense));
-WahWah_ampsnsinv->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_ASI));
-WahWah_smooth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Smooth));
-WahWah_ftype->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Mode));
+if((ud==0)||(ud==12010))rkr->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value());
+
+for (int i = 0; i < rkr->EFX_Param_Size[EFX_WAHWAH]; i++)
+{
+    parameter_refresh(i);
+};
+
 if((int)WahWah_activar->value()) rkr->EFX_Bypass[EFX_WAHWAH]=1;
 }
 void WahwahGui::cb_WahWah_preset(RKR_Choice* o, void* v) {
@@ -408,4 +403,43 @@ this->when(FL_WHEN_RELEASE);
 } // RKR_Slider* WahWah_smooth
 position(X, Y);
 end();
+}
+
+void WahwahGui::parameter_refresh(int index) {
+  switch (index)
+      {
+      case WahWah_DryWet:
+          WahWah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_DryWet)));
+          break;
+      case WahWah_Pan:
+          WahWah_pan->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Pan)-64);
+          break;
+      case WahWah_LFO_Tempo:
+          WahWah_freq->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
+          break;
+      case WahWah_LFO_Random:
+          WahWah_rnd->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Random));
+          break;
+      case WahWah_LFO_Type:
+          WahWah_lfotype->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Type));
+          break;
+      case WahWah_LFO_Stereo:
+          WahWah_stdf->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Stereo));
+          break;
+      case WahWah_Depth:
+          WahWah_dpth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Depth));
+          break;
+      case WahWah_Sense:
+          WahWah_ampsns->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Sense));
+          break;
+      case WahWah_ASI:
+          WahWah_ampsnsinv->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_ASI));
+          break;
+      case WahWah_Smooth:
+          WahWah_smooth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Smooth));
+          break;
+      case WahWah_Mode:
+           WahWah_ftype->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Mode));
+          break;
+      }
 }
