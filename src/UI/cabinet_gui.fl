@@ -24,12 +24,12 @@ widget_class CabinetGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_CABINET]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_CABINET]);
  return;
 }
-rkr->EFX_Bypass[EFX_CABINET]=(int)o->value();
-rgui->findpos(EFX_CABINET,(int)o->value(),o);}
+m_process->EFX_Bypass[EFX_CABINET]=(int)o->value();
+m_parent->findpos(EFX_CABINET,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -37,7 +37,7 @@ rgui->findpos(EFX_CABINET,(int)o->value(),o);}
   Fl_Choice Cabinet_preset {
     label Preset
     user_data 12012
-    callback {rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Preset_Idx, (int) o->value());} open
+    callback {m_process->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Preset_Idx, (int) o->value());} open
     xywh {45 45 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -91,11 +91,11 @@ rgui->findpos(EFX_CABINET,(int)o->value(),o);}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Cabinet_Gain);
+ m_parent->getMIDIControl(MC_Cabinet_Gain);
  return;
 } 
 
-rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64));}
     xywh {56 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -104,11 +104,11 @@ rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64));}
     code {switch(index)
     {
     case Cabinet_Gain:          // 1
-        Cabinet_output->value(rkr->lv[EFX_CABINET][Cabinet_Gain] - 64);
+        Cabinet_output->value(m_process->lv[EFX_CABINET][Cabinet_Gain] - 64);
         break;
 
     case Cabinet_Preset_Idx:    // 0
-        Cabinet_preset->value(rkr->lv[EFX_CABINET][Cabinet_Preset_Idx]);
+        Cabinet_preset->value(m_process->lv[EFX_CABINET][Cabinet_Preset_Idx]);
         break;
     }} {}
   }

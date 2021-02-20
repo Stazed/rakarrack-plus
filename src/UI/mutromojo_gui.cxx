@@ -5,14 +5,14 @@
 void MutromojoGui::cb_mutromojo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_MUTROMOJO]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_MUTROMOJO]);
  return;
 }
-rkr->EFX_Bypass[EFX_MUTROMOJO]=(int)o->value();
+m_process->EFX_Bypass[EFX_MUTROMOJO]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_MUTROMOJO]->cleanup();
-rgui->findpos(EFX_MUTROMOJO,(int)o->value(),o);
+m_process->Rack_Effects[EFX_MUTROMOJO]->cleanup();
+m_parent->findpos(EFX_MUTROMOJO,(int)o->value(),o);
 }
 void MutromojoGui::cb_mutromojo_activar(RKR_Light_Button* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_activar_i(o,v);
@@ -20,14 +20,14 @@ void MutromojoGui::cb_mutromojo_activar(RKR_Light_Button* o, void* v) {
 
 void MutromojoGui::cb_mutromojo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12031))rkr->Rack_Effects[EFX_MUTROMOJO]->setpreset((int) o->value());
+if((ud==0)||(ud==12031))m_process->Rack_Effects[EFX_MUTROMOJO]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_MUTROMOJO]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_MUTROMOJO]; i++)
 {
     parameter_refresh(i);
 };
 
-o->value(rkr->Rack_Effects[EFX_MUTROMOJO]->Ppreset);
+o->value(m_process->Rack_Effects[EFX_MUTROMOJO]->Ppreset);
 o->redraw();
 }
 void MutromojoGui::cb_mutromojo_preset(RKR_Choice* o, void* v) {
@@ -48,17 +48,17 @@ Fl_Menu_Item MutromojoGui::menu_mutromojo_preset[] = {
 void MutromojoGui::cb_mutromojo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_DryWet);
+ m_parent->getMIDIControl(MC_MuTro_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_DryWet,Dry_Wet((int)(o->value())));
 }
 void MutromojoGui::cb_mutromojo_WD(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_WD_i(o,v);
 }
 
 void MutromojoGui::cb_mutromojo_qm_i(RKR_Check_Button* o, void*) {
-  MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(rkr->Rack_Effects[EFX_MUTROMOJO]);
+  MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(m_process->Rack_Effects[EFX_MUTROMOJO]);
 
 if((int)o->value())
 {
@@ -78,17 +78,17 @@ void MutromojoGui::cb_mutromojo_qm(RKR_Check_Button* o, void* v) {
 void MutromojoGui::cb_mutromojo_lp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LowPass);
+ m_parent->getMIDIControl(MC_MuTro_LowPass);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_lp(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_lp_i(o,v);
 }
 
 void MutromojoGui::cb_mutromojo_nat_i(RKR_Check_Button* o, void*) {
-  MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(rkr->Rack_Effects[EFX_MUTROMOJO]);
+  MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(m_process->Rack_Effects[EFX_MUTROMOJO]);
 
 if((int)o->value())
 {
@@ -108,17 +108,17 @@ void MutromojoGui::cb_mutromojo_nat(RKR_Check_Button* o, void* v) {
 void MutromojoGui::cb_mutromojo_bp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_BandPass);
+ m_parent->getMIDIControl(MC_MuTro_BandPass);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_bp(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_bp_i(o,v);
 }
 
 void MutromojoGui::cb_mutromojo_res_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Mod_Res,(int)o->value());
+  m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Mod_Res,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_res(RKR_Check_Button* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_res_i(o,v);
@@ -127,17 +127,17 @@ void MutromojoGui::cb_mutromojo_res(RKR_Check_Button* o, void* v) {
 void MutromojoGui::cb_mutromojo_hp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_HighPass);
+ m_parent->getMIDIControl(MC_MuTro_HighPass);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_hp(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_hp_i(o,v);
 }
 
 void MutromojoGui::cb_svfilter_stages_i(RKR_Counter* o, void*) {
-  rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Stages,(int)o->value());
+  m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Stages,(int)o->value());
 }
 void MutromojoGui::cb_svfilter_stages(RKR_Counter* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_svfilter_stages_i(o,v);
@@ -146,11 +146,11 @@ void MutromojoGui::cb_svfilter_stages(RKR_Counter* o, void* v) {
 void MutromojoGui::cb_mutromojo_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Type);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Type);
  return;
 }
 
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Type,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Type,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_lfotype(RKR_Choice* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_lfotype_i(o,v);
@@ -159,10 +159,10 @@ void MutromojoGui::cb_mutromojo_lfotype(RKR_Choice* o, void* v) {
 void MutromojoGui::cb_mutromojo_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Depth);
+ m_parent->getMIDIControl(MC_MuTro_Depth);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Depth,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Depth,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_dpth(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_dpth_i(o,v);
@@ -171,10 +171,10 @@ void MutromojoGui::cb_mutromojo_dpth(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Tempo);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Tempo);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_freq(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_freq_i(o,v);
@@ -183,10 +183,10 @@ void MutromojoGui::cb_mutromojo_freq(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Resonance);
+ m_parent->getMIDIControl(MC_MuTro_Resonance);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Resonance,(int)(o->value()));
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Resonance,(int)(o->value()));
 }
 void MutromojoGui::cb_mutromojo_q(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_q_i(o,v);
@@ -195,10 +195,10 @@ void MutromojoGui::cb_mutromojo_q(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_rng_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Range);
+ m_parent->getMIDIControl(MC_MuTro_Range);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Range,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Range,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_rng(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_rng_i(o,v);
@@ -207,10 +207,10 @@ void MutromojoGui::cb_mutromojo_rng(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_ampsnsinv_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Wah);
+ m_parent->getMIDIControl(MC_MuTro_Wah);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Wah,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Wah,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_ampsnsinv(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_ampsnsinv_i(o,v);
@@ -219,10 +219,10 @@ void MutromojoGui::cb_mutromojo_ampsnsinv(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_ampsns_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Env_Sens);
+ m_parent->getMIDIControl(MC_MuTro_Env_Sens);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_ampsns(RKR_Slider* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_ampsns_i(o,v);
@@ -231,10 +231,10 @@ void MutromojoGui::cb_mutromojo_ampsns(RKR_Slider* o, void* v) {
 void MutromojoGui::cb_mutromojo_smooth_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Env_Smooth);
+ m_parent->getMIDIControl(MC_MuTro_Env_Smooth);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Smooth,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Smooth,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_smooth(RKR_Value_Input* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_smooth_i(o,v);
@@ -243,10 +243,10 @@ void MutromojoGui::cb_mutromojo_smooth(RKR_Value_Input* o, void* v) {
 void MutromojoGui::cb_mutromojo_Rnd_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Random);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Random);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Random,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Random,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_Rnd(RKR_Value_Input* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_Rnd_i(o,v);
@@ -255,10 +255,10 @@ void MutromojoGui::cb_mutromojo_Rnd(RKR_Value_Input* o, void* v) {
 void MutromojoGui::cb_mutromojo_St_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Stereo);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Stereo);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Stereo,(int)o->value()+64);
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Stereo,(int)o->value()+64);
 }
 void MutromojoGui::cb_mutromojo_St(RKR_Value_Input* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_St_i(o,v);
@@ -267,10 +267,10 @@ void MutromojoGui::cb_mutromojo_St(RKR_Value_Input* o, void* v) {
 void MutromojoGui::cb_mutromojo_minfreq_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_St_Freq);
+ m_parent->getMIDIControl(MC_MuTro_St_Freq);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq,(int)o->value());
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq,(int)o->value());
 }
 void MutromojoGui::cb_mutromojo_minfreq(RKR_Value_Input* o, void* v) {
   ((MutromojoGui*)(o->parent()))->cb_mutromojo_minfreq_i(o,v);
@@ -648,59 +648,59 @@ void MutromojoGui::parameter_refresh(int index) {
   switch (index)
       {
       case MuTro_DryWet:
-          mutromojo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_DryWet)));
+          mutromojo_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_DryWet)));
           break;
       case MuTro_Resonance:
-          mutromojo_q->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Resonance));
+          mutromojo_q->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Resonance));
           break;
       case MuTro_LFO_Tempo:
-          mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
+          mutromojo_freq->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
           break;
       case MuTro_LFO_Random:
-          mutromojo_Rnd->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Random));
+          mutromojo_Rnd->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Random));
           break;
       case MuTro_LFO_Type:
-          mutromojo_lfotype->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Type));
+          mutromojo_lfotype->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Type));
           break;
       case MuTro_LFO_Stereo:
-          mutromojo_St->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Stereo)-64);
+          mutromojo_St->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Stereo)-64);
           break;
       case MuTro_Depth:
-          mutromojo_dpth->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Depth));
+          mutromojo_dpth->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Depth));
           break;
       case MuTro_Env_Sens:
-          mutromojo_ampsns->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Sens));
+          mutromojo_ampsns->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Sens));
           break;
       case MuTro_Wah:
-          mutromojo_ampsnsinv->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Wah));
+          mutromojo_ampsnsinv->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Wah));
           break;
       case MuTro_Env_Smooth:
-          mutromojo_smooth->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Smooth));
+          mutromojo_smooth->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Smooth));
           break;
       case MuTro_LowPass:
-          mutromojo_lp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LowPass));
+          mutromojo_lp->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LowPass));
           break;
       case MuTro_BandPass:
-          mutromojo_bp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_BandPass));
+          mutromojo_bp->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_BandPass));
           break;
       case MuTro_HighPass:
-          mutromojo_hp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_HighPass));
+          mutromojo_hp->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_HighPass));
           break;
       case MuTro_Stages:
-          svfilter_stages->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Stages));
+          svfilter_stages->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Stages));
           break;
       case MuTro_Range:
-          mutromojo_rng->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range));
+          mutromojo_rng->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range));
           break;
       case MuTro_St_Freq:
-          mutromojo_minfreq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq));
+          mutromojo_minfreq->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq));
           break;
       case MuTro_Mod_Res:
-          mutromojo_res->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Mod_Res));
+          mutromojo_res->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Mod_Res));
           break;
       case Mutro_Mode_Legacy:
       {
-          int temp=rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Mode_Legacy);
+          int temp=m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Mode_Legacy);
           if((temp==1) || (temp==3)) mutromojo_qm->value(1); else mutromojo_qm->value(0);
           if((temp==2) || (temp==3)) mutromojo_nat->value(1); else mutromojo_nat->value(0);
           break;
@@ -709,5 +709,5 @@ void MutromojoGui::parameter_refresh(int index) {
 }
 
 void MutromojoGui::tap_tempo_update() {
-  mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
+  mutromojo_freq->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
 }

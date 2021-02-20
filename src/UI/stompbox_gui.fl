@@ -24,14 +24,14 @@ widget_class StompboxGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_STOMPBOX]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_STOMPBOX]);
  return;
 }
-rkr->EFX_Bypass[EFX_STOMPBOX]=(int)o->value();
+m_process->EFX_Bypass[EFX_STOMPBOX]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_STOMPBOX]->cleanup();
-rgui->findpos(EFX_STOMPBOX,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_STOMPBOX]->cleanup();
+m_parent->findpos(EFX_STOMPBOX,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -40,9 +40,9 @@ rgui->findpos(EFX_STOMPBOX,(int)o->value(),o);}
     label Preset
     user_data 12039
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12039))rkr->Rack_Effects[EFX_STOMPBOX]->setpreset((int)o->value());
+if((ud==0)||(ud==12039))m_process->Rack_Effects[EFX_STOMPBOX]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_STOMPBOX]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_STOMPBOX]; i++)
 {
     parameter_refresh(i);
 };} open
@@ -99,10 +99,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_STOMPBOX]; i++)
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Stomp_Level);
+ m_parent->getMIDIControl(MC_Stomp_Level);
  return;
 }
-rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Level,(int)o->value());}
+m_process->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Level,(int)o->value());}
     xywh {56 30 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -110,10 +110,10 @@ rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Level,(int)o->value());}
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Stomp_Gain);
+ m_parent->getMIDIControl(MC_Stomp_Gain);
  return;
 }
-rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Gain,(int)o->value());}
+m_process->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Gain,(int)o->value());}
     xywh {56 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -121,10 +121,10 @@ rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Gain,(int)o->value());}
     label Bias
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Stomp_Bias);
+ m_parent->getMIDIControl(MC_Stomp_Bias);
  return;
 }
-rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Bias,(int)o->value());}
+m_process->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Bias,(int)o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -132,10 +132,10 @@ rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Bias,(int)o->value());}
     label Mid
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Stomp_Mid);
+ m_parent->getMIDIControl(MC_Stomp_Mid);
  return;
 }
-rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mid,(int)o->value());}
+m_process->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mid,(int)o->value());}
     xywh {56 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 36 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -143,10 +143,10 @@ rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mid,(int)o->value());}
     label Tone
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Stomp_Tone);
+ m_parent->getMIDIControl(MC_Stomp_Tone);
  return;
 }
-rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Tone,(int)o->value());}
+m_process->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Tone,(int)o->value());}
     xywh {56 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -155,11 +155,11 @@ rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Tone,(int)o->value());}
     user_data 12
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Stomp_Mode);
+ m_parent->getMIDIControl(MC_Stomp_Mode);
  return;
 }
 
-rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mode,(int)o->value())}
+m_process->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mode,(int)o->value())}
     xywh {60 139 78 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -201,22 +201,22 @@ rkr->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Mode,(int)o->value())}
     code {switch (index)
     {
     case Stomp_Level:
-        stomp_WD->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level));
+        stomp_WD->value(m_process->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Level));
         break;
     case Stomp_Tone:
-        stomp_high->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
+        stomp_high->value(m_process->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Tone));
         break;
     case Stomp_Mid:
-        stomp_mid->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
+        stomp_mid->value(m_process->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mid));
         break;
     case Stomp_Bias:
-        stomp_low->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
+        stomp_low->value(m_process->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Bias));
         break;
     case Stomp_Gain:
-        stomp_gain->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain));
+        stomp_gain->value(m_process->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Gain));
         break;
     case Stomp_Mode:
-        stomp_mode->value(rkr->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));
+        stomp_mode->value(m_process->Rack_Effects[EFX_STOMPBOX]->getpar(Stomp_Mode));
         break;
     }} {}
   }

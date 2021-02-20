@@ -5,12 +5,12 @@
 void GateGui::cb_gate_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_NOISEGATE]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_NOISEGATE]);
  return;
 }
-rkr->EFX_Bypass[EFX_NOISEGATE]=(int)o->value();
-rgui->findpos(EFX_NOISEGATE,(int)o->value(),o);
+m_process->EFX_Bypass[EFX_NOISEGATE]=(int)o->value();
+m_parent->findpos(EFX_NOISEGATE,(int)o->value(),o);
 }
 void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_activar_i(o,v);
@@ -18,9 +18,9 @@ void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {
 
 void GateGui::cb_gate_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12016))rkr->Rack_Effects[EFX_NOISEGATE]->setpreset((int) o->value());
+if((ud==0)||(ud==12016))m_process->Rack_Effects[EFX_NOISEGATE]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_NOISEGATE]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_NOISEGATE]; i++)
 {
     parameter_refresh(i);
 };
@@ -39,10 +39,10 @@ Fl_Menu_Item GateGui::menu_gate_preset[] = {
 void GateGui::cb_gate_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Attack);
+ m_parent->getMIDIControl(MC_Gate_Attack);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Attack,(int)o->value());
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Attack,(int)o->value());
 }
 void GateGui::cb_gate_ATime(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_ATime_i(o,v);
@@ -51,10 +51,10 @@ void GateGui::cb_gate_ATime(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Release);
+ m_parent->getMIDIControl(MC_Gate_Release);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Release, (int) o->value());
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Release, (int) o->value());
 }
 void GateGui::cb_gate_RTime(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_RTime_i(o,v);
@@ -63,10 +63,10 @@ void GateGui::cb_gate_RTime(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_range_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Range);
+ m_parent->getMIDIControl(MC_Gate_Range);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Range, (int) o->value());
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Range, (int) o->value());
 }
 void GateGui::cb_gate_range(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_range_i(o,v);
@@ -75,10 +75,10 @@ void GateGui::cb_gate_range(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Threshold);
+ m_parent->getMIDIControl(MC_Gate_Threshold);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Threshold, (int)o->value());
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Threshold, (int)o->value());
 }
 void GateGui::cb_gate_threshold(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_threshold_i(o,v);
@@ -87,10 +87,10 @@ void GateGui::cb_gate_threshold(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_hold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Hold);
+ m_parent->getMIDIControl(MC_Gate_Hold);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Hold,(int)o->value());
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Hold,(int)o->value());
 }
 void GateGui::cb_gate_hold(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_hold_i(o,v);
@@ -99,10 +99,10 @@ void GateGui::cb_gate_hold(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_LPF);
+ m_parent->getMIDIControl(MC_Gate_LPF);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_LPF, (int)o->value());
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_LPF, (int)o->value());
 }
 void GateGui::cb_gate_LPF(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_LPF_i(o,v);
@@ -111,10 +111,10 @@ void GateGui::cb_gate_LPF(RKR_Slider* o, void* v) {
 void GateGui::cb_gate_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_HPF);
+ m_parent->getMIDIControl(MC_Gate_HPF);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_HPF, (int)o->value());
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_HPF, (int)o->value());
 }
 void GateGui::cb_gate_HPF(RKR_Slider* o, void* v) {
   ((GateGui*)(o->parent()))->cb_gate_HPF_i(o,v);
@@ -295,25 +295,25 @@ void GateGui::parameter_refresh(int index) {
   switch (index)
       {
       case Gate_Threshold:
-          gate_threshold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold));
+          gate_threshold->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold));
           break;
       case Gate_Range:
-          gate_range->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range));
+          gate_range->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range));
           break;
       case Gate_Attack:
-          gate_ATime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack));
+          gate_ATime->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack));
           break;
       case Gate_Release:
-          gate_RTime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release));
+          gate_RTime->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release));
           break;
       case Gate_LPF:
-          gate_LPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF));
+          gate_LPF->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF));
           break;
       case Gate_HPF:
-          gate_HPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF));
+          gate_HPF->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF));
           break;
       case Gate_Hold:
-          gate_hold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold));
+          gate_hold->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold));
           break;
       }
 }

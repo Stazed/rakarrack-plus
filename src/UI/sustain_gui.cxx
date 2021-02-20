@@ -5,14 +5,14 @@
 void SustainGui::cb_sus_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Multi_On_Off);
-         o->value(rkr->EFX_Bypass[EFX_SUSTAINER]);
+         m_parent->getMIDIControl(MC_Multi_On_Off);
+         o->value(m_process->EFX_Bypass[EFX_SUSTAINER]);
          return;
         }
-        rkr->EFX_Bypass[EFX_SUSTAINER]=(int)o->value();
+        m_process->EFX_Bypass[EFX_SUSTAINER]=(int)o->value();
         if((int) o->value()==0)
-        rkr->Rack_Effects[EFX_SUSTAINER]->cleanup();
-        rgui->findpos(EFX_SUSTAINER,(int)o->value(),o);
+        m_process->Rack_Effects[EFX_SUSTAINER]->cleanup();
+        m_parent->findpos(EFX_SUSTAINER,(int)o->value(),o);
 }
 void SustainGui::cb_sus_activar(RKR_Light_Button* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_activar_i(o,v);
@@ -20,9 +20,9 @@ void SustainGui::cb_sus_activar(RKR_Light_Button* o, void* v) {
 
 void SustainGui::cb_sus_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12036))rkr->Rack_Effects[EFX_SUSTAINER]->setpreset((int) o->value());
+if((ud==0)||(ud==12036))m_process->Rack_Effects[EFX_SUSTAINER]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_SUSTAINER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_SUSTAINER]; i++)
 {
     parameter_refresh(i);
 };
@@ -41,10 +41,10 @@ Fl_Menu_Item SustainGui::menu_sus_preset[] = {
 void SustainGui::cb_sus_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sustain_Gain);
+ m_parent->getMIDIControl(MC_Sustain_Gain);
  return;
 }
-rkr->Rack_Effects[EFX_SUSTAINER]->changepar(Sustain_Gain,(int)o->value());
+m_process->Rack_Effects[EFX_SUSTAINER]->changepar(Sustain_Gain,(int)o->value());
 }
 void SustainGui::cb_sus_gain(RKR_Slider* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_gain_i(o,v);
@@ -53,10 +53,10 @@ void SustainGui::cb_sus_gain(RKR_Slider* o, void* v) {
 void SustainGui::cb_sus_sus_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sustain_Sustain);
+ m_parent->getMIDIControl(MC_Sustain_Sustain);
  return;
 }
-rkr->Rack_Effects[EFX_SUSTAINER]->changepar(Sustain_Sustain,(int)o->value());
+m_process->Rack_Effects[EFX_SUSTAINER]->changepar(Sustain_Sustain,(int)o->value());
 }
 void SustainGui::cb_sus_sus(RKR_Slider* o, void* v) {
   ((SustainGui*)(o->parent()))->cb_sus_sus_i(o,v);
@@ -146,10 +146,10 @@ void SustainGui::parameter_refresh(int index) {
   switch (index)
       {
       case Sustain_Gain:
-          sus_gain->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Gain));
+          sus_gain->value(m_process->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Gain));
           break;
       case Sustain_Sustain:
-          sus_sus->value(rkr->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Sustain));
+          sus_sus->value(m_process->Rack_Effects[EFX_SUSTAINER]->getpar(Sustain_Sustain));
           break;
       }
 }

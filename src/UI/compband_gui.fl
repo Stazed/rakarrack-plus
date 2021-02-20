@@ -24,14 +24,14 @@ widget_class CbandGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_COMPBAND]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_COMPBAND]);
  return;
 }
-rkr->EFX_Bypass[EFX_COMPBAND]=(int)o->value();
+m_process->EFX_Bypass[EFX_COMPBAND]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_COMPBAND]->cleanup();
-rgui->findpos(EFX_COMPBAND,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_COMPBAND]->cleanup();
+m_parent->findpos(EFX_COMPBAND,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -40,9 +40,9 @@ rgui->findpos(EFX_COMPBAND,(int)o->value(),o);}
     label Preset
     user_data 12043
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12043))rkr->Rack_Effects[EFX_COMPBAND]->setpreset((int)o->value());
+if((ud==0)||(ud==12043))m_process->Rack_Effects[EFX_COMPBAND]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPBAND]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_COMPBAND]; i++)
 {
     parameter_refresh(i);
 };}
@@ -67,10 +67,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPBAND]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_DryWet);
+ m_parent->getMIDIControl(MC_CompBand_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 27 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -78,10 +78,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_DryWet,Dry_Wet((int)(o->valu
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Gain);
+ m_parent->getMIDIControl(MC_CompBand_Gain);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Gain,(int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Gain,(int)o->value());}
     xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -89,10 +89,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Gain,(int)o->value());}
     label {L Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Low_Ratio);
+ m_parent->getMIDIControl(MC_CompBand_Low_Ratio);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Ratio, (int) o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Ratio, (int) o->value());}
     xywh {56 51 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -100,10 +100,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Ratio, (int) o->value())
     label {ML Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Mid_1_Ratio);
+ m_parent->getMIDIControl(MC_CompBand_Mid_1_Ratio);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Ratio, (int) o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Ratio, (int) o->value());}
     xywh {56 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -111,10 +111,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Ratio, (int) o->value(
     label {MH Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Mid_2_Ratio);
+ m_parent->getMIDIControl(MC_CompBand_Mid_2_Ratio);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Ratio, (int) o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Ratio, (int) o->value());}
     xywh {56 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -122,10 +122,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Ratio, (int) o->value(
     label {H Ratio}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_High_Ratio);
+ m_parent->getMIDIControl(MC_CompBand_High_Ratio);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Ratio, (int) o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Ratio, (int) o->value());}
     xywh {56 87 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -133,10 +133,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Ratio, (int) o->value()
     label {L Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Low_Thresh);
+ m_parent->getMIDIControl(MC_CompBand_Low_Thresh);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Thresh, (int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Thresh, (int)o->value());}
     xywh {56 99 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -144,10 +144,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Low_Thresh, (int)o->value())
     label {ML Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Mid_1_Thresh);
+ m_parent->getMIDIControl(MC_CompBand_Mid_1_Thresh);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Thresh, (int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Thresh, (int)o->value());}
     xywh {56 111 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -155,10 +155,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_1_Thresh, (int)o->value(
     label {MH Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Mid_2_Thresh);
+ m_parent->getMIDIControl(MC_CompBand_Mid_2_Thresh);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Thresh, (int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Thresh, (int)o->value());}
     xywh {56 123 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -166,10 +166,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Mid_2_Thresh, (int)o->value(
     label {H Thres}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_High_Thresh);
+ m_parent->getMIDIControl(MC_CompBand_High_Thresh);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Thresh, (int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Thresh, (int)o->value());}
     xywh {56 135 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 24 step 1 textcolor 7
     class RKR_Slider
   }
@@ -177,10 +177,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_High_Thresh, (int)o->value()
     label {Cross 1}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Cross_1);
+ m_parent->getMIDIControl(MC_CompBand_Cross_1);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_1,(int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_1,(int)o->value());}
     xywh {56 147 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -188,10 +188,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_1,(int)o->value());}
     label {Cross 2}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Cross_2);
+ m_parent->getMIDIControl(MC_CompBand_Cross_2);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_2,(int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_2,(int)o->value());}
     xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1000 maximum 8000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -199,10 +199,10 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_2,(int)o->value());}
     label {Cross 3}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_CompBand_Cross_3);
+ m_parent->getMIDIControl(MC_CompBand_Cross_3);
  return;
 }
-rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_3,(int)o->value());}
+m_process->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_3,(int)o->value());}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2000 maximum 26000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -211,43 +211,43 @@ rkr->Rack_Effects[EFX_COMPBAND]->changepar(CompBand_Cross_3,(int)o->value());}
     code {switch (index)
     {
     case CompBand_DryWet:
-        cband_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet)));
+        cband_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_DryWet)));
         break;
     case CompBand_Low_Ratio:
-        cband_Lratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio));
+        cband_Lratio->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Ratio));
         break;
     case CompBand_Mid_1_Ratio:
-        cband_MLratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio));
+        cband_MLratio->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Ratio));
         break;
     case CompBand_Mid_2_Ratio:
-        cband_MHratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio));
+        cband_MHratio->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Ratio));
         break;
     case CompBand_High_Ratio:
-        cband_Hratio->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio));
+        cband_Hratio->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Ratio));
         break;
     case CompBand_Low_Thresh:
-        cband_Lthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh));
+        cband_Lthres->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Low_Thresh));
         break;
     case CompBand_Mid_1_Thresh:
-        cband_MLthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh));
+        cband_MLthres->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_1_Thresh));
         break;
     case CompBand_Mid_2_Thresh:
-        cband_MHthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh));
+        cband_MHthres->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Mid_2_Thresh));
         break;
     case CompBand_High_Thresh:
-        cband_Hthres->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh));
+        cband_Hthres->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_High_Thresh));
         break;
     case CompBand_Cross_1:
-        cband_cross1->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1));
+        cband_cross1->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_1));
         break;
     case CompBand_Cross_2:
-        cband_cross2->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2));
+        cband_cross2->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_2));
         break;
     case CompBand_Cross_3:
-        cband_cross3->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3));
+        cband_cross3->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Cross_3));
         break;
     case CompBand_Gain:
-        cband_gain->value(rkr->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain));
+        cband_gain->value(m_process->Rack_Effects[EFX_COMPBAND]->getpar(CompBand_Gain));
         break;
     }} {}
   }

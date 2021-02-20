@@ -5,14 +5,14 @@
 void RingGui::cb_ring_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_RING]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_RING]);
  return;
 }
-rkr->EFX_Bypass[EFX_RING]=(int)o->value();
+m_process->EFX_Bypass[EFX_RING]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_RING]->cleanup();
-rgui->findpos(EFX_RING,(int)o->value(),o);
+m_process->Rack_Effects[EFX_RING]->cleanup();
+m_parent->findpos(EFX_RING,(int)o->value(),o);
 }
 void RingGui::cb_ring_activar(RKR_Light_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_activar_i(o,v);
@@ -20,9 +20,9 @@ void RingGui::cb_ring_activar(RKR_Light_Button* o, void* v) {
 
 void RingGui::cb_ring_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12021))rkr->Rack_Effects[EFX_RING]->setpreset((int) o->value());
+if((ud==0)||(ud==12021))m_process->Rack_Effects[EFX_RING]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_RING]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_RING]; i++)
 {
     parameter_refresh(i);
 };
@@ -44,10 +44,10 @@ Fl_Menu_Item RingGui::menu_ring_preset[] = {
 void RingGui::cb_ring_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_DryWet);
+ m_parent->getMIDIControl(MC_Ring_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_DryWet,Dry_Wet((int)o->value()));
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_DryWet,Dry_Wet((int)o->value()));
 }
 void RingGui::cb_ring_WD(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_WD_i(o,v);
@@ -56,10 +56,10 @@ void RingGui::cb_ring_WD(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_LR_Cross);
+ m_parent->getMIDIControl(MC_Ring_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_LR_Cross,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_LR_Cross,(int)o->value());
 }
 void RingGui::cb_ring_LRc(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_LRc_i(o,v);
@@ -68,10 +68,10 @@ void RingGui::cb_ring_LRc(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_input_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Input);
+ m_parent->getMIDIControl(MC_Ring_Input);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Input,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Input,(int)o->value());
 }
 void RingGui::cb_ring_input(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_input_i(o,v);
@@ -80,10 +80,10 @@ void RingGui::cb_ring_input(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Level);
+ m_parent->getMIDIControl(MC_Ring_Level);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Level,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Level,(int)o->value());
 }
 void RingGui::cb_ring_level(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_level_i(o,v);
@@ -92,24 +92,24 @@ void RingGui::cb_ring_level(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Pan);
+ m_parent->getMIDIControl(MC_Ring_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Pan,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Pan,(int)o->value());
 }
 void RingGui::cb_ring_pan(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_pan_i(o,v);
 }
 
 void RingGui::cb_ring_st_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_RING]->changepar(Ring_Stereo,(int)o->value());
+  m_process->Rack_Effects[EFX_RING]->changepar(Ring_Stereo,(int)o->value());
 }
 void RingGui::cb_ring_st(RKR_Check_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_st_i(o,v);
 }
 
 void RingGui::cb_ring_afreq_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_RING]->changepar(Ring_Auto_Freq,(int)o->value());
+  m_process->Rack_Effects[EFX_RING]->changepar(Ring_Auto_Freq,(int)o->value());
 }
 void RingGui::cb_ring_afreq(RKR_Check_Button* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_afreq_i(o,v);
@@ -118,10 +118,10 @@ void RingGui::cb_ring_afreq(RKR_Check_Button* o, void* v) {
 void RingGui::cb_ring_depth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Depth);
+ m_parent->getMIDIControl(MC_Ring_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Depth,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Depth,(int)o->value());
 }
 void RingGui::cb_ring_depth(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_depth_i(o,v);
@@ -130,10 +130,10 @@ void RingGui::cb_ring_depth(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Freq);
+ m_parent->getMIDIControl(MC_Ring_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Freq,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Freq,(int)o->value());
 }
 void RingGui::cb_ring_freq(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_freq_i(o,v);
@@ -142,10 +142,10 @@ void RingGui::cb_ring_freq(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_sin_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Sine);
+ m_parent->getMIDIControl(MC_Ring_Sine);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Sine,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Sine,(int)o->value());
 }
 void RingGui::cb_ring_sin(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_sin_i(o,v);
@@ -154,10 +154,10 @@ void RingGui::cb_ring_sin(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_tri_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Triangle);
+ m_parent->getMIDIControl(MC_Ring_Triangle);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Triangle,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Triangle,(int)o->value());
 }
 void RingGui::cb_ring_tri(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_tri_i(o,v);
@@ -166,10 +166,10 @@ void RingGui::cb_ring_tri(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_saw_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Saw);
+ m_parent->getMIDIControl(MC_Ring_Saw);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Saw,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Saw,(int)o->value());
 }
 void RingGui::cb_ring_saw(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_saw_i(o,v);
@@ -178,10 +178,10 @@ void RingGui::cb_ring_saw(RKR_Slider* o, void* v) {
 void RingGui::cb_ring_squ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Square);
+ m_parent->getMIDIControl(MC_Ring_Square);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Square,(int)o->value());
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Square,(int)o->value());
 }
 void RingGui::cb_ring_squ(RKR_Slider* o, void* v) {
   ((RingGui*)(o->parent()))->cb_ring_squ_i(o,v);
@@ -445,43 +445,43 @@ void RingGui::parameter_refresh(int index) {
   switch (index)
       {
       case Ring_DryWet:
-          ring_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_RING]->getpar(Ring_DryWet)));
+          ring_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_RING]->getpar(Ring_DryWet)));
           break;
       case Ring_Pan:
-          ring_pan->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Pan));
+          ring_pan->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Pan));
           break;
       case Ring_LR_Cross:
-          ring_LRc->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross));
+          ring_LRc->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross));
           break;
       case Ring_Level:
-          ring_level->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Level));
+          ring_level->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Level));
           break;
       case Ring_Depth:
-          ring_depth->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Depth));
+          ring_depth->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Depth));
           break;
       case Ring_Freq:
-          ring_freq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Freq));
+          ring_freq->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Freq));
           break;
       case Ring_Stereo:
-          ring_st->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Stereo));
+          ring_st->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Stereo));
           break;
       case Ring_Sine:
-          ring_sin->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Sine));
+          ring_sin->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Sine));
           break;
       case Ring_Triangle:
-          ring_tri->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Triangle));
+          ring_tri->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Triangle));
           break;
       case Ring_Saw:
-          ring_saw->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Saw));
+          ring_saw->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Saw));
           break;
       case Ring_Square:
-          ring_squ->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Square));
+          ring_squ->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Square));
           break;
       case Ring_Input:
-          ring_input->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Input));
+          ring_input->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Input));
           break;
       case Ring_Auto_Freq:
-          ring_afreq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq));
+          ring_afreq->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq));
           break;
       }
 }

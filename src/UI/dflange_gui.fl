@@ -28,14 +28,14 @@ widget_class {\#include "common_gui_menu.h"} DflangeGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_DUAL_FLANGE]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_DUAL_FLANGE]);
  return;
 }
-rkr->EFX_Bypass[EFX_DUAL_FLANGE]=(int)o->value();
+m_process->EFX_Bypass[EFX_DUAL_FLANGE]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->cleanup();
-rgui->findpos(EFX_DUAL_FLANGE,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->cleanup();
+m_parent->findpos(EFX_DUAL_FLANGE,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x38 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -44,9 +44,9 @@ rgui->findpos(EFX_DUAL_FLANGE,(int)o->value(),o);}
     label Preset
     user_data 12020
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12020))rkr->Rack_Effects[EFX_DUAL_FLANGE]->setpreset((int)o->value());
+if((ud==0)||(ud==12020))m_process->Rack_Effects[EFX_DUAL_FLANGE]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_DUAL_FLANGE]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_DUAL_FLANGE]; i++)
 {
     parameter_refresh(i);
 };}
@@ -91,10 +91,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_DUAL_FLANGE]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_DryWet);
+ m_parent->getMIDIControl(MC_DFlange_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 24 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -102,10 +102,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_DryWet,Dry_Wet((int)(o->va
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_Pan);
+ m_parent->getMIDIControl(MC_DFlange_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Pan,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Pan,(int)o->value());}
     xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -113,10 +113,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Pan,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_LR_Cross);
+ m_parent->getMIDIControl(MC_DFlange_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LR_Cross,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LR_Cross,(int)o->value());}
     xywh {56 46 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -124,10 +124,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LR_Cross,(int)o->value());
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_Depth);
+ m_parent->getMIDIControl(MC_DFlange_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Depth,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Depth,(int)o->value());}
     xywh {56 57 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 2500 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -135,10 +135,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Depth,(int)o->value());}
     label Width
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_Width);
+ m_parent->getMIDIControl(MC_DFlange_Width);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Width,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Width,(int)o->value());}
     xywh {56 69 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 6000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -146,10 +146,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Width,(int)o->value());}
     label Offset
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_Offset);
+ m_parent->getMIDIControl(MC_DFlange_Offset);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Offset,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Offset,(int)o->value());}
     xywh {56 80 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -157,10 +157,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Offset,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_Feedback);
+ m_parent->getMIDIControl(MC_DFlange_Feedback);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Feedback,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Feedback,(int)o->value());}
     xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -168,31 +168,31 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Feedback,(int)o->value());
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_LPF);
+ m_parent->getMIDIControl(MC_DFlange_LPF);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LPF,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LPF,(int)o->value());}
     xywh {56 102 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button dflange_subs {
     label Subtr
     user_data 2
-    callback {rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Subtract,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Subtract,(int)o->value());}
     xywh {5 113 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dflange_tz {
     label {Th. zero}
     user_data 2
-    callback {rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Zero,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Zero,(int)o->value());}
     xywh {48 113 55 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dflange_intense {
     label Intense
     user_data 2
-    callback {rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Intense,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Intense,(int)o->value());}
     xywh {102 113 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -200,10 +200,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LPF,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_LFO_Tempo);
+ m_parent->getMIDIControl(MC_DFlange_LFO_Tempo);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Tempo,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Tempo,(int)o->value());}
     xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 value 100 textcolor 7
     class RKR_Slider
   }
@@ -211,10 +211,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Tempo,(int)o->value())
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_LFO_Stereo);
+ m_parent->getMIDIControl(MC_DFlange_LFO_Stereo);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Stereo,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Stereo,(int)o->value());}
     xywh {56 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -222,11 +222,11 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Stereo,(int)o->value()
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_LFO_Type);
+ m_parent->getMIDIControl(MC_DFlange_LFO_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Type,(int)o->value());} open
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Type,(int)o->value());} open
     xywh {78 153 72 15} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -235,10 +235,10 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Type,(int)o->value());
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_DFlange_LFO_Random);
+ m_parent->getMIDIControl(MC_DFlange_LFO_Random);
  return;
 } 
-rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Random,(int)o->value());}
+m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Random,(int)o->value());}
     xywh {56 170 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -249,54 +249,54 @@ rkr->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Random,(int)o->value()
     code {switch (index)
     {
     case DFlange_DryWet:
-        dflange_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_DryWet)));
+        dflange_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_DryWet)));
         break;
     case DFlange_Pan:
-        dflange_pan->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Pan));
+        dflange_pan->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Pan));
         break;
     case DFlange_LR_Cross:
-        dflange_LR->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LR_Cross));
+        dflange_LR->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LR_Cross));
         break;
     case DFlange_Depth:
-        dflange_depth->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Depth));
+        dflange_depth->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Depth));
         break;
     case DFlange_Width:
-        dflange_width->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Width));
+        dflange_width->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Width));
         break;
     case DFlange_Offset:
-        dflange_offset->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Offset));
+        dflange_offset->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Offset));
         break;
     case DFlange_Feedback:
-        dflange_fb->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Feedback));
+        dflange_fb->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Feedback));
         break;
     case DFlange_LPF:
-        dflange_lpf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LPF));
+        dflange_lpf->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LPF));
         break;
     case DFlange_Subtract:
-        dflange_subs->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Subtract));
+        dflange_subs->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Subtract));
         break;
     case DFlange_Zero:
-        dflange_tz->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Zero));
+        dflange_tz->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Zero));
         break;
     case DFlange_LFO_Tempo:
-        dflange_freq->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));
+        dflange_freq->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));
         break;
     case DFlange_LFO_Stereo:
-        dflange_stdf->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Stereo));
+        dflange_stdf->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Stereo));
         break;
     case DFlange_LFO_Type:
-        dflange_lfotype->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Type));
+        dflange_lfotype->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Type));
         break;
     case DFlange_LFO_Random:
-        dflange_rnd->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Random));
+        dflange_rnd->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Random));
         break;
     case DFlange_Intense:
-        dflange_intense->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Intense));
+        dflange_intense->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_Intense));
         break;
     }} {}
   }
   Function {tap_tempo_update()} {return_type void
   } {
-    code {dflange_freq->value(rkr->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));} {}
+    code {dflange_freq->value(m_process->Rack_Effects[EFX_DUAL_FLANGE]->getpar(DFlange_LFO_Tempo));} {}
   }
 }

@@ -5,13 +5,13 @@
 void CompressGui::cb_compress_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_COMPRESSOR]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_COMPRESSOR]);
  return;
 }
-rkr->EFX_Bypass[EFX_COMPRESSOR]=(int)o->value();
-rkr->Rack_Effects[EFX_COMPRESSOR]->cleanup();
-rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);
+m_process->EFX_Bypass[EFX_COMPRESSOR]=(int)o->value();
+m_process->Rack_Effects[EFX_COMPRESSOR]->cleanup();
+m_parent->findpos(EFX_COMPRESSOR,(int)o->value(),o);
 }
 void CompressGui::cb_compress_activar(RKR_Light_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_activar_i(o,v);
@@ -19,9 +19,9 @@ void CompressGui::cb_compress_activar(RKR_Light_Button* o, void* v) {
 
 void CompressGui::cb_compress_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12001))rkr->Rack_Effects[EFX_COMPRESSOR]->setpreset((int) o->value());
+if((ud==0)||(ud==12001))m_process->Rack_Effects[EFX_COMPRESSOR]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPRESSOR]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_COMPRESSOR]; i++)
 {
     parameter_refresh(i);
 };
@@ -41,10 +41,10 @@ Fl_Menu_Item CompressGui::menu_compress_preset[] = {
 void CompressGui::cb_compress_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Attack);
+ m_parent->getMIDIControl(MC_Compress_Attack);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Attack,(int)o->value());
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Attack,(int)o->value());
 }
 void CompressGui::cb_compress_ATime(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_ATime_i(o,v);
@@ -53,10 +53,10 @@ void CompressGui::cb_compress_ATime(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Release);
+ m_parent->getMIDIControl(MC_Compress_Release);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Release, (int) o->value());
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Release, (int) o->value());
 }
 void CompressGui::cb_compress_RTime(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_RTime_i(o,v);
@@ -65,10 +65,10 @@ void CompressGui::cb_compress_RTime(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_Ratio_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Ratio);
+ m_parent->getMIDIControl(MC_Compress_Ratio);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Ratio, (int) o->value());
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Ratio, (int) o->value());
 }
 void CompressGui::cb_compress_Ratio(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_Ratio_i(o,v);
@@ -77,10 +77,10 @@ void CompressGui::cb_compress_Ratio(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_Knee_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Knee);
+ m_parent->getMIDIControl(MC_Compress_Knee);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Knee, (int) o->value());
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Knee, (int) o->value());
 }
 void CompressGui::cb_compress_Knee(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_Knee_i(o,v);
@@ -89,10 +89,10 @@ void CompressGui::cb_compress_Knee(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Threshold);
+ m_parent->getMIDIControl(MC_Compress_Threshold);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Threshold, (int)o->value());
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Threshold, (int)o->value());
 }
 void CompressGui::cb_compress_threshold(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_threshold_i(o,v);
@@ -101,31 +101,31 @@ void CompressGui::cb_compress_threshold(RKR_Slider* o, void* v) {
 void CompressGui::cb_compress_output_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Output);
+ m_parent->getMIDIControl(MC_Compress_Output);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output,(int)o->value());
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output,(int)o->value());
 }
 void CompressGui::cb_compress_output(RKR_Slider* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_compress_output_i(o,v);
 }
 
 void CompressGui::cb_Auto_Output_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Auto_Out,(int)o->value());
+  m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Auto_Out,(int)o->value());
 }
 void CompressGui::cb_Auto_Output(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Auto_Output_i(o,v);
 }
 
 void CompressGui::cb_Stereo_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Stereo,(int)o->value());
+  m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Stereo,(int)o->value());
 }
 void CompressGui::cb_Stereo(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Stereo_i(o,v);
 }
 
 void CompressGui::cb_Peak_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Peak,(int)o->value());
+  m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Peak,(int)o->value());
 }
 void CompressGui::cb_Peak(RKR_Check_Button* o, void* v) {
   ((CompressGui*)(o->parent()))->cb_Peak_i(o,v);
@@ -329,31 +329,31 @@ void CompressGui::parameter_refresh(int index) {
   switch (index)
       {
       case Compress_Threshold:
-          compress_threshold->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold));
+          compress_threshold->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold));
           break;
       case Compress_Ratio:
-          compress_Ratio->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio));
+          compress_Ratio->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio));
           break;
       case Compress_Output:
-          compress_output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output));
+          compress_output->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output));
           break;
       case Compress_Attack:
-          compress_ATime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack));
+          compress_ATime->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack));
           break;
       case Compress_Release:
-          compress_RTime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release));
+          compress_RTime->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release));
           break;
       case Compress_Auto_Out:
-          Auto_Output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out));
+          Auto_Output->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out));
           break;
       case Compress_Knee:
-          compress_Knee->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee));
+          compress_Knee->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee));
           break;
       case Compress_Stereo:
-          Stereo->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo));
+          Stereo->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo));
           break;
       case Compress_Peak:
-          Peak->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak));
+          Peak->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak));
           break;
       }
 }

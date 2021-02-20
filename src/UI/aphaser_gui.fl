@@ -31,14 +31,14 @@ widget_class {\#include "common_gui_menu.h"} AphaserGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_ANALOG_PHASER]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_ANALOG_PHASER]);
  return;
 }
-rkr->EFX_Bypass[EFX_ANALOG_PHASER]=(int)o->value();
+m_process->EFX_Bypass[EFX_ANALOG_PHASER]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
-rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->cleanup();
+m_parent->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -47,9 +47,9 @@ rgui->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);}
     label Preset
     user_data 12018
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12018))rkr->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
+if((ud==0)||(ud==12018))m_process->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
 {
     parameter_refresh(i);
 };}
@@ -86,10 +86,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_DryWet);
+ m_parent->getMIDIControl(MC_APhase_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -97,10 +97,10 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_DryWet,Dry_Wet((int)(o->v
     label Distort
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_Distortion);
+ m_parent->getMIDIControl(MC_APhase_Distortion);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Distortion,(int)o->value());}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Distortion,(int)o->value());}
     xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -108,10 +108,10 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Distortion,(int)o->value(
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_LFO_Tempo);
+ m_parent->getMIDIControl(MC_APhase_LFO_Tempo);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo,(int)o->value());}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo,(int)o->value());}
     xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -119,10 +119,10 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo,(int)o->value()
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_LFO_Random);
+ m_parent->getMIDIControl(MC_APhase_LFO_Random);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Random,(int)o->value());}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Random,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -130,11 +130,11 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Random,(int)o->value(
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_LFO_Type);
+ m_parent->getMIDIControl(MC_APhase_LFO_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Type,(int)o->value());} open
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Type,(int)o->value());} open
     xywh {78 37 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -143,10 +143,10 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Type,(int)o->value())
     label Width
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_Width);
+ m_parent->getMIDIControl(MC_APhase_Width);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Width,(int)o->value());}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Width,(int)o->value());}
     xywh {56 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -154,10 +154,10 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Width,(int)o->value());}
     label {P. Depth}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_Depth);
+ m_parent->getMIDIControl(MC_APhase_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Depth,(int)o->value());}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Depth,(int)o->value());}
     tooltip {Phase Depth} xywh {56 67 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -165,10 +165,10 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Depth,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_Feedback);
+ m_parent->getMIDIControl(MC_APhase_Feedback);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Feedback,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Feedback,(int)(o->value()+64));}
     xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -176,10 +176,10 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Feedback,(int)(o->value()
     label Mismatch
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_Mismatch);
+ m_parent->getMIDIControl(MC_APhase_Mismatch);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Mismatch,(int)o->value());}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Mismatch,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -187,16 +187,16 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Mismatch,(int)o->value())
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_APhase_LFO_Stereo);
+ m_parent->getMIDIControl(MC_APhase_LFO_Stereo);
  return;
 } 
-rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value());}
+m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value());}
     tooltip {LFO L/R Delay} xywh {56 138 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Counter aphaser_stages {
     label Stages
-    callback {rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Stages,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Stages,(int)o->value());}
     xywh {80 151 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
@@ -204,14 +204,14 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value(
   Fl_Check_Button aphaser_subs {
     label Subtract
     user_data 2
-    callback {rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Subtract,(int)o->value())}
+    callback {m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Subtract,(int)o->value())}
     xywh {18 165 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button aphaser_hyper {
     label Hyper
     user_data 2
-    callback {rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Hyper,(int)o->value())}
+    callback {m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Hyper,(int)o->value())}
     xywh {90 165 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -222,48 +222,48 @@ rkr->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->value(
     code {switch (index)
     {
     case APhase_DryWet:
-        aphaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
+        aphaser_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_DryWet)));
         break;
     case APhase_Distortion:
-        aphaser_distort->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
+        aphaser_distort->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Distortion));
         break;
     case APhase_LFO_Tempo:
-        aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
+        aphaser_freq->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));
         break;
     case APhase_LFO_Random:
-        aphaser_rnd->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
+        aphaser_rnd->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Random));
         break;
     case APhase_LFO_Type:
-        aphaser_lfotype->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
+        aphaser_lfotype->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Type));
         break;
     case APhase_LFO_Stereo:
-        aphaser_stdf->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
+        aphaser_stdf->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Stereo));
         break;
     case APhase_Width:
-        aphaser_width->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
+        aphaser_width->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Width));
         break;
     case APhase_Feedback:
-        aphaser_fb->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-64);
+        aphaser_fb->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Feedback)-64);
         break;
     case APhase_Stages:
-        aphaser_stages->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages));
+        aphaser_stages->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Stages));
         break;
     case APhase_Mismatch:
-        aphaser_mismatch->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
+        aphaser_mismatch->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Mismatch));
         break;
     case APhase_Subtract:
-        aphaser_subs->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
+        aphaser_subs->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Subtract));
         break;
     case APhase_Depth:
-        aphaser_depth->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
+        aphaser_depth->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Depth));
         break;
     case APhase_Hyper:
-        aphaser_hyper->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));
+        aphaser_hyper->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_Hyper));
         break;
     }} {}
   }
   Function {tap_tempo_update()} {return_type void
   } {
-    code {aphaser_freq->value(rkr->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));} {}
+    code {aphaser_freq->value(m_process->Rack_Effects[EFX_ANALOG_PHASER]->getpar(APhase_LFO_Tempo));} {}
   }
 }

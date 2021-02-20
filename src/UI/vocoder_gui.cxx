@@ -5,14 +5,14 @@
 void VocoderGui::cb_vo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_VOCODER]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_VOCODER]);
  return;
 }
-rkr->EFX_Bypass[EFX_VOCODER]=(int)o->value();
+m_process->EFX_Bypass[EFX_VOCODER]=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
-rgui->findpos(EFX_VOCODER,(int)o->value(),o);
+m_parent->findpos(EFX_VOCODER,(int)o->value(),o);
 }
 void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_activar_i(o,v);
@@ -20,9 +20,9 @@ void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
 
 void VocoderGui::cb_vo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12035))rkr->Rack_Effects[EFX_VOCODER]->setpreset((int) o->value());
+if((ud==0)||(ud==12035))m_process->Rack_Effects[EFX_VOCODER]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_VOCODER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
 {
     parameter_refresh(i);
 };
@@ -43,10 +43,10 @@ Fl_Menu_Item VocoderGui::menu_vo_preset[] = {
 void VocoderGui::cb_vo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Vocoder_DryWet);
+         m_parent->getMIDIControl(MC_Vocoder_DryWet);
          return;
         }
-        rkr->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_DryWet,Dry_Wet((int)(o->value())));
+        m_process->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_DryWet,Dry_Wet((int)(o->value())));
 }
 void VocoderGui::cb_vo_WD(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_WD_i(o,v);
@@ -55,10 +55,10 @@ void VocoderGui::cb_vo_WD(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Vocoder_Pan);
+         m_parent->getMIDIControl(MC_Vocoder_Pan);
          return;
         }
-        rkr->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Pan,(int)(o->value()+64));
+        m_process->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Pan,(int)(o->value()+64));
 }
 void VocoderGui::cb_vo_pan(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_pan_i(o,v);
@@ -67,10 +67,10 @@ void VocoderGui::cb_vo_pan(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_input_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Vocoder_Input);
+         m_parent->getMIDIControl(MC_Vocoder_Input);
          return;
         }
-        rkr->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Input,(int)o->value());
+        m_process->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Input,(int)o->value());
 }
 void VocoderGui::cb_vo_input(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_input_i(o,v);
@@ -79,10 +79,10 @@ void VocoderGui::cb_vo_input(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_mu_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Vocoder_Smear);
+         m_parent->getMIDIControl(MC_Vocoder_Smear);
          return;
         }
-        rkr->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Smear,(int)o->value());
+        m_process->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Smear,(int)o->value());
 }
 void VocoderGui::cb_vo_mu(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_mu_i(o,v);
@@ -91,10 +91,10 @@ void VocoderGui::cb_vo_mu(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Vocoder_Q);
+         m_parent->getMIDIControl(MC_Vocoder_Q);
          return;
         }
-        rkr->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Q,(int)o->value());
+        m_process->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Q,(int)o->value());
 }
 void VocoderGui::cb_vo_q(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_q_i(o,v);
@@ -103,10 +103,10 @@ void VocoderGui::cb_vo_q(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_ring_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Vocoder_Ring);
+         m_parent->getMIDIControl(MC_Vocoder_Ring);
          return;
         }
-        rkr->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Ring,(int)o->value());
+        m_process->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Ring,(int)o->value());
 }
 void VocoderGui::cb_vo_ring(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_ring_i(o,v);
@@ -115,10 +115,10 @@ void VocoderGui::cb_vo_ring(RKR_Slider* o, void* v) {
 void VocoderGui::cb_vo_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
         {
-         rgui->getMIDIControl(MC_Vocoder_Level);
+         m_parent->getMIDIControl(MC_Vocoder_Level);
          return;
         }
-        rkr->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Level,(int)o->value());
+        m_process->Rack_Effects[EFX_VOCODER]->changepar(Vocoder_Level,(int)o->value());
 }
 void VocoderGui::cb_vo_level(RKR_Slider* o, void* v) {
   ((VocoderGui*)(o->parent()))->cb_vo_level_i(o,v);
@@ -309,25 +309,25 @@ void VocoderGui::parameter_refresh(int index) {
   switch (index)
       {
       case Vocoder_DryWet:
-          vo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_DryWet)));
+          vo_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_DryWet)));
           break;
       case Vocoder_Pan:
-          vo_pan->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Pan)-64);
+          vo_pan->value(m_process->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Pan)-64);
           break;
       case Vocoder_Smear:
-          vo_mu->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Smear));
+          vo_mu->value(m_process->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Smear));
           break;
       case Vocoder_Q:
-          vo_q->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Q));
+          vo_q->value(m_process->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Q));
           break;
       case Vocoder_Input:
-          vo_input->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Input));
+          vo_input->value(m_process->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Input));
           break;
       case Vocoder_Level:
-          vo_level->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Level));
+          vo_level->value(m_process->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Level));
           break;
       case Vocoder_Ring:
-          vo_ring->value(rkr->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Ring));
+          vo_ring->value(m_process->Rack_Effects[EFX_VOCODER]->getpar(Vocoder_Ring));
           break;
       }
 }

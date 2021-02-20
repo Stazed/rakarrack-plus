@@ -34,14 +34,14 @@ widget_class {\#include "common_gui_menu.h"} MutromojoGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_MUTROMOJO]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_MUTROMOJO]);
  return;
 }
-rkr->EFX_Bypass[EFX_MUTROMOJO]=(int)o->value();
+m_process->EFX_Bypass[EFX_MUTROMOJO]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_MUTROMOJO]->cleanup();
-rgui->findpos(EFX_MUTROMOJO,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_MUTROMOJO]->cleanup();
+m_parent->findpos(EFX_MUTROMOJO,(int)o->value(),o);}
     xywh {6 5 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -50,14 +50,14 @@ rgui->findpos(EFX_MUTROMOJO,(int)o->value(),o);}
     label Preset
     user_data 12031
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12031))rkr->Rack_Effects[EFX_MUTROMOJO]->setpreset((int) o->value());
+if((ud==0)||(ud==12031))m_process->Rack_Effects[EFX_MUTROMOJO]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_MUTROMOJO]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_MUTROMOJO]; i++)
 {
     parameter_refresh(i);
 };
 
-o->value(rkr->Rack_Effects[EFX_MUTROMOJO]->Ppreset);
+o->value(m_process->Rack_Effects[EFX_MUTROMOJO]->Ppreset);
 o->redraw();}
     xywh {78 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
@@ -96,17 +96,17 @@ o->redraw();}
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_DryWet);
+ m_parent->getMIDIControl(MC_MuTro_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button mutromojo_qm {
     label M
     user_data 2
-    callback {MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(rkr->Rack_Effects[EFX_MUTROMOJO]);
+    callback {MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(m_process->Rack_Effects[EFX_MUTROMOJO]);
 
 if((int)o->value())
 {
@@ -125,17 +125,17 @@ Efx_MuTroMojo->changepar(Mutro_Mode_Legacy, Efx_MuTroMojo->Pmode);}
     label LP
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LowPass);
+ m_parent->getMIDIControl(MC_MuTro_LowPass);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass,(int)o->value());}
     tooltip {Lowpass Level} xywh {56 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button mutromojo_nat {
     label N
     user_data 2
-    callback {MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(rkr->Rack_Effects[EFX_MUTROMOJO]);
+    callback {MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(m_process->Rack_Effects[EFX_MUTROMOJO]);
 
 if((int)o->value())
 {
@@ -154,17 +154,17 @@ Efx_MuTroMojo->changepar(Mutro_Mode_Legacy, Efx_MuTroMojo->Pmode);}
     label BP
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_BandPass);
+ m_parent->getMIDIControl(MC_MuTro_BandPass);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass,(int)o->value());}
     tooltip {Bandpass Level} xywh {56 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button mutromojo_res {
     label R
     user_data 2
-    callback {rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Mod_Res,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Mod_Res,(int)o->value());}
     tooltip {Modulate Resonance} xywh {18 54 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button
   }
@@ -172,16 +172,16 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass,(int)o->value());}
     label HP
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_HighPass);
+ m_parent->getMIDIControl(MC_MuTro_HighPass);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass,(int)o->value());}
     tooltip {Highpass Level} xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Counter svfilter_stages {
     label Stg
-    callback {rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Stages,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Stages,(int)o->value());}
     tooltip {Filter Stages} xywh {27 74 27 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
@@ -190,11 +190,11 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass,(int)o->value());}
     label LFO
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Type);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Type);
  return;
 }
 
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Type,(int)o->value())}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Type,(int)o->value())}
     xywh {80 73 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -203,10 +203,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Type,(int)o->value())}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Depth);
+ m_parent->getMIDIControl(MC_MuTro_Depth);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Depth,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Depth,(int)o->value());}
     xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -214,10 +214,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Depth,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Tempo);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Tempo);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -225,10 +225,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo,(int)o->value());}
     label {Res.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Resonance);
+ m_parent->getMIDIControl(MC_MuTro_Resonance);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Resonance,(int)(o->value()));}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Resonance,(int)(o->value()));}
     tooltip Resonance xywh {56 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -236,10 +236,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Resonance,(int)(o->value()));}
     label Range
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Range);
+ m_parent->getMIDIControl(MC_MuTro_Range);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Range,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Range,(int)o->value());}
     tooltip {Sweep Range} xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 6000 step 1 textcolor 7
     class RKR_Slider
   }
@@ -247,10 +247,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Range,(int)o->value());}
     label Wah
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Wah);
+ m_parent->getMIDIControl(MC_MuTro_Wah);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Wah,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Wah,(int)o->value());}
     xywh {56 140 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -258,10 +258,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Wah,(int)o->value());}
     label {E. Sens}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Env_Sens);
+ m_parent->getMIDIControl(MC_MuTro_Env_Sens);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens,(int)o->value());}
     tooltip {Envelope Sensitivity} xywh {56 152 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -269,10 +269,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens,(int)o->value());}
     label S
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_Env_Smooth);
+ m_parent->getMIDIControl(MC_MuTro_Env_Smooth);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Smooth,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Smooth,(int)o->value());}
     tooltip {Envelope Smoothing} xywh {13 165 23 15} labelsize 10 labelcolor 7 maximum 127 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }
@@ -280,10 +280,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Smooth,(int)o->value());}
     label R
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Random);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Random);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Random,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Random,(int)o->value());}
     tooltip {LFO Randomness} xywh {51 165 23 15} labelsize 10 labelcolor 7 maximum 127 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }
@@ -291,10 +291,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Random,(int)o->value());}
     label D
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_LFO_Stereo);
+ m_parent->getMIDIControl(MC_MuTro_LFO_Stereo);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Stereo,(int)o->value()+64);}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Stereo,(int)o->value()+64);}
     tooltip {LFO L/R Delay} xywh {90 165 23 15} labelsize 10 labelcolor 7 minimum -64 maximum 63 step 1 textsize 10 textcolor 7
     class RKR_Value_Input
   }
@@ -302,10 +302,10 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Stereo,(int)o->value()+64)
     label F
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_MuTro_St_Freq);
+ m_parent->getMIDIControl(MC_MuTro_St_Freq);
  return;
 }
-rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq,(int)o->value());}
+m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq,(int)o->value());}
     tooltip {Starting Frequency} xywh {127 165 26 15} labelsize 10 labelcolor 7 minimum 30 maximum 800 step 1 value 450 textsize 10 textcolor 7
     class RKR_Value_Input
   }
@@ -316,59 +316,59 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq,(int)o->value());}
     code {switch (index)
     {
     case MuTro_DryWet:
-        mutromojo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_DryWet)));
+        mutromojo_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_DryWet)));
         break;
     case MuTro_Resonance:
-        mutromojo_q->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Resonance));
+        mutromojo_q->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Resonance));
         break;
     case MuTro_LFO_Tempo:
-        mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
+        mutromojo_freq->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));
         break;
     case MuTro_LFO_Random:
-        mutromojo_Rnd->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Random));
+        mutromojo_Rnd->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Random));
         break;
     case MuTro_LFO_Type:
-        mutromojo_lfotype->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Type));
+        mutromojo_lfotype->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Type));
         break;
     case MuTro_LFO_Stereo:
-        mutromojo_St->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Stereo)-64);
+        mutromojo_St->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Stereo)-64);
         break;
     case MuTro_Depth:
-        mutromojo_dpth->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Depth));
+        mutromojo_dpth->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Depth));
         break;
     case MuTro_Env_Sens:
-        mutromojo_ampsns->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Sens));
+        mutromojo_ampsns->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Sens));
         break;
     case MuTro_Wah:
-        mutromojo_ampsnsinv->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Wah));
+        mutromojo_ampsnsinv->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Wah));
         break;
     case MuTro_Env_Smooth:
-        mutromojo_smooth->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Smooth));
+        mutromojo_smooth->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Env_Smooth));
         break;
     case MuTro_LowPass:
-        mutromojo_lp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LowPass));
+        mutromojo_lp->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LowPass));
         break;
     case MuTro_BandPass:
-        mutromojo_bp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_BandPass));
+        mutromojo_bp->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_BandPass));
         break;
     case MuTro_HighPass:
-        mutromojo_hp->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_HighPass));
+        mutromojo_hp->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_HighPass));
         break;
     case MuTro_Stages:
-        svfilter_stages->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Stages));
+        svfilter_stages->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Stages));
         break;
     case MuTro_Range:
-        mutromojo_rng->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range));
+        mutromojo_rng->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Range));
         break;
     case MuTro_St_Freq:
-        mutromojo_minfreq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq));
+        mutromojo_minfreq->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_St_Freq));
         break;
     case MuTro_Mod_Res:
-        mutromojo_res->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Mod_Res));
+        mutromojo_res->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_Mod_Res));
         break;
     case Mutro_Mode_Legacy:
     {
-        int temp=rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Mode_Legacy);
+        int temp=m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(Mutro_Mode_Legacy);
         if((temp==1) || (temp==3)) mutromojo_qm->value(1); else mutromojo_qm->value(0);
         if((temp==2) || (temp==3)) mutromojo_nat->value(1); else mutromojo_nat->value(0);
         break;
@@ -377,6 +377,6 @@ rkr->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_St_Freq,(int)o->value());}
   }
   Function {tap_tempo_update()} {return_type void
   } {
-    code {mutromojo_freq->value(rkr->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));} {}
+    code {mutromojo_freq->value(m_process->Rack_Effects[EFX_MUTROMOJO]->getpar(MuTro_LFO_Tempo));} {}
   }
 }

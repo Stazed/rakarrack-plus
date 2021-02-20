@@ -5,14 +5,14 @@
 void ShifterGui::cb_shifter_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_SHIFTER]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_SHIFTER]);
  return;
 }
-rkr->EFX_Bypass[EFX_SHIFTER]=(int)o->value();
+m_process->EFX_Bypass[EFX_SHIFTER]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_SHIFTER]->cleanup();
-rgui->findpos(EFX_SHIFTER,(int)o->value(),o);
+m_process->Rack_Effects[EFX_SHIFTER]->cleanup();
+m_parent->findpos(EFX_SHIFTER,(int)o->value(),o);
 }
 void ShifterGui::cb_shifter_activar(RKR_Light_Button* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_activar_i(o,v);
@@ -20,9 +20,9 @@ void ShifterGui::cb_shifter_activar(RKR_Light_Button* o, void* v) {
 
 void ShifterGui::cb_shifter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12038))rkr->Rack_Effects[EFX_SHIFTER]->setpreset((int)o->value());
+if((ud==0)||(ud==12038))m_process->Rack_Effects[EFX_SHIFTER]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_SHIFTER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_SHIFTER]; i++)
 {
     parameter_refresh(i);
 };
@@ -44,10 +44,10 @@ Fl_Menu_Item ShifterGui::menu_shifter_preset[] = {
 void ShifterGui::cb_shifter_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_DryWet);
+ m_parent->getMIDIControl(MC_Shifter_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_DryWet,Dry_Wet((int)(o->value())));
 }
 void ShifterGui::cb_shifter_WD(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_WD_i(o,v);
@@ -56,12 +56,12 @@ void ShifterGui::cb_shifter_WD(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_int_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_Interval);
+ m_parent->getMIDIControl(MC_Shifter_Interval);
  return;
 }
-rkr->EFX_Bypass[EFX_SHIFTER]=0;
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Interval,(int)o->value());
-if((int)shifter_activar->value())rkr->EFX_Bypass[EFX_SHIFTER]=1;
+m_process->EFX_Bypass[EFX_SHIFTER]=0;
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Interval,(int)o->value());
+if((int)shifter_activar->value())m_process->EFX_Bypass[EFX_SHIFTER]=1;
 }
 void ShifterGui::cb_shifter_int(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_int_i(o,v);
@@ -70,10 +70,10 @@ void ShifterGui::cb_shifter_int(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_Gain);
+ m_parent->getMIDIControl(MC_Shifter_Gain);
  return;
 }
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Gain,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Gain,(int)(o->value()+64));
 }
 void ShifterGui::cb_shifter_gain(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_gain_i(o,v);
@@ -82,10 +82,10 @@ void ShifterGui::cb_shifter_gain(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_Pan);
+ m_parent->getMIDIControl(MC_Shifter_Pan);
  return;
 }
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Pan,(int)(o->value()+64));
 }
 void ShifterGui::cb_shifter_pan(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_pan_i(o,v);
@@ -94,10 +94,10 @@ void ShifterGui::cb_shifter_pan(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_attack_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_Attack);
+ m_parent->getMIDIControl(MC_Shifter_Attack);
  return;
 }
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Attack,(int)o->value());
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Attack,(int)o->value());
 }
 void ShifterGui::cb_shifter_attack(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_attack_i(o,v);
@@ -106,10 +106,10 @@ void ShifterGui::cb_shifter_attack(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_decay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_Decay);
+ m_parent->getMIDIControl(MC_Shifter_Decay);
  return;
 }
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Decay,(int)o->value());
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Decay,(int)o->value());
 }
 void ShifterGui::cb_shifter_decay(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_decay_i(o,v);
@@ -118,17 +118,17 @@ void ShifterGui::cb_shifter_decay(RKR_Slider* o, void* v) {
 void ShifterGui::cb_shifter_thre_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_Threshold);
+ m_parent->getMIDIControl(MC_Shifter_Threshold);
  return;
 }
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Threshold,(int)o->value());
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Threshold,(int)o->value());
 }
 void ShifterGui::cb_shifter_thre(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_thre_i(o,v);
 }
 
 void ShifterGui::cb_shifter_ud_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Shift,(int)o->value());
+  m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Shift,(int)o->value());
 }
 void ShifterGui::cb_shifter_ud(RKR_Check_Button* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_ud_i(o,v);
@@ -137,17 +137,17 @@ void ShifterGui::cb_shifter_ud(RKR_Check_Button* o, void* v) {
 void ShifterGui::cb_shifter_whammy_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shifter_Whammy);
+ m_parent->getMIDIControl(MC_Shifter_Whammy);
  return;
 }
-rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Whammy,(int)o->value());
+m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Whammy,(int)o->value());
 }
 void ShifterGui::cb_shifter_whammy(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_whammy_i(o,v);
 }
 
 void ShifterGui::cb_shifter_mode_i(RKR_Choice* o, void*) {
-  rkr->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Mode,(int)o->value());
+  m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Mode,(int)o->value());
 }
 void ShifterGui::cb_shifter_mode(RKR_Choice* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_mode_i(o,v);
@@ -378,34 +378,34 @@ void ShifterGui::parameter_refresh(int index) {
   switch (index)
       {
       case Shifter_DryWet:
-          shifter_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_DryWet)));
+          shifter_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_DryWet)));
           break;
       case Shifter_Pan:
-          shifter_pan->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Pan)-64);
+          shifter_pan->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Pan)-64);
           break;
       case Shifter_Gain:
-          shifter_gain->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Gain)-64);
+          shifter_gain->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Gain)-64);
           break;
       case Shifter_Attack:
-          shifter_attack->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Attack));
+          shifter_attack->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Attack));
           break;
       case Shifter_Decay:
-          shifter_decay->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Decay));
+          shifter_decay->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Decay));
           break;
       case Shifter_Threshold:
-          shifter_thre->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Threshold));
+          shifter_thre->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Threshold));
           break;
       case Shifter_Interval:
-          shifter_int->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Interval));
+          shifter_int->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Interval));
           break;
       case Shifter_Shift:
-          shifter_ud->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Shift));
+          shifter_ud->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Shift));
           break;
       case Shifter_Mode:
-          shifter_mode->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Mode));
+          shifter_mode->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Mode));
           break;
       case Shifter_Whammy:
-          shifter_whammy->value(rkr->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Whammy));
+          shifter_whammy->value(m_process->Rack_Effects[EFX_SHIFTER]->getpar(Shifter_Whammy));
           break;
       }
 }

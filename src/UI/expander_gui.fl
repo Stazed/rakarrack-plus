@@ -24,12 +24,12 @@ widget_class ExpanderGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_EXPANDER]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_EXPANDER]);
  return;
 }
-rkr->EFX_Bypass[EFX_EXPANDER]=(int)o->value();
-rgui->findpos(EFX_EXPANDER,(int)o->value(),o);}
+m_process->EFX_Bypass[EFX_EXPANDER]=(int)o->value();
+m_parent->findpos(EFX_EXPANDER,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -38,9 +38,9 @@ rgui->findpos(EFX_EXPANDER,(int)o->value(),o);}
     label Preset
     user_data 12025
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12025))rkr->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
+if((ud==0)||(ud==12025))m_process->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_EXPANDER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXPANDER]; i++)
 {
     parameter_refresh(i);
 };}
@@ -69,10 +69,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_EXPANDER]; i++)
     label {A. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Attack);
+ m_parent->getMIDIControl(MC_Expander_Attack);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Attack,(int)o->value());}
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Attack,(int)o->value());}
     xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 5000 step 1 value 10 textcolor 7
     class RKR_Slider
   }
@@ -80,10 +80,10 @@ rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Attack,(int)o->value());}
     label {R. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Release);
+ m_parent->getMIDIControl(MC_Expander_Release);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Release,(int) o->value());}
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Release,(int) o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 1000 step 1 value 500 textcolor 7
     class RKR_Slider
   }
@@ -91,10 +91,10 @@ rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Release,(int) o->value());}
     label Shape
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Shape);
+ m_parent->getMIDIControl(MC_Expander_Shape);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Shape, (int) o->value());}
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Shape, (int) o->value());}
     xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 50 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -102,10 +102,10 @@ rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Shape, (int) o->value());}
     label Threshold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Threshold);
+ m_parent->getMIDIControl(MC_Expander_Threshold);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Threshold, (int)o->value());}
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Threshold, (int)o->value());}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -80 maximum 0 step 1 textcolor 7
     class RKR_Slider
   }
@@ -113,10 +113,10 @@ rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Threshold, (int)o->value());
     label {Out Gain}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Gain);
+ m_parent->getMIDIControl(MC_Expander_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Gain, (int) o->value());}
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Gain, (int) o->value());}
     xywh {56 125 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -124,10 +124,10 @@ rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Gain, (int) o->value());}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_LPF);
+ m_parent->getMIDIControl(MC_Expander_LPF);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_LPF, (int)o->value());}
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_LPF, (int)o->value());}
     xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -135,10 +135,10 @@ rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_LPF, (int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_HPF);
+ m_parent->getMIDIControl(MC_Expander_HPF);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_HPF, (int)o->value());}
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_HPF, (int)o->value());}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -147,25 +147,25 @@ rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_HPF, (int)o->value());}
     code {switch (index)
     {
     case Expander_Threshold:
-        expander_threshold->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold));
+        expander_threshold->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold));
         break;
     case Expander_Shape:
-        expander_shape->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape));
+        expander_shape->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape));
         break;
     case Expander_Attack:
-        expander_ATime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack));
+        expander_ATime->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack));
         break;
     case Expander_Release:
-        expander_RTime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release));
+        expander_RTime->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release));
         break;
     case Expander_LPF:
-        expander_LPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF));
+        expander_LPF->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF));
         break;
     case Expander_HPF:
-        expander_HPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF));
+        expander_HPF->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF));
         break;
     case Expander_Gain:
-        expander_level->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain));
+        expander_level->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain));
         break;
     }} {}
   }

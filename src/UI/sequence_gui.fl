@@ -27,14 +27,14 @@ widget_class SequenceGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_SEQUENCE]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_SEQUENCE]);
  return;
 }
-rkr->EFX_Bypass[EFX_SEQUENCE]=(int)o->value();
+m_process->EFX_Bypass[EFX_SEQUENCE]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_SEQUENCE]->cleanup();
-rgui->findpos(EFX_SEQUENCE,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_SEQUENCE]->cleanup();
+m_parent->findpos(EFX_SEQUENCE,(int)o->value(),o);}
     xywh {5 4 34 16} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -43,9 +43,9 @@ rgui->findpos(EFX_SEQUENCE,(int)o->value(),o);}
     label Preset
     user_data 12037
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12037))rkr->Rack_Effects[EFX_SEQUENCE]->setpreset((int) o->value());
+if((ud==0)||(ud==12037))m_process->Rack_Effects[EFX_SEQUENCE]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_SEQUENCE]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_SEQUENCE]; i++)
 {
     parameter_refresh(i);
 };}
@@ -102,10 +102,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_SEQUENCE]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_DryWet);
+ m_parent->getMIDIControl(MC_Sequence_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -113,10 +113,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_DryWet,Dry_Wet((int)(o->valu
     label 1
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_1);
+ m_parent->getMIDIControl(MC_Sequence_Step_1);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_1,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_1,(int)o->value());}
     xywh {56 37 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -124,10 +124,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_1,(int)o->value());}
     label 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_2);
+ m_parent->getMIDIControl(MC_Sequence_Step_2);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_2,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_2,(int)o->value());}
     xywh {56 49 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -135,10 +135,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_2,(int)o->value());}
     label 3
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_3);
+ m_parent->getMIDIControl(MC_Sequence_Step_3);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_3,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_3,(int)o->value());}
     xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -146,10 +146,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_3,(int)o->value());}
     label 4
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_4);
+ m_parent->getMIDIControl(MC_Sequence_Step_4);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_4,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_4,(int)o->value());}
     xywh {56 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -157,10 +157,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_4,(int)o->value());}
     label 5
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_5);
+ m_parent->getMIDIControl(MC_Sequence_Step_5);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_5,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_5,(int)o->value());}
     xywh {56 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -168,10 +168,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_5,(int)o->value());}
     label 6
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_6);
+ m_parent->getMIDIControl(MC_Sequence_Step_6);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_6,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_6,(int)o->value());}
     xywh {56 97 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -179,10 +179,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_6,(int)o->value());}
     label 7
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_7);
+ m_parent->getMIDIControl(MC_Sequence_Step_7);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_7,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_7,(int)o->value());}
     xywh {56 109 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -190,10 +190,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_7,(int)o->value());}
     label 8
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Step_8);
+ m_parent->getMIDIControl(MC_Sequence_Step_8);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_8,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_8,(int)o->value());}
     xywh {56 121 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -201,10 +201,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_8,(int)o->value());}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Tempo);
+ m_parent->getMIDIControl(MC_Sequence_Tempo);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Tempo,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Tempo,(int)o->value());}
     xywh {56 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -212,10 +212,10 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Tempo,(int)o->value());}
     label Q
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Resonance);
+ m_parent->getMIDIControl(MC_Sequence_Resonance);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Resonance,(int)o->value()+64);}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Resonance,(int)o->value()+64);}
     tooltip {Filter Resonance} xywh {56 145 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -223,24 +223,24 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Resonance,(int)o->value()+64
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Sequence_Stdf);
+ m_parent->getMIDIControl(MC_Sequence_Stdf);
  return;
 }
-rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());}
+m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());}
     tooltip {Right Channel Step Lag} xywh {56 157 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 7 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button seq_amp {
     label Amp
     user_data 2
-    callback {rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Amp,(int)o->value())}
+    callback {m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Amp,(int)o->value())}
     tooltip {Amplitude/Alt. Mode} xywh {9 111 43 14} down_box BORDER_BOX labelsize 10 labelcolor 7 align 5
     class RKR_Check_Button
   }
   Fl_Choice seq_mode {
     label M
     user_data 12
-    callback {rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Mode,(int)o->value())}
+    callback {m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Mode,(int)o->value())}
     tooltip {Modulation Mode} xywh {90 169 62 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-1);}
     code1 {o->set_text_offset(-1);}
@@ -286,7 +286,7 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());}
   Fl_Choice seq_range {
     label R
     user_data 12
-    callback {rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Range,(int)o->value()+1)}
+    callback {m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Range,(int)o->value()+1)}
     tooltip {Step Adjustment Range} xywh {16 169 57 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-1);}
     code1 {o->set_text_offset(-1);}
@@ -330,54 +330,54 @@ rkr->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());}
     code {switch (index)
     {
     case Sequence_Step_1:
-        seq_1->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_1));
+        seq_1->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_1));
         break;
     case Sequence_Step_2:
-        seq_2->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_2));
+        seq_2->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_2));
         break;
     case Sequence_Step_3:
-        seq_3->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_3));
+        seq_3->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_3));
         break;
     case Sequence_Step_4:
-        seq_4->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_4));
+        seq_4->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_4));
         break;
     case Sequence_Step_5:
-        seq_5->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_5));
+        seq_5->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_5));
         break;
     case Sequence_Step_6:
-        seq_6->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_6));
+        seq_6->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_6));
         break;
     case Sequence_Step_7:
-        seq_7->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_7));
+        seq_7->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_7));
         break;
     case Sequence_Step_8:
-        seq_8->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_8));
+        seq_8->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Step_8));
         break;
     case Sequence_DryWet:
-        seq_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_DryWet)));
+        seq_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_DryWet)));
         break;
     case Sequence_Tempo:
-        seq_tempo->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));
+        seq_tempo->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));
         break;
     case Sequence_Resonance:
-        seq_q->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Resonance)-64);
+        seq_q->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Resonance)-64);
         break;
     case Sequence_Amp:
-        seq_amp->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Amp));
+        seq_amp->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Amp));
         break;
     case Sequence_Stdf:
-        seq_stdf->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Stdf));
+        seq_stdf->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Stdf));
         break;
     case Sequence_Mode:
-        seq_mode->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Mode));
+        seq_mode->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Mode));
         break;
     case Sequence_Range:
-        seq_range->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range));
+        seq_range->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range));
         break;
     }} {}
   }
   Function {tap_tempo_update()} {return_type void
   } {
-    code {seq_tempo->value(rkr->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));} {}
+    code {seq_tempo->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Tempo));} {}
   }
 }

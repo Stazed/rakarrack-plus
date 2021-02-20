@@ -5,14 +5,14 @@
 void OvrdGui::cb_ovrd_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_OVERDRIVE]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_OVERDRIVE]);
  return;
 }
-rkr->EFX_Bypass[EFX_OVERDRIVE]=(int)o->value();
+m_process->EFX_Bypass[EFX_OVERDRIVE]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_OVERDRIVE]->cleanup();
-rgui->findpos(EFX_OVERDRIVE,(int)o->value(),o);
+m_process->Rack_Effects[EFX_OVERDRIVE]->cleanup();
+m_parent->findpos(EFX_OVERDRIVE,(int)o->value(),o);
 }
 void OvrdGui::cb_ovrd_activar(RKR_Light_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_activar_i(o,v);
@@ -20,9 +20,9 @@ void OvrdGui::cb_ovrd_activar(RKR_Light_Button* o, void* v) {
 
 void OvrdGui::cb_ovrd_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12003))rkr->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
+if((ud==0)||(ud==12003))m_process->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_OVERDRIVE]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_OVERDRIVE]; i++)
 {
     parameter_refresh(i);
 };
@@ -40,10 +40,10 @@ Fl_Menu_Item OvrdGui::menu_ovrd_preset[] = {
 void OvrdGui::cb_ovrd_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_DryWet);
+ m_parent->getMIDIControl(MC_Overdrive_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_DryWet,Dry_Wet((int)(o->value())));
 }
 void OvrdGui::cb_ovrd_WD(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_WD_i(o,v);
@@ -52,10 +52,10 @@ void OvrdGui::cb_ovrd_WD(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_LR_Cross);
+ m_parent->getMIDIControl(MC_Overdrive_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LR_Cross,(int)(o->value()));
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LR_Cross,(int)(o->value()));
 }
 void OvrdGui::cb_ovrd_LRc(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_LRc_i(o,v);
@@ -64,10 +64,10 @@ void OvrdGui::cb_ovrd_LRc(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_drive_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_Drive);
+ m_parent->getMIDIControl(MC_Overdrive_Drive);
  return;
 } 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Drive,(int)o->value());
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Drive,(int)o->value());
 }
 void OvrdGui::cb_ovrd_drive(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_drive_i(o,v);
@@ -76,10 +76,10 @@ void OvrdGui::cb_ovrd_drive(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_Level);
+ m_parent->getMIDIControl(MC_Overdrive_Level);
  return;
 } 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Level,(int)o->value());
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Level,(int)o->value());
 }
 void OvrdGui::cb_ovrd_level(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_level_i(o,v);
@@ -88,25 +88,25 @@ void OvrdGui::cb_ovrd_level(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_tipo_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_Type);
+ m_parent->getMIDIControl(MC_Overdrive_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Type,(int)o->value());
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Type,(int)o->value());
 }
 void OvrdGui::cb_ovrd_tipo(RKR_Choice* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_tipo_i(o,v);
 }
 
 void OvrdGui::cb_ovrd_neg_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Negate,(int)o->value());
+  m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Negate,(int)o->value());
 }
 void OvrdGui::cb_ovrd_neg(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_neg_i(o,v);
 }
 
 void OvrdGui::cb_ovrd_st_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Stereo,(int)o->value());
+  m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Stereo,(int)o->value());
 }
 void OvrdGui::cb_ovrd_st(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_st_i(o,v);
@@ -115,17 +115,17 @@ void OvrdGui::cb_ovrd_st(RKR_Check_Button* o, void* v) {
 void OvrdGui::cb_ovrd_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_Pan);
+ m_parent->getMIDIControl(MC_Overdrive_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Pan,(int)(o->value()+64));
 }
 void OvrdGui::cb_ovrd_pan(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_pan_i(o,v);
 }
 
 void OvrdGui::cb_ovrd_pf_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Prefilter,(int)o->value());
+  m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Prefilter,(int)o->value());
 }
 void OvrdGui::cb_ovrd_pf(RKR_Check_Button* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_pf_i(o,v);
@@ -134,10 +134,10 @@ void OvrdGui::cb_ovrd_pf(RKR_Check_Button* o, void* v) {
 void OvrdGui::cb_ovrd_lpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_LPF);
+ m_parent->getMIDIControl(MC_Overdrive_LPF);
  return;
 } 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LPF,(int)o->value());
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LPF,(int)o->value());
 }
 void OvrdGui::cb_ovrd_lpf(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_lpf_i(o,v);
@@ -146,10 +146,10 @@ void OvrdGui::cb_ovrd_lpf(RKR_Slider* o, void* v) {
 void OvrdGui::cb_ovrd_hpf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Overdrive_HPF);
+ m_parent->getMIDIControl(MC_Overdrive_HPF);
  return;
 } 
-rkr->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_HPF,(int)o->value());
+m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_HPF,(int)o->value());
 }
 void OvrdGui::cb_ovrd_hpf(RKR_Slider* o, void* v) {
   ((OvrdGui*)(o->parent()))->cb_ovrd_hpf_i(o,v);
@@ -377,37 +377,37 @@ void OvrdGui::parameter_refresh(int index) {
   switch (index)
       {
       case Overdrive_DryWet:
-          ovrd_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet)));
+          ovrd_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_DryWet)));
           break;
       case Overdrive_Pan:
-          ovrd_pan->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan)-64);
+          ovrd_pan->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Pan)-64);
           break;
       case Overdrive_LR_Cross:
-          ovrd_LRc->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross));
+          ovrd_LRc->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LR_Cross));
           break;
       case Overdrive_Drive:
-          ovrd_drive->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive));
+          ovrd_drive->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Drive));
           break;
       case Overdrive_Level:
-          ovrd_level->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level));
+          ovrd_level->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Level));
           break;
       case Overdrive_Type:
-          ovrd_tipo->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type));
+          ovrd_tipo->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Type));
           break;
       case Overdrive_Negate:
-          ovrd_neg->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Negate));
+          ovrd_neg->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Negate));
           break;
       case Overdrive_LPF:
-          ovrd_lpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF));
+          ovrd_lpf->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_LPF));
           break;
       case Overdrive_HPF:
-          ovrd_hpf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF));
+          ovrd_hpf->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_HPF));
           break;
       case Overdrive_Stereo:
-          ovrd_st->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Stereo));
+          ovrd_st->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Stereo));
           break;
       case Overdrive_Prefilter:
-          ovrd_pf->value(rkr->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Prefilter));
+          ovrd_pf->value(m_process->Rack_Effects[EFX_OVERDRIVE]->getpar(Overdrive_Prefilter));
           break;
       }
 }

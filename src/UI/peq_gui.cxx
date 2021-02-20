@@ -5,14 +5,14 @@
 void PeqGui::cb_eqp_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_PARAMETRIC]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_PARAMETRIC]);
  return;
 }
-rkr->EFX_Bypass[EFX_PARAMETRIC]=(int)o->value();
+m_process->EFX_Bypass[EFX_PARAMETRIC]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_PARAMETRIC]->cleanup();
-rgui->findpos(EFX_PARAMETRIC,(int)o->value(),o);
+m_process->Rack_Effects[EFX_PARAMETRIC]->cleanup();
+m_parent->findpos(EFX_PARAMETRIC,(int)o->value(),o);
 }
 void PeqGui::cb_eqp_activar(RKR_Light_Button* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_activar_i(o,v);
@@ -20,9 +20,9 @@ void PeqGui::cb_eqp_activar(RKR_Light_Button* o, void* v) {
 
 void PeqGui::cb_eqp_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12009)) rkr->Rack_Effects[EFX_PARAMETRIC]->setpreset((int)o->value());
+if((ud==0)||(ud==12009)) m_process->Rack_Effects[EFX_PARAMETRIC]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_PARAMETRIC]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_PARAMETRIC]; i++)
 {
     parameter_refresh(i);
 };
@@ -41,10 +41,10 @@ Fl_Menu_Item PeqGui::menu_eqp_preset[] = {
 void PeqGui::cb_eqp_Gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Gain);
+ m_parent->getMIDIControl(MC_Parametric_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain,(int)(o->value()+64));
 }
 void PeqGui::cb_eqp_Gain(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_Gain_i(o,v);
@@ -53,10 +53,10 @@ void PeqGui::cb_eqp_Gain(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_LF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Low_Freq);
+ m_parent->getMIDIControl(MC_Parametric_Low_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Freq,(int)o->value());
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Freq,(int)o->value());
 }
 void PeqGui::cb_eqp_LF(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_LF_i(o,v);
@@ -65,10 +65,10 @@ void PeqGui::cb_eqp_LF(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_LFg_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Low_Gain);
+ m_parent->getMIDIControl(MC_Parametric_Low_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Gain,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Gain,(int)(o->value()+64));
 }
 void PeqGui::cb_eqp_LFg(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_LFg_i(o,v);
@@ -77,10 +77,10 @@ void PeqGui::cb_eqp_LFg(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_LQ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Low_Q);
+ m_parent->getMIDIControl(MC_Parametric_Low_Q);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Q,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Q,(int)(o->value()+64));
 }
 void PeqGui::cb_eqp_LQ(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_LQ_i(o,v);
@@ -89,10 +89,10 @@ void PeqGui::cb_eqp_LQ(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_MF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Mid_Freq);
+ m_parent->getMIDIControl(MC_Parametric_Mid_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Freq,(int)o->value());
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Freq,(int)o->value());
 }
 void PeqGui::cb_eqp_MF(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_MF_i(o,v);
@@ -101,10 +101,10 @@ void PeqGui::cb_eqp_MF(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_MFg_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Mid_Gain);
+ m_parent->getMIDIControl(MC_Parametric_Mid_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Gain,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Gain,(int)(o->value()+64));
 }
 void PeqGui::cb_eqp_MFg(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_MFg_i(o,v);
@@ -113,10 +113,10 @@ void PeqGui::cb_eqp_MFg(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_MQ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Mid_Q);
+ m_parent->getMIDIControl(MC_Parametric_Mid_Q);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Q,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Q,(int)(o->value()+64));
 }
 void PeqGui::cb_eqp_MQ(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_MQ_i(o,v);
@@ -125,10 +125,10 @@ void PeqGui::cb_eqp_MQ(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_HF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_High_Freq);
+ m_parent->getMIDIControl(MC_Parametric_High_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Freq,(int)o->value());
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Freq,(int)o->value());
 }
 void PeqGui::cb_eqp_HF(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_HF_i(o,v);
@@ -137,10 +137,10 @@ void PeqGui::cb_eqp_HF(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_HFg_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_High_Gain);
+ m_parent->getMIDIControl(MC_Parametric_High_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Gain,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Gain,(int)(o->value()+64));
 }
 void PeqGui::cb_eqp_HFg(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_HFg_i(o,v);
@@ -149,10 +149,10 @@ void PeqGui::cb_eqp_HFg(RKR_Slider* o, void* v) {
 void PeqGui::cb_eqp_HQ_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_High_Q);
+ m_parent->getMIDIControl(MC_Parametric_High_Q);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Q,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Q,(int)(o->value()+64));
 }
 void PeqGui::cb_eqp_HQ(RKR_Slider* o, void* v) {
   ((PeqGui*)(o->parent()))->cb_eqp_HQ_i(o,v);
@@ -390,34 +390,34 @@ void PeqGui::parameter_refresh(int index) {
   switch(index)
       {
       case Parametric_Low_Freq:
-          eqp_LF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq));
+          eqp_LF->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq));
           break;
       case Parametric_Low_Gain:
-          eqp_LFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain)-64);
+          eqp_LFg->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain)-64);
           break;
       case Parametric_Low_Q:
-          eqp_LQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q)-64);
+          eqp_LQ->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q)-64);
           break;
       case Parametric_Mid_Freq:
-          eqp_MF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq));
+          eqp_MF->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq));
           break;
       case Parametric_Mid_Gain:
-          eqp_MFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain)-64);
+          eqp_MFg->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain)-64);
           break;
       case Parametric_Mid_Q:
-          eqp_MQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q)-64);
+          eqp_MQ->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q)-64);
           break;
       case Parametric_High_Freq:
-          eqp_HF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq));
+          eqp_HF->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq));
           break;
       case Parametric_High_Gain:
-          eqp_HFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain)-64);
+          eqp_HFg->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain)-64);
           break;
       case Parametric_High_Q:
-          eqp_HQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q)-64);
+          eqp_HQ->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q)-64);
           break;
       case Parametric_Gain:
-          eqp_Gain->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain)-64);
+          eqp_Gain->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain)-64);
           break;
       }
 }

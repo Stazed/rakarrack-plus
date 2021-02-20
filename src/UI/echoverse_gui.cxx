@@ -5,14 +5,14 @@
 void EchoverseGui::cb_echoverse_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_ECHOVERSE]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_ECHOVERSE]);
  return;
 }
-rkr->EFX_Bypass[EFX_ECHOVERSE]=(int)o->value();
+m_process->EFX_Bypass[EFX_ECHOVERSE]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_ECHOVERSE]->cleanup();
-rgui->findpos(EFX_ECHOVERSE,(int)o->value(),o);
+m_process->Rack_Effects[EFX_ECHOVERSE]->cleanup();
+m_parent->findpos(EFX_ECHOVERSE,(int)o->value(),o);
 }
 void EchoverseGui::cb_echoverse_activar(RKR_Light_Button* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_activar_i(o,v);
@@ -20,9 +20,9 @@ void EchoverseGui::cb_echoverse_activar(RKR_Light_Button* o, void* v) {
 
 void EchoverseGui::cb_echoverse_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12032))rkr->Rack_Effects[EFX_ECHOVERSE]->setpreset((int) o->value());
+if((ud==0)||(ud==12032))m_process->Rack_Effects[EFX_ECHOVERSE]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_ECHOVERSE]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_ECHOVERSE]; i++)
 {
     parameter_refresh(i);
 };
@@ -42,10 +42,10 @@ Fl_Menu_Item EchoverseGui::menu_echoverse_preset[] = {
 void EchoverseGui::cb_echoverse_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_DryWet);
+ m_parent->getMIDIControl(MC_Echoverse_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_DryWet,Dry_Wet((int)(o->value())));
 }
 void EchoverseGui::cb_echoverse_WD(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_WD_i(o,v);
@@ -54,10 +54,10 @@ void EchoverseGui::cb_echoverse_WD(RKR_Slider* o, void* v) {
 void EchoverseGui::cb_echoverse_RV_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_Reverse);
+ m_parent->getMIDIControl(MC_Echoverse_Reverse);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Reverse,(int)o->value());
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Reverse,(int)o->value());
 }
 void EchoverseGui::cb_echoverse_RV(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_RV_i(o,v);
@@ -66,10 +66,10 @@ void EchoverseGui::cb_echoverse_RV(RKR_Slider* o, void* v) {
 void EchoverseGui::cb_echoverse_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_Pan);
+ m_parent->getMIDIControl(MC_Echoverse_Pan);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Pan,(int)(o->value()+64));
 }
 void EchoverseGui::cb_echoverse_pan(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_pan_i(o,v);
@@ -78,10 +78,10 @@ void EchoverseGui::cb_echoverse_pan(RKR_Slider* o, void* v) {
 void EchoverseGui::cb_echoverse_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_Tempo);
+ m_parent->getMIDIControl(MC_Echoverse_Tempo);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Tempo,(int)o->value());
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Tempo,(int)o->value());
 }
 void EchoverseGui::cb_echoverse_delay(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_delay_i(o,v);
@@ -90,10 +90,10 @@ void EchoverseGui::cb_echoverse_delay(RKR_Slider* o, void* v) {
 void EchoverseGui::cb_echoverse_LRdl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_LR_Delay);
+ m_parent->getMIDIControl(MC_Echoverse_LR_Delay);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_LR_Delay,(int)o->value());
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_LR_Delay,(int)o->value());
 }
 void EchoverseGui::cb_echoverse_LRdl(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_LRdl_i(o,v);
@@ -102,17 +102,17 @@ void EchoverseGui::cb_echoverse_LRdl(RKR_Slider* o, void* v) {
 void EchoverseGui::cb_echoverse_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_Feedback);
+ m_parent->getMIDIControl(MC_Echoverse_Feedback);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Feedback,(int)o->value());
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Feedback,(int)o->value());
 }
 void EchoverseGui::cb_echoverse_fb(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_fb_i(o,v);
 }
 
 void EchoverseGui::cb_echoverse_subdiv_i(RKR_Choice* o, void*) {
-  rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Subdivision,(int)o->value());
+  m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Subdivision,(int)o->value());
 }
 void EchoverseGui::cb_echoverse_subdiv(RKR_Choice* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_subdiv_i(o,v);
@@ -121,10 +121,10 @@ void EchoverseGui::cb_echoverse_subdiv(RKR_Choice* o, void* v) {
 void EchoverseGui::cb_echoverse_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_Damp);
+ m_parent->getMIDIControl(MC_Echoverse_Damp);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Damp,(int)o->value());
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Damp,(int)o->value());
 }
 void EchoverseGui::cb_echoverse_damp(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_damp_i(o,v);
@@ -133,10 +133,10 @@ void EchoverseGui::cb_echoverse_damp(RKR_Slider* o, void* v) {
 void EchoverseGui::cb_echoverse_es_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_Ext_Stereo);
+ m_parent->getMIDIControl(MC_Echoverse_Ext_Stereo);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Ext_Stereo,(int)o->value());
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Ext_Stereo,(int)o->value());
 }
 void EchoverseGui::cb_echoverse_es(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_es_i(o,v);
@@ -145,10 +145,10 @@ void EchoverseGui::cb_echoverse_es(RKR_Slider* o, void* v) {
 void EchoverseGui::cb_echoverse_angle_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echoverse_Angle);
+ m_parent->getMIDIControl(MC_Echoverse_Angle);
  return;
 }
-rkr->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Angle,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Angle,(int)(o->value()+64));
 }
 void EchoverseGui::cb_echoverse_angle(RKR_Slider* o, void* v) {
   ((EchoverseGui*)(o->parent()))->cb_echoverse_angle_i(o,v);
@@ -369,38 +369,38 @@ void EchoverseGui::parameter_refresh(int index) {
   switch (index)
       {
       case Echoverse_DryWet:
-          echoverse_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_DryWet)));
+          echoverse_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_DryWet)));
           break;
       case Echoverse_Pan:
-          echoverse_pan->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Pan)-64);
+          echoverse_pan->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Pan)-64);
           break;
       case Echoverse_Tempo:
-          echoverse_delay->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
+          echoverse_delay->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
           break;
       case Echoverse_LR_Delay:
-          echoverse_LRdl->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_LR_Delay));
+          echoverse_LRdl->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_LR_Delay));
           break;
       case Echoverse_Angle:
-          echoverse_angle->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Angle)-64);
+          echoverse_angle->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Angle)-64);
           break;
       case Echoverse_Feedback:
-          echoverse_fb->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Feedback));
+          echoverse_fb->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Feedback));
           break;
       case Echoverse_Damp:
-          echoverse_damp->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Damp));
+          echoverse_damp->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Damp));
           break;
       case Echoverse_Reverse:
-          echoverse_RV->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Reverse));
+          echoverse_RV->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Reverse));
           break;
       case Echoverse_Subdivision:
-          echoverse_subdiv->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Subdivision));
+          echoverse_subdiv->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Subdivision));
           break;
       case Echoverse_Ext_Stereo:
-          echoverse_es->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Ext_Stereo));
+          echoverse_es->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Ext_Stereo));
           break;
       }
 }
 
 void EchoverseGui::tap_tempo_update() {
-  echoverse_delay->value(rkr->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
+  echoverse_delay->value(m_process->Rack_Effects[EFX_ECHOVERSE]->getpar(Echoverse_Tempo));
 }

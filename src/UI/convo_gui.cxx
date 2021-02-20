@@ -5,14 +5,14 @@
 void ConvoGui::cb_convo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_CONVOLOTRON]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_CONVOLOTRON]);
  return;
 }
-rkr->EFX_Bypass[EFX_CONVOLOTRON]=(int)o->value();
+m_process->EFX_Bypass[EFX_CONVOLOTRON]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_CONVOLOTRON]->cleanup();
-rgui->findpos(EFX_CONVOLOTRON,(int)o->value(),o);
+m_process->Rack_Effects[EFX_CONVOLOTRON]->cleanup();
+m_parent->findpos(EFX_CONVOLOTRON,(int)o->value(),o);
 }
 void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_activar_i(o,v);
@@ -20,9 +20,9 @@ void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
 
 void ConvoGui::cb_convo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12029))rkr->Rack_Effects[EFX_CONVOLOTRON]->setpreset((int) o->value());
+if((ud==0)||(ud==12029))m_process->Rack_Effects[EFX_CONVOLOTRON]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_CONVOLOTRON]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_CONVOLOTRON]; i++)
 {
     parameter_refresh(i);
 };
@@ -42,10 +42,10 @@ Fl_Menu_Item ConvoGui::menu_convo_preset[] = {
 void ConvoGui::cb_convo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Convo_DryWet);
+ m_parent->getMIDIControl(MC_Convo_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_DryWet,Dry_Wet((int)(o->value())));
 }
 void ConvoGui::cb_convo_WD(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_WD_i(o,v);
@@ -54,10 +54,10 @@ void ConvoGui::cb_convo_WD(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Convo_Pan);
+ m_parent->getMIDIControl(MC_Convo_Pan);
  return;
 }
-rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Pan,(int)(o->value()+64));
 }
 void ConvoGui::cb_convo_pan(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_pan_i(o,v);
@@ -66,10 +66,10 @@ void ConvoGui::cb_convo_pan(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Convo_Level);
+ m_parent->getMIDIControl(MC_Convo_Level);
  return;
 }
-rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Level,(int)o->value());
+m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Level,(int)o->value());
 }
 void ConvoGui::cb_convo_level(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_level_i(o,v);
@@ -78,10 +78,10 @@ void ConvoGui::cb_convo_level(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Convo_Damp);
+ m_parent->getMIDIControl(MC_Convo_Damp);
  return;
 }
-rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Damp,(int)o->value());
+m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Damp,(int)o->value());
 }
 void ConvoGui::cb_convo_damp(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_damp_i(o,v);
@@ -90,10 +90,10 @@ void ConvoGui::cb_convo_damp(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Convo_Feedback);
+ m_parent->getMIDIControl(MC_Convo_Feedback);
  return;
 }
-rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Feedback,(int)o->value());
+m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Feedback,(int)o->value());
 }
 void ConvoGui::cb_convo_fb(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_fb_i(o,v);
@@ -102,17 +102,17 @@ void ConvoGui::cb_convo_fb(RKR_Slider* o, void* v) {
 void ConvoGui::cb_convo_length_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Convo_Length);
+ m_parent->getMIDIControl(MC_Convo_Length);
  return;
 }
-rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value());
+m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value());
 }
 void ConvoGui::cb_convo_length(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_length_i(o,v);
 }
 
 void ConvoGui::cb_convo_user_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File,(int)o->value());
+  m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File,(int)o->value());
 
 if((int)o->value())B_wav->activate(); else B_wav->deactivate();
 }
@@ -121,7 +121,7 @@ void ConvoGui::cb_convo_user(RKR_Check_Button* o, void* v) {
 }
 
 void ConvoGui::cb_convo_safe_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Safe,(int)o->value());
+  m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Safe,(int)o->value());
 }
 void ConvoGui::cb_convo_safe(RKR_Check_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_safe_i(o,v);
@@ -133,7 +133,7 @@ filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
 
-Convolotron *Efx_Convolotron = static_cast<Convolotron*>(rkr->Rack_Effects[EFX_CONVOLOTRON]);
+Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
 strcpy(Efx_Convolotron->Filename,filename);
 if(!Efx_Convolotron->setfile(USERFILE))
 {
@@ -145,7 +145,7 @@ void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {
 }
 
 void ConvoGui::cb_convo_fnum_i(RKR_Choice* o, void*) {
-  rkr->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Set_File,(int)o->value());
+  m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Set_File,(int)o->value());
 }
 void ConvoGui::cb_convo_fnum(RKR_Choice* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_fnum_i(o,v);
@@ -369,36 +369,36 @@ void ConvoGui::parameter_refresh(int index) {
   switch (index)
       {
       case Convo_DryWet:
-          convo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet)));
+          convo_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_DryWet)));
           break;
       case Convo_Pan:
-          convo_pan->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan)-64);
+          convo_pan->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Pan)-64);
           break;
       case Convo_Safe:
-          convo_safe->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Safe));
+          convo_safe->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Safe));
           break;
       case Convo_Length:
-          convo_length->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length));
+          convo_length->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length));
           break;
       case Convo_User_File:
-          convo_user->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File));
+          convo_user->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File));
           convo_user->do_callback();
           break;
       case Convo_SKIP_5:
           break;
       case Convo_Damp:
-          convo_damp->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp));
+          convo_damp->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Damp));
           break;
       case Convo_Level:
-          convo_level->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level));
+          convo_level->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Level));
           break;
       case Convo_Set_File:
-          convo_fnum->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Set_File));
+          convo_fnum->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Set_File));
           break;
       case Convo_SKIP_9:
           break;
       case Convo_Feedback:
-          convo_fb->value(rkr->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback));
+          convo_fb->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback));
           break;
       }
 }

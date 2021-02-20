@@ -5,30 +5,30 @@
 void ReverbGui::cb_reverb_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_REVERB]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_REVERB]);
  return;
 }
-rkr->EFX_Bypass[EFX_REVERB]=(int)o->value();
+m_process->EFX_Bypass[EFX_REVERB]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_REVERB]->cleanup();
-rgui->findpos(EFX_REVERB,(int)o->value(),o);
+m_process->Rack_Effects[EFX_REVERB]->cleanup();
+m_parent->findpos(EFX_REVERB,(int)o->value(),o);
 }
 void ReverbGui::cb_reverb_activar(RKR_Light_Button* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_activar_i(o,v);
 }
 
 void ReverbGui::cb_reverb_preset_i(RKR_Choice* o, void* v) {
-  rkr->EFX_Bypass[EFX_REVERB]=0;
+  m_process->EFX_Bypass[EFX_REVERB]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12008))rkr->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
+if((ud==0)||(ud==12008))m_process->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_REVERB]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_REVERB]; i++)
 {
     parameter_refresh(i);
 };
 
-if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;
+if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;
 }
 void ReverbGui::cb_reverb_preset(RKR_Choice* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_preset_i(o,v);
@@ -54,10 +54,10 @@ Fl_Menu_Item ReverbGui::menu_reverb_preset[] = {
 void ReverbGui::cb_reverb_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_DryWet);
+ m_parent->getMIDIControl(MC_Reverb_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_DryWet,Dry_Wet((int)(o->value())));
 }
 void ReverbGui::cb_reverb_WD(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_WD_i(o,v);
@@ -66,10 +66,10 @@ void ReverbGui::cb_reverb_WD(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_Pan);
+ m_parent->getMIDIControl(MC_Reverb_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Pan,(int)(o->value()+64));
 }
 void ReverbGui::cb_reverb_pan(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_pan_i(o,v);
@@ -78,10 +78,10 @@ void ReverbGui::cb_reverb_pan(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_time_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_Time);
+ m_parent->getMIDIControl(MC_Reverb_Time);
  return;
 }
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Time,(int)o->value());
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Time,(int)o->value());
 }
 void ReverbGui::cb_reverb_time(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_time_i(o,v);
@@ -90,10 +90,10 @@ void ReverbGui::cb_reverb_time(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_ldel_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_I_Delay);
+ m_parent->getMIDIControl(MC_Reverb_I_Delay);
  return;
 }
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_I_Delay,(int)o->value());
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_I_Delay,(int)o->value());
 }
 void ReverbGui::cb_reverb_ldel(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_ldel_i(o,v);
@@ -102,24 +102,24 @@ void ReverbGui::cb_reverb_ldel(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_ldelft_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_Delay_FB);
+ m_parent->getMIDIControl(MC_Reverb_Delay_FB);
  return;
 }
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Delay_FB,(int)o->value());
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Delay_FB,(int)o->value());
 }
 void ReverbGui::cb_reverb_ldelft(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_ldelft_i(o,v);
 }
 
 void ReverbGui::cb_reverb_type_i(RKR_Choice* o, void*) {
-  rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Type,(int)o->value());
+  m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Type,(int)o->value());
 }
 void ReverbGui::cb_reverb_type(RKR_Choice* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_type_i(o,v);
 }
 
 void ReverbGui::cb_Random_i(Fl_Menu_*, void*) {
-  rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Type,1);
+  m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Type,1);
 }
 void ReverbGui::cb_Random(Fl_Menu_* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_Random_i(o,v);
@@ -134,12 +134,12 @@ Fl_Menu_Item ReverbGui::menu_reverb_type[] = {
 void ReverbGui::cb_reverb_RS_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_Room);
+ m_parent->getMIDIControl(MC_Reverb_Room);
  return;
 }
-rkr->EFX_Bypass[EFX_REVERB]=0;
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Room,(int)o->value());
-if((int)reverb_activar->value())rkr->EFX_Bypass[EFX_REVERB]=1;
+m_process->EFX_Bypass[EFX_REVERB]=0;
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Room,(int)o->value());
+if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;
 }
 void ReverbGui::cb_reverb_RS(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_RS_i(o,v);
@@ -148,10 +148,10 @@ void ReverbGui::cb_reverb_RS(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_LPF);
+ m_parent->getMIDIControl(MC_Reverb_LPF);
  return;
 } 
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_LPF,(int)o->value());
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_LPF,(int)o->value());
 }
 void ReverbGui::cb_reverb_LPF(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_LPF_i(o,v);
@@ -160,10 +160,10 @@ void ReverbGui::cb_reverb_LPF(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_HPF);
+ m_parent->getMIDIControl(MC_Reverb_HPF);
  return;
 } 
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_HPF,(int)o->value());
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_HPF,(int)o->value());
 }
 void ReverbGui::cb_reverb_HPF(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_HPF_i(o,v);
@@ -172,10 +172,10 @@ void ReverbGui::cb_reverb_HPF(RKR_Slider* o, void* v) {
 void ReverbGui::cb_reverb_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Reverb_Damp);
+ m_parent->getMIDIControl(MC_Reverb_Damp);
  return;
 }
-rkr->Rack_Effects[EFX_REVERB]->changepar(Reverb_Damp,(int)o->value());
+m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Damp,(int)o->value());
 }
 void ReverbGui::cb_reverb_damp(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_damp_i(o,v);
@@ -405,38 +405,38 @@ void ReverbGui::parameter_refresh(int index) {
   switch (index)
       {
       case Reverb_DryWet:
-          reverb_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet)));
+          reverb_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_DryWet)));
           break;
       case Reverb_Pan:
-          reverb_pan->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan)-64);
+          reverb_pan->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_Pan)-64);
           break;
       case Reverb_Time:
-          reverb_time->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Time));
+          reverb_time->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_Time));
           break;
       case Reverb_I_Delay:
-          reverb_ldel->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay));
+          reverb_ldel->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_I_Delay));
           break;
       case Reverb_Delay_FB:
-          reverb_ldelft->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB));
+          reverb_ldelft->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_Delay_FB));
           break;
       case Reverb_SKIP_5:
           break;
       case Reverb_SKIP_6:
           break;
       case Reverb_LPF:
-          reverb_LPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF));
+          reverb_LPF->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_LPF));
           break;
       case Reverb_HPF:
-          reverb_HPF->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF));
+          reverb_HPF->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_HPF));
           break;
       case Reverb_Damp:
-          reverb_damp->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp));
+          reverb_damp->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_Damp));
           break;
       case Reverb_Type:
-          reverb_type->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Type));
+          reverb_type->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_Type));
           break;
       case Reverb_Room:
-          reverb_RS->value(rkr->Rack_Effects[EFX_REVERB]->getpar(Reverb_Room));
+          reverb_RS->value(m_process->Rack_Effects[EFX_REVERB]->getpar(Reverb_Room));
           break;
       }
 }

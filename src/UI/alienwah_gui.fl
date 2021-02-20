@@ -25,14 +25,14 @@ widget_class {\#include "common_gui_menu.h"} AlienwahGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_ALIENWAH]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_ALIENWAH]);
  return;
 }
-rkr->EFX_Bypass[EFX_ALIENWAH]=(int)o->value();
+m_process->EFX_Bypass[EFX_ALIENWAH]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_ALIENWAH]->cleanup();
-rgui->findpos(EFX_ALIENWAH,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_ALIENWAH]->cleanup();
+m_parent->findpos(EFX_ALIENWAH,(int)o->value(),o);}
     xywh {4 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -41,9 +41,9 @@ rgui->findpos(EFX_ALIENWAH,(int)o->value(),o);}
     label Preset
     user_data 12011
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12011))rkr->Rack_Effects[EFX_ALIENWAH]->setpreset((int) o->value());
+if((ud==0)||(ud==12011))m_process->Rack_Effects[EFX_ALIENWAH]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_ALIENWAH]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_ALIENWAH]; i++)
 {
     parameter_refresh(i);
 }}
@@ -72,10 +72,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_ALIENWAH]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_DryWet);
+ m_parent->getMIDIControl(MC_Alien_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -83,10 +83,10 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_DryWet,Dry_Wet((int)(o->value()
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_Pan);
+ m_parent->getMIDIControl(MC_Alien_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Pan,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Pan,(int)(o->value()+64));}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -94,10 +94,10 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_LFO_Tempo);
+ m_parent->getMIDIControl(MC_Alien_LFO_Tempo);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo,(int)o->value());}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo,(int)o->value());}
     xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -105,10 +105,10 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_LFO_Random);
+ m_parent->getMIDIControl(MC_Alien_LFO_Random);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Random,(int)o->value());}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Random,(int)o->value());}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -116,11 +116,11 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Random,(int)o->value());}
     label {LFO Type}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_LFO_Type);
+ m_parent->getMIDIControl(MC_Alien_LFO_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Type,(int)o->value())} open
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Type,(int)o->value())} open
     xywh {78 79 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -129,10 +129,10 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Type,(int)o->value())} open
     label Phase
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_Phase);
+ m_parent->getMIDIControl(MC_Alien_Phase);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Phase,(int)o->value());}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Phase,(int)o->value());}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -140,10 +140,10 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Phase,(int)o->value());}
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_LFO_Stereo);
+ m_parent->getMIDIControl(MC_Alien_LFO_Stereo);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Stereo,(int)o->value());}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Stereo,(int)o->value());}
     xywh {56 117 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -151,10 +151,10 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Stereo,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_Depth);
+ m_parent->getMIDIControl(MC_Alien_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Depth,(int)o->value());}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Depth,(int)o->value());}
     xywh {56 129 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -162,12 +162,12 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Depth,(int)o->value());}
     label Delay
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_Delay);
+ m_parent->getMIDIControl(MC_Alien_Delay);
  return;
 } 
-rkr->EFX_Bypass[EFX_ALIENWAH]=0;
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Delay,(int)o->value());
-if (Alienwah_activar->value()) rkr->EFX_Bypass[EFX_ALIENWAH]=1;}
+m_process->EFX_Bypass[EFX_ALIENWAH]=0;
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Delay,(int)o->value());
+if (Alienwah_activar->value()) m_process->EFX_Bypass[EFX_ALIENWAH]=1;}
     xywh {56 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -175,10 +175,10 @@ if (Alienwah_activar->value()) rkr->EFX_Bypass[EFX_ALIENWAH]=1;}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_Feedback);
+ m_parent->getMIDIControl(MC_Alien_Feedback);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Feedback,(int)o->value());}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Feedback,(int)o->value());}
     xywh {56 153 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -186,10 +186,10 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_Feedback,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Alien_LR_Cross);
+ m_parent->getMIDIControl(MC_Alien_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross,(int)(o->value()));}
+m_process->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross,(int)(o->value()));}
     xywh {56 166 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -200,42 +200,42 @@ rkr->Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LR_Cross,(int)(o->value()));}
     code {switch (index)
     {
     case Alien_DryWet:
-        Alienwah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_DryWet)));
+        Alienwah_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_DryWet)));
         break;
     case Alien_Pan:
-        Alienwah_pan->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Pan)-64);
+        Alienwah_pan->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Pan)-64);
         break;
     case Alien_LFO_Tempo:
-        Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));
+        Alienwah_freq->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));
         break;
     case Alien_LFO_Random:
-        Alienwah_rnd->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Random));
+        Alienwah_rnd->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Random));
         break;
     case Alien_LFO_Type:
-        Alienwah_lfotype->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Type));
+        Alienwah_lfotype->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Type));
         break;
     case Alien_LFO_Stereo:
-        Alienwah_stdf->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Stereo));
+        Alienwah_stdf->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Stereo));
         break;
     case Alien_Depth:
-        Alienwah_dpth->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Depth));
+        Alienwah_dpth->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Depth));
         break;
     case Alien_Feedback:
-        Alienwah_fb->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Feedback));
+        Alienwah_fb->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Feedback));
         break;
     case Alien_Delay:
-        Alienwah_delay->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Delay));
+        Alienwah_delay->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Delay));
         break;
     case Alien_LR_Cross:
-        Alienwah_LR->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LR_Cross));
+        Alienwah_LR->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LR_Cross));
         break;
     case Alien_Phase:
-        Alienwah_phase->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase));
+        Alienwah_phase->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_Phase));
         break;
     }} {}
   }
   Function {tap_tempo_update()} {return_type void
   } {
-    code {Alienwah_freq->value(rkr->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));} {}
+    code {Alienwah_freq->value(m_process->Rack_Effects[EFX_ALIENWAH]->getpar(Alien_LFO_Tempo));} {}
   }
 }

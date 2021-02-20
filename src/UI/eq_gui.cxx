@@ -5,14 +5,14 @@
 void EqGui::cb_eq_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_EQ]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_EQ]);
  return;
 } 
-rkr->EFX_Bypass[EFX_EQ]=(int)o->value();
+m_process->EFX_Bypass[EFX_EQ]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_EQ]->cleanup();
-rgui->findpos(EFX_EQ,(int)o->value(),o);
+m_process->Rack_Effects[EFX_EQ]->cleanup();
+m_parent->findpos(EFX_EQ,(int)o->value(),o);
 }
 void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_activar_i(o,v);
@@ -20,9 +20,9 @@ void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
 
 void EqGui::cb_eq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12000))rkr->Rack_Effects[EFX_EQ]->setpreset((int)o->value());
+if((ud==0)||(ud==12000))m_process->Rack_Effects[EFX_EQ]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_EQ]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_EQ]; i++)
 {
     parameter_refresh(i);
 };
@@ -41,10 +41,10 @@ Fl_Menu_Item EqGui::menu_eq_preset[] = {
 void EqGui::cb_eq_Gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_Gain);
+ m_parent->getMIDIControl(MC_EQ_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_Gain,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_Gain,(int)(o->value()+64));
 }
 void EqGui::cb_eq_Gain(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_Gain_i(o,v);
@@ -53,11 +53,11 @@ void EqGui::cb_eq_Gain(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_Q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_Q);
+ m_parent->getMIDIControl(MC_EQ_Q);
  return;
 }
 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_Q,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_Q,(int)(o->value()+64));
 }
 void EqGui::cb_eq_Q(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_Q_i(o,v);
@@ -66,10 +66,10 @@ void EqGui::cb_eq_Q(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_31_HZ);
+ m_parent->getMIDIControl(MC_EQ_31_HZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_31_HZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_31_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_1(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_1_i(o,v);
@@ -78,10 +78,10 @@ void EqGui::cb_eq_1(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_63_HZ);
+ m_parent->getMIDIControl(MC_EQ_63_HZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_63_HZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_63_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_2(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_2_i(o,v);
@@ -90,10 +90,10 @@ void EqGui::cb_eq_2(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_125_HZ);
+ m_parent->getMIDIControl(MC_EQ_125_HZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_125_HZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_125_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_3(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_3_i(o,v);
@@ -102,10 +102,10 @@ void EqGui::cb_eq_3(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_4_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_250_HZ);
+ m_parent->getMIDIControl(MC_EQ_250_HZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_250_HZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_250_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_4(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_4_i(o,v);
@@ -114,10 +114,10 @@ void EqGui::cb_eq_4(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_5_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_500_HZ);
+ m_parent->getMIDIControl(MC_EQ_500_HZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_500_HZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_500_HZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_5(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_5_i(o,v);
@@ -126,10 +126,10 @@ void EqGui::cb_eq_5(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_6_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_1_KHZ);
+ m_parent->getMIDIControl(MC_EQ_1_KHZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_1_KHZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_1_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_6(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_6_i(o,v);
@@ -138,10 +138,10 @@ void EqGui::cb_eq_6(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_7_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_2_KHZ);
+ m_parent->getMIDIControl(MC_EQ_2_KHZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_2_KHZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_2_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_7(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_7_i(o,v);
@@ -150,10 +150,10 @@ void EqGui::cb_eq_7(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_8_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_4_KHZ);
+ m_parent->getMIDIControl(MC_EQ_4_KHZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_4_KHZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_4_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_8(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_8_i(o,v);
@@ -162,10 +162,10 @@ void EqGui::cb_eq_8(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_9_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_8_KHZ);
+ m_parent->getMIDIControl(MC_EQ_8_KHZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_8_KHZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_8_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_9(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_9_i(o,v);
@@ -174,10 +174,10 @@ void EqGui::cb_eq_9(RKR_Slider* o, void* v) {
 void EqGui::cb_eq_10_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_EQ_16_KHZ);
+ m_parent->getMIDIControl(MC_EQ_16_KHZ);
  return;
 } 
-rkr->Rack_Effects[EFX_EQ]->changepar(EQ_16_KHZ,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_EQ]->changepar(EQ_16_KHZ,(int)(o->value()+64));
 }
 void EqGui::cb_eq_10(RKR_Slider* o, void* v) {
   ((EqGui*)(o->parent()))->cb_eq_10_i(o,v);
@@ -438,40 +438,40 @@ void EqGui::parameter_refresh(int index) {
   switch(index)
       {
       case EQ_Gain:
-          eq_Gain->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Gain)-64);
+          eq_Gain->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_Gain)-64);
           break;
       case EQ_Q:
-          eq_Q->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_Q)-64);
+          eq_Q->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_Q)-64);
           break;
       case EQ_31_HZ:
-          eq_1->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_31_HZ)-64);
+          eq_1->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_31_HZ)-64);
           break;
       case EQ_63_HZ:
-          eq_2->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_63_HZ)-64);
+          eq_2->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_63_HZ)-64);
           break;
       case EQ_125_HZ:
-          eq_3->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_125_HZ)-64);
+          eq_3->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_125_HZ)-64);
           break;
       case EQ_250_HZ:
-          eq_4->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_250_HZ)-64);
+          eq_4->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_250_HZ)-64);
           break;
       case EQ_500_HZ:
-          eq_5->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_500_HZ)-64);
+          eq_5->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_500_HZ)-64);
           break;
       case EQ_1_KHZ:
-          eq_6->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_1_KHZ)-64);
+          eq_6->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_1_KHZ)-64);
           break;
       case EQ_2_KHZ:
-          eq_7->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_2_KHZ)-64);
+          eq_7->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_2_KHZ)-64);
           break;
       case EQ_4_KHZ:
-          eq_8->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_4_KHZ)-64);
+          eq_8->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_4_KHZ)-64);
           break;
       case EQ_8_KHZ:
-          eq_9->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_8_KHZ)-64);
+          eq_9->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_8_KHZ)-64);
           break;
       case EQ_16_KHZ:
-          eq_10->value(rkr->Rack_Effects[EFX_EQ]->getpar(EQ_16_KHZ)-64);
+          eq_10->value(m_process->Rack_Effects[EFX_EQ]->getpar(EQ_16_KHZ)-64);
           break;
       }
 }

@@ -5,14 +5,14 @@
 void InfinityGui::cb_infinity_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off); 
- o->value(rkr->EFX_Bypass[EFX_INFINITY]);
+ m_parent->getMIDIControl(MC_Multi_On_Off); 
+ o->value(m_process->EFX_Bypass[EFX_INFINITY]);
  return;
 } 
-rkr->EFX_Bypass[EFX_INFINITY]=(int)o->value();
+m_process->EFX_Bypass[EFX_INFINITY]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_INFINITY]->cleanup();
-rgui->findpos(EFX_INFINITY,(int)o->value(),o);
+m_process->Rack_Effects[EFX_INFINITY]->cleanup();
+m_parent->findpos(EFX_INFINITY,(int)o->value(),o);
 }
 void InfinityGui::cb_infinity_activar(RKR_Light_Button* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_activar_i(o,v);
@@ -20,9 +20,9 @@ void InfinityGui::cb_infinity_activar(RKR_Light_Button* o, void* v) {
 
 void InfinityGui::cb_infinity_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12046))rkr->Rack_Effects[EFX_INFINITY]->setpreset((int) o->value());
+if((ud==0)||(ud==12046))m_process->Rack_Effects[EFX_INFINITY]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_INFINITY]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_INFINITY]; i++)
 {
     parameter_refresh(i);
 };
@@ -49,10 +49,10 @@ Fl_Menu_Item InfinityGui::menu_infinity_preset[] = {
 void InfinityGui::cb_infinity_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_DryWet);
+ m_parent->getMIDIControl(MC_Infinity_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_DryWet,Dry_Wet((int)(o->value())));
 }
 void InfinityGui::cb_infinity_WD(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_WD_i(o,v);
@@ -61,10 +61,10 @@ void InfinityGui::cb_infinity_WD(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_Q_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Resonance);
+ m_parent->getMIDIControl(MC_Infinity_Resonance);
  return;
 }
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Resonance,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Resonance,(int)o->value());
 }
 void InfinityGui::cb_infinity_Q(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_Q_i(o,v);
@@ -73,10 +73,10 @@ void InfinityGui::cb_infinity_Q(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_1_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_1);
+ m_parent->getMIDIControl(MC_Infinity_Band_1);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_1,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_1,(int)o->value());
 }
 void InfinityGui::cb_infinity_1(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_1_i(o,v);
@@ -85,10 +85,10 @@ void InfinityGui::cb_infinity_1(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_2_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_2);
+ m_parent->getMIDIControl(MC_Infinity_Band_2);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_2,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_2,(int)o->value());
 }
 void InfinityGui::cb_infinity_2(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_2_i(o,v);
@@ -97,10 +97,10 @@ void InfinityGui::cb_infinity_2(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_3_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_3);
+ m_parent->getMIDIControl(MC_Infinity_Band_3);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_3,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_3,(int)o->value());
 }
 void InfinityGui::cb_infinity_3(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_3_i(o,v);
@@ -109,10 +109,10 @@ void InfinityGui::cb_infinity_3(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_4_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_4);
+ m_parent->getMIDIControl(MC_Infinity_Band_4);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_4,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_4,(int)o->value());
 }
 void InfinityGui::cb_infinity_4(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_4_i(o,v);
@@ -121,10 +121,10 @@ void InfinityGui::cb_infinity_4(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_5_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_5);
+ m_parent->getMIDIControl(MC_Infinity_Band_5);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_5,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_5,(int)o->value());
 }
 void InfinityGui::cb_infinity_5(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_5_i(o,v);
@@ -133,10 +133,10 @@ void InfinityGui::cb_infinity_5(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_6_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_6);
+ m_parent->getMIDIControl(MC_Infinity_Band_6);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_6,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_6,(int)o->value());
 }
 void InfinityGui::cb_infinity_6(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_6_i(o,v);
@@ -145,10 +145,10 @@ void InfinityGui::cb_infinity_6(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_7_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_7);
+ m_parent->getMIDIControl(MC_Infinity_Band_7);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_7,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_7,(int)o->value());
 }
 void InfinityGui::cb_infinity_7(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_7_i(o,v);
@@ -157,24 +157,24 @@ void InfinityGui::cb_infinity_7(RKR_Value_Input* o, void* v) {
 void InfinityGui::cb_infinity_8_i(RKR_Value_Input* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Band_8);
+ m_parent->getMIDIControl(MC_Infinity_Band_8);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_8,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_8,(int)o->value());
 }
 void InfinityGui::cb_infinity_8(RKR_Value_Input* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_8_i(o,v);
 }
 
 void InfinityGui::cb_infinity_rev_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Reverse,(int)o->value());
+  m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Reverse,(int)o->value());
 }
 void InfinityGui::cb_infinity_rev(RKR_Check_Button* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_rev_i(o,v);
 }
 
 void InfinityGui::cb_infinity_stages_i(RKR_Counter* o, void*) {
-  rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Stages,(int)o->value());
+  m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Stages,(int)o->value());
 }
 void InfinityGui::cb_infinity_stages(RKR_Counter* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_stages_i(o,v);
@@ -183,10 +183,10 @@ void InfinityGui::cb_infinity_stages(RKR_Counter* o, void* v) {
 void InfinityGui::cb_infinity_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_AutoPan);
+ m_parent->getMIDIControl(MC_Infinity_AutoPan);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_AutoPan,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_AutoPan,(int)o->value());
 }
 void InfinityGui::cb_infinity_pan(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_pan_i(o,v);
@@ -195,10 +195,10 @@ void InfinityGui::cb_infinity_pan(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_LR_Delay);
+ m_parent->getMIDIControl(MC_Infinity_LR_Delay);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_LR_Delay,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_LR_Delay,(int)o->value());
 }
 void InfinityGui::cb_infinity_stdf(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_stdf_i(o,v);
@@ -207,10 +207,10 @@ void InfinityGui::cb_infinity_stdf(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_start_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Start);
+ m_parent->getMIDIControl(MC_Infinity_Start);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Start,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Start,(int)o->value());
 }
 void InfinityGui::cb_infinity_start(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_start_i(o,v);
@@ -219,10 +219,10 @@ void InfinityGui::cb_infinity_start(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_end_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_End);
+ m_parent->getMIDIControl(MC_Infinity_End);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_End,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_End,(int)o->value());
 }
 void InfinityGui::cb_infinity_end(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_end_i(o,v);
@@ -231,10 +231,10 @@ void InfinityGui::cb_infinity_end(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_rate_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Tempo);
+ m_parent->getMIDIControl(MC_Infinity_Tempo);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Tempo,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Tempo,(int)o->value());
 }
 void InfinityGui::cb_infinity_rate(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_rate_i(o,v);
@@ -243,10 +243,10 @@ void InfinityGui::cb_infinity_rate(RKR_Slider* o, void* v) {
 void InfinityGui::cb_infinity_subdiv_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Infinity_Subdivision);
+ m_parent->getMIDIControl(MC_Infinity_Subdivision);
  return;
 } 
-rkr->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Subdivision,(int)o->value());
+m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Subdivision,(int)o->value());
 }
 void InfinityGui::cb_infinity_subdiv(RKR_Slider* o, void* v) {
   ((InfinityGui*)(o->parent()))->cb_infinity_subdiv_i(o,v);
@@ -605,62 +605,62 @@ void InfinityGui::parameter_refresh(int index) {
   switch (index)
       {
       case Infinity_DryWet:
-          infinity_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_DryWet)));
+          infinity_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_DryWet)));
           break;
       case Infinity_Band_1:
-          infinity_1->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_1));
+          infinity_1->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_1));
           break;
       case Infinity_Band_2:
-          infinity_2->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_2));
+          infinity_2->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_2));
           break;
       case Infinity_Band_3:
-          infinity_3->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_3));
+          infinity_3->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_3));
           break;
       case Infinity_Band_4:
-          infinity_4->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_4));
+          infinity_4->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_4));
           break;
       case Infinity_Band_5:
-          infinity_5->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_5));
+          infinity_5->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_5));
           break;
       case Infinity_Band_6:
-          infinity_6->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_6));
+          infinity_6->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_6));
           break;
       case Infinity_Band_7:
-          infinity_7->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_7));
+          infinity_7->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_7));
           break;
       case Infinity_Band_8:
-          infinity_8->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_8));
+          infinity_8->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Band_8));
           break;
       case Infinity_Resonance:
-          infinity_Q->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Resonance));
+          infinity_Q->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Resonance));
           break;
       case Infinity_Start:
-          infinity_start->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Start));
+          infinity_start->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Start));
           break;
       case Infinity_End:
-          infinity_end->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_End));
+          infinity_end->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_End));
           break;
       case Infinity_Tempo:
-          infinity_rate->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
+          infinity_rate->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
           break;
       case Infinity_LR_Delay:
-          infinity_stdf->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_LR_Delay));
+          infinity_stdf->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_LR_Delay));
           break;
       case Infinity_Subdivision:
-          infinity_subdiv->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Subdivision));
+          infinity_subdiv->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Subdivision));
           break;
       case Infinity_AutoPan:
-          infinity_pan->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_AutoPan));
+          infinity_pan->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_AutoPan));
           break;
       case Infinity_Reverse:
-          infinity_rev->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Reverse));
+          infinity_rev->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Reverse));
           break;
       case Infinity_Stages:
-          infinity_stages->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Stages));
+          infinity_stages->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Stages));
           break;
       }
 }
 
 void InfinityGui::tap_tempo_update() {
-  infinity_rate->value(rkr->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
+  infinity_rate->value(m_process->Rack_Effects[EFX_INFINITY]->getpar(Infinity_Tempo));
 }

@@ -24,12 +24,12 @@ widget_class GateGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_NOISEGATE]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_NOISEGATE]);
  return;
 }
-rkr->EFX_Bypass[EFX_NOISEGATE]=(int)o->value();
-rgui->findpos(EFX_NOISEGATE,(int)o->value(),o);}
+m_process->EFX_Bypass[EFX_NOISEGATE]=(int)o->value();
+m_parent->findpos(EFX_NOISEGATE,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -38,9 +38,9 @@ rgui->findpos(EFX_NOISEGATE,(int)o->value(),o);}
     label Preset
     user_data 12016
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12016))rkr->Rack_Effects[EFX_NOISEGATE]->setpreset((int) o->value());
+if((ud==0)||(ud==12016))m_process->Rack_Effects[EFX_NOISEGATE]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_NOISEGATE]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_NOISEGATE]; i++)
 {
     parameter_refresh(i);
 };}
@@ -65,10 +65,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_NOISEGATE]; i++)
     label {A. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Attack);
+ m_parent->getMIDIControl(MC_Gate_Attack);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Attack,(int)o->value());}
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Attack,(int)o->value());}
     tooltip {Attack Time} xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 250 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -76,10 +76,10 @@ rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Attack,(int)o->value());}
     label {R. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Release);
+ m_parent->getMIDIControl(MC_Gate_Release);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Release, (int) o->value());}
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Release, (int) o->value());}
     tooltip {Release Time} xywh {56 61 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 250 step 1 value 120 textcolor 7
     class RKR_Slider
   }
@@ -87,10 +87,10 @@ rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Release, (int) o->value());}
     label Range
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Range);
+ m_parent->getMIDIControl(MC_Gate_Range);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Range, (int) o->value());}
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Range, (int) o->value());}
     xywh {56 83 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -90 maximum 0 step 1 textcolor 7
     class RKR_Slider
   }
@@ -98,10 +98,10 @@ rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Range, (int) o->value());}
     label Threshold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Threshold);
+ m_parent->getMIDIControl(MC_Gate_Threshold);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Threshold, (int)o->value());}
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Threshold, (int)o->value());}
     xywh {56 105 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
     class RKR_Slider
   }
@@ -109,10 +109,10 @@ rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Threshold, (int)o->value());}
     label Hold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_Hold);
+ m_parent->getMIDIControl(MC_Gate_Hold);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Hold,(int)o->value());}
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Hold,(int)o->value());}
     xywh {56 127 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 500 step 1 textcolor 7
     class RKR_Slider
   }
@@ -120,10 +120,10 @@ rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Hold,(int)o->value());}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_LPF);
+ m_parent->getMIDIControl(MC_Gate_LPF);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_LPF, (int)o->value());}
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_LPF, (int)o->value());}
     xywh {56 146 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -131,10 +131,10 @@ rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_LPF, (int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Gate_HPF);
+ m_parent->getMIDIControl(MC_Gate_HPF);
  return;
 }
-rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_HPF, (int)o->value());}
+m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_HPF, (int)o->value());}
     xywh {56 162 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -143,25 +143,25 @@ rkr->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_HPF, (int)o->value());}
     code {switch (index)
     {
     case Gate_Threshold:
-        gate_threshold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold));
+        gate_threshold->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Threshold));
         break;
     case Gate_Range:
-        gate_range->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range));
+        gate_range->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Range));
         break;
     case Gate_Attack:
-        gate_ATime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack));
+        gate_ATime->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Attack));
         break;
     case Gate_Release:
-        gate_RTime->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release));
+        gate_RTime->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Release));
         break;
     case Gate_LPF:
-        gate_LPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF));
+        gate_LPF->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_LPF));
         break;
     case Gate_HPF:
-        gate_HPF->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF));
+        gate_HPF->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_HPF));
         break;
     case Gate_Hold:
-        gate_hold->value(rkr->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold));
+        gate_hold->value(m_process->Rack_Effects[EFX_NOISEGATE]->getpar(Gate_Hold));
         break;
     }} {}
   }

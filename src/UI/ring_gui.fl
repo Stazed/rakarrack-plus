@@ -27,14 +27,14 @@ widget_class RingGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_RING]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_RING]);
  return;
 }
-rkr->EFX_Bypass[EFX_RING]=(int)o->value();
+m_process->EFX_Bypass[EFX_RING]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_RING]->cleanup();
-rgui->findpos(EFX_RING,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_RING]->cleanup();
+m_parent->findpos(EFX_RING,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x34 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -43,9 +43,9 @@ rgui->findpos(EFX_RING,(int)o->value(),o);}
     label Preset
     user_data 12021
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12021))rkr->Rack_Effects[EFX_RING]->setpreset((int) o->value());
+if((ud==0)||(ud==12021))m_process->Rack_Effects[EFX_RING]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_RING]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_RING]; i++)
 {
     parameter_refresh(i);
 };}
@@ -82,10 +82,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_RING]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_DryWet);
+ m_parent->getMIDIControl(MC_Ring_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_DryWet,Dry_Wet((int)o->value()));}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_DryWet,Dry_Wet((int)o->value()));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -93,10 +93,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_DryWet,Dry_Wet((int)o->value()));}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_LR_Cross);
+ m_parent->getMIDIControl(MC_Ring_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_LR_Cross,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_LR_Cross,(int)o->value());}
     xywh {56 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
@@ -104,10 +104,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_LR_Cross,(int)o->value());}
     label Input
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Input);
+ m_parent->getMIDIControl(MC_Ring_Input);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Input,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Input,(int)o->value());}
     xywh {56 55 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -115,10 +115,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Input,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Level);
+ m_parent->getMIDIControl(MC_Ring_Level);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Level,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Level,(int)o->value());}
     xywh {56 68 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -126,24 +126,24 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Level,(int)o->value());}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Pan);
+ m_parent->getMIDIControl(MC_Ring_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Pan,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Pan,(int)o->value());}
     xywh {56 81 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button ring_st {
     label Stereo
     user_data 2
-    callback {rkr->Rack_Effects[EFX_RING]->changepar(Ring_Stereo,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_RING]->changepar(Ring_Stereo,(int)o->value());}
     xywh {28 92 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button ring_afreq {
     label {Auto Freq}
     user_data 2
-    callback {rkr->Rack_Effects[EFX_RING]->changepar(Ring_Auto_Freq,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_RING]->changepar(Ring_Auto_Freq,(int)o->value());}
     xywh {80 92 69 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -151,10 +151,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Pan,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Depth);
+ m_parent->getMIDIControl(MC_Ring_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Depth,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Depth,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -162,10 +162,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Depth,(int)o->value());}
     label Freq
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Freq);
+ m_parent->getMIDIControl(MC_Ring_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Freq,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Freq,(int)o->value());}
     tooltip Frequency xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 20000 step 10 textcolor 7
     class RKR_Slider
   }
@@ -173,10 +173,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Freq,(int)o->value());}
     label Sine
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Sine);
+ m_parent->getMIDIControl(MC_Ring_Sine);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Sine,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Sine,(int)o->value());}
     xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -184,10 +184,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Sine,(int)o->value());}
     label Triangle
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Triangle);
+ m_parent->getMIDIControl(MC_Ring_Triangle);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Triangle,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Triangle,(int)o->value());}
     xywh {56 142 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -195,10 +195,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Triangle,(int)o->value());}
     label Sawtooth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Saw);
+ m_parent->getMIDIControl(MC_Ring_Saw);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Saw,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Saw,(int)o->value());}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -206,10 +206,10 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Saw,(int)o->value());}
     label Square
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Ring_Square);
+ m_parent->getMIDIControl(MC_Ring_Square);
  return;
 } 
-rkr->Rack_Effects[EFX_RING]->changepar(Ring_Square,(int)o->value());}
+m_process->Rack_Effects[EFX_RING]->changepar(Ring_Square,(int)o->value());}
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 textcolor 7
     class RKR_Slider
   }
@@ -218,43 +218,43 @@ rkr->Rack_Effects[EFX_RING]->changepar(Ring_Square,(int)o->value());}
     code {switch (index)
     {
     case Ring_DryWet:
-        ring_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_RING]->getpar(Ring_DryWet)));
+        ring_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_RING]->getpar(Ring_DryWet)));
         break;
     case Ring_Pan:
-        ring_pan->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Pan));
+        ring_pan->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Pan));
         break;
     case Ring_LR_Cross:
-        ring_LRc->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross));
+        ring_LRc->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_LR_Cross));
         break;
     case Ring_Level:
-        ring_level->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Level));
+        ring_level->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Level));
         break;
     case Ring_Depth:
-        ring_depth->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Depth));
+        ring_depth->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Depth));
         break;
     case Ring_Freq:
-        ring_freq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Freq));
+        ring_freq->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Freq));
         break;
     case Ring_Stereo:
-        ring_st->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Stereo));
+        ring_st->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Stereo));
         break;
     case Ring_Sine:
-        ring_sin->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Sine));
+        ring_sin->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Sine));
         break;
     case Ring_Triangle:
-        ring_tri->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Triangle));
+        ring_tri->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Triangle));
         break;
     case Ring_Saw:
-        ring_saw->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Saw));
+        ring_saw->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Saw));
         break;
     case Ring_Square:
-        ring_squ->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Square));
+        ring_squ->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Square));
         break;
     case Ring_Input:
-        ring_input->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Input));
+        ring_input->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Input));
         break;
     case Ring_Auto_Freq:
-        ring_afreq->value(rkr->Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq));
+        ring_afreq->value(m_process->Rack_Effects[EFX_RING]->getpar(Ring_Auto_Freq));
         break;
     }} {}
   }

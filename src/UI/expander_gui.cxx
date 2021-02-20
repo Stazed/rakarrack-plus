@@ -5,12 +5,12 @@
 void ExpanderGui::cb_expander_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_EXPANDER]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_EXPANDER]);
  return;
 }
-rkr->EFX_Bypass[EFX_EXPANDER]=(int)o->value();
-rgui->findpos(EFX_EXPANDER,(int)o->value(),o);
+m_process->EFX_Bypass[EFX_EXPANDER]=(int)o->value();
+m_parent->findpos(EFX_EXPANDER,(int)o->value(),o);
 }
 void ExpanderGui::cb_expander_activar(RKR_Light_Button* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_activar_i(o,v);
@@ -18,9 +18,9 @@ void ExpanderGui::cb_expander_activar(RKR_Light_Button* o, void* v) {
 
 void ExpanderGui::cb_expander_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12025))rkr->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
+if((ud==0)||(ud==12025))m_process->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_EXPANDER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXPANDER]; i++)
 {
     parameter_refresh(i);
 };
@@ -40,10 +40,10 @@ Fl_Menu_Item ExpanderGui::menu_expander_preset[] = {
 void ExpanderGui::cb_expander_ATime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Attack);
+ m_parent->getMIDIControl(MC_Expander_Attack);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Attack,(int)o->value());
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Attack,(int)o->value());
 }
 void ExpanderGui::cb_expander_ATime(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_ATime_i(o,v);
@@ -52,10 +52,10 @@ void ExpanderGui::cb_expander_ATime(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_RTime_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Release);
+ m_parent->getMIDIControl(MC_Expander_Release);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Release,(int) o->value());
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Release,(int) o->value());
 }
 void ExpanderGui::cb_expander_RTime(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_RTime_i(o,v);
@@ -64,10 +64,10 @@ void ExpanderGui::cb_expander_RTime(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_shape_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Shape);
+ m_parent->getMIDIControl(MC_Expander_Shape);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Shape, (int) o->value());
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Shape, (int) o->value());
 }
 void ExpanderGui::cb_expander_shape(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_shape_i(o,v);
@@ -76,10 +76,10 @@ void ExpanderGui::cb_expander_shape(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_threshold_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Threshold);
+ m_parent->getMIDIControl(MC_Expander_Threshold);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Threshold, (int)o->value());
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Threshold, (int)o->value());
 }
 void ExpanderGui::cb_expander_threshold(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_threshold_i(o,v);
@@ -88,10 +88,10 @@ void ExpanderGui::cb_expander_threshold(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_level_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_Gain);
+ m_parent->getMIDIControl(MC_Expander_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Gain, (int) o->value());
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Gain, (int) o->value());
 }
 void ExpanderGui::cb_expander_level(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_level_i(o,v);
@@ -100,10 +100,10 @@ void ExpanderGui::cb_expander_level(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_LPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_LPF);
+ m_parent->getMIDIControl(MC_Expander_LPF);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_LPF, (int)o->value());
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_LPF, (int)o->value());
 }
 void ExpanderGui::cb_expander_LPF(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_LPF_i(o,v);
@@ -112,10 +112,10 @@ void ExpanderGui::cb_expander_LPF(RKR_Slider* o, void* v) {
 void ExpanderGui::cb_expander_HPF_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Expander_HPF);
+ m_parent->getMIDIControl(MC_Expander_HPF);
  return;
 } 
-rkr->Rack_Effects[EFX_EXPANDER]->changepar(Expander_HPF, (int)o->value());
+m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_HPF, (int)o->value());
 }
 void ExpanderGui::cb_expander_HPF(RKR_Slider* o, void* v) {
   ((ExpanderGui*)(o->parent()))->cb_expander_HPF_i(o,v);
@@ -296,25 +296,25 @@ void ExpanderGui::parameter_refresh(int index) {
   switch (index)
       {
       case Expander_Threshold:
-          expander_threshold->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold));
+          expander_threshold->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Threshold));
           break;
       case Expander_Shape:
-          expander_shape->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape));
+          expander_shape->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Shape));
           break;
       case Expander_Attack:
-          expander_ATime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack));
+          expander_ATime->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Attack));
           break;
       case Expander_Release:
-          expander_RTime->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release));
+          expander_RTime->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Release));
           break;
       case Expander_LPF:
-          expander_LPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF));
+          expander_LPF->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_LPF));
           break;
       case Expander_HPF:
-          expander_HPF->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF));
+          expander_HPF->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_HPF));
           break;
       case Expander_Gain:
-          expander_level->value(rkr->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain));
+          expander_level->value(m_process->Rack_Effects[EFX_EXPANDER]->getpar(Expander_Gain));
           break;
       }
 }

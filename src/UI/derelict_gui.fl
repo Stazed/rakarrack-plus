@@ -28,14 +28,14 @@ widget_class {\#include "common_gui_menu.h"} DerelictGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_DERELICT]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_DERELICT]);
  return;
 }
-rkr->EFX_Bypass[EFX_DERELICT]=(int)o->value();
+m_process->EFX_Bypass[EFX_DERELICT]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_DERELICT]->cleanup();
-rgui->findpos(EFX_DERELICT,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_DERELICT]->cleanup();
+m_parent->findpos(EFX_DERELICT,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x33 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -44,9 +44,9 @@ rgui->findpos(EFX_DERELICT,(int)o->value(),o);}
     label Preset
     user_data 12017
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12017))rkr->Rack_Effects[EFX_DERELICT]->setpreset((int) o->value());
+if((ud==0)||(ud==12017))m_process->Rack_Effects[EFX_DERELICT]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_DERELICT]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_DERELICT]; i++)
 {
     parameter_refresh(i);
 };}
@@ -71,10 +71,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_DERELICT]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_DryWet);
+ m_parent->getMIDIControl(MC_Dere_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -82,10 +82,10 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_DryWet,Dry_Wet((int)(o->value())
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_LR_Cross);
+ m_parent->getMIDIControl(MC_Dere_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_LR_Cross,(int)(o->value()));}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_LR_Cross,(int)(o->value()));}
     xywh {56 42 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -93,10 +93,10 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_LR_Cross,(int)(o->value()));}
     label Drive
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_Drive);
+ m_parent->getMIDIControl(MC_Dere_Drive);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Drive,(int)o->value());}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Drive,(int)o->value());}
     xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }
@@ -104,10 +104,10 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Drive,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_Level);
+ m_parent->getMIDIControl(MC_Dere_Level);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Level,(int)o->value());}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Level,(int)o->value());}
     xywh {56 70 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -115,11 +115,11 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Level,(int)o->value());}
     label Type
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_Type);
+ m_parent->getMIDIControl(MC_Dere_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Type,(int)o->value());}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Type,(int)o->value());}
     xywh {34 84 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_dist_menu->get_distortion_type());}
     class RKR_Choice
@@ -127,7 +127,7 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Type,(int)o->value());}
   Fl_Check_Button derelict_neg {
     label {Neg.}
     user_data 2
-    callback {rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Negate,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Negate,(int)o->value());}
     xywh {110 84 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -135,10 +135,10 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Type,(int)o->value());}
     label Color
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_Color);
+ m_parent->getMIDIControl(MC_Dere_Color);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Color,(int)o->value());}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Color,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -146,10 +146,10 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Color,(int)o->value());}
     label {Sub Octv}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_Suboctave);
+ m_parent->getMIDIControl(MC_Dere_Suboctave);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Suboctave,(int)o->value());}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Suboctave,(int)o->value());}
     xywh {56 120 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -157,17 +157,17 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Suboctave,(int)o->value());}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_Pan);
+ m_parent->getMIDIControl(MC_Dere_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Pan,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Pan,(int)(o->value()+64));}
     xywh {56 134 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button derelict_pf {
     label {Pre Filter}
     user_data 2
-    callback {rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Prefilter,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Prefilter,(int)o->value());}
     xywh {50 144 66 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -175,10 +175,10 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_Pan,(int)(o->value()+64));}
     label LPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_LPF);
+ m_parent->getMIDIControl(MC_Dere_LPF);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_LPF,(int)o->value());}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_LPF,(int)o->value());}
     xywh {56 159 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 26000 step 1 value 20000 textcolor 7
     class RKR_Slider
   }
@@ -186,10 +186,10 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_LPF,(int)o->value());}
     label HPF
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Dere_HPF);
+ m_parent->getMIDIControl(MC_Dere_HPF);
  return;
 } 
-rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_HPF,(int)o->value());}
+m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_HPF,(int)o->value());}
     xywh {56 171 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 20000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -200,40 +200,40 @@ rkr->Rack_Effects[EFX_DERELICT]->changepar(Dere_HPF,(int)o->value());}
     code {switch (index)
     {
     case Dere_DryWet:
-        derelict_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_DryWet)));
+        derelict_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_DryWet)));
         break;
     case Dere_Pan:
-        derelict_pan->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Pan)-64);
+        derelict_pan->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Pan)-64);
         break;
     case Dere_LR_Cross:
-        derelict_LRc->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_LR_Cross));
+        derelict_LRc->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_LR_Cross));
         break;
     case Dere_Drive:
-        derelict_drive->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Drive));
+        derelict_drive->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Drive));
         break;
     case Dere_Level:
-        derelict_level->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Level));
+        derelict_level->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Level));
         break;
     case Dere_Type:
-        derelict_tipo->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Type));
+        derelict_tipo->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Type));
         break;
     case Dere_Negate:
-        derelict_neg->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Negate));
+        derelict_neg->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Negate));
         break;
     case Dere_LPF:
-        derelict_lpf->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_LPF));
+        derelict_lpf->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_LPF));
         break;
     case Dere_HPF:
-        derelict_hpf->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_HPF));
+        derelict_hpf->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_HPF));
         break;
     case Dere_Color:
-        derelict_st->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Color));
+        derelict_st->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Color));
         break;
     case Dere_Prefilter:
-        derelict_pf->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Prefilter));
+        derelict_pf->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Prefilter));
         break;
     case Dere_Suboctave:
-        derelict_oct->value(rkr->Rack_Effects[EFX_DERELICT]->getpar(Dere_Suboctave));
+        derelict_oct->value(m_process->Rack_Effects[EFX_DERELICT]->getpar(Dere_Suboctave));
         break;
     }} {}
   }

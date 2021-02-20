@@ -5,19 +5,19 @@
 void CabinetGui::cb_Cabinet_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_CABINET]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_CABINET]);
  return;
 }
-rkr->EFX_Bypass[EFX_CABINET]=(int)o->value();
-rgui->findpos(EFX_CABINET,(int)o->value(),o);
+m_process->EFX_Bypass[EFX_CABINET]=(int)o->value();
+m_parent->findpos(EFX_CABINET,(int)o->value(),o);
 }
 void CabinetGui::cb_Cabinet_activar(RKR_Light_Button* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_activar_i(o,v);
 }
 
 void CabinetGui::cb_Cabinet_preset_i(RKR_Choice* o, void*) {
-  rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Preset_Idx, (int) o->value());
+  m_process->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Preset_Idx, (int) o->value());
 }
 void CabinetGui::cb_Cabinet_preset(RKR_Choice* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_preset_i(o,v);
@@ -41,11 +41,11 @@ Fl_Menu_Item CabinetGui::menu_Cabinet_preset[] = {
 void CabinetGui::cb_Cabinet_output_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Cabinet_Gain);
+ m_parent->getMIDIControl(MC_Cabinet_Gain);
  return;
 } 
 
-rkr->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64));
 }
 void CabinetGui::cb_Cabinet_output(RKR_Slider* o, void* v) {
   ((CabinetGui*)(o->parent()))->cb_Cabinet_output_i(o,v);
@@ -118,11 +118,11 @@ void CabinetGui::parameter_refresh(int index) {
   switch(index)
       {
       case Cabinet_Gain:          // 1
-          Cabinet_output->value(rkr->lv[EFX_CABINET][Cabinet_Gain] - 64);
+          Cabinet_output->value(m_process->lv[EFX_CABINET][Cabinet_Gain] - 64);
           break;
   
       case Cabinet_Preset_Idx:    // 0
-          Cabinet_preset->value(rkr->lv[EFX_CABINET][Cabinet_Preset_Idx]);
+          Cabinet_preset->value(m_process->lv[EFX_CABINET][Cabinet_Preset_Idx]);
           break;
       }
 }

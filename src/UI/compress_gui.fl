@@ -27,13 +27,13 @@ widget_class CompressGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_COMPRESSOR]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_COMPRESSOR]);
  return;
 }
-rkr->EFX_Bypass[EFX_COMPRESSOR]=(int)o->value();
-rkr->Rack_Effects[EFX_COMPRESSOR]->cleanup();
-rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);}
+m_process->EFX_Bypass[EFX_COMPRESSOR]=(int)o->value();
+m_process->Rack_Effects[EFX_COMPRESSOR]->cleanup();
+m_parent->findpos(EFX_COMPRESSOR,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -42,9 +42,9 @@ rgui->findpos(EFX_COMPRESSOR,(int)o->value(),o);}
     label Preset
     user_data 12001
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12001))rkr->Rack_Effects[EFX_COMPRESSOR]->setpreset((int) o->value());
+if((ud==0)||(ud==12001))m_process->Rack_Effects[EFX_COMPRESSOR]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPRESSOR]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_COMPRESSOR]; i++)
 {
     parameter_refresh(i);
 };}
@@ -73,10 +73,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_COMPRESSOR]; i++)
     label {A. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Attack);
+ m_parent->getMIDIControl(MC_Compress_Attack);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Attack,(int)o->value());}
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Attack,(int)o->value());}
     xywh {56 39 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 250 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -84,10 +84,10 @@ rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Attack,(int)o->value());}
     label {R. Time}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Release);
+ m_parent->getMIDIControl(MC_Compress_Release);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Release, (int) o->value());}
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Release, (int) o->value());}
     xywh {56 59 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 10 maximum 500 step 1 value 120 textcolor 7
     class RKR_Slider
   }
@@ -95,10 +95,10 @@ rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Release, (int) o->value())
     label Ratio
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Ratio);
+ m_parent->getMIDIControl(MC_Compress_Ratio);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Ratio, (int) o->value());}
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Ratio, (int) o->value());}
     xywh {56 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 2 maximum 42 step 1 value 2 textcolor 7
     class RKR_Slider
   }
@@ -106,10 +106,10 @@ rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Ratio, (int) o->value());}
     label Knee
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Knee);
+ m_parent->getMIDIControl(MC_Compress_Knee);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Knee, (int) o->value());}
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Knee, (int) o->value());}
     xywh {56 99 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 100 step 1 value 3 textcolor 7
     class RKR_Slider
   }
@@ -117,10 +117,10 @@ rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Knee, (int) o->value());}
     label Threshold
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Threshold);
+ m_parent->getMIDIControl(MC_Compress_Threshold);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Threshold, (int)o->value());}
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Threshold, (int)o->value());}
     xywh {56 119 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -60 maximum -3 step 1 value -3 textcolor 7
     class RKR_Slider
   }
@@ -128,31 +128,31 @@ rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Threshold, (int)o->value()
     label Output
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Compress_Output);
+ m_parent->getMIDIControl(MC_Compress_Output);
  return;
 } 
-rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output,(int)o->value());}
+m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output,(int)o->value());}
     xywh {56 139 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -40 maximum 0 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button Auto_Output {
     label {Auto Output}
     user_data 2
-    callback {rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Auto_Out,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Auto_Out,(int)o->value());}
     xywh {19 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button Stereo {
     label Stereo
     user_data 2
-    callback {rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Stereo,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Stereo,(int)o->value());}
     tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {104 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button Peak {
     label Peak
     user_data 2
-    callback {rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Peak,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Peak,(int)o->value());}
     tooltip {Peak Mode Compression} xywh {19 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -161,31 +161,31 @@ rkr->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output,(int)o->value());}
     code {switch (index)
     {
     case Compress_Threshold:
-        compress_threshold->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold));
+        compress_threshold->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Threshold));
         break;
     case Compress_Ratio:
-        compress_Ratio->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio));
+        compress_Ratio->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Ratio));
         break;
     case Compress_Output:
-        compress_output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output));
+        compress_output->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Output));
         break;
     case Compress_Attack:
-        compress_ATime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack));
+        compress_ATime->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Attack));
         break;
     case Compress_Release:
-        compress_RTime->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release));
+        compress_RTime->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Release));
         break;
     case Compress_Auto_Out:
-        Auto_Output->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out));
+        Auto_Output->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Auto_Out));
         break;
     case Compress_Knee:
-        compress_Knee->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee));
+        compress_Knee->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Knee));
         break;
     case Compress_Stereo:
-        Stereo->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo));
+        Stereo->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Stereo));
         break;
     case Compress_Peak:
-        Peak->value(rkr->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak));
+        Peak->value(m_process->Rack_Effects[EFX_COMPRESSOR]->getpar(Compress_Peak));
         break;
     }} {}
   }

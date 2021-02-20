@@ -5,14 +5,14 @@
 void PhaserGui::cb_phaser_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_PHASER]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_PHASER]);
  return;
 }
-rkr->EFX_Bypass[EFX_PHASER]=(int)o->value();
+m_process->EFX_Bypass[EFX_PHASER]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_PHASER]->cleanup();
-rgui->findpos(EFX_PHASER,(int)o->value(),o);
+m_process->Rack_Effects[EFX_PHASER]->cleanup();
+m_parent->findpos(EFX_PHASER,(int)o->value(),o);
 }
 void PhaserGui::cb_phaser_activar(RKR_Light_Button* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_activar_i(o,v);
@@ -20,9 +20,9 @@ void PhaserGui::cb_phaser_activar(RKR_Light_Button* o, void* v) {
 
 void PhaserGui::cb_phaser_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12006))rkr->Rack_Effects[EFX_PHASER]->setpreset((int) o->value());
+if((ud==0)||(ud==12006))m_process->Rack_Effects[EFX_PHASER]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_PHASER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_PHASER]; i++)
 {
     parameter_refresh(i);
 };
@@ -44,10 +44,10 @@ Fl_Menu_Item PhaserGui::menu_phaser_preset[] = {
 void PhaserGui::cb_phaser_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_DryWet);
+ m_parent->getMIDIControl(MC_Phaser_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_DryWet,Dry_Wet((int)(o->value())));
 }
 void PhaserGui::cb_phaser_WD(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_WD_i(o,v);
@@ -56,10 +56,10 @@ void PhaserGui::cb_phaser_WD(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_Pan);
+ m_parent->getMIDIControl(MC_Phaser_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_Pan,(int)(o->value()+64));
 }
 void PhaserGui::cb_phaser_pan(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_pan_i(o,v);
@@ -68,10 +68,10 @@ void PhaserGui::cb_phaser_pan(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_LFO_Tempo);
+ m_parent->getMIDIControl(MC_Phaser_LFO_Tempo);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Tempo,(int)o->value());
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Tempo,(int)o->value());
 }
 void PhaserGui::cb_phaser_freq(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_freq_i(o,v);
@@ -80,10 +80,10 @@ void PhaserGui::cb_phaser_freq(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_LFO_Random);
+ m_parent->getMIDIControl(MC_Phaser_LFO_Random);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Random,(int)o->value());
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Random,(int)o->value());
 }
 void PhaserGui::cb_phaser_rnd(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_rnd_i(o,v);
@@ -92,18 +92,18 @@ void PhaserGui::cb_phaser_rnd(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_LFO_Type);
+ m_parent->getMIDIControl(MC_Phaser_LFO_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Type,(int)o->value());
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Type,(int)o->value());
 }
 void PhaserGui::cb_phaser_lfotype(RKR_Choice* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_lfotype_i(o,v);
 }
 
 void PhaserGui::cb_phaser_subs_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_Subtract,(int)o->value());
+  m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_Subtract,(int)o->value());
 }
 void PhaserGui::cb_phaser_subs(RKR_Check_Button* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_subs_i(o,v);
@@ -112,10 +112,10 @@ void PhaserGui::cb_phaser_subs(RKR_Check_Button* o, void* v) {
 void PhaserGui::cb_phaser_phase_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_Phase);
+ m_parent->getMIDIControl(MC_Phaser_Phase);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_Phase,(int)o->value());
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_Phase,(int)o->value());
 }
 void PhaserGui::cb_phaser_phase(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_phase_i(o,v);
@@ -124,10 +124,10 @@ void PhaserGui::cb_phaser_phase(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_LFO_Stereo);
+ m_parent->getMIDIControl(MC_Phaser_LFO_Stereo);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Stereo,(int)o->value());
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Stereo,(int)o->value());
 }
 void PhaserGui::cb_phaser_stdf(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_stdf_i(o,v);
@@ -136,10 +136,10 @@ void PhaserGui::cb_phaser_stdf(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_Depth);
+ m_parent->getMIDIControl(MC_Phaser_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_Depth,(int)o->value());
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_Depth,(int)o->value());
 }
 void PhaserGui::cb_phaser_dpth(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_dpth_i(o,v);
@@ -148,17 +148,17 @@ void PhaserGui::cb_phaser_dpth(RKR_Slider* o, void* v) {
 void PhaserGui::cb_phaser_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_Feedback);
+ m_parent->getMIDIControl(MC_Phaser_Feedback);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_Feedback,(int)o->value());
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_Feedback,(int)o->value());
 }
 void PhaserGui::cb_phaser_fb(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_fb_i(o,v);
 }
 
 void PhaserGui::cb_phaser_stages_i(RKR_Counter* o, void*) {
-  rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_Stages,(int)o->value());
+  m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_Stages,(int)o->value());
 }
 void PhaserGui::cb_phaser_stages(RKR_Counter* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_stages_i(o,v);
@@ -167,10 +167,10 @@ void PhaserGui::cb_phaser_stages(RKR_Counter* o, void* v) {
 void PhaserGui::cb_phaser_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Phaser_LR_Cross);
+ m_parent->getMIDIControl(MC_Phaser_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_PHASER]->changepar(Phaser_LR_Cross,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_LR_Cross,(int)(o->value()+64));
 }
 void PhaserGui::cb_phaser_LR(RKR_Slider* o, void* v) {
   ((PhaserGui*)(o->parent()))->cb_phaser_LR_i(o,v);
@@ -423,44 +423,44 @@ void PhaserGui::parameter_refresh(int index) {
   switch (index)
       {
       case Phaser_DryWet:
-          phaser_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_DryWet)));
+          phaser_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_DryWet)));
           break;
       case Phaser_Pan:
-          phaser_pan->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Pan)-64);
+          phaser_pan->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_Pan)-64);
           break;
       case Phaser_LFO_Tempo:
-          phaser_freq->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
+          phaser_freq->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
           break;
       case Phaser_LFO_Random:
-          phaser_rnd->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Random));
+          phaser_rnd->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Random));
           break;
       case Phaser_LFO_Type:
-          phaser_lfotype->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Type));
+          phaser_lfotype->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Type));
           break;
       case Phaser_LFO_Stereo:
-          phaser_stdf->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Stereo));
+          phaser_stdf->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Stereo));
           break;
       case Phaser_Depth:
-          phaser_dpth->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Depth));
+          phaser_dpth->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_Depth));
           break;
       case Phaser_Feedback:
-          phaser_fb->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Feedback));
+          phaser_fb->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_Feedback));
           break;
       case Phaser_Stages:
-          phaser_stages->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Stages));
+          phaser_stages->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_Stages));
           break;
       case Phaser_LR_Cross:
-          phaser_LR->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LR_Cross)-64);
+          phaser_LR->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_LR_Cross)-64);
           break;
       case Phaser_Subtract:
-          phaser_subs->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Subtract));
+          phaser_subs->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_Subtract));
           break;
       case Phaser_Phase:
-          phaser_phase->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_Phase));
+          phaser_phase->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_Phase));
           break;
       }
 }
 
 void PhaserGui::tap_tempo_update() {
-  phaser_freq->value(rkr->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
+  phaser_freq->value(m_process->Rack_Effects[EFX_PHASER]->getpar(Phaser_LFO_Tempo));
 }

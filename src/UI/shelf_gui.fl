@@ -27,14 +27,14 @@ widget_class ShelfGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_SHELFBOOST]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_SHELFBOOST]);
  return;
 }
-rkr->EFX_Bypass[EFX_SHELFBOOST]=(int)o->value();
+m_process->EFX_Bypass[EFX_SHELFBOOST]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_SHELFBOOST]->cleanup();
-rgui->findpos(EFX_SHELFBOOST,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_SHELFBOOST]->cleanup();
+m_parent->findpos(EFX_SHELFBOOST,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x31 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -43,9 +43,9 @@ rgui->findpos(EFX_SHELFBOOST,(int)o->value(),o);}
     label Preset
     user_data 12034
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12034))rkr->Rack_Effects[EFX_SHELFBOOST]->setpreset((int) o->value());
+if((ud==0)||(ud==12034))m_process->Rack_Effects[EFX_SHELFBOOST]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_SHELFBOOST]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_SHELFBOOST]; i++)
 {
     parameter_refresh(i);
 };}
@@ -74,10 +74,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_SHELFBOOST]; i++)
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shelf_Gain);
+ m_parent->getMIDIControl(MC_Shelf_Gain);
  return;
 }
-rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Gain,(int)o->value());}
+m_process->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Gain,(int)o->value());}
     xywh {56 66 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -85,10 +85,10 @@ rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Gain,(int)o->value());}
     label Level
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shelf_Level);
+ m_parent->getMIDIControl(MC_Shelf_Level);
  return;
 }
-rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Level,(int)o->value());}
+m_process->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Level,(int)o->value());}
     xywh {56 86 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 value 32 textcolor 7
     class RKR_Slider
   }
@@ -96,10 +96,10 @@ rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Level,(int)o->value());}
     label Tone
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shelf_Tone);
+ m_parent->getMIDIControl(MC_Shelf_Tone);
  return;
 }
-rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Tone,(int)o->value());}
+m_process->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Tone,(int)o->value());}
     xywh {56 106 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 220 maximum 16000 step 1 value 1000 textcolor 7
     class RKR_Slider
   }
@@ -107,17 +107,17 @@ rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Tone,(int)o->value());}
     label Presence
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Shelf_Presence);
+ m_parent->getMIDIControl(MC_Shelf_Presence);
  return;
 }
-rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Presence,(int)o->value());}
+m_process->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Presence,(int)o->value());}
     xywh {56 126 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button shelf_mode {
     label Stereo
     user_data 2
-    callback {rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Stereo,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Stereo,(int)o->value());}
     xywh {13 153 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -126,19 +126,19 @@ rkr->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Presence,(int)o->value());}
     code {switch (index)
     {
     case Shelf_Gain:
-        shelf_gain->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
+        shelf_gain->value(m_process->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Gain));
         break;
     case Shelf_Presence:
-        shelf_q1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
+        shelf_q1->value(m_process->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Presence));
         break;
     case Shelf_Tone:
-        shelf_freq1->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
+        shelf_freq1->value(m_process->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Tone));
         break;
     case Shelf_Stereo:
-        shelf_mode->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo));
+        shelf_mode->value(m_process->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Stereo));
         break;
     case Shelf_Level:
-        shelf_level->value(rkr->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));
+        shelf_level->value(m_process->Rack_Effects[EFX_SHELFBOOST]->getpar(Shelf_Level));
         break;
     }} {}
   }

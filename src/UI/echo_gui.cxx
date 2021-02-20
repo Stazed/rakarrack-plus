@@ -5,14 +5,14 @@
 void EchoGui::cb_echo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_ECHO]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_ECHO]);
  return;
 }
-rkr->EFX_Bypass[EFX_ECHO]=(int)o->value();
+m_process->EFX_Bypass[EFX_ECHO]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_ECHO]->cleanup();
-rgui->findpos(EFX_ECHO,(int)o->value(),o);
+m_process->Rack_Effects[EFX_ECHO]->cleanup();
+m_parent->findpos(EFX_ECHO,(int)o->value(),o);
 }
 void EchoGui::cb_echo_activar(RKR_Light_Button* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_activar_i(o,v);
@@ -20,9 +20,9 @@ void EchoGui::cb_echo_activar(RKR_Light_Button* o, void* v) {
 
 void EchoGui::cb_echo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12004))rkr->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
+if((ud==0)||(ud==12004))m_process->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_ECHO]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_ECHO]; i++)
 {
     parameter_refresh(i);
 };
@@ -47,10 +47,10 @@ Fl_Menu_Item EchoGui::menu_echo_preset[] = {
 void EchoGui::cb_echo_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_DryWet);
+ m_parent->getMIDIControl(MC_Echo_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));
 }
 void EchoGui::cb_echo_WD(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_WD_i(o,v);
@@ -59,10 +59,10 @@ void EchoGui::cb_echo_WD(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_RV_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Reverse);
+ m_parent->getMIDIControl(MC_Echo_Reverse);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Reverse,(int)o->value());
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Reverse,(int)o->value());
 }
 void EchoGui::cb_echo_RV(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_RV_i(o,v);
@@ -71,10 +71,10 @@ void EchoGui::cb_echo_RV(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Pan);
+ m_parent->getMIDIControl(MC_Echo_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Pan,(int)(o->value()+64));
 }
 void EchoGui::cb_echo_pan(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_pan_i(o,v);
@@ -83,10 +83,10 @@ void EchoGui::cb_echo_pan(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_delay_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Delay);
+ m_parent->getMIDIControl(MC_Echo_Delay);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Delay,(int)o->value());
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Delay,(int)o->value());
 }
 void EchoGui::cb_echo_delay(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_delay_i(o,v);
@@ -95,10 +95,10 @@ void EchoGui::cb_echo_delay(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_LRdl_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_LR_Delay);
+ m_parent->getMIDIControl(MC_Echo_LR_Delay);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Delay,(int)o->value());
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Delay,(int)o->value());
 }
 void EchoGui::cb_echo_LRdl(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_LRdl_i(o,v);
@@ -107,10 +107,10 @@ void EchoGui::cb_echo_LRdl(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_LR_Cross);
+ m_parent->getMIDIControl(MC_Echo_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Cross,(int)(o->value()));
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Cross,(int)(o->value()));
 }
 void EchoGui::cb_echo_LRc(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_LRc_i(o,v);
@@ -119,17 +119,17 @@ void EchoGui::cb_echo_LRc(RKR_Slider* o, void* v) {
 void EchoGui::cb_echo_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Feedback);
+ m_parent->getMIDIControl(MC_Echo_Feedback);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Feedback,(int)o->value());
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Feedback,(int)o->value());
 }
 void EchoGui::cb_echo_fb(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_fb_i(o,v);
 }
 
 void EchoGui::cb_echo_direct_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Direct,(int)o->value());
+  m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Direct,(int)o->value());
 }
 void EchoGui::cb_echo_direct(RKR_Check_Button* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_direct_i(o,v);
@@ -138,10 +138,10 @@ void EchoGui::cb_echo_direct(RKR_Check_Button* o, void* v) {
 void EchoGui::cb_echo_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Damp);
+ m_parent->getMIDIControl(MC_Echo_Damp);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Damp,(int)o->value());
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Damp,(int)o->value());
 }
 void EchoGui::cb_echo_damp(RKR_Slider* o, void* v) {
   ((EchoGui*)(o->parent()))->cb_echo_damp_i(o,v);
@@ -341,35 +341,35 @@ void EchoGui::parameter_refresh(int index) {
   switch (index)
       {
       case Echo_DryWet:
-          echo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet)));
+          echo_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet)));
           break;
       case Echo_Pan:
-          echo_pan->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Pan)-64);
+          echo_pan->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Pan)-64);
           break;
       case Echo_Delay:
-          echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
+          echo_delay->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
           break;
       case Echo_LR_Delay:
-          echo_LRdl->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay));
+          echo_LRdl->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay));
           break;
       case Echo_LR_Cross:
-          echo_LRc->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross));
+          echo_LRc->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross));
           break;
       case Echo_Feedback:
-          echo_fb->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback));
+          echo_fb->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback));
           break;
       case Echo_Damp:
-          echo_damp->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Damp));
+          echo_damp->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Damp));
           break;
       case Echo_Reverse:
-          echo_RV->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse));
+          echo_RV->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse));
           break;
       case Echo_Direct:
-          echo_direct->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Direct));
+          echo_direct->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Direct));
           break;
       };
 }
 
 void EchoGui::tap_tempo_update() {
-  echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
+  echo_delay->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
 }

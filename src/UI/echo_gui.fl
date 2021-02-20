@@ -27,14 +27,14 @@ widget_class EchoGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_ECHO]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_ECHO]);
  return;
 }
-rkr->EFX_Bypass[EFX_ECHO]=(int)o->value();
+m_process->EFX_Bypass[EFX_ECHO]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_ECHO]->cleanup();
-rgui->findpos(EFX_ECHO,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_ECHO]->cleanup();
+m_parent->findpos(EFX_ECHO,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x35 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -43,9 +43,9 @@ rgui->findpos(EFX_ECHO,(int)o->value(),o);}
     label Preset
     user_data 12004
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12004))rkr->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
+if((ud==0)||(ud==12004))m_process->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_ECHO]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_ECHO]; i++)
 {
     parameter_refresh(i);
 };}
@@ -94,10 +94,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_ECHO]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_DryWet);
+ m_parent->getMIDIControl(MC_Echo_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 35 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -105,10 +105,10 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_DryWet,Dry_Wet((int)(o->value())));}
     label Reverse
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Reverse);
+ m_parent->getMIDIControl(MC_Echo_Reverse);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Reverse,(int)o->value());}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Reverse,(int)o->value());}
     xywh {56 58 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -116,10 +116,10 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Reverse,(int)o->value());}
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Pan);
+ m_parent->getMIDIControl(MC_Echo_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Pan,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Pan,(int)(o->value()+64));}
     xywh {56 73 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -127,10 +127,10 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Pan,(int)(o->value()+64));}
     label Delay
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Delay);
+ m_parent->getMIDIControl(MC_Echo_Delay);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Delay,(int)o->value());}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Delay,(int)o->value());}
     xywh {56 88 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 20 maximum 2000 step 1 value 20 textcolor 7
     class RKR_Slider
   }
@@ -138,10 +138,10 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Delay,(int)o->value());}
     label {L/R Delay}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_LR_Delay);
+ m_parent->getMIDIControl(MC_Echo_LR_Delay);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Delay,(int)o->value());}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Delay,(int)o->value());}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -149,10 +149,10 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Delay,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_LR_Cross);
+ m_parent->getMIDIControl(MC_Echo_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Cross,(int)(o->value()));}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Cross,(int)(o->value()));}
     xywh {56 118 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -160,17 +160,17 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_LR_Cross,(int)(o->value()));}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Feedback);
+ m_parent->getMIDIControl(MC_Echo_Feedback);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Feedback,(int)o->value());}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Feedback,(int)o->value());}
     xywh {56 133 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Check_Button echo_direct {
     label Direct
     user_data 2
-    callback {rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Direct,(int)o->value());}
+    callback {m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Direct,(int)o->value());}
     xywh {51 148 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -178,10 +178,10 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Feedback,(int)o->value());}
     label Damp
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Echo_Damp);
+ m_parent->getMIDIControl(MC_Echo_Damp);
  return;
 } 
-rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Damp,(int)o->value());}
+m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Damp,(int)o->value());}
     xywh {56 167 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -190,36 +190,36 @@ rkr->Rack_Effects[EFX_ECHO]->changepar(Echo_Damp,(int)o->value());}
     code {switch (index)
     {
     case Echo_DryWet:
-        echo_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet)));
+        echo_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_DryWet)));
         break;
     case Echo_Pan:
-        echo_pan->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Pan)-64);
+        echo_pan->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Pan)-64);
         break;
     case Echo_Delay:
-        echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
+        echo_delay->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));
         break;
     case Echo_LR_Delay:
-        echo_LRdl->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay));
+        echo_LRdl->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Delay));
         break;
     case Echo_LR_Cross:
-        echo_LRc->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross));
+        echo_LRc->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_LR_Cross));
         break;
     case Echo_Feedback:
-        echo_fb->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback));
+        echo_fb->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Feedback));
         break;
     case Echo_Damp:
-        echo_damp->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Damp));
+        echo_damp->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Damp));
         break;
     case Echo_Reverse:
-        echo_RV->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse));
+        echo_RV->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Reverse));
         break;
     case Echo_Direct:
-        echo_direct->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Direct));
+        echo_direct->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Direct));
         break;
     };} {}
   }
   Function {tap_tempo_update()} {return_type void
   } {
-    code {echo_delay->value(rkr->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));} {}
+    code {echo_delay->value(m_process->Rack_Effects[EFX_ECHO]->getpar(Echo_Delay));} {}
   }
 }

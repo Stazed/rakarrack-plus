@@ -5,30 +5,30 @@
 void WahwahGui::cb_WahWah_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_WAHWAH]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_WAHWAH]);
  return;
 }
-rkr->EFX_Bypass[EFX_WAHWAH]=(int)o->value();
+m_process->EFX_Bypass[EFX_WAHWAH]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_WAHWAH]->cleanup();
-rgui->findpos(EFX_WAHWAH,(int)o->value(),o);
+m_process->Rack_Effects[EFX_WAHWAH]->cleanup();
+m_parent->findpos(EFX_WAHWAH,(int)o->value(),o);
 }
 void WahwahGui::cb_WahWah_activar(RKR_Light_Button* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_activar_i(o,v);
 }
 
 void WahwahGui::cb_WahWah_preset_i(RKR_Choice* o, void* v) {
-  rkr->EFX_Bypass[EFX_WAHWAH]=0;
+  m_process->EFX_Bypass[EFX_WAHWAH]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12010))rkr->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value());
+if((ud==0)||(ud==12010))m_process->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_WAHWAH]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_WAHWAH]; i++)
 {
     parameter_refresh(i);
 };
 
-if((int)WahWah_activar->value()) rkr->EFX_Bypass[EFX_WAHWAH]=1;
+if((int)WahWah_activar->value()) m_process->EFX_Bypass[EFX_WAHWAH]=1;
 }
 void WahwahGui::cb_WahWah_preset(RKR_Choice* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_preset_i(o,v);
@@ -46,10 +46,10 @@ Fl_Menu_Item WahwahGui::menu_WahWah_preset[] = {
 void WahwahGui::cb_WahWah_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_DryWet);
+ m_parent->getMIDIControl(MC_WahWah_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_DryWet,Dry_Wet((int)(o->value())));
 }
 void WahwahGui::cb_WahWah_WD(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_WD_i(o,v);
@@ -58,10 +58,10 @@ void WahwahGui::cb_WahWah_WD(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_Pan);
+ m_parent->getMIDIControl(MC_WahWah_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Pan,(int)(o->value()+64));
 }
 void WahwahGui::cb_WahWah_pan(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_pan_i(o,v);
@@ -70,10 +70,10 @@ void WahwahGui::cb_WahWah_pan(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_LFO_Tempo);
+ m_parent->getMIDIControl(MC_WahWah_LFO_Tempo);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Tempo,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Tempo,(int)o->value());
 }
 void WahwahGui::cb_WahWah_freq(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_freq_i(o,v);
@@ -82,10 +82,10 @@ void WahwahGui::cb_WahWah_freq(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_LFO_Random);
+ m_parent->getMIDIControl(MC_WahWah_LFO_Random);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Random,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Random,(int)o->value());
 }
 void WahwahGui::cb_WahWah_rnd(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_rnd_i(o,v);
@@ -94,11 +94,11 @@ void WahwahGui::cb_WahWah_rnd(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_LFO_Type);
+ m_parent->getMIDIControl(MC_WahWah_LFO_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Type,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Type,(int)o->value());
 }
 void WahwahGui::cb_WahWah_lfotype(RKR_Choice* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_lfotype_i(o,v);
@@ -107,10 +107,10 @@ void WahwahGui::cb_WahWah_lfotype(RKR_Choice* o, void* v) {
 void WahwahGui::cb_WahWah_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_LFO_Stereo);
+ m_parent->getMIDIControl(MC_WahWah_LFO_Stereo);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Stereo,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Stereo,(int)o->value());
 }
 void WahwahGui::cb_WahWah_stdf(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_stdf_i(o,v);
@@ -119,10 +119,10 @@ void WahwahGui::cb_WahWah_stdf(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_Depth);
+ m_parent->getMIDIControl(MC_WahWah_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Depth,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Depth,(int)o->value());
 }
 void WahwahGui::cb_WahWah_dpth(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_dpth_i(o,v);
@@ -131,10 +131,10 @@ void WahwahGui::cb_WahWah_dpth(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_ampsns_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_Sense);
+ m_parent->getMIDIControl(MC_WahWah_Sense);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Sense,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Sense,(int)o->value());
 }
 void WahwahGui::cb_WahWah_ampsns(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_ampsns_i(o,v);
@@ -143,17 +143,17 @@ void WahwahGui::cb_WahWah_ampsns(RKR_Slider* o, void* v) {
 void WahwahGui::cb_WahWah_ampsnsinv_i(RKR_Check_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_ASI);
+ m_parent->getMIDIControl(MC_WahWah_ASI);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_ASI,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_ASI,(int)o->value());
 }
 void WahwahGui::cb_WahWah_ampsnsinv(RKR_Check_Button* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_ampsnsinv_i(o,v);
 }
 
 void WahwahGui::cb_WahWah_ftype_i(RKR_Choice* o, void*) {
-  rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Mode,(int)o->value());
+  m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Mode,(int)o->value());
 }
 void WahwahGui::cb_WahWah_ftype(RKR_Choice* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_ftype_i(o,v);
@@ -171,10 +171,10 @@ Fl_Menu_Item WahwahGui::menu_WahWah_ftype[] = {
 void WahwahGui::cb_WahWah_smooth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_WahWah_Smooth);
+ m_parent->getMIDIControl(MC_WahWah_Smooth);
  return;
 } 
-rkr->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Smooth,(int)o->value());
+m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Smooth,(int)o->value());
 }
 void WahwahGui::cb_WahWah_smooth(RKR_Slider* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_smooth_i(o,v);
@@ -409,41 +409,41 @@ void WahwahGui::parameter_refresh(int index) {
   switch (index)
       {
       case WahWah_DryWet:
-          WahWah_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_DryWet)));
+          WahWah_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_DryWet)));
           break;
       case WahWah_Pan:
-          WahWah_pan->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Pan)-64);
+          WahWah_pan->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Pan)-64);
           break;
       case WahWah_LFO_Tempo:
-          WahWah_freq->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
+          WahWah_freq->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
           break;
       case WahWah_LFO_Random:
-          WahWah_rnd->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Random));
+          WahWah_rnd->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Random));
           break;
       case WahWah_LFO_Type:
-          WahWah_lfotype->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Type));
+          WahWah_lfotype->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Type));
           break;
       case WahWah_LFO_Stereo:
-          WahWah_stdf->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Stereo));
+          WahWah_stdf->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Stereo));
           break;
       case WahWah_Depth:
-          WahWah_dpth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Depth));
+          WahWah_dpth->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Depth));
           break;
       case WahWah_Sense:
-          WahWah_ampsns->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Sense));
+          WahWah_ampsns->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Sense));
           break;
       case WahWah_ASI:
-          WahWah_ampsnsinv->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_ASI));
+          WahWah_ampsnsinv->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_ASI));
           break;
       case WahWah_Smooth:
-          WahWah_smooth->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Smooth));
+          WahWah_smooth->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Smooth));
           break;
       case WahWah_Mode:
-           WahWah_ftype->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Mode));
+           WahWah_ftype->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_Mode));
           break;
       }
 }
 
 void WahwahGui::tap_tempo_update() {
-  WahWah_freq->value(rkr->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
+  WahWah_freq->value(m_process->Rack_Effects[EFX_WAHWAH]->getpar(WahWah_LFO_Tempo));
 }

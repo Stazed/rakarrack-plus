@@ -5,14 +5,14 @@
 void ExciterGui::cb_exciter_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_EXCITER]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_EXCITER]);
  return;
 }
-rkr->EFX_Bypass[EFX_EXCITER]=(int)o->value();
+m_process->EFX_Bypass[EFX_EXCITER]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_EXCITER]->cleanup();
-rgui->findpos(EFX_EXCITER,(int)o->value(),o);
+m_process->Rack_Effects[EFX_EXCITER]->cleanup();
+m_parent->findpos(EFX_EXCITER,(int)o->value(),o);
 }
 void ExciterGui::cb_exciter_activar(RKR_Light_Button* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_exciter_activar_i(o,v);
@@ -20,9 +20,9 @@ void ExciterGui::cb_exciter_activar(RKR_Light_Button* o, void* v) {
 
 void ExciterGui::cb_exciter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12022))rkr->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
+if((ud==0)||(ud==12022))m_process->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_EXCITER]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXCITER]; i++)
 {
     parameter_refresh(i);
 };
@@ -43,10 +43,10 @@ Fl_Menu_Item ExciterGui::menu_exciter_preset[] = {
 void ExciterGui::cb_ex_Gain_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Gain);
+ m_parent->getMIDIControl(MC_Exciter_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Gain,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Gain,(int)o->value());
 }
 void ExciterGui::cb_ex_Gain(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_Gain_i(o,v);
@@ -55,10 +55,10 @@ void ExciterGui::cb_ex_Gain(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_lfreq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_LPF);
+ m_parent->getMIDIControl(MC_Exciter_LPF);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_LPF,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_LPF,(int)o->value());
 }
 void ExciterGui::cb_ex_lfreq(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_lfreq_i(o,v);
@@ -67,10 +67,10 @@ void ExciterGui::cb_ex_lfreq(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_hfreq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_HPF);
+ m_parent->getMIDIControl(MC_Exciter_HPF);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_HPF,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_HPF,(int)o->value());
 }
 void ExciterGui::cb_ex_hfreq(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_hfreq_i(o,v);
@@ -79,10 +79,10 @@ void ExciterGui::cb_ex_hfreq(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_1);
+ m_parent->getMIDIControl(MC_Exciter_Harm_1);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_1,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_1,(int)o->value());
 }
 void ExciterGui::cb_ex_1(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_1_i(o,v);
@@ -91,10 +91,10 @@ void ExciterGui::cb_ex_1(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_2);
+ m_parent->getMIDIControl(MC_Exciter_Harm_2);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_2,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_2,(int)o->value());
 }
 void ExciterGui::cb_ex_2(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_2_i(o,v);
@@ -103,10 +103,10 @@ void ExciterGui::cb_ex_2(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_3_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_3);
+ m_parent->getMIDIControl(MC_Exciter_Harm_3);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_3,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_3,(int)o->value());
 }
 void ExciterGui::cb_ex_3(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_3_i(o,v);
@@ -115,10 +115,10 @@ void ExciterGui::cb_ex_3(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_4_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_4);
+ m_parent->getMIDIControl(MC_Exciter_Harm_4);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_4,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_4,(int)o->value());
 }
 void ExciterGui::cb_ex_4(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_4_i(o,v);
@@ -127,10 +127,10 @@ void ExciterGui::cb_ex_4(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_5_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_5);
+ m_parent->getMIDIControl(MC_Exciter_Harm_5);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_5,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_5,(int)o->value());
 }
 void ExciterGui::cb_ex_5(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_5_i(o,v);
@@ -139,10 +139,10 @@ void ExciterGui::cb_ex_5(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_6_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_6);
+ m_parent->getMIDIControl(MC_Exciter_Harm_6);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_6,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_6,(int)o->value());
 }
 void ExciterGui::cb_ex_6(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_6_i(o,v);
@@ -151,10 +151,10 @@ void ExciterGui::cb_ex_6(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_7_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_7);
+ m_parent->getMIDIControl(MC_Exciter_Harm_7);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_7,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_7,(int)o->value());
 }
 void ExciterGui::cb_ex_7(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_7_i(o,v);
@@ -163,10 +163,10 @@ void ExciterGui::cb_ex_7(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_8_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_8);
+ m_parent->getMIDIControl(MC_Exciter_Harm_8);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_8,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_8,(int)o->value());
 }
 void ExciterGui::cb_ex_8(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_8_i(o,v);
@@ -175,10 +175,10 @@ void ExciterGui::cb_ex_8(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_9_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_9);
+ m_parent->getMIDIControl(MC_Exciter_Harm_9);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_9,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_9,(int)o->value());
 }
 void ExciterGui::cb_ex_9(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_9_i(o,v);
@@ -187,10 +187,10 @@ void ExciterGui::cb_ex_9(RKR_Slider* o, void* v) {
 void ExciterGui::cb_ex_10_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Exciter_Harm_10);
+ m_parent->getMIDIControl(MC_Exciter_Harm_10);
  return;
 } 
-rkr->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_10,(int)o->value());
+m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_10,(int)o->value());
 }
 void ExciterGui::cb_ex_10(RKR_Slider* o, void* v) {
   ((ExciterGui*)(o->parent()))->cb_ex_10_i(o,v);
@@ -468,43 +468,43 @@ void ExciterGui::parameter_refresh(int index) {
   switch (index)
       {
       case Exciter_Gain:
-          ex_Gain->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Gain));
+          ex_Gain->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Gain));
           break;
       case Exciter_Harm_1:
-          ex_1->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_1));
+          ex_1->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_1));
           break;
       case Exciter_Harm_2:
-          ex_2->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_2));
+          ex_2->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_2));
           break;
       case Exciter_Harm_3:
-          ex_3->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_3));
+          ex_3->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_3));
           break;
       case Exciter_Harm_4:
-          ex_4->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_4));
+          ex_4->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_4));
           break;
       case Exciter_Harm_5:
-          ex_5->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_5));
+          ex_5->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_5));
           break;
       case Exciter_Harm_6:
-          ex_6->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_6));
+          ex_6->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_6));
           break;
       case Exciter_Harm_7:
-          ex_7->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_7));
+          ex_7->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_7));
           break;
       case Exciter_Harm_8:
-          ex_8->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_8));
+          ex_8->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_8));
           break;
       case Exciter_Harm_9:
-          ex_9->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_9));
+          ex_9->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_9));
           break;
       case Exciter_Harm_10:
-          ex_10->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_10));
+          ex_10->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_Harm_10));
           break;
       case Exciter_LPF:
-          ex_lfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_LPF));
+          ex_lfreq->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_LPF));
           break;
       case Exciter_HPF:
-          ex_hfreq->value(rkr->Rack_Effects[EFX_EXCITER]->getpar(Exciter_HPF));
+          ex_hfreq->value(m_process->Rack_Effects[EFX_EXCITER]->getpar(Exciter_HPF));
           break;
       }
 }

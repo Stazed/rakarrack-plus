@@ -28,14 +28,14 @@ widget_class {\#include "common_gui_menu.h"} ChorusGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_CHORUS]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_CHORUS]);
  return;
 }
-rkr->EFX_Bypass[EFX_CHORUS]=(int)o->value();
+m_process->EFX_Bypass[EFX_CHORUS]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_CHORUS]->cleanup();
-rgui->findpos(EFX_CHORUS,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_CHORUS]->cleanup();
+m_parent->findpos(EFX_CHORUS,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -44,9 +44,9 @@ rgui->findpos(EFX_CHORUS,(int)o->value(),o);}
     label Preset
     user_data 12005
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12005))rkr->Rack_Effects[EFX_CHORUS]->setpreset((int) o->value());
+if((ud==0)||(ud==12005))m_process->Rack_Effects[EFX_CHORUS]->setpreset((int) o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_CHORUS]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_CHORUS]; i++)
 {
     parameter_refresh(i);
 };}
@@ -79,10 +79,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_CHORUS]; i++)
     label {Dry/Wet}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_DryWet);
+ m_parent->getMIDIControl(MC_Chorus_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())));}
     xywh {56 29 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -90,10 +90,10 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_DryWet,Dry_Wet((int)(o->value())
     label Pan
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_Pan);
+ m_parent->getMIDIControl(MC_Chorus_Pan);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Pan,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Pan,(int)(o->value()+64));}
     xywh {56 41 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -101,10 +101,10 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Pan,(int)(o->value()+64));}
     label Tempo
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_LFO_Tempo);
+ m_parent->getMIDIControl(MC_Chorus_LFO_Tempo);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo,(int)o->value());}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo,(int)o->value());}
     xywh {56 53 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
@@ -112,10 +112,10 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo,(int)o->value());}
     label Random
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_LFO_Random);
+ m_parent->getMIDIControl(MC_Chorus_LFO_Random);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Random,(int)o->value());}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Random,(int)o->value());}
     xywh {56 65 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -124,11 +124,11 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Random,(int)o->value());}
     user_data 12
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_LFO_Type);
+ m_parent->getMIDIControl(MC_Chorus_LFO_Type);
  return;
 } 
 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type,(int)o->value())} open
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type,(int)o->value())} open
     xywh {78 77 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(m_lfo_menu->get_lfo_type());}
     class RKR_Choice
@@ -136,14 +136,14 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type,(int)o->value())} open
   Fl_Check_Button chorus_subs {
     label Subtract
     user_data 2
-    callback {rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Subtract,(int)o->value())}
+    callback {m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Subtract,(int)o->value())}
     xywh {25 94 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button chorus_awesome {
     label Intense
     user_data 2
-    callback {rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Intense,(int)o->value())}
+    callback {m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Intense,(int)o->value())}
     xywh {88 95 56 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
@@ -151,10 +151,10 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type,(int)o->value())} open
     label {Stereo Df}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_LFO_Stereo);
+ m_parent->getMIDIControl(MC_Chorus_LFO_Stereo);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Stereo,(int)o->value());}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Stereo,(int)o->value());}
     xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -162,10 +162,10 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Stereo,(int)o->value());}
     label Depth
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_Depth);
+ m_parent->getMIDIControl(MC_Chorus_Depth);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Depth,(int)o->value());}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Depth,(int)o->value());}
     xywh {56 128 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -173,11 +173,11 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Depth,(int)o->value());}
     label Delay
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_Delay);
+ m_parent->getMIDIControl(MC_Chorus_Delay);
  return;
 } 
 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Delay,(int)o->value());}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Delay,(int)o->value());}
     xywh {56 141 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -185,10 +185,10 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Delay,(int)o->value());}
     label Feedback
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_Feedback);
+ m_parent->getMIDIControl(MC_Chorus_Feedback);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Feedback,(int)o->value());}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Feedback,(int)o->value());}
     xywh {56 154 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -196,10 +196,10 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Feedback,(int)o->value());}
     label {L/R Cross}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Chorus_LR_Cross);
+ m_parent->getMIDIControl(MC_Chorus_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LR_Cross,(int)(o->value()));}
+m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LR_Cross,(int)(o->value()));}
     xywh {55 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
@@ -210,47 +210,47 @@ rkr->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LR_Cross,(int)(o->value()));}
     code {switch (index)
     {
     case Chorus_DryWet:
-        chorus_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_DryWet)));
+        chorus_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_DryWet)));
         break;
     case Chorus_Pan:
-        chorus_pan->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Pan)-64);
+        chorus_pan->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Pan)-64);
         break;
     case Chorus_LFO_Tempo:
-        chorus_freq->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));
+        chorus_freq->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));
         break;
     case Chorus_LFO_Random:
-        chorus_rnd->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Random));
+        chorus_rnd->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Random));
         break;
     case Chorus_LFO_Type:
-        chorus_lfotype->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Type));
+        chorus_lfotype->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Type));
         break;
     case Chorus_LFO_Stereo:
-        chorus_stdf->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Stereo));
+        chorus_stdf->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Stereo));
         break;
     case Chorus_Depth:
-        chorus_dpth->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Depth));
+        chorus_dpth->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Depth));
         break;
     case Chorus_Delay:
-        chorus_delay->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Delay));
+        chorus_delay->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Delay));
         break;
     case Chorus_Feedback:
-        chorus_fb->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Feedback));
+        chorus_fb->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Feedback));
         break;
     case Chorus_LR_Cross:
-        chorus_LR->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LR_Cross));
+        chorus_LR->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LR_Cross));
         break;
     case Chorus_SKIP_Flange_10:
         break;
     case Chorus_Subtract:
-        chorus_subs->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Subtract));
+        chorus_subs->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Subtract));
         break;
     case Chorus_Intense:
-        chorus_awesome->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Intense));
+        chorus_awesome->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_Intense));
         break;
     }} {}
   }
   Function {tap_tempo_update()} {return_type void
   } {
-    code {chorus_freq->value(rkr->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));} {}
+    code {chorus_freq->value(m_process->Rack_Effects[EFX_CHORUS]->getpar(Chorus_LFO_Tempo));} {}
   }
 }

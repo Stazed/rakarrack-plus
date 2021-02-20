@@ -5,14 +5,14 @@
 void VibeGui::cb_vibe_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_VIBE]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_VIBE]);
  return;
 }
-rkr->EFX_Bypass[EFX_VIBE]=(int)o->value();
+m_process->EFX_Bypass[EFX_VIBE]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_VIBE]->cleanup();
-rgui->findpos(EFX_VIBE,(int)o->value(),o);
+m_process->Rack_Effects[EFX_VIBE]->cleanup();
+m_parent->findpos(EFX_VIBE,(int)o->value(),o);
 }
 void VibeGui::cb_vibe_activar(RKR_Light_Button* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_activar_i(o,v);
@@ -20,9 +20,9 @@ void VibeGui::cb_vibe_activar(RKR_Light_Button* o, void* v) {
 
 void VibeGui::cb_vibe_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12045))rkr->Rack_Effects[EFX_VIBE]->setpreset((int)o->value());
+if((ud==0)||(ud==12045))m_process->Rack_Effects[EFX_VIBE]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_VIBE]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_VIBE]; i++)
 {
     parameter_refresh(i);
 };
@@ -47,10 +47,10 @@ Fl_Menu_Item VibeGui::menu_vibe_preset[] = {
 void VibeGui::cb_vibe_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_DryWet);
+ m_parent->getMIDIControl(MC_Vibe_DryWet);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_DryWet,Dry_Wet((int)(o->value())));
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_DryWet,Dry_Wet((int)(o->value())));
 }
 void VibeGui::cb_vibe_WD(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_WD_i(o,v);
@@ -59,10 +59,10 @@ void VibeGui::cb_vibe_WD(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_width_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_Width);
+ m_parent->getMIDIControl(MC_Vibe_Width);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_Width,(int)o->value());
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_Width,(int)o->value());
 }
 void VibeGui::cb_vibe_width(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_width_i(o,v);
@@ -71,10 +71,10 @@ void VibeGui::cb_vibe_width(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_dpth_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_Depth);
+ m_parent->getMIDIControl(MC_Vibe_Depth);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_Depth,(int)o->value());
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_Depth,(int)o->value());
 }
 void VibeGui::cb_vibe_dpth(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_dpth_i(o,v);
@@ -83,10 +83,10 @@ void VibeGui::cb_vibe_dpth(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_freq_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_LFO_Tempo);
+ m_parent->getMIDIControl(MC_Vibe_LFO_Tempo);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Tempo,(int)o->value());
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Tempo,(int)o->value());
 }
 void VibeGui::cb_vibe_freq(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_freq_i(o,v);
@@ -95,10 +95,10 @@ void VibeGui::cb_vibe_freq(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_rnd_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_LFO_Random);
+ m_parent->getMIDIControl(MC_Vibe_LFO_Random);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Random,(int)o->value());
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Random,(int)o->value());
 }
 void VibeGui::cb_vibe_rnd(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_rnd_i(o,v);
@@ -107,11 +107,11 @@ void VibeGui::cb_vibe_rnd(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_lfotype_i(RKR_Choice* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_LFO_Type);
+ m_parent->getMIDIControl(MC_Vibe_LFO_Type);
  return;
 }
 
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Type,(int)o->value());
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Type,(int)o->value());
 }
 void VibeGui::cb_vibe_lfotype(RKR_Choice* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_lfotype_i(o,v);
@@ -120,10 +120,10 @@ void VibeGui::cb_vibe_lfotype(RKR_Choice* o, void* v) {
 void VibeGui::cb_vibe_stdf_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_LFO_Stereo);
+ m_parent->getMIDIControl(MC_Vibe_LFO_Stereo);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Stereo,(int)o->value());
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Stereo,(int)o->value());
 }
 void VibeGui::cb_vibe_stdf(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_stdf_i(o,v);
@@ -132,10 +132,10 @@ void VibeGui::cb_vibe_stdf(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_fb_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_Feedback);
+ m_parent->getMIDIControl(MC_Vibe_Feedback);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_Feedback,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_Feedback,(int)(o->value()+64));
 }
 void VibeGui::cb_vibe_fb(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_fb_i(o,v);
@@ -144,10 +144,10 @@ void VibeGui::cb_vibe_fb(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_LR_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_LR_Cross);
+ m_parent->getMIDIControl(MC_Vibe_LR_Cross);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_LR_Cross,(int)(o->value()));
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_LR_Cross,(int)(o->value()));
 }
 void VibeGui::cb_vibe_LR(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_LR_i(o,v);
@@ -156,17 +156,17 @@ void VibeGui::cb_vibe_LR(RKR_Slider* o, void* v) {
 void VibeGui::cb_vibe_pan_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Vibe_Pan);
+ m_parent->getMIDIControl(MC_Vibe_Pan);
  return;
 }
-rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_Pan,(int)(o->value()+64));
+m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_Pan,(int)(o->value()+64));
 }
 void VibeGui::cb_vibe_pan(RKR_Slider* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_pan_i(o,v);
 }
 
 void VibeGui::cb_vibe_stereo_i(RKR_Check_Button* o, void*) {
-  rkr->Rack_Effects[EFX_VIBE]->changepar(Vibe_Stereo,(int)o->value());
+  m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_Stereo,(int)o->value());
 }
 void VibeGui::cb_vibe_stereo(RKR_Check_Button* o, void* v) {
   ((VibeGui*)(o->parent()))->cb_vibe_stereo_i(o,v);
@@ -399,41 +399,41 @@ void VibeGui::parameter_refresh(int index) {
   switch (index)
       {
       case Vibe_Width:
-          vibe_width->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Width));
+          vibe_width->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_Width));
           break;
       case Vibe_LFO_Tempo:
-          vibe_freq->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
+          vibe_freq->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
           break;
       case Vibe_LFO_Random:
-          vibe_rnd->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Random));
+          vibe_rnd->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Random));
           break;
       case Vibe_LFO_Type:
-          vibe_lfotype->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Type));
+          vibe_lfotype->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Type));
           break;
       case Vibe_LFO_Stereo:
-          vibe_stdf->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Stereo));
+          vibe_stdf->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Stereo));
           break;
       case Vibe_Pan:
-          vibe_pan->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Pan)-64);
+          vibe_pan->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_Pan)-64);
           break;
       case Vibe_DryWet:
-          vibe_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_DryWet)));
+          vibe_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_DryWet)));
           break;
       case Vibe_Feedback:
-          vibe_fb->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Feedback)-64);
+          vibe_fb->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_Feedback)-64);
           break;
       case Vibe_Depth:
-          vibe_dpth->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Depth));
+          vibe_dpth->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_Depth));
           break;
       case Vibe_LR_Cross:
-          vibe_LR->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LR_Cross));
+          vibe_LR->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_LR_Cross));
           break;
       case Vibe_Stereo:
-          vibe_stereo->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_Stereo));
+          vibe_stereo->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_Stereo));
           break;
       }
 }
 
 void VibeGui::tap_tempo_update() {
-  vibe_freq->value(rkr->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
+  vibe_freq->value(m_process->Rack_Effects[EFX_VIBE]->getpar(Vibe_LFO_Tempo));
 }

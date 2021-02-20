@@ -24,14 +24,14 @@ widget_class PeqGui {
     user_data 2
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_PARAMETRIC]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_PARAMETRIC]);
  return;
 }
-rkr->EFX_Bypass[EFX_PARAMETRIC]=(int)o->value();
+m_process->EFX_Bypass[EFX_PARAMETRIC]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_PARAMETRIC]->cleanup();
-rgui->findpos(EFX_PARAMETRIC,(int)o->value(),o);}
+m_process->Rack_Effects[EFX_PARAMETRIC]->cleanup();
+m_parent->findpos(EFX_PARAMETRIC,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x30 color 62 selection_color 1 labelsize 10 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
@@ -40,9 +40,9 @@ rgui->findpos(EFX_PARAMETRIC,(int)o->value(),o);}
     label Preset
     user_data 12009
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12009)) rkr->Rack_Effects[EFX_PARAMETRIC]->setpreset((int)o->value());
+if((ud==0)||(ud==12009)) m_process->Rack_Effects[EFX_PARAMETRIC]->setpreset((int)o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_PARAMETRIC]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_PARAMETRIC]; i++)
 {
     parameter_refresh(i);
 };}
@@ -67,10 +67,10 @@ for (int i = 0; i < rkr->EFX_Param_Size[EFX_PARAMETRIC]; i++)
     label Gain
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Gain);
+ m_parent->getMIDIControl(MC_Parametric_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain,(int)(o->value()+64));}
     xywh {56 26 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -78,10 +78,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain,(int)(o->value()+64
     label {Low F.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Low_Freq);
+ m_parent->getMIDIControl(MC_Parametric_Low_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Freq,(int)o->value());}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Freq,(int)o->value());}
     tooltip {Low Frequency} xywh {56 50 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 20 maximum 1000 step 1 value 200 textcolor 7
     class RKR_Slider
   }
@@ -89,10 +89,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Freq,(int)o->value()
     label {Low G.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Low_Gain);
+ m_parent->getMIDIControl(MC_Parametric_Low_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Gain,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Gain,(int)(o->value()+64));}
     tooltip {Low Gain} xywh {56 63 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -100,10 +100,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Gain,(int)(o->value(
     label {Low Q.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Low_Q);
+ m_parent->getMIDIControl(MC_Parametric_Low_Q);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Q,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Q,(int)(o->value()+64));}
     tooltip {Low Width} xywh {56 76 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -111,10 +111,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Q,(int)(o->value()+6
     label {Mid F.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Mid_Freq);
+ m_parent->getMIDIControl(MC_Parametric_Mid_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Freq,(int)o->value());}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Freq,(int)o->value());}
     tooltip {Mid Frequency} xywh {56 98 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 800 maximum 8000 step 1 value 800 textcolor 7
     class RKR_Slider
   }
@@ -122,10 +122,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Freq,(int)o->value()
     label {Mid G.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Mid_Gain);
+ m_parent->getMIDIControl(MC_Parametric_Mid_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Gain,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Gain,(int)(o->value()+64));}
     tooltip {Mid Gain} xywh {56 110 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -133,10 +133,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Gain,(int)(o->value(
     label {Mid Q.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_Mid_Q);
+ m_parent->getMIDIControl(MC_Parametric_Mid_Q);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Q,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Q,(int)(o->value()+64));}
     tooltip {Mid Width} xywh {56 122 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -144,10 +144,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Q,(int)(o->value()+6
     label {High F.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_High_Freq);
+ m_parent->getMIDIControl(MC_Parametric_High_Freq);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Freq,(int)o->value());}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Freq,(int)o->value());}
     tooltip {High Frequency} xywh {56 144 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 6000 maximum 26000 step 1 value 12000 textcolor 7
     class RKR_Slider
   }
@@ -155,10 +155,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Freq,(int)o->value(
     label {High G.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_High_Gain);
+ m_parent->getMIDIControl(MC_Parametric_High_Gain);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Gain,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Gain,(int)(o->value()+64));}
     tooltip {High Gain} xywh {56 156 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -166,10 +166,10 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Gain,(int)(o->value
     label {High Q.}
     callback {if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Parametric_High_Q);
+ m_parent->getMIDIControl(MC_Parametric_High_Q);
  return;
 } 
-rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Q,(int)(o->value()+64));}
+m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Q,(int)(o->value()+64));}
     tooltip {High Width} xywh {56 168 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
@@ -178,34 +178,34 @@ rkr->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Q,(int)(o->value()+
     code {switch(index)
     {
     case Parametric_Low_Freq:
-        eqp_LF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq));
+        eqp_LF->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Freq));
         break;
     case Parametric_Low_Gain:
-        eqp_LFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain)-64);
+        eqp_LFg->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Gain)-64);
         break;
     case Parametric_Low_Q:
-        eqp_LQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q)-64);
+        eqp_LQ->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Low_Q)-64);
         break;
     case Parametric_Mid_Freq:
-        eqp_MF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq));
+        eqp_MF->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Freq));
         break;
     case Parametric_Mid_Gain:
-        eqp_MFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain)-64);
+        eqp_MFg->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Gain)-64);
         break;
     case Parametric_Mid_Q:
-        eqp_MQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q)-64);
+        eqp_MQ->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Mid_Q)-64);
         break;
     case Parametric_High_Freq:
-        eqp_HF->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq));
+        eqp_HF->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Freq));
         break;
     case Parametric_High_Gain:
-        eqp_HFg->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain)-64);
+        eqp_HFg->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Gain)-64);
         break;
     case Parametric_High_Q:
-        eqp_HQ->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q)-64);
+        eqp_HQ->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_High_Q)-64);
         break;
     case Parametric_Gain:
-        eqp_Gain->value(rkr->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain)-64);
+        eqp_Gain->value(m_process->Rack_Effects[EFX_PARAMETRIC]->getpar(Parametric_Gain)-64);
         break;
     }} {}
   }

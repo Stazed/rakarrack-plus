@@ -5,30 +5,30 @@
 void MusdelayGui::cb_musdelay_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Multi_On_Off);
- o->value(rkr->EFX_Bypass[EFX_MUSICAL_DELAY]);
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Bypass[EFX_MUSICAL_DELAY]);
  return;
 }
-rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=(int)o->value();
+m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=(int)o->value();
 if((int) o->value()==0)
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->cleanup();
-rgui->findpos(EFX_MUSICAL_DELAY,(int)o->value(),o);
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->cleanup();
+m_parent->findpos(EFX_MUSICAL_DELAY,(int)o->value(),o);
 }
 void MusdelayGui::cb_musdelay_activar(RKR_Light_Button* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_activar_i(o,v);
 }
 
 void MusdelayGui::cb_musdelay_preset_i(RKR_Choice* o, void* v) {
-  rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+  m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12015))rkr->Rack_Effects[EFX_MUSICAL_DELAY]->setpreset(o->value());
+if((ud==0)||(ud==12015))m_process->Rack_Effects[EFX_MUSICAL_DELAY]->setpreset(o->value());
 
-for (int i = 0; i < rkr->EFX_Param_Size[EFX_MUSICAL_DELAY]; i++)
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_MUSICAL_DELAY]; i++)
 {
     parameter_refresh(i);
 };
 
-if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
+if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
 }
 void MusdelayGui::cb_musdelay_preset(RKR_Choice* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_preset_i(o,v);
@@ -43,10 +43,10 @@ Fl_Menu_Item MusdelayGui::menu_musdelay_preset[] = {
 void MusdelayGui::cb_musdelay_WD_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_DryWet);
+ m_parent->getMIDIControl(MC_Music_DryWet);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_DryWet,Dry_Wet((int)o->value()));
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_DryWet,Dry_Wet((int)o->value()));
 }
 void MusdelayGui::cb_musdelay_WD(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_WD_i(o,v);
@@ -55,10 +55,10 @@ void MusdelayGui::cb_musdelay_WD(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_LRc_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_LR_Cross);
+ m_parent->getMIDIControl(MC_Music_LR_Cross);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_LR_Cross,(int)o->value());
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_LR_Cross,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_LRc(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_LRc_i(o,v);
@@ -67,10 +67,10 @@ void MusdelayGui::cb_musdelay_LRc(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_pan1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Pan_1);
+ m_parent->getMIDIControl(MC_Music_Pan_1);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_1,(int)o->value()+64);
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_1,(int)o->value()+64);
 }
 void MusdelayGui::cb_musdelay_pan1(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_pan1_i(o,v);
@@ -79,19 +79,19 @@ void MusdelayGui::cb_musdelay_pan1(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_pan2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Pan_2);
+ m_parent->getMIDIControl(MC_Music_Pan_2);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_2,(int)o->value()+64);
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_2,(int)o->value()+64);
 }
 void MusdelayGui::cb_musdelay_pan2(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_pan2_i(o,v);
 }
 
 void MusdelayGui::cb_musdelay_delay1_i(RKR_Choice* o, void*) {
-  rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_1,o->value()+1);
-if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
+  m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_1,o->value()+1);
+if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
 }
 void MusdelayGui::cb_musdelay_delay1(RKR_Choice* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_delay1_i(o,v);
@@ -108,9 +108,9 @@ Fl_Menu_Item MusdelayGui::menu_musdelay_delay1[] = {
 };
 
 void MusdelayGui::cb_musdelay_delay3_i(RKR_Choice* o, void*) {
-  rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Del_Offset,o->value()+1);
-if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
+  m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Del_Offset,o->value()+1);
+if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
 }
 void MusdelayGui::cb_musdelay_delay3(RKR_Choice* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_delay3_i(o,v);
@@ -128,9 +128,9 @@ Fl_Menu_Item MusdelayGui::menu_musdelay_delay3[] = {
 };
 
 void MusdelayGui::cb_musdelay_delay2_i(RKR_Choice* o, void*) {
-  rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_2,o->value()+1);
-if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
+  m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_2,o->value()+1);
+if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
 }
 void MusdelayGui::cb_musdelay_delay2(RKR_Choice* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_delay2_i(o,v);
@@ -139,12 +139,12 @@ void MusdelayGui::cb_musdelay_delay2(RKR_Choice* o, void* v) {
 void MusdelayGui::cb_musdelay_tempo_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Tempo);
+ m_parent->getMIDIControl(MC_Music_Tempo);
  return;
 }
-rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo,(int)o->value());
-if((int)musdelay_activar->value())rkr->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
+m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo,(int)o->value());
+if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;
 }
 void MusdelayGui::cb_musdelay_tempo(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_tempo_i(o,v);
@@ -153,10 +153,10 @@ void MusdelayGui::cb_musdelay_tempo(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_gain1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Gain_1);
+ m_parent->getMIDIControl(MC_Music_Gain_1);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_1,(int)o->value());
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_1,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_gain1(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_gain1_i(o,v);
@@ -165,10 +165,10 @@ void MusdelayGui::cb_musdelay_gain1(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_gain2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Gain_2);
+ m_parent->getMIDIControl(MC_Music_Gain_2);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_2,(int)o->value());
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_2,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_gain2(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_gain2_i(o,v);
@@ -177,10 +177,10 @@ void MusdelayGui::cb_musdelay_gain2(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_fb1_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Feedback_1);
+ m_parent->getMIDIControl(MC_Music_Feedback_1);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_1,(int)o->value());
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_1,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_fb1(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_fb1_i(o,v);
@@ -189,10 +189,10 @@ void MusdelayGui::cb_musdelay_fb1(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_fb2_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Feedback_2);
+ m_parent->getMIDIControl(MC_Music_Feedback_2);
  return;
 } 
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_2,(int)o->value());
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_2,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_fb2(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_fb2_i(o,v);
@@ -201,10 +201,10 @@ void MusdelayGui::cb_musdelay_fb2(RKR_Slider* o, void* v) {
 void MusdelayGui::cb_musdelay_damp_i(RKR_Slider* o, void*) {
   if(Fl::event_button()==3)
 {
- rgui->getMIDIControl(MC_Music_Damp);
+ m_parent->getMIDIControl(MC_Music_Damp);
  return;
 }
-rkr->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Damp,(int)o->value());
+m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Damp,(int)o->value());
 }
 void MusdelayGui::cb_musdelay_damp(RKR_Slider* o, void* v) {
   ((MusdelayGui*)(o->parent()))->cb_musdelay_damp_i(o,v);
@@ -476,47 +476,47 @@ void MusdelayGui::parameter_refresh(int index) {
   switch (index)
       {
       case Music_DryWet:
-          musdelay_WD->value(Dry_Wet(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_DryWet)));
+          musdelay_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_DryWet)));
           break;
       case Music_Pan_1:
-          musdelay_pan1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_1)-64);
+          musdelay_pan1->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_1)-64);
           break;
       case Music_Delay_1:
-          musdelay_delay1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_1)-1);
+          musdelay_delay1->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_1)-1);
           break;
       case Music_Del_Offset:
-          musdelay_delay3->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Del_Offset)-1);
+          musdelay_delay3->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Del_Offset)-1);
           break;
       case Music_LR_Cross:
-          musdelay_LRc->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_LR_Cross));
+          musdelay_LRc->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_LR_Cross));
           break;
       case Music_Feedback_1:
-          musdelay_fb1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_1));
+          musdelay_fb1->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_1));
           break;
       case Music_Damp:
-          musdelay_damp->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Damp));
+          musdelay_damp->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Damp));
           break;
       case Music_Pan_2:
-          musdelay_pan2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_2)-64);
+          musdelay_pan2->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Pan_2)-64);
           break;
       case Music_Delay_2:
-          musdelay_delay2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_2)-1);
+          musdelay_delay2->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Delay_2)-1);
           break;
       case Music_Feedback_2:
-          musdelay_fb2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_2));
+          musdelay_fb2->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Feedback_2));
           break;
       case Music_Tempo:
-          musdelay_tempo->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
+          musdelay_tempo->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
           break;
       case Music_Gain_1:
-          musdelay_gain1->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_1));
+          musdelay_gain1->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_1));
           break;
       case Music_Gain_2:
-          musdelay_gain2->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_2));
+          musdelay_gain2->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Gain_2));
           break;
       }
 }
 
 void MusdelayGui::tap_tempo_update() {
-  musdelay_tempo->value(rkr->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
+  musdelay_tempo->value(m_process->Rack_Effects[EFX_MUSICAL_DELAY]->getpar(Music_Tempo));
 }
