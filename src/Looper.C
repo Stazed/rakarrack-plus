@@ -689,58 +689,58 @@ Looper::getpar(int npar)
     {
     case Looper_DryWet:
         return (Pvolume);
-        break;
+
     case Looper_Play:
         return (Pplay);
-        break;
+
     case Looper_Stop:
         return (Pstop);
-        break;
+
     case Looper_Record:
         return (Precord);
-        break;
+
     case Looper_Clear:
         return (Pclear);
-        break;
+
     case Looper_Reverse:
         return (Preverse);
-        break;
+
     case Looper_Level_1:
         return (Pfade1);
-        break;
+
     case Looper_Track_1:
         return (PT1);
-        break;
+
     case Looper_Track_2:
         return (PT2);
-        break;
+
     case Looper_AutoPlay:
         return (Pautoplay);
-        break;
+
     case Looper_Level_2:
         return (Pfade2);
-        break;
+
     case Looper_Rec_1:
         return (Prec1);
-        break;
+
     case Looper_Rec_2:
         return (Prec2);
-        break;
+
     case Looper_Link:
         return (Plink);
-        break;
+
     case Looper_Tempo:
         return (Ptempo);
-        break;
+
     case Looper_Bar:
         return (Pbar);
-        break;
+
     case Looper_Metro:
         return (Pmetro);
-        break;
+
     case Looper_M_S:
         return (Pms);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

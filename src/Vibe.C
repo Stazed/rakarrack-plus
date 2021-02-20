@@ -667,37 +667,37 @@ Vibe::getpar(int npar)
     {
     case Vibe_Width:
         return (Pwidth);
-        break;
+
     case Vibe_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case Vibe_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case Vibe_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Vibe_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case Vibe_Pan:
-        return (Ppanning); //pan
-        break;
+        return (Ppanning);
+
     case Vibe_DryWet:
         return (Pvolume);
-        break;
+
     case Vibe_Feedback:
         return (Pfb);
-        break;
+
     case Vibe_Depth:
         return (Pdepth);
-        break;
+
     case Vibe_LR_Cross:
         return (Plrcross);
-        break;
-    case Vibe_Stereo: //Stereo
+
+    case Vibe_Stereo:
         return (Pstereo);
-        break;
+
     }
 
     return (0);

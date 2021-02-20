@@ -123,23 +123,23 @@ ParametricEQ::getpar(int npar)
     case Parametric_Low_Gain:
     case Parametric_Low_Q:
         return get_parameters(npar + 11);
-        break;
+
 
     case Parametric_Mid_Freq:
     case Parametric_Mid_Gain:
     case Parametric_Mid_Q:
         return get_parameters(npar + 13);
-        break;
+
 
     case Parametric_High_Freq:
     case Parametric_High_Gain:
     case Parametric_High_Q:
         return get_parameters(npar + 15);
-        break;
+
 
     case Parametric_Gain:
         return get_parameters(0);
-        break;
+
     }
     
     return 0;

@@ -432,31 +432,31 @@ Compressor::getpar(int npar)
     {
     case Compress_Threshold:
         return (tthreshold);
-        break;
+
     case Compress_Ratio:
         return (tratio);
-        break;
+
     case Compress_Output:
         return (toutput);
-        break;
+
     case Compress_Attack:
         return (tatt);
-        break;
+
     case Compress_Release:
         return (trel);
-        break;
+
     case Compress_Auto_Out:
         return (a_out);
-        break;
+
     case Compress_Knee:
         return (tknee);
-        break;
+
     case Compress_Stereo:
         return (stereo);
-        break;
+
     case Compress_Peak:
         return (peak);
-        break;
+
     }
 
     return (0);

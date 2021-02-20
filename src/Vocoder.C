@@ -610,25 +610,25 @@ Vocoder::getpar(int npar)
     {
     case Vocoder_DryWet:
         return (Pvolume);
-        break;
+
     case Vocoder_Pan:
         return (Ppanning);
-        break;
+
     case Vocoder_Smear:
         return (Pmuffle);
-        break;
+
     case Vocoder_Q:
         return (Pqq);
-        break;
+
     case Vocoder_Input:
         return (Pinput);
-        break;
+
     case Vocoder_Level:
         return (Plevel);
-        break;
+
     case Vocoder_Ring:
         return (Pring);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

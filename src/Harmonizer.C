@@ -464,37 +464,37 @@ Harmonizer::getpar(int npar)
     {
     case Harm_DryWet:
         return (Pvolume);
-        break;
+
     case Harm_Pan:
         return (Ppan);
-        break;
+
     case Harm_Gain:
         return (Pgain);
-        break;
+
     case Harm_Interval:
         return (Pinterval);
-        break;
+
     case Harm_Filter_Freq:
         return (fPfreq);
-        break;
+
     case Harm_Select:
         return (PSELECT);
-        break;
+
     case Harm_Note:
         return (Pnote);
-        break;
+
     case Harm_Chord:
         return (Ptype);
-        break;
+
     case Harm_Filter_Gain:
         return (fPgain);
-        break;
+
     case Harm_Filter_Q:
         return (fPq);
-        break;
+
     case Harm_MIDI:
         return (PMIDI);
-        break;
+
     }
 
     return (0);

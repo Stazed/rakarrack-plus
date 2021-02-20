@@ -505,34 +505,34 @@ Shifter::getpar(int npar)
     {
     case Shifter_DryWet:
         return (Pvolume);
-        break;
+
     case Shifter_Pan:
         return (Ppan);
-        break;
+
     case Shifter_Gain:
         return (Pgain);
-        break;
+
     case Shifter_Attack:
         return (Pattack);
-        break;
+
     case Shifter_Decay:
         return (Pdecay);
-        break;
+
     case Shifter_Threshold:
         return (Pthreshold);
-        break;
+
     case Shifter_Interval:
         return (Pinterval);
-        break;
+
     case Shifter_Shift:
         return (Pupdown);
-        break;
+
     case Shifter_Mode:
         return (Pmode);
-        break;
+
     case Shifter_Whammy:
         return (Pwhammy);
-        break;
+
     }
 
     return (0);

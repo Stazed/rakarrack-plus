@@ -179,11 +179,11 @@ Cabinet::getpar(int npar)
     {
     case Cabinet_Gain:          // 1
         return get_parameters(0);
-        break;
+
 
     case Cabinet_Preset_Idx:    // 0
         return Ppreset;
-        break;
+
     }
     
     return 0;

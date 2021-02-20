@@ -606,49 +606,49 @@ Dflange::getpar(int npar)
     {
     case DFlange_DryWet:
         return (Pwetdry);
-        break;
+
     case DFlange_Pan:
         return (Ppanning);
-        break;
+
     case DFlange_LR_Cross:
         return (Plrcross);
-        break;
+
     case DFlange_Depth:
         return (Pdepth);
-        break;
+
     case DFlange_Width:
         return (Pwidth);
-        break;
+
     case DFlange_Offset:
         return (Poffset);
-        break;
+
     case DFlange_Feedback:
         return (Pfb);
-        break;
+
     case DFlange_LPF:
         return (Phidamp);
-        break;
+
     case DFlange_Subtract:
         return (Psubtract);
-        break;
+
     case DFlange_Zero:
         return (Pzero);
-        break;
+
     case DFlange_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case DFlange_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case DFlange_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case DFlange_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case DFlange_Intense:
         return Pintense;
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

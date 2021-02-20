@@ -231,19 +231,19 @@ ShelfBoost::getpar(int npar)
     {
     case Shelf_Gain:
         return (Pvolume);
-        break;
+
     case Shelf_Presence:
         return (Pq1);
-        break;
+
     case Shelf_Tone:
         return (Pfreq1);
-        break;
+
     case Shelf_Stereo:
         return (Pstereo);
-        break;
+
     case Shelf_Level:
         return (Plevel);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

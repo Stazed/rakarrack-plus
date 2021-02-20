@@ -612,38 +612,38 @@ Reverb::getpar(int npar)
     {
     case Reverb_DryWet:
         return (Pvolume);
-        break;
+
     case Reverb_Pan:
         return (Ppan);
-        break;
+
     case Reverb_Time:
         return (Ptime);
-        break;
+
     case Reverb_I_Delay:
         return (Pidelay);
-        break;
+
     case Reverb_Delay_FB:
         return (Pidelayfb);
-        break;
+
         //      case Reverb_SKIP_5: return(Prdelay);
         //              break;
         //      case Reverb_SKIP_6: return(Perbalance);
         //              break;
     case Reverb_LPF:
         return (Plpf);
-        break;
+
     case Reverb_HPF:
         return (Phpf);
-        break;
+
     case Reverb_Damp:
         return (Plohidamp);
-        break;
+
     case Reverb_Type:
         return (Ptype);
-        break;
+
     case Reverb_Room:
         return (Proomsize);
-        break;
+
     }
 
     return (0); //in case of bogus "parameter"

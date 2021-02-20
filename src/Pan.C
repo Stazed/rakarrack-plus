@@ -217,31 +217,31 @@ Pan::getpar(int npar)
     {
     case Pan_DryWet:
         return (Pvolume);
-        break;
+
     case Pan_Pan:
         return (Ppanning);
-        break;
+
     case Pan_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case Pan_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case Pan_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Pan_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case Pan_Ex_St_Amt:
         return (Pextra);
-        break;
+
     case Pan_AutoPan:
         return (PAutoPan);
-        break;
+
     case Pan_Enable_Extra:
         return (PextraON);
-        break;
+
     }
 
     return (0);

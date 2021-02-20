@@ -350,43 +350,43 @@ Ring::getpar(int npar)
     {
     case Ring_DryWet:
         return (Pvolume);
-        break;
+
     case Ring_Pan:
         return (Ppanning);
-        break;
+
     case Ring_LR_Cross:
         return (Plrcross);
-        break;
+
     case Ring_Level:
         return (Plevel);
-        break;
+
     case Ring_Depth:
         return (Pdepthp);
-        break;
+
     case Ring_Freq:
         return (Pfreq);
-        break;
+
     case Ring_Stereo:
         return (Pstereo);
-        break;
+
     case Ring_Sine:
         return (Psin);
-        break;
+
     case Ring_Triangle:
         return (Ptri);
-        break;
+
     case Ring_Saw:
         return (Psaw);
-        break;
+
     case Ring_Square:
         return (Psqu);
-        break;
+
     case Ring_Input:
         return (Pinput);
-        break;
+
     case Ring_Auto_Freq:
         return (Pafreq);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

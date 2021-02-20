@@ -353,34 +353,34 @@ Echoverse::getpar(int npar)
     {
     case Echoverse_DryWet:
         return (Pvolume);
-        break;
+
     case Echoverse_Pan:
         return (Ppanning);
-        break;
+
     case Echoverse_Tempo:
         return (Pdelay);
-        break;
+
     case Echoverse_LR_Delay:
         return (Plrdelay);
-        break;
+
     case Echoverse_Angle:
         return (Plrcross);
-        break;
+
     case Echoverse_Feedback:
         return (Pfb);
-        break;
+
     case Echoverse_Damp:
         return (Phidamp);
-        break;
+
     case Echoverse_Reverse:
         return (Preverse);
-        break;
+
     case Echoverse_Subdivision:
         return (Psubdiv);
-        break;
+
     case Echoverse_Ext_Stereo:
         return (Pes);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

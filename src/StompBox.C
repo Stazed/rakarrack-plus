@@ -1020,22 +1020,22 @@ StompBox::getpar(int npar)
     {
     case Stomp_Level:
         return (Pvolume);
-        break;
+
     case Stomp_Tone:
         return (Phigh);
-        break;
+
     case Stomp_Mid:
         return (Pmid);
-        break;
+
     case Stomp_Bias:
         return (Plow);
-        break;
+
     case Stomp_Gain:
         return (Pgain);
-        break;
+
     case Stomp_Mode:
         return (Pmode);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

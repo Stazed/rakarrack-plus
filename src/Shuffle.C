@@ -336,34 +336,34 @@ Shuffle::getpar(int npar)
     {
     case Shuffle_DryWet:
         return (Pvolume);
-        break;
+
     case Shuffle_Gain_L:
         return (PvolL - 64);
-        break;
+
     case Shuffle_Gain_ML:
         return (PvolML - 64);
-        break;
+
     case Shuffle_Gain_MH:
         return (PvolMH - 64);
-        break;
+
     case Shuffle_Gain_H:
         return (PvolH - 64);
-        break;
+
     case Shuffle_Freq_L:
         return (Cross1);
-        break;
+
     case Shuffle_Freq_ML:
         return (Cross2);
-        break;
+
     case Shuffle_Freq_MH:
         return (Cross3);
-        break;
+
     case Shuffle_Freq_H:
         return (Cross4);
-        break;
+
     case Shuffle_Width:
         return (PQ);
-        break;
+
     case Shuffle_F_Band:
         return (E);
     }

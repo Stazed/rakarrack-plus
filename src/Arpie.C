@@ -479,37 +479,37 @@ Arpie::getpar(int npar)
     {
     case Arpie_DryWet:
         return (Pvolume);
-        break;
+
     case Arpie_Pan:
         return (Ppanning);
-        break;
+
     case Arpie_Tempo:
         return (Pdelay);
-        break;
+
     case Arpie_LR_Delay:
         return (Plrdelay);
-        break;
+
     case Arpie_LR_Cross:
         return (Plrcross);
-        break;
+
     case Arpie_Feedback:
         return (Pfb);
-        break;
+
     case Arpie_Damp:
         return (Phidamp);
-        break;
+
     case Arpie_ArpeWD:
         return (Preverse);
-        break;
+
     case Arpie_Harm:
         return (Pharms);
-        break;
+
     case Arpie_Pattern:
         return (Ppattern);
-        break;
+
     case Arpie_Subdivision:
         return (Psubdiv);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

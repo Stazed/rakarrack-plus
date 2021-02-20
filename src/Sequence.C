@@ -1245,28 +1245,28 @@ Sequence::getpar(int npar)
     case Sequence_Step_7:
     case Sequence_Step_8:
         return (Psequence[npar]);
-        break;
+
     case Sequence_DryWet:
         return (Pvolume);
-        break;
+
     case Sequence_Tempo:
         return (Ptempo);
-        break;
+
     case Sequence_Resonance:
         return (Pq);
-        break;
+
     case Sequence_Amp:
         return (Pamplitude);
-        break;
+
     case Sequence_Stdf:
         return (Pstdiff);
-        break;
+
     case Sequence_Mode:
         return (Pmode);
-        break;
+
     case Sequence_Range:
         return (Prange);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

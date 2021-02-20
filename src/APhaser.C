@@ -443,43 +443,43 @@ Analog_Phaser::getpar(int npar)
     {
     case APhase_DryWet:
         return (Pvolume);
-        break;
+
     case APhase_Distortion:
         return (Pdistortion);
-        break;
+
     case APhase_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case APhase_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case APhase_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case APhase_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case APhase_Width:
         return (Pwidth);
-        break;
+
     case APhase_Feedback:
         return (Pfb);
-        break;
+
     case APhase_Stages:
         return (Pstages);
-        break;
+
     case APhase_Mismatch:
         return (Poffset);
-        break;
+
     case APhase_Subtract:
         return (Poutsub);
-        break;
+
     case APhase_Depth:
         return (Pdepth);
-        break;
+
     case APhase_Hyper:
         return (Phyper);
-        break;
+
     }
     
     return (0);

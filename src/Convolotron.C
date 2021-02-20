@@ -606,37 +606,37 @@ Convolotron::getpar(int npar)
     {
     case Convo_DryWet:
         return (Pvolume);
-        break;
+
     case Convo_Pan:
         return (Ppanning);
-        break;
+
     case Convo_Safe:
         return (Psafe);
-        break;
+
     case Convo_Length:
         return (Plength);
-        break;
+
     case Convo_User_File:
         return (Puser);
-        break;
+
     case Convo_SKIP_5:
         return (0);
-        break;
+
     case Convo_Damp:
         return (Phidamp);
-        break;
+
     case Convo_Level:
         return (Plevel);
-        break;
+
     case Convo_Set_File:
         return (Filenum);
-        break;
+
     case Convo_SKIP_9:
         return (0);
-        break;
+
     case Convo_Feedback:
         return (Pfb);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

@@ -278,25 +278,25 @@ Gate::getpar(int npar)
     {
     case Gate_Threshold:
         return (Pthreshold);
-        break;
+
     case Gate_Range:
         return (Prange);
-        break;
+
     case Gate_Attack:
         return (Pattack);
-        break;
+
     case Gate_Release:
         return (Pdecay);
-        break;
+
     case Gate_LPF:
         return (Plpf);
-        break;
+
     case Gate_HPF:
         return (Phpf);
-        break;
+
     case Gate_Hold:
         return (Phold);
-        break;
+
     }
 
     return (0);

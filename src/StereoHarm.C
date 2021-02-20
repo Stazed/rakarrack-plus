@@ -550,40 +550,40 @@ StereoHarm::getpar(int npar)
     {
     case Sharm_DryWet:
         return (Pvolume);
-        break;
+
     case Sharm_L_Gain:
         return (Pgainl);
-        break;
+
     case Sharm_L_Interval:
         return (Pintervall);
-        break;
+
     case Sharm_L_Chroma:
         return (Pchromel);
-        break;
+
     case Sharm_R_Gain:
         return (Pgainr);
-        break;
+
     case Sharm_R_Interval:
         return (Pintervalr);
-        break;
+
     case Sharm_R_Chroma:
         return (Pchromer);
-        break;
+
     case Sharm_Select:
         return (PSELECT);
-        break;
+
     case Sharm_Note:
         return (Pnote);
-        break;
+
     case Sharm_Chord:
         return (Ptype);
-        break;
+
     case Sharm_MIDI:
         return (PMIDI);
-        break;
+
     case Sharm_LR_Cross:
         return (Plrcross);
-        break;
+
     }
 
     return (0);

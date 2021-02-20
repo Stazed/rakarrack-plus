@@ -471,52 +471,52 @@ Synthfilter::getpar(int npar)
     {
     case Synthfilter_DryWet:
         return (Pvolume);
-        break;
+
     case Synthfilter_Distort:
         return (Pdistortion);
-        break;
+
     case Synthfilter_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case Synthfilter_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case Synthfilter_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Synthfilter_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case Synthfilter_Width:
         return (Pwidth);
-        break;
+
     case Synthfilter_Feedback:
         return (Pfb);
-        break;
+
     case Synthfilter_LPF_Stages:
         return (Plpstages);
-        break;
+
     case Synthfilter_HPF_Stages:
         return (Phpstages);
-        break;
+
     case Synthfilter_Subtract:
         return (Poutsub);
-        break;
+
     case Synthfilter_Depth:
         return (Pdepth);
-        break;
+
     case Synthfilter_Env_Sens:
         return (Penvelope);
-        break;
+
     case Synthfilter_Attack:
         return (Pattack);
-        break;
+
     case Synthfilter_Release:
         return (Prelease);
-        break;
+
     case Synthfilter_Offset:
         return (Pbandwidth);
-        break;
+
     }
 
     return (0);

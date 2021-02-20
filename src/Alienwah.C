@@ -307,37 +307,37 @@ Alienwah::getpar(int npar)
     {
     case Alien_DryWet:
         return (Pvolume);
-        break;
+
     case Alien_Pan:
         return (Ppanning);
-        break;
+
     case Alien_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case Alien_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case Alien_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Alien_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case Alien_Depth:
         return (Pdepth);
-        break;
+
     case Alien_Feedback:
         return (Pfb);
-        break;
+
     case Alien_Delay:
         return (Pdelay);
-        break;
+
     case Alien_LR_Cross:
         return (Plrcross);
-        break;
+
     case Alien_Phase:
         return (Pphase);
-        break;
+
     }
 
     return (0);

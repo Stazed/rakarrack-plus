@@ -453,40 +453,40 @@ Derelict::getpar(int npar)
     {
     case Dere_DryWet:
         return (Pvolume);
-        break;
+
     case Dere_Pan:
         return (Ppanning);
-        break;
+
     case Dere_LR_Cross:
         return (Plrcross);
-        break;
+
     case Dere_Drive:
         return (Pdrive);
-        break;
+
     case Dere_Level:
         return (Plevel);
-        break;
+
     case Dere_Type:
         return (Ptype);
-        break;
+
     case Dere_Negate:
         return (Pnegate);
-        break;
+
     case Dere_LPF:
         return (Plpf);
-        break;
+
     case Dere_HPF:
         return (Phpf);
-        break;
+
     case Dere_Color:
         return (Prfreq);
-        break;
+
     case Dere_Prefilter:
         return (Pprefiltering);
-        break;
+
     case Dere_Suboctave:
         return (Poctave);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

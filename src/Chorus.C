@@ -410,43 +410,43 @@ Chorus::getpar(int npar)
     {
     case Chorus_DryWet:
         return (Pvolume);
-        break;
+
     case Chorus_Pan:
         return (Ppanning);
-        break;
+
     case Chorus_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case Chorus_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case Chorus_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Chorus_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case Chorus_Depth:
         return (Pdepth);
-        break;
+
     case Chorus_Delay:
         return (Pdelay);
-        break;
+
     case Chorus_Feedback:
         return (Pfb);
-        break;
+
     case Chorus_LR_Cross:
         return (Plrcross);
-        break;
+
     case Chorus_SKIP_Flange_10:
         return (Pflangemode);
-        break;
+
     case Chorus_Subtract:
         return (Poutsub);
-        break;
+
     case Chorus_Intense:
         return (awesome_mode);
-        break;
+
     }
 
     return (0);

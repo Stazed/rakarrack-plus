@@ -649,49 +649,49 @@ VaryBand::getpar(int npar)
     {
     case VaryBand_DryWet:
         return (Pvolume);
-        break;
+
     case VaryBand_LFO_Tempo_1:
         return (lfo1->Pfreq);
-        break;
+
     case VaryBand_LFO_Type_1:
         return (lfo1->PLFOtype);
-        break;
+
     case VaryBand_LFO_Stereo_1:
         return (lfo1->Pstereo);
-        break;
+
     case VaryBand_LFO_Tempo_2:
         return (lfo2->Pfreq);
-        break;
+
     case VaryBand_LFO_Type_2:
         return (lfo2->PLFOtype);
-        break;
+
     case VaryBand_LFO_Stereo_2:
         return (lfo2->Pstereo);
-        break;
+
     case VaryBand_Cross_1:
         return (Cross1);
-        break;
+
     case VaryBand_Cross_2:
         return (Cross2);
-        break;
+
     case VaryBand_Cross_3:
         return (Cross3);
-        break;
+
     case VaryBand_Combination:  // Rakarrack-plus file saving & presets
         return (Pcombi);
-        break;
+
     case VaryBand_Low_Band:
         return (PsL);
-        break;
+
     case VaryBand_Mid_Band_1:
         return (PsML);
-        break;
+
     case VaryBand_Mid_Band_2:
         return (PsMH);
-        break;
+
     case VaryBand_High_Band:
         return (PsH);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

@@ -531,42 +531,43 @@ Valve::getpar(int npar)
     {
     case Valve_DryWet:
         return (Pvolume);
-        break;
+
     case Valve_Pan:
         return (Ppanning);
-        break;
+
     case Valve_LR_Cross:
         return (Plrcross);
-        break;
+
     case Valve_Drive:
         return (Pdrive);
-        break;
+
     case Valve_Level:
         return (Plevel);
-        break;
+
     case Valve_Negate:
         return (Pnegate);
-        break;
+
     case Valve_LPF:
         return (Plpf);
-        break;
+
     case Valve_HPF:
         return (Phpf);
-        break;
+
     case Valve_Stereo:
         return (Pstereo);
-        break;
+
     case Valve_Prefilter:
         return (Pprefiltering);
-        break;
+
     case Valve_Distortion:
         return (Q_q);
-        break;
+
     case Valve_Ex_Dist:
         return (Ped);
+
     case Valve_Presence:
         return (Presence);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

@@ -333,40 +333,40 @@ Phaser::getpar(int npar)
     {
     case Phaser_DryWet:
         return (Pvolume);
-        break;
+
     case Phaser_Pan:
         return (Ppanning);
-        break;
+
     case Phaser_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case Phaser_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case Phaser_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Phaser_LFO_Stereo:
         return (lfo->Pstereo); // STDL
-        break;
+
     case Phaser_Depth:
         return (Pdepth);
-        break;
+
     case Phaser_Feedback:
         return (Pfb);
-        break;
+
     case Phaser_Stages:
         return (Pstages);
-        break;
+
     case Phaser_LR_Cross:
         return (Plrcross);
-        break;
+
     case Phaser_Subtract:
         return (Poutsub);
-        break;
+
     case Phaser_Phase:
         return (Pphase);
-        break;
+
     }
 
     return (0);

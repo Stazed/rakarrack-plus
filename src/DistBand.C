@@ -480,49 +480,49 @@ DistBand::getpar(int npar)
     {
     case DistBand_DryWet:
         return (Pvolume);
-        break;
+
     case DistBand_Pan:
         return (Ppanning);
-        break;
+
     case DistBand_LR_Cross:
         return (Plrcross);
-        break;
+
     case DistBand_Drive:
         return (Pdrive);
-        break;
+
     case DistBand_Level:
         return (Plevel);
-        break;
+
     case DistBand_Type_Low:
         return (PtypeL);
-        break;
+
     case DistBand_Type_Mid:
         return (PtypeM);
-        break;
+
     case DistBand_Type_Hi:
         return (PtypeH);
-        break;
+
     case DistBand_Gain_Low:
         return (PvolL);
-        break;
+
     case DistBand_Gain_Mid:
         return (PvolM);
-        break;
+
     case DistBand_Gain_Hi:
         return (PvolH);
-        break;
+
     case DistBand_Negate:
         return (Pnegate);
-        break;
+
     case DistBand_Cross_1:
         return (Cross1);
-        break;
+
     case DistBand_Cross_2:
         return (Cross2);
-        break;
+
     case DistBand_Stereo:
         return (Pstereo);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

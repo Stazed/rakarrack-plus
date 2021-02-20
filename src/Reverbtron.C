@@ -937,52 +937,52 @@ Reverbtron::getpar(int npar)
     {
     case Revtron_DryWet:
         return (Pvolume);
-        break;
+
     case Revtron_Fade:
         return (Pfade);
-        break;
+
     case Revtron_Safe:
         return (Psafe);
-        break;
+
     case Revtron_Length:
         return (Plength);
-        break;
+
     case Revtron_User_File:
         return (Puser);
-        break;
+
     case Revtron_I_Delay:
         return (Pidelay);
-        break;
+
     case Revtron_Damp:
         return (Phidamp);
-        break;
+
     case Revtron_Level:
         return (Plevel);
-        break;
+
     case Revtron_Set_File:
         return (Filenum);
-        break;
+
     case Revtron_Stretch:
         return (Pstretch);
-        break;
+
     case Revtron_Feedback:
         return (Pfb);
-        break;
+
     case Revtron_Pan:
         return (Ppanning);
-        break;
+
     case Revtron_Ex_Stereo:
         return (Pes);
-        break;
+
     case Revtron_Shuffle:
         return (Prv);
-        break;
+
     case Revtron_LPF:
         return (Plpf);
-        break;
+
     case Revtron_Diffusion:
         return (Pdiff);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

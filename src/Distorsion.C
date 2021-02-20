@@ -448,43 +448,43 @@ Distorsion::getpar(int npar)
     {
     case Dist_DryWet:
         return (Pvolume);
-        break;
+
     case Dist_Pan:
         return (Ppanning);
-        break;
+
     case Dist_LR_Cross:
         return (Plrcross);
-        break;
+
     case Dist_Drive:
         return (Pdrive);
-        break;
+
     case Dist_Level:
         return (Plevel);
-        break;
+
     case Dist_Type:
         return (Ptype);
-        break;
+
     case Dist_Negate:
         return (Pnegate);
-        break;
+
     case Dist_LPF:
         return (Plpf);
-        break;
+
     case Dist_HPF:
         return (Phpf);
-        break;
+
     case Dist_Stereo:
         return (Pstereo);
-        break;
+
     case Dist_Prefilter:
         return (Pprefiltering);
-        break;
+
     case Dist_SKIP_11:
         return (0);
-        break;
+
     case Dist_Suboctave:
         return (Poctave);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

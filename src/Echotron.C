@@ -857,52 +857,52 @@ Echotron::getpar(int npar)
     {
     case Echotron_DryWet:
         return (Pvolume);
-        break;
+
     case Echotron_Depth:
         return (Pdepth);
-        break;
+
     case Echotron_LFO_Width:
         return (Pwidth);
-        break;
+
     case Echotron_Taps:
         return (Plength);
-        break;
+
     case Echotron_User_File:
         return (Puser);
-        break;
+
     case Echotron_Tempo:
         return (Ptempo);
-        break;
+
     case Echotron_Damp:
         return (Phidamp);
-        break;
+
     case Echotron_LR_Cross:
         return (Plrcross);
-        break;
+
     case Echotron_Set_File:
         return (Filenum);
-        break;
+
     case Echotron_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case Echotron_Feedback:
         return (Pfb);
-        break;
+
     case Echotron_Pan:
         return (Ppanning);
-        break;
+
     case Echotron_Mod_Delay:
         return (Pmoddly); //modulate delays
-        break;
+
     case Echotron_Mod_Filter:
         return (Pmodfilts); //modulate filters
-        break;
+
     case Echotron_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Echotron_Filters:
         return (Pfilters); //Filter delay line on/off
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

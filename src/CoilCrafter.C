@@ -322,31 +322,31 @@ CoilCrafter::getpar(int npar)
     {
     case Coil_Gain:
         return (Pvolume);
-        break;
+
     case Coil_Origin:
         return (Ppo);
-        break;
+
     case Coil_Destiny:
         return (Ppd);
-        break;
+
     case Coil_Freq_1:
         return (Pfreq1);
-        break;
+
     case Coil_Q_1:
         return (Pq1);
-        break;
+
     case Coil_Freq_2:
         return (Pfreq2);
-        break;
+
     case Coil_Q_2:
         return (Pq2);
-        break;
+
     case Coil_Tone:
         return (Ptone);
-        break;
+
     case Coil_NeckMode:
         return (Pmode);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

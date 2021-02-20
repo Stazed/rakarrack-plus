@@ -568,7 +568,7 @@ Infinity::getpar(int npar)
     {
     case Infinity_DryWet:
         return (Pvolume);
-        break;
+
     case Infinity_Band_1:
     case Infinity_Band_2:
     case Infinity_Band_3:
@@ -578,34 +578,34 @@ Infinity::getpar(int npar)
     case Infinity_Band_7:
     case Infinity_Band_8:
         return (Pb[npar - 1]);
-        break;
+
     case Infinity_Resonance:
         return (Pq);
-        break;
+
     case Infinity_Start:
         return (Pstartfreq);
-        break;
+
     case Infinity_End:
         return (Pendfreq);
-        break;
+
     case Infinity_Tempo:
         return (Prate);
-        break;
+
     case Infinity_LR_Delay:
         return (Pstdf);
-        break;
+
     case Infinity_Subdivision:
         return (Psubdiv);
-        break;
+
     case Infinity_AutoPan:
         return (Pautopan);
-        break;
+
     case Infinity_Reverse:
         return (Preverse);
-        break;
+
     case Infinity_Stages:
         return (Pstages + 1);
-        break;
+
     }
 
     return (0);

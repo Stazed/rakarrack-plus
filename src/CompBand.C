@@ -453,43 +453,43 @@ CompBand::getpar(int npar)
     {
     case CompBand_DryWet:
         return (Pvolume);
-        break;
+
     case CompBand_Low_Ratio:
         return (PLratio);
-        break;
+
     case CompBand_Mid_1_Ratio:
         return (PMLratio);
-        break;
+
     case CompBand_Mid_2_Ratio:
         return (PMHratio);
-        break;
+
     case CompBand_High_Ratio:
         return (PHratio);
-        break;
+
     case CompBand_Low_Thresh:
         return (PLthres);
-        break;
+
     case CompBand_Mid_1_Thresh:
         return (PMLthres);
-        break;
+
     case CompBand_Mid_2_Thresh:
         return (PMHthres);
-        break;
+
     case CompBand_High_Thresh:
         return (PHthres);
-        break;
+
     case CompBand_Cross_1:
         return (Cross1);
-        break;
+
     case CompBand_Cross_2:
         return (Cross2);
-        break;
+
     case CompBand_Cross_3:
         return (Cross3);
-        break;
+
     case CompBand_Gain:
         return (Plevel);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

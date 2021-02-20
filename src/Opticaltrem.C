@@ -303,25 +303,25 @@ Opticaltrem::getpar(int npar)
     {
     case Optical_Depth:
         return (Pdepth);
-        break;
+
     case Optical_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case Optical_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case Optical_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case Optical_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case Optical_Pan:
         return (Ppanning);
-        break;
+
     case Optical_Invert:
         return (Pinvert);
-        break;
+
     }
     return (0);
 }

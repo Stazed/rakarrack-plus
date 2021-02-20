@@ -435,43 +435,43 @@ MusicDelay::getpar(int npar)
     {
     case Music_DryWet:
         return (Pvolume);
-        break;
+
     case Music_Pan_1:
         return (Ppanning1);
-        break;
+
     case Music_Delay_1:
         return (Pdelay1);
-        break;
+
     case Music_Del_Offset:
         return (Plrdelay);
-        break;
+
     case Music_LR_Cross:
         return (Plrcross);
-        break;
+
     case Music_Feedback_1:
         return (Pfb1);
-        break;
+
     case Music_Damp:
         return (Phidamp);
-        break;
+
     case Music_Pan_2:
         return (Ppanning2);
-        break;
+
     case Music_Delay_2:
         return (Pdelay2);
-        break;
+
     case Music_Feedback_2:
         return (Pfb2);
-        break;
+
     case Music_Tempo:
         return (Ptempo);
-        break;
+
     case Music_Gain_1:
         return (Pgain1);
-        break;
+
     case Music_Gain_2:
         return (Pgain2);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

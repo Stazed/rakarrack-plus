@@ -252,25 +252,25 @@ Expander::getpar(int npar)
     {
     case Expander_Threshold:
         return (Pthreshold);
-        break;
+
     case Expander_Shape:
         return (Pshape);
-        break;
+
     case Expander_Attack:
         return (Pattack);
-        break;
+
     case Expander_Release:
         return (Pdecay);
-        break;
+
     case Expander_LPF:
         return (Plpf);
-        break;
+
     case Expander_HPF:
         return (Phpf);
-        break;
+
     case Expander_Gain:
         return (Plevel);
-        break;
+
     }
 
     return (0);

@@ -502,65 +502,65 @@ MuTroMojo::getpar(int npar)
     {
     case MuTro_DryWet:
         return (Pvolume);
-        break;
+
     case MuTro_Resonance:
         return (Pq);
-        break;
+
     case MuTro_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case MuTro_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case MuTro_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case MuTro_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case MuTro_Depth:
         return (Pwidth);
-        break;
+
     case MuTro_Env_Sens:
         return (Pampsns);
-        break;
+
     case MuTro_Wah:
         return (Pampsnsinv);
-        break;
+
     case MuTro_Env_Smooth:
         return (Pampsmooth);
-        break;
+
     case MuTro_LowPass:
         return (Plp);
-        break;
+
     case MuTro_BandPass:
         return (Pbp);
-        break;
+
     case MuTro_HighPass:
         return (Php);
-        break;
+
     case MuTro_Stages:
         return (Pstages + 1);
-        break;
+
     case MuTro_Range:
         return (Prange);
-        break;
+
     case MuTro_St_Freq:
         return (Pminfreq);
-        break;
+
     case MuTro_Mod_Res:
         return (variq);
-        break;
+
     case Mutro_Mode_Legacy:
         return (Pmode);
-        break;
+
 #ifdef LV2_SUPPORT
     case MuTro_AG_Mode:
         return (Pqm);
-        break;
+
     case MuTro_Exp_Wah:
         return (Pamode);
-        break;
+
 #endif // LV2_SUPPORT
     }
 

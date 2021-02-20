@@ -196,10 +196,10 @@ Sustainer::getpar(int npar)
     {
     case Sustain_Gain:
         return (Pvolume);
-        break;
+
     case Sustain_Sustain:
         return (Psustain);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

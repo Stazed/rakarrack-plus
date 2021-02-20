@@ -665,25 +665,25 @@ MIDIConverter::getpar(int npar)
 #else // LV2_SUPPORT
         return 0;
 #endif
-        break;
+
     case MIDIConv_Trigger:
         return (Ptrigger);
-        break;
+
     case MIDIConv_Velocity:
         return (Pvelocity);
-        break;
+
     case MIDIConv_Midi:
         return (Pmidi);
-        break;
+
     case MIDIConv_Octave:
         return (Poctave);
-        break;
+
     case MIDIConv_FFT:
         return (Pfft);
-        break;
+
     case MIDIConv_Panic:
         return (Ppanic);
-        break;
+
     default:
         return (0);
     }

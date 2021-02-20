@@ -291,7 +291,7 @@ EQ::get_parameters (int npar)
     {
     case 0:
         return (Pvolume);
-        break;
+
     }
 
     if (npar < 10)
@@ -307,19 +307,19 @@ EQ::get_parameters (int npar)
     {
     case 0:
         return (filter[nb].Ptype);
-        break;
+
     case 1:
         return (filter[nb].Pfreq);
-        break;
+
     case 2:
         return (filter[nb].Pgain);
-        break;
+
     case 3:
         return (filter[nb].Pq);
-        break;
+
     case 4:
         return (filter[nb].Pstages);
-        break;
+
     }
 
     return (0); //in case of bogus parameter number
@@ -360,10 +360,10 @@ EQ::getpar(int npar)
     {
     case EQ_Gain:
         return get_parameters(0);
-        break;
+
     case EQ_Q:
         return get_parameters(EQ_Q + 2);
-        break;
+
     case EQ_31_HZ:
     case EQ_63_HZ:
     case EQ_125_HZ:
@@ -375,7 +375,7 @@ EQ::getpar(int npar)
     case EQ_8_KHZ:
     case EQ_16_KHZ:
         return get_parameters(npar * 5 + 12);
-        break;
+
     }
     
     return 0;

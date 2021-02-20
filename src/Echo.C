@@ -351,31 +351,31 @@ Echo::getpar(int npar)
     {
     case Echo_DryWet:
         return (Pvolume);
-        break;
+
     case Echo_Pan:
         return (Ppanning);
-        break;
+
     case Echo_Delay:
         return (Pdelay);
-        break;
+
     case Echo_LR_Delay:
         return (Plrdelay);
-        break;
+
     case Echo_LR_Cross:
         return (Plrcross);
-        break;
+
     case Echo_Feedback:
         return (Pfb);
-        break;
+
     case Echo_Damp:
         return (Phidamp);
-        break;
+
     case Echo_Reverse:
         return (Preverse);
-        break;
+
     case Echo_Direct:
         return (Pdirect);
-        break;
+
     };
     
     return (0); //in case of bogus parameter number

@@ -206,43 +206,43 @@ Exciter::getpar(int npar)
     {
     case Exciter_Gain:
         return (Pvolume);
-        break;
+
     case Exciter_Harm_1:
         return (Prm[0]);
-        break;
+
     case Exciter_Harm_2:
         return (Prm[1]);
-        break;
+
     case Exciter_Harm_3:
         return (Prm[2]);
-        break;
+
     case Exciter_Harm_4:
         return (Prm[3]);
-        break;
+
     case Exciter_Harm_5:
         return (Prm[4]);
-        break;
+
     case Exciter_Harm_6:
         return (Prm[5]);
-        break;
+
     case Exciter_Harm_7:
         return (Prm[6]);
-        break;
+
     case Exciter_Harm_8:
         return (Prm[7]);
-        break;
+
     case Exciter_Harm_9:
         return (Prm[8]);
-        break;
+
     case Exciter_Harm_10:
         return (Prm[9]);
-        break;
+
     case Exciter_LPF:
         return (lpffreq);
-        break;
+
     case Exciter_HPF:
         return (hpffreq);
-        break;
+
     }
     return (0); //in case of bogus parameter number
 }

@@ -386,37 +386,37 @@ WahWah::getpar(int npar)
     {
     case WahWah_DryWet:
         return (Pvolume);
-        break;
+
     case WahWah_Pan:
         return (Ppanning);
-        break;
+
     case WahWah_LFO_Tempo:
         return (lfo->Pfreq);
-        break;
+
     case WahWah_LFO_Random:
         return (lfo->Prandomness);
-        break;
+
     case WahWah_LFO_Type:
         return (lfo->PLFOtype);
-        break;
+
     case WahWah_LFO_Stereo:
         return (lfo->Pstereo);
-        break;
+
     case WahWah_Depth:
         return (Pdepth);
-        break;
+
     case WahWah_Sense:
         return (Pampsns);
-        break;
+
     case WahWah_ASI:
         return (Pampsnsinv);
-        break;
+
     case WahWah_Smooth:
         return (Pampsmooth);
-        break;
+
     case WahWah_Mode:
         return (Pmode);
-        break;
+
     }
 
     return (0);
