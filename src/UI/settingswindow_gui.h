@@ -496,8 +496,8 @@ private:
 public:
   RKR_Check_Button *MESSAGE_DISABLE;
 private:
-  inline void cb_MES_DIS_i(RKR_Check_Button*, void*);
-  static void cb_MES_DIS(RKR_Check_Button*, void*);
+  inline void cb_MESSAGE_DISABLE_i(RKR_Check_Button*, void*);
+  static void cb_MESSAGE_DISABLE(RKR_Check_Button*, void*);
 public:
   RKR_Check_Button *T_TIMEOUT;
 private:

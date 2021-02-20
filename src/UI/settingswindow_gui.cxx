@@ -206,7 +206,7 @@ void SettingsWindowGui::cb_L_SIZE(RKR_Counter* o, void* v) {
 
 void SettingsWindowGui::cb_LM_Volume_i(RKR_Counter* o, void*) {
   m_rkr->Metro_Vol=(int)o->value();
-Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+Looper *Efx_Looper = static_cast <Looper*> (m_rkr->Rack_Effects[EFX_LOOPER]);
 Efx_Looper->setmvol(m_rkr->Metro_Vol);
 }
 void SettingsWindowGui::cb_LM_Volume(RKR_Counter* o, void* v) {
@@ -998,11 +998,11 @@ void SettingsWindowGui::cb_Username(RKR_Input* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);
 }
 
-void SettingsWindowGui::cb_MES_DIS_i(RKR_Check_Button* o, void*) {
+void SettingsWindowGui::cb_MESSAGE_DISABLE_i(RKR_Check_Button* o, void*) {
   m_rkr->Disable_Warnings=(int) o->value();
 }
-void SettingsWindowGui::cb_MES_DIS(RKR_Check_Button* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MES_DIS_i(o,v);
+void SettingsWindowGui::cb_MESSAGE_DISABLE(RKR_Check_Button* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MESSAGE_DISABLE_i(o,v);
 }
 
 void SettingsWindowGui::cb_T_TIMEOUT_i(RKR_Check_Button* o, void*) {
@@ -2868,7 +2868,7 @@ this->when(FL_WHEN_RELEASE);
       MESSAGE_DISABLE->labelfont(0);
       MESSAGE_DISABLE->labelsize(12);
       MESSAGE_DISABLE->labelcolor(FL_BACKGROUND2_COLOR);
-      MESSAGE_DISABLE->callback((Fl_Callback*)cb_MES_DIS);
+      MESSAGE_DISABLE->callback((Fl_Callback*)cb_MESSAGE_DISABLE);
       MESSAGE_DISABLE->align(Fl_Align(FL_ALIGN_RIGHT));
       MESSAGE_DISABLE->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
@@ -3198,7 +3198,7 @@ void SettingsWindowGui::update_harmonizer_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_rkr->Rack_Effects[EFX_HARMONIZER];
-  m_rkr->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) rkr->HarQual, rkr->Har_Down, rkr->Har_U_Q, rkr->Har_D_Q, rkr->fSample_rate, rkr->period);
+  m_rkr->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_rkr->HarQual, m_rkr->Har_Down, m_rkr->Har_U_Q, m_rkr->Har_D_Q, m_rkr->fSample_rate, m_rkr->period);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   

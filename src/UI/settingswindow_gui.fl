@@ -35,7 +35,7 @@ decl {\#include "RKR_Scroll.h"} {public global
 decl {\#include "RKR_Tabs.h"} {public global
 }
 
-widget_class SettingsWindowGui {open
+widget_class SettingsWindowGui {open selected
   xywh {722 226 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_rkr = NULL;}
@@ -57,7 +57,7 @@ m_rgui= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 selected
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -327,7 +327,7 @@ m_rkr->m_displayed=1;
       }
       Fl_Counter LM_Volume {
         callback {m_rkr->Metro_Vol=(int)o->value();
-Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+Looper *Efx_Looper = static_cast <Looper*> (m_rkr->Rack_Effects[EFX_LOOPER]);
 Efx_Looper->setmvol(m_rkr->Metro_Vol);}
         tooltip {Looper Metronome Volume} xywh {165 237 47 18} type Simple labelsize 12 labelcolor 7 align 8 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
         code0 {o->set_label_offset(2);}
@@ -1716,7 +1716,7 @@ std::vector<int> save_state = Efx_Harmonizer->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_rkr->Rack_Effects[EFX_HARMONIZER];
-m_rkr->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) rkr->HarQual, rkr->Har_Down, rkr->Har_U_Q, rkr->Har_D_Q, rkr->fSample_rate, rkr->period);
+m_rkr->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_rkr->HarQual, m_rkr->Har_Down, m_rkr->Har_U_Q, m_rkr->Har_D_Q, m_rkr->fSample_rate, m_rkr->period);
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
