@@ -29,11 +29,14 @@
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 
+#include "../global.h"
+
 class RKR_Gui_Effect : public Fl_Group
 {
 public:
     RKR_Gui_Effect(int X, int Y, int W, int H, const char *L);
     
+    void initialize(RKR *_rkr, RKRGUI *_rgui);
     /**
      * Refresh gui parameter changes from MIDI control and preset changes.
      * 
@@ -47,9 +50,12 @@ public:
      */
     virtual void tap_tempo_update() {};
 
+    RKR* m_process; 
+    RKRGUI* m_parent; 
     RKR_Light_Button *activate_effect;
     RKR_Choice *preset_choice;
 
 };
 
 #endif /* RKR_GUI_EFFECT_H */
+

@@ -28,3 +28,10 @@
 RKR_Gui_Effect::RKR_Gui_Effect(int X, int Y, int W, int H, const char *L)
   : Fl_Group(X, Y, W, H, L)
 {}
+
+void
+RKR_Gui_Effect::initialize(RKR *_rkr, RKRGUI *_rgui )
+{
+    m_process = _rkr;
+    m_parent = _rgui;
+}

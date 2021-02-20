@@ -1238,6 +1238,7 @@ void RKRGUI::make_window() {
       EQ->when(FL_WHEN_RELEASE);
       EQ->hide();
       Efx_Gui_Base[EFX_EQ] = o;
+      o->initialize(rkr, this);
       EQ->end();
     } // EqGui* EQ
     { CompressGui* o = COMPRESS = new CompressGui(161, 212, 158, 184);
@@ -1253,6 +1254,7 @@ void RKRGUI::make_window() {
       COMPRESS->when(FL_WHEN_RELEASE);
       COMPRESS->hide();
       Efx_Gui_Base[EFX_COMPRESSOR] = o;
+      o->initialize(rkr, this);
       COMPRESS->end();
     } // CompressGui* COMPRESS
     { DistGui* o = DIST = new DistGui(320, 212, 158, 184);
@@ -1268,6 +1270,7 @@ void RKRGUI::make_window() {
       DIST->when(FL_WHEN_RELEASE);
       DIST->hide();
       Efx_Gui_Base[EFX_DISTORTION] = o;
+      o->initialize(rkr, this);
       DIST->end();
     } // DistGui* DIST
     { OvrdGui* o = OVRD = new OvrdGui(480, 212, 158, 184);
@@ -1283,6 +1286,7 @@ void RKRGUI::make_window() {
       OVRD->when(FL_WHEN_RELEASE);
       OVRD->hide();
       Efx_Gui_Base[EFX_OVERDRIVE] = o;
+      o->initialize(rkr, this);
       OVRD->end();
     } // OvrdGui* OVRD
     { EchoGui* o = ECHO = new EchoGui(639, 212, 158, 184);
@@ -1298,6 +1302,7 @@ void RKRGUI::make_window() {
       ECHO->when(FL_WHEN_RELEASE);
       ECHO->hide();
       Efx_Gui_Base[EFX_ECHO] = o;
+      o->initialize(rkr, this);
       ECHO->end();
     } // EchoGui* ECHO
     { ChorusGui* o = CHORUS = new ChorusGui(2, 413, 158, 184);
@@ -1313,6 +1318,7 @@ void RKRGUI::make_window() {
       CHORUS->when(FL_WHEN_RELEASE);
       CHORUS->hide();
       Efx_Gui_Base[EFX_CHORUS] = o;
+      o->initialize(rkr, this);
       CHORUS->end();
     } // ChorusGui* CHORUS
     { PhaserGui* o = PHASER = new PhaserGui(161, 413, 158, 184);
@@ -1328,6 +1334,7 @@ void RKRGUI::make_window() {
       PHASER->when(FL_WHEN_RELEASE);
       PHASER->hide();
       Efx_Gui_Base[EFX_PHASER] = o;
+      o->initialize(rkr, this);
       PHASER->end();
     } // PhaserGui* PHASER
     { FlangerGui* o = FLANGER = new FlangerGui(321, 413, 158, 184);
@@ -1343,6 +1350,7 @@ void RKRGUI::make_window() {
       FLANGER->when(FL_WHEN_RELEASE);
       FLANGER->hide();
       Efx_Gui_Base[EFX_FLANGER] = o;
+      o->initialize(rkr, this);
       FLANGER->end();
     } // FlangerGui* FLANGER
     { ReverbGui* o = REVERB = new ReverbGui(480, 413, 158, 184);
@@ -1358,6 +1366,7 @@ void RKRGUI::make_window() {
       REVERB->when(FL_WHEN_RELEASE);
       REVERB->hide();
       Efx_Gui_Base[EFX_REVERB] = o;
+      o->initialize(rkr, this);
       REVERB->end();
     } // ReverbGui* REVERB
     { PeqGui* o = PEQ = new PeqGui(639, 413, 158, 184);
@@ -1373,6 +1382,7 @@ void RKRGUI::make_window() {
       PEQ->when(FL_WHEN_RELEASE);
       PEQ->hide();
       Efx_Gui_Base[EFX_PARAMETRIC] = o;
+      o->initialize(rkr, this);
       PEQ->end();
     } // PeqGui* PEQ
     { WahwahGui* o = WAHWAH = new WahwahGui(2, 212, 158, 184);
@@ -1388,6 +1398,7 @@ void RKRGUI::make_window() {
       WAHWAH->when(FL_WHEN_RELEASE);
       WAHWAH->hide();
       Efx_Gui_Base[EFX_WAHWAH] = o;
+      o->initialize(rkr, this);
       WAHWAH->end();
     } // WahwahGui* WAHWAH
     { AlienwahGui* o = ALIENWAH = new AlienwahGui(161, 212, 158, 184);
@@ -1403,6 +1414,7 @@ void RKRGUI::make_window() {
       ALIENWAH->when(FL_WHEN_RELEASE);
       ALIENWAH->hide();
       Efx_Gui_Base[EFX_ALIENWAH] = o;
+      o->initialize(rkr, this);
       ALIENWAH->end();
     } // AlienwahGui* ALIENWAH
     { CabinetGui* o = CABINET = new CabinetGui(320, 212, 158, 184);
@@ -1418,6 +1430,7 @@ void RKRGUI::make_window() {
       CABINET->when(FL_WHEN_RELEASE);
       CABINET->hide();
       Efx_Gui_Base[EFX_CABINET] = o;
+      o->initialize(rkr, this);
       CABINET->end();
     } // CabinetGui* CABINET
     { PanGui* o = PAN = new PanGui(480, 212, 158, 184);
@@ -1433,6 +1446,7 @@ void RKRGUI::make_window() {
       PAN->when(FL_WHEN_RELEASE);
       PAN->hide();
       Efx_Gui_Base[EFX_PAN] = o;
+      o->initialize(rkr, this);
       PAN->end();
     } // PanGui* PAN
     { HarGui* o = HAR = new HarGui(639, 212, 158, 184);
@@ -1448,6 +1462,7 @@ void RKRGUI::make_window() {
       HAR->when(FL_WHEN_RELEASE);
       HAR->hide();
       Efx_Gui_Base[EFX_HARMONIZER] = o;
+      o->initialize(rkr, this);
       HAR->end();
     } // HarGui* HAR
     { MusdelayGui* o = MUSDELAY = new MusdelayGui(2, 413, 158, 184);
@@ -1463,6 +1478,7 @@ void RKRGUI::make_window() {
       MUSDELAY->when(FL_WHEN_RELEASE);
       MUSDELAY->hide();
       Efx_Gui_Base[EFX_MUSICAL_DELAY] = o;
+      o->initialize(rkr, this);
       MUSDELAY->end();
     } // MusdelayGui* MUSDELAY
     { GateGui* o = GATE = new GateGui(161, 413, 158, 184);
@@ -1478,6 +1494,7 @@ void RKRGUI::make_window() {
       GATE->when(FL_WHEN_RELEASE);
       GATE->hide();
       Efx_Gui_Base[EFX_NOISEGATE] = o;
+      o->initialize(rkr, this);
       GATE->end();
     } // GateGui* GATE
     { DerelictGui* o = DERELICT = new DerelictGui(321, 413, 158, 184);
@@ -1493,6 +1510,7 @@ void RKRGUI::make_window() {
       DERELICT->when(FL_WHEN_RELEASE);
       DERELICT->hide();
       Efx_Gui_Base[EFX_DERELICT] = o;
+      o->initialize(rkr, this);
       DERELICT->end();
     } // DerelictGui* DERELICT
     { AphaserGui* o = APHASER = new AphaserGui(480, 413, 158, 184);
@@ -1508,6 +1526,7 @@ void RKRGUI::make_window() {
       APHASER->when(FL_WHEN_RELEASE);
       APHASER->hide();
       Efx_Gui_Base[EFX_ANALOG_PHASER] = o;
+      o->initialize(rkr, this);
       APHASER->end();
     } // AphaserGui* APHASER
     { ValveGui* o = VALVE = new ValveGui(639, 413, 158, 184);
@@ -1523,6 +1542,7 @@ void RKRGUI::make_window() {
       VALVE->when(FL_WHEN_RELEASE);
       VALVE->hide();
       Efx_Gui_Base[EFX_VALVE] = o;
+      o->initialize(rkr, this);
       VALVE->end();
     } // ValveGui* VALVE
     { DflangeGui* o = DFLANGE = new DflangeGui(2, 212, 158, 184);
@@ -1538,6 +1558,7 @@ void RKRGUI::make_window() {
       DFLANGE->when(FL_WHEN_RELEASE);
       DFLANGE->hide();
       Efx_Gui_Base[EFX_DUAL_FLANGE] = o;
+      o->initialize(rkr, this);
       DFLANGE->end();
     } // DflangeGui* DFLANGE
     { RingGui* o = RING = new RingGui(161, 212, 158, 184);
@@ -1553,6 +1574,7 @@ void RKRGUI::make_window() {
       RING->when(FL_WHEN_RELEASE);
       RING->hide();
       Efx_Gui_Base[EFX_RING] = o;
+      o->initialize(rkr, this);
       RING->end();
     } // RingGui* RING
     { ExciterGui* o = EXCITER = new ExciterGui(320, 212, 158, 184);
@@ -1568,6 +1590,7 @@ void RKRGUI::make_window() {
       EXCITER->when(FL_WHEN_RELEASE);
       EXCITER->hide();
       Efx_Gui_Base[EFX_EXCITER] = o;
+      o->initialize(rkr, this);
       EXCITER->end();
     } // ExciterGui* EXCITER
     { DistBandGui* o = DISTBAND = new DistBandGui(480, 212, 158, 184);
@@ -1583,6 +1606,7 @@ void RKRGUI::make_window() {
       DISTBAND->when(FL_WHEN_RELEASE);
       DISTBAND->hide();
       Efx_Gui_Base[EFX_DISTBAND] = o;
+      o->initialize(rkr, this);
       DISTBAND->end();
     } // DistBandGui* DISTBAND
     { ArpieGui* o = ARPIE = new ArpieGui(639, 212, 158, 184);
@@ -1598,6 +1622,7 @@ void RKRGUI::make_window() {
       ARPIE->when(FL_WHEN_RELEASE);
       ARPIE->hide();
       Efx_Gui_Base[EFX_ARPIE] = o;
+      o->initialize(rkr, this);
       ARPIE->end();
     } // ArpieGui* ARPIE
     { ExpanderGui* o = EXPANDER = new ExpanderGui(2, 413, 158, 184);
@@ -1613,6 +1638,7 @@ void RKRGUI::make_window() {
       EXPANDER->when(FL_WHEN_RELEASE);
       EXPANDER->hide();
       Efx_Gui_Base[EFX_EXPANDER] = o;
+      o->initialize(rkr, this);
       EXPANDER->end();
     } // ExpanderGui* EXPANDER
     { ShuffleGui* o = SHUFFLE = new ShuffleGui(161, 413, 158, 184);
@@ -1628,6 +1654,7 @@ void RKRGUI::make_window() {
       SHUFFLE->when(FL_WHEN_RELEASE);
       SHUFFLE->hide();
       Efx_Gui_Base[EFX_SHUFFLE] = o;
+      o->initialize(rkr, this);
       SHUFFLE->end();
     } // ShuffleGui* SHUFFLE
     { SynthfilterGui* o = SYNTHFILTER = new SynthfilterGui(321, 413, 158, 184);
@@ -1643,6 +1670,7 @@ void RKRGUI::make_window() {
       SYNTHFILTER->when(FL_WHEN_RELEASE);
       SYNTHFILTER->hide();
       Efx_Gui_Base[EFX_SYNTHFILTER] = o;
+      o->initialize(rkr, this);
       SYNTHFILTER->end();
     } // SynthfilterGui* SYNTHFILTER
     { VarybandGui* o = VARYBAND = new VarybandGui(480, 413, 158, 184);
@@ -1658,6 +1686,7 @@ void RKRGUI::make_window() {
       VARYBAND->when(FL_WHEN_RELEASE);
       VARYBAND->hide();
       Efx_Gui_Base[EFX_VARYBAND] = o;
+      o->initialize(rkr, this);
       VARYBAND->end();
     } // VarybandGui* VARYBAND
     { ConvoGui* o = CONVOLOTRON = new ConvoGui(639, 413, 158, 184);
@@ -1673,6 +1702,7 @@ void RKRGUI::make_window() {
       CONVOLOTRON->when(FL_WHEN_RELEASE);
       CONVOLOTRON->hide();
       Efx_Gui_Base[EFX_CONVOLOTRON] = o;
+      o->initialize(rkr, this);
       CONVOLOTRON->end();
     } // ConvoGui* CONVOLOTRON
     { LooperGui* o = LOOPER = new LooperGui(2, 212, 158, 184);
@@ -1688,6 +1718,7 @@ void RKRGUI::make_window() {
       LOOPER->when(FL_WHEN_RELEASE);
       LOOPER->hide();
       Efx_Gui_Base[EFX_LOOPER] = o;
+      o->initialize(rkr, this);
       LOOPER->end();
     } // LooperGui* LOOPER
     { MutromojoGui* o = MUTROMOJO = new MutromojoGui(161, 212, 158, 184);
@@ -1703,6 +1734,7 @@ void RKRGUI::make_window() {
       MUTROMOJO->when(FL_WHEN_RELEASE);
       MUTROMOJO->hide();
       Efx_Gui_Base[EFX_MUTROMOJO] = o;
+      o->initialize(rkr, this);
       MUTROMOJO->end();
     } // MutromojoGui* MUTROMOJO
     { EchoverseGui* o = ECHOVERSE = new EchoverseGui(320, 212, 158, 184);
@@ -1718,6 +1750,7 @@ void RKRGUI::make_window() {
       ECHOVERSE->when(FL_WHEN_RELEASE);
       ECHOVERSE->hide();
       Efx_Gui_Base[EFX_ECHOVERSE] = o;
+      o->initialize(rkr, this);
       ECHOVERSE->end();
     } // EchoverseGui* ECHOVERSE
     { CoilGui* o = COILCRAFTER = new CoilGui(480, 212, 158, 184);
@@ -1733,6 +1766,7 @@ void RKRGUI::make_window() {
       COILCRAFTER->when(FL_WHEN_RELEASE);
       COILCRAFTER->hide();
       Efx_Gui_Base[EFX_COILCRAFTER] = o;
+      o->initialize(rkr, this);
       COILCRAFTER->end();
     } // CoilGui* COILCRAFTER
     { ShelfGui* o = SHELFBOOST = new ShelfGui(639, 212, 158, 184);
@@ -1748,6 +1782,7 @@ void RKRGUI::make_window() {
       SHELFBOOST->when(FL_WHEN_RELEASE);
       SHELFBOOST->hide();
       Efx_Gui_Base[EFX_SHELFBOOST] = o;
+      o->initialize(rkr, this);
       SHELFBOOST->end();
     } // ShelfGui* SHELFBOOST
     { VocoderGui* o = VOCODER = new VocoderGui(2, 413, 158, 184);
@@ -1763,6 +1798,7 @@ void RKRGUI::make_window() {
       VOCODER->when(FL_WHEN_RELEASE);
       VOCODER->hide();
       Efx_Gui_Base[EFX_VOCODER] = o;
+      o->initialize(rkr, this);
       VOCODER->end();
     } // VocoderGui* VOCODER
     { SustainGui* o = SUSTAINER = new SustainGui(161, 413, 158, 184);
@@ -1778,6 +1814,7 @@ void RKRGUI::make_window() {
       SUSTAINER->when(FL_WHEN_RELEASE);
       SUSTAINER->hide();
       Efx_Gui_Base[EFX_SUSTAINER] = o;
+      o->initialize(rkr, this);
       SUSTAINER->end();
     } // SustainGui* SUSTAINER
     { SequenceGui* o = SEQUENCE = new SequenceGui(321, 413, 158, 184);
@@ -1793,6 +1830,7 @@ void RKRGUI::make_window() {
       SEQUENCE->when(FL_WHEN_RELEASE);
       SEQUENCE->hide();
       Efx_Gui_Base[EFX_SEQUENCE] = o;
+      o->initialize(rkr, this);
       SEQUENCE->end();
     } // SequenceGui* SEQUENCE
     { ShifterGui* o = SHIFTER = new ShifterGui(480, 413, 158, 184);
@@ -1808,6 +1846,7 @@ void RKRGUI::make_window() {
       SHIFTER->when(FL_WHEN_RELEASE);
       SHIFTER->hide();
       Efx_Gui_Base[EFX_SHIFTER] = o;
+      o->initialize(rkr, this);
       SHIFTER->end();
     } // ShifterGui* SHIFTER
     { StompboxGui* o = STOMPBOX = new StompboxGui(639, 413, 158, 184);
@@ -1823,6 +1862,7 @@ void RKRGUI::make_window() {
       STOMPBOX->when(FL_WHEN_RELEASE);
       STOMPBOX->hide();
       Efx_Gui_Base[EFX_STOMPBOX] = o;
+      o->initialize(rkr, this);
       STOMPBOX->end();
     } // StompboxGui* STOMPBOX
     { RevtronGui* o = REVERBTRON = new RevtronGui(2, 212, 158, 184);
@@ -1838,6 +1878,7 @@ void RKRGUI::make_window() {
       REVERBTRON->when(FL_WHEN_RELEASE);
       REVERBTRON->hide();
       Efx_Gui_Base[EFX_REVERBTRON] = o;
+      o->initialize(rkr, this);
       REVERBTRON->end();
     } // RevtronGui* REVERBTRON
     { EchotronGui* o = ECHOTRON = new EchotronGui(161, 212, 158, 184);
@@ -1853,6 +1894,7 @@ void RKRGUI::make_window() {
       ECHOTRON->when(FL_WHEN_RELEASE);
       ECHOTRON->hide();
       Efx_Gui_Base[EFX_ECHOTRON] = o;
+      o->initialize(rkr, this);
       ECHOTRON->end();
     } // EchotronGui* ECHOTRON
     { SharGui* o = SHAR = new SharGui(320, 212, 158, 184);
@@ -1868,6 +1910,7 @@ void RKRGUI::make_window() {
       SHAR->when(FL_WHEN_RELEASE);
       SHAR->hide();
       Efx_Gui_Base[EFX_STEREOHARM] = o;
+      o->initialize(rkr, this);
       SHAR->end();
     } // SharGui* SHAR
     { CbandGui* o = COMPBAND = new CbandGui(480, 212, 158, 184);
@@ -1883,6 +1926,7 @@ void RKRGUI::make_window() {
       COMPBAND->when(FL_WHEN_RELEASE);
       COMPBAND->hide();
       Efx_Gui_Base[EFX_COMPBAND] = o;
+      o->initialize(rkr, this);
       COMPBAND->end();
     } // CbandGui* COMPBAND
     { OtremGui* o = OTREM = new OtremGui(639, 212, 158, 184);
@@ -1898,6 +1942,7 @@ void RKRGUI::make_window() {
       OTREM->when(FL_WHEN_RELEASE);
       OTREM->hide();
       Efx_Gui_Base[EFX_OPTICALTREM] = o;
+      o->initialize(rkr, this);
       OTREM->end();
     } // OtremGui* OTREM
     { VibeGui* o = VIBE = new VibeGui(2, 413, 158, 184);
@@ -1913,6 +1958,7 @@ void RKRGUI::make_window() {
       VIBE->when(FL_WHEN_RELEASE);
       VIBE->hide();
       Efx_Gui_Base[EFX_VIBE] = o;
+      o->initialize(rkr, this);
       VIBE->end();
     } // VibeGui* VIBE
     { InfinityGui* o = INFINIT = new InfinityGui(161, 413, 158, 184);
@@ -1928,6 +1974,7 @@ void RKRGUI::make_window() {
       INFINIT->when(FL_WHEN_RELEASE);
       INFINIT->hide();
       Efx_Gui_Base[EFX_INFINITY] = o;
+      o->initialize(rkr, this);
       INFINIT->end();
     } // InfinityGui* INFINIT
     { Tuner = new Fl_Group(520, 24, 276, 58);
