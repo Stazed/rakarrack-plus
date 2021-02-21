@@ -746,7 +746,7 @@ void RKRGUI::load_previous_state()
     char tmp[256];
     sprintf(tmp, "%s/blackbg.png", DATADIR);
 
-    rakarrack.get(rkr->PrefNom("Enable Background Image"), rkr->EnableBackgroundImage, 1);
+    rakarrack.get(rkr->PrefNom("Enable Background Image"), rkr->EnableBackgroundImage, 0);
     rakarrack.get(rkr->PrefNom("Background Image"), rkr->BackgroundImage, tmp, 256);
     PutBackground();
     rakarrack.get(rkr->PrefNom("FontSize"), rkr->fontsize, C_DEFAULT_FONT_SIZE);
@@ -754,11 +754,11 @@ void RKRGUI::load_previous_state()
         chfsize(rkr->fontsize);
     rakarrack.get(rkr->PrefNom("Font"), rkr->font, 0);
 
-    rakarrack.get(rkr->PrefNom("Background Color"), b, 56);
-    rakarrack.get(rkr->PrefNom("Foreground Color"), f, 34499072);
-    rakarrack.get(rkr->PrefNom("Leds Color"), l, -13485824);
-    rakarrack.get(rkr->PrefNom("Labels Color"), a, -1075849984);
-    rakarrack.get(rkr->PrefNom("Schema"), k, 4);
+    rakarrack.get(rkr->PrefNom("Background Color"), b, FL_BLACK);
+    rakarrack.get(rkr->PrefNom("Foreground Color"), f, FL_DARK3);
+    rakarrack.get(rkr->PrefNom("Leds Color"), l, FL_DARK_YELLOW);
+    rakarrack.get(rkr->PrefNom("Labels Color"), a, FL_WHITE);
+    rakarrack.get(rkr->PrefNom("Schema"), k, 2);
     Settings->scheme_ch->value(k);
     Settings->scheme_ch->do_callback();
     rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide, 0);
