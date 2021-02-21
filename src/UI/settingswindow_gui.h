@@ -522,8 +522,8 @@ public:
 private:
   inline void cb_UD_Browser_i(RKR_Button*, void*);
   static void cb_UD_Browser(RKR_Button*, void*);
-  RKR* m_rkr; 
-  RKRGUI* m_rgui; 
+  RKR* m_process; 
+  RKRGUI* m_parent; 
 public:
   void initialize(RKR *_rkr,RKRGUI *_rgui );
   Fl_Menu_Item * get_menu_Har_Downsample();

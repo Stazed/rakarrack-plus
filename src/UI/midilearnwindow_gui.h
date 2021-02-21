@@ -112,8 +112,8 @@ public:
 private:
   inline void cb_M_fil_current_i(RKR_Button*, void*);
   static void cb_M_fil_current(RKR_Button*, void*);
-  RKR* m_rkr; 
-  RKRGUI* m_rgui; 
+  RKR* m_process; 
+  RKRGUI* m_parent; 
 public:
   void initialize(RKR *_rkr,RKRGUI *_rgui );
 };

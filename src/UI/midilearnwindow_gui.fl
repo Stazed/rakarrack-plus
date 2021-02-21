@@ -17,14 +17,14 @@ decl {\#include "RKR_Value_Input.h"} {public global
 widget_class MidiLearnWindowGui {open
   xywh {24 108 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
-  code1 {this->m_rkr = NULL;}
-  code2 {this->m_rgui = NULL;}
+  code1 {this->m_process = NULL;}
+  code2 {this->m_parent = NULL;}
   class Fl_Double_Window visible
 } {
   Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
   } {
-    code {m_rkr = _rkr;
-m_rgui= _rgui;} {}
+    code {m_process = _rkr;
+m_parent= _rgui;} {}
   }
   Fl_Box Fondo4 {
     xywh {1 1 640 480}
@@ -37,16 +37,16 @@ m_rgui= _rgui;} {}
   }
   Fl_Browser Epar {
     user_data 99
-    callback {m_rgui->DisAssigns();}
+    callback {m_parent->DisAssigns();}
     xywh {10 58 201 348} type Hold textcolor 7
     class RKR_Browser
   }
   Fl_Button GMM {
     label {Get MIDI Message}
     user_data 77
-    callback {m_rkr->ControlGet=0;
-m_rkr->CountWait=0;
-m_rkr->RControl=1;}
+    callback {m_process->ControlGet=0;
+m_process->CountWait=0;
+m_process->RControl=1;}
     xywh {10 445 135 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -58,8 +58,8 @@ m_rkr->RControl=1;}
   Fl_Button CopyF {
     label {Copy from: }
     user_data 77
-    callback {memcpy(m_rkr->XUserMIDI,m_rkr->Bank[TPresets->value()].XUserMIDI,sizeof(m_rkr->XUserMIDI));
-  m_rgui->DisAssigns();}
+    callback {memcpy(m_process->XUserMIDI,m_process->Bank[TPresets->value()].XUserMIDI,sizeof(m_process->XUserMIDI));
+  m_parent->DisAssigns();}
     xywh {430 20 95 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -67,7 +67,7 @@ m_rkr->RControl=1;}
   Fl_Button CopyT {
     label {Copy to: }
     user_data 77
-    callback {memcpy(m_rkr->Bank[TPresets->value()].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));}
+    callback {memcpy(m_process->Bank[TPresets->value()].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));}
     xywh {535 20 95 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -162,26 +162,26 @@ m_rkr->RControl=1;}
     callback {int i, j,k;
 int the_one;
 
-if (m_rkr->ML_filter==0)
- the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
+if (m_process->ML_filter==0)
+ the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
  else
- the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+ the_one = m_process->ML_clist[(int)Epar->value()-1];
 
 
 for(i=0; i<128; i++)
   {
     for(j=0;j<20;j++)
       {
-         if (m_rkr->XUserMIDI[i][j] == the_one)
+         if (m_process->XUserMIDI[i][j] == the_one)
            {
-             for(k=j+1;k<20;k++) m_rkr->XUserMIDI[i][k-1]=m_rkr->XUserMIDI[i][k];
-             m_rkr->XUserMIDI[i][19]=0;             
+             for(k=j+1;k<20;k++) m_process->XUserMIDI[i][k-1]=m_process->XUserMIDI[i][k];
+             m_process->XUserMIDI[i][19]=0;             
            }
        
        }  
    }
    
-    m_rgui->DisAssigns();}
+    m_parent->DisAssigns();}
     xywh {245 250 150 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -189,8 +189,8 @@ for(i=0; i<128; i++)
   Fl_Button ClearP {
     label {Clear Preset}
     user_data 77
-    callback {memset(m_rkr->XUserMIDI, 0, sizeof(m_rkr->XUserMIDI));
-    m_rgui->DisAssigns();}
+    callback {memset(m_process->XUserMIDI, 0, sizeof(m_process->XUserMIDI));
+    m_parent->DisAssigns();}
     xywh {245 285 150 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -204,26 +204,26 @@ int the_one = 0;
 
 if((int)Epar->value()-1 >= 0)
 {
-    if (m_rkr->ML_filter==0)
-        the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
+    if (m_process->ML_filter==0)
+        the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
     else
-        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+        the_one = m_process->ML_clist[(int)Epar->value()-1];
 }
 
 for(i=0;i<20;i++)
 
  {
-    if(m_rkr->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
+    if(m_process->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
 
-    if(m_rkr->XUserMIDI[(int)Disp_Control->value()][i] ==0)
+    if(m_process->XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         m_rkr->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
+         m_process->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
  
  
-    m_rgui->DisAssigns();}
+    m_parent->DisAssigns();}
     xywh {112 20 98 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -236,10 +236,10 @@ int the_one = 0;
 
 if((int)Epar->value()-1 >= 0)
 {
-    if (m_rkr->ML_filter==0)
-        the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
+    if (m_process->ML_filter==0)
+        the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
     else
-        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+        the_one = m_process->ML_clist[(int)Epar->value()-1];
 }
 
 for(j=1;j<61;j++)
@@ -248,11 +248,11 @@ for(j=1;j<61;j++)
 for(i=0;i<20;i++)
 
  {
-    if(m_rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == the_one) break;
+    if(m_process->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == the_one) break;
 
-    if(m_rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
+    if(m_process->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         m_rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=the_one;
+         m_process->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
@@ -267,7 +267,7 @@ Assign->do_callback();}
   Fl_Button CancelRec {
     label Cancel
     user_data 77
-    callback {m_rkr->RControl = 0;
+    callback {m_process->RControl = 0;
 GMM->color(fore_color);
 GMM->redraw();}
     xywh {200 450 60 20}
@@ -285,7 +285,7 @@ if(o->value()< 1) o->value(1);} selected
     label {Copy to All}
     user_data 77
     callback {int i;
-for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));}
+for(i=1;i<61;i++) memcpy(m_process->Bank[i].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));}
     xywh {480 412 150 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -303,23 +303,23 @@ for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr
   } {
     Fl_Button M_fil_all {
       label All
-      callback {m_rkr->ML_filter=0;
-      m_rgui->FillML();}
+      callback {m_process->ML_filter=0;
+      m_parent->FillML();}
       xywh {16 415 89 20} type Radio
       code0 {o->set_label_offset(4);}
       class RKR_Button
     }
     Fl_Button M_fil_current {
       label Current
-      callback {m_rkr->ML_filter=1;
-      m_rgui->FillML();}
+      callback {m_process->ML_filter=1;
+      m_parent->FillML();}
       xywh {113 415 89 20} type Radio
       code0 {o->set_label_offset(4);}
       class RKR_Button
     }
   }
-  decl {RKR* m_rkr} {private local
+  decl {RKR* m_process} {private local
   }
-  decl {RKRGUI* m_rgui} {private local
+  decl {RKRGUI* m_parent} {private local
   }
 }

@@ -34,7 +34,7 @@ public:
     void set_scope_ON(bool a_set){Scope_ON = a_set;}
     bool get_scope_ON(){return Scope_ON;}
 private:
-    RKRGUI *m_rgui;
+    RKRGUI *m_parent;
     float *spl; 
     float *spr; 
     int ns; 

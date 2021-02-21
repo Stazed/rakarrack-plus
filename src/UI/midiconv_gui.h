@@ -50,8 +50,8 @@ public:
   Fl_Box *Mled;
   RKR_Box *MIDI_LABEL;
 private:
-  RKR  *m_rkr; 
-  RKRGUI *m_rgui; 
+  RKR  *m_process; 
+  RKRGUI *m_parent; 
 public:
   void initialize(RKR* _rkr, RKRGUI* _rgui);
 };

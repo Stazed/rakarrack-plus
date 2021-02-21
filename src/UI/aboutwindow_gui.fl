@@ -6,12 +6,12 @@ widget_class AboutWindowGui {
   label {About Rakarrack-Plus} open selected
   xywh {1474 56 375 280} type Double
   code0 {\#include "rakarrack.h"}
-  code1 {this->m_rgui = NULL;}
+  code1 {this->m_parent = NULL;}
   class Fl_Double_Window visible
 } {
   Function {initialize(RKRGUI *_rgui )} {open C return_type void
   } {
-    code {m_rgui= _rgui;} {}
+    code {m_parent= _rgui;} {}
   }
   Fl_Box AB_Title {
     label {Rakarrack +}
@@ -58,7 +58,7 @@ widget_class AboutWindowGui {
   }
   Fl_Button {} {
     label LICENSE
-    callback {m_rgui->show_lic();}
+    callback {m_parent->show_lic();}
     xywh {48 252 92 16} labelsize 10
   }
   Fl_Button {} {
@@ -66,6 +66,6 @@ widget_class AboutWindowGui {
     callback {hide();}
     xywh {239 252 92 16} labelsize 10
   }
-  decl {RKRGUI* m_rgui} {private local
+  decl {RKRGUI* m_parent} {private local
   }
 }

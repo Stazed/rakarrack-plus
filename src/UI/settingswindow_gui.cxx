@@ -54,29 +54,29 @@ Fl_Menu_Item SettingsWindowGui::menu_scheme_ch[] = {
 };
 
 void SettingsWindowGui::cb_Font_Bro_i(RKR_Browser* o, void*) {
-  m_rkr->font = (int)o->value()-1;
-m_rgui->chfsize(C_DONT_CHANGE_FONT_SIZE);
+  m_process->font = (int)o->value()-1;
+m_parent->chfsize(C_DONT_CHANGE_FONT_SIZE);
 }
 void SettingsWindowGui::cb_Font_Bro(RKR_Browser* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Font_Bro_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSless_i(RKR_Button*, void*) {
-  m_rgui->chfsize(global_font_size - 1);
+  m_parent->chfsize(global_font_size - 1);
 }
 void SettingsWindowGui::cb_FSless(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSless_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSplus_i(RKR_Button*, void*) {
-  m_rgui->chfsize(global_font_size + 1);
+  m_parent->chfsize(global_font_size + 1);
 }
 void SettingsWindowGui::cb_FSplus(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSplus_i(o,v);
 }
 
 void SettingsWindowGui::cb_FSReset_i(RKR_Button*, void*) {
-  m_rgui->chfsize(C_DEFAULT_FONT_SIZE);
+  m_parent->chfsize(C_DEFAULT_FONT_SIZE);
 }
 void SettingsWindowGui::cb_FSReset(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSReset_i(o,v);
@@ -88,7 +88,7 @@ void SettingsWindowGui::cb_B_C_i(RKR_Button*, void*) {
 Fl::get_color(fore_color,r,g,b);
 if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
 fore_color=fl_rgb_color(r,g,b);
-m_rgui->Buttons_Color_Change(fore_color);
+m_parent->Buttons_Color_Change(fore_color);
 }
 void SettingsWindowGui::cb_B_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_B_C_i(o,v);
@@ -99,7 +99,7 @@ void SettingsWindowGui::cb_A_C_i(RKR_Button*, void*) {
 Fl::get_color(label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
 label_color=fl_rgb_color(r,g,b);
-m_rgui->Label_Color_Change(label_color);
+m_parent->Label_Color_Change(label_color);
 }
 void SettingsWindowGui::cb_A_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_A_C_i(o,v);
@@ -110,7 +110,7 @@ void SettingsWindowGui::cb_L_C_i(RKR_Button*, void*) {
 Fl::get_color(leds_color,r,g,b);
 if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
 leds_color=fl_rgb_color(r,g,b);
-m_rgui->Leds_Color_Change(leds_color);
+m_parent->Leds_Color_Change(leds_color);
 }
 void SettingsWindowGui::cb_L_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_L_C_i(o,v);
@@ -121,15 +121,15 @@ void SettingsWindowGui::cb_K_C_i(RKR_Button*, void*) {
 Fl::get_color(back_color,r,g,b);
 if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
 back_color=fl_rgb_color(r,g,b);
-m_rgui->Background_Color_Change(back_color);
+m_parent->Background_Color_Change(back_color);
 }
 void SettingsWindowGui::cb_K_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_K_C_i(o,v);
 }
 
 void SettingsWindowGui::cb_Enable_Back_i(RKR_Check_Button* o, void*) {
-  m_rkr->EnableBackgroundImage=(int) o->value();
-m_rgui->PutBackground();
+  m_process->EnableBackgroundImage=(int) o->value();
+m_parent->PutBackground();
 }
 void SettingsWindowGui::cb_Enable_Back(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Enable_Back_i(o,v);
@@ -141,63 +141,63 @@ filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
-strcpy(m_rkr->BackgroundImage,filename);
-m_rgui->PutBackground();
+strcpy(m_process->BackgroundImage,filename);
+m_parent->PutBackground();
 }
 void SettingsWindowGui::cb_BI_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BI_Browser_i(o,v);
 }
 
 void SettingsWindowGui::cb_Enable_DeacHide_i(RKR_Check_Button* o, void*) {
-  m_rkr->deachide=(int) o->value();
-  m_rgui->reordena();
+  m_process->deachide=(int) o->value();
+  m_parent->reordena();
 }
 void SettingsWindowGui::cb_Enable_DeacHide(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Enable_DeacHide_i(o,v);
 }
 
 void SettingsWindowGui::cb_Enable_Scale_i(RKR_Check_Button* o, void*) {
-  m_rkr->scalable=(int) o->value();
-m_rkr->change_scale = 1; // true;
+  m_process->scalable=(int) o->value();
+m_process->change_scale = 1; // true;
 }
 void SettingsWindowGui::cb_Enable_Scale(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Enable_Scale_i(o,v);
 }
 
 void SettingsWindowGui::cb_INSTATE_i(RKR_Check_Button* o, void*) {
-  m_rkr->init_state=(int) o->value();
+  m_process->init_state=(int) o->value();
 }
 void SettingsWindowGui::cb_INSTATE(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_INSTATE_i(o,v);
 }
 
 void SettingsWindowGui::cb_Filter_DC_i(RKR_Check_Button* o, void*) {
-  m_rkr->DC_Offset=(int) o->value();
+  m_process->DC_Offset=(int) o->value();
 }
 void SettingsWindowGui::cb_Filter_DC(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Filter_DC_i(o,v);
 }
 
 void SettingsWindowGui::cb_Pre_Serve_i(RKR_Check_Button* o, void*) {
-  m_rkr->actuvol=(int) o->value();
+  m_process->actuvol=(int) o->value();
 }
 void SettingsWindowGui::cb_Pre_Serve(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Pre_Serve_i(o,v);
 }
 
 void SettingsWindowGui::cb_Update_TAP_i(RKR_Check_Button* o, void*) {
-  m_rkr->Tap_Updated = (int) o->value();
+  m_process->Tap_Updated = (int) o->value();
 }
 void SettingsWindowGui::cb_Update_TAP(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Update_TAP_i(o,v);
 }
 
 void SettingsWindowGui::cb_L_SIZE_i(RKR_Counter* o, void*) {
-  m_rkr->looper_size=o->value();
-if(!m_rkr->m_displayed)
+  m_process->looper_size=o->value();
+if(!m_process->m_displayed)
 {
-m_rgui->Show_Next_Time();
-m_rkr->m_displayed=1;
+m_parent->Show_Next_Time();
+m_process->m_displayed=1;
 };
 }
 void SettingsWindowGui::cb_L_SIZE(RKR_Counter* o, void* v) {
@@ -205,60 +205,60 @@ void SettingsWindowGui::cb_L_SIZE(RKR_Counter* o, void* v) {
 }
 
 void SettingsWindowGui::cb_LM_Volume_i(RKR_Counter* o, void*) {
-  m_rkr->Metro_Vol=(int)o->value();
-Looper *Efx_Looper = static_cast <Looper*> (m_rkr->Rack_Effects[EFX_LOOPER]);
-Efx_Looper->setmvol(m_rkr->Metro_Vol);
+  m_process->Metro_Vol=(int)o->value();
+Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
+Efx_Looper->setmvol(m_process->Metro_Vol);
 }
 void SettingsWindowGui::cb_LM_Volume(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_LM_Volume_i(o,v);
 }
 
 void SettingsWindowGui::cb_FLPosition_i(RKR_Check_Button* o, void*) {
-  m_rkr->flpos=(int)o->value();
+  m_process->flpos=(int)o->value();
 }
 void SettingsWindowGui::cb_FLPosition(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FLPosition_i(o,v);
 }
 
 void SettingsWindowGui::cb_DB6B_i(RKR_Check_Button* o, void*) {
-  m_rkr->db6booster=(int)o->value();
+  m_process->db6booster=(int)o->value();
 }
 void SettingsWindowGui::cb_DB6B(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_DB6B_i(o,v);
 }
 
 void SettingsWindowGui::cb_Calibration_i(RKR_Counter* o, void*) {
-  m_rkr->aFreq=o->value();
-m_rkr->HarmRecNote->update_freqs(m_rkr->aFreq);
-m_rkr->StHarmRecNote->update_freqs(m_rkr->aFreq);
-m_rkr->RingRecNote->update_freqs(m_rkr->aFreq);
+  m_process->aFreq=o->value();
+m_process->HarmRecNote->update_freqs(m_process->aFreq);
+m_process->StHarmRecNote->update_freqs(m_process->aFreq);
+m_process->RingRecNote->update_freqs(m_process->aFreq);
 }
 void SettingsWindowGui::cb_Calibration(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Calibration_i(o,v);
 }
 
 void SettingsWindowGui::cb_RTrigger_i(RKR_Counter* o, void*) {
-  m_rkr->rtrig = o->value();
-m_rkr->HarmRecNote->trigfact = o->value();
-m_rkr->StHarmRecNote->trigfact = o->value();
-m_rkr->RingRecNote->trigfact = o->value();
+  m_process->rtrig = o->value();
+m_process->HarmRecNote->trigfact = o->value();
+m_process->StHarmRecNote->trigfact = o->value();
+m_process->RingRecNote->trigfact = o->value();
 }
 void SettingsWindowGui::cb_RTrigger(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_RTrigger_i(o,v);
 }
 
 void SettingsWindowGui::cb_UPSAMPLE_C_i(RKR_Check_Button* o, void*) {
-  m_rkr->upsample=(int)o->value();
-m_rgui->Show_Next_Time();
+  m_process->upsample=(int)o->value();
+m_parent->Show_Next_Time();
 }
 void SettingsWindowGui::cb_UPSAMPLE_C(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UPSAMPLE_C_i(o,v);
 }
 
 void SettingsWindowGui::cb_Upr_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->UpAmo =(int) o->value();
+  m_process->UpAmo =(int) o->value();
 
-m_rgui->Show_Next_Time();
+m_parent->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Upr_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Upr_Amo_i(o,v);
@@ -280,9 +280,9 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Amo[] = {
 };
 
 void SettingsWindowGui::cb_Upr_Qual_i(RKR_Choice* o, void*) {
-  m_rkr->UpQual =(int) o->value();
+  m_process->UpQual =(int) o->value();
 
-m_rgui->Show_Next_Time();
+m_parent->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Upr_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Upr_Qual_i(o,v);
@@ -298,35 +298,35 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Qual[] = {
 };
 
 void SettingsWindowGui::cb_Downr_Qual_i(RKR_Choice* o, void*) {
-  m_rkr->DownQual =(int) o->value();
+  m_process->DownQual =(int) o->value();
 
-m_rgui->Show_Next_Time();
+m_parent->Show_Next_Time();
 }
 void SettingsWindowGui::cb_Downr_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Downr_Qual_i(o,v);
 }
 
 void SettingsWindowGui::cb_RC_Harm_Opti_i(RKR_Choice* o, void*) {
-  m_rkr->RCOpti_Harm =(int) o->value();
+  m_process->RCOpti_Harm =(int) o->value();
 
-switch(m_rkr->RCOpti_Harm)
+switch(m_process->RCOpti_Harm)
   {
   
   
     case 0:
-    	m_rkr->HarmRecNote->setlpf(5500);
-    	m_rkr->HarmRecNote->sethpf(80);
+    	m_process->HarmRecNote->setlpf(5500);
+    	m_process->HarmRecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	m_rkr->HarmRecNote->setlpf(4500);
-    	m_rkr->HarmRecNote->sethpf(80);
+    	m_process->HarmRecNote->setlpf(4500);
+    	m_process->HarmRecNote->sethpf(80);
     	break;
     	
     case 2:
-    	m_rkr->HarmRecNote->setlpf(3000);
-    	m_rkr->HarmRecNote->sethpf(300);
+    	m_process->HarmRecNote->setlpf(3000);
+    	m_process->HarmRecNote->sethpf(300);
     	break;
 
 };
@@ -343,26 +343,26 @@ Fl_Menu_Item SettingsWindowGui::menu_RC_Harm_Opti[] = {
 };
 
 void SettingsWindowGui::cb_RC_St_Harm_Opti_i(RKR_Choice* o, void*) {
-  m_rkr->RCOpti_Stereo =(int) o->value();
+  m_process->RCOpti_Stereo =(int) o->value();
 
-switch(m_rkr->RCOpti_Stereo)
+switch(m_process->RCOpti_Stereo)
   {
   
   
     case 0:
-    	m_rkr->StHarmRecNote->setlpf(5500);
-    	m_rkr->StHarmRecNote->sethpf(80);
+    	m_process->StHarmRecNote->setlpf(5500);
+    	m_process->StHarmRecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	m_rkr->StHarmRecNote->setlpf(4500);
-    	m_rkr->StHarmRecNote->sethpf(80);
+    	m_process->StHarmRecNote->setlpf(4500);
+    	m_process->StHarmRecNote->sethpf(80);
     	break;
     	
     case 2:
-    	m_rkr->StHarmRecNote->setlpf(3000);
-    	m_rkr->StHarmRecNote->sethpf(300);
+    	m_process->StHarmRecNote->setlpf(3000);
+    	m_process->StHarmRecNote->sethpf(300);
     	break;
 
 };
@@ -372,26 +372,26 @@ void SettingsWindowGui::cb_RC_St_Harm_Opti(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_RC_Ring_Opti_i(RKR_Choice* o, void*) {
-  m_rkr->RCOpti_Ring =(int) o->value();
+  m_process->RCOpti_Ring =(int) o->value();
 
-switch(m_rkr->RCOpti_Ring)
+switch(m_process->RCOpti_Ring)
   {
   
   
     case 0:
-    	m_rkr->RingRecNote->setlpf(5500);
-    	m_rkr->RingRecNote->sethpf(80);
+    	m_process->RingRecNote->setlpf(5500);
+    	m_process->RingRecNote->sethpf(80);
     	break;
     	
 
     case 1:
-    	m_rkr->RingRecNote->setlpf(4500);
-    	m_rkr->RingRecNote->sethpf(80);
+    	m_process->RingRecNote->setlpf(4500);
+    	m_process->RingRecNote->sethpf(80);
     	break;
     	
     case 2:
-    	m_rkr->RingRecNote->setlpf(3000);
-    	m_rkr->RingRecNote->sethpf(300);
+    	m_process->RingRecNote->setlpf(3000);
+    	m_process->RingRecNote->sethpf(300);
     	break;
 
 };
@@ -406,16 +406,16 @@ void SettingsWindowGui::cb_Har_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_rkr->HarQual=4;
+       m_process->HarQual=4;
        break;
      case 1:
-       m_rkr->HarQual=8;
+       m_process->HarQual=8;
        break;
      case 2:
-       m_rkr->HarQual=16;	
+       m_process->HarQual=16;	
 	break;
      case 3:
-       m_rkr->HarQual=32;	
+       m_process->HarQual=32;	
 	break;	
 }
 
@@ -439,16 +439,16 @@ void SettingsWindowGui::cb_Seq_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_rkr->SeqQual=4;
+       m_process->SeqQual=4;
        break;
      case 1:
-       m_rkr->SeqQual=8;
+       m_process->SeqQual=8;
        break;
      case 2:
-       m_rkr->SeqQual=16;	
+       m_process->SeqQual=16;	
 	break;
      case 3:
-       m_rkr->SeqQual=32;	
+       m_process->SeqQual=32;	
 	break;	
 }
 
@@ -464,16 +464,16 @@ void SettingsWindowGui::cb_Ste_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_rkr->SteQual=4;
+       m_process->SteQual=4;
        break;
      case 1:
-       m_rkr->SteQual=8;
+       m_process->SteQual=8;
        break;
      case 2:
-       m_rkr->SteQual=16;	
+       m_process->SteQual=16;	
 	break;
      case 3:
-       m_rkr->SteQual=32;	
+       m_process->SteQual=32;	
 	break;	
 }
 
@@ -489,16 +489,16 @@ void SettingsWindowGui::cb_Shi_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_rkr->ShiQual=4;
+       m_process->ShiQual=4;
        break;
      case 1:
-       m_rkr->ShiQual=8;
+       m_process->ShiQual=8;
        break;
      case 2:
-       m_rkr->ShiQual=16;	
+       m_process->ShiQual=16;	
 	break;
      case 3:
-       m_rkr->ShiQual=32;	
+       m_process->ShiQual=32;	
 	break;	
 }
 
@@ -512,23 +512,23 @@ void SettingsWindowGui::cb_Voc_Bands_i(RKR_Choice* o, void*) {
   switch((int)o->value())
 {
   case 0:
-  m_rkr->VocBands = 16;
+  m_process->VocBands = 16;
   break;
 
   case 1:
-  m_rkr->VocBands = 32;
+  m_process->VocBands = 32;
   break;
 
   case 2:
-  m_rkr->VocBands = 64;
+  m_process->VocBands = 64;
   break;
 
   case 3:
-  m_rkr->VocBands = 128;
+  m_process->VocBands = 128;
   break;
 
   case 4:
-  m_rkr->VocBands = 256;
+  m_process->VocBands = 256;
   break;
 
 }
@@ -549,7 +549,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Voc_Bands[] = {
 };
 
 void SettingsWindowGui::cb_Har_Downsample_i(RKR_Choice* o, void*) {
-  m_rkr->Har_Down=(int)o->value();
+  m_process->Har_Down=(int)o->value();
 
 update_harmonizer_quality();
 }
@@ -572,7 +572,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Har_Downsample[] = {
 };
 
 void SettingsWindowGui::cb_Har_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Har_D_Q=(int)o->value();
+  m_process->Har_D_Q=(int)o->value();
 
 update_harmonizer_quality();
 }
@@ -581,7 +581,7 @@ void SettingsWindowGui::cb_Har_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Har_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Har_U_Q=(int)o->value();
+  m_process->Har_U_Q=(int)o->value();
 
 update_harmonizer_quality();
 }
@@ -590,7 +590,7 @@ void SettingsWindowGui::cb_Har_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Rev_Downsample_i(RKR_Choice* o, void*) {
-  m_rkr->Rev_Down=(int)o->value();
+  m_process->Rev_Down=(int)o->value();
 
 update_revtron_quality();
 }
@@ -599,7 +599,7 @@ void SettingsWindowGui::cb_Rev_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Rev_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Rev_D_Q=(int)o->value();
+  m_process->Rev_D_Q=(int)o->value();
 
 update_revtron_quality();
 }
@@ -608,7 +608,7 @@ void SettingsWindowGui::cb_Rev_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Rev_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Rev_U_Q=(int)o->value();
+  m_process->Rev_U_Q=(int)o->value();
 
 update_revtron_quality();
 }
@@ -617,7 +617,7 @@ void SettingsWindowGui::cb_Rev_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Con_Downsample_i(RKR_Choice* o, void*) {
-  m_rkr->Con_Down=(int)o->value();
+  m_process->Con_Down=(int)o->value();
 
 update_convo_quality();
 }
@@ -626,7 +626,7 @@ void SettingsWindowGui::cb_Con_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Con_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Con_D_Q=(int)o->value();
+  m_process->Con_D_Q=(int)o->value();
 
 update_convo_quality();
 }
@@ -635,7 +635,7 @@ void SettingsWindowGui::cb_Con_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Con_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Con_U_Q=(int)o->value();
+  m_process->Con_U_Q=(int)o->value();
 
 update_convo_quality();
 }
@@ -644,7 +644,7 @@ void SettingsWindowGui::cb_Con_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Seq_Downsample_i(RKR_Choice* o, void*) {
-  m_rkr->Seq_Down=(int)o->value();
+  m_process->Seq_Down=(int)o->value();
 update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Downsample(RKR_Choice* o, void* v) {
@@ -652,7 +652,7 @@ void SettingsWindowGui::cb_Seq_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Seq_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Seq_D_Q=(int)o->value();
+  m_process->Seq_D_Q=(int)o->value();
 update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Down_Qua(RKR_Choice* o, void* v) {
@@ -660,7 +660,7 @@ void SettingsWindowGui::cb_Seq_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Seq_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Seq_U_Q=(int)o->value();
+  m_process->Seq_U_Q=(int)o->value();
 update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Up_Qua(RKR_Choice* o, void* v) {
@@ -668,7 +668,7 @@ void SettingsWindowGui::cb_Seq_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Shi_Downsample_i(RKR_Choice* o, void*) {
-  m_rkr->Shi_Down=(int)o->value();
+  m_process->Shi_Down=(int)o->value();
 update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Downsample(RKR_Choice* o, void* v) {
@@ -676,7 +676,7 @@ void SettingsWindowGui::cb_Shi_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Shi_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Shi_D_Q=(int)o->value();
+  m_process->Shi_D_Q=(int)o->value();
 update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Down_Qua(RKR_Choice* o, void* v) {
@@ -684,7 +684,7 @@ void SettingsWindowGui::cb_Shi_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Shi_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Shi_U_Q=(int)o->value();
+  m_process->Shi_U_Q=(int)o->value();
 update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Up_Qua(RKR_Choice* o, void* v) {
@@ -692,7 +692,7 @@ void SettingsWindowGui::cb_Shi_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Voc_Downsample_i(RKR_Choice* o, void*) {
-  m_rkr->Voc_Down=(int)o->value();
+  m_process->Voc_Down=(int)o->value();
 update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Downsample(RKR_Choice* o, void* v) {
@@ -700,7 +700,7 @@ void SettingsWindowGui::cb_Voc_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Voc_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Voc_D_Q=(int)o->value();
+  m_process->Voc_D_Q=(int)o->value();
 update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Down_Qua(RKR_Choice* o, void* v) {
@@ -708,7 +708,7 @@ void SettingsWindowGui::cb_Voc_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Voc_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Voc_U_Q=(int)o->value();
+  m_process->Voc_U_Q=(int)o->value();
 update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Up_Qua(RKR_Choice* o, void* v) {
@@ -716,7 +716,7 @@ void SettingsWindowGui::cb_Voc_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ste_Downsample_i(RKR_Choice* o, void*) {
-  m_rkr->Ste_Down=(int)o->value();
+  m_process->Ste_Down=(int)o->value();
 
 update_stereoharm_quality();
 }
@@ -725,7 +725,7 @@ void SettingsWindowGui::cb_Ste_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ste_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Ste_D_Q=(int)o->value();
+  m_process->Ste_D_Q=(int)o->value();
 
 update_stereoharm_quality();
 }
@@ -734,7 +734,7 @@ void SettingsWindowGui::cb_Ste_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ste_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Ste_U_Q=(int)o->value();
+  m_process->Ste_U_Q=(int)o->value();
 
 update_stereoharm_quality();
 }
@@ -743,7 +743,7 @@ void SettingsWindowGui::cb_Ste_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dist_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Dist_res_amount=(int)o->value();
+  m_process->Dist_res_amount=(int)o->value();
 update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Amo(RKR_Choice* o, void* v) {
@@ -760,7 +760,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Dist_Amo[] = {
 };
 
 void SettingsWindowGui::cb_Dist_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Dist_down_q=(int)o->value();
+  m_process->Dist_down_q=(int)o->value();
 update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
@@ -768,7 +768,7 @@ void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dist_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Dist_up_q=(int)o->value();
+  m_process->Dist_up_q=(int)o->value();
 update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
@@ -776,7 +776,7 @@ void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Ovrd_res_amount=(int)o->value();
+  m_process->Ovrd_res_amount=(int)o->value();
 update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
@@ -784,7 +784,7 @@ void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Ovrd_down_q=(int)o->value();
+  m_process->Ovrd_down_q=(int)o->value();
 update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
@@ -792,7 +792,7 @@ void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Ovrd_up_q=(int)o->value();
+  m_process->Ovrd_up_q=(int)o->value();
 update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Up_Qua(RKR_Choice* o, void* v) {
@@ -800,7 +800,7 @@ void SettingsWindowGui::cb_Ovrd_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Dere_res_amount=(int)o->value();
+  m_process->Dere_res_amount=(int)o->value();
 update_derelict_quality();
 }
 void SettingsWindowGui::cb_Dere_Amo(RKR_Choice* o, void* v) {
@@ -808,7 +808,7 @@ void SettingsWindowGui::cb_Dere_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Dere_down_q=(int)o->value();
+  m_process->Dere_down_q=(int)o->value();
 update_derelict_quality();
 }
 void SettingsWindowGui::cb_Dere_Down_Qua(RKR_Choice* o, void* v) {
@@ -816,7 +816,7 @@ void SettingsWindowGui::cb_Dere_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Dere_up_q=(int)o->value();
+  m_process->Dere_up_q=(int)o->value();
 update_derelict_quality();
 }
 void SettingsWindowGui::cb_Dere_Up_Qua(RKR_Choice* o, void* v) {
@@ -824,7 +824,7 @@ void SettingsWindowGui::cb_Dere_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_DBand_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->DBand_res_amount=(int)o->value();
+  m_process->DBand_res_amount=(int)o->value();
 update_distband_quality();
 }
 void SettingsWindowGui::cb_DBand_Amo(RKR_Choice* o, void* v) {
@@ -832,7 +832,7 @@ void SettingsWindowGui::cb_DBand_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_DBand_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->DBand_down_q=(int)o->value();
+  m_process->DBand_down_q=(int)o->value();
 update_distband_quality();
 }
 void SettingsWindowGui::cb_DBand_Down_Qua(RKR_Choice* o, void* v) {
@@ -840,7 +840,7 @@ void SettingsWindowGui::cb_DBand_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_DBand_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->DBand_up_q=(int)o->value();
+  m_process->DBand_up_q=(int)o->value();
 update_distband_quality();
 }
 void SettingsWindowGui::cb_DBand_Up_Qua(RKR_Choice* o, void* v) {
@@ -848,7 +848,7 @@ void SettingsWindowGui::cb_DBand_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Amo_i(RKR_Choice* o, void*) {
-  m_rkr->Stomp_res_amount=(int)o->value();
+  m_process->Stomp_res_amount=(int)o->value();
 update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
@@ -856,7 +856,7 @@ void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Down_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Stomp_down_q=(int)o->value();
+  m_process->Stomp_down_q=(int)o->value();
 update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
@@ -864,7 +864,7 @@ void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Up_Qua_i(RKR_Choice* o, void*) {
-  m_rkr->Stomp_up_q=(int)o->value();
+  m_process->Stomp_up_q=(int)o->value();
 update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Up_Qua(RKR_Choice* o, void* v) {
@@ -872,9 +872,9 @@ void SettingsWindowGui::cb_Stomp_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_D_A_Connect_i(RKR_Check_Button* o, void*) {
-  m_rkr->aconnect_MI=(int) o->value();
+  m_process->aconnect_MI=(int) o->value();
 
-if (m_rkr->aconnect_MI) BMidiIn->activate();
+if (m_process->aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 }
 void SettingsWindowGui::cb_D_A_Connect(RKR_Check_Button* o, void* v) {
@@ -885,54 +885,54 @@ void SettingsWindowGui::cb_BMidiIn_i(RKR_Browser* o, void*) {
   int valor;
 valor = (int) o->value();
 if(o->text(valor) != NULL)
-strcpy(m_rkr->MID,o->text(valor));
+strcpy(m_process->MID,o->text(valor));
 else return;
 o->select(valor,1);
-m_rkr->Conecta();
+m_process->Conecta();
 }
 void SettingsWindowGui::cb_BMidiIn(RKR_Browser* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BMidiIn_i(o,v);
 }
 
 void SettingsWindowGui::cb_Midi_In_Counter_i(RKR_Counter* o, void*) {
-  m_rkr->MidiCh=(int)o->value()-1;
+  m_process->MidiCh=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Midi_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Midi_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Har_In_Counter_i(RKR_Counter* o, void*) {
-  m_rkr->HarCh=(int)o->value()-1;
+  m_process->HarCh=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Har_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Stereo_Har_In_Counter_i(RKR_Counter* o, void*) {
-  m_rkr->StereoHarCh=(int)o->value()-1;
+  m_process->StereoHarCh=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Stereo_Har_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Stereo_Har_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Mw0_i(RKR_Check_Button*, void*) {
-  m_rkr->MIDIway=0;
-m_rgui->ML_Menu->deactivate();
+  m_process->MIDIway=0;
+m_parent->ML_Menu->deactivate();
 }
 void SettingsWindowGui::cb_Mw0(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Mw0_i(o,v);
 }
 
 void SettingsWindowGui::cb_Mw1_i(RKR_Check_Button*, void*) {
-  m_rkr->MIDIway=1;
-m_rgui->ML_Menu->activate();
+  m_process->MIDIway=1;
+m_parent->ML_Menu->activate();
 }
 void SettingsWindowGui::cb_Mw1(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()->parent()))->cb_Mw1_i(o,v);
 }
 
 void SettingsWindowGui::cb_AAssign_i(RKR_Check_Button* o, void*) {
-  m_rkr->autoassign=o->value();
+  m_process->autoassign=o->value();
 }
 void SettingsWindowGui::cb_AAssign(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_AAssign_i(o,v);
@@ -942,11 +942,11 @@ void SettingsWindowGui::cb_MTable_i(RKR_Check_Button* o, void*) {
   // Set preset to C_CHANGE_PRESET_OFF means do NOT process preset change for GUI
 // timeout. In the case of MIDI control PGM change at the same time.
 // Will cause crash if we do not set preset off temporarily.    
-m_rkr->Change_Preset = C_CHANGE_PRESET_OFF;
+m_process->Change_Preset = C_CHANGE_PRESET_OFF;
 
-m_rkr->midi_table=o->value();
+m_process->midi_table=o->value();
 
-if(m_rkr->midi_table)
+if(m_process->midi_table)
 {
     scroll->activate();
 }
@@ -960,22 +960,22 @@ void SettingsWindowGui::cb_MTable(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Load_i(RKR_Button*, void*) {
-  m_rgui->Load_Midi_Program_Change_Table();
+  m_parent->Load_Midi_Program_Change_Table();
 }
 void SettingsWindowGui::cb_Load(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Load_i(o,v);
 }
 
 void SettingsWindowGui::cb_Save_i(RKR_Button*, void*) {
-  m_rgui->Save_Midi_Program_Change_Table();
+  m_parent->Save_Midi_Program_Change_Table();
 }
 void SettingsWindowGui::cb_Save(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Save_i(o,v);
 }
 
 void SettingsWindowGui::cb_D_J_Connect_i(RKR_Check_Button* o, void*) {
-  m_rkr->aconnect_JA=(int) o->value();
-if (m_rkr->aconnect_JA) JackCo->activate();
+  m_process->aconnect_JA=(int) o->value();
+if (m_process->aconnect_JA) JackCo->activate();
 else JackCo->deactivate();
 }
 void SettingsWindowGui::cb_D_J_Connect(RKR_Check_Button* o, void* v) {
@@ -983,8 +983,8 @@ void SettingsWindowGui::cb_D_J_Connect(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_D_IJ_Connect_i(RKR_Check_Button* o, void*) {
-  m_rkr->aconnect_JIA=(int) o->value();
-if (m_rkr->aconnect_JIA) JackIn->activate();
+  m_process->aconnect_JIA=(int) o->value();
+if (m_process->aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();
 }
 void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {
@@ -992,29 +992,29 @@ void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Username_i(RKR_Input* o, void*) {
-  m_rkr->UserRealName=(char*) o->value();
+  m_process->UserRealName=(char*) o->value();
 }
 void SettingsWindowGui::cb_Username(RKR_Input* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);
 }
 
 void SettingsWindowGui::cb_MESSAGE_DISABLE_i(RKR_Check_Button* o, void*) {
-  m_rkr->Disable_Warnings=(int) o->value();
+  m_process->Disable_Warnings=(int) o->value();
 }
 void SettingsWindowGui::cb_MESSAGE_DISABLE(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MESSAGE_DISABLE_i(o,v);
 }
 
 void SettingsWindowGui::cb_T_TIMEOUT_i(RKR_Check_Button* o, void*) {
-  m_rkr->t_timeout=(int) o->value();
+  m_process->t_timeout=(int) o->value();
 }
 void SettingsWindowGui::cb_T_TIMEOUT(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_T_TIMEOUT_i(o,v);
 }
 
 void SettingsWindowGui::cb_ENA_TOOL_i(RKR_Check_Button* o, void*) {
-  m_rkr->ena_tool=(int) o->value();
-Fl_Tooltip::enable(m_rkr->ena_tool);
+  m_process->ena_tool=(int) o->value();
+Fl_Tooltip::enable(m_process->ena_tool);
 }
 void SettingsWindowGui::cb_ENA_TOOL(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_ENA_TOOL_i(o,v);
@@ -1026,7 +1026,7 @@ filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
-strcpy(m_rkr->BankFilename,filename);
+strcpy(m_process->BankFilename,filename);
 }
 void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BF_Browser_i(o,v);
@@ -1037,8 +1037,8 @@ void SettingsWindowGui::cb_UD_Browser_i(RKR_Button*, void*) {
 dir=fl_dir_chooser("Browse:",NULL,0);
 if (dir==NULL) return;
 Udir->value(dir);
-strcpy(m_rkr->UDirFilename,dir);
-m_rgui->Scan_Bank_Dir();
+strcpy(m_process->UDirFilename,dir);
+m_parent->Scan_Bank_Dir();
 }
 void SettingsWindowGui::cb_UD_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UD_Browser_i(o,v);
@@ -2972,14 +2972,14 @@ this->when(FL_WHEN_RELEASE);
   } // Fl_Group* BANK_SET
   STabs->end();
 } // RKR_Tabs* STabs
-this->m_rkr = NULL;
-this->m_rgui = NULL;
+this->m_process = NULL;
+this->m_parent = NULL;
 end();
 }
 
 void SettingsWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui ) {
-  m_rkr = _rkr;
-  m_rgui= _rgui;
+  m_process = _rkr;
+  m_parent= _rgui;
 }
 
 Fl_Menu_Item * SettingsWindowGui::get_menu_Har_Downsample() {
@@ -3008,7 +3008,7 @@ void SettingsWindowGui::make_table_window() {
             cb->add("3");
             cb->add("U");
             cb->user_data((void *) (c_bank_used + y));
-            cb->callback((Fl_Callback *)m_rgui->bank_click);
+            cb->callback((Fl_Callback *)m_parent->bank_click);
             cb->set_label_offset(4);
             cb->set_text_offset(4);
       
@@ -3016,7 +3016,7 @@ void SettingsWindowGui::make_table_window() {
             cp->copy_label("Preset");
             cp->labelcolor(FL_WHITE);
             cp->user_data((void *) (c_preset_used + y));
-            cp->callback((Fl_Callback *)m_rgui->p_click);
+            cp->callback((Fl_Callback *)m_parent->p_click);
             cp->set_label_offset(4);
             cp->set_text_offset(4);
         }
@@ -3055,9 +3055,9 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
               p->clear();
               for(int i=1; i<=60; i++)
               {
-                  if(m_rkr->B_Names[value][i].Preset_Name[0] != 0)
+                  if(m_process->B_Names[value][i].Preset_Name[0] != 0)
                   {
-                      p->add(m_rkr->B_Names[value][i].Preset_Name);
+                      p->add(m_process->B_Names[value][i].Preset_Name);
                   }
                   else
                   {
@@ -3091,21 +3091,21 @@ void SettingsWindowGui::Put_MidiTable() {
   // Put_MidiTable
     for(int i=0; i<128; i++)
     {
-        mtfillvalue(i + c_bank_used, m_rkr->M_table[i].bank);
-        fill_mptable(i + c_preset_used, m_rkr->M_table[i].bank);
-        mtfillvalue(i + c_preset_used, m_rkr->M_table[i].preset);
+        mtfillvalue(i + c_bank_used, m_process->M_table[i].bank);
+        fill_mptable(i + c_preset_used, m_process->M_table[i].bank);
+        mtfillvalue(i + c_preset_used, m_process->M_table[i].preset);
     }
 }
 
 void SettingsWindowGui::update_convo_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
   
   /* Cast to derived class */
-  Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_rkr->Rack_Effects[EFX_CONVOLOTRON]);
+  Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
   
   /* Save current parameters */
   std::vector<int> save_state = Efx_Convolotron->save_parameters();
@@ -3114,9 +3114,9 @@ void SettingsWindowGui::update_convo_quality() {
   std::string filename(Efx_Convolotron->Filename);
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->Rack_Effects[EFX_CONVOLOTRON];
-  m_rkr->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_rkr->Con_Down, m_rkr->Con_U_Q, m_rkr->Con_D_Q, m_rkr->fSample_rate, m_rkr->period);
-  Efx_Convolotron = static_cast<Convolotron*>(m_rkr->Rack_Effects[EFX_CONVOLOTRON]);
+  delete m_process->Rack_Effects[EFX_CONVOLOTRON];
+  m_process->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_process->Con_Down, m_process->Con_U_Q, m_process->Con_D_Q, m_process->fSample_rate, m_process->period);
+  Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3135,18 +3135,18 @@ void SettingsWindowGui::update_convo_quality() {
   }
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
 }
 
 void SettingsWindowGui::update_revtron_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
   
   /* Cast to derived class */
-  Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_rkr->Rack_Effects[EFX_REVERBTRON]);
+  Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
   
   /* Save current parameters */
   std::vector<int> save_state = Efx_Reverbtron->save_parameters();
@@ -3155,9 +3155,9 @@ void SettingsWindowGui::update_revtron_quality() {
   std::string filename(Efx_Reverbtron->Filename);
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->Rack_Effects[EFX_REVERBTRON];
-  m_rkr->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_rkr->Rev_Down, m_rkr->Rev_U_Q, m_rkr->Rev_D_Q, m_rkr->fSample_rate, m_rkr->period);
-  Efx_Reverbtron = static_cast<Reverbtron*>(m_rkr->Rack_Effects[EFX_REVERBTRON]);
+  delete m_process->Rack_Effects[EFX_REVERBTRON];
+  m_process->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_process->Rev_Down, m_process->Rev_U_Q, m_process->Rev_D_Q, m_process->fSample_rate, m_process->period);
+  Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3176,19 +3176,19 @@ void SettingsWindowGui::update_revtron_quality() {
   }
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
 }
 
 void SettingsWindowGui::update_harmonizer_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* This is for the gui bypass */
-  int hold_bypass = m_rkr->EFX_Bypass[EFX_HARMONIZER];
-  m_rkr->EFX_Bypass[EFX_HARMONIZER] = 0;
+  int hold_bypass = m_process->EFX_Bypass[EFX_HARMONIZER];
+  m_process->EFX_Bypass[EFX_HARMONIZER] = 0;
   
   /* Cast to derived class */
-  Harmonizer *Efx_Harmonizer = static_cast<Harmonizer*>(m_rkr->Rack_Effects[EFX_HARMONIZER]);
+  Harmonizer *Efx_Harmonizer = static_cast<Harmonizer*>(m_process->Rack_Effects[EFX_HARMONIZER]);
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -3197,41 +3197,41 @@ void SettingsWindowGui::update_harmonizer_quality() {
   std::vector<int> save_state = Efx_Harmonizer->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->Rack_Effects[EFX_HARMONIZER];
-  m_rkr->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_rkr->HarQual, m_rkr->Har_Down, m_rkr->Har_U_Q, m_rkr->Har_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_HARMONIZER];
+  m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Har_Down, m_process->Har_U_Q, m_process->Har_D_Q, m_process->fSample_rate, m_process->period);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_Harmonizer = static_cast<Harmonizer*>(m_rkr->Rack_Effects[EFX_HARMONIZER]);
+  Efx_Harmonizer = static_cast<Harmonizer*>(m_process->Rack_Effects[EFX_HARMONIZER]);
   
   /* Reset parameters and filename */
   Efx_Harmonizer->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
   
   /* Reset bypass */ 
-  m_rkr->EFX_Bypass[EFX_HARMONIZER] = hold_bypass;
+  m_process->EFX_Bypass[EFX_HARMONIZER] = hold_bypass;
   
   /* Reset user select */
   if(Efx_Harmonizer->getpar(Harm_Select))
   {
       Efx_Harmonizer->changepar(Harm_Select, Efx_Harmonizer->getpar(Harm_Select));
-      m_rkr->RC_Harm->cleanup();
-      m_rgui->Chord(0);
+      m_process->RC_Harm->cleanup();
+      m_parent->Chord(0);
   }
 }
 
 void SettingsWindowGui::update_stereoharm_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Cast to derived class */
-  StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(m_rkr->Rack_Effects[EFX_STEREOHARM]);
+  StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(m_process->Rack_Effects[EFX_STEREOHARM]);
   
   /* This is for the gui bypass */
-  int hold_bypass = m_rkr->EFX_Bypass[EFX_STEREOHARM];
-  m_rkr->EFX_Bypass[EFX_STEREOHARM] = 0;
+  int hold_bypass = m_process->EFX_Bypass[EFX_STEREOHARM];
+  m_process->EFX_Bypass[EFX_STEREOHARM] = 0;
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -3240,41 +3240,41 @@ void SettingsWindowGui::update_stereoharm_quality() {
   std::vector<int> save_state = Efx_StereoHarm->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->Rack_Effects[EFX_STEREOHARM];
-  m_rkr->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_rkr->SteQual, m_rkr->Ste_Down, m_rkr->Ste_U_Q, m_rkr->Ste_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_STEREOHARM];
+  m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Ste_Down, m_process->Ste_U_Q, m_process->Ste_D_Q, m_process->fSample_rate, m_process->period);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_StereoHarm = static_cast<StereoHarm*>(m_rkr->Rack_Effects[EFX_STEREOHARM]);
+  Efx_StereoHarm = static_cast<StereoHarm*>(m_process->Rack_Effects[EFX_STEREOHARM]);
   
   /* Reset parameters and filename */
   Efx_StereoHarm->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
   
   /* Reset bypass */ 
-  m_rkr->EFX_Bypass[EFX_STEREOHARM] = hold_bypass;
+  m_process->EFX_Bypass[EFX_STEREOHARM] = hold_bypass;
   
   /* Reset user select */
   if(Efx_StereoHarm->getpar(Sharm_Select))
   {
       Efx_StereoHarm->changepar(Sharm_Select, Efx_StereoHarm->getpar(Sharm_Select));
-      m_rkr->RC_Stereo_Harm->cleanup();
-      m_rgui->Chord(1);
+      m_process->RC_Stereo_Harm->cleanup();
+      m_parent->Chord(1);
   }
 }
 
 void SettingsWindowGui::update_sequence_quality() {
   /* This is for the gui bypass, tempo change */
-  int hold_bypass = m_rkr->EFX_Bypass[EFX_SEQUENCE];
-  m_rkr->EFX_Bypass[EFX_SEQUENCE] = 0;
+  int hold_bypass = m_process->EFX_Bypass[EFX_SEQUENCE];
+  m_process->EFX_Bypass[EFX_SEQUENCE] = 0;
   
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Cast to derived class */
-  Sequence *Efx_Sequence = static_cast<Sequence*>(m_rkr->Rack_Effects[EFX_SEQUENCE]);
+  Sequence *Efx_Sequence = static_cast<Sequence*>(m_process->Rack_Effects[EFX_SEQUENCE]);
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -3283,30 +3283,30 @@ void SettingsWindowGui::update_sequence_quality() {
   std::vector<int> save_state = Efx_Sequence->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->Rack_Effects[EFX_SEQUENCE];
-  m_rkr->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_rkr->SeqQual, m_rkr->Seq_Down, m_rkr->Seq_U_Q, m_rkr->Seq_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_SEQUENCE];
+  m_process->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_process->SeqQual, m_process->Seq_Down, m_process->Seq_U_Q, m_process->Seq_D_Q, m_process->fSample_rate, m_process->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_Sequence = static_cast<Sequence*>(m_rkr->Rack_Effects[EFX_SEQUENCE]);
+  Efx_Sequence = static_cast<Sequence*>(m_process->Rack_Effects[EFX_SEQUENCE]);
   
   /* Reset parameters */
   Efx_Sequence->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
   
   /* Reset bypass */ 
-  m_rkr->EFX_Bypass[EFX_SEQUENCE] = hold_bypass;
+  m_process->EFX_Bypass[EFX_SEQUENCE] = hold_bypass;
 }
 
 void SettingsWindowGui::update_shifter_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Cast to derived class */
-  Shifter *Efx_Shifter = static_cast<Shifter*>(m_rkr->Rack_Effects[EFX_SHIFTER]);
+  Shifter *Efx_Shifter = static_cast<Shifter*>(m_process->Rack_Effects[EFX_SHIFTER]);
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -3315,30 +3315,30 @@ void SettingsWindowGui::update_shifter_quality() {
   std::vector<int> save_state = Efx_Shifter->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->Rack_Effects[EFX_SHIFTER];
-  m_rkr->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_rkr->ShiQual, m_rkr->Shi_Down, m_rkr->Shi_U_Q, m_rkr->Shi_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_SHIFTER];
+  m_process->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_process->ShiQual, m_process->Shi_Down, m_process->Shi_U_Q, m_process->Shi_D_Q, m_process->fSample_rate, m_process->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_Shifter = static_cast<Shifter*>(m_rkr->Rack_Effects[EFX_SHIFTER]);
+  Efx_Shifter = static_cast<Shifter*>(m_process->Rack_Effects[EFX_SHIFTER]);
   
   /* Reset parameters */
   Efx_Shifter->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
 }
 
 void SettingsWindowGui::update_vocoder_quality() {
   /* This is for the gui volume meter */
-  int hold_bypass = m_rkr->EFX_Bypass[EFX_VOCODER];
-  m_rkr->EFX_Bypass[EFX_VOCODER] = 0;
+  int hold_bypass = m_process->EFX_Bypass[EFX_VOCODER];
+  m_process->EFX_Bypass[EFX_VOCODER] = 0;
   
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
-  Vocoder *Efx_Vocoder = static_cast<Vocoder*>(m_rkr->Rack_Effects[EFX_VOCODER]);
+  Vocoder *Efx_Vocoder = static_cast<Vocoder*>(m_process->Rack_Effects[EFX_VOCODER]);
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -3347,29 +3347,29 @@ void SettingsWindowGui::update_vocoder_quality() {
   std::vector<int> save_state = Efx_Vocoder->save_parameters();
   
   /* Delete and re-create the efx with new downsample settings */
-  delete m_rkr->Rack_Effects[EFX_VOCODER];
-  m_rkr->Rack_Effects[EFX_VOCODER] = new Vocoder(m_rkr->auxresampled, m_rkr->VocBands, m_rkr->Voc_Down, m_rkr->Voc_U_Q, m_rkr->Voc_D_Q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_VOCODER];
+  m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_Vocoder = static_cast<Vocoder*>(m_rkr->Rack_Effects[EFX_VOCODER]);
+  Efx_Vocoder = static_cast<Vocoder*>(m_process->Rack_Effects[EFX_VOCODER]);
   
   /* Reset parameters */
   Efx_Vocoder->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
   
   /* Reset bypass */
-  m_rkr->EFX_Bypass[EFX_VOCODER] = hold_bypass;
+  m_process->EFX_Bypass[EFX_VOCODER] = hold_bypass;
 }
 
 void SettingsWindowGui::update_distortion_quality() {
   /* shut off all processing */
-    m_rkr->quality_update = true;
+    m_process->quality_update = true;
     
-    Distorsion *Efx_Distortion = static_cast<Distorsion*>(m_rkr->Rack_Effects[EFX_DISTORTION]);
+    Distorsion *Efx_Distortion = static_cast<Distorsion*>(m_process->Rack_Effects[EFX_DISTORTION]);
     /* Wait a bit */
     usleep(C_MILLISECONDS_25);
     
@@ -3377,26 +3377,26 @@ void SettingsWindowGui::update_distortion_quality() {
     std::vector<int> save_state = Efx_Distortion->save_parameters();
     
     /* Delete and re-create the efx with new resample settings */
-    delete m_rkr->Rack_Effects[EFX_DISTORTION];
-    m_rkr->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_rkr->Dist_res_amount, m_rkr->Dist_up_q, m_rkr->Dist_down_q, m_rkr->fSample_rate, m_rkr->period);
+    delete m_process->Rack_Effects[EFX_DISTORTION];
+    m_process->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_process->Dist_res_amount, m_process->Dist_up_q, m_process->Dist_down_q, m_process->fSample_rate, m_process->period);
     
     /* Wait for things to complete */
     usleep(C_MILLISECONDS_50);
     
-    Efx_Distortion = static_cast<Distorsion*>(m_rkr->Rack_Effects[EFX_DISTORTION]);
+    Efx_Distortion = static_cast<Distorsion*>(m_process->Rack_Effects[EFX_DISTORTION]);
     
     /* Reset parameters */
     Efx_Distortion->reset_parameters(save_state);
     
     /* Turn processing back on */
-    m_rkr->quality_update = false;
+    m_process->quality_update = false;
 }
 
 void SettingsWindowGui::update_overdrive_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
-  Overdrive *Efx_Overdrive = static_cast<Overdrive*>(m_rkr->Rack_Effects[EFX_OVERDRIVE]);
+  Overdrive *Efx_Overdrive = static_cast<Overdrive*>(m_process->Rack_Effects[EFX_OVERDRIVE]);
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
   
@@ -3404,27 +3404,27 @@ void SettingsWindowGui::update_overdrive_quality() {
   std::vector<int> save_state = Efx_Overdrive->save_parameters();
   
   /* Delete and re-create the efx with new resample settings */
-  delete m_rkr->Rack_Effects[EFX_OVERDRIVE];
-  m_rkr->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_rkr->Ovrd_res_amount, m_rkr->Ovrd_up_q, m_rkr->Ovrd_down_q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_OVERDRIVE];
+  m_process->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_process->Ovrd_res_amount, m_process->Ovrd_up_q, m_process->Ovrd_down_q, m_process->fSample_rate, m_process->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_Overdrive = static_cast<Overdrive*>(m_rkr->Rack_Effects[EFX_OVERDRIVE]);
+  Efx_Overdrive = static_cast<Overdrive*>(m_process->Rack_Effects[EFX_OVERDRIVE]);
   
   /* Reset parameters */
   Efx_Overdrive->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
 }
 
 void SettingsWindowGui::update_derelict_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Cast to derived class */
-  Derelict *Efx_Derelict = static_cast<Derelict*>(m_rkr->Rack_Effects[EFX_DERELICT]);
+  Derelict *Efx_Derelict = static_cast<Derelict*>(m_process->Rack_Effects[EFX_DERELICT]);
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
   
@@ -3432,27 +3432,27 @@ void SettingsWindowGui::update_derelict_quality() {
   std::vector<int> save_state = Efx_Derelict->save_parameters();
   
   /* Delete and re-create the efx with new resample settings */
-  delete m_rkr->Rack_Effects[EFX_DERELICT];
-  m_rkr->Rack_Effects[EFX_DERELICT] = new Derelict(m_rkr->Dere_res_amount, m_rkr->Dere_up_q, m_rkr->Dere_down_q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_DERELICT];
+  m_process->Rack_Effects[EFX_DERELICT] = new Derelict(m_process->Dere_res_amount, m_process->Dere_up_q, m_process->Dere_down_q, m_process->fSample_rate, m_process->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_Derelict = static_cast<Derelict*>(m_rkr->Rack_Effects[EFX_DERELICT]);
+  Efx_Derelict = static_cast<Derelict*>(m_process->Rack_Effects[EFX_DERELICT]);
   
   /* Reset parameters */
   Efx_Derelict->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
 }
 
 void SettingsWindowGui::update_distband_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Cast to derived class */
-  DistBand *Efx_DistBand = static_cast<DistBand*>(m_rkr->Rack_Effects[EFX_DISTBAND]);
+  DistBand *Efx_DistBand = static_cast<DistBand*>(m_process->Rack_Effects[EFX_DISTBAND]);
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -3461,27 +3461,27 @@ void SettingsWindowGui::update_distband_quality() {
   std::vector<int> save_state = Efx_DistBand->save_parameters();
   
   /* Delete and re-create the efx with new resample settings */
-  delete m_rkr->Rack_Effects[EFX_DISTBAND];
-  m_rkr->Rack_Effects[EFX_DISTBAND] = new DistBand(m_rkr->DBand_res_amount, m_rkr->DBand_up_q, m_rkr->DBand_down_q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_DISTBAND];
+  m_process->Rack_Effects[EFX_DISTBAND] = new DistBand(m_process->DBand_res_amount, m_process->DBand_up_q, m_process->DBand_down_q, m_process->fSample_rate, m_process->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_DistBand = static_cast<DistBand*>(m_rkr->Rack_Effects[EFX_DISTBAND]);
+  Efx_DistBand = static_cast<DistBand*>(m_process->Rack_Effects[EFX_DISTBAND]);
   
   /* Reset parameters */
   Efx_DistBand->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
 }
 
 void SettingsWindowGui::update_stompbox_quality() {
   /* shut off all processing */
-  m_rkr->quality_update = true;
+  m_process->quality_update = true;
   
   /* Cast to derived class */
-  StompBox *Efx_StompBox = static_cast<StompBox*>(m_rkr->Rack_Effects[EFX_STOMPBOX]);
+  StompBox *Efx_StompBox = static_cast<StompBox*>(m_process->Rack_Effects[EFX_STOMPBOX]);
   
   /* Wait a bit */
   usleep(C_MILLISECONDS_25);
@@ -3490,17 +3490,17 @@ void SettingsWindowGui::update_stompbox_quality() {
   std::vector<int> save_state = Efx_StompBox->save_parameters();
   
   /* Delete and re-create the efx with new resample settings */
-  delete m_rkr->Rack_Effects[EFX_STOMPBOX];
-  m_rkr->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_rkr->Stomp_res_amount, m_rkr->Stomp_up_q, m_rkr->Stomp_down_q, m_rkr->fSample_rate, m_rkr->period);
+  delete m_process->Rack_Effects[EFX_STOMPBOX];
+  m_process->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_process->Stomp_res_amount, m_process->Stomp_up_q, m_process->Stomp_down_q, m_process->fSample_rate, m_process->period);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
-  Efx_StompBox = static_cast<StompBox*>(m_rkr->Rack_Effects[EFX_STOMPBOX]);
+  Efx_StompBox = static_cast<StompBox*>(m_process->Rack_Effects[EFX_STOMPBOX]);
   
   /* Reset parameters */
   Efx_StompBox->reset_parameters(save_state);
   
   /* Turn processing back on */
-  m_rkr->quality_update = false;
+  m_process->quality_update = false;
 }

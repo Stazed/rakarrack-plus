@@ -11,12 +11,12 @@ decl {\#include "RKR_Value_Input.h"} {public global
 widget_class TrigWindowGui {open
   xywh {786 255 200 180} type Double resizable
   code0 {\#include "rakarrack.h"}
-  code1 {this->m_rkr = NULL;}
+  code1 {this->m_process = NULL;}
   class Fl_Double_Window visible
 } {
   Function {initialize(RKR *_rkr)} {open C return_type void
   } {
-    code {m_rkr = _rkr;} {}
+    code {m_process = _rkr;} {}
   }
   Fl_Box Fondo5 {
     xywh {0 1 200 180}
@@ -32,7 +32,7 @@ widget_class TrigWindowGui {open
   }
   Fl_Choice aux_source {
     label Source
-    callback {m_rkr->Aux_Source = (int) o->value();}
+    callback {m_process->Aux_Source = (int) o->value();}
     xywh {100 37 50 17} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -51,13 +51,13 @@ widget_class TrigWindowGui {open
   }
   Fl_Value_Slider aux_gain {
     label Gain
-    callback {m_rkr->Aux_Gain = (int)o->value();}
+    callback {m_process->Aux_Gain = (int)o->value();}
     xywh {56 59 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider aux_thres {
     label Threshold
-    callback {m_rkr->Aux_Threshold = (int) o->value();}
+    callback {m_process->Aux_Threshold = (int) o->value();}
     xywh {55 75 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -70 maximum 20 step 1 textcolor 7
     class RKR_Slider
   }
@@ -65,7 +65,7 @@ widget_class TrigWindowGui {open
     label {Midi Control}
     callback {if(o->value()> 127) o->value(127);
 if(o->value()< 1) o->value(1);
-m_rkr->Aux_MIDI = (int)o->value();} selected
+m_process->Aux_MIDI = (int)o->value();} selected
     xywh {111 96 32 24} labelcolor 7 minimum 1 maximum 127 step 1 value 1
     code0 {o->set_text_offset(4);}
     code1 {o->set_label_offset(4);}
@@ -73,16 +73,16 @@ m_rkr->Aux_MIDI = (int)o->value();} selected
   }
   Fl_Value_Slider aux_min {
     label Minimum
-    callback {m_rkr->Aux_Minimum = (int) o->value();}
+    callback {m_process->Aux_Minimum = (int) o->value();}
     xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider aux_max {
     label Maximum
-    callback {m_rkr->Aux_Maximum = (int) o->value();}
+    callback {m_process->Aux_Maximum = (int) o->value();}
     xywh {56 150 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 value 127 textcolor 7
     class RKR_Slider
   }
-  decl {RKR* m_rkr} {private local
+  decl {RKR* m_process} {private local
   }
 }

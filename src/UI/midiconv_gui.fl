@@ -14,35 +14,35 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_Counter.h"} {public global
 }
 
-widget_class {this->m_rgui = NULL; this->m_rkr = NULL;} MidiGui {
+widget_class {this->m_parent = NULL; this->m_process = NULL;} MidiGui {
   user_data 1 open
   xywh {1159 78 275 50} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
-  code3 {this->m_rgui = NULL; this->m_rkr = NULL;} visible position_relative
+  code3 {this->m_parent = NULL; this->m_process = NULL;} visible position_relative
 } {
   Function {initialize(RKR* _rkr, RKRGUI* _rgui)} {C return_type void
   } {
-    code {m_rkr = _rkr;
-m_rgui= _rgui;} {}
+    code {m_process = _rkr;
+m_parent= _rgui;} {}
   }
   Fl_Light_Button midi_activar {
     label On
     user_data 2
     callback {if ((int)o->value()==0)
   { 
-    m_rkr->efx_MIDIConverter->panic();
+    m_process->efx_MIDIConverter->panic();
     Mled->color(fl_darker(FL_RED));
     Mled->redraw();
   }
 
 
-  m_rkr->MIDIConverter_Bypass=(int)o->value();
+  m_process->MIDIConverter_Bypass=(int)o->value();
   Midi_out_Counter->do_callback();
 
-  if(m_rgui != NULL)
-    m_rgui->ChangeActives();
+  if(m_parent != NULL)
+    m_parent->ChangeActives();
 
   MIDI_LABEL->redraw_label();}
     tooltip {Enable MIDI Converter - Shortcut 'M'} xywh {5 4 38 18} shortcut 0x6d color 62 selection_color 1 labelsize 10 when 1
@@ -54,24 +54,24 @@ m_rgui= _rgui;} {}
     callback {switch((int)o->value())
 {
   case 0:
-  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,-2);
+  m_process->efx_MIDIConverter->changepar(MIDIConv_Octave,-2);
   break;
   
   case 1:
-  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,-1);
+  m_process->efx_MIDIConverter->changepar(MIDIConv_Octave,-1);
   break;
 
   case 2:
-  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,0);
+  m_process->efx_MIDIConverter->changepar(MIDIConv_Octave,0);
   break;
 
   case 3:
-  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,1);
+  m_process->efx_MIDIConverter->changepar(MIDIConv_Octave,1);
 
   break;
 
   case 4:
-  m_rkr->efx_MIDIConverter->changepar(MIDIConv_Octave,2);
+  m_process->efx_MIDIConverter->changepar(MIDIConv_Octave,2);
   break;
 
 }}
@@ -103,7 +103,7 @@ m_rgui= _rgui;} {}
   }
   Fl_Counter Midi_out_Counter {
     label Channel
-    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_Midi, (int)o->value());}
+    callback {m_process->efx_MIDIConverter->changepar(MIDIConv_Midi, (int)o->value());}
     tooltip {Channel to send MIDI out.} xywh {94 4 50 15} type Simple color 62 labelsize 9 labelcolor 7 minimum 1 maximum 16 step 1 value 1 textsize 11
     code0 {o->set_label_offset(-1);}
     code1 {o->set_text_offset(1);}
@@ -112,14 +112,14 @@ m_rgui= _rgui;} {}
   Fl_Check_Button Use_FFT {
     label FFT
     user_data 2
-    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_FFT, (int)o->value());} selected
+    callback {m_process->efx_MIDIConverter->changepar(MIDIConv_FFT, (int)o->value());} selected
     tooltip {FFT based algorithm which is much more
 CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1
     class RKR_Check_Button
   }
   Fl_Value_Slider Trig_Adj {
     label Trigger
-    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_Trigger,(int)o->value());}
+    callback {m_process->efx_MIDIConverter->changepar(MIDIConv_Trigger,(int)o->value());}
     xywh {147 15 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 2 maximum 60 step 1 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->shut_off_pixel_adjustment();}
@@ -127,7 +127,7 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
   }
   Fl_Value_Slider Vel_Adj {
     label Velocity
-    callback {m_rkr->efx_MIDIConverter->changepar(MIDIConv_Velocity,(int)o->value());}
+    callback {m_process->efx_MIDIConverter->changepar(MIDIConv_Velocity,(int)o->value());}
     xywh {147 34 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 1 maximum 100 step 1 textcolor 7
     code0 {o->set_label_offset(-2);}
     code1 {o->shut_off_pixel_adjustment();}
@@ -142,8 +142,8 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
     xywh {4 32 44 14} labelfont 1 labelcolor 7 when 0
     class RKR_Box
   }
-  decl {RKR  *m_rkr} {private local
+  decl {RKR  *m_process} {private local
   }
-  decl {RKRGUI *m_rgui} {private local
+  decl {RKRGUI *m_parent} {private local
   }
 }

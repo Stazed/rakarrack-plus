@@ -3,7 +3,7 @@
 #include "trigwindow_gui.h"
 
 void TrigWindowGui::cb_aux_source_i(RKR_Choice* o, void*) {
-  m_rkr->Aux_Source = (int) o->value();
+  m_process->Aux_Source = (int) o->value();
 }
 void TrigWindowGui::cb_aux_source(RKR_Choice* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_source_i(o,v);
@@ -17,14 +17,14 @@ Fl_Menu_Item TrigWindowGui::menu_aux_source[] = {
 };
 
 void TrigWindowGui::cb_aux_gain_i(RKR_Slider* o, void*) {
-  m_rkr->Aux_Gain = (int)o->value();
+  m_process->Aux_Gain = (int)o->value();
 }
 void TrigWindowGui::cb_aux_gain(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_gain_i(o,v);
 }
 
 void TrigWindowGui::cb_aux_thres_i(RKR_Slider* o, void*) {
-  m_rkr->Aux_Threshold = (int) o->value();
+  m_process->Aux_Threshold = (int) o->value();
 }
 void TrigWindowGui::cb_aux_thres(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_thres_i(o,v);
@@ -33,21 +33,21 @@ void TrigWindowGui::cb_aux_thres(RKR_Slider* o, void* v) {
 void TrigWindowGui::cb_aux_midi_i(RKR_Value_Input* o, void*) {
   if(o->value()> 127) o->value(127);
 if(o->value()< 1) o->value(1);
-m_rkr->Aux_MIDI = (int)o->value();
+m_process->Aux_MIDI = (int)o->value();
 }
 void TrigWindowGui::cb_aux_midi(RKR_Value_Input* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_midi_i(o,v);
 }
 
 void TrigWindowGui::cb_aux_min_i(RKR_Slider* o, void*) {
-  m_rkr->Aux_Minimum = (int) o->value();
+  m_process->Aux_Minimum = (int) o->value();
 }
 void TrigWindowGui::cb_aux_min(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_min_i(o,v);
 }
 
 void TrigWindowGui::cb_aux_max_i(RKR_Slider* o, void*) {
-  m_rkr->Aux_Maximum = (int) o->value();
+  m_process->Aux_Maximum = (int) o->value();
 }
 void TrigWindowGui::cb_aux_max(RKR_Slider* o, void* v) {
   ((TrigWindowGui*)(o->parent()))->cb_aux_max_i(o,v);
@@ -209,11 +209,11 @@ this->when(FL_WHEN_RELEASE);
   aux_max->align(Fl_Align(FL_ALIGN_LEFT));
   aux_max->when(FL_WHEN_CHANGED);
 } // RKR_Slider* aux_max
-this->m_rkr = NULL;
+this->m_process = NULL;
 end();
 resizable(this);
 }
 
 void TrigWindowGui::initialize(RKR *_rkr) {
-  m_rkr = _rkr;
+  m_process = _rkr;
 }

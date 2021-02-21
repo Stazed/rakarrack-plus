@@ -35,7 +35,7 @@ void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRG
     spr = smpsr;
     ns = PERIOD;
     sr = SAMPLERATE;
-    m_rgui = _rgui;
+    m_parent = _rgui;
 }
 
 void Analyzer::draw()
@@ -113,8 +113,8 @@ int Analyzer::handle(int event)
             if (Analyzer_ON)    // toggle
             {
                 Analyzer_ON = false;
-                m_rgui->Etit->show();
-                m_rgui->Etit->redraw();
+                m_parent->Etit->show();
+                m_parent->Etit->redraw();
             }
             return (1);
             break;

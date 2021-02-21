@@ -34,7 +34,7 @@ void Scope::init(float *smpsl, float *smpsr, int PERIOD, RKRGUI *_rgui)
     spl = smpsl;
     spr = smpsr;
     ns = PERIOD;
-    m_rgui = _rgui;
+    m_parent = _rgui;
 }
 
 void Scope::draw()
@@ -129,8 +129,8 @@ int Scope::handle(int event)
             if (Scope_ON)
             {
                 Scope_ON = false;
-                m_rgui->Tuner->show();
-                m_rgui->Tuner->redraw();
+                m_parent->Tuner->show();
+                m_parent->Tuner->redraw();
             }
             return (1);
             break;

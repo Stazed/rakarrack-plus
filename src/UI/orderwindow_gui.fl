@@ -17,14 +17,14 @@ decl {\#include "RKR_Check_Button.h"} {public global
 widget_class OrderWindowGui {open
   xywh {61 104 500 400} type Double color 4 resizable
   code0 {\#include "rakarrack.h"}
-  code1 {this->m_rkr = NULL;}
-  code2 {this->m_rgui = NULL;}
+  code1 {this->m_process = NULL;}
+  code2 {this->m_parent = NULL;}
   class Fl_Double_Window size_range {500 400 3200 2400} visible
 } {
   Function {initialize(RKR *_rkr,RKRGUI *_rgui )} {open C return_type void
   } {
-    code {m_rkr = _rkr;
-m_rgui= _rgui;} {}
+    code {m_process = _rkr;
+m_parent= _rgui;} {}
   }
   Fl_Box Fondo1 {
     xywh {1 1 600 400}
@@ -54,8 +54,8 @@ Order_Bro->insert(i,Avail_Bro->text(j));
 Avail_Bro->remove(j);
 Order_Bro->remove(i+1);
 Order_Bro->select(1);
-m_rkr->new_order[i-1]=m_rkr->availables[j];
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+m_process->new_order[i-1]=m_process->availables[j];
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
     xywh {200 145 50 25} labelsize 18
     code0 {o->set_label_offset(8);}
     class RKR_Button
@@ -77,11 +77,11 @@ i--;
 
 if (i>0) 
 {
-x=m_rkr->new_order[i];
-x1=m_rkr->new_order[i-1];
+x=m_process->new_order[i];
+x1=m_process->new_order[i-1];
 
-m_rkr->new_order[i]=x1;
-m_rkr->new_order[i-1]=x;
+m_process->new_order[i]=x1;
+m_process->new_order[i-1]=x;
 }}
     xywh {442 120 50 25} labelsize 18
     code0 {o->set_label_offset(8);}
@@ -99,11 +99,11 @@ i--;
 
 if (i<9)
 {
-x=m_rkr->new_order[i];
-x1=m_rkr->new_order[i+1];
+x=m_process->new_order[i];
+x1=m_process->new_order[i+1];
 
-m_rkr->new_order[i]=x1;
-m_rkr->new_order[i+1]=x;
+m_process->new_order[i]=x1;
+m_process->new_order[i+1]=x;
 }}
     xywh {442 160 50 25} labelsize 18
     code0 {o->set_label_offset(8);}
@@ -114,71 +114,71 @@ m_rkr->new_order[i+1]=x;
   } {
     Fl_Button Fil0 {
       label All
-      callback {m_rkr->Effect_Type_Filter=Type_All;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_All;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {15 284 177 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil1 {
       label Distortion
-      callback {m_rkr->Effect_Type_Filter=Type_Distortion;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_Distortion;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {105 304 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil2 {
       label Modulation
-      callback {m_rkr->Effect_Type_Filter=Type_Modulation;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_Modulation;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {15 304 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil4 {
       label Time
-      callback {m_rkr->Effect_Type_Filter=Type_Time;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_Time;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {105 325 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil8 {
       label Emulation
-      callback {m_rkr->Effect_Type_Filter=Type_Emulation;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_Emulation;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {15 324 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil16 {
       label Filters
-      callback {m_rkr->Effect_Type_Filter=Type_Filters;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_Filters;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {105 345 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil32 {
       label Dynamics
-      callback {m_rkr->Effect_Type_Filter=Type_Dynamics;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_Dynamics;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {15 344 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil64 {
       label {Processing && EQ}
-      callback {m_rkr->Effect_Type_Filter=Type_Processing_and_EQ;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);}
+      callback {m_process->Effect_Type_Filter=Type_Processing_and_EQ;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {105 365 86 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
     Fl_Button Fil128 {
       label Synthesis
-      callback {m_rkr->Effect_Type_Filter=Type_Synthesis;
-m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);} selected
+      callback {m_process->Effect_Type_Filter=Type_Synthesis;
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);} selected
       xywh {15 365 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }
   }
   Fl_Check_Button Order_DeacHide {
     label {Hide Unused Effect Widgets}
-    callback {m_rkr->deachide=(int) o->value();}
+    callback {m_process->deachide=(int) o->value();}
     xywh {420 286 23 20} down_box DOWN_BOX labelsize 11 labelcolor 7 align 4
     code0 {o->set_label_offset(2);}
     class RKR_Check_Button
@@ -186,8 +186,8 @@ m_rgui->Fill_Avail(m_rkr->Effect_Type_Filter);} selected
   Fl_Button ok_order {
     label Ok
     callback {int i;
-for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_rkr->efx_order[i]=m_rkr->new_order[i];
-m_rgui->reordena();
+for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_process->efx_order[i]=m_process->new_order[i];
+m_parent->reordena();
 do_callback();}
     xywh {333 349 72 26}
     code0 {o->set_label_offset(4);}
@@ -196,14 +196,14 @@ do_callback();}
   Fl_Button Cancel_order {
     label Cancel
     callback {int i;
-for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_rkr->efx_order[i]=m_rkr->saved_order[i];
+for (i=0;i<C_NUMBER_ORDERED_EFFECTS;i++) m_process->efx_order[i]=m_process->saved_order[i];
 do_callback();}
     xywh {415 349 72 26}
     code0 {o->set_label_offset(4);}
     class RKR_Button
   }
-  decl {RKR* m_rkr} {private local
+  decl {RKR* m_process} {private local
   }
-  decl {RKRGUI* m_rgui} {private local
+  decl {RKRGUI* m_parent} {private local
   }
 }

@@ -3,7 +3,7 @@
 #include "aboutwindow_gui.h"
 
 void AboutWindowGui::cb_LICENSE_i(Fl_Button*, void*) {
-  m_rgui->show_lic();
+  m_parent->show_lic();
 }
 void AboutWindowGui::cb_LICENSE(Fl_Button* o, void* v) {
   ((AboutWindowGui*)(o->parent()))->cb_LICENSE_i(o,v);
@@ -114,10 +114,10 @@ ld");
   o->labelsize(10);
   o->callback((Fl_Callback*)cb_OK);
 } // Fl_Button* o
-this->m_rgui = NULL;
+this->m_parent = NULL;
 end();
 }
 
 void AboutWindowGui::initialize(RKRGUI *_rgui ) {
-  m_rgui= _rgui;
+  m_parent= _rgui;
 }

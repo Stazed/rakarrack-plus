@@ -30,7 +30,7 @@ private:
   static void cb_LICENSE(Fl_Button*, void*);
   inline void cb_OK_i(Fl_Button*, void*);
   static void cb_OK(Fl_Button*, void*);
-  RKRGUI* m_rgui; 
+  RKRGUI* m_parent; 
 public:
   void initialize(RKRGUI *_rgui );
 };

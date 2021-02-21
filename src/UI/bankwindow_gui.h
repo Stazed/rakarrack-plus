@@ -85,8 +85,8 @@ private:
 public:
   Fl_Group *ob;
 private:
-  RKR* m_rkr; 
-  RKRGUI* m_rgui; 
+  RKR* m_process; 
+  RKRGUI* m_parent; 
   std::vector <std::string> m_bank_menu; 
 public:
   void initialize(RKR *_rkr,RKRGUI *_rgui );

@@ -3,31 +3,31 @@
 #include "midilearnwindow_gui.h"
 
 void MidiLearnWindowGui::cb_Epar_i(RKR_Browser*, void*) {
-  m_rgui->DisAssigns();
+  m_parent->DisAssigns();
 }
 void MidiLearnWindowGui::cb_Epar(RKR_Browser* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_Epar_i(o,v);
 }
 
 void MidiLearnWindowGui::cb_GMM_i(RKR_Button*, void*) {
-  m_rkr->ControlGet=0;
-m_rkr->CountWait=0;
-m_rkr->RControl=1;
+  m_process->ControlGet=0;
+m_process->CountWait=0;
+m_process->RControl=1;
 }
 void MidiLearnWindowGui::cb_GMM(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_GMM_i(o,v);
 }
 
 void MidiLearnWindowGui::cb_CopyF_i(RKR_Button*, void*) {
-  memcpy(m_rkr->XUserMIDI,m_rkr->Bank[TPresets->value()].XUserMIDI,sizeof(m_rkr->XUserMIDI));
-  m_rgui->DisAssigns();
+  memcpy(m_process->XUserMIDI,m_process->Bank[TPresets->value()].XUserMIDI,sizeof(m_process->XUserMIDI));
+  m_parent->DisAssigns();
 }
 void MidiLearnWindowGui::cb_CopyF(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_CopyF_i(o,v);
 }
 
 void MidiLearnWindowGui::cb_CopyT_i(RKR_Button*, void*) {
-  memcpy(m_rkr->Bank[TPresets->value()].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));
+  memcpy(m_process->Bank[TPresets->value()].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));
 }
 void MidiLearnWindowGui::cb_CopyT(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_CopyT_i(o,v);
@@ -37,34 +37,34 @@ void MidiLearnWindowGui::cb_ClearA_i(RKR_Button*, void*) {
   int i, j,k;
 int the_one;
 
-if (m_rkr->ML_filter==0)
- the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
+if (m_process->ML_filter==0)
+ the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
  else
- the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+ the_one = m_process->ML_clist[(int)Epar->value()-1];
 
 
 for(i=0; i<128; i++)
   {
     for(j=0;j<20;j++)
       {
-         if (m_rkr->XUserMIDI[i][j] == the_one)
+         if (m_process->XUserMIDI[i][j] == the_one)
            {
-             for(k=j+1;k<20;k++) m_rkr->XUserMIDI[i][k-1]=m_rkr->XUserMIDI[i][k];
-             m_rkr->XUserMIDI[i][19]=0;             
+             for(k=j+1;k<20;k++) m_process->XUserMIDI[i][k-1]=m_process->XUserMIDI[i][k];
+             m_process->XUserMIDI[i][19]=0;             
            }
        
        }  
    }
    
-    m_rgui->DisAssigns();
+    m_parent->DisAssigns();
 }
 void MidiLearnWindowGui::cb_ClearA(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_ClearA_i(o,v);
 }
 
 void MidiLearnWindowGui::cb_ClearP_i(RKR_Button*, void*) {
-  memset(m_rkr->XUserMIDI, 0, sizeof(m_rkr->XUserMIDI));
-    m_rgui->DisAssigns();
+  memset(m_process->XUserMIDI, 0, sizeof(m_process->XUserMIDI));
+    m_parent->DisAssigns();
 }
 void MidiLearnWindowGui::cb_ClearP(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_ClearP_i(o,v);
@@ -77,26 +77,26 @@ int the_one = 0;
 
 if((int)Epar->value()-1 >= 0)
 {
-    if (m_rkr->ML_filter==0)
-        the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
+    if (m_process->ML_filter==0)
+        the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
     else
-        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+        the_one = m_process->ML_clist[(int)Epar->value()-1];
 }
 
 for(i=0;i<20;i++)
 
  {
-    if(m_rkr->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
+    if(m_process->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
 
-    if(m_rkr->XUserMIDI[(int)Disp_Control->value()][i] ==0)
+    if(m_process->XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         m_rkr->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
+         m_process->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
  
  
-    m_rgui->DisAssigns();
+    m_parent->DisAssigns();
 }
 void MidiLearnWindowGui::cb_Assign(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_Assign_i(o,v);
@@ -108,10 +108,10 @@ int the_one = 0;
 
 if((int)Epar->value()-1 >= 0)
 {
-    if (m_rkr->ML_filter==0)
-        the_one = m_rkr->mc_efx_params[(int)Epar->value()-1].MC_params_index;
+    if (m_process->ML_filter==0)
+        the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
     else
-        the_one = m_rkr->ML_clist[(int)Epar->value()-1];
+        the_one = m_process->ML_clist[(int)Epar->value()-1];
 }
 
 for(j=1;j<61;j++)
@@ -120,11 +120,11 @@ for(j=1;j<61;j++)
 for(i=0;i<20;i++)
 
  {
-    if(m_rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == the_one) break;
+    if(m_process->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] == the_one) break;
 
-    if(m_rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
+    if(m_process->Bank[j].XUserMIDI[(int)Disp_Control->value()][i] ==0)
        {
-         m_rkr->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=the_one;
+         m_process->Bank[j].XUserMIDI[(int)Disp_Control->value()][i]=the_one;
          break;
         }
  }
@@ -138,7 +138,7 @@ void MidiLearnWindowGui::cb_AssignA(RKR_Button* o, void* v) {
 }
 
 void MidiLearnWindowGui::cb_CancelRec_i(RKR_Button*, void*) {
-  m_rkr->RControl = 0;
+  m_process->RControl = 0;
 GMM->color(fore_color);
 GMM->redraw();
 }
@@ -156,7 +156,7 @@ void MidiLearnWindowGui::cb_Disp_Control(RKR_Value_Input* o, void* v) {
 
 void MidiLearnWindowGui::cb_CopyTAll_i(RKR_Button*, void*) {
   int i;
-for(i=1;i<61;i++) memcpy(m_rkr->Bank[i].XUserMIDI,m_rkr->XUserMIDI, sizeof(m_rkr->XUserMIDI));
+for(i=1;i<61;i++) memcpy(m_process->Bank[i].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));
 }
 void MidiLearnWindowGui::cb_CopyTAll(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()))->cb_CopyTAll_i(o,v);
@@ -170,16 +170,16 @@ void MidiLearnWindowGui::cb_CloseML(RKR_Button* o, void* v) {
 }
 
 void MidiLearnWindowGui::cb_M_fil_all_i(RKR_Button*, void*) {
-  m_rkr->ML_filter=0;
-      m_rgui->FillML();
+  m_process->ML_filter=0;
+      m_parent->FillML();
 }
 void MidiLearnWindowGui::cb_M_fil_all(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()->parent()))->cb_M_fil_all_i(o,v);
 }
 
 void MidiLearnWindowGui::cb_M_fil_current_i(RKR_Button*, void*) {
-  m_rkr->ML_filter=1;
-      m_rgui->FillML();
+  m_process->ML_filter=1;
+      m_parent->FillML();
 }
 void MidiLearnWindowGui::cb_M_fil_current(RKR_Button* o, void* v) {
   ((MidiLearnWindowGui*)(o->parent()->parent()))->cb_M_fil_current_i(o,v);
@@ -657,13 +657,13 @@ this->when(FL_WHEN_RELEASE);
   } // RKR_Button* M_fil_current
   Filters_ML->end();
 } // Fl_Group* Filters_ML
-this->m_rkr = NULL;
-this->m_rgui = NULL;
+this->m_process = NULL;
+this->m_parent = NULL;
 end();
 resizable(this);
 }
 
 void MidiLearnWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui ) {
-  m_rkr = _rkr;
-  m_rgui= _rgui;
+  m_process = _rkr;
+  m_parent= _rgui;
 }

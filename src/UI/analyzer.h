@@ -35,7 +35,7 @@ public:
     void set_analyzer_ON(bool a_set){Analyzer_ON = a_set;}
     bool get_analyzer_ON(){return Analyzer_ON;}
 private:
-    RKRGUI *m_rgui;
+    RKRGUI *m_parent;
     float *spl; 
     float *spr; 
     int sr; 

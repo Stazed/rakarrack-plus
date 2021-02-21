@@ -97,8 +97,8 @@ public:
 private:
   inline void cb_Cancel_order_i(RKR_Button*, void*);
   static void cb_Cancel_order(RKR_Button*, void*);
-  RKR* m_rkr; 
-  RKRGUI* m_rgui; 
+  RKR* m_process; 
+  RKRGUI* m_parent; 
 public:
   void initialize(RKR *_rkr,RKRGUI *_rgui );
 };

@@ -48,7 +48,7 @@ public:
 private:
   inline void cb_aux_max_i(RKR_Slider*, void*);
   static void cb_aux_max(RKR_Slider*, void*);
-  RKR* m_rkr; 
+  RKR* m_process; 
 public:
   void initialize(RKR *_rkr);
 };
