@@ -3,7 +3,7 @@
 #include "chorus_gui.h"
 
 void ChorusGui::cb_chorus_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_CHORUS]);
@@ -41,7 +41,7 @@ Fl_Menu_Item ChorusGui::menu_chorus_preset[] = {
 };
 
 void ChorusGui::cb_chorus_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_DryWet);
  return;
@@ -53,7 +53,7 @@ void ChorusGui::cb_chorus_WD(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Pan);
  return;
@@ -65,7 +65,7 @@ void ChorusGui::cb_chorus_pan(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Tempo);
  return;
@@ -77,7 +77,7 @@ void ChorusGui::cb_chorus_freq(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_rnd_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Random);
  return;
@@ -89,7 +89,7 @@ void ChorusGui::cb_chorus_rnd(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Type);
  return;
@@ -116,7 +116,7 @@ void ChorusGui::cb_chorus_awesome(RKR_Check_Button* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Stereo);
  return;
@@ -128,7 +128,7 @@ void ChorusGui::cb_chorus_stdf(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Depth);
  return;
@@ -140,7 +140,7 @@ void ChorusGui::cb_chorus_dpth(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_delay_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Delay);
  return;
@@ -153,7 +153,7 @@ void ChorusGui::cb_chorus_delay(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Feedback);
  return;
@@ -165,7 +165,7 @@ void ChorusGui::cb_chorus_fb(RKR_Slider* o, void* v) {
 }
 
 void ChorusGui::cb_chorus_LR_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LR_Cross);
  return;

@@ -3,7 +3,7 @@
 #include "alienwah_gui.h"
 
 void AlienwahGui::cb_Alienwah_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ALIENWAH]);
@@ -40,7 +40,7 @@ Fl_Menu_Item AlienwahGui::menu_Alienwah_preset[] = {
 };
 
 void AlienwahGui::cb_Alienwah_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_DryWet);
  return;
@@ -52,7 +52,7 @@ void AlienwahGui::cb_Alienwah_WD(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_Pan);
  return;
@@ -64,7 +64,7 @@ void AlienwahGui::cb_Alienwah_pan(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_LFO_Tempo);
  return;
@@ -76,7 +76,7 @@ void AlienwahGui::cb_Alienwah_freq(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_rnd_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_LFO_Random);
  return;
@@ -88,7 +88,7 @@ void AlienwahGui::cb_Alienwah_rnd(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_LFO_Type);
  return;
@@ -101,7 +101,7 @@ void AlienwahGui::cb_Alienwah_lfotype(RKR_Choice* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_phase_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_Phase);
  return;
@@ -113,7 +113,7 @@ void AlienwahGui::cb_Alienwah_phase(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_LFO_Stereo);
  return;
@@ -125,7 +125,7 @@ void AlienwahGui::cb_Alienwah_stdf(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_Depth);
  return;
@@ -137,7 +137,7 @@ void AlienwahGui::cb_Alienwah_dpth(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_delay_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_Delay);
  return;
@@ -151,7 +151,7 @@ void AlienwahGui::cb_Alienwah_delay(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_Feedback);
  return;
@@ -163,7 +163,7 @@ void AlienwahGui::cb_Alienwah_fb(RKR_Slider* o, void* v) {
 }
 
 void AlienwahGui::cb_Alienwah_LR_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Alien_LR_Cross);
  return;

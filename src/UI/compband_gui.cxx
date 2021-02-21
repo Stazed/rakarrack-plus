@@ -3,7 +3,7 @@
 #include "compband_gui.h"
 
 void CbandGui::cb_cband_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_COMPBAND]);
@@ -39,7 +39,7 @@ Fl_Menu_Item CbandGui::menu_cband_preset[] = {
 };
 
 void CbandGui::cb_cband_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_DryWet);
  return;
@@ -51,7 +51,7 @@ void CbandGui::cb_cband_WD(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_gain_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Gain);
  return;
@@ -63,7 +63,7 @@ void CbandGui::cb_cband_gain(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_Lratio_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Low_Ratio);
  return;
@@ -75,7 +75,7 @@ void CbandGui::cb_cband_Lratio(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_MLratio_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Mid_1_Ratio);
  return;
@@ -87,7 +87,7 @@ void CbandGui::cb_cband_MLratio(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_MHratio_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Mid_2_Ratio);
  return;
@@ -99,7 +99,7 @@ void CbandGui::cb_cband_MHratio(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_Hratio_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_High_Ratio);
  return;
@@ -111,7 +111,7 @@ void CbandGui::cb_cband_Hratio(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_Lthres_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Low_Thresh);
  return;
@@ -123,7 +123,7 @@ void CbandGui::cb_cband_Lthres(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_MLthres_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Mid_1_Thresh);
  return;
@@ -135,7 +135,7 @@ void CbandGui::cb_cband_MLthres(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_MHthres_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Mid_2_Thresh);
  return;
@@ -147,7 +147,7 @@ void CbandGui::cb_cband_MHthres(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_Hthres_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_High_Thresh);
  return;
@@ -159,7 +159,7 @@ void CbandGui::cb_cband_Hthres(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_cross1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Cross_1);
  return;
@@ -171,7 +171,7 @@ void CbandGui::cb_cband_cross1(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_cross2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Cross_2);
  return;
@@ -183,7 +183,7 @@ void CbandGui::cb_cband_cross2(RKR_Slider* o, void* v) {
 }
 
 void CbandGui::cb_cband_cross3_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_CompBand_Cross_3);
  return;

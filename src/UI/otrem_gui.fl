@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} OtremGui {
   Fl_Light_Button otrem_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_OPTICALTREM]);
@@ -85,7 +85,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_OPTICALTREM]; i++)
   }
   Fl_Value_Slider otrem_dpth {
     label Depth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_Depth);
  return;
@@ -96,7 +96,7 @@ m_process->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_Depth,(int)o->value(
   }
   Fl_Value_Slider otrem_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Tempo);
  return;
@@ -107,7 +107,7 @@ m_process->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Tempo,(int)o->va
   }
   Fl_Value_Slider otrem_rnd {
     label Random
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Random);
  return;
@@ -118,7 +118,7 @@ m_process->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Random,(int)o->v
   }
   Fl_Choice otrem_lfotype {
     label {LFO Type}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Type);
  return;
@@ -131,7 +131,7 @@ m_process->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Type,(int)o->val
   } {}
   Fl_Value_Slider otrem_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Stereo);
  return;
@@ -142,7 +142,7 @@ m_process->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Stereo,(int)o->v
   }
   Fl_Value_Slider otrem_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_Pan);
  return;

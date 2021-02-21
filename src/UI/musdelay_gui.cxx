@@ -3,7 +3,7 @@
 #include "musdelay_gui.h"
 
 void MusdelayGui::cb_musdelay_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_MUSICAL_DELAY]);
@@ -41,7 +41,7 @@ Fl_Menu_Item MusdelayGui::menu_musdelay_preset[] = {
 };
 
 void MusdelayGui::cb_musdelay_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_DryWet);
  return;
@@ -53,7 +53,7 @@ void MusdelayGui::cb_musdelay_WD(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_LRc_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_LR_Cross);
  return;
@@ -65,7 +65,7 @@ void MusdelayGui::cb_musdelay_LRc(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_pan1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Pan_1);
  return;
@@ -77,7 +77,7 @@ void MusdelayGui::cb_musdelay_pan1(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_pan2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Pan_2);
  return;
@@ -137,7 +137,7 @@ void MusdelayGui::cb_musdelay_delay2(RKR_Choice* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_tempo_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Tempo);
  return;
@@ -151,7 +151,7 @@ void MusdelayGui::cb_musdelay_tempo(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_gain1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Gain_1);
  return;
@@ -163,7 +163,7 @@ void MusdelayGui::cb_musdelay_gain1(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_gain2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Gain_2);
  return;
@@ -175,7 +175,7 @@ void MusdelayGui::cb_musdelay_gain2(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_fb1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Feedback_1);
  return;
@@ -187,7 +187,7 @@ void MusdelayGui::cb_musdelay_fb1(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_fb2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Feedback_2);
  return;
@@ -199,7 +199,7 @@ void MusdelayGui::cb_musdelay_fb2(RKR_Slider* o, void* v) {
 }
 
 void MusdelayGui::cb_musdelay_damp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Damp);
  return;

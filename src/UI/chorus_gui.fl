@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} ChorusGui {
   Fl_Light_Button chorus_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_CHORUS]);
@@ -77,7 +77,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_CHORUS]; i++)
   }
   Fl_Value_Slider chorus_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_DryWet);
  return;
@@ -88,7 +88,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_DryWet,Dry_Wet((int)(o->va
   }
   Fl_Value_Slider chorus_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Pan);
  return;
@@ -99,7 +99,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Pan,(int)(o->value()+64));
   }
   Fl_Value_Slider chorus_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Tempo);
  return;
@@ -110,7 +110,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo,(int)o->value())
   }
   Fl_Value_Slider chorus_rnd {
     label Random
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Random);
  return;
@@ -122,7 +122,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Random,(int)o->value()
   Fl_Choice chorus_lfotype {
     label {LFO Type}
     user_data 12
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Type);
  return;
@@ -149,7 +149,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type,(int)o->value())}
   }
   Fl_Value_Slider chorus_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Stereo);
  return;
@@ -160,7 +160,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Stereo,(int)o->value()
   }
   Fl_Value_Slider chorus_dpth {
     label Depth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Depth);
  return;
@@ -171,7 +171,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Depth,(int)o->value());}
   }
   Fl_Value_Slider chorus_delay {
     label Delay
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Delay);
  return;
@@ -183,7 +183,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Delay,(int)o->value());}
   }
   Fl_Value_Slider chorus_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_Feedback);
  return;
@@ -194,7 +194,7 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Feedback,(int)o->value());
   }
   Fl_Value_Slider chorus_LR {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LR_Cross);
  return;

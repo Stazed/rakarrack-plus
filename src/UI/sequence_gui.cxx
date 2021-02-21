@@ -3,7 +3,7 @@
 #include "sequence_gui.h"
 
 void SequenceGui::cb_seq_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SEQUENCE]);
@@ -47,7 +47,7 @@ Fl_Menu_Item SequenceGui::menu_seq_preset[] = {
 };
 
 void SequenceGui::cb_seq_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_DryWet);
  return;
@@ -59,7 +59,7 @@ void SequenceGui::cb_seq_WD(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_1);
  return;
@@ -71,7 +71,7 @@ void SequenceGui::cb_seq_1(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_2);
  return;
@@ -83,7 +83,7 @@ void SequenceGui::cb_seq_2(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_3_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_3);
  return;
@@ -95,7 +95,7 @@ void SequenceGui::cb_seq_3(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_4_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_4);
  return;
@@ -107,7 +107,7 @@ void SequenceGui::cb_seq_4(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_5_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_5);
  return;
@@ -119,7 +119,7 @@ void SequenceGui::cb_seq_5(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_6_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_6);
  return;
@@ -131,7 +131,7 @@ void SequenceGui::cb_seq_6(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_7_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_7);
  return;
@@ -143,7 +143,7 @@ void SequenceGui::cb_seq_7(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_8_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_8);
  return;
@@ -155,7 +155,7 @@ void SequenceGui::cb_seq_8(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_tempo_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Tempo);
  return;
@@ -167,7 +167,7 @@ void SequenceGui::cb_seq_tempo(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_q_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Resonance);
  return;
@@ -179,7 +179,7 @@ void SequenceGui::cb_seq_q(RKR_Slider* o, void* v) {
 }
 
 void SequenceGui::cb_seq_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Stdf);
  return;

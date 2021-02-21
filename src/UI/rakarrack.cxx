@@ -377,7 +377,7 @@ void RKRGUI::cb_BostBut(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Balance_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  getMIDIControl(MC_Balance_FX);
  return;
@@ -389,7 +389,7 @@ void RKRGUI::cb_Balance(RKR_Slider* o, void* v) {
 }
 
 void RKRGUI::cb_Nivel_Entrada_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  getMIDIControl(MC_Input_Volume);
  return;
@@ -402,7 +402,7 @@ void RKRGUI::cb_Nivel_Entrada(RKR_Slider* o, void* v) {
 }
 
 void RKRGUI::cb_Nivel_Salida_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  getMIDIControl(MC_Output_Volume);
  return;

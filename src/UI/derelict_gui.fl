@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} DerelictGui {
   Fl_Light_Button derelict_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_DERELICT]);
@@ -69,7 +69,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_DERELICT]; i++)
   }
   Fl_Value_Slider derelict_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_DryWet);
  return;
@@ -80,7 +80,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_DryWet,Dry_Wet((int)(o->va
   }
   Fl_Value_Slider derelict_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_LR_Cross);
  return;
@@ -91,7 +91,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_LR_Cross,(int)(o->value())
   }
   Fl_Value_Slider derelict_drive {
     label Drive
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_Drive);
  return;
@@ -102,7 +102,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Drive,(int)o->value());}
   }
   Fl_Value_Slider derelict_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_Level);
  return;
@@ -113,7 +113,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Level,(int)o->value());}
   }
   Fl_Choice derelict_tipo {
     label Type
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_Type);
  return;
@@ -133,7 +133,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Type,(int)o->value());}
   }
   Fl_Value_Slider derelict_st {
     label Color
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_Color);
  return;
@@ -144,7 +144,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Color,(int)o->value());}
   }
   Fl_Value_Slider derelict_oct {
     label {Sub Octv}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_Suboctave);
  return;
@@ -155,7 +155,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Suboctave,(int)o->value())
   }
   Fl_Value_Slider derelict_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_Pan);
  return;
@@ -173,7 +173,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Pan,(int)(o->value()+64));
   }
   Fl_Value_Slider derelict_lpf {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_LPF);
  return;
@@ -184,7 +184,7 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_LPF,(int)o->value());}
   }
   Fl_Value_Slider derelict_hpf {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dere_HPF);
  return;

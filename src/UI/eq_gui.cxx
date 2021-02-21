@@ -3,7 +3,7 @@
 #include "eq_gui.h"
 
 void EqGui::cb_eq_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_EQ]);
@@ -39,7 +39,7 @@ Fl_Menu_Item EqGui::menu_eq_preset[] = {
 };
 
 void EqGui::cb_eq_Gain_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_Gain);
  return;
@@ -51,7 +51,7 @@ void EqGui::cb_eq_Gain(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_Q_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_Q);
  return;
@@ -64,7 +64,7 @@ void EqGui::cb_eq_Q(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_31_HZ);
  return;
@@ -76,7 +76,7 @@ void EqGui::cb_eq_1(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_63_HZ);
  return;
@@ -88,7 +88,7 @@ void EqGui::cb_eq_2(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_3_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_125_HZ);
  return;
@@ -100,7 +100,7 @@ void EqGui::cb_eq_3(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_4_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_250_HZ);
  return;
@@ -112,7 +112,7 @@ void EqGui::cb_eq_4(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_5_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_500_HZ);
  return;
@@ -124,7 +124,7 @@ void EqGui::cb_eq_5(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_6_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_1_KHZ);
  return;
@@ -136,7 +136,7 @@ void EqGui::cb_eq_6(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_7_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_2_KHZ);
  return;
@@ -148,7 +148,7 @@ void EqGui::cb_eq_7(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_8_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_4_KHZ);
  return;
@@ -160,7 +160,7 @@ void EqGui::cb_eq_8(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_9_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_8_KHZ);
  return;
@@ -172,7 +172,7 @@ void EqGui::cb_eq_9(RKR_Slider* o, void* v) {
 }
 
 void EqGui::cb_eq_10_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_16_KHZ);
  return;

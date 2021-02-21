@@ -25,7 +25,7 @@ widget_class ShuffleGui {
   Fl_Light_Button shuffle_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SHUFFLE]);
@@ -76,7 +76,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_SHUFFLE]; i++)
   }
   Fl_Value_Slider shuffle_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_DryWet);
  return;
@@ -87,7 +87,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_DryWet,Dry_Wet((int)o->v
   }
   Fl_Value_Slider shuffle_cross1 {
     label {Low Freq}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_L);
  return;
@@ -98,7 +98,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_L,(int)o->value());
   }
   Fl_Value_Slider shuffle_volL {
     label {Low Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_L);
  return;
@@ -109,7 +109,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_L,(int)o->value());
   }
   Fl_Value_Slider shuffle_cross2 {
     label {M.L. Freq}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_ML);
  return;
@@ -120,7 +120,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_ML,(int)o->value())
   }
   Fl_Value_Slider shuffle_volML {
     label {M.L Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_ML);
  return;
@@ -131,7 +131,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_ML,(int)o->value())
   }
   Fl_Value_Slider shuffle_cross3 {
     label {M.H. Freq}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_MH);
  return;
@@ -142,7 +142,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_MH,(int)o->value())
   }
   Fl_Value_Slider shuffle_volMH {
     label {M.H. Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_MH);
  return;
@@ -153,7 +153,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_MH,(int)o->value())
   }
   Fl_Value_Slider shuffle_cross4 {
     label {High Freq}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_H);
  return;
@@ -164,7 +164,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Freq_H,(int)o->value());
   }
   Fl_Value_Slider shuffle_volH {
     label {High Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_H);
  return;
@@ -175,7 +175,7 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Gain_H,(int)o->value());
   }
   Fl_Value_Slider shuffle_Q {
     label Q
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Width);
  return;

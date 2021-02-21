@@ -22,7 +22,7 @@ widget_class MusdelayGui {
   Fl_Light_Button musdelay_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_MUSICAL_DELAY]);
@@ -64,7 +64,7 @@ if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
   }
   Fl_Value_Slider musdelay_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_DryWet);
  return;
@@ -75,7 +75,7 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_DryWet,Dry_Wet((int)
   }
   Fl_Value_Slider musdelay_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_LR_Cross);
  return;
@@ -86,7 +86,7 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_LR_Cross,(int)o->val
   }
   Fl_Value_Slider musdelay_pan1 {
     label {Pan 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Pan_1);
  return;
@@ -97,7 +97,7 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_1,(int)o->value(
   }
   Fl_Value_Slider musdelay_pan2 {
     label {Pan 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Pan_2);
  return;
@@ -186,7 +186,7 @@ if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
   } {}
   Fl_Value_Slider musdelay_tempo {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Tempo);
  return;
@@ -199,7 +199,7 @@ if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
   }
   Fl_Value_Slider musdelay_gain1 {
     label {Gain 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Gain_1);
  return;
@@ -210,7 +210,7 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_1,(int)o->value
   }
   Fl_Value_Slider musdelay_gain2 {
     label {Gain 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Gain_2);
  return;
@@ -221,7 +221,7 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Gain_2,(int)o->value
   }
   Fl_Value_Slider musdelay_fb1 {
     label {FB 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Feedback_1);
  return;
@@ -232,7 +232,7 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_1,(int)o->v
   }
   Fl_Value_Slider musdelay_fb2 {
     label {FB 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Feedback_2);
  return;
@@ -243,7 +243,7 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Feedback_2,(int)o->v
   }
   Fl_Value_Slider musdelay_damp {
     label Damp
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Music_Damp);
  return;

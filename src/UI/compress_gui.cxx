@@ -3,7 +3,7 @@
 #include "compress_gui.h"
 
 void CompressGui::cb_compress_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_COMPRESSOR]);
@@ -39,7 +39,7 @@ Fl_Menu_Item CompressGui::menu_compress_preset[] = {
 };
 
 void CompressGui::cb_compress_ATime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Attack);
  return;
@@ -51,7 +51,7 @@ void CompressGui::cb_compress_ATime(RKR_Slider* o, void* v) {
 }
 
 void CompressGui::cb_compress_RTime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Release);
  return;
@@ -63,7 +63,7 @@ void CompressGui::cb_compress_RTime(RKR_Slider* o, void* v) {
 }
 
 void CompressGui::cb_compress_Ratio_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Ratio);
  return;
@@ -75,7 +75,7 @@ void CompressGui::cb_compress_Ratio(RKR_Slider* o, void* v) {
 }
 
 void CompressGui::cb_compress_Knee_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Knee);
  return;
@@ -87,7 +87,7 @@ void CompressGui::cb_compress_Knee(RKR_Slider* o, void* v) {
 }
 
 void CompressGui::cb_compress_threshold_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Threshold);
  return;
@@ -99,7 +99,7 @@ void CompressGui::cb_compress_threshold(RKR_Slider* o, void* v) {
 }
 
 void CompressGui::cb_compress_output_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Output);
  return;

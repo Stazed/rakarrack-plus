@@ -28,7 +28,7 @@ widget_class LooperGui {
   Fl_Light_Button looper_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_LOOPER]);
@@ -78,7 +78,7 @@ looper_ms->value(m_process->Rack_Effects[EFX_LOOPER]->getpar(Looper_M_S));}
   }
   Fl_Value_Slider looper_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_DryWet);
  return;
@@ -89,7 +89,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_DryWet,Dry_Wet((int)(o->va
   }
   Fl_Value_Slider looper_level1 {
     label {Level 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Level_1);
  return;
@@ -100,7 +100,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_Level_1,(int)o->value());}
   }
   Fl_Value_Slider looper_level2 {
     label {Level 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Level_2);
  return;
@@ -111,7 +111,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_Level_2,(int)o->value());}
   }
   Fl_Value_Slider looper_Tempo {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Tempo);
  return;
@@ -137,7 +137,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_Tempo,(int)o->value());}
   Fl_Check_Button looper_rv {
     label Reverse
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Reverse);
  return;
@@ -149,7 +149,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_Reverse,(int)o->value())}
   Fl_Check_Button looper_ap {
     label {Auto Play}
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_AutoPlay);
  return;
@@ -179,7 +179,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_AutoPlay,(int)o->value())}
   Fl_Button looper_play {
     label {@|>}
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Play);
  return;
@@ -193,7 +193,7 @@ m_parent->update_looper();}
   Fl_Button looper_stop {
     label {@||}
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Stop);
  return;
@@ -207,7 +207,7 @@ m_parent->update_looper();}
   Fl_Button looper_record {
     label {@circle}
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Record);
  return;
@@ -227,7 +227,7 @@ m_parent->update_looper();}
   Fl_Check_Button looper_r1 {
     label R1
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Rec_1);
  return;
@@ -239,7 +239,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_Rec_1,(int)o->value())}
   Fl_Check_Button looper_r2 {
     label R2
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Rec_2);
  return;
@@ -251,7 +251,7 @@ m_process->Rack_Effects[EFX_LOOPER]->changepar(Looper_Rec_2,(int)o->value())}
   Fl_Button looper_t1 {
     label 1
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Track_1);
  return;
@@ -264,7 +264,7 @@ m_parent->update_looper();}
   Fl_Button looper_t2 {
     label 2
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Track_2);
  return;
@@ -284,7 +284,7 @@ m_parent->update_looper();}
   Fl_Button looper_clear {
     label Clear
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Looper_Clear);
  return;

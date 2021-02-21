@@ -3,7 +3,7 @@
 #include "har_gui.h"
 
 void HarGui::cb_har_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_HARMONIZER]);
@@ -44,7 +44,7 @@ Fl_Menu_Item HarGui::menu_har_preset[] = {
 };
 
 void HarGui::cb_har_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_DryWet);
  return;
@@ -56,7 +56,7 @@ void HarGui::cb_har_WD(RKR_Slider* o, void* v) {
 }
 
 void HarGui::cb_har_int_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Interval);
  return;
@@ -70,7 +70,7 @@ void HarGui::cb_har_int(RKR_Slider* o, void* v) {
 }
 
 void HarGui::cb_har_gan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Gain);
  return;
@@ -82,7 +82,7 @@ void HarGui::cb_har_gan(RKR_Slider* o, void* v) {
 }
 
 void HarGui::cb_har_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Pan);
  return;
@@ -94,7 +94,7 @@ void HarGui::cb_har_pan(RKR_Slider* o, void* v) {
 }
 
 void HarGui::cb_har_freq1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Filter_Freq);
  return;
@@ -106,7 +106,7 @@ void HarGui::cb_har_freq1(RKR_Slider* o, void* v) {
 }
 
 void HarGui::cb_har_gan1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Filter_Gain);
  return;
@@ -118,7 +118,7 @@ void HarGui::cb_har_gan1(RKR_Slider* o, void* v) {
 }
 
 void HarGui::cb_har_q1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Filter_Q);
  return;
@@ -139,7 +139,7 @@ void HarGui::cb_har_MIDI(RKR_Check_Button* o, void* v) {
 }
 
 void HarGui::cb_har_SELECT_i(RKR_Check_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Select);
  return;
@@ -154,7 +154,7 @@ void HarGui::cb_har_SELECT(RKR_Check_Button* o, void* v) {
 }
 
 void HarGui::cb_har_note_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Note);
  return;
@@ -167,7 +167,7 @@ void HarGui::cb_har_note(RKR_Slider* o, void* v) {
 }
 
 void HarGui::cb_har_type_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Chord);
  return;

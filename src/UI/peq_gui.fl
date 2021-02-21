@@ -22,7 +22,7 @@ widget_class PeqGui {
   Fl_Light_Button eqp_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_PARAMETRIC]);
@@ -65,7 +65,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_PARAMETRIC]; i++)
   }
   Fl_Value_Slider eqp_Gain {
     label Gain
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_Gain);
  return;
@@ -76,7 +76,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Gain,(int)(o->valu
   }
   Fl_Value_Slider eqp_LF {
     label {Low F.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_Low_Freq);
  return;
@@ -87,7 +87,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Freq,(int)o->v
   }
   Fl_Value_Slider eqp_LFg {
     label {Low G.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_Low_Gain);
  return;
@@ -98,7 +98,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Gain,(int)(o->
   }
   Fl_Value_Slider eqp_LQ {
     label {Low Q.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_Low_Q);
  return;
@@ -109,7 +109,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Low_Q,(int)(o->val
   }
   Fl_Value_Slider eqp_MF {
     label {Mid F.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_Mid_Freq);
  return;
@@ -120,7 +120,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Freq,(int)o->v
   }
   Fl_Value_Slider eqp_MFg {
     label {Mid G.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_Mid_Gain);
  return;
@@ -131,7 +131,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Gain,(int)(o->
   }
   Fl_Value_Slider eqp_MQ {
     label {Mid Q.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_Mid_Q);
  return;
@@ -142,7 +142,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_Mid_Q,(int)(o->val
   }
   Fl_Value_Slider eqp_HF {
     label {High F.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_High_Freq);
  return;
@@ -153,7 +153,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Freq,(int)o->
   }
   Fl_Value_Slider eqp_HFg {
     label {High G.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_High_Gain);
  return;
@@ -164,7 +164,7 @@ m_process->Rack_Effects[EFX_PARAMETRIC]->changepar(Parametric_High_Gain,(int)(o-
   }
   Fl_Value_Slider eqp_HQ {
     label {High Q.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Parametric_High_Q);
  return;

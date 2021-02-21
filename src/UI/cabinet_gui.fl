@@ -22,7 +22,7 @@ widget_class CabinetGui {
   Fl_Light_Button Cabinet_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_CABINET]);
@@ -89,7 +89,7 @@ m_parent->findpos(EFX_CABINET,(int)o->value(),o);}
   }
   Fl_Value_Slider Cabinet_output {
     label Gain
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Cabinet_Gain);
  return;

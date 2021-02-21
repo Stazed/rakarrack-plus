@@ -3,7 +3,7 @@
 #include "sustain_gui.h"
 
 void SustainGui::cb_sus_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Multi_On_Off);
          o->value(m_process->EFX_Bypass[EFX_SUSTAINER]);
@@ -39,7 +39,7 @@ Fl_Menu_Item SustainGui::menu_sus_preset[] = {
 };
 
 void SustainGui::cb_sus_gain_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sustain_Gain);
  return;
@@ -51,7 +51,7 @@ void SustainGui::cb_sus_gain(RKR_Slider* o, void* v) {
 }
 
 void SustainGui::cb_sus_sus_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sustain_Sustain);
  return;

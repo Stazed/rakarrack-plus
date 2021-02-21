@@ -3,7 +3,7 @@
 #include "ovrd_gui.h"
 
 void OvrdGui::cb_ovrd_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_OVERDRIVE]);
@@ -38,7 +38,7 @@ Fl_Menu_Item OvrdGui::menu_ovrd_preset[] = {
 };
 
 void OvrdGui::cb_ovrd_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_DryWet);
  return;
@@ -50,7 +50,7 @@ void OvrdGui::cb_ovrd_WD(RKR_Slider* o, void* v) {
 }
 
 void OvrdGui::cb_ovrd_LRc_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_LR_Cross);
  return;
@@ -62,7 +62,7 @@ void OvrdGui::cb_ovrd_LRc(RKR_Slider* o, void* v) {
 }
 
 void OvrdGui::cb_ovrd_drive_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Drive);
  return;
@@ -74,7 +74,7 @@ void OvrdGui::cb_ovrd_drive(RKR_Slider* o, void* v) {
 }
 
 void OvrdGui::cb_ovrd_level_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Level);
  return;
@@ -86,7 +86,7 @@ void OvrdGui::cb_ovrd_level(RKR_Slider* o, void* v) {
 }
 
 void OvrdGui::cb_ovrd_tipo_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Type);
  return;
@@ -113,7 +113,7 @@ void OvrdGui::cb_ovrd_st(RKR_Check_Button* o, void* v) {
 }
 
 void OvrdGui::cb_ovrd_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Pan);
  return;
@@ -132,7 +132,7 @@ void OvrdGui::cb_ovrd_pf(RKR_Check_Button* o, void* v) {
 }
 
 void OvrdGui::cb_ovrd_lpf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_LPF);
  return;
@@ -144,7 +144,7 @@ void OvrdGui::cb_ovrd_lpf(RKR_Slider* o, void* v) {
 }
 
 void OvrdGui::cb_ovrd_hpf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_HPF);
  return;

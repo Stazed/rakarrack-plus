@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} OvrdGui {
   Fl_Light_Button ovrd_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_OVERDRIVE]);
@@ -65,7 +65,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_OVERDRIVE]; i++)
   }
   Fl_Value_Slider ovrd_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_DryWet);
  return;
@@ -76,7 +76,7 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_DryWet,Dry_Wet((int)
   }
   Fl_Value_Slider ovrd_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_LR_Cross);
  return;
@@ -87,7 +87,7 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LR_Cross,(int)(o->va
   }
   Fl_Value_Slider ovrd_drive {
     label Drive
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Drive);
  return;
@@ -98,7 +98,7 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Drive,(int)o->value(
   }
   Fl_Value_Slider ovrd_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Level);
  return;
@@ -109,7 +109,7 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Level,(int)o->value(
   }
   Fl_Choice ovrd_tipo {
     label Type
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Type);
  return;
@@ -136,7 +136,7 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Type,(int)o->value()
   }
   Fl_Value_Slider ovrd_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_Pan);
  return;
@@ -154,7 +154,7 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Pan,(int)(o->value()
   }
   Fl_Value_Slider ovrd_lpf {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_LPF);
  return;
@@ -165,7 +165,7 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_LPF,(int)o->value())
   }
   Fl_Value_Slider ovrd_hpf {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Overdrive_HPF);
  return;

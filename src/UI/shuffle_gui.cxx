@@ -3,7 +3,7 @@
 #include "shuffle_gui.h"
 
 void ShuffleGui::cb_shuffle_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SHUFFLE]);
@@ -41,7 +41,7 @@ Fl_Menu_Item ShuffleGui::menu_shuffle_preset[] = {
 };
 
 void ShuffleGui::cb_shuffle_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_DryWet);
  return;
@@ -53,7 +53,7 @@ void ShuffleGui::cb_shuffle_WD(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_cross1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_L);
  return;
@@ -65,7 +65,7 @@ void ShuffleGui::cb_shuffle_cross1(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_volL_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_L);
  return;
@@ -77,7 +77,7 @@ void ShuffleGui::cb_shuffle_volL(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_cross2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_ML);
  return;
@@ -89,7 +89,7 @@ void ShuffleGui::cb_shuffle_cross2(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_volML_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_ML);
  return;
@@ -101,7 +101,7 @@ void ShuffleGui::cb_shuffle_volML(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_cross3_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_MH);
  return;
@@ -113,7 +113,7 @@ void ShuffleGui::cb_shuffle_cross3(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_volMH_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_MH);
  return;
@@ -125,7 +125,7 @@ void ShuffleGui::cb_shuffle_volMH(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_cross4_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Freq_H);
  return;
@@ -137,7 +137,7 @@ void ShuffleGui::cb_shuffle_cross4(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_volH_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Gain_H);
  return;
@@ -149,7 +149,7 @@ void ShuffleGui::cb_shuffle_volH(RKR_Slider* o, void* v) {
 }
 
 void ShuffleGui::cb_shuffle_Q_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shuffle_Width);
  return;

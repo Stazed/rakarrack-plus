@@ -3,7 +3,7 @@
 #include "shelf_gui.h"
 
 void ShelfGui::cb_shelf_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SHELFBOOST]);
@@ -40,7 +40,7 @@ Fl_Menu_Item ShelfGui::menu_shelf_preset[] = {
 };
 
 void ShelfGui::cb_shelf_gain_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shelf_Gain);
  return;
@@ -52,7 +52,7 @@ void ShelfGui::cb_shelf_gain(RKR_Slider* o, void* v) {
 }
 
 void ShelfGui::cb_shelf_level_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shelf_Level);
  return;
@@ -64,7 +64,7 @@ void ShelfGui::cb_shelf_level(RKR_Slider* o, void* v) {
 }
 
 void ShelfGui::cb_shelf_freq1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shelf_Tone);
  return;
@@ -76,7 +76,7 @@ void ShelfGui::cb_shelf_freq1(RKR_Slider* o, void* v) {
 }
 
 void ShelfGui::cb_shelf_q1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shelf_Presence);
  return;

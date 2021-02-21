@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} DistGui {
   Fl_Light_Button dist_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_DISTORTION]);
@@ -73,7 +73,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_DISTORTION]; i++)
   }
   Fl_Value_Slider dist_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_DryWet);
  return;
@@ -84,7 +84,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_DryWet,Dry_Wet((int)(o->
   }
   Fl_Value_Slider dist_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_LR_Cross);
  return;
@@ -95,7 +95,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_LR_Cross,(int)(o->value(
   }
   Fl_Value_Slider dist_drive {
     label Drive
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Drive);
  return;
@@ -106,7 +106,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Drive,(int)o->value());}
   }
   Fl_Value_Slider dist_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Level);
  return;
@@ -118,7 +118,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Level,(int)o->value());}
   Fl_Choice dist_tipo {
     label Type
     user_data 12
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Type);
  return;
@@ -152,7 +152,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Type,(int)o->value());}
   }
   Fl_Value_Slider dist_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Pan);
  return;
@@ -163,7 +163,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Pan,(int)(o->value()+64)
   }
   Fl_Value_Slider dist_oct {
     label {Sub Octv}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Suboctave);
  return;
@@ -174,7 +174,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Suboctave,(int)o->value(
   }
   Fl_Value_Slider dist_lpf {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_LPF);
  return;
@@ -185,7 +185,7 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_LPF,(int)o->value());}
   }
   Fl_Value_Slider dist_hpf {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_HPF);
  return;

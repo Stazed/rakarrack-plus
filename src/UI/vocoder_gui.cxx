@@ -3,7 +3,7 @@
 #include "vocoder_gui.h"
 
 void VocoderGui::cb_vo_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_VOCODER]);
@@ -41,7 +41,7 @@ Fl_Menu_Item VocoderGui::menu_vo_preset[] = {
 };
 
 void VocoderGui::cb_vo_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_DryWet);
          return;
@@ -53,7 +53,7 @@ void VocoderGui::cb_vo_WD(RKR_Slider* o, void* v) {
 }
 
 void VocoderGui::cb_vo_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Pan);
          return;
@@ -65,7 +65,7 @@ void VocoderGui::cb_vo_pan(RKR_Slider* o, void* v) {
 }
 
 void VocoderGui::cb_vo_input_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Input);
          return;
@@ -77,7 +77,7 @@ void VocoderGui::cb_vo_input(RKR_Slider* o, void* v) {
 }
 
 void VocoderGui::cb_vo_mu_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Smear);
          return;
@@ -89,7 +89,7 @@ void VocoderGui::cb_vo_mu(RKR_Slider* o, void* v) {
 }
 
 void VocoderGui::cb_vo_q_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Q);
          return;
@@ -101,7 +101,7 @@ void VocoderGui::cb_vo_q(RKR_Slider* o, void* v) {
 }
 
 void VocoderGui::cb_vo_ring_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Ring);
          return;
@@ -113,7 +113,7 @@ void VocoderGui::cb_vo_ring(RKR_Slider* o, void* v) {
 }
 
 void VocoderGui::cb_vo_level_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Level);
          return;

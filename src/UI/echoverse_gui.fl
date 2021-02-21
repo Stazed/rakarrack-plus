@@ -23,7 +23,7 @@ widget_class {\#include "common_gui_menu.h"} EchoverseGui {
   Fl_Light_Button echoverse_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ECHOVERSE]);
@@ -70,7 +70,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_ECHOVERSE]; i++)
   }
   Fl_Value_Slider echoverse_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_DryWet);
  return;
@@ -81,7 +81,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_DryWet,Dry_Wet((int)
   }
   Fl_Value_Slider echoverse_RV {
     label Reverse
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Reverse);
  return;
@@ -92,7 +92,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Reverse,(int)o->valu
   }
   Fl_Value_Slider echoverse_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Pan);
  return;
@@ -103,7 +103,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Pan,(int)(o->value()
   }
   Fl_Value_Slider echoverse_delay {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Tempo);
  return;
@@ -114,7 +114,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Tempo,(int)o->value(
   }
   Fl_Value_Slider echoverse_LRdl {
     label {L/R Delay}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_LR_Delay);
  return;
@@ -125,7 +125,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_LR_Delay,(int)o->val
   }
   Fl_Value_Slider echoverse_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Feedback);
  return;
@@ -143,7 +143,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Feedback,(int)o->val
   } {}
   Fl_Value_Slider echoverse_damp {
     label Damp
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Damp);
  return;
@@ -154,7 +154,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Damp,(int)o->value()
   }
   Fl_Value_Slider echoverse_es {
     label {Ex Stereo}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Ext_Stereo);
  return;
@@ -165,7 +165,7 @@ m_process->Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Ext_Stereo,(int)o->v
   }
   Fl_Value_Slider echoverse_angle {
     label Angle
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Angle);
  return;

@@ -3,7 +3,7 @@
 #include "flanger_gui.h"
 
 void FlangerGui::cb_flanger_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_FLANGER]);
@@ -41,7 +41,7 @@ Fl_Menu_Item FlangerGui::menu_flanger_preset[] = {
 };
 
 void FlangerGui::cb_flanger_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_DryWet);
  return;
@@ -53,7 +53,7 @@ void FlangerGui::cb_flanger_WD(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_Pan);
  return;
@@ -65,7 +65,7 @@ void FlangerGui::cb_flanger_pan(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_LFO_Tempo);
  return;
@@ -77,7 +77,7 @@ void FlangerGui::cb_flanger_freq(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_rnd_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_LFO_Random);
  return;
@@ -89,7 +89,7 @@ void FlangerGui::cb_flanger_rnd(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_LFO_Type);
  return;
@@ -116,7 +116,7 @@ void FlangerGui::cb_flanger_awesome(RKR_Check_Button* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_LFO_Stereo);
  return;
@@ -128,7 +128,7 @@ void FlangerGui::cb_flanger_stdf(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_Depth);
  return;
@@ -140,7 +140,7 @@ void FlangerGui::cb_flanger_dpth(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_delay_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_Delay);
  return;
@@ -152,7 +152,7 @@ void FlangerGui::cb_flanger_delay(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_Feedback);
  return;
@@ -164,7 +164,7 @@ void FlangerGui::cb_flanger_fb(RKR_Slider* o, void* v) {
 }
 
 void FlangerGui::cb_flanger_LR_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Flanger_LR_Cross);
  return;

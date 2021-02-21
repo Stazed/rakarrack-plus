@@ -3,7 +3,7 @@
 #include "stompbox_gui.h"
 
 void StompboxGui::cb_stomp_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_STOMPBOX]);
@@ -47,7 +47,7 @@ Fl_Menu_Item StompboxGui::menu_stomp_preset[] = {
 };
 
 void StompboxGui::cb_stomp_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Stomp_Level);
  return;
@@ -59,7 +59,7 @@ void StompboxGui::cb_stomp_WD(RKR_Slider* o, void* v) {
 }
 
 void StompboxGui::cb_stomp_gain_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Stomp_Gain);
  return;
@@ -71,7 +71,7 @@ void StompboxGui::cb_stomp_gain(RKR_Slider* o, void* v) {
 }
 
 void StompboxGui::cb_stomp_low_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Stomp_Bias);
  return;
@@ -83,7 +83,7 @@ void StompboxGui::cb_stomp_low(RKR_Slider* o, void* v) {
 }
 
 void StompboxGui::cb_stomp_mid_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Stomp_Mid);
  return;
@@ -95,7 +95,7 @@ void StompboxGui::cb_stomp_mid(RKR_Slider* o, void* v) {
 }
 
 void StompboxGui::cb_stomp_high_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Stomp_Tone);
  return;
@@ -107,7 +107,7 @@ void StompboxGui::cb_stomp_high(RKR_Slider* o, void* v) {
 }
 
 void StompboxGui::cb_stomp_mode_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Stomp_Mode);
  return;

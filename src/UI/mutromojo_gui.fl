@@ -32,7 +32,7 @@ widget_class {\#include "common_gui_menu.h"} MutromojoGui {
   Fl_Light_Button mutromojo_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_MUTROMOJO]);
@@ -94,7 +94,7 @@ o->redraw();}
   }
   Fl_Value_Slider mutromojo_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_DryWet);
  return;
@@ -123,7 +123,7 @@ Efx_MuTroMojo->changepar(Mutro_Mode_Legacy, Efx_MuTroMojo->Pmode);}
   }
   Fl_Value_Slider mutromojo_lp {
     label LP
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LowPass);
  return;
@@ -152,7 +152,7 @@ Efx_MuTroMojo->changepar(Mutro_Mode_Legacy, Efx_MuTroMojo->Pmode);}
   }
   Fl_Value_Slider mutromojo_bp {
     label BP
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_BandPass);
  return;
@@ -170,7 +170,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass,(int)o->value()
   }
   Fl_Value_Slider mutromojo_hp {
     label HP
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_HighPass);
  return;
@@ -188,7 +188,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_HighPass,(int)o->value()
   }
   Fl_Choice mutromojo_lfotype {
     label LFO
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Type);
  return;
@@ -201,7 +201,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Type,(int)o->value()
   } {}
   Fl_Value_Slider mutromojo_dpth {
     label Depth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Depth);
  return;
@@ -212,7 +212,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Depth,(int)o->value());}
   }
   Fl_Value_Slider mutromojo_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Tempo);
  return;
@@ -223,7 +223,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo,(int)o->value(
   }
   Fl_Value_Slider mutromojo_q {
     label {Res.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Resonance);
  return;
@@ -234,7 +234,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Resonance,(int)(o->value
   }
   Fl_Value_Slider mutromojo_rng {
     label Range
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Range);
  return;
@@ -245,7 +245,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Range,(int)o->value());}
   }
   Fl_Value_Slider mutromojo_ampsnsinv {
     label Wah
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Wah);
  return;
@@ -256,7 +256,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Wah,(int)o->value());}
   }
   Fl_Value_Slider mutromojo_ampsns {
     label {E. Sens}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Env_Sens);
  return;
@@ -267,7 +267,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Sens,(int)o->value()
   }
   Fl_Value_Input mutromojo_smooth {
     label S
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Env_Smooth);
  return;
@@ -278,7 +278,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Env_Smooth,(int)o->value
   }
   Fl_Value_Input mutromojo_Rnd {
     label R
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Random);
  return;
@@ -289,7 +289,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Random,(int)o->value
   }
   Fl_Value_Input mutromojo_St {
     label D
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Stereo);
  return;
@@ -300,7 +300,7 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Stereo,(int)o->value
   }
   Fl_Value_Input mutromojo_minfreq {
     label F
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_St_Freq);
  return;

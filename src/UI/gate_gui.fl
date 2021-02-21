@@ -22,7 +22,7 @@ widget_class GateGui {
   Fl_Light_Button gate_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_NOISEGATE]);
@@ -63,7 +63,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_NOISEGATE]; i++)
   }
   Fl_Value_Slider gate_ATime {
     label {A. Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Attack);
  return;
@@ -74,7 +74,7 @@ m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Attack,(int)o->value());}
   }
   Fl_Value_Slider gate_RTime {
     label {R. Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Release);
  return;
@@ -85,7 +85,7 @@ m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Release, (int) o->value()
   }
   Fl_Value_Slider gate_range {
     label Range
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Range);
  return;
@@ -96,7 +96,7 @@ m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Range, (int) o->value());
   }
   Fl_Value_Slider gate_threshold {
     label Threshold
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Threshold);
  return;
@@ -107,7 +107,7 @@ m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Threshold, (int)o->value(
   }
   Fl_Value_Slider gate_hold {
     label Hold
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Hold);
  return;
@@ -118,7 +118,7 @@ m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_Hold,(int)o->value());}
   }
   Fl_Value_Slider gate_LPF {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_LPF);
  return;
@@ -129,7 +129,7 @@ m_process->Rack_Effects[EFX_NOISEGATE]->changepar(Gate_LPF, (int)o->value());}
   }
   Fl_Value_Slider gate_HPF {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_HPF);
  return;

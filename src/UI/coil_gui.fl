@@ -25,7 +25,7 @@ widget_class CoilGui {
   Fl_Light_Button coil_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_COILCRAFTER]);
@@ -64,7 +64,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_COILCRAFTER]; i++)
   }
   Fl_Value_Slider coil_WD {
     label Gain
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Gain);
  return;
@@ -75,7 +75,7 @@ m_process->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Gain,(int)o->value());}
   }
   Fl_Value_Slider coil_tone {
     label Tone
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Tone);
  return;
@@ -132,7 +132,7 @@ coil_q1->value(m_process->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));}
   }
   Fl_Value_Slider coil_freq1 {
     label {Freq 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Freq_1);
  return;
@@ -143,7 +143,7 @@ m_process->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_1,(int)o->value())
   }
   Fl_Value_Slider coil_q1 {
     label {Q 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Q_1);
  return;
@@ -163,7 +163,7 @@ coil_q2->value(m_process->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_2));} ope
   } {}
   Fl_Value_Slider coil_freq2 {
     label {Freq 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Freq_2);
  return;
@@ -174,7 +174,7 @@ m_process->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Freq_2,(int)o->value())
   }
   Fl_Value_Slider coil_q2 {
     label {Q 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Q_2);
  return;

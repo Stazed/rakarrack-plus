@@ -32,7 +32,7 @@ widget_class {\#include "common_gui_menu.h"} SynthfilterGui {
   Fl_Light_Button synthfilter_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SYNTHFILTER]);
@@ -95,7 +95,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_SYNTHFILTER]; i++)
   }
   Fl_Value_Slider synthfilter_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_DryWet);
  return;
@@ -106,7 +106,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_DryWet,Dry_Wet((
   }
   Fl_Value_Slider synthfilter_Distort {
     label Distort
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Distort);
  return;
@@ -117,7 +117,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Distort,(int)o->
   }
   Fl_Value_Slider synthfilter_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Tempo);
  return;
@@ -128,7 +128,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Tempo,(int)o
   }
   Fl_Value_Input synthfilter_rand {
     label R
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Random);
  return;
@@ -139,7 +139,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Random,(int)
   }
   Fl_Choice synthfilter_lfotype {
     label LFO
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Type);
  return;
@@ -160,7 +160,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Type,(int)o-
   }
   Fl_Value_Slider synthfilter_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Stereo);
  return;
@@ -171,7 +171,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Stereo,(int)
   }
   Fl_Value_Slider synthfilter_width {
     label Width
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Width);
  return;
@@ -182,7 +182,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Width,(int)o->va
   }
   Fl_Value_Slider synthfilter_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Feedback);
  return;
@@ -207,7 +207,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Feedback,(int)o-
   }
   Fl_Value_Slider synthfilter_dpth {
     label Depth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Depth);
  return;
@@ -218,7 +218,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Depth,(int)o->va
   }
   Fl_Value_Slider synthfilter_EnvSens {
     label {E.Sens}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Env_Sens);
  return;
@@ -229,7 +229,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Env_Sens,(int)(o
   }
   Fl_Value_Slider synthfilter_ATime {
     label {A.Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Attack);
  return;
@@ -240,7 +240,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Attack,(int)o->v
   }
   Fl_Value_Slider synthfilter_RTime {
     label {R.Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Release);
  return;
@@ -251,7 +251,7 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Release,(int)o->
   }
   Fl_Value_Slider synthfilter_Offset {
     label Offset
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Offset);
  return;

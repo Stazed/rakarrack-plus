@@ -29,7 +29,7 @@ widget_class {\#include "common_gui_menu.h"} AphaserGui {
   Fl_Light_Button aphaser_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ANALOG_PHASER]);
@@ -84,7 +84,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
   }
   Fl_Value_Slider aphaser_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_DryWet);
  return;
@@ -95,7 +95,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_DryWet,Dry_Wet((int
   }
   Fl_Value_Slider aphaser_distort {
     label Distort
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Distortion);
  return;
@@ -106,7 +106,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Distortion,(int)o->
   }
   Fl_Value_Slider aphaser_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Tempo);
  return;
@@ -117,7 +117,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo,(int)o->v
   }
   Fl_Value_Slider aphaser_rnd {
     label Random
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Random);
  return;
@@ -128,7 +128,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Random,(int)o->
   }
   Fl_Choice aphaser_lfotype {
     label {LFO Type}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Type);
  return;
@@ -141,7 +141,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Type,(int)o->va
   } {}
   Fl_Value_Slider aphaser_width {
     label Width
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Width);
  return;
@@ -152,7 +152,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Width,(int)o->value
   }
   Fl_Value_Slider aphaser_depth {
     label {P. Depth}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Depth);
  return;
@@ -163,7 +163,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Depth,(int)o->value
   }
   Fl_Value_Slider aphaser_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Feedback);
  return;
@@ -174,7 +174,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Feedback,(int)(o->v
   }
   Fl_Value_Slider aphaser_mismatch {
     label Mismatch
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Mismatch);
  return;
@@ -185,7 +185,7 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Mismatch,(int)o->va
   }
   Fl_Value_Slider aphaser_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Stereo);
  return;

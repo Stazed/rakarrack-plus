@@ -25,7 +25,7 @@ widget_class SequenceGui {
   Fl_Light_Button seq_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SEQUENCE]);
@@ -100,7 +100,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_SEQUENCE]; i++)
   }
   Fl_Value_Slider seq_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_DryWet);
  return;
@@ -111,7 +111,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_DryWet,Dry_Wet((int)(o
   }
   Fl_Value_Slider seq_1 {
     label 1
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_1);
  return;
@@ -122,7 +122,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_1,(int)o->value()
   }
   Fl_Value_Slider seq_2 {
     label 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_2);
  return;
@@ -133,7 +133,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_2,(int)o->value()
   }
   Fl_Value_Slider seq_3 {
     label 3
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_3);
  return;
@@ -144,7 +144,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_3,(int)o->value()
   }
   Fl_Value_Slider seq_4 {
     label 4
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_4);
  return;
@@ -155,7 +155,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_4,(int)o->value()
   }
   Fl_Value_Slider seq_5 {
     label 5
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_5);
  return;
@@ -166,7 +166,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_5,(int)o->value()
   }
   Fl_Value_Slider seq_6 {
     label 6
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_6);
  return;
@@ -177,7 +177,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_6,(int)o->value()
   }
   Fl_Value_Slider seq_7 {
     label 7
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_7);
  return;
@@ -188,7 +188,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_7,(int)o->value()
   }
   Fl_Value_Slider seq_8 {
     label 8
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Step_8);
  return;
@@ -199,7 +199,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Step_8,(int)o->value()
   }
   Fl_Value_Slider seq_tempo {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Tempo);
  return;
@@ -210,7 +210,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Tempo,(int)o->value())
   }
   Fl_Value_Slider seq_q {
     label Q
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Resonance);
  return;
@@ -221,7 +221,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Resonance,(int)o->valu
   }
   Fl_Value_Slider seq_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sequence_Stdf);
  return;

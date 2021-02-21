@@ -3,7 +3,7 @@
 #include "valve_gui.h"
 
 void ValveGui::cb_valve_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_VALVE]);
@@ -40,7 +40,7 @@ Fl_Menu_Item ValveGui::menu_valve_preset[] = {
 };
 
 void ValveGui::cb_valve_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_DryWet);
  return;
@@ -52,7 +52,7 @@ void ValveGui::cb_valve_WD(RKR_Slider* o, void* v) {
 }
 
 void ValveGui::cb_valve_LRc_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_LR_Cross);
  return;
@@ -64,7 +64,7 @@ void ValveGui::cb_valve_LRc(RKR_Slider* o, void* v) {
 }
 
 void ValveGui::cb_valve_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Pan);
  return;
@@ -76,7 +76,7 @@ void ValveGui::cb_valve_pan(RKR_Slider* o, void* v) {
 }
 
 void ValveGui::cb_valve_level_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Level);
  return;
@@ -88,7 +88,7 @@ void ValveGui::cb_valve_level(RKR_Slider* o, void* v) {
 }
 
 void ValveGui::cb_valve_drive_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Drive);
  return;
@@ -107,7 +107,7 @@ void ValveGui::cb_valve_ed(RKR_Check_Button* o, void* v) {
 }
 
 void ValveGui::cb_valve_Q_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Distortion);
  return;
@@ -119,7 +119,7 @@ void ValveGui::cb_valve_Q(RKR_Slider* o, void* v) {
 }
 
 void ValveGui::cb_valve_Pre_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Presence);
  return;
@@ -152,7 +152,7 @@ void ValveGui::cb_valve_neg(RKR_Check_Button* o, void* v) {
 }
 
 void ValveGui::cb_valve_lpf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_LPF);
  return;
@@ -164,7 +164,7 @@ void ValveGui::cb_valve_lpf(RKR_Slider* o, void* v) {
 }
 
 void ValveGui::cb_valve_hpf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_HPF);
  return;

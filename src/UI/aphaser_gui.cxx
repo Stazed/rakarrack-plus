@@ -3,7 +3,7 @@
 #include "aphaser_gui.h"
 
 void AphaserGui::cb_aphaser_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ANALOG_PHASER]);
@@ -42,7 +42,7 @@ Fl_Menu_Item AphaserGui::menu_aphaser_preset[] = {
 };
 
 void AphaserGui::cb_aphaser_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_DryWet);
  return;
@@ -54,7 +54,7 @@ void AphaserGui::cb_aphaser_WD(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_distort_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Distortion);
  return;
@@ -66,7 +66,7 @@ void AphaserGui::cb_aphaser_distort(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Tempo);
  return;
@@ -78,7 +78,7 @@ void AphaserGui::cb_aphaser_freq(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_rnd_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Random);
  return;
@@ -90,7 +90,7 @@ void AphaserGui::cb_aphaser_rnd(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Type);
  return;
@@ -103,7 +103,7 @@ void AphaserGui::cb_aphaser_lfotype(RKR_Choice* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_width_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Width);
  return;
@@ -115,7 +115,7 @@ void AphaserGui::cb_aphaser_width(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_depth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Depth);
  return;
@@ -127,7 +127,7 @@ void AphaserGui::cb_aphaser_depth(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Feedback);
  return;
@@ -139,7 +139,7 @@ void AphaserGui::cb_aphaser_fb(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_mismatch_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_Mismatch);
  return;
@@ -151,7 +151,7 @@ void AphaserGui::cb_aphaser_mismatch(RKR_Slider* o, void* v) {
 }
 
 void AphaserGui::cb_aphaser_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_APhase_LFO_Stereo);
  return;

@@ -25,7 +25,7 @@ widget_class ValveGui {
   Fl_Light_Button valve_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_VALVE]);
@@ -72,7 +72,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VALVE]; i++)
   }
   Fl_Value_Slider valve_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_DryWet);
  return;
@@ -83,7 +83,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_DryWet,Dry_Wet((int)(o->valu
   }
   Fl_Value_Slider valve_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_LR_Cross);
  return;
@@ -94,7 +94,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_LR_Cross,(int)(o->value()));
   }
   Fl_Value_Slider valve_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Pan);
  return;
@@ -105,7 +105,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Pan,(int)(o->value()+64));}
   }
   Fl_Value_Slider valve_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Level);
  return;
@@ -116,7 +116,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Level,(int)o->value());}
   }
   Fl_Value_Slider valve_drive {
     label Drive
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Drive);
  return;
@@ -134,7 +134,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Drive,(int)o->value());}
   }
   Fl_Value_Slider valve_Q {
     label {Dist.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Distortion);
  return;
@@ -145,7 +145,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Distortion,(int)o->value());
   }
   Fl_Value_Slider valve_Pre {
     label Presence
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_Presence);
  return;
@@ -177,7 +177,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Presence,(int)o->value());}
   }
   Fl_Value_Slider valve_lpf {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_LPF);
  return;
@@ -188,7 +188,7 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_LPF,(int)o->value());}
   }
   Fl_Value_Slider valve_hpf {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Valve_HPF);
  return;

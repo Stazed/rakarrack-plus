@@ -25,7 +25,7 @@ widget_class ShifterGui {
   Fl_Light_Button shifter_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SHIFTER]);
@@ -80,7 +80,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_SHIFTER]; i++)
   }
   Fl_Value_Slider shifter_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_DryWet);
  return;
@@ -91,7 +91,7 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_DryWet,Dry_Wet((int)(o->
   }
   Fl_Value_Slider shifter_int {
     label Interval
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Interval);
  return;
@@ -104,7 +104,7 @@ if((int)shifter_activar->value())m_process->EFX_Bypass[EFX_SHIFTER]=1;}
   }
   Fl_Value_Slider shifter_gain {
     label Gain
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Gain);
  return;
@@ -115,7 +115,7 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Gain,(int)(o->value()+64
   }
   Fl_Value_Slider shifter_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Pan);
  return;
@@ -126,7 +126,7 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Pan,(int)(o->value()+64)
   }
   Fl_Value_Slider shifter_attack {
     label Attack
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Attack);
  return;
@@ -137,7 +137,7 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Attack,(int)o->value());
   }
   Fl_Value_Slider shifter_decay {
     label Decay
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Decay);
  return;
@@ -148,7 +148,7 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Decay,(int)o->value());}
   }
   Fl_Value_Slider shifter_thre {
     label Threshold
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Threshold);
  return;
@@ -166,7 +166,7 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Threshold,(int)o->value(
   }
   Fl_Value_Slider shifter_whammy {
     label Whammy
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Whammy);
  return;

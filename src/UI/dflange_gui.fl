@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} DflangeGui {
   Fl_Light_Button dflange_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_DUAL_FLANGE]);
@@ -89,7 +89,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_DUAL_FLANGE]; i++)
   }
   Fl_Value_Slider dflange_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_DryWet);
  return;
@@ -100,7 +100,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_DryWet,Dry_Wet((int)
   }
   Fl_Value_Slider dflange_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_Pan);
  return;
@@ -111,7 +111,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Pan,(int)o->value())
   }
   Fl_Value_Slider dflange_LR {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_LR_Cross);
  return;
@@ -122,7 +122,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LR_Cross,(int)o->val
   }
   Fl_Value_Slider dflange_depth {
     label Depth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_Depth);
  return;
@@ -133,7 +133,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Depth,(int)o->value(
   }
   Fl_Value_Slider dflange_width {
     label Width
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_Width);
  return;
@@ -144,7 +144,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Width,(int)o->value(
   }
   Fl_Value_Slider dflange_offset {
     label Offset
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_Offset);
  return;
@@ -155,7 +155,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Offset,(int)o->value
   }
   Fl_Value_Slider dflange_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_Feedback);
  return;
@@ -166,7 +166,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Feedback,(int)o->val
   }
   Fl_Value_Slider dflange_lpf {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_LPF);
  return;
@@ -198,7 +198,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LPF,(int)o->value())
   }
   Fl_Value_Slider dflange_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_LFO_Tempo);
  return;
@@ -209,7 +209,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Tempo,(int)o->va
   }
   Fl_Value_Slider dflange_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_LFO_Stereo);
  return;
@@ -220,7 +220,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Stereo,(int)o->v
   }
   Fl_Choice dflange_lfotype {
     label {LFO Type}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_LFO_Type);
  return;
@@ -233,7 +233,7 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Type,(int)o->val
   } {}
   Fl_Value_Slider dflange_rnd {
     label Random
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DFlange_LFO_Random);
  return;

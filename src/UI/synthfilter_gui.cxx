@@ -3,7 +3,7 @@
 #include "synthfilter_gui.h"
 
 void SynthfilterGui::cb_synthfilter_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SYNTHFILTER]);
@@ -44,7 +44,7 @@ Fl_Menu_Item SynthfilterGui::menu_synthfilter_preset[] = {
 };
 
 void SynthfilterGui::cb_synthfilter_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_DryWet);
  return;
@@ -56,7 +56,7 @@ void SynthfilterGui::cb_synthfilter_WD(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_Distort_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Distort);
  return;
@@ -68,7 +68,7 @@ void SynthfilterGui::cb_synthfilter_Distort(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Tempo);
  return;
@@ -80,7 +80,7 @@ void SynthfilterGui::cb_synthfilter_freq(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_rand_i(RKR_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Random);
  return;
@@ -92,7 +92,7 @@ void SynthfilterGui::cb_synthfilter_rand(RKR_Value_Input* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Type);
  return;
@@ -112,7 +112,7 @@ void SynthfilterGui::cb_synthfilter_subs(RKR_Check_Button* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_LFO_Stereo);
  return;
@@ -124,7 +124,7 @@ void SynthfilterGui::cb_synthfilter_stdf(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_width_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Width);
  return;
@@ -136,7 +136,7 @@ void SynthfilterGui::cb_synthfilter_width(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Feedback);
  return;
@@ -162,7 +162,7 @@ void SynthfilterGui::cb_synthfilter_Hstages(RKR_Counter* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Depth);
  return;
@@ -174,7 +174,7 @@ void SynthfilterGui::cb_synthfilter_dpth(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_EnvSens_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Env_Sens);
  return;
@@ -186,7 +186,7 @@ void SynthfilterGui::cb_synthfilter_EnvSens(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_ATime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Attack);
  return;
@@ -198,7 +198,7 @@ void SynthfilterGui::cb_synthfilter_ATime(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_RTime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Release);
  return;
@@ -210,7 +210,7 @@ void SynthfilterGui::cb_synthfilter_RTime(RKR_Slider* o, void* v) {
 }
 
 void SynthfilterGui::cb_synthfilter_Offset_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Synthfilter_Offset);
  return;

@@ -23,7 +23,7 @@ widget_class {\#include "common_gui_menu.h"} VarybandGui {
   Fl_Light_Button varyband_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_VARYBAND]);
@@ -71,7 +71,7 @@ for (int i = 0; i < (m_process->EFX_Param_Size[EFX_VARYBAND] + 4); i++)
   }
   Fl_Value_Slider varyband_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_DryWet);
  return;
@@ -82,7 +82,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_DryWet,Dry_Wet((int)(o
   }
   Fl_Value_Slider varyband_freq1 {
     label {Tempo 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_LFO_Tempo_1);
  return;
@@ -93,7 +93,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_1,(int)o->va
   }
   Fl_Choice varyband_lfotype1 {
     label {LFO 1 Type}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_LFO_Type_1);
  return;
@@ -106,7 +106,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Type_1,(int)o->val
   } {}
   Fl_Value_Slider varyband_stdf1 {
     label {St.df 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_LFO_Stereo_1);
  return;
@@ -117,7 +117,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Stereo_1,(int)o->v
   }
   Fl_Value_Slider varyband_freq2 {
     label {Tempo 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_LFO_Tempo_2);
  return;
@@ -128,7 +128,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_2,(int)o->va
   }
   Fl_Choice varyband_lfotype2 {
     label {LFO 2 Type}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_LFO_Type_2);
  return;
@@ -141,7 +141,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Type_2,(int)o->val
   } {}
   Fl_Value_Slider varyband_stdf2 {
     label {St.df 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_LFO_Stereo_2);
  return;
@@ -152,7 +152,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Stereo_2,(int)o->v
   }
   Fl_Value_Slider varyband_cross1 {
     label {Cross 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_Cross_1);
  return;
@@ -163,7 +163,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_1,(int)o->value(
   }
   Fl_Value_Slider varyband_cross2 {
     label {Cross 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_Cross_2);
  return;
@@ -174,7 +174,7 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_2,(int)o->value(
   }
   Fl_Value_Slider varyband_cross3 {
     label {Cross 3}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_VaryBand_Cross_3);
  return;

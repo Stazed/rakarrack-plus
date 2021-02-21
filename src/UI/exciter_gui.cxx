@@ -3,7 +3,7 @@
 #include "exciter_gui.h"
 
 void ExciterGui::cb_exciter_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_EXCITER]);
@@ -41,7 +41,7 @@ Fl_Menu_Item ExciterGui::menu_exciter_preset[] = {
 };
 
 void ExciterGui::cb_ex_Gain_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Gain);
  return;
@@ -53,7 +53,7 @@ void ExciterGui::cb_ex_Gain(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_lfreq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_LPF);
  return;
@@ -65,7 +65,7 @@ void ExciterGui::cb_ex_lfreq(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_hfreq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_HPF);
  return;
@@ -77,7 +77,7 @@ void ExciterGui::cb_ex_hfreq(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_1);
  return;
@@ -89,7 +89,7 @@ void ExciterGui::cb_ex_1(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_2);
  return;
@@ -101,7 +101,7 @@ void ExciterGui::cb_ex_2(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_3_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_3);
  return;
@@ -113,7 +113,7 @@ void ExciterGui::cb_ex_3(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_4_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_4);
  return;
@@ -125,7 +125,7 @@ void ExciterGui::cb_ex_4(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_5_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_5);
  return;
@@ -137,7 +137,7 @@ void ExciterGui::cb_ex_5(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_6_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_6);
  return;
@@ -149,7 +149,7 @@ void ExciterGui::cb_ex_6(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_7_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_7);
  return;
@@ -161,7 +161,7 @@ void ExciterGui::cb_ex_7(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_8_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_8);
  return;
@@ -173,7 +173,7 @@ void ExciterGui::cb_ex_8(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_9_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_9);
  return;
@@ -185,7 +185,7 @@ void ExciterGui::cb_ex_9(RKR_Slider* o, void* v) {
 }
 
 void ExciterGui::cb_ex_10_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_10);
  return;

@@ -3,7 +3,7 @@
 #include "expander_gui.h"
 
 void ExpanderGui::cb_expander_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_EXPANDER]);
@@ -38,7 +38,7 @@ Fl_Menu_Item ExpanderGui::menu_expander_preset[] = {
 };
 
 void ExpanderGui::cb_expander_ATime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Attack);
  return;
@@ -50,7 +50,7 @@ void ExpanderGui::cb_expander_ATime(RKR_Slider* o, void* v) {
 }
 
 void ExpanderGui::cb_expander_RTime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Release);
  return;
@@ -62,7 +62,7 @@ void ExpanderGui::cb_expander_RTime(RKR_Slider* o, void* v) {
 }
 
 void ExpanderGui::cb_expander_shape_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Shape);
  return;
@@ -74,7 +74,7 @@ void ExpanderGui::cb_expander_shape(RKR_Slider* o, void* v) {
 }
 
 void ExpanderGui::cb_expander_threshold_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Threshold);
  return;
@@ -86,7 +86,7 @@ void ExpanderGui::cb_expander_threshold(RKR_Slider* o, void* v) {
 }
 
 void ExpanderGui::cb_expander_level_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Gain);
  return;
@@ -98,7 +98,7 @@ void ExpanderGui::cb_expander_level(RKR_Slider* o, void* v) {
 }
 
 void ExpanderGui::cb_expander_LPF_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_LPF);
  return;
@@ -110,7 +110,7 @@ void ExpanderGui::cb_expander_LPF(RKR_Slider* o, void* v) {
 }
 
 void ExpanderGui::cb_expander_HPF_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_HPF);
  return;

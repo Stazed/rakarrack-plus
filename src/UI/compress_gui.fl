@@ -25,7 +25,7 @@ widget_class CompressGui {
   Fl_Light_Button compress_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_COMPRESSOR]);
@@ -71,7 +71,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_COMPRESSOR]; i++)
   }
   Fl_Value_Slider compress_ATime {
     label {A. Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Attack);
  return;
@@ -82,7 +82,7 @@ m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Attack,(int)o->value
   }
   Fl_Value_Slider compress_RTime {
     label {R. Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Release);
  return;
@@ -93,7 +93,7 @@ m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Release, (int) o->va
   }
   Fl_Value_Slider compress_Ratio {
     label Ratio
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Ratio);
  return;
@@ -104,7 +104,7 @@ m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Ratio, (int) o->valu
   }
   Fl_Value_Slider compress_Knee {
     label Knee
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Knee);
  return;
@@ -115,7 +115,7 @@ m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Knee, (int) o->value
   }
   Fl_Value_Slider compress_threshold {
     label Threshold
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Threshold);
  return;
@@ -126,7 +126,7 @@ m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Threshold, (int)o->v
   }
   Fl_Value_Slider compress_output {
     label Output
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Compress_Output);
  return;

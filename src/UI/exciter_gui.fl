@@ -22,7 +22,7 @@ widget_class ExciterGui {
   Fl_Light_Button exciter_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_EXCITER]);
@@ -73,7 +73,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXCITER]; i++)
   }
   Fl_Value_Slider ex_Gain {
     label Gain
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Gain);
  return;
@@ -84,7 +84,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Gain,(int)o->value());}
   }
   Fl_Value_Slider ex_lfreq {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_LPF);
  return;
@@ -95,7 +95,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_LPF,(int)o->value());}
   }
   Fl_Value_Slider ex_hfreq {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_HPF);
  return;
@@ -106,7 +106,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_HPF,(int)o->value());}
   }
   Fl_Value_Slider ex_1 {
     label {Har 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_1);
  return;
@@ -117,7 +117,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_1,(int)o->value());
   }
   Fl_Value_Slider ex_2 {
     label {Har 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_2);
  return;
@@ -128,7 +128,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_2,(int)o->value());
   }
   Fl_Value_Slider ex_3 {
     label {Har 3}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_3);
  return;
@@ -139,7 +139,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_3,(int)o->value());
   }
   Fl_Value_Slider ex_4 {
     label {Har 4}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_4);
  return;
@@ -150,7 +150,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_4,(int)o->value());
   }
   Fl_Value_Slider ex_5 {
     label {Har 5}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_5);
  return;
@@ -161,7 +161,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_5,(int)o->value());
   }
   Fl_Value_Slider ex_6 {
     label {Har 6}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_6);
  return;
@@ -172,7 +172,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_6,(int)o->value());
   }
   Fl_Value_Slider ex_7 {
     label {Har 7}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_7);
  return;
@@ -183,7 +183,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_7,(int)o->value());
   }
   Fl_Value_Slider ex_8 {
     label {Har 8}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_8);
  return;
@@ -194,7 +194,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_8,(int)o->value());
   }
   Fl_Value_Slider ex_9 {
     label {Har 9}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_9);
  return;
@@ -205,7 +205,7 @@ m_process->Rack_Effects[EFX_EXCITER]->changepar(Exciter_Harm_9,(int)o->value());
   }
   Fl_Value_Slider ex_10 {
     label {Har 10}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Exciter_Harm_10);
  return;

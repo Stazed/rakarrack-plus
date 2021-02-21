@@ -3,7 +3,7 @@
 #include "echo_gui.h"
 
 void EchoGui::cb_echo_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ECHO]);
@@ -45,7 +45,7 @@ Fl_Menu_Item EchoGui::menu_echo_preset[] = {
 };
 
 void EchoGui::cb_echo_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_DryWet);
  return;
@@ -57,7 +57,7 @@ void EchoGui::cb_echo_WD(RKR_Slider* o, void* v) {
 }
 
 void EchoGui::cb_echo_RV_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_Reverse);
  return;
@@ -69,7 +69,7 @@ void EchoGui::cb_echo_RV(RKR_Slider* o, void* v) {
 }
 
 void EchoGui::cb_echo_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_Pan);
  return;
@@ -81,7 +81,7 @@ void EchoGui::cb_echo_pan(RKR_Slider* o, void* v) {
 }
 
 void EchoGui::cb_echo_delay_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_Delay);
  return;
@@ -93,7 +93,7 @@ void EchoGui::cb_echo_delay(RKR_Slider* o, void* v) {
 }
 
 void EchoGui::cb_echo_LRdl_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_LR_Delay);
  return;
@@ -105,7 +105,7 @@ void EchoGui::cb_echo_LRdl(RKR_Slider* o, void* v) {
 }
 
 void EchoGui::cb_echo_LRc_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_LR_Cross);
  return;
@@ -117,7 +117,7 @@ void EchoGui::cb_echo_LRc(RKR_Slider* o, void* v) {
 }
 
 void EchoGui::cb_echo_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_Feedback);
  return;
@@ -136,7 +136,7 @@ void EchoGui::cb_echo_direct(RKR_Check_Button* o, void* v) {
 }
 
 void EchoGui::cb_echo_damp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echo_Damp);
  return;

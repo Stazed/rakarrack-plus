@@ -22,7 +22,7 @@ widget_class EqGui {
   Fl_Light_Button eq_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_EQ]);
@@ -65,7 +65,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_EQ]; i++)
   }
   Fl_Value_Slider eq_Gain {
     label Gain
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_Gain);
  return;
@@ -76,7 +76,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_Gain,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_Q {
     label Q
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_Q);
  return;
@@ -88,7 +88,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_Q,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_1 {
     label {31 Hz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_31_HZ);
  return;
@@ -99,7 +99,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_31_HZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_2 {
     label {63 Hz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_63_HZ);
  return;
@@ -110,7 +110,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_63_HZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_3 {
     label {125 Hz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_125_HZ);
  return;
@@ -121,7 +121,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_125_HZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_4 {
     label {250 Hz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_250_HZ);
  return;
@@ -132,7 +132,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_250_HZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_5 {
     label {500 Hz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_500_HZ);
  return;
@@ -143,7 +143,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_500_HZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_6 {
     label {1 Khz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_1_KHZ);
  return;
@@ -154,7 +154,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_1_KHZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_7 {
     label {2 Khz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_2_KHZ);
  return;
@@ -165,7 +165,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_2_KHZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_8 {
     label {4 Khz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_4_KHZ);
  return;
@@ -176,7 +176,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_4_KHZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_9 {
     label {8 Khz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_8_KHZ);
  return;
@@ -187,7 +187,7 @@ m_process->Rack_Effects[EFX_EQ]->changepar(EQ_8_KHZ,(int)(o->value()+64));}
   }
   Fl_Value_Slider eq_10 {
     label {16 Khz}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_EQ_16_KHZ);
  return;

@@ -25,7 +25,7 @@ widget_class SharGui {
   Fl_Light_Button shar_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_STEREOHARM]);
@@ -79,7 +79,7 @@ if ((Efx_StereoHarm->PMIDI) || (Efx_StereoHarm->PSELECT)) m_parent->Chord(1);}
   }
   Fl_Value_Slider shar_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_DryWet);
  return;
@@ -90,7 +90,7 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_DryWet,Dry_Wet((int)(o-
   }
   Fl_Value_Slider shar_intl {
     label {Int L}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_L_Interval);
  return;
@@ -103,7 +103,7 @@ if((int)shar_activar->value())m_process->EFX_Bypass[EFX_STEREOHARM]=1;}
   }
   Fl_Value_Slider shar_chl {
     label {Chrm L}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_L_Chroma);
  return;
@@ -114,7 +114,7 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Chroma,(int)o->value(
   }
   Fl_Value_Slider shar_ganl {
     label {Gain L}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_L_Gain);
  return;
@@ -125,7 +125,7 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_L_Gain,(int)(o->value()
   }
   Fl_Value_Slider shar_intr {
     label {Int R}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_R_Interval);
  return;
@@ -138,7 +138,7 @@ if((int)shar_activar->value())m_process->EFX_Bypass[EFX_STEREOHARM]=1;}
   }
   Fl_Value_Slider shar_chr {
     label {Chrm R}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_R_Chroma);
  return;
@@ -149,7 +149,7 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,(int)o->value(
   }
   Fl_Value_Slider shar_ganr {
     label {Gain R}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_R_Gain);
  return;
@@ -160,7 +160,7 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Gain,(int)(o->value()
   }
   Fl_Value_Slider shar_lrc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_LR_Cross);
  return;
@@ -186,7 +186,7 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,m_process->Rac
   Fl_Check_Button shar_SELECT {
     label SELECT
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_Select);
  return;
@@ -210,7 +210,7 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,m_process->Rac
   }
   Fl_Value_Slider shar_note {
     label Note
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_Note);
  return;
@@ -222,7 +222,7 @@ m_parent->Chord(1);}
   }
   Fl_Value_Slider shar_type {
     label Chord
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_Chord);
  return;

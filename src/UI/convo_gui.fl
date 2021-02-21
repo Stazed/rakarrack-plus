@@ -25,7 +25,7 @@ widget_class ConvoGui {
   Fl_Light_Button convo_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_CONVOLOTRON]);
@@ -72,7 +72,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_CONVOLOTRON]; i++)
   }
   Fl_Value_Slider convo_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_DryWet);
  return;
@@ -83,7 +83,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_DryWet,Dry_Wet((int)(o
   }
   Fl_Value_Slider convo_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Pan);
  return;
@@ -94,7 +94,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Pan,(int)(o->value()+6
   }
   Fl_Value_Slider convo_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Level);
  return;
@@ -105,7 +105,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Level,(int)o->value())
   }
   Fl_Value_Slider convo_damp {
     label Damp
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Damp);
  return;
@@ -116,7 +116,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Damp,(int)o->value());
   }
   Fl_Value_Slider convo_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Feedback);
  return;
@@ -127,7 +127,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Feedback,(int)o->value
   }
   Fl_Value_Slider convo_length {
     label Length
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Length);
  return;

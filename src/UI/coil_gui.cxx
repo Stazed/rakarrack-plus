@@ -3,7 +3,7 @@
 #include "coil_gui.h"
 
 void CoilGui::cb_coil_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_COILCRAFTER]);
@@ -38,7 +38,7 @@ Fl_Menu_Item CoilGui::menu_coil_preset[] = {
 };
 
 void CoilGui::cb_coil_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Gain);
  return;
@@ -50,7 +50,7 @@ void CoilGui::cb_coil_WD(RKR_Slider* o, void* v) {
 }
 
 void CoilGui::cb_coil_tone_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Tone);
  return;
@@ -84,7 +84,7 @@ Fl_Menu_Item CoilGui::menu_coil_origin[] = {
 };
 
 void CoilGui::cb_coil_freq1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Freq_1);
  return;
@@ -96,7 +96,7 @@ void CoilGui::cb_coil_freq1(RKR_Slider* o, void* v) {
 }
 
 void CoilGui::cb_coil_q1_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Q_1);
  return;
@@ -117,7 +117,7 @@ void CoilGui::cb_coil_destiny(RKR_Choice* o, void* v) {
 }
 
 void CoilGui::cb_coil_freq2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Freq_2);
  return;
@@ -129,7 +129,7 @@ void CoilGui::cb_coil_freq2(RKR_Slider* o, void* v) {
 }
 
 void CoilGui::cb_coil_q2_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Coil_Q_2);
  return;

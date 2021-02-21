@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} PanGui {
   Fl_Light_Button pan_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_PAN]);
@@ -65,7 +65,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_PAN]; i++)
   }
   Fl_Value_Slider pan_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Pan_DryWet);
  return;
@@ -76,7 +76,7 @@ m_process->Rack_Effects[EFX_PAN]->changepar(Pan_DryWet,Dry_Wet((int)(o->value())
   }
   Fl_Value_Slider pan_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Pan_Pan);
  return;
@@ -94,7 +94,7 @@ m_process->Rack_Effects[EFX_PAN]->changepar(Pan_Pan,(int)(o->value()+64));}
   }
   Fl_Value_Slider pan_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Pan_LFO_Tempo);
  return;
@@ -105,7 +105,7 @@ m_process->Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Tempo,(int)o->value());}
   }
   Fl_Value_Slider pan_rnd {
     label Random
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Pan_LFO_Random);
  return;
@@ -116,7 +116,7 @@ m_process->Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Random,(int)o->value());}
   }
   Fl_Choice pan_lfotype {
     label {LFO Type}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Pan_LFO_Type);
  return;
@@ -129,7 +129,7 @@ m_process->Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Type,(int)o->value());} open
   } {}
   Fl_Value_Slider pan_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Pan_LFO_Stereo);
  return;
@@ -147,7 +147,7 @@ m_process->Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Stereo,(int)o->value());}
   }
   Fl_Value_Slider pan_extra {
     label {E.Stereo}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Pan_Ex_St_Amt);
  return;

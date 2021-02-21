@@ -3,7 +3,7 @@
 #include "otrem_gui.h"
 
 void OtremGui::cb_otrem_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_OPTICALTREM]);
@@ -43,7 +43,7 @@ Fl_Menu_Item OtremGui::menu_otrem_preset[] = {
 };
 
 void OtremGui::cb_otrem_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_Depth);
  return;
@@ -55,7 +55,7 @@ void OtremGui::cb_otrem_dpth(RKR_Slider* o, void* v) {
 }
 
 void OtremGui::cb_otrem_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Tempo);
  return;
@@ -67,7 +67,7 @@ void OtremGui::cb_otrem_freq(RKR_Slider* o, void* v) {
 }
 
 void OtremGui::cb_otrem_rnd_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Random);
  return;
@@ -79,7 +79,7 @@ void OtremGui::cb_otrem_rnd(RKR_Slider* o, void* v) {
 }
 
 void OtremGui::cb_otrem_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Type);
  return;
@@ -92,7 +92,7 @@ void OtremGui::cb_otrem_lfotype(RKR_Choice* o, void* v) {
 }
 
 void OtremGui::cb_otrem_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_LFO_Stereo);
  return;
@@ -104,7 +104,7 @@ void OtremGui::cb_otrem_stdf(RKR_Slider* o, void* v) {
 }
 
 void OtremGui::cb_otrem_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Optical_Pan);
  return;

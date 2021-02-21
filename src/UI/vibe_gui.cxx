@@ -3,7 +3,7 @@
 #include "vibe_gui.h"
 
 void VibeGui::cb_vibe_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_VIBE]);
@@ -45,7 +45,7 @@ Fl_Menu_Item VibeGui::menu_vibe_preset[] = {
 };
 
 void VibeGui::cb_vibe_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_DryWet);
  return;
@@ -57,7 +57,7 @@ void VibeGui::cb_vibe_WD(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_width_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_Width);
  return;
@@ -69,7 +69,7 @@ void VibeGui::cb_vibe_width(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_Depth);
  return;
@@ -81,7 +81,7 @@ void VibeGui::cb_vibe_dpth(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_LFO_Tempo);
  return;
@@ -93,7 +93,7 @@ void VibeGui::cb_vibe_freq(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_rnd_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_LFO_Random);
  return;
@@ -105,7 +105,7 @@ void VibeGui::cb_vibe_rnd(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_LFO_Type);
  return;
@@ -118,7 +118,7 @@ void VibeGui::cb_vibe_lfotype(RKR_Choice* o, void* v) {
 }
 
 void VibeGui::cb_vibe_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_LFO_Stereo);
  return;
@@ -130,7 +130,7 @@ void VibeGui::cb_vibe_stdf(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_Feedback);
  return;
@@ -142,7 +142,7 @@ void VibeGui::cb_vibe_fb(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_LR_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_LR_Cross);
  return;
@@ -154,7 +154,7 @@ void VibeGui::cb_vibe_LR(RKR_Slider* o, void* v) {
 }
 
 void VibeGui::cb_vibe_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Vibe_Pan);
  return;

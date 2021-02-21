@@ -3,7 +3,7 @@
 #include "cabinet_gui.h"
 
 void CabinetGui::cb_Cabinet_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_CABINET]);
@@ -39,7 +39,7 @@ Fl_Menu_Item CabinetGui::menu_Cabinet_preset[] = {
 };
 
 void CabinetGui::cb_Cabinet_output_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Cabinet_Gain);
  return;

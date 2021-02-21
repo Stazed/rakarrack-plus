@@ -23,7 +23,7 @@ widget_class {\#include "newvum.h"} VocoderGui {
   Fl_Light_Button vo_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_VOCODER]);
@@ -74,7 +74,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
   }
   Fl_Value_Slider vo_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_DryWet);
          return;
@@ -85,7 +85,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
   }
   Fl_Value_Slider vo_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Pan);
          return;
@@ -96,7 +96,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
   }
   Fl_Value_Slider vo_input {
     label Input
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Input);
          return;
@@ -107,7 +107,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
   }
   Fl_Value_Slider vo_mu {
     label Smear
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Smear);
          return;
@@ -118,7 +118,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
   }
   Fl_Value_Slider vo_q {
     label Q
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Q);
          return;
@@ -129,7 +129,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
   }
   Fl_Value_Slider vo_ring {
     label Ring
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Ring);
          return;
@@ -140,7 +140,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
   }
   Fl_Value_Slider vo_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
         {
          m_parent->getMIDIControl(MC_Vocoder_Level);
          return;

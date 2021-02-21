@@ -25,7 +25,7 @@ widget_class RevtronGui {
   Fl_Light_Button revtron_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_REVERBTRON]);
@@ -91,7 +91,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_REVERBTRON]; i++)
   }
   Fl_Value_Slider revtron_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_DryWet);
  return;
@@ -102,7 +102,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_DryWet,Dry_Wet((int)(
   }
   Fl_Value_Slider revtron_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Pan);
  return;
@@ -113,7 +113,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Pan,(int)(o->value()+
   }
   Fl_Value_Slider revtron_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Level);
  return;
@@ -124,7 +124,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Level,(int)o->value()
   }
   Fl_Value_Slider revtron_damp {
     label Damp
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Damp);
  return;
@@ -135,7 +135,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Damp,(int)o->value())
   }
   Fl_Value_Slider revtron_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Feedback);
  return;
@@ -146,7 +146,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Feedback,(int)o->valu
   }
   Fl_Value_Slider revtron_length {
     label Length
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Length);
  return;
@@ -157,7 +157,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Length,(int)o->value(
   }
   Fl_Value_Slider revtron_strech {
     label Stretch
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Stretch);
  return;
@@ -168,7 +168,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Stretch,(int)o->value
   }
   Fl_Value_Slider revtron_idelay {
     label {I. Del}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_I_Delay);
  return;
@@ -179,7 +179,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_I_Delay,(int)o->value
   }
   Fl_Value_Slider revtron_fade {
     label Fade
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Fade);
  return;
@@ -190,7 +190,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Fade,(int)o->value())
   }
   Fl_Value_Slider revtron_diff {
     label Diffusion
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_Diffusion);
  return;
@@ -201,7 +201,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_Diffusion,(int)o->val
   }
   Fl_Value_Slider revtron_LPF {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Revtron_LPF);
  return;

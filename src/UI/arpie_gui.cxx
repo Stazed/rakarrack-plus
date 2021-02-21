@@ -3,7 +3,7 @@
 #include "arpie_gui.h"
 
 void ArpieGui::cb_arpie_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ARPIE]);
@@ -46,7 +46,7 @@ Fl_Menu_Item ArpieGui::menu_arpie_preset[] = {
 };
 
 void ArpieGui::cb_arpie_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_DryWet);
  return;
@@ -58,7 +58,7 @@ void ArpieGui::cb_arpie_WD(RKR_Slider* o, void* v) {
 }
 
 void ArpieGui::cb_arpie_arpe_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_ArpeWD);
  return;
@@ -70,7 +70,7 @@ void ArpieGui::cb_arpie_arpe(RKR_Slider* o, void* v) {
 }
 
 void ArpieGui::cb_arpie_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Pan);
  return;
@@ -82,7 +82,7 @@ void ArpieGui::cb_arpie_pan(RKR_Slider* o, void* v) {
 }
 
 void ArpieGui::cb_arpie_delay_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Tempo);
  return;
@@ -101,7 +101,7 @@ void ArpieGui::cb_arpie_subdiv(RKR_Choice* o, void* v) {
 }
 
 void ArpieGui::cb_arpie_LRdl_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_LR_Delay);
  return;
@@ -113,7 +113,7 @@ void ArpieGui::cb_arpie_LRdl(RKR_Slider* o, void* v) {
 }
 
 void ArpieGui::cb_arpie_LRc_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_LR_Cross);
  return;
@@ -125,7 +125,7 @@ void ArpieGui::cb_arpie_LRc(RKR_Slider* o, void* v) {
 }
 
 void ArpieGui::cb_arpie_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Feedback);
  return;
@@ -137,7 +137,7 @@ void ArpieGui::cb_arpie_fb(RKR_Slider* o, void* v) {
 }
 
 void ArpieGui::cb_arpie_damp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Damp);
  return;

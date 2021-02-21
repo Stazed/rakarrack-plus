@@ -3,7 +3,7 @@
 #include "wahwah_gui.h"
 
 void WahwahGui::cb_WahWah_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_WAHWAH]);
@@ -44,7 +44,7 @@ Fl_Menu_Item WahwahGui::menu_WahWah_preset[] = {
 };
 
 void WahwahGui::cb_WahWah_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_DryWet);
  return;
@@ -56,7 +56,7 @@ void WahwahGui::cb_WahWah_WD(RKR_Slider* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Pan);
  return;
@@ -68,7 +68,7 @@ void WahwahGui::cb_WahWah_pan(RKR_Slider* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Tempo);
  return;
@@ -80,7 +80,7 @@ void WahwahGui::cb_WahWah_freq(RKR_Slider* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_rnd_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Random);
  return;
@@ -92,7 +92,7 @@ void WahwahGui::cb_WahWah_rnd(RKR_Slider* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Type);
  return;
@@ -105,7 +105,7 @@ void WahwahGui::cb_WahWah_lfotype(RKR_Choice* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_stdf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Stereo);
  return;
@@ -117,7 +117,7 @@ void WahwahGui::cb_WahWah_stdf(RKR_Slider* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Depth);
  return;
@@ -129,7 +129,7 @@ void WahwahGui::cb_WahWah_dpth(RKR_Slider* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_ampsns_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Sense);
  return;
@@ -141,7 +141,7 @@ void WahwahGui::cb_WahWah_ampsns(RKR_Slider* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_ampsnsinv_i(RKR_Check_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_ASI);
  return;
@@ -169,7 +169,7 @@ Fl_Menu_Item WahwahGui::menu_WahWah_ftype[] = {
 };
 
 void WahwahGui::cb_WahWah_smooth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Smooth);
  return;

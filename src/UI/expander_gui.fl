@@ -22,7 +22,7 @@ widget_class ExpanderGui {
   Fl_Light_Button expander_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_EXPANDER]);
@@ -67,7 +67,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXPANDER]; i++)
   }
   Fl_Value_Slider expander_ATime {
     label {A. Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Attack);
  return;
@@ -78,7 +78,7 @@ m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Attack,(int)o->value()
   }
   Fl_Value_Slider expander_RTime {
     label {R. Time}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Release);
  return;
@@ -89,7 +89,7 @@ m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Release,(int) o->value
   }
   Fl_Value_Slider expander_shape {
     label Shape
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Shape);
  return;
@@ -100,7 +100,7 @@ m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Shape, (int) o->value(
   }
   Fl_Value_Slider expander_threshold {
     label Threshold
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Threshold);
  return;
@@ -111,7 +111,7 @@ m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Threshold, (int)o->val
   }
   Fl_Value_Slider expander_level {
     label {Out Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_Gain);
  return;
@@ -122,7 +122,7 @@ m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_Gain, (int) o->value()
   }
   Fl_Value_Slider expander_LPF {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_LPF);
  return;
@@ -133,7 +133,7 @@ m_process->Rack_Effects[EFX_EXPANDER]->changepar(Expander_LPF, (int)o->value());
   }
   Fl_Value_Slider expander_HPF {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Expander_HPF);
  return;

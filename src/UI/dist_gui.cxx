@@ -3,7 +3,7 @@
 #include "dist_gui.h"
 
 void DistGui::cb_dist_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_DISTORTION]);
@@ -40,7 +40,7 @@ Fl_Menu_Item DistGui::menu_dist_preset[] = {
 };
 
 void DistGui::cb_dist_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_DryWet);
  return;
@@ -52,7 +52,7 @@ void DistGui::cb_dist_WD(RKR_Slider* o, void* v) {
 }
 
 void DistGui::cb_dist_LRc_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_LR_Cross);
  return;
@@ -64,7 +64,7 @@ void DistGui::cb_dist_LRc(RKR_Slider* o, void* v) {
 }
 
 void DistGui::cb_dist_drive_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Drive);
  return;
@@ -76,7 +76,7 @@ void DistGui::cb_dist_drive(RKR_Slider* o, void* v) {
 }
 
 void DistGui::cb_dist_level_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Level);
  return;
@@ -88,7 +88,7 @@ void DistGui::cb_dist_level(RKR_Slider* o, void* v) {
 }
 
 void DistGui::cb_dist_tipo_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Type);
  return;
@@ -122,7 +122,7 @@ void DistGui::cb_dist_st(RKR_Check_Button* o, void* v) {
 }
 
 void DistGui::cb_dist_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Pan);
  return;
@@ -134,7 +134,7 @@ void DistGui::cb_dist_pan(RKR_Slider* o, void* v) {
 }
 
 void DistGui::cb_dist_oct_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Suboctave);
  return;
@@ -146,7 +146,7 @@ void DistGui::cb_dist_oct(RKR_Slider* o, void* v) {
 }
 
 void DistGui::cb_dist_lpf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_LPF);
  return;
@@ -158,7 +158,7 @@ void DistGui::cb_dist_lpf(RKR_Slider* o, void* v) {
 }
 
 void DistGui::cb_dist_hpf_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_HPF);
  return;

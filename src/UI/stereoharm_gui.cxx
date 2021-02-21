@@ -3,7 +3,7 @@
 #include "stereoharm_gui.h"
 
 void SharGui::cb_shar_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_STEREOHARM]);
@@ -47,7 +47,7 @@ Fl_Menu_Item SharGui::menu_shar_preset[] = {
 };
 
 void SharGui::cb_shar_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_DryWet);
  return;
@@ -59,7 +59,7 @@ void SharGui::cb_shar_WD(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_intl_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_L_Interval);
  return;
@@ -73,7 +73,7 @@ void SharGui::cb_shar_intl(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_chl_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_L_Chroma);
  return;
@@ -85,7 +85,7 @@ void SharGui::cb_shar_chl(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_ganl_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_L_Gain);
  return;
@@ -97,7 +97,7 @@ void SharGui::cb_shar_ganl(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_intr_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_R_Interval);
  return;
@@ -111,7 +111,7 @@ void SharGui::cb_shar_intr(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_chr_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_R_Chroma);
  return;
@@ -123,7 +123,7 @@ void SharGui::cb_shar_chr(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_ganr_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_R_Gain);
  return;
@@ -135,7 +135,7 @@ void SharGui::cb_shar_ganr(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_lrc_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_LR_Cross);
  return;
@@ -161,7 +161,7 @@ void SharGui::cb_shar_MIDI(RKR_Check_Button* o, void* v) {
 }
 
 void SharGui::cb_shar_SELECT_i(RKR_Check_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_Select);
  return;
@@ -181,7 +181,7 @@ void SharGui::cb_shar_SELECT(RKR_Check_Button* o, void* v) {
 }
 
 void SharGui::cb_shar_note_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_Note);
  return;
@@ -194,7 +194,7 @@ void SharGui::cb_shar_note(RKR_Slider* o, void* v) {
 }
 
 void SharGui::cb_shar_type_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_Chord);
  return;

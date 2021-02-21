@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} ArpieGui {
   Fl_Light_Button arpie_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ARPIE]);
@@ -97,7 +97,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_ARPIE]; i++)
   }
   Fl_Value_Slider arpie_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_DryWet);
  return;
@@ -108,7 +108,7 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_DryWet,Dry_Wet((int)(o->valu
   }
   Fl_Value_Slider arpie_arpe {
     label {Arpe's}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_ArpeWD);
  return;
@@ -119,7 +119,7 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_ArpeWD,(int)o->value());}
   }
   Fl_Value_Slider arpie_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Pan);
  return;
@@ -130,7 +130,7 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_Pan,(int)(o->value()+64));}
   }
   Fl_Value_Slider arpie_delay {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Tempo);
  return;
@@ -149,7 +149,7 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_Tempo,(int)o->value());}
   } {}
   Fl_Value_Slider arpie_LRdl {
     label {L/R Delay}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_LR_Delay);
  return;
@@ -160,7 +160,7 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_LR_Delay,(int)o->value());}
   }
   Fl_Value_Slider arpie_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_LR_Cross);
  return;
@@ -171,7 +171,7 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_LR_Cross,(int)(o->value()));
   }
   Fl_Value_Slider arpie_fb {
     label Feedback
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Feedback);
  return;
@@ -182,7 +182,7 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_Feedback,(int)o->value());}
   }
   Fl_Value_Slider arpie_damp {
     label Damp
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Arpie_Damp);
  return;

@@ -1170,7 +1170,7 @@ else m_process->booster=1.0f;}
         }
         Fl_Value_Slider Balance {
           label {FX%}
-          callback {if(Fl::event_button()==3)
+          callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  getMIDIControl(MC_Balance_FX);
  return;
@@ -1181,7 +1181,7 @@ m_process->Fraction_Bypass=(float)(o->value()/100.0f);}
         }
         Fl_Value_Slider Nivel_Entrada {
           label Input
-          callback {if(Fl::event_button()==3)
+          callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  getMIDIControl(MC_Input_Volume);
  return;
@@ -1193,7 +1193,7 @@ m_process->calculavol(1);}
         }
         Fl_Value_Slider Nivel_Salida {
           label Output
-          callback {if(Fl::event_button()==3)
+          callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  getMIDIControl(MC_Output_Volume);
  return;

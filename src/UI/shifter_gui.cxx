@@ -3,7 +3,7 @@
 #include "shifter_gui.h"
 
 void ShifterGui::cb_shifter_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_SHIFTER]);
@@ -42,7 +42,7 @@ Fl_Menu_Item ShifterGui::menu_shifter_preset[] = {
 };
 
 void ShifterGui::cb_shifter_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_DryWet);
  return;
@@ -54,7 +54,7 @@ void ShifterGui::cb_shifter_WD(RKR_Slider* o, void* v) {
 }
 
 void ShifterGui::cb_shifter_int_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Interval);
  return;
@@ -68,7 +68,7 @@ void ShifterGui::cb_shifter_int(RKR_Slider* o, void* v) {
 }
 
 void ShifterGui::cb_shifter_gain_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Gain);
  return;
@@ -80,7 +80,7 @@ void ShifterGui::cb_shifter_gain(RKR_Slider* o, void* v) {
 }
 
 void ShifterGui::cb_shifter_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Pan);
  return;
@@ -92,7 +92,7 @@ void ShifterGui::cb_shifter_pan(RKR_Slider* o, void* v) {
 }
 
 void ShifterGui::cb_shifter_attack_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Attack);
  return;
@@ -104,7 +104,7 @@ void ShifterGui::cb_shifter_attack(RKR_Slider* o, void* v) {
 }
 
 void ShifterGui::cb_shifter_decay_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Decay);
  return;
@@ -116,7 +116,7 @@ void ShifterGui::cb_shifter_decay(RKR_Slider* o, void* v) {
 }
 
 void ShifterGui::cb_shifter_thre_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Threshold);
  return;
@@ -135,7 +135,7 @@ void ShifterGui::cb_shifter_ud(RKR_Check_Button* o, void* v) {
 }
 
 void ShifterGui::cb_shifter_whammy_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Shifter_Whammy);
  return;

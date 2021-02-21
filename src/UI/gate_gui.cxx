@@ -3,7 +3,7 @@
 #include "gate_gui.h"
 
 void GateGui::cb_gate_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_NOISEGATE]);
@@ -37,7 +37,7 @@ Fl_Menu_Item GateGui::menu_gate_preset[] = {
 };
 
 void GateGui::cb_gate_ATime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Attack);
  return;
@@ -49,7 +49,7 @@ void GateGui::cb_gate_ATime(RKR_Slider* o, void* v) {
 }
 
 void GateGui::cb_gate_RTime_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Release);
  return;
@@ -61,7 +61,7 @@ void GateGui::cb_gate_RTime(RKR_Slider* o, void* v) {
 }
 
 void GateGui::cb_gate_range_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Range);
  return;
@@ -73,7 +73,7 @@ void GateGui::cb_gate_range(RKR_Slider* o, void* v) {
 }
 
 void GateGui::cb_gate_threshold_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Threshold);
  return;
@@ -85,7 +85,7 @@ void GateGui::cb_gate_threshold(RKR_Slider* o, void* v) {
 }
 
 void GateGui::cb_gate_hold_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_Hold);
  return;
@@ -97,7 +97,7 @@ void GateGui::cb_gate_hold(RKR_Slider* o, void* v) {
 }
 
 void GateGui::cb_gate_LPF_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_LPF);
  return;
@@ -109,7 +109,7 @@ void GateGui::cb_gate_LPF(RKR_Slider* o, void* v) {
 }
 
 void GateGui::cb_gate_HPF_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Gate_HPF);
  return;

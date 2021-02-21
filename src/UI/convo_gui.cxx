@@ -3,7 +3,7 @@
 #include "convo_gui.h"
 
 void ConvoGui::cb_convo_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_CONVOLOTRON]);
@@ -40,7 +40,7 @@ Fl_Menu_Item ConvoGui::menu_convo_preset[] = {
 };
 
 void ConvoGui::cb_convo_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_DryWet);
  return;
@@ -52,7 +52,7 @@ void ConvoGui::cb_convo_WD(RKR_Slider* o, void* v) {
 }
 
 void ConvoGui::cb_convo_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Pan);
  return;
@@ -64,7 +64,7 @@ void ConvoGui::cb_convo_pan(RKR_Slider* o, void* v) {
 }
 
 void ConvoGui::cb_convo_level_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Level);
  return;
@@ -76,7 +76,7 @@ void ConvoGui::cb_convo_level(RKR_Slider* o, void* v) {
 }
 
 void ConvoGui::cb_convo_damp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Damp);
  return;
@@ -88,7 +88,7 @@ void ConvoGui::cb_convo_damp(RKR_Slider* o, void* v) {
 }
 
 void ConvoGui::cb_convo_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Feedback);
  return;
@@ -100,7 +100,7 @@ void ConvoGui::cb_convo_fb(RKR_Slider* o, void* v) {
 }
 
 void ConvoGui::cb_convo_length_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Convo_Length);
  return;

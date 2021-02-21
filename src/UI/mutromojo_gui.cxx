@@ -3,7 +3,7 @@
 #include "mutromojo_gui.h"
 
 void MutromojoGui::cb_mutromojo_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_MUTROMOJO]);
@@ -46,7 +46,7 @@ Fl_Menu_Item MutromojoGui::menu_mutromojo_preset[] = {
 };
 
 void MutromojoGui::cb_mutromojo_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_DryWet);
  return;
@@ -76,7 +76,7 @@ void MutromojoGui::cb_mutromojo_qm(RKR_Check_Button* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_lp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LowPass);
  return;
@@ -106,7 +106,7 @@ void MutromojoGui::cb_mutromojo_nat(RKR_Check_Button* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_bp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_BandPass);
  return;
@@ -125,7 +125,7 @@ void MutromojoGui::cb_mutromojo_res(RKR_Check_Button* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_hp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_HighPass);
  return;
@@ -144,7 +144,7 @@ void MutromojoGui::cb_svfilter_stages(RKR_Counter* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_lfotype_i(RKR_Choice* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Type);
  return;
@@ -157,7 +157,7 @@ void MutromojoGui::cb_mutromojo_lfotype(RKR_Choice* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_dpth_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Depth);
  return;
@@ -169,7 +169,7 @@ void MutromojoGui::cb_mutromojo_dpth(RKR_Slider* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_freq_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Tempo);
  return;
@@ -181,7 +181,7 @@ void MutromojoGui::cb_mutromojo_freq(RKR_Slider* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_q_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Resonance);
  return;
@@ -193,7 +193,7 @@ void MutromojoGui::cb_mutromojo_q(RKR_Slider* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_rng_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Range);
  return;
@@ -205,7 +205,7 @@ void MutromojoGui::cb_mutromojo_rng(RKR_Slider* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_ampsnsinv_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Wah);
  return;
@@ -217,7 +217,7 @@ void MutromojoGui::cb_mutromojo_ampsnsinv(RKR_Slider* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_ampsns_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Env_Sens);
  return;
@@ -229,7 +229,7 @@ void MutromojoGui::cb_mutromojo_ampsns(RKR_Slider* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_smooth_i(RKR_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_Env_Smooth);
  return;
@@ -241,7 +241,7 @@ void MutromojoGui::cb_mutromojo_smooth(RKR_Value_Input* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_Rnd_i(RKR_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Random);
  return;
@@ -253,7 +253,7 @@ void MutromojoGui::cb_mutromojo_Rnd(RKR_Value_Input* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_St_i(RKR_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_LFO_Stereo);
  return;
@@ -265,7 +265,7 @@ void MutromojoGui::cb_mutromojo_St(RKR_Value_Input* o, void* v) {
 }
 
 void MutromojoGui::cb_mutromojo_minfreq_i(RKR_Value_Input* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_MuTro_St_Freq);
  return;

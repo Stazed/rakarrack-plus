@@ -29,7 +29,7 @@ widget_class {\#include "RKR_Value_Input.h"} InfinityGui {
   Fl_Light_Button infinity_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off); 
  o->value(m_process->EFX_Bypass[EFX_INFINITY]);
@@ -104,7 +104,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_INFINITY]; i++)
   }
   Fl_Value_Slider infinity_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_DryWet);
  return;
@@ -115,7 +115,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_DryWet,Dry_Wet((int)(o
   }
   Fl_Value_Slider infinity_Q {
     label Res
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Resonance);
  return;
@@ -126,7 +126,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Resonance,(int)o->valu
   }
   Fl_Value_Input infinity_1 {
     label 1
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_1);
  return;
@@ -137,7 +137,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_1,(int)o->value()
   }
   Fl_Value_Input infinity_2 {
     label 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_2);
  return;
@@ -148,7 +148,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_2,(int)o->value()
   }
   Fl_Value_Input infinity_3 {
     label 3
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_3);
  return;
@@ -159,7 +159,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_3,(int)o->value()
   }
   Fl_Value_Input infinity_4 {
     label 4
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_4);
  return;
@@ -170,7 +170,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_4,(int)o->value()
   }
   Fl_Value_Input infinity_5 {
     label 5
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_5);
  return;
@@ -181,7 +181,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_5,(int)o->value()
   }
   Fl_Value_Input infinity_6 {
     label 6
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_6);
  return;
@@ -192,7 +192,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_6,(int)o->value()
   }
   Fl_Value_Input infinity_7 {
     label 7
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_7);
  return;
@@ -203,7 +203,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_7,(int)o->value()
   }
   Fl_Value_Input infinity_8 {
     label 8
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Band_8);
  return;
@@ -228,7 +228,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_8,(int)o->value()
   }
   Fl_Value_Slider infinity_pan {
     label AutoPan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_AutoPan);
  return;
@@ -239,7 +239,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_AutoPan,(int)o->value(
   }
   Fl_Value_Slider infinity_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_LR_Delay);
  return;
@@ -250,7 +250,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_LR_Delay,(int)o->value
   }
   Fl_Value_Slider infinity_start {
     label Start
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Start);
  return;
@@ -261,7 +261,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Start,(int)o->value())
   }
   Fl_Value_Slider infinity_end {
     label End
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_End);
  return;
@@ -272,7 +272,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_End,(int)o->value());}
   }
   Fl_Value_Slider infinity_rate {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Tempo);
  return;
@@ -283,7 +283,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Tempo,(int)o->value())
   }
   Fl_Value_Slider infinity_subdiv {
     label Subdiv
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Infinity_Subdivision);
  return;

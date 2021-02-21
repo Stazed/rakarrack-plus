@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} DistBandGui {
   Fl_Light_Button distband_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_DISTBAND]);
@@ -89,7 +89,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_DISTBAND]; i++)
   }
   Fl_Value_Slider distband_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_DryWet);
  return;
@@ -100,7 +100,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_DryWet,Dry_Wet((int)(o
   }
   Fl_Value_Slider distband_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_LR_Cross);
  return;
@@ -111,7 +111,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_LR_Cross,(int)(o->valu
   }
   Fl_Value_Slider distband_drive {
     label Drive
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Drive);
  return;
@@ -122,7 +122,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Drive,(int)o->value())
   }
   Fl_Value_Slider distband_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Level);
  return;
@@ -133,7 +133,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Level,(int)o->value())
   }
   Fl_Value_Slider distband_volL {
     label {L. Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Gain_Low);
  return;
@@ -144,7 +144,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Low,(int)o->value
   }
   Fl_Value_Slider distband_volM {
     label {M. Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Gain_Mid);
  return;
@@ -155,7 +155,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Mid,(int)o->value
   }
   Fl_Value_Slider distband_volH {
     label {H. Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Gain_Hi);
  return;
@@ -166,7 +166,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Gain_Hi,(int)o->value(
   }
   Fl_Value_Slider distband_cross1 {
     label {Cross 1}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Cross_1);
  return;
@@ -177,7 +177,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Cross_1,(int)o->value(
   }
   Fl_Value_Slider distband_cross2 {
     label {Cross 2}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Cross_2);
  return;
@@ -187,7 +187,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Cross_2,(int)o->value(
     class RKR_Slider
   }
   Fl_Choice distband_tipoL {
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Type_Low);
  return;
@@ -199,7 +199,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Low,(int)o->value
     class RKR_Choice
   } {}
   Fl_Choice distband_tipoM {
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Type_Mid);
  return;
@@ -211,7 +211,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Mid,(int)o->value
     class RKR_Choice
   } {}
   Fl_Choice distband_tipoH {
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Type_Hi);
  return;
@@ -224,7 +224,7 @@ m_process->Rack_Effects[EFX_DISTBAND]->changepar(DistBand_Type_Hi,(int)o->value(
   } {}
   Fl_Value_Slider distband_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_DistBand_Pan);
  return;

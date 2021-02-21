@@ -25,7 +25,7 @@ widget_class HarGui {
   Fl_Light_Button har_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_HARMONIZER]);
@@ -73,7 +73,7 @@ if ((Efx_Harmonizer->PMIDI) || (Efx_Harmonizer->PSELECT)) m_parent->Chord(0);}
   }
   Fl_Value_Slider har_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_DryWet);
  return;
@@ -84,7 +84,7 @@ m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_DryWet,Dry_Wet((int)(o->
   }
   Fl_Value_Slider har_int {
     label Interval
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Interval);
  return;
@@ -97,7 +97,7 @@ if((int)har_activar->value())m_process->EFX_Bypass[EFX_HARMONIZER]=1;}
   }
   Fl_Value_Slider har_gan {
     label Gain
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Gain);
  return;
@@ -108,7 +108,7 @@ m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Gain,(int)(o->value()+64
   }
   Fl_Value_Slider har_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Pan);
  return;
@@ -119,7 +119,7 @@ m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Pan,(int)(o->value()+64)
   }
   Fl_Value_Slider har_freq1 {
     label Freq
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Filter_Freq);
  return;
@@ -130,7 +130,7 @@ m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Filter_Freq,(int)o->valu
   }
   Fl_Value_Slider har_gan1 {
     label {F. Gain}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Filter_Gain);
  return;
@@ -141,7 +141,7 @@ m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Filter_Gain,(int)(o->val
   }
   Fl_Value_Slider har_q1 {
     label {Filter Q}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Filter_Q);
  return;
@@ -162,7 +162,7 @@ if(!(int)o->value())m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Inte
   Fl_Check_Button har_SELECT {
     label SELECT
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Select);
  return;
@@ -181,7 +181,7 @@ m_parent->Chord(0);}
   }
   Fl_Value_Slider har_note {
     label Note
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Note);
  return;
@@ -193,7 +193,7 @@ m_parent->Chord(0);}
   }
   Fl_Value_Slider har_type {
     label Chord
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Chord);
  return;

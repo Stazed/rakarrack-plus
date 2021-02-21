@@ -3,7 +3,7 @@
 #include "reverb_gui.h"
 
 void ReverbGui::cb_reverb_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_REVERB]);
@@ -52,7 +52,7 @@ Fl_Menu_Item ReverbGui::menu_reverb_preset[] = {
 };
 
 void ReverbGui::cb_reverb_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_DryWet);
  return;
@@ -64,7 +64,7 @@ void ReverbGui::cb_reverb_WD(RKR_Slider* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Pan);
  return;
@@ -76,7 +76,7 @@ void ReverbGui::cb_reverb_pan(RKR_Slider* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_time_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Time);
  return;
@@ -88,7 +88,7 @@ void ReverbGui::cb_reverb_time(RKR_Slider* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_ldel_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_I_Delay);
  return;
@@ -100,7 +100,7 @@ void ReverbGui::cb_reverb_ldel(RKR_Slider* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_ldelft_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Delay_FB);
  return;
@@ -132,7 +132,7 @@ Fl_Menu_Item ReverbGui::menu_reverb_type[] = {
 };
 
 void ReverbGui::cb_reverb_RS_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Room);
  return;
@@ -146,7 +146,7 @@ void ReverbGui::cb_reverb_RS(RKR_Slider* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_LPF_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_LPF);
  return;
@@ -158,7 +158,7 @@ void ReverbGui::cb_reverb_LPF(RKR_Slider* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_HPF_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_HPF);
  return;
@@ -170,7 +170,7 @@ void ReverbGui::cb_reverb_HPF(RKR_Slider* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_damp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Damp);
  return;

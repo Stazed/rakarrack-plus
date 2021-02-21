@@ -26,7 +26,7 @@ widget_class {\#include "common_gui_menu.h"} WahwahGui {
   Fl_Light_Button WahWah_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_WAHWAH]);
@@ -80,7 +80,7 @@ if((int)WahWah_activar->value()) m_process->EFX_Bypass[EFX_WAHWAH]=1;}
   }
   Fl_Value_Slider WahWah_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_DryWet);
  return;
@@ -91,7 +91,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_DryWet,Dry_Wet((int)(o->va
   }
   Fl_Value_Slider WahWah_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Pan);
  return;
@@ -102,7 +102,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Pan,(int)(o->value()+64));
   }
   Fl_Value_Slider WahWah_freq {
     label Tempo
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Tempo);
  return;
@@ -113,7 +113,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Tempo,(int)o->value())
   }
   Fl_Value_Slider WahWah_rnd {
     label Random
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Random);
  return;
@@ -124,7 +124,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Random,(int)o->value()
   }
   Fl_Choice WahWah_lfotype {
     label {LFO Type}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Type);
  return;
@@ -137,7 +137,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Type,(int)o->value())}
   } {}
   Fl_Value_Slider WahWah_stdf {
     label {Stereo Df}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_LFO_Stereo);
  return;
@@ -148,7 +148,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Stereo,(int)o->value()
   }
   Fl_Value_Slider WahWah_dpth {
     label Depth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Depth);
  return;
@@ -159,7 +159,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Depth,(int)o->value());}
   }
   Fl_Value_Slider WahWah_ampsns {
     label {Amp.S.}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Sense);
  return;
@@ -171,7 +171,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Sense,(int)o->value());}
   Fl_Check_Button WahWah_ampsnsinv {
     label {A.S.I.}
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_ASI);
  return;
@@ -209,7 +209,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_ASI,(int)o->value());}
   }
   Fl_Value_Slider WahWah_smooth {
     label Smooth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_WahWah_Smooth);
  return;

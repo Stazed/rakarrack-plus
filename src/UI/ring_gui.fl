@@ -25,7 +25,7 @@ widget_class RingGui {
   Fl_Light_Button ring_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_RING]);
@@ -80,7 +80,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_RING]; i++)
   }
   Fl_Value_Slider ring_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_DryWet);
  return;
@@ -91,7 +91,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_DryWet,Dry_Wet((int)o->value()
   }
   Fl_Value_Slider ring_LRc {
     label {L/R Cross}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_LR_Cross);
  return;
@@ -102,7 +102,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_LR_Cross,(int)o->value());}
   }
   Fl_Value_Slider ring_input {
     label Input
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Input);
  return;
@@ -113,7 +113,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Input,(int)o->value());}
   }
   Fl_Value_Slider ring_level {
     label Level
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Level);
  return;
@@ -124,7 +124,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Level,(int)o->value());}
   }
   Fl_Value_Slider ring_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Pan);
  return;
@@ -149,7 +149,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Pan,(int)o->value());}
   }
   Fl_Value_Slider ring_depth {
     label Depth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Depth);
  return;
@@ -160,7 +160,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Depth,(int)o->value());}
   }
   Fl_Value_Slider ring_freq {
     label Freq
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Freq);
  return;
@@ -171,7 +171,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Freq,(int)o->value());}
   }
   Fl_Value_Slider ring_sin {
     label Sine
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Sine);
  return;
@@ -182,7 +182,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Sine,(int)o->value());}
   }
   Fl_Value_Slider ring_tri {
     label Triangle
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Triangle);
  return;
@@ -193,7 +193,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Triangle,(int)o->value());}
   }
   Fl_Value_Slider ring_saw {
     label Sawtooth
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Saw);
  return;
@@ -204,7 +204,7 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Saw,(int)o->value());}
   }
   Fl_Value_Slider ring_squ {
     label Square
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ring_Square);
  return;

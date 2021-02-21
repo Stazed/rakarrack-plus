@@ -3,7 +3,7 @@
 #include "echoverse_gui.h"
 
 void EchoverseGui::cb_echoverse_activar_i(RKR_Light_Button* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_ECHOVERSE]);
@@ -40,7 +40,7 @@ Fl_Menu_Item EchoverseGui::menu_echoverse_preset[] = {
 };
 
 void EchoverseGui::cb_echoverse_WD_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_DryWet);
  return;
@@ -52,7 +52,7 @@ void EchoverseGui::cb_echoverse_WD(RKR_Slider* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_RV_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Reverse);
  return;
@@ -64,7 +64,7 @@ void EchoverseGui::cb_echoverse_RV(RKR_Slider* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_pan_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Pan);
  return;
@@ -76,7 +76,7 @@ void EchoverseGui::cb_echoverse_pan(RKR_Slider* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_delay_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Tempo);
  return;
@@ -88,7 +88,7 @@ void EchoverseGui::cb_echoverse_delay(RKR_Slider* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_LRdl_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_LR_Delay);
  return;
@@ -100,7 +100,7 @@ void EchoverseGui::cb_echoverse_LRdl(RKR_Slider* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_fb_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Feedback);
  return;
@@ -119,7 +119,7 @@ void EchoverseGui::cb_echoverse_subdiv(RKR_Choice* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_damp_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Damp);
  return;
@@ -131,7 +131,7 @@ void EchoverseGui::cb_echoverse_damp(RKR_Slider* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_es_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Ext_Stereo);
  return;
@@ -143,7 +143,7 @@ void EchoverseGui::cb_echoverse_es(RKR_Slider* o, void* v) {
 }
 
 void EchoverseGui::cb_echoverse_angle_i(RKR_Slider* o, void*) {
-  if(Fl::event_button()==3)
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Echoverse_Angle);
  return;

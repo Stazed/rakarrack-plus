@@ -22,7 +22,7 @@ widget_class ReverbGui {
   Fl_Light_Button reverb_activar {
     label On
     user_data 2
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
  o->value(m_process->EFX_Bypass[EFX_REVERB]);
@@ -108,7 +108,7 @@ if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;}
   }
   Fl_Value_Slider reverb_WD {
     label {Dry/Wet}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_DryWet);
  return;
@@ -119,7 +119,7 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_DryWet,Dry_Wet((int)(o->va
   }
   Fl_Value_Slider reverb_pan {
     label Pan
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Pan);
  return;
@@ -130,7 +130,7 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Pan,(int)(o->value()+64));
   }
   Fl_Value_Slider reverb_time {
     label Time
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Time);
  return;
@@ -141,7 +141,7 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Time,(int)o->value());}
   }
   Fl_Value_Slider reverb_ldel {
     label {I. Del}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_I_Delay);
  return;
@@ -152,7 +152,7 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_I_Delay,(int)o->value());}
   }
   Fl_Value_Slider reverb_ldelft {
     label {Del. E/R}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Delay_FB);
  return;
@@ -180,7 +180,7 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Delay_FB,(int)o->value());
   }
   Fl_Value_Slider reverb_RS {
     label {R. Size}
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Room);
  return;
@@ -193,7 +193,7 @@ if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;}
   }
   Fl_Value_Slider reverb_LPF {
     label LPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_LPF);
  return;
@@ -204,7 +204,7 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_LPF,(int)o->value());}
   }
   Fl_Value_Slider reverb_HPF {
     label HPF
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_HPF);
  return;
@@ -215,7 +215,7 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_HPF,(int)o->value());}
   }
   Fl_Value_Slider reverb_damp {
     label Damping
-    callback {if(Fl::event_button()==3)
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Reverb_Damp);
  return;
