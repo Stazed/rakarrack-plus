@@ -227,6 +227,10 @@ main(int argc, char *argv[])
     {
         rgui = new RKRGUI(argc, argv, &rkr);
     }
+    else
+    {
+        (void)rgui; // To suppress unused variable compiler warning
+    }
 
     if (!rkr.Gui_Shown)
     {
