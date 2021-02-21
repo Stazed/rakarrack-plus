@@ -293,7 +293,7 @@ decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private gl
 
 class RKRGUI {open
 } {
-  decl {RKR *rkr;} {private local
+  decl {RKR *m_process;} {private local
   }
   decl {RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS];} {
     comment {Efx_Gui_Base:
@@ -320,7 +320,7 @@ Array is indexed by EFX_Index.} private local
       callback {is_modified();
 save_current_state(0);
 
-rkr->Exit_Program=1;} open selected
+m_process->Exit_Program=1;} open selected
       xywh {888 331 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -368,7 +368,7 @@ filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
 if (filename == NULL) return;
 filename = fl_filename_setext(filename,".rkrs");
 
-if(rkr->load_skin(filename))
+if(m_process->load_skin(filename))
 {
     Put_Skin();
 }}
@@ -383,16 +383,16 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
 
-rkr->slabel_color = (int) label_color;
-rkr->sback_color = (int) back_color;
-rkr->sfore_color = (int) fore_color;
-rkr->sleds_color = (int) leds_color;
-rkr->swidth = (int) Principal->w();
-rkr->sheight = (int) Principal->h();
-rkr->sschema = Settings->scheme_ch->value();
+m_process->slabel_color = (int) label_color;
+m_process->sback_color = (int) back_color;
+m_process->sfore_color = (int) fore_color;
+m_process->sleds_color = (int) leds_color;
+m_process->swidth = (int) Principal->w();
+m_process->sheight = (int) Principal->h();
+m_process->sschema = Settings->scheme_ch->value();
 
 
-rkr->save_skin(filename);}
+m_process->save_skin(filename);}
             xywh {0 0 36 21} divider
           }
           MenuItem Load_MTable {
@@ -410,13 +410,13 @@ rkr->save_skin(filename);}
             callback {char *filename;
 char name[70];
 memset(name,0, sizeof(name));
-sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+sprintf(name,"%s %s",m_process->jackcliname, VERSION);
 
 filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
-rkr->convert_reverb_file(filename);
-rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
+m_process->convert_reverb_file(filename);
+m_process->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
             xywh {0 0 36 21} divider
           }
           MenuItem ImportPresets {
@@ -427,7 +427,7 @@ filename = fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
 
 if (filename == NULL) return;
 
-if(rkr->merge_insert_presets(filename))
+if(m_process->merge_insert_presets(filename))
 {
     Show_Next_Time();
 }}
@@ -465,7 +465,7 @@ Settings->hide();}
             label {MIDI Learn}
             callback {if(!MIDILearn->visible())
 {
-rkr->comemouse=0;
+m_process->comemouse=0;
 PrepareML();
 }
 else
@@ -477,15 +477,15 @@ MIDILearn->hide();}
             callback {if(!Trigger->visible())
 {
 Trigger->show();
-rkr->ACI_Bypass = 1;
+m_process->ACI_Bypass = 1;
 put_icon(Trigger);
-rkr->old_a_sum = 0.0;
-rkr->val_a_sum = 0.0;
+m_process->old_a_sum = 0.0;
+m_process->val_a_sum = 0.0;
 }
 else
 {
 Trigger->hide();
-rkr->ACI_Bypass = 0;
+m_process->ACI_Bypass = 0;
 }}
             xywh {0 0 36 21} shortcut 0x61 divider
           }
@@ -688,7 +688,7 @@ Fl::focus(Open_Order);}
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "eq_gui.h"}
         code1 {Efx_Gui_Base[EFX_EQ] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class EqGui
       } {}
       Fl_Group COMPRESS {
@@ -696,7 +696,7 @@ Fl::focus(Open_Order);}
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "compress_gui.h"}
         code1 {Efx_Gui_Base[EFX_COMPRESSOR] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class CompressGui
       } {}
       Fl_Group DIST {
@@ -704,7 +704,7 @@ Fl::focus(Open_Order);}
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "dist_gui.h"}
         code1 {Efx_Gui_Base[EFX_DISTORTION] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class DistGui
       } {}
       Fl_Group OVRD {
@@ -712,7 +712,7 @@ Fl::focus(Open_Order);}
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "ovrd_gui.h"}
         code1 {Efx_Gui_Base[EFX_OVERDRIVE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class OvrdGui
       } {}
       Fl_Group ECHO {
@@ -720,7 +720,7 @@ Fl::focus(Open_Order);}
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echo_gui.h"}
         code1 {Efx_Gui_Base[EFX_ECHO] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class EchoGui
       } {}
       Fl_Group CHORUS {
@@ -728,7 +728,7 @@ Fl::focus(Open_Order);}
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "chorus_gui.h"}
         code1 {Efx_Gui_Base[EFX_CHORUS] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ChorusGui
       } {}
       Fl_Group PHASER {
@@ -736,7 +736,7 @@ Fl::focus(Open_Order);}
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "phaser_gui.h"}
         code1 {Efx_Gui_Base[EFX_PHASER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class PhaserGui
       } {}
       Fl_Group FLANGER {
@@ -744,7 +744,7 @@ Fl::focus(Open_Order);}
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "flanger_gui.h"}
         code1 {Efx_Gui_Base[EFX_FLANGER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class FlangerGui
       } {}
       Fl_Group REVERB {
@@ -752,7 +752,7 @@ Fl::focus(Open_Order);}
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "reverb_gui.h"}
         code1 {Efx_Gui_Base[EFX_REVERB] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ReverbGui
       } {}
       Fl_Group PEQ {
@@ -760,7 +760,7 @@ Fl::focus(Open_Order);}
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "peq_gui.h"}
         code1 {Efx_Gui_Base[EFX_PARAMETRIC] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class PeqGui
       } {}
       Fl_Group WAHWAH {
@@ -768,7 +768,7 @@ Fl::focus(Open_Order);}
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "wahwah_gui.h"}
         code1 {Efx_Gui_Base[EFX_WAHWAH] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class WahwahGui
       } {}
       Fl_Group ALIENWAH {
@@ -776,7 +776,7 @@ Fl::focus(Open_Order);}
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "alienwah_gui.h"}
         code1 {Efx_Gui_Base[EFX_ALIENWAH] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class AlienwahGui
       } {}
       Fl_Group CABINET {
@@ -784,7 +784,7 @@ Fl::focus(Open_Order);}
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "cabinet_gui.h"}
         code1 {Efx_Gui_Base[EFX_CABINET] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class CabinetGui
       } {}
       Fl_Group PAN {
@@ -792,7 +792,7 @@ Fl::focus(Open_Order);}
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "pan_gui.h"}
         code1 {Efx_Gui_Base[EFX_PAN] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class PanGui
       } {}
       Fl_Group HAR {
@@ -800,7 +800,7 @@ Fl::focus(Open_Order);}
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "har_gui.h"}
         code1 {Efx_Gui_Base[EFX_HARMONIZER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class HarGui
       } {}
       Fl_Group MUSDELAY {
@@ -808,7 +808,7 @@ Fl::focus(Open_Order);}
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "musdelay_gui.h"}
         code1 {Efx_Gui_Base[EFX_MUSICAL_DELAY] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class MusdelayGui
       } {}
       Fl_Group GATE {
@@ -816,7 +816,7 @@ Fl::focus(Open_Order);}
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "gate_gui.h"}
         code1 {Efx_Gui_Base[EFX_NOISEGATE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class GateGui
       } {}
       Fl_Group DERELICT {
@@ -824,7 +824,7 @@ Fl::focus(Open_Order);}
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "derelict_gui.h"}
         code1 {Efx_Gui_Base[EFX_DERELICT] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class DerelictGui
       } {}
       Fl_Group APHASER {
@@ -832,7 +832,7 @@ Fl::focus(Open_Order);}
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "aphaser_gui.h"}
         code1 {Efx_Gui_Base[EFX_ANALOG_PHASER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class AphaserGui
       } {}
       Fl_Group VALVE {
@@ -840,7 +840,7 @@ Fl::focus(Open_Order);}
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "valve_gui.h"}
         code1 {Efx_Gui_Base[EFX_VALVE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ValveGui
       } {}
       Fl_Group DFLANGE {
@@ -848,7 +848,7 @@ Fl::focus(Open_Order);}
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "dflange_gui.h"}
         code1 {Efx_Gui_Base[EFX_DUAL_FLANGE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class DflangeGui
       } {}
       Fl_Group RING {
@@ -856,7 +856,7 @@ Fl::focus(Open_Order);}
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "ring_gui.h"}
         code1 {Efx_Gui_Base[EFX_RING] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class RingGui
       } {}
       Fl_Group EXCITER {
@@ -864,7 +864,7 @@ Fl::focus(Open_Order);}
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "exciter_gui.h"}
         code1 {Efx_Gui_Base[EFX_EXCITER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ExciterGui
       } {}
       Fl_Group DISTBAND {
@@ -872,7 +872,7 @@ Fl::focus(Open_Order);}
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "distband_gui.h"}
         code1 {Efx_Gui_Base[EFX_DISTBAND] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class DistBandGui
       } {}
       Fl_Group ARPIE {
@@ -880,7 +880,7 @@ Fl::focus(Open_Order);}
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "arpie_gui.h"}
         code1 {Efx_Gui_Base[EFX_ARPIE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ArpieGui
       } {}
       Fl_Group EXPANDER {
@@ -888,7 +888,7 @@ Fl::focus(Open_Order);}
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "expander_gui.h"}
         code1 {Efx_Gui_Base[EFX_EXPANDER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ExpanderGui
       } {}
       Fl_Group SHUFFLE {
@@ -896,7 +896,7 @@ Fl::focus(Open_Order);}
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shuffle_gui.h"}
         code1 {Efx_Gui_Base[EFX_SHUFFLE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ShuffleGui
       } {}
       Fl_Group SYNTHFILTER {
@@ -904,7 +904,7 @@ Fl::focus(Open_Order);}
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "synthfilter_gui.h"}
         code1 {Efx_Gui_Base[EFX_SYNTHFILTER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class SynthfilterGui
       } {}
       Fl_Group VARYBAND {
@@ -912,7 +912,7 @@ Fl::focus(Open_Order);}
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "varyband_gui.h"}
         code1 {Efx_Gui_Base[EFX_VARYBAND] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class VarybandGui
       } {}
       Fl_Group CONVOLOTRON {
@@ -920,7 +920,7 @@ Fl::focus(Open_Order);}
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "convo_gui.h"}
         code1 {Efx_Gui_Base[EFX_CONVOLOTRON] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ConvoGui
       } {}
       Fl_Group LOOPER {
@@ -928,7 +928,7 @@ Fl::focus(Open_Order);}
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "looper_gui.h"}
         code1 {Efx_Gui_Base[EFX_LOOPER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class LooperGui
       } {}
       Fl_Group MUTROMOJO {
@@ -936,7 +936,7 @@ Fl::focus(Open_Order);}
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "mutromojo_gui.h"}
         code1 {Efx_Gui_Base[EFX_MUTROMOJO] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class MutromojoGui
       } {}
       Fl_Group ECHOVERSE {
@@ -944,7 +944,7 @@ Fl::focus(Open_Order);}
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echoverse_gui.h"}
         code1 {Efx_Gui_Base[EFX_ECHOVERSE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class EchoverseGui
       } {}
       Fl_Group COILCRAFTER {
@@ -952,7 +952,7 @@ Fl::focus(Open_Order);}
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "coil_gui.h"}
         code1 {Efx_Gui_Base[EFX_COILCRAFTER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class CoilGui
       } {}
       Fl_Group SHELFBOOST {
@@ -960,7 +960,7 @@ Fl::focus(Open_Order);}
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shelf_gui.h"}
         code1 {Efx_Gui_Base[EFX_SHELFBOOST] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ShelfGui
       } {}
       Fl_Group VOCODER {
@@ -968,7 +968,7 @@ Fl::focus(Open_Order);}
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "vocoder_gui.h"}
         code1 {Efx_Gui_Base[EFX_VOCODER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class VocoderGui
       } {}
       Fl_Group SUSTAINER {
@@ -976,7 +976,7 @@ Fl::focus(Open_Order);}
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "sustain_gui.h"}
         code1 {Efx_Gui_Base[EFX_SUSTAINER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class SustainGui
       } {}
       Fl_Group SEQUENCE {
@@ -984,7 +984,7 @@ Fl::focus(Open_Order);}
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "sequence_gui.h"}
         code1 {Efx_Gui_Base[EFX_SEQUENCE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class SequenceGui
       } {}
       Fl_Group SHIFTER {
@@ -992,7 +992,7 @@ Fl::focus(Open_Order);}
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shifter_gui.h"}
         code1 {Efx_Gui_Base[EFX_SHIFTER] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class ShifterGui
       } {}
       Fl_Group STOMPBOX {
@@ -1000,7 +1000,7 @@ Fl::focus(Open_Order);}
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "stompbox_gui.h"}
         code1 {Efx_Gui_Base[EFX_STOMPBOX] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class StompboxGui
       } {}
       Fl_Group REVERBTRON {
@@ -1008,7 +1008,7 @@ Fl::focus(Open_Order);}
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "reverbtron_gui.h"}
         code1 {Efx_Gui_Base[EFX_REVERBTRON] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class RevtronGui
       } {}
       Fl_Group ECHOTRON {
@@ -1016,7 +1016,7 @@ Fl::focus(Open_Order);}
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echotron_gui.h"}
         code1 {Efx_Gui_Base[EFX_ECHOTRON] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class EchotronGui
       } {}
       Fl_Group SHAR {
@@ -1024,7 +1024,7 @@ Fl::focus(Open_Order);}
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "stereoharm_gui.h"}
         code1 {Efx_Gui_Base[EFX_STEREOHARM] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class SharGui
       } {}
       Fl_Group COMPBAND {
@@ -1032,7 +1032,7 @@ Fl::focus(Open_Order);}
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "compband_gui.h"}
         code1 {Efx_Gui_Base[EFX_COMPBAND] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class CbandGui
       } {}
       Fl_Group OTREM {
@@ -1040,7 +1040,7 @@ Fl::focus(Open_Order);}
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "otrem_gui.h"}
         code1 {Efx_Gui_Base[EFX_OPTICALTREM] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class OtremGui
       } {}
       Fl_Group VIBE {
@@ -1048,7 +1048,7 @@ Fl::focus(Open_Order);}
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "vibe_gui.h"}
         code1 {Efx_Gui_Base[EFX_VIBE] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class VibeGui
       } {}
       Fl_Group INFINIT {
@@ -1056,7 +1056,7 @@ Fl::focus(Open_Order);}
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "infinity_gui.h"}
         code1 {Efx_Gui_Base[EFX_INFINITY] = o;}
-        code2 {o->initialize(rkr, this);}
+        code2 {o->initialize(m_process, this);}
         class InfinityGui
       } {}
       Fl_Group Tuner {
@@ -1066,7 +1066,7 @@ Fl::focus(Open_Order);}
         Fl_Light_Button tuner_activar {
           label On
           user_data 2
-          callback {rkr->Tuner_Bypass=(int)o->value();
+          callback {m_process->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
 WNote->copy_label("");
 WRfreq->copy_label("");
@@ -1116,18 +1116,18 @@ TUNER_LABEL->redraw_label();}
         Fl_Light_Button ActivarGeneral {
           label {FX On}
           user_data 2
-          callback {rkr->Bypass=o->value();
-rkr->val_il_sum=-50.0;
-rkr->val_ir_sum=-50.0;
+          callback {m_process->Bypass=o->value();
+m_process->val_il_sum=-50.0;
+m_process->val_ir_sum=-50.0;
 
-rkr->val_vl_sum=-50.0;
-rkr->val_vr_sum=-50.0;
+m_process->val_vl_sum=-50.0;
+m_process->val_vr_sum=-50.0;
 
-rkr->old_vl_sum=-50.0;
-rkr->old_vr_sum=-50.0;
+m_process->old_vl_sum=-50.0;
+m_process->old_vr_sum=-50.0;
 
-rkr->old_il_sum=-50.0;
-rkr->old_ir_sum=-50.0;
+m_process->old_il_sum=-50.0;
+m_process->old_ir_sum=-50.0;
 
 input_vul->value(-50.0);
 input_vur->value(-50.0);
@@ -1141,19 +1141,19 @@ LABEL_IO->redraw_label();
 
 if (!o->value())
    {
-    rkr->OnCounter = 0;
-    if (rkr->Tuner_Bypass)
+    m_process->OnCounter = 0;
+    if (m_process->Tuner_Bypass)
         {
            tuner_activar->value(0);
            tuner_activar->do_callback();
         } 
-    if (rkr->MIDIConverter_Bypass)  
+    if (m_process->MIDIConverter_Bypass)  
         {
             MIDI->midi_activar->value(0);
             MIDI->midi_activar->do_callback();
         }
              
-rkr->cleanup_efx();
+m_process->cleanup_efx();
 
 }}
           tooltip {Enable rakarrack - Shortcut 'R'} xywh {6 30 52 18} down_box BORDER_BOX shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
@@ -1162,8 +1162,8 @@ rkr->cleanup_efx();
         Fl_Button BostBut {
           label {+10dB}
           user_data 78
-          callback {if(o->value()) rkr->booster = dB2rap(10);
-else rkr->booster=1.0f;}
+          callback {if(o->value()) m_process->booster = dB2rap(10);
+else m_process->booster=1.0f;}
           tooltip {+10 dB Booster - Shortcut 'F10'} xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
           code0 {o->set_label_offset(-4);}
           class RKR_Button
@@ -1175,7 +1175,7 @@ else rkr->booster=1.0f;}
  getMIDIControl(MC_Balance_FX);
  return;
 } 
-rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
+m_process->Fraction_Bypass=(float)(o->value()/100.0f);}
           xywh {15 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 100 maximum 0 step 1 value 100 textcolor 7
           class RKR_Slider
         }
@@ -1186,8 +1186,8 @@ rkr->Fraction_Bypass=(float)(o->value()/100.0f);}
  getMIDIControl(MC_Input_Volume);
  return;
 } 
-rkr->Input_Gain=(float)((o->value()+50)/100.0);
-rkr->calculavol(1);}
+m_process->Input_Gain=(float)((o->value()+50)/100.0);
+m_process->calculavol(1);}
           xywh {57 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class RKR_Slider
         }
@@ -1199,8 +1199,8 @@ rkr->calculavol(1);}
  return;
 } 
 
-rkr->Master_Volume=(float)((o->value()+50)/100.0);
-rkr->calculavol(2);}
+m_process->Master_Volume=(float)((o->value()+50)/100.0);
+m_process->calculavol(2);}
           tooltip {Shortcut 'F2' decrease volume, 'F3' Increase volume} xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class RKR_Slider
         }
@@ -1231,7 +1231,7 @@ rkr->calculavol(2);}
         user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112 hide
         code0 {\#include "midiconv_gui.h"}
-        code1 {o->initialize(rkr, this);}
+        code1 {o->initialize(m_process, this);}
         class MidiGui
       } {}
       Fl_Group Metro {
@@ -1247,8 +1247,8 @@ rkr->calculavol(2);}
   Metro_Led->redraw();
 }
 
-rkr->M_Metronome->cleanup();
-rkr->Metro_Bypass=(int)o->value();
+m_process->M_Metronome->cleanup();
+m_process->Metro_Bypass=(int)o->value();
 
 
 ChangeActives();
@@ -1259,34 +1259,34 @@ Metro_Label->redraw_label();}
         Fl_Choice MetroBar {
           label {Time Sig.}
           user_data 12
-          callback {rkr->M_Metro_Bar=(int)o->value();
+          callback {m_process->M_Metro_Bar=(int)o->value();
 
-switch(rkr->M_Metro_Bar)
+switch(m_process->M_Metro_Bar)
 
    {
       case 0:
-      rkr->M_Metronome->set_meter(2);
+      m_process->M_Metronome->set_meter(2);
       break;                    
       case 1:
-      rkr->M_Metronome->set_meter(3);
+      m_process->M_Metronome->set_meter(3);
       break;                    
       case 2:
-      rkr->M_Metronome->set_meter(4);
+      m_process->M_Metronome->set_meter(4);
       break;                    
       case 3:
-      rkr->M_Metronome->set_meter(5);
+      m_process->M_Metronome->set_meter(5);
       break;                    
       case 4:
-      rkr->M_Metronome->set_meter(6);
+      m_process->M_Metronome->set_meter(6);
       break;                    
       case 5:
-      rkr->M_Metronome->set_meter(7);
+      m_process->M_Metronome->set_meter(7);
       break;                    
       case 6:
-      rkr->M_Metronome->set_meter(9);
+      m_process->M_Metronome->set_meter(9);
       break;                    
       case 7:
-      rkr->M_Metronome->set_meter(11);
+      m_process->M_Metronome->set_meter(11);
       break;                    
 
  }} open
@@ -1298,7 +1298,7 @@ switch(rkr->M_Metro_Bar)
         } {}
         Fl_Value_Slider Metro_Volume {
           label Volume
-          callback {rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;}
+          callback {m_process->M_Metro_Vol=2.0f*(float)o->value()/100.0f;}
           xywh {667 100 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 maximum 100 step 1 value 50 textcolor 7
           code0 {o->set_label_offset(-2);}
           code1 {o->shut_off_pixel_adjustment();}
@@ -1307,19 +1307,19 @@ switch(rkr->M_Metro_Bar)
         Fl_Choice MetroSound {
           label S
           user_data 12
-          callback {rkr->M_Metro_Sound=(int)o->value();
+          callback {m_process->M_Metro_Sound=(int)o->value();
 
-switch(rkr->M_Metro_Sound)
+switch(m_process->M_Metro_Sound)
 
    {
       case 0:
       MetroBar->do_callback();
       break;                    
       case 1:
-      rkr->M_Metronome->set_meter(1);
+      m_process->M_Metronome->set_meter(1);
       break;                    
       case 2:
-      rkr->M_Metronome->set_meter(0);
+      m_process->M_Metronome->set_meter(0);
       break;                    
        
 
@@ -1332,8 +1332,8 @@ switch(rkr->M_Metro_Sound)
         } {}
         Fl_Value_Slider Metro_Tempo {
           label Tempo
-          callback {rkr->M_Metro_Tempo=(int)o->value();
-rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
+          callback {m_process->M_Metro_Tempo=(int)o->value();
+m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
           xywh {667 119 117 11} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 8 labelcolor 7 align 9 minimum 20 maximum 340 step 1 value 100 textcolor 7
           code0 {o->set_label_offset(-2);}
           code1 {o->shut_off_pixel_adjustment();}
@@ -1366,13 +1366,13 @@ rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);}
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
-int ok=rkr->load_bank(temp);
+int ok=m_process->load_bank(temp);
 if(ok) 
 {
-rkr->a_bank=0;
+m_process->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 }}
           xywh {418 30 22 16} color 62 labelsize 10
           class RKR_Button
@@ -1384,13 +1384,13 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra.rkrb", DATADIR);
- int ok=rkr->load_bank(temp);
+ int ok=m_process->load_bank(temp);
 if(ok) 
 {
-rkr->a_bank=1;
+m_process->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 }}
           xywh {442 30 22 16} color 62 labelsize 10
           class RKR_Button
@@ -1402,13 +1402,13 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra1.rkrb", DATADIR);
- int ok=rkr->load_bank(temp);
+ int ok=m_process->load_bank(temp);
 if(ok) 
 {
-rkr->a_bank=2;
+m_process->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 }}
           xywh {466 30 22 16} color 62 labelsize 10
           class RKR_Button
@@ -1417,13 +1417,13 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
           label U
           user_data 77
           callback {is_modified();
-int ok=rkr->load_bank(rkr->BankFilename);
+int ok=m_process->load_bank(m_process->BankFilename);
 if(ok) 
 {
-rkr->a_bank=3;
-BankWin_Label(rkr->BankFilename);
+m_process->a_bank=3;
+BankWin_Label(m_process->BankFilename);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 }}
           xywh {490 30 22 16} color 62 labelsize 10
           class RKR_Button
@@ -1431,7 +1431,7 @@ BankWindow->unlight_preset(rkr->Selected_Preset);
         Fl_Button S_new {
           label New
           user_data 77
-          callback {rkr->new_preset();
+          callback {m_process->new_preset();
 DisAssigns();
 FillML();
 Prepare_Order();
@@ -1447,7 +1447,7 @@ Put_Loaded();}
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkr");
-rkr->load_preset(filename);
+m_process->load_preset(filename);
 Put_Loaded();}
           tooltip {Open load preset window - Shortcut 'L'} xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
           code0 {o->set_label_offset(2);}
@@ -1458,11 +1458,11 @@ Put_Loaded();}
           user_data 77
           callback {char *filename;
 \#define EXT ".rkr"
-filename=fl_file_chooser("Save Preset:","(*" EXT")",rkr->Preset_Name,0);
+filename=fl_file_chooser("Save Preset:","(*" EXT")",m_process->Preset_Name,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
-rkr->save_preset(filename);}
+m_process->save_preset(filename);}
           tooltip {Open save preset window - Shortcut 'S'} xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
@@ -1472,14 +1472,14 @@ rkr->save_preset(filename);}
           user_data 7
           callback {if ((int) o->value())
 {
-rkr->preset_to_bank(0);
-rkr->bank_to_preset((int)Preset_Counter->value());
+m_process->preset_to_bank(0);
+m_process->bank_to_preset((int)Preset_Counter->value());
 Put_Loaded();
 }
 
 else
 {
- rkr->bank_to_preset(0);
+ m_process->bank_to_preset(0);
  Put_Loaded();
 }}
           tooltip {Compare to bank preset - Shortcut 'P'} xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
@@ -1503,7 +1503,7 @@ BankWindow->hide();}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
-          callback {strcpy(rkr->Preset_Name,o->value());}
+          callback {strcpy(m_process->Preset_Name,o->value());}
           xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->set_text_offset(14);}
           code1 {o->maximum_size(22);}
@@ -1511,17 +1511,17 @@ BankWindow->hide();}
         }
         Fl_Counter Preset_Counter {
           label Preset
-          callback {rkr->new_bank_loaded=0;
-BankWindow->unlight_preset(rkr->Selected_Preset);
-rkr->bank_to_preset((int) o->value());
+          callback {m_process->new_bank_loaded=0;
+BankWindow->unlight_preset(m_process->Selected_Preset);
+m_process->bank_to_preset((int) o->value());
 BankWindow->light_preset((int)o->value());
-rkr->Selected_Preset=(int)o->value();
-rkr->OnCounter=0;
+m_process->Selected_Preset=(int)o->value();
+m_process->OnCounter=0;
 FillML();
 Prepare_Order();
 Put_Loaded();
 
-if(rkr->Tap_Updated)
+if(m_process->Tap_Updated)
    update_tap_tempo_GUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
           code0 {o->set_label_offset(1);}
@@ -1546,8 +1546,8 @@ if(rkr->Tap_Updated)
           callback {if (!Order->visible())
 {
 Prepare_Order();
-rkr->deachide=0;
-Order->Order_DeacHide->value(rkr->deachide);
+m_process->deachide=0;
+Order->Order_DeacHide->value(m_process->deachide);
 Order->show();
 put_icon(Order);
 }
@@ -1559,7 +1559,7 @@ Order->hide();}
         }
         Fl_Button Etit {
           label {Rakarrack +}
-          callback {//if(rkr->Bypass)
+          callback {//if(m_process->Bypass)
 //{
 o->hide();
 Analy->show();
@@ -1577,14 +1577,14 @@ Analy->set_analyzer_ON(true);
         Fl_Button HideUE {
           label Hide
           user_data 77
-          callback {if(rkr->deachide)
+          callback {if(m_process->deachide)
 {
- rkr->deachide=0;
+ m_process->deachide=0;
  o->label("Hide");
 }
 else
 {
-rkr->deachide=1;
+m_process->deachide=1;
  o->label("Show");
 }
  
@@ -1595,15 +1595,15 @@ reordena();}
         Fl_Button SwitchMod {
           label Sw
           user_data 77
-          callback {if(rkr->sw_stat==0) 
+          callback {if(m_process->sw_stat==0) 
 { 
-  rkr->sw_stat = 1;
+  m_process->sw_stat = 1;
   MIDI->hide();
   Metro->show();
 }
 else
  {
-  rkr->sw_stat= 0;
+  m_process->sw_stat= 0;
   Metro->hide();
   MIDI->show();
  }}
@@ -1619,8 +1619,8 @@ Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsi
         Fl_Light_Button Tap_activar {
           label On
           user_data 2
-          callback {rkr->Tap_Bypass = (int)o->value();
-if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
+          callback {m_process->Tap_Bypass = (int)o->value();
+if(m_process->Tap_Bypass) m_process->TapTempo_Timeout(0);
 ChangeActives();
 TAP_LABEL->redraw_label();}
           tooltip {Enable Tap Tempo - Shortcut 'H'} xywh {525 144 38 18} shortcut 0x68 color 62 selection_color 1 labelsize 10 when 1
@@ -1629,7 +1629,7 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SEL {
           label Input
           user_data 12
-          callback {rkr->Tap_Selection=(int)o->value();}
+          callback {m_process->Tap_Selection=(int)o->value();}
           xywh {600 145 87 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->set_text_offset(-1);}
           class RKR_Choice
@@ -1658,7 +1658,7 @@ TAP_LABEL->redraw_label();}
         Fl_Choice T_SET {
           label Set
           user_data 12
-          callback {rkr->Tap_SetValue=(int)o->value();}
+          callback {m_process->Tap_SetValue=(int)o->value();}
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->set_text_offset(-1);}
           class RKR_Choice
@@ -1767,9 +1767,9 @@ TAP_LABEL->redraw_label();}
         Fl_Button T_Apply {
           label Apply
           user_data 77
-          callback {if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
+          callback {if((m_process->Tap_Bypass) && (m_process->Tap_TempoSet>0))
 {
-rkr->Update_tempo();
+m_process->Update_tempo();
 update_tap_tempo_GUI();
 }}
           xywh {628 172 38 15} shortcut 0x67 labelsize 10
@@ -1778,9 +1778,9 @@ update_tap_tempo_GUI();
         Fl_Button T_BUT {
           label Tap
           user_data 77
-          callback {if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
+          callback {if((m_process->Tap_Bypass) && ( m_process->Tap_Selection==0))
 {
-T_DIS->value(rkr->TapTempo());
+T_DIS->value(m_process->TapTempo());
 update_tap_tempo_GUI();
 }}
           tooltip {Tap tempo set - Shortcut 'G'} xywh {671 165 38 23} shortcut 0x67 labelsize 12
@@ -1796,10 +1796,10 @@ update_tap_tempo_GUI();
         Fl_Value_Input T_DIS {
           callback {if(o->value()> 360) o->value(360);
 if(o->value()< 20) o->value(20);
-if(rkr->Tap_Bypass)
+if(m_process->Tap_Bypass)
 {
-rkr->Tap_TempoSet=(int)o->value();
-rkr->Update_tempo();
+m_process->Tap_TempoSet=(int)o->value();
+m_process->Update_tempo();
 update_tap_tempo_GUI();
 }}
           xywh {719 165 70 22} align 0 minimum 20 maximum 360 step 1 value 100 textcolor 7
@@ -1814,7 +1814,7 @@ update_tap_tempo_GUI();
 o->hide();} open
       xywh {113 380 800 600} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "bankwindow_gui.h"}
-      code1 {o->initialize(rkr, this);}
+      code1 {o->initialize(m_process, this);}
       code2 {o->hide();}
       class BankWindowGui size_range {320 240 3200 2400}
     } {}
@@ -1823,7 +1823,7 @@ o->hide();} open
 o->hide();} open
       xywh {133 400 500 400} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "orderwindow_gui.h"}
-      code1 {o->initialize(rkr, this);}
+      code1 {o->initialize(m_process, this);}
       code2 {o->hide();}
       class OrderWindowGui size_range {250 200 3200 2400}
     } {}
@@ -1832,7 +1832,7 @@ o->hide();} open
 o->hide();} open
       xywh {390 434 530 580} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "settingswindow_gui.h"}
-      code1 {o->initialize(rkr, this);}
+      code1 {o->initialize(m_process, this);}
       code2 {o->hide();}
       class SettingsWindowGui size_range {320 290 3200 2900}
     } {}
@@ -1842,7 +1842,7 @@ save_current_state(5);
 o->hide();} open
       xywh {165 106 640 480} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "midilearnwindow_gui.h"}
-      code1 {o->initialize(rkr, this);}
+      code1 {o->initialize(m_process, this);}
       code2 {o->hide();}
       class MidiLearnWindowGui size_range {320 240 3200 2400}
     } {}
@@ -1856,12 +1856,12 @@ o->hide();} open
       class AboutWindowGui
     } {}
     Fl_Window Trigger {
-      callback {rkr->ACI_Bypass=0;
+      callback {m_process->ACI_Bypass=0;
 save_current_state(6);
 o->hide();} open
       xywh {711 533 205 165} type Double box NO_BOX color 4 selection_color 7 hide
       code0 {\#include "trigwindow_gui.h"}
-      code1 {o->initialize(rkr);}
+      code1 {o->initialize(m_process);}
       code2 {o->hide();}
       class TrigWindowGui
     } {}

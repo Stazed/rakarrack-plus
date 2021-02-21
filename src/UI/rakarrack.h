@@ -147,7 +147,7 @@ class TrigWindowGui; // forward declaration
 #include "trigwindow_gui.h"
 
 class RKRGUI {
-  RKR *rkr; 
+  RKR *m_process; 
   /**
    Efx_Gui_Base:
    Array to hold pointer to the rack effect base class gui.

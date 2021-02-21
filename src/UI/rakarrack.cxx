@@ -35,7 +35,7 @@ void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();
 save_current_state(0);
 
-rkr->Exit_Program=1;
+m_process->Exit_Program=1;
 }
 void RKRGUI::cb_Principal(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Principal_i(o,v);
@@ -82,7 +82,7 @@ filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
 if (filename == NULL) return;
 filename = fl_filename_setext(filename,".rkrs");
 
-if(rkr->load_skin(filename))
+if(m_process->load_skin(filename))
 {
     Put_Skin();
 };
@@ -99,16 +99,16 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 #undef EXT
 
-rkr->slabel_color = (int) label_color;
-rkr->sback_color = (int) back_color;
-rkr->sfore_color = (int) fore_color;
-rkr->sleds_color = (int) leds_color;
-rkr->swidth = (int) Principal->w();
-rkr->sheight = (int) Principal->h();
-rkr->sschema = Settings->scheme_ch->value();
+m_process->slabel_color = (int) label_color;
+m_process->sback_color = (int) back_color;
+m_process->sfore_color = (int) fore_color;
+m_process->sleds_color = (int) leds_color;
+m_process->swidth = (int) Principal->w();
+m_process->sheight = (int) Principal->h();
+m_process->sschema = Settings->scheme_ch->value();
 
 
-rkr->save_skin(filename);
+m_process->save_skin(filename);
 }
 void RKRGUI::cb_Save_Skin(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Skin_i(o,v);
@@ -132,13 +132,13 @@ void RKRGUI::cb_ConvertReverb_i(Fl_Menu_*, void*) {
   char *filename;
 char name[70];
 memset(name,0, sizeof(name));
-sprintf(name,"%s %s",rkr->jackcliname, VERSION);
+sprintf(name,"%s %s",m_process->jackcliname, VERSION);
 
 filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".wav");
-rkr->convert_reverb_file(filename);
-rkr->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");
+m_process->convert_reverb_file(filename);
+m_process->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");
 }
 void RKRGUI::cb_ConvertReverb(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ConvertReverb_i(o,v);
@@ -151,7 +151,7 @@ filename = fl_file_chooser("Import Internal Presets:","(*)",NULL,0);
 
 if (filename == NULL) return;
 
-if(rkr->merge_insert_presets(filename))
+if(m_process->merge_insert_presets(filename))
 {
     Show_Next_Time();
 };
@@ -192,7 +192,7 @@ void RKRGUI::cb_Ajustes(Fl_Menu_* o, void* v) {
 void RKRGUI::cb_ML_Menu_i(Fl_Menu_*, void*) {
   if(!MIDILearn->visible())
 {
-rkr->comemouse=0;
+m_process->comemouse=0;
 PrepareML();
 }
 else
@@ -206,15 +206,15 @@ void RKRGUI::cb_ACI_Menu_i(Fl_Menu_*, void*) {
   if(!Trigger->visible())
 {
 Trigger->show();
-rkr->ACI_Bypass = 1;
+m_process->ACI_Bypass = 1;
 put_icon(Trigger);
-rkr->old_a_sum = 0.0;
-rkr->val_a_sum = 0.0;
+m_process->old_a_sum = 0.0;
+m_process->val_a_sum = 0.0;
 }
 else
 {
 Trigger->hide();
-rkr->ACI_Bypass = 0;
+m_process->ACI_Bypass = 0;
 };
 }
 void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
@@ -310,7 +310,7 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_tuner_activar_i(RKR_Light_Button* o, void*) {
-  rkr->Tuner_Bypass=(int)o->value();
+  m_process->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
 WNote->copy_label("");
 WRfreq->copy_label("");
@@ -323,18 +323,18 @@ void RKRGUI::cb_tuner_activar(RKR_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ActivarGeneral_i(RKR_Light_Button* o, void*) {
-  rkr->Bypass=o->value();
-rkr->val_il_sum=-50.0;
-rkr->val_ir_sum=-50.0;
+  m_process->Bypass=o->value();
+m_process->val_il_sum=-50.0;
+m_process->val_ir_sum=-50.0;
 
-rkr->val_vl_sum=-50.0;
-rkr->val_vr_sum=-50.0;
+m_process->val_vl_sum=-50.0;
+m_process->val_vr_sum=-50.0;
 
-rkr->old_vl_sum=-50.0;
-rkr->old_vr_sum=-50.0;
+m_process->old_vl_sum=-50.0;
+m_process->old_vr_sum=-50.0;
 
-rkr->old_il_sum=-50.0;
-rkr->old_ir_sum=-50.0;
+m_process->old_il_sum=-50.0;
+m_process->old_ir_sum=-50.0;
 
 input_vul->value(-50.0);
 input_vur->value(-50.0);
@@ -348,19 +348,19 @@ LABEL_IO->redraw_label();
 
 if (!o->value())
    {
-    rkr->OnCounter = 0;
-    if (rkr->Tuner_Bypass)
+    m_process->OnCounter = 0;
+    if (m_process->Tuner_Bypass)
         {
            tuner_activar->value(0);
            tuner_activar->do_callback();
         } 
-    if (rkr->MIDIConverter_Bypass)  
+    if (m_process->MIDIConverter_Bypass)  
         {
             MIDI->midi_activar->value(0);
             MIDI->midi_activar->do_callback();
         }
              
-rkr->cleanup_efx();
+m_process->cleanup_efx();
 
 };
 }
@@ -369,8 +369,8 @@ void RKRGUI::cb_ActivarGeneral(RKR_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_BostBut_i(RKR_Button* o, void*) {
-  if(o->value()) rkr->booster = dB2rap(10);
-else rkr->booster=1.0f;
+  if(o->value()) m_process->booster = dB2rap(10);
+else m_process->booster=1.0f;
 }
 void RKRGUI::cb_BostBut(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
@@ -382,7 +382,7 @@ void RKRGUI::cb_Balance_i(RKR_Slider* o, void*) {
  getMIDIControl(MC_Balance_FX);
  return;
 } 
-rkr->Fraction_Bypass=(float)(o->value()/100.0f);
+m_process->Fraction_Bypass=(float)(o->value()/100.0f);
 }
 void RKRGUI::cb_Balance(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Balance_i(o,v);
@@ -394,8 +394,8 @@ void RKRGUI::cb_Nivel_Entrada_i(RKR_Slider* o, void*) {
  getMIDIControl(MC_Input_Volume);
  return;
 } 
-rkr->Input_Gain=(float)((o->value()+50)/100.0);
-rkr->calculavol(1);
+m_process->Input_Gain=(float)((o->value()+50)/100.0);
+m_process->calculavol(1);
 }
 void RKRGUI::cb_Nivel_Entrada(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Entrada_i(o,v);
@@ -408,8 +408,8 @@ void RKRGUI::cb_Nivel_Salida_i(RKR_Slider* o, void*) {
  return;
 } 
 
-rkr->Master_Volume=(float)((o->value()+50)/100.0);
-rkr->calculavol(2);
+m_process->Master_Volume=(float)((o->value()+50)/100.0);
+m_process->calculavol(2);
 }
 void RKRGUI::cb_Nivel_Salida(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Salida_i(o,v);
@@ -422,8 +422,8 @@ void RKRGUI::cb_metro_activar_i(RKR_Light_Button* o, void*) {
   Metro_Led->redraw();
 }
 
-rkr->M_Metronome->cleanup();
-rkr->Metro_Bypass=(int)o->value();
+m_process->M_Metronome->cleanup();
+m_process->Metro_Bypass=(int)o->value();
 
 
 ChangeActives();
@@ -434,34 +434,34 @@ void RKRGUI::cb_metro_activar(RKR_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_MetroBar_i(RKR_Choice* o, void*) {
-  rkr->M_Metro_Bar=(int)o->value();
+  m_process->M_Metro_Bar=(int)o->value();
 
-switch(rkr->M_Metro_Bar)
+switch(m_process->M_Metro_Bar)
 
    {
       case 0:
-      rkr->M_Metronome->set_meter(2);
+      m_process->M_Metronome->set_meter(2);
       break;                    
       case 1:
-      rkr->M_Metronome->set_meter(3);
+      m_process->M_Metronome->set_meter(3);
       break;                    
       case 2:
-      rkr->M_Metronome->set_meter(4);
+      m_process->M_Metronome->set_meter(4);
       break;                    
       case 3:
-      rkr->M_Metronome->set_meter(5);
+      m_process->M_Metronome->set_meter(5);
       break;                    
       case 4:
-      rkr->M_Metronome->set_meter(6);
+      m_process->M_Metronome->set_meter(6);
       break;                    
       case 5:
-      rkr->M_Metronome->set_meter(7);
+      m_process->M_Metronome->set_meter(7);
       break;                    
       case 6:
-      rkr->M_Metronome->set_meter(9);
+      m_process->M_Metronome->set_meter(9);
       break;                    
       case 7:
-      rkr->M_Metronome->set_meter(11);
+      m_process->M_Metronome->set_meter(11);
       break;                    
 
  };
@@ -471,26 +471,26 @@ void RKRGUI::cb_MetroBar(RKR_Choice* o, void* v) {
 }
 
 void RKRGUI::cb_Metro_Volume_i(RKR_Slider* o, void*) {
-  rkr->M_Metro_Vol=2.0f*(float)o->value()/100.0f;
+  m_process->M_Metro_Vol=2.0f*(float)o->value()/100.0f;
 }
 void RKRGUI::cb_Metro_Volume(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Volume_i(o,v);
 }
 
 void RKRGUI::cb_MetroSound_i(RKR_Choice* o, void*) {
-  rkr->M_Metro_Sound=(int)o->value();
+  m_process->M_Metro_Sound=(int)o->value();
 
-switch(rkr->M_Metro_Sound)
+switch(m_process->M_Metro_Sound)
 
    {
       case 0:
       MetroBar->do_callback();
       break;                    
       case 1:
-      rkr->M_Metronome->set_meter(1);
+      m_process->M_Metronome->set_meter(1);
       break;                    
       case 2:
-      rkr->M_Metronome->set_meter(0);
+      m_process->M_Metronome->set_meter(0);
       break;                    
        
 
@@ -501,8 +501,8 @@ void RKRGUI::cb_MetroSound(RKR_Choice* o, void* v) {
 }
 
 void RKRGUI::cb_Metro_Tempo_i(RKR_Slider* o, void*) {
-  rkr->M_Metro_Tempo=(int)o->value();
-rkr->M_Metronome->set_tempo(rkr->M_Metro_Tempo);
+  m_process->M_Metro_Tempo=(int)o->value();
+m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);
 }
 void RKRGUI::cb_Metro_Tempo(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Metro_Tempo_i(o,v);
@@ -513,13 +513,13 @@ void RKRGUI::cb_L_B1_i(RKR_Button*, void*) {
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Default.rkrb", DATADIR);
-int ok=rkr->load_bank(temp);
+int ok=m_process->load_bank(temp);
 if(ok) 
 {
-rkr->a_bank=0;
+m_process->a_bank=0;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B1(RKR_Button* o, void* v) {
@@ -531,13 +531,13 @@ void RKRGUI::cb_L_B2_i(RKR_Button*, void*) {
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra.rkrb", DATADIR);
- int ok=rkr->load_bank(temp);
+ int ok=m_process->load_bank(temp);
 if(ok) 
 {
-rkr->a_bank=1;
+m_process->a_bank=1;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B2(RKR_Button* o, void* v) {
@@ -549,13 +549,13 @@ void RKRGUI::cb_L_B3_i(RKR_Button*, void*) {
 char temp[128];           
   memset (temp, 0, sizeof (temp));
   sprintf (temp, "%s/Extra1.rkrb", DATADIR);
- int ok=rkr->load_bank(temp);
+ int ok=m_process->load_bank(temp);
 if(ok) 
 {
-rkr->a_bank=2;
+m_process->a_bank=2;
 BankWin_Label(temp);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B3(RKR_Button* o, void* v) {
@@ -564,13 +564,13 @@ void RKRGUI::cb_L_B3(RKR_Button* o, void* v) {
 
 void RKRGUI::cb_L_B4_i(RKR_Button*, void*) {
   is_modified();
-int ok=rkr->load_bank(rkr->BankFilename);
+int ok=m_process->load_bank(m_process->BankFilename);
 if(ok) 
 {
-rkr->a_bank=3;
-BankWin_Label(rkr->BankFilename);
+m_process->a_bank=3;
+BankWin_Label(m_process->BankFilename);
 Put_Loaded_Bank();
-BankWindow->unlight_preset(rkr->Selected_Preset);
+BankWindow->unlight_preset(m_process->Selected_Preset);
 };
 }
 void RKRGUI::cb_L_B4(RKR_Button* o, void* v) {
@@ -578,7 +578,7 @@ void RKRGUI::cb_L_B4(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_S_new_i(RKR_Button*, void*) {
-  rkr->new_preset();
+  m_process->new_preset();
 DisAssigns();
 FillML();
 Prepare_Order();
@@ -593,7 +593,7 @@ void RKRGUI::cb_L_preset_i(RKR_Button*, void*) {
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkr");
-rkr->load_preset(filename);
+m_process->load_preset(filename);
 Put_Loaded();
 }
 void RKRGUI::cb_L_preset(RKR_Button* o, void* v) {
@@ -603,11 +603,11 @@ void RKRGUI::cb_L_preset(RKR_Button* o, void* v) {
 void RKRGUI::cb_S_preset_i(RKR_Button*, void*) {
   char *filename;
 #define EXT ".rkr"
-filename=fl_file_chooser("Save Preset:","(*" EXT")",rkr->Preset_Name,0);
+filename=fl_file_chooser("Save Preset:","(*" EXT")",m_process->Preset_Name,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 #undef EXT
-rkr->save_preset(filename);
+m_process->save_preset(filename);
 }
 void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_preset_i(o,v);
@@ -616,14 +616,14 @@ void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
 void RKRGUI::cb_Compare_i(RKR_Light_Button* o, void*) {
   if ((int) o->value())
 {
-rkr->preset_to_bank(0);
-rkr->bank_to_preset((int)Preset_Counter->value());
+m_process->preset_to_bank(0);
+m_process->bank_to_preset((int)Preset_Counter->value());
 Put_Loaded();
 }
 
 else
 {
- rkr->bank_to_preset(0);
+ m_process->bank_to_preset(0);
  Put_Loaded();
 };
 }
@@ -647,24 +647,24 @@ void RKRGUI::cb_B_preset(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_WPreset_Name_i(RKR_Input* o, void*) {
-  strcpy(rkr->Preset_Name,o->value());
+  strcpy(m_process->Preset_Name,o->value());
 }
 void RKRGUI::cb_WPreset_Name(RKR_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WPreset_Name_i(o,v);
 }
 
 void RKRGUI::cb_Preset_Counter_i(RKR_Counter* o, void*) {
-  rkr->new_bank_loaded=0;
-BankWindow->unlight_preset(rkr->Selected_Preset);
-rkr->bank_to_preset((int) o->value());
+  m_process->new_bank_loaded=0;
+BankWindow->unlight_preset(m_process->Selected_Preset);
+m_process->bank_to_preset((int) o->value());
 BankWindow->light_preset((int)o->value());
-rkr->Selected_Preset=(int)o->value();
-rkr->OnCounter=0;
+m_process->Selected_Preset=(int)o->value();
+m_process->OnCounter=0;
 FillML();
 Prepare_Order();
 Put_Loaded();
 
-if(rkr->Tap_Updated)
+if(m_process->Tap_Updated)
    update_tap_tempo_GUI();
 }
 void RKRGUI::cb_Preset_Counter(RKR_Counter* o, void* v) {
@@ -682,8 +682,8 @@ void RKRGUI::cb_Open_Order_i(RKR_Button*, void*) {
   if (!Order->visible())
 {
 Prepare_Order();
-rkr->deachide=0;
-Order->Order_DeacHide->value(rkr->deachide);
+m_process->deachide=0;
+Order->Order_DeacHide->value(m_process->deachide);
 Order->show();
 put_icon(Order);
 }
@@ -695,7 +695,7 @@ void RKRGUI::cb_Open_Order(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Etit_i(RKR_Button* o, void*) {
-  //if(rkr->Bypass)
+  //if(m_process->Bypass)
 //{
 o->hide();
 Analy->show();
@@ -707,14 +707,14 @@ void RKRGUI::cb_Etit(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_HideUE_i(RKR_Button* o, void*) {
-  if(rkr->deachide)
+  if(m_process->deachide)
 {
- rkr->deachide=0;
+ m_process->deachide=0;
  o->label("Hide");
 }
 else
 {
-rkr->deachide=1;
+m_process->deachide=1;
  o->label("Show");
 }
  
@@ -725,15 +725,15 @@ void RKRGUI::cb_HideUE(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_SwitchMod_i(RKR_Button*, void*) {
-  if(rkr->sw_stat==0) 
+  if(m_process->sw_stat==0) 
 { 
-  rkr->sw_stat = 1;
+  m_process->sw_stat = 1;
   MIDI->hide();
   Metro->show();
 }
 else
  {
-  rkr->sw_stat= 0;
+  m_process->sw_stat= 0;
   Metro->hide();
   MIDI->show();
  };
@@ -743,8 +743,8 @@ void RKRGUI::cb_SwitchMod(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Tap_activar_i(RKR_Light_Button* o, void*) {
-  rkr->Tap_Bypass = (int)o->value();
-if(rkr->Tap_Bypass) rkr->TapTempo_Timeout(0);
+  m_process->Tap_Bypass = (int)o->value();
+if(m_process->Tap_Bypass) m_process->TapTempo_Timeout(0);
 ChangeActives();
 TAP_LABEL->redraw_label();
 }
@@ -753,7 +753,7 @@ void RKRGUI::cb_Tap_activar(RKR_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_T_SEL_i(RKR_Choice* o, void*) {
-  rkr->Tap_Selection=(int)o->value();
+  m_process->Tap_Selection=(int)o->value();
 }
 void RKRGUI::cb_T_SEL(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_SEL_i(o,v);
@@ -769,7 +769,7 @@ Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
 };
 
 void RKRGUI::cb_T_SET_i(RKR_Choice* o, void*) {
-  rkr->Tap_SetValue=(int)o->value();
+  m_process->Tap_SetValue=(int)o->value();
 }
 void RKRGUI::cb_T_SET(RKR_Choice* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_T_SET_i(o,v);
@@ -805,9 +805,9 @@ Fl_Menu_Item RKRGUI::menu_T_SET[] = {
 };
 
 void RKRGUI::cb_T_Apply_i(RKR_Button*, void*) {
-  if((rkr->Tap_Bypass) && (rkr->Tap_TempoSet>0))
+  if((m_process->Tap_Bypass) && (m_process->Tap_TempoSet>0))
 {
-rkr->Update_tempo();
+m_process->Update_tempo();
 update_tap_tempo_GUI();
 };
 }
@@ -816,9 +816,9 @@ void RKRGUI::cb_T_Apply(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_T_BUT_i(RKR_Button*, void*) {
-  if((rkr->Tap_Bypass) && ( rkr->Tap_Selection==0))
+  if((m_process->Tap_Bypass) && ( m_process->Tap_Selection==0))
 {
-T_DIS->value(rkr->TapTempo());
+T_DIS->value(m_process->TapTempo());
 update_tap_tempo_GUI();
 };
 }
@@ -829,10 +829,10 @@ void RKRGUI::cb_T_BUT(RKR_Button* o, void* v) {
 void RKRGUI::cb_T_DIS_i(RKR_Value_Input* o, void*) {
   if(o->value()> 360) o->value(360);
 if(o->value()< 20) o->value(20);
-if(rkr->Tap_Bypass)
+if(m_process->Tap_Bypass)
 {
-rkr->Tap_TempoSet=(int)o->value();
-rkr->Update_tempo();
+m_process->Tap_TempoSet=(int)o->value();
+m_process->Update_tempo();
 update_tap_tempo_GUI();
 };
 }
@@ -881,7 +881,7 @@ void RKRGUI::cb_AboutWin(AboutWindowGui* o, void* v) {
 }
 
 void RKRGUI::cb_Trigger_i(TrigWindowGui* o, void*) {
-  rkr->ACI_Bypass=0;
+  m_process->ACI_Bypass=0;
 save_current_state(6);
 o->hide();
 }
@@ -1237,7 +1237,7 @@ void RKRGUI::make_window() {
       EQ->when(FL_WHEN_RELEASE);
       EQ->hide();
       Efx_Gui_Base[EFX_EQ] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       EQ->end();
     } // EqGui* EQ
     { CompressGui* o = COMPRESS = new CompressGui(161, 212, 158, 184);
@@ -1253,7 +1253,7 @@ void RKRGUI::make_window() {
       COMPRESS->when(FL_WHEN_RELEASE);
       COMPRESS->hide();
       Efx_Gui_Base[EFX_COMPRESSOR] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       COMPRESS->end();
     } // CompressGui* COMPRESS
     { DistGui* o = DIST = new DistGui(320, 212, 158, 184);
@@ -1269,7 +1269,7 @@ void RKRGUI::make_window() {
       DIST->when(FL_WHEN_RELEASE);
       DIST->hide();
       Efx_Gui_Base[EFX_DISTORTION] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       DIST->end();
     } // DistGui* DIST
     { OvrdGui* o = OVRD = new OvrdGui(480, 212, 158, 184);
@@ -1285,7 +1285,7 @@ void RKRGUI::make_window() {
       OVRD->when(FL_WHEN_RELEASE);
       OVRD->hide();
       Efx_Gui_Base[EFX_OVERDRIVE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       OVRD->end();
     } // OvrdGui* OVRD
     { EchoGui* o = ECHO = new EchoGui(639, 212, 158, 184);
@@ -1301,7 +1301,7 @@ void RKRGUI::make_window() {
       ECHO->when(FL_WHEN_RELEASE);
       ECHO->hide();
       Efx_Gui_Base[EFX_ECHO] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       ECHO->end();
     } // EchoGui* ECHO
     { ChorusGui* o = CHORUS = new ChorusGui(2, 413, 158, 184);
@@ -1317,7 +1317,7 @@ void RKRGUI::make_window() {
       CHORUS->when(FL_WHEN_RELEASE);
       CHORUS->hide();
       Efx_Gui_Base[EFX_CHORUS] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       CHORUS->end();
     } // ChorusGui* CHORUS
     { PhaserGui* o = PHASER = new PhaserGui(161, 413, 158, 184);
@@ -1333,7 +1333,7 @@ void RKRGUI::make_window() {
       PHASER->when(FL_WHEN_RELEASE);
       PHASER->hide();
       Efx_Gui_Base[EFX_PHASER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       PHASER->end();
     } // PhaserGui* PHASER
     { FlangerGui* o = FLANGER = new FlangerGui(321, 413, 158, 184);
@@ -1349,7 +1349,7 @@ void RKRGUI::make_window() {
       FLANGER->when(FL_WHEN_RELEASE);
       FLANGER->hide();
       Efx_Gui_Base[EFX_FLANGER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       FLANGER->end();
     } // FlangerGui* FLANGER
     { ReverbGui* o = REVERB = new ReverbGui(480, 413, 158, 184);
@@ -1365,7 +1365,7 @@ void RKRGUI::make_window() {
       REVERB->when(FL_WHEN_RELEASE);
       REVERB->hide();
       Efx_Gui_Base[EFX_REVERB] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       REVERB->end();
     } // ReverbGui* REVERB
     { PeqGui* o = PEQ = new PeqGui(639, 413, 158, 184);
@@ -1381,7 +1381,7 @@ void RKRGUI::make_window() {
       PEQ->when(FL_WHEN_RELEASE);
       PEQ->hide();
       Efx_Gui_Base[EFX_PARAMETRIC] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       PEQ->end();
     } // PeqGui* PEQ
     { WahwahGui* o = WAHWAH = new WahwahGui(2, 212, 158, 184);
@@ -1397,7 +1397,7 @@ void RKRGUI::make_window() {
       WAHWAH->when(FL_WHEN_RELEASE);
       WAHWAH->hide();
       Efx_Gui_Base[EFX_WAHWAH] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       WAHWAH->end();
     } // WahwahGui* WAHWAH
     { AlienwahGui* o = ALIENWAH = new AlienwahGui(161, 212, 158, 184);
@@ -1413,7 +1413,7 @@ void RKRGUI::make_window() {
       ALIENWAH->when(FL_WHEN_RELEASE);
       ALIENWAH->hide();
       Efx_Gui_Base[EFX_ALIENWAH] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       ALIENWAH->end();
     } // AlienwahGui* ALIENWAH
     { CabinetGui* o = CABINET = new CabinetGui(320, 212, 158, 184);
@@ -1429,7 +1429,7 @@ void RKRGUI::make_window() {
       CABINET->when(FL_WHEN_RELEASE);
       CABINET->hide();
       Efx_Gui_Base[EFX_CABINET] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       CABINET->end();
     } // CabinetGui* CABINET
     { PanGui* o = PAN = new PanGui(480, 212, 158, 184);
@@ -1445,7 +1445,7 @@ void RKRGUI::make_window() {
       PAN->when(FL_WHEN_RELEASE);
       PAN->hide();
       Efx_Gui_Base[EFX_PAN] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       PAN->end();
     } // PanGui* PAN
     { HarGui* o = HAR = new HarGui(639, 212, 158, 184);
@@ -1461,7 +1461,7 @@ void RKRGUI::make_window() {
       HAR->when(FL_WHEN_RELEASE);
       HAR->hide();
       Efx_Gui_Base[EFX_HARMONIZER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       HAR->end();
     } // HarGui* HAR
     { MusdelayGui* o = MUSDELAY = new MusdelayGui(2, 413, 158, 184);
@@ -1477,7 +1477,7 @@ void RKRGUI::make_window() {
       MUSDELAY->when(FL_WHEN_RELEASE);
       MUSDELAY->hide();
       Efx_Gui_Base[EFX_MUSICAL_DELAY] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       MUSDELAY->end();
     } // MusdelayGui* MUSDELAY
     { GateGui* o = GATE = new GateGui(161, 413, 158, 184);
@@ -1493,7 +1493,7 @@ void RKRGUI::make_window() {
       GATE->when(FL_WHEN_RELEASE);
       GATE->hide();
       Efx_Gui_Base[EFX_NOISEGATE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       GATE->end();
     } // GateGui* GATE
     { DerelictGui* o = DERELICT = new DerelictGui(321, 413, 158, 184);
@@ -1509,7 +1509,7 @@ void RKRGUI::make_window() {
       DERELICT->when(FL_WHEN_RELEASE);
       DERELICT->hide();
       Efx_Gui_Base[EFX_DERELICT] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       DERELICT->end();
     } // DerelictGui* DERELICT
     { AphaserGui* o = APHASER = new AphaserGui(480, 413, 158, 184);
@@ -1525,7 +1525,7 @@ void RKRGUI::make_window() {
       APHASER->when(FL_WHEN_RELEASE);
       APHASER->hide();
       Efx_Gui_Base[EFX_ANALOG_PHASER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       APHASER->end();
     } // AphaserGui* APHASER
     { ValveGui* o = VALVE = new ValveGui(639, 413, 158, 184);
@@ -1541,7 +1541,7 @@ void RKRGUI::make_window() {
       VALVE->when(FL_WHEN_RELEASE);
       VALVE->hide();
       Efx_Gui_Base[EFX_VALVE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       VALVE->end();
     } // ValveGui* VALVE
     { DflangeGui* o = DFLANGE = new DflangeGui(2, 212, 158, 184);
@@ -1557,7 +1557,7 @@ void RKRGUI::make_window() {
       DFLANGE->when(FL_WHEN_RELEASE);
       DFLANGE->hide();
       Efx_Gui_Base[EFX_DUAL_FLANGE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       DFLANGE->end();
     } // DflangeGui* DFLANGE
     { RingGui* o = RING = new RingGui(161, 212, 158, 184);
@@ -1573,7 +1573,7 @@ void RKRGUI::make_window() {
       RING->when(FL_WHEN_RELEASE);
       RING->hide();
       Efx_Gui_Base[EFX_RING] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       RING->end();
     } // RingGui* RING
     { ExciterGui* o = EXCITER = new ExciterGui(320, 212, 158, 184);
@@ -1589,7 +1589,7 @@ void RKRGUI::make_window() {
       EXCITER->when(FL_WHEN_RELEASE);
       EXCITER->hide();
       Efx_Gui_Base[EFX_EXCITER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       EXCITER->end();
     } // ExciterGui* EXCITER
     { DistBandGui* o = DISTBAND = new DistBandGui(480, 212, 158, 184);
@@ -1605,7 +1605,7 @@ void RKRGUI::make_window() {
       DISTBAND->when(FL_WHEN_RELEASE);
       DISTBAND->hide();
       Efx_Gui_Base[EFX_DISTBAND] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       DISTBAND->end();
     } // DistBandGui* DISTBAND
     { ArpieGui* o = ARPIE = new ArpieGui(639, 212, 158, 184);
@@ -1621,7 +1621,7 @@ void RKRGUI::make_window() {
       ARPIE->when(FL_WHEN_RELEASE);
       ARPIE->hide();
       Efx_Gui_Base[EFX_ARPIE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       ARPIE->end();
     } // ArpieGui* ARPIE
     { ExpanderGui* o = EXPANDER = new ExpanderGui(2, 413, 158, 184);
@@ -1637,7 +1637,7 @@ void RKRGUI::make_window() {
       EXPANDER->when(FL_WHEN_RELEASE);
       EXPANDER->hide();
       Efx_Gui_Base[EFX_EXPANDER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       EXPANDER->end();
     } // ExpanderGui* EXPANDER
     { ShuffleGui* o = SHUFFLE = new ShuffleGui(161, 413, 158, 184);
@@ -1653,7 +1653,7 @@ void RKRGUI::make_window() {
       SHUFFLE->when(FL_WHEN_RELEASE);
       SHUFFLE->hide();
       Efx_Gui_Base[EFX_SHUFFLE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       SHUFFLE->end();
     } // ShuffleGui* SHUFFLE
     { SynthfilterGui* o = SYNTHFILTER = new SynthfilterGui(321, 413, 158, 184);
@@ -1669,7 +1669,7 @@ void RKRGUI::make_window() {
       SYNTHFILTER->when(FL_WHEN_RELEASE);
       SYNTHFILTER->hide();
       Efx_Gui_Base[EFX_SYNTHFILTER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       SYNTHFILTER->end();
     } // SynthfilterGui* SYNTHFILTER
     { VarybandGui* o = VARYBAND = new VarybandGui(480, 413, 158, 184);
@@ -1685,7 +1685,7 @@ void RKRGUI::make_window() {
       VARYBAND->when(FL_WHEN_RELEASE);
       VARYBAND->hide();
       Efx_Gui_Base[EFX_VARYBAND] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       VARYBAND->end();
     } // VarybandGui* VARYBAND
     { ConvoGui* o = CONVOLOTRON = new ConvoGui(639, 413, 158, 184);
@@ -1701,7 +1701,7 @@ void RKRGUI::make_window() {
       CONVOLOTRON->when(FL_WHEN_RELEASE);
       CONVOLOTRON->hide();
       Efx_Gui_Base[EFX_CONVOLOTRON] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       CONVOLOTRON->end();
     } // ConvoGui* CONVOLOTRON
     { LooperGui* o = LOOPER = new LooperGui(2, 212, 158, 184);
@@ -1717,7 +1717,7 @@ void RKRGUI::make_window() {
       LOOPER->when(FL_WHEN_RELEASE);
       LOOPER->hide();
       Efx_Gui_Base[EFX_LOOPER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       LOOPER->end();
     } // LooperGui* LOOPER
     { MutromojoGui* o = MUTROMOJO = new MutromojoGui(161, 212, 158, 184);
@@ -1733,7 +1733,7 @@ void RKRGUI::make_window() {
       MUTROMOJO->when(FL_WHEN_RELEASE);
       MUTROMOJO->hide();
       Efx_Gui_Base[EFX_MUTROMOJO] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       MUTROMOJO->end();
     } // MutromojoGui* MUTROMOJO
     { EchoverseGui* o = ECHOVERSE = new EchoverseGui(320, 212, 158, 184);
@@ -1749,7 +1749,7 @@ void RKRGUI::make_window() {
       ECHOVERSE->when(FL_WHEN_RELEASE);
       ECHOVERSE->hide();
       Efx_Gui_Base[EFX_ECHOVERSE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       ECHOVERSE->end();
     } // EchoverseGui* ECHOVERSE
     { CoilGui* o = COILCRAFTER = new CoilGui(480, 212, 158, 184);
@@ -1765,7 +1765,7 @@ void RKRGUI::make_window() {
       COILCRAFTER->when(FL_WHEN_RELEASE);
       COILCRAFTER->hide();
       Efx_Gui_Base[EFX_COILCRAFTER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       COILCRAFTER->end();
     } // CoilGui* COILCRAFTER
     { ShelfGui* o = SHELFBOOST = new ShelfGui(639, 212, 158, 184);
@@ -1781,7 +1781,7 @@ void RKRGUI::make_window() {
       SHELFBOOST->when(FL_WHEN_RELEASE);
       SHELFBOOST->hide();
       Efx_Gui_Base[EFX_SHELFBOOST] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       SHELFBOOST->end();
     } // ShelfGui* SHELFBOOST
     { VocoderGui* o = VOCODER = new VocoderGui(2, 413, 158, 184);
@@ -1797,7 +1797,7 @@ void RKRGUI::make_window() {
       VOCODER->when(FL_WHEN_RELEASE);
       VOCODER->hide();
       Efx_Gui_Base[EFX_VOCODER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       VOCODER->end();
     } // VocoderGui* VOCODER
     { SustainGui* o = SUSTAINER = new SustainGui(161, 413, 158, 184);
@@ -1813,7 +1813,7 @@ void RKRGUI::make_window() {
       SUSTAINER->when(FL_WHEN_RELEASE);
       SUSTAINER->hide();
       Efx_Gui_Base[EFX_SUSTAINER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       SUSTAINER->end();
     } // SustainGui* SUSTAINER
     { SequenceGui* o = SEQUENCE = new SequenceGui(321, 413, 158, 184);
@@ -1829,7 +1829,7 @@ void RKRGUI::make_window() {
       SEQUENCE->when(FL_WHEN_RELEASE);
       SEQUENCE->hide();
       Efx_Gui_Base[EFX_SEQUENCE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       SEQUENCE->end();
     } // SequenceGui* SEQUENCE
     { ShifterGui* o = SHIFTER = new ShifterGui(480, 413, 158, 184);
@@ -1845,7 +1845,7 @@ void RKRGUI::make_window() {
       SHIFTER->when(FL_WHEN_RELEASE);
       SHIFTER->hide();
       Efx_Gui_Base[EFX_SHIFTER] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       SHIFTER->end();
     } // ShifterGui* SHIFTER
     { StompboxGui* o = STOMPBOX = new StompboxGui(639, 413, 158, 184);
@@ -1861,7 +1861,7 @@ void RKRGUI::make_window() {
       STOMPBOX->when(FL_WHEN_RELEASE);
       STOMPBOX->hide();
       Efx_Gui_Base[EFX_STOMPBOX] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       STOMPBOX->end();
     } // StompboxGui* STOMPBOX
     { RevtronGui* o = REVERBTRON = new RevtronGui(2, 212, 158, 184);
@@ -1877,7 +1877,7 @@ void RKRGUI::make_window() {
       REVERBTRON->when(FL_WHEN_RELEASE);
       REVERBTRON->hide();
       Efx_Gui_Base[EFX_REVERBTRON] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       REVERBTRON->end();
     } // RevtronGui* REVERBTRON
     { EchotronGui* o = ECHOTRON = new EchotronGui(161, 212, 158, 184);
@@ -1893,7 +1893,7 @@ void RKRGUI::make_window() {
       ECHOTRON->when(FL_WHEN_RELEASE);
       ECHOTRON->hide();
       Efx_Gui_Base[EFX_ECHOTRON] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       ECHOTRON->end();
     } // EchotronGui* ECHOTRON
     { SharGui* o = SHAR = new SharGui(320, 212, 158, 184);
@@ -1909,7 +1909,7 @@ void RKRGUI::make_window() {
       SHAR->when(FL_WHEN_RELEASE);
       SHAR->hide();
       Efx_Gui_Base[EFX_STEREOHARM] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       SHAR->end();
     } // SharGui* SHAR
     { CbandGui* o = COMPBAND = new CbandGui(480, 212, 158, 184);
@@ -1925,7 +1925,7 @@ void RKRGUI::make_window() {
       COMPBAND->when(FL_WHEN_RELEASE);
       COMPBAND->hide();
       Efx_Gui_Base[EFX_COMPBAND] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       COMPBAND->end();
     } // CbandGui* COMPBAND
     { OtremGui* o = OTREM = new OtremGui(639, 212, 158, 184);
@@ -1941,7 +1941,7 @@ void RKRGUI::make_window() {
       OTREM->when(FL_WHEN_RELEASE);
       OTREM->hide();
       Efx_Gui_Base[EFX_OPTICALTREM] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       OTREM->end();
     } // OtremGui* OTREM
     { VibeGui* o = VIBE = new VibeGui(2, 413, 158, 184);
@@ -1957,7 +1957,7 @@ void RKRGUI::make_window() {
       VIBE->when(FL_WHEN_RELEASE);
       VIBE->hide();
       Efx_Gui_Base[EFX_VIBE] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       VIBE->end();
     } // VibeGui* VIBE
     { InfinityGui* o = INFINIT = new InfinityGui(161, 413, 158, 184);
@@ -1973,7 +1973,7 @@ void RKRGUI::make_window() {
       INFINIT->when(FL_WHEN_RELEASE);
       INFINIT->hide();
       Efx_Gui_Base[EFX_INFINITY] = o;
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       INFINIT->end();
     } // InfinityGui* INFINIT
     { Tuner = new Fl_Group(520, 24, 276, 58);
@@ -2246,7 +2246,7 @@ void RKRGUI::make_window() {
       MIDI->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MIDI->when(FL_WHEN_RELEASE);
       MIDI->hide();
-      o->initialize(rkr, this);
+      o->initialize(m_process, this);
       MIDI->end();
     } // MidiGui* MIDI
     { Metro = new Fl_Group(520, 85, 276, 52);
@@ -2770,7 +2770,7 @@ void RKRGUI::make_window() {
     BankWindow->callback((Fl_Callback*)cb_BankWindow2, (void*)(this));
     BankWindow->align(Fl_Align(FL_ALIGN_TOP));
     BankWindow->when(FL_WHEN_RELEASE);
-    o->initialize(rkr, this);
+    o->initialize(m_process, this);
     o->hide();
     BankWindow->size_range(320, 240, 3200, 2400);
     BankWindow->end();
@@ -2787,7 +2787,7 @@ void RKRGUI::make_window() {
     Order->callback((Fl_Callback*)cb_Order, (void*)(this));
     Order->align(Fl_Align(FL_ALIGN_TOP));
     Order->when(FL_WHEN_RELEASE);
-    o->initialize(rkr, this);
+    o->initialize(m_process, this);
     o->hide();
     Order->size_range(250, 200, 3200, 2400);
     Order->end();
@@ -2804,7 +2804,7 @@ void RKRGUI::make_window() {
     Settings->callback((Fl_Callback*)cb_Settings, (void*)(this));
     Settings->align(Fl_Align(FL_ALIGN_TOP));
     Settings->when(FL_WHEN_RELEASE);
-    o->initialize(rkr, this);
+    o->initialize(m_process, this);
     o->hide();
     Settings->size_range(320, 290, 3200, 2900);
     Settings->end();
@@ -2821,7 +2821,7 @@ void RKRGUI::make_window() {
     MIDILearn->callback((Fl_Callback*)cb_MIDILearn, (void*)(this));
     MIDILearn->align(Fl_Align(FL_ALIGN_TOP));
     MIDILearn->when(FL_WHEN_RELEASE);
-    o->initialize(rkr, this);
+    o->initialize(m_process, this);
     o->hide();
     MIDILearn->size_range(320, 240, 3200, 2400);
     MIDILearn->end();
@@ -2852,7 +2852,7 @@ void RKRGUI::make_window() {
     Trigger->callback((Fl_Callback*)cb_Trigger, (void*)(this));
     Trigger->align(Fl_Align(FL_ALIGN_TOP));
     Trigger->when(FL_WHEN_RELEASE);
-    o->initialize(rkr);
+    o->initialize(m_process);
     o->hide();
     Trigger->end();
   } // TrigWindowGui* Trigger

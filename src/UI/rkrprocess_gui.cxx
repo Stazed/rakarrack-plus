@@ -53,7 +53,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Fl::visual(FL_DOUBLE | FL_RGB);
     fl_register_images();
     Fl::set_fonts(0);
-    rkr = process_rkr = rkr_;
+    m_process = process_rkr = rkr_;
 
     mBankNameList = NULL;
     mBankNameListTail = NULL;
@@ -78,30 +78,30 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Analy->set_analyzer_ON(false);
     Sco->set_scope_ON(false);
 
-    Sco->init(rkr->anall, rkr->analr, rkr->period, this);
-    Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate, this);
+    Sco->init(m_process->anall, m_process->analr, m_process->period, this);
+    Analy->init(m_process->anall, m_process->analr, m_process->period, m_process->sample_rate, this);
 
     memset(tmp, 0, sizeof (tmp));
-    if (!rkr->File_To_Load.empty())
+    if (!m_process->File_To_Load.empty())
     {
-        sprintf(tmp, "Session: %s", rkr->File_To_Load.c_str ());
+        sprintf(tmp, "Session: %s", m_process->File_To_Load.c_str ());
     }
     else
     {
-        sprintf(tmp, "%s   v%s", rkr->jackcliname, VERSION);
+        sprintf(tmp, "%s   v%s", m_process->jackcliname, VERSION);
     }
 
     Principal->copy_label(tmp);
-    BankWin_Label(rkr->BankFilename);
+    BankWin_Label(m_process->BankFilename);
     memset(tmp, 0, sizeof (tmp));
-    sprintf(tmp, "%s   v%s - Effects Order", rkr->jackcliname, VERSION);
+    sprintf(tmp, "%s   v%s - Effects Order", m_process->jackcliname, VERSION);
     Order->copy_label(tmp);
     memset(tmp, 0, sizeof (tmp));
-    sprintf(tmp, "%s   v%s - Settings", rkr->jackcliname, VERSION);
+    sprintf(tmp, "%s   v%s - Settings", m_process->jackcliname, VERSION);
     Settings->copy_label(tmp);
-    sprintf(tmp, "%s   v%s - MIDI Learn", rkr->jackcliname, VERSION);
+    sprintf(tmp, "%s   v%s - MIDI Learn", m_process->jackcliname, VERSION);
     MIDILearn->copy_label(tmp);
-    sprintf(tmp, "%s   v%s - ACI", rkr->jackcliname, VERSION);
+    sprintf(tmp, "%s   v%s - ACI", m_process->jackcliname, VERSION);
     Trigger->copy_label(tmp);
     
     load_previous_state();
@@ -111,7 +111,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     put_icon(Principal);
     ReadIntPresets();
     
-    if (rkr->deachide)
+    if (m_process->deachide)
     {
         HideUE->label("Show");
     }
@@ -143,39 +143,39 @@ void RKRGUI::GuiTimeout(void)
     drag_effect();
     check_signals(this);
 
-    if (rkr->Tuner_Bypass)
+    if (m_process->Tuner_Bypass)
     {
 
-        if (rkr->efx_Tuner->note_actual != rkr->note_old)
+        if (m_process->efx_Tuner->note_actual != m_process->note_old)
         {
             char notas[3];
-            sprintf(notas, "%-2s", rkr->efx_Tuner->notes[rkr->efx_Tuner->note_actual]);
+            sprintf(notas, "%-2s", m_process->efx_Tuner->notes[m_process->efx_Tuner->note_actual]);
             WNote->copy_label(notas);
-            rkr->note_old = rkr->efx_Tuner->note_actual;
+            m_process->note_old = m_process->efx_Tuner->note_actual;
         }
 
-        if (rkr->efx_Tuner->nfreq != rkr->nfreq_old)
+        if (m_process->efx_Tuner->nfreq != m_process->nfreq_old)
         {
             char refreq[60];
-            sprintf(refreq, "%8.3f", rkr->efx_Tuner->nfreq);
+            sprintf(refreq, "%8.3f", m_process->efx_Tuner->nfreq);
             WRfreq->copy_label(refreq);
-            rkr->nfreq_old = rkr->efx_Tuner->nfreq;
+            m_process->nfreq_old = m_process->efx_Tuner->nfreq;
         }
 
-        //if(rkr->efx_Tuner->afreq != rkr->afreq_old)
-        if (fabsf(rkr->efx_Tuner->afreq - rkr->afreq_old) > .2f)
+        //if(m_process->efx_Tuner->afreq != m_process->afreq_old)
+        if (fabsf(m_process->efx_Tuner->afreq - m_process->afreq_old) > .2f)
         {
             char nofreq[60];
-            sprintf(nofreq, "%8.3f", rkr->efx_Tuner->afreq);
-            if (abs(rkr->efx_Tuner->cents) > 5)
+            sprintf(nofreq, "%8.3f", m_process->efx_Tuner->afreq);
+            if (abs(m_process->efx_Tuner->cents) > 5)
                 WNfreq->labelcolor(FL_RED);
             else
                 WNfreq->labelcolor(label_color);
             WNfreq->copy_label(nofreq);
-            rkr->afreq_old = rkr->efx_Tuner->afreq;
+            m_process->afreq_old = m_process->efx_Tuner->afreq;
         }
 
-        if (rkr->efx_Tuner->afreq == 0.0f)
+        if (m_process->efx_Tuner->afreq == 0.0f)
         {
             char notas[3];
             sprintf(notas, "  ");
@@ -183,37 +183,37 @@ void RKRGUI::GuiTimeout(void)
         }
 
 
-        if (rkr->efx_Tuner->cents != rkr->cents_old)
+        if (m_process->efx_Tuner->cents != m_process->cents_old)
         {
-            tuner_bar->value(rkr->efx_Tuner->cents);
-            rkr->cents_old = rkr->efx_Tuner->cents;
+            tuner_bar->value(m_process->efx_Tuner->cents);
+            m_process->cents_old = m_process->efx_Tuner->cents;
         }
     }
 
-    if (rkr->Gui_Refresh == GUI_Refresh_Plus_Key)
+    if (m_process->Gui_Refresh == GUI_Refresh_Plus_Key)
     {
-        if (rkr->Selected_Preset < 60)
+        if (m_process->Selected_Preset < 60)
         {
-            Preset_Counter->value(rkr->Selected_Preset + 1);
+            Preset_Counter->value(m_process->Selected_Preset + 1);
             Preset_Counter->do_callback();
         }
 
-        rkr->Gui_Refresh = GUI_Refresh_Off;
+        m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
-    if (rkr->Gui_Refresh == GUI_Refresh_Minus_Key)
+    if (m_process->Gui_Refresh == GUI_Refresh_Minus_Key)
     {
-        if (rkr->Selected_Preset > 1)
+        if (m_process->Selected_Preset > 1)
         {
-            Preset_Counter->value(rkr->Selected_Preset - 1);
+            Preset_Counter->value(m_process->Selected_Preset - 1);
             Preset_Counter->do_callback();
         }
 
-        rkr->Gui_Refresh = GUI_Refresh_Off;
+        m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
-    if (rkr->Gui_Refresh == GUI_Refresh_F2_Key)
+    if (m_process->Gui_Refresh == GUI_Refresh_F2_Key)
     {
         if (Nivel_Salida->value()>-50)
         {
@@ -222,11 +222,11 @@ void RKRGUI::GuiTimeout(void)
             Nivel_Salida->redraw();
         }
 
-        rkr->Gui_Refresh = GUI_Refresh_Off;
+        m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
-    if (rkr->Gui_Refresh == GUI_Refresh_F3_Key)
+    if (m_process->Gui_Refresh == GUI_Refresh_F3_Key)
     {
         if (Nivel_Salida->value() < 50)
         {
@@ -235,29 +235,29 @@ void RKRGUI::GuiTimeout(void)
             Nivel_Salida->redraw();
         }
 
-        rkr->Gui_Refresh = GUI_Refresh_Off;
+        m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
-    if (rkr->Gui_Refresh == GUI_Refresh_Looper)
+    if (m_process->Gui_Refresh == GUI_Refresh_Looper)
     {
         update_looper();
-        rkr->Gui_Refresh = GUI_Refresh_Off;
+        m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
 
-    if (rkr->Change_Preset != C_CHANGE_PRESET_OFF)
+    if (m_process->Change_Preset != C_CHANGE_PRESET_OFF)
     {
-        if (!rkr->midi_table)
+        if (!m_process->midi_table)
         {
-            Preset_Counter->value(rkr->Change_Preset);
+            Preset_Counter->value(m_process->Change_Preset);
             Preset_Counter->do_callback();
         }
         else
         {
-            if (rkr->a_bank != rkr->M_table[rkr->Change_Preset].bank)
+            if (m_process->a_bank != m_process->M_table[m_process->Change_Preset].bank)
             {
-                switch (rkr->M_table[rkr->Change_Preset].bank)
+                switch (m_process->M_table[m_process->Change_Preset].bank)
                 {
                     case 0:
                         L_B1->do_callback();
@@ -276,104 +276,104 @@ void RKRGUI::GuiTimeout(void)
                         break;
                 }
             }
-            Preset_Counter->value(rkr->M_table[rkr->Change_Preset].preset + 1);
+            Preset_Counter->value(m_process->M_table[m_process->Change_Preset].preset + 1);
             Preset_Counter->do_callback();
         }
 
-        rkr->Change_Preset = C_CHANGE_PRESET_OFF;
+        m_process->Change_Preset = C_CHANGE_PRESET_OFF;
     }
 
 
     MIDI_control_gui_refresh();
-    if (rkr->ACI_Bypass)
+    if (m_process->ACI_Bypass)
         ActACI();
 
-    rkr->cpufp++;
-    if (rkr->cpufp == 40)
+    m_process->cpufp++;
+    if (m_process->cpufp == 40)
     {
         char tmp[8];
         memset(tmp, 0, sizeof (tmp));
-        sprintf(tmp, "%5.2f%%", rkr->cpuload);
+        sprintf(tmp, "%5.2f%%", m_process->cpuload);
         CPULOAD->copy_label(tmp);
-        rkr->cpufp = 0;
+        m_process->cpufp = 0;
     }
 
 
     // Jack Port connections
-    if (rkr->Jack_Port_Connnection_Changed)
+    if (m_process->Jack_Port_Connnection_Changed)
     {
-        if (rkr->Jack_IN_Port_Connnection_Status)
+        if (m_process->Jack_IN_Port_Connnection_Status)
             PORT_IN_STATE->show();
         else
             PORT_IN_STATE->hide();
-        if (rkr->Jack_OUT_Port_Connnection_Status)
+        if (m_process->Jack_OUT_Port_Connnection_Status)
             PORT_OUT_STATE->show();
         else
             PORT_OUT_STATE->hide();
-        if (rkr->Jack_AUX_Port_Connnection_Status)
+        if (m_process->Jack_AUX_Port_Connnection_Status)
             PORT_AUX_STATE->show();
         else
             PORT_AUX_STATE->hide();
-        if (rkr->Jack_MIDI_IN_Port_Connnection_Status)
+        if (m_process->Jack_MIDI_IN_Port_Connnection_Status)
             PORT_MIDI_IN_STATE->show();
         else
             PORT_MIDI_IN_STATE->hide();
-        if (rkr->Jack_MIDI_OUT_Port_Connnection_Status)
+        if (m_process->Jack_MIDI_OUT_Port_Connnection_Status)
             PORT_MIDI_OUT_STATE->show();
         else
             PORT_MIDI_OUT_STATE->hide();
-        rkr->Jack_Port_Connnection_Changed = 0;
+        m_process->Jack_Port_Connnection_Changed = 0;
     }
 
     if (global_error_number > 0)
-        rkr->Error_Handle(global_error_number);
+        m_process->Error_Handle(global_error_number);
 
-    if (rkr->Tap_Bypass)
+    if (m_process->Tap_Bypass)
     {
-        if ((rkr->Tap_Display == 1) && (rkr->Tap_Selection > 0))
+        if ((m_process->Tap_Display == 1) && (m_process->Tap_Selection > 0))
         {
-            T_DIS->value(rkr->Tap_TempoSet);
+            T_DIS->value(m_process->Tap_TempoSet);
             update_tap_tempo_GUI();
-            rkr->Tap_Display = 0;
+            m_process->Tap_Display = 0;
         }
 
-        if (rkr->Tap_Display == 2)
+        if (m_process->Tap_Display == 2)
         {
-            rkr->Tap_Display = 0;
+            m_process->Tap_Display = 0;
             Tap_activar->value(0);
             Tap_activar->do_callback();
         }
     }
 
 
-    if (rkr->Bypass)
+    if (m_process->Bypass)
     {
-        if (rkr->val_il_sum != rkr->old_il_sum)
+        if (m_process->val_il_sum != m_process->old_il_sum)
         {
-            input_vul->value(rkr->val_il_sum);
-            rkr->old_il_sum = rkr->val_il_sum;
+            input_vul->value(m_process->val_il_sum);
+            m_process->old_il_sum = m_process->val_il_sum;
         }
 
-        if (rkr->val_ir_sum != rkr->old_ir_sum)
+        if (m_process->val_ir_sum != m_process->old_ir_sum)
         {
-            input_vur->value(rkr->val_ir_sum);
-            rkr->old_ir_sum = rkr->val_ir_sum;
+            input_vur->value(m_process->val_ir_sum);
+            m_process->old_ir_sum = m_process->val_ir_sum;
         }
 
-        if (rkr->val_vl_sum != rkr->old_vl_sum)
+        if (m_process->val_vl_sum != m_process->old_vl_sum)
         {
-            output_vul->value(rkr->val_vl_sum);
-            rkr->old_vl_sum = rkr->val_vl_sum;
+            output_vul->value(m_process->val_vl_sum);
+            m_process->old_vl_sum = m_process->val_vl_sum;
         }
 
-        if (rkr->val_vr_sum != rkr->old_vr_sum)
+        if (m_process->val_vr_sum != m_process->old_vr_sum)
         {
-            output_vur->value(rkr->val_vr_sum);
-            rkr->old_vr_sum = rkr->val_vr_sum;
+            output_vur->value(m_process->val_vr_sum);
+            m_process->old_vr_sum = m_process->val_vr_sum;
         }
 
 
-        if (rkr->efx_FLimiter->clipping)
+        if (m_process->efx_FLimiter->clipping)
         {
             CLIP_LED->color(FL_RED);
             CLIP_LED->redraw();
@@ -384,7 +384,7 @@ void RKRGUI::GuiTimeout(void)
             CLIP_LED->redraw();
         }
 
-        if (rkr->efx_FLimiter->limit)
+        if (m_process->efx_FLimiter->limit)
         {
             LMT_LED->color(leds_color);
             LMT_LED->redraw();
@@ -395,13 +395,13 @@ void RKRGUI::GuiTimeout(void)
             LMT_LED->redraw();
         }
 
-        rkr->efx_FLimiter->clipping = 0;
-        rkr->efx_FLimiter->limit = 0;
+        m_process->efx_FLimiter->clipping = 0;
+        m_process->efx_FLimiter->limit = 0;
 
 
-        if (rkr->checkforaux())
+        if (m_process->checkforaux())
         {
-            Vocoder *Efx_Vocoder = static_cast <Vocoder*>(rkr->Rack_Effects[EFX_VOCODER]);
+            Vocoder *Efx_Vocoder = static_cast <Vocoder*>(m_process->Rack_Effects[EFX_VOCODER]);
             
             if (VOCODER->vu_vu->value() != Efx_Vocoder->vulevel)
             {
@@ -428,14 +428,14 @@ void RKRGUI::GuiTimeout(void)
             at = 0;
         }
 
-        if (rkr->EFX_Bypass[EFX_LOOPER])
+        if (m_process->EFX_Bypass[EFX_LOOPER])
         {
-            Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+            Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
             if ((Efx_Looper->Pplay) && (!Efx_Looper->Pstop))
             {
-                if (rkr->looper_lqua != Efx_Looper->looper_qua)
+                if (m_process->looper_lqua != Efx_Looper->looper_qua)
                 {
-                    rkr->looper_lqua = Efx_Looper->looper_qua;
+                    m_process->looper_lqua = Efx_Looper->looper_qua;
                     char tmp[16];
                     memset(tmp, 0, sizeof (tmp));
                     sprintf(tmp, "%d/%d", Efx_Looper->looper_bar, Efx_Looper->looper_qua);
@@ -446,15 +446,15 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if ((rkr->Metro_Bypass) && (MetroSound->value() == 0))
+    if ((m_process->Metro_Bypass) && (MetroSound->value() == 0))
     {
-        if ((!rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
+        if ((!m_process->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
         {
             Metro_Led->color(fl_lighter(FL_RED));
             Metro_Led->redraw();
         }
 
-        if ((rkr->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_darker(FL_RED)))
+        if ((m_process->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_darker(FL_RED)))
         {
             Metro_Led->color(fl_darker(FL_RED));
             Metro_Led->redraw();
@@ -462,15 +462,15 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (rkr->MIDIConverter_Bypass)
+    if (m_process->MIDIConverter_Bypass)
     {
-        if ((rkr->efx_MIDIConverter->hay) && ((int) MIDI->Mled->color() != (int) fl_lighter(FL_RED)))
+        if ((m_process->efx_MIDIConverter->hay) && ((int) MIDI->Mled->color() != (int) fl_lighter(FL_RED)))
         {
             MIDI->Mled->color(fl_lighter(FL_RED));
             MIDI->Mled->redraw();
         }
 
-        if ((!rkr->efx_MIDIConverter->hay) && ((int) MIDI->Mled->color() != (int) fl_darker(FL_RED)))
+        if ((!m_process->efx_MIDIConverter->hay) && ((int) MIDI->Mled->color() != (int) fl_darker(FL_RED)))
         {
             MIDI->Mled->color(fl_darker(FL_RED));
             MIDI->Mled->redraw();
@@ -478,78 +478,78 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (rkr->EFX_Bypass[EFX_HARMONIZER])
+    if (m_process->EFX_Bypass[EFX_HARMONIZER])
     {
-        Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (rkr->Rack_Effects[EFX_HARMONIZER]);
+        Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (m_process->Rack_Effects[EFX_HARMONIZER]);
         if ((Efx_Harmonizer->PSELECT) || (Efx_Harmonizer->PMIDI))
         {
-            if (rkr->RC_Harm->cc)
+            if (m_process->RC_Harm->cc)
             {
-                HAR->har_chordname->copy_label(rkr->RC_Harm->NombreAcorde);
-                rkr->RC_Harm->cc = 0;
+                HAR->har_chordname->copy_label(m_process->RC_Harm->NombreAcorde);
+                m_process->RC_Harm->cc = 0;
                 HAR->har_chordname->redraw();
-                rkr->RC_Harm->Vamos(0, Efx_Harmonizer->Pinterval - 12, rkr->HarmRecNote->reconota);
-                Efx_Harmonizer->r_ratio = rkr->RC_Harm->r__ratio[0]; //pass the found ratio
+                m_process->RC_Harm->Vamos(0, Efx_Harmonizer->Pinterval - 12, m_process->HarmRecNote->reconota);
+                Efx_Harmonizer->r_ratio = m_process->RC_Harm->r__ratio[0]; //pass the found ratio
             }
         }
     }
 
 
-    if (rkr->EFX_Bypass[EFX_STEREOHARM])
+    if (m_process->EFX_Bypass[EFX_STEREOHARM])
     {
-        StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(rkr->Rack_Effects[EFX_STEREOHARM]);
+        StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(m_process->Rack_Effects[EFX_STEREOHARM]);
 
         if ((Efx_StereoHarm->PSELECT) || (Efx_StereoHarm->PMIDI))
         {
-            if (rkr->RC_Stereo_Harm->cc)
+            if (m_process->RC_Stereo_Harm->cc)
             {
-                SHAR->shar_chordname->copy_label(rkr->RC_Stereo_Harm->NombreAcorde);
-                rkr->RC_Stereo_Harm->cc = 0;
+                SHAR->shar_chordname->copy_label(m_process->RC_Stereo_Harm->NombreAcorde);
+                m_process->RC_Stereo_Harm->cc = 0;
                 SHAR->shar_chordname->redraw();
-                rkr->RC_Stereo_Harm->Vamos(1, Efx_StereoHarm->Pintervall - 12, rkr->StHarmRecNote->reconota);
-                rkr->RC_Stereo_Harm->Vamos(2, Efx_StereoHarm->Pintervalr - 12, rkr->StHarmRecNote->reconota);
-                Efx_StereoHarm->r_ratiol = rkr->RC_Stereo_Harm->r__ratio[1];
-                Efx_StereoHarm->r_ratior = rkr->RC_Stereo_Harm->r__ratio[2];
+                m_process->RC_Stereo_Harm->Vamos(1, Efx_StereoHarm->Pintervall - 12, m_process->StHarmRecNote->reconota);
+                m_process->RC_Stereo_Harm->Vamos(2, Efx_StereoHarm->Pintervalr - 12, m_process->StHarmRecNote->reconota);
+                Efx_StereoHarm->r_ratiol = m_process->RC_Stereo_Harm->r__ratio[1];
+                Efx_StereoHarm->r_ratior = m_process->RC_Stereo_Harm->r__ratio[2];
             }
         }
     }
 
 
-    if (rkr->RControl)
+    if (m_process->RControl)
     {
-        rkr->CountWait++;
-        if (rkr->CountWait == 25)
+        m_process->CountWait++;
+        if (m_process->CountWait == 25)
         {
             MIDILearn->GMM->color(leds_color);
             MIDILearn->GMM->redraw();
         }
 
-        if (rkr->CountWait == 50)
+        if (m_process->CountWait == 50)
         {
             MIDILearn->GMM->color(fore_color);
             MIDILearn->GMM->redraw();
-            rkr->CountWait = 0;
+            m_process->CountWait = 0;
         }
 
-        if (rkr->ControlGet != 0)
+        if (m_process->ControlGet != 0)
         {
-            rkr->RControl = 0;
-            MIDILearn->Disp_Control->value(rkr->ControlGet);
+            m_process->RControl = 0;
+            MIDILearn->Disp_Control->value(m_process->ControlGet);
             MIDILearn->Disp_Control->redraw();
             MIDILearn->GMM->color(fore_color);
             MIDILearn->GMM->redraw();
-            if ((rkr->comemouse) && (rkr->autoassign))
+            if ((m_process->comemouse) && (m_process->autoassign))
             {
-                rkr->comemouse = 0;
+                m_process->comemouse = 0;
                 MIDILearn->Assign->do_callback();
             }
         }
     };
     
-    if(rkr->change_scale)
+    if(m_process->change_scale)
     {
-        rkr->change_scale = 0;  // false
-        if (rkr->scalable )
+        m_process->change_scale = 0;  // false
+        if (m_process->scalable )
         {
             Principal->size_range(384, 216, 3840, 2160, 0, 0, 1);
         }
@@ -572,7 +572,7 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor)
 
     Label_Color_Change(label_color);
     
-    if (!rkr->EnableBackgroundImage)
+    if (!m_process->EnableBackgroundImage)
     {
         back->color_average(back_color, 0.0);
     }
@@ -738,66 +738,66 @@ void RKRGUI::load_previous_state()
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
-    rakarrack.get(rkr->PrefNom("Principal X"), x, 1);
-    rakarrack.get(rkr->PrefNom("Principal Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Principal W"), w, 960);
-    rakarrack.get(rkr->PrefNom("Principal H"), h, 540);
+    rakarrack.get(m_process->PrefNom("Principal X"), x, 1);
+    rakarrack.get(m_process->PrefNom("Principal Y"), y, 1);
+    rakarrack.get(m_process->PrefNom("Principal W"), w, 960);
+    rakarrack.get(m_process->PrefNom("Principal H"), h, 540);
 
     char tmp[256];
     sprintf(tmp, "%s/blackbg.png", DATADIR);
 
-    rakarrack.get(rkr->PrefNom("Enable Background Image"), rkr->EnableBackgroundImage, 0);
-    rakarrack.get(rkr->PrefNom("Background Image"), rkr->BackgroundImage, tmp, 256);
+    rakarrack.get(m_process->PrefNom("Enable Background Image"), m_process->EnableBackgroundImage, 0);
+    rakarrack.get(m_process->PrefNom("Background Image"), m_process->BackgroundImage, tmp, 256);
     PutBackground();
-    rakarrack.get(rkr->PrefNom("FontSize"), rkr->fontsize, C_DEFAULT_FONT_SIZE);
-    if (rkr->fontsize != C_DEFAULT_FONT_SIZE)
-        chfsize(rkr->fontsize);
-    rakarrack.get(rkr->PrefNom("Font"), rkr->font, 0);
+    rakarrack.get(m_process->PrefNom("FontSize"), m_process->fontsize, C_DEFAULT_FONT_SIZE);
+    if (m_process->fontsize != C_DEFAULT_FONT_SIZE)
+        chfsize(m_process->fontsize);
+    rakarrack.get(m_process->PrefNom("Font"), m_process->font, 0);
 
-    rakarrack.get(rkr->PrefNom("Background Color"), b, FL_BLACK);
-    rakarrack.get(rkr->PrefNom("Foreground Color"), f, FL_DARK3);
-    rakarrack.get(rkr->PrefNom("Leds Color"), l, FL_DARK_YELLOW);
-    rakarrack.get(rkr->PrefNom("Labels Color"), a, FL_WHITE);
-    rakarrack.get(rkr->PrefNom("Schema"), k, 2);
+    rakarrack.get(m_process->PrefNom("Background Color"), b, FL_BLACK);
+    rakarrack.get(m_process->PrefNom("Foreground Color"), f, FL_DARK3);
+    rakarrack.get(m_process->PrefNom("Leds Color"), l, FL_DARK_YELLOW);
+    rakarrack.get(m_process->PrefNom("Labels Color"), a, FL_WHITE);
+    rakarrack.get(m_process->PrefNom("Schema"), k, 2);
     Settings->scheme_ch->value(k);
     Settings->scheme_ch->do_callback();
-    rakarrack.get(rkr->PrefNom("Hide Effects"), rkr->deachide, 0);
-    rakarrack.get(rkr->PrefNom("Scale Window"), rkr->scalable, 0);
+    rakarrack.get(m_process->PrefNom("Hide Effects"), m_process->deachide, 0);
+    rakarrack.get(m_process->PrefNom("Scale Window"), m_process->scalable, 0);
 
     Principal->resize(x, y, w, h);
 
-    rakarrack.get(rkr->PrefNom("BankWindow X"), x, 1);
-    rakarrack.get(rkr->PrefNom("BankWindow Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("BankWindow W"), w, 680);
-    rakarrack.get(rkr->PrefNom("BankWindow H"), h, 425);
+    rakarrack.get(m_process->PrefNom("BankWindow X"), x, 1);
+    rakarrack.get(m_process->PrefNom("BankWindow Y"), y, 1);
+    rakarrack.get(m_process->PrefNom("BankWindow W"), w, 680);
+    rakarrack.get(m_process->PrefNom("BankWindow H"), h, 425);
 
     BankWindow->resize(x, y, w, h);
 
-    rakarrack.get(rkr->PrefNom("Order X"), x, 1);
-    rakarrack.get(rkr->PrefNom("Order Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Order W"), w, 600);
-    rakarrack.get(rkr->PrefNom("Order H"), h, 330);
+    rakarrack.get(m_process->PrefNom("Order X"), x, 1);
+    rakarrack.get(m_process->PrefNom("Order Y"), y, 1);
+    rakarrack.get(m_process->PrefNom("Order W"), w, 600);
+    rakarrack.get(m_process->PrefNom("Order H"), h, 330);
 
     Order->resize(x, y, w, h);
 
-    rakarrack.get(rkr->PrefNom("MIDI Learn X"), x, 1);
-    rakarrack.get(rkr->PrefNom("MIDI Learn Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("MIDI Learn W"), w, 600);
-    rakarrack.get(rkr->PrefNom("MIDI Learn H"), h, 360);
+    rakarrack.get(m_process->PrefNom("MIDI Learn X"), x, 1);
+    rakarrack.get(m_process->PrefNom("MIDI Learn Y"), y, 1);
+    rakarrack.get(m_process->PrefNom("MIDI Learn W"), w, 600);
+    rakarrack.get(m_process->PrefNom("MIDI Learn H"), h, 360);
 
     MIDILearn->resize(x, y, w, h);
 
-    rakarrack.get(rkr->PrefNom("Trigger X"), x, 1);
-    rakarrack.get(rkr->PrefNom("Trigger Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Trigger W"), w, 280);
-    rakarrack.get(rkr->PrefNom("Trigger H"), h, 165);
+    rakarrack.get(m_process->PrefNom("Trigger X"), x, 1);
+    rakarrack.get(m_process->PrefNom("Trigger Y"), y, 1);
+    rakarrack.get(m_process->PrefNom("Trigger W"), w, 280);
+    rakarrack.get(m_process->PrefNom("Trigger H"), h, 165);
 
     Trigger->resize(x, y, w, h);
 
-    rakarrack.get(rkr->PrefNom("Settings X"), x, 1);
-    rakarrack.get(rkr->PrefNom("Settings Y"), y, 1);
-    rakarrack.get(rkr->PrefNom("Settings W"), w, 440);
-    rakarrack.get(rkr->PrefNom("Settings H"), h, 410);
+    rakarrack.get(m_process->PrefNom("Settings X"), x, 1);
+    rakarrack.get(m_process->PrefNom("Settings Y"), y, 1);
+    rakarrack.get(m_process->PrefNom("Settings W"), w, 440);
+    rakarrack.get(m_process->PrefNom("Settings H"), h, 410);
 
     Settings->resize(x, y, w, h);
 
@@ -812,11 +812,11 @@ void RKRGUI::load_previous_state()
     Leds_Color_Change(leds_color);
     Label_Color_Change(label_color);
 
-    rakarrack.get(rkr->PrefNom("Bank Selected"), rkr->a_bank, 3);
+    rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->a_bank, 3);
 
-    if (!rkr->Bank_Load_Command_Line)
+    if (!m_process->Bank_Load_Command_Line)
     {
-        switch (rkr->a_bank)
+        switch (m_process->a_bank)
         {
             case 0:
                 L_B1->do_callback();
@@ -833,47 +833,47 @@ void RKRGUI::load_previous_state()
     }
     else
     {
-        BankWin_Label(rkr->Command_Line_Bank.c_str());
+        BankWin_Label(m_process->Command_Line_Bank.c_str());
     }
 
-    if (!rkr->Command_Line_File)
+    if (!m_process->Command_Line_File)
     {
-        rakarrack.get(rkr->PrefNom("Preset Num"), k, 1);
-        rkr->Selected_Preset = k;
+        rakarrack.get(m_process->PrefNom("Preset Num"), k, 1);
+        m_process->Selected_Preset = k;
         Preset_Counter->value(k);
         Preset_Counter->do_callback();
     }
 
-    rakarrack.get(rkr->PrefNom("MIDI Implementation"), rkr->MIDIway, 0);
-    if (!rkr->MIDIway)
+    rakarrack.get(m_process->PrefNom("MIDI Implementation"), m_process->MIDIway, 0);
+    if (!m_process->MIDIway)
         ML_Menu->deactivate();
 
-    rakarrack.get(rkr->PrefNom("MIDI Table"), rkr->midi_table, 0);
-    if (!rkr->midi_table)
+    rakarrack.get(m_process->PrefNom("MIDI Table"), m_process->midi_table, 0);
+    if (!m_process->midi_table)
         Settings->scroll->deactivate();
 
 
-    rakarrack.get(rkr->PrefNom("UserName"), rkr->UserRealName, "", 127);
-    rakarrack.get(rkr->PrefNom("User Directory"), rkr->UDirFilename, DATADIR, 127);
-    rakarrack.get(rkr->PrefNom("Preserve Gain/Master"), rkr->actuvol, 0);
-    rakarrack.get(rkr->PrefNom("Metronome Volume"), rkr->Metro_Vol, 50);
+    rakarrack.get(m_process->PrefNom("UserName"), m_process->UserRealName, "", 127);
+    rakarrack.get(m_process->PrefNom("User Directory"), m_process->UDirFilename, DATADIR, 127);
+    rakarrack.get(m_process->PrefNom("Preserve Gain/Master"), m_process->actuvol, 0);
+    rakarrack.get(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol, 50);
     
-    Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
-    Efx_Looper->setmvol(rkr->Metro_Vol);
+    Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
+    Efx_Looper->setmvol(m_process->Metro_Vol);
 
-    rakarrack.get(rkr->PrefNom("Update Tap"), rkr->Tap_Updated, 0);
-    rakarrack.get(rkr->PrefNom("MIDI IN Channel"), rkr->MidiCh, 1);
-    rkr->MidiCh--;
+    rakarrack.get(m_process->PrefNom("Update Tap"), m_process->Tap_Updated, 0);
+    rakarrack.get(m_process->PrefNom("MIDI IN Channel"), m_process->MidiCh, 1);
+    m_process->MidiCh--;
 
-    rakarrack.get(rkr->PrefNom("MIDI IN Harmonizer"), rkr->HarCh, 1);
-    rkr->HarCh--;
-    rakarrack.get(rkr->PrefNom("MIDI IN Stereo Harmonizer"), rkr->StereoHarCh, 1);
-    rkr->StereoHarCh--;
+    rakarrack.get(m_process->PrefNom("MIDI IN Harmonizer"), m_process->HarCh, 1);
+    m_process->HarCh--;
+    rakarrack.get(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->StereoHarCh, 1);
+    m_process->StereoHarCh--;
 
-    rakarrack.get(rkr->PrefNom("Limiter Position"), rkr->flpos, 0);
-    rakarrack.get(rkr->PrefNom("Limiter +6dB"), rkr->db6booster, 0);
-    rakarrack.get(rkr->PrefNom("Booster"), rkr->booster, 1.0f);
-    if (rkr->booster == 1.0)
+    rakarrack.get(m_process->PrefNom("Limiter Position"), m_process->flpos, 0);
+    rakarrack.get(m_process->PrefNom("Limiter +6dB"), m_process->db6booster, 0);
+    rakarrack.get(m_process->PrefNom("Booster"), m_process->booster, 1.0f);
+    if (m_process->booster == 1.0)
     {
         BostBut->value(0);
     }
@@ -882,78 +882,78 @@ void RKRGUI::load_previous_state()
         BostBut->value(1);
     }
 
-    rakarrack.get(rkr->PrefNom("FX_init_state"), rkr->init_state, 0);
-    rakarrack.get(rkr->PrefNom("Auto Assign"), rkr->autoassign, 0);
+    rakarrack.get(m_process->PrefNom("FX_init_state"), m_process->init_state, 0);
+    rakarrack.get(m_process->PrefNom("Auto Assign"), m_process->autoassign, 0);
 
 
-    if (rkr->init_state)
+    if (m_process->init_state)
     {
-        rkr->Bypass = 1;
-        rkr->calculavol(1);
-        rkr->calculavol(2);
+        m_process->Bypass = 1;
+        m_process->calculavol(1);
+        m_process->calculavol(2);
     }
 
 
-    rakarrack.get(rkr->PrefNom("Recognize Optimization Harmonizer"), rkr->RCOpti_Harm, 0);
-    Settings->RC_Harm_Opti->value(rkr->RCOpti_Harm);
+    rakarrack.get(m_process->PrefNom("Recognize Optimization Harmonizer"), m_process->RCOpti_Harm, 0);
+    Settings->RC_Harm_Opti->value(m_process->RCOpti_Harm);
     Settings->RC_Harm_Opti->do_callback();
 
-    rakarrack.get(rkr->PrefNom("Recognize Optimization Stereo Harm"), rkr->RCOpti_Stereo, 0);
-    Settings->RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
+    rakarrack.get(m_process->PrefNom("Recognize Optimization Stereo Harm"), m_process->RCOpti_Stereo, 0);
+    Settings->RC_St_Harm_Opti->value(m_process->RCOpti_Stereo);
     Settings->RC_St_Harm_Opti->do_callback();
 
-    rakarrack.get(rkr->PrefNom("Recognize Optimization Ring"), rkr->RCOpti_Ring, 0);
-    Settings->RC_Ring_Opti->value(rkr->RCOpti_Ring);
+    rakarrack.get(m_process->PrefNom("Recognize Optimization Ring"), m_process->RCOpti_Ring, 0);
+    Settings->RC_Ring_Opti->value(m_process->RCOpti_Ring);
     Settings->RC_Ring_Opti->do_callback();
 
     //MIDIConverter
-    rakarrack.get(rkr->PrefNom("Midi Out Channel"), k, 1);
+    rakarrack.get(m_process->PrefNom("Midi Out Channel"), k, 1);
     MIDI->Midi_out_Counter->value(k);
     MIDI->Midi_out_Counter->do_callback();
 
-    rkr->efx_MIDIConverter->setmidichannel(k);
+    m_process->efx_MIDIConverter->setmidichannel(k);
 
-    rakarrack.get(rkr->PrefNom("Trigger Adjust"), k, 4);
+    rakarrack.get(m_process->PrefNom("Trigger Adjust"), k, 4);
     MIDI->Trig_Adj->value(k);
-    rkr->efx_MIDIConverter->setTriggerAdjust(k);
+    m_process->efx_MIDIConverter->setTriggerAdjust(k);
 
 
-    rakarrack.get(rkr->PrefNom("Velocity Adjust"), k, 50);
+    rakarrack.get(m_process->PrefNom("Velocity Adjust"), k, 50);
     MIDI->Vel_Adj->value(k);
-    rkr->efx_MIDIConverter->setVelAdjust(k);
+    m_process->efx_MIDIConverter->setVelAdjust(k);
 
-    rakarrack.get(rkr->PrefNom("Converter Octave"), k, 2);
+    rakarrack.get(m_process->PrefNom("Converter Octave"), k, 2);
     MIDI->MIDIOctave->value(k);
     MIDI->MIDIOctave->do_callback();
 
-    rakarrack.get(rkr->PrefNom("MIDI Converter On/Off"), k, 0);
+    rakarrack.get(m_process->PrefNom("MIDI Converter On/Off"), k, 0);
     MIDI->midi_activar->value(k);
     MIDI->midi_activar->do_callback();
 
     //Metronome
-    rakarrack.get(rkr->PrefNom("Internal Metronome Time"), k, 2);
+    rakarrack.get(m_process->PrefNom("Internal Metronome Time"), k, 2);
     MetroBar->value(k);
     MetroBar->do_callback();
 
-    rakarrack.get(rkr->PrefNom("Internal Metronome Sound"), k, 0);
+    rakarrack.get(m_process->PrefNom("Internal Metronome Sound"), k, 0);
     MetroSound->value(k);
     MetroSound->do_callback();
 
-    rakarrack.get(rkr->PrefNom("Internal Metronome Volume"), k, 50);
+    rakarrack.get(m_process->PrefNom("Internal Metronome Volume"), k, 50);
     Metro_Volume->value(k);
     Metro_Volume->do_callback();
 
-    rakarrack.get(rkr->PrefNom("Internal Metronome Tempo"), k, 100);
+    rakarrack.get(m_process->PrefNom("Internal Metronome Tempo"), k, 100);
     Metro_Tempo->value(k);
     Metro_Tempo->do_callback();
 
-    rakarrack.get(rkr->PrefNom("Internal Metronome Show"), rkr->sw_stat, 0);
+    rakarrack.get(m_process->PrefNom("Internal Metronome Show"), m_process->sw_stat, 0);
 
-    rakarrack.get(rkr->PrefNom("Internal Metronome On/Off"), k, 0);
+    rakarrack.get(m_process->PrefNom("Internal Metronome On/Off"), k, 0);
     metro_activar->value(k);
     metro_activar->do_callback();
 
-    if (rkr->sw_stat == 1)
+    if (m_process->sw_stat == 1)
     {
         MIDI->hide();
         Metro->show();
@@ -965,41 +965,41 @@ void RKRGUI::load_previous_state()
     }
 
     //Tuner
-    rakarrack.get(rkr->PrefNom("Tuner On/Off"), k, 0);
+    rakarrack.get(m_process->PrefNom("Tuner On/Off"), k, 0);
     tuner_activar->value(k);
     tuner_activar->do_callback();
 
 
     //Tap Tempo
-    rakarrack.get(rkr->PrefNom("TapTempo Input"), rkr->Tap_Selection, 0);
-    T_SEL->value(rkr->Tap_Selection);
-    rakarrack.get(rkr->PrefNom("Tap Tempo Timeout"), rkr->t_timeout, 0);
-    Settings->T_TIMEOUT->value(rkr->t_timeout);
-    rakarrack.get(rkr->PrefNom("TapTempo Set"), rkr->Tap_SetValue, 0);
-    T_SET->value(rkr->Tap_SetValue);
+    rakarrack.get(m_process->PrefNom("TapTempo Input"), m_process->Tap_Selection, 0);
+    T_SEL->value(m_process->Tap_Selection);
+    rakarrack.get(m_process->PrefNom("Tap Tempo Timeout"), m_process->t_timeout, 0);
+    Settings->T_TIMEOUT->value(m_process->t_timeout);
+    rakarrack.get(m_process->PrefNom("TapTempo Set"), m_process->Tap_SetValue, 0);
+    T_SET->value(m_process->Tap_SetValue);
 
-    rakarrack.get(rkr->PrefNom("TapTempo On/Off"), k, 0);
+    rakarrack.get(m_process->PrefNom("TapTempo On/Off"), k, 0);
     Tap_activar->value(k);
     Tap_activar->do_callback();
 
 
-    rakarrack.get(rkr->PrefNom("Disable Warnings"), rkr->Disable_Warnings, 0);
-    rakarrack.get(rkr->PrefNom("Enable Tooltips"), rkr->ena_tool, 1);
-    Fl_Tooltip::enable(rkr->ena_tool);
+    rakarrack.get(m_process->PrefNom("Disable Warnings"), m_process->Disable_Warnings, 0);
+    rakarrack.get(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool, 1);
+    Fl_Tooltip::enable(m_process->ena_tool);
 
     //Trigger
-    rakarrack.get(rkr->PrefNom("Aux Source"), rkr->Aux_Source, 0);
-    Trigger->aux_source->value(rkr->Aux_Source);
-    rakarrack.get(rkr->PrefNom("Aux Gain"), rkr->Aux_Gain, 0);
-    Trigger->aux_gain->value(rkr->Aux_Gain);
-    rakarrack.get(rkr->PrefNom("Aux Threshold"), rkr->Aux_Threshold, 0);
-    Trigger->aux_thres->value(rkr->Aux_Threshold);
-    rakarrack.get(rkr->PrefNom("Aux MIDI"), rkr->Aux_MIDI, 1);
-    Trigger->aux_midi->value(rkr->Aux_MIDI);
-    rakarrack.get(rkr->PrefNom("Aux Minimum"), rkr->Aux_Minimum, 0);
-    Trigger->aux_min->value(rkr->Aux_Minimum);
-    rakarrack.get(rkr->PrefNom("Aux Maximum"), rkr->Aux_Maximum, 127);
-    Trigger->aux_max->value(rkr->Aux_Maximum);
+    rakarrack.get(m_process->PrefNom("Aux Source"), m_process->Aux_Source, 0);
+    Trigger->aux_source->value(m_process->Aux_Source);
+    rakarrack.get(m_process->PrefNom("Aux Gain"), m_process->Aux_Gain, 0);
+    Trigger->aux_gain->value(m_process->Aux_Gain);
+    rakarrack.get(m_process->PrefNom("Aux Threshold"), m_process->Aux_Threshold, 0);
+    Trigger->aux_thres->value(m_process->Aux_Threshold);
+    rakarrack.get(m_process->PrefNom("Aux MIDI"), m_process->Aux_MIDI, 1);
+    Trigger->aux_midi->value(m_process->Aux_MIDI);
+    rakarrack.get(m_process->PrefNom("Aux Minimum"), m_process->Aux_Minimum, 0);
+    Trigger->aux_min->value(m_process->Aux_Minimum);
+    rakarrack.get(m_process->PrefNom("Aux Maximum"), m_process->Aux_Maximum, 127);
+    Trigger->aux_max->value(m_process->Aux_Maximum);
 
 
     char temp[64];
@@ -1018,32 +1018,32 @@ void RKRGUI::load_previous_state()
         
         memset(temp, 0, sizeof (temp));
         sprintf(temp, "Midi Table Program %d", i);
-        rakarrack.get(rkr->PrefNom(temp), f, k);
+        rakarrack.get(m_process->PrefNom(temp), f, k);
 
 
         if (f < 1000)
         {
-            rkr->M_table[i].bank = 0;
-            rkr->M_table[i].preset = f;
+            m_process->M_table[i].bank = 0;
+            m_process->M_table[i].preset = f;
         }
 
         if ((f > 999) && (f < 2000))
         {
-            rkr->M_table[i].bank = 1;
-            rkr->M_table[i].preset = f - 1000;
+            m_process->M_table[i].bank = 1;
+            m_process->M_table[i].preset = f - 1000;
         }
 
         if ((f > 1999) && (f < 3000))
         {
-            rkr->M_table[i].bank = 2;
-            rkr->M_table[i].preset = f - 2000;
+            m_process->M_table[i].bank = 2;
+            m_process->M_table[i].preset = f - 2000;
         }
 
 
         if ((f > 2999) && (f < 4000))
         {
-            rkr->M_table[i].bank = 3;
-            rkr->M_table[i].preset = f - 3000;
+            m_process->M_table[i].bank = 3;
+            m_process->M_table[i].preset = f - 3000;
         }
     }
 }
@@ -1070,95 +1070,95 @@ void RKRGUI::save_current_state(int whati)
 
     if (whati == 0)
     {
-        rakarrack.set(rkr->PrefNom("Principal X"), Principal->x());
-        rakarrack.set(rkr->PrefNom("Principal Y"), Principal->y());
-        rakarrack.set(rkr->PrefNom("Principal W"), Principal->w());
-        rakarrack.set(rkr->PrefNom("Principal H"), Principal->h());
-        rakarrack.set(rkr->PrefNom("FontSize"), rkr->fontsize);
-        rakarrack.set(rkr->PrefNom("Font"), rkr->font);
+        rakarrack.set(m_process->PrefNom("Principal X"), Principal->x());
+        rakarrack.set(m_process->PrefNom("Principal Y"), Principal->y());
+        rakarrack.set(m_process->PrefNom("Principal W"), Principal->w());
+        rakarrack.set(m_process->PrefNom("Principal H"), Principal->h());
+        rakarrack.set(m_process->PrefNom("FontSize"), m_process->fontsize);
+        rakarrack.set(m_process->PrefNom("Font"), m_process->font);
 
-        rakarrack.set(rkr->PrefNom("Background Color"), (int) back_color);
-        rakarrack.set(rkr->PrefNom("Foreground Color"), (int) fore_color);
-        rakarrack.set(rkr->PrefNom("Leds Color"), (int) leds_color);
-        rakarrack.set(rkr->PrefNom("Labels Color"), (int) label_color);
-        rakarrack.set(rkr->PrefNom("Schema"), (int) Settings->scheme_ch->value());
-        rakarrack.set(rkr->PrefNom("Hide Effects"), (int) rkr->deachide);
-        rakarrack.set(rkr->PrefNom("Scale Window"), (int) rkr->scalable);
+        rakarrack.set(m_process->PrefNom("Background Color"), (int) back_color);
+        rakarrack.set(m_process->PrefNom("Foreground Color"), (int) fore_color);
+        rakarrack.set(m_process->PrefNom("Leds Color"), (int) leds_color);
+        rakarrack.set(m_process->PrefNom("Labels Color"), (int) label_color);
+        rakarrack.set(m_process->PrefNom("Schema"), (int) Settings->scheme_ch->value());
+        rakarrack.set(m_process->PrefNom("Hide Effects"), (int) m_process->deachide);
+        rakarrack.set(m_process->PrefNom("Scale Window"), (int) m_process->scalable);
 
-        rakarrack.set(rkr->PrefNom("Bank Selected"), rkr->a_bank);
+        rakarrack.set(m_process->PrefNom("Bank Selected"), m_process->a_bank);
 
         if ((Preset_Counter->value() > 0) && (Preset_Counter->value() < 61))
-            rakarrack.set(rkr->PrefNom("Preset Num"), (int) Preset_Counter->value());
+            rakarrack.set(m_process->PrefNom("Preset Num"), (int) Preset_Counter->value());
 
-        if (rkr->help_displayed)
+        if (m_process->help_displayed)
         {
-            rakarrack.set(rkr->PrefNom("Help X"), visor->x());
-            rakarrack.set(rkr->PrefNom("Help Y"), visor->y());
-            rakarrack.set(rkr->PrefNom("Help W"), visor->w());
-            rakarrack.set(rkr->PrefNom("Help H"), visor->h());
-            rakarrack.set(rkr->PrefNom("Help TextSize"), visor->textsize());
+            rakarrack.set(m_process->PrefNom("Help X"), visor->x());
+            rakarrack.set(m_process->PrefNom("Help Y"), visor->y());
+            rakarrack.set(m_process->PrefNom("Help W"), visor->w());
+            rakarrack.set(m_process->PrefNom("Help H"), visor->h());
+            rakarrack.set(m_process->PrefNom("Help TextSize"), visor->textsize());
         }
 
         //Tuner
-        rakarrack.set(rkr->PrefNom("Tuner On/Off"), (int) rkr->Tuner_Bypass);
+        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Bypass);
 
 
         //MIDIConverter
-        rakarrack.set(rkr->PrefNom("MIDI Converter On/Off"), (int) rkr->MIDIConverter_Bypass);
-        rakarrack.set(rkr->PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
-        rakarrack.set(rkr->PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
-        rakarrack.set(rkr->PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
-        rakarrack.set(rkr->PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
+        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Bypass);
+        rakarrack.set(m_process->PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
+        rakarrack.set(m_process->PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
+        rakarrack.set(m_process->PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
+        rakarrack.set(m_process->PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
 
         //Metronome
-        rakarrack.set(rkr->PrefNom("Internal Metronome On/Off"), (int) rkr->Metro_Bypass);
-        rakarrack.set(rkr->PrefNom("Internal Metronome Time"), (int) MetroBar->value());
-        rakarrack.set(rkr->PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
-        rakarrack.set(rkr->PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
-        rakarrack.set(rkr->PrefNom("Internal Metronome Show"), (int) rkr->sw_stat);
-        rakarrack.set(rkr->PrefNom("Internal Metronome Sound"), (int) MetroSound->value());
+        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Bypass);
+        rakarrack.set(m_process->PrefNom("Internal Metronome Time"), (int) MetroBar->value());
+        rakarrack.set(m_process->PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
+        rakarrack.set(m_process->PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
+        rakarrack.set(m_process->PrefNom("Internal Metronome Show"), (int) m_process->sw_stat);
+        rakarrack.set(m_process->PrefNom("Internal Metronome Sound"), (int) MetroSound->value());
 
         //Booster
-        rakarrack.set(rkr->PrefNom("Booster"), rkr->booster);
+        rakarrack.set(m_process->PrefNom("Booster"), m_process->booster);
 
 
         //Tap Tempo
-        rakarrack.set(rkr->PrefNom("TapTempo On/Off"), (int) rkr->Tap_Bypass);
-        rakarrack.set(rkr->PrefNom("TapTempo Input"), (int) rkr->Tap_Selection);
-        rakarrack.set(rkr->PrefNom("TapTempo Set"), (int) rkr->Tap_SetValue);
+        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Bypass);
+        rakarrack.set(m_process->PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
+        rakarrack.set(m_process->PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
     }
 
 
     if (whati == 1)
     {
-        rakarrack.set(rkr->PrefNom("BankWindow X"), BankWindow->x());
-        rakarrack.set(rkr->PrefNom("BankWindow Y"), BankWindow->y());
-        rakarrack.set(rkr->PrefNom("BankWindow W"), BankWindow->w());
-        rakarrack.set(rkr->PrefNom("BankWindow H"), BankWindow->h());
+        rakarrack.set(m_process->PrefNom("BankWindow X"), BankWindow->x());
+        rakarrack.set(m_process->PrefNom("BankWindow Y"), BankWindow->y());
+        rakarrack.set(m_process->PrefNom("BankWindow W"), BankWindow->w());
+        rakarrack.set(m_process->PrefNom("BankWindow H"), BankWindow->h());
     }
 
     if (whati == 5)
     {
-        rakarrack.set(rkr->PrefNom("MIDI Learn X"), MIDILearn->x());
-        rakarrack.set(rkr->PrefNom("MIDI Learn Y"), MIDILearn->y());
-        rakarrack.set(rkr->PrefNom("MIDI Learn W"), MIDILearn->w());
-        rakarrack.set(rkr->PrefNom("MIDI Learn H"), MIDILearn->h());
+        rakarrack.set(m_process->PrefNom("MIDI Learn X"), MIDILearn->x());
+        rakarrack.set(m_process->PrefNom("MIDI Learn Y"), MIDILearn->y());
+        rakarrack.set(m_process->PrefNom("MIDI Learn W"), MIDILearn->w());
+        rakarrack.set(m_process->PrefNom("MIDI Learn H"), MIDILearn->h());
     }
 
 
     if (whati == 6)
     {
-        rakarrack.set(rkr->PrefNom("Trigger X"), Trigger->x());
-        rakarrack.set(rkr->PrefNom("Trigger Y"), Trigger->y());
-        rakarrack.set(rkr->PrefNom("Trigger W"), Trigger->w());
-        rakarrack.set(rkr->PrefNom("Trigger H"), Trigger->h());
+        rakarrack.set(m_process->PrefNom("Trigger X"), Trigger->x());
+        rakarrack.set(m_process->PrefNom("Trigger Y"), Trigger->y());
+        rakarrack.set(m_process->PrefNom("Trigger W"), Trigger->w());
+        rakarrack.set(m_process->PrefNom("Trigger H"), Trigger->h());
 
-        rakarrack.set(rkr->PrefNom("Aux Source"), rkr->Aux_Source);
-        rakarrack.set(rkr->PrefNom("Aux Gain"), rkr->Aux_Gain);
-        rakarrack.set(rkr->PrefNom("Aux Threshold"), rkr->Aux_Threshold);
-        rakarrack.set(rkr->PrefNom("Aux MIDI"), rkr->Aux_MIDI);
-        rakarrack.set(rkr->PrefNom("Aux Minimum"), rkr->Aux_Minimum);
-        rakarrack.set(rkr->PrefNom("Aux Maximum"), rkr->Aux_Maximum);
+        rakarrack.set(m_process->PrefNom("Aux Source"), m_process->Aux_Source);
+        rakarrack.set(m_process->PrefNom("Aux Gain"), m_process->Aux_Gain);
+        rakarrack.set(m_process->PrefNom("Aux Threshold"), m_process->Aux_Threshold);
+        rakarrack.set(m_process->PrefNom("Aux MIDI"), m_process->Aux_MIDI);
+        rakarrack.set(m_process->PrefNom("Aux Minimum"), m_process->Aux_Minimum);
+        rakarrack.set(m_process->PrefNom("Aux Maximum"), m_process->Aux_Maximum);
     }
 
 
@@ -1166,104 +1166,104 @@ void RKRGUI::save_current_state(int whati)
 
     if (whati == 2)
     {
-        rakarrack.set(rkr->PrefNom("Order X"), Order->x());
-        rakarrack.set(rkr->PrefNom("Order Y"), Order->y());
-        rakarrack.set(rkr->PrefNom("Order W"), Order->w());
-        rakarrack.set(rkr->PrefNom("Order H"), Order->h());
+        rakarrack.set(m_process->PrefNom("Order X"), Order->x());
+        rakarrack.set(m_process->PrefNom("Order Y"), Order->y());
+        rakarrack.set(m_process->PrefNom("Order W"), Order->w());
+        rakarrack.set(m_process->PrefNom("Order H"), Order->h());
     }
 
     if (whati == 3)
     {
-        rakarrack.set(rkr->PrefNom("Settings X"), Settings->x());
-        rakarrack.set(rkr->PrefNom("Settings Y"), Settings->y());
-        rakarrack.set(rkr->PrefNom("Settings W"), Settings->w());
-        rakarrack.set(rkr->PrefNom("Settings H"), Settings->h());
+        rakarrack.set(m_process->PrefNom("Settings X"), Settings->x());
+        rakarrack.set(m_process->PrefNom("Settings Y"), Settings->y());
+        rakarrack.set(m_process->PrefNom("Settings W"), Settings->w());
+        rakarrack.set(m_process->PrefNom("Settings H"), Settings->h());
     }
 
     if ((whati == 3) || (whati == 0))
     {
-        rakarrack.set(rkr->PrefNom("UserName"), rkr->UserRealName);
-        rakarrack.set(rkr->PrefNom("Preserve Gain/Master"), rkr->actuvol);
-        rakarrack.set(rkr->PrefNom("Metronome Volume"), rkr->Metro_Vol);
+        rakarrack.set(m_process->PrefNom("UserName"), m_process->UserRealName);
+        rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->actuvol);
+        rakarrack.set(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol);
 
-        rakarrack.set(rkr->PrefNom("Filter DC Offset"), rkr->DC_Offset);
+        rakarrack.set(m_process->PrefNom("Filter DC Offset"), m_process->DC_Offset);
 
-        rakarrack.set(rkr->PrefNom("Update Tap"), rkr->Tap_Updated);
-        rakarrack.set(rkr->PrefNom("Limiter Position"), rkr->flpos);
-        rakarrack.set(rkr->PrefNom("Limiter +6dB"), rkr->db6booster);
+        rakarrack.set(m_process->PrefNom("Update Tap"), m_process->Tap_Updated);
+        rakarrack.set(m_process->PrefNom("Limiter Position"), m_process->flpos);
+        rakarrack.set(m_process->PrefNom("Limiter +6dB"), m_process->db6booster);
 
-        rakarrack.set(rkr->PrefNom("Recognize Optimization Harmonizer"), rkr->RCOpti_Harm);
-        rakarrack.set(rkr->PrefNom("Recognize Optimization Stereo Harm"), rkr->RCOpti_Stereo);
-        rakarrack.set(rkr->PrefNom("Recognize Optimization Ring"), rkr->RCOpti_Ring);
+        rakarrack.set(m_process->PrefNom("Recognize Optimization Harmonizer"), m_process->RCOpti_Harm);
+        rakarrack.set(m_process->PrefNom("Recognize Optimization Stereo Harm"), m_process->RCOpti_Stereo);
+        rakarrack.set(m_process->PrefNom("Recognize Optimization Ring"), m_process->RCOpti_Ring);
 
-        rakarrack.set(rkr->PrefNom("Harmonizer Downsample"), rkr->Har_Down);
-        rakarrack.set(rkr->PrefNom("Harmonizer Up Quality"), rkr->Har_U_Q);
-        rakarrack.set(rkr->PrefNom("Harmonizer Down Quality"), rkr->Har_D_Q);
-        rakarrack.set(rkr->PrefNom("Reverbtron Downsample"), rkr->Rev_Down);
-        rakarrack.set(rkr->PrefNom("Reverbtron Up Quality"), rkr->Rev_U_Q);
-        rakarrack.set(rkr->PrefNom("Reverbtron Down Quality"), rkr->Rev_D_Q);
-        rakarrack.set(rkr->PrefNom("Convolotron Downsample"), rkr->Con_Down);
-        rakarrack.set(rkr->PrefNom("Convolotron Up Quality"), rkr->Con_U_Q);
-        rakarrack.set(rkr->PrefNom("Convolotron Down Quality"), rkr->Con_D_Q);
-        rakarrack.set(rkr->PrefNom("Sequence Downsample"), rkr->Seq_Down);
-        rakarrack.set(rkr->PrefNom("Sequence Up Quality"), rkr->Seq_U_Q);
-        rakarrack.set(rkr->PrefNom("Sequence Down Quality"), rkr->Seq_D_Q);
-        rakarrack.set(rkr->PrefNom("Shifter Downsample"), rkr->Shi_Down);
-        rakarrack.set(rkr->PrefNom("Shifter Up Quality"), rkr->Shi_U_Q);
-        rakarrack.set(rkr->PrefNom("Shifter Down Quality"), rkr->Shi_D_Q);
-        rakarrack.set(rkr->PrefNom("Vocoder Downsample"), rkr->Voc_Down);
-        rakarrack.set(rkr->PrefNom("Vocoder Up Quality"), rkr->Voc_U_Q);
-        rakarrack.set(rkr->PrefNom("Vocoder Down Quality"), rkr->Voc_D_Q);
-        rakarrack.set(rkr->PrefNom("StereoHarm Downsample"), rkr->Ste_Down);
-        rakarrack.set(rkr->PrefNom("StereoHarm Up Quality"), rkr->Ste_U_Q);
-        rakarrack.set(rkr->PrefNom("StereoHarm Down Quality"), rkr->Ste_D_Q);
+        rakarrack.set(m_process->PrefNom("Harmonizer Downsample"), m_process->Har_Down);
+        rakarrack.set(m_process->PrefNom("Harmonizer Up Quality"), m_process->Har_U_Q);
+        rakarrack.set(m_process->PrefNom("Harmonizer Down Quality"), m_process->Har_D_Q);
+        rakarrack.set(m_process->PrefNom("Reverbtron Downsample"), m_process->Rev_Down);
+        rakarrack.set(m_process->PrefNom("Reverbtron Up Quality"), m_process->Rev_U_Q);
+        rakarrack.set(m_process->PrefNom("Reverbtron Down Quality"), m_process->Rev_D_Q);
+        rakarrack.set(m_process->PrefNom("Convolotron Downsample"), m_process->Con_Down);
+        rakarrack.set(m_process->PrefNom("Convolotron Up Quality"), m_process->Con_U_Q);
+        rakarrack.set(m_process->PrefNom("Convolotron Down Quality"), m_process->Con_D_Q);
+        rakarrack.set(m_process->PrefNom("Sequence Downsample"), m_process->Seq_Down);
+        rakarrack.set(m_process->PrefNom("Sequence Up Quality"), m_process->Seq_U_Q);
+        rakarrack.set(m_process->PrefNom("Sequence Down Quality"), m_process->Seq_D_Q);
+        rakarrack.set(m_process->PrefNom("Shifter Downsample"), m_process->Shi_Down);
+        rakarrack.set(m_process->PrefNom("Shifter Up Quality"), m_process->Shi_U_Q);
+        rakarrack.set(m_process->PrefNom("Shifter Down Quality"), m_process->Shi_D_Q);
+        rakarrack.set(m_process->PrefNom("Vocoder Downsample"), m_process->Voc_Down);
+        rakarrack.set(m_process->PrefNom("Vocoder Up Quality"), m_process->Voc_U_Q);
+        rakarrack.set(m_process->PrefNom("Vocoder Down Quality"), m_process->Voc_D_Q);
+        rakarrack.set(m_process->PrefNom("StereoHarm Downsample"), m_process->Ste_Down);
+        rakarrack.set(m_process->PrefNom("StereoHarm Up Quality"), m_process->Ste_U_Q);
+        rakarrack.set(m_process->PrefNom("StereoHarm Down Quality"), m_process->Ste_D_Q);
 
-        rakarrack.set(rkr->PrefNom("Distortion Resampling"), rkr->Dist_res_amount);
-        rakarrack.set(rkr->PrefNom("Distortion Up Quality"), rkr->Dist_up_q);
-        rakarrack.set(rkr->PrefNom("Distortion Down Quality"), rkr->Dist_down_q);
+        rakarrack.set(m_process->PrefNom("Distortion Resampling"), m_process->Dist_res_amount);
+        rakarrack.set(m_process->PrefNom("Distortion Up Quality"), m_process->Dist_up_q);
+        rakarrack.set(m_process->PrefNom("Distortion Down Quality"), m_process->Dist_down_q);
 
-        rakarrack.set(rkr->PrefNom("Overdrive Resampling"), rkr->Ovrd_res_amount);
-        rakarrack.set(rkr->PrefNom("Overdrive Up Quality"), rkr->Ovrd_up_q);
-        rakarrack.set(rkr->PrefNom("Overdrive Down Quality"), rkr->Ovrd_down_q);
+        rakarrack.set(m_process->PrefNom("Overdrive Resampling"), m_process->Ovrd_res_amount);
+        rakarrack.set(m_process->PrefNom("Overdrive Up Quality"), m_process->Ovrd_up_q);
+        rakarrack.set(m_process->PrefNom("Overdrive Down Quality"), m_process->Ovrd_down_q);
 
-        rakarrack.set(rkr->PrefNom("Derelict Resampling"), rkr->Dere_res_amount);
-        rakarrack.set(rkr->PrefNom("Derelict Up Quality"), rkr->Dere_up_q);
-        rakarrack.set(rkr->PrefNom("Derelict Down Quality"), rkr->Dere_down_q);
+        rakarrack.set(m_process->PrefNom("Derelict Resampling"), m_process->Dere_res_amount);
+        rakarrack.set(m_process->PrefNom("Derelict Up Quality"), m_process->Dere_up_q);
+        rakarrack.set(m_process->PrefNom("Derelict Down Quality"), m_process->Dere_down_q);
         
-        rakarrack.set(rkr->PrefNom("DistBand Resampling"), rkr->DBand_res_amount);
-        rakarrack.set(rkr->PrefNom("DistBand Up Quality"), rkr->DBand_up_q);
-        rakarrack.set(rkr->PrefNom("DistBand Down Quality"), rkr->DBand_down_q);
+        rakarrack.set(m_process->PrefNom("DistBand Resampling"), m_process->DBand_res_amount);
+        rakarrack.set(m_process->PrefNom("DistBand Up Quality"), m_process->DBand_up_q);
+        rakarrack.set(m_process->PrefNom("DistBand Down Quality"), m_process->DBand_down_q);
 
-        rakarrack.set(rkr->PrefNom("StompBox Resampling"), rkr->Stomp_res_amount);
-        rakarrack.set(rkr->PrefNom("StompBox Up Quality"), rkr->Stomp_up_q);
-        rakarrack.set(rkr->PrefNom("StompBox Down Quality"), rkr->Stomp_down_q);
+        rakarrack.set(m_process->PrefNom("StompBox Resampling"), m_process->Stomp_res_amount);
+        rakarrack.set(m_process->PrefNom("StompBox Up Quality"), m_process->Stomp_up_q);
+        rakarrack.set(m_process->PrefNom("StompBox Down Quality"), m_process->Stomp_down_q);
 
-        rakarrack.set(rkr->PrefNom("Calibration"), rkr->aFreq);
-        rakarrack.set(rkr->PrefNom("Recognize Trigger"), rkr->rtrig);
+        rakarrack.set(m_process->PrefNom("Calibration"), m_process->aFreq);
+        rakarrack.set(m_process->PrefNom("Recognize Trigger"), m_process->rtrig);
 
-        rakarrack.set(rkr->PrefNom("Vocoder Bands"), rkr->VocBands);
+        rakarrack.set(m_process->PrefNom("Vocoder Bands"), m_process->VocBands);
 
-        rakarrack.set(rkr->PrefNom("FX_init_state"), rkr->init_state);
-        rakarrack.set(rkr->PrefNom("Auto Assign"), rkr->autoassign);
+        rakarrack.set(m_process->PrefNom("FX_init_state"), m_process->init_state);
+        rakarrack.set(m_process->PrefNom("Auto Assign"), m_process->autoassign);
 
-        rakarrack.set(rkr->PrefNom("UpSampling"), rkr->upsample);
-        rakarrack.set(rkr->PrefNom("UpQuality"), rkr->UpQual);
-        rakarrack.set(rkr->PrefNom("DownQuality"), rkr->DownQual);
+        rakarrack.set(m_process->PrefNom("UpSampling"), m_process->upsample);
+        rakarrack.set(m_process->PrefNom("UpQuality"), m_process->UpQual);
+        rakarrack.set(m_process->PrefNom("DownQuality"), m_process->DownQual);
 
-        rakarrack.set(rkr->PrefNom("UpAmount"), rkr->UpAmo);
-        rakarrack.set(rkr->PrefNom("Looper Size"), rkr->looper_size);
+        rakarrack.set(m_process->PrefNom("UpAmount"), m_process->UpAmo);
+        rakarrack.set(m_process->PrefNom("Looper Size"), m_process->looper_size);
 
-        rakarrack.set(rkr->PrefNom("Bank Filename"), rkr->BankFilename);
-        rakarrack.set(rkr->PrefNom("User Directory"), rkr->UDirFilename);
+        rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->BankFilename);
+        rakarrack.set(m_process->PrefNom("User Directory"), m_process->UDirFilename);
 
-        rakarrack.set(rkr->PrefNom("Enable Background Image"), rkr->EnableBackgroundImage);
-        rakarrack.set(rkr->PrefNom("Background Image"), rkr->BackgroundImage);
-        rakarrack.set(rkr->PrefNom("Auto Connect MIDI IN"), rkr->aconnect_MI);
-        rakarrack.set(rkr->PrefNom("Auto Connect Jack"), rkr->aconnect_JA);
-        rakarrack.set(rkr->PrefNom("Auto Connect Jack In"), rkr->aconnect_JIA);
+        rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->EnableBackgroundImage);
+        rakarrack.set(m_process->PrefNom("Background Image"), m_process->BackgroundImage);
+        rakarrack.set(m_process->PrefNom("Auto Connect MIDI IN"), m_process->aconnect_MI);
+        rakarrack.set(m_process->PrefNom("Auto Connect Jack"), m_process->aconnect_JA);
+        rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->aconnect_JIA);
 
-        rakarrack.set(rkr->PrefNom("MIDI Implementation"), rkr->MIDIway);
-        rakarrack.set(rkr->PrefNom("MIDI Table"), rkr->midi_table);
+        rakarrack.set(m_process->PrefNom("MIDI Implementation"), m_process->MIDIway);
+        rakarrack.set(m_process->PrefNom("MIDI Table"), m_process->midi_table);
 
 
         int i = Settings->BMidiIn->value();
@@ -1272,25 +1272,25 @@ void RKRGUI::save_current_state(int whati)
         
         if (temp != NULL)
         {
-            rakarrack.set(rkr->PrefNom("MIDI IN Device"), temp);
+            rakarrack.set(m_process->PrefNom("MIDI IN Device"), temp);
         }
         
-        rakarrack.set(rkr->PrefNom("MIDI IN Channel"), rkr->MidiCh + 1);
-        rakarrack.set(rkr->PrefNom("MIDI IN Harmonizer"), rkr->HarCh + 1);
-        rakarrack.set(rkr->PrefNom("MIDI IN Stereo Harmonizer"), rkr->StereoHarCh + 1);
-        rakarrack.set(rkr->PrefNom("Harmonizer Quality"), rkr->HarQual);
-        rakarrack.set(rkr->PrefNom("StereoHarm Quality"), rkr->SteQual);
-        rakarrack.set(rkr->PrefNom("Sequence Quality"), rkr->SeqQual);
-        rakarrack.set(rkr->PrefNom("Shifter Quality"), rkr->ShiQual);
-        rakarrack.set(rkr->PrefNom("Tap Tempo Timeout"), rkr->t_timeout);
-        rakarrack.set(rkr->PrefNom("Disable Warnings"), rkr->Disable_Warnings);
-        rakarrack.set(rkr->PrefNom("Enable Tooltips"), rkr->ena_tool);
+        rakarrack.set(m_process->PrefNom("MIDI IN Channel"), m_process->MidiCh + 1);
+        rakarrack.set(m_process->PrefNom("MIDI IN Harmonizer"), m_process->HarCh + 1);
+        rakarrack.set(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->StereoHarCh + 1);
+        rakarrack.set(m_process->PrefNom("Harmonizer Quality"), m_process->HarQual);
+        rakarrack.set(m_process->PrefNom("StereoHarm Quality"), m_process->SteQual);
+        rakarrack.set(m_process->PrefNom("Sequence Quality"), m_process->SeqQual);
+        rakarrack.set(m_process->PrefNom("Shifter Quality"), m_process->ShiQual);
+        rakarrack.set(m_process->PrefNom("Tap Tempo Timeout"), m_process->t_timeout);
+        rakarrack.set(m_process->PrefNom("Disable Warnings"), m_process->Disable_Warnings);
+        rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool);
 
         for (int i = 0; i < 128; i++)
         {
             memset(temp1, 0, sizeof (temp1));
             sprintf(temp1, "Midi Table Program %d", i);
-            rakarrack.set(rkr->PrefNom(temp1), rkr->M_table[i].bank * 1000 + rkr->M_table[i].preset);
+            rakarrack.set(m_process->PrefNom(temp1), m_process->M_table[i].bank * 1000 + m_process->M_table[i].preset);
         }
     }
 
@@ -1304,12 +1304,12 @@ void RKRGUI::save_current_state(int whati)
             {
                 memset(temp1, 0, sizeof (temp1));
                 sprintf(temp1, "Jack Port %d", k);
-                rakarrack.set(rkr->PrefNom(temp1), Settings->JackCo->text(i));
+                rakarrack.set(m_process->PrefNom(temp1), Settings->JackCo->text(i));
                 k++;
             }
         }
 
-        rakarrack.set(rkr->PrefNom("Auto Connect Num"), k - 1);
+        rakarrack.set(m_process->PrefNom("Auto Connect Num"), k - 1);
 
         k = 1;
         for (int i = 1; i <= Settings->JackIn->size(); i++)
@@ -1318,12 +1318,12 @@ void RKRGUI::save_current_state(int whati)
             {
                 memset(temp1, 0, sizeof (temp1));
                 sprintf(temp1, "Jack Port In %d", k);
-                rakarrack.set(rkr->PrefNom(temp1), Settings->JackIn->text(i));
+                rakarrack.set(m_process->PrefNom(temp1), Settings->JackIn->text(i));
                 k++;
             }
         }
 
-        rakarrack.set(rkr->PrefNom("Auto Connect In Num"), k - 1);
+        rakarrack.set(m_process->PrefNom("Auto Connect In Num"), k - 1);
     }
 }
 
@@ -1331,25 +1331,25 @@ void RKRGUI::Put_Loaded()
 {
     //General loading of efx default settings
 
-    WPreset_Name->value(rkr->Preset_Name);
-    DAuthor->copy_label(rkr->Author);
+    WPreset_Name->value(m_process->Preset_Name);
+    DAuthor->copy_label(m_process->Author);
 
-    Nivel_Entrada->value((int) (rkr->Input_Gain * 100.0) - 50);
-    rkr->calculavol(1);
-    Nivel_Salida->value((int) (rkr->Master_Volume * 100.0) - 50);
-    rkr->calculavol(2);
-    Balance->value((int) (rkr->Fraction_Bypass * 100.0));
+    Nivel_Entrada->value((int) (m_process->Input_Gain * 100.0) - 50);
+    m_process->calculavol(1);
+    Nivel_Salida->value((int) (m_process->Master_Volume * 100.0) - 50);
+    m_process->calculavol(2);
+    Balance->value((int) (m_process->Fraction_Bypass * 100.0));
 
 
-    ActivarGeneral->value(rkr->Bypass);
+    ActivarGeneral->value(m_process->Bypass);
 
-    if (rkr->Bypass == 0)
+    if (m_process->Bypass == 0)
     {
-        rkr->val_il_sum = -50;
-        rkr->val_ir_sum = -50;
+        m_process->val_il_sum = -50;
+        m_process->val_ir_sum = -50;
 
-        rkr->val_vl_sum = -50;
-        rkr->val_vr_sum = -50;
+        m_process->val_vl_sum = -50;
+        m_process->val_vr_sum = -50;
 
         input_vul->value(-50);
         input_vur->value(-50);
@@ -1367,7 +1367,7 @@ void RKRGUI::Put_Loaded()
   
         Legacy:
         for(i=0;i<10;i++) {
-        switch(rkr->efx_order[i]){
+        switch(m_process->efx_order[i]){
      */
 
     for (int i = 0; i < C_NUMBER_EFFECTS; i++)
@@ -1375,14 +1375,14 @@ void RKRGUI::Put_Loaded()
         // Cabinet is special
         if( i == EFX_CABINET)
         {
-            CABINET->Cabinet_output->value(rkr->lv[EFX_CABINET][Cabinet_Gain] - 64);
-            CABINET->Cabinet_preset->value(rkr->lv[EFX_CABINET][Cabinet_Preset_Idx]);
-            CABINET->Cabinet_activar->value(rkr->EFX_Bypass[EFX_CABINET]);
+            CABINET->Cabinet_output->value(m_process->lv[EFX_CABINET][Cabinet_Gain] - 64);
+            CABINET->Cabinet_preset->value(m_process->lv[EFX_CABINET][Cabinet_Preset_Idx]);
+            CABINET->Cabinet_activar->value(m_process->EFX_Bypass[EFX_CABINET]);
         }
         else
         {
             // Calls the preset callback and sets the effect to the first preset
-            Efx_Gui_Base[i]->activate_effect->value (rkr->EFX_Bypass[i]);
+            Efx_Gui_Base[i]->activate_effect->value (m_process->EFX_Bypass[i]);
             Efx_Gui_Base[i]->preset_choice->do_callback (Efx_Gui_Base[i]->preset_choice, 1);
         }
     }
@@ -1408,11 +1408,11 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         int en = search_but(Fl::event_x(), Fl::event_y());
         if (en != 1000)
         {
-            rkr->Bank[0] = rkr->Bank[en];
-            rkr->Bank[en] = rkr->Bank[num];
-            rkr->Bank[num] = rkr->Bank[0];
+            m_process->Bank[0] = m_process->Bank[en];
+            m_process->Bank[en] = m_process->Bank[num];
+            m_process->Bank[num] = m_process->Bank[0];
             Put_Loaded_Bank();
-            rkr->modified = 1;
+            m_process->modified = 1;
             num = en;
             drag = 1000;
         }
@@ -1434,7 +1434,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 
         // Check if user really wants to set the preset to the bank
         Fl_Widget *m = fl_message_icon();
-        m->parent()->copy_label(rkr->jackcliname);
+        m->parent()->copy_label(m_process->jackcliname);
         int ok = fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
         if (!ok)
         {
@@ -1445,19 +1445,19 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 
         o->value(0);
         o->redraw();
-        rkr->preset_to_bank(num);
-        w->copy_label(rkr->Preset_Name);
-        rkr->modified = 1;
+        m_process->preset_to_bank(num);
+        w->copy_label(m_process->Preset_Name);
+        m_process->modified = 1;
     }
 
 
     if ((Fl::event_button() == FL_LEFT_MOUSE) || tecla == SPACE_BAR)
     {
-        if ((num != rkr->Selected_Preset) || (rkr->new_bank_loaded))
+        if ((num != m_process->Selected_Preset) || (m_process->new_bank_loaded))
         {
             Fl_Widget *w = BankWindow->ob->child(num - 1);
-            BankWindow->unlight_preset(rkr->Selected_Preset);
-            rkr->Selected_Preset = num;
+            BankWindow->unlight_preset(m_process->Selected_Preset);
+            m_process->Selected_Preset = num;
             w->color(fl_darker(leds_color));
             Preset_Counter->value(num);
             Preset_Counter->do_callback();
@@ -1517,7 +1517,7 @@ void RKRGUI::reordena()
         for (int j = 0; j < C_NUMBER_EFFECTS; j++)
         {
             // Search the effects for the requested in main window order 
-            if (j == rkr->efx_order[i])
+            if (j == m_process->efx_order[i])
             {
                 // Sets the position in the main window
                 Efx_Gui_Base[j]->position(x[i], y[i]);
@@ -1525,24 +1525,24 @@ void RKRGUI::reordena()
                 
                 // This is the Hide/Show inactive effect button choice
                 // If it is not hide, then show all effects
-                if (!rkr->deachide)
+                if (!m_process->deachide)
                 {
                     Efx_Gui_Base[j]->show();
                 }
 
                 // Set the active status, for label highlighting
                 // If the Hide/Show button is set for hide, then show only active
-                if (rkr->EFX_Bypass[j])
+                if (m_process->EFX_Bypass[j])
                 {
-                    rkr->active[i] = 1;
+                    m_process->active[i] = 1;
 
                     // Show the active
-                    if (rkr->deachide)
+                    if (m_process->deachide)
                         Efx_Gui_Base[j]->show();
                 }
                 else
                 {
-                    rkr->active[i] = 0;
+                    m_process->active[i] = 0;
                 }
             }
         }
@@ -1551,71 +1551,71 @@ void RKRGUI::reordena()
         switch (i)
         {
             case 0:
-                L1->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L1->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L1->hide();
                 else
                     L1->show();
                 break;
             case 1:
-                L2->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L2->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L2->hide();
                 else
                     L2->show();
                 break;
             case 2:
-                L3->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L3->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L3->hide();
                 else
                     L3->show();
                 break;
             case 3:
-                L4->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L4->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L4->hide();
                 else
                     L4->show();
                 break;
             case 4:
-                L5->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L5->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L5->hide();
                 else
                     L5->show();
                 break;
             case 5:
-                L6->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L6->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L6->hide();
                 else
                     L6->show();
                 break;
             case 6:
-                L7->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L7->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L7->hide();
                 else
                     L7->show();
                 break;
             case 7:
-                L8->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L8->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L8->hide();
                 else
                     L8->show();
                 break;
             case 8:
-                L9->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L9->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L9->hide();
                 else
                     L9->show();
                 break;
             case 9:
-                L10->copy_label(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
-                if ((rkr->deachide) && (!rkr->active[i]))
+                L10->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
+                if ((m_process->deachide) && (!m_process->active[i]))
                     L10->hide();
                 else
                     L10->show();
@@ -1637,16 +1637,16 @@ void RKRGUI::show_help()
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
-    if (rkr->help_displayed == 0)
+    if (m_process->help_displayed == 0)
     {
         visor = new Fl_Help_Dialog;
 
         int x, y, w, h, k;
-        rakarrack.get(rkr->PrefNom("Help X"), x, 1);
-        rakarrack.get(rkr->PrefNom("Help Y"), y, 1);
-        rakarrack.get(rkr->PrefNom("Help W"), w, 640);
-        rakarrack.get(rkr->PrefNom("Help H"), h, 480);
-        rakarrack.get(rkr->PrefNom("Help TextSize"), k, 11);
+        rakarrack.get(m_process->PrefNom("Help X"), x, 1);
+        rakarrack.get(m_process->PrefNom("Help Y"), y, 1);
+        rakarrack.get(m_process->PrefNom("Help W"), w, 640);
+        rakarrack.get(m_process->PrefNom("Help H"), h, 480);
+        rakarrack.get(m_process->PrefNom("Help TextSize"), k, 11);
         visor->resize(x, y, w, h);
         visor->textsize((unsigned char) k);
     }
@@ -1660,7 +1660,7 @@ void RKRGUI::show_help()
     {
         fclose(file);
         visor->load(temp);
-        rkr->help_displayed = 1;
+        m_process->help_displayed = 1;
         visor->show();
     }
 }
@@ -1672,16 +1672,16 @@ void RKRGUI::show_lic()
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
-    if (rkr->help_displayed == 0)
+    if (m_process->help_displayed == 0)
     {
         visor = new Fl_Help_Dialog;
 
         int x, y, w, h, k;
-        rakarrack.get(rkr->PrefNom("Help X"), x, 1);
-        rakarrack.get(rkr->PrefNom("Help Y"), y, 1);
-        rakarrack.get(rkr->PrefNom("Help W"), w, 640);
-        rakarrack.get(rkr->PrefNom("Help H"), h, 480);
-        rakarrack.get(rkr->PrefNom("Help TextSize"), k, 11);
+        rakarrack.get(m_process->PrefNom("Help X"), x, 1);
+        rakarrack.get(m_process->PrefNom("Help Y"), y, 1);
+        rakarrack.get(m_process->PrefNom("Help W"), w, 640);
+        rakarrack.get(m_process->PrefNom("Help H"), h, 480);
+        rakarrack.get(m_process->PrefNom("Help TextSize"), k, 11);
         visor->resize(x, y, w, h);
         visor->textsize((unsigned char) k);
     }
@@ -1690,7 +1690,7 @@ void RKRGUI::show_lic()
     sprintf(temp, "%s/html/license.html", HELPDIR);
     visor->load(temp);
 
-    rkr->help_displayed = 1;
+    m_process->help_displayed = 1;
 
     visor->show();
 }
@@ -1735,7 +1735,7 @@ void RKRGUI::MiraClientes()
     const char **ports;
 
 
-    if ((ports = jack_get_ports(rkr->jackclient, NULL, JACK_DEFAULT_AUDIO_TYPE,
+    if ((ports = jack_get_ports(m_process->jackclient, NULL, JACK_DEFAULT_AUDIO_TYPE,
             JackPortIsInput)) == NULL)
     {
         fprintf(stderr, "Cannot find any Input port\n");
@@ -1761,7 +1761,7 @@ void RKRGUI::MiraClientes()
 
     const char **iports;
 
-    if ((iports = jack_get_ports(rkr->jackclient, NULL, JACK_DEFAULT_AUDIO_TYPE,
+    if ((iports = jack_get_ports(m_process->jackclient, NULL, JACK_DEFAULT_AUDIO_TYPE,
             JackPortIsOutput)) == NULL)
     {
         fprintf(stderr, "Cannot find any Output port\n");
@@ -1791,7 +1791,7 @@ void RKRGUI::MiraConfig()
         int i = 1;
         while (Settings->BMidiIn->text(i) != NULL)
         {
-            if (strcmp(Settings->BMidiIn->text(i), rkr->MID) == 0)
+            if (strcmp(Settings->BMidiIn->text(i), m_process->MID) == 0)
             {
                 Settings->BMidiIn->select(i, 1);
             }
@@ -1803,9 +1803,9 @@ void RKRGUI::MiraConfig()
         int i = 1;
         while (Settings->JackCo->text(i) != NULL)
         {
-            for (int k = 0; k < rkr->cuan_jack; k++)
+            for (int k = 0; k < m_process->cuan_jack; k++)
             {
-                if (strcmp(Settings->JackCo->text(i), rkr->jack_po[k].name) == 0)
+                if (strcmp(Settings->JackCo->text(i), m_process->jack_po[k].name) == 0)
                 {
                     Settings->JackCo->select(i, 1);
                 }
@@ -1819,9 +1819,9 @@ void RKRGUI::MiraConfig()
         int i = 1;
         while (Settings->JackIn->text(i) != NULL)
         {
-            for (int k = 0; k < rkr->cuan_ijack; k++)
+            for (int k = 0; k < m_process->cuan_ijack; k++)
             {
-                if (strcmp(Settings->JackIn->text(i), rkr->jack_poi[k].name) == 0)
+                if (strcmp(Settings->JackIn->text(i), m_process->jack_poi[k].name) == 0)
                 {
                     Settings->JackIn->select(i, 1);
                 }
@@ -1831,7 +1831,7 @@ void RKRGUI::MiraConfig()
         }
     }
 
-    if (rkr->MIDIway)
+    if (m_process->MIDIway)
     {
         Settings->Mw1->setonly();
     }
@@ -1840,70 +1840,70 @@ void RKRGUI::MiraConfig()
         Settings->Mw0->setonly();
     }
 
-    rkr->m_displayed = 0;
-    Settings->Enable_Back->value(rkr->EnableBackgroundImage);
-    Settings->Enable_DeacHide->value(rkr->deachide);
-    Settings->Enable_Scale->value(rkr->scalable);
+    m_process->m_displayed = 0;
+    Settings->Enable_Back->value(m_process->EnableBackgroundImage);
+    Settings->Enable_DeacHide->value(m_process->deachide);
+    Settings->Enable_Scale->value(m_process->scalable);
 
-    Settings->BFiname->value(rkr->BankFilename);
-    Settings->BackFiname->value(rkr->BackgroundImage);
-    Settings->Udir->value(rkr->UDirFilename);
-    Settings->Username->value(rkr->UserRealName);
-    Settings->Pre_Serve->value(rkr->actuvol);
-    Settings->LM_Volume->value(rkr->Metro_Vol);
-    Settings->Filter_DC->value(rkr->DC_Offset);
-    Settings->FLPosition->value(rkr->flpos);
-    Settings->DB6B->value(rkr->db6booster);
-    Settings->Har_Downsample->value(rkr->Har_Down);
-    Settings->Har_Down_Qua->value(rkr->Har_D_Q);
-    Settings->Har_Up_Qua->value(rkr->Har_U_Q);
-    Settings->Rev_Downsample->value(rkr->Rev_Down);
-    Settings->Rev_Down_Qua->value(rkr->Rev_D_Q);
-    Settings->Rev_Up_Qua->value(rkr->Rev_U_Q);
-    Settings->Con_Downsample->value(rkr->Con_Down);
-    Settings->Con_Down_Qua->value(rkr->Con_D_Q);
-    Settings->Con_Up_Qua->value(rkr->Con_U_Q);
-    Settings->Seq_Downsample->value(rkr->Seq_Down);
-    Settings->Seq_Down_Qua->value(rkr->Seq_D_Q);
-    Settings->Seq_Up_Qua->value(rkr->Seq_U_Q);
-    Settings->Shi_Downsample->value(rkr->Shi_Down);
-    Settings->Shi_Down_Qua->value(rkr->Shi_D_Q);
-    Settings->Shi_Up_Qua->value(rkr->Shi_U_Q);
-    Settings->Voc_Downsample->value(rkr->Voc_Down);
-    Settings->Voc_Down_Qua->value(rkr->Voc_D_Q);
-    Settings->Voc_Up_Qua->value(rkr->Voc_U_Q);
-    Settings->Ste_Downsample->value(rkr->Ste_Down);
-    Settings->Ste_Down_Qua->value(rkr->Ste_D_Q);
-    Settings->Ste_Up_Qua->value(rkr->Ste_U_Q);
+    Settings->BFiname->value(m_process->BankFilename);
+    Settings->BackFiname->value(m_process->BackgroundImage);
+    Settings->Udir->value(m_process->UDirFilename);
+    Settings->Username->value(m_process->UserRealName);
+    Settings->Pre_Serve->value(m_process->actuvol);
+    Settings->LM_Volume->value(m_process->Metro_Vol);
+    Settings->Filter_DC->value(m_process->DC_Offset);
+    Settings->FLPosition->value(m_process->flpos);
+    Settings->DB6B->value(m_process->db6booster);
+    Settings->Har_Downsample->value(m_process->Har_Down);
+    Settings->Har_Down_Qua->value(m_process->Har_D_Q);
+    Settings->Har_Up_Qua->value(m_process->Har_U_Q);
+    Settings->Rev_Downsample->value(m_process->Rev_Down);
+    Settings->Rev_Down_Qua->value(m_process->Rev_D_Q);
+    Settings->Rev_Up_Qua->value(m_process->Rev_U_Q);
+    Settings->Con_Downsample->value(m_process->Con_Down);
+    Settings->Con_Down_Qua->value(m_process->Con_D_Q);
+    Settings->Con_Up_Qua->value(m_process->Con_U_Q);
+    Settings->Seq_Downsample->value(m_process->Seq_Down);
+    Settings->Seq_Down_Qua->value(m_process->Seq_D_Q);
+    Settings->Seq_Up_Qua->value(m_process->Seq_U_Q);
+    Settings->Shi_Downsample->value(m_process->Shi_Down);
+    Settings->Shi_Down_Qua->value(m_process->Shi_D_Q);
+    Settings->Shi_Up_Qua->value(m_process->Shi_U_Q);
+    Settings->Voc_Downsample->value(m_process->Voc_Down);
+    Settings->Voc_Down_Qua->value(m_process->Voc_D_Q);
+    Settings->Voc_Up_Qua->value(m_process->Voc_U_Q);
+    Settings->Ste_Downsample->value(m_process->Ste_Down);
+    Settings->Ste_Down_Qua->value(m_process->Ste_D_Q);
+    Settings->Ste_Up_Qua->value(m_process->Ste_U_Q);
     
-    Settings->Dist_Amo->value(rkr->Dist_res_amount);
-    Settings->Dist_Up_Qua->value(rkr->Dist_up_q);
-    Settings->Dist_Down_Qua->value(rkr->Dist_down_q);
+    Settings->Dist_Amo->value(m_process->Dist_res_amount);
+    Settings->Dist_Up_Qua->value(m_process->Dist_up_q);
+    Settings->Dist_Down_Qua->value(m_process->Dist_down_q);
     
-    Settings->Ovrd_Amo->value(rkr->Ovrd_res_amount);
-    Settings->Ovrd_Up_Qua->value(rkr->Ovrd_up_q);
-    Settings->Ovrd_Down_Qua->value(rkr->Ovrd_down_q);
+    Settings->Ovrd_Amo->value(m_process->Ovrd_res_amount);
+    Settings->Ovrd_Up_Qua->value(m_process->Ovrd_up_q);
+    Settings->Ovrd_Down_Qua->value(m_process->Ovrd_down_q);
     
-    Settings->Dere_Amo->value(rkr->Dere_res_amount);
-    Settings->Dere_Up_Qua->value(rkr->Dere_up_q);
-    Settings->Dere_Down_Qua->value(rkr->Dere_down_q);
+    Settings->Dere_Amo->value(m_process->Dere_res_amount);
+    Settings->Dere_Up_Qua->value(m_process->Dere_up_q);
+    Settings->Dere_Down_Qua->value(m_process->Dere_down_q);
     
-    Settings->DBand_Amo->value(rkr->DBand_res_amount);
-    Settings->DBand_Up_Qua->value(rkr->DBand_up_q);
-    Settings->DBand_Down_Qua->value(rkr->DBand_down_q);
+    Settings->DBand_Amo->value(m_process->DBand_res_amount);
+    Settings->DBand_Up_Qua->value(m_process->DBand_up_q);
+    Settings->DBand_Down_Qua->value(m_process->DBand_down_q);
     
-    Settings->Stomp_Amo->value(rkr->Stomp_res_amount);
-    Settings->Stomp_Up_Qua->value(rkr->Stomp_up_q);
-    Settings->Stomp_Down_Qua->value(rkr->Stomp_down_q);
+    Settings->Stomp_Amo->value(m_process->Stomp_res_amount);
+    Settings->Stomp_Up_Qua->value(m_process->Stomp_up_q);
+    Settings->Stomp_Down_Qua->value(m_process->Stomp_down_q);
 
-    Settings->Calibration->value(rkr->aFreq);
-    Settings->RTrigger->value(rkr->HarmRecNote->trigfact);
-    Settings->RC_Harm_Opti->value(rkr->RCOpti_Harm);
-    Settings->RC_St_Harm_Opti->value(rkr->RCOpti_Stereo);
-    Settings->RC_Ring_Opti->value(rkr->RCOpti_Ring);
+    Settings->Calibration->value(m_process->aFreq);
+    Settings->RTrigger->value(m_process->HarmRecNote->trigfact);
+    Settings->RC_Harm_Opti->value(m_process->RCOpti_Harm);
+    Settings->RC_St_Harm_Opti->value(m_process->RCOpti_Stereo);
+    Settings->RC_Ring_Opti->value(m_process->RCOpti_Ring);
 
 
-    switch (rkr->VocBands)
+    switch (m_process->VocBands)
     {
         case 16:
             Settings->Voc_Bands->value(0);
@@ -1924,29 +1924,29 @@ void RKRGUI::MiraConfig()
     }
 
 
-    Settings->MTable->value(rkr->midi_table);
+    Settings->MTable->value(m_process->midi_table);
 
-    Settings->AAssign->value(rkr->autoassign);
-    Settings->Update_TAP->value(rkr->Tap_Updated);
-    Settings->INSTATE->value(rkr->init_state);
-    Settings->UPSAMPLE_C->value(rkr->upsample);
-    Settings->Upr_Qual->value(rkr->UpQual);
-    Settings->Downr_Qual->value(rkr->DownQual);
-    Settings->MESSAGE_DISABLE->value(rkr->Disable_Warnings);
-    Settings->ENA_TOOL->value(rkr->ena_tool);
-    Settings->T_TIMEOUT->value(rkr->t_timeout);
+    Settings->AAssign->value(m_process->autoassign);
+    Settings->Update_TAP->value(m_process->Tap_Updated);
+    Settings->INSTATE->value(m_process->init_state);
+    Settings->UPSAMPLE_C->value(m_process->upsample);
+    Settings->Upr_Qual->value(m_process->UpQual);
+    Settings->Downr_Qual->value(m_process->DownQual);
+    Settings->MESSAGE_DISABLE->value(m_process->Disable_Warnings);
+    Settings->ENA_TOOL->value(m_process->ena_tool);
+    Settings->T_TIMEOUT->value(m_process->t_timeout);
 
-    Settings->Upr_Amo->value(rkr->UpAmo);
-    Settings->L_SIZE->value(rkr->looper_size);
-    Settings->D_A_Connect->value(rkr->aconnect_MI);
-    Settings->D_J_Connect->value(rkr->aconnect_JA);
-    Settings->D_IJ_Connect->value(rkr->aconnect_JIA);
+    Settings->Upr_Amo->value(m_process->UpAmo);
+    Settings->L_SIZE->value(m_process->looper_size);
+    Settings->D_A_Connect->value(m_process->aconnect_MI);
+    Settings->D_J_Connect->value(m_process->aconnect_JA);
+    Settings->D_IJ_Connect->value(m_process->aconnect_JIA);
 
-    Settings->Midi_In_Counter->value(rkr->MidiCh + 1);
-    Settings->Har_In_Counter->value(rkr->HarCh + 1);
-    Settings->Stereo_Har_In_Counter->value(rkr->StereoHarCh + 1);
+    Settings->Midi_In_Counter->value(m_process->MidiCh + 1);
+    Settings->Har_In_Counter->value(m_process->HarCh + 1);
+    Settings->Stereo_Har_In_Counter->value(m_process->StereoHarCh + 1);
 
-    switch (rkr->HarQual)
+    switch (m_process->HarQual)
     {
         case 4:
             Settings->Har_Qual->value(0);
@@ -1965,7 +1965,7 @@ void RKRGUI::MiraConfig()
             break;
     }
 
-    switch (rkr->SteQual)
+    switch (m_process->SteQual)
     {
         case 4:
             Settings->Ste_Qual->value(0);
@@ -1984,7 +1984,7 @@ void RKRGUI::MiraConfig()
             break;
     }
     
-    switch (rkr->SeqQual)
+    switch (m_process->SeqQual)
     {
         case 4:
             Settings->Seq_Qual->value(0);
@@ -2003,7 +2003,7 @@ void RKRGUI::MiraConfig()
             break;
     }
 
-    switch (rkr->ShiQual)
+    switch (m_process->ShiQual)
     {
         case 4:
             Settings->Shi_Qual->value(0);
@@ -2023,7 +2023,7 @@ void RKRGUI::MiraConfig()
     }
 
 
-    if (rkr->aconnect_MI)
+    if (m_process->aconnect_MI)
     {
         Settings->BMidiIn->activate();
     }
@@ -2032,7 +2032,7 @@ void RKRGUI::MiraConfig()
         Settings->BMidiIn->deactivate();
     }
 
-    if (rkr->aconnect_JA)
+    if (m_process->aconnect_JA)
     {
         Settings->JackCo->activate();
     }
@@ -2041,7 +2041,7 @@ void RKRGUI::MiraConfig()
         Settings->JackCo->deactivate();
     }
 
-    if (rkr->aconnect_JIA)
+    if (m_process->aconnect_JIA)
     {
         Settings->JackIn->activate();
     }
@@ -2052,7 +2052,7 @@ void RKRGUI::MiraConfig()
 
     Fl_Menu_Item *p;
     Fl_Menu_Item *Har = Settings->get_menu_Har_Downsample();
-    unsigned int SR_value = rkr->sample_rate;
+    unsigned int SR_value = m_process->sample_rate;
 
     for (int j = 0; j < Har->size(); j++)
     {
@@ -2061,7 +2061,7 @@ void RKRGUI::MiraConfig()
         switch (j)
         {
             case 0:
-                SR_value = rkr->sample_rate;
+                SR_value = m_process->sample_rate;
                 break;
             case 1:
                 SR_value = 96000;
@@ -2092,7 +2092,7 @@ void RKRGUI::MiraConfig()
                 break;
         }
 
-        if ((j > 0) && ((unsigned int) rkr->sample_rate <= SR_value))
+        if ((j > 0) && ((unsigned int) m_process->sample_rate <= SR_value))
         {
             p->deactivate();
         }
@@ -2136,7 +2136,7 @@ void RKRGUI::MiraConfig()
         Settings->Font_Bro->add(name);
     }
 
-    Settings->Font_Bro->value(rkr->font + 1);
+    Settings->Font_Bro->value(m_process->font + 1);
 }
 
 void RKRGUI::BankWin_Label(const char *filename)
@@ -2145,7 +2145,7 @@ void RKRGUI::BankWin_Label(const char *filename)
     char tmp[256];
 
     memset(tmp, 0, sizeof (tmp));
-    sprintf(tmp, "%s   v%s - Bank Manager - %s", rkr->jackcliname, VERSION, fl_filename_name(filename));
+    sprintf(tmp, "%s   v%s - Bank Manager - %s", m_process->jackcliname, VERSION, fl_filename_name(filename));
     BankWindow->copy_label(tmp);
 }
 
@@ -2153,10 +2153,10 @@ void RKRGUI::is_modified()
 {
     // popup dialog for modified bank saving
 
-    if (rkr->modified)
+    if (m_process->modified)
     {
         Fl_Widget *w = fl_message_icon();
-        w->parent()->copy_label(rkr->jackcliname);
+        w->parent()->copy_label(m_process->jackcliname);
 
         int ok = fl_choice("Bank was modified, but not saved", "Discard", "Save", NULL);
 
@@ -2183,7 +2183,7 @@ void RKRGUI::Put_Loaded_Bank()
         long long temp = (long long) w->user_data();
         if (temp > 0)
         {
-            w->copy_label(rkr->Bank[k].Preset_Name);
+            w->copy_label(m_process->Bank[k].Preset_Name);
             k++;
         }
     }
@@ -2201,31 +2201,31 @@ void RKRGUI::Chord(int eff)
     switch (eff)
     {
         case 0:
-            tipo = rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord);
-            undi = rkr->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note);
+            tipo = m_process->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Chord);
+            undi = m_process->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Note);
             break;
         case 1:
-            tipo = rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord);
-            undi = rkr->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note);
+            tipo = m_process->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Chord);
+            undi = m_process->Rack_Effects[EFX_STEREOHARM]->getpar(Sharm_Note);
             break;
     }
 
 
     if (eff == 0)
     {
-        sprintf(rkr->RC_Harm->NombreAcorde, "%s%s", rkr->RC_Harm->NCE[undi].Nom, rkr->RC_Harm->ChN[tipo].Nom);
+        sprintf(m_process->RC_Harm->NombreAcorde, "%s%s", m_process->RC_Harm->NCE[undi].Nom, m_process->RC_Harm->ChN[tipo].Nom);
 
-        rkr->RC_Harm->ctipo = tipo;
-        rkr->RC_Harm->fundi = undi;
-        rkr->RC_Harm->cc = 1;
+        m_process->RC_Harm->ctipo = tipo;
+        m_process->RC_Harm->fundi = undi;
+        m_process->RC_Harm->cc = 1;
     }
     else
     {
-        sprintf(rkr->RC_Stereo_Harm->NombreAcorde, "%s%s", rkr->RC_Stereo_Harm->NCE[undi].Nom, rkr->RC_Stereo_Harm->ChN[tipo].Nom);
+        sprintf(m_process->RC_Stereo_Harm->NombreAcorde, "%s%s", m_process->RC_Stereo_Harm->NCE[undi].Nom, m_process->RC_Stereo_Harm->ChN[tipo].Nom);
 
-        rkr->RC_Stereo_Harm->ctipo = tipo;
-        rkr->RC_Stereo_Harm->fundi = undi;
-        rkr->RC_Stereo_Harm->cc = 1;
+        m_process->RC_Stereo_Harm->ctipo = tipo;
+        m_process->RC_Stereo_Harm->fundi = undi;
+        m_process->RC_Stereo_Harm->cc = 1;
     }
 }
 
@@ -2235,7 +2235,7 @@ void RKRGUI::Chord(int eff)
 void RKRGUI::MIDI_control_gui_refresh()
 {
     // Mvalue is flag to indicate at least one parameter needs update
-    if (!rkr->Mvalue)
+    if (!m_process->Mvalue)
         return;
 
     // Index starts at 1, since case 0 is unused
@@ -2243,7 +2243,7 @@ void RKRGUI::MIDI_control_gui_refresh()
     {
         // Mcontrol is flag for each individual parameter
         // 1 = the parameter needs update, 0 = no update needed
-        if (!rkr->Mcontrol[mc_index])
+        if (!m_process->Mcontrol[mc_index])
         {
             continue;   // No gui update needed
         }
@@ -2252,30 +2252,30 @@ void RKRGUI::MIDI_control_gui_refresh()
         switch(mc_index)
         {
             case MC_Output_Volume:
-                rkr->Mcontrol[mc_index] = 0;   // clear the parameter flag
-                Nivel_Salida->value((int) (rkr->Master_Volume * 100.0) - 50);
+                m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
+                Nivel_Salida->value((int) (m_process->Master_Volume * 100.0) - 50);
                 Nivel_Salida->redraw();
                 break;
 
             case MC_Balance_FX:
-                rkr->Mcontrol[mc_index] = 0;   // clear the parameter flag
-                Balance->value(rkr->Fraction_Bypass * 100.0);
+                m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
+                Balance->value(m_process->Fraction_Bypass * 100.0);
                 Balance->redraw();
                 break;
 
             case MC_Input_Volume:
-                rkr->Mcontrol[mc_index] = 0;   // clear the parameter flag
-                Nivel_Entrada->value((int) (rkr->Input_Gain * 100.0) - 50);
+                m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
+                Nivel_Entrada->value((int) (m_process->Input_Gain * 100.0) - 50);
                 Nivel_Entrada->redraw();
                 break;
 
             case MC_Multi_On_Off:
-                rkr->Mcontrol[mc_index] = 0;   // clear the parameter flag
+                m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
                 ActOnOff();
                 break;
         }
         
-        if (!rkr->Mcontrol[mc_index])
+        if (!m_process->Mcontrol[mc_index])
         {
             continue;   // We found it in above special cases
         }
@@ -2284,13 +2284,13 @@ void RKRGUI::MIDI_control_gui_refresh()
         for (int param_index = 0; param_index < C_MC_PARAMETER_SIZE; param_index++)
         {
             // Find the effect parameter that needs update
-            if(rkr->mc_efx_params[param_index].MC_params_index == mc_index)
+            if(m_process->mc_efx_params[param_index].MC_params_index == mc_index)
             {
-                rkr->Mcontrol[mc_index] = 0;   // clear the parameter flag
+                m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
                 
                 // Get the effect and parameter
-                int effect_index = rkr->mc_efx_params[param_index].Effect_index;
-                int efx_param_index = rkr->mc_efx_params[param_index].Efx_param_index;
+                int effect_index = m_process->mc_efx_params[param_index].Effect_index;
+                int efx_param_index = m_process->mc_efx_params[param_index].Efx_param_index;
 
                 // Tell the gui effect to update the parameter
                 Efx_Gui_Base[effect_index]->parameter_refresh (efx_param_index);
@@ -2300,7 +2300,7 @@ void RKRGUI::MIDI_control_gui_refresh()
     }
 
     // Clear the flag
-    rkr->Mvalue = 0;
+    m_process->Mvalue = 0;
 }
 
 /**
@@ -2310,27 +2310,27 @@ void RKRGUI::ActOnOff()
 {
     int miralo = 0;
 
-    while (rkr->OnOffC > 0)
+    while (m_process->OnOffC > 0)
     {
-        if (rkr->Mnumeff[rkr->OnOffC] > 2000)
+        if (m_process->Mnumeff[m_process->OnOffC] > 2000)
         {
-            miralo = rkr->Mnumeff[rkr->OnOffC] - 2000;
+            miralo = m_process->Mnumeff[m_process->OnOffC] - 2000;
         }
-        else if (rkr->Mnumeff[rkr->OnOffC] >= 1000)
+        else if (m_process->Mnumeff[m_process->OnOffC] >= 1000)
         {
-            miralo = rkr->Mnumeff[rkr->OnOffC] - 1000;
+            miralo = m_process->Mnumeff[m_process->OnOffC] - 1000;
         }
         else    // efx_order[] is limited by C_NUMBER_ORDERED_EFFECTS
         {
-            miralo = rkr->efx_order[rkr->Mnumeff[rkr->OnOffC]];
+            miralo = m_process->efx_order[m_process->Mnumeff[m_process->OnOffC]];
         }
         
         // Check for rack effects
         if (miralo < C_NUMBER_EFFECTS)
         {
-            Efx_Gui_Base[miralo]->activate_effect->value (rkr->EFX_Bypass[miralo]);
+            Efx_Gui_Base[miralo]->activate_effect->value (m_process->EFX_Bypass[miralo]);
             Efx_Gui_Base[miralo]->activate_effect->do_callback ();
-            rkr->OnOffC--;
+            m_process->OnOffC--;
             continue;
         }
         else
@@ -2338,25 +2338,25 @@ void RKRGUI::ActOnOff()
             switch (miralo)
             {
                 case EFX_TAP_TEMPO_ON_OFF:
-                    Tap_activar->value(rkr->Tap_Bypass);
+                    Tap_activar->value(m_process->Tap_Bypass);
                     Tap_activar->do_callback();
                     break;
                 case EFX_MIDI_CONVERTER_ON_OFF:
-                    MIDI->midi_activar->value(rkr->MIDIConverter_Bypass);
+                    MIDI->midi_activar->value(m_process->MIDIConverter_Bypass);
                     MIDI->midi_activar->do_callback();
                     break;
                 case EFX_TUNER_ON_OFF:
-                    tuner_activar->value(rkr->Tuner_Bypass);
+                    tuner_activar->value(m_process->Tuner_Bypass);
                     tuner_activar->do_callback();
                     break;
                 case EFX_MASTER_ON_OFF:
-                    ActivarGeneral->value(rkr->Bypass);
+                    ActivarGeneral->value(m_process->Bypass);
                     ActivarGeneral->do_callback();
                     break;
             }
         }
 
-        rkr->OnOffC--;
+        m_process->OnOffC--;
     }
 }
 
@@ -2364,9 +2364,9 @@ void RKRGUI::PutBackground()
 {
     // Put selected .png background image on everything
     delete back;
-    back = new Fl_Tiled_Image(new Fl_PNG_Image(rkr->BackgroundImage), 3200, 2400);
+    back = new Fl_Tiled_Image(new Fl_PNG_Image(m_process->BackgroundImage), 3200, 2400);
     
-    if (!rkr->EnableBackgroundImage)
+    if (!m_process->EnableBackgroundImage)
     {
         back->color_average(back_color, 0.0);
     }
@@ -2422,7 +2422,7 @@ void RKRGUI::chfsize(int font_size)
      * This variable should only be adjusted here. */
     if(font_size)
     {
-        global_font_size = rkr->fontsize = font_size;
+        global_font_size = m_process->fontsize = font_size;
     }
 
     /* Sort through widgets and adjust font colors and type */
@@ -2481,7 +2481,7 @@ void RKRGUI::chfsize(int font_size)
                 }
 
                 c->color(fore_color);
-                c->labelfont(rkr->font);
+                c->labelfont(m_process->font);
             }
         }
     }
@@ -2503,71 +2503,71 @@ void RKRGUI::ChangeActives()
     Fl_Color off = fl_darker(label_color);
 
 
-    if (rkr->active[0])
+    if (m_process->active[0])
         L1->labelcolor(on);
     else
         L1->labelcolor(off);
-    if (rkr->active[1])
+    if (m_process->active[1])
         L2->labelcolor(on);
     else
         L2->labelcolor(off);
-    if (rkr->active[2])
+    if (m_process->active[2])
         L3->labelcolor(on);
     else
         L3->labelcolor(off);
-    if (rkr->active[3])
+    if (m_process->active[3])
         L4->labelcolor(on);
     else
         L4->labelcolor(off);
-    if (rkr->active[4])
+    if (m_process->active[4])
         L5->labelcolor(on);
     else
         L5->labelcolor(off);
-    if (rkr->active[5])
+    if (m_process->active[5])
         L6->labelcolor(on);
     else
         L6->labelcolor(off);
-    if (rkr->active[6])
+    if (m_process->active[6])
         L7->labelcolor(on);
     else
         L7->labelcolor(off);
-    if (rkr->active[7])
+    if (m_process->active[7])
         L8->labelcolor(on);
     else
         L8->labelcolor(off);
-    if (rkr->active[8])
+    if (m_process->active[8])
         L9->labelcolor(on);
     else
         L9->labelcolor(off);
-    if (rkr->active[9])
+    if (m_process->active[9])
         L10->labelcolor(on);
     else
         L10->labelcolor(off);
 
 
 
-    if (rkr->MIDIConverter_Bypass)
+    if (m_process->MIDIConverter_Bypass)
         MIDI->MIDI_LABEL->labelcolor(on);
     else
         MIDI->MIDI_LABEL->labelcolor(off);
-    if (rkr->Metro_Bypass)
+    if (m_process->Metro_Bypass)
         Metro_Label->labelcolor(on);
     else
         Metro_Label->labelcolor(off);
-    if (rkr->Tap_Bypass)
+    if (m_process->Tap_Bypass)
         TAP_LABEL->labelcolor(on);
     else
         TAP_LABEL->labelcolor(off);
-    if (rkr->Tuner_Bypass)
+    if (m_process->Tuner_Bypass)
         TUNER_LABEL->labelcolor(on);
     else
         TUNER_LABEL->labelcolor(off);
-    if (rkr->Bypass)
+    if (m_process->Bypass)
         LABEL_IO->labelcolor(on);
     else
         LABEL_IO->labelcolor(off);
 
-    if ((rkr->upsample) && (rkr->Bypass))
+    if ((m_process->upsample) && (m_process->Bypass))
     {
         UPS_LED->color(leds_color);
         UPS_LED->redraw();
@@ -2591,9 +2591,9 @@ void RKRGUI::findpos(int num, int value, Fl_Widget*)
 
     for (i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        if (rkr->efx_order[i] == num)
+        if (m_process->efx_order[i] == num)
         {
-            rkr->active[i] = value;
+            m_process->active[i] = value;
             break;
         }
     }
@@ -2687,17 +2687,17 @@ void RKRGUI::findpos(int num, int value, Fl_Widget*)
 void RKRGUI::Put_Skin()
 {
     // adjust based on theme selected in settings-look
-    Principal->resize(Principal->x(), Principal->y(), rkr->swidth, rkr->sheight);
+    Principal->resize(Principal->x(), Principal->y(), m_process->swidth, m_process->sheight);
 
-    back_color = (Fl_Color) rkr->sback_color;
-    fore_color = (Fl_Color) rkr->sfore_color;
-    leds_color = (Fl_Color) rkr->sleds_color;
-    label_color = (Fl_Color) rkr->slabel_color;
+    back_color = (Fl_Color) m_process->sback_color;
+    fore_color = (Fl_Color) m_process->sfore_color;
+    leds_color = (Fl_Color) m_process->sleds_color;
+    label_color = (Fl_Color) m_process->slabel_color;
 
-    Settings->scheme_ch->value(rkr->sschema);
+    Settings->scheme_ch->value(m_process->sschema);
     Settings->scheme_ch->do_callback();
     PutBackground();
-    chfsize(rkr->fontsize);
+    chfsize(m_process->fontsize);
     Leds_Color_Change(leds_color);
     Buttons_Color_Change(fore_color);
 
@@ -2713,28 +2713,28 @@ void RKRGUI::FillML(/*int type*/)
     memset(tmp, 0, sizeof (tmp));
 
 
-    sprintf(tmp, "%s   v%s - MIDI Learn - Preset : %s", rkr->jackcliname, VERSION, rkr->Bank[rkr->Selected_Preset].Preset_Name);
+    sprintf(tmp, "%s   v%s - MIDI Learn - Preset : %s", m_process->jackcliname, VERSION, m_process->Bank[m_process->Selected_Preset].Preset_Name);
     MIDILearn->copy_label(tmp);
 
-    memset(rkr->ML_clist, 0, sizeof (rkr->ML_clist));
+    memset(m_process->ML_clist, 0, sizeof (m_process->ML_clist));
     MIDILearn->Epar->clear();
     
     int k = 0;
 
-    switch (rkr->ML_filter)
+    switch (m_process->ML_filter)
     {
         case 0:
             for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
-                MIDILearn->Epar->add(rkr->mc_efx_params[i].Description);
+                MIDILearn->Epar->add(m_process->mc_efx_params[i].Description);
             break;
 
         case 1:
             for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
             {
-                if (rkr->mc_efx_params[i].Effect_index == EFX_MASTER)
+                if (m_process->mc_efx_params[i].Effect_index == EFX_MASTER)
                 {
-                    MIDILearn->Epar->add(rkr->mc_efx_params[i].Description);
-                    rkr->ML_clist[k] = rkr->mc_efx_params[i].MC_params_index;
+                    MIDILearn->Epar->add(m_process->mc_efx_params[i].Description);
+                    m_process->ML_clist[k] = m_process->mc_efx_params[i].MC_params_index;
                     k++;
                 }
             }
@@ -2743,10 +2743,10 @@ void RKRGUI::FillML(/*int type*/)
             {
                 for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
                 {
-                    if (rkr->mc_efx_params[i].Effect_index == rkr->efx_order[j])
+                    if (m_process->mc_efx_params[i].Effect_index == m_process->efx_order[j])
                     {
-                        MIDILearn->Epar->add(rkr->mc_efx_params[i].Description);
-                        rkr->ML_clist[k] = rkr->mc_efx_params[i].MC_params_index;
+                        MIDILearn->Epar->add(m_process->mc_efx_params[i].Description);
+                        m_process->ML_clist[k] = m_process->mc_efx_params[i].MC_params_index;
                         k++;
                     }
                 }
@@ -2760,10 +2760,10 @@ void RKRGUI::FillML(/*int type*/)
     MIDILearn->TPresets->clear();
     for (int i = 1; i <= 60; i++)
     {
-        MIDILearn->TPresets->add(rkr->Bank[i].Preset_Name);
+        MIDILearn->TPresets->add(m_process->Bank[i].Preset_Name);
     }
 
-    MIDILearn->TPresets->select(rkr->Selected_Preset, 1);
+    MIDILearn->TPresets->select(m_process->Selected_Preset, 1);
     MIDILearn->TPresets->redraw();
 
     DisAssigns();
@@ -2780,13 +2780,13 @@ void RKRGUI::DisAssigns()
 
     if ((int) MIDILearn->Epar->value())
     {
-        if (rkr->ML_filter == 0)
+        if (m_process->ML_filter == 0)
         {
-            the_one = rkr->mc_efx_params[(int) MIDILearn->Epar->value() - 1].MC_params_index;
+            the_one = m_process->mc_efx_params[(int) MIDILearn->Epar->value() - 1].MC_params_index;
         }
         else
         {
-            the_one = rkr->ML_clist[(int) MIDILearn->Epar->value() - 1];
+            the_one = m_process->ML_clist[(int) MIDILearn->Epar->value() - 1];
         }
     }
 
@@ -2796,7 +2796,7 @@ void RKRGUI::DisAssigns()
     {
         for (int j = 0; j < 20; j++)
         {
-            if (rkr->XUserMIDI[i][j] == the_one)
+            if (m_process->XUserMIDI[i][j] == the_one)
             {
                 k++;
                 memset(tmp, 0, sizeof (tmp));
@@ -3027,12 +3027,12 @@ void RKRGUI::Prepare_Order()
 
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        rkr->new_order[i] = rkr->efx_order[i];
-        rkr->saved_order[i] = rkr->efx_order[i];
-        Order->Order_Bro->add(rkr->efx_names[Busca_Eff(rkr->efx_order[i])].Nom);
+        m_process->new_order[i] = m_process->efx_order[i];
+        m_process->saved_order[i] = m_process->efx_order[i];
+        Order->Order_Bro->add(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
     }
 
-    Fill_Avail(rkr->Effect_Type_Filter);
+    Fill_Avail(m_process->Effect_Type_Filter);
 
     Order->Order_Bro->select(1);
 }
@@ -3040,18 +3040,18 @@ void RKRGUI::Prepare_Order()
 void RKRGUI::Show_Next_Time()
 {
     // popup for settings changes that will not take effect until restart
-    if (rkr->Disable_Warnings)
+    if (m_process->Disable_Warnings)
         return;
 
     Fl_Widget *w = fl_message_icon();
-    w->parent()->copy_label(rkr->jackcliname);
+    w->parent()->copy_label(m_process->jackcliname);
     fl_message("This setting will be changed the next time you run rakarrack-plus");
 }
 
 void RKRGUI::update_looper()
 {
     // update looper
-    Looper *Efx_Looper = static_cast <Looper*> (rkr->Rack_Effects[EFX_LOOPER]);
+    Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
     Efx_Looper->getstate();
 
     LOOPER->looper_play->value(Efx_Looper->progstate[0]);
@@ -3088,7 +3088,7 @@ void RKRGUI::update_tap_tempo_GUI()
 {
     for(int efx_index = 0; efx_index < C_NUMBER_EFFECTS; efx_index++)
     {
-        if (rkr->EFX_Bypass[efx_index])
+        if (m_process->EFX_Bypass[efx_index])
         {
             Efx_Gui_Base[efx_index]->tap_tempo_update ();
         }
@@ -3103,25 +3103,25 @@ void RKRGUI::ActACI()
     float gain = 0.0;
     float tmp = 0.0;
 
-    switch (rkr->Aux_Source)
+    switch (m_process->Aux_Source)
     {
         case 0:
-            gain = dB2rap(75.0f * (float) rkr->Aux_Gain / 127.0f);
-            tmp = rkr->val_a_sum * gain;
+            gain = dB2rap(75.0f * (float) m_process->Aux_Gain / 127.0f);
+            tmp = m_process->val_a_sum * gain;
             break;
         case 1:
-            gain = (float) rkr->Aux_Gain / 127.0f;
-            tmp = dB2rap(rkr->val_il_sum) * 12.0f * gain;
+            gain = (float) m_process->Aux_Gain / 127.0f;
+            tmp = dB2rap(m_process->val_il_sum) * 12.0f * gain;
             break;
         case 2:
-            gain = (float) rkr->Aux_Gain / 127.0f;
-            tmp = dB2rap(rkr->val_ir_sum) * 12.0f * gain;
+            gain = (float) m_process->Aux_Gain / 127.0f;
+            tmp = dB2rap(m_process->val_ir_sum) * 12.0f * gain;
             break;
     }
 
     float aux_vulevel = (float) CLAMP(rap2dB(tmp), -48.0, 15.0);
 
-    float threshold = (float) rkr->Aux_Threshold;
+    float threshold = (float) m_process->Aux_Threshold;
     Trigger->aux_vu->value(aux_vulevel);
 
     if (aux_vulevel < threshold)
@@ -3130,20 +3130,20 @@ void RKRGUI::ActACI()
     if (tmp > 1.0)
         tmp = 1.0f;
 
-    int amax = rkr->Aux_Maximum;
-    int amin = rkr->Aux_Minimum;
+    int amax = m_process->Aux_Maximum;
+    int amin = m_process->Aux_Minimum;
 
     int value = amin + lrintf((float) (amax - amin) * tmp);
 
-    if (value != rkr->last_auxvalue)
+    if (value != m_process->last_auxvalue)
     {
-        if (rkr->MIDIway)
+        if (m_process->MIDIway)
         {
             for (int i = 0; i < 20; i++)
             {
-                if (rkr->XUserMIDI[rkr->Aux_MIDI][i])
+                if (m_process->XUserMIDI[m_process->Aux_MIDI][i])
                 {
-                    rkr->process_midi_controller_events(rkr->XUserMIDI[rkr->Aux_MIDI][i], value);
+                    m_process->process_midi_controller_events(m_process->XUserMIDI[m_process->Aux_MIDI][i], value);
                 }
                 else
                     break;
@@ -3151,10 +3151,10 @@ void RKRGUI::ActACI()
         }
         else
         {
-            rkr->process_midi_controller_events(rkr->Aux_MIDI, value);
+            m_process->process_midi_controller_events(m_process->Aux_MIDI, value);
         }
 
-        rkr->last_auxvalue = value;
+        m_process->last_auxvalue = value;
     }
 }
 
@@ -3165,7 +3165,7 @@ int RKRGUI::Busca_Eff(int num)
 
     for (i = 0; i < C_NUMBER_EFFECTS; i++)
     {
-        if (rkr->efx_names[i].Pos == num)
+        if (m_process->efx_names[i].Pos == num)
         {
             break;
         }
@@ -3187,7 +3187,7 @@ void RKRGUI::Fill_Avail(int filter)
         int k = 0;
         for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
         {
-            if (rkr->new_order[j] == rkr->efx_names[i].Pos)
+            if (m_process->new_order[j] == m_process->efx_names[i].Pos)
             {
                 k = 1;
             }
@@ -3195,10 +3195,10 @@ void RKRGUI::Fill_Avail(int filter)
 
         if (!k)
         {
-            if ((rkr->efx_names[i].Type & rkr->Effect_Type_Filter) == filter)
+            if ((m_process->efx_names[i].Type & m_process->Effect_Type_Filter) == filter)
             {
-                Order->Avail_Bro->add(rkr->efx_names[i].Nom);
-                rkr->availables[t] = rkr->efx_names[i].Pos;
+                Order->Avail_Bro->add(m_process->efx_names[i].Nom);
+                m_process->availables[t] = m_process->efx_names[i].Pos;
                 t++;
             }
         }
@@ -3313,7 +3313,7 @@ void RKRGUI::Scan_Bank_Dir()
     Set_Bank(DATADIR);
     
     /* Scan User Directory for Bank files */
-    Set_Bank(rkr->UDirFilename);
+    Set_Bank(m_process->UDirFilename);
     
     BankWindow->CH_UB->value(0);
 }
@@ -3345,7 +3345,7 @@ void RKRGUI::Set_Bank(std::string directory)
             
             AddBankName(nombank);
             
-            if (rkr->CheckOldBank(nombank) == 0)
+            if (m_process->CheckOldBank(nombank) == 0)
             {
                 /* Get the name to be listed in the drop down "User Banks" menu */
                 std::string s_nombre = fs->d_name;
@@ -3494,11 +3494,11 @@ void RKRGUI::check_signals(void *usrPtr)
 
     if (got_sigusr1 == SIGUSR1)
     {
-        if (!gui->rkr->File_To_Load.empty()) // individual preset
+        if (!gui->m_process->File_To_Load.empty()) // individual preset
         {
-            printf("Saving file: %s\n", gui->rkr->File_To_Load.c_str());
+            printf("Saving file: %s\n", gui->m_process->File_To_Load.c_str());
             got_sigusr1 = 0;
-            gui->rkr->save_preset(gui->rkr->File_To_Load.c_str());
+            gui->m_process->save_preset(gui->m_process->File_To_Load.c_str());
         }
         return;
     }
@@ -3507,7 +3507,7 @@ void RKRGUI::check_signals(void *usrPtr)
     {
         printf("Got SIGTERM, quitting...\n");
         got_sigint = 0;
-        gui->rkr->Exit_Program = 1;
+        gui->m_process->Exit_Program = 1;
     }
 }
 
@@ -3520,7 +3520,7 @@ void RKRGUI::check_signals(void *usrPtr)
  *  in Settings/Preferences/MIDI/Midi Learn - Really confusing when
  *  it pops up but nothing happens when set. The menu item for Midi Learn
  *  is set inactive unless the box is checked as well. For consistency here,
- *  if (!rkr->MIDIway)
+ *  if (!m_process->MIDIway)
  *      return;
  * 
  * @param num
@@ -3529,21 +3529,21 @@ void RKRGUI::check_signals(void *usrPtr)
 void RKRGUI::getMIDIControl(int num)
 {
     // Don't pop up the midi learn window unless the user checked the box.
-    if (!rkr->MIDIway)
+    if (!m_process->MIDIway)
         return;
 
     int i = 0;
-    rkr->comemouse = 1;
+    m_process->comemouse = 1;
     PrepareML();
     while (i < MIDILearn->Epar->size())
     {
-        if ((rkr->ML_filter == 0) && (rkr->mc_efx_params[i].MC_params_index == num))
+        if ((m_process->ML_filter == 0) && (m_process->mc_efx_params[i].MC_params_index == num))
         {
             MIDILearn->Epar->select(i + 1);
             break;
         }
 
-        if ((rkr->ML_filter == 1) && (rkr->ML_clist[i] == num))
+        if ((m_process->ML_filter == 1) && (m_process->ML_clist[i] == num))
         {
             MIDILearn->Epar->select(i + 1);
             break;
@@ -3560,16 +3560,16 @@ void RKRGUI::PrepareML()
 {
     // PrepareML
     FillML();
-    if (rkr->comemouse == 0)
+    if (m_process->comemouse == 0)
     {
         MIDILearn->show();
         put_icon(MIDILearn);
         return;
     }
 
-    if (rkr->comemouse)
+    if (m_process->comemouse)
     {
-        if (rkr->autoassign == 0)
+        if (m_process->autoassign == 0)
         {
             MIDILearn->show();
             put_icon(MIDILearn);
@@ -3592,7 +3592,7 @@ inline void RKRGUI::addpreset(Fl_Widget *w, int num)
     memset(NewName, 0, sizeof (NewName));
     sprintf(NewName, "*%s", name);
     add_name(w, NewName);
-    rkr->save_insert_preset(num, NewName);
+    m_process->save_insert_preset(num, NewName);
 }
 
 void RKRGUI::add_name(Fl_Widget *w, char *name)
@@ -3700,17 +3700,17 @@ inline void RKRGUI::delpreset(Fl_Widget *w, int num)
     s->remove(s->value());
     s->value(0);
     s->redraw();
-    rkr->delete_insert_preset(num, Rname);
+    m_process->delete_insert_preset(num, Rname);
 }
 
 void RKRGUI::Prep_Reorden(int source, int dest)
 {
     // Prepare Reorden
-    int x = rkr->efx_order[source];
-    int y = rkr->efx_order[dest];
+    int x = m_process->efx_order[source];
+    int y = m_process->efx_order[dest];
 
-    rkr->efx_order[source] = y;
-    rkr->efx_order[dest] = x;
+    m_process->efx_order[source] = y;
+    m_process->efx_order[dest] = x;
 
     reordena();
 
@@ -3730,8 +3730,8 @@ inline void RKRGUI::bank_click_i(Fl_Choice* o, void*)
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
-    rkr->M_table[num - c_bank_used].bank = (int) o->value();
-    Settings->fill_mptable(num + c_bank_used, rkr->M_table[num - c_bank_used].bank);
+    m_process->M_table[num - c_bank_used].bank = (int) o->value();
+    Settings->fill_mptable(num + c_bank_used, m_process->M_table[num - c_bank_used].bank);
 }
 
 void RKRGUI::p_click(Fl_Choice* o, void* v)
@@ -3746,7 +3746,7 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
-    rkr->M_table[num - c_preset_used].preset = o->value();
+    m_process->M_table[num - c_preset_used].preset = o->value();
 }
 
 void RKRGUI::RandomPreset()
@@ -3780,23 +3780,23 @@ void RKRGUI::RandomPreset()
 
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        rkr->efx_order[i] = SelEff[i];
+        m_process->efx_order[i] = SelEff[i];
     }
 
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        int rack_effect = rkr->efx_order[i];
+        int rack_effect = m_process->efx_order[i];
 
         if (i < numEff)
         {
-            rkr->EFX_Bypass[rack_effect] = 1;
+            m_process->EFX_Bypass[rack_effect] = 1;
         }
         else
         {
-            rkr->EFX_Bypass[rack_effect] = 0;
+            m_process->EFX_Bypass[rack_effect] = 0;
         }
         
-        Efx_Gui_Base[rack_effect]->activate_effect->value (rkr->EFX_Bypass[rack_effect]);
+        Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Bypass[rack_effect]);
 
         Fl_Widget *w = FindWidget(SelEff[i]);
         Fl_Choice *s = (Fl_Choice *) w;
@@ -3831,7 +3831,7 @@ void RKRGUI::drag_effect()
 
             // w->user_data() is Label in range 770 to 779
             // which is checked above, so this is valid range (10) for
-            // rkr->efx_order[C_NUMBER_ORDERED_EFFECTS] used by Prep_Reorden(source, dest)
+            // m_process->efx_order[C_NUMBER_ORDERED_EFFECTS] used by Prep_Reorden(source, dest)
             if (drag != (int) k - 770)
             {
                 Prep_Reorden(drag, (int) k - 770);
@@ -3902,7 +3902,7 @@ char* RKRGUI::get_bank_file()
         return 0;
 
     filename = fl_filename_setext(filename, ".rkrb");
-    int ok = rkr->load_bank(filename);
+    int ok = m_process->load_bank(filename);
 
     if (ok)
     {
@@ -3920,17 +3920,17 @@ void RKRGUI::set_save_file()
     char *filename;
 
 #define EXT ".rkrb"
-    filename = fl_file_chooser("Save Bank File:", "(*" EXT")", rkr->Bank_Saved, 0);
+    filename = fl_file_chooser("Save Bank File:", "(*" EXT")", m_process->Bank_Saved, 0);
 
     if (filename == NULL)
         return;
 
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
-    int ok = rkr->save_bank(filename);
+    int ok = m_process->save_bank(filename);
     if (ok)
     {
-        strcpy(rkr->Bank_Saved, filename);
+        strcpy(m_process->Bank_Saved, filename);
         BankWin_Label(filename);
     }
 }
@@ -3957,7 +3957,7 @@ void RKRGUI::Load_Midi_Program_Change_Table()
         return;
 
     filename = fl_filename_setext(filename, ".rmt");
-    rkr->load_MIDI_table(filename);
+    m_process->load_MIDI_table(filename);
     Settings->Put_MidiTable();
 }
 
@@ -3973,5 +3973,5 @@ void RKRGUI::Save_Midi_Program_Change_Table()
 
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
-    rkr->save_MIDI_table(filename);
+    m_process->save_MIDI_table(filename);
 }
