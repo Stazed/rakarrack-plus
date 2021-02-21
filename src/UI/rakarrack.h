@@ -608,7 +608,7 @@ public:
 private:
   void Set_Bank(std::string directory);
 public:
-  static int prevnext(int e);
+  static int global_shortcuts(int event);
   bool install_signal_handlers();
   static void sigterm_handler(int sig);
   static void check_signals(void *usrPtr);

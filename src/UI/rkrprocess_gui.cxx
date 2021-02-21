@@ -123,7 +123,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     HideUE->redraw();
 
     Fl::add_timeout(.04, this->TimeoutStatic, this);
-    Fl::add_handler(prevnext);
+    Fl::add_handler(global_shortcuts);
     install_signal_handlers();
 }
 
@@ -3362,10 +3362,18 @@ void RKRGUI::Set_Bank(std::string directory)
     closedir(dir);
 }
 
-int RKRGUI::prevnext(int e)
+/**
+ * Find various global keys, buttons for special processing.
+ * 
+ * @param event
+ *      FLTK event to check.
+ * 
+ * @return 
+ *      The status if used = 1, unused = 0.
+ */
+int RKRGUI::global_shortcuts(int event)
 {
-    // find various keybinding keys for processing
-    if (e == 5)
+    if (event == FL_DRAG)
     {
         Fl_Widget *w = Fl::belowmouse();
         long long k = (long long) w->user_data();
@@ -3375,8 +3383,7 @@ int RKRGUI::prevnext(int e)
         return 1;
     }
 
-
-    if (e != 12)
+    if (event != FL_SHORTCUT)
     {
         return 0;
     }

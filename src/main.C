@@ -245,8 +245,8 @@ main(int argc, char *argv[])
     // For keeping the message about disconnected from repeating
     int jack_disconnected = 0;
 
-    //Main Loop
-    while (process.Exit_Program == 0)
+    // Main Loop - run until exit requested
+    while (!process.Exit_Program)
     {
         // Refresh GUI
         if (process.Gui_Shown)
