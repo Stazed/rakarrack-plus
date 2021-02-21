@@ -37,6 +37,11 @@ static XWMHints *hints = NULL;
 static volatile int got_sigint = 0;
 static volatile int got_sigusr1 = 0;
 
+/**
+ * This local RKR pointer is used exclusively with RKRGUI class static function.
+ */
+RKR * process_rkr;
+
 RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     made()
 {
@@ -48,7 +53,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Fl::visual(FL_DOUBLE | FL_RGB);
     fl_register_images();
     Fl::set_fonts(0);
-    rkr = rkr_;
+    rkr = process_rkr = rkr_;
 
     mBankNameList = NULL;
     mBankNameListTail = NULL;
@@ -3379,25 +3384,25 @@ int RKRGUI::prevnext(int e)
     {
         if ((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43))) // +(plus) key
         {
-            rkr->Gui_Refresh = GUI_Refresh_Plus_Key;
+            process_rkr->Gui_Refresh = GUI_Refresh_Plus_Key;
             return 1;
         }
 
         if ((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45))) // -(minus) key
         {
-            rkr->Gui_Refresh = GUI_Refresh_Minus_Key;
+            process_rkr->Gui_Refresh = GUI_Refresh_Minus_Key;
             return 1;
         }
 
         if (Fl::event_key(FL_F + 2)) // F2 key - decrease output volume
         {
-            rkr->Gui_Refresh = GUI_Refresh_F2_Key;
+            process_rkr->Gui_Refresh = GUI_Refresh_F2_Key;
             return 1;
         }
 
         if (Fl::event_key(FL_F + 3)) // F3 key - increase output volume
         {
-            rkr->Gui_Refresh = GUI_Refresh_F3_Key;
+            process_rkr->Gui_Refresh = GUI_Refresh_F3_Key;
             return 1;
         }
 
@@ -3489,11 +3494,11 @@ void RKRGUI::check_signals(void *usrPtr)
 
     if (got_sigusr1 == SIGUSR1)
     {
-        if (!rkr->File_To_Load.empty()) // individual preset
+        if (!gui->rkr->File_To_Load.empty()) // individual preset
         {
-            printf("Saving file: %s\n", rkr->File_To_Load.c_str());
+            printf("Saving file: %s\n", gui->rkr->File_To_Load.c_str());
             got_sigusr1 = 0;
-            rkr->save_preset(rkr->File_To_Load.c_str());
+            gui->rkr->save_preset(gui->rkr->File_To_Load.c_str());
         }
         return;
     }
@@ -3502,7 +3507,7 @@ void RKRGUI::check_signals(void *usrPtr)
     {
         printf("Got SIGTERM, quitting...\n");
         got_sigint = 0;
-        rkr->Exit_Program = 1;
+        gui->rkr->Exit_Program = 1;
     }
 }
 

@@ -29,7 +29,6 @@ Fl_Color leds_color;
 Fl_Color back_color; 
 Fl_Color fore_color; 
 Fl_Color label_color; 
-RKR *rkr; // extern global
 int global_font_size = C_DEFAULT_FONT_SIZE; // extern global
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {

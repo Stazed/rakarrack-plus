@@ -288,14 +288,13 @@ decl {Fl_Color fore_color;} {private global
 decl {Fl_Color label_color;} {private global
 }
 
-decl {RKR *rkr; // extern global} {private global
-}
-
 decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private global
 }
 
 class RKRGUI {open
 } {
+  decl {RKR *rkr;} {private local
+  }
   decl {RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS];} {
     comment {Efx_Gui_Base:
 Array to hold pointer to the rack effect base class gui.
@@ -322,7 +321,7 @@ Array is indexed by EFX_Index.} private local
 save_current_state(0);
 
 rkr->Exit_Program=1;} open selected
-      xywh {327 201 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {888 331 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
