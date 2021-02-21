@@ -165,15 +165,15 @@ main(int argc, char *argv[])
     };
 
 
-    RKR rkr;
+    RKR process;
 
-    if (rkr.No_Jack_Client)
+    if (process.No_Jack_Client)
     {
         show_help();
         
         if (gui)
         {
-            rkr.Message
+            process.Message
             (
                 1,
                 "rakarrack-plus error",
@@ -185,59 +185,59 @@ main(int argc, char *argv[])
 
     if (needtodump)
     {
-        rkr.dump_preset_names();
+        process.dump_preset_names();
         exit(1);
     }
 
-    JACKstart(&rkr);
-    rkr.InitMIDI();
-    rkr.ConnectMIDI();
+    JACKstart(&process);
+    process.InitMIDI();
+    process.ConnectMIDI();
 
     if (needtoloadfile)
     {
-        rkr.File_To_Load = filetoload;
+        process.File_To_Load = filetoload;
         
-        // This will clear rkr.File_To_Load if bad file
-        rkr.load_preset(filetoload.c_str());
+        // This will clear process.File_To_Load if bad file
+        process.load_preset(filetoload.c_str());
     }
     
     // Set command line bank file, if any
     if (needtoloadbank)
     {
         // If valid bank then copy the Bank name and set the command line flag
-        if(rkr.load_bank(banktoload.c_str()))
+        if(process.load_bank(banktoload.c_str()))
         {
-            rkr.Bank_Load_Command_Line = needtoloadbank;
-            rkr.Command_Line_Bank = banktoload;
+            process.Bank_Load_Command_Line = needtoloadbank;
+            process.Command_Line_Bank = banktoload;
         }
     }
     
     // Set preset index from command line, if any
-    rkr.Change_Preset = preset;
+    process.Change_Preset = preset;
 
     // Set flag to indicate a file from the command line, if any
-    rkr.Command_Line_File = commandline;
+    process.Command_Line_File = commandline;
     
     // Set flag to indicate if in CLI vs Gui mode
-    rkr.Gui_Shown = gui;
+    process.Gui_Shown = gui;
 
 
     // Launch GUI
-    if (rkr.Gui_Shown)
+    if (process.Gui_Shown)
     {
-        rgui = new RKRGUI(argc, argv, &rkr);
+        rgui = new RKRGUI(argc, argv, &process);
     }
     else
     {
         (void)rgui; // To suppress unused variable compiler warning
     }
 
-    if (!rkr.Gui_Shown)
+    if (!process.Gui_Shown)
     {
-        rkr.Bypass = 1;
-        rkr.calculavol(1);
-        rkr.calculavol(2);
-        rkr.booster = 1.0f;
+        process.Bypass = 1;
+        process.calculavol(1);
+        process.calculavol(2);
+        process.booster = 1.0f;
     }
 
     mlockall(MCL_CURRENT | MCL_FUTURE);
@@ -246,37 +246,37 @@ main(int argc, char *argv[])
     int jack_disconnected = 0;
 
     //Main Loop
-    while (rkr.Exit_Program == 0)
+    while (process.Exit_Program == 0)
     {
         // Refresh GUI
-        if (rkr.Gui_Shown)
+        if (process.Gui_Shown)
         {
             Fl::wait();
         }
         else
         {
             usleep(1500);
-            if (rkr.Change_Preset != C_CHANGE_PRESET_OFF)
+            if (process.Change_Preset != C_CHANGE_PRESET_OFF)
             {
-                if ((rkr.Change_Preset > 0) && (rkr.Change_Preset < 61))
+                if ((process.Change_Preset > 0) && (process.Change_Preset < 61))
                 {
-                    rkr.bank_to_preset(rkr.Change_Preset);
+                    process.bank_to_preset(process.Change_Preset);
                 }
-                rkr.Change_Preset = C_CHANGE_PRESET_OFF;
+                process.Change_Preset = C_CHANGE_PRESET_OFF;
             }
         }
 
-        if ((!jack_disconnected) && (rkr.Jack_Shut_Down))
+        if ((!jack_disconnected) && (process.Jack_Shut_Down))
         {
             jack_disconnected = 1;
-            rkr.Message(1, rkr.jackcliname, "Jack Shut Down, try to save your work");
+            process.Message(1, process.jackcliname, "Jack Shut Down, try to save your work");
         }
 
-        rkr.miramidi();
+        process.miramidi();
     }
 
     // free memory etc.
-    JACKfinish(&rkr);
+    JACKfinish(&process);
 
     return (0);
 
