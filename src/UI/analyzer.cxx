@@ -29,12 +29,13 @@ Analyzer::Analyzer(int x, int y, int w, int h, const char *label) : Fl_Box(x, y,
     back_color = 0;
 }
 
-void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE)
+void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRGUI *_rgui)
 {
     spl = smpsl;
     spr = smpsr;
     ns = PERIOD;
     sr = SAMPLERATE;
+    m_rgui = _rgui;
 }
 
 void Analyzer::draw()
@@ -112,8 +113,8 @@ int Analyzer::handle(int event)
             if (Analyzer_ON)    // toggle
             {
                 Analyzer_ON = false;
-                rgui->Etit->show();
-                rgui->Etit->redraw();
+                m_rgui->Etit->show();
+                m_rgui->Etit->redraw();
             }
             return (1);
             break;

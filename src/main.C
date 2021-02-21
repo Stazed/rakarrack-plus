@@ -61,8 +61,6 @@ show_help()
     fprintf(stderr, "\n");
 }
 
-RKRGUI *rgui = NULL; // global
-
 int
 main(int argc, char *argv[])
 {
@@ -93,6 +91,7 @@ main(int argc, char *argv[])
     };
 
 
+    RKRGUI *rgui = NULL;
     int needtoloadfile = 0;
     int needtodump = 0;
     int preset = C_CHANGE_PRESET_OFF;

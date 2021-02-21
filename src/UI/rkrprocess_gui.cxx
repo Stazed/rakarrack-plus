@@ -78,8 +78,8 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Analy->set_analyzer_ON(false);
     Sco->set_scope_ON(false);
 
-    Sco->init(rkr->anall, rkr->analr, rkr->period);
-    Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate);
+    Sco->init(rkr->anall, rkr->analr, rkr->period, this);
+    Analy->init(rkr->anall, rkr->analr, rkr->period, rkr->sample_rate, this);
 
     memset(tmp, 0, sizeof (tmp));
     if (!rkr->File_To_Load.empty())

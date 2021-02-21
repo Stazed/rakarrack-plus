@@ -39,8 +39,7 @@
 
 class RKRGUI;   // forward declaration
 class RKR;      // forward declaration
-
-extern RKRGUI *rgui;    // define in main 
+ 
 extern Fl_Tiled_Image *back; 
 extern Fl_Color leds_color; 
 extern Fl_Color back_color; 

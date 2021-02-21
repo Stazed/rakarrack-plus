@@ -29,11 +29,12 @@ Scope::Scope(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h,
     back_color = 0;
 }
 
-void Scope::init(float *smpsl, float *smpsr, int PERIOD)
+void Scope::init(float *smpsl, float *smpsr, int PERIOD, RKRGUI *_rgui)
 {
     spl = smpsl;
     spr = smpsr;
     ns = PERIOD;
+    m_rgui = _rgui;
 }
 
 void Scope::draw()
@@ -128,8 +129,8 @@ int Scope::handle(int event)
             if (Scope_ON)
             {
                 Scope_ON = false;
-                rgui->Tuner->show();
-                rgui->Tuner->redraw();
+                m_rgui->Tuner->show();
+                m_rgui->Tuner->redraw();
             }
             return (1);
             break;

@@ -29,12 +29,13 @@
 class Analyzer : public Fl_Box {
 public:
     Analyzer(int x,int y, int w, int h, const char *label=0);
-    void init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE);
+    void init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRGUI *_rgui);
     void draw();
     int handle(int event);
     void set_analyzer_ON(bool a_set){Analyzer_ON = a_set;}
     bool get_analyzer_ON(){return Analyzer_ON;}
 private:
+    RKRGUI *m_rgui;
     float *spl; 
     float *spr; 
     int sr; 

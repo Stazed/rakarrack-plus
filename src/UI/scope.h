@@ -28,12 +28,13 @@
 class Scope : public Fl_Box {
 public:
     Scope(int x,int y, int w, int h, const char *label=0);
-    void init(float *smpsl, float *smpsr, int PERIOD);
+    void init(float *smpsl, float *smpsr, int PERIOD, RKRGUI *_rgui);
     void draw();
     int handle(int event);
     void set_scope_ON(bool a_set){Scope_ON = a_set;}
     bool get_scope_ON(){return Scope_ON;}
 private:
+    RKRGUI *m_rgui;
     float *spl; 
     float *spr; 
     int ns; 
