@@ -752,6 +752,9 @@ void RKRGUI::load_previous_state()
     rakarrack.get(m_process->PrefNom("FontSize"), m_process->fontsize, C_DEFAULT_FONT_SIZE);
     if (m_process->fontsize != C_DEFAULT_FONT_SIZE)
         chfsize(m_process->fontsize);
+    
+    // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
+    // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
     rakarrack.get(m_process->PrefNom("Font"), m_process->font, 0);
 
     rakarrack.get(m_process->PrefNom("Background Color"), b, FL_BLACK);
@@ -1451,7 +1454,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
     }
 
 
-    if ((Fl::event_button() == FL_LEFT_MOUSE) || tecla == SPACE_BAR)
+    if ((Fl::event_button() == FL_LEFT_MOUSE) || tecla == ASCII_Space)
     {
         if ((num != m_process->Selected_Preset) || (m_process->new_bank_loaded))
         {
@@ -1469,18 +1472,18 @@ void RKRGUI::reordena()
 {
     // Reorder efx
     unsigned int x[10], y[10];
-    ulong s[10];
+    ulong shortcut[10];
 
-    s[0] = 49;
-    s[1] = 50;
-    s[2] = 51;
-    s[3] = 52;
-    s[4] = 53;
-    s[5] = 54;
-    s[6] = 55;
-    s[7] = 56;
-    s[8] = 57;
-    s[9] = 48;
+    shortcut[0] = ASCII_One;
+    shortcut[1] = ASCII_Two;
+    shortcut[2] = ASCII_Three;
+    shortcut[3] = ASCII_Four;
+    shortcut[4] = ASCII_Five;
+    shortcut[5] = ASCII_Six;
+    shortcut[6] = ASCII_Seven;
+    shortcut[7] = ASCII_Eight;
+    shortcut[8] = ASCII_Nine;
+    shortcut[9] = ASCII_Zero;
 
 
     x[0] = E1->x();
@@ -1521,7 +1524,7 @@ void RKRGUI::reordena()
             {
                 // Sets the position in the main window
                 Efx_Gui_Base[j]->position(x[i], y[i]);
-                Efx_Gui_Base[j]->activate_effect->shortcut (s[i]);
+                Efx_Gui_Base[j]->activate_effect->shortcut (shortcut[i]);
                 
                 // This is the Hide/Show inactive effect button choice
                 // If it is not hide, then show all effects

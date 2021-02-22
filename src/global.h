@@ -159,7 +159,6 @@ std::string NTS ( T Number )
 #define MAX_PDATA_SIZE 50
 #define USERFILE 100    // used by Convolotron, Echotron, Reverbtron to indicate user file in setfile()
 #define JACK_RINGBUFFER_SIZE 16384 // Default size for ringbuffer
-#define SPACE_BAR 32    // for space bar pressed
 
 typedef union {
     float f;
@@ -316,6 +315,21 @@ enum EFX_Index
     EFX_MIDI_CONVERTER_ON_OFF = 122,
     EFX_TUNER_ON_OFF = 123,
     EFX_MASTER_ON_OFF = 124
+};
+
+enum ASCII_Index
+{
+    ASCII_Space = 32,
+    ASCII_Zero  = 48,
+    ASCII_One,
+    ASCII_Two,
+    ASCII_Three,
+    ASCII_Four,
+    ASCII_Five,
+    ASCII_Six,
+    ASCII_Seven,
+    ASCII_Eight,
+    ASCII_Nine
 };
 
 #endif
