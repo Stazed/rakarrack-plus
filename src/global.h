@@ -320,6 +320,8 @@ enum EFX_Index
 enum ASCII_Index
 {
     ASCII_Space = 32,
+    ASCII_Plus  = 43,
+    ASCII_Minus = 45,
     ASCII_Zero  = 48,
     ASCII_One,
     ASCII_Two,

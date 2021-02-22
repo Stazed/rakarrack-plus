@@ -3392,13 +3392,13 @@ int RKRGUI::global_shortcuts(int event)
     }
     else
     {
-        if ((Fl::event_key(43)) || (Fl::event_key(FL_KP + 43))) // +(plus) key
+        if ((Fl::event_key(ASCII_Plus)) || (Fl::event_key(FL_KP + ASCII_Plus))) // +(plus) key
         {
             process_rkr->Gui_Refresh = GUI_Refresh_Plus_Key;
             return 1;
         }
 
-        if ((Fl::event_key(45)) || (Fl::event_key(FL_KP + 45))) // -(minus) key
+        if ((Fl::event_key(ASCII_Minus)) || (Fl::event_key(FL_KP + ASCII_Minus))) // -(minus) key
         {
             process_rkr->Gui_Refresh = GUI_Refresh_Minus_Key;
             return 1;
