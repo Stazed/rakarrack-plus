@@ -1971,15 +1971,15 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {PrepareML()} {open
   } {}
-  Function {addpreset(Fl_Widget *w, int num)} {open return_type {inline void}
+  Function {get_insert_preset_name(Fl_Widget *w, int effect)} {open return_type {inline void}
   } {}
-  Function {add_name(Fl_Widget *w, char *name)} {open
+  Function {add_insert_preset_name(Fl_Widget *w, char *name)} {open
   } {}
-  Function {FindWidget(int num)} {open return_type {Fl_Widget *}
+  Function {find_preset_widget(int effect)} {open return_type {Fl_Widget *}
   } {}
-  Function {ReadIntPresets()} {open
+  Function {read_insert_presets()} {open
   } {}
-  Function {delpreset(Fl_Widget *w, int num)} {open return_type {inline void}
+  Function {delete_insert_preset(Fl_Widget *w, int effect)} {open return_type {inline void}
   } {}
   Function {Prep_Reorden(int source, int dest)} {open
   } {}

@@ -109,7 +109,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Put_Loaded();
     Principal->show(argc, argv);
     put_icon(Principal);
-    ReadIntPresets();
+    read_insert_presets();
     
     if (m_process->deachide)
     {
@@ -3429,7 +3429,7 @@ int RKRGUI::global_shortcuts(int event)
             
             if ((k > 11999) && (k < 12100))
             {
-                ((RKRGUI*) (w->parent()->parent()->user_data()))->addpreset(w, k - 12000);
+                ((RKRGUI*) (w->parent()->parent()->user_data()))->get_insert_preset_name(w, k - 12000);
             }
             
             return 1;
@@ -3447,7 +3447,7 @@ int RKRGUI::global_shortcuts(int event)
             
             if ((k > 11999) && (k < 12100))
             {
-                ((RKRGUI*) (w->parent()->parent()->user_data()))->delpreset(w, k - 12000);
+                ((RKRGUI*) (w->parent()->parent()->user_data()))->delete_insert_preset(w, k - 12000);
             }
             
             return 1;
@@ -3588,10 +3588,19 @@ void RKRGUI::PrepareML()
     }
 }
 
-inline void RKRGUI::addpreset(Fl_Widget *w, int num)
+/**
+ * Shows the input window so the user can enter a 'Insert' preset name.
+ * 
+ * @param w
+ *      The RKR_Choice widget to the related effect.
+ * 
+ * @param effect
+ *      The EFX_Index number.
+ */
+inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
 {
-    // Add preset
-    if (num == 12)
+    // Cabinet does not allow insert presets
+    if (effect == EFX_CABINET)
         return;
 
     const char *name = fl_input("Preset Name?", "");
@@ -3601,11 +3610,20 @@ inline void RKRGUI::addpreset(Fl_Widget *w, int num)
     char NewName[64];
     memset(NewName, 0, sizeof (NewName));
     sprintf(NewName, "*%s", name);
-    add_name(w, NewName);
-    m_process->save_insert_preset(num, NewName);
+    add_insert_preset_name(w, NewName);
+    m_process->save_insert_preset(effect, NewName);
 }
 
-void RKRGUI::add_name(Fl_Widget *w, char *name)
+/**
+ * Adds user defined 'Insert' preset name to preset drop down menu for an effect.
+ * 
+ * @param w
+ *      The RKR_Choice widget to add the name.
+ * 
+ * @param name
+ *      The user defined preset name to add.
+ */
+void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
 {
     // add name
     Fl_Choice *s = (Fl_Choice *) w;
@@ -3630,7 +3648,16 @@ void RKRGUI::add_name(Fl_Widget *w, char *name)
     }
 }
 
-Fl_Widget * RKRGUI::FindWidget(int num)
+/**
+ * Gets the 'Preset' RKR_Choice widget for a given effect.
+ * 
+ * @param effect
+ *      The EFX_Index effect number that is requested.
+ * 
+ * @return 
+ *      The widget (RKR_Choice) for the requested effect.
+ */
+Fl_Widget * RKRGUI::find_preset_widget(int effect)
 {
     // FindWidget
     for (int t = 0; t < Principal->children(); t++)
@@ -3646,7 +3673,7 @@ Fl_Widget * RKRGUI::FindWidget(int num)
             {
                 Fl_Widget *c = g->child(i);
                 long long uh = (long long) c->user_data();
-                if (uh == (num + 12000))
+                if (uh == (effect + 12000))
                     return c;
             }
         }
@@ -3655,7 +3682,11 @@ Fl_Widget * RKRGUI::FindWidget(int num)
     return NULL;
 }
 
-void RKRGUI::ReadIntPresets()
+/**
+ * Reads the insert presets file : .rkrintpreset in the user home directory
+ * and adds them to the effect preset list.
+ */
+void RKRGUI::read_insert_presets()
 {
     // Read in user presets
     FILE *fn;
@@ -3663,7 +3694,7 @@ void RKRGUI::ReadIntPresets()
     char buf[256];
     char *name;
     char *sbuf;
-    int num = 0;
+    int effect = 0;
     memset(tempfile, 0, sizeof (tempfile));
 
     sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
@@ -3673,20 +3704,29 @@ void RKRGUI::ReadIntPresets()
         while (fgets(buf, sizeof buf, fn) != NULL)
         {
             sbuf = buf;
-            sscanf(buf, "%d", &num);
+            sscanf(buf, "%d", &effect);
             name = strsep(&sbuf, ",");
             name = strsep(&sbuf, ",");
-            add_name(FindWidget(num), name);
+            add_insert_preset_name(find_preset_widget(effect), name);
         }
 
         fclose(fn);
     }
 }
 
-inline void RKRGUI::delpreset(Fl_Widget *w, int num)
+/**
+ * Deletes user defined 'Insert' preset from list.
+ * 
+ * @param w
+ *      The RKR_Choice preset widget from which the item will be deleted.
+ * 
+ * @param num
+ *      The EFX_Index number of the related insert preset.
+ */
+inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
 {
-    // delete user preset
-    if (num == 12)
+    // Cabinet does not allow insert presets
+    if (effect == EFX_CABINET)
         return;
 
     char Rname[128];
@@ -3710,7 +3750,7 @@ inline void RKRGUI::delpreset(Fl_Widget *w, int num)
     s->remove(s->value());
     s->value(0);
     s->redraw();
-    m_process->delete_insert_preset(num, Rname);
+    m_process->delete_insert_preset(effect, Rname);
 }
 
 void RKRGUI::Prep_Reorden(int source, int dest)
@@ -3808,7 +3848,7 @@ void RKRGUI::RandomPreset()
         
         Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Bypass[rack_effect]);
 
-        Fl_Widget *w = FindWidget(SelEff[i]);
+        Fl_Widget *w = find_preset_widget(SelEff[i]);
         Fl_Choice *s = (Fl_Choice *) w;
         long long k = (long long) s->user_data();
         int Esel = (int) (RND * s->size());

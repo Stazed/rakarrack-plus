@@ -614,11 +614,11 @@ public:
   static void check_signals(void *usrPtr);
   void getMIDIControl(int num);
   void PrepareML();
-  inline void addpreset(Fl_Widget *w, int num);
-  void add_name(Fl_Widget *w, char *name);
-  Fl_Widget * FindWidget(int num);
-  void ReadIntPresets();
-  inline void delpreset(Fl_Widget *w, int num);
+  inline void get_insert_preset_name(Fl_Widget *w, int effect);
+  void add_insert_preset_name(Fl_Widget *w, char *name);
+  Fl_Widget * find_preset_widget(int effect);
+  void read_insert_presets();
+  inline void delete_insert_preset(Fl_Widget *w, int effect);
   void Prep_Reorden(int source, int dest);
   static void bank_click(Fl_Choice* o, void* v);
   inline void bank_click_i(Fl_Choice* o, void*);
