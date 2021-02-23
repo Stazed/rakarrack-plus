@@ -30,7 +30,6 @@
 #include <FL/Fl_Box.H>
 #include <FL/fl_draw.H>
 
-#define BOX_USER_DATA   99997
 #define BOX_LED_DATA    5
 
 class RKR_Box : public Fl_Box
