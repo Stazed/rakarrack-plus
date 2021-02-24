@@ -3633,7 +3633,7 @@ void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
     Fl_Menu_Item *m = (Fl_Menu_Item*) n;
     Fl_Menu_Item *p;
     
-    int k = 10; // default label size
+    int font_size = C_DEFAULT_FONT_SIZE;
 
     for (int i = 0; i < m->size(); i++)
     {
@@ -3641,10 +3641,11 @@ void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
         
         if (i == 0)
         {
-            k = p->labelsize();
+            font_size = p->labelsize();
         }
         
-        p->labelsize(k);
+        p->labelsize(font_size);
+        p->labelfont (m_process->font);
     }
 }
 

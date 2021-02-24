@@ -46,6 +46,11 @@ extern Fl_Color back_color;
 extern Fl_Color fore_color; 
 extern Fl_Color label_color;
 
+/* The font size adjustments */
+extern int global_font_size;
+const int C_DEFAULT_FONT_SIZE = 10;
+const int C_DONT_CHANGE_FONT_SIZE = 0;
+
 /* These are used by settings midi scroll for identifying the scroll widgets - user data (void *) */
 const int c_bank_used = 1000;
 const int c_preset_used = 2000;
@@ -61,10 +66,6 @@ const unsigned C_CHANGE_PRESET_OFF = 1000;
 extern int global_error_number;
 extern char *jack_client_name;
 
-/* The font size adjustments */
-extern int global_font_size;
-const int C_DEFAULT_FONT_SIZE = 10;
-const int C_DONT_CHANGE_FONT_SIZE = 0;
 
 /* Milliseconds - used for quality changes by usleep().
    The amounts are much greater than necessary for the 
