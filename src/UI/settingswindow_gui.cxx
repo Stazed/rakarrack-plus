@@ -1109,7 +1109,7 @@ this->when(FL_WHEN_RELEASE);
       o->set_label_offset(3);
       o->set_text_offset(2);
     } // RKR_Choice* scheme_ch
-    { Font_Bro = new RKR_Browser(30, 100, 400, 225, "Font");
+    { RKR_Browser* o = Font_Bro = new RKR_Browser(30, 100, 400, 225, "Font");
       Font_Bro->type(1);
       Font_Bro->box(FL_NO_BOX);
       Font_Bro->color(FL_BACKGROUND2_COLOR);
@@ -1121,6 +1121,7 @@ this->when(FL_WHEN_RELEASE);
       Font_Bro->callback((Fl_Callback*)cb_Font_Bro);
       Font_Bro->align(Fl_Align(FL_ALIGN_TOP));
       Font_Bro->when(FL_WHEN_CHANGED);
+      o->set_browser_type(FONT_BROWSER);
     } // RKR_Browser* Font_Bro
     { RKR_Box* o = FSLabel = new RKR_Box(30, 333, 60, 17, "Font Size");
       FSLabel->box(FL_NO_BOX);

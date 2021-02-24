@@ -32,13 +32,23 @@ RKR_Browser::RKR_Browser(int X, int Y, int W, int H, const char *label) :
     m_text_offset(4),       // default 14pt - (C_DEFAULT_FONT_SIZE + 4)
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size)
+    m_previous_font_size(global_font_size),
+    m_type_browser(DEFAULT_BROWSER)
 {
-//    this->user_data((void*)(BOX_USER_DATA));
 }
 
 void RKR_Browser::draw()
 {
+#if 1
+    labelcolor(label_color);
+    labelfont(global_font_type);
+    selection_color(back_color);
+    color(fore_color);
+    
+    if(m_type_browser != FONT_BROWSER)
+        textfont(global_font_type);
+    
+#endif
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {

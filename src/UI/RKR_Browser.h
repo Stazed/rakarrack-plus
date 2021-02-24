@@ -30,6 +30,9 @@
 #include <FL/Fl_Browser.H>
 #include <FL/fl_draw.H>
 
+#define DEFAULT_BROWSER 0
+#define FONT_BROWSER    1
+
 class RKR_Browser : public Fl_Browser
 {
 public:
@@ -38,6 +41,7 @@ public:
     void resize(int,int,int,int);
     void set_label_offset(int offset){m_label_offset = offset;};
     void set_text_offset(int offset){m_text_offset = offset;};
+    void set_browser_type(int type){m_type_browser = type;};
 
 private:
 
@@ -46,6 +50,7 @@ private:
     int m_start_width;
     int m_start_height;
     int m_previous_font_size;
+    int m_type_browser;
     void font_resize(int,int);
 
 };
