@@ -30,6 +30,7 @@ Fl_Color back_color;
 Fl_Color fore_color; 
 Fl_Color label_color; 
 int global_font_size = C_DEFAULT_FONT_SIZE; // extern global
+int global_font_type = 0; 
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();

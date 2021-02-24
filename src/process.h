@@ -959,7 +959,6 @@ public:
     int deachide;
     int scalable;
     int change_scale;
-    int font;
     int flpos;
 
     int m_displayed;

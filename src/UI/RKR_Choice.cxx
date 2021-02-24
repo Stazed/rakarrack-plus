@@ -223,6 +223,7 @@ void RKR_Choice::font_resize(int W, int H)
     {
         p = m->next(s);
         p->labelsize(adjusted_text_size); /* Drop down menus - menu list items */
+        p->labelfont (global_font_type);
     }
 
     textsize(adjusted_text_size);

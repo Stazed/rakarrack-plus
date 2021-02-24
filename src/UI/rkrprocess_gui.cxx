@@ -755,7 +755,7 @@ void RKRGUI::load_previous_state()
     
     // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
     // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
-    rakarrack.get(m_process->PrefNom("Font"), m_process->font, 0);
+    rakarrack.get(m_process->PrefNom("Font"), global_font_type, 0);
 
     rakarrack.get(m_process->PrefNom("Background Color"), b, FL_BLACK);
     rakarrack.get(m_process->PrefNom("Foreground Color"), f, FL_DARK3);
@@ -1078,7 +1078,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Principal W"), Principal->w());
         rakarrack.set(m_process->PrefNom("Principal H"), Principal->h());
         rakarrack.set(m_process->PrefNom("FontSize"), m_process->fontsize);
-        rakarrack.set(m_process->PrefNom("Font"), m_process->font);
+        rakarrack.set(m_process->PrefNom("Font"), global_font_type);
 
         rakarrack.set(m_process->PrefNom("Background Color"), (int) back_color);
         rakarrack.set(m_process->PrefNom("Foreground Color"), (int) fore_color);
@@ -2139,7 +2139,7 @@ void RKRGUI::MiraConfig()
         Settings->Font_Bro->add(name);
     }
 
-    Settings->Font_Bro->value(m_process->font + 1);
+    Settings->Font_Bro->value(global_font_type + 1);
 }
 
 void RKRGUI::BankWin_Label(const char *filename)
@@ -2484,7 +2484,7 @@ void RKRGUI::chfsize(int font_size)
                 }
 
                 c->color(fore_color);
-                c->labelfont(m_process->font);
+                c->labelfont(global_font_type);
             }
         }
     }
@@ -3645,7 +3645,7 @@ void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
         }
         
         p->labelsize(font_size);
-        p->labelfont (m_process->font);
+        p->labelfont (global_font_type);
     }
 }
 

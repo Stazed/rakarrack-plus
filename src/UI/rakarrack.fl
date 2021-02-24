@@ -291,6 +291,9 @@ decl {Fl_Color label_color;} {private global
 decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private global
 }
 
+decl {int global_font_type = 0;} {private global
+}
+
 class RKRGUI {open
 } {
   decl {RKR *m_process;} {private local

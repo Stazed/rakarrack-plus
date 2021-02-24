@@ -54,7 +54,7 @@ Fl_Menu_Item SettingsWindowGui::menu_scheme_ch[] = {
 };
 
 void SettingsWindowGui::cb_Font_Bro_i(RKR_Browser* o, void*) {
-  m_process->font = (int)o->value()-1;
+  global_font_type = (int)o->value()-1;
 m_parent->chfsize(C_DONT_CHANGE_FONT_SIZE);
 }
 void SettingsWindowGui::cb_Font_Bro(RKR_Browser* o, void* v) {

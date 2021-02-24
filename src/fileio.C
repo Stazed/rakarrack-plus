@@ -1420,7 +1420,7 @@ RKR::save_skin(char *filename)
     fputs("\n", fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%d,%d\n", fontsize, font);
+    sprintf(buf, "%d,%d\n", fontsize, global_font_type);
     fputs(buf, fn);
 
     memset(buf, 0, sizeof (buf));
@@ -1484,7 +1484,7 @@ RKR::load_skin(char *filename)
         load_skin_error(fn);
         return 0;
     }
-    sscanf(buf, "%d,%d\n", &fontsize, &font);
+    sscanf(buf, "%d,%d\n", &fontsize, &global_font_type);
 
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
