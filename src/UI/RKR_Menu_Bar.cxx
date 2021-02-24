@@ -65,6 +65,7 @@ void RKR_Menu_Bar::font_resize(int W, int H)
         if(sm)
         {
             sm->labelsize(adjusted_label_size);
+            sm->labelfont (global_font_type);
         }
     }
     
@@ -84,6 +85,7 @@ void RKR_Menu_Bar::font_resize(int W, int H)
         if(p->label())
         {
             p->labelsize(adjusted_label_size);   /* Menu bar items */
+            p->labelfont (global_font_type);
         }
     }
 }
