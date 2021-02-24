@@ -41,12 +41,21 @@ RKR_Choice::RKR_Choice(int X, int Y, int W, int H, const char *label) :
 
 void RKR_Choice::draw()
 {
+#if 1
+    color(fore_color);
+    labelcolor(label_color);
+    textcolor(label_color);
+    labelfont(global_font_type);
+    font_resize(w(), h());
+    
+#else
     /* To update the font size if user changes the value in settings */
     if (global_font_size != m_previous_font_size)
     {
         m_previous_font_size = global_font_size;
         font_resize(w(), h());
     }
+#endif
 
     Fl_Boxtype btype = Fl::scheme() ? FL_UP_BOX // non-default uses up box
             : FL_DOWN_BOX; // default scheme uses down box
