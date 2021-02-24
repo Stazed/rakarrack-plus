@@ -37,6 +37,13 @@ RKR_Scroll::RKR_Scroll(int X, int Y, int W, int H, const char *label) :
 {
 }
 
+void RKR_Scroll::draw()
+{
+    color(fore_color);
+
+    Fl_Scroll::draw();
+}
+
 void RKR_Scroll::resize(int X, int Y, int W, int H)
 {
     /* Resize the text and labels */
