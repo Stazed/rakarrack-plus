@@ -713,6 +713,96 @@ void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
     chfsize(C_DONT_CHANGE_FONT_SIZE);
 }
 
+/**
+ *  Changes the font size, colors and font type.
+ * 
+ * @param font_size
+ *      The amount to change the font size. When != 0, it comes from the
+ *      user adjusting the font up or down from the Settings/Preferences/Look
+ *      + or - buttons for font size.
+ */
+void RKRGUI::chfsize(int font_size)
+{
+    /* global_font_size is used by all RKR widget overrides to adjust font size in draw().
+     * This variable should only be adjusted here. */
+    if(font_size)
+    {
+        global_font_size = m_process->fontsize = font_size;
+    }
+
+    /* Sort through widgets and adjust font colors and type */
+    for (int t = 0; t < Principal->children(); t++)
+    {
+        Fl_Widget *w = Principal->child(t);
+        long long ud = (long long) w->user_data();
+
+        if (ud != BOX_LED_DATA)
+        {
+            w->labelcolor(label_color);     /* Lmt, Clip, Resample */
+        }
+        else
+        {
+            w->labelcolor(leds_color);      /* Aux, In, Out, 0.0% */
+        }
+        
+        if (ud != 2)
+        {
+            w->selection_color(back_color); /* ????? */
+        }
+        else
+        {
+            w->selection_color(leds_color); /* ???? */
+        }
+
+
+        /* EFX, tuner, tap, volume control, etc */
+        if (ud == 1)
+        {
+            Fl_Group *g = (Fl_Group *) w;
+
+            for (int i = 0; i < g->children(); i++)
+            {
+                Fl_Widget *c = g->child(i);
+                long long uh = (long long) c->user_data();
+
+                if (uh != BOX_LED_DATA)
+                {
+                    c->labelcolor(label_color);     /* Labels on (almost) everything except sliders */
+                }
+                else
+                {
+                    c->labelcolor(leds_color);      /* ????? */
+                }
+
+                if (uh != 7)
+                {
+                    c->selection_color(back_color); /* ????? */
+                }
+
+                /* All efx On buttons, +10db, selections boxes, and all efx other buttons */
+                if ((uh == 2) || (uh == 7) || (uh == 77) || (uh == 78))
+                {
+                    c->selection_color(leds_color);
+                }
+
+                c->color(fore_color);
+                c->labelfont(global_font_type);
+            }
+        }
+    }
+
+    CLIP_LED->selection_color(FL_RED);
+    Etit->labelcolor(leds_color);
+    Trigger->aux_midi->color(fore_color);
+    Trigger->aux_midi->textcolor(FL_BACKGROUND2_COLOR);
+
+    ChangeActives();
+
+    Fl::redraw();
+}
+
+
+
 void RKRGUI::put_icon(Fl_Window* window)
 {
     // put icon
@@ -2407,94 +2497,6 @@ void RKRGUI::PutBackground()
 
     MenuP->image(InOut->image());
     BankWindow->MenuB->image(InOut->image());
-
-    Fl::redraw();
-}
-
-/**
- *  Changes the font size, colors and font type.
- * 
- * @param font_size
- *      The amount to change the font size. When != 0, it comes from the
- *      user adjusting the font up or down from the Settings/Preferences/Look
- *      + or - buttons for font size.
- */
-void RKRGUI::chfsize(int font_size)
-{
-    /* global_font_size is used by all RKR widget overrides to adjust font size in draw().
-     * This variable should only be adjusted here. */
-    if(font_size)
-    {
-        global_font_size = m_process->fontsize = font_size;
-    }
-
-    /* Sort through widgets and adjust font colors and type */
-    for (int t = 0; t < Principal->children(); t++)
-    {
-        Fl_Widget *w = Principal->child(t);
-        long long ud = (long long) w->user_data();
-
-        if (ud != BOX_LED_DATA)
-        {
-            w->labelcolor(label_color);     /* Lmt, Clip, Resample */
-        }
-        else
-        {
-            w->labelcolor(leds_color);      /* Aux, In, Out, 0.0% */
-        }
-        
-        if (ud != 2)
-        {
-            w->selection_color(back_color); /* ????? */
-        }
-        else
-        {
-            w->selection_color(leds_color); /* ???? */
-        }
-
-
-        /* EFX, tuner, tap, volume control, etc */
-        if (ud == 1)
-        {
-            Fl_Group *g = (Fl_Group *) w;
-
-            for (int i = 0; i < g->children(); i++)
-            {
-                Fl_Widget *c = g->child(i);
-                long long uh = (long long) c->user_data();
-
-                if (uh != BOX_LED_DATA)
-                {
-                    c->labelcolor(label_color);     /* Labels on (almost) everything except sliders */
-                }
-                else
-                {
-                    c->labelcolor(leds_color);      /* ????? */
-                }
-
-                if (uh != 7)
-                {
-                    c->selection_color(back_color); /* ????? */
-                }
-
-                /* All efx On buttons, +10db, selections boxes, and all efx other buttons */
-                if ((uh == 2) || (uh == 7) || (uh == 77) || (uh == 78))
-                {
-                    c->selection_color(leds_color);
-                }
-
-                c->color(fore_color);
-                c->labelfont(global_font_type);
-            }
-        }
-    }
-
-    CLIP_LED->selection_color(FL_RED);
-    Etit->labelcolor(leds_color);
-    Trigger->aux_midi->color(fore_color);
-    Trigger->aux_midi->textcolor(FL_BACKGROUND2_COLOR);
-
-    ChangeActives();
 
     Fl::redraw();
 }

@@ -571,6 +571,7 @@ public:
   void Label_Color_Change(Fl_Color bcolor);
   void Buttons_Color_Change(Fl_Color bcolor);
   void Leds_Color_Change(Fl_Color bcolor);
+  void chfsize(int font_size);
   void put_icon(Fl_Window* window);
   void load_previous_state();
   void save_current_state(int whati);
@@ -589,7 +590,6 @@ public:
   void MIDI_control_gui_refresh();
   void ActOnOff();
   void PutBackground();
-  void chfsize(int font_size);
   void ChangeActives();
   void findpos(int num, int value, Fl_Widget*);
   void Put_Skin();

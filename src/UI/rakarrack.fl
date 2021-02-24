@@ -1892,6 +1892,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {Leds_Color_Change(Fl_Color bcolor)} {open
   } {}
+  Function {chfsize(int font_size)} {open
+  } {}
   Function {put_icon(Fl_Window* window)} {open
   } {}
   Function {load_previous_state()} {open
@@ -1927,8 +1929,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {ActOnOff()} {open
   } {}
   Function {PutBackground()} {open
-  } {}
-  Function {chfsize(int font_size)} {open
   } {}
   Function {ChangeActives()} {open
   } {}
