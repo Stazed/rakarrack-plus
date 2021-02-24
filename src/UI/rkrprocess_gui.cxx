@@ -3626,7 +3626,7 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
 void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
 {
     // add name
-    Fl_Choice *s = (Fl_Choice *) w;
+    RKR_Choice *s = (RKR_Choice *) w;
     s->add(name);
 
     Fl_Menu_*n = (Fl_Menu_*) s->menu();
@@ -3850,7 +3850,7 @@ void RKRGUI::RandomPreset()
         Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Bypass[rack_effect]);
 
         Fl_Widget *w = find_preset_widget(SelEff[i]);
-        Fl_Choice *s = (Fl_Choice *) w;
+        RKR_Choice *s = (RKR_Choice *) w;
         long long k = (long long) s->user_data();
         int Esel = (int) (RND * s->size());
         s->value(Esel);
