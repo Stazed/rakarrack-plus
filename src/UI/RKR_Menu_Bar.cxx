@@ -38,13 +38,18 @@ RKR_Menu_Bar::RKR_Menu_Bar(int X, int Y, int W, int H, const char *label) :
 
 void RKR_Menu_Bar::draw()
 {
+#if 1
+    color(back_color);
+    font_resize(w(), h());
+    
+#else
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {
         m_previous_font_size = global_font_size;
         font_resize(w(), h());
     }
-
+#endif
     Fl_Menu_Bar::draw();
 }
 
@@ -66,6 +71,7 @@ void RKR_Menu_Bar::font_resize(int W, int H)
         {
             sm->labelsize(adjusted_label_size);
             sm->labelfont (global_font_type);
+            sm->labelcolor (label_color);
         }
     }
     
@@ -86,6 +92,7 @@ void RKR_Menu_Bar::font_resize(int W, int H)
         {
             p->labelsize(adjusted_label_size);   /* Menu bar items */
             p->labelfont (global_font_type);
+            p->labelcolor (label_color);
         }
     }
 }
