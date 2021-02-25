@@ -214,6 +214,10 @@ int RKR_Slider::handle2(int event, int X, int Y, int W, int H)
 
 void RKR_Slider::draw()
 {
+    labelfont(global_font_type);
+    textfont(global_font_type);
+    textcolor(label_color);
+
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {
