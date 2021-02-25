@@ -39,6 +39,13 @@ RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) :
 
 void RKR_Counter::draw()
 {
+#if 1
+    labelcolor(label_color);
+    color(fore_color);
+    labelfont(global_font_type);
+    textfont(global_font_type);
+    
+#endif
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {
