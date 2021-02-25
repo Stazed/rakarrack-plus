@@ -38,6 +38,11 @@ RKR_Light_Button::RKR_Light_Button(int X, int Y, int W, int H, const char *label
 
 void RKR_Light_Button::draw()
 {
+    labelcolor(label_color);
+    color(fore_color);
+    labelfont(global_font_type);
+    selection_color(leds_color);
+    
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {
