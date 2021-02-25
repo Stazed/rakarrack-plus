@@ -85,6 +85,7 @@ private:
     int m_start_width;
     int m_start_height;
     int m_previous_font_size;
+    int is_redraw;
     void font_resize(int, int);
     
 public:

@@ -46,7 +46,8 @@ RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l) :
     m_text_offset(0),       // C_DEFAULT_FONT_SIZE
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size)
+    m_previous_font_size(global_font_size),
+    is_redraw(0)
 {
     if (input.parent()) // defeat automatic-add
         input.parent()->remove(input);
@@ -71,6 +72,18 @@ RKR_Value_Input::~RKR_Value_Input()
 
 void RKR_Value_Input::draw()
 {
+    color(fore_color);
+    labelcolor(label_color);
+    labelfont(global_font_type);
+    textfont(global_font_type);
+    
+    // If redraw() because of focus, we change color to leds_color to show focus.
+    // So do not change the color back to label_color until unfocus.
+    if(!is_redraw)
+    {
+        textcolor(label_color);
+    }
+
     /* To update the font size if user changes the value in settings rakarrack+ */
     if(global_font_size != m_previous_font_size)
     {
@@ -164,14 +177,16 @@ int RKR_Value_Input::handle(int event)
     if (event == FL_FOCUS)
     {
         textcolor(leds_color);
+        is_redraw = 1;  // so draw() does not reset the color to label_color
         redraw();
-        return 1;   // says we handed it
+        return 1;       // says we handed it
     }
     
     /* Revert color */
     if(event == FL_UNFOCUS)
     {
         textcolor(label_color);
+        is_redraw = 0;  // ok for draw() set to label_color
         redraw();
         return 1;
     }
@@ -180,6 +195,7 @@ int RKR_Value_Input::handle(int event)
     if ((Fl::focus() == &input || Fl::focus() == this))
     {
         textcolor(leds_color);
+        is_redraw = 1;  // so draw() does not reset the color to label_color
         redraw();
     }
     
