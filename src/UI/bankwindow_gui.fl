@@ -31,7 +31,7 @@ const std::vector<std::string> bank_submenu_paths
 };} {private global
 }
 
-widget_class BankWindowGui {open
+widget_class BankWindowGui {open selected
   xywh {90 89 800 600} type Double color 4 selection_color 7 resizable
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -45,7 +45,7 @@ m_parent= _rgui;} {}
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
-  Fl_Menu_Bar MenuB {selected
+  Fl_Menu_Bar MenuB {
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
     code0 {o->set_label_offset(6);}
     code1 {o->set_submenu_paths(bank_submenu_paths);}
@@ -245,34 +245,38 @@ CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
   light_preset(m_process->Selected_Preset);} {}
   }
   Function {light_preset(int npreset)} {} {
-    code {if((m_parent == NULL) ||(!m_parent->get_bank_made())) return;
+    code {if((m_parent == NULL) ||(!m_parent->get_bank_made()))
+       return;
 
-for (int t=0; t<ob->children();t++)
-  {
-    Fl_Widget *w = ob->child(t);
-    long long temp = (long long) w->user_data();
-    if (temp == npreset)
+    for (int t=0; t<ob->children();t++)
     {
-     w->color(fl_darker(leds_color));
-     break;
-     }
-  
-  }} {}
+        Fl_Widget *w = ob->child(t);
+        long long temp = (long long) w->user_data();
+
+        if (temp == npreset)
+        {
+            RKR_Button *preset_selected = static_cast<RKR_Button*>(w);
+            preset_selected->set_highlight_preset (1);  // true
+            break;
+        }
+    }} {}
   }
   Function {unlight_preset(int npreset)} {} {
-    code {if((m_parent == NULL) ||(!m_parent->get_bank_made())) return;
+    code {if((m_parent == NULL) ||(!m_parent->get_bank_made()))
+        return;
 
-for (int t=0; t<ob->children();t++)
-  {
-    Fl_Widget *w = ob->child(t);
-    long long temp = (long long) w->user_data();
-    if (temp == npreset)
+    for (int t=0; t<ob->children();t++)
     {
-     w->color(fore_color);
-     break;
-     }
-  
-  }} {}
+        Fl_Widget *w = ob->child(t);
+        long long temp = (long long) w->user_data();
+
+        if (temp == npreset)
+        {
+            RKR_Button *preset_unselected = static_cast<RKR_Button*>(w);
+            preset_unselected->set_highlight_preset (0);    // false
+            break;
+        }
+    }} {}
   }
   Function {clear_menu()} {return_type void
   } {

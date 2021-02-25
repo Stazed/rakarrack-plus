@@ -354,35 +354,39 @@ void BankWindowGui::make_window_banks() {
 }
 
 void BankWindowGui::light_preset(int npreset) {
-  if((m_parent == NULL) ||(!m_parent->get_bank_made())) return;
+  if((m_parent == NULL) ||(!m_parent->get_bank_made()))
+         return;
   
-  for (int t=0; t<ob->children();t++)
-    {
-      Fl_Widget *w = ob->child(t);
-      long long temp = (long long) w->user_data();
-      if (temp == npreset)
+      for (int t=0; t<ob->children();t++)
       {
-       w->color(fl_darker(leds_color));
-       break;
-       }
-    
-    }
+          Fl_Widget *w = ob->child(t);
+          long long temp = (long long) w->user_data();
+  
+          if (temp == npreset)
+          {
+              RKR_Button *preset_selected = static_cast<RKR_Button*>(w);
+              preset_selected->set_highlight_preset (1);  // true
+              break;
+          }
+      }
 }
 
 void BankWindowGui::unlight_preset(int npreset) {
-  if((m_parent == NULL) ||(!m_parent->get_bank_made())) return;
+  if((m_parent == NULL) ||(!m_parent->get_bank_made()))
+          return;
   
-  for (int t=0; t<ob->children();t++)
-    {
-      Fl_Widget *w = ob->child(t);
-      long long temp = (long long) w->user_data();
-      if (temp == npreset)
+      for (int t=0; t<ob->children();t++)
       {
-       w->color(fore_color);
-       break;
-       }
-    
-    }
+          Fl_Widget *w = ob->child(t);
+          long long temp = (long long) w->user_data();
+  
+          if (temp == npreset)
+          {
+              RKR_Button *preset_unselected = static_cast<RKR_Button*>(w);
+              preset_unselected->set_highlight_preset (0);    // false
+              break;
+          }
+      }
 }
 
 void BankWindowGui::clear_menu() {

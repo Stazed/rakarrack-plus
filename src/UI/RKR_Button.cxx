@@ -28,16 +28,30 @@
 
 RKR_Button::RKR_Button(int X, int Y, int W, int H, const char *label) :
     Fl_Button(X, Y, W, H, label),
-    m_label_offset(0),      // default 10pt - (C_DEFAULT_FONT_SIZE)
+    m_label_offset(0),              // default 10pt - (C_DEFAULT_FONT_SIZE)
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size)
+    m_previous_font_size(global_font_size),
+    m_bank_highlight_preset(0)      // false
 {
     this->user_data((void*)(BUTTON_USER_DATA));
 }
 
 void RKR_Button::draw()
 {
+    if(m_bank_highlight_preset)
+    {
+        color(fl_darker(leds_color));
+    }
+    else
+    {
+        color(fore_color);
+    }
+        
+    labelcolor(label_color);
+    labelfont(global_font_type);
+    selection_color(leds_color);
+    
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {

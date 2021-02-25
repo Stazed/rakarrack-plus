@@ -44,6 +44,7 @@ public:
     void set_start_width(int W) {m_start_width = W;};
     void set_start_height(int H) {m_start_height = H;};
     void set_label_offset(int offset){m_label_offset = offset;};
+    void set_highlight_preset(int highlight) {m_bank_highlight_preset = highlight;};
 
 private:
 
@@ -51,6 +52,7 @@ private:
     int m_start_width;
     int m_start_height;
     int m_previous_font_size;
+    int m_bank_highlight_preset;
 };
 
 #endif /* RKR_BUTTON_H */
