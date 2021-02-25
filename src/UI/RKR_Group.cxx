@@ -38,6 +38,10 @@ RKR_Group::RKR_Group(int X, int Y, int W, int H, const char *label) :
 
 void RKR_Group::draw()
 {
+    labelcolor(label_color);
+    color(fore_color);
+    labelfont(global_font_type);
+
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {
