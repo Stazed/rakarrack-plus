@@ -75,6 +75,7 @@ m_process->RControl=1;}
   }
   Fl_Group Ares {
     xywh {215 60 205 180} box THIN_DOWN_BOX align 80
+    class RKR_Group
   } {
     Fl_Box Ar1 {
       xywh {220 65 45 30} box DOWN_BOX
@@ -301,6 +302,7 @@ for(i=1;i<61;i++) memcpy(m_process->Bank[i].XUserMIDI,m_process->XUserMIDI, size
   }
   Fl_Group Filters_ML {
     xywh {10 410 200 31} box DOWN_BOX
+    class RKR_Group
   } {
     Fl_Button M_fil_all {
       label All

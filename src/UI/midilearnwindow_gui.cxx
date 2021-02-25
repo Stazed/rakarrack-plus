@@ -292,9 +292,16 @@ this->when(FL_WHEN_RELEASE);
   CopyT->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Button* CopyT
-{ Ares = new Fl_Group(215, 60, 205, 180);
+{ Ares = new RKR_Group(215, 60, 205, 180);
   Ares->box(FL_THIN_DOWN_BOX);
+  Ares->color(FL_BACKGROUND_COLOR);
+  Ares->selection_color(FL_BACKGROUND_COLOR);
+  Ares->labeltype(FL_NORMAL_LABEL);
+  Ares->labelfont(0);
+  Ares->labelsize(14);
+  Ares->labelcolor(FL_FOREGROUND_COLOR);
   Ares->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
+  Ares->when(FL_WHEN_RELEASE);
   { Ar1 = new RKR_Box(220, 65, 45, 30);
     Ar1->box(FL_DOWN_BOX);
     Ar1->color(FL_BACKGROUND_COLOR);
@@ -516,7 +523,7 @@ this->when(FL_WHEN_RELEASE);
     Ar20->when(FL_WHEN_RELEASE);
   } // RKR_Box* Ar20
   Ares->end();
-} // Fl_Group* Ares
+} // RKR_Group* Ares
 { RKR_Button* o = ClearA = new RKR_Button(245, 250, 150, 30, "Clear Assignements");
   ClearA->box(FL_UP_BOX);
   ClearA->color(FL_BACKGROUND_COLOR);
@@ -626,8 +633,16 @@ this->when(FL_WHEN_RELEASE);
   CloseML->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Button* CloseML
-{ Filters_ML = new Fl_Group(10, 410, 200, 31);
+{ Filters_ML = new RKR_Group(10, 410, 200, 31);
   Filters_ML->box(FL_DOWN_BOX);
+  Filters_ML->color(FL_BACKGROUND_COLOR);
+  Filters_ML->selection_color(FL_BACKGROUND_COLOR);
+  Filters_ML->labeltype(FL_NORMAL_LABEL);
+  Filters_ML->labelfont(0);
+  Filters_ML->labelsize(14);
+  Filters_ML->labelcolor(FL_FOREGROUND_COLOR);
+  Filters_ML->align(Fl_Align(FL_ALIGN_TOP));
+  Filters_ML->when(FL_WHEN_RELEASE);
   { RKR_Button* o = M_fil_all = new RKR_Button(16, 415, 89, 20, "All");
     M_fil_all->type(102);
     M_fil_all->box(FL_UP_BOX);
@@ -657,7 +672,7 @@ this->when(FL_WHEN_RELEASE);
     o->set_label_offset(4);
   } // RKR_Button* M_fil_current
   Filters_ML->end();
-} // Fl_Group* Filters_ML
+} // RKR_Group* Filters_ML
 this->m_process = NULL;
 this->m_parent = NULL;
 end();

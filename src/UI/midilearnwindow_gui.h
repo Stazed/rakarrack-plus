@@ -10,7 +10,6 @@
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
-#include <FL/Fl_Group.H>
 
 class MidiLearnWindowGui : public Fl_Double_Window {
   void _MidiLearnWindowGui();
@@ -41,7 +40,7 @@ private:
   inline void cb_CopyT_i(RKR_Button*, void*);
   static void cb_CopyT(RKR_Button*, void*);
 public:
-  Fl_Group *Ares;
+  RKR_Group *Ares;
   RKR_Box *Ar1;
   RKR_Box *Ar2;
   RKR_Box *Ar3;
@@ -102,7 +101,7 @@ private:
   inline void cb_CloseML_i(RKR_Button*, void*);
   static void cb_CloseML(RKR_Button*, void*);
 public:
-  Fl_Group *Filters_ML;
+  RKR_Group *Filters_ML;
   RKR_Button *M_fil_all;
 private:
   inline void cb_M_fil_all_i(RKR_Button*, void*);
