@@ -1570,6 +1570,7 @@ Analy->set_analyzer_ON(true);
 //}}
           tooltip {Click here to toggle analyzer ON/OFF} xywh {174 160 340 28} type Toggle box NO_BOX color 2 labeltype EMBOSSED_LABEL labelfont 1 labelsize 21 labelcolor 1 align 80
           code0 {o->set_label_offset(15);}
+          code1 {o->set_rakarrack_label();}
           class RKR_Button
         }
         Fl_Box Analy {

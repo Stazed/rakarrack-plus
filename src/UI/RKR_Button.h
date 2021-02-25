@@ -45,6 +45,7 @@ public:
     void set_start_height(int H) {m_start_height = H;};
     void set_label_offset(int offset){m_label_offset = offset;};
     void set_highlight_preset(int highlight) {m_bank_highlight_preset = highlight;};
+    void set_rakarrack_label() {m_rakarrack_label = 1;};
 
 private:
 
@@ -53,6 +54,7 @@ private:
     int m_start_height;
     int m_previous_font_size;
     int m_bank_highlight_preset;
+    int m_rakarrack_label;
 };
 
 #endif /* RKR_BUTTON_H */
