@@ -324,12 +324,12 @@ Array is indexed by EFX_Index.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {888 331 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {492 237 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->set_label_offset(4);}
         code1 {o->set_submenu_paths(main_submenu_paths);}
@@ -639,60 +639,70 @@ Fl::focus(Open_Order);}
         label label
         user_data 770
         xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L2 {
         label label
         user_data 771
         xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L3 {
         label label
         user_data 772
         xywh {322 195 158 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L4 {
         label label
         user_data 773
         xywh {482 195 158 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L5 {
         label label
         user_data 774
         xywh {642 195 157 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L6 {
         label label
         user_data 775
         xywh {1 396 158 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L7 {
         label label
         user_data 776
         xywh {162 396 158 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L8 {
         label label
         user_data 777
         xywh {322 396 158 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L9 {
         label label
         user_data 778
         xywh {482 396 158 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box L10 {
         label label
         user_data 779
         xywh {642 396 154 17} labelfont 1 labelcolor 7
+        code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Group EQ {
