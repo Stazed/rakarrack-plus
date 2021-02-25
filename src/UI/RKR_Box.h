@@ -32,6 +32,10 @@
 
 #define BOX_LED_DATA    5
 
+#define BOX_DEFAULT     0
+#define BOX_LEDS        1
+#define BOX_LIGHT       2
+
 class RKR_Box : public Fl_Box
 {
 public:
@@ -43,6 +47,7 @@ public:
     int get_start_x(){return m_start_x;};
     int get_start_y(){return m_start_y;};
     void set_label_offset(int offset){m_label_offset = offset;};
+    void set_box_type(int type) {m_box_type = type;};
 
 private:
 
@@ -52,6 +57,7 @@ private:
     int m_start_width;
     int m_start_height;
     int m_previous_font_size;
+    int m_box_type;
     void font_resize(int,int);
 
 };

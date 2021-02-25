@@ -329,7 +329,7 @@ m_process->Exit_Program=1;} open selected
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->set_label_offset(4);}
         code1 {o->set_submenu_paths(main_submenu_paths);}
@@ -535,18 +535,21 @@ Fl::focus(Open_Order);}
         label Limiter
         xywh {291 6 12 12} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
         code0 {o->set_label_offset(0);}
+        code1 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box CLIP_LED {
         label Clipping
         xywh {363 6 12 12} box DOWN_BOX color 136 labelsize 10 labelcolor 7 align 4
         code0 {o->set_label_offset(0);}
+        code1 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box UPS_LED {
         label Resample
         xywh {450 6 12 12} box DOWN_BOX color 2 labelsize 10 labelcolor 7 align 4
         code0 {o->set_label_offset(0);}
+        code1 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
       }
       Fl_Box PORT_MIDI_IN_STATE {
@@ -554,6 +557,7 @@ Fl::focus(Open_Order);}
         user_data BOX_LED_DATA
         xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
         code0 {o->set_label_offset(-2);}
+        code1 {o->set_box_type(BOX_LEDS);}
         class RKR_Box
       }
       Fl_Box PORT_MIDI_OUT_STATE {
@@ -561,6 +565,7 @@ Fl::focus(Open_Order);}
         user_data BOX_LED_DATA
         xywh {648 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
         code0 {o->set_label_offset(-2);}
+        code1 {o->set_box_type(BOX_LEDS);}
         class RKR_Box
       }
       Fl_Box PORT_AUX_STATE {
@@ -568,6 +573,7 @@ Fl::focus(Open_Order);}
         user_data BOX_LED_DATA
         xywh {676 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
+        code1 {o->set_box_type(BOX_LEDS);}
         class RKR_Box
       }
       Fl_Box PORT_IN_STATE {
@@ -575,6 +581,7 @@ Fl::focus(Open_Order);}
         user_data BOX_LED_DATA
         xywh {698 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
+        code1 {o->set_box_type(BOX_LEDS);}
         class RKR_Box
       }
       Fl_Box PORT_OUT_STATE {
@@ -582,12 +589,14 @@ Fl::focus(Open_Order);}
         user_data BOX_LED_DATA
         xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
+        code1 {o->set_box_type(BOX_LEDS);}
         class RKR_Box
       }
       Fl_Box CPULOAD {
         user_data BOX_LED_DATA
         xywh {750 5 45 17} labelsize 10 labelcolor 7
         code0 {o->set_label_offset(0);}
+        code1 {o->set_box_type(BOX_LEDS);}
         class RKR_Box
       }
       Fl_Box Sco {

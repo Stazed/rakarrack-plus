@@ -934,6 +934,7 @@ void RKRGUI::make_window() {
       LMT_LED->align(Fl_Align(FL_ALIGN_LEFT));
       LMT_LED->when(FL_WHEN_RELEASE);
       o->set_label_offset(0);
+      o->set_box_type(BOX_LIGHT);
     } // RKR_Box* LMT_LED
     { RKR_Box* o = CLIP_LED = new RKR_Box(363, 6, 12, 12, "Clipping");
       CLIP_LED->box(FL_DOWN_BOX);
@@ -946,6 +947,7 @@ void RKRGUI::make_window() {
       CLIP_LED->align(Fl_Align(FL_ALIGN_LEFT));
       CLIP_LED->when(FL_WHEN_RELEASE);
       o->set_label_offset(0);
+      o->set_box_type(BOX_LIGHT);
     } // RKR_Box* CLIP_LED
     { RKR_Box* o = UPS_LED = new RKR_Box(450, 6, 12, 12, "Resample");
       UPS_LED->box(FL_DOWN_BOX);
@@ -958,6 +960,7 @@ void RKRGUI::make_window() {
       UPS_LED->align(Fl_Align(FL_ALIGN_LEFT));
       UPS_LED->when(FL_WHEN_RELEASE);
       o->set_label_offset(0);
+      o->set_box_type(BOX_LIGHT);
     } // RKR_Box* UPS_LED
     { RKR_Box* o = PORT_MIDI_IN_STATE = new RKR_Box(620, 3, 29, 20, "Midi In");
       PORT_MIDI_IN_STATE->box(FL_NO_BOX);
@@ -972,6 +975,7 @@ void RKRGUI::make_window() {
       PORT_MIDI_IN_STATE->when(FL_WHEN_RELEASE);
       PORT_MIDI_IN_STATE->hide();
       o->set_label_offset(-2);
+      o->set_box_type(BOX_LEDS);
     } // RKR_Box* PORT_MIDI_IN_STATE
     { RKR_Box* o = PORT_MIDI_OUT_STATE = new RKR_Box(648, 3, 29, 20, "Midi Out");
       PORT_MIDI_OUT_STATE->box(FL_NO_BOX);
@@ -986,6 +990,7 @@ void RKRGUI::make_window() {
       PORT_MIDI_OUT_STATE->when(FL_WHEN_RELEASE);
       PORT_MIDI_OUT_STATE->hide();
       o->set_label_offset(-2);
+      o->set_box_type(BOX_LEDS);
     } // RKR_Box* PORT_MIDI_OUT_STATE
     { RKR_Box* o = PORT_AUX_STATE = new RKR_Box(676, 5, 32, 17, "Aux");
       PORT_AUX_STATE->box(FL_NO_BOX);
@@ -1000,6 +1005,7 @@ void RKRGUI::make_window() {
       PORT_AUX_STATE->when(FL_WHEN_RELEASE);
       PORT_AUX_STATE->hide();
       o->set_label_offset(0);
+      o->set_box_type(BOX_LEDS);
     } // RKR_Box* PORT_AUX_STATE
     { RKR_Box* o = PORT_IN_STATE = new RKR_Box(698, 5, 32, 17, "In");
       PORT_IN_STATE->box(FL_NO_BOX);
@@ -1014,6 +1020,7 @@ void RKRGUI::make_window() {
       PORT_IN_STATE->when(FL_WHEN_RELEASE);
       PORT_IN_STATE->hide();
       o->set_label_offset(0);
+      o->set_box_type(BOX_LEDS);
     } // RKR_Box* PORT_IN_STATE
     { RKR_Box* o = PORT_OUT_STATE = new RKR_Box(719, 5, 32, 17, "Out");
       PORT_OUT_STATE->box(FL_NO_BOX);
@@ -1028,6 +1035,7 @@ void RKRGUI::make_window() {
       PORT_OUT_STATE->when(FL_WHEN_RELEASE);
       PORT_OUT_STATE->hide();
       o->set_label_offset(0);
+      o->set_box_type(BOX_LEDS);
     } // RKR_Box* PORT_OUT_STATE
     { RKR_Box* o = CPULOAD = new RKR_Box(750, 5, 45, 17);
       CPULOAD->box(FL_NO_BOX);
@@ -1041,6 +1049,7 @@ void RKRGUI::make_window() {
       CPULOAD->align(Fl_Align(FL_ALIGN_CENTER));
       CPULOAD->when(FL_WHEN_RELEASE);
       o->set_label_offset(0);
+      o->set_box_type(BOX_LEDS);
     } // RKR_Box* CPULOAD
     { Sco = new Scope(545, 25, 226, 59, "Rakarrack");
       Sco->tooltip("Click here to turn off scope");
