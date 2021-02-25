@@ -23,6 +23,8 @@
  * Created on April 15, 2020, 5:05 AM
  */
 
+#include <FL/Fl_Widget.H>
+
 #include "RKR_Tabs.h"
 #include "../global.h"
 
@@ -37,12 +39,17 @@ RKR_Tabs::RKR_Tabs(int X, int Y, int W, int H, const char *label) :
 
 void RKR_Tabs::draw()
 {
+
+#if 1
+    font_resize(w(), h());
+#else
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
     {
         m_previous_font_size = global_font_size;
         font_resize(w(), h());
     }
+#endif
 
     Fl_Tabs::draw();
 }
@@ -58,8 +65,12 @@ void RKR_Tabs::font_resize(int W, int H)
     
     for (int i = 0; i < children(); ++i)
     {
-      Fl_Widget *c = child(i);
-      c->labelsize(adjusted_label_size);
+        Fl_Widget *c = child(i);
+        c->labelsize(adjusted_label_size);
+        c->labelfont (global_font_type);
+        c->labelcolor (label_color);
+        c->color (fore_color);
+        c->selection_color (back_color);
     }
 }
 
