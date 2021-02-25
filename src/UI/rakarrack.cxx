@@ -2606,7 +2606,7 @@ void RKRGUI::make_window() {
         Etit->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         Etit->when(FL_WHEN_RELEASE);
         o->set_label_offset(15);
-        o->set_rakarrack_label();
+        o->set_button_type(BUTTON_RKR_LABEL);
       } // RKR_Button* Etit
       { Analy = new Analyzer(174, 160, 340, 28);
         Analy->tooltip("Click here to toggle analyzer ON/OFF");

@@ -251,6 +251,7 @@ this->when(FL_WHEN_RELEASE);
   GMM->align(Fl_Align(FL_ALIGN_CENTER));
   GMM->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
+  o->set_button_type(BUTTON_MIDI_GET);
 } // RKR_Button* GMM
 { TPresets = new RKR_Browser(430, 61, 201, 348);
   TPresets->type(2);

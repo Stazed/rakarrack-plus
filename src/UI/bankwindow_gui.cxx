@@ -327,6 +327,7 @@ void BankWindowGui::make_window_banks() {
                 butX->value(0);
                 butX->when(FL_WHEN_CHANGED |FL_WHEN_RELEASE_ALWAYS);
                 butX->callback((Fl_Callback *)m_parent->preset_click);
+                butX->set_button_type(BUTTON_BANK_HIGHLIGHT);
                 butX->set_label_offset(5);
                 butX->set_start_width(button_w);
                 butX->set_start_height(button_h);;

@@ -33,29 +33,48 @@ RKR_Button::RKR_Button(int X, int Y, int W, int H, const char *label) :
     m_start_height(H),
     m_previous_font_size(global_font_size),
     m_bank_highlight_preset(0),     // false
-    m_rakarrack_label(0)            // false
+    m_button_type(BUTTON_DEFAULT)
 {
     this->user_data((void*)(BUTTON_USER_DATA));
 }
 
 void RKR_Button::draw()
 {
-    if(m_bank_highlight_preset)
+    switch(m_button_type)
     {
-        color(fl_darker(leds_color));
-    }
-    else
-    {
-        color(fore_color);
-    }
-        
-    if(m_rakarrack_label)
-    {
-        labelcolor(fl_darker(leds_color));
-    }
-    else
-    {
-        labelcolor(label_color);
+        case BUTTON_DEFAULT:
+        {
+            color(fore_color);
+            labelcolor(label_color);
+            break;
+        }
+
+        case BUTTON_BANK_HIGHLIGHT:
+        {
+            if(m_bank_highlight_preset)
+            {
+                color(fl_darker(leds_color));
+            }
+            else
+            {
+                color(fore_color);
+            }
+            
+            labelcolor(label_color);
+            break;
+        }
+
+        case BUTTON_MIDI_GET:
+        {
+            labelcolor(label_color);
+            break;
+        }
+
+        case BUTTON_RKR_LABEL:
+        {
+            labelcolor(fl_darker(leds_color));
+            break;
+        }
     }
 
     labelfont(global_font_type);

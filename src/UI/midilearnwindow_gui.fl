@@ -14,7 +14,7 @@ decl {\#include "RKR_Button.h"} {public global
 decl {\#include "RKR_Value_Input.h"} {public global
 }
 
-widget_class MidiLearnWindowGui {open
+widget_class MidiLearnWindowGui {open selected
   xywh {24 108 640 480} type Double color 22 selection_color 7 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
@@ -49,6 +49,7 @@ m_process->CountWait=0;
 m_process->RControl=1;}
     xywh {10 445 135 30}
     code0 {o->set_label_offset(4);}
+    code1 {o->set_button_type(BUTTON_MIDI_GET);}
     class RKR_Button
   }
   Fl_Browser TPresets {
@@ -276,7 +277,7 @@ GMM->redraw();}
   }
   Fl_Value_Input Disp_Control {
     callback {if(o->value()> 127) o->value(127);
-if(o->value()< 1) o->value(1);} selected
+if(o->value()< 1) o->value(1);}
     xywh {155 445 40 30} minimum 1 maximum 127 step 1 value 1 textcolor 7
     code0 {o->set_text_offset(4);}
     class RKR_Value_Input
