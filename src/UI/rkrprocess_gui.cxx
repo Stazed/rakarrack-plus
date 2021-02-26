@@ -563,9 +563,12 @@ void RKRGUI::GuiTimeout(void)
 }
 
 
-void RKRGUI::Background_Color_Change(Fl_Color bcolor)
+void RKRGUI::back_color_change(Fl_Color back_color)
 {
-    global_back_color = bcolor;
+    global_back_color = back_color;
+    
+    // Increment look changed flag
+    global_look_changed > 10 ? 0 : global_look_changed++;
     
     if (!m_process->EnableBackgroundImage)
     {
@@ -576,23 +579,35 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor)
     Fl::redraw();
 }
 
-void RKRGUI::Label_Color_Change(Fl_Color bcolor)
+void RKRGUI::label_color_change(Fl_Color label_color)
 {
-    global_label_color = bcolor;
+    global_label_color = label_color;
+
+    // Increment look changed flag
+    global_look_changed > 10 ? 0 : global_look_changed++;
+
     ChangeActives();
     Fl::redraw();
 }
 
-void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
+void RKRGUI::buttons_color_change(Fl_Color buttons_color)
 {
-    global_fore_color = bcolor;
+    global_fore_color = buttons_color;
+    
+    // Increment look changed flag
+    global_look_changed > 10 ? 0 : global_look_changed++;
+
     ChangeActives();
     Fl::redraw();
 }
 
-void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
+void RKRGUI::leds_color_change(Fl_Color leds_color)
 {
-    global_leds_color = bcolor;
+    global_leds_color = leds_color;
+
+    // Increment look changed flag
+    global_look_changed > 10 ? 0 : global_look_changed++;
+
     ChangeActives();
     Fl::redraw();
 }
@@ -600,6 +615,10 @@ void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
 void RKRGUI::font_size_change(int font_size)
 {
     global_font_size = font_size;
+
+    // Increment look changed flag
+    global_look_changed > 10 ? 0 : global_look_changed++;
+
     ChangeActives();
     Fl::redraw();
 }
@@ -607,6 +626,10 @@ void RKRGUI::font_size_change(int font_size)
 void RKRGUI::font_type_change (int font_type)
 {
     global_font_type = font_type;
+
+    // Increment look changed flag
+    global_look_changed > 10 ? 0 : global_look_changed++;
+
     ChangeActives();
     Fl::redraw();
 }
@@ -700,10 +723,10 @@ void RKRGUI::load_previous_state()
 
     Settings->resize(x, y, w, h);
 
-    Background_Color_Change((Fl_Color)back_color);
-    Buttons_Color_Change((Fl_Color)fore_color);
-    Leds_Color_Change((Fl_Color)leds_color);
-    Label_Color_Change((Fl_Color)label_color);
+    back_color_change((Fl_Color)back_color);
+    buttons_color_change((Fl_Color)fore_color);
+    leds_color_change((Fl_Color)leds_color);
+    label_color_change((Fl_Color)label_color);
     font_size_change(font_size);
     font_type_change(font_type);
 
@@ -2499,10 +2522,10 @@ void RKRGUI::Put_Skin()
     Settings->scheme_ch->do_callback();
     PutBackground();
     
-    Background_Color_Change((Fl_Color) m_process->sback_color);
-    Leds_Color_Change((Fl_Color) m_process->sleds_color);
-    Buttons_Color_Change((Fl_Color) m_process->sfore_color);
-    Label_Color_Change((Fl_Color) m_process->slabel_color);
+    back_color_change((Fl_Color) m_process->sback_color);
+    leds_color_change((Fl_Color) m_process->sleds_color);
+    buttons_color_change((Fl_Color) m_process->sfore_color);
+    label_color_change((Fl_Color) m_process->slabel_color);
     font_size_change(m_process->sfont_size);
     font_type_change(m_process->sfont_type);
 

@@ -567,10 +567,10 @@ private:
   static void TimeoutStatic(void* ptr);
   void GuiTimeout(void);
 public:
-  void Background_Color_Change(Fl_Color bcolor);
-  void Label_Color_Change(Fl_Color bcolor);
-  void Buttons_Color_Change(Fl_Color bcolor);
-  void Leds_Color_Change(Fl_Color bcolor);
+  void back_color_change(Fl_Color back_color);
+  void label_color_change(Fl_Color label_color);
+  void buttons_color_change(Fl_Color buttons_color);
+  void leds_color_change(Fl_Color leds_color);
   void font_size_change(int font_size);
   void font_type_change(int font_type);
   void put_icon(Fl_Window* window);

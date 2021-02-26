@@ -29,8 +29,9 @@ Fl_Color global_leds_color = FL_DARK_YELLOW;
 Fl_Color global_back_color = FL_BLACK; 
 Fl_Color global_fore_color = FL_DARK3; 
 Fl_Color global_label_color = FL_WHITE; 
-int global_font_size = C_DEFAULT_FONT_SIZE; // extern global
+int global_font_size = C_DEFAULT_FONT_SIZE; 
 int global_font_type = 0; 
+int global_look_changed = 0; 
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();

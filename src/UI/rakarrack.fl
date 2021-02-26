@@ -288,10 +288,13 @@ decl {Fl_Color global_fore_color = FL_DARK3;} {private global
 decl {Fl_Color global_label_color = FL_WHITE;} {private global
 }
 
-decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private global
+decl {int global_font_size = C_DEFAULT_FONT_SIZE;} {private global
 }
 
 decl {int global_font_type = 0;} {private global
+}
+
+decl {int global_look_changed = 0;} {private global
 }
 
 class RKRGUI {open
@@ -324,7 +327,7 @@ Array is indexed by EFX_Index.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {582 135 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {691 403 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1904,13 +1907,13 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {GuiTimeout(void)} {open private C return_type void
   } {}
-  Function {Background_Color_Change(Fl_Color bcolor)} {open
+  Function {back_color_change(Fl_Color back_color)} {open
   } {}
-  Function {Label_Color_Change(Fl_Color bcolor)} {open
+  Function {label_color_change(Fl_Color label_color)} {open
   } {}
-  Function {Buttons_Color_Change(Fl_Color bcolor)} {open
+  Function {buttons_color_change(Fl_Color buttons_color)} {open
   } {}
-  Function {Leds_Color_Change(Fl_Color bcolor)} {open
+  Function {leds_color_change(Fl_Color leds_color)} {open
   } {}
   Function {font_size_change(int font_size)} {open
   } {}

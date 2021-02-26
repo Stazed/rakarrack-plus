@@ -48,10 +48,9 @@ extern Fl_Color global_fore_color;
 extern Fl_Color global_label_color;
 extern int global_font_type;
 extern int global_font_size;
+extern int global_look_changed;
 
-/* The font size adjustments */
 const int C_DEFAULT_FONT_SIZE = 10;
-const int C_DONT_CHANGE_FONT_SIZE = 0;
 
 /* These are used by settings midi scroll for identifying the scroll widgets - user data (void *) */
 const int c_bank_used = 1000;
