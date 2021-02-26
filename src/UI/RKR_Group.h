@@ -29,7 +29,6 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
 
-#define GROUP_USER_DATA   99996
 
 class RKR_Group : public Fl_Group
 {
@@ -44,7 +43,7 @@ private:
     int m_label_offset;
     int m_start_width;
     int m_start_height;
-    int m_previous_font_size;
+    int m_look_changed;
     void font_resize(int,int);
 };
 
