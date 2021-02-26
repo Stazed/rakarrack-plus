@@ -55,7 +55,7 @@ private:
     int m_start_y;
     int m_start_width;
     int m_start_height;
-    int m_previous_font_size;
+    int m_look_changed;
 };
 
 #endif /* RKR_CHOICE_H */
