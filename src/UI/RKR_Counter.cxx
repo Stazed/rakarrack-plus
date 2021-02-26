@@ -32,24 +32,19 @@ RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) :
     m_text_offset(0),       // C_DEFAULT_FONT_SIZE
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size)
+    m_look_changed(0)
 {
-//    this->user_data((void*)(BUTTON_USER_DATA));
 }
 
 void RKR_Counter::draw()
 {
-#if 1
-    labelcolor(global_label_color);
-    color(global_fore_color);
-    labelfont(global_font_type);
-    textfont(global_font_type);
-    
-#endif
-    /* To update the font size if user changes the value in settings */
-    if(global_font_size != m_previous_font_size)
+    if(m_look_changed != global_look_changed)
     {
-        m_previous_font_size = global_font_size;
+        m_look_changed = global_look_changed;
+        labelcolor(global_label_color);
+        color(global_fore_color);
+        labelfont(global_font_type);
+        textfont(global_font_type);
         font_resize(w(), h());
     }
 
