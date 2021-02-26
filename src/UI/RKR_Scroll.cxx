@@ -33,13 +33,18 @@ RKR_Scroll::RKR_Scroll(int X, int Y, int W, int H, const char *label) :
     m_start_x(X),
     m_start_y(Y),
     m_start_width(W),
-    m_start_height(H)
+    m_start_height(H),
+    m_look_changed(0)
 {
 }
 
 void RKR_Scroll::draw()
 {
-    color(global_fore_color);
+    if(m_look_changed != global_look_changed)
+    {
+        m_look_changed = global_look_changed;
+        color(global_fore_color);
+    }
 
     Fl_Scroll::draw();
 }

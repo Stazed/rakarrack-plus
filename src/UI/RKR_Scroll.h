@@ -48,6 +48,7 @@ private:
     int m_start_y;
     int m_start_width;
     int m_start_height;
+    int m_look_changed;
 };
 
 #endif /* RKR_SCROLL_H */
