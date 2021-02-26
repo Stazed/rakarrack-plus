@@ -56,8 +56,8 @@ private:
     int m_start_y;
     int m_start_width;
     int m_start_height;
-    int m_previous_font_size;
     int m_box_type;
+    int m_look_changed;
     void font_resize(int,int);
 
 };

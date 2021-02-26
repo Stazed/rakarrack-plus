@@ -33,44 +33,40 @@ RKR_Box::RKR_Box(int X, int Y, int W, int H, const char *label) :
     m_start_y(Y),
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size),
-    m_box_type(BOX_DEFAULT)
+    m_box_type(BOX_DEFAULT),
+    m_look_changed(0)
 {
 }
 
 void RKR_Box::draw()
 {
-#if 1
-    switch(m_box_type)
+    if(m_look_changed != global_look_changed)
     {
-        case BOX_DEFAULT:
+        m_look_changed = global_look_changed;
+
+        switch(m_box_type)
         {
-            labelcolor(global_label_color);
-            color(global_fore_color);
-            break;
+            case BOX_DEFAULT:
+            {
+                labelcolor(global_label_color);
+                color(global_fore_color);
+                break;
+            }
+
+            case BOX_LEDS:
+            {
+                labelcolor(global_leds_color);
+                color(global_back_color);
+                break;
+            }
+
+            case BOX_LIGHT:
+            {
+                break;
+            }
         }
-        
-        case BOX_LEDS:
-        {
-            labelcolor(global_leds_color);
-            color(global_back_color);
-            break;
-        }
-        
-        case BOX_LIGHT:
-        {
-            break;
-        }
-    }
-    
- 
-    labelfont(global_font_type);
-    
-#endif
-    /* To update the font size if user changes the value in settings */
-    if(global_font_size != m_previous_font_size)
-    {
-        m_previous_font_size = global_font_size;
+
+        labelfont(global_font_type);
         font_resize(w(), h());
     }
 
