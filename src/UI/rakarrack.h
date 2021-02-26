@@ -571,7 +571,8 @@ public:
   void Label_Color_Change(Fl_Color bcolor);
   void Buttons_Color_Change(Fl_Color bcolor);
   void Leds_Color_Change(Fl_Color bcolor);
-  void chfsize(int font_size);
+  void font_size_change(int font_size);
+  void font_type_change(int font_type);
   void put_icon(Fl_Window* window);
   void load_previous_state();
   void save_current_state(int whati);

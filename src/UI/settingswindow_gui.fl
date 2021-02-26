@@ -130,7 +130,7 @@ break;
       Fl_Browser Font_Bro {
         label Font
         callback {global_font_type = (int)o->value()-1;
-m_parent->chfsize(C_DONT_CHANGE_FONT_SIZE);}
+m_parent->font_size_change(C_DONT_CHANGE_FONT_SIZE);}
         xywh {30 100 400 225} type Select labelcolor 7 align 1 when 1
         code0 {o->set_browser_type(FONT_BROWSER);}
         class RKR_Browser
@@ -144,7 +144,7 @@ m_parent->chfsize(C_DONT_CHANGE_FONT_SIZE);}
       Fl_Button FSless {
         label {-}
         user_data 77
-        callback {m_parent->chfsize(global_font_size - 1);}
+        callback {m_parent->font_size_change(global_font_size - 1);}
         xywh {95 330 30 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
@@ -152,7 +152,7 @@ m_parent->chfsize(C_DONT_CHANGE_FONT_SIZE);}
       Fl_Button FSplus {
         label {+}
         user_data 77
-        callback {m_parent->chfsize(global_font_size + 1);}
+        callback {m_parent->font_size_change(global_font_size + 1);}
         xywh {130 330 30 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
@@ -160,7 +160,7 @@ m_parent->chfsize(C_DONT_CHANGE_FONT_SIZE);}
       Fl_Button FSReset {
         label Reset
         user_data 77
-        callback {m_parent->chfsize(C_DEFAULT_FONT_SIZE);}
+        callback {m_parent->font_size_change(C_DEFAULT_FONT_SIZE);}
         xywh {165 330 57 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button

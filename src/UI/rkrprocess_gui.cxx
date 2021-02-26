@@ -597,13 +597,20 @@ void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
     Fl::redraw();
 }
 
-void RKRGUI::chfsize(int font_size)
+void RKRGUI::font_size_change(int font_size)
 {
     if(font_size)
     {
         global_font_size = m_process->fontsize = font_size;
     }
 
+    ChangeActives();
+    Fl::redraw();
+}
+
+void RKRGUI::font_type_change (int font_type)
+{
+    global_font_type = font_type;
     ChangeActives();
     Fl::redraw();
 }
@@ -630,7 +637,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 {
     // change the label colors
     global_label_color = bcolor;
-    chfsize(C_DONT_CHANGE_FONT_SIZE);
+    font_size_change(C_DONT_CHANGE_FONT_SIZE);
 
 
     for (int t = 0; t < Settings->STabs->children(); t++)
@@ -758,7 +765,7 @@ void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
 {
     // change the leds color
     global_leds_color = bcolor;
-    chfsize(C_DONT_CHANGE_FONT_SIZE);
+    font_size_change(C_DONT_CHANGE_FONT_SIZE);
 }
 
 /**
@@ -769,7 +776,7 @@ void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
  *      user adjusting the font up or down from the Settings/Preferences/Look
  *      + or - buttons for font size.
  */
-void RKRGUI::chfsize(int font_size)
+void RKRGUI::font_size_change(int font_size)
 {
     /* global_font_size is used by all RKR widget overrides to adjust font size in draw().
      * This variable should only be adjusted here. */
@@ -889,7 +896,7 @@ void RKRGUI::load_previous_state()
     PutBackground();
     rakarrack.get(m_process->PrefNom("FontSize"), m_process->fontsize, C_DEFAULT_FONT_SIZE);
     if (m_process->fontsize != C_DEFAULT_FONT_SIZE)
-        chfsize(m_process->fontsize);
+        font_size_change(m_process->fontsize);
     
     // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
     // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
@@ -2750,7 +2757,7 @@ void RKRGUI::Put_Skin()
     Settings->scheme_ch->value(m_process->sschema);
     Settings->scheme_ch->do_callback();
     PutBackground();
-    chfsize(m_process->fontsize);
+    font_size_change(m_process->fontsize);
     Leds_Color_Change(global_leds_color);
     Buttons_Color_Change(global_fore_color);
 

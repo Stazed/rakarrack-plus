@@ -47,9 +47,9 @@ extern Fl_Color global_back_color;
 extern Fl_Color global_fore_color; 
 extern Fl_Color global_label_color;
 extern int global_font_type;
+extern int global_font_size;
 
 /* The font size adjustments */
-extern int global_font_size;
 const int C_DEFAULT_FONT_SIZE = 10;
 const int C_DONT_CHANGE_FONT_SIZE = 0;
 

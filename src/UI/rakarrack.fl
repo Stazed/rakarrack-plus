@@ -324,7 +324,7 @@ Array is indexed by EFX_Index.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {492 237 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {582 135 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1912,7 +1912,9 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {Leds_Color_Change(Fl_Color bcolor)} {open
   } {}
-  Function {chfsize(int font_size)} {open
+  Function {font_size_change(int font_size)} {open
+  } {}
+  Function {font_type_change(int font_type)} {open return_type void
   } {}
   Function {put_icon(Fl_Window* window)} {open
   } {}
