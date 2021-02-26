@@ -54,8 +54,8 @@ Fl_Menu_Item SettingsWindowGui::menu_scheme_ch[] = {
 };
 
 void SettingsWindowGui::cb_Font_Bro_i(RKR_Browser* o, void*) {
-  global_font_type = (int)o->value()-1;
-m_parent->font_size_change(C_DONT_CHANGE_FONT_SIZE);
+  int font_type = (int)o->value()-1;
+m_parent->font_type_change(font_type);
 }
 void SettingsWindowGui::cb_Font_Bro(RKR_Browser* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Font_Bro_i(o,v);
@@ -86,9 +86,11 @@ void SettingsWindowGui::cb_B_C_i(RKR_Button*, void*) {
   uchar r,g,b;
 
 Fl::get_color(global_fore_color,r,g,b);
-if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
-global_fore_color=fl_rgb_color(r,g,b);
-m_parent->Buttons_Color_Change(global_fore_color);
+if (!fl_color_chooser("rakarrak buttons color:",r,g,b))
+   return;
+
+Fl_Color fore_color = fl_rgb_color(r,g,b);
+m_parent->Buttons_Color_Change(fore_color);
 }
 void SettingsWindowGui::cb_B_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_B_C_i(o,v);
@@ -96,10 +98,13 @@ void SettingsWindowGui::cb_B_C(RKR_Button* o, void* v) {
 
 void SettingsWindowGui::cb_A_C_i(RKR_Button*, void*) {
   uchar r,g,b;
+
 Fl::get_color(global_label_color,r,g,b);
-if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
-global_label_color=fl_rgb_color(r,g,b);
-m_parent->Label_Color_Change(global_label_color);
+if (!fl_color_chooser("rakarrack label color:",r,g,b))
+   return;
+   
+Fl_Color label_color = fl_rgb_color(r,g,b);
+m_parent->Label_Color_Change(label_color);
 }
 void SettingsWindowGui::cb_A_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_A_C_i(o,v);
@@ -107,10 +112,13 @@ void SettingsWindowGui::cb_A_C(RKR_Button* o, void* v) {
 
 void SettingsWindowGui::cb_L_C_i(RKR_Button*, void*) {
   uchar r,g,b;
+
 Fl::get_color(global_leds_color,r,g,b);
-if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
-global_leds_color=fl_rgb_color(r,g,b);
-m_parent->Leds_Color_Change(global_leds_color);
+if (!fl_color_chooser("rakarrack leds color:",r,g,b))
+   return;
+
+Fl_Color leds_color = fl_rgb_color(r,g,b);
+m_parent->Leds_Color_Change(leds_color);
 }
 void SettingsWindowGui::cb_L_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_L_C_i(o,v);
@@ -118,10 +126,13 @@ void SettingsWindowGui::cb_L_C(RKR_Button* o, void* v) {
 
 void SettingsWindowGui::cb_K_C_i(RKR_Button*, void*) {
   uchar r,g,b;
+
 Fl::get_color(global_back_color,r,g,b);
-if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
-global_back_color=fl_rgb_color(r,g,b);
-m_parent->Background_Color_Change(global_back_color);
+if (!fl_color_chooser("rakarrack back color:",r,g,b))
+   return;
+
+Fl_Color back_color = fl_rgb_color(r,g,b);
+m_parent->Background_Color_Change(back_color);
 }
 void SettingsWindowGui::cb_K_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_K_C_i(o,v);

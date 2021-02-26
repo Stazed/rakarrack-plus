@@ -599,11 +599,7 @@ void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
 
 void RKRGUI::font_size_change(int font_size)
 {
-    if(font_size)
-    {
-        global_font_size = m_process->fontsize = font_size;
-    }
-
+    global_font_size = m_process->fontsize = font_size;
     ChangeActives();
     Fl::redraw();
 }
