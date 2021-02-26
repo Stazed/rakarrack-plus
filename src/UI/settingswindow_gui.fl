@@ -176,10 +176,10 @@ m_parent->chfsize(C_DONT_CHANGE_FONT_SIZE);}
         user_data 77
         callback {uchar r,g,b;
 
-Fl::get_color(fore_color,r,g,b);
+Fl::get_color(global_fore_color,r,g,b);
 if (!fl_color_chooser("rakarrak buttons color:",r,g,b)) return;
-fore_color=fl_rgb_color(r,g,b);
-m_parent->Buttons_Color_Change(fore_color);}
+global_fore_color=fl_rgb_color(r,g,b);
+m_parent->Buttons_Color_Change(global_fore_color);}
         xywh {30 380 90 25}
         code0 {o->set_label_offset(4);}
         class RKR_Button

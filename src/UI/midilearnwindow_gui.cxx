@@ -139,7 +139,7 @@ void MidiLearnWindowGui::cb_AssignA(RKR_Button* o, void* v) {
 
 void MidiLearnWindowGui::cb_CancelRec_i(RKR_Button*, void*) {
   m_process->RControl = 0;
-GMM->color(fore_color);
+GMM->color(global_fore_color);
 GMM->redraw();
 }
 void MidiLearnWindowGui::cb_CancelRec(RKR_Button* o, void* v) {

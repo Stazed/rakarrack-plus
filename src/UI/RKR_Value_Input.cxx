@@ -72,7 +72,7 @@ RKR_Value_Input::~RKR_Value_Input()
 
 void RKR_Value_Input::draw()
 {
-    color(fore_color);
+    color(global_fore_color);
     labelcolor(label_color);
     labelfont(global_font_type);
     textfont(global_font_type);

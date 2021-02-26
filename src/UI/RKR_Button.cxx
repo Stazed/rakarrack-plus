@@ -44,7 +44,7 @@ void RKR_Button::draw()
     {
         case BUTTON_DEFAULT:
         {
-            color(fore_color);
+            color(global_fore_color);
             labelcolor(label_color);
             break;
         }
@@ -57,7 +57,7 @@ void RKR_Button::draw()
             }
             else
             {
-                color(fore_color);
+                color(global_fore_color);
             }
             
             labelcolor(label_color);

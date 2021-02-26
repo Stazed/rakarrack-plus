@@ -39,7 +39,7 @@ RKR_Scroll::RKR_Scroll(int X, int Y, int W, int H, const char *label) :
 
 void RKR_Scroll::draw()
 {
-    color(fore_color);
+    color(global_fore_color);
 
     Fl_Scroll::draw();
 }

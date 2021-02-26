@@ -40,7 +40,7 @@ void RKR_File_Input::draw()
 {
     labelcolor(label_color);
     selection_color(global_back_color);
-    color(fore_color);
+    color(global_fore_color);
     labelfont(global_font_type);
     textcolor(label_color);
     textfont(global_font_type);

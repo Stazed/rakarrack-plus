@@ -317,7 +317,7 @@ void BankWindowGui::make_window_banks() {
           {
                RKR_Button* butX = new RKR_Button(x+1, y+1, elw,elh,m_process->Bank[num].Preset_Name);
                 butX->type(0);
-                butX->color(fore_color);
+                butX->color(global_fore_color);
                 butX->box(FL_UP_BOX);
                 butX->selection_color(global_leds_color);
                 butX->labelcolor(label_color);
@@ -345,11 +345,11 @@ void BankWindowGui::make_window_banks() {
     ob->end();
     m_parent->set_bank_made(1);
     
-    B_B1->color(fore_color);
-    B_B2->color(fore_color);
-    B_B3->color(fore_color);
-    B_B4->color(fore_color);
-    CH_UB->color(fore_color);
+    B_B1->color(global_fore_color);
+    B_B2->color(global_fore_color);
+    B_B3->color(global_fore_color);
+    B_B4->color(global_fore_color);
+    CH_UB->color(global_fore_color);
     
     light_preset(m_process->Selected_Preset);
 }

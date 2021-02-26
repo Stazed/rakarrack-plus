@@ -270,7 +270,7 @@ Assign->do_callback();}
     label Cancel
     user_data 77
     callback {m_process->RControl = 0;
-GMM->color(fore_color);
+GMM->color(global_fore_color);
 GMM->redraw();}
     xywh {200 450 60 20}
     code0 {o->set_label_offset(4);}

@@ -42,7 +42,7 @@ RKR_Choice::RKR_Choice(int X, int Y, int W, int H, const char *label) :
 void RKR_Choice::draw()
 {
 #if 1
-    color(fore_color);
+    color(global_fore_color);
     labelcolor(label_color);
     textcolor(label_color);
     labelfont(global_font_type);

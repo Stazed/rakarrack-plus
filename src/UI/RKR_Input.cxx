@@ -39,7 +39,7 @@ RKR_Input::RKR_Input(int X, int Y, int W, int H, const char *label) :
 void RKR_Input::draw()
 {
     labelcolor(label_color);
-    color(fore_color);
+    color(global_fore_color);
     labelfont(global_font_type);
     textcolor(label_color);
     textfont(global_font_type);

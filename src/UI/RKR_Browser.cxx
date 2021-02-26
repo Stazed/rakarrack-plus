@@ -44,7 +44,7 @@ void RKR_Browser::draw()
     labelfont(global_font_type);
     selection_color(global_back_color);
     textcolor(label_color);
-    color(fore_color);
+    color(global_fore_color);
     
     if(m_type_browser != FONT_BROWSER)
         textfont(global_font_type);

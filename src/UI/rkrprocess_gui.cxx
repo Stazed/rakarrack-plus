@@ -526,7 +526,7 @@ void RKRGUI::GuiTimeout(void)
 
         if (m_process->CountWait == 50)
         {
-            MIDILearn->GMM->color(fore_color);
+            MIDILearn->GMM->color(global_fore_color);
             MIDILearn->GMM->redraw();
             m_process->CountWait = 0;
         }
@@ -536,7 +536,7 @@ void RKRGUI::GuiTimeout(void)
             m_process->RControl = 0;
             MIDILearn->Disp_Control->value(m_process->ControlGet);
             MIDILearn->Disp_Control->redraw();
-            MIDILearn->GMM->color(fore_color);
+            MIDILearn->GMM->color(global_fore_color);
             MIDILearn->GMM->redraw();
             if ((m_process->comemouse) && (m_process->autoassign))
             {
@@ -585,7 +585,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 
 void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
 {
-    fore_color = bcolor;
+    global_fore_color = bcolor;
     ChangeActives();
     Fl::redraw();
 }
@@ -638,7 +638,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
         Fl_Widget *tabg = Settings->STabs->child(t);
         tabg->labelcolor(label_color);
         tabg->selection_color(global_back_color);
-        tabg->color(fore_color);
+        tabg->color(global_fore_color);
 
         long long ud = (long long) tabg->user_data();
 
@@ -652,7 +652,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 
                 w->labelcolor(label_color);
                 w->selection_color(global_back_color);
-                w->color(fore_color);
+                w->color(global_fore_color);
                 
                 long long ugd = (long long) w->user_data();
                 
@@ -665,7 +665,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 
                         ww->labelcolor(label_color);
                         ww->selection_color(global_back_color);
-                        ww->color(fore_color);
+                        ww->color(global_fore_color);
                     }
                 }
                 
@@ -695,7 +695,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 
         w->labelcolor(label_color);
         w->selection_color(global_back_color);
-        w->color(fore_color);
+        w->color(global_fore_color);
     }
 
     for (int t = 0; t < Order->Filters->children(); t++)
@@ -704,7 +704,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 
         w->labelcolor(label_color);
         w->selection_color(global_back_color);
-        w->color(fore_color);
+        w->color(global_fore_color);
     }
 
 
@@ -714,7 +714,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 
         w->labelcolor(label_color);
         w->selection_color(global_back_color);
-        w->color(fore_color);
+        w->color(global_fore_color);
     }
 
     Settings->Font_Bro->textcolor(label_color);
@@ -749,7 +749,7 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
     }
 
 
-    fore_color = bcolor;
+    global_fore_color = bcolor;
     Trigger->aux_source->color(bcolor);
     Label_Color_Change(label_color);
 }
@@ -833,7 +833,7 @@ void RKRGUI::chfsize(int font_size)
                     c->selection_color(global_leds_color);
                 }
 
-                c->color(fore_color);
+                c->color(global_fore_color);
                 c->labelfont(global_font_type);
             }
         }
@@ -841,7 +841,7 @@ void RKRGUI::chfsize(int font_size)
 
     CLIP_LED->selection_color(FL_RED);
     Etit->labelcolor(global_leds_color);
-    Trigger->aux_midi->color(fore_color);
+    Trigger->aux_midi->color(global_fore_color);
     Trigger->aux_midi->textcolor(FL_BACKGROUND2_COLOR);
 
     ChangeActives();
@@ -944,12 +944,12 @@ void RKRGUI::load_previous_state()
 
 
     global_back_color = (Fl_Color) b;
-    fore_color = (Fl_Color) f;
+    global_fore_color = (Fl_Color) f;
     global_leds_color = (Fl_Color) l;
     label_color = (Fl_Color) a;
 
     Background_Color_Change(global_back_color);
-    Buttons_Color_Change(fore_color);
+    Buttons_Color_Change(global_fore_color);
     Leds_Color_Change(global_leds_color);
     Label_Color_Change(label_color);
 
@@ -1219,7 +1219,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Font"), global_font_type);
 
         rakarrack.set(m_process->PrefNom("Background Color"), (int) global_back_color);
-        rakarrack.set(m_process->PrefNom("Foreground Color"), (int) fore_color);
+        rakarrack.set(m_process->PrefNom("Foreground Color"), (int) global_fore_color);
         rakarrack.set(m_process->PrefNom("Leds Color"), (int) global_leds_color);
         rakarrack.set(m_process->PrefNom("Labels Color"), (int) label_color);
         rakarrack.set(m_process->PrefNom("Schema"), (int) Settings->scheme_ch->value());
@@ -2743,7 +2743,7 @@ void RKRGUI::Put_Skin()
     Principal->resize(Principal->x(), Principal->y(), m_process->swidth, m_process->sheight);
 
     global_back_color = (Fl_Color) m_process->sback_color;
-    fore_color = (Fl_Color) m_process->sfore_color;
+    global_fore_color = (Fl_Color) m_process->sfore_color;
     global_leds_color = (Fl_Color) m_process->sleds_color;
     label_color = (Fl_Color) m_process->slabel_color;
 
@@ -2752,7 +2752,7 @@ void RKRGUI::Put_Skin()
     PutBackground();
     chfsize(m_process->fontsize);
     Leds_Color_Change(global_leds_color);
-    Buttons_Color_Change(fore_color);
+    Buttons_Color_Change(global_fore_color);
 
 
     save_current_state(3);
@@ -3285,7 +3285,7 @@ void RKRGUI::highlight()
     {
         if (old != NULL)
         {
-            old->color(fore_color);
+            old->color(global_fore_color);
             old->redraw();
         }
     }
@@ -3295,10 +3295,10 @@ void RKRGUI::highlight()
     {
         if (old != NULL)
         {
-            old->color(fore_color);
+            old->color(global_fore_color);
             old->redraw();
         }
-        w->color(fl_color_average(fore_color, fl_lighter(fore_color), .8));
+        w->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .8));
         w->redraw();
         old = w;
     }
@@ -3307,7 +3307,7 @@ void RKRGUI::highlight()
     {
         if (old != NULL)
         {
-            old->color(fore_color);
+            old->color(global_fore_color);
             old->redraw();
             old->redraw_label();
         }
