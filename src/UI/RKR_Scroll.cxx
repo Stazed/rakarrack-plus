@@ -43,7 +43,7 @@ void RKR_Scroll::draw()
     if(m_look_changed != global_look_changed)
     {
         m_look_changed = global_look_changed;
-        color(global_fore_color);
+        color(fl_lighter(global_back_color));
     }
 
     Fl_Scroll::draw();
