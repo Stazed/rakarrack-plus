@@ -170,7 +170,6 @@ RKR::RKR() :
     Stomp_down_q(),
     sw_stat(),
     MIDIway(),
-    fontsize(C_DEFAULT_FONT_SIZE),
     swidth(),
     sheight(),
     sschema(),

@@ -1003,7 +1003,6 @@ public:
 
     int sw_stat;
     int MIDIway;
-    int fontsize;
     int swidth;
     int sheight;
     int sschema;
