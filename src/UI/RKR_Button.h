@@ -57,9 +57,9 @@ private:
     int m_label_offset;
     int m_start_width;
     int m_start_height;
-    int m_previous_font_size;
     int m_bank_highlight_preset;
     int m_button_type;
+    int m_look_changed;
 };
 
 #endif /* RKR_BUTTON_H */
