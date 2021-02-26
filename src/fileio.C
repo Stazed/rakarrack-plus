@@ -1484,7 +1484,7 @@ RKR::load_skin(char *filename)
         load_skin_error(fn);
         return 0;
     }
-    sscanf(buf, "%d,%d\n", &global_font_size, &global_font_type);
+    sscanf(buf, "%d,%d\n", &sfont_size, &sfont_type);
 
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)

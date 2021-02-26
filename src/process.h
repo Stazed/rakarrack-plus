@@ -1010,6 +1010,8 @@ public:
     int sfore_color;
     int sback_color;
     int sleds_color;
+    int sfont_size;
+    int sfont_type;
 
     int have_signal;
     int OnCounter;

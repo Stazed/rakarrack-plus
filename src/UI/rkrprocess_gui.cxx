@@ -2736,21 +2736,18 @@ void RKRGUI::findpos(int num, int value, Fl_Widget*)
 
 void RKRGUI::Put_Skin()
 {
-    // adjust based on theme selected in settings-look
     Principal->resize(Principal->x(), Principal->y(), m_process->swidth, m_process->sheight);
-
-    global_back_color = (Fl_Color) m_process->sback_color;
-    global_fore_color = (Fl_Color) m_process->sfore_color;
-    global_leds_color = (Fl_Color) m_process->sleds_color;
-    global_label_color = (Fl_Color) m_process->slabel_color;
 
     Settings->scheme_ch->value(m_process->sschema);
     Settings->scheme_ch->do_callback();
     PutBackground();
-    font_size_change(global_font_size);
-    Leds_Color_Change(global_leds_color);
-    Buttons_Color_Change(global_fore_color);
-
+    
+    Background_Color_Change((Fl_Color) m_process->sback_color);
+    Leds_Color_Change((Fl_Color) m_process->sleds_color);
+    Buttons_Color_Change((Fl_Color) m_process->sfore_color);
+    Label_Color_Change((Fl_Color) m_process->slabel_color);
+    font_size_change(m_process->sfont_size);
+    font_type_change(m_process->sfont_type);
 
     save_current_state(3);
     Fl::redraw();

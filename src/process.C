@@ -177,6 +177,8 @@ RKR::RKR() :
     sfore_color(),
     sback_color(),
     sleds_color(),
+    sfont_size(C_DEFAULT_FONT_SIZE),
+    sfont_type(0),
     have_signal(),
     OnCounter(),
     t_periods(),
