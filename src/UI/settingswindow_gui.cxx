@@ -118,10 +118,10 @@ void SettingsWindowGui::cb_L_C(RKR_Button* o, void* v) {
 
 void SettingsWindowGui::cb_K_C_i(RKR_Button*, void*) {
   uchar r,g,b;
-Fl::get_color(back_color,r,g,b);
+Fl::get_color(global_back_color,r,g,b);
 if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
-back_color=fl_rgb_color(r,g,b);
-m_parent->Background_Color_Change(back_color);
+global_back_color=fl_rgb_color(r,g,b);
+m_parent->Background_Color_Change(global_back_color);
 }
 void SettingsWindowGui::cb_K_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_K_C_i(o,v);

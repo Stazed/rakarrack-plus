@@ -43,7 +43,7 @@ class RKR;      // forward declaration
 // These are defined in rakarrack.cxx
 extern Fl_Tiled_Image *back; 
 extern Fl_Color global_leds_color; 
-extern Fl_Color back_color; 
+extern Fl_Color global_back_color; 
 extern Fl_Color fore_color; 
 extern Fl_Color label_color;
 extern int global_font_type;

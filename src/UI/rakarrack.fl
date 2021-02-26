@@ -279,7 +279,7 @@ decl {Fl_Tiled_Image *back;} {private global
 decl {Fl_Color global_leds_color;} {private global
 }
 
-decl {Fl_Color back_color;} {private global
+decl {Fl_Color global_back_color;} {private global
 }
 
 decl {Fl_Color fore_color;} {private global
@@ -387,7 +387,7 @@ filename=fl_filename_setext(filename,EXT);
 \#undef EXT
 
 m_process->slabel_color = (int) label_color;
-m_process->sback_color = (int) back_color;
+m_process->sback_color = (int) global_back_color;
 m_process->sfore_color = (int) fore_color;
 m_process->sleds_color = (int) global_leds_color;
 m_process->swidth = (int) Principal->w();

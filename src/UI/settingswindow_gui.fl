@@ -212,10 +212,10 @@ m_parent->Leds_Color_Change(global_leds_color);}
         label Background
         user_data 77
         callback {uchar r,g,b;
-Fl::get_color(back_color,r,g,b);
+Fl::get_color(global_back_color,r,g,b);
 if (!fl_color_chooser("rakarrack back color:",r,g,b)) return;
-back_color=fl_rgb_color(r,g,b);
-m_parent->Background_Color_Change(back_color);}
+global_back_color=fl_rgb_color(r,g,b);
+m_parent->Background_Color_Change(global_back_color);}
         xywh {330 380 90 25}
         code0 {o->set_label_offset(4);}
         class RKR_Button

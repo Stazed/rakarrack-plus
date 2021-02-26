@@ -26,7 +26,7 @@ Scope::Scope(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h,
     Scope_ON = false;
     back = NULL;
     global_leds_color = 0;
-    back_color = 0;
+    global_back_color = 0;
 }
 
 void Scope::init(float *smpsl, float *smpsr, int PERIOD, RKRGUI *_rgui)
@@ -113,7 +113,7 @@ void Scope::draw()
     }
     else
     {
-        draw_box(box(), ox, oy, lx, ly, back_color);
+        draw_box(box(), ox, oy, lx, ly, global_back_color);
         draw_label();
     }
 }

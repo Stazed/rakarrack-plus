@@ -42,7 +42,7 @@ void RKR_Browser::draw()
 #if 1
     labelcolor(label_color);
     labelfont(global_font_type);
-    selection_color(back_color);
+    selection_color(global_back_color);
     textcolor(label_color);
     color(fore_color);
     

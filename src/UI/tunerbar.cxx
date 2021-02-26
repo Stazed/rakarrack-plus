@@ -27,7 +27,7 @@ TunerBar::TunerBar(int x, int y, int w, int h, const char *label) : Fl_Slider(x,
 void TunerBar::draw_bg(int X, int Y, int W, int H)
 {
     fl_push_clip(X, Y, W, H);
-    // draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,back_color);
+    // draw_box(FL_THIN_DOWN_BOX,X,Y,W,H,global_back_color);
 
     back->draw(X, Y);
     fl_pop_clip();

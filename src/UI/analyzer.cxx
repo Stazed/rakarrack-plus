@@ -26,7 +26,7 @@ Analyzer::Analyzer(int x, int y, int w, int h, const char *label) : Fl_Box(x, y,
     Analyzer_ON = false;
     back = NULL;
     global_leds_color = 0;
-    back_color = 0;
+    global_back_color = 0;
 }
 
 void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRGUI *_rgui)
@@ -97,7 +97,7 @@ void Analyzer::draw()
     }
     else
     {
-        draw_box(box(), ox, oy, lx, ly, back_color);
+        draw_box(box(), ox, oy, lx, ly, global_back_color);
         draw_label();
     }
 }

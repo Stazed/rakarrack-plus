@@ -53,7 +53,7 @@ void RKR_Box::draw()
         case BOX_LEDS:
         {
             labelcolor(global_leds_color);
-            color(back_color);
+            color(global_back_color);
             break;
         }
         

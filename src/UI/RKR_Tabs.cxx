@@ -70,7 +70,7 @@ void RKR_Tabs::font_resize(int W, int H)
         c->labelfont (global_font_type);
         c->labelcolor (label_color);
         c->color (fore_color);
-        c->selection_color (back_color);
+        c->selection_color (global_back_color);
     }
 }
 

@@ -243,7 +243,7 @@ void RKR_Slider::draw()
         shh -= bhh;             // reduce slider height by box height
     }
 
-    //  if (damage()&FL_DAMAGE_ALL) draw_box(box(),sxx,syy,sww,shh,back_color);
+    //  if (damage()&FL_DAMAGE_ALL) draw_box(box(),sxx,syy,sww,shh,global_back_color);
 
     X = sxx + Fl::box_dx(box());
     Y = syy + Fl::box_dy(box());

@@ -39,7 +39,7 @@ RKR_Menu_Bar::RKR_Menu_Bar(int X, int Y, int W, int H, const char *label) :
 void RKR_Menu_Bar::draw()
 {
 #if 1
-    color(back_color);
+    color(global_back_color);
     font_resize(w(), h());
     
 #else
