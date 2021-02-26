@@ -30,7 +30,7 @@ RKR_Slider::RKR_Slider(int X, int Y, int W, int H, const char *label) :
     m_text_offset(0),       // C_DEFAULT_FONT_SIZE
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size),
+    m_look_changed(0),
     m_use_pixel_adjustment(true)    // main window efx sliders use this
 {
 }
@@ -214,14 +214,13 @@ int RKR_Slider::handle2(int event, int X, int Y, int W, int H)
 
 void RKR_Slider::draw()
 {
-    labelfont(global_font_type);
-    textfont(global_font_type);
-    textcolor(global_label_color);
-
-    /* To update the font size if user changes the value in settings */
-    if(global_font_size != m_previous_font_size)
+    if(m_look_changed != global_look_changed)
     {
-        m_previous_font_size = global_font_size;
+        m_look_changed = global_look_changed;
+
+        labelfont(global_font_type);
+        textfont(global_font_type);
+        textcolor(global_label_color);
         font_resize(w(), h());
     }
 

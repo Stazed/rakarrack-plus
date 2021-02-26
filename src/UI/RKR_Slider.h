@@ -43,7 +43,7 @@ private:
     int m_text_offset;
     int m_start_width;
     int m_start_height;
-    int m_previous_font_size;
+    int m_look_changed;
     bool m_use_pixel_adjustment;
     
     void font_resize(int,int);
