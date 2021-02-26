@@ -76,7 +76,35 @@ void SettingsWindowGui::cb_FSplus(RKR_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_FSReset_i(RKR_Button*, void*) {
-  m_parent->font_size_change(C_DEFAULT_FONT_SIZE);
+  scheme_ch->value(2);
+    scheme_ch->do_callback();
+    Enable_DeacHide->value(0);
+    Enable_DeacHide->do_callback();
+    Enable_Back->value(0);
+    Enable_Back->do_callback();
+    Enable_Scale->value(0);
+    Enable_Scale->do_callback();
+    
+    // Background image
+    char filename[256];
+    sprintf(filename, "%s/blackbg.png", DATADIR);
+    BackFiname->value(filename);
+    strcpy(m_process->BackgroundImage,filename);
+    
+    m_process->EnableBackgroundImage = 0;
+    m_parent->PutBackground();
+    
+    m_parent->back_color_change(FL_BLACK);
+    m_parent->leds_color_change(FL_DARK_YELLOW);
+    m_parent->buttons_color_change(FL_DARK3);
+    m_parent->label_color_change(FL_WHITE);
+    m_parent->font_size_change(C_DEFAULT_FONT_SIZE);
+    m_parent->font_type_change(0);
+    
+    m_parent->Principal->resize(m_parent->Principal->x(), m_parent->Principal->y(), 960, 540);
+
+    m_parent->save_current_state(3);
+    Fl::redraw();
 }
 void SettingsWindowGui::cb_FSReset(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_FSReset_i(o,v);
@@ -1172,7 +1200,8 @@ this->when(FL_WHEN_RELEASE);
       FSplus->when(FL_WHEN_RELEASE);
       o->set_label_offset(4);
     } // RKR_Button* FSplus
-    { RKR_Button* o = FSReset = new RKR_Button(165, 330, 57, 20, "Reset");
+    { RKR_Button* o = FSReset = new RKR_Button(30, 547, 57, 20, "Reset");
+      FSReset->tooltip("Reset Look settings to program defaults");
       FSReset->box(FL_UP_BOX);
       FSReset->color(FL_BACKGROUND_COLOR);
       FSReset->selection_color(FL_BACKGROUND_COLOR);

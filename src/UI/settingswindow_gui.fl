@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {709 191 530 580} type Double
+  xywh {820 211 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -57,7 +57,7 @@ m_parent= _rgui;} {}
   } {
     Fl_Group Look {
       label Look
-      user_data 1 open
+      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -160,8 +160,36 @@ m_parent->font_type_change(font_type);}
       Fl_Button FSReset {
         label Reset
         user_data 77
-        callback {m_parent->font_size_change(C_DEFAULT_FONT_SIZE);}
-        xywh {165 330 57 20}
+        callback {scheme_ch->value(2);
+    scheme_ch->do_callback();
+    Enable_DeacHide->value(0);
+    Enable_DeacHide->do_callback();
+    Enable_Back->value(0);
+    Enable_Back->do_callback();
+    Enable_Scale->value(0);
+    Enable_Scale->do_callback();
+    
+    // Background image
+    char filename[256];
+    sprintf(filename, "%s/blackbg.png", DATADIR);
+    BackFiname->value(filename);
+    strcpy(m_process->BackgroundImage,filename);
+    
+    m_process->EnableBackgroundImage = 0;
+    m_parent->PutBackground();
+    
+    m_parent->back_color_change(FL_BLACK);
+    m_parent->leds_color_change(FL_DARK_YELLOW);
+    m_parent->buttons_color_change(FL_DARK3);
+    m_parent->label_color_change(FL_WHITE);
+    m_parent->font_size_change(C_DEFAULT_FONT_SIZE);
+    m_parent->font_type_change(0);
+    
+    m_parent->Principal->resize(m_parent->Principal->x(), m_parent->Principal->y(), 960, 540);
+
+    m_parent->save_current_state(3);
+    Fl::redraw();}
+        tooltip {Reset Look settings to program defaults} xywh {30 547 57 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
       }
