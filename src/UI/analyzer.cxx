@@ -25,7 +25,7 @@ Analyzer::Analyzer(int x, int y, int w, int h, const char *label) : Fl_Box(x, y,
 {
     Analyzer_ON = false;
     back = NULL;
-    leds_color = 0;
+    global_leds_color = 0;
     back_color = 0;
 }
 
@@ -67,7 +67,7 @@ void Analyzer::draw()
     {
         fl_draw(buf, ox, oy, lx, ly, FL_ALIGN_CLIP, back);
 
-        fl_color(leds_color);
+        fl_color(global_leds_color);
 
         for (i = 0; i < 28; i++)
         {
@@ -91,7 +91,7 @@ void Analyzer::draw()
             py = lrint(y * scale);
 
 
-            fl_color(leds_color);
+            fl_color(global_leds_color);
             fl_rectf(px + ox + px * i + 4, oy + ly - py, px - 2, py);
         }
     }

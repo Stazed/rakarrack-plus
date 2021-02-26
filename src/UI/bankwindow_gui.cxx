@@ -319,7 +319,7 @@ void BankWindowGui::make_window_banks() {
                 butX->type(0);
                 butX->color(fore_color);
                 butX->box(FL_UP_BOX);
-                butX->selection_color(leds_color);
+                butX->selection_color(global_leds_color);
                 butX->labelcolor(label_color);
                 butX->labelsize(15);
                 butX->align(68|FL_ALIGN_INSIDE);

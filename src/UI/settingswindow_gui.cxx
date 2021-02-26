@@ -107,10 +107,10 @@ void SettingsWindowGui::cb_A_C(RKR_Button* o, void* v) {
 
 void SettingsWindowGui::cb_L_C_i(RKR_Button*, void*) {
   uchar r,g,b;
-Fl::get_color(leds_color,r,g,b);
+Fl::get_color(global_leds_color,r,g,b);
 if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
-leds_color=fl_rgb_color(r,g,b);
-m_parent->Leds_Color_Change(leds_color);
+global_leds_color=fl_rgb_color(r,g,b);
+m_parent->Leds_Color_Change(global_leds_color);
 }
 void SettingsWindowGui::cb_L_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_L_C_i(o,v);

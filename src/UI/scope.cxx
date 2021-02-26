@@ -25,7 +25,7 @@ Scope::Scope(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h,
 {
     Scope_ON = false;
     back = NULL;
-    leds_color = 0;
+    global_leds_color = 0;
     back_color = 0;
 }
 
@@ -68,7 +68,7 @@ void Scope::draw()
         //Draw Curve Reponse  
         back->draw(ox, oy);
 
-        fl_color(leds_color);
+        fl_color(global_leds_color);
 
 
         old_px = Xl;

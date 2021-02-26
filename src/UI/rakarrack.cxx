@@ -25,7 +25,7 @@ const std::vector<std::string> main_submenu_paths
     "&Help/About...",
 };
 Fl_Tiled_Image *back; 
-Fl_Color leds_color; 
+Fl_Color global_leds_color; 
 Fl_Color back_color; 
 Fl_Color fore_color; 
 Fl_Color label_color; 
@@ -103,7 +103,7 @@ filename=fl_filename_setext(filename,EXT);
 m_process->slabel_color = (int) label_color;
 m_process->sback_color = (int) back_color;
 m_process->sfore_color = (int) fore_color;
-m_process->sleds_color = (int) leds_color;
+m_process->sleds_color = (int) global_leds_color;
 m_process->swidth = (int) Principal->w();
 m_process->sheight = (int) Principal->h();
 m_process->sschema = Settings->scheme_ch->value();

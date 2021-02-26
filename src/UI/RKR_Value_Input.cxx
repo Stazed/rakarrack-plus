@@ -77,7 +77,7 @@ void RKR_Value_Input::draw()
     labelfont(global_font_type);
     textfont(global_font_type);
     
-    // If redraw() because of focus, we change color to leds_color to show focus.
+    // If redraw() because of focus, we change color to global_leds_color to show focus.
     // So do not change the color back to label_color until unfocus.
     if(!is_redraw)
     {
@@ -176,7 +176,7 @@ int RKR_Value_Input::handle(int event)
     /* Need to handle focus to get keyboard events */
     if (event == FL_FOCUS)
     {
-        textcolor(leds_color);
+        textcolor(global_leds_color);
         is_redraw = 1;  // so draw() does not reset the color to label_color
         redraw();
         return 1;       // says we handed it
@@ -194,7 +194,7 @@ int RKR_Value_Input::handle(int event)
     /* Change text color on focus */
     if ((Fl::focus() == &input || Fl::focus() == this))
     {
-        textcolor(leds_color);
+        textcolor(global_leds_color);
         is_redraw = 1;  // so draw() does not reset the color to label_color
         redraw();
     }

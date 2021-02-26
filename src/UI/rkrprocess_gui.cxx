@@ -386,12 +386,12 @@ void RKRGUI::GuiTimeout(void)
 
         if (m_process->efx_FLimiter->limit)
         {
-            LMT_LED->color(leds_color);
+            LMT_LED->color(global_leds_color);
             LMT_LED->redraw();
         }
         else
         {
-            LMT_LED->color(fl_darker(leds_color));
+            LMT_LED->color(fl_darker(global_leds_color));
             LMT_LED->redraw();
         }
 
@@ -520,7 +520,7 @@ void RKRGUI::GuiTimeout(void)
         m_process->CountWait++;
         if (m_process->CountWait == 25)
         {
-            MIDILearn->GMM->color(leds_color);
+            MIDILearn->GMM->color(global_leds_color);
             MIDILearn->GMM->redraw();
         }
 
@@ -592,7 +592,7 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
 
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
 {
-    leds_color = bcolor;
+    global_leds_color = bcolor;
     ChangeActives();
     Fl::redraw();
 }
@@ -757,7 +757,7 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
 {
     // change the leds color
-    leds_color = bcolor;
+    global_leds_color = bcolor;
     chfsize(C_DONT_CHANGE_FONT_SIZE);
 }
 
@@ -790,7 +790,7 @@ void RKRGUI::chfsize(int font_size)
         }
         else
         {
-            w->labelcolor(leds_color);      /* Aux, In, Out, 0.0% */
+            w->labelcolor(global_leds_color);      /* Aux, In, Out, 0.0% */
         }
         
         if (ud != 2)
@@ -799,7 +799,7 @@ void RKRGUI::chfsize(int font_size)
         }
         else
         {
-            w->selection_color(leds_color); /* ???? */
+            w->selection_color(global_leds_color); /* ???? */
         }
 
 
@@ -819,7 +819,7 @@ void RKRGUI::chfsize(int font_size)
                 }
                 else
                 {
-                    c->labelcolor(leds_color);      /* ????? */
+                    c->labelcolor(global_leds_color);      /* ????? */
                 }
 
                 if (uh != 7)
@@ -830,7 +830,7 @@ void RKRGUI::chfsize(int font_size)
                 /* All efx On buttons, +10db, selections boxes, and all efx other buttons */
                 if ((uh == 2) || (uh == 7) || (uh == 77) || (uh == 78))
                 {
-                    c->selection_color(leds_color);
+                    c->selection_color(global_leds_color);
                 }
 
                 c->color(fore_color);
@@ -840,7 +840,7 @@ void RKRGUI::chfsize(int font_size)
     }
 
     CLIP_LED->selection_color(FL_RED);
-    Etit->labelcolor(leds_color);
+    Etit->labelcolor(global_leds_color);
     Trigger->aux_midi->color(fore_color);
     Trigger->aux_midi->textcolor(FL_BACKGROUND2_COLOR);
 
@@ -945,12 +945,12 @@ void RKRGUI::load_previous_state()
 
     back_color = (Fl_Color) b;
     fore_color = (Fl_Color) f;
-    leds_color = (Fl_Color) l;
+    global_leds_color = (Fl_Color) l;
     label_color = (Fl_Color) a;
 
     Background_Color_Change(back_color);
     Buttons_Color_Change(fore_color);
-    Leds_Color_Change(leds_color);
+    Leds_Color_Change(global_leds_color);
     Label_Color_Change(label_color);
 
     rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->a_bank, 3);
@@ -1220,7 +1220,7 @@ void RKRGUI::save_current_state(int whati)
 
         rakarrack.set(m_process->PrefNom("Background Color"), (int) back_color);
         rakarrack.set(m_process->PrefNom("Foreground Color"), (int) fore_color);
-        rakarrack.set(m_process->PrefNom("Leds Color"), (int) leds_color);
+        rakarrack.set(m_process->PrefNom("Leds Color"), (int) global_leds_color);
         rakarrack.set(m_process->PrefNom("Labels Color"), (int) label_color);
         rakarrack.set(m_process->PrefNom("Schema"), (int) Settings->scheme_ch->value());
         rakarrack.set(m_process->PrefNom("Hide Effects"), (int) m_process->deachide);
@@ -1599,7 +1599,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
             Fl_Widget *w = BankWindow->ob->child(num - 1);
             BankWindow->unlight_preset(m_process->Selected_Preset);
             m_process->Selected_Preset = num;
-            w->color(fl_darker(leds_color));
+            w->color(fl_darker(global_leds_color));
             Preset_Counter->value(num);
             Preset_Counter->do_callback();
         }
@@ -2622,17 +2622,17 @@ void RKRGUI::ChangeActives()
 
     if ((m_process->upsample) && (m_process->Bypass))
     {
-        UPS_LED->color(leds_color);
+        UPS_LED->color(global_leds_color);
         UPS_LED->redraw();
     }
     else
     {
-        UPS_LED->color(fl_darker(leds_color));
+        UPS_LED->color(fl_darker(global_leds_color));
         UPS_LED->redraw();
     }
 
     CLIP_LED->color(fl_darker(FL_RED));
-    LMT_LED->color(fl_darker(leds_color));
+    LMT_LED->color(fl_darker(global_leds_color));
 }
 
 void RKRGUI::findpos(int num, int value, Fl_Widget*)
@@ -2744,14 +2744,14 @@ void RKRGUI::Put_Skin()
 
     back_color = (Fl_Color) m_process->sback_color;
     fore_color = (Fl_Color) m_process->sfore_color;
-    leds_color = (Fl_Color) m_process->sleds_color;
+    global_leds_color = (Fl_Color) m_process->sleds_color;
     label_color = (Fl_Color) m_process->slabel_color;
 
     Settings->scheme_ch->value(m_process->sschema);
     Settings->scheme_ch->do_callback();
     PutBackground();
     chfsize(m_process->fontsize);
-    Leds_Color_Change(leds_color);
+    Leds_Color_Change(global_leds_color);
     Buttons_Color_Change(fore_color);
 
 

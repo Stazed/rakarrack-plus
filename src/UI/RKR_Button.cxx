@@ -53,7 +53,7 @@ void RKR_Button::draw()
         {
             if(m_bank_highlight_preset)
             {
-                color(fl_darker(leds_color));
+                color(fl_darker(global_leds_color));
             }
             else
             {
@@ -72,13 +72,13 @@ void RKR_Button::draw()
 
         case BUTTON_RKR_LABEL:
         {
-            labelcolor(fl_darker(leds_color));
+            labelcolor(fl_darker(global_leds_color));
             break;
         }
     }
 
     labelfont(global_font_type);
-    selection_color(leds_color);
+    selection_color(global_leds_color);
     
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)

@@ -311,11 +311,11 @@ void RKR_Slider::draw()
     /*
    
      if (type() == FL_VERT_NICE_SLIDER) {
-       draw_box(FL_THIN_DOWN_BOX, X+W/2-2, ysl, 3,Y+H-ysl , fl_darker(leds_color));
+       draw_box(FL_THIN_DOWN_BOX, X+W/2-2, ysl, 3,Y+H-ysl , fl_darker(global_leds_color));
       }
       else
       {
-        draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2,xsl-X,3, fl_darker(leds_color));
+        draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2,xsl-X,3, fl_darker(global_leds_color));
       }  
     
      */
@@ -324,8 +324,8 @@ void RKR_Slider::draw()
     Fl_Color juan, pepe, luis;
     float vval = fabsf((float) val);
 
-    juan = fl_color_average(fl_darker(fl_darker(leds_color)), fl_lighter(fl_lighter(leds_color)), vval);
-    pepe = fl_color_average(fl_lighter(fl_lighter(leds_color)), fl_darker(fl_darker(leds_color)), vval);
+    juan = fl_color_average(fl_darker(fl_darker(global_leds_color)), fl_lighter(fl_lighter(global_leds_color)), vval);
+    pepe = fl_color_average(fl_lighter(fl_lighter(global_leds_color)), fl_darker(fl_darker(global_leds_color)), vval);
 
     Fl_Boxtype box1 = slider();
 
@@ -357,7 +357,7 @@ void RKR_Slider::draw()
     if (Fl::focus() == this)
     {
         draw_focus(box1, xsl, ysl, wsl, hsl);
-        luis = leds_color;
+        luis = global_leds_color;
     }
     else luis = textcolor();
 
@@ -393,7 +393,7 @@ void RKR_Slider::draw()
     
     if ((Fl::scheme_) && (strcmp(Fl::scheme_, "plastic") == 0))
     {
-        fl_color(active_r() ? leds_color : fl_inactive(textcolor()));
+        fl_color(active_r() ? global_leds_color : fl_inactive(textcolor()));
     }
     else
     {

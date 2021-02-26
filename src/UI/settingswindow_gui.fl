@@ -200,10 +200,10 @@ m_parent->Label_Color_Change(label_color);}
         label Leds
         user_data 77
         callback {uchar r,g,b;
-Fl::get_color(leds_color,r,g,b);
+Fl::get_color(global_leds_color,r,g,b);
 if (!fl_color_chooser("rakarrack leds color:",r,g,b)) return;
-leds_color=fl_rgb_color(r,g,b);
-m_parent->Leds_Color_Change(leds_color);}
+global_leds_color=fl_rgb_color(r,g,b);
+m_parent->Leds_Color_Change(global_leds_color);}
         xywh {230 380 90 25}
         code0 {o->set_label_offset(4);}
         class RKR_Button
