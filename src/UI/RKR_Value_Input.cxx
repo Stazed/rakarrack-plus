@@ -46,7 +46,7 @@ RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l) :
     m_text_offset(0),       // C_DEFAULT_FONT_SIZE
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size),
+    m_look_changed(0),
     is_redraw(0)
 {
     if (input.parent()) // defeat automatic-add
@@ -72,10 +72,16 @@ RKR_Value_Input::~RKR_Value_Input()
 
 void RKR_Value_Input::draw()
 {
-    color(global_fore_color);
-    labelcolor(global_label_color);
-    labelfont(global_font_type);
-    textfont(global_font_type);
+    if(m_look_changed != global_look_changed)
+    {
+        m_look_changed = global_look_changed;
+        
+        color(global_fore_color);
+        labelcolor(global_label_color);
+        labelfont(global_font_type);
+        textfont(global_font_type);
+        font_resize(w(), h());
+    }
     
     // If redraw() because of focus, we change color to global_leds_color to show focus.
     // So do not change the color back to global_label_color until unfocus.
@@ -84,13 +90,6 @@ void RKR_Value_Input::draw()
         textcolor(global_label_color);
     }
 
-    /* To update the font size if user changes the value in settings rakarrack+ */
-    if(global_font_size != m_previous_font_size)
-    {
-        m_previous_font_size = global_font_size;
-        font_resize(w(), h());
-    }
-    
     if (damage()&~FL_DAMAGE_CHILD) input.clear_damage(FL_DAMAGE_ALL);
     input.box(box());
     input.color(color(), selection_color());
