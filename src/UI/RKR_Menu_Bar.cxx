@@ -31,25 +31,20 @@ RKR_Menu_Bar::RKR_Menu_Bar(int X, int Y, int W, int H, const char *label) :
     m_label_offset(0),      // C_DEFAULT_FONT_SIZE
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size)
+    m_look_changed(0)
 {
-//    this->user_data((void*)(BOX_USER_DATA));
 }
 
 void RKR_Menu_Bar::draw()
 {
-#if 1
-    color(global_back_color);
-    font_resize(w(), h());
-    
-#else
-    /* To update the font size if user changes the value in settings */
-    if(global_font_size != m_previous_font_size)
+    if(m_look_changed != global_look_changed)
     {
-        m_previous_font_size = global_font_size;
+        m_look_changed = global_look_changed;
+
+        color(global_back_color);
         font_resize(w(), h());
     }
-#endif
+
     Fl_Menu_Bar::draw();
 }
 

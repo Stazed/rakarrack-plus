@@ -47,7 +47,7 @@ private:
     int m_label_offset;
     int m_start_width;
     int m_start_height;
-    int m_previous_font_size;
+    int m_look_changed;
     std::vector<std::string> m_submenu_paths;
     void font_resize(int,int);
 
