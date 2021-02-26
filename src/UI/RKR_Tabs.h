@@ -42,7 +42,7 @@ private:
     int m_label_offset;
     int m_start_width;
     int m_start_height;
-    int m_previous_font_size;
+    int m_look_changed;
     void font_resize(int,int);
 };
 

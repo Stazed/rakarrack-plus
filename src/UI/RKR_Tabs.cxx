@@ -33,23 +33,19 @@ RKR_Tabs::RKR_Tabs(int X, int Y, int W, int H, const char *label) :
     m_label_offset(4),      // C_DEFAULT_FONT_SIZE + 4 = 14pt
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size)
+    m_look_changed(0)
 {
 }
 
 void RKR_Tabs::draw()
 {
 
-#if 1
-    font_resize(w(), h());
-#else
-    /* To update the font size if user changes the value in settings */
-    if(global_font_size != m_previous_font_size)
+    if(m_look_changed != global_look_changed)
     {
-        m_previous_font_size = global_font_size;
+        m_look_changed = global_look_changed;
+
         font_resize(w(), h());
     }
-#endif
 
     Fl_Tabs::draw();
 }
