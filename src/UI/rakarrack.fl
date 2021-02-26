@@ -273,19 +273,19 @@ decl {class AboutWindowGui; // forward declaration} {public global
 decl {class TrigWindowGui; // forward declaration} {public global
 }
 
-decl {Fl_Tiled_Image *back;} {private global
+decl {Fl_Tiled_Image *back = NULL;} {private global
 }
 
-decl {Fl_Color global_leds_color;} {private global
+decl {Fl_Color global_leds_color = FL_DARK_YELLOW;} {private global
 }
 
-decl {Fl_Color global_back_color;} {private global
+decl {Fl_Color global_back_color = FL_BLACK;} {private global
 }
 
-decl {Fl_Color global_fore_color;} {private global
+decl {Fl_Color global_fore_color = FL_DARK3;} {private global
 }
 
-decl {Fl_Color global_label_color;} {private global
+decl {Fl_Color global_label_color = FL_WHITE;} {private global
 }
 
 decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private global

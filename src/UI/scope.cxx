@@ -24,9 +24,6 @@
 Scope::Scope(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h, label)
 {
     Scope_ON = false;
-    back = NULL;
-    global_leds_color = 0;
-    global_back_color = 0;
 }
 
 void Scope::init(float *smpsl, float *smpsr, int PERIOD, RKRGUI *_rgui)

@@ -24,9 +24,6 @@
 Analyzer::Analyzer(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h, label)
 {
     Analyzer_ON = false;
-    back = NULL;
-    global_leds_color = 0;
-    global_back_color = 0;
 }
 
 void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRGUI *_rgui)
