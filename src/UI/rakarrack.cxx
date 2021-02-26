@@ -28,7 +28,7 @@ Fl_Tiled_Image *back;
 Fl_Color global_leds_color; 
 Fl_Color global_back_color; 
 Fl_Color global_fore_color; 
-Fl_Color label_color; 
+Fl_Color global_label_color; 
 int global_font_size = C_DEFAULT_FONT_SIZE; // extern global
 int global_font_type = 0; 
 
@@ -100,7 +100,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 #undef EXT
 
-m_process->slabel_color = (int) label_color;
+m_process->slabel_color = (int) global_label_color;
 m_process->sback_color = (int) global_back_color;
 m_process->sfore_color = (int) global_fore_color;
 m_process->sleds_color = (int) global_leds_color;

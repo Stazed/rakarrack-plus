@@ -45,7 +45,7 @@ void RKR_Box::draw()
     {
         case BOX_DEFAULT:
         {
-            labelcolor(label_color);
+            labelcolor(global_label_color);
             color(global_fore_color);
             break;
         }

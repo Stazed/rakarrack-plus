@@ -45,7 +45,7 @@ extern Fl_Tiled_Image *back;
 extern Fl_Color global_leds_color; 
 extern Fl_Color global_back_color; 
 extern Fl_Color global_fore_color; 
-extern Fl_Color label_color;
+extern Fl_Color global_label_color;
 extern int global_font_type;
 
 /* The font size adjustments */

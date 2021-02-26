@@ -285,7 +285,7 @@ decl {Fl_Color global_back_color;} {private global
 decl {Fl_Color global_fore_color;} {private global
 }
 
-decl {Fl_Color label_color;} {private global
+decl {Fl_Color global_label_color;} {private global
 }
 
 decl {int global_font_size = C_DEFAULT_FONT_SIZE;  // extern global} {private global
@@ -386,7 +386,7 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,EXT);
 \#undef EXT
 
-m_process->slabel_color = (int) label_color;
+m_process->slabel_color = (int) global_label_color;
 m_process->sback_color = (int) global_back_color;
 m_process->sfore_color = (int) global_fore_color;
 m_process->sleds_color = (int) global_leds_color;

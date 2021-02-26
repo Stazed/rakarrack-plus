@@ -38,10 +38,10 @@ RKR_Input::RKR_Input(int X, int Y, int W, int H, const char *label) :
 
 void RKR_Input::draw()
 {
-    labelcolor(label_color);
+    labelcolor(global_label_color);
     color(global_fore_color);
     labelfont(global_font_type);
-    textcolor(label_color);
+    textcolor(global_label_color);
     textfont(global_font_type);
     
     /* To update the font size if user changes the value in settings */

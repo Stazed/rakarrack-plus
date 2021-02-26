@@ -40,10 +40,10 @@ RKR_Browser::RKR_Browser(int X, int Y, int W, int H, const char *label) :
 void RKR_Browser::draw()
 {
 #if 1
-    labelcolor(label_color);
+    labelcolor(global_label_color);
     labelfont(global_font_type);
     selection_color(global_back_color);
-    textcolor(label_color);
+    textcolor(global_label_color);
     color(global_fore_color);
     
     if(m_type_browser != FONT_BROWSER)

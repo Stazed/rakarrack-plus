@@ -96,10 +96,10 @@ void SettingsWindowGui::cb_B_C(RKR_Button* o, void* v) {
 
 void SettingsWindowGui::cb_A_C_i(RKR_Button*, void*) {
   uchar r,g,b;
-Fl::get_color(label_color,r,g,b);
+Fl::get_color(global_label_color,r,g,b);
 if (!fl_color_chooser("rakarrack label color:",r,g,b)) return;
-label_color=fl_rgb_color(r,g,b);
-m_parent->Label_Color_Change(label_color);
+global_label_color=fl_rgb_color(r,g,b);
+m_parent->Label_Color_Change(global_label_color);
 }
 void SettingsWindowGui::cb_A_C(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_A_C_i(o,v);

@@ -43,8 +43,8 @@ void RKR_Choice::draw()
 {
 #if 1
     color(global_fore_color);
-    labelcolor(label_color);
-    textcolor(label_color);
+    labelcolor(global_label_color);
+    textcolor(global_label_color);
     labelfont(global_font_type);
     font_resize(w(), h());
     

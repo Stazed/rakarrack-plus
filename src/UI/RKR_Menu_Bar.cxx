@@ -71,7 +71,7 @@ void RKR_Menu_Bar::font_resize(int W, int H)
         {
             sm->labelsize(adjusted_label_size);
             sm->labelfont (global_font_type);
-            sm->labelcolor (label_color);
+            sm->labelcolor (global_label_color);
         }
     }
     
@@ -92,7 +92,7 @@ void RKR_Menu_Bar::font_resize(int W, int H)
         {
             p->labelsize(adjusted_label_size);   /* Menu bar items */
             p->labelfont (global_font_type);
-            p->labelcolor (label_color);
+            p->labelcolor (global_label_color);
         }
     }
 }

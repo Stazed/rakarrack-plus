@@ -68,7 +68,7 @@ void RKR_Tabs::font_resize(int W, int H)
         Fl_Widget *c = child(i);
         c->labelsize(adjusted_label_size);
         c->labelfont (global_font_type);
-        c->labelcolor (label_color);
+        c->labelcolor (global_label_color);
         c->color (global_fore_color);
         c->selection_color (global_back_color);
     }

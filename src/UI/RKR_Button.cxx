@@ -45,7 +45,7 @@ void RKR_Button::draw()
         case BUTTON_DEFAULT:
         {
             color(global_fore_color);
-            labelcolor(label_color);
+            labelcolor(global_label_color);
             break;
         }
 
@@ -60,13 +60,13 @@ void RKR_Button::draw()
                 color(global_fore_color);
             }
             
-            labelcolor(label_color);
+            labelcolor(global_label_color);
             break;
         }
 
         case BUTTON_MIDI_GET:
         {
-            labelcolor(label_color);
+            labelcolor(global_label_color);
             break;
         }
 

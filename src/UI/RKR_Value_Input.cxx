@@ -73,15 +73,15 @@ RKR_Value_Input::~RKR_Value_Input()
 void RKR_Value_Input::draw()
 {
     color(global_fore_color);
-    labelcolor(label_color);
+    labelcolor(global_label_color);
     labelfont(global_font_type);
     textfont(global_font_type);
     
     // If redraw() because of focus, we change color to global_leds_color to show focus.
-    // So do not change the color back to label_color until unfocus.
+    // So do not change the color back to global_label_color until unfocus.
     if(!is_redraw)
     {
-        textcolor(label_color);
+        textcolor(global_label_color);
     }
 
     /* To update the font size if user changes the value in settings rakarrack+ */
@@ -177,7 +177,7 @@ int RKR_Value_Input::handle(int event)
     if (event == FL_FOCUS)
     {
         textcolor(global_leds_color);
-        is_redraw = 1;  // so draw() does not reset the color to label_color
+        is_redraw = 1;  // so draw() does not reset the color to global_label_color
         redraw();
         return 1;       // says we handed it
     }
@@ -185,8 +185,8 @@ int RKR_Value_Input::handle(int event)
     /* Revert color */
     if(event == FL_UNFOCUS)
     {
-        textcolor(label_color);
-        is_redraw = 0;  // ok for draw() set to label_color
+        textcolor(global_label_color);
+        is_redraw = 0;  // ok for draw() set to global_label_color
         redraw();
         return 1;
     }
@@ -195,7 +195,7 @@ int RKR_Value_Input::handle(int event)
     if ((Fl::focus() == &input || Fl::focus() == this))
     {
         textcolor(global_leds_color);
-        is_redraw = 1;  // so draw() does not reset the color to label_color
+        is_redraw = 1;  // so draw() does not reset the color to global_label_color
         redraw();
     }
     

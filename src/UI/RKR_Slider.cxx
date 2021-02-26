@@ -216,7 +216,7 @@ void RKR_Slider::draw()
 {
     labelfont(global_font_type);
     textfont(global_font_type);
-    textcolor(label_color);
+    textcolor(global_label_color);
 
     /* To update the font size if user changes the value in settings */
     if(global_font_size != m_previous_font_size)
@@ -351,7 +351,7 @@ void RKR_Slider::draw()
     }
 
 
-    labelcolor(label_color);
+    labelcolor(global_label_color);
     draw_label(xsl, ysl, wsl, hsl);
 
     if (Fl::focus() == this)

@@ -170,7 +170,7 @@ void RKRGUI::GuiTimeout(void)
             if (abs(m_process->efx_Tuner->cents) > 5)
                 WNfreq->labelcolor(FL_RED);
             else
-                WNfreq->labelcolor(label_color);
+                WNfreq->labelcolor(global_label_color);
             WNfreq->copy_label(nofreq);
             m_process->afreq_old = m_process->efx_Tuner->afreq;
         }
@@ -578,7 +578,7 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor)
 
 void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 {
-    label_color = bcolor;
+    global_label_color = bcolor;
     ChangeActives();
     Fl::redraw();
 }
@@ -618,7 +618,7 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor)
 
     global_back_color = bcolor;
 
-    Label_Color_Change(label_color);
+    Label_Color_Change(global_label_color);
     
     if (!m_process->EnableBackgroundImage)
     {
@@ -629,14 +629,14 @@ void RKRGUI::Background_Color_Change(Fl_Color bcolor)
 void RKRGUI::Label_Color_Change(Fl_Color bcolor)
 {
     // change the label colors
-    label_color = bcolor;
+    global_label_color = bcolor;
     chfsize(C_DONT_CHANGE_FONT_SIZE);
 
 
     for (int t = 0; t < Settings->STabs->children(); t++)
     {
         Fl_Widget *tabg = Settings->STabs->child(t);
-        tabg->labelcolor(label_color);
+        tabg->labelcolor(global_label_color);
         tabg->selection_color(global_back_color);
         tabg->color(global_fore_color);
 
@@ -650,7 +650,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
             {
                 Fl_Widget *w = g->child(i);
 
-                w->labelcolor(label_color);
+                w->labelcolor(global_label_color);
                 w->selection_color(global_back_color);
                 w->color(global_fore_color);
                 
@@ -663,7 +663,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
                     {
                         Fl_Widget *ww = gg->child(i);
 
-                        ww->labelcolor(label_color);
+                        ww->labelcolor(global_label_color);
                         ww->selection_color(global_back_color);
                         ww->color(global_fore_color);
                     }
@@ -677,7 +677,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
     {
         Fl_Widget *w = BankWindow->child(t);
 
-        w->labelcolor(label_color);
+        w->labelcolor(global_label_color);
     }
 
 
@@ -685,7 +685,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
     {
         Fl_Widget *w = BankWindow->ob->child(t);
 
-        w->labelcolor(label_color);
+        w->labelcolor(global_label_color);
     }
 
 
@@ -693,7 +693,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
     {
         Fl_Widget *w = Order->child(t);
 
-        w->labelcolor(label_color);
+        w->labelcolor(global_label_color);
         w->selection_color(global_back_color);
         w->color(global_fore_color);
     }
@@ -702,7 +702,7 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
     {
         Fl_Widget *w = Order->Filters->child(t);
 
-        w->labelcolor(label_color);
+        w->labelcolor(global_label_color);
         w->selection_color(global_back_color);
         w->color(global_fore_color);
     }
@@ -712,15 +712,15 @@ void RKRGUI::Label_Color_Change(Fl_Color bcolor)
     {
         Fl_Widget *w = MIDILearn->child(t);
 
-        w->labelcolor(label_color);
+        w->labelcolor(global_label_color);
         w->selection_color(global_back_color);
         w->color(global_fore_color);
     }
 
-    Settings->Font_Bro->textcolor(label_color);
-    Trigger->ACI_LABEL->labelcolor(fl_lighter(label_color));
-    Trigger->aux_source->labelcolor(label_color);
-    Trigger->aux_midi->labelcolor(label_color);
+    Settings->Font_Bro->textcolor(global_label_color);
+    Trigger->ACI_LABEL->labelcolor(fl_lighter(global_label_color));
+    Trigger->aux_source->labelcolor(global_label_color);
+    Trigger->aux_midi->labelcolor(global_label_color);
 
     Fl::redraw();
 }
@@ -751,7 +751,7 @@ void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
 
     global_fore_color = bcolor;
     Trigger->aux_source->color(bcolor);
-    Label_Color_Change(label_color);
+    Label_Color_Change(global_label_color);
 }
 
 void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
@@ -786,7 +786,7 @@ void RKRGUI::chfsize(int font_size)
 
         if (ud != BOX_LED_DATA)
         {
-            w->labelcolor(label_color);     /* Lmt, Clip, Resample */
+            w->labelcolor(global_label_color);     /* Lmt, Clip, Resample */
         }
         else
         {
@@ -815,7 +815,7 @@ void RKRGUI::chfsize(int font_size)
 
                 if (uh != BOX_LED_DATA)
                 {
-                    c->labelcolor(label_color);     /* Labels on (almost) everything except sliders */
+                    c->labelcolor(global_label_color);     /* Labels on (almost) everything except sliders */
                 }
                 else
                 {
@@ -946,12 +946,12 @@ void RKRGUI::load_previous_state()
     global_back_color = (Fl_Color) b;
     global_fore_color = (Fl_Color) f;
     global_leds_color = (Fl_Color) l;
-    label_color = (Fl_Color) a;
+    global_label_color = (Fl_Color) a;
 
     Background_Color_Change(global_back_color);
     Buttons_Color_Change(global_fore_color);
     Leds_Color_Change(global_leds_color);
-    Label_Color_Change(label_color);
+    Label_Color_Change(global_label_color);
 
     rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->a_bank, 3);
 
@@ -1221,7 +1221,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Background Color"), (int) global_back_color);
         rakarrack.set(m_process->PrefNom("Foreground Color"), (int) global_fore_color);
         rakarrack.set(m_process->PrefNom("Leds Color"), (int) global_leds_color);
-        rakarrack.set(m_process->PrefNom("Labels Color"), (int) label_color);
+        rakarrack.set(m_process->PrefNom("Labels Color"), (int) global_label_color);
         rakarrack.set(m_process->PrefNom("Schema"), (int) Settings->scheme_ch->value());
         rakarrack.set(m_process->PrefNom("Hide Effects"), (int) m_process->deachide);
         rakarrack.set(m_process->PrefNom("Scale Window"), (int) m_process->scalable);
@@ -2245,7 +2245,7 @@ void RKRGUI::MiraConfig()
 
 
     Settings->Font_Bro->clear();
-    Settings->Font_Bro->textcolor(label_color);
+    Settings->Font_Bro->textcolor(global_label_color);
 
     int k = Fl::set_fonts(0);
     for (int i = 0; i < k; i++)
@@ -2552,8 +2552,8 @@ void RKRGUI::PutBackground()
 void RKRGUI::ChangeActives()
 {
     //Change label colors based on active or inactive
-    Fl_Color on = fl_lighter(fl_lighter(label_color));
-    Fl_Color off = fl_darker(label_color);
+    Fl_Color on = fl_lighter(fl_lighter(global_label_color));
+    Fl_Color off = fl_darker(global_label_color);
 
 
     if (m_process->active[0])
@@ -2639,8 +2639,8 @@ void RKRGUI::findpos(int num, int value, Fl_Widget*)
 {
     // adjust efx title label colors based on active of inactive
     int i = 0;
-    Fl_Color on = fl_lighter(fl_lighter(label_color));
-    Fl_Color off = fl_darker(label_color);
+    Fl_Color on = fl_lighter(fl_lighter(global_label_color));
+    Fl_Color off = fl_darker(global_label_color);
 
     for (i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
@@ -2745,7 +2745,7 @@ void RKRGUI::Put_Skin()
     global_back_color = (Fl_Color) m_process->sback_color;
     global_fore_color = (Fl_Color) m_process->sfore_color;
     global_leds_color = (Fl_Color) m_process->sleds_color;
-    label_color = (Fl_Color) m_process->slabel_color;
+    global_label_color = (Fl_Color) m_process->slabel_color;
 
     Settings->scheme_ch->value(m_process->sschema);
     Settings->scheme_ch->do_callback();

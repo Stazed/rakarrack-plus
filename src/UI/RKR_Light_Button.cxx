@@ -38,7 +38,7 @@ RKR_Light_Button::RKR_Light_Button(int X, int Y, int W, int H, const char *label
 
 void RKR_Light_Button::draw()
 {
-    labelcolor(label_color);
+    labelcolor(global_label_color);
     color(global_fore_color);
     labelfont(global_font_type);
     selection_color(global_leds_color);
