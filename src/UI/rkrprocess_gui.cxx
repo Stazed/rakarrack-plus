@@ -562,6 +562,54 @@ void RKRGUI::GuiTimeout(void)
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
 }
 
+
+void RKRGUI::Background_Color_Change(Fl_Color bcolor)
+{
+    back_color = bcolor;
+    
+    if (!m_process->EnableBackgroundImage)
+    {
+        back->color_average(back_color, 0.0);
+    }
+    
+    ChangeActives();
+    Fl::redraw();
+}
+
+void RKRGUI::Label_Color_Change(Fl_Color bcolor)
+{
+    label_color = bcolor;
+    ChangeActives();
+    Fl::redraw();
+}
+
+void RKRGUI::Buttons_Color_Change(Fl_Color bcolor)
+{
+    fore_color = bcolor;
+    ChangeActives();
+    Fl::redraw();
+}
+
+void RKRGUI::Leds_Color_Change(Fl_Color bcolor)
+{
+    leds_color = bcolor;
+    ChangeActives();
+    Fl::redraw();
+}
+
+void RKRGUI::chfsize(int font_size)
+{
+    if(font_size)
+    {
+        global_font_size = m_process->fontsize = font_size;
+    }
+
+    ChangeActives();
+    Fl::redraw();
+}
+
+
+#if 0
 void RKRGUI::Background_Color_Change(Fl_Color bcolor)
 {
     // change the gui background color if png is not used
@@ -801,7 +849,7 @@ void RKRGUI::chfsize(int font_size)
     Fl::redraw();
 }
 
-
+#endif // 0
 
 void RKRGUI::put_icon(Fl_Window* window)
 {
