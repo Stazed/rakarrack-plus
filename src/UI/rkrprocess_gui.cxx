@@ -28,8 +28,8 @@
 
 #include "rakarrack.h"
 #include "../icono_rakarrack_128x128.xpm"
-static Fl_Widget *old;
-static int last_tecla;
+static Fl_Widget *previous_widget;
+static int previous_keyboard_key;
 static int drag;
 static int at;
 static Pixmap p, mask;
@@ -59,7 +59,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     mBankNameListTail = NULL;
 
     back = NULL;
-    old = NULL;
+    previous_widget = NULL;
     make_window();
 
     Principal->icon((char *) p);
@@ -70,7 +70,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     MIDILearn->icon((char *) p);
     Trigger->icon((char *) p);
 
-    last_tecla = 0;
+    previous_keyboard_key = 0;
     made = 0;
     char tmp[256];
     drag = 1000;
@@ -139,7 +139,7 @@ void RKRGUI::TimeoutStatic(void* ptr)
 void RKRGUI::GuiTimeout(void)
 {
     // Main gui process on timeout
-    highlight();
+    highlight_and_search_browser();
     drag_effect();
     check_signals(this);
 
@@ -3038,13 +3038,12 @@ void RKRGUI::Fill_Avail(int filter)
     Order->Avail_Bro->select(1);
 }
 
-void RKRGUI::highlight()
+void RKRGUI::highlight_and_search_browser()
 {
-    // highlight
-    int tipo = 0;
-    long long k = 0;
+    int widget_type = 0;
+    long long widget_user_data = 0;
 
-    Fl_Widget *w;
+    Fl_Widget *widget_belowmouse;
 
     if (Fl::focus() == TITTLE_L)
         Fl::focus(Open_Order);
@@ -3052,56 +3051,59 @@ void RKRGUI::highlight()
     if (Fl::focus() == Etit)
         Fl::focus(Open_Order);
 
-    w = Fl::belowmouse();
+    widget_belowmouse = Fl::belowmouse();
 
-    if (w != NULL)
+    if (widget_belowmouse != NULL)
     {
-        tipo = (int) w->type();
-        k = (long long) w->user_data();
+        widget_type = (int) widget_belowmouse->type();
+        widget_user_data = (long long) widget_belowmouse->user_data();
     }
     else
     {
-        if (old != NULL)
+        if (previous_widget != NULL)
         {
-            old->color(global_fore_color);
-            old->redraw();
+            previous_widget->color(global_fore_color);
+            previous_widget->redraw();
         }
     }
 
-
-    if ((tipo == 1) || (k == UD_RKR_Button_Highlight))
+    // This will highlight the item under the mouse
+    // The widget_type is FLTK type, usually light buttons, choice selectors.
+    if ((widget_type == 1) || (widget_user_data == UD_RKR_Button_Highlight))
     {
-        if (old != NULL)
+        if (previous_widget != NULL)
         {
-            old->color(global_fore_color);
-            old->redraw();
+            previous_widget->color(global_fore_color);
+            previous_widget->redraw();
         }
-        w->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .8));
-        w->redraw();
-        old = w;
+        widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .8));
+        widget_belowmouse->redraw();
+        previous_widget = widget_belowmouse;
     }
-
     else
     {
-        if (old != NULL)
+        if (previous_widget != NULL)
         {
-            old->color(global_fore_color);
-            old->redraw();
-            old->redraw_label();
+            previous_widget->color(global_fore_color);
+            previous_widget->redraw();
+            previous_widget->redraw_label();
         }
     }
 
-    if (k == UD_RKR_Browser_Search)
+    // This searches on the browser by alpha key entry, first letter only.
+    // Used by order widow and MIDI learn window browsers.
+    // The browser listing has to be listed in alpha order (uppercase) for it to work.
+    if (widget_user_data == UD_RKR_Browser_Search)
     {
         Fl_Browser *b;
-        b = (Fl_Browser *) w;
-        int tecla = Fl::event_key();
-        if (tecla != last_tecla)
+        b = (Fl_Browser *) widget_belowmouse;
+        int keyboard_key = Fl::event_key();
+        if (keyboard_key != previous_keyboard_key)
         {
-            last_tecla = tecla;
+            previous_keyboard_key = keyboard_key;
             for (int i = 1; i <= b->size(); i++)
             {
-                if (b->text(i)[0] >= tecla - 32)
+                if (b->text(i)[0] >= keyboard_key - 32)
                 {
                     b->select(i, 1);
                     break;

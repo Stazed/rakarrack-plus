@@ -1967,7 +1967,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {Fill_Avail(int filter)} {open
   } {}
-  Function {highlight()} {open
+  Function {highlight_and_search_browser()} {open
   } {}
   Function {search_but(int x, int y)} {open return_type int
   } {}
