@@ -3091,7 +3091,7 @@ void RKRGUI::highlight()
         }
     }
 
-    if (k == 99)
+    if (k == UD_RKR_Browser_Search)
     {
         Fl_Browser *b;
         b = (Fl_Browser *) w;

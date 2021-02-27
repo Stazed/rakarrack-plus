@@ -214,7 +214,7 @@ this->when(FL_WHEN_RELEASE);
   Avail_Bro->labelcolor(FL_FOREGROUND_COLOR);
   Avail_Bro->textsize(18);
   Avail_Bro->textcolor(FL_BACKGROUND2_COLOR);
-  Avail_Bro->user_data((void*)(99));
+  Avail_Bro->user_data((void*)(UD_RKR_Browser_Search));
   Avail_Bro->align(Fl_Align(FL_ALIGN_BOTTOM));
   Avail_Bro->when(FL_WHEN_RELEASE_ALWAYS);
   o->set_text_offset(8);

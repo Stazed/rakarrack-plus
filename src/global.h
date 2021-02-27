@@ -347,7 +347,7 @@ enum USER_DATA_index
     UD_RKR_Choice           = 12,
     UD_RKR_Button_Highlight = 77,       // Default button user data for highlighting when mouse moves inside
     UD_FL_Button            = 78,       // Boost Button
-    UD_RKR_Browser          = 99,       // MIDI learn, Order Window
+    UD_RKR_Browser_Search   = 99,       // MIDI learn, Order Window
     
     // Effect main rack labels
     UD_Label_1              = 770,

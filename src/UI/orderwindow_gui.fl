@@ -14,7 +14,7 @@ decl {\#include "RKR_Button.h"} {public global
 decl {\#include "RKR_Check_Button.h"} {public global
 }
 
-widget_class OrderWindowGui {open
+widget_class OrderWindowGui {open selected
   xywh {61 104 500 400} type Double color 4 resizable
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
@@ -36,7 +36,7 @@ m_parent= _rgui;} {}
     class RKR_Box
   }
   Fl_Browser Avail_Bro {
-    user_data 99
+    user_data UD_RKR_Browser_Search
     xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
     code0 {o->set_text_offset(8);}
     class RKR_Browser
@@ -171,7 +171,7 @@ m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
     Fl_Button Fil128 {
       label Synthesis
       callback {m_process->Effect_Type_Filter=Type_Synthesis;
-m_parent->Fill_Avail(m_process->Effect_Type_Filter);} selected
+m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
       xywh {15 365 78 15} type Radio labelsize 10 when 1
       class RKR_Button
     }

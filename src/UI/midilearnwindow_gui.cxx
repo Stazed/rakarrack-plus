@@ -235,7 +235,7 @@ this->when(FL_WHEN_RELEASE);
   Epar->labelsize(14);
   Epar->labelcolor(FL_FOREGROUND_COLOR);
   Epar->textcolor(FL_BACKGROUND2_COLOR);
-  Epar->callback((Fl_Callback*)cb_Epar, (void*)(99));
+  Epar->callback((Fl_Callback*)cb_Epar, (void*)(UD_RKR_Browser_Search));
   Epar->align(Fl_Align(FL_ALIGN_BOTTOM));
   Epar->when(FL_WHEN_RELEASE_ALWAYS);
 } // RKR_Browser* Epar
@@ -263,6 +263,7 @@ this->when(FL_WHEN_RELEASE);
   TPresets->labelsize(14);
   TPresets->labelcolor(FL_FOREGROUND_COLOR);
   TPresets->textcolor(FL_BACKGROUND2_COLOR);
+  TPresets->user_data((void*)(UD_RKR_Browser_Search));
   TPresets->align(Fl_Align(FL_ALIGN_BOTTOM));
   TPresets->when(3);
 } // RKR_Browser* TPresets
