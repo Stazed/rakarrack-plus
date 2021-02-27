@@ -110,11 +110,6 @@ RKR::MIDI_control()
 {
     static const char *los_params[] =
     {
-        "Balance FX%",              NTS(MC_Balance_FX).c_str(),             NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
-        "Input Volume",             NTS(MC_Input_Volume).c_str(),           NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
-        "Output Volume",            NTS(MC_Output_Volume).c_str(),          NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
-        "Multi On/Off",             NTS(MC_Multi_On_Off).c_str(),           NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
-
         "Alienwah Dry/Wet",         NTS(MC_Alien_DryWet).c_str(),           NTS(EFX_ALIENWAH).c_str(),      NTS(Alien_DryWet).c_str(),         "127",     "-1.0",
         "Alienwah Pan",             NTS(MC_Alien_Pan).c_str(),              NTS(EFX_ALIENWAH).c_str(),      NTS(Alien_Pan).c_str(),              "0",     "1.0",
         "Alienwah Tempo",           NTS(MC_Alien_LFO_Tempo).c_str(),        NTS(EFX_ALIENWAH).c_str(),      NTS(Alien_LFO_Tempo).c_str(),        "1",     NTS(C_MC_600_RANGE).c_str(),
@@ -146,6 +141,8 @@ RKR::MIDI_control()
         "Arpie L/R Cross",          NTS(MC_Arpie_LR_Cross).c_str(),         NTS(EFX_ARPIE).c_str(),         NTS(Arpie_LR_Cross).c_str(),         "0",     "1.0",
         "Arpie Feedback",           NTS(MC_Arpie_Feedback).c_str(),         NTS(EFX_ARPIE).c_str(),         NTS(Arpie_Feedback).c_str(),         "0",     "1.0",
         "Arpie Damp",               NTS(MC_Arpie_Damp).c_str(),             NTS(EFX_ARPIE).c_str(),         NTS(Arpie_Damp).c_str(),             "0",     "1.0",
+
+        "Balance FX%",              NTS(MC_Balance_FX).c_str(),             NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
 
         "Cabinet Gain",             NTS(MC_Cabinet_Gain).c_str(),           NTS(EFX_CABINET).c_str(),       NTS(Cabinet_Gain).c_str(),           "0",     "1.0",
 
@@ -348,6 +345,8 @@ RKR::MIDI_control()
         "Infinity Tempo",           NTS(MC_Infinity_Tempo).c_str(),         NTS(EFX_INFINITY).c_str(),      NTS(Infinity_Tempo).c_str(),         "1",     NTS(C_MC_600_RANGE).c_str(),
         "Infinity Subdiv",          NTS(MC_Infinity_Subdivision).c_str(),   NTS(EFX_INFINITY).c_str(),      NTS(Infinity_Subdivision).c_str(), "-16",     NTS(C_MC_32_RANGE).c_str(),
 
+        "Input Volume",             NTS(MC_Input_Volume).c_str(),           NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
+
         "Looper Dry/Wet",           NTS(MC_Looper_DryWet).c_str(),          NTS(EFX_LOOPER).c_str(),        NTS(Looper_DryWet).c_str(),        "127",     "-1.0",
         "Looper Level 1",           NTS(MC_Looper_Level_1).c_str(),         NTS(EFX_LOOPER).c_str(),        NTS(Looper_Level_1).c_str(),         "0",     "1.0",
         "Looper Level 2",           NTS(MC_Looper_Level_2).c_str(),         NTS(EFX_LOOPER).c_str(),        NTS(Looper_Level_2).c_str(),         "0",     "1.0",
@@ -362,6 +361,8 @@ RKR::MIDI_control()
         "Looper Track 1",           NTS(MC_Looper_Track_1).c_str(),         NTS(EFX_LOOPER).c_str(),        NTS(Looper_Track_1).c_str(),         "0",     "1.0",
         "Looper Track 2",           NTS(MC_Looper_Track_2).c_str(),         NTS(EFX_LOOPER).c_str(),        NTS(Looper_Track_2).c_str(),         "0",     "1.0",
         "Looper Clear",             NTS(MC_Looper_Clear).c_str(),           NTS(EFX_LOOPER).c_str(),        NTS(Looper_Clear).c_str(),           "0",     "1.0",
+
+        "Multi On/Off",             NTS(MC_Multi_On_Off).c_str(),           NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
 
         "Musical Delay Dry/Wet",    NTS(MC_Music_DryWet).c_str(),           NTS(EFX_MUSICAL_DELAY).c_str(), NTS(Music_DryWet).c_str(),         "127",     "-1.0",
         "Musical Delay L/R Cross",  NTS(MC_Music_LR_Cross).c_str(),         NTS(EFX_MUSICAL_DELAY).c_str(), NTS(Music_LR_Cross).c_str(),         "0",     "1.0",
@@ -404,6 +405,8 @@ RKR::MIDI_control()
         "Opticaltrem LFO Type",     NTS(MC_Optical_LFO_Type).c_str(),       NTS(EFX_OPTICALTREM).c_str(),   NTS(Optical_LFO_Type).c_str(),       "0",     NTS(C_MC_11_RANGE).c_str(),
         "Opticaltrem Stereo Df",    NTS(MC_Optical_LFO_Stereo).c_str(),     NTS(EFX_OPTICALTREM).c_str(),   NTS(Optical_LFO_Stereo).c_str(),     "0",     "1.0",
         "Opticaltrem Pan",          NTS(MC_Optical_Pan).c_str(),            NTS(EFX_OPTICALTREM).c_str(),   NTS(Optical_Pan).c_str(),            "0",     "1.0",
+
+        "Output Volume",            NTS(MC_Output_Volume).c_str(),          NTS(EFX_MASTER).c_str(),        "0",                                 "0",     "1.0",
 
         "Overdrive Dry/Wet",        NTS(MC_Overdrive_DryWet).c_str(),       NTS(EFX_OVERDRIVE).c_str(),     NTS(Overdrive_DryWet).c_str(),     "127",     "-1.0",
         "Overdrive L/R Cross",      NTS(MC_Overdrive_LR_Cross).c_str(),     NTS(EFX_OVERDRIVE).c_str(),     NTS(Overdrive_LR_Cross).c_str(),     "0",     "1.0",
