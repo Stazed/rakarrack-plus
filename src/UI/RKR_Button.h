@@ -30,7 +30,6 @@
 #include <FL/Fl_Button.H>
 #include <FL/fl_draw.H>
 
-#define BUTTON_USER_DATA   77
 
 #define BUTTON_DEFAULT          0
 #define BUTTON_BANK_HIGHLIGHT   1

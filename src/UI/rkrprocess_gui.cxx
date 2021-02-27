@@ -3069,7 +3069,7 @@ void RKRGUI::highlight()
     }
 
 
-    if ((tipo == 1) || (k == 77))
+    if ((tipo == 1) || (k == UD_RKR_Button_Highlight))
     {
         if (old != NULL)
         {

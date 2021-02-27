@@ -43,7 +43,6 @@ m_parent= _rgui;} {}
   }
   Fl_Button GMM {
     label {Get MIDI Message}
-    user_data 77
     callback {m_process->ControlGet=0;
 m_process->CountWait=0;
 m_process->RControl=1;}
@@ -58,7 +57,6 @@ m_process->RControl=1;}
   }
   Fl_Button CopyF {
     label {Copy from: }
-    user_data 77
     callback {memcpy(m_process->XUserMIDI,m_process->Bank[TPresets->value()].XUserMIDI,sizeof(m_process->XUserMIDI));
   m_parent->DisAssigns();}
     xywh {430 20 95 30}
@@ -67,7 +65,6 @@ m_process->RControl=1;}
   }
   Fl_Button CopyT {
     label {Copy to: }
-    user_data 77
     callback {memcpy(m_process->Bank[TPresets->value()].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));}
     xywh {535 20 95 30}
     code0 {o->set_label_offset(4);}
@@ -160,7 +157,6 @@ m_process->RControl=1;}
   }
   Fl_Button ClearA {
     label {Clear Assignements}
-    user_data 77
     callback {int i, j,k;
 int the_one;
 
@@ -190,7 +186,6 @@ for(i=0; i<128; i++)
   }
   Fl_Button ClearP {
     label {Clear Preset}
-    user_data 77
     callback {memset(m_process->XUserMIDI, 0, sizeof(m_process->XUserMIDI));
     m_parent->DisAssigns();}
     xywh {245 285 150 30}
@@ -199,7 +194,6 @@ for(i=0; i<128; i++)
   }
   Fl_Button Assign {
     label Assign
-    user_data 77
     callback {int i;
 
 int the_one = 0;
@@ -232,7 +226,6 @@ for(i=0;i<20;i++)
   }
   Fl_Button AssignA {
     label {Assign to All}
-    user_data 77
     callback {int i,j;
 int the_one = 0;
 
@@ -268,7 +261,6 @@ Assign->do_callback();}
   }
   Fl_Button CancelRec {
     label Cancel
-    user_data 77
     callback {m_process->RControl = 0;
 GMM->color(global_fore_color);
 GMM->redraw();}
@@ -285,7 +277,6 @@ if(o->value()< 1) o->value(1);}
   }
   Fl_Button CopyTAll {
     label {Copy to All}
-    user_data 77
     callback {int i;
 for(i=1;i<61;i++) memcpy(m_process->Bank[i].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));}
     xywh {480 412 150 30}
@@ -294,7 +285,6 @@ for(i=1;i<61;i++) memcpy(m_process->Bank[i].XUserMIDI,m_process->XUserMIDI, size
   }
   Fl_Button CloseML {
     label Close
-    user_data 77
     callback {do_callback();}
     xywh {480 445 150 30}
     code0 {o->set_label_offset(4);}

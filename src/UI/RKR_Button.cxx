@@ -35,7 +35,7 @@ RKR_Button::RKR_Button(int X, int Y, int W, int H, const char *label) :
     m_button_type(BUTTON_DEFAULT),
     m_look_changed(0)
 {
-    this->user_data((void*)(BUTTON_USER_DATA));
+    this->user_data((void*)(UD_RKR_Button_Highlight));
 }
 
 void RKR_Button::draw()

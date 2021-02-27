@@ -327,7 +327,7 @@ Array is indexed by EFX_Index.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {691 403 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {343 287 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1386,7 +1386,6 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         }
         Fl_Button L_B1 {
           label 1
-          user_data 77
           callback {is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -1404,7 +1403,6 @@ BankWindow->unlight_preset(m_process->Selected_Preset);
         }
         Fl_Button L_B2 {
           label 2
-          user_data 77
           callback {is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -1422,7 +1420,6 @@ BankWindow->unlight_preset(m_process->Selected_Preset);
         }
         Fl_Button L_B3 {
           label 3
-          user_data 77
           callback {is_modified();
 char temp[128];           
   memset (temp, 0, sizeof (temp));
@@ -1440,7 +1437,6 @@ BankWindow->unlight_preset(m_process->Selected_Preset);
         }
         Fl_Button L_B4 {
           label U
-          user_data 77
           callback {is_modified();
 int ok=m_process->load_bank(m_process->BankFilename);
 if(ok) 
@@ -1455,7 +1451,6 @@ BankWindow->unlight_preset(m_process->Selected_Preset);
         }
         Fl_Button S_new {
           label New
-          user_data 77
           callback {m_process->new_preset();
 DisAssigns();
 FillML();
@@ -1467,7 +1462,6 @@ Put_Loaded();}
         }
         Fl_Button L_preset {
           label Load
-          user_data 77
           callback {char *filename;
 filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
 if (filename==NULL) return;
@@ -1480,7 +1474,6 @@ Put_Loaded();}
         }
         Fl_Button S_preset {
           label Save
-          user_data 77
           callback {char *filename;
 \#define EXT ".rkr"
 filename=fl_file_chooser("Save Preset:","(*" EXT")",m_process->Preset_Name,0);
@@ -1513,7 +1506,6 @@ else
         }
         Fl_Button B_preset {
           label Bank
-          user_data 77
           callback {if(!BankWindow->visible())
 {
 if(!made) BankWindow->make_window_banks();
@@ -1560,14 +1552,12 @@ if(m_process->Tap_Updated)
         }
         Fl_Button RandomP {
           label Random
-          user_data 77
           callback {RandomPreset();}
           tooltip {Random Preset selection - Shortcut 'F7'} xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
           class RKR_Button
         }
         Fl_Button Open_Order {
           label {Put Order in your Rack}
-          user_data 77
           callback {if (!Order->visible())
 {
 Prepare_Order();
@@ -1602,7 +1592,6 @@ Analy->set_analyzer_ON(true);
         }
         Fl_Button HideUE {
           label Hide
-          user_data 77
           callback {if(m_process->deachide)
 {
  m_process->deachide=0;
@@ -1620,7 +1609,6 @@ reordena();}
         }
         Fl_Button SwitchMod {
           label Sw
-          user_data 77
           callback {if(m_process->sw_stat==0) 
 { 
   m_process->sw_stat = 1;
@@ -1792,7 +1780,6 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Button T_Apply {
           label Apply
-          user_data 77
           callback {if((m_process->Tap_Bypass) && (m_process->Tap_TempoSet>0))
 {
 m_process->Update_tempo();
@@ -1803,7 +1790,6 @@ update_tap_tempo_GUI();
         }
         Fl_Button T_BUT {
           label Tap
-          user_data 77
           callback {if((m_process->Tap_Bypass) && ( m_process->Tap_Selection==0))
 {
 T_DIS->value(m_process->TapTempo());

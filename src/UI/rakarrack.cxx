@@ -2410,7 +2410,7 @@ void RKRGUI::make_window() {
         L_B1->labelfont(0);
         L_B1->labelsize(10);
         L_B1->labelcolor(FL_FOREGROUND_COLOR);
-        L_B1->callback((Fl_Callback*)cb_L_B1, (void*)(77));
+        L_B1->callback((Fl_Callback*)cb_L_B1);
         L_B1->align(Fl_Align(FL_ALIGN_CENTER));
         L_B1->when(FL_WHEN_RELEASE);
       } // RKR_Button* L_B1
@@ -2422,7 +2422,7 @@ void RKRGUI::make_window() {
         L_B2->labelfont(0);
         L_B2->labelsize(10);
         L_B2->labelcolor(FL_FOREGROUND_COLOR);
-        L_B2->callback((Fl_Callback*)cb_L_B2, (void*)(77));
+        L_B2->callback((Fl_Callback*)cb_L_B2);
         L_B2->align(Fl_Align(FL_ALIGN_CENTER));
         L_B2->when(FL_WHEN_RELEASE);
       } // RKR_Button* L_B2
@@ -2434,7 +2434,7 @@ void RKRGUI::make_window() {
         L_B3->labelfont(0);
         L_B3->labelsize(10);
         L_B3->labelcolor(FL_FOREGROUND_COLOR);
-        L_B3->callback((Fl_Callback*)cb_L_B3, (void*)(77));
+        L_B3->callback((Fl_Callback*)cb_L_B3);
         L_B3->align(Fl_Align(FL_ALIGN_CENTER));
         L_B3->when(FL_WHEN_RELEASE);
       } // RKR_Button* L_B3
@@ -2446,7 +2446,7 @@ void RKRGUI::make_window() {
         L_B4->labelfont(0);
         L_B4->labelsize(10);
         L_B4->labelcolor(FL_FOREGROUND_COLOR);
-        L_B4->callback((Fl_Callback*)cb_L_B4, (void*)(77));
+        L_B4->callback((Fl_Callback*)cb_L_B4);
         L_B4->align(Fl_Align(FL_ALIGN_CENTER));
         L_B4->when(FL_WHEN_RELEASE);
       } // RKR_Button* L_B4
@@ -2460,7 +2460,7 @@ void RKRGUI::make_window() {
         S_new->labelfont(0);
         S_new->labelsize(12);
         S_new->labelcolor(FL_FOREGROUND_COLOR);
-        S_new->callback((Fl_Callback*)cb_S_new, (void*)(77));
+        S_new->callback((Fl_Callback*)cb_S_new);
         S_new->align(Fl_Align(FL_ALIGN_CENTER));
         S_new->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
@@ -2475,7 +2475,7 @@ void RKRGUI::make_window() {
         L_preset->labelfont(0);
         L_preset->labelsize(12);
         L_preset->labelcolor(FL_FOREGROUND_COLOR);
-        L_preset->callback((Fl_Callback*)cb_L_preset, (void*)(77));
+        L_preset->callback((Fl_Callback*)cb_L_preset);
         L_preset->align(Fl_Align(FL_ALIGN_CENTER));
         L_preset->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
@@ -2490,7 +2490,7 @@ void RKRGUI::make_window() {
         S_preset->labelfont(0);
         S_preset->labelsize(12);
         S_preset->labelcolor(FL_FOREGROUND_COLOR);
-        S_preset->callback((Fl_Callback*)cb_S_preset, (void*)(77));
+        S_preset->callback((Fl_Callback*)cb_S_preset);
         S_preset->align(Fl_Align(FL_ALIGN_CENTER));
         S_preset->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
@@ -2520,7 +2520,7 @@ void RKRGUI::make_window() {
         B_preset->labelfont(0);
         B_preset->labelsize(12);
         B_preset->labelcolor(FL_FOREGROUND_COLOR);
-        B_preset->callback((Fl_Callback*)cb_B_preset, (void*)(77));
+        B_preset->callback((Fl_Callback*)cb_B_preset);
         B_preset->align(Fl_Align(FL_ALIGN_CENTER));
         B_preset->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
@@ -2584,7 +2584,7 @@ void RKRGUI::make_window() {
         RandomP->labelfont(0);
         RandomP->labelsize(10);
         RandomP->labelcolor(FL_FOREGROUND_COLOR);
-        RandomP->callback((Fl_Callback*)cb_RandomP, (void*)(77));
+        RandomP->callback((Fl_Callback*)cb_RandomP);
         RandomP->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         RandomP->when(FL_WHEN_RELEASE_ALWAYS);
       } // RKR_Button* RandomP
@@ -2598,7 +2598,7 @@ void RKRGUI::make_window() {
         Open_Order->labelfont(0);
         Open_Order->labelsize(14);
         Open_Order->labelcolor(FL_FOREGROUND_COLOR);
-        Open_Order->callback((Fl_Callback*)cb_Open_Order, (void*)(77));
+        Open_Order->callback((Fl_Callback*)cb_Open_Order);
         Open_Order->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         Open_Order->when(FL_WHEN_RELEASE_ALWAYS);
         o->set_label_offset(4);
@@ -2642,7 +2642,7 @@ void RKRGUI::make_window() {
         HideUE->labelfont(0);
         HideUE->labelsize(10);
         HideUE->labelcolor(FL_FOREGROUND_COLOR);
-        HideUE->callback((Fl_Callback*)cb_HideUE, (void*)(77));
+        HideUE->callback((Fl_Callback*)cb_HideUE);
         HideUE->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         HideUE->when(FL_WHEN_RELEASE_ALWAYS);
       } // RKR_Button* HideUE
@@ -2656,7 +2656,7 @@ void RKRGUI::make_window() {
         SwitchMod->labelfont(0);
         SwitchMod->labelsize(10);
         SwitchMod->labelcolor(FL_FOREGROUND_COLOR);
-        SwitchMod->callback((Fl_Callback*)cb_SwitchMod, (void*)(77));
+        SwitchMod->callback((Fl_Callback*)cb_SwitchMod);
         SwitchMod->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         SwitchMod->when(FL_WHEN_RELEASE_ALWAYS);
       } // RKR_Button* SwitchMod
@@ -2725,7 +2725,7 @@ void RKRGUI::make_window() {
         T_Apply->labelfont(0);
         T_Apply->labelsize(10);
         T_Apply->labelcolor(FL_FOREGROUND_COLOR);
-        T_Apply->callback((Fl_Callback*)cb_T_Apply, (void*)(77));
+        T_Apply->callback((Fl_Callback*)cb_T_Apply);
         T_Apply->align(Fl_Align(FL_ALIGN_CENTER));
         T_Apply->when(FL_WHEN_RELEASE);
       } // RKR_Button* T_Apply
@@ -2739,7 +2739,7 @@ void RKRGUI::make_window() {
         T_BUT->labelfont(0);
         T_BUT->labelsize(12);
         T_BUT->labelcolor(FL_FOREGROUND_COLOR);
-        T_BUT->callback((Fl_Callback*)cb_T_BUT, (void*)(77));
+        T_BUT->callback((Fl_Callback*)cb_T_BUT);
         T_BUT->align(Fl_Align(FL_ALIGN_CENTER));
         T_BUT->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);

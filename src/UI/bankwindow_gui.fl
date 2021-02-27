@@ -133,7 +133,6 @@ m_parent->put_icon(m_parent->AboutWin);}
   }
   Fl_Button B_B1 {
     label 1
-    user_data 77
     callback {m_parent->L_B1->do_callback();}
     xywh {258 14 32 24} color 62 labelsize 10
     code0 {o->set_label_offset(2);}
@@ -141,7 +140,6 @@ m_parent->put_icon(m_parent->AboutWin);}
   }
   Fl_Button B_B2 {
     label 2
-    user_data 77
     callback {m_parent->L_B2->do_callback();}
     xywh {298 14 32 24} color 62 labelsize 10
     code0 {o->set_label_offset(2);}
@@ -149,7 +147,6 @@ m_parent->put_icon(m_parent->AboutWin);}
   }
   Fl_Button B_B3 {
     label 3
-    user_data 77
     callback {m_parent->L_B3->do_callback();}
     xywh {338 14 32 24} color 62 labelsize 10
     code0 {o->set_label_offset(2);}
@@ -157,7 +154,6 @@ m_parent->put_icon(m_parent->AboutWin);}
   }
   Fl_Button B_B4 {
     label U
-    user_data 77
     callback {m_parent->L_B4->do_callback();}
     xywh {378 14 32 24} color 62 labelsize 10
     code0 {o->set_label_offset(2);}

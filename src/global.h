@@ -336,6 +336,88 @@ enum ASCII_Index
     ASCII_Nine
 };
 
+// Bank preset buttons user_data go from 1 - 60
+
+enum USER_DATA_index
+{
+    UD_Group_Efx            = 1,        // All rack effects, Tuner, InOut, MIDI, Metro, Tap, Presets, Settings Tabs
+    UD_RKR_Light_Button     = 2,        // Also RKR_Check_Button
+    UD_RKR_Leds             = 5,        // Jack Port States labels, CPU load
+    UD_RKR_Box              = 7,        // MIDI converter 'MIDI' label, Tuner: WNote, WRfreq, WNfreq, TUNER_LABEL -  LABEL_IO ("In/Out"), "Metronome" label, PRESETS_LABEL ("Presets"), Author, TAP_LABEL
+    UD_RKR_Choice           = 12,
+    UD_RKR_Button_Highlight = 77,       // Default button user data for highlighting when mouse moves inside
+    UD_FL_Button            = 78,       // Boost Button
+    UD_RKR_Browser          = 99,       // MIDI learn, Order Window
+    
+    // Effect main rack labels
+    UD_Label_1              = 770,
+    UD_Label_2,
+    UD_Label_3,
+    UD_Label_4,
+    UD_Label_5,
+    UD_Label_6,
+    UD_Label_7,
+    UD_Label_8,
+    UD_Label_9,
+    UD_Label_10,            // 779
+    
+    UD_Bank_Used            = 1000,
+    UD_Preset_Used          = 2000,
+    UD_Scroll_Custom_MIDI   = 5000,     // Check This
+    UD_Bank_Number          = 8000,
+    
+    UD_EQ                   = 12000,
+    UD_COMPRESSOR,
+    UD_DISTORTION,
+    UD_OVERDRIVE,
+    UD_ECHO,
+    UD_CHORUS,
+    UD_PHASER,
+    UD_FLANGER,
+    UD_REVERB,
+    UD_PARAMETRIC,
+    UD_WAHWAH,              // 12010
+    UD_ALIENWAH,
+    UD_CABINET,
+    UD_PAN,
+    UD_HARMONIZER,
+    UD_MUSICAL_DELAY,
+    UD_NOISEGATE,
+    UD_DERELICT,
+    UD_ANALOG_PHASER,
+    UD_VALVE,
+    UD_DUAL_FLANGE,         // 12020
+    UD_RING,
+    UD_EXCITER,
+    UD_DISTBAND,
+    UD_ARPIE,
+    UD_EXPANDER,
+    UD_SHUFFLE,
+    UD_SYNTHFILTER,
+    UD_VARYBAND,
+    UD_CONVOLOTRON,
+    UD_LOOPER,              // 12030
+    UD_MUTROMOJO,
+    UD_ECHOVERSE,
+    UD_COILCRAFTER,
+    UD_SHELFBOOST,
+    UD_VOCODER,
+    UD_SUSTAINER,
+    UD_SEQUENCE,
+    UD_SHIFTER,
+    UD_STOMPBOX,
+    UD_REVERBTRON,          // 12040
+    UD_ECHOTRON,
+    UD_STEREOHARM,
+    UD_COMPBAND,
+    UD_OPTICALTREM,
+    UD_VIBE,
+    UD_INFINITY,            // 12046
+    
+    UD_RKR_Group            = 99996
+};
+
+
 #endif
 
 
