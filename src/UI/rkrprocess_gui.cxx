@@ -3207,9 +3207,9 @@ int RKRGUI::global_shortcuts(int event)
     {
         Fl_Widget *w = Fl::belowmouse();
         long long k = (long long) w->user_data();
-        if ((k < 770) || (k > 779))
+        if ((k < UD_Label_1) || (k > UD_Label_10))
             return 0;
-        drag = k - 770;
+        drag = k - UD_Label_1;
         return 1;
     }
 
@@ -3694,7 +3694,6 @@ void RKRGUI::RandomPreset()
 
 void RKRGUI::drag_effect()
 {
-    // drag effect
     if ((drag != C_NO_DRAG) && (Fl::event_button1() == 0))
     {
         Fl_Widget *w = Fl::belowmouse();
@@ -3702,7 +3701,7 @@ void RKRGUI::drag_effect()
         {
             long long k = (long long) w->user_data();
 
-            if ((k < 770) || (k > 779))
+            if ((k < UD_Label_1) || (k > UD_Label_10))
             {
                 return;
             }
@@ -3710,9 +3709,9 @@ void RKRGUI::drag_effect()
             // w->user_data() is Label in range 770 to 779
             // which is checked above, so this is valid range (10) for
             // m_process->efx_order[C_NUMBER_ORDERED_EFFECTS] used by Prep_Reorden(source, dest)
-            if (drag != (int) k - 770)
+            if (drag != (int) k - UD_Label_1)
             {
-                Prep_Reorden(drag, (int) k - 770);
+                Prep_Reorden(drag, (int) k - UD_Label_1);
             }
         }
         drag = C_NO_DRAG;
