@@ -28,10 +28,10 @@
 
 #include "rakarrack.h"
 #include "../icono_rakarrack_128x128.xpm"
-static Fl_Widget *previous_widget;
-static int previous_keyboard_key;
-static int drag;
-static int at;
+static Fl_Widget *previous_widget = NULL;
+static int previous_keyboard_key = 0;
+static int drag = C_NO_DRAG;
+static int analyzer_redraw = 0;
 static Pixmap p, mask;
 static XWMHints *hints = NULL;
 static volatile int got_sigint = 0;
@@ -43,7 +43,7 @@ static volatile int got_sigusr1 = 0;
 RKR * process_rkr;
 
 RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
-    made()
+    made(0)
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -53,13 +53,13 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Fl::visual(FL_DOUBLE | FL_RGB);
     fl_register_images();
     Fl::set_fonts(0);
+
     m_process = process_rkr = rkr_;
 
     mBankNameList = NULL;
     mBankNameListTail = NULL;
-
     back = NULL;
-    previous_widget = NULL;
+
     make_window();
 
     Principal->icon((char *) p);
@@ -70,11 +70,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     MIDILearn->icon((char *) p);
     Trigger->icon((char *) p);
 
-    previous_keyboard_key = 0;
-    made = 0;
     char tmp[256];
-    drag = 1000;
-    at = 0;
     Analy->set_analyzer_ON(false);
     Sco->set_scope_ON(false);
 
@@ -416,16 +412,16 @@ void RKRGUI::GuiTimeout(void)
 
         if (Analy->get_analyzer_ON())
         {
-            at++;
-            if (at == 3)
+            analyzer_redraw++;
+            if (analyzer_redraw == 3)
             {
                 Analy->redraw();
-                at = 0;
+                analyzer_redraw = 0;
             }
         }
         else
         {
-            at = 0;
+            analyzer_redraw = 0;
         }
 
         if (m_process->EFX_Bypass[EFX_LOOPER])
@@ -1321,14 +1317,14 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 {
     // used when selecting/moving/right click on preset from bank window
 
-    int tecla = Fl::event_key();
+    int keyboard_key = Fl::event_key();
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
-    if (drag != 1000)
+    if (drag != C_NO_DRAG)
     {
         int en = search_but(Fl::event_x(), Fl::event_y());
-        if (en != 1000)
+        if (en != C_NO_DRAG)
         {
             m_process->Bank[0] = m_process->Bank[en];
             m_process->Bank[en] = m_process->Bank[num];
@@ -1336,7 +1332,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
             Put_Loaded_Bank();
             m_process->modified = 1;
             num = en;
-            drag = 1000;
+            drag = C_NO_DRAG;
         }
     }
 
@@ -1347,9 +1343,10 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
     }
     else
     {
-        drag = 1000;
+        drag = C_NO_DRAG;
     }
 
+    // The use wants to save the main window preset to the bank selected preset button
     if ((Fl::event_button() == FL_RIGHT_MOUSE) && (Fl::event() == FL_RELEASE))
     {
         Fl_Widget *w = BankWindow->ob->child(num - 1);
@@ -1372,8 +1369,8 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         m_process->modified = 1;
     }
 
-
-    if ((Fl::event_button() == FL_LEFT_MOUSE) || tecla == ASCII_Space)
+    // The user selected a preset from the bank window, so highlight and set it
+    if ((Fl::event_button() == FL_LEFT_MOUSE) || keyboard_key == ASCII_Space)
     {
         if ((num != m_process->Selected_Preset) || (m_process->new_bank_loaded))
         {
@@ -3103,7 +3100,7 @@ void RKRGUI::highlight_and_search_browser()
             previous_keyboard_key = keyboard_key;
             for (int i = 1; i <= b->size(); i++)
             {
-                if (b->text(i)[0] >= keyboard_key - 32)
+                if (b->text(i)[0] >= keyboard_key - 32) // -32 shift ascii code to upper case
                 {
                     b->select(i, 1);
                     break;
@@ -3698,7 +3695,7 @@ void RKRGUI::RandomPreset()
 void RKRGUI::drag_effect()
 {
     // drag effect
-    if ((drag != 1000) && (Fl::event_button1() == 0))
+    if ((drag != C_NO_DRAG) && (Fl::event_button1() == 0))
     {
         Fl_Widget *w = Fl::belowmouse();
         if (w != NULL)
@@ -3718,7 +3715,7 @@ void RKRGUI::drag_effect()
                 Prep_Reorden(drag, (int) k - 770);
             }
         }
-        drag = 1000;
+        drag = C_NO_DRAG;
     }
 }
 
