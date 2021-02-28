@@ -136,7 +136,6 @@ CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDE
   }
   Fl_Box MIDI_LABEL {
     label MIDI
-    user_data 7
     xywh {4 32 44 14} labelfont 1 labelcolor 7 when 0
     class RKR_Box
   }

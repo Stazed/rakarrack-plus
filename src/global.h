@@ -342,8 +342,6 @@ enum USER_DATA_index
     
     
     UD_Group_Efx            = 1,        // All rack effects, Tuner, InOut, MIDI, Metro, Tap, Presets, Settings Tabs
-    UD_RKR_Leds             = 5,        // Jack Port States labels, CPU load
-    UD_RKR_Box              = 7,        // MIDI converter 'MIDI' label, Tuner: WNote, WRfreq, WNfreq, TUNER_LABEL -  LABEL_IO ("In/Out"), "Metronome" label, PRESETS_LABEL ("Presets"), Author, TAP_LABEL
     UD_RKR_Choice           = 12,
     
     UD_RKR_Button_Highlight = 77,       // Default button user data for highlighting when mouse moves inside

@@ -216,7 +216,6 @@ results.");
   MIDI_LABEL->labelfont(1);
   MIDI_LABEL->labelsize(14);
   MIDI_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-  MIDI_LABEL->user_data((void*)(7));
   MIDI_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
   MIDI_LABEL->when(FL_WHEN_NEVER);
 } // RKR_Box* MIDI_LABEL

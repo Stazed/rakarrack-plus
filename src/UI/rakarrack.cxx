@@ -1992,7 +1992,6 @@ void RKRGUI::make_window() {
         WNote->labelfont(1);
         WNote->labelsize(14);
         WNote->labelcolor(FL_BACKGROUND2_COLOR);
-        WNote->user_data((void*)(7));
         WNote->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         WNote->when(FL_WHEN_RELEASE);
       } // RKR_Box* WNote
@@ -2004,7 +2003,6 @@ void RKRGUI::make_window() {
         WRfreq->labelfont(1);
         WRfreq->labelsize(14);
         WRfreq->labelcolor(FL_BACKGROUND2_COLOR);
-        WRfreq->user_data((void*)(7));
         WRfreq->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         WRfreq->when(FL_WHEN_RELEASE);
       } // RKR_Box* WRfreq
@@ -2016,7 +2014,6 @@ void RKRGUI::make_window() {
         WNfreq->labelfont(1);
         WNfreq->labelsize(14);
         WNfreq->labelcolor(FL_BACKGROUND2_COLOR);
-        WNfreq->user_data((void*)(7));
         WNfreq->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         WNfreq->when(FL_WHEN_RELEASE);
       } // RKR_Box* WNfreq
@@ -2034,7 +2031,6 @@ void RKRGUI::make_window() {
         TUNER_LABEL->labelfont(1);
         TUNER_LABEL->labelsize(14);
         TUNER_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-        TUNER_LABEL->user_data((void*)(7));
         TUNER_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
         TUNER_LABEL->when(FL_WHEN_RELEASE);
       } // RKR_Box* TUNER_LABEL
@@ -2202,7 +2198,6 @@ void RKRGUI::make_window() {
         LABEL_IO->labelfont(1);
         LABEL_IO->labelsize(14);
         LABEL_IO->labelcolor(FL_BACKGROUND2_COLOR);
-        LABEL_IO->user_data((void*)(7));
         LABEL_IO->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
         LABEL_IO->when(FL_WHEN_RELEASE);
       } // RKR_Box* LABEL_IO
@@ -2331,7 +2326,6 @@ void RKRGUI::make_window() {
         Metro_Label->labelfont(1);
         Metro_Label->labelsize(14);
         Metro_Label->labelcolor(FL_BACKGROUND2_COLOR);
-        Metro_Label->user_data((void*)(7));
         Metro_Label->align(Fl_Align(FL_ALIGN_CENTER));
         Metro_Label->when(FL_WHEN_NEVER);
       } // RKR_Box* Metro_Label
@@ -2351,7 +2345,6 @@ void RKRGUI::make_window() {
         PRESETS_LABEL->labelfont(1);
         PRESETS_LABEL->labelsize(14);
         PRESETS_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-        PRESETS_LABEL->user_data((void*)(7));
         PRESETS_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
         PRESETS_LABEL->when(FL_WHEN_RELEASE);
       } // RKR_Box* PRESETS_LABEL
@@ -2458,7 +2451,7 @@ void RKRGUI::make_window() {
         Compare->labelfont(0);
         Compare->labelsize(12);
         Compare->labelcolor(FL_FOREGROUND_COLOR);
-        Compare->callback((Fl_Callback*)cb_Compare, (void*)(7));
+        Compare->callback((Fl_Callback*)cb_Compare);
         Compare->align(Fl_Align(68|FL_ALIGN_INSIDE));
         Compare->when(FL_WHEN_CHANGED);
         o->set_label_offset(2);
@@ -2523,7 +2516,6 @@ void RKRGUI::make_window() {
         DAuthor->labelfont(0);
         DAuthor->labelsize(14);
         DAuthor->labelcolor(FL_FOREGROUND_COLOR);
-        DAuthor->user_data((void*)(7));
         DAuthor->align(Fl_Align(100|FL_ALIGN_INSIDE));
         DAuthor->when(FL_WHEN_RELEASE);
       } // RKR_Box* DAuthor
@@ -2705,7 +2697,6 @@ void RKRGUI::make_window() {
         TAP_LABEL->labelfont(1);
         TAP_LABEL->labelsize(14);
         TAP_LABEL->labelcolor(FL_BACKGROUND2_COLOR);
-        TAP_LABEL->user_data((void*)(7));
         TAP_LABEL->align(Fl_Align(FL_ALIGN_CENTER));
         TAP_LABEL->when(FL_WHEN_NEVER);
       } // RKR_Box* TAP_LABEL
