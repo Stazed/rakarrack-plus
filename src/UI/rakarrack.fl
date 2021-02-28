@@ -1991,7 +1991,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {add_insert_preset_name(Fl_Widget *w, char *name)} {open
   } {}
-  Function {find_preset_widget(int effect)} {open return_type {Fl_Widget *}
+  Function {find_effect_preset_widget(int effect)} {open return_type {Fl_Widget *}
   } {}
   Function {read_insert_presets()} {open
   } {}

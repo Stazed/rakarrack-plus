@@ -3486,23 +3486,22 @@ void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
  * @return 
  *      The widget (RKR_Choice) for the requested effect.
  */
-Fl_Widget * RKRGUI::find_preset_widget(int effect)
+Fl_Widget * RKRGUI::find_effect_preset_widget(int effect)
 {
-    // FindWidget
     for (int t = 0; t < Principal->children(); t++)
     {
         Fl_Widget *w = Principal->child(t);
-        long long ud = (long long) w->user_data();
+        long long effect_user_data = (long long) w->user_data();
 
-        if (ud == 1)
+        if (effect_user_data == 1)
         {
             Fl_Group *g = (Fl_Group *) w;
 
             for (int i = 0; i < g->children(); i++)
             {
                 Fl_Widget *c = g->child(i);
-                long long uh = (long long) c->user_data();
-                if (uh == (effect + UD_PRESET_EQ))  // UD_PRESET_EQ is start efx user_data
+                long long preset_user_data = (long long) c->user_data();
+                if (preset_user_data == (effect + UD_PRESET_EQ))  // UD_PRESET_EQ is start efx user_data
                     return c;
             }
         }
@@ -3536,7 +3535,7 @@ void RKRGUI::read_insert_presets()
             sscanf(buf, "%d", &effect);
             name = strsep(&sbuf, ",");
             name = strsep(&sbuf, ",");
-            add_insert_preset_name(find_preset_widget(effect), name);
+            add_insert_preset_name(find_effect_preset_widget(effect), name);
         }
 
         fclose(fn);
@@ -3686,7 +3685,7 @@ void RKRGUI::RandomPreset()
         Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Bypass[rack_effect]);
 
         // Get the effect preset size and select a random effect preset
-        Fl_Widget *w = find_preset_widget(Effect_Index[i]);
+        Fl_Widget *w = find_effect_preset_widget(Effect_Index[i]);
         RKR_Choice *preset_widget = static_cast<RKR_Choice *> (w);
 
         long long widget_user_data = (long long) preset_widget->user_data();
