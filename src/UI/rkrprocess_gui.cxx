@@ -3205,8 +3205,8 @@ int RKRGUI::global_shortcuts(int event)
 {
     if (event == FL_DRAG)
     {
-        Fl_Widget *w = Fl::belowmouse();
-        long long widget_user_data = (long long) w->user_data();
+        Fl_Widget *widget_belowmouse = Fl::belowmouse();
+        long long widget_user_data = (long long) widget_belowmouse->user_data();
         if ((widget_user_data < UD_Label_1) || (widget_user_data > UD_Label_10))
             return 0;
         drag = widget_user_data - UD_Label_1;
@@ -3245,18 +3245,18 @@ int RKRGUI::global_shortcuts(int event)
 
         if (Fl::event_key(FL_Insert)) // Insert key - add user preset
         {
-            Fl_Widget *w = Fl::belowmouse();
+            Fl_Widget *widget_belowmouse = Fl::belowmouse();
             
-            if (w == NULL)
+            if (widget_belowmouse == NULL)
             {
                 return 0;
             }
             
-            long long widget_user_data = (long long) w->user_data();
+            long long widget_user_data = (long long) widget_belowmouse->user_data();
             
-            if ((widget_user_data > 11999) && (widget_user_data < 12100))
+            if ((widget_user_data >= UD_PRESET_EQ) && (widget_user_data <= UD_PRESET_MAX_EFFECTS))
             {
-                ((RKRGUI*) (w->parent()->parent()->user_data()))->get_insert_preset_name(w, widget_user_data - 12000);
+                ((RKRGUI*) (widget_belowmouse->parent()->parent()->user_data()))->get_insert_preset_name(widget_belowmouse, widget_user_data - UD_PRESET_EQ);
             }
             
             return 1;
@@ -3264,17 +3264,17 @@ int RKRGUI::global_shortcuts(int event)
 
         if (Fl::event_key(FL_Delete)) // Delete key - delete user preset
         {
-            Fl_Widget *w = Fl::belowmouse();
+            Fl_Widget *widget_belowmouse = Fl::belowmouse();
             
-            if (w == NULL)
+            if (widget_belowmouse == NULL)
             {
                 return 0;
             }
-            long long widget_user_data = (long long) w->user_data();
+            long long widget_user_data = (long long) widget_belowmouse->user_data();
             
-            if ((widget_user_data > 11999) && (widget_user_data < 12100))
+            if ((widget_user_data >= UD_PRESET_EQ) && (widget_user_data <= UD_PRESET_MAX_EFFECTS))
             {
-                ((RKRGUI*) (w->parent()->parent()->user_data()))->delete_insert_preset(w, widget_user_data - 12000);
+                ((RKRGUI*) (widget_belowmouse->parent()->parent()->user_data()))->delete_insert_preset(widget_belowmouse, widget_user_data - UD_PRESET_EQ);
             }
             
             return 1;
@@ -3696,10 +3696,10 @@ void RKRGUI::drag_effect()
 {
     if ((drag != C_NO_DRAG) && (Fl::event_button1() == 0))
     {
-        Fl_Widget *w = Fl::belowmouse();
-        if (w != NULL)
+        Fl_Widget *widget_belowmouse = Fl::belowmouse();
+        if (widget_belowmouse != NULL)
         {
-            long long widget_user_data = (long long) w->user_data();
+            long long widget_user_data = (long long) widget_belowmouse->user_data();
 
             if ((widget_user_data < UD_Label_1) || (widget_user_data > UD_Label_10))
             {
