@@ -3256,7 +3256,8 @@ int RKRGUI::global_shortcuts(int event)
             
             if ((widget_user_data >= UD_PRESET_EQ) && (widget_user_data <= UD_PRESET_MAX_EFFECTS))
             {
-                ((RKRGUI*) (widget_belowmouse->parent()->parent()->user_data()))->get_insert_preset_name(widget_belowmouse, widget_user_data - UD_PRESET_EQ);
+                ((RKRGUI*) (widget_belowmouse->parent()->parent()->user_data()))->
+                        get_insert_preset_name(widget_belowmouse, widget_user_data - UD_PRESET_EQ);
             }
             
             return 1;
@@ -3274,7 +3275,8 @@ int RKRGUI::global_shortcuts(int event)
             
             if ((widget_user_data >= UD_PRESET_EQ) && (widget_user_data <= UD_PRESET_MAX_EFFECTS))
             {
-                ((RKRGUI*) (widget_belowmouse->parent()->parent()->user_data()))->delete_insert_preset(widget_belowmouse, widget_user_data - UD_PRESET_EQ);
+                ((RKRGUI*) (widget_belowmouse->parent()->parent()->user_data()))->
+                        delete_insert_preset(widget_belowmouse, widget_user_data - UD_PRESET_EQ);
             }
             
             return 1;
@@ -3629,43 +3631,51 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
 
 void RKRGUI::RandomPreset()
 {
-    // Random select button
-    int SelEff[10];
-    int numEff = (int) (RND * 6) + 1;
- 
+    // Reset all effects to defaults
     S_new->do_callback();
 
-    SelEff[0] = (int) (RND * C_NUMBER_EFFECTS);
+    // Array to hold selected effect index
+    int Effect_Index[10];
+    
+    // Get the first one to compare for duplicates
+    Effect_Index[0] = (int) (RND * C_NUMBER_EFFECTS);
 
+    // Get random selection of effect index
     for (int i = 1; i < 10; i++)
     {
         int l = 0;
         while (l == 0)
         {
-            SelEff[i] = (int) (RND * C_NUMBER_EFFECTS);
+            Effect_Index[i] = (int) (RND * C_NUMBER_EFFECTS);
             for (int j = 0; j < i; j++)
             {
-                if (SelEff[j] == SelEff[i])
+                // Check that there are no duplicate selections
+                if (Effect_Index[j] == Effect_Index[i])
                 {
-                    l = 0;
+                    l = 0;  // duplicate selection, continue while()
                     break;
                 }
                 else
-                    l = 1;
+                    l = 1;  // got a new selection, break from while()
             }
         }
     }
 
+    // Set the main window order based on random selections
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        m_process->efx_order[i] = SelEff[i];
+        m_process->efx_order[i] = Effect_Index[i];
     }
+    
+    // Get random number of active effects, max of six
+    int number_active_effects = (int) (RND * 6) + 1;
 
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         int rack_effect = m_process->efx_order[i];
 
-        if (i < numEff)
+        // Set the main window effects active or inactive
+        if (i < number_active_effects)
         {
             m_process->EFX_Bypass[rack_effect] = 1;
         }
@@ -3676,12 +3686,14 @@ void RKRGUI::RandomPreset()
         
         Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Bypass[rack_effect]);
 
-        Fl_Widget *w = find_preset_widget(SelEff[i]);
-        RKR_Choice *s = (RKR_Choice *) w;
-        long long widget_user_data = (long long) s->user_data();
-        int Esel = (int) (RND * s->size());
-        s->value(Esel);
-        s->do_callback(w, widget_user_data);
+        // Get the effect preset size and select a random effect preset
+        Fl_Widget *w = find_preset_widget(Effect_Index[i]);
+        RKR_Choice *preset_widget = static_cast<RKR_Choice *> (w);
+
+        long long widget_user_data = (long long) preset_widget->user_data();
+        int preset_selection = (int) (RND * preset_widget->size());
+        preset_widget->value(preset_selection);
+        preset_widget->do_callback(w, widget_user_data);
     }
 
     FillML();
