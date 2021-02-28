@@ -1318,27 +1318,27 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
     // used when selecting/moving/right click on preset from bank window
 
     int keyboard_key = Fl::event_key();
-    long long kk = (long long) o->user_data();
-    int num = (int) kk;
+    long long bank_preset_button = (long long) o->user_data();
+    int button_number = (int) bank_preset_button;
 
     if (drag != C_NO_DRAG)
     {
-        int en = search_but(Fl::event_x(), Fl::event_y());
-        if (en != C_NO_DRAG)
+        int drag_destination = search_but(Fl::event_x(), Fl::event_y());
+        if (drag_destination != C_NO_DRAG)
         {
-            m_process->Bank[0] = m_process->Bank[en];
-            m_process->Bank[en] = m_process->Bank[num];
-            m_process->Bank[num] = m_process->Bank[0];
+            m_process->Bank[0] = m_process->Bank[drag_destination];
+            m_process->Bank[drag_destination] = m_process->Bank[button_number];
+            m_process->Bank[button_number] = m_process->Bank[0];
             Put_Loaded_Bank();
             m_process->modified = 1;
-            num = en;
+            button_number = drag_destination;
             drag = C_NO_DRAG;
         }
     }
 
     if ((Fl::event_is_click() == 0)&&(Fl::event() == FL_DRAG))
     {
-        drag = num;
+        drag = button_number;
         return;
     }
     else
@@ -1349,7 +1349,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
     // The use wants to save the main window preset to the bank selected preset button
     if ((Fl::event_button() == FL_RIGHT_MOUSE) && (Fl::event() == FL_RELEASE))
     {
-        Fl_Widget *w = BankWindow->ob->child(num - 1);
+        Fl_Widget *w = BankWindow->ob->child(button_number - 1);
 
         // Check if user really wants to set the preset to the bank
         Fl_Widget *m = fl_message_icon();
@@ -1364,7 +1364,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 
         o->value(0);
         o->redraw();
-        m_process->preset_to_bank(num);
+        m_process->preset_to_bank(button_number);
         w->copy_label(m_process->Preset_Name);
         m_process->modified = 1;
     }
@@ -1372,13 +1372,13 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
     // The user selected a preset from the bank window, so highlight and set it
     if ((Fl::event_button() == FL_LEFT_MOUSE) || keyboard_key == ASCII_Space)
     {
-        if ((num != m_process->Selected_Preset) || (m_process->new_bank_loaded))
+        if ((button_number != m_process->Selected_Preset) || (m_process->new_bank_loaded))
         {
-            Fl_Widget *w = BankWindow->ob->child(num - 1);
+            Fl_Widget *w = BankWindow->ob->child(button_number - 1);
             BankWindow->unlight_preset(m_process->Selected_Preset);
-            m_process->Selected_Preset = num;
+            m_process->Selected_Preset = button_number;
             w->color(fl_darker(global_leds_color));
-            Preset_Counter->value(num);
+            Preset_Counter->value(button_number);
             Preset_Counter->do_callback();
         }
     }

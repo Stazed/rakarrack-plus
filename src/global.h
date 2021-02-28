@@ -337,6 +337,10 @@ enum ASCII_Index
 
 enum USER_DATA_index
 {
+    // The Bank Window user data values go from 1 to 60
+    // Set in: BankWindowGui::make_window_banks()
+    
+    
     UD_Group_Efx            = 1,        // All rack effects, Tuner, InOut, MIDI, Metro, Tap, Presets, Settings Tabs
     UD_RKR_Light_Button     = 2,        // Also RKR_Check_Button
     UD_RKR_Leds             = 5,        // Jack Port States labels, CPU load
@@ -358,6 +362,7 @@ enum USER_DATA_index
     UD_Label_9,
     UD_Label_10,            // 779
     
+    // Custom MIDI table banks and presets
     UD_Bank_Used            = 1000,
     UD_Preset_Used          = 2000,
     UD_Scroll_Custom_MIDI   = 5000,     // Check This
