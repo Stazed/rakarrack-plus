@@ -3124,7 +3124,7 @@ int RKRGUI::search_but(int x, int y)
         }
     }
 
-    return (1000);
+    return (C_NO_DRAG);
 }
 
 /** 
@@ -3501,7 +3501,7 @@ Fl_Widget * RKRGUI::find_preset_widget(int effect)
             {
                 Fl_Widget *c = g->child(i);
                 long long uh = (long long) c->user_data();
-                if (uh == (effect + 12000))
+                if (uh == (effect + UD_PRESET_EQ))  // UD_PRESET_EQ is start efx user_data
                     return c;
             }
         }
