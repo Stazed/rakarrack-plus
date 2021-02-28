@@ -52,11 +52,6 @@ extern int global_look_changed;
 
 const int C_DEFAULT_FONT_SIZE = 10;
 
-/* These are used by settings midi scroll for identifying the scroll widgets - user data (void *) */
-const int c_bank_used = 1000;
-const int c_preset_used = 2000;
-const int c_bank_number = 8000;
-
 /* For file .rkrb extension size usually for removing the extension from bank names */
 const unsigned c_rkrb_ext_size = 5;
 /* For file .rkr extension size usually for removing the extension from preset names */

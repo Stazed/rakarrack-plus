@@ -3610,8 +3610,8 @@ inline void RKRGUI::bank_click_i(Fl_Choice* o, void*)
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
-    m_process->M_table[num - c_bank_used].bank = (int) o->value();
-    Settings->fill_mptable(num + c_bank_used, m_process->M_table[num - c_bank_used].bank);
+    m_process->M_table[num - UD_Bank_Used].bank = (int) o->value();
+    Settings->fill_mptable(num + UD_Bank_Used, m_process->M_table[num - UD_Bank_Used].bank);
 }
 
 void RKRGUI::p_click(Fl_Choice* o, void* v)
@@ -3626,7 +3626,7 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
-    m_process->M_table[num - c_preset_used].preset = o->value();
+    m_process->M_table[num - UD_Preset_Used].preset = o->value();
 }
 
 void RKRGUI::RandomPreset()
