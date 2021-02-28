@@ -1323,7 +1323,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 
     if (drag != C_NO_DRAG)
     {
-        int drag_destination = search_but(Fl::event_x(), Fl::event_y());
+        int drag_destination = search_bank_preset_button(Fl::event_x(), Fl::event_y());
         if (drag_destination != C_NO_DRAG)
         {
             m_process->Bank[0] = m_process->Bank[drag_destination];
@@ -3110,17 +3110,16 @@ void RKRGUI::highlight_and_search_browser()
     }
 }
 
-int RKRGUI::search_but(int x, int y)
+int RKRGUI::search_bank_preset_button(int x, int y)
 {
-    // search_but
     for (int t = 0; t < BankWindow->ob->children(); t++)
     {
         Fl_Widget *w = BankWindow->ob->child(t);
 
         if ((x >= w->x()) && (x <= (w->x() + w->w())) && (y >= w->y()) && (y <= (w->y() + w->h())))
         {
-            long long kn = (long long) w->user_data();
-            return ((int) kn);
+            long long bank_preset_number = (long long) w->user_data();
+            return ((int) bank_preset_number);
         }
     }
 

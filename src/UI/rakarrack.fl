@@ -1969,7 +1969,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {highlight_and_search_browser()} {open
   } {}
-  Function {search_but(int x, int y)} {open return_type int
+  Function {search_bank_preset_button(int x, int y)} {open return_type int
   } {}
   Function {Scan_Bank_Dir()} {open
   } {}

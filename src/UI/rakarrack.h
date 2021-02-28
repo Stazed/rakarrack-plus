@@ -605,7 +605,7 @@ public:
   int Busca_Eff(int num);
   void Fill_Avail(int filter);
   void highlight_and_search_browser();
-  int search_but(int x, int y);
+  int search_bank_preset_button(int x, int y);
   void Scan_Bank_Dir();
 private:
   void Set_Bank(std::string directory);
