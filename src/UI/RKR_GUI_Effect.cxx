@@ -27,7 +27,9 @@
 
 RKR_Gui_Effect::RKR_Gui_Effect(int X, int Y, int W, int H, const char *L)
   : Fl_Group(X, Y, W, H, L)
-{}
+{
+    this->user_data((void*)(UD_Group_Efx));
+}
 
 void
 RKR_Gui_Effect::initialize(RKR *_rkr, RKRGUI *_rgui )

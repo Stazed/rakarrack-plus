@@ -11,9 +11,8 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
-widget_class EqGui {
-  user_data 1 open selected
-  xywh {1366 114 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+widget_class EqGui {open selected
+  xywh {1584 174 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}

@@ -1253,7 +1253,6 @@ void RKRGUI::make_window() {
       EQ->labelfont(1);
       EQ->labelsize(14);
       EQ->labelcolor(FL_FOREGROUND_COLOR);
-      EQ->user_data((void*)(1));
       EQ->align(Fl_Align(96|FL_ALIGN_INSIDE));
       EQ->when(FL_WHEN_RELEASE);
       EQ->hide();
@@ -1269,7 +1268,6 @@ void RKRGUI::make_window() {
       COMPRESS->labelfont(1);
       COMPRESS->labelsize(14);
       COMPRESS->labelcolor(FL_FOREGROUND_COLOR);
-      COMPRESS->user_data((void*)(1));
       COMPRESS->align(Fl_Align(96|FL_ALIGN_INSIDE));
       COMPRESS->when(FL_WHEN_RELEASE);
       COMPRESS->hide();
@@ -1285,7 +1283,6 @@ void RKRGUI::make_window() {
       DIST->labelfont(1);
       DIST->labelsize(14);
       DIST->labelcolor(FL_FOREGROUND_COLOR);
-      DIST->user_data((void*)(1));
       DIST->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DIST->when(FL_WHEN_RELEASE);
       DIST->hide();
@@ -1301,7 +1298,6 @@ void RKRGUI::make_window() {
       OVRD->labelfont(1);
       OVRD->labelsize(14);
       OVRD->labelcolor(FL_FOREGROUND_COLOR);
-      OVRD->user_data((void*)(1));
       OVRD->align(Fl_Align(96|FL_ALIGN_INSIDE));
       OVRD->when(FL_WHEN_RELEASE);
       OVRD->hide();
@@ -1317,7 +1313,6 @@ void RKRGUI::make_window() {
       ECHO->labelfont(1);
       ECHO->labelsize(14);
       ECHO->labelcolor(FL_FOREGROUND_COLOR);
-      ECHO->user_data((void*)(1));
       ECHO->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ECHO->when(FL_WHEN_RELEASE);
       ECHO->hide();
@@ -1333,7 +1328,6 @@ void RKRGUI::make_window() {
       CHORUS->labelfont(1);
       CHORUS->labelsize(14);
       CHORUS->labelcolor(FL_FOREGROUND_COLOR);
-      CHORUS->user_data((void*)(1));
       CHORUS->align(Fl_Align(96|FL_ALIGN_INSIDE));
       CHORUS->when(FL_WHEN_RELEASE);
       CHORUS->hide();
@@ -1349,7 +1343,6 @@ void RKRGUI::make_window() {
       PHASER->labelfont(1);
       PHASER->labelsize(14);
       PHASER->labelcolor(FL_FOREGROUND_COLOR);
-      PHASER->user_data((void*)(1));
       PHASER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       PHASER->when(FL_WHEN_RELEASE);
       PHASER->hide();
@@ -1365,7 +1358,6 @@ void RKRGUI::make_window() {
       FLANGER->labelfont(1);
       FLANGER->labelsize(14);
       FLANGER->labelcolor(FL_FOREGROUND_COLOR);
-      FLANGER->user_data((void*)(1));
       FLANGER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       FLANGER->when(FL_WHEN_RELEASE);
       FLANGER->hide();
@@ -1381,7 +1373,6 @@ void RKRGUI::make_window() {
       REVERB->labelfont(1);
       REVERB->labelsize(14);
       REVERB->labelcolor(FL_FOREGROUND_COLOR);
-      REVERB->user_data((void*)(1));
       REVERB->align(Fl_Align(96|FL_ALIGN_INSIDE));
       REVERB->when(FL_WHEN_RELEASE);
       REVERB->hide();
@@ -1397,7 +1388,6 @@ void RKRGUI::make_window() {
       PEQ->labelfont(1);
       PEQ->labelsize(14);
       PEQ->labelcolor(FL_FOREGROUND_COLOR);
-      PEQ->user_data((void*)(1));
       PEQ->align(Fl_Align(96|FL_ALIGN_INSIDE));
       PEQ->when(FL_WHEN_RELEASE);
       PEQ->hide();
@@ -1413,7 +1403,6 @@ void RKRGUI::make_window() {
       WAHWAH->labelfont(1);
       WAHWAH->labelsize(14);
       WAHWAH->labelcolor(FL_FOREGROUND_COLOR);
-      WAHWAH->user_data((void*)(1));
       WAHWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
       WAHWAH->when(FL_WHEN_RELEASE);
       WAHWAH->hide();
@@ -1429,7 +1418,6 @@ void RKRGUI::make_window() {
       ALIENWAH->labelfont(1);
       ALIENWAH->labelsize(14);
       ALIENWAH->labelcolor(FL_FOREGROUND_COLOR);
-      ALIENWAH->user_data((void*)(1));
       ALIENWAH->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ALIENWAH->when(FL_WHEN_RELEASE);
       ALIENWAH->hide();
@@ -1445,7 +1433,6 @@ void RKRGUI::make_window() {
       CABINET->labelfont(1);
       CABINET->labelsize(14);
       CABINET->labelcolor(FL_FOREGROUND_COLOR);
-      CABINET->user_data((void*)(1));
       CABINET->align(Fl_Align(96|FL_ALIGN_INSIDE));
       CABINET->when(FL_WHEN_RELEASE);
       CABINET->hide();
@@ -1461,7 +1448,6 @@ void RKRGUI::make_window() {
       PAN->labelfont(1);
       PAN->labelsize(14);
       PAN->labelcolor(FL_FOREGROUND_COLOR);
-      PAN->user_data((void*)(1));
       PAN->align(Fl_Align(96|FL_ALIGN_INSIDE));
       PAN->when(FL_WHEN_RELEASE);
       PAN->hide();
@@ -1477,7 +1463,6 @@ void RKRGUI::make_window() {
       HAR->labelfont(1);
       HAR->labelsize(14);
       HAR->labelcolor(FL_FOREGROUND_COLOR);
-      HAR->user_data((void*)(1));
       HAR->align(Fl_Align(96|FL_ALIGN_INSIDE));
       HAR->when(FL_WHEN_RELEASE);
       HAR->hide();
@@ -1493,7 +1478,6 @@ void RKRGUI::make_window() {
       MUSDELAY->labelfont(1);
       MUSDELAY->labelsize(14);
       MUSDELAY->labelcolor(FL_FOREGROUND_COLOR);
-      MUSDELAY->user_data((void*)(1));
       MUSDELAY->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MUSDELAY->when(FL_WHEN_RELEASE);
       MUSDELAY->hide();
@@ -1509,7 +1493,6 @@ void RKRGUI::make_window() {
       GATE->labelfont(1);
       GATE->labelsize(14);
       GATE->labelcolor(FL_FOREGROUND_COLOR);
-      GATE->user_data((void*)(1));
       GATE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       GATE->when(FL_WHEN_RELEASE);
       GATE->hide();
@@ -1525,7 +1508,6 @@ void RKRGUI::make_window() {
       DERELICT->labelfont(1);
       DERELICT->labelsize(14);
       DERELICT->labelcolor(FL_FOREGROUND_COLOR);
-      DERELICT->user_data((void*)(1));
       DERELICT->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DERELICT->when(FL_WHEN_RELEASE);
       DERELICT->hide();
@@ -1541,7 +1523,6 @@ void RKRGUI::make_window() {
       APHASER->labelfont(1);
       APHASER->labelsize(14);
       APHASER->labelcolor(FL_FOREGROUND_COLOR);
-      APHASER->user_data((void*)(1));
       APHASER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       APHASER->when(FL_WHEN_RELEASE);
       APHASER->hide();
@@ -1557,7 +1538,6 @@ void RKRGUI::make_window() {
       VALVE->labelfont(1);
       VALVE->labelsize(14);
       VALVE->labelcolor(FL_FOREGROUND_COLOR);
-      VALVE->user_data((void*)(1));
       VALVE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VALVE->when(FL_WHEN_RELEASE);
       VALVE->hide();
@@ -1573,7 +1553,6 @@ void RKRGUI::make_window() {
       DFLANGE->labelfont(1);
       DFLANGE->labelsize(14);
       DFLANGE->labelcolor(FL_FOREGROUND_COLOR);
-      DFLANGE->user_data((void*)(1));
       DFLANGE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DFLANGE->when(FL_WHEN_RELEASE);
       DFLANGE->hide();
@@ -1589,7 +1568,6 @@ void RKRGUI::make_window() {
       RING->labelfont(1);
       RING->labelsize(14);
       RING->labelcolor(FL_FOREGROUND_COLOR);
-      RING->user_data((void*)(1));
       RING->align(Fl_Align(96|FL_ALIGN_INSIDE));
       RING->when(FL_WHEN_RELEASE);
       RING->hide();
@@ -1605,7 +1583,6 @@ void RKRGUI::make_window() {
       EXCITER->labelfont(1);
       EXCITER->labelsize(14);
       EXCITER->labelcolor(FL_FOREGROUND_COLOR);
-      EXCITER->user_data((void*)(1));
       EXCITER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       EXCITER->when(FL_WHEN_RELEASE);
       EXCITER->hide();
@@ -1621,7 +1598,6 @@ void RKRGUI::make_window() {
       DISTBAND->labelfont(1);
       DISTBAND->labelsize(14);
       DISTBAND->labelcolor(FL_FOREGROUND_COLOR);
-      DISTBAND->user_data((void*)(1));
       DISTBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
       DISTBAND->when(FL_WHEN_RELEASE);
       DISTBAND->hide();
@@ -1637,7 +1613,6 @@ void RKRGUI::make_window() {
       ARPIE->labelfont(1);
       ARPIE->labelsize(14);
       ARPIE->labelcolor(FL_FOREGROUND_COLOR);
-      ARPIE->user_data((void*)(1));
       ARPIE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ARPIE->when(FL_WHEN_RELEASE);
       ARPIE->hide();
@@ -1653,7 +1628,6 @@ void RKRGUI::make_window() {
       EXPANDER->labelfont(1);
       EXPANDER->labelsize(14);
       EXPANDER->labelcolor(FL_FOREGROUND_COLOR);
-      EXPANDER->user_data((void*)(1));
       EXPANDER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       EXPANDER->when(FL_WHEN_RELEASE);
       EXPANDER->hide();
@@ -1669,7 +1643,6 @@ void RKRGUI::make_window() {
       SHUFFLE->labelfont(1);
       SHUFFLE->labelsize(14);
       SHUFFLE->labelcolor(FL_FOREGROUND_COLOR);
-      SHUFFLE->user_data((void*)(1));
       SHUFFLE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHUFFLE->when(FL_WHEN_RELEASE);
       SHUFFLE->hide();
@@ -1685,7 +1658,6 @@ void RKRGUI::make_window() {
       SYNTHFILTER->labelfont(1);
       SYNTHFILTER->labelsize(14);
       SYNTHFILTER->labelcolor(FL_FOREGROUND_COLOR);
-      SYNTHFILTER->user_data((void*)(1));
       SYNTHFILTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SYNTHFILTER->when(FL_WHEN_RELEASE);
       SYNTHFILTER->hide();
@@ -1701,7 +1673,6 @@ void RKRGUI::make_window() {
       VARYBAND->labelfont(1);
       VARYBAND->labelsize(14);
       VARYBAND->labelcolor(FL_FOREGROUND_COLOR);
-      VARYBAND->user_data((void*)(1));
       VARYBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VARYBAND->when(FL_WHEN_RELEASE);
       VARYBAND->hide();
@@ -1717,7 +1688,6 @@ void RKRGUI::make_window() {
       CONVOLOTRON->labelfont(1);
       CONVOLOTRON->labelsize(14);
       CONVOLOTRON->labelcolor(FL_FOREGROUND_COLOR);
-      CONVOLOTRON->user_data((void*)(1));
       CONVOLOTRON->align(Fl_Align(96|FL_ALIGN_INSIDE));
       CONVOLOTRON->when(FL_WHEN_RELEASE);
       CONVOLOTRON->hide();
@@ -1733,7 +1703,6 @@ void RKRGUI::make_window() {
       LOOPER->labelfont(1);
       LOOPER->labelsize(14);
       LOOPER->labelcolor(FL_FOREGROUND_COLOR);
-      LOOPER->user_data((void*)(1));
       LOOPER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       LOOPER->when(FL_WHEN_RELEASE);
       LOOPER->hide();
@@ -1749,7 +1718,6 @@ void RKRGUI::make_window() {
       MUTROMOJO->labelfont(1);
       MUTROMOJO->labelsize(14);
       MUTROMOJO->labelcolor(FL_FOREGROUND_COLOR);
-      MUTROMOJO->user_data((void*)(1));
       MUTROMOJO->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MUTROMOJO->when(FL_WHEN_RELEASE);
       MUTROMOJO->hide();
@@ -1765,7 +1733,6 @@ void RKRGUI::make_window() {
       ECHOVERSE->labelfont(1);
       ECHOVERSE->labelsize(14);
       ECHOVERSE->labelcolor(FL_FOREGROUND_COLOR);
-      ECHOVERSE->user_data((void*)(1));
       ECHOVERSE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ECHOVERSE->when(FL_WHEN_RELEASE);
       ECHOVERSE->hide();
@@ -1781,7 +1748,6 @@ void RKRGUI::make_window() {
       COILCRAFTER->labelfont(1);
       COILCRAFTER->labelsize(14);
       COILCRAFTER->labelcolor(FL_FOREGROUND_COLOR);
-      COILCRAFTER->user_data((void*)(1));
       COILCRAFTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       COILCRAFTER->when(FL_WHEN_RELEASE);
       COILCRAFTER->hide();
@@ -1797,7 +1763,6 @@ void RKRGUI::make_window() {
       SHELFBOOST->labelfont(1);
       SHELFBOOST->labelsize(14);
       SHELFBOOST->labelcolor(FL_FOREGROUND_COLOR);
-      SHELFBOOST->user_data((void*)(1));
       SHELFBOOST->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHELFBOOST->when(FL_WHEN_RELEASE);
       SHELFBOOST->hide();
@@ -1813,7 +1778,6 @@ void RKRGUI::make_window() {
       VOCODER->labelfont(1);
       VOCODER->labelsize(14);
       VOCODER->labelcolor(FL_FOREGROUND_COLOR);
-      VOCODER->user_data((void*)(1));
       VOCODER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VOCODER->when(FL_WHEN_RELEASE);
       VOCODER->hide();
@@ -1829,7 +1793,6 @@ void RKRGUI::make_window() {
       SUSTAINER->labelfont(1);
       SUSTAINER->labelsize(14);
       SUSTAINER->labelcolor(FL_FOREGROUND_COLOR);
-      SUSTAINER->user_data((void*)(1));
       SUSTAINER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SUSTAINER->when(FL_WHEN_RELEASE);
       SUSTAINER->hide();
@@ -1845,7 +1808,6 @@ void RKRGUI::make_window() {
       SEQUENCE->labelfont(1);
       SEQUENCE->labelsize(14);
       SEQUENCE->labelcolor(FL_FOREGROUND_COLOR);
-      SEQUENCE->user_data((void*)(1));
       SEQUENCE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SEQUENCE->when(FL_WHEN_RELEASE);
       SEQUENCE->hide();
@@ -1861,7 +1823,6 @@ void RKRGUI::make_window() {
       SHIFTER->labelfont(1);
       SHIFTER->labelsize(14);
       SHIFTER->labelcolor(FL_FOREGROUND_COLOR);
-      SHIFTER->user_data((void*)(1));
       SHIFTER->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHIFTER->when(FL_WHEN_RELEASE);
       SHIFTER->hide();
@@ -1877,7 +1838,6 @@ void RKRGUI::make_window() {
       STOMPBOX->labelfont(1);
       STOMPBOX->labelsize(14);
       STOMPBOX->labelcolor(FL_FOREGROUND_COLOR);
-      STOMPBOX->user_data((void*)(1));
       STOMPBOX->align(Fl_Align(96|FL_ALIGN_INSIDE));
       STOMPBOX->when(FL_WHEN_RELEASE);
       STOMPBOX->hide();
@@ -1893,7 +1853,6 @@ void RKRGUI::make_window() {
       REVERBTRON->labelfont(1);
       REVERBTRON->labelsize(14);
       REVERBTRON->labelcolor(FL_FOREGROUND_COLOR);
-      REVERBTRON->user_data((void*)(1));
       REVERBTRON->align(Fl_Align(96|FL_ALIGN_INSIDE));
       REVERBTRON->when(FL_WHEN_RELEASE);
       REVERBTRON->hide();
@@ -1909,7 +1868,6 @@ void RKRGUI::make_window() {
       ECHOTRON->labelfont(1);
       ECHOTRON->labelsize(14);
       ECHOTRON->labelcolor(FL_FOREGROUND_COLOR);
-      ECHOTRON->user_data((void*)(1));
       ECHOTRON->align(Fl_Align(96|FL_ALIGN_INSIDE));
       ECHOTRON->when(FL_WHEN_RELEASE);
       ECHOTRON->hide();
@@ -1925,7 +1883,6 @@ void RKRGUI::make_window() {
       SHAR->labelfont(1);
       SHAR->labelsize(14);
       SHAR->labelcolor(FL_FOREGROUND_COLOR);
-      SHAR->user_data((void*)(1));
       SHAR->align(Fl_Align(96|FL_ALIGN_INSIDE));
       SHAR->when(FL_WHEN_RELEASE);
       SHAR->hide();
@@ -1941,7 +1898,6 @@ void RKRGUI::make_window() {
       COMPBAND->labelfont(1);
       COMPBAND->labelsize(14);
       COMPBAND->labelcolor(FL_FOREGROUND_COLOR);
-      COMPBAND->user_data((void*)(1));
       COMPBAND->align(Fl_Align(96|FL_ALIGN_INSIDE));
       COMPBAND->when(FL_WHEN_RELEASE);
       COMPBAND->hide();
@@ -1957,7 +1913,6 @@ void RKRGUI::make_window() {
       OTREM->labelfont(1);
       OTREM->labelsize(14);
       OTREM->labelcolor(FL_FOREGROUND_COLOR);
-      OTREM->user_data((void*)(1));
       OTREM->align(Fl_Align(96|FL_ALIGN_INSIDE));
       OTREM->when(FL_WHEN_RELEASE);
       OTREM->hide();
@@ -1973,7 +1928,6 @@ void RKRGUI::make_window() {
       VIBE->labelfont(1);
       VIBE->labelsize(14);
       VIBE->labelcolor(FL_FOREGROUND_COLOR);
-      VIBE->user_data((void*)(1));
       VIBE->align(Fl_Align(96|FL_ALIGN_INSIDE));
       VIBE->when(FL_WHEN_RELEASE);
       VIBE->hide();
@@ -1989,7 +1943,6 @@ void RKRGUI::make_window() {
       INFINIT->labelfont(1);
       INFINIT->labelsize(14);
       INFINIT->labelcolor(FL_FOREGROUND_COLOR);
-      INFINIT->user_data((void*)(1));
       INFINIT->align(Fl_Align(96|FL_ALIGN_INSIDE));
       INFINIT->when(FL_WHEN_RELEASE);
       INFINIT->hide();

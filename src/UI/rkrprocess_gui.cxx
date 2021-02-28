@@ -3493,7 +3493,7 @@ Fl_Widget * RKRGUI::find_effect_preset_widget(int effect)
         Fl_Widget *w = Principal->child(t);
         long long effect_user_data = (long long) w->user_data();
 
-        if (effect_user_data == 1)
+        if (effect_user_data == UD_Group_Efx)
         {
             Fl_Group *g = (Fl_Group *) w;
 

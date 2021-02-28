@@ -709,7 +709,6 @@ Fl::focus(Open_Order);}
         class RKR_Box
       }
       Fl_Group EQ {
-        user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "eq_gui.h"}
         code1 {Efx_Gui_Base[EFX_EQ] = o;}
@@ -717,7 +716,6 @@ Fl::focus(Open_Order);}
         class EqGui
       } {}
       Fl_Group COMPRESS {
-        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "compress_gui.h"}
         code1 {Efx_Gui_Base[EFX_COMPRESSOR] = o;}
@@ -725,7 +723,6 @@ Fl::focus(Open_Order);}
         class CompressGui
       } {}
       Fl_Group DIST {
-        user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "dist_gui.h"}
         code1 {Efx_Gui_Base[EFX_DISTORTION] = o;}
@@ -733,7 +730,6 @@ Fl::focus(Open_Order);}
         class DistGui
       } {}
       Fl_Group OVRD {
-        user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "ovrd_gui.h"}
         code1 {Efx_Gui_Base[EFX_OVERDRIVE] = o;}
@@ -741,7 +737,6 @@ Fl::focus(Open_Order);}
         class OvrdGui
       } {}
       Fl_Group ECHO {
-        user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echo_gui.h"}
         code1 {Efx_Gui_Base[EFX_ECHO] = o;}
@@ -749,7 +744,6 @@ Fl::focus(Open_Order);}
         class EchoGui
       } {}
       Fl_Group CHORUS {
-        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "chorus_gui.h"}
         code1 {Efx_Gui_Base[EFX_CHORUS] = o;}
@@ -757,7 +751,6 @@ Fl::focus(Open_Order);}
         class ChorusGui
       } {}
       Fl_Group PHASER {
-        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "phaser_gui.h"}
         code1 {Efx_Gui_Base[EFX_PHASER] = o;}
@@ -765,7 +758,6 @@ Fl::focus(Open_Order);}
         class PhaserGui
       } {}
       Fl_Group FLANGER {
-        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "flanger_gui.h"}
         code1 {Efx_Gui_Base[EFX_FLANGER] = o;}
@@ -773,7 +765,6 @@ Fl::focus(Open_Order);}
         class FlangerGui
       } {}
       Fl_Group REVERB {
-        user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "reverb_gui.h"}
         code1 {Efx_Gui_Base[EFX_REVERB] = o;}
@@ -781,7 +772,6 @@ Fl::focus(Open_Order);}
         class ReverbGui
       } {}
       Fl_Group PEQ {
-        user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "peq_gui.h"}
         code1 {Efx_Gui_Base[EFX_PARAMETRIC] = o;}
@@ -789,7 +779,6 @@ Fl::focus(Open_Order);}
         class PeqGui
       } {}
       Fl_Group WAHWAH {
-        user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "wahwah_gui.h"}
         code1 {Efx_Gui_Base[EFX_WAHWAH] = o;}
@@ -797,7 +786,6 @@ Fl::focus(Open_Order);}
         class WahwahGui
       } {}
       Fl_Group ALIENWAH {
-        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "alienwah_gui.h"}
         code1 {Efx_Gui_Base[EFX_ALIENWAH] = o;}
@@ -805,7 +793,6 @@ Fl::focus(Open_Order);}
         class AlienwahGui
       } {}
       Fl_Group CABINET {
-        user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "cabinet_gui.h"}
         code1 {Efx_Gui_Base[EFX_CABINET] = o;}
@@ -813,7 +800,6 @@ Fl::focus(Open_Order);}
         class CabinetGui
       } {}
       Fl_Group PAN {
-        user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "pan_gui.h"}
         code1 {Efx_Gui_Base[EFX_PAN] = o;}
@@ -821,7 +807,6 @@ Fl::focus(Open_Order);}
         class PanGui
       } {}
       Fl_Group HAR {
-        user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "har_gui.h"}
         code1 {Efx_Gui_Base[EFX_HARMONIZER] = o;}
@@ -829,7 +814,6 @@ Fl::focus(Open_Order);}
         class HarGui
       } {}
       Fl_Group MUSDELAY {
-        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "musdelay_gui.h"}
         code1 {Efx_Gui_Base[EFX_MUSICAL_DELAY] = o;}
@@ -837,7 +821,6 @@ Fl::focus(Open_Order);}
         class MusdelayGui
       } {}
       Fl_Group GATE {
-        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "gate_gui.h"}
         code1 {Efx_Gui_Base[EFX_NOISEGATE] = o;}
@@ -845,7 +828,6 @@ Fl::focus(Open_Order);}
         class GateGui
       } {}
       Fl_Group DERELICT {
-        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "derelict_gui.h"}
         code1 {Efx_Gui_Base[EFX_DERELICT] = o;}
@@ -853,7 +835,6 @@ Fl::focus(Open_Order);}
         class DerelictGui
       } {}
       Fl_Group APHASER {
-        user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "aphaser_gui.h"}
         code1 {Efx_Gui_Base[EFX_ANALOG_PHASER] = o;}
@@ -861,7 +842,6 @@ Fl::focus(Open_Order);}
         class AphaserGui
       } {}
       Fl_Group VALVE {
-        user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "valve_gui.h"}
         code1 {Efx_Gui_Base[EFX_VALVE] = o;}
@@ -869,7 +849,6 @@ Fl::focus(Open_Order);}
         class ValveGui
       } {}
       Fl_Group DFLANGE {
-        user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "dflange_gui.h"}
         code1 {Efx_Gui_Base[EFX_DUAL_FLANGE] = o;}
@@ -877,7 +856,6 @@ Fl::focus(Open_Order);}
         class DflangeGui
       } {}
       Fl_Group RING {
-        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "ring_gui.h"}
         code1 {Efx_Gui_Base[EFX_RING] = o;}
@@ -885,7 +863,6 @@ Fl::focus(Open_Order);}
         class RingGui
       } {}
       Fl_Group EXCITER {
-        user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "exciter_gui.h"}
         code1 {Efx_Gui_Base[EFX_EXCITER] = o;}
@@ -893,7 +870,6 @@ Fl::focus(Open_Order);}
         class ExciterGui
       } {}
       Fl_Group DISTBAND {
-        user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "distband_gui.h"}
         code1 {Efx_Gui_Base[EFX_DISTBAND] = o;}
@@ -901,7 +877,6 @@ Fl::focus(Open_Order);}
         class DistBandGui
       } {}
       Fl_Group ARPIE {
-        user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "arpie_gui.h"}
         code1 {Efx_Gui_Base[EFX_ARPIE] = o;}
@@ -909,7 +884,6 @@ Fl::focus(Open_Order);}
         class ArpieGui
       } {}
       Fl_Group EXPANDER {
-        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "expander_gui.h"}
         code1 {Efx_Gui_Base[EFX_EXPANDER] = o;}
@@ -917,7 +891,6 @@ Fl::focus(Open_Order);}
         class ExpanderGui
       } {}
       Fl_Group SHUFFLE {
-        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shuffle_gui.h"}
         code1 {Efx_Gui_Base[EFX_SHUFFLE] = o;}
@@ -925,7 +898,6 @@ Fl::focus(Open_Order);}
         class ShuffleGui
       } {}
       Fl_Group SYNTHFILTER {
-        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "synthfilter_gui.h"}
         code1 {Efx_Gui_Base[EFX_SYNTHFILTER] = o;}
@@ -933,7 +905,6 @@ Fl::focus(Open_Order);}
         class SynthfilterGui
       } {}
       Fl_Group VARYBAND {
-        user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "varyband_gui.h"}
         code1 {Efx_Gui_Base[EFX_VARYBAND] = o;}
@@ -941,7 +912,6 @@ Fl::focus(Open_Order);}
         class VarybandGui
       } {}
       Fl_Group CONVOLOTRON {
-        user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "convo_gui.h"}
         code1 {Efx_Gui_Base[EFX_CONVOLOTRON] = o;}
@@ -949,7 +919,6 @@ Fl::focus(Open_Order);}
         class ConvoGui
       } {}
       Fl_Group LOOPER {
-        user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "looper_gui.h"}
         code1 {Efx_Gui_Base[EFX_LOOPER] = o;}
@@ -957,7 +926,6 @@ Fl::focus(Open_Order);}
         class LooperGui
       } {}
       Fl_Group MUTROMOJO {
-        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "mutromojo_gui.h"}
         code1 {Efx_Gui_Base[EFX_MUTROMOJO] = o;}
@@ -965,7 +933,6 @@ Fl::focus(Open_Order);}
         class MutromojoGui
       } {}
       Fl_Group ECHOVERSE {
-        user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echoverse_gui.h"}
         code1 {Efx_Gui_Base[EFX_ECHOVERSE] = o;}
@@ -973,7 +940,6 @@ Fl::focus(Open_Order);}
         class EchoverseGui
       } {}
       Fl_Group COILCRAFTER {
-        user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "coil_gui.h"}
         code1 {Efx_Gui_Base[EFX_COILCRAFTER] = o;}
@@ -981,7 +947,6 @@ Fl::focus(Open_Order);}
         class CoilGui
       } {}
       Fl_Group SHELFBOOST {
-        user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shelf_gui.h"}
         code1 {Efx_Gui_Base[EFX_SHELFBOOST] = o;}
@@ -989,7 +954,6 @@ Fl::focus(Open_Order);}
         class ShelfGui
       } {}
       Fl_Group VOCODER {
-        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "vocoder_gui.h"}
         code1 {Efx_Gui_Base[EFX_VOCODER] = o;}
@@ -997,7 +961,6 @@ Fl::focus(Open_Order);}
         class VocoderGui
       } {}
       Fl_Group SUSTAINER {
-        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "sustain_gui.h"}
         code1 {Efx_Gui_Base[EFX_SUSTAINER] = o;}
@@ -1005,7 +968,6 @@ Fl::focus(Open_Order);}
         class SustainGui
       } {}
       Fl_Group SEQUENCE {
-        user_data 1
         xywh {321 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "sequence_gui.h"}
         code1 {Efx_Gui_Base[EFX_SEQUENCE] = o;}
@@ -1013,7 +975,6 @@ Fl::focus(Open_Order);}
         class SequenceGui
       } {}
       Fl_Group SHIFTER {
-        user_data 1
         xywh {480 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "shifter_gui.h"}
         code1 {Efx_Gui_Base[EFX_SHIFTER] = o;}
@@ -1021,7 +982,6 @@ Fl::focus(Open_Order);}
         class ShifterGui
       } {}
       Fl_Group STOMPBOX {
-        user_data 1
         xywh {639 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "stompbox_gui.h"}
         code1 {Efx_Gui_Base[EFX_STOMPBOX] = o;}
@@ -1029,7 +989,6 @@ Fl::focus(Open_Order);}
         class StompboxGui
       } {}
       Fl_Group REVERBTRON {
-        user_data 1
         xywh {2 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "reverbtron_gui.h"}
         code1 {Efx_Gui_Base[EFX_REVERBTRON] = o;}
@@ -1037,7 +996,6 @@ Fl::focus(Open_Order);}
         class RevtronGui
       } {}
       Fl_Group ECHOTRON {
-        user_data 1
         xywh {161 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "echotron_gui.h"}
         code1 {Efx_Gui_Base[EFX_ECHOTRON] = o;}
@@ -1045,7 +1003,6 @@ Fl::focus(Open_Order);}
         class EchotronGui
       } {}
       Fl_Group SHAR {
-        user_data 1
         xywh {320 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "stereoharm_gui.h"}
         code1 {Efx_Gui_Base[EFX_STEREOHARM] = o;}
@@ -1053,7 +1010,6 @@ Fl::focus(Open_Order);}
         class SharGui
       } {}
       Fl_Group COMPBAND {
-        user_data 1
         xywh {480 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "compband_gui.h"}
         code1 {Efx_Gui_Base[EFX_COMPBAND] = o;}
@@ -1061,7 +1017,6 @@ Fl::focus(Open_Order);}
         class CbandGui
       } {}
       Fl_Group OTREM {
-        user_data 1
         xywh {639 212 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "otrem_gui.h"}
         code1 {Efx_Gui_Base[EFX_OPTICALTREM] = o;}
@@ -1069,7 +1024,6 @@ Fl::focus(Open_Order);}
         class OtremGui
       } {}
       Fl_Group VIBE {
-        user_data 1
         xywh {2 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "vibe_gui.h"}
         code1 {Efx_Gui_Base[EFX_VIBE] = o;}
@@ -1077,7 +1031,6 @@ Fl::focus(Open_Order);}
         class VibeGui
       } {}
       Fl_Group INFINIT {
-        user_data 1
         xywh {161 413 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
         code0 {\#include "infinity_gui.h"}
         code1 {Efx_Gui_Base[EFX_INFINITY] = o;}

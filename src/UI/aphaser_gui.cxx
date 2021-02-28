@@ -192,7 +192,6 @@ this->labeltype(FL_NO_LABEL);
 this->labelfont(0);
 this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
-this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
 this->when(FL_WHEN_RELEASE);
 { RKR_Light_Button* o = aphaser_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
