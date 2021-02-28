@@ -43,9 +43,10 @@ m_parent->findpos(EFX_HARMONIZER,(int)o->value(),o);}
   }
   Fl_Choice har_preset {
     label Preset
-    user_data 12014
+    user_data UD_PRESET_HARMONIZER
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12014))m_process->Rack_Effects[EFX_HARMONIZER]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_HARMONIZER))
+    m_process->Rack_Effects[EFX_HARMONIZER]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_HARMONIZER]; i++)
 {

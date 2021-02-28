@@ -20,7 +20,8 @@ void ArpieGui::cb_arpie_activar(RKR_Light_Button* o, void* v) {
 
 void ArpieGui::cb_arpie_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12024))m_process->Rack_Effects[EFX_ARPIE]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_ARPIE))
+    m_process->Rack_Effects[EFX_ARPIE]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_ARPIE]; i++)
 {
@@ -208,7 +209,7 @@ this->when(FL_WHEN_RELEASE);
   arpie_preset->labelcolor(FL_BACKGROUND2_COLOR);
   arpie_preset->textsize(10);
   arpie_preset->textcolor(FL_BACKGROUND2_COLOR);
-  arpie_preset->callback((Fl_Callback*)cb_arpie_preset, (void*)(12024));
+  arpie_preset->callback((Fl_Callback*)cb_arpie_preset, (void*)(UD_PRESET_ARPIE));
   arpie_preset->align(Fl_Align(FL_ALIGN_LEFT));
   arpie_preset->when(FL_WHEN_RELEASE_ALWAYS);
   arpie_preset->menu(menu_arpie_preset);

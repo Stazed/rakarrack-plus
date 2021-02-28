@@ -21,7 +21,8 @@ void WahwahGui::cb_WahWah_activar(RKR_Light_Button* o, void* v) {
 void WahwahGui::cb_WahWah_preset_i(RKR_Choice* o, void* v) {
   m_process->EFX_Bypass[EFX_WAHWAH]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12010))m_process->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_WAHWAH))
+    m_process->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_WAHWAH]; i++)
 {
@@ -216,7 +217,7 @@ this->when(FL_WHEN_RELEASE);
   WahWah_preset->labelcolor(FL_BACKGROUND2_COLOR);
   WahWah_preset->textsize(10);
   WahWah_preset->textcolor(FL_BACKGROUND2_COLOR);
-  WahWah_preset->callback((Fl_Callback*)cb_WahWah_preset, (void*)(12010));
+  WahWah_preset->callback((Fl_Callback*)cb_WahWah_preset, (void*)(UD_PRESET_WAHWAH));
   WahWah_preset->align(Fl_Align(FL_ALIGN_LEFT));
   WahWah_preset->when(FL_WHEN_RELEASE_ALWAYS);
   WahWah_preset->menu(menu_WahWah_preset);

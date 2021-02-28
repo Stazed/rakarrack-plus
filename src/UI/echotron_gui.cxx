@@ -19,7 +19,8 @@ void EchotronGui::cb_echotron_activar(RKR_Light_Button* o, void* v) {
 
 void EchotronGui::cb_echotron_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12041))m_process->Rack_Effects[EFX_ECHOTRON]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_ECHOTRON))
+    m_process->Rack_Effects[EFX_ECHOTRON]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_ECHOTRON]; i++)
 {
@@ -290,7 +291,7 @@ this->when(FL_WHEN_RELEASE);
   echotron_preset->labelcolor(FL_BACKGROUND2_COLOR);
   echotron_preset->textsize(10);
   echotron_preset->textcolor(FL_BACKGROUND2_COLOR);
-  echotron_preset->callback((Fl_Callback*)cb_echotron_preset, (void*)(12041));
+  echotron_preset->callback((Fl_Callback*)cb_echotron_preset, (void*)(UD_PRESET_ECHOTRON));
   echotron_preset->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echotron_preset->menu(menu_echotron_preset);

@@ -20,7 +20,8 @@ void DistBandGui::cb_distband_activar(RKR_Light_Button* o, void* v) {
 
 void DistBandGui::cb_distband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12023))m_process->Rack_Effects[EFX_DISTBAND]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_DISTBAND))
+    m_process->Rack_Effects[EFX_DISTBAND]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_DISTBAND]; i++)
 {
@@ -252,7 +253,7 @@ this->when(FL_WHEN_RELEASE);
   distband_preset->labelcolor(FL_BACKGROUND2_COLOR);
   distband_preset->textsize(10);
   distband_preset->textcolor(FL_BACKGROUND2_COLOR);
-  distband_preset->callback((Fl_Callback*)cb_distband_preset, (void*)(12023));
+  distband_preset->callback((Fl_Callback*)cb_distband_preset, (void*)(UD_PRESET_DISTBAND));
   distband_preset->align(Fl_Align(FL_ALIGN_LEFT));
   distband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   distband_preset->menu(menu_distband_preset);

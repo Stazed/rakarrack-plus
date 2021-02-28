@@ -20,7 +20,8 @@ void VibeGui::cb_vibe_activar(RKR_Light_Button* o, void* v) {
 
 void VibeGui::cb_vibe_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12045))m_process->Rack_Effects[EFX_VIBE]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_VIBE))
+    m_process->Rack_Effects[EFX_VIBE]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_VIBE]; i++)
 {
@@ -208,7 +209,7 @@ this->when(FL_WHEN_RELEASE);
   vibe_preset->labelcolor(FL_BACKGROUND2_COLOR);
   vibe_preset->textsize(10);
   vibe_preset->textcolor(FL_BACKGROUND2_COLOR);
-  vibe_preset->callback((Fl_Callback*)cb_vibe_preset, (void*)(12045));
+  vibe_preset->callback((Fl_Callback*)cb_vibe_preset, (void*)(UD_PRESET_VIBE));
   vibe_preset->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vibe_preset->menu(menu_vibe_preset);

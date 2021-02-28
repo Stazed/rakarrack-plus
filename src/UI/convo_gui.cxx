@@ -20,7 +20,8 @@ void ConvoGui::cb_convo_activar(RKR_Light_Button* o, void* v) {
 
 void ConvoGui::cb_convo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12029))m_process->Rack_Effects[EFX_CONVOLOTRON]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_CONVOLOTRON))
+    m_process->Rack_Effects[EFX_CONVOLOTRON]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_CONVOLOTRON]; i++)
 {
@@ -200,7 +201,7 @@ this->when(FL_WHEN_RELEASE);
   convo_preset->labelcolor(FL_BACKGROUND2_COLOR);
   convo_preset->textsize(10);
   convo_preset->textcolor(FL_BACKGROUND2_COLOR);
-  convo_preset->callback((Fl_Callback*)cb_convo_preset, (void*)(12029));
+  convo_preset->callback((Fl_Callback*)cb_convo_preset, (void*)(UD_PRESET_CONVOLOTRON));
   convo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   convo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   convo_preset->menu(menu_convo_preset);

@@ -368,53 +368,61 @@ enum USER_DATA_index
     UD_Scroll_Custom_MIDI   = 5000,     // Check This
     UD_Bank_Number          = 8000,
     
-    UD_EQ                   = 12000,
-    UD_COMPRESSOR,
-    UD_DISTORTION,
-    UD_OVERDRIVE,
-    UD_ECHO,
-    UD_CHORUS,
-    UD_PHASER,
-    UD_FLANGER,
-    UD_REVERB,
-    UD_PARAMETRIC,
-    UD_WAHWAH,              // 12010
-    UD_ALIENWAH,
-    UD_CABINET,
-    UD_PAN,
-    UD_HARMONIZER,
-    UD_MUSICAL_DELAY,
-    UD_NOISEGATE,
-    UD_DERELICT,
-    UD_ANALOG_PHASER,
-    UD_VALVE,
-    UD_DUAL_FLANGE,         // 12020
-    UD_RING,
-    UD_EXCITER,
-    UD_DISTBAND,
-    UD_ARPIE,
-    UD_EXPANDER,
-    UD_SHUFFLE,
-    UD_SYNTHFILTER,
-    UD_VARYBAND,
-    UD_CONVOLOTRON,
-    UD_LOOPER,              // 12030
-    UD_MUTROMOJO,
-    UD_ECHOVERSE,
-    UD_COILCRAFTER,
-    UD_SHELFBOOST,
-    UD_VOCODER,
-    UD_SUSTAINER,
-    UD_SEQUENCE,
-    UD_SHIFTER,
-    UD_STOMPBOX,
-    UD_REVERBTRON,          // 12040
-    UD_ECHOTRON,
-    UD_STEREOHARM,
-    UD_COMPBAND,
-    UD_OPTICALTREM,
-    UD_VIBE,
-    UD_INFINITY,            // 12046
+    // The user_data for RKR_Choice 'Preset' widgets. For use in identifying
+    // the correct widget when user 'Insert' or 'Delete' key is used for
+    // adding or deleting effect user defined presets. The range is the same
+    // as EFX_Index + 12000.
+    UD_PRESET_EQ                   = (12000 + EFX_EQ),     // For clarity
+    UD_PRESET_COMPRESSOR,
+    UD_PRESET_DISTORTION,
+    UD_PRESET_OVERDRIVE,
+    UD_PRESET_ECHO,
+    UD_PRESET_CHORUS,
+    UD_PRESET_PHASER,
+    UD_PRESET_FLANGER,
+    UD_PRESET_REVERB,
+    UD_PRESET_PARAMETRIC,
+    UD_PRESET_WAHWAH,              // 12010
+    UD_PRESET_ALIENWAH,
+    UD_PRESET_CABINET,
+    UD_PRESET_PAN,
+    UD_PRESET_HARMONIZER,
+    UD_PRESET_MUSICAL_DELAY,
+    UD_PRESET_NOISEGATE,
+    UD_PRESET_DERELICT,
+    UD_PRESET_ANALOG_PHASER,
+    UD_PRESET_VALVE,
+    UD_PRESET_DUAL_FLANGE,         // 12020
+    UD_PRESET_RING,
+    UD_PRESET_EXCITER,
+    UD_PRESET_DISTBAND,
+    UD_PRESET_ARPIE,
+    UD_PRESET_EXPANDER,
+    UD_PRESET_SHUFFLE,
+    UD_PRESET_SYNTHFILTER,
+    UD_PRESET_VARYBAND,
+    UD_PRESET_CONVOLOTRON,
+    UD_PRESET_LOOPER,              // 12030
+    UD_PRESET_MUTROMOJO,
+    UD_PRESET_ECHOVERSE,
+    UD_PRESET_COILCRAFTER,
+    UD_PRESET_SHELFBOOST,
+    UD_PRESET_VOCODER,
+    UD_PRESET_SUSTAINER,
+    UD_PRESET_SEQUENCE,
+    UD_PRESET_SHIFTER,
+    UD_PRESET_STOMPBOX,
+    UD_PRESET_REVERBTRON,          // 12040
+    UD_PRESET_ECHOTRON,
+    UD_PRESET_STEREOHARM,
+    UD_PRESET_COMPBAND,
+    UD_PRESET_OPTICALTREM,
+    UD_PRESET_VIBE,
+    UD_PRESET_INFINITY,            // 12046
+    
+    // The max number of effects based on bank file saving
+    // The range from 12047 to 12068 can be used for expansion
+    UD_PRESET_MAX_EFFECTS          = 12068,
     
     UD_RKR_Group            = 99996
 };

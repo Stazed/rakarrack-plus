@@ -20,7 +20,8 @@ void AphaserGui::cb_aphaser_activar(RKR_Light_Button* o, void* v) {
 
 void AphaserGui::cb_aphaser_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12018))m_process->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_ANALOG_PHASER))
+    m_process->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
 {
@@ -219,7 +220,7 @@ this->when(FL_WHEN_RELEASE);
   aphaser_preset->labelcolor(FL_BACKGROUND2_COLOR);
   aphaser_preset->textsize(10);
   aphaser_preset->textcolor(FL_BACKGROUND2_COLOR);
-  aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset, (void*)(12018));
+  aphaser_preset->callback((Fl_Callback*)cb_aphaser_preset, (void*)(UD_PRESET_ANALOG_PHASER));
   aphaser_preset->align(Fl_Align(FL_ALIGN_LEFT));
   aphaser_preset->when(FL_WHEN_RELEASE_ALWAYS);
   aphaser_preset->menu(menu_aphaser_preset);

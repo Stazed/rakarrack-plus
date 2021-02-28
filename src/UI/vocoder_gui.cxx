@@ -20,7 +20,8 @@ void VocoderGui::cb_vo_activar(RKR_Light_Button* o, void* v) {
 
 void VocoderGui::cb_vo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12035))m_process->Rack_Effects[EFX_VOCODER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_VOCODER))
+    m_process->Rack_Effects[EFX_VOCODER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_VOCODER]; i++)
 {
@@ -160,7 +161,7 @@ this->when(FL_WHEN_RELEASE);
   vo_preset->labelcolor(FL_BACKGROUND2_COLOR);
   vo_preset->textsize(10);
   vo_preset->textcolor(FL_BACKGROUND2_COLOR);
-  vo_preset->callback((Fl_Callback*)cb_vo_preset, (void*)(12035));
+  vo_preset->callback((Fl_Callback*)cb_vo_preset, (void*)(UD_PRESET_VOCODER));
   vo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   vo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   vo_preset->menu(menu_vo_preset);

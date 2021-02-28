@@ -41,9 +41,10 @@ m_parent->findpos(EFX_RING,(int)o->value(),o);}
   }
   Fl_Choice ring_preset {
     label Preset
-    user_data 12021
+    user_data UD_PRESET_RING
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12021))m_process->Rack_Effects[EFX_RING]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_RING))
+    m_process->Rack_Effects[EFX_RING]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_RING]; i++)
 {

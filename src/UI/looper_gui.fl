@@ -44,9 +44,11 @@ m_parent->findpos(EFX_LOOPER,(int)o->value(),o);}
   }
   Fl_Choice looper_preset {
     label Preset
-    user_data 12030
+    user_data UD_PRESET_LOOPER
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12030))m_process->Rack_Effects[EFX_LOOPER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_LOOPER))
+    m_process->Rack_Effects[EFX_LOOPER]->setpreset((int) o->value());
+    
 looper_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_LOOPER]->getpar(Looper_DryWet)));
 looper_play->value(m_process->Rack_Effects[EFX_LOOPER]->getpar(Looper_Play));
 looper_record->value(m_process->Rack_Effects[EFX_LOOPER]->getpar(Looper_Record));

@@ -16,7 +16,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 
 widget_class {\#include "common_gui_menu.h"} FlangerGui {
   user_data 1 open selected
-  xywh {1384 93 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1619 75 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -42,9 +42,10 @@ m_parent->findpos(EFX_FLANGER,(int)o->value(),o);}
   }
   Fl_Choice flanger_preset {
     label Preset
-    user_data 12007
+    user_data UD_PRESET_FLANGER
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12007))m_process->Rack_Effects[EFX_FLANGER]->setpreset((int)(o->value()));
+if((ud==0)||(ud==UD_PRESET_FLANGER))
+    m_process->Rack_Effects[EFX_FLANGER]->setpreset((int)(o->value()));
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_FLANGER]; i++)
 {

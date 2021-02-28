@@ -20,7 +20,8 @@ void OtremGui::cb_otrem_activar(RKR_Light_Button* o, void* v) {
 
 void OtremGui::cb_otrem_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12044))m_process->Rack_Effects[EFX_OPTICALTREM]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_OPTICALTREM))
+    m_process->Rack_Effects[EFX_OPTICALTREM]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_OPTICALTREM]; i++)
 {
@@ -158,7 +159,7 @@ this->when(FL_WHEN_RELEASE);
   otrem_preset->labelcolor(FL_BACKGROUND2_COLOR);
   otrem_preset->textsize(10);
   otrem_preset->textcolor(FL_BACKGROUND2_COLOR);
-  otrem_preset->callback((Fl_Callback*)cb_otrem_preset, (void*)(12044));
+  otrem_preset->callback((Fl_Callback*)cb_otrem_preset, (void*)(UD_PRESET_OPTICALTREM));
   otrem_preset->align(Fl_Align(FL_ALIGN_LEFT));
   otrem_preset->when(FL_WHEN_RELEASE_ALWAYS);
   otrem_preset->menu(menu_otrem_preset);

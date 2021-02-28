@@ -20,7 +20,8 @@ void MutromojoGui::cb_mutromojo_activar(RKR_Light_Button* o, void* v) {
 
 void MutromojoGui::cb_mutromojo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12031))m_process->Rack_Effects[EFX_MUTROMOJO]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_MUTROMOJO))
+    m_process->Rack_Effects[EFX_MUTROMOJO]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_MUTROMOJO]; i++)
 {
@@ -312,7 +313,7 @@ this->when(FL_WHEN_RELEASE);
   mutromojo_preset->labelcolor(FL_BACKGROUND2_COLOR);
   mutromojo_preset->textsize(10);
   mutromojo_preset->textcolor(FL_BACKGROUND2_COLOR);
-  mutromojo_preset->callback((Fl_Callback*)cb_mutromojo_preset, (void*)(12031));
+  mutromojo_preset->callback((Fl_Callback*)cb_mutromojo_preset, (void*)(UD_PRESET_MUTROMOJO));
   mutromojo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   mutromojo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   mutromojo_preset->menu(menu_mutromojo_preset);

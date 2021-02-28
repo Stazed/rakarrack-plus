@@ -36,9 +36,10 @@ m_parent->findpos(EFX_EXPANDER,(int)o->value(),o);}
   }
   Fl_Choice expander_preset {
     label Preset
-    user_data 12025
+    user_data UD_PRESET_EXPANDER
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12025))m_process->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_EXPANDER))
+    m_process->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXPANDER]; i++)
 {

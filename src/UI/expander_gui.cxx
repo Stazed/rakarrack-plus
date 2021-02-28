@@ -18,7 +18,8 @@ void ExpanderGui::cb_expander_activar(RKR_Light_Button* o, void* v) {
 
 void ExpanderGui::cb_expander_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12025))m_process->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_EXPANDER))
+    m_process->Rack_Effects[EFX_EXPANDER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXPANDER]; i++)
 {
@@ -157,7 +158,7 @@ this->when(FL_WHEN_RELEASE);
   expander_preset->labelcolor(FL_BACKGROUND2_COLOR);
   expander_preset->textsize(10);
   expander_preset->textcolor(FL_BACKGROUND2_COLOR);
-  expander_preset->callback((Fl_Callback*)cb_expander_preset, (void*)(12025));
+  expander_preset->callback((Fl_Callback*)cb_expander_preset, (void*)(UD_PRESET_EXPANDER));
   expander_preset->align(Fl_Align(FL_ALIGN_LEFT));
   expander_preset->when(FL_WHEN_RELEASE_ALWAYS);
   expander_preset->menu(menu_expander_preset);

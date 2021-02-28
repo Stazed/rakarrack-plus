@@ -20,7 +20,8 @@ void DerelictGui::cb_derelict_activar(RKR_Light_Button* o, void* v) {
 
 void DerelictGui::cb_derelict_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12017))m_process->Rack_Effects[EFX_DERELICT]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_DERELICT))
+    m_process->Rack_Effects[EFX_DERELICT]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_DERELICT]; i++)
 {
@@ -209,7 +210,7 @@ this->when(FL_WHEN_RELEASE);
   derelict_preset->labelcolor(FL_BACKGROUND2_COLOR);
   derelict_preset->textsize(10);
   derelict_preset->textcolor(FL_BACKGROUND2_COLOR);
-  derelict_preset->callback((Fl_Callback*)cb_derelict_preset, (void*)(12017));
+  derelict_preset->callback((Fl_Callback*)cb_derelict_preset, (void*)(UD_PRESET_DERELICT));
   derelict_preset->align(Fl_Align(FL_ALIGN_LEFT));
   derelict_preset->when(FL_WHEN_RELEASE_ALWAYS);
   derelict_preset->menu(menu_derelict_preset);

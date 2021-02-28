@@ -20,7 +20,8 @@ void VarybandGui::cb_varyband_activar(RKR_Light_Button* o, void* v) {
 
 void VarybandGui::cb_varyband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12028))m_process->Rack_Effects[EFX_VARYBAND]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_VARYBAND))
+    m_process->Rack_Effects[EFX_VARYBAND]->setpreset((int)o->value());
 
 // We need to add 4 because the gui is not using legacy file saving combination any more
 for (int i = 0; i < (m_process->EFX_Param_Size[EFX_VARYBAND] + 4); i++)
@@ -258,7 +259,7 @@ this->when(FL_WHEN_RELEASE);
   varyband_preset->labelcolor(FL_BACKGROUND2_COLOR);
   varyband_preset->textsize(10);
   varyband_preset->textcolor(FL_BACKGROUND2_COLOR);
-  varyband_preset->callback((Fl_Callback*)cb_varyband_preset, (void*)(12028));
+  varyband_preset->callback((Fl_Callback*)cb_varyband_preset, (void*)(UD_PRESET_VARYBAND));
   varyband_preset->align(Fl_Align(FL_ALIGN_LEFT));
   varyband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   varyband_preset->menu(menu_varyband_preset);

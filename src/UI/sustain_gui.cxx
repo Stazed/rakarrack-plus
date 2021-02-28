@@ -20,7 +20,8 @@ void SustainGui::cb_sus_activar(RKR_Light_Button* o, void* v) {
 
 void SustainGui::cb_sus_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12036))m_process->Rack_Effects[EFX_SUSTAINER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_SUSTAINER))
+    m_process->Rack_Effects[EFX_SUSTAINER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_SUSTAINER]; i++)
 {
@@ -98,7 +99,7 @@ this->when(FL_WHEN_RELEASE);
   sus_preset->labelcolor(FL_BACKGROUND2_COLOR);
   sus_preset->textsize(10);
   sus_preset->textcolor(FL_BACKGROUND2_COLOR);
-  sus_preset->callback((Fl_Callback*)cb_sus_preset, (void*)(12036));
+  sus_preset->callback((Fl_Callback*)cb_sus_preset, (void*)(UD_PRESET_SUSTAINER));
   sus_preset->align(Fl_Align(FL_ALIGN_LEFT));
   sus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   sus_preset->menu(menu_sus_preset);

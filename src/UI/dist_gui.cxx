@@ -20,7 +20,8 @@ void DistGui::cb_dist_activar(RKR_Light_Button* o, void* v) {
 
 void DistGui::cb_dist_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12002)) m_process->Rack_Effects[EFX_DISTORTION]->setpreset((int)(o->value()));
+if((ud==0)||(ud==UD_PRESET_DISTORTION))
+    m_process->Rack_Effects[EFX_DISTORTION]->setpreset((int)(o->value()));
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_DISTORTION]; i++)
 {
@@ -205,7 +206,7 @@ this->when(FL_WHEN_RELEASE);
   dist_preset->labelcolor(FL_BACKGROUND2_COLOR);
   dist_preset->textsize(10);
   dist_preset->textcolor(FL_BACKGROUND2_COLOR);
-  dist_preset->callback((Fl_Callback*)cb_dist_preset, (void*)(12002));
+  dist_preset->callback((Fl_Callback*)cb_dist_preset, (void*)(UD_PRESET_DISTORTION));
   dist_preset->align(Fl_Align(FL_ALIGN_LEFT));
   dist_preset->when(FL_WHEN_RELEASE_ALWAYS);
   dist_preset->menu(menu_dist_preset);

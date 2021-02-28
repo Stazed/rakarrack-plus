@@ -20,7 +20,8 @@ void RingGui::cb_ring_activar(RKR_Light_Button* o, void* v) {
 
 void RingGui::cb_ring_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12021))m_process->Rack_Effects[EFX_RING]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_RING))
+    m_process->Rack_Effects[EFX_RING]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_RING]; i++)
 {
@@ -223,7 +224,7 @@ this->when(FL_WHEN_RELEASE);
   ring_preset->labelcolor(FL_BACKGROUND2_COLOR);
   ring_preset->textsize(10);
   ring_preset->textcolor(FL_BACKGROUND2_COLOR);
-  ring_preset->callback((Fl_Callback*)cb_ring_preset, (void*)(12021));
+  ring_preset->callback((Fl_Callback*)cb_ring_preset, (void*)(UD_PRESET_RING));
   ring_preset->align(Fl_Align(FL_ALIGN_LEFT));
   ring_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ring_preset->menu(menu_ring_preset);

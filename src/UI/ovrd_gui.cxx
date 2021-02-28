@@ -20,7 +20,8 @@ void OvrdGui::cb_ovrd_activar(RKR_Light_Button* o, void* v) {
 
 void OvrdGui::cb_ovrd_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12003))m_process->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_OVERDRIVE))
+    m_process->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_OVERDRIVE]; i++)
 {
@@ -191,7 +192,7 @@ this->when(FL_WHEN_RELEASE);
   ovrd_preset->labelcolor(FL_BACKGROUND2_COLOR);
   ovrd_preset->textsize(10);
   ovrd_preset->textcolor(FL_BACKGROUND2_COLOR);
-  ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset, (void*)(12003));
+  ovrd_preset->callback((Fl_Callback*)cb_ovrd_preset, (void*)(UD_PRESET_OVERDRIVE));
   ovrd_preset->align(Fl_Align(FL_ALIGN_LEFT));
   ovrd_preset->when(FL_WHEN_RELEASE_ALWAYS);
   ovrd_preset->menu(menu_ovrd_preset);

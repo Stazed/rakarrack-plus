@@ -20,7 +20,8 @@ void ChorusGui::cb_chorus_activar(RKR_Light_Button* o, void* v) {
 
 void ChorusGui::cb_chorus_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12005))m_process->Rack_Effects[EFX_CHORUS]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_CHORUS))
+    m_process->Rack_Effects[EFX_CHORUS]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_CHORUS]; i++)
 {
@@ -212,7 +213,7 @@ this->when(FL_WHEN_RELEASE);
   chorus_preset->labelcolor(FL_BACKGROUND2_COLOR);
   chorus_preset->textsize(10);
   chorus_preset->textcolor(FL_BACKGROUND2_COLOR);
-  chorus_preset->callback((Fl_Callback*)cb_chorus_preset, (void*)(12005));
+  chorus_preset->callback((Fl_Callback*)cb_chorus_preset, (void*)(UD_PRESET_CHORUS));
   chorus_preset->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_preset->when(FL_WHEN_RELEASE_ALWAYS);
   chorus_preset->menu(menu_chorus_preset);

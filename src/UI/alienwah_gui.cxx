@@ -20,7 +20,8 @@ void AlienwahGui::cb_Alienwah_activar(RKR_Light_Button* o, void* v) {
 
 void AlienwahGui::cb_Alienwah_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12011))m_process->Rack_Effects[EFX_ALIENWAH]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_ALIENWAH))
+    m_process->Rack_Effects[EFX_ALIENWAH]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_ALIENWAH]; i++)
 {
@@ -210,7 +211,7 @@ this->when(FL_WHEN_RELEASE);
   Alienwah_preset->labelcolor(FL_BACKGROUND2_COLOR);
   Alienwah_preset->textsize(10);
   Alienwah_preset->textcolor(FL_BACKGROUND2_COLOR);
-  Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset, (void*)(12011));
+  Alienwah_preset->callback((Fl_Callback*)cb_Alienwah_preset, (void*)(UD_PRESET_ALIENWAH));
   Alienwah_preset->align(Fl_Align(FL_ALIGN_LEFT));
   Alienwah_preset->when(FL_WHEN_RELEASE_ALWAYS);
   Alienwah_preset->menu(menu_Alienwah_preset);

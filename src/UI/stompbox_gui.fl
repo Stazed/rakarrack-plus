@@ -38,14 +38,15 @@ m_parent->findpos(EFX_STOMPBOX,(int)o->value(),o);}
   }
   Fl_Choice stomp_preset {
     label Preset
-    user_data 12039
+    user_data UD_PRESET_STOMPBOX
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12039))m_process->Rack_Effects[EFX_STOMPBOX]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_STOMPBOX))
+    m_process->Rack_Effects[EFX_STOMPBOX]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_STOMPBOX]; i++)
 {
     parameter_refresh(i);
-};} open
+};}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice

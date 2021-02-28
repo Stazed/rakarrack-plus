@@ -20,7 +20,8 @@ void CbandGui::cb_cband_activar(RKR_Light_Button* o, void* v) {
 
 void CbandGui::cb_cband_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12043))m_process->Rack_Effects[EFX_COMPBAND]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_COMPBAND))
+    m_process->Rack_Effects[EFX_COMPBAND]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_COMPBAND]; i++)
 {
@@ -230,7 +231,7 @@ this->when(FL_WHEN_RELEASE);
   cband_preset->labelcolor(FL_BACKGROUND2_COLOR);
   cband_preset->textsize(10);
   cband_preset->textcolor(FL_BACKGROUND2_COLOR);
-  cband_preset->callback((Fl_Callback*)cb_cband_preset, (void*)(12043));
+  cband_preset->callback((Fl_Callback*)cb_cband_preset, (void*)(UD_PRESET_COMPBAND));
   cband_preset->align(Fl_Align(FL_ALIGN_LEFT));
   cband_preset->when(FL_WHEN_RELEASE_ALWAYS);
   cband_preset->menu(menu_cband_preset);

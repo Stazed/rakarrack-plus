@@ -22,7 +22,8 @@ void HarGui::cb_har_activar(RKR_Light_Button* o, void* v) {
 
 void HarGui::cb_har_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12014))m_process->Rack_Effects[EFX_HARMONIZER]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_HARMONIZER))
+    m_process->Rack_Effects[EFX_HARMONIZER]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_HARMONIZER]; i++)
 {
@@ -215,7 +216,7 @@ this->when(FL_WHEN_RELEASE);
   har_preset->labelcolor(FL_BACKGROUND2_COLOR);
   har_preset->textsize(10);
   har_preset->textcolor(FL_BACKGROUND2_COLOR);
-  har_preset->callback((Fl_Callback*)cb_har_preset, (void*)(12014));
+  har_preset->callback((Fl_Callback*)cb_har_preset, (void*)(UD_PRESET_HARMONIZER));
   har_preset->align(Fl_Align(FL_ALIGN_LEFT));
   har_preset->when(FL_WHEN_RELEASE_ALWAYS);
   har_preset->menu(menu_har_preset);

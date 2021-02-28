@@ -20,7 +20,8 @@ void EqGui::cb_eq_activar(RKR_Light_Button* o, void* v) {
 
 void EqGui::cb_eq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12000))m_process->Rack_Effects[EFX_EQ]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_EQ))
+   m_process->Rack_Effects[EFX_EQ]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_EQ]; i++)
 {
@@ -219,7 +220,7 @@ this->when(FL_WHEN_RELEASE);
   eq_preset->labelcolor(FL_BACKGROUND2_COLOR);
   eq_preset->textsize(10);
   eq_preset->textcolor(FL_BACKGROUND2_COLOR);
-  eq_preset->callback((Fl_Callback*)cb_eq_preset, (void*)(12000));
+  eq_preset->callback((Fl_Callback*)cb_eq_preset, (void*)(UD_PRESET_EQ));
   eq_preset->align(Fl_Align(FL_ALIGN_LEFT));
   eq_preset->when(FL_WHEN_RELEASE_ALWAYS);
   eq_preset->menu(menu_eq_preset);

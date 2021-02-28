@@ -20,7 +20,8 @@ void ShelfGui::cb_shelf_activar(RKR_Light_Button* o, void* v) {
 
 void ShelfGui::cb_shelf_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12034))m_process->Rack_Effects[EFX_SHELFBOOST]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_SHELFBOOST))
+    m_process->Rack_Effects[EFX_SHELFBOOST]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_SHELFBOOST]; i++)
 {
@@ -130,7 +131,7 @@ this->when(FL_WHEN_RELEASE);
   shelf_preset->labelcolor(FL_BACKGROUND2_COLOR);
   shelf_preset->textsize(10);
   shelf_preset->textcolor(FL_BACKGROUND2_COLOR);
-  shelf_preset->callback((Fl_Callback*)cb_shelf_preset, (void*)(12034));
+  shelf_preset->callback((Fl_Callback*)cb_shelf_preset, (void*)(UD_PRESET_SHELFBOOST));
   shelf_preset->align(Fl_Align(FL_ALIGN_LEFT));
   shelf_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shelf_preset->menu(menu_shelf_preset);

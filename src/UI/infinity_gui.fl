@@ -45,9 +45,10 @@ m_parent->findpos(EFX_INFINITY,(int)o->value(),o);}
   }
   Fl_Choice infinity_preset {
     label Preset
-    user_data 12046
+    user_data UD_PRESET_INFINITY
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12046))m_process->Rack_Effects[EFX_INFINITY]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_INFINITY))
+    m_process->Rack_Effects[EFX_INFINITY]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_INFINITY]; i++)
 {

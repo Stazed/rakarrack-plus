@@ -39,9 +39,10 @@ m_parent->findpos(EFX_VARYBAND,(int)o->value(),o);}
   }
   Fl_Choice varyband_preset {
     label Preset
-    user_data 12028
+    user_data UD_PRESET_VARYBAND
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12028))m_process->Rack_Effects[EFX_VARYBAND]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_VARYBAND))
+    m_process->Rack_Effects[EFX_VARYBAND]->setpreset((int)o->value());
 
 // We need to add 4 because the gui is not using legacy file saving combination any more
 for (int i = 0; i < (m_process->EFX_Param_Size[EFX_VARYBAND] + 4); i++)

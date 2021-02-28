@@ -41,9 +41,10 @@ m_parent->findpos(EFX_ECHO,(int)o->value(),o);}
   }
   Fl_Choice echo_preset {
     label Preset
-    user_data 12004
+    user_data UD_PRESET_ECHO
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12004))m_process->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_ECHO))
+    m_process->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_ECHO]; i++)
 {

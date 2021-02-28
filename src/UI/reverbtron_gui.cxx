@@ -19,7 +19,8 @@ void RevtronGui::cb_revtron_activar(RKR_Light_Button* o, void* v) {
 
 void RevtronGui::cb_revtron_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12040))m_process->Rack_Effects[EFX_REVERBTRON]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_REVERBTRON))
+    m_process->Rack_Effects[EFX_REVERBTRON]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_REVERBTRON]; i++)
 {
@@ -280,7 +281,7 @@ this->when(FL_WHEN_RELEASE);
   revtron_preset->labelcolor(FL_BACKGROUND2_COLOR);
   revtron_preset->textsize(10);
   revtron_preset->textcolor(FL_BACKGROUND2_COLOR);
-  revtron_preset->callback((Fl_Callback*)cb_revtron_preset, (void*)(12040));
+  revtron_preset->callback((Fl_Callback*)cb_revtron_preset, (void*)(UD_PRESET_REVERBTRON));
   revtron_preset->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_preset->when(FL_WHEN_RELEASE_ALWAYS);
   revtron_preset->menu(menu_revtron_preset);

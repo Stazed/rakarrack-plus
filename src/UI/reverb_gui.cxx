@@ -21,7 +21,8 @@ void ReverbGui::cb_reverb_activar(RKR_Light_Button* o, void* v) {
 void ReverbGui::cb_reverb_preset_i(RKR_Choice* o, void* v) {
   m_process->EFX_Bypass[EFX_REVERB]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12008))m_process->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_REVERB))
+    m_process->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_REVERB]; i++)
 {
@@ -217,7 +218,7 @@ this->when(FL_WHEN_RELEASE);
   reverb_preset->labelcolor(FL_BACKGROUND2_COLOR);
   reverb_preset->textsize(10);
   reverb_preset->textcolor(FL_BACKGROUND2_COLOR);
-  reverb_preset->callback((Fl_Callback*)cb_reverb_preset, (void*)(12008));
+  reverb_preset->callback((Fl_Callback*)cb_reverb_preset, (void*)(UD_PRESET_REVERB));
   reverb_preset->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_preset->when(FL_WHEN_RELEASE_ALWAYS);
   reverb_preset->menu(menu_reverb_preset);

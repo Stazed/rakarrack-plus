@@ -20,7 +20,8 @@ void FlangerGui::cb_flanger_activar(RKR_Light_Button* o, void* v) {
 
 void FlangerGui::cb_flanger_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12007))m_process->Rack_Effects[EFX_FLANGER]->setpreset((int)(o->value()));
+if((ud==0)||(ud==UD_PRESET_FLANGER))
+    m_process->Rack_Effects[EFX_FLANGER]->setpreset((int)(o->value()));
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_FLANGER]; i++)
 {
@@ -211,7 +212,7 @@ this->when(FL_WHEN_RELEASE);
   flanger_preset->labelcolor(FL_BACKGROUND2_COLOR);
   flanger_preset->textsize(10);
   flanger_preset->textcolor(FL_BACKGROUND2_COLOR);
-  flanger_preset->callback((Fl_Callback*)cb_flanger_preset, (void*)(12007));
+  flanger_preset->callback((Fl_Callback*)cb_flanger_preset, (void*)(UD_PRESET_FLANGER));
   flanger_preset->align(Fl_Align(FL_ALIGN_LEFT));
   flanger_preset->when(FL_WHEN_RELEASE_ALWAYS);
   flanger_preset->menu(menu_flanger_preset);

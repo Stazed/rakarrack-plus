@@ -20,7 +20,8 @@ void SequenceGui::cb_seq_activar(RKR_Light_Button* o, void* v) {
 
 void SequenceGui::cb_seq_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12037))m_process->Rack_Effects[EFX_SEQUENCE]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_SEQUENCE))
+    m_process->Rack_Effects[EFX_SEQUENCE]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_SEQUENCE]; i++)
 {
@@ -272,7 +273,7 @@ this->when(FL_WHEN_RELEASE);
   seq_preset->labelcolor(FL_BACKGROUND2_COLOR);
   seq_preset->textsize(10);
   seq_preset->textcolor(FL_BACKGROUND2_COLOR);
-  seq_preset->callback((Fl_Callback*)cb_seq_preset, (void*)(12037));
+  seq_preset->callback((Fl_Callback*)cb_seq_preset, (void*)(UD_PRESET_SEQUENCE));
   seq_preset->align(Fl_Align(FL_ALIGN_LEFT));
   seq_preset->when(FL_WHEN_RELEASE_ALWAYS);
   seq_preset->menu(menu_seq_preset);

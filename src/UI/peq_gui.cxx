@@ -20,7 +20,8 @@ void PeqGui::cb_eqp_activar(RKR_Light_Button* o, void* v) {
 
 void PeqGui::cb_eqp_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12009)) m_process->Rack_Effects[EFX_PARAMETRIC]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_PARAMETRIC))
+    m_process->Rack_Effects[EFX_PARAMETRIC]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_PARAMETRIC]; i++)
 {
@@ -194,7 +195,7 @@ this->when(FL_WHEN_RELEASE);
   eqp_preset->labelcolor(FL_BACKGROUND2_COLOR);
   eqp_preset->textsize(10);
   eqp_preset->textcolor(FL_BACKGROUND2_COLOR);
-  eqp_preset->callback((Fl_Callback*)cb_eqp_preset, (void*)(12009));
+  eqp_preset->callback((Fl_Callback*)cb_eqp_preset, (void*)(UD_PRESET_PARAMETRIC));
   eqp_preset->align(Fl_Align(FL_ALIGN_LEFT));
   eqp_preset->when(FL_WHEN_RELEASE_ALWAYS);
   eqp_preset->menu(menu_eqp_preset);

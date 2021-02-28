@@ -38,9 +38,10 @@ m_parent->findpos(EFX_EXCITER,(int)o->value(),o);}
   }
   Fl_Choice exciter_preset {
     label Preset
-    user_data 12022
+    user_data UD_PRESET_EXCITER
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12022))m_process->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_EXCITER))
+    m_process->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXCITER]; i++)
 {

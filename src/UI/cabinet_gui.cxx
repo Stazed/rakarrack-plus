@@ -87,7 +87,7 @@ this->when(FL_WHEN_RELEASE);
   Cabinet_preset->labelcolor(FL_BACKGROUND2_COLOR);
   Cabinet_preset->textsize(10);
   Cabinet_preset->textcolor(FL_BACKGROUND2_COLOR);
-  Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset, (void*)(12012));
+  Cabinet_preset->callback((Fl_Callback*)cb_Cabinet_preset, (void*)(UD_PRESET_CABINET));
   Cabinet_preset->align(Fl_Align(FL_ALIGN_LEFT));
   Cabinet_preset->when(FL_WHEN_RELEASE_ALWAYS);
   Cabinet_preset->menu(menu_Cabinet_preset);

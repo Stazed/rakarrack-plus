@@ -20,7 +20,8 @@ void ExciterGui::cb_exciter_activar(RKR_Light_Button* o, void* v) {
 
 void ExciterGui::cb_exciter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12022))m_process->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_EXCITER))
+    m_process->Rack_Effects[EFX_EXCITER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_EXCITER]; i++)
 {
@@ -232,7 +233,7 @@ this->when(FL_WHEN_RELEASE);
   exciter_preset->labelcolor(FL_BACKGROUND2_COLOR);
   exciter_preset->textsize(10);
   exciter_preset->textcolor(FL_BACKGROUND2_COLOR);
-  exciter_preset->callback((Fl_Callback*)cb_exciter_preset, (void*)(12022));
+  exciter_preset->callback((Fl_Callback*)cb_exciter_preset, (void*)(UD_PRESET_EXCITER));
   exciter_preset->align(Fl_Align(FL_ALIGN_LEFT));
   exciter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   exciter_preset->menu(menu_exciter_preset);

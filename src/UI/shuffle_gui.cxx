@@ -20,7 +20,8 @@ void ShuffleGui::cb_shuffle_activar(RKR_Light_Button* o, void* v) {
 
 void ShuffleGui::cb_shuffle_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12026))m_process->Rack_Effects[EFX_SHUFFLE]->setpreset((int)o->value());
+if((ud==0)||(ud==UD_PRESET_SHUFFLE))
+    m_process->Rack_Effects[EFX_SHUFFLE]->setpreset((int)o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_SHUFFLE]; i++)
 {
@@ -203,7 +204,7 @@ this->when(FL_WHEN_RELEASE);
   shuffle_preset->labelcolor(FL_BACKGROUND2_COLOR);
   shuffle_preset->textsize(10);
   shuffle_preset->textcolor(FL_BACKGROUND2_COLOR);
-  shuffle_preset->callback((Fl_Callback*)cb_shuffle_preset, (void*)(12026));
+  shuffle_preset->callback((Fl_Callback*)cb_shuffle_preset, (void*)(UD_PRESET_SHUFFLE));
   shuffle_preset->align(Fl_Align(FL_ALIGN_LEFT));
   shuffle_preset->when(FL_WHEN_RELEASE_ALWAYS);
   shuffle_preset->menu(menu_shuffle_preset);

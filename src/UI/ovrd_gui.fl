@@ -42,9 +42,10 @@ m_parent->findpos(EFX_OVERDRIVE,(int)o->value(),o);}
   }
   Fl_Choice ovrd_preset {
     label Preset
-    user_data 12003
+    user_data UD_PRESET_OVERDRIVE
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12003))m_process->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_OVERDRIVE))
+    m_process->Rack_Effects[EFX_OVERDRIVE]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_OVERDRIVE]; i++)
 {

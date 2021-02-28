@@ -45,9 +45,10 @@ m_parent->findpos(EFX_ANALOG_PHASER,(int)o->value(),o);}
   }
   Fl_Choice aphaser_preset {
     label Preset
-    user_data 12018
+    user_data UD_PRESET_ANALOG_PHASER
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12018))m_process->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_ANALOG_PHASER))
+    m_process->Rack_Effects[EFX_ANALOG_PHASER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
 {

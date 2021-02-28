@@ -18,7 +18,8 @@ void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {
 
 void GateGui::cb_gate_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12016))m_process->Rack_Effects[EFX_NOISEGATE]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_NOISEGATE))
+    m_process->Rack_Effects[EFX_NOISEGATE]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_NOISEGATE]; i++)
 {
@@ -156,7 +157,7 @@ this->when(FL_WHEN_RELEASE);
   gate_preset->labelcolor(FL_BACKGROUND2_COLOR);
   gate_preset->textsize(10);
   gate_preset->textcolor(FL_BACKGROUND2_COLOR);
-  gate_preset->callback((Fl_Callback*)cb_gate_preset, (void*)(12016));
+  gate_preset->callback((Fl_Callback*)cb_gate_preset, (void*)(UD_PRESET_NOISEGATE));
   gate_preset->align(Fl_Align(FL_ALIGN_LEFT));
   gate_preset->when(FL_WHEN_RELEASE_ALWAYS);
   gate_preset->menu(menu_gate_preset);

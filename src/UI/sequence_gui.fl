@@ -41,9 +41,10 @@ m_parent->findpos(EFX_SEQUENCE,(int)o->value(),o);}
   }
   Fl_Choice seq_preset {
     label Preset
-    user_data 12037
+    user_data UD_PRESET_SEQUENCE
     callback {long long ud= (long long) v;
-if((ud==0)||(ud==12037))m_process->Rack_Effects[EFX_SEQUENCE]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_SEQUENCE))
+    m_process->Rack_Effects[EFX_SEQUENCE]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_SEQUENCE]; i++)
 {

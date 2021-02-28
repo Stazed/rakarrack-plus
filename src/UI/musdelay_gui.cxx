@@ -21,7 +21,8 @@ void MusdelayGui::cb_musdelay_activar(RKR_Light_Button* o, void* v) {
 void MusdelayGui::cb_musdelay_preset_i(RKR_Choice* o, void* v) {
   m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12015))m_process->Rack_Effects[EFX_MUSICAL_DELAY]->setpreset(o->value());
+if((ud==0)||(ud==UD_PRESET_MUSICAL_DELAY))
+    m_process->Rack_Effects[EFX_MUSICAL_DELAY]->setpreset(o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_MUSICAL_DELAY]; i++)
 {
@@ -246,7 +247,7 @@ this->when(FL_WHEN_RELEASE);
   musdelay_preset->labelcolor(FL_BACKGROUND2_COLOR);
   musdelay_preset->textsize(10);
   musdelay_preset->textcolor(FL_BACKGROUND2_COLOR);
-  musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset, (void*)(12015));
+  musdelay_preset->callback((Fl_Callback*)cb_musdelay_preset, (void*)(UD_PRESET_MUSICAL_DELAY));
   musdelay_preset->align(Fl_Align(FL_ALIGN_LEFT));
   musdelay_preset->when(FL_WHEN_RELEASE_ALWAYS);
   musdelay_preset->menu(menu_musdelay_preset);

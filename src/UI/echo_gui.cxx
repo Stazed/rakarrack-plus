@@ -20,7 +20,8 @@ void EchoGui::cb_echo_activar(RKR_Light_Button* o, void* v) {
 
 void EchoGui::cb_echo_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12004))m_process->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_ECHO))
+    m_process->Rack_Effects[EFX_ECHO]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_ECHO]; i++)
 {
@@ -183,7 +184,7 @@ this->when(FL_WHEN_RELEASE);
   echo_preset->labelcolor(FL_BACKGROUND2_COLOR);
   echo_preset->textsize(10);
   echo_preset->textcolor(FL_BACKGROUND2_COLOR);
-  echo_preset->callback((Fl_Callback*)cb_echo_preset, (void*)(12004));
+  echo_preset->callback((Fl_Callback*)cb_echo_preset, (void*)(UD_PRESET_ECHO));
   echo_preset->align(Fl_Align(FL_ALIGN_LEFT));
   echo_preset->when(FL_WHEN_RELEASE_ALWAYS);
   echo_preset->menu(menu_echo_preset);

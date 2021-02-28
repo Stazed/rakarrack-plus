@@ -38,10 +38,11 @@ m_parent->findpos(EFX_REVERB,(int)o->value(),o);}
   }
   Fl_Choice reverb_preset {
     label Preset
-    user_data 12008
+    user_data UD_PRESET_REVERB
     callback {m_process->EFX_Bypass[EFX_REVERB]=0;
 long long ud= (long long) v;
-if((ud==0)||(ud==12008))m_process->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_REVERB))
+    m_process->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_REVERB]; i++)
 {

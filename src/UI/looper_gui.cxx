@@ -20,7 +20,9 @@ void LooperGui::cb_looper_activar(RKR_Light_Button* o, void* v) {
 
 void LooperGui::cb_looper_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12030))m_process->Rack_Effects[EFX_LOOPER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_LOOPER))
+    m_process->Rack_Effects[EFX_LOOPER]->setpreset((int) o->value());
+    
 looper_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_LOOPER]->getpar(Looper_DryWet)));
 looper_play->value(m_process->Rack_Effects[EFX_LOOPER]->getpar(Looper_Play));
 looper_record->value(m_process->Rack_Effects[EFX_LOOPER]->getpar(Looper_Record));
@@ -286,7 +288,7 @@ this->when(FL_WHEN_RELEASE);
   looper_preset->labelcolor(FL_BACKGROUND2_COLOR);
   looper_preset->textsize(10);
   looper_preset->textcolor(FL_BACKGROUND2_COLOR);
-  looper_preset->callback((Fl_Callback*)cb_looper_preset, (void*)(12030));
+  looper_preset->callback((Fl_Callback*)cb_looper_preset, (void*)(UD_PRESET_LOOPER));
   looper_preset->align(Fl_Align(FL_ALIGN_LEFT));
   looper_preset->when(FL_WHEN_RELEASE_ALWAYS);
   looper_preset->menu(menu_looper_preset);

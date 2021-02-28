@@ -20,7 +20,8 @@ void SynthfilterGui::cb_synthfilter_activar(RKR_Light_Button* o, void* v) {
 
 void SynthfilterGui::cb_synthfilter_preset_i(RKR_Choice* o, void* v) {
   long long ud= (long long) v;
-if((ud==0)||(ud==12027))m_process->Rack_Effects[EFX_SYNTHFILTER]->setpreset((int) o->value());
+if((ud==0)||(ud==UD_PRESET_SYNTHFILTER))
+    m_process->Rack_Effects[EFX_SYNTHFILTER]->setpreset((int) o->value());
 
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_SYNTHFILTER]; i++)
 {
@@ -257,7 +258,7 @@ this->when(FL_WHEN_RELEASE);
   synthfilter_preset->labelcolor(FL_BACKGROUND2_COLOR);
   synthfilter_preset->textsize(10);
   synthfilter_preset->textcolor(FL_BACKGROUND2_COLOR);
-  synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset, (void*)(12027));
+  synthfilter_preset->callback((Fl_Callback*)cb_synthfilter_preset, (void*)(UD_PRESET_SYNTHFILTER));
   synthfilter_preset->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_preset->when(FL_WHEN_RELEASE_ALWAYS);
   synthfilter_preset->menu(menu_synthfilter_preset);

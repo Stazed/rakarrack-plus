@@ -36,7 +36,7 @@ m_parent->findpos(EFX_CABINET,(int)o->value(),o);}
   }
   Fl_Choice Cabinet_preset {
     label Preset
-    user_data 12012
+    user_data UD_PRESET_CABINET
     callback {m_process->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Preset_Idx, (int) o->value());} open
     xywh {45 45 106 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
