@@ -142,7 +142,7 @@ this->when(FL_WHEN_RELEASE);
   otrem_activar->labelfont(0);
   otrem_activar->labelsize(10);
   otrem_activar->labelcolor(FL_FOREGROUND_COLOR);
-  otrem_activar->callback((Fl_Callback*)cb_otrem_activar, (void*)(2));
+  otrem_activar->callback((Fl_Callback*)cb_otrem_activar);
   otrem_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   otrem_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -274,7 +274,7 @@ e a stompbox Opto Trem");
   otrem_invert->labelfont(0);
   otrem_invert->labelsize(10);
   otrem_invert->labelcolor(FL_BACKGROUND2_COLOR);
-  otrem_invert->callback((Fl_Callback*)cb_otrem_invert, (void*)(2));
+  otrem_invert->callback((Fl_Callback*)cb_otrem_invert);
   otrem_invert->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   otrem_invert->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* otrem_invert

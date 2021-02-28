@@ -236,7 +236,7 @@ this->when(FL_WHEN_RELEASE);
   distband_activar->labelfont(0);
   distband_activar->labelsize(10);
   distband_activar->labelcolor(FL_FOREGROUND_COLOR);
-  distband_activar->callback((Fl_Callback*)cb_distband_activar, (void*)(2));
+  distband_activar->callback((Fl_Callback*)cb_distband_activar);
   distband_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   distband_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -484,7 +484,7 @@ this->when(FL_WHEN_RELEASE);
   distband_st->labelfont(0);
   distband_st->labelsize(10);
   distband_st->labelcolor(FL_BACKGROUND2_COLOR);
-  distband_st->callback((Fl_Callback*)cb_distband_st, (void*)(2));
+  distband_st->callback((Fl_Callback*)cb_distband_st);
   distband_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   distband_st->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* distband_st
@@ -497,7 +497,7 @@ this->when(FL_WHEN_RELEASE);
   distband_neg->labelfont(0);
   distband_neg->labelsize(10);
   distband_neg->labelcolor(FL_BACKGROUND2_COLOR);
-  distband_neg->callback((Fl_Callback*)cb_distband_neg, (void*)(2));
+  distband_neg->callback((Fl_Callback*)cb_distband_neg);
   distband_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   distband_neg->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* distband_neg

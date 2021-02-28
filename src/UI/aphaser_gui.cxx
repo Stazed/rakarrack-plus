@@ -203,7 +203,7 @@ this->when(FL_WHEN_RELEASE);
   aphaser_activar->labelfont(0);
   aphaser_activar->labelsize(10);
   aphaser_activar->labelcolor(FL_FOREGROUND_COLOR);
-  aphaser_activar->callback((Fl_Callback*)cb_aphaser_activar, (void*)(2));
+  aphaser_activar->callback((Fl_Callback*)cb_aphaser_activar);
   aphaser_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   aphaser_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -417,7 +417,7 @@ this->when(FL_WHEN_RELEASE);
   aphaser_subs->labelfont(0);
   aphaser_subs->labelsize(10);
   aphaser_subs->labelcolor(FL_BACKGROUND2_COLOR);
-  aphaser_subs->callback((Fl_Callback*)cb_aphaser_subs, (void*)(2));
+  aphaser_subs->callback((Fl_Callback*)cb_aphaser_subs);
   aphaser_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   aphaser_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* aphaser_subs
@@ -430,7 +430,7 @@ this->when(FL_WHEN_RELEASE);
   aphaser_hyper->labelfont(0);
   aphaser_hyper->labelsize(10);
   aphaser_hyper->labelcolor(FL_BACKGROUND2_COLOR);
-  aphaser_hyper->callback((Fl_Callback*)cb_aphaser_hyper, (void*)(2));
+  aphaser_hyper->callback((Fl_Callback*)cb_aphaser_hyper);
   aphaser_hyper->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   aphaser_hyper->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* aphaser_hyper

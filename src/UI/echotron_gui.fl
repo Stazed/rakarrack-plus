@@ -27,7 +27,6 @@ widget_class {\#include "common_gui_menu.h"} EchotronGui {open selected
 } {
   Fl_Light_Button echotron_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -185,7 +184,6 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Stereo,(int)o->val
   }
   Fl_Check_Button echotron_af {
     label AF
-    user_data 2
     callback {m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Filters,(int)o->value());}
     xywh {2 136 32 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
@@ -205,21 +203,18 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Type,(int)o->value
   } {}
   Fl_Check_Button echotron_mf {
     label MF
-    user_data 2
     callback {m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Mod_Filter,(int)o->value());}
     xywh {2 151 33 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button echotron_md {
     label MD
-    user_data 2
     callback {m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Mod_Delay,(int)o->value());}
     xywh {33 151 34 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button echotron_user {
     label User
-    user_data 2
     callback {m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File,(int)o->value());
 
 if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
@@ -228,7 +223,6 @@ if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
   }
   Fl_Button B_ech {
     label Browse
-    user_data 2
     callback {char *filename;
 filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
 if (filename==NULL) return;

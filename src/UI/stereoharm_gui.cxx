@@ -226,7 +226,7 @@ this->when(FL_WHEN_RELEASE);
   shar_activar->labelfont(0);
   shar_activar->labelsize(10);
   shar_activar->labelcolor(FL_FOREGROUND_COLOR);
-  shar_activar->callback((Fl_Callback*)cb_shar_activar, (void*)(2));
+  shar_activar->callback((Fl_Callback*)cb_shar_activar);
   shar_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   shar_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -395,7 +395,7 @@ this->when(FL_WHEN_RELEASE);
   shar_MIDI->labelfont(0);
   shar_MIDI->labelsize(10);
   shar_MIDI->labelcolor(FL_BACKGROUND2_COLOR);
-  shar_MIDI->callback((Fl_Callback*)cb_shar_MIDI, (void*)(2));
+  shar_MIDI->callback((Fl_Callback*)cb_shar_MIDI);
   shar_MIDI->align(Fl_Align(FL_ALIGN_RIGHT));
   shar_MIDI->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* shar_MIDI
@@ -408,7 +408,7 @@ this->when(FL_WHEN_RELEASE);
   shar_SELECT->labelfont(0);
   shar_SELECT->labelsize(10);
   shar_SELECT->labelcolor(FL_BACKGROUND2_COLOR);
-  shar_SELECT->callback((Fl_Callback*)cb_shar_SELECT, (void*)(2));
+  shar_SELECT->callback((Fl_Callback*)cb_shar_SELECT);
   shar_SELECT->align(Fl_Align(FL_ALIGN_RIGHT));
   shar_SELECT->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* shar_SELECT

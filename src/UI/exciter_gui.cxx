@@ -216,7 +216,7 @@ this->when(FL_WHEN_RELEASE);
   exciter_activar->labelfont(0);
   exciter_activar->labelsize(10);
   exciter_activar->labelcolor(FL_FOREGROUND_COLOR);
-  exciter_activar->callback((Fl_Callback*)cb_exciter_activar, (void*)(2));
+  exciter_activar->callback((Fl_Callback*)cb_exciter_activar);
   exciter_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   exciter_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

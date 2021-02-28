@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} ChorusGui {open selected
 } {
   Fl_Light_Button chorus_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -135,14 +134,12 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Type,(int)o->value())}
   } {}
   Fl_Check_Button chorus_subs {
     label Subtract
-    user_data 2
     callback {m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Subtract,(int)o->value())}
     xywh {25 94 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button chorus_awesome {
     label Intense
-    user_data 2
     callback {m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_Intense,(int)o->value())}
     xywh {88 95 56 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

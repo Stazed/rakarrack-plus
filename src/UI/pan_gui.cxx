@@ -156,7 +156,7 @@ this->when(FL_WHEN_RELEASE);
   pan_activar->labelfont(0);
   pan_activar->labelsize(10);
   pan_activar->labelcolor(FL_FOREGROUND_COLOR);
-  pan_activar->callback((Fl_Callback*)cb_pan_activar, (void*)(2));
+  pan_activar->callback((Fl_Callback*)cb_pan_activar);
   pan_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   pan_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -220,7 +220,7 @@ this->when(FL_WHEN_RELEASE);
   pan_autopan->labelfont(0);
   pan_autopan->labelsize(10);
   pan_autopan->labelcolor(FL_BACKGROUND2_COLOR);
-  pan_autopan->callback((Fl_Callback*)cb_pan_autopan, (void*)(2));
+  pan_autopan->callback((Fl_Callback*)cb_pan_autopan);
   pan_autopan->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   pan_autopan->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* pan_autopan
@@ -300,7 +300,7 @@ this->when(FL_WHEN_RELEASE);
   pan_extraon->labelfont(0);
   pan_extraon->labelsize(10);
   pan_extraon->labelcolor(FL_BACKGROUND2_COLOR);
-  pan_extraon->callback((Fl_Callback*)cb_pan_extraon, (void*)(2));
+  pan_extraon->callback((Fl_Callback*)cb_pan_extraon);
   pan_extraon->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   pan_extraon->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* pan_extraon

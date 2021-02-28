@@ -167,7 +167,7 @@ this->when(FL_WHEN_RELEASE);
   coil_activar->labelfont(0);
   coil_activar->labelsize(10);
   coil_activar->labelcolor(FL_FOREGROUND_COLOR);
-  coil_activar->callback((Fl_Callback*)cb_coil_activar, (void*)(2));
+  coil_activar->callback((Fl_Callback*)cb_coil_activar);
   coil_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   coil_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -340,7 +340,7 @@ this->when(FL_WHEN_RELEASE);
   coil_mode->labelfont(0);
   coil_mode->labelsize(10);
   coil_mode->labelcolor(FL_BACKGROUND2_COLOR);
-  coil_mode->callback((Fl_Callback*)cb_coil_mode, (void*)(2));
+  coil_mode->callback((Fl_Callback*)cb_coil_mode);
   coil_mode->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   coil_mode->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* coil_mode

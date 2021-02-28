@@ -20,7 +20,6 @@ widget_class EqGui {open selected
 } {
   Fl_Light_Button eq_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);

@@ -144,7 +144,7 @@ this->when(FL_WHEN_RELEASE);
   vo_activar->labelfont(0);
   vo_activar->labelsize(10);
   vo_activar->labelcolor(FL_FOREGROUND_COLOR);
-  vo_activar->callback((Fl_Callback*)cb_vo_activar, (void*)(2));
+  vo_activar->callback((Fl_Callback*)cb_vo_activar);
   vo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   vo_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

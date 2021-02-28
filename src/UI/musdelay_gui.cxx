@@ -230,7 +230,7 @@ this->when(FL_WHEN_RELEASE);
   musdelay_activar->labelfont(0);
   musdelay_activar->labelsize(10);
   musdelay_activar->labelcolor(FL_FOREGROUND_COLOR);
-  musdelay_activar->callback((Fl_Callback*)cb_musdelay_activar, (void*)(2));
+  musdelay_activar->callback((Fl_Callback*)cb_musdelay_activar);
   musdelay_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   musdelay_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

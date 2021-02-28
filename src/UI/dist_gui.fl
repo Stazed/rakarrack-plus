@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} DistGui {open selected
 } {
   Fl_Light_Button dist_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -131,21 +130,18 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Type,(int)o->value());}
   } {}
   Fl_Check_Button dist_neg {
     label {Neg.}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Negate,(int)o->value());}
     xywh {110 92 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dist_pf {
     label {Pre Filter}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Prefilter,(int)o->value());}
     xywh {9 108 67 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dist_st {
     label Stereo
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Stereo,(int)o->value());}
     xywh {74 108 57 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

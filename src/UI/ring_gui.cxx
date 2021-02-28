@@ -207,7 +207,7 @@ this->when(FL_WHEN_RELEASE);
   ring_activar->labelfont(0);
   ring_activar->labelsize(10);
   ring_activar->labelcolor(FL_FOREGROUND_COLOR);
-  ring_activar->callback((Fl_Callback*)cb_ring_activar, (void*)(2));
+  ring_activar->callback((Fl_Callback*)cb_ring_activar);
   ring_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   ring_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -322,7 +322,7 @@ this->when(FL_WHEN_RELEASE);
   ring_st->labelfont(0);
   ring_st->labelsize(10);
   ring_st->labelcolor(FL_BACKGROUND2_COLOR);
-  ring_st->callback((Fl_Callback*)cb_ring_st, (void*)(2));
+  ring_st->callback((Fl_Callback*)cb_ring_st);
   ring_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ring_st->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ring_st
@@ -335,7 +335,7 @@ this->when(FL_WHEN_RELEASE);
   ring_afreq->labelfont(0);
   ring_afreq->labelsize(10);
   ring_afreq->labelcolor(FL_BACKGROUND2_COLOR);
-  ring_afreq->callback((Fl_Callback*)cb_ring_afreq, (void*)(2));
+  ring_afreq->callback((Fl_Callback*)cb_ring_afreq);
   ring_afreq->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ring_afreq->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ring_afreq

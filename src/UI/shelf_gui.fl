@@ -23,7 +23,6 @@ widget_class ShelfGui {open selected
 } {
   Fl_Light_Button shelf_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -116,7 +115,6 @@ m_process->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Presence,(int)o->value(
   }
   Fl_Check_Button shelf_mode {
     label Stereo
-    user_data 2
     callback {m_process->Rack_Effects[EFX_SHELFBOOST]->changepar(Shelf_Stereo,(int)o->value());}
     xywh {13 153 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

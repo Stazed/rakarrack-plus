@@ -200,7 +200,7 @@ this->when(FL_WHEN_RELEASE);
   WahWah_activar->labelfont(0);
   WahWah_activar->labelsize(10);
   WahWah_activar->labelcolor(FL_FOREGROUND_COLOR);
-  WahWah_activar->callback((Fl_Callback*)cb_WahWah_activar, (void*)(2));
+  WahWah_activar->callback((Fl_Callback*)cb_WahWah_activar);
   WahWah_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   WahWah_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -364,7 +364,7 @@ this->when(FL_WHEN_RELEASE);
   WahWah_ampsnsinv->labelfont(0);
   WahWah_ampsnsinv->labelsize(10);
   WahWah_ampsnsinv->labelcolor(FL_BACKGROUND2_COLOR);
-  WahWah_ampsnsinv->callback((Fl_Callback*)cb_WahWah_ampsnsinv, (void*)(2));
+  WahWah_ampsnsinv->callback((Fl_Callback*)cb_WahWah_ampsnsinv);
   WahWah_ampsnsinv->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   WahWah_ampsnsinv->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* WahWah_ampsnsinv

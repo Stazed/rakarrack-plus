@@ -23,7 +23,6 @@ widget_class CompressGui {open selected
 } {
   Fl_Light_Button compress_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -137,21 +136,18 @@ m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output,(int)o->value
   }
   Fl_Check_Button Auto_Output {
     label {Auto Output}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Auto_Out,(int)o->value());}
     xywh {19 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button Stereo {
     label Stereo
-    user_data 2
     callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Stereo,(int)o->value());}
     tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {104 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button Peak {
     label Peak
-    user_data 2
     callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Peak,(int)o->value());}
     tooltip {Peak Mode Compression} xywh {19 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

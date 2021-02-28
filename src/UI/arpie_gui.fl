@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} ArpieGui {open selected
 } {
   Fl_Light_Button arpie_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);

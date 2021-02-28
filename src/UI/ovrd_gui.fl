@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} OvrdGui {open selected
 } {
   Fl_Light_Button ovrd_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -122,14 +121,12 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Type,(int)o->value()
   } {}
   Fl_Check_Button ovrd_neg {
     label {Neg.}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Negate,(int)o->value());}
     xywh {109 92 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button ovrd_st {
     label Stereo
-    user_data 2
     callback {m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Stereo,(int)o->value());}
     xywh {41 110 54 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
@@ -147,7 +144,6 @@ m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Pan,(int)(o->value()
   }
   Fl_Check_Button ovrd_pf {
     label {Pre Filter}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_OVERDRIVE]->changepar(Overdrive_Prefilter,(int)o->value());}
     xywh {41 138 68 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

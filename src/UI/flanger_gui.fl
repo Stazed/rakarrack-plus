@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} FlangerGui {open selected
 } {
   Fl_Light_Button flanger_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -134,14 +133,14 @@ m_process->Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Type,(int)o->value()
   } {}
   Fl_Check_Button flanger_subs {
     label Subtract
-    user_data 2
+    
     callback {m_process->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Subtract,(int)o->value());}
     xywh {32 94 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button flanger_awesome {
     label Intense
-    user_data 2
+    
     callback {m_process->Rack_Effects[EFX_FLANGER]->changepar(Flanger_Intense,(int)o->value());}
     xywh {94 94 58 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

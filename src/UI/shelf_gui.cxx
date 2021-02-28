@@ -114,7 +114,7 @@ this->when(FL_WHEN_RELEASE);
   shelf_activar->labelfont(0);
   shelf_activar->labelsize(10);
   shelf_activar->labelcolor(FL_FOREGROUND_COLOR);
-  shelf_activar->callback((Fl_Callback*)cb_shelf_activar, (void*)(2));
+  shelf_activar->callback((Fl_Callback*)cb_shelf_activar);
   shelf_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   shelf_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -214,7 +214,7 @@ this->when(FL_WHEN_RELEASE);
   shelf_mode->labelfont(0);
   shelf_mode->labelsize(10);
   shelf_mode->labelcolor(FL_BACKGROUND2_COLOR);
-  shelf_mode->callback((Fl_Callback*)cb_shelf_mode, (void*)(2));
+  shelf_mode->callback((Fl_Callback*)cb_shelf_mode);
   shelf_mode->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   shelf_mode->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* shelf_mode

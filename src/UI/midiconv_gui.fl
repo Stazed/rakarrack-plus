@@ -29,7 +29,6 @@ m_parent= _rgui;} {}
   }
   Fl_Light_Button midi_activar {
     label On
-    user_data 2
     callback {if ((int)o->value()==0)
   { 
     m_process->efx_MIDIConverter->panic();
@@ -111,7 +110,6 @@ m_parent= _rgui;} {}
   }
   Fl_Check_Button Use_FFT {
     label FFT
-    user_data 2
     callback {m_process->efx_MIDIConverter->changepar(MIDIConv_FFT, (int)o->value());} selected
     tooltip {FFT based algorithm which is much more
 CPU intensive but may provide better results.} xywh {51 34 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 1

@@ -23,7 +23,6 @@ widget_class ShifterGui {open selected
 } {
   Fl_Light_Button shifter_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -159,7 +158,6 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Threshold,(int)o->value(
   }
   Fl_Check_Button shifter_ud {
     label Down
-    user_data 2
     callback {m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Shift,(int)o->value())}
     xywh {51 128 49 14} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

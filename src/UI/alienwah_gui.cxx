@@ -194,7 +194,7 @@ this->when(FL_WHEN_RELEASE);
   Alienwah_activar->labelfont(0);
   Alienwah_activar->labelsize(10);
   Alienwah_activar->labelcolor(FL_FOREGROUND_COLOR);
-  Alienwah_activar->callback((Fl_Callback*)cb_Alienwah_activar, (void*)(2));
+  Alienwah_activar->callback((Fl_Callback*)cb_Alienwah_activar);
   Alienwah_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   Alienwah_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

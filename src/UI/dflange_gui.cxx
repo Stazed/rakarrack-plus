@@ -229,7 +229,7 @@ this->when(FL_WHEN_RELEASE);
   dflange_activar->labelfont(0);
   dflange_activar->labelsize(10);
   dflange_activar->labelcolor(FL_FOREGROUND_COLOR);
-  dflange_activar->callback((Fl_Callback*)cb_dflange_activar, (void*)(2));
+  dflange_activar->callback((Fl_Callback*)cb_dflange_activar);
   dflange_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   dflange_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -394,7 +394,7 @@ this->when(FL_WHEN_RELEASE);
   dflange_subs->labelfont(0);
   dflange_subs->labelsize(10);
   dflange_subs->labelcolor(FL_BACKGROUND2_COLOR);
-  dflange_subs->callback((Fl_Callback*)cb_dflange_subs, (void*)(2));
+  dflange_subs->callback((Fl_Callback*)cb_dflange_subs);
   dflange_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   dflange_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* dflange_subs
@@ -407,7 +407,7 @@ this->when(FL_WHEN_RELEASE);
   dflange_tz->labelfont(0);
   dflange_tz->labelsize(10);
   dflange_tz->labelcolor(FL_BACKGROUND2_COLOR);
-  dflange_tz->callback((Fl_Callback*)cb_dflange_tz, (void*)(2));
+  dflange_tz->callback((Fl_Callback*)cb_dflange_tz);
   dflange_tz->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   dflange_tz->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* dflange_tz
@@ -420,7 +420,7 @@ this->when(FL_WHEN_RELEASE);
   dflange_intense->labelfont(0);
   dflange_intense->labelsize(10);
   dflange_intense->labelcolor(FL_BACKGROUND2_COLOR);
-  dflange_intense->callback((Fl_Callback*)cb_dflange_intense, (void*)(2));
+  dflange_intense->callback((Fl_Callback*)cb_dflange_intense);
   dflange_intense->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   dflange_intense->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* dflange_intense

@@ -193,7 +193,7 @@ this->when(FL_WHEN_RELEASE);
   derelict_activar->labelfont(0);
   derelict_activar->labelsize(10);
   derelict_activar->labelcolor(FL_FOREGROUND_COLOR);
-  derelict_activar->callback((Fl_Callback*)cb_derelict_activar, (void*)(2));
+  derelict_activar->callback((Fl_Callback*)cb_derelict_activar);
   derelict_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   derelict_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -306,7 +306,7 @@ this->when(FL_WHEN_RELEASE);
   derelict_neg->labelfont(0);
   derelict_neg->labelsize(10);
   derelict_neg->labelcolor(FL_BACKGROUND2_COLOR);
-  derelict_neg->callback((Fl_Callback*)cb_derelict_neg, (void*)(2));
+  derelict_neg->callback((Fl_Callback*)cb_derelict_neg);
   derelict_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   derelict_neg->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* derelict_neg
@@ -368,7 +368,7 @@ this->when(FL_WHEN_RELEASE);
   derelict_pf->labelfont(0);
   derelict_pf->labelsize(10);
   derelict_pf->labelcolor(FL_BACKGROUND2_COLOR);
-  derelict_pf->callback((Fl_Callback*)cb_derelict_pf, (void*)(2));
+  derelict_pf->callback((Fl_Callback*)cb_derelict_pf);
   derelict_pf->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   derelict_pf->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* derelict_pf

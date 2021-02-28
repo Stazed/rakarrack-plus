@@ -201,7 +201,7 @@ this->when(FL_WHEN_RELEASE);
   reverb_activar->labelfont(0);
   reverb_activar->labelsize(10);
   reverb_activar->labelcolor(FL_FOREGROUND_COLOR);
-  reverb_activar->callback((Fl_Callback*)cb_reverb_activar, (void*)(2));
+  reverb_activar->callback((Fl_Callback*)cb_reverb_activar);
   reverb_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   reverb_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

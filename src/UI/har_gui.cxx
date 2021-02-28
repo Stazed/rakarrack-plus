@@ -199,7 +199,7 @@ this->when(FL_WHEN_RELEASE);
   har_activar->labelfont(0);
   har_activar->labelsize(10);
   har_activar->labelcolor(FL_FOREGROUND_COLOR);
-  har_activar->callback((Fl_Callback*)cb_har_activar, (void*)(2));
+  har_activar->callback((Fl_Callback*)cb_har_activar);
   har_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   har_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -350,7 +350,7 @@ this->when(FL_WHEN_RELEASE);
   har_MIDI->labelfont(0);
   har_MIDI->labelsize(10);
   har_MIDI->labelcolor(FL_BACKGROUND2_COLOR);
-  har_MIDI->callback((Fl_Callback*)cb_har_MIDI, (void*)(2));
+  har_MIDI->callback((Fl_Callback*)cb_har_MIDI);
   har_MIDI->align(Fl_Align(FL_ALIGN_RIGHT));
   har_MIDI->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* har_MIDI
@@ -363,7 +363,7 @@ this->when(FL_WHEN_RELEASE);
   har_SELECT->labelfont(0);
   har_SELECT->labelsize(10);
   har_SELECT->labelcolor(FL_BACKGROUND2_COLOR);
-  har_SELECT->callback((Fl_Callback*)cb_har_SELECT, (void*)(2));
+  har_SELECT->callback((Fl_Callback*)cb_har_SELECT);
   har_SELECT->align(Fl_Align(FL_ALIGN_RIGHT));
   har_SELECT->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* har_SELECT

@@ -27,7 +27,6 @@ widget_class {\#include "RKR_Value_Input.h"} InfinityGui {open selected
 } {
   Fl_Light_Button infinity_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off); 
@@ -214,7 +213,6 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_8,(int)o->value()
   }
   Fl_Check_Button infinity_rev {
     label Reverse
-    user_data 2
     callback {m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Reverse,(int)o->value());}
     tooltip {Reverse Left Channel Sweep} xywh {53 94 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button

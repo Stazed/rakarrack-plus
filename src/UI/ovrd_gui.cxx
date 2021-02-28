@@ -175,7 +175,7 @@ this->when(FL_WHEN_RELEASE);
   ovrd_activar->labelfont(0);
   ovrd_activar->labelsize(10);
   ovrd_activar->labelcolor(FL_FOREGROUND_COLOR);
-  ovrd_activar->callback((Fl_Callback*)cb_ovrd_activar, (void*)(2));
+  ovrd_activar->callback((Fl_Callback*)cb_ovrd_activar);
   ovrd_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   ovrd_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -286,7 +286,7 @@ this->when(FL_WHEN_RELEASE);
   ovrd_neg->labelfont(0);
   ovrd_neg->labelsize(10);
   ovrd_neg->labelcolor(FL_BACKGROUND2_COLOR);
-  ovrd_neg->callback((Fl_Callback*)cb_ovrd_neg, (void*)(2));
+  ovrd_neg->callback((Fl_Callback*)cb_ovrd_neg);
   ovrd_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ovrd_neg->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ovrd_neg
@@ -299,7 +299,7 @@ this->when(FL_WHEN_RELEASE);
   ovrd_st->labelfont(0);
   ovrd_st->labelsize(10);
   ovrd_st->labelcolor(FL_BACKGROUND2_COLOR);
-  ovrd_st->callback((Fl_Callback*)cb_ovrd_st, (void*)(2));
+  ovrd_st->callback((Fl_Callback*)cb_ovrd_st);
   ovrd_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ovrd_st->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ovrd_st
@@ -329,7 +329,7 @@ this->when(FL_WHEN_RELEASE);
   ovrd_pf->labelfont(0);
   ovrd_pf->labelsize(10);
   ovrd_pf->labelcolor(FL_BACKGROUND2_COLOR);
-  ovrd_pf->callback((Fl_Callback*)cb_ovrd_pf, (void*)(2));
+  ovrd_pf->callback((Fl_Callback*)cb_ovrd_pf);
   ovrd_pf->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ovrd_pf->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ovrd_pf

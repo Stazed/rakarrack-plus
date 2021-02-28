@@ -23,7 +23,6 @@ widget_class SequenceGui {open selected
 } {
   Fl_Light_Button seq_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -232,7 +231,6 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());
   }
   Fl_Check_Button seq_amp {
     label Amp
-    user_data 2
     callback {m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Amp,(int)o->value())}
     tooltip {Amplitude/Alt. Mode} xywh {9 111 43 14} down_box BORDER_BOX labelsize 10 labelcolor 7 align 5
     class RKR_Check_Button

@@ -196,7 +196,7 @@ this->when(FL_WHEN_RELEASE);
   chorus_activar->labelfont(0);
   chorus_activar->labelsize(10);
   chorus_activar->labelcolor(FL_FOREGROUND_COLOR);
-  chorus_activar->callback((Fl_Callback*)cb_chorus_activar, (void*)(2));
+  chorus_activar->callback((Fl_Callback*)cb_chorus_activar);
   chorus_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   chorus_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -309,7 +309,7 @@ this->when(FL_WHEN_RELEASE);
   chorus_subs->labelfont(0);
   chorus_subs->labelsize(10);
   chorus_subs->labelcolor(FL_BACKGROUND2_COLOR);
-  chorus_subs->callback((Fl_Callback*)cb_chorus_subs, (void*)(2));
+  chorus_subs->callback((Fl_Callback*)cb_chorus_subs);
   chorus_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   chorus_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* chorus_subs
@@ -322,7 +322,7 @@ this->when(FL_WHEN_RELEASE);
   chorus_awesome->labelfont(0);
   chorus_awesome->labelsize(10);
   chorus_awesome->labelcolor(FL_BACKGROUND2_COLOR);
-  chorus_awesome->callback((Fl_Callback*)cb_chorus_awesome, (void*)(2));
+  chorus_awesome->callback((Fl_Callback*)cb_chorus_awesome);
   chorus_awesome->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   chorus_awesome->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* chorus_awesome

@@ -192,7 +192,7 @@ this->when(FL_WHEN_RELEASE);
   vibe_activar->labelfont(0);
   vibe_activar->labelsize(10);
   vibe_activar->labelcolor(FL_FOREGROUND_COLOR);
-  vibe_activar->callback((Fl_Callback*)cb_vibe_activar, (void*)(2));
+  vibe_activar->callback((Fl_Callback*)cb_vibe_activar);
   vibe_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   vibe_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -387,7 +387,7 @@ this->when(FL_WHEN_RELEASE);
   vibe_stereo->labelfont(0);
   vibe_stereo->labelsize(10);
   vibe_stereo->labelcolor(FL_BACKGROUND2_COLOR);
-  vibe_stereo->callback((Fl_Callback*)cb_vibe_stereo, (void*)(2));
+  vibe_stereo->callback((Fl_Callback*)cb_vibe_stereo);
   vibe_stereo->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   vibe_stereo->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* vibe_stereo

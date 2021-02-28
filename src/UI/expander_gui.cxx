@@ -141,7 +141,7 @@ this->when(FL_WHEN_RELEASE);
   expander_activar->labelfont(0);
   expander_activar->labelsize(10);
   expander_activar->labelcolor(FL_FOREGROUND_COLOR);
-  expander_activar->callback((Fl_Callback*)cb_expander_activar, (void*)(2));
+  expander_activar->callback((Fl_Callback*)cb_expander_activar);
   expander_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   expander_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

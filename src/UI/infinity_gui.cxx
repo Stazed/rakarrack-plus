@@ -272,7 +272,7 @@ this->when(FL_WHEN_RELEASE);
   infinity_activar->labelfont(0);
   infinity_activar->labelsize(10);
   infinity_activar->labelcolor(FL_FOREGROUND_COLOR);
-  infinity_activar->callback((Fl_Callback*)cb_infinity_activar, (void*)(2));
+  infinity_activar->callback((Fl_Callback*)cb_infinity_activar);
   infinity_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   infinity_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -474,7 +474,7 @@ this->when(FL_WHEN_RELEASE);
   infinity_rev->labelfont(0);
   infinity_rev->labelsize(10);
   infinity_rev->labelcolor(FL_BACKGROUND2_COLOR);
-  infinity_rev->callback((Fl_Callback*)cb_infinity_rev, (void*)(2));
+  infinity_rev->callback((Fl_Callback*)cb_infinity_rev);
   infinity_rev->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_rev->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* infinity_rev

@@ -23,7 +23,6 @@ widget_class ValveGui {open selected
 } {
   Fl_Light_Button valve_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -127,7 +126,6 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Drive,(int)o->value());}
   }
   Fl_Check_Button valve_ed {
     label {Extra Dist.}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Ex_Dist,(int)o->value());}
     xywh {15 96 72 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
@@ -156,21 +154,18 @@ m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Presence,(int)o->value());}
   }
   Fl_Check_Button valve_pf {
     label {Pre Filter}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Prefilter,(int)o->value());}
     xywh {5 139 62 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button valve_st {
     label Stereo
-    user_data 2
     callback {m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Stereo,(int)o->value());}
     xywh {65 139 50 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button valve_neg {
     label {Neg.}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_VALVE]->changepar(Valve_Negate,(int)o->value());}
     xywh {114 139 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

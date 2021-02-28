@@ -151,7 +151,7 @@ this->when(FL_WHEN_RELEASE);
   stomp_activar->labelfont(0);
   stomp_activar->labelsize(10);
   stomp_activar->labelcolor(FL_FOREGROUND_COLOR);
-  stomp_activar->callback((Fl_Callback*)cb_stomp_activar, (void*)(2));
+  stomp_activar->callback((Fl_Callback*)cb_stomp_activar);
   stomp_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   stomp_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

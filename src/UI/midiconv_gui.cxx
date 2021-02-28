@@ -106,7 +106,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   midi_activar->labelfont(0);
   midi_activar->labelsize(10);
   midi_activar->labelcolor(FL_FOREGROUND_COLOR);
-  midi_activar->callback((Fl_Callback*)cb_midi_activar, (void*)(2));
+  midi_activar->callback((Fl_Callback*)cb_midi_activar);
   midi_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   midi_activar->when(FL_WHEN_CHANGED);
 } // RKR_Light_Button* midi_activar
@@ -161,7 +161,7 @@ results.");
   Use_FFT->labelfont(0);
   Use_FFT->labelsize(10);
   Use_FFT->labelcolor(FL_BACKGROUND2_COLOR);
-  Use_FFT->callback((Fl_Callback*)cb_Use_FFT, (void*)(2));
+  Use_FFT->callback((Fl_Callback*)cb_Use_FFT);
   Use_FFT->align(Fl_Align(FL_ALIGN_TOP));
   Use_FFT->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* Use_FFT

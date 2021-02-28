@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} VibeGui {open selected
 } {
   Fl_Light_Button vibe_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -205,7 +204,6 @@ m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_Pan,(int)(o->value()+64));}
   }
   Fl_Check_Button vibe_stereo {
     label Stereo
-    user_data 2
     callback {m_process->Rack_Effects[EFX_VIBE]->changepar(Vibe_Stereo,(int)o->value())}
     xywh {103 169 43 14} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

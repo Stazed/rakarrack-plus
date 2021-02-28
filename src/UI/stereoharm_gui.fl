@@ -23,7 +23,6 @@ widget_class SharGui {open selected
 } {
   Fl_Light_Button shar_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -171,7 +170,6 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_LR_Cross,(int)(o->value
   }
   Fl_Check_Button shar_MIDI {
     label MIDI
-    user_data 2
     callback {m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_MIDI,(int)o->value());
 m_process->RC_Stereo_Harm->cleanup();
 
@@ -185,7 +183,6 @@ m_process->Rack_Effects[EFX_STEREOHARM]->changepar(Sharm_R_Chroma,m_process->Rac
   }
   Fl_Check_Button shar_SELECT {
     label SELECT
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Sharm_Select);

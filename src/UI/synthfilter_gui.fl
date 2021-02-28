@@ -30,7 +30,6 @@ widget_class {\#include "common_gui_menu.h"} SynthfilterGui {open selected
 } {
   Fl_Light_Button synthfilter_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -153,7 +152,6 @@ m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Type,(int)o-
   } {}
   Fl_Check_Button synthfilter_subs {
     label Sub
-    user_data 2
     callback {m_process->Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_Subtract,(int)o->value())}
     tooltip {Subtract - Make output of filter negative} xywh {143 63 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button

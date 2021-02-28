@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} DflangeGui {open selected
 } {
   Fl_Light_Button dflange_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -177,21 +176,18 @@ m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LPF,(int)o->value())
   }
   Fl_Check_Button dflange_subs {
     label Subtr
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Subtract,(int)o->value());}
     xywh {5 113 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dflange_tz {
     label {Th. zero}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Zero,(int)o->value());}
     xywh {48 113 55 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button dflange_intense {
     label Intense
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_Intense,(int)o->value());}
     xywh {102 113 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

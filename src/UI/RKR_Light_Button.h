@@ -30,7 +30,6 @@
 #include <FL/Fl_Light_Button.H>
 #include <FL/fl_draw.H>
 
-#define LIGHT_BUTTON_USER_DATA   2
 
 class RKR_Light_Button : public Fl_Light_Button
 {

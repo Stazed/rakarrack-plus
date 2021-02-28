@@ -241,7 +241,7 @@ this->when(FL_WHEN_RELEASE);
   synthfilter_activar->labelfont(0);
   synthfilter_activar->labelsize(10);
   synthfilter_activar->labelcolor(FL_FOREGROUND_COLOR);
-  synthfilter_activar->callback((Fl_Callback*)cb_synthfilter_activar, (void*)(2));
+  synthfilter_activar->callback((Fl_Callback*)cb_synthfilter_activar);
   synthfilter_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   synthfilter_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -356,7 +356,7 @@ this->when(FL_WHEN_RELEASE);
   synthfilter_subs->labelfont(0);
   synthfilter_subs->labelsize(10);
   synthfilter_subs->labelcolor(FL_BACKGROUND2_COLOR);
-  synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs, (void*)(2));
+  synthfilter_subs->callback((Fl_Callback*)cb_synthfilter_subs);
   synthfilter_subs->align(Fl_Align(FL_ALIGN_LEFT));
   synthfilter_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* synthfilter_subs

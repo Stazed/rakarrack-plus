@@ -192,7 +192,7 @@ this->when(FL_WHEN_RELEASE);
   arpie_activar->labelfont(0);
   arpie_activar->labelsize(10);
   arpie_activar->labelcolor(FL_FOREGROUND_COLOR);
-  arpie_activar->callback((Fl_Callback*)cb_arpie_activar, (void*)(2));
+  arpie_activar->callback((Fl_Callback*)cb_arpie_activar);
   arpie_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   arpie_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

@@ -196,7 +196,7 @@ this->when(FL_WHEN_RELEASE);
   phaser_activar->labelfont(0);
   phaser_activar->labelsize(10);
   phaser_activar->labelcolor(FL_FOREGROUND_COLOR);
-  phaser_activar->callback((Fl_Callback*)cb_phaser_activar, (void*)(2));
+  phaser_activar->callback((Fl_Callback*)cb_phaser_activar);
   phaser_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   phaser_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -309,7 +309,7 @@ this->when(FL_WHEN_RELEASE);
   phaser_subs->labelfont(0);
   phaser_subs->labelsize(10);
   phaser_subs->labelcolor(FL_BACKGROUND2_COLOR);
-  phaser_subs->callback((Fl_Callback*)cb_phaser_subs, (void*)(2));
+  phaser_subs->callback((Fl_Callback*)cb_phaser_subs);
   phaser_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   phaser_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* phaser_subs

@@ -27,7 +27,6 @@ widget_class {\#include "common_gui_menu.h"} AphaserGui {open selected
 } {
   Fl_Light_Button aphaser_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -203,14 +202,12 @@ m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Stereo,(int)o->
   }
   Fl_Check_Button aphaser_subs {
     label Subtract
-    user_data 2
     callback {m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Subtract,(int)o->value())}
     xywh {18 165 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button aphaser_hyper {
     label Hyper
-    user_data 2
     callback {m_process->Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_Hyper,(int)o->value())}
     xywh {90 165 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

@@ -82,7 +82,7 @@ this->when(FL_WHEN_RELEASE);
   sus_activar->labelfont(0);
   sus_activar->labelsize(10);
   sus_activar->labelcolor(FL_FOREGROUND_COLOR);
-  sus_activar->callback((Fl_Callback*)cb_sus_activar, (void*)(2));
+  sus_activar->callback((Fl_Callback*)cb_sus_activar);
   sus_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   sus_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

@@ -180,7 +180,7 @@ this->when(FL_WHEN_RELEASE);
   shifter_activar->labelfont(0);
   shifter_activar->labelsize(10);
   shifter_activar->labelcolor(FL_FOREGROUND_COLOR);
-  shifter_activar->callback((Fl_Callback*)cb_shifter_activar, (void*)(2));
+  shifter_activar->callback((Fl_Callback*)cb_shifter_activar);
   shifter_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   shifter_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -332,7 +332,7 @@ this->when(FL_WHEN_RELEASE);
   shifter_ud->labelfont(0);
   shifter_ud->labelsize(10);
   shifter_ud->labelcolor(FL_BACKGROUND2_COLOR);
-  shifter_ud->callback((Fl_Callback*)cb_shifter_ud, (void*)(2));
+  shifter_ud->callback((Fl_Callback*)cb_shifter_ud);
   shifter_ud->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   shifter_ud->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* shifter_ud

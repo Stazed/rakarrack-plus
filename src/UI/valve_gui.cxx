@@ -195,7 +195,7 @@ this->when(FL_WHEN_RELEASE);
   valve_activar->labelfont(0);
   valve_activar->labelsize(10);
   valve_activar->labelcolor(FL_FOREGROUND_COLOR);
-  valve_activar->callback((Fl_Callback*)cb_valve_activar, (void*)(2));
+  valve_activar->callback((Fl_Callback*)cb_valve_activar);
   valve_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   valve_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -307,7 +307,7 @@ this->when(FL_WHEN_RELEASE);
   valve_ed->labelfont(0);
   valve_ed->labelsize(10);
   valve_ed->labelcolor(FL_BACKGROUND2_COLOR);
-  valve_ed->callback((Fl_Callback*)cb_valve_ed, (void*)(2));
+  valve_ed->callback((Fl_Callback*)cb_valve_ed);
   valve_ed->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   valve_ed->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* valve_ed
@@ -353,7 +353,7 @@ this->when(FL_WHEN_RELEASE);
   valve_pf->labelfont(0);
   valve_pf->labelsize(10);
   valve_pf->labelcolor(FL_BACKGROUND2_COLOR);
-  valve_pf->callback((Fl_Callback*)cb_valve_pf, (void*)(2));
+  valve_pf->callback((Fl_Callback*)cb_valve_pf);
   valve_pf->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   valve_pf->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* valve_pf
@@ -366,7 +366,7 @@ this->when(FL_WHEN_RELEASE);
   valve_st->labelfont(0);
   valve_st->labelsize(10);
   valve_st->labelcolor(FL_BACKGROUND2_COLOR);
-  valve_st->callback((Fl_Callback*)cb_valve_st, (void*)(2));
+  valve_st->callback((Fl_Callback*)cb_valve_st);
   valve_st->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   valve_st->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* valve_st
@@ -379,7 +379,7 @@ this->when(FL_WHEN_RELEASE);
   valve_neg->labelfont(0);
   valve_neg->labelsize(10);
   valve_neg->labelcolor(FL_BACKGROUND2_COLOR);
-  valve_neg->callback((Fl_Callback*)cb_valve_neg, (void*)(2));
+  valve_neg->callback((Fl_Callback*)cb_valve_neg);
   valve_neg->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   valve_neg->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* valve_neg

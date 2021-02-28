@@ -151,7 +151,7 @@ this->when(FL_WHEN_RELEASE);
   compress_activar->labelfont(0);
   compress_activar->labelsize(10);
   compress_activar->labelcolor(FL_FOREGROUND_COLOR);
-  compress_activar->callback((Fl_Callback*)cb_compress_activar, (void*)(2));
+  compress_activar->callback((Fl_Callback*)cb_compress_activar);
   compress_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   compress_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -288,7 +288,7 @@ this->when(FL_WHEN_RELEASE);
   Auto_Output->labelfont(0);
   Auto_Output->labelsize(10);
   Auto_Output->labelcolor(FL_BACKGROUND2_COLOR);
-  Auto_Output->callback((Fl_Callback*)cb_Auto_Output, (void*)(2));
+  Auto_Output->callback((Fl_Callback*)cb_Auto_Output);
   Auto_Output->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   Auto_Output->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* Auto_Output
@@ -303,7 +303,7 @@ R average.");
   Stereo->labelfont(0);
   Stereo->labelsize(10);
   Stereo->labelcolor(FL_BACKGROUND2_COLOR);
-  Stereo->callback((Fl_Callback*)cb_Stereo, (void*)(2));
+  Stereo->callback((Fl_Callback*)cb_Stereo);
   Stereo->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   Stereo->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* Stereo
@@ -317,7 +317,7 @@ R average.");
   Peak->labelfont(0);
   Peak->labelsize(10);
   Peak->labelcolor(FL_BACKGROUND2_COLOR);
-  Peak->callback((Fl_Callback*)cb_Peak, (void*)(2));
+  Peak->callback((Fl_Callback*)cb_Peak);
   Peak->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   Peak->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* Peak

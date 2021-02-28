@@ -256,7 +256,7 @@ this->when(FL_WHEN_RELEASE);
   seq_activar->labelfont(0);
   seq_activar->labelsize(10);
   seq_activar->labelcolor(FL_FOREGROUND_COLOR);
-  seq_activar->callback((Fl_Callback*)cb_seq_activar, (void*)(2));
+  seq_activar->callback((Fl_Callback*)cb_seq_activar);
   seq_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   seq_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -484,7 +484,7 @@ this->when(FL_WHEN_RELEASE);
   seq_amp->labelfont(0);
   seq_amp->labelsize(10);
   seq_amp->labelcolor(FL_BACKGROUND2_COLOR);
-  seq_amp->callback((Fl_Callback*)cb_seq_amp, (void*)(2));
+  seq_amp->callback((Fl_Callback*)cb_seq_amp);
   seq_amp->align(Fl_Align(FL_ALIGN_TOP_LEFT));
   seq_amp->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* seq_amp

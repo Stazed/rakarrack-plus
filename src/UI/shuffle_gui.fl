@@ -23,7 +23,6 @@ widget_class ShuffleGui {open selected
 } {
   Fl_Light_Button shuffle_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -186,7 +185,6 @@ m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_Width,(int)o->value());}
   }
   Fl_Check_Button shuffle_E {
     label Rev
-    user_data 2
     callback {m_process->Rack_Effects[EFX_SHUFFLE]->changepar(Shuffle_F_Band,(int)o->value());}
     tooltip {Filtered Band - (Uncheck = Mid: Check = Side)} xywh {2 167 40 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

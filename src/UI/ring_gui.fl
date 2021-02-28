@@ -23,7 +23,6 @@ widget_class RingGui {open selected
 } {
   Fl_Light_Button ring_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -135,14 +134,12 @@ m_process->Rack_Effects[EFX_RING]->changepar(Ring_Pan,(int)o->value());}
   }
   Fl_Check_Button ring_st {
     label Stereo
-    user_data 2
     callback {m_process->Rack_Effects[EFX_RING]->changepar(Ring_Stereo,(int)o->value());}
     xywh {28 92 52 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button ring_afreq {
     label {Auto Freq}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_RING]->changepar(Ring_Auto_Freq,(int)o->value());}
     xywh {80 92 69 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

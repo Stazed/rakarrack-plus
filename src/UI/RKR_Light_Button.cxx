@@ -33,7 +33,6 @@ RKR_Light_Button::RKR_Light_Button(int X, int Y, int W, int H, const char *label
     m_start_height(H),
     m_look_changed(0)
 {
-    this->user_data((void*)(LIGHT_BUTTON_USER_DATA));
 }
 
 void RKR_Light_Button::draw()

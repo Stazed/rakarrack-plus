@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} OtremGui {open selected
 } {
   Fl_Light_Button otrem_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -153,7 +152,6 @@ m_process->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_Pan,(int)(o->value()
   }
   Fl_Check_Button otrem_invert {
     label Invert
-    user_data 2
     callback {m_process->Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_Invert,(int)o->value())}
     tooltip {If checked it behaves more like tube preamp trem. If unchecked it behaves like a stompbox Opto Trem} xywh {49 164 73 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

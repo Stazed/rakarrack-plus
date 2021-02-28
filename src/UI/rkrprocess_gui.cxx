@@ -3598,13 +3598,11 @@ void RKRGUI::Prep_Reorden(int source, int dest)
 
 void RKRGUI::bank_click(Fl_Choice* o, void* v)
 {
-    // Bank click
     ((RKRGUI*) (o->parent()->parent()->parent()->parent()->user_data()))->bank_click_i(o, v);
 }
 
 inline void RKRGUI::bank_click_i(Fl_Choice* o, void*)
 {
-    // bank_click_i
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
@@ -3614,13 +3612,11 @@ inline void RKRGUI::bank_click_i(Fl_Choice* o, void*)
 
 void RKRGUI::p_click(Fl_Choice* o, void* v)
 {
-    // p_click
     ((RKRGUI*) (o->parent()->parent()->parent()->parent()->user_data()))->p_click_i(o, v);
 }
 
 inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
 {
-    // p_click_i
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 

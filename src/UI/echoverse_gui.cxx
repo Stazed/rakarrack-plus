@@ -174,7 +174,7 @@ this->when(FL_WHEN_RELEASE);
   echoverse_activar->labelfont(0);
   echoverse_activar->labelsize(10);
   echoverse_activar->labelcolor(FL_FOREGROUND_COLOR);
-  echoverse_activar->callback((Fl_Callback*)cb_echoverse_activar, (void*)(2));
+  echoverse_activar->callback((Fl_Callback*)cb_echoverse_activar);
   echoverse_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   echoverse_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

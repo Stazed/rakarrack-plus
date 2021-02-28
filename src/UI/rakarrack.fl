@@ -1043,7 +1043,6 @@ Fl::focus(Open_Order);}
       } {
         Fl_Light_Button tuner_activar {
           label On
-          user_data 2
           callback {m_process->Tuner_Bypass=(int)o->value();
 tuner_bar->value(-32);
 WNote->copy_label("");
@@ -1093,7 +1092,6 @@ TUNER_LABEL->redraw_label();}
       } {
         Fl_Light_Button ActivarGeneral {
           label {FX On}
-          user_data 2
           callback {m_process->Bypass=o->value();
 m_process->val_il_sum=-50.0;
 m_process->val_ir_sum=-50.0;
@@ -1218,7 +1216,6 @@ m_process->calculavol(2);}
       } {
         Fl_Light_Button metro_activar {
           label On
-          user_data 2
           callback {if ((int)o->value()==0)
 { 
   Metro_Led->color(fl_darker(FL_RED));
@@ -1585,7 +1582,6 @@ Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsi
       } {
         Fl_Light_Button Tap_activar {
           label On
-          user_data 2
           callback {m_process->Tap_Bypass = (int)o->value();
 if(m_process->Tap_Bypass) m_process->TapTempo_Timeout(0);
 ChangeActives();

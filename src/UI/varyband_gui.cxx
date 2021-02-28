@@ -242,7 +242,7 @@ this->when(FL_WHEN_RELEASE);
   varyband_activar->labelfont(0);
   varyband_activar->labelsize(10);
   varyband_activar->labelcolor(FL_FOREGROUND_COLOR);
-  varyband_activar->callback((Fl_Callback*)cb_varyband_activar, (void*)(2));
+  varyband_activar->callback((Fl_Callback*)cb_varyband_activar);
   varyband_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   varyband_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

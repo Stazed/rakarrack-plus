@@ -167,7 +167,7 @@ this->when(FL_WHEN_RELEASE);
   echo_activar->labelfont(0);
   echo_activar->labelsize(10);
   echo_activar->labelcolor(FL_FOREGROUND_COLOR);
-  echo_activar->callback((Fl_Callback*)cb_echo_activar, (void*)(2));
+  echo_activar->callback((Fl_Callback*)cb_echo_activar);
   echo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   echo_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -313,7 +313,7 @@ this->when(FL_WHEN_RELEASE);
   echo_direct->labelfont(0);
   echo_direct->labelsize(10);
   echo_direct->labelcolor(FL_BACKGROUND2_COLOR);
-  echo_direct->callback((Fl_Callback*)cb_echo_direct, (void*)(2));
+  echo_direct->callback((Fl_Callback*)cb_echo_direct);
   echo_direct->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   echo_direct->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* echo_direct

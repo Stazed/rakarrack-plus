@@ -24,7 +24,6 @@ widget_class {\#include "common_gui_menu.h"} DerelictGui {open selected
 } {
   Fl_Light_Button derelict_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -126,7 +125,6 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Type,(int)o->value());}
   } {}
   Fl_Check_Button derelict_neg {
     label {Neg.}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Negate,(int)o->value());}
     xywh {110 84 42 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
@@ -166,7 +164,6 @@ m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Pan,(int)(o->value()+64));
   }
   Fl_Check_Button derelict_pf {
     label {Pre Filter}
-    user_data 2
     callback {m_process->Rack_Effects[EFX_DERELICT]->changepar(Dere_Prefilter,(int)o->value());}
     xywh {50 144 66 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

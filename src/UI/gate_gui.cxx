@@ -140,7 +140,7 @@ this->when(FL_WHEN_RELEASE);
   gate_activar->labelfont(0);
   gate_activar->labelsize(10);
   gate_activar->labelcolor(FL_FOREGROUND_COLOR);
-  gate_activar->callback((Fl_Callback*)cb_gate_activar, (void*)(2));
+  gate_activar->callback((Fl_Callback*)cb_gate_activar);
   gate_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   gate_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

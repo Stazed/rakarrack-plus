@@ -27,7 +27,6 @@ widget_class {\#include "common_gui_menu.h"} PhaserGui {open selected
 } {
   Fl_Light_Button phaser_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -141,7 +140,6 @@ m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Type,(int)o->value());
   } {}
   Fl_Check_Button phaser_subs {
     label Subtract
-    user_data 2
     callback {m_process->Rack_Effects[EFX_PHASER]->changepar(Phaser_Subtract,(int)o->value())}
     xywh {40 94 65 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

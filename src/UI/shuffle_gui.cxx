@@ -187,7 +187,7 @@ this->when(FL_WHEN_RELEASE);
   shuffle_activar->labelfont(0);
   shuffle_activar->labelsize(10);
   shuffle_activar->labelcolor(FL_FOREGROUND_COLOR);
-  shuffle_activar->callback((Fl_Callback*)cb_shuffle_activar, (void*)(2));
+  shuffle_activar->callback((Fl_Callback*)cb_shuffle_activar);
   shuffle_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   shuffle_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -394,7 +394,7 @@ this->when(FL_WHEN_RELEASE);
   shuffle_E->labelfont(0);
   shuffle_E->labelsize(10);
   shuffle_E->labelcolor(FL_BACKGROUND2_COLOR);
-  shuffle_E->callback((Fl_Callback*)cb_shuffle_E, (void*)(2));
+  shuffle_E->callback((Fl_Callback*)cb_shuffle_E);
   shuffle_E->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   shuffle_E->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* shuffle_E

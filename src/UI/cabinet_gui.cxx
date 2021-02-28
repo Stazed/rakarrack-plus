@@ -70,7 +70,7 @@ this->when(FL_WHEN_RELEASE);
   Cabinet_activar->labelfont(0);
   Cabinet_activar->labelsize(10);
   Cabinet_activar->labelcolor(FL_FOREGROUND_COLOR);
-  Cabinet_activar->callback((Fl_Callback*)cb_Cabinet_activar, (void*)(2));
+  Cabinet_activar->callback((Fl_Callback*)cb_Cabinet_activar);
   Cabinet_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   Cabinet_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

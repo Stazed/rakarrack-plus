@@ -23,7 +23,6 @@ widget_class EchoGui {open selected
 } {
   Fl_Light_Button echo_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -169,7 +168,6 @@ m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Feedback,(int)o->value());}
   }
   Fl_Check_Button echo_direct {
     label Direct
-    user_data 2
     callback {m_process->Rack_Effects[EFX_ECHO]->changepar(Echo_Direct,(int)o->value());}
     xywh {51 148 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button

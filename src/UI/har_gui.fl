@@ -23,7 +23,6 @@ widget_class HarGui {open selected
 } {
   Fl_Light_Button har_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -152,7 +151,6 @@ m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Filter_Q,(int)(o->value(
   }
   Fl_Check_Button har_MIDI {
     label MIDI
-    user_data 2
     callback {m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_MIDI,(int)o->value());
 m_process->RC_Harm->cleanup();
 if(!(int)o->value())m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval,m_process->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval));}
@@ -161,7 +159,6 @@ if(!(int)o->value())m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Inte
   }
   Fl_Check_Button har_SELECT {
     label SELECT
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Harm_Select);

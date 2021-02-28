@@ -214,7 +214,7 @@ this->when(FL_WHEN_RELEASE);
   cband_activar->labelfont(0);
   cband_activar->labelsize(10);
   cband_activar->labelcolor(FL_FOREGROUND_COLOR);
-  cband_activar->callback((Fl_Callback*)cb_cband_activar, (void*)(2));
+  cband_activar->callback((Fl_Callback*)cb_cband_activar);
   cband_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   cband_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;

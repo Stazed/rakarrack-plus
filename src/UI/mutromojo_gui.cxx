@@ -296,7 +296,7 @@ this->when(FL_WHEN_RELEASE);
   mutromojo_activar->labelfont(0);
   mutromojo_activar->labelsize(10);
   mutromojo_activar->labelcolor(FL_FOREGROUND_COLOR);
-  mutromojo_activar->callback((Fl_Callback*)cb_mutromojo_activar, (void*)(2));
+  mutromojo_activar->callback((Fl_Callback*)cb_mutromojo_activar);
   mutromojo_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   mutromojo_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -344,7 +344,7 @@ this->when(FL_WHEN_RELEASE);
   mutromojo_qm->labelfont(0);
   mutromojo_qm->labelsize(10);
   mutromojo_qm->labelcolor(FL_BACKGROUND2_COLOR);
-  mutromojo_qm->callback((Fl_Callback*)cb_mutromojo_qm, (void*)(2));
+  mutromojo_qm->callback((Fl_Callback*)cb_mutromojo_qm);
   mutromojo_qm->align(Fl_Align(FL_ALIGN_LEFT));
   mutromojo_qm->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* mutromojo_qm
@@ -376,7 +376,7 @@ this->when(FL_WHEN_RELEASE);
   mutromojo_nat->labelfont(0);
   mutromojo_nat->labelsize(10);
   mutromojo_nat->labelcolor(FL_BACKGROUND2_COLOR);
-  mutromojo_nat->callback((Fl_Callback*)cb_mutromojo_nat, (void*)(2));
+  mutromojo_nat->callback((Fl_Callback*)cb_mutromojo_nat);
   mutromojo_nat->align(Fl_Align(FL_ALIGN_LEFT));
   mutromojo_nat->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* mutromojo_nat
@@ -408,7 +408,7 @@ this->when(FL_WHEN_RELEASE);
   mutromojo_res->labelfont(0);
   mutromojo_res->labelsize(10);
   mutromojo_res->labelcolor(FL_BACKGROUND2_COLOR);
-  mutromojo_res->callback((Fl_Callback*)cb_mutromojo_res, (void*)(2));
+  mutromojo_res->callback((Fl_Callback*)cb_mutromojo_res);
   mutromojo_res->align(Fl_Align(FL_ALIGN_LEFT));
   mutromojo_res->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* mutromojo_res

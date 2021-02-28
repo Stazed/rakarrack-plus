@@ -30,7 +30,6 @@ widget_class {\#include "common_gui_menu.h"} MutromojoGui {open selected
 } {
   Fl_Light_Button mutromojo_activar {
     label On
-    user_data 2
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
@@ -105,7 +104,6 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_DryWet,Dry_Wet((int)(o->
   }
   Fl_Check_Button mutromojo_qm {
     label M
-    user_data 2
     callback {MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(m_process->Rack_Effects[EFX_MUTROMOJO]);
 
 if((int)o->value())
@@ -134,7 +132,6 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LowPass,(int)o->value())
   }
   Fl_Check_Button mutromojo_nat {
     label N
-    user_data 2
     callback {MuTroMojo *Efx_MuTroMojo = static_cast<MuTroMojo*>(m_process->Rack_Effects[EFX_MUTROMOJO]);
 
 if((int)o->value())
@@ -163,7 +160,6 @@ m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_BandPass,(int)o->value()
   }
   Fl_Check_Button mutromojo_res {
     label R
-    user_data 2
     callback {m_process->Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_Mod_Res,(int)o->value());}
     tooltip {Modulate Resonance} xywh {18 54 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
     class RKR_Check_Button

@@ -1966,7 +1966,7 @@ void RKRGUI::make_window() {
         tuner_activar->labelfont(0);
         tuner_activar->labelsize(10);
         tuner_activar->labelcolor(FL_FOREGROUND_COLOR);
-        tuner_activar->callback((Fl_Callback*)cb_tuner_activar, (void*)(2));
+        tuner_activar->callback((Fl_Callback*)cb_tuner_activar);
         tuner_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
         tuner_activar->when(FL_WHEN_CHANGED);
       } // RKR_Light_Button* tuner_activar
@@ -2057,7 +2057,7 @@ void RKRGUI::make_window() {
         ActivarGeneral->labelfont(0);
         ActivarGeneral->labelsize(10);
         ActivarGeneral->labelcolor(FL_FOREGROUND_COLOR);
-        ActivarGeneral->callback((Fl_Callback*)cb_ActivarGeneral, (void*)(2));
+        ActivarGeneral->callback((Fl_Callback*)cb_ActivarGeneral);
         ActivarGeneral->align(Fl_Align(68|FL_ALIGN_INSIDE));
         ActivarGeneral->when(FL_WHEN_CHANGED);
       } // RKR_Light_Button* ActivarGeneral
@@ -2239,7 +2239,7 @@ void RKRGUI::make_window() {
         metro_activar->labelfont(0);
         metro_activar->labelsize(10);
         metro_activar->labelcolor(FL_FOREGROUND_COLOR);
-        metro_activar->callback((Fl_Callback*)cb_metro_activar, (void*)(2));
+        metro_activar->callback((Fl_Callback*)cb_metro_activar);
         metro_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
         metro_activar->when(FL_WHEN_CHANGED);
       } // RKR_Light_Button* metro_activar
@@ -2631,7 +2631,7 @@ void RKRGUI::make_window() {
         Tap_activar->labelfont(0);
         Tap_activar->labelsize(10);
         Tap_activar->labelcolor(FL_FOREGROUND_COLOR);
-        Tap_activar->callback((Fl_Callback*)cb_Tap_activar, (void*)(2));
+        Tap_activar->callback((Fl_Callback*)cb_Tap_activar);
         Tap_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
         Tap_activar->when(FL_WHEN_CHANGED);
       } // RKR_Light_Button* Tap_activar

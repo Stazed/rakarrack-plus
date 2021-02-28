@@ -195,7 +195,7 @@ this->when(FL_WHEN_RELEASE);
   flanger_activar->labelfont(0);
   flanger_activar->labelsize(10);
   flanger_activar->labelcolor(FL_FOREGROUND_COLOR);
-  flanger_activar->callback((Fl_Callback*)cb_flanger_activar, (void*)(2));
+  flanger_activar->callback((Fl_Callback*)cb_flanger_activar);
   flanger_activar->align(Fl_Align(68|FL_ALIGN_INSIDE));
   flanger_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
@@ -308,7 +308,7 @@ this->when(FL_WHEN_RELEASE);
   flanger_subs->labelfont(0);
   flanger_subs->labelsize(10);
   flanger_subs->labelcolor(FL_BACKGROUND2_COLOR);
-  flanger_subs->callback((Fl_Callback*)cb_flanger_subs, (void*)(2));
+  flanger_subs->callback((Fl_Callback*)cb_flanger_subs);
   flanger_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   flanger_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* flanger_subs
@@ -321,7 +321,7 @@ this->when(FL_WHEN_RELEASE);
   flanger_awesome->labelfont(0);
   flanger_awesome->labelsize(10);
   flanger_awesome->labelcolor(FL_BACKGROUND2_COLOR);
-  flanger_awesome->callback((Fl_Callback*)cb_flanger_awesome, (void*)(2));
+  flanger_awesome->callback((Fl_Callback*)cb_flanger_awesome);
   flanger_awesome->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   flanger_awesome->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* flanger_awesome

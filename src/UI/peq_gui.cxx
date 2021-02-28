@@ -178,7 +178,7 @@ this->when(FL_WHEN_RELEASE);
   eqp_activar->labelfont(0);
   eqp_activar->labelsize(10);
   eqp_activar->labelcolor(FL_FOREGROUND_COLOR);
-  eqp_activar->callback((Fl_Callback*)cb_eqp_activar, (void*)(2));
+  eqp_activar->callback((Fl_Callback*)cb_eqp_activar);
   eqp_activar->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   eqp_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
