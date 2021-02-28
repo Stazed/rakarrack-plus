@@ -3206,10 +3206,10 @@ int RKRGUI::global_shortcuts(int event)
     if (event == FL_DRAG)
     {
         Fl_Widget *w = Fl::belowmouse();
-        long long k = (long long) w->user_data();
-        if ((k < UD_Label_1) || (k > UD_Label_10))
+        long long widget_user_data = (long long) w->user_data();
+        if ((widget_user_data < UD_Label_1) || (widget_user_data > UD_Label_10))
             return 0;
-        drag = k - UD_Label_1;
+        drag = widget_user_data - UD_Label_1;
         return 1;
     }
 
@@ -3252,11 +3252,11 @@ int RKRGUI::global_shortcuts(int event)
                 return 0;
             }
             
-            long long k = (long long) w->user_data();
+            long long widget_user_data = (long long) w->user_data();
             
-            if ((k > 11999) && (k < 12100))
+            if ((widget_user_data > 11999) && (widget_user_data < 12100))
             {
-                ((RKRGUI*) (w->parent()->parent()->user_data()))->get_insert_preset_name(w, k - 12000);
+                ((RKRGUI*) (w->parent()->parent()->user_data()))->get_insert_preset_name(w, widget_user_data - 12000);
             }
             
             return 1;
@@ -3270,11 +3270,11 @@ int RKRGUI::global_shortcuts(int event)
             {
                 return 0;
             }
-            long long k = (long long) w->user_data();
+            long long widget_user_data = (long long) w->user_data();
             
-            if ((k > 11999) && (k < 12100))
+            if ((widget_user_data > 11999) && (widget_user_data < 12100))
             {
-                ((RKRGUI*) (w->parent()->parent()->user_data()))->delete_insert_preset(w, k - 12000);
+                ((RKRGUI*) (w->parent()->parent()->user_data()))->delete_insert_preset(w, widget_user_data - 12000);
             }
             
             return 1;
@@ -3678,10 +3678,10 @@ void RKRGUI::RandomPreset()
 
         Fl_Widget *w = find_preset_widget(SelEff[i]);
         RKR_Choice *s = (RKR_Choice *) w;
-        long long k = (long long) s->user_data();
+        long long widget_user_data = (long long) s->user_data();
         int Esel = (int) (RND * s->size());
         s->value(Esel);
-        s->do_callback(w, k);
+        s->do_callback(w, widget_user_data);
     }
 
     FillML();
@@ -3699,9 +3699,9 @@ void RKRGUI::drag_effect()
         Fl_Widget *w = Fl::belowmouse();
         if (w != NULL)
         {
-            long long k = (long long) w->user_data();
+            long long widget_user_data = (long long) w->user_data();
 
-            if ((k < UD_Label_1) || (k > UD_Label_10))
+            if ((widget_user_data < UD_Label_1) || (widget_user_data > UD_Label_10))
             {
                 return;
             }
@@ -3709,9 +3709,9 @@ void RKRGUI::drag_effect()
             // w->user_data() is Label in range 770 to 779
             // which is checked above, so this is valid range (10) for
             // m_process->efx_order[C_NUMBER_ORDERED_EFFECTS] used by Prep_Reorden(source, dest)
-            if (drag != (int) k - UD_Label_1)
+            if (drag != (int) widget_user_data - UD_Label_1)
             {
-                Prep_Reorden(drag, (int) k - UD_Label_1);
+                Prep_Reorden(drag, (int) widget_user_data - UD_Label_1);
             }
         }
         drag = C_NO_DRAG;
