@@ -106,7 +106,6 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_2,(int)o->value(
     class RKR_Slider
   }
   Fl_Choice musdelay_delay1 {
-    user_data 12
     callback {m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
 m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_1,o->value()+1);
 if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
@@ -139,7 +138,6 @@ if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     }
   }
   Fl_Choice musdelay_delay3 {
-    user_data 12
     callback {m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
 m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Del_Offset,o->value()+1);
 if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}

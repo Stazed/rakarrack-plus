@@ -553,7 +553,7 @@ this->when(FL_WHEN_RELEASE);
   revtron_fnum->labelcolor(FL_BACKGROUND2_COLOR);
   revtron_fnum->textsize(10);
   revtron_fnum->textcolor(FL_BACKGROUND2_COLOR);
-  revtron_fnum->callback((Fl_Callback*)cb_revtron_fnum, (void*)(12));
+  revtron_fnum->callback((Fl_Callback*)cb_revtron_fnum);
   revtron_fnum->align(Fl_Align(FL_ALIGN_LEFT));
   revtron_fnum->when(FL_WHEN_RELEASE);
   revtron_fnum->menu(menu_revtron_fnum);

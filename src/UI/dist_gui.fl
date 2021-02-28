@@ -116,7 +116,6 @@ m_process->Rack_Effects[EFX_DISTORTION]->changepar(Dist_Level,(int)o->value());}
   }
   Fl_Choice dist_tipo {
     label Type
-    user_data 12
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Dist_Type);

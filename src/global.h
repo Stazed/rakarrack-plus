@@ -341,8 +341,7 @@ enum USER_DATA_index
     // Set in: BankWindowGui::make_window_banks()
     
     
-    UD_Group_Efx            = 1,        // All rack effects, Tuner, InOut, MIDI, Metro, Tap, Presets, Settings Tabs
-    UD_RKR_Choice           = 12,
+    UD_Group_Efx            = 1,        // All rack effects
     
     UD_RKR_Button_Highlight = 77,       // Default button user data for highlighting when mouse moves inside
     

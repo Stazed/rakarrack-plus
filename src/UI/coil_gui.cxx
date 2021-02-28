@@ -235,7 +235,7 @@ this->when(FL_WHEN_RELEASE);
   coil_origin->labelcolor(FL_BACKGROUND2_COLOR);
   coil_origin->textsize(10);
   coil_origin->textcolor(FL_BACKGROUND2_COLOR);
-  coil_origin->callback((Fl_Callback*)cb_coil_origin, (void*)(12));
+  coil_origin->callback((Fl_Callback*)cb_coil_origin);
   coil_origin->align(Fl_Align(FL_ALIGN_LEFT));
   coil_origin->when(FL_WHEN_RELEASE_ALWAYS);
   coil_origin->menu(menu_coil_origin);

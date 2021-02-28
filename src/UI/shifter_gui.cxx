@@ -363,7 +363,7 @@ this->when(FL_WHEN_RELEASE);
   shifter_mode->labelcolor(FL_BACKGROUND2_COLOR);
   shifter_mode->textsize(9);
   shifter_mode->textcolor(FL_BACKGROUND2_COLOR);
-  shifter_mode->callback((Fl_Callback*)cb_shifter_mode, (void*)(12));
+  shifter_mode->callback((Fl_Callback*)cb_shifter_mode);
   shifter_mode->align(Fl_Align(FL_ALIGN_LEFT));
   shifter_mode->when(FL_WHEN_RELEASE);
   shifter_mode->menu(menu_shifter_mode);

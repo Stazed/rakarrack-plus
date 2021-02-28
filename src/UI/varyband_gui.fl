@@ -184,7 +184,6 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_3,(int)o->value(
   }
   Fl_Choice varyband_LB {
     label L
-    user_data 12
     callback {m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Low_Band,(int)o->value());}
     tooltip {Low Band Volume} xywh {11 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}
@@ -210,7 +209,6 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_3,(int)o->value(
   }
   Fl_Choice varyband_MB1 {
     label M
-    user_data 12
     callback {m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Mid_Band_1,(int)o->value());}
     tooltip {Mid Band 1 Volume} xywh {50 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}
@@ -236,7 +234,6 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_3,(int)o->value(
   }
   Fl_Choice varyband_MB2 {
     label M
-    user_data 12
     callback {m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Mid_Band_2,(int)o->value());}
     tooltip {Mid Band 2 Volume} xywh {90 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}
@@ -262,7 +259,6 @@ m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_Cross_3,(int)o->value(
   }
   Fl_Choice varyband_HB {
     label H
-    user_data 12
     callback {m_process->Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_High_Band,(int)o->value());}
     tooltip {High Band Volume} xywh {128 164 27 16} down_box BORDER_BOX selection_color 0 labelsize 8 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-2);}

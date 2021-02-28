@@ -175,7 +175,6 @@ m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Whammy,(int)o->value());
   }
   Fl_Choice shifter_mode {
     label Mode
-    user_data 12
     callback {m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Mode,(int)o->value())}
     xywh {43 165 78 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-1);}

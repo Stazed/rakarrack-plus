@@ -557,7 +557,7 @@ this->when(FL_WHEN_RELEASE);
   echotron_fnum->labelcolor(FL_BACKGROUND2_COLOR);
   echotron_fnum->textsize(10);
   echotron_fnum->textcolor(FL_BACKGROUND2_COLOR);
-  echotron_fnum->callback((Fl_Callback*)cb_echotron_fnum, (void*)(12));
+  echotron_fnum->callback((Fl_Callback*)cb_echotron_fnum);
   echotron_fnum->align(Fl_Align(FL_ALIGN_LEFT));
   echotron_fnum->when(FL_WHEN_RELEASE);
   echotron_fnum->menu(menu_echotron_fnum);

@@ -140,7 +140,6 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_Tempo,(int)o->value());}
   }
   Fl_Choice arpie_subdiv {
     label SubDivision
-    user_data 12
     callback {m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_Subdivision,(int)o->value());} open
     xywh {78 82 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {o->menu(m_subdiv_menu->get_subdiv_type());}
@@ -198,7 +197,6 @@ m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_Damp,(int)o->value());}
     class RKR_Counter
   }
   Fl_Choice arpie_pattern {
-    user_data 12
     callback {m_process->Rack_Effects[EFX_ARPIE]->changepar(Arpie_Pattern,(int)o->value());}
     xywh {77 147 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     class RKR_Choice

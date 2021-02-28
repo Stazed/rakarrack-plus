@@ -2249,7 +2249,7 @@ void RKRGUI::make_window() {
         MetroBar->labelcolor(FL_BACKGROUND2_COLOR);
         MetroBar->textsize(10);
         MetroBar->textcolor(FL_BACKGROUND2_COLOR);
-        MetroBar->callback((Fl_Callback*)cb_MetroBar, (void*)(12));
+        MetroBar->callback((Fl_Callback*)cb_MetroBar);
         MetroBar->align(Fl_Align(FL_ALIGN_LEFT));
         MetroBar->when(FL_WHEN_RELEASE);
         o->menu(m_looper_bar->get_time_sig());
@@ -2286,7 +2286,7 @@ void RKRGUI::make_window() {
         MetroSound->labelcolor(FL_BACKGROUND2_COLOR);
         MetroSound->textsize(10);
         MetroSound->textcolor(FL_BACKGROUND2_COLOR);
-        MetroSound->callback((Fl_Callback*)cb_MetroSound, (void*)(12));
+        MetroSound->callback((Fl_Callback*)cb_MetroSound);
         MetroSound->align(Fl_Align(FL_ALIGN_LEFT));
         MetroSound->when(FL_WHEN_RELEASE);
         o->menu(m_looper_ms->get_metronome_sound());
@@ -2638,7 +2638,7 @@ void RKRGUI::make_window() {
         T_SEL->labelcolor(FL_BACKGROUND2_COLOR);
         T_SEL->textsize(10);
         T_SEL->textcolor(FL_BACKGROUND2_COLOR);
-        T_SEL->callback((Fl_Callback*)cb_T_SEL, (void*)(12));
+        T_SEL->callback((Fl_Callback*)cb_T_SEL);
         T_SEL->align(Fl_Align(FL_ALIGN_LEFT));
         T_SEL->when(FL_WHEN_RELEASE);
         T_SEL->menu(menu_T_SEL);
@@ -2655,7 +2655,7 @@ void RKRGUI::make_window() {
         T_SET->labelcolor(FL_BACKGROUND2_COLOR);
         T_SET->textsize(10);
         T_SET->textcolor(FL_BACKGROUND2_COLOR);
-        T_SET->callback((Fl_Callback*)cb_T_SET, (void*)(12));
+        T_SET->callback((Fl_Callback*)cb_T_SET);
         T_SET->align(Fl_Align(FL_ALIGN_LEFT));
         T_SET->when(FL_WHEN_RELEASE);
         T_SET->menu(menu_T_SET);

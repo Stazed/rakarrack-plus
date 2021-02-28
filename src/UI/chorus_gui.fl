@@ -120,7 +120,6 @@ m_process->Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Random,(int)o->value()
   }
   Fl_Choice chorus_lfotype {
     label {LFO Type}
-    user_data 12
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Chorus_LFO_Type);

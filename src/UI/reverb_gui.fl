@@ -162,7 +162,6 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Delay_FB,(int)o->value());
   }
   Fl_Choice reverb_type {
     label Type
-    user_data 12
     callback {m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Type,(int)o->value());}
     xywh {62 92 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice

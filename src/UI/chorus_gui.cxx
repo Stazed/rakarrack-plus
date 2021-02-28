@@ -295,7 +295,7 @@ this->when(FL_WHEN_RELEASE);
   chorus_lfotype->labelcolor(FL_BACKGROUND2_COLOR);
   chorus_lfotype->textsize(10);
   chorus_lfotype->textcolor(FL_BACKGROUND2_COLOR);
-  chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype, (void*)(12));
+  chorus_lfotype->callback((Fl_Callback*)cb_chorus_lfotype);
   chorus_lfotype->align(Fl_Align(FL_ALIGN_LEFT));
   chorus_lfotype->when(FL_WHEN_RELEASE);
   o->menu(m_lfo_menu->get_lfo_type());

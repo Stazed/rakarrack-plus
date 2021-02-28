@@ -1228,7 +1228,6 @@ Metro_Label->redraw_label();}
         }
         Fl_Choice MetroBar {
           label {Time Sig.}
-          user_data 12
           callback {m_process->M_Metro_Bar=(int)o->value();
 
 switch(m_process->M_Metro_Bar)
@@ -1276,7 +1275,6 @@ switch(m_process->M_Metro_Bar)
         }
         Fl_Choice MetroSound {
           label S
-          user_data 12
           callback {m_process->M_Metro_Sound=(int)o->value();
 
 switch(m_process->M_Metro_Sound)
@@ -1582,7 +1580,6 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Choice T_SEL {
           label Input
-          user_data 12
           callback {m_process->Tap_Selection=(int)o->value();}
           xywh {600 145 87 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->set_text_offset(-1);}
@@ -1611,7 +1608,6 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Choice T_SET {
           label Set
-          user_data 12
           callback {m_process->Tap_SetValue=(int)o->value();}
           xywh {714 145 76 15} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->set_text_offset(-1);}

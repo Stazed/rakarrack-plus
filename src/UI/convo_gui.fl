@@ -167,7 +167,6 @@ if(!Efx_Convolotron->setfile(USERFILE))
   }
   Fl_Choice convo_fnum {
     label Preset
-    user_data 12
     callback {m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Set_File,(int)o->value());}
     xywh {51 159 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice

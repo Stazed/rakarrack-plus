@@ -256,7 +256,6 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps,(int)o->value());
   }
   Fl_Choice echotron_fnum {
     label File
-    user_data 12
     callback {m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Set_File,(int)o->value());
 echotron_length->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
 

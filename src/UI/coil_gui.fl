@@ -85,7 +85,6 @@ m_process->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Tone,(int)o->value());}
   }
   Fl_Choice coil_origin {
     label Origin
-    user_data 12
     callback {m_process->Rack_Effects[EFX_COILCRAFTER]->changepar(Coil_Origin,(int)o->value());
 coil_freq1->value(m_process->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Freq_1));
 coil_q1->value(m_process->Rack_Effects[EFX_COILCRAFTER]->getpar(Coil_Q_1));}

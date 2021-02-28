@@ -3,12 +3,11 @@ version 1.0304
 header_name {.h}
 code_name {.cxx}
 widget_class CommonGuiMenu {
-  user_data 1 open selected
-  xywh {1033 102 217 185} type Double box UP_BOX color 0 selection_color 0 align 112 visible position_relative
+  user_data 1 open
+  xywh {1033 102 215 185} type Double box UP_BOX color 0 selection_color 0 align 112 visible position_relative
 } {
   Fl_Choice subdiv_type {
     label SubDivision
-    user_data 12
     xywh {97 42 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -38,7 +37,6 @@ widget_class CommonGuiMenu {
   }
   Fl_Choice lfo_type {
     label {LFO Type}
-    user_data 12
     xywh {101 70 72 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
   } {
     MenuItem {} {
@@ -46,7 +44,7 @@ widget_class CommonGuiMenu {
       xywh {102 102 36 21} labelsize 10
     }
     MenuItem {} {
-      label Tri
+      label Triangle
       xywh {102 102 36 21} labelsize 10
     }
     MenuItem {} {
@@ -62,11 +60,11 @@ widget_class CommonGuiMenu {
       xywh {60 60 36 21} labelsize 9
     }
     MenuItem {} {
-      label {M. Sqare}
+      label {M. Square}
       xywh {50 50 36 21} labelsize 9
     }
     MenuItem {} {
-      label {M.Saw}
+      label {M. Saw}
       xywh {50 50 36 21} labelsize 9
     }
     MenuItem {} {
@@ -92,13 +90,12 @@ widget_class CommonGuiMenu {
   }
   Fl_Choice distortion_type {
     label {Distortion Type}
-    user_data 12
     xywh {102 98 70 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
   } {
     MenuItem {} {
       label Atan
-      comment {The dist_tipo menu items are used by distortion, overdrive, derelict NEWDIST, and distband.
-If any of these menu items change here, then they must be changed in the others.}
+      comment {The dist_tipo menu items are used by distortion, overdrive, derelict, and distband.
+If any of these menu items change here, then they must be changed in the others.} selected
       xywh {42 42 36 21} labelsize 9
     }
     MenuItem {} {
@@ -278,7 +275,7 @@ If any of these menu items change here, then they must be changed in the others.
     code {return menu_distortion_type;} {}
   }
   Function {get_lfo_type()} {
-    comment {Common menu lfo types used by many efx.} open C return_type {Fl_Menu_Item *}
+    comment {Common menu types used by many efx.} open C return_type {Fl_Menu_Item *}
   } {
     code {return menu_lfo_type;} {}
   }

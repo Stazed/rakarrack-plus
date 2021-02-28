@@ -286,7 +286,7 @@ this->when(FL_WHEN_RELEASE);
   dist_tipo->labelcolor(FL_BACKGROUND2_COLOR);
   dist_tipo->textsize(10);
   dist_tipo->textcolor(FL_BACKGROUND2_COLOR);
-  dist_tipo->callback((Fl_Callback*)cb_dist_tipo, (void*)(12));
+  dist_tipo->callback((Fl_Callback*)cb_dist_tipo);
   dist_tipo->align(Fl_Align(FL_ALIGN_LEFT));
   dist_tipo->when(FL_WHEN_RELEASE);
   o->menu(m_dist_menu->get_distortion_type());

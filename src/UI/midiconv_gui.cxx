@@ -122,7 +122,7 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   MIDIOctave->labelcolor(FL_BACKGROUND2_COLOR);
   MIDIOctave->textsize(10);
   MIDIOctave->textcolor(FL_BACKGROUND2_COLOR);
-  MIDIOctave->callback((Fl_Callback*)cb_MIDIOctave, (void*)(12));
+  MIDIOctave->callback((Fl_Callback*)cb_MIDIOctave);
   MIDIOctave->align(Fl_Align(FL_ALIGN_LEFT));
   MIDIOctave->when(FL_WHEN_CHANGED);
   MIDIOctave->menu(menu_MIDIOctave);

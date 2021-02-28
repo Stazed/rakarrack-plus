@@ -151,7 +151,6 @@ m_process->Rack_Effects[EFX_STOMPBOX]->changepar(Stomp_Tone,(int)o->value());}
   }
   Fl_Choice stomp_mode {
     label Mode
-    user_data 12
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Stomp_Mode);

@@ -356,7 +356,7 @@ this->when(FL_WHEN_RELEASE);
   convo_fnum->labelcolor(FL_BACKGROUND2_COLOR);
   convo_fnum->textsize(10);
   convo_fnum->textcolor(FL_BACKGROUND2_COLOR);
-  convo_fnum->callback((Fl_Callback*)cb_convo_fnum, (void*)(12));
+  convo_fnum->callback((Fl_Callback*)cb_convo_fnum);
   convo_fnum->align(Fl_Align(FL_ALIGN_LEFT));
   convo_fnum->when(FL_WHEN_RELEASE);
   convo_fnum->menu(menu_convo_fnum);

@@ -317,7 +317,7 @@ this->when(FL_WHEN_RELEASE);
   reverb_type->labelcolor(FL_BACKGROUND2_COLOR);
   reverb_type->textsize(10);
   reverb_type->textcolor(FL_BACKGROUND2_COLOR);
-  reverb_type->callback((Fl_Callback*)cb_reverb_type, (void*)(12));
+  reverb_type->callback((Fl_Callback*)cb_reverb_type);
   reverb_type->align(Fl_Align(FL_ALIGN_LEFT));
   reverb_type->when(FL_WHEN_RELEASE);
   reverb_type->menu(menu_reverb_type);

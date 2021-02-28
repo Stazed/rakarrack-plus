@@ -267,7 +267,7 @@ this->when(FL_WHEN_RELEASE);
   stomp_mode->labelcolor(FL_BACKGROUND2_COLOR);
   stomp_mode->textsize(10);
   stomp_mode->textcolor(FL_BACKGROUND2_COLOR);
-  stomp_mode->callback((Fl_Callback*)cb_stomp_mode, (void*)(12));
+  stomp_mode->callback((Fl_Callback*)cb_stomp_mode);
   stomp_mode->align(Fl_Align(FL_ALIGN_LEFT));
   stomp_mode->when(FL_WHEN_RELEASE);
   stomp_mode->menu(menu_stomp_mode);

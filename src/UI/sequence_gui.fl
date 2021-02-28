@@ -237,7 +237,6 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());
   }
   Fl_Choice seq_mode {
     label M
-    user_data 12
     callback {m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Mode,(int)o->value())}
     tooltip {Modulation Mode} xywh {90 169 62 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-1);}
@@ -283,7 +282,6 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());
   }
   Fl_Choice seq_range {
     label R
-    user_data 12
     callback {m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Range,(int)o->value()+1)}
     tooltip {Step Adjustment Range} xywh {16 169 57 13} down_box BORDER_BOX labelsize 9 labelcolor 7 textsize 9 textcolor 7
     code0 {o->set_label_offset(-1);}

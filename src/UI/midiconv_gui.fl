@@ -49,7 +49,6 @@ m_parent= _rgui;} {}
   }
   Fl_Choice MIDIOctave {
     label Octave
-    user_data 12
     callback {switch((int)o->value())
 {
   case 0:

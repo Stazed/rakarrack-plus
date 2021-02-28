@@ -98,7 +98,6 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   subdiv_type->labelcolor(FL_BACKGROUND2_COLOR);
   subdiv_type->textsize(10);
   subdiv_type->textcolor(FL_BACKGROUND2_COLOR);
-  subdiv_type->user_data((void*)(12));
   subdiv_type->when(FL_WHEN_RELEASE_ALWAYS);
   subdiv_type->menu(menu_subdiv_type);
 } // Fl_Choice* subdiv_type
@@ -109,7 +108,6 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   lfo_type->labelcolor(FL_BACKGROUND2_COLOR);
   lfo_type->textsize(10);
   lfo_type->textcolor(FL_BACKGROUND2_COLOR);
-  lfo_type->user_data((void*)(12));
   lfo_type->menu(menu_lfo_type);
 } // Fl_Choice* lfo_type
 { distortion_type = new Fl_Choice(102, 98, 70, 16, "Distortion Type");
@@ -119,7 +117,6 @@ this->align(Fl_Align(96|FL_ALIGN_INSIDE));
   distortion_type->labelcolor(FL_BACKGROUND2_COLOR);
   distortion_type->textsize(10);
   distortion_type->textcolor(FL_BACKGROUND2_COLOR);
-  distortion_type->user_data((void*)(12));
   distortion_type->menu(menu_distortion_type);
 } // Fl_Choice* distortion_type
 { time_sig = new Fl_Choice(132, 126, 40, 15, "Time Sig.");
