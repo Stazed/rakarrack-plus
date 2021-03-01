@@ -214,7 +214,7 @@ m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Band_8,(int)o->value()
   Fl_Check_Button infinity_rev {
     label Reverse
     callback {m_process->Rack_Effects[EFX_INFINITY]->changepar(Infinity_Reverse,(int)o->value());}
-    tooltip {Reverse Left Channel Sweep} xywh {53 94 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7 align 4
+    tooltip {Reverse Left Channel Sweep} xywh {5 94 59 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Counter infinity_stages {

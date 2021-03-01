@@ -279,7 +279,7 @@ this->when(FL_WHEN_RELEASE);
   compress_output->align(Fl_Align(FL_ALIGN_LEFT));
   compress_output->when(FL_WHEN_CHANGED);
 } // RKR_Slider* compress_output
-{ Auto_Output = new RKR_Check_Button(19, 166, 15, 15, "Auto Output");
+{ Auto_Output = new RKR_Check_Button(19, 166, 77, 15, "Auto Output");
   Auto_Output->box(FL_NO_BOX);
   Auto_Output->down_box(FL_BORDER_BOX);
   Auto_Output->color(FL_BACKGROUND_COLOR);
@@ -292,7 +292,7 @@ this->when(FL_WHEN_RELEASE);
   Auto_Output->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   Auto_Output->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* Auto_Output
-{ Stereo = new RKR_Check_Button(104, 166, 15, 15, "Stereo");
+{ Stereo = new RKR_Check_Button(104, 166, 50, 15, "Stereo");
   Stereo->tooltip("Level detect Left and Right separately.  Unchecked compresses according to L/\
 R average.");
   Stereo->box(FL_NO_BOX);
@@ -307,7 +307,7 @@ R average.");
   Stereo->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   Stereo->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* Stereo
-{ Peak = new RKR_Check_Button(19, 153, 15, 15, "Peak");
+{ Peak = new RKR_Check_Button(19, 153, 45, 15, "Peak");
   Peak->tooltip("Peak Mode Compression");
   Peak->box(FL_NO_BOX);
   Peak->down_box(FL_BORDER_BOX);

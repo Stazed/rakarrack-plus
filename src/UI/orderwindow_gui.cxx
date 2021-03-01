@@ -394,7 +394,7 @@ this->when(FL_WHEN_RELEASE);
   } // RKR_Button* Fil128
   Filters->end();
 } // Fl_Group* Filters
-{ RKR_Check_Button* o = Order_DeacHide = new RKR_Check_Button(420, 286, 23, 20, "Hide Unused Effect Widgets");
+{ RKR_Check_Button* o = Order_DeacHide = new RKR_Check_Button(259, 286, 175, 20, "Hide Unused Effect Widgets");
   Order_DeacHide->box(FL_NO_BOX);
   Order_DeacHide->down_box(FL_DOWN_BOX);
   Order_DeacHide->color(FL_BACKGROUND_COLOR);
@@ -404,7 +404,7 @@ this->when(FL_WHEN_RELEASE);
   Order_DeacHide->labelsize(11);
   Order_DeacHide->labelcolor(FL_BACKGROUND2_COLOR);
   Order_DeacHide->callback((Fl_Callback*)cb_Order_DeacHide);
-  Order_DeacHide->align(Fl_Align(FL_ALIGN_LEFT));
+  Order_DeacHide->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   Order_DeacHide->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Check_Button* Order_DeacHide

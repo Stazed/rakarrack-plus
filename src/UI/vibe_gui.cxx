@@ -378,7 +378,7 @@ this->when(FL_WHEN_RELEASE);
   vibe_pan->align(Fl_Align(FL_ALIGN_LEFT));
   vibe_pan->when(FL_WHEN_CHANGED);
 } // RKR_Slider* vibe_pan
-{ vibe_stereo = new RKR_Check_Button(103, 169, 43, 14, "Stereo");
+{ vibe_stereo = new RKR_Check_Button(103, 169, 52, 14, "Stereo");
   vibe_stereo->box(FL_NO_BOX);
   vibe_stereo->down_box(FL_BORDER_BOX);
   vibe_stereo->color(FL_BACKGROUND_COLOR);

@@ -137,19 +137,19 @@ m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Output,(int)o->value
   Fl_Check_Button Auto_Output {
     label {Auto Output}
     callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Auto_Out,(int)o->value());}
-    xywh {19 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    xywh {19 166 77 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button Stereo {
     label Stereo
     callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Stereo,(int)o->value());}
-    tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {104 166 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip {Level detect Left and Right separately.  Unchecked compresses according to L/R average.} xywh {104 166 50 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button Peak {
     label Peak
     callback {m_process->Rack_Effects[EFX_COMPRESSOR]->changepar(Compress_Peak,(int)o->value());}
-    tooltip {Peak Mode Compression} xywh {19 153 15 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip {Peak Mode Compression} xywh {19 153 45 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Function {parameter_refresh(int index)} {return_type void

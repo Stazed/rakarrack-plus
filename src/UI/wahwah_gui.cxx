@@ -354,7 +354,7 @@ this->when(FL_WHEN_RELEASE);
   WahWah_ampsns->align(Fl_Align(FL_ALIGN_LEFT));
   WahWah_ampsns->when(FL_WHEN_CHANGED);
 } // RKR_Slider* WahWah_ampsns
-{ WahWah_ampsnsinv = new RKR_Check_Button(8, 145, 70, 15, "A.S.I.");
+{ WahWah_ampsnsinv = new RKR_Check_Button(8, 145, 46, 15, "A.S.I.");
   WahWah_ampsnsinv->tooltip("Amplitude Sensitivity Inverse");
   WahWah_ampsnsinv->box(FL_NO_BOX);
   WahWah_ampsnsinv->down_box(FL_BORDER_BOX);

@@ -175,7 +175,7 @@ m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_Sense,(int)o->value());}
  return;
 } 
 m_process->Rack_Effects[EFX_WAHWAH]->changepar(WahWah_ASI,(int)o->value());}
-    tooltip {Amplitude Sensitivity Inverse} xywh {8 145 70 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    tooltip {Amplitude Sensitivity Inverse} xywh {8 145 46 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Choice WahWah_ftype {

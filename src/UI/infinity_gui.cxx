@@ -464,7 +464,7 @@ this->when(FL_WHEN_RELEASE);
   infinity_8->align(Fl_Align(FL_ALIGN_LEFT));
   infinity_8->when(FL_WHEN_CHANGED);
 } // RKR_Value_Input* infinity_8
-{ infinity_rev = new RKR_Check_Button(53, 94, 15, 15, "Reverse");
+{ infinity_rev = new RKR_Check_Button(5, 94, 59, 15, "Reverse");
   infinity_rev->tooltip("Reverse Left Channel Sweep");
   infinity_rev->box(FL_NO_BOX);
   infinity_rev->down_box(FL_BORDER_BOX);
@@ -475,7 +475,7 @@ this->when(FL_WHEN_RELEASE);
   infinity_rev->labelsize(10);
   infinity_rev->labelcolor(FL_BACKGROUND2_COLOR);
   infinity_rev->callback((Fl_Callback*)cb_infinity_rev);
-  infinity_rev->align(Fl_Align(FL_ALIGN_LEFT));
+  infinity_rev->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   infinity_rev->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* infinity_rev
 { RKR_Counter* o = infinity_stages = new RKR_Counter(106, 93, 46, 15, "Stages");

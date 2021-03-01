@@ -331,7 +331,7 @@ this->when(FL_WHEN_RELEASE);
   coil_q2->align(Fl_Align(FL_ALIGN_LEFT));
   coil_q2->when(FL_WHEN_CHANGED);
 } // RKR_Slider* coil_q2
-{ coil_mode = new RKR_Check_Button(13, 161, 41, 15, "Neck Pickup");
+{ coil_mode = new RKR_Check_Button(13, 161, 82, 15, "Neck Pickup");
   coil_mode->box(FL_NO_BOX);
   coil_mode->down_box(FL_BORDER_BOX);
   coil_mode->color(FL_BACKGROUND_COLOR);
