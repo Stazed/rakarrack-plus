@@ -340,9 +340,9 @@ enum USER_DATA_index
     // Set in: BankWindowGui::make_window_banks()
     
     
-    UD_Group_Efx            = 1,        // All rack effects
+    UD_Group_Efx            = 90,       // All rack effects
     
-    UD_RKR_Button_Highlight = 77,       // Default button user data for highlighting when mouse moves inside
+    UD_RKR_Button_Highlight = 91,       // Default button user data for highlighting when below mouse
     
     
     UD_RKR_Browser_Search   = 99,       // MIDI learn, Order Window
