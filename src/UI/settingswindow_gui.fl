@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0305
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -181,7 +181,7 @@ m_parent->font_type_change(font_type);}
     m_parent->font_size_change(C_DEFAULT_FONT_SIZE);
     m_parent->font_type_change(0);
     
-    m_parent->Principal->resize(m_parent->Principal->x(), m_parent->Principal->y(), 960, 540);
+    //m_parent->Principal->resize(m_parent->Principal->x(), m_parent->Principal->y(), 960, 540);
 
     m_parent->save_current_state(3);
     Fl::redraw();}
