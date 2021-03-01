@@ -333,17 +333,19 @@ enum ASCII_Index
     ASCII_Nine
 };
 
+const int C_UD_Highlight_Begin    = 60;
+const int C_UD_Highlight_End      = 14000;
 
 enum USER_DATA_index
 {
     // The Bank Window user data values go from 1 to 60
     // Set in: BankWindowGui::make_window_banks()
-    
-    
-    UD_Group_Efx            = 90,       // All rack effects
-    
-    UD_RKR_Button_Highlight = 91,       // Default button user data for highlighting when below mouse
-    
+
+
+    // All user_data in range from: > (C_UD_Highlight_Begin) < (C_UD_Highlight_End)
+    // are highlighted when below mouse.
+
+    UD_RKR_Highlight = 91,              // For highlighting when below mouse
     
     UD_RKR_Browser_Search   = 99,       // MIDI learn, Order Window
     
@@ -362,7 +364,6 @@ enum USER_DATA_index
     // Custom MIDI table banks and presets
     UD_Bank_Used            = 1000,
     UD_Preset_Used          = 2000,
-    UD_Bank_Number          = 8000,
     
     // The user_data for RKR_Choice 'Preset' widgets. For use in identifying
     // the correct widget when user 'Insert' or 'Delete' key is used. For
@@ -419,6 +420,11 @@ enum USER_DATA_index
     // The max number of effects based on bank file saving
     // The range from 12047 to 12068 can be used for expansion
     UD_PRESET_MAX_EFFECTS          = 12068,
+    
+    // End Highlighted Items - after (UD_Highlight_End)
+    
+    UD_Group_Efx                   = 14000,        // All rack effects
+    UD_Bank_Number                 = 15000,        // Custom MIDI table bank CC Number
 
 };
 

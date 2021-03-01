@@ -3037,7 +3037,6 @@ void RKRGUI::Fill_Avail(int filter)
 
 void RKRGUI::highlight_and_search_browser()
 {
-    int widget_type = 0;
     long long widget_user_data = 0;
 
     Fl_Widget *widget_belowmouse;
@@ -3052,7 +3051,6 @@ void RKRGUI::highlight_and_search_browser()
 
     if (widget_belowmouse != NULL)
     {
-        widget_type = (int) widget_belowmouse->type();
         widget_user_data = (long long) widget_belowmouse->user_data();
     }
 
@@ -3064,9 +3062,8 @@ void RKRGUI::highlight_and_search_browser()
         previous_widget = NULL;
     }
 
-    // This will highlight the item under the mouse
-    // The widget_type is FLTK type, usually light buttons, choice selectors.
-    if ((widget_type == 1) || (widget_user_data == UD_RKR_Button_Highlight))
+    // This will highlight the item under mouse within the user_data range - see global.h, USER_DATA_index
+    if ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End))
     {
         widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .3));
         widget_belowmouse->redraw();

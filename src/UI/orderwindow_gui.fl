@@ -61,6 +61,7 @@ m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
     class RKR_Button
   }
   Fl_Browser Order_Bro {
+    user_data UD_RKR_Highlight
     xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
     code0 {o->set_text_offset(8);}
     class RKR_Browser
@@ -109,7 +110,7 @@ m_process->new_order[i+1]=x;
     code0 {o->set_label_offset(8);}
     class RKR_Button
   }
-  Fl_Group Filters {open
+  Fl_Group Filters {
     xywh {15 280 180 110}
   } {
     Fl_Button Fil0 {

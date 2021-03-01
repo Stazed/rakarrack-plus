@@ -34,6 +34,7 @@ RKR_Counter::RKR_Counter(int X, int Y, int W, int H, const char *label) :
     m_start_height(H),
     m_look_changed(0)
 {
+    this->user_data((void*)(UD_RKR_Highlight));
 }
 
 void RKR_Counter::draw()
