@@ -3055,36 +3055,22 @@ void RKRGUI::highlight_and_search_browser()
         widget_type = (int) widget_belowmouse->type();
         widget_user_data = (long long) widget_belowmouse->user_data();
     }
-    else
+
+    if ((previous_widget != NULL) && (previous_widget != widget_belowmouse))
     {
-        if (previous_widget != NULL)
-        {
-            previous_widget->color(global_fore_color);
-            previous_widget->redraw();
-        }
+        previous_widget->color(global_fore_color);
+        previous_widget->redraw();
+        previous_widget->redraw_label();
+        previous_widget = NULL;
     }
 
     // This will highlight the item under the mouse
     // The widget_type is FLTK type, usually light buttons, choice selectors.
     if ((widget_type == 1) || (widget_user_data == UD_RKR_Button_Highlight))
     {
-        if (previous_widget != NULL)
-        {
-            previous_widget->color(global_fore_color);
-            previous_widget->redraw();
-        }
-        widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .8));
+        widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .3));
         widget_belowmouse->redraw();
         previous_widget = widget_belowmouse;
-    }
-    else
-    {
-        if (previous_widget != NULL)
-        {
-            previous_widget->color(global_fore_color);
-            previous_widget->redraw();
-            previous_widget->redraw_label();
-        }
     }
 
     // This searches on the browser by alpha key entry, first letter only.
