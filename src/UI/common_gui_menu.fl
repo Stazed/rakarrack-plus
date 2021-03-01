@@ -2,8 +2,7 @@
 version 1.0304
 header_name {.h}
 code_name {.cxx}
-widget_class CommonGuiMenu {
-  user_data 1 open
+widget_class CommonGuiMenu {open selected
   xywh {1033 102 215 185} type Double box UP_BOX color 0 selection_color 0 align 112 visible position_relative
 } {
   Fl_Choice subdiv_type {
@@ -95,7 +94,7 @@ widget_class CommonGuiMenu {
     MenuItem {} {
       label Atan
       comment {The dist_tipo menu items are used by distortion, overdrive, derelict, and distband.
-If any of these menu items change here, then they must be changed in the others.} selected
+If any of these menu items change here, then they must be changed in the others.}
       xywh {42 42 36 21} labelsize 9
     }
     MenuItem {} {

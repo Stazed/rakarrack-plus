@@ -1954,7 +1954,6 @@ void RKRGUI::make_window() {
       Tuner->box(FL_UP_BOX);
       Tuner->color(FL_FOREGROUND_COLOR);
       Tuner->selection_color(FL_FOREGROUND_COLOR);
-      Tuner->user_data((void*)(1));
       Tuner->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { tuner_activar = new RKR_Light_Button(526, 28, 38, 18, "On");
         tuner_activar->tooltip("Enable Tuner - Shortcut \'T\'");
@@ -2040,7 +2039,6 @@ void RKRGUI::make_window() {
       InOut->box(FL_UP_BOX);
       InOut->color(FL_FOREGROUND_COLOR);
       InOut->selection_color(FL_FOREGROUND_COLOR);
-      InOut->user_data((void*)(1));
       InOut->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { ActivarGeneral = new RKR_Light_Button(6, 30, 52, 18, "FX On");
         ActivarGeneral->tooltip("Enable rakarrack - Shortcut \'R\'");
@@ -2068,7 +2066,7 @@ void RKRGUI::make_window() {
         BostBut->labelfont(0);
         BostBut->labelsize(6);
         BostBut->labelcolor(FL_FOREGROUND_COLOR);
-        BostBut->callback((Fl_Callback*)cb_BostBut, (void*)(78));
+        BostBut->callback((Fl_Callback*)cb_BostBut);
         BostBut->align(Fl_Align(FL_ALIGN_CENTER));
         BostBut->when(FL_WHEN_RELEASE);
         o->set_label_offset(-4);
@@ -2211,7 +2209,6 @@ void RKRGUI::make_window() {
       MIDI->labelfont(0);
       MIDI->labelsize(14);
       MIDI->labelcolor(FL_FOREGROUND_COLOR);
-      MIDI->user_data((void*)(1));
       MIDI->align(Fl_Align(96|FL_ALIGN_INSIDE));
       MIDI->when(FL_WHEN_RELEASE);
       MIDI->hide();
@@ -2222,7 +2219,6 @@ void RKRGUI::make_window() {
       Metro->box(FL_UP_BOX);
       Metro->color(FL_FOREGROUND_COLOR);
       Metro->selection_color(FL_FOREGROUND_COLOR);
-      Metro->user_data((void*)(1));
       Metro->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { metro_activar = new RKR_Light_Button(525, 89, 38, 18, "On");
         metro_activar->tooltip("Enable Metronome - Shortcut \'M\'");
@@ -2335,7 +2331,6 @@ void RKRGUI::make_window() {
       Presets->box(FL_UP_BOX);
       Presets->color(FL_FOREGROUND_COLOR);
       Presets->selection_color(FL_FOREGROUND_COLOR);
-      Presets->user_data((void*)(1));
       Presets->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { PRESETS_LABEL = new RKR_Box(174, 28, 62, 14, "Presets");
         PRESETS_LABEL->box(FL_NO_BOX);
@@ -2611,7 +2606,6 @@ void RKRGUI::make_window() {
       Tap->box(FL_UP_BOX);
       Tap->color(FL_FOREGROUND_COLOR);
       Tap->selection_color(FL_FOREGROUND_COLOR);
-      Tap->user_data((void*)(1));
       Tap->align(Fl_Align(96|FL_ALIGN_INSIDE));
       { Tap_activar = new RKR_Light_Button(525, 144, 38, 18, "On");
         Tap_activar->tooltip("Enable Tap Tempo - Shortcut \'H\'");

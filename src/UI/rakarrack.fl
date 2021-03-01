@@ -327,7 +327,7 @@ Array is indexed by EFX_Index.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {771 78 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {527 102 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1038,7 +1038,6 @@ Fl::focus(Open_Order);}
         class InfinityGui
       } {}
       Fl_Group Tuner {
-        user_data 1
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button tuner_activar {
@@ -1083,7 +1082,6 @@ TUNER_LABEL->redraw_label();}
         }
       }
       Fl_Group InOut {
-        user_data 1
         xywh {2 24 164 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button ActivarGeneral {
@@ -1133,7 +1131,6 @@ m_process->cleanup_efx();
         }
         Fl_Button BostBut {
           label {+10dB}
-          user_data 78
           callback {if(o->value()) m_process->booster = dB2rap(10);
 else m_process->booster=1.0f;}
           tooltip {+10 dB Booster - Shortcut 'F10'} xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
@@ -1199,14 +1196,12 @@ m_process->calculavol(2);}
         }
       }
       Fl_Group MIDI {
-        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112 hide
         code0 {\#include "midiconv_gui.h"}
         code1 {o->initialize(m_process, this);}
         class MidiGui
       } {}
       Fl_Group Metro {
-        user_data 1
         xywh {520 85 276 52} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button metro_activar {
@@ -1317,7 +1312,6 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         }
       }
       Fl_Group Presets {
-        user_data 1
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1566,7 +1560,6 @@ Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsi
         }
       }
       Fl_Group Tap {
-        user_data 1
         xywh {520 140 276 54} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button Tap_activar {

@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {767 199 530 580} type Double
+  xywh {543 237 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -50,14 +50,12 @@ m_parent= _rgui;} {}
   Fl_Box Fondo2 {
     xywh {1 1 525 575}
   }
-  Fl_Tabs STabs {
-    user_data 1 open
+  Fl_Tabs STabs {open
     xywh {0 0 530 580}
     class RKR_Tabs
   } {
     Fl_Group Look {
       label Look
-      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -299,7 +297,6 @@ m_process->change_scale = 1; // true}
     }
     Fl_Group AUDIO_SET {
       label Audio
-      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo7 {
@@ -617,7 +614,6 @@ switch(m_process->RCOpti_Ring)
     }
     Fl_Group QUALITY_SET {
       label Quality
-      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo12 {
@@ -1262,7 +1258,6 @@ update_stompbox_quality();}
     }
     Fl_Group MIDI_SET {
       label MIDI
-      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo8 {
@@ -1380,14 +1375,12 @@ else
         class RKR_Button
       }
       Fl_Scroll scroll {
-        user_data 5000
         xywh {30 366 360 162} type VERTICAL_ALWAYS
         class RKR_Scroll
       } {}
     }
     Fl_Group JACK_SET {
       label Jack
-      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo9 {
@@ -1424,7 +1417,6 @@ else JackIn->deactivate();}
     }
     Fl_Group MISC_SET {
       label Misc
-      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo10 {
@@ -1463,7 +1455,6 @@ Fl_Tooltip::enable(m_process->ena_tool);}
     }
     Fl_Group BANK_SET {
       label Bank
-      user_data 1
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo11 {

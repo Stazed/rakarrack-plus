@@ -89,7 +89,6 @@ CommonGuiMenu::CommonGuiMenu(int X, int Y, int W, int H, const char *L)
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
-this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
 { subdiv_type = new Fl_Choice(97, 42, 76, 18, "SubDivision");
   subdiv_type->down_box(FL_BORDER_BOX);

@@ -333,7 +333,6 @@ enum ASCII_Index
     ASCII_Nine
 };
 
-// 1, 2, 7, 12, 78, 5000,
 
 enum USER_DATA_index
 {
@@ -345,7 +344,6 @@ enum USER_DATA_index
     
     UD_RKR_Button_Highlight = 77,       // Default button user data for highlighting when mouse moves inside
     
-    UD_FL_Button            = 78,       // Boost Button
     
     UD_RKR_Browser_Search   = 99,       // MIDI learn, Order Window
     
@@ -364,11 +362,10 @@ enum USER_DATA_index
     // Custom MIDI table banks and presets
     UD_Bank_Used            = 1000,
     UD_Preset_Used          = 2000,
-    UD_Scroll_Custom_MIDI   = 5000,     // Check This
     UD_Bank_Number          = 8000,
     
     // The user_data for RKR_Choice 'Preset' widgets. For use in identifying
-    // the correct widget when user 'Insert' or 'Delete' key is used for
+    // the correct widget when user 'Insert' or 'Delete' key is used. For
     // adding or deleting effect user defined presets. The range is the same
     // as EFX_Index + 12000.
     UD_PRESET_EQ                   = (12000 + EFX_EQ),     // For clarity
@@ -422,8 +419,7 @@ enum USER_DATA_index
     // The max number of effects based on bank file saving
     // The range from 12047 to 12068 can be used for expansion
     UD_PRESET_MAX_EFFECTS          = 12068,
-    
-    UD_RKR_Group            = 99996
+
 };
 
 

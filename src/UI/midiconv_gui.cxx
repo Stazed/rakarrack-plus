@@ -94,7 +94,6 @@ MidiGui::MidiGui(int X, int Y, int W, int H, const char *L)
 this->box(FL_UP_BOX);
 this->color(FL_FOREGROUND_COLOR);
 this->selection_color(FL_FOREGROUND_COLOR);
-this->user_data((void*)(1));
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
 { midi_activar = new RKR_Light_Button(5, 4, 38, 18, "On");
   midi_activar->tooltip("Enable MIDI Converter - Shortcut \'M\'");
