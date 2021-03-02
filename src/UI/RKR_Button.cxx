@@ -48,7 +48,7 @@ void RKR_Button::draw()
         {
             if(m_bank_under_mouse)
             {
-                color(fl_color_average(global_leds_color, fl_lighter(global_leds_color), .3));
+                color(global_leds_color);
             }
             else
             {
@@ -59,7 +59,7 @@ void RKR_Button::draw()
         {
             if(m_bank_under_mouse)
             {
-                color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .3));
+                color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .6));
             }
             else
             {
