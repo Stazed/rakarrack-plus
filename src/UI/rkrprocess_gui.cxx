@@ -3560,15 +3560,15 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
         return;
 
     char Rname[128];
-    Fl_Choice *s = (Fl_Choice *) w;
+    RKR_Choice *preset = static_cast<RKR_Choice*> (w);
 
-    if (strncmp(s->text(), "*", 1) != 0)
+    if (strncmp(preset->text(), "*", 1) != 0)
     {
         fl_message("Internal Presets can not be deleted ");
         return;
     }
 
-    int ok = fl_choice("Delete \"%s\"?", "No", "Yes", NULL, s->text());
+    int ok = fl_choice("Delete \"%s\"?", "No", "Yes", NULL, preset->text());
 
     if (!ok)
     {
@@ -3576,10 +3576,11 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
     }
 
     memset(Rname, 0, sizeof (Rname));
-    sprintf(Rname, "%s", s->text());
-    s->remove(s->value());
-    s->value(0);
-    s->redraw();
+    sprintf(Rname, "%s", preset->text());
+    preset->remove(preset->value());
+    preset->value(0);
+    preset->redraw();
+
     m_process->delete_insert_preset(effect, Rname);
 }
 
