@@ -24,7 +24,7 @@
  */
 
 #include "RKR_Scroll.h"
-#include "../global.h"  /* UD_Bank_Used, UD_Preset_Used, UD_Bank_Number */
+#include "../global.h"  /* UD_Bank_Used_Start, UD_Preset_Used_Start, UD_Bank_Number */
 #include "RKR_Choice.h"
 #include "RKR_Box.h"
 
@@ -63,8 +63,8 @@ void RKR_Scroll::resize(int X, int Y, int W, int H)
         long long ud = (long long) c->user_data();
         
         // This finds the bank and preset choice widgets
-        // UD_Bank_Used = 1000 to 1127 >> UD_Preset_Used = 2000 to 2127
-        if(ud >= UD_Bank_Used && ud <= (UD_Preset_Used + 127))
+        // UD_Bank_Used_Start = 1000 to 1127 >> UD_Preset_Used_End = 2000 to 2127
+        if((ud >= UD_Bank_Used_Start) && (ud <= UD_Preset_Used_End))
         {
             RKR_Choice *c_choice = static_cast<RKR_Choice *> (c);
 

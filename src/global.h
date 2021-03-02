@@ -333,19 +333,29 @@ enum ASCII_Index
     ASCII_Nine
 };
 
-const int C_UD_Highlight_Begin    = 60;
-const int C_UD_Highlight_End      = 14000;
+/**
+ * The user_data highlight range for below mouse.
+ */
+const int C_UD_Highlight_Begin    = 60;     // After
+const int C_UD_Highlight_End      = 14000;  // Before
 
+/**
+ * FLTK widget user_data is used for identifying widgets from user actions
+ * as well as below mouse highlighting. Any items in the index range from
+ * C_UD_Highlight_Begin to C_UD_Highlight_End will be highlighted when
+ * below mouse. 
+ * 
+ * The index items should not overlap, including those from function calculated
+ * amounts of bank window preset buttons and custom MIDI table bank and presets.
+ */
 enum USER_DATA_index
 {
+    UD_Bank_Preset_Start    = 1,
     // The Bank Window user data values go from 1 to 60
     // Set in: BankWindowGui::make_window_banks()
+    UD_Bank_Preset_End      = 60,
 
-
-    // All user_data in range from: > (C_UD_Highlight_Begin) < (C_UD_Highlight_End)
-    // are highlighted when below mouse.
-
-    UD_RKR_Highlight = 91,              // For highlighting when below mouse
+    UD_RKR_Highlight        = 91,       // For highlighting when below mouse
     
     UD_RKR_Browser_Search   = 99,       // MIDI learn, Order Window
     
@@ -362,8 +372,11 @@ enum USER_DATA_index
     UD_Label_10,            // 779
     
     // Custom MIDI table banks and presets
-    UD_Bank_Used            = 1000,
-    UD_Preset_Used          = 2000,
+    UD_Bank_Used_Start      = 1000,
+    UD_Bank_Used_End        = 1127,
+    // In between these should not be used !!
+    UD_Preset_Used_Start    = 2000,
+    UD_Preset_Used_End      = 2127,
     
     // The user_data for RKR_Choice 'Preset' widgets. For use in identifying
     // the correct widget when user 'Insert' or 'Delete' key is used. For

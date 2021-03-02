@@ -3019,7 +3019,7 @@ void SettingsWindowGui::make_table_window() {
             cb->add("2");
             cb->add("3");
             cb->add("U");
-            cb->user_data((void *) (UD_Bank_Used + y));
+            cb->user_data((void *) (UD_Bank_Used_Start + y));
             cb->callback((Fl_Callback *)m_parent->bank_click);
             cb->set_label_offset(4);
             cb->set_text_offset(4);
@@ -3027,7 +3027,7 @@ void SettingsWindowGui::make_table_window() {
             RKR_Choice* cp = new RKR_Choice(225,y*25+25,130,20);
             cp->copy_label("Preset");
             cp->labelcolor(FL_WHITE);
-            cp->user_data((void *) (UD_Preset_Used + y));
+            cp->user_data((void *) (UD_Preset_Used_Start + y));
             cp->callback((Fl_Callback *)m_parent->p_click);
             cp->set_label_offset(4);
             cp->set_text_offset(4);
@@ -3103,9 +3103,9 @@ void SettingsWindowGui::Put_MidiTable() {
   // Put_MidiTable
     for(int i=0; i<128; i++)
     {
-        mtfillvalue(i + UD_Bank_Used, m_process->M_table[i].bank);
-        fill_mptable(i + UD_Preset_Used, m_process->M_table[i].bank);
-        mtfillvalue(i + UD_Preset_Used, m_process->M_table[i].preset);
+        mtfillvalue(i + UD_Bank_Used_Start, m_process->M_table[i].bank);
+        fill_mptable(i + UD_Preset_Used_Start, m_process->M_table[i].bank);
+        mtfillvalue(i + UD_Preset_Used_Start, m_process->M_table[i].preset);
     }
 }
 
