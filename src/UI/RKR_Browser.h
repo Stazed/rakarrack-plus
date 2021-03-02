@@ -39,9 +39,11 @@ public:
     RKR_Browser(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
+    int handle(int event);
     void set_label_offset(int offset){m_label_offset = offset;};
     void set_text_offset(int offset){m_text_offset = offset;};
     void set_browser_type(int type){m_type_browser = type;};
+    void set_key_search_used(int key) {m_key_search_used = key;};
 
 private:
 
@@ -51,6 +53,8 @@ private:
     int m_start_height;
     int m_type_browser;
     int m_look_changed;
+    int m_key_search_used;
+    int m_key_found;
     void font_resize(int,int);
 
 };

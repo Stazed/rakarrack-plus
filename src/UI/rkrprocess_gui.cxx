@@ -3092,7 +3092,7 @@ void RKRGUI::highlight_and_search_browser()
             previous_widget = widget_belowmouse;
         }
     }
-
+#if 0
     // This searches on the browser by alpha key entry, first letter only.
     // Used by order widow and MIDI learn window browsers.
     // The browser listing has to be listed in alpha order (uppercase) for it to work.
@@ -3114,6 +3114,7 @@ void RKRGUI::highlight_and_search_browser()
             }
         }
     }
+#endif // 0
 }
 
 int RKRGUI::search_bank_preset_button(int x, int y)

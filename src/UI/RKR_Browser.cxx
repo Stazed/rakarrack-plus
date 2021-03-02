@@ -33,7 +33,9 @@ RKR_Browser::RKR_Browser(int X, int Y, int W, int H, const char *label) :
     m_start_width(W),
     m_start_height(H),
     m_type_browser(DEFAULT_BROWSER),
-    m_look_changed(0)
+    m_look_changed(0),
+    m_key_search_used(1),
+    m_key_found(0)
 {
 }
 
@@ -81,4 +83,48 @@ void RKR_Browser::resize(int X, int Y, int W, int H)
     font_resize(W, H);
 
     Fl_Browser::resize(X, Y, W, H);
+}
+
+int RKR_Browser::handle(int event)
+{
+    // Search the browser for alpha match, cycle through all items
+    if (event == FL_KEYBOARD && (Fl::focus() == this))
+    {
+        int keyboard_key = Fl::event_key();
+
+        for (int i = m_key_search_used; i <= size(); i++)
+        {
+            int lower_case = tolower(text(i)[0]);
+            if (lower_case == keyboard_key)
+            {
+                select(i, 1);
+                m_key_search_used = i + 1;
+                m_key_found = 1;            // true
+            //    printf("m_key_search_used = %d: size() = %d: i = %d\n", m_key_search_used, size(), i);
+                
+                // If we are on the last item, then reset to top for next search
+                // or we get stuck at the bottom
+                if(m_key_search_used == (size() + 1))
+                {
+                    m_key_search_used = 1;
+                }
+
+                return 1;                   // event used
+            }
+
+            // Go back to the beginning if we found a key to cycle around on each key press
+            if(m_key_search_used != 1)
+            {
+                if((i >= size ()) && m_key_found)   // check key found or endless loop
+                {
+                    i = 0;
+                    m_key_search_used = 1;  // restart from beginning
+                    m_key_found = 0;        // false
+                    continue;
+                }
+            }
+        }
+    }
+
+    return Fl_Browser::handle (event);
 }
