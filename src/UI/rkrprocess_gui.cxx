@@ -3037,18 +3037,15 @@ void RKRGUI::Fill_Avail(int filter)
 
 void RKRGUI::highlight_and_search_browser()
 {
-    long long widget_user_data = 0;
-
-    Fl_Widget *widget_belowmouse;
-
     if (Fl::focus() == TITTLE_L)
         Fl::focus(Open_Order);
 
     if (Fl::focus() == Etit)
         Fl::focus(Open_Order);
 
-    widget_belowmouse = Fl::belowmouse();
+    Fl_Widget *widget_belowmouse = Fl::belowmouse();
 
+    long long widget_user_data = 0;
     if (widget_belowmouse != NULL)
     {
         widget_user_data = (long long) widget_belowmouse->user_data();
@@ -3097,17 +3094,17 @@ void RKRGUI::highlight_and_search_browser()
     // The browser listing has to be listed in alpha order (uppercase) for it to work.
     if (widget_user_data == UD_RKR_Browser_Search)
     {
-        Fl_Browser *b;
-        b = (Fl_Browser *) widget_belowmouse;
+        RKR_Browser *browser = static_cast<RKR_Browser*> (widget_belowmouse);
+
         int keyboard_key = Fl::event_key();
         if (keyboard_key != previous_keyboard_key)
         {
             previous_keyboard_key = keyboard_key;
-            for (int i = 1; i <= b->size(); i++)
+            for (int i = 1; i <= browser->size(); i++)
             {
-                if (b->text(i)[0] >= keyboard_key - 32) // -32 shift ascii code to upper case
+                if (browser->text(i)[0] >= keyboard_key - 32) // -32 shift ascii code to upper case
                 {
-                    b->select(i, 1);
+                    browser->select(i, 1);
                     break;
                 }
             }
