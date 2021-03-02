@@ -3071,7 +3071,8 @@ void RKRGUI::highlight_and_search_browser()
         previous_widget = NULL;
     }
 
-    if((widget_belowmouse != NULL) && (previous_widget != widget_belowmouse))
+    // Check if new below mouse widget
+    if(widget_user_data && (widget_belowmouse != previous_widget))
     {
         // Highlight the item below mouse within the user_data range - see global.h, USER_DATA_index
         if ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End))
