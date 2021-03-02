@@ -33,7 +33,8 @@ RKR_Button::RKR_Button(int X, int Y, int W, int H, const char *label) :
     m_start_height(H),
     m_bank_highlight_preset(0),     // false
     m_button_type(BUTTON_DEFAULT),
-    m_look_changed(0)
+    m_look_changed(0),
+    m_bank_under_mouse(0)
 {
     this->user_data((void*)(UD_RKR_Highlight));
 }
@@ -45,11 +46,25 @@ void RKR_Button::draw()
     {
         if(m_bank_highlight_preset)
         {
-            color(fl_darker(global_leds_color));
+            if(m_bank_under_mouse)
+            {
+                color(fl_color_average(global_leds_color, fl_lighter(global_leds_color), .3));
+            }
+            else
+            {
+                color(fl_darker(global_leds_color));
+            }
         }
         else
         {
-            color(global_fore_color);
+            if(m_bank_under_mouse)
+            {
+                color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .3));
+            }
+            else
+            {
+                color(global_fore_color);
+            }
         }
 
         labelcolor(global_label_color);

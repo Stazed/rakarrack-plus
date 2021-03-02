@@ -336,7 +336,7 @@ enum ASCII_Index
 /**
  * The user_data highlight range for below mouse.
  */
-const int C_UD_Highlight_Begin    = 60;     // After
+const int C_UD_Highlight_Begin    = 0;      // After
 const int C_UD_Highlight_End      = 14000;  // Before
 
 /**

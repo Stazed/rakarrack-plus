@@ -3054,19 +3054,41 @@ void RKRGUI::highlight_and_search_browser()
         widget_user_data = (long long) widget_belowmouse->user_data();
     }
 
+    // Un-highlight if no longer below the mouse
     if ((previous_widget != NULL) && (previous_widget != widget_belowmouse))
     {
-        previous_widget->color(global_fore_color);
-        previous_widget->redraw();
-        previous_widget->redraw_label();
+        // Check if bank window preset button, special handling in RKR_Button::draw()
+        long long previous_widget_user_data = (long long) previous_widget->user_data();
+        if( (previous_widget_user_data >= UD_Bank_Preset_Start) && (previous_widget_user_data <= UD_Bank_Preset_End) )
+        {
+            RKR_Button *previous_button = static_cast<RKR_Button*> (previous_widget);
+            previous_button->set_bank_under_mouse (0);  // False
+            previous_button->redraw ();
+        }
+        else    // Everything else not bank window preset buttons
+        {
+            previous_widget->color(global_fore_color);
+            previous_widget->redraw();
+            previous_widget->redraw_label();
+        }
         previous_widget = NULL;
     }
 
-    // This will highlight the item under mouse within the user_data range - see global.h, USER_DATA_index
+    // Highlight the item below mouse within the user_data range - see global.h, USER_DATA_index
     if ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End))
     {
-        widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .3));
-        widget_belowmouse->redraw();
+        // Check if bank window preset button, special handling in RKR_Button::draw()
+        if( (widget_user_data >= UD_Bank_Preset_Start) && (widget_user_data <= UD_Bank_Preset_End) )
+        {
+            RKR_Button *bank_button = static_cast<RKR_Button*> (widget_belowmouse);
+            bank_button->set_bank_under_mouse (1);  // True
+            bank_button->redraw ();
+        }
+        else    // Everything else not bank window preset buttons
+        {
+            widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .3));
+            widget_belowmouse->redraw();
+        }
         previous_widget = widget_belowmouse;
     }
 

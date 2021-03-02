@@ -50,6 +50,7 @@ public:
     void set_label_offset(int offset) {m_label_offset = offset;};
     void set_button_type(int type) {m_button_type = type;};
     void set_highlight_preset(int highlight) {m_bank_highlight_preset = highlight;};
+    void set_bank_under_mouse(int mouse) {m_bank_under_mouse = mouse;};
 
 private:
 
@@ -59,6 +60,7 @@ private:
     int m_bank_highlight_preset;
     int m_button_type;
     int m_look_changed;
+    int m_bank_under_mouse;
 };
 
 #endif /* RKR_BUTTON_H */
