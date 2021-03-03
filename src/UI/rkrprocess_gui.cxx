@@ -29,7 +29,6 @@
 #include "rakarrack.h"
 #include "../icono_rakarrack_128x128.xpm"
 static Fl_Widget *previous_widget = NULL;
-static int previous_keyboard_key = 0;
 static int drag = C_NO_DRAG;
 static int analyzer_redraw = 0;
 static Pixmap p, mask;
