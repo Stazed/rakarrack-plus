@@ -135,7 +135,7 @@ void RKRGUI::TimeoutStatic(void* ptr)
 void RKRGUI::GuiTimeout(void)
 {
     // Main gui process on timeout
-    highlight_and_search_browser();
+    below_mouse_highlight_and_focus();
     drag_effect();
     check_signals(this);
 
@@ -2032,6 +2032,8 @@ void RKRGUI::MiraConfig()
         const char *name = Fl::get_font_name((Fl_Font) i, &t);
         char buffer[128];
 #if 1
+        // This sets format specifiers. If more are added, then the
+        // alpha search in RKR_Browser::handle() may need to be adjusted.
         if (t)
         {
             char *p = buffer;
@@ -3035,7 +3037,7 @@ void RKRGUI::Fill_Avail(int filter)
     Order->Avail_Bro->select(1);
 }
 
-void RKRGUI::highlight_and_search_browser()
+void RKRGUI::below_mouse_highlight_and_focus()
 {
     if (Fl::focus() == TITTLE_L)
         Fl::focus(Open_Order);
@@ -3092,29 +3094,6 @@ void RKRGUI::highlight_and_search_browser()
             previous_widget = widget_belowmouse;
         }
     }
-#if 0
-    // This searches on the browser by alpha key entry, first letter only.
-    // Used by order widow and MIDI learn window browsers.
-    // The browser listing has to be listed in alpha order (uppercase) for it to work.
-    if (widget_user_data == UD_RKR_Browser_Search)
-    {
-        RKR_Browser *browser = static_cast<RKR_Browser*> (widget_belowmouse);
-
-        int keyboard_key = Fl::event_key();
-        if (keyboard_key != previous_keyboard_key)
-        {
-            previous_keyboard_key = keyboard_key;
-            for (int i = 1; i <= browser->size(); i++)
-            {
-                if (browser->text(i)[0] >= keyboard_key - 32) // -32 shift ascii code to upper case
-                {
-                    browser->select(i, 1);
-                    break;
-                }
-            }
-        }
-    }
-#endif // 0
 }
 
 int RKRGUI::search_bank_preset_button(int x, int y)

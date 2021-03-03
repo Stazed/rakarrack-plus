@@ -604,7 +604,7 @@ public:
   void ActACI();
   int Busca_Eff(int num);
   void Fill_Avail(int filter);
-  void highlight_and_search_browser();
+  void below_mouse_highlight_and_focus();
   int search_bank_preset_button(int x, int y);
   void Scan_Bank_Dir();
 private:

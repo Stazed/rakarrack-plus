@@ -91,19 +91,38 @@ int RKR_Browser::handle(int event)
     if (event == FL_KEYBOARD && (Fl::focus() == this))
     {
         int keyboard_key = Fl::event_key();
+        int lower_case = 0;
 
         for (int i = m_key_search_used; i <= size(); i++)
         {
-            int lower_case = tolower(text(i)[0]);
+            // The font browser text contains formatting that is added from
+            // MiraConfig(). The format specifier @ + type, currently has
+            // a max of two added. We check for the specifier here and 
+            // match the character after the format specifiers.
+            if(text(i)[0] == '@')
+            {
+                if(text(i)[2] == '@')
+                {
+                    lower_case = tolower(text(i)[4]);   // two format specifiers
+                }
+                else
+                {
+                    lower_case = tolower(text(i)[2]);   // one format specifier
+                }
+            }
+            else
+            {
+                lower_case = tolower(text(i)[0]);       // no formatting
+            }
+
             if (lower_case == keyboard_key)
             {
                 select(i, 1);
                 m_key_search_used = i + 1;
                 m_key_found = 1;            // true
-            //    printf("m_key_search_used = %d: size() = %d: i = %d\n", m_key_search_used, size(), i);
                 
                 // If we are on the last item, then reset to top for next search
-                // or we get stuck at the bottom
+                // or we get stuck at the bottom since the counter(i) never reaches the end
                 if(m_key_search_used == (size() + 1))
                 {
                     m_key_search_used = 1;
