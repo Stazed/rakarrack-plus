@@ -2553,7 +2553,7 @@ void RKRGUI::make_window() {
         Etit->labelfont(1);
         Etit->labelsize(21);
         Etit->labelcolor((Fl_Color)1);
-        Etit->callback((Fl_Callback*)cb_Etit);
+        Etit->callback((Fl_Callback*)cb_Etit, (void*)(UD_Disable_Highlight));
         Etit->align(Fl_Align(FL_ALIGN_CLIP|FL_ALIGN_INSIDE));
         Etit->when(FL_WHEN_RELEASE);
         o->set_label_offset(15);

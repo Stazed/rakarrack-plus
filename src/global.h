@@ -435,7 +435,8 @@ enum USER_DATA_index
     // End Highlighted Items - after (UD_Highlight_End)
     
     UD_Group_Efx                   = 14000,        // All rack effects
-    UD_Bank_Number                 = 15000,        // Custom MIDI table bank CC Number
+    UD_Disable_Highlight           = 14001,        // Disable highlight for override of RKR defaults
+    UD_Bank_Number                 = 15000         // Custom MIDI table bank CC Number
 
 };
 

@@ -312,7 +312,14 @@ Array is indexed by EFX_Index.} private local
   }
   decl {CommonGuiMenu *m_looper_ms;} {private local
   }
-  decl {int made;} {private local
+  decl {int made;} {
+    comment {Flag to indicate if the custom MIDI control bank has been completed.} private local
+  }
+  decl {int focus_delay_time;} {
+    comment {The amount of time to delay before the below mouse
+widget gets the focus.} private local
+  }
+  decl {int enable_grab_focus;} {private local
   }
   decl {Fl_Help_Dialog *visor;} {private local
   }
@@ -1507,6 +1514,7 @@ Order->hide();}
         }
         Fl_Button Etit {
           label {Rakarrack +}
+          user_data UD_Disable_Highlight
           callback {//if(m_process->Bypass)
 //{
 o->hide();

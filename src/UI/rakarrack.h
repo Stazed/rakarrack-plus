@@ -158,7 +158,16 @@ class RKRGUI {
   RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS]; 
   CommonGuiMenu *m_looper_bar; 
   CommonGuiMenu *m_looper_ms; 
+  /**
+   Flag to indicate if the custom MIDI control bank has been completed.
+  */
   int made; 
+  /**
+   The amount of time to delay before the below mouse
+   widget gets the focus.
+  */
+  int focus_delay_time; 
+  int enable_grab_focus; 
   Fl_Help_Dialog *visor; 
   struct list_element *mBankNameList;
   struct list_element *mBankNameListTail;

@@ -31,6 +31,7 @@
 static Fl_Widget *previous_widget = NULL;
 static int drag = C_NO_DRAG;
 static int analyzer_redraw = 0;
+static int grab_focus = 0;
 static Pixmap p, mask;
 static XWMHints *hints = NULL;
 static volatile int got_sigint = 0;
@@ -42,7 +43,9 @@ static volatile int got_sigusr1 = 0;
 RKR * process_rkr;
 
 RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
-    made(0)
+    made(0),
+    focus_delay_time(50),   // Every 25 count is about 1 second: this default == 2 seconds
+    enable_grab_focus(0)    // False
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -3078,6 +3081,9 @@ void RKRGUI::below_mouse_highlight_and_focus()
     // Check if new below mouse widget
     if(widget_user_data && (widget_belowmouse != previous_widget))
     {
+        // Start the focus count
+        grab_focus = 1;
+
         // Highlight the item below mouse within the user_data range - see global.h, USER_DATA_index
         if ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End))
         {
@@ -3094,6 +3100,25 @@ void RKRGUI::below_mouse_highlight_and_focus()
                 widget_belowmouse->redraw();
             }
             previous_widget = widget_belowmouse;
+        }
+    }
+    
+    if(enable_grab_focus)
+    {
+        if(widget_user_data && (widget_belowmouse == previous_widget) &&
+           ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End)))
+        {
+            if(grab_focus &&  (grab_focus > focus_delay_time))
+            {
+                Fl::focus (widget_belowmouse);
+
+                // Shut off focus count
+                grab_focus = 0;
+            }
+            else if(grab_focus)
+            {
+                grab_focus++;
+            }
         }
     }
 }
