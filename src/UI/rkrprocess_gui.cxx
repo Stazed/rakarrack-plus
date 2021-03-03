@@ -3442,12 +3442,11 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
  */
 void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
 {
-    // add name
-    RKR_Choice *s = (RKR_Choice *) w;
+    RKR_Choice *s = static_cast<RKR_Choice *> (w);
+    
     s->add(name);
 
-    Fl_Menu_*n = (Fl_Menu_*) s->menu();
-    Fl_Menu_Item *m = (Fl_Menu_Item*) n;
+    Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (s->menu ());
     Fl_Menu_Item *p;
     
     int font_size = C_DEFAULT_FONT_SIZE;
@@ -3484,7 +3483,7 @@ Fl_Widget * RKRGUI::find_effect_preset_widget(int effect)
 
         if (effect_user_data == UD_Group_Efx)
         {
-            Fl_Group *g = (Fl_Group *) w;
+            Fl_Group *g = static_cast<Fl_Group *> (w);
 
             for (int i = 0; i < g->children(); i++)
             {
