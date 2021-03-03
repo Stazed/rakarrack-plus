@@ -357,8 +357,6 @@ enum USER_DATA_index
 
     UD_RKR_Highlight        = 91,       // For highlighting when below mouse
     
-    UD_RKR_Browser_Search   = 99,       // MIDI learn, Order Window
-    
     // Effect main rack labels
     UD_Label_1              = 770,
     UD_Label_2,

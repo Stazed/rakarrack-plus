@@ -37,6 +37,7 @@ RKR_Browser::RKR_Browser(int X, int Y, int W, int H, const char *label) :
     m_key_search_used(1),
     m_key_found(0)
 {
+    this->user_data((void*)(UD_RKR_Highlight));
 }
 
 void RKR_Browser::draw()

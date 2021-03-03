@@ -36,7 +36,6 @@ m_parent= _rgui;} {}
     class RKR_Box
   }
   Fl_Browser Epar {
-    user_data UD_RKR_Browser_Search
     callback {m_parent->DisAssigns();}
     xywh {10 58 201 348} type Hold textcolor 7
     class RKR_Browser
@@ -52,7 +51,6 @@ m_process->RControl=1;}
     class RKR_Button
   }
   Fl_Browser TPresets {
-    user_data UD_RKR_Browser_Search
     xywh {430 61 201 348} type Hold when 3 textcolor 7
     class RKR_Browser
   }

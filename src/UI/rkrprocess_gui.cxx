@@ -3050,7 +3050,10 @@ void RKRGUI::below_mouse_highlight_and_focus()
     long long widget_user_data = 0;
     if (widget_belowmouse != NULL)
     {
-        widget_user_data = (long long) widget_belowmouse->user_data();
+        if(widget_belowmouse->active ())
+        {
+            widget_user_data = (long long) widget_belowmouse->user_data();
+        }
     }
 
     // Un-highlight if no longer below the mouse

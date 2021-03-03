@@ -127,7 +127,6 @@ break;
       }
       Fl_Browser Font_Bro {
         label Font
-        user_data UD_RKR_Browser_Search
         callback {int font_type = (int)o->value()-1;
 m_parent->font_type_change(font_type);}
         xywh {30 100 400 225} type Select labelcolor 7 align 1 when 1

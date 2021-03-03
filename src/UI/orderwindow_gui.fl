@@ -36,7 +36,6 @@ m_parent= _rgui;} {}
     class RKR_Box
   }
   Fl_Browser Avail_Bro {
-    user_data UD_RKR_Browser_Search
     xywh {15 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
     code0 {o->set_text_offset(8);}
     class RKR_Browser
@@ -61,7 +60,6 @@ m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
     class RKR_Button
   }
   Fl_Browser Order_Bro {
-    user_data UD_RKR_Highlight
     xywh {260 50 175 225} type Hold labelsize 18 textsize 18 textcolor 7
     code0 {o->set_text_offset(8);}
     class RKR_Browser

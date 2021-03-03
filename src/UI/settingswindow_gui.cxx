@@ -1155,7 +1155,7 @@ this->when(FL_WHEN_RELEASE);
       Font_Bro->labelfont(0);
       Font_Bro->labelsize(14);
       Font_Bro->labelcolor(FL_BACKGROUND2_COLOR);
-      Font_Bro->callback((Fl_Callback*)cb_Font_Bro, (void*)(UD_RKR_Browser_Search));
+      Font_Bro->callback((Fl_Callback*)cb_Font_Bro);
       Font_Bro->align(Fl_Align(FL_ALIGN_TOP));
       Font_Bro->when(FL_WHEN_CHANGED);
       o->set_browser_type(FONT_BROWSER);
