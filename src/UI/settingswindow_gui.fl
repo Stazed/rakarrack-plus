@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {310 219 530 580} type Double
+  xywh {707 104 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1451,6 +1451,31 @@ Fl_Tooltip::enable(m_process->ena_tool);}
         xywh {30 130 118 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
+      }
+      Fl_Box {} {
+        label {Specify the delay an item gets selected when the mouse pointer is paused over it:}
+        xywh {30 157 400 56} align 148
+        class RKR_Box
+      }
+      Fl_Slider Focus_Slider {
+        user_data UD_RKR_Highlight
+        callback {m_parent->set_focus_timer(o->value());}
+        xywh {30 213 400 30} type Horizontal box FLAT_BOX labelsize 10 align 1 maximum 100 step 1 value 25
+      }
+      Fl_Box {} {
+        label Disabled
+        xywh {30 246 69 17} align 20
+        class RKR_Box
+      }
+      Fl_Box {} {
+        label Medium
+        xywh {209 246 69 17} align 16
+        class RKR_Box
+      }
+      Fl_Box {} {
+        label Long
+        xywh {362 246 69 17} align 24
+        class RKR_Box
       }
     }
     Fl_Group BANK_SET {

@@ -1059,6 +1059,13 @@ void SettingsWindowGui::cb_ENA_TOOL(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_ENA_TOOL_i(o,v);
 }
 
+void SettingsWindowGui::cb_Focus_Slider_i(Fl_Slider* o, void*) {
+  m_parent->set_focus_timer(o->value());
+}
+void SettingsWindowGui::cb_Focus_Slider(Fl_Slider* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Focus_Slider_i(o,v);
+}
+
 void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
   char *filename;
 filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
@@ -2914,6 +2921,61 @@ this->when(FL_WHEN_RELEASE);
       ENA_TOOL->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* ENA_TOOL
+    { RKR_Box* o = new RKR_Box(30, 157, 400, 56, "Specify the delay an item gets selected when the mouse pointer is paused over\
+ it:");
+      o->box(FL_NO_BOX);
+      o->color(FL_BACKGROUND_COLOR);
+      o->selection_color(FL_BACKGROUND_COLOR);
+      o->labeltype(FL_NORMAL_LABEL);
+      o->labelfont(0);
+      o->labelsize(14);
+      o->labelcolor(FL_FOREGROUND_COLOR);
+      o->align(Fl_Align(132|FL_ALIGN_INSIDE));
+      o->when(FL_WHEN_RELEASE);
+    } // RKR_Box* o
+    { Focus_Slider = new Fl_Slider(30, 213, 400, 30);
+      Focus_Slider->type(1);
+      Focus_Slider->box(FL_FLAT_BOX);
+      Focus_Slider->labelsize(10);
+      Focus_Slider->maximum(100);
+      Focus_Slider->step(1);
+      Focus_Slider->value(25);
+      Focus_Slider->callback((Fl_Callback*)cb_Focus_Slider, (void*)(UD_RKR_Highlight));
+      Focus_Slider->align(Fl_Align(FL_ALIGN_TOP));
+    } // Fl_Slider* Focus_Slider
+    { RKR_Box* o = new RKR_Box(30, 246, 69, 17, "Disabled");
+      o->box(FL_NO_BOX);
+      o->color(FL_BACKGROUND_COLOR);
+      o->selection_color(FL_BACKGROUND_COLOR);
+      o->labeltype(FL_NORMAL_LABEL);
+      o->labelfont(0);
+      o->labelsize(14);
+      o->labelcolor(FL_FOREGROUND_COLOR);
+      o->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+      o->when(FL_WHEN_RELEASE);
+    } // RKR_Box* o
+    { RKR_Box* o = new RKR_Box(209, 246, 69, 17, "Medium");
+      o->box(FL_NO_BOX);
+      o->color(FL_BACKGROUND_COLOR);
+      o->selection_color(FL_BACKGROUND_COLOR);
+      o->labeltype(FL_NORMAL_LABEL);
+      o->labelfont(0);
+      o->labelsize(14);
+      o->labelcolor(FL_FOREGROUND_COLOR);
+      o->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
+      o->when(FL_WHEN_RELEASE);
+    } // RKR_Box* o
+    { RKR_Box* o = new RKR_Box(362, 246, 69, 17, "Long");
+      o->box(FL_NO_BOX);
+      o->color(FL_BACKGROUND_COLOR);
+      o->selection_color(FL_BACKGROUND_COLOR);
+      o->labeltype(FL_NORMAL_LABEL);
+      o->labelfont(0);
+      o->labelsize(14);
+      o->labelcolor(FL_FOREGROUND_COLOR);
+      o->align(Fl_Align(FL_ALIGN_RIGHT|FL_ALIGN_INSIDE));
+      o->when(FL_WHEN_RELEASE);
+    } // RKR_Box* o
     MISC_SET->end();
   } // Fl_Group* MISC_SET
   { BANK_SET = new Fl_Group(5, 26, 518, 554, "Bank");

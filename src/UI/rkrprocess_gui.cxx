@@ -3039,6 +3039,12 @@ void RKRGUI::Fill_Avail(int filter)
     Order->Avail_Bro->select(1);
 }
 
+void RKRGUI::set_focus_timer(int time)
+{
+    focus_delay_time = time;
+    enable_grab_focus = time;
+}
+
 void RKRGUI::below_mouse_highlight_and_focus()
 {
     if (Fl::focus() == TITTLE_L)

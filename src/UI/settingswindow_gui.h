@@ -18,6 +18,7 @@
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Group.H>
+#include <FL/Fl_Slider.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
   void _SettingsWindowGui();
@@ -508,6 +509,11 @@ public:
 private:
   inline void cb_ENA_TOOL_i(RKR_Check_Button*, void*);
   static void cb_ENA_TOOL(RKR_Check_Button*, void*);
+public:
+  Fl_Slider *Focus_Slider;
+private:
+  inline void cb_Focus_Slider_i(Fl_Slider*, void*);
+  static void cb_Focus_Slider(Fl_Slider*, void*);
 public:
   Fl_Group *BANK_SET;
   Fl_Box *Fondo11;
