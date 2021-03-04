@@ -14,11 +14,11 @@
 #include "RKR_Group.h"
 #include "RKR_Scroll.h"
 #include "RKR_Tabs.h"
+#include "RKR_Fl_Slider.h"
 #include <FL/Fl_Double_Window.H>
 #include "rakarrack.h"
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Group.H>
-#include <FL/Fl_Slider.H>
 
 class SettingsWindowGui : public Fl_Double_Window {
   void _SettingsWindowGui();
@@ -510,10 +510,10 @@ private:
   inline void cb_ENA_TOOL_i(RKR_Check_Button*, void*);
   static void cb_ENA_TOOL(RKR_Check_Button*, void*);
 public:
-  Fl_Slider *Focus_Slider;
+  RKR_Fl_Slider *Focus_Slider;
 private:
-  inline void cb_Focus_Slider_i(Fl_Slider*, void*);
-  static void cb_Focus_Slider(Fl_Slider*, void*);
+  inline void cb_Focus_Slider_i(RKR_Fl_Slider*, void*);
+  static void cb_Focus_Slider(RKR_Fl_Slider*, void*);
 public:
   Fl_Group *BANK_SET;
   Fl_Box *Fondo11;

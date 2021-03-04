@@ -1059,10 +1059,10 @@ void SettingsWindowGui::cb_ENA_TOOL(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_ENA_TOOL_i(o,v);
 }
 
-void SettingsWindowGui::cb_Focus_Slider_i(Fl_Slider* o, void*) {
+void SettingsWindowGui::cb_Focus_Slider_i(RKR_Fl_Slider* o, void*) {
   m_parent->set_focus_timer(o->value());
 }
-void SettingsWindowGui::cb_Focus_Slider(Fl_Slider* o, void* v) {
+void SettingsWindowGui::cb_Focus_Slider(RKR_Fl_Slider* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Focus_Slider_i(o,v);
 }
 
@@ -2933,16 +2933,22 @@ this->when(FL_WHEN_RELEASE);
       o->align(Fl_Align(132|FL_ALIGN_INSIDE));
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
-    { Focus_Slider = new Fl_Slider(30, 213, 400, 22);
+    { Focus_Slider = new RKR_Fl_Slider(30, 213, 400, 22);
       Focus_Slider->type(1);
       Focus_Slider->box(FL_ROUND_DOWN_BOX);
+      Focus_Slider->color(FL_BACKGROUND_COLOR);
+      Focus_Slider->selection_color(FL_BACKGROUND_COLOR);
+      Focus_Slider->labeltype(FL_NORMAL_LABEL);
+      Focus_Slider->labelfont(0);
       Focus_Slider->labelsize(10);
+      Focus_Slider->labelcolor(FL_FOREGROUND_COLOR);
       Focus_Slider->maximum(100);
       Focus_Slider->step(1);
       Focus_Slider->value(25);
       Focus_Slider->callback((Fl_Callback*)cb_Focus_Slider, (void*)(UD_RKR_Highlight));
       Focus_Slider->align(Fl_Align(FL_ALIGN_TOP));
-    } // Fl_Slider* Focus_Slider
+      Focus_Slider->when(FL_WHEN_CHANGED);
+    } // RKR_Fl_Slider* Focus_Slider
     { RKR_Box* o = new RKR_Box(30, 240, 69, 17, "Disabled");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);

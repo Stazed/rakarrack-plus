@@ -19,6 +19,7 @@ set (ProgSources
     UI/RKR_Choice.cxx
     UI/RKR_Counter.cxx
     UI/RKR_File_Input.cxx
+    UI/RKR_Fl_Slider.cxx
     UI/RKR_Group.cxx
     UI/RKR_Key_Input.cxx
     UI/RKR_Light_Button.cxx
