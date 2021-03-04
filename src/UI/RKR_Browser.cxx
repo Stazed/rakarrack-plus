@@ -128,7 +128,8 @@ int RKR_Browser::handle(int event)
                 {
                     m_key_search_used = 1;
                 }
-
+                
+                do_callback();
                 return 1;                   // event used
             }
 

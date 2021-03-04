@@ -132,7 +132,7 @@ break;
         label Font
         callback {int font_type = (int)o->value()-1;
 m_parent->font_type_change(font_type);}
-        xywh {30 100 400 225} type Select labelcolor 7 align 1 when 1
+        xywh {30 100 400 225} type Hold labelcolor 7 align 1
         code0 {o->set_browser_type(FONT_BROWSER);}
         class RKR_Browser
       }
