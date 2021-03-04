@@ -167,7 +167,6 @@ class RKRGUI {
    widget gets the focus.
   */
   int focus_delay_time; 
-  int enable_grab_focus; 
   Fl_Help_Dialog *visor; 
   struct list_element *mBankNameList;
   struct list_element *mBankNameListTail;

@@ -2933,9 +2933,9 @@ this->when(FL_WHEN_RELEASE);
       o->align(Fl_Align(132|FL_ALIGN_INSIDE));
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
-    { Focus_Slider = new Fl_Slider(30, 213, 400, 30);
+    { Focus_Slider = new Fl_Slider(30, 213, 400, 22);
       Focus_Slider->type(1);
-      Focus_Slider->box(FL_FLAT_BOX);
+      Focus_Slider->box(FL_ROUND_DOWN_BOX);
       Focus_Slider->labelsize(10);
       Focus_Slider->maximum(100);
       Focus_Slider->step(1);
@@ -2943,7 +2943,7 @@ this->when(FL_WHEN_RELEASE);
       Focus_Slider->callback((Fl_Callback*)cb_Focus_Slider, (void*)(UD_RKR_Highlight));
       Focus_Slider->align(Fl_Align(FL_ALIGN_TOP));
     } // Fl_Slider* Focus_Slider
-    { RKR_Box* o = new RKR_Box(30, 246, 69, 17, "Disabled");
+    { RKR_Box* o = new RKR_Box(30, 240, 69, 17, "Disabled");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);
       o->selection_color(FL_BACKGROUND_COLOR);
@@ -2954,7 +2954,7 @@ this->when(FL_WHEN_RELEASE);
       o->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
-    { RKR_Box* o = new RKR_Box(209, 246, 69, 17, "Medium");
+    { RKR_Box* o = new RKR_Box(209, 240, 69, 17, "Medium");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);
       o->selection_color(FL_BACKGROUND_COLOR);
@@ -2965,7 +2965,7 @@ this->when(FL_WHEN_RELEASE);
       o->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
-    { RKR_Box* o = new RKR_Box(362, 246, 69, 17, "Long");
+    { RKR_Box* o = new RKR_Box(362, 240, 69, 17, "Long");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);
       o->selection_color(FL_BACKGROUND_COLOR);

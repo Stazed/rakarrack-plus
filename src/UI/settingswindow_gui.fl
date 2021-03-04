@@ -36,7 +36,7 @@ decl {\#include "RKR_Tabs.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {707 104 530 580} type Double
+  xywh {108 133 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1460,21 +1460,21 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       Fl_Slider Focus_Slider {
         user_data UD_RKR_Highlight
         callback {m_parent->set_focus_timer(o->value());}
-        xywh {30 213 400 30} type Horizontal box FLAT_BOX labelsize 10 align 1 maximum 100 step 1 value 25
+        xywh {30 213 400 22} type Horizontal box ROUND_DOWN_BOX labelsize 10 align 1 maximum 100 step 1 value 25
       }
       Fl_Box {} {
         label Disabled
-        xywh {30 246 69 17} align 20
+        xywh {30 240 69 17} align 20
         class RKR_Box
       }
       Fl_Box {} {
         label Medium
-        xywh {209 246 69 17} align 16
+        xywh {209 240 69 17} align 16
         class RKR_Box
       }
       Fl_Box {} {
         label Long
-        xywh {362 246 69 17} align 24
+        xywh {362 240 69 17} align 24
         class RKR_Box
       }
     }

@@ -44,8 +44,7 @@ RKR * process_rkr;
 
 RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     made(0),
-    focus_delay_time(50),   // Every 25 count is about 1 second: this default == 2 seconds
-    enable_grab_focus(0)    // False
+    focus_delay_time(50)    // Every 25 count is about 1 second: this default == 2 seconds
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -3042,7 +3041,6 @@ void RKRGUI::Fill_Avail(int filter)
 void RKRGUI::set_focus_timer(int time)
 {
     focus_delay_time = time;
-    enable_grab_focus = time;
 }
 
 void RKRGUI::below_mouse_highlight_and_focus()
@@ -3109,7 +3107,7 @@ void RKRGUI::below_mouse_highlight_and_focus()
         }
     }
     
-    if(enable_grab_focus)
+    if(focus_delay_time)
     {
         if(widget_user_data && (widget_belowmouse == previous_widget) &&
            ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End)))

@@ -319,8 +319,6 @@ Array is indexed by EFX_Index.} private local
     comment {The amount of time to delay before the below mouse
 widget gets the focus.} private local
   }
-  decl {int enable_grab_focus;} {private local
-  }
   decl {Fl_Help_Dialog *visor;} {private local
   }
   decl {struct list_element *mBankNameList;} {private local
