@@ -44,7 +44,7 @@ RKR * process_rkr;
 
 RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     made(0),
-    focus_delay_time(50)    // Every 25 count is about 1 second: this default == 2 seconds
+    focus_delay_time(25)    // Every 25 count is about 1 second
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -905,6 +905,10 @@ void RKRGUI::load_previous_state()
     rakarrack.get(m_process->PrefNom("Disable Warnings"), m_process->Disable_Warnings, 0);
     rakarrack.get(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool, 1);
     Fl_Tooltip::enable(m_process->ena_tool);
+    
+    rakarrack.get(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay, 25);
+    Settings->Focus_Slider->value (m_process->Focus_Delay);
+    Settings->Focus_Slider->do_callback ();
 
     //Trigger
     rakarrack.get(m_process->PrefNom("Aux Source"), m_process->Aux_Source, 0);
@@ -1204,6 +1208,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Tap Tempo Timeout"), m_process->t_timeout);
         rakarrack.set(m_process->PrefNom("Disable Warnings"), m_process->Disable_Warnings);
         rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool);
+        rakarrack.set(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay);
 
         for (int i = 0; i < 128; i++)
         {
@@ -1854,6 +1859,7 @@ void RKRGUI::MiraConfig()
     Settings->Downr_Qual->value(m_process->DownQual);
     Settings->MESSAGE_DISABLE->value(m_process->Disable_Warnings);
     Settings->ENA_TOOL->value(m_process->ena_tool);
+    Settings->Focus_Slider->value(m_process->Focus_Delay);
     Settings->T_TIMEOUT->value(m_process->t_timeout);
 
     Settings->Upr_Amo->value(m_process->UpAmo);
@@ -3040,7 +3046,7 @@ void RKRGUI::Fill_Avail(int filter)
 
 void RKRGUI::set_focus_timer(int time)
 {
-    focus_delay_time = time;
+    focus_delay_time = m_process->Focus_Delay = time;
 }
 
 void RKRGUI::below_mouse_highlight_and_focus()

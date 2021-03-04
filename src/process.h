@@ -1089,6 +1089,7 @@ public:
     int Aux_Source;
     int last_auxvalue;
     int ena_tool;
+    int Focus_Delay;
     int VocBands;
     int RCOpti_Harm;
     int RCOpti_Stereo;
