@@ -1850,6 +1850,7 @@ void RKRGUI::MiraConfig()
 
 
     Settings->MTable->value(m_process->midi_table);
+    Settings->MTable->do_callback ();
 
     Settings->AAssign->value(m_process->autoassign);
     Settings->Update_TAP->value(m_process->Tap_Updated);

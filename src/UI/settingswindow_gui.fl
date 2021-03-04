@@ -1351,6 +1351,21 @@ m_process->Change_Preset = C_CHANGE_PRESET_OFF;
 
 m_process->midi_table=o->value();
 
+// To show/stop highlight on under mouse based on parent status
+for (int i = 0; i < scroll->children(); ++i)
+{
+    Fl_Widget *c = scroll->child(i);
+
+    if(m_process->midi_table)
+    {
+        c->activate ();
+    }
+    else
+    {
+        c->deactivate ();
+    }
+}
+
 if(m_process->midi_table)
 {
     scroll->activate();
