@@ -33,6 +33,7 @@ RKR_Slider::RKR_Slider(int X, int Y, int W, int H, const char *label) :
     m_look_changed(0),
     m_use_pixel_adjustment(true)    // main window efx sliders use this
 {
+    this->user_data((void*)(UD_RKR_Highlight));
 }
 
 int RKR_Slider::handle(int event)

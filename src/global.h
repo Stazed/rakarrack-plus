@@ -343,7 +343,8 @@ const int C_UD_Highlight_End      = 14000;  // Before
  * FLTK widget user_data is used for identifying widgets from user actions
  * as well as below mouse highlighting. Any items in the index range from
  * C_UD_Highlight_Begin to C_UD_Highlight_End will be highlighted when
- * below mouse. 
+ * below mouse. Also if active will become focused if not disabled in 
+ * Settings/Misc.
  * 
  * The index items should not overlap, including those from function calculated
  * amounts of bank window preset buttons and custom MIDI table bank and presets.
@@ -355,7 +356,7 @@ enum USER_DATA_index
     // Set in: BankWindowGui::make_window_banks()
     UD_Bank_Preset_End      = 60,
 
-    UD_RKR_Highlight        = 91,       // For highlighting when below mouse
+    UD_RKR_Highlight        = 91,       // For highlighting and focus when below mouse
     
     // Effect main rack labels
     UD_Label_1              = 770,

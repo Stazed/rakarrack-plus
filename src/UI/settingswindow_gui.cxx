@@ -2934,7 +2934,7 @@ this->when(FL_WHEN_RELEASE);
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
     { Focus_Slider = new RKR_Fl_Slider(30, 213, 400, 22);
-      Focus_Slider->type(1);
+      Focus_Slider->type(5);
       Focus_Slider->box(FL_ROUND_DOWN_BOX);
       Focus_Slider->color(FL_BACKGROUND_COLOR);
       Focus_Slider->selection_color(FL_BACKGROUND_COLOR);

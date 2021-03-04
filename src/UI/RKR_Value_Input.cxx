@@ -60,6 +60,8 @@ RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l) :
     align(FL_ALIGN_LEFT);
     value_damage();
     set_flag(SHORTCUT_LABEL);
+    
+    this->user_data((void*)(UD_RKR_Highlight));
 }
 
 RKR_Value_Input::~RKR_Value_Input()

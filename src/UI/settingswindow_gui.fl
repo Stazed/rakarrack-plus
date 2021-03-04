@@ -1463,7 +1463,7 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       Fl_Slider Focus_Slider {
         user_data UD_RKR_Highlight
         callback {m_parent->set_focus_timer(o->value());}
-        xywh {30 213 400 22} type Horizontal box ROUND_DOWN_BOX labelsize 10 align 1 maximum 100 step 1 value 25
+        xywh {30 213 400 22} type {Horz Knob} box ROUND_DOWN_BOX labelsize 10 align 1 maximum 100 step 1 value 25
         class RKR_Fl_Slider
       }
       Fl_Box {} {
