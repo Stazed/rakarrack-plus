@@ -677,10 +677,10 @@ void RKRGUI::load_previous_state()
     // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
     rakarrack.get(m_process->PrefNom("Font"), font_type, 0);
 
-    rakarrack.get(m_process->PrefNom("Background Color"), back_color, FL_BLACK);
-    rakarrack.get(m_process->PrefNom("Foreground Color"), fore_color, FL_DARK3);
-    rakarrack.get(m_process->PrefNom("Leds Color"), leds_color, FL_DARK_YELLOW);
-    rakarrack.get(m_process->PrefNom("Labels Color"), label_color, FL_WHITE);
+    rakarrack.get(m_process->PrefNom("Background Color"), back_color, 56);              // FL_BLACK
+    rakarrack.get(m_process->PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3
+    rakarrack.get(m_process->PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
+    rakarrack.get(m_process->PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
     rakarrack.get(m_process->PrefNom("Schema"), k, 2);
     Settings->scheme_ch->value(k);
     Settings->scheme_ch->do_callback();
