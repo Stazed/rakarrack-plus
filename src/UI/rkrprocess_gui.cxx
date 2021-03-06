@@ -243,6 +243,23 @@ void RKRGUI::GuiTimeout(void)
         m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
+    if (m_process->Change_Bank != C_BANK_CHANGE_OFF)
+    {
+       // BankWin_Label((char *)v); // FIXME
+        if (m_process->a_bank != m_process->Change_Bank)
+        {
+            m_process->a_bank = m_process->Change_Bank;
+
+            Put_Loaded_Bank();
+
+           // unlight_preset(m_process->Selected_Preset);
+
+            Preset_Counter->value(1);
+            Preset_Counter->do_callback();
+        }
+        
+        m_process->Change_Bank = C_BANK_CHANGE_OFF;
+    }
 
     if (m_process->Change_Preset != C_CHANGE_PRESET_OFF)
     {

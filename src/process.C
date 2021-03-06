@@ -71,6 +71,7 @@ RKR::RKR() :
     Exit_Program(0),
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
+    Change_Bank(C_BANK_CHANGE_OFF),
     Command_Line_File(0),
     File_To_Load(),
     Gui_Shown(1),
@@ -311,7 +312,7 @@ RKR::RKR() :
     new_preset();
 
     // Initialize Bank
-    new_bank();
+    new_bank(Bank);
     
     // Loads the banks preset names and information for the bank manager window.
     load_names();
@@ -323,6 +324,8 @@ RKR::RKR() :
         load_bank(BankFilename);
         a_bank = 3;
     }
+    
+    load_bank_CC_array();
 }
 
 RKR::~RKR()
@@ -604,6 +607,11 @@ RKR::load_user_preferences()
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/Default.rkrb", DATADIR);
     rakarrack.get(PrefNom("Bank Filename"), BankFilename, temp, 127);
+    
+    // Get user bank directory
+    memset(temp, 0, sizeof (temp));
+    sprintf(temp, "%s/", DATADIR);
+    rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
 }
 
 void

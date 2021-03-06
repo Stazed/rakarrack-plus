@@ -645,6 +645,48 @@ const int C_MAX_EFFECTS = 70;
 const int C_MAX_PARAMETERS = C_NUMBER_PARAMETERS + 1;  // 20
 const int C_BYPASS = 19;
 
+struct Preset_Bank_Struct
+{
+    char Preset_Name[64];
+    char Author[64];
+    char Classe[36];
+    char Type[4];
+    char ConvoFiname[128];
+    char cInput_Gain[64];
+    char cMaster_Volume[64];
+    char cBalance[64];
+    float Input_Gain;
+    float Master_Volume;
+    float Balance;
+    int Bypass;
+    char RevFiname[128];
+    char EchoFiname[128];
+    int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
+    int XUserMIDI[128][20];
+    int XMIDIrangeMin[128];
+    int XMIDIrangeMax[128];
+
+    Preset_Bank_Struct():
+        Preset_Name(),
+        Author(),
+        Classe(),
+        Type(),
+        ConvoFiname(),
+        cInput_Gain(),
+        cMaster_Volume(),
+        cBalance(),
+        Input_Gain(),
+        Master_Volume(),
+        Balance(),
+        Bypass(),
+        RevFiname(),
+        EchoFiname(),
+        lv(),
+        XUserMIDI(),
+        XMIDIrangeMin(),
+        XMIDIrangeMax() {}
+};
+
 
 class RKR
 {
@@ -699,8 +741,11 @@ public:
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     int load_bank (const char *filename);
     int save_bank (const char *filename);
+    void load_bank_CC_array();
+    void add_bank_item(std::string filename);
+    void copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[]);
     void new_preset ();
-    void new_bank ();
+    void new_bank (struct Preset_Bank_Struct a_bank[] );
     void bank_to_preset (int Num);
     void preset_to_bank (int i);
     void copy_IO();
@@ -818,6 +863,11 @@ public:
      * This is processed in GuiTimeout.
      */
     int Change_Preset;
+    
+    /**
+     * Flag to indicate that a MIDI CC bank change has occurred.
+     */
+    int Change_Bank;
 
     /**
      * Flag to indicate if the user used the -l command line option to load a preset file.
@@ -1217,48 +1267,22 @@ public:
     } mc_efx_params[C_MC_PARAMETER_SIZE];
 
 
-    struct Preset_Bank_Struct
-    {
-        char Preset_Name[64];
-        char Author[64];
-        char Classe[36];
-        char Type[4];
-        char ConvoFiname[128];
-        char cInput_Gain[64];
-        char cMaster_Volume[64];
-        char cBalance[64];
-        float Input_Gain;
-        float Master_Volume;
-        float Balance;
-        int Bypass;
-        char RevFiname[128];
-        char EchoFiname[128];
-        int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
-        int XUserMIDI[128][20];
-        int XMIDIrangeMin[128];
-        int XMIDIrangeMax[128];
-        
-        Preset_Bank_Struct():
-            Preset_Name(),
-            Author(),
-            Classe(),
-            Type(),
-            ConvoFiname(),
-            cInput_Gain(),
-            cMaster_Volume(),
-            cBalance(),
-            Input_Gain(),
-            Master_Volume(),
-            Balance(),
-            Bypass(),
-            RevFiname(),
-            EchoFiname(),
-            lv(),
-            XUserMIDI(),
-            XMIDIrangeMin(),
-            XMIDIrangeMax() {}
-    } Bank[62];
+    Preset_Bank_Struct Bank[62];
 
+    /**
+     * Array to hold Banks from file loading.
+     */
+    struct BankArray
+    {
+        Preset_Bank_Struct Bank[62];
+    };
+
+    /**
+     * Vector to hold all the available banks, default and user, in MIDI CC order for
+     * MIDI control loading on Bank Select.
+     */
+    std::vector <BankArray> Bank_Vector;
+    
 
     struct MIDI_table
     {

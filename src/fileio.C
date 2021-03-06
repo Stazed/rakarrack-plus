@@ -682,7 +682,7 @@ RKR::load_names()
 
         if ((fn = fopen(temp, "rb")) != NULL)
         {
-            new_bank();
+            new_bank(Bank);
             while (1)
             {
                 size_t ret = fread(&Bank, sizeof (Bank), 1, fn);
@@ -979,6 +979,7 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
 int
 RKR::load_bank(const char *filename)
 {
+//    printf("load_bank = %s\n", filename);
     int err_message = 1;
     char meslabel[70];
     FILE *fn;
@@ -1014,7 +1015,7 @@ RKR::load_bank(const char *filename)
 
     if ((fn = fopen(filename, "rb")) != NULL)
     {
-        new_bank();
+        new_bank(Bank);
 
         while (1)
         {
@@ -1097,6 +1098,170 @@ RKR::save_bank(const char *filename)
     return (0);
 }
 
+void
+RKR::load_bank_CC_array()
+{
+    std::vector<std::string>file_name;
+    DIR *dir;
+    struct dirent *fs;
+    
+    dir = opendir(DATADIR);
+    if (dir == NULL)
+    {
+        return;
+    }
+
+    // Get the bank files in the directory
+    while ((fs = readdir(dir)))
+    {
+        if (strstr(fs->d_name, ".rkrb") != NULL)
+        {
+            file_name.push_back (fs->d_name);
+        }
+    }
+
+    closedir(dir);
+    
+    // Sort alpha numeric
+    std::sort( file_name.begin(), file_name.end() );
+    
+    for(unsigned i = 0; i < file_name.size (); i++)
+    {
+        std::string full_path = DATADIR;
+        full_path += "/";
+        full_path += file_name[i];
+        add_bank_item(full_path);
+    }
+    
+    // Clear for the next directory
+    file_name.clear();
+    
+    // The (U) button Bank
+    add_bank_item(BankFilename);
+    
+    // The user bank directory
+    if(strcmp(UDirFilename, DATADIR) != 0)
+    {
+        dir = opendir(UDirFilename);
+        if (dir == NULL)
+        {
+            return;
+        }
+        
+        // Get the bank files in the directory
+        while ((fs = readdir(dir)))
+        {
+            if (strstr(fs->d_name, ".rkrb") != NULL)
+            {
+                file_name.push_back (fs->d_name);
+            }
+        }
+
+        closedir(dir);
+    }
+    
+    // Sort alpha numeric
+    std::sort( file_name.begin(), file_name.end() );
+    
+    for(unsigned i = 0; i < file_name.size (); i++)
+    {
+        std::string full_path = UDirFilename;
+        full_path += "/";
+        full_path += file_name[i];
+        add_bank_item(full_path);
+    }
+    
+}
+
+void
+RKR::add_bank_item(std::string filename)
+{
+    if (CheckOldBank(filename.c_str ()) == 0)
+    {
+//        printf("filename = %s\n", filename.c_str());
+        FILE *fn;
+        
+        BankArray Another_Bank;
+        
+        if ((fn = fopen(filename.c_str(), "rb")) != NULL)
+        {
+            new_bank(Another_Bank.Bank);
+
+            while (1)
+            {
+                size_t ret = fread(&Another_Bank.Bank, sizeof (Another_Bank.Bank), 1, fn);
+
+                if (feof(fn))
+                    break;
+
+                if (ret != 1)
+                {
+                    fl_alert("fread error in load_bank()");
+                    break;
+                }
+            }
+
+            fclose(fn);
+
+            if (big_endian())
+            {
+                fix_endianess();
+            }
+
+            convert_IO();
+
+            for(int i = 0; i < 62; i++)
+            {
+                revert_file_to_bank(Another_Bank.Bank[i].lv, sizeof(Another_Bank.Bank[i].lv));
+            }
+            
+            Bank_Vector.push_back(Another_Bank);
+        }
+    }
+}
+
+void
+RKR::copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[])
+{
+    new_bank(dest);
+    
+    for (int i = 0; i < 62; i++)
+    {
+        strcpy(dest[i].Preset_Name, source[i].Preset_Name);
+        strcpy(dest[i].Author, source[i].Author);
+
+        strcpy(dest[i].ConvoFiname, source[i].ConvoFiname);
+        strcpy(dest[i].RevFiname, source[i].RevFiname);
+        strcpy(dest[i].EchoFiname, source[i].EchoFiname);
+
+        dest[i].Input_Gain = source[i].Input_Gain;
+        dest[i].Master_Volume = source[i].Master_Volume;
+        dest[i].Balance = source[i].Balance;
+        dest[i].Bypass = source[i].Bypass;
+
+        // Set the default presets
+        for (int j = 0; j < C_NUMBER_EFFECTS; j++)
+        {
+            for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
+            {
+                dest[i].lv[j][k] = source[i].lv[j][k];
+            }
+            dest[i].lv[j][C_BYPASS] = source[i].lv[j][C_BYPASS];
+        }
+        
+        // Set the default order
+        for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
+        {
+            dest[i].lv[EFX_ORDER][k] = source[i].lv[EFX_ORDER][k];
+        }
+
+        memcpy(dest[i].XUserMIDI, source[i].XUserMIDI, sizeof(source[i].XUserMIDI));
+    }
+    
+    modified = 0;
+    new_bank_loaded = 1;
+}
+
 /**
  * Set all main window values to default.
  * Can be user triggered with the New button on the main window.
@@ -1170,40 +1335,40 @@ RKR::new_preset()
 }
 
 void
-RKR::new_bank()
+RKR::new_bank(struct Preset_Bank_Struct a_bank[])
 {
     for (int i = 0; i < 62; i++)
     {
-        memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
-        memset(Bank[i].Author, 0, sizeof (Bank[i].Author));
-        strcpy(Bank[i].Author, UserRealName);
-        memset(Bank[i].ConvoFiname, 0, sizeof (Bank[i].ConvoFiname));
-        memset(Bank[i].RevFiname, 0, sizeof (Bank[i].RevFiname));
-        memset(Bank[i].EchoFiname, 0, sizeof (Bank[i].EchoFiname));
+        memset(a_bank[i].Preset_Name, 0, sizeof (a_bank[i].Preset_Name));
+        memset(a_bank[i].Author, 0, sizeof (a_bank[i].Author));
+        strcpy(a_bank[i].Author, UserRealName);
+        memset(a_bank[i].ConvoFiname, 0, sizeof (a_bank[i].ConvoFiname));
+        memset(a_bank[i].RevFiname, 0, sizeof (a_bank[i].RevFiname));
+        memset(a_bank[i].EchoFiname, 0, sizeof (a_bank[i].EchoFiname));
 
-        Bank[i].Input_Gain = .5f;
-        Bank[i].Master_Volume = .5f;
-        Bank[i].Balance = 1.0f;
-        Bank[i].Bypass = 0;
-        memset(Bank[i].lv, 0, sizeof (Bank[i].lv));
+        a_bank[i].Input_Gain = .5f;
+        a_bank[i].Master_Volume = .5f;
+        a_bank[i].Balance = 1.0f;
+        a_bank[i].Bypass = 0;
+        memset(a_bank[i].lv, 0, sizeof (a_bank[i].lv));
 
         // Set the default presets
         for (int j = 0; j < C_NUMBER_EFFECTS; j++)
         {
             for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
             {
-                Bank[i].lv[j][k] = presets_default[j][k];
+                a_bank[i].lv[j][k] = presets_default[j][k];
             }
-            Bank[i].lv[j][C_BYPASS] = 0;
+            a_bank[i].lv[j][C_BYPASS] = 0;
         }
         
         // Set the default order
         for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
         {
-            Bank[i].lv[EFX_ORDER][k] = k;   // Order from 0 to 10
+            a_bank[i].lv[EFX_ORDER][k] = k;   // Order from 0 to 10
         }
 
-        memset(Bank[i].XUserMIDI, 0, sizeof (Bank[i].XUserMIDI));
+        memset(a_bank[i].XUserMIDI, 0, sizeof (a_bank[i].XUserMIDI));
     }
 };
 

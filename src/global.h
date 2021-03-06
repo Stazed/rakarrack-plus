@@ -58,6 +58,9 @@ const unsigned c_rkrb_ext_size = 5;
 const unsigned c_rkr_ext_size = 4;
 /* Flag to indicate the preset should not be changed */
 const unsigned C_CHANGE_PRESET_OFF = 1000;
+// Flag to indicate a CC Bank change 
+const unsigned C_BANK_CHANGE_OFF = 1000;
+
 /* Flag to indicate that drag should not be done */
 const unsigned C_NO_DRAG = 1000;
 

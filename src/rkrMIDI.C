@@ -1220,6 +1220,17 @@ RKR::process_midi_controller_events(int parameter, int value)
     // Special cases
     switch (parameter)
     {
+        case MC_Unused_32:  // FIXME
+        {
+            if(value < (int) Bank_Vector.size())
+            {
+                copy_bank(Bank, Bank_Vector[value].Bank);
+                Change_Bank = value;
+                // FIXME copy label
+            }
+            return;
+        }
+            
         case MC_Unused_0:
         case MC_Unused_10:
         case MC_Unused_11:
@@ -1229,7 +1240,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Unused_17:
         case MC_Unused_18:
         case MC_Unused_19:
-        case MC_Unused_32:
+            
         case MC_Unused_33:
         case MC_Unused_34:
         case MC_Unused_35:
