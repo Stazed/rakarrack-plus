@@ -28,6 +28,7 @@
 
 #include "rakarrack.h"
 #include "../icono_rakarrack_128x128.xpm"
+#include <algorithm>    // std::sort
 static Fl_Widget *previous_widget = NULL;
 static int drag = C_NO_DRAG;
 static int analyzer_redraw = 0;
@@ -3114,16 +3115,20 @@ int RKRGUI::search_bank_preset_button(int x, int y)
  */
 void RKRGUI::Scan_Bank_Dir()
 {
-    ClearBankNames(); /* This will free all memory allocated for names */
+    // This will free all memory allocated for names
+    ClearBankNames();
+    
+    // Clear the bank window menus
     BankWindow->CH_UB->clear();
     BankWindow->clear_menu();
     
-    /* Scan Default Directory for Bank files */
-    Set_Bank(DATADIR);
-    
-    /* Scan User Directory for Bank files */
-    Set_Bank(m_process->UDirFilename);
-    
+    // Scan Default Directory for Bank files
+    //Set_Bank(DATADIR);
+
+    // Scan User Directory for Bank files
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+        Set_Bank(m_process->UDirFilename);
+
     BankWindow->CH_UB->value(0);
 }
 
@@ -3135,7 +3140,7 @@ void RKRGUI::Scan_Bank_Dir()
  */
 void RKRGUI::Set_Bank(std::string directory)
 {
-    char nombank[FILENAME_MAX];
+    std::vector<std::string>file_name;
     DIR *dir;
     struct dirent *fs;
     
@@ -3145,30 +3150,47 @@ void RKRGUI::Set_Bank(std::string directory)
         return;
     }
 
+    // Get the bank files in the directory
     while ((fs = readdir(dir)))
     {
         if (strstr(fs->d_name, ".rkrb") != NULL)
         {
-            /* Construct full bank file name with path */
-            sprintf(nombank, "%s/%s", directory.c_str(), fs->d_name);
-            
-            AddBankName(nombank);
-            
-            if (m_process->CheckOldBank(nombank) == 0)
-            {
-                /* Get the name to be listed in the drop down "User Banks" menu */
-                std::string s_nombre = fs->d_name;
-                s_nombre = s_nombre.substr(0, s_nombre.size() - c_rkrb_ext_size);   // remove extension
-                
-                if(!s_nombre.empty())
-                {
-                    BankWindow->set_bank_CH_UB(&s_nombre[0], nombank);
-                } 
-            }
+            file_name.push_back (fs->d_name);
         }
     }
 
     closedir(dir);
+    
+    // Sort alpha numeric
+    std::sort( file_name.begin(), file_name.end() );
+    
+    for(int i = 0; i < file_name.size (); i++)
+    {
+        std::string full_path = directory;
+        full_path += "/";
+        full_path += file_name[i];
+        
+        if (m_process->CheckOldBank(full_path.c_str ()) == 0)
+        {
+            AddBankName(full_path.c_str ());
+            
+            // Construct the name to be listed in the drop down "User Banks" menu
+            // Add the CC value for bank select
+            std::string menu_name = "(";
+            menu_name += NTS((i + 3));      // CC value starts at 4, first 4 are preset (0 index)
+            menu_name += ") ";
+            
+            // Add the file name
+            menu_name += file_name[i];
+            menu_name = menu_name.substr(0, menu_name.size() - c_rkrb_ext_size);   // remove extension
+
+            // Add the name and full path to the menu
+            if(!menu_name.empty())
+            {
+                BankWindow->set_bank_CH_UB(&menu_name[0], (char*) full_path.c_str());
+            } 
+        }
+    }
 }
 
 /**
@@ -3704,6 +3726,16 @@ void RKRGUI::drag_effect()
     }
 }
 
+/**
+ * Adds a bank file name with full path to a double stacked list.
+ * Currently the list mBankNameList is never used - FIXME
+ * 
+ * @param name
+ *      The bank file with full path.
+ * 
+ * @return 
+ *      1 if successful, 0 if not.
+ */
 int RKRGUI::AddBankName(const char *name)
 {
     //AddBankName
@@ -3740,6 +3772,9 @@ int RKRGUI::AddBankName(const char *name)
     return 1;
 }
 
+/**
+ * Clears the double stacked list of bank names.
+ */
 void RKRGUI::ClearBankNames()
 {
     // clearbanknames
