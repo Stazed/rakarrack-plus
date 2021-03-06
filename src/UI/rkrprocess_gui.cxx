@@ -763,10 +763,11 @@ void RKRGUI::load_previous_state()
         Preset_Counter->do_callback();
     }
 
-    rakarrack.get(m_process->PrefNom("MIDI Implementation"), m_process->MIDIway, 0);
+    // MIDI Learn
     if (!m_process->MIDIway)
         ML_Menu->deactivate();
 
+    // Custom MIDI table
     rakarrack.get(m_process->PrefNom("MIDI Table"), m_process->midi_table, 0);
     if (!m_process->midi_table)
         Settings->scroll->deactivate();
@@ -924,51 +925,6 @@ void RKRGUI::load_previous_state()
     rakarrack.get(m_process->PrefNom("Aux Maximum"), m_process->Aux_Maximum, 127);
     Trigger->aux_max->value(m_process->Aux_Maximum);
 
-
-    char temp[64];
-
-
-    for (int i = 0; i < 128; i++)
-    {
-        if (i < 60)
-            k = i;
-        
-        if ((i > 59)&&(i < 120))
-            k = 1000 + i - 60;
-        
-        if (i > 119)
-            k = 0;
-        
-        memset(temp, 0, sizeof (temp));
-        sprintf(temp, "Midi Table Program %d", i);
-        rakarrack.get(m_process->PrefNom(temp), f, k);
-
-
-        if (f < 1000)
-        {
-            m_process->M_table[i].bank = 0;
-            m_process->M_table[i].preset = f;
-        }
-
-        if ((f > 999) && (f < 2000))
-        {
-            m_process->M_table[i].bank = 1;
-            m_process->M_table[i].preset = f - 1000;
-        }
-
-        if ((f > 1999) && (f < 3000))
-        {
-            m_process->M_table[i].bank = 2;
-            m_process->M_table[i].preset = f - 2000;
-        }
-
-
-        if ((f > 2999) && (f < 4000))
-        {
-            m_process->M_table[i].bank = 3;
-            m_process->M_table[i].preset = f - 3000;
-        }
-    }
 }
 
 /**

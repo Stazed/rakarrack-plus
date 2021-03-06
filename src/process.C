@@ -407,6 +407,20 @@ RKR::jack_open_client()
  *  Look, Audio, Quality, MIDI, Jack, Misc, Bank.
  *  These settings are saved in:
  *  /home/username/.fltk/github.com.Stazed.rakarrrack.plus/rakarrack-plus.prefs
+ * 
+ *  This loads only items needed for audio/MIDI processing. Since the program
+ *  can be run without GUI, the Look and other user settings not related to audio/MIDI
+ *  do not need to be loaded here. This is for initial process setup. 
+ * 
+ *  Currently this does not allow for using custom MIDI program change table.
+ *  Also, only applies to current bank loaded.
+ *  The current bank is: Default.rkrb, or if set, the bank set in Preferences/Bank,
+ *  or if on command line -b file is set.
+ * 
+ *  FIXME need to allow custom MIDI table.
+ * 
+ *  The other non audio/MIDI user settings are loaded by the load_previous_state()
+ *  function that is called when the RKRGUI class is created.
  */
 void
 RKR::load_user_preferences()
@@ -489,6 +503,58 @@ RKR::load_user_preferences()
 
     rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);
     rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
+    
+    // MIDI Learn used On/Off
+    rakarrack.get(PrefNom("MIDI Implementation"), MIDIway, 0);
+    
+    // Custom MIDI Table used On/OFF - Currently cannot be used with no GUI - FIXME
+    //rakarrack.get(PrefNom("MIDI Table"), midi_table, 0);
+    
+    // Custom MIDI program change table loading
+    char table_buffer[64];
+    int k = 0, f = 0;
+
+    for (int i = 0; i < 128; i++)
+    {
+        if (i < 60)
+            k = i;
+        
+        if ((i > 59)&&(i < 120))
+            k = 1000 + i - 60;
+        
+        if (i > 119)
+            k = 0;
+        
+        memset(table_buffer, 0, sizeof (table_buffer));
+        sprintf(table_buffer, "Midi Table Program %d", i);
+        rakarrack.get(PrefNom(table_buffer), f, k);
+
+
+        if (f < 1000)
+        {
+            M_table[i].bank = 0;
+            M_table[i].preset = f;
+        }
+
+        if ((f > 999) && (f < 2000))
+        {
+            M_table[i].bank = 1;
+            M_table[i].preset = f - 1000;
+        }
+
+        if ((f > 1999) && (f < 3000))
+        {
+            M_table[i].bank = 2;
+            M_table[i].preset = f - 2000;
+        }
+
+
+        if ((f > 2999) && (f < 4000))
+        {
+            M_table[i].bank = 3;
+            M_table[i].preset = f - 3000;
+        }
+    }   // End Custom Program change table
 
     char temp[256];
     memset(temp, 0, sizeof (temp));
