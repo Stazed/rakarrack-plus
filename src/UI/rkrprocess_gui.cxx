@@ -3125,7 +3125,7 @@ void RKRGUI::Scan_Bank_Dir()
     // Scan Default Directory for Bank files
     //Set_Bank(DATADIR);
 
-    // Scan User Directory for Bank files
+    // Scan User Directory for Bank files, do not load the defaults
     if(strcmp(m_process->UDirFilename, DATADIR) != 0)
         Set_Bank(m_process->UDirFilename);
 
@@ -3164,7 +3164,7 @@ void RKRGUI::Set_Bank(std::string directory)
     // Sort alpha numeric
     std::sort( file_name.begin(), file_name.end() );
     
-    for(int i = 0; i < file_name.size (); i++)
+    for(unsigned i = 0; i < file_name.size (); i++)
     {
         std::string full_path = directory;
         full_path += "/";
