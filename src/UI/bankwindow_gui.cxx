@@ -150,13 +150,25 @@ void BankWindowGui::cb_B_B4(RKR_Button* o, void* v) {
 }
 
 void BankWindowGui::cb_CH_UB_i(RKR_Choice*, void* v) {
-  int ok=m_process->load_bank((char *)v);
-if(ok) 
-{
-m_parent->BankWin_Label((char *)v);
-m_parent->Put_Loaded_Bank();
-unlight_preset(m_process->Selected_Preset);
-};
+  unsigned bank_to_set = 0;
+    
+    // Find the bank chosen by comparing file name
+    for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
+    {
+        if(strcmp((char *)v, m_process->Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
+        {
+            bank_to_set = i;
+            break;
+        }
+    }
+    
+    // Copy the found bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[bank_to_set].Bank);
+
+    // Update the Bank Window
+    m_parent->BankWin_Label((char *)v);
+    m_parent->Put_Loaded_Bank();
+    unlight_preset(m_process->Selected_Preset);
 }
 void BankWindowGui::cb_CH_UB(RKR_Choice* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_CH_UB_i(o,v);
