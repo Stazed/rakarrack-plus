@@ -1130,7 +1130,11 @@ RKR::load_bank_CC_array()
     for(unsigned i = 0; i < file_name.size (); i++)
     {
         std::string full_path = DATADIR;
-        full_path += "/";
+        
+        // Check for trailing '/'
+        if(full_path[full_path.size() - 1] != '/')
+            full_path += "/";
+        
         full_path += file_name[i];
         add_bank_item(full_path);
     }
@@ -1168,7 +1172,11 @@ RKR::load_bank_CC_array()
     for(unsigned i = 0; i < file_name.size (); i++)
     {
         std::string full_path = UDirFilename;
-        full_path += "/";
+        
+        // Check for trailing '/'
+        if(full_path[full_path.size() - 1] != '/')
+            full_path += "/";
+
         full_path += file_name[i];
         add_bank_item(full_path);
     }

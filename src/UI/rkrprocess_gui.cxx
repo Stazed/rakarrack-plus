@@ -2065,6 +2065,7 @@ void RKRGUI::is_modified()
         switch (ok)
         {
             case 0:
+                m_process->modified = 0;
                 break;
 
             case 1:
@@ -3849,8 +3850,26 @@ void RKRGUI::set_save_file()
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
     int ok = m_process->save_bank(filename);
+    
     if (ok)
     {
+        // Check if the saved file is one of the Bank_Vector items
+        // If it is, then we need to update the Bank_Vector
+        int file_match = -1;
+        for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
+        {
+            if(strcmp(filename, m_process->Bank_Vector[i].Bank_File_Name.c_str()) == 0)
+            {
+                file_match = i;
+                break;
+            }
+        }
+        
+        if(file_match >= 0)
+        {
+            m_process->copy_bank (m_process->Bank_Vector[file_match].Bank, m_process->Bank);
+        }
+        
         strcpy(m_process->Bank_Saved, filename);
         BankWin_Label(filename);
     }

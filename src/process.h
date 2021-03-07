@@ -1213,6 +1213,11 @@ public:
 
     char *Preset_Name;
     char *Author;
+    
+    /**
+     * Any previously saved bank filename is saved here. Used for setting the
+     * fltk file browser previous item.
+     */
     char *Bank_Saved;
     char *UserRealName;
 

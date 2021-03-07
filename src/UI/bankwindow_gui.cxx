@@ -15,16 +15,22 @@ const std::vector<std::string> bank_submenu_paths
 };
 
 void BankWindowGui::cb_NewB_i(Fl_Menu_*, void*) {
-  m_process->new_bank(m_process->Bank);
-m_parent->Put_Loaded_Bank();
-redraw();
+  m_parent->is_modified ();
+    m_process->new_bank(m_process->Bank);
+    m_parent->Put_Loaded_Bank();
+    redraw();
 }
 void BankWindowGui::cb_NewB(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_NewB_i(o,v);
 }
 
 void BankWindowGui::cb_Load_Bank_i(Fl_Menu_*, void*) {
-  char *filename =  m_parent->get_bank_file();
+  m_parent->is_modified ();
+    m_parent->get_bank_file();
+
+/*
+// We cannot load banks to the menu that are not from the user bank directory.
+// If it is already in the directory, it is already listed.
 
 if(filename == 0)
   return;
@@ -34,7 +40,8 @@ if(m_process->CheckOldBank(filename)==0)
 	std::string filepart = strrchr(filename,'/')+1;     // get the file name W/O path
         std::string bank_name = filepart.substr(0, filepart.size() - c_rkrb_ext_size); // remove the file extension
         CH_UB->add((const char *)bank_name.c_str(), 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
-};
+}
+*/;
 }
 void BankWindowGui::cb_Load_Bank(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Load_Bank_i(o,v);
@@ -150,7 +157,8 @@ void BankWindowGui::cb_B_B4(RKR_Button* o, void* v) {
 }
 
 void BankWindowGui::cb_CH_UB_i(RKR_Choice*, void* v) {
-  unsigned bank_to_set = 0;
+  m_parent->is_modified ();
+    unsigned bank_to_set = 0;
     
     // Find the bank chosen by comparing file name
     for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)

@@ -45,7 +45,7 @@ m_parent= _rgui;} {}
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
-  Fl_Menu_Bar MenuB {open
+  Fl_Menu_Bar MenuB {
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
     code0 {o->set_label_offset(6);}
     code1 {o->set_submenu_paths(bank_submenu_paths);}
@@ -57,14 +57,20 @@ m_parent= _rgui;} {}
     } {
       MenuItem NewB {
         label {&New}
-        callback {m_process->new_bank(m_process->Bank);
-m_parent->Put_Loaded_Bank();
-redraw();}
+        callback {m_parent->is_modified ();
+    m_process->new_bank(m_process->Bank);
+    m_parent->Put_Loaded_Bank();
+    redraw();}
         xywh {0 0 45 26} divider
       }
       MenuItem Load_Bank {
         label {&Load Bank}
-        callback {char *filename =  m_parent->get_bank_file();
+        callback {m_parent->is_modified ();
+    m_parent->get_bank_file();
+
+/*
+// We cannot load banks to the menu that are not from the user bank directory.
+// If it is already in the directory, it is already listed.
 
 if(filename == 0)
   return;
@@ -74,7 +80,8 @@ if(m_process->CheckOldBank(filename)==0)
 	std::string filepart = strrchr(filename,'/')+1;     // get the file name W/O path
         std::string bank_name = filepart.substr(0, filepart.size() - c_rkrb_ext_size); // remove the file extension
         CH_UB->add((const char *)bank_name.c_str(), 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
-}}
+}
+*/}
         xywh {10 10 45 26}
       }
       MenuItem Save_Bank {
@@ -161,7 +168,8 @@ m_parent->put_icon(m_parent->AboutWin);}
   }
   Fl_Choice CH_UB {
     label {User Banks       }
-    callback {unsigned bank_to_set = 0;
+    callback {m_parent->is_modified ();
+    unsigned bank_to_set = 0;
     
     // Find the bank chosen by comparing file name
     for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
