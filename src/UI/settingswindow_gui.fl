@@ -1518,7 +1518,10 @@ filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
-strcpy(m_process->BankFilename,filename);}
+strcpy(m_process->BankFilename,filename);
+
+// To reload MIDI CC table for Bank Select
+m_parent->Scan_Bank_Dir(1);}
         xywh {415 65 65 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
@@ -1537,7 +1540,7 @@ dir=fl_dir_chooser("Browse:",NULL,0);
 if (dir==NULL) return;
 Udir->value(dir);
 strcpy(m_process->UDirFilename,dir);
-m_parent->Scan_Bank_Dir();}
+m_parent->Scan_Bank_Dir(1);}
         xywh {415 135 65 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button

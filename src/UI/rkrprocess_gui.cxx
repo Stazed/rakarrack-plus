@@ -3129,26 +3129,33 @@ int RKRGUI::search_bank_preset_button(int x, int y)
  Any directory files found are passed to the BankWindow class and listed on the
  Bank Manager "User Banks" drop down menu.
  */
-void RKRGUI::Scan_Bank_Dir()
+void RKRGUI::Scan_Bank_Dir(int reload)
 {
     // This will free all memory allocated for names
+    // FIXME the list created is not used - remove when done
     ClearBankNames();
     
     // Clear the bank window menus
     BankWindow->CH_UB->clear();
     BankWindow->clear_menu();
     
-    // Scan Default Directory for Bank files
-    //Set_Bank(DATADIR);
-
-    // Scan User Directory for Bank files, do not load the defaults
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
-        Set_Bank(m_process->UDirFilename);
+    if(reload)
+    {
+        m_process->load_bank_CC_array ();
+    }
+    
+    for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
+    {
+        std::string full_path = m_process->Bank_Vector[i].Bank_File_Name;
+        std::string menu_name = m_process->Bank_Vector[i].Bank_Menu_Name;
+        BankWindow->set_bank_CH_UB(&menu_name[0], (char*) full_path.c_str());
+    }
 
     BankWindow->CH_UB->value(0);
 }
 
 /**
+ *  This is no longer used - FIXME remove when done
  *  Scan a directory for Bank files and if valid, send it to the BankWindow class.
  * 
  * @param directory

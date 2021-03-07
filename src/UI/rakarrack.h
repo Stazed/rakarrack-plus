@@ -614,7 +614,7 @@ public:
   void Fill_Avail(int filter);
   void below_mouse_highlight_and_focus();
   int search_bank_preset_button(int x, int y);
-  void Scan_Bank_Dir();
+  void Scan_Bank_Dir(int reload);
 private:
   void Set_Bank(std::string directory);
 public:

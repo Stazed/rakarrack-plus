@@ -1101,6 +1101,8 @@ RKR::save_bank(const char *filename)
 void
 RKR::load_bank_CC_array()
 {
+    Bank_Vector.clear();
+
     std::vector<std::string>file_name;
     DIR *dir;
     struct dirent *fs;

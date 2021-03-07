@@ -332,7 +332,7 @@ widget gets the focus.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {492 99 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {476 95 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1450,7 +1450,7 @@ else
 if(!made) BankWindow->make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
-Scan_Bank_Dir();
+Scan_Bank_Dir(0);
 }
 else
 BankWindow->hide();}
@@ -1905,7 +1905,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {search_bank_preset_button(int x, int y)} {open return_type int
   } {}
-  Function {Scan_Bank_Dir()} {open
+  Function {Scan_Bank_Dir(int reload)} {open
   } {}
   Function {Set_Bank(std::string directory)} {open private return_type void
   } {}

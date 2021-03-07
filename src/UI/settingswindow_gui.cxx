@@ -1088,6 +1088,9 @@ if (filename==NULL) return;
 filename=fl_filename_setext(filename,".rkrb");
 BFiname->value(filename);
 strcpy(m_process->BankFilename,filename);
+
+// To reload MIDI CC table for Bank Select
+m_parent->Scan_Bank_Dir(1);
 }
 void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BF_Browser_i(o,v);
@@ -1099,7 +1102,7 @@ dir=fl_dir_chooser("Browse:",NULL,0);
 if (dir==NULL) return;
 Udir->value(dir);
 strcpy(m_process->UDirFilename,dir);
-m_parent->Scan_Bank_Dir();
+m_parent->Scan_Bank_Dir(1);
 }
 void SettingsWindowGui::cb_UD_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UD_Browser_i(o,v);

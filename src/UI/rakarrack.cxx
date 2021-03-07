@@ -639,7 +639,7 @@ void RKRGUI::cb_B_preset_i(RKR_Button*, void*) {
 if(!made) BankWindow->make_window_banks();
 BankWindow->show();
 put_icon(BankWindow);
-Scan_Bank_Dir();
+Scan_Bank_Dir(0);
 }
 else
 BankWindow->hide();
