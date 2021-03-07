@@ -1238,6 +1238,9 @@ RKR::process_midi_controller_events(int parameter, int value)
             {
                 copy_bank(Bank, Bank_Vector[value].Bank);
                 Change_Bank = value;
+                
+                // Un-comment for testing, to hear change of Bank preset
+                // Change_Preset = 1;
             }
             return;
         }

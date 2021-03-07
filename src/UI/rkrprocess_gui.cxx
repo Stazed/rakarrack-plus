@@ -252,9 +252,6 @@ void RKRGUI::GuiTimeout(void)
             m_process->a_bank = m_process->Change_Bank;
 
             Put_Loaded_Bank();
-
-            Preset_Counter->value(1);
-            Preset_Counter->do_callback();
         }
         
         m_process->Change_Bank = C_BANK_CHANGE_OFF;
