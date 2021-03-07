@@ -79,7 +79,7 @@
  */
 enum MIDI_Control_Default_Index
 {
-    MC_Unused_0 = 0,
+    MC_Bank_Select = 0,
 
     MC_WahWah_Depth,
     MC_Dere_Drive,
@@ -606,7 +606,7 @@ enum GUI_Refresh_Index
 const int C_MC_PARAMETER_SIZE = 445;
 
 /**
- * Magic number 26 is the Unused cases from the default MIDI control
+ * Magic number 26 is Bank Select (CC 0) and the Unused cases from the default MIDI control
  * (0, 10, 11, 13, (15 > 19), (32 > 45), 64) = 24 -- Unused
  * plus 128, 129 also Unused  = 24 + 2 = 26.
  * If any of these unused parameters are used and added to
@@ -1274,6 +1274,8 @@ public:
      */
     struct BankArray
     {
+        std::string Bank_File_Name;
+        std::string Bank_Menu_Name;
         Preset_Bank_Struct Bank[62];
     };
 

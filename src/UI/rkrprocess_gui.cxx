@@ -245,14 +245,13 @@ void RKRGUI::GuiTimeout(void)
 
     if (m_process->Change_Bank != C_BANK_CHANGE_OFF)
     {
-       // BankWin_Label((char *)v); // FIXME
+        BankWin_Label(m_process->Bank_Vector[m_process->Change_Bank].Bank_File_Name.c_str ());
+
         if (m_process->a_bank != m_process->Change_Bank)
         {
             m_process->a_bank = m_process->Change_Bank;
 
             Put_Loaded_Bank();
-
-           // unlight_preset(m_process->Selected_Preset);
 
             Preset_Counter->value(1);
             Preset_Counter->do_callback();

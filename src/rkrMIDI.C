@@ -826,8 +826,14 @@ RKR::midievents()
                 ControlGet = (int) midievent->data.control.param;
                 return;
             }
-
-            if (MIDIway)
+            
+            // Bank_Select = CC 0
+            if(midievent->data.control.param == 0)
+            {
+                process_midi_controller_events((int) midievent->data.control.param,
+                                               (int) midievent->data.control.value);
+            }
+            else if (MIDIway)
             {
                 for (i = 0; i < 20; i++)
                 {
@@ -1183,8 +1189,13 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                 ControlGet = cmdcontrol;
                 return;
             }
-
-            if (MIDIway)
+            
+            // Bank_Select = CC 0
+            if(cmdcontrol == 0)
+            {
+                process_midi_controller_events(cmdcontrol, cmdvalue);
+            }
+            else if (MIDIway)
             {
                 for (i = 0; i < 20; i++)
                 {
@@ -1220,18 +1231,17 @@ RKR::process_midi_controller_events(int parameter, int value)
     // Special cases
     switch (parameter)
     {
-        case MC_Unused_32:  // FIXME
+        // Bank Select is Hard coded to CC 0
+        case MC_Bank_Select:    // CC 0
         {
             if(value < (int) Bank_Vector.size())
             {
                 copy_bank(Bank, Bank_Vector[value].Bank);
                 Change_Bank = value;
-                // FIXME copy label
             }
             return;
         }
             
-        case MC_Unused_0:
         case MC_Unused_10:
         case MC_Unused_11:
         case MC_Unused_13:
@@ -1240,7 +1250,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Unused_17:
         case MC_Unused_18:
         case MC_Unused_19:
-            
+        case MC_Unused_32:
         case MC_Unused_33:
         case MC_Unused_34:
         case MC_Unused_35:

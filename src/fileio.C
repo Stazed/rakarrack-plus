@@ -1178,7 +1178,6 @@ RKR::add_bank_item(std::string filename)
 {
     if (CheckOldBank(filename.c_str ()) == 0)
     {
-//        printf("filename = %s\n", filename.c_str());
         FILE *fn;
         
         BankArray Another_Bank;
@@ -1214,6 +1213,19 @@ RKR::add_bank_item(std::string filename)
             {
                 revert_file_to_bank(Another_Bank.Bank[i].lv, sizeof(Another_Bank.Bank[i].lv));
             }
+            
+            Another_Bank.Bank_File_Name = filename;
+            
+            // Add the CC value for bank select
+            std::string menu_name = "(";
+            menu_name += NTS(Bank_Vector.size());
+            menu_name += ") ";
+            
+            // Add the file name
+            menu_name += strrchr(filename.c_str(),'/')+1;     // get the file name W/O path
+            menu_name = menu_name.substr(0, menu_name.size() - c_rkrb_ext_size);   // remove extension
+
+            Another_Bank.Bank_Menu_Name = menu_name;
             
             Bank_Vector.push_back(Another_Bank);
         }
