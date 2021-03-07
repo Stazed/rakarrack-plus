@@ -1326,66 +1326,61 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         }
         Fl_Button L_B1 {
           label 1
-          callback {is_modified();
-char temp[128];           
-  memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s/Default.rkrb", DATADIR);
-int ok=m_process->load_bank(temp);
-if(ok) 
-{
-m_process->a_bank=0;
-BankWin_Label(temp);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-}}
+          callback {// Check if the bank was modified - request save
+    is_modified();
+    
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[0].Bank);
+
+    m_process->a_bank = 0;
+    BankWin_Label(m_process->Bank_Vector[0].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);}
           xywh {418 30 22 16} color 62 labelsize 10
           class RKR_Button
         }
         Fl_Button L_B2 {
           label 2
-          callback {is_modified();
-char temp[128];           
-  memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s/Extra.rkrb", DATADIR);
- int ok=m_process->load_bank(temp);
-if(ok) 
-{
-m_process->a_bank=1;
-BankWin_Label(temp);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-}}
+          callback {// Check if the bank was modified - request save
+    is_modified();
+
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[1].Bank);
+
+    m_process->a_bank = 1;
+    BankWin_Label(m_process->Bank_Vector[1].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);}
           xywh {442 30 22 16} color 62 labelsize 10
           class RKR_Button
         }
         Fl_Button L_B3 {
           label 3
-          callback {is_modified();
-char temp[128];           
-  memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s/Extra1.rkrb", DATADIR);
- int ok=m_process->load_bank(temp);
-if(ok) 
-{
-m_process->a_bank=2;
-BankWin_Label(temp);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-}}
+          callback {// Check if the bank was modified - request save
+    is_modified();
+
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[2].Bank);
+
+    m_process->a_bank = 2;
+    BankWin_Label(m_process->Bank_Vector[2].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);}
           xywh {466 30 22 16} color 62 labelsize 10
           class RKR_Button
         }
         Fl_Button L_B4 {
           label U
-          callback {is_modified();
-int ok=m_process->load_bank(m_process->BankFilename);
-if(ok) 
-{
-m_process->a_bank=3;
-BankWin_Label(m_process->BankFilename);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-}}
+          callback {// Check if the bank was modified - request save
+    is_modified();
+
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[3].Bank);
+
+    m_process->a_bank = 3;
+    BankWin_Label(m_process->Bank_Vector[3].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);}
           xywh {490 30 22 16} color 62 labelsize 10
           class RKR_Button
         }

@@ -511,69 +511,64 @@ void RKRGUI::cb_Metro_Tempo(RKR_Slider* o, void* v) {
 }
 
 void RKRGUI::cb_L_B1_i(RKR_Button*, void*) {
-  is_modified();
-char temp[128];           
-  memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s/Default.rkrb", DATADIR);
-int ok=m_process->load_bank(temp);
-if(ok) 
-{
-m_process->a_bank=0;
-BankWin_Label(temp);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-};
+  // Check if the bank was modified - request save
+    is_modified();
+    
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[0].Bank);
+
+    m_process->a_bank = 0;
+    BankWin_Label(m_process->Bank_Vector[0].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);
 }
 void RKRGUI::cb_L_B1(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B1_i(o,v);
 }
 
 void RKRGUI::cb_L_B2_i(RKR_Button*, void*) {
-  is_modified();
-char temp[128];           
-  memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s/Extra.rkrb", DATADIR);
- int ok=m_process->load_bank(temp);
-if(ok) 
-{
-m_process->a_bank=1;
-BankWin_Label(temp);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-};
+  // Check if the bank was modified - request save
+    is_modified();
+
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[1].Bank);
+
+    m_process->a_bank = 1;
+    BankWin_Label(m_process->Bank_Vector[1].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);
 }
 void RKRGUI::cb_L_B2(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B2_i(o,v);
 }
 
 void RKRGUI::cb_L_B3_i(RKR_Button*, void*) {
-  is_modified();
-char temp[128];           
-  memset (temp, 0, sizeof (temp));
-  sprintf (temp, "%s/Extra1.rkrb", DATADIR);
- int ok=m_process->load_bank(temp);
-if(ok) 
-{
-m_process->a_bank=2;
-BankWin_Label(temp);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-};
+  // Check if the bank was modified - request save
+    is_modified();
+
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[2].Bank);
+
+    m_process->a_bank = 2;
+    BankWin_Label(m_process->Bank_Vector[2].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);
 }
 void RKRGUI::cb_L_B3(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B3_i(o,v);
 }
 
 void RKRGUI::cb_L_B4_i(RKR_Button*, void*) {
-  is_modified();
-int ok=m_process->load_bank(m_process->BankFilename);
-if(ok) 
-{
-m_process->a_bank=3;
-BankWin_Label(m_process->BankFilename);
-Put_Loaded_Bank();
-BankWindow->unlight_preset(m_process->Selected_Preset);
-};
+  // Check if the bank was modified - request save
+    is_modified();
+
+    // Copy the bank to the process active Bank
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[3].Bank);
+
+    m_process->a_bank = 3;
+    BankWin_Label(m_process->Bank_Vector[3].Bank_File_Name.c_str ());
+    Put_Loaded_Bank();
+    BankWindow->unlight_preset(m_process->Selected_Preset);
 }
 void RKRGUI::cb_L_B4(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_B4_i(o,v);
