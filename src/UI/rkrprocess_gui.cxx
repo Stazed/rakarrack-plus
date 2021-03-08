@@ -2074,8 +2074,10 @@ void RKRGUI::is_modified()
 
 void RKRGUI::Put_Loaded_Bank()
 {
-    // Put loaded bank
     int k = 1;
+
+    // Program change number before the preset name
+    std::string add_pg_change = "";
 
     for (int t = 0; t < BankWindow->ob->children(); t++)
     {
@@ -2083,7 +2085,11 @@ void RKRGUI::Put_Loaded_Bank()
         long long temp = (long long) w->user_data();
         if (temp > 0)
         {
-            w->copy_label(m_process->Bank[k].Preset_Name);
+            add_pg_change = "(";
+            add_pg_change += NTS(k);
+            add_pg_change += ") ";
+            add_pg_change += m_process->Bank[k].Preset_Name;
+            w->copy_label(add_pg_change.c_str ());
             k++;
         }
     }
