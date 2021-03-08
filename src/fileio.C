@@ -1206,7 +1206,8 @@ RKR::add_bank_item(std::string filename)
                 if (ret != 1)
                 {
                     Error_Handle(28, filename);
-                    break;
+                    fclose(fn);
+                    return;
                 }
             }
 

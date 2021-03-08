@@ -75,7 +75,7 @@ RKR::RKR() :
     Change_Bank(C_BANK_CHANGE_OFF),
     Command_Line_File(0),
     File_To_Load(),
-    Gui_Shown(1),
+    Gui_Shown(0),
     Gui_Refresh(0),
     No_Jack_Client(0),
     Bank_Load_Command_Line(0),
@@ -207,7 +207,7 @@ RKR::RKR() :
     Jack_MIDI_OUT_Port_Connnection_Status(),
     Jack_Port_Connnection_Changed(),
     midi_table(),
-    a_bank(),
+    a_bank(0),
     new_bank_loaded(),
     Aux_Gain(),
     Aux_Threshold(),
@@ -314,7 +314,7 @@ RKR::RKR() :
 
     // Initialize Bank
     new_bank(Bank);
-    
+
     // Loads the banks preset names and information for the bank manager window.
     load_names();
 
@@ -322,8 +322,17 @@ RKR::RKR() :
     // in Settings/Preferences/Bank/ Bank Filename
     if (Command_Line_File == 0)
     {
-        load_bank(BankFilename);
-        a_bank = 3;
+        if(load_bank(BankFilename))
+        {
+            a_bank = 3;
+        }
+        else    // means we got a bad user file so reset it to Default.rkrb
+        {
+            // Get user default bank file from Settings/Bank/ --Bank Filename
+            memset(BankFilename, 0, sizeof(BankFilename));
+            sprintf(BankFilename, "%s/Default.rkrb", DATADIR);
+            load_bank(BankFilename);
+        }
     }
     
     load_bank_CC_array();
