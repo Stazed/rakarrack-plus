@@ -136,9 +136,13 @@ filename=fl_filename_setext(filename,".wav");
 
 Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
 strcpy(Efx_Convolotron->Filename,filename);
+
 if(!Efx_Convolotron->setfile(USERFILE))
 {
+    // Need to shut off below mouse or it tries to modify the fl_alert widget and crash.
+    Shut_Off_Below_Mouse = 1;
     fl_alert("Error loading %s file!\n", filename);
+    Shut_Off_Below_Mouse = 0;
 };
 }
 void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {

@@ -1030,7 +1030,12 @@ RKR::conectaaconnect()
         sprintf(tempi, "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
         
         if (system(tempi) == -1)
+        {
+            // Need to shut off below mouse or it tries to modify the fl_alert widget and crash.
+            Shut_Off_Below_Mouse = 1;
             fl_alert("Error running aconnect!");
+            Shut_Off_Below_Mouse = 0;
+        }
         else
             IsCoIn = 1;
     }
@@ -1046,7 +1051,12 @@ RKR::disconectaaconnect()
         memset(tempi, 0, sizeof (tempi));
         sprintf(tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
         if (system(tempi) == -1)
+        {
+            // Need to shut off below mouse or it tries to modify the fl_alert widget and crash.
+            Shut_Off_Below_Mouse = 1;
             fl_alert("Error running aconnect!");
+            Shut_Off_Below_Mouse = 0;
+        }
         else
             IsCoIn = 0;
     }

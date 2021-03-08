@@ -3228,7 +3228,10 @@ void SettingsWindowGui::update_convo_quality() {
       strcpy(Efx_Convolotron->Filename,filename.c_str());
       if(!Efx_Convolotron->setfile(USERFILE))
       {
+          // Need to shut off below mouse or it tries to modify the fl_alert widget and crash.
+          Shut_Off_Below_Mouse = 1;
           fl_alert("Error loading %s file!\n", filename.c_str());
+          Shut_Off_Below_Mouse = 0;
       };
   }
   
@@ -3269,7 +3272,10 @@ void SettingsWindowGui::update_revtron_quality() {
       strcpy(Efx_Reverbtron->Filename,filename.c_str());
       if(!Efx_Reverbtron->setfile(USERFILE))
       {
+          // Need to shut off below mouse or it tries to modify the fl_alert widget and crash.
+          Shut_Off_Below_Mouse = 1;
           fl_alert("Error loading %s file!\n", filename.c_str());
+          Shut_Off_Below_Mouse = 0;
       };
   }
   
