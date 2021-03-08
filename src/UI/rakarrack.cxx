@@ -561,12 +561,25 @@ void RKRGUI::cb_L_B3(RKR_Button* o, void* v) {
 void RKRGUI::cb_L_B4_i(RKR_Button*, void*) {
   // Check if the bank was modified - request save
     is_modified();
+    
+    // If we do not find the Bank file, then the Default.rkrb file is loaded.
+    unsigned bank_to_set = 0;
+    
+    // Find the bank chosen by comparing file name
+    for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
+    {
+        if(strcmp( m_process->BankFilename , m_process->Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
+        {
+            bank_to_set = i;
+            break;
+        }
+    }
 
     // Copy the bank to the process active Bank
-    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[3].Bank);
+    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[bank_to_set].Bank);
 
-    m_process->a_bank = 3;
-    BankWin_Label(m_process->Bank_Vector[3].Bank_File_Name.c_str ());
+    m_process->a_bank = bank_to_set;
+    BankWin_Label(m_process->Bank_Vector[bank_to_set].Bank_File_Name.c_str ());
     Put_Loaded_Bank();
     BankWindow->unlight_preset(m_process->Selected_Preset);
 }

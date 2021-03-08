@@ -315,7 +315,7 @@ RKR::RKR() :
     // Initialize Bank
     new_bank(Bank);
 
-    // Loads the banks preset names and information for the bank manager window.
+    // Loads the information for the custom MIDI control scroll.
     load_names();
 
     // If no bank is listed from the command line, then load the default user bank

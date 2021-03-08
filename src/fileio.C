@@ -644,7 +644,8 @@ RKR::set_audio_paramters()
 }
 
 /**
- *  Loads the default banks preset names and information for the bank manager window.
+ *  Loads the default banks preset names and information for the Custom MIDI
+ *  control scroll. FIXME - this should load from the Bank_Vector.
  */
 void
 RKR::load_names()
@@ -1141,9 +1142,6 @@ RKR::load_bank_CC_array()
     
     // Clear for the next directory
     file_name.clear();
-    
-    // The (U) button Bank
-    add_bank_item(BankFilename);
     
     // The user bank directory
     if(strcmp(UDirFilename, DATADIR) != 0)
