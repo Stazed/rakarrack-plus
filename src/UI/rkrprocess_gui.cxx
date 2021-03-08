@@ -3058,6 +3058,12 @@ void RKRGUI::below_mouse_highlight_and_focus()
         if(widget_belowmouse->active ())
         {
             widget_user_data = (long long) widget_belowmouse->user_data();
+            
+            // Check range
+            if ((widget_user_data <= C_UD_Highlight_Begin) || (widget_user_data >= C_UD_Highlight_End))
+            {
+                widget_user_data = 0;   // out of range so don't use it
+            }
         }
     }
 
@@ -3088,28 +3094,24 @@ void RKRGUI::below_mouse_highlight_and_focus()
         grab_focus = 1;
 
         // Highlight the item below mouse within the user_data range - see global.h, USER_DATA_index
-        if ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End))
+        // Check if bank window preset button, special handling in RKR_Button::draw()
+        if( (widget_user_data >= UD_Bank_Preset_Start) && (widget_user_data <= UD_Bank_Preset_End) )
         {
-            // Check if bank window preset button, special handling in RKR_Button::draw()
-            if( (widget_user_data >= UD_Bank_Preset_Start) && (widget_user_data <= UD_Bank_Preset_End) )
-            {
-                RKR_Button *bank_button = static_cast<RKR_Button*> (widget_belowmouse);
-                bank_button->set_bank_under_mouse (1);  // True
-                bank_button->redraw ();
-            }
-            else    // Everything else not bank window preset buttons
-            {
-                widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .6));
-                widget_belowmouse->redraw();
-            }
-            previous_widget = widget_belowmouse;
+            RKR_Button *bank_button = static_cast<RKR_Button*> (widget_belowmouse);
+            bank_button->set_bank_under_mouse (1);  // True
+            bank_button->redraw ();
         }
+        else    // Everything else not bank window preset buttons
+        {
+            widget_belowmouse->color(fl_color_average(global_fore_color, fl_lighter(global_fore_color), .6));
+            widget_belowmouse->redraw();
+        }
+        previous_widget = widget_belowmouse;
     }
     
     if(focus_delay_time)
     {
-        if(widget_user_data && (widget_belowmouse == previous_widget) &&
-           ((widget_user_data > C_UD_Highlight_Begin) && (widget_user_data < C_UD_Highlight_End)))
+        if(widget_user_data && (widget_belowmouse == previous_widget))
         {
             if(grab_focus &&  (grab_focus > focus_delay_time))
             {
