@@ -1330,7 +1330,12 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         // Check if user really wants to set the preset to the bank
         Fl_Widget *m = fl_message_icon();
         m->parent()->copy_label(m_process->jackcliname);
+        
+        // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
+        Shut_Off_Below_Mouse = 1;
         int ok = fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
+        Shut_Off_Below_Mouse = 0;
+        
         if (!ok)
         {
             o->value(0);
@@ -2057,8 +2062,11 @@ void RKRGUI::is_modified()
         Fl_Widget *w = fl_message_icon();
         w->parent()->copy_label(m_process->jackcliname);
 
+        // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
+        Shut_Off_Below_Mouse = 1;
         int ok = fl_choice("Bank was modified, but not saved", "Discard", "Save", NULL);
-
+        Shut_Off_Below_Mouse = 0;
+        
         switch (ok)
         {
             case 0:
@@ -2860,7 +2868,11 @@ void RKRGUI::Show_Next_Time()
 
     Fl_Widget *w = fl_message_icon();
     w->parent()->copy_label(m_process->jackcliname);
+    
+    // Need to shut off below mouse or it tries to modify the fl_message widget and crash.
+    Shut_Off_Below_Mouse = 1;
     fl_message("This setting will be changed the next time you run rakarrack-plus");
+    Shut_Off_Below_Mouse = 0;
 }
 
 void RKRGUI::update_looper()
@@ -3029,6 +3041,9 @@ void RKRGUI::set_focus_timer(int time)
 
 void RKRGUI::below_mouse_highlight_and_focus()
 {
+    if(Shut_Off_Below_Mouse)
+        return;
+
     if (Fl::focus() == TITTLE_L)
         Fl::focus(Open_Order);
 
@@ -3460,7 +3475,11 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
     if (effect == EFX_CABINET)
         return;
 
+    // Need to shut off below mouse or it tries to modify the fl_input widget and crash.
+    Shut_Off_Below_Mouse = 1;
     const char *name = fl_input("Preset Name?", "");
+    Shut_Off_Below_Mouse = 0;
+    
     if (name == NULL)
         return;
 
@@ -3587,14 +3606,20 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
 
     char Rname[128];
     RKR_Choice *preset = static_cast<RKR_Choice*> (w);
-
+    
     if (strncmp(preset->text(), "*", 1) != 0)
     {
+        // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
+        Shut_Off_Below_Mouse = 1;
         fl_message("Internal Presets can not be deleted ");
+        Shut_Off_Below_Mouse = 0;
         return;
     }
-
+    
+    // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
+    Shut_Off_Below_Mouse = 1;
     int ok = fl_choice("Delete \"%s\"?", "No", "Yes", NULL, preset->text());
+    Shut_Off_Below_Mouse = 0;
 
     if (!ok)
     {
