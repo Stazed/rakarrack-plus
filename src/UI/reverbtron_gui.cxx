@@ -217,10 +217,7 @@ strcpy(Efx_Reverbtron->Filename,filename);
 
 if(!Efx_Reverbtron->setfile(USERFILE))
 {
-    // Need to shut off below mouse or it tries to modify the fl_alert widget and crash.
-    Shut_Off_Below_Mouse = 1;
-    fl_alert("Error loading %s file!\n", filename);
-    Shut_Off_Below_Mouse = 0;
+    m_process->Error_Handle(14, filename);
 };
 }
 void RevtronGui::cb_B_rvb(RKR_Button* o, void* v) {

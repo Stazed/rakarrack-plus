@@ -166,6 +166,9 @@ main(int argc, char *argv[])
 
 
     RKR process;
+    
+    // Set flag to indicate if in CLI vs Gui mode
+    process.Gui_Shown = gui;
 
     if (process.No_Jack_Client)
     {
@@ -217,10 +220,6 @@ main(int argc, char *argv[])
 
     // Set flag to indicate a file from the command line, if any
     process.Command_Line_File = commandline;
-    
-    // Set flag to indicate if in CLI vs Gui mode
-    process.Gui_Shown = gui;
-
 
     // Launch GUI
     if (process.Gui_Shown)

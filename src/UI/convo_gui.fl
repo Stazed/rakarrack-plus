@@ -161,10 +161,7 @@ strcpy(Efx_Convolotron->Filename,filename);
 
 if(!Efx_Convolotron->setfile(USERFILE))
 {
-    // Need to shut off below mouse or it tries to modify the fl_alert widget and crash.
-    Shut_Off_Below_Mouse = 1;
-    fl_alert("Error loading %s file!\\n", filename);
-    Shut_Off_Below_Mouse = 0;
+    m_process->Error_Handle(14, filename);
 }}
     xywh {106 143 46 12} labelsize 10 deactivate
     class RKR_Button

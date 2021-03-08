@@ -33,26 +33,34 @@ int
 RKR::Message(int prio, const char *labelwin, const char *message_text)
 {
     if ((Disable_Warnings) && (prio == 0)) return (0);
+    
+    if(Gui_Shown)
+    {
+        Fl_Widget *w = fl_message_icon();
 
-    Fl_Widget *w = fl_message_icon();
+        Fl_Image *a = new Fl_Pixmap(icono_rakarrack_32x32_xpm);
+        w->color(FL_WHITE);
+        w->label("");
+        w->image(a);
+        w->align(FL_ALIGN_TOP | FL_ALIGN_INSIDE);
+        w->parent()->copy_label(labelwin);
 
-    Fl_Image *a = new Fl_Pixmap(icono_rakarrack_32x32_xpm);
-    w->color(FL_WHITE);
-    w->label("");
-    w->image(a);
-    w->align(FL_ALIGN_TOP | FL_ALIGN_INSIDE);
-    w->parent()->copy_label(labelwin);
+        // Need to shut off below mouse or it tries to modify the fl_message widget and crash.
+        Shut_Off_Below_Mouse = 1;
+        fl_message("%s", message_text);
+        Shut_Off_Below_Mouse = 0;
+    }
+    else
+    {
+        fprintf(stderr, "%s\n", message_text);
+    }
 
-    // Need to shut off below mouse or it tries to modify the fl_message widget and crash.
-    Shut_Off_Below_Mouse = 1;
-    fl_message("%s", message_text);
-    Shut_Off_Below_Mouse = 0;
     return (0);
 
 };
 
 void
-RKR::Error_Handle(int num)
+RKR::Error_Handle(int num, std::string filename)
 {
     char meslabel[70];
     char error_msg[256];
@@ -102,6 +110,54 @@ RKR::Error_Handle(int num)
         break;
     case 13:
         sprintf(error_msg, "%s", "Some Stages parameter bad in the .dly file");
+        break;
+    case 14:
+        sprintf(error_msg, "Error loading file %s", filename.c_str());
+        break;
+    case 15:
+        sprintf(error_msg, "Error loading file Order %s", filename.c_str());
+        break;
+    case 16:
+        sprintf(error_msg, "Error loading file Version %s", filename.c_str());
+        break;
+    case 17:
+        sprintf(error_msg, "Error loading file Author %s", filename.c_str());
+        break;
+    case 18:
+        sprintf(error_msg, "Error loading file Preset Name %s", filename.c_str());
+        break;
+    case 19:
+        sprintf(error_msg, "Error loading file General %s", filename.c_str());
+        break;
+    case 20:
+        sprintf(error_msg, "Error loading file MIDI %s", filename.c_str());
+        break;
+    case 21:
+        sprintf(error_msg, "%s", "fread error in load_names()");
+        break;
+    case 22:
+        sprintf(error_msg, "%s", "fread error in load_bank()");
+        break;
+    case 23:
+        sprintf(error_msg, "Error reading file %s", filename.c_str());
+        break;
+    case 24:
+        sprintf(error_msg, "%s", "Error running rakconvert!");
+        break;
+    case 25:
+        sprintf(error_msg, "%s", "Error running rakverb!");
+        break;
+    case 26:
+        sprintf(error_msg, "%s", "Error removing internal preset!");
+        break;
+    case 27:
+        sprintf(error_msg, "%s", "Error merging internal presets!");
+        break;
+    case 28:
+        sprintf(error_msg, "fread error in add_bank_item() %s", filename.c_str());
+        break;
+    case 29:
+        sprintf(error_msg, "%s", "Error running aconnect!");
         break;
     }
 

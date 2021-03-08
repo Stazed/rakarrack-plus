@@ -394,7 +394,7 @@ RKR::load_preset(const char *filename)
     if ((fn = fopen(filename, "r")) == NULL)
     {
         File_To_Load.clear();
-        fl_alert("Error loading %s file!\n", filename);
+        Error_Handle(14, filename);
         return;
     }
 
@@ -409,7 +409,7 @@ RKR::load_preset(const char *filename)
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             File_To_Load.clear();
-            fl_alert("Error loading %s file!\n", filename);
+            Error_Handle(14, filename);
             file_error(fn);
             return;
         }
@@ -421,7 +421,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        fl_alert("Error loading %s file Order!\n", filename);
+        Error_Handle(15, filename);
         file_error(fn);
         return;
     }
@@ -449,7 +449,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        fl_alert("Error loading %s file Version!\n", filename);
+        Error_Handle(16, filename);
         file_error(fn);
         return;
     }
@@ -461,7 +461,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        fl_alert("Error loading %s file Author!\n", filename);
+        Error_Handle(17, filename);
         file_error(fn);
         return;
     }
@@ -482,7 +482,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        fl_alert("Error loading %s file Preset Name!\n", filename);
+        Error_Handle(18, filename);
         file_error(fn);
         return;
     }
@@ -501,7 +501,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        fl_alert("Error loading %s file General!\n", filename);
+        Error_Handle(19, filename);
         file_error(fn);
         return;
     }
@@ -528,7 +528,7 @@ RKR::load_preset(const char *filename)
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             File_To_Load.clear();
-            fl_alert("Error loading %s file General!\n", filename);
+            Error_Handle(19, filename);
             file_error(fn);
             return;
         }
@@ -541,7 +541,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        fl_alert("Error loading %s file Order!\n", filename);
+        Error_Handle(15, filename);
         file_error(fn);
         return;
     }
@@ -559,7 +559,7 @@ RKR::load_preset(const char *filename)
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             File_To_Load.clear();
-            fl_alert("Error loading %s file MIDI!\n", filename);
+            Error_Handle(20, filename);
             file_error(fn);
             return;
         }
@@ -692,7 +692,7 @@ RKR::load_names()
                 
                 if (ret != 1)
                 {
-                    fl_alert("fread error in load_names()");
+                    Error_Handle(21);
                     break;
                 }
 
@@ -1026,7 +1026,7 @@ RKR::load_bank(const char *filename)
 
             if (ret != 1)
             {
-                fl_alert("fread error in load_bank()");
+                Error_Handle(22);
                 break;
             }
         }
@@ -1205,7 +1205,7 @@ RKR::add_bank_item(std::string filename)
 
                 if (ret != 1)
                 {
-                    fl_alert("fread error in load_bank()");
+                    Error_Handle(28, filename);
                     break;
                 }
             }
@@ -1626,14 +1626,14 @@ RKR::load_skin(char *filename)
 
     if ((fn = fopen(filename, "r")) == NULL)
     {
-        fl_alert("Error reading %s file!\n", filename);
+        Error_Handle(23, filename);
         return 0;
     }
 
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        fl_alert("Error reading %s file!\n", filename);
+        Error_Handle(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1642,7 +1642,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        fl_alert("Error reading %s file!\n", filename);
+        Error_Handle(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1652,7 +1652,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        fl_alert("Error reading %s file!\n", filename);
+        Error_Handle(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1667,7 +1667,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        fl_alert("Error reading %s file!\n", filename);
+        Error_Handle(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1676,7 +1676,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        fl_alert("Error reading %s file!\n", filename);
+        Error_Handle(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1736,8 +1736,11 @@ RKR::ConvertOldFile(char * filename)
     char buff[255];
     memset(buff, 0, sizeof (buff));
     sprintf(buff, "rakconvert -c '%s'", filename);
+    
     if (system(buff) == -1)
-        fl_alert("Error running rakconvert...\n");
+    {
+        Error_Handle(24);
+    }
 }
 
 void
@@ -1747,8 +1750,11 @@ RKR::convert_reverb_file(char * filename)
     memset(buff, 0, sizeof (buff));
     sprintf(buff, "rakverb -i '%s'", filename);
     printf("%s\n", buff);
+    
     if (system(buff) == -1)
-        fl_alert("Error running rakverb...\n");
+    {
+        Error_Handle(25);
+    }
 }
 
 void
@@ -1822,7 +1828,9 @@ RKR::delete_insert_preset(int num, char *name)
     sprintf(orden, "mv %s %s\n", tempfile2, tempfile);
 
     if (system(orden) == -1)
-        fl_alert("Error removing internal preset");
+    {
+        Error_Handle(26);
+    }
 }
 
 /**
@@ -1842,7 +1850,7 @@ RKR::merge_insert_presets(char *filename)
     FILE *fn;
     if ((fn = fopen(filename, "r")) == NULL)
     {
-        fl_alert("Error reading %s file!\n", filename);
+        Error_Handle(23 , filename);
         return 0;
     }
     
@@ -1863,7 +1871,7 @@ RKR::merge_insert_presets(char *filename)
     
     if (system(orden) == -1)
     {
-        fl_alert("Error merging internal presets!");
+        Error_Handle(27);
         return 0;
     }
     
@@ -1872,7 +1880,7 @@ RKR::merge_insert_presets(char *filename)
     sprintf(orden, "mv %s %s\n", tempfile2, tempfile);
     if (system(orden) == -1)
     {
-        fl_alert("Error merging internal presets!");
+        Error_Handle(27);
         return 0;
     }
 
@@ -1911,7 +1919,7 @@ RKR::load_MIDI_table(char *filename)
 
     if ((fn = fopen(filename, "r")) == NULL)
     {
-        fl_alert("Error loading %s file!\n", filename);
+        Error_Handle(14, filename);
         return;
     }
 
@@ -1920,7 +1928,7 @@ RKR::load_MIDI_table(char *filename)
         memset(buf, 0, sizeof (buf));
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
-            fl_alert("Error loading %s file!\n", filename);
+            Error_Handle(14, filename);
             break;
         }
 
