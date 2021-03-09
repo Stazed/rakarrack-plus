@@ -1917,8 +1917,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {Scan_Bank_Dir(int reload)} {open
   } {}
-  Function {Set_Bank(std::string directory)} {open private return_type void
-  } {}
   Function {global_shortcuts(int event)} {open return_type {static int}
   } {}
   Function {install_signal_handlers()} {open return_type bool

@@ -980,39 +980,15 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
 int
 RKR::load_bank(const char *filename)
 {
-//    printf("load_bank = %s\n", filename);
-    int err_message = 1;
-    char meslabel[70];
-    FILE *fn;
-
-    memset(meslabel, 0, sizeof (meslabel));
-    sprintf(meslabel, "%s %s", jackcliname, VERSION);
+    int error_number = CheckOldBank(filename);
     
-    char error_msg[256];
-    memset(error_msg, 0, sizeof (error_msg));
-
-    err_message = CheckOldBank(filename);
-
-    switch (err_message)
+    if(error_number)
     {
-        case 0:
-            break;
-        case 1:
-        {
-            Handle_Message(30);
-            return (0);
-        }
-        case 2:
-        {
-            Handle_Message(14, filename);
-            return (0);
-        }
-        case 3:     // 31
-        {
-            Handle_Message(31);
-            return (0);
-        }
+        Handle_Message(error_number, filename);
+        return (0);
     }
+
+    FILE *fn;
 
     if ((fn = fopen(filename, "rb")) != NULL)
     {
@@ -1186,60 +1162,65 @@ RKR::load_bank_vector()
 void
 RKR::add_bank_item(std::string filename)
 {
-    if (CheckOldBank(filename.c_str ()) == 0)
+    int error_number = CheckOldBank(filename.c_str());
+    
+    if(error_number)
     {
-        FILE *fn;
-        
-        BankArray Another_Bank;
-        
-        if ((fn = fopen(filename.c_str(), "rb")) != NULL)
+        Handle_Message(error_number, filename);
+        return;
+    }
+
+    FILE *fn;
+
+    BankArray Another_Bank;
+
+    if ((fn = fopen(filename.c_str(), "rb")) != NULL)
+    {
+        new_bank(Another_Bank.Bank);
+
+        while (1)
         {
-            new_bank(Another_Bank.Bank);
+            size_t ret = fread(&Another_Bank.Bank, sizeof (Another_Bank.Bank), 1, fn);
 
-            while (1)
+            if (feof(fn))
+                break;
+
+            if (ret != 1)
             {
-                size_t ret = fread(&Another_Bank.Bank, sizeof (Another_Bank.Bank), 1, fn);
-
-                if (feof(fn))
-                    break;
-
-                if (ret != 1)
-                {
-                    Handle_Message(28, filename);
-                    fclose(fn);
-                    return;
-                }
+                Handle_Message(28, filename);
+                fclose(fn);
+                return;
             }
-
-            fclose(fn);
-
-            if (big_endian())
-            {
-                fix_endianess();
-            }
-
-            convert_IO();
-
-            for(int i = 0; i < 62; i++)
-            {
-                revert_file_to_bank(Another_Bank.Bank[i].lv, sizeof(Another_Bank.Bank[i].lv));
-            }
-            
-            Another_Bank.Bank_File_Name = filename;
-            
-            // Add the CC value for bank select
-            std::string menu_name = "(";
-            menu_name += NTS(Bank_Vector.size());
-            menu_name += ") ";
-            
-            // Add the file name
-            menu_name += strrchr(filename.c_str(),'/')+1;     // get the file name W/O path
-            menu_name = menu_name.substr(0, menu_name.size() - c_rkrb_ext_size);   // remove extension
-
-            Another_Bank.Bank_Menu_Name = menu_name;
-            
-            Bank_Vector.push_back(Another_Bank);
         }
+
+        fclose(fn);
+
+        if (big_endian())
+        {
+            fix_endianess();
+        }
+
+        convert_IO();
+
+        for(int i = 0; i < 62; i++)
+        {
+            revert_file_to_bank(Another_Bank.Bank[i].lv, sizeof(Another_Bank.Bank[i].lv));
+        }
+
+        Another_Bank.Bank_File_Name = filename;
+
+        // Add the CC value for bank select
+        std::string menu_name = "(";
+        menu_name += NTS(Bank_Vector.size());
+        menu_name += ") ";
+
+        // Add the file name
+        menu_name += strrchr(filename.c_str(),'/')+1;     // get the file name W/O path
+        menu_name = menu_name.substr(0, menu_name.size() - c_rkrb_ext_size);   // remove extension
+
+        Another_Bank.Bank_Menu_Name = menu_name;
+
+        Bank_Vector.push_back(Another_Bank);
     }
 }
 
@@ -1722,13 +1703,13 @@ RKR::CheckOldBank(const char *filename)
         Length = ftell(fs);
         fclose(fs);
         
-        if (Length == 993488) return (3);
+        if (Length == 993488) return (31);
         
         if (Length == 1092688) return (0);
 
     }
 
-    return (2);
+    return (14);
 }
 
 void

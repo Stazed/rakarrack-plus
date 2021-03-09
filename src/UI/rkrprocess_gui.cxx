@@ -3173,68 +3173,6 @@ void RKRGUI::Scan_Bank_Dir(int reload)
 }
 
 /**
- *  This is no longer used - FIXME remove when done
- *  Scan a directory for Bank files and if valid, send it to the BankWindow class.
- * 
- * @param directory
- *      The directory to be scanned.
- */
-void RKRGUI::Set_Bank(std::string directory)
-{
-    std::vector<std::string>file_name;
-    DIR *dir;
-    struct dirent *fs;
-    
-    dir = opendir(directory.c_str());
-    if (dir == NULL)
-    {
-        return;
-    }
-
-    // Get the bank files in the directory
-    while ((fs = readdir(dir)))
-    {
-        if (strstr(fs->d_name, ".rkrb") != NULL)
-        {
-            file_name.push_back (fs->d_name);
-        }
-    }
-
-    closedir(dir);
-    
-    // Sort alpha numeric
-    std::sort( file_name.begin(), file_name.end() );
-    
-    for(unsigned i = 0; i < file_name.size (); i++)
-    {
-        std::string full_path = directory;
-        full_path += "/";
-        full_path += file_name[i];
-        
-        if (m_process->CheckOldBank(full_path.c_str ()) == 0)
-        {
-            AddBankName(full_path.c_str ());
-            
-            // Construct the name to be listed in the drop down "User Banks" menu
-            // Add the CC value for bank select
-            std::string menu_name = "(";
-            menu_name += NTS((i + 3));      // CC value starts at 4, first 4 are preset (0 index)
-            menu_name += ") ";
-            
-            // Add the file name
-            menu_name += file_name[i];
-            menu_name = menu_name.substr(0, menu_name.size() - c_rkrb_ext_size);   // remove extension
-
-            // Add the name and full path to the menu
-            if(!menu_name.empty())
-            {
-                BankWindow->set_bank_CH_UB(&menu_name[0], (char*) full_path.c_str());
-            } 
-        }
-    }
-}
-
-/**
  * Find various global keys, buttons for special processing.
  * 
  * @param event
