@@ -3159,7 +3159,7 @@ void RKRGUI::Scan_Bank_Dir(int reload)
     
     if(reload)
     {
-        m_process->load_bank_CC_array ();
+        m_process->load_bank_vector ();
     }
     
     for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)

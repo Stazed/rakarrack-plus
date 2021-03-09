@@ -741,7 +741,7 @@ public:
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     int load_bank (const char *filename);
     int save_bank (const char *filename);
-    void load_bank_CC_array();
+    void load_bank_vector();
     void add_bank_item(std::string filename);
     void copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[]);
     void new_preset ();

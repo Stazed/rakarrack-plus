@@ -1102,7 +1102,7 @@ RKR::save_bank(const char *filename)
 }
 
 void
-RKR::load_bank_CC_array()
+RKR::load_bank_vector()
 {
     Bank_Vector.clear();
 

@@ -335,7 +335,7 @@ RKR::RKR() :
         }
     }
     
-    load_bank_CC_array();
+    load_bank_vector();
 }
 
 RKR::~RKR()
