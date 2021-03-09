@@ -315,13 +315,11 @@ RKR::RKR() :
     // Initialize Bank
     new_bank(Bank);
 
-    // Loads the information for the custom MIDI control scroll.
-    load_names();
-
     // If no bank is listed from the command line, then load the default user bank
     // in Settings/Preferences/Bank/ Bank Filename
     if (Command_Line_File == 0)
     {
+        // Does a validity check
         if(load_bank(BankFilename))
         {
             a_bank = 3;
@@ -335,7 +333,11 @@ RKR::RKR() :
         }
     }
     
+    // Loads all Banks, default and any in Settings/Preferences/Bank - User Directory
     load_bank_vector();
+    
+    // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
+    load_custom_MIDI_table_preset_names();
 }
 
 RKR::~RKR()

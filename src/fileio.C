@@ -643,69 +643,40 @@ RKR::set_audio_paramters()
 
 }
 
-/**
- *  Loads the default banks preset names and information for the Custom MIDI
- *  control scroll. FIXME - this should load from the Bank_Vector.
- */
 void
-RKR::load_names()
+RKR::load_custom_MIDI_table_preset_names()
 {
-    FILE *fn;
-    char temp[128];
-
     memset(B_Names, 0, sizeof (B_Names));
-
+    
     for (int k = 0; k < 4; k++)
     {
-        switch (k)
+        if(k != 3)
         {
-
-        case 0:
-            memset(temp, 0, sizeof (temp));
-            sprintf(temp, "%s/Default.rkrb", DATADIR);
-            break;
-
-        case 1:
-            memset(temp, 0, sizeof (temp));
-            sprintf(temp, "%s/Extra.rkrb", DATADIR);
-            break;
-
-        case 2:
-            memset(temp, 0, sizeof (temp));
-            sprintf(temp, "%s/Extra1.rkrb", DATADIR);
-            break;
-
-        case 3:
-            memset(temp, 0, sizeof (temp));
-            sprintf(temp, "%s", BankFilename);
-            break;
-        }
-
-        if ((fn = fopen(temp, "rb")) != NULL)
-        {
-            new_bank(Bank);
-            while (1)
+            for (int j = 1; j <= 60; j++)
             {
-                size_t ret = fread(&Bank, sizeof (Bank), 1, fn);
-                
-                if (feof(fn))
-                    break;
-                
-                if (ret != 1)
+                strcpy(B_Names[k][j].Preset_Name,  Bank_Vector[k].Bank[j].Preset_Name);
+            }
+        }
+        else    // User Bank 'B' button
+        {
+            int user_bank = 0;
+            
+            for(int ii = 0; ii < Bank_Vector.size(); ii++)
+            {
+                if(strcmp(BankFilename, Bank_Vector[ii].Bank_File_Name.c_str()) == 0)
                 {
-                    Handle_Message(21);
-                    break;
-                }
-
-                for (int j = 1; j <= 60; j++)
-                {
-                    strcpy(B_Names[k][j].Preset_Name, Bank[j].Preset_Name);
+                    user_bank = ii;
                 }
             }
-            fclose(fn);
+            
+            for (int j = 1; j <= 60; j++)
+            {
+                strcpy(B_Names[k][j].Preset_Name,  Bank_Vector[user_bank].Bank[j].Preset_Name);
+            }
         }
     }
 }
+
 
 /**
  * Reverts the file ordering to program Bank[].lv[][] array ordering.
