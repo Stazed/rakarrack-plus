@@ -142,7 +142,7 @@ void RKRGUI::cb_ConvertReverb_i(Fl_Menu_*, void*) {
 
     m_process->convert_reverb_file(filename);
 
-    m_process->Error_Handle(37);
+    m_process->Handle_Message(37);
 }
 void RKRGUI::cb_ConvertReverb(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ConvertReverb_i(o,v);

@@ -139,7 +139,7 @@ strcpy(Efx_Convolotron->Filename,filename);
 
 if(!Efx_Convolotron->setfile(USERFILE))
 {
-    m_process->Error_Handle(14, filename);
+    m_process->Handle_Message(14, filename);
 };
 }
 void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {

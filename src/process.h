@@ -769,7 +769,7 @@ public:
 
     // varios.C
     int Message (int prio, const char *labelwin, const char *message_text);
-    void Error_Handle(int num, std::string filename = "");
+    void Handle_Message(int num, std::string filename = "");
     char *PrefNom (const char *dato);
     int Get_Bogomips();
     int TapTempo();

@@ -206,7 +206,7 @@ strcpy(Efx_Echotron->Filename,filename);
 
 if(!Efx_Echotron->setfile(USERFILE))
 {
-    m_process->Error_Handle(14, filename);
+    m_process->Handle_Message(14, filename);
 }
 
 echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));

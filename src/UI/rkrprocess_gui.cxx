@@ -337,7 +337,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
     if (global_error_number > 0)
-        m_process->Error_Handle(global_error_number);
+        m_process->Handle_Message(global_error_number);
 
     if (m_process->Tap_Bypass)
     {
@@ -2869,7 +2869,7 @@ void RKRGUI::Show_Next_Time()
     Fl_Widget *w = fl_message_icon();
     w->parent()->copy_label(m_process->jackcliname);
     
-    m_process->Error_Handle (38);
+    m_process->Handle_Message (38);
 }
 
 void RKRGUI::update_looper()
@@ -3608,7 +3608,7 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
     
     if (strncmp(preset->text(), "*", 1) != 0)
     {
-        m_process->Error_Handle(39);
+        m_process->Handle_Message(39);
         return;
     }
     

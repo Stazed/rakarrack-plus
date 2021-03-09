@@ -67,11 +67,11 @@ void BankWindowGui::cb_Convert_Old_Bank_i(Fl_Menu_*, void*) {
     if(m_process->CheckOldBank(filename))
     {
         m_process->ConvertOldFile(filename);
-        m_process->Error_Handle(35);
+        m_process->Handle_Message(35);
     }
     else
     {
-        m_process->Error_Handle(36);
+        m_process->Handle_Message(36);
     };
 }
 void BankWindowGui::cb_Convert_Old_Bank(Fl_Menu_* o, void* v) {

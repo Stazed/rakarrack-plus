@@ -3228,7 +3228,7 @@ void SettingsWindowGui::update_convo_quality() {
       strcpy(Efx_Convolotron->Filename,filename.c_str());
       if(!Efx_Convolotron->setfile(USERFILE))
       {
-          m_process->Error_Handle(14, filename);
+          m_process->Handle_Message(14, filename);
       };
   }
   
@@ -3269,7 +3269,7 @@ void SettingsWindowGui::update_revtron_quality() {
       strcpy(Efx_Reverbtron->Filename,filename.c_str());
       if(!Efx_Reverbtron->setfile(USERFILE))
       {
-          m_process->Error_Handle(14, filename);
+          m_process->Handle_Message(14, filename);
       };
   }
   

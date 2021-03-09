@@ -174,7 +174,7 @@ main(int argc, char *argv[])
     {
         show_help();
         
-        process.Error_Handle(34);
+        process.Handle_Message(34);
         return (0);
     }
 
@@ -260,7 +260,7 @@ main(int argc, char *argv[])
         if ((!jack_disconnected) && (process.Jack_Shut_Down))
         {
             jack_disconnected = 1;
-            process.Error_Handle(33);
+            process.Handle_Message(33);
         }
 
         process.miramidi();

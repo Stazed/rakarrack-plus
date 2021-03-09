@@ -304,7 +304,7 @@ RKR::save_preset(const char *filename)
 
     if (errno == EACCES)
     {
-        Error_Handle(3);
+        Handle_Message(3);
         fclose(fn);
         return;
     }
@@ -394,7 +394,7 @@ RKR::load_preset(const char *filename)
     if ((fn = fopen(filename, "r")) == NULL)
     {
         File_To_Load.clear();
-        Error_Handle(14, filename);
+        Handle_Message(14, filename);
         return;
     }
 
@@ -409,7 +409,7 @@ RKR::load_preset(const char *filename)
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             File_To_Load.clear();
-            Error_Handle(14, filename);
+            Handle_Message(14, filename);
             file_error(fn);
             return;
         }
@@ -421,7 +421,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        Error_Handle(15, filename);
+        Handle_Message(15, filename);
         file_error(fn);
         return;
     }
@@ -449,7 +449,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        Error_Handle(16, filename);
+        Handle_Message(16, filename);
         file_error(fn);
         return;
     }
@@ -461,7 +461,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        Error_Handle(17, filename);
+        Handle_Message(17, filename);
         file_error(fn);
         return;
     }
@@ -482,7 +482,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        Error_Handle(18, filename);
+        Handle_Message(18, filename);
         file_error(fn);
         return;
     }
@@ -501,7 +501,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        Error_Handle(19, filename);
+        Handle_Message(19, filename);
         file_error(fn);
         return;
     }
@@ -528,7 +528,7 @@ RKR::load_preset(const char *filename)
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             File_To_Load.clear();
-            Error_Handle(19, filename);
+            Handle_Message(19, filename);
             file_error(fn);
             return;
         }
@@ -541,7 +541,7 @@ RKR::load_preset(const char *filename)
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
         File_To_Load.clear();
-        Error_Handle(15, filename);
+        Handle_Message(15, filename);
         file_error(fn);
         return;
     }
@@ -559,7 +559,7 @@ RKR::load_preset(const char *filename)
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
             File_To_Load.clear();
-            Error_Handle(20, filename);
+            Handle_Message(20, filename);
             file_error(fn);
             return;
         }
@@ -693,7 +693,7 @@ RKR::load_names()
                 
                 if (ret != 1)
                 {
-                    Error_Handle(21);
+                    Handle_Message(21);
                     break;
                 }
 
@@ -999,17 +999,17 @@ RKR::load_bank(const char *filename)
             break;
         case 1:
         {
-            Error_Handle(30);
+            Handle_Message(30);
             return (0);
         }
         case 2:
         {
-            Error_Handle(14, filename);
+            Handle_Message(14, filename);
             return (0);
         }
         case 3:     // 31
         {
-            Error_Handle(31);
+            Handle_Message(31);
             return (0);
         }
     }
@@ -1027,7 +1027,7 @@ RKR::load_bank(const char *filename)
 
             if (ret != 1)
             {
-                Error_Handle(22);
+                Handle_Message(22);
                 new_bank(Bank);
                 fclose(fn);
                 return 0;
@@ -1095,7 +1095,7 @@ RKR::save_bank(const char *filename)
 
     if (errno == EACCES)
     {
-        Error_Handle(3);
+        Handle_Message(3);
     }
     
     return (0);
@@ -1205,7 +1205,7 @@ RKR::add_bank_item(std::string filename)
 
                 if (ret != 1)
                 {
-                    Error_Handle(28, filename);
+                    Handle_Message(28, filename);
                     fclose(fn);
                     return;
                 }
@@ -1589,7 +1589,7 @@ RKR::save_skin(char *filename)
     fn = fopen(filename, "w");
     if (errno == EACCES)
     {
-        Error_Handle(3);
+        Handle_Message(3);
         fclose(fn);
         return;
     }
@@ -1627,14 +1627,14 @@ RKR::load_skin(char *filename)
 
     if ((fn = fopen(filename, "r")) == NULL)
     {
-        Error_Handle(23, filename);
+        Handle_Message(23, filename);
         return 0;
     }
 
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        Error_Handle(23, filename);
+        Handle_Message(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1643,7 +1643,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        Error_Handle(23, filename);
+        Handle_Message(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1653,7 +1653,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        Error_Handle(23, filename);
+        Handle_Message(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1668,7 +1668,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        Error_Handle(23, filename);
+        Handle_Message(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1677,7 +1677,7 @@ RKR::load_skin(char *filename)
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
-        Error_Handle(23, filename);
+        Handle_Message(23, filename);
         load_skin_error(fn);
         return 0;
     }
@@ -1740,7 +1740,7 @@ RKR::ConvertOldFile(char * filename)
     
     if (system(buff) == -1)
     {
-        Error_Handle(24);
+        Handle_Message(24);
     }
 }
 
@@ -1754,7 +1754,7 @@ RKR::convert_reverb_file(char * filename)
     
     if (system(buff) == -1)
     {
-        Error_Handle(25);
+        Handle_Message(25);
     }
 }
 
@@ -1830,7 +1830,7 @@ RKR::delete_insert_preset(int num, char *name)
 
     if (system(orden) == -1)
     {
-        Error_Handle(26);
+        Handle_Message(26);
     }
 }
 
@@ -1851,7 +1851,7 @@ RKR::merge_insert_presets(char *filename)
     FILE *fn;
     if ((fn = fopen(filename, "r")) == NULL)
     {
-        Error_Handle(23 , filename);
+        Handle_Message(23 , filename);
         return 0;
     }
     
@@ -1872,7 +1872,7 @@ RKR::merge_insert_presets(char *filename)
     
     if (system(orden) == -1)
     {
-        Error_Handle(27);
+        Handle_Message(27);
         return 0;
     }
     
@@ -1881,7 +1881,7 @@ RKR::merge_insert_presets(char *filename)
     sprintf(orden, "mv %s %s\n", tempfile2, tempfile);
     if (system(orden) == -1)
     {
-        Error_Handle(27);
+        Handle_Message(27);
         return 0;
     }
 
@@ -1897,7 +1897,7 @@ RKR::save_MIDI_table(char *filename)
 
     if (errno == EACCES)
     {
-        Error_Handle(3);
+        Handle_Message(3);
         fclose(fn);
         return;
     }
@@ -1920,7 +1920,7 @@ RKR::load_MIDI_table(char *filename)
 
     if ((fn = fopen(filename, "r")) == NULL)
     {
-        Error_Handle(14, filename);
+        Handle_Message(14, filename);
         return;
     }
 
@@ -1929,7 +1929,7 @@ RKR::load_MIDI_table(char *filename)
         memset(buf, 0, sizeof (buf));
         if (fgets(buf, sizeof buf, fn) == NULL)
         {
-            Error_Handle(14, filename);
+            Handle_Message(14, filename);
             break;
         }
 

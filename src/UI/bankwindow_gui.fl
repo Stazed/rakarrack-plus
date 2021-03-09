@@ -103,11 +103,11 @@ if(m_process->CheckOldBank(filename)==0)
     if(m_process->CheckOldBank(filename))
     {
         m_process->ConvertOldFile(filename);
-        m_process->Error_Handle(35);
+        m_process->Handle_Message(35);
     }
     else
     {
-        m_process->Error_Handle(36);
+        m_process->Handle_Message(36);
     }}
         xywh {0 0 36 21} divider
       }

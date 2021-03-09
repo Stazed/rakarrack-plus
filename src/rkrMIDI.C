@@ -1031,7 +1031,7 @@ RKR::conectaaconnect()
         
         if (system(tempi) == -1)
         {
-            Error_Handle(29);
+            Handle_Message(29);
         }
         else
             IsCoIn = 1;
@@ -1049,7 +1049,7 @@ RKR::disconectaaconnect()
         sprintf(tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
         if (system(tempi) == -1)
         {
-            Error_Handle(29);
+            Handle_Message(29);
         }
         else
             IsCoIn = 0;

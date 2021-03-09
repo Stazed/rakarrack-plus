@@ -217,7 +217,7 @@ strcpy(Efx_Reverbtron->Filename,filename);
 
 if(!Efx_Reverbtron->setfile(USERFILE))
 {
-    m_process->Error_Handle(14, filename);
+    m_process->Handle_Message(14, filename);
 };
 }
 void RevtronGui::cb_B_rvb(RKR_Button* o, void* v) {

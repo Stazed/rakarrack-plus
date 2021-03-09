@@ -247,7 +247,7 @@ strcpy(Efx_Reverbtron->Filename,filename);
 
 if(!Efx_Reverbtron->setfile(USERFILE))
 {
-    m_process->Error_Handle(14, filename);
+    m_process->Handle_Message(14, filename);
 }}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button

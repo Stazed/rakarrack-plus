@@ -60,7 +60,7 @@ RKR::Message(int prio, const char *labelwin, const char *message_text)
 };
 
 void
-RKR::Error_Handle(int num, std::string filename)
+RKR::Handle_Message(int num, std::string filename)
 {
     // Flag to indicate message severity.
     // 1 = always show, even if messages are turned off in settings.
@@ -260,7 +260,7 @@ RKR::Get_Bogomips()
         {
             if (maxx_len < 2) maxx_len = 2;
             
-            Error_Handle(32);            
+            Handle_Message(32);            
         }
 
         fclose(fp);
