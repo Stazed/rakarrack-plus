@@ -132,15 +132,17 @@ void RKRGUI::cb_Save_MTable(Fl_Menu_* o, void* v) {
 
 void RKRGUI::cb_ConvertReverb_i(Fl_Menu_*, void*) {
   char *filename;
-char name[70];
-memset(name,0, sizeof(name));
-sprintf(name,"%s %s",m_process->jackcliname, VERSION);
 
-filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".wav");
-m_process->convert_reverb_file(filename);
-m_process->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");
+    filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
+
+    if (filename==NULL)
+        return;
+
+    filename=fl_filename_setext(filename,".wav");
+
+    m_process->convert_reverb_file(filename);
+
+    m_process->Error_Handle(37);
 }
 void RKRGUI::cb_ConvertReverb(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ConvertReverb_i(o,v);

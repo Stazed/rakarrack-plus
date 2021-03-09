@@ -174,15 +174,7 @@ main(int argc, char *argv[])
     {
         show_help();
         
-        if (gui)
-        {
-            process.Message
-            (
-                1,
-                "rakarrack-plus error",
-                "Cannot make a jack client, is jackd running?"
-            );
-        }
+        process.Error_Handle(34);
         return (0);
     }
 
@@ -268,7 +260,7 @@ main(int argc, char *argv[])
         if ((!jack_disconnected) && (process.Jack_Shut_Down))
         {
             jack_disconnected = 1;
-            process.Message(1, process.jackcliname, "Jack Shut Down, try to save your work");
+            process.Error_Handle(33);
         }
 
         process.miramidi();

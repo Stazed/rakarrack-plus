@@ -62,6 +62,11 @@ RKR::Message(int prio, const char *labelwin, const char *message_text)
 void
 RKR::Error_Handle(int num, std::string filename)
 {
+    // Flag to indicate message severity.
+    // 1 = always show, even if messages are turned off in settings.
+    // 0 = only show if messages are turned on in settings.
+    int message_type = 1;
+
     char meslabel[70];
     char error_msg[256];
     memset(meslabel, 0, sizeof (meslabel));
@@ -159,9 +164,39 @@ RKR::Error_Handle(int num, std::string filename)
     case 29:
         sprintf(error_msg, "%s", "Error running aconnect!");
         break;
+    case 30:
+        sprintf(error_msg, "%s", "Can not load this Bank file because it is from an old rakarrack version,"
+                "\n please use 'Convert Old Bank' menu entry in the Bank window.");
+        break;
+    case 31:
+        sprintf(error_msg, "%s", "Can not load this Bank file because it is from an old rakarrack git version,"
+                "\n please use rakgit2new utility to convert.");
+        break;
+    case 32:
+        sprintf(error_msg, "%s", "!! Rakarrack-plus CPU Usage Warning !!\n"
+                "It appears your CPU will not easily handle convolution with the current settings.\n"
+                "Be careful with the Convolotron effect settings.\n"
+                "Please read Help (F1) for more information.");
+        message_type = 0;
+        break;
+    case 33:
+        sprintf(error_msg, "%s", "Jack Shut Down, try to save your work");
+        break;
+    case 34:
+        sprintf(error_msg, "%s", "Cannot make a jack client, is jackd running?");
+        break;
+    case 35:
+        sprintf(error_msg,"Please, now try to load the new files");
+        break;
+    case 36:
+        sprintf(error_msg,"This file already has the new format");
+        break;
+    case 37:
+        sprintf(error_msg,"Please, now use Reverbtron to load the new '.rvb' file");
+        break;
     }
 
-    Message(1, meslabel, error_msg);
+    Message(message_type, meslabel, error_msg);
 
 }
 
@@ -219,7 +254,7 @@ RKR::Get_Bogomips()
         {
             if (maxx_len < 2) maxx_len = 2;
             
-            Message(0, "!! Rakarrack-plus CPU Usage Warning !!", "It appears your CPU will not easily handle convolution with the current settings.  Be careful with the Convolotron effect settings.\nPlease read Help (F1) for more information.");
+            Error_Handle(32);            
         }
 
         fclose(fp);

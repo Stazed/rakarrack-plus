@@ -419,15 +419,17 @@ m_process->save_skin(filename);}
           MenuItem ConvertReverb {
             label {&Convert Reverb IR File}
             callback {char *filename;
-char name[70];
-memset(name,0, sizeof(name));
-sprintf(name,"%s %s",m_process->jackcliname, VERSION);
 
-filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".wav");
-m_process->convert_reverb_file(filename);
-m_process->Message(1,name, "Please, now use Reverbtron to load the new '.rvb' file");}
+    filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
+
+    if (filename==NULL)
+        return;
+
+    filename=fl_filename_setext(filename,".wav");
+
+    m_process->convert_reverb_file(filename);
+
+    m_process->Error_Handle(37);}
             xywh {0 0 36 21} divider
           }
           MenuItem ImportPresets {

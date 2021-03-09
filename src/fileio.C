@@ -995,23 +995,23 @@ RKR::load_bank(const char *filename)
 
     switch (err_message)
     {
-    case 0:
-        break;
-    case 1:
-        Message(1, meslabel, "Can not load this Bank file because is from a old rakarrack version,\n please use 'Convert Old Bank' menu entry in the Bank window.");
-        return (0);
-        break;
-    case 2:
-    {
-        sprintf(error_msg, "Can not load this Bank file: %s", filename);
-        Message(1, meslabel, error_msg);
-        return (0);
-        break;
-    }
-    case 3:
-        Message(1, meslabel, "Can not load this Bank file because is from a old rakarrack git version,\n please use rakgit2new utility to convert.");
-        return (0);
-        break;
+        case 0:
+            break;
+        case 1:
+        {
+            Error_Handle(30);
+            return (0);
+        }
+        case 2:
+        {
+            Error_Handle(14, filename);
+            return (0);
+        }
+        case 3:     // 31
+        {
+            Error_Handle(31);
+            return (0);
+        }
     }
 
     if ((fn = fopen(filename, "rb")) != NULL)
@@ -1028,7 +1028,9 @@ RKR::load_bank(const char *filename)
             if (ret != 1)
             {
                 Error_Handle(22);
-                break;
+                new_bank(Bank);
+                fclose(fn);
+                return 0;
             }
         }
 

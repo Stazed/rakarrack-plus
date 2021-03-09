@@ -56,21 +56,23 @@ void BankWindowGui::cb_Save_Bank(Fl_Menu_* o, void* v) {
 
 void BankWindowGui::cb_Convert_Old_Bank_i(Fl_Menu_*, void*) {
   char *filename;
-char name[70];
-memset(name,0, sizeof(name));
-sprintf(name,"%s %s",m_process->jackcliname, VERSION);
 
-filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
+    filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
 
-if(m_process->CheckOldBank(filename))
-{
-m_process->ConvertOldFile(filename);
-m_process->Message(1,name, "Please, now try to load the new files");
-}
-else
-m_process->Message(1, name, "This file has already the new format");
+    if (filename==NULL)
+        return;
+
+    filename=fl_filename_setext(filename,".rkrb");
+
+    if(m_process->CheckOldBank(filename))
+    {
+        m_process->ConvertOldFile(filename);
+        m_process->Error_Handle(35);
+    }
+    else
+    {
+        m_process->Error_Handle(36);
+    };
 }
 void BankWindowGui::cb_Convert_Old_Bank(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Convert_Old_Bank_i(o,v);
