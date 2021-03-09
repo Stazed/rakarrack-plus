@@ -1083,14 +1083,39 @@ void SettingsWindowGui::cb_Focus_Slider(RKR_Fl_Slider* o, void* v) {
 
 void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
   char *filename;
-filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkrb");
-BFiname->value(filename);
-strcpy(m_process->BankFilename,filename);
+    filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
+    
+    if (filename==NULL)
+        return;
+    
+    filename=fl_filename_setext(filename,".rkrb");
+    
+    BFiname->value(filename);
+    strcpy(m_process->BankFilename,filename);
 
-// To reload MIDI CC table for Bank Select
-m_parent->Scan_Bank_Dir(1);
+    // If we do not find the Bank file, then the Default.rkrb file is loaded.
+    int bank_found = -1;
+
+    // Find the bank chosen by comparing file name
+    for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
+    {
+        if(strcmp(m_process->BankFilename , m_process->Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
+        {
+            bank_found = i;
+            break;
+        }
+    }
+
+    // We did not find the bank in the User Directory, so reload the default
+    if(bank_found < 0)
+    {
+        // Get user default bank file from Settings/Bank/ --Bank Filename
+        memset(m_process->BankFilename, 0, sizeof(m_process->BankFilename));
+        sprintf(m_process->BankFilename, "%s/Default.rkrb", DATADIR);
+        
+        m_process->Handle_Message(40, filename);
+        BFiname->value(m_process->BankFilename);
+    };
 }
 void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BF_Browser_i(o,v);

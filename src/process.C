@@ -318,39 +318,12 @@ RKR::RKR() :
     // Loads all Banks, default and any in Settings/Preferences/Bank - User Directory
     load_bank_vector();
 
-    // If no bank is listed from the command line, then load the default user bank
-    // in Settings/Preferences/Bank/ Bank Filename
-    if (Command_Line_File == 0)
-    {
-        // Does a validity check
-        if(load_bank_from_vector(BankFilename))
-        {
-            // If we do not find the Bank file, then the Default.rkrb file is loaded.
-            unsigned bank_to_set = 0;
-
-            // Find the bank chosen by comparing file name
-            for(unsigned i = 0; i < Bank_Vector.size (); i++)
-            {
-                if(strcmp( BankFilename , Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
-                {
-                    bank_to_set = i;
-                    break;
-                }
-            }
-
-            a_bank = bank_to_set;
-        }
-        else    // means we got a bad user file so reset it to Default.rkrb
-        {
-            // Get user default bank file from Settings/Bank/ --Bank Filename
-            memset(BankFilename, 0, sizeof(BankFilename));
-            sprintf(BankFilename, "%s/Default.rkrb", DATADIR);
-            load_bank_from_vector(BankFilename);
-        }
-    }
-    
     // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
     load_custom_MIDI_table_preset_names();
+    
+    // We don't need to check return since BanFilename is validated on entry
+    // and load_bank_vector() will generate and error if one happens.
+    load_bank_from_vector(BankFilename);
 }
 
 RKR::~RKR()
