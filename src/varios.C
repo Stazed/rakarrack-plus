@@ -194,6 +194,12 @@ RKR::Error_Handle(int num, std::string filename)
     case 37:
         sprintf(error_msg,"Please, now use Reverbtron to load the new '.rvb' file");
         break;
+    case 38:
+        sprintf(error_msg, "This setting will be changed the next time you run rakarrack-plus");
+        break;
+    case 39:
+        sprintf(error_msg, "Internal Presets can not be deleted ");
+        break;
     }
 
     Message(message_type, meslabel, error_msg);

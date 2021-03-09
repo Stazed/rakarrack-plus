@@ -2869,10 +2869,7 @@ void RKRGUI::Show_Next_Time()
     Fl_Widget *w = fl_message_icon();
     w->parent()->copy_label(m_process->jackcliname);
     
-    // Need to shut off below mouse or it tries to modify the fl_message widget and crash.
-    Shut_Off_Below_Mouse = 1;
-    fl_message("This setting will be changed the next time you run rakarrack-plus");
-    Shut_Off_Below_Mouse = 0;
+    m_process->Error_Handle (38);
 }
 
 void RKRGUI::update_looper()
@@ -3611,10 +3608,7 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
     
     if (strncmp(preset->text(), "*", 1) != 0)
     {
-        // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
-        Shut_Off_Below_Mouse = 1;
-        fl_message("Internal Presets can not be deleted ");
-        Shut_Off_Below_Mouse = 0;
+        m_process->Error_Handle(39);
         return;
     }
     
