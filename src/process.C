@@ -314,27 +314,40 @@ RKR::RKR() :
 
     // Initialize Bank
     new_bank(Bank);
+    
+    // Loads all Banks, default and any in Settings/Preferences/Bank - User Directory
+    load_bank_vector();
 
     // If no bank is listed from the command line, then load the default user bank
     // in Settings/Preferences/Bank/ Bank Filename
     if (Command_Line_File == 0)
     {
         // Does a validity check
-        if(load_bank(BankFilename))
+        if(load_bank_from_vector(BankFilename))
         {
-            a_bank = 3;
+            // If we do not find the Bank file, then the Default.rkrb file is loaded.
+            unsigned bank_to_set = 0;
+
+            // Find the bank chosen by comparing file name
+            for(unsigned i = 0; i < Bank_Vector.size (); i++)
+            {
+                if(strcmp( BankFilename , Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
+                {
+                    bank_to_set = i;
+                    break;
+                }
+            }
+
+            a_bank = bank_to_set;
         }
         else    // means we got a bad user file so reset it to Default.rkrb
         {
             // Get user default bank file from Settings/Bank/ --Bank Filename
             memset(BankFilename, 0, sizeof(BankFilename));
             sprintf(BankFilename, "%s/Default.rkrb", DATADIR);
-            load_bank(BankFilename);
+            load_bank_from_vector(BankFilename);
         }
     }
-    
-    // Loads all Banks, default and any in Settings/Preferences/Bank - User Directory
-    load_bank_vector();
     
     // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
     load_custom_MIDI_table_preset_names();
@@ -817,6 +830,37 @@ RKR::put_order_in_rack()
         sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);
         sscanf(los_names[i + 2], "%d", &efx_names[i / 3].Type);
     }
+}
+
+/**
+ * Check if the filename is one of the Bank_Vector items.
+ * If it is, then copy it to the active bank.
+ * If not then error message, telling the user to put the file
+ * in the user bank directory Settings/Preferences/Bank - User Directory.
+ * @param filename
+ *      The file name to match.
+ * 
+ * @return 
+ *      1 =  bank was found and loaded to active Bank.
+ *      0 =  bank not found in user directory.
+ */
+int
+RKR::load_bank_from_vector(std::string filename)
+{
+    for(unsigned i = 0; i < Bank_Vector.size (); i++)
+    {
+        if(strcmp(filename.c_str(), Bank_Vector[i].Bank_File_Name.c_str()) == 0)
+        {
+            copy_bank(Bank, Bank_Vector[i].Bank);
+            modified = 0;
+            new_bank_loaded = 1;
+            return (1);
+        }
+    }
+    
+    Handle_Message(40, filename);
+    
+    return (0);
 }
 
 void

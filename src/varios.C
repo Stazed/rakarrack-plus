@@ -200,6 +200,11 @@ RKR::Handle_Message(int num, std::string filename)
     case 39:
         sprintf(error_msg, "Internal Presets can not be deleted ");
         break;
+    case 40:
+        sprintf(error_msg, "Bank file cannot be found in user directory %s\n\n"
+                "All user banks must be put in the user directory set in:\n"
+                "Settings/Preferences/Bank - User Directory", filename.c_str());
+        break;
     }
 
     Message(message_type, meslabel, error_msg);

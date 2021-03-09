@@ -940,7 +940,10 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
 }
 
 /**
- *  This parses the rakarrack bank files *.rkrb types.
+ * This parses the rakarrack bank files *.rkrb types.
+ * This is no longer used because all files are loaded and checked
+ * by load_bank_vector();
+ * 
  * @param filename
  *      The bank file to parse.
  * 

@@ -200,7 +200,7 @@ main(int argc, char *argv[])
     if (needtoloadbank)
     {
         // If valid bank then copy the Bank name and set the command line flag
-        if(process.load_bank(banktoload.c_str()))
+        if(process.load_bank_from_vector(banktoload))
         {
             process.Bank_Load_Command_Line = needtoloadbank;
             process.Command_Line_Bank = banktoload;

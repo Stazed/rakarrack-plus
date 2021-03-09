@@ -3786,7 +3786,7 @@ char* RKRGUI::get_bank_file()
         return 0;
 
     filename = fl_filename_setext(filename, ".rkrb");
-    int ok = m_process->load_bank(filename);
+    int ok = m_process->load_bank_from_vector(filename);
 
     if (ok)
     {

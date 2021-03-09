@@ -702,6 +702,7 @@ public:
     void instantiate_effects();
     void initialize_arrays();
     void put_order_in_rack();
+    int load_bank_from_vector(std::string filename);
     void Adjust_Upsample();
     void add_metro();
     void Vol_Efx (int NumEffect, float volume);
