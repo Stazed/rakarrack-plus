@@ -243,20 +243,15 @@ void RKRGUI::GuiTimeout(void)
         m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
+    // Updates the Gui for MIDI Bank select
     if (m_process->Change_Bank != C_BANK_CHANGE_OFF)
     {
         BankWin_Label(m_process->Bank_Vector[m_process->Change_Bank].Bank_File_Name.c_str ());
-
-        if (m_process->a_bank != m_process->Change_Bank)
-        {
-            m_process->a_bank = m_process->Change_Bank;
-
-            Put_Loaded_Bank();
-        }
-        
+        Put_Loaded_Bank();
         m_process->Change_Bank = C_BANK_CHANGE_OFF;
     }
 
+    // Update the Gui for preset changes
     if (m_process->Change_Preset != C_CHANGE_PRESET_OFF)
     {
         if (!m_process->midi_table)
@@ -749,19 +744,19 @@ void RKRGUI::load_previous_state()
 
     if (!m_process->Bank_Load_Command_Line)
     {
-        switch (m_process->a_bank)
+        // Copy the bank to the process active Bank
+        if(m_process->a_bank < m_process->Bank_Vector.size ())
         {
-            case 0:
-                L_B1->do_callback();
-                break;
+            m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[m_process->a_bank].Bank);
 
-            case 1:
-                L_B2->do_callback();
-                break;
-
-            case 2:
-                L_B3->do_callback();
-                break;
+            BankWin_Label(m_process->Bank_Vector[m_process->a_bank].Bank_File_Name.c_str ());
+            Put_Loaded_Bank();
+            BankWindow->unlight_preset(m_process->Selected_Preset);
+        }
+        else    // something went wrong with an invalid vector size (perhaps used deleted the bank)
+        {
+            // Load the default
+            L_B1->do_callback();
         }
     }
     else

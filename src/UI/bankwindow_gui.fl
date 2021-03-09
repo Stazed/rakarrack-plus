@@ -45,7 +45,7 @@ m_parent= _rgui;} {}
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
-  Fl_Menu_Bar MenuB {open
+  Fl_Menu_Bar MenuB {
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
     code0 {o->set_label_offset(6);}
     code1 {o->set_submenu_paths(bank_submenu_paths);}
@@ -171,25 +171,14 @@ m_parent->put_icon(m_parent->AboutWin);}
   Fl_Choice CH_UB {
     label {User Banks       }
     callback {m_parent->is_modified ();
-    unsigned bank_to_set = 0;
-    
-    // Find the bank chosen by comparing file name
-    for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
-    {
-        if(strcmp((char *)v, m_process->Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
-        {
-            bank_to_set = i;
-            break;
-        }
-    }
-    
-    // Copy the found bank to the process active Bank
-    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[bank_to_set].Bank);
 
-    // Update the Bank Window
-    m_parent->BankWin_Label((char *)v);
-    m_parent->Put_Loaded_Bank();
-    unlight_preset(m_process->Selected_Preset);} open
+    if(m_process->load_bank_from_vector ((char *)v))
+    {
+        // Update the Bank Window
+        m_parent->BankWin_Label((char *)v);
+        m_parent->Put_Loaded_Bank();
+        unlight_preset(m_process->Selected_Preset);
+    }} open
     xywh {549 14 117 24} down_box BORDER_BOX selection_color 7 labelcolor 7 when 6 textcolor 7
     code0 {o->set_label_offset(4);}
     code1 {o->set_text_offset(4);}

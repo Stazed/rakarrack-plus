@@ -320,10 +320,7 @@ RKR::RKR() :
 
     // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
     load_custom_MIDI_table_preset_names();
-    
-    // We don't need to check return since BanFilename is validated on entry
-    // and load_bank_vector() will generate and error if one happens.
-    load_bank_from_vector(BankFilename);
+
 }
 
 RKR::~RKR()
@@ -825,8 +822,7 @@ RKR::load_bank_from_vector(std::string filename)
         if(strcmp(filename.c_str(), Bank_Vector[i].Bank_File_Name.c_str()) == 0)
         {
             copy_bank(Bank, Bank_Vector[i].Bank);
-            modified = 0;
-            new_bank_loaded = 1;
+            a_bank = i;
             return (1);
         }
     }

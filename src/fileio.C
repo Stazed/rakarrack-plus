@@ -1217,7 +1217,7 @@ RKR::copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct sourc
         dest[i].Balance = source[i].Balance;
         dest[i].Bypass = source[i].Bypass;
 
-        // Set the default presets
+        // Set the parameter values
         for (int j = 0; j < C_NUMBER_EFFECTS; j++)
         {
             for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
@@ -1227,12 +1227,13 @@ RKR::copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct sourc
             dest[i].lv[j][C_BYPASS] = source[i].lv[j][C_BYPASS];
         }
         
-        // Set the default order
+        // Set the order
         for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
         {
             dest[i].lv[EFX_ORDER][k] = source[i].lv[EFX_ORDER][k];
         }
 
+        // Copy the MIDI learn table
         memcpy(dest[i].XUserMIDI, source[i].XUserMIDI, sizeof(source[i].XUserMIDI));
     }
     

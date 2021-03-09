@@ -1129,7 +1129,12 @@ public:
     // End Jack port connections
     
     int midi_table;
+
+    /**
+     * Flag to indicate the active bank for reload on next start.
+     */
     int a_bank;
+
     int new_bank_loaded;
 
     int Aux_Gain;
