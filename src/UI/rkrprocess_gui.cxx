@@ -3800,11 +3800,27 @@ char* RKRGUI::get_bank_file()
 
 void RKRGUI::set_save_file()
 {
-    // set bank file save name
+    // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    
+    // If we have a previous file, then use it
+    if(!m_process->Bank_Saved.empty ())
+    {
+        chooser_start_location = m_process->Bank_Saved;
+    }
+    else    // No previous file, try User Directory
+    {
+        // Did the user set a User Directory
+        if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+        {
+            chooser_start_location = m_process->UDirFilename;
+        }
+    }
+
     char *filename;
 
 #define EXT ".rkrb"
-    filename = fl_file_chooser("Save Bank File:", "(*" EXT")", m_process->Bank_Saved.c_str (), 0);
+    filename = fl_file_chooser("Save Bank File:", "(*" EXT")", chooser_start_location.c_str (), 0);
 
     if (filename == NULL)
         return;
