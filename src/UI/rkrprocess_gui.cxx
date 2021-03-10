@@ -251,7 +251,7 @@ void RKRGUI::GuiTimeout(void)
         m_process->Change_Bank = C_BANK_CHANGE_OFF;
     }
 
-    // Update the Gui for preset changes
+    // Update the Gui for MIDI program changes
     if (m_process->Change_Preset != C_CHANGE_PRESET_OFF)
     {
         if (!m_process->midi_table)
@@ -1327,9 +1327,9 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         m->parent()->copy_label(m_process->jackcliname);
         
         // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
-        Shut_Off_Below_Mouse = 1;
+        m_process->Shut_Off_Below_Mouse = 1;
         int ok = fl_choice("Overwrite \"%s\"?", "No", "Yes", NULL, w->label());
-        Shut_Off_Below_Mouse = 0;
+        m_process->Shut_Off_Below_Mouse = 0;
         
         if (!ok)
         {
@@ -2058,9 +2058,9 @@ void RKRGUI::is_modified()
         w->parent()->copy_label(m_process->jackcliname);
 
         // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
-        Shut_Off_Below_Mouse = 1;
+        m_process->Shut_Off_Below_Mouse = 1;
         int ok = fl_choice("Bank was modified, but not saved", "Discard", "Save", NULL);
-        Shut_Off_Below_Mouse = 0;
+        m_process->Shut_Off_Below_Mouse = 0;
         
         switch (ok)
         {
@@ -3033,7 +3033,7 @@ void RKRGUI::set_focus_timer(int time)
 
 void RKRGUI::below_mouse_highlight_and_focus()
 {
-    if(Shut_Off_Below_Mouse)
+    if(m_process->Shut_Off_Below_Mouse)
         return;
 
     if (Fl::focus() == TITTLE_L)
@@ -3408,9 +3408,9 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
         return;
 
     // Need to shut off below mouse or it tries to modify the fl_input widget and crash.
-    Shut_Off_Below_Mouse = 1;
+    m_process->Shut_Off_Below_Mouse = 1;
     const char *name = fl_input("Preset Name?", "");
-    Shut_Off_Below_Mouse = 0;
+    m_process->Shut_Off_Below_Mouse = 0;
     
     if (name == NULL)
         return;
@@ -3546,9 +3546,9 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
     }
     
     // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
-    Shut_Off_Below_Mouse = 1;
+    m_process->Shut_Off_Below_Mouse = 1;
     int ok = fl_choice("Delete \"%s\"?", "No", "Yes", NULL, preset->text());
-    Shut_Off_Below_Mouse = 0;
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (!ok)
     {

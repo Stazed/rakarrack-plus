@@ -243,6 +243,8 @@ main(int argc, char *argv[])
         }
         else
         {
+            // This is needed for MIDI control program changes when no gui is shown.
+            // If the gui is shown, then the RKRGUI timeout is used.
             usleep(1500);
             if (process.Change_Preset != C_CHANGE_PRESET_OFF)
             {

@@ -50,15 +50,6 @@ extern int global_font_type;
 extern int global_font_size;
 extern int global_look_changed;
 
-/**
- Flag to shut off below mouse highlight and grab focus.
- Certain pop up dialogs, like fl_choice, fl_message, fl_alert will crash if the
- widget is modified. Some of them return user_data values of non zero
- which get caught by the below mouse function.
- Defined in process.C
-*/
-extern int Shut_Off_Below_Mouse; 
-
 const int C_DEFAULT_FONT_SIZE = 10;
 
 /* For file .rkrb extension size usually for removing the extension from bank names */

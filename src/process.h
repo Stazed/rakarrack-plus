@@ -892,6 +892,14 @@ public:
     int Gui_Refresh;
     
     /**
+     Flag to shut off below mouse highlight and grab focus.
+     Certain pop up dialogs, like fl_choice, fl_message, fl_alert will crash if the
+     widget is modified. Some of them return user_data values of non zero
+     which get caught by the below mouse function.
+    */
+    int Shut_Off_Below_Mouse;
+    
+    /**
      * Flag to indicate that a Jack client cannot be created.
      */
     int No_Jack_Client;
