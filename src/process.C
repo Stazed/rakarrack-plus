@@ -272,7 +272,7 @@ RKR::RKR(int gui) :
     tmpprefname(),
     Preset_Name(NULL),
     Author(NULL),
-    Bank_Saved(NULL),
+    Bank_Saved(),
     UserRealName(NULL),
     MID(),
     BankFilename(),
@@ -361,7 +361,6 @@ RKR::~RKR()
     free(interpbuf);
     free(Preset_Name);
     free(Author);
-    free(Bank_Saved);
     free(UserRealName);
 
     // alsa
@@ -728,8 +727,6 @@ RKR::initialize_arrays()
     memset(Preset_Name, 0, sizeof (char) * 64);
     Author = (char *) malloc(sizeof (char) * 64);
     memset(Author, 0, sizeof (char) * 64);
-    Bank_Saved = (char *) malloc(sizeof (char) * 128);
-    memset(Bank_Saved, 0, sizeof (char) * 128);
     UserRealName = (char *) malloc(sizeof (char) * 128);
     memset(UserRealName, 0, sizeof (char) * 128);
 }

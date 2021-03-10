@@ -1232,10 +1232,10 @@ public:
      * Any previously saved bank filename is saved here. Used for setting the
      * fltk file browser previous item.
      */
-    char *Bank_Saved;
+    std::string Bank_Saved;
+
+
     char *UserRealName;
-
-
 
     char MID[128];
     

@@ -3804,7 +3804,7 @@ void RKRGUI::set_save_file()
     char *filename;
 
 #define EXT ".rkrb"
-    filename = fl_file_chooser("Save Bank File:", "(*" EXT")", m_process->Bank_Saved, 0);
+    filename = fl_file_chooser("Save Bank File:", "(*" EXT")", m_process->Bank_Saved.c_str (), 0);
 
     if (filename == NULL)
         return;
@@ -3818,7 +3818,8 @@ void RKRGUI::set_save_file()
         // Reload the bank vector for the new file or update the existing
         Scan_Bank_Dir(1);
 
-        strcpy(m_process->Bank_Saved, filename);
+        // Save the Bank name for next file saving
+        m_process->Bank_Saved = filename;
         BankWin_Label(filename);
     }
 }
