@@ -79,38 +79,61 @@ void RKRGUI::cb_BankWindow1(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_Load_Skin_i(Fl_Menu_*, void*) {
-  char *filename;
-filename = fl_file_chooser("Load Skin:","(*.rkrs)",NULL,0);
-if (filename == NULL) return;
-filename = fl_filename_setext(filename,".rkrs");
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
 
-if(m_process->load_skin(filename))
-{
-    Put_Skin();
-};
+    char *filename;
+    filename = fl_file_chooser("Load Skin:", "(*.rkrs)", chooser_start_location.c_str(), 0);
+
+    if (filename == NULL)
+        return;
+
+    filename = fl_filename_setext(filename, ".rkrs");
+
+    if(m_process->load_skin(filename))
+    {
+        Put_Skin();
+    };
 }
 void RKRGUI::cb_Load_Skin(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Load_Skin_i(o,v);
 }
 
 void RKRGUI::cb_Save_Skin_i(Fl_Menu_*, void*) {
-  char *filename;
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+
+    char *filename;
 #define EXT ".rkrs"
-filename=fl_file_chooser("Save Skin:","(*" EXT")","",0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
+    filename = fl_file_chooser("Save Skin:", "(*" EXT")", chooser_start_location.c_str(), 0);
+
+    if (filename == NULL)
+        return;
+
+    filename = fl_filename_setext(filename, EXT);
 #undef EXT
 
-m_process->slabel_color = (int) global_label_color;
-m_process->sback_color = (int) global_back_color;
-m_process->sfore_color = (int) global_fore_color;
-m_process->sleds_color = (int) global_leds_color;
-m_process->swidth = (int) Principal->w();
-m_process->sheight = (int) Principal->h();
-m_process->sschema = Settings->scheme_ch->value();
+    m_process->slabel_color = (int) global_label_color;
+    m_process->sback_color = (int) global_back_color;
+    m_process->sfore_color = (int) global_fore_color;
+    m_process->sleds_color = (int) global_leds_color;
+    m_process->swidth = (int) Principal->w();
+    m_process->sheight = (int) Principal->h();
+    m_process->sschema = Settings->scheme_ch->value();
 
 
-m_process->save_skin(filename);
+    m_process->save_skin(filename);
 }
 void RKRGUI::cb_Save_Skin(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Skin_i(o,v);
@@ -131,14 +154,23 @@ void RKRGUI::cb_Save_MTable(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_ConvertReverb_i(Fl_Menu_*, void*) {
-  char *filename;
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
 
-    filename=fl_file_chooser("Convert Reverb IR File:","(*.wav)",NULL,0);
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+    
+    char *filename;
 
-    if (filename==NULL)
+    filename = fl_file_chooser("Convert Reverb IR File:", "(*.wav)", chooser_start_location.c_str(), 0);
+
+    if (filename == NULL)
         return;
 
-    filename=fl_filename_setext(filename,".wav");
+    filename = fl_filename_setext(filename, ".wav");
 
     m_process->convert_reverb_file(filename);
 
