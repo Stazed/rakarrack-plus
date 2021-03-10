@@ -1082,13 +1082,22 @@ void SettingsWindowGui::cb_Focus_Slider(RKR_Fl_Slider* o, void* v) {
 }
 
 void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
-  char *filename;
-    filename=fl_file_chooser("Browse:","(*.rkrb)",NULL,0);
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
     
-    if (filename==NULL)
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+
+    char *filename;
+    filename = fl_file_chooser("Browse:", "(*.rkrb)", chooser_start_location.c_str (), 0);
+    
+    if (filename == NULL)
         return;
     
-    filename=fl_filename_setext(filename,".rkrb");
+    filename = fl_filename_setext(filename, ".rkrb");
     
     BFiname->value(filename);
     strcpy(m_process->BankFilename,filename);

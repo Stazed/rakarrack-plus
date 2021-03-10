@@ -3780,7 +3780,18 @@ char* RKRGUI::get_bank_file()
     // get bank file
     char *filename;
     is_modified();
-    filename = fl_file_chooser("Load Bank File:", "(*.rkrb)", NULL, 0);
+    
+    // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    
+    // Did the user set a User Directory
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+    
+    
+    filename = fl_file_chooser("Load Bank File:", "(*.rkrb)", chooser_start_location.c_str (), 0);
 
     if (filename == NULL)
         return 0;
@@ -3854,9 +3865,17 @@ int RKRGUI::get_bank_made()
 
 void RKRGUI::Load_Midi_Program_Change_Table()
 {
-    // load table
+    // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+    
     char *filename;
-    filename = fl_file_chooser("Load MIDI Table:", "(*.rmt)", NULL, 0);
+    filename = fl_file_chooser("Load MIDI Table:", "(*.rmt)", chooser_start_location.c_str (), 0);
 
     if (filename == NULL)
         return;
@@ -3868,10 +3887,18 @@ void RKRGUI::Load_Midi_Program_Change_Table()
 
 void RKRGUI::Save_Midi_Program_Change_Table()
 {
-    // save program change table
+    // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+
     char *filename;
 #define EXT ".rmt"
-    filename = fl_file_chooser("Save MIDI Table:", "(*" EXT")", "", 0);
+    filename = fl_file_chooser("Save MIDI Table:", "(*" EXT")", chooser_start_location.c_str (), 0);
 
     if (filename == NULL)
         return;
