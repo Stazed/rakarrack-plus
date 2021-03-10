@@ -207,18 +207,30 @@ void RevtronGui::cb_revtron_user(RKR_Check_Button* o, void* v) {
 }
 
 void RevtronGui::cb_B_rvb_i(RKR_Button*, void*) {
-  char *filename;
-filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rvb");
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
 
-Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
-strcpy(Efx_Reverbtron->Filename,filename);
+    char *filename;
+    filename = fl_file_chooser("Load rvb File:", "(*.rvb)", chooser_start_location.c_str(), 0);
+    
+    if (filename == NULL)
+        return;
+    
+    filename = fl_filename_setext(filename, ".rvb");
 
-if(!Efx_Reverbtron->setfile(USERFILE))
-{
-    m_process->Handle_Message(14, filename);
-};
+    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
+    strcpy(Efx_Reverbtron->Filename, filename);
+
+    if(!Efx_Reverbtron->setfile(USERFILE))
+    {
+        m_process->Handle_Message(14, filename);
+    };
 }
 void RevtronGui::cb_B_rvb(RKR_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_B_rvb_i(o,v);

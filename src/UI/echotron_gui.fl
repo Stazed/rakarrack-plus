@@ -223,22 +223,34 @@ if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
   }
   Fl_Button B_ech {
     label Browse
-    callback {char *filename;
-filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".dly");
+    callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
 
-Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
-strcpy(Efx_Echotron->Filename,filename);
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
 
-if(!Efx_Echotron->setfile(USERFILE))
-{
-    m_process->Handle_Message(14, filename);
-}
+    char *filename;
+    filename = fl_file_chooser("Load dly File:", "(*.dly)", chooser_start_location.c_str(), 0);
 
-echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
+    if (filename == NULL)
+        return;
 
-echotron_length->maximum(Efx_Echotron->get_file_length());}
+    filename = fl_filename_setext(filename, ".dly");
+
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    strcpy(Efx_Echotron->Filename,filename);
+
+    if(!Efx_Echotron->setfile(USERFILE))
+    {
+        m_process->Handle_Message(14, filename);
+    }
+
+    echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
+
+    echotron_length->maximum(Efx_Echotron->get_file_length());}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }

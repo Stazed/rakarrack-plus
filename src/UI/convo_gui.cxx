@@ -129,18 +129,30 @@ void ConvoGui::cb_convo_safe(RKR_Check_Button* o, void* v) {
 }
 
 void ConvoGui::cb_B_wav_i(RKR_Button*, void*) {
-  char *filename;
-filename=fl_file_chooser("Load Wav File:","(*.wav)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".wav");
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
 
-Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
-strcpy(Efx_Convolotron->Filename,filename);
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
 
-if(!Efx_Convolotron->setfile(USERFILE))
-{
-    m_process->Handle_Message(14, filename);
-};
+    char *filename;
+    filename = fl_file_chooser("Load Wav File:", "(*.wav)", chooser_start_location.c_str(), 0);
+
+    if (filename == NULL)
+        return;
+
+    filename = fl_filename_setext(filename, ".wav");
+
+    Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
+    strcpy(Efx_Convolotron->Filename, filename);
+
+    if(!Efx_Convolotron->setfile(USERFILE))
+    {
+        m_process->Handle_Message(14, filename);
+    };
 }
 void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_B_wav_i(o,v);

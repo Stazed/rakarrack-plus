@@ -237,18 +237,30 @@ if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
   }
   Fl_Button B_rvb {
     label Browse
-    callback {char *filename;
-filename=fl_file_chooser("Load rvb File:","(*.rvb)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rvb");
+    callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
 
-Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
-strcpy(Efx_Reverbtron->Filename,filename);
+    char *filename;
+    filename = fl_file_chooser("Load rvb File:", "(*.rvb)", chooser_start_location.c_str(), 0);
+    
+    if (filename == NULL)
+        return;
+    
+    filename = fl_filename_setext(filename, ".rvb");
 
-if(!Efx_Reverbtron->setfile(USERFILE))
-{
-    m_process->Handle_Message(14, filename);
-}}
+    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
+    strcpy(Efx_Reverbtron->Filename, filename);
+
+    if(!Efx_Reverbtron->setfile(USERFILE))
+    {
+        m_process->Handle_Message(14, filename);
+    }}
     xywh {106 156 46 10} labelsize 10 deactivate
     class RKR_Button
   }
