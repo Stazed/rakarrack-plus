@@ -25,23 +25,7 @@ void BankWindowGui::cb_NewB(Fl_Menu_* o, void* v) {
 }
 
 void BankWindowGui::cb_Load_Bank_i(Fl_Menu_*, void*) {
-  m_parent->is_modified ();
-    m_parent->get_bank_file();
-
-/*
-// We cannot load banks to the menu that are not from the user bank directory.
-// If it is already in the directory, it is already listed.
-
-if(filename == 0)
-  return;
-
-if(m_process->CheckOldBank(filename)==0)
-{
-	std::string filepart = strrchr(filename,'/')+1;     // get the file name W/O path
-        std::string bank_name = filepart.substr(0, filepart.size() - c_rkrb_ext_size); // remove the file extension
-        CH_UB->add((const char *)bank_name.c_str(), 0, (Fl_Callback *)cb_CH_UB, (void *)filename, 0);
-}
-*/;
+  m_parent->get_bank_file();
 }
 void BankWindowGui::cb_Load_Bank(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Load_Bank_i(o,v);
@@ -159,12 +143,16 @@ void BankWindowGui::cb_B_B4(RKR_Button* o, void* v) {
 }
 
 void BankWindowGui::cb_CH_UB_i(RKR_Choice*, void* v) {
-  m_parent->is_modified ();
+  // Need to save the file name in case is_modified() results in a save
+    // which rescans and deletes the menu with the void *v pointer 
+    std::string bank_filename = (char *)v;
 
-    if(m_process->load_bank_from_vector ((char *)v))
+    m_parent->is_modified ();
+
+    if(m_process->load_bank_from_vector (bank_filename))
     {
         // Update the Bank Window
-        m_parent->BankWin_Label((char *)v);
+        m_parent->BankWin_Label(bank_filename.c_str());
         m_parent->Put_Loaded_Bank();
         unlight_preset(m_process->Selected_Preset);
     };

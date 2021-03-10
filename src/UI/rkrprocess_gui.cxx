@@ -3147,15 +3147,20 @@ void RKRGUI::Scan_Bank_Dir(int reload)
     // This will free all memory allocated for names
     // FIXME the list created is not used - remove when done
     ClearBankNames();
-    
-    // Clear the bank window menus
-    BankWindow->CH_UB->clear();
-    BankWindow->clear_menu();
-    
+
+    int menu_item = 0;
+
     if(reload)
     {
         m_process->load_bank_vector ();
+
+        // On reload save the menu item so it can be set again
+        menu_item = BankWindow->CH_UB->value();
     }
+
+    // Clear the bank window menus
+    BankWindow->CH_UB->clear();
+    BankWindow->clear_menu();
     
     for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
     {
@@ -3164,7 +3169,7 @@ void RKRGUI::Scan_Bank_Dir(int reload)
         BankWindow->set_bank_CH_UB(&menu_name[0], (char*) full_path.c_str());
     }
 
-    BankWindow->CH_UB->value(0);
+    BankWindow->CH_UB->value(menu_item);
 }
 
 /**
@@ -3810,23 +3815,9 @@ void RKRGUI::set_save_file()
     
     if (ok)
     {
-        // Check if the saved file is one of the Bank_Vector items
-        // If it is, then we need to update the Bank_Vector
-        int file_match = -1;
-        for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
-        {
-            if(strcmp(filename, m_process->Bank_Vector[i].Bank_File_Name.c_str()) == 0)
-            {
-                file_match = i;
-                break;
-            }
-        }
-        
-        if(file_match >= 0)
-        {
-            m_process->copy_bank (m_process->Bank_Vector[file_match].Bank, m_process->Bank);
-        }
-        
+        // Reload the bank vector for the new file or update the existing
+        Scan_Bank_Dir(1);
+
         strcpy(m_process->Bank_Saved, filename);
         BankWin_Label(filename);
     }
