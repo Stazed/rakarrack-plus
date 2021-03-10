@@ -916,7 +916,7 @@ void RKRGUI::load_previous_state()
     rakarrack.get(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool, 1);
     Fl_Tooltip::enable(m_process->ena_tool);
     
-    rakarrack.get(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay, 25);
+    rakarrack.get(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay, 0);
     Settings->Focus_Slider->value (m_process->Focus_Delay);
     Settings->Focus_Slider->do_callback ();
 

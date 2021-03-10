@@ -215,7 +215,7 @@ RKR::RKR(int gui) :
     Aux_Source(),
     last_auxvalue(0),
     ena_tool(),
-    Focus_Delay(25),
+    Focus_Delay(0),
     VocBands(),
     RCOpti_Harm(),
     RCOpti_Stereo(),
