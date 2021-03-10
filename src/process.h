@@ -693,7 +693,7 @@ class RKR
 
 public:
 
-    RKR ();
+    RKR (int gui);
     ~RKR ();
 
     // process.C

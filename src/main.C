@@ -165,10 +165,7 @@ main(int argc, char *argv[])
     };
 
 
-    RKR process;
-    
-    // Set flag to indicate if in CLI vs Gui mode
-    process.Gui_Shown = gui;
+    RKR process(gui);
 
     if (process.No_Jack_Client)
     {

@@ -37,7 +37,7 @@ int Shut_Off_Below_Mouse = 0;
 int global_error_number = 0;
 char *jack_client_name = (char*) "rakarrack-plus";
 
-RKR::RKR() :
+RKR::RKR(int gui) :
     efx_Tuner(NULL),
     efx_MIDIConverter(NULL),
     M_Metronome(NULL),
@@ -75,7 +75,7 @@ RKR::RKR() :
     Change_Bank(C_BANK_CHANGE_OFF),
     Command_Line_File(0),
     File_To_Load(),
-    Gui_Shown(0),
+    Gui_Shown(gui),
     Gui_Refresh(0),
     No_Jack_Client(0),
     Bank_Load_Command_Line(0),
