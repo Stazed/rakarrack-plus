@@ -588,25 +588,50 @@ void RKRGUI::cb_S_new(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_L_preset_i(RKR_Button*, void*) {
-  char *filename;
-filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkr");
-m_process->load_preset(filename);
-Put_Loaded();
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+
+    // If the user set a User Directory then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+
+    char *filename;
+    filename = fl_file_chooser("Load Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
+    
+    if (filename == NULL)
+        return;
+
+    filename=fl_filename_setext(filename,".rkr");
+    m_process->load_preset(filename);
+    Put_Loaded();
 }
 void RKRGUI::cb_L_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_preset_i(o,v);
 }
 
 void RKRGUI::cb_S_preset_i(RKR_Button*, void*) {
-  char *filename;
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+
+    // Did the user set a User Directory
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+
+    char *filename;
+
 #define EXT ".rkr"
-filename=fl_file_chooser("Save Preset:","(*" EXT")",m_process->Preset_Name,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
+    filename = fl_file_chooser("Save Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
+    if (filename == NULL)
+        return;
+
+    filename = fl_filename_setext(filename,EXT);
 #undef EXT
-m_process->save_preset(filename);
+
+    m_process->save_preset(filename);
 }
 void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_preset_i(o,v);

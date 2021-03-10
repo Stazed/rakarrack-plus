@@ -3789,8 +3789,7 @@ char* RKRGUI::get_bank_file()
     {
         chooser_start_location = m_process->UDirFilename;
     }
-    
-    
+
     filename = fl_file_chooser("Load Bank File:", "(*.rkrb)", chooser_start_location.c_str (), 0);
 
     if (filename == NULL)
@@ -3812,14 +3811,10 @@ char* RKRGUI::get_bank_file()
 void RKRGUI::set_save_file()
 {
     // If nothing previously set, then default location
-    std::string chooser_start_location = "";
+    std::string chooser_start_location = m_process->Bank_Saved;
     
-    // If we have a previous file, then use it
-    if(!m_process->Bank_Saved.empty ())
-    {
-        chooser_start_location = m_process->Bank_Saved;
-    }
-    else    // No previous file, try User Directory
+    // If we do not have a previous file, then try User Directory
+    if(chooser_start_location.empty ())
     {
         // Did the user set a User Directory
         if(strcmp(m_process->UDirFilename, DATADIR) != 0)

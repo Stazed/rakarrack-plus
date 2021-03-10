@@ -344,7 +344,7 @@ m_process->Exit_Program=1;} open selected
         class RKR_Menu_Bar
       } {
         Submenu Archivo {
-          label {&File}
+          label {&File} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Menu_New {
@@ -1399,25 +1399,50 @@ Put_Loaded();}
         }
         Fl_Button L_preset {
           label Load
-          callback {char *filename;
-filename=fl_file_chooser("Load Preset:","(*.rkr)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".rkr");
-m_process->load_preset(filename);
-Put_Loaded();}
+          callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
+
+    // If the user set a User Directory then use it
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+
+    char *filename;
+    filename = fl_file_chooser("Load Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
+    
+    if (filename == NULL)
+        return;
+
+    filename=fl_filename_setext(filename,".rkr");
+    m_process->load_preset(filename);
+    Put_Loaded();}
           tooltip {Open load preset window - Shortcut 'L'} xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
         }
         Fl_Button S_preset {
           label Save
-          callback {char *filename;
+          callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
+
+    // Did the user set a User Directory
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->UDirFilename;
+    }
+
+    char *filename;
+
 \#define EXT ".rkr"
-filename=fl_file_chooser("Save Preset:","(*" EXT")",m_process->Preset_Name,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
+    filename = fl_file_chooser("Save Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
+    if (filename == NULL)
+        return;
+
+    filename = fl_filename_setext(filename,EXT);
 \#undef EXT
-m_process->save_preset(filename);}
+
+    m_process->save_preset(filename);}
           tooltip {Open save preset window - Shortcut 'S'} xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
