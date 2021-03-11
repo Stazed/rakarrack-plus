@@ -1184,9 +1184,9 @@ RKR::add_bank_item(std::string filename)
         Another_Bank.Bank_File_Name = filename;
 
         // Add the CC value for bank select
-        std::string menu_name = "(";
+        std::string menu_name = "[";
         menu_name += NTS(Bank_Vector.size());
-        menu_name += ") ";
+        menu_name += "] ";
 
         // Add the file name
         menu_name += strrchr(filename.c_str(),'/')+1;     // get the file name W/O path
