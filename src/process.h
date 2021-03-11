@@ -762,7 +762,7 @@ public:
     void ConvertOldFile(char *filename);
 
     void convert_reverb_file(char * filename);
-    void save_insert_preset(int num, char *name);
+    int save_insert_preset(int num, char *name);
     void delete_insert_preset(int num, char *name);
     bool merge_insert_presets(char *filename);
     void save_MIDI_table (char *filename);

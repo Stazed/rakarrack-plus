@@ -3423,8 +3423,11 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
     char NewName[64];
     memset(NewName, 0, sizeof (NewName));
     sprintf(NewName, "*%s", name);
-    add_insert_preset_name(w, NewName);
-    m_process->save_insert_preset(effect, NewName);
+    
+    if(m_process->save_insert_preset(effect, NewName))
+    {
+        add_insert_preset_name(w, NewName);
+    }
 }
 
 /**
@@ -3500,6 +3503,20 @@ Fl_Widget * RKRGUI::find_effect_preset_widget(int effect)
  */
 void RKRGUI::read_insert_presets()
 {
+    std::string insert_preset_location = "";
+    
+    // Did the user set a User Directory
+    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    {
+        insert_preset_location = m_process->UDirFilename;
+        insert_preset_location += "InsertPresets.rkis";
+    }
+    else
+    {
+        printf("No User Directory Set. Cannot load insert presets!\n");
+        return;
+    }
+
     // Read in user presets
     FILE *fn;
     char tempfile[256];
@@ -3509,7 +3526,7 @@ void RKRGUI::read_insert_presets()
     int effect = 0;
     memset(tempfile, 0, sizeof (tempfile));
 
-    sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
+    sprintf(tempfile, "%s", insert_preset_location.c_str());
 
     if ((fn = fopen(tempfile, "r")) != NULL)
     {

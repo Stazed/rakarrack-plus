@@ -1714,15 +1714,29 @@ RKR::convert_reverb_file(char * filename)
     }
 }
 
-void
+int
 RKR::save_insert_preset(int num, char *name)
 {
+    std::string insert_preset_location = "";
+    
+    // Did the user set a User Directory
+    if(strcmp(UDirFilename, DATADIR) != 0)
+    {
+        insert_preset_location = UDirFilename;
+        insert_preset_location += "InsertPresets.rkis";
+    }
+    else
+    {
+        Handle_Message(41);
+        return 0;
+    }
+
     FILE *fn;
     char tempfile[256];
     char buf[256];
     char sbuf[260];
     memset(tempfile, 0, sizeof (tempfile));
-    sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
+    sprintf(tempfile, "%s", insert_preset_location.c_str());
 
     if ((fn = fopen(tempfile, "a")) != NULL)
     {
@@ -1733,11 +1747,29 @@ RKR::save_insert_preset(int num, char *name)
         fputs(sbuf, fn);
         fclose(fn);
     }
+    
+    return 1;
 }
 
 void
 RKR::delete_insert_preset(int num, char *name)
 {
+    std::string insert_preset_location = "";
+    
+    // Did the user set a User Directory
+    if(strcmp(global_user_directory.c_str(), DATADIR) != 0)
+    {
+        insert_preset_location = global_user_directory;
+        insert_preset_location += "InsertPresets.rkis";
+    }
+    else
+    {
+        // This is really not going to happen, because if they
+        // did not set the user directory, then they cannot have
+        // any user insert presets to delete.
+        return;
+    }
+
     FILE *fn;
     FILE *fs;
     char *rname;
@@ -1753,7 +1785,7 @@ RKR::delete_insert_preset(int num, char *name)
     memset(tempfile2, 0, sizeof (tempfile2));
     memset(orden, 0, sizeof (orden));
 
-    sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
+    sprintf(tempfile, "%s", insert_preset_location.c_str());
 
     if ((fs = fopen(tempfile, "r")) == NULL) return;
 
@@ -1804,6 +1836,20 @@ RKR::delete_insert_preset(int num, char *name)
 bool
 RKR::merge_insert_presets(char *filename)
 {
+    std::string insert_preset_location = "";
+    
+    // Did the user set a User Directory
+    if(strcmp(UDirFilename, DATADIR) != 0)
+    {
+        insert_preset_location = UDirFilename;
+        insert_preset_location += "InsertPresets.rkis";
+    }
+    else
+    {
+        Handle_Message(41);
+        return 0;
+    }
+    
     FILE *fn;
     if ((fn = fopen(filename, "r")) == NULL)
     {
@@ -1821,7 +1867,7 @@ RKR::merge_insert_presets(char *filename)
     memset(tempfile2, 0, sizeof (tempfile2));
     memset(orden, 0, sizeof (orden));
 
-    sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
+    sprintf(tempfile, "%s", insert_preset_location.c_str());
     sprintf(tempfile2, "%s%s", getenv("HOME"), "/.rkrtemp");
 
     sprintf(orden, "cat %s '%s' > %s\n", tempfile, filename, tempfile2);

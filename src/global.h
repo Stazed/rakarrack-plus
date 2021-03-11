@@ -50,6 +50,9 @@ extern int global_font_type;
 extern int global_font_size;
 extern int global_look_changed;
 
+// Used by FPreset
+extern std::string global_user_directory;
+
 const int C_DEFAULT_FONT_SIZE = 10;
 
 /* For file .rkrb extension size usually for removing the extension from bank names */

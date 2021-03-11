@@ -31,6 +31,20 @@ FPreset::~FPreset()
 void
 FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
 {
+    std::string insert_preset_location = "";
+    
+    // Did the user set a User Directory
+    if(strcmp(global_user_directory.c_str(), DATADIR) != 0)
+    {
+        insert_preset_location = global_user_directory;
+        insert_preset_location += "InsertPresets.rkis";
+    }
+    else
+    {
+        printf("No User Directory Set. Cannot load insert presets!\n");
+        return;
+    }
+
     FILE *fn;
     char tempfile[256];
     char buf[256];
@@ -39,7 +53,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     int reff = 0;
     memset(tempfile, 0, sizeof (tempfile));
     memset(pdata, 0, sizeof (int)*MAX_PDATA_SIZE);
-    sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
+    sprintf(tempfile, "%s", insert_preset_location.c_str());
     
     if ((fn = fopen(tempfile, "r")) != NULL)
     {

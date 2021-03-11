@@ -33,6 +33,7 @@
 #include "process.h"
 
 int global_error_number = 0;
+std::string global_user_directory = "";
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR(int gui) :
@@ -604,6 +605,7 @@ RKR::load_user_preferences()
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/", DATADIR);
     rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
+    global_user_directory = UDirFilename;
 }
 
 void

@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {1322 441 530 580} type Double
+  xywh {1050 446 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1570,11 +1570,18 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       Fl_Button UD_Browser {
         label Browse
         callback {char *dir;
-dir=fl_dir_chooser("Browse:",NULL,0);
-if (dir==NULL) return;
-Udir->value(dir);
-strcpy(m_process->UDirFilename,dir);
-m_parent->Scan_Bank_Dir(1);}
+    dir = fl_dir_chooser("Browse:", NULL, 0);
+
+    if (dir == NULL)
+        return;
+
+    Udir->value(dir);
+    strcpy(m_process->UDirFilename, dir);
+
+    // Needed for FPreset
+    global_user_directory = m_process->UDirFilename;
+
+    m_parent->Scan_Bank_Dir(1);}
         xywh {415 135 65 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button

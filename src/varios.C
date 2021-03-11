@@ -205,6 +205,11 @@ RKR::Handle_Message(int num, std::string filename)
                 "All user banks must be put in the user directory set in:\n"
                 "Settings/Preferences/Bank - User Directory", filename.c_str());
         break;
+    case 41:
+        sprintf(error_msg,"User Directory is not set!\n\n"
+                "You must set a User Directory in :\n"
+                "Settings/Preferences/Bank - User Directory.");
+        break;
     }
 
     Message(message_type, meslabel, error_msg);
