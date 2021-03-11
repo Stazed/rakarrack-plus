@@ -58,8 +58,10 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
 
     m_process = process_rkr = rkr_;
 
-    mBankNameList = NULL;
-    mBankNameListTail = NULL;
+    // FIXME these do not seem to be used for anything... delete??
+    // mBankNameList = NULL;
+    // mBankNameListTail = NULL;
+
     back = NULL;
 
     make_window();
@@ -3152,7 +3154,7 @@ void RKRGUI::Scan_Bank_Dir(int reload)
 {
     // This will free all memory allocated for names
     // FIXME the list created is not used - remove when done
-    ClearBankNames();
+    // ClearBankNames();
 
     int menu_item = 0;
 
@@ -3783,6 +3785,7 @@ int RKRGUI::AddBankName(const char *name)
 
 /**
  * Clears the double stacked list of bank names.
+ * FIXME no longer used - remove.
  */
 void RKRGUI::ClearBankNames()
 {
@@ -3825,7 +3828,9 @@ char* RKRGUI::get_bank_file()
     {
         BankWin_Label(filename);
         Put_Loaded_Bank();
-        AddBankName(filename);
+        
+        // FIXME this serves no purpose, commenting out and maybe delete
+        // AddBankName(filename);
     }
 
     return filename;

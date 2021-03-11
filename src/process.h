@@ -1344,6 +1344,10 @@ public:
 
 };
 
+/**
+ * Double stacked list that was used for bank name list.
+ * No longer used - FIXME remove??
+ */
 struct list_element
 {
     struct list_element *forward;
