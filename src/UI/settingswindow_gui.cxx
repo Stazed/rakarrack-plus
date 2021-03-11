@@ -3043,12 +3043,12 @@ this->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
     MISC_SET->end();
   } // Fl_Group* MISC_SET
-  { BANK_SET = new Fl_Group(5, 26, 518, 554, "User");
-    BANK_SET->box(FL_DOWN_FRAME);
-    BANK_SET->labelfont(1);
-    BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
-    BANK_SET->align(Fl_Align(FL_ALIGN_LEFT));
-    BANK_SET->hide();
+  { USER_SET = new Fl_Group(5, 26, 518, 554, "User");
+    USER_SET->box(FL_DOWN_FRAME);
+    USER_SET->labelfont(1);
+    USER_SET->labelcolor(FL_BACKGROUND2_COLOR);
+    USER_SET->align(Fl_Align(FL_ALIGN_LEFT));
+    USER_SET->hide();
     { Fondo11 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo11
     { RKR_File_Input* o = Udir = new RKR_File_Input(20, 50, 390, 40, "User Directory");
@@ -3111,8 +3111,8 @@ ndow or the Bank window.");
       BF_Browser->when(FL_WHEN_RELEASE);
       o->set_label_offset(4);
     } // RKR_Button* BF_Browser
-    BANK_SET->end();
-  } // Fl_Group* BANK_SET
+    USER_SET->end();
+  } // Fl_Group* USER_SET
   STabs->end();
 } // RKR_Tabs* STabs
 this->m_process = NULL;

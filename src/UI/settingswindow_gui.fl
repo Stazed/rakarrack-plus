@@ -1497,7 +1497,7 @@ Fl_Tooltip::enable(m_process->ena_tool);}
         class RKR_Box
       }
     }
-    Fl_Group BANK_SET {
+    Fl_Group USER_SET {
       label User
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {

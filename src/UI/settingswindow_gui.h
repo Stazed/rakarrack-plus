@@ -515,7 +515,7 @@ private:
   inline void cb_Focus_Slider_i(RKR_Fl_Slider*, void*);
   static void cb_Focus_Slider(RKR_Fl_Slider*, void*);
 public:
-  Fl_Group *BANK_SET;
+  Fl_Group *USER_SET;
   Fl_Box *Fondo11;
   RKR_File_Input *Udir;
   RKR_Button *UD_Browser;
