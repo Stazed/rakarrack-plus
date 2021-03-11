@@ -1081,6 +1081,25 @@ void SettingsWindowGui::cb_Focus_Slider(RKR_Fl_Slider* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Focus_Slider_i(o,v);
 }
 
+void SettingsWindowGui::cb_UD_Browser_i(RKR_Button*, void*) {
+  char *dir;
+    dir = fl_dir_chooser("Browse:", NULL, 0);
+
+    if (dir == NULL)
+        return;
+
+    Udir->value(dir);
+    strcpy(m_process->UDirFilename, dir);
+
+    // Needed for FPreset
+    global_user_directory = m_process->UDirFilename;
+
+    m_parent->Scan_Bank_Dir(1);
+}
+void SettingsWindowGui::cb_UD_Browser(RKR_Button* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UD_Browser_i(o,v);
+}
+
 void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
@@ -1128,25 +1147,6 @@ void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
 }
 void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BF_Browser_i(o,v);
-}
-
-void SettingsWindowGui::cb_UD_Browser_i(RKR_Button*, void*) {
-  char *dir;
-    dir = fl_dir_chooser("Browse:", NULL, 0);
-
-    if (dir == NULL)
-        return;
-
-    Udir->value(dir);
-    strcpy(m_process->UDirFilename, dir);
-
-    // Needed for FPreset
-    global_user_directory = m_process->UDirFilename;
-
-    m_parent->Scan_Bank_Dir(1);
-}
-void SettingsWindowGui::cb_UD_Browser(RKR_Button* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_UD_Browser_i(o,v);
 }
 SettingsWindowGui::SettingsWindowGui(int X, int Y, int W, int H, const char *L)
   : Fl_Double_Window(X, Y, W, H, L) {
@@ -3043,7 +3043,7 @@ this->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
     MISC_SET->end();
   } // Fl_Group* MISC_SET
-  { BANK_SET = new Fl_Group(5, 26, 518, 554, "Bank");
+  { BANK_SET = new Fl_Group(5, 26, 518, 554, "User");
     BANK_SET->box(FL_DOWN_FRAME);
     BANK_SET->labelfont(1);
     BANK_SET->labelcolor(FL_BACKGROUND2_COLOR);
@@ -3051,35 +3051,9 @@ this->when(FL_WHEN_RELEASE);
     BANK_SET->hide();
     { Fondo11 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo11
-    { RKR_File_Input* o = BFiname = new RKR_File_Input(20, 50, 390, 40, "Bank Filename");
-      BFiname->box(FL_DOWN_BOX);
-      BFiname->color(FL_BACKGROUND2_COLOR);
-      BFiname->selection_color(FL_SELECTION_COLOR);
-      BFiname->labeltype(FL_NORMAL_LABEL);
-      BFiname->labelfont(0);
-      BFiname->labelsize(12);
-      BFiname->labelcolor(FL_BACKGROUND2_COLOR);
-      BFiname->textcolor(FL_BACKGROUND2_COLOR);
-      BFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-      BFiname->when(FL_WHEN_CHANGED);
-      BFiname->deactivate();
-      o->set_label_offset(2);
-      o->set_text_offset(4);
-    } // RKR_File_Input* BFiname
-    { RKR_Button* o = BF_Browser = new RKR_Button(415, 65, 65, 20, "Browse");
-      BF_Browser->box(FL_UP_BOX);
-      BF_Browser->color(FL_BACKGROUND_COLOR);
-      BF_Browser->selection_color(FL_BACKGROUND_COLOR);
-      BF_Browser->labeltype(FL_NORMAL_LABEL);
-      BF_Browser->labelfont(0);
-      BF_Browser->labelsize(14);
-      BF_Browser->labelcolor(FL_FOREGROUND_COLOR);
-      BF_Browser->callback((Fl_Callback*)cb_BF_Browser);
-      BF_Browser->align(Fl_Align(FL_ALIGN_CENTER));
-      BF_Browser->when(FL_WHEN_RELEASE);
-      o->set_label_offset(4);
-    } // RKR_Button* BF_Browser
-    { RKR_File_Input* o = Udir = new RKR_File_Input(20, 120, 390, 40, "User Directory");
+    { RKR_File_Input* o = Udir = new RKR_File_Input(20, 50, 390, 40, "User Directory");
+      Udir->tooltip("The User Directory must be set to a writeable location and all custom user ba\
+nks must be stored in this directory.");
       Udir->box(FL_DOWN_BOX);
       Udir->color(FL_BACKGROUND2_COLOR);
       Udir->selection_color(FL_SELECTION_COLOR);
@@ -3094,7 +3068,7 @@ this->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
       o->set_text_offset(4);
     } // RKR_File_Input* Udir
-    { RKR_Button* o = UD_Browser = new RKR_Button(415, 135, 65, 20, "Browse");
+    { RKR_Button* o = UD_Browser = new RKR_Button(415, 65, 65, 20, "Browse");
       UD_Browser->box(FL_UP_BOX);
       UD_Browser->color(FL_BACKGROUND_COLOR);
       UD_Browser->selection_color(FL_BACKGROUND_COLOR);
@@ -3107,6 +3081,36 @@ this->when(FL_WHEN_RELEASE);
       UD_Browser->when(FL_WHEN_RELEASE);
       o->set_label_offset(4);
     } // RKR_Button* UD_Browser
+    { RKR_File_Input* o = BFiname = new RKR_File_Input(20, 120, 390, 40, "Default User Bank Filename");
+      BFiname->tooltip("This is the bank that will be selected with the \'U\' button from the main wi\
+ndow or the Bank window.");
+      BFiname->box(FL_DOWN_BOX);
+      BFiname->color(FL_BACKGROUND2_COLOR);
+      BFiname->selection_color(FL_SELECTION_COLOR);
+      BFiname->labeltype(FL_NORMAL_LABEL);
+      BFiname->labelfont(0);
+      BFiname->labelsize(12);
+      BFiname->labelcolor(FL_BACKGROUND2_COLOR);
+      BFiname->textcolor(FL_BACKGROUND2_COLOR);
+      BFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+      BFiname->when(FL_WHEN_CHANGED);
+      BFiname->deactivate();
+      o->set_label_offset(2);
+      o->set_text_offset(4);
+    } // RKR_File_Input* BFiname
+    { RKR_Button* o = BF_Browser = new RKR_Button(415, 135, 65, 20, "Browse");
+      BF_Browser->box(FL_UP_BOX);
+      BF_Browser->color(FL_BACKGROUND_COLOR);
+      BF_Browser->selection_color(FL_BACKGROUND_COLOR);
+      BF_Browser->labeltype(FL_NORMAL_LABEL);
+      BF_Browser->labelfont(0);
+      BF_Browser->labelsize(14);
+      BF_Browser->labelcolor(FL_FOREGROUND_COLOR);
+      BF_Browser->callback((Fl_Callback*)cb_BF_Browser);
+      BF_Browser->align(Fl_Align(FL_ALIGN_CENTER));
+      BF_Browser->when(FL_WHEN_RELEASE);
+      o->set_label_offset(4);
+    } // RKR_Button* BF_Browser
     BANK_SET->end();
   } // Fl_Group* BANK_SET
   STabs->end();

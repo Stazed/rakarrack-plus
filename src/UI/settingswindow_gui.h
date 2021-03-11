@@ -517,17 +517,17 @@ private:
 public:
   Fl_Group *BANK_SET;
   Fl_Box *Fondo11;
-  RKR_File_Input *BFiname;
-  RKR_Button *BF_Browser;
-private:
-  inline void cb_BF_Browser_i(RKR_Button*, void*);
-  static void cb_BF_Browser(RKR_Button*, void*);
-public:
   RKR_File_Input *Udir;
   RKR_Button *UD_Browser;
 private:
   inline void cb_UD_Browser_i(RKR_Button*, void*);
   static void cb_UD_Browser(RKR_Button*, void*);
+public:
+  RKR_File_Input *BFiname;
+  RKR_Button *BF_Browser;
+private:
+  inline void cb_BF_Browser_i(RKR_Button*, void*);
+  static void cb_BF_Browser(RKR_Button*, void*);
   RKR* m_process; 
   RKRGUI* m_parent; 
 public:

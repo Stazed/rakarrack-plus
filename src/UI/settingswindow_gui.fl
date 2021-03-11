@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {1050 446 530 580} type Double
+  xywh {1335 279 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1498,15 +1498,41 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       }
     }
     Fl_Group BANK_SET {
-      label Bank
+      label User
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo11 {
         xywh {5 26 518 554}
       }
+      Fl_File_Input Udir {
+        label {User Directory}
+        tooltip {The User Directory must be set to a writeable location and all custom user banks must be stored in this directory.} xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
+        code0 {o->set_label_offset(2);}
+        code1 {o->set_text_offset(4);}
+        class RKR_File_Input
+      }
+      Fl_Button UD_Browser {
+        label Browse
+        callback {char *dir;
+    dir = fl_dir_chooser("Browse:", NULL, 0);
+
+    if (dir == NULL)
+        return;
+
+    Udir->value(dir);
+    strcpy(m_process->UDirFilename, dir);
+
+    // Needed for FPreset
+    global_user_directory = m_process->UDirFilename;
+
+    m_parent->Scan_Bank_Dir(1);}
+        xywh {415 65 65 20}
+        code0 {o->set_label_offset(4);}
+        class RKR_Button
+      }
       Fl_File_Input BFiname {
-        label {Bank Filename}
-        xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
+        label {Default User Bank Filename}
+        tooltip {This is the bank that will be selected with the 'U' button from the main window or the Bank window.} xywh {20 120 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(4);}
         class RKR_File_Input
@@ -1556,32 +1582,6 @@ Fl_Tooltip::enable(m_process->ena_tool);}
         m_process->Handle_Message(40, filename);
         BFiname->value(m_process->BankFilename);
     }}
-        xywh {415 65 65 20}
-        code0 {o->set_label_offset(4);}
-        class RKR_Button
-      }
-      Fl_File_Input Udir {
-        label {User Directory}
-        xywh {20 120 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
-        code0 {o->set_label_offset(2);}
-        code1 {o->set_text_offset(4);}
-        class RKR_File_Input
-      }
-      Fl_Button UD_Browser {
-        label Browse
-        callback {char *dir;
-    dir = fl_dir_chooser("Browse:", NULL, 0);
-
-    if (dir == NULL)
-        return;
-
-    Udir->value(dir);
-    strcpy(m_process->UDirFilename, dir);
-
-    // Needed for FPreset
-    global_user_directory = m_process->UDirFilename;
-
-    m_parent->Scan_Bank_Dir(1);}
         xywh {415 135 65 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
