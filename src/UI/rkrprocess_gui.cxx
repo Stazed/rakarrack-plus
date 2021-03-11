@@ -745,7 +745,7 @@ void RKRGUI::load_previous_state()
     if (!m_process->Bank_Load_Command_Line)
     {
         // Copy the bank to the process active Bank
-        if(m_process->a_bank < m_process->Bank_Vector.size ())
+        if(m_process->a_bank < (int)m_process->Bank_Vector.size ())
         {
             m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[m_process->a_bank].Bank);
 

@@ -661,7 +661,7 @@ RKR::load_custom_MIDI_table_preset_names()
         {
             int user_bank = 0;
             
-            for(int ii = 0; ii < Bank_Vector.size(); ii++)
+            for(unsigned ii = 0; ii < Bank_Vector.size(); ii++)
             {
                 if(strcmp(BankFilename, Bank_Vector[ii].Bank_File_Name.c_str()) == 0)
                 {
