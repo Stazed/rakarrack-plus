@@ -318,9 +318,9 @@ void BankWindowGui::make_window_banks() {
           for (int j=1; j<5; j++)
           {
               // Add the Program Change value
-              add_pg_change = "(";
+              add_pg_change = "[";
               add_pg_change += NTS(num);
-              add_pg_change += ") ";
+              add_pg_change += "] ";
               add_pg_change += m_process->Bank[num].Preset_Name;
   
               RKR_Button* butX = new RKR_Button(x + 1, y+1, elw, elh, 0);

@@ -1341,7 +1341,13 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         o->value(0);
         o->redraw();
         m_process->preset_to_bank(button_number);
-        w->copy_label(m_process->Preset_Name);
+        
+        std::string add_pg_change = "[";
+        add_pg_change += NTS(button_number);
+        add_pg_change += "] ";
+        add_pg_change += m_process->Preset_Name;
+
+        w->copy_label(add_pg_change.c_str());
         m_process->modified = 1;
     }
 
@@ -2088,9 +2094,9 @@ void RKRGUI::Put_Loaded_Bank()
         long long temp = (long long) w->user_data();
         if (temp > 0)
         {
-            add_pg_change = "(";
+            add_pg_change = "[";
             add_pg_change += NTS(k);
-            add_pg_change += ") ";
+            add_pg_change += "] ";
             add_pg_change += m_process->Bank[k].Preset_Name;
             w->copy_label(add_pg_change.c_str ());
             k++;
