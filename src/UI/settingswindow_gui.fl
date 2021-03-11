@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {1335 279 530 580} type Double
+  xywh {1296 261 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1440,25 +1440,17 @@ else JackIn->deactivate();}
       Fl_Box Fondo10 {
         xywh {5 26 518 554}
       }
-      Fl_Input Username {
-        label Username
-        callback {m_process->UserRealName=(char*) o->value();}
-        xywh {30 58 240 21} labelcolor 7 align 5 textcolor 7
-        code0 {o->set_label_offset(4);}
-        code1 {o->set_text_offset(4);}
-        class RKR_Input
-      }
       Fl_Check_Button MESSAGE_DISABLE {
         label {Disable Warnings    }
         callback {m_process->Disable_Warnings=(int) o->value();}
-        xywh {30 90 141 16} down_box DOWN_BOX labelsize 12 labelcolor 7
+        xywh {30 40 141 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button T_TIMEOUT {
         label {Tap Tempo Timeout}
         callback {m_process->t_timeout=(int) o->value();}
-        xywh {30 110 143 16} down_box DOWN_BOX labelsize 12 labelcolor 7
+        xywh {30 70 143 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
@@ -1466,34 +1458,34 @@ else JackIn->deactivate();}
         label {Enable Tooltips       }
         callback {m_process->ena_tool=(int) o->value();
 Fl_Tooltip::enable(m_process->ena_tool);}
-        xywh {30 130 118 16} down_box DOWN_BOX labelsize 12 labelcolor 7
+        xywh {30 100 118 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Box {} {
         label {Specify the delay an item gets selected when the mouse pointer is paused over it:}
-        xywh {30 157 400 56} align 148
+        xywh {30 130 400 56} align 148
         class RKR_Box
       }
       Fl_Slider Focus_Slider {
         user_data UD_RKR_Highlight
         callback {m_parent->set_focus_timer(o->value());}
-        xywh {30 213 400 22} type {Horz Knob} box ROUND_DOWN_BOX labelsize 10 align 1 maximum 100 step 1 value 25
+        xywh {30 180 400 22} type {Horz Knob} box ROUND_DOWN_BOX labelsize 10 align 1 maximum 100 step 1 value 25
         class RKR_Fl_Slider
       }
       Fl_Box {} {
         label Disabled
-        xywh {30 240 69 17} align 20
+        xywh {30 205 69 17} align 20
         class RKR_Box
       }
       Fl_Box {} {
         label Medium
-        xywh {209 240 69 17} align 16
+        xywh {209 205 69 17} align 16
         class RKR_Box
       }
       Fl_Box {} {
         label Long
-        xywh {362 240 69 17} align 24
+        xywh {362 205 69 17} align 24
         class RKR_Box
       }
     }
@@ -1506,7 +1498,7 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       }
       Fl_File_Input Udir {
         label {User Directory}
-        tooltip {The User Directory must be set to a writeable location and all custom user banks must be stored in this directory.} xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
+        tooltip {The User Directory must be set to a writable location and all custom user banks must be stored in this directory.} xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(4);}
         class RKR_File_Input
@@ -1585,6 +1577,14 @@ Fl_Tooltip::enable(m_process->ena_tool);}
         xywh {415 135 65 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
+      }
+      Fl_Input Username {
+        label Username
+        callback {m_process->UserRealName=(char*) o->value();}
+        tooltip {The name to be used for author below the preset name on the main window.} xywh {20 192 240 21} labelsize 12 labelcolor 7 align 5 textcolor 7
+        code0 {o->set_label_offset(2);}
+        code1 {o->set_text_offset(4);}
+        class RKR_Input
       }
     }
   }

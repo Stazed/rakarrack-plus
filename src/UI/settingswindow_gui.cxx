@@ -1045,13 +1045,6 @@ void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_D_IJ_Connect_i(o,v);
 }
 
-void SettingsWindowGui::cb_Username_i(RKR_Input* o, void*) {
-  m_process->UserRealName=(char*) o->value();
-}
-void SettingsWindowGui::cb_Username(RKR_Input* o, void* v) {
-  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);
-}
-
 void SettingsWindowGui::cb_MESSAGE_DISABLE_i(RKR_Check_Button* o, void*) {
   m_process->Disable_Warnings=(int) o->value();
 }
@@ -1147,6 +1140,13 @@ void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
 }
 void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_BF_Browser_i(o,v);
+}
+
+void SettingsWindowGui::cb_Username_i(RKR_Input* o, void*) {
+  m_process->UserRealName=(char*) o->value();
+}
+void SettingsWindowGui::cb_Username(RKR_Input* o, void* v) {
+  ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);
 }
 SettingsWindowGui::SettingsWindowGui(int X, int Y, int W, int H, const char *L)
   : Fl_Double_Window(X, Y, W, H, L) {
@@ -2923,22 +2923,7 @@ this->when(FL_WHEN_RELEASE);
     MISC_SET->hide();
     { Fondo10 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo10
-    { RKR_Input* o = Username = new RKR_Input(30, 58, 240, 21, "Username");
-      Username->box(FL_DOWN_BOX);
-      Username->color(FL_BACKGROUND2_COLOR);
-      Username->selection_color(FL_SELECTION_COLOR);
-      Username->labeltype(FL_NORMAL_LABEL);
-      Username->labelfont(0);
-      Username->labelsize(14);
-      Username->labelcolor(FL_BACKGROUND2_COLOR);
-      Username->textcolor(FL_BACKGROUND2_COLOR);
-      Username->callback((Fl_Callback*)cb_Username);
-      Username->align(Fl_Align(FL_ALIGN_TOP_LEFT));
-      Username->when(FL_WHEN_RELEASE);
-      o->set_label_offset(4);
-      o->set_text_offset(4);
-    } // RKR_Input* Username
-    { RKR_Check_Button* o = MESSAGE_DISABLE = new RKR_Check_Button(30, 90, 141, 16, "Disable Warnings    ");
+    { RKR_Check_Button* o = MESSAGE_DISABLE = new RKR_Check_Button(30, 40, 141, 16, "Disable Warnings    ");
       MESSAGE_DISABLE->box(FL_NO_BOX);
       MESSAGE_DISABLE->down_box(FL_DOWN_BOX);
       MESSAGE_DISABLE->color(FL_BACKGROUND_COLOR);
@@ -2952,7 +2937,7 @@ this->when(FL_WHEN_RELEASE);
       MESSAGE_DISABLE->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* MESSAGE_DISABLE
-    { RKR_Check_Button* o = T_TIMEOUT = new RKR_Check_Button(30, 110, 143, 16, "Tap Tempo Timeout");
+    { RKR_Check_Button* o = T_TIMEOUT = new RKR_Check_Button(30, 70, 143, 16, "Tap Tempo Timeout");
       T_TIMEOUT->box(FL_NO_BOX);
       T_TIMEOUT->down_box(FL_DOWN_BOX);
       T_TIMEOUT->color(FL_BACKGROUND_COLOR);
@@ -2966,7 +2951,7 @@ this->when(FL_WHEN_RELEASE);
       T_TIMEOUT->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* T_TIMEOUT
-    { RKR_Check_Button* o = ENA_TOOL = new RKR_Check_Button(30, 130, 118, 16, "Enable Tooltips       ");
+    { RKR_Check_Button* o = ENA_TOOL = new RKR_Check_Button(30, 100, 118, 16, "Enable Tooltips       ");
       ENA_TOOL->box(FL_NO_BOX);
       ENA_TOOL->down_box(FL_DOWN_BOX);
       ENA_TOOL->color(FL_BACKGROUND_COLOR);
@@ -2980,7 +2965,7 @@ this->when(FL_WHEN_RELEASE);
       ENA_TOOL->when(FL_WHEN_RELEASE);
       o->set_label_offset(2);
     } // RKR_Check_Button* ENA_TOOL
-    { RKR_Box* o = new RKR_Box(30, 157, 400, 56, "Specify the delay an item gets selected when the mouse pointer is paused over\
+    { RKR_Box* o = new RKR_Box(30, 130, 400, 56, "Specify the delay an item gets selected when the mouse pointer is paused over\
  it:");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);
@@ -2992,7 +2977,7 @@ this->when(FL_WHEN_RELEASE);
       o->align(Fl_Align(132|FL_ALIGN_INSIDE));
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
-    { Focus_Slider = new RKR_Fl_Slider(30, 213, 400, 22);
+    { Focus_Slider = new RKR_Fl_Slider(30, 180, 400, 22);
       Focus_Slider->type(5);
       Focus_Slider->box(FL_ROUND_DOWN_BOX);
       Focus_Slider->color(FL_BACKGROUND_COLOR);
@@ -3008,7 +2993,7 @@ this->when(FL_WHEN_RELEASE);
       Focus_Slider->align(Fl_Align(FL_ALIGN_TOP));
       Focus_Slider->when(FL_WHEN_CHANGED);
     } // RKR_Fl_Slider* Focus_Slider
-    { RKR_Box* o = new RKR_Box(30, 240, 69, 17, "Disabled");
+    { RKR_Box* o = new RKR_Box(30, 205, 69, 17, "Disabled");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);
       o->selection_color(FL_BACKGROUND_COLOR);
@@ -3019,7 +3004,7 @@ this->when(FL_WHEN_RELEASE);
       o->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
-    { RKR_Box* o = new RKR_Box(209, 240, 69, 17, "Medium");
+    { RKR_Box* o = new RKR_Box(209, 205, 69, 17, "Medium");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);
       o->selection_color(FL_BACKGROUND_COLOR);
@@ -3030,7 +3015,7 @@ this->when(FL_WHEN_RELEASE);
       o->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
-    { RKR_Box* o = new RKR_Box(362, 240, 69, 17, "Long");
+    { RKR_Box* o = new RKR_Box(362, 205, 69, 17, "Long");
       o->box(FL_NO_BOX);
       o->color(FL_BACKGROUND_COLOR);
       o->selection_color(FL_BACKGROUND_COLOR);
@@ -3052,8 +3037,8 @@ this->when(FL_WHEN_RELEASE);
     { Fondo11 = new Fl_Box(5, 26, 518, 554);
     } // Fl_Box* Fondo11
     { RKR_File_Input* o = Udir = new RKR_File_Input(20, 50, 390, 40, "User Directory");
-      Udir->tooltip("The User Directory must be set to a writeable location and all custom user ba\
-nks must be stored in this directory.");
+      Udir->tooltip("The User Directory must be set to a writable location and all custom user ban\
+ks must be stored in this directory.");
       Udir->box(FL_DOWN_BOX);
       Udir->color(FL_BACKGROUND2_COLOR);
       Udir->selection_color(FL_SELECTION_COLOR);
@@ -3111,6 +3096,22 @@ ndow or the Bank window.");
       BF_Browser->when(FL_WHEN_RELEASE);
       o->set_label_offset(4);
     } // RKR_Button* BF_Browser
+    { RKR_Input* o = Username = new RKR_Input(20, 192, 240, 21, "Username");
+      Username->tooltip("The name to be used for author below the preset name on the main window.");
+      Username->box(FL_DOWN_BOX);
+      Username->color(FL_BACKGROUND2_COLOR);
+      Username->selection_color(FL_SELECTION_COLOR);
+      Username->labeltype(FL_NORMAL_LABEL);
+      Username->labelfont(0);
+      Username->labelsize(12);
+      Username->labelcolor(FL_BACKGROUND2_COLOR);
+      Username->textcolor(FL_BACKGROUND2_COLOR);
+      Username->callback((Fl_Callback*)cb_Username);
+      Username->align(Fl_Align(FL_ALIGN_TOP_LEFT));
+      Username->when(FL_WHEN_RELEASE);
+      o->set_label_offset(2);
+      o->set_text_offset(4);
+    } // RKR_Input* Username
     USER_SET->end();
   } // Fl_Group* USER_SET
   STabs->end();

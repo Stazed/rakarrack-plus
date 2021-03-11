@@ -490,11 +490,6 @@ public:
   RKR_Browser *JackIn;
   Fl_Group *MISC_SET;
   Fl_Box *Fondo10;
-  RKR_Input *Username;
-private:
-  inline void cb_Username_i(RKR_Input*, void*);
-  static void cb_Username(RKR_Input*, void*);
-public:
   RKR_Check_Button *MESSAGE_DISABLE;
 private:
   inline void cb_MESSAGE_DISABLE_i(RKR_Check_Button*, void*);
@@ -528,6 +523,11 @@ public:
 private:
   inline void cb_BF_Browser_i(RKR_Button*, void*);
   static void cb_BF_Browser(RKR_Button*, void*);
+public:
+  RKR_Input *Username;
+private:
+  inline void cb_Username_i(RKR_Input*, void*);
+  static void cb_Username(RKR_Input*, void*);
   RKR* m_process; 
   RKRGUI* m_parent; 
 public:
