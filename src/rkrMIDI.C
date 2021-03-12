@@ -813,7 +813,12 @@ RKR::midievents()
                     if (Selected_Preset < 60) Change_Preset = Selected_Preset + 1;
             }
             else
-                Change_Preset = midievent->data.control.value;
+            {
+                int bank = MIDI_Table[midievent->data.control.value].bank;
+                process_midi_controller_events(0, bank);    // 0 is CC 0 Bank Select
+
+                Change_Preset = MIDI_Table[midievent->data.control.value].preset + 1;
+            }
         }
     }
 
@@ -1176,7 +1181,12 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                 if (cmdvalue == 82) if (Selected_Preset < 60) Change_Preset = Selected_Preset + 1;
             }
             else
-                Change_Preset = cmdvalue;
+            {
+                int bank = MIDI_Table[cmdvalue].bank;
+                process_midi_controller_events(0, bank);    // 0 is CC 0 Bank Select
+
+                Change_Preset = MIDI_Table[cmdvalue].preset + 1;
+            }
         }
     }
 

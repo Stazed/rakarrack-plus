@@ -503,8 +503,8 @@ RKR::load_user_preferences()
     // MIDI Learn used On/Off
     rakarrack.get(PrefNom("MIDI Implementation"), MIDIway, 0);
     
-    // Custom MIDI Table used On/OFF - Currently cannot be used with no GUI - FIXME
-    //rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
+    // Custom MIDI Table used On/OFF
+    rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
     
     // Custom MIDI program change table loading
     char table_buffer[64];

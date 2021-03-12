@@ -256,37 +256,8 @@ void RKRGUI::GuiTimeout(void)
     // Update the Gui for MIDI program changes
     if (m_process->Change_Preset != C_CHANGE_PRESET_OFF)
     {
-        if (!m_process->custom_midi_table)
-        {
-            Preset_Counter->value(m_process->Change_Preset);
-            Preset_Counter->do_callback();
-        }
-        else
-        {
-            if (m_process->a_bank != m_process->MIDI_Table[m_process->Change_Preset].bank)
-            {
-                switch (m_process->MIDI_Table[m_process->Change_Preset].bank)
-                {
-                    case 0:
-                        L_B1->do_callback();
-                        break;
-
-                    case 1:
-                        L_B2->do_callback();
-                        break;
-
-                    case 2:
-                        L_B3->do_callback();
-                        break;
-
-                    case 3:
-                        L_B4->do_callback();
-                        break;
-                }
-            }
-            Preset_Counter->value(m_process->MIDI_Table[m_process->Change_Preset].preset + 1);
-            Preset_Counter->do_callback();
-        }
+        Preset_Counter->value(m_process->Change_Preset);
+        Preset_Counter->do_callback();
 
         m_process->Change_Preset = C_CHANGE_PRESET_OFF;
     }
