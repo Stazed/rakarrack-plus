@@ -1248,13 +1248,14 @@ RKR::process_midi_controller_events(int parameter, int value)
         // Bank Select is Hard coded to CC 0
         case MC_Bank_Select:    // CC 0
         {
+            // Don't bother with change if already is
+            if(value == Previous_MIDI_Bank)
+                return;
+
             if(value < (int) Bank_Vector.size())
             {
                 copy_bank(Bank, Bank_Vector[value].Bank);
-                Change_Bank = value;
-                
-                // Un-comment for testing, to hear change of Bank preset
-                // Change_Preset = 1;
+                Previous_MIDI_Bank = Change_Bank = value;
             }
             return;
         }

@@ -871,6 +871,12 @@ public:
      * Flag to indicate that a MIDI CC bank change has occurred.
      */
     int Change_Bank;
+    
+    /*
+     * Holds the previously selected MIDI bank for comparison to current selection.
+     * For optimized bank changes, if no change, then don't copy_bank().
+     */
+    int Previous_MIDI_Bank;
 
     /**
      * Flag to indicate if the user used the -l command line option to load a preset file.
