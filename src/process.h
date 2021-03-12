@@ -64,8 +64,6 @@
 #include <jack/jack.h>
 #include <sstream>
 
-//#define OPTIMIZE_RT 1
-
 
 /**
  * This is the "MIDI Implementation Chart" listed in Rakarrack-plus help.

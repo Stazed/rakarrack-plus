@@ -603,102 +603,104 @@ RKR::set_audio_paramters()
     
     // Looper is special
     Looper *Efx_Looper = static_cast<Looper*>(Rack_Effects[EFX_LOOPER]);
-
-
-#ifdef OPTIMIZE_RT  // This should be used for no gui
     
-    // These are specially processed and need to be shut of unless specifically set
-    // from the ordered effects.
-    EFX_Active[EFX_HARMONIZER] = 0;
-    EFX_Active[EFX_STEREOHARM] = 0;
-    EFX_Active[EFX_RING] = 0;
-    
-    // For each item on the main rack, check for a match to the efx_order
-    for (int ordered_efx = 0; ordered_efx < C_NUMBER_ORDERED_EFFECTS; ordered_efx++)
+    // This is not optimized for audio processing.
+    // It sets all parameters for all effects, even if they are not used.
+    // This is beneficial for User editing and feedback, but not for fast preset changes
+    if(Gui_Shown)
     {
         for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
         {
-            // Is the effect one of the ordered?
-            if(efx_order[ordered_efx] == all_efx)
+            EFX_Active[all_efx] = EFX_Bank_Active[all_efx];
+
+            if(all_efx != EFX_LOOPER)
+                Rack_Effects[all_efx]->cleanup();
+
+
+            for (int efx_params = 0; efx_params < EFX_Param_Size[all_efx]; efx_params++)
             {
-                // Set the bypass for all ordered
-                EFX_Active[all_efx] = EFX_Bank_Active[all_efx];
-
-                // If the ordered effect is active, then set the parameters
-                // We do not need to set parameters for inactive effects
-                if(EFX_Active[all_efx])
+                if(all_efx == EFX_LOOPER)
                 {
-                    if(all_efx != EFX_LOOPER)
-                        Rack_Effects[all_efx]->cleanup();
+                    Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
+                }
+                else
+                {
+                    Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
+                }
+            }
 
-                    for (int efx_params = 0; efx_params < EFX_Param_Size[all_efx]; efx_params++)
+            // We have to reset the Echotron Taps because we limit it to get_file_length().
+            // But, it is set before the loaded file and would be limited by the 
+            // previous file. So, reset it again after the requested file is loaded.
+            if(all_efx == EFX_ECHOTRON)
+            {
+                Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
+            }
+
+            if(all_efx == EFX_STEREOHARM)
+            {
+                if (lv[EFX_STEREOHARM][Sharm_MIDI])
+                    RC_Stereo_Harm->cleanup();
+            }
+        }
+    }
+    else    // No gui optimized audio processing
+    {
+        // These are specially processed and need to be shut of unless specifically set
+        // from the ordered effects.
+        EFX_Active[EFX_HARMONIZER] = 0;
+        EFX_Active[EFX_STEREOHARM] = 0;
+        EFX_Active[EFX_RING] = 0;
+
+        // For each item on the main rack, check for a match to the efx_order
+        for (int ordered_efx = 0; ordered_efx < C_NUMBER_ORDERED_EFFECTS; ordered_efx++)
+        {
+            for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
+            {
+                // Is the effect one of the ordered?
+                if(efx_order[ordered_efx] == all_efx)
+                {
+                    // Set the bypass for all ordered
+                    EFX_Active[all_efx] = EFX_Bank_Active[all_efx];
+
+                    // If the ordered effect is active, then set the parameters
+                    // We do not need to set parameters for inactive effects
+                    if(EFX_Active[all_efx])
                     {
-                        if(all_efx == EFX_LOOPER)
+                        if(all_efx != EFX_LOOPER)
+                            Rack_Effects[all_efx]->cleanup();
+
+                        for (int efx_params = 0; efx_params < EFX_Param_Size[all_efx]; efx_params++)
                         {
-                            Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
+                            if(all_efx == EFX_LOOPER)
+                            {
+                                Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
+                            }
+                            else
+                            {
+                                Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
+                            }
                         }
-                        else
+
+                        // We have to reset the Echotron Taps because we limit it to get_file_length().
+                        // But, it is set before the loaded file and would be limited by the 
+                        // previous file. So, reset it again after the requested file is loaded.
+                        if(all_efx == EFX_ECHOTRON)
                         {
-                            Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
+                            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
                         }
-                    }
 
-                    // We have to reset the Echotron Taps because we limit it to get_file_length().
-                    // But, it is set before the loaded file and would be limited by the 
-                    // previous file. So, reset it again after the requested file is loaded.
-                    if(all_efx == EFX_ECHOTRON)
-                    {
-                        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
-                    }
-
-                    if(all_efx == EFX_STEREOHARM)
-                    {
-                        if (lv[EFX_STEREOHARM][Sharm_MIDI])
-                            RC_Stereo_Harm->cleanup();
+                        if(all_efx == EFX_STEREOHARM)
+                        {
+                            if (lv[EFX_STEREOHARM][Sharm_MIDI])
+                                RC_Stereo_Harm->cleanup();
+                        }
                     }
                 }
             }
         }
     }
 
-#else   // For GUi shown
-
-    for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
-    {
-        EFX_Active[all_efx] = EFX_Bank_Active[all_efx];
-
-        if(all_efx != EFX_LOOPER)
-            Rack_Effects[all_efx]->cleanup();
-
-        
-        for (int efx_params = 0; efx_params < EFX_Param_Size[all_efx]; efx_params++)
-        {
-            if(all_efx == EFX_LOOPER)
-            {
-                Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
-            }
-            else
-            {
-                Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
-            }
-        }
-        
-        // We have to reset the Echotron Taps because we limit it to get_file_length().
-        // But, it is set before the loaded file and would be limited by the 
-        // previous file. So, reset it again after the requested file is loaded.
-        if(all_efx == EFX_ECHOTRON)
-        {
-            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
-        }
-        
-        if(all_efx == EFX_STEREOHARM)
-        {
-            if (lv[EFX_STEREOHARM][Sharm_MIDI])
-                RC_Stereo_Harm->cleanup();
-        }
-    }
-#endif
-    
     // Reset the main audio processing to requested state
     // Could be on or off
     FX_Master_Active = FX_Master_Active_Reset;
@@ -1396,12 +1398,14 @@ RKR::new_bank(struct Preset_Bank_Struct a_bank[])
 void
 RKR::bank_to_preset(int i)
 {
-#ifndef OPTIMIZE_RT  // This should be used for no gui
-    memset(Preset_Name, 0, sizeof (char) * 64);
-    strcpy(Preset_Name, Bank[i].Preset_Name);
-    memset(Author, 0, sizeof (char) * 64);
-    strcpy(Author, Bank[i].Author);
-#endif
+    // Do not need to copy this if no gui
+    if(Gui_Shown)
+    {
+        memset(Preset_Name, 0, sizeof (char) * 64);
+        strcpy(Preset_Name, Bank[i].Preset_Name);
+        memset(Author, 0, sizeof (char) * 64);
+        strcpy(Author, Bank[i].Author);
+    }
 
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
