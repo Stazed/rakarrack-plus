@@ -47,7 +47,7 @@ RKR::RKR(int gui) :
     RC_Harm(NULL),
     RC_Stereo_Harm(NULL),
     EFX_Active(),
-    EFX_Bank_Bypass(),
+    EFX_Bank_Active(),
     efx_FLimiter(NULL),
     U_Resample(NULL),
     D_Resample(NULL),

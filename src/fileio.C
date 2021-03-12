@@ -169,7 +169,7 @@ void RKR::apply_effect_parameters(char *buf, int fx_index)
                 }
                 else    // Set the bypass
                 {
-                    EFX_Bank_Bypass[effect] = atoi( result.at(params).c_str() );
+                    EFX_Bank_Active[effect] = atoi( result.at(params).c_str() );
                 }
             }
 
@@ -622,7 +622,7 @@ RKR::set_audio_paramters()
             if(efx_order[ordered_efx] == all_efx)
             {
                 // Set the bypass for all ordered
-                EFX_Active[all_efx] = EFX_Bank_Bypass[all_efx];
+                EFX_Active[all_efx] = EFX_Bank_Active[all_efx];
 
                 // If the ordered effect is active, then set the parameters
                 // We do not need to set parameters for inactive effects
@@ -665,7 +665,7 @@ RKR::set_audio_paramters()
 
     for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
     {
-        EFX_Active[all_efx] = EFX_Bank_Bypass[all_efx];
+        EFX_Active[all_efx] = EFX_Bank_Active[all_efx];
 
         if(all_efx != EFX_LOOPER)
             Rack_Effects[all_efx]->cleanup();
@@ -1277,7 +1277,7 @@ RKR::copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct sourc
         dest[i].Input_Gain = source[i].Input_Gain;
         dest[i].Master_Volume = source[i].Master_Volume;
         dest[i].Balance = source[i].Balance;
-        dest[i].Bypass = source[i].Bypass;
+        dest[i].Active = source[i].Active;
 
         // Set the parameter values
         for (int j = 0; j < C_NUMBER_EFFECTS; j++)
@@ -1363,7 +1363,7 @@ RKR::new_preset()
     // Set all effects bypass to off
     for(int i = 0; i < C_NUMBER_EFFECTS; i++)
     {
-        EFX_Bank_Bypass[i] = 0;
+        EFX_Bank_Active[i] = 0;
     }
 
     FX_Master_Active_Reset = 0;
@@ -1390,7 +1390,7 @@ RKR::new_bank(struct Preset_Bank_Struct a_bank[])
         a_bank[i].Input_Gain = .5f;
         a_bank[i].Master_Volume = .5f;
         a_bank[i].Balance = 1.0f;
-        a_bank[i].Bypass = 0;
+        a_bank[i].Active = 0;
         memset(a_bank[i].lv, 0, sizeof (a_bank[i].lv));
 
         // Set the default presets
@@ -1452,7 +1452,7 @@ RKR::bank_to_preset(int i)
     // Set the bypass state for each effect
     for(int k = 0; k < C_NUMBER_EFFECTS; k++)
     {
-        EFX_Bank_Bypass[k] = Bank[i].lv[k][C_BYPASS];
+        EFX_Bank_Active[k] = Bank[i].lv[k][C_BYPASS];
     }
 
     FX_Master_Active_Reset = Bypass;
@@ -1575,9 +1575,9 @@ RKR::fix_endianess()
 
     for (int i = 0; i < 62; i++)
     {
-        data = Bank[i].Bypass;
+        data = Bank[i].Active;
         data = SwapFourBytes(data);
-        Bank[i].Bypass = data;
+        Bank[i].Active = data;
 
         for (int j = 0; j < 70; j++)
         {

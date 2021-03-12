@@ -660,7 +660,7 @@ struct Preset_Bank_Struct
     float Input_Gain;
     float Master_Volume;
     float Balance;
-    int Bypass;
+    int Active;
     char RevFiname[128];
     char EchoFiname[128];
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
@@ -680,7 +680,7 @@ struct Preset_Bank_Struct
         Input_Gain(),
         Master_Volume(),
         Balance(),
-        Bypass(),
+        Active(),
         RevFiname(),
         EchoFiname(),
         lv(),
@@ -806,7 +806,7 @@ public:
      * Arrays to hold bypass flags for each effect, indexed by EFX_Index.
      */
     int EFX_Active[C_NUMBER_EFFECTS];
-    int EFX_Bank_Bypass[C_NUMBER_EFFECTS];
+    int EFX_Bank_Active[C_NUMBER_EFFECTS];
 
     class Limiter *efx_FLimiter;
 
