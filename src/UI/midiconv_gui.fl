@@ -36,7 +36,7 @@ m_parent= _rgui;} {}
   }
 
 
-  m_process->MIDIConverter_Bypass=(int)o->value();
+  m_process->MIDIConverter_Active=(int)o->value();
   Midi_out_Counter->do_callback();
 
   if(m_parent != NULL)

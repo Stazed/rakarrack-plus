@@ -247,7 +247,7 @@ void RKRGUI::cb_ACI_Menu_i(Fl_Menu_*, void*) {
   if(!Trigger->visible())
 {
 Trigger->show();
-m_process->ACI_Bypass = 1;
+m_process->ACI_Active = 1;
 put_icon(Trigger);
 m_process->old_a_sum = 0.0;
 m_process->val_a_sum = 0.0;
@@ -255,7 +255,7 @@ m_process->val_a_sum = 0.0;
 else
 {
 Trigger->hide();
-m_process->ACI_Bypass = 0;
+m_process->ACI_Active = 0;
 };
 }
 void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
@@ -351,7 +351,7 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
 }
 
 void RKRGUI::cb_tuner_activar_i(RKR_Light_Button* o, void*) {
-  m_process->Tuner_Bypass=(int)o->value();
+  m_process->Tuner_Active=(int)o->value();
 tuner_bar->value(-32);
 WNote->copy_label("");
 WRfreq->copy_label("");
@@ -390,12 +390,12 @@ LABEL_IO->redraw_label();
 if (!o->value())
    {
     m_process->OnCounter = 0;
-    if (m_process->Tuner_Bypass)
+    if (m_process->Tuner_Active)
         {
            tuner_activar->value(0);
            tuner_activar->do_callback();
         } 
-    if (m_process->MIDIConverter_Bypass)  
+    if (m_process->MIDIConverter_Active)  
         {
             MIDI->midi_activar->value(0);
             MIDI->midi_activar->do_callback();
@@ -464,7 +464,7 @@ void RKRGUI::cb_metro_activar_i(RKR_Light_Button* o, void*) {
 }
 
 m_process->M_Metronome->cleanup();
-m_process->Metro_Bypass=(int)o->value();
+m_process->Metro_Active=(int)o->value();
 
 
 ChangeActives();
@@ -804,8 +804,8 @@ void RKRGUI::cb_SwitchMod(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Tap_activar_i(RKR_Light_Button* o, void*) {
-  m_process->Tap_Bypass = (int)o->value();
-if(m_process->Tap_Bypass) m_process->TapTempo_Timeout(0);
+  m_process->Tap_Active = (int)o->value();
+if(m_process->Tap_Active) m_process->TapTempo_Timeout(0);
 ChangeActives();
 TAP_LABEL->redraw_label();
 }
@@ -866,7 +866,7 @@ Fl_Menu_Item RKRGUI::menu_T_SET[] = {
 };
 
 void RKRGUI::cb_T_Apply_i(RKR_Button*, void*) {
-  if((m_process->Tap_Bypass) && (m_process->Tap_TempoSet>0))
+  if((m_process->Tap_Active) && (m_process->Tap_TempoSet>0))
 {
 m_process->Update_tempo();
 update_tap_tempo_GUI();
@@ -877,7 +877,7 @@ void RKRGUI::cb_T_Apply(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_T_BUT_i(RKR_Button*, void*) {
-  if((m_process->Tap_Bypass) && ( m_process->Tap_Selection==0))
+  if((m_process->Tap_Active) && ( m_process->Tap_Selection==0))
 {
 T_DIS->value(m_process->TapTempo());
 update_tap_tempo_GUI();
@@ -890,7 +890,7 @@ void RKRGUI::cb_T_BUT(RKR_Button* o, void* v) {
 void RKRGUI::cb_T_DIS_i(RKR_Value_Input* o, void*) {
   if(o->value()> 360) o->value(360);
 if(o->value()< 20) o->value(20);
-if(m_process->Tap_Bypass)
+if(m_process->Tap_Active)
 {
 m_process->Tap_TempoSet=(int)o->value();
 m_process->Update_tempo();
@@ -942,7 +942,7 @@ void RKRGUI::cb_AboutWin(AboutWindowGui* o, void* v) {
 }
 
 void RKRGUI::cb_Trigger_i(TrigWindowGui* o, void*) {
-  m_process->ACI_Bypass=0;
+  m_process->ACI_Active=0;
 save_current_state(6);
 o->hide();
 }

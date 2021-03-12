@@ -684,7 +684,7 @@ RKR::midievents()
     if (midievent->type == 42)
         return;
 
-    if ((Tap_Bypass) && (Tap_Selection == 3) && (midievent->type == SND_SEQ_EVENT_CLOCK))
+    if ((Tap_Active) && (Tap_Selection == 3) && (midievent->type == SND_SEQ_EVENT_CLOCK))
     {
         mtc_counter++;
         if (mtc_counter >= 24)
@@ -715,7 +715,7 @@ RKR::midievents()
         int cmdnote = midievent->data.note.note;
         int cmdvelo = midievent->data.note.velocity;
 
-        if ((Tap_Bypass) && (Tap_Selection == 1) && (midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0))
+        if ((Tap_Active) && (Tap_Selection == 1) && (midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0))
             Tap_TempoSet = TapTempo();
 
         if (midievent->data.note.channel == HarCh)
@@ -905,16 +905,16 @@ RKR::ActiveUn(int value)
         switch (miraque)
         {
             case EFX_TAP_TEMPO_ON_OFF:
-                if (inoff) Tap_Bypass = 1;
-                else Tap_Bypass = 0;
+                if (inoff) Tap_Active = 1;
+                else Tap_Active = 0;
                 break;
             case EFX_MIDI_CONVERTER_ON_OFF:
-                if (inoff) MIDIConverter_Bypass = 1;
-                else MIDIConverter_Bypass = 0;
+                if (inoff) MIDIConverter_Active = 1;
+                else MIDIConverter_Active = 0;
                 break;
             case EFX_TUNER_ON_OFF:
-                if (inoff) Tuner_Bypass = 1;
-                else Tuner_Bypass = 0;
+                if (inoff) Tuner_Active = 1;
+                else Tuner_Active = 0;
                 break;
             case EFX_MASTER_ON_OFF:
                 if (inoff) Bypass = 1;
@@ -947,13 +947,13 @@ RKR::checkonoff(int miraque)
         switch (miraque)
         {
             case EFX_TAP_TEMPO_ON_OFF:
-                if (Tap_Bypass) return 0;
+                if (Tap_Active) return 0;
                 break;
             case EFX_MIDI_CONVERTER_ON_OFF:
-                if (MIDIConverter_Bypass) return 0;
+                if (MIDIConverter_Active) return 0;
                 break;
             case EFX_TUNER_ON_OFF:
-                if (Tuner_Bypass) return 0;
+                if (Tuner_Active) return 0;
                 break;
             case EFX_MASTER_ON_OFF:
                 if (Bypass) return 0;
@@ -1062,7 +1062,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
     int i;
     int type = midievent->buffer[0] >> 4;
 
-    if ((Tap_Bypass) && (Tap_Selection == 3) && (midievent->buffer[0] == 0xf8))
+    if ((Tap_Active) && (Tap_Selection == 3) && (midievent->buffer[0] == 0xf8))
     {
         mtc_counter++;
         
@@ -1079,7 +1079,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         int cmdvelo = midievent->buffer[2];
         int cmdchan = midievent->buffer[0]&15;
 
-        if ((Tap_Bypass) && (Tap_Selection == 1) && (type == 9) && (cmdvelo != 0)) Tap_TempoSet = TapTempo();
+        if ((Tap_Active) && (Tap_Selection == 1) && (type == 9) && (cmdvelo != 0)) Tap_TempoSet = TapTempo();
 
         if (cmdchan == HarCh)
         {

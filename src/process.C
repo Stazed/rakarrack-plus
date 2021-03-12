@@ -62,12 +62,12 @@ RKR::RKR(int gui) :
     db6booster(),
     DC_Offset(),
     Bypass(),
-    Bypass_B(),
-    MIDIConverter_Bypass(0),
-    Metro_Bypass(0),
-    Tuner_Bypass(0),
-    Tap_Bypass(0),
-    ACI_Bypass(0),
+    FX_Master_Active_Reset(),
+    MIDIConverter_Active(0),
+    Metro_Active(0),
+    Tuner_Active(0),
+    Tap_Active(0),
+    ACI_Active(0),
     Exit_Program(0),
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
@@ -952,12 +952,12 @@ RKR::Control_Gain(float *origl, float *origr)
     if (upsample)
     {
         U_Resample->out(origl, origr, efxoutl, efxoutr, JACK_PERIOD, u_up);
-        if ((checkforaux()) || (ACI_Bypass))
+        if ((checkforaux()) || (ACI_Active))
         {
             A_Resample->mono_out(auxdata, auxresampled, JACK_PERIOD, u_up, period);
         }
     }
-    else if ((checkforaux()) || (ACI_Bypass))
+    else if ((checkforaux()) || (ACI_Active))
     {
         memcpy(auxresampled, auxdata, sizeof (float)*JACK_PERIOD);
     }
@@ -999,7 +999,7 @@ RKR::Control_Gain(float *origl, float *origr)
     val_sum = val_il_sum + val_ir_sum;
 
 
-    if ((ACI_Bypass) && (Aux_Source == 0))
+    if ((ACI_Active) && (Aux_Source == 0))
     {
         temp_sum = 0.0;
         tmp = 0.0;
@@ -1187,7 +1187,7 @@ RKR::process_effects(float *origl, float *origr, void *)
     if(quality_update)
         return;
 
-    if ((t_timeout) && (Tap_Bypass))
+    if ((t_timeout) && (Tap_Active))
     {
         TapTempo_Timeout(1);
     }
@@ -1196,12 +1196,12 @@ RKR::process_effects(float *origl, float *origr, void *)
     {
         Control_Gain(origl, origr);
 
-        if (Metro_Bypass)
+        if (Metro_Active)
         {
             M_Metronome->metronomeout(m_ticks, period);
         }
 
-        if ((Tap_Bypass) && (Tap_Selection == 4))
+        if ((Tap_Active) && (Tap_Selection == 4))
         {
             beat->detect(efxoutl, efxoutr, period);
             int bt_tempo = lrintf(beat->get_tempo());
@@ -1214,12 +1214,12 @@ RKR::process_effects(float *origl, float *origr, void *)
             }
         }
 
-        if (Tuner_Bypass)
+        if (Tuner_Active)
         {
             efx_Tuner->schmittFloat(period, efxoutl, efxoutr, HarmRecNote->freqs, HarmRecNote->lfreqs);
         }
 
-        if (MIDIConverter_Bypass)
+        if (MIDIConverter_Active)
         {
             if (efx_MIDIConverter->getpar(MIDIConv_FFT))
             {
@@ -1676,7 +1676,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             }
         }
 
-        if (Metro_Bypass)
+        if (Metro_Active)
         {
             add_metro();
         }

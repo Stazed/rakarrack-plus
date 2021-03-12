@@ -509,7 +509,7 @@ RKR::load_preset(const char *filename)
     float in_vol, out_vol; in_vol = out_vol = 0.0;
     float balance = 1.0f;
     
-    sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &Bypass_B);
+    sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &FX_Master_Active_Reset);
 
     if (!actuvol)
     {
@@ -701,7 +701,7 @@ RKR::set_audio_paramters()
     
     // Reset the main audio processing to requested state
     // Could be on or off
-    Bypass = Bypass_B;
+    Bypass = FX_Master_Active_Reset;
 
 }
 
@@ -1366,7 +1366,7 @@ RKR::new_preset()
         EFX_Bank_Bypass[i] = 0;
     }
 
-    Bypass_B = 0;
+    FX_Master_Active_Reset = 0;
 
     // Clear MIDI learn
     memset(XUserMIDI, 0, sizeof (XUserMIDI));
@@ -1455,7 +1455,7 @@ RKR::bank_to_preset(int i)
         EFX_Bank_Bypass[k] = Bank[i].lv[k][C_BYPASS];
     }
 
-    Bypass_B = Bypass;
+    FX_Master_Active_Reset = Bypass;
 
     memcpy(XUserMIDI, Bank[i].XUserMIDI, sizeof (XUserMIDI));
 
@@ -1468,7 +1468,7 @@ RKR::bank_to_preset(int i)
         Fraction_Bypass = Bank[i].Balance;
     }
 
-    if ((Tap_Updated) && (Tap_Bypass) && (Tap_TempoSet > 0) && (Tap_TempoSet < 601))
+    if ((Tap_Updated) && (Tap_Active) && (Tap_TempoSet > 0) && (Tap_TempoSet < 601))
     {
         Update_tempo();
     }

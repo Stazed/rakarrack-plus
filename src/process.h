@@ -838,15 +838,15 @@ public:
     int Bypass;
 
     /**
-     * Main window master FX On/Off from/to bank preset.
+     * Main window master FX On/Off temporary flag to hold Active state for resetting.
      */
-    int Bypass_B;
+    int FX_Master_Active_Reset;
     
-    int MIDIConverter_Bypass;
-    int Metro_Bypass;
-    int Tuner_Bypass;
-    int Tap_Bypass;
-    int ACI_Bypass;     // Analog control (trigger window)
+    int MIDIConverter_Active;
+    int Metro_Active;
+    int Tuner_Active;
+    int Tap_Active;
+    int ACI_Active;     // Analog control (trigger window)
 
     /**
      * Flag to indicate the program should terminate (user request).

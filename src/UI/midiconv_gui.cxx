@@ -11,7 +11,7 @@ void MidiGui::cb_midi_activar_i(RKR_Light_Button* o, void*) {
   }
 
 
-  m_process->MIDIConverter_Bypass=(int)o->value();
+  m_process->MIDIConverter_Active=(int)o->value();
   Midi_out_Counter->do_callback();
 
   if(m_parent != NULL)

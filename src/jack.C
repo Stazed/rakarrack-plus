@@ -137,7 +137,7 @@ jackprocess(jack_nframes_t nframes, void *arg)
     JackOUT->cpuload = jack_cpu_load(JackOUT->jackclient);
 
 
-    if ((JackOUT->Tap_Bypass) && (JackOUT->Tap_Selection == 2))
+    if ((JackOUT->Tap_Active) && (JackOUT->Tap_Selection == 2))
     {
         astate = jack_transport_query(JackOUT->jackclient, &pos);
         
@@ -295,7 +295,7 @@ timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
     
     JackOUT->jt_state = state;
 
-    if ((JackOUT->Tap_Bypass) && (JackOUT->Tap_Selection == 2))
+    if ((JackOUT->Tap_Active) && (JackOUT->Tap_Selection == 2))
     {
         if ((state > 0) && (pos->beats_per_minute > 0))
         {

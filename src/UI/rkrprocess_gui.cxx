@@ -143,7 +143,7 @@ void RKRGUI::GuiTimeout(void)
     drag_effect();
     check_signals(this);
 
-    if (m_process->Tuner_Bypass)
+    if (m_process->Tuner_Active)
     {
 
         if (m_process->efx_Tuner->note_actual != m_process->note_old)
@@ -293,7 +293,7 @@ void RKRGUI::GuiTimeout(void)
 
 
     MIDI_control_gui_refresh();
-    if (m_process->ACI_Bypass)
+    if (m_process->ACI_Active)
         ActACI();
 
     m_process->cpufp++;
@@ -336,7 +336,7 @@ void RKRGUI::GuiTimeout(void)
     if (global_error_number > 0)
         m_process->Handle_Message(global_error_number);
 
-    if (m_process->Tap_Bypass)
+    if (m_process->Tap_Active)
     {
         if ((m_process->Tap_Display == 1) && (m_process->Tap_Selection > 0))
         {
@@ -454,7 +454,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if ((m_process->Metro_Bypass) && (MetroSound->value() == 0))
+    if ((m_process->Metro_Active) && (MetroSound->value() == 0))
     {
         if ((!m_process->M_Metronome->markctr) && ((int) Metro_Led->color() != (int) fl_lighter(FL_RED)))
         {
@@ -470,7 +470,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (m_process->MIDIConverter_Bypass)
+    if (m_process->MIDIConverter_Active)
     {
         if ((m_process->efx_MIDIConverter->hay) && ((int) MIDI->Mled->color() != (int) fl_lighter(FL_RED)))
         {
@@ -990,18 +990,18 @@ void RKRGUI::save_current_state(int whati)
         }
 
         //Tuner
-        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Bypass);
+        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);
 
 
         //MIDIConverter
-        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Bypass);
+        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);
         rakarrack.set(m_process->PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
         rakarrack.set(m_process->PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
         rakarrack.set(m_process->PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
         rakarrack.set(m_process->PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
 
         //Metronome
-        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Bypass);
+        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);
         rakarrack.set(m_process->PrefNom("Internal Metronome Time"), (int) MetroBar->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
@@ -1013,7 +1013,7 @@ void RKRGUI::save_current_state(int whati)
 
 
         //Tap Tempo
-        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Bypass);
+        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);
         rakarrack.set(m_process->PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
         rakarrack.set(m_process->PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
     }
@@ -2255,15 +2255,15 @@ void RKRGUI::ActOnOff()
             switch (miralo)
             {
                 case EFX_TAP_TEMPO_ON_OFF:
-                    Tap_activar->value(m_process->Tap_Bypass);
+                    Tap_activar->value(m_process->Tap_Active);
                     Tap_activar->do_callback();
                     break;
                 case EFX_MIDI_CONVERTER_ON_OFF:
-                    MIDI->midi_activar->value(m_process->MIDIConverter_Bypass);
+                    MIDI->midi_activar->value(m_process->MIDIConverter_Active);
                     MIDI->midi_activar->do_callback();
                     break;
                 case EFX_TUNER_ON_OFF:
-                    tuner_activar->value(m_process->Tuner_Bypass);
+                    tuner_activar->value(m_process->Tuner_Active);
                     tuner_activar->do_callback();
                     break;
                 case EFX_MASTER_ON_OFF:
@@ -2375,19 +2375,19 @@ void RKRGUI::ChangeActives()
 
 
 
-    if (m_process->MIDIConverter_Bypass)
+    if (m_process->MIDIConverter_Active)
         MIDI->MIDI_LABEL->labelcolor(on);
     else
         MIDI->MIDI_LABEL->labelcolor(off);
-    if (m_process->Metro_Bypass)
+    if (m_process->Metro_Active)
         Metro_Label->labelcolor(on);
     else
         Metro_Label->labelcolor(off);
-    if (m_process->Tap_Bypass)
+    if (m_process->Tap_Active)
         TAP_LABEL->labelcolor(on);
     else
         TAP_LABEL->labelcolor(off);
-    if (m_process->Tuner_Bypass)
+    if (m_process->Tuner_Active)
         TUNER_LABEL->labelcolor(on);
     else
         TUNER_LABEL->labelcolor(off);

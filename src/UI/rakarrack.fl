@@ -527,7 +527,7 @@ MIDILearn->hide();}
             callback {if(!Trigger->visible())
 {
 Trigger->show();
-m_process->ACI_Bypass = 1;
+m_process->ACI_Active = 1;
 put_icon(Trigger);
 m_process->old_a_sum = 0.0;
 m_process->val_a_sum = 0.0;
@@ -535,7 +535,7 @@ m_process->val_a_sum = 0.0;
 else
 {
 Trigger->hide();
-m_process->ACI_Bypass = 0;
+m_process->ACI_Active = 0;
 }}
             xywh {0 0 36 21} shortcut 0x61 divider
           }
@@ -1086,7 +1086,7 @@ Fl::focus(Open_Order);}
       } {
         Fl_Light_Button tuner_activar {
           label On
-          callback {m_process->Tuner_Bypass=(int)o->value();
+          callback {m_process->Tuner_Active=(int)o->value();
 tuner_bar->value(-32);
 WNote->copy_label("");
 WRfreq->copy_label("");
@@ -1156,12 +1156,12 @@ LABEL_IO->redraw_label();
 if (!o->value())
    {
     m_process->OnCounter = 0;
-    if (m_process->Tuner_Bypass)
+    if (m_process->Tuner_Active)
         {
            tuner_activar->value(0);
            tuner_activar->do_callback();
         } 
-    if (m_process->MIDIConverter_Bypass)  
+    if (m_process->MIDIConverter_Active)  
         {
             MIDI->midi_activar->value(0);
             MIDI->midi_activar->do_callback();
@@ -1257,7 +1257,7 @@ m_process->calculavol(2);}
 }
 
 m_process->M_Metronome->cleanup();
-m_process->Metro_Bypass=(int)o->value();
+m_process->Metro_Active=(int)o->value();
 
 
 ChangeActives();
@@ -1629,8 +1629,8 @@ Metronome - Shortcut 'F8'} xywh {480 137 32 18} shortcut 0xffc5 color 62 labelsi
       } {
         Fl_Light_Button Tap_activar {
           label On
-          callback {m_process->Tap_Bypass = (int)o->value();
-if(m_process->Tap_Bypass) m_process->TapTempo_Timeout(0);
+          callback {m_process->Tap_Active = (int)o->value();
+if(m_process->Tap_Active) m_process->TapTempo_Timeout(0);
 ChangeActives();
 TAP_LABEL->redraw_label();}
           tooltip {Enable Tap Tempo - Shortcut 'H'} xywh {525 144 38 18} shortcut 0x68 color 62 selection_color 1 labelsize 10 when 1
@@ -1774,7 +1774,7 @@ TAP_LABEL->redraw_label();}
         }
         Fl_Button T_Apply {
           label Apply
-          callback {if((m_process->Tap_Bypass) && (m_process->Tap_TempoSet>0))
+          callback {if((m_process->Tap_Active) && (m_process->Tap_TempoSet>0))
 {
 m_process->Update_tempo();
 update_tap_tempo_GUI();
@@ -1784,7 +1784,7 @@ update_tap_tempo_GUI();
         }
         Fl_Button T_BUT {
           label Tap
-          callback {if((m_process->Tap_Bypass) && ( m_process->Tap_Selection==0))
+          callback {if((m_process->Tap_Active) && ( m_process->Tap_Selection==0))
 {
 T_DIS->value(m_process->TapTempo());
 update_tap_tempo_GUI();
@@ -1801,7 +1801,7 @@ update_tap_tempo_GUI();
         Fl_Value_Input T_DIS {
           callback {if(o->value()> 360) o->value(360);
 if(o->value()< 20) o->value(20);
-if(m_process->Tap_Bypass)
+if(m_process->Tap_Active)
 {
 m_process->Tap_TempoSet=(int)o->value();
 m_process->Update_tempo();
@@ -1861,7 +1861,7 @@ o->hide();} open
       class AboutWindowGui
     } {}
     Fl_Window Trigger {
-      callback {m_process->ACI_Bypass=0;
+      callback {m_process->ACI_Active=0;
 save_current_state(6);
 o->hide();} open
       xywh {711 533 205 165} type Double box NO_BOX color 4 selection_color 7 hide
