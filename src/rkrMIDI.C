@@ -917,8 +917,8 @@ RKR::ActiveUn(int value)
                 else Tuner_Active = 0;
                 break;
             case EFX_MASTER_ON_OFF:
-                if (inoff) Bypass = 1;
-                else Bypass = 0;
+                if (inoff) FX_Master_Active = 1;
+                else FX_Master_Active = 0;
             break;
         }
     }
@@ -956,7 +956,7 @@ RKR::checkonoff(int miraque)
                 if (Tuner_Active) return 0;
                 break;
             case EFX_MASTER_ON_OFF:
-                if (Bypass) return 0;
+                if (FX_Master_Active) return 0;
             break;
         }
     }

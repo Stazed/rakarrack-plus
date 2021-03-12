@@ -364,7 +364,7 @@ void RKRGUI::cb_tuner_activar(RKR_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ActivarGeneral_i(RKR_Light_Button* o, void*) {
-  m_process->Bypass=o->value();
+  m_process->FX_Master_Active=o->value();
 m_process->val_il_sum=-50.0;
 m_process->val_ir_sum=-50.0;
 
@@ -756,7 +756,7 @@ void RKRGUI::cb_Open_Order(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_Etit_i(RKR_Button* o, void*) {
-  //if(m_process->Bypass)
+  //if(m_process->FX_Master_Active)
 //{
 o->hide();
 Analy->show();

@@ -1130,7 +1130,7 @@ TUNER_LABEL->redraw_label();}
       } {
         Fl_Light_Button ActivarGeneral {
           label {FX On}
-          callback {m_process->Bypass=o->value();
+          callback {m_process->FX_Master_Active=o->value();
 m_process->val_il_sum=-50.0;
 m_process->val_ir_sum=-50.0;
 
@@ -1572,7 +1572,7 @@ Order->hide();}
         Fl_Button Etit {
           label {Rakarrack +}
           user_data UD_Disable_Highlight
-          callback {//if(m_process->Bypass)
+          callback {//if(m_process->FX_Master_Active)
 //{
 o->hide();
 Analy->show();

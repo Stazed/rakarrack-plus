@@ -61,7 +61,7 @@ RKR::RKR(int gui) :
     Jack_Shut_Down(0),
     db6booster(),
     DC_Offset(),
-    Bypass(),
+    FX_Master_Active(),
     FX_Master_Active_Reset(),
     MIDIConverter_Active(0),
     Metro_Active(0),
@@ -1192,7 +1192,7 @@ RKR::process_effects(float *origl, float *origr, void *)
         TapTempo_Timeout(1);
     }
 
-    if (Bypass)
+    if (FX_Master_Active)
     {
         Control_Gain(origl, origr);
 

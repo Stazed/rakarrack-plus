@@ -354,7 +354,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (m_process->Bypass)
+    if (m_process->FX_Master_Active)
     {
         if (m_process->val_il_sum != m_process->old_il_sum)
         {
@@ -819,7 +819,7 @@ void RKRGUI::load_previous_state()
 
     if (m_process->init_state)
     {
-        m_process->Bypass = 1;
+        m_process->FX_Master_Active = 1;
         m_process->calculavol(1);
         m_process->calculavol(2);
     }
@@ -1232,9 +1232,9 @@ void RKRGUI::Put_Loaded()
     Balance->value((int) (m_process->Fraction_Bypass * 100.0));
 
 
-    ActivarGeneral->value(m_process->Bypass);
+    ActivarGeneral->value(m_process->FX_Master_Active);
 
-    if (m_process->Bypass == 0)
+    if (m_process->FX_Master_Active == 0)
     {
         m_process->val_il_sum = -50;
         m_process->val_ir_sum = -50;
@@ -2267,7 +2267,7 @@ void RKRGUI::ActOnOff()
                     tuner_activar->do_callback();
                     break;
                 case EFX_MASTER_ON_OFF:
-                    ActivarGeneral->value(m_process->Bypass);
+                    ActivarGeneral->value(m_process->FX_Master_Active);
                     ActivarGeneral->do_callback();
                     break;
             }
@@ -2391,12 +2391,12 @@ void RKRGUI::ChangeActives()
         TUNER_LABEL->labelcolor(on);
     else
         TUNER_LABEL->labelcolor(off);
-    if (m_process->Bypass)
+    if (m_process->FX_Master_Active)
         LABEL_IO->labelcolor(on);
     else
         LABEL_IO->labelcolor(off);
 
-    if ((m_process->upsample) && (m_process->Bypass))
+    if ((m_process->upsample) && (m_process->FX_Master_Active))
     {
         UPS_LED->color(global_leds_color);
         UPS_LED->redraw();

@@ -835,7 +835,7 @@ public:
     /**
      * Main window master FX On/Off button flag.
      */
-    int Bypass;
+    int FX_Master_Active;
 
     /**
      * Main window master FX On/Off temporary flag to hold Active state for resetting.

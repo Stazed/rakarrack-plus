@@ -341,7 +341,7 @@ RKR::save_preset(const char *filename)
 
     // Master control
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, Bypass);
+    sprintf(buf, "%f,%f,%f,%d\n", Input_Gain, Master_Volume, Fraction_Bypass, FX_Master_Active);
     fputs(buf, fn);
 
     // Effect parameters
@@ -593,7 +593,7 @@ void
 RKR::set_audio_paramters()
 {
     // Shut off main audio processing while setting
-    Bypass = 0;
+    FX_Master_Active = 0;
     
     // The main window effect order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
@@ -701,7 +701,7 @@ RKR::set_audio_paramters()
     
     // Reset the main audio processing to requested state
     // Could be on or off
-    Bypass = FX_Master_Active_Reset;
+    FX_Master_Active = FX_Master_Active_Reset;
 
 }
 
@@ -1337,7 +1337,7 @@ RKR::new_preset()
     Input_Gain = .5f;
     Master_Volume = .5f;
     Fraction_Bypass = 1.0f;
-    Bypass = 0;
+    FX_Master_Active = 0;
     
     // Clear the effects parameters array
     memset(lv, 0, sizeof (lv));
@@ -1455,7 +1455,7 @@ RKR::bank_to_preset(int i)
         EFX_Bank_Active[k] = Bank[i].lv[k][C_BYPASS];
     }
 
-    FX_Master_Active_Reset = Bypass;
+    FX_Master_Active_Reset = FX_Master_Active;
 
     memcpy(XUserMIDI, Bank[i].XUserMIDI, sizeof (XUserMIDI));
 
