@@ -1277,9 +1277,10 @@ RKR::process_effects(float *origl, float *origr, void *)
             }
         }
 
+        if(EFX_Bypass[EFX_RING])
         {
             Ring *Efx_Ring = static_cast<Ring*>(Rack_Effects[EFX_RING]);
-            if ((EFX_Bypass[EFX_RING]) && (Efx_Ring->Pafreq))
+            if (Efx_Ring->Pafreq)
             {
                 RingRecNote->schmittFloat(efxoutl, efxoutr);
                 if ((RingRecNote->reconota != -1) && (RingRecNote->reconota != RingRecNote->last))
@@ -1287,7 +1288,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                     if (RingRecNote->afreq > 0.0)
                     {
                         Efx_Ring->Pfreq = lrintf(RingRecNote->lafreq);
-                        StHarmRecNote->last = StHarmRecNote->reconota;
+                        RingRecNote->last = RingRecNote->reconota;
                     }
                 }
             }
