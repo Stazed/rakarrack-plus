@@ -1138,7 +1138,11 @@ public:
     int Jack_Port_Connnection_Changed;
     // End Jack port connections
     
-    int midi_table;
+    /**
+     * Flag to indicate the custom MIDI Program Change Table is active.
+     * This is the check box in Settings/Preferences/MIDI - MIDI Program Change Table
+     */
+    int custom_midi_table;
 
     /**
      * Flag to indicate the active bank for reload on next start.
@@ -1307,6 +1311,10 @@ public:
     std::vector <BankArray> Bank_Vector;
     
 
+    /**
+     * MIDI Program Change Table bank and preset selection items.
+     * This is the scroll table in Settings/Preferences/MIDI - MIDI Program Change Table
+     */
     struct MIDI_table
     {
         int bank;
@@ -1315,8 +1323,12 @@ public:
         MIDI_table():
             bank(),
             preset() {}
-    } M_table[128];
+    } MIDI_Table[128];
 
+    /**
+     * MIDI Program Change Table bank preset names.
+     * This is the scroll table in Settings/Preferences/MIDI - MIDI Program Change Table
+     */
     struct Bank_Names
     {
         char Preset_Name[64];
@@ -1326,7 +1338,7 @@ public:
         {
             Preset_Name[0] = 0;
         }
-    } B_Names[4][62];
+    } MIDI_Table_Bank_Preset_Names[4][62];
 
 
     // Alsa MIDI

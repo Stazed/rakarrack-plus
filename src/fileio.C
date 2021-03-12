@@ -708,7 +708,7 @@ RKR::set_audio_paramters()
 void
 RKR::load_custom_MIDI_table_preset_names()
 {
-    memset(B_Names, 0, sizeof (B_Names));
+    memset(MIDI_Table_Bank_Preset_Names, 0, sizeof (MIDI_Table_Bank_Preset_Names));
     
     for (int k = 0; k < 4; k++)
     {
@@ -716,7 +716,7 @@ RKR::load_custom_MIDI_table_preset_names()
         {
             for (int j = 1; j <= 60; j++)
             {
-                strcpy(B_Names[k][j].Preset_Name,  Bank_Vector[k].Bank[j].Preset_Name);
+                strcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,  Bank_Vector[k].Bank[j].Preset_Name);
             }
         }
         else    // User Bank 'B' button
@@ -733,7 +733,7 @@ RKR::load_custom_MIDI_table_preset_names()
             
             for (int j = 1; j <= 60; j++)
             {
-                strcpy(B_Names[k][j].Preset_Name,  Bank_Vector[user_bank].Bank[j].Preset_Name);
+                strcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,  Bank_Vector[user_bank].Bank[j].Preset_Name);
             }
         }
     }
@@ -1971,7 +1971,7 @@ RKR::save_MIDI_table(char *filename)
     for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
-        sprintf(buf, "%d,%d\n", M_table[i].bank, M_table[i].preset);
+        sprintf(buf, "%d,%d\n", MIDI_Table[i].bank, MIDI_Table[i].preset);
         fputs(buf, fn);
     }
 
@@ -1999,7 +1999,7 @@ RKR::load_MIDI_table(char *filename)
             break;
         }
 
-        sscanf(buf, "%d,%d\n", &M_table[i].bank, &M_table[i].preset);
+        sscanf(buf, "%d,%d\n", &MIDI_Table[i].bank, &MIDI_Table[i].preset);
     }
 
     fclose(fn);

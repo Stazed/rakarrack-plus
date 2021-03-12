@@ -800,7 +800,7 @@ RKR::midievents()
     {
         if (midievent->data.control.channel == MidiCh)
         {
-            if (!midi_table)
+            if (!custom_midi_table)
             {
                 if ((midievent->data.control.value > 0)
                     && (midievent->data.control.value < 61))
@@ -1165,7 +1165,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 
         if (cmdchan == MidiCh)
         {
-            if (!midi_table)
+            if (!custom_midi_table)
             {
                 if ((cmdvalue > 0)
                     && (cmdvalue < 61))

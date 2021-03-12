@@ -256,16 +256,16 @@ void RKRGUI::GuiTimeout(void)
     // Update the Gui for MIDI program changes
     if (m_process->Change_Preset != C_CHANGE_PRESET_OFF)
     {
-        if (!m_process->midi_table)
+        if (!m_process->custom_midi_table)
         {
             Preset_Counter->value(m_process->Change_Preset);
             Preset_Counter->do_callback();
         }
         else
         {
-            if (m_process->a_bank != m_process->M_table[m_process->Change_Preset].bank)
+            if (m_process->a_bank != m_process->MIDI_Table[m_process->Change_Preset].bank)
             {
-                switch (m_process->M_table[m_process->Change_Preset].bank)
+                switch (m_process->MIDI_Table[m_process->Change_Preset].bank)
                 {
                     case 0:
                         L_B1->do_callback();
@@ -284,7 +284,7 @@ void RKRGUI::GuiTimeout(void)
                         break;
                 }
             }
-            Preset_Counter->value(m_process->M_table[m_process->Change_Preset].preset + 1);
+            Preset_Counter->value(m_process->MIDI_Table[m_process->Change_Preset].preset + 1);
             Preset_Counter->do_callback();
         }
 
@@ -779,8 +779,8 @@ void RKRGUI::load_previous_state()
         ML_Menu->deactivate();
 
     // Custom MIDI table
-    rakarrack.get(m_process->PrefNom("MIDI Table"), m_process->midi_table, 0);
-    if (!m_process->midi_table)
+    rakarrack.get(m_process->PrefNom("MIDI Table"), m_process->custom_midi_table, 0);
+    if (!m_process->custom_midi_table)
         Settings->scroll->deactivate();
 
 
@@ -1153,7 +1153,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->aconnect_JIA);
 
         rakarrack.set(m_process->PrefNom("MIDI Implementation"), m_process->MIDIway);
-        rakarrack.set(m_process->PrefNom("MIDI Table"), m_process->midi_table);
+        rakarrack.set(m_process->PrefNom("MIDI Table"), m_process->custom_midi_table);
 
 
         int i = Settings->BMidiIn->value();
@@ -1181,7 +1181,7 @@ void RKRGUI::save_current_state(int whati)
         {
             memset(temp1, 0, sizeof (temp1));
             sprintf(temp1, "Midi Table Program %d", i);
-            rakarrack.set(m_process->PrefNom(temp1), m_process->M_table[i].bank * 1000 + m_process->M_table[i].preset);
+            rakarrack.set(m_process->PrefNom(temp1), m_process->MIDI_Table[i].bank * 1000 + m_process->MIDI_Table[i].preset);
         }
     }
 
@@ -1827,7 +1827,7 @@ void RKRGUI::MiraConfig()
     }
 
 
-    Settings->MTable->value(m_process->midi_table);
+    Settings->MTable->value(m_process->custom_midi_table);
     Settings->MTable->do_callback ();
 
     Settings->AAssign->value(m_process->autoassign);
@@ -3619,8 +3619,8 @@ inline void RKRGUI::bank_click_i(Fl_Choice* o, void*)
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
-    m_process->M_table[num - UD_Bank_Used_Start].bank = (int) o->value();
-    Settings->fill_mptable(num + UD_Bank_Used_Start, m_process->M_table[num - UD_Bank_Used_Start].bank);
+    m_process->MIDI_Table[num - UD_Bank_Used_Start].bank = (int) o->value();
+    Settings->fill_mptable(num + UD_Bank_Used_Start, m_process->MIDI_Table[num - UD_Bank_Used_Start].bank);
 }
 
 void RKRGUI::p_click(Fl_Choice* o, void* v)
@@ -3633,7 +3633,7 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
     long long kk = (long long) o->user_data();
     int num = (int) kk;
 
-    m_process->M_table[num - UD_Preset_Used_Start].preset = o->value();
+    m_process->MIDI_Table[num - UD_Preset_Used_Start].preset = o->value();
 }
 
 void RKRGUI::RandomPreset()

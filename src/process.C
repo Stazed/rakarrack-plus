@@ -205,7 +205,7 @@ RKR::RKR(int gui) :
     Jack_MIDI_IN_Port_Connnection_Status(),
     Jack_MIDI_OUT_Port_Connnection_Status(),
     Jack_Port_Connnection_Changed(),
-    midi_table(),
+    custom_midi_table(),
     a_bank(0),
     new_bank_loaded(),
     Aux_Gain(),
@@ -283,8 +283,8 @@ RKR::RKR(int gui) :
     efx_names(),
     mc_efx_params(),
     Bank(),
-    M_table(),
-    B_Names(),
+    MIDI_Table(),
+    MIDI_Table_Bank_Preset_Names(),
     midi_in(NULL),
     midi_out(NULL),
     jack_po(),
@@ -504,7 +504,7 @@ RKR::load_user_preferences()
     rakarrack.get(PrefNom("MIDI Implementation"), MIDIway, 0);
     
     // Custom MIDI Table used On/OFF - Currently cannot be used with no GUI - FIXME
-    //rakarrack.get(PrefNom("MIDI Table"), midi_table, 0);
+    //rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
     
     // Custom MIDI program change table loading
     char table_buffer[64];
@@ -528,27 +528,27 @@ RKR::load_user_preferences()
 
         if (f < 1000)
         {
-            M_table[i].bank = 0;
-            M_table[i].preset = f;
+            MIDI_Table[i].bank = 0;
+            MIDI_Table[i].preset = f;
         }
 
         if ((f > 999) && (f < 2000))
         {
-            M_table[i].bank = 1;
-            M_table[i].preset = f - 1000;
+            MIDI_Table[i].bank = 1;
+            MIDI_Table[i].preset = f - 1000;
         }
 
         if ((f > 1999) && (f < 3000))
         {
-            M_table[i].bank = 2;
-            M_table[i].preset = f - 2000;
+            MIDI_Table[i].bank = 2;
+            MIDI_Table[i].preset = f - 2000;
         }
 
 
         if ((f > 2999) && (f < 4000))
         {
-            M_table[i].bank = 3;
-            M_table[i].preset = f - 3000;
+            MIDI_Table[i].bank = 3;
+            MIDI_Table[i].preset = f - 3000;
         }
     }   // End Custom Program change table
 

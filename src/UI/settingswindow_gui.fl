@@ -1349,14 +1349,14 @@ m_parent->ML_Menu->activate();}
 // Will cause crash if we do not set preset off temporarily.    
 m_process->Change_Preset = C_CHANGE_PRESET_OFF;
 
-m_process->midi_table=o->value();
+m_process->custom_midi_table=o->value();
 
 // To show/stop highlight on under mouse based on parent status
 for (int i = 0; i < scroll->children(); ++i)
 {
     Fl_Widget *c = scroll->child(i);
 
-    if(m_process->midi_table)
+    if(m_process->custom_midi_table)
     {
         c->activate ();
     }
@@ -1366,7 +1366,7 @@ for (int i = 0; i < scroll->children(); ++i)
     }
 }
 
-if(m_process->midi_table)
+if(m_process->custom_midi_table)
 {
     scroll->activate();
 }
@@ -1664,9 +1664,9 @@ Fl_Tooltip::enable(m_process->ena_tool);}
             p->clear();
             for(int i=1; i<=60; i++)
             {
-                if(m_process->B_Names[value][i].Preset_Name[0] != 0)
+                if(m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name[0] != 0)
                 {
-                    p->add(m_process->B_Names[value][i].Preset_Name);
+                    p->add(m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name);
                 }
                 else
                 {
@@ -1698,9 +1698,9 @@ Fl_Tooltip::enable(m_process->ena_tool);}
     code {// Put_MidiTable
   for(int i=0; i<128; i++)
   {
-      mtfillvalue(i + UD_Bank_Used_Start, m_process->M_table[i].bank);
-      fill_mptable(i + UD_Preset_Used_Start, m_process->M_table[i].bank);
-      mtfillvalue(i + UD_Preset_Used_Start, m_process->M_table[i].preset);
+      mtfillvalue(i + UD_Bank_Used_Start, m_process->MIDI_Table[i].bank);
+      fill_mptable(i + UD_Preset_Used_Start, m_process->MIDI_Table[i].bank);
+      mtfillvalue(i + UD_Preset_Used_Start, m_process->MIDI_Table[i].preset);
   }} {}
   }
   Function {update_convo_quality()} {return_type void
