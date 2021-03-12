@@ -3147,10 +3147,13 @@ void SettingsWindowGui::make_table_window() {
             RKR_Choice* cb = new RKR_Choice(120,y*25+25,40,20);
             cb->copy_label("Bank");
             cb->labelcolor(FL_WHITE);
-            cb->add("1");
-            cb->add("2");
-            cb->add("3");
-            cb->add("U");
+  
+            // Add all banks
+            for(unsigned bnk = 0; bnk < m_process->Bank_Vector.size (); bnk++)
+            {
+                cb->add (m_process->Bank_Vector[bnk].Bank_Menu_Name.c_str());
+            }
+  
             cb->user_data((void *) (UD_Bank_Used_Start + y));
             cb->callback((Fl_Callback *)m_parent->bank_click);
             cb->set_label_offset(4);
@@ -3202,12 +3205,14 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
                   if(m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name[0] != 0)
                   {
                       p->add(m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name);
+                      p->textfont (global_font_type);
                   }
                   else
                   {
                       char buf[64];
                       sprintf(buf,"Untitled (%d)", i);
                       p->add(buf);
+                      p->textfont (global_font_type);
                   }
               }
               p->redraw();

@@ -1344,7 +1344,7 @@ public:
         {
             Preset_Name[0] = 0;
         }
-    } MIDI_Table_Bank_Preset_Names[4][62];
+    } MIDI_Table_Bank_Preset_Names[128][62];
 
 
     // Alsa MIDI

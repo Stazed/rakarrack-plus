@@ -710,31 +710,11 @@ RKR::load_custom_MIDI_table_preset_names()
 {
     memset(MIDI_Table_Bank_Preset_Names, 0, sizeof (MIDI_Table_Bank_Preset_Names));
     
-    for (int k = 0; k < 4; k++)
+    for (unsigned k = 0; k < Bank_Vector.size(); k++)
     {
-        if(k != 3)
+        for (int j = 1; j <= 60; j++)
         {
-            for (int j = 1; j <= 60; j++)
-            {
-                strcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,  Bank_Vector[k].Bank[j].Preset_Name);
-            }
-        }
-        else    // User Bank 'B' button
-        {
-            int user_bank = 0;
-            
-            for(unsigned ii = 0; ii < Bank_Vector.size(); ii++)
-            {
-                if(strcmp(BankFilename, Bank_Vector[ii].Bank_File_Name.c_str()) == 0)
-                {
-                    user_bank = ii;
-                }
-            }
-            
-            for (int j = 1; j <= 60; j++)
-            {
-                strcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,  Bank_Vector[user_bank].Bank[j].Preset_Name);
-            }
+            strcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,  Bank_Vector[k].Bank[j].Preset_Name);
         }
     }
 }
