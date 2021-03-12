@@ -592,8 +592,10 @@ RKR::file_error(FILE *fn)
 void
 RKR::set_audio_paramters()
 {
+    // Shut off main audio processing while setting
     Bypass = 0;
-
+    
+    // The main window effect order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         efx_order[i] = lv[EFX_ORDER][i];
@@ -601,6 +603,65 @@ RKR::set_audio_paramters()
     
     // Looper is special
     Looper *Efx_Looper = static_cast<Looper*>(Rack_Effects[EFX_LOOPER]);
+
+
+#ifdef OPTIMIZE_RT  // This should be used for no gui
+    
+    // These are specially processed and need to be shut of unless specifically set
+    // from the ordered effects.
+    EFX_Bypass[EFX_HARMONIZER] = 0;
+    EFX_Bypass[EFX_STEREOHARM] = 0;
+    EFX_Bypass[EFX_RING] = 0;
+    
+    // For each item on the main rack, check for a match to the efx_order
+    for (int ordered_efx = 0; ordered_efx < C_NUMBER_ORDERED_EFFECTS; ordered_efx++)
+    {
+        for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
+        {
+            // Is the effect one of the ordered?
+            if(efx_order[ordered_efx] == all_efx)
+            {
+                // Set the bypass for all ordered
+                EFX_Bypass[all_efx] = EFX_Bank_Bypass[all_efx];
+
+                // If the ordered effect is active, then set the parameters
+                // We do not need to set parameters for inactive effects
+                if(EFX_Bypass[all_efx])
+                {
+                    if(all_efx != EFX_LOOPER)
+                        Rack_Effects[all_efx]->cleanup();
+
+                    for (int efx_params = 0; efx_params < EFX_Param_Size[all_efx]; efx_params++)
+                    {
+                        if(all_efx == EFX_LOOPER)
+                        {
+                            Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
+                        }
+                        else
+                        {
+                            Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
+                        }
+                    }
+
+                    // We have to reset the Echotron Taps because we limit it to get_file_length().
+                    // But, it is set before the loaded file and would be limited by the 
+                    // previous file. So, reset it again after the requested file is loaded.
+                    if(all_efx == EFX_ECHOTRON)
+                    {
+                        Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
+                    }
+
+                    if(all_efx == EFX_STEREOHARM)
+                    {
+                        if (lv[EFX_STEREOHARM][Sharm_MIDI])
+                            RC_Stereo_Harm->cleanup();
+                    }
+                }
+            }
+        }
+    }
+
+#else   // For GUi shown
 
     for (int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
@@ -638,7 +699,10 @@ RKR::set_audio_paramters()
         
         EFX_Bypass[j] = EFX_Bank_Bypass[j];
     }
-
+#endif
+    
+    // Reset the main audio processing to requested state
+    // Could be on or off
     Bypass = Bypass_B;
 
 }
