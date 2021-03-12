@@ -663,41 +663,39 @@ RKR::set_audio_paramters()
 
 #else   // For GUi shown
 
-    for (int j = 0; j < C_NUMBER_EFFECTS; j++)
+    for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
     {
-        EFX_Bypass[j] = 0;
+        EFX_Bypass[all_efx] = EFX_Bank_Bypass[all_efx];
 
-        if(j != EFX_LOOPER)
-            Rack_Effects[j]->cleanup();
+        if(all_efx != EFX_LOOPER)
+            Rack_Effects[all_efx]->cleanup();
 
         
-        for (int i = 0; i < EFX_Param_Size[j]; i++)
+        for (int efx_params = 0; efx_params < EFX_Param_Size[all_efx]; efx_params++)
         {
-            if(j == EFX_LOOPER)
+            if(all_efx == EFX_LOOPER)
             {
-                Efx_Looper->set_value(i, lv[EFX_LOOPER][i]);
+                Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
             }
             else
             {
-                Rack_Effects[j]->changepar(i, lv[j][i]);
+                Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
             }
         }
         
         // We have to reset the Echotron Taps because we limit it to get_file_length().
         // But, it is set before the loaded file and would be limited by the 
         // previous file. So, reset it again after the requested file is loaded.
-        if(j == EFX_ECHOTRON)
+        if(all_efx == EFX_ECHOTRON)
         {
-            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[j][Echotron_Taps]);
+            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
         }
         
-        if(j == EFX_STEREOHARM)
+        if(all_efx == EFX_STEREOHARM)
         {
             if (lv[EFX_STEREOHARM][Sharm_MIDI])
                 RC_Stereo_Harm->cleanup();
         }
-        
-        EFX_Bypass[j] = EFX_Bank_Bypass[j];
     }
 #endif
     
@@ -1418,11 +1416,13 @@ RKR::new_bank(struct Preset_Bank_Struct a_bank[])
 void
 RKR::bank_to_preset(int i)
 {
+#ifndef OPTIMIZE_RT  // This should be used for no gui
     memset(Preset_Name, 0, sizeof (char) * 64);
     strcpy(Preset_Name, Bank[i].Preset_Name);
     memset(Author, 0, sizeof (char) * 64);
     strcpy(Author, Bank[i].Author);
-    
+#endif
+
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
     strcpy(Efx_Convolotron->Filename, Bank[i].ConvoFiname);
