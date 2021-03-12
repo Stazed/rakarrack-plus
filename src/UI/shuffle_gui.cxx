@@ -6,10 +6,10 @@ void ShuffleGui::cb_shuffle_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_SHUFFLE]);
+ o->value(m_process->EFX_Active[EFX_SHUFFLE]);
  return;
 }
-m_process->EFX_Bypass[EFX_SHUFFLE]=(int)o->value();
+m_process->EFX_Active[EFX_SHUFFLE]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_SHUFFLE]->cleanup();
 m_parent->findpos(EFX_SHUFFLE,(int)o->value(),o);

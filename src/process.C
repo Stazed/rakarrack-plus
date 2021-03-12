@@ -46,7 +46,7 @@ RKR::RKR(int gui) :
     RingRecNote(NULL),
     RC_Harm(NULL),
     RC_Stereo_Harm(NULL),
-    EFX_Bypass(),
+    EFX_Active(),
     EFX_Bank_Bypass(),
     efx_FLimiter(NULL),
     U_Resample(NULL),
@@ -934,7 +934,7 @@ RKR::checkforaux()
     {
         if (efx_order[i] == EFX_VOCODER)
         {
-            if (EFX_Bypass[EFX_VOCODER]) return (1);
+            if (EFX_Active[EFX_VOCODER]) return (1);
         }
     }
 
@@ -1231,7 +1231,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             }
         }
 
-        if ((EFX_Bypass[EFX_HARMONIZER]) && (have_signal))
+        if ((EFX_Active[EFX_HARMONIZER]) && (have_signal))
         {
             Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (Rack_Effects[EFX_HARMONIZER]);
             if (Efx_Harmonizer->mira)
@@ -1253,7 +1253,7 @@ RKR::process_effects(float *origl, float *origr, void *)
         }
 
 
-        if ((EFX_Bypass[EFX_STEREOHARM]) && (have_signal))
+        if ((EFX_Active[EFX_STEREOHARM]) && (have_signal))
         {
             StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(Rack_Effects[EFX_STEREOHARM]);
 
@@ -1277,7 +1277,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             }
         }
 
-        if(EFX_Bypass[EFX_RING])
+        if(EFX_Active[EFX_RING])
         {
             Ring *Efx_Ring = static_cast<Ring*>(Rack_Effects[EFX_RING]);
             if (Efx_Ring->Pafreq)
@@ -1299,7 +1299,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             switch (efx_order[i])
             {
             case EFX_EQ:
-                if (EFX_Bypass[EFX_EQ])
+                if (EFX_Active[EFX_EQ])
                 {
                     Rack_Effects[EFX_EQ]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1307,7 +1307,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_COMPRESSOR:
-                if (EFX_Bypass[EFX_COMPRESSOR])
+                if (EFX_Active[EFX_COMPRESSOR])
                 {
                     Rack_Effects[EFX_COMPRESSOR]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1315,7 +1315,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_DISTORTION:
-                if (EFX_Bypass[EFX_DISTORTION])
+                if (EFX_Active[EFX_DISTORTION])
                 {
                     Rack_Effects[EFX_DISTORTION]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DISTORTION, Rack_Effects[EFX_DISTORTION]->outvolume);
@@ -1323,7 +1323,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_OVERDRIVE:
-                if (EFX_Bypass[EFX_OVERDRIVE])
+                if (EFX_Active[EFX_OVERDRIVE])
                 {
                     Rack_Effects[EFX_OVERDRIVE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_OVERDRIVE, Rack_Effects[EFX_OVERDRIVE]->outvolume);
@@ -1331,7 +1331,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_ECHO:
-                if (EFX_Bypass[EFX_ECHO])
+                if (EFX_Active[EFX_ECHO])
                 {
                     Rack_Effects[EFX_ECHO]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHO, Rack_Effects[EFX_ECHO]->outvolume);
@@ -1339,7 +1339,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_CHORUS:
-                if (EFX_Bypass[EFX_CHORUS])
+                if (EFX_Active[EFX_CHORUS])
                 {
                     Rack_Effects[EFX_CHORUS]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_CHORUS, Rack_Effects[EFX_CHORUS]->outvolume);
@@ -1347,7 +1347,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_PHASER:
-                if (EFX_Bypass[EFX_PHASER])
+                if (EFX_Active[EFX_PHASER])
                 {
                     Rack_Effects[EFX_PHASER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_PHASER, Rack_Effects[EFX_PHASER]->outvolume);
@@ -1355,7 +1355,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_FLANGER:
-                if (EFX_Bypass[EFX_FLANGER])
+                if (EFX_Active[EFX_FLANGER])
                 {
                     Rack_Effects[EFX_FLANGER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_FLANGER, Rack_Effects[EFX_FLANGER]->outvolume);
@@ -1363,7 +1363,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_REVERB:
-                if (EFX_Bypass[EFX_REVERB])
+                if (EFX_Active[EFX_REVERB])
                 {
                     Rack_Effects[EFX_REVERB]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_REVERB, Rack_Effects[EFX_REVERB]->outvolume);
@@ -1371,7 +1371,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_PARAMETRIC:
-                if (EFX_Bypass[EFX_PARAMETRIC])
+                if (EFX_Active[EFX_PARAMETRIC])
                 {
                     Rack_Effects[EFX_PARAMETRIC]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1379,7 +1379,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_WAHWAH:
-                if (EFX_Bypass[EFX_WAHWAH])
+                if (EFX_Active[EFX_WAHWAH])
                 {
                     Rack_Effects[EFX_WAHWAH]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_WAHWAH, Rack_Effects[EFX_WAHWAH]->outvolume);
@@ -1387,7 +1387,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_ALIENWAH:
-                if (EFX_Bypass[EFX_ALIENWAH])
+                if (EFX_Active[EFX_ALIENWAH])
                 {
                     Rack_Effects[EFX_ALIENWAH]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ALIENWAH, Rack_Effects[EFX_ALIENWAH]->outvolume);
@@ -1395,7 +1395,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_CABINET:
-                if (EFX_Bypass[EFX_CABINET])
+                if (EFX_Active[EFX_CABINET])
                 {
                     Rack_Effects[EFX_CABINET]->out(efxoutl, efxoutr);
                     Vol3_Efx();
@@ -1404,7 +1404,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_PAN:
-                if (EFX_Bypass[EFX_PAN])
+                if (EFX_Active[EFX_PAN])
                 {
                     Rack_Effects[EFX_PAN]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_PAN, Rack_Effects[EFX_PAN]->outvolume);
@@ -1412,7 +1412,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_HARMONIZER:
-                if (EFX_Bypass[EFX_HARMONIZER])
+                if (EFX_Active[EFX_HARMONIZER])
                 {
                     Rack_Effects[EFX_HARMONIZER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_HARMONIZER, Rack_Effects[EFX_HARMONIZER]->outvolume);
@@ -1420,7 +1420,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_MUSICAL_DELAY:
-                if (EFX_Bypass[EFX_MUSICAL_DELAY])
+                if (EFX_Active[EFX_MUSICAL_DELAY])
                 {
                     Rack_Effects[EFX_MUSICAL_DELAY]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_MUSICAL_DELAY, Rack_Effects[EFX_MUSICAL_DELAY]->outvolume);
@@ -1428,7 +1428,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_NOISEGATE:
-                if (EFX_Bypass[EFX_NOISEGATE])
+                if (EFX_Active[EFX_NOISEGATE])
                 {
                     Rack_Effects[EFX_NOISEGATE]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1436,7 +1436,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_DERELICT:
-                if (EFX_Bypass[EFX_DERELICT])
+                if (EFX_Active[EFX_DERELICT])
                 {
                     Rack_Effects[EFX_DERELICT]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DERELICT, Rack_Effects[EFX_DERELICT]->outvolume);
@@ -1444,7 +1444,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_ANALOG_PHASER:
-                if (EFX_Bypass[EFX_ANALOG_PHASER])
+                if (EFX_Active[EFX_ANALOG_PHASER])
                 {
                     Rack_Effects[EFX_ANALOG_PHASER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ANALOG_PHASER, Rack_Effects[EFX_ANALOG_PHASER]->outvolume);
@@ -1452,7 +1452,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_VALVE:
-                if (EFX_Bypass[EFX_VALVE])
+                if (EFX_Active[EFX_VALVE])
                 {
                     Rack_Effects[EFX_VALVE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VALVE, Rack_Effects[EFX_VALVE]->outvolume);
@@ -1460,7 +1460,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_DUAL_FLANGE:
-                if (EFX_Bypass[EFX_DUAL_FLANGE])
+                if (EFX_Active[EFX_DUAL_FLANGE])
                 {
                     Rack_Effects[EFX_DUAL_FLANGE]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1468,7 +1468,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_RING:
-                if (EFX_Bypass[EFX_RING])
+                if (EFX_Active[EFX_RING])
                 {
                     Rack_Effects[EFX_RING]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_RING, Rack_Effects[EFX_RING]->outvolume);
@@ -1476,7 +1476,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_EXCITER:
-                if (EFX_Bypass[EFX_EXCITER])
+                if (EFX_Active[EFX_EXCITER])
                 {
                     Rack_Effects[EFX_EXCITER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1484,7 +1484,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_DISTBAND:
-                if (EFX_Bypass[EFX_DISTBAND])
+                if (EFX_Active[EFX_DISTBAND])
                 {
                     Rack_Effects[EFX_DISTBAND]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DISTBAND, Rack_Effects[EFX_DISTBAND]->outvolume);
@@ -1492,7 +1492,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_ARPIE:
-                if (EFX_Bypass[EFX_ARPIE])
+                if (EFX_Active[EFX_ARPIE])
                 {
                     Rack_Effects[EFX_ARPIE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ARPIE, Rack_Effects[EFX_ARPIE]->outvolume);
@@ -1500,7 +1500,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_EXPANDER:
-                if (EFX_Bypass[EFX_EXPANDER])
+                if (EFX_Active[EFX_EXPANDER])
                 {
                     Rack_Effects[EFX_EXPANDER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1508,7 +1508,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_SHUFFLE:
-                if (EFX_Bypass[EFX_SHUFFLE])
+                if (EFX_Active[EFX_SHUFFLE])
                 {
                     Rack_Effects[EFX_SHUFFLE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SHUFFLE, Rack_Effects[EFX_SHUFFLE]->outvolume);
@@ -1516,7 +1516,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_SYNTHFILTER:
-                if (EFX_Bypass[EFX_SYNTHFILTER])
+                if (EFX_Active[EFX_SYNTHFILTER])
                 {
                     Rack_Effects[EFX_SYNTHFILTER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SYNTHFILTER, Rack_Effects[EFX_SYNTHFILTER]->outvolume);
@@ -1524,7 +1524,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_VARYBAND:
-                if (EFX_Bypass[EFX_VARYBAND])
+                if (EFX_Active[EFX_VARYBAND])
                 {
                     Rack_Effects[EFX_VARYBAND]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VARYBAND, Rack_Effects[EFX_VARYBAND]->outvolume);
@@ -1532,7 +1532,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_CONVOLOTRON:
-                if (EFX_Bypass[EFX_CONVOLOTRON])
+                if (EFX_Active[EFX_CONVOLOTRON])
                 {
                     Rack_Effects[EFX_CONVOLOTRON]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_CONVOLOTRON, Rack_Effects[EFX_CONVOLOTRON]->outvolume);
@@ -1540,7 +1540,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_LOOPER:
-                if (EFX_Bypass[EFX_LOOPER])
+                if (EFX_Active[EFX_LOOPER])
                 {
                     Rack_Effects[EFX_LOOPER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_LOOPER, Rack_Effects[EFX_LOOPER]->outvolume);
@@ -1548,7 +1548,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_MUTROMOJO:
-                if (EFX_Bypass[EFX_MUTROMOJO])
+                if (EFX_Active[EFX_MUTROMOJO])
                 {
                     Rack_Effects[EFX_MUTROMOJO]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_MUTROMOJO, Rack_Effects[EFX_MUTROMOJO]->outvolume);
@@ -1556,7 +1556,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_ECHOVERSE:
-                if (EFX_Bypass[EFX_ECHOVERSE])
+                if (EFX_Active[EFX_ECHOVERSE])
                 {
                     Rack_Effects[EFX_ECHOVERSE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHOVERSE, Rack_Effects[EFX_ECHOVERSE]->outvolume);
@@ -1564,7 +1564,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_COILCRAFTER:
-                if (EFX_Bypass[EFX_COILCRAFTER])
+                if (EFX_Active[EFX_COILCRAFTER])
                 {
                     Rack_Effects[EFX_COILCRAFTER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1572,7 +1572,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_SHELFBOOST:
-                if (EFX_Bypass[EFX_SHELFBOOST])
+                if (EFX_Active[EFX_SHELFBOOST])
                 {
                     Rack_Effects[EFX_SHELFBOOST]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1580,7 +1580,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_VOCODER:
-                if (EFX_Bypass[EFX_VOCODER])
+                if (EFX_Active[EFX_VOCODER])
                 {
                     Rack_Effects[EFX_VOCODER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VOCODER, Rack_Effects[EFX_VOCODER]->outvolume);
@@ -1588,7 +1588,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_SUSTAINER:
-                if (EFX_Bypass[EFX_SUSTAINER])
+                if (EFX_Active[EFX_SUSTAINER])
                 {
                     Rack_Effects[EFX_SUSTAINER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1596,7 +1596,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_SEQUENCE:
-                if (EFX_Bypass[EFX_SEQUENCE])
+                if (EFX_Active[EFX_SEQUENCE])
                 {
                     Rack_Effects[EFX_SEQUENCE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SEQUENCE, Rack_Effects[EFX_SEQUENCE]->outvolume);
@@ -1604,7 +1604,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_SHIFTER:
-                if (EFX_Bypass[EFX_SHIFTER])
+                if (EFX_Active[EFX_SHIFTER])
                 {
                     Rack_Effects[EFX_SHIFTER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SHIFTER, Rack_Effects[EFX_SHIFTER]->outvolume);
@@ -1612,7 +1612,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_STOMPBOX:
-                if (EFX_Bypass[EFX_STOMPBOX])
+                if (EFX_Active[EFX_STOMPBOX])
                 {
                     Rack_Effects[EFX_STOMPBOX]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1620,7 +1620,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_REVERBTRON:
-                if (EFX_Bypass[EFX_REVERBTRON])
+                if (EFX_Active[EFX_REVERBTRON])
                 {
                     Rack_Effects[EFX_REVERBTRON]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_REVERBTRON, Rack_Effects[EFX_REVERBTRON]->outvolume);
@@ -1628,7 +1628,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_ECHOTRON:
-                if (EFX_Bypass[EFX_ECHOTRON])
+                if (EFX_Active[EFX_ECHOTRON])
                 {
                     Rack_Effects[EFX_ECHOTRON]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHOTRON, Rack_Effects[EFX_ECHOTRON]->outvolume);
@@ -1636,7 +1636,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_STEREOHARM:
-                if (EFX_Bypass[EFX_STEREOHARM])
+                if (EFX_Active[EFX_STEREOHARM])
                 {
                     Rack_Effects[EFX_STEREOHARM]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_STEREOHARM, Rack_Effects[EFX_STEREOHARM]->outvolume);
@@ -1644,7 +1644,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_COMPBAND:
-                if (EFX_Bypass[EFX_COMPBAND])
+                if (EFX_Active[EFX_COMPBAND])
                 {
                     Rack_Effects[EFX_COMPBAND]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_COMPBAND, Rack_Effects[EFX_COMPBAND]->outvolume);
@@ -1652,7 +1652,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_OPTICALTREM:
-                if (EFX_Bypass[EFX_OPTICALTREM])
+                if (EFX_Active[EFX_OPTICALTREM])
                 {
                     Rack_Effects[EFX_OPTICALTREM]->out(efxoutl, efxoutr);
                     Vol2_Efx();
@@ -1660,7 +1660,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_VIBE:
-                if (EFX_Bypass[EFX_VIBE])
+                if (EFX_Active[EFX_VIBE])
                 {
                     Rack_Effects[EFX_VIBE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VIBE, Rack_Effects[EFX_VIBE]->outvolume);
@@ -1668,7 +1668,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                 break;
 
             case EFX_INFINITY:
-                if (EFX_Bypass[EFX_INFINITY])
+                if (EFX_Active[EFX_INFINITY])
                 {
                     Rack_Effects[EFX_INFINITY]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_INFINITY, Rack_Effects[EFX_INFINITY]->outvolume);

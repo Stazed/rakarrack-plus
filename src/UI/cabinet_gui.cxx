@@ -6,10 +6,10 @@ void CabinetGui::cb_Cabinet_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_CABINET]);
+ o->value(m_process->EFX_Active[EFX_CABINET]);
  return;
 }
-m_process->EFX_Bypass[EFX_CABINET]=(int)o->value();
+m_process->EFX_Active[EFX_CABINET]=(int)o->value();
 m_parent->findpos(EFX_CABINET,(int)o->value(),o);
 }
 void CabinetGui::cb_Cabinet_activar(RKR_Light_Button* o, void* v) {

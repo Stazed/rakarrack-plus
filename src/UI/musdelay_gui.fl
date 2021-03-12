@@ -23,10 +23,10 @@ widget_class MusdelayGui {open selected
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_MUSICAL_DELAY]);
+ o->value(m_process->EFX_Active[EFX_MUSICAL_DELAY]);
  return;
 }
-m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=(int)o->value();
+m_process->EFX_Active[EFX_MUSICAL_DELAY]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_MUSICAL_DELAY]->cleanup();
 m_parent->findpos(EFX_MUSICAL_DELAY,(int)o->value(),o);}
@@ -37,7 +37,7 @@ m_parent->findpos(EFX_MUSICAL_DELAY,(int)o->value(),o);}
   Fl_Choice musdelay_preset {
     label Preset
     user_data UD_PRESET_MUSICAL_DELAY
-    callback {m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+    callback {m_process->EFX_Active[EFX_MUSICAL_DELAY]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==UD_PRESET_MUSICAL_DELAY))
     m_process->Rack_Effects[EFX_MUSICAL_DELAY]->setpreset(o->value());
@@ -47,7 +47,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_MUSICAL_DELAY]; i++)
     parameter_refresh(i);
 };
 
-if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
+if((int)musdelay_activar->value())m_process->EFX_Active[EFX_MUSICAL_DELAY]=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -106,9 +106,9 @@ m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Pan_2,(int)o->value(
     class RKR_Slider
   }
   Fl_Choice musdelay_delay1 {
-    callback {m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+    callback {m_process->EFX_Active[EFX_MUSICAL_DELAY]=0;
 m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_1,o->value()+1);
-if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
+if((int)musdelay_activar->value())m_process->EFX_Active[EFX_MUSICAL_DELAY]=1;}
     tooltip {Delay 1} xywh {10 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -138,9 +138,9 @@ if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     }
   }
   Fl_Choice musdelay_delay3 {
-    callback {m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+    callback {m_process->EFX_Active[EFX_MUSICAL_DELAY]=0;
 m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Del_Offset,o->value()+1);
-if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
+if((int)musdelay_activar->value())m_process->EFX_Active[EFX_MUSICAL_DELAY]=1;}
     tooltip {Delay Offset} xywh {62 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
@@ -174,9 +174,9 @@ if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
     }
   }
   Fl_Choice musdelay_delay2 {
-    callback {m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+    callback {m_process->EFX_Active[EFX_MUSICAL_DELAY]=0;
 m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Delay_2,o->value()+1);
-if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
+if((int)musdelay_activar->value())m_process->EFX_Active[EFX_MUSICAL_DELAY]=1;}
     tooltip {Delay 2} xywh {114 82 38 14} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
     code0 {o->menu(menu_musdelay_delay1);}
     class RKR_Choice
@@ -188,9 +188,9 @@ if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
  m_parent->getMIDIControl(MC_Music_Tempo);
  return;
 }
-m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=0;
+m_process->EFX_Active[EFX_MUSICAL_DELAY]=0;
 m_process->Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo,(int)o->value());
-if((int)musdelay_activar->value())m_process->EFX_Bypass[EFX_MUSICAL_DELAY]=1;}
+if((int)musdelay_activar->value())m_process->EFX_Active[EFX_MUSICAL_DELAY]=1;}
     xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 10 maximum 480 step 1 textcolor 7
     class RKR_Slider
   }

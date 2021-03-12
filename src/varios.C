@@ -474,34 +474,34 @@ RKR::Update_tempo()
         Tap_TempoSetD = Tap_TempoSet;
     }
 
-    if (EFX_Bypass[EFX_LOOPER])
+    if (EFX_Active[EFX_LOOPER])
     {
         Looper *Efx_Looper = static_cast <Looper*> (Rack_Effects[EFX_LOOPER]);
         Efx_Looper->settempo(Tap_TempoSet);
     }
 
-    if (EFX_Bypass[EFX_CHORUS]) Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_FLANGER]) Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_PHASER]) Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_PAN]) Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_WAHWAH]) Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_ALIENWAH]) Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_MUSICAL_DELAY]) Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo, Tap_TempoSetD);
-    if (EFX_Bypass[EFX_ANALOG_PHASER]) Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_DUAL_FLANGE]) Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_SYNTHFILTER]) Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_MUTROMOJO]) Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_VARYBAND]) Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_1, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_VARYBAND]) Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_2, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_ARPIE]) Rack_Effects[EFX_ARPIE]->changepar(Arpie_Tempo, Tap_TempoSetD);
-    if (EFX_Bypass[EFX_ECHOVERSE]) Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Tempo, Tap_TempoSetD);
-    if (EFX_Bypass[EFX_SEQUENCE]) Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Tempo, Tap_TempoSetD);
-    if (EFX_Bypass[EFX_ECHOTRON]) Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Tempo, Tap_TempoSetD);
-    if (EFX_Bypass[EFX_OPTICALTREM]) Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_VIBE]) Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Tempo, Tap_TempoSetL);
-    if (EFX_Bypass[EFX_INFINITY]) Rack_Effects[EFX_INFINITY]->changepar(Infinity_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_CHORUS]) Rack_Effects[EFX_CHORUS]->changepar(Chorus_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_FLANGER]) Rack_Effects[EFX_FLANGER]->changepar(Flanger_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_PHASER]) Rack_Effects[EFX_PHASER]->changepar(Phaser_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_PAN]) Rack_Effects[EFX_PAN]->changepar(Pan_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_WAHWAH]) Rack_Effects[EFX_WAHWAH]->changepar(WahWah_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_ALIENWAH]) Rack_Effects[EFX_ALIENWAH]->changepar(Alien_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_MUSICAL_DELAY]) Rack_Effects[EFX_MUSICAL_DELAY]->changepar(Music_Tempo, Tap_TempoSetD);
+    if (EFX_Active[EFX_ANALOG_PHASER]) Rack_Effects[EFX_ANALOG_PHASER]->changepar(APhase_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_DUAL_FLANGE]) Rack_Effects[EFX_DUAL_FLANGE]->changepar(DFlange_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_SYNTHFILTER]) Rack_Effects[EFX_SYNTHFILTER]->changepar(Synthfilter_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_MUTROMOJO]) Rack_Effects[EFX_MUTROMOJO]->changepar(MuTro_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_VARYBAND]) Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_1, Tap_TempoSetL);
+    if (EFX_Active[EFX_VARYBAND]) Rack_Effects[EFX_VARYBAND]->changepar(VaryBand_LFO_Tempo_2, Tap_TempoSetL);
+    if (EFX_Active[EFX_ARPIE]) Rack_Effects[EFX_ARPIE]->changepar(Arpie_Tempo, Tap_TempoSetD);
+    if (EFX_Active[EFX_ECHOVERSE]) Rack_Effects[EFX_ECHOVERSE]->changepar(Echoverse_Tempo, Tap_TempoSetD);
+    if (EFX_Active[EFX_SEQUENCE]) Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Tempo, Tap_TempoSetD);
+    if (EFX_Active[EFX_ECHOTRON]) Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Tempo, Tap_TempoSetD);
+    if (EFX_Active[EFX_OPTICALTREM]) Rack_Effects[EFX_OPTICALTREM]->changepar(Optical_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_VIBE]) Rack_Effects[EFX_VIBE]->changepar(Vibe_LFO_Tempo, Tap_TempoSetL);
+    if (EFX_Active[EFX_INFINITY]) Rack_Effects[EFX_INFINITY]->changepar(Infinity_Tempo, Tap_TempoSetL);
 
-    if (EFX_Bypass[EFX_ECHO])
+    if (EFX_Active[EFX_ECHO])
     {
         Echo *Efx_Echo = static_cast<Echo*>(Rack_Effects[EFX_ECHO]);
         Efx_Echo->Tempo2Delay(Tap_TempoSetD);

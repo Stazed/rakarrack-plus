@@ -6,10 +6,10 @@ void HarGui::cb_har_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_HARMONIZER]);
+ o->value(m_process->EFX_Active[EFX_HARMONIZER]);
  return;
 }
-m_process->EFX_Bypass[EFX_HARMONIZER]=(int)o->value();
+m_process->EFX_Active[EFX_HARMONIZER]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_HARMONIZER]->cleanup();
 m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval,m_process->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval));
@@ -62,9 +62,9 @@ void HarGui::cb_har_int_i(RKR_Slider* o, void*) {
  m_parent->getMIDIControl(MC_Harm_Interval);
  return;
 } 
-m_process->EFX_Bypass[EFX_HARMONIZER]=0;
+m_process->EFX_Active[EFX_HARMONIZER]=0;
 m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval,(int)(o->value()+12));
-if((int)har_activar->value())m_process->EFX_Bypass[EFX_HARMONIZER]=1;
+if((int)har_activar->value())m_process->EFX_Active[EFX_HARMONIZER]=1;
 }
 void HarGui::cb_har_int(RKR_Slider* o, void* v) {
   ((HarGui*)(o->parent()))->cb_har_int_i(o,v);

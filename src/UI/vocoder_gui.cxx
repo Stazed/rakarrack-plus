@@ -6,10 +6,10 @@ void VocoderGui::cb_vo_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_VOCODER]);
+ o->value(m_process->EFX_Active[EFX_VOCODER]);
  return;
 }
-m_process->EFX_Bypass[EFX_VOCODER]=(int)o->value();
+m_process->EFX_Active[EFX_VOCODER]=(int)o->value();
 if((int) o->value()==0)
 vu_vu->value(-48);
 m_parent->findpos(EFX_VOCODER,(int)o->value(),o);

@@ -23,10 +23,10 @@ widget_class EqGui {open selected
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_EQ]);
+ o->value(m_process->EFX_Active[EFX_EQ]);
  return;
 } 
-m_process->EFX_Bypass[EFX_EQ]=(int)o->value();
+m_process->EFX_Active[EFX_EQ]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_EQ]->cleanup();
 m_parent->findpos(EFX_EQ,(int)o->value(),o);}

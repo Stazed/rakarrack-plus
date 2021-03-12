@@ -249,7 +249,7 @@ void RKR::get_effect_parameters(char *buf, int fx_index)
                 }
                 else    // add the effect bypass
                 {
-                    s_buf += NTS(EFX_Bypass[effect]);
+                    s_buf += NTS(EFX_Active[effect]);
                 }
             }
 
@@ -609,9 +609,9 @@ RKR::set_audio_paramters()
     
     // These are specially processed and need to be shut of unless specifically set
     // from the ordered effects.
-    EFX_Bypass[EFX_HARMONIZER] = 0;
-    EFX_Bypass[EFX_STEREOHARM] = 0;
-    EFX_Bypass[EFX_RING] = 0;
+    EFX_Active[EFX_HARMONIZER] = 0;
+    EFX_Active[EFX_STEREOHARM] = 0;
+    EFX_Active[EFX_RING] = 0;
     
     // For each item on the main rack, check for a match to the efx_order
     for (int ordered_efx = 0; ordered_efx < C_NUMBER_ORDERED_EFFECTS; ordered_efx++)
@@ -622,11 +622,11 @@ RKR::set_audio_paramters()
             if(efx_order[ordered_efx] == all_efx)
             {
                 // Set the bypass for all ordered
-                EFX_Bypass[all_efx] = EFX_Bank_Bypass[all_efx];
+                EFX_Active[all_efx] = EFX_Bank_Bypass[all_efx];
 
                 // If the ordered effect is active, then set the parameters
                 // We do not need to set parameters for inactive effects
-                if(EFX_Bypass[all_efx])
+                if(EFX_Active[all_efx])
                 {
                     if(all_efx != EFX_LOOPER)
                         Rack_Effects[all_efx]->cleanup();
@@ -665,7 +665,7 @@ RKR::set_audio_paramters()
 
     for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
     {
-        EFX_Bypass[all_efx] = EFX_Bank_Bypass[all_efx];
+        EFX_Active[all_efx] = EFX_Bank_Bypass[all_efx];
 
         if(all_efx != EFX_LOOPER)
             Rack_Effects[all_efx]->cleanup();
@@ -1524,7 +1524,7 @@ RKR::preset_to_bank(int i)
     // Copy the current bypass state to the Bank
     for(int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
-        Bank[i].lv[j][C_BYPASS] = EFX_Bypass[j];
+        Bank[i].lv[j][C_BYPASS] = EFX_Active[j];
     }
 
     // Copy MIDI learn to the Bank

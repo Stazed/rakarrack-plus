@@ -6,10 +6,10 @@ void DistBandGui::cb_distband_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_DISTBAND]);
+ o->value(m_process->EFX_Active[EFX_DISTBAND]);
  return;
 }
-m_process->EFX_Bypass[EFX_DISTBAND]=(int)o->value();
+m_process->EFX_Active[EFX_DISTBAND]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_DISTBAND]->cleanup();
 m_parent->findpos(EFX_DISTBAND,(int)o->value(),o);

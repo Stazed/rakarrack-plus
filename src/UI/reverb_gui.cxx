@@ -6,10 +6,10 @@ void ReverbGui::cb_reverb_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_REVERB]);
+ o->value(m_process->EFX_Active[EFX_REVERB]);
  return;
 }
-m_process->EFX_Bypass[EFX_REVERB]=(int)o->value();
+m_process->EFX_Active[EFX_REVERB]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_REVERB]->cleanup();
 m_parent->findpos(EFX_REVERB,(int)o->value(),o);
@@ -19,7 +19,7 @@ void ReverbGui::cb_reverb_activar(RKR_Light_Button* o, void* v) {
 }
 
 void ReverbGui::cb_reverb_preset_i(RKR_Choice* o, void* v) {
-  m_process->EFX_Bypass[EFX_REVERB]=0;
+  m_process->EFX_Active[EFX_REVERB]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==UD_PRESET_REVERB))
     m_process->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
@@ -29,7 +29,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_REVERB]; i++)
     parameter_refresh(i);
 };
 
-if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;
+if((int)reverb_activar->value())m_process->EFX_Active[EFX_REVERB]=1;
 }
 void ReverbGui::cb_reverb_preset(RKR_Choice* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_preset_i(o,v);
@@ -138,9 +138,9 @@ void ReverbGui::cb_reverb_RS_i(RKR_Slider* o, void*) {
  m_parent->getMIDIControl(MC_Reverb_Room);
  return;
 }
-m_process->EFX_Bypass[EFX_REVERB]=0;
+m_process->EFX_Active[EFX_REVERB]=0;
 m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Room,(int)o->value());
-if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;
+if((int)reverb_activar->value())m_process->EFX_Active[EFX_REVERB]=1;
 }
 void ReverbGui::cb_reverb_RS(RKR_Slider* o, void* v) {
   ((ReverbGui*)(o->parent()))->cb_reverb_RS_i(o,v);

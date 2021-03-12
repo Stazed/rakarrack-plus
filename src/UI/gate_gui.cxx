@@ -6,10 +6,10 @@ void GateGui::cb_gate_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_NOISEGATE]);
+ o->value(m_process->EFX_Active[EFX_NOISEGATE]);
  return;
 }
-m_process->EFX_Bypass[EFX_NOISEGATE]=(int)o->value();
+m_process->EFX_Active[EFX_NOISEGATE]=(int)o->value();
 m_parent->findpos(EFX_NOISEGATE,(int)o->value(),o);
 }
 void GateGui::cb_gate_activar(RKR_Light_Button* o, void* v) {

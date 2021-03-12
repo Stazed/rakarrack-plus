@@ -6,10 +6,10 @@ void RevtronGui::cb_revtron_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_REVERBTRON]);
+ o->value(m_process->EFX_Active[EFX_REVERBTRON]);
  return;
 }
-m_process->EFX_Bypass[EFX_REVERBTRON]=(int)o->value();
+m_process->EFX_Active[EFX_REVERBTRON]=(int)o->value();
 if((int) o->value()==0) m_process->Rack_Effects[EFX_REVERBTRON]->cleanup();
 m_parent->findpos(EFX_REVERBTRON,(int)o->value(),o);
 }

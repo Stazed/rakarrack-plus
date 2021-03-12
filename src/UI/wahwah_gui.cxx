@@ -6,10 +6,10 @@ void WahwahGui::cb_WahWah_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_WAHWAH]);
+ o->value(m_process->EFX_Active[EFX_WAHWAH]);
  return;
 }
-m_process->EFX_Bypass[EFX_WAHWAH]=(int)o->value();
+m_process->EFX_Active[EFX_WAHWAH]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_WAHWAH]->cleanup();
 m_parent->findpos(EFX_WAHWAH,(int)o->value(),o);
@@ -19,7 +19,7 @@ void WahwahGui::cb_WahWah_activar(RKR_Light_Button* o, void* v) {
 }
 
 void WahwahGui::cb_WahWah_preset_i(RKR_Choice* o, void* v) {
-  m_process->EFX_Bypass[EFX_WAHWAH]=0;
+  m_process->EFX_Active[EFX_WAHWAH]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==UD_PRESET_WAHWAH))
     m_process->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value());
@@ -29,7 +29,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_WAHWAH]; i++)
     parameter_refresh(i);
 };
 
-if((int)WahWah_activar->value()) m_process->EFX_Bypass[EFX_WAHWAH]=1;
+if((int)WahWah_activar->value()) m_process->EFX_Active[EFX_WAHWAH]=1;
 }
 void WahwahGui::cb_WahWah_preset(RKR_Choice* o, void* v) {
   ((WahwahGui*)(o->parent()))->cb_WahWah_preset_i(o,v);

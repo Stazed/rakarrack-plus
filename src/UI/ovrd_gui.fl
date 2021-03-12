@@ -27,10 +27,10 @@ widget_class {\#include "common_gui_menu.h"} OvrdGui {open selected
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_OVERDRIVE]);
+ o->value(m_process->EFX_Active[EFX_OVERDRIVE]);
  return;
 }
-m_process->EFX_Bypass[EFX_OVERDRIVE]=(int)o->value();
+m_process->EFX_Active[EFX_OVERDRIVE]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_OVERDRIVE]->cleanup();
 m_parent->findpos(EFX_OVERDRIVE,(int)o->value(),o);}

@@ -436,7 +436,7 @@ void RKRGUI::GuiTimeout(void)
             analyzer_redraw = 0;
         }
 
-        if (m_process->EFX_Bypass[EFX_LOOPER])
+        if (m_process->EFX_Active[EFX_LOOPER])
         {
             Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
             if ((Efx_Looper->Pplay) && (!Efx_Looper->Pstop))
@@ -486,7 +486,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (m_process->EFX_Bypass[EFX_HARMONIZER])
+    if (m_process->EFX_Active[EFX_HARMONIZER])
     {
         Harmonizer *Efx_Harmonizer = static_cast <Harmonizer*> (m_process->Rack_Effects[EFX_HARMONIZER]);
         if ((Efx_Harmonizer->PSELECT) || (Efx_Harmonizer->PMIDI))
@@ -503,7 +503,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (m_process->EFX_Bypass[EFX_STEREOHARM])
+    if (m_process->EFX_Active[EFX_STEREOHARM])
     {
         StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(m_process->Rack_Effects[EFX_STEREOHARM]);
 
@@ -1268,12 +1268,12 @@ void RKRGUI::Put_Loaded()
         {
             CABINET->Cabinet_output->value(m_process->lv[EFX_CABINET][Cabinet_Gain] - 64);
             CABINET->Cabinet_preset->value(m_process->lv[EFX_CABINET][Cabinet_Preset_Idx]);
-            CABINET->Cabinet_activar->value(m_process->EFX_Bypass[EFX_CABINET]);
+            CABINET->Cabinet_activar->value(m_process->EFX_Active[EFX_CABINET]);
         }
         else
         {
             // Calls the preset callback and sets the effect to the first preset
-            Efx_Gui_Base[i]->activate_effect->value (m_process->EFX_Bypass[i]);
+            Efx_Gui_Base[i]->activate_effect->value (m_process->EFX_Active[i]);
             Efx_Gui_Base[i]->preset_choice->do_callback (Efx_Gui_Base[i]->preset_choice, 1);
         }
     }
@@ -1435,7 +1435,7 @@ void RKRGUI::reordena()
 
                 // Set the active status, for label highlighting
                 // If the Hide/Show button is set for hide, then show only active
-                if (m_process->EFX_Bypass[j])
+                if (m_process->EFX_Active[j])
                 {
                     m_process->active[i] = 1;
 
@@ -2245,7 +2245,7 @@ void RKRGUI::ActOnOff()
         // Check for rack effects
         if (miralo < C_NUMBER_EFFECTS)
         {
-            Efx_Gui_Base[miralo]->activate_effect->value (m_process->EFX_Bypass[miralo]);
+            Efx_Gui_Base[miralo]->activate_effect->value (m_process->EFX_Active[miralo]);
             Efx_Gui_Base[miralo]->activate_effect->do_callback ();
             m_process->OnOffC--;
             continue;
@@ -2915,7 +2915,7 @@ void RKRGUI::update_tap_tempo_GUI()
 {
     for(int efx_index = 0; efx_index < C_NUMBER_EFFECTS; efx_index++)
     {
-        if (m_process->EFX_Bypass[efx_index])
+        if (m_process->EFX_Active[efx_index])
         {
             Efx_Gui_Base[efx_index]->tap_tempo_update ();
         }
@@ -3684,14 +3684,14 @@ void RKRGUI::RandomPreset()
         // Set the main window effects active or inactive
         if (i < number_active_effects)
         {
-            m_process->EFX_Bypass[rack_effect] = 1;
+            m_process->EFX_Active[rack_effect] = 1;
         }
         else
         {
-            m_process->EFX_Bypass[rack_effect] = 0;
+            m_process->EFX_Active[rack_effect] = 0;
         }
         
-        Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Bypass[rack_effect]);
+        Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Active[rack_effect]);
 
         // Get the effect preset size and select a random effect preset
         Fl_Widget *w = find_effect_preset_widget(Effect_Index[i]);

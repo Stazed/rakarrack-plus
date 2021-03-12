@@ -23,10 +23,10 @@ widget_class ReverbGui {open selected
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_REVERB]);
+ o->value(m_process->EFX_Active[EFX_REVERB]);
  return;
 }
-m_process->EFX_Bypass[EFX_REVERB]=(int)o->value();
+m_process->EFX_Active[EFX_REVERB]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_REVERB]->cleanup();
 m_parent->findpos(EFX_REVERB,(int)o->value(),o);}
@@ -37,7 +37,7 @@ m_parent->findpos(EFX_REVERB,(int)o->value(),o);}
   Fl_Choice reverb_preset {
     label Preset
     user_data UD_PRESET_REVERB
-    callback {m_process->EFX_Bypass[EFX_REVERB]=0;
+    callback {m_process->EFX_Active[EFX_REVERB]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==UD_PRESET_REVERB))
     m_process->Rack_Effects[EFX_REVERB]->setpreset((int) o->value());
@@ -47,7 +47,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_REVERB]; i++)
     parameter_refresh(i);
 };
 
-if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;}
+if((int)reverb_activar->value())m_process->EFX_Active[EFX_REVERB]=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -183,9 +183,9 @@ m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Delay_FB,(int)o->value());
  m_parent->getMIDIControl(MC_Reverb_Room);
  return;
 }
-m_process->EFX_Bypass[EFX_REVERB]=0;
+m_process->EFX_Active[EFX_REVERB]=0;
 m_process->Rack_Effects[EFX_REVERB]->changepar(Reverb_Room,(int)o->value());
-if((int)reverb_activar->value())m_process->EFX_Bypass[EFX_REVERB]=1;}
+if((int)reverb_activar->value())m_process->EFX_Active[EFX_REVERB]=1;}
     tooltip {Room Size} xywh {56 116 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 when 4 minimum 1 maximum 127 step 1 value 1 textcolor 7
     class RKR_Slider
   }

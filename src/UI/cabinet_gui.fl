@@ -23,10 +23,10 @@ widget_class CabinetGui {open selected
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_CABINET]);
+ o->value(m_process->EFX_Active[EFX_CABINET]);
  return;
 }
-m_process->EFX_Bypass[EFX_CABINET]=(int)o->value();
+m_process->EFX_Active[EFX_CABINET]=(int)o->value();
 m_parent->findpos(EFX_CABINET,(int)o->value(),o);}
     xywh {5 4 34 18} shortcut 0x32 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}

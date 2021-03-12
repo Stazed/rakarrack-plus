@@ -694,7 +694,7 @@ RKR::midievents()
         }
     }
 
-    if ((EFX_Bypass[EFX_LOOPER]) && (Tap_Selection == 3))
+    if ((EFX_Active[EFX_LOOPER]) && (Tap_Selection == 3))
     {
         if (midievent->type == SND_SEQ_EVENT_START)
         {
@@ -894,8 +894,8 @@ RKR::ActiveUn(int value)
         {
             if(miraque == i)
             {
-                if (inoff) EFX_Bypass[i] = 1;
-                else EFX_Bypass[i] = 0;
+                if (inoff) EFX_Active[i] = 1;
+                else EFX_Active[i] = 0;
                 return;
             }
         }
@@ -933,7 +933,7 @@ RKR::checkonoff(int miraque)
         {
             if(miraque == i)
             {
-                if (EFX_Bypass[i])
+                if (EFX_Active[i])
                 {
                     return (0);
                 }

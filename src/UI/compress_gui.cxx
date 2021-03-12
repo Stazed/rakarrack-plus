@@ -6,10 +6,10 @@ void CompressGui::cb_compress_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_COMPRESSOR]);
+ o->value(m_process->EFX_Active[EFX_COMPRESSOR]);
  return;
 }
-m_process->EFX_Bypass[EFX_COMPRESSOR]=(int)o->value();
+m_process->EFX_Active[EFX_COMPRESSOR]=(int)o->value();
 m_process->Rack_Effects[EFX_COMPRESSOR]->cleanup();
 m_parent->findpos(EFX_COMPRESSOR,(int)o->value(),o);
 }

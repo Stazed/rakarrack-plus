@@ -6,10 +6,10 @@ void ShifterGui::cb_shifter_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_SHIFTER]);
+ o->value(m_process->EFX_Active[EFX_SHIFTER]);
  return;
 }
-m_process->EFX_Bypass[EFX_SHIFTER]=(int)o->value();
+m_process->EFX_Active[EFX_SHIFTER]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_SHIFTER]->cleanup();
 m_parent->findpos(EFX_SHIFTER,(int)o->value(),o);
@@ -60,9 +60,9 @@ void ShifterGui::cb_shifter_int_i(RKR_Slider* o, void*) {
  m_parent->getMIDIControl(MC_Shifter_Interval);
  return;
 }
-m_process->EFX_Bypass[EFX_SHIFTER]=0;
+m_process->EFX_Active[EFX_SHIFTER]=0;
 m_process->Rack_Effects[EFX_SHIFTER]->changepar(Shifter_Interval,(int)o->value());
-if((int)shifter_activar->value())m_process->EFX_Bypass[EFX_SHIFTER]=1;
+if((int)shifter_activar->value())m_process->EFX_Active[EFX_SHIFTER]=1;
 }
 void ShifterGui::cb_shifter_int(RKR_Slider* o, void* v) {
   ((ShifterGui*)(o->parent()))->cb_shifter_int_i(o,v);

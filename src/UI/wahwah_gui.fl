@@ -27,10 +27,10 @@ widget_class {\#include "common_gui_menu.h"} WahwahGui {open selected
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_WAHWAH]);
+ o->value(m_process->EFX_Active[EFX_WAHWAH]);
  return;
 }
-m_process->EFX_Bypass[EFX_WAHWAH]=(int)o->value();
+m_process->EFX_Active[EFX_WAHWAH]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_WAHWAH]->cleanup();
 m_parent->findpos(EFX_WAHWAH,(int)o->value(),o);}
@@ -41,7 +41,7 @@ m_parent->findpos(EFX_WAHWAH,(int)o->value(),o);}
   Fl_Choice WahWah_preset {
     label Preset
     user_data UD_PRESET_WAHWAH
-    callback {m_process->EFX_Bypass[EFX_WAHWAH]=0;
+    callback {m_process->EFX_Active[EFX_WAHWAH]=0;
 long long ud= (long long) v;
 if((ud==0)||(ud==UD_PRESET_WAHWAH))
     m_process->Rack_Effects[EFX_WAHWAH]->setpreset((int) o->value());
@@ -51,7 +51,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_WAHWAH]; i++)
     parameter_refresh(i);
 };
 
-if((int)WahWah_activar->value()) m_process->EFX_Bypass[EFX_WAHWAH]=1;}
+if((int)WahWah_activar->value()) m_process->EFX_Active[EFX_WAHWAH]=1;}
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice

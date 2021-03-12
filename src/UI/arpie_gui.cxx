@@ -6,10 +6,10 @@ void ArpieGui::cb_arpie_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_ARPIE]);
+ o->value(m_process->EFX_Active[EFX_ARPIE]);
  return;
 }
-m_process->EFX_Bypass[EFX_ARPIE]=(int)o->value();
+m_process->EFX_Active[EFX_ARPIE]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_ARPIE]->cleanup();
 m_parent->findpos(EFX_ARPIE,(int)o->value(),o);

@@ -26,10 +26,10 @@ widget_class HarGui {open selected
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_HARMONIZER]);
+ o->value(m_process->EFX_Active[EFX_HARMONIZER]);
  return;
 }
-m_process->EFX_Bypass[EFX_HARMONIZER]=(int)o->value();
+m_process->EFX_Active[EFX_HARMONIZER]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_HARMONIZER]->cleanup();
 m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval,m_process->Rack_Effects[EFX_HARMONIZER]->getpar(Harm_Interval));
@@ -88,9 +88,9 @@ m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_DryWet,Dry_Wet((int)(o->
  m_parent->getMIDIControl(MC_Harm_Interval);
  return;
 } 
-m_process->EFX_Bypass[EFX_HARMONIZER]=0;
+m_process->EFX_Active[EFX_HARMONIZER]=0;
 m_process->Rack_Effects[EFX_HARMONIZER]->changepar(Harm_Interval,(int)(o->value()+12));
-if((int)har_activar->value())m_process->EFX_Bypass[EFX_HARMONIZER]=1;}
+if((int)har_activar->value())m_process->EFX_Active[EFX_HARMONIZER]=1;}
     xywh {56 43 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -12 maximum 12 step 1 textcolor 7
     class RKR_Slider
   }

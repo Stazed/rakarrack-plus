@@ -1791,8 +1791,8 @@ m_process->quality_update = false;} {}
 m_process->quality_update = true;
 
 /* This is for the gui bypass */
-int hold_bypass = m_process->EFX_Bypass[EFX_HARMONIZER];
-m_process->EFX_Bypass[EFX_HARMONIZER] = 0;
+int hold_bypass = m_process->EFX_Active[EFX_HARMONIZER];
+m_process->EFX_Active[EFX_HARMONIZER] = 0;
 
 /* Cast to derived class */
 Harmonizer *Efx_Harmonizer = static_cast<Harmonizer*>(m_process->Rack_Effects[EFX_HARMONIZER]);
@@ -1818,7 +1818,7 @@ Efx_Harmonizer->reset_parameters(save_state);
 m_process->quality_update = false;
 
 /* Reset bypass */ 
-m_process->EFX_Bypass[EFX_HARMONIZER] = hold_bypass;
+m_process->EFX_Active[EFX_HARMONIZER] = hold_bypass;
 
 /* Reset user select */
 if(Efx_Harmonizer->getpar(Harm_Select))
@@ -1837,8 +1837,8 @@ m_process->quality_update = true;
 StereoHarm *Efx_StereoHarm = static_cast<StereoHarm*>(m_process->Rack_Effects[EFX_STEREOHARM]);
 
 /* This is for the gui bypass */
-int hold_bypass = m_process->EFX_Bypass[EFX_STEREOHARM];
-m_process->EFX_Bypass[EFX_STEREOHARM] = 0;
+int hold_bypass = m_process->EFX_Active[EFX_STEREOHARM];
+m_process->EFX_Active[EFX_STEREOHARM] = 0;
 
 /* Wait a bit */
 usleep(C_MILLISECONDS_25);
@@ -1861,7 +1861,7 @@ Efx_StereoHarm->reset_parameters(save_state);
 m_process->quality_update = false;
 
 /* Reset bypass */ 
-m_process->EFX_Bypass[EFX_STEREOHARM] = hold_bypass;
+m_process->EFX_Active[EFX_STEREOHARM] = hold_bypass;
 
 /* Reset user select */
 if(Efx_StereoHarm->getpar(Sharm_Select))
@@ -1874,8 +1874,8 @@ if(Efx_StereoHarm->getpar(Sharm_Select))
   Function {update_sequence_quality()} {return_type void
   } {
     code {/* This is for the gui bypass, tempo change */
-int hold_bypass = m_process->EFX_Bypass[EFX_SEQUENCE];
-m_process->EFX_Bypass[EFX_SEQUENCE] = 0;
+int hold_bypass = m_process->EFX_Active[EFX_SEQUENCE];
+m_process->EFX_Active[EFX_SEQUENCE] = 0;
 
 /* shut off all processing */
 m_process->quality_update = true;
@@ -1905,7 +1905,7 @@ Efx_Sequence->reset_parameters(save_state);
 m_process->quality_update = false;
 
 /* Reset bypass */ 
-m_process->EFX_Bypass[EFX_SEQUENCE] = hold_bypass;} {}
+m_process->EFX_Active[EFX_SEQUENCE] = hold_bypass;} {}
   }
   Function {update_shifter_quality()} {return_type void
   } {
@@ -1939,8 +1939,8 @@ m_process->quality_update = false;} {}
   Function {update_vocoder_quality()} {return_type void
   } {
     code {/* This is for the gui volume meter */
-int hold_bypass = m_process->EFX_Bypass[EFX_VOCODER];
-m_process->EFX_Bypass[EFX_VOCODER] = 0;
+int hold_bypass = m_process->EFX_Active[EFX_VOCODER];
+m_process->EFX_Active[EFX_VOCODER] = 0;
 
 /* shut off all processing */
 m_process->quality_update = true;
@@ -1969,7 +1969,7 @@ Efx_Vocoder->reset_parameters(save_state);
 m_process->quality_update = false;
 
 /* Reset bypass */
-m_process->EFX_Bypass[EFX_VOCODER] = hold_bypass;} {}
+m_process->EFX_Active[EFX_VOCODER] = hold_bypass;} {}
   }
   Function {update_distortion_quality()} {return_type void
   } {

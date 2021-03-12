@@ -6,10 +6,10 @@ void RingGui::cb_ring_activar_i(RKR_Light_Button* o, void*) {
   if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Multi_On_Off);
- o->value(m_process->EFX_Bypass[EFX_RING]);
+ o->value(m_process->EFX_Active[EFX_RING]);
  return;
 }
-m_process->EFX_Bypass[EFX_RING]=(int)o->value();
+m_process->EFX_Active[EFX_RING]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_RING]->cleanup();
 m_parent->findpos(EFX_RING,(int)o->value(),o);
