@@ -3151,7 +3151,7 @@ void SettingsWindowGui::make_table_window() {
             // Add all banks
             for(unsigned bnk = 0; bnk < m_process->Bank_Vector.size (); bnk++)
             {
-                cb->add (m_process->Bank_Vector[bnk].Bank_Menu_Name.c_str());
+                cb->add (m_process->Bank_Vector[bnk].Bank_Name_Clean.c_str());
             }
   
             cb->user_data((void *) (UD_Bank_Used_Start + y));

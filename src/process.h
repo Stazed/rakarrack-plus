@@ -1314,6 +1314,7 @@ public:
     {
         std::string Bank_File_Name;
         std::string Bank_Menu_Name;
+        std::string Bank_Name_Clean;    // For MIDI table display
         Preset_Bank_Struct Bank[62];
     };
 

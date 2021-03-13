@@ -1226,6 +1226,10 @@ RKR::add_bank_item(std::string filename)
         }
 
         Another_Bank.Bank_File_Name = filename;
+        
+        std::string clean_name = strrchr(filename.c_str(),'/')+1;     // get the file name W/O path
+        clean_name = clean_name.substr(0, clean_name.size() - c_rkrb_ext_size);   // remove extension
+        Another_Bank.Bank_Name_Clean = clean_name;
 
         // Add the CC value for bank select
         std::string menu_name = "[";
@@ -1233,8 +1237,7 @@ RKR::add_bank_item(std::string filename)
         menu_name += "] ";
 
         // Add the file name
-        menu_name += strrchr(filename.c_str(),'/')+1;     // get the file name W/O path
-        menu_name = menu_name.substr(0, menu_name.size() - c_rkrb_ext_size);   // remove extension
+        menu_name += clean_name;
 
         Another_Bank.Bank_Menu_Name = menu_name;
 

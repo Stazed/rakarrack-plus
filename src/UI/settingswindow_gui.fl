@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {1296 261 530 580} type Double
+  xywh {925 196 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1617,7 +1617,7 @@ Fl_Tooltip::enable(m_process->ena_tool);}
           // Add all banks
           for(unsigned bnk = 0; bnk < m_process->Bank_Vector.size (); bnk++)
           {
-              cb->add (m_process->Bank_Vector[bnk].Bank_Menu_Name.c_str());
+              cb->add (m_process->Bank_Vector[bnk].Bank_Name_Clean.c_str());
           }
 
           cb->user_data((void *) (UD_Bank_Used_Start + y));
