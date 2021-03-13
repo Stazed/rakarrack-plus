@@ -3884,8 +3884,13 @@ void RKRGUI::Load_Midi_Program_Change_Table()
         m_process->Handle_Message (42, filename);
         return;     // Do not load it!!!!
     }
+    else
+    {
+        // Use the Midi_Table_Vector to load it
+        m_process->set_midi_table (m_process->custom_midi_table_file);
+    }
 
-    m_process->load_MIDI_table(filename);
+    // Put it in the scroll table
     Settings->Put_MidiTable();
 }
 
@@ -3923,7 +3928,7 @@ void RKRGUI::Save_Midi_Program_Change_Table()
     // it is not in the User Directory.
     m_process->save_MIDI_table(filename);
 
-    // rescan the User Directory for any new file
+    // rescan the User Directory for any new file, or refresh existing one
     m_process->load_MIDI_table_vector();
 
     // Check to see if the file is in the User Directory.
