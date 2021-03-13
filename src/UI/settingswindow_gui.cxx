@@ -2836,7 +2836,7 @@ this->when(FL_WHEN_RELEASE);
       o->when(FL_WHEN_RELEASE);
       o->set_label_offset(4);
     } // RKR_Button* o
-    { scroll = new RKR_Scroll(30, 366, 360, 162);
+    { scroll = new RKR_Scroll(30, 366, 430, 162);
       scroll->type(6);
       scroll->box(FL_NO_BOX);
       scroll->color(FL_BACKGROUND_COLOR);
@@ -3144,7 +3144,7 @@ void SettingsWindowGui::make_table_window() {
             b->labelcolor(FL_BLACK);
             b->user_data((void *) UD_Bank_Number);
       
-            RKR_Choice* cb = new RKR_Choice(120,y*25+25,40,20);
+            RKR_Choice* cb = new RKR_Choice(120,y*25+25,130,20);
             cb->copy_label("Bank");
             cb->labelcolor(FL_WHITE);
   
@@ -3159,7 +3159,7 @@ void SettingsWindowGui::make_table_window() {
             cb->set_label_offset(4);
             cb->set_text_offset(4);
       
-            RKR_Choice* cp = new RKR_Choice(225,y*25+25,130,20);
+            RKR_Choice* cp = new RKR_Choice(310,y*25+25,130,20);
             cp->copy_label("Preset");
             cp->labelcolor(FL_WHITE);
             cp->user_data((void *) (UD_Preset_Used_Start + y));
