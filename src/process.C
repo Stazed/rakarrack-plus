@@ -207,6 +207,7 @@ RKR::RKR(int gui) :
     Jack_MIDI_OUT_Port_Connnection_Status(),
     Jack_Port_Connnection_Changed(),
     custom_midi_table(),
+    custom_midi_table_file(-1),
     a_bank(0),
     new_bank_loaded(),
     Aux_Gain(),
@@ -317,6 +318,12 @@ RKR::RKR(int gui) :
     
     // Loads all Banks, default and any in Settings/Preferences/Bank - User Directory
     load_bank_vector();
+
+    // Custom MIDI table file loading
+    load_MIDI_table_vector();
+
+    // Either default or last used table
+    load_default_midi_table();
 
     // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
     load_custom_MIDI_table_preset_names();
@@ -507,51 +514,9 @@ RKR::load_user_preferences()
     // Custom MIDI Table used On/OFF
     rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
     
-    // Custom MIDI program change table loading
-    char table_buffer[64];
-    int k = 0, f = 0;
+    // Custom MIDI Table last used file
+    rakarrack.get(PrefNom("MIDI Table File"), custom_midi_table_file, -1);
 
-    for (int i = 0; i < 128; i++)
-    {
-        if (i < 60)
-            k = i;
-        
-        if ((i > 59)&&(i < 120))
-            k = 1000 + i - 60;
-        
-        if (i > 119)
-            k = 0;
-        
-        memset(table_buffer, 0, sizeof (table_buffer));
-        sprintf(table_buffer, "Midi Table Program %d", i);
-        rakarrack.get(PrefNom(table_buffer), f, k);
-
-
-        if (f < 1000)
-        {
-            MIDI_Table[i].bank = 0;
-            MIDI_Table[i].preset = f;
-        }
-
-        if ((f > 999) && (f < 2000))
-        {
-            MIDI_Table[i].bank = 1;
-            MIDI_Table[i].preset = f - 1000;
-        }
-
-        if ((f > 1999) && (f < 3000))
-        {
-            MIDI_Table[i].bank = 2;
-            MIDI_Table[i].preset = f - 2000;
-        }
-
-
-        if ((f > 2999) && (f < 4000))
-        {
-            MIDI_Table[i].bank = 3;
-            MIDI_Table[i].preset = f - 3000;
-        }
-    }   // End Custom Program change table
 
     char temp[256];
     memset(temp, 0, sizeof (temp));

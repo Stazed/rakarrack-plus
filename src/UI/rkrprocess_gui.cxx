@@ -1147,13 +1147,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Disable Warnings"), m_process->Disable_Warnings);
         rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool);
         rakarrack.set(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay);
-
-        for (int i = 0; i < 128; i++)
-        {
-            memset(temp1, 0, sizeof (temp1));
-            sprintf(temp1, "Midi Table Program %d", i);
-            rakarrack.set(m_process->PrefNom(temp1), m_process->MIDI_Table[i].bank * 1000 + m_process->MIDI_Table[i].preset);
-        }
+        rakarrack.set(m_process->PrefNom("MIDI Table File"), m_process->custom_midi_table_file);
     }
 
 
@@ -3877,6 +3871,16 @@ void RKRGUI::Load_Midi_Program_Change_Table()
     filename = fl_filename_setext(filename, ".rmt");
     m_process->load_MIDI_table(filename);
     Settings->Put_MidiTable();
+
+    // Set the current MIDI table file location for reload on next startup
+    for(unsigned i = 0; i < m_process->Midi_Table_Vector.size(); i++)
+    {
+        if(strcmp(filename, m_process->Midi_Table_Vector[i].Table_File_Name.c_str()) == 0)
+        {
+            m_process->custom_midi_table_file = i;
+            break;
+        }
+    }
 }
 
 void RKRGUI::Save_Midi_Program_Change_Table()

@@ -1989,3 +1989,159 @@ RKR::load_MIDI_table(char *filename)
     fclose(fn);
 }
 
+
+void
+RKR::load_MIDI_table_vector()
+{
+    Midi_Table_Vector.clear();
+    
+    std::vector<std::string>file_name;
+    
+    DIR *dir;
+    struct dirent *fs;
+    
+    if(strcmp(UDirFilename, DATADIR) != 0)
+    {
+        dir = opendir(UDirFilename);
+
+        if (dir == NULL)
+        {
+            return;
+        }
+     }
+
+    // Get the bank files in the directory
+    while ((fs = readdir(dir)))
+    {
+        if (strstr(fs->d_name, ".rmt") != NULL)
+        {
+            file_name.push_back (fs->d_name);
+        }
+    }
+
+    closedir(dir);
+    
+    // Sort alpha numeric
+    std::sort( file_name.begin(), file_name.end() );
+    
+    for(unsigned i = 0; i < file_name.size (); i++)
+    {
+ 
+        std::string full_path = UDirFilename;
+
+        // Check for trailing '/'
+        if(full_path[full_path.size() - 1] != '/')
+            full_path += "/";
+
+        full_path += file_name[i];
+
+        add_table_item(full_path);
+    }
+}
+
+void 
+RKR::add_table_item(std::string filename)
+{
+    // printf("Add table item %s\n", filename.c_str());
+    char buf[256];
+    FILE *fn;
+    
+    MIDItableArray Another_Table;
+
+    if ((fn = fopen(filename.c_str(), "r")) == NULL)
+    {
+        Handle_Message(14, filename);
+        return;
+    }
+
+    for (int i = 0; i < 128; i++)
+    {
+        memset(buf, 0, sizeof (buf));
+        if (fgets(buf, sizeof buf, fn) == NULL)
+        {
+            Handle_Message(14, filename);
+            fclose(fn);
+            return;
+        }
+
+        sscanf(buf, "%d,%d\n", &Another_Table.MIDI_Table[i].bank, &Another_Table.MIDI_Table[i].preset);
+    }
+    
+    Another_Table.Table_File_Name = filename;
+    
+    // Add the Menu name
+    std::string menu_name = strrchr(filename.c_str(),'/')+1;     // get the file name W/O path
+    menu_name = menu_name.substr(0, menu_name.size() - 4);   // remove extension .rmt = 4
+    Another_Table.Table_Menu_Name = menu_name;
+    
+    Midi_Table_Vector.push_back(Another_Table);
+
+    fclose(fn);
+}
+
+int
+RKR::set_midi_table(int item)
+{
+    if(item >= Midi_Table_Vector.size())
+        return 0;
+    
+    for (int i = 0; i < 128; i++)
+    {
+        MIDI_Table[i].bank = Midi_Table_Vector[item].MIDI_Table[i].bank;
+        MIDI_Table[i].preset = Midi_Table_Vector[item].MIDI_Table[i].preset;
+    }
+    
+    return 1;
+}
+
+void
+RKR::load_default_midi_table()
+{
+    int load_default_midi_table = 1;
+    if(custom_midi_table_file >= 0)
+    {
+        if(set_midi_table(custom_midi_table_file))
+            load_default_midi_table = 0;
+    }
+    
+    if(load_default_midi_table)
+    {
+        int k = 0;
+
+        for (int i = 0; i < 128; i++)
+        {
+            if (i < 60)
+                k = i;
+
+            if ((i > 59)&&(i < 120))
+                k = 1000 + i - 60;
+
+            if (i > 119)
+                k = 0;
+
+            if (k < 1000)
+            {
+                MIDI_Table[i].bank = 0;
+                MIDI_Table[i].preset = k;
+            }
+
+            if ((k > 999) && (k < 2000))
+            {
+                MIDI_Table[i].bank = 1;
+                MIDI_Table[i].preset = k - 1000;
+            }
+
+            if ((k > 1999) && (k < 3000))
+            {
+                MIDI_Table[i].bank = 2;
+                MIDI_Table[i].preset = k - 2000;
+            }
+
+            if ((k > 2999) && (k < 4000))
+            {
+                MIDI_Table[i].bank = 3;
+                MIDI_Table[i].preset = k - 3000;
+            }
+        }
+    }
+}

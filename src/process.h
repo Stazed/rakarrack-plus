@@ -767,6 +767,10 @@ public:
     bool merge_insert_presets(char *filename);
     void save_MIDI_table (char *filename);
     void load_MIDI_table (char *filename);
+    void load_MIDI_table_vector();
+    void add_table_item(std::string filename);
+    int set_midi_table(int item);
+    void load_default_midi_table();
 
     // varios.C
     int Message (int prio, const char *labelwin, const char *message_text);
@@ -1149,6 +1153,11 @@ public:
     int custom_midi_table;
 
     /**
+     * The last loaded custom MIDI table file, if any. -1 if none.
+     */
+    int custom_midi_table_file;
+
+    /**
      * Flag to indicate the active bank for reload on next start.
      */
     int a_bank;
@@ -1314,7 +1323,7 @@ public:
      */
     std::vector <BankArray> Bank_Vector;
     
-
+    
     /**
      * MIDI Program Change Table bank and preset selection items.
      * This is the scroll table in Settings/Preferences/MIDI - MIDI Program Change Table
@@ -1327,7 +1336,28 @@ public:
         MIDI_table():
             bank(),
             preset() {}
-    } MIDI_Table[128];
+    };
+    
+    /**
+     * The midi table array used for processing custom midi table program changes.
+     */
+    MIDI_table MIDI_Table[128];
+    
+    
+    /**
+     * Holds the midi table information for a midi table file.
+     */
+    struct MIDItableArray
+    {
+        std::string Table_File_Name;
+        std::string Table_Menu_Name;
+        MIDI_table MIDI_Table[128];
+    };
+    
+    /**
+     * Holds all midi table files and is loaded from the User Directory scan on program start.
+     */
+    std::vector <MIDItableArray> Midi_Table_Vector;
 
     /**
      * MIDI Program Change Table bank preset names.
