@@ -3143,6 +3143,13 @@ void RKRGUI::Scan_Bank_Dir(int reload)
     }
 
     BankWindow->CH_UB->value(menu_item);
+    
+    if(reload)
+    {
+        Settings->make_table_window ();
+        m_process->load_default_midi_table ();
+        m_process->load_custom_MIDI_table_preset_names();
+    }
 }
 
 /**

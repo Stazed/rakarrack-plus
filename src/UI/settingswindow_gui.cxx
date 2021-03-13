@@ -3132,6 +3132,8 @@ Fl_Menu_Item * SettingsWindowGui::get_menu_Har_Downsample() {
 
 void SettingsWindowGui::make_table_window() {
   // Fill settings midi table scroll
+        scroll->clear();
+  
         scroll->begin();
       
         for (intptr_t y=0; y<128; y++)

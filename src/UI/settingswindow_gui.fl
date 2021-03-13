@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {225 103 530 580} type Double
+  xywh {387 283 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1598,6 +1598,8 @@ Fl_Tooltip::enable(m_process->ena_tool);}
   }
   Function {make_table_window()} {} {
     code {// Fill settings midi table scroll
+      scroll->clear();
+
       scroll->begin();
     
       for (intptr_t y=0; y<128; y++)
