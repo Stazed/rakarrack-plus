@@ -252,6 +252,13 @@ void RKRGUI::GuiTimeout(void)
         Put_Loaded_Bank();
         m_process->Change_Bank = C_BANK_CHANGE_OFF;
     }
+    
+    if (m_process->Change_MIDI_Table != C_BANK_CHANGE_OFF)
+    {
+        // Put it in the scroll table
+        Settings->Put_MidiTable();
+        m_process->Change_MIDI_Table = C_BANK_CHANGE_OFF;
+    }
 
     // Update the Gui for MIDI program changes
     if (m_process->Change_Preset != C_CHANGE_PRESET_OFF)

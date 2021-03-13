@@ -121,7 +121,8 @@ enum MIDI_Control_Default_Index
     MC_Dist_DryWet,             // 30
     MC_Harm_DryWet,
 
-    MC_Unused_32,
+    MC_Unused_32,               // FIXME Bank select fine - custom midi table
+
     MC_Unused_33,
     MC_Unused_34,
     MC_Unused_35,
@@ -880,6 +881,11 @@ public:
      * For optimized bank changes, if no change, then don't copy_bank().
      */
     int Previous_MIDI_Bank;
+
+    /**
+     * Flag to indicate that the midi table should be changed, for gui refresh on CC 32 bank select fine.
+     */
+    int Change_MIDI_Table;
 
     /**
      * Flag to indicate if the user used the -l command line option to load a preset file.

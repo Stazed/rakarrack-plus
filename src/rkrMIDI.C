@@ -447,6 +447,8 @@ RKR::MIDI_control()
         "Phaser Feedback",          NTS(MC_Phaser_Feedback).c_str(),        NTS(EFX_PHASER).c_str(),        NTS(Phaser_Feedback).c_str(),        "0",     "1.0",
         "Phaser L/R Cross",         NTS(MC_Phaser_LR_Cross).c_str(),        NTS(EFX_PHASER).c_str(),        NTS(Phaser_LR_Cross).c_str(),        "0",     "1.0",
 
+// FIXME "Program Change Table,
+
         "Reverb Dry/Wet",           NTS(MC_Reverb_DryWet).c_str(),          NTS(EFX_REVERB).c_str(),        NTS(Reverb_DryWet).c_str(),        "127",     "-1.0",
         "Reverb Pan",               NTS(MC_Reverb_Pan).c_str(),             NTS(EFX_REVERB).c_str(),        NTS(Reverb_Pan).c_str(),             "0",     "1.0",
         "Reverb Time",              NTS(MC_Reverb_Time).c_str(),            NTS(EFX_REVERB).c_str(),        NTS(Reverb_Time).c_str(),            "0",     "1.0",
@@ -1268,7 +1270,9 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Unused_17:
         case MC_Unused_18:
         case MC_Unused_19:
-        case MC_Unused_32:
+            
+       // case MC_Unused_32:
+            
         case MC_Unused_33:
         case MC_Unused_34:
         case MC_Unused_35:
@@ -1285,6 +1289,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Unused_64:
         case MC_Unused_128:
         case MC_Unused_129:
+            return;
+
+        case MC_Unused_32:  // FIXME
+            set_midi_table (value);
+            Change_MIDI_Table = value;
             return;
 
         case MC_Output_Volume:
