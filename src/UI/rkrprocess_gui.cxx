@@ -3876,18 +3876,17 @@ void RKRGUI::Load_Midi_Program_Change_Table()
         return;
 
     filename = fl_filename_setext(filename, ".rmt");
+
+    // Check to see if the file is in the User Directory.
+    // This will set the m_process->custom_midi_table_file to the file if found.
+    if(!m_process->file_in_midi_table_vector(filename))
+    {
+        m_process->Handle_Message (42, filename);
+        return;     // Do not load it!!!!
+    }
+
     m_process->load_MIDI_table(filename);
     Settings->Put_MidiTable();
-
-    // Set the current MIDI table file location for reload on next startup
-    for(unsigned i = 0; i < m_process->Midi_Table_Vector.size(); i++)
-    {
-        if(strcmp(filename, m_process->Midi_Table_Vector[i].Table_File_Name.c_str()) == 0)
-        {
-            m_process->custom_midi_table_file = i;
-            break;
-        }
-    }
 }
 
 void RKRGUI::Save_Midi_Program_Change_Table()
