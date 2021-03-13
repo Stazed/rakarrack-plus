@@ -2148,3 +2148,18 @@ RKR::load_default_midi_table()
         }
     }
 }
+
+int
+RKR::file_in_midi_table_vector(std::string filename)
+{
+    for(unsigned i = 0; i < Midi_Table_Vector.size(); i++)
+    {
+        if(strcmp(filename.c_str(), Midi_Table_Vector[i].Table_File_Name.c_str()) == 0)
+        {
+            custom_midi_table_file = i;     // set the current file
+            return 1;   // true
+        }
+    }
+
+    return 0;   // false
+}

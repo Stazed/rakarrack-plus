@@ -771,6 +771,7 @@ public:
     void add_table_item(std::string filename);
     int set_midi_table(int item);
     void load_default_midi_table();
+    int file_in_midi_table_vector(std::string filename);
 
     // varios.C
     int Message (int prio, const char *labelwin, const char *message_text);

@@ -210,6 +210,11 @@ RKR::Handle_Message(int num, std::string filename)
                 "You must set a User Directory in :\n"
                 "Settings/Preferences/Bank - User Directory.");
         break;
+    case 42:
+        sprintf(error_msg, "MIDI program file cannot be found in user directory %s\n\n"
+                "All MIDI program files should be put in the user directory set in:\n"
+                "Settings/Preferences/Bank - User Directory", filename.c_str());
+        break;
     }
 
     Message(message_type, meslabel, error_msg);

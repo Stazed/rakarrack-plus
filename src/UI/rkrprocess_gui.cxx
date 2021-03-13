@@ -3899,6 +3899,15 @@ void RKRGUI::Save_Midi_Program_Change_Table()
     if(strcmp(m_process->UDirFilename, DATADIR) != 0)
     {
         chooser_start_location = m_process->UDirFilename;
+
+        // If we have a previous file, then use it
+        if(m_process->custom_midi_table_file >= 0)
+        {
+             if(m_process->custom_midi_table_file < m_process->Midi_Table_Vector.size ())
+             {
+                 chooser_start_location = m_process->Midi_Table_Vector[m_process->custom_midi_table_file].Table_File_Name;
+             }
+        }
     }
 
     char *filename;
@@ -3910,5 +3919,18 @@ void RKRGUI::Save_Midi_Program_Change_Table()
 
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
+
+    // We save the file anywhere they want, but give an error message if
+    // it is not in the User Directory.
     m_process->save_MIDI_table(filename);
+
+    // rescan the User Directory for any new file
+    m_process->load_MIDI_table_vector();
+
+    // Check to see if the file is in the User Directory.
+    // This will set the m_process->custom_midi_table_file to the file if found.
+    if(!m_process->file_in_midi_table_vector(filename))
+    {
+        m_process->Handle_Message (42, filename);
+    }
 }
