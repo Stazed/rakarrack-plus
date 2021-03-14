@@ -3271,7 +3271,7 @@ void SettingsWindowGui::update_convo_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_CONVOLOTRON];
-  m_process->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_process->Con_Down, m_process->Con_U_Q, m_process->Con_D_Q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_process->Con_Down, m_process->Con_U_Q, m_process->Con_D_Q, m_process->fSample_rate, m_process->period_master);
   Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
   
   /* Wait for things to complete */
@@ -3312,7 +3312,7 @@ void SettingsWindowGui::update_revtron_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_REVERBTRON];
-  m_process->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_process->Rev_Down, m_process->Rev_U_Q, m_process->Rev_D_Q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_process->Rev_Down, m_process->Rev_U_Q, m_process->Rev_D_Q, m_process->fSample_rate, m_process->period_master);
   Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
   
   /* Wait for things to complete */
@@ -3354,7 +3354,7 @@ void SettingsWindowGui::update_harmonizer_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_HARMONIZER];
-  m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Har_Down, m_process->Har_U_Q, m_process->Har_D_Q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Har_Down, m_process->Har_U_Q, m_process->Har_D_Q, m_process->fSample_rate, m_process->period_master);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
@@ -3397,7 +3397,7 @@ void SettingsWindowGui::update_stereoharm_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_STEREOHARM];
-  m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Ste_Down, m_process->Ste_U_Q, m_process->Ste_D_Q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Ste_Down, m_process->Ste_U_Q, m_process->Ste_D_Q, m_process->fSample_rate, m_process->period_master);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
@@ -3440,7 +3440,7 @@ void SettingsWindowGui::update_sequence_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_SEQUENCE];
-  m_process->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_process->SeqQual, m_process->Seq_Down, m_process->Seq_U_Q, m_process->Seq_D_Q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_process->SeqQual, m_process->Seq_Down, m_process->Seq_U_Q, m_process->Seq_D_Q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3472,7 +3472,7 @@ void SettingsWindowGui::update_shifter_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_SHIFTER];
-  m_process->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_process->ShiQual, m_process->Shi_Down, m_process->Shi_U_Q, m_process->Shi_D_Q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_process->ShiQual, m_process->Shi_Down, m_process->Shi_U_Q, m_process->Shi_D_Q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3504,7 +3504,7 @@ void SettingsWindowGui::update_vocoder_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_VOCODER];
-  m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3534,7 +3534,7 @@ void SettingsWindowGui::update_distortion_quality() {
     
     /* Delete and re-create the efx with new resample settings */
     delete m_process->Rack_Effects[EFX_DISTORTION];
-    m_process->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_process->Dist_res_amount, m_process->Dist_up_q, m_process->Dist_down_q, m_process->fSample_rate, m_process->period);
+    m_process->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_process->Dist_res_amount, m_process->Dist_up_q, m_process->Dist_down_q, m_process->fSample_rate, m_process->period_master);
     
     /* Wait for things to complete */
     usleep(C_MILLISECONDS_50);
@@ -3561,7 +3561,7 @@ void SettingsWindowGui::update_overdrive_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_OVERDRIVE];
-  m_process->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_process->Ovrd_res_amount, m_process->Ovrd_up_q, m_process->Ovrd_down_q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_process->Ovrd_res_amount, m_process->Ovrd_up_q, m_process->Ovrd_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3589,7 +3589,7 @@ void SettingsWindowGui::update_derelict_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_DERELICT];
-  m_process->Rack_Effects[EFX_DERELICT] = new Derelict(m_process->Dere_res_amount, m_process->Dere_up_q, m_process->Dere_down_q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_DERELICT] = new Derelict(m_process->Dere_res_amount, m_process->Dere_up_q, m_process->Dere_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3618,7 +3618,7 @@ void SettingsWindowGui::update_distband_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_DISTBAND];
-  m_process->Rack_Effects[EFX_DISTBAND] = new DistBand(m_process->DBand_res_amount, m_process->DBand_up_q, m_process->DBand_down_q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_DISTBAND] = new DistBand(m_process->DBand_res_amount, m_process->DBand_up_q, m_process->DBand_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3647,7 +3647,7 @@ void SettingsWindowGui::update_stompbox_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_STOMPBOX];
-  m_process->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_process->Stomp_res_amount, m_process->Stomp_up_q, m_process->Stomp_down_q, m_process->fSample_rate, m_process->period);
+  m_process->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_process->Stomp_res_amount, m_process->Stomp_up_q, m_process->Stomp_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);

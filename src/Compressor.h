@@ -54,7 +54,7 @@ public:
     virtual ~Compressor ();
 
     void out (float *efxoutl, float *efxoutr);
-    void volume_adjust(int NumEffect, float volume, int period,
+    void volume_adjust(int NumEffect, float volume, uint32_t period,
         float *efxoutl, float *efxoutr, float *smpl, float *smpr);
 
     virtual void setpreset (int npreset);

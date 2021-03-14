@@ -1041,7 +1041,7 @@ public:
 
     uint32_t JACK_SAMPLE_RATE;
     uint32_t JACK_PERIOD;
-    uint32_t period;
+    uint32_t period_master;
     float fPeriod;
     uint32_t sample_rate;
     float fSample_rate;

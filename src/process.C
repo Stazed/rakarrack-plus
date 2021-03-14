@@ -150,7 +150,7 @@ RKR::RKR(int gui) :
     OnOffC(),
     JACK_SAMPLE_RATE(),
     JACK_PERIOD(),
-    period(),
+    period_master(),
     fPeriod(),
     sample_rate(),
     fSample_rate(),
@@ -580,67 +580,67 @@ RKR::instantiate_effects()
 {
     DC_Offsetl = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
     DC_Offsetr = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf);
-    M_Metronome = new metronome(fSample_rate, period);
-    efx_FLimiter = new Limiter(fSample_rate, period);
+    M_Metronome = new metronome(fSample_rate, period_master);
+    efx_FLimiter = new Limiter(fSample_rate, period_master);
 
-    Rack_Effects[EFX_CHORUS] = new Chorus(fSample_rate, period);
-    Rack_Effects[EFX_FLANGER] = new Flanger(fSample_rate, period);
-    Rack_Effects[EFX_REVERB] = new Reverb(fSample_rate, period);
-    Rack_Effects[EFX_ECHO] = new Echo(fSample_rate, period);
-    Rack_Effects[EFX_PHASER] = new Phaser(fSample_rate, period);
-    Rack_Effects[EFX_ANALOG_PHASER] = new Analog_Phaser(fSample_rate, period);
-    Rack_Effects[EFX_DISTORTION] = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period);
-    Rack_Effects[EFX_OVERDRIVE] = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period);
-    Rack_Effects[EFX_PARAMETRIC] = new ParametricEQ(fSample_rate, period);
-    Rack_Effects[EFX_EQ] = new EQ( fSample_rate, period);
-    Rack_Effects[EFX_COMPRESSOR] = new Compressor(fSample_rate, period);
-    Rack_Effects[EFX_WAHWAH] = new WahWah(fSample_rate, period);
-    Rack_Effects[EFX_ALIENWAH] = new Alienwah(fSample_rate, period);
-    Rack_Effects[EFX_CABINET] = new Cabinet(fSample_rate, period);
-    Rack_Effects[EFX_PAN] = new Pan(fSample_rate, period);
-    Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period);
-    Rack_Effects[EFX_MUSICAL_DELAY] = new MusicDelay(fSample_rate, period);
-    Rack_Effects[EFX_NOISEGATE] = new Gate(fSample_rate, period);
-    Rack_Effects[EFX_DERELICT] = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period);
-    Rack_Effects[EFX_VALVE] = new Valve(fSample_rate, period);
-    Rack_Effects[EFX_DUAL_FLANGE] = new Dflange(fSample_rate, period);
-    Rack_Effects[EFX_RING] = new Ring(fSample_rate, period);
-    Rack_Effects[EFX_EXCITER] = new Exciter(fSample_rate, period);
-    Rack_Effects[EFX_DISTBAND] = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period);
-    Rack_Effects[EFX_ARPIE] = new Arpie(fSample_rate, period);
-    Rack_Effects[EFX_EXPANDER] = new Expander(fSample_rate, period);
-    Rack_Effects[EFX_SHUFFLE] = new Shuffle(fSample_rate, period);
-    Rack_Effects[EFX_SYNTHFILTER] = new Synthfilter(fSample_rate, period);
-    Rack_Effects[EFX_VARYBAND] = new VaryBand(fSample_rate, period);
-    Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period);
-    Rack_Effects[EFX_LOOPER] = new Looper(looper_size, fSample_rate, period);
-    Rack_Effects[EFX_MUTROMOJO] = new MuTroMojo(fSample_rate, period);
-    Rack_Effects[EFX_ECHOVERSE] = new Echoverse(fSample_rate, period);
-    Rack_Effects[EFX_COILCRAFTER] = new CoilCrafter(fSample_rate, period);
-    Rack_Effects[EFX_SHELFBOOST] = new ShelfBoost(fSample_rate, period);
-    Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period);
-    Rack_Effects[EFX_SUSTAINER] = new Sustainer(fSample_rate, period);
-    Rack_Effects[EFX_SEQUENCE] = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period);
-    Rack_Effects[EFX_SHIFTER] = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period);
-    Rack_Effects[EFX_STOMPBOX] = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period);
-    Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period);
-    Rack_Effects[EFX_ECHOTRON] = new Echotron(fSample_rate, period);
-    Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period);
-    Rack_Effects[EFX_COMPBAND] = new CompBand(fSample_rate, period);
-    Rack_Effects[EFX_OPTICALTREM] = new Opticaltrem(fSample_rate, period);
-    Rack_Effects[EFX_VIBE] = new Vibe(fSample_rate, period);
-    Rack_Effects[EFX_INFINITY] = new Infinity(fSample_rate, period);
+    Rack_Effects[EFX_CHORUS] = new Chorus(fSample_rate, period_master);
+    Rack_Effects[EFX_FLANGER] = new Flanger(fSample_rate, period_master);
+    Rack_Effects[EFX_REVERB] = new Reverb(fSample_rate, period_master);
+    Rack_Effects[EFX_ECHO] = new Echo(fSample_rate, period_master);
+    Rack_Effects[EFX_PHASER] = new Phaser(fSample_rate, period_master);
+    Rack_Effects[EFX_ANALOG_PHASER] = new Analog_Phaser(fSample_rate, period_master);
+    Rack_Effects[EFX_DISTORTION] = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_OVERDRIVE] = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_PARAMETRIC] = new ParametricEQ(fSample_rate, period_master);
+    Rack_Effects[EFX_EQ] = new EQ( fSample_rate, period_master);
+    Rack_Effects[EFX_COMPRESSOR] = new Compressor(fSample_rate, period_master);
+    Rack_Effects[EFX_WAHWAH] = new WahWah(fSample_rate, period_master);
+    Rack_Effects[EFX_ALIENWAH] = new Alienwah(fSample_rate, period_master);
+    Rack_Effects[EFX_CABINET] = new Cabinet(fSample_rate, period_master);
+    Rack_Effects[EFX_PAN] = new Pan(fSample_rate, period_master);
+    Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) HarQual, Har_Down, Har_U_Q, Har_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_MUSICAL_DELAY] = new MusicDelay(fSample_rate, period_master);
+    Rack_Effects[EFX_NOISEGATE] = new Gate(fSample_rate, period_master);
+    Rack_Effects[EFX_DERELICT] = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_VALVE] = new Valve(fSample_rate, period_master);
+    Rack_Effects[EFX_DUAL_FLANGE] = new Dflange(fSample_rate, period_master);
+    Rack_Effects[EFX_RING] = new Ring(fSample_rate, period_master);
+    Rack_Effects[EFX_EXCITER] = new Exciter(fSample_rate, period_master);
+    Rack_Effects[EFX_DISTBAND] = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_ARPIE] = new Arpie(fSample_rate, period_master);
+    Rack_Effects[EFX_EXPANDER] = new Expander(fSample_rate, period_master);
+    Rack_Effects[EFX_SHUFFLE] = new Shuffle(fSample_rate, period_master);
+    Rack_Effects[EFX_SYNTHFILTER] = new Synthfilter(fSample_rate, period_master);
+    Rack_Effects[EFX_VARYBAND] = new VaryBand(fSample_rate, period_master);
+    Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_LOOPER] = new Looper(looper_size, fSample_rate, period_master);
+    Rack_Effects[EFX_MUTROMOJO] = new MuTroMojo(fSample_rate, period_master);
+    Rack_Effects[EFX_ECHOVERSE] = new Echoverse(fSample_rate, period_master);
+    Rack_Effects[EFX_COILCRAFTER] = new CoilCrafter(fSample_rate, period_master);
+    Rack_Effects[EFX_SHELFBOOST] = new ShelfBoost(fSample_rate, period_master);
+    Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_SUSTAINER] = new Sustainer(fSample_rate, period_master);
+    Rack_Effects[EFX_SEQUENCE] = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_SHIFTER] = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_STOMPBOX] = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_ECHOTRON] = new Echotron(fSample_rate, period_master);
+    Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) SteQual, Ste_Down, Ste_U_Q, Ste_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_COMPBAND] = new CompBand(fSample_rate, period_master);
+    Rack_Effects[EFX_OPTICALTREM] = new Opticaltrem(fSample_rate, period_master);
+    Rack_Effects[EFX_VIBE] = new Vibe(fSample_rate, period_master);
+    Rack_Effects[EFX_INFINITY] = new Infinity(fSample_rate, period_master);
 
     U_Resample = new Resample(UpQual);
     D_Resample = new Resample(DownQual);
     A_Resample = new Resample(3);
 
-    beat = new beattracker(fSample_rate, period);
+    beat = new beattracker(fSample_rate, period_master);
     efx_Tuner = new Tuner(fSample_rate);
-    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate, period);
-    HarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
-    StHarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
-    RingRecNote = new Recognize(rtrig, aFreq, fSample_rate, period);
+    efx_MIDIConverter = new MIDIConverter(jackcliname, fSample_rate, period_master);
+    HarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period_master);
+    StHarmRecNote = new Recognize(rtrig, aFreq, fSample_rate, period_master);
+    RingRecNote = new Recognize(rtrig, aFreq, fSample_rate, period_master);
     RC_Harm = new RecChord();
     RC_Stereo_Harm = new RecChord();
     
@@ -661,36 +661,36 @@ RKR::instantiate_effects()
 void
 RKR::initialize_arrays()
 {
-    efxoutl = (float *) malloc(sizeof (float) * period);
-    efxoutr = (float *) malloc(sizeof (float) * period);
+    efxoutl = (float *) malloc(sizeof (float) * period_master);
+    efxoutr = (float *) malloc(sizeof (float) * period_master);
 
-    smpl = (float *) malloc(sizeof (float) * period);
-    smpr = (float *) malloc(sizeof (float) * period);
+    smpl = (float *) malloc(sizeof (float) * period_master);
+    smpr = (float *) malloc(sizeof (float) * period_master);
 
-    anall = (float *) malloc(sizeof (float) * period);
-    analr = (float *) malloc(sizeof (float) * period);
+    anall = (float *) malloc(sizeof (float) * period_master);
+    analr = (float *) malloc(sizeof (float) * period_master);
 
-    auxdata = (float *) malloc(sizeof (float) * period);
-    auxresampled = (float *) malloc(sizeof (float) * period);
+    auxdata = (float *) malloc(sizeof (float) * period_master);
+    auxresampled = (float *) malloc(sizeof (float) * period_master);
 
-    m_ticks = (float *) malloc(sizeof (float) * period);
+    m_ticks = (float *) malloc(sizeof (float) * period_master);
 
-    interpbuf = (float*) malloc(sizeof (float)* period);
+    interpbuf = (float*) malloc(sizeof (float)* period_master);
 
-    memset(efxoutl, 0, sizeof (float)*period);
-    memset(efxoutr, 0, sizeof (float)*period);
+    memset(efxoutl, 0, sizeof (float)*period_master);
+    memset(efxoutr, 0, sizeof (float)*period_master);
 
-    memset(smpl, 0, sizeof (float)*period);
-    memset(smpr, 0, sizeof (float)*period);
+    memset(smpl, 0, sizeof (float)*period_master);
+    memset(smpr, 0, sizeof (float)*period_master);
 
-    memset(anall, 0, sizeof (float)*period);
-    memset(analr, 0, sizeof (float)*period);
+    memset(anall, 0, sizeof (float)*period_master);
+    memset(analr, 0, sizeof (float)*period_master);
 
-    memset(auxdata, 0, sizeof (float)*period);
-    memset(auxresampled, 0, sizeof (float)*period);
+    memset(auxdata, 0, sizeof (float)*period_master);
+    memset(auxresampled, 0, sizeof (float)*period_master);
 
-    memset(m_ticks, 0, sizeof (float)*period);
-    memset(interpbuf, 0, sizeof (float)*period);
+    memset(m_ticks, 0, sizeof (float)*period_master);
+    memset(interpbuf, 0, sizeof (float)*period_master);
 
     Preset_Name = (char *) malloc(sizeof (char) * 64);
     memset(Preset_Name, 0, sizeof (char) * 64);
@@ -802,19 +802,19 @@ RKR::Adjust_Upsample()
     if (upsample)
     {
         sample_rate = JACK_SAMPLE_RATE * (UpAmo + 2);
-        period = JACK_PERIOD * (UpAmo + 2);
+        period_master = JACK_PERIOD * (UpAmo + 2);
         u_up = (double) UpAmo + 2.0;
         u_down = 1.0 / u_up;
     }
     else
     {
         sample_rate = JACK_SAMPLE_RATE;
-        period = JACK_PERIOD;
+        period_master = JACK_PERIOD;
     }
 
     fSample_rate = (float) sample_rate;
     cSample_rate = 1.0f / (float) sample_rate;
-    fPeriod = float(period);
+    fPeriod = float(period_master);
     t_periods = JACK_SAMPLE_RATE / 12 / JACK_PERIOD;
 
 }
@@ -822,7 +822,7 @@ RKR::Adjust_Upsample()
 void
 RKR::add_metro()
 {
-    for (unsigned i = 0; i < period; i++)
+    for (unsigned i = 0; i < period_master; i++)
     {
         efxoutl[i] += m_ticks[i] * M_Metro_Vol;
         efxoutr[i] += m_ticks[i] * M_Metro_Vol;
@@ -870,7 +870,7 @@ RKR::Control_Gain(float *origl, float *origr)
         U_Resample->out(origl, origr, efxoutl, efxoutr, JACK_PERIOD, u_up);
         if ((checkforaux()) || (ACI_Active))
         {
-            A_Resample->mono_out(auxdata, auxresampled, JACK_PERIOD, u_up, period);
+            A_Resample->mono_out(auxdata, auxresampled, JACK_PERIOD, u_up, period_master);
         }
     }
     else if ((checkforaux()) || (ACI_Active))
@@ -880,11 +880,11 @@ RKR::Control_Gain(float *origl, float *origr)
 
     if (DC_Offset)
     {
-        DC_Offsetl->filterout(efxoutl, period);
-        DC_Offsetr->filterout(efxoutr, period);
+        DC_Offsetl->filterout(efxoutl, period_master);
+        DC_Offsetr->filterout(efxoutr, period_master);
     }
 
-    for (unsigned i = 0; i < period; i++)
+    for (unsigned i = 0; i < period_master; i++)
     {
         efxoutl[i] *= Log_I_Gain;
         efxoutr[i] *= Log_I_Gain;
@@ -903,8 +903,8 @@ RKR::Control_Gain(float *origl, float *origr)
         }
     }
     
-    memcpy(smpl, efxoutl, sizeof (float)*period);
-    memcpy(smpr, efxoutr, sizeof (float)*period);
+    memcpy(smpl, efxoutl, sizeof (float)*period_master);
+    memcpy(smpr, efxoutr, sizeof (float)*period_master);
 
     float temp_sum = (float) CLAMP(rap2dB(il_sum), -48.0, 15.0);
     val_il_sum = .6f * old_il_sum + .4f * temp_sum;
@@ -919,7 +919,7 @@ RKR::Control_Gain(float *origl, float *origr)
     {
         temp_sum = 0.0;
         tmp = 0.0;
-        for (unsigned i = 0; i < period; i++)
+        for (unsigned i = 0; i < period_master; i++)
         {
             tmp = fabsf(auxresampled[i]);
             
@@ -947,7 +947,7 @@ RKR::Control_Volume(float *origl, float *origr)
     {
         if (db6booster)
         { // +6dB Final Limiter in settings/audio
-            for (unsigned i = 0; i < period; i++)
+            for (unsigned i = 0; i < period_master; i++)
             {
                 efxoutl[i] *= .5f;
                 efxoutr[i] *= .5f;
@@ -958,7 +958,7 @@ RKR::Control_Volume(float *origl, float *origr)
 
         if (db6booster)
         {
-            for (unsigned i = 0; i < period; i++)
+            for (unsigned i = 0; i < period_master; i++)
             {
                 efxoutl[i] *= 2.0f;
                 efxoutr[i] *= 2.0f;
@@ -966,12 +966,12 @@ RKR::Control_Volume(float *origl, float *origr)
         }
     }
 
-    memcpy(anall, efxoutl, sizeof (float)* period);
-    memcpy(analr, efxoutr, sizeof (float)* period);
+    memcpy(anall, efxoutl, sizeof (float)* period_master);
+    memcpy(analr, efxoutr, sizeof (float)* period_master);
 
     if (upsample)
     {
-        D_Resample->out(anall, analr, efxoutl, efxoutr, period, u_down);
+        D_Resample->out(anall, analr, efxoutl, efxoutr, period_master, u_down);
     }
 
     if (OnCounter < t_periods)
@@ -984,7 +984,7 @@ RKR::Control_Volume(float *origl, float *origr)
         Temp_M_Volume = Log_M_Volume;
     }
 
-    for (unsigned i = 0; i < period; i++)
+    for (unsigned i = 0; i < period_master; i++)
     { //control volume
 
         efxoutl[i] *= Temp_M_Volume*booster; // +10dB booster main window
@@ -1015,7 +1015,7 @@ RKR::Control_Volume(float *origl, float *origr)
     {
         if (db6booster)
         {
-            for (unsigned i = 0; i < period; i++)
+            for (unsigned i = 0; i < period_master; i++)
             {
                 efxoutl[i] *= .5f;
                 efxoutr[i] *= .5f;
@@ -1026,7 +1026,7 @@ RKR::Control_Volume(float *origl, float *origr)
 
         if (db6booster)
         {
-            for (unsigned i = 0; i < period; i++)
+            for (unsigned i = 0; i < period_master; i++)
             {
                 efxoutl[i] *= 2.0f;
                 efxoutr[i] *= 2.0f;
@@ -1034,7 +1034,7 @@ RKR::Control_Volume(float *origl, float *origr)
         }
     }
 
-    for (unsigned i = 0; i < period; i++)
+    for (unsigned i = 0; i < period_master; i++)
     {
         tmp = fabsf(efxoutl[i]);
         
@@ -1114,12 +1114,12 @@ RKR::process_effects(float *origl, float *origr, void *)
 
         if (Metro_Active)
         {
-            M_Metronome->metronomeout(m_ticks, period);
+            M_Metronome->metronomeout(m_ticks, period_master);
         }
 
         if ((Tap_Active) && (Tap_Selection == 4))
         {
-            beat->detect(efxoutl, efxoutr, period);
+            beat->detect(efxoutl, efxoutr, period_master);
             int bt_tempo = lrintf(beat->get_tempo());
             
             if ((bt_tempo > 19) && (bt_tempo < 360) && (bt_tempo != Tap_TempoSet))
@@ -1132,7 +1132,7 @@ RKR::process_effects(float *origl, float *origr, void *)
 
         if (Tuner_Active)
         {
-            efx_Tuner->schmittFloat(period, efxoutl, efxoutr, HarmRecNote->freqs, HarmRecNote->lfreqs);
+            efx_Tuner->schmittFloat(period_master, efxoutl, efxoutr, HarmRecNote->freqs, HarmRecNote->lfreqs);
         }
 
         if (MIDIConverter_Active)
@@ -1220,7 +1220,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             Rack_Effects[efx_order[i]]->out(efxoutl, efxoutr);
 
             Rack_Effects[efx_order[i]]->volume_adjust(efx_order[i], Rack_Effects[efx_order[i]]->outvolume,
-                    period, efxoutl, efxoutr, smpl, smpr);
+                    period_master, efxoutl, efxoutr, smpl, smpr);
         }
 
         if (Metro_Active)

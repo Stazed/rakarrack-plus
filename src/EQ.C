@@ -150,7 +150,7 @@ EQ::out(float * efxoutl, float * efxoutr)
 }
 
 void
-EQ::volume_adjust(int, float, int period,
+EQ::volume_adjust(int, float, uint32_t period,
                       float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     Vol2_Efx(period, efxoutl, efxoutr, smpl, smpr);

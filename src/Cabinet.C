@@ -38,7 +38,7 @@ Cabinet::initialize()
 }
 
 void
-Cabinet::volume_adjust(int, float, int period,
+Cabinet::volume_adjust(int, float, uint32_t period,
                       float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     Vol3_Efx(period, efxoutl, efxoutr, smpl, smpr);

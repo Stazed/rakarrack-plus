@@ -135,7 +135,7 @@ Sustainer::out(float * efxoutl, float * efxoutr)
 }
 
 void
-Sustainer::volume_adjust(int, float, int period,
+Sustainer::volume_adjust(int, float, uint32_t period,
                       float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     Vol2_Efx(period, efxoutl, efxoutr, smpl, smpr);

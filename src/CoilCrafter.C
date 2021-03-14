@@ -174,7 +174,7 @@ CoilCrafter::out(float * efxoutl, float * efxoutr)
 }
 
 void
-CoilCrafter::volume_adjust(int, float, int period,
+CoilCrafter::volume_adjust(int, float, uint32_t period,
                       float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     Vol2_Efx(period, efxoutl, efxoutr, smpl, smpr);
