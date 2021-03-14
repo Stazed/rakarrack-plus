@@ -706,9 +706,6 @@ public:
     int load_bank_from_vector(std::string filename);
     void Adjust_Upsample();
     void add_metro();
-    void Vol_Efx (int NumEffect, float volume);
-    void Vol2_Efx ();
-    void Vol3_Efx ();
     void calculavol (int i);
     int checkforaux();
     void Control_Gain (float *origl, float *origr);
