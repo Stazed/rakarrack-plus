@@ -3209,7 +3209,7 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
                       // We add the preset number here to avoid duplicate names which the fltk choice
                       // widget will eliminate into one. It does not allow duplicates and things
                       // will not align if eliminated.
-                      char buf[64];
+                      char buf[128];
                       sprintf(buf,"(%d) %s", i, m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name);
                       p->add(buf);
                       p->textfont (global_font_type);

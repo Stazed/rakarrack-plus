@@ -57,6 +57,13 @@ public:
     virtual void out (float *, float *) = 0;
     virtual void cleanup () = 0;
     virtual int get_number_efx_parameters () = 0;
+    
+    virtual void volume_adjust(int NumEffect, float volume, int period,
+        float *efxoutl, float *efxoutr, float *smpl, float *smpr);
+    
+    void Vol2_Efx(int period, float *efxoutl, float *efxoutr, float *smpl, float *smpr);
+    
+    void Vol3_Efx(int period, float *efxoutl, float *efxoutr, float *smpl, float *smpr);
 
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t)  = 0;

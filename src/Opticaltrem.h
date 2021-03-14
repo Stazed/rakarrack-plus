@@ -51,6 +51,8 @@ public:
     ~Opticaltrem ();
 
     void out (float * efxoutl, float * efxoutr);
+    void volume_adjust(int NumEffect, float volume, int period,
+        float *efxoutl, float *efxoutr, float *smpl, float *smpr);
     void setpanning(int value);
     void setpreset (int npreset);
     void changepar (int npar, int value);

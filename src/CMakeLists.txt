@@ -90,6 +90,7 @@ set (ProgSources
     Reverb.C
     Chorus.C
     Flanger.C
+    Effect.C
     EffectLFO.C
     Echo.C
     Phaser.C

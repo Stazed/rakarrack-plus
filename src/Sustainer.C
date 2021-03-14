@@ -134,6 +134,13 @@ Sustainer::out(float * efxoutl, float * efxoutr)
     //End compression
 }
 
+void
+Sustainer::volume_adjust(int, float, int period,
+                      float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+{
+    Vol2_Efx(period, efxoutl, efxoutr, smpl, smpr);
+}
+
 /*
  * Parameter control
  */

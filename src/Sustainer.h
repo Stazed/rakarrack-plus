@@ -46,6 +46,8 @@ public:
 #endif // LV2
     
     void out (float * efxoutl, float * efxoutr);
+    void volume_adjust(int NumEffect, float volume, int period,
+        float *efxoutl, float *efxoutr, float *smpl, float *smpr);
     void changepar (int npar, int value);
     int getpar (int npar);
     void setpreset (int npreset);

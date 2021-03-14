@@ -2085,7 +2085,7 @@ RKR::add_table_item(std::string filename)
 int
 RKR::set_midi_table(int item)
 {
-    if(item >= Midi_Table_Vector.size())
+    if(item >= (int)Midi_Table_Vector.size())
         return 0;
     
     for (int i = 0; i < 128; i++)

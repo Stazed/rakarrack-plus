@@ -1267,6 +1267,13 @@ RKR::process_effects(float *origl, float *origr, void *)
             if(!EFX_Active[efx_order[i]])
                 continue;
             
+#if 1
+            Rack_Effects[efx_order[i]]->out(efxoutl, efxoutr);
+
+            Rack_Effects[efx_order[i]]->volume_adjust(efx_order[i], Rack_Effects[efx_order[i]]->outvolume,
+                    period, efxoutl, efxoutr, smpl, smpr);
+#else
+            
             switch (efx_order[i])
             {
             case EFX_EQ:
@@ -1503,6 +1510,7 @@ RKR::process_effects(float *origl, float *origr, void *)
                     Rack_Effects[EFX_INFINITY]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_INFINITY, Rack_Effects[EFX_INFINITY]->outvolume);
             }
+#endif // 0
         }
 
         if (Metro_Active)

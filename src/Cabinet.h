@@ -38,6 +38,9 @@ class Cabinet :public EQ
 {
 public:
     Cabinet (double sample_frequency, uint32_t intermediate_bufsize);
+    
+    void volume_adjust(int NumEffect, float volume, int period,
+        float *efxoutl, float *efxoutr, float *smpl, float *smpr);
     void setpreset(int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);

@@ -38,6 +38,13 @@ Cabinet::initialize()
 }
 
 void
+Cabinet::volume_adjust(int, float, int period,
+                      float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+{
+    Vol3_Efx(period, efxoutl, efxoutr, smpl, smpr);
+}
+
+void
 Cabinet::setpreset(int npreset)
 {
     const int PRESET_SIZE = 81;

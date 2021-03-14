@@ -3914,7 +3914,7 @@ void RKRGUI::Save_Midi_Program_Change_Table()
         // If we have a previous file, then use it
         if(m_process->custom_midi_table_file >= 0)
         {
-             if(m_process->custom_midi_table_file < m_process->Midi_Table_Vector.size ())
+             if(m_process->custom_midi_table_file < (int)m_process->Midi_Table_Vector.size ())
              {
                  chooser_start_location = m_process->Midi_Table_Vector[m_process->custom_midi_table_file].Table_File_Name;
              }
