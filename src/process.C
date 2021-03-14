@@ -1263,383 +1263,245 @@ RKR::process_effects(float *origl, float *origr, void *)
 
         for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
         {
+            // Don't process inactive effects
+            if(!EFX_Active[efx_order[i]])
+                continue;
+            
             switch (efx_order[i])
             {
             case EFX_EQ:
-                if (EFX_Active[EFX_EQ])
-                {
                     Rack_Effects[EFX_EQ]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_COMPRESSOR:
-                if (EFX_Active[EFX_COMPRESSOR])
-                {
                     Rack_Effects[EFX_COMPRESSOR]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_DISTORTION:
-                if (EFX_Active[EFX_DISTORTION])
-                {
                     Rack_Effects[EFX_DISTORTION]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DISTORTION, Rack_Effects[EFX_DISTORTION]->outvolume);
-                }
                 break;
 
             case EFX_OVERDRIVE:
-                if (EFX_Active[EFX_OVERDRIVE])
-                {
                     Rack_Effects[EFX_OVERDRIVE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_OVERDRIVE, Rack_Effects[EFX_OVERDRIVE]->outvolume);
-                }
                 break;
 
             case EFX_ECHO:
-                if (EFX_Active[EFX_ECHO])
-                {
                     Rack_Effects[EFX_ECHO]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHO, Rack_Effects[EFX_ECHO]->outvolume);
-                }
                 break;
 
             case EFX_CHORUS:
-                if (EFX_Active[EFX_CHORUS])
-                {
                     Rack_Effects[EFX_CHORUS]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_CHORUS, Rack_Effects[EFX_CHORUS]->outvolume);
-                }
                 break;
 
             case EFX_PHASER:
-                if (EFX_Active[EFX_PHASER])
-                {
                     Rack_Effects[EFX_PHASER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_PHASER, Rack_Effects[EFX_PHASER]->outvolume);
-                }
                 break;
 
             case EFX_FLANGER:
-                if (EFX_Active[EFX_FLANGER])
-                {
                     Rack_Effects[EFX_FLANGER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_FLANGER, Rack_Effects[EFX_FLANGER]->outvolume);
-                }
                 break;
 
             case EFX_REVERB:
-                if (EFX_Active[EFX_REVERB])
-                {
                     Rack_Effects[EFX_REVERB]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_REVERB, Rack_Effects[EFX_REVERB]->outvolume);
-                }
                 break;
 
             case EFX_PARAMETRIC:
-                if (EFX_Active[EFX_PARAMETRIC])
-                {
                     Rack_Effects[EFX_PARAMETRIC]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_WAHWAH:
-                if (EFX_Active[EFX_WAHWAH])
-                {
                     Rack_Effects[EFX_WAHWAH]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_WAHWAH, Rack_Effects[EFX_WAHWAH]->outvolume);
-                }
                 break;
 
             case EFX_ALIENWAH:
-                if (EFX_Active[EFX_ALIENWAH])
-                {
                     Rack_Effects[EFX_ALIENWAH]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ALIENWAH, Rack_Effects[EFX_ALIENWAH]->outvolume);
-                }
                 break;
 
             case EFX_CABINET:
-                if (EFX_Active[EFX_CABINET])
-                {
                     Rack_Effects[EFX_CABINET]->out(efxoutl, efxoutr);
                     Vol3_Efx();
-                }
-
                 break;
 
             case EFX_PAN:
-                if (EFX_Active[EFX_PAN])
-                {
                     Rack_Effects[EFX_PAN]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_PAN, Rack_Effects[EFX_PAN]->outvolume);
-                }
                 break;
 
             case EFX_HARMONIZER:
-                if (EFX_Active[EFX_HARMONIZER])
-                {
                     Rack_Effects[EFX_HARMONIZER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_HARMONIZER, Rack_Effects[EFX_HARMONIZER]->outvolume);
-                }
                 break;
 
             case EFX_MUSICAL_DELAY:
-                if (EFX_Active[EFX_MUSICAL_DELAY])
-                {
                     Rack_Effects[EFX_MUSICAL_DELAY]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_MUSICAL_DELAY, Rack_Effects[EFX_MUSICAL_DELAY]->outvolume);
-                }
                 break;
 
             case EFX_NOISEGATE:
-                if (EFX_Active[EFX_NOISEGATE])
-                {
                     Rack_Effects[EFX_NOISEGATE]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_DERELICT:
-                if (EFX_Active[EFX_DERELICT])
-                {
                     Rack_Effects[EFX_DERELICT]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DERELICT, Rack_Effects[EFX_DERELICT]->outvolume);
-                }
                 break;
 
             case EFX_ANALOG_PHASER:
-                if (EFX_Active[EFX_ANALOG_PHASER])
-                {
                     Rack_Effects[EFX_ANALOG_PHASER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ANALOG_PHASER, Rack_Effects[EFX_ANALOG_PHASER]->outvolume);
-                }
                 break;
 
             case EFX_VALVE:
-                if (EFX_Active[EFX_VALVE])
-                {
                     Rack_Effects[EFX_VALVE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VALVE, Rack_Effects[EFX_VALVE]->outvolume);
-                }
                 break;
 
             case EFX_DUAL_FLANGE:
-                if (EFX_Active[EFX_DUAL_FLANGE])
-                {
                     Rack_Effects[EFX_DUAL_FLANGE]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_RING:
-                if (EFX_Active[EFX_RING])
-                {
                     Rack_Effects[EFX_RING]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_RING, Rack_Effects[EFX_RING]->outvolume);
-                }
                 break;
 
             case EFX_EXCITER:
-                if (EFX_Active[EFX_EXCITER])
-                {
                     Rack_Effects[EFX_EXCITER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_DISTBAND:
-                if (EFX_Active[EFX_DISTBAND])
-                {
                     Rack_Effects[EFX_DISTBAND]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_DISTBAND, Rack_Effects[EFX_DISTBAND]->outvolume);
-                }
                 break;
 
             case EFX_ARPIE:
-                if (EFX_Active[EFX_ARPIE])
-                {
                     Rack_Effects[EFX_ARPIE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ARPIE, Rack_Effects[EFX_ARPIE]->outvolume);
-                }
                 break;
 
             case EFX_EXPANDER:
-                if (EFX_Active[EFX_EXPANDER])
-                {
                     Rack_Effects[EFX_EXPANDER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_SHUFFLE:
-                if (EFX_Active[EFX_SHUFFLE])
-                {
                     Rack_Effects[EFX_SHUFFLE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SHUFFLE, Rack_Effects[EFX_SHUFFLE]->outvolume);
-                }
                 break;
 
             case EFX_SYNTHFILTER:
-                if (EFX_Active[EFX_SYNTHFILTER])
-                {
                     Rack_Effects[EFX_SYNTHFILTER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SYNTHFILTER, Rack_Effects[EFX_SYNTHFILTER]->outvolume);
-                }
                 break;
 
             case EFX_VARYBAND:
-                if (EFX_Active[EFX_VARYBAND])
-                {
                     Rack_Effects[EFX_VARYBAND]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VARYBAND, Rack_Effects[EFX_VARYBAND]->outvolume);
-                }
                 break;
 
             case EFX_CONVOLOTRON:
-                if (EFX_Active[EFX_CONVOLOTRON])
-                {
                     Rack_Effects[EFX_CONVOLOTRON]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_CONVOLOTRON, Rack_Effects[EFX_CONVOLOTRON]->outvolume);
-                }
                 break;
 
             case EFX_LOOPER:
-                if (EFX_Active[EFX_LOOPER])
-                {
                     Rack_Effects[EFX_LOOPER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_LOOPER, Rack_Effects[EFX_LOOPER]->outvolume);
-                }
                 break;
 
             case EFX_MUTROMOJO:
-                if (EFX_Active[EFX_MUTROMOJO])
-                {
                     Rack_Effects[EFX_MUTROMOJO]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_MUTROMOJO, Rack_Effects[EFX_MUTROMOJO]->outvolume);
-                }
                 break;
 
             case EFX_ECHOVERSE:
-                if (EFX_Active[EFX_ECHOVERSE])
-                {
                     Rack_Effects[EFX_ECHOVERSE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHOVERSE, Rack_Effects[EFX_ECHOVERSE]->outvolume);
-                }
                 break;
 
             case EFX_COILCRAFTER:
-                if (EFX_Active[EFX_COILCRAFTER])
-                {
                     Rack_Effects[EFX_COILCRAFTER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_SHELFBOOST:
-                if (EFX_Active[EFX_SHELFBOOST])
-                {
                     Rack_Effects[EFX_SHELFBOOST]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_VOCODER:
-                if (EFX_Active[EFX_VOCODER])
-                {
                     Rack_Effects[EFX_VOCODER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VOCODER, Rack_Effects[EFX_VOCODER]->outvolume);
-                }
                 break;
 
             case EFX_SUSTAINER:
-                if (EFX_Active[EFX_SUSTAINER])
-                {
                     Rack_Effects[EFX_SUSTAINER]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_SEQUENCE:
-                if (EFX_Active[EFX_SEQUENCE])
-                {
                     Rack_Effects[EFX_SEQUENCE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SEQUENCE, Rack_Effects[EFX_SEQUENCE]->outvolume);
-                }
                 break;
 
             case EFX_SHIFTER:
-                if (EFX_Active[EFX_SHIFTER])
-                {
                     Rack_Effects[EFX_SHIFTER]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_SHIFTER, Rack_Effects[EFX_SHIFTER]->outvolume);
-                }
                 break;
 
             case EFX_STOMPBOX:
-                if (EFX_Active[EFX_STOMPBOX])
-                {
                     Rack_Effects[EFX_STOMPBOX]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_REVERBTRON:
-                if (EFX_Active[EFX_REVERBTRON])
-                {
                     Rack_Effects[EFX_REVERBTRON]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_REVERBTRON, Rack_Effects[EFX_REVERBTRON]->outvolume);
-                }
                 break;
 
             case EFX_ECHOTRON:
-                if (EFX_Active[EFX_ECHOTRON])
-                {
                     Rack_Effects[EFX_ECHOTRON]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_ECHOTRON, Rack_Effects[EFX_ECHOTRON]->outvolume);
-                }
                 break;
 
             case EFX_STEREOHARM:
-                if (EFX_Active[EFX_STEREOHARM])
-                {
                     Rack_Effects[EFX_STEREOHARM]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_STEREOHARM, Rack_Effects[EFX_STEREOHARM]->outvolume);
-                }
                 break;
 
             case EFX_COMPBAND:
-                if (EFX_Active[EFX_COMPBAND])
-                {
                     Rack_Effects[EFX_COMPBAND]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_COMPBAND, Rack_Effects[EFX_COMPBAND]->outvolume);
-                }
                 break;
 
             case EFX_OPTICALTREM:
-                if (EFX_Active[EFX_OPTICALTREM])
-                {
                     Rack_Effects[EFX_OPTICALTREM]->out(efxoutl, efxoutr);
                     Vol2_Efx();
-                }
                 break;
 
             case EFX_VIBE:
-                if (EFX_Active[EFX_VIBE])
-                {
                     Rack_Effects[EFX_VIBE]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_VIBE, Rack_Effects[EFX_VIBE]->outvolume);
-                }
                 break;
 
             case EFX_INFINITY:
-                if (EFX_Active[EFX_INFINITY])
-                {
                     Rack_Effects[EFX_INFINITY]->out(efxoutl, efxoutr);
                     Vol_Efx(EFX_INFINITY, Rack_Effects[EFX_INFINITY]->outvolume);
-                }
             }
         }
 
