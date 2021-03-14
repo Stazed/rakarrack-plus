@@ -121,7 +121,7 @@ enum MIDI_Control_Default_Index
     MC_Dist_DryWet,             // 30
     MC_Harm_DryWet,
 
-    MC_Unused_32,               // FIXME Bank select fine - custom midi table
+    MC_Program_Table,           // custom midi table
 
     MC_Unused_33,
     MC_Unused_34,
@@ -604,7 +604,7 @@ enum GUI_Refresh_Index
  * This is the total of listed items in the MIDI learn window.
  * If any new parameters are added, this must be adjusted.
  */
-const int C_MC_PARAMETER_SIZE = 445;
+const int C_MC_PARAMETER_SIZE = 446;
 
 /**
  * Magic number 26 is Bank Select (CC 0) and the Unused cases from the default MIDI control
@@ -613,7 +613,7 @@ const int C_MC_PARAMETER_SIZE = 445;
  * If any of these unused parameters are used and added to
  * C_MC_PARAMETER_SIZE, this value must be adjusted.
  */
-const int C_MC_UNUSED_PARAMETERS = 26;
+const int C_MC_UNUSED_PARAMETERS = 25;
 
 /**
  * The total MIDI control range used in switch() case function.
