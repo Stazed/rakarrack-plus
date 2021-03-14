@@ -1039,11 +1039,11 @@ public:
     int Mnumeff[32];
     int OnOffC;
 
-    int JACK_SAMPLE_RATE;
-    int JACK_PERIOD;
-    int period;
+    uint32_t JACK_SAMPLE_RATE;
+    uint32_t JACK_PERIOD;
+    uint32_t period;
     float fPeriod;
-    int sample_rate;
+    uint32_t sample_rate;
     float fSample_rate;
     float cSample_rate;
 

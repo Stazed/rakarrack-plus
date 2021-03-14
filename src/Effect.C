@@ -46,7 +46,7 @@
  *       Master buffer for temporary copying and making adjustments right.
  */
 void
-Effect::volume_adjust(int NumEffect, float volume, int period,
+Effect::volume_adjust(int NumEffect, float volume, uint32_t period,
                       float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     float v1, v2; v1 = v2 = 1.0f;
@@ -67,7 +67,7 @@ Effect::volume_adjust(int NumEffect, float volume, int period,
         v2 *= v2;
     }
 
-    for (int i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     {
         efxoutl[i] = smpl[i] * v2 + efxoutl[i] * v1;
         efxoutr[i] = smpr[i] * v2 + efxoutr[i] * v1;
@@ -95,7 +95,7 @@ Effect::volume_adjust(int NumEffect, float volume, int period,
  *       Master buffer for temporary copying and making adjustments right.
  */
 void
-Effect::Vol2_Efx(int period, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+Effect::Vol2_Efx(uint32_t period, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     memcpy(smpl, efxoutl, period * sizeof (float));
     memcpy(smpr, efxoutr, period * sizeof (float));
@@ -120,11 +120,11 @@ Effect::Vol2_Efx(int period, float *efxoutl, float *efxoutr, float *smpl, float 
  *       Master buffer for temporary copying and making adjustments right.
  */
 void
-Effect::Vol3_Efx(int period, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+Effect::Vol3_Efx(uint32_t period, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     float att = 2.0f;
 
-    for (int i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     {
         efxoutl[i] *= att;
         efxoutr[i] *= att;

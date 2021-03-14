@@ -822,7 +822,7 @@ RKR::Adjust_Upsample()
 void
 RKR::add_metro()
 {
-    for (int i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     {
         efxoutl[i] += m_ticks[i] * M_Metro_Vol;
         efxoutr[i] += m_ticks[i] * M_Metro_Vol;
@@ -884,7 +884,7 @@ RKR::Control_Gain(float *origl, float *origr)
         DC_Offsetr->filterout(efxoutr, period);
     }
 
-    for (int i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     {
         efxoutl[i] *= Log_I_Gain;
         efxoutr[i] *= Log_I_Gain;
@@ -919,7 +919,7 @@ RKR::Control_Gain(float *origl, float *origr)
     {
         temp_sum = 0.0;
         tmp = 0.0;
-        for (int i = 0; i < period; i++)
+        for (unsigned i = 0; i < period; i++)
         {
             tmp = fabsf(auxresampled[i]);
             
@@ -947,7 +947,7 @@ RKR::Control_Volume(float *origl, float *origr)
     {
         if (db6booster)
         { // +6dB Final Limiter in settings/audio
-            for (int i = 0; i < period; i++)
+            for (unsigned i = 0; i < period; i++)
             {
                 efxoutl[i] *= .5f;
                 efxoutr[i] *= .5f;
@@ -958,7 +958,7 @@ RKR::Control_Volume(float *origl, float *origr)
 
         if (db6booster)
         {
-            for (int i = 0; i < period; i++)
+            for (unsigned i = 0; i < period; i++)
             {
                 efxoutl[i] *= 2.0f;
                 efxoutr[i] *= 2.0f;
@@ -984,7 +984,7 @@ RKR::Control_Volume(float *origl, float *origr)
         Temp_M_Volume = Log_M_Volume;
     }
 
-    for (int i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     { //control volume
 
         efxoutl[i] *= Temp_M_Volume*booster; // +10dB booster main window
@@ -1015,7 +1015,7 @@ RKR::Control_Volume(float *origl, float *origr)
     {
         if (db6booster)
         {
-            for (int i = 0; i < period; i++)
+            for (unsigned i = 0; i < period; i++)
             {
                 efxoutl[i] *= .5f;
                 efxoutr[i] *= .5f;
@@ -1026,7 +1026,7 @@ RKR::Control_Volume(float *origl, float *origr)
 
         if (db6booster)
         {
-            for (int i = 0; i < period; i++)
+            for (unsigned i = 0; i < period; i++)
             {
                 efxoutl[i] *= 2.0f;
                 efxoutr[i] *= 2.0f;
@@ -1034,7 +1034,7 @@ RKR::Control_Volume(float *origl, float *origr)
         }
     }
 
-    for (int i = 0; i < period; i++)
+    for (unsigned i = 0; i < period; i++)
     {
         tmp = fabsf(efxoutl[i]);
         
@@ -1210,6 +1210,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             }
         }
 
+        // Apply the main rack effects in the efx_index order.
         for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
         {
             // Don't process inactive effects
