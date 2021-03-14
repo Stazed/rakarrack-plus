@@ -443,10 +443,9 @@ StompBox::out(float * efxoutl, float * efxoutr)
 }
 
 void
-StompBox::volume_adjust(int, float, uint32_t period,
-                      float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+StompBox::volume_adjust(int, float, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
-    Vol2_Efx(period, efxoutl, efxoutr, smpl, smpr);
+    Vol2_Efx(efxoutl, efxoutr, smpl, smpr);
 }
 
 /*

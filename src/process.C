@@ -1220,7 +1220,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             Rack_Effects[efx_order[i]]->out(efxoutl, efxoutr);
 
             Rack_Effects[efx_order[i]]->volume_adjust(efx_order[i], Rack_Effects[efx_order[i]]->outvolume,
-                    period_master, efxoutl, efxoutr, smpl, smpr);
+                    efxoutl, efxoutr, smpl, smpr);
         }
 
         if (Metro_Active)

@@ -29,9 +29,6 @@
  * 
  * @param volume
  *      The effect current volume amount.
- *  
- * @param period
- *      The JACK_PERIOD or adjusted JACK_PERIOD if master upsampling. FIXME make Effect class variable
  * 
  * @param efxoutl
  *      Master out buffer left.
@@ -46,7 +43,7 @@
  *       Master buffer for temporary copying and making adjustments right.
  */
 void
-Effect::volume_adjust(int NumEffect, float volume, uint32_t period,
+Effect::volume_adjust(int NumEffect, float volume,
                       float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     float v1, v2; v1 = v2 = 1.0f;
@@ -67,21 +64,18 @@ Effect::volume_adjust(int NumEffect, float volume, uint32_t period,
         v2 *= v2;
     }
 
-    for (unsigned i = 0; i < period; i++)
+    for (unsigned i = 0; i < period_master; i++)
     {
         efxoutl[i] = smpl[i] * v2 + efxoutl[i] * v1;
         efxoutr[i] = smpr[i] * v2 + efxoutr[i] * v1;
     }
 
-    Vol2_Efx(period, efxoutl, efxoutr, smpl, smpr);
+    Vol2_Efx(efxoutl, efxoutr, smpl, smpr);
 }
 
 /**
  * Volume/Gain adjustment for effects that do not have Dry/Wet or mix externally.
  * 
- * @param period
- *      The JACK_PERIOD or adjusted JACK_PERIOD if master upsampling. FIXME make Effect class variable
- * 
  * @param efxoutl
  *      Master out buffer left.
  * 
@@ -95,18 +89,15 @@ Effect::volume_adjust(int NumEffect, float volume, uint32_t period,
  *       Master buffer for temporary copying and making adjustments right.
  */
 void
-Effect::Vol2_Efx(uint32_t period, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+Effect::Vol2_Efx(float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
-    memcpy(smpl, efxoutl, period * sizeof (float));
-    memcpy(smpr, efxoutr, period * sizeof (float));
+    memcpy(smpl, efxoutl, period_master * sizeof (float));
+    memcpy(smpr, efxoutr, period_master * sizeof (float));
 }
 
 /**
  * Gain adjustment used exclusively by EFX_CABINET.
  * 
- * @param period
- *      The JACK_PERIOD or adjusted JACK_PERIOD if master upsampling. FIXME make Effect class variable
- * 
  * @param efxoutl
  *      Master out buffer left.
  * 
@@ -120,15 +111,15 @@ Effect::Vol2_Efx(uint32_t period, float *efxoutl, float *efxoutr, float *smpl, f
  *       Master buffer for temporary copying and making adjustments right.
  */
 void
-Effect::Vol3_Efx(uint32_t period, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+Effect::Vol3_Efx(float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     float att = 2.0f;
 
-    for (unsigned i = 0; i < period; i++)
+    for (unsigned i = 0; i < period_master; i++)
     {
         efxoutl[i] *= att;
         efxoutr[i] *= att;
     }
 
-    Vol2_Efx(period, efxoutl, efxoutr, smpl, smpr);
+    Vol2_Efx(efxoutl, efxoutr, smpl, smpr);
 }
