@@ -71,7 +71,7 @@ public:
     virtual ~EQ ();
     void out (float * efxoutl, float * efxoutr);
     
-    virtual void volume_adjust(int NumEffect, float volume,
+    virtual void Dry_Wet_Mix(int NumEffect, float volume,
         float *efxoutl, float *efxoutr, float *smpl, float *smpr);
     
     virtual void setpreset (int npreset);

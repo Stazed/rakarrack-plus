@@ -443,7 +443,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
 }
 
 void
-Dflange::volume_adjust(int, float, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+Dflange::Dry_Wet_Mix(int, float, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     Vol2_Efx(efxoutl, efxoutr, smpl, smpr);
 }

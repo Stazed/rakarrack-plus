@@ -55,7 +55,7 @@ public:
     ~Gate ();
 
     void out (float *efxoutl, float *efxoutr);
-    void volume_adjust(int NumEffect, float volume,
+    void Dry_Wet_Mix(int NumEffect, float volume,
         float *efxoutl, float *efxoutr, float *smpl, float *smpr);
     void setpreset (int npreset);
     void changepar (int npar, int value);

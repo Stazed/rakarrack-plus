@@ -127,7 +127,7 @@ ShelfBoost::out(float * efxoutl, float * efxoutr)
 }
 
 void
-ShelfBoost::volume_adjust(int, float, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+ShelfBoost::Dry_Wet_Mix(int, float, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     Vol2_Efx(efxoutl, efxoutr, smpl, smpr);
 }

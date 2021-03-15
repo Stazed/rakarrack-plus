@@ -184,7 +184,7 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
 }
 
 void
-Opticaltrem::volume_adjust(int, float, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
+Opticaltrem::Dry_Wet_Mix(int, float, float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     Vol2_Efx(efxoutl, efxoutr, smpl, smpr);
 }

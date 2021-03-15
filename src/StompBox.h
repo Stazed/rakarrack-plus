@@ -45,7 +45,7 @@ public:
     StompBox (int wave_res, int wave_upq, int wave_dnq, double sample_rate, uint32_t intermediate_bufsize);
     ~StompBox ();
     void out (float * efxoutl, float * efxoutr);
-    void volume_adjust(int NumEffect, float volume,
+    void Dry_Wet_Mix(int NumEffect, float volume,
         float *efxoutl, float *efxoutr, float *smpl, float *smpr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
