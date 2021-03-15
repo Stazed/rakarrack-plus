@@ -32,7 +32,7 @@ const std::vector<std::string> bank_submenu_paths
 }
 
 widget_class BankWindowGui {open selected
-  xywh {1075 456 800 600} type Double color 4 selection_color 7 resizable
+  xywh {1118 332 800 600} type Double color 4 selection_color 7 resizable
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
   class Fl_Double_Window size_range {320 240 3200 2400} visible
@@ -172,8 +172,13 @@ m_parent->put_icon(m_parent->AboutWin);}
     code1 {o->set_text_offset(4);}
     class RKR_Choice
   } {}
+  Fl_Box Alert_Message {
+    xywh {40 44 710 17} labelcolor 7 align 16
+    code0 {o->set_box_type(BOX_LEDS);}
+    class RKR_Box
+  }
   Fl_Group ob {open
-    xywh {0 60 800 540} labelsize 18
+    xywh {1 1 800 620} labelsize 18
   } {}
   Function {set_bank_CH_UB(char* nombre, char* nombank)} {C return_type void
   } {
@@ -206,9 +211,9 @@ CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
         for (int j=1; j<5; j++)
         {
             // Add the Program Change value
-            add_pg_change = "(";
+            add_pg_change = "[";
             add_pg_change += NTS(num);
-            add_pg_change += ") ";
+            add_pg_change += "] ";
             add_pg_change += m_process->Bank[num].Preset_Name;
 
             RKR_Button* butX = new RKR_Button(x + 1, y+1, elw, elh, 0);

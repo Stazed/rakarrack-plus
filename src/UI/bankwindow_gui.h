@@ -83,6 +83,7 @@ private:
   inline void cb_CH_UB_i(RKR_Choice*, void*);
   static void cb_CH_UB(RKR_Choice*, void*);
 public:
+  RKR_Box *Alert_Message;
   Fl_Group *ob;
 private:
   RKR* m_process; 

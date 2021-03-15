@@ -112,6 +112,7 @@ RKR::RKR(int gui) :
     XUserMIDI(),
     quality_update(false),
     Effect_Type_Filter(Type_All),
+    Alert_Count(0),
     Har_Down(),
     Har_U_Q(),
     Har_D_Q(),

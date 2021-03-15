@@ -272,7 +272,19 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
   o->set_text_offset(4);
 } // RKR_Choice* CH_UB
-{ ob = new Fl_Group(0, 60, 800, 540);
+{ RKR_Box* o = Alert_Message = new RKR_Box(40, 44, 710, 17);
+  Alert_Message->box(FL_NO_BOX);
+  Alert_Message->color(FL_BACKGROUND_COLOR);
+  Alert_Message->selection_color(FL_BACKGROUND_COLOR);
+  Alert_Message->labeltype(FL_NORMAL_LABEL);
+  Alert_Message->labelfont(0);
+  Alert_Message->labelsize(14);
+  Alert_Message->labelcolor(FL_BACKGROUND2_COLOR);
+  Alert_Message->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
+  Alert_Message->when(FL_WHEN_RELEASE);
+  o->set_box_type(BOX_LEDS);
+} // RKR_Box* Alert_Message
+{ ob = new Fl_Group(1, 1, 800, 620);
   ob->labelsize(18);
   ob->end();
 } // Fl_Group* ob

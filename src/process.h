@@ -990,6 +990,11 @@ public:
      * Holds the effect type, Order window value from Efx_Type_Index.
      */
     int Effect_Type_Filter;
+    
+    /**
+     * The counter for the bank window alert message to be cleared after file saving.
+     */
+    int Alert_Count;
 
     /* Quality resampling */
     int Har_Down;

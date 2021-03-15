@@ -254,7 +254,14 @@ void RKRGUI::GuiTimeout(void)
         {
             // Reload the bank vector for the new file or update the existing
             Scan_Bank_Dir(1);
-            printf("File Saved: %s\n", filename.c_str());
+
+            // Set the bank window alert message
+            filename = filename.insert(0, "File Saved: ", 12);
+            BankWindow->Alert_Message->copy_label (filename.c_str());
+            BankWindow->Alert_Message->redraw ();
+            
+            // Start the counter for timed message clearing
+            m_process->Alert_Count = 1;
         }
         m_process->Gui_Refresh = GUI_Refresh_Off;
     }
@@ -545,6 +552,19 @@ void RKRGUI::GuiTimeout(void)
             }
         }
     };
+    
+    // The counter for bank window alert message to be cleared.
+    if(m_process->Alert_Count)
+    {
+        m_process->Alert_Count++;
+
+        if(m_process->Alert_Count > 75)     // about 3s
+        {
+            m_process->Alert_Count = 0;
+            BankWindow->Alert_Message->copy_label ("");
+            BankWindow->Alert_Message->redraw ();
+        }
+    }
     
     if(m_process->change_scale)
     {
