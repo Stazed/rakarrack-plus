@@ -247,7 +247,7 @@ void RKRGUI::GuiTimeout(void)
     
     if (m_process->Gui_Refresh == GUI_Refresh_CTRL_S)
     {
-        std::string filename = m_process->Bank_Vector[m_process->a_bank].Bank_File_Name;
+        std::string filename = m_process->Bank_Vector[m_process->active_bank].Bank_File_Name;
         int ok = m_process->save_bank(filename.c_str ());
     
         if (ok)
@@ -754,16 +754,16 @@ void RKRGUI::load_previous_state()
     font_size_change(font_size);
     font_type_change(font_type);
 
-    rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->a_bank, 3);
+    rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->active_bank, 3);
 
     if (!m_process->Bank_Load_Command_Line)
     {
         // Copy the bank to the process active Bank
-        if(m_process->a_bank < (int)m_process->Bank_Vector.size ())
+        if(m_process->active_bank < (int)m_process->Bank_Vector.size ())
         {
-            m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[m_process->a_bank].Bank);
+            m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[m_process->active_bank].Bank);
 
-            BankWin_Label(m_process->Bank_Vector[m_process->a_bank].Bank_File_Name.c_str ());
+            BankWin_Label(m_process->Bank_Vector[m_process->active_bank].Bank_File_Name.c_str ());
             Put_Loaded_Bank();
             BankWindow->unlight_preset(m_process->Selected_Preset);
         }
@@ -987,7 +987,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Hide Effects"), (int) m_process->deachide);
         rakarrack.set(m_process->PrefNom("Scale Window"), (int) m_process->scalable);
 
-        rakarrack.set(m_process->PrefNom("Bank Selected"), m_process->a_bank);
+        rakarrack.set(m_process->PrefNom("Bank Selected"), m_process->active_bank);
 
         if ((Preset_Counter->value() > 0) && (Preset_Counter->value() < 61))
             rakarrack.set(m_process->PrefNom("Preset Num"), (int) Preset_Counter->value());
@@ -3901,7 +3901,7 @@ void RKRGUI::set_save_file()
         
         if(in_user_directory >= 0)
         {
-            m_process->a_bank = in_user_directory;
+            m_process->active_bank = in_user_directory;
 
             // Save the Bank name for next file saving
             m_process->Bank_Saved = filename;

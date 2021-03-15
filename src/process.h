@@ -745,7 +745,7 @@ public:
     void add_bank_item(std::string filename);
     void copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[]);
     void new_preset ();
-    void new_bank (struct Preset_Bank_Struct a_bank[] );
+    void new_bank (struct Preset_Bank_Struct active_bank[] );
     void bank_to_preset (int Num);
     void preset_to_bank (int i);
     void copy_IO();
@@ -1168,9 +1168,9 @@ public:
     int custom_midi_table_file;
 
     /**
-     * Flag to indicate the active bank for reload on next start.
+     * The currently active bank displayed in the bank window.
      */
-    int a_bank;
+    int active_bank;
 
     int new_bank_loaded;
 

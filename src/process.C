@@ -210,7 +210,7 @@ RKR::RKR(int gui) :
     Jack_Port_Connnection_Changed(),
     custom_midi_table(),
     custom_midi_table_file(-1),
-    a_bank(0),
+    active_bank(0),
     new_bank_loaded(),
     Aux_Gain(),
     Aux_Threshold(),
@@ -787,7 +787,7 @@ RKR::load_bank_from_vector(std::string filename)
         if(strcmp(filename.c_str(), Bank_Vector[i].Bank_File_Name.c_str()) == 0)
         {
             copy_bank(Bank, Bank_Vector[i].Bank);
-            a_bank = i;
+            active_bank = i;
             return (1);
         }
     }
