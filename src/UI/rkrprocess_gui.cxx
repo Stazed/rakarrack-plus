@@ -3887,10 +3887,36 @@ void RKRGUI::set_save_file()
     {
         // Reload the bank vector for the new file or update the existing
         Scan_Bank_Dir(1);
+        
+        // Check if the user saved outside the user directory
+        int in_user_directory = -1;
+        for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
+        {
+            if(strcmp(filename, m_process->Bank_Vector[i].Bank_File_Name.c_str()) == 0)
+            {
+                in_user_directory = i;
+                break;
+            }
+        }
+        
+        if(in_user_directory >= 0)
+        {
+            m_process->a_bank = in_user_directory;
 
-        // Save the Bank name for next file saving
-        m_process->Bank_Saved = filename;
-        BankWin_Label(filename);
+            // Save the Bank name for next file saving
+            m_process->Bank_Saved = filename;
+            BankWin_Label(filename);
+        }
+        else
+        {
+            // since we did not save in the user directory, we do not update
+            // the active bank, and leave the previous in place. We reset the
+            // modified flag for the current bank since save_bank() cleared it.
+            m_process->modified = 1;
+
+            // Message telling user to put the file in the user directory
+            m_process->Handle_Message (40, filename);
+        }
     }
 }
 
