@@ -1210,16 +1210,18 @@ RKR::process_effects(float *origl, float *origr, void *)
             }
         }
 
-        // Apply the main rack effects in the efx_index order.
+        // Apply the main rack effects in the efx_order by EFX_Index.
         for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
         {
             // Don't process inactive effects
             if(!EFX_Active[efx_order[i]])
                 continue;
             
+            // The effect out()
             Rack_Effects[efx_order[i]]->out(efxoutl, efxoutr);
 
-            Rack_Effects[efx_order[i]]->volume_adjust(efx_order[i], Rack_Effects[efx_order[i]]->outvolume,
+            // Dry/Wet mix
+            Rack_Effects[efx_order[i]]->Dry_Wet_Mix(efx_order[i], Rack_Effects[efx_order[i]]->outvolume,
                     efxoutl, efxoutr, smpl, smpr);
         }
 

@@ -24,7 +24,7 @@
  * Effects that do not have Dry/Wet will override this function, except for EFX_CABINET, 
  * with a call to Vol2_Efx(). EFX_CABINET calls Vol3_Efx().
  * 
- * @param NumEffect
+ * @param efx_index
  *      The effect index from global.h EFX_Index.
  * 
  * @param volume
@@ -43,7 +43,7 @@
  *       Master buffer for temporary copying and making adjustments right.
  */
 void
-Effect::volume_adjust(int NumEffect, float volume,
+Effect::Dry_Wet_Mix(int efx_index, float volume,
                       float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 {
     float v1, v2; v1 = v2 = 1.0f;
@@ -59,7 +59,7 @@ Effect::volume_adjust(int NumEffect, float volume,
         v2 = 1.0f;
     }
 
-    if ((NumEffect == EFX_REVERB) || (NumEffect == EFX_MUSICAL_DELAY))
+    if ((efx_index == EFX_REVERB) || (efx_index == EFX_MUSICAL_DELAY))
     {
         v2 *= v2;
     }

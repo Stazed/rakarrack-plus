@@ -54,7 +54,7 @@ public:
     virtual void cleanup () = 0;
     virtual int get_number_efx_parameters () = 0;
     
-    virtual void volume_adjust(int NumEffect, float volume,
+    virtual void Dry_Wet_Mix(int efx_index, float volume,
         float *efxoutl, float *efxoutr, float *smpl, float *smpr);
     
     void Vol2_Efx(float *efxoutl, float *efxoutr, float *smpl, float *smpr);
