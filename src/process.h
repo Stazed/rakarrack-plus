@@ -596,7 +596,8 @@ enum GUI_Refresh_Index
     GUI_Refresh_Minus_Key,
     GUI_Refresh_F2_Key,
     GUI_Refresh_F3_Key,
-    GUI_Refresh_Looper
+    GUI_Refresh_Looper,
+    GUI_Refresh_CTRL_S
 };
 
 /**

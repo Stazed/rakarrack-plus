@@ -244,6 +244,20 @@ void RKRGUI::GuiTimeout(void)
         update_looper();
         m_process->Gui_Refresh = GUI_Refresh_Off;
     }
+    
+    if (m_process->Gui_Refresh == GUI_Refresh_CTRL_S)
+    {
+        std::string filename = m_process->Bank_Vector[m_process->a_bank].Bank_File_Name;
+        int ok = m_process->save_bank(filename.c_str ());
+    
+        if (ok)
+        {
+            // Reload the bank vector for the new file or update the existing
+            Scan_Bank_Dir(1);
+            printf("File Saved: %s\n", filename.c_str());
+        }
+        m_process->Gui_Refresh = GUI_Refresh_Off;
+    }
 
     // Updates the Gui for MIDI Bank select
     if (m_process->Change_Bank != C_BANK_CHANGE_OFF)
@@ -3246,6 +3260,13 @@ int RKRGUI::global_shortcuts(int event)
                         delete_insert_preset(widget_belowmouse, widget_user_data - UD_PRESET_EQ);
             }
             
+            return 1;
+        }
+        
+        // Ctrl+S, save the currently loaded bank.
+        if(Fl::event_state(FL_CTRL+'s'))
+        {
+            process_rkr->Gui_Refresh = GUI_Refresh_CTRL_S;
             return 1;
         }
     }
