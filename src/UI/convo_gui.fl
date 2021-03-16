@@ -25,7 +25,7 @@ widget_class ConvoGui {open selected
   } {
     code {for(unsigned i = 0; i < m_process->Convolotron_WAV_Files.size(); i++)
 {
-    m_parent->add_convolotron_file(m_process->Convolotron_WAV_Files[i].User_File_Menu_Name );
+    add_convolotron_file(m_process->Convolotron_WAV_Files[i].User_File_Menu_Name );
 }} {}
   }
   Fl_Light_Button convo_activar {
@@ -323,6 +323,28 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
     case Convo_Feedback:
         convo_fb->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Feedback));
         break;
+    }} {}
+  }
+  Function {add_convolotron_file(std::string name)} {return_type void
+  } {
+    code {convo_fnum->add(name.c_str ());
+
+    Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (convo_fnum->menu ());
+    Fl_Menu_Item *p;
+    
+    int font_size = C_DEFAULT_FONT_SIZE;
+
+    for (int i = 0; i < m->size(); i++)
+    {
+        p = m->next(i);
+        
+        if (i == 0)
+        {
+            font_size = p->labelsize();
+        }
+        
+        p->labelsize(font_size);
+        p->labelfont (global_font_type);
     }} {}
   }
 }

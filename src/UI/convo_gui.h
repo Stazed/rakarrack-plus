@@ -74,5 +74,6 @@ private:
 public:
   void add_user_files();
   void parameter_refresh(int index);
+  void add_convolotron_file(std::string name);
 };
 #endif

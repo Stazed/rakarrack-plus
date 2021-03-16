@@ -4013,25 +4013,3 @@ void RKRGUI::Save_Midi_Program_Change_Table()
     }
 }
 
-void RKRGUI::add_convolotron_file(std::string name)
-{
-    CONVOLOTRON->convo_fnum->add(name.c_str ());
-
-    Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (CONVOLOTRON->convo_fnum->menu ());
-    Fl_Menu_Item *p;
-    
-    int font_size = C_DEFAULT_FONT_SIZE;
-
-    for (int i = 0; i < m->size(); i++)
-    {
-        p = m->next(i);
-        
-        if (i == 0)
-        {
-            font_size = p->labelsize();
-        }
-        
-        p->labelsize(font_size);
-        p->labelfont (global_font_type);
-    }
-}

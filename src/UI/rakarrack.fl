@@ -332,7 +332,7 @@ widget gets the focus.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {1091 224 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {464 247 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2018,8 +2018,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {Load_Midi_Program_Change_Table()} {open C return_type void
   } {}
   Function {Save_Midi_Program_Change_Table()} {open C return_type void
-  } {}
-  Function {add_convolotron_file(std::string name)} {open return_type void
   } {}
   Function {set_focus_timer(int time)} {open return_type void
   } {}
