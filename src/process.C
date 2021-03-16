@@ -330,6 +330,10 @@ RKR::RKR(int gui) :
     // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
     load_custom_MIDI_table_preset_names();
 
+    // Related user files in User Directory
+    load_convolotron_vector();
+    load_echotron_vector();
+    load_reverbtron_vector();
 }
 
 RKR::~RKR()

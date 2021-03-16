@@ -2163,3 +2163,174 @@ RKR::file_in_midi_table_vector(std::string filename)
 
     return 0;   // false
 }
+
+void
+RKR::load_convolotron_vector()
+{
+    Convolotron_WAV_Files.clear();
+
+    std::vector<std::string>file_name;
+
+    User_Files another_file;
+
+    DIR *dir;
+    struct dirent *fs;
+
+    if(strcmp(UDirFilename, DATADIR) != 0)
+    {
+        dir = opendir(UDirFilename);
+
+        if (dir == NULL)
+        {
+            return;
+        }
+     }
+
+    // Get the .wav files in the directory
+    while ((fs = readdir(dir)))
+    {
+        if (strstr(fs->d_name, ".wav") != NULL)
+        {
+            file_name.push_back (fs->d_name);
+        }
+    }
+
+    closedir(dir);
+
+    for(unsigned i = 0; i < file_name.size (); i++)
+    {
+        another_file.User_File_Name_Clean = file_name[i];
+
+        std::string full_path = UDirFilename;
+
+        // Check for trailing '/'
+        if(full_path[full_path.size() - 1] != '/')
+            full_path += "/";
+
+        full_path += file_name[i];
+        another_file.User_File_Name = full_path;
+
+        // Add the Menu name
+        std::string menu_name = "* ";
+        menu_name += file_name[i];
+        menu_name = menu_name.substr(0, menu_name.size() - 4);   // remove extension .wav = 4
+
+        another_file.User_File_Menu_Name = menu_name;
+
+        Convolotron_WAV_Files.push_back(another_file);
+    }
+}
+
+void
+RKR::load_echotron_vector()
+{
+    Echotron_DLY_Files.clear();
+
+    std::vector<std::string>file_name;
+
+    User_Files another_file;
+
+    DIR *dir;
+    struct dirent *fs;
+
+    if(strcmp(UDirFilename, DATADIR) != 0)
+    {
+        dir = opendir(UDirFilename);
+
+        if (dir == NULL)
+        {
+            return;
+        }
+     }
+
+    // Get the .wav files in the directory
+    while ((fs = readdir(dir)))
+    {
+        if (strstr(fs->d_name, ".dly") != NULL)
+        {
+            file_name.push_back (fs->d_name);
+        }
+    }
+
+    closedir(dir);
+
+    for(unsigned i = 0; i < file_name.size (); i++)
+    {
+        another_file.User_File_Name_Clean = file_name[i];
+
+        std::string full_path = UDirFilename;
+
+        // Check for trailing '/'
+        if(full_path[full_path.size() - 1] != '/')
+            full_path += "/";
+
+        full_path += file_name[i];
+        another_file.User_File_Name = full_path;
+
+        // Add the Menu name
+        std::string menu_name = "* ";
+        menu_name += file_name[i];
+        menu_name = menu_name.substr(0, menu_name.size() - 4);   // remove extension .dly = 4
+
+        another_file.User_File_Menu_Name = menu_name;
+
+        Echotron_DLY_Files.push_back(another_file);
+    }
+}
+
+void
+RKR::load_reverbtron_vector()
+{
+    Reverbtron_RVB_Files.clear();
+
+    std::vector<std::string>file_name;
+
+    User_Files another_file;
+
+    DIR *dir;
+    struct dirent *fs;
+
+    if(strcmp(UDirFilename, DATADIR) != 0)
+    {
+        dir = opendir(UDirFilename);
+
+        if (dir == NULL)
+        {
+            return;
+        }
+     }
+
+    // Get the .wav files in the directory
+    while ((fs = readdir(dir)))
+    {
+        if (strstr(fs->d_name, ".rvb") != NULL)
+        {
+            file_name.push_back (fs->d_name);
+        }
+    }
+
+    closedir(dir);
+
+    for(unsigned i = 0; i < file_name.size (); i++)
+    {
+        another_file.User_File_Name_Clean = file_name[i];
+
+        std::string full_path = UDirFilename;
+
+        // Check for trailing '/'
+        if(full_path[full_path.size() - 1] != '/')
+            full_path += "/";
+
+        full_path += file_name[i];
+        another_file.User_File_Name = full_path;
+
+        // Add the Menu name
+        std::string menu_name = "* ";
+        menu_name += file_name[i];
+        menu_name = menu_name.substr(0, menu_name.size() - 4);   // remove extension .rvb = 4
+
+        another_file.User_File_Menu_Name = menu_name;
+
+        Reverbtron_RVB_Files.push_back(another_file);
+    }
+}
