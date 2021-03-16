@@ -55,11 +55,7 @@ private:
   inline void cb_convo_length_i(RKR_Slider*, void*);
   static void cb_convo_length(RKR_Slider*, void*);
 public:
-  RKR_Check_Button *convo_user;
-private:
-  inline void cb_convo_user_i(RKR_Check_Button*, void*);
-  static void cb_convo_user(RKR_Check_Button*, void*);
-public:
+  RKR_Box *convo_user;
   RKR_Check_Button *convo_safe;
 private:
   inline void cb_convo_safe_i(RKR_Check_Button*, void*);

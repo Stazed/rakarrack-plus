@@ -112,15 +112,6 @@ void ConvoGui::cb_convo_length(RKR_Slider* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_length_i(o,v);
 }
 
-void ConvoGui::cb_convo_user_i(RKR_Check_Button* o, void*) {
-  m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File,(int)o->value());
-
-if((int)o->value())B_wav->activate(); else B_wav->deactivate();
-}
-void ConvoGui::cb_convo_user(RKR_Check_Button* o, void* v) {
-  ((ConvoGui*)(o->parent()))->cb_convo_user_i(o,v);
-}
-
 void ConvoGui::cb_convo_safe_i(RKR_Check_Button* o, void*) {
   m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Safe,(int)o->value());
 }
@@ -195,7 +186,7 @@ void ConvoGui::cb_convo_fnum_i(RKR_Choice* o, void*) {
         else
         {
             // User file was loaded so set the gui user check box
-            convo_user->value (1);
+            convo_user->color (global_leds_color);
             convo_user->redraw ();
         }
     }
@@ -208,7 +199,7 @@ void ConvoGui::cb_convo_fnum_i(RKR_Choice* o, void*) {
         m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Set_File,(int)o->value());
 
         // Not a user file so un-check the gui user check box
-        convo_user->value (0);
+        convo_user->color (global_fore_color);
         convo_user->redraw ();
     };
 }
@@ -370,19 +361,18 @@ this->when(FL_WHEN_RELEASE);
   convo_length->align(Fl_Align(FL_ALIGN_LEFT));
   convo_length->when(FL_WHEN_RELEASE);
 } // RKR_Slider* convo_length
-{ convo_user = new RKR_Check_Button(110, 126, 43, 15, "User");
-  convo_user->box(FL_NO_BOX);
-  convo_user->down_box(FL_BORDER_BOX);
+{ RKR_Box* o = convo_user = new RKR_Box(110, 126, 12, 12, "User");
+  convo_user->box(FL_DOWN_BOX);
   convo_user->color(FL_BACKGROUND_COLOR);
-  convo_user->selection_color(FL_FOREGROUND_COLOR);
+  convo_user->selection_color(FL_BACKGROUND_COLOR);
   convo_user->labeltype(FL_NORMAL_LABEL);
   convo_user->labelfont(0);
   convo_user->labelsize(10);
   convo_user->labelcolor(FL_BACKGROUND2_COLOR);
-  convo_user->callback((Fl_Callback*)cb_convo_user);
-  convo_user->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  convo_user->align(Fl_Align(FL_ALIGN_RIGHT));
   convo_user->when(FL_WHEN_RELEASE);
-} // RKR_Check_Button* convo_user
+  o->set_box_type(BOX_LIGHT);
+} // RKR_Box* convo_user
 { convo_safe = new RKR_Check_Button(19, 141, 73, 15, "Safe Mode");
   convo_safe->box(FL_NO_BOX);
   convo_safe->down_box(FL_BORDER_BOX);
@@ -452,8 +442,18 @@ void ConvoGui::parameter_refresh(int index) {
           convo_length->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_Length));
           break;
       case Convo_User_File:
-          convo_user->value(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File));
-          convo_user->do_callback();
+      {
+          if(m_process->Rack_Effects[EFX_CONVOLOTRON]->getpar(Convo_User_File))
+          {
+              convo_user->color (global_leds_color);
+              convo_user->redraw ();
+          }
+          else
+          {
+              convo_user->color (global_fore_color);
+              convo_user->redraw ();
+          }
+      }
           break;
       case Convo_SKIP_5:
           break;
