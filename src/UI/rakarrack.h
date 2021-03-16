@@ -641,6 +641,7 @@ public:
   int get_bank_made();
   void Load_Midi_Program_Change_Table();
   void Save_Midi_Program_Change_Table();
+  void add_convolotron_file(std::string name);
   void set_focus_timer(int time);
 };
 #endif

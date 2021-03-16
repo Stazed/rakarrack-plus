@@ -21,6 +21,13 @@ widget_class ConvoGui {open selected
   code2 {\#include "rakarrack.h"}
   class RKR_Gui_Effect visible position_relative
 } {
+  Function {add_user_files()} {return_type void
+  } {
+    code {for(unsigned i = 0; i < m_process->Convolotron_WAV_Files.size(); i++)
+{
+    m_parent->add_convolotron_file(m_process->Convolotron_WAV_Files[i].User_File_Menu_Name );
+}} {}
+  }
   Fl_Light_Button convo_activar {
     label On
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)

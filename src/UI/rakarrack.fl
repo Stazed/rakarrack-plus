@@ -960,6 +960,7 @@ Fl::focus(Open_Order);}
         code0 {\#include "convo_gui.h"}
         code1 {Efx_Gui_Base[EFX_CONVOLOTRON] = o;}
         code2 {o->initialize(m_process, this);}
+        code3 {o->add_user_files();}
         class ConvoGui
       } {}
       Fl_Group LOOPER {
@@ -2017,6 +2018,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {Load_Midi_Program_Change_Table()} {open C return_type void
   } {}
   Function {Save_Midi_Program_Change_Table()} {open C return_type void
+  } {}
+  Function {add_convolotron_file(std::string name)} {open return_type void
   } {}
   Function {set_focus_timer(int time)} {open return_type void
   } {}

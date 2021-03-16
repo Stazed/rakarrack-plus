@@ -1752,6 +1752,7 @@ void RKRGUI::make_window() {
       CONVOLOTRON->hide();
       Efx_Gui_Base[EFX_CONVOLOTRON] = o;
       o->initialize(m_process, this);
+      o->add_user_files();
       CONVOLOTRON->end();
     } // ConvoGui* CONVOLOTRON
     { LooperGui* o = LOOPER = new LooperGui(2, 212, 158, 184);

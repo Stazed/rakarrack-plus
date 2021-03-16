@@ -378,6 +378,13 @@ position(X, Y);
 end();
 }
 
+void ConvoGui::add_user_files() {
+  for(unsigned i = 0; i < m_process->Convolotron_WAV_Files.size(); i++)
+  {
+      m_parent->add_convolotron_file(m_process->Convolotron_WAV_Files[i].User_File_Menu_Name );
+  }
+}
+
 void ConvoGui::parameter_refresh(int index) {
   switch (index)
       {

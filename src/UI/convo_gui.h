@@ -76,6 +76,7 @@ private:
   static void cb_convo_fnum(RKR_Choice*, void*);
   static Fl_Menu_Item menu_convo_fnum[];
 public:
+  void add_user_files();
   void parameter_refresh(int index);
 };
 #endif
