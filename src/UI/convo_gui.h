@@ -61,10 +61,10 @@ private:
   inline void cb_convo_safe_i(RKR_Check_Button*, void*);
   static void cb_convo_safe(RKR_Check_Button*, void*);
 public:
-  RKR_Button *B_wav;
+  RKR_Button *B_scan;
 private:
-  inline void cb_B_wav_i(RKR_Button*, void*);
-  static void cb_B_wav(RKR_Button*, void*);
+  inline void cb_B_scan_i(RKR_Button*, void*);
+  static void cb_B_scan(RKR_Button*, void*);
 public:
   RKR_Choice *convo_fnum;
 private:
@@ -75,5 +75,6 @@ public:
   void add_user_files();
   void parameter_refresh(int index);
   void add_convolotron_file(std::string name);
+  void scan_for_new_wav_files();
 };
 #endif

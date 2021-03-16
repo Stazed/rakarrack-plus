@@ -119,34 +119,11 @@ void ConvoGui::cb_convo_safe(RKR_Check_Button* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_safe_i(o,v);
 }
 
-void ConvoGui::cb_B_wav_i(RKR_Button*, void*) {
-  // If nothing previously set, then default location
-    std::string chooser_start_location = "";
-
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->UDirFilename;
-    }
-
-    char *filename;
-    filename = fl_file_chooser("Load Wav File:", "(*.wav)", chooser_start_location.c_str(), 0);
-
-    if (filename == NULL)
-        return;
-
-    filename = fl_filename_setext(filename, ".wav");
-
-    Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
-    strcpy(Efx_Convolotron->Filename, filename);
-
-    if(!Efx_Convolotron->setfile(USERFILE))
-    {
-        m_process->Handle_Message(14, filename);
-    };
+void ConvoGui::cb_B_scan_i(RKR_Button*, void*) {
+  scan_for_new_wav_files();
 }
-void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {
-  ((ConvoGui*)(o->parent()))->cb_B_wav_i(o,v);
+void ConvoGui::cb_B_scan(RKR_Button* o, void* v) {
+  ((ConvoGui*)(o->parent()))->cb_B_scan_i(o,v);
 }
 
 void ConvoGui::cb_convo_fnum_i(RKR_Choice* o, void*) {
@@ -361,7 +338,7 @@ this->when(FL_WHEN_RELEASE);
   convo_length->align(Fl_Align(FL_ALIGN_LEFT));
   convo_length->when(FL_WHEN_RELEASE);
 } // RKR_Slider* convo_length
-{ RKR_Box* o = convo_user = new RKR_Box(110, 126, 12, 12, "User");
+{ RKR_Box* o = convo_user = new RKR_Box(106, 126, 12, 12, "User");
   convo_user->box(FL_DOWN_BOX);
   convo_user->color(FL_BACKGROUND_COLOR);
   convo_user->selection_color(FL_BACKGROUND_COLOR);
@@ -386,19 +363,18 @@ this->when(FL_WHEN_RELEASE);
   convo_safe->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   convo_safe->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* convo_safe
-{ B_wav = new RKR_Button(106, 143, 46, 12, "Browse");
-  B_wav->box(FL_UP_BOX);
-  B_wav->color(FL_BACKGROUND_COLOR);
-  B_wav->selection_color(FL_BACKGROUND_COLOR);
-  B_wav->labeltype(FL_NORMAL_LABEL);
-  B_wav->labelfont(0);
-  B_wav->labelsize(10);
-  B_wav->labelcolor(FL_FOREGROUND_COLOR);
-  B_wav->callback((Fl_Callback*)cb_B_wav);
-  B_wav->align(Fl_Align(FL_ALIGN_CENTER));
-  B_wav->when(FL_WHEN_RELEASE);
-  B_wav->deactivate();
-} // RKR_Button* B_wav
+{ B_scan = new RKR_Button(106, 143, 46, 12, "Scan");
+  B_scan->box(FL_UP_BOX);
+  B_scan->color(FL_BACKGROUND_COLOR);
+  B_scan->selection_color(FL_BACKGROUND_COLOR);
+  B_scan->labeltype(FL_NORMAL_LABEL);
+  B_scan->labelfont(0);
+  B_scan->labelsize(10);
+  B_scan->labelcolor(FL_FOREGROUND_COLOR);
+  B_scan->callback((Fl_Callback*)cb_B_scan);
+  B_scan->align(Fl_Align(FL_ALIGN_CENTER));
+  B_scan->when(FL_WHEN_RELEASE);
+} // RKR_Button* B_scan
 { convo_fnum = new RKR_Choice(51, 159, 101, 16, "Preset");
   convo_fnum->box(FL_FLAT_BOX);
   convo_fnum->down_box(FL_BORDER_BOX);
@@ -494,4 +470,27 @@ void ConvoGui::add_convolotron_file(std::string name) {
           p->labelsize(font_size);
           p->labelfont (global_font_type);
       }
+}
+
+void ConvoGui::scan_for_new_wav_files() {
+  // This is just to get the current font size so the scan does not change the size
+      // when the menu is reloaded
+      Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (convo_fnum->menu ());
+      int font_size = m->next(0)->labelsize();
+  
+      // Clear the whole menu and re-add everything
+      convo_fnum->clear();
+  
+      // Add the default
+      convo_fnum->menu(menu_convo_fnum);
+  
+      // Set the font size for the first item, others will follow
+      m = const_cast<Fl_Menu_Item*>  (convo_fnum->menu ());
+      m->next(0)->labelsize(font_size);
+  
+      // Re scan the User Directory and reload user vector
+      m_process->load_convolotron_vector();
+  
+      // Add user files from vector to menu
+      add_user_files();
 }

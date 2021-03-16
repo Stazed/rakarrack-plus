@@ -144,7 +144,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
   }
   Fl_Box convo_user {
     label User
-    xywh {110 126 12 12} box DOWN_BOX labelsize 10 labelcolor 7 align 8
+    xywh {106 126 12 12} box DOWN_BOX labelsize 10 labelcolor 7 align 8
     code0 {o->set_box_type(BOX_LIGHT);}
     class RKR_Box
   }
@@ -154,33 +154,10 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
     xywh {19 141 73 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  Fl_Button B_wav {
-    label Browse
-    callback {// If nothing previously set, then default location
-    std::string chooser_start_location = "";
-
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->UDirFilename;
-    }
-
-    char *filename;
-    filename = fl_file_chooser("Load Wav File:", "(*.wav)", chooser_start_location.c_str(), 0);
-
-    if (filename == NULL)
-        return;
-
-    filename = fl_filename_setext(filename, ".wav");
-
-    Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
-    strcpy(Efx_Convolotron->Filename, filename);
-
-    if(!Efx_Convolotron->setfile(USERFILE))
-    {
-        m_process->Handle_Message(14, filename);
-    }}
-    xywh {106 143 46 12} labelsize 10 deactivate
+  Fl_Button B_scan {
+    label Scan
+    callback {scan_for_new_wav_files();}
+    xywh {106 143 46 12} labelsize 10
     class RKR_Button
   }
   Fl_Choice convo_fnum {
@@ -346,5 +323,28 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
         p->labelsize(font_size);
         p->labelfont (global_font_type);
     }} {}
+  }
+  Function {scan_for_new_wav_files()} {return_type void
+  } {
+    code {// This is just to get the current font size so the scan does not change the size
+    // when the menu is reloaded
+    Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (convo_fnum->menu ());
+    int font_size = m->next(0)->labelsize();
+
+    // Clear the whole menu and re-add everything
+    convo_fnum->clear();
+
+    // Add the default
+    convo_fnum->menu(menu_convo_fnum);
+
+    // Set the font size for the first item, others will follow
+    m = const_cast<Fl_Menu_Item*>  (convo_fnum->menu ());
+    m->next(0)->labelsize(font_size);
+
+    // Re scan the User Directory and reload user vector
+    m_process->load_convolotron_vector();
+
+    // Add user files from vector to menu
+    add_user_files();} {}
   }
 }
