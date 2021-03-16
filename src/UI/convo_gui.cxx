@@ -159,7 +159,58 @@ void ConvoGui::cb_B_wav(RKR_Button* o, void* v) {
 }
 
 void ConvoGui::cb_convo_fnum_i(RKR_Choice* o, void*) {
-  m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Set_File,(int)o->value());
+  int user_file_selected = 0;
+    Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (o->menu ());
+    std::string file = m[o->value()].label();
+    
+    // See if this is a User provided file by checking the vector of user files
+    for(unsigned i = 0; i < m_process->Convolotron_WAV_Files.size (); i++)
+    {
+        // String compare by menu name
+        if(strcmp(file.c_str(), m_process->Convolotron_WAV_Files[i].User_File_Menu_Name.c_str ()) == 0)
+        {
+            user_file_selected = 1;  // found
+            file = m_process->Convolotron_WAV_Files[i].User_File_Name;  // full path
+            break;
+        }
+    }
+
+    if(user_file_selected)
+    {
+        // Copy the file name to the EFX
+        Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
+        strcpy(Efx_Convolotron->Filename, file.c_str());
+        
+        // Tell the EFX that this is a user supplied file
+        m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File, 1);
+
+        // Try to load the user file
+        if(!Efx_Convolotron->setfile(USERFILE))
+        {
+            m_process->Handle_Message(14, file);
+            
+            // The user file did not work, un-set the user file
+            m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File, 0);
+        }
+        else
+        {
+            // User file was loaded so set the gui user check box
+            convo_user->value (1);
+            convo_user->redraw ();
+        }
+    }
+    else
+    {
+        // They selected a program provided file, so un-set the User file
+        m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File, 0);
+        
+        // Tell the EFX which program file to use
+        m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Set_File,(int)o->value());
+
+        // Not a user file so un-check the gui user check box
+        convo_user->value (0);
+        convo_user->redraw ();
+    };
 }
 void ConvoGui::cb_convo_fnum(RKR_Choice* o, void* v) {
   ((ConvoGui*)(o->parent()))->cb_convo_fnum_i(o,v);
