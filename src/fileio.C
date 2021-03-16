@@ -2219,6 +2219,10 @@ RKR::load_convolotron_vector()
 
         Convolotron_WAV_Files.push_back(another_file);
     }
+
+    // Copy to the audio effect class
+    Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
+    Efx_Convolotron->set_user_files(Convolotron_WAV_Files);
 }
 
 void

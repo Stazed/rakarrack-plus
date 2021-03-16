@@ -369,6 +369,44 @@ Convolotron::setfile(int value)
         memset(Filename, 0, sizeof (Filename));
         sprintf(Filename, "%s/%d.wav", DATADIR, Filenum + 1);
     }
+#ifndef LV2_SUPPORT // Rakarrack-plus only, user files must be in User Directory
+    else    // User file
+    {
+        // For backwards compatibility and copying to another computer,
+        // we check the filename only for a match in the user directory.
+        // If a match is found, then we use the User Directory path.
+        std::string file_name_clean = strrchr(Filename,'/')+1;     // get the file name W/O path
+        int file_found = 0;
+        
+        // Check if the user file is in the User Directory
+        for(unsigned i = 0; i < WAV_Files.size(); i++)
+        {
+            if(strcmp(file_name_clean.c_str(), WAV_Files[i].User_File_Name_Clean.c_str()) == 0)
+            {
+                // We found the file in the user directory so replace Filename with
+                // the full path of the found file. In case the User Directory name
+                // was changed, or copied to another computer with a different file
+                // structure, and backwards compatible if the file was not originally
+                // placed in the User Directory.
+                file_found = 1;
+                memset(Filename, 0, sizeof (Filename));
+                sprintf(Filename, "%s", WAV_Files[i].User_File_Name.c_str());
+                break;
+            }
+        }
+        
+        // We did not find the file in the User Directory, so error
+        if(!file_found)
+        {
+            real_len = 1;
+            length = 1;
+            rbuf[0] = 1.0f;
+            process_rbuf();
+            return (0);
+        }
+    }
+#endif
+    
 
     //    printf("Convolotron Filename %s: value %d: Filenum %d\n",Filename, value,Filenum);
     sfinfo.format = 0;

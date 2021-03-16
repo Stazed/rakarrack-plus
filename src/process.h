@@ -1387,13 +1387,7 @@ public:
             Preset_Name[0] = 0;
         }
     } MIDI_Table_Bank_Preset_Names[128][62];
-    
-    struct User_Files
-    {
-        std::string User_File_Name;         // Full path
-        std::string User_File_Menu_Name;    // File name w/o extension and with *
-        std::string User_File_Name_Clean;   // File name w/o path
-    };
+
 
     std::vector<User_Files> Convolotron_WAV_Files;
     std::vector<User_Files> Echotron_DLY_Files;

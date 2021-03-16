@@ -22,6 +22,13 @@
 #include "global.h"
 #include "FPreset.h"
 
+struct User_Files
+{
+    std::string User_File_Name;         // Full path
+    std::string User_File_Menu_Name;    // File name w/o extension and with *
+    std::string User_File_Name_Clean;   // File name w/o path
+};
+
 class Effect
 {
 public:

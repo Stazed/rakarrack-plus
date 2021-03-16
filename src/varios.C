@@ -78,7 +78,8 @@ RKR::Handle_Message(int num, std::string filename)
     switch (num)
     {
     case 1:
-        sprintf(error_msg, "%s", "Convolotron is unable to open the audio .wav file");
+        sprintf(error_msg, "%s", "Convolotron is unable to open the audio .wav file. \n"
+                "All User files must be placed in the User Directory.");
         break;
     case 2:
         sprintf(error_msg, "%s", "Reverbtron is unable to open the IR .rvb file");

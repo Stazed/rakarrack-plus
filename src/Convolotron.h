@@ -69,7 +69,8 @@ public:
     int setfile (int value);
     void adjust(int DS, uint32_t period);
     void loaddefault();
-    
+    void set_user_files(std::vector<User_Files>wav_files){WAV_Files = wav_files;};
+
     /* Change quality */
     std::vector<int> save_parameters();
     void reset_parameters(std::vector<int> parameters);
@@ -77,7 +78,9 @@ public:
     char Filename[128];
 
 private:
-    
+
+    std::vector<User_Files> WAV_Files;
+
     unsigned int SAMPLE_RATE;
     float fSAMPLE_RATE;
     int nSAMPLE_RATE;
