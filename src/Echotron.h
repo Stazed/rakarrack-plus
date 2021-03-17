@@ -24,6 +24,7 @@
 #ifndef ECHOTRON_H
 #define ECHOTRON_H
 
+#include <vector>
 #include "Effect.h"
 #include "AnalogFilter.h"
 #include "EffectLFO.h"
@@ -126,6 +127,7 @@ public:
     void applyfile(DlyFile);
     int get_file_length() {return File.fLength;};
     char *get_file_name() {return File.Filename;};
+    void set_user_files(std::vector<User_Files>dly_files){DLY_Files = dly_files;};
 
     char Filename[128];
     DlyFile File;
@@ -142,6 +144,8 @@ private:
     void modulate_delay();
     void modulate_filters();
     DlyFile loaddefault();
+
+    std::vector<User_Files> DLY_Files;
 
     float fSAMPLE_RATE;
     uint32_t PERIOD;

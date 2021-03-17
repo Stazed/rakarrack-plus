@@ -2280,6 +2280,10 @@ RKR::load_echotron_vector()
 
         Echotron_DLY_Files.push_back(another_file);
     }
+    
+    // Copy to the audio effect class
+    Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
+    Efx_Echotron->set_user_files(Echotron_DLY_Files);
 }
 
 void
