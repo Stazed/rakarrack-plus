@@ -206,11 +206,71 @@ void EchotronGui::cb_echotron_length(RKR_Counter* o, void* v) {
 }
 
 void EchotronGui::cb_echotron_fnum_i(RKR_Choice* o, void*) {
-  m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Set_File,(int)o->value());
-echotron_length->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
+  int user_file_selected = 0;
+    Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (o->menu ());
+    std::string file = m[o->value()].label();
+    
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    
+    // See if this is a User provided file by checking the vector of user files
+    for(unsigned i = 0; i < m_process->Echotron_DLY_Files.size (); i++)
+    {
+        // String compare by menu name
+        if(strcmp(file.c_str(), m_process->Echotron_DLY_Files[i].User_File_Menu_Name.c_str ()) == 0)
+        {
+            user_file_selected = 1;  // found
+            file = m_process->Echotron_DLY_Files[i].User_File_Name;  // full path
+            break;
+        }
+    }
 
-Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
-echotron_length->maximum(Efx_Echotron->get_file_length());
+    if(user_file_selected)
+    {
+        // Copy the file name to the EFX
+        strcpy(Efx_Echotron->Filename, file.c_str());
+        
+        // Tell the EFX that this is a user supplied file
+        m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File, 1);
+
+        // Try to load the user file
+        if(!Efx_Echotron->setfile(USERFILE))
+        {
+            m_process->Handle_Message(14, file);
+            
+            // The user file did not work, un-set the user file
+            m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File, 0);
+        }
+        else
+        {
+            // On file loading, the taps are set to max length
+            echotron_length->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
+
+            // We don't know what the max file length is until after the file is loaded
+            echotron_length->maximum(Efx_Echotron->get_file_length());
+            
+            // User file was loaded so set the gui user check box
+            echotron_user->color (global_leds_color);
+            echotron_user->redraw ();
+        }
+    }
+    else
+    {
+        // They selected a program provided file, so un-set the User file
+        m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File, 0);
+
+        // Load the program provided file
+        m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Set_File,(int)o->value());
+
+        // On file loading, the taps are set to max length
+        echotron_length->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
+
+        // We don't know what the max file length is until after the file is loaded
+        echotron_length->maximum(Efx_Echotron->get_file_length());
+
+        // Not a user file so un-check the gui user check box
+        echotron_user->color (global_fore_color);
+        echotron_user->redraw ();
+    };
 }
 void EchotronGui::cb_echotron_fnum(RKR_Choice* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_fnum_i(o,v);
