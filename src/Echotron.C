@@ -319,6 +319,42 @@ Echotron::setfile(int value)
         memset(Filename, 0, sizeof (Filename));
         sprintf(Filename, "%s/%d.dly", DATADIR, Filenum + 1);
     }
+#ifndef LV2_SUPPORT // Rakarrack-plus only, user files must be in User Directory
+    else
+    {
+        // For backwards compatibility and copying to another computer,
+        // we check the filename only for a match in the user directory.
+        // If a match is found, then we use the User Directory path.
+        std::string file_name_clean = strrchr(Filename,'/')+1;     // get the file name W/O path
+        int file_found = 0;
+        
+        // Check if the user file is in the User Directory
+        for(unsigned i = 0; i < DLY_Files.size(); i++)
+        {
+            if(strcmp(file_name_clean.c_str(), DLY_Files[i].User_File_Name_Clean.c_str()) == 0)
+            {
+                // We found the file in the user directory so replace Filename with
+                // the full path of the found file. In case the User Directory name
+                // was changed, or copied to another computer with a different file
+                // structure, and backwards compatible if the file was not originally
+                // placed in the User Directory.
+                file_found = 1;
+                memset(Filename, 0, sizeof (Filename));
+                sprintf(Filename, "%s", DLY_Files[i].User_File_Name.c_str());
+                break;
+            }
+        }
+        
+        // We did not find the file in the User Directory, so error & set defaults
+        if(!file_found)
+        {
+            filedata = loaddefault();
+            applyfile(filedata);
+            error = 44;
+            return 0;
+        }
+    }
+#endif
 
     //    printf("Filename %s\n",Filename);
     filedata = loadfile(Filename);
@@ -440,7 +476,7 @@ Echotron::loadfile(char* Filename)
 
     if ((fs = fopen(Filename, "r")) == NULL)
     {
-        error = 1;
+        error = 4;
         return loaddefault();
     }
 
@@ -549,7 +585,9 @@ Echotron::loadfile(char* Filename)
     // what to do here - FIXME how does lv2 handle file errors?
 #else
     if(error)
-        global_error_number = error; // global_error_number is used by rakarrack to pop up a warning dialog
+    {
+        return loaddefault();
+    }
 #endif     
 
     return f;
@@ -812,7 +850,11 @@ Echotron::changepar(int npar, int value)
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called by changepar() upon initialization for lv2 and is ignored.
 #else
-        if (!setfile(value)) global_error_number = 4;
+        if (!setfile(value))
+        {
+            global_error_number = error;
+            error = 0;
+        }
 #endif
         break;
     }

@@ -224,6 +224,16 @@ RKR::Handle_Message(int num, std::string filename)
             "Settings/Preferences/Bank - User Directory", filename.c_str());
     }
         break;
+
+    case 44:
+    {
+        Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
+        filename =  Efx_Echotron->Filename;
+        sprintf(error_msg, "Convolotron user file cannot be found in user directory:\n%s\n\n"
+            "All user files must be put in the user directory set in:\n"
+            "Settings/Preferences/Bank - User Directory", filename.c_str());
+    }
+        break;
     }
 
     Message(message_type, meslabel, error_msg);
