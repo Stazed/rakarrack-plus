@@ -1933,6 +1933,7 @@ void RKRGUI::make_window() {
       ECHOTRON->hide();
       Efx_Gui_Base[EFX_ECHOTRON] = o;
       o->initialize(m_process, this);
+      o->add_user_files();
       ECHOTRON->end();
     } // EchotronGui* ECHOTRON
     { SharGui* o = SHAR = new SharGui(320, 212, 158, 184);

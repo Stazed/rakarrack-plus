@@ -332,7 +332,7 @@ widget gets the focus.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {464 247 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {926 197 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1045,6 +1045,7 @@ Fl::focus(Open_Order);}
         code0 {\#include "echotron_gui.h"}
         code1 {Efx_Gui_Base[EFX_ECHOTRON] = o;}
         code2 {o->initialize(m_process, this);}
+        code3 {o->add_user_files();}
         class EchotronGui
       } {}
       Fl_Group SHAR {

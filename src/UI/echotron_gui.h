@@ -116,5 +116,8 @@ private:
 public:
   void parameter_refresh(int index);
   void tap_tempo_update();
+  void add_echotron_file(std::string name);
+  void add_user_files();
+  void scan_for_new_dly_files();
 };
 #endif
