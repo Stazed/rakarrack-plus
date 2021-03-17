@@ -146,6 +146,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
     label User
     xywh {106 126 12 12} box DOWN_BOX labelsize 10 labelcolor 7 align 8
     code0 {o->set_box_type(BOX_LIGHT);}
+    code1 {o->set_label_offset(1);}
     class RKR_Box
   }
   Fl_Check_Button convo_safe {

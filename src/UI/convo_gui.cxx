@@ -349,6 +349,7 @@ this->when(FL_WHEN_RELEASE);
   convo_user->align(Fl_Align(FL_ALIGN_RIGHT));
   convo_user->when(FL_WHEN_RELEASE);
   o->set_box_type(BOX_LIGHT);
+  o->set_label_offset(1);
 } // RKR_Box* convo_user
 { convo_safe = new RKR_Check_Button(19, 141, 73, 15, "Safe Mode");
   convo_safe->box(FL_NO_BOX);

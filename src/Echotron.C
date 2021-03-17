@@ -548,7 +548,8 @@ Echotron::loadfile(char* Filename)
 #ifdef LV2_SUPPORT
     // what to do here - FIXME how does lv2 handle file errors?
 #else
-    global_error_number = error; // global_error_number is used by rakarrack to pop up a warning dialog
+    if(error)
+        global_error_number = error; // global_error_number is used by rakarrack to pop up a warning dialog
 #endif     
 
     return f;

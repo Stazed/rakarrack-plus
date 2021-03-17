@@ -78,8 +78,7 @@ RKR::Handle_Message(int num, std::string filename)
     switch (num)
     {
     case 1:
-        sprintf(error_msg, "%s", "Convolotron is unable to open the audio .wav file. \n"
-                "All User files must be placed in the User Directory.");
+        sprintf(error_msg, "%s", "Convolotron is unable to open the audio .wav file.");
         break;
     case 2:
         sprintf(error_msg, "%s", "Reverbtron is unable to open the IR .rvb file");
@@ -212,9 +211,18 @@ RKR::Handle_Message(int num, std::string filename)
                 "Settings/Preferences/Bank - User Directory.");
         break;
     case 42:
-        sprintf(error_msg, "MIDI program file cannot be found in user directory %s\n\n"
+        sprintf(error_msg, "MIDI program file cannot be found in user directory:\n%s\n\n"
                 "All MIDI program files should be put in the user directory set in:\n"
                 "Settings/Preferences/Bank - User Directory", filename.c_str());
+        break;
+    case 43:
+    {
+        Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
+        filename =  Efx_Convolotron->Filename;
+        sprintf(error_msg, "Convolotron user file cannot be found in user directory:\n%s\n\n"
+            "All user files must be put in the user directory set in:\n"
+            "Settings/Preferences/Bank - User Directory", filename.c_str());
+    }
         break;
     }
 
