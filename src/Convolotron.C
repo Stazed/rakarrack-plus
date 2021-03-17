@@ -615,11 +615,7 @@ Convolotron::changepar(int npar, int value)
         levpanr = rpanning * level * 2.0f;
         break;
     case Convo_Set_File:
-#ifdef LV2_SUPPORT
-        setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
-#else
         setfile(value);
-#endif
         break;
     case Convo_SKIP_9:
         break;
