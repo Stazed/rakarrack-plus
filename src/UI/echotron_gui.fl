@@ -213,45 +213,17 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Type,(int)o->value
     xywh {33 151 34 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  Fl_Check_Button echotron_user {
+  Fl_Box echotron_user {
     label User
-    callback {m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File,(int)o->value());
-
-if((int)o->value())B_ech->activate(); else B_ech->deactivate();}
-    xywh {67 154 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-    class RKR_Check_Button
+    xywh {67 154 12 12} box DOWN_BOX labelsize 10 labelcolor 7 align 8
+    code0 {o->set_box_type(BOX_LIGHT);}
+    code1 {o->set_label_offset(1);}
+    class RKR_Box
   }
-  Fl_Button B_ech {
-    label Browse
-    callback {// If nothing previously set, then default location
-    std::string chooser_start_location = "";
-
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->UDirFilename;
-    }
-
-    char *filename;
-    filename = fl_file_chooser("Load dly File:", "(*.dly)", chooser_start_location.c_str(), 0);
-
-    if (filename == NULL)
-        return;
-
-    filename = fl_filename_setext(filename, ".dly");
-
-    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
-    strcpy(Efx_Echotron->Filename,filename);
-
-    if(!Efx_Echotron->setfile(USERFILE))
-    {
-        m_process->Handle_Message(14, filename);
-    }
-
-    echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
-
-    echotron_length->maximum(Efx_Echotron->get_file_length());}
-    xywh {106 156 46 10} labelsize 10 deactivate
+  Fl_Button B_scan {
+    label Scan
+    callback {scan_for_new_dly_files();}
+    xywh {106 156 46 10} labelsize 10
     class RKR_Button
   }
   Fl_Counter echotron_length {
@@ -340,8 +312,18 @@ echotron_length->maximum(Efx_Echotron->get_file_length());}
         echotron_length->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
         break;
     case Echotron_User_File:
-        echotron_user->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_User_File));
-        echotron_user->do_callback();
+    {
+        if(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_User_File))
+        {
+            echotron_user->color (global_leds_color);
+            echotron_user->redraw ();
+        }
+        else
+        {
+            echotron_user->color (global_fore_color);
+            echotron_user->redraw ();
+        }
+    }
         break;
     case Echotron_Tempo:
         echotron_tempo->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));

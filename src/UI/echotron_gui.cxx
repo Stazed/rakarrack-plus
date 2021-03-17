@@ -186,47 +186,11 @@ void EchotronGui::cb_echotron_md(RKR_Check_Button* o, void* v) {
   ((EchotronGui*)(o->parent()))->cb_echotron_md_i(o,v);
 }
 
-void EchotronGui::cb_echotron_user_i(RKR_Check_Button* o, void*) {
-  m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File,(int)o->value());
-
-if((int)o->value())B_ech->activate(); else B_ech->deactivate();
+void EchotronGui::cb_B_scan_i(RKR_Button*, void*) {
+  scan_for_new_dly_files();
 }
-void EchotronGui::cb_echotron_user(RKR_Check_Button* o, void* v) {
-  ((EchotronGui*)(o->parent()))->cb_echotron_user_i(o,v);
-}
-
-void EchotronGui::cb_B_ech_i(RKR_Button*, void*) {
-  // If nothing previously set, then default location
-    std::string chooser_start_location = "";
-
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->UDirFilename;
-    }
-
-    char *filename;
-    filename = fl_file_chooser("Load dly File:", "(*.dly)", chooser_start_location.c_str(), 0);
-
-    if (filename == NULL)
-        return;
-
-    filename = fl_filename_setext(filename, ".dly");
-
-    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
-    strcpy(Efx_Echotron->Filename,filename);
-
-    if(!Efx_Echotron->setfile(USERFILE))
-    {
-        m_process->Handle_Message(14, filename);
-    }
-
-    echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
-
-    echotron_length->maximum(Efx_Echotron->get_file_length());
-}
-void EchotronGui::cb_B_ech(RKR_Button* o, void* v) {
-  ((EchotronGui*)(o->parent()))->cb_B_ech_i(o,v);
+void EchotronGui::cb_B_scan(RKR_Button* o, void* v) {
+  ((EchotronGui*)(o->parent()))->cb_B_scan_i(o,v);
 }
 
 void EchotronGui::cb_echotron_length_i(RKR_Counter* o, void*) {
@@ -513,32 +477,31 @@ this->when(FL_WHEN_RELEASE);
   echotron_md->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   echotron_md->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* echotron_md
-{ echotron_user = new RKR_Check_Button(67, 154, 39, 15, "User");
-  echotron_user->box(FL_NO_BOX);
-  echotron_user->down_box(FL_BORDER_BOX);
+{ RKR_Box* o = echotron_user = new RKR_Box(67, 154, 12, 12, "User");
+  echotron_user->box(FL_DOWN_BOX);
   echotron_user->color(FL_BACKGROUND_COLOR);
-  echotron_user->selection_color(FL_FOREGROUND_COLOR);
+  echotron_user->selection_color(FL_BACKGROUND_COLOR);
   echotron_user->labeltype(FL_NORMAL_LABEL);
   echotron_user->labelfont(0);
   echotron_user->labelsize(10);
   echotron_user->labelcolor(FL_BACKGROUND2_COLOR);
-  echotron_user->callback((Fl_Callback*)cb_echotron_user);
-  echotron_user->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  echotron_user->align(Fl_Align(FL_ALIGN_RIGHT));
   echotron_user->when(FL_WHEN_RELEASE);
-} // RKR_Check_Button* echotron_user
-{ B_ech = new RKR_Button(106, 156, 46, 10, "Browse");
-  B_ech->box(FL_UP_BOX);
-  B_ech->color(FL_BACKGROUND_COLOR);
-  B_ech->selection_color(FL_BACKGROUND_COLOR);
-  B_ech->labeltype(FL_NORMAL_LABEL);
-  B_ech->labelfont(0);
-  B_ech->labelsize(10);
-  B_ech->labelcolor(FL_FOREGROUND_COLOR);
-  B_ech->callback((Fl_Callback*)cb_B_ech);
-  B_ech->align(Fl_Align(FL_ALIGN_CENTER));
-  B_ech->when(FL_WHEN_RELEASE);
-  B_ech->deactivate();
-} // RKR_Button* B_ech
+  o->set_box_type(BOX_LIGHT);
+  o->set_label_offset(1);
+} // RKR_Box* echotron_user
+{ B_scan = new RKR_Button(106, 156, 46, 10, "Scan");
+  B_scan->box(FL_UP_BOX);
+  B_scan->color(FL_BACKGROUND_COLOR);
+  B_scan->selection_color(FL_BACKGROUND_COLOR);
+  B_scan->labeltype(FL_NORMAL_LABEL);
+  B_scan->labelfont(0);
+  B_scan->labelsize(10);
+  B_scan->labelcolor(FL_FOREGROUND_COLOR);
+  B_scan->callback((Fl_Callback*)cb_B_scan);
+  B_scan->align(Fl_Align(FL_ALIGN_CENTER));
+  B_scan->when(FL_WHEN_RELEASE);
+} // RKR_Button* B_scan
 { RKR_Counter* o = echotron_length = new RKR_Counter(16, 167, 48, 12, "#");
   echotron_length->type(1);
   echotron_length->box(FL_UP_BOX);
@@ -594,8 +557,18 @@ void EchotronGui::parameter_refresh(int index) {
           echotron_length->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Taps));
           break;
       case Echotron_User_File:
-          echotron_user->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_User_File));
-          echotron_user->do_callback();
+      {
+          if(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_User_File))
+          {
+              echotron_user->color (global_leds_color);
+              echotron_user->redraw ();
+          }
+          else
+          {
+              echotron_user->color (global_fore_color);
+              echotron_user->redraw ();
+          }
+      }
           break;
       case Echotron_Tempo:
           echotron_tempo->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));

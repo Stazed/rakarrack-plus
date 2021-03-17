@@ -92,15 +92,11 @@ private:
   inline void cb_echotron_md_i(RKR_Check_Button*, void*);
   static void cb_echotron_md(RKR_Check_Button*, void*);
 public:
-  RKR_Check_Button *echotron_user;
+  RKR_Box *echotron_user;
+  RKR_Button *B_scan;
 private:
-  inline void cb_echotron_user_i(RKR_Check_Button*, void*);
-  static void cb_echotron_user(RKR_Check_Button*, void*);
-public:
-  RKR_Button *B_ech;
-private:
-  inline void cb_B_ech_i(RKR_Button*, void*);
-  static void cb_B_ech(RKR_Button*, void*);
+  inline void cb_B_scan_i(RKR_Button*, void*);
+  static void cb_B_scan(RKR_Button*, void*);
 public:
   RKR_Counter *echotron_length;
 private:
