@@ -491,6 +491,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(1);
 } // RKR_Box* echotron_user
 { B_scan = new RKR_Button(106, 156, 46, 10, "Scan");
+  B_scan->tooltip("Scan the User Directory for .dly files added after program start.");
   B_scan->box(FL_UP_BOX);
   B_scan->color(FL_BACKGROUND_COLOR);
   B_scan->selection_color(FL_BACKGROUND_COLOR);
@@ -522,6 +523,8 @@ this->when(FL_WHEN_RELEASE);
   o->set_text_offset(-1);
 } // RKR_Counter* echotron_length
 { echotron_fnum = new RKR_Choice(88, 168, 64, 14, "File");
+  echotron_fnum->tooltip("Select the .dly file to be used. File preceded by a \'*\' are user supplied f\
+iles in the User Directory.");
   echotron_fnum->box(FL_FLAT_BOX);
   echotron_fnum->down_box(FL_BORDER_BOX);
   echotron_fnum->color(FL_BACKGROUND_COLOR);

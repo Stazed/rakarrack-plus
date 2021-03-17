@@ -158,11 +158,11 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
   Fl_Button B_scan {
     label Scan
     callback {scan_for_new_wav_files();}
-    xywh {106 143 46 12} labelsize 10
+    tooltip {Scan the User Directory for .wav files added after program start.} xywh {106 143 46 12} labelsize 10
     class RKR_Button
   }
   Fl_Choice convo_fnum {
-    label Preset
+    label File
     callback {int user_file_selected = 0;
     Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (o->menu ());
     std::string file = m[o->value()].label();
@@ -215,7 +215,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
         convo_user->color (global_fore_color);
         convo_user->redraw ();
     }}
-    xywh {51 159 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    tooltip {Select the .wav file to be used. File preceded by a '*' are user supplied files in the User Directory.} xywh {51 159 101 16} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
     MenuItem {} {

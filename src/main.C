@@ -254,6 +254,9 @@ main(int argc, char *argv[])
                 }
                 process.Change_Preset = C_CHANGE_PRESET_OFF;
             }
+            
+            if (global_error_number > 0)
+                process.Handle_Message(global_error_number);
         }
 
         if ((!jack_disconnected) && (process.Jack_Shut_Down))

@@ -365,6 +365,7 @@ this->when(FL_WHEN_RELEASE);
   convo_safe->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* convo_safe
 { B_scan = new RKR_Button(106, 143, 46, 12, "Scan");
+  B_scan->tooltip("Scan the User Directory for .wav files added after program start.");
   B_scan->box(FL_UP_BOX);
   B_scan->color(FL_BACKGROUND_COLOR);
   B_scan->selection_color(FL_BACKGROUND_COLOR);
@@ -376,7 +377,9 @@ this->when(FL_WHEN_RELEASE);
   B_scan->align(Fl_Align(FL_ALIGN_CENTER));
   B_scan->when(FL_WHEN_RELEASE);
 } // RKR_Button* B_scan
-{ convo_fnum = new RKR_Choice(51, 159, 101, 16, "Preset");
+{ convo_fnum = new RKR_Choice(51, 159, 101, 16, "File");
+  convo_fnum->tooltip("Select the .wav file to be used. File preceded by a \'*\' are user supplied f\
+iles in the User Directory.");
   convo_fnum->box(FL_FLAT_BOX);
   convo_fnum->down_box(FL_BORDER_BOX);
   convo_fnum->color(FL_BACKGROUND_COLOR);

@@ -223,7 +223,7 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_LFO_Type,(int)o->value
   Fl_Button B_scan {
     label Scan
     callback {scan_for_new_dly_files();}
-    xywh {106 156 46 10} labelsize 10
+    tooltip {Scan the User Directory for .dly files added after program start.} xywh {106 156 46 10} labelsize 10
     class RKR_Button
   }
   Fl_Counter echotron_length {
@@ -245,7 +245,7 @@ echotron_length->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Ta
 
 Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
 echotron_length->maximum(Efx_Echotron->get_file_length());}
-    xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    tooltip {Select the .dly file to be used. File preceded by a '*' are user supplied files in the User Directory.} xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
     MenuItem {} {
