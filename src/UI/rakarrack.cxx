@@ -1918,6 +1918,7 @@ void RKRGUI::make_window() {
       REVERBTRON->hide();
       Efx_Gui_Base[EFX_REVERBTRON] = o;
       o->initialize(m_process, this);
+      o->add_user_files();
       REVERBTRON->end();
     } // RevtronGui* REVERBTRON
     { EchotronGui* o = ECHOTRON = new EchotronGui(161, 212, 158, 184);

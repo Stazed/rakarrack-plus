@@ -628,3 +628,55 @@ void RevtronGui::parameter_refresh(int index) {
           break;
       }
 }
+
+void RevtronGui::add_reverbtron_file(std::string name) {
+  revtron_fnum->add(name.c_str ());
+      
+      Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (revtron_fnum->menu ());
+      Fl_Menu_Item *p;
+  
+      int font_size = C_DEFAULT_FONT_SIZE;
+  
+      for (int i = 0; i < m->size(); i++)
+      {
+          p = m->next(i);
+  
+          if (i == 0)
+          {
+              font_size = p->labelsize();
+          }
+  
+          p->labelsize(font_size);
+          p->labelfont (global_font_type);
+      }
+}
+
+void RevtronGui::add_user_files() {
+  for(unsigned i = 0; i < m_process->Reverbtron_RVB_Files.size(); i++)
+      {
+          add_reverbtron_file(m_process->Reverbtron_RVB_Files[i].User_File_Menu_Name );
+      }
+}
+
+void RevtronGui::scan_for_new_rvb_files() {
+  // This is just to get the current font size so the scan does not change the size
+      // when the menu is reloaded
+      Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (revtron_fnum->menu ());
+      int font_size = m->next(0)->labelsize();
+  
+      // Clear the whole menu and re-add everything
+      revtron_fnum->clear();
+  
+      // Add the default
+      revtron_fnum->menu(menu_revtron_fnum);
+  
+      // Set the font size for the first item, others will follow
+      m = const_cast<Fl_Menu_Item*>  (revtron_fnum->menu ());
+      m->next(0)->labelsize(font_size);
+  
+      // Re scan the User Directory and reload user vector
+      m_process->load_reverbtron_vector();
+  
+      // Add user files from vector to menu
+      add_user_files();
+}

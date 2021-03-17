@@ -1038,6 +1038,7 @@ Fl::focus(Open_Order);}
         code0 {\#include "reverbtron_gui.h"}
         code1 {Efx_Gui_Base[EFX_REVERBTRON] = o;}
         code2 {o->initialize(m_process, this);}
+        code3 {o->add_user_files();}
         class RevtronGui
       } {}
       Fl_Group ECHOTRON {
