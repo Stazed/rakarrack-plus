@@ -2341,4 +2341,8 @@ RKR::load_reverbtron_vector()
 
         Reverbtron_RVB_Files.push_back(another_file);
     }
+
+    // Copy to the audio effect class
+    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
+    Efx_Reverbtron->set_user_files(Reverbtron_RVB_Files);
 }

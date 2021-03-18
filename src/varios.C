@@ -224,12 +224,20 @@ RKR::Handle_Message(int num, std::string filename)
             "Settings/Preferences/Bank - User Directory", filename.c_str());
     }
         break;
-
     case 44:
     {
         Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
         filename =  Efx_Echotron->Filename;
         sprintf(error_msg, "Echotron user file cannot be found in user directory:\n%s\n\n"
+            "All user files must be put in the user directory set in:\n"
+            "Settings/Preferences/Bank - User Directory", filename.c_str());
+    }
+        break;
+    case 45:
+    {
+        Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
+        filename =  Efx_Reverbtron->Filename;
+        sprintf(error_msg, "Reverbtron user file cannot be found in user directory:\n%s\n\n"
             "All user files must be put in the user directory set in:\n"
             "Settings/Preferences/Bank - User Directory", filename.c_str());
     }

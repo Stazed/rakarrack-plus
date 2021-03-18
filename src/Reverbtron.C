@@ -404,6 +404,42 @@ Reverbtron::setfile(int value)
         memset(Filename, 0, sizeof (Filename));
         sprintf(Filename, "%s/%d.rvb", DATADIR, Filenum + 1); // DATADIR comes from CMakeLists.txt
     }
+#ifndef LV2_SUPPORT // Rakarrack-plus only, user files must be in User Directory
+    else    // User file
+    {
+        // For backwards compatibility and copying to another computer,
+        // we check the filename only for a match in the user directory.
+        // If a match is found, then we use the User Directory path.
+        std::string file_name_clean = strrchr(Filename,'/')+1;     // get the file name W/O path
+        int file_found = 0;
+        
+        // Check if the user file is in the User Directory
+        for(unsigned i = 0; i < RVB_Files.size(); i++)
+        {
+            if(strcmp(file_name_clean.c_str(), RVB_Files[i].User_File_Name_Clean.c_str()) == 0)
+            {
+                // We found the file in the user directory so replace Filename with
+                // the full path of the found file. In case the User Directory name
+                // was changed, or copied to another computer with a different file
+                // structure, and backwards compatible if the file was not originally
+                // placed in the User Directory.
+                file_found = 1;
+                memset(Filename, 0, sizeof (Filename));
+                sprintf(Filename, "%s", RVB_Files[i].User_File_Name.c_str());
+                break;
+            }
+        }
+        
+        // We did not find the file in the User Directory, so error
+        if(!file_found)
+        {
+            filedata = loaddefault();
+            applyfile(filedata);
+            error = 45;
+            return (0);
+        }
+    }
+#endif
 
 //    printf("Reverbtron Filename %s\n",Filename);
     
@@ -482,7 +518,7 @@ Reverbtron::loadfile(char* filename)
     if ((fs = fopen(filename, "r")) == NULL)
     {
         f = loaddefault();
-        error = 1;
+        error = 2;
         return (f);
     }
     
@@ -497,7 +533,7 @@ Reverbtron::loadfile(char* filename)
     if (fgets(wbuf, sizeof wbuf, fs) == NULL)
     {
         f = loaddefault();
-        error = 1;
+        error = 2;
         return (f);
     }
 
@@ -507,7 +543,7 @@ Reverbtron::loadfile(char* filename)
     if (fgets(wbuf, sizeof wbuf, fs) == NULL)
     {
         f = loaddefault();
-        error = 1;
+        error = 2;
         return (f);
     }
 
@@ -521,7 +557,7 @@ Reverbtron::loadfile(char* filename)
     if (fgets(wbuf, sizeof wbuf, fs) == NULL)
     {
         f = loaddefault();
-        error = 1;
+        error = 2;
         return (f);
     }
     
@@ -537,7 +573,7 @@ Reverbtron::loadfile(char* filename)
         if (fgets(wbuf, sizeof wbuf, fs) == NULL)
         {
             f = loaddefault();
-            error = 1;
+            error = 2;
             return (f);
         }
         sscanf(wbuf, "%f,%f\n", &f.ftime[i], &f.tdata[i]);
@@ -896,7 +932,11 @@ Reverbtron::changepar(int npar, int value)
 #ifdef LV2_SUPPORT
         setfile(value); // This will only be called from changepar() upon initialization for lv2 and is ignored.
 #else
-        if (!setfile(value))global_error_number = 2;
+        if (!setfile(value))
+        {
+            global_error_number = error;
+            error = 0;
+        }
 #endif 
         break;
     case Revtron_Stretch:
