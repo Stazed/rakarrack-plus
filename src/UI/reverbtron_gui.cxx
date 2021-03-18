@@ -197,43 +197,11 @@ void RevtronGui::cb_revtron_safe(RKR_Check_Button* o, void* v) {
   ((RevtronGui*)(o->parent()))->cb_revtron_safe_i(o,v);
 }
 
-void RevtronGui::cb_revtron_user_i(RKR_Check_Button* o, void*) {
-  m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_User_File,(int)o->value());
-
-if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();
+void RevtronGui::cb_B_scan_i(RKR_Button*, void*) {
+  scan_for_new_rvb_files();
 }
-void RevtronGui::cb_revtron_user(RKR_Check_Button* o, void* v) {
-  ((RevtronGui*)(o->parent()))->cb_revtron_user_i(o,v);
-}
-
-void RevtronGui::cb_B_rvb_i(RKR_Button*, void*) {
-  // If nothing previously set, then default location
-    std::string chooser_start_location = "";
-    
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->UDirFilename;
-    }
-
-    char *filename;
-    filename = fl_file_chooser("Load rvb File:", "(*.rvb)", chooser_start_location.c_str(), 0);
-    
-    if (filename == NULL)
-        return;
-    
-    filename = fl_filename_setext(filename, ".rvb");
-
-    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
-    strcpy(Efx_Reverbtron->Filename, filename);
-
-    if(!Efx_Reverbtron->setfile(USERFILE))
-    {
-        m_process->Handle_Message(14, filename);
-    };
-}
-void RevtronGui::cb_B_rvb(RKR_Button* o, void* v) {
-  ((RevtronGui*)(o->parent()))->cb_B_rvb_i(o,v);
+void RevtronGui::cb_B_scan(RKR_Button* o, void* v) {
+  ((RevtronGui*)(o->parent()))->cb_B_scan_i(o,v);
 }
 
 void RevtronGui::cb_revtron_fnum_i(RKR_Choice* o, void*) {
@@ -526,33 +494,32 @@ this->when(FL_WHEN_RELEASE);
   revtron_safe->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   revtron_safe->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* revtron_safe
-{ revtron_user = new RKR_Check_Button(67, 154, 39, 15, "User");
-  revtron_user->tooltip("User file");
-  revtron_user->box(FL_NO_BOX);
-  revtron_user->down_box(FL_BORDER_BOX);
+{ RKR_Box* o = revtron_user = new RKR_Box(67, 154, 12, 12, "User");
+  revtron_user->box(FL_DOWN_BOX);
   revtron_user->color(FL_BACKGROUND_COLOR);
-  revtron_user->selection_color(FL_FOREGROUND_COLOR);
+  revtron_user->selection_color(FL_BACKGROUND_COLOR);
   revtron_user->labeltype(FL_NORMAL_LABEL);
   revtron_user->labelfont(0);
   revtron_user->labelsize(10);
   revtron_user->labelcolor(FL_BACKGROUND2_COLOR);
-  revtron_user->callback((Fl_Callback*)cb_revtron_user);
-  revtron_user->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
+  revtron_user->align(Fl_Align(FL_ALIGN_RIGHT));
   revtron_user->when(FL_WHEN_RELEASE);
-} // RKR_Check_Button* revtron_user
-{ B_rvb = new RKR_Button(106, 156, 46, 10, "Browse");
-  B_rvb->box(FL_UP_BOX);
-  B_rvb->color(FL_BACKGROUND_COLOR);
-  B_rvb->selection_color(FL_BACKGROUND_COLOR);
-  B_rvb->labeltype(FL_NORMAL_LABEL);
-  B_rvb->labelfont(0);
-  B_rvb->labelsize(10);
-  B_rvb->labelcolor(FL_FOREGROUND_COLOR);
-  B_rvb->callback((Fl_Callback*)cb_B_rvb);
-  B_rvb->align(Fl_Align(FL_ALIGN_CENTER));
-  B_rvb->when(FL_WHEN_RELEASE);
-  B_rvb->deactivate();
-} // RKR_Button* B_rvb
+  o->set_box_type(BOX_LIGHT);
+  o->set_label_offset(1);
+} // RKR_Box* revtron_user
+{ B_scan = new RKR_Button(106, 156, 46, 10, "Scan");
+  B_scan->tooltip("Scan the User Directory for .rvb files added after program start.");
+  B_scan->box(FL_UP_BOX);
+  B_scan->color(FL_BACKGROUND_COLOR);
+  B_scan->selection_color(FL_BACKGROUND_COLOR);
+  B_scan->labeltype(FL_NORMAL_LABEL);
+  B_scan->labelfont(0);
+  B_scan->labelsize(10);
+  B_scan->labelcolor(FL_FOREGROUND_COLOR);
+  B_scan->callback((Fl_Callback*)cb_B_scan);
+  B_scan->align(Fl_Align(FL_ALIGN_CENTER));
+  B_scan->when(FL_WHEN_RELEASE);
+} // RKR_Button* B_scan
 { revtron_fnum = new RKR_Choice(51, 168, 101, 14, "File");
   revtron_fnum->tooltip("Select one of the program provided IR files");
   revtron_fnum->box(FL_FLAT_BOX);
@@ -590,8 +557,18 @@ void RevtronGui::parameter_refresh(int index) {
           revtron_length->value(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Length));
           break;
       case Revtron_User_File:
-          revtron_user->value(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File));
-          revtron_user->do_callback();
+      {
+          if(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File))
+          {
+              revtron_user->color (global_leds_color);
+              revtron_user->redraw ();
+          }
+          else
+          {
+              revtron_user->color (global_fore_color);
+              revtron_user->redraw ();
+          }
+      }
           break;
       case Revtron_I_Delay:
           revtron_idelay->value(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_I_Delay));

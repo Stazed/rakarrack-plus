@@ -95,15 +95,11 @@ private:
   inline void cb_revtron_safe_i(RKR_Check_Button*, void*);
   static void cb_revtron_safe(RKR_Check_Button*, void*);
 public:
-  RKR_Check_Button *revtron_user;
+  RKR_Box *revtron_user;
+  RKR_Button *B_scan;
 private:
-  inline void cb_revtron_user_i(RKR_Check_Button*, void*);
-  static void cb_revtron_user(RKR_Check_Button*, void*);
-public:
-  RKR_Button *B_rvb;
-private:
-  inline void cb_B_rvb_i(RKR_Button*, void*);
-  static void cb_B_rvb(RKR_Button*, void*);
+  inline void cb_B_scan_i(RKR_Button*, void*);
+  static void cb_B_scan(RKR_Button*, void*);
 public:
   RKR_Choice *revtron_fnum;
 private:

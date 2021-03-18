@@ -227,41 +227,17 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_LPF,(int)o->value());
     tooltip {Safe mode} xywh {30 154 41 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  Fl_Check_Button revtron_user {
+  Fl_Box revtron_user {
     label User
-    callback {m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_User_File,(int)o->value());
-
-if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
-    tooltip {User file} xywh {67 154 39 15} down_box BORDER_BOX labelsize 10 labelcolor 7
-    class RKR_Check_Button
+    xywh {67 154 12 12} box DOWN_BOX labelsize 10 labelcolor 7 align 8
+    code0 {o->set_box_type(BOX_LIGHT);}
+    code1 {o->set_label_offset(1);}
+    class RKR_Box
   }
-  Fl_Button B_rvb {
-    label Browse
-    callback {// If nothing previously set, then default location
-    std::string chooser_start_location = "";
-    
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->UDirFilename;
-    }
-
-    char *filename;
-    filename = fl_file_chooser("Load rvb File:", "(*.rvb)", chooser_start_location.c_str(), 0);
-    
-    if (filename == NULL)
-        return;
-    
-    filename = fl_filename_setext(filename, ".rvb");
-
-    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
-    strcpy(Efx_Reverbtron->Filename, filename);
-
-    if(!Efx_Reverbtron->setfile(USERFILE))
-    {
-        m_process->Handle_Message(14, filename);
-    }}
-    xywh {106 156 46 10} labelsize 10 deactivate
+  Fl_Button B_scan {
+    label Scan
+    callback {scan_for_new_rvb_files();}
+    tooltip {Scan the User Directory for .rvb files added after program start.} xywh {106 156 46 10} labelsize 10
     class RKR_Button
   }
   Fl_Choice revtron_fnum {
@@ -328,8 +304,18 @@ if((int)o->value())B_rvb->activate(); else B_rvb->deactivate();}
         revtron_length->value(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_Length));
         break;
     case Revtron_User_File:
-        revtron_user->value(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File));
-        revtron_user->do_callback();
+    {
+        if(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_User_File))
+        {
+            revtron_user->color (global_leds_color);
+            revtron_user->redraw ();
+        }
+        else
+        {
+            revtron_user->color (global_fore_color);
+            revtron_user->redraw ();
+        }
+    }
         break;
     case Revtron_I_Delay:
         revtron_idelay->value(m_process->Rack_Effects[EFX_REVERBTRON]->getpar(Revtron_I_Delay));
