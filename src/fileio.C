@@ -1139,7 +1139,7 @@ RKR::load_bank_vector()
     // Clear for the next directory
     file_name.clear();
     
-    // The user bank directory
+    // The user bank directory if set
     if(strcmp(UDirFilename, DATADIR) != 0)
     {
         dir = opendir(UDirFilename);
@@ -2003,6 +2003,7 @@ RKR::load_MIDI_table_vector()
     DIR *dir;
     struct dirent *fs;
     
+    // Has a user directory been set?
     if(strcmp(UDirFilename, DATADIR) != 0)
     {
         dir = opendir(UDirFilename);
@@ -2011,7 +2012,9 @@ RKR::load_MIDI_table_vector()
         {
             return;
         }
-     }
+    }
+    else
+        return; // No user directory set
 
     // Get the bank files in the directory
     while ((fs = readdir(dir)))
@@ -2176,6 +2179,7 @@ RKR::load_convolotron_vector()
     DIR *dir;
     struct dirent *fs;
 
+    // Has a user directory been set?
     if(strcmp(UDirFilename, DATADIR) != 0)
     {
         dir = opendir(UDirFilename);
@@ -2184,7 +2188,9 @@ RKR::load_convolotron_vector()
         {
             return;
         }
-     }
+    }
+    else
+        return; // No user directory set
 
     // Get the .wav files in the directory
     while ((fs = readdir(dir)))
@@ -2237,6 +2243,7 @@ RKR::load_echotron_vector()
     DIR *dir;
     struct dirent *fs;
 
+    // Has a user directory been set?
     if(strcmp(UDirFilename, DATADIR) != 0)
     {
         dir = opendir(UDirFilename);
@@ -2245,7 +2252,9 @@ RKR::load_echotron_vector()
         {
             return;
         }
-     }
+    }
+    else
+        return; // No user directory set
 
     // Get the .wav files in the directory
     while ((fs = readdir(dir)))
@@ -2298,6 +2307,7 @@ RKR::load_reverbtron_vector()
     DIR *dir;
     struct dirent *fs;
 
+    // Has a user directory been set?
     if(strcmp(UDirFilename, DATADIR) != 0)
     {
         dir = opendir(UDirFilename);
@@ -2306,7 +2316,9 @@ RKR::load_reverbtron_vector()
         {
             return;
         }
-     }
+    }
+    else
+        return; // No user directory set
 
     // Get the .wav files in the directory
     while ((fs = readdir(dir)))
