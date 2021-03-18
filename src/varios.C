@@ -77,170 +77,177 @@ RKR::Handle_Message(int num, std::string filename)
 
     switch (num)
     {
-    case 1:
-        sprintf(error_msg, "%s", "Convolotron is unable to open the audio .wav file.");
-        break;
-    case 2:
-        sprintf(error_msg, "%s", "Reverbtron is unable to open the IR .rvb file");
-        break;
-    case 3:
-        sprintf(error_msg, "%s", "Error writing the file. Do you have permission to write to this directory?");
-        break;
-    case 4:
-        sprintf(error_msg, "%s", "Echotron is unable to open the .dly file");
-        break;
-    case 5:
-        sprintf(error_msg, "%s", "Some Pan parameter is bad in the .dly file");
-        break;
-    case 6:
-        sprintf(error_msg, "%s", "Some Time parameter is bad in the .dly file");
-        break;
-    case 7:
-        sprintf(error_msg, "%s", "Some Level parameter is bad in the .dly file");
-        break;
-    case 8:
-        sprintf(error_msg, "%s", "Some LP parameter is bad in the .dly file");
-        break;
-    case 9:
-        sprintf(error_msg, "%s", "Some BP parameter is bad in the .dly file");
-        break;
-    case 10:
-        sprintf(error_msg, "%s", "Some HP parameter is bad in the .dly file");
-        break;
-    case 11:
-        sprintf(error_msg, "%s", "Some Freq parameter is bad in the .dly file");
-        break;
-    case 12:
-        sprintf(error_msg, "%s", "Some Q parameter bad in the .dly file");
-        break;
-    case 13:
-        sprintf(error_msg, "%s", "Some Stages parameter bad in the .dly file");
-        break;
-    case 14:
-        sprintf(error_msg, "Error loading file %s", filename.c_str());
-        break;
-    case 15:
-        sprintf(error_msg, "Error loading file Order %s", filename.c_str());
-        break;
-    case 16:
-        sprintf(error_msg, "Error loading file Version %s", filename.c_str());
-        break;
-    case 17:
-        sprintf(error_msg, "Error loading file Author %s", filename.c_str());
-        break;
-    case 18:
-        sprintf(error_msg, "Error loading file Preset Name %s", filename.c_str());
-        break;
-    case 19:
-        sprintf(error_msg, "Error loading file General %s", filename.c_str());
-        break;
-    case 20:
-        sprintf(error_msg, "Error loading file MIDI %s", filename.c_str());
-        break;
-    case 21:
-        sprintf(error_msg, "%s", "fread error in load_names()");
-        break;
-    case 22:
-        sprintf(error_msg, "%s", "fread error in load_bank()");
-        break;
-    case 23:
-        sprintf(error_msg, "Error reading file %s", filename.c_str());
-        break;
-    case 24:
-        sprintf(error_msg, "%s", "Error running rakconvert!");
-        break;
-    case 25:
-        sprintf(error_msg, "%s", "Error running rakverb!");
-        break;
-    case 26:
-        sprintf(error_msg, "%s", "Error removing internal preset!");
-        break;
-    case 27:
-        sprintf(error_msg, "%s", "Error merging internal presets!");
-        break;
-    case 28:
-        sprintf(error_msg, "fread error in add_bank_item() %s", filename.c_str());
-        break;
-    case 29:
-        sprintf(error_msg, "%s", "Error running aconnect!");
-        break;
-    case 30:
-        sprintf(error_msg, "%s", "Can not load this Bank file because it is from an old rakarrack version,"
-                "\n please use 'Convert Old Bank' menu entry in the Bank window.");
-        break;
-    case 31:
-        sprintf(error_msg, "%s", "Can not load this Bank file because it is from an old rakarrack git version,"
-                "\n please use rakgit2new utility to convert.");
-        break;
-    case 32:
-        sprintf(error_msg, "%s", "!! Rakarrack-plus CPU Usage Warning !!\n"
-                "It appears your CPU will not easily handle convolution with the current settings.\n"
-                "Be careful with the Convolotron effect settings.\n"
-                "Please read Help (F1) for more information.");
-        message_type = 0;
-        break;
-    case 33:
-        sprintf(error_msg, "%s", "Jack Shut Down, try to save your work");
-        break;
-    case 34:
-        sprintf(error_msg, "%s", "Cannot make a jack client, is jackd running?");
-        break;
-    case 35:
-        sprintf(error_msg,"Please, now try to load the new files");
-        break;
-    case 36:
-        sprintf(error_msg,"This file already has the new format");
-        break;
-    case 37:
-        sprintf(error_msg,"Please, now use Reverbtron to load the new '.rvb' file");
-        break;
-    case 38:
-        sprintf(error_msg, "This setting will be changed the next time you run rakarrack-plus");
-        break;
-    case 39:
-        sprintf(error_msg, "Internal Presets can not be deleted ");
-        break;
-    case 40:
-        sprintf(error_msg, "Bank file cannot be found in user directory %s\n\n"
-                "All user banks must be put in the user directory set in:\n"
+        case 1:
+            sprintf(error_msg, "%s", "Convolotron is unable to open the audio .wav file.");
+            break;
+        case 2:
+            sprintf(error_msg, "%s", "Reverbtron is unable to open the IR .rvb file");
+            break;
+        case 3:
+            sprintf(error_msg, "%s", "Error writing the file. Do you have permission to write to this directory?");
+            break;
+        case 4:
+            sprintf(error_msg, "%s", "Echotron is unable to open the .dly file");
+            break;
+        case 5:
+            sprintf(error_msg, "%s", "Some Pan parameter is bad in the .dly file");
+            break;
+        case 6:
+            sprintf(error_msg, "%s", "Some Time parameter is bad in the .dly file");
+            break;
+        case 7:
+            sprintf(error_msg, "%s", "Some Level parameter is bad in the .dly file");
+            break;
+        case 8:
+            sprintf(error_msg, "%s", "Some LP parameter is bad in the .dly file");
+            break;
+        case 9:
+            sprintf(error_msg, "%s", "Some BP parameter is bad in the .dly file");
+            break;
+        case 10:
+            sprintf(error_msg, "%s", "Some HP parameter is bad in the .dly file");
+            break;
+        case 11:
+            sprintf(error_msg, "%s", "Some Freq parameter is bad in the .dly file");
+            break;
+        case 12:
+            sprintf(error_msg, "%s", "Some Q parameter bad in the .dly file");
+            break;
+        case 13:
+            sprintf(error_msg, "%s", "Some Stages parameter bad in the .dly file");
+            break;
+        case 14:
+            sprintf(error_msg, "Error loading file %s", filename.c_str());
+            break;
+        case 15:
+            sprintf(error_msg, "Error loading file Order %s", filename.c_str());
+            break;
+        case 16:
+            sprintf(error_msg, "Error loading file Version %s", filename.c_str());
+            break;
+        case 17:
+            sprintf(error_msg, "Error loading file Author %s", filename.c_str());
+            break;
+        case 18:
+            sprintf(error_msg, "Error loading file Preset Name %s", filename.c_str());
+            break;
+        case 19:
+            sprintf(error_msg, "Error loading file General %s", filename.c_str());
+            break;
+        case 20:
+            sprintf(error_msg, "Error loading file MIDI %s", filename.c_str());
+            break;
+        case 21:
+            sprintf(error_msg, "%s", "fread error in load_names()");
+            break;
+        case 22:
+            sprintf(error_msg, "%s", "fread error in load_bank()");
+            break;
+        case 23:
+            sprintf(error_msg, "Error reading file %s", filename.c_str());
+            break;
+        case 24:
+            sprintf(error_msg, "%s", "Error running rakconvert!");
+            break;
+        case 25:
+            sprintf(error_msg, "%s", "Error running rakverb!");
+            break;
+        case 26:
+            sprintf(error_msg, "%s", "Error removing internal preset!");
+            break;
+        case 27:
+            sprintf(error_msg, "%s", "Error merging internal presets!");
+            break;
+        case 28:
+            sprintf(error_msg, "fread error in add_bank_item() %s", filename.c_str());
+            break;
+        case 29:
+            sprintf(error_msg, "%s", "Error running aconnect!");
+            break;
+        case 30:
+            sprintf(error_msg, "%s", "Can not load this Bank file because it is from an old rakarrack version,"
+                    "\n please use 'Convert Old Bank' menu entry in the Bank window.");
+            break;
+        case 31:
+            sprintf(error_msg, "%s", "Can not load this Bank file because it is from an old rakarrack git version,"
+                    "\n please use rakgit2new utility to convert.");
+            break;
+        case 32:
+            sprintf(error_msg, "%s", "!! Rakarrack-plus CPU Usage Warning !!\n"
+                    "It appears your CPU will not easily handle convolution with the current settings.\n"
+                    "Be careful with the Convolotron effect settings.\n"
+                    "Please read Help (F1) for more information.");
+            message_type = 0;
+            break;
+        case 33:
+            sprintf(error_msg, "%s", "Jack Shut Down, try to save your work");
+            break;
+        case 34:
+            sprintf(error_msg, "%s", "Cannot make a jack client, is jackd running?");
+            break;
+        case 35:
+            sprintf(error_msg,"Please, now try to load the new files");
+            break;
+        case 36:
+            sprintf(error_msg,"This file already has the new format");
+            break;
+        case 37:
+            sprintf(error_msg,"Please, now use Reverbtron to load the new '.rvb' file");
+            break;
+        case 38:
+            sprintf(error_msg, "This setting will be changed the next time you run rakarrack-plus");
+            break;
+        case 39:
+            sprintf(error_msg, "Internal Presets can not be deleted ");
+            break;
+        case 40:
+            sprintf(error_msg, "Bank file cannot be found in user directory %s\n\n"
+                    "All user banks must be put in the user directory set in:\n"
+                    "Settings/Preferences/Bank - User Directory", filename.c_str());
+            break;
+        case 41:
+            sprintf(error_msg,"User Directory is not set!\n\n"
+                    "You must set a User Directory in :\n"
+                    "Settings/Preferences/Bank - User Directory.");
+            break;
+        case 42:
+            sprintf(error_msg, "MIDI program file cannot be found in user directory:\n%s\n\n"
+                    "All MIDI program files should be put in the user directory set in:\n"
+                    "Settings/Preferences/Bank - User Directory", filename.c_str());
+            break;
+        case 43:
+        {
+            Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
+            filename =  Efx_Convolotron->Filename;
+            sprintf(error_msg, "Convolotron user file cannot be found in user directory:\n%s\n\n"
+                "All user files must be put in the user directory set in:\n"
                 "Settings/Preferences/Bank - User Directory", filename.c_str());
-        break;
-    case 41:
-        sprintf(error_msg,"User Directory is not set!\n\n"
-                "You must set a User Directory in :\n"
-                "Settings/Preferences/Bank - User Directory.");
-        break;
-    case 42:
-        sprintf(error_msg, "MIDI program file cannot be found in user directory:\n%s\n\n"
-                "All MIDI program files should be put in the user directory set in:\n"
+        }
+            break;
+        case 44:
+        {
+            Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
+            filename =  Efx_Echotron->Filename;
+            sprintf(error_msg, "Echotron user file cannot be found in user directory:\n%s\n\n"
+                "All user files must be put in the user directory set in:\n"
                 "Settings/Preferences/Bank - User Directory", filename.c_str());
-        break;
-    case 43:
-    {
-        Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-        filename =  Efx_Convolotron->Filename;
-        sprintf(error_msg, "Convolotron user file cannot be found in user directory:\n%s\n\n"
-            "All user files must be put in the user directory set in:\n"
-            "Settings/Preferences/Bank - User Directory", filename.c_str());
-    }
-        break;
-    case 44:
-    {
-        Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-        filename =  Efx_Echotron->Filename;
-        sprintf(error_msg, "Echotron user file cannot be found in user directory:\n%s\n\n"
-            "All user files must be put in the user directory set in:\n"
-            "Settings/Preferences/Bank - User Directory", filename.c_str());
-    }
-        break;
-    case 45:
-    {
-        Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-        filename =  Efx_Reverbtron->Filename;
-        sprintf(error_msg, "Reverbtron user file cannot be found in user directory:\n%s\n\n"
-            "All user files must be put in the user directory set in:\n"
-            "Settings/Preferences/Bank - User Directory", filename.c_str());
-    }
+        }
+            break;
+        case 45:
+        {
+            Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
+            filename =  Efx_Reverbtron->Filename;
+            sprintf(error_msg, "Reverbtron user file cannot be found in user directory:\n%s\n\n"
+                "All user files must be put in the user directory set in:\n"
+                "Settings/Preferences/Bank - User Directory", filename.c_str());
+        }
+            break;
+        case 46:
+        {
+            sprintf(error_msg, "Cannot access User Directory at:\n%s\n"
+                    "Do you have permission?\n"
+                    "Is the User Directory a valid read/write folder?", filename.c_str());
+        }
         break;
     }
 

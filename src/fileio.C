@@ -2186,6 +2186,7 @@ RKR::load_convolotron_vector()
 
         if (dir == NULL)
         {
+            Handle_Message(46, UDirFilename);
             return;
         }
     }
@@ -2250,6 +2251,7 @@ RKR::load_echotron_vector()
 
         if (dir == NULL)
         {
+            Handle_Message(46, UDirFilename);
             return;
         }
     }
@@ -2314,6 +2316,7 @@ RKR::load_reverbtron_vector()
 
         if (dir == NULL)
         {
+            Handle_Message(46, UDirFilename);
             return;
         }
     }
