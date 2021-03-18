@@ -1030,7 +1030,6 @@ void RKRGUI::make_window() {
       PORT_MIDI_IN_STATE->labelfont(1);
       PORT_MIDI_IN_STATE->labelsize(8);
       PORT_MIDI_IN_STATE->labelcolor(FL_BACKGROUND2_COLOR);
-      PORT_MIDI_IN_STATE->user_data((void*)(BOX_LED_DATA));
       PORT_MIDI_IN_STATE->align(Fl_Align(FL_ALIGN_WRAP));
       PORT_MIDI_IN_STATE->when(FL_WHEN_RELEASE);
       PORT_MIDI_IN_STATE->hide();
@@ -1045,7 +1044,6 @@ void RKRGUI::make_window() {
       PORT_MIDI_OUT_STATE->labelfont(1);
       PORT_MIDI_OUT_STATE->labelsize(8);
       PORT_MIDI_OUT_STATE->labelcolor(FL_BACKGROUND2_COLOR);
-      PORT_MIDI_OUT_STATE->user_data((void*)(BOX_LED_DATA));
       PORT_MIDI_OUT_STATE->align(Fl_Align(FL_ALIGN_WRAP));
       PORT_MIDI_OUT_STATE->when(FL_WHEN_RELEASE);
       PORT_MIDI_OUT_STATE->hide();
@@ -1060,7 +1058,6 @@ void RKRGUI::make_window() {
       PORT_AUX_STATE->labelfont(1);
       PORT_AUX_STATE->labelsize(10);
       PORT_AUX_STATE->labelcolor(FL_BACKGROUND2_COLOR);
-      PORT_AUX_STATE->user_data((void*)(BOX_LED_DATA));
       PORT_AUX_STATE->align(Fl_Align(FL_ALIGN_CENTER));
       PORT_AUX_STATE->when(FL_WHEN_RELEASE);
       PORT_AUX_STATE->hide();
@@ -1075,7 +1072,6 @@ void RKRGUI::make_window() {
       PORT_IN_STATE->labelfont(1);
       PORT_IN_STATE->labelsize(10);
       PORT_IN_STATE->labelcolor(FL_BACKGROUND2_COLOR);
-      PORT_IN_STATE->user_data((void*)(BOX_LED_DATA));
       PORT_IN_STATE->align(Fl_Align(FL_ALIGN_CENTER));
       PORT_IN_STATE->when(FL_WHEN_RELEASE);
       PORT_IN_STATE->hide();
@@ -1090,7 +1086,6 @@ void RKRGUI::make_window() {
       PORT_OUT_STATE->labelfont(1);
       PORT_OUT_STATE->labelsize(10);
       PORT_OUT_STATE->labelcolor(FL_BACKGROUND2_COLOR);
-      PORT_OUT_STATE->user_data((void*)(BOX_LED_DATA));
       PORT_OUT_STATE->align(Fl_Align(FL_ALIGN_CENTER));
       PORT_OUT_STATE->when(FL_WHEN_RELEASE);
       PORT_OUT_STATE->hide();
@@ -1105,7 +1100,6 @@ void RKRGUI::make_window() {
       CPULOAD->labelfont(0);
       CPULOAD->labelsize(10);
       CPULOAD->labelcolor(FL_BACKGROUND2_COLOR);
-      CPULOAD->user_data((void*)(BOX_LED_DATA));
       CPULOAD->align(Fl_Align(FL_ALIGN_CENTER));
       CPULOAD->when(FL_WHEN_RELEASE);
       o->set_label_offset(0);

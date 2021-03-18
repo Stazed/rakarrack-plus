@@ -332,7 +332,7 @@ widget gets the focus.} private local
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {926 197 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {575 84 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -601,7 +601,6 @@ Fl::focus(Open_Order);}
       }
       Fl_Box PORT_MIDI_IN_STATE {
         label {Midi In}
-        user_data BOX_LED_DATA
         xywh {620 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
         code0 {o->set_label_offset(-2);}
         code1 {o->set_box_type(BOX_LEDS);}
@@ -609,7 +608,6 @@ Fl::focus(Open_Order);}
       }
       Fl_Box PORT_MIDI_OUT_STATE {
         label {Midi Out}
-        user_data BOX_LED_DATA
         xywh {648 3 29 20} labelfont 1 labelsize 8 labelcolor 7 align 128 hide
         code0 {o->set_label_offset(-2);}
         code1 {o->set_box_type(BOX_LEDS);}
@@ -617,7 +615,6 @@ Fl::focus(Open_Order);}
       }
       Fl_Box PORT_AUX_STATE {
         label Aux
-        user_data BOX_LED_DATA
         xywh {676 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
         code1 {o->set_box_type(BOX_LEDS);}
@@ -625,7 +622,6 @@ Fl::focus(Open_Order);}
       }
       Fl_Box PORT_IN_STATE {
         label In
-        user_data BOX_LED_DATA
         xywh {698 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
         code1 {o->set_box_type(BOX_LEDS);}
@@ -633,14 +629,12 @@ Fl::focus(Open_Order);}
       }
       Fl_Box PORT_OUT_STATE {
         label Out
-        user_data BOX_LED_DATA
         xywh {719 5 32 17} labelfont 1 labelsize 10 labelcolor 7 hide
         code0 {o->set_label_offset(0);}
         code1 {o->set_box_type(BOX_LEDS);}
         class RKR_Box
       }
       Fl_Box CPULOAD {
-        user_data BOX_LED_DATA
         xywh {750 5 45 17} labelsize 10 labelcolor 7
         code0 {o->set_label_offset(0);}
         code1 {o->set_box_type(BOX_LEDS);}

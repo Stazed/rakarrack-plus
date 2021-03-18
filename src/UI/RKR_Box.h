@@ -30,8 +30,6 @@
 #include <FL/Fl_Box.H>
 #include <FL/fl_draw.H>
 
-#define BOX_LED_DATA    5
-
 #define BOX_DEFAULT     0
 #define BOX_LEDS        1
 #define BOX_LIGHT       2

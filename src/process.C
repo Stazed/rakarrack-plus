@@ -78,6 +78,7 @@ RKR::RKR(int gui) :
     File_To_Load(),
     Gui_Shown(gui),
     Gui_Refresh(0),
+    Shut_Off_Below_Mouse(0),
     No_Jack_Client(0),
     Bank_Load_Command_Line(0),
     lv(),
