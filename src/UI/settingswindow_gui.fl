@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {487 180 530 580} type Double
+  xywh {1295 557 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1498,7 +1498,7 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       }
       Fl_File_Input Udir {
         label {User Directory}
-        tooltip {The User Directory must be set to a writable location and all custom user banks must be stored in this directory.} xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
+        tooltip {The User Directory must be set to a writable location and all custom user banks must be stored in this directory.} xywh {20 50 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(4);}
         class RKR_File_Input
@@ -1524,7 +1524,7 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       }
       Fl_File_Input BFiname {
         label {Default User Bank Filename}
-        tooltip {This is the bank that will be selected with the 'U' button from the main window or the Bank window.} xywh {20 120 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7 deactivate
+        tooltip {This is the bank that will be selected with the 'U' button from the main window or the Bank window.} xywh {20 120 390 40} labelsize 12 labelcolor 7 align 5 when 1 textcolor 7
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(4);}
         class RKR_File_Input
@@ -1657,8 +1657,7 @@ Fl_Tooltip::enable(m_process->ena_tool);}
         (float) scroll->get_start_height() * H_midi_set_ratio
       );} {}
   }
-  Function {fill_mptable(int num,int value)} {open
-  } {
+  Function {fill_mptable(int num,int value)} {} {
     code {// Fill settings scroll
     for (int t=0; t < scroll->children(); t++)
     {
@@ -1675,14 +1674,14 @@ Fl_Tooltip::enable(m_process->ena_tool);}
                     // We add the preset number here to avoid duplicate names which the fltk choice
                     // widget will eliminate into one. It does not allow duplicates and things
                     // will not align if eliminated.
-                    char buf[64];
+                    char buf[128];
                     sprintf(buf,"(%d) %s", i, m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name);
                     p->add(buf);
                     p->textfont (global_font_type);
                 }
                 else
                 {
-                    char buf[64];
+                    char buf[128];
                     sprintf(buf,"(%d) Untitled", i);
                     p->add(buf);
                     p->textfont (global_font_type);

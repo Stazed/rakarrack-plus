@@ -3049,7 +3049,6 @@ ks must be stored in this directory.");
       Udir->textcolor(FL_BACKGROUND2_COLOR);
       Udir->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       Udir->when(FL_WHEN_CHANGED);
-      Udir->deactivate();
       o->set_label_offset(2);
       o->set_text_offset(4);
     } // RKR_File_Input* Udir
@@ -3079,7 +3078,6 @@ ndow or the Bank window.");
       BFiname->textcolor(FL_BACKGROUND2_COLOR);
       BFiname->align(Fl_Align(FL_ALIGN_TOP_LEFT));
       BFiname->when(FL_WHEN_CHANGED);
-      BFiname->deactivate();
       o->set_label_offset(2);
       o->set_text_offset(4);
     } // RKR_File_Input* BFiname
@@ -3216,7 +3214,7 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
                   }
                   else
                   {
-                      char buf[64];
+                      char buf[128];
                       sprintf(buf,"(%d) Untitled", i);
                       p->add(buf);
                       p->textfont (global_font_type);
