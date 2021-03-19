@@ -1963,6 +1963,8 @@ RKR::save_MIDI_table(char *filename)
     }
 
     fclose(fn);
+    
+    PG_table_modified = 0;
 }
 
 void

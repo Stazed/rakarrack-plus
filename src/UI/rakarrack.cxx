@@ -35,6 +35,7 @@ int global_look_changed = 0;
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   is_modified();
+is_PG_table_modified();
 save_current_state(0);
 
 m_process->Exit_Program=1;

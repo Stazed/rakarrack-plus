@@ -1014,7 +1014,8 @@ void SettingsWindowGui::cb_MTable(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Load_i(RKR_Button*, void*) {
-  m_parent->Load_Midi_Program_Change_Table();
+  m_parent->is_PG_table_modified();
+m_parent->Load_Midi_Program_Change_Table();
 }
 void SettingsWindowGui::cb_Load(RKR_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Load_i(o,v);

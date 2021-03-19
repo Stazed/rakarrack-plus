@@ -329,10 +329,11 @@ widget gets the focus.} private local
   } {
     Fl_Window Principal {
       callback {is_modified();
+is_PG_table_modified();
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {575 84 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {277 56 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1922,6 +1923,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {BankWin_Label(const char *filename)} {open
   } {}
   Function {is_modified()} {open
+  } {}
+  Function {is_PG_table_modified()} {open return_type void
   } {}
   Function {Put_Loaded_Bank()} {open
   } {}

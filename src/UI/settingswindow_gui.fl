@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {1295 557 530 580} type Double
+  xywh {1283 316 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1313,7 +1313,7 @@ m_process->Conecta();}
         class RKR_Counter
       }
       Fl_Group wMIDI {
-        label {MIDI implementation} open
+        label {MIDI implementation}
         xywh {30 266 180 23} box DOWN_FRAME labelsize 12 labelcolor 7 align 5
         code0 {o->set_label_offset(2);}
         class RKR_Group
@@ -1380,7 +1380,8 @@ else
       }
       Fl_Button {} {
         label Load
-        callback {m_parent->Load_Midi_Program_Change_Table();}
+        callback {m_parent->is_PG_table_modified();
+m_parent->Load_Midi_Program_Change_Table();}
         tooltip {Load program change table from file} xywh {254 331 70 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button

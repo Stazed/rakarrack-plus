@@ -210,6 +210,7 @@ RKR::RKR(int gui) :
     Jack_Port_Connnection_Changed(),
     custom_midi_table(),
     custom_midi_table_file(-1),
+    PG_table_modified(0),
     active_bank(0),
     new_bank_loaded(),
     Aux_Gain(),

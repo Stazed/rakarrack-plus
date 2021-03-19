@@ -595,6 +595,7 @@ public:
   void MiraConfig();
   void BankWin_Label(const char *filename);
   void is_modified();
+  void is_PG_table_modified();
   void Put_Loaded_Bank();
   void Chord(int eff);
   void MIDI_control_gui_refresh();

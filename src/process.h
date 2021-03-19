@@ -1176,6 +1176,11 @@ public:
     int custom_midi_table_file;
 
     /**
+     * Flag to indicate if the custom MIDI program change table was modified by the user.
+     */
+    int PG_table_modified;
+
+    /**
      * The currently active bank displayed in the bank window.
      */
     int active_bank;

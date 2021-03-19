@@ -2089,6 +2089,32 @@ void RKRGUI::is_modified()
     }
 }
 
+void
+RKRGUI::is_PG_table_modified()
+{
+    if (m_process->PG_table_modified)
+    {
+        Fl_Widget *w = fl_message_icon();
+        w->parent()->copy_label(m_process->jackcliname);
+
+        // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
+        m_process->Shut_Off_Below_Mouse = 1;
+        int ok = fl_choice("Program change table was modified, but not saved", "Discard", "Save", NULL);
+        m_process->Shut_Off_Below_Mouse = 0;
+        
+        switch (ok)
+        {
+            case 0:
+                m_process->PG_table_modified = 0;
+                break;
+
+            case 1:
+                Save_Midi_Program_Change_Table();
+                break;
+        }
+    }
+}
+
 void RKRGUI::Put_Loaded_Bank()
 {
     int k = 1;
@@ -3641,6 +3667,7 @@ inline void RKRGUI::bank_click_i(Fl_Choice* o, void*)
 
     m_process->MIDI_Table[num - UD_Bank_Used_Start].bank = (int) o->value();
     Settings->fill_mptable(num + UD_Bank_Used_Start, m_process->MIDI_Table[num - UD_Bank_Used_Start].bank);
+    m_process->PG_table_modified = 1;
 }
 
 void RKRGUI::p_click(Fl_Choice* o, void* v)
@@ -3654,6 +3681,7 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
     int num = (int) kk;
 
     m_process->MIDI_Table[num - UD_Preset_Used_Start].preset = o->value();
+    m_process->PG_table_modified = 1;
 }
 
 void RKRGUI::RandomPreset()
