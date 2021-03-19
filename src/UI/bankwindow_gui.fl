@@ -57,7 +57,7 @@ m_parent= _rgui;} {}
     } {
       MenuItem NewB {
         label {&New}
-        callback {m_parent->is_modified ();
+        callback {m_parent->is_bank_modified ();
     m_process->new_bank(m_process->Bank);
     m_parent->Put_Loaded_Bank();
     redraw();}
@@ -126,7 +126,7 @@ m_parent->put_icon(m_parent->AboutWin);}
   }
   Fl_Button B_New {
     label {New Bank}
-    callback {m_parent->is_modified ();
+    callback {m_parent->is_bank_modified ();
     m_process->new_bank(m_process->Bank);
     m_parent->Put_Loaded_Bank();
     redraw();}
@@ -164,11 +164,11 @@ m_parent->put_icon(m_parent->AboutWin);}
   }
   Fl_Choice CH_UB {
     label {User Banks       }
-    callback {// Need to save the file name in case is_modified() results in a save
+    callback {// Need to save the file name in case is_bank_modified() results in a save
     // which rescans and deletes the menu with the void *v pointer 
     std::string bank_filename = (char *)v;
 
-    m_parent->is_modified ();
+    m_parent->is_bank_modified ();
 
     if(m_process->load_bank_from_vector (bank_filename))
     {

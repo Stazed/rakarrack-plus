@@ -34,7 +34,7 @@ int global_font_type = 0;
 int global_look_changed = 0; 
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
-  is_modified();
+  is_bank_modified();
 is_PG_table_modified();
 save_current_state(0);
 
@@ -552,7 +552,7 @@ void RKRGUI::cb_Metro_Tempo(RKR_Slider* o, void* v) {
 
 void RKRGUI::cb_L_B1_i(RKR_Button*, void*) {
   // Check if the bank was modified - request save
-    is_modified();
+    is_bank_modified();
     
     // Copy the bank to the process active Bank
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[0].Bank);
@@ -568,7 +568,7 @@ void RKRGUI::cb_L_B1(RKR_Button* o, void* v) {
 
 void RKRGUI::cb_L_B2_i(RKR_Button*, void*) {
   // Check if the bank was modified - request save
-    is_modified();
+    is_bank_modified();
 
     // Copy the bank to the process active Bank
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[1].Bank);
@@ -584,7 +584,7 @@ void RKRGUI::cb_L_B2(RKR_Button* o, void* v) {
 
 void RKRGUI::cb_L_B3_i(RKR_Button*, void*) {
   // Check if the bank was modified - request save
-    is_modified();
+    is_bank_modified();
 
     // Copy the bank to the process active Bank
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[2].Bank);
@@ -600,7 +600,7 @@ void RKRGUI::cb_L_B3(RKR_Button* o, void* v) {
 
 void RKRGUI::cb_L_B4_i(RKR_Button*, void*) {
   // Check if the bank was modified - request save
-    is_modified ();
+    is_bank_modified ();
 
     if(m_process->load_bank_from_vector (m_process->BankFilename))
     {

@@ -2062,7 +2062,7 @@ void RKRGUI::BankWin_Label(const char *filename)
     BankWindow->copy_label(tmp);
 }
 
-void RKRGUI::is_modified()
+void RKRGUI::is_bank_modified()
 {
     // popup dialog for modified bank saving
 
@@ -3853,7 +3853,7 @@ char* RKRGUI::get_bank_file()
 {
     // get bank file
     char *filename;
-    is_modified();
+    is_bank_modified();
     
     // If nothing previously set, then default location
     std::string chooser_start_location = "";

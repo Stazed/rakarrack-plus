@@ -328,7 +328,7 @@ widget gets the focus.} private local
   Function {make_window()} {open return_type void
   } {
     Fl_Window Principal {
-      callback {is_modified();
+      callback {is_bank_modified();
 is_PG_table_modified();
 save_current_state(0);
 
@@ -1364,7 +1364,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         Fl_Button L_B1 {
           label 1
           callback {// Check if the bank was modified - request save
-    is_modified();
+    is_bank_modified();
     
     // Copy the bank to the process active Bank
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[0].Bank);
@@ -1379,7 +1379,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         Fl_Button L_B2 {
           label 2
           callback {// Check if the bank was modified - request save
-    is_modified();
+    is_bank_modified();
 
     // Copy the bank to the process active Bank
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[1].Bank);
@@ -1394,7 +1394,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         Fl_Button L_B3 {
           label 3
           callback {// Check if the bank was modified - request save
-    is_modified();
+    is_bank_modified();
 
     // Copy the bank to the process active Bank
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[2].Bank);
@@ -1409,7 +1409,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         Fl_Button L_B4 {
           label U
           callback {// Check if the bank was modified - request save
-    is_modified ();
+    is_bank_modified ();
 
     if(m_process->load_bank_from_vector (m_process->BankFilename))
     {
@@ -1922,7 +1922,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {BankWin_Label(const char *filename)} {open
   } {}
-  Function {is_modified()} {open
+  Function {is_bank_modified()} {open
   } {}
   Function {is_PG_table_modified()} {open return_type void
   } {}

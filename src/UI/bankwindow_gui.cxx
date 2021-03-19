@@ -15,7 +15,7 @@ const std::vector<std::string> bank_submenu_paths
 };
 
 void BankWindowGui::cb_NewB_i(Fl_Menu_*, void*) {
-  m_parent->is_modified ();
+  m_parent->is_bank_modified ();
     m_process->new_bank(m_process->Bank);
     m_parent->Put_Loaded_Bank();
     redraw();
@@ -115,7 +115,7 @@ Fl_Menu_Item* BankWindowGui::ContenidoB = BankWindowGui::menu_MenuB + 8;
 Fl_Menu_Item* BankWindowGui::Acerca_deB = BankWindowGui::menu_MenuB + 9;
 
 void BankWindowGui::cb_B_New_i(RKR_Button*, void*) {
-  m_parent->is_modified ();
+  m_parent->is_bank_modified ();
     m_process->new_bank(m_process->Bank);
     m_parent->Put_Loaded_Bank();
     redraw();
@@ -153,11 +153,11 @@ void BankWindowGui::cb_B_B4(RKR_Button* o, void* v) {
 }
 
 void BankWindowGui::cb_CH_UB_i(RKR_Choice*, void* v) {
-  // Need to save the file name in case is_modified() results in a save
+  // Need to save the file name in case is_bank_modified() results in a save
     // which rescans and deletes the menu with the void *v pointer 
     std::string bank_filename = (char *)v;
 
-    m_parent->is_modified ();
+    m_parent->is_bank_modified ();
 
     if(m_process->load_bank_from_vector (bank_filename))
     {

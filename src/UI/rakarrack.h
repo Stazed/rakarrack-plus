@@ -594,7 +594,7 @@ public:
   void MiraClientes();
   void MiraConfig();
   void BankWin_Label(const char *filename);
-  void is_modified();
+  void is_bank_modified();
   void is_PG_table_modified();
   void Put_Loaded_Bank();
   void Chord(int eff);
