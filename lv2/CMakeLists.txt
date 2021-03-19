@@ -6,6 +6,7 @@ project (rakarrack-plus-lv2)
 
 add_library(rakarrack-plus-lv2 SHARED
   rkrlv2.C
+  ../src/Effect.C
   ../src/EQ.C
   ../src/AnalogFilter.C
   ../src/Compressor.C

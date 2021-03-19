@@ -417,7 +417,11 @@ Convolotron::setfile(int value)
         length = 1;
         rbuf[0] = 1.0f;
         process_rbuf();
+#ifdef LV2_SUPPORT
+        // FIXME
+#else
         global_error_number = 1;
+#endif
         return (0);
     }
 

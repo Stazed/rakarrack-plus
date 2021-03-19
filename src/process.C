@@ -33,7 +33,6 @@
 #include "process.h"
 
 int global_error_number = 0;
-std::string global_user_directory = "";
 char *jack_client_name = (char*) "rakarrack-plus";
 
 RKR::RKR(int gui) :

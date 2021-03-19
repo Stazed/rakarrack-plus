@@ -20,6 +20,8 @@
 
 #include "FPreset.h"
 
+std::string global_user_directory = "";
+
 FPreset::FPreset()
 {
 }
