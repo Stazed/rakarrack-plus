@@ -284,7 +284,7 @@ this->when(FL_WHEN_RELEASE);
   Alert_Message->when(FL_WHEN_RELEASE);
   o->set_box_type(BOX_LEDS);
 } // RKR_Box* Alert_Message
-{ ob = new Fl_Group(1, 1, 800, 620);
+{ ob = new Fl_Group(0, 60, 800, 540);
   ob->labelsize(18);
   ob->end();
 } // Fl_Group* ob
