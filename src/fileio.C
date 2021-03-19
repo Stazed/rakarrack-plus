@@ -1042,7 +1042,7 @@ RKR::load_bank(const char *filename)
             revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
         }
 
-        modified = 0;
+        bank_modified = 0;
         new_bank_loaded = 1;
         return (1);
     }
@@ -1083,7 +1083,7 @@ RKR::save_bank(const char *filename)
             revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
         }
 
-        modified = 0;
+        bank_modified = 0;
         return (1);
     }
 
@@ -1284,7 +1284,7 @@ RKR::copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct sourc
         memcpy(dest[i].XUserMIDI, source[i].XUserMIDI, sizeof(source[i].XUserMIDI));
     }
     
-    modified = 0;
+    bank_modified = 0;
     new_bank_loaded = 1;
 }
 

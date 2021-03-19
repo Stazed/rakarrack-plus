@@ -1309,7 +1309,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
             m_process->Bank[drag_destination] = m_process->Bank[button_number];
             m_process->Bank[button_number] = m_process->Bank[0];
             Put_Loaded_Bank();
-            m_process->modified = 1;
+            m_process->bank_modified = 1;
             button_number = drag_destination;
             drag = C_NO_DRAG;
         }
@@ -1356,7 +1356,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         add_pg_change += m_process->Preset_Name;
 
         w->copy_label(add_pg_change.c_str());
-        m_process->modified = 1;
+        m_process->bank_modified = 1;
     }
 
     // The user selected a preset from the bank window, so highlight and set it
@@ -2066,7 +2066,7 @@ void RKRGUI::is_modified()
 {
     // popup dialog for modified bank saving
 
-    if (m_process->modified)
+    if (m_process->bank_modified)
     {
         Fl_Widget *w = fl_message_icon();
         w->parent()->copy_label(m_process->jackcliname);
@@ -2079,7 +2079,7 @@ void RKRGUI::is_modified()
         switch (ok)
         {
             case 0:
-                m_process->modified = 0;
+                m_process->bank_modified = 0;
                 break;
 
             case 1:
@@ -3912,7 +3912,7 @@ void RKRGUI::set_save_file()
             // since we did not save in the user directory, we do not update
             // the active bank, and leave the previous in place. We reset the
             // modified flag for the current bank since save_bank() cleared it.
-            m_process->modified = 1;
+            m_process->bank_modified = 1;
 
             // Message telling user to put the file in the user directory
             m_process->Handle_Message (40, filename);

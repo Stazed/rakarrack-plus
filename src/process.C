@@ -92,7 +92,7 @@ RKR::RKR(int gui) :
     init_state(),
     actuvol(),
     help_displayed(0),
-    modified(0),
+    bank_modified(0),
     autoassign(),
     comemouse(),
     aconnect_MI(),
