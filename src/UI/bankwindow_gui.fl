@@ -57,10 +57,7 @@ m_parent= _rgui;} {}
     } {
       MenuItem NewB {
         label {&New}
-        callback {m_parent->is_bank_modified ();
-    m_process->new_bank(m_process->Bank);
-    m_parent->Put_Loaded_Bank();
-    redraw();}
+        callback {B_New->do_callback();}
         xywh {0 0 45 26} divider
       }
       MenuItem Load_Bank {

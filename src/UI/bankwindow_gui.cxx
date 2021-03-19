@@ -15,10 +15,7 @@ const std::vector<std::string> bank_submenu_paths
 };
 
 void BankWindowGui::cb_NewB_i(Fl_Menu_*, void*) {
-  m_parent->is_bank_modified ();
-    m_process->new_bank(m_process->Bank);
-    m_parent->Put_Loaded_Bank();
-    redraw();
+  B_New->do_callback();
 }
 void BankWindowGui::cb_NewB(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_NewB_i(o,v);
