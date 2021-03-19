@@ -114,6 +114,16 @@ Fl_Menu_Item* BankWindowGui::AyudaB = BankWindowGui::menu_MenuB + 7;
 Fl_Menu_Item* BankWindowGui::ContenidoB = BankWindowGui::menu_MenuB + 8;
 Fl_Menu_Item* BankWindowGui::Acerca_deB = BankWindowGui::menu_MenuB + 9;
 
+void BankWindowGui::cb_B_New_i(RKR_Button*, void*) {
+  m_parent->is_modified ();
+    m_process->new_bank(m_process->Bank);
+    m_parent->Put_Loaded_Bank();
+    redraw();
+}
+void BankWindowGui::cb_B_New(RKR_Button* o, void* v) {
+  ((BankWindowGui*)(o->parent()))->cb_B_New_i(o,v);
+}
+
 void BankWindowGui::cb_B_B1_i(RKR_Button*, void*) {
   m_parent->L_B1->do_callback();
 }
@@ -204,6 +214,19 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(6);
   o->set_submenu_paths(bank_submenu_paths);
 } // RKR_Menu_Bar* MenuB
+{ RKR_Button* o = B_New = new RKR_Button(131, 14, 80, 24, "New Bank");
+  B_New->box(FL_UP_BOX);
+  B_New->color((Fl_Color)2);
+  B_New->selection_color(FL_BACKGROUND_COLOR);
+  B_New->labeltype(FL_NORMAL_LABEL);
+  B_New->labelfont(0);
+  B_New->labelsize(14);
+  B_New->labelcolor(FL_FOREGROUND_COLOR);
+  B_New->callback((Fl_Callback*)cb_B_New);
+  B_New->align(Fl_Align(FL_ALIGN_CENTER));
+  B_New->when(FL_WHEN_RELEASE);
+  o->set_label_offset(2);
+} // RKR_Button* B_New
 { RKR_Button* o = B_B1 = new RKR_Button(258, 14, 32, 24, "1");
   B_B1->box(FL_UP_BOX);
   B_B1->color((Fl_Color)62);
