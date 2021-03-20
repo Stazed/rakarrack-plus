@@ -1290,7 +1290,7 @@ m_process->Conecta();}
       }
       Fl_Counter Midi_In_Counter {
         label {Effects Receive Channel}
-        callback {m_process->MidiCh=(int)o->value()-1;}
+        callback {m_process->MIDI_In_Channel=(int)o->value()-1;}
         xywh {30 210 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(2);}
@@ -1298,7 +1298,7 @@ m_process->Conecta();}
       }
       Fl_Counter Har_In_Counter {
         label {Harmonizer Receive Channel}
-        callback {m_process->HarCh=(int)o->value()-1;}
+        callback {m_process->Harmonizer_MIDI_Channel=(int)o->value()-1;}
         xywh {245 210 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(2);}
@@ -1306,7 +1306,7 @@ m_process->Conecta();}
       }
       Fl_Counter Stereo_Har_In_Counter {
         label {Stereo Harm Receive Channel}
-        callback {m_process->StereoHarCh=(int)o->value()-1;}
+        callback {m_process->StereoHarm_MIDI_Channel=(int)o->value()-1;}
         xywh {245 265 60 24} type Simple color 25 labelsize 12 labelcolor 7 align 8 minimum 1 maximum 16 step 1 value 1 textsize 12
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(2);}

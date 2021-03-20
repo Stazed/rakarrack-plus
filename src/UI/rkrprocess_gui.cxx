@@ -805,13 +805,13 @@ void RKRGUI::load_previous_state()
     Efx_Looper->setmvol(m_process->Metro_Vol);
 
     rakarrack.get(m_process->PrefNom("Update Tap"), m_process->Tap_Updated, 0);
-    rakarrack.get(m_process->PrefNom("MIDI IN Channel"), m_process->MidiCh, 1);
-    m_process->MidiCh--;
+    rakarrack.get(m_process->PrefNom("MIDI IN Channel"), m_process->MIDI_In_Channel, 1);
+    m_process->MIDI_In_Channel--;
 
-    rakarrack.get(m_process->PrefNom("MIDI IN Harmonizer"), m_process->HarCh, 1);
-    m_process->HarCh--;
-    rakarrack.get(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->StereoHarCh, 1);
-    m_process->StereoHarCh--;
+    rakarrack.get(m_process->PrefNom("MIDI IN Harmonizer"), m_process->Harmonizer_MIDI_Channel, 1);
+    m_process->Harmonizer_MIDI_Channel--;
+    rakarrack.get(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->StereoHarm_MIDI_Channel, 1);
+    m_process->StereoHarm_MIDI_Channel--;
 
     rakarrack.get(m_process->PrefNom("Limiter Position"), m_process->flpos, 0);
     rakarrack.get(m_process->PrefNom("Limiter +6dB"), m_process->db6booster, 0);
@@ -1177,9 +1177,9 @@ void RKRGUI::save_current_state(int whati)
             rakarrack.set(m_process->PrefNom("MIDI IN Device"), temp);
         }
         
-        rakarrack.set(m_process->PrefNom("MIDI IN Channel"), m_process->MidiCh + 1);
-        rakarrack.set(m_process->PrefNom("MIDI IN Harmonizer"), m_process->HarCh + 1);
-        rakarrack.set(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->StereoHarCh + 1);
+        rakarrack.set(m_process->PrefNom("MIDI IN Channel"), m_process->MIDI_In_Channel + 1);
+        rakarrack.set(m_process->PrefNom("MIDI IN Harmonizer"), m_process->Harmonizer_MIDI_Channel + 1);
+        rakarrack.set(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->StereoHarm_MIDI_Channel + 1);
         rakarrack.set(m_process->PrefNom("Harmonizer Quality"), m_process->HarQual);
         rakarrack.set(m_process->PrefNom("StereoHarm Quality"), m_process->SteQual);
         rakarrack.set(m_process->PrefNom("Sequence Quality"), m_process->SeqQual);
@@ -1853,9 +1853,9 @@ void RKRGUI::MiraConfig()
     Settings->D_J_Connect->value(m_process->aconnect_JA);
     Settings->D_IJ_Connect->value(m_process->aconnect_JIA);
 
-    Settings->Midi_In_Counter->value(m_process->MidiCh + 1);
-    Settings->Har_In_Counter->value(m_process->HarCh + 1);
-    Settings->Stereo_Har_In_Counter->value(m_process->StereoHarCh + 1);
+    Settings->Midi_In_Counter->value(m_process->MIDI_In_Channel + 1);
+    Settings->Har_In_Counter->value(m_process->Harmonizer_MIDI_Channel + 1);
+    Settings->Stereo_Har_In_Counter->value(m_process->StereoHarm_MIDI_Channel + 1);
 
     switch (m_process->HarQual)
     {

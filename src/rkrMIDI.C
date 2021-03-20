@@ -720,7 +720,7 @@ RKR::midievents()
         if ((Tap_Active) && (Tap_Selection == 1) && (midievent->type == SND_SEQ_EVENT_NOTEON) && (cmdvelo != 0))
             Tap_TempoSet = TapTempo();
 
-        if (midievent->data.note.channel == HarCh)
+        if (midievent->data.note.channel == Harmonizer_MIDI_Channel)
         {
             for (i = 0; i < POLY; i++)
             {
@@ -758,7 +758,7 @@ RKR::midievents()
             }
         }
 
-        if (midievent->data.note.channel == StereoHarCh)
+        if (midievent->data.note.channel == StereoHarm_MIDI_Channel)
         {
             for (i = 0; i < POLY; i++)
             {
@@ -800,7 +800,7 @@ RKR::midievents()
 
     if (midievent->type == SND_SEQ_EVENT_PGMCHANGE)
     {
-        if (midievent->data.control.channel == MidiCh)
+        if (midievent->data.control.channel == MIDI_In_Channel)
         {
             if (!custom_midi_table)
             {
@@ -826,7 +826,7 @@ RKR::midievents()
 
     if (midievent->type == SND_SEQ_EVENT_CONTROLLER)
     {
-        if (midievent->data.control.channel == MidiCh)
+        if (midievent->data.control.channel == MIDI_In_Channel)
         {
             if (RControl)
             {
@@ -1088,7 +1088,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 
         if ((Tap_Active) && (Tap_Selection == 1) && (type == 9) && (cmdvelo != 0)) Tap_TempoSet = TapTempo();
 
-        if (cmdchan == HarCh)
+        if (cmdchan == Harmonizer_MIDI_Channel)
         {
             for (i = 0; i < POLY; i++)
             {
@@ -1126,7 +1126,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
             }
         }
 
-        if (cmdchan == StereoHarCh)
+        if (cmdchan == StereoHarm_MIDI_Channel)
         {
             for (i = 0; i < POLY; i++)
             {
@@ -1170,7 +1170,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         int cmdvalue = midievent->buffer[1];
         int cmdchan = midievent->buffer[0]&15;
 
-        if (cmdchan == MidiCh)
+        if (cmdchan == MIDI_In_Channel)
         {
             if (!custom_midi_table)
             {
@@ -1198,7 +1198,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         int cmdvalue = midievent->buffer[2];
         int cmdchan = midievent->buffer[0]&15;
 
-        if (cmdchan == MidiCh)
+        if (cmdchan == MIDI_In_Channel)
         {
             if (RControl)
             {
