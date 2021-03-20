@@ -2087,19 +2087,31 @@ RKR::add_table_item(std::string filename)
     fclose(fn);
 }
 
+/**
+ * Copy the requested MIDI table from vector to current active table.
+ * 
+ * @param item
+ *      The MIDI table CC 32 (MIDI learnable) value sent or loaded in Settings/MIDI
+ * 
+ * @return 
+ *      1 = within valid range of MIDI table vector.
+ *      0 = Not in valid range.
+ */
 int
 RKR::set_midi_table(int item)
 {
-    if(item >= (int)Midi_Table_Vector.size())
-        return 0;
-    
-    for (int i = 0; i < 128; i++)
+    if(item < (int )Midi_Table_Vector.size())
     {
-        MIDI_Table[i].bank = Midi_Table_Vector[item].MIDI_Table[i].bank;
-        MIDI_Table[i].preset = Midi_Table_Vector[item].MIDI_Table[i].preset;
+        for (int i = 0; i < 128; i++)
+        {
+            MIDI_Table[i].bank = Midi_Table_Vector[item].MIDI_Table[i].bank;
+            MIDI_Table[i].preset = Midi_Table_Vector[item].MIDI_Table[i].preset;
+        }
+
+        return 1;
     }
     
-    return 1;
+    return 0;
 }
 
 void

@@ -1291,9 +1291,12 @@ RKR::process_midi_controller_events(int parameter, int value)
             return;
 
         case MC_Program_Table:
-            set_midi_table (value);
-            Change_MIDI_Table = value;
+        {
+            if(set_midi_table (value))
+                Change_MIDI_Table = value;  // GUI update
+
             return;
+        }
 
         case MC_Output_Volume:
             Master_Volume = (float) value / 127.0f;
