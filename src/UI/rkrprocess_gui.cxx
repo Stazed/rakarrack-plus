@@ -3370,9 +3370,10 @@ void RKRGUI::check_signals(void *usrPtr)
         if (!gui->m_process->File_To_Load.empty()) // individual preset
         {
             printf("Saving file: %s\n", gui->m_process->File_To_Load.c_str());
-            got_sigusr1 = 0;
             gui->m_process->save_preset(gui->m_process->File_To_Load.c_str());
         }
+        
+        got_sigusr1 = 0;
         return;
     }
 
