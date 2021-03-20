@@ -71,7 +71,6 @@ RKR::RKR(int gui) :
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
     Change_Bank(C_BANK_CHANGE_OFF),
-    Previous_MIDI_Bank(C_BANK_CHANGE_OFF),
     Change_MIDI_Table(C_BANK_CHANGE_OFF),
     Command_Line_File(0),
     File_To_Load(),
