@@ -1252,8 +1252,11 @@ RKR::process_midi_controller_events(int parameter, int value)
         {
             if(value < (int) Bank_Vector.size())
             {
-                copy_bank(Bank, Bank_Vector[value].Bank);
-                Change_Bank = value;
+                if(active_bank != value)
+                {
+                    copy_bank(Bank, Bank_Vector[value].Bank);
+                    active_bank = Change_Bank = value;      // Change_Bank is for GUI update
+                }
             }
             return;
         }
@@ -1280,7 +1283,9 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Unused_43:
         case MC_Unused_44:
         case MC_Unused_45:
+
         case MC_Unused_64:
+
         case MC_Unused_128:
         case MC_Unused_129:
             return;

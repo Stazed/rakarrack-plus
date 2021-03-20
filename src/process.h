@@ -873,7 +873,7 @@ public:
     int Change_Preset;
     
     /**
-     * Flag to indicate that a MIDI CC bank change has occurred.
+     * Flag to indicate that a MIDI CC bank change has occurred. For GUI update.
      */
     int Change_Bank;
 
