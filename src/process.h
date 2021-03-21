@@ -748,10 +748,10 @@ public:
     void new_bank (struct Preset_Bank_Struct active_bank[] );
     void bank_to_preset (int Num);
     void preset_to_bank (int i);
-    void copy_IO();
-    void convert_IO();
+    void copy_IO(struct Preset_Bank_Struct _bank[]);
+    void convert_IO(struct Preset_Bank_Struct _bank[]);
     int big_endian();
-    void fix_endianess();
+    void fix_endianess(struct Preset_Bank_Struct _bank[]);
     void save_skin (char *filename);
     bool load_skin (char *filename);
     void load_skin_error(FILE *fn);
@@ -1335,6 +1335,9 @@ public:
     } mc_efx_params[C_MC_PARAMETER_SIZE];
 
 
+    /**
+     * The currently active bank displayed on the Bank Window.
+     */
     Preset_Bank_Struct Bank[62];
 
     /**

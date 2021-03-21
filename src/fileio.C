@@ -1005,16 +1005,18 @@ RKR::load_bank(const char *filename)
         Handle_Message(error_number, filename);
         return (0);
     }
+    
+    Preset_Bank_Struct Load_Bank[62];
 
     FILE *fn;
 
     if ((fn = fopen(filename, "rb")) != NULL)
     {
-        new_bank(Bank);
+        new_bank(Load_Bank);
 
         while (1)
         {
-            size_t ret = fread(&Bank, sizeof (Bank), 1, fn);
+            size_t ret = fread(&Load_Bank, sizeof (Load_Bank), 1, fn);
 
             if (feof(fn))
                 break;
@@ -1022,7 +1024,7 @@ RKR::load_bank(const char *filename)
             if (ret != 1)
             {
                 Handle_Message(22);
-                new_bank(Bank);
+                new_bank(Bank);         // since we have a bad load, set the active bank to new
                 fclose(fn);
                 return 0;
             }
@@ -1032,15 +1034,18 @@ RKR::load_bank(const char *filename)
 
         if (big_endian())
         {
-            fix_endianess();
+            fix_endianess(Load_Bank);
         }
 
-        convert_IO();
+        convert_IO(Load_Bank);
 
         for(int i = 0; i < 62; i++)
         {
-            revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
+            revert_file_to_bank(Load_Bank[i].lv, sizeof(Load_Bank[i].lv));
         }
+
+        // copy the loaded bank to the active bank
+        copy_bank(Bank, Load_Bank);
 
         bank_modified = 0;
         new_bank_loaded = 1;
@@ -1054,34 +1059,29 @@ int
 RKR::save_bank(const char *filename)
 {
     FILE *fn;
+    
+    Preset_Bank_Struct Save_Bank[62];
+    
+    // Copy active bank
+    copy_bank(Save_Bank, Bank);
 
     if ((fn = fopen(filename, "wb")) != NULL)
     {
-        copy_IO();
+        copy_IO(Save_Bank);
 
         for(int i = 0; i < 62; i++)
         {
-            convert_bank_to_file(Bank[i].lv, sizeof(Bank[i].lv));
+            convert_bank_to_file(Save_Bank[i].lv, sizeof(Save_Bank[i].lv));
         }
 
         if (big_endian())
         {
-            fix_endianess();
+            fix_endianess(Save_Bank);
         }
         
-        fwrite(&Bank, sizeof (Bank), 1, fn);
-        
-        if (big_endian())
-        {
-            fix_endianess();
-        }
+        fwrite(&Save_Bank, sizeof (Save_Bank), 1, fn);
 
         fclose(fn);
-
-        for(int i = 0; i < 62; i++)
-        {
-            revert_file_to_bank(Bank[i].lv, sizeof(Bank[i].lv));
-        }
 
         bank_modified = 0;
         return (1);
@@ -1215,10 +1215,10 @@ RKR::add_bank_item(std::string filename)
 
         if (big_endian())
         {
-            fix_endianess();
+            fix_endianess(Another_Bank.Bank);
         }
 
-        convert_IO();
+        convert_IO(Another_Bank.Bank);
 
         for(int i = 0; i < 62; i++)
         {
@@ -1519,32 +1519,32 @@ RKR::preset_to_bank(int i)
 }
 
 void
-RKR::copy_IO()
+RKR::copy_IO(struct Preset_Bank_Struct _bank[])
 {
     for (int i = 0; i < 62; i++)
     {
-        memset(Bank[i].cInput_Gain, 0, sizeof (Bank[i].cInput_Gain));
-        sprintf(Bank[i].cInput_Gain, "%f", Bank[i].Input_Gain);
-        memset(Bank[i].cMaster_Volume, 0, sizeof (Bank[i].cMaster_Volume));
-        sprintf(Bank[i].cMaster_Volume, "%f", Bank[i].Master_Volume);
-        memset(Bank[i].cBalance, 0, sizeof (Bank[i].cBalance));
-        sprintf(Bank[i].cBalance, "%f", Bank[i].Balance);
+        memset(_bank[i].cInput_Gain, 0, sizeof (_bank[i].cInput_Gain));
+        sprintf(_bank[i].cInput_Gain, "%f", _bank[i].Input_Gain);
+        memset(_bank[i].cMaster_Volume, 0, sizeof (_bank[i].cMaster_Volume));
+        sprintf(_bank[i].cMaster_Volume, "%f", _bank[i].Master_Volume);
+        memset(_bank[i].cBalance, 0, sizeof (_bank[i].cBalance));
+        sprintf(_bank[i].cBalance, "%f", _bank[i].Balance);
     }
 }
 
 void
-RKR::convert_IO()
+RKR::convert_IO(struct Preset_Bank_Struct _bank[])
 {
     for (int i = 0; i < 62; i++)
     {
-        sscanf(Bank[i].cInput_Gain, "%f", &Bank[i].Input_Gain);
-        if (Bank[i].Input_Gain == 0.0) Bank[i].Input_Gain = 0.5f;
+        sscanf(_bank[i].cInput_Gain, "%f", &_bank[i].Input_Gain);
+        if (_bank[i].Input_Gain == 0.0) _bank[i].Input_Gain = 0.5f;
 
-        sscanf(Bank[i].cMaster_Volume, "%f", &Bank[i].Master_Volume);
-        if (Bank[i].Master_Volume == 0.0) Bank[i].Master_Volume = 0.5f;
+        sscanf(_bank[i].cMaster_Volume, "%f", &_bank[i].Master_Volume);
+        if (_bank[i].Master_Volume == 0.0) _bank[i].Master_Volume = 0.5f;
 
-        sscanf(Bank[i].cBalance, "%f", &Bank[i].Balance);
-        if (Bank[i].Balance == 0.0) Bank[i].Balance = 1.0f;
+        sscanf(_bank[i].cBalance, "%f", &_bank[i].Balance);
+        if (_bank[i].Balance == 0.0) _bank[i].Balance = 1.0f;
     }
 }
 
@@ -1556,23 +1556,23 @@ RKR::big_endian()
 }
 
 void
-RKR::fix_endianess()
+RKR::fix_endianess(struct Preset_Bank_Struct _bank[])
 {
     unsigned int data;
 
     for (int i = 0; i < 62; i++)
     {
-        data = Bank[i].Active;
+        data = _bank[i].Active;
         data = SwapFourBytes(data);
-        Bank[i].Active = data;
+        _bank[i].Active = data;
 
         for (int j = 0; j < 70; j++)
         {
             for (int k = 0; k < 20; k++)
             {
-                data = Bank[i].lv[j][k];
+                data = _bank[i].lv[j][k];
                 data = SwapFourBytes(data);
-                Bank[i].lv[j][k] = data;
+                _bank[i].lv[j][k] = data;
             }
         }
 
@@ -1580,9 +1580,9 @@ RKR::fix_endianess()
         {
             for (int k = 0; k < 20; k++)
             {
-                data = Bank[i].XUserMIDI[j][k];
+                data = _bank[i].XUserMIDI[j][k];
                 data = SwapFourBytes(data);
-                Bank[i].XUserMIDI[j][k] = data;
+                _bank[i].XUserMIDI[j][k] = data;
             }
         }
     }
