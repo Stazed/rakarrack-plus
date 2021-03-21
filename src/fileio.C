@@ -1361,40 +1361,40 @@ RKR::new_preset()
 }
 
 void
-RKR::new_bank(struct Preset_Bank_Struct active_bank[])
+RKR::new_bank(struct Preset_Bank_Struct _bank[])
 {
     for (int i = 0; i < 62; i++)
     {
-        memset(active_bank[i].Preset_Name, 0, sizeof (active_bank[i].Preset_Name));
-        memset(active_bank[i].Author, 0, sizeof (active_bank[i].Author));
-        strcpy(active_bank[i].Author, UserRealName);
-        memset(active_bank[i].ConvoFiname, 0, sizeof (active_bank[i].ConvoFiname));
-        memset(active_bank[i].RevFiname, 0, sizeof (active_bank[i].RevFiname));
-        memset(active_bank[i].EchoFiname, 0, sizeof (active_bank[i].EchoFiname));
+        memset(_bank[i].Preset_Name, 0, sizeof (_bank[i].Preset_Name));
+        memset(_bank[i].Author, 0, sizeof (_bank[i].Author));
+        strcpy(_bank[i].Author, UserRealName);
+        memset(_bank[i].ConvoFiname, 0, sizeof (_bank[i].ConvoFiname));
+        memset(_bank[i].RevFiname, 0, sizeof (_bank[i].RevFiname));
+        memset(_bank[i].EchoFiname, 0, sizeof (_bank[i].EchoFiname));
 
-        active_bank[i].Input_Gain = .5f;
-        active_bank[i].Master_Volume = .5f;
-        active_bank[i].Balance = 1.0f;
-        active_bank[i].Active = 0;
-        memset(active_bank[i].lv, 0, sizeof (active_bank[i].lv));
+        _bank[i].Input_Gain = .5f;
+        _bank[i].Master_Volume = .5f;
+        _bank[i].Balance = 1.0f;
+        _bank[i].Active = 0;
+        memset(_bank[i].lv, 0, sizeof (_bank[i].lv));
 
         // Set the default presets
         for (int j = 0; j < C_NUMBER_EFFECTS; j++)
         {
             for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
             {
-                active_bank[i].lv[j][k] = presets_default[j][k];
+                _bank[i].lv[j][k] = presets_default[j][k];
             }
-            active_bank[i].lv[j][C_BYPASS] = 0;
+            _bank[i].lv[j][C_BYPASS] = 0;
         }
         
         // Set the default order
         for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
         {
-            active_bank[i].lv[EFX_ORDER][k] = k;   // Order from 0 to 10
+            _bank[i].lv[EFX_ORDER][k] = k;   // Order from 0 to 10
         }
 
-        memset(active_bank[i].XUserMIDI, 0, sizeof (active_bank[i].XUserMIDI));
+        memset(_bank[i].XUserMIDI, 0, sizeof (_bank[i].XUserMIDI));
     }
 };
 

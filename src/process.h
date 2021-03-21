@@ -745,7 +745,7 @@ public:
     void add_bank_item(std::string filename);
     void copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[]);
     void new_preset ();
-    void new_bank (struct Preset_Bank_Struct active_bank[] );
+    void new_bank (struct Preset_Bank_Struct _bank[] );
     void bank_to_preset (int Num);
     void preset_to_bank (int i);
     void copy_IO(struct Preset_Bank_Struct _bank[]);
