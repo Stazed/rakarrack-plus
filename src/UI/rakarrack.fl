@@ -1486,7 +1486,7 @@ Put_Loaded();}
           label Compare
           callback {if ((int) o->value())
 {
-m_process->preset_to_bank(0);
+m_process->main_window_preset_to_active_bank(0);
 m_process->active_bank_preset_to_main_window((int)Preset_Counter->value());
 Put_Loaded();
 }

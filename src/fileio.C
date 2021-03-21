@@ -1470,32 +1470,40 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     }
 }
 
+/**
+ * Copy all the current main window preset information to the selected bank preset.
+ * This is triggered by right mouse button on a bank preset item.
+ *
+ * @param preset_number
+ *      The bank preset number which was selected by right mouse button. Corresponds
+ *      to the number preceding the preset name in brackets [1] to [60].
+ */
 void
-RKR::preset_to_bank(int i)
+RKR::main_window_preset_to_active_bank(int preset_number)
 {
     // Main window information
-    memset(Bank[i].Preset_Name, 0, sizeof (Bank[i].Preset_Name));
-    strcpy(Bank[i].Preset_Name, Preset_Name);
-    memset(Bank[i].Author, 0, sizeof (Bank[i].Author));
-    strcpy(Bank[i].Author, Author);
+    memset(Bank[preset_number].Preset_Name, 0, sizeof (Bank[preset_number].Preset_Name));
+    strcpy(Bank[preset_number].Preset_Name, Preset_Name);
+    memset(Bank[preset_number].Author, 0, sizeof (Bank[preset_number].Author));
+    strcpy(Bank[preset_number].Author, Author);
     
     // Special cases filenames for Convolotron, Echotron, Reverbtron
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-    memset(Bank[i].ConvoFiname, 0, sizeof (Bank[i].ConvoFiname));    
-    strcpy(Bank[i].ConvoFiname, Efx_Convolotron->Filename);
+    memset(Bank[preset_number].ConvoFiname, 0, sizeof (Bank[preset_number].ConvoFiname));
+    strcpy(Bank[preset_number].ConvoFiname, Efx_Convolotron->Filename);
     
     Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-    memset(Bank[i].RevFiname, 0, sizeof (Bank[i].RevFiname));
-    strcpy(Bank[i].RevFiname, Efx_Reverbtron->Filename);
+    memset(Bank[preset_number].RevFiname, 0, sizeof (Bank[preset_number].RevFiname));
+    strcpy(Bank[preset_number].RevFiname, Efx_Reverbtron->Filename);
 
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-    memset(Bank[i].EchoFiname, 0, sizeof (Bank[i].EchoFiname));
-    strcpy(Bank[i].EchoFiname, Efx_Echotron->Filename);
+    memset(Bank[preset_number].EchoFiname, 0, sizeof (Bank[preset_number].EchoFiname));
+    strcpy(Bank[preset_number].EchoFiname, Efx_Echotron->Filename);
 
     // Master effect
-    Bank[i].Input_Gain = Input_Gain;
-    Bank[i].Master_Volume = Master_Volume;
-    Bank[i].Balance = Fraction_Bypass;
+    Bank[preset_number].Input_Gain = Input_Gain;
+    Bank[preset_number].Master_Volume = Master_Volume;
+    Bank[preset_number].Balance = Fraction_Bypass;
 
     // Load all effect parameters into the lv[][] array from current preset (main window)
     for (int k = 0; k < C_NUMBER_EFFECTS; k++)
@@ -1513,18 +1521,18 @@ RKR::preset_to_bank(int i)
     {
         for (int k = 0; k < C_NUMBER_PARAMETERS; k++)    // bypass is not copied here
         {
-            Bank[i].lv[j][k] = lv[j][k];
+            Bank[preset_number].lv[j][k] = lv[j][k];
         }
     }
 
     // Copy the current bypass state to the Bank
     for(int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
-        Bank[i].lv[j][C_BYPASS] = EFX_Active[j];
+        Bank[preset_number].lv[j][C_BYPASS] = EFX_Active[j];
     }
 
     // Copy MIDI learn to the Bank
-    memcpy(Bank[i].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
+    memcpy(Bank[preset_number].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
 }
 
 void

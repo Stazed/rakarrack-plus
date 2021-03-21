@@ -1348,7 +1348,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 
         o->value(0);
         o->redraw();
-        m_process->preset_to_bank(button_number);
+        m_process->main_window_preset_to_active_bank(button_number);
         
         std::string add_pg_change = "[";
         add_pg_change += NTS(button_number);

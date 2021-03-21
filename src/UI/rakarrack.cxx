@@ -678,7 +678,7 @@ void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
 void RKRGUI::cb_Compare_i(RKR_Light_Button* o, void*) {
   if ((int) o->value())
 {
-m_process->preset_to_bank(0);
+m_process->main_window_preset_to_active_bank(0);
 m_process->active_bank_preset_to_main_window((int)Preset_Counter->value());
 Put_Loaded();
 }

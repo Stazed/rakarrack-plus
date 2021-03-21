@@ -747,7 +747,7 @@ public:
     void new_preset ();
     void new_bank (struct Preset_Bank_Struct _bank[] );
     void active_bank_preset_to_main_window (int preset_number);
-    void preset_to_bank (int i);
+    void main_window_preset_to_active_bank (int preset_number);
     void copy_IO(struct Preset_Bank_Struct _bank[]);
     void convert_IO(struct Preset_Bank_Struct _bank[]);
     int big_endian();
