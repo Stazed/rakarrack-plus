@@ -1487,13 +1487,13 @@ Put_Loaded();}
           callback {if ((int) o->value())
 {
 m_process->preset_to_bank(0);
-m_process->bank_to_preset((int)Preset_Counter->value());
+m_process->active_bank_preset_to_main_window((int)Preset_Counter->value());
 Put_Loaded();
 }
 
 else
 {
- m_process->bank_to_preset(0);
+ m_process->active_bank_preset_to_main_window(0);
  Put_Loaded();
 }}
           tooltip {Compare to bank preset - Shortcut 'P'} xywh {373 50 72 18} shortcut 0x70 color 62 selection_color 1 labelsize 12 align 84 when 1
@@ -1526,7 +1526,7 @@ BankWindow->hide();}
           label Preset
           callback {m_process->new_bank_loaded=0;
 BankWindow->unlight_preset(m_process->Selected_Preset);
-m_process->bank_to_preset((int) o->value());
+m_process->active_bank_preset_to_main_window((int) o->value());
 BankWindow->light_preset((int)o->value());
 m_process->Selected_Preset=(int)o->value();
 m_process->OnCounter=0;

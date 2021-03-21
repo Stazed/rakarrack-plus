@@ -679,13 +679,13 @@ void RKRGUI::cb_Compare_i(RKR_Light_Button* o, void*) {
   if ((int) o->value())
 {
 m_process->preset_to_bank(0);
-m_process->bank_to_preset((int)Preset_Counter->value());
+m_process->active_bank_preset_to_main_window((int)Preset_Counter->value());
 Put_Loaded();
 }
 
 else
 {
- m_process->bank_to_preset(0);
+ m_process->active_bank_preset_to_main_window(0);
  Put_Loaded();
 };
 }
@@ -718,7 +718,7 @@ void RKRGUI::cb_WPreset_Name(RKR_Input* o, void* v) {
 void RKRGUI::cb_Preset_Counter_i(RKR_Counter* o, void*) {
   m_process->new_bank_loaded=0;
 BankWindow->unlight_preset(m_process->Selected_Preset);
-m_process->bank_to_preset((int) o->value());
+m_process->active_bank_preset_to_main_window((int) o->value());
 BankWindow->light_preset((int)o->value());
 m_process->Selected_Preset=(int)o->value();
 m_process->OnCounter=0;

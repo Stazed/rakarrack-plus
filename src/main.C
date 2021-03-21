@@ -250,7 +250,7 @@ main(int argc, char *argv[])
             {
                 if ((process.Change_Preset > 0) && (process.Change_Preset < 61))
                 {
-                    process.bank_to_preset(process.Change_Preset);
+                    process.active_bank_preset_to_main_window(process.Change_Preset);
                 }
                 process.Change_Preset = C_CHANGE_PRESET_OFF;
             }

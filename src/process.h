@@ -746,7 +746,7 @@ public:
     void copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[]);
     void new_preset ();
     void new_bank (struct Preset_Bank_Struct _bank[] );
-    void bank_to_preset (int Num);
+    void active_bank_preset_to_main_window (int preset_number);
     void preset_to_bank (int i);
     void copy_IO(struct Preset_Bank_Struct _bank[]);
     void convert_IO(struct Preset_Bank_Struct _bank[]);

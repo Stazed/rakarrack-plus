@@ -1398,61 +1398,70 @@ RKR::new_bank(struct Preset_Bank_Struct _bank[])
     }
 };
 
+/**
+ * Copies all the preset information from the selected bank window preset to
+ * the main window, and audio effects. This sets the audio parameters as well as
+ * the gui, if shown.
+ * 
+ * @param preset_number
+ *      The selected preset from the bank window. Corresponds to the number preceding
+ *      the preset name in brackets [1] to [60].
+ */
 void
-RKR::bank_to_preset(int i)
+RKR::active_bank_preset_to_main_window(int preset_number)
 {
     // Do not need to copy this if no gui
     if(Gui_Shown)
     {
         memset(Preset_Name, 0, sizeof (char) * 64);
-        strcpy(Preset_Name, Bank[i].Preset_Name);
+        strcpy(Preset_Name, Bank[preset_number].Preset_Name);
         memset(Author, 0, sizeof (char) * 64);
-        strcpy(Author, Bank[i].Author);
+        strcpy(Author, Bank[preset_number].Author);
     }
 
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
-    strcpy(Efx_Convolotron->Filename, Bank[i].ConvoFiname);
+    strcpy(Efx_Convolotron->Filename, Bank[preset_number].ConvoFiname);
 
     Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
     memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
-    strcpy(Efx_Reverbtron->Filename, Bank[i].RevFiname);
+    strcpy(Efx_Reverbtron->Filename, Bank[preset_number].RevFiname);
 
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
     memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
-    strcpy(Efx_Echotron->Filename, Bank[i].EchoFiname);
+    strcpy(Efx_Echotron->Filename, Bank[preset_number].EchoFiname);
 
     for (int j = 0; j < C_MAX_EFFECTS; j++)
     {
         for (int k = 0; k < C_MAX_PARAMETERS; k++)
         {
-            lv[j][k] = Bank[i].lv[j][k];
+            lv[j][k] = Bank[preset_number].lv[j][k];
         }
     }
 
     // Set the main rack effect order
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
-        efx_order[k] = Bank[i].lv[EFX_ORDER][k];
+        efx_order[k] = Bank[preset_number].lv[EFX_ORDER][k];
     }
     
     // Set the bypass state for each effect
     for(int k = 0; k < C_NUMBER_EFFECTS; k++)
     {
-        EFX_Bank_Active[k] = Bank[i].lv[k][C_BYPASS];
+        EFX_Bank_Active[k] = Bank[preset_number].lv[k][C_BYPASS];
     }
 
     FX_Master_Active_Reset = FX_Master_Active;
 
-    memcpy(XUserMIDI, Bank[i].XUserMIDI, sizeof (XUserMIDI));
+    memcpy(XUserMIDI, Bank[preset_number].XUserMIDI, sizeof (XUserMIDI));
 
     set_audio_paramters();
 
     if (actuvol == 0)
     {
-        Input_Gain = Bank[i].Input_Gain;
-        Master_Volume = Bank[i].Master_Volume;
-        Fraction_Bypass = Bank[i].Balance;
+        Input_Gain = Bank[preset_number].Input_Gain;
+        Master_Volume = Bank[preset_number].Master_Volume;
+        Fraction_Bypass = Bank[preset_number].Balance;
     }
 
     if ((Tap_Updated) && (Tap_Active) && (Tap_TempoSet > 0) && (Tap_TempoSet < 601))
