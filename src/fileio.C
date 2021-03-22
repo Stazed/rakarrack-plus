@@ -1535,6 +1535,12 @@ RKR::main_window_preset_to_active_bank(int preset_number)
     memcpy(Bank[preset_number].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
 }
 
+/**
+ * Copy float into char array. Master Input, Volume, Balance. For precision in file saving?
+ * 
+ * @param _bank
+ *      The bank to which the copy is made.
+ */
 void
 RKR::copy_IO(struct Preset_Bank_Struct _bank[])
 {
@@ -1549,6 +1555,13 @@ RKR::copy_IO(struct Preset_Bank_Struct _bank[])
     }
 }
 
+/**
+ * Convert char array to float. Master Input, Volume, Balance. For precision in file saving?
+ * This is used for file loading. The converted amounts are used, not the saved floats.
+ * 
+ * @param _bank
+ *      The bank used in the conversion.
+ */
 void
 RKR::convert_IO(struct Preset_Bank_Struct _bank[])
 {

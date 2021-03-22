@@ -651,8 +651,8 @@ struct Preset_Bank_Struct
 {
     char Preset_Name[64];
     char Author[64];
-    char Classe[36];
-    char Type[4];
+    char Classe[36];            // Not used
+    char Type[4];               // Not used
     char ConvoFiname[128];
     char cInput_Gain[64];
     char cMaster_Volume[64];
@@ -665,8 +665,8 @@ struct Preset_Bank_Struct
     char EchoFiname[128];
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int XUserMIDI[128][20];
-    int XMIDIrangeMin[128];
-    int XMIDIrangeMax[128];
+    int XMIDIrangeMin[128];     // Not used
+    int XMIDIrangeMax[128];     // Not used
 
     Preset_Bank_Struct():
         Preset_Name(),
