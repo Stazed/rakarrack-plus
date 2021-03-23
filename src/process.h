@@ -813,11 +813,6 @@ public:
     int DC_Offset;
 
     /**
-     * Main window master FX On/Off button flag.
-     */
-    int FX_Master_Active;
-
-    /**
      * Main window master FX On/Off temporary flag to hold Active state for resetting.
      */
     int FX_Master_Active_Reset;
@@ -896,7 +891,6 @@ public:
      */
     int Bank_Load_Command_Line;
 
-    int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     int saved_order[C_NUMBER_ORDERED_EFFECTS];
     int efx_order[C_NUMBER_ORDERED_EFFECTS];
     int new_order[C_NUMBER_ORDERED_EFFECTS];
@@ -963,11 +957,6 @@ public:
      */
     int CountWait;
 
-    /**
-     * Array for holding the user MIDI learn settings. CC from 0 to 127, each CC can
-     * be mapped to 20 effects.
-     */
-    int XUserMIDI[128][20];
     // End MIDI learn
     
     /**
@@ -1219,9 +1208,6 @@ public:
     float *denormal;
     float *m_ticks;
 
-    float Master_Volume;
-    float Input_Gain;
-    float Fraction_Bypass;
     float Log_I_Gain;
     float Log_M_Volume;
     float M_Metro_Vol;
@@ -1249,17 +1235,39 @@ public:
 
     char tmpprefname[128];
 
+    /**
+     * The active preset displayed on the main window rack.
+     */
+    PresetBankStruct Active_Preset;
+
+
     char *Preset_Name;
     char *Author;
+    char *UserRealName;
+    
+    float Input_Gain;
+    float Master_Volume;
+    float Fraction_Bypass;  // Balance
+    
+    /**
+     * Main window master FX On/Off button flag.
+     */
+    int FX_Master_Active;   // Active
+
+
+    int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
+    
+    /**
+     * Array for holding the user MIDI learn settings. CC from 0 to 127, each CC can
+     * be mapped to 20 effects.
+     */
+    int XUserMIDI[128][20];
     
     /**
      * Any previously saved bank filename is saved here. Used for setting the
      * fltk file browser previous item.
      */
     std::string Bank_Saved;
-
-
-    char *UserRealName;
 
     char MID[128];
     
@@ -1308,11 +1316,6 @@ public:
             MC_offset(),
             MC_range() {}
     } mc_efx_params[C_MC_PARAMETER_SIZE];
-
-    /**
-     * The active preset displayed on the main window rack.
-     */
-    PresetBankStruct Active_Preset;
 
     /**
      * The currently active bank displayed on the Bank Window.

@@ -183,7 +183,7 @@ public:
     float Input_Gain;
     float Master_Volume;
     float Balance;              // Fraction_Bypass
-    int Active;                 // Not really used
+    int Active;                 // FX_Master_Active
     char RevFiname[128];
     char EchoFiname[128];
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
