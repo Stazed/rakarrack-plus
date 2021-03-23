@@ -468,7 +468,7 @@ RKR::load_preset(const char *filename)
 
     for (int i = 0; i < 64; i++)
     {
-        if (buf[i] > 20)
+        if (buf[i] > 20)        // remove LF '\n'
         {
             Author[i] = buf[i];
         }
@@ -489,7 +489,7 @@ RKR::load_preset(const char *filename)
 
     for (int i = 0; i < 64; i++)
     {
-        if (buf[i] > 20)
+        if (buf[i] > 20)        // remove LF '\n'
         {
             Preset_Name[i] = buf[i];
         }

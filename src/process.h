@@ -659,8 +659,8 @@ struct Preset_Bank_Struct
     char cBalance[64];
     float Input_Gain;
     float Master_Volume;
-    float Balance;
-    int Active;
+    float Balance;              // Fraction_Bypass
+    int Active;                 // Not really used
     char RevFiname[128];
     char EchoFiname[128];
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];

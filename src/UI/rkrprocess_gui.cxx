@@ -1224,10 +1224,11 @@ void RKRGUI::save_current_state(int whati)
     }
 }
 
+/**
+ * Copy the loaded active preset to the main window gui.
+ */
 void RKRGUI::Put_Loaded()
 {
-    //General loading of efx default settings
-
     WPreset_Name->value(m_process->Preset_Name);
     DAuthor->copy_label(m_process->Author);
 
