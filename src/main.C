@@ -222,7 +222,7 @@ main(int argc, char *argv[])
 
     if (!process.Gui_Shown)
     {
-        process.FX_Master_Active = 1;
+        process.Active_Preset.FX_Master_Active = 1;
         process.calculavol(1);
         process.calculavol(2);
         process.booster = 1.0f;

@@ -271,13 +271,7 @@ RKR::RKR(int gui) :
     tmpprefname(),
 
     // Active preset
-    Preset_Name(NULL),
-    Author(NULL),
     UserRealName(NULL),
-    Input_Gain(0.50f),
-    Master_Volume(0.50f),
-    Fraction_Bypass(1.0f),
-    FX_Master_Active(0),
     lv(),
     XUserMIDI(),
     // End Active preset
@@ -378,8 +372,6 @@ RKR::~RKR()
     free(smpr);
     free(m_ticks);
     free(interpbuf);
-    free(Preset_Name);
-    free(Author);
     free(UserRealName);
 
     // alsa
@@ -701,10 +693,6 @@ RKR::initialize_arrays()
     memset(m_ticks, 0, sizeof (float)*period_master);
     memset(interpbuf, 0, sizeof (float)*period_master);
 
-    Preset_Name = (char *) malloc(sizeof (char) * 64);
-    memset(Preset_Name, 0, sizeof (char) * 64);
-    Author = (char *) malloc(sizeof (char) * 64);
-    memset(Author, 0, sizeof (char) * 64);
     UserRealName = (char *) malloc(sizeof (char) * 128);
     memset(UserRealName, 0, sizeof (char) * 128);
 }
@@ -843,12 +831,12 @@ RKR::calculavol(int i)
 {
     if (i == 1)
     {
-        Log_I_Gain = powf(Input_Gain * 2.0f, 4);
+        Log_I_Gain = powf(Active_Preset.Input_Gain * 2.0f, 4);
     }
     
     if (i == 2)
     {
-        Log_M_Volume = powf(Master_Volume * 2.0f, 4);
+        Log_M_Volume = powf(Active_Preset.Master_Volume * 2.0f, 4);
     }
 }
 
@@ -999,10 +987,10 @@ RKR::Control_Volume(float *origl, float *origr)
         efxoutl[i] *= Temp_M_Volume*booster; // +10dB booster main window
         efxoutr[i] *= Temp_M_Volume*booster;
 
-        if (Fraction_Bypass < 1.0f)
+        if (Active_Preset.Fraction_Bypass < 1.0f)
         { // FX% main window
-            efxoutl[i] = (origl[i] * (1.0f - Fraction_Bypass) + efxoutl[i] * Fraction_Bypass);
-            efxoutr[i] = (origr[i] * (1.0f - Fraction_Bypass) + efxoutr[i] * Fraction_Bypass);
+            efxoutl[i] = (origl[i] * (1.0f - Active_Preset.Fraction_Bypass) + efxoutl[i] * Active_Preset.Fraction_Bypass);
+            efxoutr[i] = (origr[i] * (1.0f - Active_Preset.Fraction_Bypass) + efxoutr[i] * Active_Preset.Fraction_Bypass);
         }
 
         tmp = fabsf(efxoutl[i]);
@@ -1117,7 +1105,7 @@ RKR::process_effects(float *origl, float *origr, void *)
         TapTempo_Timeout(1);
     }
 
-    if (FX_Master_Active)
+    if (Active_Preset.FX_Master_Active)
     {
         Control_Gain(origl, origr);
 

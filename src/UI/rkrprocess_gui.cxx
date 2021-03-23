@@ -353,7 +353,7 @@ void RKRGUI::GuiTimeout(void)
     }
 
 
-    if (m_process->FX_Master_Active)
+    if (m_process->Active_Preset.FX_Master_Active)
     {
         if (m_process->val_il_sum != m_process->old_il_sum)
         {
@@ -831,7 +831,7 @@ void RKRGUI::load_previous_state()
 
     if (m_process->init_state)
     {
-        m_process->FX_Master_Active = 1;
+        m_process->Active_Preset.FX_Master_Active = 1;
         m_process->calculavol(1);
         m_process->calculavol(2);
     }
@@ -1229,19 +1229,19 @@ void RKRGUI::save_current_state(int whati)
  */
 void RKRGUI::Put_Loaded()
 {
-    WPreset_Name->value(m_process->Preset_Name);
-    DAuthor->copy_label(m_process->Author);
+    WPreset_Name->value(m_process->Active_Preset.Preset_Name);
+    DAuthor->copy_label(m_process->Active_Preset.Author);
 
-    Nivel_Entrada->value((int) (m_process->Input_Gain * 100.0) - 50);
+    Nivel_Entrada->value((int) (m_process->Active_Preset.Input_Gain * 100.0) - 50);
     m_process->calculavol(1);
-    Nivel_Salida->value((int) (m_process->Master_Volume * 100.0) - 50);
+    Nivel_Salida->value((int) (m_process->Active_Preset.Master_Volume * 100.0) - 50);
     m_process->calculavol(2);
-    Balance->value((int) (m_process->Fraction_Bypass * 100.0));
+    Balance->value((int) (m_process->Active_Preset.Fraction_Bypass * 100.0));
 
 
-    ActivarGeneral->value(m_process->FX_Master_Active);
+    ActivarGeneral->value(m_process->Active_Preset.FX_Master_Active);
 
-    if (m_process->FX_Master_Active == 0)
+    if (m_process->Active_Preset.FX_Master_Active == 0)
     {
         m_process->val_il_sum = -50;
         m_process->val_ir_sum = -50;
@@ -1354,7 +1354,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         std::string add_pg_change = "[";
         add_pg_change += NTS(button_number);
         add_pg_change += "] ";
-        add_pg_change += m_process->Preset_Name;
+        add_pg_change += m_process->Active_Preset.Preset_Name;
 
         w->copy_label(add_pg_change.c_str());
         m_process->bank_modified = 1;
@@ -2203,19 +2203,19 @@ void RKRGUI::MIDI_control_gui_refresh()
         {
             case MC_Output_Volume:
                 m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
-                Nivel_Salida->value((int) (m_process->Master_Volume * 100.0) - 50);
+                Nivel_Salida->value((int) (m_process->Active_Preset.Master_Volume * 100.0) - 50);
                 Nivel_Salida->redraw();
                 break;
 
             case MC_Balance_FX:
                 m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
-                Balance->value(m_process->Fraction_Bypass * 100.0);
+                Balance->value(m_process->Active_Preset.Fraction_Bypass * 100.0);
                 Balance->redraw();
                 break;
 
             case MC_Input_Volume:
                 m_process->Mcontrol[mc_index] = 0;   // clear the parameter flag
-                Nivel_Entrada->value((int) (m_process->Input_Gain * 100.0) - 50);
+                Nivel_Entrada->value((int) (m_process->Active_Preset.Input_Gain * 100.0) - 50);
                 Nivel_Entrada->redraw();
                 break;
 
@@ -2300,7 +2300,7 @@ void RKRGUI::ActOnOff()
                     tuner_activar->do_callback();
                     break;
                 case EFX_MASTER_ON_OFF:
-                    ActivarGeneral->value(m_process->FX_Master_Active);
+                    ActivarGeneral->value(m_process->Active_Preset.FX_Master_Active);
                     ActivarGeneral->do_callback();
                     break;
             }
@@ -2424,12 +2424,12 @@ void RKRGUI::ChangeActives()
         TUNER_LABEL->labelcolor(on);
     else
         TUNER_LABEL->labelcolor(off);
-    if (m_process->FX_Master_Active)
+    if (m_process->Active_Preset.FX_Master_Active)
         LABEL_IO->labelcolor(on);
     else
         LABEL_IO->labelcolor(off);
 
-    if ((m_process->upsample) && (m_process->FX_Master_Active))
+    if ((m_process->upsample) && (m_process->Active_Preset.FX_Master_Active))
     {
         UPS_LED->color(global_leds_color);
         UPS_LED->redraw();

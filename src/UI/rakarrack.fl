@@ -1128,7 +1128,7 @@ TUNER_LABEL->redraw_label();}
       } {
         Fl_Light_Button ActivarGeneral {
           label {FX On}
-          callback {m_process->FX_Master_Active=o->value();
+          callback {m_process->Active_Preset.FX_Master_Active = o->value();
 m_process->val_il_sum=-50.0;
 m_process->val_ir_sum=-50.0;
 
@@ -1186,7 +1186,7 @@ else m_process->booster=1.0f;}
  getMIDIControl(MC_Balance_FX);
  return;
 } 
-m_process->Fraction_Bypass=(float)(o->value()/100.0f);}
+m_process->Active_Preset.Fraction_Bypass=(float)(o->value()/100.0f);}
           xywh {15 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 100 maximum 0 step 1 value 100 textcolor 7
           class RKR_Slider
         }
@@ -1197,7 +1197,7 @@ m_process->Fraction_Bypass=(float)(o->value()/100.0f);}
  getMIDIControl(MC_Input_Volume);
  return;
 } 
-m_process->Input_Gain=(float)((o->value()+50)/100.0);
+m_process->Active_Preset.Input_Gain=(float)((o->value()+50)/100.0);
 m_process->calculavol(1);}
           xywh {57 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class RKR_Slider
@@ -1210,7 +1210,7 @@ m_process->calculavol(1);}
  return;
 } 
 
-m_process->Master_Volume=(float)((o->value()+50)/100.0);
+m_process->Active_Preset.Master_Volume=(float)((o->value()+50)/100.0);
 m_process->calculavol(2);}
           tooltip {Shortcut 'F2' decrease volume, 'F3' Increase volume} xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class RKR_Slider
@@ -1516,7 +1516,7 @@ BankWindow->hide();}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
-          callback {strcpy(m_process->Preset_Name,o->value());}
+          callback {strcpy(m_process->Active_Preset.Preset_Name,o->value());}
           xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->set_text_offset(14);}
           code1 {o->maximum_size(22);}

@@ -182,8 +182,8 @@ public:
     char cBalance[64];
     float Input_Gain;
     float Master_Volume;
-    float Balance;              // Fraction_Bypass
-    int Active;                 // FX_Master_Active
+    float Fraction_Bypass;      // Balance
+    int FX_Master_Active;       // Active
     char RevFiname[128];
     char EchoFiname[128];
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];

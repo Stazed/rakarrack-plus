@@ -52,8 +52,8 @@ PresetBankStruct::PresetBankStruct(const PresetBankStruct& orig)
 
     Input_Gain = orig.Input_Gain;
     Master_Volume = orig.Master_Volume;
-    Balance = orig.Balance;
-    Active = orig.Active;
+    Fraction_Bypass = orig.Fraction_Bypass;
+    FX_Master_Active = orig.FX_Master_Active;
 
     strcpy(RevFiname, orig.RevFiname);
     strcpy(EchoFiname, orig.EchoFiname);
@@ -100,8 +100,8 @@ PresetBankStruct::new_preset(bool load_default)
     // Always set these to defaults
     Input_Gain = 0.5f;
     Master_Volume = 0.5f;
-    Balance = 1.0f;             // Fraction_Bypass
-    Active = 0;
+    Fraction_Bypass = 1.0f;             // Balance
+    FX_Master_Active = 0;
 
     memset(RevFiname, 0, sizeof (char) * 128);
     memset(EchoFiname, 0, sizeof (char) * 128);

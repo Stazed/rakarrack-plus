@@ -924,8 +924,8 @@ RKR::ActiveUn(int value)
                 else Tuner_Active = 0;
                 break;
             case EFX_MASTER_ON_OFF:
-                if (inoff) FX_Master_Active = 1;
-                else FX_Master_Active = 0;
+                if (inoff) Active_Preset.FX_Master_Active = 1;
+                else Active_Preset.FX_Master_Active = 0;
             break;
         }
     }
@@ -963,7 +963,7 @@ RKR::checkonoff(int miraque)
                 if (Tuner_Active) return 0;
                 break;
             case EFX_MASTER_ON_OFF:
-                if (FX_Master_Active) return 0;
+                if (Active_Preset.FX_Master_Active) return 0;
             break;
         }
     }
@@ -1299,16 +1299,16 @@ RKR::process_midi_controller_events(int parameter, int value)
         }
 
         case MC_Output_Volume:
-            Master_Volume = (float) value / 127.0f;
+            Active_Preset.Master_Volume = (float) value / 127.0f;
             calculavol(2);
             return;
 
         case MC_Balance_FX:
-            Fraction_Bypass = (float) value / 127.0f;
+            Active_Preset.Fraction_Bypass = (float) value / 127.0f;
             return;
 
         case MC_Input_Volume:
-            Input_Gain = (float) value / 127.0f;
+            Active_Preset.Input_Gain = (float) value / 127.0f;
             calculavol(1);
             return;
 

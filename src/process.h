@@ -1241,19 +1241,7 @@ public:
     PresetBankStruct Active_Preset;
 
 
-    char *Preset_Name;
-    char *Author;
     char *UserRealName;
-    
-    float Input_Gain;
-    float Master_Volume;
-    float Fraction_Bypass;  // Balance
-    
-    /**
-     * Main window master FX On/Off button flag.
-     */
-    int FX_Master_Active;   // Active
-
 
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
     
