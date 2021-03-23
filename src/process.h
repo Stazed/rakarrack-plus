@@ -622,48 +622,6 @@ const int C_MC_UNUSED_PARAMETERS = 25;
  */
 const int C_MC_RANGE = C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS;
 
-struct Preset_Bank_Struct
-{
-    char Preset_Name[64];
-    char Author[64];
-    char Classe[36];            // Not used
-    char Type[4];               // Not used
-    char ConvoFiname[128];
-    char cInput_Gain[64];
-    char cMaster_Volume[64];
-    char cBalance[64];
-    float Input_Gain;
-    float Master_Volume;
-    float Balance;              // Fraction_Bypass
-    int Active;                 // Not really used
-    char RevFiname[128];
-    char EchoFiname[128];
-    int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
-    int XUserMIDI[128][20];
-    int XMIDIrangeMin[128];     // Not used
-    int XMIDIrangeMax[128];     // Not used
-
-    Preset_Bank_Struct():
-        Preset_Name(),
-        Author(),
-        Classe(),
-        Type(),
-        ConvoFiname(),
-        cInput_Gain(),
-        cMaster_Volume(),
-        cBalance(),
-        Input_Gain(),
-        Master_Volume(),
-        Balance(),
-        Active(),
-        RevFiname(),
-        EchoFiname(),
-        lv(),
-        XUserMIDI(),
-        XMIDIrangeMin(),
-        XMIDIrangeMax() {}
-};
-
 
 class RKR
 {
@@ -718,15 +676,15 @@ public:
     int save_bank (const char *filename);
     void load_bank_vector();
     void add_bank_item(std::string filename);
-    void copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[]);
+    void copy_bank(struct PresetBankStruct dest[], struct PresetBankStruct source[]);
     void new_preset ();
-    void new_bank (struct Preset_Bank_Struct _bank[] );
+    void new_bank (struct PresetBankStruct _bank[] );
     void active_bank_preset_to_main_window (int preset_number);
     void main_window_preset_to_active_bank (int preset_number);
-    void copy_IO(struct Preset_Bank_Struct _bank[]);
-    void convert_IO(struct Preset_Bank_Struct _bank[]);
+    void copy_IO(struct PresetBankStruct _bank[]);
+    void convert_IO(struct PresetBankStruct _bank[]);
     int big_endian();
-    void fix_endianess(struct Preset_Bank_Struct _bank[]);
+    void fix_endianess(struct PresetBankStruct _bank[]);
     void save_skin (char *filename);
     bool load_skin (char *filename);
     void load_skin_error(FILE *fn);
@@ -1300,7 +1258,7 @@ public:
     /**
      * The currently active bank displayed on the Bank Window.
      */
-    Preset_Bank_Struct Bank[62];
+    PresetBankStruct Bank[62];
 
     /**
      * Array to hold Banks from file loading.
@@ -1310,7 +1268,7 @@ public:
         std::string Bank_File_Name;
         std::string Bank_Menu_Name;
         std::string Bank_Name_Clean;    // For MIDI table display
-        Preset_Bank_Struct Bank[62];
+        PresetBankStruct Bank[62];
     };
 
     /**

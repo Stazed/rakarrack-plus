@@ -924,7 +924,7 @@ RKR::load_bank(const char *filename)
         return (0);
     }
     
-    Preset_Bank_Struct Load_Bank[62];
+    PresetBankStruct Load_Bank[62];
 
     FILE *fn;
 
@@ -978,7 +978,7 @@ RKR::save_bank(const char *filename)
 {
     FILE *fn;
     
-    Preset_Bank_Struct Save_Bank[62];
+    PresetBankStruct Save_Bank[62];
     
     // Copy active bank
     copy_bank(Save_Bank, Bank);
@@ -1164,7 +1164,7 @@ RKR::add_bank_item(std::string filename)
 }
 
 void
-RKR::copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct source[])
+RKR::copy_bank(struct PresetBankStruct dest[], struct PresetBankStruct source[])
 {
     new_bank(dest);
     
@@ -1179,8 +1179,8 @@ RKR::copy_bank(struct Preset_Bank_Struct dest[], struct Preset_Bank_Struct sourc
 
         dest[i].Input_Gain = source[i].Input_Gain;
         dest[i].Master_Volume = source[i].Master_Volume;
-        dest[i].Balance = source[i].Balance;
-        dest[i].Active = source[i].Active;
+        dest[i].Fraction_Bypass = source[i].Fraction_Bypass;
+        dest[i].FX_Master_Active = source[i].FX_Master_Active;
 
         // Set the parameter values
         for (int j = 0; j < C_NUMBER_EFFECTS; j++)
@@ -1279,7 +1279,7 @@ RKR::new_preset()
 }
 
 void
-RKR::new_bank(struct Preset_Bank_Struct _bank[])
+RKR::new_bank(struct PresetBankStruct _bank[])
 {
     for (int i = 0; i < 62; i++)
     {
@@ -1292,8 +1292,8 @@ RKR::new_bank(struct Preset_Bank_Struct _bank[])
 
         _bank[i].Input_Gain = .5f;
         _bank[i].Master_Volume = .5f;
-        _bank[i].Balance = 1.0f;
-        _bank[i].Active = 0;
+        _bank[i].Fraction_Bypass = 1.0f;
+        _bank[i].FX_Master_Active = 0;
         memset(_bank[i].lv, 0, sizeof (_bank[i].lv));
 
         // Set the default presets
@@ -1379,7 +1379,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     {
         Active_Preset.Input_Gain = Bank[preset_number].Input_Gain;
         Active_Preset.Master_Volume = Bank[preset_number].Master_Volume;
-        Active_Preset.Fraction_Bypass = Bank[preset_number].Balance;
+        Active_Preset.Fraction_Bypass = Bank[preset_number].Fraction_Bypass;
     }
 
     if ((Tap_Updated) && (Tap_Active) && (Tap_TempoSet > 0) && (Tap_TempoSet < 601))
@@ -1421,7 +1421,7 @@ RKR::main_window_preset_to_active_bank(int preset_number)
     // Master effect
     Bank[preset_number].Input_Gain = Active_Preset.Input_Gain;
     Bank[preset_number].Master_Volume = Active_Preset.Master_Volume;
-    Bank[preset_number].Balance = Active_Preset.Fraction_Bypass;
+    Bank[preset_number].Fraction_Bypass = Active_Preset.Fraction_Bypass;
 
     // Load all effect parameters into the lv[][] array from current preset (main window)
     for (int k = 0; k < C_NUMBER_EFFECTS; k++)
@@ -1460,7 +1460,7 @@ RKR::main_window_preset_to_active_bank(int preset_number)
  *      The bank to which the copy is made.
  */
 void
-RKR::copy_IO(struct Preset_Bank_Struct _bank[])
+RKR::copy_IO(struct PresetBankStruct _bank[])
 {
     for (int i = 0; i < 62; i++)
     {
@@ -1469,7 +1469,7 @@ RKR::copy_IO(struct Preset_Bank_Struct _bank[])
         memset(_bank[i].cMaster_Volume, 0, sizeof (_bank[i].cMaster_Volume));
         sprintf(_bank[i].cMaster_Volume, "%f", _bank[i].Master_Volume);
         memset(_bank[i].cBalance, 0, sizeof (_bank[i].cBalance));
-        sprintf(_bank[i].cBalance, "%f", _bank[i].Balance);
+        sprintf(_bank[i].cBalance, "%f", _bank[i].Fraction_Bypass);
     }
 }
 
@@ -1481,7 +1481,7 @@ RKR::copy_IO(struct Preset_Bank_Struct _bank[])
  *      The bank used in the conversion.
  */
 void
-RKR::convert_IO(struct Preset_Bank_Struct _bank[])
+RKR::convert_IO(struct PresetBankStruct _bank[])
 {
     for (int i = 0; i < 62; i++)
     {
@@ -1491,8 +1491,8 @@ RKR::convert_IO(struct Preset_Bank_Struct _bank[])
         sscanf(_bank[i].cMaster_Volume, "%f", &_bank[i].Master_Volume);
         if (_bank[i].Master_Volume == 0.0) _bank[i].Master_Volume = 0.5f;
 
-        sscanf(_bank[i].cBalance, "%f", &_bank[i].Balance);
-        if (_bank[i].Balance == 0.0) _bank[i].Balance = 1.0f;
+        sscanf(_bank[i].cBalance, "%f", &_bank[i].Fraction_Bypass);
+        if (_bank[i].Fraction_Bypass == 0.0) _bank[i].Fraction_Bypass = 1.0f;
     }
 }
 
@@ -1504,15 +1504,15 @@ RKR::big_endian()
 }
 
 void
-RKR::fix_endianess(struct Preset_Bank_Struct _bank[])
+RKR::fix_endianess(struct PresetBankStruct _bank[])
 {
     unsigned int data;
 
     for (int i = 0; i < 62; i++)
     {
-        data = _bank[i].Active;
+        data = _bank[i].FX_Master_Active;
         data = SwapFourBytes(data);
-        _bank[i].Active = data;
+        _bank[i].FX_Master_Active = data;
 
         for (int j = 0; j < 70; j++)
         {
