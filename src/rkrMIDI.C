@@ -844,8 +844,8 @@ RKR::midievents()
             {
                 for (i = 0; i < 20; i++)
                 {
-                    if (XUserMIDI[(int) midievent->data.control.param][i])
-                        process_midi_controller_events(XUserMIDI[(int) midievent->data.control.param][i],
+                    if (Active_Preset.XUserMIDI[(int) midievent->data.control.param][i])
+                        process_midi_controller_events(Active_Preset.XUserMIDI[(int) midievent->data.control.param][i],
                                                        (int) midievent->data.control.value);
                     else break;
                 }
@@ -1215,8 +1215,8 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
             {
                 for (i = 0; i < 20; i++)
                 {
-                    if (XUserMIDI[cmdcontrol][i])
-                        process_midi_controller_events(XUserMIDI[cmdcontrol][i], cmdvalue);
+                    if (Active_Preset.XUserMIDI[cmdcontrol][i])
+                        process_midi_controller_events(Active_Preset.XUserMIDI[cmdcontrol][i], cmdvalue);
                     else break;
                 }
             }

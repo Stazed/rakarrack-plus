@@ -187,7 +187,13 @@ public:
     char RevFiname[128];
     char EchoFiname[128];
     int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
+
+    /**
+     * Array for holding the user MIDI learn settings. CC from 0 to 127, each CC can
+     * be mapped to 20 effects.
+     */
     int XUserMIDI[128][20];
+
     int XMIDIrangeMin[128];     // Not used
     int XMIDIrangeMax[128];     // Not used
 

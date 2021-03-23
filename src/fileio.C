@@ -67,7 +67,7 @@ void RKR::apply_effect_parameters(char *buf, int fx_index)
             {
                 if(params < EFX_Param_Size[effect])   // Set the EFX parameters
                 {
-                    lv[effect][params] =  atoi( result.at(params).c_str() );
+                    Active_Preset.lv[effect][params] =  atoi( result.at(params).c_str() );
                 }
                 else    // Set the bypass
                 {
@@ -270,10 +270,16 @@ RKR::save_preset(const char *filename)
     {
         memset(buf, 0, sizeof (buf));
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                XUserMIDI[i][0], XUserMIDI[i][1], XUserMIDI[i][2], XUserMIDI[i][3], XUserMIDI[i][4],
-                XUserMIDI[i][5], XUserMIDI[i][6], XUserMIDI[i][7], XUserMIDI[i][8], XUserMIDI[i][9],
-                XUserMIDI[i][10], XUserMIDI[i][10], XUserMIDI[i][12], XUserMIDI[i][13], XUserMIDI[i][14],
-                XUserMIDI[i][15], XUserMIDI[i][16], XUserMIDI[i][17], XUserMIDI[i][18], XUserMIDI[i][19]);
+                Active_Preset.XUserMIDI[i][0], Active_Preset.XUserMIDI[i][1],
+                Active_Preset.XUserMIDI[i][2], Active_Preset.XUserMIDI[i][3],
+                Active_Preset.XUserMIDI[i][4], Active_Preset.XUserMIDI[i][5],
+                Active_Preset.XUserMIDI[i][6], Active_Preset.XUserMIDI[i][7],
+                Active_Preset.XUserMIDI[i][8], Active_Preset.XUserMIDI[i][9],
+                Active_Preset.XUserMIDI[i][10], Active_Preset.XUserMIDI[i][10],
+                Active_Preset.XUserMIDI[i][12], Active_Preset.XUserMIDI[i][13],
+                Active_Preset.XUserMIDI[i][14], Active_Preset.XUserMIDI[i][15],
+                Active_Preset.XUserMIDI[i][16], Active_Preset.XUserMIDI[i][17],
+                Active_Preset.XUserMIDI[i][18], Active_Preset.XUserMIDI[i][19]);
 
         fputs(buf, fn);
     }
@@ -451,8 +457,11 @@ RKR::load_preset(const char *filename)
 
     // Apply the order
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-           &lv[EFX_ORDER][0], &lv[EFX_ORDER][1], &lv[EFX_ORDER][2], &lv[EFX_ORDER][3], &lv[EFX_ORDER][4],
-           &lv[EFX_ORDER][5], &lv[EFX_ORDER][6], &lv[EFX_ORDER][7], &lv[EFX_ORDER][8], &lv[EFX_ORDER][9]);
+           &Active_Preset.lv[EFX_ORDER][0], &Active_Preset.lv[EFX_ORDER][1],
+           &Active_Preset.lv[EFX_ORDER][2], &Active_Preset.lv[EFX_ORDER][3],
+           &Active_Preset.lv[EFX_ORDER][4], &Active_Preset.lv[EFX_ORDER][5],
+           &Active_Preset.lv[EFX_ORDER][6], &Active_Preset.lv[EFX_ORDER][7],
+           &Active_Preset.lv[EFX_ORDER][8], &Active_Preset.lv[EFX_ORDER][9]);
 
     // MIDI learn table
     for (int i = 0; i < 128; i++)
@@ -468,10 +477,16 @@ RKR::load_preset(const char *filename)
         }
 
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &XUserMIDI[i][0], &XUserMIDI[i][1], &XUserMIDI[i][2], &XUserMIDI[i][3], &XUserMIDI[i][4],
-               &XUserMIDI[i][5], &XUserMIDI[i][6], &XUserMIDI[i][7], &XUserMIDI[i][8], &XUserMIDI[i][9],
-               &XUserMIDI[i][10], &XUserMIDI[i][10], &XUserMIDI[i][12], &XUserMIDI[i][13], &XUserMIDI[i][14],
-               &XUserMIDI[i][15], &XUserMIDI[i][16], &XUserMIDI[i][17], &XUserMIDI[i][18], &XUserMIDI[i][19]);
+               &Active_Preset.XUserMIDI[i][0], &Active_Preset.XUserMIDI[i][1],
+               &Active_Preset.XUserMIDI[i][2], &Active_Preset.XUserMIDI[i][3],
+               &Active_Preset.XUserMIDI[i][4], &Active_Preset.XUserMIDI[i][5],
+               &Active_Preset.XUserMIDI[i][6], &Active_Preset.XUserMIDI[i][7],
+               &Active_Preset.XUserMIDI[i][8], &Active_Preset.XUserMIDI[i][9],
+               &Active_Preset.XUserMIDI[i][10], &Active_Preset.XUserMIDI[i][10],
+               &Active_Preset.XUserMIDI[i][12], &Active_Preset.XUserMIDI[i][13],
+               &Active_Preset.XUserMIDI[i][14], &Active_Preset.XUserMIDI[i][15],
+               &Active_Preset.XUserMIDI[i][16], &Active_Preset.XUserMIDI[i][17],
+               &Active_Preset.XUserMIDI[i][18], &Active_Preset.XUserMIDI[i][19]);
     }
 
     fclose(fn);
@@ -501,7 +516,7 @@ RKR::set_audio_paramters()
     // The main window effect order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        efx_order[i] = lv[EFX_ORDER][i];
+        efx_order[i] = Active_Preset.lv[EFX_ORDER][i];
     }
     
     // Looper is special
@@ -524,11 +539,11 @@ RKR::set_audio_paramters()
             {
                 if(all_efx == EFX_LOOPER)
                 {
-                    Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
+                    Efx_Looper->set_value(efx_params, Active_Preset.lv[EFX_LOOPER][efx_params]);
                 }
                 else
                 {
-                    Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
+                    Rack_Effects[all_efx]->changepar(efx_params, Active_Preset.lv[all_efx][efx_params]);
                 }
             }
 
@@ -537,12 +552,12 @@ RKR::set_audio_paramters()
             // previous file. So, reset it again after the requested file is loaded.
             if(all_efx == EFX_ECHOTRON)
             {
-                Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
+                Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, Active_Preset.lv[all_efx][Echotron_Taps]);
             }
 
             if(all_efx == EFX_STEREOHARM)
             {
-                if (lv[EFX_STEREOHARM][Sharm_MIDI])
+                if (Active_Preset.lv[EFX_STEREOHARM][Sharm_MIDI])
                     RC_Stereo_Harm->cleanup();
             }
         }
@@ -577,11 +592,11 @@ RKR::set_audio_paramters()
                         {
                             if(all_efx == EFX_LOOPER)
                             {
-                                Efx_Looper->set_value(efx_params, lv[EFX_LOOPER][efx_params]);
+                                Efx_Looper->set_value(efx_params, Active_Preset.lv[EFX_LOOPER][efx_params]);
                             }
                             else
                             {
-                                Rack_Effects[all_efx]->changepar(efx_params, lv[all_efx][efx_params]);
+                                Rack_Effects[all_efx]->changepar(efx_params, Active_Preset.lv[all_efx][efx_params]);
                             }
                         }
 
@@ -590,12 +605,12 @@ RKR::set_audio_paramters()
                         // previous file. So, reset it again after the requested file is loaded.
                         if(all_efx == EFX_ECHOTRON)
                         {
-                            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, lv[all_efx][Echotron_Taps]);
+                            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, Active_Preset.lv[all_efx][Echotron_Taps]);
                         }
 
                         if(all_efx == EFX_STEREOHARM)
                         {
-                            if (lv[EFX_STEREOHARM][Sharm_MIDI])
+                            if (Active_Preset.lv[EFX_STEREOHARM][Sharm_MIDI])
                                 RC_Stereo_Harm->cleanup();
                         }
                     }
@@ -1228,24 +1243,24 @@ RKR::new_preset()
     Active_Preset.FX_Master_Active = 0;
     
     // Clear the effects parameters array
-    memset(lv, 0, sizeof (lv));
+    memset(Active_Preset.lv, 0, sizeof (Active_Preset.lv));
 
     // Set the default effect parameters
     for (int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
         for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
         {
-            lv[j][k] = presets_default[j][k];
+            Active_Preset.lv[j][k] = presets_default[j][k];
         }
 
-        lv[j][C_BYPASS] = 0;
+        Active_Preset.lv[j][C_BYPASS] = 0;
     }
 
     // Set the default order
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
         // Order from 0 to 10
-        lv[EFX_ORDER][k] = efx_order[k] = k;
+        Active_Preset.lv[EFX_ORDER][k] = efx_order[k] = k;
     }
     
     // Set all effects bypass to off
@@ -1257,7 +1272,7 @@ RKR::new_preset()
     FX_Master_Active_Reset = 0;
 
     // Clear MIDI learn
-    memset(XUserMIDI, 0, sizeof (XUserMIDI));
+    memset(Active_Preset.XUserMIDI, 0, sizeof (Active_Preset.XUserMIDI));
 
     // Apply all the above settings to each effect, etc.
     set_audio_paramters();
@@ -1338,7 +1353,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     {
         for (int k = 0; k < C_MAX_PARAMETERS; k++)
         {
-            lv[j][k] = Bank[preset_number].lv[j][k];
+            Active_Preset.lv[j][k] = Bank[preset_number].lv[j][k];
         }
     }
 
@@ -1356,7 +1371,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
 
     FX_Master_Active_Reset = Active_Preset.FX_Master_Active;
 
-    memcpy(XUserMIDI, Bank[preset_number].XUserMIDI, sizeof (XUserMIDI));
+    memcpy(Active_Preset.XUserMIDI, Bank[preset_number].XUserMIDI, sizeof (Active_Preset.XUserMIDI));
 
     set_audio_paramters();
 
@@ -1412,19 +1427,19 @@ RKR::main_window_preset_to_active_bank(int preset_number)
     for (int k = 0; k < C_NUMBER_EFFECTS; k++)
     {
         for (int j = 0; j < EFX_Param_Size[k]; j++)
-            lv[k][j] = Rack_Effects[k]->getpar(j);
+            Active_Preset.lv[k][j] = Rack_Effects[k]->getpar(j);
     }
     
     // Get the main window effect order
     for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
-        lv[EFX_ORDER][j] = efx_order[j];
+        Active_Preset.lv[EFX_ORDER][j] = efx_order[j];
 
     // Copy the lv[][] parameters to the Bank[].lv[][] structure
     for (int j = 0; j < C_MAX_EFFECTS; j++)
     {
         for (int k = 0; k < C_NUMBER_PARAMETERS; k++)    // bypass is not copied here
         {
-            Bank[preset_number].lv[j][k] = lv[j][k];
+            Bank[preset_number].lv[j][k] = Active_Preset.lv[j][k];
         }
     }
 
@@ -1435,7 +1450,7 @@ RKR::main_window_preset_to_active_bank(int preset_number)
     }
 
     // Copy MIDI learn to the Bank
-    memcpy(Bank[preset_number].XUserMIDI, XUserMIDI, sizeof (XUserMIDI));
+    memcpy(Bank[preset_number].XUserMIDI, Active_Preset.XUserMIDI, sizeof (Active_Preset.XUserMIDI));
 }
 
 /**

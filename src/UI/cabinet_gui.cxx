@@ -117,11 +117,11 @@ void CabinetGui::parameter_refresh(int index) {
   switch(index)
       {
       case Cabinet_Gain:          // 1
-          Cabinet_output->value(m_process->lv[EFX_CABINET][Cabinet_Gain] - 64);
+          Cabinet_output->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Gain] - 64);
           break;
   
       case Cabinet_Preset_Idx:    // 0
-          Cabinet_preset->value(m_process->lv[EFX_CABINET][Cabinet_Preset_Idx]);
+          Cabinet_preset->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Preset_Idx]);
           break;
       }
 }

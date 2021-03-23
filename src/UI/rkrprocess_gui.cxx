@@ -1273,8 +1273,8 @@ void RKRGUI::Put_Loaded()
         // Cabinet is special
         if( i == EFX_CABINET)
         {
-            CABINET->Cabinet_output->value(m_process->lv[EFX_CABINET][Cabinet_Gain] - 64);
-            CABINET->Cabinet_preset->value(m_process->lv[EFX_CABINET][Cabinet_Preset_Idx]);
+            CABINET->Cabinet_output->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Gain] - 64);
+            CABINET->Cabinet_preset->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Preset_Idx]);
             CABINET->Cabinet_activar->value(m_process->EFX_Active[EFX_CABINET]);
         }
         else
@@ -2655,7 +2655,7 @@ void RKRGUI::DisAssigns()
     {
         for (int j = 0; j < 20; j++)
         {
-            if (m_process->XUserMIDI[i][j] == the_one)
+            if (m_process->Active_Preset.XUserMIDI[i][j] == the_one)
             {
                 k++;
                 memset(tmp, 0, sizeof (tmp));
@@ -3001,9 +3001,9 @@ void RKRGUI::ActACI()
         {
             for (int i = 0; i < 20; i++)
             {
-                if (m_process->XUserMIDI[m_process->Aux_MIDI][i])
+                if (m_process->Active_Preset.XUserMIDI[m_process->Aux_MIDI][i])
                 {
-                    m_process->process_midi_controller_events(m_process->XUserMIDI[m_process->Aux_MIDI][i], value);
+                    m_process->process_midi_controller_events(m_process->Active_Preset.XUserMIDI[m_process->Aux_MIDI][i], value);
                 }
                 else
                     break;

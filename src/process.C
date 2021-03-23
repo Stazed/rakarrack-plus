@@ -272,8 +272,6 @@ RKR::RKR(int gui) :
 
     // Active preset
     UserRealName(NULL),
-    lv(),
-    XUserMIDI(),
     // End Active preset
 
     Bank_Saved(),

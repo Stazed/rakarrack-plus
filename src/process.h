@@ -1243,14 +1243,6 @@ public:
 
     char *UserRealName;
 
-    int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
-    
-    /**
-     * Array for holding the user MIDI learn settings. CC from 0 to 127, each CC can
-     * be mapped to 20 effects.
-     */
-    int XUserMIDI[128][20];
-    
     /**
      * Any previously saved bank filename is saved here. Used for setting the
      * fltk file browser previous item.

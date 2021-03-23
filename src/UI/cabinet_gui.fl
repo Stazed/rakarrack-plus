@@ -97,16 +97,16 @@ m_process->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64
     xywh {56 92 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 63 step 1 textcolor 7
     class RKR_Slider
   }
-  Function {parameter_refresh(int index)} {open return_type void
+  Function {parameter_refresh(int index)} {return_type void
   } {
     code {switch(index)
     {
     case Cabinet_Gain:          // 1
-        Cabinet_output->value(m_process->lv[EFX_CABINET][Cabinet_Gain] - 64);
+        Cabinet_output->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Gain] - 64);
         break;
 
     case Cabinet_Preset_Idx:    // 0
-        Cabinet_preset->value(m_process->lv[EFX_CABINET][Cabinet_Preset_Idx]);
+        Cabinet_preset->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Preset_Idx]);
         break;
     }} {}
   }

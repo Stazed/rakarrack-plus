@@ -56,15 +56,18 @@ m_process->RControl=1;}
   }
   Fl_Button CopyF {
     label {Copy from: }
-    callback {memcpy(m_process->XUserMIDI,m_process->Bank[TPresets->value()].XUserMIDI,sizeof(m_process->XUserMIDI));
-  m_parent->DisAssigns();}
+    callback {memcpy(m_process->Active_Preset.XUserMIDI, m_process->Bank[TPresets->value()].XUserMIDI,
+        sizeof(m_process->Active_Preset.XUserMIDI));
+
+    m_parent->DisAssigns();}
     xywh {430 20 95 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
   }
   Fl_Button CopyT {
     label {Copy to: }
-    callback {memcpy(m_process->Bank[TPresets->value()].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));}
+    callback {memcpy(m_process->Bank[TPresets->value()].XUserMIDI, m_process->Active_Preset.XUserMIDI,
+        sizeof(m_process->Active_Preset.XUserMIDI));}
     xywh {535 20 95 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -156,27 +159,33 @@ m_process->RControl=1;}
   }
   Fl_Button ClearA {
     label {Clear Assignements}
-    callback {int i, j,k;
-int the_one;
+    callback {int the_one;
 
-if (m_process->ML_filter==0)
- the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
- else
- the_one = m_process->ML_clist[(int)Epar->value()-1];
+    if (m_process->ML_filter == 0)
+    {
+        the_one = m_process->mc_efx_params[(int)Epar->value() -1].MC_params_index;
+    }
+    else
+    {
+        the_one = m_process->ML_clist[(int)Epar->value() -1];
+    }
 
+    for(int i = 0; i < 128; i++)
+    {
+        for(int j = 0; j < 20; j++)
+        {
+            if (m_process->Active_Preset.XUserMIDI[i][j] == the_one)
+            {
+                 for(int k = (j + 1); k < 20; k++)
+                 {
+                     m_process->Active_Preset.XUserMIDI[i][k-1] = m_process->Active_Preset.XUserMIDI[i][k];
+                 }
 
-for(i=0; i<128; i++)
-  {
-    for(j=0;j<20;j++)
-      {
-         if (m_process->XUserMIDI[i][j] == the_one)
-           {
-             for(k=j+1;k<20;k++) m_process->XUserMIDI[i][k-1]=m_process->XUserMIDI[i][k];
-             m_process->XUserMIDI[i][19]=0;             
-           }
-       
-       }  
-   }
+                 m_process->Active_Preset.XUserMIDI[i][19] = 0;             
+            }
+
+        }  
+    }
    
     m_parent->DisAssigns();}
     xywh {245 250 150 30}
@@ -185,7 +194,8 @@ for(i=0; i<128; i++)
   }
   Fl_Button ClearP {
     label {Clear Preset}
-    callback {memset(m_process->XUserMIDI, 0, sizeof(m_process->XUserMIDI));
+    callback {memset(m_process->Active_Preset.XUserMIDI, 0, sizeof(m_process->Active_Preset.XUserMIDI));
+
     m_parent->DisAssigns();}
     xywh {245 285 150 30}
     code0 {o->set_label_offset(4);}
@@ -193,31 +203,32 @@ for(i=0; i<128; i++)
   }
   Fl_Button Assign {
     label Assign
-    callback {int i;
+    callback {int the_one = 0;
 
-int the_one = 0;
-
-if((int)Epar->value()-1 >= 0)
-{
-    if (m_process->ML_filter==0)
-        the_one = m_process->mc_efx_params[(int)Epar->value()-1].MC_params_index;
-    else
-        the_one = m_process->ML_clist[(int)Epar->value()-1];
-}
-
-for(i=0;i<20;i++)
-
- {
-    if(m_process->XUserMIDI[(int)Disp_Control->value()][i] == the_one) return;
-
-    if(m_process->XUserMIDI[(int)Disp_Control->value()][i] ==0)
-       {
-         m_process->XUserMIDI[(int)Disp_Control->value()][i]=the_one;
-         break;
+    if((int)Epar->value()-1 >= 0)
+    {
+        if (m_process->ML_filter == 0)
+        {
+            the_one = m_process->mc_efx_params[(int)Epar->value() -1].MC_params_index;
         }
- }
- 
- 
+        else
+        {
+            the_one = m_process->ML_clist[(int)Epar->value() -1];
+        }
+    }
+
+    for(int i = 0; i < 20; i++)
+    {
+        if(m_process->Active_Preset.XUserMIDI[(int)Disp_Control->value()][i] == the_one)
+            return;
+
+        if(m_process->Active_Preset.XUserMIDI[(int)Disp_Control->value()][i] == 0)
+        {
+            m_process->Active_Preset.XUserMIDI[(int)Disp_Control->value()][i] = the_one;
+            break;
+        }
+    }
+
     m_parent->DisAssigns();}
     xywh {112 20 98 30}
     code0 {o->set_label_offset(4);}
@@ -276,8 +287,11 @@ if(o->value()< 1) o->value(1);}
   }
   Fl_Button CopyTAll {
     label {Copy to All}
-    callback {int i;
-for(i=1;i<61;i++) memcpy(m_process->Bank[i].XUserMIDI,m_process->XUserMIDI, sizeof(m_process->XUserMIDI));}
+    callback {for(int i = 1; i < 61; i++)
+    {
+        memcpy(m_process->Bank[i].XUserMIDI, m_process->Active_Preset.XUserMIDI,
+            sizeof(m_process->Active_Preset.XUserMIDI));
+    }}
     xywh {480 412 150 30}
     code0 {o->set_label_offset(4);}
     class RKR_Button
