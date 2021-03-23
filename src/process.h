@@ -6,6 +6,7 @@
 //main class for processing engine
 #include "global.h"
 
+#include "PresetBankStruct.h"
 #include "Effect.h"
 #include "Reverb.h"
 #include "Chorus.h"
@@ -620,32 +621,6 @@ const int C_MC_UNUSED_PARAMETERS = 25;
  * The total MIDI control range used in switch() case function.
  */
 const int C_MC_RANGE = C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS;
-
-/**
- * The number of rack effects.
- */
-const int C_NUMBER_EFFECTS = 47;
-
-/**
- * The maximum number of effect parameters. See fileio.C presets_default[][].
- */
-const int C_NUMBER_PARAMETERS = 19;
-
-/**
- * The number of rack effects - Main window, Orderwindow.
- * saved_order[] : efx_order[] : new_order[];
- */
-const int C_NUMBER_ORDERED_EFFECTS = 10;
-
-/**
- * The array sizes for lv[70][20] and Bank.lv[70][20]: Preset_Bank_Struct.
- * These sizes are saved to file for bank files. The max effects include 
- * one index for effect order lv[69][xx]. The max parameters includes the one index for
- * effect bypass lv[xx][19].
- */
-const int C_MAX_EFFECTS = 70;
-const int C_MAX_PARAMETERS = C_NUMBER_PARAMETERS + 1;  // 20
-const int C_BYPASS = 19;
 
 struct Preset_Bank_Struct
 {
@@ -1334,6 +1309,10 @@ public:
             MC_range() {}
     } mc_efx_params[C_MC_PARAMETER_SIZE];
 
+    /**
+     * The active preset displayed on the main window rack.
+     */
+    PresetBankStruct Active_Preset;
 
     /**
      * The currently active bank displayed on the Bank Window.

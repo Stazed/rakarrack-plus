@@ -83,6 +83,7 @@ set (ProgSources
     UI/aboutwindow_gui.cxx
     UI/trigwindow_gui.cxx
     UI/rkrprocess_gui.cxx
+    PresetBankStruct.C
     process.C
     fileio.C
     varios.C
