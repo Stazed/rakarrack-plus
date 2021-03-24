@@ -28,65 +28,14 @@
 
 PresetBankStruct::PresetBankStruct()
 {
-    new_preset(true);   // true - load default parameters
+    new_preset();   // load default parameters
 }
 
 /**
- * Copy constructor.
- * 
- * @param orig
- *      The origin from which the copy is being made.
- */
-PresetBankStruct::PresetBankStruct(const PresetBankStruct& orig)
-{
-    new_preset(false);  // false - do not load default effect parameters.
-
-    strcpy(Preset_Name, orig.Preset_Name);
-    strcpy(Author, orig.Author);
-    strcpy(Classe, orig.Classe);
-    strcpy(Type, orig.Type);
-    strcpy(ConvoFiname, orig.ConvoFiname);
-    strcpy(cInput_Gain, orig.cInput_Gain);
-    strcpy(cMaster_Volume, orig.cMaster_Volume);
-    strcpy(cBalance, orig.cBalance);
-
-    Input_Gain = orig.Input_Gain;
-    Master_Volume = orig.Master_Volume;
-    Fraction_Bypass = orig.Fraction_Bypass;
-    FX_Master_Active = orig.FX_Master_Active;
-
-    strcpy(RevFiname, orig.RevFiname);
-    strcpy(EchoFiname, orig.EchoFiname);
-
-    memset(lv, 0, sizeof (lv));
-
-    for (int j = 0; j < C_MAX_EFFECTS; j++)
-    {
-        for (int k = 0; k < C_MAX_PARAMETERS; k++)
-        {
-            lv[j][k] = orig.lv[j][k];
-        }
-    }
-
-    memcpy(XUserMIDI, orig.XUserMIDI, sizeof (XUserMIDI));
-
-    // not used
-    memcpy(XMIDIrangeMin, orig.XMIDIrangeMin, sizeof (XMIDIrangeMin));
-    memcpy(XMIDIrangeMax, orig.XMIDIrangeMax, sizeof (XMIDIrangeMax));
-
-}
-
-/**
- * Clear and zero all parameters. If this is load_default then set default preset
- * parameter values from presets_default[][].
- * 
- * @param load_default
- *      Flag to indicate if the default effect parameters should be loaded.
- *      true - load defaults
- *      false - do not load defaults
+ * Clear and set all default parameters
  */
 void
-PresetBankStruct::new_preset(bool load_default)
+PresetBankStruct::new_preset()
 {
     memset(Preset_Name, 0, sizeof (char) * 64);
     memset(Author, 0, sizeof (char) * 64);
@@ -108,24 +57,12 @@ PresetBankStruct::new_preset(bool load_default)
 
     memset(lv, 0, sizeof (lv));
 
-    // Set the default effect parameters unless this is a clear only
-    if(load_default)
+    for (int j = 0; j < C_MAX_EFFECTS; j++)
     {
-        for (int j = 0; j < C_NUMBER_EFFECTS; j++)
+        for (int k = 0; k < C_MAX_PARAMETERS; k++)
         {
-            for (int k = 0; k < C_NUMBER_PARAMETERS; k++)
-            {
-                lv[j][k] = presets_default[j][k];
-            }
-
-            lv[j][C_BYPASS] = 0;    // FIXME
+            lv[j][k] = presets_default[j][k];
         }
-    }
-    // Set the default order - FIXME should be included in load_default above
-    for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
-    {
-        // Order from 0 to 10
-        lv[EFX_ORDER][k] = k;
     }
 
     // Clear MIDI learn
