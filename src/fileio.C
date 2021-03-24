@@ -299,7 +299,7 @@ RKR::load_preset(const char *filename)
 {
     FILE *fn;
     char buf[256];
-
+    
     if ((fn = fopen(filename, "r")) == NULL)
     {
         File_To_Load.clear();
@@ -420,7 +420,7 @@ RKR::load_preset(const char *filename)
     
     sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &FX_Master_Active_Reset);
 
-    if (!actuvol)
+    if (!preserve_master)
     {
         Active_Preset.Fraction_Bypass = balance;
         Active_Preset.Input_Gain = in_vol;
@@ -1242,7 +1242,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     // Does the user want to preserve Master settings
     float Input_Gain = 0.0, Master_Volume = 0.0, Fraction_Bypass = 0.0;
 
-    if(actuvol)
+    if(preserve_master)
     {
         Input_Gain = Active_Preset.Input_Gain;
         Master_Volume = Active_Preset.Master_Volume;
@@ -1253,7 +1253,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     Active_Preset = Bank[preset_number];
 
     // Reset these if the user wants to preserve Master settings
-    if (actuvol)
+    if (preserve_master)
     {
         Active_Preset.Input_Gain = Input_Gain;
         Active_Preset.Master_Volume = Master_Volume;

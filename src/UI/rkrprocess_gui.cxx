@@ -798,7 +798,7 @@ void RKRGUI::load_previous_state()
 
     rakarrack.get(m_process->PrefNom("UserName"), m_process->UserRealName, "", 127);
     rakarrack.get(m_process->PrefNom("User Directory"), m_process->UDirFilename, DATADIR, 127);
-    rakarrack.get(m_process->PrefNom("Preserve Gain/Master"), m_process->actuvol, 0);
+    rakarrack.get(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master, 0);
     rakarrack.get(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol, 50);
     
     Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
@@ -1085,7 +1085,7 @@ void RKRGUI::save_current_state(int whati)
     if ((whati == 3) || (whati == 0))
     {
         rakarrack.set(m_process->PrefNom("UserName"), m_process->UserRealName);
-        rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->actuvol);
+        rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master);
         rakarrack.set(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol);
 
         rakarrack.set(m_process->PrefNom("Filter DC Offset"), m_process->DC_Offset);
@@ -1759,7 +1759,7 @@ void RKRGUI::MiraConfig()
     Settings->BackFiname->value(m_process->BackgroundImage);
     Settings->Udir->value(m_process->UDirFilename);
     Settings->Username->value(m_process->UserRealName);
-    Settings->Pre_Serve->value(m_process->actuvol);
+    Settings->Pre_Serve->value(m_process->preserve_master);
     Settings->LM_Volume->value(m_process->Metro_Vol);
     Settings->Filter_DC->value(m_process->DC_Offset);
     Settings->FLPosition->value(m_process->flpos);

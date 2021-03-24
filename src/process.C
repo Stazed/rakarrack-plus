@@ -87,7 +87,7 @@ RKR::RKR(int gui) :
     Harmonizer_MIDI_Channel(),
     StereoHarm_MIDI_Channel(),
     init_state(),
-    actuvol(),
+    preserve_master(),
     help_displayed(0),
     bank_modified(0),
     autoassign(),

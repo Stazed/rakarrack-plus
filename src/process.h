@@ -876,7 +876,7 @@ public:
      * Flag to indicate if user wants to preserve Master gain, etc on bank preset selections.
      * Set in Settings/Preferences/Audio.
      */
-    int actuvol;
+    int preserve_master;
     
     int help_displayed;
 

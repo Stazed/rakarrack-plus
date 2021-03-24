@@ -321,7 +321,7 @@ m_process->change_scale = 1; // true}
       }
       Fl_Check_Button Pre_Serve {
         label {Preserve Gain/Master when Preset change}
-        callback {m_process->actuvol=(int) o->value();}
+        callback {m_process->preserve_master=(int) o->value();}
         xywh {30 87 275 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button

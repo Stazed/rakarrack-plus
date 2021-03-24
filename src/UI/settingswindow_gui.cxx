@@ -218,7 +218,7 @@ void SettingsWindowGui::cb_Filter_DC(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Pre_Serve_i(RKR_Check_Button* o, void*) {
-  m_process->actuvol=(int) o->value();
+  m_process->preserve_master=(int) o->value();
 }
 void SettingsWindowGui::cb_Pre_Serve(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Pre_Serve_i(o,v);
