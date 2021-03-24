@@ -1297,6 +1297,21 @@ RKR::active_bank_preset_to_main_window(int preset_number)
 void
 RKR::main_window_preset_to_active_bank(int preset_number)
 {
+    // Update the active preset main window structure for any user
+    // changes that are not automatic.
+    refresh_active_preset();
+
+    // Copy the active preset to the bank
+    Bank[preset_number] = Active_Preset;
+}
+
+/**
+ * Updates the Active_Preset (Main window) structure for any user changes that
+ * are not automatically updated when changed.
+ */
+void
+RKR::refresh_active_preset()
+{
     // Update all effect parameters into Active_Preset from audio classes
     // since they may have been changed by user.
     for (int k = 0; k < C_NUMBER_EFFECTS; k++)
@@ -1313,6 +1328,12 @@ RKR::main_window_preset_to_active_bank(int preset_number)
         Active_Preset.lv[EFX_ORDER][j] = efx_order[j];
     }
 
+    // Copy the current bypass state
+    for(int j = 0; j < C_NUMBER_EFFECTS; j++)
+    {
+        Active_Preset.lv[j][C_BYPASS] = EFX_Active[j];
+    }
+
     // Update filenames for Convolotron, Echotron, Reverbtron to Active_Preset
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Active_Preset.ConvoFiname, 0, sizeof (Active_Preset.ConvoFiname));
@@ -1325,15 +1346,6 @@ RKR::main_window_preset_to_active_bank(int preset_number)
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
     memset(Active_Preset.EchoFiname, 0, sizeof (Active_Preset.EchoFiname));
     strcpy(Active_Preset.EchoFiname, Efx_Echotron->Filename);
-
-    // Copy the active preset to the bank
-    Bank[preset_number] = Active_Preset;
-
-    // Copy the current bypass state to the Bank
-    for(int j = 0; j < C_NUMBER_EFFECTS; j++)
-    {
-        Bank[preset_number].lv[j][C_BYPASS] = EFX_Active[j];    // FIXME check this
-    }
 }
 
 /**
