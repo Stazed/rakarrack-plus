@@ -871,7 +871,13 @@ public:
     int StereoHarm_MIDI_Channel;
 
     int init_state;
+    
+    /**
+     * Flag to indicate if user wants to preserve Master gain, etc on bank preset selections.
+     * Set in Settings/Preferences/Audio.
+     */
     int actuvol;
+    
     int help_displayed;
 
     /**
