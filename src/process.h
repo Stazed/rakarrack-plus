@@ -663,7 +663,7 @@ public:
     void process_midi_controller_events(int parameter, int value);
 
     // fileio.C
-    void apply_effect_parameters (char *buf, int fx_index);
+    void apply_effect_parameters (char *buf, int fx_index, PresetBankStruct &preset_loaded);
     void get_effect_parameters (char *buf, int fx_index);
     void save_preset (const char *filename);
     void load_preset (const char *filename);
