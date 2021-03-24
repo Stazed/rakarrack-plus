@@ -1232,11 +1232,11 @@ void RKRGUI::Put_Loaded()
     WPreset_Name->value(m_process->Active_Preset.Preset_Name);
     DAuthor->copy_label(m_process->Active_Preset.Author);
 
-    Nivel_Entrada->value((int) (m_process->Active_Preset.Input_Gain * 100.0) - 50);
+    Nivel_Entrada->value((int) (float) (m_process->Active_Preset.Input_Gain * 100.0) - 50);
     m_process->calculavol(1);
-    Nivel_Salida->value((int) (m_process->Active_Preset.Master_Volume * 100.0) - 50);
+    Nivel_Salida->value((int) (float) (m_process->Active_Preset.Master_Volume * 100.0) - 50);
     m_process->calculavol(2);
-    Balance->value((int) (m_process->Active_Preset.Fraction_Bypass * 100.0));
+    Balance->value((int) (float) (m_process->Active_Preset.Fraction_Bypass * 100.0));
 
 
     ActivarGeneral->value(m_process->Active_Preset.FX_Master_Active);
