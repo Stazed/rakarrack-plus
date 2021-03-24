@@ -78,40 +78,28 @@ void RKR::apply_effect_parameters(char *buf, int fx_index, PresetBankStruct &pre
             // Convolotron, Reverbtron, Echotron have file names to parse as well
             if(fx_index == EFX_CONVOLOTRON)
             {
-                Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-                memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
-
                 std::string s_name = result.at(EFX_Param_Size[effect] + 1);
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strcpy(Efx_Convolotron->Filename, s_name.c_str());
                 strcpy(preset_loaded.ConvoFiname, s_name.c_str());
             }
             
             else if(fx_index == EFX_REVERBTRON)
             {
-                Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-                memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
-
                 std::string s_name = result.at(EFX_Param_Size[effect] + 1);
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strcpy(Efx_Reverbtron->Filename, s_name.c_str());
                 strcpy(preset_loaded.RevFiname, s_name.c_str());
             }
 
             else if(fx_index == EFX_ECHOTRON)
             {
-                Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-                memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
-
                 std::string s_name = result.at(EFX_Param_Size[effect] + 1);
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strcpy(Efx_Echotron->Filename, s_name.c_str());
                 strcpy(preset_loaded.EchoFiname, s_name.c_str());
             }
             
@@ -526,6 +514,19 @@ RKR::set_audio_paramters()
 {
     // Shut off main audio processing while setting
     Active_Preset.FX_Master_Active = 0;
+
+    // Copy the file names to the audio effects
+    Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
+    memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
+    strcpy(Efx_Convolotron->Filename, Active_Preset.ConvoFiname);
+
+    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
+    memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
+    strcpy(Efx_Reverbtron->Filename, Active_Preset.RevFiname);
+
+    Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
+    memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
+    strcpy(Efx_Echotron->Filename, Active_Preset.EchoFiname);
     
     // The main window effect order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
@@ -1206,16 +1207,6 @@ RKR::new_preset()
 
     Active_Preset.new_preset();
 
-    // Clear special effect file names from the audio classes
-    Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-    memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
-
-    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-    memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
-
-    Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-    memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
-
     // Set all effects bypass to off
     for(int i = 0; i < C_NUMBER_EFFECTS; i++)
     {
@@ -1273,19 +1264,6 @@ RKR::active_bank_preset_to_main_window(int preset_number)
         Active_Preset.Master_Volume = Master_Volume;
         Active_Preset.Fraction_Bypass = Fraction_Bypass;
     }
-
-    // Copy the file names to the audio effects
-    Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-    memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
-    strcpy(Efx_Convolotron->Filename, Active_Preset.ConvoFiname);
-
-    Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-    memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
-    strcpy(Efx_Reverbtron->Filename, Active_Preset.RevFiname);
-
-    Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-    memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
-    strcpy(Efx_Echotron->Filename, Active_Preset.EchoFiname);
 
     // Set the main rack effect order
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
