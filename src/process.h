@@ -745,7 +745,6 @@ public:
      * Arrays to hold bypass flags for each effect, indexed by EFX_Index.
      */
     int EFX_Active[C_NUMBER_EFFECTS];
-    int EFX_Bank_Active[C_NUMBER_EFFECTS];
 
     class Limiter *efx_FLimiter;
 

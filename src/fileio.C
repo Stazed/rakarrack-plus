@@ -71,7 +71,7 @@ void RKR::apply_effect_parameters(char *buf, int fx_index, PresetBankStruct &pre
                 }
                 else    // Set the bypass
                 {
-                    EFX_Bank_Active[effect] = atoi( result.at(params).c_str() );    // FIXME Active_Preset
+                    preset_loaded.lv[effect][C_BYPASS] = atoi( result.at(params).c_str() );
                 }
             }
 
@@ -201,7 +201,13 @@ RKR::save_preset(const char *filename)
         fclose(fn);
         return;
     }
-
+    
+    // Update active preset for any user changes
+    refresh_active_preset();
+    
+    // Copy active preset for file operations
+    PresetBankStruct Save_Preset = Active_Preset;
+    
     // Program release version
     memset(buf, 0, sizeof (buf));
     sprintf(buf, "%s\n", VERSION);
@@ -210,9 +216,9 @@ RKR::save_preset(const char *filename)
     // Author
     memset(buf, 0, sizeof (buf));
 
-    if (strlen(Active_Preset.Author) != 0)
+    if (strlen(Save_Preset.Author) != 0)
     {
-        sprintf(buf, "%s\n", Active_Preset.Author);
+        sprintf(buf, "%s\n", Save_Preset.Author);
     }
     else
     {
@@ -229,13 +235,13 @@ RKR::save_preset(const char *filename)
     fputs(buf, fn);
 
     // Preset Name
-    fputs(Active_Preset.Preset_Name, fn);
+    fputs(Save_Preset.Preset_Name, fn);
     fputs("\n", fn);
 
     // Master control
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%f,%f,%f,%d\n", Active_Preset.Input_Gain, Active_Preset.Master_Volume,
-            Active_Preset.Fraction_Bypass, Active_Preset.FX_Master_Active);
+    sprintf(buf, "%f,%f,%f,%d\n", Save_Preset.Input_Gain, Save_Preset.Master_Volume,
+            Save_Preset.Fraction_Bypass, Save_Preset.FX_Master_Active);
     fputs(buf, fn);
 
     // Effect parameters
@@ -261,16 +267,16 @@ RKR::save_preset(const char *filename)
     {
         memset(buf, 0, sizeof (buf));
         sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Active_Preset.XUserMIDI[i][0], Active_Preset.XUserMIDI[i][1],
-                Active_Preset.XUserMIDI[i][2], Active_Preset.XUserMIDI[i][3],
-                Active_Preset.XUserMIDI[i][4], Active_Preset.XUserMIDI[i][5],
-                Active_Preset.XUserMIDI[i][6], Active_Preset.XUserMIDI[i][7],
-                Active_Preset.XUserMIDI[i][8], Active_Preset.XUserMIDI[i][9],
-                Active_Preset.XUserMIDI[i][10], Active_Preset.XUserMIDI[i][10],
-                Active_Preset.XUserMIDI[i][12], Active_Preset.XUserMIDI[i][13],
-                Active_Preset.XUserMIDI[i][14], Active_Preset.XUserMIDI[i][15],
-                Active_Preset.XUserMIDI[i][16], Active_Preset.XUserMIDI[i][17],
-                Active_Preset.XUserMIDI[i][18], Active_Preset.XUserMIDI[i][19]);
+                Save_Preset.XUserMIDI[i][0], Save_Preset.XUserMIDI[i][1],
+                Save_Preset.XUserMIDI[i][2], Save_Preset.XUserMIDI[i][3],
+                Save_Preset.XUserMIDI[i][4], Save_Preset.XUserMIDI[i][5],
+                Save_Preset.XUserMIDI[i][6], Save_Preset.XUserMIDI[i][7],
+                Save_Preset.XUserMIDI[i][8], Save_Preset.XUserMIDI[i][9],
+                Save_Preset.XUserMIDI[i][10], Save_Preset.XUserMIDI[i][10],
+                Save_Preset.XUserMIDI[i][12], Save_Preset.XUserMIDI[i][13],
+                Save_Preset.XUserMIDI[i][14], Save_Preset.XUserMIDI[i][15],
+                Save_Preset.XUserMIDI[i][16], Save_Preset.XUserMIDI[i][17],
+                Save_Preset.XUserMIDI[i][18], Save_Preset.XUserMIDI[i][19]);
 
         fputs(buf, fn);
     }
@@ -486,9 +492,6 @@ RKR::load_preset(const char *filename)
 
     fclose(fn);
 
-    // Clear the Main Window preset
-    new_preset();
-
     // Copy the loaded preset to Main window
     Active_Preset = preset_loaded;
 
@@ -544,7 +547,7 @@ RKR::set_audio_paramters()
     {
         for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
         {
-            EFX_Active[all_efx] = EFX_Bank_Active[all_efx];     // FIXME Active_Preset
+            EFX_Active[all_efx] = Active_Preset.lv[all_efx][C_BYPASS];
 
             if(all_efx != EFX_LOOPER)
                 Rack_Effects[all_efx]->cleanup();
@@ -594,7 +597,7 @@ RKR::set_audio_paramters()
                 if(efx_order[ordered_efx] == all_efx)
                 {
                     // Set the bypass for all ordered
-                    EFX_Active[all_efx] = EFX_Bank_Active[all_efx];     // FIXME Active_Preset
+                    EFX_Active[all_efx] = Active_Preset.lv[all_efx][C_BYPASS];
 
                     // If the ordered effect is active, then set the parameters
                     // We do not need to set parameters for inactive effects
@@ -1207,12 +1210,6 @@ RKR::new_preset()
 
     Active_Preset.new_preset();
 
-    // Set all effects bypass to off
-    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
-    {
-        EFX_Bank_Active[i] = 0;     // FIXME check this
-    }
-
     // Set the Master to OFF
     FX_Master_Active_Reset = 0;
 
@@ -1269,12 +1266,6 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
         efx_order[k] = Active_Preset.lv[EFX_ORDER][k];
-    }
-
-    // Set the bypass state for each effect
-    for(int k = 0; k < C_NUMBER_EFFECTS; k++)
-    {
-        EFX_Bank_Active[k] = Active_Preset.lv[k][C_BYPASS]; // FIXME - active preset could be used
     }
 
     // Apply the effect parameters to the audio classes
