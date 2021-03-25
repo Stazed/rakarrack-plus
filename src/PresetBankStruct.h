@@ -35,7 +35,7 @@
 const int C_NUMBER_EFFECTS = 47;
 
 /**
- * The maximum number of effect parameters. See presets_default[][].
+ * The maximum number of effect parameters for the audio class
  */
 const int C_NUMBER_PARAMETERS = 19;
 
@@ -46,10 +46,10 @@ const int C_NUMBER_PARAMETERS = 19;
 const int C_NUMBER_ORDERED_EFFECTS = 10;
 
 /**
- * The array sizes for lv[70][20] and Bank.lv[70][20]: Preset_Bank_Struct.
+ * The array sizes for Effect_Params[70][20] and Bank.Effect_Params[70][20]:
  * These sizes are saved to file for bank files. The max effects include 
- * one index for effect order lv[69][xx]. The max parameters includes the one index for
- * effect bypass lv[xx][19].
+ * one index for effect order Effect_Params[69][xx]. The max parameters includes the one index for
+ * effect bypass Effect_Params[xx][19].
  */
 const int C_MAX_EFFECTS = 70;
 const int C_MAX_PARAMETERS = C_NUMBER_PARAMETERS + 1;  // 20
@@ -194,6 +194,8 @@ public:
 
     void new_preset();
     
+    // The order and size of these variables cannot be changed
+    // since they are used for file saving.
     char Preset_Name[64];
     char Author[64];
     char Classe[36];            // Not used
@@ -208,7 +210,8 @@ public:
     int FX_Master_Active;       // Active
     char RevFiname[128];
     char EchoFiname[128];
-    int lv[C_MAX_EFFECTS][C_MAX_PARAMETERS];
+    
+    int Effect_Params[C_MAX_EFFECTS][C_MAX_PARAMETERS];
 
     /**
      * Array for holding the user MIDI learn settings. CC from 0 to 127, each CC can

@@ -102,11 +102,11 @@ m_process->Rack_Effects[EFX_CABINET]->changepar(Cabinet_Gain,(int)(o->value()+64
     code {switch(index)
     {
     case Cabinet_Gain:          // 1
-        Cabinet_output->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Gain] - 64);
+        Cabinet_output->value(m_process->Active_Preset.Effect_Params[EFX_CABINET][Cabinet_Gain] - 64);
         break;
 
     case Cabinet_Preset_Idx:    // 0
-        Cabinet_preset->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Preset_Idx]);
+        Cabinet_preset->value(m_process->Active_Preset.Effect_Params[EFX_CABINET][Cabinet_Preset_Idx]);
         break;
     }} {}
   }

@@ -1273,8 +1273,8 @@ void RKRGUI::Put_Loaded()
         // Cabinet is special
         if( i == EFX_CABINET)
         {
-            CABINET->Cabinet_output->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Gain] - 64);
-            CABINET->Cabinet_preset->value(m_process->Active_Preset.lv[EFX_CABINET][Cabinet_Preset_Idx]);
+            CABINET->Cabinet_output->value(m_process->Active_Preset.Effect_Params[EFX_CABINET][Cabinet_Gain] - 64);
+            CABINET->Cabinet_preset->value(m_process->Active_Preset.Effect_Params[EFX_CABINET][Cabinet_Preset_Idx]);
             CABINET->Cabinet_activar->value(m_process->EFX_Active[EFX_CABINET]);
         }
         else

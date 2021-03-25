@@ -67,11 +67,11 @@ void RKR::apply_effect_parameters(char *buf, int fx_index, PresetBankStruct &pre
             {
                 if(params < EFX_Param_Size[effect])   // Set the EFX parameters
                 {
-                    preset_loaded.lv[effect][params] =  atoi( result.at(params).c_str() );
+                    preset_loaded.Effect_Params[effect][params] =  atoi( result.at(params).c_str() );
                 }
                 else    // Set the bypass
                 {
-                    preset_loaded.lv[effect][C_BYPASS] = atoi( result.at(params).c_str() );
+                    preset_loaded.Effect_Params[effect][C_BYPASS] = atoi( result.at(params).c_str() );
                 }
             }
 
@@ -458,11 +458,11 @@ RKR::load_preset(const char *filename)
 
     // Apply the order
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-           &preset_loaded.lv[EFX_ORDER][0], &preset_loaded.lv[EFX_ORDER][1],
-           &preset_loaded.lv[EFX_ORDER][2], &preset_loaded.lv[EFX_ORDER][3],
-           &preset_loaded.lv[EFX_ORDER][4], &preset_loaded.lv[EFX_ORDER][5],
-           &preset_loaded.lv[EFX_ORDER][6], &preset_loaded.lv[EFX_ORDER][7],
-           &preset_loaded.lv[EFX_ORDER][8], &preset_loaded.lv[EFX_ORDER][9]);
+           &preset_loaded.Effect_Params[EFX_ORDER][0], &preset_loaded.Effect_Params[EFX_ORDER][1],
+           &preset_loaded.Effect_Params[EFX_ORDER][2], &preset_loaded.Effect_Params[EFX_ORDER][3],
+           &preset_loaded.Effect_Params[EFX_ORDER][4], &preset_loaded.Effect_Params[EFX_ORDER][5],
+           &preset_loaded.Effect_Params[EFX_ORDER][6], &preset_loaded.Effect_Params[EFX_ORDER][7],
+           &preset_loaded.Effect_Params[EFX_ORDER][8], &preset_loaded.Effect_Params[EFX_ORDER][9]);
 
     // MIDI learn table
     for (int i = 0; i < 128; i++)
@@ -534,7 +534,7 @@ RKR::set_audio_paramters()
     // The main window effect order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        efx_order[i] = Active_Preset.lv[EFX_ORDER][i];
+        efx_order[i] = Active_Preset.Effect_Params[EFX_ORDER][i];
     }
     
     // Looper is special
@@ -547,7 +547,7 @@ RKR::set_audio_paramters()
     {
         for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
         {
-            EFX_Active[all_efx] = Active_Preset.lv[all_efx][C_BYPASS];
+            EFX_Active[all_efx] = Active_Preset.Effect_Params[all_efx][C_BYPASS];
 
             if(all_efx != EFX_LOOPER)
                 Rack_Effects[all_efx]->cleanup();
@@ -557,11 +557,11 @@ RKR::set_audio_paramters()
             {
                 if(all_efx == EFX_LOOPER)
                 {
-                    Efx_Looper->set_value(efx_params, Active_Preset.lv[EFX_LOOPER][efx_params]);
+                    Efx_Looper->set_value(efx_params, Active_Preset.Effect_Params[EFX_LOOPER][efx_params]);
                 }
                 else
                 {
-                    Rack_Effects[all_efx]->changepar(efx_params, Active_Preset.lv[all_efx][efx_params]);
+                    Rack_Effects[all_efx]->changepar(efx_params, Active_Preset.Effect_Params[all_efx][efx_params]);
                 }
             }
 
@@ -570,12 +570,12 @@ RKR::set_audio_paramters()
             // previous file. So, reset it again after the requested file is loaded.
             if(all_efx == EFX_ECHOTRON)
             {
-                Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, Active_Preset.lv[all_efx][Echotron_Taps]);
+                Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, Active_Preset.Effect_Params[all_efx][Echotron_Taps]);
             }
 
             if(all_efx == EFX_STEREOHARM)
             {
-                if (Active_Preset.lv[EFX_STEREOHARM][Sharm_MIDI])
+                if (Active_Preset.Effect_Params[EFX_STEREOHARM][Sharm_MIDI])
                     RC_Stereo_Harm->cleanup();
             }
         }
@@ -597,7 +597,7 @@ RKR::set_audio_paramters()
                 if(efx_order[ordered_efx] == all_efx)
                 {
                     // Set the bypass for all ordered
-                    EFX_Active[all_efx] = Active_Preset.lv[all_efx][C_BYPASS];
+                    EFX_Active[all_efx] = Active_Preset.Effect_Params[all_efx][C_BYPASS];
 
                     // If the ordered effect is active, then set the parameters
                     // We do not need to set parameters for inactive effects
@@ -610,11 +610,11 @@ RKR::set_audio_paramters()
                         {
                             if(all_efx == EFX_LOOPER)
                             {
-                                Efx_Looper->set_value(efx_params, Active_Preset.lv[EFX_LOOPER][efx_params]);
+                                Efx_Looper->set_value(efx_params, Active_Preset.Effect_Params[EFX_LOOPER][efx_params]);
                             }
                             else
                             {
-                                Rack_Effects[all_efx]->changepar(efx_params, Active_Preset.lv[all_efx][efx_params]);
+                                Rack_Effects[all_efx]->changepar(efx_params, Active_Preset.Effect_Params[all_efx][efx_params]);
                             }
                         }
 
@@ -623,12 +623,12 @@ RKR::set_audio_paramters()
                         // previous file. So, reset it again after the requested file is loaded.
                         if(all_efx == EFX_ECHOTRON)
                         {
-                            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, Active_Preset.lv[all_efx][Echotron_Taps]);
+                            Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps, Active_Preset.Effect_Params[all_efx][Echotron_Taps]);
                         }
 
                         if(all_efx == EFX_STEREOHARM)
                         {
-                            if (Active_Preset.lv[EFX_STEREOHARM][Sharm_MIDI])
+                            if (Active_Preset.Effect_Params[EFX_STEREOHARM][Sharm_MIDI])
                                 RC_Stereo_Harm->cleanup();
                         }
                     }
@@ -659,12 +659,12 @@ RKR::load_custom_MIDI_table_preset_names()
 
 
 /**
- * Reverts the file ordering to program Bank[].lv[][] array ordering.
+ * Reverts the file ordering to program Bank[].Effect_Params[][] array ordering.
  * The Bank files (.rkrb types) effects indexing is saved in the order
  * of LV_File_Index. The program uses EFX_Index.
  * 
  * @param lv_revert
- *      A single Bank[].lv[][] array to be converted. This will alter the array.
+ *      A single Bank[].Effect_Params[][] array to be converted. This will alter the array.
  * 
  * @param size
  *      The size of the array sizeof().
@@ -759,19 +759,19 @@ RKR::revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int siz
 }
 
 /**
- * Converts the program Bank[].lv[][] array ordering to file ordering.
+ * Converts the program Bank[].Effect_Params[][] array ordering to file ordering.
  * The Bank files (.rkrb types) effects indexing is saved in the order
  * of LV_File_Index. This was originally part of legacy rakarrack which kept 
- * the lv[][] indexing the same for the program. The program otherwise
+ * the Effect_Params[][] indexing the same for the program. The program otherwise
  * used the indexing of EFX_Index. This resulted in extra code having 
  * to individually map each effect when copying bank to preset. A
  * for() loop would be much easier if the two were aligned.
  * Originally this was all done with magic numbers. The conversion/reversion
- * is simply to align the lv[][] arrays with the program without having to 
+ * is simply to align the Effect_Params[][] arrays with the program without having to 
  * change the file structure.
  * 
  * @param lv_convert
- *      A single Bank[].lv[][] array to be converted. This will alter the array.
+ *      A single Bank[].Effect_Params[][] array to be converted. This will alter the array.
  * 
  * @param size
  *      The size of the array sizeof().
@@ -779,7 +779,7 @@ RKR::revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int siz
 void
 RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size)
 {
-    // The effect order used for file saving lv[70][20] and Preset_Bank_Struct.lv[70][20].
+    // The effect order used for file saving Effect_Params[70][20] and Preset_Bank_Struct.Effect_Params[70][20].
     enum LV_File_Index
     {
         LV_REVERB = 0,
@@ -977,7 +977,7 @@ RKR::load_bank(const char *filename)
 
         for(int i = 0; i < 62; i++)
         {
-            revert_file_to_bank(Load_Bank[i].lv, sizeof(Load_Bank[i].lv));
+            revert_file_to_bank(Load_Bank[i].Effect_Params, sizeof(Load_Bank[i].Effect_Params));
         }
 
         // copy the loaded bank to the active bank
@@ -1007,7 +1007,7 @@ RKR::save_bank(const char *filename)
 
         for(int i = 0; i < 62; i++)
         {
-            convert_bank_to_file(Save_Bank[i].lv, sizeof(Save_Bank[i].lv));
+            convert_bank_to_file(Save_Bank[i].Effect_Params, sizeof(Save_Bank[i].Effect_Params));
         }
 
         if (big_endian())
@@ -1158,7 +1158,7 @@ RKR::add_bank_item(std::string filename)
 
         for(int i = 0; i < 62; i++)
         {
-            revert_file_to_bank(Another_Bank.Bank[i].lv, sizeof(Another_Bank.Bank[i].lv));
+            revert_file_to_bank(Another_Bank.Bank[i].Effect_Params, sizeof(Another_Bank.Bank[i].Effect_Params));
         }
 
         Another_Bank.Bank_File_Name = filename;
@@ -1265,7 +1265,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     // Set the main rack effect order
     for (int k = 0; k < C_NUMBER_ORDERED_EFFECTS; k++)
     {
-        efx_order[k] = Active_Preset.lv[EFX_ORDER][k];
+        efx_order[k] = Active_Preset.Effect_Params[EFX_ORDER][k];
     }
 
     // Apply the effect parameters to the audio classes
@@ -1309,20 +1309,20 @@ RKR::refresh_active_preset()
     {
         for (int j = 0; j < EFX_Param_Size[k]; j++)
         {
-            Active_Preset.lv[k][j] = Rack_Effects[k]->getpar(j);
+            Active_Preset.Effect_Params[k][j] = Rack_Effects[k]->getpar(j);
         }
     }
 
     // Update main window effect order to Active_Preset since it may have been changed by user.
     for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
     {
-        Active_Preset.lv[EFX_ORDER][j] = efx_order[j];
+        Active_Preset.Effect_Params[EFX_ORDER][j] = efx_order[j];
     }
 
     // Copy the current bypass state
     for(int j = 0; j < C_NUMBER_EFFECTS; j++)
     {
-        Active_Preset.lv[j][C_BYPASS] = EFX_Active[j];
+        Active_Preset.Effect_Params[j][C_BYPASS] = EFX_Active[j];
     }
 
     // Update filenames for Convolotron, Echotron, Reverbtron to Active_Preset
@@ -1404,9 +1404,9 @@ RKR::fix_endianess(struct PresetBankStruct _bank[])
         {
             for (int k = 0; k < 20; k++)
             {
-                data = _bank[i].lv[j][k];
+                data = _bank[i].Effect_Params[j][k];
                 data = SwapFourBytes(data);
-                _bank[i].lv[j][k] = data;
+                _bank[i].Effect_Params[j][k] = data;
             }
         }
 

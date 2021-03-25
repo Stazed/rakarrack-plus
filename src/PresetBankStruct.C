@@ -55,13 +55,13 @@ PresetBankStruct::new_preset()
     memset(RevFiname, 0, sizeof (char) * 128);
     memset(EchoFiname, 0, sizeof (char) * 128);
 
-    memset(lv, 0, sizeof (lv));
+    memset(Effect_Params, 0, sizeof (Effect_Params));
 
     for (int j = 0; j < C_MAX_EFFECTS; j++)
     {
         for (int k = 0; k < C_MAX_PARAMETERS; k++)
         {
-            lv[j][k] = presets_default[j][k];
+            Effect_Params[j][k] = presets_default[j][k];
         }
     }
 
