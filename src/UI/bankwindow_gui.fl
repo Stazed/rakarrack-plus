@@ -17,18 +17,18 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_Menu_Bar.h"} {public global
 }
 
-decl {/* All the sub menu paths for resizing */
-const std::vector<std::string> bank_submenu_paths
+decl {const std::vector<std::string> bank_submenu_paths
 {
-    /* Bank Window - From BankWindowGui::menu_MenuB[] */
-    "&File/&New",
     "&File/&Load Bank",
     "&File/&Save Bank",
     "&File/Convert &Old Bank",
     "&File/&Close",
     "&Help/Help &Contents",
     "&Help/&About..."
-};} {private global
+};} {
+  comment {Bank Window - From BankWindowGui::menu_MenuB[].
+All the sub menu paths for resizing.
+These need to be adjusted if the file menu is changed.} private global
 }
 
 widget_class BankWindowGui {open selected
@@ -55,11 +55,6 @@ m_parent= _rgui;} {}
       label {&File}
       xywh {10 10 100 20} labelcolor 7
     } {
-      MenuItem NewB {
-        label {&New}
-        callback {B_New->do_callback();}
-        xywh {0 0 45 26} divider
-      }
       MenuItem Load_Bank {
         label {&Load Bank}
         callback {m_parent->get_bank_file();}

@@ -22,11 +22,6 @@ public:
   RKR_Menu_Bar *MenuB;
   static Fl_Menu_Item menu_MenuB[];
   static Fl_Menu_Item *ArchivoB;
-  static Fl_Menu_Item *NewB;
-private:
-  inline void cb_NewB_i(Fl_Menu_*, void*);
-  static void cb_NewB(Fl_Menu_*, void*);
-public:
   static Fl_Menu_Item *Load_Bank;
 private:
   inline void cb_Load_Bank_i(Fl_Menu_*, void*);
