@@ -316,7 +316,7 @@ RKR::load_preset(const char *filename)
         {
             File_To_Load.clear();
             Handle_Message(14, filename);
-            file_error(fn);
+            fclose(fn);
             return;
         }
     }
@@ -328,7 +328,7 @@ RKR::load_preset(const char *filename)
     {
         File_To_Load.clear();
         Handle_Message(15, filename);
-        file_error(fn);
+        fclose(fn);
         return;
     }
 
@@ -356,7 +356,7 @@ RKR::load_preset(const char *filename)
     {
         File_To_Load.clear();
         Handle_Message(16, filename);
-        file_error(fn);
+        fclose(fn);
         return;
     }
 
@@ -367,7 +367,7 @@ RKR::load_preset(const char *filename)
     {
         File_To_Load.clear();
         Handle_Message(17, filename);
-        file_error(fn);
+        fclose(fn);
         return;
     }
 
@@ -386,7 +386,7 @@ RKR::load_preset(const char *filename)
     {
         File_To_Load.clear();
         Handle_Message(18, filename);
-        file_error(fn);
+        fclose(fn);
         return;
     }
 
@@ -405,7 +405,7 @@ RKR::load_preset(const char *filename)
     {
         File_To_Load.clear();
         Handle_Message(19, filename);
-        file_error(fn);
+        fclose(fn);
         return;
     }
 
@@ -438,7 +438,7 @@ RKR::load_preset(const char *filename)
         {
             File_To_Load.clear();
             Handle_Message(19, filename);
-            file_error(fn);
+            fclose(fn);
             return;
         }
 
@@ -452,7 +452,7 @@ RKR::load_preset(const char *filename)
     {
         File_To_Load.clear();
         Handle_Message(15, filename);
-        file_error(fn);
+        fclose(fn);
         return;
     }
 
@@ -473,7 +473,7 @@ RKR::load_preset(const char *filename)
         {
             File_To_Load.clear();
             Handle_Message(20, filename);
-            file_error(fn);
+            fclose(fn);
             return;
         }
 
@@ -495,15 +495,6 @@ RKR::load_preset(const char *filename)
     // Copy the loaded preset to Main window
     Active_Preset = preset_loaded;
 
-    set_audio_paramters();
-}
-
-void
-RKR::file_error(FILE *fn)
-{
-    printf("File Error!\n");
-    
-    fclose(fn);
     set_audio_paramters();
 }
 

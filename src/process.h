@@ -667,7 +667,6 @@ public:
     void get_effect_parameters (char *buf, int fx_index);
     void save_preset (const char *filename);
     void load_preset (const char *filename);
-    void file_error(FILE *fn);
     void set_audio_paramters ();
     void load_custom_MIDI_table_preset_names();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
