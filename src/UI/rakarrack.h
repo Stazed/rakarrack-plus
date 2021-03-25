@@ -181,11 +181,6 @@ public:
   RKR_Menu_Bar *MenuP;
   static Fl_Menu_Item menu_MenuP[];
   static Fl_Menu_Item *Archivo;
-  static Fl_Menu_Item *Menu_New;
-private:
-  inline void cb_Menu_New_i(Fl_Menu_*, void*);
-  static void cb_Menu_New(Fl_Menu_*, void*);
-public:
   static Fl_Menu_Item *Load_Preset;
 private:
   inline void cb_Load_Preset_i(Fl_Menu_*, void*);

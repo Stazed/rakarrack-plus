@@ -71,11 +71,8 @@ decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 decl {\#include <X11/xpm.h>} {public global
 }
 
-decl {/* All the sub menu paths for resizing */
-const std::vector<std::string> main_submenu_paths
+decl {const std::vector<std::string> main_submenu_paths
 {
-    /* Main Window - From RKRGUI::menu_MenuP[] */
-    "&File/New",
     "&File/Load Preset",
     "&File/Save Preset",
     "&File/Load &Bank",
@@ -93,7 +90,10 @@ const std::vector<std::string> main_submenu_paths
     "&Settings/Fullscreen",
     "&Help/Help Contents",
     "&Help/About...",
-};} {private global
+};} {
+  comment {Main Window - From RKRGUI::menu_MenuP[].
+All the sub menu paths for resizing.
+If any of the File menu items change, then this vector needs to be changed.} private global
 }
 
 decl {class RKR;  // forward declaration} {public global
@@ -333,26 +333,21 @@ is_PG_table_modified();
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {277 56 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {427 491 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->set_label_offset(4);}
         code1 {o->set_submenu_paths(main_submenu_paths);}
         class RKR_Menu_Bar
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
-          MenuItem Menu_New {
-            label New
-            callback {S_new->do_callback();}
-            xywh {0 0 45 26} shortcut 0x6e divider
-          }
           MenuItem Load_Preset {
             label {Load Preset}
             callback {L_preset->do_callback();}
