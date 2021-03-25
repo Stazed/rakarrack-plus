@@ -17,7 +17,7 @@ const std::vector<std::string> main_submenu_paths
     "&File/Load MIDI Table",
     "&File/Save MIDI Table",
     "&File/&Convert Reverb IR File",
-    "&File/Import Internal Presets",
+    "&File/Import Inserted Presets",
     "&File/Exit",
     "&Settings/Preferences",
     "&Settings/MIDI Learn",
@@ -184,7 +184,7 @@ void RKRGUI::cb_ImportPresets_i(Fl_Menu_*, void*) {
     memset(tempfile, 0, sizeof (tempfile));
     sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
   
-    filename = fl_file_chooser("Import Internal Presets:","(*)", tempfile,0);
+    filename = fl_file_chooser("Import Inserted Presets:","(*)", tempfile,0);
 
     if (filename == NULL) return;
 
@@ -300,7 +300,7 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"Load MIDI Table", 0,  (Fl_Callback*)RKRGUI::cb_Load_MTable, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Save MIDI Table", 0,  (Fl_Callback*)RKRGUI::cb_Save_MTable, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"&Convert Reverb IR File", 0,  (Fl_Callback*)RKRGUI::cb_ConvertReverb, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Import Internal Presets", 0,  (Fl_Callback*)RKRGUI::cb_ImportPresets, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Import Inserted Presets", 0,  (Fl_Callback*)RKRGUI::cb_ImportPresets, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Exit", 0x78,  (Fl_Callback*)RKRGUI::cb_salir, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {"&Bank", 0x62,  (Fl_Callback*)RKRGUI::cb_Bank_Menu, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
