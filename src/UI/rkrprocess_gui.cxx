@@ -3309,13 +3309,6 @@ int RKRGUI::global_shortcuts(int event)
             
             return 1;
         }
-        
-        // Ctrl+S, save the currently loaded bank.
-        if(Fl::event_state(FL_CTRL+'s'))
-        {
-            process_rkr->Gui_Refresh = GUI_Refresh_CTRL_S;
-            return 1;
-        }
     }
 
     return 0;

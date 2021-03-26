@@ -53,6 +53,11 @@ private:
   inline void cb_Acerca_deB_i(Fl_Menu_*, void*);
   static void cb_Acerca_deB(Fl_Menu_*, void*);
 public:
+  RKR_Button *B_Save;
+private:
+  inline void cb_B_Save_i(RKR_Button*, void*);
+  static void cb_B_Save(RKR_Button*, void*);
+public:
   RKR_Button *B_New;
 private:
   inline void cb_B_New_i(RKR_Button*, void*);
