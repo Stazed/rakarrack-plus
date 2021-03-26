@@ -32,7 +32,7 @@ These need to be adjusted if the file menu is changed.} private global
 }
 
 widget_class BankWindowGui {open selected
-  xywh {344 233 800 600} type Double color 4 selection_color 7 resizable
+  xywh {882 265 800 600} type Double color 4 selection_color 7 resizable
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
   class Fl_Double_Window size_range {320 240 3200 2400} visible
@@ -122,35 +122,35 @@ m_parent->put_icon(m_parent->AboutWin);}
     m_process->new_bank(m_process->Bank);
     m_parent->Put_Loaded_Bank();
     redraw();}
-    xywh {131 14 80 24} color 2
+    tooltip {Clear the current bank window - Shortcut 'N'} xywh {131 14 80 24} shortcut 0x6e color 2
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B1 {
     label 1
     callback {m_parent->L_B1->do_callback();}
-    xywh {258 14 32 24} color 62 labelsize 10
+    tooltip {Set the active bank to Default - Shortcut '1'} xywh {258 14 32 24} shortcut 0x31 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B2 {
     label 2
     callback {m_parent->L_B2->do_callback();}
-    xywh {298 14 32 24} color 62 labelsize 10
+    tooltip {Set the active bank to Extra - Shortcut '2'} xywh {298 14 32 24} shortcut 0x32 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B3 {
     label 3
     callback {m_parent->L_B3->do_callback();}
-    xywh {338 14 32 24} color 62 labelsize 10
+    tooltip {Set the active bank to Extra1 - Shortcut '3'} xywh {338 14 32 24} shortcut 0x33 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B4 {
     label U
     callback {m_parent->L_B4->do_callback();}
-    xywh {378 14 32 24} color 62 labelsize 10
+    tooltip {Set the active bank to User bank default - Shortcut 'U'} xywh {378 14 32 24} shortcut 0x75 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }

@@ -205,7 +205,9 @@ this->when(FL_WHEN_RELEASE);
   o->set_submenu_paths(bank_submenu_paths);
 } // RKR_Menu_Bar* MenuB
 { RKR_Button* o = B_New = new RKR_Button(131, 14, 80, 24, "New Bank");
+  B_New->tooltip("Clear the current bank window - Shortcut \'N\'");
   B_New->box(FL_UP_BOX);
+  B_New->shortcut(0x6e);
   B_New->color((Fl_Color)2);
   B_New->selection_color(FL_BACKGROUND_COLOR);
   B_New->labeltype(FL_NORMAL_LABEL);
@@ -218,7 +220,9 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Button* B_New
 { RKR_Button* o = B_B1 = new RKR_Button(258, 14, 32, 24, "1");
+  B_B1->tooltip("Set the active bank to Default - Shortcut \'1\'");
   B_B1->box(FL_UP_BOX);
+  B_B1->shortcut(0x31);
   B_B1->color((Fl_Color)62);
   B_B1->selection_color(FL_BACKGROUND_COLOR);
   B_B1->labeltype(FL_NORMAL_LABEL);
@@ -231,7 +235,9 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Button* B_B1
 { RKR_Button* o = B_B2 = new RKR_Button(298, 14, 32, 24, "2");
+  B_B2->tooltip("Set the active bank to Extra - Shortcut \'2\'");
   B_B2->box(FL_UP_BOX);
+  B_B2->shortcut(0x32);
   B_B2->color((Fl_Color)62);
   B_B2->selection_color(FL_BACKGROUND_COLOR);
   B_B2->labeltype(FL_NORMAL_LABEL);
@@ -244,7 +250,9 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Button* B_B2
 { RKR_Button* o = B_B3 = new RKR_Button(338, 14, 32, 24, "3");
+  B_B3->tooltip("Set the active bank to Extra1 - Shortcut \'3\'");
   B_B3->box(FL_UP_BOX);
+  B_B3->shortcut(0x33);
   B_B3->color((Fl_Color)62);
   B_B3->selection_color(FL_BACKGROUND_COLOR);
   B_B3->labeltype(FL_NORMAL_LABEL);
@@ -257,7 +265,9 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Button* B_B3
 { RKR_Button* o = B_B4 = new RKR_Button(378, 14, 32, 24, "U");
+  B_B4->tooltip("Set the active bank to User bank default - Shortcut \'U\'");
   B_B4->box(FL_UP_BOX);
+  B_B4->shortcut(0x75);
   B_B4->color((Fl_Color)62);
   B_B4->selection_color(FL_BACKGROUND_COLOR);
   B_B4->labeltype(FL_NORMAL_LABEL);
