@@ -181,15 +181,15 @@ public:
   RKR_Menu_Bar *MenuP;
   static Fl_Menu_Item menu_MenuP[];
   static Fl_Menu_Item *Archivo;
-  static Fl_Menu_Item *Load_Preset;
+  static Fl_Menu_Item *Import_Preset;
 private:
-  inline void cb_Load_Preset_i(Fl_Menu_*, void*);
-  static void cb_Load_Preset(Fl_Menu_*, void*);
+  inline void cb_Import_Preset_i(Fl_Menu_*, void*);
+  static void cb_Import_Preset(Fl_Menu_*, void*);
 public:
-  static Fl_Menu_Item *Save_Preset;
+  static Fl_Menu_Item *Export_Preset;
 private:
-  inline void cb_Save_Preset_i(Fl_Menu_*, void*);
-  static void cb_Save_Preset(Fl_Menu_*, void*);
+  inline void cb_Export_Preset_i(Fl_Menu_*, void*);
+  static void cb_Export_Preset(Fl_Menu_*, void*);
   inline void cb_BankWindow_i(Fl_Menu_*, void*);
   static void cb_BankWindow(Fl_Menu_*, void*);
   inline void cb_BankWindow1_i(Fl_Menu_*, void*);
@@ -249,8 +249,11 @@ public:
 private:
   inline void cb_ACI_Menu_i(Fl_Menu_*, void*);
   static void cb_ACI_Menu(Fl_Menu_*, void*);
-  inline void cb_Fullscreen_i(Fl_Menu_*, void*);
-  static void cb_Fullscreen(Fl_Menu_*, void*);
+public:
+  static Fl_Menu_Item *FullScreen_Menu;
+private:
+  inline void cb_FullScreen_Menu_i(Fl_Menu_*, void*);
+  static void cb_FullScreen_Menu(Fl_Menu_*, void*);
 public:
   static Fl_Menu_Item *Ayuda;
   static Fl_Menu_Item *Contenido;
@@ -444,15 +447,15 @@ private:
   inline void cb_S_new_i(RKR_Button*, void*);
   static void cb_S_new(RKR_Button*, void*);
 public:
-  RKR_Button *L_preset;
+  RKR_Button *import_preset;
 private:
-  inline void cb_L_preset_i(RKR_Button*, void*);
-  static void cb_L_preset(RKR_Button*, void*);
+  inline void cb_import_preset_i(RKR_Button*, void*);
+  static void cb_import_preset(RKR_Button*, void*);
 public:
-  RKR_Button *S_preset;
+  RKR_Button *export_preset;
 private:
-  inline void cb_S_preset_i(RKR_Button*, void*);
-  static void cb_S_preset(RKR_Button*, void*);
+  inline void cb_export_preset_i(RKR_Button*, void*);
+  static void cb_export_preset(RKR_Button*, void*);
 public:
   RKR_Light_Button *Compare;
 private:

@@ -8,12 +8,12 @@
 */
 const std::vector<std::string> main_submenu_paths
 {
-    "&File/Load Preset",
-    "&File/Save Preset",
-    "&File/Load &Bank",
-    "&File/Save B&ank",
-    "&File/Load S&kin",
-    "&File/Save Sk&in",
+    "&File/Import Preset",
+    "&File/Export Preset",
+    "&File/&Load Bank",
+    "&File/&Save Bank",
+    "&File/Load Skin",
+    "&File/Save Skin",
     "&File/Load MIDI Table",
     "&File/Save MIDI Table",
     "&File/&Convert Reverb IR File",
@@ -22,7 +22,7 @@ const std::vector<std::string> main_submenu_paths
     "&Settings/Preferences",
     "&Settings/MIDI Learn",
     "&Settings/ACI",
-    "&Settings/Fullscreen",
+    "&Settings/Toggle Fullscreen",
     "&Help/Help Contents",
     "&Help/About...",
 }; 
@@ -46,18 +46,18 @@ void RKRGUI::cb_Principal(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Principal_i(o,v);
 }
 
-void RKRGUI::cb_Load_Preset_i(Fl_Menu_*, void*) {
-  L_preset->do_callback();
+void RKRGUI::cb_Import_Preset_i(Fl_Menu_*, void*) {
+  import_preset->do_callback();
 }
-void RKRGUI::cb_Load_Preset(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Load_Preset_i(o,v);
+void RKRGUI::cb_Import_Preset(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_Import_Preset_i(o,v);
 }
 
-void RKRGUI::cb_Save_Preset_i(Fl_Menu_*, void*) {
-  S_preset->do_callback();
+void RKRGUI::cb_Export_Preset_i(Fl_Menu_*, void*) {
+  export_preset->do_callback();
 }
-void RKRGUI::cb_Save_Preset(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Save_Preset_i(o,v);
+void RKRGUI::cb_Export_Preset(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_Export_Preset_i(o,v);
 }
 
 void RKRGUI::cb_BankWindow_i(Fl_Menu_*, void*) {
@@ -258,14 +258,14 @@ void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ACI_Menu_i(o,v);
 }
 
-void RKRGUI::cb_Fullscreen_i(Fl_Menu_*, void*) {
+void RKRGUI::cb_FullScreen_Menu_i(Fl_Menu_*, void*) {
   if(Principal->fullscreen_active())
     Principal->fullscreen_off();
   else
     Principal->fullscreen();
 }
-void RKRGUI::cb_Fullscreen(Fl_Menu_* o, void* v) {
-  ((RKRGUI*)(o->parent()->user_data()))->cb_Fullscreen_i(o,v);
+void RKRGUI::cb_FullScreen_Menu(Fl_Menu_* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_FullScreen_Menu_i(o,v);
 }
 
 void RKRGUI::cb_Contenido_i(Fl_Menu_*, void*) {
@@ -291,12 +291,12 @@ void RKRGUI::cb_Acerca_de(Fl_Menu_* o, void* v) {
 
 Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"&File", 0,  0, 0, 64, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
- {"Load Preset", 0x6c,  (Fl_Callback*)RKRGUI::cb_Load_Preset, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Save Preset", 0x73,  (Fl_Callback*)RKRGUI::cb_Save_Preset, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Load &Bank", 0,  (Fl_Callback*)RKRGUI::cb_BankWindow, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Save B&ank", 0,  (Fl_Callback*)RKRGUI::cb_BankWindow1, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Load S&kin", 0,  (Fl_Callback*)RKRGUI::cb_Load_Skin, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Save Sk&in", 0,  (Fl_Callback*)RKRGUI::cb_Save_Skin, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Import Preset", 0x69,  (Fl_Callback*)RKRGUI::cb_Import_Preset, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Export Preset", 0x65,  (Fl_Callback*)RKRGUI::cb_Export_Preset, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"&Load Bank", 0,  (Fl_Callback*)RKRGUI::cb_BankWindow, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"&Save Bank", 0x40073,  (Fl_Callback*)RKRGUI::cb_BankWindow1, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Load Skin", 0,  (Fl_Callback*)RKRGUI::cb_Load_Skin, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Save Skin", 0,  (Fl_Callback*)RKRGUI::cb_Save_Skin, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Load MIDI Table", 0,  (Fl_Callback*)RKRGUI::cb_Load_MTable, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Save MIDI Table", 0,  (Fl_Callback*)RKRGUI::cb_Save_MTable, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"&Convert Reverb IR File", 0,  (Fl_Callback*)RKRGUI::cb_ConvertReverb, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
@@ -305,10 +305,10 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {0,0,0,0,0,0,0,0,0},
  {"&Bank", 0x62,  (Fl_Callback*)RKRGUI::cb_Bank_Menu, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"&Settings", 0,  0, 0, 64, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Preferences", 0x69,  (Fl_Callback*)RKRGUI::cb_Ajustes, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
- {"MIDI Learn", 0x65,  (Fl_Callback*)RKRGUI::cb_ML_Menu, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
+ {"Preferences", 0x6a,  (Fl_Callback*)RKRGUI::cb_Ajustes, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
+ {"MIDI Learn", 0x6c,  (Fl_Callback*)RKRGUI::cb_ML_Menu, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
  {"ACI", 0x61,  (Fl_Callback*)RKRGUI::cb_ACI_Menu, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Fullscreen", 0xffc9,  (Fl_Callback*)RKRGUI::cb_Fullscreen, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Toggle Fullscreen", 0xffc9,  (Fl_Callback*)RKRGUI::cb_FullScreen_Menu, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0},
  {"&Help", 0,  0, 0, 64, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
  {"Help Contents", 0xffbe,  (Fl_Callback*)RKRGUI::cb_Contenido, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
@@ -317,8 +317,8 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {0,0,0,0,0,0,0,0,0}
 };
 Fl_Menu_Item* RKRGUI::Archivo = RKRGUI::menu_MenuP + 0;
-Fl_Menu_Item* RKRGUI::Load_Preset = RKRGUI::menu_MenuP + 1;
-Fl_Menu_Item* RKRGUI::Save_Preset = RKRGUI::menu_MenuP + 2;
+Fl_Menu_Item* RKRGUI::Import_Preset = RKRGUI::menu_MenuP + 1;
+Fl_Menu_Item* RKRGUI::Export_Preset = RKRGUI::menu_MenuP + 2;
 Fl_Menu_Item* RKRGUI::Load_Skin = RKRGUI::menu_MenuP + 5;
 Fl_Menu_Item* RKRGUI::Save_Skin = RKRGUI::menu_MenuP + 6;
 Fl_Menu_Item* RKRGUI::Load_MTable = RKRGUI::menu_MenuP + 7;
@@ -330,6 +330,7 @@ Fl_Menu_Item* RKRGUI::Bank_Menu = RKRGUI::menu_MenuP + 13;
 Fl_Menu_Item* RKRGUI::Ajustes = RKRGUI::menu_MenuP + 15;
 Fl_Menu_Item* RKRGUI::ML_Menu = RKRGUI::menu_MenuP + 16;
 Fl_Menu_Item* RKRGUI::ACI_Menu = RKRGUI::menu_MenuP + 17;
+Fl_Menu_Item* RKRGUI::FullScreen_Menu = RKRGUI::menu_MenuP + 18;
 Fl_Menu_Item* RKRGUI::Ayuda = RKRGUI::menu_MenuP + 20;
 Fl_Menu_Item* RKRGUI::Contenido = RKRGUI::menu_MenuP + 21;
 Fl_Menu_Item* RKRGUI::Acerca_de = RKRGUI::menu_MenuP + 22;
@@ -618,7 +619,7 @@ void RKRGUI::cb_S_new(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_new_i(o,v);
 }
 
-void RKRGUI::cb_L_preset_i(RKR_Button*, void*) {
+void RKRGUI::cb_import_preset_i(RKR_Button*, void*) {
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
 
@@ -629,7 +630,7 @@ void RKRGUI::cb_L_preset_i(RKR_Button*, void*) {
     }
 
     char *filename;
-    filename = fl_file_chooser("Load Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
+    filename = fl_file_chooser("Import Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
     
     if (filename == NULL)
         return;
@@ -638,11 +639,11 @@ void RKRGUI::cb_L_preset_i(RKR_Button*, void*) {
     m_process->load_preset(filename);
     Put_Loaded();
 }
-void RKRGUI::cb_L_preset(RKR_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_L_preset_i(o,v);
+void RKRGUI::cb_import_preset(RKR_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_import_preset_i(o,v);
 }
 
-void RKRGUI::cb_S_preset_i(RKR_Button*, void*) {
+void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
 
@@ -655,7 +656,7 @@ void RKRGUI::cb_S_preset_i(RKR_Button*, void*) {
     char *filename;
 
 #define EXT ".rkr"
-    filename = fl_file_chooser("Save Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
+    filename = fl_file_chooser("Export Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
     if (filename == NULL)
         return;
 
@@ -664,8 +665,8 @@ void RKRGUI::cb_S_preset_i(RKR_Button*, void*) {
 
     m_process->save_preset(filename);
 }
-void RKRGUI::cb_S_preset(RKR_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_S_preset_i(o,v);
+void RKRGUI::cb_export_preset(RKR_Button* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_export_preset_i(o,v);
 }
 
 void RKRGUI::cb_Compare_i(RKR_Light_Button* o, void*) {
@@ -2456,36 +2457,36 @@ void RKRGUI::make_window() {
         S_new->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
       } // RKR_Button* S_new
-      { RKR_Button* o = L_preset = new RKR_Button(240, 50, 64, 18, "Load");
-        L_preset->tooltip("Open load preset window - Shortcut \'L\'");
-        L_preset->box(FL_UP_BOX);
-        L_preset->shortcut(0x6c);
-        L_preset->color((Fl_Color)62);
-        L_preset->selection_color(FL_BACKGROUND_COLOR);
-        L_preset->labeltype(FL_NORMAL_LABEL);
-        L_preset->labelfont(0);
-        L_preset->labelsize(12);
-        L_preset->labelcolor(FL_FOREGROUND_COLOR);
-        L_preset->callback((Fl_Callback*)cb_L_preset);
-        L_preset->align(Fl_Align(FL_ALIGN_CENTER));
-        L_preset->when(FL_WHEN_RELEASE);
+      { RKR_Button* o = import_preset = new RKR_Button(240, 50, 64, 18, "Import");
+        import_preset->tooltip("Import preset file, *.rkr type - Shortcut \'I\'");
+        import_preset->box(FL_UP_BOX);
+        import_preset->shortcut(0x69);
+        import_preset->color((Fl_Color)62);
+        import_preset->selection_color(FL_BACKGROUND_COLOR);
+        import_preset->labeltype(FL_NORMAL_LABEL);
+        import_preset->labelfont(0);
+        import_preset->labelsize(12);
+        import_preset->labelcolor(FL_FOREGROUND_COLOR);
+        import_preset->callback((Fl_Callback*)cb_import_preset);
+        import_preset->align(Fl_Align(FL_ALIGN_CENTER));
+        import_preset->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
-      } // RKR_Button* L_preset
-      { RKR_Button* o = S_preset = new RKR_Button(306, 50, 64, 18, "Save");
-        S_preset->tooltip("Open save preset window - Shortcut \'S\'");
-        S_preset->box(FL_UP_BOX);
-        S_preset->shortcut(0x73);
-        S_preset->color((Fl_Color)62);
-        S_preset->selection_color(FL_BACKGROUND_COLOR);
-        S_preset->labeltype(FL_NORMAL_LABEL);
-        S_preset->labelfont(0);
-        S_preset->labelsize(12);
-        S_preset->labelcolor(FL_FOREGROUND_COLOR);
-        S_preset->callback((Fl_Callback*)cb_S_preset);
-        S_preset->align(Fl_Align(FL_ALIGN_CENTER));
-        S_preset->when(FL_WHEN_RELEASE);
+      } // RKR_Button* import_preset
+      { RKR_Button* o = export_preset = new RKR_Button(306, 50, 64, 18, "Export");
+        export_preset->tooltip("Export preset to file, *.rkr type - Shortcut \'E\'");
+        export_preset->box(FL_UP_BOX);
+        export_preset->shortcut(0x65);
+        export_preset->color((Fl_Color)62);
+        export_preset->selection_color(FL_BACKGROUND_COLOR);
+        export_preset->labeltype(FL_NORMAL_LABEL);
+        export_preset->labelfont(0);
+        export_preset->labelsize(12);
+        export_preset->labelcolor(FL_FOREGROUND_COLOR);
+        export_preset->callback((Fl_Callback*)cb_export_preset);
+        export_preset->align(Fl_Align(FL_ALIGN_CENTER));
+        export_preset->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
-      } // RKR_Button* S_preset
+      } // RKR_Button* export_preset
       { RKR_Light_Button* o = Compare = new RKR_Light_Button(373, 50, 72, 18, "Compare");
         Compare->tooltip("Compare to bank preset - Shortcut \'P\'");
         Compare->box(FL_UP_BOX);

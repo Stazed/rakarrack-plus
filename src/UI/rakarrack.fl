@@ -73,12 +73,12 @@ decl {\#include <X11/xpm.h>} {public global
 
 decl {const std::vector<std::string> main_submenu_paths
 {
-    "&File/Load Preset",
-    "&File/Save Preset",
-    "&File/Load &Bank",
-    "&File/Save B&ank",
-    "&File/Load S&kin",
-    "&File/Save Sk&in",
+    "&File/Import Preset",
+    "&File/Export Preset",
+    "&File/&Load Bank",
+    "&File/&Save Bank",
+    "&File/Load Skin",
+    "&File/Save Skin",
     "&File/Load MIDI Table",
     "&File/Save MIDI Table",
     "&File/&Convert Reverb IR File",
@@ -87,7 +87,7 @@ decl {const std::vector<std::string> main_submenu_paths
     "&Settings/Preferences",
     "&Settings/MIDI Learn",
     "&Settings/ACI",
-    "&Settings/Fullscreen",
+    "&Settings/Toggle Fullscreen",
     "&Help/Help Contents",
     "&Help/About...",
 };} {
@@ -333,7 +333,7 @@ is_PG_table_modified();
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {427 491 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {396 575 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -348,28 +348,28 @@ m_process->Exit_Program=1;} open selected
           label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
-          MenuItem Load_Preset {
-            label {Load Preset}
-            callback {L_preset->do_callback();}
-            xywh {0 0 45 26} shortcut 0x6c
+          MenuItem Import_Preset {
+            label {Import Preset}
+            callback {import_preset->do_callback();}
+            tooltip {Import Preset file *.rkr type} xywh {0 0 45 26} shortcut 0x69
           }
-          MenuItem Save_Preset {
-            label {Save Preset}
-            callback {S_preset->do_callback();}
-            xywh {0 0 45 26} shortcut 0x73 divider
+          MenuItem Export_Preset {
+            label {Export Preset}
+            callback {export_preset->do_callback();}
+            tooltip {Export Preset to file *.rkr type} xywh {0 0 45 26} shortcut 0x65 divider
           }
           MenuItem {BankWindow->Load_Bank_M} {
-            label {Load &Bank}
+            label {&Load Bank}
             callback {get_bank_file();}
             xywh {0 0 45 26}
           }
           MenuItem {BankWindow->Save_Bank_M} {
-            label {Save B&ank}
+            label {&Save Bank}
             callback {set_save_file();}
-            xywh {0 0 45 26} divider
+            xywh {0 0 45 26} shortcut 0x40073 divider
           }
           MenuItem Load_Skin {
-            label {Load S&kin}
+            label {Load Skin}
             callback {// If nothing previously set, then default location
     std::string chooser_start_location = "";
     // If the user set a User Directory, then use it
@@ -393,7 +393,7 @@ m_process->Exit_Program=1;} open selected
             xywh {0 0 36 21}
           }
           MenuItem Save_Skin {
-            label {Save Sk&in}
+            label {Save Skin}
             callback {// If nothing previously set, then default location
     std::string chooser_start_location = "";
 
@@ -492,7 +492,7 @@ m_process->Exit_Program=1;} open selected
         }
         Submenu {} {
           label {&Settings}
-          xywh {0 0 70 21}
+          xywh {0 0 100 20}
         } {
           MenuItem Ajustes {
             label Preferences
@@ -505,7 +505,7 @@ put_icon(Settings);
 }
 else
 Settings->hide();}
-            xywh {10 10 45 26} shortcut 0x69 labelcolor 7 divider
+            xywh {0 0 45 26} shortcut 0x6a labelcolor 7 divider
           }
           MenuItem ML_Menu {
             label {MIDI Learn}
@@ -516,7 +516,7 @@ PrepareML();
 }
 else
 MIDILearn->hide();}
-            xywh {0 0 36 21} shortcut 0x65 labelcolor 7 divider
+            xywh {0 0 36 21} shortcut 0x6c labelcolor 7 divider
           }
           MenuItem ACI_Menu {
             label ACI
@@ -535,8 +535,8 @@ m_process->ACI_Active = 0;
 }}
             xywh {0 0 36 21} shortcut 0x61 divider
           }
-          MenuItem {} {
-            label Fullscreen
+          MenuItem FullScreen_Menu {
+            label {Toggle Fullscreen}
             callback {if(Principal->fullscreen_active())
     Principal->fullscreen_off();
   else
@@ -1427,8 +1427,8 @@ Put_Loaded();}
           code0 {o->set_label_offset(2);}
           class RKR_Button
         }
-        Fl_Button L_preset {
-          label Load
+        Fl_Button import_preset {
+          label Import
           callback {// If nothing previously set, then default location
     std::string chooser_start_location = "";
 
@@ -1439,7 +1439,7 @@ Put_Loaded();}
     }
 
     char *filename;
-    filename = fl_file_chooser("Load Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
+    filename = fl_file_chooser("Import Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
     
     if (filename == NULL)
         return;
@@ -1447,12 +1447,12 @@ Put_Loaded();}
     filename=fl_filename_setext(filename,".rkr");
     m_process->load_preset(filename);
     Put_Loaded();}
-          tooltip {Open load preset window - Shortcut 'L'} xywh {240 50 64 18} shortcut 0x6c color 62 labelsize 12
+          tooltip {Import preset file, *.rkr type - Shortcut 'I'} xywh {240 50 64 18} shortcut 0x69 color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
         }
-        Fl_Button S_preset {
-          label Save
+        Fl_Button export_preset {
+          label Export
           callback {// If nothing previously set, then default location
     std::string chooser_start_location = "";
 
@@ -1465,7 +1465,7 @@ Put_Loaded();}
     char *filename;
 
 \#define EXT ".rkr"
-    filename = fl_file_chooser("Save Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
+    filename = fl_file_chooser("Export Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
     if (filename == NULL)
         return;
 
@@ -1473,7 +1473,7 @@ Put_Loaded();}
 \#undef EXT
 
     m_process->save_preset(filename);}
-          tooltip {Open save preset window - Shortcut 'S'} xywh {306 50 64 18} shortcut 0x73 color 62 labelsize 12
+          tooltip {Export preset to file, *.rkr type - Shortcut 'E'} xywh {306 50 64 18} shortcut 0x65 color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
         }
