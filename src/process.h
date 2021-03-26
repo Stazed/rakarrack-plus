@@ -739,7 +739,7 @@ public:
     void TapTempo_Timeout(int state);
     void Update_tempo();
 
-    Config_fltk *Config;
+    Config_fltk Config;
 
     // class pointers
     class Tuner *efx_Tuner;

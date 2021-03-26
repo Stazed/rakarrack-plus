@@ -295,11 +295,9 @@ RKR::RKR(int gui) :
         return; // If we don't have a jack client then quit with message
     }
     
-    Config = new Config_fltk();
-    Config->load_user_preferences();
-    
+    Config.load_user_preferences();
 
-    load_user_preferences();
+    load_user_preferences();    // FIXME
 
     Get_Bogomips();
 
@@ -338,8 +336,6 @@ RKR::RKR(int gui) :
 RKR::~RKR()
 {
     /* To clean up valgrind log */
-
-    delete Config;
 
     delete DC_Offsetl;
     delete DC_Offsetr;

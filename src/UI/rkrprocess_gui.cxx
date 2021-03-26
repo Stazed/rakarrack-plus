@@ -100,7 +100,10 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     sprintf(tmp, "%s   v%s - ACI", m_process->jackcliname, VERSION);
     Trigger->copy_label(tmp);
     
-    load_previous_state();
+    m_process->Config.load_previous_state ();
+
+    load_previous_state();  // FIXME
+
     Settings->make_table_window();
     Put_Loaded();
     Principal->show(argc, argv);
