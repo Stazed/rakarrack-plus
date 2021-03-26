@@ -168,8 +168,6 @@ class RKRGUI {
   */
   int focus_delay_time; 
   Fl_Help_Dialog *visor; 
-  struct list_element *mBankNameList;
-  struct list_element *mBankNameListTail;
 public:
   void make_window();
   Fl_Double_Window *Principal;
@@ -632,8 +630,6 @@ public:
   inline void p_click_i(Fl_Choice* o, void*);
   void RandomPreset();
   void drag_effect();
-  int AddBankName(const char *name);
-  void ClearBankNames();
   char* get_bank_file();
   void set_save_file();
   void set_bank_made(int a_made);

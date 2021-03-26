@@ -58,10 +58,6 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
 
     m_process = process_rkr = rkr_;
 
-    // FIXME these do not seem to be used for anything... delete??
-    // mBankNameList = NULL;
-    // mBankNameListTail = NULL;
-
     back = NULL;
 
     make_window();
@@ -3185,10 +3181,6 @@ int RKRGUI::search_bank_preset_button(int x, int y)
  */
 void RKRGUI::Scan_Bank_Dir(int reload)
 {
-    // This will free all memory allocated for names
-    // FIXME the list created is not used - remove when done
-    // ClearBankNames();
-
     int menu_item = 0;
 
     if(reload)
@@ -3777,70 +3769,6 @@ void RKRGUI::drag_effect()
             }
         }
         drag = C_NO_DRAG;
-    }
-}
-
-/**
- * Adds a bank file name with full path to a double stacked list.
- * Currently the list mBankNameList is never used - FIXME
- * 
- * @param name
- *      The bank file with full path.
- * 
- * @return 
- *      1 if successful, 0 if not.
- */
-int RKRGUI::AddBankName(const char *name)
-{
-    //AddBankName
-    struct list_element *elem;
-
-    elem = (struct list_element *) calloc(1, sizeof (struct list_element));
-
-    if (elem == NULL)
-    {
-        return 0;
-    }
-
-    elem->name = (char *) calloc(1, 256);
-
-    if (elem->name == NULL)
-    {
-        free(elem);
-        return 0;
-    }
-
-    strncpy(elem->name, name, 255);
-
-    if (mBankNameList == NULL)
-    {
-        mBankNameList = elem;
-        insque(elem, NULL);
-    }
-    else
-    {
-        insque(elem, mBankNameListTail);
-    }
-
-    mBankNameListTail = elem;
-    return 1;
-}
-
-/**
- * Clears the double stacked list of bank names.
- * FIXME no longer used - remove.
- */
-void RKRGUI::ClearBankNames()
-{
-    // clearbanknames
-    struct list_element *elem;
-    while (mBankNameList != NULL)
-    {
-        elem = mBankNameList;
-        mBankNameList = elem->forward;
-        free(elem->name);
-        remque(elem);
-        free(elem);
     }
 }
 

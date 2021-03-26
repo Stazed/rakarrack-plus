@@ -1351,25 +1351,6 @@ public:
             name() {}
     } jack_po[16],jack_poi[16];
 
-
-
-
-};
-
-/**
- * Double stacked list that was used for bank name list.
- * No longer used - FIXME remove??
- */
-struct list_element
-{
-    struct list_element *forward;
-    struct list_element *backward;
-    char *name;
-    
-    list_element():
-        forward(),
-        backward(),
-        name() {}
-};
+};  // class RKR
 
 #endif

@@ -56,10 +56,7 @@ const int C_MAX_PARAMETERS = C_NUMBER_PARAMETERS + 1;  // 20
 const int C_BYPASS = 19;
 
 /**
- * The default settings for currently available effects.
- * FIXME - this does not include the available unused, the effect order,
- * or the bypass. It should be C_MAX_EFFECTS, C_MAX_PARAMETERS, and order
- * at EFX_ORDER.
+ * The default settings for rack audio effect.
  */
 const int presets_default[C_MAX_EFFECTS][C_MAX_PARAMETERS] = {
     //EQ1

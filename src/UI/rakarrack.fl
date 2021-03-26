@@ -321,10 +321,6 @@ widget gets the focus.} private local
   }
   decl {Fl_Help_Dialog *visor;} {private local
   }
-  decl {struct list_element *mBankNameList;} {private local
-  }
-  decl {struct list_element *mBankNameListTail;} {private local
-  }
   Function {make_window()} {open return_type void
   } {
     Fl_Window Principal {
@@ -333,7 +329,7 @@ is_PG_table_modified();
 save_current_state(0);
 
 m_process->Exit_Program=1;} open selected
-      xywh {396 575 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {396 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1996,10 +1992,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {RandomPreset()} {open
   } {}
   Function {drag_effect()} {open
-  } {}
-  Function {AddBankName(const char *name)} {open return_type int
-  } {}
-  Function {ClearBankNames()} {open
   } {}
   Function {get_bank_file()} {open C return_type {char*}
   } {}

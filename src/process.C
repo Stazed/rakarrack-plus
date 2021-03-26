@@ -415,13 +415,6 @@ RKR::jack_open_client()
  *  can be run without GUI, the Look and other user settings not related to audio/MIDI
  *  do not need to be loaded here. This is for initial process setup. 
  * 
- *  Currently this does not allow for using custom MIDI program change table.
- *  Also, only applies to current bank loaded.
- *  The current bank is: Default.rkrb, or if set, the bank set in Preferences/Bank,
- *  or if on command line -b file is set.
- * 
- *  FIXME need to allow custom MIDI table.
- * 
  *  The other non audio/MIDI user settings are loaded by the load_previous_state()
  *  function that is called when the RKRGUI class is created.
  */
