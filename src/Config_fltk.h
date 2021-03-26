@@ -34,6 +34,7 @@ public:
     virtual ~Config_fltk();
     
     void load_user_preferences();
+    void load_previous_state();
     
     /**
      * Flag to indicate if user warnings should be disabled. From check box
@@ -144,6 +145,128 @@ public:
     char BankFilename[128];
 
     char UDirFilename[128];
+
+    // GUI
+    int EnableBackgroundImage;
+    char BackgroundImage[256];
+    int deachide;
+    int scalable;
+    int Schema;
+    
+    int back_color, fore_color, leds_color, label_color, font_size, font_type;
+
+    /**
+     * The currently active bank displayed in the bank window.
+     */
+    int active_bank;
+
+    char UserRealName[128];
+
+    /**
+     * Flag to indicate if user wants to preserve Master gain, etc on bank preset selections.
+     * Set in Settings/Preferences/Audio.
+     */
+    int preserve_master;
+
+    int Metro_Vol;
+    int Tap_Updated;
+
+    /**
+     * MIDI receive channel, parameter control, Bank Select, Program Changes, MIDI learn.
+     */
+    int MIDI_In_Channel;
+
+    // MIDI Converter
+    int Midi_Out_Channel;
+    int Trigger_Adjust;
+    int Velocity_Adjust;
+    int Converter_Octave;
+    int MIDI_Converter_On_Off;
+    // End MIDI Converter
+
+    // Metronome
+    int Metronome_Time;
+    int Metronome_Sound;
+    int Metronome_Volume;
+    int Metronome_Tempo;
+    int Metronome_On_Off;
+
+    int Tuner_On_Off;
+    int TapTempo_On_Off;
+
+    int Preset_Number;
+
+
+    /**
+     * Harmonizer MIDI receive channel.
+     */
+    int Harmonizer_MIDI_Channel;
+
+    /**
+     * Stereo Harmonizer MIDI receive channel.
+     */
+    int StereoHarm_MIDI_Channel;
+
+    int flpos;
+
+    /**
+     * Flag for check box in Settings/Audio "+6dB Final Limiter.
+     */
+    int db6booster;
+    float booster;
+
+    int init_state;
+    int autoassign;
+
+    int RCOpti_Harm;
+    int RCOpti_Stereo;
+    int RCOpti_Ring;
+    int sw_stat;
+
+    int Tap_Selection;
+    int t_timeout;
+    int Tap_SetValue;
+
+    int ena_tool;
+    int Focus_Delay;
+
+    int Aux_Source;
+    int Aux_Gain;
+    int Aux_Threshold;
+    int Aux_MIDI;
+    int Aux_Minimum;
+    int Aux_Maximum;
+
+    // Window sizes
+    int Principal_X;
+    int Principal_Y;
+    int Principal_W;
+    int Principal_H;
+
+    int BankWindow_X;
+    int BankWindow_Y;
+    int BankWindow_W;
+    int BankWindow_H;
+
+    int Order_X;
+    int Order_Y;
+    int Order_W;
+    int Order_H;
+
+    int MIDI_Learn_X;
+    int MIDI_Learn_Y;
+    int MIDI_Learn_W;
+    int MIDI_Learn_H;
+
+    int Trigger_X;
+    int Trigger_Y;
+    int Trigger_W;
+    int Trigger_H;
+
+    int Settings_X;
+    int Settings_Y;
+    int Settings_W;
+    int Settings_H;
 
 private:
     

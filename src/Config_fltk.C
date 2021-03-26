@@ -207,3 +207,131 @@ Config_fltk::PrefNom(const char *dato)
     sprintf(tmpprefname, "%s %s", jackcliname, dato);
     return (tmpprefname);
 }
+
+/**
+ *  Loads the previous state when shutdown, window sizes, images, etc.
+ *  From ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
+ */
+void Config_fltk::load_previous_state()
+{
+
+    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
+
+    char tmp[256];
+    sprintf(tmp, "%s/blackbg.png", DATADIR);
+
+    rakarrack.get(PrefNom("Enable Background Image"), EnableBackgroundImage, 0);
+    rakarrack.get(PrefNom("Background Image"), BackgroundImage, tmp, 256);
+    rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
+    
+    // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
+    // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
+    rakarrack.get(PrefNom("Font"), font_type, 0);
+
+    rakarrack.get(PrefNom("Background Color"), back_color, 56);              // FL_BLACK
+    rakarrack.get(PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3
+    rakarrack.get(PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
+    rakarrack.get(PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
+    rakarrack.get(PrefNom("Schema"), Schema, 2);
+    rakarrack.get(PrefNom("Hide Effects"), deachide, 0);
+    rakarrack.get(PrefNom("Scale Window"), scalable, 0);
+
+    rakarrack.get(PrefNom("Principal X"), Principal_X, 1);
+    rakarrack.get(PrefNom("Principal Y"), Principal_Y, 1);
+    rakarrack.get(PrefNom("Principal W"), Principal_W, 960);
+    rakarrack.get(PrefNom("Principal H"), Principal_H, 540);
+
+    rakarrack.get(PrefNom("BankWindow X"), BankWindow_X, 1);
+    rakarrack.get(PrefNom("BankWindow Y"), BankWindow_Y, 1);
+    rakarrack.get(PrefNom("BankWindow W"), BankWindow_W, 680);
+    rakarrack.get(PrefNom("BankWindow H"), BankWindow_H, 425);
+
+    rakarrack.get(PrefNom("Order X"), Order_X, 1);
+    rakarrack.get(PrefNom("Order Y"), Order_Y, 1);
+    rakarrack.get(PrefNom("Order W"), Order_W, 600);
+    rakarrack.get(PrefNom("Order H"), Order_H, 330);
+
+    rakarrack.get(PrefNom("MIDI Learn X"), MIDI_Learn_X, 1);
+    rakarrack.get(PrefNom("MIDI Learn Y"), MIDI_Learn_Y, 1);
+    rakarrack.get(PrefNom("MIDI Learn W"), MIDI_Learn_W, 600);
+    rakarrack.get(PrefNom("MIDI Learn H"), MIDI_Learn_H, 360);
+
+    rakarrack.get(PrefNom("Trigger X"), Trigger_X, 1);
+    rakarrack.get(PrefNom("Trigger Y"), Trigger_Y, 1);
+    rakarrack.get(PrefNom("Trigger W"), Trigger_W, 280);
+    rakarrack.get(PrefNom("Trigger H"), Trigger_H, 165);
+
+    rakarrack.get(PrefNom("Settings X"), Settings_X, 1);
+    rakarrack.get(PrefNom("Settings Y"), Settings_Y, 1);
+    rakarrack.get(PrefNom("Settings W"), Settings_W, 440);
+    rakarrack.get(PrefNom("Settings H"), Settings_H, 410);
+
+    rakarrack.get(PrefNom("Bank Selected"), active_bank, 3);
+    rakarrack.get(PrefNom("Preset Num"), Preset_Number, 1);
+
+    // Custom MIDI table
+    rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
+
+    rakarrack.get(PrefNom("UserName"), UserRealName, "", 127);
+    rakarrack.get(PrefNom("User Directory"), UDirFilename, DATADIR, 127);
+    rakarrack.get(PrefNom("Preserve Gain/Master"), preserve_master, 0);
+
+    rakarrack.get(PrefNom("MIDI IN Channel"), MIDI_In_Channel, 1);
+    MIDI_In_Channel--;
+
+    rakarrack.get(PrefNom("MIDI IN Harmonizer"), Harmonizer_MIDI_Channel, 1);
+    Harmonizer_MIDI_Channel--;
+
+    rakarrack.get(PrefNom("MIDI IN Stereo Harmonizer"), StereoHarm_MIDI_Channel, 1);
+    StereoHarm_MIDI_Channel--;
+
+    rakarrack.get(PrefNom("Limiter Position"), flpos, 0);
+    rakarrack.get(PrefNom("Limiter +6dB"), db6booster, 0);
+    rakarrack.get(PrefNom("Booster"), booster, 1.0f);
+
+    rakarrack.get(PrefNom("FX_init_state"), init_state, 0);
+    rakarrack.get(PrefNom("Auto Assign"), autoassign, 0);
+
+    rakarrack.get(PrefNom("Recognize Optimization Harmonizer"), RCOpti_Harm, 0);
+    rakarrack.get(PrefNom("Recognize Optimization Stereo Harm"), RCOpti_Stereo, 0);
+    rakarrack.get(PrefNom("Recognize Optimization Ring"), RCOpti_Ring, 0);
+
+    //MIDIConverter
+    rakarrack.get(PrefNom("Midi Out Channel"), Midi_Out_Channel, 1);
+    rakarrack.get(PrefNom("Trigger Adjust"), Trigger_Adjust, 4);
+    rakarrack.get(PrefNom("Velocity Adjust"), Velocity_Adjust, 50);
+    rakarrack.get(PrefNom("Converter Octave"), Converter_Octave, 2);
+    rakarrack.get(PrefNom("MIDI Converter On/Off"), MIDI_Converter_On_Off, 0);
+
+    //Metronome
+    rakarrack.get(PrefNom("Metronome Volume"), Metro_Vol, 50);
+    rakarrack.get(PrefNom("Internal Metronome Time"), Metronome_Time, 2);
+    rakarrack.get(PrefNom("Internal Metronome Sound"), Metronome_Sound, 0);
+    rakarrack.get(PrefNom("Internal Metronome Volume"), Metronome_Volume, 50);
+    rakarrack.get(PrefNom("Internal Metronome Tempo"), Metronome_Tempo, 100);
+    rakarrack.get(PrefNom("Internal Metronome Show"), sw_stat, 0);
+    rakarrack.get(PrefNom("Internal Metronome On/Off"), Metronome_On_Off, 0);
+
+    //Tuner
+    rakarrack.get(PrefNom("Tuner On/Off"), Tuner_On_Off, 0);
+
+    //Tap Tempo
+    rakarrack.get(PrefNom("TapTempo Input"), Tap_Selection, 0);
+    rakarrack.get(PrefNom("Tap Tempo Timeout"), t_timeout, 0);
+    rakarrack.get(PrefNom("TapTempo Set"), Tap_SetValue, 0);
+    rakarrack.get(PrefNom("TapTempo On/Off"), TapTempo_On_Off, 0);
+    rakarrack.get(PrefNom("Update Tap"), Tap_Updated, 0);
+
+    rakarrack.get(PrefNom("Disable Warnings"), Disable_Warnings, 0);
+    rakarrack.get(PrefNom("Enable Tooltips"), ena_tool, 1);
+    rakarrack.get(PrefNom("Focus Delay"), Focus_Delay, 0);
+
+    //Trigger
+    rakarrack.get(PrefNom("Aux Source"), Aux_Source, 0);
+    rakarrack.get(PrefNom("Aux Gain"), Aux_Gain, 0);
+    rakarrack.get(PrefNom("Aux Threshold"), Aux_Threshold, 0);
+    rakarrack.get(PrefNom("Aux MIDI"), Aux_MIDI, 1);
+    rakarrack.get(PrefNom("Aux Minimum"), Aux_Minimum, 0);
+    rakarrack.get(PrefNom("Aux Maximum"), Aux_Maximum, 127);
+
+}
