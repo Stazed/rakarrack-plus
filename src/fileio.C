@@ -247,7 +247,7 @@ RKR::save_preset(const char *filename)
     // Effect parameters
     for (int order = 0; order < C_NUMBER_ORDERED_EFFECTS; order++)
     {
-        int effect = efx_order[order];
+        int effect = Save_Preset.Effect_Params[EFX_ORDER][order];
         memset(buf, 0, sizeof (buf));
         get_effect_parameters(buf, effect);
         fputs(buf, fn);
@@ -256,9 +256,11 @@ RKR::save_preset(const char *filename)
     // Effect Order
     memset(buf, 0, sizeof (buf));
     sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-            efx_order[0], efx_order[1], efx_order[2], efx_order[3],
-            efx_order[4], efx_order[5], efx_order[6], efx_order[7],
-            efx_order[8], efx_order[9]);
+            Save_Preset.Effect_Params[EFX_ORDER][0], Save_Preset.Effect_Params[EFX_ORDER][1],
+            Save_Preset.Effect_Params[EFX_ORDER][2], Save_Preset.Effect_Params[EFX_ORDER][3],
+            Save_Preset.Effect_Params[EFX_ORDER][4], Save_Preset.Effect_Params[EFX_ORDER][5],
+            Save_Preset.Effect_Params[EFX_ORDER][6], Save_Preset.Effect_Params[EFX_ORDER][7],
+            Save_Preset.Effect_Params[EFX_ORDER][8], Save_Preset.Effect_Params[EFX_ORDER][9]);
 
     fputs(buf, fn);
 
