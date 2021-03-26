@@ -3,6 +3,7 @@
 project (rakarrack-plus)
 
 set (ProgSources
+    Config_fltk.C
     jack.C 
     UI/rakarrack.cxx
     UI/analyzer.cxx

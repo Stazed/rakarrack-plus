@@ -1,4 +1,25 @@
-//spencer jackson
+/*
+  rakarrack - a guitar effects software
+
+  process.h  -  mainloop functions
+  Copyright (C) 2008-2010 Josep Andreu
+  Author: Josep Andreu
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of version 2 of the GNU General Public License
+ as published by the Free Software Foundation.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License (version 2) for more details.
+
+ You should have received a copy of the GNU General Public License
+ (version2)  along with this program; if not, write to the Free Software
+ Foundation,
+ Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+
+ */
 
 #ifndef PROCESS_H
 #define PROCESS_H
@@ -6,6 +27,7 @@
 //main class for processing engine
 #include "global.h"
 
+#include "Config_fltk.h"
 #include "PresetBankStruct.h"
 #include "Effect.h"
 #include "Reverb.h"
@@ -716,6 +738,8 @@ public:
     int TapTempo();
     void TapTempo_Timeout(int state);
     void Update_tempo();
+
+    Config_fltk *Config;
 
     // class pointers
     class Tuner *efx_Tuner;
