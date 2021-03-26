@@ -1204,7 +1204,7 @@ RKR::new_preset()
     Active_Preset.new_preset();
     
     // Copy the user name from settings
-    strcpy(Active_Preset.Author, UserRealName);
+    strncpy(Active_Preset.Author, UserRealName, sizeof(Active_Preset.Author) - 1);
 
     // Set the Master to OFF
     FX_Master_Active_Reset = 0;
@@ -1221,7 +1221,7 @@ RKR::new_bank(struct PresetBankStruct _bank[])
         _bank[i].new_preset();
         
         // Copy the user name from settings
-        strcpy(_bank[i].Author, UserRealName);
+        strncpy(_bank[i].Author, UserRealName, sizeof(_bank[i].Author) - 1);
     }
 };
 
