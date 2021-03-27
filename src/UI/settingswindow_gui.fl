@@ -1407,8 +1407,8 @@ m_parent->Load_Midi_Program_Change_Table();}
       }
       Fl_Check_Button D_J_Connect {
         label {Auto Connect Out}
-        callback {m_process->aconnect_JA=(int) o->value();
-if (m_process->aconnect_JA) JackCo->activate();
+        callback {m_process->Config.aconnect_JA=(int) o->value();
+if (m_process->Config.aconnect_JA) JackCo->activate();
 else JackCo->deactivate();}
         xywh {30 45 137 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
@@ -1421,8 +1421,8 @@ else JackCo->deactivate();}
       }
       Fl_Check_Button D_IJ_Connect {
         label {Auto Connect In}
-        callback {m_process->aconnect_JIA=(int) o->value();
-if (m_process->aconnect_JIA) JackIn->activate();
+        callback {m_process->Config.aconnect_JIA=(int) o->value();
+if (m_process->Config.aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();}
         xywh {30 245 125 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}

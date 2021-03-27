@@ -91,10 +91,6 @@ RKR::RKR(int gui) :
     autoassign(),
     comemouse(),
     aconnect_MI(),
-    aconnect_JA(),
-    aconnect_JIA(),
-    cuan_jack(),
-    cuan_ijack(),
     IsCoIn(),
     Cyoin(),
     Pyoin(),
@@ -236,10 +232,7 @@ RKR::RKR(int gui) :
     MIDI_Table(),
     MIDI_Table_Bank_Preset_Names(),
     midi_in(NULL),
-    midi_out(NULL),
-    jack_po(),
-    jack_poi()
-
+    midi_out(NULL)
 {
     if(!jack_open_client())
     {
@@ -380,14 +373,6 @@ RKR::load_user_preferences()
     upsample = Config.upsample;
 
     Adjust_Upsample();
-
-    rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);
-    
-    // Default on new installs - don't connect input - can cause feedback loop = 0
-    rakarrack.get(PrefNom("Auto Connect Jack In"), aconnect_JIA, 0);
-
-    rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);
-    rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
     
     // MIDI Learn used On/Off
     rakarrack.get(PrefNom("MIDI Implementation"), MIDIway, 0);
@@ -398,51 +383,8 @@ RKR::load_user_preferences()
     // Custom MIDI Table last used file
     rakarrack.get(PrefNom("MIDI Table File"), custom_midi_table_file, -1);
 
-
     char temp[256];
-    memset(temp, 0, sizeof (temp));
-    char j_names[128];
 
-    static const char *jack_names[] ={"system:playback_1", "system:playback_2"};
-
-    for (int i = 0; i < cuan_jack; i++)
-    {
-        memset(temp, 0, sizeof (temp));
-        sprintf(temp, "Jack Port %d", i + 1);
-        
-        if (i < 2)
-        {
-            strcpy(j_names, jack_names[i]);
-        }
-        else
-        {
-            strcpy(j_names, "");
-        }
-        
-        rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
-    }
-
-    memset(j_names, 0, sizeof (j_names));
-
-    static const char *jack_inames[] ={"system:capture_1", "system:capture_2"};
-
-    for (int i = 0; i < cuan_ijack; i++)
-    {
-        memset(temp, 0, sizeof (temp));
-        sprintf(temp, "Jack Port In %d", i + 1);
-        
-        if (i < 1)
-        {
-            strcpy(j_names, jack_inames[i]);
-        }
-        else
-        {
-            strcpy(j_names, "");
-        }
-        
-        rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
-    }
-    
     // Get user default bank file from Settings/Bank/ --Bank Filename
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/Default.rkrb", DATADIR);

@@ -1029,8 +1029,8 @@ void SettingsWindowGui::cb_Save(RKR_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_D_J_Connect_i(RKR_Check_Button* o, void*) {
-  m_process->aconnect_JA=(int) o->value();
-if (m_process->aconnect_JA) JackCo->activate();
+  m_process->Config.aconnect_JA=(int) o->value();
+if (m_process->Config.aconnect_JA) JackCo->activate();
 else JackCo->deactivate();
 }
 void SettingsWindowGui::cb_D_J_Connect(RKR_Check_Button* o, void* v) {
@@ -1038,8 +1038,8 @@ void SettingsWindowGui::cb_D_J_Connect(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_D_IJ_Connect_i(RKR_Check_Button* o, void*) {
-  m_process->aconnect_JIA=(int) o->value();
-if (m_process->aconnect_JIA) JackIn->activate();
+  m_process->Config.aconnect_JIA=(int) o->value();
+if (m_process->Config.aconnect_JIA) JackIn->activate();
 else JackIn->deactivate();
 }
 void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {

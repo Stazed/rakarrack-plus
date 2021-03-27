@@ -906,11 +906,7 @@ public:
     int autoassign;
     int comemouse;
     int aconnect_MI;
-    int aconnect_JA;
-    int aconnect_JIA;
 
-    int cuan_jack;
-    int cuan_ijack;
     int IsCoIn;
     int Cyoin;
     int Pyoin;
@@ -1288,15 +1284,6 @@ public:
 
     // Alsa MIDI
     snd_seq_t *midi_in, *midi_out;
-
-
-    struct JackPorts
-    {
-        char name[128];
-        
-        JackPorts():
-            name() {}
-    } jack_po[16],jack_poi[16];
 
 };  // class RKR
 

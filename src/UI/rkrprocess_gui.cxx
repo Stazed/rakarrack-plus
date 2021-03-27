@@ -1159,8 +1159,8 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->EnableBackgroundImage);
         rakarrack.set(m_process->PrefNom("Background Image"), m_process->BackgroundImage);
         rakarrack.set(m_process->PrefNom("Auto Connect MIDI IN"), m_process->aconnect_MI);
-        rakarrack.set(m_process->PrefNom("Auto Connect Jack"), m_process->aconnect_JA);
-        rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->aconnect_JIA);
+        rakarrack.set(m_process->PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
+        rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
 
         rakarrack.set(m_process->PrefNom("MIDI Implementation"), m_process->MIDIway);
         rakarrack.set(m_process->PrefNom("MIDI Table"), m_process->custom_midi_table);
@@ -1711,9 +1711,9 @@ void RKRGUI::MiraConfig()
         int i = 1;
         while (Settings->JackCo->text(i) != NULL)
         {
-            for (int k = 0; k < m_process->cuan_jack; k++)
+            for (int k = 0; k < m_process->Config.cuan_jack; k++)
             {
-                if (strcmp(Settings->JackCo->text(i), m_process->jack_po[k].name) == 0)
+                if (strcmp(Settings->JackCo->text(i), m_process->Config.jack_po[k].name) == 0)
                 {
                     Settings->JackCo->select(i, 1);
                 }
@@ -1727,9 +1727,9 @@ void RKRGUI::MiraConfig()
         int i = 1;
         while (Settings->JackIn->text(i) != NULL)
         {
-            for (int k = 0; k < m_process->cuan_ijack; k++)
+            for (int k = 0; k < m_process->Config.cuan_ijack; k++)
             {
-                if (strcmp(Settings->JackIn->text(i), m_process->jack_poi[k].name) == 0)
+                if (strcmp(Settings->JackIn->text(i), m_process->Config.jack_poi[k].name) == 0)
                 {
                     Settings->JackIn->select(i, 1);
                 }
@@ -1849,8 +1849,8 @@ void RKRGUI::MiraConfig()
     Settings->Upr_Amo->value(m_process->Config.UpAmo);
     Settings->L_SIZE->value(m_process->Config.looper_size);
     Settings->D_A_Connect->value(m_process->aconnect_MI);
-    Settings->D_J_Connect->value(m_process->aconnect_JA);
-    Settings->D_IJ_Connect->value(m_process->aconnect_JIA);
+    Settings->D_J_Connect->value(m_process->Config.aconnect_JA);
+    Settings->D_IJ_Connect->value(m_process->Config.aconnect_JIA);
 
     Settings->Midi_In_Counter->value(m_process->MIDI_In_Channel + 1);
     Settings->Har_In_Counter->value(m_process->Harmonizer_MIDI_Channel + 1);
@@ -1942,7 +1942,7 @@ void RKRGUI::MiraConfig()
         Settings->BMidiIn->deactivate();
     }
 
-    if (m_process->aconnect_JA)
+    if (m_process->Config.aconnect_JA)
     {
         Settings->JackCo->activate();
     }
@@ -1951,7 +1951,7 @@ void RKRGUI::MiraConfig()
         Settings->JackCo->deactivate();
     }
 
-    if (m_process->aconnect_JIA)
+    if (m_process->Config.aconnect_JIA)
     {
         Settings->JackIn->activate();
     }

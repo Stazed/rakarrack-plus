@@ -269,9 +269,6 @@ public:
     int Settings_H;
 
     char jackcliname[64];
-
-private:
-    
     char tmpprefname[128];
 
     struct JackPorts
@@ -283,7 +280,6 @@ private:
     } jack_po[16],jack_poi[16];
     
     char *PrefNom (const char *dato);
-
 };
 
 #endif /* CONFIG_FLTK_H */

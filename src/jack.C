@@ -79,30 +79,30 @@ JACKstart(RKR * rkr_)
         return (2);
     }
 
-    if (JackOUT->aconnect_JA)
+    if (JackOUT->Config.aconnect_JA)
     {
-        for (int i = 0; i < JackOUT->cuan_jack; i += 2)
+        for (int i = 0; i < JackOUT->Config.cuan_jack; i += 2)
         {
             jack_connect(jackclient, jack_port_name(outport_left),
-                         JackOUT->jack_po[i].name);
+                         JackOUT->Config.jack_po[i].name);
             jack_connect(jackclient, jack_port_name(outport_right),
-                         JackOUT->jack_po[i + 1].name);
+                         JackOUT->Config.jack_po[i + 1].name);
         }
     }
 
-    if (JackOUT->aconnect_JIA)
+    if (JackOUT->Config.aconnect_JIA)
     {
-        if (JackOUT->cuan_ijack == 1)
+        if (JackOUT->Config.cuan_ijack == 1)
         {
-            jack_connect(jackclient, JackOUT->jack_poi[0].name, jack_port_name(inputport_left));
-            jack_connect(jackclient, JackOUT->jack_poi[0].name, jack_port_name(inputport_right));
+            jack_connect(jackclient, JackOUT->Config.jack_poi[0].name, jack_port_name(inputport_left));
+            jack_connect(jackclient, JackOUT->Config.jack_poi[0].name, jack_port_name(inputport_right));
         }
         else
         {
-            for (int i = 0; i < JackOUT->cuan_ijack; i += 2)
+            for (int i = 0; i < JackOUT->Config.cuan_ijack; i += 2)
             {
-                jack_connect(jackclient, JackOUT->jack_poi[i].name, jack_port_name(inputport_left));
-                jack_connect(jackclient, JackOUT->jack_poi[i + 1].name, jack_port_name(inputport_right));
+                jack_connect(jackclient, JackOUT->Config.jack_poi[i].name, jack_port_name(inputport_left));
+                jack_connect(jackclient, JackOUT->Config.jack_poi[i + 1].name, jack_port_name(inputport_right));
             }
         }
     }
