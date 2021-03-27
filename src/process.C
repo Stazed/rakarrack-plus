@@ -216,7 +216,6 @@ RKR::RKR(int gui) :
     Bank_Saved(),
     MID(),
     Command_Line_Bank(),
-    UDirFilename(),
     BackgroundImage(),
     efx_names(),
     mc_efx_params(),
@@ -364,14 +363,6 @@ RKR::load_user_preferences()
 
     upsample = Config.upsample;
     Adjust_Upsample();
-
-    char temp[256];
-
-    // Get user bank directory
-    memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s/", DATADIR);
-    rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
-    global_user_directory = UDirFilename;
 }
 
 void

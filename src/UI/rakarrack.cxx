@@ -78,9 +78,9 @@ void RKRGUI::cb_Load_Skin_i(Fl_Menu_*, void*) {
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
 
     char *filename;
@@ -105,9 +105,9 @@ void RKRGUI::cb_Save_Skin_i(Fl_Menu_*, void*) {
     std::string chooser_start_location = "";
 
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
 
     char *filename;
@@ -154,9 +154,9 @@ void RKRGUI::cb_ConvertReverb_i(Fl_Menu_*, void*) {
     std::string chooser_start_location = "";
 
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
     
     char *filename;
@@ -624,9 +624,9 @@ void RKRGUI::cb_import_preset_i(RKR_Button*, void*) {
     std::string chooser_start_location = "";
 
     // If the user set a User Directory then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
 
     char *filename;
@@ -648,9 +648,9 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
     std::string chooser_start_location = "";
 
     // Did the user set a User Directory
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
 
     char *filename;

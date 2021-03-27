@@ -1150,9 +1150,7 @@ public:
      */
     std::string Command_Line_Bank;
 
-    char UDirFilename[128];
     char BackgroundImage[256];
-
 
     struct Effects_Names
     {

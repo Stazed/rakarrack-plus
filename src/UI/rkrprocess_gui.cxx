@@ -795,7 +795,7 @@ void RKRGUI::load_previous_state()
 
 
     rakarrack.get(m_process->PrefNom("UserName"), m_process->UserRealName, "", 127);
-    rakarrack.get(m_process->PrefNom("User Directory"), m_process->UDirFilename, DATADIR, 127);
+    rakarrack.get(m_process->PrefNom("User Directory"), m_process->Config.UDirFilename, DATADIR, 127);
     rakarrack.get(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master, 0);
     rakarrack.get(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol, 50);
     
@@ -1153,7 +1153,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Looper Size"), m_process->Config.looper_size);
 
         rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->Config.BankFilename);
-        rakarrack.set(m_process->PrefNom("User Directory"), m_process->UDirFilename);
+        rakarrack.set(m_process->PrefNom("User Directory"), m_process->Config.UDirFilename);
 
         rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->EnableBackgroundImage);
         rakarrack.set(m_process->PrefNom("Background Image"), m_process->BackgroundImage);
@@ -1754,7 +1754,7 @@ void RKRGUI::MiraConfig()
 
     Settings->BFiname->value(m_process->Config.BankFilename);
     Settings->BackFiname->value(m_process->BackgroundImage);
-    Settings->Udir->value(m_process->UDirFilename);
+    Settings->Udir->value(m_process->Config.UDirFilename);
     Settings->Username->value(m_process->UserRealName);
     Settings->Pre_Serve->value(m_process->preserve_master);
     Settings->LM_Volume->value(m_process->Metro_Vol);
@@ -3548,9 +3548,9 @@ void RKRGUI::read_insert_presets()
     std::string insert_preset_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        insert_preset_location = m_process->UDirFilename;
+        insert_preset_location = m_process->Config.UDirFilename;
         insert_preset_location += "InsertPresets.rkis";
     }
     else
@@ -3783,9 +3783,9 @@ char* RKRGUI::get_bank_file()
     std::string chooser_start_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
 
     filename = fl_file_chooser("Load Bank File:", "(*.rkrb)", chooser_start_location.c_str (), 0);
@@ -3817,9 +3817,9 @@ void RKRGUI::set_save_file()
     if(chooser_start_location.empty ())
     {
         // Did the user set a User Directory
-        if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+        if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
         {
-            chooser_start_location = m_process->UDirFilename;
+            chooser_start_location = m_process->Config.UDirFilename;
         }
     }
 
@@ -3890,9 +3890,9 @@ void RKRGUI::Load_Midi_Program_Change_Table()
     std::string chooser_start_location = "";
     
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
     
     char *filename;
@@ -3926,9 +3926,9 @@ void RKRGUI::Save_Midi_Program_Change_Table()
     std::string chooser_start_location = "";
     
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
 
         // If we have a previous file, then use it
         if(m_process->Config.custom_midi_table_file >= 0)

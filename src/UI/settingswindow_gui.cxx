@@ -1083,10 +1083,10 @@ void SettingsWindowGui::cb_UD_Browser_i(RKR_Button*, void*) {
         return;
 
     Udir->value(dir);
-    strcpy(m_process->UDirFilename, dir);
+    strcpy(m_process->Config.UDirFilename, dir);
 
     // Needed for FPreset
-    global_user_directory = m_process->UDirFilename;
+    global_user_directory = m_process->Config.UDirFilename;
 
     m_parent->Scan_Bank_Dir(1);
 }
@@ -1099,9 +1099,9 @@ void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
     std::string chooser_start_location = "";
     
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->UDirFilename, DATADIR) != 0)
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
-        chooser_start_location = m_process->UDirFilename;
+        chooser_start_location = m_process->Config.UDirFilename;
     }
 
     char *filename;

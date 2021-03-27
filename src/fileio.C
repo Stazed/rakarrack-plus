@@ -1069,9 +1069,9 @@ RKR::load_bank_vector()
     file_name.clear();
     
     // The user bank directory if set
-    if(strcmp(UDirFilename, DATADIR) != 0)
+    if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
-        dir = opendir(UDirFilename);
+        dir = opendir(Config.UDirFilename);
         if (dir == NULL)
         {
             return;
@@ -1094,7 +1094,7 @@ RKR::load_bank_vector()
     
     for(unsigned i = 0; i < file_name.size (); i++)
     {
-        std::string full_path = UDirFilename;
+        std::string full_path = Config.UDirFilename;
         
         // Check for trailing '/'
         if(full_path[full_path.size() - 1] != '/')
@@ -1604,9 +1604,9 @@ RKR::save_insert_preset(int num, char *name)
     std::string insert_preset_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(UDirFilename, DATADIR) != 0)
+    if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
-        insert_preset_location = UDirFilename;
+        insert_preset_location = Config.UDirFilename;
         insert_preset_location += "InsertPresets.rkis";
     }
     else
@@ -1723,9 +1723,9 @@ RKR::merge_insert_presets(char *filename)
     std::string insert_preset_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(UDirFilename, DATADIR) != 0)
+    if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
-        insert_preset_location = UDirFilename;
+        insert_preset_location = Config.UDirFilename;
         insert_preset_location += "InsertPresets.rkis";
     }
     else
@@ -1839,9 +1839,9 @@ RKR::load_MIDI_table_vector()
     struct dirent *fs;
     
     // Has a user directory been set?
-    if(strcmp(UDirFilename, DATADIR) != 0)
+    if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
-        dir = opendir(UDirFilename);
+        dir = opendir(Config.UDirFilename);
 
         if (dir == NULL)
         {
@@ -1868,7 +1868,7 @@ RKR::load_MIDI_table_vector()
     for(unsigned i = 0; i < file_name.size (); i++)
     {
  
-        std::string full_path = UDirFilename;
+        std::string full_path = Config.UDirFilename;
 
         // Check for trailing '/'
         if(full_path[full_path.size() - 1] != '/')
@@ -2027,13 +2027,13 @@ RKR::load_convolotron_vector()
     struct dirent *fs;
 
     // Has a user directory been set?
-    if(strcmp(UDirFilename, DATADIR) != 0)
+    if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
-        dir = opendir(UDirFilename);
+        dir = opendir(Config.UDirFilename);
 
         if (dir == NULL)
         {
-            Handle_Message(46, UDirFilename);
+            Handle_Message(46, Config.UDirFilename);
             return;
         }
     }
@@ -2055,7 +2055,7 @@ RKR::load_convolotron_vector()
     {
         another_file.User_File_Name_Clean = file_name[i];
 
-        std::string full_path = UDirFilename;
+        std::string full_path = Config.UDirFilename;
 
         // Check for trailing '/'
         if(full_path[full_path.size() - 1] != '/')
@@ -2092,13 +2092,13 @@ RKR::load_echotron_vector()
     struct dirent *fs;
 
     // Has a user directory been set?
-    if(strcmp(UDirFilename, DATADIR) != 0)
+    if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
-        dir = opendir(UDirFilename);
+        dir = opendir(Config.UDirFilename);
 
         if (dir == NULL)
         {
-            Handle_Message(46, UDirFilename);
+            Handle_Message(46, Config.UDirFilename);
             return;
         }
     }
@@ -2120,7 +2120,7 @@ RKR::load_echotron_vector()
     {
         another_file.User_File_Name_Clean = file_name[i];
 
-        std::string full_path = UDirFilename;
+        std::string full_path = Config.UDirFilename;
 
         // Check for trailing '/'
         if(full_path[full_path.size() - 1] != '/')
@@ -2157,13 +2157,13 @@ RKR::load_reverbtron_vector()
     struct dirent *fs;
 
     // Has a user directory been set?
-    if(strcmp(UDirFilename, DATADIR) != 0)
+    if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
-        dir = opendir(UDirFilename);
+        dir = opendir(Config.UDirFilename);
 
         if (dir == NULL)
         {
-            Handle_Message(46, UDirFilename);
+            Handle_Message(46, Config.UDirFilename);
             return;
         }
     }
@@ -2185,7 +2185,7 @@ RKR::load_reverbtron_vector()
     {
         another_file.User_File_Name_Clean = file_name[i];
 
-        std::string full_path = UDirFilename;
+        std::string full_path = Config.UDirFilename;
 
         // Check for trailing '/'
         if(full_path[full_path.size() - 1] != '/')
