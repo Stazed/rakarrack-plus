@@ -593,7 +593,7 @@ void RKRGUI::back_color_change(Fl_Color back_color)
     // Increment look changed flag
     global_look_changed = increment_look_changed ();
     
-    if (!m_process->EnableBackgroundImage)
+    if (!m_process->Config.EnableBackgroundImage)
     {
         back->color_average(global_back_color, 0.0);
     }
@@ -700,12 +700,9 @@ void RKRGUI::load_previous_state()
     Settings->resize(m_process->Config.Settings_X, m_process->Config.Settings_Y,
                      m_process->Config.Settings_W, m_process->Config.Settings_H);
 
-    char tmp[256];
-    sprintf(tmp, "%s/blackbg.png", DATADIR);
 
-    rakarrack.get(m_process->PrefNom("Enable Background Image"), m_process->EnableBackgroundImage, 0);
-    rakarrack.get(m_process->PrefNom("Background Image"), m_process->BackgroundImage, tmp, 256);
     PutBackground();
+
     rakarrack.get(m_process->PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
     
     // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
@@ -1132,8 +1129,8 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->Config.BankFilename);
         rakarrack.set(m_process->PrefNom("User Directory"), m_process->Config.UDirFilename);
 
-        rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->EnableBackgroundImage);
-        rakarrack.set(m_process->PrefNom("Background Image"), m_process->BackgroundImage);
+        rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->Config.EnableBackgroundImage);
+        rakarrack.set(m_process->PrefNom("Background Image"), m_process->Config.BackgroundImage);
         rakarrack.set(m_process->PrefNom("Auto Connect MIDI IN"), m_process->aconnect_MI);
         rakarrack.set(m_process->PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
         rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
@@ -1725,12 +1722,12 @@ void RKRGUI::MiraConfig()
     }
 
     m_process->m_displayed = 0;
-    Settings->Enable_Back->value(m_process->EnableBackgroundImage);
+    Settings->Enable_Back->value(m_process->Config.EnableBackgroundImage);
     Settings->Enable_DeacHide->value(m_process->deachide);
     Settings->Enable_Scale->value(m_process->scalable);
 
     Settings->BFiname->value(m_process->Config.BankFilename);
-    Settings->BackFiname->value(m_process->BackgroundImage);
+    Settings->BackFiname->value(m_process->Config.BackgroundImage);
     Settings->Udir->value(m_process->Config.UDirFilename);
     Settings->Username->value(m_process->UserRealName);
     Settings->Pre_Serve->value(m_process->preserve_master);
@@ -2288,9 +2285,9 @@ void RKRGUI::PutBackground()
 {
     // Put selected .png background image on everything
     delete back;
-    back = new Fl_Tiled_Image(new Fl_PNG_Image(m_process->BackgroundImage), 3200, 2400);
+    back = new Fl_Tiled_Image(new Fl_PNG_Image(m_process->Config.BackgroundImage), 3200, 2400);
     
-    if (!m_process->EnableBackgroundImage)
+    if (!m_process->Config.EnableBackgroundImage)
     {
         back->color_average(global_back_color, 0.0);
     }

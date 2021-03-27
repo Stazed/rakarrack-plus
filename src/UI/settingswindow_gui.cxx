@@ -89,9 +89,9 @@ void SettingsWindowGui::cb_FSReset_i(RKR_Button*, void*) {
     char filename[256];
     sprintf(filename, "%s/blackbg.png", DATADIR);
     BackFiname->value(filename);
-    strcpy(m_process->BackgroundImage,filename);
+    strcpy(m_process->Config.BackgroundImage,filename);
     
-    m_process->EnableBackgroundImage = 0;
+    m_process->Config.EnableBackgroundImage = 0;
     m_parent->PutBackground();
     
     m_parent->back_color_change(FL_BLACK);
@@ -167,7 +167,7 @@ void SettingsWindowGui::cb_K_C(RKR_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Enable_Back_i(RKR_Check_Button* o, void*) {
-  m_process->EnableBackgroundImage=(int) o->value();
+  m_process->Config.EnableBackgroundImage=(int) o->value();
 m_parent->PutBackground();
 }
 void SettingsWindowGui::cb_Enable_Back(RKR_Check_Button* o, void* v) {
@@ -180,7 +180,7 @@ filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
-strcpy(m_process->BackgroundImage,filename);
+strcpy(m_process->Config.BackgroundImage,filename);
 m_parent->PutBackground();
 }
 void SettingsWindowGui::cb_BI_Browser(RKR_Button* o, void* v) {

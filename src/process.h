@@ -1071,7 +1071,6 @@ public:
     int M_Metro_Tempo;
     int M_Metro_Bar;
     int mtc_counter;
-    int EnableBackgroundImage;
     int ML_filter;
     int ML_clist[150];
 
@@ -1149,8 +1148,6 @@ public:
      * The bank filename from the -b command line option.
      */
     std::string Command_Line_Bank;
-
-    char BackgroundImage[256];
 
     struct Effects_Names
     {

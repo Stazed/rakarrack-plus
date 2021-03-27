@@ -1443,7 +1443,7 @@ RKR::save_skin(char *filename)
     fputs(buf, fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%s", BackgroundImage);
+    sprintf(buf, "%s", Config.BackgroundImage);
     fputs(buf, fn);
     fputs("\n", fn);
 
@@ -1489,7 +1489,7 @@ RKR::load_skin(char *filename)
     }
     sscanf(buf, "%d,%d,%d,%d\n", &sback_color, &sfore_color, &slabel_color, &sleds_color);
 
-    memset(BackgroundImage, 0, sizeof (BackgroundImage));
+    memset(Config.BackgroundImage, 0, sizeof (Config.BackgroundImage));
     memset(buf, 0, sizeof (buf));
     if (fgets(buf, sizeof buf, fn) == NULL)
     {
@@ -1501,7 +1501,7 @@ RKR::load_skin(char *filename)
     {
         if (buf[i] > 20)
         {
-            BackgroundImage[i] = buf[i];
+            Config.BackgroundImage[i] = buf[i];
         }
     }
 
