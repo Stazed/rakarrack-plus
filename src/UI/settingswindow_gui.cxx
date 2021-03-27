@@ -295,7 +295,7 @@ void SettingsWindowGui::cb_UPSAMPLE_C(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Upr_Amo_i(RKR_Choice* o, void*) {
-  m_process->UpAmo =(int) o->value();
+  m_process->Config.UpAmo =(int) o->value();
 
 m_parent->Show_Next_Time();
 }
@@ -319,7 +319,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Amo[] = {
 };
 
 void SettingsWindowGui::cb_Upr_Qual_i(RKR_Choice* o, void*) {
-  m_process->UpQual =(int) o->value();
+  m_process->Config.UpQual =(int) o->value();
 
 m_parent->Show_Next_Time();
 }
@@ -337,7 +337,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Qual[] = {
 };
 
 void SettingsWindowGui::cb_Downr_Qual_i(RKR_Choice* o, void*) {
-  m_process->DownQual =(int) o->value();
+  m_process->Config.DownQual =(int) o->value();
 
 m_parent->Show_Next_Time();
 }

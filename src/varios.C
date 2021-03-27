@@ -297,10 +297,10 @@ RKR::Get_Bogomips()
 
         int maxx_len = lrintf(150.0f / 4800.0f * bogomips);
         
-        if (upsample)
+        if (Config.upsample)
         {
-            maxx_len /= (UpAmo + 8);
-            maxx_len /= (6 - ((UpQual + DownQual) / 2));
+            maxx_len /= (Config.UpAmo + 8);
+            maxx_len /= (6 - ((Config.UpQual + Config.DownQual) / 2));
             // printf("Max Len: %d\n",maxx_len);
 
         }

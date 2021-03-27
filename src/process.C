@@ -129,9 +129,6 @@ RKR::RKR(int gui) :
     Ste_U_Q(),
     Ste_D_Q(),
     upsample(),
-    UpQual(),
-    DownQual(),
-    UpAmo(),
     aFreq(),
     Metro_Vol(),
     M_Metro_Sound(),
@@ -426,10 +423,6 @@ RKR::load_user_preferences()
 
     upsample = Config.upsample;
 
-    rakarrack.get(PrefNom("UpQuality"), UpQual, 4);
-    rakarrack.get(PrefNom("DownQuality"), DownQual, 4);
-    rakarrack.get(PrefNom("UpAmount"), UpAmo, 0);
-
     Adjust_Upsample();
 
     rakarrack.get(PrefNom("Looper Size"), looper_size, 1);
@@ -622,8 +615,8 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_VIBE] = new Vibe(fSample_rate, period_master);
     Rack_Effects[EFX_INFINITY] = new Infinity(fSample_rate, period_master);
 
-    U_Resample = new Resample(UpQual);
-    D_Resample = new Resample(DownQual);
+    U_Resample = new Resample(Config.UpQual);
+    D_Resample = new Resample(Config.DownQual);
     A_Resample = new Resample(3);
 
     beat = new beattracker(fSample_rate, period_master);
@@ -788,9 +781,9 @@ RKR::Adjust_Upsample()
 {
     if (upsample)
     {
-        sample_rate = JACK_SAMPLE_RATE * (UpAmo + 2);
-        period_master = JACK_PERIOD * (UpAmo + 2);
-        u_up = (double) UpAmo + 2.0;
+        sample_rate = JACK_SAMPLE_RATE * (Config.UpAmo + 2);
+        period_master = JACK_PERIOD * (Config.UpAmo + 2);
+        u_up = (double) Config.UpAmo + 2.0;
         u_down = 1.0 / u_up;
     }
     else

@@ -988,9 +988,6 @@ public:
 
     /* Master resampling */
     int upsample;
-    int UpQual;
-    int DownQual;
-    int UpAmo;
     /* End Quality resampling */
 
     float aFreq;

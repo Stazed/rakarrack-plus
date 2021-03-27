@@ -411,7 +411,7 @@ m_parent->Show_Next_Time();}
       }
       Fl_Choice Upr_Amo {
         label Amount
-        callback {m_process->UpAmo =(int) o->value();
+        callback {m_process->Config.UpAmo =(int) o->value();
 
 m_parent->Show_Next_Time();}
         xywh {241 175 47 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -465,7 +465,7 @@ m_parent->Show_Next_Time();}
       }
       Fl_Choice Upr_Qual {
         label Up
-        callback {m_process->UpQual =(int) o->value();
+        callback {m_process->Config.UpQual =(int) o->value();
 
 m_parent->Show_Next_Time();}
         xywh {313 175 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -495,7 +495,7 @@ m_parent->Show_Next_Time();}
       }
       Fl_Choice Downr_Qual {
         label Down
-        callback {m_process->DownQual =(int) o->value();
+        callback {m_process->Config.DownQual =(int) o->value();
 
 m_parent->Show_Next_Time();}
         xywh {425 175 73 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7

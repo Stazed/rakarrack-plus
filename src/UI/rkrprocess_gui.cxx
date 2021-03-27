@@ -1147,10 +1147,10 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Auto Assign"), m_process->autoassign);
 
         rakarrack.set(m_process->PrefNom("UpSampling"), m_process->Config.upsample);
-        rakarrack.set(m_process->PrefNom("UpQuality"), m_process->UpQual);
-        rakarrack.set(m_process->PrefNom("DownQuality"), m_process->DownQual);
+        rakarrack.set(m_process->PrefNom("UpQuality"), m_process->Config.UpQual);
+        rakarrack.set(m_process->PrefNom("DownQuality"), m_process->Config.DownQual);
 
-        rakarrack.set(m_process->PrefNom("UpAmount"), m_process->UpAmo);
+        rakarrack.set(m_process->PrefNom("UpAmount"), m_process->Config.UpAmo);
         rakarrack.set(m_process->PrefNom("Looper Size"), m_process->looper_size);
 
         rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->BankFilename);
@@ -1839,14 +1839,14 @@ void RKRGUI::MiraConfig()
     Settings->Update_TAP->value(m_process->Tap_Updated);
     Settings->INSTATE->value(m_process->init_state);
     Settings->UPSAMPLE_C->value(m_process->Config.upsample);
-    Settings->Upr_Qual->value(m_process->UpQual);
-    Settings->Downr_Qual->value(m_process->DownQual);
+    Settings->Upr_Qual->value(m_process->Config.UpQual);
+    Settings->Downr_Qual->value(m_process->Config.DownQual);
     Settings->MESSAGE_DISABLE->value(m_process->Config.Disable_Warnings);
     Settings->ENA_TOOL->value(m_process->ena_tool);
     Settings->Focus_Slider->value(m_process->Focus_Delay);
     Settings->T_TIMEOUT->value(m_process->t_timeout);
 
-    Settings->Upr_Amo->value(m_process->UpAmo);
+    Settings->Upr_Amo->value(m_process->Config.UpAmo);
     Settings->L_SIZE->value(m_process->looper_size);
     Settings->D_A_Connect->value(m_process->aconnect_MI);
     Settings->D_J_Connect->value(m_process->aconnect_JA);
