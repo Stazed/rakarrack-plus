@@ -268,10 +268,11 @@ public:
     int Settings_W;
     int Settings_H;
 
+    char jackcliname[64];
+
 private:
     
     char tmpprefname[128];
-    char jackcliname[64];
 
     struct JackPorts
     {

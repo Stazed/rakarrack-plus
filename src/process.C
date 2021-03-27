@@ -196,7 +196,6 @@ RKR::RKR(int gui) :
     note_old(0),
     cents_old(0),
     cpufp(),
-    Disable_Warnings(),
     Jack_IN_Port_Connnection_Status(),
     Jack_OUT_Port_Connnection_Status(),
     Jack_AUX_Port_Connnection_Status(),
@@ -400,6 +399,7 @@ RKR::jack_open_client()
     }
 
     strcpy(jackcliname, jack_get_client_name(jackclient));
+    strcpy(Config.jackcliname, jack_get_client_name(jackclient));
 
     JACK_SAMPLE_RATE = jack_get_sample_rate(jackclient);
     JACK_PERIOD = jack_get_buffer_size(jackclient);
@@ -424,8 +424,7 @@ void
 RKR::load_user_preferences()
 {
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-    
-    rakarrack.get(PrefNom("Disable Warnings"), Disable_Warnings, 0);
+
     rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
     rakarrack.get(PrefNom("UpSampling"), upsample, 0);
     rakarrack.get(PrefNom("UpQuality"), UpQual, 4);

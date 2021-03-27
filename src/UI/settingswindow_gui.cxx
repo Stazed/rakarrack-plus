@@ -1047,7 +1047,7 @@ void SettingsWindowGui::cb_D_IJ_Connect(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_MESSAGE_DISABLE_i(RKR_Check_Button* o, void*) {
-  m_process->Disable_Warnings=(int) o->value();
+  m_process->Config.Disable_Warnings=(int) o->value();
 }
 void SettingsWindowGui::cb_MESSAGE_DISABLE(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_MESSAGE_DISABLE_i(o,v);

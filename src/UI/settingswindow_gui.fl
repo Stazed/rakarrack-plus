@@ -1443,7 +1443,7 @@ else JackIn->deactivate();}
       }
       Fl_Check_Button MESSAGE_DISABLE {
         label {Disable Warnings    }
-        callback {m_process->Disable_Warnings=(int) o->value();}
+        callback {m_process->Config.Disable_Warnings=(int) o->value();}
         xywh {30 40 141 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button

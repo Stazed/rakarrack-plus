@@ -322,7 +322,6 @@ void Config_fltk::load_previous_state()
     rakarrack.get(PrefNom("TapTempo On/Off"), TapTempo_On_Off, 0);
     rakarrack.get(PrefNom("Update Tap"), Tap_Updated, 0);
 
-    rakarrack.get(PrefNom("Disable Warnings"), Disable_Warnings, 0);
     rakarrack.get(PrefNom("Enable Tooltips"), ena_tool, 1);
     rakarrack.get(PrefNom("Focus Delay"), Focus_Delay, 0);
 

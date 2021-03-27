@@ -1083,12 +1083,6 @@ public:
 
     int cpufp;
 
-    /**
-     * Flag to indicate if user warnings should be disabled. From check box
-     * in Settings/Misc.
-     */
-    int Disable_Warnings;
-    
     // Jack port connection flags.
     /**
      * Flag to indicate the connection state of audio in ports.

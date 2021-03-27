@@ -32,7 +32,7 @@
 int
 RKR::Message(int prio, const char *labelwin, const char *message_text)
 {
-    if ((Disable_Warnings) && (prio == 0)) return (0);
+    if ((Config.Disable_Warnings) && (prio == 0)) return (0);
     
     if(Gui_Shown)
     {
