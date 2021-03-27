@@ -1096,9 +1096,9 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Recognize Optimization Stereo Harm"), m_process->RCOpti_Stereo);
         rakarrack.set(m_process->PrefNom("Recognize Optimization Ring"), m_process->RCOpti_Ring);
 
-        rakarrack.set(m_process->PrefNom("Harmonizer Downsample"), m_process->Har_Down);
-        rakarrack.set(m_process->PrefNom("Harmonizer Up Quality"), m_process->Har_U_Q);
-        rakarrack.set(m_process->PrefNom("Harmonizer Down Quality"), m_process->Har_D_Q);
+        rakarrack.set(m_process->PrefNom("Harmonizer Downsample"), m_process->Config.Har_Down);
+        rakarrack.set(m_process->PrefNom("Harmonizer Up Quality"), m_process->Config.Har_U_Q);
+        rakarrack.set(m_process->PrefNom("Harmonizer Down Quality"), m_process->Config.Har_D_Q);
         rakarrack.set(m_process->PrefNom("Reverbtron Downsample"), m_process->Rev_Down);
         rakarrack.set(m_process->PrefNom("Reverbtron Up Quality"), m_process->Rev_U_Q);
         rakarrack.set(m_process->PrefNom("Reverbtron Down Quality"), m_process->Rev_D_Q);
@@ -1114,9 +1114,9 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Vocoder Downsample"), m_process->Voc_Down);
         rakarrack.set(m_process->PrefNom("Vocoder Up Quality"), m_process->Voc_U_Q);
         rakarrack.set(m_process->PrefNom("Vocoder Down Quality"), m_process->Voc_D_Q);
-        rakarrack.set(m_process->PrefNom("StereoHarm Downsample"), m_process->Ste_Down);
-        rakarrack.set(m_process->PrefNom("StereoHarm Up Quality"), m_process->Ste_U_Q);
-        rakarrack.set(m_process->PrefNom("StereoHarm Down Quality"), m_process->Ste_D_Q);
+        rakarrack.set(m_process->PrefNom("StereoHarm Downsample"), m_process->Config.Ste_Down);
+        rakarrack.set(m_process->PrefNom("StereoHarm Up Quality"), m_process->Config.Ste_U_Q);
+        rakarrack.set(m_process->PrefNom("StereoHarm Down Quality"), m_process->Config.Ste_D_Q);
 
         rakarrack.set(m_process->PrefNom("Distortion Resampling"), m_process->Dist_res_amount);
         rakarrack.set(m_process->PrefNom("Distortion Up Quality"), m_process->Dist_up_q);
@@ -1138,10 +1138,10 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("StompBox Up Quality"), m_process->Stomp_up_q);
         rakarrack.set(m_process->PrefNom("StompBox Down Quality"), m_process->Stomp_down_q);
 
-        rakarrack.set(m_process->PrefNom("Calibration"), m_process->aFreq);
-        rakarrack.set(m_process->PrefNom("Recognize Trigger"), m_process->rtrig);
+        rakarrack.set(m_process->PrefNom("Calibration"), m_process->Config.aFreq);
+        rakarrack.set(m_process->PrefNom("Recognize Trigger"), m_process->Config.rtrig);
 
-        rakarrack.set(m_process->PrefNom("Vocoder Bands"), m_process->VocBands);
+        rakarrack.set(m_process->PrefNom("Vocoder Bands"), m_process->Config.VocBands);
 
         rakarrack.set(m_process->PrefNom("FX_init_state"), m_process->init_state);
         rakarrack.set(m_process->PrefNom("Auto Assign"), m_process->autoassign);
@@ -1151,7 +1151,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("DownQuality"), m_process->Config.DownQual);
 
         rakarrack.set(m_process->PrefNom("UpAmount"), m_process->Config.UpAmo);
-        rakarrack.set(m_process->PrefNom("Looper Size"), m_process->looper_size);
+        rakarrack.set(m_process->PrefNom("Looper Size"), m_process->Config.looper_size);
 
         rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->BankFilename);
         rakarrack.set(m_process->PrefNom("User Directory"), m_process->UDirFilename);
@@ -1762,9 +1762,9 @@ void RKRGUI::MiraConfig()
     Settings->Filter_DC->value(m_process->Config.DC_Offset);
     Settings->FLPosition->value(m_process->flpos);
     Settings->DB6B->value(m_process->db6booster);
-    Settings->Har_Downsample->value(m_process->Har_Down);
-    Settings->Har_Down_Qua->value(m_process->Har_D_Q);
-    Settings->Har_Up_Qua->value(m_process->Har_U_Q);
+    Settings->Har_Downsample->value(m_process->Config.Har_Down);
+    Settings->Har_Down_Qua->value(m_process->Config.Har_D_Q);
+    Settings->Har_Up_Qua->value(m_process->Config.Har_U_Q);
     Settings->Rev_Downsample->value(m_process->Rev_Down);
     Settings->Rev_Down_Qua->value(m_process->Rev_D_Q);
     Settings->Rev_Up_Qua->value(m_process->Rev_U_Q);
@@ -1780,9 +1780,9 @@ void RKRGUI::MiraConfig()
     Settings->Voc_Downsample->value(m_process->Voc_Down);
     Settings->Voc_Down_Qua->value(m_process->Voc_D_Q);
     Settings->Voc_Up_Qua->value(m_process->Voc_U_Q);
-    Settings->Ste_Downsample->value(m_process->Ste_Down);
-    Settings->Ste_Down_Qua->value(m_process->Ste_D_Q);
-    Settings->Ste_Up_Qua->value(m_process->Ste_U_Q);
+    Settings->Ste_Downsample->value(m_process->Config.Ste_Down);
+    Settings->Ste_Down_Qua->value(m_process->Config.Ste_D_Q);
+    Settings->Ste_Up_Qua->value(m_process->Config.Ste_U_Q);
     
     Settings->Dist_Amo->value(m_process->Dist_res_amount);
     Settings->Dist_Up_Qua->value(m_process->Dist_up_q);
@@ -1804,14 +1804,14 @@ void RKRGUI::MiraConfig()
     Settings->Stomp_Up_Qua->value(m_process->Stomp_up_q);
     Settings->Stomp_Down_Qua->value(m_process->Stomp_down_q);
 
-    Settings->Calibration->value(m_process->aFreq);
+    Settings->Calibration->value(m_process->Config.aFreq);
     Settings->RTrigger->value(m_process->HarmRecNote->trigfact);
     Settings->RC_Harm_Opti->value(m_process->RCOpti_Harm);
     Settings->RC_St_Harm_Opti->value(m_process->RCOpti_Stereo);
     Settings->RC_Ring_Opti->value(m_process->RCOpti_Ring);
 
 
-    switch (m_process->VocBands)
+    switch (m_process->Config.VocBands)
     {
         case 16:
             Settings->Voc_Bands->value(0);
@@ -1847,7 +1847,7 @@ void RKRGUI::MiraConfig()
     Settings->T_TIMEOUT->value(m_process->t_timeout);
 
     Settings->Upr_Amo->value(m_process->Config.UpAmo);
-    Settings->L_SIZE->value(m_process->looper_size);
+    Settings->L_SIZE->value(m_process->Config.looper_size);
     Settings->D_A_Connect->value(m_process->aconnect_MI);
     Settings->D_J_Connect->value(m_process->aconnect_JA);
     Settings->D_IJ_Connect->value(m_process->aconnect_JIA);

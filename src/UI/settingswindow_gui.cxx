@@ -232,7 +232,7 @@ void SettingsWindowGui::cb_Update_TAP(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_L_SIZE_i(RKR_Counter* o, void*) {
-  m_process->looper_size=o->value();
+  m_process->Config.looper_size=o->value();
 if(!m_process->m_displayed)
 {
 m_parent->Show_Next_Time();
@@ -267,17 +267,17 @@ void SettingsWindowGui::cb_DB6B(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Calibration_i(RKR_Counter* o, void*) {
-  m_process->aFreq=o->value();
-m_process->HarmRecNote->update_freqs(m_process->aFreq);
-m_process->StHarmRecNote->update_freqs(m_process->aFreq);
-m_process->RingRecNote->update_freqs(m_process->aFreq);
+  m_process->Config.aFreq=o->value();
+m_process->HarmRecNote->update_freqs(m_process->Config.aFreq);
+m_process->StHarmRecNote->update_freqs(m_process->Config.aFreq);
+m_process->RingRecNote->update_freqs(m_process->Config.aFreq);
 }
 void SettingsWindowGui::cb_Calibration(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Calibration_i(o,v);
 }
 
 void SettingsWindowGui::cb_RTrigger_i(RKR_Counter* o, void*) {
-  m_process->rtrig = o->value();
+  m_process->Config.rtrig = o->value();
 m_process->HarmRecNote->trigfact = o->value();
 m_process->StHarmRecNote->trigfact = o->value();
 m_process->RingRecNote->trigfact = o->value();
@@ -551,23 +551,23 @@ void SettingsWindowGui::cb_Voc_Bands_i(RKR_Choice* o, void*) {
   switch((int)o->value())
 {
   case 0:
-  m_process->VocBands = 16;
+  m_process->Config.VocBands = 16;
   break;
 
   case 1:
-  m_process->VocBands = 32;
+  m_process->Config.VocBands = 32;
   break;
 
   case 2:
-  m_process->VocBands = 64;
+  m_process->Config.VocBands = 64;
   break;
 
   case 3:
-  m_process->VocBands = 128;
+  m_process->Config.VocBands = 128;
   break;
 
   case 4:
-  m_process->VocBands = 256;
+  m_process->Config.VocBands = 256;
   break;
 
 }
@@ -588,7 +588,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Voc_Bands[] = {
 };
 
 void SettingsWindowGui::cb_Har_Downsample_i(RKR_Choice* o, void*) {
-  m_process->Har_Down=(int)o->value();
+  m_process->Config.Har_Down=(int)o->value();
 
 update_harmonizer_quality();
 }
@@ -611,7 +611,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Har_Downsample[] = {
 };
 
 void SettingsWindowGui::cb_Har_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Har_D_Q=(int)o->value();
+  m_process->Config.Har_D_Q=(int)o->value();
 
 update_harmonizer_quality();
 }
@@ -620,7 +620,7 @@ void SettingsWindowGui::cb_Har_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Har_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Har_U_Q=(int)o->value();
+  m_process->Config.Har_U_Q=(int)o->value();
 
 update_harmonizer_quality();
 }
@@ -755,7 +755,7 @@ void SettingsWindowGui::cb_Voc_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ste_Downsample_i(RKR_Choice* o, void*) {
-  m_process->Ste_Down=(int)o->value();
+  m_process->Config.Ste_Down=(int)o->value();
 
 update_stereoharm_quality();
 }
@@ -764,7 +764,7 @@ void SettingsWindowGui::cb_Ste_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ste_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Ste_D_Q=(int)o->value();
+  m_process->Config.Ste_D_Q=(int)o->value();
 
 update_stereoharm_quality();
 }
@@ -773,7 +773,7 @@ void SettingsWindowGui::cb_Ste_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ste_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Ste_U_Q=(int)o->value();
+  m_process->Config.Ste_U_Q=(int)o->value();
 
 update_stereoharm_quality();
 }
@@ -3353,7 +3353,7 @@ void SettingsWindowGui::update_harmonizer_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_HARMONIZER];
-  m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Har_Down, m_process->Har_U_Q, m_process->Har_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Config.Har_Down, m_process->Config.Har_U_Q, m_process->Config.Har_D_Q, m_process->fSample_rate, m_process->period_master);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
@@ -3396,7 +3396,7 @@ void SettingsWindowGui::update_stereoharm_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_STEREOHARM];
-  m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Ste_Down, m_process->Ste_U_Q, m_process->Ste_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Config.Ste_Down, m_process->Config.Ste_U_Q, m_process->Config.Ste_D_Q, m_process->fSample_rate, m_process->period_master);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
@@ -3503,7 +3503,7 @@ void SettingsWindowGui::update_vocoder_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_VOCODER];
-  m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->Config.VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);

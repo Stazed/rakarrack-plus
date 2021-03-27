@@ -340,7 +340,7 @@ m_process->change_scale = 1; // true}
         class RKR_Box
       }
       Fl_Counter L_SIZE {
-        callback {m_process->looper_size=o->value();
+        callback {m_process->Config.looper_size=o->value();
 if(!m_process->m_displayed)
 {
 m_parent->Show_Next_Time();
@@ -384,15 +384,15 @@ Efx_Looper->setmvol(m_process->Metro_Vol);}
         class RKR_Box
       }
       Fl_Counter Calibration {
-        callback {m_process->aFreq=o->value();
-m_process->HarmRecNote->update_freqs(m_process->aFreq);
-m_process->StHarmRecNote->update_freqs(m_process->aFreq);
-m_process->RingRecNote->update_freqs(m_process->aFreq);}
+        callback {m_process->Config.aFreq=o->value();
+m_process->HarmRecNote->update_freqs(m_process->Config.aFreq);
+m_process->StHarmRecNote->update_freqs(m_process->Config.aFreq);
+m_process->RingRecNote->update_freqs(m_process->Config.aFreq);}
         xywh {170 280 116 21} labelsize 10 labelcolor 7 align 4 minimum 420 maximum 460 value 440 textsize 10
         class RKR_Counter
       }
       Fl_Counter RTrigger {
-        callback {m_process->rtrig = o->value();
+        callback {m_process->Config.rtrig = o->value();
 m_process->HarmRecNote->trigfact = o->value();
 m_process->StHarmRecNote->trigfact = o->value();
 m_process->RingRecNote->trigfact = o->value();}
@@ -761,23 +761,23 @@ update_shifter_quality();} open
         callback {switch((int)o->value())
 {
   case 0:
-  m_process->VocBands = 16;
+  m_process->Config.VocBands = 16;
   break;
 
   case 1:
-  m_process->VocBands = 32;
+  m_process->Config.VocBands = 32;
   break;
 
   case 2:
-  m_process->VocBands = 64;
+  m_process->Config.VocBands = 64;
   break;
 
   case 3:
-  m_process->VocBands = 128;
+  m_process->Config.VocBands = 128;
   break;
 
   case 4:
-  m_process->VocBands = 256;
+  m_process->Config.VocBands = 256;
   break;
 
 }
@@ -814,7 +814,7 @@ update_vocoder_quality();}
         class RKR_Box
       }
       Fl_Choice Har_Downsample {
-        callback {m_process->Har_Down=(int)o->value();
+        callback {m_process->Config.Har_Down=(int)o->value();
 
 update_harmonizer_quality();}
         xywh {205 140 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
@@ -863,7 +863,7 @@ update_harmonizer_quality();}
       }
       Fl_Choice Har_Down_Qua {
         label Down
-        callback {m_process->Har_D_Q=(int)o->value();
+        callback {m_process->Config.Har_D_Q=(int)o->value();
 
 update_harmonizer_quality();} open
         xywh {315 140 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -873,7 +873,7 @@ update_harmonizer_quality();} open
       } {}
       Fl_Choice Har_Up_Qua {
         label Up
-        callback {m_process->Har_U_Q=(int)o->value();
+        callback {m_process->Config.Har_U_Q=(int)o->value();
 
 update_harmonizer_quality();} open
         xywh {415 140 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -1049,7 +1049,7 @@ update_vocoder_quality();} open
         class RKR_Box
       }
       Fl_Choice Ste_Downsample {
-        callback {m_process->Ste_Down=(int)o->value();
+        callback {m_process->Config.Ste_Down=(int)o->value();
 
 update_stereoharm_quality();} open
         xywh {205 320 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
@@ -1058,7 +1058,7 @@ update_stereoharm_quality();} open
       } {}
       Fl_Choice Ste_Down_Qua {
         label Down
-        callback {m_process->Ste_D_Q=(int)o->value();
+        callback {m_process->Config.Ste_D_Q=(int)o->value();
 
 update_stereoharm_quality();} open
         xywh {315 320 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -1068,7 +1068,7 @@ update_stereoharm_quality();} open
       } {}
       Fl_Choice Ste_Up_Qua {
         label Up
-        callback {m_process->Ste_U_Q=(int)o->value();
+        callback {m_process->Config.Ste_U_Q=(int)o->value();
 
 update_stereoharm_quality();} open
         xywh {415 320 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -1818,7 +1818,7 @@ std::vector<int> save_state = Efx_Harmonizer->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_HARMONIZER];
-m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Har_Down, m_process->Har_U_Q, m_process->Har_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Config.Har_Down, m_process->Config.Har_U_Q, m_process->Config.Har_D_Q, m_process->fSample_rate, m_process->period_master);
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
@@ -1861,7 +1861,7 @@ std::vector<int> save_state = Efx_StereoHarm->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_STEREOHARM];
-m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Ste_Down, m_process->Ste_U_Q, m_process->Ste_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Config.Ste_Down, m_process->Config.Ste_U_Q, m_process->Config.Ste_D_Q, m_process->fSample_rate, m_process->period_master);
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
@@ -1968,7 +1968,7 @@ std::vector<int> save_state = Efx_Vocoder->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_VOCODER];
-m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->Config.VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);

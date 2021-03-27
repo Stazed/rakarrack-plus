@@ -958,9 +958,6 @@ public:
     int Alert_Count;
 
     /* Quality resampling */
-    int Har_Down;
-    int Har_U_Q;
-    int Har_D_Q;
 
     int Rev_Down;
     int Rev_U_Q;
@@ -982,15 +979,10 @@ public:
     int Voc_U_Q;
     int Voc_D_Q;
 
-    int Ste_Down;
-    int Ste_U_Q;
-    int Ste_D_Q;
-
     /* Master resampling */
     int upsample;
     /* End Quality resampling */
 
-    float aFreq;
     int Metro_Vol;
     int M_Metro_Sound;
     int deachide;
@@ -1140,7 +1132,6 @@ public:
     int last_auxvalue;
     int ena_tool;
     int Focus_Delay;
-    int VocBands;
     int RCOpti_Harm;
     int RCOpti_Stereo;
     int RCOpti_Ring;
@@ -1168,7 +1159,6 @@ public:
 
     float booster;
     float cpuload;
-    float rtrig;
 
     float *efxoutl;
     float *efxoutr;
@@ -1199,7 +1189,6 @@ public:
 
 
     float bogomips;
-    float looper_size;
     int looper_lqua;
 
     // Tuner
