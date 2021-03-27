@@ -212,14 +212,9 @@ RKR::RKR(int gui) :
     nfreq_old(0),
     afreq_old(0),
     tmpprefname(),
-
-    // Active preset
     UserRealName(NULL),
-    // End Active preset
-
     Bank_Saved(),
     MID(),
-    BankFilename(),
     Command_Line_Bank(),
     UDirFilename(),
     BackgroundImage(),
@@ -372,11 +367,6 @@ RKR::load_user_preferences()
 
     char temp[256];
 
-    // Get user default bank file from Settings/Bank/ --Bank Filename
-    memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s/Default.rkrb", DATADIR);
-    rakarrack.get(PrefNom("Bank Filename"), BankFilename, temp, 127);
-    
     // Get user bank directory
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/", DATADIR);

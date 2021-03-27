@@ -88,7 +88,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     }
 
     Principal->copy_label(tmp);
-    BankWin_Label(m_process->BankFilename);
+    BankWin_Label(m_process->Config.BankFilename);
     memset(tmp, 0, sizeof (tmp));
     sprintf(tmp, "%s   v%s - Effects Order", m_process->jackcliname, VERSION);
     Order->copy_label(tmp);
@@ -1152,7 +1152,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("UpAmount"), m_process->Config.UpAmo);
         rakarrack.set(m_process->PrefNom("Looper Size"), m_process->Config.looper_size);
 
-        rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->BankFilename);
+        rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->Config.BankFilename);
         rakarrack.set(m_process->PrefNom("User Directory"), m_process->UDirFilename);
 
         rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->EnableBackgroundImage);
@@ -1752,7 +1752,7 @@ void RKRGUI::MiraConfig()
     Settings->Enable_DeacHide->value(m_process->deachide);
     Settings->Enable_Scale->value(m_process->scalable);
 
-    Settings->BFiname->value(m_process->BankFilename);
+    Settings->BFiname->value(m_process->Config.BankFilename);
     Settings->BackFiname->value(m_process->BackgroundImage);
     Settings->Udir->value(m_process->UDirFilename);
     Settings->Username->value(m_process->UserRealName);

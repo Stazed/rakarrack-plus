@@ -1144,14 +1144,7 @@ public:
     std::string Bank_Saved;
 
     char MID[128];
-    
-    /**
-     * The default user bank from Settings/Bank/Bank Filename. Also the
-     * bank selected when the user clicks the 'U' button from the Bank Manager
-     * and above the Bank button on the main window.
-     */
-    char BankFilename[128];
-    
+
     /**
      * The bank filename from the -b command line option.
      */

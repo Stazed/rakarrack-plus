@@ -1113,7 +1113,7 @@ void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
     filename = fl_filename_setext(filename, ".rkrb");
     
     BFiname->value(filename);
-    strcpy(m_process->BankFilename,filename);
+    strcpy(m_process->Config.BankFilename,filename);
 
     // If we do not find the Bank file, then the Default.rkrb file is loaded.
     int bank_found = -1;
@@ -1121,7 +1121,7 @@ void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
     // Find the bank chosen by comparing file name
     for(unsigned i = 0; i < m_process->Bank_Vector.size (); i++)
     {
-        if(strcmp(m_process->BankFilename , m_process->Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
+        if(strcmp(m_process->Config.BankFilename , m_process->Bank_Vector[i].Bank_File_Name.c_str ()) == 0)
         {
             bank_found = i;
             break;
@@ -1132,11 +1132,11 @@ void SettingsWindowGui::cb_BF_Browser_i(RKR_Button*, void*) {
     if(bank_found < 0)
     {
         // Get user default bank file from Settings/Bank/ --Bank Filename
-        memset(m_process->BankFilename, 0, sizeof(m_process->BankFilename));
-        sprintf(m_process->BankFilename, "%s/Default.rkrb", DATADIR);
+        memset(m_process->Config.BankFilename, 0, sizeof(m_process->Config.BankFilename));
+        sprintf(m_process->Config.BankFilename, "%s/Default.rkrb", DATADIR);
         
         m_process->Handle_Message(40, filename);
-        BFiname->value(m_process->BankFilename);
+        BFiname->value(m_process->Config.BankFilename);
     };
 }
 void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {

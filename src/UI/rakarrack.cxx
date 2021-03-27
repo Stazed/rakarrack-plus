@@ -596,10 +596,10 @@ void RKRGUI::cb_L_B4_i(RKR_Button*, void*) {
   // Check if the bank was modified - request save
     is_bank_modified ();
 
-    if(m_process->load_bank_from_vector (m_process->BankFilename))
+    if(m_process->load_bank_from_vector (m_process->Config.BankFilename))
     {
         // Update the Bank Window
-        BankWin_Label(m_process->BankFilename);
+        BankWin_Label(m_process->Config.BankFilename);
         Put_Loaded_Bank();
         BankWindow->unlight_preset(m_process->Selected_Preset);
     };
