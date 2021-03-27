@@ -789,11 +789,6 @@ public:
     int db6booster;
 
     /**
-     * Flag for check box in Settings/Audio "Filter Input DC Offset"
-     */
-    int DC_Offset;
-
-    /**
      * Main window master FX On/Off temporary flag to hold Active state for resetting.
      */
     int FX_Master_Active_Reset;

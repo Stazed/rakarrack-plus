@@ -58,7 +58,6 @@ RKR::RKR(int gui) :
     jackcliname(),
     Jack_Shut_Down(0),
     db6booster(),
-    DC_Offset(),
     FX_Master_Active_Reset(),
     MIDIConverter_Active(0),
     Metro_Active(0),
@@ -425,7 +424,6 @@ RKR::load_user_preferences()
 {
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
-    rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
     rakarrack.get(PrefNom("UpSampling"), upsample, 0);
     rakarrack.get(PrefNom("UpQuality"), UpQual, 4);
     rakarrack.get(PrefNom("DownQuality"), DownQual, 4);
@@ -866,7 +864,7 @@ RKR::Control_Gain(float *origl, float *origr)
         memcpy(auxresampled, auxdata, sizeof (float)*JACK_PERIOD);
     }
 
-    if (DC_Offset)
+    if (Config.DC_Offset)
     {
         DC_Offsetl->filterout(efxoutl, period_master);
         DC_Offsetr->filterout(efxoutr, period_master);

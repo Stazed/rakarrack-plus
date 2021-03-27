@@ -314,7 +314,7 @@ m_process->change_scale = 1; // true}
       }
       Fl_Check_Button Filter_DC {
         label {Filter Input DC Offset}
-        callback {m_process->DC_Offset=(int) o->value();}
+        callback {m_process->Config.DC_Offset=(int) o->value();}
         xywh {30 64 152 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button

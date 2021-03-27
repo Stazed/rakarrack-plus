@@ -1086,7 +1086,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master);
         rakarrack.set(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol);
 
-        rakarrack.set(m_process->PrefNom("Filter DC Offset"), m_process->DC_Offset);
+        rakarrack.set(m_process->PrefNom("Filter DC Offset"), m_process->Config.DC_Offset);
 
         rakarrack.set(m_process->PrefNom("Update Tap"), m_process->Tap_Updated);
         rakarrack.set(m_process->PrefNom("Limiter Position"), m_process->flpos);
@@ -1759,7 +1759,7 @@ void RKRGUI::MiraConfig()
     Settings->Username->value(m_process->UserRealName);
     Settings->Pre_Serve->value(m_process->preserve_master);
     Settings->LM_Volume->value(m_process->Metro_Vol);
-    Settings->Filter_DC->value(m_process->DC_Offset);
+    Settings->Filter_DC->value(m_process->Config.DC_Offset);
     Settings->FLPosition->value(m_process->flpos);
     Settings->DB6B->value(m_process->db6booster);
     Settings->Har_Downsample->value(m_process->Har_Down);

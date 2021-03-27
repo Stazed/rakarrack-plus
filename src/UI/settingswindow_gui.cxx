@@ -211,7 +211,7 @@ void SettingsWindowGui::cb_INSTATE(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Filter_DC_i(RKR_Check_Button* o, void*) {
-  m_process->DC_Offset=(int) o->value();
+  m_process->Config.DC_Offset=(int) o->value();
 }
 void SettingsWindowGui::cb_Filter_DC(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Filter_DC_i(o,v);
