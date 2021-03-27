@@ -110,7 +110,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     put_icon(Principal);
     read_insert_presets();
     
-    if (m_process->deachide)
+    if (m_process->Config.deachide)
     {
         HideUE->label("Show");
     }
@@ -568,7 +568,7 @@ void RKRGUI::GuiTimeout(void)
     if(m_process->change_scale)
     {
         m_process->change_scale = 0;  // false
-        if (m_process->scalable )
+        if (m_process->Config.scalable )
         {
             Principal->size_range(384, 216, 3840, 2160, 0, 0, 1);
         }
@@ -711,11 +711,6 @@ void RKRGUI::load_previous_state()
     label_color_change((Fl_Color)m_process->Config.label_color);
     font_size_change(m_process->Config.font_size);
     font_type_change(m_process->Config.font_type);
-
-
-
-    rakarrack.get(m_process->PrefNom("Hide Effects"), m_process->deachide, 0);
-    rakarrack.get(m_process->PrefNom("Scale Window"), m_process->scalable, 0);
 
     rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->active_bank, 3);
 
@@ -945,8 +940,8 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Leds Color"), (int) global_leds_color);
         rakarrack.set(m_process->PrefNom("Labels Color"), (int) global_label_color);
         rakarrack.set(m_process->PrefNom("Schema"), (int) Settings->scheme_ch->value());
-        rakarrack.set(m_process->PrefNom("Hide Effects"), (int) m_process->deachide);
-        rakarrack.set(m_process->PrefNom("Scale Window"), (int) m_process->scalable);
+        rakarrack.set(m_process->PrefNom("Hide Effects"), (int) m_process->Config.deachide);
+        rakarrack.set(m_process->PrefNom("Scale Window"), (int) m_process->Config.scalable);
 
         rakarrack.set(m_process->PrefNom("Bank Selected"), m_process->active_bank);
 
@@ -1396,7 +1391,7 @@ void RKRGUI::reordena()
                 
                 // This is the Hide/Show inactive effect button choice
                 // If it is not hide, then show all effects
-                if (!m_process->deachide)
+                if (!m_process->Config.deachide)
                 {
                     Efx_Gui_Base[j]->show();
                 }
@@ -1408,7 +1403,7 @@ void RKRGUI::reordena()
                     m_process->active[i] = 1;
 
                     // Show the active
-                    if (m_process->deachide)
+                    if (m_process->Config.deachide)
                         Efx_Gui_Base[j]->show();
                 }
                 else
@@ -1423,70 +1418,70 @@ void RKRGUI::reordena()
         {
             case 0:
                 L1->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L1->hide();
                 else
                     L1->show();
                 break;
             case 1:
                 L2->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L2->hide();
                 else
                     L2->show();
                 break;
             case 2:
                 L3->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L3->hide();
                 else
                     L3->show();
                 break;
             case 3:
                 L4->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L4->hide();
                 else
                     L4->show();
                 break;
             case 4:
                 L5->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L5->hide();
                 else
                     L5->show();
                 break;
             case 5:
                 L6->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L6->hide();
                 else
                     L6->show();
                 break;
             case 6:
                 L7->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L7->hide();
                 else
                     L7->show();
                 break;
             case 7:
                 L8->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L8->hide();
                 else
                     L8->show();
                 break;
             case 8:
                 L9->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L9->hide();
                 else
                     L9->show();
                 break;
             case 9:
                 L10->copy_label(m_process->efx_names[Busca_Eff(m_process->efx_order[i])].Nom);
-                if ((m_process->deachide) && (!m_process->active[i]))
+                if ((m_process->Config.deachide) && (!m_process->active[i]))
                     L10->hide();
                 else
                     L10->show();
@@ -1713,8 +1708,8 @@ void RKRGUI::MiraConfig()
 
     m_process->m_displayed = 0;
     Settings->Enable_Back->value(m_process->Config.EnableBackgroundImage);
-    Settings->Enable_DeacHide->value(m_process->deachide);
-    Settings->Enable_Scale->value(m_process->scalable);
+    Settings->Enable_DeacHide->value(m_process->Config.deachide);
+    Settings->Enable_Scale->value(m_process->Config.scalable);
 
     Settings->BFiname->value(m_process->Config.BankFilename);
     Settings->BackFiname->value(m_process->Config.BackgroundImage);

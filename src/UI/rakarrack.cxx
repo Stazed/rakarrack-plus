@@ -738,8 +738,8 @@ void RKRGUI::cb_Open_Order_i(RKR_Button*, void*) {
   if (!Order->visible())
 {
 Prepare_Order();
-m_process->deachide=0;
-Order->Order_DeacHide->value(m_process->deachide);
+m_process->Config.deachide=0;
+Order->Order_DeacHide->value(m_process->Config.deachide);
 Order->show();
 put_icon(Order);
 }
@@ -763,14 +763,14 @@ void RKRGUI::cb_Etit(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_HideUE_i(RKR_Button* o, void*) {
-  if(m_process->deachide)
+  if(m_process->Config.deachide)
 {
- m_process->deachide=0;
+ m_process->Config.deachide=0;
  o->label("Hide");
 }
 else
 {
-m_process->deachide=1;
+m_process->Config.deachide=1;
  o->label("Show");
 }
  

@@ -177,7 +177,7 @@ m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
   }
   Fl_Check_Button Order_DeacHide {
     label {Hide Unused Effect Widgets}
-    callback {m_process->deachide=(int) o->value();}
+    callback {m_process->Config.deachide=(int) o->value();}
     xywh {259 286 175 20} down_box DOWN_BOX labelsize 11 labelcolor 7
     code0 {o->set_label_offset(2);}
     class RKR_Check_Button

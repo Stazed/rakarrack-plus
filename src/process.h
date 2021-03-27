@@ -958,8 +958,6 @@ public:
 
     int Metro_Vol;
     int M_Metro_Sound;
-    int deachide;
-    int scalable;
     int change_scale;
     int flpos;
 

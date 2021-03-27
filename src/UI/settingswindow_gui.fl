@@ -283,7 +283,7 @@ m_parent->PutBackground();}
       }
       Fl_Check_Button Enable_DeacHide {
         label {Hide Unused Effect Widgets}
-        callback {m_process->deachide=(int) o->value();
+        callback {m_process->Config.deachide=(int) o->value();
   m_parent->reordena();}
         xywh {30 500 192 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
@@ -291,7 +291,7 @@ m_parent->PutBackground();}
       }
       Fl_Check_Button Enable_Scale {
         label {Set Main Window Scalable}
-        callback {m_process->scalable=(int) o->value();
+        callback {m_process->Config.scalable=(int) o->value();
 m_process->change_scale = 1; // true}
         xywh {30 525 181 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}

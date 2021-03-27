@@ -105,8 +105,6 @@ RKR::RKR(int gui) :
     upsample(),
     Metro_Vol(),
     M_Metro_Sound(),
-    deachide(),
-    scalable(0),
     change_scale(1),
     flpos(),
     m_displayed(),

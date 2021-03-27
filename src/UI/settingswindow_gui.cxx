@@ -188,7 +188,7 @@ void SettingsWindowGui::cb_BI_Browser(RKR_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Enable_DeacHide_i(RKR_Check_Button* o, void*) {
-  m_process->deachide=(int) o->value();
+  m_process->Config.deachide=(int) o->value();
   m_parent->reordena();
 }
 void SettingsWindowGui::cb_Enable_DeacHide(RKR_Check_Button* o, void* v) {
@@ -196,7 +196,7 @@ void SettingsWindowGui::cb_Enable_DeacHide(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Enable_Scale_i(RKR_Check_Button* o, void*) {
-  m_process->scalable=(int) o->value();
+  m_process->Config.scalable=(int) o->value();
 m_process->change_scale = 1; // true;
 }
 void SettingsWindowGui::cb_Enable_Scale(RKR_Check_Button* o, void* v) {

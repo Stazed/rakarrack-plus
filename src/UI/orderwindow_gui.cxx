@@ -138,7 +138,7 @@ void OrderWindowGui::cb_Fil128(RKR_Button* o, void* v) {
 }
 
 void OrderWindowGui::cb_Order_DeacHide_i(RKR_Check_Button* o, void*) {
-  m_process->deachide=(int) o->value();
+  m_process->Config.deachide=(int) o->value();
 }
 void OrderWindowGui::cb_Order_DeacHide(RKR_Check_Button* o, void* v) {
   ((OrderWindowGui*)(o->parent()))->cb_Order_DeacHide_i(o,v);
