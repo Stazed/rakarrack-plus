@@ -403,7 +403,7 @@ m_process->RingRecNote->trigfact = o->value();}
       }
       Fl_Check_Button UPSAMPLE_C {
         label {Master Upsampling}
-        callback {m_process->upsample=(int)o->value();
+        callback {m_process->Config.upsample=(int)o->value();
 m_parent->Show_Next_Time();}
         tooltip {Check to Activate Master Upsampling} xywh {30 175 141 16} down_box DOWN_BOX labelsize 12 labelcolor 7 when 1
         code0 {o->set_label_offset(2);}

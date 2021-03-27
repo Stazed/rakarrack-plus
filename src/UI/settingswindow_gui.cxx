@@ -287,7 +287,7 @@ void SettingsWindowGui::cb_RTrigger(RKR_Counter* o, void* v) {
 }
 
 void SettingsWindowGui::cb_UPSAMPLE_C_i(RKR_Check_Button* o, void*) {
-  m_process->upsample=(int)o->value();
+  m_process->Config.upsample=(int)o->value();
 m_parent->Show_Next_Time();
 }
 void SettingsWindowGui::cb_UPSAMPLE_C(RKR_Check_Button* o, void* v) {

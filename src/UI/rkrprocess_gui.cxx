@@ -1146,7 +1146,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("FX_init_state"), m_process->init_state);
         rakarrack.set(m_process->PrefNom("Auto Assign"), m_process->autoassign);
 
-        rakarrack.set(m_process->PrefNom("UpSampling"), m_process->upsample);
+        rakarrack.set(m_process->PrefNom("UpSampling"), m_process->Config.upsample);
         rakarrack.set(m_process->PrefNom("UpQuality"), m_process->UpQual);
         rakarrack.set(m_process->PrefNom("DownQuality"), m_process->DownQual);
 
@@ -1838,7 +1838,7 @@ void RKRGUI::MiraConfig()
     Settings->AAssign->value(m_process->autoassign);
     Settings->Update_TAP->value(m_process->Tap_Updated);
     Settings->INSTATE->value(m_process->init_state);
-    Settings->UPSAMPLE_C->value(m_process->upsample);
+    Settings->UPSAMPLE_C->value(m_process->Config.upsample);
     Settings->Upr_Qual->value(m_process->UpQual);
     Settings->Downr_Qual->value(m_process->DownQual);
     Settings->MESSAGE_DISABLE->value(m_process->Config.Disable_Warnings);
@@ -2427,7 +2427,7 @@ void RKRGUI::ChangeActives()
     else
         LABEL_IO->labelcolor(off);
 
-    if ((m_process->upsample) && (m_process->Active_Preset.FX_Master_Active))
+    if ((m_process->Config.upsample) && (m_process->Active_Preset.FX_Master_Active))
     {
         UPS_LED->color(global_leds_color);
         UPS_LED->redraw();

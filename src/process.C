@@ -424,7 +424,8 @@ RKR::load_user_preferences()
 {
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
-    rakarrack.get(PrefNom("UpSampling"), upsample, 0);
+    upsample = Config.upsample;
+
     rakarrack.get(PrefNom("UpQuality"), UpQual, 4);
     rakarrack.get(PrefNom("DownQuality"), DownQual, 4);
     rakarrack.get(PrefNom("UpAmount"), UpAmo, 0);
