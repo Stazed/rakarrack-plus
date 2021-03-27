@@ -682,10 +682,23 @@ void RKRGUI::load_previous_state()
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
-    rakarrack.get(m_process->PrefNom("Principal X"), x, 1);
-    rakarrack.get(m_process->PrefNom("Principal Y"), y, 1);
-    rakarrack.get(m_process->PrefNom("Principal W"), w, 960);
-    rakarrack.get(m_process->PrefNom("Principal H"), h, 540);
+    Principal->resize(m_process->Config.Principal_X, m_process->Config.Principal_Y,
+                      m_process->Config.Principal_W, m_process->Config.Principal_H);
+
+    BankWindow->resize(m_process->Config.BankWindow_X, m_process->Config.BankWindow_Y,
+                       m_process->Config.BankWindow_W, m_process->Config.BankWindow_H);
+
+    Order->resize(m_process->Config.Order_X, m_process->Config.Order_Y,
+                  m_process->Config.Order_W, m_process->Config.Order_H);
+
+    MIDILearn->resize(m_process->Config.MIDI_Learn_X, m_process->Config.MIDI_Learn_Y,
+                      m_process->Config.MIDI_Learn_W, m_process->Config.MIDI_Learn_H);
+
+    Trigger->resize(m_process->Config.Trigger_X, m_process->Config.Trigger_Y,
+                    m_process->Config.Trigger_W, m_process->Config.Trigger_H);
+
+    Settings->resize(m_process->Config.Settings_X, m_process->Config.Settings_Y,
+                     m_process->Config.Settings_W, m_process->Config.Settings_H);
 
     char tmp[256];
     sprintf(tmp, "%s/blackbg.png", DATADIR);
@@ -709,42 +722,6 @@ void RKRGUI::load_previous_state()
     rakarrack.get(m_process->PrefNom("Hide Effects"), m_process->deachide, 0);
     rakarrack.get(m_process->PrefNom("Scale Window"), m_process->scalable, 0);
 
-    Principal->resize(x, y, w, h);
-
-    rakarrack.get(m_process->PrefNom("BankWindow X"), x, 1);
-    rakarrack.get(m_process->PrefNom("BankWindow Y"), y, 1);
-    rakarrack.get(m_process->PrefNom("BankWindow W"), w, 680);
-    rakarrack.get(m_process->PrefNom("BankWindow H"), h, 425);
-
-    BankWindow->resize(x, y, w, h);
-
-    rakarrack.get(m_process->PrefNom("Order X"), x, 1);
-    rakarrack.get(m_process->PrefNom("Order Y"), y, 1);
-    rakarrack.get(m_process->PrefNom("Order W"), w, 600);
-    rakarrack.get(m_process->PrefNom("Order H"), h, 330);
-
-    Order->resize(x, y, w, h);
-
-    rakarrack.get(m_process->PrefNom("MIDI Learn X"), x, 1);
-    rakarrack.get(m_process->PrefNom("MIDI Learn Y"), y, 1);
-    rakarrack.get(m_process->PrefNom("MIDI Learn W"), w, 600);
-    rakarrack.get(m_process->PrefNom("MIDI Learn H"), h, 360);
-
-    MIDILearn->resize(x, y, w, h);
-
-    rakarrack.get(m_process->PrefNom("Trigger X"), x, 1);
-    rakarrack.get(m_process->PrefNom("Trigger Y"), y, 1);
-    rakarrack.get(m_process->PrefNom("Trigger W"), w, 280);
-    rakarrack.get(m_process->PrefNom("Trigger H"), h, 165);
-
-    Trigger->resize(x, y, w, h);
-
-    rakarrack.get(m_process->PrefNom("Settings X"), x, 1);
-    rakarrack.get(m_process->PrefNom("Settings Y"), y, 1);
-    rakarrack.get(m_process->PrefNom("Settings W"), w, 440);
-    rakarrack.get(m_process->PrefNom("Settings H"), h, 410);
-
-    Settings->resize(x, y, w, h);
 
     back_color_change((Fl_Color)back_color);
     buttons_color_change((Fl_Color)fore_color);

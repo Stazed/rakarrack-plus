@@ -214,27 +214,7 @@ Config_fltk::PrefNom(const char *dato)
  */
 void Config_fltk::load_previous_state()
 {
-
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-
-    char tmp[256];
-    sprintf(tmp, "%s/blackbg.png", DATADIR);
-
-    rakarrack.get(PrefNom("Enable Background Image"), EnableBackgroundImage, 0);
-    rakarrack.get(PrefNom("Background Image"), BackgroundImage, tmp, 256);
-    rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
-    
-    // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
-    // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
-    rakarrack.get(PrefNom("Font"), font_type, 0);
-
-    rakarrack.get(PrefNom("Background Color"), back_color, 56);              // FL_BLACK
-    rakarrack.get(PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3
-    rakarrack.get(PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
-    rakarrack.get(PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
-    rakarrack.get(PrefNom("Schema"), Schema, 2);
-    rakarrack.get(PrefNom("Hide Effects"), deachide, 0);
-    rakarrack.get(PrefNom("Scale Window"), scalable, 0);
 
     rakarrack.get(PrefNom("Principal X"), Principal_X, 1);
     rakarrack.get(PrefNom("Principal Y"), Principal_Y, 1);
@@ -265,6 +245,25 @@ void Config_fltk::load_previous_state()
     rakarrack.get(PrefNom("Settings Y"), Settings_Y, 1);
     rakarrack.get(PrefNom("Settings W"), Settings_W, 440);
     rakarrack.get(PrefNom("Settings H"), Settings_H, 410);
+
+    char tmp[256];
+    sprintf(tmp, "%s/blackbg.png", DATADIR);
+
+    rakarrack.get(PrefNom("Enable Background Image"), EnableBackgroundImage, 0);
+    rakarrack.get(PrefNom("Background Image"), BackgroundImage, tmp, 256);
+    rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
+    
+    // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
+    // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
+    rakarrack.get(PrefNom("Font"), font_type, 0);
+
+    rakarrack.get(PrefNom("Background Color"), back_color, 56);              // FL_BLACK
+    rakarrack.get(PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3
+    rakarrack.get(PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
+    rakarrack.get(PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
+    rakarrack.get(PrefNom("Schema"), Schema, 2);
+    rakarrack.get(PrefNom("Hide Effects"), deachide, 0);
+    rakarrack.get(PrefNom("Scale Window"), scalable, 0);
 
     rakarrack.get(PrefNom("Bank Selected"), active_bank, 3);
     rakarrack.get(PrefNom("Preset Num"), Preset_Number, 1);

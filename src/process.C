@@ -28,7 +28,6 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <FL/Fl_Preferences.H>
 #include "global.h"
 #include "process.h"
 
@@ -359,8 +358,6 @@ RKR::jack_open_client()
 void
 RKR::load_user_preferences()
 {
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-
     upsample = Config.upsample;
     Adjust_Upsample();
 }
