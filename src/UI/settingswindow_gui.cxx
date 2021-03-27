@@ -955,7 +955,7 @@ void SettingsWindowGui::cb_Stereo_Har_In_Counter(RKR_Counter* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Mw0_i(RKR_Check_Button*, void*) {
-  m_process->MIDIway=0;
+  m_process->Config.MIDIway=0;
 m_parent->ML_Menu->deactivate();
 }
 void SettingsWindowGui::cb_Mw0(RKR_Check_Button* o, void* v) {
@@ -963,7 +963,7 @@ void SettingsWindowGui::cb_Mw0(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Mw1_i(RKR_Check_Button*, void*) {
-  m_process->MIDIway=1;
+  m_process->Config.MIDIway=1;
 m_parent->ML_Menu->activate();
 }
 void SettingsWindowGui::cb_Mw1(RKR_Check_Button* o, void* v) {
@@ -983,14 +983,14 @@ void SettingsWindowGui::cb_MTable_i(RKR_Check_Button* o, void*) {
 // Will cause crash if we do not set preset off temporarily.    
 m_process->Change_Preset = C_CHANGE_PRESET_OFF;
 
-m_process->custom_midi_table=o->value();
+m_process->Config.custom_midi_table=o->value();
 
 // To show/stop highlight on under mouse based on parent status
 for (int i = 0; i < scroll->children(); ++i)
 {
     Fl_Widget *c = scroll->child(i);
 
-    if(m_process->custom_midi_table)
+    if(m_process->Config.custom_midi_table)
     {
         c->activate ();
     }
@@ -1000,7 +1000,7 @@ for (int i = 0; i < scroll->children(); ++i)
     }
 }
 
-if(m_process->custom_midi_table)
+if(m_process->Config.custom_midi_table)
 {
     scroll->activate();
 }

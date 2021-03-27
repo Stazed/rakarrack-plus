@@ -1320,7 +1320,7 @@ m_process->Conecta();}
       } {
         Fl_Check_Button Mw0 {
           label Default
-          callback {m_process->MIDIway=0;
+          callback {m_process->Config.MIDIway=0;
 m_parent->ML_Menu->deactivate();}
           xywh {35 268 73 16} type Radio down_box DOWN_BOX labelsize 12 labelcolor 7
           code0 {o->set_label_offset(2);}
@@ -1328,7 +1328,7 @@ m_parent->ML_Menu->deactivate();}
         }
         Fl_Check_Button Mw1 {
           label {MIDI Learn}
-          callback {m_process->MIDIway=1;
+          callback {m_process->Config.MIDIway=1;
 m_parent->ML_Menu->activate();}
           xywh {119 268 87 16} type Radio down_box DOWN_BOX labelsize 12 labelcolor 7
           code0 {o->set_label_offset(2);}
@@ -1349,14 +1349,14 @@ m_parent->ML_Menu->activate();}
 // Will cause crash if we do not set preset off temporarily.    
 m_process->Change_Preset = C_CHANGE_PRESET_OFF;
 
-m_process->custom_midi_table=o->value();
+m_process->Config.custom_midi_table=o->value();
 
 // To show/stop highlight on under mouse based on parent status
 for (int i = 0; i < scroll->children(); ++i)
 {
     Fl_Widget *c = scroll->child(i);
 
-    if(m_process->custom_midi_table)
+    if(m_process->Config.custom_midi_table)
     {
         c->activate ();
     }
@@ -1366,7 +1366,7 @@ for (int i = 0; i < scroll->children(); ++i)
     }
 }
 
-if(m_process->custom_midi_table)
+if(m_process->Config.custom_midi_table)
 {
     scroll->activate();
 }

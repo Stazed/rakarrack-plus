@@ -982,7 +982,6 @@ public:
     float *interpbuf;
 
     int sw_stat;
-    int MIDIway;
     int swidth;
     int sheight;
     int sschema;
@@ -1043,17 +1042,6 @@ public:
      */
     int Jack_Port_Connnection_Changed;
     // End Jack port connections
-    
-    /**
-     * Flag to indicate the custom MIDI Program Change Table is active.
-     * This is the check box in Settings/Preferences/MIDI - MIDI Program Change Table
-     */
-    int custom_midi_table;
-
-    /**
-     * The last loaded custom MIDI table file, if any. -1 if none.
-     */
-    int custom_midi_table_file;
 
     /**
      * Flag to indicate if the custom MIDI program change table was modified by the user.

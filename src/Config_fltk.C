@@ -269,9 +269,6 @@ void Config_fltk::load_previous_state()
     rakarrack.get(PrefNom("Bank Selected"), active_bank, 3);
     rakarrack.get(PrefNom("Preset Num"), Preset_Number, 1);
 
-    // Custom MIDI table
-    rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
-
     rakarrack.get(PrefNom("UserName"), UserRealName, "", 127);
     rakarrack.get(PrefNom("User Directory"), UDirFilename, DATADIR, 127);
     rakarrack.get(PrefNom("Preserve Gain/Master"), preserve_master, 0);

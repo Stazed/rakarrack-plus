@@ -786,12 +786,11 @@ void RKRGUI::load_previous_state()
     }
 
     // MIDI Learn
-    if (!m_process->MIDIway)
+    if (!m_process->Config.MIDIway)
         ML_Menu->deactivate();
 
     // Custom MIDI table
-    rakarrack.get(m_process->PrefNom("MIDI Table"), m_process->custom_midi_table, 0);
-    if (!m_process->custom_midi_table)
+    if (!m_process->Config.custom_midi_table)
         Settings->scroll->deactivate();
 
 
@@ -1162,8 +1161,8 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
         rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
 
-        rakarrack.set(m_process->PrefNom("MIDI Implementation"), m_process->MIDIway);
-        rakarrack.set(m_process->PrefNom("MIDI Table"), m_process->custom_midi_table);
+        rakarrack.set(m_process->PrefNom("MIDI Implementation"), m_process->Config.MIDIway);
+        rakarrack.set(m_process->PrefNom("MIDI Table"), m_process->Config.custom_midi_table);
 
 
         int i = Settings->BMidiIn->value();
@@ -1186,7 +1185,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Disable Warnings"), m_process->Config.Disable_Warnings);
         rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool);
         rakarrack.set(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay);
-        rakarrack.set(m_process->PrefNom("MIDI Table File"), m_process->custom_midi_table_file);
+        rakarrack.set(m_process->PrefNom("MIDI Table File"), m_process->Config.custom_midi_table_file);
     }
 
 
@@ -1739,7 +1738,7 @@ void RKRGUI::MiraConfig()
         }
     }
 
-    if (m_process->MIDIway)
+    if (m_process->Config.MIDIway)
     {
         Settings->Mw1->setonly();
     }
@@ -1832,7 +1831,7 @@ void RKRGUI::MiraConfig()
     }
 
 
-    Settings->MTable->value(m_process->custom_midi_table);
+    Settings->MTable->value(m_process->Config.custom_midi_table);
     Settings->MTable->do_callback ();
 
     Settings->AAssign->value(m_process->autoassign);
@@ -2995,7 +2994,7 @@ void RKRGUI::ActACI()
 
     if (value != m_process->last_auxvalue)
     {
-        if (m_process->MIDIway)
+        if (m_process->Config.MIDIway)
         {
             for (int i = 0; i < 20; i++)
             {
@@ -3382,7 +3381,7 @@ void RKRGUI::check_signals(void *usrPtr)
  *  in Settings/Preferences/MIDI/Midi Learn - Really confusing when
  *  it pops up but nothing happens when set. The menu item for Midi Learn
  *  is set inactive unless the box is checked as well. For consistency here,
- *  if (!m_process->MIDIway)
+ *  if (!m_process->Config.MIDIway)
  *      return;
  * 
  * @param num
@@ -3391,7 +3390,7 @@ void RKRGUI::check_signals(void *usrPtr)
 void RKRGUI::getMIDIControl(int num)
 {
     // Don't pop up the midi learn window unless the user checked the box.
-    if (!m_process->MIDIway)
+    if (!m_process->Config.MIDIway)
         return;
 
     int i = 0;
@@ -3905,7 +3904,7 @@ void RKRGUI::Load_Midi_Program_Change_Table()
     filename = fl_filename_setext(filename, ".rmt");
 
     // Check to see if the file is in the User Directory.
-    // This will set the m_process->custom_midi_table_file to the file if found.
+    // This will set the m_process->Config.custom_midi_table_file to the file if found.
     if(!m_process->file_in_midi_table_vector(filename))
     {
         m_process->Handle_Message (42, filename);
@@ -3914,7 +3913,7 @@ void RKRGUI::Load_Midi_Program_Change_Table()
     else
     {
         // Use the Midi_Table_Vector to load it
-        m_process->set_midi_table (m_process->custom_midi_table_file);
+        m_process->set_midi_table (m_process->Config.custom_midi_table_file);
     }
 
     // Put it in the scroll table
@@ -3932,11 +3931,11 @@ void RKRGUI::Save_Midi_Program_Change_Table()
         chooser_start_location = m_process->UDirFilename;
 
         // If we have a previous file, then use it
-        if(m_process->custom_midi_table_file >= 0)
+        if(m_process->Config.custom_midi_table_file >= 0)
         {
-             if(m_process->custom_midi_table_file < (int)m_process->Midi_Table_Vector.size ())
+             if(m_process->Config.custom_midi_table_file < (int)m_process->Midi_Table_Vector.size ())
              {
-                 chooser_start_location = m_process->Midi_Table_Vector[m_process->custom_midi_table_file].Table_File_Name;
+                 chooser_start_location = m_process->Midi_Table_Vector[m_process->Config.custom_midi_table_file].Table_File_Name;
              }
         }
     }
@@ -3959,7 +3958,7 @@ void RKRGUI::Save_Midi_Program_Change_Table()
     m_process->load_MIDI_table_vector();
 
     // Check to see if the file is in the User Directory.
-    // This will set the m_process->custom_midi_table_file to the file if found.
+    // This will set the m_process->Config.custom_midi_table_file to the file if found.
     if(!m_process->file_in_midi_table_vector(filename))
     {
         m_process->Handle_Message (42, filename);

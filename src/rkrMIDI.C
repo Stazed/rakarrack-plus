@@ -802,7 +802,7 @@ RKR::midievents()
     {
         if (midievent->data.control.channel == MIDI_In_Channel)
         {
-            if (!custom_midi_table)
+            if (!Config.custom_midi_table)
             {
                 if ((midievent->data.control.value > 0)
                     && (midievent->data.control.value < 61))
@@ -840,7 +840,7 @@ RKR::midievents()
                 process_midi_controller_events((int) midievent->data.control.param,
                                                (int) midievent->data.control.value);
             }
-            else if (MIDIway)
+            else if (Config.MIDIway)
             {
                 for (i = 0; i < 20; i++)
                 {
@@ -1172,7 +1172,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 
         if (cmdchan == MIDI_In_Channel)
         {
-            if (!custom_midi_table)
+            if (!Config.custom_midi_table)
             {
                 if ((cmdvalue > 0)
                     && (cmdvalue < 61))
@@ -1211,7 +1211,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
             {
                 process_midi_controller_events(cmdcontrol, cmdvalue);
             }
-            else if (MIDIway)
+            else if (Config.MIDIway)
             {
                 for (i = 0; i < 20; i++)
                 {

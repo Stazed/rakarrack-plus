@@ -1951,9 +1951,9 @@ void
 RKR::load_default_midi_table()
 {
     int load_default_midi_table = 1;
-    if(custom_midi_table_file >= 0)
+    if(Config.custom_midi_table_file >= 0)
     {
-        if(set_midi_table(custom_midi_table_file))
+        if(set_midi_table(Config.custom_midi_table_file))
             load_default_midi_table = 0;
     }
     
@@ -2006,7 +2006,7 @@ RKR::file_in_midi_table_vector(std::string filename)
     {
         if(strcmp(filename.c_str(), Midi_Table_Vector[i].Table_File_Name.c_str()) == 0)
         {
-            custom_midi_table_file = i;     // set the current file
+            Config.custom_midi_table_file = i;     // set the current file
             return 1;   // true
         }
     }

@@ -123,7 +123,6 @@ RKR::RKR(int gui) :
     cSample_rate(),
     interpbuf(NULL),
     sw_stat(),
-    MIDIway(),
     swidth(),
     sheight(),
     sschema(),
@@ -153,8 +152,6 @@ RKR::RKR(int gui) :
     Jack_MIDI_IN_Port_Connnection_Status(),
     Jack_MIDI_OUT_Port_Connnection_Status(),
     Jack_Port_Connnection_Changed(),
-    custom_midi_table(),
-    custom_midi_table_file(-1),
     PG_table_modified(0),
     active_bank(0),
     new_bank_loaded(),
@@ -371,17 +368,7 @@ RKR::load_user_preferences()
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
     upsample = Config.upsample;
-
     Adjust_Upsample();
-    
-    // MIDI Learn used On/Off
-    rakarrack.get(PrefNom("MIDI Implementation"), MIDIway, 0);
-    
-    // Custom MIDI Table used On/OFF
-    rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
-    
-    // Custom MIDI Table last used file
-    rakarrack.get(PrefNom("MIDI Table File"), custom_midi_table_file, -1);
 
     char temp[256];
 
