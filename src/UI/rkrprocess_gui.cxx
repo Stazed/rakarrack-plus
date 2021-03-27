@@ -1001,18 +1001,18 @@ void RKRGUI::save_current_state(int whati)
         }
 
         //Tuner
-        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);
+        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);   // FIXME - never get
 
 
         //MIDIConverter
-        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);
+        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);  // FIXME - never get
         rakarrack.set(m_process->PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
         rakarrack.set(m_process->PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
         rakarrack.set(m_process->PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
         rakarrack.set(m_process->PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
 
         //Metronome
-        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);
+        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);  // FIXME - never .get
         rakarrack.set(m_process->PrefNom("Internal Metronome Time"), (int) MetroBar->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
@@ -1024,7 +1024,7 @@ void RKRGUI::save_current_state(int whati)
 
 
         //Tap Tempo
-        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);
+        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);  // FIXME - never .get
         rakarrack.set(m_process->PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
         rakarrack.set(m_process->PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
     }

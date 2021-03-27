@@ -632,7 +632,7 @@ RKR::ConnectMIDI()
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
     rakarrack.get(PrefNom("Auto Connect MIDI IN"), aconnect_MI, 0);
-    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);
+    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);  // FIXME - this is never rakarrack.set
     
     if (aconnect_MI)
         Conecta();
