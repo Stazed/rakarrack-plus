@@ -1099,44 +1099,44 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Harmonizer Downsample"), m_process->Config.Har_Down);
         rakarrack.set(m_process->PrefNom("Harmonizer Up Quality"), m_process->Config.Har_U_Q);
         rakarrack.set(m_process->PrefNom("Harmonizer Down Quality"), m_process->Config.Har_D_Q);
-        rakarrack.set(m_process->PrefNom("Reverbtron Downsample"), m_process->Rev_Down);
-        rakarrack.set(m_process->PrefNom("Reverbtron Up Quality"), m_process->Rev_U_Q);
-        rakarrack.set(m_process->PrefNom("Reverbtron Down Quality"), m_process->Rev_D_Q);
-        rakarrack.set(m_process->PrefNom("Convolotron Downsample"), m_process->Con_Down);
-        rakarrack.set(m_process->PrefNom("Convolotron Up Quality"), m_process->Con_U_Q);
-        rakarrack.set(m_process->PrefNom("Convolotron Down Quality"), m_process->Con_D_Q);
-        rakarrack.set(m_process->PrefNom("Sequence Downsample"), m_process->Seq_Down);
-        rakarrack.set(m_process->PrefNom("Sequence Up Quality"), m_process->Seq_U_Q);
-        rakarrack.set(m_process->PrefNom("Sequence Down Quality"), m_process->Seq_D_Q);
-        rakarrack.set(m_process->PrefNom("Shifter Downsample"), m_process->Shi_Down);
-        rakarrack.set(m_process->PrefNom("Shifter Up Quality"), m_process->Shi_U_Q);
-        rakarrack.set(m_process->PrefNom("Shifter Down Quality"), m_process->Shi_D_Q);
-        rakarrack.set(m_process->PrefNom("Vocoder Downsample"), m_process->Voc_Down);
-        rakarrack.set(m_process->PrefNom("Vocoder Up Quality"), m_process->Voc_U_Q);
-        rakarrack.set(m_process->PrefNom("Vocoder Down Quality"), m_process->Voc_D_Q);
+        rakarrack.set(m_process->PrefNom("Reverbtron Downsample"), m_process->Config.Rev_Down);
+        rakarrack.set(m_process->PrefNom("Reverbtron Up Quality"), m_process->Config.Rev_U_Q);
+        rakarrack.set(m_process->PrefNom("Reverbtron Down Quality"), m_process->Config.Rev_D_Q);
+        rakarrack.set(m_process->PrefNom("Convolotron Downsample"), m_process->Config.Con_Down);
+        rakarrack.set(m_process->PrefNom("Convolotron Up Quality"), m_process->Config.Con_U_Q);
+        rakarrack.set(m_process->PrefNom("Convolotron Down Quality"), m_process->Config.Con_D_Q);
+        rakarrack.set(m_process->PrefNom("Sequence Downsample"), m_process->Config.Seq_Down);
+        rakarrack.set(m_process->PrefNom("Sequence Up Quality"), m_process->Config.Seq_U_Q);
+        rakarrack.set(m_process->PrefNom("Sequence Down Quality"), m_process->Config.Seq_D_Q);
+        rakarrack.set(m_process->PrefNom("Shifter Downsample"), m_process->Config.Shi_Down);
+        rakarrack.set(m_process->PrefNom("Shifter Up Quality"), m_process->Config.Shi_U_Q);
+        rakarrack.set(m_process->PrefNom("Shifter Down Quality"), m_process->Config.Shi_D_Q);
+        rakarrack.set(m_process->PrefNom("Vocoder Downsample"), m_process->Config.Voc_Down);
+        rakarrack.set(m_process->PrefNom("Vocoder Up Quality"), m_process->Config.Voc_U_Q);
+        rakarrack.set(m_process->PrefNom("Vocoder Down Quality"), m_process->Config.Voc_D_Q);
         rakarrack.set(m_process->PrefNom("StereoHarm Downsample"), m_process->Config.Ste_Down);
         rakarrack.set(m_process->PrefNom("StereoHarm Up Quality"), m_process->Config.Ste_U_Q);
         rakarrack.set(m_process->PrefNom("StereoHarm Down Quality"), m_process->Config.Ste_D_Q);
 
-        rakarrack.set(m_process->PrefNom("Distortion Resampling"), m_process->Dist_res_amount);
-        rakarrack.set(m_process->PrefNom("Distortion Up Quality"), m_process->Dist_up_q);
-        rakarrack.set(m_process->PrefNom("Distortion Down Quality"), m_process->Dist_down_q);
+        rakarrack.set(m_process->PrefNom("Distortion Resampling"), m_process->Config.Dist_res_amount);
+        rakarrack.set(m_process->PrefNom("Distortion Up Quality"), m_process->Config.Dist_up_q);
+        rakarrack.set(m_process->PrefNom("Distortion Down Quality"), m_process->Config.Dist_down_q);
 
-        rakarrack.set(m_process->PrefNom("Overdrive Resampling"), m_process->Ovrd_res_amount);
-        rakarrack.set(m_process->PrefNom("Overdrive Up Quality"), m_process->Ovrd_up_q);
-        rakarrack.set(m_process->PrefNom("Overdrive Down Quality"), m_process->Ovrd_down_q);
+        rakarrack.set(m_process->PrefNom("Overdrive Resampling"), m_process->Config.Ovrd_res_amount);
+        rakarrack.set(m_process->PrefNom("Overdrive Up Quality"), m_process->Config.Ovrd_up_q);
+        rakarrack.set(m_process->PrefNom("Overdrive Down Quality"), m_process->Config.Ovrd_down_q);
 
-        rakarrack.set(m_process->PrefNom("Derelict Resampling"), m_process->Dere_res_amount);
-        rakarrack.set(m_process->PrefNom("Derelict Up Quality"), m_process->Dere_up_q);
-        rakarrack.set(m_process->PrefNom("Derelict Down Quality"), m_process->Dere_down_q);
+        rakarrack.set(m_process->PrefNom("Derelict Resampling"), m_process->Config.Dere_res_amount);
+        rakarrack.set(m_process->PrefNom("Derelict Up Quality"), m_process->Config.Dere_up_q);
+        rakarrack.set(m_process->PrefNom("Derelict Down Quality"), m_process->Config.Dere_down_q);
         
-        rakarrack.set(m_process->PrefNom("DistBand Resampling"), m_process->DBand_res_amount);
-        rakarrack.set(m_process->PrefNom("DistBand Up Quality"), m_process->DBand_up_q);
-        rakarrack.set(m_process->PrefNom("DistBand Down Quality"), m_process->DBand_down_q);
+        rakarrack.set(m_process->PrefNom("DistBand Resampling"), m_process->Config.DBand_res_amount);
+        rakarrack.set(m_process->PrefNom("DistBand Up Quality"), m_process->Config.DBand_up_q);
+        rakarrack.set(m_process->PrefNom("DistBand Down Quality"), m_process->Config.DBand_down_q);
 
-        rakarrack.set(m_process->PrefNom("StompBox Resampling"), m_process->Stomp_res_amount);
-        rakarrack.set(m_process->PrefNom("StompBox Up Quality"), m_process->Stomp_up_q);
-        rakarrack.set(m_process->PrefNom("StompBox Down Quality"), m_process->Stomp_down_q);
+        rakarrack.set(m_process->PrefNom("StompBox Resampling"), m_process->Config.Stomp_res_amount);
+        rakarrack.set(m_process->PrefNom("StompBox Up Quality"), m_process->Config.Stomp_up_q);
+        rakarrack.set(m_process->PrefNom("StompBox Down Quality"), m_process->Config.Stomp_down_q);
 
         rakarrack.set(m_process->PrefNom("Calibration"), m_process->Config.aFreq);
         rakarrack.set(m_process->PrefNom("Recognize Trigger"), m_process->Config.rtrig);
@@ -1178,10 +1178,10 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("MIDI IN Channel"), m_process->MIDI_In_Channel + 1);
         rakarrack.set(m_process->PrefNom("MIDI IN Harmonizer"), m_process->Harmonizer_MIDI_Channel + 1);
         rakarrack.set(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->StereoHarm_MIDI_Channel + 1);
-        rakarrack.set(m_process->PrefNom("Harmonizer Quality"), m_process->HarQual);
-        rakarrack.set(m_process->PrefNom("StereoHarm Quality"), m_process->SteQual);
-        rakarrack.set(m_process->PrefNom("Sequence Quality"), m_process->SeqQual);
-        rakarrack.set(m_process->PrefNom("Shifter Quality"), m_process->ShiQual);
+        rakarrack.set(m_process->PrefNom("Harmonizer Quality"), m_process->Config.HarQual);
+        rakarrack.set(m_process->PrefNom("StereoHarm Quality"), m_process->Config.SteQual);
+        rakarrack.set(m_process->PrefNom("Sequence Quality"), m_process->Config.SeqQual);
+        rakarrack.set(m_process->PrefNom("Shifter Quality"), m_process->Config.ShiQual);
         rakarrack.set(m_process->PrefNom("Tap Tempo Timeout"), m_process->t_timeout);
         rakarrack.set(m_process->PrefNom("Disable Warnings"), m_process->Config.Disable_Warnings);
         rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool);
@@ -1765,44 +1765,44 @@ void RKRGUI::MiraConfig()
     Settings->Har_Downsample->value(m_process->Config.Har_Down);
     Settings->Har_Down_Qua->value(m_process->Config.Har_D_Q);
     Settings->Har_Up_Qua->value(m_process->Config.Har_U_Q);
-    Settings->Rev_Downsample->value(m_process->Rev_Down);
-    Settings->Rev_Down_Qua->value(m_process->Rev_D_Q);
-    Settings->Rev_Up_Qua->value(m_process->Rev_U_Q);
-    Settings->Con_Downsample->value(m_process->Con_Down);
-    Settings->Con_Down_Qua->value(m_process->Con_D_Q);
-    Settings->Con_Up_Qua->value(m_process->Con_U_Q);
-    Settings->Seq_Downsample->value(m_process->Seq_Down);
-    Settings->Seq_Down_Qua->value(m_process->Seq_D_Q);
-    Settings->Seq_Up_Qua->value(m_process->Seq_U_Q);
-    Settings->Shi_Downsample->value(m_process->Shi_Down);
-    Settings->Shi_Down_Qua->value(m_process->Shi_D_Q);
-    Settings->Shi_Up_Qua->value(m_process->Shi_U_Q);
-    Settings->Voc_Downsample->value(m_process->Voc_Down);
-    Settings->Voc_Down_Qua->value(m_process->Voc_D_Q);
-    Settings->Voc_Up_Qua->value(m_process->Voc_U_Q);
+    Settings->Rev_Downsample->value(m_process->Config.Rev_Down);
+    Settings->Rev_Down_Qua->value(m_process->Config.Rev_D_Q);
+    Settings->Rev_Up_Qua->value(m_process->Config.Rev_U_Q);
+    Settings->Con_Downsample->value(m_process->Config.Con_Down);
+    Settings->Con_Down_Qua->value(m_process->Config.Con_D_Q);
+    Settings->Con_Up_Qua->value(m_process->Config.Con_U_Q);
+    Settings->Seq_Downsample->value(m_process->Config.Seq_Down);
+    Settings->Seq_Down_Qua->value(m_process->Config.Seq_D_Q);
+    Settings->Seq_Up_Qua->value(m_process->Config.Seq_U_Q);
+    Settings->Shi_Downsample->value(m_process->Config.Shi_Down);
+    Settings->Shi_Down_Qua->value(m_process->Config.Shi_D_Q);
+    Settings->Shi_Up_Qua->value(m_process->Config.Shi_U_Q);
+    Settings->Voc_Downsample->value(m_process->Config.Voc_Down);
+    Settings->Voc_Down_Qua->value(m_process->Config.Voc_D_Q);
+    Settings->Voc_Up_Qua->value(m_process->Config.Voc_U_Q);
     Settings->Ste_Downsample->value(m_process->Config.Ste_Down);
     Settings->Ste_Down_Qua->value(m_process->Config.Ste_D_Q);
     Settings->Ste_Up_Qua->value(m_process->Config.Ste_U_Q);
     
-    Settings->Dist_Amo->value(m_process->Dist_res_amount);
-    Settings->Dist_Up_Qua->value(m_process->Dist_up_q);
-    Settings->Dist_Down_Qua->value(m_process->Dist_down_q);
+    Settings->Dist_Amo->value(m_process->Config.Dist_res_amount);
+    Settings->Dist_Up_Qua->value(m_process->Config.Dist_up_q);
+    Settings->Dist_Down_Qua->value(m_process->Config.Dist_down_q);
     
-    Settings->Ovrd_Amo->value(m_process->Ovrd_res_amount);
-    Settings->Ovrd_Up_Qua->value(m_process->Ovrd_up_q);
-    Settings->Ovrd_Down_Qua->value(m_process->Ovrd_down_q);
+    Settings->Ovrd_Amo->value(m_process->Config.Ovrd_res_amount);
+    Settings->Ovrd_Up_Qua->value(m_process->Config.Ovrd_up_q);
+    Settings->Ovrd_Down_Qua->value(m_process->Config.Ovrd_down_q);
     
-    Settings->Dere_Amo->value(m_process->Dere_res_amount);
-    Settings->Dere_Up_Qua->value(m_process->Dere_up_q);
-    Settings->Dere_Down_Qua->value(m_process->Dere_down_q);
+    Settings->Dere_Amo->value(m_process->Config.Dere_res_amount);
+    Settings->Dere_Up_Qua->value(m_process->Config.Dere_up_q);
+    Settings->Dere_Down_Qua->value(m_process->Config.Dere_down_q);
     
-    Settings->DBand_Amo->value(m_process->DBand_res_amount);
-    Settings->DBand_Up_Qua->value(m_process->DBand_up_q);
-    Settings->DBand_Down_Qua->value(m_process->DBand_down_q);
+    Settings->DBand_Amo->value(m_process->Config.DBand_res_amount);
+    Settings->DBand_Up_Qua->value(m_process->Config.DBand_up_q);
+    Settings->DBand_Down_Qua->value(m_process->Config.DBand_down_q);
     
-    Settings->Stomp_Amo->value(m_process->Stomp_res_amount);
-    Settings->Stomp_Up_Qua->value(m_process->Stomp_up_q);
-    Settings->Stomp_Down_Qua->value(m_process->Stomp_down_q);
+    Settings->Stomp_Amo->value(m_process->Config.Stomp_res_amount);
+    Settings->Stomp_Up_Qua->value(m_process->Config.Stomp_up_q);
+    Settings->Stomp_Down_Qua->value(m_process->Config.Stomp_down_q);
 
     Settings->Calibration->value(m_process->Config.aFreq);
     Settings->RTrigger->value(m_process->HarmRecNote->trigfact);
@@ -1856,7 +1856,7 @@ void RKRGUI::MiraConfig()
     Settings->Har_In_Counter->value(m_process->Harmonizer_MIDI_Channel + 1);
     Settings->Stereo_Har_In_Counter->value(m_process->StereoHarm_MIDI_Channel + 1);
 
-    switch (m_process->HarQual)
+    switch (m_process->Config.HarQual)
     {
         case 4:
             Settings->Har_Qual->value(0);
@@ -1875,7 +1875,7 @@ void RKRGUI::MiraConfig()
             break;
     }
 
-    switch (m_process->SteQual)
+    switch (m_process->Config.SteQual)
     {
         case 4:
             Settings->Ste_Qual->value(0);
@@ -1894,7 +1894,7 @@ void RKRGUI::MiraConfig()
             break;
     }
     
-    switch (m_process->SeqQual)
+    switch (m_process->Config.SeqQual)
     {
         case 4:
             Settings->Seq_Qual->value(0);
@@ -1913,7 +1913,7 @@ void RKRGUI::MiraConfig()
             break;
     }
 
-    switch (m_process->ShiQual)
+    switch (m_process->Config.ShiQual)
     {
         case 4:
             Settings->Shi_Qual->value(0);

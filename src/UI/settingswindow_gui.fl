@@ -634,16 +634,16 @@ switch(m_process->RCOpti_Ring)
 switch(i)
 {
      case 0:
-       m_process->HarQual=4;
+       m_process->Config.HarQual=4;
        break;
      case 1:
-       m_process->HarQual=8;
+       m_process->Config.HarQual=8;
        break;
      case 2:
-       m_process->HarQual=16;	
+       m_process->Config.HarQual=16;	
 	break;
      case 3:
-       m_process->HarQual=32;	
+       m_process->Config.HarQual=32;	
 	break;	
 }
 
@@ -675,16 +675,16 @@ update_harmonizer_quality();}
 switch(i)
 {
      case 0:
-       m_process->SeqQual=4;
+       m_process->Config.SeqQual=4;
        break;
      case 1:
-       m_process->SeqQual=8;
+       m_process->Config.SeqQual=8;
        break;
      case 2:
-       m_process->SeqQual=16;	
+       m_process->Config.SeqQual=16;	
 	break;
      case 3:
-       m_process->SeqQual=32;	
+       m_process->Config.SeqQual=32;	
 	break;	
 }
 
@@ -706,16 +706,16 @@ update_sequence_quality();} open
 switch(i)
 {
      case 0:
-       m_process->SteQual=4;
+       m_process->Config.SteQual=4;
        break;
      case 1:
-       m_process->SteQual=8;
+       m_process->Config.SteQual=8;
        break;
      case 2:
-       m_process->SteQual=16;	
+       m_process->Config.SteQual=16;	
 	break;
      case 3:
-       m_process->SteQual=32;	
+       m_process->Config.SteQual=32;	
 	break;	
 }
 
@@ -732,16 +732,16 @@ update_stereoharm_quality();} open
 switch(i)
 {
      case 0:
-       m_process->ShiQual=4;
+       m_process->Config.ShiQual=4;
        break;
      case 1:
-       m_process->ShiQual=8;
+       m_process->Config.ShiQual=8;
        break;
      case 2:
-       m_process->ShiQual=16;	
+       m_process->Config.ShiQual=16;	
 	break;
      case 3:
-       m_process->ShiQual=32;	
+       m_process->Config.ShiQual=32;	
 	break;	
 }
 
@@ -888,7 +888,7 @@ update_harmonizer_quality();} open
         class RKR_Box
       }
       Fl_Choice Rev_Downsample {
-        callback {m_process->Rev_Down=(int)o->value();
+        callback {m_process->Config.Rev_Down=(int)o->value();
 
 update_revtron_quality();} open
         xywh {205 170 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
@@ -897,7 +897,7 @@ update_revtron_quality();} open
       } {}
       Fl_Choice Rev_Down_Qua {
         label Down
-        callback {m_process->Rev_D_Q=(int)o->value();
+        callback {m_process->Config.Rev_D_Q=(int)o->value();
 
 update_revtron_quality();}
         xywh {315 170 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -907,7 +907,7 @@ update_revtron_quality();}
       } {}
       Fl_Choice Rev_Up_Qua {
         label Up
-        callback {m_process->Rev_U_Q=(int)o->value();
+        callback {m_process->Config.Rev_U_Q=(int)o->value();
 
 update_revtron_quality();} open
         xywh {415 170 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -922,7 +922,7 @@ update_revtron_quality();} open
         class RKR_Box
       }
       Fl_Choice Con_Downsample {
-        callback {m_process->Con_Down=(int)o->value();
+        callback {m_process->Config.Con_Down=(int)o->value();
 
 update_convo_quality();} open
         xywh {205 200 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
@@ -931,7 +931,7 @@ update_convo_quality();} open
       } {}
       Fl_Choice Con_Down_Qua {
         label Down
-        callback {m_process->Con_D_Q=(int)o->value();
+        callback {m_process->Config.Con_D_Q=(int)o->value();
 
 update_convo_quality();} open
         xywh {315 200 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -941,7 +941,7 @@ update_convo_quality();} open
       } {}
       Fl_Choice Con_Up_Qua {
         label Up
-        callback {m_process->Con_U_Q=(int)o->value();
+        callback {m_process->Config.Con_U_Q=(int)o->value();
 
 update_convo_quality();} open
         xywh {415 200 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
@@ -956,7 +956,7 @@ update_convo_quality();} open
         class RKR_Box
       }
       Fl_Choice Seq_Downsample {
-        callback {m_process->Seq_Down=(int)o->value();
+        callback {m_process->Config.Seq_Down=(int)o->value();
 update_sequence_quality();} open
         xywh {205 230 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
@@ -964,7 +964,7 @@ update_sequence_quality();} open
       } {}
       Fl_Choice Seq_Down_Qua {
         label Down
-        callback {m_process->Seq_D_Q=(int)o->value();
+        callback {m_process->Config.Seq_D_Q=(int)o->value();
 update_sequence_quality();} open
         xywh {315 230 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
@@ -973,7 +973,7 @@ update_sequence_quality();} open
       } {}
       Fl_Choice Seq_Up_Qua {
         label Up
-        callback {m_process->Seq_U_Q=(int)o->value();
+        callback {m_process->Config.Seq_U_Q=(int)o->value();
 update_sequence_quality();} open
         xywh {415 230 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
@@ -987,7 +987,7 @@ update_sequence_quality();} open
         class RKR_Box
       }
       Fl_Choice Shi_Downsample {
-        callback {m_process->Shi_Down=(int)o->value();
+        callback {m_process->Config.Shi_Down=(int)o->value();
 update_shifter_quality();} open
         xywh {205 260 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
@@ -995,7 +995,7 @@ update_shifter_quality();} open
       } {}
       Fl_Choice Shi_Down_Qua {
         label Down
-        callback {m_process->Shi_D_Q=(int)o->value();
+        callback {m_process->Config.Shi_D_Q=(int)o->value();
 update_shifter_quality();} open
         xywh {315 260 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
@@ -1004,7 +1004,7 @@ update_shifter_quality();} open
       } {}
       Fl_Choice Shi_Up_Qua {
         label Up
-        callback {m_process->Shi_U_Q=(int)o->value();
+        callback {m_process->Config.Shi_U_Q=(int)o->value();
 update_shifter_quality();} open
         xywh {415 260 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
@@ -1018,7 +1018,7 @@ update_shifter_quality();} open
         class RKR_Box
       }
       Fl_Choice Voc_Downsample {
-        callback {m_process->Voc_Down=(int)o->value();
+        callback {m_process->Config.Voc_Down=(int)o->value();
 update_vocoder_quality();} open
         xywh {205 290 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Har_Downsample);}
@@ -1026,7 +1026,7 @@ update_vocoder_quality();} open
       } {}
       Fl_Choice Voc_Down_Qua {
         label Down
-        callback {m_process->Voc_D_Q=(int)o->value();
+        callback {m_process->Config.Voc_D_Q=(int)o->value();
 update_vocoder_quality();} open
         xywh {315 290 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
@@ -1035,7 +1035,7 @@ update_vocoder_quality();} open
       } {}
       Fl_Choice Voc_Up_Qua {
         label Up
-        callback {m_process->Voc_U_Q=(int)o->value();
+        callback {m_process->Config.Voc_U_Q=(int)o->value();
 update_vocoder_quality();} open
         xywh {415 290 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
@@ -1089,7 +1089,7 @@ update_stereoharm_quality();} open
           class RKR_Box
         }
         Fl_Choice Dist_Amo {
-          callback {m_process->Dist_res_amount=(int)o->value();
+          callback {m_process->Config.Dist_res_amount=(int)o->value();
 update_distortion_quality();}
           xywh {195 400 70 18} down_box BORDER_BOX selection_color 137 labelsize 10 labelcolor 7 textsize 10 textcolor 7
           class RKR_Choice
@@ -1117,7 +1117,7 @@ update_distortion_quality();}
         }
         Fl_Choice Dist_Down_Qua {
           label Down
-          callback {m_process->Dist_down_q=(int)o->value();
+          callback {m_process->Config.Dist_down_q=(int)o->value();
 update_distortion_quality();}
           xywh {305 400 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1126,7 +1126,7 @@ update_distortion_quality();}
         } {}
         Fl_Choice Dist_Up_Qua {
           label Up
-          callback {m_process->Dist_up_q=(int)o->value();
+          callback {m_process->Config.Dist_up_q=(int)o->value();
 update_distortion_quality();}
           xywh {405 400 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1140,7 +1140,7 @@ update_distortion_quality();}
           class RKR_Box
         }
         Fl_Choice Ovrd_Amo {
-          callback {m_process->Ovrd_res_amount=(int)o->value();
+          callback {m_process->Config.Ovrd_res_amount=(int)o->value();
 update_overdrive_quality();}
           xywh {195 425 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
@@ -1148,7 +1148,7 @@ update_overdrive_quality();}
         } {}
         Fl_Choice Ovrd_Down_Qua {
           label Down
-          callback {m_process->Ovrd_down_q=(int)o->value();
+          callback {m_process->Config.Ovrd_down_q=(int)o->value();
 update_overdrive_quality();}
           xywh {305 425 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1157,7 +1157,7 @@ update_overdrive_quality();}
         } {}
         Fl_Choice Ovrd_Up_Qua {
           label Up
-          callback {m_process->Ovrd_up_q=(int)o->value();
+          callback {m_process->Config.Ovrd_up_q=(int)o->value();
 update_overdrive_quality();}
           xywh {405 425 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1171,7 +1171,7 @@ update_overdrive_quality();}
           class RKR_Box
         }
         Fl_Choice Dere_Amo {
-          callback {m_process->Dere_res_amount=(int)o->value();
+          callback {m_process->Config.Dere_res_amount=(int)o->value();
 update_derelict_quality();} open
           xywh {195 450 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
@@ -1179,7 +1179,7 @@ update_derelict_quality();} open
         } {}
         Fl_Choice Dere_Down_Qua {
           label Down
-          callback {m_process->Dere_down_q=(int)o->value();
+          callback {m_process->Config.Dere_down_q=(int)o->value();
 update_derelict_quality();}
           xywh {305 450 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1188,7 +1188,7 @@ update_derelict_quality();}
         } {}
         Fl_Choice Dere_Up_Qua {
           label Up
-          callback {m_process->Dere_up_q=(int)o->value();
+          callback {m_process->Config.Dere_up_q=(int)o->value();
 update_derelict_quality();}
           xywh {405 450 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1202,7 +1202,7 @@ update_derelict_quality();}
           class RKR_Box
         }
         Fl_Choice DBand_Amo {
-          callback {m_process->DBand_res_amount=(int)o->value();
+          callback {m_process->Config.DBand_res_amount=(int)o->value();
 update_distband_quality();}
           xywh {195 475 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
@@ -1210,7 +1210,7 @@ update_distband_quality();}
         } {}
         Fl_Choice DBand_Down_Qua {
           label Down
-          callback {m_process->DBand_down_q=(int)o->value();
+          callback {m_process->Config.DBand_down_q=(int)o->value();
 update_distband_quality();}
           xywh {305 475 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1219,7 +1219,7 @@ update_distband_quality();}
         } {}
         Fl_Choice DBand_Up_Qua {
           label Up
-          callback {m_process->DBand_up_q=(int)o->value();
+          callback {m_process->Config.DBand_up_q=(int)o->value();
 update_distband_quality();}
           xywh {405 475 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1233,7 +1233,7 @@ update_distband_quality();}
           class RKR_Box
         }
         Fl_Choice Stomp_Amo {
-          callback {m_process->Stomp_res_amount=(int)o->value();
+          callback {m_process->Config.Stomp_res_amount=(int)o->value();
 update_stompbox_quality();}
           xywh {195 500 70 18} down_box BORDER_BOX labelsize 10 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Dist_Amo);}
@@ -1241,7 +1241,7 @@ update_stompbox_quality();}
         } {}
         Fl_Choice Stomp_Down_Qua {
           label Down
-          callback {m_process->Stomp_down_q=(int)o->value();
+          callback {m_process->Config.Stomp_down_q=(int)o->value();
 update_stompbox_quality();}
           xywh {305 500 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1250,7 +1250,7 @@ update_stompbox_quality();}
         } {}
         Fl_Choice Stomp_Up_Qua {
           label Up
-          callback {m_process->Stomp_up_q=(int)o->value();
+          callback {m_process->Config.Stomp_up_q=(int)o->value();
 update_stompbox_quality();}
           xywh {405 500 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
           code0 {o->menu(menu_Upr_Qual);}
@@ -1735,7 +1735,7 @@ std::string filename(Efx_Convolotron->Filename);
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_CONVOLOTRON];
-m_process->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_process->Con_Down, m_process->Con_U_Q, m_process->Con_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_process->Config.Con_Down, m_process->Config.Con_U_Q, m_process->Config.Con_D_Q, m_process->fSample_rate, m_process->period_master);
 Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
 
 /* Wait for things to complete */
@@ -1776,7 +1776,7 @@ std::string filename(Efx_Reverbtron->Filename);
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_REVERBTRON];
-m_process->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_process->Rev_Down, m_process->Rev_U_Q, m_process->Rev_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_process->Config.Rev_Down, m_process->Config.Rev_U_Q, m_process->Config.Rev_D_Q, m_process->fSample_rate, m_process->period_master);
 Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
 
 /* Wait for things to complete */
@@ -1818,7 +1818,7 @@ std::vector<int> save_state = Efx_Harmonizer->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_HARMONIZER];
-m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Config.Har_Down, m_process->Config.Har_U_Q, m_process->Config.Har_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->Config.HarQual, m_process->Config.Har_Down, m_process->Config.Har_U_Q, m_process->Config.Har_D_Q, m_process->fSample_rate, m_process->period_master);
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
@@ -1861,7 +1861,7 @@ std::vector<int> save_state = Efx_StereoHarm->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_STEREOHARM];
-m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Config.Ste_Down, m_process->Config.Ste_U_Q, m_process->Config.Ste_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->Config.SteQual, m_process->Config.Ste_Down, m_process->Config.Ste_U_Q, m_process->Config.Ste_D_Q, m_process->fSample_rate, m_process->period_master);
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
 
@@ -1904,7 +1904,7 @@ std::vector<int> save_state = Efx_Sequence->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_SEQUENCE];
-m_process->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_process->SeqQual, m_process->Seq_Down, m_process->Seq_U_Q, m_process->Seq_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_process->Config.SeqQual, m_process->Config.Seq_Down, m_process->Config.Seq_U_Q, m_process->Config.Seq_D_Q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -1936,7 +1936,7 @@ std::vector<int> save_state = Efx_Shifter->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_SHIFTER];
-m_process->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_process->ShiQual, m_process->Shi_Down, m_process->Shi_U_Q, m_process->Shi_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_process->Config.ShiQual, m_process->Config.Shi_Down, m_process->Config.Shi_U_Q, m_process->Config.Shi_D_Q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -1968,7 +1968,7 @@ std::vector<int> save_state = Efx_Vocoder->save_parameters();
 
 /* Delete and re-create the efx with new downsample settings */
 delete m_process->Rack_Effects[EFX_VOCODER];
-m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->Config.VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->Config.VocBands, m_process->Config.Voc_Down, m_process->Config.Voc_U_Q, m_process->Config.Voc_D_Q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -1998,7 +1998,7 @@ m_process->EFX_Active[EFX_VOCODER] = hold_bypass;} {}
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_DISTORTION];
-  m_process->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_process->Dist_res_amount, m_process->Dist_up_q, m_process->Dist_down_q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_process->Config.Dist_res_amount, m_process->Config.Dist_up_q, m_process->Config.Dist_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -2025,7 +2025,7 @@ std::vector<int> save_state = Efx_Overdrive->save_parameters();
 
 /* Delete and re-create the efx with new resample settings */
 delete m_process->Rack_Effects[EFX_OVERDRIVE];
-m_process->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_process->Ovrd_res_amount, m_process->Ovrd_up_q, m_process->Ovrd_down_q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_process->Config.Ovrd_res_amount, m_process->Config.Ovrd_up_q, m_process->Config.Ovrd_down_q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -2053,7 +2053,7 @@ std::vector<int> save_state = Efx_Derelict->save_parameters();
 
 /* Delete and re-create the efx with new resample settings */
 delete m_process->Rack_Effects[EFX_DERELICT];
-m_process->Rack_Effects[EFX_DERELICT] = new Derelict(m_process->Dere_res_amount, m_process->Dere_up_q, m_process->Dere_down_q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_DERELICT] = new Derelict(m_process->Config.Dere_res_amount, m_process->Config.Dere_up_q, m_process->Config.Dere_down_q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -2082,7 +2082,7 @@ std::vector<int> save_state = Efx_DistBand->save_parameters();
 
 /* Delete and re-create the efx with new resample settings */
 delete m_process->Rack_Effects[EFX_DISTBAND];
-m_process->Rack_Effects[EFX_DISTBAND] = new DistBand(m_process->DBand_res_amount, m_process->DBand_up_q, m_process->DBand_down_q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_DISTBAND] = new DistBand(m_process->Config.DBand_res_amount, m_process->Config.DBand_up_q, m_process->Config.DBand_down_q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);
@@ -2111,7 +2111,7 @@ std::vector<int> save_state = Efx_StompBox->save_parameters();
 
 /* Delete and re-create the efx with new resample settings */
 delete m_process->Rack_Effects[EFX_STOMPBOX];
-m_process->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_process->Stomp_res_amount, m_process->Stomp_up_q, m_process->Stomp_down_q, m_process->fSample_rate, m_process->period_master);
+m_process->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_process->Config.Stomp_res_amount, m_process->Config.Stomp_up_q, m_process->Config.Stomp_down_q, m_process->fSample_rate, m_process->period_master);
 
 /* Wait for things to complete */
 usleep(C_MILLISECONDS_50);

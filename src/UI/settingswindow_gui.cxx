@@ -445,16 +445,16 @@ void SettingsWindowGui::cb_Har_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_process->HarQual=4;
+       m_process->Config.HarQual=4;
        break;
      case 1:
-       m_process->HarQual=8;
+       m_process->Config.HarQual=8;
        break;
      case 2:
-       m_process->HarQual=16;	
+       m_process->Config.HarQual=16;	
 	break;
      case 3:
-       m_process->HarQual=32;	
+       m_process->Config.HarQual=32;	
 	break;	
 }
 
@@ -478,16 +478,16 @@ void SettingsWindowGui::cb_Seq_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_process->SeqQual=4;
+       m_process->Config.SeqQual=4;
        break;
      case 1:
-       m_process->SeqQual=8;
+       m_process->Config.SeqQual=8;
        break;
      case 2:
-       m_process->SeqQual=16;	
+       m_process->Config.SeqQual=16;	
 	break;
      case 3:
-       m_process->SeqQual=32;	
+       m_process->Config.SeqQual=32;	
 	break;	
 }
 
@@ -503,16 +503,16 @@ void SettingsWindowGui::cb_Ste_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_process->SteQual=4;
+       m_process->Config.SteQual=4;
        break;
      case 1:
-       m_process->SteQual=8;
+       m_process->Config.SteQual=8;
        break;
      case 2:
-       m_process->SteQual=16;	
+       m_process->Config.SteQual=16;	
 	break;
      case 3:
-       m_process->SteQual=32;	
+       m_process->Config.SteQual=32;	
 	break;	
 }
 
@@ -528,16 +528,16 @@ void SettingsWindowGui::cb_Shi_Qual_i(RKR_Choice* o, void*) {
 switch(i)
 {
      case 0:
-       m_process->ShiQual=4;
+       m_process->Config.ShiQual=4;
        break;
      case 1:
-       m_process->ShiQual=8;
+       m_process->Config.ShiQual=8;
        break;
      case 2:
-       m_process->ShiQual=16;	
+       m_process->Config.ShiQual=16;	
 	break;
      case 3:
-       m_process->ShiQual=32;	
+       m_process->Config.ShiQual=32;	
 	break;	
 }
 
@@ -629,7 +629,7 @@ void SettingsWindowGui::cb_Har_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Rev_Downsample_i(RKR_Choice* o, void*) {
-  m_process->Rev_Down=(int)o->value();
+  m_process->Config.Rev_Down=(int)o->value();
 
 update_revtron_quality();
 }
@@ -638,7 +638,7 @@ void SettingsWindowGui::cb_Rev_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Rev_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Rev_D_Q=(int)o->value();
+  m_process->Config.Rev_D_Q=(int)o->value();
 
 update_revtron_quality();
 }
@@ -647,7 +647,7 @@ void SettingsWindowGui::cb_Rev_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Rev_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Rev_U_Q=(int)o->value();
+  m_process->Config.Rev_U_Q=(int)o->value();
 
 update_revtron_quality();
 }
@@ -656,7 +656,7 @@ void SettingsWindowGui::cb_Rev_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Con_Downsample_i(RKR_Choice* o, void*) {
-  m_process->Con_Down=(int)o->value();
+  m_process->Config.Con_Down=(int)o->value();
 
 update_convo_quality();
 }
@@ -665,7 +665,7 @@ void SettingsWindowGui::cb_Con_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Con_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Con_D_Q=(int)o->value();
+  m_process->Config.Con_D_Q=(int)o->value();
 
 update_convo_quality();
 }
@@ -674,7 +674,7 @@ void SettingsWindowGui::cb_Con_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Con_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Con_U_Q=(int)o->value();
+  m_process->Config.Con_U_Q=(int)o->value();
 
 update_convo_quality();
 }
@@ -683,7 +683,7 @@ void SettingsWindowGui::cb_Con_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Seq_Downsample_i(RKR_Choice* o, void*) {
-  m_process->Seq_Down=(int)o->value();
+  m_process->Config.Seq_Down=(int)o->value();
 update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Downsample(RKR_Choice* o, void* v) {
@@ -691,7 +691,7 @@ void SettingsWindowGui::cb_Seq_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Seq_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Seq_D_Q=(int)o->value();
+  m_process->Config.Seq_D_Q=(int)o->value();
 update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Down_Qua(RKR_Choice* o, void* v) {
@@ -699,7 +699,7 @@ void SettingsWindowGui::cb_Seq_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Seq_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Seq_U_Q=(int)o->value();
+  m_process->Config.Seq_U_Q=(int)o->value();
 update_sequence_quality();
 }
 void SettingsWindowGui::cb_Seq_Up_Qua(RKR_Choice* o, void* v) {
@@ -707,7 +707,7 @@ void SettingsWindowGui::cb_Seq_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Shi_Downsample_i(RKR_Choice* o, void*) {
-  m_process->Shi_Down=(int)o->value();
+  m_process->Config.Shi_Down=(int)o->value();
 update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Downsample(RKR_Choice* o, void* v) {
@@ -715,7 +715,7 @@ void SettingsWindowGui::cb_Shi_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Shi_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Shi_D_Q=(int)o->value();
+  m_process->Config.Shi_D_Q=(int)o->value();
 update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Down_Qua(RKR_Choice* o, void* v) {
@@ -723,7 +723,7 @@ void SettingsWindowGui::cb_Shi_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Shi_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Shi_U_Q=(int)o->value();
+  m_process->Config.Shi_U_Q=(int)o->value();
 update_shifter_quality();
 }
 void SettingsWindowGui::cb_Shi_Up_Qua(RKR_Choice* o, void* v) {
@@ -731,7 +731,7 @@ void SettingsWindowGui::cb_Shi_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Voc_Downsample_i(RKR_Choice* o, void*) {
-  m_process->Voc_Down=(int)o->value();
+  m_process->Config.Voc_Down=(int)o->value();
 update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Downsample(RKR_Choice* o, void* v) {
@@ -739,7 +739,7 @@ void SettingsWindowGui::cb_Voc_Downsample(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Voc_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Voc_D_Q=(int)o->value();
+  m_process->Config.Voc_D_Q=(int)o->value();
 update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Down_Qua(RKR_Choice* o, void* v) {
@@ -747,7 +747,7 @@ void SettingsWindowGui::cb_Voc_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Voc_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Voc_U_Q=(int)o->value();
+  m_process->Config.Voc_U_Q=(int)o->value();
 update_vocoder_quality();
 }
 void SettingsWindowGui::cb_Voc_Up_Qua(RKR_Choice* o, void* v) {
@@ -782,7 +782,7 @@ void SettingsWindowGui::cb_Ste_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dist_Amo_i(RKR_Choice* o, void*) {
-  m_process->Dist_res_amount=(int)o->value();
+  m_process->Config.Dist_res_amount=(int)o->value();
 update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Amo(RKR_Choice* o, void* v) {
@@ -799,7 +799,7 @@ Fl_Menu_Item SettingsWindowGui::menu_Dist_Amo[] = {
 };
 
 void SettingsWindowGui::cb_Dist_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Dist_down_q=(int)o->value();
+  m_process->Config.Dist_down_q=(int)o->value();
 update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
@@ -807,7 +807,7 @@ void SettingsWindowGui::cb_Dist_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dist_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Dist_up_q=(int)o->value();
+  m_process->Config.Dist_up_q=(int)o->value();
 update_distortion_quality();
 }
 void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
@@ -815,7 +815,7 @@ void SettingsWindowGui::cb_Dist_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Amo_i(RKR_Choice* o, void*) {
-  m_process->Ovrd_res_amount=(int)o->value();
+  m_process->Config.Ovrd_res_amount=(int)o->value();
 update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
@@ -823,7 +823,7 @@ void SettingsWindowGui::cb_Ovrd_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Ovrd_down_q=(int)o->value();
+  m_process->Config.Ovrd_down_q=(int)o->value();
 update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
@@ -831,7 +831,7 @@ void SettingsWindowGui::cb_Ovrd_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Ovrd_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Ovrd_up_q=(int)o->value();
+  m_process->Config.Ovrd_up_q=(int)o->value();
 update_overdrive_quality();
 }
 void SettingsWindowGui::cb_Ovrd_Up_Qua(RKR_Choice* o, void* v) {
@@ -839,7 +839,7 @@ void SettingsWindowGui::cb_Ovrd_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Amo_i(RKR_Choice* o, void*) {
-  m_process->Dere_res_amount=(int)o->value();
+  m_process->Config.Dere_res_amount=(int)o->value();
 update_derelict_quality();
 }
 void SettingsWindowGui::cb_Dere_Amo(RKR_Choice* o, void* v) {
@@ -847,7 +847,7 @@ void SettingsWindowGui::cb_Dere_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Dere_down_q=(int)o->value();
+  m_process->Config.Dere_down_q=(int)o->value();
 update_derelict_quality();
 }
 void SettingsWindowGui::cb_Dere_Down_Qua(RKR_Choice* o, void* v) {
@@ -855,7 +855,7 @@ void SettingsWindowGui::cb_Dere_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Dere_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Dere_up_q=(int)o->value();
+  m_process->Config.Dere_up_q=(int)o->value();
 update_derelict_quality();
 }
 void SettingsWindowGui::cb_Dere_Up_Qua(RKR_Choice* o, void* v) {
@@ -863,7 +863,7 @@ void SettingsWindowGui::cb_Dere_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_DBand_Amo_i(RKR_Choice* o, void*) {
-  m_process->DBand_res_amount=(int)o->value();
+  m_process->Config.DBand_res_amount=(int)o->value();
 update_distband_quality();
 }
 void SettingsWindowGui::cb_DBand_Amo(RKR_Choice* o, void* v) {
@@ -871,7 +871,7 @@ void SettingsWindowGui::cb_DBand_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_DBand_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->DBand_down_q=(int)o->value();
+  m_process->Config.DBand_down_q=(int)o->value();
 update_distband_quality();
 }
 void SettingsWindowGui::cb_DBand_Down_Qua(RKR_Choice* o, void* v) {
@@ -879,7 +879,7 @@ void SettingsWindowGui::cb_DBand_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_DBand_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->DBand_up_q=(int)o->value();
+  m_process->Config.DBand_up_q=(int)o->value();
 update_distband_quality();
 }
 void SettingsWindowGui::cb_DBand_Up_Qua(RKR_Choice* o, void* v) {
@@ -887,7 +887,7 @@ void SettingsWindowGui::cb_DBand_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Amo_i(RKR_Choice* o, void*) {
-  m_process->Stomp_res_amount=(int)o->value();
+  m_process->Config.Stomp_res_amount=(int)o->value();
 update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
@@ -895,7 +895,7 @@ void SettingsWindowGui::cb_Stomp_Amo(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Down_Qua_i(RKR_Choice* o, void*) {
-  m_process->Stomp_down_q=(int)o->value();
+  m_process->Config.Stomp_down_q=(int)o->value();
 update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
@@ -903,7 +903,7 @@ void SettingsWindowGui::cb_Stomp_Down_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Stomp_Up_Qua_i(RKR_Choice* o, void*) {
-  m_process->Stomp_up_q=(int)o->value();
+  m_process->Config.Stomp_up_q=(int)o->value();
 update_stompbox_quality();
 }
 void SettingsWindowGui::cb_Stomp_Up_Qua(RKR_Choice* o, void* v) {
@@ -3270,7 +3270,7 @@ void SettingsWindowGui::update_convo_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_CONVOLOTRON];
-  m_process->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_process->Con_Down, m_process->Con_U_Q, m_process->Con_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(m_process->Config.Con_Down, m_process->Config.Con_U_Q, m_process->Config.Con_D_Q, m_process->fSample_rate, m_process->period_master);
   Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
   
   /* Wait for things to complete */
@@ -3311,7 +3311,7 @@ void SettingsWindowGui::update_revtron_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_REVERBTRON];
-  m_process->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_process->Rev_Down, m_process->Rev_U_Q, m_process->Rev_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_REVERBTRON] = new Reverbtron(m_process->Config.Rev_Down, m_process->Config.Rev_U_Q, m_process->Config.Rev_D_Q, m_process->fSample_rate, m_process->period_master);
   Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
   
   /* Wait for things to complete */
@@ -3353,7 +3353,7 @@ void SettingsWindowGui::update_harmonizer_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_HARMONIZER];
-  m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->HarQual, m_process->Config.Har_Down, m_process->Config.Har_U_Q, m_process->Config.Har_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) m_process->Config.HarQual, m_process->Config.Har_Down, m_process->Config.Har_U_Q, m_process->Config.Har_D_Q, m_process->fSample_rate, m_process->period_master);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
@@ -3396,7 +3396,7 @@ void SettingsWindowGui::update_stereoharm_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_STEREOHARM];
-  m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->SteQual, m_process->Config.Ste_Down, m_process->Config.Ste_U_Q, m_process->Config.Ste_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) m_process->Config.SteQual, m_process->Config.Ste_Down, m_process->Config.Ste_U_Q, m_process->Config.Ste_D_Q, m_process->fSample_rate, m_process->period_master);
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
   
@@ -3439,7 +3439,7 @@ void SettingsWindowGui::update_sequence_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_SEQUENCE];
-  m_process->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_process->SeqQual, m_process->Seq_Down, m_process->Seq_U_Q, m_process->Seq_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_SEQUENCE] = new Sequence((long) m_process->Config.SeqQual, m_process->Config.Seq_Down, m_process->Config.Seq_U_Q, m_process->Config.Seq_D_Q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3471,7 +3471,7 @@ void SettingsWindowGui::update_shifter_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_SHIFTER];
-  m_process->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_process->ShiQual, m_process->Shi_Down, m_process->Shi_U_Q, m_process->Shi_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_SHIFTER] = new Shifter((long) m_process->Config.ShiQual, m_process->Config.Shi_Down, m_process->Config.Shi_U_Q, m_process->Config.Shi_D_Q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3503,7 +3503,7 @@ void SettingsWindowGui::update_vocoder_quality() {
   
   /* Delete and re-create the efx with new downsample settings */
   delete m_process->Rack_Effects[EFX_VOCODER];
-  m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->Config.VocBands, m_process->Voc_Down, m_process->Voc_U_Q, m_process->Voc_D_Q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_VOCODER] = new Vocoder(m_process->auxresampled, m_process->Config.VocBands, m_process->Config.Voc_Down, m_process->Config.Voc_U_Q, m_process->Config.Voc_D_Q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3533,7 +3533,7 @@ void SettingsWindowGui::update_distortion_quality() {
     
     /* Delete and re-create the efx with new resample settings */
     delete m_process->Rack_Effects[EFX_DISTORTION];
-    m_process->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_process->Dist_res_amount, m_process->Dist_up_q, m_process->Dist_down_q, m_process->fSample_rate, m_process->period_master);
+    m_process->Rack_Effects[EFX_DISTORTION] = new Distorsion(m_process->Config.Dist_res_amount, m_process->Config.Dist_up_q, m_process->Config.Dist_down_q, m_process->fSample_rate, m_process->period_master);
     
     /* Wait for things to complete */
     usleep(C_MILLISECONDS_50);
@@ -3560,7 +3560,7 @@ void SettingsWindowGui::update_overdrive_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_OVERDRIVE];
-  m_process->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_process->Ovrd_res_amount, m_process->Ovrd_up_q, m_process->Ovrd_down_q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_OVERDRIVE] = new Overdrive(m_process->Config.Ovrd_res_amount, m_process->Config.Ovrd_up_q, m_process->Config.Ovrd_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3588,7 +3588,7 @@ void SettingsWindowGui::update_derelict_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_DERELICT];
-  m_process->Rack_Effects[EFX_DERELICT] = new Derelict(m_process->Dere_res_amount, m_process->Dere_up_q, m_process->Dere_down_q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_DERELICT] = new Derelict(m_process->Config.Dere_res_amount, m_process->Config.Dere_up_q, m_process->Config.Dere_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3617,7 +3617,7 @@ void SettingsWindowGui::update_distband_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_DISTBAND];
-  m_process->Rack_Effects[EFX_DISTBAND] = new DistBand(m_process->DBand_res_amount, m_process->DBand_up_q, m_process->DBand_down_q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_DISTBAND] = new DistBand(m_process->Config.DBand_res_amount, m_process->Config.DBand_up_q, m_process->Config.DBand_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);
@@ -3646,7 +3646,7 @@ void SettingsWindowGui::update_stompbox_quality() {
   
   /* Delete and re-create the efx with new resample settings */
   delete m_process->Rack_Effects[EFX_STOMPBOX];
-  m_process->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_process->Stomp_res_amount, m_process->Stomp_up_q, m_process->Stomp_down_q, m_process->fSample_rate, m_process->period_master);
+  m_process->Rack_Effects[EFX_STOMPBOX] = new StompBox(m_process->Config.Stomp_res_amount, m_process->Config.Stomp_up_q, m_process->Config.Stomp_down_q, m_process->fSample_rate, m_process->period_master);
   
   /* Wait for things to complete */
   usleep(C_MILLISECONDS_50);

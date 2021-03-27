@@ -107,21 +107,6 @@ RKR::RKR(int gui) :
     quality_update(false),
     Effect_Type_Filter(Type_All),
     Alert_Count(0),
-    Rev_Down(),
-    Rev_U_Q(),
-    Rev_D_Q(),
-    Con_Down(),
-    Con_U_Q(),
-    Con_D_Q(),
-    Shi_Down(),
-    Shi_U_Q(),
-    Shi_D_Q(),
-    Seq_Down(),
-    Seq_U_Q(),
-    Seq_D_Q(),
-    Voc_Down(),
-    Voc_U_Q(),
-    Voc_D_Q(),
     upsample(),
     Metro_Vol(),
     M_Metro_Sound(),
@@ -141,21 +126,6 @@ RKR::RKR(int gui) :
     fSample_rate(),
     cSample_rate(),
     interpbuf(NULL),
-    Dist_res_amount(),
-    Dist_up_q(),
-    Dist_down_q(),
-    Ovrd_res_amount(),
-    Ovrd_up_q(),
-    Ovrd_down_q(),
-    Dere_res_amount(),
-    Dere_up_q(),
-    Dere_down_q(),
-    DBand_res_amount(),
-    DBand_up_q(),
-    DBand_down_q(),
-    Stomp_res_amount(),
-    Stomp_up_q(),
-    Stomp_down_q(),
     sw_stat(),
     MIDIway(),
     swidth(),
@@ -170,10 +140,6 @@ RKR::RKR(int gui) :
     have_signal(),
     OnCounter(),
     t_periods(),
-    HarQual(),
-    SteQual(),
-    SeqQual(),
-    ShiQual(),
     tempocnt(0),
     Tap_Display(0),
     Tap_Selection(0),
@@ -415,52 +381,6 @@ RKR::load_user_preferences()
 
     Adjust_Upsample();
 
-    rakarrack.get(PrefNom("Reverbtron Downsample"), Rev_Down, 5);
-    rakarrack.get(PrefNom("Reverbtron Up Quality"), Rev_U_Q, 4);
-    rakarrack.get(PrefNom("Reverbtron Down Quality"), Rev_D_Q, 2);
-
-    rakarrack.get(PrefNom("Convolotron Downsample"), Con_Down, 6);
-    rakarrack.get(PrefNom("Convolotron Up Quality"), Con_U_Q, 4);
-    rakarrack.get(PrefNom("Convolotron Down Quality"), Con_D_Q, 2);
-
-    rakarrack.get(PrefNom("Sequence Downsample"), Seq_Down, 5);
-    rakarrack.get(PrefNom("Sequence Up Quality"), Seq_U_Q, 4);
-    rakarrack.get(PrefNom("Sequence Down Quality"), Seq_D_Q, 2);
-
-    rakarrack.get(PrefNom("Shifter Downsample"), Shi_Down, 5);
-    rakarrack.get(PrefNom("Shifter Up Quality"), Shi_U_Q, 4);
-    rakarrack.get(PrefNom("Shifter Down Quality"), Shi_D_Q, 2);
-
-    rakarrack.get(PrefNom("Vocoder Downsample"), Voc_Down, 5);
-    rakarrack.get(PrefNom("Vocoder Up Quality"), Voc_U_Q, 4);
-    rakarrack.get(PrefNom("Vocoder Down Quality"), Voc_D_Q, 2);
-
-    rakarrack.get(PrefNom("Distortion Resampling"), Dist_res_amount, 2);
-    rakarrack.get(PrefNom("Distortion Up Quality"), Dist_up_q, 4);
-    rakarrack.get(PrefNom("Distortion Down Quality"), Dist_down_q, 2);
-
-    rakarrack.get(PrefNom("Overdrive Resampling"), Ovrd_res_amount, 2);
-    rakarrack.get(PrefNom("Overdrive Up Quality"), Ovrd_up_q, 4);
-    rakarrack.get(PrefNom("Overdrive Down Quality"), Ovrd_down_q, 2);
-
-    rakarrack.get(PrefNom("Derelict Resampling"), Dere_res_amount, 2);
-    rakarrack.get(PrefNom("Derelict Up Quality"), Dere_up_q, 4);
-    rakarrack.get(PrefNom("Derelict Down Quality"), Dere_down_q, 2);
-
-    rakarrack.get(PrefNom("DistBand Resampling"), DBand_res_amount, 2);
-    rakarrack.get(PrefNom("DistBand Up Quality"), DBand_up_q, 4);
-    rakarrack.get(PrefNom("DistBand Down Quality"), DBand_down_q, 2);
-
-    rakarrack.get(PrefNom("StompBox Resampling"), Stomp_res_amount, 2);
-    rakarrack.get(PrefNom("StompBox Up Quality"), Stomp_up_q, 4);
-    rakarrack.get(PrefNom("StompBox Down Quality"), Stomp_down_q, 2);
-
-    rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
-    rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);
-    
-    rakarrack.get(PrefNom("Sequence Quality"), SeqQual, 4);
-    rakarrack.get(PrefNom("Shifter Quality"), ShiQual, 4);
-
     rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);
     
     // Default on new installs - don't connect input - can cause feedback loop = 0
@@ -549,8 +469,8 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_ECHO] = new Echo(fSample_rate, period_master);
     Rack_Effects[EFX_PHASER] = new Phaser(fSample_rate, period_master);
     Rack_Effects[EFX_ANALOG_PHASER] = new Analog_Phaser(fSample_rate, period_master);
-    Rack_Effects[EFX_DISTORTION] = new Distorsion(Dist_res_amount, Dist_up_q, Dist_down_q, fSample_rate, period_master);
-    Rack_Effects[EFX_OVERDRIVE] = new Overdrive(Ovrd_res_amount, Ovrd_up_q, Ovrd_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_DISTORTION] = new Distorsion(Config.Dist_res_amount, Config.Dist_up_q, Config.Dist_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_OVERDRIVE] = new Overdrive(Config.Ovrd_res_amount, Config.Ovrd_up_q, Config.Ovrd_down_q, fSample_rate, period_master);
     Rack_Effects[EFX_PARAMETRIC] = new ParametricEQ(fSample_rate, period_master);
     Rack_Effects[EFX_EQ] = new EQ( fSample_rate, period_master);
     Rack_Effects[EFX_COMPRESSOR] = new Compressor(fSample_rate, period_master);
@@ -558,34 +478,34 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_ALIENWAH] = new Alienwah(fSample_rate, period_master);
     Rack_Effects[EFX_CABINET] = new Cabinet(fSample_rate, period_master);
     Rack_Effects[EFX_PAN] = new Pan(fSample_rate, period_master);
-    Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) HarQual, Config.Har_Down, Config.Har_U_Q, Config.Har_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_HARMONIZER] = new Harmonizer((long) Config.HarQual, Config.Har_Down, Config.Har_U_Q, Config.Har_D_Q, fSample_rate, period_master);
     Rack_Effects[EFX_MUSICAL_DELAY] = new MusicDelay(fSample_rate, period_master);
     Rack_Effects[EFX_NOISEGATE] = new Gate(fSample_rate, period_master);
-    Rack_Effects[EFX_DERELICT] = new Derelict(Dere_res_amount, Dere_up_q, Dere_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_DERELICT] = new Derelict(Config.Dere_res_amount, Config.Dere_up_q, Config.Dere_down_q, fSample_rate, period_master);
     Rack_Effects[EFX_VALVE] = new Valve(fSample_rate, period_master);
     Rack_Effects[EFX_DUAL_FLANGE] = new Dflange(fSample_rate, period_master);
     Rack_Effects[EFX_RING] = new Ring(fSample_rate, period_master);
     Rack_Effects[EFX_EXCITER] = new Exciter(fSample_rate, period_master);
-    Rack_Effects[EFX_DISTBAND] = new DistBand(DBand_res_amount, DBand_up_q, DBand_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_DISTBAND] = new DistBand(Config.DBand_res_amount, Config.DBand_up_q, Config.DBand_down_q, fSample_rate, period_master);
     Rack_Effects[EFX_ARPIE] = new Arpie(fSample_rate, period_master);
     Rack_Effects[EFX_EXPANDER] = new Expander(fSample_rate, period_master);
     Rack_Effects[EFX_SHUFFLE] = new Shuffle(fSample_rate, period_master);
     Rack_Effects[EFX_SYNTHFILTER] = new Synthfilter(fSample_rate, period_master);
     Rack_Effects[EFX_VARYBAND] = new VaryBand(fSample_rate, period_master);
-    Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(Con_Down, Con_U_Q, Con_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_CONVOLOTRON] = new Convolotron(Config.Con_Down, Config.Con_U_Q, Config.Con_D_Q, fSample_rate, period_master);
     Rack_Effects[EFX_LOOPER] = new Looper(Config.looper_size, fSample_rate, period_master);
     Rack_Effects[EFX_MUTROMOJO] = new MuTroMojo(fSample_rate, period_master);
     Rack_Effects[EFX_ECHOVERSE] = new Echoverse(fSample_rate, period_master);
     Rack_Effects[EFX_COILCRAFTER] = new CoilCrafter(fSample_rate, period_master);
     Rack_Effects[EFX_SHELFBOOST] = new ShelfBoost(fSample_rate, period_master);
-    Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, Config.VocBands, Voc_Down, Voc_U_Q, Voc_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_VOCODER] = new Vocoder(auxresampled, Config.VocBands, Config.Voc_Down, Config.Voc_U_Q, Config.Voc_D_Q, fSample_rate, period_master);
     Rack_Effects[EFX_SUSTAINER] = new Sustainer(fSample_rate, period_master);
-    Rack_Effects[EFX_SEQUENCE] = new Sequence((long) SeqQual, Seq_Down, Seq_U_Q, Seq_D_Q, fSample_rate, period_master);
-    Rack_Effects[EFX_SHIFTER] = new Shifter((long) ShiQual, Shi_Down, Shi_U_Q, Shi_D_Q, fSample_rate, period_master);
-    Rack_Effects[EFX_STOMPBOX] = new StompBox(Stomp_res_amount, Stomp_up_q, Stomp_down_q, fSample_rate, period_master);
-    Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Rev_Down, Rev_U_Q, Rev_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_SEQUENCE] = new Sequence((long) Config.SeqQual, Config.Seq_Down, Config.Seq_U_Q, Config.Seq_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_SHIFTER] = new Shifter((long) Config.ShiQual, Config.Shi_Down, Config.Shi_U_Q, Config.Shi_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_STOMPBOX] = new StompBox(Config.Stomp_res_amount, Config.Stomp_up_q, Config.Stomp_down_q, fSample_rate, period_master);
+    Rack_Effects[EFX_REVERBTRON] = new Reverbtron(Config.Rev_Down, Config.Rev_U_Q, Config.Rev_D_Q, fSample_rate, period_master);
     Rack_Effects[EFX_ECHOTRON] = new Echotron(fSample_rate, period_master);
-    Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) SteQual, Config.Ste_Down, Config.Ste_U_Q, Config.Ste_D_Q, fSample_rate, period_master);
+    Rack_Effects[EFX_STEREOHARM] = new StereoHarm((long) Config.SteQual, Config.Ste_Down, Config.Ste_U_Q, Config.Ste_D_Q, fSample_rate, period_master);
     Rack_Effects[EFX_COMPBAND] = new CompBand(fSample_rate, period_master);
     Rack_Effects[EFX_OPTICALTREM] = new Opticaltrem(fSample_rate, period_master);
     Rack_Effects[EFX_VIBE] = new Vibe(fSample_rate, period_master);

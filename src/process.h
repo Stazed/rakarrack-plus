@@ -957,31 +957,8 @@ public:
      */
     int Alert_Count;
 
-    /* Quality resampling */
-
-    int Rev_Down;
-    int Rev_U_Q;
-    int Rev_D_Q;
-
-    int Con_Down;
-    int Con_U_Q;
-    int Con_D_Q;
-
-    int Shi_Down;
-    int Shi_U_Q;
-    int Shi_D_Q;
-
-    int Seq_Down;
-    int Seq_U_Q;
-    int Seq_D_Q;
-
-    int Voc_Down;
-    int Voc_U_Q;
-    int Voc_D_Q;
-
     /* Master resampling */
     int upsample;
-    /* End Quality resampling */
 
     int Metro_Vol;
     int M_Metro_Sound;
@@ -1008,28 +985,6 @@ public:
      */
     float *interpbuf;
 
-    /* WaveShape Resampling */
-    int Dist_res_amount;
-    int Dist_up_q;
-    int Dist_down_q;
-    
-    int Ovrd_res_amount;
-    int Ovrd_up_q;
-    int Ovrd_down_q;
-
-    int Dere_res_amount;
-    int Dere_up_q;
-    int Dere_down_q;
-
-    int DBand_res_amount;
-    int DBand_up_q;
-    int DBand_down_q;
-
-    int Stomp_res_amount;
-    int Stomp_up_q;
-    int Stomp_down_q;
-    /* End WaveShape */
-
     int sw_stat;
     int MIDIway;
     int swidth;
@@ -1045,13 +1000,6 @@ public:
     int have_signal;
     int OnCounter;
     int t_periods;
-
-    // Harmonizer
-    int HarQual;
-    int SteQual;
-    int SeqQual;
-    int ShiQual;
-    
 
     // Tap Tempo
     int tempocnt;
