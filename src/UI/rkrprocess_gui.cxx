@@ -700,32 +700,22 @@ void RKRGUI::load_previous_state()
     Settings->resize(m_process->Config.Settings_X, m_process->Config.Settings_Y,
                      m_process->Config.Settings_W, m_process->Config.Settings_H);
 
-
     PutBackground();
 
-    rakarrack.get(m_process->PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
-    
-    // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
-    // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
-    rakarrack.get(m_process->PrefNom("Font"), font_type, 0);
-
-    rakarrack.get(m_process->PrefNom("Background Color"), back_color, 56);              // FL_BLACK
-    rakarrack.get(m_process->PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3
-    rakarrack.get(m_process->PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
-    rakarrack.get(m_process->PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
-    rakarrack.get(m_process->PrefNom("Schema"), k, 2);
-    Settings->scheme_ch->value(k);
+    Settings->scheme_ch->value(m_process->Config.Schema);
     Settings->scheme_ch->do_callback();
+
+    back_color_change((Fl_Color)m_process->Config.back_color);
+    buttons_color_change((Fl_Color)m_process->Config.fore_color);
+    leds_color_change((Fl_Color)m_process->Config.leds_color);
+    label_color_change((Fl_Color)m_process->Config.label_color);
+    font_size_change(m_process->Config.font_size);
+    font_type_change(m_process->Config.font_type);
+
+
+
     rakarrack.get(m_process->PrefNom("Hide Effects"), m_process->deachide, 0);
     rakarrack.get(m_process->PrefNom("Scale Window"), m_process->scalable, 0);
-
-
-    back_color_change((Fl_Color)back_color);
-    buttons_color_change((Fl_Color)fore_color);
-    leds_color_change((Fl_Color)leds_color);
-    label_color_change((Fl_Color)label_color);
-    font_size_change(font_size);
-    font_type_change(font_type);
 
     rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->active_bank, 3);
 
