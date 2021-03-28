@@ -623,18 +623,13 @@ RKR::MIDI_control()
 }
 
 /**
- *  Get MIDI connection information from user preferences.
+ *  Alsa MIDI connection.
  *  If auto connect is requested, then make the connections.
  */
 void
 RKR::ConnectMIDI()
 {
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-
-    rakarrack.get(PrefNom("Auto Connect MIDI IN"), aconnect_MI, 0);
-    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);  // FIXME - this is never rakarrack.set
-    
-    if (aconnect_MI)
+    if (Config.aconnect_MI)
         Conecta();
 }
 
@@ -1013,7 +1008,7 @@ RKR::Conecta()
                     Pyoin = puerto;
                 }
                 
-                if (strstr(temp, MID) != 0)
+                if (strstr(temp, Config.MID) != 0)
                 {
                     Ccin = client;
                     Pcin = puerto;
@@ -1031,7 +1026,7 @@ RKR::conectaaconnect()
 {
     char tempi[128];
 
-    if (MID != NULL)
+    if (Config.MID != NULL)
     {
         memset(tempi, 0, sizeof (tempi));
         sprintf(tempi, "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
@@ -1050,7 +1045,7 @@ RKR::disconectaaconnect()
 {
     char tempi[128];
 
-    if (MID != NULL)
+    if (Config.MID != NULL)
     {
         memset(tempi, 0, sizeof (tempi));
         sprintf(tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);

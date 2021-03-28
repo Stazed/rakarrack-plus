@@ -911,9 +911,9 @@ void SettingsWindowGui::cb_Stomp_Up_Qua(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_D_A_Connect_i(RKR_Check_Button* o, void*) {
-  m_process->aconnect_MI=(int) o->value();
+  m_process->Config.aconnect_MI=(int) o->value();
 
-if (m_process->aconnect_MI) BMidiIn->activate();
+if (m_process->Config.aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();
 }
 void SettingsWindowGui::cb_D_A_Connect(RKR_Check_Button* o, void* v) {
@@ -924,7 +924,7 @@ void SettingsWindowGui::cb_BMidiIn_i(RKR_Browser* o, void*) {
   int valor;
 valor = (int) o->value();
 if(o->text(valor) != NULL)
-strcpy(m_process->MID,o->text(valor));
+strcpy(m_process->Config.MID,o->text(valor));
 else return;
 o->select(valor,1);
 m_process->Conecta();

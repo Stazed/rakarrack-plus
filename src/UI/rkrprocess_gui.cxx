@@ -1075,7 +1075,7 @@ void RKRGUI::save_current_state(int whati)
 
         rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->Config.EnableBackgroundImage);
         rakarrack.set(m_process->PrefNom("Background Image"), m_process->Config.BackgroundImage);
-        rakarrack.set(m_process->PrefNom("Auto Connect MIDI IN"), m_process->aconnect_MI);
+        rakarrack.set(m_process->PrefNom("Auto Connect MIDI IN"), m_process->Config.aconnect_MI);
         rakarrack.set(m_process->PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
         rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
 
@@ -1616,7 +1616,7 @@ void RKRGUI::MiraConfig()
         int i = 1;
         while (Settings->BMidiIn->text(i) != NULL)
         {
-            if (strcmp(Settings->BMidiIn->text(i), m_process->MID) == 0)
+            if (strcmp(Settings->BMidiIn->text(i), m_process->Config.MID) == 0)
             {
                 Settings->BMidiIn->select(i, 1);
             }
@@ -1765,7 +1765,7 @@ void RKRGUI::MiraConfig()
 
     Settings->Upr_Amo->value(m_process->Config.UpAmo);
     Settings->L_SIZE->value(m_process->Config.looper_size);
-    Settings->D_A_Connect->value(m_process->aconnect_MI);
+    Settings->D_A_Connect->value(m_process->Config.aconnect_MI);
     Settings->D_J_Connect->value(m_process->Config.aconnect_JA);
     Settings->D_IJ_Connect->value(m_process->Config.aconnect_JIA);
 
@@ -1850,7 +1850,7 @@ void RKRGUI::MiraConfig()
     }
 
 
-    if (m_process->aconnect_MI)
+    if (m_process->Config.aconnect_MI)
     {
         Settings->BMidiIn->activate();
     }

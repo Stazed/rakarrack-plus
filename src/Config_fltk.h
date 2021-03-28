@@ -279,6 +279,10 @@ public:
             name() {}
     } jack_po[16],jack_poi[16];
     
+    // Alsa MIDI
+    int aconnect_MI;
+    char MID[128];
+    
     char *PrefNom (const char *dato);
 };
 

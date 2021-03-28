@@ -881,7 +881,6 @@ public:
     int bank_modified;
 
     int comemouse;
-    int aconnect_MI;
 
     int IsCoIn;
     int Cyoin;
@@ -1104,8 +1103,6 @@ public:
      * fltk file browser previous item.
      */
     std::string Bank_Saved;
-
-    char MID[128];
 
     /**
      * The bank filename from the -b command line option.

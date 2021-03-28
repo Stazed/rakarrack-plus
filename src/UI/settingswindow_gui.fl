@@ -1268,9 +1268,9 @@ update_stompbox_quality();}
       }
       Fl_Check_Button D_A_Connect {
         label {Auto Connect MIDI In}
-        callback {m_process->aconnect_MI=(int) o->value();
+        callback {m_process->Config.aconnect_MI=(int) o->value();
 
-if (m_process->aconnect_MI) BMidiIn->activate();
+if (m_process->Config.aconnect_MI) BMidiIn->activate();
 else BMidiIn->deactivate();}
         xywh {30 38 153 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
@@ -1281,7 +1281,7 @@ else BMidiIn->deactivate();}
         callback {int valor;
 valor = (int) o->value();
 if(o->text(valor) != NULL)
-strcpy(m_process->MID,o->text(valor));
+strcpy(m_process->Config.MID,o->text(valor));
 else return;
 o->select(valor,1);
 m_process->Conecta();}

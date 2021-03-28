@@ -187,6 +187,10 @@ Config_fltk::load_user_preferences()
         
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
     }
+    
+    // Alsa MIDI
+    rakarrack.get(PrefNom("Auto Connect MIDI IN"), aconnect_MI, 0);
+    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);
 
     // Get user default bank file from Settings/Bank/ --Bank Filename
     memset(temp, 0, sizeof (temp));
