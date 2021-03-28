@@ -255,14 +255,6 @@ RKR::Handle_Message(int num, std::string filename)
 
 }
 
-char *
-RKR::PrefNom(const char *dato)
-{
-    memset(tmpprefname, 0, sizeof (tmpprefname));
-    sprintf(tmpprefname, "%s %s", jackcliname, dato);
-    return (tmpprefname);
-}
-
 /**
  *  Checks CPU usage
  * 

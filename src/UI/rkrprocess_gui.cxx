@@ -887,95 +887,95 @@ void RKRGUI::save_current_state(int whati)
 
     if (whati == 0)
     {
-        rakarrack.set(m_process->PrefNom("Principal X"), Principal->x());
-        rakarrack.set(m_process->PrefNom("Principal Y"), Principal->y());
-        rakarrack.set(m_process->PrefNom("Principal W"), Principal->w());
-        rakarrack.set(m_process->PrefNom("Principal H"), Principal->h());
-        rakarrack.set(m_process->PrefNom("FontSize"), global_font_size);
-        rakarrack.set(m_process->PrefNom("Font"), global_font_type);
+        rakarrack.set(m_process->Config.PrefNom("Principal X"), Principal->x());
+        rakarrack.set(m_process->Config.PrefNom("Principal Y"), Principal->y());
+        rakarrack.set(m_process->Config.PrefNom("Principal W"), Principal->w());
+        rakarrack.set(m_process->Config.PrefNom("Principal H"), Principal->h());
+        rakarrack.set(m_process->Config.PrefNom("FontSize"), global_font_size);
+        rakarrack.set(m_process->Config.PrefNom("Font"), global_font_type);
 
-        rakarrack.set(m_process->PrefNom("Background Color"), (int) global_back_color);
-        rakarrack.set(m_process->PrefNom("Foreground Color"), (int) global_fore_color);
-        rakarrack.set(m_process->PrefNom("Leds Color"), (int) global_leds_color);
-        rakarrack.set(m_process->PrefNom("Labels Color"), (int) global_label_color);
-        rakarrack.set(m_process->PrefNom("Schema"), (int) Settings->scheme_ch->value());
-        rakarrack.set(m_process->PrefNom("Hide Effects"), (int) m_process->Config.deachide);
-        rakarrack.set(m_process->PrefNom("Scale Window"), (int) m_process->Config.scalable);
+        rakarrack.set(m_process->Config.PrefNom("Background Color"), (int) global_back_color);
+        rakarrack.set(m_process->Config.PrefNom("Foreground Color"), (int) global_fore_color);
+        rakarrack.set(m_process->Config.PrefNom("Leds Color"), (int) global_leds_color);
+        rakarrack.set(m_process->Config.PrefNom("Labels Color"), (int) global_label_color);
+        rakarrack.set(m_process->Config.PrefNom("Schema"), (int) Settings->scheme_ch->value());
+        rakarrack.set(m_process->Config.PrefNom("Hide Effects"), (int) m_process->Config.deachide);
+        rakarrack.set(m_process->Config.PrefNom("Scale Window"), (int) m_process->Config.scalable);
 
-        rakarrack.set(m_process->PrefNom("Bank Selected"), m_process->active_bank);
+        rakarrack.set(m_process->Config.PrefNom("Bank Selected"), m_process->active_bank);
 
         if ((Preset_Counter->value() > 0) && (Preset_Counter->value() < 61))
-            rakarrack.set(m_process->PrefNom("Preset Num"), (int) Preset_Counter->value());
+            rakarrack.set(m_process->Config.PrefNom("Preset Num"), (int) Preset_Counter->value());
 
         if (m_process->help_displayed)
         {
-            rakarrack.set(m_process->PrefNom("Help X"), visor->x());
-            rakarrack.set(m_process->PrefNom("Help Y"), visor->y());
-            rakarrack.set(m_process->PrefNom("Help W"), visor->w());
-            rakarrack.set(m_process->PrefNom("Help H"), visor->h());
-            rakarrack.set(m_process->PrefNom("Help TextSize"), visor->textsize());
+            rakarrack.set(m_process->Config.PrefNom("Help X"), visor->x());
+            rakarrack.set(m_process->Config.PrefNom("Help Y"), visor->y());
+            rakarrack.set(m_process->Config.PrefNom("Help W"), visor->w());
+            rakarrack.set(m_process->Config.PrefNom("Help H"), visor->h());
+            rakarrack.set(m_process->Config.PrefNom("Help TextSize"), visor->textsize());
         }
 
         //Tuner
-        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);
+        rakarrack.set(m_process->Config.PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);
 
 
         //MIDIConverter
-        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);
-        rakarrack.set(m_process->PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
-        rakarrack.set(m_process->PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
-        rakarrack.set(m_process->PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
-        rakarrack.set(m_process->PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
+        rakarrack.set(m_process->Config.PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);
+        rakarrack.set(m_process->Config.PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
+        rakarrack.set(m_process->Config.PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
+        rakarrack.set(m_process->Config.PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
+        rakarrack.set(m_process->Config.PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
 
         //Metronome
-        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);
-        rakarrack.set(m_process->PrefNom("Internal Metronome Time"), (int) MetroBar->value());
-        rakarrack.set(m_process->PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
-        rakarrack.set(m_process->PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
-        rakarrack.set(m_process->PrefNom("Internal Metronome Show"), (int) m_process->Config.sw_stat);
-        rakarrack.set(m_process->PrefNom("Internal Metronome Sound"), (int) MetroSound->value());
+        rakarrack.set(m_process->Config.PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);
+        rakarrack.set(m_process->Config.PrefNom("Internal Metronome Time"), (int) MetroBar->value());
+        rakarrack.set(m_process->Config.PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
+        rakarrack.set(m_process->Config.PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
+        rakarrack.set(m_process->Config.PrefNom("Internal Metronome Show"), (int) m_process->Config.sw_stat);
+        rakarrack.set(m_process->Config.PrefNom("Internal Metronome Sound"), (int) MetroSound->value());
 
         //Booster
-        rakarrack.set(m_process->PrefNom("Booster"), m_process->booster);
+        rakarrack.set(m_process->Config.PrefNom("Booster"), m_process->booster);
 
 
         //Tap Tempo
-        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);
-        rakarrack.set(m_process->PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
-        rakarrack.set(m_process->PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
+        rakarrack.set(m_process->Config.PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);
+        rakarrack.set(m_process->Config.PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
+        rakarrack.set(m_process->Config.PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
     }
 
 
     if (whati == 1)
     {
-        rakarrack.set(m_process->PrefNom("BankWindow X"), BankWindow->x());
-        rakarrack.set(m_process->PrefNom("BankWindow Y"), BankWindow->y());
-        rakarrack.set(m_process->PrefNom("BankWindow W"), BankWindow->w());
-        rakarrack.set(m_process->PrefNom("BankWindow H"), BankWindow->h());
+        rakarrack.set(m_process->Config.PrefNom("BankWindow X"), BankWindow->x());
+        rakarrack.set(m_process->Config.PrefNom("BankWindow Y"), BankWindow->y());
+        rakarrack.set(m_process->Config.PrefNom("BankWindow W"), BankWindow->w());
+        rakarrack.set(m_process->Config.PrefNom("BankWindow H"), BankWindow->h());
     }
 
     if (whati == 5)
     {
-        rakarrack.set(m_process->PrefNom("MIDI Learn X"), MIDILearn->x());
-        rakarrack.set(m_process->PrefNom("MIDI Learn Y"), MIDILearn->y());
-        rakarrack.set(m_process->PrefNom("MIDI Learn W"), MIDILearn->w());
-        rakarrack.set(m_process->PrefNom("MIDI Learn H"), MIDILearn->h());
+        rakarrack.set(m_process->Config.PrefNom("MIDI Learn X"), MIDILearn->x());
+        rakarrack.set(m_process->Config.PrefNom("MIDI Learn Y"), MIDILearn->y());
+        rakarrack.set(m_process->Config.PrefNom("MIDI Learn W"), MIDILearn->w());
+        rakarrack.set(m_process->Config.PrefNom("MIDI Learn H"), MIDILearn->h());
     }
 
 
     if (whati == 6)
     {
-        rakarrack.set(m_process->PrefNom("Trigger X"), Trigger->x());
-        rakarrack.set(m_process->PrefNom("Trigger Y"), Trigger->y());
-        rakarrack.set(m_process->PrefNom("Trigger W"), Trigger->w());
-        rakarrack.set(m_process->PrefNom("Trigger H"), Trigger->h());
+        rakarrack.set(m_process->Config.PrefNom("Trigger X"), Trigger->x());
+        rakarrack.set(m_process->Config.PrefNom("Trigger Y"), Trigger->y());
+        rakarrack.set(m_process->Config.PrefNom("Trigger W"), Trigger->w());
+        rakarrack.set(m_process->Config.PrefNom("Trigger H"), Trigger->h());
 
-        rakarrack.set(m_process->PrefNom("Aux Source"), m_process->Aux_Source);
-        rakarrack.set(m_process->PrefNom("Aux Gain"), m_process->Aux_Gain);
-        rakarrack.set(m_process->PrefNom("Aux Threshold"), m_process->Aux_Threshold);
-        rakarrack.set(m_process->PrefNom("Aux MIDI"), m_process->Aux_MIDI);
-        rakarrack.set(m_process->PrefNom("Aux Minimum"), m_process->Aux_Minimum);
-        rakarrack.set(m_process->PrefNom("Aux Maximum"), m_process->Aux_Maximum);
+        rakarrack.set(m_process->Config.PrefNom("Aux Source"), m_process->Aux_Source);
+        rakarrack.set(m_process->Config.PrefNom("Aux Gain"), m_process->Aux_Gain);
+        rakarrack.set(m_process->Config.PrefNom("Aux Threshold"), m_process->Aux_Threshold);
+        rakarrack.set(m_process->Config.PrefNom("Aux MIDI"), m_process->Aux_MIDI);
+        rakarrack.set(m_process->Config.PrefNom("Aux Minimum"), m_process->Aux_Minimum);
+        rakarrack.set(m_process->Config.PrefNom("Aux Maximum"), m_process->Aux_Maximum);
     }
 
 
@@ -983,104 +983,104 @@ void RKRGUI::save_current_state(int whati)
 
     if (whati == 2)
     {
-        rakarrack.set(m_process->PrefNom("Order X"), Order->x());
-        rakarrack.set(m_process->PrefNom("Order Y"), Order->y());
-        rakarrack.set(m_process->PrefNom("Order W"), Order->w());
-        rakarrack.set(m_process->PrefNom("Order H"), Order->h());
+        rakarrack.set(m_process->Config.PrefNom("Order X"), Order->x());
+        rakarrack.set(m_process->Config.PrefNom("Order Y"), Order->y());
+        rakarrack.set(m_process->Config.PrefNom("Order W"), Order->w());
+        rakarrack.set(m_process->Config.PrefNom("Order H"), Order->h());
     }
 
     if (whati == 3)
     {
-        rakarrack.set(m_process->PrefNom("Settings X"), Settings->x());
-        rakarrack.set(m_process->PrefNom("Settings Y"), Settings->y());
-        rakarrack.set(m_process->PrefNom("Settings W"), Settings->w());
-        rakarrack.set(m_process->PrefNom("Settings H"), Settings->h());
+        rakarrack.set(m_process->Config.PrefNom("Settings X"), Settings->x());
+        rakarrack.set(m_process->Config.PrefNom("Settings Y"), Settings->y());
+        rakarrack.set(m_process->Config.PrefNom("Settings W"), Settings->w());
+        rakarrack.set(m_process->Config.PrefNom("Settings H"), Settings->h());
     }
 
     if ((whati == 3) || (whati == 0))
     {
-        rakarrack.set(m_process->PrefNom("UserName"), m_process->Config.UserRealName);
-        rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->Config.preserve_master);
-        rakarrack.set(m_process->PrefNom("Metronome Volume"), m_process->Config.Metro_Vol);
+        rakarrack.set(m_process->Config.PrefNom("UserName"), m_process->Config.UserRealName);
+        rakarrack.set(m_process->Config.PrefNom("Preserve Gain/Master"), m_process->Config.preserve_master);
+        rakarrack.set(m_process->Config.PrefNom("Metronome Volume"), m_process->Config.Metro_Vol);
 
-        rakarrack.set(m_process->PrefNom("Filter DC Offset"), m_process->Config.DC_Offset);
+        rakarrack.set(m_process->Config.PrefNom("Filter DC Offset"), m_process->Config.DC_Offset);
 
-        rakarrack.set(m_process->PrefNom("Update Tap"), m_process->Config.Tap_Updated);
-        rakarrack.set(m_process->PrefNom("Limiter Position"), m_process->flpos);
-        rakarrack.set(m_process->PrefNom("Limiter +6dB"), m_process->db6booster);
+        rakarrack.set(m_process->Config.PrefNom("Update Tap"), m_process->Config.Tap_Updated);
+        rakarrack.set(m_process->Config.PrefNom("Limiter Position"), m_process->flpos);
+        rakarrack.set(m_process->Config.PrefNom("Limiter +6dB"), m_process->db6booster);
 
-        rakarrack.set(m_process->PrefNom("Recognize Optimization Harmonizer"), m_process->Config.RCOpti_Harm);
-        rakarrack.set(m_process->PrefNom("Recognize Optimization Stereo Harm"), m_process->Config.RCOpti_Stereo);
-        rakarrack.set(m_process->PrefNom("Recognize Optimization Ring"), m_process->Config.RCOpti_Ring);
+        rakarrack.set(m_process->Config.PrefNom("Recognize Optimization Harmonizer"), m_process->Config.RCOpti_Harm);
+        rakarrack.set(m_process->Config.PrefNom("Recognize Optimization Stereo Harm"), m_process->Config.RCOpti_Stereo);
+        rakarrack.set(m_process->Config.PrefNom("Recognize Optimization Ring"), m_process->Config.RCOpti_Ring);
 
-        rakarrack.set(m_process->PrefNom("Harmonizer Downsample"), m_process->Config.Har_Down);
-        rakarrack.set(m_process->PrefNom("Harmonizer Up Quality"), m_process->Config.Har_U_Q);
-        rakarrack.set(m_process->PrefNom("Harmonizer Down Quality"), m_process->Config.Har_D_Q);
-        rakarrack.set(m_process->PrefNom("Reverbtron Downsample"), m_process->Config.Rev_Down);
-        rakarrack.set(m_process->PrefNom("Reverbtron Up Quality"), m_process->Config.Rev_U_Q);
-        rakarrack.set(m_process->PrefNom("Reverbtron Down Quality"), m_process->Config.Rev_D_Q);
-        rakarrack.set(m_process->PrefNom("Convolotron Downsample"), m_process->Config.Con_Down);
-        rakarrack.set(m_process->PrefNom("Convolotron Up Quality"), m_process->Config.Con_U_Q);
-        rakarrack.set(m_process->PrefNom("Convolotron Down Quality"), m_process->Config.Con_D_Q);
-        rakarrack.set(m_process->PrefNom("Sequence Downsample"), m_process->Config.Seq_Down);
-        rakarrack.set(m_process->PrefNom("Sequence Up Quality"), m_process->Config.Seq_U_Q);
-        rakarrack.set(m_process->PrefNom("Sequence Down Quality"), m_process->Config.Seq_D_Q);
-        rakarrack.set(m_process->PrefNom("Shifter Downsample"), m_process->Config.Shi_Down);
-        rakarrack.set(m_process->PrefNom("Shifter Up Quality"), m_process->Config.Shi_U_Q);
-        rakarrack.set(m_process->PrefNom("Shifter Down Quality"), m_process->Config.Shi_D_Q);
-        rakarrack.set(m_process->PrefNom("Vocoder Downsample"), m_process->Config.Voc_Down);
-        rakarrack.set(m_process->PrefNom("Vocoder Up Quality"), m_process->Config.Voc_U_Q);
-        rakarrack.set(m_process->PrefNom("Vocoder Down Quality"), m_process->Config.Voc_D_Q);
-        rakarrack.set(m_process->PrefNom("StereoHarm Downsample"), m_process->Config.Ste_Down);
-        rakarrack.set(m_process->PrefNom("StereoHarm Up Quality"), m_process->Config.Ste_U_Q);
-        rakarrack.set(m_process->PrefNom("StereoHarm Down Quality"), m_process->Config.Ste_D_Q);
+        rakarrack.set(m_process->Config.PrefNom("Harmonizer Downsample"), m_process->Config.Har_Down);
+        rakarrack.set(m_process->Config.PrefNom("Harmonizer Up Quality"), m_process->Config.Har_U_Q);
+        rakarrack.set(m_process->Config.PrefNom("Harmonizer Down Quality"), m_process->Config.Har_D_Q);
+        rakarrack.set(m_process->Config.PrefNom("Reverbtron Downsample"), m_process->Config.Rev_Down);
+        rakarrack.set(m_process->Config.PrefNom("Reverbtron Up Quality"), m_process->Config.Rev_U_Q);
+        rakarrack.set(m_process->Config.PrefNom("Reverbtron Down Quality"), m_process->Config.Rev_D_Q);
+        rakarrack.set(m_process->Config.PrefNom("Convolotron Downsample"), m_process->Config.Con_Down);
+        rakarrack.set(m_process->Config.PrefNom("Convolotron Up Quality"), m_process->Config.Con_U_Q);
+        rakarrack.set(m_process->Config.PrefNom("Convolotron Down Quality"), m_process->Config.Con_D_Q);
+        rakarrack.set(m_process->Config.PrefNom("Sequence Downsample"), m_process->Config.Seq_Down);
+        rakarrack.set(m_process->Config.PrefNom("Sequence Up Quality"), m_process->Config.Seq_U_Q);
+        rakarrack.set(m_process->Config.PrefNom("Sequence Down Quality"), m_process->Config.Seq_D_Q);
+        rakarrack.set(m_process->Config.PrefNom("Shifter Downsample"), m_process->Config.Shi_Down);
+        rakarrack.set(m_process->Config.PrefNom("Shifter Up Quality"), m_process->Config.Shi_U_Q);
+        rakarrack.set(m_process->Config.PrefNom("Shifter Down Quality"), m_process->Config.Shi_D_Q);
+        rakarrack.set(m_process->Config.PrefNom("Vocoder Downsample"), m_process->Config.Voc_Down);
+        rakarrack.set(m_process->Config.PrefNom("Vocoder Up Quality"), m_process->Config.Voc_U_Q);
+        rakarrack.set(m_process->Config.PrefNom("Vocoder Down Quality"), m_process->Config.Voc_D_Q);
+        rakarrack.set(m_process->Config.PrefNom("StereoHarm Downsample"), m_process->Config.Ste_Down);
+        rakarrack.set(m_process->Config.PrefNom("StereoHarm Up Quality"), m_process->Config.Ste_U_Q);
+        rakarrack.set(m_process->Config.PrefNom("StereoHarm Down Quality"), m_process->Config.Ste_D_Q);
 
-        rakarrack.set(m_process->PrefNom("Distortion Resampling"), m_process->Config.Dist_res_amount);
-        rakarrack.set(m_process->PrefNom("Distortion Up Quality"), m_process->Config.Dist_up_q);
-        rakarrack.set(m_process->PrefNom("Distortion Down Quality"), m_process->Config.Dist_down_q);
+        rakarrack.set(m_process->Config.PrefNom("Distortion Resampling"), m_process->Config.Dist_res_amount);
+        rakarrack.set(m_process->Config.PrefNom("Distortion Up Quality"), m_process->Config.Dist_up_q);
+        rakarrack.set(m_process->Config.PrefNom("Distortion Down Quality"), m_process->Config.Dist_down_q);
 
-        rakarrack.set(m_process->PrefNom("Overdrive Resampling"), m_process->Config.Ovrd_res_amount);
-        rakarrack.set(m_process->PrefNom("Overdrive Up Quality"), m_process->Config.Ovrd_up_q);
-        rakarrack.set(m_process->PrefNom("Overdrive Down Quality"), m_process->Config.Ovrd_down_q);
+        rakarrack.set(m_process->Config.PrefNom("Overdrive Resampling"), m_process->Config.Ovrd_res_amount);
+        rakarrack.set(m_process->Config.PrefNom("Overdrive Up Quality"), m_process->Config.Ovrd_up_q);
+        rakarrack.set(m_process->Config.PrefNom("Overdrive Down Quality"), m_process->Config.Ovrd_down_q);
 
-        rakarrack.set(m_process->PrefNom("Derelict Resampling"), m_process->Config.Dere_res_amount);
-        rakarrack.set(m_process->PrefNom("Derelict Up Quality"), m_process->Config.Dere_up_q);
-        rakarrack.set(m_process->PrefNom("Derelict Down Quality"), m_process->Config.Dere_down_q);
+        rakarrack.set(m_process->Config.PrefNom("Derelict Resampling"), m_process->Config.Dere_res_amount);
+        rakarrack.set(m_process->Config.PrefNom("Derelict Up Quality"), m_process->Config.Dere_up_q);
+        rakarrack.set(m_process->Config.PrefNom("Derelict Down Quality"), m_process->Config.Dere_down_q);
         
-        rakarrack.set(m_process->PrefNom("DistBand Resampling"), m_process->Config.DBand_res_amount);
-        rakarrack.set(m_process->PrefNom("DistBand Up Quality"), m_process->Config.DBand_up_q);
-        rakarrack.set(m_process->PrefNom("DistBand Down Quality"), m_process->Config.DBand_down_q);
+        rakarrack.set(m_process->Config.PrefNom("DistBand Resampling"), m_process->Config.DBand_res_amount);
+        rakarrack.set(m_process->Config.PrefNom("DistBand Up Quality"), m_process->Config.DBand_up_q);
+        rakarrack.set(m_process->Config.PrefNom("DistBand Down Quality"), m_process->Config.DBand_down_q);
 
-        rakarrack.set(m_process->PrefNom("StompBox Resampling"), m_process->Config.Stomp_res_amount);
-        rakarrack.set(m_process->PrefNom("StompBox Up Quality"), m_process->Config.Stomp_up_q);
-        rakarrack.set(m_process->PrefNom("StompBox Down Quality"), m_process->Config.Stomp_down_q);
+        rakarrack.set(m_process->Config.PrefNom("StompBox Resampling"), m_process->Config.Stomp_res_amount);
+        rakarrack.set(m_process->Config.PrefNom("StompBox Up Quality"), m_process->Config.Stomp_up_q);
+        rakarrack.set(m_process->Config.PrefNom("StompBox Down Quality"), m_process->Config.Stomp_down_q);
 
-        rakarrack.set(m_process->PrefNom("Calibration"), m_process->Config.aFreq);
-        rakarrack.set(m_process->PrefNom("Recognize Trigger"), m_process->Config.rtrig);
+        rakarrack.set(m_process->Config.PrefNom("Calibration"), m_process->Config.aFreq);
+        rakarrack.set(m_process->Config.PrefNom("Recognize Trigger"), m_process->Config.rtrig);
 
-        rakarrack.set(m_process->PrefNom("Vocoder Bands"), m_process->Config.VocBands);
+        rakarrack.set(m_process->Config.PrefNom("Vocoder Bands"), m_process->Config.VocBands);
 
-        rakarrack.set(m_process->PrefNom("FX_init_state"), m_process->Config.init_state);
-        rakarrack.set(m_process->PrefNom("Auto Assign"), m_process->Config.autoassign);
+        rakarrack.set(m_process->Config.PrefNom("FX_init_state"), m_process->Config.init_state);
+        rakarrack.set(m_process->Config.PrefNom("Auto Assign"), m_process->Config.autoassign);
 
-        rakarrack.set(m_process->PrefNom("UpSampling"), m_process->Config.upsample);
-        rakarrack.set(m_process->PrefNom("UpQuality"), m_process->Config.UpQual);
-        rakarrack.set(m_process->PrefNom("DownQuality"), m_process->Config.DownQual);
+        rakarrack.set(m_process->Config.PrefNom("UpSampling"), m_process->Config.upsample);
+        rakarrack.set(m_process->Config.PrefNom("UpQuality"), m_process->Config.UpQual);
+        rakarrack.set(m_process->Config.PrefNom("DownQuality"), m_process->Config.DownQual);
 
-        rakarrack.set(m_process->PrefNom("UpAmount"), m_process->Config.UpAmo);
-        rakarrack.set(m_process->PrefNom("Looper Size"), m_process->Config.looper_size);
+        rakarrack.set(m_process->Config.PrefNom("UpAmount"), m_process->Config.UpAmo);
+        rakarrack.set(m_process->Config.PrefNom("Looper Size"), m_process->Config.looper_size);
 
-        rakarrack.set(m_process->PrefNom("Bank Filename"), m_process->Config.BankFilename);
-        rakarrack.set(m_process->PrefNom("User Directory"), m_process->Config.UDirFilename);
+        rakarrack.set(m_process->Config.PrefNom("Bank Filename"), m_process->Config.BankFilename);
+        rakarrack.set(m_process->Config.PrefNom("User Directory"), m_process->Config.UDirFilename);
 
-        rakarrack.set(m_process->PrefNom("Enable Background Image"), m_process->Config.EnableBackgroundImage);
-        rakarrack.set(m_process->PrefNom("Background Image"), m_process->Config.BackgroundImage);
-        rakarrack.set(m_process->PrefNom("Auto Connect MIDI IN"), m_process->Config.aconnect_MI);
-        rakarrack.set(m_process->PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
-        rakarrack.set(m_process->PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
+        rakarrack.set(m_process->Config.PrefNom("Enable Background Image"), m_process->Config.EnableBackgroundImage);
+        rakarrack.set(m_process->Config.PrefNom("Background Image"), m_process->Config.BackgroundImage);
+        rakarrack.set(m_process->Config.PrefNom("Auto Connect MIDI IN"), m_process->Config.aconnect_MI);
+        rakarrack.set(m_process->Config.PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
+        rakarrack.set(m_process->Config.PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
 
-        rakarrack.set(m_process->PrefNom("MIDI Implementation"), m_process->Config.MIDIway);
-        rakarrack.set(m_process->PrefNom("MIDI Table"), m_process->Config.custom_midi_table);
+        rakarrack.set(m_process->Config.PrefNom("MIDI Implementation"), m_process->Config.MIDIway);
+        rakarrack.set(m_process->Config.PrefNom("MIDI Table"), m_process->Config.custom_midi_table);
 
 
         int i = Settings->BMidiIn->value();
@@ -1089,21 +1089,21 @@ void RKRGUI::save_current_state(int whati)
         
         if (temp != NULL)
         {
-            rakarrack.set(m_process->PrefNom("MIDI IN Device"), temp);
+            rakarrack.set(m_process->Config.PrefNom("MIDI IN Device"), temp);
         }
         
-        rakarrack.set(m_process->PrefNom("MIDI IN Channel"), m_process->Config.MIDI_In_Channel + 1);
-        rakarrack.set(m_process->PrefNom("MIDI IN Harmonizer"), m_process->Config.Harmonizer_MIDI_Channel + 1);
-        rakarrack.set(m_process->PrefNom("MIDI IN Stereo Harmonizer"), m_process->Config.StereoHarm_MIDI_Channel + 1);
-        rakarrack.set(m_process->PrefNom("Harmonizer Quality"), m_process->Config.HarQual);
-        rakarrack.set(m_process->PrefNom("StereoHarm Quality"), m_process->Config.SteQual);
-        rakarrack.set(m_process->PrefNom("Sequence Quality"), m_process->Config.SeqQual);
-        rakarrack.set(m_process->PrefNom("Shifter Quality"), m_process->Config.ShiQual);
-        rakarrack.set(m_process->PrefNom("Tap Tempo Timeout"), m_process->t_timeout);
-        rakarrack.set(m_process->PrefNom("Disable Warnings"), m_process->Config.Disable_Warnings);
-        rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->Config.ena_tool);
-        rakarrack.set(m_process->PrefNom("Focus Delay"), m_process->Config.Focus_Delay);
-        rakarrack.set(m_process->PrefNom("MIDI Table File"), m_process->Config.custom_midi_table_file);
+        rakarrack.set(m_process->Config.PrefNom("MIDI IN Channel"), m_process->Config.MIDI_In_Channel + 1);
+        rakarrack.set(m_process->Config.PrefNom("MIDI IN Harmonizer"), m_process->Config.Harmonizer_MIDI_Channel + 1);
+        rakarrack.set(m_process->Config.PrefNom("MIDI IN Stereo Harmonizer"), m_process->Config.StereoHarm_MIDI_Channel + 1);
+        rakarrack.set(m_process->Config.PrefNom("Harmonizer Quality"), m_process->Config.HarQual);
+        rakarrack.set(m_process->Config.PrefNom("StereoHarm Quality"), m_process->Config.SteQual);
+        rakarrack.set(m_process->Config.PrefNom("Sequence Quality"), m_process->Config.SeqQual);
+        rakarrack.set(m_process->Config.PrefNom("Shifter Quality"), m_process->Config.ShiQual);
+        rakarrack.set(m_process->Config.PrefNom("Tap Tempo Timeout"), m_process->t_timeout);
+        rakarrack.set(m_process->Config.PrefNom("Disable Warnings"), m_process->Config.Disable_Warnings);
+        rakarrack.set(m_process->Config.PrefNom("Enable Tooltips"), m_process->Config.ena_tool);
+        rakarrack.set(m_process->Config.PrefNom("Focus Delay"), m_process->Config.Focus_Delay);
+        rakarrack.set(m_process->Config.PrefNom("MIDI Table File"), m_process->Config.custom_midi_table_file);
     }
 
 
@@ -1116,12 +1116,12 @@ void RKRGUI::save_current_state(int whati)
             {
                 memset(temp1, 0, sizeof (temp1));
                 sprintf(temp1, "Jack Port %d", k);
-                rakarrack.set(m_process->PrefNom(temp1), Settings->JackCo->text(i));
+                rakarrack.set(m_process->Config.PrefNom(temp1), Settings->JackCo->text(i));
                 k++;
             }
         }
 
-        rakarrack.set(m_process->PrefNom("Auto Connect Num"), k - 1);
+        rakarrack.set(m_process->Config.PrefNom("Auto Connect Num"), k - 1);
 
         k = 1;
         for (int i = 1; i <= Settings->JackIn->size(); i++)
@@ -1130,12 +1130,12 @@ void RKRGUI::save_current_state(int whati)
             {
                 memset(temp1, 0, sizeof (temp1));
                 sprintf(temp1, "Jack Port In %d", k);
-                rakarrack.set(m_process->PrefNom(temp1), Settings->JackIn->text(i));
+                rakarrack.set(m_process->Config.PrefNom(temp1), Settings->JackIn->text(i));
                 k++;
             }
         }
 
-        rakarrack.set(m_process->PrefNom("Auto Connect In Num"), k - 1);
+        rakarrack.set(m_process->Config.PrefNom("Auto Connect In Num"), k - 1);
     }
 }
 
@@ -1460,8 +1460,6 @@ void RKRGUI::show_help()
     // show the help window
     char temp[128];
 
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-
     // Is this the first time displayed ? If true then we have to create it.
     if (m_process->help_displayed == 0)
     {
@@ -1491,8 +1489,6 @@ void RKRGUI::show_lic()
 {
     // Show licenses
     char temp[128];
-
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
     // Is this the first time displayed ? If true then we have to create it.
     if (m_process->help_displayed == 0)
