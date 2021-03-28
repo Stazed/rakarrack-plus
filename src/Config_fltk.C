@@ -38,46 +38,83 @@ Config_fltk::~Config_fltk()
 {
 }
 
+char *
+Config_fltk::PrefNom(const char *dato)
+{
+    memset(tmpprefname, 0, sizeof (tmpprefname));
+    sprintf(tmpprefname, "%s %s", jackcliname, dato);
+    return (tmpprefname);
+}
+
 /**
- *  Loads the user preferences set in the Settings/Preferences tabs:
- *  Look, Audio, Quality, MIDI, Jack, Misc, Bank.
- *  These settings are saved in:
- *  /home/username/.fltk/github.com.Stazed.rakarrrack.plus/rakarrack-plus.prefs
- * 
- *  This loads only items needed for audio/MIDI processing. Since the program
- *  can be run without GUI, the Look and other user settings not related to audio/MIDI
- *  do not need to be loaded here. This is for initial process setup. 
- * 
- *  The other non audio/MIDI user settings are loaded by the load_previous_state()
- *  function that is called when the RKRGUI class is created.
+ * User settings from Settings/Preferences.
+ * Main Window non rack effect settings: Tuner, MIDI Converter, Tap Tempo, Metronome,
+ * Booster button, last used bank, last used preset.
+ * Also the previous state when shutdown, window sizes, images, etc.
+ * From ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
  */
-void
-Config_fltk::load_user_preferences()
+void Config_fltk::load_previous_state()
 {
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-    
-    rakarrack.get(PrefNom("Disable Warnings"), Disable_Warnings, 0);
+
+    // ************* Settings/Look ******************
+    rakarrack.get(PrefNom("Schema"), Schema, 2);
+
+    // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
+    // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
+    rakarrack.get(PrefNom("Font"), font_type, 0);
+    rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
+    rakarrack.get(PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3 - Buttons
+    rakarrack.get(PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
+    rakarrack.get(PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
+    rakarrack.get(PrefNom("Background Color"), back_color, 56);              // FL_BLACK
+
+    rakarrack.get(PrefNom("Enable Background Image"), EnableBackgroundImage, 0);
+
+    char temp[256];
+    sprintf(temp, "%s/blackbg.png", DATADIR);
+    rakarrack.get(PrefNom("Background Image"), BackgroundImage, temp, 256);
+
+    rakarrack.get(PrefNom("Hide Effects"), deachide, 0);
+    rakarrack.get(PrefNom("Scale Window"), scalable, 0);
+    // End Settings/Look
+
+    // ************ Settings/Audio *******************
+    rakarrack.get(PrefNom("FX_init_state"), init_state, 0);
     rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
+    rakarrack.get(PrefNom("Preserve Gain/Master"), preserve_master, 0);
+    rakarrack.get(PrefNom("Update Tap"), Tap_Updated, 0);
+    rakarrack.get(PrefNom("Limiter Position"), flpos, 0);
+    rakarrack.get(PrefNom("Limiter +6dB"), db6booster, 0);
+
     rakarrack.get(PrefNom("UpSampling"), upsample, 0);
+    rakarrack.get(PrefNom("UpAmount"), UpAmo, 0);
     rakarrack.get(PrefNom("UpQuality"), UpQual, 4);
     rakarrack.get(PrefNom("DownQuality"), DownQual, 4);
-    rakarrack.get(PrefNom("UpAmount"), UpAmo, 0);
-
-//    Adjust_Upsample();    // FIXME to process
 
     rakarrack.get(PrefNom("Looper Size"), looper_size, 1);
+    rakarrack.get(PrefNom("Metronome Volume"), Metro_Vol, 50);  // Looper
+
     rakarrack.get(PrefNom("Calibration"), aFreq, 440.0f);
+    rakarrack.get(PrefNom("Recognize Trigger"), rtrig, .6f);
+
+    rakarrack.get(PrefNom("Recognize Optimization Harmonizer"), RCOpti_Harm, 0);
+    rakarrack.get(PrefNom("Recognize Optimization Stereo Harm"), RCOpti_Stereo, 0);
+    rakarrack.get(PrefNom("Recognize Optimization Ring"), RCOpti_Ring, 0);
+    // End Settings/Audio
+
+    // ************ Settings/Quality ******************
+    rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
+    rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);
+    
+    rakarrack.get(PrefNom("Sequence Quality"), SeqQual, 4);
+    rakarrack.get(PrefNom("Shifter Quality"), ShiQual, 4);
 
     rakarrack.get(PrefNom("Vocoder Bands"), VocBands, 32);
-    rakarrack.get(PrefNom("Recognize Trigger"), rtrig, .6f);
 
     rakarrack.get(PrefNom("Harmonizer Downsample"), Har_Down, 5);
     rakarrack.get(PrefNom("Harmonizer Up Quality"), Har_U_Q, 4);
     rakarrack.get(PrefNom("Harmonizer Down Quality"), Har_D_Q, 2);
-
-    rakarrack.get(PrefNom("StereoHarm Downsample"), Ste_Down, 5);
-    rakarrack.get(PrefNom("StereoHarm Up Quality"), Ste_U_Q, 4);
-    rakarrack.get(PrefNom("StereoHarm Down Quality"), Ste_D_Q, 2);
 
     rakarrack.get(PrefNom("Reverbtron Downsample"), Rev_Down, 5);
     rakarrack.get(PrefNom("Reverbtron Up Quality"), Rev_U_Q, 4);
@@ -99,6 +136,10 @@ Config_fltk::load_user_preferences()
     rakarrack.get(PrefNom("Vocoder Up Quality"), Voc_U_Q, 4);
     rakarrack.get(PrefNom("Vocoder Down Quality"), Voc_D_Q, 2);
 
+    rakarrack.get(PrefNom("StereoHarm Downsample"), Ste_Down, 5);
+    rakarrack.get(PrefNom("StereoHarm Up Quality"), Ste_U_Q, 4);
+    rakarrack.get(PrefNom("StereoHarm Down Quality"), Ste_D_Q, 2);
+
     rakarrack.get(PrefNom("Distortion Resampling"), Dist_res_amount, 2);
     rakarrack.get(PrefNom("Distortion Up Quality"), Dist_up_q, 4);
     rakarrack.get(PrefNom("Distortion Down Quality"), Dist_down_q, 2);
@@ -118,32 +159,38 @@ Config_fltk::load_user_preferences()
     rakarrack.get(PrefNom("StompBox Resampling"), Stomp_res_amount, 2);
     rakarrack.get(PrefNom("StompBox Up Quality"), Stomp_up_q, 4);
     rakarrack.get(PrefNom("StompBox Down Quality"), Stomp_down_q, 2);
+    // End Settings/Quality
 
-    rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
-    rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);
-    
-    rakarrack.get(PrefNom("Sequence Quality"), SeqQual, 4);
-    rakarrack.get(PrefNom("Shifter Quality"), ShiQual, 4);
+    // ************ Settings/MIDI *****************
+    // Alsa MIDI
+    rakarrack.get(PrefNom("Auto Connect MIDI IN"), aconnect_MI, 0);
+    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);
 
-    rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);
-    
-    // Default on new installs - don't connect input - can cause feedback loop = 0
-    rakarrack.get(PrefNom("Auto Connect Jack In"), aconnect_JIA, 0);
+    rakarrack.get(PrefNom("MIDI IN Channel"), MIDI_In_Channel, 1);
+    MIDI_In_Channel--;
 
-    rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);
-    rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
-    
+    rakarrack.get(PrefNom("MIDI IN Harmonizer"), Harmonizer_MIDI_Channel, 1);
+    Harmonizer_MIDI_Channel--;
+
+    rakarrack.get(PrefNom("MIDI IN Stereo Harmonizer"), StereoHarm_MIDI_Channel, 1);
+    StereoHarm_MIDI_Channel--;
+
     // MIDI Learn used On/Off
     rakarrack.get(PrefNom("MIDI Implementation"), MIDIway, 0);
-    
+    rakarrack.get(PrefNom("Auto Assign"), autoassign, 0);
+
     // Custom MIDI Table used On/OFF
     rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
     
     // Custom MIDI Table last used file
     rakarrack.get(PrefNom("MIDI Table File"), custom_midi_table_file, -1);
+    // End Settings/MIDI
 
-
-    char temp[256];
+    // *********** Settings/Jack *****************
+    // Jack Out
+    rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);    // Out
+    rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);       // Out
+    
     memset(temp, 0, sizeof (temp));
 
     char j_names[128];
@@ -167,6 +214,11 @@ Config_fltk::load_user_preferences()
         rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
     }
 
+    // Jack In
+    // Default on new installs - don't connect input - can cause feedback loop = 0
+    rakarrack.get(PrefNom("Auto Connect Jack In"), aconnect_JIA, 0);
+    rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
+
     memset(j_names, 0, sizeof (j_names));
 
     static const char *jack_inames[] ={"system:capture_1", "system:capture_2"};
@@ -187,11 +239,16 @@ Config_fltk::load_user_preferences()
         
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
     }
-    
-    // Alsa MIDI
-    rakarrack.get(PrefNom("Auto Connect MIDI IN"), aconnect_MI, 0);
-    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);
+    // End Settings/Jack
 
+    // *************** Settings/Misc **********************
+    rakarrack.get(PrefNom("Disable Warnings"), Disable_Warnings, 0);
+    rakarrack.get(PrefNom("Tap Tempo Timeout"), t_timeout, 0);
+    rakarrack.get(PrefNom("Enable Tooltips"), ena_tool, 1);
+    rakarrack.get(PrefNom("Focus Delay"), Focus_Delay, 0);
+    // End Settings/Misc
+
+    // ******************* Settings/User *******************
     // Get user default bank file from Settings/Bank/ --Bank Filename
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/Default.rkrb", DATADIR);
@@ -202,24 +259,11 @@ Config_fltk::load_user_preferences()
     sprintf(temp, "%s/", DATADIR);
     rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
     global_user_directory = UDirFilename;
-}
+    
+    rakarrack.get(PrefNom("UserName"), UserRealName, "", 127);
+    // End Settings/User
 
-char *
-Config_fltk::PrefNom(const char *dato)
-{
-    memset(tmpprefname, 0, sizeof (tmpprefname));
-    sprintf(tmpprefname, "%s %s", jackcliname, dato);
-    return (tmpprefname);
-}
-
-/**
- *  Loads the previous state when shutdown, window sizes, images, etc.
- *  From ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
- */
-void Config_fltk::load_previous_state()
-{
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-
+    // ************** Window Sizes *****************
     rakarrack.get(PrefNom("Principal X"), Principal_X, 1);
     rakarrack.get(PrefNom("Principal Y"), Principal_Y, 1);
     rakarrack.get(PrefNom("Principal W"), Principal_W, 960);
@@ -255,62 +299,23 @@ void Config_fltk::load_previous_state()
     rakarrack.get(PrefNom("Help W"), Help_W, 640);
     rakarrack.get(PrefNom("Help H"), Help_H, 480);
     rakarrack.get(PrefNom("Help TextSize"), Help_TextSize, 11);
+    // End Window Sizes
 
-    char tmp[256];
-    sprintf(tmp, "%s/blackbg.png", DATADIR);
+    // Main window booster button
+    rakarrack.get(PrefNom("Booster"), booster, 1.0f);   // On/Off
 
-    rakarrack.get(PrefNom("Enable Background Image"), EnableBackgroundImage, 0);
-    rakarrack.get(PrefNom("Background Image"), BackgroundImage, tmp, 256);
-    rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
-    
-    // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
-    // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
-    rakarrack.get(PrefNom("Font"), font_type, 0);
-
-    rakarrack.get(PrefNom("Background Color"), back_color, 56);              // FL_BLACK
-    rakarrack.get(PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3
-    rakarrack.get(PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
-    rakarrack.get(PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
-    rakarrack.get(PrefNom("Schema"), Schema, 2);
-    rakarrack.get(PrefNom("Hide Effects"), deachide, 0);
-    rakarrack.get(PrefNom("Scale Window"), scalable, 0);
-
+    // Last bank and preset selected
     rakarrack.get(PrefNom("Bank Selected"), active_bank, 3);
     rakarrack.get(PrefNom("Preset Num"), Preset_Number, 1);
 
-    rakarrack.get(PrefNom("UserName"), UserRealName, "", 127);
-    rakarrack.get(PrefNom("User Directory"), UDirFilename, DATADIR, 127);
-    rakarrack.get(PrefNom("Preserve Gain/Master"), preserve_master, 0);
-
-    rakarrack.get(PrefNom("MIDI IN Channel"), MIDI_In_Channel, 1);
-    MIDI_In_Channel--;
-
-    rakarrack.get(PrefNom("MIDI IN Harmonizer"), Harmonizer_MIDI_Channel, 1);
-    Harmonizer_MIDI_Channel--;
-
-    rakarrack.get(PrefNom("MIDI IN Stereo Harmonizer"), StereoHarm_MIDI_Channel, 1);
-    StereoHarm_MIDI_Channel--;
-
-    rakarrack.get(PrefNom("Limiter Position"), flpos, 0);
-    rakarrack.get(PrefNom("Limiter +6dB"), db6booster, 0);
-    rakarrack.get(PrefNom("Booster"), booster, 1.0f);
-
-    rakarrack.get(PrefNom("FX_init_state"), init_state, 0);
-    rakarrack.get(PrefNom("Auto Assign"), autoassign, 0);
-
-    rakarrack.get(PrefNom("Recognize Optimization Harmonizer"), RCOpti_Harm, 0);
-    rakarrack.get(PrefNom("Recognize Optimization Stereo Harm"), RCOpti_Stereo, 0);
-    rakarrack.get(PrefNom("Recognize Optimization Ring"), RCOpti_Ring, 0);
-
-    //MIDIConverter
+    // MIDIConverter
     rakarrack.get(PrefNom("Midi Out Channel"), Midi_Out_Channel, 1);
     rakarrack.get(PrefNom("Trigger Adjust"), Trigger_Adjust, 4);
     rakarrack.get(PrefNom("Velocity Adjust"), Velocity_Adjust, 50);
     rakarrack.get(PrefNom("Converter Octave"), Converter_Octave, 2);
     rakarrack.get(PrefNom("MIDI Converter On/Off"), MIDI_Converter_On_Off, 0);
 
-    //Metronome
-    rakarrack.get(PrefNom("Metronome Volume"), Metro_Vol, 50);
+    // Metronome
     rakarrack.get(PrefNom("Internal Metronome Time"), Metronome_Time, 2);
     rakarrack.get(PrefNom("Internal Metronome Sound"), Metronome_Sound, 0);
     rakarrack.get(PrefNom("Internal Metronome Volume"), Metronome_Volume, 50);
@@ -318,25 +323,19 @@ void Config_fltk::load_previous_state()
     rakarrack.get(PrefNom("Internal Metronome Show"), sw_stat, 0);
     rakarrack.get(PrefNom("Internal Metronome On/Off"), Metronome_On_Off, 0);
 
-    //Tuner
+    // Tuner
     rakarrack.get(PrefNom("Tuner On/Off"), Tuner_On_Off, 0);
 
-    //Tap Tempo
+    // Tap Tempo
     rakarrack.get(PrefNom("TapTempo Input"), Tap_Selection, 0);
-    rakarrack.get(PrefNom("Tap Tempo Timeout"), t_timeout, 0);
     rakarrack.get(PrefNom("TapTempo Set"), Tap_SetValue, 0);
     rakarrack.get(PrefNom("TapTempo On/Off"), TapTempo_On_Off, 0);
-    rakarrack.get(PrefNom("Update Tap"), Tap_Updated, 0);
 
-    rakarrack.get(PrefNom("Enable Tooltips"), ena_tool, 1);
-    rakarrack.get(PrefNom("Focus Delay"), Focus_Delay, 0);
-
-    //Trigger
+    // Trigger
     rakarrack.get(PrefNom("Aux Source"), Aux_Source, 0);
     rakarrack.get(PrefNom("Aux Gain"), Aux_Gain, 0);
     rakarrack.get(PrefNom("Aux Threshold"), Aux_Threshold, 0);
     rakarrack.get(PrefNom("Aux MIDI"), Aux_MIDI, 1);
     rakarrack.get(PrefNom("Aux Minimum"), Aux_Minimum, 0);
     rakarrack.get(PrefNom("Aux Maximum"), Aux_Maximum, 127);
-
 }

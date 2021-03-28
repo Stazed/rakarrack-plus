@@ -334,7 +334,7 @@ RKR::jack_open_client()
 void
 RKR::load_user_preferences()
 {
-    Config.load_user_preferences();
+    Config.load_previous_state();
     upsample = Config.upsample;
     Adjust_Upsample();
 }

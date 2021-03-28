@@ -33,7 +33,6 @@ public:
     Config_fltk();
     virtual ~Config_fltk();
     
-    void load_user_preferences();
     void load_previous_state();
     
     /**
