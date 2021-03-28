@@ -218,14 +218,14 @@ void SettingsWindowGui::cb_Filter_DC(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Pre_Serve_i(RKR_Check_Button* o, void*) {
-  m_process->preserve_master=(int) o->value();
+  m_process->Config.preserve_master=(int) o->value();
 }
 void SettingsWindowGui::cb_Pre_Serve(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Pre_Serve_i(o,v);
 }
 
 void SettingsWindowGui::cb_Update_TAP_i(RKR_Check_Button* o, void*) {
-  m_process->Tap_Updated = (int) o->value();
+  m_process->Config.Tap_Updated = (int) o->value();
 }
 void SettingsWindowGui::cb_Update_TAP(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Update_TAP_i(o,v);
@@ -244,9 +244,9 @@ void SettingsWindowGui::cb_L_SIZE(RKR_Counter* o, void* v) {
 }
 
 void SettingsWindowGui::cb_LM_Volume_i(RKR_Counter* o, void*) {
-  m_process->Metro_Vol=(int)o->value();
+  m_process->Config.Metro_Vol=(int)o->value();
 Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
-Efx_Looper->setmvol(m_process->Metro_Vol);
+Efx_Looper->setmvol(m_process->Config.Metro_Vol);
 }
 void SettingsWindowGui::cb_LM_Volume(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_LM_Volume_i(o,v);

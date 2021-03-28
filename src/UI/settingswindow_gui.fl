@@ -321,14 +321,14 @@ m_process->change_scale = 1; // true}
       }
       Fl_Check_Button Pre_Serve {
         label {Preserve Gain/Master when Preset change}
-        callback {m_process->preserve_master=(int) o->value();}
+        callback {m_process->Config.preserve_master=(int) o->value();}
         xywh {30 87 275 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
       }
       Fl_Check_Button Update_TAP {
         label {Update TapTempo when Preset change}
-        callback {m_process->Tap_Updated = (int) o->value();}
+        callback {m_process->Config.Tap_Updated = (int) o->value();}
         xywh {30 108 264 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
@@ -356,9 +356,9 @@ m_process->m_displayed=1;
         class RKR_Box
       }
       Fl_Counter LM_Volume {
-        callback {m_process->Metro_Vol=(int)o->value();
+        callback {m_process->Config.Metro_Vol=(int)o->value();
 Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
-Efx_Looper->setmvol(m_process->Metro_Vol);}
+Efx_Looper->setmvol(m_process->Config.Metro_Vol);}
         tooltip {Looper Metronome Volume} xywh {165 237 47 18} type Simple labelsize 12 labelcolor 7 align 8 when 4 minimum 0 maximum 100 step 1 value 50 textsize 10
         code0 {o->set_label_offset(2);}
         class RKR_Counter

@@ -751,15 +751,11 @@ void RKRGUI::load_previous_state()
     if (!m_process->Config.custom_midi_table)
         Settings->scroll->deactivate();
 
-
-    rakarrack.get(m_process->PrefNom("User Directory"), m_process->Config.UDirFilename, DATADIR, 127);
-    rakarrack.get(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master, 0);
-    rakarrack.get(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol, 50);
-    
     Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
-    Efx_Looper->setmvol(m_process->Metro_Vol);
+    Efx_Looper->setmvol(m_process->Config.Metro_Vol);
 
-    rakarrack.get(m_process->PrefNom("Update Tap"), m_process->Tap_Updated, 0);
+
+
     rakarrack.get(m_process->PrefNom("MIDI IN Channel"), m_process->MIDI_In_Channel, 1);
     m_process->MIDI_In_Channel--;
 
@@ -1039,12 +1035,12 @@ void RKRGUI::save_current_state(int whati)
     if ((whati == 3) || (whati == 0))
     {
         rakarrack.set(m_process->PrefNom("UserName"), m_process->Config.UserRealName);
-        rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master);
-        rakarrack.set(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol);
+        rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->Config.preserve_master);
+        rakarrack.set(m_process->PrefNom("Metronome Volume"), m_process->Config.Metro_Vol);
 
         rakarrack.set(m_process->PrefNom("Filter DC Offset"), m_process->Config.DC_Offset);
 
-        rakarrack.set(m_process->PrefNom("Update Tap"), m_process->Tap_Updated);
+        rakarrack.set(m_process->PrefNom("Update Tap"), m_process->Config.Tap_Updated);
         rakarrack.set(m_process->PrefNom("Limiter Position"), m_process->flpos);
         rakarrack.set(m_process->PrefNom("Limiter +6dB"), m_process->db6booster);
 
@@ -1713,8 +1709,8 @@ void RKRGUI::MiraConfig()
     Settings->BackFiname->value(m_process->Config.BackgroundImage);
     Settings->Udir->value(m_process->Config.UDirFilename);
     Settings->Username->value(m_process->Config.UserRealName);
-    Settings->Pre_Serve->value(m_process->preserve_master);
-    Settings->LM_Volume->value(m_process->Metro_Vol);
+    Settings->Pre_Serve->value(m_process->Config.preserve_master);
+    Settings->LM_Volume->value(m_process->Config.Metro_Vol);
     Settings->Filter_DC->value(m_process->Config.DC_Offset);
     Settings->FLPosition->value(m_process->flpos);
     Settings->DB6B->value(m_process->db6booster);
@@ -1792,7 +1788,7 @@ void RKRGUI::MiraConfig()
     Settings->MTable->do_callback ();
 
     Settings->AAssign->value(m_process->autoassign);
-    Settings->Update_TAP->value(m_process->Tap_Updated);
+    Settings->Update_TAP->value(m_process->Config.Tap_Updated);
     Settings->INSTATE->value(m_process->init_state);
     Settings->UPSAMPLE_C->value(m_process->Config.upsample);
     Settings->Upr_Qual->value(m_process->Config.UpQual);

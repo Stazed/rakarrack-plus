@@ -416,7 +416,7 @@ RKR::load_preset(const char *filename)
 
     sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &FX_Master_Active_Reset);
 
-    if (!preserve_master)
+    if (!Config.preserve_master)
     {
         preset_loaded.Fraction_Bypass = balance;
         preset_loaded.Input_Gain = in_vol;
@@ -1243,7 +1243,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     // Does the user want to preserve Master settings
     float Input_Gain = 0.0, Master_Volume = 0.0, Fraction_Bypass = 0.0;
 
-    if(preserve_master)
+    if(Config.preserve_master)
     {
         Input_Gain = Active_Preset.Input_Gain;
         Master_Volume = Active_Preset.Master_Volume;
@@ -1254,7 +1254,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     Active_Preset = Bank[preset_number];
 
     // Reset these if the user wants to preserve Master settings
-    if (preserve_master)
+    if (Config.preserve_master)
     {
         Active_Preset.Input_Gain = Input_Gain;
         Active_Preset.Master_Volume = Master_Volume;
@@ -1270,7 +1270,7 @@ RKR::active_bank_preset_to_main_window(int preset_number)
     // Apply the effect parameters to the audio classes
     set_audio_paramters();
 
-    if ((Tap_Updated) && (Tap_Active) && (Tap_TempoSet > 0) && (Tap_TempoSet < 601))
+    if ((Config.Tap_Updated) && (Tap_Active) && (Tap_TempoSet > 0) && (Tap_TempoSet < 601))
     {
         Update_tempo();
     }

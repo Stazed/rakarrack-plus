@@ -720,7 +720,7 @@ FillML();
 Prepare_Order();
 Put_Loaded();
 
-if(m_process->Tap_Updated)
+if(m_process->Config.Tap_Updated)
    update_tap_tempo_GUI();
 }
 void RKRGUI::cb_Preset_Counter(RKR_Counter* o, void* v) {

@@ -1525,7 +1525,7 @@ FillML();
 Prepare_Order();
 Put_Loaded();
 
-if(m_process->Tap_Updated)
+if(m_process->Config.Tap_Updated)
    update_tap_tempo_GUI();}
           tooltip {Next or previous preset - Shortcut +(plus) or -(minus)} xywh {174 106 60 20} type Simple color 62 selection_color 0 labelsize 11 labelcolor 7 minimum 1 maximum 60 step 1 value 1 textsize 11
           code0 {o->set_label_offset(1);}

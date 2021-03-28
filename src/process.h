@@ -889,13 +889,7 @@ public:
     int StereoHarm_MIDI_Channel;
 
     int init_state;
-    
-    /**
-     * Flag to indicate if user wants to preserve Master gain, etc on bank preset selections.
-     * Set in Settings/Preferences/Audio.
-     */
-    int preserve_master;
-    
+
     int help_displayed;
 
     /**
@@ -956,7 +950,6 @@ public:
     /* Master resampling */
     int upsample;
 
-    int Metro_Vol;
     int M_Metro_Sound;
     int change_scale;
     int flpos;
@@ -1002,7 +995,6 @@ public:
     int Tap_SetValue;
     int t_timeout;
     int jt_state;
-    int Tap_Updated;
     int note_old;
     int cents_old;
 
