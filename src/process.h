@@ -1036,10 +1036,7 @@ public:
     int last_auxvalue;
     int ena_tool;
     int Focus_Delay;
-    int RCOpti_Harm;
-    int RCOpti_Stereo;
-    int RCOpti_Ring;
-    
+
     int M_Metro_Tempo;
     int M_Metro_Bar;
     int mtc_counter;

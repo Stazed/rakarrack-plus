@@ -517,9 +517,9 @@ m_parent->Show_Next_Time();}
       }
       Fl_Choice RC_Harm_Opti {
         label Harmonizer
-        callback {m_process->RCOpti_Harm =(int) o->value();
+        callback {m_process->Config.RCOpti_Harm =(int) o->value();
 
-switch(m_process->RCOpti_Harm)
+switch(m_process->Config.RCOpti_Harm)
   {
   
   
@@ -558,9 +558,9 @@ switch(m_process->RCOpti_Harm)
       }
       Fl_Choice RC_St_Harm_Opti {
         label {Stereo Harmonizer}
-        callback {m_process->RCOpti_Stereo =(int) o->value();
+        callback {m_process->Config.RCOpti_Stereo =(int) o->value();
 
-switch(m_process->RCOpti_Stereo)
+switch(m_process->Config.RCOpti_Stereo)
   {
   
   
@@ -587,9 +587,9 @@ switch(m_process->RCOpti_Stereo)
       } {}
       Fl_Choice RC_Ring_Opti {
         label Ring
-        callback {m_process->RCOpti_Ring =(int) o->value();
+        callback {m_process->Config.RCOpti_Ring =(int) o->value();
 
-switch(m_process->RCOpti_Ring)
+switch(m_process->Config.RCOpti_Ring)
   {
   
   

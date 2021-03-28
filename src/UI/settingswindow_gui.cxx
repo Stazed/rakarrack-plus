@@ -346,9 +346,9 @@ void SettingsWindowGui::cb_Downr_Qual(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_RC_Harm_Opti_i(RKR_Choice* o, void*) {
-  m_process->RCOpti_Harm =(int) o->value();
+  m_process->Config.RCOpti_Harm =(int) o->value();
 
-switch(m_process->RCOpti_Harm)
+switch(m_process->Config.RCOpti_Harm)
   {
   
   
@@ -382,9 +382,9 @@ Fl_Menu_Item SettingsWindowGui::menu_RC_Harm_Opti[] = {
 };
 
 void SettingsWindowGui::cb_RC_St_Harm_Opti_i(RKR_Choice* o, void*) {
-  m_process->RCOpti_Stereo =(int) o->value();
+  m_process->Config.RCOpti_Stereo =(int) o->value();
 
-switch(m_process->RCOpti_Stereo)
+switch(m_process->Config.RCOpti_Stereo)
   {
   
   
@@ -411,9 +411,9 @@ void SettingsWindowGui::cb_RC_St_Harm_Opti(RKR_Choice* o, void* v) {
 }
 
 void SettingsWindowGui::cb_RC_Ring_Opti_i(RKR_Choice* o, void*) {
-  m_process->RCOpti_Ring =(int) o->value();
+  m_process->Config.RCOpti_Ring =(int) o->value();
 
-switch(m_process->RCOpti_Ring)
+switch(m_process->Config.RCOpti_Ring)
   {
   
   

@@ -774,18 +774,16 @@ void RKRGUI::load_previous_state()
         m_process->calculavol(2);
     }
 
-
-    rakarrack.get(m_process->PrefNom("Recognize Optimization Harmonizer"), m_process->RCOpti_Harm, 0);
-    Settings->RC_Harm_Opti->value(m_process->RCOpti_Harm);
+    Settings->RC_Harm_Opti->value(m_process->Config.RCOpti_Harm);
     Settings->RC_Harm_Opti->do_callback();
 
-    rakarrack.get(m_process->PrefNom("Recognize Optimization Stereo Harm"), m_process->RCOpti_Stereo, 0);
-    Settings->RC_St_Harm_Opti->value(m_process->RCOpti_Stereo);
+    Settings->RC_St_Harm_Opti->value(m_process->Config.RCOpti_Stereo);
     Settings->RC_St_Harm_Opti->do_callback();
 
-    rakarrack.get(m_process->PrefNom("Recognize Optimization Ring"), m_process->RCOpti_Ring, 0);
-    Settings->RC_Ring_Opti->value(m_process->RCOpti_Ring);
+    Settings->RC_Ring_Opti->value(m_process->Config.RCOpti_Ring);
     Settings->RC_Ring_Opti->do_callback();
+
+    
 
     //MIDIConverter
     rakarrack.get(m_process->PrefNom("Midi Out Channel"), k, 1);
@@ -1031,9 +1029,9 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Limiter Position"), m_process->flpos);
         rakarrack.set(m_process->PrefNom("Limiter +6dB"), m_process->db6booster);
 
-        rakarrack.set(m_process->PrefNom("Recognize Optimization Harmonizer"), m_process->RCOpti_Harm);
-        rakarrack.set(m_process->PrefNom("Recognize Optimization Stereo Harm"), m_process->RCOpti_Stereo);
-        rakarrack.set(m_process->PrefNom("Recognize Optimization Ring"), m_process->RCOpti_Ring);
+        rakarrack.set(m_process->PrefNom("Recognize Optimization Harmonizer"), m_process->Config.RCOpti_Harm);
+        rakarrack.set(m_process->PrefNom("Recognize Optimization Stereo Harm"), m_process->Config.RCOpti_Stereo);
+        rakarrack.set(m_process->PrefNom("Recognize Optimization Ring"), m_process->Config.RCOpti_Ring);
 
         rakarrack.set(m_process->PrefNom("Harmonizer Downsample"), m_process->Config.Har_Down);
         rakarrack.set(m_process->PrefNom("Harmonizer Up Quality"), m_process->Config.Har_U_Q);
@@ -1745,9 +1743,9 @@ void RKRGUI::MiraConfig()
 
     Settings->Calibration->value(m_process->Config.aFreq);
     Settings->RTrigger->value(m_process->HarmRecNote->trigfact);
-    Settings->RC_Harm_Opti->value(m_process->RCOpti_Harm);
-    Settings->RC_St_Harm_Opti->value(m_process->RCOpti_Stereo);
-    Settings->RC_Ring_Opti->value(m_process->RCOpti_Ring);
+    Settings->RC_Harm_Opti->value(m_process->Config.RCOpti_Harm);
+    Settings->RC_St_Harm_Opti->value(m_process->Config.RCOpti_Stereo);
+    Settings->RC_Ring_Opti->value(m_process->Config.RCOpti_Ring);
 
 
     switch (m_process->Config.VocBands)
