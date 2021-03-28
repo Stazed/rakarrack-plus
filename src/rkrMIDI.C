@@ -1002,7 +1002,7 @@ RKR::Conecta()
                 nume = strtok(NULL, "  ");
                 sscanf(nume, "%d", &puerto);
                 
-                if (strstr(temp, "rakarrack IN") != 0)
+                if (strstr(temp, "rakarrack-plus IN") != 0)
                 {
                     Cyoin = client;
                     Pyoin = puerto;
