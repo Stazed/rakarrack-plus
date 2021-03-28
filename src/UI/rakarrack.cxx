@@ -781,15 +781,15 @@ void RKRGUI::cb_HideUE(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_SwitchMod_i(RKR_Button*, void*) {
-  if(m_process->sw_stat==0) 
+  if(m_process->Config.sw_stat==0) 
 { 
-  m_process->sw_stat = 1;
+  m_process->Config.sw_stat = 1;
   MIDI->hide();
   Metro->show();
 }
 else
  {
-  m_process->sw_stat= 0;
+  m_process->Config.sw_stat= 0;
   Metro->hide();
   MIDI->show();
  };

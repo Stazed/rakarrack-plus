@@ -783,56 +783,40 @@ void RKRGUI::load_previous_state()
     Settings->RC_Ring_Opti->value(m_process->Config.RCOpti_Ring);
     Settings->RC_Ring_Opti->do_callback();
 
-    
-
     //MIDIConverter
-    rakarrack.get(m_process->PrefNom("Midi Out Channel"), k, 1);
-    MIDI->Midi_out_Counter->value(k);
+    MIDI->Midi_out_Counter->value(m_process->Config.Midi_Out_Channel);
     MIDI->Midi_out_Counter->do_callback();
+    m_process->efx_MIDIConverter->setmidichannel(m_process->Config.Midi_Out_Channel);
 
-    m_process->efx_MIDIConverter->setmidichannel(k);
+    MIDI->Trig_Adj->value(m_process->Config.Trigger_Adjust);
+    m_process->efx_MIDIConverter->setTriggerAdjust(m_process->Config.Trigger_Adjust);
 
-    rakarrack.get(m_process->PrefNom("Trigger Adjust"), k, 4);
-    MIDI->Trig_Adj->value(k);
-    m_process->efx_MIDIConverter->setTriggerAdjust(k);
+    MIDI->Vel_Adj->value(m_process->Config.Velocity_Adjust);
+    m_process->efx_MIDIConverter->setVelAdjust(m_process->Config.Velocity_Adjust);
 
-
-    rakarrack.get(m_process->PrefNom("Velocity Adjust"), k, 50);
-    MIDI->Vel_Adj->value(k);
-    m_process->efx_MIDIConverter->setVelAdjust(k);
-
-    rakarrack.get(m_process->PrefNom("Converter Octave"), k, 2);
-    MIDI->MIDIOctave->value(k);
+    MIDI->MIDIOctave->value(m_process->Config.Converter_Octave);
     MIDI->MIDIOctave->do_callback();
 
-    rakarrack.get(m_process->PrefNom("MIDI Converter On/Off"), k, 0);
-    MIDI->midi_activar->value(k);
+    MIDI->midi_activar->value(m_process->Config.MIDI_Converter_On_Off);
     MIDI->midi_activar->do_callback();
 
     //Metronome
-    rakarrack.get(m_process->PrefNom("Internal Metronome Time"), k, 2);
-    MetroBar->value(k);
+    MetroBar->value(m_process->Config.Metronome_Time);
     MetroBar->do_callback();
 
-    rakarrack.get(m_process->PrefNom("Internal Metronome Sound"), k, 0);
-    MetroSound->value(k);
+    MetroSound->value(m_process->Config.Metronome_Sound);
     MetroSound->do_callback();
 
-    rakarrack.get(m_process->PrefNom("Internal Metronome Volume"), k, 50);
-    Metro_Volume->value(k);
+    Metro_Volume->value(m_process->Config.Metronome_Volume);
     Metro_Volume->do_callback();
 
-    rakarrack.get(m_process->PrefNom("Internal Metronome Tempo"), k, 100);
-    Metro_Tempo->value(k);
+    Metro_Tempo->value(m_process->Config.Metronome_Tempo);
     Metro_Tempo->do_callback();
 
-    rakarrack.get(m_process->PrefNom("Internal Metronome Show"), m_process->sw_stat, 0);
-
-    rakarrack.get(m_process->PrefNom("Internal Metronome On/Off"), k, 0);
-    metro_activar->value(k);
+    metro_activar->value(m_process->Config.Metronome_On_Off);
     metro_activar->do_callback();
 
-    if (m_process->sw_stat == 1)
+    if (m_process->Config.sw_stat == 1)
     {
         MIDI->hide();
         Metro->show();
@@ -844,8 +828,7 @@ void RKRGUI::load_previous_state()
     }
 
     //Tuner
-    rakarrack.get(m_process->PrefNom("Tuner On/Off"), k, 0);
-    tuner_activar->value(k);
+    tuner_activar->value(m_process->Config.Tuner_On_Off);
     tuner_activar->do_callback();
 
 
@@ -952,7 +935,7 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Internal Metronome Time"), (int) MetroBar->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
-        rakarrack.set(m_process->PrefNom("Internal Metronome Show"), (int) m_process->sw_stat);
+        rakarrack.set(m_process->PrefNom("Internal Metronome Show"), (int) m_process->Config.sw_stat);
         rakarrack.set(m_process->PrefNom("Internal Metronome Sound"), (int) MetroSound->value());
 
         //Booster

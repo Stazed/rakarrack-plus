@@ -954,7 +954,6 @@ public:
      */
     float *interpbuf;
 
-    int sw_stat;
     int swidth;
     int sheight;
     int sschema;

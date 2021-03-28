@@ -1596,15 +1596,15 @@ reordena();}
         }
         Fl_Button SwitchMod {
           label Sw
-          callback {if(m_process->sw_stat==0) 
+          callback {if(m_process->Config.sw_stat==0) 
 { 
-  m_process->sw_stat = 1;
+  m_process->Config.sw_stat = 1;
   MIDI->hide();
   Metro->show();
 }
 else
  {
-  m_process->sw_stat= 0;
+  m_process->Config.sw_stat= 0;
   Metro->hide();
   MIDI->show();
  }}

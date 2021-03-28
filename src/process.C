@@ -112,7 +112,6 @@ RKR::RKR(int gui) :
     fSample_rate(),
     cSample_rate(),
     interpbuf(NULL),
-    sw_stat(),
     swidth(),
     sheight(),
     sschema(),
