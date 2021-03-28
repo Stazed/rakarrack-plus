@@ -712,7 +712,7 @@ void RKRGUI::load_previous_state()
     font_size_change(m_process->Config.font_size);
     font_type_change(m_process->Config.font_type);
 
-    rakarrack.get(m_process->PrefNom("Bank Selected"), m_process->active_bank, 3);
+    m_process->active_bank = m_process->Config.active_bank;
 
     if (!m_process->Bank_Load_Command_Line)
     {
@@ -738,9 +738,8 @@ void RKRGUI::load_previous_state()
 
     if (!m_process->Command_Line_File)
     {
-        rakarrack.get(m_process->PrefNom("Preset Num"), k, 1);
-        m_process->Selected_Preset = k;
-        Preset_Counter->value(k);
+        m_process->Selected_Preset = m_process->Config.Preset_Number;
+        Preset_Counter->value(m_process->Config.Preset_Number);
         Preset_Counter->do_callback();
     }
 
