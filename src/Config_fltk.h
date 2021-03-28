@@ -34,27 +34,55 @@ public:
     virtual ~Config_fltk();
     
     void load_previous_state();
-    
-    /**
-     * Flag to indicate if user warnings should be disabled. From check box
-     * in Settings/Misc.
-     */
-    int Disable_Warnings;
 
+    // ***** Look *****
+    int Schema;
+    int font_type, font_size, fore_color, label_color, leds_color, back_color;
+    int EnableBackgroundImage;
+    char BackgroundImage[256];
+    int deachide;
+    int scalable;
+
+    // ***** Audio *****
+    int init_state;
     /**
      * Flag for check box in Settings/Audio "Filter Input DC Offset"
      */
     int DC_Offset;
 
+    /**
+     * Flag to indicate if user wants to preserve Master gain, etc on bank preset selections.
+     * Set in Settings/Preferences/Audio.
+     */
+    int preserve_master;
+    int Tap_Updated;
+    int flpos;
+    /**
+     * Flag for check box in Settings/Audio "+6dB Final Limiter.
+     */
+    int db6booster;
+    // Master resampling
+    int upsample;
+    int UpQual;
+    int DownQual;
+    int UpAmo;
+
     float looper_size;
-
+    int Metro_Vol;      // Looper metronome
     float aFreq;
+    float rtrig;
+    int RCOpti_Harm;
+    int RCOpti_Stereo;
+    int RCOpti_Ring;
 
+    // ***** Quality *****
+    int HarQual;
+    int SteQual;
+    int SeqQual;
+    int ShiQual;
     int VocBands;
 
-    float rtrig;
-    
-    /* Quality resampling */
+    // Resampling
     int Har_Down;
     int Har_U_Q;
     int Har_D_Q;
@@ -67,13 +95,13 @@ public:
     int Con_U_Q;
     int Con_D_Q;
 
-    int Shi_Down;
-    int Shi_U_Q;
-    int Shi_D_Q;
-
     int Seq_Down;
     int Seq_U_Q;
     int Seq_D_Q;
+
+    int Shi_Down;
+    int Shi_U_Q;
+    int Shi_D_Q;
 
     int Voc_Down;
     int Voc_U_Q;
@@ -83,14 +111,7 @@ public:
     int Ste_U_Q;
     int Ste_D_Q;
 
-    /* Master resampling */
-    int upsample;
-    int UpQual;
-    int DownQual;
-    int UpAmo;
-    /* End Quality resampling */
-    
-    /* WaveShape Resampling */
+    // WaveShape Resampling
     int Dist_res_amount;
     int Dist_up_q;
     int Dist_down_q;
@@ -110,20 +131,29 @@ public:
     int Stomp_res_amount;
     int Stomp_up_q;
     int Stomp_down_q;
-    /* End WaveShape */
-    
-    int HarQual;
-    int SteQual;
-    int SeqQual;
-    int ShiQual;
 
-    int aconnect_JA;
-    int aconnect_JIA;
+    // ***** MIDI *****
+    // Alsa MIDI
+    int aconnect_MI;
+    char MID[128];
 
-    int cuan_jack;
-    int cuan_ijack;
+    /**
+     * MIDI receive channel, parameter control, Bank Select, Program Changes, MIDI learn.
+     */
+    int MIDI_In_Channel;
 
-    int MIDIway;
+    /**
+     * Harmonizer MIDI receive channel.
+     */
+    int Harmonizer_MIDI_Channel;
+
+    /**
+     * Stereo Harmonizer MIDI receive channel.
+     */
+    int StereoHarm_MIDI_Channel;
+
+    int MIDIway;    // MIDI Learn
+    int autoassign;
 
     /**
      * Flag to indicate the custom MIDI Program Change Table is active.
@@ -136,107 +166,33 @@ public:
      */
     int custom_midi_table_file;
 
+    // ***** Jack *****
+    int aconnect_JA;
+    int cuan_jack;
+    int aconnect_JIA;
+    int cuan_ijack;
+
+    // ***** Misc *****
+    /**
+     * Flag to indicate if user warnings should be disabled. From check box
+     * in Settings/Misc.
+     */
+    int Disable_Warnings;
+    int t_timeout;
+    int ena_tool;
+    int Focus_Delay;
+    
+    // ***** User *****
     /**
      * The default user bank from Settings/Bank/Bank Filename. Also the
      * bank selected when the user clicks the 'U' button from the Bank Manager
      * and above the Bank button on the main window.
      */
     char BankFilename[128];
-
     char UDirFilename[128];
-
-    // GUI
-    int EnableBackgroundImage;
-    char BackgroundImage[256];
-    int deachide;
-    int scalable;
-    int Schema;
-    
-    int back_color, fore_color, leds_color, label_color, font_size, font_type;
-
-    /**
-     * The currently active bank displayed in the bank window.
-     */
-    int active_bank;
-
     char UserRealName[128];
 
-    /**
-     * Flag to indicate if user wants to preserve Master gain, etc on bank preset selections.
-     * Set in Settings/Preferences/Audio.
-     */
-    int preserve_master;
-
-    int Metro_Vol;
-    int Tap_Updated;
-
-    /**
-     * MIDI receive channel, parameter control, Bank Select, Program Changes, MIDI learn.
-     */
-    int MIDI_In_Channel;
-
-    // MIDI Converter
-    int Midi_Out_Channel;
-    int Trigger_Adjust;
-    int Velocity_Adjust;
-    int Converter_Octave;
-    int MIDI_Converter_On_Off;
-    // End MIDI Converter
-
-    // Metronome
-    int Metronome_Time;
-    int Metronome_Sound;
-    int Metronome_Volume;
-    int Metronome_Tempo;
-    int Metronome_On_Off;
-
-    int Tuner_On_Off;
-    int TapTempo_On_Off;
-
-    int Preset_Number;
-
-
-    /**
-     * Harmonizer MIDI receive channel.
-     */
-    int Harmonizer_MIDI_Channel;
-
-    /**
-     * Stereo Harmonizer MIDI receive channel.
-     */
-    int StereoHarm_MIDI_Channel;
-
-    int flpos;
-
-    /**
-     * Flag for check box in Settings/Audio "+6dB Final Limiter.
-     */
-    int db6booster;
-    float booster;
-
-    int init_state;
-    int autoassign;
-
-    int RCOpti_Harm;
-    int RCOpti_Stereo;
-    int RCOpti_Ring;
-    int sw_stat;
-
-    int Tap_Selection;
-    int t_timeout;
-    int Tap_SetValue;
-
-    int ena_tool;
-    int Focus_Delay;
-
-    int Aux_Source;
-    int Aux_Gain;
-    int Aux_Threshold;
-    int Aux_MIDI;
-    int Aux_Minimum;
-    int Aux_Maximum;
-
-    // Window sizes
+    // ***** Window Sizes *****
     int Principal_X;
     int Principal_Y;
     int Principal_W;
@@ -273,21 +229,58 @@ public:
     int Help_H;
     int Help_TextSize;
 
+    // Main window booster button
+    float booster;
+
+    /**
+     * The currently active bank displayed in the bank window.
+     */
+    int active_bank;
+    int Preset_Number;
+
+    // MIDI Converter
+    int Midi_Out_Channel;
+    int Trigger_Adjust;
+    int Velocity_Adjust;
+    int Converter_Octave;
+    int MIDI_Converter_On_Off;
+
+    // Metronome
+    int Metronome_Time;
+    int Metronome_Sound;
+    int Metronome_Volume;
+    int Metronome_Tempo;
+    int sw_stat;
+    int Metronome_On_Off;
+
+    // Tuner
+    int Tuner_On_Off;
+
+    // Tap Tempo
+    int Tap_Selection;
+    int Tap_SetValue;
+    int TapTempo_On_Off;
+
+    // Trigger window (ACI)
+    int Aux_Source;
+    int Aux_Gain;
+    int Aux_Threshold;
+    int Aux_MIDI;
+    int Aux_Minimum;
+    int Aux_Maximum;
+
+    // preferences location for fltk
     char jackcliname[64];
     char tmpprefname[128];
 
     struct JackPorts
     {
         char name[128];
-        
+
         JackPorts():
             name() {}
     } jack_po[16],jack_poi[16];
-    
-    // Alsa MIDI
-    int aconnect_MI;
-    char MID[128];
-    
+
     char *PrefNom (const char *dato);
 };
 
