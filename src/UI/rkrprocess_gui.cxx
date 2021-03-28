@@ -752,7 +752,6 @@ void RKRGUI::load_previous_state()
         Settings->scroll->deactivate();
 
 
-    rakarrack.get(m_process->PrefNom("UserName"), m_process->UserRealName, "", 127);
     rakarrack.get(m_process->PrefNom("User Directory"), m_process->Config.UDirFilename, DATADIR, 127);
     rakarrack.get(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master, 0);
     rakarrack.get(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol, 50);
@@ -1039,7 +1038,7 @@ void RKRGUI::save_current_state(int whati)
 
     if ((whati == 3) || (whati == 0))
     {
-        rakarrack.set(m_process->PrefNom("UserName"), m_process->UserRealName);
+        rakarrack.set(m_process->PrefNom("UserName"), m_process->Config.UserRealName);
         rakarrack.set(m_process->PrefNom("Preserve Gain/Master"), m_process->preserve_master);
         rakarrack.set(m_process->PrefNom("Metronome Volume"), m_process->Metro_Vol);
 
@@ -1713,7 +1712,7 @@ void RKRGUI::MiraConfig()
     Settings->BFiname->value(m_process->Config.BankFilename);
     Settings->BackFiname->value(m_process->Config.BackgroundImage);
     Settings->Udir->value(m_process->Config.UDirFilename);
-    Settings->Username->value(m_process->UserRealName);
+    Settings->Username->value(m_process->Config.UserRealName);
     Settings->Pre_Serve->value(m_process->preserve_master);
     Settings->LM_Volume->value(m_process->Metro_Vol);
     Settings->Filter_DC->value(m_process->Config.DC_Offset);

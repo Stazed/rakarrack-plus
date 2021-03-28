@@ -208,7 +208,6 @@ RKR::RKR(int gui) :
     nfreq_old(0),
     afreq_old(0),
     tmpprefname(),
-    UserRealName(NULL),
     Bank_Saved(),
     MID(),
     Command_Line_Bank(),
@@ -301,7 +300,6 @@ RKR::~RKR()
     free(smpr);
     free(m_ticks);
     free(interpbuf);
-    free(UserRealName);
 
     // alsa
     snd_seq_close(midi_in);
@@ -475,8 +473,6 @@ RKR::initialize_arrays()
     memset(m_ticks, 0, sizeof (float)*period_master);
     memset(interpbuf, 0, sizeof (float)*period_master);
 
-    UserRealName = (char *) malloc(sizeof (char) * 128);
-    memset(UserRealName, 0, sizeof (char) * 128);
 }
 
 /**

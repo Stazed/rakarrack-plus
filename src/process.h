@@ -1131,9 +1131,6 @@ public:
      */
     PresetBankStruct Active_Preset;
 
-
-    char *UserRealName;
-
     /**
      * Any previously saved bank filename is saved here. Used for setting the
      * fltk file browser previous item.

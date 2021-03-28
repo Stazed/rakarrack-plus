@@ -222,9 +222,9 @@ RKR::save_preset(const char *filename)
     }
     else
     {
-        if (UserRealName != NULL)
+        if (Config.UserRealName != NULL)
         {
-            sprintf(buf, "%s\n", UserRealName);
+            sprintf(buf, "%s\n", Config.UserRealName);
         }
         else
         {
@@ -1204,7 +1204,7 @@ RKR::new_preset()
     Active_Preset.new_preset();
     
     // Copy the user name from settings
-    strncpy(Active_Preset.Author, UserRealName, sizeof(Active_Preset.Author) - 1);
+    strncpy(Active_Preset.Author, Config.UserRealName, sizeof(Active_Preset.Author) - 1);
 
     // Set the Master to OFF
     FX_Master_Active_Reset = 0;
@@ -1221,7 +1221,7 @@ RKR::new_bank(struct PresetBankStruct _bank[])
         _bank[i].new_preset();
         
         // Copy the user name from settings
-        strncpy(_bank[i].Author, UserRealName, sizeof(_bank[i].Author) - 1);
+        strncpy(_bank[i].Author, Config.UserRealName, sizeof(_bank[i].Author) - 1);
     }
 };
 

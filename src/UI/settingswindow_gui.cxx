@@ -1144,7 +1144,9 @@ void SettingsWindowGui::cb_BF_Browser(RKR_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Username_i(RKR_Input* o, void*) {
-  m_process->UserRealName=(char*) o->value();
+  // Copy the user name from settings
+    memset(m_process->Config.UserRealName, 0, sizeof(m_process->Config.UserRealName));
+    strncpy(m_process->Config.UserRealName, (char*) o->value(), sizeof(m_process->Config.UserRealName) - 1);
 }
 void SettingsWindowGui::cb_Username(RKR_Input* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Username_i(o,v);

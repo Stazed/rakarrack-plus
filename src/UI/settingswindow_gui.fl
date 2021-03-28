@@ -1581,7 +1581,9 @@ Fl_Tooltip::enable(m_process->ena_tool);}
       }
       Fl_Input Username {
         label Username
-        callback {m_process->UserRealName=(char*) o->value();}
+        callback {// Copy the user name from settings
+    memset(m_process->Config.UserRealName, 0, sizeof(m_process->Config.UserRealName));
+    strncpy(m_process->Config.UserRealName, (char*) o->value(), sizeof(m_process->Config.UserRealName) - 1);}
         tooltip {The name to be used for author below the preset name on the main window.} xywh {20 192 240 21} labelsize 12 labelcolor 7 align 5 textcolor 7
         code0 {o->set_label_offset(2);}
         code1 {o->set_text_offset(4);}
