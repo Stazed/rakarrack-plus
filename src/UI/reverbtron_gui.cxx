@@ -572,7 +572,8 @@ this->when(FL_WHEN_RELEASE);
   B_scan->when(FL_WHEN_RELEASE);
 } // RKR_Button* B_scan
 { revtron_fnum = new RKR_Choice(51, 168, 101, 14, "File");
-  revtron_fnum->tooltip("Select one of the program provided IR files");
+  revtron_fnum->tooltip("Select the .rvb file to be used. File preceded by a \'*\' are user supplied f\
+iles in the User Directory.");
   revtron_fnum->box(FL_FLAT_BOX);
   revtron_fnum->down_box(FL_BORDER_BOX);
   revtron_fnum->color(FL_BACKGROUND_COLOR);
