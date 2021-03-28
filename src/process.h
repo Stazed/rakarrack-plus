@@ -952,6 +952,7 @@ public:
      */
     float *interpbuf;
 
+    // Skin
     int swidth;
     int sheight;
     int sschema;
@@ -984,7 +985,6 @@ public:
      * Flag to indicate the connection state of audio in ports.
      */
     int Jack_IN_Port_Connnection_Status;
-
 
     /**
      * Flag to indicate the connection state of audio out ports.
@@ -1038,8 +1038,6 @@ public:
     int ML_filter;
     int ML_clist[150];
 
-    long Tap_time_Init;
-
     double Tap_timeB;
     double Tap_timeC;
     double jt_tempo;
@@ -1089,8 +1087,6 @@ public:
     // Tuner
     float nfreq_old;
     float afreq_old;
-
-    char tmpprefname[128];
 
     /**
      * The active preset displayed on the main window rack.
