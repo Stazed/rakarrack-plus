@@ -851,18 +851,23 @@ void RKRGUI::load_previous_state()
     Settings->Focus_Slider->value (m_process->Config.Focus_Delay);
     Settings->Focus_Slider->do_callback ();
 
-    //Trigger
-    rakarrack.get(m_process->PrefNom("Aux Source"), m_process->Aux_Source, 0);
+    // Trigger (ACI)
+    m_process->Aux_Source = m_process->Config.Aux_Source;
     Trigger->aux_source->value(m_process->Aux_Source);
-    rakarrack.get(m_process->PrefNom("Aux Gain"), m_process->Aux_Gain, 0);
+
+    m_process->Aux_Gain = m_process->Config.Aux_Gain;
     Trigger->aux_gain->value(m_process->Aux_Gain);
-    rakarrack.get(m_process->PrefNom("Aux Threshold"), m_process->Aux_Threshold, 0);
+
+    m_process->Aux_Threshold = m_process->Config.Aux_Threshold;
     Trigger->aux_thres->value(m_process->Aux_Threshold);
-    rakarrack.get(m_process->PrefNom("Aux MIDI"), m_process->Aux_MIDI, 1);
+
+    m_process->Aux_MIDI = m_process->Config.Aux_MIDI;
     Trigger->aux_midi->value(m_process->Aux_MIDI);
-    rakarrack.get(m_process->PrefNom("Aux Minimum"), m_process->Aux_Minimum, 0);
+
+    m_process->Aux_Minimum = m_process->Config.Aux_Minimum;
     Trigger->aux_min->value(m_process->Aux_Minimum);
-    rakarrack.get(m_process->PrefNom("Aux Maximum"), m_process->Aux_Maximum, 127);
+
+    m_process->Aux_Maximum = m_process->Config.Aux_Maximum;
     Trigger->aux_max->value(m_process->Aux_Maximum);
 
 }
