@@ -209,10 +209,8 @@ RKR::RKR(int gui) :
     {
         return; // If we don't have a jack client then quit with message
     }
-    
-    Config.load_user_preferences();
 
-    load_user_preferences();    // FIXME
+    load_user_preferences();
 
     Get_Bogomips();
 
@@ -338,6 +336,7 @@ RKR::jack_open_client()
 void
 RKR::load_user_preferences()
 {
+    Config.load_user_preferences();
     upsample = Config.upsample;
     Adjust_Upsample();
 }

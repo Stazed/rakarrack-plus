@@ -677,11 +677,6 @@ void RKRGUI::put_icon(Fl_Window* window)
  */
 void RKRGUI::load_previous_state()
 {
-    int x, y, w, h, f, k, back_color, fore_color, leds_color, label_color, font_size, font_type;
-    x = y = w = h = f = k = back_color = fore_color = leds_color = label_color = font_size = font_type = 0;
-
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-
     Principal->resize(m_process->Config.Principal_X, m_process->Config.Principal_Y,
                       m_process->Config.Principal_W, m_process->Config.Principal_H);
 
@@ -827,15 +822,14 @@ void RKRGUI::load_previous_state()
         MIDI->show();
     }
 
-    //Tuner
+    // Tuner
     tuner_activar->value(m_process->Config.Tuner_On_Off);
     tuner_activar->do_callback();
-
 
     // Tap Tempo
     m_process->Tap_Selection = m_process->Config.Tap_Selection;
     T_SEL->value(m_process->Tap_Selection);
-    
+
     m_process->t_timeout = m_process->Config.t_timeout;
     Settings->T_TIMEOUT->value(m_process->t_timeout);
 
@@ -869,7 +863,6 @@ void RKRGUI::load_previous_state()
 
     m_process->Aux_Maximum = m_process->Config.Aux_Maximum;
     Trigger->aux_max->value(m_process->Aux_Maximum);
-
 }
 
 /**
@@ -924,18 +917,18 @@ void RKRGUI::save_current_state(int whati)
         }
 
         //Tuner
-        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);   // FIXME - never get
+        rakarrack.set(m_process->PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);
 
 
         //MIDIConverter
-        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);  // FIXME - never get
+        rakarrack.set(m_process->PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);
         rakarrack.set(m_process->PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
         rakarrack.set(m_process->PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
         rakarrack.set(m_process->PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
         rakarrack.set(m_process->PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
 
         //Metronome
-        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);  // FIXME - never .get
+        rakarrack.set(m_process->PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);
         rakarrack.set(m_process->PrefNom("Internal Metronome Time"), (int) MetroBar->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Volume"), (int) Metro_Volume->value());
         rakarrack.set(m_process->PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
@@ -947,7 +940,7 @@ void RKRGUI::save_current_state(int whati)
 
 
         //Tap Tempo
-        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);  // FIXME - never .get
+        rakarrack.set(m_process->PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);
         rakarrack.set(m_process->PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
         rakarrack.set(m_process->PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
     }
