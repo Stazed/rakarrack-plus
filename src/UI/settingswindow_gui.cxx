@@ -934,21 +934,21 @@ void SettingsWindowGui::cb_BMidiIn(RKR_Browser* o, void* v) {
 }
 
 void SettingsWindowGui::cb_Midi_In_Counter_i(RKR_Counter* o, void*) {
-  m_process->MIDI_In_Channel=(int)o->value()-1;
+  m_process->Config.MIDI_In_Channel=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Midi_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Midi_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Har_In_Counter_i(RKR_Counter* o, void*) {
-  m_process->Harmonizer_MIDI_Channel=(int)o->value()-1;
+  m_process->Config.Harmonizer_MIDI_Channel=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Har_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Har_In_Counter_i(o,v);
 }
 
 void SettingsWindowGui::cb_Stereo_Har_In_Counter_i(RKR_Counter* o, void*) {
-  m_process->StereoHarm_MIDI_Channel=(int)o->value()-1;
+  m_process->Config.StereoHarm_MIDI_Channel=(int)o->value()-1;
 }
 void SettingsWindowGui::cb_Stereo_Har_In_Counter(RKR_Counter* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Stereo_Har_In_Counter_i(o,v);

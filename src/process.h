@@ -873,21 +873,6 @@ public:
     int availables[60];
     int active[12];
 
-    /**
-     * MIDI receive channel, parameter control, Bank Select, Program Changes, MIDI learn.
-     */
-    int MIDI_In_Channel;
-
-    /**
-     * Harmonizer MIDI receive channel.
-     */
-    int Harmonizer_MIDI_Channel;
-
-    /**
-     * Stereo Harmonizer MIDI receive channel.
-     */
-    int StereoHarm_MIDI_Channel;
-
     int init_state;
 
     int help_displayed;
