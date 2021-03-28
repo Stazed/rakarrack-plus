@@ -268,6 +268,12 @@ public:
     int Settings_W;
     int Settings_H;
 
+    int Help_X;
+    int Help_Y;
+    int Help_W;
+    int Help_H;
+    int Help_TextSize;
+
     char jackcliname[64];
     char tmpprefname[128];
 

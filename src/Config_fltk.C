@@ -250,6 +250,12 @@ void Config_fltk::load_previous_state()
     rakarrack.get(PrefNom("Settings W"), Settings_W, 440);
     rakarrack.get(PrefNom("Settings H"), Settings_H, 410);
 
+    rakarrack.get(PrefNom("Help X"), Help_X, 1);
+    rakarrack.get(PrefNom("Help Y"), Help_Y, 1);
+    rakarrack.get(PrefNom("Help W"), Help_W, 640);
+    rakarrack.get(PrefNom("Help H"), Help_H, 480);
+    rakarrack.get(PrefNom("Help TextSize"), Help_TextSize, 11);
+
     char tmp[256];
     sprintf(tmp, "%s/blackbg.png", DATADIR);
 

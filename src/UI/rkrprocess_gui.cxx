@@ -1462,18 +1462,15 @@ void RKRGUI::show_help()
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
+    // Is this the first time displayed ? If true then we have to create it.
     if (m_process->help_displayed == 0)
     {
         visor = new Fl_Help_Dialog;
 
-        int x, y, w, h, k;
-        rakarrack.get(m_process->PrefNom("Help X"), x, 1);
-        rakarrack.get(m_process->PrefNom("Help Y"), y, 1);
-        rakarrack.get(m_process->PrefNom("Help W"), w, 640);
-        rakarrack.get(m_process->PrefNom("Help H"), h, 480);
-        rakarrack.get(m_process->PrefNom("Help TextSize"), k, 11);
-        visor->resize(x, y, w, h);
-        visor->textsize((unsigned char) k);
+        visor->resize(m_process->Config.Help_X, m_process->Config.Help_Y,
+                      m_process->Config.Help_W, m_process->Config.Help_H);
+
+        visor->textsize((unsigned char) m_process->Config.Help_TextSize);
     }
 
 
@@ -1497,18 +1494,15 @@ void RKRGUI::show_lic()
 
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
 
+    // Is this the first time displayed ? If true then we have to create it.
     if (m_process->help_displayed == 0)
     {
         visor = new Fl_Help_Dialog;
 
-        int x, y, w, h, k;
-        rakarrack.get(m_process->PrefNom("Help X"), x, 1);
-        rakarrack.get(m_process->PrefNom("Help Y"), y, 1);
-        rakarrack.get(m_process->PrefNom("Help W"), w, 640);
-        rakarrack.get(m_process->PrefNom("Help H"), h, 480);
-        rakarrack.get(m_process->PrefNom("Help TextSize"), k, 11);
-        visor->resize(x, y, w, h);
-        visor->textsize((unsigned char) k);
+        visor->resize(m_process->Config.Help_X, m_process->Config.Help_Y,
+                      m_process->Config.Help_W, m_process->Config.Help_H);
+
+        visor->textsize((unsigned char) m_process->Config.Help_TextSize);
     }
 
     memset(temp, 0, sizeof (temp));
