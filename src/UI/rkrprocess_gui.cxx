@@ -544,7 +544,7 @@ void RKRGUI::GuiTimeout(void)
             MIDILearn->Disp_Control->redraw();
             MIDILearn->GMM->color(global_fore_color);
             MIDILearn->GMM->redraw();
-            if ((m_process->comemouse) && (m_process->autoassign))
+            if ((m_process->comemouse) && (m_process->Config.autoassign))
             {
                 m_process->comemouse = 0;
                 MIDILearn->Assign->do_callback();
@@ -754,14 +754,10 @@ void RKRGUI::load_previous_state()
     Looper *Efx_Looper = static_cast <Looper*> (m_process->Rack_Effects[EFX_LOOPER]);
     Efx_Looper->setmvol(m_process->Config.Metro_Vol);
 
+    m_process->flpos = m_process->Config.flpos;
+    m_process->db6booster = m_process->Config.db6booster;
 
-
-
-
-
-    rakarrack.get(m_process->PrefNom("Limiter Position"), m_process->flpos, 0);
-    rakarrack.get(m_process->PrefNom("Limiter +6dB"), m_process->db6booster, 0);
-    rakarrack.get(m_process->PrefNom("Booster"), m_process->booster, 1.0f);
+    m_process->booster = m_process->Config.booster;
     if (m_process->booster == 1.0)
     {
         BostBut->value(0);
@@ -771,11 +767,7 @@ void RKRGUI::load_previous_state()
         BostBut->value(1);
     }
 
-    rakarrack.get(m_process->PrefNom("FX_init_state"), m_process->init_state, 0);
-    rakarrack.get(m_process->PrefNom("Auto Assign"), m_process->autoassign, 0);
-
-
-    if (m_process->init_state)
+    if (m_process->Config.init_state)
     {
         m_process->Active_Preset.FX_Master_Active = 1;
         m_process->calculavol(1);
@@ -1090,8 +1082,8 @@ void RKRGUI::save_current_state(int whati)
 
         rakarrack.set(m_process->PrefNom("Vocoder Bands"), m_process->Config.VocBands);
 
-        rakarrack.set(m_process->PrefNom("FX_init_state"), m_process->init_state);
-        rakarrack.set(m_process->PrefNom("Auto Assign"), m_process->autoassign);
+        rakarrack.set(m_process->PrefNom("FX_init_state"), m_process->Config.init_state);
+        rakarrack.set(m_process->PrefNom("Auto Assign"), m_process->Config.autoassign);
 
         rakarrack.set(m_process->PrefNom("UpSampling"), m_process->Config.upsample);
         rakarrack.set(m_process->PrefNom("UpQuality"), m_process->Config.UpQual);
@@ -1782,9 +1774,9 @@ void RKRGUI::MiraConfig()
     Settings->MTable->value(m_process->Config.custom_midi_table);
     Settings->MTable->do_callback ();
 
-    Settings->AAssign->value(m_process->autoassign);
+    Settings->AAssign->value(m_process->Config.autoassign);
     Settings->Update_TAP->value(m_process->Config.Tap_Updated);
-    Settings->INSTATE->value(m_process->init_state);
+    Settings->INSTATE->value(m_process->Config.init_state);
     Settings->UPSAMPLE_C->value(m_process->Config.upsample);
     Settings->Upr_Qual->value(m_process->Config.UpQual);
     Settings->Downr_Qual->value(m_process->Config.DownQual);
@@ -3378,7 +3370,7 @@ void RKRGUI::PrepareML()
 
     if (m_process->comemouse)
     {
-        if (m_process->autoassign == 0)
+        if (m_process->Config.autoassign == 0)
         {
             MIDILearn->show();
             put_icon(MIDILearn);

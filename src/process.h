@@ -873,16 +873,13 @@ public:
     int availables[60];
     int active[12];
 
-    int init_state;
-
     int help_displayed;
 
     /**
      * Flag to indicate if a bank has been changed by the user.
      */
     int bank_modified;
-    
-    int autoassign;
+
     int comemouse;
     int aconnect_MI;
 

@@ -204,7 +204,7 @@ void SettingsWindowGui::cb_Enable_Scale(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_INSTATE_i(RKR_Check_Button* o, void*) {
-  m_process->init_state=(int) o->value();
+  m_process->Config.init_state=(int) o->value();
 }
 void SettingsWindowGui::cb_INSTATE(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_INSTATE_i(o,v);
@@ -971,7 +971,7 @@ void SettingsWindowGui::cb_Mw1(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_AAssign_i(RKR_Check_Button* o, void*) {
-  m_process->autoassign=o->value();
+  m_process->Config.autoassign=o->value();
 }
 void SettingsWindowGui::cb_AAssign(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_AAssign_i(o,v);

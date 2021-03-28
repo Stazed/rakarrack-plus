@@ -307,7 +307,7 @@ m_process->change_scale = 1; // true}
       }
       Fl_Check_Button INSTATE {
         label {FX On at start}
-        callback {m_process->init_state=(int) o->value();}
+        callback {m_process->Config.init_state=(int) o->value();}
         xywh {30 40 124 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
@@ -1337,7 +1337,7 @@ m_parent->ML_Menu->activate();}
       }
       Fl_Check_Button AAssign {
         label {Auto Assign MIDI Learn}
-        callback {m_process->autoassign=o->value();}
+        callback {m_process->Config.autoassign=o->value();}
         xywh {30 308 163 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
