@@ -1061,8 +1061,8 @@ void SettingsWindowGui::cb_T_TIMEOUT(RKR_Check_Button* o, void* v) {
 }
 
 void SettingsWindowGui::cb_ENA_TOOL_i(RKR_Check_Button* o, void*) {
-  m_process->ena_tool=(int) o->value();
-Fl_Tooltip::enable(m_process->ena_tool);
+  m_process->Config.ena_tool=(int) o->value();
+Fl_Tooltip::enable(m_process->Config.ena_tool);
 }
 void SettingsWindowGui::cb_ENA_TOOL(RKR_Check_Button* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_ENA_TOOL_i(o,v);

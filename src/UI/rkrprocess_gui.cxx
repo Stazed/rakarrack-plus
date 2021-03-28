@@ -832,24 +832,23 @@ void RKRGUI::load_previous_state()
     tuner_activar->do_callback();
 
 
-    //Tap Tempo
-    rakarrack.get(m_process->PrefNom("TapTempo Input"), m_process->Tap_Selection, 0);
+    // Tap Tempo
+    m_process->Tap_Selection = m_process->Config.Tap_Selection;
     T_SEL->value(m_process->Tap_Selection);
-    rakarrack.get(m_process->PrefNom("Tap Tempo Timeout"), m_process->t_timeout, 0);
+    
+    m_process->t_timeout = m_process->Config.t_timeout;
     Settings->T_TIMEOUT->value(m_process->t_timeout);
-    rakarrack.get(m_process->PrefNom("TapTempo Set"), m_process->Tap_SetValue, 0);
+
+    m_process->Tap_SetValue = m_process->Config.Tap_SetValue;
     T_SET->value(m_process->Tap_SetValue);
 
-    rakarrack.get(m_process->PrefNom("TapTempo On/Off"), k, 0);
-    Tap_activar->value(k);
+    Tap_activar->value(m_process->Config.TapTempo_On_Off);
     Tap_activar->do_callback();
+    // End Tap
 
+    Fl_Tooltip::enable(m_process->Config.ena_tool);
 
-    rakarrack.get(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool, 1);
-    Fl_Tooltip::enable(m_process->ena_tool);
-    
-    rakarrack.get(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay, 0);
-    Settings->Focus_Slider->value (m_process->Focus_Delay);
+    Settings->Focus_Slider->value (m_process->Config.Focus_Delay);
     Settings->Focus_Slider->do_callback ();
 
     //Trigger
@@ -1104,8 +1103,8 @@ void RKRGUI::save_current_state(int whati)
         rakarrack.set(m_process->PrefNom("Shifter Quality"), m_process->Config.ShiQual);
         rakarrack.set(m_process->PrefNom("Tap Tempo Timeout"), m_process->t_timeout);
         rakarrack.set(m_process->PrefNom("Disable Warnings"), m_process->Config.Disable_Warnings);
-        rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->ena_tool);
-        rakarrack.set(m_process->PrefNom("Focus Delay"), m_process->Focus_Delay);
+        rakarrack.set(m_process->PrefNom("Enable Tooltips"), m_process->Config.ena_tool);
+        rakarrack.set(m_process->PrefNom("Focus Delay"), m_process->Config.Focus_Delay);
         rakarrack.set(m_process->PrefNom("MIDI Table File"), m_process->Config.custom_midi_table_file);
     }
 
@@ -1762,8 +1761,8 @@ void RKRGUI::MiraConfig()
     Settings->Upr_Qual->value(m_process->Config.UpQual);
     Settings->Downr_Qual->value(m_process->Config.DownQual);
     Settings->MESSAGE_DISABLE->value(m_process->Config.Disable_Warnings);
-    Settings->ENA_TOOL->value(m_process->ena_tool);
-    Settings->Focus_Slider->value(m_process->Focus_Delay);
+    Settings->ENA_TOOL->value(m_process->Config.ena_tool);
+    Settings->Focus_Slider->value(m_process->Config.Focus_Delay);
     Settings->T_TIMEOUT->value(m_process->t_timeout);
 
     Settings->Upr_Amo->value(m_process->Config.UpAmo);
@@ -2987,7 +2986,7 @@ void RKRGUI::Fill_Avail(int filter)
 
 void RKRGUI::set_focus_timer(int time)
 {
-    focus_delay_time = m_process->Focus_Delay = time;
+    focus_delay_time = m_process->Config.Focus_Delay = time;
 }
 
 void RKRGUI::below_mouse_highlight_and_focus()

@@ -150,8 +150,6 @@ RKR::RKR(int gui) :
     Aux_Maximum(),
     Aux_Source(),
     last_auxvalue(0),
-    ena_tool(),
-    Focus_Delay(0),
     M_Metro_Tempo(),
     M_Metro_Bar(),
     mtc_counter(),

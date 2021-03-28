@@ -1033,8 +1033,6 @@ public:
     int Aux_Maximum;
     int Aux_Source;
     int last_auxvalue;
-    int ena_tool;
-    int Focus_Delay;
 
     int M_Metro_Tempo;
     int M_Metro_Bar;

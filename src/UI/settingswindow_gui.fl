@@ -1457,8 +1457,8 @@ else JackIn->deactivate();}
       }
       Fl_Check_Button ENA_TOOL {
         label {Enable Tooltips       }
-        callback {m_process->ena_tool=(int) o->value();
-Fl_Tooltip::enable(m_process->ena_tool);}
+        callback {m_process->Config.ena_tool=(int) o->value();
+Fl_Tooltip::enable(m_process->Config.ena_tool);}
         xywh {30 100 118 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button
