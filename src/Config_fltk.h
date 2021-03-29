@@ -271,7 +271,7 @@ public:
 
     // preferences location for fltk
     char jackcliname[64];
-    char tmpprefname[128];
+    char tmpprefname[512];
 
     struct JackPorts
     {
