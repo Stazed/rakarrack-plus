@@ -1508,7 +1508,7 @@ BankWindow->hide();}
         }
         Fl_Input WPreset_Name {
           callback {strcpy(m_process->Active_Preset.Preset_Name,o->value());}
-          xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
+          tooltip {Enter the preset name for this effect.} xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->set_text_offset(14);}
           code1 {o->maximum_size(22);}
           class RKR_Input

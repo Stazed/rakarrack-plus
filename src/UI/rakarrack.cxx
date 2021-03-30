@@ -2518,6 +2518,7 @@ void RKRGUI::make_window() {
         o->set_label_offset(2);
       } // RKR_Button* B_preset
       { RKR_Input* o = WPreset_Name = new RKR_Input(174, 72, 338, 30);
+        WPreset_Name->tooltip("Enter the preset name for this effect.");
         WPreset_Name->box(FL_DOWN_BOX);
         WPreset_Name->color((Fl_Color)62);
         WPreset_Name->selection_color(FL_SELECTION_COLOR);
