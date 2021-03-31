@@ -38,7 +38,7 @@ RKR::Message(int prio, const char *labelwin, const char *message_text)
     {
         Fl_Widget *w = fl_message_icon();
 
-        Fl_Image *a = new Fl_Pixmap(icono_rakarrack_32x32_xpm);
+        Fl_Image *a = new Fl_Pixmap(icono_rakarrack_32x32);
         w->color(FL_WHITE);
         w->label("");
         w->image(a);
@@ -203,17 +203,17 @@ RKR::Handle_Message(int num, std::string filename)
         case 40:
             sprintf(error_msg, "Bank file cannot be found in user directory %s\n\n"
                     "All user banks must be put in the user directory set in:\n"
-                    "Settings/Preferences/Bank - User Directory", filename.c_str());
+                    "Settings/Preferences/User - User Directory", filename.c_str());
             break;
         case 41:
             sprintf(error_msg,"User Directory is not set!\n\n"
                     "You must set a User Directory in :\n"
-                    "Settings/Preferences/Bank - User Directory.");
+                    "Settings/Preferences/User - User Directory.");
             break;
         case 42:
             sprintf(error_msg, "MIDI program file cannot be found in user directory:\n%s\n\n"
                     "All MIDI program files should be put in the user directory set in:\n"
-                    "Settings/Preferences/Bank - User Directory", filename.c_str());
+                    "Settings/Preferences/User - User Directory", filename.c_str());
             break;
         case 43:
         {
@@ -221,7 +221,7 @@ RKR::Handle_Message(int num, std::string filename)
             filename =  Efx_Convolotron->Filename;
             sprintf(error_msg, "Convolotron user file cannot be found in user directory:\n%s\n\n"
                 "All user files must be put in the user directory set in:\n"
-                "Settings/Preferences/Bank - User Directory", filename.c_str());
+                "Settings/Preferences/User - User Directory", filename.c_str());
         }
             break;
         case 44:
@@ -230,7 +230,7 @@ RKR::Handle_Message(int num, std::string filename)
             filename =  Efx_Echotron->Filename;
             sprintf(error_msg, "Echotron user file cannot be found in user directory:\n%s\n\n"
                 "All user files must be put in the user directory set in:\n"
-                "Settings/Preferences/Bank - User Directory", filename.c_str());
+                "Settings/Preferences/User - User Directory", filename.c_str());
         }
             break;
         case 45:
@@ -239,7 +239,7 @@ RKR::Handle_Message(int num, std::string filename)
             filename =  Efx_Reverbtron->Filename;
             sprintf(error_msg, "Reverbtron user file cannot be found in user directory:\n%s\n\n"
                 "All user files must be put in the user directory set in:\n"
-                "Settings/Preferences/Bank - User Directory", filename.c_str());
+                "Settings/Preferences/User - User Directory", filename.c_str());
         }
             break;
         case 46:
