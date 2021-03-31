@@ -94,20 +94,35 @@ control rakarrack-plus with MIDI messages use the MIDI Learn way.</p>
 
 <p> All the presets can be saved as single text files but, recently added
 Convolotron, Echotron and Reverbtron can use "User" files. The program saves
-the paths of these "User" files. If you want to share please be sure that the
-paths can also be shared and of course you will need to supply the user files.
+the names of these "User" files. All user files must be placed in the user
+directory. Rakarrack-plus scans the user directory on start for these files.
+See the individual help for Convolotron, Echotron and Reverbtron for additional
+information. If you want to share, you will need to supply the user files.</p>
 
-To add a user defined preset to any effect, place the mouse pointer over the
+<p><b>User defined "Insert" Presets</b></p>
+<p>To add a user defined preset to any effect, place the mouse pointer over the
 effect's preset drop down menu and press the "Insert" key. You will be prompted
-to name the preset, and it will be saved in "/.rkrintpreset" of your home 
-directory. This will save the effect's current settings as a preset that will
-appear on the drop down menu effect's preset menu with a * before the name.
+to name the preset, and it will be saved in your rakarrack-plus user directory
+in the file named "InsertPresets.rkis". This will save the effect's current
+settings as a preset that will appear on the effect's preset menu
+with a * before the name.
 
-To delete a user defined preset, place the mouse pointer over the effect's
+To delete a user defined preset, select the preset and place the mouse pointer over the effect's
 preset menu and press the "Delete" key.
 
 You can import presets from other sources from the main window menu:
-File/Import Internal Presets.
+File/Import Inserted Presets.</p>
+
+<p><b>Rakarrack-plus users prior to version 1.1.0</b></p>
+<p>The file location of the inserted presets was moved in version 1.1.0.
+The previous file location was in a hidden file of your home directory "~/.rkrintpreset".
+To recover your previous inserted presets, from the main window goto File/Import Inserted Presets.
+The file browser default file selection is set to the previous location hidden .rkrintpreset file. Select the
+"OK" button to accept. Your previous inserted presets will be copied to the new file location
+in your user directory, "InsertPresets.rkis". You will need to re-start for the import to take effect.
+After importing, and checking that the presets have been properly loaded, you can safely delete the .rkrintpreset
+file.</p>
+    
 
 
 <h3><a name="awha"></a>AlienWah</h3>
