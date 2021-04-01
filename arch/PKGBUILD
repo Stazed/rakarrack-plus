@@ -1,0 +1,34 @@
+# Maintainer: Your name here <your@email.here>
+pkgname=rakarrack-plus
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="Stereo digital effects processor with Jack support (Continuation of rakarrack with LV2s, fixes & more, git version)"
+arch=('i686' 'x86_64')
+url="https://github.com/Stazed/rakarrack-plus"
+license=('GPL3')
+depends=('alsa-utils' 'fftw' 'fltk' 'jack' 'libxpm')
+makedepends=('git')
+conflicts=('rakarrack-plus')
+provides=('rakarrack-plus')
+_name='rakarrack-plus'
+source=("git+https://github.com/Stazed/$_name.git#branch=master")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_name"
+  git describe --long --tags | sed 's/Release-//;s/-/./g'
+}
+
+build(){
+  mkdir -p "$srcdir/build"
+  cd "$srcdir/build"
+  cmake "$srcdir/$_name" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX="/usr"
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="$pkgdir" install
+}
