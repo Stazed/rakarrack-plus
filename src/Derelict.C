@@ -236,11 +236,17 @@ Derelict::applyfilters(float * efxoutl, float * efxoutr, uint32_t period)
 void
 Derelict::out(float * efxoutl, float * efxoutr)
 {
-    // FIXME inputvol is never used, Pnegate does nothing !!!
-    float inputvol = .5f;
+    float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
 
     if (Pnegate != 0)
+    {
         inputvol *= -1.0f;
+        for (unsigned i = 0; i < PERIOD; i++)
+        {
+            efxoutl[i] = efxoutl[i] * inputvol;
+            efxoutr[i] = efxoutr[i] * inputvol;
+        }
+    }
         
     if (Pprefiltering != 0)
         applyfilters(efxoutl, efxoutr, PERIOD);
