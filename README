@@ -4,7 +4,7 @@ Rakarrack-plus
 Screenshot
 ----------
 
-![screenshot](https://raw.github.com/Stazed/rakarrack-plus/wip/doc/rakarrack-plus-1.0.0.png "Rakarrack-plus Gleam Theme")
+![screenshot](https://raw.github.com/Stazed/rakarrack-plus/wip/doc/rakarrack-plus-1.1.0.png "Rakarrack-plus release-1.1.0")
 
 
 About
@@ -66,6 +66,23 @@ To build Rakarrack-plus only set "BuildLV2Plugins" to OFF:
 To build LV2s only set "BuildRakarrackPlus" to OFF
 
     cmake -DBuildRakarrackPlus=OFF ..
+
+Rakarrack-plus-1.1.0
+--------------------
+Important changes from previous versions:
+*   All user files must now be located in the User Directory
+*   MIDI Bank select CC 0, now available for program default and all user banks
+*   "Insert" preset file changed to user directory. From the main window File/Import Inserted Presets
+    to import from older versions.
+*   Some key binding has changed
+*   Custom MIDI program table can now be used without the gui
+*   Custom MIDI program files must be in the User Directory
+*   Custom MIDI program files are MIDI selectable, CC 32, MIDI learnable
+*   File handling changed for Convolotron, Echotron and Reverbtron. See F1 help for additional information
+*   Error handling expanded
+*   Help updated
+*   Extensive re-factoring of MIDI control, Audio processing, and gui
+*   And many, many more... to numerous to list. See git commits for details
 
 
 Rakarrack-plus-1.0.0
