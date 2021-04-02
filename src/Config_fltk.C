@@ -55,7 +55,17 @@ Config_fltk::PrefNom(const char *dato)
  */
 void Config_fltk::load_previous_state()
 {
+//#ifdef NSM_SUPPORT
+#if 0
+    //The file name is generated in the form path/application.prefs.
+    // If application is NULL, path must contain the full file name.
+    std::string s_path = "/home/sspresto/rakabank/";    // path to NSM project directory
+    std::string s_vendor = "This_Instance";             // anything - unique text describing the company or author of this file
+    std::string s_name = "Jack_Name";                   // application - NSM name, file would be Jack_Name.prefs
+    Fl_Preferences rakarrack(s_path.c_str(), s_instance.c_str(), s_name.c_str());
+#else
     Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
+#endif
 
     // ************* Settings/Look ******************
     rakarrack.get(PrefNom("Schema"), Schema, 2);

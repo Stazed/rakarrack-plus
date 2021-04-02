@@ -36,6 +36,7 @@
 #include <sstream>  // NTS
 #include <FL/Fl_Tiled_Image.H>
 
+//#define NSM_SUPPORT
 
 class RKRGUI;   // forward declaration
 class RKR;      // forward declaration
@@ -49,6 +50,10 @@ extern Fl_Color global_label_color;
 extern int global_font_type;
 extern int global_font_size;
 extern int global_look_changed;
+
+#ifdef NSM_SUPPORT
+extern int global_gui_show;
+#endif
 
 // Used by FPreset
 extern std::string global_user_directory;

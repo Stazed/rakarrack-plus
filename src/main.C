@@ -61,6 +61,10 @@ show_help()
     fprintf(stderr, "\n");
 }
 
+#ifdef NSM_SUPPORT
+int global_gui_show = 0;
+#endif
+
 int
 main(int argc, char *argv[])
 {
@@ -240,6 +244,22 @@ main(int argc, char *argv[])
         if (process.Gui_Shown)
         {
             Fl::wait();
+            
+#ifdef NSM_SUPPORT
+            if(global_gui_show)
+            {
+                process.Gui_Shown = 0;
+                rgui->BankWindow->hide();
+                rgui->Order->hide();
+                rgui->Settings->hide();
+                rgui->AboutWin->hide();
+                rgui->MIDILearn->hide();
+                rgui->Trigger->hide();
+                rgui->Principal->hide();
+                Fl::flush();
+                global_gui_show = 0;
+            }
+#endif
         }
         else
         {
@@ -257,6 +277,14 @@ main(int argc, char *argv[])
             
             if (global_error_number > 0)
                 process.Handle_Message(global_error_number);
+#ifdef NSM_SUPPORT
+            if(global_gui_show)
+            {
+                process.Gui_Shown = 1;
+                rgui->Principal->show();
+                global_gui_show = 0;
+            }
+#endif
         }
 
         if ((!jack_disconnected) && (process.Jack_Shut_Down))

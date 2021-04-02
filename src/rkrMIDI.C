@@ -1255,6 +1255,15 @@ RKR::process_midi_controller_events(int parameter, int value)
             }
             return;
         }
+#if 1   // For debugging gui show/hide FIXME remove when done
+#ifdef NSM_SUPPORT
+        case MC_Unused_19:
+        {
+            global_gui_show = 1;
+            return;
+        }
+#endif
+#endif
             
         case MC_Unused_10:
         case MC_Unused_11:
@@ -1263,8 +1272,10 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Unused_16:
         case MC_Unused_17:
         case MC_Unused_18:
+#ifndef NSM_SUPPORT     // FIXME remove when done
         case MC_Unused_19:
-            
+#endif
+
         case MC_Unused_33:
         case MC_Unused_34:
         case MC_Unused_35:
