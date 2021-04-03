@@ -28,12 +28,15 @@
 #ifndef CONFIG_FLTK_H
 #define CONFIG_FLTK_H
 
+#include <FL/Fl_Preferences.H>
+
 class Config_fltk {
 public:
     Config_fltk();
     virtual ~Config_fltk();
     
     void load_previous_state();
+    void load_preferences(Fl_Preferences &rakarrack);
 
     // ***** Look *****
     int Schema;

@@ -324,11 +324,20 @@ widget gets the focus.} private local
   Function {make_window()} {open return_type void
   } {
     Fl_Window Principal {
-      callback {is_bank_modified();
-is_PG_table_modified();
-save_current_state(0);
+      callback {if(nsm_preferences_file.empty())
+    {
+        is_bank_modified();
+        is_PG_table_modified();
+        save_current_state(0);
 
-m_process->Exit_Program=1;} open selected
+        m_process->Exit_Program=1;
+    }
+\#ifdef NSM_SUPPORT
+    else
+    {
+        global_gui_show = CONST_GUI_HIDE;
+    }
+\#endif} open selected
       xywh {396 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1892,6 +1901,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {put_icon(Fl_Window* window)} {open
   } {}
   Function {load_previous_state()} {open
+  } {}
+  Function {save_preferences(Fl_Preferences &rakarrack, int whati)} {open return_type void
   } {}
   Function {save_current_state(int whati)} {open
   } {}

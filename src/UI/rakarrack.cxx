@@ -36,11 +36,20 @@ int global_font_type = 0;
 int global_look_changed = 0; 
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
-  is_bank_modified();
-is_PG_table_modified();
-save_current_state(0);
+  if(nsm_preferences_file.empty())
+    {
+        is_bank_modified();
+        is_PG_table_modified();
+        save_current_state(0);
 
-m_process->Exit_Program=1;
+        m_process->Exit_Program=1;
+    }
+#ifdef NSM_SUPPORT
+    else
+    {
+        global_gui_show = CONST_GUI_HIDE;
+    }
+#endif
 }
 void RKRGUI::cb_Principal(Fl_Double_Window* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Principal_i(o,v);

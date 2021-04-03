@@ -25,7 +25,6 @@
  * Created on March 26, 2021, 11:06 AM
  */
 
-#include <FL/Fl_Preferences.H>
 
 #include "global.h"
 #include "Config_fltk.h"
@@ -46,22 +45,9 @@ Config_fltk::PrefNom(const char *dato)
     return (tmpprefname);
 }
 
-/**
- * User settings from Settings/Preferences.
- * Main Window non rack effect settings: Tuner, MIDI Converter, Tap Tempo, Metronome,
- * Booster button, last used bank, last used preset.
- * Also the previous state when shutdown, window sizes, images, etc.
- * From ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
- */
-void Config_fltk::load_previous_state()
+void
+Config_fltk::load_preferences(Fl_Preferences &rakarrack)
 {
-
-#ifdef NSM_SUPPORT
-    Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
-#else
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-#endif
-
     // ************* Settings/Look ******************
     rakarrack.get(PrefNom("Schema"), Schema, 2);
 
@@ -343,4 +329,25 @@ void Config_fltk::load_previous_state()
     rakarrack.get(PrefNom("Aux MIDI"), Aux_MIDI, 1);
     rakarrack.get(PrefNom("Aux Minimum"), Aux_Minimum, 0);
     rakarrack.get(PrefNom("Aux Maximum"), Aux_Maximum, 127);
+}
+
+/**
+ * User settings from Settings/Preferences.
+ * Main Window non rack effect settings: Tuner, MIDI Converter, Tap Tempo, Metronome,
+ * Booster button, last used bank, last used preset.
+ * Also the previous state when shutdown, window sizes, images, etc.
+ * From ~user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
+ */
+void Config_fltk::load_previous_state()
+{
+    if(nsm_preferences_file.empty())
+    {
+        Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
+        load_preferences(rakarrack);
+    }
+    else
+    {
+        Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
+        load_preferences(rakarrack);
+    }
 }

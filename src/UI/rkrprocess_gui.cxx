@@ -863,29 +863,9 @@ void RKRGUI::load_previous_state()
     Trigger->aux_max->value(m_process->Aux_Maximum);
 }
 
-/**
- *  Save the current user state, windows, images, bank selected, preset, etc.
- *  In ~/user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
- * 
- * @param whati
- *      The window settings that should be saved:
- *      0 = Main window & User settings
- *      1 = Bank window
- *      2 = Order window
- *      3 = Settings window & User settings
- *      4 = Not used
- *      5 = MIDI Learn
- *      6 = Trigger window (ACI)
- */
-void RKRGUI::save_current_state(int whati)
+void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
 {
     char temp1[128];
-
-#ifdef NSM_SUPPORT
-    Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
-#else
-    Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
-#endif
 
     if (whati == 0)
     {
@@ -1138,6 +1118,34 @@ void RKRGUI::save_current_state(int whati)
         }
 
         rakarrack.set(m_process->Config.PrefNom("Auto Connect In Num"), k - 1);
+    }
+}
+
+/**
+ *  Save the current user state, windows, images, bank selected, preset, etc.
+ *  In ~/user/.fltk/github.com.Stazed.rakarrack.plus/rakarrack-plus.prefs
+ * 
+ * @param whati
+ *      The window settings that should be saved:
+ *      0 = Main window & User settings
+ *      1 = Bank window
+ *      2 = Order window
+ *      3 = Settings window & User settings
+ *      4 = Not used
+ *      5 = MIDI Learn
+ *      6 = Trigger window (ACI)
+ */
+void RKRGUI::save_current_state(int whati)
+{
+    if(nsm_preferences_file.empty())
+    {
+        Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
+        save_preferences(rakarrack, whati);
+    }
+    else
+    {
+        Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
+        save_preferences(rakarrack, whati);
     }
 }
 

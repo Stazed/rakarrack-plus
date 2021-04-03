@@ -580,6 +580,7 @@ public:
   void font_type_change(int font_type);
   void put_icon(Fl_Window* window);
   void load_previous_state();
+  void save_preferences(Fl_Preferences &rakarrack, int whati);
   void save_current_state(int whati);
   void Put_Loaded();
   static void preset_click(Fl_Button* o, void* v);

@@ -30,11 +30,13 @@
 #include "process.h"
 #include "jack.h"
 
+// This is necessary for NSM, so if it is empty, then we are not using NSM
+std::string nsm_preferences_file = "";
+
 #ifdef NSM_SUPPORT
 #include "nsm.h"
 
 int global_gui_show = 0;
-std::string nsm_preferences_file = "";
 int save_preferences = 0;
 static nsm_client_t *nsm = 0;
 static int wait_nsm = 1;
@@ -70,7 +72,7 @@ cb_nsm_show ( void *userdata )
 {
    // do_show_ui();  //Your own function
     global_gui_show = CONST_GUI_SHOW;
-    nsm_send_is_shown ( nsm );
+  //  nsm_send_is_shown ( nsm );
 }
 
 void
@@ -78,7 +80,7 @@ cb_nsm_hide ( void *userdata )
 {
    // do_hide_ui(); //Your own function
     global_gui_show = CONST_GUI_HIDE;
-    nsm_send_is_hidden ( nsm );
+  //  nsm_send_is_hidden ( nsm );
 }
                                                                      
 void
@@ -358,26 +360,29 @@ main(int argc, char *argv[])
             Fl::wait();
             
 #ifdef NSM_SUPPORT
-            
-            poll_nsm(NULL);
-            if(global_gui_show == CONST_GUI_HIDE)
+            if(!nsm_preferences_file.empty())
             {
-                process.Gui_Shown = 0;
-                rgui->BankWindow->hide();
-                rgui->Order->hide();
-                rgui->Settings->hide();
-                rgui->AboutWin->hide();
-                rgui->MIDILearn->hide();
-                rgui->Trigger->hide();
-                rgui->Principal->hide();
-                Fl::flush();
-                global_gui_show = CONST_GUI_OFF;
-            }
-            
-            if(save_preferences)
-            {
-                save_preferences = 0;
-                rgui->save_current_state(0);
+                poll_nsm(NULL);
+                if(global_gui_show == CONST_GUI_HIDE)
+                {
+                    process.Gui_Shown = 0;
+                    rgui->BankWindow->hide();
+                    rgui->Order->hide();
+                    rgui->Settings->hide();
+                    rgui->AboutWin->hide();
+                    rgui->MIDILearn->hide();
+                    rgui->Trigger->hide();
+                    rgui->Principal->hide();
+                    Fl::flush();
+                    global_gui_show = CONST_GUI_OFF;
+                    nsm_send_is_hidden ( nsm );
+                }
+
+                if(save_preferences)
+                {
+                    save_preferences = 0;
+                    rgui->save_current_state(0);
+                }
             }
 #endif
         }
@@ -397,20 +402,24 @@ main(int argc, char *argv[])
             
             if (global_error_number > 0)
                 process.Handle_Message(global_error_number);
+
 #ifdef NSM_SUPPORT
-            
-            poll_nsm(NULL);
-            if(global_gui_show == CONST_GUI_SHOW)
+            if(!nsm_preferences_file.empty())
             {
-                process.Gui_Shown = 1;
-                rgui->Principal->show();
-                global_gui_show = CONST_GUI_OFF;
-            }
-            
-            if(save_preferences)
-            {
-                save_preferences = 0;
-                rgui->save_current_state(0);
+                poll_nsm(NULL);
+                if(global_gui_show == CONST_GUI_SHOW)
+                {
+                    process.Gui_Shown = 1;
+                    rgui->Principal->show();
+                    global_gui_show = CONST_GUI_OFF;
+                    nsm_send_is_shown ( nsm );
+                }
+
+                if(save_preferences)
+                {
+                    save_preferences = 0;
+                    rgui->save_current_state(0);
+                }
             }
 #endif
         }
