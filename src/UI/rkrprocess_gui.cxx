@@ -1086,6 +1086,9 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Enable Tooltips"), m_process->Config.ena_tool);
         rakarrack.set(m_process->Config.PrefNom("Focus Delay"), m_process->Config.Focus_Delay);
         rakarrack.set(m_process->Config.PrefNom("MIDI Table File"), m_process->Config.custom_midi_table_file);
+#ifdef NSM_SUPPORT
+        rakarrack.set(m_process->Config.PrefNom("NSM Gui Status"), m_process->Gui_Shown);
+#endif
     }
 
 

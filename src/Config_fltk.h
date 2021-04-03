@@ -272,6 +272,11 @@ public:
     int Aux_Minimum;
     int Aux_Maximum;
 
+    // NSM
+#ifdef NSM_SUPPORT
+    int NSM_gui_status;
+#endif
+
     // preferences location for fltk
     char jackcliname[64];
     char tmpprefname[512];
