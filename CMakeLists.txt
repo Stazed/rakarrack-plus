@@ -23,6 +23,7 @@ check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 option (BuildRakarrackPlus "Build rakarrack-plus" ON)
 option (BuildLV2Plugins "Build rakarack-plus lv2 plugins (RakarrackPlus.lv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
+option (EnableNSM "Enable NSM session support" ON)
 option (BuildForDebug "Include gdb debugging support" OFF)
 option (EnableOptimizations "Enable optimizations" ON)
 option (EnableSSE "Enable SSE (default=automatic check)" ON)
@@ -87,8 +88,9 @@ pkg_check_modules(XFT REQUIRED xft)
 pkg_check_modules(XRENDER REQUIRED xrender)
 pkg_check_modules(XPM REQUIRED xpm)
 
-# FIXME not required unless using NSM
-pkg_check_modules(LIBLO liblo>=0.26 REQUIRED)
+if (EnableNSM)
+    pkg_check_modules(LIBLO liblo>=0.26 REQUIRED)
+endif (EnableNSM)
 
 find_program(ACONNECT aconnect)
 if (ACONNECT)
@@ -130,6 +132,10 @@ mark_as_advanced (FLTK_DIR)
 mark_as_advanced (FLTK_MATH_LIBRARY)
 mark_as_advanced (LIBDL)
 mark_as_advanced (LIBRT)
+if(EnableNSM)
+    mark_as_advanced (LIBLO)
+    add_definitions(-D'NSM_SUPPORT=1')
+endif (EnableNSM)
 
 if(BuildRakarrackPlus)
     install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
@@ -276,7 +282,10 @@ package_status(SAMPLERATE_FOUND    "Samplerate conversion (libsamplerate). . . .
 package_status(XFT_FOUND           "Xft support. . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(XRENDER_FOUND       "Xrender support. . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(XPM_FOUND           "Xpm support (libxpm) . . . . . . . . . . . . . . . . . .:"  )
-package_status(LIBLO_FOUND         "Liblo support. . . . . . . . . . . . . . . . . . . . . .:"  )
+
+if (EnableNSM)
+    package_status(LIBLO_FOUND         "Liblo support. . . . . . . . . . . . . . . . . . . . . .:"  )
+endif(EnableNSM)
 
 if(BuildLV2Plugins)
     package_status(LV2_FOUND           "LV2 support. . . . . . . . . . . . . . . . . . . . . . .:"  )
@@ -293,6 +302,7 @@ package_status(BuildRakarrackPlus  "Build Rakarrack-plus . . . . . . . . . . . .
 package_status(BuildLV2Plugins     "Build LV2s (RakarrackPlus.lv2) . . . . . . . . . . . . .:"  )
 package_status(BuildCarlaPresets   "Build Carla lv2 presets. . . . . . . . . . . . . . . . .:"  )
 package_status(BuildForDebug       "Build for debug. . . . . . . . . . . . . . . . . . . . .:"  )
+package_status(EnableNSM           "NSM session support. . . . . . . . . . . . . . . . . . .:"  )
 
 message (STATUS)
 message (STATUS)

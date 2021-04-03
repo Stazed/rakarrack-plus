@@ -98,7 +98,7 @@ poll_nsm(void *v)
     }
 }
 
-#endif
+#endif  // NSM_SUPPORT
 
 void sigterm_handler(int sig)
 {

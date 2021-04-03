@@ -36,7 +36,6 @@
 #include <sstream>  // NTS
 #include <FL/Fl_Tiled_Image.H>
 
-#define NSM_SUPPORT
 
 class RKRGUI;   // forward declaration
 class RKR;      // forward declaration
