@@ -45,7 +45,8 @@ cb_nsm_open ( const char *save_file_path,  //See API Docs 2.2.2
               char **out_msg,
               void *userdata )
 {
-       // do_open_stuff(); //Your own function
+    // do_open_stuff(); //Your own function
+    // fprintf(stderr, "Open - Path = %s:\n disp = %s\n client_id = %s", save_file_path, display_name, client_id);
     jack_client_name = strdup(client_id);
     wait_nsm = 0;
     return ERR_OK;
@@ -124,52 +125,6 @@ show_help()
 int
 main(int argc, char *argv[])
 {
-#ifdef NSM_SUPPORT
-    const char *nsm_url = getenv( "NSM_URL" );
-    
-    if ( nsm_url )
-    {
-        nsm = nsm_new();
-
-        nsm_set_open_callback( nsm, cb_nsm_open, 0 );
-        nsm_set_save_callback( nsm, cb_nsm_save, 0 );
-
-        if ( 0 == nsm_init( nsm, nsm_url ) )
-        {
-            nsm_set_save_callback( nsm, cb_nsm_save, 0 );
-            nsm_send_announce( nsm, "Rakarrack-plus", ":optional-gui:", argv[0] );
-        }
-
-        int timeout = 0;
-        while ( wait_nsm )
-        {
-            nsm_check_wait( nsm, 500 );
-            timeout += 1;
-
-            if ( timeout > 200 )
-                exit ( 1 );
-        }
-
-        if ( strstr( nsm_get_session_manager_features ( nsm ),
-                      ":optional-gui:" ) )
-        {
-            nsm_set_show_callback( nsm, cb_nsm_show, 0 );
-            nsm_set_hide_callback( nsm, cb_nsm_hide, 0 );
-
-        }
-
-       /* poll so we can keep OSC handlers running in the GUI thread and avoid extra sync */
-    //   Fl::add_timeout( NSM_CHECK_INTERVAL, poll_nsm, NULL );
-    }
-    else
-    {
-        if(nsm)
-        {
-            nsm_free( nsm );
-            nsm = 0;
-        }
-    }
-#endif // NSM_SUPPORT
     // Read command Line
 
     fprintf
@@ -208,6 +163,7 @@ main(int argc, char *argv[])
     int needtoloadbank = 0;
     std::string banktoload;
     std::string filetoload;
+    std::string command_line_name = "rakarrack-plus";
 
     // globals
     opterr = 0;
@@ -257,7 +213,7 @@ main(int argc, char *argv[])
         case 'j':
             if (optarguments != NULL)
             {
-                jack_client_name = strdup(optarguments);
+                command_line_name = jack_client_name = strdup(optarguments);
             }
             break;
         }
@@ -269,6 +225,54 @@ main(int argc, char *argv[])
         show_help();
         return (0);
     };
+    
+#ifdef NSM_SUPPORT
+    const char *nsm_url = getenv( "NSM_URL" );
+    
+    if ( nsm_url )
+    {
+        nsm = nsm_new();
+
+        nsm_set_open_callback( nsm, cb_nsm_open, 0 );
+        nsm_set_save_callback( nsm, cb_nsm_save, 0 );
+
+        if ( 0 == nsm_init( nsm, nsm_url ) )
+        {
+            
+            nsm_set_save_callback( nsm, cb_nsm_save, 0 );
+            nsm_send_announce( nsm, command_line_name.c_str(), ":optional-gui:", argv[0] );
+        }
+
+        int timeout = 0;
+        while ( wait_nsm )
+        {
+            nsm_check_wait( nsm, 500 );
+            timeout += 1;
+
+            if ( timeout > 200 )
+                exit ( 1 );
+        }
+
+        if ( strstr( nsm_get_session_manager_features ( nsm ),
+                      ":optional-gui:" ) )
+        {
+            nsm_set_show_callback( nsm, cb_nsm_show, 0 );
+            nsm_set_hide_callback( nsm, cb_nsm_hide, 0 );
+
+        }
+
+       /* poll so we can keep OSC handlers running in the GUI thread and avoid extra sync */
+    //   Fl::add_timeout( NSM_CHECK_INTERVAL, poll_nsm, NULL );
+    }
+    else
+    {
+        if(nsm)
+        {
+            nsm_free( nsm );
+            nsm = 0;
+        }
+    }
+#endif // NSM_SUPPORT
 
 
     RKR process(gui);
