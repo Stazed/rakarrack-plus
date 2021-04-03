@@ -34,6 +34,8 @@
 #include "nsm.h"
 
 int global_gui_show = 0;
+std::string nsm_preferences_file = "";
+int save_preferences = 0;
 static nsm_client_t *nsm = 0;
 static int wait_nsm = 1;
 const double NSM_CHECK_INTERVAL = 0.25f;
@@ -47,6 +49,8 @@ cb_nsm_open ( const char *save_file_path,  //See API Docs 2.2.2
 {
     // do_open_stuff(); //Your own function
     // fprintf(stderr, "Open - Path = %s:\n disp = %s\n client_id = %s", save_file_path, display_name, client_id);
+    nsm_preferences_file = save_file_path;
+    nsm_preferences_file += ".prefs";
     jack_client_name = strdup(client_id);
     wait_nsm = 0;
     return ERR_OK;
@@ -57,6 +61,7 @@ cb_nsm_save ( char **out_msg,
            void *userdata )
 {
    // do_save_stuff(); //Your own function
+    save_preferences = 1;
     return ERR_OK;
 }
 
@@ -261,6 +266,7 @@ main(int argc, char *argv[])
 
         }
 
+        gui = 1;    // always load gui with NSM
        /* poll so we can keep OSC handlers running in the GUI thread and avoid extra sync */
     //   Fl::add_timeout( NSM_CHECK_INTERVAL, poll_nsm, NULL );
     }
@@ -367,6 +373,12 @@ main(int argc, char *argv[])
                 Fl::flush();
                 global_gui_show = CONST_GUI_OFF;
             }
+            
+            if(save_preferences)
+            {
+                save_preferences = 0;
+                rgui->save_current_state(0);
+            }
 #endif
         }
         else
@@ -393,6 +405,12 @@ main(int argc, char *argv[])
                 process.Gui_Shown = 1;
                 rgui->Principal->show();
                 global_gui_show = CONST_GUI_OFF;
+            }
+            
+            if(save_preferences)
+            {
+                save_preferences = 0;
+                rgui->save_current_state(0);
             }
 #endif
         }

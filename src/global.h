@@ -56,6 +56,7 @@ extern int global_gui_show;
 const int CONST_GUI_SHOW = 1;
 const int CONST_GUI_HIDE = 2;
 const int CONST_GUI_OFF  = 0;
+extern std::string nsm_preferences_file;
 #endif
 
 // Used by FPreset
