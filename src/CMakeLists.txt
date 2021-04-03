@@ -175,6 +175,7 @@ set(ExternLibraries
     ${XPM_LIBRARIES}
     ${FREETYPE_LIBRARIES}
     ${ZLIB_LIBRARIES}
+    ${LIBLO_LIBRARIES}
     dl
     rt
     m
@@ -197,6 +198,7 @@ target_include_directories (
     ${XPM_INCLUDE_DIRS}
     ${FREETYPE_INCLUDE_DIRS}
     ${ZLIB_INCLUDE_DIRS}
+    ${LIBLO_INCLUDE_DIRS}
     "${CMAKE_CURRENT_SOURCE_DIR}/UI"
     "${CMAKE_CURRENT_BINARY_DIR}/UI"
 )

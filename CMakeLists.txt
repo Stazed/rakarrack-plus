@@ -87,6 +87,9 @@ pkg_check_modules(XFT REQUIRED xft)
 pkg_check_modules(XRENDER REQUIRED xrender)
 pkg_check_modules(XPM REQUIRED xpm)
 
+# FIXME not required unless using NSM
+pkg_check_modules(LIBLO liblo>=0.26 REQUIRED)
+
 find_program(ACONNECT aconnect)
 if (ACONNECT)
     message (STATUS "Found aconnect in ${ACONNECT}")
@@ -273,6 +276,7 @@ package_status(SAMPLERATE_FOUND    "Samplerate conversion (libsamplerate). . . .
 package_status(XFT_FOUND           "Xft support. . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(XRENDER_FOUND       "Xrender support. . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(XPM_FOUND           "Xpm support (libxpm) . . . . . . . . . . . . . . . . . .:"  )
+package_status(LIBLO_FOUND         "Liblo support. . . . . . . . . . . . . . . . . . . . . .:"  )
 
 if(BuildLV2Plugins)
     package_status(LV2_FOUND           "LV2 support. . . . . . . . . . . . . . . . . . . . . . .:"  )

@@ -30,6 +30,62 @@
 #include "process.h"
 #include "jack.h"
 
+#ifdef NSM_SUPPORT
+#include "nsm.h"
+
+static nsm_client_t *nsm = 0;
+static int wait_nsm = 1;
+const double NSM_CHECK_INTERVAL = 0.25f;
+
+int                                                                  
+cb_nsm_open ( const char *save_file_path,  //See API Docs 2.2.2 
+              const char *display_name,  //Not useful
+              const char *client_id,    //Use as JACK Client Name
+              char **out_msg,
+              void *userdata )
+{
+       // do_open_stuff(); //Your own function
+        wait_nsm = 0;
+        return ERR_OK;
+}                                                                    
+                                                                     
+int
+cb_nsm_save ( char **out_msg,
+           void *userdata )
+{
+   // do_save_stuff(); //Your own function
+    return ERR_OK;
+}
+
+void
+cb_nsm_show ( void *userdata )
+{
+   // do_show_ui();  //Your own function
+    nsm_send_is_shown ( nsm );
+}
+
+void
+cb_nsm_hide ( void *userdata )
+{
+   // do_hide_ui(); //Your own function
+    nsm_send_is_hidden ( nsm );
+}
+                                                                     
+void
+poll_nsm(void *v)
+{
+    if ( nsm )
+    {
+        nsm_check_nowait( nsm );
+        Fl::repeat_timeout( NSM_CHECK_INTERVAL, poll_nsm, v);
+        return;
+    }
+}
+
+int global_gui_show = 0;
+#endif
+
+
 void
 show_help()
 {
@@ -61,13 +117,56 @@ show_help()
     fprintf(stderr, "\n");
 }
 
-#ifdef NSM_SUPPORT
-int global_gui_show = 0;
-#endif
 
 int
 main(int argc, char *argv[])
 {
+#ifdef NSM_SUPPORT
+    const char *nsm_url = getenv( "NSM_URL" );
+    
+    if ( nsm_url )
+    {
+        nsm = nsm_new();
+
+        nsm_set_open_callback( nsm, cb_nsm_open, 0 );
+        nsm_set_save_callback( nsm, cb_nsm_save, 0 );
+
+        if ( 0 == nsm_init( nsm, nsm_url ) )
+        {
+            nsm_set_save_callback( nsm, cb_nsm_save, 0 );
+            nsm_send_announce( nsm, "Rakarrack-plus", ":optional-gui:", argv[0] );
+        }
+
+        int timeout = 0;
+        while ( wait_nsm )
+        {
+            nsm_check_wait( nsm, 500 );
+            timeout += 1;
+
+            if ( timeout > 200 )
+                exit ( 1 );
+        }
+
+        if ( strstr( nsm_get_session_manager_features ( nsm ),
+                      ":optional-gui:" ) )
+        {
+            nsm_set_show_callback( nsm, cb_nsm_show, 0 );
+            nsm_set_hide_callback( nsm, cb_nsm_hide, 0 );
+
+        }
+
+       /* poll so we can keep OSC handlers running in the GUI thread and avoid extra sync */
+       Fl::add_timeout( NSM_CHECK_INTERVAL, poll_nsm, NULL );
+    }
+    else
+    {
+        if(nsm)
+        {
+            nsm_free( nsm );
+            nsm = 0;
+        }
+    }
+#endif // NSM_SUPPORT
     // Read command Line
 
     fprintf
