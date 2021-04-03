@@ -35,8 +35,6 @@ static int analyzer_redraw = 0;
 static int grab_focus = 0;
 static Pixmap p, mask;
 static XWMHints *hints = NULL;
-static volatile int got_sigint = 0;
-static volatile int got_sigusr1 = 0;
 
 /**
  * This local RKR pointer is used exclusively with RKRGUI class static function.
@@ -121,7 +119,6 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
 
     Fl::add_timeout(.04, this->TimeoutStatic, this);
     Fl::add_handler(global_shortcuts);
-    install_signal_handlers();
 }
 
 /**
@@ -138,7 +135,6 @@ void RKRGUI::GuiTimeout(void)
     // Main gui process on timeout
     below_mouse_highlight_and_focus();
     drag_effect();
-    check_signals(this);
 
     if (m_process->Tuner_Active)
     {
@@ -3226,71 +3222,6 @@ int RKRGUI::global_shortcuts(int event)
     }
 
     return 0;
-}
-
-bool RKRGUI::install_signal_handlers()
-{
-    /*install signal handlers*/
-    struct sigaction action;
-    memset(&action, 0, sizeof (action));
-    action.sa_handler = sigterm_handler;
-
-    if (sigaction(SIGUSR1, &action, NULL) == -1)
-    {
-        printf("sigaction() failed: \n");
-        return false;
-    }
-
-    if (sigaction(SIGINT, &action, NULL) == -1)
-    {
-        printf("sigaction() failed: \n");
-        return false;
-    }
-
-    return true;
-}
-
-void RKRGUI::sigterm_handler(int sig)
-{
-    // handle signal type
-    if (sig == SIGUSR1)
-    {
-        got_sigusr1 = sig;
-    }
-
-    if (sig == SIGINT)
-    {
-        got_sigint = sig;
-    }
-}
-
-void RKRGUI::check_signals(void *usrPtr)
-{
-    // process signals
-    RKRGUI *gui = NULL;
-    gui = (RKRGUI*) usrPtr;
-
-    if (!gui)
-        return;
-
-    if (got_sigusr1 == SIGUSR1)
-    {
-        if (!gui->m_process->File_To_Load.empty()) // individual preset
-        {
-            printf("Saving file: %s\n", gui->m_process->File_To_Load.c_str());
-            gui->m_process->save_preset(gui->m_process->File_To_Load.c_str());
-        }
-        
-        got_sigusr1 = 0;
-        return;
-    }
-
-    if (got_sigint == SIGINT)
-    {
-        printf("Got SIGTERM, quitting...\n");
-        got_sigint = 0;
-        gui->m_process->Exit_Program = 1;
-    }
 }
 
 /**

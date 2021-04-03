@@ -33,11 +33,15 @@
 // This is necessary for NSM, so if it is empty, then we are not using NSM
 std::string nsm_preferences_file = "";
 
+// Signal handlers
+static volatile int got_sigint = 0;
+static volatile int got_sigusr1 = 0;
+int save_preferences = 0;
+
 #ifdef NSM_SUPPORT
 #include "nsm.h"
 
 int global_gui_show = 0;
-int save_preferences = 0;
 static nsm_client_t *nsm = 0;
 static int wait_nsm = 1;
 const double NSM_CHECK_INTERVAL = 0.25f;
@@ -95,6 +99,66 @@ poll_nsm(void *v)
 }
 
 #endif
+
+void sigterm_handler(int sig)
+{
+    // handle signal type
+    if (sig == SIGUSR1)
+    {
+        got_sigusr1 = sig;
+    }
+
+    if (sig == SIGINT)
+    {
+        got_sigint = sig;
+    }
+}
+
+bool install_signal_handlers()
+{
+    /*install signal handlers*/
+    struct sigaction action;
+    memset(&action, 0, sizeof (action));
+    action.sa_handler = sigterm_handler;
+
+    if (sigaction(SIGUSR1, &action, NULL) == -1)
+    {
+        printf("sigaction() failed: \n");
+        return false;
+    }
+
+    if (sigaction(SIGINT, &action, NULL) == -1)
+    {
+        printf("sigaction() failed: \n");
+        return false;
+    }
+
+    return true;
+}
+
+void check_signals(void *usrPtr)
+{
+    // process signals
+    RKR *process = NULL;
+    process = (RKR*) usrPtr;
+
+    if (!process)
+        return;
+
+    if (got_sigusr1 == SIGUSR1)
+    {
+        save_preferences = 1;
+        got_sigusr1 = 0;
+        return;
+    }
+
+    if (got_sigint == SIGINT)
+    {
+        printf("Got SIGTERM, quitting...\n");
+        got_sigint = 0;
+        process->Exit_Program = 1;
+    }
+}
 
 
 void
@@ -354,6 +418,8 @@ main(int argc, char *argv[])
     // Main Loop - run until exit requested
     while (!process.Exit_Program)
     {
+        check_signals(&process);
+
         // Refresh GUI
         if (process.Gui_Shown)
         {
@@ -377,14 +443,14 @@ main(int argc, char *argv[])
                     global_gui_show = CONST_GUI_OFF;
                     nsm_send_is_hidden ( nsm );
                 }
-
-                if(save_preferences)
-                {
-                    save_preferences = 0;
-                    rgui->save_current_state(0);
-                }
             }
 #endif
+
+            if(save_preferences)
+            {
+                save_preferences = 0;
+                rgui->save_current_state(0);
+            }
         }
         else
         {
@@ -414,14 +480,14 @@ main(int argc, char *argv[])
                     global_gui_show = CONST_GUI_OFF;
                     nsm_send_is_shown ( nsm );
                 }
-
-                if(save_preferences)
-                {
-                    save_preferences = 0;
-                    rgui->save_current_state(0);
-                }
             }
 #endif
+
+            if(save_preferences)
+            {
+                save_preferences = 0;
+                rgui->save_current_state(0);
+            }
         }
 
         if ((!jack_disconnected) && (process.Jack_Shut_Down))
