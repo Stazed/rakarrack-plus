@@ -33,6 +33,7 @@
 #ifdef NSM_SUPPORT
 #include "nsm.h"
 
+int global_gui_show = 0;
 static nsm_client_t *nsm = 0;
 static int wait_nsm = 1;
 const double NSM_CHECK_INTERVAL = 0.25f;
@@ -45,8 +46,9 @@ cb_nsm_open ( const char *save_file_path,  //See API Docs 2.2.2
               void *userdata )
 {
        // do_open_stuff(); //Your own function
-        wait_nsm = 0;
-        return ERR_OK;
+    jack_client_name = strdup(client_id);
+    wait_nsm = 0;
+    return ERR_OK;
 }                                                                    
                                                                      
 int
@@ -61,6 +63,7 @@ void
 cb_nsm_show ( void *userdata )
 {
    // do_show_ui();  //Your own function
+    global_gui_show = CONST_GUI_SHOW;
     nsm_send_is_shown ( nsm );
 }
 
@@ -68,6 +71,7 @@ void
 cb_nsm_hide ( void *userdata )
 {
    // do_hide_ui(); //Your own function
+    global_gui_show = CONST_GUI_HIDE;
     nsm_send_is_hidden ( nsm );
 }
                                                                      
@@ -77,12 +81,11 @@ poll_nsm(void *v)
     if ( nsm )
     {
         nsm_check_nowait( nsm );
-        Fl::repeat_timeout( NSM_CHECK_INTERVAL, poll_nsm, v);
+       // Fl::repeat_timeout( NSM_CHECK_INTERVAL, poll_nsm, v);
         return;
     }
 }
 
-int global_gui_show = 0;
 #endif
 
 
@@ -156,7 +159,7 @@ main(int argc, char *argv[])
         }
 
        /* poll so we can keep OSC handlers running in the GUI thread and avoid extra sync */
-       Fl::add_timeout( NSM_CHECK_INTERVAL, poll_nsm, NULL );
+    //   Fl::add_timeout( NSM_CHECK_INTERVAL, poll_nsm, NULL );
     }
     else
     {
@@ -345,7 +348,9 @@ main(int argc, char *argv[])
             Fl::wait();
             
 #ifdef NSM_SUPPORT
-            if(global_gui_show)
+            
+            poll_nsm(NULL);
+            if(global_gui_show == CONST_GUI_HIDE)
             {
                 process.Gui_Shown = 0;
                 rgui->BankWindow->hide();
@@ -356,7 +361,7 @@ main(int argc, char *argv[])
                 rgui->Trigger->hide();
                 rgui->Principal->hide();
                 Fl::flush();
-                global_gui_show = 0;
+                global_gui_show = CONST_GUI_OFF;
             }
 #endif
         }
@@ -377,11 +382,13 @@ main(int argc, char *argv[])
             if (global_error_number > 0)
                 process.Handle_Message(global_error_number);
 #ifdef NSM_SUPPORT
-            if(global_gui_show)
+            
+            poll_nsm(NULL);
+            if(global_gui_show == CONST_GUI_SHOW)
             {
                 process.Gui_Shown = 1;
                 rgui->Principal->show();
-                global_gui_show = 0;
+                global_gui_show = CONST_GUI_OFF;
             }
 #endif
         }

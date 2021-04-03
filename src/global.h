@@ -36,7 +36,7 @@
 #include <sstream>  // NTS
 #include <FL/Fl_Tiled_Image.H>
 
-//#define NSM_SUPPORT
+#define NSM_SUPPORT
 
 class RKRGUI;   // forward declaration
 class RKR;      // forward declaration
@@ -53,6 +53,9 @@ extern int global_look_changed;
 
 #ifdef NSM_SUPPORT
 extern int global_gui_show;
+const int CONST_GUI_SHOW = 1;
+const int CONST_GUI_HIDE = 2;
+const int CONST_GUI_OFF  = 0;
 #endif
 
 // Used by FPreset
