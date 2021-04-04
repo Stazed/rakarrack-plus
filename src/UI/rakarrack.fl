@@ -324,11 +324,10 @@ widget gets the focus.} private local
   Function {make_window()} {open return_type void
   } {
     Fl_Window Principal {
-      callback {is_bank_modified();
-    is_PG_table_modified();
-
-    if(nsm_preferences_file.empty())
+      callback {if(nsm_preferences_file.empty())
     {
+        is_bank_modified();
+        is_PG_table_modified();
         save_current_state(0);
         m_process->Exit_Program=1;
     }

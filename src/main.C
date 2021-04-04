@@ -114,13 +114,13 @@ bool install_signal_handlers()
 
     if (sigaction(SIGUSR1, &action, NULL) == -1)
     {
-        printf("sigaction() failed: \n");
+        fprintf(stderr, "sigaction() failed: \n");
         return false;
     }
 
     if (sigaction(SIGINT, &action, NULL) == -1)
     {
-        printf("sigaction() failed: \n");
+        fprintf(stderr, "sigaction() failed: \n");
         return false;
     }
 
@@ -145,7 +145,7 @@ void check_signals(void *usrPtr)
 
     if (got_sigint == SIGINT)
     {
-        printf("Got SIGTERM, quitting...\n");
+        fprintf(stderr, "Got SIGTERM, quitting...\n");
         got_sigint = 0;
         process->Exit_Program = 1;
     }
@@ -417,12 +417,18 @@ main(int argc, char *argv[])
             Fl::wait();
             
 #ifdef NSM_SUPPORT
+            // We could have NSM_SUPPORT without a session.
+            // So the check for nsm_preferences_file.empty() is to ensure that we are
+            // actually in an NSM session. The file is only loaded when within a session.
             if(!nsm_preferences_file.empty())
             {
                 poll_nsm(NULL);
                 if(global_gui_show == CONST_GUI_HIDE)
                 {
                     process.Gui_Shown = 0;
+                    rgui->is_bank_modified();
+                    rgui->is_PG_table_modified();
+                    
                     rgui->BankWindow->hide();
                     rgui->Order->hide();
                     rgui->Settings->hide();
@@ -436,11 +442,18 @@ main(int argc, char *argv[])
                 }
             }
 #endif
-
+            // This could be from session SIGUSR1, so not necessarily from NSM
             if(save_preferences)
             {
                 save_preferences = 0;
                 rgui->save_current_state(0);
+                
+                // For session use, the modified checks will not work on save and quit.
+                // NSM requires that the client must quit immediately, so the 
+                // shown modal windows are ignored. The user would need to do 
+                // a separate save, then quit.
+                rgui->is_bank_modified();
+                rgui->is_PG_table_modified();      
             }
         }
         else
@@ -461,6 +474,7 @@ main(int argc, char *argv[])
                 process.Handle_Message(global_error_number);
 
 #ifdef NSM_SUPPORT
+            // Check if within NSM session
             if(!nsm_preferences_file.empty())
             {
                 poll_nsm(NULL);
@@ -473,7 +487,10 @@ main(int argc, char *argv[])
                 }
             }
 #endif
-
+            // This could be from session SIGUSR1, so not necessarily from NSM
+            // We do not check for is_modified, bank or table since they cannot 
+            // be changed if there is no gui. If in NSM session, then the modified
+            // is checked upon gui hide request.
             if(save_preferences)
             {
                 save_preferences = 0;
