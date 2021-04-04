@@ -588,7 +588,8 @@ NSM_EXPORT int _nsm_osc_session_is_loaded ( const char *path, const char *types,
     return 0;
 }
 
-NSM_EXPORT int _nsm_osc_show ( const char *path, const char *types, lo_arg **argv, int argc, lo_message msg, void *user_data )
+// NSM_EXPORT int _nsm_osc_show ( const char *path, const char *types, lo_arg **argv, int argc, lo_message msg, void *user_data )
+NSM_EXPORT int _nsm_osc_show ( const char *, const char *, lo_arg **, int, lo_message, void *user_data )
 {
 
     struct _nsm_client_t *nsm = (struct _nsm_client_t*)user_data;
@@ -601,7 +602,8 @@ NSM_EXPORT int _nsm_osc_show ( const char *path, const char *types, lo_arg **arg
     return 0;
 }
 
-NSM_EXPORT int _nsm_osc_hide ( const char *path, const char *types, lo_arg **argv, int argc, lo_message msg, void *user_data )
+// NSM_EXPORT int _nsm_osc_hide ( const char *path, const char *types, lo_arg **argv, int argc, lo_message msg, void *user_data )
+NSM_EXPORT int _nsm_osc_hide ( const char *, const char *, lo_arg **, int, lo_message, void *user_data )
 {
 
     struct _nsm_client_t *nsm = (struct _nsm_client_t*)user_data;

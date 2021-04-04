@@ -47,14 +47,12 @@ static int wait_nsm = 1;
 const double NSM_CHECK_INTERVAL = 0.25f;
 
 int                                                                  
-cb_nsm_open ( const char *save_file_path,  //See API Docs 2.2.2 
-              const char *display_name,  //Not useful
-              const char *client_id,    //Use as JACK Client Name
-              char **out_msg,
-              void *userdata )
+cb_nsm_open ( const char *save_file_path,   // See API Docs 2.2.2 
+              const char *,                 // display_name
+              const char *client_id,        // Use as JACK Client Name
+              char **,                      // out_msg
+              void *)                       // userdata
 {
-    // do_open_stuff(); //Your own function
-    // fprintf(stderr, "Open - Path = %s:\n disp = %s\n client_id = %s", save_file_path, display_name, client_id);
     nsm_preferences_file = save_file_path;
     nsm_preferences_file += ".prefs";
     jack_client_name = strdup(client_id);
@@ -63,41 +61,34 @@ cb_nsm_open ( const char *save_file_path,  //See API Docs 2.2.2
 }                                                                    
                                                                      
 int
-cb_nsm_save ( char **out_msg,
-           void *userdata )
+cb_nsm_save ( char **,          // out_msg
+           void *)              // userdata
 {
-   // do_save_stuff(); //Your own function
     save_preferences = 1;
     return ERR_OK;
 }
 
 void
-cb_nsm_show ( void *userdata )
+cb_nsm_show ( void * )          // userdata
 {
-   // do_show_ui();  //Your own function
     global_gui_show = CONST_GUI_SHOW;
-  //  nsm_send_is_shown ( nsm );
 }
 
 void
-cb_nsm_hide ( void *userdata )
+cb_nsm_hide ( void * )          // userdata
 {
-   // do_hide_ui(); //Your own function
     global_gui_show = CONST_GUI_HIDE;
-  //  nsm_send_is_hidden ( nsm );
 }
                                                                      
 void
-poll_nsm(void *v)
+poll_nsm(void *)                // userdata
 {
     if ( nsm )
     {
         nsm_check_nowait( nsm );
-       // Fl::repeat_timeout( NSM_CHECK_INTERVAL, poll_nsm, v);
         return;
     }
 }
-
 #endif  // NSM_SUPPORT
 
 void sigterm_handler(int sig)
