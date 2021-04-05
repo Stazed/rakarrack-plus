@@ -1771,6 +1771,14 @@ void RKRGUI::MiraConfig()
     Settings->D_A_Connect->value(m_process->Config.aconnect_MI);
     Settings->D_J_Connect->value(m_process->Config.aconnect_JA);
     Settings->D_IJ_Connect->value(m_process->Config.aconnect_JIA);
+    
+    // For NSM the default setting is Off for auto connect audio and we do not let the user change it.
+    // All jack connections should be handled by NSM.
+    if(!nsm_preferences_file.empty())    // NSM
+    {
+        Settings->D_J_Connect->deactivate ();
+        Settings->D_IJ_Connect->deactivate ();
+    }
 
     Settings->Midi_In_Counter->value(m_process->Config.MIDI_In_Channel + 1);
     Settings->Har_In_Counter->value(m_process->Config.Harmonizer_MIDI_Channel + 1);

@@ -71,7 +71,15 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // End Settings/Look
 
     // ************ Settings/Audio *******************
-    rakarrack.get(PrefNom("FX_init_state"), init_state, 0);
+    if(nsm_preferences_file.empty())    // Not NSM - master Off by default = 0
+    {
+        rakarrack.get(PrefNom("FX_init_state"), init_state, 0);
+    }
+    else    // NSM - master On by default = 1
+    {
+        rakarrack.get(PrefNom("FX_init_state"), init_state, 1);
+    }
+
     rakarrack.get(PrefNom("Filter DC Offset"), DC_Offset, 0);
     rakarrack.get(PrefNom("Preserve Gain/Master"), preserve_master, 0);
     rakarrack.get(PrefNom("Update Tap"), Tap_Updated, 0);
@@ -179,7 +187,17 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
 
     // *********** Settings/Jack *****************
     // Jack Out
-    rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);    // Out
+    if(nsm_preferences_file.empty())
+    {
+        rakarrack.get(PrefNom("Auto Connect Jack"), aconnect_JA, 1);    // Out
+    }
+    else    // Using NSM - shut off auto connect out
+    {
+        // For NSM the default setting is Off for auto connect audio and we do not let the user change it.
+        // All jack connections should be handled by NSM.
+        aconnect_JA = 0;
+    }
+
     rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);       // Out
     
     memset(temp, 0, sizeof (temp));
@@ -206,8 +224,17 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     }
 
     // Jack In
-    // Default on new installs - don't connect input - can cause feedback loop = 0
-    rakarrack.get(PrefNom("Auto Connect Jack In"), aconnect_JIA, 0);
+    if(nsm_preferences_file.empty())    // Not NSM
+    {
+        rakarrack.get(PrefNom("Auto Connect Jack In"), aconnect_JIA, 0);    // In
+    }
+    else    // Using NSM - shut off auto connect in
+    {
+        // For NSM the default setting is Off for auto connect audio and we do not let the user change it.
+        // All jack connections should be handled by NSM.
+        aconnect_JIA = 0;
+    }
+
     rakarrack.get(PrefNom("Auto Connect In Num"), cuan_ijack, 1);
 
     memset(j_names, 0, sizeof (j_names));
