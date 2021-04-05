@@ -1022,22 +1022,15 @@ with the space bar keys.</p>
 
 <h3><a name="session"></a>Session Support</h3>
 
-<p>Rakarrack-plus supports SIGUSR1 & SIGINT signal capture.
-For session management, only the active current preset is saved per session. Use
-SIGUSR1 for preset saving and SIGINT to quit without saving. LADISH and Non Session
-Manager (NSM) are able to send SIGUSR1 and SIGINT signals. For signal capture, use the
-<a href="#cmd">Command line options</a> -p preset option to set the file to save.
-For NSM use the NSM Proxy to set command line options.</p>
-
-<p>Rakarrack-plus supports multiple occurrences of the program. By default jack will
-name each occurrence with the same name by appending the occurrence number to
-the name: ex "rakarrack-plus-01". For NSM support, using multiple occurrences, the 
-manager will not always start each occurrence in the same order for each session.
-This will result in occasional incorrect jack connections being made from different
-sessions. To solve this problem, use the Command line option "-j Name" to set the
-rakarrack-plus client name to a unique id for each occurrence.</p>
-
-
+<p>Rakarrack-plus supports NSM, both Non Session Manager as well as New Session
+Manager.
+For session management, the current instance Settings/Preferences are saved as well as last
+used bank and preset. In addition, gui show/hide is supported. All bank, user files,
+Program Change table and "Insert" presets are global to all instances.
+For each Rakarrack-plus instance in the NSM session you must set the User bank in
+Settings/Preferences/User to your global user bank. SIGUSR1(save) and SIGINT(quit) signals
+can also be used for session support.
+</p>
 
 <p><a href="general.html">General</a></p>
 <p><a href="help.html">Table of Contents</a> - <a href="effects.html">Effects</a></p>

@@ -29,6 +29,7 @@ The dependencies are:
 *   jackd
 *   libxft2
 *   libfftw3
+*   liblo   (For NSM support)
 
 If you want to compile you will also need the development packages:
 
@@ -40,6 +41,7 @@ If you want to compile you will also need the development packages:
 *   libasound2-dev
 *   libxft-dev
 *   libfftw3-dev
+*   liblo-dev
 
 
 To build both rakarrack-plus and LV2s, from top checkout directory:
@@ -75,6 +77,7 @@ Important changes from previous versions:
 *   "Insert" preset file changed to user directory. From the main window File/Import Inserted Presets
     to import from older versions.
 *   Some key binding has changed
+*   Added NSM session support.
 *   Custom MIDI program table can now be used without the gui
 *   Custom MIDI program files must be in the User Directory
 *   Custom MIDI program files are MIDI selectable, CC 32, MIDI learnable
