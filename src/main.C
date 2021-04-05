@@ -480,10 +480,16 @@ main(int argc, char *argv[])
                 poll_nsm(NULL);
                 if(global_gui_show == CONST_GUI_SHOW)
                 {
-                    process.Gui_Shown = 1;
                     rgui->Principal->show();
                     global_gui_show = CONST_GUI_OFF;
                     nsm_send_is_shown ( nsm );
+                    process.Gui_Shown = 1;
+                    
+                    // Need to reset this because the value is not adjusted or
+                    // reset when the gui is hidden. If not reset, then it can
+                    // result in an out of range.. segfault. Since this is used
+                    // for efx_order[] array location.
+                    process.OnOffC = 0;     // need to reset or possible out of range 
                 }
             }
 #endif

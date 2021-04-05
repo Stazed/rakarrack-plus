@@ -132,6 +132,10 @@ void RKRGUI::TimeoutStatic(void* ptr)
 
 void RKRGUI::GuiTimeout(void)
 {
+    // Timing issue with NSM show/hide
+    if(!m_process->Gui_Shown)
+        return;
+
     // Main gui process on timeout
     below_mouse_highlight_and_focus();
     drag_effect();
