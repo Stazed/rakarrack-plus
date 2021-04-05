@@ -123,7 +123,7 @@ bool install_signal_handlers()
         fprintf(stderr, "sigaction() failed: \n");
         return false;
     }
-
+    
     return true;
 }
 
@@ -138,6 +138,7 @@ void check_signals(void *usrPtr)
 
     if (got_sigusr1 == SIGUSR1)
     {
+        fprintf(stderr, "Got SIGUSR1, saving...\n");
         save_preferences = 1;
         got_sigusr1 = 0;
         return;
@@ -213,6 +214,7 @@ main(int argc, char *argv[])
         {0, 0, 0, 0}
     };
 
+    install_signal_handlers();
 
     RKRGUI *rgui = NULL;
     int needtoloadfile = 0;
@@ -324,8 +326,6 @@ main(int argc, char *argv[])
         }
 
         gui = 1;    // always load gui with NSM
-       /* poll so we can keep OSC handlers running in the GUI thread and avoid extra sync */
-    //   Fl::add_timeout( NSM_CHECK_INTERVAL, poll_nsm, NULL );
     }
     else
     {
