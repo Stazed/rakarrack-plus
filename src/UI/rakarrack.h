@@ -571,7 +571,6 @@ private:
   static void TimeoutStatic(void* ptr);
   void GuiTimeout(void);
 public:
-  int increment_look_changed();
   void back_color_change(Fl_Color back_color);
   void label_color_change(Fl_Color label_color);
   void buttons_color_change(Fl_Color buttons_color);

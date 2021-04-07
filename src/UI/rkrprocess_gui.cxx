@@ -579,17 +579,12 @@ void RKRGUI::GuiTimeout(void)
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
 }
 
-int RKRGUI::increment_look_changed ()
-{
-    return global_look_changed > 10 ? 0 : (global_look_changed + 1);
-}
-
 void RKRGUI::back_color_change(Fl_Color back_color)
 {
     global_back_color = back_color;
     
     // Increment look changed flag
-    global_look_changed = increment_look_changed ();
+    global_look_changed++;
     
     if (!m_process->Config.EnableBackgroundImage)
     {
@@ -605,7 +600,7 @@ void RKRGUI::label_color_change(Fl_Color label_color)
     global_label_color = label_color;
 
     // Increment look changed flag
-    global_look_changed = increment_look_changed ();
+    global_look_changed++;
 
     ChangeActives();
     Fl::redraw();
@@ -616,7 +611,7 @@ void RKRGUI::buttons_color_change(Fl_Color buttons_color)
     global_fore_color = buttons_color;
     
     // Increment look changed flag
-    global_look_changed = increment_look_changed ();
+    global_look_changed++;
 
     ChangeActives();
     Fl::redraw();
@@ -627,7 +622,7 @@ void RKRGUI::leds_color_change(Fl_Color leds_color)
     global_leds_color = leds_color;
 
     // Increment look changed flag
-    global_look_changed = increment_look_changed ();
+    global_look_changed++;
 
     ChangeActives();
     Fl::redraw();
@@ -638,7 +633,7 @@ void RKRGUI::font_size_change(int font_size)
     global_font_size = font_size;
 
     // Increment look changed flag
-    global_look_changed = increment_look_changed ();
+    global_look_changed++;
 
     ChangeActives();
     Fl::redraw();
@@ -649,7 +644,7 @@ void RKRGUI::font_type_change (int font_type)
     global_font_type = font_type;
 
     // Increment look changed flag
-    global_look_changed = increment_look_changed ();
+    global_look_changed++;
 
     ChangeActives();
     Fl::redraw();

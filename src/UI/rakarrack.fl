@@ -1883,8 +1883,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {GuiTimeout(void)} {open private C return_type void
   } {}
-  Function {increment_look_changed()} {open return_type int
-  } {}
   Function {back_color_change(Fl_Color back_color)} {open
   } {}
   Function {label_color_change(Fl_Color label_color)} {open
