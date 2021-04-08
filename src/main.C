@@ -405,6 +405,9 @@ main(int argc, char *argv[])
     
     // For keeping the message about disconnected from repeating
     int jack_disconnected = 0;
+    
+    // For NSM gui show and update from hide
+    int hold_preset = C_CHANGE_PRESET_OFF;
 
     // Main Loop - run until exit requested
     while (!process.Exit_Program)
@@ -472,6 +475,9 @@ main(int argc, char *argv[])
                     process.calculavol(2);
                     process.booster = 1.0f;
                 }
+
+                // hold the preset number so we can update the bank window highlight if using NSM
+                hold_preset = process.Change_Preset;
                 process.Change_Preset = C_CHANGE_PRESET_OFF;
             }
             
@@ -485,7 +491,20 @@ main(int argc, char *argv[])
                 poll_nsm(NULL);
                 if(global_gui_show == CONST_GUI_SHOW)
                 {
+                    // To update the Gui for any MIDI changes
+                    rgui->Put_Loaded();
+                    rgui->Put_Loaded_Bank();
+                    
+                    if(hold_preset != C_CHANGE_PRESET_OFF)
+                    {
+                        rgui->BankWindow->unlight_preset(process.Selected_Preset);
+                        rgui->BankWindow->light_preset(hold_preset);
+                        rgui->Preset_Counter->value(hold_preset);
+                        process.Selected_Preset = hold_preset;
+                        hold_preset = C_CHANGE_PRESET_OFF;
+                    }
                     rgui->Principal->show();
+
                     global_gui_show = CONST_GUI_OFF;
                     nsm_send_is_shown ( nsm );
                     process.Gui_Shown = 1;
@@ -494,7 +513,7 @@ main(int argc, char *argv[])
                     // reset when the gui is hidden. If not reset, then it can
                     // result in an out of range.. segfault. Since this is used
                     // for efx_order[] array location.
-                    process.OnOffC = 0;     // need to reset or possible out of range 
+                    process.OnOffC = 0;     // need to reset or possible out of range
                 }
             }
 #endif
