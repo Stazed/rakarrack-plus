@@ -682,7 +682,7 @@ public:
     void conectaaconnect ();
     void disconectaaconnect ();
     void jack_process_midievents (jack_midi_event_t *midievent);
-    void process_midi_controller_events(int parameter, int value);
+    void process_midi_controller_events(int parameter, int value, int preset = C_CHANGE_PRESET_OFF);
 
     // fileio.C
     void apply_effect_parameters (char *buf, int fx_index, PresetBankStruct &preset_loaded);

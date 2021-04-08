@@ -812,9 +812,8 @@ RKR::midievents()
             else
             {
                 int bank = MIDI_Table[midievent->data.control.value].bank;
-                process_midi_controller_events(0, bank);    // 0 is CC 0 Bank Select
-
-                Change_Preset = MIDI_Table[midievent->data.control.value].preset + 1;
+                int preset = MIDI_Table[midievent->data.control.value].preset + 1;
+                process_midi_controller_events(0, bank, preset);  // 0 is CC 0 Bank Select
             }
         }
     }
@@ -1180,9 +1179,8 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
             else
             {
                 int bank = MIDI_Table[cmdvalue].bank;
-                process_midi_controller_events(0, bank);    // 0 is CC 0 Bank Select
-
-                Change_Preset = MIDI_Table[cmdvalue].preset + 1;
+                int preset = MIDI_Table[cmdvalue].preset + 1;
+                process_midi_controller_events(0, bank, preset);    // 0 is CC 0 Bank Select
             }
         }
     }
@@ -1225,7 +1223,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
  * process MIDI controller events
  */
 void
-RKR::process_midi_controller_events(int parameter, int value)
+RKR::process_midi_controller_events(int parameter, int value, int preset)
 {
     // Don't process MIDI control when updating quality since
     // the efx may be deleted
@@ -1253,18 +1251,16 @@ RKR::process_midi_controller_events(int parameter, int value)
                     active_bank = Change_Bank = value;      // Change_Bank is for GUI update
                 }
             }
-            return;
-        }
-#if 1   // For debugging gui show/hide FIXME remove when done
-#ifdef NSM_SUPPORT
-        case MC_Unused_19:
-        {
-            global_gui_show = 1;
-            return;
-        }
-#endif
-#endif
             
+            // From custom program change table.
+            // We must set the preset after the bank change.
+            if(preset != C_CHANGE_PRESET_OFF)
+            {
+                Change_Preset = preset;
+            }
+            return;
+        }
+
         case MC_Unused_10:
         case MC_Unused_11:
         case MC_Unused_13:
@@ -1272,9 +1268,7 @@ RKR::process_midi_controller_events(int parameter, int value)
         case MC_Unused_16:
         case MC_Unused_17:
         case MC_Unused_18:
-#ifndef NSM_SUPPORT     // FIXME remove when done
         case MC_Unused_19:
-#endif
 
         case MC_Unused_33:
         case MC_Unused_34:

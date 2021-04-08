@@ -466,6 +466,11 @@ main(int argc, char *argv[])
                 if ((process.Change_Preset > 0) && (process.Change_Preset < 61))
                 {
                     process.active_bank_preset_to_main_window(process.Change_Preset);
+                    
+                    // reset these if volume changed from preset
+                    process.calculavol(1);
+                    process.calculavol(2);
+                    process.booster = 1.0f;
                 }
                 process.Change_Preset = C_CHANGE_PRESET_OFF;
             }
