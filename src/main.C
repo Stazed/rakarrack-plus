@@ -428,19 +428,7 @@ main(int argc, char *argv[])
                 poll_nsm(NULL);
                 if(global_gui_show == CONST_GUI_HIDE)
                 {
-                    process.Gui_Shown = 0;
-                    rgui->is_bank_modified();
-                    rgui->is_PG_table_modified();
-                    
-                    rgui->BankWindow->hide();
-                    rgui->Order->hide();
-                    rgui->Settings->hide();
-                    rgui->AboutWin->hide();
-                    rgui->MIDILearn->hide();
-                    rgui->Trigger->hide();
-                    rgui->Principal->hide();
-                    Fl::flush();
-                    global_gui_show = CONST_GUI_OFF;
+                    rgui->NSM_gui_hide();
                     nsm_send_is_hidden ( nsm );
                 }
             }
@@ -491,29 +479,8 @@ main(int argc, char *argv[])
                 poll_nsm(NULL);
                 if(global_gui_show == CONST_GUI_SHOW)
                 {
-                    // To update the Gui for any MIDI changes
-                    rgui->Put_Loaded();
-                    rgui->Put_Loaded_Bank();
-                    
-                    if(hold_preset != C_CHANGE_PRESET_OFF)
-                    {
-                        rgui->BankWindow->unlight_preset(process.Selected_Preset);
-                        rgui->BankWindow->light_preset(hold_preset);
-                        rgui->Preset_Counter->value(hold_preset);
-                        process.Selected_Preset = hold_preset;
-                        hold_preset = C_CHANGE_PRESET_OFF;
-                    }
-                    rgui->Principal->show();
-
-                    global_gui_show = CONST_GUI_OFF;
+                    hold_preset = rgui->NSM_gui_show(hold_preset);
                     nsm_send_is_shown ( nsm );
-                    process.Gui_Shown = 1;
-                    
-                    // Need to reset this because the value is not adjusted or
-                    // reset when the gui is hidden. If not reset, then it can
-                    // result in an out of range.. segfault. Since this is used
-                    // for efx_order[] array location.
-                    process.OnOffC = 0;     // need to reset or possible out of range
                 }
             }
 #endif

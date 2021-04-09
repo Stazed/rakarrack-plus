@@ -637,5 +637,7 @@ public:
   void Load_Midi_Program_Change_Table();
   void Save_Midi_Program_Change_Table();
   void set_focus_timer(int time);
+  int NSM_gui_show(int hold_preset);
+  void NSM_gui_hide();
 };
 #endif

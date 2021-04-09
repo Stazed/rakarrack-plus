@@ -3824,3 +3824,47 @@ void RKRGUI::Save_Midi_Program_Change_Table()
     }
 }
 
+int RKRGUI::NSM_gui_show(int hold_preset)
+{
+    // To update the Gui for any MIDI changes
+    Put_Loaded();
+    Put_Loaded_Bank();
+
+    if(hold_preset != C_CHANGE_PRESET_OFF)
+    {
+        BankWindow->unlight_preset(m_process->Selected_Preset);
+        BankWindow->light_preset(hold_preset);
+        Preset_Counter->value(hold_preset);
+        m_process->Selected_Preset = hold_preset;
+        hold_preset = C_CHANGE_PRESET_OFF;
+    }
+    Principal->show();
+
+    global_gui_show = CONST_GUI_OFF;
+    m_process->Gui_Shown = 1;
+
+    // Need to reset OnOffC because the value is not adjusted or
+    // reset when the gui is hidden. If not reset, then it can
+    // result in an out of range.. segfault. Since this is used
+    // for efx_order[] array location.
+    m_process->OnOffC = 0;
+    
+    return hold_preset;
+}
+
+void RKRGUI::NSM_gui_hide()
+{
+    m_process->Gui_Shown = 0;
+    is_bank_modified();
+    is_PG_table_modified();
+
+    BankWindow->hide();
+    Order->hide();
+    Settings->hide();
+    AboutWin->hide();
+    MIDILearn->hide();
+    Trigger->hide();
+    Principal->hide();
+    Fl::flush();
+    global_gui_show = CONST_GUI_OFF;
+}

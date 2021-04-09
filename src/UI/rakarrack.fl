@@ -337,7 +337,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {396 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {204 85 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2014,5 +2014,9 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {Save_Midi_Program_Change_Table()} {open C return_type void
   } {}
   Function {set_focus_timer(int time)} {open return_type void
+  } {}
+  Function {NSM_gui_show(int hold_preset)} {open return_type int
+  } {}
+  Function {NSM_gui_hide()} {open return_type void
   } {}
 }
