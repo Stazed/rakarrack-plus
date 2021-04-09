@@ -30,7 +30,7 @@
 #include "process.h"
 #include "jack.h"
 
-// This is necessary for NSM, so if it is empty, then we are not using NSM
+// This is necessary for NSM, so if it is empty, then we are not in NSM session
 std::string nsm_preferences_file = "";
 
 // Signal handlers
@@ -44,7 +44,6 @@ int save_preferences = 0;
 int global_gui_show = 0;
 static nsm_client_t *nsm = 0;
 static int wait_nsm = 1;
-const double NSM_CHECK_INTERVAL = 0.25f;
 
 int                                                                  
 cb_nsm_open ( const char *save_file_path,   // See API Docs 2.2.2 
@@ -327,14 +326,6 @@ main(int argc, char *argv[])
 
         gui = 1;    // always load gui with NSM
     }
-    else
-    {
-        if(nsm)
-        {
-            nsm_free( nsm );
-            nsm = 0;
-        }
-    }
 #endif // NSM_SUPPORT
 
 
@@ -506,6 +497,14 @@ main(int argc, char *argv[])
 
     // free memory etc.
     JACKfinish(&process);
+
+#ifdef NSM_SUPPORT
+    if(nsm)
+    {
+        nsm_free( nsm );
+        nsm = NULL;
+    }
+#endif
 
     return (0);
 
