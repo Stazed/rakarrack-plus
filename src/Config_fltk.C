@@ -65,6 +65,19 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     char temp[256];
     sprintf(temp, "%s/blackbg.png", DATADIR);
     rakarrack.get(PrefNom("Background Image"), BackgroundImage, temp, 256);
+    
+    // Check if valid file. Revert to default if error.
+    FILE *fn;
+    if ((fn = fopen(BackgroundImage, "r")) == NULL)
+    {
+        memset(BackgroundImage, 0, sizeof (BackgroundImage));
+        strcpy(BackgroundImage, temp);
+        fprintf(stderr, "Invalid BackgroundImage file, reverting to default\n");
+    }
+    else
+    {
+        fclose(fn);
+    }
 
     rakarrack.get(PrefNom("Hide Effects"), deachide, 0);
     rakarrack.get(PrefNom("Scale Window"), scalable, 0);

@@ -336,6 +336,7 @@ main(int argc, char *argv[])
     // Segfault if font type is out of range.
     if(process.Config.font_type > Fl::set_fonts(0)) // set_fonts returns number of fonts available
     {
+        fprintf(stderr, "Invalid font type, reverting to default\n");
         process.Config.font_type = 0;   // reset to default
     }
 
