@@ -28,6 +28,7 @@
 
 #include "global.h"
 #include "Config_fltk.h"
+#include <FL/Fl.H>
 
 Config_fltk::Config_fltk()
 {
@@ -54,6 +55,15 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
     // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
     rakarrack.get(PrefNom("Font"), font_type, 0);
+    // Sanity check. Can happen when NSM session copied to another computer
+    // that has fewer fonts loaded than source. Also if some fonts are removed.
+    // Segfault if font type is out of range.
+    if(font_type >= Fl::set_fonts(0)) // set_fonts returns number of fonts available
+    {
+        fprintf(stderr, "Invalid font type, reverting to default\n");
+        font_type = 0;   // reset to default
+    }
+    
     rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
     rakarrack.get(PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3 - Buttons
     rakarrack.get(PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
