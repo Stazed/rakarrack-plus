@@ -1088,6 +1088,7 @@ void SettingsWindowGui::cb_UD_Browser_i(RKR_Button*, void*) {
     // Needed for FPreset
     global_user_directory = m_process->Config.UDirFilename;
 
+    m_process->load_MIDI_table_vector();
     m_parent->Scan_Bank_Dir(1);
 }
 void SettingsWindowGui::cb_UD_Browser(RKR_Button* o, void* v) {

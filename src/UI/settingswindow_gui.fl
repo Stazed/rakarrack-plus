@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {1283 316 530 580} type Double
+  xywh {439 230 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1518,6 +1518,7 @@ Fl_Tooltip::enable(m_process->Config.ena_tool);}
     // Needed for FPreset
     global_user_directory = m_process->Config.UDirFilename;
 
+    m_process->load_MIDI_table_vector();
     m_parent->Scan_Bank_Dir(1);}
         xywh {415 65 65 20}
         code0 {o->set_label_offset(4);}
