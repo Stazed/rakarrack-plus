@@ -1001,7 +1001,10 @@ RKR::Conecta()
                 nume = strtok(NULL, "  ");
                 sscanf(nume, "%d", &puerto);
                 
-                if (strstr(temp, "rakarrack-plus IN") != 0)
+                std::string s_name = jackcliname;
+                s_name + " IN";
+                
+                if (strstr(temp, s_name.c_str()) != 0)
                 {
                     Cyoin = client;
                     Pyoin = puerto;
