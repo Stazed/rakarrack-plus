@@ -1140,7 +1140,7 @@ void RKRGUI::save_current_state(int whati)
         Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
         save_preferences(rakarrack, whati);
     }
-    else
+    else    // Using NSM
     {
         Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
         save_preferences(rakarrack, whati);

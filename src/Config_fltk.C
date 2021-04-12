@@ -42,7 +42,16 @@ char *
 Config_fltk::PrefNom(const char *dato)
 {
     memset(tmpprefname, 0, sizeof (tmpprefname));
-    sprintf(tmpprefname, "%s %s", jackcliname, dato);
+
+    if(nsm_preferences_file.empty())
+    {
+        sprintf(tmpprefname, "%s %s", jackcliname, dato);
+    }
+    else    // NSM use - always use PACKAGE name since there is only one per preferences file
+    {
+        sprintf(tmpprefname, "%s %s", PACKAGE, dato);
+    }
+
     return (tmpprefname);
 }
 
@@ -406,7 +415,7 @@ void Config_fltk::load_previous_state()
         Fl_Preferences rakarrack(Fl_Preferences::USER, WEBSITE, PACKAGE);
         load_preferences(rakarrack);
     }
-    else
+    else    // Using NSM
     {
         Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
         load_preferences(rakarrack);
