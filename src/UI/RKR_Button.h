@@ -35,6 +35,7 @@
 #define BUTTON_BANK_HIGHLIGHT   1
 #define BUTTON_MIDI_GET         2
 #define BUTTON_RKR_LABEL        3
+#define BUTTON_BANK_RESET       4
 
 class RKR_Button : public Fl_Button
 {

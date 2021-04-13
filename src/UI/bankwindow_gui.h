@@ -83,6 +83,11 @@ private:
   inline void cb_B_B4_i(RKR_Button*, void*);
   static void cb_B_B4(RKR_Button*, void*);
 public:
+  RKR_Button *B_Reload;
+private:
+  inline void cb_B_Reload_i(RKR_Button*, void*);
+  static void cb_B_Reload(RKR_Button*, void*);
+public:
   RKR_Choice *CH_UB;
 private:
   inline void cb_CH_UB_i(RKR_Choice*, void*);

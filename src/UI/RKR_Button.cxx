@@ -94,6 +94,13 @@ void RKR_Button::draw()
                 labelcolor(fl_darker(global_leds_color));
                 break;
             }
+
+            case BUTTON_BANK_RESET:
+            {
+                color(fl_darker(FL_RED));
+                labelcolor(global_label_color);
+                break;
+            }
         }
 
         labelfont(global_font_type);

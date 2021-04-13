@@ -149,6 +149,26 @@ void BankWindowGui::cb_B_B4(RKR_Button* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_B_B4_i(o,v);
 }
 
+void BankWindowGui::cb_B_Reload_i(RKR_Button*, void*) {
+  // Save the current bank filename
+    std::string bank_filename = m_process->Bank_Vector[m_process->active_bank].Bank_File_Name.c_str();
+
+    // Re-scan the user directory and reload all user banks
+    m_parent->Scan_Bank_Dir(1);
+    
+    // Re-load the currently active bank for any changes
+    if(m_process->load_bank_from_vector (bank_filename))
+    {
+        // Update the Bank Window
+        m_parent->BankWin_Label(bank_filename.c_str());
+        m_parent->Put_Loaded_Bank();
+        unlight_preset(m_process->Selected_Preset);
+    };
+}
+void BankWindowGui::cb_B_Reload(RKR_Button* o, void* v) {
+  ((BankWindowGui*)(o->parent()))->cb_B_Reload_i(o,v);
+}
+
 void BankWindowGui::cb_CH_UB_i(RKR_Choice*, void* v) {
   // Need to save the file name in case is_bank_modified() results in a save
     // which rescans and deletes the menu with the void *v pointer 
@@ -301,6 +321,22 @@ this->when(FL_WHEN_RELEASE);
   B_B4->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Button* B_B4
+{ RKR_Button* o = B_Reload = new RKR_Button(502, 14, 32, 24, "R");
+  B_Reload->tooltip("Refresh the User Bank. \nWARNING: This will re-load the currently active bank\
+.\n All modifications to the current active bank will be lost!");
+  B_Reload->box(FL_UP_BOX);
+  B_Reload->color(FL_RED);
+  B_Reload->selection_color(FL_BACKGROUND_COLOR);
+  B_Reload->labeltype(FL_NORMAL_LABEL);
+  B_Reload->labelfont(0);
+  B_Reload->labelsize(10);
+  B_Reload->labelcolor(FL_FOREGROUND_COLOR);
+  B_Reload->callback((Fl_Callback*)cb_B_Reload, (void*)(UD_Disable_Highlight));
+  B_Reload->align(Fl_Align(FL_ALIGN_CENTER));
+  B_Reload->when(FL_WHEN_RELEASE);
+  o->set_label_offset(2);
+  o->set_button_type(BUTTON_BANK_RESET);
+} // RKR_Button* B_Reload
 { RKR_Choice* o = CH_UB = new RKR_Choice(635, 14, 117, 24, "User Banks");
   CH_UB->box(FL_FLAT_BOX);
   CH_UB->down_box(FL_BORDER_BOX);

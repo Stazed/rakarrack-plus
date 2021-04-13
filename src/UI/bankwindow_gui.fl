@@ -32,7 +32,7 @@ These need to be adjusted if the file menu is changed.} private global
 }
 
 widget_class BankWindowGui {open selected
-  xywh {325 478 800 600} type Double color 4 selection_color 7 resizable
+  xywh {867 238 800 600} type Double color 4 selection_color 7 resizable
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
   class Fl_Double_Window size_range {320 240 3200 2400} visible
@@ -45,7 +45,7 @@ m_parent= _rgui;} {}
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
-  Fl_Menu_Bar MenuB {open
+  Fl_Menu_Bar MenuB {
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
     code0 {o->set_label_offset(6);}
     code1 {o->set_submenu_paths(bank_submenu_paths);}
@@ -159,6 +159,30 @@ m_parent->put_icon(m_parent->AboutWin);}
     callback {m_parent->L_B4->do_callback();}
     tooltip {Set the active bank to User bank default - Shortcut 'U'} xywh {460 14 32 24} shortcut 0x75 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
+    class RKR_Button
+  }
+  Fl_Button B_Reload {
+    label R
+    user_data UD_Disable_Highlight
+    callback {// Save the current bank filename
+    std::string bank_filename = m_process->Bank_Vector[m_process->active_bank].Bank_File_Name.c_str();
+
+    // Re-scan the user directory and reload all user banks
+    m_parent->Scan_Bank_Dir(1);
+    
+    // Re-load the currently active bank for any changes
+    if(m_process->load_bank_from_vector (bank_filename))
+    {
+        // Update the Bank Window
+        m_parent->BankWin_Label(bank_filename.c_str());
+        m_parent->Put_Loaded_Bank();
+        unlight_preset(m_process->Selected_Preset);
+    };}
+    tooltip {Refresh the User Bank. 
+WARNING: This will re-load the currently active bank.
+ All modifications to the current active bank will be lost!} xywh {502 14 32 24} color 88 labelsize 10
+    code0 {o->set_label_offset(2);}
+    code1 {o->set_button_type(BUTTON_BANK_RESET);}
     class RKR_Button
   }
   Fl_Choice CH_UB {
