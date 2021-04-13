@@ -322,8 +322,8 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(2);
 } // RKR_Button* B_B4
 { RKR_Button* o = B_Reload = new RKR_Button(502, 14, 32, 24, "R");
-  B_Reload->tooltip("Refresh the User Bank. \nWARNING: This will re-load the currently active bank\
-.\n All modifications to the current active bank will be lost!");
+  B_Reload->tooltip("Refresh User Banks. \nWARNING: This will re-load the currently active bank.\n\
+ All modifications to the current active bank will be lost!");
   B_Reload->box(FL_UP_BOX);
   B_Reload->color(FL_RED);
   B_Reload->selection_color(FL_BACKGROUND_COLOR);

@@ -178,7 +178,7 @@ m_parent->put_icon(m_parent->AboutWin);}
         m_parent->Put_Loaded_Bank();
         unlight_preset(m_process->Selected_Preset);
     };}
-    tooltip {Refresh the User Bank. 
+    tooltip {Refresh User Banks. 
 WARNING: This will re-load the currently active bank.
  All modifications to the current active bank will be lost!} xywh {502 14 32 24} color 88 labelsize 10
     code0 {o->set_label_offset(2);}
