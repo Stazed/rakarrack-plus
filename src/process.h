@@ -1214,7 +1214,7 @@ public:
 
 
     // Alsa MIDI
-    snd_seq_t *midi_in, *midi_out;
+    snd_seq_t *midi_in;
 
 };  // class RKR
 

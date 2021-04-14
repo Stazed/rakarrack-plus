@@ -198,8 +198,7 @@ RKR::RKR(int gui) :
     Bank(),
     MIDI_Table(),
     MIDI_Table_Bank_Preset_Names(),
-    midi_in(NULL),
-    midi_out(NULL)
+    midi_in(NULL)
 {
     if(!jack_open_client())
     {
@@ -282,7 +281,10 @@ RKR::~RKR()
     free(interpbuf);
 
     // alsa
-    snd_seq_close(midi_in);
+    if(midi_in)
+    {
+        snd_seq_close(midi_in);
+    }
 };
 
 /**

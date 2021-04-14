@@ -109,7 +109,10 @@ MIDIConverter::~MIDIConverter()
     schmittFree();
     fftFree();
 #ifndef LV2_SUPPORT
-    snd_seq_close(port);
+    if(port)
+    {
+        snd_seq_close(port);
+    }
 #endif // LV2_SUPPORT
 }
 
