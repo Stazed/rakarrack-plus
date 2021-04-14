@@ -37,11 +37,11 @@ std::string nsm_preferences_file = "";
 static volatile int got_sigint = 0;
 static volatile int got_sigusr1 = 0;
 int save_preferences = 0;
+int global_gui_show = 0;
 
 #ifdef NSM_SUPPORT
 #include "nsm.h"
 
-int global_gui_show = 0;
 static nsm_client_t *nsm = 0;
 static int wait_nsm = 1;
 
@@ -326,6 +326,9 @@ main(int argc, char *argv[])
 
         gui = 1;    // always load gui with NSM
     }
+
+    // For NSM gui show and update from hide
+    int hold_preset = C_CHANGE_PRESET_OFF;
 #endif // NSM_SUPPORT
 
 
@@ -396,9 +399,6 @@ main(int argc, char *argv[])
     
     // For keeping the message about disconnected from repeating
     int jack_disconnected = 0;
-    
-    // For NSM gui show and update from hide
-    int hold_preset = C_CHANGE_PRESET_OFF;
 
     // Main Loop - run until exit requested
     while (!process.Exit_Program)
@@ -454,9 +454,10 @@ main(int argc, char *argv[])
                     process.calculavol(2);
                     process.booster = 1.0f;
                 }
-
+#ifdef NSM_SUPPORT
                 // hold the preset number so we can update the bank window highlight if using NSM
                 hold_preset = process.Change_Preset;
+#endif
                 process.Change_Preset = C_CHANGE_PRESET_OFF;
             }
             
