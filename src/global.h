@@ -50,12 +50,12 @@ extern int global_font_type;
 extern int global_font_size;
 extern int global_look_changed;
 
-// NSM
+#ifdef NSM_SUPPORT
 extern int global_gui_show;
 const int CONST_GUI_SHOW = 1;
 const int CONST_GUI_HIDE = 2;
 const int CONST_GUI_OFF  = 0;
-// End NSM
+#endif
 
 extern std::string nsm_preferences_file;
 

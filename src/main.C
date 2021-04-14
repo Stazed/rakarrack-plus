@@ -37,11 +37,11 @@ std::string nsm_preferences_file = "";
 static volatile int got_sigint = 0;
 static volatile int got_sigusr1 = 0;
 int save_preferences = 0;
-int global_gui_show = 0;
 
 #ifdef NSM_SUPPORT
 #include "nsm.h"
 
+int global_gui_show = 0;
 static nsm_client_t *nsm = 0;
 static int wait_nsm = 1;
 

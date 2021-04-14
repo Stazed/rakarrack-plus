@@ -3829,6 +3829,7 @@ void RKRGUI::Save_Midi_Program_Change_Table()
 
 int RKRGUI::NSM_gui_show(int hold_preset)
 {
+#ifdef NSM_SUPPORT
     // To update the Gui for any MIDI changes
     Put_Loaded();
     Put_Loaded_Bank();
@@ -3851,12 +3852,14 @@ int RKRGUI::NSM_gui_show(int hold_preset)
     // result in an out of range.. segfault. Since this is used
     // for efx_order[] array location.
     m_process->OnOffC = 0;
-    
+#endif
+
     return hold_preset;
 }
 
 void RKRGUI::NSM_gui_hide()
 {
+#ifdef NSM_SUPPORT
     m_process->Gui_Shown = 0;
     is_bank_modified();
     is_PG_table_modified();
@@ -3870,4 +3873,5 @@ void RKRGUI::NSM_gui_hide()
     Principal->hide();
     Fl::flush();
     global_gui_show = CONST_GUI_OFF;
+#endif
 }
