@@ -357,7 +357,7 @@ main(int argc, char *argv[])
         process.File_To_Load = filetoload;
         
         // This will clear process.File_To_Load if bad file
-        process.load_preset(filetoload.c_str());
+        process.load_preset(filetoload);
     }
     
     // Set command line bank file, if any

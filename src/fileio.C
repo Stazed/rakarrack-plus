@@ -37,11 +37,8 @@
  * @param fx_index
  *      The effect index to process.
  */
-void RKR::apply_effect_parameters(char *buf, int fx_index, PresetBankStruct &preset_loaded)
+void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStruct &preset_loaded)
 {
-    // Copy buffer to std::string
-    std::string s_buf(buf);
-
     // String vector to hold each comma delimited item
     std::vector<std::string> result;
 
@@ -305,14 +302,14 @@ RKR::save_preset(std::string filename)
  *      The user selected filename.
  */
 void
-RKR::load_preset(const char *filename)
+RKR::load_preset(std::string filename)
 {
     FILE *fn;
     char buf[256];
 
     PresetBankStruct preset_loaded;
     
-    if ((fn = fopen(filename, "r")) == NULL)
+    if ((fn = fopen(filename.c_str(), "r")) == NULL)
     {
         File_To_Load.clear();
         Handle_Message(14, filename);
@@ -357,7 +354,7 @@ RKR::load_preset(const char *filename)
     // the parameters apply until we get the order first, uuuuuggghhlllyyy!!!!
     fclose(fn);
 
-    if ((fn = fopen(filename, "r")) == NULL)
+    if ((fn = fopen(filename.c_str(), "r")) == NULL)
     {
         return;
     }

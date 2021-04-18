@@ -685,10 +685,10 @@ public:
     void process_midi_controller_events(int parameter, int value, int preset = C_CHANGE_PRESET_OFF);
 
     // fileio.C
-    void apply_effect_parameters (char *buf, int fx_index, PresetBankStruct &preset_loaded);
+    void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);
     void get_effect_parameters (std::string &s_buf, int fx_index);
     void save_preset (std::string filename);
-    void load_preset (const char *filename);
+    void load_preset (std::string filename);
     void set_audio_paramters ();
     void load_custom_MIDI_table_preset_names();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
