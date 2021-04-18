@@ -613,9 +613,6 @@ public:
   int search_bank_preset_button(int x, int y);
   void Scan_Bank_Dir(int reload);
   static int global_shortcuts(int event);
-  bool install_signal_handlers();
-  static void sigterm_handler(int sig);
-  static void check_signals(void *usrPtr);
   void getMIDIControl(int num);
   void PrepareML();
   inline void get_insert_preset_name(Fl_Widget *w, int effect);

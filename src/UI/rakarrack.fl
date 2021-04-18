@@ -1967,12 +1967,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {global_shortcuts(int event)} {open return_type {static int}
   } {}
-  Function {install_signal_handlers()} {open return_type bool
-  } {}
-  Function {sigterm_handler(int sig)} {open return_type {static void}
-  } {}
-  Function {check_signals(void *usrPtr)} {open return_type {static void}
-  } {}
   Function {getMIDIControl(int num)} {open
   } {}
   Function {PrepareML()} {open

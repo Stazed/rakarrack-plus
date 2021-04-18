@@ -3664,9 +3664,6 @@ char* RKRGUI::get_bank_file()
     {
         BankWin_Label(filename);
         Put_Loaded_Bank();
-        
-        // FIXME this serves no purpose, commenting out and maybe delete
-        // AddBankName(filename);
     }
 
     return filename;
