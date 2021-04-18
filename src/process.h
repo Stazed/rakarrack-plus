@@ -693,8 +693,8 @@ public:
     void load_custom_MIDI_table_preset_names();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
-    int load_bank (const char *filename);
-    int save_bank (const char *filename);
+    int load_bank (std::string filename);
+    int save_bank (std::string filename);
     void load_bank_vector();
     void add_bank_item(std::string filename);
     void copy_bank(struct PresetBankStruct dest[], struct PresetBankStruct source[]);
@@ -712,7 +712,7 @@ public:
     void load_skin_error(FILE *fn);
     void dump_preset_names ();
 
-    int CheckOldBank(const char *filename);
+    int CheckOldBank(std::string filename);
     void ConvertOldFile(char *filename);
 
     void convert_reverb_file(char * filename);

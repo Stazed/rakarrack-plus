@@ -933,7 +933,7 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
  *      One (1) if successful parsing.
  */
 int
-RKR::load_bank(const char *filename)
+RKR::load_bank(std::string filename)
 {
     int error_number = CheckOldBank(filename);
     
@@ -947,7 +947,7 @@ RKR::load_bank(const char *filename)
 
     FILE *fn;
 
-    if ((fn = fopen(filename, "rb")) != NULL)
+    if ((fn = fopen(filename.c_str(), "rb")) != NULL)
     {
         new_bank(Load_Bank);
 
@@ -993,7 +993,7 @@ RKR::load_bank(const char *filename)
 };
 
 int
-RKR::save_bank(const char *filename)
+RKR::save_bank(std::string filename)
 {
     FILE *fn;
     
@@ -1002,7 +1002,7 @@ RKR::save_bank(const char *filename)
     // Copy active bank
     copy_bank(Save_Bank, Bank);
 
-    if ((fn = fopen(filename, "wb")) != NULL)
+    if ((fn = fopen(filename.c_str(), "wb")) != NULL)
     {
         copy_IO(Save_Bank);
 
@@ -1559,12 +1559,12 @@ RKR::dump_preset_names(void)
 }
 
 int
-RKR::CheckOldBank(const char *filename)
+RKR::CheckOldBank(std::string filename)
 {
     long Length = 0;
     FILE *fs;
 
-    if ((fs = fopen(filename, "r")) != NULL)
+    if ((fs = fopen(filename.c_str(), "r")) != NULL)
     {
         fseek(fs, 0L, SEEK_END);
         Length = ftell(fs);
