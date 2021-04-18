@@ -1430,11 +1430,11 @@ RKR::fix_endianess(struct PresetBankStruct _bank[])
 }
 
 void
-RKR::save_skin(char *filename)
+RKR::save_skin(std::string filename)
 {
     FILE *fn;
     char buf[256];
-    fn = fopen(filename, "w");
+    fn = fopen(filename.c_str(), "w");
     if (errno == EACCES)
     {
         Handle_Message(3);
@@ -1468,12 +1468,12 @@ RKR::save_skin(char *filename)
 }
 
 bool
-RKR::load_skin(char *filename)
+RKR::load_skin(std::string filename)
 {
     char buf[256];
     FILE *fn;
 
-    if ((fn = fopen(filename, "r")) == NULL)
+    if ((fn = fopen(filename.c_str(), "r")) == NULL)
     {
         Handle_Message(23, filename);
         return 0;
@@ -1580,11 +1580,11 @@ RKR::CheckOldBank(std::string filename)
 }
 
 void
-RKR::ConvertOldFile(char * filename)
+RKR::ConvertOldFile(std::string filename)
 {
     char buff[255];
     memset(buff, 0, sizeof (buff));
-    sprintf(buff, "rakconvert -c '%s'", filename);
+    sprintf(buff, "rakconvert -c '%s'", filename.c_str());
     
     if (system(buff) == -1)
     {
@@ -1593,11 +1593,11 @@ RKR::ConvertOldFile(char * filename)
 }
 
 void
-RKR::convert_reverb_file(char * filename)
+RKR::convert_reverb_file(std::string filename)
 {
     char buff[255];
     memset(buff, 0, sizeof (buff));
-    sprintf(buff, "rakverb -i '%s'", filename);
+    sprintf(buff, "rakverb -i '%s'", filename.c_str());
     printf("%s\n", buff);
     
     if (system(buff) == -1)
@@ -1644,7 +1644,7 @@ RKR::save_insert_preset(int num, std::string name)
 }
 
 void
-RKR::delete_insert_preset(int num, char *name)
+RKR::delete_insert_preset(int num, std::string name)
 {
     std::string insert_preset_location = "";
     
@@ -1694,7 +1694,7 @@ RKR::delete_insert_preset(int num, char *name)
             sscanf(buf, "%d", &eff);
             rname = strsep(&sbuf, ",");
             rname = strsep(&sbuf, ",");
-            if ((eff == num)&&(strcmp(rname, name) == 0))
+            if ((eff == num)&&(strcmp(rname, name.c_str()) == 0))
             {
                 continue;
             }
@@ -1726,7 +1726,7 @@ RKR::delete_insert_preset(int num, char *name)
  *      One(1) on success.
  */
 bool
-RKR::merge_insert_presets(char *filename)
+RKR::merge_insert_presets(std::string filename)
 {
     std::string insert_preset_location = "";
     
@@ -1743,7 +1743,7 @@ RKR::merge_insert_presets(char *filename)
     }
     
     FILE *fn;
-    if ((fn = fopen(filename, "r")) == NULL)
+    if ((fn = fopen(filename.c_str(), "r")) == NULL)
     {
         Handle_Message(23 , filename);
         return 0;
@@ -1762,7 +1762,7 @@ RKR::merge_insert_presets(char *filename)
     sprintf(tempfile, "%s", insert_preset_location.c_str());
     sprintf(tempfile2, "%s%s", getenv("HOME"), "/.rkrtemp");
 
-    sprintf(orden, "cat %s '%s' > %s\n", tempfile, filename, tempfile2);
+    sprintf(orden, "cat %s '%s' > %s\n", tempfile, filename.c_str(), tempfile2);
     
     if (system(orden) == -1)
     {
@@ -1783,11 +1783,11 @@ RKR::merge_insert_presets(char *filename)
 }
 
 void
-RKR::save_MIDI_table(char *filename)
+RKR::save_MIDI_table(std::string filename)
 {
     FILE *fn;
     char buf[256];
-    fn = fopen(filename, "w");
+    fn = fopen(filename.c_str(), "w");
 
     if (errno == EACCES)
     {
@@ -1809,12 +1809,12 @@ RKR::save_MIDI_table(char *filename)
 }
 
 void
-RKR::load_MIDI_table(char *filename)
+RKR::load_MIDI_table(std::string filename)
 {
     char buf[256];
     FILE *fn;
 
-    if ((fn = fopen(filename, "r")) == NULL)
+    if ((fn = fopen(filename.c_str(), "r")) == NULL)
     {
         Handle_Message(14, filename);
         return;

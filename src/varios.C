@@ -30,7 +30,7 @@
 #include "process.h"
 
 int
-RKR::Message(int prio, const char *labelwin, const char *message_text)
+RKR::Message(int prio, std::string labelwin, std::string message_text)
 {
     if ((Config.Disable_Warnings) && (prio == 0)) return (0);
     
@@ -43,16 +43,16 @@ RKR::Message(int prio, const char *labelwin, const char *message_text)
         w->label("");
         w->image(a);
         w->align(FL_ALIGN_TOP | FL_ALIGN_INSIDE);
-        w->parent()->copy_label(labelwin);
+        w->parent()->copy_label(labelwin.c_str());
 
         // Need to shut off below mouse or it tries to modify the fl_message widget and crash.
         Shut_Off_Below_Mouse = 1;
-        fl_message("%s", message_text);
+        fl_message("%s", message_text.c_str());
         Shut_Off_Below_Mouse = 0;
     }
     else
     {
-        fprintf(stderr, "%s\n", message_text);
+        fprintf(stderr, "%s\n", message_text.c_str());
     }
 
     return (0);

@@ -707,20 +707,20 @@ public:
     void convert_IO(struct PresetBankStruct _bank[]);
     int big_endian();
     void fix_endianess(struct PresetBankStruct _bank[]);
-    void save_skin (char *filename);
-    bool load_skin (char *filename);
+    void save_skin (std::string filename);
+    bool load_skin (std::string filename);
     void load_skin_error(FILE *fn);
     void dump_preset_names ();
 
     int CheckOldBank(std::string filename);
-    void ConvertOldFile(char *filename);
+    void ConvertOldFile(std::string filename);
 
-    void convert_reverb_file(char * filename);
+    void convert_reverb_file(std::string filename);
     int save_insert_preset(int num, std::string name);
-    void delete_insert_preset(int num, char *name);
-    bool merge_insert_presets(char *filename);
-    void save_MIDI_table (char *filename);
-    void load_MIDI_table (char *filename);
+    void delete_insert_preset(int num, std::string name);
+    bool merge_insert_presets(std::string filename);
+    void save_MIDI_table (std::string filename);
+    void load_MIDI_table (std::string filename);
     void load_MIDI_table_vector();
     void add_table_item(std::string filename);
     int set_midi_table(int item);
@@ -731,7 +731,7 @@ public:
     void load_reverbtron_vector();
 
     // varios.C
-    int Message (int prio, const char *labelwin, const char *message_text);
+    int Message (int prio, std::string labelwin, std::string message_text);
     void Handle_Message(int num, std::string filename = "");
     int Get_Bogomips();
     int TapTempo();
