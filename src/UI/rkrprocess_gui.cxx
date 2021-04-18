@@ -3318,19 +3318,22 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
 
     // Need to shut off below mouse or it tries to modify the fl_input widget and crash.
     m_process->Shut_Off_Below_Mouse = 1;
-    const char *name = fl_input("Preset Name?", "");
+    std::string name = fl_input("Preset Name?", "");
     m_process->Shut_Off_Below_Mouse = 0;
-    
-    if (name == NULL)
+
+    if (name.empty ())
         return;
 
-    char NewName[64];
-    memset(NewName, 0, sizeof (NewName));
-    sprintf(NewName, "*%s", name);
-    
-    if(m_process->save_insert_preset(effect, NewName))
+    name.insert (0, "*" );
+
+    if(name.length () > 64)
     {
-        add_insert_preset_name(w, NewName);
+        name.resize (64);
+    }
+
+    if(m_process->save_insert_preset(effect, name))
+    {
+        add_insert_preset_name(w, name);
     }
 }
 
@@ -3343,11 +3346,11 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
  * @param name
  *      The user defined preset name to add.
  */
-void RKRGUI::add_insert_preset_name(Fl_Widget *w, char *name)
+void RKRGUI::add_insert_preset_name(Fl_Widget *w, std::string name)
 {
     RKR_Choice *s = static_cast<RKR_Choice *> (w);
     
-    s->add(name);
+    s->add(name.c_str ());
 
     Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (s->menu ());
     Fl_Menu_Item *p;

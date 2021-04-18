@@ -120,11 +120,8 @@ void RKR::apply_effect_parameters(char *buf, int fx_index, PresetBankStruct &pre
  * @param fx_index
  *      The effect index number to load.
  */
-void RKR::get_effect_parameters(char *buf, int fx_index)
+void RKR::get_effect_parameters(std::string &s_buf, int fx_index)
 {
-    // String buffer to hold everything
-    std::string s_buf = "";
-    
      // Run through the effects for a match to the effect index
     for (int effect = 0; effect < C_NUMBER_EFFECTS; effect++)
     {
@@ -171,9 +168,6 @@ void RKR::get_effect_parameters(char *buf, int fx_index)
             // Add final newline
             s_buf += "\n";
 
-            // copy string to passed char array
-            strcpy(buf, s_buf.c_str());
-            
             return; // we found and processed what we were looking for
         }
     }
@@ -189,11 +183,13 @@ void RKR::get_effect_parameters(char *buf, int fx_index)
  *      The user defined file name for the preset to be saved.
  */
 void
-RKR::save_preset(const char *filename)
+RKR::save_preset(std::string filename)
 {
     FILE *fn;
-    char buf[256];
-    fn = fopen(filename, "w");
+
+    std::string s_buf;
+
+    fn = fopen(filename.c_str(), "w");
 
     if (errno == EACCES)
     {
@@ -209,78 +205,93 @@ RKR::save_preset(const char *filename)
     PresetBankStruct Save_Preset = Active_Preset;
     
     // Program release version
-    memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%s\n", VERSION);
-    fputs(buf, fn);
+    s_buf = VERSION;
+    s_buf += "\n";
+    fputs(s_buf.c_str(), fn);
 
     // Author
-    memset(buf, 0, sizeof (buf));
-
+    s_buf.clear();
     if (strlen(Save_Preset.Author) != 0)
     {
-        sprintf(buf, "%s\n", Save_Preset.Author);
+        s_buf = Save_Preset.Author;
+        s_buf += "\n";
     }
     else
     {
         if (Config.UserRealName != NULL)
         {
-            sprintf(buf, "%s\n", Config.UserRealName);
+            s_buf = Config.UserRealName;
+            s_buf += "\n";
         }
         else
         {
-            sprintf(buf, "%s\n", getenv("USER"));
+            s_buf = getenv("USER");
+            s_buf += "\n";
         }
     }
 
-    fputs(buf, fn);
+    fputs(s_buf.c_str(), fn);
 
     // Preset Name
     fputs(Save_Preset.Preset_Name, fn);
     fputs("\n", fn);
 
     // Master control
-    memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%f,%f,%f,%d\n", Save_Preset.Input_Gain, Save_Preset.Master_Volume,
-            Save_Preset.Fraction_Bypass, Save_Preset.FX_Master_Active);
-    fputs(buf, fn);
+    s_buf.clear();
+    
+    s_buf += NTS(Save_Preset.Input_Gain);
+    s_buf += ",";
+    s_buf += NTS(Save_Preset.Master_Volume);
+    s_buf += ",";
+    s_buf += NTS(Save_Preset.Fraction_Bypass);
+    s_buf += ",";
+    s_buf += NTS(Save_Preset.FX_Master_Active);
+    s_buf += "\n";
+
+    fputs(s_buf.c_str(), fn);
 
     // Effect parameters
     for (int order = 0; order < C_NUMBER_ORDERED_EFFECTS; order++)
     {
         int effect = Save_Preset.Effect_Params[EFX_ORDER][order];
-        memset(buf, 0, sizeof (buf));
-        get_effect_parameters(buf, effect);
-        fputs(buf, fn);
+        s_buf.clear();
+
+        get_effect_parameters(s_buf, effect);
+        fputs(s_buf.c_str(), fn);
     }
 
     // Effect Order
-    memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-            Save_Preset.Effect_Params[EFX_ORDER][0], Save_Preset.Effect_Params[EFX_ORDER][1],
-            Save_Preset.Effect_Params[EFX_ORDER][2], Save_Preset.Effect_Params[EFX_ORDER][3],
-            Save_Preset.Effect_Params[EFX_ORDER][4], Save_Preset.Effect_Params[EFX_ORDER][5],
-            Save_Preset.Effect_Params[EFX_ORDER][6], Save_Preset.Effect_Params[EFX_ORDER][7],
-            Save_Preset.Effect_Params[EFX_ORDER][8], Save_Preset.Effect_Params[EFX_ORDER][9]);
-
-    fputs(buf, fn);
+    s_buf.clear();
+    for(int i = 0; i < 10; i++)
+    {
+        s_buf += NTS(Save_Preset.Effect_Params[EFX_ORDER][i]);
+        if(i < 9)
+        {
+            s_buf += ",";
+        }
+    }
+    s_buf += "\n";
+    
+    fputs(s_buf.c_str(), fn);
 
     // MIDI learn table
     for (int i = 0; i < 128; i++)
     {
-        memset(buf, 0, sizeof (buf));
-        sprintf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-                Save_Preset.XUserMIDI[i][0], Save_Preset.XUserMIDI[i][1],
-                Save_Preset.XUserMIDI[i][2], Save_Preset.XUserMIDI[i][3],
-                Save_Preset.XUserMIDI[i][4], Save_Preset.XUserMIDI[i][5],
-                Save_Preset.XUserMIDI[i][6], Save_Preset.XUserMIDI[i][7],
-                Save_Preset.XUserMIDI[i][8], Save_Preset.XUserMIDI[i][9],
-                Save_Preset.XUserMIDI[i][10], Save_Preset.XUserMIDI[i][10],
-                Save_Preset.XUserMIDI[i][12], Save_Preset.XUserMIDI[i][13],
-                Save_Preset.XUserMIDI[i][14], Save_Preset.XUserMIDI[i][15],
-                Save_Preset.XUserMIDI[i][16], Save_Preset.XUserMIDI[i][17],
-                Save_Preset.XUserMIDI[i][18], Save_Preset.XUserMIDI[i][19]);
+        s_buf.clear();
+        
+        for(int j = 0; j < 20; j++)
+        {
+            s_buf += NTS(Save_Preset.XUserMIDI[i][j]);
+            
+            if(j < 19)
+            {
+                s_buf += ",";
+            }
+        }
+        
+        s_buf += "\n";
 
-        fputs(buf, fn);
+        fputs(s_buf.c_str(), fn);
     }
 
     fclose(fn);
@@ -1599,7 +1610,7 @@ RKR::convert_reverb_file(char * filename)
 }
 
 int
-RKR::save_insert_preset(int num, char *name)
+RKR::save_insert_preset(int num, std::string name)
 {
     std::string insert_preset_location = "";
     
@@ -1616,19 +1627,19 @@ RKR::save_insert_preset(int num, char *name)
     }
 
     FILE *fn;
-    char tempfile[256];
-    char buf[256];
-    char sbuf[260];
-    memset(tempfile, 0, sizeof (tempfile));
-    sprintf(tempfile, "%s", insert_preset_location.c_str());
 
-    if ((fn = fopen(tempfile, "a")) != NULL)
+    if ((fn = fopen(insert_preset_location.c_str(), "a")) != NULL)
     {
-        memset(buf, 0, sizeof (buf));
-        get_effect_parameters(buf, num);
-        memset(sbuf, 0, sizeof (sbuf));
-        sprintf(sbuf, "%d,%s,%s", num, name, buf);
-        fputs(sbuf, fn);
+        std::string s_buf;
+        get_effect_parameters(s_buf, num);
+
+        std::string s_preset = NTS(num);
+        s_preset += ",";
+        s_preset += name;
+        s_preset += ",";
+        s_preset += s_buf;
+
+        fputs(s_preset.c_str(), fn);
         fclose(fn);
     }
     

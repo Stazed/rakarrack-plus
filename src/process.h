@@ -686,8 +686,8 @@ public:
 
     // fileio.C
     void apply_effect_parameters (char *buf, int fx_index, PresetBankStruct &preset_loaded);
-    void get_effect_parameters (char *buf, int fx_index);
-    void save_preset (const char *filename);
+    void get_effect_parameters (std::string &s_buf, int fx_index);
+    void save_preset (std::string filename);
     void load_preset (const char *filename);
     void set_audio_paramters ();
     void load_custom_MIDI_table_preset_names();
@@ -716,7 +716,7 @@ public:
     void ConvertOldFile(char *filename);
 
     void convert_reverb_file(char * filename);
-    int save_insert_preset(int num, char *name);
+    int save_insert_preset(int num, std::string name);
     void delete_insert_preset(int num, char *name);
     bool merge_insert_presets(char *filename);
     void save_MIDI_table (char *filename);
