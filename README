@@ -19,6 +19,7 @@ Install
 
 The dependencies are:
 
+*   cmake
 *   libfltk1.3
 *   libxpm
 *   libjack100.0
@@ -29,7 +30,8 @@ The dependencies are:
 *   jackd
 *   libxft2
 *   libfftw3
-*   liblo   (For NSM support)
+*   lv2     (LV2 support)
+*   liblo   (NSM support)
 
 If you want to compile you will also need the development packages:
 
@@ -41,7 +43,8 @@ If you want to compile you will also need the development packages:
 *   libasound2-dev
 *   libxft-dev
 *   libfftw3-dev
-*   liblo-dev
+*   lv2-dev  (LV2 support)
+*   liblo-dev   (NSM support)
 
 
 To build both rakarrack-plus and LV2s, from top checkout directory:
