@@ -337,7 +337,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {204 85 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {204 85 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1369,7 +1369,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[0].Bank);
 
     m_process->active_bank = 0;
-    BankWin_Label(m_process->Bank_Vector[0].Bank_File_Name.c_str ());
+    BankWin_Label(m_process->Bank_Vector[0].Bank_File_Name);
     Put_Loaded_Bank();
     BankWindow->unlight_preset(m_process->Selected_Preset);}
           xywh {418 30 22 16} color 62 labelsize 10
@@ -1384,7 +1384,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[1].Bank);
 
     m_process->active_bank = 1;
-    BankWin_Label(m_process->Bank_Vector[1].Bank_File_Name.c_str ());
+    BankWin_Label(m_process->Bank_Vector[1].Bank_File_Name);
     Put_Loaded_Bank();
     BankWindow->unlight_preset(m_process->Selected_Preset);}
           xywh {442 30 22 16} color 62 labelsize 10
@@ -1399,7 +1399,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[2].Bank);
 
     m_process->active_bank = 2;
-    BankWin_Label(m_process->Bank_Vector[2].Bank_File_Name.c_str ());
+    BankWin_Label(m_process->Bank_Vector[2].Bank_File_Name);
     Put_Loaded_Bank();
     BankWindow->unlight_preset(m_process->Selected_Preset);}
           xywh {466 30 22 16} color 62 labelsize 10
@@ -1919,7 +1919,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {MiraConfig()} {open
   } {}
-  Function {BankWin_Label(const char *filename)} {open
+  Function {BankWin_Label(std::string filename)} {open return_type void
   } {}
   Function {is_bank_modified()} {open
   } {}

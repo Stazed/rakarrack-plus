@@ -160,7 +160,7 @@ void BankWindowGui::cb_B_Reload_i(RKR_Button*, void*) {
     if(m_process->load_bank_from_vector (bank_filename))
     {
         // Update the Bank Window
-        m_parent->BankWin_Label(bank_filename.c_str());
+        m_parent->BankWin_Label(bank_filename);
         m_parent->Put_Loaded_Bank();
         unlight_preset(m_process->Selected_Preset);
     };
@@ -179,7 +179,7 @@ void BankWindowGui::cb_CH_UB_i(RKR_Choice*, void* v) {
     if(m_process->load_bank_from_vector (bank_filename))
     {
         // Update the Bank Window
-        m_parent->BankWin_Label(bank_filename.c_str());
+        m_parent->BankWin_Label(bank_filename);
         m_parent->Put_Loaded_Bank();
         unlight_preset(m_process->Selected_Preset);
     };

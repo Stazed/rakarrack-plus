@@ -560,7 +560,7 @@ void RKRGUI::cb_L_B1_i(RKR_Button*, void*) {
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[0].Bank);
 
     m_process->active_bank = 0;
-    BankWin_Label(m_process->Bank_Vector[0].Bank_File_Name.c_str ());
+    BankWin_Label(m_process->Bank_Vector[0].Bank_File_Name);
     Put_Loaded_Bank();
     BankWindow->unlight_preset(m_process->Selected_Preset);
 }
@@ -576,7 +576,7 @@ void RKRGUI::cb_L_B2_i(RKR_Button*, void*) {
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[1].Bank);
 
     m_process->active_bank = 1;
-    BankWin_Label(m_process->Bank_Vector[1].Bank_File_Name.c_str ());
+    BankWin_Label(m_process->Bank_Vector[1].Bank_File_Name);
     Put_Loaded_Bank();
     BankWindow->unlight_preset(m_process->Selected_Preset);
 }
@@ -592,7 +592,7 @@ void RKRGUI::cb_L_B3_i(RKR_Button*, void*) {
     m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[2].Bank);
 
     m_process->active_bank = 2;
-    BankWin_Label(m_process->Bank_Vector[2].Bank_File_Name.c_str ());
+    BankWin_Label(m_process->Bank_Vector[2].Bank_File_Name);
     Put_Loaded_Bank();
     BankWindow->unlight_preset(m_process->Selected_Preset);
 }

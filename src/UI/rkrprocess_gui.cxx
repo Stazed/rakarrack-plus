@@ -266,7 +266,7 @@ void RKRGUI::GuiTimeout(void)
     // Updates the Gui for MIDI Bank select
     if (m_process->Change_Bank != C_BANK_CHANGE_OFF)
     {
-        BankWin_Label(m_process->Bank_Vector[m_process->Change_Bank].Bank_File_Name.c_str ());
+        BankWin_Label(m_process->Bank_Vector[m_process->Change_Bank].Bank_File_Name);
         Put_Loaded_Bank();
         m_process->Change_Bank = C_BANK_CHANGE_OFF;
     }
@@ -709,7 +709,7 @@ void RKRGUI::load_previous_state()
         {
             m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[m_process->active_bank].Bank);
 
-            BankWin_Label(m_process->Bank_Vector[m_process->active_bank].Bank_File_Name.c_str ());
+            BankWin_Label(m_process->Bank_Vector[m_process->active_bank].Bank_File_Name);
             Put_Loaded_Bank();
             BankWindow->unlight_preset(m_process->Selected_Preset);
         }
@@ -721,7 +721,7 @@ void RKRGUI::load_previous_state()
     }
     else
     {
-        BankWin_Label(m_process->Command_Line_Bank.c_str());
+        BankWin_Label(m_process->Command_Line_Bank);
     }
 
     if (!m_process->Command_Line_File)
@@ -1977,13 +1977,12 @@ void RKRGUI::MiraConfig()
     Settings->Font_Bro->value(global_font_type + 1);
 }
 
-void RKRGUI::BankWin_Label(const char *filename)
+void RKRGUI::BankWin_Label(std::string filename)
 {
-    // add the bankwindow label
     char tmp[256];
 
     memset(tmp, 0, sizeof (tmp));
-    sprintf(tmp, "%s   v%s - Bank Manager - %s", m_process->jackcliname, VERSION, fl_filename_name(filename));
+    sprintf(tmp, "%s   v%s - Bank Manager - %s", m_process->jackcliname, VERSION, fl_filename_name(filename.c_str()));
     BankWindow->copy_label(tmp);
 }
 

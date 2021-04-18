@@ -589,7 +589,7 @@ public:
   void show_lic();
   void MiraClientes();
   void MiraConfig();
-  void BankWin_Label(const char *filename);
+  void BankWin_Label(std::string filename);
   void is_bank_modified();
   void is_PG_table_modified();
   void Put_Loaded_Bank();
