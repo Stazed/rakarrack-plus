@@ -3637,7 +3637,7 @@ void RKRGUI::drag_effect()
     }
 }
 
-char* RKRGUI::get_bank_file()
+void RKRGUI::set_bank_file()
 {
     // get bank file
     char *filename;
@@ -3655,7 +3655,7 @@ char* RKRGUI::get_bank_file()
     filename = fl_file_chooser("Load Bank File:", "(*.rkrb)", chooser_start_location.c_str (), 0);
 
     if (filename == NULL)
-        return 0;
+        return;
 
     filename = fl_filename_setext(filename, ".rkrb");
     int ok = m_process->load_bank_from_vector(filename);
@@ -3665,8 +3665,6 @@ char* RKRGUI::get_bank_file()
         BankWin_Label(filename);
         Put_Loaded_Bank();
     }
-
-    return filename;
 }
 
 void RKRGUI::set_save_file()

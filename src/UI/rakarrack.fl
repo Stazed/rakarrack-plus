@@ -337,12 +337,12 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {204 85 800 600} type Double box DOWN_BOX color 0 hide resizable size_range {320 240 3200 2400}
+      xywh {204 85 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->set_label_offset(4);}
         code1 {o->set_submenu_paths(main_submenu_paths);}
@@ -364,7 +364,7 @@ widget gets the focus.} private local
           }
           MenuItem {BankWindow->Load_Bank_M} {
             label {&Load Bank}
-            callback {get_bank_file();}
+            callback {set_bank_file();}
             xywh {0 0 45 26}
           }
           MenuItem {BankWindow->Save_Bank_M} {
@@ -1995,7 +1995,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {drag_effect()} {open
   } {}
-  Function {get_bank_file()} {open C return_type {char*}
+  Function {set_bank_file()} {open C return_type void
   } {}
   Function {set_save_file()} {open return_type void
   } {}

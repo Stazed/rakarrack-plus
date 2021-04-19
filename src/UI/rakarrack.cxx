@@ -69,7 +69,7 @@ void RKRGUI::cb_Export_Preset(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_BankWindow_i(Fl_Menu_*, void*) {
-  get_bank_file();
+  set_bank_file();
 }
 void RKRGUI::cb_BankWindow(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_BankWindow_i(o,v);

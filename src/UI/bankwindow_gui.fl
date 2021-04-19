@@ -45,7 +45,7 @@ m_parent= _rgui;} {}
   Fl_Box Fondo3 {
     xywh {1 1 800 600}
   }
-  Fl_Menu_Bar MenuB {
+  Fl_Menu_Bar MenuB {open
     xywh {0 0 253 20} box NO_BOX color 55 selection_color 7 labelcolor 7 align 112 textcolor 7
     code0 {o->set_label_offset(6);}
     code1 {o->set_submenu_paths(bank_submenu_paths);}
@@ -57,7 +57,7 @@ m_parent= _rgui;} {}
     } {
       MenuItem Load_Bank {
         label {&Load Bank}
-        callback {m_parent->get_bank_file();}
+        callback {m_parent->set_bank_file();}
         xywh {10 10 45 26}
       }
       MenuItem Save_Bank {

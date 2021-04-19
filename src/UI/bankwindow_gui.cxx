@@ -17,7 +17,7 @@ const std::vector<std::string> bank_submenu_paths
 }; 
 
 void BankWindowGui::cb_Load_Bank_i(Fl_Menu_*, void*) {
-  m_parent->get_bank_file();
+  m_parent->set_bank_file();
 }
 void BankWindowGui::cb_Load_Bank(Fl_Menu_* o, void* v) {
   ((BankWindowGui*)(o->parent()))->cb_Load_Bank_i(o,v);

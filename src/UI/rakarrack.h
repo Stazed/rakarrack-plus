@@ -627,7 +627,7 @@ public:
   inline void p_click_i(Fl_Choice* o, void*);
   void RandomPreset();
   void drag_effect();
-  char* get_bank_file();
+  void set_bank_file();
   void set_save_file();
   void set_bank_made(int a_made);
   int get_bank_made();
