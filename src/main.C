@@ -61,7 +61,7 @@ cb_nsm_open ( const char *save_file_path,   // See API Docs 2.2.2
                                                                      
 int
 cb_nsm_save ( char **,          // out_msg
-           void *)              // userdata
+              void *)           // userdata
 {
     save_preferences = 1;
     return ERR_OK;
@@ -301,8 +301,6 @@ main(int argc, char *argv[])
 
         if ( 0 == nsm_init( nsm, nsm_url ) )
         {
-            
-            nsm_set_save_callback( nsm, cb_nsm_save, 0 );
             nsm_send_announce( nsm, command_line_name.c_str(), ":optional-gui:", argv[0] );
         }
 
