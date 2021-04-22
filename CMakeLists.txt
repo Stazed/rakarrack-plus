@@ -138,7 +138,7 @@ if(EnableNSM)
 endif (EnableNSM)
 
 if(BuildRakarrackPlus)
-    install(FILES COPYING AUTHORS ChangeLog NEWS README PACKAGERS.README
+    install(FILES COPYING AUTHORS ChangeLog NEWS README README.md PACKAGERS.README
         DESTINATION share/doc/rakarrack-plus)
 endif(BuildRakarrackPlus)
 #TODO move from /data to main
