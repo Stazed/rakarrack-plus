@@ -321,27 +321,27 @@ Derelict::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Derelict::setvolume(int Pvolume)
+Derelict::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
+    Pvolume = _Pvolume;
 
-    outvolume = (float) Pvolume / 127.0f;
-    if (Pvolume == 0)
+    outvolume = (float) _Pvolume / 127.0f;
+    if (_Pvolume == 0)
         cleanup();
 }
 
 void
-Derelict::setpanning(int Ppanning)
+Derelict::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + 0.5f) / 127.0f;
 }
 
 void
-Derelict::setlrcross(int Plrcross)
+Derelict::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f * 1.0f;
 }
 
 void
@@ -363,10 +363,10 @@ Derelict::sethpf(int value)
 }
 
 void
-Derelict::setoctave(int Poctave)
+Derelict::setoctave(int _Poctave)
 {
-    this->Poctave = Poctave;
-    octmix = (float) (Poctave) / 127.0f;
+    Poctave = _Poctave;
+    octmix = (float) (_Poctave) / 127.0f;
 }
 
 void

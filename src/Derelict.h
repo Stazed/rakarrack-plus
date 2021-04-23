@@ -91,12 +91,12 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setlrcross (int Plrcross);
-    void setoctave (int Poctave);
-    void setlpf (int Plpf);
-    void sethpf (int Phpf);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setlrcross (int _Plrcross);
+    void setoctave (int _Poctave);
+    void setlpf (int value);
+    void sethpf (int value);
 
     //Parametrii
     int Pvolume;	//Volumul or E/R
