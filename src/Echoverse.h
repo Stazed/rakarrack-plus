@@ -66,14 +66,14 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setdelay (int Pdelay);
-    void setlrdelay (int Plrdelay);
-    void setlrcross (int Plrcross);
-    void setfb (int Pfb);
-    void sethidamp (int Phidamp);
-    void setreverse (int Preverse);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setdelay (int _Pdelay);
+    void setlrdelay (int _Plrdelay);
+    void setlrcross (int _Plrcross);
+    void setfb (int _Pfb);
+    void sethidamp (int _Phidamp);
+    void setreverse (int _Preverse);
     void initdelays ();
 
     float fSAMPLE_RATE;

@@ -189,17 +189,17 @@ Echoverse::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Echoverse::setvolume(int Pvolume)
+Echoverse::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-Echoverse::setpanning(int Ppanning)
+Echoverse::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    lpanning = ((float) Ppanning) / 64.0f;
+    Ppanning = _Ppanning;
+    lpanning = ((float) _Ppanning) / 64.0f;
     rpanning = 2.0f - lpanning;
     lpanning = 10.0f * powf(lpanning, 4);
     rpanning = 10.0f * powf(rpanning, 4);
@@ -210,18 +210,18 @@ Echoverse::setpanning(int Ppanning)
 }
 
 void
-Echoverse::setreverse(int Preverse)
+Echoverse::setreverse(int _Preverse)
 {
-    this->Preverse = Preverse;
-    reverse = (float) Preverse / 127.0f;
+    Preverse = _Preverse;
+    reverse = (float) _Preverse / 127.0f;
     ireverse = 1.0f - reverse;
 }
 
 void
-Echoverse::setdelay(int Pdelay)
+Echoverse::setdelay(int _Pdelay)
 {
-    this->Pdelay = Pdelay;
-    fdelay = 60.0f / ((float) Pdelay);
+    Pdelay = _Pdelay;
+    fdelay = 60.0f / ((float) _Pdelay);
     if (fdelay < 0.01f)
     {
         fdelay = 0.01f;
@@ -235,13 +235,13 @@ Echoverse::setdelay(int Pdelay)
 }
 
 void
-Echoverse::setlrdelay(int Plrdelay)
+Echoverse::setlrdelay(int _Plrdelay)
 {
     float tmp;
-    this->Plrdelay = Plrdelay;
-    lrdelay = delay * fabs(((float) Plrdelay - 64.0f) / 65.0f);
+    Plrdelay = _Plrdelay;
+    lrdelay = delay * fabs(((float) _Plrdelay - 64.0f) / 65.0f);
 
-    tmp = fabs(((float) Plrdelay - 64.0f) / 32.0f);
+    tmp = fabs(((float) _Plrdelay - 64.0f) / 32.0f);
     pingpong = 1.0f - 1.0f / (5.0f * tmp * tmp + 1.0f);
     pingpong *= 1.05159f;
     ipingpong = 1.0f - pingpong;
@@ -249,24 +249,24 @@ Echoverse::setlrdelay(int Plrdelay)
 }
 
 void
-Echoverse::setlrcross(int Plrcross)
+Echoverse::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = D_PI * (float) Plrcross / 128.0f;
+    Plrcross = _Plrcross;
+    lrcross = D_PI * (float) _Plrcross / 128.0f;
 }
 
 void
-Echoverse::setfb(int Pfb)
+Echoverse::setfb(int _Pfb)
 {
-    this->Pfb = Pfb;
-    fb = (float) Pfb / 128.0f;
+    Pfb = _Pfb;
+    fb = (float) _Pfb / 128.0f;
 }
 
 void
-Echoverse::sethidamp(int Phidamp)
+Echoverse::sethidamp(int _Phidamp)
 {
-    this->Phidamp = Phidamp;
-    hidamp = f_exp(-D_PI * 500.0f * ((float) Phidamp) / fSAMPLE_RATE);
+    Phidamp = _Phidamp;
+    hidamp = f_exp(-D_PI * 500.0f * ((float) _Phidamp) / fSAMPLE_RATE);
 }
 
 void
