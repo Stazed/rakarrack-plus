@@ -319,20 +319,20 @@ Convolotron::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Convolotron::setvolume(int Pvolume)
+Convolotron::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
     
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
         cleanup();
 }
 
 void
-Convolotron::setpanning(int Ppanning)
+Convolotron::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    rpanning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    rpanning = ((float) _Ppanning + 0.5f) / 127.0f;
     lpanning = 1.0f - rpanning;
     levpanl = lpanning * level * 2.0f;
     levpanr = rpanning * level * 2.0f;
@@ -536,10 +536,10 @@ Convolotron::process_rbuf()
 }
 
 void
-Convolotron::sethidamp(int Phidamp)
+Convolotron::sethidamp(int _Phidamp)
 {
-    this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float) Phidamp / 127.1f;
+    Phidamp = _Phidamp;
+    hidamp = 1.0f - (float) _Phidamp / 127.1f;
     alpha_hidamp = 1.0f - hidamp;
 }
 

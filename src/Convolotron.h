@@ -101,9 +101,9 @@ private:
     int Puser;		//-64...64//Feedback.
     int Filenum;
     int Pfb;		//-64 ... 64// amount of feedback
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void sethidamp (int Phidamp);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void sethidamp (int _Phidamp);
     void process_rbuf();
     void UpdateLength ();
 
