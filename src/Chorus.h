@@ -81,12 +81,12 @@ public:
 
 
     //Control Parametrii
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setdepth (int Pdepth);
-    void setdelay (int Pdelay);
-    void setfb (int Pfb);
-    void setlrcross (int Plrcross);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setdepth (int _Pdepth);
+    void setdelay (int _Pdelay);
+    void setfb (int _Pfb);
+    void setlrcross (int _Plrcross);
 
     //Valorile interne
     int maxdelay;

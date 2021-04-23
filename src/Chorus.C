@@ -256,52 +256,52 @@ Chorus::lv2_update_params(uint32_t period)
  * Parameter control
  */
 void
-Chorus::setdepth(int Pdepth)
+Chorus::setdepth(int _Pdepth)
 {
-    this->Pdepth = Pdepth;
-    depth = (powf(8.0f, ((float) Pdepth / 127.0f) * 2.0f) - 1.0f) / 1000.0f; //seconds
+    Pdepth = _Pdepth;
+    depth = (powf(8.0f, ((float) _Pdepth / 127.0f) * 2.0f) - 1.0f) / 1000.0f; //seconds
 }
 
 void
-Chorus::setdelay(int Pdelay)
+Chorus::setdelay(int _Pdelay)
 {
-    this->Pdelay = Pdelay;
-    delay = (powf(10.0f, ((float) Pdelay / 127.0f) * 2.0f) - 1.0f) / 1000.0f; //seconds
+    Pdelay = _Pdelay;
+    delay = (powf(10.0f, ((float) _Pdelay / 127.0f) * 2.0f) - 1.0f) / 1000.0f; //seconds
 }
 
 void
-Chorus::setfb(int Pfb)
+Chorus::setfb(int _Pfb)
 {
-    this->Pfb = Pfb;
-    fb = ((float) Pfb - 64.0f) / 64.1f;
+    Pfb = _Pfb;
+    fb = ((float) _Pfb - 64.0f) / 64.1f;
 }
 
 void
-Chorus::setvolume(int Pvolume)
+Chorus::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
+    Pvolume = _Pvolume;
     
     if (awesome_mode)
     { //use interpolated delay line for better sound
-        ldelay->set_mix(((float) Pvolume / 128.0f));
-        rdelay->set_mix(((float) Pvolume / 128.0f));
+        ldelay->set_mix(((float) _Pvolume / 128.0f));
+        rdelay->set_mix(((float) _Pvolume / 128.0f));
     }
     
-    outvolume = (float) Pvolume / 127.0f;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-Chorus::setpanning(int Ppanning)
+Chorus::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + .5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + .5f) / 127.0f;
 }
 
 void
-Chorus::setlrcross(int Plrcross)
+Chorus::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f;
 }
 
 void
