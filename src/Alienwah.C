@@ -159,66 +159,66 @@ Alienwah::lv2_update_params(uint32_t period)
  */
 
 void
-Alienwah::setdepth(int Pdepth)
+Alienwah::setvolume(int _Pvolume)
 {
-    this->Pdepth = Pdepth;
-    depth = ((float) Pdepth / 127.0f);
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-Alienwah::setfb(int Pfb)
+Alienwah::setpanning(int _Ppanning)
 {
-    this->Pfb = Pfb;
-    fb = fabsf(((float) Pfb - 64.0f) / 64.1f);
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + .5f) / 127.0f;
+}
+
+void
+Alienwah::setdepth(int _Pdepth)
+{
+    Pdepth = _Pdepth;
+    depth = ((float) _Pdepth / 127.0f);
+}
+
+void
+Alienwah::setfb(int _Pfb)
+{
+    Pfb = _Pfb;
+    fb = fabsf(((float) _Pfb - 64.0f) / 64.1f);
     fb = sqrtf(fb);
 
     if (fb < 0.4f)
         fb = 0.4f;
 
-    if (Pfb < 64)
+    if (_Pfb < 64)
         fb = -fb;
 }
 
 void
-Alienwah::setvolume(int Pvolume)
+Alienwah::setlrcross(int _Plrcross)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f;
 }
 
 void
-Alienwah::setpanning(int Ppanning)
+Alienwah::setdelay(int _Pdelay)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + .5f) / 127.0f;
-}
+    if (_Pdelay > MAX_ALIENWAH_DELAY)
+        _Pdelay = MAX_ALIENWAH_DELAY;
 
-void
-Alienwah::setlrcross(int Plrcross)
-{
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f;
-}
+    Pdelay = _Pdelay;
 
-void
-Alienwah::setphase(int Pphase)
-{
-    this->Pphase = Pphase;
-    phase = ((float) Pphase - 64.0f) / 64.0f * PI;
-}
-
-void
-Alienwah::setdelay(int Pdelay)
-{
-    if (Pdelay > MAX_ALIENWAH_DELAY)
-        Pdelay = MAX_ALIENWAH_DELAY;
-
-    this->Pdelay = Pdelay;
-
-    if (Pdelay > oldpdelay)
+    if (_Pdelay > oldpdelay)
         cleanup();
 
-    oldpdelay = Pdelay;
+    oldpdelay = _Pdelay;
+}
+
+void
+Alienwah::setphase(int _Pphase)
+{
+    Pphase = _Pphase;
+    phase = ((float) _Pphase - 64.0f) / 64.0f * PI;
 }
 
 void

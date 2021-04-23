@@ -90,13 +90,13 @@ private:
     int oldpdelay;
 
     //Control Parametrii
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setdepth (int Pdepth);
-    void setfb (int Pfb);
-    void setlrcross (int Plrcross);
-    void setdelay (int Pdelay);
-    void setphase (int Pphase);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setdepth (int _Pdepth);
+    void setfb (int _Pfb);
+    void setlrcross (int _Plrcross);
+    void setdelay (int _Pdelay);
+    void setphase (int _Pphase);
     
     EffectLFO *lfo;		//lfo-ul Alienwah
     
