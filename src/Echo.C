@@ -174,24 +174,24 @@ Echo::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Echo::setvolume(int Pvolume)
+Echo::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-Echo::setpanning(int Ppanning)
+Echo::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + 0.5f) / 127.0f;
 }
 
 void
-Echo::setreverse(int Preverse)
+Echo::setreverse(int _Preverse)
 {
-    this->Preverse = Preverse;
-    reverse = (float) Preverse / 127.0f;
+    Preverse = _Preverse;
+    reverse = (float) _Preverse / 127.0f;
     ireverse = 1.0f - reverse;
 }
 
@@ -210,23 +210,23 @@ Echo::Tempo2Delay(int value)
 }
 
 void
-Echo::setdelay(int Pdelay)
+Echo::setdelay(int _Pdelay)
 {
-    this->Pdelay = Pdelay;
-    delay = ((float) Pdelay) / 1000.0f;
+    Pdelay = _Pdelay;
+    delay = ((float) _Pdelay) / 1000.0f;
     ldelay->set_averaging(0.05f);
     rdelay->set_averaging(0.05f);
     initdelays();
 }
 
 void
-Echo::setlrdelay(int Plrdelay)
+Echo::setlrdelay(int _Plrdelay)
 {
-    this->Plrdelay = Plrdelay;
-    float tmp =  (powf(2.0, fabsf((float) Plrdelay - 64.0f) / 64.0f * 9.0f) -
+    Plrdelay = _Plrdelay;
+    float tmp =  (powf(2.0, fabsf((float) _Plrdelay - 64.0f) / 64.0f * 9.0f) -
             1.0f) / 1000.0f;
     
-    if (Plrdelay < 64.0)
+    if (_Plrdelay < 64.0)
         tmp = -tmp;
     
     lrdelay = tmp;
@@ -234,33 +234,33 @@ Echo::setlrdelay(int Plrdelay)
 }
 
 void
-Echo::setlrcross(int Plrcross)
+Echo::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f * 1.0f;
 }
 
 void
-Echo::setfb(int Pfb)
+Echo::setfb(int _Pfb)
 {
-    this->Pfb = Pfb;
-    fb = (float) Pfb / 128.0f;
+    Pfb = _Pfb;
+    fb = (float) _Pfb / 128.0f;
 }
 
 void
-Echo::sethidamp(int Phidamp)
+Echo::sethidamp(int _Phidamp)
 {
-    this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float) Phidamp / 127.0f;
+    Phidamp = _Phidamp;
+    hidamp = 1.0f - (float) _Phidamp / 127.0f;
 }
 
 void
-Echo::setdirect(int Pdirect)
+Echo::setdirect(int _Pdirect)
 {
-    if (Pdirect > 0)
-        Pdirect = 1;
+    if (_Pdirect > 0)
+        _Pdirect = 1;
     
-    this->Pdirect = Pdirect;
+    Pdirect = _Pdirect;
 }
 
 void
