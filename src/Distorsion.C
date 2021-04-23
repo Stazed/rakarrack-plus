@@ -303,28 +303,28 @@ Distorsion::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Distorsion::setvolume(int Pvolume)
+Distorsion::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
+    Pvolume = _Pvolume;
 
-    outvolume = (float) Pvolume / 127.0f;
+    outvolume = (float) _Pvolume / 127.0f;
     
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
         cleanup();
 }
 
 void
-Distorsion::setpanning(int Ppanning)
+Distorsion::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + 0.5f) / 127.0f;
 }
 
 void
-Distorsion::setlrcross(int Plrcross)
+Distorsion::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f * 1.0f;
 }
 
 void
@@ -348,10 +348,10 @@ Distorsion::sethpf(int value)
 }
 
 void
-Distorsion::setoctave(int Poctave)
+Distorsion::setoctave(int _Poctave)
 {
-    this->Poctave = Poctave;
-    octmix = (float) (Poctave) / 127.0f;
+    Poctave = _Poctave;
+    octmix = (float) (_Poctave) / 127.0f;
 }
 
 void
