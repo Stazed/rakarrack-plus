@@ -90,7 +90,7 @@ public:
     virtual void initialize();
     void clear_initialize();
     float getfreqresponse (float freq); // not used
-    void setvolume (int Pvolume);
+    void setvolume (int _Pvolume);
     
 private:
     void changepar_Q(int npar, int value);

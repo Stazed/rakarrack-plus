@@ -159,10 +159,10 @@ EQ::Dry_Wet_Mix(int, float, float *efxoutl, float *efxoutr, float *smpl, float *
  * Parameter control
  */
 void
-EQ::setvolume(int Pvolume)
+EQ::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = powf(0.005f, (1.0f - (float) Pvolume / 127.0f)) * 10.0f;
+    Pvolume = _Pvolume;
+    outvolume = powf(0.005f, (1.0f - (float) _Pvolume / 127.0f)) * 10.0f;
 }
 
 /**
