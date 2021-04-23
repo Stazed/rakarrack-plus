@@ -82,13 +82,13 @@ private:
     int Pbarber;         //Enable barber pole phasing
 
     //Control parameters
-    void setvolume (int Pvolume);
-    void setdistortion (int Pdistortion);
-    void setwidth (int Pwidth);
-    void setfb (int Pfb);
-    void setoffset (int Poffset);
-    void setstages (int Pstages);
-    void setdepth (int Pdepth);
+    void setvolume (int _Pvolume);
+    void setdistortion (int _Pdistortion);
+    void setwidth (int _Pwidth);
+    void setfb (int _Pfb);
+    void setoffset (int _Poffset);
+    void setstages (int _Pstages);
+    void setdepth (int _Pdepth);
 
     //Internal Variables
     bool barber;			//Barber pole phasing flag

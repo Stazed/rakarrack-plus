@@ -286,57 +286,59 @@ Analog_Phaser::lv2_update_params(uint32_t period)
  * Parameter control
  */
 void
-Analog_Phaser::setwidth(int Pwidth)
+Analog_Phaser::setwidth(int _Pwidth)
 {
-    this->Pwidth = Pwidth;
-    width = ((float) Pwidth / 127.0f);
+    Pwidth = _Pwidth;
+    width = ((float) _Pwidth / 127.0f);
 };
 
 void
-Analog_Phaser::setfb(int Pfb)
+Analog_Phaser::setfb(int _Pfb)
 {
-    this->Pfb = Pfb;
-    fb = (float) (Pfb - 64) / 64.2f;
+    Pfb = _Pfb;
+    fb = (float) (_Pfb - 64) / 64.2f;
 };
 
 void
-Analog_Phaser::setvolume(int Pvolume)
+Analog_Phaser::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    // outvolume is needed in calling program
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 };
 
 void
-Analog_Phaser::setdistortion(int Pdistortion)
+Analog_Phaser::setdistortion(int _Pdistortion)
 {
-    this->Pdistortion = Pdistortion;
-    distortion = (float) Pdistortion / 127.0f;
+    Pdistortion = _Pdistortion;
+    distortion = (float) _Pdistortion / 127.0f;
 };
 
 void
-Analog_Phaser::setoffset(int Poffset)
+Analog_Phaser::setoffset(int _Poffset)
 {
-    this->Poffset = Poffset;
-    offsetpct = (float) Poffset / 127.0f;
+    Poffset = _Poffset;
+    offsetpct = (float) _Poffset / 127.0f;
 };
 
 void
-Analog_Phaser::setstages(int Pstages)
+Analog_Phaser::setstages(int _Pstages)
 {
 
-    if (Pstages >= MAX_PHASER_STAGES)
-        Pstages = MAX_PHASER_STAGES;
-    this->Pstages = Pstages;
+    if (_Pstages >= MAX_PHASER_STAGES)
+    {
+        _Pstages = MAX_PHASER_STAGES;
+    }
+
+    Pstages = _Pstages;
 
     cleanup();
 };
 
 void
-Analog_Phaser::setdepth(int Pdepth)
+Analog_Phaser::setdepth(int _Pdepth)
 {
-    this->Pdepth = Pdepth;
-    depth = (float) (Pdepth - 64) / 127.0f; //Pdepth input should be 0-127.  depth shall range 0-0.5 since we don't need to shift the full spectrum.
+    Pdepth = _Pdepth;
+    depth = (float) (_Pdepth - 64) / 127.0f; //Pdepth input should be 0-127.  depth shall range 0-0.5 since we don't need to shift the full spectrum.
 };
 
 void
