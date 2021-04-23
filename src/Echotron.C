@@ -271,12 +271,12 @@ Echotron::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Echotron::setvolume(int Pvolume)
+Echotron::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
     
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
         cleanup();
 }
 
@@ -731,10 +731,10 @@ void Echotron::modulate_delay()
 }
 
 void
-Echotron::sethidamp(int Phidamp)
+Echotron::sethidamp(int _Phidamp)
 {
-    this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float) Phidamp / 127.1f;
+    Phidamp = _Phidamp;
+    hidamp = 1.0f - (float) _Phidamp / 127.1f;
     float fr = 20.0f * f_pow2(hidamp * 10.0f);
     lpfl->setfreq(fr);
     lpfr->setfreq(fr);
