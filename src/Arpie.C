@@ -280,54 +280,54 @@ Arpie::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Arpie::setvolume(int Pvolume)
+Arpie::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
     
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
         cleanup();
 }
 
 void
-Arpie::setpanning(int Ppanning)
+Arpie::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + 0.5f) / 127.0f;
 }
 
 void
-Arpie::setreverse(int Preverse)
+Arpie::setreverse(int _Preverse)
 {
-    this->Preverse = Preverse;
-    reverse = (float) Preverse / 127.0f;
+    Preverse = _Preverse;
+    reverse = (float) _Preverse / 127.0f;
 }
 
 void
-Arpie::setdelay(int Pdelay)
+Arpie::setdelay(int _Pdelay)
 {
-    this->Pdelay = Pdelay;
+    Pdelay = _Pdelay;
     
-    if (Pdelay < 30)
-        Pdelay = 30;
+    if (_Pdelay < 30)
+        _Pdelay = 30;
     
-    if (Pdelay > 600)
-        Pdelay = 600; //100ms .. 2 sec constraint
+    if (_Pdelay > 600)
+        _Pdelay = 600; //100ms .. 2 sec constraint
     
-    delay = 1 + lrintf((60.0f / ((float) (subdiv * Pdelay))) * fSAMPLE_RATE); //quarter notes
+    delay = 1 + lrintf((60.0f / ((float) (subdiv * _Pdelay))) * fSAMPLE_RATE); //quarter notes
     initdelays();
 
 };
 
 void
-Arpie::setlrdelay(int Plrdelay)
+Arpie::setlrdelay(int _Plrdelay)
 {
     float tmp;
-    this->Plrdelay = Plrdelay;
-    tmp =  (powf(2.0, fabsf((float) Plrdelay - 64.0f) / 64.0f * 9.0f) -
+    Plrdelay = _Plrdelay;
+    tmp =  (powf(2.0, fabsf((float) _Plrdelay - 64.0f) / 64.0f * 9.0f) -
             1.0f) / 1000.0f * fSAMPLE_RATE;
     
-    if (Plrdelay < 64.0)
+    if (_Plrdelay < 64.0)
         tmp = -tmp;
     
     lrdelay = lrintf(tmp);
@@ -335,30 +335,30 @@ Arpie::setlrdelay(int Plrdelay)
 }
 
 void
-Arpie::setlrcross(int Plrcross)
+Arpie::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f * 1.0f;
 }
 
 void
-Arpie::setfb(int Pfb)
+Arpie::setfb(int _Pfb)
 {
-    this->Pfb = Pfb;
-    fb = (float) Pfb / 128.0f;
+    Pfb = _Pfb;
+    fb = (float) _Pfb / 128.0f;
 }
 
 void
-Arpie::sethidamp(int Phidamp)
+Arpie::sethidamp(int _Phidamp)
 {
-    this->Phidamp = Phidamp;
-    hidamp = 0.5f - (float) Phidamp / 254.0f;
+    Phidamp = _Phidamp;
+    hidamp = 0.5f - (float) _Phidamp / 254.0f;
 }
 
 void
-Arpie::setpattern(int Ppattern)
+Arpie::setpattern(int _Ppattern)
 {
-    this->Ppattern = Ppattern;
+    Ppattern = _Ppattern;
 
     const int PATTERN_SIZE = MAXHARMS;
     const int NUM_PATTERNS = 7;
@@ -373,10 +373,10 @@ Arpie::setpattern(int Ppattern)
     };
 
 
-    if (Ppattern >= PATTERN_SIZE)
-        Ppattern = PATTERN_SIZE - 1;
+    if (_Ppattern >= PATTERN_SIZE)
+        _Ppattern = PATTERN_SIZE - 1;
     for (int ii = 0; ii < PATTERN_SIZE; ii++)
-        pattern[ii] = setpatterns[Ppattern][ii];
+        pattern[ii] = setpatterns[_Ppattern][ii];
 }
 
 void
