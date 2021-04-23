@@ -92,9 +92,9 @@ private:
     float *highl;
     float *highr;
 
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setlrcross (int Plrcross);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setlrcross (int _Plrcross);
     void setCross1 (int value);
     void setCross2 (int value);
 

@@ -334,17 +334,17 @@ DistBand::setvolume(int value)
 }
 
 void
-DistBand::setpanning(int Ppanning)
+DistBand::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + 0.5f) / 127.0f;
 }
 
 void
-DistBand::setlrcross(int Plrcross)
+DistBand::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f * 1.0f;
 }
 
 void
