@@ -103,10 +103,10 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void sethidamp (int Phidamp);
-    void setlpf (int Plpf);
+    void setvolume (int _Pvolume);
+    void setpanning (int value);
+    void sethidamp (int _Phidamp);
+    void setlpf (int value);
     void setfb(int value);
     void convert_time();
     RvbFile loaddefault();

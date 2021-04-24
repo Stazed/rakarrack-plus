@@ -352,12 +352,12 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Reverbtron::setvolume(int Pvolume)
+Reverbtron::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
     
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
     {
         cleanup();
     }
@@ -749,10 +749,10 @@ Reverbtron::setlpf(int value)
 }
 
 void
-Reverbtron::sethidamp(int Phidamp)
+Reverbtron::sethidamp(int _Phidamp)
 {
-    this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float) Phidamp / 127.1f;
+    Phidamp = _Phidamp;
+    hidamp = 1.0f - (float) _Phidamp / 127.1f;
     alpha_hidamp = 1.0f - hidamp;
 }
 
