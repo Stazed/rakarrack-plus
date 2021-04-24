@@ -479,20 +479,20 @@ Vocoder::setbands(int numbands, float startfreq, float endfreq)
  * Parameter control
  */
 void
-Vocoder::setvolume(int Pvolume)
+Vocoder::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
         cleanup();
 }
 
 void
-Vocoder::setpanning(int Ppanning)
+Vocoder::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    rpanning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    rpanning = ((float) _Ppanning + 0.5f) / 127.0f;
     lpanning = 1.0f - rpanning;
 }
 

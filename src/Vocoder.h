@@ -72,8 +72,8 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
     void init_filters();
     void adjustq(int value);
     void   setbands(int numbands, float startfreq, float endfreq);
