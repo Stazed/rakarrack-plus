@@ -79,10 +79,10 @@ private:
     int Pmode;      //settings of filters
 
     //Control Parametrii
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setdepth (int Pdepth);
-    void setampsns (int Pampsns);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setdepth (int _Pdepth);
+    void setampsns (int _Pampsns);
 
     void reinitfilter ();
 

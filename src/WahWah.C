@@ -155,36 +155,36 @@ WahWah::lv2_update_params(uint32_t period)
  */
 
 void
-WahWah::setdepth(int Pdepth)
+WahWah::setdepth(int _Pdepth)
 {
-    this->Pdepth = Pdepth;
-    depth = powf(((float) Pdepth / 127.0f), 2.0f);
+    Pdepth = _Pdepth;
+    depth = powf(((float) _Pdepth / 127.0f), 2.0f);
 }
 
 void
-WahWah::setvolume(int Pvolume)
+WahWah::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-WahWah::setpanning(int Ppanning)
+WahWah::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + .5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + .5f) / 127.0f;
 }
 
 void
-WahWah::setampsns(int Pampsns)
+WahWah::setampsns(int _Pampsns)
 {
-    ampsns = powf((float) Pampsns / 127.0f, 2.5f) * 10.0f;
+    ampsns = powf((float) _Pampsns / 127.0f, 2.5f) * 10.0f;
     
     if (Pampsnsinv != 0)
         ampsns = -ampsns;
     
     ampsmooth = expf((float) -Pampsmooth / 127.0f * 10.0f) * 0.99f;
-    this->Pampsns = Pampsns;
+    Pampsns = _Pampsns;
 }
 
 void
