@@ -69,11 +69,11 @@ public:
     void applyfilters (float * efxoutl, float * efxoutr);
 
 private:
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setlrcross (int Plrcross);
-    void setlpf (int Plpf);
-    void sethpf (int Phpf);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setlrcross (int _Plrcross);
+    void setlpf (int value);
+    void sethpf (int value);
     void setpresence(int value);
     void init_coefs();
 

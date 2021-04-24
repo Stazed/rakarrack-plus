@@ -373,30 +373,30 @@ Valve::init_coefs()
 }
 
 void
-Valve::setvolume(int Pvolume)
+Valve::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
+    Pvolume = _Pvolume;
 
-    outvolume = (float) Pvolume / 127.0f;
+    outvolume = (float) _Pvolume / 127.0f;
     
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
     {
         cleanup();
     }
 }
 
 void
-Valve::setpanning(int Ppanning)
+Valve::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + 0.5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + 0.5f) / 127.0f;
 }
 
 void
-Valve::setlrcross(int Plrcross)
+Valve::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f * 1.0f;
 }
 
 void
