@@ -74,7 +74,7 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
+    void setvolume (int _Pvolume);
     void adjustfreqs();
     void oscillator();
     void reinitfilter ();

@@ -329,10 +329,10 @@ void Infinity::clear_initialize()
  */
 
 void
-Infinity::setvolume(int Pvolume)
+Infinity::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
