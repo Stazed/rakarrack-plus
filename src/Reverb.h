@@ -67,16 +67,16 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
-    void setpan (int Ppan);
-    void settime (int Ptime);
-    void setlohidamp (int Plohidamp);
-    void setidelay (int Pidelay);
-    void setidelayfb (int Pidelayfb);
-    void sethpf (int Phpf);
-    void setlpf (int Plpf);
-    void settype (int Ptype);
-    void setroomsize (int Proomsize);
+    void setvolume (int _Pvolume);
+    void setpan (int _Ppan);
+    void settime (int _Ptime);
+    void setlohidamp (int _Plohidamp);
+    void setidelay (int _Pidelay);
+    void setidelayfb (int _Pidelayfb);
+    void sethpf (int value);
+    void setlpf (int value);
+    void settype (int _Ptype);
+    void setroomsize (int _Proomsize);
     void processmono (unsigned int ch, float * output);
 
     float fSAMPLE_RATE;

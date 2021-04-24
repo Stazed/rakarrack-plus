@@ -294,27 +294,27 @@ Reverb::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-Reverb::setvolume(int Pvolume)
+Reverb::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 
-    if (Pvolume == 0)
+    if (_Pvolume == 0)
         cleanup();
 }
 
 void
-Reverb::setpan(int Ppan)
+Reverb::setpan(int _Ppan)
 {
-    this->Ppan = Ppan;
-    pan = (float) Ppan / 127.0f;
+    Ppan = _Ppan;
+    pan = (float) _Ppan / 127.0f;
 }
 
 void
-Reverb::settime(int Ptime)
+Reverb::settime(int _Ptime)
 {
-    this->Ptime = Ptime;
-    float t = powf(60.0f, (float) Ptime / 127.0f) - 0.97f;
+    Ptime = _Ptime;
+    float t = powf(60.0f, (float) _Ptime / 127.0f) - 0.97f;
 
     for (int i = 0; i < REV_COMBS * 2; i++)
     {
@@ -324,42 +324,42 @@ Reverb::settime(int Ptime)
 }
 
 void
-Reverb::setlohidamp(int Plohidamp)
+Reverb::setlohidamp(int _Plohidamp)
 {
-    if (Plohidamp < 64)
+    if (_Plohidamp < 64)
     {
-        Plohidamp = 64; //remove this when the high part from lohidamp will be added
+        _Plohidamp = 64; //remove this when the high part from lohidamp will be added
     }
 
-    this->Plohidamp = Plohidamp;
+    Plohidamp = _Plohidamp;
 
-    if (Plohidamp == 64)
+    if (_Plohidamp == 64)
     {
         lohidamptype = 0;
         lohifb = 0.0;
     }
     else
     {
-        if (Plohidamp < 64)
+        if (_Plohidamp < 64)
         {
             lohidamptype = 1;
         }
 
-        if (Plohidamp > 64)
+        if (_Plohidamp > 64)
         {
             lohidamptype = 2;
         }
 
-        float x = fabsf((float) (Plohidamp - 64) / 64.1f);
+        float x = fabsf((float) (_Plohidamp - 64) / 64.1f);
         lohifb = x * x;
     }
 }
 
 void
-Reverb::setidelay(int Pidelay)
+Reverb::setidelay(int _Pidelay)
 {
-    this->Pidelay = Pidelay;
-    float delay = powf(50.0f * (float) Pidelay / 127.0f, 2.0f) - 1.0f;
+    Pidelay = _Pidelay;
+    float delay = powf(50.0f * (float) _Pidelay / 127.0f, 2.0f) - 1.0f;
 
     idelaylen = lrintf(fSAMPLE_RATE * delay / 1000.0f);
 
@@ -375,10 +375,10 @@ Reverb::setidelay(int Pidelay)
 }
 
 void
-Reverb::setidelayfb(int Pidelayfb)
+Reverb::setidelayfb(int _Pidelayfb)
 {
-    this->Pidelayfb = Pidelayfb;
-    idelayfb = (float) Pidelayfb / 128.0f;
+    Pidelayfb = _Pidelayfb;
+    idelayfb = (float) _Pidelayfb / 128.0f;
 }
 
 void
@@ -398,7 +398,7 @@ Reverb::setlpf(int value)
 }
 
 void
-Reverb::settype(int Ptype)
+Reverb::settype(int _Ptype)
 {
     const int NUM_TYPES = 2;
     int combtunings[NUM_TYPES][REV_COMBS] = {
@@ -415,24 +415,24 @@ Reverb::settype(int Ptype)
         {225, 341, 441, 556}
     };
 
-    if (Ptype >= NUM_TYPES)
+    if (_Ptype >= NUM_TYPES)
     {
-        Ptype = NUM_TYPES - 1;
+        _Ptype = NUM_TYPES - 1;
     }
 
-    this->Ptype = Ptype;
+    Ptype = _Ptype;
 
     float tmp = 0.0;
 
     for (int i = 0; i < REV_COMBS * 2; i++)
     {
-        if (Ptype == 0)
+        if (_Ptype == 0)
         {
             tmp = 800.0f + (float) (RND * 1400.0f);
         }
         else
         {
-            tmp = (float) combtunings[Ptype][i % REV_COMBS];
+            tmp = (float) combtunings[_Ptype][i % REV_COMBS];
         }
 
         tmp *= roomsize;
@@ -456,13 +456,13 @@ Reverb::settype(int Ptype)
 
     for (int i = 0; i < REV_APS * 2; i++)
     {
-        if (Ptype == 0)
+        if (_Ptype == 0)
         {
             tmp = 500.0f + (float) (RND * 500.0f);
         }
         else
         {
-            tmp = (float) aptunings[Ptype][i % REV_APS];
+            tmp = (float) aptunings[_Ptype][i % REV_APS];
         }
 
         tmp *= roomsize;
@@ -488,15 +488,15 @@ Reverb::settype(int Ptype)
 }
 
 void
-Reverb::setroomsize(int Proomsize)
+Reverb::setroomsize(int _Proomsize)
 {
-    if (Proomsize == 0)
+    if (_Proomsize == 0)
     {
-        Proomsize = 64; //this is because the older versions consider roomsize=0
+        _Proomsize = 64; //this is because the older versions consider roomsize=0
     }
 
-    this->Proomsize = Proomsize;
-    roomsize = ((float) Proomsize - 64.0f) / 64.0f;
+    Proomsize = _Proomsize;
+    roomsize = ((float) _Proomsize - 64.0f) / 64.0f;
 
     if (roomsize > 0.0)
     {
