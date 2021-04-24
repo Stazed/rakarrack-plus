@@ -249,23 +249,23 @@ MuTroMojo::clear_initialize()
  */
 
 void
-MuTroMojo::setwidth(int Pwidth)
+MuTroMojo::setwidth(int _Pwidth)
 {
-    this->Pwidth = Pwidth;
-    depth = powf(((float) Pwidth / 127.0f), 2.0f);
+    Pwidth = _Pwidth;
+    depth = powf(((float) _Pwidth / 127.0f), 2.0f);
 }
 
 void
-MuTroMojo::setvolume(int Pvolume)
+MuTroMojo::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-MuTroMojo::setampsns(int Pp)
+MuTroMojo::setampsns(int _Pampsns)
 {
-    Pampsns = Pp;
+    Pampsns = _Pampsns;
     
     if (Pampsns > 0)
     {

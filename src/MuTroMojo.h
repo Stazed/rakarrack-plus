@@ -88,9 +88,9 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
-    void setwidth (int Pwidth);
-    void setampsns (int Pampsns);
+    void setvolume (int _Pvolume);
+    void setwidth (int _Pwidth);
+    void setampsns (int _Pampsns);
     void reinitfilter ();
 
     float fSAMPLE_RATE;
