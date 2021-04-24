@@ -231,41 +231,41 @@ MusicDelay::out(float * efxoutl, float * efxoutr)
  * Parameter control
  */
 void
-MusicDelay::setvolume(int Pvolume)
+MusicDelay::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-MusicDelay::setpanning(int num, int Ppanning)
+MusicDelay::setpanning(int num, int _Ppanning)
 {
     switch (num)
     {
     case 1:
-        this->Ppanning1 = Ppanning;
+        Ppanning1 = _Ppanning;
         panning1 = ((float) Ppanning1 + 0.5f) / 127.0f;
         break;
     case 2:
-        this->Ppanning2 = Ppanning;
+        Ppanning2 = _Ppanning;
         panning2 = ((float) Ppanning2 + 0.5f) / 127.0f;
         break;
     }
 }
 
 void
-MusicDelay::setdelay(int num, int Pdelay)
+MusicDelay::setdelay(int num, int _Pdelay)
 {
     switch (num)
     {
     case 1:
-        this->Pdelay1 = Pdelay;
+        Pdelay1 = _Pdelay;
         break;
     case 2:
-        this->Pdelay2 = Pdelay;
+        Pdelay2 = _Pdelay;
         break;
     case 3:
-        this->Plrdelay = Pdelay;
+        Plrdelay = _Pdelay;
     }
     
     float ntem = 60.0f / (float) Ptempo;
@@ -284,58 +284,58 @@ MusicDelay::setdelay(int num, int Pdelay)
 }
 
 void
-MusicDelay::setgain(int num, int PGain)
+MusicDelay::setgain(int num, int _PGain)
 {
     switch (num)
     {
     case 1:
-        this->Pgain1 = PGain;
+        Pgain1 = _PGain;
         gain1 = (float) Pgain1 / 127.0f;
         break;
     case 2:
-        this->Pgain2 = PGain;
+        Pgain2 = _PGain;
         gain2 = (float) Pgain2 / 127.0f;
         break;
     }
 }
 
 void
-MusicDelay::setlrcross(int Plrcross)
+MusicDelay::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f * 1.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f * 1.0f;
 }
 
 void
-MusicDelay::setfb(int num, int Pfb)
+MusicDelay::setfb(int num, int _Pfb)
 {
     switch (num)
     {
     case 1:
-        this->Pfb1 = Pfb;
+        Pfb1 = _Pfb;
         fb1 = (float) Pfb1 / 127.0f;
         break;
     case 2:
-        this->Pfb2 = Pfb;
+        Pfb2 = _Pfb;
         fb2 = (float) Pfb2 / 127.0f;
         break;
     }
 }
 
 void
-MusicDelay::sethidamp(int Phidamp)
+MusicDelay::sethidamp(int _Phidamp)
 {
-    this->Phidamp = Phidamp;
-    hidamp = 1.0f - (float) Phidamp / 127.0f;
+    Phidamp = _Phidamp;
+    hidamp = 1.0f - (float) _Phidamp / 127.0f;
 }
 
 void
-MusicDelay::settempo(int Ptempo)
+MusicDelay::settempo(int _Ptempo)
 {
     float coef = 0.0;
 
-    this->Ptempo = Ptempo;
-    float ntem = 60.0f / (float) Ptempo;
+    Ptempo = _Ptempo;
+    float ntem = 60.0f / (float) _Ptempo;
 
 
     delay1 = lrintf((ntem / (float) Pdelay1) * fSAMPLE_RATE);

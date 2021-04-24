@@ -64,15 +64,15 @@ public:
 
 private:
 
-    void setvolume (int Pvolume);
-    void setpanning (int num, int Ppanning);
-    void setdelay (int num, int Pdelay);
-    void setgain (int num, int Pgain);
-    void setlrdelay (int Plrdelay);
-    void setlrcross (int Plrcross);
-    void setfb (int num, int Pfb);
-    void sethidamp (int Phidamp);
-    void settempo (int Ptempo);
+    void setvolume (int _Pvolume);
+    void setpanning (int num, int _Ppanning);
+    void setdelay (int num, int _Pdelay);
+    void setgain (int num, int _Pgain);
+    void setlrdelay (int _Plrdelay);
+    void setlrcross (int _Plrcross);
+    void setfb (int num, int _Pfb);
+    void sethidamp (int _Phidamp);
+    void settempo (int _Ptempo);
     void initdelays ();
 
     uint32_t PERIOD;
