@@ -74,11 +74,11 @@ public:
 private:
 
     //Control parameters
-    void setvolume (int Pvolume);
-    void setdistortion (int Pdistortion);
-    void setwidth (int Pwidth);
-    void setfb (int Pfb);
-    void setdepth (int Pdepth);
+    void setvolume (int _Pvolume);
+    void setdistortion (int _Pdistortion);
+    void setwidth (int _Pwidth);
+    void setfb (int _Pfb);
+    void setdepth (int _Pdepth);
 
     uint32_t PERIOD;
 

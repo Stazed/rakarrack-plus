@@ -287,17 +287,17 @@ Synthfilter::lv2_update_params(uint32_t period)
  * Parameter control
  */
 void
-Synthfilter::setwidth(int Pwidth)
+Synthfilter::setwidth(int _Pwidth)
 {
-    this->Pwidth = Pwidth;
-    width = ((float) Pwidth / 127.0f);
+    Pwidth = _Pwidth;
+    width = ((float) _Pwidth / 127.0f);
 }
 
 void
-Synthfilter::setfb(int Pfb)
+Synthfilter::setfb(int _Pfb)
 {
-    this->Pfb = Pfb;
-    fb = (float) Pfb;
+    Pfb = _Pfb;
+    fb = (float) _Pfb;
     
     if (fb < 0.0f)
     {
@@ -315,25 +315,24 @@ Synthfilter::setfb(int Pfb)
 }
 
 void
-Synthfilter::setvolume(int Pvolume)
+Synthfilter::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    // outvolume is needed in calling program
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-Synthfilter::setdistortion(int Pdistortion)
+Synthfilter::setdistortion(int _Pdistortion)
 {
-    this->Pdistortion = Pdistortion;
-    distortion = (float) Pdistortion / 127.0f;
+    Pdistortion = _Pdistortion;
+    distortion = (float) _Pdistortion / 127.0f;
 }
 
 void
-Synthfilter::setdepth(int Pdepth)
+Synthfilter::setdepth(int _Pdepth)
 {
-    this->Pdepth = Pdepth;
-    depth = (float) (Pdepth - 32) / 95.0f; //   Pdepth input should be 0-127. .
+    Pdepth = _Pdepth;
+    depth = (float) (_Pdepth - 32) / 95.0f; //   Pdepth input should be 0-127. .
 }
 
 void
