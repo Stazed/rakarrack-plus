@@ -186,55 +186,55 @@ Phaser::lv2_update_params(uint32_t period)
  * Parameter control
  */
 void
-Phaser::setdepth(int Pdepth)
+Phaser::setdepth(int _Pdepth)
 {
-    this->Pdepth = Pdepth;
-    depth = ((float) Pdepth / 127.0f);
+    Pdepth = _Pdepth;
+    depth = ((float) _Pdepth / 127.0f);
 }
 
 void
-Phaser::setfb(int Pfb)
+Phaser::setfb(int _Pfb)
 {
-    this->Pfb = Pfb;
-    fb = ((float) Pfb - 64.0f) / 64.1f;
+    Pfb = _Pfb;
+    fb = ((float) _Pfb - 64.0f) / 64.1f;
 }
 
 void
-Phaser::setvolume(int Pvolume)
+Phaser::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-Phaser::setpanning(int Ppanning)
+Phaser::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning + .5f) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning + .5f) / 127.0f;
 }
 
 void
-Phaser::setlrcross(int Plrcross)
+Phaser::setlrcross(int _Plrcross)
 {
-    this->Plrcross = Plrcross;
-    lrcross = (float) Plrcross / 127.0f;
+    Plrcross = _Plrcross;
+    lrcross = (float) _Plrcross / 127.0f;
 }
 
 void
-Phaser::setstages(int Pstages)
+Phaser::setstages(int _Pstages)
 {
-    if (Pstages > MAX_PHASER_STAGES)
-        Pstages = MAX_PHASER_STAGES;
+    if (_Pstages > MAX_PHASER_STAGES)
+        _Pstages = MAX_PHASER_STAGES;
     
-    this->Pstages = Pstages;
+    Pstages = _Pstages;
     cleanup();
 }
 
 void
-Phaser::setphase(int Pphase)
+Phaser::setphase(int _Pphase)
 {
-    this->Pphase = Pphase;
-    phase = ((float) Pphase / 127.0f);
+    Pphase = _Pphase;
+    phase = ((float) _Pphase / 127.0f);
 }
 
 void

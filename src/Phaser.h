@@ -63,13 +63,13 @@ public:
 #endif // LV2
 
 private:
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setdepth (int Pdepth);
-    void setfb (int Pfb);
-    void setlrcross (int Plrcross);
-    void setstages (int Pstages);
-    void setphase (int Pphase);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setdepth (int _Pdepth);
+    void setfb (int _Pfb);
+    void setlrcross (int _Plrcross);
+    void setstages (int _Pstages);
+    void setphase (int _Pphase);
 
 
     //Parametrii Phaser
