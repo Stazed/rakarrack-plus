@@ -63,9 +63,9 @@ private:
     uint32_t PERIOD;
     float fPERIOD;
 
-    void setvolume (int Pvolume);
-    void setpanning (int Ppanning);
-    void setextra (int Pdepth);
+    void setvolume (int _Pvolume);
+    void setpanning (int _Ppanning);
+    void setextra (int _Pextra);
 
     int Pvolume;
     int Ppanning;

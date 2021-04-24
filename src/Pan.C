@@ -117,27 +117,27 @@ Pan::out(float *efxoutl, float *efxoutr)
 }
 
 void
-Pan::setvolume(int Pvolume)
+Pan::setvolume(int _Pvolume)
 {
-    this->Pvolume = Pvolume;
-    outvolume = (float) Pvolume / 127.0f;
+    Pvolume = _Pvolume;
+    outvolume = (float) _Pvolume / 127.0f;
 }
 
 void
-Pan::setpanning(int Ppanning)
+Pan::setpanning(int _Ppanning)
 {
-    this->Ppanning = Ppanning;
-    panning = ((float) Ppanning) / 127.0f;
+    Ppanning = _Ppanning;
+    panning = ((float) _Ppanning) / 127.0f;
     dvalue = panning*M_PI_2;
     cdvalue = cosf(dvalue);
     sdvalue = sinf(dvalue);
 }
 
 void
-Pan::setextra(int Pextra)
+Pan::setextra(int _Pextra)
 {
-    this->Pextra = Pextra;
-    mul = 4.0f * (float) Pextra / 127.0f;
+    Pextra = _Pextra;
+    mul = 4.0f * (float) _Pextra / 127.0f;
 }
 
 void
