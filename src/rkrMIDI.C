@@ -849,6 +849,44 @@ RKR::midievents()
                                                (int) midievent->data.control.value);
         }
     }
+    
+    /* temp for midi data */
+    unsigned char buffer[0x1000];
+    bool sysex = false;
+    
+    if (midievent->type == SND_SEQ_EVENT_SYSEX)
+    {
+        snd_midi_event_t *midi_ev;
+        snd_midi_event_new(sizeof(buffer), &midi_ev);
+        long bytes = snd_midi_event_decode(midi_ev, buffer, sizeof(buffer), midievent);
+           
+        if (bytes <= 0)
+        {
+            snd_midi_event_free( midi_ev );
+            return;
+        }
+
+
+        start_sysex( );
+        sysex = append_sysex( buffer, bytes );
+        
+        /* sysex messages might be more than one message */
+        while (sysex)
+        {
+            snd_seq_event_input(midi_in, &midievent);
+
+            bytes = snd_midi_event_decode(midi_ev, buffer, sizeof(buffer), midievent);
+
+            if (bytes > 0)
+                sysex = append_sysex( buffer, bytes );
+            else
+                sysex = false;
+        }
+
+        snd_midi_event_free( midi_ev );
+        
+        printf("Sysex size = %ld: 2 = %d: 3 = %d\n", m_sysex.size(), m_sysex[2], m_sysex[3]);
+    }
 }
 
 void
@@ -1338,4 +1376,24 @@ RKR::process_midi_controller_events(int parameter, int value, int preset)
     }
 }
 
+void
+RKR::start_sysex( void  )
+{
+    m_sysex.clear();
+}
 
+bool 
+RKR::append_sysex( unsigned char *a_data, long a_size )
+{
+    bool ret = true;
+
+    for ( int i=0; i<a_size; i++ )
+    {
+
+        m_sysex.push_back( a_data[i] );
+        if ( a_data[i] == EVENT_SYSEX_END )
+            ret = false;
+    }
+
+    return ret;
+}

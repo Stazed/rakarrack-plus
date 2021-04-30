@@ -645,6 +645,10 @@ const int C_MC_UNUSED_PARAMETERS = 25;
 const int C_MC_RANGE = C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS;
 
 
+const unsigned char  EVENT_SYSEX            = 0xF0;
+const unsigned char  EVENT_SYSEX_END        = 0xF7;
+
+
 class RKR
 {
 
@@ -683,6 +687,8 @@ public:
     void disconectaaconnect ();
     void jack_process_midievents (jack_midi_event_t *midievent);
     void process_midi_controller_events(int parameter, int value, int preset = C_CHANGE_PRESET_OFF);
+    void start_sysex(void);
+    bool append_sysex( unsigned char *a_data, long a_size );
 
     // fileio.C
     void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);
@@ -1215,6 +1221,9 @@ public:
 
     // Alsa MIDI
     snd_seq_t *midi_in;
+    
+    /* data for sysex */
+    std::vector<unsigned char> m_sysex;
 
 };  // class RKR
 
