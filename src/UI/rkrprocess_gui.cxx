@@ -245,7 +245,7 @@ void RKRGUI::GuiTimeout(void)
     if (m_process->Gui_Refresh == GUI_Refresh_CTRL_S)
     {
         std::string filename = m_process->Bank_Vector[m_process->active_bank].Bank_File_Name;
-        int ok = m_process->save_bank(filename);
+        int ok = m_process->save_bank(filename, m_process->Bank);
     
         if (ok)
         {
@@ -3692,7 +3692,7 @@ void RKRGUI::set_save_file()
 
     filename = fl_filename_setext(filename, EXT);
 #undef EXT
-    int ok = m_process->save_bank(filename);
+    int ok = m_process->save_bank(filename, m_process->Bank);
     
     if (ok)
     {

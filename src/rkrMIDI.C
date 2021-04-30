@@ -1458,6 +1458,34 @@ void RKR::parse_sysex()
         preset_name += (char) m_sysex[i];
     }
     
-    printf("Preset name = %s: bank = %d: p_num = %d\n", preset_name.c_str(), bank_number, preset_number);
+    //printf("Preset name = %s: bank = %d: p_num = %d\n", preset_name.c_str(), bank_number, preset_number);
+    sysex_save_preset(preset_name, bank_number, preset_number);
 
+}
+
+void RKR::sysex_save_preset(std::string preset_name, int bank_number, int preset_number)
+{
+    PresetBankStruct Save_Bank[62];
+    
+    // Copy the requested bank to be saved
+    copy_bank(Save_Bank, Bank_Vector[bank_number].Bank);
+    
+    // Update active preset for any user changes
+    refresh_active_preset();
+    
+    // Set the preset name for the active preset
+    memset(Active_Preset.Preset_Name, 0, sizeof (char) * 64);
+    strcpy(Active_Preset.Preset_Name, preset_name.c_str());
+    
+    // Copy the active preset to the save bank
+    Save_Bank[preset_number] = Active_Preset;
+    
+    // Get the filename for the requested bank
+    std::string filename = Bank_Vector[bank_number].Bank_File_Name;
+    
+    // Save the bank
+    save_bank(filename, Save_Bank);
+    
+    // Update the Bank Vector
+    load_bank_vector();
 }

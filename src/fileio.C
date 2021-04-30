@@ -993,14 +993,14 @@ RKR::load_bank(std::string filename)
 };
 
 int
-RKR::save_bank(std::string filename)
+RKR::save_bank(std::string filename, PresetBankStruct _Bank[])
 {
     FILE *fn;
     
     PresetBankStruct Save_Bank[62];
     
     // Copy active bank
-    copy_bank(Save_Bank, Bank);
+    copy_bank(Save_Bank, _Bank);
 
     if ((fn = fopen(filename.c_str(), "wb")) != NULL)
     {

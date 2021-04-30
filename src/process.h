@@ -690,6 +690,7 @@ public:
     void start_sysex(void);
     bool append_sysex( unsigned char *a_data, long a_size );
     void parse_sysex();
+    void sysex_save_preset(std::string preset_name, int bank_number, int preset_number);
 
     // fileio.C
     void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);
@@ -701,7 +702,7 @@ public:
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     int load_bank (std::string filename);
-    int save_bank (std::string filename);
+    int save_bank (std::string filename, PresetBankStruct _Bank[]);
     void load_bank_vector();
     void add_bank_item(std::string filename);
     void copy_bank(struct PresetBankStruct dest[], struct PresetBankStruct source[]);
