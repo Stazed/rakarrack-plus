@@ -689,6 +689,7 @@ public:
     void process_midi_controller_events(int parameter, int value, int preset = C_CHANGE_PRESET_OFF);
     void start_sysex(void);
     bool append_sysex( unsigned char *a_data, long a_size );
+    void parse_sysex();
 
     // fileio.C
     void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);

@@ -849,27 +849,26 @@ RKR::midievents()
                                                (int) midievent->data.control.value);
         }
     }
-    
-    /* temp for midi data */
-    unsigned char buffer[0x1000];
-    bool sysex = false;
-    
+
     if (midievent->type == SND_SEQ_EVENT_SYSEX)
     {
+        /* temp for midi data */
+        unsigned char buffer[0x1000];
+        bool sysex = false;
+        
         snd_midi_event_t *midi_ev;
         snd_midi_event_new(sizeof(buffer), &midi_ev);
         long bytes = snd_midi_event_decode(midi_ev, buffer, sizeof(buffer), midievent);
-           
+
         if (bytes <= 0)
         {
             snd_midi_event_free( midi_ev );
             return;
         }
 
-
         start_sysex( );
         sysex = append_sysex( buffer, bytes );
-        
+
         /* sysex messages might be more than one message */
         while (sysex)
         {
@@ -884,8 +883,8 @@ RKR::midievents()
         }
 
         snd_midi_event_free( midi_ev );
-        
-        printf("Sysex size = %ld: 2 = %d: 3 = %d\n", m_sysex.size(), m_sysex[2], m_sysex[3]);
+
+        parse_sysex();
     }
 }
 
@@ -1396,4 +1395,69 @@ RKR::append_sysex( unsigned char *a_data, long a_size )
     }
 
     return ret;
+}
+
+
+void RKR::parse_sysex()
+{
+/*  http://www.indiana.edu/~emusic/etext/MIDI/chapter3_MIDI9.shtml
+ *  A System Exclusive code set begins with 11110000 (240 decimal or F0 hex),
+ *  followed by the manufacturer ID#, then by an unspecified number of
+ *  data bytes of any ranges from 0-127) and ends with 11110111
+ *  (decimal 247 or F7 hex), meaning End of SysEx message. No other coded
+ *  are to be transmitted during a SysEx message (except a system real time
+ *  message). Normally, after the manufacturer ID, each maker will have its
+ *  own instrument model subcode, so a Yamaha DX7 will ignore a Yamaha SY77's
+ *  patch dump. In addition, most instruments have a SysEx ID # setting so
+ *  more than one of the same instruments can be on a network but not
+ *  necessarily respond to a patch dump not intended for it.
+ */
+
+    // Dec 125 = hex 7D is the Universal Non-Commercial identification byte,
+    // designed for use by Universities, researchers, etc.
+
+    /* layout of Rakarrack-plus sysex messages */
+    //  EVENT_SYSEX                                         // byte 0 0xF0
+    const unsigned char c_non_commercial_ID = 0x7D;         // byte 1
+    const unsigned long c_RKP_subcode       = 0x524B5250;   // bytes 2 - 5
+    // const unsigned char c_sysex_type     = 0x00;         // byte 6 - For possible sysex type expansion -unused
+    // Bank save location (Dec 3 - 127)                     // byte 7
+    // Preset location (Dec 1 - 60)                         // byte 8
+    // Preset name (ascii hex max 40 characters)            // bytes 9 to ??? max 48 variable size
+    // end sysex 0xF7                                       // byte ??  // last sent
+
+    unsigned char *data = m_sysex.data();
+
+    /* Check the manufacturer ID */
+    if(data[1] != c_non_commercial_ID)
+        return;
+
+    /* Check the subcode */
+    unsigned long subcode = 0;
+
+    subcode += (data[2] << 24);
+    subcode += (data[3] << 16);
+    subcode += (data[4] << 8);
+    subcode += (data[5]);
+
+    if(subcode != c_RKP_subcode)
+        return;
+
+/*    for(int i = 0; i < m_sysex.size(); i++)
+    {
+        printf( "%02X \n", data[i]);
+    }*/
+ 
+    /* We are good to go */
+    std::string preset_name = "";
+    int bank_number = data[7];
+    int preset_number = data[8];
+    
+    for(unsigned i = 9; i < (m_sysex.size() - 1); i++)
+    {
+        preset_name += (char) m_sysex[i];
+    }
+    
+    printf("Preset name = %s: bank = %d: p_num = %d\n", preset_name.c_str(), bank_number, preset_number);
+
 }
