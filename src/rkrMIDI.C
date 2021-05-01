@@ -1397,42 +1397,44 @@ RKR::append_sysex( unsigned char *a_data, long a_size )
     return ret;
 }
 
-
+/**
+ * http://www.indiana.edu/~emusic/etext/MIDI/chapter3_MIDI9.shtml
+ * A System Exclusive code set begins with 11110000 (240 decimal or F0 hex),
+ * followed by the manufacturer ID#, then by an unspecified number of
+ * data bytes of any ranges from 0-127) and ends with 11110111
+ * (decimal 247 or F7 hex), meaning End of SysEx message. No other coded
+ * are to be transmitted during a SysEx message (except a system real time
+ * message). Normally, after the manufacturer ID, each maker will have its
+ * own instrument model subcode, so a Yamaha DX7 will ignore a Yamaha SY77's
+ * patch dump. In addition, most instruments have a SysEx ID # setting so
+ * more than one of the same instruments can be on a network but not
+ * necessarily respond to a patch dump not intended for it.
+ * 
+ * Dec 125 = hex 7D is the Universal Non-Commercial identification byte,
+ * designed for use by Universities, researchers, etc.
+ *
+ * 
+ * * * * * *  Format of Rakarrack-plus sysex save message * * * * * *
+    EVENT_SYSEX                                             // byte 0 0xF0
+    const unsigned char c_non_commercial_ID = 0x7D;         // byte 1
+    const unsigned long c_RKRP_subcode      = 0x524B5250;   // bytes 2 - 5
+    const unsigned char c_sysex_type        = 0x00;         // byte 6 - (For possible sysex type expansion - UNUSED)
+    Bank save location (Dec 3 - 127)                        // byte 7
+    Preset location (Dec 1 - 60)                            // byte 8
+    Preset name (ascii hex max 22 characters)               // bytes 9 to ??? max 31 variable size
+    end sysex 0xF7                                          // byte ??  (End message)
+ */
 void RKR::parse_sysex()
 {
-/*  http://www.indiana.edu/~emusic/etext/MIDI/chapter3_MIDI9.shtml
- *  A System Exclusive code set begins with 11110000 (240 decimal or F0 hex),
- *  followed by the manufacturer ID#, then by an unspecified number of
- *  data bytes of any ranges from 0-127) and ends with 11110111
- *  (decimal 247 or F7 hex), meaning End of SysEx message. No other coded
- *  are to be transmitted during a SysEx message (except a system real time
- *  message). Normally, after the manufacturer ID, each maker will have its
- *  own instrument model subcode, so a Yamaha DX7 will ignore a Yamaha SY77's
- *  patch dump. In addition, most instruments have a SysEx ID # setting so
- *  more than one of the same instruments can be on a network but not
- *  necessarily respond to a patch dump not intended for it.
- */
-
-    // Dec 125 = hex 7D is the Universal Non-Commercial identification byte,
-    // designed for use by Universities, researchers, etc.
-
-    /* layout of Rakarrack-plus sysex messages */
-    //  EVENT_SYSEX                                         // byte 0 0xF0
-    const unsigned char c_non_commercial_ID = 0x7D;         // byte 1
-    const unsigned long c_RKP_subcode       = 0x524B5250;   // bytes 2 - 5
-    // const unsigned char c_sysex_type     = 0x00;         // byte 6 - For possible sysex type expansion -unused
-    // Bank save location (Dec 3 - 127)                     // byte 7
-    // Preset location (Dec 1 - 60)                         // byte 8
-    // Preset name (ascii hex max 40 characters)            // bytes 9 to ??? max 48 variable size
-    // end sysex 0xF7                                       // byte ??  // last sent
-
     unsigned char *data = m_sysex.data();
 
-    /* Check the manufacturer ID */
+    // Check the manufacturer ID
+    const unsigned char c_non_commercial_ID = 0x7D;         // byte 1
     if(data[1] != c_non_commercial_ID)
         return;
 
-    /* Check the subcode */
+    // Check the subcode
+    const unsigned long c_RKRP_subcode      = 0x524B5250;   // bytes 2 - 5
     unsigned long subcode = 0;
 
     subcode += (data[2] << 24);
@@ -1440,31 +1442,44 @@ void RKR::parse_sysex()
     subcode += (data[4] << 8);
     subcode += (data[5]);
 
-    if(subcode != c_RKP_subcode)
+    if(subcode != c_RKRP_subcode)
         return;
 
-/*    for(int i = 0; i < m_sysex.size(); i++)
-    {
-        printf( "%02X \n", data[i]);
-    }*/
- 
-    /* We are good to go */
+    // We are good to go 
     std::string preset_name = "";
-    int bank_number = data[7];
-    int preset_number = data[8];
-    
+    unsigned bank_number = data[7];
+    unsigned preset_number = data[8];
+
     for(unsigned i = 9; i < (m_sysex.size() - 1); i++)
     {
         preset_name += (char) m_sysex[i];
     }
-    
+
     //printf("Preset name = %s: bank = %d: p_num = %d\n", preset_name.c_str(), bank_number, preset_number);
     sysex_save_preset(preset_name, bank_number, preset_number);
 
 }
 
-void RKR::sysex_save_preset(std::string preset_name, int bank_number, int preset_number)
+void RKR::sysex_save_preset(std::string preset_name, unsigned bank_number, unsigned preset_number)
 {
+    if((bank_number >= Bank_Vector.size()) || (bank_number < 3))
+    {
+        fprintf(stderr, "Invalid Bank save request!\n");
+        return;
+    }
+
+    if((preset_number < 1) || (preset_number > 60))
+    {
+        fprintf(stderr, "Invalid preset number save request!\n");
+        return;
+    }
+    
+    if(preset_name.size() > 22)
+    {
+        fprintf(stderr, "Invalid preset name size!\n");
+        return;
+    }
+
     PresetBankStruct Save_Bank[62];
     
     // Copy the requested bank to be saved

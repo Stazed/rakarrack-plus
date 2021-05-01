@@ -690,7 +690,7 @@ public:
     void start_sysex(void);
     bool append_sysex( unsigned char *a_data, long a_size );
     void parse_sysex();
-    void sysex_save_preset(std::string preset_name, int bank_number, int preset_number);
+    void sysex_save_preset(std::string preset_name, unsigned bank_number, unsigned preset_number);
 
     // fileio.C
     void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);

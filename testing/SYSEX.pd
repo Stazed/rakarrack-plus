@@ -1,0 +1,31 @@
+#N canvas 950 339 756 575 12;
+#X obj 50 500 midiout;
+#X text 20 30 Assci = dec : hex;
+#X text 20 60 Preset== P = 80 : 50 \, r = 114: 72 \, e = 101: 65 \,
+s = 115: 73 \, e = 101: 65 \, t = 116: 74;
+#X text 20 110 Dec 240 = hex F0 = Sysex start: Dec 247 = hex F7 = Sysex
+end;
+#X text 20 150 Dec 125 = hex 7D is the Universal Non-Commercial identification
+byte \, designed for use by Universities \, researchers \, etc.;
+#X text 40 240 ST;
+#X text 80 240 ID;
+#X text 500 240 END;
+#X text 260 240 P#;
+#X text 240 240 B#;
+#X text 110 240 R;
+#X text 170 240 R;
+#X text 140 240 K;
+#X text 220 240 T#;
+#X text 200 240 P;
+#X text 290 240 |-------Preset Name--------|;
+#X msg 40 270 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 0 \, 3 \, 60 \,
+80 \, 114 \, 101 \, 115 \, 101 \, 116 \, 247, f 71;
+#X msg 90 330 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 0 \, 2 \, 66 \,
+80 \, 114 \, 101 \, 115 \, 101 \, 116 \, 247, f 71;
+#X msg 100 400 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 0 \, 3 \, 61 \,
+80 \, 114 \, 101 \, 115 \, 101 \, 116 \, 247, f 71;
+#X text 90 310 Bad Bank value;
+#X text 100 380 Bad Preset value;
+#X connect 16 0 0 0;
+#X connect 17 0 0 0;
+#X connect 18 0 0 0;
