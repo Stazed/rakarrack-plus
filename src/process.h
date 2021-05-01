@@ -690,7 +690,7 @@ public:
     void start_sysex(void);
     bool append_sysex( unsigned char *a_data, long a_size );
     void parse_sysex();
-    void sysex_save_preset(std::string preset_name, unsigned bank_number, unsigned preset_number);
+    void sysex_save_preset();
 
     // fileio.C
     void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);
@@ -1224,8 +1224,14 @@ public:
     // Alsa MIDI
     snd_seq_t *midi_in;
     
-    /* data for sysex */
+    // data for sysex
     std::vector<unsigned char> m_sysex;
+    
+    // flag for sysex messages
+    int m_have_sysex_message;
+    std::string m_preset_name;
+    unsigned m_bank_number;
+    unsigned m_preset_number;
 
 };  // class RKR
 

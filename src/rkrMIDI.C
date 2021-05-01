@@ -1257,6 +1257,13 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                 process_midi_controller_events(cmdcontrol, cmdvalue);
         }
     }
+
+    if(type == 15)
+    {
+        start_sysex();
+        append_sysex(midievent->buffer, midievent->size);
+        parse_sysex();
+    }
 }
 
 /*
@@ -1456,25 +1463,28 @@ void RKR::parse_sysex()
     }
 
     //printf("Preset name = %s: bank = %d: p_num = %d\n", preset_name.c_str(), bank_number, preset_number);
-    sysex_save_preset(preset_name, bank_number, preset_number);
 
+    m_preset_name = preset_name;
+    m_bank_number = bank_number;
+    m_preset_number = preset_number;
+    m_have_sysex_message = 1;
 }
 
-void RKR::sysex_save_preset(std::string preset_name, unsigned bank_number, unsigned preset_number)
+void RKR::sysex_save_preset()
 {
-    if((bank_number >= Bank_Vector.size()) || (bank_number < 3))
+    if((m_bank_number >= Bank_Vector.size()) || (m_bank_number < 3))
     {
         fprintf(stderr, "Invalid Bank save request!\n");
         return;
     }
 
-    if((preset_number < 1) || (preset_number > 60))
+    if((m_preset_number < 1) || (m_preset_number > 60))
     {
         fprintf(stderr, "Invalid preset number save request!\n");
         return;
     }
     
-    if(preset_name.size() > 22)
+    if(m_preset_name.size() > 22 || m_preset_name.empty())
     {
         fprintf(stderr, "Invalid preset name size!\n");
         return;
@@ -1483,20 +1493,20 @@ void RKR::sysex_save_preset(std::string preset_name, unsigned bank_number, unsig
     PresetBankStruct Save_Bank[62];
     
     // Copy the requested bank to be saved
-    copy_bank(Save_Bank, Bank_Vector[bank_number].Bank);
+    copy_bank(Save_Bank, Bank_Vector[m_bank_number].Bank);
     
     // Update active preset for any user changes
     refresh_active_preset();
     
     // Set the preset name for the active preset
     memset(Active_Preset.Preset_Name, 0, sizeof (char) * 64);
-    strcpy(Active_Preset.Preset_Name, preset_name.c_str());
+    strcpy(Active_Preset.Preset_Name, m_preset_name.c_str());
     
     // Copy the active preset to the save bank
-    Save_Bank[preset_number] = Active_Preset;
+    Save_Bank[m_preset_number] = Active_Preset;
     
     // Get the filename for the requested bank
-    std::string filename = Bank_Vector[bank_number].Bank_File_Name;
+    std::string filename = Bank_Vector[m_bank_number].Bank_File_Name;
     
     // Save the bank
     save_bank(filename, Save_Bank);

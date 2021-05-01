@@ -198,7 +198,11 @@ RKR::RKR(int gui) :
     Bank(),
     MIDI_Table(),
     MIDI_Table_Bank_Preset_Names(),
-    midi_in(NULL)
+    midi_in(NULL),
+    m_have_sysex_message(0),
+    m_preset_name(),
+    m_bank_number(0),
+    m_preset_number(0)
 {
     if(!jack_open_client())
     {
