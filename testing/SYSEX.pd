@@ -1,31 +1,82 @@
-#N canvas 950 339 756 575 12;
-#X obj 50 500 midiout;
-#X text 20 30 Assci = dec : hex;
-#X text 20 60 Preset== P = 80 : 50 \, r = 114: 72 \, e = 101: 65 \,
-s = 115: 73 \, e = 101: 65 \, t = 116: 74;
-#X text 20 110 Dec 240 = hex F0 = Sysex start: Dec 247 = hex F7 = Sysex
+#N canvas 987 212 756 747 12;
+#X obj 30 710 midiout;
+#X text 300 60 Dec 240 = hex F0 = Sysex start: Dec 247 = hex F7 = Sysex
 end;
-#X text 20 150 Dec 125 = hex 7D is the Universal Non-Commercial identification
+#X text 300 90 Dec 125 = hex 7D is the Universal Non-Commercial identification
 byte \, designed for use by Universities \, researchers \, etc.;
-#X text 40 240 ST;
-#X text 80 240 ID;
-#X text 500 240 END;
-#X text 260 240 P#;
-#X text 240 240 B#;
-#X text 110 240 R;
-#X text 170 240 R;
-#X text 140 240 K;
-#X text 220 240 T#;
-#X text 200 240 P;
-#X text 290 240 |-------Preset Name--------|;
-#X msg 40 270 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 0 \, 3 \, 60 \,
+#X text 40 350 ST;
+#X text 80 350 ID;
+#X text 500 350 END;
+#X text 260 350 P#;
+#X text 240 350 B#;
+#X text 110 350 R;
+#X text 170 350 R;
+#X text 140 350 K;
+#X text 220 350 T#;
+#X text 200 350 P;
+#X text 90 420 Bad Bank value;
+#X text 100 490 Bad Preset value;
+#X msg 40 380 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 1 \, 3 \, 60 \,
 80 \, 114 \, 101 \, 115 \, 101 \, 116 \, 247, f 71;
-#X msg 90 330 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 0 \, 2 \, 66 \,
+#X msg 90 440 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 1 \, 2 \, 66 \,
 80 \, 114 \, 101 \, 115 \, 101 \, 116 \, 247, f 71;
-#X msg 100 400 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 0 \, 3 \, 61 \,
+#X msg 100 510 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 1 \, 3 \, 61 \,
 80 \, 114 \, 101 \, 115 \, 101 \, 116 \, 247, f 71;
-#X text 90 310 Bad Bank value;
-#X text 100 380 Bad Preset value;
+#X msg 100 590 240 \, 125 \, 82 \, 75 \, 82 \, 80 \, 1 \, 3 \, 60 \,
+80 \, 114 \, 101 \, 115 \, 101 \, 116 \, 49 \, 80 \, 114 \, 101 \,
+115 \, 101 \, 116 \, 50 \, 80 \, 114 \, 101 \, 115 \, 101 \, 116 \,
+51 \, 52 \, 247, f 71;
+#X text 100 570 Maximum name size;
+#X text 40 70 0;
+#X text 40 90 1;
+#X text 40 110 2;
+#X text 40 130 3;
+#X text 40 150 4;
+#X text 40 170 5;
+#X text 40 190 6;
+#X text 40 210 7;
+#X text 40 230 8;
+#X text 40 250 9;
+#X text 170 70 0xF0;
+#X text 170 90 0x7D;
+#X text 170 110 0x52;
+#X text 170 130 0x4B;
+#X text 170 150 0x52;
+#X text 170 170 0x50;
+#X text 170 190 0x01;
+#X text 130 90 125;
+#X text 130 70 240;
+#X text 130 110 82;
+#X text 130 130 75;
+#X text 130 150 82;
+#X text 130 170 80;
+#X text 130 190 1;
+#X text 90 110 R;
+#X text 90 150 R;
+#X text 90 130 K;
+#X text 90 170 P;
+#X text 90 210 Bank save location (Dec 3 - 127);
+#X text 90 230 Preset location (Dec 1 - 60);
+#X text 90 250 Preset name (ascii hex max 22 characters);
+#X text 40 310 End Sysex;
+#X text 170 310 0xF7;
+#X text 130 310 247;
+#X text 30 10 Rakarrack-plus SYSEX Format;
+#X text 290 350 |----------Preset----------|;
+#X text 30 40 byte : Assci : dec : hex : Descript;
+#X text 220 70 Start SX;
+#X text 220 90 Mfg Code;
+#X text 220 110 Subcode;
+#X text 220 170 Subcode;
+#X text 240 130 |;
+#X text 240 150 |;
+#X text 220 190 Type Sysex - (set to 1);
+#X text 90 70 --;
+#X text 90 90 --;
+#X text 90 190 --;
+#X text 90 270 Preset == P = 80 : 50 \, r = 114: 72 \, e = 101: 65
+\, s = 115: 73 \, e = 101: 65 \, t = 116: 74;
+#X connect 15 0 0 0;
 #X connect 16 0 0 0;
 #X connect 17 0 0 0;
 #X connect 18 0 0 0;

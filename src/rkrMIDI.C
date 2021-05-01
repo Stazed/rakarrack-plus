@@ -1425,7 +1425,7 @@ RKR::append_sysex( unsigned char *a_data, long a_size )
     EVENT_SYSEX                                             // byte 0 0xF0
     const unsigned char c_non_commercial_ID = 0x7D;         // byte 1
     const unsigned long c_RKRP_subcode      = 0x524B5250;   // bytes 2 - 5
-    const unsigned char c_sysex_type        = 0x00;         // byte 6 - (For possible sysex type expansion - UNUSED)
+    const unsigned char c_sysex_type        = 0x01;         // byte 6 - (For sysex type - 0x01)
     Bank save location (Dec 3 - 127)                        // byte 7
     Preset location (Dec 1 - 60)                            // byte 8
     Preset name (ascii hex max 22 characters)               // bytes 9 to ??? max 31 variable size
@@ -1467,7 +1467,7 @@ void RKR::parse_sysex()
     m_preset_name = preset_name;
     m_bank_number = bank_number;
     m_preset_number = preset_number;
-    m_have_sysex_message = 1;
+    m_have_sysex_message = data[6];
 }
 
 void RKR::sysex_save_preset()
