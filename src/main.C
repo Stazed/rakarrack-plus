@@ -346,6 +346,20 @@ main(int argc, char *argv[])
         exit(1);
     }
 
+#ifdef NSM_SUPPORT
+    // Startup gui status. We need to send the NSM show status here on startup
+    // since the show function will not be called if the gui is already shown.
+    // By default we always show, then if the gui should be hidden, we hide.
+    // This is done by the main loop while, but for show on start only, since
+    // the gui is already shown, the routine to show is not called, and the status
+    // to send to NSM is never sent. So we send it here, and clear the flag.
+    if(global_gui_show == CONST_GUI_SHOW)
+    {
+        global_gui_show = CONST_GUI_OFF;
+        nsm_send_is_shown ( nsm );
+    }
+#endif
+
     JACKstart(&process);
     process.InitMIDI();
     process.ConnectMIDI();
