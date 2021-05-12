@@ -353,10 +353,13 @@ main(int argc, char *argv[])
     // This is done by the main loop while, but for show on start only, since
     // the gui is already shown, the routine to show is not called, and the status
     // to send to NSM is never sent. So we send it here, and clear the flag.
-    if(global_gui_show == CONST_GUI_SHOW)
+    if(!nsm_preferences_file.empty())   // check if in NSM session
     {
-        global_gui_show = CONST_GUI_OFF;
-        nsm_send_is_shown ( nsm );
+        if(global_gui_show == CONST_GUI_SHOW)
+        {
+            global_gui_show = CONST_GUI_OFF;
+            nsm_send_is_shown ( nsm );
+        }
     }
 #endif
 
