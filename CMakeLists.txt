@@ -24,6 +24,7 @@ option (BuildRakarrackPlus "Build rakarrack-plus" ON)
 option (BuildLV2Plugins "Build rakarack-plus lv2 plugins (RakarrackPlus.lv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
 option (EnableNSM "Enable NSM session support" ON)
+option (EnableSysex "Enable Experimental Sysex preset save support" OFF)
 option (BuildForDebug "Include gdb debugging support" OFF)
 option (EnableOptimizations "Enable optimizations" ON)
 option (EnableSSE "Enable SSE (default=automatic check)" ON)
@@ -136,6 +137,10 @@ if(EnableNSM)
     mark_as_advanced (LIBLO)
     add_definitions(-D'NSM_SUPPORT=1')
 endif (EnableNSM)
+
+if(EnableSysex)
+    add_definitions(-D'SYSEX_SUPPORT=1')
+endif (EnableSysex)
 
 if(BuildRakarrackPlus)
     install(FILES COPYING AUTHORS ChangeLog NEWS README README.md PACKAGERS.README
@@ -303,6 +308,7 @@ package_status(BuildLV2Plugins     "Build LV2s (RakarrackPlus.lv2) . . . . . . .
 package_status(BuildCarlaPresets   "Build Carla lv2 presets. . . . . . . . . . . . . . . . .:"  )
 package_status(BuildForDebug       "Build for debug. . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableNSM           "NSM session support. . . . . . . . . . . . . . . . . . .:"  )
+package_status(EnableSysex         "Sysex preset save support. . . . . . . . . . . . . . . .:"  )
 
 message (STATUS)
 message (STATUS)
