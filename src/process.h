@@ -644,10 +644,10 @@ const int C_MC_UNUSED_PARAMETERS = 25;
  */
 const int C_MC_RANGE = C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS;
 
-
+#ifdef SYSEX_SUPPORT
 const unsigned char  EVENT_SYSEX            = 0xF0;
 const unsigned char  EVENT_SYSEX_END        = 0xF7;
-
+#endif
 
 class RKR
 {
@@ -1224,6 +1224,7 @@ public:
     // Alsa MIDI
     snd_seq_t *midi_in;
     
+#ifdef SYSEX_SUPPORT
     // data for sysex
     std::vector<unsigned char> m_sysex;
     
@@ -1232,7 +1233,7 @@ public:
     std::string m_preset_name;
     unsigned m_bank_number;
     unsigned m_preset_number;
-
+#endif  // SYSEX_SUPPORT
 };  // class RKR
 
 #endif

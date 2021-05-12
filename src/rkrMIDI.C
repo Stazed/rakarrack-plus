@@ -849,7 +849,7 @@ RKR::midievents()
                                                (int) midievent->data.control.value);
         }
     }
-
+#ifdef SYSEX_SUPPORT
     if (midievent->type == SND_SEQ_EVENT_SYSEX)
     {
         /* temp for midi data */
@@ -886,6 +886,7 @@ RKR::midievents()
 
         parse_sysex();
     }
+#endif // SYSEX_SUPPORT
 }
 
 void
@@ -1257,13 +1258,14 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                 process_midi_controller_events(cmdcontrol, cmdvalue);
         }
     }
-
+#ifdef SYSEX_SUPPORT
     if(type == 15)
     {
         start_sysex();
         append_sysex(midievent->buffer, midievent->size);
         parse_sysex();
     }
+#endif
 }
 
 /*
@@ -1382,6 +1384,7 @@ RKR::process_midi_controller_events(int parameter, int value, int preset)
     }
 }
 
+#ifdef SYSEX_SUPPORT
 void
 RKR::start_sysex( void  )
 {
@@ -1514,3 +1517,4 @@ void RKR::sysex_save_preset()
     // Update the Bank Vector
     load_bank_vector();
 }
+#endif  // SYSEX_SUPPORT

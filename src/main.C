@@ -506,12 +506,14 @@ main(int argc, char *argv[])
         }
 
         process.miramidi();
-
+    
+#ifdef SYSEX_SUPPORT
         if(process.m_have_sysex_message)
         {
             process.m_have_sysex_message = 0;
             process.sysex_save_preset();
         }
+#endif  // SYSEX_SUPPORT
     }
 
     // free memory etc.
