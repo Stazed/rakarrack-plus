@@ -631,9 +631,9 @@ enum GUI_Refresh_Index
 const int C_MC_PARAMETER_SIZE = 446;
 
 /**
- * Magic number 26 is Bank Select (CC 0) and the Unused cases from the default MIDI control
- * (0, 10, 11, 13, (15 > 19), (32 > 45), 64) = 24 -- Unused
- * plus 128, 129 also Unused  = 24 + 2 = 26.
+ * Magic number 25 is Bank Select (CC 0) and the Unused cases from the default MIDI control
+ * (0, 10, 11, 13, (15 > 19), (33 > 45), 64) = 23 -- Unused
+ * plus 128, 129 also Unused  = 23 + 2 = 25.
  * If any of these unused parameters are used and added to
  * C_MC_PARAMETER_SIZE, this value must be adjusted.
  */
