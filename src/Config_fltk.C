@@ -74,10 +74,10 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     }
     
     rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
-    rakarrack.get(PrefNom("Foreground Color"), fore_color, 1397969664);      // FL_DARK3 - Buttons
-    rakarrack.get(PrefNom("Labels Color"), label_color, 255);                // FL_WHITE
-    rakarrack.get(PrefNom("Leds Color"), leds_color, 2140209152);            // FL_DARK_YELLOW
-    rakarrack.get(PrefNom("Background Color"), back_color, 56);              // FL_BLACK
+    rakarrack.get(PrefNom("Foreground Color"), fore_color, RKR_buttons_color);      // FL_DARK3 - Buttons
+    rakarrack.get(PrefNom("Labels Color"), label_color, RKR_labels_color);          // FL_WHITE
+    rakarrack.get(PrefNom("Leds Color"), leds_color, RKR_leds_color);               // FL_DARK_YELLOW
+    rakarrack.get(PrefNom("Background Color"), back_color, RKR_background_color);   // FL_BLACK
 
     rakarrack.get(PrefNom("Enable Background Image"), EnableBackgroundImage, 0);
 

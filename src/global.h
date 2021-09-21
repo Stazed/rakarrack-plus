@@ -260,6 +260,14 @@ static inline float f_pow2(float x)
     }
 }
 
+enum RKR_Default_Colors
+{
+    RKR_background_color = 56,      // FL_BLACK
+    RKR_labels_color = 255,         // FL_WHITE
+    RKR_buttons_color = 1397969664, // FL_DARK3 - Buttons
+    RKR_leds_color = 2140209152     // FL_DARK_YELLOW
+};
+
 /**
  * The effect index used by switch(): case: and order number.
  */

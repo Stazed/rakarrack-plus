@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0307
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {439 230 530 580} type Double
+  xywh {1144 344 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -58,7 +58,7 @@ m_parent= _rgui;} {}
     class RKR_Tabs
   } {
     Fl_Group Look {
-      label Look
+      label Look open
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -176,10 +176,10 @@ m_parent->font_type_change(font_type);}
     m_process->Config.EnableBackgroundImage = 0;
     m_parent->PutBackground();
     
-    m_parent->back_color_change(FL_BLACK);
-    m_parent->leds_color_change(FL_DARK_YELLOW);
-    m_parent->buttons_color_change(FL_DARK3);
-    m_parent->label_color_change(FL_WHITE);
+    m_parent->back_color_change(RKR_background_color);      // FL_BLACK
+    m_parent->leds_color_change(RKR_leds_color);            // FL_DARK_YELLOW
+    m_parent->buttons_color_change(RKR_buttons_color);      // FL_DARK3 - Buttons
+    m_parent->label_color_change(RKR_labels_color);         // FL_WHITE
     m_parent->font_size_change(C_DEFAULT_FONT_SIZE);
     m_parent->font_type_change(0);
     
