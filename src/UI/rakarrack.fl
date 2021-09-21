@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0307
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -337,7 +337,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {204 85 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {152 338 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1352,7 +1352,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
           class RKR_Box
         }
       }
-      Fl_Group Presets {
+      Fl_Group Presets {open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1362,46 +1362,19 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
         }
         Fl_Button L_B1 {
           label 1
-          callback {// Check if the bank was modified - request save
-    is_bank_modified();
-    
-    // Copy the bank to the process active Bank
-    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[0].Bank);
-
-    m_process->active_bank = 0;
-    BankWin_Label(m_process->Bank_Vector[0].Bank_File_Name);
-    Put_Loaded_Bank();
-    BankWindow->unlight_preset(m_process->Selected_Preset);}
+          callback {load_default_bank(0);}
           xywh {418 30 22 16} color 62 labelsize 10
           class RKR_Button
         }
         Fl_Button L_B2 {
           label 2
-          callback {// Check if the bank was modified - request save
-    is_bank_modified();
-
-    // Copy the bank to the process active Bank
-    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[1].Bank);
-
-    m_process->active_bank = 1;
-    BankWin_Label(m_process->Bank_Vector[1].Bank_File_Name);
-    Put_Loaded_Bank();
-    BankWindow->unlight_preset(m_process->Selected_Preset);}
+          callback {load_default_bank(1);}
           xywh {442 30 22 16} color 62 labelsize 10
           class RKR_Button
         }
         Fl_Button L_B3 {
           label 3
-          callback {// Check if the bank was modified - request save
-    is_bank_modified();
-
-    // Copy the bank to the process active Bank
-    m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[2].Bank);
-
-    m_process->active_bank = 2;
-    BankWin_Label(m_process->Bank_Vector[2].Bank_File_Name);
-    Put_Loaded_Bank();
-    BankWindow->unlight_preset(m_process->Selected_Preset);}
+          callback {load_default_bank(2);}
           xywh {466 30 22 16} color 62 labelsize 10
           class RKR_Button
         }
@@ -1882,6 +1855,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
     comment {Main FLTK gui timeout} open private C return_type {static void}
   } {}
   Function {GuiTimeout(void)} {open private C return_type void
+  } {}
+  Function {load_default_bank(int bank_index)} {open return_type void
   } {}
   Function {back_color_change(Fl_Color back_color)} {open
   } {}

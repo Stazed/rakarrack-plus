@@ -579,6 +579,27 @@ void RKRGUI::GuiTimeout(void)
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
 }
 
+void RKRGUI::load_default_bank(int bank_index)
+{
+    // Check if the bank was modified - request save
+    is_bank_modified();
+    
+    // Copy the bank to the process active Bank
+    if(!m_process->Bank_Vector.empty())
+    {
+        m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[bank_index].Bank);
+
+        m_process->active_bank = bank_index;
+        BankWin_Label(m_process->Bank_Vector[bank_index].Bank_File_Name);
+        Put_Loaded_Bank();
+        BankWindow->unlight_preset(m_process->Selected_Preset);
+    }
+    else
+    {
+        m_process->Handle_Message(47, DATADIR);
+    }
+}
+
 void RKRGUI::back_color_change(Fl_Color back_color)
 {
     global_back_color = back_color;

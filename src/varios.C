@@ -248,6 +248,12 @@ RKR::Handle_Message(int num, std::string filename)
                     "Do you have permission?\n"
                     "Is the User Directory a valid read/write folder?", filename.c_str());
         }
+            break;
+        case 47:
+        {
+            sprintf(error_msg, "Cannot access DATA Directory at:\n%s\n"
+                    "You must install Rakarrack-plus to access default preset banks.\n", filename.c_str());
+        }
         break;
     }
 
