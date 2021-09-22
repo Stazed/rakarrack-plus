@@ -3425,7 +3425,7 @@ Fl_Widget * RKRGUI::find_effect_preset_widget(int effect)
 }
 
 /**
- * Reads the insert presets file : .rkrintpreset in the user home directory
+ * Reads the insert presets file : "InsertPresets.rkis" in user directory
  * and adds them to the effect preset list.
  */
 void RKRGUI::read_insert_presets()
@@ -3446,16 +3446,12 @@ void RKRGUI::read_insert_presets()
 
     // Read in user presets
     FILE *fn;
-    char tempfile[256];
     char buf[256];
     char *name;
     char *sbuf;
     int effect = 0;
-    memset(tempfile, 0, sizeof (tempfile));
 
-    sprintf(tempfile, "%s", insert_preset_location.c_str());
-
-    if ((fn = fopen(tempfile, "r")) != NULL)
+    if ((fn = fopen(insert_preset_location.c_str(), "r")) != NULL)
     {
         while (fgets(buf, sizeof buf, fn) != NULL)
         {
