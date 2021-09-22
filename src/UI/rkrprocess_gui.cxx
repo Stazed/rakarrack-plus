@@ -3481,9 +3481,9 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
     if (effect == EFX_CABINET)
         return;
 
-    char Rname[128];
     RKR_Choice *preset = static_cast<RKR_Choice*> (w);
     
+    // Check if user defined preset
     if (strncmp(preset->text(), "*", 1) != 0)
     {
         m_process->Handle_Message(39);
@@ -3500,13 +3500,12 @@ inline void RKRGUI::delete_insert_preset(Fl_Widget *w, int effect)
         return;
     }
 
-    memset(Rname, 0, sizeof (Rname));
-    sprintf(Rname, "%s", preset->text());
+    std::string Sname = preset->text();
     preset->remove(preset->value());
     preset->value(0);
     preset->redraw();
 
-    m_process->delete_insert_preset(effect, Rname);
+    m_process->delete_insert_preset(effect, Sname);
 }
 
 void RKRGUI::Prep_Reorden(int source, int dest)
