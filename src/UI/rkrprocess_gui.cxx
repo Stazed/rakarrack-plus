@@ -579,13 +579,13 @@ void RKRGUI::GuiTimeout(void)
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
 }
 
-void RKRGUI::load_default_bank(int bank_index)
+void RKRGUI::load_default_bank(unsigned bank_index)
 {
     // Check if the bank was modified - request save
     is_bank_modified();
-    
-    // Copy the bank to the process active Bank
-    if(!m_process->Bank_Vector.empty())
+
+    // Copy the bank to the process active Bank if valid
+    if(!m_process->Bank_Vector.empty() && (m_process->Bank_Vector.size() > bank_index))
     {
         m_process->copy_bank(m_process->Bank, m_process->Bank_Vector[bank_index].Bank);
 

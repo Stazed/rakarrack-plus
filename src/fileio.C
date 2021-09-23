@@ -583,7 +583,7 @@ RKR::set_audio_paramters()
     }
     else    // No gui optimized audio processing
     {
-        // These are specially processed and need to be shut of unless specifically set
+        // These are specially processed and need to be shut off unless specifically set
         // from the ordered effects.
         EFX_Active[EFX_HARMONIZER] = 0;
         EFX_Active[EFX_STEREOHARM] = 0;

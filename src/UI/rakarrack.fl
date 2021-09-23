@@ -1856,7 +1856,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {GuiTimeout(void)} {open private C return_type void
   } {}
-  Function {load_default_bank(int bank_index)} {open return_type void
+  Function {load_default_bank(unsigned bank_index)} {open return_type void
   } {}
   Function {back_color_change(Fl_Color back_color)} {open
   } {}
