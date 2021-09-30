@@ -734,7 +734,7 @@ void RKRGUI::load_previous_state()
             Put_Loaded_Bank();
             BankWindow->unlight_preset(m_process->Selected_Preset);
         }
-        else    // something went wrong with an invalid vector size (perhaps used deleted the bank)
+        else    // something went wrong with an invalid vector size (perhaps user deleted the bank)
         {
             // Load the default
             L_B1->do_callback();
@@ -1270,7 +1270,7 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
         drag = C_NO_DRAG;
     }
 
-    // The use wants to save the main window preset to the bank selected preset button
+    // The user wants to save the main window preset to the bank selected preset button
     if ((Fl::event_button() == FL_RIGHT_MOUSE) && (Fl::event() == FL_RELEASE))
     {
         Fl_Widget *w = BankWindow->ob->child(button_number - 1);

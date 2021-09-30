@@ -48,16 +48,13 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     }
 
     FILE *fn;
-    char tempfile[256];
     char buf[256];
     char *sbuf;
     int k = 0;
     int reff = 0;
-    memset(tempfile, 0, sizeof (tempfile));
     memset(pdata, 0, sizeof (int)*MAX_PDATA_SIZE);
-    sprintf(tempfile, "%s", insert_preset_location.c_str());
     
-    if ((fn = fopen(tempfile, "r")) != NULL)
+    if ((fn = fopen(insert_preset_location.c_str(), "r")) != NULL)
     {
         if (eff != EFX_CONVOLOTRON && eff != EFX_REVERBTRON && eff != EFX_ECHOTRON)
         {

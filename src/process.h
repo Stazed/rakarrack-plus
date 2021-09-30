@@ -144,7 +144,7 @@ enum MIDI_Control_Default_Index
     MC_Dist_DryWet,             // 30
     MC_Harm_DryWet,
 
-    MC_Program_Table,           // custom midi table
+    MC_Program_Table,           // custom midi table - 32
 
     MC_Unused_33,
     MC_Unused_34,
