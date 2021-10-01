@@ -28,37 +28,77 @@
 #include <math.h>
 #include "VaryBand.h"
 
-/*
- * Waveshape (this is called by OscilGen::waveshape and Distorsion::process)
- */
-
-
-
 VaryBand::VaryBand(double sample_rate, uint32_t intermediate_bufsize) :
-    Effect(sample_rate, intermediate_bufsize)
+    Effect(sample_rate, intermediate_bufsize),
+    PERIOD(intermediate_bufsize),
+    fSAMPLE_RATE(sample_rate),
+    lowl(NULL),
+    lowr(NULL),
+    midll(NULL),
+    midlr(NULL),
+    midhl(NULL),
+    midhr(NULL),
+    highl(NULL),
+    highr(NULL),
+    Pvolume(50),
+    Pcombi(0),
+    Cross1(500),
+    Cross2(2500),
+    Cross3(5000),
+    PsL(0),
+    PsML(0),
+    PsMH(0),
+    PsH(0),
+    lfo1l(),
+    lfo1r(),
+    lfo2l(),
+    lfo2r(),
+    v1l(),
+    v1r(),
+    v2l(),
+    v2r(),
+    d1(),
+    d2(),
+    d3(),
+    d4(),
+    volL(2.0f),
+    volML(2.0f),
+    volMH(2.0f),
+    volH(2.0f),
+    volLr(2.0f),
+    volMLr(2.0f),
+    volMHr(2.0f),
+    volHr(2.0f),
+    sourceL(NULL),
+    sourceML(NULL),
+    sourceMH(NULL),
+    sourceH(NULL),
+    sourceLr(NULL),
+    sourceMLr(NULL),
+    sourceMHr(NULL),
+    sourceHr(NULL),
+    one(1.0f),
+    zero(0.0f),
+    lpf1l(NULL),
+    lpf1r(NULL),
+    hpf1l(NULL),
+    hpf1r(NULL),
+    lpf2l(NULL),
+    lpf2r(NULL),
+    hpf2l(NULL),
+    hpf2r(NULL),
+    lpf3l(NULL),
+    lpf3r(NULL),
+    hpf3l(NULL),
+    hpf3r(NULL),
+    interpbuf(NULL),
+    lfo1(NULL),
+    lfo2(NULL)
 {
-    PERIOD = intermediate_bufsize; // correct for rakarrack, may be adjusted by lv2
-    fSAMPLE_RATE = sample_rate;
-
     initialize();
 
     lfo1 = new EffectLFO(fSAMPLE_RATE);
     lfo2 = new EffectLFO(fSAMPLE_RATE);
-
-    //default values
-    Ppreset = 0;
-    Pvolume = 50;
-    Pcombi = 0;
-    Cross1 = 500;
-    Cross2 = 2500;
-    Cross3 = 5000;
-    PsL = PsML = PsMH = PsH = 0;
-    v1l = v1r = v2l = v2r = 0.0f;
-    d1 = d2 = d3 = d4 = 0.0f;
-    volL = volLr = volML = volMLr = volMH = volMHr = volH = volHr = 2.0f;
-    one = 1.0f;
-    zero = 0.0f;
-    outvolume = 0.5f;
 
     setpreset(Ppreset);
     cleanup();

@@ -62,7 +62,7 @@ class VaryBand : public Effect
 public:
     VaryBand (double sample_rate, uint32_t intermediate_bufsize);
     ~VaryBand ();
-    void out (float * efxoutl, float * efxoutr);
+    void out (float *efxoutl, float *efxoutr);
     void setpreset (int npreset);
     void changepar (int npar, int value);
     int getpar (int npar);
@@ -99,7 +99,7 @@ private:
     void calcCombi ();
     void parseCombi (int value);
     void updateVols(void);
-    void setSource(float** ptr, float** ptrr, int val);
+    void setSource(float **ptr, float **ptrr, int val);
 
     //Parametrii
     int Pvolume;	//Volumul or E/R
@@ -122,9 +122,9 @@ private:
     AnalogFilter *lpf1l, *lpf1r, *hpf1l, *hpf1r;
     AnalogFilter *lpf2l, *lpf2r, *hpf2l, *hpf2r;
     AnalogFilter *lpf3l, *lpf3r, *hpf3l, *hpf3r;
-    float* interpbuf;   //buffer for filters
+    float *interpbuf;   //buffer for filters
 
-    EffectLFO* lfo1,*lfo2;
+    EffectLFO *lfo1,*lfo2;
 
 };
 
