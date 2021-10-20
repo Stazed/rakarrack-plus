@@ -8,3 +8,4 @@ Comment=Guitar Effects Processor
 Comment[fr]=Processeur d'effets de guitare
 Terminal=false
 Icon=icono_rakarrack-plus_128x128
+X-NSM-capable=true
