@@ -1,0 +1,37 @@
+# Maintainer: Your name here <your@email.here>
+# To use: makepkg -p PKGBUILD.lv2 -si
+pkgname=rakarrack-plus-LV2s
+_gitname=rakarrack-plus
+pkgver=1.1.1.10.gd7f44153
+pkgrel=1
+pkgdesc="Rakarrack-plus LV2s only - git version)"
+arch=('i686' 'x86_64' 'aarch64')
+url="https://github.com/Stazed/rakarrack-plus"
+license=('GPL3')
+depends=('alsa-utils' 'fftw' 'fltk' 'jack' 'libxpm' 'lv2' 'liblo')
+makedepends=('git' 'cmake')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+
+source=("git+${url}.git#branch=master")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/${_gitname}"
+  git describe --long --tags | sed 's/Release-//;s/-/./g'
+}
+
+build(){
+  mkdir -p "$srcdir/build"
+  cd "$srcdir/build"
+  cmake "$srcdir/${_gitname}" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DBuildRakarrackPlus=OFF \
+        -DCMAKE_INSTALL_PREFIX="/usr"
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="$pkgdir" install
+}
