@@ -249,10 +249,16 @@ static inline float f_pow2(float x)
 
         if (xint>=0)
         {
+            if(xint >=24)
+                return pw2[24];
+
             y = pw2[xint]*(x*(x*(x*(x*a[4] + a[3]) + a[2]) + a[1]) + a[0]);
         }
         else
         {
+            if (xint <= -24.0f)
+                return ipw2[24];
+
             y = ipw2[-xint]*(x*(x*(x*(x*a[4] + a[3]) + a[2]) + a[1]) + a[0]);
         }
 
