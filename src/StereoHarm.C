@@ -156,6 +156,69 @@ StereoHarm::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+StereoHarm::LV2_parameters(std::string &s_buf, float *param_p[20])
+{
+    int param_case_offset = 0;
+    for(int i = 0; i < (C_SHARM_PARAMETERS - 1); i++)   // -1 for no midi
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Sharm_L_Chroma:
+            case Sharm_R_Chroma:
+            case Sharm_Select:
+            case Sharm_Note:
+            case Sharm_LR_Cross:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
+
+                if ( param_case_offset !=  Sharm_LR_Cross)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Sharm_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Sharm_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset 64
+            case Sharm_L_Gain:
+            case Sharm_R_Gain:
+            {
+                s_buf += NTS( getpar( param_case_offset ) - 64);
+                s_buf += ":";
+            }
+            break;
+
+            // Offset 12
+            case Sharm_L_Interval:
+            case Sharm_R_Interval:
+            {
+                s_buf += NTS( getpar( param_case_offset ) - 12);
+                s_buf += ":";
+            }
+            break;
+
+            case Sharm_Chord:
+            {
+                s_buf += NTS( getpar( Sharm_Chord ));
+                s_buf += ":";
+
+                param_case_offset++;    // skip Sharm_MIDI
+            }
+            break;
+        }
+
+        param_case_offset++;
+    }
+}
+
+void
 StereoHarm::initialize()
 {
     templ = (float *) malloc(sizeof (float) * PERIOD);

@@ -144,16 +144,6 @@ Harmonizer::lv2_update_params(uint32_t period)
 void
 Harmonizer::LV2_parameters(std::string &s_buf, float *param_p[20])
 {
-    bool get_parameters = false;
-
-    // If we don't have the param_p array, then we want to get parameters for non-mixer export
-    // If we have the array then we ignore the s_buf and process for LV2
-    if ( !param_p )
-    {
-        get_parameters = true;
-    }
-
-    int val = 0;
     for(int i = 0; i < (C_HARM_PARAMETERS - 1); i++)    // -1 for Harm_MIDI - since this is no MIDI
     {
         switch(i)

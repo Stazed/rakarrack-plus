@@ -31,6 +31,8 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
+#define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"
+
 const int C_SHARM_PARAMETERS = 12;
 
 enum Sharm_Index
@@ -65,6 +67,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf, float *param_p[20] = NULL);
+    virtual std::string get_URI() { return SHARMNOMIDLV2_URI; };
     
     void initialize();
     void clear_initialize();

@@ -126,7 +126,7 @@
 #define STOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#StompBox"
 #define REVTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron"
 #define ECHOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Echotron"
-#define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"
+//#define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"
 #define MBCOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#CompBand"
 #define OPTTREMLV2_URI "https://github.com/Stazed/rakarrack-plus#Otrem"
 #define VIBELV2_URI "https://github.com/Stazed/rakarrack-plus#Vibe"
