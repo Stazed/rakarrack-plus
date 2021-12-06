@@ -282,6 +282,105 @@ Analog_Phaser::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Analog_Phaser::LV2_parameters(std::string &s_buf, float *param_p[20])
+{
+    bool get_parameters = false;
+
+    // If we don't have the param_p array, then we want to get parameters for non-mixer export
+    // If we have the array then we ignore the s_buf and process for LV2
+    if ( !param_p )
+    {
+        get_parameters = true;
+    }
+
+    int val = 0;
+
+    for(int i = 0; i < C_APHASER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case APhase_Distortion:
+            case APhase_LFO_Tempo:
+            case APhase_LFO_Random:
+            case APhase_LFO_Type:
+            case APhase_LFO_Stereo:
+            case APhase_Width:
+            case APhase_Stages:
+            case APhase_Mismatch:
+            case APhase_Subtract:
+            case APhase_Depth:
+            case APhase_Hyper:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( i ));
+
+                    if ( i !=  APhase_Hyper)   // last one no need for delimiter
+                        s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i];
+                    if(getpar(i) != val)
+                    {
+                        changepar(i,val);
+                    }
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case APhase_DryWet: 
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( Dry_Wet(getpar( APhase_DryWet )) );
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = Dry_Wet((int)*param_p[i]);
+                    if(getpar(APhase_DryWet) != val)
+                    {
+                        changepar(APhase_DryWet,val);
+                    }
+                }
+            }
+            break;
+
+            // Offset
+            case APhase_Feedback:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( APhase_Feedback ) - 64);
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i] + 64;  // offset
+                    if(getpar(APhase_Feedback) != val)
+                    {
+                        changepar(APhase_Feedback,val);
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+void
+Analog_Phaser::LV2_parameters(float *param_p[20])
+{
+    std::string s;      // dummy
+    LV2_parameters(s, param_p);
+}
+
+
 /*
  * Parameter control
  */

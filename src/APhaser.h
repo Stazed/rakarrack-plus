@@ -30,6 +30,8 @@
 #include "Effect.h"
 #include "EffectLFO.h"
 
+#define APHASELV2_URI "https://github.com/Stazed/rakarrack-plus#aphas"
+
 const int C_APHASER_PARAMETERS = 13;
 
 enum APhaser_Index
@@ -64,6 +66,9 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf, float *param_p[20] = NULL);
+    virtual void LV2_parameters(float *param_p[20]);
+    virtual std::string get_URI() { return APHASELV2_URI; };
 
 private:
     float fPERIOD;
