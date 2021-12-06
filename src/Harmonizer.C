@@ -141,6 +141,67 @@ Harmonizer::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Harmonizer::LV2_parameters(std::string &s_buf, float *param_p[20])
+{
+    bool get_parameters = false;
+
+    // If we don't have the param_p array, then we want to get parameters for non-mixer export
+    // If we have the array then we ignore the s_buf and process for LV2
+    if ( !param_p )
+    {
+        get_parameters = true;
+    }
+
+    int val = 0;
+    for(int i = 0; i < (C_HARM_PARAMETERS - 1); i++)    // -1 for Harm_MIDI - since this is no MIDI
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Harm_Filter_Freq:
+            case Harm_Select:
+            case Harm_Note:
+            case Harm_Chord:
+            {
+                s_buf += NTS( getpar( i ));
+                s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Harm_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Harm_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset 64
+            case Harm_Pan:
+            case Harm_Gain:
+            case Harm_Filter_Gain:
+            case Harm_Filter_Q:
+            {
+                s_buf += NTS( getpar( i ) - 64);
+                
+                if ( i !=  Harm_Filter_Q)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Offset 12
+            case Harm_Interval:
+            {
+                s_buf += NTS( getpar( i ) - 12);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 void Harmonizer::initialize()
 {
     templ = (float *) malloc(sizeof (float) * PERIOD);
