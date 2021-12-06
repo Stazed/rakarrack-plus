@@ -137,6 +137,129 @@ Distorsion::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Distorsion::LV2_parameters(std::string &s_buf, float *param_p[20])
+{
+    bool get_parameters = false;
+
+    // If we don't have the param_p array, then we want to get parameters for non-mixer export
+    // If we have the array then we ignore the s_buf and process for LV2
+    if ( !param_p )
+    {
+        get_parameters = true;
+    }
+
+    int val = 0;
+    int param_case_offset = 0;
+    
+    for(int i = 0; i < (C_DIST_PARAMETERS - 1); i++)    // -1 for skipped parameter 11
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Dist_LR_Cross:
+            case Dist_Drive:
+            case Dist_Level:
+            case Dist_Type:
+            case Dist_Negate:
+            case Dist_LPF:
+            case Dist_HPF:
+            case Dist_Stereo:
+            case Dist_Suboctave:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
+
+                    if ( param_case_offset !=  Dist_Suboctave)   // last one no need for delimiter
+                        s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i];
+                    if(getpar(param_case_offset) != val)
+                    {
+                        changepar(param_case_offset,val);
+                    }
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Dist_DryWet:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Dist_DryWet )) );
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = Dry_Wet((int)*param_p[i]);
+                    if(getpar(Dist_DryWet) != val)
+                    {
+                        changepar(Dist_DryWet,val);
+                    }
+                }
+            }
+            break;
+            
+            // Offset
+            case Dist_Pan:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( Dist_Pan ) - 64);
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i] + 64;    // offset
+                    if(getpar(Dist_Pan) != val)
+                    {
+                        changepar(Dist_Pan,val);
+                    }
+                }
+            }
+            break;
+            
+            // Skip 1 parameter after this
+            case Dist_Prefilter:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( Dist_Prefilter ) );
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i];
+                    if(getpar(Dist_Prefilter) != val)
+                    {
+                        changepar(Dist_Prefilter,val);
+                    }
+                }
+
+                // increment for skipped Dist_SKIP_11
+                param_case_offset++;
+            }
+            break;
+            
+        }
+        // increment offset
+        param_case_offset++;
+    }
+    
+}
+
+void
+Distorsion::LV2_parameters(float *param_p[20])
+{
+    std::string s;      // dummy
+    LV2_parameters(s, param_p);
+}
+
 /*
  * Apply the filters
  */
