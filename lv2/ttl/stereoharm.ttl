@@ -194,7 +194,7 @@
                 lv2:scalePoint [ rdfs:label "G#"; rdf:value 20 ] ;
                 lv2:scalePoint [ rdfs:label "A"; rdf:value 21 ] ;
                 lv2:scalePoint [ rdfs:label "A#"; rdf:value 22 ] ;
-                lv2:scalePoint [ rdfs:label "A"; rdf:value 23 ] ;
+                lv2:scalePoint [ rdfs:label "B"; rdf:value 23 ] ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 16 ;
