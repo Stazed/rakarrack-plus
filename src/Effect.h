@@ -71,9 +71,8 @@ public:
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t)  = 0;
 #endif // LV2
-    virtual void LV2_parameters(std::string &, float *[20]) {};     // FIXME - make pure virtual when done
-    virtual void LV2_parameters(float *[20]) {};                    // FIXME
-    virtual std::string get_URI() { return ""; };                   // FIXME
+    virtual void LV2_parameters(std::string &) {};
+    virtual std::string get_URI() { return ""; };
 
     uint32_t period_master;
     float outvolume;

@@ -359,7 +359,7 @@ RKR::export_to_nsm_mixer(std::string filename)
         s_buf += NTS( 0 );  // bypass - should be always 0
         s_buf += ":";
 
-        Rack_Effects[effect]->LV2_parameters(s_buf, NULL);
+        Rack_Effects[effect]->LV2_parameters(s_buf);
 
         s_buf += "\" :is_default 0 :chain 0x2 :active 1 :number 0\n";
         fputs(s_buf.c_str(), fn);

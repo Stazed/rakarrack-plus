@@ -37,7 +37,7 @@ Overdrive::Overdrive(int wave_res, int wave_upq, int wave_dnq, double samplerate
 }
 
 void
-Overdrive::LV2_parameters(std::string &s_buf, float *param_p[20])
+Overdrive::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < (C_OVERDRIVE_PARAMETERS - 2); i++)   // -2 for Skipped param 11 and Suboctave
     {

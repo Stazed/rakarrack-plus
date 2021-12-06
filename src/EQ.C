@@ -166,18 +166,8 @@ EQ::setvolume(int _Pvolume)
 }
 
 void
-EQ::LV2_parameters(std::string &s_buf, float *param_p[20])
+EQ::LV2_parameters(std::string &s_buf)
 {
-    bool get_parameters = false;
-
-    // If we don't have the param_p array, then we want to get parameters for non-mixer export
-    // If we have the array then we ignore the s_buf and process for LV2
-    if ( !param_p )
-    {
-        get_parameters = true;
-    }
-
-    int val = 0;
     int param_case_offset = 10;
     for(int i = 0; i < C_EQ_PARAMETERS; i++)
     {
@@ -185,38 +175,16 @@ EQ::LV2_parameters(std::string &s_buf, float *param_p[20])
         {
             case EQ_Gain:   // 0
             {
-                if ( get_parameters )   // non-mixer
-                {
-                    s_buf += NTS( getpar(EQ_Gain) - 64 );
-                    s_buf += ":";
-                }
-                else    // LV2 Processing
-                {
-                    val = (int)*param_p[i] + 64;
-                    if(getpar(EQ_Gain) != val)
-                    {
-                        changepar(EQ_Gain,val);
-                    }
-                }
+                s_buf += NTS( getpar(EQ_Gain) - 64 );
+                s_buf += ":";
                 param_case_offset = EQ_Q; // set for EQ_Q
             }
             break;
 
             case EQ_Q:      // 1
             {
-                if ( get_parameters )   // non-mixer
-                {
-                    s_buf += NTS( getpar(EQ_Q) - 64 );
-                    s_buf += ":";
-                }
-                else    // LV2
-                {
-                    val = (int)*param_p[i] + 64;
-                    if(getpar(EQ_Q) != val)
-                    {
-                        changepar(EQ_Q, val);
-                    }
-                }
+                s_buf += NTS( getpar(EQ_Q) - 64 );
+                s_buf += ":";
                 param_case_offset = EQ_31_HZ;   // set for EQ_31_HZ
             }
             break;
@@ -232,34 +200,16 @@ EQ::LV2_parameters(std::string &s_buf, float *param_p[20])
             case EQ_8_KHZ:
             case EQ_16_KHZ: // 9
             {
-                if ( get_parameters )   // non-mixer
-                {
-                    s_buf += NTS( getpar(param_case_offset) - 64 );
+                s_buf += NTS( getpar(param_case_offset) - 64 );
 
-                    if ( param_case_offset !=  EQ_16_KHZ)   // last one no need for delimiter
-                        s_buf += ":";
-                }
-                else    // LV2
-                {
-                    val = (int)*param_p[i] + 64;
-                    if(getpar(param_case_offset) != val)
-                    {
-                        changepar(param_case_offset, val);
-                    }
-                }
+                if ( param_case_offset !=  EQ_16_KHZ)   // last one no need for delimiter
+                    s_buf += ":";
 
                 param_case_offset++;     // next parameter
             }
             break;
         }
     }
-}
-
-void
-EQ::LV2_parameters(float *param_p[20])
-{
-    std::string s;      // dummy
-    LV2_parameters(s, param_p);
 }
 
 /**

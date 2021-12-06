@@ -356,7 +356,6 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-#if 0
     int val = 0;
     int param_case_offset = 10;
     for(int i = 0; i < plug->nparams; i++)
@@ -409,11 +408,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
             break;
         }
     }
-#else
 
-    plug->eq->LV2_parameters(plug->param_p);
-
-#endif
     //now run
     plug->eq->out(plug->output_l_p, plug->output_r_p);
 
@@ -467,7 +462,6 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-#if 0
     int val = 0;
 
     for(int i = 0; i < plug->nparams; i++)
@@ -493,11 +487,7 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
             break;
         }
     }
-#else
 
-    plug->comp->LV2_parameters(plug->param_p);
-
-#endif
     //now run
     plug->comp->out(plug->output_l_p,plug->output_r_p);
 
@@ -557,7 +547,6 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-#if 0
     int val = 0;
     int param_case_offset = 0;
     
@@ -625,11 +614,6 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
         // increment offset
         param_case_offset++;
     }
-#else
-
-    plug->dist->LV2_parameters(plug->param_p);
-
-#endif
 
     //now run
     plug->dist->out(plug->output_l_p, plug->output_r_p);
@@ -693,7 +677,6 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-#if 0
     int val = 0;
     for(int i = 0; i < plug->nparams; i++)
     {
@@ -739,11 +722,6 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
             }
         }
     }
-#else
-
-    plug->echo->LV2_parameters(plug->param_p);
-
-#endif
 
     //now run
     plug->echo->out(plug->output_l_p, plug->output_r_p);
@@ -807,7 +785,6 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-#if 0
     int val = 0;
     int param_case_offset = 0;
     
@@ -872,11 +849,7 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
         }
         param_case_offset++;
     }
-#else
 
-    plug->chorus->LV2_parameters(plug->param_p);
-
-#endif
     //now run
     plug->chorus->out(plug->output_l_p, plug->output_r_p);
 
@@ -939,7 +912,6 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
     
     //check and set changed parameters
-#if 0
     int val = 0;
     
     for(int i = 0; i < plug->nparams; i++)
@@ -991,11 +963,7 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
             break;
         }
     }
-#else
 
-    plug->aphase->LV2_parameters(plug->param_p);
-
-#endif
     //now run
     plug->aphase->out(plug->output_l_p, plug->output_r_p);
 
@@ -1579,7 +1547,6 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
-#if 0
     int val = 0;
     int param_case_offset = 0;
     for(int i = 0; i < plug->nparams; i++)
@@ -1640,11 +1607,6 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
         
         param_case_offset++;
     }
-#else
-
-    plug->reve->LV2_parameters(plug->param_p);
-
-#endif
 
     //now run
     plug->reve->out(plug->output_l_p,plug->output_r_p);

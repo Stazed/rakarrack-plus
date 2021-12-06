@@ -104,18 +104,8 @@ Echo::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-Echo::LV2_parameters(std::string &s_buf, float *param_p[20])
+Echo::LV2_parameters(std::string &s_buf)
 {
-    bool get_parameters = false;
-
-    // If we don't have the param_p array, then we want to get parameters for non-mixer export
-    // If we have the array then we ignore the s_buf and process for LV2
-    if ( !param_p )
-    {
-        get_parameters = true;
-    }
-
-    int val = 0;
     for(int i = 0; i < C_ECHO_PARAMETERS; i++)
     {
         switch(i)
@@ -129,21 +119,10 @@ Echo::LV2_parameters(std::string &s_buf, float *param_p[20])
             case Echo_Reverse:
             case Echo_Direct:
             {
-                if ( get_parameters )   // non-mixer
-                {
-                    s_buf += NTS( getpar( i ));
+                s_buf += NTS( getpar( i ));
 
-                    if ( i !=  Echo_Direct )   // last one no need for delimiter
-                        s_buf += ":";
-                }
-                else    // LV2 Processing
-                {
-                    val = (int)*param_p[i];
-                    if(getpar(i) != val)
-                    {
-                        changepar(i,val);
-                    }
-                }
+                if ( i !=  Echo_Direct )   // last one no need for delimiter
+                    s_buf += ":";
             }
             break;
 
@@ -151,48 +130,19 @@ Echo::LV2_parameters(std::string &s_buf, float *param_p[20])
             // wet/dry -> dry/wet reversal
             case Echo_DryWet:
             {
-                if ( get_parameters )   // non-mixer
-                {
-                    s_buf += NTS( Dry_Wet(getpar( Echo_DryWet )) );
-                    s_buf += ":";
-                }
-                else    // LV2 Processing
-                {
-                    val = Dry_Wet((int)*param_p[i]);
-                    if(getpar(Echo_DryWet) != val)
-                    {
-                        changepar(Echo_DryWet,val);
-                    }
-                }
+                s_buf += NTS( Dry_Wet(getpar( Echo_DryWet )) );
+                s_buf += ":";
             }
             break;
 
             // Offset
             case Echo_Pan:
             {
-                if ( get_parameters )   // non-mixer
-                {
-                    s_buf += NTS( getpar( Echo_Pan ) - 64);
-                    s_buf += ":";
-                }
-                else    // LV2 Processing
-                {
-                    val = (int)*param_p[i] + 64;  // offset
-                    if(getpar(Echo_Pan) != val)
-                    {
-                        changepar(Echo_Pan,val);
-                    }
-                }
+                s_buf += NTS( getpar( Echo_Pan ) - 64);
+                s_buf += ":";
             }
         }
     }
-}
-
-void
-Echo::LV2_parameters(float *param_p[20])
-{
-    std::string s;      // dummy
-    LV2_parameters(s, param_p);
 }
 
 /*
