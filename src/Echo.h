@@ -30,6 +30,8 @@
 #include "Effect.h"
 #include "delayline.h"
 
+#define ECHOLV2_URI "https://github.com/Stazed/rakarrack-plus#eco"
+
 const int C_ECHO_PARAMETERS = 9;
 
 enum Echo_Index
@@ -60,6 +62,9 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf, float *param_p[20] = NULL);
+    virtual void LV2_parameters(float *param_p[20]);
+    virtual std::string get_URI() { return ECHOLV2_URI; };
 
     void Tempo2Delay(int delay);
 
