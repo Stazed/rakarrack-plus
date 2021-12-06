@@ -156,7 +156,7 @@ StereoHarm::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-StereoHarm::LV2_parameters(std::string &s_buf, float *param_p[20])
+StereoHarm::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
     for(int i = 0; i < (C_SHARM_PARAMETERS - 1); i++)   // -1 for no midi

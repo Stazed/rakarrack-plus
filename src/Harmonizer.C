@@ -142,7 +142,7 @@ Harmonizer::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-Harmonizer::LV2_parameters(std::string &s_buf, float *param_p[20])
+Harmonizer::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < (C_HARM_PARAMETERS - 1); i++)    // -1 for Harm_MIDI - since this is no MIDI
     {
