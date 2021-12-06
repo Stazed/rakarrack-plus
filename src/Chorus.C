@@ -252,6 +252,126 @@ Chorus::lv2_update_params(uint32_t period)
 }
 #endif // 0
 
+void
+Chorus::LV2_parameters(std::string &s_buf, float *param_p[20])
+{
+    bool get_parameters = false;
+
+    // If we don't have the param_p array, then we want to get parameters for non-mixer export
+    // If we have the array then we ignore the s_buf and process for LV2
+    if ( !param_p )
+    {
+        get_parameters = true;
+    }
+
+    int val = 0;
+    int param_case_offset = 0;
+    
+    for(int i = 0; i < (C_CHORUS_PARAMETERS - 1); i++)  // -1 skip Chorus_SKIP_Flange_10
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Chorus_LFO_Tempo:
+            case Chorus_LFO_Random:
+            case Chorus_LFO_Type:
+            case Chorus_LFO_Stereo:
+            case Chorus_Depth:
+            case Chorus_Delay:
+            case Chorus_Feedback:
+            case Chorus_Subtract:
+            case Chorus_Intense:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
+
+                    if ( param_case_offset !=  Chorus_Intense)   // last one no need for delimiter
+                        s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i];
+                    if(getpar(param_case_offset) != val)
+                    {
+                        changepar(param_case_offset,val);
+                    }
+                }
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Chorus_DryWet:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Chorus_DryWet )) );
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = Dry_Wet((int)*param_p[i]);
+                    if(getpar(Chorus_DryWet) != val)
+                    {
+                        changepar(Chorus_DryWet,val);
+                    }
+                }
+            }
+            break;
+            
+            // Offset
+            case Chorus_Pan:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( Chorus_Pan ) - 64);
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i] + 64; // offset
+                    if(getpar(Chorus_Pan) != val)
+                    {
+                        changepar(Chorus_Pan,val);
+                    }
+                }
+            }
+            break;
+            
+            // Skip after this one
+            case Chorus_LR_Cross:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( Chorus_LR_Cross ) );
+                    s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i];
+                    if(getpar(Chorus_LR_Cross) != val)
+                    {
+                        changepar(Chorus_LR_Cross,val);
+                    }
+                }
+
+                // increment for skipped parameter
+                param_case_offset++;
+            }
+            break;
+        }
+        param_case_offset++;
+    }
+}
+
+void
+Chorus::LV2_parameters(float *param_p[20])
+{
+    std::string s;      // dummy
+    LV2_parameters(s, param_p);
+}
+
 /*
  * Parameter control
  */

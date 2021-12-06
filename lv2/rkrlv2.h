@@ -94,7 +94,7 @@
 //#define COMPLV2_URI "https://github.com/Stazed/rakarrack-plus#comp"
 //#define DISTLV2_URI "https://github.com/Stazed/rakarrack-plus#dist"
 //#define ECHOLV2_URI "https://github.com/Stazed/rakarrack-plus#eco"
-#define CHORUSLV2_URI "https://github.com/Stazed/rakarrack-plus#chor"
+//#define CHORUSLV2_URI "https://github.com/Stazed/rakarrack-plus#chor"
 #define APHASELV2_URI "https://github.com/Stazed/rakarrack-plus#aphas"
 #define PANLV2_URI "https://github.com/Stazed/rakarrack-plus#pan"
 #define ALIENLV2_URI "https://github.com/Stazed/rakarrack-plus#awha"
