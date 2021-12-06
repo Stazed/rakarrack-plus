@@ -37,6 +37,51 @@ Overdrive::Overdrive(int wave_res, int wave_upq, int wave_dnq, double samplerate
 }
 
 void
+Overdrive::LV2_parameters(std::string &s_buf, float *param_p[20])
+{
+    for(int i = 0; i < (C_OVERDRIVE_PARAMETERS - 2); i++)   // -2 for Skipped param 11 and Suboctave
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Overdrive_LR_Cross:
+            case Overdrive_Drive:
+            case Overdrive_Level:
+            case Overdrive_Type:
+            case Overdrive_Negate:
+            case Overdrive_LPF:
+            case Overdrive_HPF:
+            case Overdrive_Stereo:
+            case Overdrive_Prefilter:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i != Overdrive_Prefilter ) // last one
+                    s_buf += ":";
+            }
+            break;
+            
+            //Special cases
+            // wet/dry -> dry/wet reversal
+            case Overdrive_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Overdrive_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Overdrive_Pan:
+            {
+                s_buf += NTS( getpar( Overdrive_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Overdrive::setpreset (int npreset)
 {
     const int PRESET_SIZE = C_OVERDRIVE_PARAMETERS;

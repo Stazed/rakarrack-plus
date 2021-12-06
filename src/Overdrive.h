@@ -34,6 +34,8 @@
 
 #include "Distorsion.h"
 
+#define OVERDRIVELV2_URI "https://github.com/Stazed/rakarrack-plus#Overdrive"
+
 const int C_OVERDRIVE_PARAMETERS = 13;
 
 enum Overdrive_Index
@@ -60,6 +62,9 @@ public:
 
     void setpreset (int npreset);
     int get_number_efx_parameters () {return C_OVERDRIVE_PARAMETERS;};
+    
+    virtual void LV2_parameters(std::string &s_buf, float *param_p[20] = NULL);
+    virtual std::string get_URI() { return OVERDRIVELV2_URI; };
 
 };
 

@@ -136,7 +136,7 @@
 #define MIDICLV2_URI "https://github.com/Stazed/rakarrack-plus#midi_converter"
 #define CONVOLOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Convolotron"
 #define FLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Flange"
-#define OVERDRIVELV2_URI "https://github.com/Stazed/rakarrack-plus#Overdrive"
+//#define OVERDRIVELV2_URI "https://github.com/Stazed/rakarrack-plus#Overdrive"
 #define HARMLV2_URI "https://github.com/Stazed/rakarrack-plus#har"
 #define STEROHARMLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm"
 
