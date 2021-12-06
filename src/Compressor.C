@@ -117,6 +117,62 @@ Compressor::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Compressor::LV2_parameters(std::string &s_buf, float *param_p[20])
+{
+    bool get_parameters = false;
+
+    // If we don't have the param_p array, then we want to get parameters for non-mixer export
+    // If we have the array then we ignore the s_buf and process for LV2
+    if ( !param_p )
+    {
+        get_parameters = true;
+    }
+
+    int val = 0;
+
+    for(int i = 0; i < C_COMPRESS_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Compress_Threshold:
+            case Compress_Ratio:
+            case Compress_Output:
+            case Compress_Attack:
+            case Compress_Release:
+            case Compress_Auto_Out:
+            case Compress_Knee:
+            case Compress_Stereo:
+            case Compress_Peak:
+            {
+                if ( get_parameters )   // non-mixer
+                {
+                    s_buf += NTS( getpar( i ));
+
+                    if ( i !=  Compress_Peak)   // last one no need for delimiter
+                        s_buf += ":";
+                }
+                else    // LV2 Processing
+                {
+                    val = (int)*param_p[i];
+                    if(getpar(i) != val)
+                    {
+                        changepar(i, val);
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+void
+Compressor::LV2_parameters(float *param_p[20])
+{
+    std::string s;      // dummy
+    LV2_parameters(s, param_p);
+}
+
+void
 Compressor::out(float *efxoutl, float *efxoutr)
 {
     for (unsigned i = 0; i < PERIOD; i++)
