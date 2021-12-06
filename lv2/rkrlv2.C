@@ -1579,6 +1579,7 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
+#if 0
     int val = 0;
     int param_case_offset = 0;
     for(int i = 0; i < plug->nparams; i++)
@@ -1639,6 +1640,11 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
         
         param_case_offset++;
     }
+#else
+
+    plug->reve->LV2_parameters(plug->param_p);
+
+#endif
 
     //now run
     plug->reve->out(plug->output_l_p,plug->output_r_p);
