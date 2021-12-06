@@ -294,6 +294,93 @@ RKR::save_preset(std::string filename)
     fclose(fn);
 }
 
+void
+RKR::export_to_nsm_mixer(std::string filename)
+{
+    FILE *fn;
+
+    std::string s_buf;
+
+    fn = fopen(filename.c_str(), "w");
+
+    if (errno == EACCES)
+    {
+        Handle_Message(3);
+        fclose(fn);
+        return;
+    }
+    
+    // Update active preset for any user changes
+    refresh_active_preset();
+    
+    // Copy active preset for file operations
+    PresetBankStruct Save_Preset = Active_Preset;
+    
+    // Default Mixer items
+    s_buf = "{\n";
+    fputs(s_buf.c_str(), fn);
+
+    s_buf = "\tMixer_Strip 0x1 create :name \"Unnamed\" :width \"narrow\" :tab \"fader\" :color 1309453625 :gain_mode 0 :mute_mode 0 :group 0x0 :auto_input \"\" :manual_connection 0\n";
+    fputs(s_buf.c_str(), fn);
+
+    s_buf = "\tChain 0x2 create :strip 0x1 :tab \"chain\"\n";
+    fputs(s_buf.c_str(), fn);
+
+    s_buf = "\tJACK_Module 0x3 create :parameter_values \"0.000000:2.000000\" :is_default 1 :chain 0x2 :active 1\n";
+    fputs(s_buf.c_str(), fn);
+
+    s_buf = "\tGain_Module 0x4 create :parameter_values \"0.000000:0.000000\" :is_default 1 :chain 0x2 :active 1\n";
+    fputs(s_buf.c_str(), fn);
+    
+    int mixer_module_index = 7; // There are six defaults, so plugin modules start at 7
+    
+    // Effect modules & parameters
+    for (int order = 0; order < C_NUMBER_ORDERED_EFFECTS; order++)
+    {
+        int effect = Save_Preset.Effect_Params[EFX_ORDER][order];
+        
+        if ( !EFX_Active[effect] )  // ignore inactive effects
+            continue;
+
+        // Not supported by non-mixer
+        if(effect == EFX_CONVOLOTRON || effect == EFX_REVERBTRON || effect == EFX_ECHOTRON)
+            continue;
+
+        s_buf.clear();
+
+        s_buf = "\tPlugin_Module ";
+        s_buf += "0x";
+        s_buf += NTS(mixer_module_index);
+        s_buf += " create :lv2_plugin_uri \"";        
+        s_buf += Rack_Effects[effect]->get_URI();
+        s_buf += "\" :plugin_ins 2 :plugin_outs 2 :parameter_values \"";
+        
+        // Add the individual effects parameters
+        s_buf += NTS( 0 );  // bypass - should be always 0
+        s_buf += ":";
+
+        Rack_Effects[effect]->LV2_parameters(s_buf, NULL);
+
+        s_buf += "\" :is_default 0 :chain 0x2 :active 1 :number 0\n";
+        fputs(s_buf.c_str(), fn);
+        
+        mixer_module_index++;
+    }
+    // End effect modules & parameters
+
+    // More defaults modules
+    s_buf = "\tMeter_Module 0x5 create :is_default 1 :chain 0x2 :active 1\n";
+    fputs(s_buf.c_str(), fn);
+
+    s_buf = "\tJACK_Module 0x6 create :parameter_values \"2.000000:0.000000\" :is_default 1 :chain 0x2 :active 1\n";
+    fputs(s_buf.c_str(), fn);
+
+    s_buf = "}\n\n";
+    fputs(s_buf.c_str(), fn);
+
+    fclose(fn);
+}
+
 /**
  * This parses the preset files *.rkr types, from the menu File/Load Preset
  * and the Load button from the main window.

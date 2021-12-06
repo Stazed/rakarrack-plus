@@ -28,6 +28,8 @@
 #include "Effect.h"
 #include "AnalogFilter.h"
 
+#define EQLV2_URI "https://github.com/Stazed/rakarrack-plus#eql"
+
 const int C_EQ_PARAMETERS = 12;
 
 // This is the order in the presets
@@ -85,6 +87,9 @@ public:
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf, float *param_p[20] = NULL);
+    virtual void LV2_parameters(float *param_p[20]);
+    virtual std::string get_URI() { return EQLV2_URI; };
     
     void init_filters();
     virtual void initialize();

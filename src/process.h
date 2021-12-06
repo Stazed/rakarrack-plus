@@ -695,6 +695,7 @@ public:
     // fileio.C
     void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);
     void get_effect_parameters (std::string &s_buf, int fx_index);
+    void export_to_nsm_mixer(std::string filename);
     void save_preset (std::string filename);
     void load_preset (std::string filename);
     void set_audio_paramters ();

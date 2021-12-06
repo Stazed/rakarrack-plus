@@ -356,6 +356,7 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
     // we are good to run now
 
     //check and set changed parameters
+#if 0
     int val = 0;
     int param_case_offset = 10;
     for(int i = 0; i < plug->nparams; i++)
@@ -408,7 +409,11 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
             break;
         }
     }
+#else
 
+    plug->eq->LV2_parameters(plug->param_p);
+
+#endif
     //now run
     plug->eq->out(plug->output_l_p, plug->output_r_p);
 
