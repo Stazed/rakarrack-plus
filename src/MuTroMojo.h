@@ -32,6 +32,8 @@
 #include "RBFilter.h"
 #include "AnalogFilter.h"
 
+#define MUTROLV2_URI "https://github.com/Stazed/rakarrack-plus#MuTroMojo"
+
 /**
  * This is the amount for File saving and presets Rakarrack-plus.
  * The listed are 20 - less the 2 for LV2.
@@ -58,10 +60,10 @@ enum MuTro_Index
     MuTro_St_Freq,
     MuTro_Mod_Res,
     Mutro_Mode_Legacy   // Rakarrack-plus only
-#ifdef LV2_SUPPORT
+//#ifdef LV2_SUPPORT
     ,MuTro_AG_Mode,
     MuTro_Exp_Wah
-#endif
+//#endif
 };
 
 class MuTroMojo : public Effect
@@ -80,6 +82,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return MUTROLV2_URI; };
 
     void initialize();
     void clear_initialize();

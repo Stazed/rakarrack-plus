@@ -226,6 +226,71 @@ MuTroMojo::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+MuTroMojo::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = 0;
+    for(int i = 0; i < (C_MUTRO_PARAMETERS + 1); i++)   // -1 for Mutro_Mode_Legacy, +2 for MuTro_AG_Mode, MuTro_Exp_Wah
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case MuTro_Resonance:
+            case MuTro_LFO_Tempo:
+            case MuTro_LFO_Random:
+            case MuTro_LFO_Type:
+            case MuTro_Depth:
+            case MuTro_Env_Sens:
+            case MuTro_Wah:
+            case MuTro_Env_Smooth:
+            case MuTro_LowPass:
+            case MuTro_BandPass:
+            case MuTro_HighPass:
+            case MuTro_Stages:
+            case MuTro_Range:
+            case MuTro_St_Freq:
+            case MuTro_AG_Mode:
+            case MuTro_Exp_Wah:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
+
+                if ( param_case_offset !=  MuTro_Exp_Wah)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case MuTro_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( MuTro_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case MuTro_LFO_Stereo:
+            {
+                s_buf += NTS( getpar( MuTro_LFO_Stereo ) - 64);
+                s_buf += ":";
+            }
+            break;
+
+            // Skip after
+            case MuTro_Mod_Res:
+            {
+                s_buf += NTS( getpar( MuTro_Mod_Res ) );
+                s_buf += ":";
+
+                param_case_offset += 1; // Skip: Mutro_Mode_Legacy
+            }
+            break;
+        }
+        
+        param_case_offset++;
+    }
+}
+
+void
 MuTroMojo::initialize()
 {
     interpbuf = new float[PERIOD];
@@ -554,14 +619,14 @@ MuTroMojo::getpar(int npar)
     case Mutro_Mode_Legacy:
         return (Pmode);
 
-#ifdef LV2_SUPPORT
+//#ifdef LV2_SUPPORT
     case MuTro_AG_Mode:
         return (Pqm);
 
     case MuTro_Exp_Wah:
         return (Pamode);
 
-#endif // LV2_SUPPORT
+//#endif // LV2_SUPPORT
     }
 
     return (0);
