@@ -34,6 +34,8 @@
 #include "Effect.h"
 #include "AnalogFilter.h"
 
+#define EXPANDLV2_URI "https://github.com/Stazed/rakarrack-plus#Expander"
+
 const int C_EXPANDER_PARAMETERS = 7;
 
 enum Expander_Index
@@ -67,6 +69,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return EXPANDLV2_URI; };
     
     void initialize();
     void clear_initialize();

@@ -95,6 +95,32 @@ Expander::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Expander::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_EXPANDER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Expander_Threshold:
+            case Expander_Shape:
+            case Expander_Attack:
+            case Expander_Release:
+            case Expander_LPF:
+            case Expander_HPF:
+            case Expander_Gain:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Expander_Gain)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Expander::initialize()
 {
     interpbuf = new float[PERIOD];
