@@ -175,6 +175,47 @@ Dflange::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Dflange::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_DFLANGE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case DFlange_Pan:
+            case DFlange_LR_Cross:
+            case DFlange_Depth:
+            case DFlange_Width:
+            case DFlange_Offset:
+            case DFlange_Feedback:
+            case DFlange_LPF:
+            case DFlange_Subtract:
+            case DFlange_Zero:
+            case DFlange_LFO_Tempo:
+            case DFlange_LFO_Stereo:
+            case DFlange_LFO_Type:
+            case DFlange_LFO_Random:
+            case DFlange_Intense:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  DFlange_Intense)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case DFlange_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( DFlange_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Effect output
  */

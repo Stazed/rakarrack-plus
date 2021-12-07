@@ -2327,6 +2327,7 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
                     plug->dflange->changepar(DFlange_DryWet,val);
                 }
             }
+            break;
         }
     }
 
