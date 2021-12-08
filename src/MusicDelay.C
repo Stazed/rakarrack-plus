@@ -130,9 +130,12 @@ MusicDelay::LV2_parameters(std::string &s_buf)
         switch(i)
         {
             // Normal processing
+            case Music_Delay_1:
+            case Music_Del_Offset:
             case Music_LR_Cross:
             case Music_Feedback_1:
             case Music_Damp:
+            case Music_Delay_2:
             case Music_Feedback_2:
             case Music_Tempo:
             case Music_Gain_1:
