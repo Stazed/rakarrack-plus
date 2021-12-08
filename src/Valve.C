@@ -129,6 +129,53 @@ Valve::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Valve::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_VALVE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Valve_LR_Cross:
+            case Valve_Drive:
+            case Valve_Level:
+            case Valve_Negate:
+            case Valve_LPF:
+            case Valve_HPF:
+            case Valve_Stereo:
+            case Valve_Prefilter:
+            case Valve_Distortion:
+            case Valve_Ex_Dist:
+            case Valve_Presence:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Valve_Presence)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Valve_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Valve_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Valve_Pan:
+            {
+                s_buf += NTS( getpar( Valve_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Valve::initialize()
 {
     interpbuf = new float[PERIOD];
