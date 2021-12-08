@@ -25,6 +25,8 @@
 #include "Effect.h"
 #include "HarmonicEnhancer.h"
 
+#define EXCITERLV2_URI "https://github.com/Stazed/rakarrack-plus#Exciter"
+
 const int C_EXCITER_PARAMETERS = 13;
 
 enum Exciter_index
@@ -61,6 +63,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return EXCITERLV2_URI; };
 
 private:
 

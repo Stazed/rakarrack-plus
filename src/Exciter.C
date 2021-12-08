@@ -63,6 +63,38 @@ Exciter::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Exciter::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_EXCITER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Exciter_Gain:
+            case Exciter_Harm_1:
+            case Exciter_Harm_2:
+            case Exciter_Harm_3:
+            case Exciter_Harm_4:
+            case Exciter_Harm_5:
+            case Exciter_Harm_6:
+            case Exciter_Harm_7:
+            case Exciter_Harm_8:
+            case Exciter_Harm_9:
+            case Exciter_Harm_10:
+            case Exciter_LPF:
+            case Exciter_HPF:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Exciter_HPF )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Effect output
  */
