@@ -31,6 +31,8 @@
 #include "EffectLFO.h"
 #include "Filter.h"
 
+#define WAHLV2_URI "https://github.com/Stazed/rakarrack-plus#wha"
+
 const int C_WAHWAH_PARAMETERS = 11;
 
 enum WahWah_Index
@@ -64,6 +66,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return WAHLV2_URI; };
 
 private:
     

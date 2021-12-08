@@ -150,6 +150,51 @@ WahWah::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+WahWah::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_WAHWAH_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case WahWah_LFO_Tempo:
+            case WahWah_LFO_Random:
+            case WahWah_LFO_Type:
+            case WahWah_LFO_Stereo:
+            case WahWah_Depth:
+            case WahWah_Sense:
+            case WahWah_ASI:
+            case WahWah_Smooth:
+            case WahWah_Mode:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  WahWah_Mode )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case WahWah_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( WahWah_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case WahWah_Pan:
+            {
+                s_buf += NTS( getpar( WahWah_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Parameter control
  */
