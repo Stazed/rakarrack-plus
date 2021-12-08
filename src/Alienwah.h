@@ -29,6 +29,8 @@
 #include "Effect.h"
 #include "EffectLFO.h"
 
+#define ALIENLV2_URI "https://github.com/Stazed/rakarrack-plus#awha"
+
 const int C_ALIENWAH_PARAMETERS = 11;
 
 enum AlienWah_Index
@@ -71,6 +73,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return ALIENLV2_URI; };
 
 private:
     

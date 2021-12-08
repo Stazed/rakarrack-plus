@@ -97,7 +97,7 @@
 //#define CHORUSLV2_URI "https://github.com/Stazed/rakarrack-plus#chor"
 //#define APHASELV2_URI "https://github.com/Stazed/rakarrack-plus#aphas"
 //#define PANLV2_URI "https://github.com/Stazed/rakarrack-plus#pan"
-#define ALIENLV2_URI "https://github.com/Stazed/rakarrack-plus#awha"
+//#define ALIENLV2_URI "https://github.com/Stazed/rakarrack-plus#awha"
 //#define HARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#har_no_mid"
 #define EXCITERLV2_URI "https://github.com/Stazed/rakarrack-plus#Exciter"
 //#define REVELV2_URI "https://github.com/Stazed/rakarrack-plus#reve"

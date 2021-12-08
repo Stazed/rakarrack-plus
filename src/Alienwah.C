@@ -154,6 +154,52 @@ Alienwah::lv2_update_params(uint32_t period)
     lfo->updateparams(period);
 }
 #endif // LV2
+
+void
+Alienwah::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_ALIENWAH_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Alien_LFO_Tempo:
+            case Alien_LFO_Random:
+            case Alien_LFO_Type:
+            case Alien_LFO_Stereo:
+            case Alien_Depth:
+            case Alien_Feedback:
+            case Alien_Delay:
+            case Alien_LR_Cross:
+            case Alien_Phase:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Alien_Phase )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Alien_DryWet: 
+            {
+                s_buf += NTS( Dry_Wet(getpar( Alien_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+            
+            // Offset
+            case Alien_Pan:
+            {
+                s_buf += NTS( getpar( Alien_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Parameter control
  */
