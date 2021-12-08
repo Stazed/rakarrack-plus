@@ -25,6 +25,8 @@
 
 #include "EQ.h"
 
+#define CABLV2_URI "https://github.com/Stazed/rakarrack-plus#cabe"
+
 /* Used for Gain and Preset setting */
 const int C_CABINET_PARAMETERS = 2;
 
@@ -51,6 +53,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return CABLV2_URI; };
 
 };
 

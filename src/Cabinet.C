@@ -203,3 +203,13 @@ Cabinet::lv2_update_params(uint32_t period)
     setpreset(Ppreset);
 }
 #endif // LV2
+
+void
+Cabinet::LV2_parameters(std::string &s_buf)
+{
+    // The parameters for gain and preset are reversed for LV2
+    s_buf += NTS( getpar( Cabinet_Gain ) - 64);
+    s_buf += ":";
+
+    s_buf += NTS( getpar( Cabinet_Preset_Idx ));
+}
