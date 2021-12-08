@@ -27,6 +27,8 @@
 
 #include "Effect.h"
 
+#define MDELLV2_URI "https://github.com/Stazed/rakarrack-plus#delm"
+
 const int C_MUSIC_PARAMETERS = 13;
 
 enum Music_Index
@@ -61,6 +63,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return MDELLV2_URI; };
 
 private:
 

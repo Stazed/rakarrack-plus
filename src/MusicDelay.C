@@ -122,6 +122,50 @@ MusicDelay::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+MusicDelay::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_MUSIC_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Music_LR_Cross:
+            case Music_Feedback_1:
+            case Music_Damp:
+            case Music_Feedback_2:
+            case Music_Tempo:
+            case Music_Gain_1:
+            case Music_Gain_2:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Music_Gain_2)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Music_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Music_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Music_Pan_1:
+            case Music_Pan_2:
+            {
+                s_buf += NTS( getpar( i ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Initialize the delays
  */
