@@ -151,6 +151,52 @@ Derelict::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Derelict::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_DERE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Dere_LR_Cross:
+            case Dere_Drive:
+            case Dere_Level:
+            case Dere_Type:
+            case Dere_Negate:
+            case Dere_LPF:
+            case Dere_HPF:
+            case Dere_Color:
+            case Dere_Prefilter:
+            case Dere_Suboctave:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Dere_Suboctave )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Dere_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Dere_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+            
+            // Offset
+            case Dere_Pan:
+            {
+                s_buf += NTS( getpar( Dere_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Derelict::initialize()
 {
     octoutl = (float *) malloc(sizeof (float) * PERIOD);
