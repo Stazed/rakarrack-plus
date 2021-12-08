@@ -161,6 +161,55 @@ DistBand::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+DistBand::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_DBAND_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case DistBand_LR_Cross:
+            case DistBand_Drive:
+            case DistBand_Level:
+            case DistBand_Type_Low:
+            case DistBand_Type_Mid:
+            case DistBand_Type_Hi:
+            case DistBand_Gain_Low:
+            case DistBand_Gain_Mid:
+            case DistBand_Gain_Hi:
+            case DistBand_Negate:
+            case DistBand_Cross_1:
+            case DistBand_Cross_2:
+            case DistBand_Stereo:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  DistBand_Stereo)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case DistBand_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( DistBand_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+            
+            // Offset
+            case DistBand_Pan:
+            {
+                s_buf += NTS( getpar( DistBand_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 DistBand::initialize()
 {
     lowl = (float *) malloc(sizeof (float) * PERIOD);
