@@ -25,6 +25,8 @@
 
 #include "EQ.h"
 
+#define EQPLV2_URI "https://github.com/Stazed/rakarrack-plus#eqp"
+
 const int C_PARAMETRIC_EQ_PARAMETERS = 10;
 
 enum ParametricEQ_Index
@@ -52,6 +54,9 @@ public:
     int get_number_efx_parameters () {return C_PARAMETRIC_EQ_PARAMETERS;};
     
     void initialize();
+
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return EQPLV2_URI; };
 
 private:
 

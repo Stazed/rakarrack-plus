@@ -41,6 +41,53 @@ ParametricEQ::initialize()
 }
 
 void
+ParametricEQ::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = Parametric_Gain;
+
+    for(int i = 0; i < C_PARAMETRIC_EQ_PARAMETERS; i++)
+    {
+        switch(param_case_offset)
+        {
+            case Parametric_Gain:
+            {
+                s_buf += NTS( getpar( Parametric_Gain ) - 64);
+                s_buf += ":";
+
+                // the subsequent parameters start at 0, we add one on break
+                param_case_offset = -1;
+            }
+            break;
+
+            case Parametric_Low_Freq:
+            case Parametric_Mid_Freq:
+            case Parametric_High_Freq:
+            {
+                s_buf += NTS( getpar( param_case_offset ) );
+                s_buf += ":";
+            }
+            break;
+                
+            case Parametric_Low_Gain:
+            case Parametric_Low_Q:
+            case Parametric_Mid_Gain:
+            case Parametric_Mid_Q:
+            case Parametric_High_Gain:
+            case Parametric_High_Q:
+            {
+                s_buf += NTS( getpar( param_case_offset ) - 64);
+
+                if ( param_case_offset !=  Parametric_High_Q)   // last one no need for delimiter
+                s_buf += ":";
+            }
+            break;
+        }
+        
+        param_case_offset++;
+    }
+}
+
+void
 ParametricEQ::setpreset(int npreset)
 {
     const int PRESET_SIZE = C_PARAMETRIC_EQ_PARAMETERS;

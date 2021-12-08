@@ -101,7 +101,7 @@
 //#define HARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#har_no_mid"
 //#define EXCITERLV2_URI "https://github.com/Stazed/rakarrack-plus#Exciter"
 //#define REVELV2_URI "https://github.com/Stazed/rakarrack-plus#reve"
-#define EQPLV2_URI "https://github.com/Stazed/rakarrack-plus#eqp"
+//#define EQPLV2_URI "https://github.com/Stazed/rakarrack-plus#eqp"
 #define CABLV2_URI "https://github.com/Stazed/rakarrack-plus#cabe"
 #define MDELLV2_URI "https://github.com/Stazed/rakarrack-plus#delm"
 #define WAHLV2_URI "https://github.com/Stazed/rakarrack-plus#wha"
