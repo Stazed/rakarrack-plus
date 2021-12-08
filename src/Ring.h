@@ -26,6 +26,8 @@
 
 #include "Effect.h"
 
+#define RINGLV2_URI "https://github.com/Stazed/rakarrack-plus#Ring"
+
 const int C_RING_PARAMETERS = 13;
 
 enum Ring_Index
@@ -61,6 +63,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return RINGLV2_URI; };
     
     void Create_Tables(float sample_rate);
 

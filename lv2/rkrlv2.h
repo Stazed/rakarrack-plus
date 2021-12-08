@@ -108,7 +108,7 @@
 //#define DERELV2_URI "https://github.com/Stazed/rakarrack-plus#dere"
 //#define VALVELV2_URI "https://github.com/Stazed/rakarrack-plus#Valve"
 //#define DFLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Dual_Flange"
-#define RINGLV2_URI "https://github.com/Stazed/rakarrack-plus#Ring"
+//#define RINGLV2_URI "https://github.com/Stazed/rakarrack-plus#Ring"
 #define DISTBANDLV2_URI "https://github.com/Stazed/rakarrack-plus#DistBand"
 #define ARPIELV2_URI "https://github.com/Stazed/rakarrack-plus#Arpie"
 //#define EXPANDLV2_URI "https://github.com/Stazed/rakarrack-plus#Expander"

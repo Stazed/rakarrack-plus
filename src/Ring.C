@@ -113,6 +113,47 @@ Ring::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Ring::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_RING_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Ring_Pan:
+            case Ring_LR_Cross:
+            case Ring_Level:
+            case Ring_Depth:
+            case Ring_Freq:
+            case Ring_Stereo:
+            case Ring_Sine:
+            case Ring_Triangle:
+            case Ring_Saw:
+            case Ring_Square:
+            case Ring_Input:
+            case Ring_Auto_Freq:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Ring_Auto_Freq )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+
+            // wet/dry -> dry/wet reversal
+            case Ring_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Ring_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Apply the filters
  */
