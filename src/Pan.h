@@ -27,6 +27,8 @@
 #include "Effect.h"
 #include "EffectLFO.h"
 
+#define PANLV2_URI "https://github.com/Stazed/rakarrack-plus#pan"
+
 const int C_PAN_PARAMETERS = 9;
 
 enum Pan_Index
@@ -58,6 +60,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return PANLV2_URI; };
 
 private:
     uint32_t PERIOD;

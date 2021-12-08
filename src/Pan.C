@@ -73,6 +73,49 @@ Pan::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Pan::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_PAN_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Pan_LFO_Tempo:
+            case Pan_LFO_Random:
+            case Pan_LFO_Type:
+            case Pan_LFO_Stereo:
+            case Pan_Ex_St_Amt:
+            case Pan_AutoPan:
+            case Pan_Enable_Extra:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Pan_Enable_Extra)   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Pan_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Pan_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Pan_Pan:
+            {
+                s_buf += NTS( getpar( Pan_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Pan::out(float *efxoutl, float *efxoutr)
 {
     if (PextraON)
