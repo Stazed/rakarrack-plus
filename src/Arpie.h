@@ -28,6 +28,8 @@
 #include "Effect.h"
 #include "global.h"
 
+#define ARPIELV2_URI "https://github.com/Stazed/rakarrack-plus#Arpie"
+
 const int C_ARPIE_PARAMETERS = 11;
 
 enum Arpie_Index
@@ -60,7 +62,9 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return ARPIELV2_URI; };
+    
 private:
     
     float fSAMPLE_RATE;

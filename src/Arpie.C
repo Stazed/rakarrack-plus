@@ -122,6 +122,51 @@ Arpie::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Arpie::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_ARPIE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Arpie_Tempo:
+            case Arpie_LR_Delay:
+            case Arpie_LR_Cross:
+            case Arpie_Feedback:
+            case Arpie_Damp:
+            case Arpie_ArpeWD:
+            case Arpie_Harm:
+            case Arpie_Pattern:
+            case Arpie_Subdivision:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Arpie_Subdivision )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Arpie_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Arpie_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+            
+            // Offset
+            case Arpie_Pan:
+            {
+                s_buf += NTS( getpar( Arpie_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Initialize the delays
  */
