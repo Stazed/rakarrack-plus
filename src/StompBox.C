@@ -158,6 +158,31 @@ StompBox::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+StompBox::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_STOMP_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Stomp_Level:
+            case Stomp_Tone:
+            case Stomp_Mid:
+            case Stomp_Bias:
+            case Stomp_Gain:
+            case Stomp_Mode:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Stomp_Mode )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 StompBox::initialize()
 {
     //left channel filters
