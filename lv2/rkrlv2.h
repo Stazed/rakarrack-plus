@@ -87,9 +87,6 @@
 #include"Convolotron.h"
 #include"ParametricEQ.h"
 
-#undef OLDRKRLV2    // comment this for original method
-//#define OLDRKRLV2  // use this for original
-
 #define RVBFILE_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile"
 #define DLYFILE_URI "https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile"
 #define SNDFILE_URI "https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile"
@@ -98,7 +95,7 @@ class MIDIConverter;    // forward declaration
 
 enum RKRLV2_ports_
 {
-    INL =0,
+    INL = 0,
     INR,
     OUTL,
     OUTR,
@@ -130,55 +127,55 @@ enum RKRLV2_ports_
 //just make sure these line up with the order in manifest.ttl
 enum RKRLV2_effects_
 {
-	IEQ =0,
-	ICOMP,
-	IDIST,
-	IECHO,
-	ICHORUS,
-	IAPHASE,
-	IHARM_NM,
-	IEXCITER,
-	IPAN,
-	IAWAH,
-	IREV,//10
-	IEQP,
-	ICAB,
-	IMDEL,
-	IWAH,
-	IDERE,
-	IVALVE,
-	IDFLANGE,
-	IRING,
-	IDISTBAND,
-	IARPIE,//20
-	IEXPAND,
-	ISHUFF,
-	ISYNTH,
-	IVBAND,
-	IMUTRO,
-	IECHOVERSE,
-	ICOIL,
-	ISHELF,
-	IVOC,
-	ISUS,//30
-	ISEQ,
-	ISHIFT,
-	ISTOMP,
-	IREVTRON,
-	IECHOTRON,
-	ISHARM_NM,
-	IMBCOMP,
-	IOPTTREM,
-	IVIBE,
-	IINF,//40
-	IPHASE,
-	IGATE,
-	IMIDIC,
-        ICONVO,
-        IFLANGE,
-        IOVERDRIVE,
-        IHARM,
-        ISTEREOHARM
+    IEQ = 0,
+    ICOMP,
+    IDIST,
+    IECHO,
+    ICHORUS,
+    IAPHASE,
+    IHARM_NM,
+    IEXCITER,
+    IPAN,
+    IAWAH,
+    IREV,//10
+    IEQP,
+    ICAB,
+    IMDEL,
+    IWAH,
+    IDERE,
+    IVALVE,
+    IDFLANGE,
+    IRING,
+    IDISTBAND,
+    IARPIE,//20
+    IEXPAND,
+    ISHUFF,
+    ISYNTH,
+    IVBAND,
+    IMUTRO,
+    IECHOVERSE,
+    ICOIL,
+    ISHELF,
+    IVOC,
+    ISUS,//30
+    ISEQ,
+    ISHIFT,
+    ISTOMP,
+    IREVTRON,
+    IECHOTRON,
+    ISHARM_NM,
+    IMBCOMP,
+    IOPTTREM,
+    IVIBE,
+    IINF,//40
+    IPHASE,
+    IGATE,
+    IMIDIC,
+    ICONVO,
+    IFLANGE,
+    IOVERDRIVE,
+    IHARM,
+    ISTEREOHARM
 };
 
 typedef struct _RKRLV2
@@ -191,11 +188,7 @@ typedef struct _RKRLV2
     uint8_t prev_bypass;
     float	*tmp_l;//temporary buffers for wet/dry mixing for hosts with shared in/out buffers(Ardour)
     float 	*tmp_r;
-    
-#ifdef OLDRKRLV2
-    RvbFile* rvbfile;//file for reverbtron
-    DlyFile* dlyfile;//file for echotron
-#endif
+
     //ports
     float *input_l_p;
     float *input_r_p;
