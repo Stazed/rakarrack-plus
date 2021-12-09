@@ -30,6 +30,7 @@
 #include "Resample.h"
 #include "mayer_fft.h"
 
+#define CONVOLOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Convolotron"
 
 const int C_CONVO_PARAMETERS = 11;
 

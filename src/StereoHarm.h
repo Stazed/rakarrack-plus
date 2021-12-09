@@ -31,6 +31,7 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
+#define STEROHARMLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm"
 #define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"
 
 const int C_SHARM_PARAMETERS = 12;

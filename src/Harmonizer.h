@@ -32,6 +32,7 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
+#define HARMLV2_URI "https://github.com/Stazed/rakarrack-plus#har"
 #define HARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#har_no_mid"
 
 const int C_HARM_PARAMETERS = 11;

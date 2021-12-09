@@ -31,6 +31,8 @@
 #include "delayline.h"
 #include "RBFilter.h"
 
+#define ECHOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Echotron"
+
 #define  ECHOTRON_F_SIZE   128       //Allow up to 150 points in the file
 #define  ECHOTRON_MAXFILTERS  32      //filters available
 

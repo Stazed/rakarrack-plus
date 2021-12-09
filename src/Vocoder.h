@@ -29,6 +29,8 @@
 #include "AnalogFilter.h"
 #include "Resample.h"
 
+#define VOCODERLV2_URI "https://github.com/Stazed/rakarrack-plus#Vocoder"
+
 const int C_VOCODER_PARAMETERS = 7;
 
 enum Vocoder_Index

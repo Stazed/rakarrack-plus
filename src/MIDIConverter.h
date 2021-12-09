@@ -18,6 +18,8 @@
 #include <complex.h>
 #include <fftw3.h>
 
+#define MIDICLV2_URI "https://github.com/Stazed/rakarrack-plus#midi_converter"
+
 const unsigned char  EVENT_NOTE_OFF         = 0x80;
 const unsigned char  EVENT_NOTE_ON          = 0x90;
 const unsigned char  NOTE_OFF_VELOCITY      = 64;

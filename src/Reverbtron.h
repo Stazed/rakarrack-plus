@@ -29,6 +29,8 @@
 #include "AnalogFilter.h"
 #include "Resample.h"
 
+#define REVTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron"
+
 const int C_REVTRON_PARAMETERS = 16;
 
 enum Revtron_Index
