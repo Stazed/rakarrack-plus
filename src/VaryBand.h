@@ -32,6 +32,8 @@
 #include "EffectLFO.h"
 #include "AnalogFilter.h"
 
+#define VARYBANDLV2_URI "https://github.com/Stazed/rakarrack-plus#VaryBand"
+
 /**
  * This is the Rakarrack-plus parameters number for presets and file saving
  * which does not use last four listed
@@ -72,6 +74,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return VARYBANDLV2_URI; };
     
     void initialize ();
     void clear_initialize();

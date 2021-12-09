@@ -155,6 +155,59 @@ VaryBand::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+VaryBand::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = 0;
+    for(int i = 0; i < (C_VARYBAND_PARAMETERS + 3); i++)    // +3 for the 4 LV2 parameters added - 1 for legacy pcombi
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case VaryBand_LFO_Tempo_1:
+            case VaryBand_LFO_Type_1:
+            case VaryBand_LFO_Stereo_1:
+            case VaryBand_LFO_Tempo_2:
+            case VaryBand_LFO_Type_2:
+            case VaryBand_LFO_Stereo_2:
+            case VaryBand_Cross_1:
+            case VaryBand_Cross_2:
+            case VaryBand_Low_Band:
+            case VaryBand_Mid_Band_1:
+            case VaryBand_Mid_Band_2:
+            case VaryBand_High_Band:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
+
+                if ( param_case_offset !=  VaryBand_High_Band )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case VaryBand_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( VaryBand_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Skip after
+            case VaryBand_Cross_3:
+            {
+                s_buf += NTS( getpar( VaryBand_Cross_3 ) );
+                s_buf += ":";
+ 
+                param_case_offset++;    // skip VaryBand_Combination (legacy)
+            }
+            break;
+        }
+
+        param_case_offset++;
+    }
+}
+
+void
 VaryBand::initialize()
 {
     lowl = (float *) malloc(sizeof (float) * PERIOD);
