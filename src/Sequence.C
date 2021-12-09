@@ -197,6 +197,55 @@ Sequence::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Sequence::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_SEQUENCE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Sequence_Step_1:
+            case Sequence_Step_2:
+            case Sequence_Step_3:
+            case Sequence_Step_4:
+            case Sequence_Step_5:
+            case Sequence_Step_6:
+            case Sequence_Step_7:
+            case Sequence_Step_8:
+            case Sequence_Tempo:
+            case Sequence_Amp:
+            case Sequence_Stdf:
+            case Sequence_Mode:
+            case Sequence_Range:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Sequence_Range )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Sequence_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Sequence_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Sequence_Resonance:
+            {
+                s_buf += NTS( getpar( Sequence_Resonance ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Sequence::initialize()
 {
     templ = (float *) malloc(sizeof (float) * PERIOD);
