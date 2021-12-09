@@ -91,6 +91,39 @@ Opticaltrem::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Opticaltrem::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_OPTICAL_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Optical_Depth:
+            case Optical_LFO_Tempo:
+            case Optical_LFO_Random:
+            case Optical_LFO_Type:
+            case Optical_LFO_Stereo:
+            case Optical_Invert:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Optical_Invert )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Optical_Pan:
+            {
+                s_buf += NTS( getpar( Optical_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Opticaltrem::out(float *efxoutl, float *efxoutr)
 {
     float lfol, lfor;
