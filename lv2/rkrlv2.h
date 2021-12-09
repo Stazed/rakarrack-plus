@@ -131,7 +131,7 @@
 //#define OPTTREMLV2_URI "https://github.com/Stazed/rakarrack-plus#Otrem"
 //#define VIBELV2_URI "https://github.com/Stazed/rakarrack-plus#Vibe"
 //#define INFLV2_URI "https://github.com/Stazed/rakarrack-plus#Infinity"
-#define PHASELV2_URI "https://github.com/Stazed/rakarrack-plus#phas"
+//#define PHASELV2_URI "https://github.com/Stazed/rakarrack-plus#phas"
 #define GATELV2_URI "https://github.com/Stazed/rakarrack-plus#gate"
 #define MIDICLV2_URI "https://github.com/Stazed/rakarrack-plus#midi_converter"
 #define CONVOLOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Convolotron"

@@ -182,6 +182,52 @@ Phaser::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Phaser::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_PHASER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Phaser_LFO_Tempo:
+            case Phaser_LFO_Random:
+            case Phaser_LFO_Type:
+            case Phaser_LFO_Stereo:
+            case Phaser_Depth:
+            case Phaser_Feedback:
+            case Phaser_Stages:
+            case Phaser_Subtract:
+            case Phaser_Phase:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Phaser_Phase )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Phaser_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Phaser_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Phaser_Pan:
+            case Phaser_LR_Cross:
+            {
+                s_buf += NTS( getpar( i ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Parameter control
  */

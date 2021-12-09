@@ -28,6 +28,8 @@
 #include "Effect.h"
 #include "EffectLFO.h"
 
+#define PHASELV2_URI "https://github.com/Stazed/rakarrack-plus#phas"
+
 const int C_PHASER_PARAMETERS = 12;
 
 enum Phaser_Index
@@ -61,6 +63,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return PHASELV2_URI; };
 
 private:
     void setvolume (int _Pvolume);
