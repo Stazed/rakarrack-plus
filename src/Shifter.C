@@ -144,6 +144,51 @@ Shifter::lv2_update_params(uint32_t period)
     }
 }
 #endif // LV2
+
+void
+Shifter::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_SHIFTER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Shifter_Attack:
+            case Shifter_Decay:
+            case Shifter_Threshold:
+            case Shifter_Interval:
+            case Shifter_Shift:
+            case Shifter_Mode:
+            case Shifter_Whammy:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Shifter_Whammy )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Shifter_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Shifter_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Shifter_Pan:
+            case Shifter_Gain:
+            {
+                s_buf += NTS( getpar( i ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 void
 Shifter::initialize()
 {

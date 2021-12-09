@@ -29,6 +29,8 @@
 #include "smbPitchShift.h"
 #include "Resample.h"
 
+#define SHIFTERLV2_URI "https://github.com/Stazed/rakarrack-plus#Shifter"
+
 
 #define IDLE 0
 #define UP   1
@@ -67,6 +69,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return SHIFTERLV2_URI; };
     
     void initialize();
     void clear_initialize();
