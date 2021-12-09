@@ -29,6 +29,8 @@
 #include "Effect.h"
 #include "EffectLFO.h"
 
+#define VIBELV2_URI "https://github.com/Stazed/rakarrack-plus#Vibe"
+
 //#define VIBE_INLINE 1     // uncomment for inline
 
 const int C_VIBE_PARAMETERS = 11;
@@ -68,6 +70,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return VIBELV2_URI; };
 
 private:
     

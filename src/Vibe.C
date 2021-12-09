@@ -147,6 +147,51 @@ Vibe::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Vibe::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_VIBE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Vibe_Width:
+            case Vibe_LFO_Tempo:
+            case Vibe_LFO_Random:
+            case Vibe_LFO_Type:
+            case Vibe_LFO_Stereo:
+            case Vibe_Depth:
+            case Vibe_LR_Cross:
+            case Vibe_Stereo:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Vibe_Stereo )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Vibe_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Vibe_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Vibe_Pan:
+            case Vibe_Feedback:
+            {
+                s_buf += NTS( getpar( i ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Vibe::out(float *efxoutl, float *efxoutr)
 {
     float cvolt, ocvolt, evolt, input;
