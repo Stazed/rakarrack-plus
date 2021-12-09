@@ -634,17 +634,47 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
         chooser_start_location = m_process->Config.UDirFilename;
     }
 
-    char *filename;
+    // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
+    m_process->Shut_Off_Below_Mouse = 1;
+
+    switch ( fl_choice("Export type", "Cancel", "Rakarrack+", "Non-Mixer") )
+    {
+        case 0: return;
+            break;
+
+        case 1:  // Default
+        {
+            char *filename;
 
 #define EXT ".rkr"
-    filename = fl_file_chooser("Export Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
-    if (filename == NULL)
-        return;
+            filename = fl_file_chooser("Export Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            if (filename == NULL)
+                return;
 
-    filename = fl_filename_setext(filename,EXT);
+            filename = fl_filename_setext(filename,EXT);
+#undef EXT
+            m_process->save_preset(filename);
+        }
+        break;
+
+        case 2:
+        {
+            char *filename;
+
+#define EXT ".strip"
+            filename = fl_file_chooser("Export Non-Mixer:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            if (filename == NULL)
+                return;
+
+            filename = fl_filename_setext(filename,EXT);
 #undef EXT
 
-    m_process->save_preset(filename);
+            m_process->export_to_nsm_mixer(filename);
+        }
+        break;
+    }
+
+    m_process->Shut_Off_Below_Mouse = 0;
 }
 void RKRGUI::cb_export_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_export_preset_i(o,v);

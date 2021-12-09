@@ -336,8 +336,8 @@ widget gets the focus.} private local
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif} open selected
-      xywh {152 338 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+\#endif} open
+      xywh {279 284 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1352,7 +1352,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
           class RKR_Box
         }
       }
-      Fl_Group Presets {open
+      Fl_Group Presets {
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1439,17 +1439,47 @@ Put_Loaded();}
         chooser_start_location = m_process->Config.UDirFilename;
     }
 
-    char *filename;
+    // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
+    m_process->Shut_Off_Below_Mouse = 1;
+
+    switch ( fl_choice("Export type", "Cancel", "Rakarrack+", "Non-Mixer") )
+    {
+        case 0: return;
+            break;
+
+        case 1:  // Default
+        {
+            char *filename;
 
 \#define EXT ".rkr"
-    filename = fl_file_chooser("Export Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
-    if (filename == NULL)
-        return;
+            filename = fl_file_chooser("Export Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            if (filename == NULL)
+                return;
 
-    filename = fl_filename_setext(filename,EXT);
+            filename = fl_filename_setext(filename,EXT);
+\#undef EXT
+            m_process->save_preset(filename);
+        }
+        break;
+
+        case 2:
+        {
+            char *filename;
+
+\#define EXT ".strip"
+            filename = fl_file_chooser("Export Non-Mixer:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            if (filename == NULL)
+                return;
+
+            filename = fl_filename_setext(filename,EXT);
 \#undef EXT
 
-    m_process->save_preset(filename);}
+            m_process->export_to_nsm_mixer(filename);
+        }
+        break;
+    }
+
+    m_process->Shut_Off_Below_Mouse = 0;} selected
           tooltip {Export preset to file, *.rkr type - Shortcut 'E'} xywh {306 50 64 18} shortcut 0x65 color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
