@@ -159,6 +159,46 @@ CompBand::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+CompBand::LV2_parameters(std::string &s_buf)
+{
+    for(int i; i < C_COMPBAND_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case CompBand_Low_Ratio:
+            case CompBand_Mid_1_Ratio:
+            case CompBand_Mid_2_Ratio:
+            case CompBand_High_Ratio:
+            case CompBand_Low_Thresh:
+            case CompBand_Mid_1_Thresh:
+            case CompBand_Mid_2_Thresh:
+            case CompBand_High_Thresh:
+            case CompBand_Cross_1:
+            case CompBand_Cross_2:
+            case CompBand_Cross_3:
+            case CompBand_Gain:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  CompBand_Gain )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case CompBand_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( CompBand_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 CompBand::initialize()
 {
     lowl = (float *) malloc(sizeof (float) * PERIOD);
