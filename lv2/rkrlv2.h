@@ -118,7 +118,7 @@
 //#define MUTROLV2_URI "https://github.com/Stazed/rakarrack-plus#MuTroMojo"
 //#define ECHOVERSELV2_URI "https://github.com/Stazed/rakarrack-plus#Echoverse"
 //#define COILLV2_URI "https://github.com/Stazed/rakarrack-plus#CoilCrafter"
-#define SHELFLV2_URI "https://github.com/Stazed/rakarrack-plus#ShelfBoost"
+//#define SHELFLV2_URI "https://github.com/Stazed/rakarrack-plus#ShelfBoost"
 #define VOCODERLV2_URI "https://github.com/Stazed/rakarrack-plus#Vocoder"
 #define SUSTAINLV2_URI "https://github.com/Stazed/rakarrack-plus#Sustainer"
 #define SEQUENCELV2_URI "https://github.com/Stazed/rakarrack-plus#Sequence"

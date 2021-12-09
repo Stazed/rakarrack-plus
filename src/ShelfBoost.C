@@ -82,6 +82,30 @@ ShelfBoost::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+ShelfBoost::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_SHELF_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Shelf_Gain:
+            case Shelf_Presence:
+            case Shelf_Tone:
+            case Shelf_Stereo:
+            case Shelf_Level:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Shelf_Level )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 ShelfBoost::initialize()
 {
     interpbuf = new float[PERIOD];
