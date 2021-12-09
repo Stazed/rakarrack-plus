@@ -274,7 +274,7 @@ Chorus::LV2_parameters(std::string &s_buf)
             {
                 s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Chorus_Intense)   // last one no need for delimiter
+                if ( param_case_offset !=  Chorus_Intense )   // last one no need for delimiter
                     s_buf += ":";
             }
             break;

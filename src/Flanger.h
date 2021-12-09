@@ -34,6 +34,8 @@
 
 #include "Chorus.h"
 
+#define FLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Flange"
+
 const int C_FLANGER_PARAMETERS = 13;
 
 enum Flanger_Index
@@ -59,6 +61,9 @@ public:
     Flanger(double sample_rate, uint32_t intermediate_bufsize);
     void setpreset (int npreset);
     int get_number_efx_parameters () {return C_FLANGER_PARAMETERS;};
+
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return FLANGELV2_URI; };
 
 private:
 

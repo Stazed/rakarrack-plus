@@ -72,6 +72,61 @@ Flanger::setpreset(int npreset)
     Ppreset = npreset;
 }
 
+void
+Flanger::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = 0;
+    
+    for(int i = 0; i < (C_FLANGER_PARAMETERS - 1); i++) // -1 skip Flanger_SKIP_Flange_10
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Flanger_LFO_Tempo:
+            case Flanger_LFO_Random:
+            case Flanger_LFO_Type:
+            case Flanger_LFO_Stereo:
+            case Flanger_Depth:
+            case Flanger_Delay:
+            case Flanger_Feedback:
+            case Flanger_Subtract:
+            case Flanger_Intense:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
 
+                if ( param_case_offset !=  Flanger_Intense )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Flanger_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Flanger_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+            
+            // Offset
+            case Flanger_Pan:
+            {
+                s_buf += NTS( getpar( Flanger_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+            
+            // Skip after this one
+            case Flanger_LR_Cross:
+            {
+                s_buf += NTS( getpar( Flanger_LR_Cross ) );
+                s_buf += ":";
 
-
+                // increment for skipped parameter
+                param_case_offset++;
+            }
+            break;
+        }
+        param_case_offset++;
+    }
+}
