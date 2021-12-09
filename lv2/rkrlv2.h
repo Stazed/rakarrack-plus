@@ -120,7 +120,7 @@
 //#define COILLV2_URI "https://github.com/Stazed/rakarrack-plus#CoilCrafter"
 //#define SHELFLV2_URI "https://github.com/Stazed/rakarrack-plus#ShelfBoost"
 #define VOCODERLV2_URI "https://github.com/Stazed/rakarrack-plus#Vocoder"
-#define SUSTAINLV2_URI "https://github.com/Stazed/rakarrack-plus#Sustainer"
+//#define SUSTAINLV2_URI "https://github.com/Stazed/rakarrack-plus#Sustainer"
 #define SEQUENCELV2_URI "https://github.com/Stazed/rakarrack-plus#Sequence"
 #define SHIFTERLV2_URI "https://github.com/Stazed/rakarrack-plus#Shifter"
 #define STOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#StompBox"

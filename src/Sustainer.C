@@ -86,6 +86,27 @@ Sustainer::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Sustainer::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_SUSTAIN_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Sustain_Gain:
+            case Sustain_Sustain:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Sustain_Sustain )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Effect output
  */

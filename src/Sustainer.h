@@ -25,6 +25,8 @@
 
 #include "Effect.h"
 
+#define SUSTAINLV2_URI "https://github.com/Stazed/rakarrack-plus#Sustainer"
+
 const int C_SUSTAIN_PARAMETERS = 2;
 
 enum Sustain_Index
@@ -44,6 +46,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return SUSTAINLV2_URI; };
     
     void out (float * efxoutl, float * efxoutr);
     void Dry_Wet_Mix(int NumEffect, float volume,
