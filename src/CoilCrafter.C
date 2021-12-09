@@ -134,6 +134,46 @@ CoilCrafter::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+CoilCrafter::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = 0;
+    
+    for(int i = 0; i < (C_COIL_PARAMETERS - 2); i++)    // -2  Coil_Origin, Coil_Destiny skipped
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Coil_Freq_1:
+            case Coil_Q_1:
+            case Coil_Freq_2:
+            case Coil_Q_2:
+            case Coil_Tone:
+            case Coil_NeckMode:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
+
+                if ( param_case_offset !=  Coil_NeckMode )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            //  Coil_Origin, Coil_Destiny, are skipped after gain
+            case Coil_Gain:
+            {
+                s_buf += NTS( getpar( Coil_Gain ) );
+                s_buf += ":";
+
+                // skip Coil_Origin, Coil_Destiny
+                param_case_offset += 2;
+            }
+            break;
+        }
+        
+        param_case_offset++;
+    }
+}
+
 /*
  * Effect output
  */
