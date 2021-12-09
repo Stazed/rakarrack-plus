@@ -33,6 +33,8 @@
 #include "Effect.h"
 #include "EffectLFO.h"
 
+#define SYNTHLV2_URI "https://github.com/Stazed/rakarrack-plus#Synthfilter"
+
 const int C_SYNTHFILTER_PARAMETERS = 16;
 
 enum Synthfilter_Index
@@ -70,6 +72,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return SYNTHLV2_URI; };
 
 private:
 

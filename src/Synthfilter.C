@@ -283,6 +283,49 @@ Synthfilter::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Synthfilter::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Synthfilter_Distort:
+            case Synthfilter_LFO_Tempo:
+            case Synthfilter_LFO_Random:
+            case Synthfilter_LFO_Type:
+            case Synthfilter_LFO_Stereo:
+            case Synthfilter_Width:
+            case Synthfilter_Feedback:
+            case Synthfilter_LPF_Stages:
+            case Synthfilter_HPF_Stages:
+            case Synthfilter_Subtract:
+            case Synthfilter_Depth:
+            case Synthfilter_Env_Sens:
+            case Synthfilter_Attack:
+            case Synthfilter_Release:
+            case Synthfilter_Offset:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Synthfilter_Offset )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Synthfilter_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Synthfilter_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Parameter control
  */
