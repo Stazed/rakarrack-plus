@@ -29,6 +29,8 @@
 #include "Effect.h"
 #include "AnalogFilter.h"
 
+#define SHUFFLELV2_URI "https://github.com/Stazed/rakarrack-plus#Shuffle"
+
 const int C_SHUFFLE_PARAMETERS = 11;
 
 enum Shuffle_Index
@@ -62,6 +64,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return SHUFFLELV2_URI; };
     
     void initialize();
     void clear_initialize();

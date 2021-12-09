@@ -109,6 +109,44 @@ Shuffle::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Shuffle::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_SHUFFLE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Shuffle_Gain_L:
+            case Shuffle_Gain_ML:
+            case Shuffle_Gain_MH:
+            case Shuffle_Gain_H:
+            case Shuffle_Freq_L:
+            case Shuffle_Freq_ML:
+            case Shuffle_Freq_MH:
+            case Shuffle_Freq_H:
+            case Shuffle_Width:
+            case Shuffle_F_Band:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Shuffle_F_Band )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Shuffle_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Shuffle_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Shuffle::initialize()
 {
     inputl = (float *) malloc(sizeof (float) * PERIOD);
