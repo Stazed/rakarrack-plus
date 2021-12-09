@@ -288,7 +288,53 @@ Infinity::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
-void Infinity::initialize()
+void
+Infinity::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_INFINITY_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Infinity_Band_1:
+            case Infinity_Band_2:
+            case Infinity_Band_3:
+            case Infinity_Band_4:
+            case Infinity_Band_5:
+            case Infinity_Band_6:
+            case Infinity_Band_7:
+            case Infinity_Band_8:
+            case Infinity_Resonance:
+            case Infinity_Start:
+            case Infinity_End:
+            case Infinity_Tempo:
+            case Infinity_LR_Delay:
+            case Infinity_Subdivision:
+            case Infinity_AutoPan:
+            case Infinity_Reverse:
+            case Infinity_Stages:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Infinity_Stages )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Infinity_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Infinity_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
+Infinity::initialize()
 {
     interpbuf = new float[PERIOD];
     
@@ -313,7 +359,8 @@ void Infinity::initialize()
     }
 }
 
-void Infinity::clear_initialize()
+void
+Infinity::clear_initialize()
 {
     delete[] interpbuf;
     
