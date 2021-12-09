@@ -106,6 +106,50 @@ Echoverse::lv2_update_params(uint32_t period)
 }
 #endif // LV2
 
+void
+Echoverse::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Echoverse_Tempo:
+            case Echoverse_LR_Delay:
+            case Echoverse_Feedback:
+            case Echoverse_Damp:
+            case Echoverse_Reverse:
+            case Echoverse_Subdivision:
+            case Echoverse_Ext_Stereo:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Echoverse_Ext_Stereo )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Echoverse_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Echoverse_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Echoverse_Pan:
+            case Echoverse_Angle:
+            {
+                s_buf += NTS( getpar( i ) - 64);
+                s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
 /*
  * Initialize the delays
  */
