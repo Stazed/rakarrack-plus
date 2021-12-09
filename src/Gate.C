@@ -96,6 +96,32 @@ Gate::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Gate::LV2_parameters(std::string &s_buf)
+{
+    for(int i = 0; i < C_GATE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Gate_Threshold:
+            case Gate_Range:
+            case Gate_Attack:
+            case Gate_Release:
+            case Gate_LPF:
+            case Gate_HPF:
+            case Gate_Hold:
+            {
+                s_buf += NTS( getpar( i ));
+
+                if ( i !=  Gate_Hold )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+        }
+    }
+}
+
+void
 Gate::initialize()
 {
     interpbuf = new float[PERIOD];

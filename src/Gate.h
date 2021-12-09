@@ -33,6 +33,8 @@
 #include "Effect.h"
 #include "AnalogFilter.h"
 
+#define GATELV2_URI "https://github.com/Stazed/rakarrack-plus#gate"
+
 const int C_GATE_PARAMETERS = 7;
 
 enum Gate_Index
@@ -66,6 +68,8 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf);
+    virtual std::string get_URI() { return GATELV2_URI; };
     
     void initialize();
     void clear_initialize();
