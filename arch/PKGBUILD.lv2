@@ -11,7 +11,7 @@ license=('GPL3')
 depends=('alsa-utils' 'fftw' 'fltk' 'jack' 'libxpm' 'lv2' 'liblo')
 makedepends=('git' 'cmake')
 provides=("${pkgname}")
-conflicts=("${pkgname}")
+conflicts=("${pkgname}" 'rakarrack-plus-ALL')
 
 source=("git+${url}.git#branch=master")
 sha256sums=('SKIP')
