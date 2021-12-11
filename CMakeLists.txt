@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.1)
 project (rakarrack-plus)
 
-set (PACKAGE_VERSION "1.1.1")
+set (PACKAGE_VERSION "1.1.2")
 
 set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
 
