@@ -60,7 +60,7 @@ RKR::Message(int prio, std::string labelwin, std::string message_text)
 };
 
 void
-RKR::Handle_Message(int num, std::string filename)
+RKR::Handle_Message(int num, std::string strMessage)
 {
     // Flag to indicate message severity.
     // 1 = always show, even if messages are turned off in settings.
@@ -117,25 +117,25 @@ RKR::Handle_Message(int num, std::string filename)
             sprintf(error_msg, "%s", "Some Stages parameter bad in the .dly file");
             break;
         case 14:
-            sprintf(error_msg, "Error loading file %s", filename.c_str());
+            sprintf(error_msg, "Error loading file %s", strMessage.c_str());
             break;
         case 15:
-            sprintf(error_msg, "Error loading file Order %s", filename.c_str());
+            sprintf(error_msg, "Error loading file Order %s", strMessage.c_str());
             break;
         case 16:
-            sprintf(error_msg, "Error loading file Version %s", filename.c_str());
+            sprintf(error_msg, "Error loading file Version %s", strMessage.c_str());
             break;
         case 17:
-            sprintf(error_msg, "Error loading file Author %s", filename.c_str());
+            sprintf(error_msg, "Error loading file Author %s", strMessage.c_str());
             break;
         case 18:
-            sprintf(error_msg, "Error loading file Preset Name %s", filename.c_str());
+            sprintf(error_msg, "Error loading file Preset Name %s", strMessage.c_str());
             break;
         case 19:
-            sprintf(error_msg, "Error loading file General %s", filename.c_str());
+            sprintf(error_msg, "Error loading file General %s", strMessage.c_str());
             break;
         case 20:
-            sprintf(error_msg, "Error loading file MIDI %s", filename.c_str());
+            sprintf(error_msg, "Error loading file MIDI %s", strMessage.c_str());
             break;
         case 21:
             sprintf(error_msg, "%s", "fread error in load_names()");
@@ -144,7 +144,7 @@ RKR::Handle_Message(int num, std::string filename)
             sprintf(error_msg, "%s", "fread error in load_bank()");
             break;
         case 23:
-            sprintf(error_msg, "Error reading file %s", filename.c_str());
+            sprintf(error_msg, "Error reading file %s", strMessage.c_str());
             break;
         case 24:
             sprintf(error_msg, "%s", "Error running rakconvert!");
@@ -159,7 +159,7 @@ RKR::Handle_Message(int num, std::string filename)
             sprintf(error_msg, "%s", "Error merging internal presets!");
             break;
         case 28:
-            sprintf(error_msg, "fread error in add_bank_item() %s", filename.c_str());
+            sprintf(error_msg, "fread error in add_bank_item() %s", strMessage.c_str());
             break;
         case 29:
             sprintf(error_msg, "%s", "Error running aconnect!");
@@ -203,7 +203,7 @@ RKR::Handle_Message(int num, std::string filename)
         case 40:
             sprintf(error_msg, "Bank file cannot be found in user directory %s\n\n"
                     "All user banks must be put in the user directory set in:\n"
-                    "Settings/Preferences/User - User Directory", filename.c_str());
+                    "Settings/Preferences/User - User Directory", strMessage.c_str());
             break;
         case 41:
             sprintf(error_msg,"User Directory is not set!\n\n"
@@ -213,51 +213,51 @@ RKR::Handle_Message(int num, std::string filename)
         case 42:
             sprintf(error_msg, "MIDI program file cannot be found in user directory:\n%s\n\n"
                     "All MIDI program files should be put in the user directory set in:\n"
-                    "Settings/Preferences/User - User Directory", filename.c_str());
+                    "Settings/Preferences/User - User Directory", strMessage.c_str());
             break;
         case 43:
         {
             Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
-            filename =  Efx_Convolotron->Filename;
+            strMessage =  Efx_Convolotron->Filename;
             sprintf(error_msg, "Convolotron user file cannot be found in user directory:\n%s\n\n"
                 "All user files must be put in the user directory set in:\n"
-                "Settings/Preferences/User - User Directory", filename.c_str());
+                "Settings/Preferences/User - User Directory", strMessage.c_str());
         }
             break;
         case 44:
         {
             Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
-            filename =  Efx_Echotron->Filename;
+            strMessage =  Efx_Echotron->Filename;
             sprintf(error_msg, "Echotron user file cannot be found in user directory:\n%s\n\n"
                 "All user files must be put in the user directory set in:\n"
-                "Settings/Preferences/User - User Directory", filename.c_str());
+                "Settings/Preferences/User - User Directory", strMessage.c_str());
         }
             break;
         case 45:
         {
             Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
-            filename =  Efx_Reverbtron->Filename;
+            strMessage =  Efx_Reverbtron->Filename;
             sprintf(error_msg, "Reverbtron user file cannot be found in user directory:\n%s\n\n"
                 "All user files must be put in the user directory set in:\n"
-                "Settings/Preferences/User - User Directory", filename.c_str());
+                "Settings/Preferences/User - User Directory", strMessage.c_str());
         }
             break;
         case 46:
         {
             sprintf(error_msg, "Cannot access User Directory at:\n%s\n"
                     "Do you have permission?\n"
-                    "Is the User Directory a valid read/write folder?", filename.c_str());
+                    "Is the User Directory a valid read/write folder?", strMessage.c_str());
         }
             break;
         case 47:
         {
             sprintf(error_msg, "Cannot access DATA Directory at:\n%s\n"
-                    "You must install Rakarrack-plus to access default preset banks.\n", filename.c_str());
+                    "You must install Rakarrack-plus to access default preset banks.\n", strMessage.c_str());
         }
             break;
         case 48:
         {
-            int effect_number = atoi( filename.c_str() );
+            int effect_number = atoi( strMessage.c_str() );
             std::string effect_name = "";
             
             switch(effect_number)
