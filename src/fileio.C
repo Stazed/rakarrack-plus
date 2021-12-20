@@ -343,8 +343,12 @@ RKR::export_to_nsm_mixer(std::string filename)
             continue;
 
         // Not supported by non-mixer
-        if(effect == EFX_CONVOLOTRON || effect == EFX_REVERBTRON || effect == EFX_ECHOTRON)
+        if(effect == EFX_CONVOLOTRON || effect == EFX_REVERBTRON || effect == EFX_ECHOTRON
+           || effect == EFX_VOCODER || effect == EFX_LOOPER)
+        {
+            Handle_Message(48, NTS(effect));
             continue;
+        }
 
         s_buf.clear();
 

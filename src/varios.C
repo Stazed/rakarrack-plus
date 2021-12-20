@@ -254,7 +254,35 @@ RKR::Handle_Message(int num, std::string filename)
             sprintf(error_msg, "Cannot access DATA Directory at:\n%s\n"
                     "You must install Rakarrack-plus to access default preset banks.\n", filename.c_str());
         }
-        break;
+            break;
+        case 48:
+        {
+            int effect_number = atoi( filename.c_str() );
+            std::string effect_name = "";
+            
+            switch(effect_number)
+            {
+            case EFX_ECHOTRON:
+                effect_name = "Echotron";
+                break;
+            case EFX_CONVOLOTRON:
+                effect_name = "Convolotron";
+                break;
+            case EFX_REVERBTRON:
+                effect_name = "Reverbtron";
+                break;
+            case EFX_LOOPER:
+                effect_name = "Looper";
+                break;
+            case EFX_VOCODER:
+                effect_name = "Vocoder";
+                break;
+            }
+            
+            sprintf(error_msg, "Non-mixer does not support %s plugin type.\n"
+                    "It will be ignored on export...\n", effect_name.c_str());
+        }
+            break;
     }
 
     Message(message_type, meslabel, error_msg);
