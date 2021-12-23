@@ -517,6 +517,9 @@ Reverbtron::loadfile(char* filename)
 
     if ((fs = fopen(filename, "r")) == NULL)
     {
+#ifdef LV2_SUPPORT
+        fprintf(stderr, "Reverbtron - file open error %s\n", filename);
+#endif
         f = loaddefault();
         error = 2;
         return (f);

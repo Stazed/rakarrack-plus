@@ -580,15 +580,13 @@ Echotron::loadfile(char* Filename)
     // Set Taps (Plength) to lessor of fLength or 127
     Plength = f.fLength > 127 ? 127 : f.fLength;
 
-
-#ifdef LV2_SUPPORT
-    // what to do here - FIXME how does lv2 handle file errors?
-#else
     if(error)
     {
+#ifdef LV2_SUPPORT
+    fprintf(stderr, "Echotron file loading error #%d - %s\n", error, Filename);
+#endif
         return loaddefault();
-    }
-#endif     
+    }    
 
     return f;
 }

@@ -407,7 +407,7 @@ Convolotron::setfile(int value)
         }
     }
 #endif
-    
+
 
     //    printf("Convolotron Filename %s: value %d: Filenum %d\n",Filename, value,Filenum);
     sfinfo.format = 0;
@@ -418,7 +418,7 @@ Convolotron::setfile(int value)
         rbuf[0] = 1.0f;
         process_rbuf();
 #ifdef LV2_SUPPORT
-        // FIXME
+        fprintf(stderr, "Convolotron - cannot open file = %s\n", Filename);
 #else
         global_error_number = 1;
 #endif
