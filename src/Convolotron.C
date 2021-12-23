@@ -472,8 +472,15 @@ Convolotron::process_rbuf()
     float a2 = 0.5 * alpha;
     int N = length;
     int N2 = length / 2;
-    float Nm1p = D_PI / ((float) (N - 1));
-    float Nm1pp = 4.0f * PI / ((float) (N - 1));
+    float Nm1p = 0.0;
+    float Nm1pp = 0.0;
+    
+    // if length == 1 == N because of failure to load file, then we get divide by 0
+    if ( N != 1 )
+    {
+        Nm1p = D_PI / ((float) (N - 1));
+        Nm1pp = 4.0f * PI / ((float) (N - 1));
+    }
 
     float tailfader;    // initialize o.k.
     for (int ii = 0; ii < length; ii++)
