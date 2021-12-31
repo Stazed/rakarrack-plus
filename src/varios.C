@@ -262,15 +262,6 @@ RKR::Handle_Message(int num, std::string strMessage)
             
             switch(effect_number)
             {
-            case EFX_ECHOTRON:
-                effect_name = "Echotron";
-                break;
-            case EFX_CONVOLOTRON:
-                effect_name = "Convolotron";
-                break;
-            case EFX_REVERBTRON:
-                effect_name = "Reverbtron";
-                break;
             case EFX_LOOPER:
                 effect_name = "Looper";
                 break;

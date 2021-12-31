@@ -154,6 +154,78 @@ Echotron::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Echotron::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = 0;
+    for(int i = 0; i < (C_ECHOTRON_PARAMETERS - 2); i++)    // -2 for skip user file and set file
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Echotron_LFO_Width:
+            case Echotron_Tempo:
+            case Echotron_Damp:
+            case Echotron_LFO_Stereo:
+            case Echotron_Feedback:
+            case Echotron_Mod_Delay:
+            case Echotron_Mod_Filter:
+            case Echotron_LFO_Type:
+            case Echotron_Filters:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
+
+                if ( param_case_offset !=  Echotron_Filters )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+            
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Echotron_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Echotron_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Echotron_Depth:
+            case Echotron_Pan:
+            {
+                s_buf += NTS( getpar( param_case_offset ) - 64);
+                s_buf += ":";
+            }
+            break;
+
+            // Skip user file
+            case Echotron_Taps:
+            {
+                s_buf += NTS( getpar( Echotron_Taps ) );
+                s_buf += ":";
+
+                param_case_offset++;    // skip user file
+            }
+            break;
+            
+            // Offset & skip Set file
+            case Echotron_LR_Cross:
+            {
+                s_buf += NTS( getpar( Echotron_LR_Cross ) - 64);
+                s_buf += ":";
+
+                param_case_offset++;    // skip set file
+            }
+            break;
+        }
+
+        param_case_offset++;
+    }
+
+    s_buf += "\" :filename \"";
+    s_buf += Filename;
+}
+
+void
 Echotron::initialize()
 {
     interpbuf = new float[PERIOD];

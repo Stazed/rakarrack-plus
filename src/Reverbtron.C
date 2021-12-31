@@ -205,6 +205,69 @@ Reverbtron::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Reverbtron::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = 0;
+    for(int i = 0; i < (C_REVTRON_PARAMETERS - 2); i++) // -2 Revtron_User_File, Revtron_Set_File
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Revtron_Fade:
+            case Revtron_Safe:
+            case Revtron_I_Delay:
+            case Revtron_Damp:
+            case Revtron_Stretch:
+            case Revtron_Feedback:
+            case Revtron_Ex_Stereo:
+            case Revtron_Shuffle:
+            case Revtron_LPF:
+            case Revtron_Diffusion:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
+
+                if ( param_case_offset !=  Revtron_Diffusion )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Revtron_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Revtron_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+
+            // Offset
+            case Revtron_Pan:
+            {
+                s_buf += NTS( getpar( Revtron_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+
+            // Skip parameter
+            case Revtron_Length:
+            case Revtron_Level:
+            {
+                s_buf += NTS( getpar( param_case_offset ) );
+                s_buf += ":";
+
+                param_case_offset++;    // skips Revtron_User_File, Revtron_Set_File
+            }
+            break;
+        }
+
+        param_case_offset++;
+    }
+    
+    s_buf += "\" :filename \"";
+    s_buf += Filename;
+}
+
+void
 Reverbtron::initialize()
 {
     templ = (float *) malloc(sizeof (float) * PERIOD);

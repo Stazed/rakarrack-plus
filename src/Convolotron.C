@@ -173,6 +173,64 @@ Convolotron::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Convolotron::LV2_parameters(std::string &s_buf)
+{
+    int param_case_offset = 0;
+
+    // -4 for: Convo_User_File, Convo_SKIP_5, Convo_Set_File, Convo_SKIP_9
+    for(int i = 0; i < (C_CONVO_PARAMETERS - 4); i++)
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Convo_Safe:
+            case Convo_Damp:
+            case Convo_Feedback:
+            {
+                s_buf += NTS( getpar( param_case_offset ));
+
+                if ( param_case_offset !=  Convo_Feedback )   // last one no need for delimiter
+                    s_buf += ":";
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Convo_DryWet:
+            {
+                s_buf += NTS( Dry_Wet(getpar( Convo_DryWet )) );
+                s_buf += ":";
+            }
+            break;
+            
+            // Offset
+            case Convo_Pan:
+            {
+                s_buf += NTS( getpar( Convo_Pan ) - 64);
+                s_buf += ":";
+            }
+            break;
+            
+            // Skip two after these
+            case Convo_Length:
+            case Convo_Level:
+            {
+                s_buf += NTS( getpar( param_case_offset ) );
+                s_buf += ":";
+
+                // increment for two skipped parameters
+                param_case_offset += 2;
+            }
+            break;
+        }
+        param_case_offset++;
+    }
+
+    s_buf += "\" :filename \"";
+    s_buf += Filename;
+}
+
+void
 Convolotron::initialize()
 {
     templ = (float *) malloc(sizeof (float) * PERIOD);
