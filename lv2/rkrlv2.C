@@ -269,9 +269,16 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
     plug->file_changed = 0;
     plug->scheduler = 0;
     plug->urid_map = 0;
+    plug->URIDs.bufsz_max = 0;  // for valgrind
+    plug->URIDs.atom_Int = 0;   // for valgrind
+
     for(i=0; host_features[i]; i++)
-    { if(!strcmp(host_features[i]->URI,LV2_OPTIONS__options)) { LV2_Options_Option* option; option = (LV2_Options_Option*)host_features[i]->data;
-            for(j=0; option[j].key; j++)
+    {
+        if(!strcmp(host_features[i]->URI,LV2_OPTIONS__options))
+        { 
+            LV2_Options_Option* option; option = (LV2_Options_Option*)host_features[i]->data;
+
+            for(j = 0; option[j].key; j++)
             {
                 if(option[j].key == plug->URIDs.bufsz_max)
                 {
@@ -4039,7 +4046,7 @@ LV2_Handle init_revtronlv2(const LV2_Descriptor* /* descriptor */,double sample_
 
     plug->revtron = new Reverbtron( /*downsample*/5, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
     plug->revtron->changepar(Revtron_User_File,1);  // set to user selected files
-    
+
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
     plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
@@ -4053,7 +4060,7 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -4062,14 +4069,14 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
     {
         return;
     }
- 
+
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
         plug->revtron->lv2_update_params(nframes);
     }
-    
+
     // we are good to run now
 
     //check and set changed parameters
@@ -4163,7 +4170,6 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
         lv2_atom_forge_pop(&plug->forge, &frame);
     }
 
-
     //see if there's a file
     LV2_ATOM_SEQUENCE_FOREACH( plug->atom_in_p, ev)
     {
@@ -4220,7 +4226,6 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
 
 static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t /* size */, const void* data)
 {
-
     RKRLV2* plug = (RKRLV2*)handle;
     LV2_Atom_Object* obj = (LV2_Atom_Object*)data;
     const LV2_Atom* file_path = NULL;
@@ -4335,11 +4340,11 @@ LV2_Handle init_echotronlv2(const LV2_Descriptor* /* descriptor */,double sample
 
     plug->echotron = new Echotron(sample_freq, plug->period_max);
     plug->echotron->changepar(Echotron_User_File,1);    // set to user selected files
-    
+
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
     plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
-    
+
     return plug;
 }
 
@@ -4349,7 +4354,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -4358,14 +4363,14 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
     {
         return;
     }
- 
+
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
         plug->echotron->lv2_update_params(nframes);
     }
-    
+
     // we are good to run now
 
     //check and set changed parameters
@@ -4393,7 +4398,7 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
                 }
             }
             break;
-            
+
             // Special cases
             // wet/dry -> dry/wet reversal
             case Echotron_DryWet:
@@ -4430,11 +4435,11 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
                 {
                     plug->echotron->changepar(Echotron_Taps,val);
                 }
-                
+
                 param_case_offset++;    // skip user file
             }
             break;
-            
+
             // Offset & skip Set file
             case Echotron_LR_Cross:
             {
@@ -4474,7 +4479,6 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
 
         lv2_atom_forge_pop(&plug->forge, &frame);
     }
-
 
     //see if there's a file
     LV2_ATOM_SEQUENCE_FOREACH( plug->atom_in_p, ev)
@@ -4532,7 +4536,6 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
 
 static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t /* size */, const void* data)
 {
-
     RKRLV2* plug = (RKRLV2*)handle;
     LV2_Atom_Object* obj = (LV2_Atom_Object*)data;
     const LV2_Atom* file_path = NULL;
@@ -4582,7 +4585,7 @@ static LV2_State_Status echosave(LV2_Handle handle, LV2_State_Store_Function  st
 
     store(state_handle, plug->URIDs.filetype_dly, abstractpath, strlen(plug->echotron->get_file_name()) + 1,
     		plug->URIDs.atom_Path, LV2_STATE_IS_POD | LV2_STATE_IS_PORTABLE);
-    
+
     free(abstractpath);
 
     return LV2_STATE_SUCCESS;
@@ -5576,7 +5579,7 @@ LV2_Handle init_convollv2(const LV2_Descriptor* /* descriptor */,double sample_f
 
     plug->convol = new Convolotron( /*downsample*/6, /*up interpolation method*/4, /*down interpolation method*/2 ,sample_freq, plug->period_max);
     plug->convol->changepar(Convo_User_File,1);//set to user selected files
-    
+
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
     plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
@@ -5590,7 +5593,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -5599,7 +5602,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
     {
         return;
     }
- 
+
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
     {
@@ -5612,7 +5615,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
     //check and set changed parameters
     int val = 0;
     int param_case_offset = 0;
-    
+
     for(int i = 0; i < plug->nparams; i++)
     {
         switch(param_case_offset)
@@ -5641,7 +5644,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
                 }
             }
             break;
-            
+
             // Offset
             case Convo_Pan:
             {
@@ -5652,7 +5655,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
                 }
             }
             break;
-            
+
             // Skip two after these
             case Convo_Length:
             case Convo_Level:
@@ -5693,7 +5696,6 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
         lv2_atom_forge_pop(&plug->forge, &frame);
     }
 
-
     //see if there's a file
     LV2_ATOM_SEQUENCE_FOREACH( plug->atom_in_p, ev)
     {
@@ -5731,7 +5733,7 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
             }
         }//atom is object
     }//each atom in sequence
-    
+
     //now run
     plug->convol->out(plug->output_l_p,plug->output_r_p);
 
@@ -5750,7 +5752,6 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
 
 static LV2_Worker_Status convwork(LV2_Handle handle, LV2_Worker_Respond_Function respond, LV2_Worker_Respond_Handle rhandle, uint32_t /* size */, const void* data)
 {
-
     RKRLV2* plug = (RKRLV2*)handle;
     LV2_Atom_Object* obj = (LV2_Atom_Object*)data;
     const LV2_Atom* file_path = NULL;
@@ -5817,10 +5818,10 @@ static LV2_State_Status convrestore(LV2_Handle handle, LV2_State_Retrieve_Functi
 
     if (value)
     {
-            char* path = (char*)value;
-            strcpy(plug->convol->Filename,path);
-            plug->convol->setfile(USERFILE);
-            plug->file_changed = 1;
+        char* path = (char*)value;
+        strcpy(plug->convol->Filename,path);
+        plug->convol->setfile(USERFILE);
+        plug->file_changed = 1;
     }
 
     return LV2_STATE_SUCCESS;
