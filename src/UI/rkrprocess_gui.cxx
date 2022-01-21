@@ -67,6 +67,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     AboutWin->icon((char *) p);
     MIDILearn->icon((char *) p);
     Trigger->icon((char *) p);
+    DelayFile->icon((char *) p);
 
     char tmp[256];
     Analy->set_analyzer_ON(false);
@@ -99,7 +100,8 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Trigger->copy_label(tmp);
     
     load_previous_state();
-
+    
+    DelayFile->make_delay_window();
     Settings->make_table_window();
     Put_Loaded();
     Principal->show(argc, argv);
@@ -2298,6 +2300,8 @@ void RKRGUI::PutBackground()
 
     MenuP->image(InOut->image());
     BankWindow->MenuB->image(InOut->image());
+    
+    DelayFile->Fondo13->image(InOut->image());
 
     Fl::redraw();
 }

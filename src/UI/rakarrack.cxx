@@ -2879,10 +2879,10 @@ void RKRGUI::make_window() {
     o->hide();
     Trigger->end();
   } // TrigWindowGui* Trigger
-  { DelayFileWindowGui* o = DelayFile = new DelayFileWindowGui(800, 265, "Echotron Delay File");
+  { DelayFileWindowGui* o = DelayFile = new DelayFileWindowGui(800, 265);
     DelayFile->box(FL_NO_BOX);
     DelayFile->color((Fl_Color)4);
-    DelayFile->selection_color(FL_BACKGROUND_COLOR);
+    DelayFile->selection_color(FL_BACKGROUND2_COLOR);
     DelayFile->labeltype(FL_NO_LABEL);
     DelayFile->labelfont(0);
     DelayFile->labelsize(14);
@@ -2892,6 +2892,7 @@ void RKRGUI::make_window() {
     DelayFile->when(FL_WHEN_RELEASE);
     o->initialize(m_process, this);
     o->hide();
+    DelayFile->size_range(400, 132, 1600, 530);
     DelayFile->end();
     DelayFile->resizable(DelayFile);
   } // DelayFileWindowGui* DelayFile

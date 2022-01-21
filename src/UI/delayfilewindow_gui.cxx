@@ -104,8 +104,8 @@ DelayFileWindowGui::DelayFileWindowGui()
 
 void DelayFileWindowGui::_DelayFileWindowGui() {
 this->box(FL_FLAT_BOX);
-this->color(FL_BACKGROUND_COLOR);
-this->selection_color(FL_BACKGROUND_COLOR);
+this->color((Fl_Color)4);
+this->selection_color(FL_BACKGROUND2_COLOR);
 this->labeltype(FL_NO_LABEL);
 this->labelfont(0);
 this->labelsize(14);

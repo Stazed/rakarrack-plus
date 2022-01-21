@@ -340,7 +340,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {891 92 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {312 145 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1873,13 +1873,12 @@ o->hide();} open
       code2 {o->hide();}
       class TrigWindowGui
     } {}
-    Fl_Window DelayFile {
-      label {Echotron Delay File} open
-      xywh {951 624 800 265} type Double box NO_BOX color 4 hide resizable
+    Fl_Window DelayFile {open
+      xywh {831 639 800 265} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "delayfilewindow_gui.h"}
       code1 {o->initialize(m_process, this);}
       code2 {o->hide();}
-      class DelayFileWindowGui
+      class DelayFileWindowGui size_range {400 132 1600 530}
     } {}
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);

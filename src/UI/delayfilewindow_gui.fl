@@ -68,10 +68,10 @@ decl {enum
 }
 
 widget_class DelayFileWindowGui {open selected
-  xywh {465 110 800 265} type Double resizable
-  code0 {this->m_process = NULL;
-this->m_parent = NULL;}
-  class Fl_Double_Window visible
+  xywh {777 65 800 265} type Double color 4 selection_color 7 resizable
+  code0 {this->m_process = NULL;}
+  code1 {this->m_parent = NULL;}
+  class Fl_Double_Window size_range {400 130 1600 530} visible
 } {
   Fl_Box Fondo13 {
     xywh {2 2 796 261}
@@ -462,7 +462,7 @@ this->redraw();} {}
   int set_start_height = 265;    //  set in fluid
   float H_set_ratio = (float) this->h() / set_start_height;
     
-  dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->yposition());;
+  dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->yposition());
   
   this->redraw();} {}
   }
@@ -496,7 +496,7 @@ vector_delay_line = vector_temp;} {}
 
 widget_class dlyFileGroup {
   user_data UD_delay_group open
-  xywh {490 432 725 30} type Double
+  xywh {818 385 725 30} type Double
   class RKR_Group visible position_relative
 } {
   decl {DelayFileWindowGui *m_parent;} {private local
