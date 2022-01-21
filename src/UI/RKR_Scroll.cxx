@@ -34,7 +34,8 @@ RKR_Scroll::RKR_Scroll(int X, int Y, int W, int H, const char *label) :
     m_start_y(Y),
     m_start_width(W),
     m_start_height(H),
-    m_look_changed(0)
+    m_look_changed(0),
+    m_delay_scroll(false)
 {
 }
 

@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0307
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -273,6 +273,9 @@ decl {class AboutWindowGui; // forward declaration} {public global
 decl {class TrigWindowGui; // forward declaration} {public global
 }
 
+decl {class DelayFileWindowGui; // forward declaration} {public global
+}
+
 decl {Fl_Tiled_Image *back = NULL;} {private global
 }
 
@@ -336,8 +339,8 @@ widget gets the focus.} private local
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif} open
-      xywh {279 284 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+\#endif} open selected
+      xywh {891 92 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1479,7 +1482,7 @@ Put_Loaded();}
         break;
     }
 
-    m_process->Shut_Off_Below_Mouse = 0;} selected
+    m_process->Shut_Off_Below_Mouse = 0;}
           tooltip {Export preset to file, *.rkr type - Shortcut 'E'} xywh {306 50 64 18} shortcut 0x65 color 62 labelsize 12
           code0 {o->set_label_offset(2);}
           class RKR_Button
@@ -1869,6 +1872,14 @@ o->hide();} open
       code1 {o->initialize(m_process);}
       code2 {o->hide();}
       class TrigWindowGui
+    } {}
+    Fl_Window DelayFile {
+      label {Echotron Delay File} open
+      xywh {951 624 800 265} type Double box NO_BOX color 4 hide resizable
+      code0 {\#include "delayfilewindow_gui.h"}
+      code1 {o->initialize(m_process, this);}
+      code2 {o->hide();}
+      class DelayFileWindowGui
     } {}
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);

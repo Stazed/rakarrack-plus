@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -240,7 +240,23 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps,(int)o->value());
   }
   Fl_Choice echotron_fnum {
     label File
-    callback {int user_file_selected = 0;
+    callback {if(Fl::event_button() == 3)
+    {
+        if(!m_parent->DelayFile->visible())
+        {
+            m_parent->DelayFile->apply_button->activate();
+            m_parent->DelayFile->show();
+            m_parent->put_icon(m_parent->DelayFile);
+        }
+        else
+        {
+            m_parent->DelayFile->hide();
+        }
+        return;
+    }
+
+    int user_file_selected = 0;
+
     Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (o->menu ());
     std::string file = m[o->value()].label();
     
