@@ -32,7 +32,7 @@ RKR_Float_Input::RKR_Float_Input(int X, int Y, int W, int H, const char *label) 
     m_text_offset(0),       // C_DEFAULT_FONT_SIZE
     m_start_width(W),
     m_start_height(H),
-    m_previous_font_size(global_font_size),
+    m_look_changed(0),
     m_max_value(0.0),
     m_min_value(0.0)
 {
@@ -40,10 +40,13 @@ RKR_Float_Input::RKR_Float_Input(int X, int Y, int W, int H, const char *label) 
 
 void RKR_Float_Input::draw()
 {
-    /* To update the font size if user changes the value in settings */
-    if(global_font_size != m_previous_font_size)
+    if(m_look_changed != global_look_changed)
     {
-        m_previous_font_size = global_font_size;
+        m_look_changed = global_look_changed;
+        color(global_fore_color);
+        labelcolor(global_label_color);
+        labelfont(global_font_type);
+        textfont(global_font_type);
         font_resize(w(), h());
     }
 
