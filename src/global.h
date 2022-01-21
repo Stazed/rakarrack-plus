@@ -406,6 +406,9 @@ enum USER_DATA_index
     UD_Preset_Used_Start    = 2000,
     UD_Preset_Used_End      = 2127,
     
+    // Echotron Delay file window group
+    UD_delay_group          = 4000,
+    
     // The user_data for RKR_Choice 'Preset' widgets. For use in identifying
     // the correct widget when user 'Insert' or 'Delete' key is used. For
     // adding or deleting effect user defined presets. The range is the same

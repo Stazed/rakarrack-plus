@@ -495,7 +495,7 @@ vector_delay_line = vector_temp;} {}
 }
 
 widget_class dlyFileGroup {
-  user_data c_delay_group open
+  user_data UD_delay_group open
   xywh {490 432 725 30} type Double
   class RKR_Group visible position_relative
 } {

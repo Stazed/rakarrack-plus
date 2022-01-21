@@ -662,7 +662,7 @@ this->labeltype(FL_NO_LABEL);
 this->labelfont(0);
 this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
-this->user_data((void*)(c_delay_group));
+this->user_data((void*)(UD_delay_group));
 this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { dly_occur = new RKR_Box(6, 6, 35, 20, "1");
