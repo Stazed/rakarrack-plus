@@ -31,6 +31,8 @@ RKR_Group::RKR_Group(int X, int Y, int W, int H, const char *label) :
     m_label_offset(0),      // C_DEFAULT_FONT_SIZE
     m_start_width(W),
     m_start_height(H),
+    m_start_x(X),
+    m_start_y(Y),
     m_look_changed(0)
 {
 }

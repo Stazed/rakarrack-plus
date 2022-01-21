@@ -27,6 +27,7 @@
 #include "../global.h"  /* UD_Bank_Used_Start, UD_Preset_Used_Start, UD_Bank_Number */
 #include "RKR_Choice.h"
 #include "RKR_Box.h"
+#include "RKR_Group.h"
 
 RKR_Scroll::RKR_Scroll(int X, int Y, int W, int H, const char *label) :
     Fl_Scroll(X, Y, W, H, label),
@@ -57,36 +58,61 @@ void RKR_Scroll::resize(int X, int Y, int W, int H)
     float W_ratio = (float) W / m_start_width;
     float H_ratio = (float) H / m_start_height;
     
-    for (int i = 0; i < children(); ++i)
+    if(m_delay_scroll)
     {
-        Fl_Widget *c = child(i);
-        
-        long long ud = (long long) c->user_data();
-        
-        // This finds the bank and preset choice widgets
-        // UD_Bank_Used_Start = 1000 to 1127 >> UD_Preset_Used_End = 2000 to 2127
-        if((ud >= UD_Bank_Used_Start) && (ud <= UD_Preset_Used_End))
+        for (int i = 0; i < children(); ++i)
         {
-            RKR_Choice *c_choice = static_cast<RKR_Choice *> (c);
+            Fl_Widget *c = child(i);
 
-            c_choice->resize
-            (
-                (c_choice->get_start_x()* W_ratio),
-                (c_choice->get_start_y() + m_start_y - 20) * H_ratio,   // 20 is height of RKR_Choice
-                (c_choice->get_start_width()) * W_ratio ,
-                c_choice->get_start_height() * H_ratio
-            );
+            long long ud = (long long) c->user_data();
+            
+            if(ud == UD_delay_group)
+            {
+                RKR_Group *g_group = (RKR_Group *) c;
+                
+                g_group->resize
+                (
+                    (g_group->get_start_x() + m_start_x) * W_ratio,
+                    ((g_group->get_start_y() + m_start_y) + (30 * i)) * H_ratio,   // 30 is height of RKR_Group
+                    (g_group->get_start_width()) * W_ratio ,
+                    g_group->get_start_height() * H_ratio
+                );
+            }
         }
-        else if(ud == UD_Bank_Number)
+    }
+    else    // settings/MIDI
+    {
+        for (int i = 0; i < children(); ++i)
         {
-            RKR_Box *c_box = static_cast<RKR_Box *> (c);
-            c_box->resize
-            (
-                (c_box->get_start_x() + m_start_x )* W_ratio,
-                (c_box->get_start_y() + m_start_y - 20) * H_ratio,      // 20 is height of RKR_Choice
-                (c_box->get_start_width() * W_ratio),
-                c_box->get_start_height() * H_ratio
-            );
+            Fl_Widget *c = child(i);
+
+            long long ud = (long long) c->user_data();
+
+            // This finds the bank and preset choice widgets
+            // UD_Bank_Used_Start = 1000 to 1127 >> UD_Preset_Used_End = 2000 to 2127
+            if((ud >= UD_Bank_Used_Start) && (ud <= UD_Preset_Used_End))
+            {
+                RKR_Choice *c_choice = static_cast<RKR_Choice *> (c);
+
+                c_choice->resize
+                (
+                    (c_choice->get_start_x()* W_ratio),
+                    (c_choice->get_start_y() + m_start_y - 20) * H_ratio,   // 20 is height of RKR_Choice
+                    (c_choice->get_start_width()) * W_ratio ,
+                    c_choice->get_start_height() * H_ratio
+                );
+            }
+            else if(ud == UD_Bank_Number)
+            {
+                RKR_Box *c_box = static_cast<RKR_Box *> (c);
+                c_box->resize
+                (
+                    (c_box->get_start_x() + m_start_x )* W_ratio,
+                    (c_box->get_start_y() + m_start_y - 20) * H_ratio,      // 20 is height of RKR_Choice
+                    (c_box->get_start_width() * W_ratio),
+                    c_box->get_start_height() * H_ratio
+                );
+            }
         }
     }
 

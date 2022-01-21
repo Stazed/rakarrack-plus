@@ -37,12 +37,18 @@ public:
     void draw();
     void resize(int,int,int,int);
     void set_label_offset(int offset){m_label_offset = offset;};
-
+    int get_start_height(){return m_start_height;};
+    int get_start_width(){return m_start_width;};
+    int get_start_x(){return m_start_x;};
+    int get_start_y(){return m_start_y;};
+    
 private:
 
     int m_label_offset;
     int m_start_width;
     int m_start_height;
+    int m_start_x;
+    int m_start_y;
     int m_look_changed;
     void font_resize(int,int);
 };
