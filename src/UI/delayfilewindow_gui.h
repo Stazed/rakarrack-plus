@@ -84,8 +84,8 @@ public:
   RKR_Scroll *dly_scroll;
 private:
   int m_file_size; 
-  RKRGUI* m_rgui; 
-  RKR* m_rkr; 
+  RKRGUI* m_parent; 
+  RKR* m_process; 
   DlyFile m_delay_file; 
 public:
   void make_delay_window();

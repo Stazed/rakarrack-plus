@@ -4,16 +4,20 @@
 
 void DelayFileWindowGui::cb_Load_i(RKR_Button*, void*) {
   char *filename;
-filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".dly");
-//strcpy(rkr->efx_Echotron->Filename,filename);
+    
+    filename = fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
+    if (filename == NULL)
+        return;
 
-DlyFile delay_file = rkr->efx_Echotron->loadfile(filename);
+    filename = fl_filename_setext(filename,".dly");
+    //strcpy(rkr->efx_Echotron->Filename,filename);
 
-load_delay_file(delay_file);
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    DlyFile delay_file = Efx_Echotron->loadfile(filename);
 
-this->copy_label(filename);
+    load_delay_file(delay_file);
+
+    this->copy_label(filename);
 }
 void DelayFileWindowGui::cb_Load(RKR_Button* o, void* v) {
   ((DelayFileWindowGui*)(o->parent()))->cb_Load_i(o,v);
@@ -59,23 +63,24 @@ void DelayFileWindowGui::cb_add_button(RKR_Button* o, void* v) {
 
 void DelayFileWindowGui::cb_apply_button_i(RKR_Light_Button*, void*) {
   DlyFile file = get_current_settings();
-/* Send the file to Echotron */
-m_rkr->efx_Echotron->applyfile(file);
+    /* Send the file to Echotron */
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    Efx_Echotron->applyfile(file);
 
-/* Update the file name if we have one */
-if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
-{
-    strcpy(m_rkr->efx_Echotron->Filename, file.Filename);
-}
+    /* Update the file name if we have one */
+    if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
+    {
+        strcpy(Efx_Echotron->Filename, file.Filename);
+    }
 
-/* Set efx gui max file length to the applied file size */
-m_rgui->ECHOTRON->echotron_length->maximum(rkr->efx_Echotron->File.fLength);
+    /* Set efx gui max file length to the applied file size */
+    m_parent->ECHOTRON->echotron_length->maximum(Efx_Echotron->File.fLength);
 
-/* Change the file length to the max */
-m_rkr->efx_Echotron->changepar(3, rkr->efx_Echotron->File.fLength);
+    /* Change the file length to the max */
+    Efx_Echotron->changepar(3, Efx_Echotron->File.fLength);
 
-/* Update the gui for the change */
-m_rgui->ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(3));
+    /* Update the gui for the change */
+    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(3));
 }
 void DelayFileWindowGui::cb_apply_button(RKR_Light_Button* o, void* v) {
   ((DelayFileWindowGui*)(o->parent()))->cb_apply_button_i(o,v);
@@ -285,8 +290,8 @@ this->when(FL_WHEN_RELEASE);
   o->set_delay_scroll();
   dly_scroll->end();
 } // RKR_Scroll* dly_scroll
-this->m_rkr = NULL;
-this->m_rgui = NULL;
+this->m_process = NULL;
+this->m_parent = NULL;
 end();
 resizable(this);
 }
@@ -297,8 +302,8 @@ void DelayFileWindowGui::make_delay_window() {
 
 void DelayFileWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui) {
   m_file_size = 0;
-  m_rkr = _rkr;
-  m_rgui= _rgui;
+  m_process = _rkr;
+  m_parent = _rgui;
   this->copy_label(DEFAULT_DLY_FILE_NAME);
 }
 
@@ -374,7 +379,7 @@ void DelayFileWindowGui::save_delay_file(char *filename) {
   
       if (errno == EACCES)
       {
-          rkr->Error_Handle(3);
+          m_process->Handle_Message(3);
           fclose(fn);
           return;
       }

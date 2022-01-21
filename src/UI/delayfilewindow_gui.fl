@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
@@ -67,10 +67,10 @@ decl {enum
 };} {public global
 }
 
-widget_class DelayFileWindowGui {open
-  xywh {276 723 800 265} type Double resizable
-  code0 {this->m_rkr = NULL;
-this->m_rgui = NULL;}
+widget_class DelayFileWindowGui {open selected
+  xywh {465 110 800 265} type Double resizable
+  code0 {this->m_process = NULL;
+this->m_parent = NULL;}
   class Fl_Double_Window visible
 } {
   Fl_Box Fondo13 {
@@ -105,16 +105,20 @@ this->m_rgui = NULL;}
   Fl_Button {} {
     label Load
     callback {char *filename;
-filename=fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,".dly");
-//strcpy(rkr->efx_Echotron->Filename,filename);
+    
+    filename = fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
+    if (filename == NULL)
+        return;
 
-DlyFile delay_file = rkr->efx_Echotron->loadfile(filename);
+    filename = fl_filename_setext(filename,".dly");
+    //strcpy(rkr->efx_Echotron->Filename,filename);
 
-load_delay_file(delay_file);
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    DlyFile delay_file = Efx_Echotron->loadfile(filename);
 
-this->copy_label(filename);}
+    load_delay_file(delay_file);
+
+    this->copy_label(filename);}
     xywh {210 25 70 20}
     code0 {o->set_label_offset(4);}
     class RKR_Button
@@ -160,23 +164,24 @@ update_scroll(-1, ADD_ROW);}
   Fl_Round_Button apply_button {
     label Apply
     callback {DlyFile file = get_current_settings();
-/* Send the file to Echotron */
-m_rkr->efx_Echotron->applyfile(file);
+    /* Send the file to Echotron */
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    Efx_Echotron->applyfile(file);
 
-/* Update the file name if we have one */
-if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
-{
-    strcpy(m_rkr->efx_Echotron->Filename, file.Filename);
-}
+    /* Update the file name if we have one */
+    if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
+    {
+        strcpy(Efx_Echotron->Filename, file.Filename);
+    }
 
-/* Set efx gui max file length to the applied file size */
-m_rgui->ECHOTRON->echotron_length->maximum(rkr->efx_Echotron->File.fLength);
+    /* Set efx gui max file length to the applied file size */
+    m_parent->ECHOTRON->echotron_length->maximum(Efx_Echotron->File.fLength);
 
-/* Change the file length to the max */
-m_rkr->efx_Echotron->changepar(3, rkr->efx_Echotron->File.fLength);
+    /* Change the file length to the max */
+    Efx_Echotron->changepar(3, Efx_Echotron->File.fLength);
 
-/* Update the gui for the change */
-m_rgui->ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(3));}
+    /* Update the gui for the change */
+    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(3));}
     tooltip {Apply Changes to Echotron} xywh {513 22 72 25} type Normal box ROUND_UP_BOX down_box ROUND_DOWN_BOX color 7
     code0 {o->set_label_offset(4);}
     class RKR_Light_Button
@@ -206,9 +211,9 @@ m_rgui->ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(3));}
   } {}
   decl {int m_file_size;} {private local
   }
-  decl {RKRGUI* m_rgui;} {private local
+  decl {RKRGUI* m_parent;} {private local
   }
-  decl {RKR* m_rkr;} {private local
+  decl {RKR* m_process;} {private local
   }
   decl {DlyFile m_delay_file;} {private local
   }
@@ -217,8 +222,8 @@ m_rgui->ECHOTRON->echotron_length->value(rkr->efx_Echotron->getpar(3));}
   }
   Function {initialize(RKR *_rkr,RKRGUI *_rgui)} {} {
     code {m_file_size = 0;
-m_rkr = _rkr;
-m_rgui= _rgui;
+m_process = _rkr;
+m_parent = _rgui;
 this->copy_label(DEFAULT_DLY_FILE_NAME);} {}
   }
   Function {load_delay_file(DlyFile delay_file)} {private
@@ -284,7 +289,8 @@ dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->
 
 this->redraw();} {}
   }
-  Function {save_delay_file(char *filename)} {} {
+  Function {save_delay_file(char *filename)} {open
+  } {
     code {DlyFile delay_file = get_current_settings();
 
     FILE *fn;
@@ -293,7 +299,7 @@ this->redraw();} {}
 
     if (errno == EACCES)
     {
-        rkr->Error_Handle(3);
+        m_process->Handle_Message(3);
         fclose(fn);
         return;
     }
@@ -324,8 +330,7 @@ this->redraw();} {}
         fputs(buf, fn);
     }
     
-    fclose(fn);} {selected
-    }
+    fclose(fn);} {}
   }
   Function {get_current_settings()} {private return_type DlyFile
   } {
@@ -491,7 +496,7 @@ vector_delay_line = vector_temp;} {}
 
 widget_class dlyFileGroup {
   user_data c_delay_group open
-  xywh {1047 928 725 30} type Double
+  xywh {490 432 725 30} type Double
   class RKR_Group visible position_relative
 } {
   decl {DelayFileWindowGui *m_parent;} {private local
