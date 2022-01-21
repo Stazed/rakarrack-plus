@@ -21,6 +21,7 @@ set (ProgSources
     UI/RKR_Counter.cxx
     UI/RKR_File_Input.cxx
     UI/RKR_Fl_Slider.cxx
+    UI/RKR_Float_Input.cxx
     UI/RKR_Group.cxx
     UI/RKR_Key_Input.cxx
     UI/RKR_Light_Button.cxx
@@ -83,6 +84,7 @@ set (ProgSources
     UI/midilearnwindow_gui.cxx
     UI/aboutwindow_gui.cxx
     UI/trigwindow_gui.cxx
+    UI/delayfilewindow_gui.cxx
     UI/rkrprocess_gui.cxx
     PresetBankStruct.C
     process.C
