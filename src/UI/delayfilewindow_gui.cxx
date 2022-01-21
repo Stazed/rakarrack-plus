@@ -317,6 +317,9 @@ void DelayFileWindowGui::load_delay_file(DlyFile delay_file) {
       ss << delay_file.subdiv_fmod;
       f_string = ss.str();
       dly_filter->value(f_string.c_str());
+  
+      ss.str("");
+      ss.clear();
     
       ss << delay_file.subdiv_dmod;
       f_string = ss.str();
