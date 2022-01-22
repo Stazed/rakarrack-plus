@@ -3,9 +3,16 @@
 #include "delayfilewindow_gui.h"
 
 void DelayFileWindowGui::cb_Load_i(RKR_Button*, void*) {
-  char *filename;
-    
-    filename = fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->Config.UDirFilename;
+    }
+
+    char *filename;
+    filename = fl_file_chooser("Load dly File:","(*.dly)", chooser_start_location.c_str(), 0);
     if (filename == NULL)
         return;
 
@@ -24,15 +31,22 @@ void DelayFileWindowGui::cb_Load(RKR_Button* o, void* v) {
 }
 
 void DelayFileWindowGui::cb_Save_i(RKR_Button*, void*) {
-  char *filename;
+  // If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->Config.UDirFilename;
+    }
+    char *filename;
 #define EXT ".dly"
-filename=fl_file_chooser("Save delay file:","(*" EXT")", NULL/*rkr->Preset_Name*/,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
+    filename=fl_file_chooser("Save delay file:","(*" EXT")", chooser_start_location.c_str(), 0);
+    if (filename==NULL) return;
+    filename=fl_filename_setext(filename,EXT);
 #undef EXT
-save_delay_file(filename);
+    save_delay_file(filename);
 
-this->copy_label(filename);
+    this->copy_label(filename);
 }
 void DelayFileWindowGui::cb_Save(RKR_Button* o, void* v) {
   ((DelayFileWindowGui*)(o->parent()))->cb_Save_i(o,v);

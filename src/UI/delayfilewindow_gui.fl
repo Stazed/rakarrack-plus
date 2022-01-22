@@ -104,9 +104,16 @@ widget_class DelayFileWindowGui {open selected
   }
   Fl_Button {} {
     label Load
-    callback {char *filename;
-    
-    filename = fl_file_chooser("Load dly File:","(*.dly)",NULL,0);
+    callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->Config.UDirFilename;
+    }
+
+    char *filename;
+    filename = fl_file_chooser("Load dly File:","(*.dly)", chooser_start_location.c_str(), 0);
     if (filename == NULL)
         return;
 
@@ -125,15 +132,22 @@ widget_class DelayFileWindowGui {open selected
   }
   Fl_Button {} {
     label Save
-    callback {char *filename;
+    callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->Config.UDirFilename;
+    }
+    char *filename;
 \#define EXT ".dly"
-filename=fl_file_chooser("Save delay file:","(*" EXT")", NULL/*rkr->Preset_Name*/,0);
-if (filename==NULL) return;
-filename=fl_filename_setext(filename,EXT);
+    filename=fl_file_chooser("Save delay file:","(*" EXT")", chooser_start_location.c_str(), 0);
+    if (filename==NULL) return;
+    filename=fl_filename_setext(filename,EXT);
 \#undef EXT
-save_delay_file(filename);
+    save_delay_file(filename);
 
-this->copy_label(filename);}
+    this->copy_label(filename);}
     xywh {290 25 70 20}
     code0 {o->set_label_offset(4);}
     class RKR_Button
