@@ -31,6 +31,7 @@
 #include <sys/time.h>
 #include <stdint.h>
 #include <string.h>
+#include <iomanip>  // setprecision - FTSP
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>  // NTS
@@ -264,6 +265,14 @@ static inline float f_pow2(float x)
 
         return y;
     }
+}
+
+template <typename T>
+std::string FTSP(T value, int digits)
+{   // For conversion from float to string precision
+    std::ostringstream out;
+    out << std::setprecision(digits) << std::fixed << value;
+    return out.str();
 }
 
 enum RKR_Default_Colors

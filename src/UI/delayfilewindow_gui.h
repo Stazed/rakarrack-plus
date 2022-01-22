@@ -109,15 +109,15 @@ private:
   DelayFileWindowGui *m_parent; 
 public:
   RKR_Box *dly_occur;
-  RKR_Value_Input *dly_pan;
-  RKR_Value_Input *dly_time;
-  RKR_Value_Input *dly_level;
-  RKR_Value_Input *dly_LP;
-  RKR_Value_Input *dly_BP;
-  RKR_Value_Input *dly_HP;
-  RKR_Value_Input *dly_freq;
-  RKR_Value_Input *dly_Q;
-  RKR_Value_Input *dly_stages;
+  RKR_Float_Input *dly_pan;
+  RKR_Float_Input *dly_time;
+  RKR_Float_Input *dly_level;
+  RKR_Float_Input *dly_LP;
+  RKR_Float_Input *dly_BP;
+  RKR_Float_Input *dly_HP;
+  RKR_Float_Input *dly_freq;
+  RKR_Float_Input *dly_Q;
+  RKR_Float_Input *dly_stages;
   RKR_Button *dly_delete;
 private:
   inline void cb_dly_delete_i(RKR_Button*, void*);

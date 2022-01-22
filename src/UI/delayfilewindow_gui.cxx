@@ -325,20 +325,9 @@ void DelayFileWindowGui::load_delay_file(DlyFile delay_file) {
   dly_scroll->clear();
     m_file_size = 0;
     
-      std::ostringstream ss;
-      std::string f_string;
-      
-      ss << delay_file.subdiv_fmod;
-      f_string = ss.str();
-      dly_filter->value(f_string.c_str());
+      dly_filter->value( FTSP(delay_file.subdiv_fmod, 3).c_str());
   
-      ss.str("");
-      ss.clear();
-    
-      ss << delay_file.subdiv_dmod;
-      f_string = ss.str();
-      dly_delay->value(f_string.c_str());
-      
+      dly_delay->value( FTSP(delay_file.subdiv_dmod, 3).c_str());    
       
       dly_Q_mode->value(delay_file.f_qmode);
       
@@ -358,16 +347,16 @@ void DelayFileWindowGui::load_delay_file(DlyFile delay_file) {
           );
           ADDG->initialize(this);
   
-          ADDG->dly_pan->value(delay_file.fPan[i]);
-          ADDG->dly_time->value(delay_file.fTime[i]);
-          ADDG->dly_level->value(delay_file.fLevel[i]);
-          ADDG->dly_LP->value(delay_file.fLP[i]);
-          ADDG->dly_BP->value(delay_file.fBP[i]);
-          ADDG->dly_HP->value(delay_file.fHP[i]);
-          ADDG->dly_freq->value(delay_file.fFreq[i]);
-          ADDG->dly_Q->value(delay_file.fQ[i]);
-          ADDG->dly_stages->value(delay_file.iStages[i] + 1);	// offset by 1
-  
+          ADDG->dly_pan->value( FTSP(delay_file.fPan[i], 3).c_str() );
+          ADDG->dly_time->value( FTSP(delay_file.fTime[i], 10).c_str() );
+          ADDG->dly_level->value( FTSP(delay_file.fLevel[i], 4).c_str() );
+          ADDG->dly_LP->value( FTSP(delay_file.fLP[i], 4).c_str() );
+          ADDG->dly_BP->value( FTSP(delay_file.fBP[i], 4).c_str() );
+          ADDG->dly_HP->value( FTSP(delay_file.fHP[i], 4).c_str() );
+          ADDG->dly_freq->value( FTSP(delay_file.fFreq[i], 5).c_str() );
+          ADDG->dly_Q->value( FTSP(delay_file.fQ[i], 6).c_str() );
+          ADDG->dly_stages->value( FTSP(delay_file.iStages[i] + 1, 0).c_str() );	// offset by 1
+   
           std::stringstream strs;
           strs << m_file_size;
           std::string temp_str = strs.str();
@@ -450,15 +439,15 @@ DlyFile DelayFileWindowGui::get_current_settings() {
       Fl_Widget *c = dly_scroll->child(i);
       dlyFileGroup *c_choice = (dlyFileGroup *) c;
         
-      delay_file.fPan[i] = c_choice->dly_pan->value();
-      delay_file.fTime[i] = c_choice->dly_time->value();
-      delay_file.fLevel[i] = c_choice->dly_level->value();
-      delay_file.fLP[i] = c_choice->dly_LP->value();
-      delay_file.fBP[i] = c_choice->dly_BP->value();
-      delay_file.fHP[i] = c_choice->dly_HP->value();
-      delay_file.fFreq[i] = c_choice->dly_freq->value();
-      delay_file.fQ[i] = c_choice->dly_Q->value();
-      delay_file.iStages[i] = (c_choice->dly_stages->value() - 1);
+      delay_file.fPan[i] = (double) strtod(c_choice->dly_pan->value(), NULL);
+      delay_file.fTime[i] = (double) strtod(c_choice->dly_time->value(), NULL);
+      delay_file.fLevel[i] = (double) strtod(c_choice->dly_level->value(), NULL);
+      delay_file.fLP[i] = (double) strtod(c_choice->dly_LP->value(), NULL);
+      delay_file.fBP[i] = (double) strtod(c_choice->dly_BP->value(), NULL);
+      delay_file.fHP[i] = (double) strtod(c_choice->dly_HP->value(), NULL);
+      delay_file.fFreq[i] = (double) strtod(c_choice->dly_freq->value(), NULL);
+      delay_file.fQ[i] = (double) strtod(c_choice->dly_Q->value(), NULL);
+      delay_file.iStages[i] = (double) strtod((c_choice->dly_stages->value() - 1), NULL);
     }
     
     return delay_file;
@@ -492,16 +481,15 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
         }
   
         DelayLine d_choice;
-        d_choice.pan = c_choice->dly_pan->value();
-        d_choice.time = c_choice->dly_time->value();
-        d_choice.level = c_choice->dly_level->value();
-        d_choice.LP = c_choice->dly_LP->value();
-        d_choice.BP = c_choice->dly_BP->value();
-        d_choice.HP = c_choice->dly_HP->value();
-        d_choice.freq = c_choice->dly_freq->value();
-        d_choice.Q = c_choice->dly_Q->value();
-        d_choice.stages = (c_choice->dly_stages->value() - 1);
-        
+        d_choice.pan = (double) strtod(c_choice->dly_pan->value(), NULL);
+        d_choice.time = (double) strtod(c_choice->dly_time->value(), NULL);
+        d_choice.level = (double) strtod(c_choice->dly_level->value(), NULL);
+        d_choice.LP = (double) strtod(c_choice->dly_LP->value(), NULL);
+        d_choice.BP = (double) strtod(c_choice->dly_BP->value(), NULL);
+        d_choice.HP = (double) strtod(c_choice->dly_HP->value(), NULL);
+        d_choice.freq = (double) strtod(c_choice->dly_freq->value(), NULL);
+        d_choice.Q = (double) strtod(c_choice->dly_Q->value(), NULL);
+        d_choice.stages = (double) strtod((c_choice->dly_stages->value() - 1), NULL);      
         vector_delay_line.push_back(d_choice);
     }
     
@@ -535,16 +523,16 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
             );
             ADDG->initialize(this);
     
-            ADDG->dly_pan->value(vector_delay_line[i].pan);
-            ADDG->dly_time->value(vector_delay_line[i].time);
-            ADDG->dly_level->value(vector_delay_line[i].level);
-            ADDG->dly_LP->value(vector_delay_line[i].LP);
-            ADDG->dly_BP->value(vector_delay_line[i].BP);
-            ADDG->dly_HP->value(vector_delay_line[i].HP);
-            ADDG->dly_freq->value(vector_delay_line[i].freq);
-            ADDG->dly_Q->value(vector_delay_line[i].Q);
-            ADDG->dly_stages->value(vector_delay_line[i].stages + 1);	// offset by 1
-    
+            ADDG->dly_pan->value( FTSP(vector_delay_line[i].pan, 3).c_str() );
+            ADDG->dly_time->value( FTSP(vector_delay_line[i].time, 10).c_str() );
+            ADDG->dly_level->value( FTSP(vector_delay_line[i].level, 4).c_str() );
+            ADDG->dly_LP->value( FTSP(vector_delay_line[i].LP, 4).c_str() );
+            ADDG->dly_BP->value( FTSP(vector_delay_line[i].BP, 4).c_str() );
+            ADDG->dly_HP->value( FTSP(vector_delay_line[i].HP, 4).c_str() );
+            ADDG->dly_freq->value( FTSP(vector_delay_line[i].freq, 5).c_str() );
+            ADDG->dly_Q->value( FTSP(vector_delay_line[i].Q, 6).c_str() );
+            ADDG->dly_stages->value( FTSP(vector_delay_line[i].stages + 1, 0).c_str() );	// offset by 1
+  
             std::stringstream strs;
             strs << m_file_size;
             std::string temp_str = strs.str();
@@ -693,7 +681,7 @@ this->when(FL_WHEN_RELEASE);
   dly_occur->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   dly_occur->when(FL_WHEN_RELEASE);
 } // RKR_Box* dly_occur
-{ dly_pan = new RKR_Value_Input(45, 6, 40, 20);
+{ dly_pan = new RKR_Float_Input(45, 6, 40, 20);
   dly_pan->box(FL_DOWN_BOX);
   dly_pan->color(FL_FOREGROUND_COLOR);
   dly_pan->selection_color(FL_SELECTION_COLOR);
@@ -701,14 +689,12 @@ this->when(FL_WHEN_RELEASE);
   dly_pan->labelfont(0);
   dly_pan->labelsize(14);
   dly_pan->labelcolor(FL_FOREGROUND_COLOR);
-  dly_pan->minimum(-1);
-  dly_pan->step(0.001);
   dly_pan->textsize(10);
   dly_pan->textcolor(FL_BACKGROUND2_COLOR);
-  dly_pan->align(Fl_Align(FL_ALIGN_TOP));
+  dly_pan->align(Fl_Align(FL_ALIGN_LEFT));
   dly_pan->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_pan
-{ dly_time = new RKR_Value_Input(94, 6, 76, 20);
+} // RKR_Float_Input* dly_pan
+{ dly_time = new RKR_Float_Input(94, 6, 76, 21);
   dly_time->box(FL_DOWN_BOX);
   dly_time->color(FL_FOREGROUND_COLOR);
   dly_time->selection_color(FL_SELECTION_COLOR);
@@ -716,15 +702,12 @@ this->when(FL_WHEN_RELEASE);
   dly_time->labelfont(0);
   dly_time->labelsize(14);
   dly_time->labelcolor(FL_FOREGROUND_COLOR);
-  dly_time->maximum(6);
-  dly_time->step(1e-09);
-  dly_time->value(1);
   dly_time->textsize(10);
   dly_time->textcolor(FL_BACKGROUND2_COLOR);
-  dly_time->align(Fl_Align(FL_ALIGN_TOP));
+  dly_time->align(Fl_Align(FL_ALIGN_LEFT));
   dly_time->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_time
-{ dly_level = new RKR_Value_Input(175, 6, 45, 20);
+} // RKR_Float_Input* dly_time
+{ dly_level = new RKR_Float_Input(175, 6, 45, 20);
   dly_level->box(FL_DOWN_BOX);
   dly_level->color(FL_FOREGROUND_COLOR);
   dly_level->selection_color(FL_SELECTION_COLOR);
@@ -732,16 +715,12 @@ this->when(FL_WHEN_RELEASE);
   dly_level->labelfont(0);
   dly_level->labelsize(14);
   dly_level->labelcolor(FL_FOREGROUND_COLOR);
-  dly_level->minimum(-10);
-  dly_level->maximum(10);
-  dly_level->step(0.001);
-  dly_level->value(0.7);
   dly_level->textsize(10);
   dly_level->textcolor(FL_BACKGROUND2_COLOR);
-  dly_level->align(Fl_Align(FL_ALIGN_TOP));
+  dly_level->align(Fl_Align(FL_ALIGN_LEFT));
   dly_level->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_level
-{ dly_LP = new RKR_Value_Input(228, 6, 42, 20);
+} // RKR_Float_Input* dly_level
+{ dly_LP = new RKR_Float_Input(228, 6, 42, 20);
   dly_LP->box(FL_DOWN_BOX);
   dly_LP->color(FL_FOREGROUND_COLOR);
   dly_LP->selection_color(FL_SELECTION_COLOR);
@@ -749,16 +728,12 @@ this->when(FL_WHEN_RELEASE);
   dly_LP->labelfont(0);
   dly_LP->labelsize(14);
   dly_LP->labelcolor(FL_FOREGROUND_COLOR);
-  dly_LP->minimum(-2);
-  dly_LP->maximum(2);
-  dly_LP->step(0.001);
-  dly_LP->value(1);
   dly_LP->textsize(10);
   dly_LP->textcolor(FL_BACKGROUND2_COLOR);
-  dly_LP->align(Fl_Align(FL_ALIGN_TOP));
+  dly_LP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_LP->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_LP
-{ dly_BP = new RKR_Value_Input(279, 6, 42, 20);
+} // RKR_Float_Input* dly_LP
+{ dly_BP = new RKR_Float_Input(280, 6, 42, 20);
   dly_BP->box(FL_DOWN_BOX);
   dly_BP->color(FL_FOREGROUND_COLOR);
   dly_BP->selection_color(FL_SELECTION_COLOR);
@@ -766,16 +741,12 @@ this->when(FL_WHEN_RELEASE);
   dly_BP->labelfont(0);
   dly_BP->labelsize(14);
   dly_BP->labelcolor(FL_FOREGROUND_COLOR);
-  dly_BP->minimum(-2);
-  dly_BP->maximum(2);
-  dly_BP->step(0.001);
-  dly_BP->value(-1);
   dly_BP->textsize(10);
   dly_BP->textcolor(FL_BACKGROUND2_COLOR);
-  dly_BP->align(Fl_Align(FL_ALIGN_TOP));
+  dly_BP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_BP->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_BP
-{ dly_HP = new RKR_Value_Input(331, 6, 42, 20);
+} // RKR_Float_Input* dly_BP
+{ dly_HP = new RKR_Float_Input(331, 6, 42, 20);
   dly_HP->box(FL_DOWN_BOX);
   dly_HP->color(FL_FOREGROUND_COLOR);
   dly_HP->selection_color(FL_SELECTION_COLOR);
@@ -783,16 +754,12 @@ this->when(FL_WHEN_RELEASE);
   dly_HP->labelfont(0);
   dly_HP->labelsize(14);
   dly_HP->labelcolor(FL_FOREGROUND_COLOR);
-  dly_HP->minimum(-2);
-  dly_HP->maximum(2);
-  dly_HP->step(0.001);
-  dly_HP->value(1);
   dly_HP->textsize(10);
   dly_HP->textcolor(FL_BACKGROUND2_COLOR);
-  dly_HP->align(Fl_Align(FL_ALIGN_TOP));
+  dly_HP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_HP->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_HP
-{ dly_freq = new RKR_Value_Input(380, 6, 120, 20);
+} // RKR_Float_Input* dly_HP
+{ dly_freq = new RKR_Float_Input(380, 6, 120, 20);
   dly_freq->box(FL_DOWN_BOX);
   dly_freq->color(FL_FOREGROUND_COLOR);
   dly_freq->selection_color(FL_SELECTION_COLOR);
@@ -800,16 +767,12 @@ this->when(FL_WHEN_RELEASE);
   dly_freq->labelfont(0);
   dly_freq->labelsize(14);
   dly_freq->labelcolor(FL_FOREGROUND_COLOR);
-  dly_freq->minimum(20);
-  dly_freq->maximum(26000);
-  dly_freq->step(1e-09);
-  dly_freq->value(800);
   dly_freq->textsize(10);
   dly_freq->textcolor(FL_BACKGROUND2_COLOR);
-  dly_freq->align(Fl_Align(FL_ALIGN_TOP));
+  dly_freq->align(Fl_Align(FL_ALIGN_LEFT));
   dly_freq->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_freq
-{ dly_Q = new RKR_Value_Input(510, 6, 76, 20);
+} // RKR_Float_Input* dly_freq
+{ dly_Q = new RKR_Float_Input(510, 6, 76, 20);
   dly_Q->box(FL_DOWN_BOX);
   dly_Q->color(FL_FOREGROUND_COLOR);
   dly_Q->selection_color(FL_SELECTION_COLOR);
@@ -817,15 +780,12 @@ this->when(FL_WHEN_RELEASE);
   dly_Q->labelfont(0);
   dly_Q->labelsize(14);
   dly_Q->labelcolor(FL_FOREGROUND_COLOR);
-  dly_Q->maximum(300);
-  dly_Q->step(1e-09);
-  dly_Q->value(2);
   dly_Q->textsize(10);
   dly_Q->textcolor(FL_BACKGROUND2_COLOR);
-  dly_Q->align(Fl_Align(FL_ALIGN_TOP));
+  dly_Q->align(Fl_Align(FL_ALIGN_LEFT));
   dly_Q->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_Q
-{ dly_stages = new RKR_Value_Input(600, 6, 20, 20);
+} // RKR_Float_Input* dly_Q
+{ dly_stages = new RKR_Float_Input(600, 6, 20, 20);
   dly_stages->box(FL_DOWN_BOX);
   dly_stages->color(FL_FOREGROUND_COLOR);
   dly_stages->selection_color(FL_SELECTION_COLOR);
@@ -833,15 +793,11 @@ this->when(FL_WHEN_RELEASE);
   dly_stages->labelfont(0);
   dly_stages->labelsize(14);
   dly_stages->labelcolor(FL_FOREGROUND_COLOR);
-  dly_stages->minimum(1);
-  dly_stages->maximum(5);
-  dly_stages->step(1);
-  dly_stages->value(1);
   dly_stages->textsize(10);
   dly_stages->textcolor(FL_BACKGROUND2_COLOR);
-  dly_stages->align(Fl_Align(FL_ALIGN_TOP));
+  dly_stages->align(Fl_Align(FL_ALIGN_LEFT));
   dly_stages->when(FL_WHEN_CHANGED);
-} // RKR_Value_Input* dly_stages
+} // RKR_Float_Input* dly_stages
 { dly_delete = new RKR_Button(651, 6, 20, 20, "D");
   dly_delete->tooltip("Delete this row");
   dly_delete->box(FL_UP_BOX);
