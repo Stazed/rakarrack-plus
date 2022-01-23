@@ -974,7 +974,7 @@ modulation. Same concept as for filter, but this is the LFO applied to
 the delay line. Note there is not a field for delay time subdivision.
 This is because you define this by the times you put into the Time
 column, so such a field would be redundant.</p>
-<p><b>Pan</b>:&nbsp; Ranges from -1.0 to 1.0.&nbsp; less than 0.0 is pan left,
+<p><b>Pan</b>:&nbsp; Ranges from -1.0 to 1.0.&nbsp; Less than 0.0 is pan left,
 greater is pan right.&nbsp; 0.0 puts the delay equally to left and
 right.&nbsp; Anything magnitude of +/-1.0 or greater will be treated as
 extreme left or right.</p>
@@ -982,22 +982,22 @@ extreme left or right.</p>
 easier way to think of this as a musician is increments of
 measures. "1.0" means 1 measure at the tempo selected in the
 effect GUI. The above indicates a quarter note in the first line,
-and a 1/2 note in the second line.Ranges from -6.0 to 6.0</p>
-<p><b>Level</b>: how loud you want the echo to return.&nbsp; 1.0 returns it
+and a 1/2 note in the second line. Ranges from -6.0 to 6.0.</p>
+<p><b>Level</b>: How loud you want the echo to return.&nbsp; 1.0 returns it
 exactly as loud as it came it.&nbsp; More makes it come back louder,
 less makes it softer.&nbsp; You can use both positive and negative
-numbers.Ranges from -2.0 to 2.0</p>
+numbers. Ranges from -10.0 to 10.0</p>
 <p><b>LP</b>: Mix State variable Low Pass Filter amount.</p>
 <p><b>BP</b>: Band pass filter amount.</p>
 <p><b>HP</b>: High Pass Filter amount.</p>
 <p>*For LP, BP, and HP when filters are activated, these also adjust the
 level.&nbsp; If you don't want the filter to have an effect at a
-certain time, then set LP, BP, and HP all to 1.0.Ranges -2.0 to 2.0</p>
-<p><b>Freq</b>: Filter center frequency.Ranges 20.0 to 20000.0</p>
-<p><b>Q</b>: Filter resonance.Ranges 0.0 to 300.0 </p>
+certain time, then set LP, BP, and HP all to 1.0. Ranges -2.0 to 2.0.</p>
+<p><b>Freq</b>: Filter center frequency. Ranges 20.0 to 26000.0.</p>
+<p><b>Q</b>: Filter resonance. Ranges 0.0 to 300.0.</p>
 <p><b>Stages</b>: Number of filter stages.&nbsp; This is virtually
 unlimited, but you can crash your CPU with the processing requirement
-if you aren't careful.Ranges 1 to 16</p>
+if you aren't careful. Ranges 1 to 5.</p>
 <p>Caveats:</p>
 <p>Always separate the fields with a &lt;TAB&gt;, and not spaces.&nbsp; Echotron looks specifically for TAB
 separation.</p>
