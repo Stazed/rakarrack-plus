@@ -106,6 +106,20 @@ public:
 
 };
 
+enum Echotron_file_errors
+{
+    Dly_Open = 4,
+    Dly_Pan,
+    Dly_Time,
+    Dly_Level,
+    Dly_LP,
+    Dly_BP,
+    Dly_HP,
+    Dly_Freq,
+    Dly_Q,
+    Dly_Stages
+};
+
 class Echotron :public Effect
 {
 public:

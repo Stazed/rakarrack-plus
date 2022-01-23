@@ -464,7 +464,7 @@ Echotron::loadfile(char* Filename)
 
     if ((fs = fopen(Filename, "r")) == NULL)
     {
-        error = 4;
+        error = Dly_Open;
         return loaddefault();
     }
 
@@ -496,63 +496,63 @@ Echotron::loadfile(char* Filename)
         //tLP,  tBP,  tHP,  tFreq,  tQ,  tiStages);
         if ((tPan<-1.0f) || (tPan > 1.0f))
         {
-            error = 5;
+            error = Dly_Pan;
             break;
         }
         else f.fPan[count] = tPan;
 
         if ((tTime <-6.0) || (tTime > 6.0f))
         {
-            error = 6;
+            error = Dly_Time;
             break;
         }
         else f.fTime[count] = fabs(tTime);
 
         if ((tLevel <-10.0f) || (tLevel > 10.0f))
         {
-            error = 7;
+            error = Dly_Level;
             break;
         }
         else f.fLevel[count] = tLevel;
 
         if ((tLP <-2.0f) || (tLP > 2.0f))
         {
-            error = 8;
+            error = Dly_LP;
             break;
         }
         else f.fLP[count] = tLP;
 
         if ((tBP<-2.0f) || (tBP > 2.0f))
         {
-            error = 9;
+            error = Dly_BP;
             break;
         }
         else f.fBP[count] = tBP;
 
         if ((tHP<-2.0f) || (tHP > 2.0f))
         {
-            error = 10;
+            error = Dly_HP;
             break;
         }
         else f.fHP[count] = tHP;
 
         if ((tFreq < 20.0f) || (tFreq > 26000.0f))
         {
-            error = 11;
+            error = Dly_Freq;
             break;
         }
         else f.fFreq[count] = tFreq;
 
         if ((tQ < 0.0) || (tQ > 300.0f))
         {
-            error = 12;
+            error = Dly_Q;
             break;
         }
         else f.fQ[count] = tQ;
 
         if ((tiStages < 0) || (tiStages > MAX_FILTER_STAGES))
         {
-            error = 13;
+            error = Dly_Stages;
             break;
         }
         else f.iStages[count] = tiStages - 1; //check in main loop if <0, then skip filter

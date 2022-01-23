@@ -86,34 +86,34 @@ RKR::Handle_Message(int num, std::string strMessage)
         case 3:
             sprintf(error_msg, "%s", "Error writing the file. Do you have permission to write to this directory?");
             break;
-        case 4:
+        case Dly_Open:
             sprintf(error_msg, "%s", "Echotron is unable to open the .dly file");
             break;
-        case 5:
+        case Dly_Pan:
             sprintf(error_msg, "%s", "Some Pan parameter is bad in the .dly file");
             break;
-        case 6:
+        case Dly_Time:
             sprintf(error_msg, "%s", "Some Time parameter is bad in the .dly file");
             break;
-        case 7:
+        case Dly_Level:
             sprintf(error_msg, "%s", "Some Level parameter is bad in the .dly file");
             break;
-        case 8:
+        case Dly_LP:
             sprintf(error_msg, "%s", "Some LP parameter is bad in the .dly file");
             break;
-        case 9:
+        case Dly_BP:
             sprintf(error_msg, "%s", "Some BP parameter is bad in the .dly file");
             break;
-        case 10:
+        case Dly_HP:
             sprintf(error_msg, "%s", "Some HP parameter is bad in the .dly file");
             break;
-        case 11:
+        case Dly_Freq:
             sprintf(error_msg, "%s", "Some Freq parameter is bad in the .dly file");
             break;
-        case 12:
+        case Dly_Q:
             sprintf(error_msg, "%s", "Some Q parameter bad in the .dly file");
             break;
-        case 13:
+        case Dly_Stages:
             sprintf(error_msg, "%s", "Some Stages parameter bad in the .dly file");
             break;
         case 14:
