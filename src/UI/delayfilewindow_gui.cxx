@@ -393,7 +393,6 @@ void DelayFileWindowGui::save_delay_file(char *filename) {
       //General
       memset(buf, 0, sizeof (buf));
       sprintf(buf, "%s\t%s\t%d\n",dly_filter->value(), dly_delay->value(), delay_file.f_qmode);
-  //    sprintf(buf, "%f\t%f\t%d\n",delay_file.subdiv_fmod, delay_file.subdiv_dmod, delay_file.f_qmode);
       fputs(buf, fn);
       
       for(int i = 0; i < m_file_size; ++i)
@@ -402,7 +401,7 @@ void DelayFileWindowGui::save_delay_file(char *filename) {
           memset(buf, 0, sizeof (buf));
           sprintf
           (
-          buf, "%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",
+          buf, "%9.3f\t%9.10f\t%9.4f\t%9.4f\t%9.4f\t%9.4f\t%9.5f\t%9.6f\t%d\n",
           delay_file.fPan[i],
           delay_file.fTime[i],
           delay_file.fLevel[i],
