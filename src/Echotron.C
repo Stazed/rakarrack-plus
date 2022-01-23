@@ -529,14 +529,14 @@ Echotron::loadfile(char* Filename)
     FILENAME = Filename; // For lv2 if need to re-initialize and reload file
 #endif // LV2
     
-    float tPan = 0.0f;
-    float tTime = 0.0f;
-    float tLevel = 0.0f;
-    float tLP = 0.0f;
-    float tBP = 0.0f;
-    float tHP = 0.0f;
-    float tFreq = 20.0f;
-    float tQ = 1.0f;
+    double tPan = 0.0f;
+    double tTime = 0.0f;
+    double tLevel = 0.0f;
+    double tLP = 0.0f;
+    double tBP = 0.0f;
+    double tHP = 0.0f;
+    double tFreq = 20.0f;
+    double tQ = 1.0f;
     int tiStages = 0;
 
     FILE *fs;
@@ -562,7 +562,7 @@ Echotron::loadfile(char* Filename)
         memset(wbuf, 0, sizeof (wbuf));
     }
 
-    sscanf(wbuf, "%f\t%f\t%d", &f.subdiv_fmod, &f.subdiv_dmod, &f.f_qmode); //Second line has tempo subdivision
+    sscanf(wbuf, "%lf\t%lf\t%d", &f.subdiv_fmod, &f.subdiv_dmod, &f.f_qmode); //Second line has tempo subdivision
 //    printf("subdivs:%f\t%f\t%d\n",f.subdiv_fmod,f.subdiv_dmod, f.f_qmode);
 
     int count = 0;
@@ -574,7 +574,7 @@ Echotron::loadfile(char* Filename)
         
         if (wbuf[0] == '#') continue;
         
-        sscanf(wbuf, "%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d", &tPan, &tTime, &tLevel,
+        sscanf(wbuf, "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%d", &tPan, &tTime, &tLevel,
                &tLP, &tBP, &tHP, &tFreq, &tQ, &tiStages);
         //printf("params:\n%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",tPan, tTime, tLevel,
         //tLP,  tBP,  tHP,  tFreq,  tQ,  tiStages);

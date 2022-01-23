@@ -62,17 +62,17 @@ class DlyFile
 {
 public:
     //arrays of parameters from text file:
-    float fPan[ECHOTRON_F_SIZE];  //1+Pan from text file
-    float fTime[ECHOTRON_F_SIZE];
-    float fLevel[ECHOTRON_F_SIZE];
-    float fLP[ECHOTRON_F_SIZE];
-    float fBP[ECHOTRON_F_SIZE];
-    float fHP[ECHOTRON_F_SIZE];
-    float fFreq[ECHOTRON_F_SIZE];
-    float fQ[ECHOTRON_F_SIZE];
+    double fPan[ECHOTRON_F_SIZE];  //1+Pan from text file
+    double fTime[ECHOTRON_F_SIZE];
+    double fLevel[ECHOTRON_F_SIZE];
+    double fLP[ECHOTRON_F_SIZE];
+    double fBP[ECHOTRON_F_SIZE];
+    double fHP[ECHOTRON_F_SIZE];
+    double fFreq[ECHOTRON_F_SIZE];
+    double fQ[ECHOTRON_F_SIZE];
     int iStages[ECHOTRON_F_SIZE];
-    float subdiv_dmod;
-    float subdiv_fmod;
+    double subdiv_dmod;
+    double subdiv_fmod;
     int f_qmode;
 
     float rtime[ECHOTRON_F_SIZE];
