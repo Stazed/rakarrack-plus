@@ -436,90 +436,6 @@ Echotron::setfile(int value)
         return 0;
     
     return 1;
-    /*
-
-    if ((fs = fopen (Filename, "r")) == NULL) {
-        loaddefault();
-        return(0);
-    }
-
-    while (fgets(wbuf,sizeof wbuf,fs) != NULL) {
-        //fgets(wbuf,sizeof wbuf,fs);
-        if(wbuf[0]!='#') break;
-        memset(wbuf,0,sizeof(wbuf));
-    }
-
-    sscanf(wbuf,"%f\t%f\t%d",&subdiv_fmod,&subdiv_dmod,&f_qmode); //Second line has tempo subdivision
-//printf("subdivs:\t%f\t%f\n",subdiv_fmod,subdiv_dmod);
-
-    int count = 0;
-    memset(iStages,0,sizeof(iStages));
-
-
-
-    while ((fgets(wbuf,sizeof wbuf,fs) != NULL) && (count<ECHOTRON_F_SIZE)) {
-        if(wbuf[0]==10) break;  // Check Carriage Return
-        if(wbuf[0]=='#') continue;
-        sscanf(wbuf,"%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d",&tPan, &tTime, &tLevel,
-               &tLP,  &tBP,  &tHP,  &tFreq,  &tQ,  &tiStages);
-        //printf("params:\n%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",tPan, tTime, tLevel,
-        //tLP,  tBP,  tHP,  tFreq,  tQ,  tiStages);
-        if((tPan<-1.0f) || (tPan>1.0f)) {
-            global_error_number=5;
-            break;
-        } else fPan[count]=tPan;
-
-        if((tTime <-6.0) || (tTime>6.0f)) {
-            global_error_number=6;
-            break;
-        } else fTime[count]=fabs(tTime);
-
-        if((tLevel <-10.0f) || (tLevel>10.0f)) {
-            global_error_number=7;
-            break;
-        } else fLevel[count]=tLevel;
-
-        if((tLP <-2.0f) || (tLP>2.0f)) {
-            global_error_number=8;
-            break;
-        } else fLP[count]=tLP;
-
-        if((tBP<-2.0f) || (tBP>2.0f)) {
-            global_error_number=9;
-            break;
-        } else fBP[count]=tBP;
-
-        if((tHP<-2.0f) || (tHP>2.0f)) {
-            global_error_number=10;
-            break;
-        } else fHP[count]=tHP;
-
-        if((tFreq <20.0f) || (tFreq>26000.0f)) {
-            global_error_number=11;
-            break;
-        } else fFreq[count]=tFreq;
-
-        if((tQ <0.0) || (tQ>300.0f)) {
-            global_error_number=12;
-            break;
-        } else fQ[count]=tQ;
-
-        if((tiStages<0) || (tiStages>MAX_FILTER_STAGES)) {
-            global_error_number=13;
-            break;
-        } else iStages[count]=tiStages-1;   //check in main loop if <0, then skip filter
-
-
-        memset(wbuf,0,sizeof(wbuf));
-        count++;
-    }
-    fclose(fs);
-
-    if(!Pchange) Plength=count;
-    cleanup();
-    init_params();
-    return(1);
-     */
 }
 
 DlyFile
@@ -677,7 +593,7 @@ Echotron::loaddefault()
     DlyFile f;
     strcpy(f.Filename, "default");
     f.fLength = 1;
-    f.fPan[0] = 0.0f; //
+    f.fPan[0] = 0.0f;
     f.fTime[0] = 1.0f; //default 1 measure delay
     f.fLevel[0] = 0.7f;
     f.fLP[0] = 1.0f;
