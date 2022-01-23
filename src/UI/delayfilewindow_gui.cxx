@@ -264,7 +264,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
   scroll_label_1->end();
 } // RKR_Group* scroll_label_1
-{ RKR_Group* o = srcoll_label_2 = new RKR_Group(285, 69, 126, 20, "LP         BP        HP");
+{ RKR_Group* o = srcoll_label_2 = new RKR_Group(275, 69, 126, 20, "LP         BP        HP");
   srcoll_label_2->box(FL_NO_BOX);
   srcoll_label_2->color(FL_BACKGROUND_COLOR);
   srcoll_label_2->selection_color(FL_BACKGROUND_COLOR);
@@ -715,7 +715,7 @@ this->when(FL_WHEN_RELEASE);
   dly_level->align(Fl_Align(FL_ALIGN_LEFT));
   dly_level->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_level
-{ dly_LP = new RKR_Float_Input(248, 6, 42, 20);
+{ dly_LP = new RKR_Float_Input(242, 6, 48, 20);
   dly_LP->box(FL_DOWN_BOX);
   dly_LP->color(FL_FOREGROUND_COLOR);
   dly_LP->selection_color(FL_SELECTION_COLOR);
@@ -728,7 +728,7 @@ this->when(FL_WHEN_RELEASE);
   dly_LP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_LP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_LP
-{ dly_BP = new RKR_Float_Input(300, 6, 42, 20);
+{ dly_BP = new RKR_Float_Input(294, 6, 48, 20);
   dly_BP->box(FL_DOWN_BOX);
   dly_BP->color(FL_FOREGROUND_COLOR);
   dly_BP->selection_color(FL_SELECTION_COLOR);
@@ -741,7 +741,7 @@ this->when(FL_WHEN_RELEASE);
   dly_BP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_BP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_BP
-{ dly_HP = new RKR_Float_Input(350, 6, 42, 20);
+{ dly_HP = new RKR_Float_Input(345, 6, 48, 20);
   dly_HP->box(FL_DOWN_BOX);
   dly_HP->color(FL_FOREGROUND_COLOR);
   dly_HP->selection_color(FL_SELECTION_COLOR);

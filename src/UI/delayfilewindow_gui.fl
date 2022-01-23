@@ -208,7 +208,7 @@ update_scroll(-1, ADD_ROW);}
   } {}
   Fl_Group srcoll_label_2 {
     label {LP         BP        HP} open
-    xywh {285 69 126 20} align 16
+    xywh {275 69 126 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
@@ -518,15 +518,15 @@ widget_class dlyFileGroup {
     class RKR_Float_Input
   }
   Fl_Input dly_LP {
-    xywh {248 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {242 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_BP {
-    xywh {300 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {294 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_HP {
-    xywh {350 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {345 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_freq {
