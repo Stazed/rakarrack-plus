@@ -78,14 +78,14 @@ widget_class DelayFileWindowGui {open selected
   }
   Fl_Input dly_filter {
     label Filter
-    xywh {25 25 45 25} labelcolor 7 align 1 when 1 textcolor 7
+    xywh {25 25 50 25} labelcolor 7 align 1 when 1 textcolor 7
     code0 {o->set_label_offset(4);}
     code1 {o->set_text_offset(4);}
     class RKR_Float_Input
   }
   Fl_Input dly_delay {
     label Delay
-    xywh {90 25 45 25} labelcolor 7 align 1 when 1 textcolor 7
+    xywh {90 25 50 25} labelcolor 7 align 1 when 1 textcolor 7
     code0 {o->set_label_offset(4);}
     code1 {o->set_text_offset(4);}
     class RKR_Float_Input
@@ -201,20 +201,20 @@ update_scroll(-1, ADD_ROW);}
     class RKR_Light_Button
   }
   Fl_Group scroll_label_1 {
-    label {Pan        Time       Level} open
-    xywh {73 69 168 20} align 16
+    label {Pan        Time          Level} open
+    xywh {64 69 200 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
   Fl_Group srcoll_label_2 {
     label {LP         BP        HP} open
-    xywh {262 69 126 20} align 16
+    xywh {285 69 126 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
   Fl_Group scroll_label_3 {
     label {Frequency               Q           Stages} open
-    xywh {423 69 242 20} align 16
+    xywh {423 69 250 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
@@ -495,7 +495,7 @@ vector_delay_line = vector_temp;} {}
 
 widget_class dlyFileGroup {
   user_data UD_delay_group open
-  xywh {818 385 725 30} type Double
+  xywh {422 409 725 30} type Double
   class RKR_Group visible position_relative
 } {
   decl {DelayFileWindowGui *m_parent;} {private local
@@ -510,27 +510,27 @@ widget_class dlyFileGroup {
     class RKR_Float_Input
   }
   Fl_Input dly_time {
-    xywh {94 6 76 21} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {95 6 86 21} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_level {
-    xywh {175 6 45 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {191 6 45 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_LP {
-    xywh {228 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {248 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_BP {
-    xywh {280 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {300 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_HP {
-    xywh {331 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {350 6 42 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_freq {
-    xywh {380 6 120 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {397 6 100 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_Q {
@@ -538,7 +538,7 @@ widget_class dlyFileGroup {
     class RKR_Float_Input
   }
   Fl_Input dly_stages {
-    xywh {600 6 20 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    xywh {610 6 20 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Button dly_delete {

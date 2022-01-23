@@ -128,7 +128,7 @@ this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo13 = new Fl_Box(2, 2, 796, 261);
 } // Fl_Box* Fondo13
-{ RKR_Float_Input* o = dly_filter = new RKR_Float_Input(25, 25, 45, 25, "Filter");
+{ RKR_Float_Input* o = dly_filter = new RKR_Float_Input(25, 25, 50, 25, "Filter");
   dly_filter->box(FL_DOWN_BOX);
   dly_filter->color(FL_BACKGROUND2_COLOR);
   dly_filter->selection_color(FL_SELECTION_COLOR);
@@ -142,7 +142,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
   o->set_text_offset(4);
 } // RKR_Float_Input* dly_filter
-{ RKR_Float_Input* o = dly_delay = new RKR_Float_Input(90, 25, 45, 25, "Delay");
+{ RKR_Float_Input* o = dly_delay = new RKR_Float_Input(90, 25, 50, 25, "Delay");
   dly_delay->box(FL_DOWN_BOX);
   dly_delay->color(FL_BACKGROUND2_COLOR);
   dly_delay->selection_color(FL_SELECTION_COLOR);
@@ -251,7 +251,7 @@ this->when(FL_WHEN_RELEASE);
   apply_button->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Light_Button* apply_button
-{ RKR_Group* o = scroll_label_1 = new RKR_Group(73, 69, 168, 20, "Pan        Time       Level");
+{ RKR_Group* o = scroll_label_1 = new RKR_Group(64, 69, 200, 20, "Pan        Time          Level");
   scroll_label_1->box(FL_NO_BOX);
   scroll_label_1->color(FL_BACKGROUND_COLOR);
   scroll_label_1->selection_color(FL_BACKGROUND_COLOR);
@@ -264,7 +264,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
   scroll_label_1->end();
 } // RKR_Group* scroll_label_1
-{ RKR_Group* o = srcoll_label_2 = new RKR_Group(262, 69, 126, 20, "LP         BP        HP");
+{ RKR_Group* o = srcoll_label_2 = new RKR_Group(285, 69, 126, 20, "LP         BP        HP");
   srcoll_label_2->box(FL_NO_BOX);
   srcoll_label_2->color(FL_BACKGROUND_COLOR);
   srcoll_label_2->selection_color(FL_BACKGROUND_COLOR);
@@ -277,7 +277,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
   srcoll_label_2->end();
 } // RKR_Group* srcoll_label_2
-{ RKR_Group* o = scroll_label_3 = new RKR_Group(423, 69, 242, 20, "Frequency               Q           Stages");
+{ RKR_Group* o = scroll_label_3 = new RKR_Group(423, 69, 250, 20, "Frequency               Q           Stages");
   scroll_label_3->box(FL_NO_BOX);
   scroll_label_3->color(FL_BACKGROUND_COLOR);
   scroll_label_3->selection_color(FL_BACKGROUND_COLOR);
@@ -689,7 +689,7 @@ this->when(FL_WHEN_RELEASE);
   dly_pan->align(Fl_Align(FL_ALIGN_LEFT));
   dly_pan->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_pan
-{ dly_time = new RKR_Float_Input(94, 6, 76, 21);
+{ dly_time = new RKR_Float_Input(95, 6, 86, 21);
   dly_time->box(FL_DOWN_BOX);
   dly_time->color(FL_FOREGROUND_COLOR);
   dly_time->selection_color(FL_SELECTION_COLOR);
@@ -702,7 +702,7 @@ this->when(FL_WHEN_RELEASE);
   dly_time->align(Fl_Align(FL_ALIGN_LEFT));
   dly_time->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_time
-{ dly_level = new RKR_Float_Input(175, 6, 45, 20);
+{ dly_level = new RKR_Float_Input(191, 6, 45, 20);
   dly_level->box(FL_DOWN_BOX);
   dly_level->color(FL_FOREGROUND_COLOR);
   dly_level->selection_color(FL_SELECTION_COLOR);
@@ -715,7 +715,7 @@ this->when(FL_WHEN_RELEASE);
   dly_level->align(Fl_Align(FL_ALIGN_LEFT));
   dly_level->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_level
-{ dly_LP = new RKR_Float_Input(228, 6, 42, 20);
+{ dly_LP = new RKR_Float_Input(248, 6, 42, 20);
   dly_LP->box(FL_DOWN_BOX);
   dly_LP->color(FL_FOREGROUND_COLOR);
   dly_LP->selection_color(FL_SELECTION_COLOR);
@@ -728,7 +728,7 @@ this->when(FL_WHEN_RELEASE);
   dly_LP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_LP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_LP
-{ dly_BP = new RKR_Float_Input(280, 6, 42, 20);
+{ dly_BP = new RKR_Float_Input(300, 6, 42, 20);
   dly_BP->box(FL_DOWN_BOX);
   dly_BP->color(FL_FOREGROUND_COLOR);
   dly_BP->selection_color(FL_SELECTION_COLOR);
@@ -741,7 +741,7 @@ this->when(FL_WHEN_RELEASE);
   dly_BP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_BP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_BP
-{ dly_HP = new RKR_Float_Input(331, 6, 42, 20);
+{ dly_HP = new RKR_Float_Input(350, 6, 42, 20);
   dly_HP->box(FL_DOWN_BOX);
   dly_HP->color(FL_FOREGROUND_COLOR);
   dly_HP->selection_color(FL_SELECTION_COLOR);
@@ -754,7 +754,7 @@ this->when(FL_WHEN_RELEASE);
   dly_HP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_HP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_HP
-{ dly_freq = new RKR_Float_Input(380, 6, 120, 20);
+{ dly_freq = new RKR_Float_Input(397, 6, 100, 20);
   dly_freq->box(FL_DOWN_BOX);
   dly_freq->color(FL_FOREGROUND_COLOR);
   dly_freq->selection_color(FL_SELECTION_COLOR);
@@ -780,7 +780,7 @@ this->when(FL_WHEN_RELEASE);
   dly_Q->align(Fl_Align(FL_ALIGN_LEFT));
   dly_Q->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_Q
-{ dly_stages = new RKR_Float_Input(600, 6, 20, 20);
+{ dly_stages = new RKR_Float_Input(610, 6, 20, 20);
   dly_stages->box(FL_DOWN_BOX);
   dly_stages->color(FL_FOREGROUND_COLOR);
   dly_stages->selection_color(FL_SELECTION_COLOR);
