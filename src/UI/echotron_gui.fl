@@ -321,7 +321,9 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps,(int)o->value());
         echotron_user->color (global_fore_color);
         echotron_user->redraw ();
     }}
-    tooltip {Select the .dly file to be used. File preceded by a '*' are user supplied files in the User Directory.} xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
+    tooltip {Right mouse button for Delay File Editor.
+Select the .dly file to be used.
+Files preceded by a '*' are user supplied files in the User Directory.} xywh {88 168 64 14} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 textsize 10 textcolor 7
     class RKR_Choice
   } {
     MenuItem {} {

@@ -599,8 +599,8 @@ this->when(FL_WHEN_RELEASE);
   o->set_text_offset(-1);
 } // RKR_Counter* echotron_length
 { echotron_fnum = new RKR_Choice(88, 168, 64, 14, "File");
-  echotron_fnum->tooltip("Select the .dly file to be used. File preceded by a \'*\' are user supplied f\
-iles in the User Directory.");
+  echotron_fnum->tooltip("Right mouse button for Delay File Editor.\nSelect the .dly file to be used.\n\
+Files preceded by a \'*\' are user supplied files in the User Directory.");
   echotron_fnum->box(FL_FLAT_BOX);
   echotron_fnum->down_box(FL_BORDER_BOX);
   echotron_fnum->color(FL_BACKGROUND_COLOR);
