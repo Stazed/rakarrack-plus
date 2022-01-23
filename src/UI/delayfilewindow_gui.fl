@@ -344,12 +344,8 @@ this->redraw();} {}
   delay_file.fLength = (float)m_file_size;
   
   delay_file.subdiv_fmod = (double) strtod(dly_filter->value(), NULL);
-  delay_file.subdiv_dmod = (double) strtod(dly_delay->value(), NULL);  
+  delay_file.subdiv_dmod = (double) strtod(dly_delay->value(), NULL);
   
-//  std::string flt_to_str(dly_filter->value());    
-//  delay_file.subdiv_fmod = std::stof(flt_to_str);
-//  delay_file.subdiv_dmod = dly_delay->value();
-
   delay_file.f_qmode = dly_Q_mode->value();
   
   for(int i = 0; i < m_file_size; ++i)
