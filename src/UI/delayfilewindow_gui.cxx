@@ -77,6 +77,10 @@ void DelayFileWindowGui::cb_add_button(RKR_Button* o, void* v) {
 
 void DelayFileWindowGui::cb_apply_button_i(RKR_Light_Button*, void*) {
   DlyFile file = get_current_settings();
+
+    if (file.fLength == INVALID_DELAY_FILE_RANGE )
+      return;
+
     /* Send the file to Echotron */
     Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
     Efx_Echotron->applyfile(file);
@@ -379,6 +383,9 @@ void DelayFileWindowGui::load_delay_file(DlyFile delay_file) {
 void DelayFileWindowGui::save_delay_file(char *filename) {
   DlyFile delay_file = get_current_settings();
   
+      if ( delay_file.fLength == INVALID_DELAY_FILE_RANGE )
+          return;
+  
       FILE *fn;
       char buf[256];
       fn = fopen(filename, "w");
@@ -429,21 +436,70 @@ DlyFile DelayFileWindowGui::get_current_settings() {
     
     delay_file.f_qmode = dly_Q_mode->value();
     
-    for(int i = 0; i < m_file_size; ++i)
-    {
-      Fl_Widget *c = dly_scroll->child(i);
-      dlyFileGroup *c_choice = (dlyFileGroup *) c;
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    
+      for(int i = 0; i < m_file_size; ++i)
+      {
+        Fl_Widget *c = dly_scroll->child(i);
+        dlyFileGroup *c_choice = (dlyFileGroup *) c;
+  
+        // Gotta range check all of these!!
+        delay_file.fPan[i] = (double) strtod(c_choice->dly_pan->value(), NULL);               // -1.0 -- + 1.0
+        delay_file.fTime[i] = (double) strtod(c_choice->dly_time->value(), NULL);             // -6.0 -- + 6.0
+        delay_file.fLevel[i] = (double) strtod(c_choice->dly_level->value(), NULL);           // -10.0 -- + 10.0
+        delay_file.fLP[i] = (double) strtod(c_choice->dly_LP->value(), NULL);                 // -2.0 -- + 2.0
+        delay_file.fBP[i] = (double) strtod(c_choice->dly_BP->value(), NULL);                 // -2.0 -- + 2.0
+        delay_file.fHP[i] = (double) strtod(c_choice->dly_HP->value(), NULL);                 // -2.0 -- + 2.0
+        delay_file.fFreq[i] = (double) strtod(c_choice->dly_freq->value(), NULL);             // 20.0 -- 26000.0
+        delay_file.fQ[i] = (double) strtod(c_choice->dly_Q->value(), NULL);                   // 0.0  -- 300.0
+        delay_file.iStages[i] = atoi((c_choice->dly_stages->value())) - 1;                    // 0 -- MAX_FILTER_STAGES
         
-      delay_file.fPan[i] = (double) strtod(c_choice->dly_pan->value(), NULL);
-      delay_file.fTime[i] = (double) strtod(c_choice->dly_time->value(), NULL);
-      delay_file.fLevel[i] = (double) strtod(c_choice->dly_level->value(), NULL);
-      delay_file.fLP[i] = (double) strtod(c_choice->dly_LP->value(), NULL);
-      delay_file.fBP[i] = (double) strtod(c_choice->dly_BP->value(), NULL);
-      delay_file.fHP[i] = (double) strtod(c_choice->dly_HP->value(), NULL);
-      delay_file.fFreq[i] = (double) strtod(c_choice->dly_freq->value(), NULL);
-      delay_file.fQ[i] = (double) strtod(c_choice->dly_Q->value(), NULL);
-      delay_file.iStages[i] = (double) strtod((c_choice->dly_stages->value() - 1), NULL);
-    }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fPan[i], Dly_Pan ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fTime[i], Dly_Time ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fLevel[i], Dly_Level ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fLP[i], Dly_LP ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fBP[i], Dly_BP ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fHP[i], Dly_HP ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fFreq[i], Dly_Freq ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.fQ[i], Dly_Q ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.iStages[i] + 1, Dly_Stages ) )
+        {
+            delay_file.fLength = INVALID_DELAY_FILE_RANGE;
+            return delay_file;
+        }
+      }
     
     return delay_file;
 }
@@ -484,7 +540,7 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
         d_choice.HP = (double) strtod(c_choice->dly_HP->value(), NULL);
         d_choice.freq = (double) strtod(c_choice->dly_freq->value(), NULL);
         d_choice.Q = (double) strtod(c_choice->dly_Q->value(), NULL);
-        d_choice.stages = (double) strtod((c_choice->dly_stages->value() - 1), NULL);      
+        d_choice.stages = atoi(c_choice->dly_stages->value()) - 1;     
         vector_delay_line.push_back(d_choice);
     }
     

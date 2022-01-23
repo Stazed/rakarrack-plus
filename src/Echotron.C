@@ -438,6 +438,85 @@ Echotron::setfile(int value)
     return 1;
 }
 
+bool
+Echotron::check_delay_file_ranges(double value, int item)
+{
+    bool ret = true;
+    switch(item)
+    {
+        case Dly_Pan:
+        {
+            if ((value < -1.0f) || (value > 1.0f))
+            {
+                error = Dly_Pan;
+                ret = false;
+            }
+            break;
+        }
+        case Dly_Time:
+        {
+            if ((value < -6.0f) || (value > 6.0f))
+            {
+                error = Dly_Time;
+                ret = false;
+            }
+            break;
+        }
+        case Dly_Level:
+        {
+            if ((value < -10.0f) || (value > 10.0f))
+            {
+                error = Dly_Level;
+                ret = false;
+            }
+            break;
+        }
+        case Dly_LP:
+        case Dly_BP:
+        case Dly_HP:
+        {
+            if ((value < -2.0f) || (value > 2.0f))
+            {
+                error = item;
+                ret = false;
+            }
+            break;
+        }
+        case Dly_Freq:
+        {
+            if ((value < 20.0f) || (value > 26000.0f))
+            {
+                error = Dly_Freq;
+                ret = false;
+            }
+            break;
+        }
+        case Dly_Q:
+        {
+            if ((value < 0.0f) || (value > 300.0f))
+            {
+                error = Dly_Q;
+                ret = false;
+            }
+            break;
+        }
+        case Dly_Stages:
+        {
+            if ((value < 0.0f) || (value > MAX_FILTER_STAGES))
+            {
+                error = Dly_Stages;
+                ret = false;
+            }
+            break;
+        }
+    }
+    
+    if (!ret)
+        global_error_number = error;
+
+    return ret;
+}
+
 DlyFile
 Echotron::loadfile(char* Filename)
 {

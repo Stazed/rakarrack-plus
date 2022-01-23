@@ -106,6 +106,8 @@ public:
 
 };
 
+#define INVALID_DELAY_FILE_RANGE -1
+
 enum Echotron_file_errors
 {
     Dly_Open = 4,
@@ -141,6 +143,7 @@ public:
     void initialize();
     void clear_initialize();
     int setfile (int value);
+    bool check_delay_file_ranges(double value, int item);
     DlyFile loadfile(char* path);
     void applyfile(DlyFile);
     int get_file_length() {return File.fLength;};
