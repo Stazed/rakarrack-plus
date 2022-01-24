@@ -251,7 +251,8 @@ void EchotronGui::cb_echotron_fnum_i(RKR_Choice* o, void*) {
         // Try to load the user file
         if(!Efx_Echotron->setfile(USERFILE))
         {
-            m_process->Handle_Message(14, file);
+            // The error handling is done by the EFX
+            //m_process->Handle_Message(14, file);
             
             // The user file did not work, un-set the user file
             m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File, 0);

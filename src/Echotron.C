@@ -512,9 +512,11 @@ Echotron::check_delay_file_ranges(double value, int item)
             break;
         }
     }
-    
+
+#ifndef LV2_SUPPORT
     if (!ret)
         global_error_number = error;
+#endif
 
     return ret;
 }
