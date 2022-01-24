@@ -34,7 +34,7 @@ struct DelayLine
     HP(1.0),
     freq(800.0),
     Q(2.0),
-    stages(0) {}
+    stages(1) {}
 }; 
 enum
 {
