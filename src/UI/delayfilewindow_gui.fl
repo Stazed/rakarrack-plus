@@ -205,20 +205,20 @@ update_scroll(-1, ADD_ROW);}
     class RKR_Light_Button
   }
   Fl_Group scroll_label_1 {
-    label {Pan        Time          Level} open
-    xywh {64 69 200 20} align 16
+    label {Pan         Time            Level} open
+    xywh {66 69 200 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
   Fl_Group srcoll_label_2 {
     label {LP         BP        HP} open
-    xywh {275 69 126 20} align 16
+    xywh {286 69 126 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
   Fl_Group scroll_label_3 {
-    label {Frequency               Q           Stages} open
-    xywh {423 69 250 20} align 16
+    label {Frequency           Q       Stages} open
+    xywh {454 69 213 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
@@ -551,7 +551,7 @@ vector_delay_line = vector_temp;} {}
 
 widget_class dlyFileGroup {
   user_data UD_delay_group open
-  xywh {484 359 725 30} type Double
+  xywh {805 212 725 30} type Double
   class RKR_Group visible position_relative
 } {
   decl {DelayFileWindowGui *m_parent;} {private local
@@ -562,39 +562,39 @@ widget_class dlyFileGroup {
     class RKR_Box
   }
   Fl_Input dly_pan {
-    xywh {45 6 40 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Pan range -1.0 to 1.0.} xywh {45 6 40 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_time {
-    xywh {95 6 86 21} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Time range -6.0 to 6.0.} xywh {95 6 86 21} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_level {
-    xywh {191 6 45 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Volume Level -10.0 to 10.0.} xywh {191 6 45 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_LP {
-    xywh {242 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {LP range -2.0 to 2.0.} xywh {250 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_BP {
-    xywh {294 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {BP range -2.0 to 2.0.} xywh {302 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_HP {
-    xywh {345 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {HP range -2.0 to 2.0.} xywh {354 6 48 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_freq {
-    xywh {397 6 100 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Frequency range 20.0 to 26000.0.} xywh {421 6 100 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_Q {
-    xywh {510 6 76 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Q range 0.0 to 300.0.} xywh {525 6 76 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Input dly_stages {
-    xywh {610 6 20 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Stages range 0 to 5.} xywh {606 6 20 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     class RKR_Float_Input
   }
   Fl_Button dly_delete {
@@ -654,7 +654,7 @@ if(intValue == 1)
     return;
 
 m_parent->update_scroll(intValue - 1, MOVE_ROW_UP); // offset by 1}
-    tooltip {Move this row up} xywh {700 4 12 12} labelsize 10
+    tooltip {Move this row up} xywh {700 4 20 12} labelsize 10
     class RKR_Button
   }
   Fl_Button dly_down {
@@ -675,7 +675,7 @@ if(intValue == m_parent->get_file_size())
     return;
 
 m_parent->update_scroll(intValue - 1, MOVE_ROW_DOWN); // offset by 1}
-    tooltip {Move this row down} xywh {700 15 12 12} labelsize 10
+    tooltip {Move this row down} xywh {700 15 20 12} labelsize 10
     class RKR_Button
   }
   Function {initialize(DelayFileWindowGui *parent)} {open return_type void

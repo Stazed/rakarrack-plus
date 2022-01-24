@@ -255,7 +255,7 @@ this->when(FL_WHEN_RELEASE);
   apply_button->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Light_Button* apply_button
-{ RKR_Group* o = scroll_label_1 = new RKR_Group(64, 69, 200, 20, "Pan        Time          Level");
+{ RKR_Group* o = scroll_label_1 = new RKR_Group(66, 69, 200, 20, "Pan         Time            Level");
   scroll_label_1->box(FL_NO_BOX);
   scroll_label_1->color(FL_BACKGROUND_COLOR);
   scroll_label_1->selection_color(FL_BACKGROUND_COLOR);
@@ -268,7 +268,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
   scroll_label_1->end();
 } // RKR_Group* scroll_label_1
-{ RKR_Group* o = srcoll_label_2 = new RKR_Group(275, 69, 126, 20, "LP         BP        HP");
+{ RKR_Group* o = srcoll_label_2 = new RKR_Group(286, 69, 126, 20, "LP         BP        HP");
   srcoll_label_2->box(FL_NO_BOX);
   srcoll_label_2->color(FL_BACKGROUND_COLOR);
   srcoll_label_2->selection_color(FL_BACKGROUND_COLOR);
@@ -281,7 +281,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
   srcoll_label_2->end();
 } // RKR_Group* srcoll_label_2
-{ RKR_Group* o = scroll_label_3 = new RKR_Group(423, 69, 250, 20, "Frequency               Q           Stages");
+{ RKR_Group* o = scroll_label_3 = new RKR_Group(454, 69, 213, 20, "Frequency           Q       Stages");
   scroll_label_3->box(FL_NO_BOX);
   scroll_label_3->color(FL_BACKGROUND_COLOR);
   scroll_label_3->selection_color(FL_BACKGROUND_COLOR);
@@ -733,6 +733,7 @@ this->when(FL_WHEN_RELEASE);
   dly_occur->when(FL_WHEN_RELEASE);
 } // RKR_Box* dly_occur
 { dly_pan = new RKR_Float_Input(45, 6, 40, 20);
+  dly_pan->tooltip("Pan range -1.0 to 1.0.");
   dly_pan->box(FL_DOWN_BOX);
   dly_pan->color(FL_FOREGROUND_COLOR);
   dly_pan->selection_color(FL_SELECTION_COLOR);
@@ -746,6 +747,7 @@ this->when(FL_WHEN_RELEASE);
   dly_pan->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_pan
 { dly_time = new RKR_Float_Input(95, 6, 86, 21);
+  dly_time->tooltip("Time range -6.0 to 6.0.");
   dly_time->box(FL_DOWN_BOX);
   dly_time->color(FL_FOREGROUND_COLOR);
   dly_time->selection_color(FL_SELECTION_COLOR);
@@ -759,6 +761,7 @@ this->when(FL_WHEN_RELEASE);
   dly_time->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_time
 { dly_level = new RKR_Float_Input(191, 6, 45, 20);
+  dly_level->tooltip("Volume Level -10.0 to 10.0.");
   dly_level->box(FL_DOWN_BOX);
   dly_level->color(FL_FOREGROUND_COLOR);
   dly_level->selection_color(FL_SELECTION_COLOR);
@@ -771,7 +774,8 @@ this->when(FL_WHEN_RELEASE);
   dly_level->align(Fl_Align(FL_ALIGN_LEFT));
   dly_level->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_level
-{ dly_LP = new RKR_Float_Input(242, 6, 48, 20);
+{ dly_LP = new RKR_Float_Input(250, 6, 48, 20);
+  dly_LP->tooltip("LP range -2.0 to 2.0.");
   dly_LP->box(FL_DOWN_BOX);
   dly_LP->color(FL_FOREGROUND_COLOR);
   dly_LP->selection_color(FL_SELECTION_COLOR);
@@ -784,7 +788,8 @@ this->when(FL_WHEN_RELEASE);
   dly_LP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_LP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_LP
-{ dly_BP = new RKR_Float_Input(294, 6, 48, 20);
+{ dly_BP = new RKR_Float_Input(302, 6, 48, 20);
+  dly_BP->tooltip("BP range -2.0 to 2.0.");
   dly_BP->box(FL_DOWN_BOX);
   dly_BP->color(FL_FOREGROUND_COLOR);
   dly_BP->selection_color(FL_SELECTION_COLOR);
@@ -797,7 +802,8 @@ this->when(FL_WHEN_RELEASE);
   dly_BP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_BP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_BP
-{ dly_HP = new RKR_Float_Input(345, 6, 48, 20);
+{ dly_HP = new RKR_Float_Input(354, 6, 48, 20);
+  dly_HP->tooltip("HP range -2.0 to 2.0.");
   dly_HP->box(FL_DOWN_BOX);
   dly_HP->color(FL_FOREGROUND_COLOR);
   dly_HP->selection_color(FL_SELECTION_COLOR);
@@ -810,7 +816,8 @@ this->when(FL_WHEN_RELEASE);
   dly_HP->align(Fl_Align(FL_ALIGN_LEFT));
   dly_HP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_HP
-{ dly_freq = new RKR_Float_Input(397, 6, 100, 20);
+{ dly_freq = new RKR_Float_Input(421, 6, 100, 20);
+  dly_freq->tooltip("Frequency range 20.0 to 26000.0.");
   dly_freq->box(FL_DOWN_BOX);
   dly_freq->color(FL_FOREGROUND_COLOR);
   dly_freq->selection_color(FL_SELECTION_COLOR);
@@ -823,7 +830,8 @@ this->when(FL_WHEN_RELEASE);
   dly_freq->align(Fl_Align(FL_ALIGN_LEFT));
   dly_freq->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_freq
-{ dly_Q = new RKR_Float_Input(510, 6, 76, 20);
+{ dly_Q = new RKR_Float_Input(525, 6, 76, 20);
+  dly_Q->tooltip("Q range 0.0 to 300.0.");
   dly_Q->box(FL_DOWN_BOX);
   dly_Q->color(FL_FOREGROUND_COLOR);
   dly_Q->selection_color(FL_SELECTION_COLOR);
@@ -836,7 +844,8 @@ this->when(FL_WHEN_RELEASE);
   dly_Q->align(Fl_Align(FL_ALIGN_LEFT));
   dly_Q->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_Q
-{ dly_stages = new RKR_Float_Input(610, 6, 20, 20);
+{ dly_stages = new RKR_Float_Input(606, 6, 20, 20);
+  dly_stages->tooltip("Stages range 0 to 5.");
   dly_stages->box(FL_DOWN_BOX);
   dly_stages->color(FL_FOREGROUND_COLOR);
   dly_stages->selection_color(FL_SELECTION_COLOR);
@@ -875,7 +884,7 @@ this->when(FL_WHEN_RELEASE);
   dly_insert->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
   dly_insert->when(FL_WHEN_RELEASE);
 } // RKR_Button* dly_insert
-{ dly_up = new RKR_Button(700, 4, 12, 12, "@8>");
+{ dly_up = new RKR_Button(700, 4, 20, 12, "@8>");
   dly_up->tooltip("Move this row up");
   dly_up->box(FL_UP_BOX);
   dly_up->color(FL_BACKGROUND_COLOR);
@@ -888,7 +897,7 @@ this->when(FL_WHEN_RELEASE);
   dly_up->align(Fl_Align(FL_ALIGN_CENTER));
   dly_up->when(FL_WHEN_RELEASE);
 } // RKR_Button* dly_up
-{ dly_down = new RKR_Button(700, 15, 12, 12, "@2>");
+{ dly_down = new RKR_Button(700, 15, 20, 12, "@2>");
   dly_down->tooltip("Move this row down");
   dly_down->box(FL_UP_BOX);
   dly_down->color(FL_BACKGROUND_COLOR);
