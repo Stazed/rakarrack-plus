@@ -422,7 +422,7 @@ Echotron::setfile(int value)
         {
             filedata = loaddefault();
             applyfile(filedata);
-            error = 44;
+            error = global_error_number = 44;
             return 0;
         }
     }
@@ -547,7 +547,7 @@ Echotron::loadfile(char* Filename)
 
     if ((fs = fopen(Filename, "r")) == NULL)
     {
-        error = Dly_Open;
+        error = global_error_number = Dly_Open;
         return loaddefault();
     }
 
@@ -885,7 +885,6 @@ Echotron::changepar(int npar, int value)
 #else
         if (!setfile(value))
         {
-            global_error_number = error;
             error = 0;
         }
 #endif

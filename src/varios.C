@@ -90,31 +90,31 @@ RKR::Handle_Message(int num, std::string strMessage)
             sprintf(error_msg, "%s", "Echotron is unable to open the .dly file");
             break;
         case Dly_Pan:
-            sprintf(error_msg, "%s", "Some Pan parameter is bad in the .dly file");
+            sprintf(error_msg, "%s", "Some Pan parameter is out of range in the .dly file");
             break;
         case Dly_Time:
-            sprintf(error_msg, "%s", "Some Time parameter is bad in the .dly file");
+            sprintf(error_msg, "%s", "Some Time parameter is out of range in the .dly file");
             break;
         case Dly_Level:
-            sprintf(error_msg, "%s", "Some Level parameter is bad in the .dly file");
+            sprintf(error_msg, "%s", "Some Level parameter is out of range in the .dly file");
             break;
         case Dly_LP:
-            sprintf(error_msg, "%s", "Some LP parameter is bad in the .dly file");
+            sprintf(error_msg, "%s", "Some LP parameter is out of range in the .dly file");
             break;
         case Dly_BP:
-            sprintf(error_msg, "%s", "Some BP parameter is bad in the .dly file");
+            sprintf(error_msg, "%s", "Some BP parameter is out of range in the .dly file");
             break;
         case Dly_HP:
-            sprintf(error_msg, "%s", "Some HP parameter is bad in the .dly file");
+            sprintf(error_msg, "%s", "Some HP parameter is out of range in the .dly file");
             break;
         case Dly_Freq:
-            sprintf(error_msg, "%s", "Some Freq parameter is bad in the .dly file");
+            sprintf(error_msg, "%s", "Some Freq parameter is out of range in the .dly file");
             break;
         case Dly_Q:
-            sprintf(error_msg, "%s", "Some Q parameter bad in the .dly file");
+            sprintf(error_msg, "%s", "Some Q parameter is out of range in the .dly file");
             break;
         case Dly_Stages:
-            sprintf(error_msg, "%s", "Some Stages parameter bad in the .dly file");
+            sprintf(error_msg, "%s", "Some Stages parameter is out of range in the .dly file");
             break;
         case 14:
             sprintf(error_msg, "Error loading file %s", strMessage.c_str());
