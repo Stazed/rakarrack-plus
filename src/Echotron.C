@@ -442,6 +442,8 @@ bool
 Echotron::check_delay_file_ranges(double value, int item)
 {
     bool ret = true;
+    error = 0;
+
     switch(item)
     {
         case Dly_Pan:
@@ -573,68 +575,33 @@ Echotron::loadfile(char* Filename)
                &tLP, &tBP, &tHP, &tFreq, &tQ, &tiStages);
         //printf("params:\n%f\t%f\t%f\t%f\t%f\t%f\t%f\t%f\t%d\n",tPan, tTime, tLevel,
         //tLP,  tBP,  tHP,  tFreq,  tQ,  tiStages);
-        if ((tPan<-1.0f) || (tPan > 1.0f))
-        {
-            error = Dly_Pan;
-            break;
-        }
+        
+        if ( !check_delay_file_ranges( tPan, Dly_Pan ) ) break;
         else f.fPan[count] = tPan;
-
-        if ((tTime <-6.0) || (tTime > 6.0f))
-        {
-            error = Dly_Time;
-            break;
-        }
+        
+        if ( !check_delay_file_ranges( tTime, Dly_Time ) ) break;
         else f.fTime[count] = fabs(tTime);
 
-        if ((tLevel <-10.0f) || (tLevel > 10.0f))
-        {
-            error = Dly_Level;
-            break;
-        }
+        if ( !check_delay_file_ranges( tLevel, Dly_Level ) ) break;
         else f.fLevel[count] = tLevel;
 
-        if ((tLP <-2.0f) || (tLP > 2.0f))
-        {
-            error = Dly_LP;
-            break;
-        }
+        if ( !check_delay_file_ranges( tLP, Dly_LP ) ) break;
         else f.fLP[count] = tLP;
 
-        if ((tBP<-2.0f) || (tBP > 2.0f))
-        {
-            error = Dly_BP;
-            break;
-        }
+        if ( !check_delay_file_ranges( tBP, Dly_BP ) ) break;
         else f.fBP[count] = tBP;
 
-        if ((tHP<-2.0f) || (tHP > 2.0f))
-        {
-            error = Dly_HP;
-            break;
-        }
+        if ( !check_delay_file_ranges( tHP, Dly_HP ) ) break;
         else f.fHP[count] = tHP;
 
-        if ((tFreq < 20.0f) || (tFreq > 26000.0f))
-        {
-            error = Dly_Freq;
-            break;
-        }
+        if ( !check_delay_file_ranges( tFreq, Dly_Freq ) ) break;
         else f.fFreq[count] = tFreq;
 
-        if ((tQ < 0.0) || (tQ > 300.0f))
-        {
-            error = Dly_Q;
-            break;
-        }
+        if ( !check_delay_file_ranges( tQ, Dly_Q ) ) break;
         else f.fQ[count] = tQ;
 
-        if ((tiStages < 0) || (tiStages > MAX_FILTER_STAGES))
-        {
-            error = Dly_Stages;
-            break;
-        }
-        else f.iStages[count] = tiStages - 1; //check in main loop if <0, then skip filter
+        if ( !check_delay_file_ranges( (double) tiStages, Dly_Stages ) ) break;
+        else f.iStages[count] = tiStages - 1; //check in main loop if < 0, then skip filter
 
         memset(wbuf, 0, sizeof (wbuf));
         count++;
@@ -679,7 +646,6 @@ Echotron::loaddefault()
     f.fBP[0] = -1.0f;
     f.fHP[0] = 1.0f;
     f.fFreq[0] = 800.0f;
-    ;
     f.fQ[0] = 2.0f;
     f.iStages[0] = 1;
     f.subdiv_dmod = 1.0f;

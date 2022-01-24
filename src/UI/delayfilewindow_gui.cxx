@@ -359,8 +359,8 @@ void DelayFileWindowGui::load_delay_file(DlyFile delay_file) {
           ADDG->dly_HP->value( FTSP(delay_file.fHP[i], 4).c_str() );
           ADDG->dly_freq->value( FTSP(delay_file.fFreq[i], 5).c_str() );
           ADDG->dly_Q->value( FTSP(delay_file.fQ[i], 6).c_str() );
-          ADDG->dly_stages->value( FTSP(delay_file.iStages[i] + 1, 0).c_str() );	// offset by 1
-   
+          ADDG->dly_stages->value( FTSP(delay_file.iStages[i], 0).c_str() );
+  
           std::stringstream strs;
           strs << m_file_size;
           std::string temp_str = strs.str();
@@ -417,7 +417,7 @@ void DelayFileWindowGui::save_delay_file(char *filename) {
           delay_file.fHP[i],
           delay_file.fFreq[i],
           delay_file.fQ[i],
-          (delay_file.iStages[i] + 1)
+          (delay_file.iStages[i] + 1)   // + 1 since get_current_settings() offsets by -1 for apply
           );
           fputs(buf, fn);
       }
@@ -494,7 +494,7 @@ DlyFile DelayFileWindowGui::get_current_settings() {
             delay_file.fLength = INVALID_DELAY_FILE_RANGE;
             return delay_file;
         }
-        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.iStages[i] + 1, Dly_Stages ) )
+        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.iStages[i] + 1, Dly_Stages ) )  // + 1 since we offset above in file
         {
             delay_file.fLength = INVALID_DELAY_FILE_RANGE;
             return delay_file;
@@ -540,7 +540,7 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
         d_choice.HP = (double) strtod(c_choice->dly_HP->value(), NULL);
         d_choice.freq = (double) strtod(c_choice->dly_freq->value(), NULL);
         d_choice.Q = (double) strtod(c_choice->dly_Q->value(), NULL);
-        d_choice.stages = atoi(c_choice->dly_stages->value()) - 1;     
+        d_choice.stages = atoi(c_choice->dly_stages->value());     
         vector_delay_line.push_back(d_choice);
     }
     
@@ -582,7 +582,7 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
             ADDG->dly_HP->value( FTSP(vector_delay_line[i].HP, 4).c_str() );
             ADDG->dly_freq->value( FTSP(vector_delay_line[i].freq, 5).c_str() );
             ADDG->dly_Q->value( FTSP(vector_delay_line[i].Q, 6).c_str() );
-            ADDG->dly_stages->value( FTSP(vector_delay_line[i].stages + 1, 0).c_str() );	// offset by 1
+            ADDG->dly_stages->value( FTSP(vector_delay_line[i].stages, 0).c_str() );
   
             std::stringstream strs;
             strs << m_file_size;
