@@ -57,26 +57,24 @@ public:
   RKR_Float_Input *dly_filter;
   RKR_Float_Input *dly_delay;
   RKR_Button *dly_Q_mode;
+  RKR_Light_Button *apply_button;
 private:
+  inline void cb_apply_button_i(RKR_Light_Button*, void*);
+  static void cb_apply_button(RKR_Light_Button*, void*);
   inline void cb_Load_i(RKR_Button*, void*);
   static void cb_Load(RKR_Button*, void*);
   inline void cb_Save_i(RKR_Button*, void*);
   static void cb_Save(RKR_Button*, void*);
-public:
-  RKR_Button *clear_button;
-private:
-  inline void cb_clear_button_i(RKR_Button*, void*);
-  static void cb_clear_button(RKR_Button*, void*);
 public:
   RKR_Button *add_button;
 private:
   inline void cb_add_button_i(RKR_Button*, void*);
   static void cb_add_button(RKR_Button*, void*);
 public:
-  RKR_Light_Button *apply_button;
+  RKR_Button *clear_button;
 private:
-  inline void cb_apply_button_i(RKR_Light_Button*, void*);
-  static void cb_apply_button(RKR_Light_Button*, void*);
+  inline void cb_clear_button_i(RKR_Button*, void*);
+  static void cb_clear_button(RKR_Button*, void*);
 public:
   RKR_Input *dly_description;
   RKR_Group *scroll_label_1;

@@ -102,80 +102,6 @@ widget_class DelayFileWindowGui {open selected
     code0 {o->set_label_offset(4);}
     class RKR_Button
   }
-  Fl_Button {} {
-    label Load
-    callback {// If nothing previously set, then default location
-    std::string chooser_start_location = "";
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->Config.UDirFilename;
-    }
-
-    char *filename;
-    filename = fl_file_chooser("Load dly File:","(*.dly)", chooser_start_location.c_str(), 0);
-    if (filename == NULL)
-        return;
-
-    filename = fl_filename_setext(filename,".dly");
-    //strcpy(rkr->efx_Echotron->Filename,filename);
-
-    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
-    DlyFile delay_file = Efx_Echotron->loadfile(filename);
-
-    load_delay_file(delay_file);
-
-    this->copy_label(filename);}
-    tooltip {Load from file} xywh {210 25 70 20}
-    code0 {o->set_label_offset(4);}
-    class RKR_Button
-  }
-  Fl_Button {} {
-    label Save
-    callback {// If nothing previously set, then default location
-    std::string chooser_start_location = "";
-    // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
-    {
-        chooser_start_location = m_process->Config.UDirFilename;
-    }
-    char *filename;
-\#define EXT ".dly"
-    filename=fl_file_chooser("Save delay file:","(*" EXT")", chooser_start_location.c_str(), 0);
-    if (filename==NULL) return;
-    filename=fl_filename_setext(filename,EXT);
-\#undef EXT
-    save_delay_file(filename);
-
-    this->copy_label(filename);}
-    tooltip {Save to file} xywh {290 25 70 20}
-    code0 {o->set_label_offset(4);}
-    class RKR_Button
-  }
-  Fl_Button clear_button {
-    label Clear
-    callback {m_file_size = 0;
-dly_filter->value("1.0");
-dly_delay->value("1.0");
-dly_Q_mode->value(0);
-dly_description->value("");
-dly_scroll->clear();
-add_button->do_callback();
-this->copy_label(DEFAULT_DLY_FILE_NAME);}
-    tooltip {Clear all delay lines and set to default} xywh {375 25 70 20}
-    code0 {o->set_label_offset(4);}
-    class RKR_Button
-  }
-  Fl_Button add_button {
-    label {+}
-    callback {if(m_file_size >= (ECHOTRON_F_SIZE - 1))
-    return;
-
-update_scroll(-1, ADD_ROW);}
-    tooltip {Add Delay Row} xywh {464 22 25 25} labelsize 21
-    code0 {o->set_label_offset(11);}
-    class RKR_Button
-  }
   Fl_Round_Button apply_button {
     label Apply
     callback {DlyFile file = get_current_settings();
@@ -201,13 +127,87 @@ update_scroll(-1, ADD_ROW);}
 
     /* Update the gui for the change */
     m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));}
-    tooltip {Apply Changes to Echotron} xywh {513 22 72 25} type Normal box ROUND_UP_BOX down_box ROUND_DOWN_BOX color 7
+    tooltip {Apply Changes to Echotron} xywh {210 25 72 25} type Normal box ROUND_UP_BOX down_box ROUND_DOWN_BOX color 7
     code0 {o->set_label_offset(4);}
     class RKR_Light_Button
   }
+  Fl_Button {} {
+    label Load
+    callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->Config.UDirFilename;
+    }
+
+    char *filename;
+    filename = fl_file_chooser("Load dly File:","(*.dly)", chooser_start_location.c_str(), 0);
+    if (filename == NULL)
+        return;
+
+    filename = fl_filename_setext(filename,".dly");
+    //strcpy(rkr->efx_Echotron->Filename,filename);
+
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    DlyFile delay_file = Efx_Echotron->loadfile(filename);
+
+    load_delay_file(delay_file);
+
+    this->copy_label(filename);}
+    tooltip {Load from file} xywh {295 25 70 25}
+    code0 {o->set_label_offset(4);}
+    class RKR_Button
+  }
+  Fl_Button {} {
+    label Save
+    callback {// If nothing previously set, then default location
+    std::string chooser_start_location = "";
+    // If the user set a User Directory, then use it
+    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    {
+        chooser_start_location = m_process->Config.UDirFilename;
+    }
+    char *filename;
+\#define EXT ".dly"
+    filename=fl_file_chooser("Save delay file:","(*" EXT")", chooser_start_location.c_str(), 0);
+    if (filename==NULL) return;
+    filename=fl_filename_setext(filename,EXT);
+\#undef EXT
+    save_delay_file(filename);
+
+    this->copy_label(filename);}
+    tooltip {Save to file} xywh {370 25 70 25}
+    code0 {o->set_label_offset(4);}
+    class RKR_Button
+  }
+  Fl_Button add_button {
+    label {+}
+    callback {if(m_file_size >= (ECHOTRON_F_SIZE - 1))
+    return;
+
+update_scroll(-1, ADD_ROW);}
+    tooltip {Add Delay Row} xywh {450 25 25 25} labelsize 21
+    code0 {o->set_label_offset(11);}
+    class RKR_Button
+  }
+  Fl_Button clear_button {
+    label Clear
+    callback {m_file_size = 0;
+dly_filter->value("1.0");
+dly_delay->value("1.0");
+dly_Q_mode->value(0);
+dly_description->value("");
+dly_scroll->clear();
+add_button->do_callback();
+this->copy_label(DEFAULT_DLY_FILE_NAME);}
+    tooltip {Clear all delay lines and set to default} xywh {488 25 70 25}
+    code0 {o->set_label_offset(4);}
+    class RKR_Button
+  }
   Fl_Input dly_description {
     label Description
-    tooltip {Enter a description for this delay file} xywh {606 25 182 25} align 1
+    tooltip {Enter a description for this delay file} xywh {569 25 220 25} align 1
     code0 {o->set_label_offset(4);}
     code1 {o->set_text_offset(4);}
     code2 {o->maximum_size(100);}

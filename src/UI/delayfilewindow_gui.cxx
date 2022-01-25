@@ -2,6 +2,35 @@
 
 #include "delayfilewindow_gui.h"
 
+void DelayFileWindowGui::cb_apply_button_i(RKR_Light_Button*, void*) {
+  DlyFile file = get_current_settings();
+
+    if (file.fLength == INVALID_DELAY_FILE_RANGE )
+      return;
+
+    /* Send the file to Echotron */
+    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
+    Efx_Echotron->applyfile(file);
+
+    /* Update the file name if we have one */
+    if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
+    {
+        strcpy(Efx_Echotron->Filename, file.Filename);
+    }
+
+    /* Set efx gui max file length to the applied file size */
+    m_parent->ECHOTRON->echotron_length->maximum(Efx_Echotron->File.fLength);
+
+    /* Change the file length to the max */
+    Efx_Echotron->changepar(Echotron_Taps, Efx_Echotron->File.fLength);
+
+    /* Update the gui for the change */
+    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
+}
+void DelayFileWindowGui::cb_apply_button(RKR_Light_Button* o, void* v) {
+  ((DelayFileWindowGui*)(o->parent()))->cb_apply_button_i(o,v);
+}
+
 void DelayFileWindowGui::cb_Load_i(RKR_Button*, void*) {
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
@@ -52,6 +81,16 @@ void DelayFileWindowGui::cb_Save(RKR_Button* o, void* v) {
   ((DelayFileWindowGui*)(o->parent()))->cb_Save_i(o,v);
 }
 
+void DelayFileWindowGui::cb_add_button_i(RKR_Button*, void*) {
+  if(m_file_size >= (ECHOTRON_F_SIZE - 1))
+    return;
+
+update_scroll(-1, ADD_ROW);
+}
+void DelayFileWindowGui::cb_add_button(RKR_Button* o, void* v) {
+  ((DelayFileWindowGui*)(o->parent()))->cb_add_button_i(o,v);
+}
+
 void DelayFileWindowGui::cb_clear_button_i(RKR_Button*, void*) {
   m_file_size = 0;
 dly_filter->value("1.0");
@@ -64,45 +103,6 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);
 }
 void DelayFileWindowGui::cb_clear_button(RKR_Button* o, void* v) {
   ((DelayFileWindowGui*)(o->parent()))->cb_clear_button_i(o,v);
-}
-
-void DelayFileWindowGui::cb_add_button_i(RKR_Button*, void*) {
-  if(m_file_size >= (ECHOTRON_F_SIZE - 1))
-    return;
-
-update_scroll(-1, ADD_ROW);
-}
-void DelayFileWindowGui::cb_add_button(RKR_Button* o, void* v) {
-  ((DelayFileWindowGui*)(o->parent()))->cb_add_button_i(o,v);
-}
-
-void DelayFileWindowGui::cb_apply_button_i(RKR_Light_Button*, void*) {
-  DlyFile file = get_current_settings();
-
-    if (file.fLength == INVALID_DELAY_FILE_RANGE )
-      return;
-
-    /* Send the file to Echotron */
-    Echotron *Efx_Echotron = static_cast<Echotron*>(m_process->Rack_Effects[EFX_ECHOTRON]);
-    Efx_Echotron->applyfile(file);
-
-    /* Update the file name if we have one */
-    if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
-    {
-        strcpy(Efx_Echotron->Filename, file.Filename);
-    }
-
-    /* Set efx gui max file length to the applied file size */
-    m_parent->ECHOTRON->echotron_length->maximum(Efx_Echotron->File.fLength);
-
-    /* Change the file length to the max */
-    Efx_Echotron->changepar(Echotron_Taps, Efx_Echotron->File.fLength);
-
-    /* Update the gui for the change */
-    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
-}
-void DelayFileWindowGui::cb_apply_button(RKR_Light_Button* o, void* v) {
-  ((DelayFileWindowGui*)(o->parent()))->cb_apply_button_i(o,v);
 }
 DelayFileWindowGui::DelayFileWindowGui(int X, int Y, int W, int H, const char *L)
   : Fl_Double_Window(X, Y, W, H, L) {
@@ -190,63 +190,7 @@ e settings, but better sound");
   dly_Q_mode->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Button* dly_Q_mode
-{ RKR_Button* o = new RKR_Button(210, 25, 70, 20, "Load");
-  o->tooltip("Load from file");
-  o->box(FL_UP_BOX);
-  o->color(FL_BACKGROUND_COLOR);
-  o->selection_color(FL_BACKGROUND_COLOR);
-  o->labeltype(FL_NORMAL_LABEL);
-  o->labelfont(0);
-  o->labelsize(14);
-  o->labelcolor(FL_FOREGROUND_COLOR);
-  o->callback((Fl_Callback*)cb_Load);
-  o->align(Fl_Align(FL_ALIGN_CENTER));
-  o->when(FL_WHEN_RELEASE);
-  o->set_label_offset(4);
-} // RKR_Button* o
-{ RKR_Button* o = new RKR_Button(290, 25, 70, 20, "Save");
-  o->tooltip("Save to file");
-  o->box(FL_UP_BOX);
-  o->color(FL_BACKGROUND_COLOR);
-  o->selection_color(FL_BACKGROUND_COLOR);
-  o->labeltype(FL_NORMAL_LABEL);
-  o->labelfont(0);
-  o->labelsize(14);
-  o->labelcolor(FL_FOREGROUND_COLOR);
-  o->callback((Fl_Callback*)cb_Save);
-  o->align(Fl_Align(FL_ALIGN_CENTER));
-  o->when(FL_WHEN_RELEASE);
-  o->set_label_offset(4);
-} // RKR_Button* o
-{ RKR_Button* o = clear_button = new RKR_Button(375, 25, 70, 20, "Clear");
-  clear_button->tooltip("Clear all delay lines and set to default");
-  clear_button->box(FL_UP_BOX);
-  clear_button->color(FL_BACKGROUND_COLOR);
-  clear_button->selection_color(FL_BACKGROUND_COLOR);
-  clear_button->labeltype(FL_NORMAL_LABEL);
-  clear_button->labelfont(0);
-  clear_button->labelsize(14);
-  clear_button->labelcolor(FL_FOREGROUND_COLOR);
-  clear_button->callback((Fl_Callback*)cb_clear_button);
-  clear_button->align(Fl_Align(FL_ALIGN_CENTER));
-  clear_button->when(FL_WHEN_RELEASE);
-  o->set_label_offset(4);
-} // RKR_Button* clear_button
-{ RKR_Button* o = add_button = new RKR_Button(464, 22, 25, 25, "+");
-  add_button->tooltip("Add Delay Row");
-  add_button->box(FL_UP_BOX);
-  add_button->color(FL_BACKGROUND_COLOR);
-  add_button->selection_color(FL_BACKGROUND_COLOR);
-  add_button->labeltype(FL_NORMAL_LABEL);
-  add_button->labelfont(0);
-  add_button->labelsize(21);
-  add_button->labelcolor(FL_FOREGROUND_COLOR);
-  add_button->callback((Fl_Callback*)cb_add_button);
-  add_button->align(Fl_Align(FL_ALIGN_CENTER));
-  add_button->when(FL_WHEN_RELEASE);
-  o->set_label_offset(11);
-} // RKR_Button* add_button
-{ RKR_Light_Button* o = apply_button = new RKR_Light_Button(513, 22, 72, 25, "Apply");
+{ RKR_Light_Button* o = apply_button = new RKR_Light_Button(210, 25, 72, 25, "Apply");
   apply_button->tooltip("Apply Changes to Echotron");
   apply_button->type(0);
   apply_button->box(FL_ROUND_UP_BOX);
@@ -262,7 +206,63 @@ e settings, but better sound");
   apply_button->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Light_Button* apply_button
-{ RKR_Input* o = dly_description = new RKR_Input(606, 25, 182, 25, "Description");
+{ RKR_Button* o = new RKR_Button(295, 25, 70, 25, "Load");
+  o->tooltip("Load from file");
+  o->box(FL_UP_BOX);
+  o->color(FL_BACKGROUND_COLOR);
+  o->selection_color(FL_BACKGROUND_COLOR);
+  o->labeltype(FL_NORMAL_LABEL);
+  o->labelfont(0);
+  o->labelsize(14);
+  o->labelcolor(FL_FOREGROUND_COLOR);
+  o->callback((Fl_Callback*)cb_Load);
+  o->align(Fl_Align(FL_ALIGN_CENTER));
+  o->when(FL_WHEN_RELEASE);
+  o->set_label_offset(4);
+} // RKR_Button* o
+{ RKR_Button* o = new RKR_Button(370, 25, 70, 25, "Save");
+  o->tooltip("Save to file");
+  o->box(FL_UP_BOX);
+  o->color(FL_BACKGROUND_COLOR);
+  o->selection_color(FL_BACKGROUND_COLOR);
+  o->labeltype(FL_NORMAL_LABEL);
+  o->labelfont(0);
+  o->labelsize(14);
+  o->labelcolor(FL_FOREGROUND_COLOR);
+  o->callback((Fl_Callback*)cb_Save);
+  o->align(Fl_Align(FL_ALIGN_CENTER));
+  o->when(FL_WHEN_RELEASE);
+  o->set_label_offset(4);
+} // RKR_Button* o
+{ RKR_Button* o = add_button = new RKR_Button(450, 25, 25, 25, "+");
+  add_button->tooltip("Add Delay Row");
+  add_button->box(FL_UP_BOX);
+  add_button->color(FL_BACKGROUND_COLOR);
+  add_button->selection_color(FL_BACKGROUND_COLOR);
+  add_button->labeltype(FL_NORMAL_LABEL);
+  add_button->labelfont(0);
+  add_button->labelsize(21);
+  add_button->labelcolor(FL_FOREGROUND_COLOR);
+  add_button->callback((Fl_Callback*)cb_add_button);
+  add_button->align(Fl_Align(FL_ALIGN_CENTER));
+  add_button->when(FL_WHEN_RELEASE);
+  o->set_label_offset(11);
+} // RKR_Button* add_button
+{ RKR_Button* o = clear_button = new RKR_Button(488, 25, 70, 25, "Clear");
+  clear_button->tooltip("Clear all delay lines and set to default");
+  clear_button->box(FL_UP_BOX);
+  clear_button->color(FL_BACKGROUND_COLOR);
+  clear_button->selection_color(FL_BACKGROUND_COLOR);
+  clear_button->labeltype(FL_NORMAL_LABEL);
+  clear_button->labelfont(0);
+  clear_button->labelsize(14);
+  clear_button->labelcolor(FL_FOREGROUND_COLOR);
+  clear_button->callback((Fl_Callback*)cb_clear_button);
+  clear_button->align(Fl_Align(FL_ALIGN_CENTER));
+  clear_button->when(FL_WHEN_RELEASE);
+  o->set_label_offset(4);
+} // RKR_Button* clear_button
+{ RKR_Input* o = dly_description = new RKR_Input(569, 25, 220, 25, "Description");
   dly_description->tooltip("Enter a description for this delay file");
   dly_description->box(FL_DOWN_BOX);
   dly_description->color(FL_BACKGROUND2_COLOR);
