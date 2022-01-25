@@ -553,9 +553,25 @@ Echotron::loadfile(char* Filename)
 
     strcpy(f.Filename, Filename); // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
 
+    int first_line = 0;
     while (fgets(wbuf, sizeof wbuf, fs) != NULL)
     {
-        //fgets(wbuf,sizeof wbuf,fs);
+        // Get the description
+        if ( (wbuf[0] == '#') && (first_line == 0) )
+        {
+            f.Description = wbuf;
+            if (!f.Description.empty())
+            {
+                f.Description.pop_back();   // remove \n
+                if (!f.Description.empty())
+                {
+                    f.Description.erase(f.Description.begin()); // remove #
+                }
+            }
+        }
+        
+        ++first_line;   // only check for description on first line
+
         if (wbuf[0] != '#') break;
         
         memset(wbuf, 0, sizeof (wbuf));

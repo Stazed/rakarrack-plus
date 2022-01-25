@@ -82,6 +82,7 @@ public:
 
     int fLength;
     char Filename[128];
+    std::string Description;
     
     DlyFile():
         fPan(),
@@ -102,7 +103,8 @@ public:
         rdata(),
 
         fLength(0.0),
-        Filename() {}
+        Filename(),
+        Description() {}
 
 };
 
