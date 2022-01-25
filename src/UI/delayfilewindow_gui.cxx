@@ -359,7 +359,7 @@ void DelayFileWindowGui::load_delay_file(DlyFile delay_file) {
           ADDG->dly_HP->value( FTSP(delay_file.fHP[i], 4).c_str() );
           ADDG->dly_freq->value( FTSP(delay_file.fFreq[i], 5).c_str() );
           ADDG->dly_Q->value( FTSP(delay_file.fQ[i], 6).c_str() );
-          ADDG->dly_stages->value( FTSP(delay_file.iStages[i], 0).c_str() );
+          ADDG->dly_stages->value( FTSP(delay_file.iStages[i] + 1, 0).c_str() );    // +1 since echotron load file is offset -1
   
           std::stringstream strs;
           strs << m_file_size;
@@ -399,7 +399,15 @@ void DelayFileWindowGui::save_delay_file(char *filename) {
       
       //General
       memset(buf, 0, sizeof (buf));
+      sprintf(buf, "#Filter  Delay  Mode\n");   // titles
+      fputs(buf, fn);
+  
+      memset(buf, 0, sizeof (buf));
       sprintf(buf, "%s\t%s\t%d\n",dly_filter->value(), dly_delay->value(), delay_file.f_qmode);
+      fputs(buf, fn);
+  
+      memset(buf, 0, sizeof (buf));
+      sprintf(buf, "#    Pan       Time            Level         LP          BP          HP     Frequency       Q    Stages\n");   // titles
       fputs(buf, fn);
       
       for(int i = 0; i < m_file_size; ++i)
@@ -494,7 +502,7 @@ DlyFile DelayFileWindowGui::get_current_settings() {
             delay_file.fLength = INVALID_DELAY_FILE_RANGE;
             return delay_file;
         }
-        if ( !Efx_Echotron->check_delay_file_ranges( delay_file.iStages[i] + 1, Dly_Stages ) )  // + 1 since we offset above in file
+        if ( !Efx_Echotron->check_delay_file_ranges( (double) (delay_file.iStages[i] + 1), Dly_Stages ) )  // + 1 since we offset above in file
         {
             delay_file.fLength = INVALID_DELAY_FILE_RANGE;
             return delay_file;
