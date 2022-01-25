@@ -547,7 +547,10 @@ Echotron::loadfile(char* Filename)
 
     if ((fs = fopen(Filename, "r")) == NULL)
     {
-        error = global_error_number = Dly_Open;
+        error = Dly_Open;
+#ifndef LV2_SUPPORT
+        global_error_number = error;
+#endif
         return loaddefault();
     }
 
