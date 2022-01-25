@@ -78,6 +78,7 @@ private:
   inline void cb_apply_button_i(RKR_Light_Button*, void*);
   static void cb_apply_button(RKR_Light_Button*, void*);
 public:
+  RKR_Input *dly_description;
   RKR_Group *scroll_label_1;
   RKR_Group *srcoll_label_2;
   RKR_Group *scroll_label_3;

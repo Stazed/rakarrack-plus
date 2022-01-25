@@ -158,6 +158,7 @@ widget_class DelayFileWindowGui {open selected
 dly_filter->value("1.0");
 dly_delay->value("1.0");
 dly_Q_mode->value(0);
+dly_description->value("");
 dly_scroll->clear();
 add_button->do_callback();
 this->copy_label(DEFAULT_DLY_FILE_NAME);}
@@ -204,6 +205,14 @@ update_scroll(-1, ADD_ROW);}
     code0 {o->set_label_offset(4);}
     class RKR_Light_Button
   }
+  Fl_Input dly_description {
+    label Description
+    tooltip {Enter a description for this delay file} xywh {606 25 182 25} align 1
+    code0 {o->set_label_offset(4);}
+    code1 {o->set_text_offset(4);}
+    code2 {o->maximum_size(100);}
+    class RKR_Input
+  }
   Fl_Group scroll_label_1 {
     label {Pan         Time            Level} open
     xywh {66 69 200 20} align 16
@@ -247,7 +256,12 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);} {}
   Function {load_delay_file(DlyFile delay_file)} {private
   } {
     code {dly_scroll->clear();
-  m_file_size = 0;
+    m_file_size = 0;
+
+    if (!delay_file.Description.empty())
+    {
+        dly_description->value(delay_file.Description.c_str());
+    }
   
     dly_filter->value( FTSP(delay_file.subdiv_fmod, 3).c_str());
 
@@ -315,7 +329,12 @@ this->redraw();} {}
         fclose(fn);
         return;
     }
-    
+
+    // Description
+    memset(buf, 0, sizeof (buf));
+    sprintf(buf, "\#%s\\n", dly_description->value());
+    fputs(buf, fn);
+
     //General
     memset(buf, 0, sizeof (buf));
     sprintf(buf, "\#Filter  Delay  Mode\\n");   // titles

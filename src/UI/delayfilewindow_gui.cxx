@@ -57,6 +57,7 @@ void DelayFileWindowGui::cb_clear_button_i(RKR_Button*, void*) {
 dly_filter->value("1.0");
 dly_delay->value("1.0");
 dly_Q_mode->value(0);
+dly_description->value("");
 dly_scroll->clear();
 add_button->do_callback();
 this->copy_label(DEFAULT_DLY_FILE_NAME);
@@ -261,6 +262,21 @@ e settings, but better sound");
   apply_button->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Light_Button* apply_button
+{ RKR_Input* o = dly_description = new RKR_Input(606, 25, 182, 25, "Description");
+  dly_description->tooltip("Enter a description for this delay file");
+  dly_description->box(FL_DOWN_BOX);
+  dly_description->color(FL_BACKGROUND2_COLOR);
+  dly_description->selection_color(FL_SELECTION_COLOR);
+  dly_description->labeltype(FL_NORMAL_LABEL);
+  dly_description->labelfont(0);
+  dly_description->labelsize(14);
+  dly_description->labelcolor(FL_FOREGROUND_COLOR);
+  dly_description->align(Fl_Align(FL_ALIGN_TOP));
+  dly_description->when(FL_WHEN_RELEASE);
+  o->set_label_offset(4);
+  o->set_text_offset(4);
+  o->maximum_size(100);
+} // RKR_Input* dly_description
 { RKR_Group* o = scroll_label_1 = new RKR_Group(66, 69, 200, 20, "Pan         Time            Level");
   scroll_label_1->box(FL_NO_BOX);
   scroll_label_1->color(FL_BACKGROUND_COLOR);
@@ -333,7 +349,12 @@ void DelayFileWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui) {
 
 void DelayFileWindowGui::load_delay_file(DlyFile delay_file) {
   dly_scroll->clear();
-    m_file_size = 0;
+      m_file_size = 0;
+  
+      if (!delay_file.Description.empty())
+      {
+          dly_description->value(delay_file.Description.c_str());
+      }
     
       dly_filter->value( FTSP(delay_file.subdiv_fmod, 3).c_str());
   
@@ -402,7 +423,12 @@ void DelayFileWindowGui::save_delay_file(char *filename) {
           fclose(fn);
           return;
       }
-      
+  
+      // Description
+      memset(buf, 0, sizeof (buf));
+      sprintf(buf, "#%s\n", dly_description->value());
+      fputs(buf, fn);
+  
       //General
       memset(buf, 0, sizeof (buf));
       sprintf(buf, "#Filter  Delay  Mode\n");   // titles
