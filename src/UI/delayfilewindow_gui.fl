@@ -197,10 +197,10 @@ update_scroll(-1, ADD_ROW);}
     m_parent->ECHOTRON->echotron_length->maximum(Efx_Echotron->File.fLength);
 
     /* Change the file length to the max */
-    Efx_Echotron->changepar(3, Efx_Echotron->File.fLength);
+    Efx_Echotron->changepar(Echotron_Taps, Efx_Echotron->File.fLength);
 
     /* Update the gui for the change */
-    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(3));}
+    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));}
     tooltip {Apply Changes to Echotron} xywh {513 22 72 25} type Normal box ROUND_UP_BOX down_box ROUND_DOWN_BOX color 7
     code0 {o->set_label_offset(4);}
     class RKR_Light_Button

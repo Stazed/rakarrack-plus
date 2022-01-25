@@ -96,10 +96,10 @@ void DelayFileWindowGui::cb_apply_button_i(RKR_Light_Button*, void*) {
     m_parent->ECHOTRON->echotron_length->maximum(Efx_Echotron->File.fLength);
 
     /* Change the file length to the max */
-    Efx_Echotron->changepar(3, Efx_Echotron->File.fLength);
+    Efx_Echotron->changepar(Echotron_Taps, Efx_Echotron->File.fLength);
 
     /* Update the gui for the change */
-    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(3));
+    m_parent->ECHOTRON->echotron_length->value(Efx_Echotron->getpar(Echotron_Taps));
 }
 void DelayFileWindowGui::cb_apply_button(RKR_Light_Button* o, void* v) {
   ((DelayFileWindowGui*)(o->parent()))->cb_apply_button_i(o,v);
