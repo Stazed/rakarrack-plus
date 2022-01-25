@@ -52,7 +52,7 @@ void DelayFileWindowGui::cb_Save(RKR_Button* o, void* v) {
   ((DelayFileWindowGui*)(o->parent()))->cb_Save_i(o,v);
 }
 
-void DelayFileWindowGui::cb_new_button_i(RKR_Button*, void*) {
+void DelayFileWindowGui::cb_clear_button_i(RKR_Button*, void*) {
   m_file_size = 0;
 dly_filter->value("1.0");
 dly_delay->value("1.0");
@@ -61,8 +61,8 @@ dly_scroll->clear();
 add_button->do_callback();
 this->copy_label(DEFAULT_DLY_FILE_NAME);
 }
-void DelayFileWindowGui::cb_new_button(RKR_Button* o, void* v) {
-  ((DelayFileWindowGui*)(o->parent()))->cb_new_button_i(o,v);
+void DelayFileWindowGui::cb_clear_button(RKR_Button* o, void* v) {
+  ((DelayFileWindowGui*)(o->parent()))->cb_clear_button_i(o,v);
 }
 
 void DelayFileWindowGui::cb_add_button_i(RKR_Button*, void*) {
@@ -133,6 +133,7 @@ this->when(FL_WHEN_RELEASE);
 { Fondo13 = new Fl_Box(2, 2, 796, 261);
 } // Fl_Box* Fondo13
 { RKR_Float_Input* o = dly_filter = new RKR_Float_Input(25, 25, 50, 25, "Filter");
+  dly_filter->tooltip("Filter Modulation Tempo multiplier");
   dly_filter->box(FL_DOWN_BOX);
   dly_filter->color(FL_BACKGROUND2_COLOR);
   dly_filter->selection_color(FL_SELECTION_COLOR);
@@ -147,6 +148,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_text_offset(4);
 } // RKR_Float_Input* dly_filter
 { RKR_Float_Input* o = dly_delay = new RKR_Float_Input(90, 25, 50, 25, "Delay");
+  dly_delay->tooltip("Delay Modulation Tempo multiplier");
   dly_delay->box(FL_DOWN_BOX);
   dly_delay->color(FL_BACKGROUND2_COLOR);
   dly_delay->selection_color(FL_SELECTION_COLOR);
@@ -173,7 +175,8 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Box* o
 { RKR_Button* o = dly_Q_mode = new RKR_Button(159, 25, 25, 25, "Q");
-  dly_Q_mode->tooltip("High Quality - potentially unstable at some settings, but better sound");
+  dly_Q_mode->tooltip("Filter Resonance Mode. Check for higher quality - potentially unstable at som\
+e settings, but better sound");
   dly_Q_mode->type(1);
   dly_Q_mode->box(FL_UP_BOX);
   dly_Q_mode->color(FL_BACKGROUND_COLOR);
@@ -187,6 +190,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Button* dly_Q_mode
 { RKR_Button* o = new RKR_Button(210, 25, 70, 20, "Load");
+  o->tooltip("Load from file");
   o->box(FL_UP_BOX);
   o->color(FL_BACKGROUND_COLOR);
   o->selection_color(FL_BACKGROUND_COLOR);
@@ -200,6 +204,7 @@ this->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Button* o
 { RKR_Button* o = new RKR_Button(290, 25, 70, 20, "Save");
+  o->tooltip("Save to file");
   o->box(FL_UP_BOX);
   o->color(FL_BACKGROUND_COLOR);
   o->selection_color(FL_BACKGROUND_COLOR);
@@ -212,19 +217,20 @@ this->when(FL_WHEN_RELEASE);
   o->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
 } // RKR_Button* o
-{ RKR_Button* o = new_button = new RKR_Button(375, 25, 70, 20, "New");
-  new_button->box(FL_UP_BOX);
-  new_button->color(FL_BACKGROUND_COLOR);
-  new_button->selection_color(FL_BACKGROUND_COLOR);
-  new_button->labeltype(FL_NORMAL_LABEL);
-  new_button->labelfont(0);
-  new_button->labelsize(14);
-  new_button->labelcolor(FL_FOREGROUND_COLOR);
-  new_button->callback((Fl_Callback*)cb_new_button);
-  new_button->align(Fl_Align(FL_ALIGN_CENTER));
-  new_button->when(FL_WHEN_RELEASE);
+{ RKR_Button* o = clear_button = new RKR_Button(375, 25, 70, 20, "Clear");
+  clear_button->tooltip("Clear all delay lines and set to default");
+  clear_button->box(FL_UP_BOX);
+  clear_button->color(FL_BACKGROUND_COLOR);
+  clear_button->selection_color(FL_BACKGROUND_COLOR);
+  clear_button->labeltype(FL_NORMAL_LABEL);
+  clear_button->labelfont(0);
+  clear_button->labelsize(14);
+  clear_button->labelcolor(FL_FOREGROUND_COLOR);
+  clear_button->callback((Fl_Callback*)cb_clear_button);
+  clear_button->align(Fl_Align(FL_ALIGN_CENTER));
+  clear_button->when(FL_WHEN_RELEASE);
   o->set_label_offset(4);
-} // RKR_Button* new_button
+} // RKR_Button* clear_button
 { RKR_Button* o = add_button = new RKR_Button(464, 22, 25, 25, "+");
   add_button->tooltip("Add Delay Row");
   add_button->box(FL_UP_BOX);
@@ -315,7 +321,7 @@ resizable(this);
 }
 
 void DelayFileWindowGui::make_delay_window() {
-  new_button->do_callback();
+  clear_button->do_callback();
 }
 
 void DelayFileWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui) {
@@ -741,7 +747,7 @@ this->when(FL_WHEN_RELEASE);
   dly_occur->when(FL_WHEN_RELEASE);
 } // RKR_Box* dly_occur
 { dly_pan = new RKR_Float_Input(45, 6, 40, 20);
-  dly_pan->tooltip("Pan range -1.0 to 1.0.");
+  dly_pan->tooltip("Pan range -1.0 to 1.0");
   dly_pan->box(FL_DOWN_BOX);
   dly_pan->color(FL_FOREGROUND_COLOR);
   dly_pan->selection_color(FL_SELECTION_COLOR);
@@ -755,7 +761,7 @@ this->when(FL_WHEN_RELEASE);
   dly_pan->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_pan
 { dly_time = new RKR_Float_Input(95, 6, 86, 21);
-  dly_time->tooltip("Time range -6.0 to 6.0.");
+  dly_time->tooltip("Time range -6.0 to 6.0");
   dly_time->box(FL_DOWN_BOX);
   dly_time->color(FL_FOREGROUND_COLOR);
   dly_time->selection_color(FL_SELECTION_COLOR);
@@ -769,7 +775,7 @@ this->when(FL_WHEN_RELEASE);
   dly_time->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_time
 { dly_level = new RKR_Float_Input(191, 6, 45, 20);
-  dly_level->tooltip("Volume Level -10.0 to 10.0.");
+  dly_level->tooltip("Volume Level -10.0 to 10.0");
   dly_level->box(FL_DOWN_BOX);
   dly_level->color(FL_FOREGROUND_COLOR);
   dly_level->selection_color(FL_SELECTION_COLOR);
@@ -783,7 +789,7 @@ this->when(FL_WHEN_RELEASE);
   dly_level->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_level
 { dly_LP = new RKR_Float_Input(250, 6, 48, 20);
-  dly_LP->tooltip("LP range -2.0 to 2.0.");
+  dly_LP->tooltip("LP range -2.0 to 2.0");
   dly_LP->box(FL_DOWN_BOX);
   dly_LP->color(FL_FOREGROUND_COLOR);
   dly_LP->selection_color(FL_SELECTION_COLOR);
@@ -797,7 +803,7 @@ this->when(FL_WHEN_RELEASE);
   dly_LP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_LP
 { dly_BP = new RKR_Float_Input(302, 6, 48, 20);
-  dly_BP->tooltip("BP range -2.0 to 2.0.");
+  dly_BP->tooltip("BP range -2.0 to 2.0");
   dly_BP->box(FL_DOWN_BOX);
   dly_BP->color(FL_FOREGROUND_COLOR);
   dly_BP->selection_color(FL_SELECTION_COLOR);
@@ -811,7 +817,7 @@ this->when(FL_WHEN_RELEASE);
   dly_BP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_BP
 { dly_HP = new RKR_Float_Input(354, 6, 48, 20);
-  dly_HP->tooltip("HP range -2.0 to 2.0.");
+  dly_HP->tooltip("HP range -2.0 to 2.0");
   dly_HP->box(FL_DOWN_BOX);
   dly_HP->color(FL_FOREGROUND_COLOR);
   dly_HP->selection_color(FL_SELECTION_COLOR);
@@ -825,7 +831,7 @@ this->when(FL_WHEN_RELEASE);
   dly_HP->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_HP
 { dly_freq = new RKR_Float_Input(421, 6, 100, 20);
-  dly_freq->tooltip("Frequency range 20.0 to 26000.0.");
+  dly_freq->tooltip("Frequency range 20.0 to 26000.0");
   dly_freq->box(FL_DOWN_BOX);
   dly_freq->color(FL_FOREGROUND_COLOR);
   dly_freq->selection_color(FL_SELECTION_COLOR);
@@ -839,7 +845,7 @@ this->when(FL_WHEN_RELEASE);
   dly_freq->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_freq
 { dly_Q = new RKR_Float_Input(525, 6, 76, 20);
-  dly_Q->tooltip("Q range 0.0 to 300.0.");
+  dly_Q->tooltip("Q range 0.0 to 300.0");
   dly_Q->box(FL_DOWN_BOX);
   dly_Q->color(FL_FOREGROUND_COLOR);
   dly_Q->selection_color(FL_SELECTION_COLOR);
@@ -853,7 +859,7 @@ this->when(FL_WHEN_RELEASE);
   dly_Q->when(FL_WHEN_CHANGED);
 } // RKR_Float_Input* dly_Q
 { dly_stages = new RKR_Float_Input(606, 6, 20, 20);
-  dly_stages->tooltip("Stages range 0 to 5.");
+  dly_stages->tooltip("Stages range 0 to 5");
   dly_stages->box(FL_DOWN_BOX);
   dly_stages->color(FL_FOREGROUND_COLOR);
   dly_stages->selection_color(FL_SELECTION_COLOR);

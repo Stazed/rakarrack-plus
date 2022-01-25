@@ -63,10 +63,10 @@ private:
   inline void cb_Save_i(RKR_Button*, void*);
   static void cb_Save(RKR_Button*, void*);
 public:
-  RKR_Button *new_button;
+  RKR_Button *clear_button;
 private:
-  inline void cb_new_button_i(RKR_Button*, void*);
-  static void cb_new_button(RKR_Button*, void*);
+  inline void cb_clear_button_i(RKR_Button*, void*);
+  static void cb_clear_button(RKR_Button*, void*);
 public:
   RKR_Button *add_button;
 private:
