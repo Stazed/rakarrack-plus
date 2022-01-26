@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0308
+version 1.0304
 header_name {.h}
 code_name {.cxx}
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
@@ -186,7 +186,7 @@ widget_class DelayFileWindowGui {open selected
     callback {if(m_file_size >= (ECHOTRON_F_SIZE - 1))
     return;
 
-update_scroll(-1, ADD_ROW);}
+update_scroll(0, ADD_ROW);}
     tooltip {Add Delay Row} xywh {450 25 25 25} labelsize 21
     code0 {o->set_label_offset(11);}
     class RKR_Button
@@ -244,6 +244,10 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);}
   }
   decl {DlyFile m_delay_file;} {private local
   }
+  decl {int m_group;} {public local
+  }
+  decl {int m_type;} {public local
+  }
   Function {make_delay_window()} {} {
     code {clear_button->do_callback();} {}
   }
@@ -251,6 +255,8 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);}
     code {m_file_size = 0;
 m_process = _rkr;
 m_parent = _rgui;
+m_group = -1;
+m_type = -1;
 this->copy_label(DEFAULT_DLY_FILE_NAME);} {}
   }
   Function {load_delay_file(DlyFile delay_file)} {private
@@ -574,6 +580,14 @@ vector_delay_line = vector_temp;} {}
   } {
     code {return m_file_size;} {}
   }
+  Function {process_scroll_update()} {return_type void
+  } {
+    code {if (m_group >= 0 && m_type >= 0 )
+    {
+        update_scroll(m_group, m_type);
+        m_group = m_type = -1;
+    }} {}
+  }
 }
 
 widget_class dlyFileGroup {
@@ -646,8 +660,8 @@ strValue << Choice->dly_occur->label();
 int intValue;
 strValue >> intValue;
 
-
-m_parent->update_scroll(intValue - 1, DELETE_ROW); // offset by 1}
+m_parent->m_group = intValue -1;   // offset by 1
+m_parent->m_type = DELETE_ROW;}
     tooltip {Delete this row} xywh {651 6 20 20} align 16
     class RKR_Button
   }
@@ -667,8 +681,8 @@ strValue << Choice->dly_occur->label();
 int intValue;
 strValue >> intValue;
 
-
-m_parent->update_scroll(intValue - 1, INSERT_ROW); // offset by 1}
+m_parent->m_group = intValue -1;
+m_parent->m_type = INSERT_ROW;}
     tooltip {Insert new row before this one} xywh {675 6 20 20} align 16
     class RKR_Button
   }
@@ -689,7 +703,8 @@ strValue >> intValue;
 if(intValue == 1)
     return;
 
-m_parent->update_scroll(intValue - 1, MOVE_ROW_UP); // offset by 1}
+m_parent->m_group = intValue -1;
+m_parent->m_type = MOVE_ROW_UP;}
     tooltip {Move this row up} xywh {700 4 20 12} labelsize 10
     class RKR_Button
   }
@@ -710,7 +725,8 @@ strValue >> intValue;
 if(intValue == m_parent->get_file_size())
     return;
 
-m_parent->update_scroll(intValue - 1, MOVE_ROW_DOWN); // offset by 1}
+m_parent->m_group = intValue -1;
+m_parent->m_type = MOVE_ROW_DOWN;}
     tooltip {Move this row down} xywh {700 15 20 12} labelsize 10
     class RKR_Button
   }

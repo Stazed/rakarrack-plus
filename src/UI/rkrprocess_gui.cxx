@@ -564,7 +564,10 @@ void RKRGUI::GuiTimeout(void)
             BankWindow->Alert_Message->redraw ();
         }
     }
-    
+
+    // Group widget deletion, addition, insert, move up/down
+    DelayFile->process_scroll_update();
+
     if(m_process->change_scale)
     {
         m_process->change_scale = 0;  // false
