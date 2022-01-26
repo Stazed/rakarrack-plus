@@ -2892,7 +2892,7 @@ void RKRGUI::make_window() {
     DelayFile->when(FL_WHEN_RELEASE);
     o->initialize(m_process, this);
     o->hide();
-    DelayFile->size_range(400, 132, 1600, 530);
+    DelayFile->size_range(400, 132, 1600, 1060);
     DelayFile->end();
     DelayFile->resizable(DelayFile);
   } // DelayFileWindowGui* DelayFile
