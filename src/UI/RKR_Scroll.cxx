@@ -47,8 +47,17 @@ void RKR_Scroll::draw()
         m_look_changed = global_look_changed;
         color(fl_lighter(global_back_color));
     }
+    
+    int y_pos = yposition();
 
     Fl_Scroll::draw();
+
+    // need this because draw will change position when adding or re-ordering the delay scroller
+    if (m_delay_scroll)
+    {
+        scroll_to(xposition(), y_pos);
+        Fl_Scroll::draw();
+    }
 }
 
 void RKR_Scroll::resize(int X, int Y, int W, int H)
@@ -73,9 +82,11 @@ void RKR_Scroll::resize(int X, int Y, int W, int H)
                 g_group->resize
                 (
                     (g_group->get_start_x() + m_start_x) * W_ratio,
-                    ((g_group->get_start_y() + m_start_y) + (30 * i)) * H_ratio,   // 30 is height of RKR_Group
+                    ((g_group->get_start_y() + m_start_y) + (30 * i)),   // 30 is height of RKR_Group
+                //    ((g_group->get_start_y() + m_start_y) + (30 * i)) * H_ratio,   // 30 is height of RKR_Group
                     (g_group->get_start_width()) * W_ratio ,
-                    g_group->get_start_height() * H_ratio
+                    g_group->get_start_height()
+                //    g_group->get_start_height() * H_ratio
                 );
             }
         }
@@ -118,5 +129,3 @@ void RKR_Scroll::resize(int X, int Y, int W, int H)
 
     Fl_Scroll::resize(X, Y, W, H);
 }
-
-

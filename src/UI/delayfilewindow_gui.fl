@@ -306,10 +306,10 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);} {}
 
 dly_scroll->resize(dly_scroll->x(), dly_scroll->y(), dly_scroll->w(), dly_scroll->h());
 
-int set_start_height = 265;    //  set in fluid
-float H_set_ratio = (float) this->h() / set_start_height;
+//int set_start_height = 265;    //  set in fluid
+//float H_set_ratio = (float) this->h() / set_start_height;
       
-dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->yposition());
+//dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->yposition());
 
 this->redraw();} {}
   }
@@ -541,10 +541,10 @@ this->redraw();} {}
   
   dly_scroll->resize(dly_scroll->x(), dly_scroll->y(), dly_scroll->w(), dly_scroll->h());
   
-  int set_start_height = 265;    //  set in fluid
-  float H_set_ratio = (float) this->h() / set_start_height;
+//  int set_start_height = 265;    //  set in fluid
+//  float H_set_ratio = (float) this->h() / set_start_height;
     
-  dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->yposition());
+//  dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->yposition());
   
   this->redraw();} {}
   }
