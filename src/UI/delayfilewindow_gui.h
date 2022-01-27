@@ -89,6 +89,7 @@ private:
   DlyFile m_delay_file; 
 public:
   DelayLine m_paste_item; 
+  bool m_need_update; 
   int m_group; 
   int m_type; 
   void make_delay_window();

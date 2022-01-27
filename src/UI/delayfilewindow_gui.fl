@@ -249,6 +249,8 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);}
   }
   decl {DelayLine m_paste_item;} {public local
   }
+  decl {bool m_need_update;} {public local
+  }
   decl {int m_group;} {public local
   }
   decl {int m_type;} {public local
@@ -260,8 +262,9 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);}
     code {m_file_size = 0;
 m_process = _rkr;
 m_parent = _rgui;
-m_group = -1;
-m_type = -1;
+m_need_update = false;
+m_group = 0;
+m_type = 0;
 this->copy_label(DEFAULT_DLY_FILE_NAME);} {}
   }
   Function {load_delay_file(DlyFile delay_file)} {private
@@ -590,11 +593,7 @@ vector_delay_line = vector_temp;} {}
   }
   Function {process_scroll_update()} {return_type void
   } {
-    code {if (m_group >= 0 && m_type >= 0 )
-    {
-        update_scroll(m_group, m_type);
-        m_group = m_type = -1;
-    }} {}
+    code {update_scroll(m_group, m_type);} {}
   }
 }
 
@@ -689,7 +688,8 @@ int intValue;
 strValue >> intValue;
 
 m_parent->m_group = intValue -1;   // offset by 1
-m_parent->m_type = DELETE_ROW;}
+m_parent->m_type = DELETE_ROW;
+m_parent->m_need_update = true;}
     tooltip {Delete this row} xywh {649 6 20 20} align 16
     class RKR_Button
   }
@@ -710,7 +710,8 @@ int intValue;
 strValue >> intValue;
 
 m_parent->m_group = intValue -1;
-m_parent->m_type = INSERT_ROW;}
+m_parent->m_type = INSERT_ROW;
+m_parent->m_need_update = true;}
     tooltip {Insert new row before this one} xywh {674 6 20 20} align 16
     class RKR_Button
   }
@@ -732,7 +733,8 @@ if(intValue == 1)
     return;
 
 m_parent->m_group = intValue -1;
-m_parent->m_type = MOVE_ROW_UP;}
+m_parent->m_type = MOVE_ROW_UP;
+m_parent->m_need_update = true;}
     tooltip {Move this row up} xywh {700 4 20 12} labelsize 10
     class RKR_Button
   }
@@ -754,7 +756,8 @@ if(intValue == m_parent->get_file_size())
     return;
 
 m_parent->m_group = intValue -1;
-m_parent->m_type = MOVE_ROW_DOWN;}
+m_parent->m_type = MOVE_ROW_DOWN;
+m_parent->m_need_update = true;}
     tooltip {Move this row down} xywh {700 15 20 12} labelsize 10
     class RKR_Button
   }

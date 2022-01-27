@@ -344,8 +344,9 @@ void DelayFileWindowGui::initialize(RKR *_rkr,RKRGUI *_rgui) {
   m_file_size = 0;
   m_process = _rkr;
   m_parent = _rgui;
-  m_group = -1;
-  m_type = -1;
+  m_need_update = false;
+  m_group = 0;
+  m_type = 0;
   this->copy_label(DEFAULT_DLY_FILE_NAME);
 }
 
@@ -675,11 +676,7 @@ void DelayFileWindowGui::copy_group_to_delay_line(DelayLine &line, dlyFileGroup 
 }
 
 void DelayFileWindowGui::process_scroll_update() {
-  if (m_group >= 0 && m_type >= 0 )
-      {
-          update_scroll(m_group, m_type);
-          m_group = m_type = -1;
-      }
+  update_scroll(m_group, m_type);
 }
 
 void dlyFileGroup::cb_dly_copy_i(RKR_Button* o, void*) {
@@ -715,6 +712,7 @@ strValue >> intValue;
 
 m_parent->m_group = intValue -1;   // offset by 1
 m_parent->m_type = DELETE_ROW;
+m_parent->m_need_update = true;
 }
 void dlyFileGroup::cb_dly_delete(RKR_Button* o, void* v) {
   ((dlyFileGroup*)(o->parent()))->cb_dly_delete_i(o,v);
@@ -736,6 +734,7 @@ strValue >> intValue;
 
 m_parent->m_group = intValue -1;
 m_parent->m_type = INSERT_ROW;
+m_parent->m_need_update = true;
 }
 void dlyFileGroup::cb_dly_insert(RKR_Button* o, void* v) {
   ((dlyFileGroup*)(o->parent()))->cb_dly_insert_i(o,v);
@@ -758,6 +757,7 @@ if(intValue == 1)
 
 m_parent->m_group = intValue -1;
 m_parent->m_type = MOVE_ROW_UP;
+m_parent->m_need_update = true;
 }
 void dlyFileGroup::cb_dly_up(RKR_Button* o, void* v) {
   ((dlyFileGroup*)(o->parent()))->cb_dly_up_i(o,v);
@@ -780,6 +780,7 @@ if(intValue == m_parent->get_file_size())
 
 m_parent->m_group = intValue -1;
 m_parent->m_type = MOVE_ROW_DOWN;
+m_parent->m_need_update = true;
 }
 void dlyFileGroup::cb_dly_down(RKR_Button* o, void* v) {
   ((dlyFileGroup*)(o->parent()))->cb_dly_down_i(o,v);

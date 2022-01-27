@@ -566,7 +566,11 @@ void RKRGUI::GuiTimeout(void)
     }
 
     // Group widget deletion, addition, insert, move up/down
-    DelayFile->process_scroll_update();
+    if(DelayFile->m_need_update)
+    {
+        DelayFile->m_need_update = false;
+        DelayFile->process_scroll_update();
+    }
 
     if(m_process->change_scale)
     {
