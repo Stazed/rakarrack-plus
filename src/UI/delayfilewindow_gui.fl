@@ -214,20 +214,20 @@ this->copy_label(DEFAULT_DLY_FILE_NAME);}
     class RKR_Input
   }
   Fl_Group scroll_label_1 {
-    label {Pan         Time        Level} open
-    xywh {66 69 190 20} align 16
+    label {Pan          Time          Level} open
+    xywh {73 69 190 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
   Fl_Group srcoll_label_2 {
     label {LP         BP        HP} open
-    xywh {273 69 126 20} align 16
+    xywh {295 69 126 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
   Fl_Group scroll_label_3 {
-    label {Frequency           Q       Stages} open
-    xywh {419 69 213 20} align 16
+    label {Frequency        Q      Stages} open
+    xywh {439 69 200 20} align 16
     code0 {o->set_label_offset(4);}
     class RKR_Group
   } {}
@@ -605,47 +605,47 @@ widget_class dlyFileGroup {
     class RKR_Box
   }
   Fl_Input dly_pan {
-    tooltip {Pan range -1.0 to 1.0} xywh {45 6 40 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Pan range -1.0 to 1.0} xywh {45 6 45 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_time {
-    tooltip {Time range -6.0 to 6.0} xywh {90 6 86 21} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Time range -6.0 to 6.0} xywh {94 6 93 21} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_level {
-    tooltip {Volume Level -10.0 to 10.0} xywh {181 6 45 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Volume Level -10.0 to 10.0} xywh {190 6 60 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_LP {
-    tooltip {LP range -2.0 to 2.0} xywh {232 6 50 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {LP range -2.0 to 2.0} xywh {255 6 50 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_BP {
-    tooltip {BP range -2.0 to 2.0} xywh {285 6 50 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {BP range -2.0 to 2.0} xywh {307 6 50 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_HP {
-    tooltip {HP range -2.0 to 2.0} xywh {338 6 50 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {HP range -2.0 to 2.0} xywh {359 6 50 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_freq {
-    tooltip {Frequency range 20.0 to 26000.0} xywh {390 6 100 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Frequency range 20.0 to 26000.0} xywh {415 6 83 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_Q {
-    tooltip {Q range 0.0 to 300.0} xywh {495 6 76 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Q range 0.0 to 300.0} xywh {502 6 76 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
   Fl_Input dly_stages {
-    tooltip {Stages range 0 to 5} xywh {575 6 20 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
+    tooltip {Stages range 0 to 5} xywh {580 6 16 20} color 0 labeltype NO_LABEL when 1 textsize 10 textcolor 7
     code0 {o->set_text_offset(1);}
     class RKR_Float_Input
   }
