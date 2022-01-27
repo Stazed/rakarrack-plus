@@ -574,15 +574,7 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
         }
   
         DelayLine d_choice;
-        d_choice.pan = (double) strtod(c_choice->dly_pan->value(), NULL);
-        d_choice.time = (double) strtod(c_choice->dly_time->value(), NULL);
-        d_choice.level = (double) strtod(c_choice->dly_level->value(), NULL);
-        d_choice.LP = (double) strtod(c_choice->dly_LP->value(), NULL);
-        d_choice.BP = (double) strtod(c_choice->dly_BP->value(), NULL);
-        d_choice.HP = (double) strtod(c_choice->dly_HP->value(), NULL);
-        d_choice.freq = (double) strtod(c_choice->dly_freq->value(), NULL);
-        d_choice.Q = (double) strtod(c_choice->dly_Q->value(), NULL);
-        d_choice.stages = atoi(c_choice->dly_stages->value());     
+        copy_group_to_delay_line(d_choice, c_choice);     
         vector_delay_line.push_back(d_choice);
     }
     
@@ -614,17 +606,9 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
                 725,
                 30
             );
+  
             ADDG->initialize(this);
-    
-            ADDG->dly_pan->value( FTSP(vector_delay_line[i].pan, 3).c_str() );
-            ADDG->dly_time->value( FTSP(vector_delay_line[i].time, 10).c_str() );
-            ADDG->dly_level->value( FTSP(vector_delay_line[i].level, 4).c_str() );
-            ADDG->dly_LP->value( FTSP(vector_delay_line[i].LP, 4).c_str() );
-            ADDG->dly_BP->value( FTSP(vector_delay_line[i].BP, 4).c_str() );
-            ADDG->dly_HP->value( FTSP(vector_delay_line[i].HP, 4).c_str() );
-            ADDG->dly_freq->value( FTSP(vector_delay_line[i].freq, 5).c_str() );
-            ADDG->dly_Q->value( FTSP(vector_delay_line[i].Q, 6).c_str() );
-            ADDG->dly_stages->value( FTSP(vector_delay_line[i].stages, 0).c_str() );
+            copy_delay_line_to_group(ADDG, vector_delay_line[i]);
   
             std::stringstream strs;
             strs << m_file_size;
@@ -636,11 +620,6 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
         }
     
     dly_scroll->resize(dly_scroll->x(), dly_scroll->y(), dly_scroll->w(), dly_scroll->h());
-    
-  //  int set_start_height = 265;    //  set in fluid
-  //  float H_set_ratio = (float) this->h() / set_start_height;
-      
-  //  dly_scroll->scroll_to(dly_scroll->xposition(), (60 * H_set_ratio) + dly_scroll->yposition());
     
     this->redraw();
 }
@@ -671,6 +650,30 @@ int DelayFileWindowGui::get_file_size() {
   return m_file_size;
 }
 
+void DelayFileWindowGui::copy_delay_line_to_group(dlyFileGroup *ADDG, DelayLine line) {
+  ADDG->dly_pan->value( FTSP(line.pan, 3).c_str() );
+      ADDG->dly_time->value( FTSP(line.time, 10).c_str() );
+      ADDG->dly_level->value( FTSP(line.level, 4).c_str() );
+      ADDG->dly_LP->value( FTSP(line.LP, 4).c_str() );
+      ADDG->dly_BP->value( FTSP(line.BP, 4).c_str() );
+      ADDG->dly_HP->value( FTSP(line.HP, 4).c_str() );
+      ADDG->dly_freq->value( FTSP(line.freq, 5).c_str() );
+      ADDG->dly_Q->value( FTSP(line.Q, 6).c_str() );
+      ADDG->dly_stages->value( FTSP(line.stages, 0).c_str() );
+}
+
+void DelayFileWindowGui::copy_group_to_delay_line(DelayLine &line, dlyFileGroup *c_choice) {
+  line.pan = (double) strtod(c_choice->dly_pan->value(), NULL);
+      line.time = (double) strtod(c_choice->dly_time->value(), NULL);
+      line.level = (double) strtod(c_choice->dly_level->value(), NULL);
+      line.LP = (double) strtod(c_choice->dly_LP->value(), NULL);
+      line.BP = (double) strtod(c_choice->dly_BP->value(), NULL);
+      line.HP = (double) strtod(c_choice->dly_HP->value(), NULL);
+      line.freq = (double) strtod(c_choice->dly_freq->value(), NULL);
+      line.Q = (double) strtod(c_choice->dly_Q->value(), NULL);
+      line.stages = atoi(c_choice->dly_stages->value());
+}
+
 void DelayFileWindowGui::process_scroll_update() {
   if (m_group >= 0 && m_type >= 0 )
       {
@@ -683,15 +686,7 @@ void dlyFileGroup::cb_dly_copy_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
     dlyFileGroup *c_choice = (dlyFileGroup *) P;
 
-    m_parent->m_paste_item.pan = (double) strtod(c_choice->dly_pan->value(), NULL);
-    m_parent->m_paste_item.time = (double) strtod(c_choice->dly_time->value(), NULL);
-    m_parent->m_paste_item.level = (double) strtod(c_choice->dly_level->value(), NULL);
-    m_parent->m_paste_item.LP = (double) strtod(c_choice->dly_LP->value(), NULL);
-    m_parent->m_paste_item.BP = (double) strtod(c_choice->dly_BP->value(), NULL);
-    m_parent->m_paste_item.HP = (double) strtod(c_choice->dly_HP->value(), NULL);
-    m_parent->m_paste_item.freq = (double) strtod(c_choice->dly_freq->value(), NULL);
-    m_parent->m_paste_item.Q = (double) strtod(c_choice->dly_Q->value(), NULL);
-    m_parent->m_paste_item.stages = atoi(c_choice->dly_stages->value());
+    m_parent->copy_group_to_delay_line(m_parent->m_paste_item, c_choice);
 }
 void dlyFileGroup::cb_dly_copy(RKR_Button* o, void* v) {
   ((dlyFileGroup*)(o->parent()))->cb_dly_copy_i(o,v);
@@ -701,15 +696,7 @@ void dlyFileGroup::cb_dly_paste_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
     dlyFileGroup *ADDG = (dlyFileGroup *) P;
 
-    ADDG->dly_pan->value( FTSP(m_parent->m_paste_item.pan, 3).c_str() );
-    ADDG->dly_time->value( FTSP(m_parent->m_paste_item.time, 10).c_str() );
-    ADDG->dly_level->value( FTSP(m_parent->m_paste_item.level, 4).c_str() );
-    ADDG->dly_LP->value( FTSP(m_parent->m_paste_item.LP, 4).c_str() );
-    ADDG->dly_BP->value( FTSP(m_parent->m_paste_item.BP, 4).c_str() );
-    ADDG->dly_HP->value( FTSP(m_parent->m_paste_item.HP, 4).c_str() );
-    ADDG->dly_freq->value( FTSP(m_parent->m_paste_item.freq, 5).c_str() );
-    ADDG->dly_Q->value( FTSP(m_parent->m_paste_item.Q, 6).c_str() );
-    ADDG->dly_stages->value( FTSP(m_parent->m_paste_item.stages, 0).c_str() );
+    m_parent->copy_delay_line_to_group(ADDG, m_parent->m_paste_item);
 }
 void dlyFileGroup::cb_dly_paste(RKR_Button* o, void* v) {
   ((dlyFileGroup*)(o->parent()))->cb_dly_paste_i(o,v);

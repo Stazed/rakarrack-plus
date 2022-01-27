@@ -44,6 +44,7 @@ enum
     MOVE_ROW_UP,
     MOVE_ROW_DOWN
 }; 
+class dlyFileGroup;  // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 
@@ -102,6 +103,8 @@ public:
   void update_scroll(int group, int type);
   void reorder_delay_lines(std::vector<DelayLine> &vector_delay_line, int line);
   int get_file_size();
+  void copy_delay_line_to_group(dlyFileGroup *ADDG, DelayLine line);
+  void copy_group_to_delay_line(DelayLine &line, dlyFileGroup *c_choice);
   void process_scroll_update();
 };
 
