@@ -34,14 +34,14 @@ decl {\#define DEFAULT_DLY_FILE_NAME "Delay File - Untitled"} {public global
 
 decl {struct DelayLine
 {
-    float pan;
-    float time;
-    float level;
-    float LP;
-    float BP;
-    float HP;
-    float freq;
-    float Q;
+    double pan;
+    double time;
+    double level;
+    double LP;
+    double BP;
+    double HP;
+    double freq;
+    double Q;
     int stages;
     
     DelayLine() :
