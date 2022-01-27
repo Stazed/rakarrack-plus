@@ -679,6 +679,42 @@ void DelayFileWindowGui::process_scroll_update() {
       }
 }
 
+void dlyFileGroup::cb_dly_copy_i(RKR_Button* o, void*) {
+  Fl_Widget * P = o->parent();
+    dlyFileGroup *c_choice = (dlyFileGroup *) P;
+
+    m_parent->m_paste_item.pan = (double) strtod(c_choice->dly_pan->value(), NULL);
+    m_parent->m_paste_item.time = (double) strtod(c_choice->dly_time->value(), NULL);
+    m_parent->m_paste_item.level = (double) strtod(c_choice->dly_level->value(), NULL);
+    m_parent->m_paste_item.LP = (double) strtod(c_choice->dly_LP->value(), NULL);
+    m_parent->m_paste_item.BP = (double) strtod(c_choice->dly_BP->value(), NULL);
+    m_parent->m_paste_item.HP = (double) strtod(c_choice->dly_HP->value(), NULL);
+    m_parent->m_paste_item.freq = (double) strtod(c_choice->dly_freq->value(), NULL);
+    m_parent->m_paste_item.Q = (double) strtod(c_choice->dly_Q->value(), NULL);
+    m_parent->m_paste_item.stages = atoi(c_choice->dly_stages->value());
+}
+void dlyFileGroup::cb_dly_copy(RKR_Button* o, void* v) {
+  ((dlyFileGroup*)(o->parent()))->cb_dly_copy_i(o,v);
+}
+
+void dlyFileGroup::cb_dly_paste_i(RKR_Button* o, void*) {
+  Fl_Widget * P = o->parent();
+    dlyFileGroup *ADDG = (dlyFileGroup *) P;
+
+    ADDG->dly_pan->value( FTSP(m_parent->m_paste_item.pan, 3).c_str() );
+    ADDG->dly_time->value( FTSP(m_parent->m_paste_item.time, 10).c_str() );
+    ADDG->dly_level->value( FTSP(m_parent->m_paste_item.level, 4).c_str() );
+    ADDG->dly_LP->value( FTSP(m_parent->m_paste_item.LP, 4).c_str() );
+    ADDG->dly_BP->value( FTSP(m_parent->m_paste_item.BP, 4).c_str() );
+    ADDG->dly_HP->value( FTSP(m_parent->m_paste_item.HP, 4).c_str() );
+    ADDG->dly_freq->value( FTSP(m_parent->m_paste_item.freq, 5).c_str() );
+    ADDG->dly_Q->value( FTSP(m_parent->m_paste_item.Q, 6).c_str() );
+    ADDG->dly_stages->value( FTSP(m_parent->m_paste_item.stages, 0).c_str() );
+}
+void dlyFileGroup::cb_dly_paste(RKR_Button* o, void* v) {
+  ((dlyFileGroup*)(o->parent()))->cb_dly_paste_i(o,v);
+}
+
 void dlyFileGroup::cb_dly_delete_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
   
@@ -928,7 +964,7 @@ this->when(FL_WHEN_RELEASE);
   dly_copy->labelfont(0);
   dly_copy->labelsize(14);
   dly_copy->labelcolor(FL_FOREGROUND_COLOR);
-  dly_copy->user_data((void*)(0));
+  dly_copy->callback((Fl_Callback*)cb_dly_copy, (void*)(0));
   dly_copy->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
   dly_copy->when(FL_WHEN_RELEASE);
 } // RKR_Button* dly_copy
@@ -941,7 +977,7 @@ this->when(FL_WHEN_RELEASE);
   dly_paste->labelfont(0);
   dly_paste->labelsize(14);
   dly_paste->labelcolor(FL_FOREGROUND_COLOR);
-  dly_paste->user_data((void*)(0));
+  dly_paste->callback((Fl_Callback*)cb_dly_paste, (void*)(0));
   dly_paste->align(Fl_Align(FL_ALIGN_CENTER|FL_ALIGN_INSIDE));
   dly_paste->when(FL_WHEN_RELEASE);
 } // RKR_Button* dly_paste

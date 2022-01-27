@@ -87,6 +87,7 @@ private:
   RKR* m_process; 
   DlyFile m_delay_file; 
 public:
+  DelayLine m_paste_item; 
   int m_group; 
   int m_type; 
   void make_delay_window();
@@ -121,7 +122,15 @@ public:
   RKR_Float_Input *dly_Q;
   RKR_Float_Input *dly_stages;
   RKR_Button *dly_copy;
+private:
+  inline void cb_dly_copy_i(RKR_Button*, void*);
+  static void cb_dly_copy(RKR_Button*, void*);
+public:
   RKR_Button *dly_paste;
+private:
+  inline void cb_dly_paste_i(RKR_Button*, void*);
+  static void cb_dly_paste(RKR_Button*, void*);
+public:
   RKR_Button *dly_delete;
 private:
   inline void cb_dly_delete_i(RKR_Button*, void*);
