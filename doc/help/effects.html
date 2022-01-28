@@ -883,8 +883,8 @@ multiples of 0.125.&nbsp; Potential musical subdivisions are limited
 only by your creativity and ability to do fractional mathematics as
 pertains to musical rhythm and timing.&nbsp; If you don't like math,
 but you like to experiment, then simply try a bunch of numbers less
-than 6 and see what happens.&nbsp; Maybe someday we will make a GUI
-editor to generate the text files</p>
+than 6 and see what happens.&nbsp; See the delay file GUI editor below to
+generate the text files</p>
 <p>A more advanced feature of Echotron is the assignment of filters in each 
 delay line tap.  In the text file, you can configure a state-variable 
 filter with center frequency, resonance, and individually mix the 3 
@@ -949,7 +949,8 @@ the file .dly extension and list them in the File menu on startup. The user
 files will be preceded with a '*'. If you add user files after startup,
 press the Scan button to refresh the File menu.</p>
 <p><b>File</b>:
-Select any of the default .dly files or user provided files from the choice menu.
+To open the delay file editor, right-click on the 'File' button.
+Left-click to select any of the default .dly files or user provided files from the choice menu.
 All user files must be placed in the User directory and have a .dly extension to be listed.
 Select from several files supplied by Rakarrack-plus.&nbsp; This
 will include a broad spectrum of uses so you can get started using
@@ -960,9 +961,9 @@ something you can't do with one of the default files.&nbsp; You can edit
 your own text file with the desired delay times, levels, and filter
 pattern, scan the file, select, and voila! Your Echotron has
 morphed into a completely unique effect.</p>
-<p><b>Text Files</b></p><p>
-</p><p>Below is an example text file with explanation of each field and any caveats you may need to
-know:</p><img style="width: 844px; height: 271px;" alt="rakarrack file .dly" src="imagenes/dlyfile.png"><br>
+<p><u><b>Delay File Editor</b></u></p><p>
+</p><p>Right-click the 'File' button to open the delay file editor window.
+</p><img style="width: 795px; height: 261px;" alt="rakarrack file .dly" src="imagenes/delay.jpg"><br>
       <br>
 <p><b>Filter</b>:&nbsp; This field multiplies the tempo for the filter
 LFO modulation. For example, if you are playing a song at 80 beats per
@@ -974,6 +975,20 @@ modulation. Same concept as for filter, but this is the LFO applied to
 the delay line. Note there is not a field for delay time subdivision.
 This is because you define this by the times you put into the Time
 column, so such a field would be redundant.</p>
+<p><b>Mode</b>:&nbsp; Filter Resonance Mode. Check button for higher quality.
+Potentially unstable at some settings, but better sound quality.</p>
+<p><b>Apply</b>:&nbsp; Apply the editor settings to the Echotron effect.
+<b>CAUTION:</b> this will NOT save the settings to file!</p>
+<p><b>Load</b>:&nbsp; Load a previously created .dly file into the editor.</p>
+<p><b>Save</b>:&nbsp; Save the current editor settings to file. You can save the 
+file to any location, but for it to work with Rakarrack-plus it must be placed in
+the user directory. After saving, press the Echotron scan button to refresh the 
+file chooser listing. Then select the file from the file list.</p>
+<p><b>Add +</b>:&nbsp; Press the '+' button to add a delay line (tap) row to the end
+of the scroll list.</p>
+<p><b>Clear</b>:&nbsp; This will clear all settings and reset the editor to default settings.</p>
+<p><b>Description</b>:&nbsp; Enter a brief optional description if you desire.</p>
+<p><b>Delay Row Tap Settings Scroll</b>:&nbsp;
 <p><b>Pan</b>:&nbsp; Ranges from -1.0 to 1.0.&nbsp; Less than 0.0 is pan left,
 greater is pan right.&nbsp; 0.0 puts the delay equally to left and
 right.&nbsp; Anything magnitude of +/-1.0 or greater will be treated as
@@ -999,9 +1014,13 @@ certain time, then set LP, BP, and HP all to 1.0. Ranges -2.0 to 2.0.</p>
 unlimited, but you can crash your CPU with the processing requirement
 if you aren't careful. Ranges 1 to 5.</p>
 <p>Caveats:</p>
-<p>Always separate the fields with a &lt;TAB&gt;, and not spaces.&nbsp; Echotron looks specifically for TAB
-separation.</p>
-<p>You can enter as many lines as you want, but only the first 127 will be used by the program.
+<p>The editor will generate TAB delimited text files with a .dly extension when saved.
+In order to use the files with Rakarrack-plus they should be placed in you user directory.
+The program will scan the user directory on startup and list them in the drop down 'File'
+button. The user files will show with a '*' before the name. You can use a text editor to
+also generate .dly files. If you do, always separate the fields with a &lt;TAB&gt;, and not spaces.&nbsp; 
+Echotron looks specifically for TAB separation.</p>
+<p>The number of delay tap lines is limited to 127.
 </p>
 <p>There are only 8 filters available.&nbsp; After the 8th line, filter parameters are ignored by the
 program.</p>
@@ -1011,9 +1030,8 @@ unstable.</p>
 <p>It is not wise to set Level greater in magnitude to +/-1.0.&nbsp; There
 is some normalization internal to Echotron, but it is best to think of
 1.0 as the volume knob's maximum range.</p>
-<p>It is best to copy one of the default files distributed with Rakarrack-plus
-and edit it as desired.&nbsp; Always save with an extension .dly so you
-don't confuse it with other kinds of text files. </p>
+<p>It is helpful to load one of the default files distributed with Rakarrack-plus
+and edit it as desired.&nbsp; Always save in the user directory for easy access.</p>
 </td></tr></tbody>
 </table>
 
