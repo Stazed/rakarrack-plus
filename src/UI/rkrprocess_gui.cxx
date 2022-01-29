@@ -3895,6 +3895,7 @@ void RKRGUI::NSM_gui_hide()
     MIDILearn->hide();
     Trigger->hide();
     Principal->hide();
+    DelayFile->hide();
     Fl::flush();
     global_gui_show = CONST_GUI_OFF;
 #endif
