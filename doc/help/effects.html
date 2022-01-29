@@ -949,7 +949,7 @@ the file .dly extension and list them in the File menu on startup. The user
 files will be preceded with a '*'. If you add user files after startup,
 press the Scan button to refresh the File menu.</p>
 <p><b>File</b>:
-To open the delay file editor, right-click on the 'File' button.
+To open the delay file editor, right-click on the 'File' chooser button.
 Left-click to select any of the default .dly files or user provided files from the choice menu.
 All user files must be placed in the User directory and have a .dly extension to be listed.
 Select from several files supplied by Rakarrack-plus.&nbsp; This
@@ -962,7 +962,7 @@ your own text file with the desired delay times, levels, and filter
 pattern, scan the file, select, and voila! Your Echotron has
 morphed into a completely unique effect.</p>
 <p><u><b>Delay File Editor</b></u></p><p>
-</p><p>Right-click the 'File' button to open the delay file editor window.
+</p><p>Right-click the 'File' chooser button to open the delay file editor window.
 </p><img style="width: 795px; height: 261px;" alt="rakarrack file .dly" src="imagenes/delay.jpg"><br>
       <br>
 <p><b>Filter</b>:&nbsp; This field multiplies the tempo for the filter
@@ -1013,13 +1013,18 @@ certain time, then set LP, BP, and HP all to 1.0. Ranges -2.0 to 2.0.</p>
 <p><b>Stages</b>: Number of filter stages.&nbsp; This is virtually
 unlimited, but you can crash your CPU with the processing requirement
 if you aren't careful. Ranges 1 to 5.</p>
+<p><b>C - Copy</b>: Press the 'C' button to copy the tap row to the paste buffer.</p>
+<p><b>P - Paste</b>: Press the 'P' button to paste from the paste buffer to the selected row.</p>
+<p><b>D - Delete</b>: Press the 'D' button to delete the row.</p>
+<p><b>I - Insert</b>: Press the 'I' button to insert a new row before the current row.</p>
+<p><b>Up/Down Arrows</b>: Press the up or down arrows to move the row up or down.</p>
 <p>Caveats:</p>
-<p>The editor will generate TAB delimited text files with a .dly extension when saved.
+<p>The editor will generate &lt;TAB&gt; delimited text files with a .dly extension when saved.
 In order to use the files with Rakarrack-plus they should be placed in you user directory.
 The program will scan the user directory on startup and list them in the drop down 'File'
 button. The user files will show with a '*' before the name. You can use a text editor to
 also generate .dly files. If you do, always separate the fields with a &lt;TAB&gt;, and not spaces.&nbsp; 
-Echotron looks specifically for TAB separation.</p>
+Echotron looks specifically for &lt;TAB&gt; separation.</p>
 <p>The number of delay tap lines is limited to 127.
 </p>
 <p>There are only 8 filters available.&nbsp; After the 8th line, filter parameters are ignored by the
