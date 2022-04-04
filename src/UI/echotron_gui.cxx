@@ -318,7 +318,7 @@ this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
 this->align(Fl_Align(96|FL_ALIGN_INSIDE));
 this->when(FL_WHEN_RELEASE);
-{ RKR_Light_Button* o = echotron_activar = new RKR_Light_Button(6, 4, 34, 18, "On");
+{ RKR_Light_Button* o = echotron_activar = new RKR_Light_Button(5, 4, 34, 18, "On");
   echotron_activar->box(FL_UP_BOX);
   echotron_activar->shortcut(0x35);
   echotron_activar->color((Fl_Color)62);
@@ -332,7 +332,7 @@ this->when(FL_WHEN_RELEASE);
   echotron_activar->when(FL_WHEN_CHANGED);
   activate_effect = o;
 } // RKR_Light_Button* echotron_activar
-{ RKR_Choice* o = echotron_preset = new RKR_Choice(79, 4, 76, 18, "Preset");
+{ RKR_Choice* o = echotron_preset = new RKR_Choice(77, 4, 76, 18, "Preset");
   echotron_preset->box(FL_FLAT_BOX);
   echotron_preset->down_box(FL_BORDER_BOX);
   echotron_preset->color(FL_BACKGROUND_COLOR);

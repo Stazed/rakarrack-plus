@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -40,7 +40,7 @@ m_process->EFX_Active[EFX_MUTROMOJO]=(int)o->value();
 if((int) o->value()==0)
 m_process->Rack_Effects[EFX_MUTROMOJO]->cleanup();
 m_parent->findpos(EFX_MUTROMOJO,(int)o->value(),o);}
-    xywh {6 5 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
+    xywh {5 4 34 18} shortcut 0x36 color 62 selection_color 1 labelsize 10 align 84 when 1
     code0 {activate_effect = o;}
     class RKR_Light_Button
   }
@@ -58,7 +58,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_MUTROMOJO]; i++)
 
 o->value(m_process->Rack_Effects[EFX_MUTROMOJO]->Ppreset);
 o->redraw();}
-    xywh {78 5 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
   } {
